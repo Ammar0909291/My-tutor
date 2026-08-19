@@ -123,10 +123,14 @@ import {
   MATHEMATICS_VECTORS_CONICS_EXPLANATIONS,
   MATHEMATICS_VECTORS_CONICS_PROBES,
 } from '@/lib/teaching/assets/mathematicsVectorsConicsAssets'
+import {
+  MATHEMATICS_DIFF_GEOM_EXPLANATIONS,
+  MATHEMATICS_DIFF_GEOM_PROBES,
+} from '@/lib/teaching/assets/mathematicsDiffGeomAssets'
 import { SEED_PROBES, seedCanonicalSlug } from '@/lib/teaching/assets/brainSeedAssets'
 import { evaluateAssetContract, MIN_CLOSED_CHOICE_PROBES } from '@/lib/teaching/assetContract'
 
-const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES, ...MATHEMATICS_ARITH_CLOSE_PROBES, ...MATHEMATICS_MEASUREMENT_PROBES, ...MATHEMATICS_COORDINATE_PROBES, ...MATHEMATICS_NUMBER_THEORY_PROBES, ...MATHEMATICS_TRIANGLE_TRANSFORM_PROBES, ...MATHEMATICS_DIVISIBILITY_MODULAR_PROBES, ...MATHEMATICS_CRYPTO_NUMBER_PROBES, ...MATHEMATICS_ANALYTIC_ALGEBRAIC_PROBES, ...MATHEMATICS_SOLIDS_POLYGONS_PROBES, ...MATHEMATICS_CIRCLES_TRANSFORM_PROBES, ...MATHEMATICS_VECTORS_CONICS_PROBES]
+const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES, ...MATHEMATICS_ARITH_CLOSE_PROBES, ...MATHEMATICS_MEASUREMENT_PROBES, ...MATHEMATICS_COORDINATE_PROBES, ...MATHEMATICS_NUMBER_THEORY_PROBES, ...MATHEMATICS_TRIANGLE_TRANSFORM_PROBES, ...MATHEMATICS_DIVISIBILITY_MODULAR_PROBES, ...MATHEMATICS_CRYPTO_NUMBER_PROBES, ...MATHEMATICS_ANALYTIC_ALGEBRAIC_PROBES, ...MATHEMATICS_SOLIDS_POLYGONS_PROBES, ...MATHEMATICS_CIRCLES_TRANSFORM_PROBES, ...MATHEMATICS_VECTORS_CONICS_PROBES, ...MATHEMATICS_DIFF_GEOM_PROBES]
 const isClosedChoice = (p: { choices?: unknown[] }) => (p.choices?.length ?? 0) >= 2
 
 /**
@@ -275,7 +279,7 @@ describe('mathematics foundations — newly serving concepts', () => {
   })
 
   it('every asset cites the Educational Brain entry it came from', () => {
-    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES, ...MATHEMATICS_ARITH_CLOSE_PROBES, ...MATHEMATICS_MEASUREMENT_PROBES, ...MATHEMATICS_COORDINATE_PROBES, ...MATHEMATICS_NUMBER_THEORY_PROBES, ...MATHEMATICS_TRIANGLE_TRANSFORM_PROBES, ...MATHEMATICS_DIVISIBILITY_MODULAR_PROBES, ...MATHEMATICS_CRYPTO_NUMBER_PROBES, ...MATHEMATICS_ANALYTIC_ALGEBRAIC_PROBES, ...MATHEMATICS_SOLIDS_POLYGONS_PROBES, ...MATHEMATICS_CIRCLES_TRANSFORM_PROBES, ...MATHEMATICS_VECTORS_CONICS_PROBES]) {
+    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES, ...MATHEMATICS_ARITH_CLOSE_PROBES, ...MATHEMATICS_MEASUREMENT_PROBES, ...MATHEMATICS_COORDINATE_PROBES, ...MATHEMATICS_NUMBER_THEORY_PROBES, ...MATHEMATICS_TRIANGLE_TRANSFORM_PROBES, ...MATHEMATICS_DIVISIBILITY_MODULAR_PROBES, ...MATHEMATICS_CRYPTO_NUMBER_PROBES, ...MATHEMATICS_ANALYTIC_ALGEBRAIC_PROBES, ...MATHEMATICS_SOLIDS_POLYGONS_PROBES, ...MATHEMATICS_CIRCLES_TRANSFORM_PROBES, ...MATHEMATICS_VECTORS_CONICS_PROBES, ...MATHEMATICS_DIFF_GEOM_PROBES]) {
       expect(a.source).toMatch(/^educational-brain\/concepts\/mathematics\/math\./)
     }
   })
@@ -411,6 +415,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_SOLIDS_POLYGONS_EXPLANATIONS,
     ...MATHEMATICS_CIRCLES_TRANSFORM_EXPLANATIONS,
     ...MATHEMATICS_VECTORS_CONICS_EXPLANATIONS,
+    ...MATHEMATICS_DIFF_GEOM_EXPLANATIONS,
   ]
   const ALL_NEW_PROBES = [
     ...MATHEMATICS_FOUNDATION_PROBES,
@@ -441,6 +446,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_SOLIDS_POLYGONS_PROBES,
     ...MATHEMATICS_CIRCLES_TRANSFORM_PROBES,
     ...MATHEMATICS_VECTORS_CONICS_PROBES,
+    ...MATHEMATICS_DIFF_GEOM_PROBES,
   ]
 
   it('no concept is authored twice across batches', () => {
@@ -2410,6 +2416,81 @@ describe('mathematics vectors, polar coordinates and conics', () => {
 
   it('no two probes for one concept collide on identity', () => {
     const slugs = MATHEMATICS_VECTORS_CONICS_PROBES.map((p) => `${p.conceptId}:${p.probeKind}:${p.gradeBand}:${p.difficulty}`)
+    expect(new Set(slugs).size).toBe(slugs.length)
+  })
+})
+
+/**
+ * Batch 29 — the last five. This CLOSES math.geom, and with it every
+ * authored Educational Brain entry in mathematics.
+ *
+ * Four of the five are differential geometry and share one shape of
+ * error: treating a LOCAL, pointwise quantity as global or constant.
+ * The Euler characteristic is the exception — genuinely global, and
+ * recorded as being assumed local, i.e. the same confusion backwards.
+ */
+describe('mathematics differential geometry and geometric proof', () => {
+  const NEW = [
+    'math.geom.geometric-proof', 'math.geom.differential-geometry-curves',
+    'math.geom.curvature', 'math.geom.frenet-serret',
+    'math.geom.differential-geometry-surfaces',
+  ]
+
+  it.each(NEW)('%s now meets the contract', (conceptId) => {
+    const explanations = MATHEMATICS_DIFF_GEOM_EXPLANATIONS.filter((e) => e.conceptId === conceptId)
+    const probes = MATHEMATICS_DIFF_GEOM_PROBES.filter((p) => p.conceptId === conceptId && isClosedChoice(p))
+    expect(explanations.length, conceptId).toBeGreaterThanOrEqual(1)
+    const verdict = evaluateAssetContract({
+      explanations: explanations.length, closedChoiceProbes: probes.length,
+    })
+    expect(verdict.satisfied, `${conceptId}: ${verdict.shortfall}`).toBe(true)
+  })
+
+  it('the local/global distinction is drawn in every entry that needs it', () => {
+    const find = (id: string) => MATHEMATICS_DIFF_GEOM_EXPLANATIONS.find((e) => e.conceptId === id)!
+    expect(find('math.geom.curvature').content).toMatch(/LOCAL quantity, defined AT A POINT/)
+    expect(find('math.geom.differential-geometry-surfaces').content).toMatch(/VARIES from place to place/)
+    // and the exception, running the other way
+    expect(find('math.geom.differential-geometry-surfaces').content).toMatch(/genuinely global and topological/)
+  })
+
+  it('curvature is anchored to the circle case', () => {
+    // kappa = 1/R: a radius-2 circle curves half as hard as a unit circle
+    expect(1 / 2).toBe(0.5)
+    expect(1 / 1).toBe(1)
+    const c = MATHEMATICS_DIFF_GEOM_EXPLANATIONS.find((e) => e.conceptId === 'math.geom.curvature')!
+    expect(c.content).toMatch(/κ = 1\/R/)
+    expect(c.content).toMatch(/\|r′ × r″\| \/ \|r′\|³/)
+  })
+
+  it('torsion is stated as independent of curvature, with both witnesses', () => {
+    const f = MATHEMATICS_DIFF_GEOM_EXPLANATIONS.find((e) => e.conceptId === 'math.geom.frenet-serret')!
+    expect(f.content).toMatch(/INDEPENDENT/)
+    expect(f.content).toMatch(/circle has constant κ and ZERO torsion/)
+    expect(f.content).toMatch(/helix/)
+  })
+
+  it('velocity and the unit tangent are kept apart', () => {
+    const d = MATHEMATICS_DIFF_GEOM_EXPLANATIONS.find((e) => e.conceptId === 'math.geom.differential-geometry-curves')!
+    expect(d.content).toMatch(/T = r′\/\|r′\|/)
+    expect(d.content).toMatch(/not the same object/)
+  })
+
+  it('the proof entry puts the argument in the reason column', () => {
+    const g = MATHEMATICS_DIFF_GEOM_EXPLANATIONS.find((e) => e.conceptId === 'math.geom.geometric-proof')!
+    expect(g.content).toMatch(/reason column is the proof/i)
+    expect(g.content).toMatch(/not less rigorous/)
+  })
+
+  it('every probe is gradeable and offers at least three choices', () => {
+    for (const p of MATHEMATICS_DIFF_GEOM_PROBES) {
+      expect(p.choices?.filter((c) => c.isCorrect).length, p.stem).toBe(1)
+      expect(p.choices!.length, p.stem).toBeGreaterThanOrEqual(3)
+    }
+  })
+
+  it('no two probes for one concept collide on identity', () => {
+    const slugs = MATHEMATICS_DIFF_GEOM_PROBES.map((p) => `${p.conceptId}:${p.probeKind}:${p.gradeBand}:${p.difficulty}`)
     expect(new Set(slugs).size).toBe(slugs.length)
   })
 })
