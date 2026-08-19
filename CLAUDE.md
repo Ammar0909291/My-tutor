@@ -2283,6 +2283,48 @@
   against the asset contract, and adding them would have turned "make chemistry servable" into
   "seed everything".
 
+## Mobile lesson navigation fixed (2026-08-19)
+
+- **Reported symptom**: on the mobile web lesson screen, the Previous/Next lesson controls
+  did not move to the next or previous lesson.
+- **Reproduced with production data, not theory** — Chromium cannot reach the app through this
+  sandbox's egress proxy (four flag combinations all `ERR_CONNECTION_RESET`), so instead the real
+  account's `GET /api/curriculum?subject=chemistry` payload was read and the REAL
+  `findNextLesson`/`findPreviousLesson` were run against it. That payload:
+  `currentLesson=1`, `completedLessons=[]`, `activeLessonSlug='chem.found.pure-substances'`
+  (the open lesson is order 3). The shipped functions answered `next -> order 2 "States of
+  Matter"` (BEHIND the open lesson) and `prev -> null` (a null renders the button `disabled`).
+  So "Previous" did nothing and "Next" went BACKWARDS — the symptom exactly.
+- **Cause**: both functions anchored on `progress.currentLesson`, a COMPLETION counter that only
+  advances when a lesson is recorded complete/skipped. The lesson actually open is
+  `resolveActiveLesson()` (honours `activeLessonSlug`). They diverge the moment a learner opens a
+  lesson ahead of their recorded progress — the ordinary case. NOT mobile-only (logic is shared
+  with desktop); mobile is just where a side-by-side backwards jump is unmistakable.
+- **Fix, two commits**:
+  1. `94f8c1b` — `findNextLesson`/`findPreviousLesson` resolve their anchor from
+     `resolveActiveLesson` inside the functions (not via an optional caller param, which is how
+     the two ideas of "current" drifted apart). The same wrong anchor one line above, in
+     LessonScreen's tutor POSITION line (`order === currentLesson`), was fixed to
+     `resolveActiveLesson` too — the model was being told "Lesson 1 of 186. Today: Nature of
+     Matter" while teaching lesson 3.
+  2. `7ca5d4b` — the anchor only moves if something writes `activeLessonSlug` on switch, and
+     nothing did on the client. `callLessonInit` sent `topicSlug` to the SERVER but never wrote
+     it back to local state, so a second tap of "Next" re-opened the same lesson until the next
+     chat turn's `data.lessonOrder` sync cleared the slug — and lesson-init renders an opening
+     WITHOUT a chat turn, which is the exact window the buttons live in. It now writes the target
+     slug + `lastLessonTitle` into local progress on success and bumps `progressGenerationRef`
+     (the skip/complete/restart contract, so an in-flight chat response can't clobber it).
+- **Evidence the tests are real**: the 58 pre-existing `lessonNavigation.test.ts` cases pass in
+  BOTH the broken and fixed states — every fixture omits `activeLessonSlug`, which is exactly why
+  the suite never caught this. 7 new cases built from the production payload FAIL (4 of them) with
+  the anchor temporarily reverted and pass with the fix; `lessonSwitchAnchor.test.ts` reproduces
+  the "second tap re-opens the same lesson" defect as a passing test so the client sync isn't
+  decorative. Re-confirmed against the live payload post-deploy: `next -> 4`, `prev -> 2`.
+- **NOT verified**: an actual on-device browser tap (proxy blocks Chromium here). Everything is
+  measured against the real production API payload and the real modules, plus source assertions
+  that the client performs the write. Full suite 374 files / 8,273 passed / 9 skipped; tsc clean;
+  build clean. Deployed `dpl_FJE9TBEGkTAdrc4pBD2KNLMZiNZp` READY on `7ca5d4b`.
+
 ## Run locally
 ```
 cp .env.example .env   # set DATABASE_URL, AUTH_SECRET (openssl rand -base64 32), GROQ_API_KEY
