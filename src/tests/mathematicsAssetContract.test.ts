@@ -103,10 +103,14 @@ import {
   MATHEMATICS_DIVISIBILITY_MODULAR_EXPLANATIONS,
   MATHEMATICS_DIVISIBILITY_MODULAR_PROBES,
 } from '@/lib/teaching/assets/mathematicsDivisibilityModularAssets'
+import {
+  MATHEMATICS_CRYPTO_NUMBER_EXPLANATIONS,
+  MATHEMATICS_CRYPTO_NUMBER_PROBES,
+} from '@/lib/teaching/assets/mathematicsCryptoNumberAssets'
 import { SEED_PROBES, seedCanonicalSlug } from '@/lib/teaching/assets/brainSeedAssets'
 import { evaluateAssetContract, MIN_CLOSED_CHOICE_PROBES } from '@/lib/teaching/assetContract'
 
-const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES, ...MATHEMATICS_ARITH_CLOSE_PROBES, ...MATHEMATICS_MEASUREMENT_PROBES, ...MATHEMATICS_COORDINATE_PROBES, ...MATHEMATICS_NUMBER_THEORY_PROBES, ...MATHEMATICS_TRIANGLE_TRANSFORM_PROBES, ...MATHEMATICS_DIVISIBILITY_MODULAR_PROBES]
+const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES, ...MATHEMATICS_ARITH_CLOSE_PROBES, ...MATHEMATICS_MEASUREMENT_PROBES, ...MATHEMATICS_COORDINATE_PROBES, ...MATHEMATICS_NUMBER_THEORY_PROBES, ...MATHEMATICS_TRIANGLE_TRANSFORM_PROBES, ...MATHEMATICS_DIVISIBILITY_MODULAR_PROBES, ...MATHEMATICS_CRYPTO_NUMBER_PROBES]
 const isClosedChoice = (p: { choices?: unknown[] }) => (p.choices?.length ?? 0) >= 2
 
 /**
@@ -255,7 +259,7 @@ describe('mathematics foundations — newly serving concepts', () => {
   })
 
   it('every asset cites the Educational Brain entry it came from', () => {
-    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES, ...MATHEMATICS_ARITH_CLOSE_PROBES, ...MATHEMATICS_MEASUREMENT_PROBES, ...MATHEMATICS_COORDINATE_PROBES, ...MATHEMATICS_NUMBER_THEORY_PROBES, ...MATHEMATICS_TRIANGLE_TRANSFORM_PROBES, ...MATHEMATICS_DIVISIBILITY_MODULAR_PROBES]) {
+    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES, ...MATHEMATICS_ARITH_CLOSE_PROBES, ...MATHEMATICS_MEASUREMENT_PROBES, ...MATHEMATICS_COORDINATE_PROBES, ...MATHEMATICS_NUMBER_THEORY_PROBES, ...MATHEMATICS_TRIANGLE_TRANSFORM_PROBES, ...MATHEMATICS_DIVISIBILITY_MODULAR_PROBES, ...MATHEMATICS_CRYPTO_NUMBER_PROBES]) {
       expect(a.source).toMatch(/^educational-brain\/concepts\/mathematics\/math\./)
     }
   })
@@ -386,6 +390,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_NUMBER_THEORY_EXPLANATIONS,
     ...MATHEMATICS_TRIANGLE_TRANSFORM_EXPLANATIONS,
     ...MATHEMATICS_DIVISIBILITY_MODULAR_EXPLANATIONS,
+    ...MATHEMATICS_CRYPTO_NUMBER_EXPLANATIONS,
   ]
   const ALL_NEW_PROBES = [
     ...MATHEMATICS_FOUNDATION_PROBES,
@@ -411,6 +416,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_NUMBER_THEORY_PROBES,
     ...MATHEMATICS_TRIANGLE_TRANSFORM_PROBES,
     ...MATHEMATICS_DIVISIBILITY_MODULAR_PROBES,
+    ...MATHEMATICS_CRYPTO_NUMBER_PROBES,
   ]
 
   it('no concept is authored twice across batches', () => {
@@ -1918,6 +1924,95 @@ describe('mathematics divisibility and modular arithmetic', () => {
 
   it('no two probes for one concept collide on identity', () => {
     const slugs = MATHEMATICS_DIVISIBILITY_MODULAR_PROBES.map((p) => `${p.conceptId}:${p.probeKind}:${p.gradeBand}:${p.difficulty}`)
+    expect(new Set(slugs).size).toBe(slugs.length)
+  })
+})
+
+/**
+ * Batch 24 — Bézout to RSA.
+ *
+ * Every link in this chain is an EXISTENCE statement first and a
+ * computation second, and four registers record the same inversion:
+ * the algorithm gets learnt and the guarantee it rests on does not.
+ * The checks below re-derive every quoted number AND demand each entry
+ * names the guarantee rather than only the procedure.
+ */
+describe('mathematics number theory — Bézout to RSA', () => {
+  const NEW = [
+    'math.nt.residue-classes', 'math.nt.bezout-identity',
+    'math.nt.modular-inverse', 'math.nt.fermats-little-theorem',
+    'math.nt.chinese-remainder-theorem', 'math.nt.linear-diophantine',
+    'math.nt.rsa-basics', 'math.nt.pythagorean-triples',
+  ]
+
+  it.each(NEW)('%s now meets the contract', (conceptId) => {
+    const explanations = MATHEMATICS_CRYPTO_NUMBER_EXPLANATIONS.filter((e) => e.conceptId === conceptId)
+    const probes = MATHEMATICS_CRYPTO_NUMBER_PROBES.filter((p) => p.conceptId === conceptId && isClosedChoice(p))
+    expect(explanations.length, conceptId).toBeGreaterThanOrEqual(1)
+    const verdict = evaluateAssetContract({
+      explanations: explanations.length, closedChoiceProbes: probes.length,
+    })
+    expect(verdict.satisfied, `${conceptId}: ${verdict.shortfall}`).toBe(true)
+  })
+
+  it('the Fermat worked example is right, including the mod p−1 reduction', () => {
+    const modpow = (b: number, e: number, m: number) => {
+      let r = 1; b %= m
+      while (e > 0) { if (e & 1) r = (r * b) % m; b = (b * b) % m; e >>= 1 }
+      return r
+    }
+    expect(modpow(3, 6, 7)).toBe(1)          // Fermat holds, 7 does not divide 3
+    expect(modpow(7, 6, 7)).toBe(0)          // hypothesis fails when p | a
+    expect(100 % 6).toBe(4)                  // reduce mod p-1
+    expect(modpow(3, 100, 7)).toBe(modpow(3, 4, 7))
+    expect(modpow(3, 100, 7)).not.toBe(modpow(3, 100 % 7, 7))  // mod p is WRONG
+    const f = MATHEMATICS_CRYPTO_NUMBER_EXPLANATIONS.find((e) => e.conceptId === 'math.nt.fermats-little-theorem')!
+    expect(f.content).toMatch(/mod p−1, NOT mod\s+p/)
+  })
+
+  it('the linear-Diophantine scaling and step size are right', () => {
+    expect(6 * -1 + 9 * 1).toBe(3)           // Bezout for gcd
+    expect(6 * -7 + 9 * 7).toBe(21)          // scaled by c/g = 7
+    expect(21 % 3).toBe(0)                   // solvable: gcd DIVIDES c
+    // step size b/g = 3, a/g = 2 — every t gives a solution
+    for (const t of [-2, 0, 1, 5]) expect(6 * (-7 + 3 * t) + 9 * (7 - 2 * t)).toBe(21)
+    const l = MATHEMATICS_CRYPTO_NUMBER_EXPLANATIONS.find((e) => e.conceptId === 'math.nt.linear-diophantine')!
+    expect(l.content).toMatch(/DIVIDES c/)
+  })
+
+  it('the CRT and triple examples check out', () => {
+    expect(8 % 3).toBe(2)
+    expect(8 % 5).toBe(3)
+    expect(20 ** 2 + 21 ** 2).toBe(29 ** 2)  // a genuine triple
+    expect(6 ** 2 + 7 ** 2).not.toBe(9 ** 2) // the near-miss
+    expect(6 ** 2 + 8 ** 2).toBe(10 ** 2)    // 3-4-5 doubled
+  })
+
+  it('ℤ/6ℤ really fails to be a field, as the residue-class entry claims', () => {
+    expect((2 * 3) % 6).toBe(0)              // zero divisors
+    const inverses = (b: number, n: number) => [...Array(n).keys()].filter((x) => (b * x) % n === 1)
+    expect(inverses(2, 6)).toEqual([])
+    const r = MATHEMATICS_CRYPTO_NUMBER_EXPLANATIONS.find((e) => e.conceptId === 'math.nt.residue-classes')!
+    expect(r.content).toMatch(/FIELD only when n is prime/)
+  })
+
+  it('each entry names the guarantee, not only the procedure', () => {
+    const find = (id: string) => MATHEMATICS_CRYPTO_NUMBER_EXPLANATIONS.find((e) => e.conceptId === id)!
+    expect(find('math.nt.bezout-identity').content).toMatch(/EXIST integers x and y/)
+    expect(find('math.nt.modular-inverse').content).toMatch(/that criterion is Bézout, not a new fact/i)
+    expect(find('math.nt.chinese-remainder-theorem').content).toMatch(/structural fact rather than a numerical coincidence/i)
+    expect(find('math.nt.rsa-basics').content).toMatch(/FACTORING n/)
+  })
+
+  it('every probe is gradeable and offers at least three choices', () => {
+    for (const p of MATHEMATICS_CRYPTO_NUMBER_PROBES) {
+      expect(p.choices?.filter((c) => c.isCorrect).length, p.stem).toBe(1)
+      expect(p.choices!.length, p.stem).toBeGreaterThanOrEqual(3)
+    }
+  })
+
+  it('no two probes for one concept collide on identity', () => {
+    const slugs = MATHEMATICS_CRYPTO_NUMBER_PROBES.map((p) => `${p.conceptId}:${p.probeKind}:${p.gradeBand}:${p.difficulty}`)
     expect(new Set(slugs).size).toBe(slugs.length)
   })
 })
