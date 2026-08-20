@@ -73,39 +73,40 @@ export function chainKeyForLanguage(lang: TeachingLanguage | undefined): 'ru' | 
 const _routers = new Map<'ru' | 'default', ReturnType<typeof createFailoverRouter>>
 
 /**
- * GEMINI-ONLY IS NOW THE DEFAULT (owner instruction, 2026-08-12).
+ * GEMINI-ONLY MODE — NOW AN OPT-IN DIAGNOSTIC AGAIN (owner instruction,
+ * 2026-08-20, reversing the 2026-08-12 inversion below).
  *
- * Every turn is served by Gemini `gemini-3.5-flash-lite` and nothing else.
- * This was previously a diagnostic opt-IN (`AI_PROVIDER_MODE=gemini_only`,
- * P17); it is now the standing product decision, so the switch is INVERTED:
- * the narrow chain is what you get unless failover is explicitly restored.
+ * Reason for the reversal, stated plainly: Gemini alone had nothing to fail
+ * over to, and Gemini started returning 429 rate-limit errors in production,
+ * so every learner turn was landing on the degraded template — a total
+ * teaching outage, not a degraded experience. GROQ_API_KEY has been
+ * configured in production the whole time and was sitting unused.
  *
- *     (unset, or anything else)      -> Gemini only            [DEFAULT]
- *     AI_PROVIDER_MODE=failover      -> full chain restored
+ * The default is once again the full multi-provider chain (see the
+ * `candidates` array below): for the default (non-Russian) chain, Groq is
+ * now PRIMARY and Gemini is the FALLBACK — reversed from the pre-2026-08-12
+ * ordering, which had Gemini primary. This keeps Gemini fully wired and
+ * reachable (nothing was removed) while making sure a Gemini outage no
+ * longer means "nothing answers."
  *
- * WHY IT IS AN INVERSION RATHER THAN A DELETION. Turning this on by editing
- * the chain would have thrown away the failover algorithm, the provider
- * factories and the Russian tier — none of which are wrong, and all of which
- * are needed the moment the decision is revisited. Keeping the opt-out means
- * restoring the old behaviour costs ONE environment variable and no deploy,
- * and the chain-composition tests keep running against the real assembly.
+ *     (unset, or anything else)        -> full chain, Groq primary [DEFAULT]
+ *     AI_PROVIDER_MODE=gemini_only     -> Gemini alone (diagnostic escape
+ *                                          hatch, symmetric with the old
+ *                                          `failover` opt-out — kept in case
+ *                                          gemini-only isolation is wanted
+ *                                          again later; costs one env var)
  *
- * THE TRADE-OFF, STATED PLAINLY BECAUSE IT IS REAL. With one provider there
- * is nothing to fail over TO. A Gemini outage or quota exhaustion now reaches
- * the learner as the degraded template instead of a Groq-served answer. That
- * is the accepted cost of the instruction, not an oversight — and it is why
- * the opt-out above exists and is one env var away.
- *
- * IT ALSO DISABLES YANDEXGPT FOR RUSSIAN TEACHING, which was itself an
- * intentional product decision (2026-08-04). "Only Gemini" and "Russian goes
- * to Yandex" cannot both hold; the newer instruction wins, and this note
- * records what was given up so it is a choice rather than a silent
- * regression. Russian text-to-speech is a SEPARATE integration and is
- * untouched — `/api/tts` still routes Russian audio to Yandex.
+ * IT DOES NOT TOUCH YANDEXGPT FOR RUSSIAN TEACHING. The Russian chain is
+ * assembled as its own array below (Yandex -> Gemini -> OpenRouter -> Groq,
+ * byte-for-byte the 2026-08-04 order) and is not reordered by this change —
+ * only the DEFAULT (non-Russian) chain's internal order changes. Russian
+ * text-to-speech was never affected by any of this — `/api/tts` still routes
+ * Russian audio to Yandex independently.
  */
 export function isGeminiOnlyMode(): boolean {
-  // Explicit opt-out only. Anything else — including unset — is Gemini-only.
-  return (process.env.AI_PROVIDER_MODE ?? '').trim().toLowerCase() !== 'failover'
+  // Explicit opt-IN only. Anything else — including unset — uses the full
+  // failover chain (Groq primary for the default chain).
+  return (process.env.AI_PROVIDER_MODE ?? '').trim().toLowerCase() === 'gemini_only'
 }
 
 function getRouter(lang?: TeachingLanguage) {
@@ -131,7 +132,7 @@ function getRouter(lang?: TeachingLanguage) {
     // too. The diagnostic exists to measure Gemini in isolation, and a Russian
     // turn silently routed to YandexGPT would corrupt that measurement exactly
     // as a failover hop would.
-    console.log('[ai/router] gemini-only mode (default) — failover and same-provider retry disabled; set AI_PROVIDER_MODE=failover to restore the chain')
+    console.log('[ai/router] gemini-only mode (AI_PROVIDER_MODE=gemini_only) — failover and same-provider retry disabled; unset AI_PROVIDER_MODE to use the full chain')
     const geminiOnly = createFailoverRouter({
       providers: [createGeminiProvider(GEMINI_API_KEY, GEMINI_MODEL)],
       disableSameProviderRetry: true,
@@ -145,28 +146,41 @@ function getRouter(lang?: TeachingLanguage) {
   // "401 Missing Authentication header" — OPENROUTER_API_KEY is unset in
   // this deployment, so createOpenRouterProvider('', ...) was always a
   // guaranteed-fail real HTTP round-trip before falling through to the
-  // next tier. Same risk exists for Gemini if GEMINI_API_KEY is unset.
+  // next tier. Same risk exists for any provider whose key is unset.
   // Filtering out providers with no configured key removes that wasted
   // (and log-polluting) hop — behavior is otherwise identical, since an
   // empty-key provider could never have succeeded anyway. GROQ_API_KEY is
   // the one credential this app has always required (CLAUDE.md/.env.example),
   // so the chain is never empty in practice.
   //
-  // Russian prepends YandexGPT to that same chain; every other tier, and the
-  // chain for every other language, is byte-for-byte what it was before. The
-  // Yandex tier is subject to the identical empty-key filter — it needs BOTH
-  // credentials, so an unset YANDEX_FOLDER_ID drops it rather than spending a
-  // guaranteed-fail round-trip on a request whose model URI cannot be formed.
-  const candidates: Array<{ key: string; provider: AIProvider }> = [
-    ...(chain === 'ru'
-      ? [{
-          key: YANDEX_API_KEY && YANDEX_FOLDER_ID ? YANDEX_API_KEY : '',
-          provider: createYandexProvider(YANDEX_API_KEY, YANDEX_FOLDER_ID, YANDEX_MODEL),
-        }]
-      : []),
+  // Russian's chain is its own array — YandexGPT -> Gemini -> OpenRouter ->
+  // Groq, byte-for-byte the 2026-08-04 order, deliberately NOT reordered by
+  // the 2026-08-20 Groq-primary change below (see isGeminiOnlyMode()'s doc
+  // comment for why). The Yandex tier is subject to the identical empty-key
+  // filter — it needs BOTH credentials, so an unset YANDEX_FOLDER_ID drops it
+  // rather than spending a guaranteed-fail round-trip on a request whose
+  // model URI cannot be formed.
+  //
+  // The DEFAULT (non-Russian) chain is Groq -> Gemini -> OpenRouter
+  // (2026-08-20, owner-authorized reversal of the Gemini-primary order this
+  // chain used before 2026-08-12's Gemini-only default, reasoned above in
+  // isGeminiOnlyMode()'s doc comment): Groq is the credential this app has
+  // always required and was sitting completely unused while Gemini alone
+  // absorbed a rate-limit outage. OpenRouter stays as a third tier — its key
+  // is unset in production today, so it is filtered out below exactly as it
+  // always was; nothing about its role changes.
+  const candidates: Array<{ key: string; provider: AIProvider }> = chain === 'ru' ? [
+    {
+      key: YANDEX_API_KEY && YANDEX_FOLDER_ID ? YANDEX_API_KEY : '',
+      provider: createYandexProvider(YANDEX_API_KEY, YANDEX_FOLDER_ID, YANDEX_MODEL),
+    },
     { key: GEMINI_API_KEY, provider: createGeminiProvider(GEMINI_API_KEY, GEMINI_MODEL) },
     { key: OPENROUTER_API_KEY, provider: createOpenRouterProvider(OPENROUTER_API_KEY, OPENROUTER_MODEL) },
     { key: GROQ_API_KEY, provider: createGroqProvider(GROQ_API_KEY, GROQ_MODEL) },
+  ] : [
+    { key: GROQ_API_KEY, provider: createGroqProvider(GROQ_API_KEY, GROQ_MODEL) },
+    { key: GEMINI_API_KEY, provider: createGeminiProvider(GEMINI_API_KEY, GEMINI_MODEL) },
+    { key: OPENROUTER_API_KEY, provider: createOpenRouterProvider(OPENROUTER_API_KEY, OPENROUTER_MODEL) },
   ]
   const providers = candidates.filter((c) => c.key !== '').map((c) => c.provider)
   if (providers.length === 0) {

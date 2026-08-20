@@ -33,15 +33,16 @@ beforeEach(() => {
   process.env.GEMINI_API_KEY = 'g-key'
   process.env.OPENROUTER_API_KEY = 'o-key'
   process.env.GROQ_API_KEY = 'q-key'
-  // Gemini-only became the DEFAULT on 2026-08-12 (owner instruction), so an
-  // unset AI_PROVIDER_MODE now collapses every chain to a single provider.
-  // These tests exist to guard the CHAIN COMPOSITION — that Russian is
-  // selected by teaching language and never by country — which is still the
-  // behaviour whenever failover is restored. They therefore opt in explicitly
-  // rather than being deleted: the assembly they protect is intact, reachable
-  // with one env var, and must not be allowed to rot while it is switched off.
-  // The new default is pinned separately, in aiGeminiOnlyDefault.test.ts.
-  process.env.AI_PROVIDER_MODE = 'failover'
+  // Gemini-only is once again an explicit opt-IN diagnostic (reverted
+  // 2026-08-20, owner-authorized, after Gemini alone hit a rate-limit
+  // outage with nothing to fail over to). The full chain — Groq primary for
+  // the default chain, Yandex primary for Russian — is once again what an
+  // unset AI_PROVIDER_MODE resolves to, so these tests no longer need to opt
+  // in; deleting the explicit set is deliberate, not an oversight — it
+  // proves the chain these tests protect IS the default again, not merely
+  // reachable behind a flag. The single-provider escape hatch is pinned
+  // separately, in aiDefaultProviderChain.test.ts / aiAttemptTelemetry.test.ts.
+  delete process.env.AI_PROVIDER_MODE
   vi.resetModules()
 })
 
@@ -184,15 +185,15 @@ describe('Russian failover chain degrades one tier at a time', () => {
 
 describe('Non-Russian languages never select YandexGPT', () => {
   it('English chain excludes yandex', async () => {
-    expect(await chainFor('en')).toEqual(['gemini', 'openrouter', 'groq'])
+    expect(await chainFor('en')).toEqual(['groq', 'gemini', 'openrouter'])
   })
 
   it('Hindi chain excludes yandex', async () => {
-    expect(await chainFor('hi')).toEqual(['gemini', 'openrouter', 'groq'])
+    expect(await chainFor('hi')).toEqual(['groq', 'gemini', 'openrouter'])
   })
 
   it('omitted language (JSON/internal callers) excludes yandex', async () => {
-    expect(await chainFor(undefined)).toEqual(['gemini', 'openrouter', 'groq'])
+    expect(await chainFor(undefined)).toEqual(['groq', 'gemini', 'openrouter'])
   })
 
   it('yandex never appears for a non-Russian language even with credentials set', async () => {
@@ -211,10 +212,10 @@ describe('Non-Russian languages never select YandexGPT', () => {
         healthCheck: async () => true,
       }),
     }))
-    vi.doMock('@/lib/ai/providers/gemini', () => ({
-      createGeminiProvider: () => ({
-        name: 'gemini',
-        complete: async () => ({ text: '{"ok":true}', finishReason: 'stop', provider: 'gemini' }),
+    vi.doMock('@/lib/ai/providers/groq', () => ({
+      createGroqProvider: () => ({
+        name: 'groq',
+        complete: async () => ({ text: '{"ok":true}', finishReason: 'stop', provider: 'groq' }),
         healthCheck: async () => true,
       }),
     }))
@@ -263,16 +264,19 @@ describe('Country alone never changes provider selection', () => {
         healthCheck: async () => true,
       }),
     }))
-    vi.doMock('@/lib/ai/providers/gemini', () => ({
-      createGeminiProvider: () => ({
-        name: 'gemini',
-        complete: async () => ({ text: 'english answer', finishReason: 'stop', provider: 'gemini' }),
+    // Groq is primary for the default (non-Russian) chain — mocked so this
+    // stays a network-free unit test rather than accidentally proving the
+    // point via a real HTTP call.
+    vi.doMock('@/lib/ai/providers/groq', () => ({
+      createGroqProvider: () => ({
+        name: 'groq',
+        complete: async () => ({ text: 'english answer', finishReason: 'stop', provider: 'groq' }),
         healthCheck: async () => true,
       }),
     }))
     const { routeAI } = await import('@/lib/ai/router')
     const r = await routeAI([{ role: 'user', content: 'q' }], 'sys', 'ru', 800, 'en')
-    expect(r.provider).toBe('gemini')
+    expect(r.provider).toBe('groq')
     expect(yandexCalled).toBe(false)
   })
 
@@ -368,14 +372,14 @@ describe('Metrics and logging identify YandexGPT as the active provider', () => 
 
 // ─── 10. Non-Russian chain is unchanged ──────────────────────────────────────
 
-describe('Existing provider chain is unchanged for non-Russian languages', () => {
-  it('the default chain is exactly what it was before this change', async () => {
-    expect(await chainFor('en')).toEqual(['gemini', 'openrouter', 'groq'])
+describe('Default (non-Russian) provider chain is Groq-primary (2026-08-20)', () => {
+  it('the default chain is Groq -> Gemini -> OpenRouter', async () => {
+    expect(await chainFor('en')).toEqual(['groq', 'gemini', 'openrouter'])
   })
 
   it('missing keys are still filtered out of the default chain', async () => {
     process.env.OPENROUTER_API_KEY = ''
-    expect(await chainFor('en')).toEqual(['gemini', 'groq'])
+    expect(await chainFor('en')).toEqual(['groq', 'gemini'])
   })
 
   it('gemini_only isolation mode still wins over language routing', async () => {

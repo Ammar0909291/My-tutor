@@ -54,7 +54,7 @@ describe('AI provider chain — the code is the source of truth', () => {
     expect(router).toMatch(/from '\.\/providers\/yandex'/)
   })
 
-  it('the router assembles Yandex -> Gemini -> OpenRouter -> Groq in that order', () => {
+  it('the Russian chain assembles Yandex -> Gemini -> OpenRouter -> Groq in that order', () => {
     // Scoped to the `candidates` array, which IS the chain. Searching the whole
     // file would match the gemini_only diagnostic block, which legitimately
     // constructs Gemini earlier and is not part of this ordering.
@@ -67,6 +67,27 @@ describe('AI provider chain — the code is the source of truth', () => {
     expect(gemini).toBeGreaterThan(yandex)
     expect(openrouter).toBeGreaterThan(gemini)
     expect(groq).toBeGreaterThan(openrouter)
+  })
+
+  it('the DEFAULT (non-Russian) chain assembles Groq -> Gemini -> OpenRouter in that order (2026-08-20)', () => {
+    // The `candidates` array is `chain === 'ru' ? [ru array] : [default array]`.
+    // The default array is everything from the `] : [` join to the array's own
+    // closing `]`, scoped past the Russian array so a Yandex mention there
+    // cannot satisfy this block by accident.
+    const src = readFileSync(join(AI_DIR, 'router.ts'), 'utf8')
+    const start = src.indexOf('const candidates:')
+    const joinPoint = src.indexOf('] : [', start)
+    expect(joinPoint, 'the candidates array must have a ru/default ternary split').toBeGreaterThan(start)
+    const end = src.indexOf('\n  ]', joinPoint)
+    expect(end).toBeGreaterThan(joinPoint)
+    const defaultChain = src.slice(joinPoint, end)
+    expect(defaultChain).not.toContain('createYandexProvider')
+    const groq = defaultChain.indexOf('createGroqProvider(GROQ_API_KEY')
+    const gemini = defaultChain.indexOf('createGeminiProvider(GEMINI_API_KEY')
+    const openrouter = defaultChain.indexOf('createOpenRouterProvider(OPENROUTER_API_KEY')
+    expect(groq).toBeGreaterThan(-1)
+    expect(gemini).toBeGreaterThan(groq)
+    expect(openrouter).toBeGreaterThan(gemini)
   })
 
   it('the Yandex tier is gated on the teaching language, not on a country value', () => {

@@ -110,21 +110,32 @@
   1:1. `prisma migrate deploy` is confirmed a genuine no-op on every deploy — **no drift, resolved,
   not a risk.** (Prior note, 2026-07-26 Engineering Program close-out, is superseded: it had
   flagged this as unverified and originally mis-stated the project as `db push`-only.)
-- **AI PROVIDER — GEMINI ONLY (owner instruction, 2026-08-12, supersedes the chain description
-  below).** Every turn is served by Gemini `gemini-3.5-flash-lite` and nothing else, in every
-  teaching language. `isGeminiOnlyMode()` in `src/lib/ai/router.ts` is INVERTED: unset (or any
-  value other than the exact opt-out) means gemini-only; `AI_PROVIDER_MODE=failover` restores the
-  full chain. Nothing was deleted — the failover algorithm, the provider factories and the Russian
-  Yandex tier are all intact and one env var away, which is why the chain-composition tests still
-  run against the real assembly (`aiRussianLanguageRouting.test.ts` now opts into `failover`
-  explicitly). Two consequences, both deliberate and recorded rather than discovered later:
-  (a) there is nothing to fail over TO, so a Gemini outage or quota exhaustion reaches the learner
-  as the degraded template instead of a Groq answer; (b) **YandexGPT for Russian TEACHING is
-  disabled** — "only Gemini" and "Russian goes to Yandex" cannot both hold, and the newer
-  instruction wins. Russian **text-to-speech is a separate integration and is untouched**:
-  `/api/tts` still routes Russian audio to Yandex. Guarded by
-  `src/tests/aiGeminiOnlyDefault.test.ts` (pins the default, incl. that a typo fails toward the
-  narrow chain) and the inverted P17 block in `aiAttemptTelemetry.test.ts`.
+- **AI PROVIDER — GEMINI-ONLY REVERSED, GROQ NOW PRIMARY (owner-authorized, 2026-08-20,
+  supersedes the 2026-08-12 Gemini-only entry below, which is kept for history only).** Gemini
+  started returning 429 rate-limit errors in production; the 2026-08-12 gemini-only default had
+  left nothing to fail over to, so every learner turn was landing on the degraded template — a
+  total teaching outage, not a degraded one. `GROQ_API_KEY` had been configured in production the
+  whole time and was sitting unused. `isGeminiOnlyMode()` in `src/lib/ai/router.ts` is back to an
+  opt-IN diagnostic: unset (or anything other than the exact `AI_PROVIDER_MODE=gemini_only`
+  opt-in) uses the full chain. The DEFAULT (non-Russian) chain's internal order is reversed from
+  what it was before 2026-08-12: **Groq -> Gemini -> OpenRouter** (`getRouter()`'s `candidates`
+  ternary, `src/lib/ai/router.ts` ~L172-184) — Groq primary, Gemini fallback, OpenRouter third
+  (its key is unset in production, so it is filtered out exactly as before; nothing about its role
+  changes). Gemini is NOT removed — fully wired, second in the chain, reachable the moment Groq
+  fails. The Russian chain is untouched: **Yandex -> Gemini -> OpenRouter -> Groq**, in the same
+  order as the 2026-08-04 restoration, in its own array so the default-chain reorder cannot leak
+  into it. `AI_PROVIDER_MODE=gemini_only` is kept as a diagnostic escape hatch (symmetric with the
+  old `failover` opt-out it replaces) in case single-provider isolation is wanted again. Guarded
+  by `src/tests/aiDefaultProviderChain.test.ts` (renamed from `aiGeminiOnlyDefault.test.ts`,
+  rewritten for the new default), `src/tests/aiGroqPrimaryFailover.test.ts` (new: Groq-first
+  selection, no wasted Gemini call on a Groq success, Groq-failure-to-Gemini failover, double-
+  failure fallthrough unchanged, no secret in any log/error, `createGeminiProvider` unbroken
+  standalone), the updated `AI_PROVIDER_MODE` block in `aiAttemptTelemetry.test.ts`, and updated
+  assertions in `aiProviderChainTruth.test.ts`/`aiRussianLanguageRouting.test.ts`.
+- **Superseded 2026-08-12 entry, kept for history only:** every turn was served by Gemini
+  `gemini-3.5-flash-lite` and nothing else, in every teaching language, via an inverted
+  `isGeminiOnlyMode()` (unset meant gemini-only; `AI_PROVIDER_MODE=failover` restored the full
+  chain). That inversion is what the 2026-08-20 entry above reverses.
 - AI (**YandexGPT restored 2026-08-04 as an intentional product decision; supersedes the
   2026-08-04 "there is NO YandexGPT LLM provider" note below**): provider selection keys off the
   learner's **selected teaching language and NOTHING else** — never their country. Two chains,

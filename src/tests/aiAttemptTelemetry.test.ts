@@ -148,14 +148,15 @@ describe('telemetry never breaks a turn', () => {
 })
 
 /**
- * INVERTED 2026-08-12 (owner instruction): gemini-only is now the DEFAULT, and
- * `AI_PROVIDER_MODE=failover` is the explicit opt-out that restores the chain.
- * These assertions previously pinned the opposite polarity; they are updated
- * rather than removed, because the property worth guarding is unchanged — the
- * switch must have exactly one meaning, and a typo must fail toward the narrow
- * chain rather than silently fanning back out to four providers.
+ * REVERTED to opt-IN 2026-08-20 (owner-authorized, Gemini outage reversal):
+ * `AI_PROVIDER_MODE=gemini_only` is once again the explicit escape hatch, and
+ * the full multi-provider chain (Groq primary for the default chain) is the
+ * default. See aiDefaultProviderChain.test.ts for the full default-chain
+ * ordering assertions; this block pins the switch's own on/off polarity and
+ * that a typo fails SAFE toward the full chain, not toward single-provider
+ * isolation.
  */
-describe('gemini-only mode — default ON, opt-out via failover', () => {
+describe('gemini-only mode — opt-in only, full chain by default', () => {
   const KEY = 'AI_PROVIDER_MODE'
   const prev = process.env[KEY]
   afterEach(() => {
@@ -164,27 +165,15 @@ describe('gemini-only mode — default ON, opt-out via failover', () => {
     vi.resetModules()
   })
 
-  it('is ON when the variable is unset — this is the default', async () => {
+  it('is OFF when the variable is unset — this is the default', async () => {
     delete process.env[KEY]
     vi.resetModules()
     const { isGeminiOnlyMode } = await import('@/lib/ai/router')
-    expect(isGeminiOnlyMode()).toBe(true)
+    expect(isGeminiOnlyMode()).toBe(false)
   })
 
-  it('stays ON for any value that is not the exact opt-out', async () => {
-    // Including the OLD opt-in spelling: a deployment still carrying
-    // AI_PROVIDER_MODE=gemini_only keeps getting gemini only, so the
-    // inversion cannot surprise an existing environment.
-    for (const v of ['', 'full', 'groq_only', 'gemini', 'GEMINI', '1', 'true', 'gemini_only']) {
-      process.env[KEY] = v
-      vi.resetModules()
-      const { isGeminiOnlyMode } = await import('@/lib/ai/router')
-      expect(isGeminiOnlyMode(), `value ${JSON.stringify(v)}`).toBe(true)
-    }
-  })
-
-  it('is OFF only for failover, case- and whitespace-insensitive', async () => {
-    for (const v of ['failover', 'FAILOVER', ' failover ']) {
+  it('stays OFF for any value that is not the exact opt-in', async () => {
+    for (const v of ['', 'full', 'groq_only', 'gemini', 'GEMINI', '1', 'true', 'failover']) {
       process.env[KEY] = v
       vi.resetModules()
       const { isGeminiOnlyMode } = await import('@/lib/ai/router')
@@ -192,24 +181,33 @@ describe('gemini-only mode — default ON, opt-out via failover', () => {
     }
   })
 
-  it('the chain contains ONLY gemini by default', async () => {
+  it('is ON only for gemini_only, case- and whitespace-insensitive', async () => {
+    for (const v of ['gemini_only', 'GEMINI_ONLY', ' gemini_only ']) {
+      process.env[KEY] = v
+      vi.resetModules()
+      const { isGeminiOnlyMode } = await import('@/lib/ai/router')
+      expect(isGeminiOnlyMode(), `value ${JSON.stringify(v)}`).toBe(true)
+    }
+  })
+
+  it('the chain contains Groq primary, Gemini fallback, OpenRouter third by default', async () => {
     delete process.env[KEY]
     process.env.GEMINI_API_KEY = 'k'
     process.env.GROQ_API_KEY = 'k'
     process.env.OPENROUTER_API_KEY = 'k'
     vi.resetModules()
     const { getAIRouter } = await import('@/lib/ai/router')
-    expect(getAIRouter().providerNames).toEqual(['gemini'])
+    expect(getAIRouter().providerNames).toEqual(['groq', 'gemini', 'openrouter'])
   })
 
-  it('the chain still contains the fallbacks when explicitly opted out', async () => {
-    process.env[KEY] = 'failover'
+  it('the chain collapses to gemini only when explicitly opted in', async () => {
+    process.env[KEY] = 'gemini_only'
     process.env.GEMINI_API_KEY = 'k'
     process.env.GROQ_API_KEY = 'k'
     process.env.OPENROUTER_API_KEY = 'k'
     vi.resetModules()
     const { getAIRouter } = await import('@/lib/ai/router')
-    expect(getAIRouter().providerNames).toEqual(['gemini', 'openrouter', 'groq'])
+    expect(getAIRouter().providerNames).toEqual(['gemini'])
   })
 })
 
