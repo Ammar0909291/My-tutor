@@ -183,11 +183,11 @@ async function post(pathname: string, body: unknown, cookie: string): Promise<Tu
  * a learner who knows nothing about this concept, so the session is created
  * here and never shared.
  */
-async function createSession(cookie: string): Promise<string> {
+async function createSession(cookie: string, subjectSlug: string): Promise<string> {
   const res = await fetch(`${BASE}/api/sessions`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', cookie },
-    body: JSON.stringify({ subjectSlug: 'mathematics' }),
+    body: JSON.stringify({ subjectSlug }),
   })
   if (!res.ok) throw new Error(`/api/sessions -> HTTP ${res.status}: ${(await res.text()).slice(0, 200)}`)
   const body = (await res.json()) as { data?: { id?: string }; id?: string; resumed?: boolean }
@@ -201,7 +201,7 @@ async function createSession(cookie: string): Promise<string> {
 }
 
 export async function certifyConcept(
-  target: ConceptTarget, cookie: string, sessionId: string,
+  target: ConceptTarget, cookie: string, sessionId: string, totalLessons = 908,
 ): Promise<CertificationResult> {
   const failed: string[] = []
   const notes: string[] = []
@@ -277,7 +277,7 @@ export async function certifyConcept(
   last = await post('/api/learn/lesson-init', {
     sessionId, mode: 'restart', lessonTitle: target.lessonTitle,
     lessonOrder: target.lessonOrder, topicSlug: target.conceptId,
-    unitTitle: target.unitTitle, totalLessons: 908, completedLessons: [], teachingLanguage: 'en',
+    unitTitle: target.unitTitle, totalLessons, completedLessons: [], teachingLanguage: 'en',
   }, cookie)
   check(last)
 
@@ -531,17 +531,24 @@ export function classifyOutcome(
 }
 
 async function main() {
-  const targets: ConceptTarget[] = JSON.parse(
-    require('fs').readFileSync(process.argv[2] ?? 'scripts/math/targets.json', 'utf-8'),
-  )
+  // Subject-agnostic by construction: argv[2] is the targets file (any
+  // subject's own concept list, same {conceptId, lessonTitle, lessonOrder,
+  // unitTitle} shape), argv[3] the subjectSlug /api/sessions expects
+  // ('mathematics' | 'chemistry' | ...), argv[4] the subject's total lesson
+  // count for the lesson-init payload. All three default to the original
+  // mathematics behavior so no existing invocation or CI usage changes.
+  const targetsPath = process.argv[2] ?? 'scripts/math/targets.json'
+  const subjectSlug = process.argv[3] ?? 'mathematics'
+  const totalLessons = Number(process.argv[4] ?? 908)
+  const targets: ConceptTarget[] = JSON.parse(require('fs').readFileSync(targetsPath, 'utf-8'))
   const cookie = await authenticate()
 
   const results: CertificationResult[] = []
   for (const t of targets) {
     process.stderr.write(`certifying ${t.conceptId} … `)
     try {
-      const sessionId = await createSession(cookie)
-      const r = await certifyConcept(t, cookie, sessionId)
+      const sessionId = await createSession(cookie, subjectSlug)
+      const r = await certifyConcept(t, cookie, sessionId, totalLessons)
       results.push(r)
       process.stderr.write(`${r.pass ? 'PASS' : `FAIL [${r.failed.join(', ')}]`} (${r.turns} turns)\n`)
     } catch (err) {

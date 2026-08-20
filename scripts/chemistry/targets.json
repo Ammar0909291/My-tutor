@@ -1,0 +1,74 @@
+[
+  {
+    "conceptId": "chem.found.matter",
+    "lessonTitle": "Nature of Matter",
+    "lessonOrder": 1,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.found.measurement",
+    "lessonTitle": "Physical Quantities and SI Units",
+    "lessonOrder": 4,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.found.mole-concept",
+    "lessonTitle": "Mole Concept and Avogadro's Number",
+    "lessonOrder": 6,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.found.stoichiometry",
+    "lessonTitle": "Stoichiometry",
+    "lessonOrder": 7,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.found.concentration",
+    "lessonTitle": "Concentration Units",
+    "lessonOrder": 8,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.bond.ionic-bonding",
+    "lessonTitle": "Ionic Bonding",
+    "lessonOrder": 26,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.bond.covalent-bonding",
+    "lessonTitle": "Covalent Bonding",
+    "lessonOrder": 27,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.equil.concept",
+    "lessonTitle": "Equilibrium Concept",
+    "lessonOrder": 58,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.equil.acids-bases",
+    "lessonTitle": "Acid–Base Theories",
+    "lessonOrder": 62,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.bond.hybridization",
+    "lessonTitle": "Hybridization",
+    "lessonOrder": 29,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.equil.weak-acid",
+    "lessonTitle": "Weak Acid and Base Equilibria",
+    "lessonOrder": 63,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.org.spectroscopy",
+    "lessonTitle": "Introduction to Spectroscopy",
+    "lessonOrder": 132,
+    "unitTitle": "Chemistry"
+  }
+]
