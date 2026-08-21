@@ -1,0 +1,86 @@
+[
+  {
+    "conceptId": "chem.env.ozone",
+    "lessonTitle": "Ozone Depletion",
+    "lessonOrder": 181,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.anal.volumetric",
+    "lessonTitle": "Volumetric Analysis",
+    "lessonOrder": 184,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.sblock.alkaline-earth",
+    "lessonTitle": "Alkaline Earth Metals",
+    "lessonOrder": 110,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.nitro.heterocycles",
+    "lessonTitle": "Nitrogen Heterocycles",
+    "lessonOrder": 166,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.dblock.general",
+    "lessonTitle": "Transition Metals — General Properties",
+    "lessonOrder": 119,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.pblock.group16",
+    "lessonTitle": "Group 16 — Oxygen Family",
+    "lessonOrder": 115,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.coord.applications",
+    "lessonTitle": "Applications of Coordination Chemistry",
+    "lessonOrder": 107,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.kinet.arrhenius",
+    "lessonTitle": "Arrhenius Equation",
+    "lessonOrder": 86,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.redox.disproportionation",
+    "lessonTitle": "Disproportionation",
+    "lessonOrder": 71,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.surface.emulsions",
+    "lessonTitle": "Emulsions and Gels",
+    "lessonOrder": 98,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.elect.batteries",
+    "lessonTitle": "Batteries and Fuel Cells",
+    "lessonOrder": 80,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.period.ionization-energy",
+    "lessonTitle": "Ionization Energy",
+    "lessonOrder": 22,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.poly.condensation",
+    "lessonTitle": "Condensation Polymerization",
+    "lessonOrder": 175,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.sol.activity",
+    "lessonTitle": "Activity and Non-ideal Solutions",
+    "lessonOrder": 48,
+    "unitTitle": "Chemistry"
+  }
+]
