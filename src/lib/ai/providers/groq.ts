@@ -45,7 +45,18 @@ export function createGroqProvider(apiKey: string, model: string): AIProvider {
 
       if (!text) throw new AIEmptyResponseError('groq')
 
-      return { text, finishReason, provider: 'groq' }
+      // Groq's chat.completions response is OpenAI-compatible and carries a
+      // `usage` object exactly like Gemini's `usageMetadata` — this provider
+      // simply never read it, which is why every attempt log before this
+      // showed prompt_tokens/completion_tokens as "not_reported" even on a
+      // successful call. `cachedTokens` omitted: Groq's usage object carries
+      // no cached-token field to report (unlike Gemini's), so leaving it out
+      // reads as "not measured" rather than a fabricated zero.
+      const usage = response.usage
+        ? { promptTokens: response.usage.prompt_tokens, completionTokens: response.usage.completion_tokens }
+        : undefined
+
+      return { text, finishReason, provider: 'groq', usage }
     },
 
     async healthCheck(): Promise<boolean> {
