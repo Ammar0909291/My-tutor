@@ -1,0 +1,128 @@
+[
+  {
+    "conceptId": "chem.atomic.electronic-config",
+    "lessonTitle": "Electronic Configuration",
+    "lessonOrder": 16,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.atomic.photoelectric-effect",
+    "lessonTitle": "Photoelectric Effect and Dual Nature",
+    "lessonOrder": 17,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.bond.bond-parameters",
+    "lessonTitle": "Bond Parameters",
+    "lessonOrder": 35,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.bond.coordinate-bond",
+    "lessonTitle": "Coordinate and Dative Bonding",
+    "lessonOrder": 36,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.bond.intermolecular",
+    "lessonTitle": "Intermolecular Forces",
+    "lessonOrder": 32,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.bond.metallic-bonding",
+    "lessonTitle": "Metallic Bonding",
+    "lessonOrder": 33,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.bond.resonance",
+    "lessonTitle": "Resonance Structures",
+    "lessonOrder": 34,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.equil.buffer",
+    "lessonTitle": "Buffer Solutions",
+    "lessonOrder": 64,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.equil.complex-equil",
+    "lessonTitle": "Complex Ion Equilibria",
+    "lessonOrder": 67,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.equil.hydrolysis",
+    "lessonTitle": "Salt Hydrolysis",
+    "lessonOrder": 65,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.equil.solubility",
+    "lessonTitle": "Solubility Equilibria",
+    "lessonOrder": 66,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.equil.titration",
+    "lessonTitle": "Acid–Base Titrations",
+    "lessonOrder": 68,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.found.significant-figures",
+    "lessonTitle": "Significant Figures and Error Analysis",
+    "lessonOrder": 5,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.org.arrow-pushing",
+    "lessonTitle": "Electron Flow and Arrow Notation",
+    "lessonOrder": 134,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.org.hybridization",
+    "lessonTitle": "Carbon Hybridization",
+    "lessonOrder": 125,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.org.mechanisms",
+    "lessonTitle": "Organic Reaction Mechanisms",
+    "lessonOrder": 129,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.org.pericyclic",
+    "lessonTitle": "Pericyclic Reactions",
+    "lessonOrder": 135,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.org.purification",
+    "lessonTitle": "Purification Techniques",
+    "lessonOrder": 130,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.org.qualitative-analysis",
+    "lessonTitle": "Qualitative Organic Analysis",
+    "lessonOrder": 131,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.org.reactive-intermediates",
+    "lessonTitle": "Reactive Intermediates",
+    "lessonOrder": 128,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.thermo.cell-thermo",
+    "lessonTitle": "Electrochemical Thermodynamics",
+    "lessonOrder": 57,
+    "unitTitle": "Chemistry"
+  }
+]
