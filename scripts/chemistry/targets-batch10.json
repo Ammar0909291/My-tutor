@@ -1,0 +1,86 @@
+[
+  {
+    "conceptId": "chem.elect.nernst",
+    "lessonTitle": "Nernst Equation",
+    "lessonOrder": 76,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.period.periodic-properties",
+    "lessonTitle": "Periodic Trends Overview",
+    "lessonOrder": 24,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.solid.ionic-solids",
+    "lessonTitle": "Ionic Crystal Structures",
+    "lessonOrder": 92,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.state.liquids",
+    "lessonTitle": "Liquid State Properties",
+    "lessonOrder": 41,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.thermo.entropy",
+    "lessonTitle": "Entropy and Second Law",
+    "lessonOrder": 53,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.atomic.quantum-numbers",
+    "lessonTitle": "Quantum Numbers",
+    "lessonOrder": 14,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.hal.sn2",
+    "lessonTitle": "SN2 Mechanism",
+    "lessonOrder": 145,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.hyd.alkanes",
+    "lessonTitle": "Alkanes",
+    "lessonOrder": 136,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.alc.phenols",
+    "lessonTitle": "Phenols",
+    "lessonOrder": 151,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.carb.aldehydes",
+    "lessonTitle": "Aldehydes",
+    "lessonOrder": 156,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.bio.lipids",
+    "lessonTitle": "Lipids",
+    "lessonOrder": 171,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.found.states-of-matter",
+    "lessonTitle": "States of Matter",
+    "lessonOrder": 2,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.bond.vsepr",
+    "lessonTitle": "VSEPR Theory",
+    "lessonOrder": 28,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.equil.kc-kp",
+    "lessonTitle": "Equilibrium Constants Kc and Kp",
+    "lessonOrder": 59,
+    "unitTitle": "Chemistry"
+  }
+]
