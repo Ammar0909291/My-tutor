@@ -1,0 +1,74 @@
+[
+  {
+    "conceptId": "chem.atomic.atomic-theory",
+    "lessonTitle": "Atomic Theory",
+    "lessonOrder": 9,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.kinet.rate",
+    "lessonTitle": "Rate of Reaction",
+    "lessonOrder": 83,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.elect.standard-electrode",
+    "lessonTitle": "Standard Electrode Potential",
+    "lessonOrder": 75,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.coord.werner",
+    "lessonTitle": "Werner's Theory",
+    "lessonOrder": 101,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.dblock.first-row",
+    "lessonTitle": "First-Row Transition Metals",
+    "lessonOrder": 120,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.hal.introduction",
+    "lessonTitle": "Haloalkanes and Haloarenes",
+    "lessonOrder": 143,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.hyd.alkynes",
+    "lessonTitle": "Alkynes",
+    "lessonOrder": 138,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.alc.ethers",
+    "lessonTitle": "Ethers",
+    "lessonOrder": 152,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.carb.ketones",
+    "lessonTitle": "Ketones",
+    "lessonOrder": 157,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.anal.chromatography",
+    "lessonTitle": "Chromatography",
+    "lessonOrder": 185,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.bio.proteins",
+    "lessonTitle": "Proteins",
+    "lessonOrder": 169,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.env.atmosphere",
+    "lessonTitle": "Atmosphere and Composition",
+    "lessonOrder": 179,
+    "unitTitle": "Chemistry"
+  }
+]
