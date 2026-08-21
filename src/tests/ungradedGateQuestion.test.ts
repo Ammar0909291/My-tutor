@@ -75,9 +75,17 @@ describe('withholdUngradedGateQuestion — what it must NOT touch', () => {
     expect(r.text).toBe(L9_SQUARES)
   })
 
-  it('leaves GUIDE alone — it advances on a give, not on a graded answer', () => {
+  it('leaves GUIDE alone when the gate never went looking for a probe this turn (TEACH move)', () => {
     const r = withholdUngradedGateQuestion({
       text: L9_SQUARES, phase: 'GUIDE', hasStructuredMcq: false,
+    })
+    expect(r.withheld).toBe(false)
+    expect(r.text).toBe(L9_SQUARES)
+  })
+
+  it('leaves GUIDE alone even with gateSoughtThisTurn explicitly false', () => {
+    const r = withholdUngradedGateQuestion({
+      text: L9_SQUARES, phase: 'GUIDE', hasStructuredMcq: false, gateSoughtThisTurn: false,
     })
     expect(r.withheld).toBe(false)
     expect(r.text).toBe(L9_SQUARES)
@@ -120,6 +128,48 @@ describe('withholdUngradedGateQuestion — what it must NOT touch', () => {
         }),
       ).not.toThrow()
     }
+  })
+})
+
+describe('withholdUngradedGateQuestion — GUIDE, when the gate sought a probe (the chemistry root cause)', () => {
+  // Reproduces the actual production mechanism: `evidenceMoveHoisted === 'ask'`
+  // at GUIDE made the gate look for an authored probe (`phaseAllowsProbe`
+  // true), none converted (`gateMcqHoisted` stayed null — pool exhaustion or
+  // no authored probe), and the model wrote its own ungradeable prose
+  // question. GUIDE→CHECK then advanced off that turn's self-reported
+  // SIGNAL, with zero withholding, because the guard's old phase check never
+  // looked at GUIDE at all.
+  it('withholds an ungradeable GUIDE question when the gate sought a probe this turn', () => {
+    const r = withholdUngradedGateQuestion({
+      text: R3_APPLES, phase: 'GUIDE', hasStructuredMcq: false, gateSoughtThisTurn: true,
+    })
+    expect(r.withheld).toBe(true)
+    expect(r.reason).toBe('no-gradeable-probe')
+    expect(r.text).not.toContain('A) 7:4')
+    expect(r.text).not.toMatch(/ratio of apples to oranges/i)
+  })
+
+  it('also catches a stray question alongside a GUIDE-attached MCQ', () => {
+    const attached = 'Which of the following best describes matter?'
+    const strayTurn = `Nice work so far.\n\n**Quick check:** How would you describe what happens when ice melts into water?`
+    const r = withholdUngradedGateQuestion({
+      text: strayTurn,
+      phase: 'GUIDE',
+      hasStructuredMcq: true,
+      attachedMcqQuestion: attached,
+      gateSoughtThisTurn: true,
+    })
+    expect(r.withheld).toBe(true)
+    expect(r.reason).toBe('stray-question-alongside-mcq')
+  })
+
+  it('leaves a confirmation tail alone at GUIDE even when the gate sought a probe', () => {
+    const text = 'A ratio compares two quantities by division.\n\nDoes that make sense so far?'
+    const r = withholdUngradedGateQuestion({
+      text, phase: 'GUIDE', hasStructuredMcq: false, gateSoughtThisTurn: true,
+    })
+    expect(r.withheld).toBe(false)
+    expect(r.text).toBe(text)
   })
 })
 

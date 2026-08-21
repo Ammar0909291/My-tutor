@@ -1650,6 +1650,21 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     // read pre-LLM (drives the TURN DIRECTIVE), folded post-AI with this
     // turn's evidence, persisted on the existing snapshot ride.
     let conversationStateHoisted: import('@/lib/teaching/conversationState').ConversationState | null = null
+    // The chemistry CHECK-phase D2-ungradeable defect (2026-08-21 sweep,
+    // 4/12 concepts): `withholdUngradedGateQuestion`'s scope was
+    // `isMasteryGatePhase` (CHECK|PRACTICE) alone, a docblock left over from
+    // before the A1 fix below widened where a gate question may be SOUGHT.
+    // `isProbeAttachablePhase` (gateAssessment.ts) also allows GUIDE, exactly
+    // because GUIDE→CHECK now advances on a graded probe success rather than
+    // a self-reported SIGNAL — the same unverifiable-correctness problem this
+    // whole file exists to close for CHECK/PRACTICE. A GUIDE turn where the
+    // gate went looking for a probe (evidenceMoveHoisted === 'ask') and found
+    // none left the model free to ask an ungraded prose question with zero
+    // withhold protection, because the guard never even inspected GUIDE.
+    // Hoisted here (computed alongside `phaseAllowsProbe` ~150 lines below,
+    // read at the withhold call site ~1600 lines below) so both places agree
+    // on exactly which turns the gate considered question-eligible.
+    let phaseAllowsProbeHoisted = false
     // EOS M1 (Evidence Spine): decision facts hoisted for the parallel spine
     // emitter — observation only, zero effect on the turn.
     let evidenceMoveHoisted: string | null = null
@@ -3271,6 +3286,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         const phaseAllowsProbe =
           isMasteryGatePhase(phaseBeforeTurn) ||
           (phaseBeforeTurn === 'GUIDE' && evidenceMoveHoisted === 'ask')
+        phaseAllowsProbeHoisted = phaseAllowsProbe
         const gateEligible =
           phaseAllowsProbe &&
           isProbeAttachablePhase(phaseBeforeTurn) &&
@@ -4876,6 +4892,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // when no probe was attached (`gateMcqHoisted` null), which
               // reproduces the prior no-op behaviour for that case exactly.
               attachedMcqQuestion: gateMcqHoisted?.question,
+              // GUIDE→CHECK's own success gate, not just CHECK/PRACTICE's —
+              // see `phaseAllowsProbeHoisted`'s declaration.
+              gateSoughtThisTurn: phaseAllowsProbeHoisted,
             })
             if (ungraded.withheld) {
               console.warn('[gate-contract] ' + JSON.stringify({

@@ -232,9 +232,18 @@ export function buildGateAssessmentBlock(mcq: TutorMCQ): string {
 // the contract this should never fire, and a rising fire rate is the signal
 // that the corpus, not the runtime, needs attention.
 //
-// Scoped to CHECK and PRACTICE — the phases whose counters only a graded answer
-// can move. GUIDE may still ask freely: it advances on a give, so an ungraded
-// question there costs a turn, not a lesson.
+// Scoped to CHECK and PRACTICE by default — the phases whose counters only a
+// graded answer can move — PLUS any turn the caller flags via
+// `gateSoughtThisTurn`, below. That field exists for GUIDE: the docblock this
+// replaces claimed "GUIDE may still ask freely: it advances on a give," which
+// was true before the A1 fix (`isProbeAttachablePhase`'s docblock above) made
+// GUIDE→CHECK advance on a graded PROBE SUCCESS, not a bare give. A GUIDE turn
+// where the gate went looking for a probe and found none is exactly as
+// unverifiable as an ungraded CHECK/PRACTICE turn, and left unchecked here it
+// silently withholds nothing — the chemistry sweep's actual defect
+// (2026-08-21): 4 concepts advanced GUIDE→CHECK off a self-reported SIGNAL on
+// an ungradeable prose question, with zero `[gate-contract]` withholding,
+// because this function's phase check never even looked at GUIDE turns.
 export interface UngradedGateQuestionInput {
   /** The outgoing text, tags already stripped. */
   text: string
@@ -242,6 +251,16 @@ export interface UngradedGateQuestionInput {
   phase: unknown
   /** Does the turn carry a structured MCQ the server can grade? */
   hasStructuredMcq: boolean
+  /**
+   * Did THIS turn's phase+move combination make it eligible for the gate to
+   * attach an authored probe — the exact `phaseAllowsProbe` boolean computed
+   * where the gate looks for one (`isMasteryGatePhase(phase) ||
+   * (phase === 'GUIDE' && move === 'ask')`)? Optional and
+   * backward-compatible: omitting it reproduces the exact prior
+   * `isMasteryGatePhase`-only scope, so the pre-existing CHECK/PRACTICE
+   * "must NOT touch" tests are unaffected by this field's existence.
+   */
+  gateSoughtThisTurn?: boolean
   /**
    * The question text of the structured MCQ actually attached this turn (the
    * server-selected probe's question, `gateMcqHoisted.question` at the call
@@ -295,7 +314,8 @@ export function withholdUngradedGateQuestion(
   input: UngradedGateQuestionInput,
 ): UngradedGateQuestionResult {
   try {
-    if (!isMasteryGatePhase(input.phase)) return { text: input.text, withheld: false, reason: 'ok' }
+    const gateActive = isMasteryGatePhase(input.phase) || input.gateSoughtThisTurn === true
+    if (!gateActive) return { text: input.text, withheld: false, reason: 'ok' }
 
     const text = typeof input.text === 'string' ? input.text : ''
 
