@@ -2594,7 +2594,19 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       // Resume is now earned by evidence about THIS lesson, not by the
       // existence of subject history. Everything else still returns early
       // exactly as before, so genuine mid-lesson resumes are unchanged.
-      const entryLesson = curriculumLessons.find((l) => l.order === curriculumProgress.currentLesson) ?? null
+      //
+      // F1 fix (verified, not assumed): this WAS "the same wrong anchor" the
+      // comment 16 lines below already named and fixed at ITS OWN site
+      // (curLesson, below) — `curriculumProgress.currentLesson` is a
+      // completion counter, not the lesson on screen, and this specific call
+      // site had been left on the old anchor. Confirmed via a real black-box
+      // production account: currentLesson=5 (stale) while the genuinely
+      // active lesson (activeLessonSlug) was order=18 — `.find(order===5)`
+      // would have resolved entryMode from an entirely different lesson's
+      // topicProgress/order match than the one actually on screen. Now uses
+      // the same `resolveActiveLesson` the sibling site already does, so the
+      // two can never disagree again.
+      const entryLesson = resolveActiveLesson(curriculumLessons, curriculumProgress)
       const entryMode = entryLesson
         ? decideLessonEntryMode({
             lesson: entryLesson,

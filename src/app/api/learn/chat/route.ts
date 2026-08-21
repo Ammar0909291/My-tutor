@@ -2138,22 +2138,41 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // Root-cause fix (completion-lock investigation): decide, once per
         // turn, whether a COMPLETED lesson's turn carries genuine new intent
         // distinct from the closed lesson. Reuses signals already computed
-        // above — no phrase list, no subject-specific check:
+        // above/earlier this same turn — no new phrase list for the generic
+        // cases, no subject-specific check:
         //   - an excursion is open/started this turn (decideExcursion, generic
         //     across every subject)
         //   - a requested concept/topic resolved this turn (also generic)
         //   - the message itself reads as a genuine question (the same test
         //     that fills conversationSummary.currentMessageIsQuestion)
+        //   - F2 fix: the message reads as a distress/help-seeking utterance
+        //     ("I still dont understand this", "I'm confused") — reuses
+        //     `recoveryKeyHoisted` (recoveryGuard.ts's detectFailureState(),
+        //     already computed for every turn above, completion state or
+        //     not). PRODUCTION EVIDENCE: this exact phrase family was served
+        //     the canned reflection question 3 times across two lessons in a
+        //     real black-box session, because none of the other four signals
+        //     fire on a plain confusion statement (no "?", no WH-opener, no
+        //     concept/topic named, no excursion opened).
+        //   - F2 fix: `isQuestionAnnouncement()` (lessonCompletion.ts) — a
+        //     deliberately narrow, completion-only detector for "I have a/one
+        //     question", the one production-observed phrasing none of the
+        //     above five signals cover (it is neither a confusion statement
+        //     nor itself interrogative). See that function's doc comment for
+        //     why this is scoped here rather than broadening isGenuineQuestion.
         // When true, D0a (decisionEngine.ts) yields and the completion-block
         // "do NOT teach/ask" instruction gets the override addendum below, so
         // the learner's real question is routed and answered — the lesson
         // stays recorded COMPLETED regardless; nothing here reopens it.
         if (lessonCompletedHoisted) {
           const { isGenuineQuestion } = await import('@/lib/understanding/readers/conversationReader')
+          const { isQuestionAnnouncement } = await import('@/lib/teaching/lessonCompletion')
           lessonCompletionRespectsNewIntentHoisted = excursionDecision.state.active
             || requestedConceptIdThisTurn != null
             || requestedTopicTitleThisTurn != null
             || isGenuineQuestion(message)
+            || recoveryKeyHoisted !== null
+            || isQuestionAnnouncement(message)
           if (lessonCompletionRespectsNewIntentHoisted) {
             const { buildLessonCompleteContinuationOverrideBlock } = await import('@/lib/teaching/lessonCompletion')
             systemPrompt += buildLessonCompleteContinuationOverrideBlock()

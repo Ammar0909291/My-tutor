@@ -33,7 +33,9 @@
  * Pure data + pure predicates. No LLM, no I/O, no database.
  */
 
-import { isExplicitTopicRequest, isReturnRequest, looksLikeAnswer, MAX_EXCURSION_TURNS } from './visual/session'
+import {
+  isExplicitTopicRequest, isReturnRequest, isExplicitCorrection, looksLikeAnswer, MAX_EXCURSION_TURNS,
+} from './visual/session'
 
 export { MAX_EXCURSION_TURNS }
 
@@ -171,9 +173,11 @@ export interface ExcursionInput {
  * Decide this turn's teaching target and the excursion's next state.
  *
  * Ordered and deterministic. The order IS the design: a return beats a
- * satisfaction signal, satisfaction beats the answer-hold, and the answer-hold
- * beats starting anything new — so a reply to the tutor's own question can
- * never be mistaken for a request to leave the lesson.
+ * satisfaction signal, satisfaction beats an explicit correction (F3 fix — a
+ * negation of the current topic, "I meant X, not Y"), a correction beats the
+ * answer-hold, and the answer-hold beats starting anything new — so a reply
+ * to the tutor's own question can never be mistaken for a request to leave
+ * the lesson.
  *
  * ── UNRESOLVED TOPICS: WHY AN EXCURSION MAY HAVE NO CONCEPT ID ──────────────
  * This used to open ONLY on a resolved `requestedConceptId`, i.e. only when the
@@ -250,6 +254,20 @@ export function decideExcursion(input: ExcursionInput): ExcursionDecision {
   // The learner said they are done.
   if (active && isSatisfactionSignal(message)) return closed('closed-satisfied')
 
+  // F3 fix: the learner explicitly said the active excursion topic is NOT
+  // what they meant ("I meant the book and table thing, not cesium"), and
+  // named nothing else this turn that a later branch can redirect to. Same
+  // priority tier as isReturnRequest/isSatisfactionSignal above (checked
+  // before the answer-hold, never swallowed by it) — an explicit negation of
+  // the current topic is exactly the opposite of "answering the tutor".
+  // When the correction DOES name something new (requestedConceptId or
+  // requestedTopicTitle resolved this turn), this falls through instead: the
+  // branches below redirect to what was actually named rather than the
+  // lesson, via the isExplicitCorrection addition to the concept branch.
+  if (active && isExplicitCorrection(message) && !requestedConceptId && !requestedTopicTitle) {
+    return closed('closed-returned')
+  }
+
   // The learner is ANSWERING the tutor, not asking for a new topic. This is the
   // most common turn in a real lesson and must never start an excursion — the
   // same guard the visual layer already applies to the figure.
@@ -257,8 +275,11 @@ export function decideExcursion(input: ExcursionInput): ExcursionDecision {
     return active ? held(state, 'continued') : none(lessonConceptId)
   }
 
-  // A concept takes over the teaching target ONLY on an explicit request.
-  if (requestedConceptId && isExplicitTopicRequest(message)) {
+  // A concept takes over the teaching target on an explicit request, OR on an
+  // explicit correction ("I meant X, not Y") — the same negation signal
+  // checked above, but this time paired with a concept the correction itself
+  // named, so it redirects to what was actually meant instead of the lesson.
+  if (requestedConceptId && (isExplicitTopicRequest(message) || isExplicitCorrection(message))) {
     // They asked for the lesson's own concept — the detour is over.
     if (requestedConceptId === lessonConceptId) {
       return active ? closed('closed-on-lesson') : none(lessonConceptId)
