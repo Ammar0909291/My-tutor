@@ -1,0 +1,86 @@
+[
+  {
+    "conceptId": "chem.atomic.subatomic-particles",
+    "lessonTitle": "Subatomic Particles",
+    "lessonOrder": 10,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.kinet.rate-law",
+    "lessonTitle": "Rate Law and Order",
+    "lessonOrder": 84,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.elect.concentration-cell",
+    "lessonTitle": "Concentration Cells",
+    "lessonOrder": 77,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.coord.nomenclature",
+    "lessonTitle": "Nomenclature of Complexes",
+    "lessonOrder": 102,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.dblock.oxo-species",
+    "lessonTitle": "Oxides and Oxyanions of Transition Metals",
+    "lessonOrder": 121,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.hal.grignard",
+    "lessonTitle": "Grignard and Organolithium Reagents",
+    "lessonOrder": 148,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.hyd.conformations",
+    "lessonTitle": "Conformational Analysis",
+    "lessonOrder": 140,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.alc.diols",
+    "lessonTitle": "Diols and Polyols",
+    "lessonOrder": 153,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.carb.alpha-reactions",
+    "lessonTitle": "Alpha-Carbon Reactions",
+    "lessonOrder": 158,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.anal.gravimetric",
+    "lessonTitle": "Gravimetric Analysis",
+    "lessonOrder": 183,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.bio.nucleic-acids",
+    "lessonTitle": "Nucleic Acids",
+    "lessonOrder": 170,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.env.air-pollution",
+    "lessonTitle": "Air Pollution",
+    "lessonOrder": 180,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.nitro.amines",
+    "lessonTitle": "Amines",
+    "lessonOrder": 163,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.pblock.group14",
+    "lessonTitle": "Group 14 — Carbon Family",
+    "lessonOrder": 113,
+    "unitTitle": "Chemistry"
+  }
+]
