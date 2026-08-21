@@ -1,0 +1,86 @@
+[
+  {
+    "conceptId": "chem.sblock.water",
+    "lessonTitle": "Chemistry of Water",
+    "lessonOrder": 111,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.nitro.amino-acids",
+    "lessonTitle": "Amino Acids",
+    "lessonOrder": 167,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.dblock.organometallics",
+    "lessonTitle": "Organometallic Chemistry",
+    "lessonOrder": 123,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.pblock.group17",
+    "lessonTitle": "Group 17 — Halogens",
+    "lessonOrder": 116,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.coord.cft",
+    "lessonTitle": "Crystal Field Theory",
+    "lessonOrder": 104,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.kinet.mechanism",
+    "lessonTitle": "Reaction Mechanisms",
+    "lessonOrder": 87,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.redox.activity-series",
+    "lessonTitle": "Electrochemical Activity Series",
+    "lessonOrder": 72,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.surface.surfactants",
+    "lessonTitle": "Surfactants and Micelles",
+    "lessonOrder": 99,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.elect.corrosion",
+    "lessonTitle": "Corrosion",
+    "lessonOrder": 81,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.period.electron-affinity",
+    "lessonTitle": "Electron Affinity and Electronegativity",
+    "lessonOrder": 23,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.poly.natural",
+    "lessonTitle": "Natural Polymers",
+    "lessonOrder": 176,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.sol.types",
+    "lessonTitle": "Types of Solutions",
+    "lessonOrder": 43,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.solid.defects",
+    "lessonTitle": "Crystal Defects",
+    "lessonOrder": 93,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.state.real-gases",
+    "lessonTitle": "Real Gases and van der Waals Equation",
+    "lessonOrder": 40,
+    "unitTitle": "Chemistry"
+  }
+]
