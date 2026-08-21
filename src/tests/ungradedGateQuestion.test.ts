@@ -174,6 +174,125 @@ describe('withholdUngradedGateQuestion — GUIDE, when the gate sought a probe (
   })
 })
 
+describe('withholdUngradedGateQuestion — GUIDE folding into CHECK/PRACTICE (math.func.function-concept)', () => {
+  // Confirmed live, twice, on production (2026-08-21): a GUIDE turn reacting
+  // to a just-graded CORRECT answer folds straight to CHECK
+  // (conversationState.ts's `case 'GUIDE': if (next.demonstrated) next.phase
+  // = 'CHECK'`), independent of this turn's decided move. Reacting to a
+  // graded answer is routinely 'teach', not 'ask', so `gateSoughtThisTurn`
+  // (which only covers move==='ask') is correctly false, and — before this
+  // fix — `isMasteryGatePhase('GUIDE')` was also false, so the guard no-opped
+  // entirely on an ungradeable question. Real production `[ladder]` log for
+  // the exact failing request: `{ phaseBefore: 'GUIDE', phaseAfter: 'CHECK',
+  // move: 'teach', mcqAsked: false }`, with no `[gate-assessment]` log at all
+  // for that request (gateSoughtThisTurn genuinely false).
+  const reactiveTurn =
+    'It looks like you chose **B) Codomain**.\n' +
+    'Could you walk me through why you think the set of all possible ages is the codomain, rather than something else?'
+
+  it('withholds an ungradeable question on a GUIDE turn that folds to CHECK, even though gateSoughtThisTurn is false', () => {
+    const r = withholdUngradedGateQuestion({
+      text: reactiveTurn,
+      phase: 'GUIDE',
+      phaseAfter: 'CHECK',
+      hasStructuredMcq: false,
+      gateSoughtThisTurn: false,
+    })
+    expect(r.withheld).toBe(true)
+    expect(r.reason).toBe('no-gradeable-probe')
+    expect(r.text).not.toMatch(/walk me through why/i)
+  })
+
+  it('withholds identically on a GUIDE turn that folds to PRACTICE (the interface supports it symmetrically, even though the real fold never produces this transition directly)', () => {
+    const r = withholdUngradedGateQuestion({
+      text: reactiveTurn,
+      phase: 'GUIDE',
+      phaseAfter: 'PRACTICE',
+      hasStructuredMcq: false,
+      gateSoughtThisTurn: false,
+    })
+    expect(r.withheld).toBe(true)
+    expect(r.reason).toBe('no-gradeable-probe')
+  })
+
+  it('negative 1 — a GUIDE turn that stays in GUIDE (no fold) is unaffected: existing teach behaviour is untouched', () => {
+    const r = withholdUngradedGateQuestion({
+      text: reactiveTurn,
+      phase: 'GUIDE',
+      phaseAfter: 'GUIDE',
+      hasStructuredMcq: false,
+      gateSoughtThisTurn: false,
+    })
+    expect(r.withheld).toBe(false)
+    expect(r.text).toBe(reactiveTurn)
+  })
+
+  it('negative 2 — a GUIDE turn with gateSoughtThisTurn=true (move==="ask", no probe found) keeps its existing behaviour regardless of phaseAfter', () => {
+    const r = withholdUngradedGateQuestion({
+      text: R3_APPLES,
+      phase: 'GUIDE',
+      phaseAfter: 'GUIDE',
+      hasStructuredMcq: false,
+      gateSoughtThisTurn: true,
+    })
+    expect(r.withheld).toBe(true)
+    expect(r.reason).toBe('no-gradeable-probe')
+  })
+
+  it('negative 3 — CHECK with no MCQ is unaffected by phaseAfter (already unconditionally covered)', () => {
+    const r = withholdUngradedGateQuestion({
+      text: reactiveTurn,
+      phase: 'CHECK',
+      phaseAfter: 'PRACTICE',
+      hasStructuredMcq: false,
+    })
+    expect(r.withheld).toBe(true)
+    expect(r.reason).toBe('no-gradeable-probe')
+  })
+
+  it('negative 4 — PRACTICE with no MCQ is unaffected by phaseAfter (already unconditionally covered)', () => {
+    const r = withholdUngradedGateQuestion({
+      text: reactiveTurn,
+      phase: 'PRACTICE',
+      phaseAfter: 'TRANSFER',
+      hasStructuredMcq: false,
+    })
+    expect(r.withheld).toBe(true)
+    expect(r.reason).toBe('no-gradeable-probe')
+  })
+
+  it('negative 5 — a GUIDE->CHECK fold with an attached structured MCQ still only strips a stray, non-restated question, never the MCQ itself', () => {
+    const attached = 'What is the codomain of the function f(x)=2x+1?'
+    const r = withholdUngradedGateQuestion({
+      text: reactiveTurn,
+      phase: 'GUIDE',
+      phaseAfter: 'CHECK',
+      hasStructuredMcq: true,
+      attachedMcqQuestion: attached,
+      gateSoughtThisTurn: false,
+    })
+    expect(r.withheld).toBe(true)
+    expect(r.reason).toBe('stray-question-alongside-mcq')
+  })
+
+  it('negative 6 — a normal GUIDE teaching turn with no fold and no question is untouched', () => {
+    const text = 'A function assigns exactly one output to every input in its domain.'
+    const r = withholdUngradedGateQuestion({
+      text, phase: 'GUIDE', phaseAfter: 'GUIDE', hasStructuredMcq: false, gateSoughtThisTurn: false,
+    })
+    expect(r.withheld).toBe(false)
+    expect(r.text).toBe(text)
+  })
+
+  it('omitting phaseAfter entirely reproduces the exact prior behaviour (backward compatible)', () => {
+    const r = withholdUngradedGateQuestion({
+      text: reactiveTurn, phase: 'GUIDE', hasStructuredMcq: false, gateSoughtThisTurn: false,
+    })
+    expect(r.withheld).toBe(false)
+    expect(r.text).toBe(reactiveTurn)
+  })
+})
+
 describe('withholdUngradedGateQuestion — a stray question alongside an attached MCQ', () => {
   // Verbatim shape of the chemistry CHECK-phase turn from the 2026-08-21
   // certification sweep (`chem.found.matter`): an authored MCQ WAS attached

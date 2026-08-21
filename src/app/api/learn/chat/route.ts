@@ -4974,11 +4974,33 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // invented answer key, no second provider call).
           try {
             const { withholdUngradedGateQuestion } = await import('@/lib/teaching/gateAssessment')
+            // math.func.function-concept (2026-08-21, confirmed live twice):
+            // a GUIDE turn reacting to a just-graded CORRECT answer folds
+            // straight to CHECK (conversationState.ts's `case 'GUIDE': if
+            // (next.demonstrated) next.phase = 'CHECK'`) regardless of this
+            // turn's decided move — reacting to a graded answer is routinely
+            // 'teach', not 'ask', so `phaseAllowsProbeHoisted` (which only
+            // covers the move==='ask' case) is correctly false and the gate
+            // never even looks for a probe, leaving an ungradeable question
+            // with zero withhold protection. This is a PEEK at that specific
+            // transition, not a second fold: it reads the exact three inputs
+            // conversationState.ts's own `succeeded` / `case 'GUIDE'` branch
+            // reads (prior phase, the just-graded signal, recovery
+            // preemption), all already hoisted well above this point, and is
+            // inert whenever phaseBeforeTurn isn't GUIDE.
+            const guideFoldsToGateThisTurn =
+              conversationStateHoisted?.phase === 'GUIDE' &&
+              conversationStateHoisted?.demonstrated === true &&
+              teachingSignal?.correctness === true &&
+              recoveryKeyHoisted === null
             const ungraded = withholdUngradedGateQuestion({
               text: cleanText,
               // The phase the turn was BUILT at — the same pre-fold value the
               // gate itself read when it went looking for a probe.
               phase: conversationStateHoisted?.phase ?? null,
+              // Only meaningful when phase === 'GUIDE' (see phaseAfter's own
+              // docblock) — CHECK/PRACTICE never consult it.
+              phaseAfter: guideFoldsToGateThisTurn ? 'CHECK' : (conversationStateHoisted?.phase ?? null),
               hasStructuredMcq: mcqHoisted !== null,
               // The server-selected probe's own question, when the gate
               // actually attached one this turn — lets the guard tell a

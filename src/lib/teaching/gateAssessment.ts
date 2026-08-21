@@ -262,6 +262,31 @@ export interface UngradedGateQuestionInput {
    */
   gateSoughtThisTurn?: boolean
   /**
+   * The phase this turn's OWN fold will advance TO, if known — lets the guard
+   * recognize a GUIDE turn that is about to become CHECK/PRACTICE even when
+   * the engine's decided `move` for the turn is not literally `'ask'`, which
+   * is exactly what `gateSoughtThisTurn` above requires. Optional and
+   * backward-compatible: omitting it (or passing the pre-fold phase
+   * unchanged) reproduces the exact prior behaviour.
+   *
+   * ── THE DEFECT THIS CLOSES (math.func.function-concept, 2026-08-21) ───────
+   * A GUIDE turn whose graded signal succeeds folds straight to CHECK
+   * (`conversationState.ts`'s `case 'GUIDE': if (next.demonstrated) next.phase
+   * = 'CHECK'`) regardless of this turn's decided move — reacting to a just-
+   * graded answer is routinely a `'teach'` move, not `'ask'`. Measured live,
+   * twice, on the current deployment: `[ladder] { phaseBefore: 'GUIDE',
+   * phaseAfter: 'CHECK', move: 'teach' }`, with no `[gate-assessment]` log at
+   * all for that request — `gateSoughtThisTurn` was correctly `false` (the
+   * move genuinely was not `'ask'`), so this exact transition shape was the
+   * one case neither `isMasteryGatePhase(phase)` nor `gateSoughtThisTurn`
+   * covered, and an ungradeable question survived unstripped in production.
+   *
+   * Only ever changes `gateActive` when `phase === 'GUIDE'` — it is inert for
+   * every other phase, so CHECK/PRACTICE's own unconditional coverage and the
+   * `move === 'ask'` GUIDE case are both untouched.
+   */
+  phaseAfter?: unknown
+  /**
    * The question text of the structured MCQ actually attached this turn (the
    * server-selected probe's question, `gateMcqHoisted.question` at the call
    * site), when one is attached. Optional and backward-compatible: omitting
@@ -314,7 +339,10 @@ export function withholdUngradedGateQuestion(
   input: UngradedGateQuestionInput,
 ): UngradedGateQuestionResult {
   try {
-    const gateActive = isMasteryGatePhase(input.phase) || input.gateSoughtThisTurn === true
+    const gateActive =
+      isMasteryGatePhase(input.phase) ||
+      input.gateSoughtThisTurn === true ||
+      (input.phase === 'GUIDE' && isMasteryGatePhase(input.phaseAfter))
     if (!gateActive) return { text: input.text, withheld: false, reason: 'ok' }
 
     const text = typeof input.text === 'string' ? input.text : ''
