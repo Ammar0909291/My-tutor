@@ -84,6 +84,10 @@ export interface UnderstandingInputs {
    *  Optional so every existing caller compiles unchanged and behaves exactly
    *  as before. */
   lessonCompleted?: boolean
+  /** See StudentTurnUnderstanding.newIntentAfterCompletion. Optional so every
+   *  existing caller compiles unchanged and defaults to false (the original
+   *  completion-lock behavior). */
+  newIntentAfterCompletion?: boolean
   observations: CueObservations
 }
 
@@ -149,5 +153,6 @@ export function understandStudentTurn(inputs: UnderstandingInputs): StudentTurnU
     availableVisual: inputs.observations?.availableVisual ?? null,
     visualDetectionRan: inputs.observations?.visualDetectionRan === true,
     lessonCompleted: inputs.lessonCompleted === true,
+    newIntentAfterCompletion: inputs.newIntentAfterCompletion === true,
   })
 }

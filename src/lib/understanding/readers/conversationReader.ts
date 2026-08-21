@@ -40,6 +40,19 @@ export interface ConversationReaderOutput {
 }
 
 const QUESTION_OPENERS = /^(what|why|how|when|where|which|who|can|could|would|does|do|did|is|are|will|should)\b/i
+
+/**
+ * Generic, subject-agnostic question detector — the same test used to fill
+ * `conversationSummary.currentMessageIsQuestion` below, exported so callers
+ * that run BEFORE the CUE (e.g. route.ts's completion-block injection,
+ * which happens earlier in the turn than `understandStudentTurn`) can use
+ * the identical signal instead of inventing a second one.
+ */
+export function isGenuineQuestion(message: string): boolean {
+  const trimmed = (message ?? '').trim()
+  if (!trimmed) return false
+  return /\?\s*$/.test(trimmed) || QUESTION_OPENERS.test(trimmed)
+}
 /** P1 Human Teacher Reasoning: hedging markers in the CURRENT message. */
 const HEDGE_RE = /\b(maybe|perhaps|possibly|probably|i think|i guess|not sure|i'?m guessing it)\b/i
 /** A short answer phrased as a question ("is it 4?", "12?", "so it's the numerator?")

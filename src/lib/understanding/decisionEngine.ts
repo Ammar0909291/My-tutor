@@ -157,8 +157,25 @@ export function decideTeaching(u: StudentTurnUnderstanding): TeachingDecision {
     // and points the learner at Review or the next lesson, which is the
     // honest response to confusion about a lesson that has already ended.
     const lessonIsClosed = u.lessonCompleted?.value === true
+    // ROOT-CAUSE FIX (completion-lock investigation): completion and
+    // conversation termination are different states. `lessonIsClosed` alone
+    // used to mean "no further content decision may run" for the REST of the
+    // conversation, on every turn, regardless of what the learner said next
+    // — production evidence showed a valid in-topic follow-up answered with
+    // "you've already finished," and any cross-topic/cross-subject question
+    // silently replaced with a static reflection question, because neither
+    // branch below ever inspected the new message.
+    //
+    // `newIntentAfterCompletion` (route.ts) is true only when THIS turn
+    // carries genuine new intent distinct from the closed lesson: a real
+    // question, a resolvable off-lesson concept request, or an open/started
+    // topic excursion. A bare acknowledgement, "let's continue", or an
+    // explicit request to review/continue the completed lesson all leave it
+    // false, so the original completion-lock behavior (D0a below) still
+    // governs those turns exactly as before.
+    const closedWithNewIntent = lessonIsClosed && u.newIntentAfterCompletion?.value === true
     if (
-      !lessonIsClosed
+      !(lessonIsClosed && !closedWithNewIntent)
       && (u.conversationIntent.value === 'recovery' || u.studentIntent.value === 'expressing_distress')
     ) {
       return make(u, 'ESCALATE_TO_LLM', 'D0-RECOVERY-PREEMPT',
@@ -193,7 +210,14 @@ export function decideTeaching(u: StudentTurnUnderstanding): TeachingDecision {
     // the CURRENT lesson's attempt, so normal AI routing resumes immediately —
     // including recovery, which becomes reachable again the moment the next
     // lesson opens.
-    if (lessonIsClosed) {
+    // Root-cause fix continued: this rule now yields when the turn carries
+    // genuine new intent (closedWithNewIntent) — the lesson stays recorded
+    // COMPLETED (nothing here re-opens it, resets mastery, or un-finalizes
+    // the attempt), but the turn falls through to the normal ladder below
+    // instead of the deterministic close, so the learner's actual question
+    // gets routed and answered. When there is no new intent, behavior is
+    // byte-for-byte the original D0a.
+    if (lessonIsClosed && !closedWithNewIntent) {
       return make(u, 'SERVE_LESSON_COMPLETE', 'D0a-LESSON-ALREADY-COMPLETE',
         ['The lesson attempt is already COMPLETED; P6.6 persisted the summary and completion payload.',
          'No new teaching is legal for a finished lesson, so no model call is required to answer.'],

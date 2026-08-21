@@ -642,6 +642,14 @@ export async function POST(req: Request) {
     // prompt-build time and fed to the CUE, which is what lets the EXISTING
     // decision ladder rule D-0a fire — the route never decides this itself.
     let lessonCompletedHoisted = false
+    // Root-cause fix (completion-lock investigation): true only when a
+    // COMPLETED lesson's turn also carries genuine new intent (a real
+    // question, a resolvable off-lesson concept, or an open/started
+    // excursion) — computed once excursion detection has run (below),
+    // fed to the CUE (mirrors lessonCompletedHoisted's wiring) so D0a can
+    // yield, and consulted at the filler-detector swap so a genuine model
+    // answer is never overwritten with the static reflection template.
+    let lessonCompletionRespectsNewIntentHoisted = false
     let teachingHistoryHoisted: import('@/lib/teaching/teachingHistory').TeachingHistory | null = null
     let selectedStrategyHoisted: number | null = null
     let retrievalCacheHoisted: import('@/lib/teaching/retrievalCache').RetrievalCache | null = null
@@ -2127,6 +2135,31 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             ?? null)
           : null
 
+        // Root-cause fix (completion-lock investigation): decide, once per
+        // turn, whether a COMPLETED lesson's turn carries genuine new intent
+        // distinct from the closed lesson. Reuses signals already computed
+        // above — no phrase list, no subject-specific check:
+        //   - an excursion is open/started this turn (decideExcursion, generic
+        //     across every subject)
+        //   - a requested concept/topic resolved this turn (also generic)
+        //   - the message itself reads as a genuine question (the same test
+        //     that fills conversationSummary.currentMessageIsQuestion)
+        // When true, D0a (decisionEngine.ts) yields and the completion-block
+        // "do NOT teach/ask" instruction gets the override addendum below, so
+        // the learner's real question is routed and answered — the lesson
+        // stays recorded COMPLETED regardless; nothing here reopens it.
+        if (lessonCompletedHoisted) {
+          const { isGenuineQuestion } = await import('@/lib/understanding/readers/conversationReader')
+          lessonCompletionRespectsNewIntentHoisted = excursionDecision.state.active
+            || requestedConceptIdThisTurn != null
+            || requestedTopicTitleThisTurn != null
+            || isGenuineQuestion(message)
+          if (lessonCompletionRespectsNewIntentHoisted) {
+            const { buildLessonCompleteContinuationOverrideBlock } = await import('@/lib/teaching/lessonCompletion')
+            systemPrompt += buildLessonCompleteContinuationOverrideBlock()
+          }
+        }
+
         // Session lifecycle (07 §8): boundary measured from real message
         // timestamps — the newest loaded message predates this turn's user
         // insert, so the gap is genuine learner inactivity, never LLM-claimed.
@@ -2212,13 +2245,44 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           : profile?.currentLevel === 'intermediate' ? 'intermediate' : null
         const nothingCompleted = (studentProgress?.completedLessons?.length ?? 0) === 0
 
+        // Root-cause fix (lesson-identity-corruption investigation):
+        // `nothingCompleted` alone re-armed placement verification for a
+        // learner who had already skip-advanced far past their placement
+        // entry point (StudentProgress.currentLesson can move forward via
+        // the skip/soft-advance path without ever writing to
+        // completedLessons — Lesson 33 with completedLessons=[] is a
+        // genuine, reachable state). A stale/mis-attributed probe result
+        // then silently overwrote currentLesson with the level's entry
+        // order (physics intermediate = "Dot and Cross Products", not a
+        // coincidental index). Eligibility now also requires the learner's
+        // ACTUAL current lesson to still be at-or-before their level's
+        // placement entry point — the same authoritative curriculum-entry
+        // computation already used for a brand-new learner's default
+        // (line ~381 above), reused rather than reinvented, and no subject
+        // is hardcoded. A genuinely fresh learner (no StudentProgress row,
+        // or currentLesson still at the entry point) is completely
+        // unaffected; a learner who has since progressed — by any means —
+        // stops being eligible for downward placement adjustment.
+        const placementEligible = level ? await (async () => {
+          try {
+            const { getKnowledgeGraph } = await import('@/lib/curriculum/knowledgeGraph')
+            const { computeCurriculumEntryOrder } = await import('@/lib/curriculum/placement')
+            const { isEligibleForPlacementVerification } = await import('@/lib/teaching/placementVerification')
+            const graph = getKnowledgeGraph(subjectCode)
+            const entryOrder = graph ? computeCurriculumEntryOrder(graph, level) : null
+            return isEligibleForPlacementVerification({
+              nothingCompleted, currentLesson: studentProgress?.currentLesson, entryOrder,
+            })
+          } catch { return nothingCompleted } // degrade to the old behavior rather than block eligibility on an error
+        })() : nothingCompleted
+
         // Red-team fix D3 (assessment/02 §1: "Placement… runs once, at
         // entry"): contextSnapshot is per-session, so without inheritance a
         // verified learner opening a NEW session before completing a lesson
         // would be re-probed. Inherit a CONCLUDED verification from the
         // learner's most recent other session in this subject. Narrow query:
         // only runs for the unverified-eligible population.
-        if (level && nothingCompleted && !placementPrevHoisted) {
+        if (level && placementEligible && !placementPrevHoisted) {
           try {
             const prevSession = await prisma.learnSession.findFirst({
               where: { userId, subjectId: learnSession.subjectId, id: { not: sessionId } },
@@ -2236,7 +2300,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           } catch { /* non-fatal — worst case is a redundant (bounded) re-verification */ }
         }
 
-        if (level && resolvedConceptId && nothingCompleted && !(placementPrevHoisted?.verified) && !recoveryKeyHoisted) {
+        if (level && resolvedConceptId && placementEligible && !(placementPrevHoisted?.verified) && !recoveryKeyHoisted) {
           const state = placementPrevHoisted ?? emptyPlacementState()
           if (snapshotPendingProbe) {
             // A probe question is already in flight — this turn's job is
@@ -3427,6 +3491,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         const understanding = understandStudentTurn({
           // P13: a runtime fact the CUE records and the ladder acts on.
           lessonCompleted: lessonCompletedHoisted,
+          newIntentAfterCompletion: lessonCompletionRespectsNewIntentHoisted,
           message,
           history: historyMessages,
           recoveryKey: recoveryKeyHoisted,
@@ -4260,7 +4325,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // So compliance with the assessment contract was being punished, and the
       // better the model behaved the more often the learner got filler. The
       // turn is not content-free; its content is in `mcqHoisted`.
-      if (!assembled && !mcqHoisted) {
+      // Root-cause fix (completion-lock investigation): production evidence
+      // showed this swap firing on every message after lesson completion —
+      // thermodynamics, radiation, periodic-table questions all got the
+      // SAME static reflection text, because the model, still bound by the
+      // (pre-override) completion block, produced terse filler regardless
+      // of what was asked. lessonCompletionRespectsNewIntentHoisted means
+      // the override addendum was injected and the model was told to
+      // actually answer this specific request — never replace that answer
+      // with the generic template.
+      if (!assembled && !mcqHoisted && !lessonCompletionRespectsNewIntentHoisted) {
         try {
           const { detectFillerTurn } = await import('@/lib/teaching/conversationState')
           if (detectFillerTurn(cleanText)) {
@@ -5848,8 +5922,27 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             if (nextState.verified && nextState.outcome === 'adjusted_down' && placementLevelHoisted) {
               const { getKnowledgeGraph } = await import('@/lib/curriculum/knowledgeGraph')
               const { computeCurriculumEntryOrder } = await import('@/lib/curriculum/placement')
+              const { shouldApplyDownwardAdjustment } = await import('@/lib/teaching/placementVerification')
               const graph = getKnowledgeGraph(subjectCode)
-              if (graph) {
+              // DEFENSE IN DEPTH (lesson-identity-corruption fix): the
+              // eligibility gate above (Step 4, `placementEligible`) already
+              // decided this turn should not have entered a placement probe
+              // at all once the learner has moved past their entry point —
+              // this is a second, independent check at the actual WRITE
+              // site, re-reading the SAME authoritative `studentProgress`
+              // captured at the start of this request. A stale/mis-attributed
+              // probe result (the SIGNAL tag is an unverified LLM self-report)
+              // must never silently overwrite an already-advanced
+              // currentLesson. No subject is hardcoded — the same
+              // computeCurriculumEntryOrder helper used everywhere else in
+              // this file supplies the ORIGINAL (pre-adjustment) entry order.
+              const originalEntryOrder = graph
+                ? (() => { try { return computeCurriculumEntryOrder(graph, placementLevelHoisted) } catch { return null } })()
+                : null
+              const learnerStillAtEntry = shouldApplyDownwardAdjustment({
+                currentLesson: studentProgress?.currentLesson, originalEntryOrder,
+              })
+              if (graph && learnerStillAtEntry) {
                 const lowered = computeCurriculumEntryOrder(graph, levelBelow(placementLevelHoisted))
                 prisma.studentProgress.update({
                   where: { userId_subjectCode: { userId, subjectCode: progressCode } },

@@ -34,6 +34,11 @@ export interface FusionExtras {
   lessonCompleted?: boolean
   /** true when a visual detection path genuinely ran this turn. */
   visualDetectionRan: boolean
+  /** See StudentTurnUnderstanding.newIntentAfterCompletion — computed by the
+   *  route (excursion decision + genuine-question detection), threaded
+   *  through fusion exactly like lessonCompleted. Irrelevant unless
+   *  lessonCompleted is also true. */
+  newIntentAfterCompletion?: boolean
 }
 
 export function fuseUnderstanding(
@@ -82,6 +87,9 @@ export function fuseUnderstanding(
     requiredVisualization,
     // Runtime fact, not inference: sourced from the persisted lesson attempt.
     lessonCompleted: extras.lessonCompleted === true
+      ? sourced(true, 'contextSnapshot', 1)
+      : sourced(false, 'contextSnapshot', 1),
+    newIntentAfterCompletion: extras.newIntentAfterCompletion === true
       ? sourced(true, 'contextSnapshot', 1)
       : sourced(false, 'contextSnapshot', 1),
     recommendedTeachingMode,

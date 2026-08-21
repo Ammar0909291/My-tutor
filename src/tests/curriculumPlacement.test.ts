@@ -83,3 +83,107 @@ describe('getPlacementFloorSlugs', () => {
     expect(floor.has('f')).toBe(false)
   })
 })
+
+// ── Root-cause fix: placement verification must not corrupt progress ───────
+// Production evidence: Physics Lesson 33 -> Lesson 7 with no learner
+// navigation. Cause: `completedLessons.length === 0` alone re-armed
+// placement verification for a learner who had skip-advanced far past the
+// placement entry point (StudentProgress.currentLesson can move without
+// ever writing a completion). isEligibleForPlacementVerification /
+// shouldApplyDownwardAdjustment close this — eligibility (and the
+// downward-adjustment write) now also require the learner's actual
+// currentLesson to be at-or-before their level's entry order.
+describe('isEligibleForPlacementVerification / shouldApplyDownwardAdjustment', () => {
+  it('TEST GROUP D — a genuine new learner (no progress row) is unaffected', async () => {
+    const { isEligibleForPlacementVerification } = await import('@/lib/teaching/placementVerification')
+    const entryOrder = computeCurriculumEntryOrder(GRAPH, 'intermediate') // 4
+    expect(isEligibleForPlacementVerification({
+      nothingCompleted: true, currentLesson: null, entryOrder,
+    })).toBe(true)
+    expect(isEligibleForPlacementVerification({
+      nothingCompleted: true, currentLesson: entryOrder, entryOrder,
+    })).toBe(true)
+  })
+
+  it('TEST GROUP B — a deep learner (currentLesson far beyond entry, zero completedLessons) is NOT eligible', async () => {
+    const { isEligibleForPlacementVerification } = await import('@/lib/teaching/placementVerification')
+    const entryOrder = computeCurriculumEntryOrder(GRAPH, 'intermediate') // 4
+    // Mirrors the production case: currentLesson=33-equivalent (well past
+    // entry), completedLessons=[] (nothingCompleted stays true).
+    expect(isEligibleForPlacementVerification({
+      nothingCompleted: true, currentLesson: entryOrder + 20, entryOrder,
+    })).toBe(false)
+  })
+
+  it('a learner with completed lessons is never eligible regardless of position (unchanged prior behavior)', async () => {
+    const { isEligibleForPlacementVerification } = await import('@/lib/teaching/placementVerification')
+    const entryOrder = computeCurriculumEntryOrder(GRAPH, 'intermediate')
+    expect(isEligibleForPlacementVerification({
+      nothingCompleted: false, currentLesson: entryOrder, entryOrder,
+    })).toBe(false)
+  })
+
+  it('degrades to nothingCompleted-only when no entry-order signal exists (no KG graph)', async () => {
+    const { isEligibleForPlacementVerification } = await import('@/lib/teaching/placementVerification')
+    expect(isEligibleForPlacementVerification({
+      nothingCompleted: true, currentLesson: 999, entryOrder: null,
+    })).toBe(true)
+    expect(isEligibleForPlacementVerification({
+      nothingCompleted: false, currentLesson: 999, entryOrder: null,
+    })).toBe(false)
+  })
+
+  it('TEST GROUP C — a stale/incorrect probe result must not overwrite an already-advanced currentLesson', async () => {
+    const { shouldApplyDownwardAdjustment } = await import('@/lib/teaching/placementVerification')
+    const entryOrder = computeCurriculumEntryOrder(GRAPH, 'advanced') // 5
+    // Learner already advanced well past their original (advanced) entry
+    // order — the write-site guard must refuse, independent of eligibility
+    // above (defense in depth: this fires even if eligibility somehow let
+    // a stale probe through).
+    expect(shouldApplyDownwardAdjustment({
+      currentLesson: entryOrder + 15, originalEntryOrder: entryOrder,
+    })).toBe(false)
+  })
+
+  it('the write-site guard permits the adjustment for a learner still at their entry point', async () => {
+    const { shouldApplyDownwardAdjustment } = await import('@/lib/teaching/placementVerification')
+    const entryOrder = computeCurriculumEntryOrder(GRAPH, 'advanced')
+    expect(shouldApplyDownwardAdjustment({
+      currentLesson: entryOrder, originalEntryOrder: entryOrder,
+    })).toBe(true)
+    expect(shouldApplyDownwardAdjustment({
+      currentLesson: null, originalEntryOrder: entryOrder,
+    })).toBe(true)
+  })
+
+  it('the write-site guard degrades to permissive when no entry-order signal exists', async () => {
+    const { shouldApplyDownwardAdjustment } = await import('@/lib/teaching/placementVerification')
+    expect(shouldApplyDownwardAdjustment({
+      currentLesson: 999, originalEntryOrder: null,
+    })).toBe(true)
+  })
+})
+
+// ── TEST GROUP E — production replay (pure-function level) ─────────────────
+// Reproduces the exact reported scenario against the real functions: a
+// learner at Lesson 33 equivalent, completedLessons=[], answers an unrelated
+// question. Verify eligibility is refused BEFORE any probe/adjustment logic
+// could run, so currentLesson is never at risk of being overwritten.
+describe('production replay — Lesson 33 stays authoritative', () => {
+  it('a deep-progress learner never re-enters placement verification, so no adjustment write can occur', async () => {
+    const { isEligibleForPlacementVerification } = await import('@/lib/teaching/placementVerification')
+    const entryOrderIntermediate = computeCurriculumEntryOrder(GRAPH, 'intermediate')
+    const lesson33Equivalent = entryOrderIntermediate + 29 // deep into the curriculum, well past entry
+    const eligible = isEligibleForPlacementVerification({
+      nothingCompleted: true, // completedLessons=[] — the exact reported state
+      currentLesson: lesson33Equivalent,
+      entryOrder: entryOrderIntermediate,
+    })
+    expect(eligible).toBe(false)
+    // Because eligibility is false, route.ts's Step 4 never injects a
+    // placement probe/await block for this turn, never sets
+    // placementProbeActive/placementLevelHoisted, and the downward-
+    // adjustment write block (gated on placementLevelHoisted) can never
+    // fire — currentLesson=33-equivalent is never touched by placement.
+  })
+})

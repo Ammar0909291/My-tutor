@@ -152,6 +152,23 @@ export interface StudentTurnUnderstanding {
    *  already holds the correct response (persisted summary + completion
    *  payload), so no model call is needed to produce one. */
   lessonCompleted: Sourced<boolean>
+  /**
+   * Root-cause fix for "completion locks the conversation": true when THIS
+   * turn's message carries genuine new intent distinct from "the lesson
+   * that just closed" — a real question (currentMessageIsQuestion-style
+   * detection), a resolvable off-lesson concept request, or an open/started
+   * topic excursion (route.ts's decideExcursion, already computed before
+   * this understanding is built). LESSON COMPLETION and CONVERSATION
+   * TERMINATION are deliberately two different states: `lessonCompleted`
+   * never stops meaning "this lesson is done and must not be re-taught as
+   * unfinished," but when this flag is true the decision ladder must not
+   * short-circuit straight to the completion close — the new intent is
+   * routed and answered instead. False (the default) preserves the
+   * original completion-lock behavior for anything that is NOT genuine new
+   * intent (bare acknowledgements, "let's continue", explicit review/next-
+   * lesson requests) — D above in the fix spec.
+   */
+  newIntentAfterCompletion: Sourced<boolean>
   /** Field names whose value is 'unknown' this turn, with the reason. */
   uncertainty: string[]
   /** field name → provenance source, flattened for quick inspection. */

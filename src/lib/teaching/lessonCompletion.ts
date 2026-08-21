@@ -210,3 +210,34 @@ export function buildLessonCompleteBlock(): string {
     + 'learner chooses when to start the next lesson.'
   )
 }
+
+/**
+ * Root-cause fix (completion-lock investigation): appended AFTER
+ * buildLessonCompleteBlock() above, ONLY on a turn where the runtime has
+ * already determined (route.ts's excursion decision + genuine-question
+ * detection, mirrored into the CUE as `newIntentAfterCompletion`) that the
+ * learner's new message is genuine new intent — a real question, a
+ * different topic, a different concept — rather than an acknowledgement or
+ * a request to review/continue the completed lesson.
+ *
+ * The block above still stands (the lesson genuinely is finished and must
+ * never be re-taught as unfinished), but this addendum lifts its blanket
+ * "do NOT teach, do NOT ask another question" instruction specifically for
+ * the learner's new request, so a valid follow-up or an unrelated question
+ * actually gets answered instead of being silently refused or replaced with
+ * filler. This is the LAST block appended for lesson-completion state, so
+ * it is the instruction closest to the model's attention.
+ */
+export function buildLessonCompleteContinuationOverrideBlock(): string {
+  return (
+    '\n\nNEW REQUEST AFTER COMPLETION (overrides the "do NOT teach/ask" line '
+    + 'above for THIS specific request only): the learner\'s latest message is '
+    + 'a genuine question or a request about something else, not an '
+    + 'acknowledgement of the close. Answer it directly and helpfully — do NOT '
+    + 'refuse it, do NOT repeat the completion notice, do NOT ignore it and ask '
+    + 'a generic reflection question instead. At the same time: do NOT treat '
+    + 'the completed lesson as unfinished, do NOT reopen its mastery tracking, '
+    + 'and do NOT present this as continuing the completed lesson unless the '
+    + 'learner is specifically asking to review or continue it.'
+  )
+}

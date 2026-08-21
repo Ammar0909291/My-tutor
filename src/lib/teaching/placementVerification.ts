@@ -99,6 +99,60 @@ export function levelBelow(level: CurriculumLevel): CurriculumLevel {
 }
 
 /**
+ * Eligibility gate — ROOT-CAUSE FIX (lesson-identity-corruption
+ * investigation, 2026-08-21). `completedLessons.length === 0` alone used
+ * to mean "this learner is fresh, re-arm placement verification." It does
+ * not: `StudentProgress.currentLesson` can advance far past the placement
+ * entry point via the skip/soft-advance path without ever writing a
+ * completion, so a learner 33 lessons deep with zero completedLessons read
+ * as indistinguishable from a brand-new learner — production evidence: a
+ * stale probe result then silently overwrote `currentLesson` back down to
+ * the level's entry order (Lesson 33 -> Lesson 7).
+ *
+ * Eligibility now ALSO requires the learner's actual current lesson to
+ * still be at-or-before their level's placement entry order. A learner
+ * with no StudentProgress row (or one still sitting at the entry point) is
+ * unaffected; a learner who has progressed past it — by any means — is no
+ * longer eligible, regardless of `completedLessons`.
+ *
+ * Pure, no I/O: `entryOrder` is the caller's already-computed
+ * `computeCurriculumEntryOrder(graph, level)` result (null when no KG graph
+ * exists for the subject, in which case eligibility degrades to the prior
+ * `nothingCompleted`-only behavior — there is no entry-order signal to
+ * distrust `nothingCompleted` with).
+ */
+export function isEligibleForPlacementVerification(params: {
+  nothingCompleted: boolean
+  currentLesson: number | null | undefined
+  entryOrder: number | null
+}): boolean {
+  if (!params.nothingCompleted) return false
+  if (params.entryOrder === null) return true
+  const learnerCurrentLesson = params.currentLesson ?? params.entryOrder
+  return learnerCurrentLesson <= params.entryOrder
+}
+
+/**
+ * Write-site defense-in-depth — ROOT-CAUSE FIX, same investigation. The
+ * eligibility gate above already decides whether a turn may enter placement
+ * probing at all; this is a SECOND, independent check at the point a
+ * downward adjustment is actually about to be WRITTEN, re-verified against
+ * the learner's original (pre-adjustment) entry order. A stale or
+ * mis-attributed probe result (the SIGNAL tag reporting a probe outcome is
+ * an unverified LLM self-report, never cross-checked against subject
+ * matter server-side) must never silently overwrite an already-advanced
+ * `currentLesson`.
+ */
+export function shouldApplyDownwardAdjustment(params: {
+  currentLesson: number | null | undefined
+  originalEntryOrder: number | null
+}): boolean {
+  if (params.originalEntryOrder === null) return true
+  const learnerCurrentLesson = params.currentLesson ?? params.originalEntryOrder
+  return learnerCurrentLesson <= params.originalEntryOrder
+}
+
+/**
  * Awaiting-answer block: the previous turn asked a calibration question
  * and the learner's newest message is (probably) the answer. The LLM's
  * only calibration duty this turn is tagging that answer — never asking a

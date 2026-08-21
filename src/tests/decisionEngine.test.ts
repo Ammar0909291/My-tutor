@@ -324,6 +324,63 @@ describe('D-0a — lesson already complete', () => {
     expect(withFlag.decision).toBe(without.decision)
     expect(withFlag.ruleId).toBe(without.ruleId)
   })
+
+  // ── Root-cause fix: completion must not lock the conversation ──────────
+  // Production evidence: a valid in-topic follow-up got "you've already
+  // finished"; cross-topic/cross-subject questions were silently ignored
+  // and replaced with an identical static reflection question. Both were
+  // the SAME defect — a state check (lessonCompleted) with no path for the
+  // new message's actual content to matter. `newIntentAfterCompletion` is
+  // the fix: computed by route.ts from signals that already exist
+  // (excursion detection, requested-concept resolution, genuine-question
+  // detection) and threaded into the CUE exactly like lessonCompleted.
+  describe('newIntentAfterCompletion — completion no longer locks the conversation', () => {
+    it('D0a still fires with no new-intent signal (unchanged default)', () => {
+      const d = decide({ lessonCompleted: true, message: 'Continue' })
+      expect(d.decision).toBe('SERVE_LESSON_COMPLETE')
+      expect(d.ruleId).toBe('D0a-LESSON-ALREADY-COMPLETE')
+    })
+
+    it('D0a yields when genuine new intent is signalled — a valid in-topic follow-up', () => {
+      const d = decide({
+        lessonCompleted: true, newIntentAfterCompletion: true,
+        message: 'what would their total momentum be?',
+      })
+      expect(d.decision).not.toBe('SERVE_LESSON_COMPLETE')
+      expect(d.ruleId).not.toBe('D0a-LESSON-ALREADY-COMPLETE')
+    })
+
+    it('D0a yields for a cross-topic question with the new-intent signal set', () => {
+      const d = decide({ lessonCompleted: true, newIntentAfterCompletion: true, message: 'Explain thermodynamics' })
+      expect(d.decision).not.toBe('SERVE_LESSON_COMPLETE')
+    })
+
+    it('an explicit review/continue request (no new-intent signal) still gets the completion close', () => {
+      const d = decide({ lessonCompleted: true, newIntentAfterCompletion: false, message: 'can we review this lesson again?' })
+      expect(d.decision).toBe('SERVE_LESSON_COMPLETE')
+      expect(d.ruleId).toBe('D0a-LESSON-ALREADY-COMPLETE')
+    })
+
+    it('recovery preemption is restored (not the closed-lesson exception) when new intent is present', () => {
+      // D0-RECOVERY-PREEMPT's "except when closed" carve-out only applies
+      // when there is truly nothing to recover into. With genuine new
+      // intent present, there IS something (the new request), so ordinary
+      // recovery routing resumes.
+      const d = decide({
+        lessonCompleted: true, newIntentAfterCompletion: true,
+        recoveryKey: 'i_am_stupid', message: 'I feel stupid, but what is radiation?',
+      })
+      expect(d.decision).toBe('ESCALATE_TO_LLM')
+      expect(d.ruleId).toBe('D0-RECOVERY-PREEMPT')
+    })
+
+    it('newIntentAfterCompletion is a no-op while the lesson is still ACTIVE', () => {
+      const withSignal = decide({ lessonCompleted: false, newIntentAfterCompletion: true, sessionFailureCount: 2 })
+      const without = decide({ lessonCompleted: false, sessionFailureCount: 2 })
+      expect(withSignal.decision).toBe(without.decision)
+      expect(withSignal.ruleId).toBe(without.ruleId)
+    })
+  })
 })
 
 describe('D-0a dispatch — no provider is invoked', () => {
