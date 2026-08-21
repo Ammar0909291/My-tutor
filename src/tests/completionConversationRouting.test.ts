@@ -33,8 +33,10 @@ import { describe, it, expect } from 'vitest'
 import { readFileSync } from 'node:fs'
 import {
   buildLessonCompleteBlock, buildLessonCompleteContinuationOverrideBlock,
+  isQuestionAnnouncement,
 } from '@/lib/teaching/lessonCompletion'
 import { isGenuineQuestion } from '@/lib/understanding/readers/conversationReader'
+import { detectFailureState } from '@/lib/teaching/recoveryGuard'
 
 const ROUTE = readFileSync('src/app/api/learn/chat/route.ts', 'utf8')
 
@@ -60,6 +62,68 @@ describe('isGenuineQuestion — generic, subject-agnostic detector', () => {
   it('is empty-safe', () => {
     expect(isGenuineQuestion('')).toBe(false)
     expect(isGenuineQuestion('   ')).toBe(false)
+  })
+})
+
+/**
+ * F2 — production evidence (real black-box session, two different physics
+ * lessons, one pre-existing-completion and one completed fresh in-session):
+ * "I still dont understand this" / "hmm i dont understand this" /
+ * "i dont understand this" / "I have one question" were each served the
+ * byte-identical canned reflection question instead of being treated as new
+ * intent, because none of isGenuineQuestion/requestedConceptId/
+ * requestedTopicTitle/excursionActive fire on a plain confusion statement or
+ * a bare announcement. See lessonCompletionRespectsNewIntentHoisted in
+ * route.ts for the full signal and lessonCompletion.ts's
+ * isQuestionAnnouncement() doc comment for why the fix is split across two
+ * existing/new signals instead of one phrase list.
+ */
+describe('F2 fix — help-seeking statements after completion', () => {
+  it('detectFailureState (recoveryGuard.ts, already computed every turn as recoveryKeyHoisted) classifies the confusion-statement family as a genuine failure state', () => {
+    expect(detectFailureState('I still dont understand this')).not.toBeNull()
+    expect(detectFailureState('hmm i dont understand this')).not.toBeNull()
+    expect(detectFailureState('i dont understand this')).not.toBeNull()
+    expect(detectFailureState("I don't understand this")).not.toBeNull()
+    expect(detectFailureState("I'm confused")).not.toBeNull()
+  })
+
+  it('isQuestionAnnouncement recognizes an explicit "I have a/one question" announcement — the one production phrase the other five signals all miss', () => {
+    expect(isQuestionAnnouncement('I have one question')).toBe(true)
+    expect(isQuestionAnnouncement('I have a question')).toBe(true)
+    expect(isQuestionAnnouncement("I've got a question")).toBe(true)
+    expect(isQuestionAnnouncement('I have some questions')).toBe(true)
+  })
+
+  it('isQuestionAnnouncement does NOT fire on an ordinary acknowledgement — the negative-control requirement', () => {
+    for (const m of ['ok', 'thanks', 'got it', 'okay, understood', 'Ok', 'Got it thanks']) {
+      expect(isQuestionAnnouncement(m)).toBe(false)
+    }
+  })
+
+  it('detectFailureState does NOT fire on an ordinary acknowledgement either — both new signals respect the negative control', () => {
+    for (const m of ['ok', 'thanks', 'got it', 'okay, understood', 'Ok', 'Got it thanks']) {
+      expect(detectFailureState(m)).toBeNull()
+    }
+  })
+
+  it('the combined new-intent predicate (mirroring route.ts\'s OR chain) is true for every reproduced production failure', () => {
+    const isNewIntentAfterCompletion = (message: string) =>
+      isGenuineQuestion(message) || detectFailureState(message) !== null || isQuestionAnnouncement(message)
+
+    expect(isNewIntentAfterCompletion('I still dont understand this')).toBe(true)
+    expect(isNewIntentAfterCompletion('hmm i dont understand this')).toBe(true)
+    expect(isNewIntentAfterCompletion('i dont understand this')).toBe(true)
+    expect(isNewIntentAfterCompletion('I have one question')).toBe(true)
+    expect(isNewIntentAfterCompletion("I'm confused")).toBe(true)
+  })
+
+  it('the combined predicate is false for a genuine acknowledgement — closing the lesson must still work', () => {
+    const isNewIntentAfterCompletion = (message: string) =>
+      isGenuineQuestion(message) || detectFailureState(message) !== null || isQuestionAnnouncement(message)
+
+    for (const m of ['ok', 'thanks', 'got it', 'okay, understood']) {
+      expect(isNewIntentAfterCompletion(m)).toBe(false)
+    }
   })
 })
 
@@ -91,12 +155,19 @@ describe('route.ts wiring — new-intent signal reaches every consumer', () => {
     expect(signalAt).toBeGreaterThan(excursionAt)
   })
 
-  it('the signal considers excursion state, requested concept/topic, and genuine-question detection — not message phrase matching', () => {
+  it('the signal considers excursion state, requested concept/topic, and genuine-question detection', () => {
     const signalAt = ROUTE.indexOf('lessonCompletionRespectsNewIntentHoisted = excursionDecision.state.active')
     const window = ROUTE.slice(signalAt, signalAt + 400)
     expect(window).toContain('requestedConceptIdThisTurn')
     expect(window).toContain('requestedTopicTitleThisTurn')
     expect(window).toContain('isGenuineQuestion(message)')
+  })
+
+  it('F2 fix: the signal also considers recoveryKeyHoisted (an already-computed, generic distress/failure-state signal) and isQuestionAnnouncement (the one narrowly-scoped, completion-only detector added for this fix)', () => {
+    const signalAt = ROUTE.indexOf('lessonCompletionRespectsNewIntentHoisted = excursionDecision.state.active')
+    const window = ROUTE.slice(signalAt, signalAt + 400)
+    expect(window).toContain('recoveryKeyHoisted !== null')
+    expect(window).toContain('isQuestionAnnouncement(message)')
   })
 
   it('the override block is only injected when the signal is true', () => {

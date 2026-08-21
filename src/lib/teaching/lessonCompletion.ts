@@ -241,3 +241,45 @@ export function buildLessonCompleteContinuationOverrideBlock(): string {
     + 'learner is specifically asking to review or continue it.'
   )
 }
+
+/**
+ * F2 fix (completion-lock investigation, round 2): a narrow, deliberately
+ * scoped gap-filler for the new-intent check above.
+ *
+ * PRODUCTION EVIDENCE (real account, real conversation, both a
+ * pre-existing-completion lesson and one completed fresh in the same
+ * session): "I still dont understand this", "hmm i dont understand this",
+ * "i dont understand this", and "I have one question" were each served the
+ * byte-identical canned reflection question — "Let me ask you something
+ * concrete about {Lesson}: what's one thing you notice or find surprising
+ * about what we just covered?" — instead of being treated as new intent.
+ *
+ * Three of those four ("I dont understand this" and its variants, "I'm
+ * confused") are ALREADY correctly classified by the Recovery Engine's
+ * `detectFailureState()` (recoveryGuard.ts) as `dont_understand` / `confused`
+ * — a distress/help-seeking utterance, computed every turn regardless of
+ * completion state (`recoveryKeyHoisted`). That existing, heavily-tested
+ * signal is reused directly at the call site rather than re-detected here;
+ * no new phrase list was needed for that class of failure.
+ *
+ * "I have one question" is different in kind — not a confusion statement
+ * (recoveryGuard would not and should not fire on it) and not itself
+ * interrogative (isGenuineQuestion would not and should not fire on it
+ * either, since neither ends with "?" nor opens with a WH-word). It is an
+ * explicit ANNOUNCEMENT that a question is coming. No existing primitive in
+ * this codebase models that speech act, so this is a genuinely new, narrow
+ * detector — deliberately scoped to exactly that announcement shape, and
+ * used ONLY by the completion-continuation decision (never by
+ * isGenuineQuestion or any other shared reader), so it cannot change
+ * behavior anywhere else in the app.
+ *
+ * Explicitly excluded by design (verified against the negative-control
+ * requirement — an acknowledgement must still lock the conversation):
+ * "ok", "thanks", "got it", "okay, understood" — none contain "question" in
+ * this announcement shape, so none match.
+ */
+const QUESTION_ANNOUNCEMENT_RE = /\bi\s*(?:'ve(?:\s+got)?|\s+have|\s+got)\s+(?:a|one|some)\s+questions?\b/i
+
+export function isQuestionAnnouncement(message: string): boolean {
+  return QUESTION_ANNOUNCEMENT_RE.test((message ?? '').trim())
+}

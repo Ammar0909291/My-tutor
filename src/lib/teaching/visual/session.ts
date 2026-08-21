@@ -123,11 +123,48 @@ const RETURN_REQUEST_RE =
   /\b(back\s+to|go\s+back|return\s+to|resume|carry\s+on\s+with|continue\s+(?:with|the\s+lesson)|finish\s+the\s+lesson|done\s+with\s+(?:this|that)|got\s+it,?\s+(?:back|continue)|let'?s\s+get\s+back)\b/i
 
 /**
+ * F3 fix — the learner explicitly NEGATES the topic currently being taught
+ * ("I meant the book and table thing, not cesium"; "that's not what I
+ * meant"; "no wait, I meant X").
+ *
+ * PRODUCTION EVIDENCE (real black-box session, physics): mid an off-lesson
+ * cesium excursion, "the table push it up? can you explain again" and then
+ * the explicit correction "no wait I meant the book and table thing, not
+ * cesium. why doesnt the book fall through the table" both got answered
+ * about cesium — the excursion never budged. The correction named nothing
+ * `isExplicitTopicRequest`/`isReturnRequest` recognize (no "explain/teach/
+ * what is", no "back to/go back"), so it fell through every branch to the
+ * "stay on whatever is currently active" default. Only a third, blunter
+ * message ("stop cesium. lets go back to newtons first law lesson" —
+ * itself an ordinary `isReturnRequest` match) finally recovered it.
+ *
+ * This is a DIFFERENT, stronger speech act than an ordinary follow-up or a
+ * request to be taught something: the learner is asserting that what is
+ * currently being taught is NOT what they meant. Deliberately requires the
+ * word "not" near "meant" (or one of two fixed phrases) rather than a bare
+ * "not X" — a bare "not" is far too common in ordinary answers ("I do not
+ * know", "not really") to use safely as a signal on its own.
+ *
+ * Consulted only at the excursion-return tier (alongside `isReturnRequest`,
+ * never inside `looksLikeAnswer`/`decideContinuity`'s hold-by-default
+ * path): this module's own continuity law — "an incidental concept
+ * mention inside an answer... never switches the figure" — is unaffected.
+ * An explicit correction is exactly the opposite of incidental.
+ */
+const EXPLICIT_CORRECTION_RE =
+  /\bi\s+meant\b[^.!?]{0,60}\bnot\b|\bnot\b[^.!?]{0,60}\bi\s+meant\b|\b(?:that'?s|this\s+is)\s+not\s+what\s+i\s+(?:meant|asked|said)\b|\bdidn'?t\s+mean\s+(?:that|this|it)\b/i
+
+/**
  * Did the learner actually ASK to be taught something? Only a true here may
  * move the visualization to a different concept.
  */
 export function isExplicitTopicRequest(message: string): boolean {
   return TOPIC_REQUEST_RE.test(message ?? '')
+}
+
+/** Did the learner explicitly say the current topic is not what they meant? */
+export function isExplicitCorrection(message: string): boolean {
+  return EXPLICIT_CORRECTION_RE.test(message ?? '')
 }
 
 /**
@@ -255,13 +292,36 @@ export function decideContinuity(input: {
     }
   }
 
+  // F3 fix: the learner explicitly said the on-screen topic is NOT what they
+  // meant ("I meant the book and table thing, not cesium") — the same signal
+  // `decideExcursion` now honors for the teaching target. Without this, a
+  // correction could return the TEACHING to the lesson while the FIGURE stays
+  // on the topic just disowned — the tutor's words and the screen disagreeing,
+  // which is the exact mis-narration failure this module's own header
+  // documents for two other routes into it. Only fires when the correction did
+  // not also name a different concept this turn; the branch just below
+  // already redirects there via the same `isExplicitCorrection` OR.
+  if (isExplicitCorrection(message) && !(requestedConceptId && requestedConceptId !== session.conceptId)) {
+    return {
+      kind: 'switch',
+      targetConceptId: session.returnToConceptId ?? lessonConceptId,
+      reason: 'learner-corrected-away-from-topic',
+    }
+  }
+
   // The learner is answering the tutor, not asking for a new topic. THE FIX.
   if (looksLikeAnswer(message, lastAssistantAskedQuestion)) {
     return { kind: 'hold', session, reason: 'learner-answering-not-requesting' }
   }
 
-  // A different concept may take the screen ONLY on an explicit request.
-  if (requestedConceptId && requestedConceptId !== session.conceptId && isExplicitTopicRequest(message)) {
+  // A different concept may take the screen on an explicit request, OR on an
+  // explicit correction that names one ("I meant viscosity, not cesium") —
+  // the same negation signal checked above, paired here with a concept the
+  // correction itself named.
+  if (
+    requestedConceptId && requestedConceptId !== session.conceptId
+    && (isExplicitTopicRequest(message) || isExplicitCorrection(message))
+  ) {
     return { kind: 'switch', targetConceptId: requestedConceptId, reason: 'explicit-new-topic-request' }
   }
 

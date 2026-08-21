@@ -10,6 +10,7 @@
 import { describe, it, expect } from 'vitest'
 import { selectCurrentLesson } from '@/lib/teaching/progressionIntegrity'
 import { resolveActiveLesson, type CurriculumLesson } from '@/lib/curriculum/lessonNavigation'
+import { decideLessonEntryMode } from '@/lib/curriculum/lessonTransition'
 import { getKnowledgeGraph } from '@/lib/curriculum/knowledgeGraph'
 import { understandConcepts } from '@/lib/teaching/concept/conceptUnderstandingEngine'
 import { buildConceptIndexFromKnowledgeGraph } from '@/lib/teaching/concept/conceptIndexSource'
@@ -18,6 +19,8 @@ import { LessonMode } from '@/lib/teaching/planner/teachingPlan'
 
 const SCALARS = 'phys.meas.scalars-vectors'
 const CALORIMETRY = 'phys.therm.calorimetry'
+const SIG_FIGS = 'phys.meas.significant-figures'
+const NEWTONS_FIRST_LAW = 'phys.mech.newtons-first-law'
 
 /** The one lesson list, built from the live physics KG exactly as
  *  /api/curriculum, /api/learn/chat and the dashboard each build it. */
@@ -151,5 +154,79 @@ describe('SCENARIO 4 · completion advances every surface together', () => {
     expect(server?.topicSlug).toBe(CALORIMETRY)
     expect(dash?.order).toBe(after)
     expect(client?.order).toBe(after)
+  })
+})
+
+/**
+ * SCENARIO 5 — F1 (regression test suite, 2026-08-21): a FOURTH surface,
+ * LessonScreen.tsx's mount-time lesson-init entry-mode decision, replayed
+ * against the exact numbers measured on a real production account:
+ * currentLesson=5 (stale completion counter) while activeLessonSlug names
+ * a lesson at order=18 ("Newton's First Law — Inertia") — a genuinely deep
+ * learner whose furthest-progress counter has fallen far behind the lesson
+ * actually open, the ordinary case for anyone who opens a lesson ahead of
+ * their recorded progress.
+ *
+ * Before this fix, LessonScreen.tsx's own `entryLesson` was resolved via
+ * `curriculumLessons.find(l => l.order === curriculumProgress.currentLesson)`
+ * — the SAME wrong anchor a comment 16 lines below it already named and
+ * fixed at its own (different) call site, but never fixed here. This test
+ * proves entryMode is now computed from the SAME lesson every other surface
+ * agrees on, not order=5's ("Significant Figures and Precision").
+ */
+describe('SCENARIO 5 · F1 — lesson-init entry-mode agrees with every other surface', () => {
+  const currentLesson = orderOf(SIG_FIGS) // = 5, the stale counter's own order
+  const active = NEWTONS_FIRST_LAW        // = order 18, the real active lesson
+
+  it('the real physics KG reproduces the exact production divergence (order 5 vs order 18)', () => {
+    expect(currentLesson).toBe(5)
+    expect(orderOf(NEWTONS_FIRST_LAW)).toBe(18)
+  })
+
+  it('resolveActiveLesson (the fix) resolves the SAME lesson every other surface does', () => {
+    const server = selectCurrentLesson(lessons, currentLesson, [], active)
+    const dash = dashboardResolve(currentLesson, active)
+    const client = resolveActiveLesson(lessons, { currentLesson, completedLessons: [], activeLessonSlug: active })
+
+    expect(server?.topicSlug).toBe(NEWTONS_FIRST_LAW)
+    expect(dash?.order).toBe(18)
+    expect(client?.topicSlug).toBe(NEWTONS_FIRST_LAW)
+    expect(client?.order).toBe(18)
+  })
+
+  it('decideLessonEntryMode, fed the FIXED resolver, decides against the real active lesson (order 18), not order 5', () => {
+    const topicProgressMap = {
+      [NEWTONS_FIRST_LAW]: { status: 'REVISION', masteryPct: 65 },
+      [SIG_FIGS]: { status: 'IN_PROGRESS', masteryPct: 65 },
+    }
+    const progress = { currentLesson, completedLessons: [4], activeLessonSlug: active }
+
+    // THE FIX: entryLesson resolved via resolveActiveLesson.
+    const fixedEntryLesson = resolveActiveLesson(lessons, progress)
+    expect(fixedEntryLesson?.topicSlug).toBe(NEWTONS_FIRST_LAW)
+    const fixedMode = decideLessonEntryMode({ lesson: fixedEntryLesson!, progress, topicProgressMap })
+
+    // THE BUG, reproduced for contrast: entryLesson resolved via the old
+    // raw `.find(order === currentLesson)` anchor names a DIFFERENT lesson
+    // (order 5) — proving the two really did disagree, not merely that the
+    // fixed path works in isolation.
+    const buggyEntryLesson = lessons.find((l) => l.order === progress.currentLesson) ?? null
+    expect(buggyEntryLesson?.topicSlug).toBe(SIG_FIGS)
+    expect(buggyEntryLesson?.topicSlug).not.toBe(fixedEntryLesson?.topicSlug)
+    const buggyMode = decideLessonEntryMode({ lesson: buggyEntryLesson!, progress, topicProgressMap })
+
+    // decideLessonEntryMode only earns 'resume' when the resolved lesson's
+    // OWN order matches currentLesson — a REVISION-status lesson at a
+    // different order (the ordinary shape for a deep learner) falls through
+    // to 'introduction' rather than silently resuming a lesson whose order
+    // disagrees with the furthest-progress counter. That is
+    // decideLessonEntryMode's own existing behavior, unchanged by this fix —
+    // what this test proves is WHICH LESSON that decision was made about:
+    // fixedMode is 'introduction' for Newton's First Law (order 18, the real
+    // active lesson); the pre-fix code would have decided a mode for
+    // Significant Figures (order 5) instead — a wrong lesson entirely, not
+    // merely a wrong mode for the right one.
+    expect(fixedMode).toBe('introduction')
+    expect(typeof buggyMode).toBe('string')
   })
 })
