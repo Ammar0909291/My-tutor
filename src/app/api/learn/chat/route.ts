@@ -4,7 +4,7 @@ import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
 import { withRetry } from '@/lib/db/withRetry'
 import { buildTutorSystemPrompt, type LessonContext } from '@/lib/ai/client'
-import { routeAI } from '@/lib/ai/router'
+import { routeAI, isAllowedGroqCertModel } from '@/lib/ai/router'
 import { AIBudgetExceededError } from '@/lib/ai/budget'
 import { checkRateLimit, rateLimitResponse } from '@/lib/rateLimit'
 import { captureError } from '@/lib/monitoring'
@@ -94,6 +94,25 @@ export async function POST(req: Request) {
 
   const { allowed } = await checkRateLimit(`rl:learn-chat:${userId}`, 30, 60)
   if (!allowed) return rateLimitResponse()
+
+  // A/B provider-certification gate (2026-08-21). A request-supplied header
+  // NAMES a Groq model but does nothing on its own — it is only honoured if
+  // THIS authenticated user's own DB row (never anything the client sends)
+  // has `modelOverrideAllowed = true`. Every ordinary learner has that flag
+  // false by default, so this block is inert for them regardless of what
+  // headers they send. Only queried when the header is present, so ordinary
+  // requests pay no extra DB round trip.
+  let groqModelOverride: string | undefined
+  const requestedCertModel = req.headers.get('x-cert-groq-model')
+  if (isAllowedGroqCertModel(requestedCertModel)) {
+    const dbUser = await prisma.user.findUnique({
+      where: { id: userId },
+      select: { modelOverrideAllowed: true },
+    })
+    if (dbUser?.modelOverrideAllowed) {
+      groqModelOverride = requestedCertModel
+    }
+  }
 
   try {
     const body = await req.json()
@@ -3803,6 +3822,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           2048,
           teachingLang,
             { userId, subject: learnSession.subject.slug },
+            groqModelOverride,
           )
         } catch (aiError) {
           if (aiError instanceof AIBudgetExceededError) throw aiError
@@ -4569,6 +4589,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                   systemPrompt + appendix + outputLanguageBlockHoisted,
                   country, 2048, teachingLang,
                   { userId, subject: learnSession.subject.slug },
+                  groqModelOverride,
                 )
                 repaired = routed.text
                 if (contentRegister === 'beginner') repaired = stripIpaNotation(repaired)
@@ -4743,6 +4764,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                   2048, // see the primary routeAI() call above for why this was raised from 1024
                   teachingLang,
                   { userId, subject: learnSession.subject.slug },
+                  groqModelOverride,
                 )
                 let t = routed.text
                 if (contentRegister === 'beginner') t = stripIpaNotation(t)

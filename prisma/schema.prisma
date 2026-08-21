@@ -35,6 +35,11 @@ model User {
   referredBy          String?
   freeSessionsExtra   Int          @default(0)
   telegramChatId      String?
+  // A/B provider-certification gate (2026-08-21). Default false for every
+  // learner; only set true via direct SQL on a throwaway certification
+  // account. See src/lib/ai/router.ts's `resolveGroqModelOverride` for the
+  // full gate (also requires a dedicated request header).
+  modelOverrideAllowed Boolean     @default(false)
   isDeleted           Boolean      @default(false)
   deletedAt           DateTime?
   createdAt           DateTime     @default(now())

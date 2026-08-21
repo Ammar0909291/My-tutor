@@ -158,10 +158,22 @@ export function hasMalformedLatex(text: string): boolean {
 
 // ── transport ───────────────────────────────────────────────────────────────
 
+/**
+ * A/B provider-certification gate (2026-08-21). Opt-in per invocation via
+ * `CERT_GROQ_MODEL=openai/gpt-oss-20b` — never a permanent harness default.
+ * Sending the header does nothing on its own: the server only honours it if
+ * the authenticated account's own DB row also has `modelOverrideAllowed`
+ * true, set directly via Supabase SQL before the run, never through this
+ * script or any client-reachable path.
+ */
+const CERT_GROQ_MODEL = process.env.CERT_GROQ_MODEL ?? ''
+
 async function post(pathname: string, body: unknown, cookie: string): Promise<TurnPayload> {
+  const headers: Record<string, string> = { 'Content-Type': 'application/json', cookie }
+  if (CERT_GROQ_MODEL) headers['x-cert-groq-model'] = CERT_GROQ_MODEL
   const res = await fetch(`${BASE}${pathname}`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', cookie },
+    headers,
     body: JSON.stringify(body),
   })
   if (!res.ok) throw new Error(`${pathname} -> HTTP ${res.status}: ${(await res.text()).slice(0, 200)}`)

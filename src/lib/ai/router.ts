@@ -109,8 +109,39 @@ export function isGeminiOnlyMode(): boolean {
   return (process.env.AI_PROVIDER_MODE ?? '').trim().toLowerCase() === 'gemini_only'
 }
 
-function getRouter(lang?: TeachingLanguage) {
+/**
+ * A/B provider-certification gate (2026-08-21). Allowlist of Groq models a
+ * certification run may request via the `x-cert-groq-model` header — the
+ * header alone does nothing; the caller (route.ts) must ALSO have verified
+ * the authenticated user's `modelOverrideAllowed` DB flag is true before
+ * this value is ever honoured. Kept as a closed list (not "any string the
+ * client sends") so a spoofed header can at most select a real Groq model,
+ * never arbitrary provider config.
+ */
+const GROQ_CERT_MODEL_ALLOWLIST = ['openai/gpt-oss-20b', 'openai/gpt-oss-120b']
+
+export function isAllowedGroqCertModel(model: string | null | undefined): model is string {
+  return !!model && GROQ_CERT_MODEL_ALLOWLIST.includes(model)
+}
+
+function getRouter(lang?: TeachingLanguage, groqModelOverride?: string) {
   const chain = chainKeyForLanguage(lang)
+
+  // A per-request override never uses (or pollutes) the shared cache — it is
+  // a one-off router built for this single certification-gated request only,
+  // and only the default (non-Russian) chain honours it.
+  if (groqModelOverride && chain === 'default' && isGeminiOnlyMode() === false) {
+    console.log(`[ai/router] cert override active — groq model=${groqModelOverride} (this request only)`)
+    return createFailoverRouter({
+      providers: [
+        { key: GROQ_API_KEY, provider: createGroqProvider(GROQ_API_KEY, groqModelOverride) },
+        { key: GEMINI_API_KEY, provider: createGeminiProvider(GEMINI_API_KEY, GEMINI_MODEL) },
+        { key: OPENROUTER_API_KEY, provider: createOpenRouterProvider(OPENROUTER_API_KEY, OPENROUTER_MODEL) },
+      ].filter((c) => c.key !== '').map((c) => c.provider),
+      disableSameProviderRetry: true,
+    })
+  }
+
   const cached = _routers.get(chain)
   if (cached) return cached
 
@@ -241,10 +272,17 @@ export async function routeAI(
   // wiring it into provider selection needed no call-site changes.
   lang: TeachingLanguage = 'en',
   _meta?: Record<string, unknown>,
+  // A/B provider-certification gate (2026-08-21). Set ONLY by the caller
+  // after it has independently verified the authenticated user's DB flag —
+  // routeAI performs no such verification itself, it just wires the value
+  // through if given one. Ignored for the Russian chain and in gemini-only
+  // diagnostic mode.
+  groqModelOverride?: string,
 ): Promise<RouteAIResult> {
   console.log(
     `[ai/router] routing request, teaching_language=${lang} chain=${chainKeyForLanguage(lang)}` +
-    ` country=${country} (country is not a routing signal)`,
+    ` country=${country} (country is not a routing signal)` +
+    (groqModelOverride ? ` groq_model_override=${groqModelOverride}` : ''),
   )
 
   await consumeAIBudget()
@@ -271,7 +309,7 @@ export async function routeAI(
   }
 
   try {
-    const result = await getRouter(lang).complete(req)
+    const result = await getRouter(lang, groqModelOverride).complete(req)
     console.log(
       `[ai/router] success provider=${result.provider} finish_reason=${result.finishReason}` +
       ` chars=${result.text.length}`,

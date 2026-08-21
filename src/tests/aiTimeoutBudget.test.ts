@@ -210,10 +210,21 @@ describe('SEV-1: AI timeout budget fits the function budget', () => {
   })
 
   it('provider ORDER is untouched: Gemini first, Groq last', () => {
+    // Scoped to the main `candidates` array specifically — the 2026-08-21
+    // A/B certification override (router.ts's per-request early-return
+    // branch, ABOVE this array in the file) intentionally lists Groq first
+    // within its own one-off array, since the whole point of that branch is
+    // to try the overridden Groq model first for that single request. That
+    // is a different array from the one this test pins; searching the whole
+    // file (as this test previously did) picked up the override block's
+    // earlier `key: GROQ_API_KEY` occurrence instead.
     const src = readSource('src/lib/ai/router.ts')
-    const gi = src.indexOf('key: GEMINI_API_KEY')
-    const oi = src.indexOf('key: OPENROUTER_API_KEY')
-    const qi = src.indexOf('key: GROQ_API_KEY')
+    const candidatesStart = src.indexOf('const candidates: Array<')
+    expect(candidatesStart).toBeGreaterThan(-1)
+    const scoped = src.slice(candidatesStart)
+    const gi = scoped.indexOf('key: GEMINI_API_KEY')
+    const oi = scoped.indexOf('key: OPENROUTER_API_KEY')
+    const qi = scoped.indexOf('key: GROQ_API_KEY')
     expect(gi).toBeGreaterThan(-1)
     expect(gi).toBeLessThan(oi)
     expect(oi).toBeLessThan(qi)
