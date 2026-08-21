@@ -4868,6 +4868,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // gate itself read when it went looking for a probe.
               phase: conversationStateHoisted?.phase ?? null,
               hasStructuredMcq: mcqHoisted !== null,
+              // The server-selected probe's own question, when the gate
+              // actually attached one this turn — lets the guard tell a
+              // model that quoted it back in prose (harmless) apart from a
+              // model that asked a SEPARATE, unauthorized question anyway
+              // (the chemistry CHECK-phase defect this closes). Undefined
+              // when no probe was attached (`gateMcqHoisted` null), which
+              // reproduces the prior no-op behaviour for that case exactly.
+              attachedMcqQuestion: gateMcqHoisted?.question,
             })
             if (ungraded.withheld) {
               console.warn('[gate-contract] ' + JSON.stringify({

@@ -242,12 +242,41 @@ export interface UngradedGateQuestionInput {
   phase: unknown
   /** Does the turn carry a structured MCQ the server can grade? */
   hasStructuredMcq: boolean
+  /**
+   * The question text of the structured MCQ actually attached this turn (the
+   * server-selected probe's question, `gateMcqHoisted.question` at the call
+   * site), when one is attached. Optional and backward-compatible: omitting
+   * it (or `hasStructuredMcq: false`) reproduces the exact prior behaviour —
+   * see the "second question alongside an attached MCQ" note below for why
+   * it exists.
+   *
+   * ── THE DEFECT THIS CLOSES (chemistry CHECK-phase sweep, 2026-08-21) ──────
+   * `buildGateAssessmentBlock` tells the model "do NOT ask any other
+   * question" once a probe is attached, and — same lesson as this whole
+   * file — a prompt rule is not an enforcement. Measured on
+   * `chem.found.matter`/`chem.found.measurement`: an authored MCQ WAS
+   * attached (`hasStructuredMcq: true`), and the model wrote its own
+   * separate, unrelated open-ended "Stage 2 Recognition" question anyway
+   * (`src/lib/ai/client.ts`'s QUESTION STAGE POLICY, which every turn's
+   * prompt carries regardless of the gate). Because `hasStructuredMcq` was
+   * true, the ONLY existing guard skipped entirely — it was built for "no
+   * probe was found," not "a probe was found and the model asked ANOTHER
+   * question besides it." The learner was shown two questions at once: the
+   * graded widget and an ungraded prose one with no answer key.
+   *
+   * The repair below is narrow: it only fires when the offending trailing
+   * question is DEMONSTRABLY NOT the attached MCQ restated (normalised
+   * substring match against `attachedMcqQuestion`) — a model that quotes the
+   * same authored question back in prose (the pre-existing "must NOT touch"
+   * test's scenario) is left alone exactly as before.
+   */
+  attachedMcqQuestion?: string
 }
 
 export interface UngradedGateQuestionResult {
   text: string
   withheld: boolean
-  reason: 'ok' | 'no-gradeable-probe'
+  reason: 'ok' | 'no-gradeable-probe' | 'stray-question-alongside-mcq'
 }
 
 /**
@@ -267,9 +296,34 @@ export function withholdUngradedGateQuestion(
 ): UngradedGateQuestionResult {
   try {
     if (!isMasteryGatePhase(input.phase)) return { text: input.text, withheld: false, reason: 'ok' }
-    if (input.hasStructuredMcq) return { text: input.text, withheld: false, reason: 'ok' }
 
     const text = typeof input.text === 'string' ? input.text : ''
+
+    if (input.hasStructuredMcq) {
+      // No known attached question to compare against: reproduce the exact
+      // prior behaviour (untouched) rather than guess.
+      const attached = typeof input.attachedMcqQuestion === 'string' ? input.attachedMcqQuestion.trim() : ''
+      if (!attached) return { text: input.text, withheld: false, reason: 'ok' }
+
+      const poses = askedAnswerableQuestion(text) || containsOptionList(text)
+      if (!poses) return { text: input.text, withheld: false, reason: 'ok' }
+
+      // The model restating the SAME authored question in prose (harmless,
+      // and the pre-existing contract this function must not break) is
+      // distinguished from a genuinely DIFFERENT, unauthorized question by a
+      // normalised substring check.
+      if (norm(text).includes(norm(attached))) {
+        return { text: input.text, withheld: false, reason: 'ok' }
+      }
+
+      const kept = dropTrailingQuestion(text)
+      return {
+        text: kept.length > 0 ? kept : WITHHELD_QUESTION_CONTINUATION,
+        withheld: true,
+        reason: 'stray-question-alongside-mcq',
+      }
+    }
+
     // A turn that asks nothing gradeable is already fine. `askedAnswerableQuestion`
     // is reused rather than re-derived precisely because it ALREADY excludes
     // confirmation tails — "does that make sense?" and "shall we carry on?" are

@@ -123,6 +123,59 @@ describe('withholdUngradedGateQuestion — what it must NOT touch', () => {
   })
 })
 
+describe('withholdUngradedGateQuestion — a stray question alongside an attached MCQ', () => {
+  // Verbatim shape of the chemistry CHECK-phase turn from the 2026-08-21
+  // certification sweep (`chem.found.matter`): an authored MCQ WAS attached
+  // this turn, and the model asked its OWN separate open-ended question
+  // anyway, in violation of `buildGateAssessmentBlock`'s "do NOT ask any
+  // other question" instruction.
+  const ATTACHED_MCQ_QUESTION =
+    'Which of the following best describes matter?'
+  const STRAY_QUESTION_TURN = `Great, let's build on that.
+
+**Question (Stage 2 – Recognition):** Have you ever seen a situation where two everyday materials can be pulled apart with a magnet, but after heating they become a single solid that no longer responds to the magnet?`
+
+  it('strips a genuinely different question the model asked alongside the attached MCQ', () => {
+    const r = withholdUngradedGateQuestion({
+      text: STRAY_QUESTION_TURN,
+      phase: 'CHECK',
+      hasStructuredMcq: true,
+      attachedMcqQuestion: ATTACHED_MCQ_QUESTION,
+    })
+    expect(r.withheld).toBe(true)
+    expect(r.reason).toBe('stray-question-alongside-mcq')
+    expect(r.text).toContain("Great, let's build on that.")
+    expect(r.text).not.toMatch(/Have you ever seen a situation/i)
+    expect(r.text).not.toMatch(/\?/)
+  })
+
+  it('leaves the turn alone when the prose merely restates the attached MCQ', () => {
+    const text = `Here's your question.\n\n${ATTACHED_MCQ_QUESTION}\n\nA) Foo\nB) Bar`
+    const r = withholdUngradedGateQuestion({
+      text, phase: 'CHECK', hasStructuredMcq: true, attachedMcqQuestion: ATTACHED_MCQ_QUESTION,
+    })
+    expect(r.withheld).toBe(false)
+    expect(r.text).toBe(text)
+  })
+
+  it('is backward-compatible: omitting attachedMcqQuestion reproduces the prior no-op', () => {
+    const r = withholdUngradedGateQuestion({
+      text: STRAY_QUESTION_TURN, phase: 'CHECK', hasStructuredMcq: true,
+    })
+    expect(r.withheld).toBe(false)
+    expect(r.text).toBe(STRAY_QUESTION_TURN)
+  })
+
+  it('leaves a pure lead-in (no stray question) alone even with an MCQ attached', () => {
+    const text = "Let's check one thing about the states of matter before we go further."
+    const r = withholdUngradedGateQuestion({
+      text, phase: 'CHECK', hasStructuredMcq: true, attachedMcqQuestion: ATTACHED_MCQ_QUESTION,
+    })
+    expect(r.withheld).toBe(false)
+    expect(r.text).toBe(text)
+  })
+})
+
 describe('asset contract — the inventory that stops this happening at all', () => {
   it('the two concepts that failed in production are BELOW contract', () => {
     // math.found.logic and math.arith.ratios each hold exactly 2 closed-choice
