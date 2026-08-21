@@ -1,0 +1,68 @@
+[
+  {
+    "conceptId": "chem.nitro.nitro-compounds",
+    "lessonTitle": "Nitro Compounds",
+    "lessonOrder": 165,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.pblock.group13",
+    "lessonTitle": "Group 13 — Boron Family",
+    "lessonOrder": 112,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.period.classification",
+    "lessonTitle": "Early Classification of Elements",
+    "lessonOrder": 19,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.poly.biodegradable",
+    "lessonTitle": "Biodegradable and Functional Polymers",
+    "lessonOrder": 178,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.redox.oxidation-state",
+    "lessonTitle": "Oxidation State",
+    "lessonOrder": 69,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.sblock.hydrogen",
+    "lessonTitle": "Hydrogen",
+    "lessonOrder": 108,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.sol.colligative",
+    "lessonTitle": "Colligative Properties",
+    "lessonOrder": 46,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.solid.packing",
+    "lessonTitle": "Close Packing and Efficiency",
+    "lessonOrder": 91,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.state.kinetic-theory",
+    "lessonTitle": "Kinetic Molecular Theory of Gases",
+    "lessonOrder": 37,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.surface.adsorption",
+    "lessonTitle": "Adsorption",
+    "lessonOrder": 96,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.thermo.system",
+    "lessonTitle": "System, Surroundings and State Functions",
+    "lessonOrder": 49,
+    "unitTitle": "Chemistry"
+  }
+]
