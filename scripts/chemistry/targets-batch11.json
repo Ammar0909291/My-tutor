@@ -1,0 +1,86 @@
+[
+  {
+    "conceptId": "chem.elect.electrolysis",
+    "lessonTitle": "Electrolysis and Faraday's Laws",
+    "lessonOrder": 79,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.solid.properties",
+    "lessonTitle": "Electrical and Magnetic Properties",
+    "lessonOrder": 94,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.state.phase-diagram",
+    "lessonTitle": "Phase Diagrams",
+    "lessonOrder": 42,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.thermo.third-law",
+    "lessonTitle": "Third Law and Absolute Entropy",
+    "lessonOrder": 55,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.atomic.orbitals",
+    "lessonTitle": "Atomic Orbitals",
+    "lessonOrder": 15,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.hal.elimination",
+    "lessonTitle": "Elimination Reactions",
+    "lessonOrder": 146,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.hyd.alkenes",
+    "lessonTitle": "Alkenes",
+    "lessonOrder": 137,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.alc.epoxides",
+    "lessonTitle": "Epoxides",
+    "lessonOrder": 154,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.carb.carboxylic",
+    "lessonTitle": "Carboxylic Acids",
+    "lessonOrder": 159,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.bio.carbohydrates",
+    "lessonTitle": "Carbohydrates",
+    "lessonOrder": 168,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.found.pure-substances",
+    "lessonTitle": "Pure Substances and Mixtures",
+    "lessonOrder": 3,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.bond.polar-molecules",
+    "lessonTitle": "Polarity and Dipole Moment",
+    "lessonOrder": 31,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.equil.le-chatelier",
+    "lessonTitle": "Le Chatelier's Principle",
+    "lessonOrder": 60,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.org.iupac",
+    "lessonTitle": "IUPAC Nomenclature",
+    "lessonOrder": 124,
+    "unitTitle": "Chemistry"
+  }
+]
