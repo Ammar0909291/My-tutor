@@ -1,0 +1,110 @@
+[
+  {
+    "conceptId": "chem.alc.protection",
+    "lessonTitle": "Protecting Group Strategy",
+    "lessonOrder": 155,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.atomic.atomic-spectra",
+    "lessonTitle": "Atomic Spectra",
+    "lessonOrder": 12,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.atomic.quantum-mech-model",
+    "lessonTitle": "Quantum Mechanical Model",
+    "lessonOrder": 18,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.bio.enzyme-kinetics",
+    "lessonTitle": "Enzyme Kinetics",
+    "lessonOrder": 173,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.bio.vitamins",
+    "lessonTitle": "Vitamins and Hormones",
+    "lessonOrder": 172,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.bond.mo-theory",
+    "lessonTitle": "Molecular Orbital Theory",
+    "lessonOrder": 30,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.carb.named-reactions",
+    "lessonTitle": "Named Carbonyl Reactions",
+    "lessonOrder": 161,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.carb.spectro",
+    "lessonTitle": "Spectroscopic ID of Carbonyls",
+    "lessonOrder": 162,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.equil.kw-ph",
+    "lessonTitle": "Water Ionization and pH",
+    "lessonOrder": 61,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.hal.haloarenes",
+    "lessonTitle": "Haloarenes",
+    "lessonOrder": 147,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.hyd.arenes",
+    "lessonTitle": "Benzene and Arenes",
+    "lessonOrder": 139,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.hyd.polycyclic",
+    "lessonTitle": "Polycyclic and Heterocyclic Systems",
+    "lessonOrder": 142,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.org.aromaticity",
+    "lessonTitle": "Aromaticity",
+    "lessonOrder": 133,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.org.electronic-effects",
+    "lessonTitle": "Inductive and Mesomeric Effects",
+    "lessonOrder": 127,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.org.isomerism",
+    "lessonTitle": "Structural and Stereoisomerism",
+    "lessonOrder": 126,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.thermo.bond-enthalpy",
+    "lessonTitle": "Bond Enthalpy",
+    "lessonOrder": 52,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.thermo.gibbs",
+    "lessonTitle": "Gibbs Free Energy and Spontaneity",
+    "lessonOrder": 54,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.thermo.heat-capacities",
+    "lessonTitle": "Heat Capacities of Gases",
+    "lessonOrder": 56,
+    "unitTitle": "Chemistry"
+  }
+]
