@@ -47,7 +47,7 @@ const OPENROUTER_MODEL = process.env.OPENROUTER_MODEL ?? 'deepseek/deepseek-chat
 // Gemini/OpenRouter migration, kept as a proven-working last resort so a
 // Gemini+OpenRouter outage together doesn't take teaching turns down.
 const GROQ_API_KEY = process.env.GROQ_API_KEY ?? ''
-const GROQ_MODEL = process.env.GROQ_MODEL ?? 'openai/gpt-oss-20b'
+const GROQ_MODEL = process.env.GROQ_MODEL ?? 'openai/gpt-oss-120b'
 
 /** The teaching language the learner selected. This is the ONLY routing signal. */
 export type TeachingLanguage = 'ru' | 'en' | 'hi'
