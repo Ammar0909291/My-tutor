@@ -1,0 +1,86 @@
+[
+  {
+    "conceptId": "chem.pblock.trends",
+    "lessonTitle": "Trends Across p-Block",
+    "lessonOrder": 118,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.coord.stability",
+    "lessonTitle": "Stability Constants",
+    "lessonOrder": 106,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.kinet.photochemistry",
+    "lessonTitle": "Photochemical Reactions",
+    "lessonOrder": 89,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.elect.galvanic-cell",
+    "lessonTitle": "Galvanic Cell",
+    "lessonOrder": 74,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.period.modern-periodic-law",
+    "lessonTitle": "Modern Periodic Law and Table",
+    "lessonOrder": 20,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.sol.vapour-pressure",
+    "lessonTitle": "Vapour Pressure of Solutions",
+    "lessonOrder": 45,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.solid.crystal-systems",
+    "lessonTitle": "Crystal Systems",
+    "lessonOrder": 90,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.state.molar-mass-gas",
+    "lessonTitle": "Molar Mass from Gas Data",
+    "lessonOrder": 39,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.thermo.enthalpy",
+    "lessonTitle": "Enthalpy and Hess's Law",
+    "lessonOrder": 51,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.atomic.bohr-model",
+    "lessonTitle": "Bohr Model of the Atom",
+    "lessonOrder": 13,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.hal.sn1",
+    "lessonTitle": "SN1 Mechanism",
+    "lessonOrder": 144,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.hyd.petroleum",
+    "lessonTitle": "Petroleum Refining",
+    "lessonOrder": 141,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.alc.alcohols",
+    "lessonTitle": "Alcohols",
+    "lessonOrder": 150,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.carb.derivatives",
+    "lessonTitle": "Carboxylic Acid Derivatives",
+    "lessonOrder": 160,
+    "unitTitle": "Chemistry"
+  }
+]
