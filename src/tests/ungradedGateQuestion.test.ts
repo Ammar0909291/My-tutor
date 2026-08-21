@@ -8,6 +8,7 @@
  */
 import { describe, it, expect } from 'vitest'
 import { withholdUngradedGateQuestion } from '@/lib/teaching/gateAssessment'
+import { askedAnswerableQuestion } from '@/lib/teaching/answerableTurn'
 import {
   evaluateAssetContract,
   canCertifyWithoutModelCompliance,
@@ -223,6 +224,68 @@ describe('withholdUngradedGateQuestion — a stray question alongside an attache
     })
     expect(r.withheld).toBe(false)
     expect(r.text).toBe(text)
+  })
+})
+
+describe('askedAnswerableQuestion / withholdUngradedGateQuestion — self-answered rhetorical "why" (chem.thermo.third-law)', () => {
+  // `chem.thermo.third-law` FAILED a chemistry certification sweep with
+  // `D2-ungradeable` (2026-08-21) on a turn whose only "question" was a
+  // rhetorical one the tutor answered itself in the very next sentence — the
+  // same shape a human lecturer uses ("Why is that? Because …"). No MCQ was
+  // attached, phase was CHECK both turns, and the served text was reported
+  // unchanged, containing the "Why is that?" verbatim.
+  const TRAILING = `The Third Law of Thermodynamics states that as a system approaches absolute zero, its entropy approaches a well-defined minimum.
+
+Why is that? Because at absolute zero a perfect crystal has only one possible microstate, so its entropy is exactly zero.`
+
+  const MID_TEXT = `The Third Law of Thermodynamics states that as a system approaches absolute zero, its entropy approaches a well-defined minimum.
+
+Why is that? Because at absolute zero a perfect crystal has only one possible microstate, so its entropy is exactly zero.
+
+This has major implications: it means absolute zero can never actually be reached in a finite number of steps.`
+
+  it('askedAnswerableQuestion does not flag a self-answered rhetorical "why...because"', () => {
+    expect(askedAnswerableQuestion(TRAILING)).toBe(false)
+    expect(askedAnswerableQuestion(MID_TEXT)).toBe(false)
+  })
+
+  it('a genuine "why" question with no self-answer is still flagged', () => {
+    expect(askedAnswerableQuestion(
+      'Ice floats on water because ice is less dense than liquid water.\n\n'
+      + 'Why do you think a metal ring expands when heated?',
+    )).toBe(true)
+    expect(askedAnswerableQuestion('Why does the sky appear blue during the day?')).toBe(true)
+  })
+
+  it('does not withhold — and does not lose the trailing self-answered explanation — at CHECK', () => {
+    // Before this fix, the rhetorical pair being the TRAILING paragraph made
+    // `dropTrailingQuestion` pop the entire paragraph, deleting the actual
+    // physics answer along with the question that answered it in the same
+    // breath — a genuine content-loss defect, not a benign no-op.
+    const r = withholdUngradedGateQuestion({ text: TRAILING, phase: 'CHECK', hasStructuredMcq: false })
+    expect(r.withheld).toBe(false)
+    expect(r.reason).toBe('ok')
+    expect(r.text).toBe(TRAILING)
+  })
+
+  it('does not withhold — reason "ok", not a mislabeled unchanged "withheld" — when the rhetorical pair is mid-turn', () => {
+    // Reproduces the production shape exactly: before this fix, `poses` was
+    // true (full-text scan) but `dropTrailingQuestion` is tail-anchored and
+    // this content is not trailing, so the text came back byte-identical
+    // while still reporting `withheld: true` — this is the confirmed root
+    // cause of the reported production failure.
+    const r = withholdUngradedGateQuestion({ text: MID_TEXT, phase: 'CHECK', hasStructuredMcq: false })
+    expect(r.withheld).toBe(false)
+    expect(r.reason).toBe('ok')
+    expect(r.text).toBe(MID_TEXT)
+  })
+
+  it('still withholds when a genuinely ungradeable, non-rhetorical question follows the same shape', () => {
+    const text = 'Absolute zero is the theoretical minimum temperature.\n\n'
+      + 'Why do you think no real system can ever fully reach it?'
+    const r = withholdUngradedGateQuestion({ text, phase: 'CHECK', hasStructuredMcq: false })
+    expect(r.withheld).toBe(true)
+    expect(r.reason).toBe('no-gradeable-probe')
   })
 })
 

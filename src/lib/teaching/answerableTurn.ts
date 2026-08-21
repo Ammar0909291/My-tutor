@@ -101,6 +101,42 @@ const TASK_IMPERATIVE =
   /^\s*(?:your turn[\s:,-]+|now[\s,]+|next[\s,]+)?(?:(calculate|compute|solve|find|work out|determine|name|state|identify|explain|describe|predict|compare|estimate|convert|balance|write|choose|select|pick|list|give)\b|try\s+(?:this|it|one|that)\b)/i
 
 /**
+ * A sentence that answers the sentence before it, matched at the HEAD.
+ *
+ * ── THE DEFECT THIS CLOSES (chemistry CHECK-phase sweep, 2026-08-21,
+ * `chem.thermo.third-law`) ───────────────────────────────────────────────────
+ * A rhetorical "Why is that? Because …" — a tutor posing its own question and
+ * answering it in the same breath, the way a lecture does — was treated as an
+ * answerable question with no way to grade it, because `SOLICITS_CONTENT`
+ * matches any sentence carrying "why" and ending in "?", with no exception for
+ * one that is immediately self-answered.
+ *
+ * That single misclassification produced two failures, not one, from the same
+ * root: `withholdUngradedGateQuestion` (gateAssessment.ts) and the
+ * certification harness (`scripts/math/certify.ts`) both call this function
+ * directly.
+ *
+ *  - When the rhetorical pair was the TRAILING paragraph of a turn,
+ *    `dropTrailingQuestion` popped the ENTIRE paragraph — deleting the actual
+ *    physics answer along with the question that (correctly, in the same
+ *    breath) answered it. A genuine content-loss defect, not a benign one.
+ *  - When it sat mid-turn, followed by more teaching prose, the trailing-only
+ *    removal never reached it, so the turn was reported `withheld: true` while
+ *    the served text was, in fact, unchanged — which is what the harness
+ *    actually captured for `chem.thermo.third-law`.
+ *
+ * Both are the same bug: the sentence never needed a learner reply, so it
+ * should never have registered as "answerable" in the first place. Matched at
+ * the head of the NEXT sentence, mirroring `CONFIRMATION_TAIL`'s tail anchor —
+ * the point is the immediate adjacency ("Why…? Because…", not "Why…? […two
+ * paragraphs of unrelated teaching…] Because…"), so a real question that
+ * happens to be followed, elsewhere, by an unrelated "Because" sentence is not
+ * swept up by this.
+ */
+const SELF_ANSWERED_HEAD =
+  /^\s*(?:that'?s|this\s+is|it'?s)?\s*because\b/i
+
+/**
  * Did this tutor turn pose something the learner could actually answer?
  *
  * True when EITHER a question sentence solicits content, OR a line sets an
@@ -117,11 +153,15 @@ export function askedAnswerableQuestion(text: string): boolean {
   }
 
   // Question sentences: split on terminators, keep the ones that end in '?'.
-  for (const sentence of text.split(/(?<=[.!?])\s+/)) {
-    const s = sentence.trim()
+  const sentences = text.split(/(?<=[.!?])\s+/)
+  for (let i = 0; i < sentences.length; i++) {
+    const s = sentences[i].trim()
     if (!s.endsWith('?')) continue
     if (CONFIRMATION_TAIL.test(s)) continue
-    if (SOLICITS_CONTENT.test(s)) return true
+    if (!SOLICITS_CONTENT.test(s)) continue
+    const next = (sentences[i + 1] ?? '').trim()
+    if (SELF_ANSWERED_HEAD.test(next)) continue
+    return true
   }
 
   return false
