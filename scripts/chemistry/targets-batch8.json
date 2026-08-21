@@ -1,0 +1,86 @@
+[
+  {
+    "conceptId": "chem.pblock.group18",
+    "lessonTitle": "Group 18 — Noble Gases",
+    "lessonOrder": 117,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.coord.bonding",
+    "lessonTitle": "Bonding in Complexes",
+    "lessonOrder": 105,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.kinet.catalysis",
+    "lessonTitle": "Catalysis",
+    "lessonOrder": 88,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.redox.titrations",
+    "lessonTitle": "Redox Titrations",
+    "lessonOrder": 73,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.surface.heterogeneous-cat",
+    "lessonTitle": "Mechanism of Heterogeneous Catalysis",
+    "lessonOrder": 100,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.elect.industrial",
+    "lessonTitle": "Industrial Electrolysis",
+    "lessonOrder": 82,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.period.valency",
+    "lessonTitle": "Valency and Oxidation State",
+    "lessonOrder": 25,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.poly.properties",
+    "lessonTitle": "Polymer Properties",
+    "lessonOrder": 177,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.sol.solubility",
+    "lessonTitle": "Solubility and Henry's Law",
+    "lessonOrder": 44,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.solid.amorphous",
+    "lessonTitle": "Amorphous Solids",
+    "lessonOrder": 95,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.state.gas-laws",
+    "lessonTitle": "Gas Laws",
+    "lessonOrder": 38,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.thermo.first-law",
+    "lessonTitle": "First Law of Thermodynamics",
+    "lessonOrder": 50,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.atomic.electromagnetic-radiation",
+    "lessonTitle": "Electromagnetic Radiation",
+    "lessonOrder": 11,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.hal.cfcs",
+    "lessonTitle": "Polyhalogen Compounds and CFCs",
+    "lessonOrder": 149,
+    "unitTitle": "Chemistry"
+  }
+]
