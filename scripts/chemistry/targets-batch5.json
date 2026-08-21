@@ -1,0 +1,86 @@
+[
+  {
+    "conceptId": "chem.env.water-soil",
+    "lessonTitle": "Water and Soil Pollution",
+    "lessonOrder": 182,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.anal.spectroscopy",
+    "lessonTitle": "Spectroscopic Methods",
+    "lessonOrder": 186,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.sblock.alkali",
+    "lessonTitle": "Alkali Metals",
+    "lessonOrder": 109,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.nitro.diazonium",
+    "lessonTitle": "Diazonium Salts",
+    "lessonOrder": 164,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.dblock.lanthanides",
+    "lessonTitle": "Lanthanides and Actinides",
+    "lessonOrder": 122,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.pblock.group15",
+    "lessonTitle": "Group 15 — Nitrogen Family",
+    "lessonOrder": 114,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.coord.isomerism",
+    "lessonTitle": "Isomerism in Complexes",
+    "lessonOrder": 103,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.kinet.integrated-rate",
+    "lessonTitle": "Integrated Rate Laws",
+    "lessonOrder": 85,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.redox.balancing",
+    "lessonTitle": "Balancing Redox Equations",
+    "lessonOrder": 70,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.surface.colloids",
+    "lessonTitle": "Colloids",
+    "lessonOrder": 97,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.elect.conductance",
+    "lessonTitle": "Electrolytic Conductance",
+    "lessonOrder": 78,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.period.atomic-radius",
+    "lessonTitle": "Atomic and Ionic Radius",
+    "lessonOrder": 21,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.poly.addition",
+    "lessonTitle": "Addition Polymerization",
+    "lessonOrder": 174,
+    "unitTitle": "Chemistry"
+  },
+  {
+    "conceptId": "chem.sol.osmosis",
+    "lessonTitle": "Osmosis and Osmotic Pressure",
+    "lessonOrder": 47,
+    "unitTitle": "Chemistry"
+  }
+]
