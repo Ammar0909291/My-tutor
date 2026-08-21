@@ -219,11 +219,11 @@ describe('8. Pre-existing provider-chain behaviour that is not about ordering st
     expect(getAIRouter('en').providerNames).toEqual(['gemini'])
   })
 
-  it('the GROQ_MODEL default is openai/gpt-oss-120b (2026-08-21 upgrade from 20b)', async () => {
+  it('the GROQ_MODEL default is openai/gpt-oss-20b (2026-08-21 A/B test result)', async () => {
     delete process.env.GROQ_MODEL
     const fs = await import('node:fs')
     const src = fs.readFileSync('src/lib/ai/router.ts', 'utf8')
-    expect(src).toContain("process.env.GROQ_MODEL ?? 'openai/gpt-oss-120b'")
+    expect(src).toContain("process.env.GROQ_MODEL ?? 'openai/gpt-oss-20b'")
   })
 
   it('GROQ_MODEL env override still works, unaffected by the default change', async () => {
