@@ -259,7 +259,46 @@ export function buildVisualContractBlock(
   // now, from state the engine already keeps: `session.turns` is the held
   // count, 0 on the turn a figure first appears.
   const heldTurns = decision.session?.turns ?? 0
-  if (heldTurns > 0) {
+  if (heldTurns > 0 && opts.learnerAskedForAVisual) {
+    // P0-B — THE ONE TURN ON WHICH SILENCE IS THE WRONG ANSWER.
+    //
+    // "Do NOT re-introduce or re-describe it" is right on an ordinary
+    // continuing turn, and wrong the moment the learner ASKS to be shown
+    // something. On that turn the engine HOLDS the figure it already has —
+    // correctly, continuity is not a bug — so the tutor is told at once to
+    // answer a request for a picture AND not to describe the picture in front
+    // of them. Both cannot be obeyed, and the model resolved it the worst way:
+    // by describing a figure that does not exist.
+    //
+    // Measured live, Lesson 39, on the turn after the figure was introduced.
+    // Learner: "Can you give me a diagram to visualize this?" Attached, and
+    // unchanged from the previous turn: a GRAPH, {"type":"graph","title":
+    // "Angular Displacement vs Time","xLabel":"Time (s)","yLabel":"Angular
+    // Displacement (rad)"}. Tutor: "Here's a diagram that shows a disk with a
+    // marked point indicating angular displacement ... an arrow from the
+    // center to a point on the rim labeled θ."
+    //
+    // No fabrication rule catches this, and that is why it survived: a figure
+    // IS attached, so the phantom-reference guard correctly stays silent. The
+    // claim is not "a figure exists"; it is "the figure is a disk", and only
+    // this block knows it is a graph.
+    //
+    // So the suppression is lifted for this turn only — the request is rare,
+    // and it is exactly the case where re-describing is the correct teaching
+    // move. The anti-repetition rule keeps its full force on every other turn,
+    // which is the defect it was written for.
+    lines.push(
+      'THE LEARNER HAS JUST ASKED TO BE SHOWN SOMETHING, AND THE FIGURE THEY ' +
+      'ARE ASKING FOR IS ALREADY ON THEIR SCREEN — it is the one described ' +
+      'above, which has been there since earlier in this exchange. Answer the ' +
+      'request with THAT figure: say plainly that it is already beside this ' +
+      'message, then walk them through it using its real elements. Do NOT ' +
+      'describe a different picture, do NOT invent a second figure to satisfy ' +
+      'the request, and do NOT promise to draw one — nothing further will be ' +
+      'attached. If the figure is not the kind of picture they asked for, say ' +
+      'so in one clause and teach from the one that IS there.',
+    )
+  } else if (heldTurns > 0) {
     lines.push(
       'ALREADY INTRODUCED: the learner has had this figure in front of them ' +
       'for the whole exchange — you introduced it earlier. Do NOT re-introduce ' +
