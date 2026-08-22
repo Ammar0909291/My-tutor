@@ -816,6 +816,34 @@ export function advanceConversationState(
   if (evidence.degradedTurn) {
     next.phase = prev.phase
     next.turnsInCurrentPhase = prev.turnsInCurrentPhase
+    // F7 — PROVIDER FAILURE IS NOT DEMONSTRATED MASTERY.
+    //
+    // Pinning the phase was not enough. The mastery counters are incremented
+    // in the `succeeded` branch above, which this guard did not reach, so a
+    // degraded turn carrying `signalCorrect: true` still banked mastery
+    // evidence. Measured before this line existed, at phase CHECK:
+    //
+    //     phase CHECK (pinned)  correctAtCheck 1  verifiedCorrectAtCheck 1
+    //
+    // and the same one step later for correctAtPractice. The mastery bar is
+    // correctAtCheck >= 1 plus correctAtPractice >= 2, so an outage could be
+    // spent as two thirds of a learner's practice requirement.
+    //
+    // It was unreachable in production only because the outage template
+    // contains no `<!--SIGNAL-->` tag, so correctness parsed as null. That is
+    // a property of some template text, not an invariant — any future
+    // fallback that echoed a signal, or any caller that inferred correctness
+    // some other way, would silently start crediting outages. The counters
+    // are pinned here, at the one site that already owns "a degraded turn
+    // changes no teaching state", so the guarantee is structural.
+    //
+    // Learner-describing counters stay folded, exactly as the phase rule
+    // above intends: the student's message was real even when our reply
+    // failed. Only the record of what THEY demonstrated is protected.
+    next.correctAtCheck = prev.correctAtCheck
+    next.correctAtPractice = prev.correctAtPractice
+    next.verifiedCorrectAtCheck = prev.verifiedCorrectAtCheck
+    next.verifiedCorrectAtPractice = prev.verifiedCorrectAtPractice
   }
 
   return withBudgetExtension(next)

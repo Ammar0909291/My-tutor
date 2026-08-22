@@ -62,3 +62,53 @@ describe('degraded turns never advance the lesson stage', () => {
     expect(next.misconceptionDetectedThisLesson).toBe(true)
   })
 })
+
+// ── F7 — provider failure is not demonstrated mastery ───────────────────────
+// Pinning the phase was not enough: the mastery counters are incremented in
+// the success branch, which the degraded guard did not reach. Measured before
+// the fix, at phase CHECK: phase pinned, but correctAtCheck 1 and
+// verifiedCorrectAtCheck 1. The bar is correctAtCheck >= 1 plus
+// correctAtPractice >= 2, so an outage could be spent as two thirds of a
+// learner's practice requirement.
+describe('F7 — a degraded turn banks no mastery evidence', () => {
+  it('does not credit a CHECK even when the turn carries a correct signal', () => {
+    const prev = stateAt('CHECK', { demonstrated: true })
+    const next = advanceConversationState(prev, evidence({ signalCorrect: true, degradedTurn: true }))
+    expect(next.phase).toBe('CHECK')
+    expect(next.correctAtCheck).toBe(0)
+    expect(next.verifiedCorrectAtCheck ?? 0).toBe(0)
+  })
+
+  it('does not credit a PRACTICE even when the turn carries a correct signal', () => {
+    const prev = stateAt('PRACTICE', { demonstrated: true, correctAtCheck: 1 })
+    const next = advanceConversationState(prev, evidence({ signalCorrect: true, degradedTurn: true }))
+    expect(next.phase).toBe('PRACTICE')
+    expect(next.correctAtPractice).toBe(0)
+    expect(next.verifiedCorrectAtPractice ?? 0).toBe(0)
+  })
+
+  it('an outage cannot spend a learner toward the mastery bar', () => {
+    // Two degraded turns in a row at PRACTICE would otherwise satisfy
+    // correctAtPractice >= 2 outright.
+    let s = stateAt('PRACTICE', { demonstrated: true, correctAtCheck: 1 })
+    s = advanceConversationState(s, evidence({ signalCorrect: true, degradedTurn: true }))
+    s = advanceConversationState(s, evidence({ signalCorrect: true, degradedTurn: true }))
+    expect(s.correctAtPractice).toBe(0)
+    expect(s.phase).toBe('PRACTICE')
+  })
+
+  it('mastery already earned by REAL turns is preserved, not erased', () => {
+    // The guard pins to the previous value; it must not zero genuine progress.
+    const prev = stateAt('PRACTICE', { demonstrated: true, correctAtCheck: 1, correctAtPractice: 1 })
+    const next = advanceConversationState(prev, evidence({ signalCorrect: true, degradedTurn: true }))
+    expect(next.correctAtCheck).toBe(1)
+    expect(next.correctAtPractice).toBe(1)
+  })
+
+  it('a NON-degraded correct answer still credits mastery exactly as before', () => {
+    const prev = stateAt('CHECK', { demonstrated: true })
+    const next = advanceConversationState(prev, evidence({ signalCorrect: true }))
+    expect(next.correctAtCheck).toBe(1)
+    expect(next.phase).toBe('PRACTICE')
+  })
+})
