@@ -4371,6 +4371,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       if (!assembled && !mcqHoisted && (await import('@/lib/teaching/lessonCompletion')).shouldRepairFillerTurn({
         lessonCompleted: lessonCompletedHoisted,
         respectsNewIntent: lessonCompletionRespectsNewIntentHoisted,
+        // A close is the third turn-shape that looks empty and is not — see
+        // shouldRepairFillerTurn. Live: "I'm done for today." was honoured all
+        // the way through forceClosing and the close directive, then overwritten
+        // here with "Let me ask you something concrete…".
+        closingTurn: sessionEpisodeHoisted?.phase === 'CLOSING',
       })) {
         try {
           const { detectFillerTurn } = await import('@/lib/teaching/conversationState')

@@ -340,7 +340,34 @@ export function isQuestionAnnouncement(message: string): boolean {
 export function shouldRepairFillerTurn(input: {
   lessonCompleted: boolean
   respectsNewIntent: boolean
+  /**
+   * The session episode is CLOSING — the learner asked to stop, or the affect
+   * budget is spent.
+   *
+   * THIRD ROOT-CAUSE FIX (live-reproduced 2026-08-22). A correct session close
+   * and a filler turn are the same shape: no explanation, no question, no new
+   * content. That is not a coincidence — it is what buildAffectCloseBlock
+   * ORDERS ("do NOT introduce new content, new questions, or another attempt
+   * ... close warmly in ~2 sentences"). So a model that obeyed the close
+   * directive was detected as filler and overwritten.
+   *
+   * Measured: the learner typed "I'm done for today." and received
+   * "Let me ask you something concrete about Newton's First Law — Inertia:
+   * what's one thing you notice or find surprising about what we just
+   * covered?" — the stop was detected and honoured everywhere upstream
+   * (forceClosing ran, the close block was injected, nothing was graded) and
+   * then undone at the very last step by this repair.
+   *
+   * This is the same failure this predicate's own history already records
+   * twice: "compliance with the assessment contract was being punished, and
+   * the better the model behaved the more often the learner got filler." A
+   * close is the third shape that looks empty and is not.
+   */
+  closingTurn?: boolean
 }): boolean {
   if (input.lessonCompleted) return false
+  // A session the learner asked to end has nothing left to probe for, exactly
+  // as a completed lesson does.
+  if (input.closingTurn) return false
   return !input.respectsNewIntent
 }
