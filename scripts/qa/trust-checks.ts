@@ -72,6 +72,14 @@ async function main(): Promise<void> {
       const claim = ONSCREEN_CLAIM.test(p.text ?? '')
       if (claim) f5 = false
       console.log(`  ${tag.padEnd(18)} claims-a-figure=${claim}`)
+      if (claim) {
+        // Print the offending sentence so a hit can be judged: the product's
+        // own guard strips unbacked references, so a hit is either a shape it
+        // missed or an over-broad probe regex. Guessing between those is what
+        // this line exists to prevent.
+        const m = (p.text ?? '').split(/(?<=[.!?])\s+/).find((s2) => ONSCREEN_CLAIM.test(s2))
+        console.log(`      OFFENDING: ${JSON.stringify(m ?? (p.text ?? '').slice(0, 200))}`)
+      }
     }
     console.log(`F5 no phantom reference on any figureless turn: ${f5} (${noFigureTurns.length} turns checked)`)
 
