@@ -68,7 +68,25 @@ export const INSUFFICIENT_FOR_CONCEPT: ReadonlySet<string> = new Set([
   'phys.mech.inclined-plane',        // force diagram with no incline drawn
   'phys.mech.work',                  // empty x-y plane; work is the area under an F-d curve
   'phys.mech.conservative-forces',   // static forces cannot show path-independence
-  'phys.mech.angular-kinematics',    // empty x-y plane; no θ/ω/α curves
+  // REMOVED: 'phys.mech.angular-kinematics'. The verdict was written about a
+  // curated binding (coordinate_plane with no generator) that has since been
+  // removed from the registry, so the sentence "empty x-y plane; no θ/ω/α
+  // curves" no longer describes anything this concept renders.
+  //
+  // It was NOT inert. scopeForAsset() tests INSUFFICIENT_FOR_CONCEPT against
+  // the conceptId for EVERY provenance, generated figures included — so a
+  // verdict on a deleted curated card was still demoting whatever the
+  // generation engine produced in its place. Measured live: the engine now
+  // serves {"type":"graph","title":"Angular Displacement vs Time","xLabel":
+  // "Time (s)","yLabel":"Angular Displacement (rad)"}, a faithful, correctly
+  // labelled figure, and the contract was telling the tutor it is "a GENERAL
+  // ILLUSTRATION ... NOT a figure of Angular Kinematics" and to not build the
+  // explanation on it.
+  //
+  // General hazard worth naming, since this set is keyed on concept id alone:
+  // an entry outlives the figure it judged. When a binding is removed or
+  // repaired, its verdict must be revisited, or the next figure inherits a
+  // criticism of its predecessor.
   'phys.mech.angular-momentum',      // centripetal-force card; L = r × p is not drawn
   'phys.mech.conservation-of-angular-momentum', // no before/after spin-rate change
   'phys.mech.hookes-law',            // no spring, no extension-vs-force relation
@@ -97,6 +115,17 @@ export const INSUFFICIENT_FOR_CONCEPT: ReadonlySet<string> = new Set([
   // faithful figure of the number line. They keep concept scope.
   'math.alg.quadratic-equation',     // empty x-y plane; no parabola is drawn
   'math.alg.polynomial',             // empty x-y plane; no polynomial curve is drawn
+  // The number-line renderer is hardcoded -5..5 with INTEGER ticks and integer
+  // labels only (NumberLine.tsx — not parametrized). That is a faithful figure
+  // of the integers, and it is missing the defining element of both concepts
+  // below: nothing is ever drawn BETWEEN the ticks. Rational numbers are
+  // defined by what lives between integers, and the reals additionally by the
+  // irrationals and completeness. Same verdict, same remedy — the line still
+  // renders, it simply may not claim to depict these two.
+  // 'math.found.integers' is deliberately absent: for it the canvas IS the
+  // concept, so it keeps concept scope.
+  'math.found.rational-numbers',     // integer ticks only; no fraction between them
+  'math.found.real-numbers',         // integer ticks only; no irrational, no density
 
   // ── added by the visual semantic moat sweep ──────────────────────────────
   // Three concept-level rows that were carrying the STRONG contract ("a

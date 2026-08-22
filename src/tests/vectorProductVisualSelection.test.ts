@@ -319,7 +319,15 @@ describe('the repair path is the general one, not a special case', () => {
     // an empty grid, bound to a concept whose whole content is the curve that
     // is not drawn. Demoted, not retired — the number going up is again a
     // claim withdrawn, not a figure made worse.
-    expect(INSUFFICIENT_FOR_CONCEPT.size).toBe(43)
+    // 43 -> 44: net of one removal and two additions.
+    // REMOVED 'phys.mech.angular-kinematics' — its verdict described a curated
+    // binding that no longer exists, and scopeForAsset tests this set for EVERY
+    // provenance, so a criticism of a deleted card was demoting the faithful
+    // generated graph that replaced it.
+    // ADDED 'math.found.rational-numbers' and 'math.found.real-numbers' — the
+    // number-line renderer is hardcoded -5..5 with integer ticks only, so it
+    // never draws anything between them, which is precisely what defines both.
+    expect(INSUFFICIENT_FOR_CONCEPT.size).toBe(44)
     expect([...INSUFFICIENT_FOR_CONCEPT].some((id) => id.startsWith('chem.'))).toBe(true)
     // The queue now tracks mathematics too, which it did not before.
     expect([...INSUFFICIENT_FOR_CONCEPT].some((id) => id.startsWith('math.'))).toBe(true)

@@ -472,9 +472,28 @@ const CONCEPT_VISUALS: Record<string, VisualEntry> = {
   'math.arith.fractions':             { primary: 'fraction_bar', all: ['fraction_bar', 'number_line'] },
   'math.arith.decimals':              { primary: 'number_line', all: ['number_line', 'fraction_bar'] },
   'math.arith.percentages':           { primary: 'percentage_grid', all: ['percentage_grid', 'fraction_bar'] },
-  'math.arith.integers':              { primary: 'number_line', all: ['number_line'] },
-  'math.arith.rational-numbers':      { primary: 'number_line', all: ['number_line', 'fraction_bar'] },
-  'math.arith.real-numbers':          { primary: 'number_line', all: ['number_line'] },
+  // REPOINTED (P1 audit): these three keys named no concept in the KG, so they
+  // were unreachable — the same silent-orphan defect this file already fixed
+  // for phys.mech.pendulum and phys.mech.gravitation. The real ids live under
+  // math.found, and all three resolved to NO figure at all before this change,
+  // so the repair gives a figure to three concepts that had none rather than
+  // replacing anything.
+  //
+  // Verified before repointing, because a rename that lands on a worse figure
+  // is not a repair: NumberLine.tsx is hardcoded -5..5 with integer ticks and
+  // integer labels. That IS a faithful figure of the integers. It is NOT a
+  // faithful figure of the rationals or the reals — nothing is ever drawn
+  // between the ticks — so those two are demoted in scope.ts rather than
+  // allowed to claim they depict the concept. The picture still renders.
+  //
+  // NOT repointed, deliberately: 'math.trig.trigonometric-identities' is also
+  // an orphan whose real id is 'math.trig.trig-identities', but that concept
+  // ALREADY resolves to geometry_shape through a domain default. Repointing it
+  // would replace a real figure with a bare coordinate plane — a downgrade —
+  // so it stays on the reported backlog instead.
+  'math.found.integers':              { primary: 'number_line', all: ['number_line'] },
+  'math.found.rational-numbers':      { primary: 'number_line', all: ['number_line', 'fraction_bar'] },
+  'math.found.real-numbers':          { primary: 'number_line', all: ['number_line'] },
   'math.arith.number-line':           { primary: 'number_line', all: ['number_line'] },
 
   // Mathematics — Algebra (graphing)

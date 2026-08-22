@@ -32,9 +32,6 @@ cs.ds.linked-lists
 cs.ds.stacks-queues
 math.alg.linear-equations
 math.alg.linear-inequalities
-math.arith.integers
-math.arith.rational-numbers
-math.arith.real-numbers
 math.calc.applications-derivative
 math.calc.differentiation
 math.calc.integration
