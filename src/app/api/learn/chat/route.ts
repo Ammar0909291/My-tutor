@@ -4376,6 +4376,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // the way through forceClosing and the close directive, then overwritten
         // here with "Let me ask you something concrete…".
         closingTurn: sessionEpisodeHoisted?.phase === 'CLOSING',
+        // A recovery script is ordered to ask nothing, and is written in the
+        // exact calming vocabulary the filler detector keys on. Without this,
+        // a learner who said "I give up" could be answered with a quiz
+        // question. See shouldRepairFillerTurn.
+        recoveryTurn: recoveryKeyHoisted !== null,
       })) {
         try {
           const { detectFillerTurn } = await import('@/lib/teaching/conversationState')

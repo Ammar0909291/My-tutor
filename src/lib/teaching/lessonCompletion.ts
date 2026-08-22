@@ -364,10 +364,52 @@ export function shouldRepairFillerTurn(input: {
    * close is the third shape that looks empty and is not.
    */
   closingTurn?: boolean
+  /**
+   * A recovery script is being served — the learner said something like "I'm
+   * stupid", "I give up", "I can't do this", and recoveryGuard injected an
+   * authored calming script that DELIBERATELY asks nothing.
+   *
+   * FOURTH ROOT-CAUSE FIX, and the most trust-critical of the four. The filler
+   * detector fires on: <= 30 words, no '?', and a known filler phrase. That
+   * phrase list is "feel free to", "whenever you're ready", "take your time",
+   * "no rush", "we can continue", "let's take one small step" — the vocabulary
+   * of CALMING. Which is precisely the vocabulary an authored recovery script
+   * is required to use.
+   *
+   * Measured against the real detector: genuine filler and a real recovery
+   * script are word-for-word indistinguishable to it —
+   *
+   *   filler   "Let's take one small step together. We can continue whenever
+   *             you're ready."                                     -> REPAIRED
+   *   recovery "That's okay. This one is genuinely tricky, and we can go
+   *             slower. Let's take one small step together."       -> REPAIRED
+   *
+   * so a learner in distress could have their recovery script replaced with
+   * "Let me ask you something concrete about X: what's one thing you notice or
+   * find surprising?" — a quiz question, delivered to someone who just said
+   * they wanted to give up. Nothing in this codebase does more damage per
+   * occurrence.
+   */
+  recoveryTurn?: boolean
 }): boolean {
   if (input.lessonCompleted) return false
-  // A session the learner asked to end has nothing left to probe for, exactly
-  // as a completed lesson does.
+  // ── THE INVARIANT ────────────────────────────────────────────────────────
+  // This repair exists to replace a turn that FAILED TO DO WHAT THE SERVER
+  // ASKED. The server knows what it asked. So a turn whose shape the server
+  // ITSELF ordered — no question, no new teaching content — is compliance, not
+  // filler, and must never be replaced.
+  //
+  // Every exclusion here and at the call site is one instance of that single
+  // rule, not four unrelated special cases:
+  //   · assembled       the server served curated content        (call site)
+  //   · mcqHoisted      the question is in the structured channel (call site)
+  //   · lessonCompleted nothing left to probe for
+  //   · closingTurn     the server ordered a close
+  //   · recoveryTurn    the server ordered a calming script
+  // A future directive that forbids questions or new content belongs on this
+  // list too — add it deliberately rather than discovering it from a
+  // learner-visible failure, which is how the last two arrived.
   if (input.closingTurn) return false
+  if (input.recoveryTurn) return false
   return !input.respectsNewIntent
 }

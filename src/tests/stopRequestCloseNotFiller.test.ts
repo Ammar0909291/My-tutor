@@ -21,6 +21,7 @@
 import { describe, it, expect } from 'vitest'
 import { readFileSync } from 'node:fs'
 import { shouldRepairFillerTurn } from '@/lib/teaching/lessonCompletion'
+import { detectFillerTurn } from '@/lib/teaching/conversationState'
 import {
   detectExplicitFinishRequest, forceClosing, buildAffectCloseBlock,
   type SessionEpisode,
@@ -72,5 +73,71 @@ describe('an explicit stop is not overwritten by the filler repair', () => {
   it('the route passes the episode phase into the predicate', () => {
     const route = readFileSync('src/app/api/learn/chat/route.ts', 'utf8')
     expect(route).toContain("closingTurn: sessionEpisodeHoisted?.phase === 'CLOSING'")
+  })
+})
+
+// ── P0-A: the invariant behind all of these ────────────────────────────────
+// The filler repair replaces a turn that FAILED TO DO WHAT THE SERVER ASKED.
+// The server knows what it asked. A turn whose shape the server itself
+// ordered — no question, no new teaching content — is compliance, not filler.
+//
+// The detector fires on: <=30 words AND no '?' AND a known filler phrase. That
+// phrase list ("feel free to", "whenever you're ready", "take your time",
+// "no rush", "let's take one small step") is the vocabulary of CALMING and
+// CLOSING — which is exactly what the close directive and the recovery scripts
+// are required to use. So the collision is structural, not incidental.
+describe('P0-A — a server-ordered turn shape is never filler', () => {
+  const ordered = { lessonCompleted: false, respectsNewIntent: false }
+
+  it('the detector genuinely cannot tell filler from a recovery script', () => {
+    // Both are <=30 words, no '?', and carry a listed filler phrase. This is
+    // the evidence that a text-only classifier CANNOT fix this, and why the
+    // fix has to come from the server knowing what it ordered.
+    expect(detectFillerTurn(
+      "Let's take one small step together. We can continue whenever you're ready.",
+    )).toBe(true)
+    expect(detectFillerTurn(
+      "That's okay. This one is genuinely tricky, and we can go slower. Let's take one small step together.",
+    )).toBe(true)
+  })
+
+  it('a recovery turn is never repaired — the worst case in the system', () => {
+    // A learner who typed "I give up" must not receive a quiz question.
+    expect(shouldRepairFillerTurn({ ...ordered, recoveryTurn: true })).toBe(false)
+  })
+
+  it('a closing turn is never repaired', () => {
+    expect(shouldRepairFillerTurn({ ...ordered, closingTurn: true })).toBe(false)
+  })
+
+  it('a completed lesson is never repaired', () => {
+    expect(shouldRepairFillerTurn({ ...ordered, lessonCompleted: true })).toBe(false)
+  })
+
+  it('NEGATIVE CONTROL — genuine filler on an ordinary turn is still repaired', () => {
+    // The whole point: this fix must not disable the repair. With no directive
+    // active, a content-free turn is still replaced.
+    expect(shouldRepairFillerTurn({ ...ordered })).toBe(true)
+    expect(shouldRepairFillerTurn({
+      ...ordered, closingTurn: false, recoveryTurn: false,
+    })).toBe(true)
+  })
+
+  it('NEGATIVE CONTROL — a short concrete turn was never filler to begin with', () => {
+    // Already protected by the phrase requirement; asserted so a future
+    // loosening of FILLER_PHRASE_RE cannot quietly capture real teaching.
+    expect(detectFillerTurn('An orbital is a region where electrons can be found.')).toBe(false)
+    expect(detectFillerTurn('Force equals mass times acceleration: F = ma.')).toBe(false)
+  })
+
+  it('NEGATIVE CONTROL — a turn that asks a question is never filler', () => {
+    expect(detectFillerTurn('Take your time. What do you think happens next?')).toBe(false)
+  })
+
+  it('the route passes the recovery signal into the predicate', () => {
+    const route = readFileSync('src/app/api/learn/chat/route.ts', 'utf8')
+    expect(route).toContain('recoveryTurn: recoveryKeyHoisted !== null')
+    // And the two shape-owned exclusions remain at the call site.
+    expect(route).toContain('!assembled && !mcqHoisted')
   })
 })
