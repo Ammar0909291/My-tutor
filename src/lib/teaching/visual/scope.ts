@@ -77,6 +77,27 @@ export const INSUFFICIENT_FOR_CONCEPT: ReadonlySet<string> = new Set([
   'phys.therm.carnot-cycle',         // empty x-y plane; no closed four-stage cycle
   'phys.em.resistivity',             // bulb circuit; ρ = RA/L needs conductor geometry
 
+  // ── MATHEMATICS: the sweep never reached it (P1 audit) ───────────────────
+  // Every entry above came from the physics/chemistry semantic-moat sweep, and
+  // this set contained no mathematics id at all — the only moat suite in the
+  // repo is visualSemanticMoatPhysicsChemistry. So the identical defect the
+  // sweep found and demoted in physics was still standing in mathematics, on
+  // the STRONG contract, where the tutor may introduce the figure as "a
+  // diagram of <concept>".
+  //
+  // These two are the same shape as 'phys.mech.work' and
+  // 'phys.therm.carnot-cycle' immediately above: coordinate_plane with NO
+  // scene generator, i.e. an empty grid, bound to a concept whose whole
+  // content is the curve that is not drawn. Demoted, not retired — the same
+  // remedy, so mathematics now carries the verdict physics already carries.
+  //
+  // Deliberately NOT demoted, and worth stating so the omission reads as a
+  // decision: 'math.arith.number-line' and 'math.arith.decimals' are also bare
+  // number lines, and for them the canvas IS the concept — a number line is a
+  // faithful figure of the number line. They keep concept scope.
+  'math.alg.quadratic-equation',     // empty x-y plane; no parabola is drawn
+  'math.alg.polynomial',             // empty x-y plane; no polynomial curve is drawn
+
   // ── added by the visual semantic moat sweep ──────────────────────────────
   // Three concept-level rows that were carrying the STRONG contract ("a
   // <representation> of <concept> is attached") while pointing at a generic

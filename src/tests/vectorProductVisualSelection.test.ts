@@ -309,8 +309,20 @@ describe('the repair path is the general one, not a special case', () => {
     // ARE depicted by their shared instance and were deliberately left alone;
     // they are enumerated in visualGeneratorDefaultScope.test.ts so the gap
     // cannot grow in the dark.
-    expect(INSUFFICIENT_FOR_CONCEPT.size).toBe(41)
+    // 41 -> 43: the P1 audit found this set contained NO mathematics id at
+    // all — every entry above came from the physics/chemistry sweep, and the
+    // repo's only moat suite is visualSemanticMoatPhysicsChemistry. So the
+    // defect that sweep found and demoted in physics was still standing in
+    // mathematics on the STRONG contract. math.alg.quadratic-equation and
+    // math.alg.polynomial are the same shape as phys.mech.work and
+    // phys.therm.carnot-cycle: coordinate_plane with NO scene generator, i.e.
+    // an empty grid, bound to a concept whose whole content is the curve that
+    // is not drawn. Demoted, not retired — the number going up is again a
+    // claim withdrawn, not a figure made worse.
+    expect(INSUFFICIENT_FOR_CONCEPT.size).toBe(43)
     expect([...INSUFFICIENT_FOR_CONCEPT].some((id) => id.startsWith('chem.'))).toBe(true)
+    // The queue now tracks mathematics too, which it did not before.
+    expect([...INSUFFICIENT_FOR_CONCEPT].some((id) => id.startsWith('math.'))).toBe(true)
     expect(INSUFFICIENT_FOR_CONCEPT.has('phys.meas.scalars-vectors')).toBe(true)
   })
 })

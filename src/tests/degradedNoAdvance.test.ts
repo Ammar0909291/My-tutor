@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest'
+import { masteryVerified } from '@/lib/teaching/masteryGate'
 import {
   advanceConversationState,
   initialConversationState,
@@ -103,6 +104,19 @@ describe('F7 — a degraded turn banks no mastery evidence', () => {
     const next = advanceConversationState(prev, evidence({ signalCorrect: true, degradedTurn: true }))
     expect(next.correctAtCheck).toBe(1)
     expect(next.correctAtPractice).toBe(1)
+  })
+
+  it('an outage cannot flip masteryVerified from false to true', () => {
+    // The derived value the completion gate actually reads. A learner one
+    // practice short of the bar must not cross it on a turn that taught
+    // nothing, so this asserts the CONSEQUENCE, not just the counters.
+    const prev = stateAt('PRACTICE', { demonstrated: true, correctAtCheck: 1, correctAtPractice: 1 })
+    expect(masteryVerified(prev)).toBe(false)
+    const next = advanceConversationState(prev, evidence({ signalCorrect: true, degradedTurn: true }))
+    expect(masteryVerified(next)).toBe(false)
+    // …while the identical NON-degraded turn legitimately does cross it.
+    const real = advanceConversationState(prev, evidence({ signalCorrect: true }))
+    expect(masteryVerified(real)).toBe(true)
   })
 
   it('a NON-degraded correct answer still credits mastery exactly as before', () => {
