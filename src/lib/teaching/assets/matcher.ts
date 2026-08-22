@@ -252,7 +252,19 @@ export function pickBest<T extends MatchableAsset>(
   let best: { asset: T; confidence: number; exactGradeMatch: boolean } | null = null
   for (const candidate of candidates) {
     const confidence = scoreMatch(state, candidate, options)
-    if (confidence >= threshold && (!best || confidence > best.confidence)) {
+    // confidence === 0 always means scoreMatch hard-disqualified the
+    // candidate (wrong concept/language/status, active-misconception
+    // incompatibility, or — P1, 2026-08-22 — a missing required facet):
+    // every candidate that clears those checks starts from a base score of
+    // 50, so 0 can never be a legitimate low score. Without the `> 0` guard,
+    // callers that pass threshold=0 (the grade-band "serve it anyway"
+    // fallback both retrieval paths use) would treat "hard-disqualified" as
+    // "clears a threshold of 0" and could return a disqualified asset —
+    // e.g. a facet-mismatched or misconception-incompatible one — instead
+    // of the honest no-match a threshold-0 fallback is supposed to fall
+    // back FROM. threshold >= 1 (the normal path) was never affected: any
+    // confidence that clears it was already > 0.
+    if (confidence > 0 && confidence >= threshold && (!best || confidence > best.confidence)) {
       best = { asset: candidate, confidence, exactGradeMatch: isExactGradeMatch(state, candidate) }
     }
   }
