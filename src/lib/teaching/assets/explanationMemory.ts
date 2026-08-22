@@ -65,6 +65,43 @@ interface ExplanationCandidateRow extends MatchableAsset {
   familyKind: string
 }
 
+// ── FACET RELEVANCE DEFAULT (P1, 2026-08-22) ────────────────────────────────
+//
+// THE DEFECT: the DB query two lines below has no familyKind filter — every
+// ACTIVE explanation for the concept is a candidate, regardless of kind. The
+// seed corpus (measured, all 55 files under src/lib/teaching/assets/)
+// authors 1,357 'core_explanation' assets alongside 897 'misconception_repair'
+// ones (plus a handful of worked_example/faq/real_world_example/
+// common_misconception_note) — a misconception_repair explanation reads as
+// "actually, X is NOT true because…", authored to repair a specific error, not
+// to teach the concept cold. scoreMatch's hard disqualifiers never looked at
+// familyKind, and its only facet-aware term (`tagOverlap`) is a softbonus
+// capped at 15 of 100 that essentially never fires here (nothing in an
+// ordinary learner message contains the literal token "core_explanation" or
+// "misconception_repair"). So a core_explanation and a misconception_repair
+// candidate for the same concept+gradeBand routinely TIE on score — and this
+// query carries no `orderBy`, so which one wins is whatever order Postgres
+// happens to return, not a teaching decision.
+//
+// THE FIX: 'core_explanation' is not an invented facet — it is already the
+// corpus's own established default kind (captureGeneratedExplanation defaults
+// every live-captured explanation to it; decomposeLesson always emits it for
+// whatever text precedes the first labelled section). At this call site —
+// "give me a good general explanation of this concept," with no more specific
+// signal available — that existing default IS the well-defined requirement.
+// Verified against the full seed corpus: every one of the 827 authored
+// concept+explanation blocks that carries ANY explanation kind also carries a
+// core_explanation, so requiring it here never turns a currently-served
+// concept into a miss — it only ever removes a wrong-facet asset from
+// contention. A caller with a MORE specific requirement (e.g. a future
+// misconception-repair-specific call site) sets its own `requiredTags` and
+// this default steps aside entirely — it only fills in when the caller hasn't
+// already declared a facet.
+function defaultExplanationFacet(options: MatchOptions): MatchOptions {
+  if (options.requiredTags && options.requiredTags.length > 0) return options
+  return { ...options, requiredTags: ['core_explanation'] }
+}
+
 /** Phase 3: retrieval. Returns null (never throws) on any failure — a lookup
  * miss must always degrade to the existing LLM path, never break a turn. */
 export async function findBestExplanation(
@@ -72,6 +109,7 @@ export async function findBestExplanation(
   options: MatchOptions = {},
 ): Promise<ExplanationMatch | null> {
   try {
+    const facetOptions = defaultExplanationFacet(options)
     const candidates = await prisma.assetIdentity.findMany({
       where: { family: AssetFamily.EXPLANATION, conceptId: state.conceptId, language: state.language, status: AssetStatus.ACTIVE },
       include: { explanationAsset: true },
@@ -116,7 +154,7 @@ export async function findBestExplanation(
     }
     rows = admissible
 
-    const best = pickBest(state, rows, options)
+    const best = pickBest(state, rows, facetOptions)
     if (best) {
       const meta = classify(best.exactGradeMatch, false)
       return {
@@ -136,7 +174,7 @@ export async function findBestExplanation(
     // difference, not a correctness failure. Groq is never preferable over
     // authored content that exists for the right concept.
     if (rows.length > 0) {
-      const fallback = pickBest(state, rows, options, 0)
+      const fallback = pickBest(state, rows, facetOptions, 0)
       if (fallback) {
         const meta = classify(fallback.exactGradeMatch, true)
         console.log(
