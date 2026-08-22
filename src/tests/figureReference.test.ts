@@ -175,6 +175,94 @@ What is the only even prime number?`
  * visualFired, no sceneSpec, no responseVisual — so its message is structurally
  * incapable of carrying a figure, whatever the model writes.
  */
+/**
+ * The third production run — a bare "look at the diagram" with NO on-screen
+ * locator, captured on math.found.problem-solving-strategies, 2026-08-22.
+ * `isPointer` required ON_SCREEN even for a STRONG noun, which `namesAFigure`
+ * itself does not — this is the gap DIRECT_POINTER_RE closes.
+ */
+describe('third production run — no locator at all', () => {
+  const PUZZLE_TURN = `Imagine a jigsaw puzzle that you're about to assemble. You have a bag of 12 small, square pieces that need to fit together to reveal a picture.
+
+This act of placing the puzzle pieces on a table is a concrete example of the draw a diagram strategy. It turns an abstract idea into a visible arrangement that you can examine, adjust, and use to answer the question. When you look at the diagram, you can count rows, columns, and even spot missing pieces, all without doing any calculations on paper.
+
+So, drawing a diagram lets you see the structure of a problem at a glance, revealing patterns and relationships that are hard to spot otherwise.`
+
+  it('strips the bare pointer with no locator', () => {
+    const r = stripUnbackedFigureReferences(PUZZLE_TURN, false)
+    expect(r.stripped).toBe(true)
+    expect(r.text).not.toMatch(/when you look at the diagram/i)
+  })
+
+  it('keeps the surrounding teaching content — the whole POINTER sentence goes, not the paragraph', () => {
+    const r = stripUnbackedFigureReferences(PUZZLE_TURN, false)
+    // Shape 1 drops the WHOLE sentence it fires on (documented behaviour,
+    // identical to the existing PRIME_NUMBER_TURN case) — "count rows,
+    // columns" lived only inside the stripped sentence and goes with it.
+    // What must survive is every OTHER sentence in the turn.
+    expect(r.text).toContain('draw a diagram strategy')
+    expect(r.text).toContain('drawing a diagram lets you see the structure')
+  })
+
+  it('leaves it alone when a figure genuinely is attached', () => {
+    const r = stripUnbackedFigureReferences(PUZZLE_TURN, true)
+    expect(r.stripped).toBe(false)
+    expect(r.text).toBe(PUZZLE_TURN)
+  })
+
+  // Embedded in a multi-sentence paragraph, matching the "never hand back an
+  // empty turn" guard that a single-sentence message would otherwise trip
+  // (see 'never returns an empty turn when the reference was the whole
+  // message' above) — these variants prove DIRECT_POINTER_RE fires without
+  // an on-screen locator, not that a bare one-line message gets emptied.
+  for (const [label, sentence] of [
+    ['look at the diagram', 'Now, look at the diagram to see how the pieces connect. This is the key step.'],
+    ['see the figure', 'Next, see the figure and count how many sides it has. That count matters.'],
+    ['notice the chart', 'Now notice the chart before we continue. It will guide the next step.'],
+    ['examine the graph', 'Let us examine the graph together. Then we will discuss what it shows.'],
+    ['study the picture', 'Study the picture for a moment. Afterward, tell me what you noticed.'],
+  ] as const) {
+    it(`catches the natural variant: "${label}"`, () => {
+      const r = stripUnbackedFigureReferences(sentence, false)
+      expect(r.stripped).toBe(true)
+    })
+  }
+
+  it('NEGATIVE CONTROL: ordinary strategy prose about diagrams is untouched', () => {
+    const t = 'When learners draw a diagram, they can see relationships more clearly than in words alone.'
+    const r = stripUnbackedFigureReferences(t, false)
+    expect(r.stripped).toBe(false)
+    expect(r.text).toBe(t)
+  })
+
+  it('NEGATIVE CONTROL: "consider the strategy" is not a figure reference', () => {
+    const t = 'Consider the strategy of drawing a diagram whenever a problem feels abstract.'
+    const r = stripUnbackedFigureReferences(t, false)
+    expect(r.stripped).toBe(false)
+    expect(r.text).toBe(t)
+  })
+
+  it('NEGATIVE CONTROL: a question naming a diagram is still never removed', () => {
+    const t = 'What would you look at the diagram for, if you wanted to count the rows?'
+    const r = stripUnbackedFigureReferences(t, false)
+    expect(r.text).toContain('?')
+  })
+
+  it('a genuinely attached figure keeps a bare "look at the diagram" reference', () => {
+    const t = 'Now look at the diagram and count the rows.'
+    const r = stripUnbackedFigureReferences(t, true)
+    expect(r.stripped).toBe(false)
+    expect(r.text).toBe(t)
+  })
+
+  it('is idempotent on the new shape', () => {
+    const once = stripUnbackedFigureReferences(PUZZLE_TURN, false)
+    const twice = stripUnbackedFigureReferences(once.text, false)
+    expect(twice.text).toBe(once.text)
+    expect(twice.stripped).toBe(false)
+  })
+})
+
 describe('the opening turn', () => {
   const OPENING = `Let's look at the numbers displayed on your screen: the highlighted points are 2, 3, 5, 7, 11, and 13. Each of these can only be divided evenly by 1 and itself.`
 

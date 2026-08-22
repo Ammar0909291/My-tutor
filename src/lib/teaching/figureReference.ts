@@ -76,6 +76,28 @@ function namesAFigure(fragment: string): boolean {
 /** Verbs that direct the learner's eyes somewhere. */
 const POINTING_VERB = /\b(look at|looking at|see|notice|observe|study|examine|consider)\b/i
 
+/**
+ * "Look at the diagram" — no locator, and still a false claim.
+ *
+ * Captured on math.found.problem-solving-strategies, 2026-08-22: "When you
+ * look at the diagram, you can count rows, columns, and even spot missing
+ * pieces…", on a turn with no figure attached. `isPointer` below required
+ * ON_SCREEN even for a STRONG noun, which `namesAFigure` does NOT — a strong
+ * noun already stands on its own there. The gap is that determiner + verb +
+ * noun sitting right next to each other IS the pointer, whether or not the
+ * model also bothers to say "on your screen".
+ *
+ * Deliberately narrower than "verb ... anywhere-in-sentence noun": this
+ * concept's own lesson is ABOUT diagrams as a strategy, so ordinary prose
+ * like "when learners draw a diagram, they can see relationships more
+ * clearly" must NOT be caught — and it is not, because "see" and "diagram"
+ * are not adjacent through a determiner here. Requiring VERB + (the/this/
+ * that) + NOUN immediately adjacent is the shape that is always a pointer at
+ * a specific, present thing, never a general statement about the noun.
+ */
+const DIRECT_POINTER_RE =
+  /\b(?:look at|looking at|see|notice|observe|study|examine|consider)\s+(?:the|this|that)\s+(?:diagram|figure|graph|picture|image|chart|number ?line|animation|illustration|visual|simulation|plot|sketch)\b/i
+
 export interface FigureReferenceResult {
   text: string
   stripped: boolean
@@ -141,8 +163,16 @@ export function stripUnbackedFigureReferences(
         // Shape 1: the whole sentence is the pointer. Never a question — a
         // question is content the learner is expected to answer, and removing
         // it would silently change what the turn asked.
+        //
+        // Two independent ways a sentence earns this: an explicit on-screen
+        // locator (the original, broader path — catches a weak noun too,
+        // since namesAFigure gates WEAK behind ON_SCREEN already), or the
+        // narrower DIRECT_POINTER_RE shape below, which needs no locator
+        // because "look at the diagram" is already the claim on its own.
         const isPointer =
-          POINTING_VERB.test(s) && namesAFigure(s) && ON_SCREEN.test(s) && !s.includes('?')
+          !s.includes('?') &&
+          ((POINTING_VERB.test(s) && namesAFigure(s) && ON_SCREEN.test(s)) ||
+            DIRECT_POINTER_RE.test(s))
         if (isPointer) {
           removed.push(s)
           return ''
