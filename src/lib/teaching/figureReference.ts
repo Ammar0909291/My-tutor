@@ -34,8 +34,18 @@
  *   1. a sentence that exists solely to point at the figure
  *      ("Look at the diagram on your screen.") — dropped whole;
  *   2. a leading clause that points at the figure before the real content
- *      ("look at the highlighted points — why can't 2 be divided…?") — the
- *      clause is dropped and the content kept, re-capitalised.
+ *      ("look at the highlighted points — why can't 2 be divided…?",
+ *      "In the picture on your screen you can see gravity pulling…—those
+ *      two are action-reaction partners…") — the clause is dropped and the
+ *      content kept, re-capitalised.
+ *
+ * The clause a sentence opens with earns removal in either of two
+ * independent ways: a POINTING_VERB (look at/see/notice/…) next to a figure
+ * noun, or a PREPOSED LOCATOR — "In/On/From/Within the/this/that <figure
+ * noun> <on-screen locator>" — which needs no verb at all, since the
+ * preposition alone is already the claim ("in the diagram on your screen"
+ * presupposes the diagram is there). See PREPOSED_LOCATOR_RE below for the
+ * production shape that required it.
  *
  * A QUESTION IS NEVER REMOVED. In the captured turn the question survives intact
  * and stands perfectly well on its own, which is the general case: the figure
@@ -77,6 +87,42 @@ function namesAFigure(fragment: string): boolean {
 const POINTING_VERB = /\b(look at|looking at|see|notice|observe|study|examine|consider)\b/i
 
 /**
+ * A PREPOSED LOCATING CLAUSE — "In the picture on your screen you can see…",
+ * "In the diagram on your screen, gravity is shown…", "In the figure shown
+ * above—…".
+ *
+ * Captured live on a Newton's Third Law turn, 2026-08-22, with no visual, no
+ * visualSpec and no sceneSpec attached: "In the picture on your screen you
+ * can see gravity pulling on an object and the normal force pushing upward
+ * on that same object—those two are action-reaction partners…". The old
+ * clause test — `POINTING_VERB.test(head) && namesAFigure(head)` — requires
+ * a verb from POINTING_VERB (look at/see/notice/observe/study/examine/
+ * consider) to occur INSIDE the head. That happened to hold for this exact
+ * sentence ("you can see" sits before the em-dash), which is why it looked
+ * caught in isolation — but the shape it was built for is narrower than the
+ * shape actually being produced: "shown above", "is shown", and any other
+ * passive or verbless construction name nothing on this list, so
+ * "In the diagram on your screen, gravity is shown pulling…" and
+ * "In the figure shown above—gravity pulls down…" sailed straight through,
+ * unit-verified as real misses (see figureReference.test.ts).
+ *
+ * The generalisation: a clause opening with "In/On/From/Within the/this/that"
+ * is ALREADY the claim, independent of whatever verb (if any) follows it —
+ * "in the diagram on your screen" presupposes a diagram is there to be in.
+ * Gated on BOTH a figure noun and an on-screen locator being present in the
+ * same fragment (never on the prefix alone) so ordinary prose openers —
+ * "On the other hand, …", "In the meantime, …" — are structurally incapable
+ * of matching: neither names a figure, so `namesAFigure` fails regardless of
+ * how the sentence begins.
+ */
+const PREPOSED_LOCATOR_RE = /^(?:in|on|from|within)\s+(?:the|this|that)\s+/i
+
+/** Does this fragment claim, all by itself, that a specific figure is present? */
+function isPreposedLocatorClaim(fragment: string): boolean {
+  return PREPOSED_LOCATOR_RE.test(fragment.trim()) && namesAFigure(fragment) && ON_SCREEN.test(fragment)
+}
+
+/**
  * "Look at the diagram" — no locator, and still a false claim.
  *
  * Captured on math.found.problem-solving-strategies, 2026-08-22: "When you
@@ -97,6 +143,58 @@ const POINTING_VERB = /\b(look at|looking at|see|notice|observe|study|examine|co
  */
 const DIRECT_POINTER_RE =
   /\b(?:look at|looking at|see|notice|observe|study|examine|consider)\s+(?:the|this|that)\s+(?:diagram|figure|graph|picture|image|chart|number ?line|animation|illustration|visual|simulation|plot|sketch)\b/i
+
+/**
+ * A single boundary character — em/en dash, a whitespace-bounded hyphen, or a
+ * comma — with any trailing whitespace. Matched globally so the caller can
+ * walk EVERY candidate boundary in the sentence, not just the first.
+ */
+const CLAUSE_BOUNDARY_RE = /(?:[—–]|(?<=\s)-(?=\s)|,)\s*/g
+
+/**
+ * The leading pointer clause, if the sentence opens with one — tried against
+ * EVERY boundary in the sentence (up to a length cap), in order, and returns
+ * the first head that actually qualifies as a pointer clause.
+ *
+ * NOT "the text up to the first boundary character". A sentence often opens
+ * with something else entirely before the pointer clause — most commonly a
+ * vocative ("claudeTest, look at the highlighted points on the number line —
+ * why can't…?") — and taking only the first boundary would stop at
+ * "claudeTest," (which names no figure) and give up, leaving the REAL
+ * pointer clause after the em-dash untouched. Trying every boundary in turn
+ * is what makes the comma addition above safe to combine with an existing
+ * vocative-prefixed sentence.
+ *
+ * A COMMA IS A WEAKER SIGNAL THAN A DASH. A dash is rare enough in ordinary
+ * prose that POINTING_VERB + a figure noun before one is already good
+ * evidence of a real pointer clause (the original, permissive shape-2 rule).
+ * A comma is not — "So, drawing a diagram lets you see the structure of a
+ * problem at a glance, revealing patterns…" has "see" and "diagram" both
+ * inside the span up to its second comma, and is ordinary teaching prose
+ * about diagrams as a strategy, not a claim that one is on screen. Measured
+ * as a real regression while building this: adding comma as a boundary type
+ * made that exact sentence (from the existing PUZZLE_TURN fixture) match.
+ * So a comma-terminated head additionally requires ON_SCREEN evidence,
+ * exactly as shape 1's whole-sentence test already does; a dash-terminated
+ * head keeps the original, more permissive bar.
+ */
+function findPointerClauseHead(s: string): string | null {
+  CLAUSE_BOUNDARY_RE.lastIndex = 0
+  let m: RegExpExecArray | null
+  while ((m = CLAUSE_BOUNDARY_RE.exec(s))) {
+    const end = m.index + m[0].length
+    if (end > 140) break
+    if (end >= s.length) continue // nothing follows — not a leading clause
+    const head = s.slice(0, end)
+    const boundaryIsComma = m[0].trim() === ','
+    const pointingVerbQualifies =
+      POINTING_VERB.test(head) && namesAFigure(head) && (!boundaryIsComma || ON_SCREEN.test(head))
+    if (pointingVerbQualifies || isPreposedLocatorClaim(head)) {
+      return head
+    }
+  }
+  return null
+}
 
 export interface FigureReferenceResult {
   text: string
@@ -134,29 +232,43 @@ export function stripUnbackedFigureReferences(
 
         // Shape 2 first: a pointing clause in FRONT of real content. Handled
         // before shape 1 so a sentence carrying both is trimmed, not deleted.
-        const clause = s.match(/^(.{0,140}?[—–-]\s*)(?=\S)/)
-        if (clause) {
-          const head = clause[1]
-          if (POINTING_VERB.test(head) && namesAFigure(head)) {
-            const rest = s.slice(head.length).trim()
-            // A REPAIR MUST NOT LEAVE A SENTENCE STARTING MID-THOUGHT.
-            //
-            // Measured on the real turn "When we look at the numbers highlighted
-            // on the number line on your screen—2, 3, 5, 7, 11, and 13—each of
-            // these numbers can only be divided evenly by 1 and by itself": the
-            // pointing head carried the sentence's subject, so cutting it left
-            // "2, 3, 5, 7, 11, and 13—each of these numbers…", which reads as a
-            // fragment. When the remainder does not begin like a sentence, the
-            // whole sentence goes instead — a clean turn beats a mangled one,
-            // and the surrounding paragraphs carry the teaching.
-            if (rest.length > 0 && /^[A-Za-z]/.test(rest)) {
-              removed.push(head.trim())
-              return rest.charAt(0).toUpperCase() + rest.slice(1)
-            }
-            if (rest.length > 0 && !s.includes('?')) {
-              removed.push(s)
-              return ''
-            }
+        //
+        // THE BOUNDARY, FIXED. The dash class used to be bare `[—–-]` — any
+        // hyphen counted, including one with no whitespace on either side.
+        // That is indistinguishable from a hyphen INSIDE A WORD, and it broke
+        // sentences it should only have trimmed: "…and these are action-
+        // reaction pairs." has a hyphen at "action-reaction", which the old
+        // regex happily took as ITS clause boundary — miles past the real
+        // pointer clause — mangling the output down to a fragment like
+        // "Reaction pairs." with all the real content gone. A bare hyphen
+        // now counts only with whitespace on both sides (`5 - 1`, a genuine
+        // stylistic dash), never mid-word. A comma is also now a valid
+        // boundary, since "In the figure shown above, you can see…" is at
+        // least as common a construction from a model as the em-dash form —
+        // and every boundary in the sentence is tried in turn (see
+        // findPointerClauseHead), not just the first, so a leading vocative
+        // before the real clause ("claudeTest, look at the diagram — …")
+        // still finds the em-dash after failing on the comma.
+        const head = findPointerClauseHead(s)
+        if (head !== null) {
+          const rest = s.slice(head.length).trim()
+          // A REPAIR MUST NOT LEAVE A SENTENCE STARTING MID-THOUGHT.
+          //
+          // Measured on the real turn "When we look at the numbers highlighted
+          // on the number line on your screen—2, 3, 5, 7, 11, and 13—each of
+          // these numbers can only be divided evenly by 1 and by itself": the
+          // pointing head carried the sentence's subject, so cutting it left
+          // "2, 3, 5, 7, 11, and 13—each of these numbers…", which reads as a
+          // fragment. When the remainder does not begin like a sentence, the
+          // whole sentence goes instead — a clean turn beats a mangled one,
+          // and the surrounding paragraphs carry the teaching.
+          if (rest.length > 0 && /^[A-Za-z]/.test(rest)) {
+            removed.push(head.trim())
+            return rest.charAt(0).toUpperCase() + rest.slice(1)
+          }
+          if (rest.length > 0 && !s.includes('?')) {
+            removed.push(s)
+            return ''
           }
         }
 
@@ -172,6 +284,7 @@ export function stripUnbackedFigureReferences(
         const isPointer =
           !s.includes('?') &&
           ((POINTING_VERB.test(s) && namesAFigure(s) && ON_SCREEN.test(s)) ||
+            isPreposedLocatorClaim(s) ||
             DIRECT_POINTER_RE.test(s))
         if (isPointer) {
           removed.push(s)
