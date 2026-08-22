@@ -283,3 +283,36 @@ const QUESTION_ANNOUNCEMENT_RE = /\bi\s*(?:'ve(?:\s+got)?|\s+have|\s+got)\s+(?:a
 export function isQuestionAnnouncement(message: string): boolean {
   return QUESTION_ANNOUNCEMENT_RE.test((message ?? '').trim())
 }
+
+/**
+ * P1 fix, second root cause ("got it" after completion, live-reproduced
+ * 2026-08-22) — extracted to a pure, testable predicate rather than left as
+ * an inline boolean at the route.ts call site.
+ *
+ * route.ts's filler-turn repair (Bug 4: "a turn with no explanation, no
+ * question, and no concrete content is a wasted turn") replaces a detected-
+ * filler response with a canned probing reflection question. It already
+ * excluded a completed lesson's turn carrying genuine NEW intent
+ * (`respectsNewIntent`) — but not an ORDINARY acknowledgement on a completed
+ * lesson, which is the far more common case. The completion-lock prompt
+ * (`buildLessonCompleteBlock`) correctly tells the model to answer such a
+ * turn with a brief, non-probing confirmation — and a brief warm
+ * confirmation is exactly the shape the filler detector is built to catch
+ * ("we can continue", "whenever you're ready"). So a model that OBEYED the
+ * completion lock had its compliant reply overwritten with a brand-new
+ * question, on a lesson already marked finished — live-reproduced
+ * verbatim: "got it" -> "Let me ask you something concrete about SI Units
+ * and Measurement: what's one thing you notice or find surprising about
+ * what we just covered?", served with zero LLM calls (a pure text
+ * substitution, so no prompt instruction could have prevented it).
+ *
+ * A completed lesson has nothing left to probe for, so the repair must not
+ * fire there at all, new intent or not.
+ */
+export function shouldRepairFillerTurn(input: {
+  lessonCompleted: boolean
+  respectsNewIntent: boolean
+}): boolean {
+  if (input.lessonCompleted) return false
+  return !input.respectsNewIntent
+}

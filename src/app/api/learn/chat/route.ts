@@ -4353,7 +4353,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // the override addendum was injected and the model was told to
       // actually answer this specific request — never replace that answer
       // with the generic template.
-      if (!assembled && !mcqHoisted && !lessonCompletionRespectsNewIntentHoisted) {
+      //
+      // SECOND ROOT-CAUSE FIX ("got it" after completion, live-reproduced
+      // 2026-08-22): see `shouldRepairFillerTurn`'s doc comment
+      // (lessonCompletion.ts) for the full trace — extracted there as a
+      // pure, testable predicate rather than left as an inline boolean.
+      if (!assembled && !mcqHoisted && (await import('@/lib/teaching/lessonCompletion')).shouldRepairFillerTurn({
+        lessonCompleted: lessonCompletedHoisted,
+        respectsNewIntent: lessonCompletionRespectsNewIntentHoisted,
+      })) {
         try {
           const { detectFillerTurn } = await import('@/lib/teaching/conversationState')
           if (detectFillerTurn(cleanText)) {

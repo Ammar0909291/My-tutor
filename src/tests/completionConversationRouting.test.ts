@@ -183,13 +183,22 @@ describe('route.ts wiring — new-intent signal reaches every consumer', () => {
     expect(ROUTE.slice(cueAt, cueAt + 200)).toContain('newIntentAfterCompletion: lessonCompletionRespectsNewIntentHoisted')
   })
 
-  it('the filler-detector swap (the repeated-reflection-question defect) is gated on the new-intent signal', () => {
+  it('the filler-detector swap (the repeated-reflection-question defect) is gated on shouldRepairFillerTurn, which reads both the new-intent signal AND lessonCompleted', () => {
     // This is the exact site that produced the byte-identical reflection
-    // text for thermodynamics / radiation / periodic-table messages.
+    // text for thermodynamics / radiation / periodic-table messages, and
+    // (a second root cause, live-reproduced 2026-08-22) for a plain "got
+    // it" acknowledgement after genuine completion. The inline boolean was
+    // replaced by `shouldRepairFillerTurn` (lessonCompletion.ts) — a pure,
+    // testable predicate that suppresses the swap whenever the lesson is
+    // completed, new intent or not (see fillerTurnCompletionLock.test.ts
+    // for its own direct coverage); this test pins that the CALL SITE
+    // actually wires both flags into it, not just one.
     const swapAt = ROUTE.indexOf("what's one thing you notice or find surprising about what we just covered?")
     expect(swapAt).toBeGreaterThan(-1)
-    const guardWindow = ROUTE.slice(Math.max(0, swapAt - 800), swapAt)
-    expect(guardWindow).toContain('!lessonCompletionRespectsNewIntentHoisted')
+    const guardWindow = ROUTE.slice(Math.max(0, swapAt - 1600), swapAt)
+    expect(guardWindow).toContain('shouldRepairFillerTurn')
+    expect(guardWindow).toContain('lessonCompleted: lessonCompletedHoisted')
+    expect(guardWindow).toContain('respectsNewIntent: lessonCompletionRespectsNewIntentHoisted')
   })
 
   it('the deterministic SERVE_LESSON_COMPLETE close still exists and is still driven by the decision engine, not deleted', () => {
