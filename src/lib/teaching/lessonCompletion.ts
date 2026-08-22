@@ -169,14 +169,42 @@ export function buildLessonCloseText(
   // Localized lesson name; never an internal curriculum id.
   const title = safeConceptTitle(opts?.conceptId, lessonTitle, lang)
 
+  // NEVER CLAIM SUCCESS WHEN NOTHING WAS MASTERED.
+  //
+  // The opener used to be unconditional: "finished — nice work" regardless of
+  // whether anything in `summary.mastered` was non-empty. Reproduced live: a
+  // learner who explicitly said "I just guessed" closed a lesson with
+  // checkCorrect 0 / practiceCorrect 0 / mastery.verified false, and was told
+  // "That's Mathematical Thinking finished — nice work. Worth another look
+  // later: Mathematical Thinking." — a celebratory close immediately
+  // contradicted by its own next sentence, for a concept the runtime's own
+  // topicProgress recorded as REVISION, masteryPct 0.
+  //
+  // Scoped to `needsReview.length > 0` specifically, not to `mastered.length
+  // === 0` alone: `shouldFinalizeLesson`/`areAllRequiredConceptsClosed` only
+  // finalize once every required concept appears in `closedConceptIds`
+  // (mastered ∪ needsReview), so a real completion with mastered=[] always
+  // carries something in needsReview — a summary with BOTH empty is not a
+  // reachable production state and is left on the existing wording rather
+  // than guessed at.
+  const nothingMastered = summary.mastered.length === 0 && summary.needsReview.length > 0
+
   const parts: string[] = [
     opts?.alreadyFinished
-      ? title
-        ? t(lang, 'lesson_close_already').replace('{title}', title)
-        : t(lang, 'lesson_close_already_untitled')
-      : title
-        ? t(lang, 'lesson_close_done').replace('{title}', title)
-        : t(lang, 'lesson_close_done_untitled'),
+      ? nothingMastered
+        ? title
+          ? t(lang, 'lesson_close_already_review').replace('{title}', title)
+          : t(lang, 'lesson_close_already_review_untitled')
+        : title
+          ? t(lang, 'lesson_close_already').replace('{title}', title)
+          : t(lang, 'lesson_close_already_untitled')
+      : nothingMastered
+        ? title
+          ? t(lang, 'lesson_close_needs_review').replace('{title}', title)
+          : t(lang, 'lesson_close_needs_review_untitled')
+        : title
+          ? t(lang, 'lesson_close_done').replace('{title}', title)
+          : t(lang, 'lesson_close_done_untitled'),
   ]
   if (summary.mastered.length > 0) {
     parts.push(t(lang, 'lesson_close_mastered').replace('{items}', conceptNames(summary.mastered, lang)))
