@@ -96,9 +96,26 @@ const CONFIRMATION_TAIL =
  * mass.", "Your turn: balance this equation."). `try` is narrowed to
  * `try this/it/one/that`, so ordinary teaching prose ("Try to remember that…")
  * is not mistaken for a set task.
+ *
+ * ── THE COVERAGE GAP THIS CLOSES (math.arith.counting, 2026-08-21) ─────────
+ * "When you finish, tell me how many objects you counted." carries no "?" and
+ * "tell" was absent from the verb list — a genuine report-back solicitation
+ * (the same speech-act class as the already-covered "state"/"name"/
+ * "identify"/"describe") slipped through undetected. Two additions, both at
+ * the shared primitive rather than special-cased to this one concept:
+ * (1) "tell" joins the line-start verb list, so "Tell me your answer." is
+ * caught exactly like "State your answer." always was; (2) a second,
+ * narrowly-scoped alternative catches "tell me/us" immediately after a
+ * clause boundary (a comma) even when the line does not itself start with
+ * the verb — the real-world shape ("When you finish, tell me…", "Once
+ * you're done, tell me…") a bare line-start match cannot reach. Scoped to
+ * "tell me/us" specifically (not "tell" alone) so ordinary narrative — "The
+ * graph will tell us the trend once we plot it" mid-sentence, with no comma
+ * immediately before "tell" — is not swept up; nothing else in the verb list
+ * gained this looser form.
  */
 const TASK_IMPERATIVE =
-  /^\s*(?:your turn[\s:,-]+|now[\s,]+|next[\s,]+)?(?:(calculate|compute|solve|find|work out|determine|name|state|identify|explain|describe|predict|compare|estimate|convert|balance|write|choose|select|pick|list|give)\b|try\s+(?:this|it|one|that)\b)/i
+  /^\s*(?:your turn[\s:,-]+|now[\s,]+|next[\s,]+)?(?:(?:calculate|compute|solve|find|work out|determine|name|state|identify|explain|describe|predict|compare|estimate|convert|balance|write|choose|select|pick|list|give|tell)\b|try\s+(?:this|it|one|that)\b)|,\s*tell\s+(?:me|us)\b/i
 
 /**
  * A sentence that answers the sentence before it, matched at the HEAD.
