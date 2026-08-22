@@ -152,7 +152,19 @@ const RETURN_REQUEST_RE =
  * An explicit correction is exactly the opposite of incidental.
  */
 const EXPLICIT_CORRECTION_RE =
-  /\bi\s+meant\b[^.!?]{0,60}\bnot\b|\bnot\b[^.!?]{0,60}\bi\s+meant\b|\b(?:that'?s|this\s+is)\s+not\s+what\s+i\s+(?:meant|asked|said)\b|\bdidn'?t\s+mean\s+(?:that|this|it)\b/i
+  /\bi\s+meant\b[^.!?]{0,60}\bnot\b|\bnot\b[^.!?]{0,60}\bi\s+meant\b|\b(?:that'?s|this\s+is)\s+not\s+what\s+i\s+(?:meant|asked|said)\b|\bdidn'?t\s+mean\b(?!\s+to\b)/i
+// ── THE GAP THIS CLOSES (P1, 2026-08-22) ────────────────────────────────────
+// "I didn't mean cesium; I meant viscosity." was previously invisible: the
+// old 4th alternative required "didn't mean" to be followed by exactly
+// "that"/"this"/"it" ("I didn't mean that") and could not see a NAMED topic
+// ("I didn't mean cesium"). Widened to accept any object after "didn't
+// mean" — except an infinitive ("didn't mean TO ..."), which is a different
+// speech act (apologising for a tone/intent, e.g. "I didn't mean to be
+// rude") and must NOT be read as a topic correction; the negative lookahead
+// keeps that shape excluded exactly as the negative-control requirement
+// asks ("I meant to ask, is cesium radioactive?" must not close the
+// excursion merely because "I meant" appears — unaffected here since it
+// never contains "didn't mean" at all, but the same principle applies).
 
 /**
  * Did the learner actually ASK to be taught something? Only a true here may

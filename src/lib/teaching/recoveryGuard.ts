@@ -217,6 +217,24 @@ const MILD_PATTERNS: Array<[FailureStateKey, RegExp]> = [
   ['dont_understand', /\b(i\s+)?(still\s+)?(don'?t|do\s+not)\s+get\s+(it|that|this)\b/i],
   ['forgot',          /\bi\s+(forgot|forget)\b|\bi\s+can'?t\s+remember\b/i],
   ['guessing',        /\bi(?:'?m|\s+was)\s+(just\s+)?guessing\b|\bthat\s+was\s+a\s+guess\b/i],
+  // P1 (2026-08-22): past-tense "I guessed" / "I just guessed" — the
+  // existing pattern above only matched the progressive ("I'm guessing" /
+  // "I was guessing"), missing the equally common simple-past phrasing.
+  // Same structural family, just the other tense of the same verb. Excludes
+  // "guessed correctly/right" so a learner reporting a lucky-but-CORRECT
+  // guess is not routed into the recovery script.
+  ['guessing',        /\bi\s+(just\s+)?guessed\b(?!\s+(?:it\s+)?(?:correctly|right))/i],
+  // P1 (2026-08-22): "I wasn't sure" — a direct admission of low-confidence
+  // response, the same disclosure the 'guessing' script already rewards.
+  ['guessing',        /\bi\s+wasn'?t\s+sure\b|\bi\s+was\s+not\s+sure\b/i],
+  // P1 (2026-08-22): "<subject> is/are confusing me" — a structural family
+  // ("the direction is confusing me", "this notation is confusing me",
+  // "these steps are confusing me") rather than a subject-specific phrase
+  // list. Anchored on the verb phrase "confusing me" itself, which is what
+  // is invariant across the family; the existing "I'm confused" /
+  // "this is confusing" patterns above cover the two other common shapes
+  // but neither matches a NAMED subject as the confusing thing.
+  ['confused',        /\b(?:is|are|was|were)\s+(?:really\s+|so\s+|totally\s+)?confusing\s+me\b/i],
   // "huh" / "huh?" — bare confusion, not a genuine question
   ['confused',        /^huh\s*[?!.…]*$/i],
   // "my mind is blank" / "mind blank" / "I'm blank" — unable to produce

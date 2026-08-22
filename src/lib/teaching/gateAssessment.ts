@@ -315,6 +315,37 @@ export interface UngradedGateQuestionInput {
    * test's scenario) is left alone exactly as before.
    */
   attachedMcqQuestion?: string
+  /**
+   * True when this lesson's attempt is already `COMPLETED` (the same
+   * `lessonCompletedHoisted` flag route.ts reads from the persisted
+   * LessonAttempt at the top of the turn — not a second source of truth).
+   *
+   * ── THE DEFECT THIS CLOSES ("got it" after completion, 2026-08-22) ────────
+   * This function decides whether a mastery gate is active from `phase` /
+   * `gateSoughtThisTurn` alone. Mastery is reached, and a lesson is
+   * finalised, WHILE `phase` is CHECK or PRACTICE — and nothing ever moves
+   * the persisted `conversationState.phase` off that value afterwards, since
+   * no further concept is being taught. So on EVERY turn after completion,
+   * `isMasteryGatePhase(phase)` kept reading true, and this function kept
+   * treating the mastery gate as active on a lesson that had already closed.
+   *
+   * Measured live: after genuine completion, "got it" (a bare
+   * acknowledgement, correctly told by `buildLessonCompleteBlock()` to
+   * receive only a brief confirmation and STOP) reached the model, which —
+   * despite the instruction — wrote a trailing question. Because the gate
+   * was (wrongly) still "active", that stray question was withheld and
+   * replaced with `WITHHELD_QUESTION_CONTINUATION`, "Let's stay with this
+   * idea for a moment." — a sentence that flatly contradicts the completion
+   * lock and reads as the lesson still being taught.
+   *
+   * A completed lesson has no mastery gate left to guard, so this input,
+   * when true, short-circuits `gateActive` to false and the text is
+   * returned untouched — the same "nothing to withhold" behaviour as any
+   * other non-gate turn. Optional and defaulting to false/undefined, so
+   * every existing caller (which has never had a completed lesson in scope)
+   * keeps its exact prior behaviour.
+   */
+  lessonCompleted?: boolean
 }
 
 export interface UngradedGateQuestionResult {
@@ -340,9 +371,10 @@ export function withholdUngradedGateQuestion(
 ): UngradedGateQuestionResult {
   try {
     const gateActive =
-      isMasteryGatePhase(input.phase) ||
+      !input.lessonCompleted &&
+      (isMasteryGatePhase(input.phase) ||
       input.gateSoughtThisTurn === true ||
-      (input.phase === 'GUIDE' && isMasteryGatePhase(input.phaseAfter))
+      (input.phase === 'GUIDE' && isMasteryGatePhase(input.phaseAfter)))
     if (!gateActive) return { text: input.text, withheld: false, reason: 'ok' }
 
     const text = typeof input.text === 'string' ? input.text : ''

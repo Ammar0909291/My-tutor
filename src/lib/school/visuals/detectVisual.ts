@@ -236,11 +236,35 @@ export function detectVisual(opts: DetectVisualOptions): VisualType | null {
 /**
  * Parse a VISUAL:<type> tag from tutor response text.
  * Returns { visual, cleanText } — visual is null if no tag found.
+ *
+ * ── THE DEFECT THIS CLOSES (P1, 2026-08-22) ─────────────────────────────────
+ * The tag is single-value by contract (`responseVisual: string | null` at the
+ * one call site, route.ts) but the old parser only matched ONE bare word
+ * after "VISUAL:" (`\w+`, which a comma cannot join). On
+ * "VISUAL: force_diagram, circuit_diagram" it correctly picked up
+ * `force_diagram` as the value, but its strip regex used the exact same
+ * `\w+` match — so only "VISUAL: force_diagram" was removed, and
+ * ", circuit_diagram" (an unvalidated, un-registered raw remainder) was left
+ * behind, verbatim, in the text a learner reads.
+ *
+ * Fixed by matching and consuming the WHOLE tag line — every comma-separated
+ * candidate up to the newline — so nothing from it can survive stripping,
+ * valid or not. `visual` is the first candidate that validates against the
+ * registry; every other candidate on the line, valid or invalid, is removed
+ * along with it. A line where NO candidate validates is still removed in
+ * full: a `VISUAL:` token immediately followed by identifier-shaped text is
+ * definitionally tag-shaped, never natural prose (unlike a bare mention of
+ * the word "visual", which this regex cannot match at all, since it requires
+ * the literal uppercase "VISUAL:" with a colon) — so a hallucinated or
+ * misspelled type must be removed exactly like a valid one, never displayed
+ * raw. This does not change the shape a caller can act on: `visual` is
+ * still `null` on a request nothing here validated, same as before.
  */
 export function parseVisualTag(text: string): { visual: VisualType | null; cleanText: string } {
-  const match = text.match(/\bVISUAL:\s*(\w+)\b/i)
-  if (!match) return { visual: null, cleanText: text }
-  const candidate = match[1].toLowerCase() as VisualType
+  // Everything from "VISUAL:" to the end of its line — captures a
+  // comma-separated list whole rather than only its first token.
+  const lineMatch = text.match(/\bVISUAL:\s*([^\n]*)/i)
+  if (!lineMatch) return { visual: null, cleanText: text }
   const VALID: Set<string> = new Set([
     'number_line', 'fraction_bar', 'percentage_grid', 'coordinate_plane',
     'geometry_shape', 'food_chain', 'water_cycle', 'solar_system',
@@ -265,11 +289,23 @@ export function parseVisualTag(text: string): { visual: VisualType | null; clean
     'three_statistical_distribution', 'three_data_visualization', 'three_correlation',
     'three_clustering', 'three_ml_pipeline',
   ])
-  const visual = VALID.has(candidate) ? candidate as VisualType : null
-  // Only strip the matched text when it's a recognized tag. An unrecognized
-  // candidate (typo, or "VISUAL:" appearing incidentally in real prose) is not
-  // a tag at all and must be left in the displayed text, not silently eaten.
-  const cleanText = visual ? text.replace(/\bVISUAL:\s*\w+\b\n?/i, '').trim() : text
+  // Comma-separated candidates, parsed safely: split, trim, lowercase, drop
+  // anything empty (a trailing comma or double comma must not produce a
+  // blank candidate that then fails validation in a confusing way).
+  const candidates = lineMatch[1]
+    .split(',')
+    .map((c) => c.trim().toLowerCase())
+    .filter((c) => c.length > 0)
+  const visual = (candidates.find((c) => VALID.has(c)) ?? null) as VisualType | null
+  // Nothing on the "VISUAL:" line — malformed, no candidate at all — is left
+  // untouched: there is nothing tag-shaped to strip, and a bare "VISUAL:"
+  // with no colon-adjacent token is not this tag.
+  if (candidates.length === 0) return { visual: null, cleanText: text }
+  // The whole line is removed once it is confirmed to be the tag shape
+  // (candidates.length > 0), regardless of whether any candidate validated:
+  // every candidate on the line — valid or not — is consumed together, so a
+  // mixed or fully-invalid list can never leave a raw remainder behind.
+  const cleanText = text.replace(/\bVISUAL:\s*[^\n]*\n?/i, '').trim()
   return { visual, cleanText }
 }
 
