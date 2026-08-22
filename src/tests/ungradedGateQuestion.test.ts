@@ -408,6 +408,248 @@ This has major implications: it means absolute zero can never actually be reache
   })
 })
 
+describe('withholdUngradedGateQuestion — detection scope === removal scope (math.arith.column-addition, math.nt.extended-euclidean-algorithm)', () => {
+  // Confirmed live, 2026-08-21/22: `poses` scans the WHOLE text, but the
+  // removal function this replaced (`dropTrailingQuestion`) only ever
+  // examined the TRAILING paragraph — so an answerable paragraph anywhere
+  // else survived completely unchanged while the function still reported
+  // `withheld: true`. Fixed by `dropAnswerableContent`, which removes every
+  // paragraph that is independently answerable, wherever it sits.
+
+  // Verbatim (whitespace-preserved) production text, chem/math batch 2
+  // certification sweep, math.arith.column-addition.
+  const COLUMN_ADDITION = `**Demonstration: Why we add from right to left**
+
+Let's add 58 and 74 the standard way.
+
+\`\`\`
+ 58
++74
+────
+\`\`\`
+
+1. **Ones column** (rightmost):
+   8 + 4 = 12.
+   Write the 2 in the ones place and carry the 1 to the tens column.
+
+2. **Tens column** (next to the left), including the carry:
+   5 + 7 + 1 = 13.
+   Write the 3 in the tens place and carry the 1 to a new hundreds column.
+
+3. **Hundreds column** (no original digits there):
+   1.
+
+Result: **132**.
+
+If we had started with the tens column first (5 + 7 = 12) and written 2 in the tens place, we would have missed the carry from the ones column, ending with 112 instead of 132. That shows why we always start with the rightmost (ones) column and work leftward.
+
+---`
+
+  // Verbatim production text, math.nt.extended-euclidean-algorithm.
+  const EXTENDED_EUCLIDEAN =
+    "Let's try another example. Use the extended Euclidean algorithm on the pair 35 and 12. \n"
+    + 'Find integers x and y such that \n\n'
+    + '35x + 12y = gcd(35,12).\n\n'
+    + '(You can also think of it as finding the modular inverse of 35 modulo 12 once you know the gcd.)'
+
+  it('1/2 — an answerable imperative in a NON-trailing paragraph, with prose after it, is actually removed', () => {
+    const r = withholdUngradedGateQuestion({ text: COLUMN_ADDITION, phase: 'CHECK', hasStructuredMcq: false })
+    expect(r.withheld).toBe(true)
+    expect(r.reason).toBe('no-gradeable-probe')
+    expect(r.text).not.toMatch(/write the 3 in the tens place/i)
+    // The rest of the demonstration survives — this is a removal-scope fix,
+    // not a delete-the-whole-turn fix.
+    expect(r.text).toMatch(/ones column/i)
+    expect(r.text).toMatch(/hundreds column/i)
+    expect(r.text).toMatch(/Result.*132/i)
+    expect(r.text).toMatch(/work leftward/i)
+  })
+
+  it('the standalone practice-problem paragraph is removed even though it precedes an aside', () => {
+    const r = withholdUngradedGateQuestion({ text: EXTENDED_EUCLIDEAN, phase: 'PRACTICE', hasStructuredMcq: false })
+    expect(r.withheld).toBe(true)
+    expect(r.reason).toBe('no-gradeable-probe')
+    expect(r.text).not.toMatch(/find integers x and y/i)
+    expect(r.text).toMatch(/modular inverse/i)
+  })
+
+  it('3 — an answerable question in the FINAL paragraph is still removed (pre-existing behaviour preserved)', () => {
+    const text = 'A ratio compares two quantities by division.\n\nWhat is the ratio of 4 to 7?'
+    const r = withholdUngradedGateQuestion({ text, phase: 'CHECK', hasStructuredMcq: false })
+    expect(r.withheld).toBe(true)
+    expect(r.text).not.toMatch(/ratio of 4 to 7/i)
+    expect(r.text).toMatch(/compares two quantities/i)
+  })
+
+  it('4 — multiple answerable paragraphs are ALL removed, not just the first or last found', () => {
+    const text =
+      'Calculate the sum of 3 and 4.\n\n'
+      + 'This is how addition works in general.\n\n'
+      + 'Now find the sum of 5 and 6.'
+    const r = withholdUngradedGateQuestion({ text, phase: 'CHECK', hasStructuredMcq: false })
+    expect(r.withheld).toBe(true)
+    expect(r.text).not.toMatch(/calculate the sum of 3 and 4/i)
+    expect(r.text).not.toMatch(/find the sum of 5 and 6/i)
+    expect(r.text).toMatch(/how addition works/i)
+  })
+
+  it('5 — an answerable paragraph followed by SEVERAL teaching paragraphs is still removed', () => {
+    const text =
+      'Solve for x: 2x = 10.\n\n'
+      + 'This kind of equation appears throughout algebra.\n\n'
+      + 'It is called a linear equation because x appears to the first power.\n\n'
+      + 'Linear equations always have at most one solution.'
+    const r = withholdUngradedGateQuestion({ text, phase: 'PRACTICE', hasStructuredMcq: false })
+    expect(r.withheld).toBe(true)
+    expect(r.text).not.toMatch(/solve for x/i)
+    expect(r.text).toMatch(/throughout algebra/i)
+    expect(r.text).toMatch(/linear equation because/i)
+    expect(r.text).toMatch(/at most one solution/i)
+  })
+
+  it('6 — legitimate instructional narrative containing "write"/"find"/"calculate" mid-sentence is NOT touched (negative control)', () => {
+    const text =
+      'We use estimation to check our arithmetic.\n\n'
+      + 'Understanding place value helps us find where each digit belongs, '
+      + 'and lets us calculate sums quickly in our heads.'
+    const r = withholdUngradedGateQuestion({ text, phase: 'CHECK', hasStructuredMcq: false })
+    expect(r.withheld).toBe(false)
+    expect(r.text).toBe(text)
+  })
+
+  it('7 — a valid structured MCQ turn (hasStructuredMcq, no stray text) is left completely alone', () => {
+    const r = withholdUngradedGateQuestion({
+      text: 'Here is your next question.',
+      phase: 'CHECK',
+      hasStructuredMcq: true,
+      attachedMcqQuestion: 'What is 4 + 3?',
+    })
+    expect(r.withheld).toBe(false)
+    expect(r.text).toBe('Here is your next question.')
+  })
+
+  it('8 — mixed MCQ + a stray ungradeable question: the MCQ survives, only the stray paragraph is removed', () => {
+    const text =
+      'Nice work so far.\n\n'
+      + 'Quick check: how would you describe what happens when ice melts?'
+    const r = withholdUngradedGateQuestion({
+      text,
+      phase: 'CHECK',
+      hasStructuredMcq: true,
+      attachedMcqQuestion: 'Which of the following best describes matter?',
+    })
+    expect(r.withheld).toBe(true)
+    expect(r.reason).toBe('stray-question-alongside-mcq')
+    expect(r.text).not.toMatch(/how would you describe/i)
+  })
+
+  it('9 — normal GUIDE prose (no fold, no gate sought) remains unchanged even when it contains an imperative line', () => {
+    const text = 'Write down the formula for area: A = length × width.'
+    const r = withholdUngradedGateQuestion({ text, phase: 'GUIDE', hasStructuredMcq: false })
+    // GUIDE with no gateSoughtThisTurn and no fold into CHECK/PRACTICE is
+    // simply not gate-active — untouched regardless of content, exactly as
+    // before this change.
+    expect(r.withheld).toBe(false)
+    expect(r.text).toBe(text)
+  })
+
+  it('10 — normal CHECK/PRACTICE prose with nothing answerable is unchanged', () => {
+    const check = 'Great progress. Let\'s keep going with the next idea.'
+    const practice = 'You are building real fluency with this concept.'
+    expect(withholdUngradedGateQuestion({ text: check, phase: 'CHECK', hasStructuredMcq: false }).withheld).toBe(false)
+    expect(withholdUngradedGateQuestion({ text: practice, phase: 'PRACTICE', hasStructuredMcq: false }).withheld).toBe(false)
+  })
+
+  it('11/12 — withheld and reason metadata are truthful: false only when the text is genuinely unchanged, true only when it genuinely changed', () => {
+    const unaffected = 'Estimation helps us check whether an answer is reasonable.'
+    const r1 = withholdUngradedGateQuestion({ text: unaffected, phase: 'CHECK', hasStructuredMcq: false })
+    expect(r1.withheld).toBe(false)
+    expect(r1.text).toBe(unaffected)
+
+    const r2 = withholdUngradedGateQuestion({ text: COLUMN_ADDITION, phase: 'CHECK', hasStructuredMcq: false })
+    expect(r2.withheld).toBe(true)
+    expect(r2.text).not.toBe(COLUMN_ADDITION)
+    expect(r2.reason).toBe('no-gradeable-probe')
+  })
+
+  it('13 — no raw answerable prompt remains in the returned text after withholding, for any of the fixed shapes', () => {
+    for (const [text, phase] of [
+      [COLUMN_ADDITION, 'CHECK'],
+      [EXTENDED_EUCLIDEAN, 'PRACTICE'],
+    ] as const) {
+      const r = withholdUngradedGateQuestion({ text, phase, hasStructuredMcq: false })
+      expect(r.withheld).toBe(true)
+      // The result itself must never be re-flagged as answerable — otherwise
+      // the repair produced a new ungradeable turn instead of removing one.
+      expect(askedAnswerableQuestion(r.text)).toBe(false)
+    }
+  })
+
+  it('14 — the earlier self-answered rhetorical-question regression still passes unchanged', () => {
+    const text = 'The Third Law states entropy approaches a minimum.\n\n'
+      + 'Why is that? Because at absolute zero a perfect crystal has only one microstate.'
+    const r = withholdUngradedGateQuestion({ text, phase: 'CHECK', hasStructuredMcq: false })
+    expect(r.withheld).toBe(false)
+    expect(r.text).toBe(text)
+  })
+
+  it('15 — the earlier GUIDE->CHECK gate regression (math.func.function-concept) still passes unchanged', () => {
+    const text =
+      'It looks like you chose **B) Codomain**.\n'
+      + 'Could you walk me through why you think the set of all possible ages is the codomain, rather than something else?'
+    const r = withholdUngradedGateQuestion({
+      text, phase: 'GUIDE', phaseAfter: 'CHECK', hasStructuredMcq: false, gateSoughtThisTurn: false,
+    })
+    expect(r.withheld).toBe(true)
+    expect(r.reason).toBe('no-gradeable-probe')
+  })
+
+  it('a generalized synthetic example proves this is not merely a fix for the two named concepts', () => {
+    const text =
+      'Determine the boiling point of water at sea level.\n\n'
+      + 'This matters because phase changes depend on pressure.\n\n'
+      + 'Explain why the boiling point drops at high altitude.\n\n'
+      + 'Altitude affects atmospheric pressure directly.'
+    const r = withholdUngradedGateQuestion({ text, phase: 'CHECK', hasStructuredMcq: false })
+    expect(r.withheld).toBe(true)
+    expect(r.text).not.toMatch(/determine the boiling point/i)
+    expect(r.text).not.toMatch(/explain why the boiling point drops/i)
+    expect(r.text).toMatch(/phase changes depend on pressure/i)
+    expect(r.text).toMatch(/altitude affects atmospheric pressure/i)
+  })
+})
+
+describe('withholdUngradedGateQuestion — GUIDE folding to CHECK via a bare acknowledgement (math.arith.counting-sequence)', () => {
+  // Confirmed live via production [ladder] log, 2026-08-22: `{ signalTag:
+  // false, correctness: null, ack: true, phaseBefore: 'GUIDE', phaseAfter:
+  // 'CHECK' }`, with NO [gate-assessment] log at all for that request. The
+  // 2026-08-21 GUIDE->CHECK fix (math.func.function-concept) only peeked at
+  // the `succeeded` (teachingSignal.correctness === true) fold path;
+  // conversationState.ts has a SECOND, independent path to the identical
+  // fold — a bare acknowledgement ("ready"/"got it") with NO signal at all,
+  // via `case 'GUIDE': if (next.demonstrated) next.phase = 'CHECK'` inside
+  // the `else if (evidence.acknowledgement)` branch. This is the route.ts
+  // call-site peek (`guideFoldsToGateThisTurn`), which is not itself unit-
+  // testable in isolation from the route — this suite instead pins the
+  // GUIDE+phaseAfter='CHECK' shape at the withholdUngradedGateQuestion level
+  // (the same interface contract the route now correctly feeds for this
+  // case), proving the guard-level fix behaves correctly for it.
+  it('withholds the exact production text when phaseAfter is CHECK, regardless of which transition path produced it', () => {
+    const text =
+      "Let's try a quick check. \n"
+      + 'Suppose you have **7** books on a shelf. \n'
+      + 'You start at the first book and give it the number 1, then the next book the number 2, and so on, always adding 1 each time. \n'
+      + 'What number will you write on the last book? \n\n'
+      + "Give me your answer when you're ready."
+    const r = withholdUngradedGateQuestion({
+      text, phase: 'GUIDE', phaseAfter: 'CHECK', hasStructuredMcq: false, gateSoughtThisTurn: false,
+    })
+    expect(r.withheld).toBe(true)
+    expect(r.reason).toBe('no-gradeable-probe')
+    expect(r.text).not.toMatch(/what number will you write/i)
+  })
+})
+
 describe('asset contract — the inventory that stops this happening at all', () => {
   it('the two concepts that failed in production are BELOW contract', () => {
     // math.found.logic and math.arith.ratios each hold exactly 2 closed-choice

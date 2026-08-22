@@ -396,7 +396,7 @@ export function withholdUngradedGateQuestion(
         return { text: input.text, withheld: false, reason: 'ok' }
       }
 
-      const kept = dropTrailingQuestion(text)
+      const kept = dropAnswerableContent(text)
       return {
         text: kept.length > 0 ? kept : WITHHELD_QUESTION_CONTINUATION,
         withheld: true,
@@ -411,7 +411,7 @@ export function withholdUngradedGateQuestion(
     const poses = askedAnswerableQuestion(text) || containsOptionList(text)
     if (!poses) return { text: input.text, withheld: false, reason: 'ok' }
 
-    const kept = dropTrailingQuestion(text)
+    const kept = dropAnswerableContent(text)
     return {
       text: kept.length > 0 ? kept : WITHHELD_QUESTION_CONTINUATION,
       withheld: true,
@@ -425,28 +425,48 @@ export function withholdUngradedGateQuestion(
 
 /**
  * Cut the turn back to its teaching: drop an enumerated option list and
- * everything after it, then drop trailing paragraphs that pose a question.
+ * everything after it, then drop every paragraph that itself poses an
+ * answerable question or task — wherever it sits, not only at the end.
  *
- * Paragraph-wise, not sentence-wise, for the reason `dropCompetingQuestion`
- * already records: cutting one sentence strands the question's setup ("A car
- * drives 60 km east in 1 hour.") in front of nothing, and half a question is
- * still a question. Loops because a model that wrote one question often wrote
- * its set-up as a separate paragraph, and is bounded so a pathological input
- * cannot spin.
+ * ── THE DEFECT THIS CLOSES (math.arith.column-addition,
+ * math.nt.extended-euclidean-algorithm — 2026-08-21/22 sweep) ───────────────
+ * `poses`, above, decides WHETHER to attempt a repair by scanning the WHOLE
+ * text. The removal function this replaced (`dropTrailingQuestion`) only ever
+ * examined the TRAILING paragraph, and gave up — returning the text
+ * completely unchanged — the instant that paragraph itself wasn't
+ * answerable, even when an earlier paragraph plainly was ("Find integers x
+ * and y such that 35x + 12y = gcd(35,12).\n\n(You can also think of it as
+ * finding the modular inverse...)" — the practice problem is paragraph 1, the
+ * harmless aside is the trailing paragraph, so nothing was ever cut). The
+ * function still reported `withheld: true` while the served text was, in
+ * fact, unchanged — the exact metadata-lies-about-the-text shape this file's
+ * `SELF_ANSWERED_HEAD` fix (2026-08-21) closed for ONE trigger; this closes
+ * the general case: detection scope must equal removal scope.
+ *
+ * Paragraph-wise, not sentence-wise, for the reason the prior version already
+ * recorded: cutting one sentence strands the question's setup ("A car drives
+ * 60 km east in 1 hour.") in front of nothing, and half a question is still a
+ * question — when a genuine question's setup and its ask share ONE paragraph,
+ * removing that whole paragraph is correct; a setup living in its OWN
+ * (non-answerable) paragraph is left alone, orphaned but harmless, exactly as
+ * this file's own worked design already intends (see the module docblock's
+ * CASE 1/2 examples). `askedAnswerableQuestion` is the single arbiter of
+ * "answerable," at both decision points — a paragraph survives here if and
+ * only if the whole-text scan above would not itself have flagged it, so
+ * ordinary explanatory prose that merely contains a word like "write" or
+ * "find" mid-narrative (never at the start of a line, so `TASK_IMPERATIVE`
+ * does not match it) is never touched.
  */
-function dropTrailingQuestion(text: string): string {
+function dropAnswerableContent(text: string): string {
   const lines = text.split('\n')
   const firstOptionLine = lines.findIndex((l) => /^\s*\(?[A-Da-d][).]\s+\S/.test(l))
-  let head = firstOptionLine >= 0 ? lines.slice(0, firstOptionLine).join('\n').trim() : text.trim()
+  const scoped = firstOptionLine >= 0 ? lines.slice(0, firstOptionLine).join('\n').trim() : text.trim()
+  if (scoped.length === 0) return scoped
 
-  for (let i = 0; i < 6; i++) {
-    if (head.length === 0) break
-    const paragraphs = head.split(/\n{2,}/)
-    const last = paragraphs[paragraphs.length - 1].trim()
-    if (last.length === 0) { paragraphs.pop(); head = paragraphs.join('\n\n').trim(); continue }
-    if (!askedAnswerableQuestion(last)) break
-    paragraphs.pop()
-    head = paragraphs.join('\n\n').trim()
-  }
-  return head
+  const kept = scoped
+    .split(/\n{2,}/)
+    .map((p) => p.trim())
+    .filter((p) => p.length > 0 && !askedAnswerableQuestion(p))
+
+  return kept.join('\n\n').trim()
 }

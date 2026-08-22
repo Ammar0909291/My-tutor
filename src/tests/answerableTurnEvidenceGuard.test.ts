@@ -291,3 +291,37 @@ describe('the embedded-wh-word trap, pinned', () => {
     expect(askedAnswerableQuestion('So, thinking about how moles work, what is the answer?')).toBe(true)
   })
 })
+
+describe('TASK_IMPERATIVE "tell" coverage (math.arith.counting, 2026-08-21)', () => {
+  // "tell me how many objects you counted." carried no "?" and "tell" was
+  // absent from the verb list, so a genuine report-back task slipped through
+  // undetected entirely — not a scope-mismatch (the trigger just never
+  // registered as answerable at all).
+
+  it('the exact production sentence is now recognized', () => {
+    expect(askedAnswerableQuestion(
+      'When you finish, tell me how many objects you counted.',
+    )).toBe(true)
+  })
+
+  it('natural variants: line-start and clause-boundary phrasing', () => {
+    expect(askedAnswerableQuestion('Tell me your answer.')).toBe(true)
+    expect(askedAnswerableQuestion('Tell me what you notice about the pattern.')).toBe(true)
+    expect(askedAnswerableQuestion('Once you are done, tell me how many you found.')).toBe(true)
+    expect(askedAnswerableQuestion('Tell us which option is correct.')).toBe(true)
+  })
+
+  it('negative control: "tell" mid-sentence with no clause boundary is narrative, not a task', () => {
+    expect(askedAnswerableQuestion(
+      'The graph will tell us the trend once we plot it.',
+    )).toBe(false)
+    expect(askedAnswerableQuestion(
+      'We can tell that the pattern continues forever.',
+    )).toBe(false)
+  })
+
+  it('negative control: other TASK_IMPERATIVE verbs are unaffected by the "tell" addition', () => {
+    expect(askedAnswerableQuestion('Calculate the total.')).toBe(true)
+    expect(askedAnswerableQuestion('We will calculate it together.')).toBe(false)
+  })
+})

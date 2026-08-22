@@ -5010,16 +5010,34 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // covers the move==='ask' case) is correctly false and the gate
             // never even looks for a probe, leaving an ungradeable question
             // with zero withhold protection. This is a PEEK at that specific
-            // transition, not a second fold: it reads the exact three inputs
-            // conversationState.ts's own `succeeded` / `case 'GUIDE'` branch
-            // reads (prior phase, the just-graded signal, recovery
-            // preemption), all already hoisted well above this point, and is
-            // inert whenever phaseBeforeTurn isn't GUIDE.
+            // transition, not a second fold: it reads the exact inputs
+            // conversationState.ts's own GUIDE-phase branches read (prior
+            // phase, demonstrated, recovery preemption, and EITHER of the two
+            // documented ways that phase folds GUIDE->CHECK), all already
+            // hoisted well above this point, and is inert whenever
+            // phaseBeforeTurn isn't GUIDE.
+            //
+            // math.arith.counting-sequence (2026-08-22, confirmed live via
+            // production [ladder] log: `{ signalTag: false, correctness:
+            // null, ack: true, phaseBefore: 'GUIDE', phaseAfter: 'CHECK' }`,
+            // with no [gate-assessment] log at all for that request):
+            // the ORIGINAL peek above only covered the `succeeded` branch
+            // (`teachingSignal?.correctness === true`) — conversationState.ts
+            // has a SECOND, independent path to the exact same fold, the
+            // `else if (evidence.acknowledgement)` branch's OWN `case 'GUIDE':
+            // if (next.demonstrated) next.phase = 'CHECK'` (a bare "ready"/
+            // "got it" reply with no signal at all still advances GUIDE to
+            // CHECK once `demonstrated` is true). The peek missed this second
+            // path entirely, reproducing the exact same unstripped-question
+            // defect the first fix closed, for a different trigger. Both
+            // branches are mutually exclusive in practice (the acknowledgement
+            // branch only runs when `succeeded` is false), so this is a
+            // straightforward union, not a new calculation.
             const guideFoldsToGateThisTurn =
               conversationStateHoisted?.phase === 'GUIDE' &&
               conversationStateHoisted?.demonstrated === true &&
-              teachingSignal?.correctness === true &&
-              recoveryKeyHoisted === null
+              recoveryKeyHoisted === null &&
+              (teachingSignal?.correctness === true || lowSignalAckHoisted === true)
             const ungraded = withholdUngradedGateQuestion({
               text: cleanText,
               // The phase the turn was BUILT at — the same pre-fold value the
