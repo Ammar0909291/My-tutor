@@ -47,11 +47,19 @@ const QUESTION_OPENERS = /^(what|why|how|when|where|which|who|can|could|would|do
  * that run BEFORE the CUE (e.g. route.ts's completion-block injection,
  * which happens earlier in the turn than `understandStudentTurn`) can use
  * the identical signal instead of inventing a second one.
+ *
+ * F2 (real-student session): "wait did i pass? i dont think i understand
+ * it" was not recognized as a question. The "?" sits mid-message, not at
+ * the end — a hesitant student asking one thing and then explaining why in
+ * the same breath is not a rarer shape than a question that ends cleanly,
+ * and the trailing-only anchor rejected it outright. A "?" ANYWHERE in the
+ * message is evidence something was asked; trailing prose after it doesn't
+ * retract that. Widened from `/\?\s*$/` to `/\?/` for exactly that reason.
  */
 export function isGenuineQuestion(message: string): boolean {
   const trimmed = (message ?? '').trim()
   if (!trimmed) return false
-  return /\?\s*$/.test(trimmed) || QUESTION_OPENERS.test(trimmed)
+  return /\?/.test(trimmed) || QUESTION_OPENERS.test(trimmed)
 }
 /** P1 Human Teacher Reasoning: hedging markers in the CURRENT message. */
 const HEDGE_RE = /\b(maybe|perhaps|possibly|probably|i think|i guess|not sure|i'?m guessing it)\b/i
@@ -66,7 +74,10 @@ export function readConversation(input: ConversationReaderInput): ConversationRe
   const lastAssistant = [...history].reverse().find((m) => m.role === 'assistant')
   const lastAssistantAskedQuestion = lastAssistant ? lastAssistant.content.includes('?') : false
   const trimmed = message.trim()
-  const isQuestion = /\?\s*$/.test(trimmed) || QUESTION_OPENERS.test(trimmed)
+  // Kept identical to isGenuineQuestion() above (same widened "? anywhere"
+  // test) so the two cannot silently drift into disagreeing about the same
+  // message within one turn.
+  const isQuestion = isGenuineQuestion(trimmed)
 
   // P1 Human Teacher Reasoning: "is it 4?" / "maybe 12?" after a pending
   // question is a hesitant ANSWER — the learner is offering a candidate
