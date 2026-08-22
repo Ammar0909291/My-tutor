@@ -284,3 +284,203 @@ describe('the opening turn', () => {
     expect(route).not.toMatch(/detectedSceneSpec\s*=/)
   })
 })
+
+/**
+ * The fourth production run — a substantive PREPOSED POINTER CLAUSE, captured
+ * live on a Newton's Third Law turn, 2026-08-22, on a turn with no visual, no
+ * visualSpec and no sceneSpec attached:
+ *
+ *     "In the picture on your screen you can see gravity pulling on an
+ *      object and the normal force pushing upward on that same object—those
+ *      two are action-reaction partners acting on the object and the Earth,
+ *      respectively, even though they're drawn together."
+ *
+ * Distinct from the third production run above (a bare "look at the
+ * diagram" with no locator) and from the original captured turn (whose
+ * clause happens to contain a POINTING_VERB before its dash): this shape's
+ * pointer clause is introduced by a PREPOSITION ("In the picture on your
+ * screen"), and the verb that follows it varies — "you can see", "is
+ * shown", or none at all ("shown above") — so a detector keyed only to
+ * POINTING_VERB misses most of the family. See PREPOSED_LOCATOR_RE and
+ * findPointerClauseHead in figureReference.ts for the fix.
+ */
+describe('fourth production run — a preposed pointer clause', () => {
+  const CAPTURED_TURN = `Newton's Third Law says that every action has an equal and opposite reaction force.
+
+In the picture on your screen you can see gravity pulling on an object and the normal force pushing upward on that same object—those two are action-reaction partners acting on the object and the Earth, respectively, even though they're drawn together.
+
+Can you think of another everyday example of this principle?`
+
+  it('strips the exact captured production sentence', () => {
+    const r = stripUnbackedFigureReferences(CAPTURED_TURN, false)
+    expect(r.stripped).toBe(true)
+    expect(r.text).not.toMatch(/in the picture on your screen/i)
+    expect(r.text).not.toMatch(/you can see gravity pulling/i)
+  })
+
+  it('keeps the teaching content on either side of the removed clause', () => {
+    const r = stripUnbackedFigureReferences(CAPTURED_TURN, false)
+    expect(r.text).toMatch(/equal and opposite reaction force/i)
+    expect(r.text).toMatch(/action-reaction partners/i)
+    expect(r.text).toMatch(/another everyday example/i)
+  })
+
+  it('never leaves a sentence starting mid-thought', () => {
+    const r = stripUnbackedFigureReferences(CAPTURED_TURN, false)
+    for (const line of r.text.split('\n')) {
+      const t = line.trim()
+      if (t.length > 0) expect(t[0]).toMatch(/[A-Za-z*_]/)
+    }
+  })
+
+  it('leaves the turn byte-identical when a figure genuinely is attached', () => {
+    const r = stripUnbackedFigureReferences(CAPTURED_TURN, true)
+    expect(r.stripped).toBe(false)
+    expect(r.text).toBe(CAPTURED_TURN)
+  })
+
+  it('is idempotent', () => {
+    const once = stripUnbackedFigureReferences(CAPTURED_TURN, false)
+    const twice = stripUnbackedFigureReferences(once.text, false)
+    expect(twice.text).toBe(once.text)
+    expect(twice.stripped).toBe(false)
+  })
+
+  // Every construction the task specifically named, each embedded in a real
+  // multi-sentence turn (a lone sentence trips the "never empty" guard,
+  // which is its own already-tested behaviour, not this shape's).
+  const wrap = (sentence: string) =>
+    `Let's talk about forces.\n\n${sentence}\n\nWhat else acts in pairs like this?`
+
+  for (const [label, sentence] of [
+    [
+      'em dash, no POINTING_VERB at all ("shown above")',
+      'In the diagram shown above—gravity pulls down and the normal force pushes up—these are action-reaction partners.',
+    ],
+    [
+      'comma, passive "is shown"',
+      'In the diagram on your screen, gravity is shown pulling on the block and the normal force is pushing up on it, and these two are action-reaction partners.',
+    ],
+    [
+      'comma, "you can see"',
+      'In the figure shown above, you can see gravity pulling down and the normal force pushing up, and these are action-reaction pairs.',
+    ],
+    [
+      'conjunction after the pointer clause',
+      'In the picture on your screen you can see gravity pulling down and the normal force pushing up, and these are action-reaction pairs acting on different bodies.',
+    ],
+    [
+      'longer pointer clause with substantive content before the boundary',
+      'In the picture on your screen you can see gravity pulling on an object and the normal force pushing upward on that same object, and those two are action-reaction partners.',
+    ],
+  ] as const) {
+    it(`catches: ${label}`, () => {
+      const turn = wrap(sentence)
+      const r = stripUnbackedFigureReferences(turn, false)
+      expect(r.stripped).toBe(true)
+      // THE INVARIANT: no sentence left behind may claim a specific figure
+      // is present or visible — a figure noun co-occurring with an
+      // on-screen locator, in any surviving sentence, is exactly that claim.
+      for (const line of r.text.split(/\n+/)) {
+        if (!line.trim()) continue
+        const namesFigureWithLocator =
+          /\b(diagram|figure|picture|image|chart|number ?line|animation|illustration|visual|simulation|plot|sketch|graph)\b/i.test(
+            line,
+          ) && /\b(on (?:your|the) screen|displayed|shown (?:above|below|here)?)\b/i.test(line)
+        expect(namesFigureWithLocator).toBe(false)
+      }
+      // The classification survives — it is never the false part of the claim.
+      expect(r.text).toMatch(/action-reaction/i)
+      // The rest of the turn is untouched.
+      expect(r.text).toMatch(/let's talk about forces/i)
+      expect(r.text).toMatch(/what else acts in pairs/i)
+    })
+
+    it(`leaves it alone when a figure genuinely is attached: ${label}`, () => {
+      const turn = wrap(sentence)
+      const r = stripUnbackedFigureReferences(turn, true)
+      expect(r.stripped).toBe(false)
+      expect(r.text).toBe(turn)
+    })
+  }
+
+  it('NEGATIVE CONTROL: ordinary prose about diagrams is untouched', () => {
+    for (const t of [
+      'Diagrams are useful for organizing information.',
+      'A picture is one way to represent the idea.',
+      'Students can draw a graph to compare values.',
+      'When you draw a diagram, relationships become easier to see.',
+    ]) {
+      const r = stripUnbackedFigureReferences(t, false)
+      expect(r.stripped).toBe(false)
+      expect(r.text).toBe(t)
+    }
+  })
+
+  it('NEGATIVE CONTROL: a conceptual mention of "in the diagram" without an on-screen locator is untouched', () => {
+    const t = 'In the diagram, arrows usually represent force direction and magnitude.'
+    const r = stripUnbackedFigureReferences(t, false)
+    expect(r.stripped).toBe(false)
+    expect(r.text).toBe(t)
+  })
+
+  it('NEGATIVE CONTROL: an ordinary opener that is not about a figure at all is untouched', () => {
+    const t = 'On the other hand, some students prefer working through the algebra directly.'
+    const r = stripUnbackedFigureReferences(t, false)
+    expect(r.stripped).toBe(false)
+    expect(r.text).toBe(t)
+  })
+
+  it('NEGATIVE CONTROL: a question about a diagram that does not claim one is present is untouched', () => {
+    const t = 'Would a diagram help you understand this better?'
+    const r = stripUnbackedFigureReferences(t, false)
+    expect(r.stripped).toBe(false)
+    expect(r.text).toContain('?')
+  })
+
+  it('NEGATIVE CONTROL: ordinary teaching prose with an em dash, no figure claim, is untouched', () => {
+    const t = "Force is a vector—it has both magnitude and direction."
+    const r = stripUnbackedFigureReferences(t, false)
+    expect(r.stripped).toBe(false)
+    expect(r.text).toBe(t)
+  })
+
+  it('NEGATIVE CONTROL: generic strategy prose using "see" and "diagram" across a comma is untouched', () => {
+    // The exact shape that regressed while building this fix: a comma
+    // boundary let a POINTING_VERB and a figure noun co-occur in the same
+    // "head" purely by coincidence, with no on-screen claim anywhere.
+    const t =
+      'So, drawing a diagram lets you see the structure of a problem at a glance, revealing patterns and relationships that are hard to spot otherwise.'
+    const r = stripUnbackedFigureReferences(t, false)
+    expect(r.stripped).toBe(false)
+    expect(r.text).toBe(t)
+  })
+
+  it('does not mangle a hyphenated compound word into a false clause boundary', () => {
+    // The bug this fix's dash-boundary correction closes: "action-reaction"
+    // is not a clause boundary, and must never be read as one.
+    const t =
+      'In the figure shown above, you can see gravity pulling down and the normal force pushing up, and these are action-reaction pairs.'
+    const r = stripUnbackedFigureReferences(t, false)
+    expect(r.text).not.toMatch(/^reaction pairs\.?$/i)
+    expect(r.text).toMatch(/action-reaction pairs/i)
+  })
+
+  it('a genuine whitespace-bounded hyphen still counts as a clause boundary', () => {
+    const t = 'Look at the diagram on your screen - it shows two forces in equilibrium.'
+    const r = stripUnbackedFigureReferences(t, false)
+    expect(r.stripped).toBe(true)
+    expect(r.text).not.toMatch(/on your screen/i)
+    expect(r.text).toMatch(/it shows two forces in equilibrium/i)
+  })
+
+  it('a leading vocative before the real pointer clause still finds the clause after it', () => {
+    // Regression guard: adding comma as a boundary type must not stop the
+    // search at an early, irrelevant comma (e.g. a name) when the real
+    // pointer clause sits after a later dash.
+    const t =
+      "claudeTest, in the diagram on your screen you can see the two forces — which one is larger?"
+    const r = stripUnbackedFigureReferences(t, false)
+    expect(r.text).toContain('?')
+  })
+})
