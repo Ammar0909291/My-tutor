@@ -5032,6 +5032,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // GUIDE→CHECK's own success gate, not just CHECK/PRACTICE's —
               // see `phaseAllowsProbeHoisted`'s declaration.
               gateSoughtThisTurn: phaseAllowsProbeHoisted,
+              // A completed lesson has no mastery gate left to guard — see
+              // `UngradedGateQuestionInput.lessonCompleted`'s doc comment for
+              // the production defect this closes ("got it" after
+              // completion). Same authority as the D-0a completion gate.
+              lessonCompleted: lessonCompletedHoisted,
             })
             if (ungraded.withheld) {
               console.warn('[gate-contract] ' + JSON.stringify({

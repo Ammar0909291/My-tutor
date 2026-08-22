@@ -103,6 +103,20 @@ describe('isExplicitCorrection — the new predicate', () => {
     expect(isExplicitCorrection('I do not know the answer')).toBe(false)
     expect(isExplicitCorrection('not really')).toBe(false)
   })
+
+  // P1 (2026-08-22): "I didn't mean cesium; I meant viscosity." was missed —
+  // the old 4th alternative only matched "didn't mean" followed by exactly
+  // that/this/it, never a NAMED topic. Widened to any object except an
+  // infinitive ("didn't mean TO ..."), which stays excluded because it is a
+  // different speech act (apologising for tone/intent), not a topic
+  // correction.
+  it('recognizes "I didn\'t mean <named topic>; I meant <other topic>"', () => {
+    expect(isExplicitCorrection("I didn't mean cesium; I meant viscosity.")).toBe(true)
+  })
+
+  it('does NOT fire on "didn\'t mean to ..." (apology for tone/intent, not a topic correction)', () => {
+    expect(isExplicitCorrection("I didn't mean to be rude, I was just curious about cesium.")).toBe(false)
+  })
 })
 
 describe('F3 fix — decideExcursion end to end (test cases A-E)', () => {
@@ -148,6 +162,16 @@ describe('F3 fix — decideExcursion end to end (test cases A-E)', () => {
     const d = turn({ state: CESIUM_EXCURSION, message: 'I meant to ask, is cesium radioactive?' })
     expect(d.transition).not.toBe('closed-returned')
     expect(d.state.active).toBe(true)
+  })
+
+  it('P1: "I didn\'t mean X; I meant Y" ends the excursion via excursion.ts too', () => {
+    const d = turn({
+      state: CESIUM_EXCURSION,
+      message: "I didn't mean cesium; I meant the book and table thing, why doesnt the book fall through the table",
+    })
+    expect(d.transition).toBe('closed-returned')
+    expect(d.state.active).toBe(false)
+    expect(d.targetConceptId).toBe(LESSON)
   })
 
   it('a correction that ALSO names a real new concept redirects to it, not to the lesson', () => {

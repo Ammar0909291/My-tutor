@@ -57,6 +57,23 @@
 const MACHINE_TAG_RE = /<!--\s*[A-Z][A-Z0-9_]{2,}\b[\s\S]*?(?:-->|\/>)/g
 
 /**
+ * P1 (visual reference integrity, 2026-08-22): a raw HTML-ELEMENT-shaped
+ * `<visual ...>...</visual>` or self-closing `<visual .../>` tag, case-
+ * insensitive. No prompt in this codebase asks the model for this shape —
+ * the real visual tag is the uppercase `VISUAL:<type>` line
+ * (`src/lib/school/visuals/detectVisual.ts`'s `parseVisualTag`) — but a
+ * model can hallucinate markup it was never asked for (the exact lesson
+ * `MACHINE_TAG_RE` above already exists for), and this codebase's own
+ * component tree genuinely renders lowercase `<visual>`-shaped JSX
+ * (`VisualCard`, `VisualRenderer`) elsewhere, which is precisely the kind of
+ * plausible-looking tag a model could imitate in prose. Swept here,
+ * defensively, alongside the comment-style machine tags above, so the same
+ * "no machine markup ever reaches a learner" guarantee covers this shape
+ * too — never in the render path today, but never a silent gap either.
+ */
+const RAW_VISUAL_ELEMENT_RE = /<visual\b[^>]*>[\s\S]*?<\/visual\s*>|<visual\b[^>]*\/?>/gi
+
+/**
  * An UNTERMINATED tag at the very end — the model ran out of tokens mid-tag.
  * attemptVectorSignal.ts documents the same hazard for its own tag and resolves
  * it the same way: a visible `<!--ATTEMPT` fragment is worse than over-deleting
@@ -74,10 +91,14 @@ const UNTERMINATED_TRAILING_RE = /\n?[ \t]*<!--\s*[A-Z][A-Z0-9_]{2,}\b[^>]*$/
  * hazard attemptVectorSignal.ts guards against.
  */
 export function stripResidualMachineTags(text: string): string {
-  if (typeof text !== 'string' || !text.includes('<!--')) return text
+  if (typeof text !== 'string') return text
+  // Fast path: neither shape of markup this sweep removes is present.
+  // `/<visual\b/i` is cheap and only tested once here (not per-pass), since
+  // the loop below re-tests via the full regex on each pass anyway.
+  if (!text.includes('<!--') && !/<visual\b/i.test(text)) return text
   let out = text
   for (let pass = 0; pass < 4; pass++) {
-    const next = out.replace(MACHINE_TAG_RE, '')
+    const next = out.replace(MACHINE_TAG_RE, '').replace(RAW_VISUAL_ELEMENT_RE, '')
     if (next === out) break
     out = next
   }
@@ -89,5 +110,6 @@ export function stripResidualMachineTags(text: string): string {
 
 /** True when the text still carries machine markup. For assertions and tests. */
 export function hasResidualMachineTag(text: string): boolean {
-  return typeof text === 'string' && /<!--\s*[A-Z][A-Z0-9_]{2,}\b/.test(text)
+  return typeof text === 'string'
+    && (/<!--\s*[A-Z][A-Z0-9_]{2,}\b/.test(text) || /<visual\b/i.test(text))
 }

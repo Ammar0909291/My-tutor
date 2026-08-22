@@ -102,6 +102,38 @@ export interface MatchableAsset {
 export interface MatchOptions {
   activeMisconceptionIds?: string[]
   /**
+   * P1 (memory retrieval facet relevance, 2026-08-22) — an optional, caller-
+   * supplied set of facet tags the returned asset MUST carry at least one of.
+   *
+   * ── THE DEFECT THIS CLOSES ──────────────────────────────────────────────
+   * `scoreMatch`'s hard disqualifiers were conceptId/status/language/active-
+   * misconception-incompatibility only. `tags` — the field this codebase
+   * already uses to represent WHAT FACET of a concept a piece of content
+   * covers (fractions' "denominator" vs "numerator" vs "equivalence", say) —
+   * fed only into a small BONUS (`tagOverlap`, capped at 15 of 100), scored
+   * against the learner's raw message text. A concept + exact-gradeBand match
+   * alone already reaches 75 (base 50 + gradeBand 25), comfortably clearing
+   * `DEFAULT_CONFIDENCE_THRESHOLD` (65) with ZERO facet relevance at all — so
+   * an asset belonging to the right CONCEPT but the wrong FACET of it could
+   * win purely on concept membership, whenever the caller actually needed a
+   * specific facet (e.g. the teaching engine is repairing a specific
+   * misconception or continuing a specific sub-topic) rather than "anything
+   * about this concept".
+   *
+   * ── THE FIX ────────────────────────────────────────────────────────────
+   * Reuses `tags` — no new taxonomy. When a caller supplies `requiredTags`
+   * (non-empty), an asset is now hard-disqualified (score 0, same as a
+   * conceptId/language mismatch) unless it carries at least one of them.
+   * Undefined or empty (the default, and every existing call site's current
+   * behaviour) changes nothing: `tagOverlap` keeps working exactly as the
+   * soft bonus it already was. This is intentionally the NARROWEST point to
+   * enforce it — `scoreMatch` is the single place both conceptId and facet
+   * tags are already read, so a caller that knows it needs a specific facet
+   * can require one without any change to retrieval, ranking or storage
+   * elsewhere.
+   */
+  requiredTags?: string[]
+  /**
    * PROBE RETRIEVAL ONLY — ignored by scoreMatch and by explanation matching.
    *
    * Return true for a stem that must not be selected again. Exists because the
@@ -166,6 +198,16 @@ export function scoreMatch(state: StudentState, asset: MatchableAsset, options: 
 
   const activeMisconceptionIds = options.activeMisconceptionIds ?? []
   if (asset.incompatibilities.some((m) => activeMisconceptionIds.includes(m))) return 0
+
+  // Facet relevance (see MatchOptions.requiredTags): a hard filter only when
+  // the caller actually supplies a requirement — empty/undefined is a no-op,
+  // reproducing the exact prior behaviour for every existing call site.
+  if (options.requiredTags && options.requiredTags.length > 0) {
+    const required = new Set(options.requiredTags.map((t) => t.toLowerCase()))
+    const assetTags = new Set(asset.tags.map((t) => t.toLowerCase()))
+    const hasRequiredFacet = [...required].some((t) => assetTags.has(t))
+    if (!hasRequiredFacet) return 0
+  }
 
   let score = 50 // base: concept + language + ACTIVE all matched, already reviewer-approved
 

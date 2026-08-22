@@ -58,6 +58,29 @@ const SOLICITS_CONTENT =
   /\b(what|which|why|how|when|where|who|whom|whose|name|state|identify|calculate|compute|solve|find|determine|explain|describe|predict|compare|estimate|convert|balance|choose|select|pick|list|give)\b/i
 
 /**
+ * ALTERNATIVE-CHOICE questions (P0-B, 2026-08-22): "Is the acceleration
+ * positive or negative here?", "Does the ball move up or down?", "Would this
+ * reaction be endothermic or exothermic?". None of these carry a
+ * `SOLICITS_CONTENT` word, so a genuine correct free-form answer to one of
+ * them ("negative", "down", "endothermic") had its evidence suppressed —
+ * confirmed by direct probing of common tutoring phrasings, the exact P0-B
+ * failure mode: a real answerable question, missed by the grammar, silently
+ * shrinking the learner's evidence stream toward budget exhaustion.
+ *
+ * Structurally this is the free-form twin of an authored MCQ's two options —
+ * it names a bounded set of alternatives and asks the learner to pick one, so
+ * grading a correct reply against it is exactly as safe as grading any other
+ * content question. Deliberately narrow: requires an interrogative auxiliary
+ * near the head (so a random sentence containing "or" is not swept in — the
+ * outer loop already requires the sentence to end in "?") and excludes an "or
+ * not" tail, which reads as a yes/no confirmation shape
+ * (`CONFIRMATION_TAIL`'s territory, e.g. "...or not?" after "is that right"),
+ * not a genuine content alternative.
+ */
+const ALTERNATIVE_CHOICE =
+  /\b(?:is|are|was|were|does|do|did|will|would|can|could|has|have|should)\b[^?]*\bor\b\s+(?!not\b)\S[^?]*\?\s*$/i
+
+/**
  * Confirmation questions, matched at the TAIL.
  *
  * Anchoring to the end is the point, not a shortcut. A wh-word can appear
@@ -158,7 +181,7 @@ export function askedAnswerableQuestion(text: string): boolean {
     const s = sentences[i].trim()
     if (!s.endsWith('?')) continue
     if (CONFIRMATION_TAIL.test(s)) continue
-    if (!SOLICITS_CONTENT.test(s)) continue
+    if (!SOLICITS_CONTENT.test(s) && !ALTERNATIVE_CHOICE.test(s)) continue
     const next = (sentences[i + 1] ?? '').trim()
     if (SELF_ANSWERED_HEAD.test(next)) continue
     return true
