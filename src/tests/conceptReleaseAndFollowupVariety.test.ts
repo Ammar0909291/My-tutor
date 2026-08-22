@@ -65,8 +65,18 @@ describe('new-concept release is bounded, and the bound is published', () => {
 
   it('the route now passes the value it already computed', () => {
     // It was previously computed only for the verifier context and parity.
-    const call = ROUTE.slice(ROUTE.indexOf('systemPrompt += buildTurnDirective({'))
-    expect(call.slice(0, 1400)).toContain("maxNewTerms: contentRegister === 'beginner' ? 1 : 2")
+    // The window is the call's OWN extent — from its opening to the line that
+    // closes it at the call's indentation — not a fixed character count. A
+    // magic offset (this was `slice(0, 1400)`) silently re-scopes the
+    // assertion whenever anything earlier in the argument list grows, and it
+    // broke on an added comment while the argument it checks was still there.
+    const from = ROUTE.indexOf('systemPrompt += buildTurnDirective({')
+    expect(from).toBeGreaterThan(-1)
+    const rest = ROUTE.slice(from)
+    const end = rest.indexOf('\n          })')
+    expect(end).toBeGreaterThan(-1)
+    const call = rest.slice(0, end)
+    expect(call).toContain("maxNewTerms: contentRegister === 'beginner' ? 1 : 2")
   })
 })
 

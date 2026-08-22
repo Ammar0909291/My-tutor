@@ -2844,11 +2844,21 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // counters, the learner's own request, the remediation tier and the
             // recovery guard — so it introduces no new detector and no new
             // signal. REMEDIAL is unreachable without evidenced confusion.
+            //
+            // F3: plus the previous turn's SIGNAL confusion read, taken from
+            // the snapshot the same way the misconception gate above takes it
+            // (`lastSignalForRemediation`). Still no new detector — this value
+            // was already being parsed and persisted; it simply never reached
+            // a teaching decision, so a learner who said "too fast" or "that
+            // went over my head" was answered at unchanged granularity.
             granularity: decideTeachingGranularity({
               state: conversationStateHoisted,
               learnerRequest: learnerRequestHoisted,
               remediationTier,
               recoveryKey: recoveryKeyHoisted,
+              signalConfusion: (snapshot?.lastSignal && typeof snapshot.lastSignal === 'object')
+                ? (snapshot.lastSignal as { confusion?: boolean }).confusion ?? null
+                : null,
             }),
             // The value the route already computed for the verifier context and
             // the parity facts — now also reaching the SERVED prompt, through

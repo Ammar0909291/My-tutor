@@ -59,6 +59,27 @@ export interface GranularityInputs {
   remediationTier?: number
   /** recoveryGuard key — set only on a genuine distress utterance. */
   recoveryKey?: string | null
+  /**
+   * The PREVIOUS turn's `<!--SIGNAL confusion="…">` read (snapshot.lastSignal).
+   *
+   * F3: this field is the only confusion evidence that is not a fixed phrase
+   * list. `detectLearnerRequest`'s EXPLAIN_DIFF_RE and `detectFailureState`'s
+   * families between them enumerate specific wordings; measured against 36
+   * natural confusion utterances, 21 matched NEITHER — "too fast", "I feel
+   * lost here", "that went over my head", "can you break that down", "I need
+   * it simpler", "nothing is making sense" — and so lowered nothing. The
+   * SIGNAL exists precisely so the model can report the confusion a regex
+   * cannot enumerate, and it was being parsed, logged, used to gate the
+   * misconception block, and then dropped before it could reach any teaching
+   * decision.
+   *
+   * It is deliberately NOT folded into `consecutiveFailures`. Confusion is not
+   * a wrong answer: that counter feeds mastery accounting and the session
+   * affect budget (2 visible failures → CLOSING), so counting confusion as
+   * failure would end sessions the learner never failed. It lowers
+   * granularity only.
+   */
+  signalConfusion?: boolean | null
 }
 
 /**
@@ -75,14 +96,24 @@ export function decideTeachingGranularity(input: GranularityInputs): TeachingLev
   const failures = input.state?.consecutiveFailures ?? 0
   const tier = input.remediationTier ?? 0
 
+  const confused = input.signalConfusion === true
+
   // Genuine, evidenced confusion — the only way into word-level teaching.
   if (input.recoveryKey) return 'REMEDIAL'
   if (failures >= 2) return 'REMEDIAL'
   if (input.learnerRequest === 'explain_differently' && tier >= 2) return 'REMEDIAL'
+  // Reported confusion ON TOP OF a wobble or a prior re-explanation is the
+  // same weight of evidence as two failures: the learner has now missed once
+  // AND said so. Confusion alone is not enough to reach word-level teaching.
+  if (confused && (failures >= 1 || tier >= 1)) return 'REMEDIAL'
 
   // One wobble: slow down to ideas, but never to words.
   if (failures === 1) return 'GUIDED'
   if (input.learnerRequest === 'explain_differently') return 'GUIDED'
+  // A single reported confusion, with nothing else against the learner: drop
+  // to ideas, never to words — the same treatment a first "explain it
+  // differently" already gets, which is what this signal is a synonym for.
+  if (confused) return 'GUIDED'
 
   return 'COMPLETE'
 }

@@ -74,6 +74,92 @@ describe('the directive states a FLOOR, which nothing else did', () => {
   })
 })
 
+// ── F3 regression suite (2026-08-22) ──────────────────────────────────────
+// A real-student session showed confusion being answered at unchanged
+// difficulty. Root cause: the `<!--SIGNAL confusion="true">` read was parsed,
+// persisted and logged, but never reached a teaching decision — the two
+// detectors that DID lower granularity (EXPLAIN_DIFF_RE, detectFailureState)
+// are fixed phrase lists, and measured against 36 natural confusion
+// utterances, 21 matched neither.
+describe('F3 — reported confusion lowers granularity', () => {
+  it('a single reported confusion drops COMPLETE to GUIDED', () => {
+    expect(decideTeachingGranularity({ state: state(), signalConfusion: true }))
+      .toBe('GUIDED')
+    expect(decideTeachingGranularity({ state: null, signalConfusion: true }))
+      .toBe('GUIDED')
+  })
+
+  it('confusion alone never reaches REMEDIAL — words are still off the table', () => {
+    expect(decideTeachingGranularity({ state: state(), signalConfusion: true }))
+      .not.toBe('REMEDIAL')
+  })
+
+  it('confusion ON TOP OF a wobble is REMEDIAL', () => {
+    expect(decideTeachingGranularity({
+      state: state({ consecutiveFailures: 1 }), signalConfusion: true,
+    })).toBe('REMEDIAL')
+  })
+
+  it('confusion ON TOP OF a prior re-explanation is REMEDIAL', () => {
+    expect(decideTeachingGranularity({
+      state: state(), remediationTier: 1, signalConfusion: true,
+    })).toBe('REMEDIAL')
+  })
+
+  it('confusion does not override an already-stronger signal downward', () => {
+    // recoveryKey and 2 failures were REMEDIAL before; they stay REMEDIAL.
+    expect(decideTeachingGranularity({
+      state: state({ consecutiveFailures: 2 }), signalConfusion: true,
+    })).toBe('REMEDIAL')
+    expect(decideTeachingGranularity({
+      state: state(), recoveryKey: 'confused', signalConfusion: true,
+    })).toBe('REMEDIAL')
+  })
+
+  // The negative controls: the field must not act on absence or on false.
+  it('confusion=false and confusion absent both leave the ladder untouched', () => {
+    expect(decideTeachingGranularity({ state: state(), signalConfusion: false }))
+      .toBe('COMPLETE')
+    expect(decideTeachingGranularity({ state: state(), signalConfusion: null }))
+      .toBe('COMPLETE')
+    expect(decideTeachingGranularity({ state: state(), signalConfusion: undefined }))
+      .toBe('COMPLETE')
+    expect(decideTeachingGranularity({ state: state() })).toBe('COMPLETE')
+  })
+
+  it('a false confusion read cannot cancel real failure evidence', () => {
+    expect(decideTeachingGranularity({
+      state: state({ consecutiveFailures: 2 }), signalConfusion: false,
+    })).toBe('REMEDIAL')
+    expect(decideTeachingGranularity({
+      state: state({ consecutiveFailures: 1 }), signalConfusion: false,
+    })).toBe('GUIDED')
+  })
+
+  // Every pre-F3 input combination must resolve exactly as it did before, so
+  // the new field cannot have moved an existing learner's teaching.
+  it('every pre-existing case is byte-identical with the field omitted', () => {
+    const cases: Array<[Parameters<typeof decideTeachingGranularity>[0], TeachingLevel]> = [
+      [{ state: state() }, 'COMPLETE'],
+      [{ state: null }, 'COMPLETE'],
+      [{ state: state(), learnerRequest: 'diagram' }, 'COMPLETE'],
+      [{ state: state(), learnerRequest: 'real_life_example' }, 'COMPLETE'],
+      [{ state: state({ consecutiveFailures: 1 }) }, 'GUIDED'],
+      [{ state: state({ consecutiveFailures: 2 }) }, 'REMEDIAL'],
+      [{ state: state({ consecutiveFailures: 5 }) }, 'REMEDIAL'],
+      [{ state: state(), learnerRequest: 'explain_differently' }, 'GUIDED'],
+      [{ state: state(), learnerRequest: 'explain_differently', remediationTier: 2 }, 'REMEDIAL'],
+      [{ state: state(), recoveryKey: 'too_hard' }, 'REMEDIAL'],
+      // tier alone, with no confusion and no request, was and stays COMPLETE
+      [{ state: state(), remediationTier: 1 }, 'COMPLETE'],
+      [{ state: state(), remediationTier: 3 }, 'COMPLETE'],
+    ]
+    for (const [input, expected] of cases) {
+      expect(decideTeachingGranularity(input)).toBe(expected)
+    }
+  })
+})
+
 describe('turn directive integration', () => {
   const base = {
     state: state(), nextMove: 'teach' as const, maxParagraphs: 4,
