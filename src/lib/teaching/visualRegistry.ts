@@ -92,9 +92,33 @@ const CONCEPT_VISUALS: Record<string, VisualEntry> = {
   // Work is force-times-displacement — best shown as an F–d graph (area
   // under the curve = work), not a static force diagram.
   'phys.mech.work':                   { primary: 'coordinate_plane', all: ['coordinate_plane'] },
-  // Angular kinematics (θ/ω/α vs t) is graph-shaped, exactly parallel to
-  // linear kinematics-1d/2d above — same reasoning, same visual type.
-  'phys.mech.angular-kinematics':     { primary: 'coordinate_plane', all: ['coordinate_plane'] },
+  // REMOVED (live P0, Lesson 39): 'phys.mech.angular-kinematics' ->
+  // coordinate_plane. Reproduced against production — the tutor taught a
+  // rotating bicycle wheel (θ, ω, α; "a point on a circle of radius r … arc
+  // s = rθ") while the attached figure was a bare coordinate grid with a demo
+  // point on it. The learner asked for a diagram of a wheel and was shown axes.
+  //
+  // The removed comment argued this was "exactly parallel to linear
+  // kinematics-1d/2d above — same reasoning, same visual type". The reasoning
+  // was right and the binding was not: kinematics-1d/2d carry
+  // `sceneGenerator: 'kinematics_graphs'`, which is what DRAWS the curves;
+  // this row copied the primary and not the generator, and `coordinate_plane`
+  // with no generator is a blank canvas, not a graph.
+  //
+  // It is left UNMAPPED rather than repointed, because no authored visual on
+  // this platform actually teaches angular kinematics, and every candidate is
+  // worse than nothing:
+  //   · kinematics_graphs labels its axes in m/s and m/s² — linear units for
+  //     an angular concept. A figure with confident wrong labels is worse than
+  //     no figure, because a learner believes labels.
+  //   · three_circular_motion renders "Uniform Circular Motion: a_c = v²/r",
+  //     which asserts α = 0 — contradicting the third of this lesson that is
+  //     about angular acceleration.
+  // Unmapped is this file's own documented treatment for exactly this case
+  // (see the phys.therm block: "left unmapped rather than stretched onto axes
+  // that don't represent them"), and phys.mech carries no domain default, so
+  // the concept now falls through Tier 2 to Tier 3 or to an honest no-visual
+  // response instead of inheriting a grid that represents nothing.
   // Rotational/rolling motion concepts pair naturally with the existing
   // circular-motion 3D visual rather than a static force diagram.
   'phys.mech.angular-momentum':       { primary: 'three_circular_motion', all: ['three_circular_motion'] },

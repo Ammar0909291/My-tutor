@@ -170,13 +170,26 @@ describe('intentional zero coverage is documented, not silent', () => {
 })
 
 describe('coverage floor — this fix must not regress below its own result', () => {
-  it('at least 77 of 238 physics concepts resolve to a visual', () => {
+  it('at least 76 of 238 physics concepts resolve to a visual', () => {
     // A FLOOR, not a target: future content work should raise this number by
     // adding more genuinely-fitting exact entries, never by reintroducing a
     // blanket domain default. Set from this fix's own measured result so a
     // future accidental removal is caught immediately.
+    //
+    // 77 -> 76 (live P0, Lesson 39): the original floor was measured from a set
+    // that INCLUDED 'phys.mech.angular-kinematics' -> coordinate_plane, a
+    // binding since proven wrong against production — the tutor taught a
+    // rotating wheel while the learner looked at a bare axis grid. Coverage is
+    // a proxy for "the learner gets a useful figure", and it stops being that
+    // the moment a binding is counted whose figure teaches nothing about its
+    // concept. The floor therefore drops by exactly one, for one identified and
+    // documented removal, and remains a floor: it still fails on the next
+    // accidental deletion. See visualRegistry.test.ts, 'generic-canvas bindings
+    // must not stand in for a real figure'.
     const covered = PHYS.filter((c) => lookupConceptVisual(c.id) !== null).length
-    expect(covered).toBeGreaterThanOrEqual(77)
+    expect(covered).toBeGreaterThanOrEqual(76)
+    // And the removal really was exactly one: nothing else silently vanished.
+    expect(covered).toBe(76)
   })
 
   it('zero orphan keys and zero duplicates remain physics-specific to this fix', () => {

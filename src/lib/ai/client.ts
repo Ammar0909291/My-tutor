@@ -377,3 +377,37 @@ export async function chatWithFallback(
   )
   return { choices: [{ message: { content } }] }
 }
+
+/**
+ * The lesson OPENING is not a navigation request — say so, or the endpoint
+ * refuses its own instruction.
+ *
+ * Root cause (reproduced live, physics Lesson 39 -> 40): `/api/learn/lesson-init`
+ * sends, as the user turn, `Let's restart lesson "<title>" from the beginning.`
+ * The NAVIGATION RULE in buildTutorSystemPrompt — which that route shares with
+ * /api/learn/chat — explicitly lists "restart lesson" among the phrases the
+ * model must answer with exactly one sentence:
+ *
+ *     "Use the lesson navigation panel at the top to switch lessons."
+ *
+ * So the endpoint's own instruction trips the endpoint's own guard, and the
+ * learner who has JUST navigated is told to navigate. Measured: opening the
+ * same lesson twice produced a full orientation once and this refusal the other
+ * time — the "sometimes there is no lesson introduction" report is this rule
+ * firing or not firing, not model mood.
+ *
+ * The rule is correct on the chat route, where the student really can type
+ * "next lesson" and the tutor must not move the lesson itself. It can never be
+ * correct here: on lesson-init the UI has ALREADY performed the selection and
+ * this turn's only job is to open the chosen lesson. So this is appended by
+ * lesson-init alone; the chat path is byte-for-byte unchanged.
+ *
+ * Appended in English regardless of teaching language, matching how every other
+ * server-side directive block in this codebase is appended to the localized
+ * prompt; the `teachingLanguage` rules above still govern the reply's language.
+ */
+export function buildLessonOpeningOverride(lessonTitle: string): string {
+  return `
+
+LESSON OPENING — THIS TURN IS NOT A NAVIGATION REQUEST. The lesson has ALREADY been selected by the UI and you are opening it. The NAVIGATION RULE above does NOT apply to this turn: do NOT tell the student to use the lesson navigation panel, do NOT treat the instruction to start or restart "${lessonTitle}" as a request to switch lessons, and do NOT refuse it. Open the lesson: name it, state in one or two sentences what it is about and what the student will be able to do by the end, then begin teaching it.`
+}

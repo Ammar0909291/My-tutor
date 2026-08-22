@@ -31,9 +31,40 @@ export function hasVisualBeenShown(
 const MD_IMAGE_RE = /!\[[^\]]*\]\([^)]+\)/g
 const RAW_IMAGE_URL_RE = /(?:^|\s)https?:\/\/\S+\.(?:png|jpg|jpeg|gif|svg|webp)(?:\?\S*)?(?:\s|$)/gi
 
+/**
+ * The SAME defect in its other shape: `![alt]` with no `(url)` at all.
+ *
+ * MD_IMAGE_RE requires the `(url)` half, so this form passed straight through.
+ * Captured live on Lesson 39 (Angular Kinematics), where the learner asked
+ * "Can you give me a diagram to visualize this?" and the ENTIRE reply was:
+ *
+ *   ![Angular displacement diagram: a circle with a point moving from angle 0
+ *    to angle π⁄2, showing radius r, arc s, and angle θ]
+ *
+ * The learner asked for a picture and received markup, with no teaching at all
+ * on that turn.
+ *
+ * The alt text is UNWRAPPED rather than deleted. Deleting it is what the
+ * url-carrying branch does, and that is right there — a real broken image whose
+ * alt is redundant with the prose around it. Here the alt text is the only
+ * content the turn has, so removing it would answer the learner with an empty
+ * message: `cleanText` has no emptiness guard on any of its four return sites,
+ * so a blank tutor turn would be served. Trading a broken image tag for a blank
+ * turn is not a fix. Unwrapping keeps the model's own description as ordinary
+ * prose, which is genuinely useful — it is the MARKUP that was broken, not the
+ * words.
+ *
+ * The negative lookahead is what keeps the two branches disjoint, so the
+ * shipped `![alt](url)` behaviour is byte-for-byte unchanged. Ordinary
+ * markdown links (`[text](url)`) and bracketed prose (`[1, 2, 3]`) never match:
+ * the leading `!` is the discriminator.
+ */
+const MD_IMAGE_NO_URL_RE = /!\[([^\]]*)\](?!\()/g
+
 export function stripRawImageUrls(text: string): string {
   return text
     .replace(MD_IMAGE_RE, '')
+    .replace(MD_IMAGE_NO_URL_RE, '$1')
     .replace(RAW_IMAGE_URL_RE, ' ')
     .replace(/\n{3,}/g, '\n\n')
     .trim()

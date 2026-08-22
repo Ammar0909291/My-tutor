@@ -229,7 +229,12 @@ describe('visualRegistry', () => {
   // (b) A different existing visual type is the better fit — remapped.
   it.each([
     ['phys.mech.work', 'coordinate_plane'],
-    ['phys.mech.angular-kinematics', 'coordinate_plane'],
+    // 'phys.mech.angular-kinematics' -> 'coordinate_plane' was here and is
+    // deliberately gone: it encoded the P0 this file's last describe() block
+    // reproduces (a rotating-wheel lesson showing a bare axis grid). The
+    // concept is not untested — it is now asserted MORE strictly, as
+    // resolving to null, in 'generic-canvas bindings must not stand in for a
+    // real figure' below.
     ['phys.mech.angular-momentum', 'three_circular_motion'],
     ['phys.mech.conservation-of-angular-momentum', 'three_circular_motion'],
     ['phys.mech.rolling-motion', 'three_circular_motion'],
@@ -406,5 +411,48 @@ describe('textPromisesUnfulfilledVisual', () => {
   it('does not fire on unrelated uses of "here is" or "look at"', () => {
     expect(textPromisesUnfulfilledVisual("Here's the formula you'll need: F = ma.")).toBe(false)
     expect(textPromisesUnfulfilledVisual('Look at the second term in the equation.')).toBe(false)
+  })
+})
+
+// ── P0, live capture (Lesson 39, Angular Kinematics) ────────────────────────
+// The tutor taught a rotating bicycle wheel (θ, ω, α; "a point on a circle of
+// radius r … arc s = rθ") while the figure on screen was a bare coordinate
+// grid with a demo point. Reproduced against production before being fixed.
+describe('generic-canvas bindings must not stand in for a real figure', () => {
+  // A generic canvas is only meaningful once a generator draws on it — which
+  // is exactly what kinematics-1d/2d have and angular-kinematics did not.
+  const GENERIC_CANVAS = new Set(['coordinate_plane', 'number_line'])
+
+  it('angular kinematics no longer resolves to a bare coordinate grid', () => {
+    expect(getConceptVisualType('phys.mech.angular-kinematics')).toBeNull()
+    expect(getConceptSceneGenerator('phys.mech.angular-kinematics')).toBeNull()
+  })
+
+  it('phys.mech has no domain default, so unmapping really means no figure', () => {
+    // If a domain default existed the concept would silently inherit one and
+    // the fix above would be cosmetic. This is the assertion that makes the
+    // removal meaningful rather than decorative.
+    expect(getConceptVisualType('phys.mech.some-unmapped-concept-xyz')).toBeNull()
+  })
+
+  it('the neighbouring bindings the fix must NOT disturb are unchanged', () => {
+    // kinematics-1d/2d keep the generator that makes their canvas a graph.
+    expect(getConceptVisualType('phys.mech.kinematics-1d')).toBe('coordinate_plane')
+    expect(getConceptSceneGenerator('phys.mech.kinematics-1d')).toBe('kinematics_graphs')
+    expect(getConceptSceneGenerator('phys.mech.kinematics-2d')).toBe('kinematics_graphs')
+    // Reported as plausibly correct and deliberately left alone.
+    expect(getConceptVisualType('phys.mech.newtons-first-law')).toBe('three_newton_forces')
+    expect(getConceptVisualType('phys.mech.angular-momentum')).toBe('three_circular_motion')
+    expect(getConceptSceneGenerator('phys.mech.torque')).toBe('torque_diagram')
+  })
+
+  it('a canvas that IS the concept keeps its binding', () => {
+    // The rule is not "generic canvas + no generator is always wrong": for
+    // these the canvas is the lesson, not a stage for an absent curve.
+    for (const id of ['math.arith.number-line', 'math.arith.integers']) {
+      const t = getConceptVisualType(id)
+      expect(t).not.toBeNull()
+      expect(GENERIC_CANVAS.has(t as string)).toBe(true)
+    }
   })
 })

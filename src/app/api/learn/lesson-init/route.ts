@@ -33,7 +33,7 @@ import { prisma } from '@/lib/prisma'
 import { z } from 'zod'
 import { routeAI } from '@/lib/ai/router'
 import { AIBudgetExceededError } from '@/lib/ai/budget'
-import { buildTutorSystemPrompt, type LessonContext } from '@/lib/ai/client'
+import { buildTutorSystemPrompt, buildLessonOpeningOverride, type LessonContext } from '@/lib/ai/client'
 import { MessageRole } from '@prisma/client'
 
 const schema = z.object({
@@ -343,6 +343,13 @@ export async function POST(req: Request) {
       teachingLanguage,
       lessonCtx,
     )
+      // The shared prompt carries a NAVIGATION RULE whose trigger list includes
+      // "restart lesson" — which is exactly what buildInstruction() sends below
+      // as this route's user turn. Without this override the endpoint refuses
+      // its own instruction and answers a learner who just navigated with
+      // "Use the lesson navigation panel at the top to switch lessons."
+      // Reproduced live; see buildLessonOpeningOverride.
+      + buildLessonOpeningOverride(lessonTitle)
 
     // Build the instruction string (the user-role trigger sent to the LLM).
     // This is NEVER written to the DB — it is ephemeral context only.

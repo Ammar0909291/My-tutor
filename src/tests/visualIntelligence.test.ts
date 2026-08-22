@@ -62,6 +62,56 @@ describe('D.23-30 — Visual Intelligence layer', () => {
       const result = stripRawImageUrls(input)
       expect(result).not.toContain('\n\n\n')
     })
+
+    // ── The url-less placeholder (live capture, Lesson 39 Angular Kinematics).
+    // MD_IMAGE_RE requires the `(url)` half, so `![alt]` passed through and the
+    // learner's whole reply to "Can you give me a diagram?" was markup.
+    describe('![alt] with no (url) — the live Lesson 39 defect', () => {
+      const LIVE = '![Angular displacement diagram: a circle with a point moving from angle 0 to angle π⁄2, showing radius r, arc s, and angle θ]'
+
+      it('no longer leaves the raw placeholder in learner-facing text', () => {
+        const out = stripRawImageUrls(LIVE)
+        expect(out).not.toContain('![')
+        expect(out).not.toContain(']')
+      })
+
+      it('does NOT answer the learner with an empty message', () => {
+        // cleanText has no emptiness guard on any return site, so deleting the
+        // only content on the turn would serve a blank tutor message.
+        const out = stripRawImageUrls(LIVE)
+        expect(out.length).toBeGreaterThan(40)
+        expect(out).toContain('angular displacement diagram'.replace('angular', 'Angular'))
+        expect(out).toContain('radius r')
+      })
+
+      it('unwraps an inline placeholder without eating the sentence', () => {
+        expect(stripRawImageUrls('Here it is ![a circle diagram] and that is all.'))
+          .toBe('Here it is a circle diagram and that is all.')
+      })
+
+      it('handles an empty alt text without leaving markup', () => {
+        expect(stripRawImageUrls('before ![] after')).toBe('before  after')
+      })
+
+      // Negative controls — the discriminator is the leading '!', so ordinary
+      // markdown and bracketed prose must be untouched.
+      it('leaves ordinary markdown links and bracketed prose alone', () => {
+        expect(stripRawImageUrls('See [the notes](https://x.test/n) for more.'))
+          .toBe('See [the notes](https://x.test/n) for more.')
+        expect(stripRawImageUrls('The set [1, 2, 3] has three members.'))
+          .toBe('The set [1, 2, 3] has three members.')
+        expect(stripRawImageUrls('Solve f[x] = 2 for x.')).toBe('Solve f[x] = 2 for x.')
+      })
+
+      // The shipped url-carrying branch must be byte-for-byte unchanged: the
+      // two branches are kept disjoint by the negative lookahead.
+      it('the (url) form still deletes, exactly as before', () => {
+        expect(stripRawImageUrls('Look at this: ![diagram](https://example.com/img.png) and continue'))
+          .toBe('Look at this:  and continue')
+        expect(stripRawImageUrls('![a](http://x.com/a.png) text ![b](http://x.com/b.svg)'))
+          .toBe('text')
+      })
+    })
   })
 
   describe('buildVisualIntelligenceBlock (D.23-30)', () => {
