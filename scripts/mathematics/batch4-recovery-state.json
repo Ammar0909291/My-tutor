@@ -1,0 +1,60 @@
+{
+  "batch": 4,
+  "productionDeployment": {
+    "deploymentId": "dpl_AvQvEyhQm119eCekY9kK9enAARLs",
+    "commit": "531b2c2",
+    "status": "READY"
+  },
+  "certificationCriteria": {
+    "correctAtCheck": ">=1",
+    "correctAtPractice": ">=2",
+    "verified": true,
+    "finalPhase": "TRANSFER",
+    "minClosedChoiceProbes": 3,
+    "forbiddenAccounts": ["suaibamr@gmail.com"]
+  },
+  "expectedOutputLocation": "harness stdout JSON (scripts/math/certify.ts), one CertificationResult per targeted concept",
+  "harness": "scripts/math/certify.ts (unmodified, do not alter)",
+  "unresolvedTransportBlocked": [
+    {
+      "conceptId": "math.arith.mental-addition",
+      "status": "HARNESS-ERROR",
+      "previousAttempts": 1,
+      "reason": "sandbox outbound transport cascade (TypeError: fetch failed) after an earlier concept in the same run succeeded",
+      "retryAllowed": true
+    },
+    {
+      "conceptId": "math.arith.number-line",
+      "status": "HARNESS-ERROR",
+      "previousAttempts": 1,
+      "reason": "same cascade, same run as mental-addition",
+      "retryAllowed": true
+    },
+    { "conceptId": "math.arith.ordering", "status": "NOT-ATTEMPTED", "previousAttempts": 0, "reason": "Group B never reached — campaign stopped before it per the recurring-environment-fault stop condition", "retryAllowed": true },
+    { "conceptId": "math.arith.multiplication-table", "status": "NOT-ATTEMPTED", "previousAttempts": 0, "reason": "Group B never reached", "retryAllowed": true },
+    { "conceptId": "math.geom.ray", "status": "NOT-ATTEMPTED", "previousAttempts": 0, "reason": "Group B never reached", "retryAllowed": true },
+    { "conceptId": "math.geom.plane", "status": "NOT-ATTEMPTED", "previousAttempts": 0, "reason": "Group B never reached", "retryAllowed": true },
+    { "conceptId": "math.geom.perpendicular-lines", "status": "NOT-ATTEMPTED", "previousAttempts": 0, "reason": "Group C never reached", "retryAllowed": true },
+    { "conceptId": "math.geom.triangle-types", "status": "NOT-ATTEMPTED", "previousAttempts": 0, "reason": "Group C never reached", "retryAllowed": true },
+    { "conceptId": "math.geom.pythagorean-converse", "status": "NOT-ATTEMPTED", "previousAttempts": 0, "reason": "Group C never reached", "retryAllowed": true },
+    { "conceptId": "math.nt.fundamental-theorem-arithmetic", "status": "NOT-ATTEMPTED", "previousAttempts": 0, "reason": "Group D never reached", "retryAllowed": true },
+    { "conceptId": "math.nt.residue-classes", "status": "NOT-ATTEMPTED", "previousAttempts": 0, "reason": "Group D never reached", "retryAllowed": true },
+    { "conceptId": "math.nt.primality-testing", "status": "NOT-ATTEMPTED", "previousAttempts": 0, "reason": "Group D never reached", "retryAllowed": true }
+  ],
+  "unmeasuredProviderOutage": [
+    { "conceptId": "math.found.logical-connectives", "status": "UNMEASURED", "previousAttempts": 2, "reason": "AI-provider INFRASTRUCTURE-degraded on both attempts", "retryAllowed": true, "note": "one clean retry is sufficient per the recovery loop's own Phase 7" },
+    { "conceptId": "math.arith.number-base", "status": "UNMEASURED", "previousAttempts": 1, "reason": "AI-provider INFRASTRUCTURE-degraded", "retryAllowed": true }
+  ],
+  "confirmedPassThisBatch": [
+    "math.found.mathematical-notation",
+    "math.found.mathematical-symbols",
+    "math.found.proposition",
+    "math.found.truth-table"
+  ],
+  "environmentFinding": {
+    "sandboxTransportFault": "reproduced 3 times: first concept in a run succeeds, then every subsequent fetch() call in that same Node process fails with TypeError: fetch failed, for the remainder of the run; curl and short fetch() bursts always succeed cleanly before/after",
+    "independentEnvironmentAttempted": "env_01BTb5336mMShf1CngnChTQ3 (trusted network access) via mcp__Claude_Code_Remote__create_session",
+    "independentEnvironmentResult": "session creation failed 3x with 'the service is temporarily unavailable' (list_environments succeeded in between, isolating the failure to session creation specifically)",
+    "conclusion": "not a Tutor Max defect; do not patch code, do not lower certification bar, do not retry endlessly in the failing sandbox"
+  }
+}
