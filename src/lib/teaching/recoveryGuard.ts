@@ -176,7 +176,12 @@ const STRONG_PATTERNS: Array<[FailureStateKey, RegExp]> = [
 ]
 
 const MILD_PATTERNS: Array<[FailureStateKey, RegExp]> = [
-  ['dont_understand', /\bi\s+(really\s+|just\s+)?(don'?t|do\s+not)\s+understand\b/i],
+  // F2 (real-student session): "wait did i pass? I DON'T THINK I UNDERSTAND
+  // it" fell through this pattern — "think i" sits between the negation and
+  // "understand", and the fixed word order below had no room for a hedge. A
+  // hedged admission is not a rarer shape of "I don't understand"; it's the
+  // softer way a low-confidence student says the same thing.
+  ['dont_understand', /\bi\s+(really\s+|just\s+)?(don'?t|do\s+not)\s+(think\s+i\s+)?understand\b/i],
   // Past-tense / pronoun-less variants — "Didn't understand", "still didn't
   // get it", "didn't follow" — the live-transcript bug: the present-tense
   // pattern above missed the most common student phrasings.
