@@ -176,4 +176,207 @@ describe('explicit finish request (07 §6 extension)', () => {
     const afterSignal = applySignalToEpisode(closed, { correctness: true }, { isFirstLesson: false })
     expect(afterSignal.phase).toBe('CLOSING')
   })
+
+  // ── F2 regression suite (2026-08-22): patterns added after a real-student
+  // session where 34 of 35 natural stop phrasings were missed.
+  describe('F2 — widened stop/defer coverage', () => {
+    const yes = (msg: string) => expect(detectExplicitFinishRequest(msg)).toBe(true)
+    const no = (msg: string) => expect(detectExplicitFinishRequest(msg)).toBe(false)
+
+    it('bare "I want/need to stop" (session intent, nothing follows)', () => {
+      yes('I want to stop')
+      yes('I want to stop.')
+      yes('i need to stop')
+      yes('I wanna stop!')
+    })
+
+    it('"please stop" / "just stop" as the whole message', () => {
+      yes('please stop')
+      yes('just stop')
+      yes('stop')
+      yes('ok stop')
+      yes('Stop.')
+      yes('stop please')
+    })
+
+    it('"I\'m done" bare (no qualifier)', () => {
+      yes("I'm done")
+      yes("I'm done.")
+      yes("i am done")
+      yes("ok I'm done")
+    })
+
+    it('bare "done" as the whole message', () => {
+      yes('done')
+      yes('Done.')
+      yes('DONE!')
+    })
+
+    it('"enough" / "that\'s enough" as the whole message', () => {
+      yes('enough')
+      yes("that's enough")
+      yes('ok enough')
+      yes('Enough!')
+    })
+
+    it('bye / goodbye / ok bye', () => {
+      yes('bye')
+      yes('goodbye')
+      yes('ok bye')
+      yes('bye bye')
+      yes('Goodbye!')
+    })
+
+    it('"I\'m leaving" / "I\'m going" — departure signal', () => {
+      yes("I'm leaving")
+      yes("I'm going")
+      yes("I am leaving")
+      yes("i am going now")
+    })
+
+    it('"I\'m tired" — fatigue exit', () => {
+      yes("I'm tired")
+      yes("I am tired")
+      yes("I'm so tired")
+      yes("I'm really tired.")
+    })
+
+    it('"I need a break" / "let me take a break"', () => {
+      yes('I need a break')
+      yes('let me take a break')
+      yes('let me have a break')
+    })
+
+    it('"let\'s stop" (bare or with here/now/for today)', () => {
+      yes("let's stop")
+      yes("let's stop here")
+      yes("let's stop now")
+      yes("let's stop for today")
+      yes("lets stop")
+    })
+
+    it('"can we stop" bare', () => {
+      yes('can we stop')
+      yes('can we stop?')
+    })
+
+    it('"I don\'t want to continue/do this/keep going"', () => {
+      yes("I don't want to continue")
+      yes("i dont want to do this")
+      yes("I don't want to keep going")
+      yes("I do not want to go on")
+    })
+
+    it('"no more" / "no more questions" / "no more please"', () => {
+      yes('no more')
+      yes('no more questions')
+      yes('no more please')
+      yes('No more!')
+    })
+
+    it('defer intent: "let\'s continue/do this later"', () => {
+      yes("let's continue later")
+      yes("can we do this later")
+      yes("let's come back tomorrow")
+      yes("can we continue another time")
+      yes("I'll come back later")
+      yes("I will continue tomorrow")
+      yes("I'll do this next time")
+    })
+
+    it('"that\'s it/all for today/now"', () => {
+      yes("that's it for today")
+      yes("that's all for now")
+      yes("thats it for today")
+    })
+
+    it('"not now" / "not right now"', () => {
+      yes('not now')
+      yes('not right now')
+      yes('Not now.')
+    })
+
+    // ── Russian patterns ─────────────────────────────────────────────────
+    it('Russian stop/defer phrasings', () => {
+      yes('хватит')
+      yes('всё')
+      yes('мне пора')
+      yes('давай закончим')
+      yes('давай остановимся')
+      yes('я ухожу')
+      yes('я пошёл')
+      yes('я пошла')
+      yes('хочу остановиться')
+      yes('надо закончить')
+      yes('хочу перерыв')
+      yes('пока')
+      yes('до свидания')
+      yes('устал')
+      yes('устала')
+      yes('устали')
+    })
+
+    // ── Hindi (Devanagari) patterns ──────────────────────────────────────
+    it('Hindi (Devanagari) stop/defer phrasings', () => {
+      yes('मुझे जाना है')
+      yes('बस करो')
+      yes('बस करें')
+      yes('रुको')
+      yes('रुकें')
+      yes('काफी है')
+      yes('काफ़ी है')
+      yes('बंद करो')
+      yes('बंद करें')
+      yes('थक गया')
+      yes('थक गयी')
+      yes('थक गये')
+    })
+
+    // ── Romanized Hindi (Hinglish) patterns ──────────────────────────────
+    it('Romanized Hindi stop/defer phrasings', () => {
+      yes('bas karo')
+      yes('bas karen')
+      yes('band karo')
+      yes('band karen')
+      yes('mujhe jaana hai')
+      yes('mujhe jana hai')
+      yes('thak gaye')
+      yes('thak gayi')
+      yes('thak gaya')
+    })
+
+    // ── Negative cases: must NOT fire ────────────────────────────────────
+    it('method complaints go to recoveryGuard, NOT session stop', () => {
+      no('stop asking me questions')
+      no('stop explaining it that way')
+      no('stop repeating yourself')
+      no('can you stop giving me so many problems')
+      no('please stop testing me')
+    })
+
+    it('finishing a problem/example is NOT a session stop', () => {
+      no("let's finish this equation")
+      no('can we finish this problem first?')
+      no("I'm done with this problem, what's next?")
+      no("I'm done with fractions, can we move on?")
+      no("enough about this topic, what's next?")
+    })
+
+    it('content references containing stop/done/enough words', () => {
+      no('I got this topic move to next')
+      no('what happens next?')
+      no("I'm going to try a different approach")
+      no('when did this stop being true?')
+      no('is this enough to solve it?')
+      no("I'm tired of fractions, can we do geometry?")
+    })
+
+    it('questions and continuations that contain trigger words incidentally', () => {
+      no('can we stop using this method and try another?')
+      no('how do I stop the timer in the problem?')
+      no("I'm done with the first part, now what?")
+      no('are we done with this section?')
+      no("that's enough context, let me try")
+    })
+  })
 })

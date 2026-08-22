@@ -236,6 +236,80 @@ const FINISH_REQUEST_PATTERNS: RegExp[] = [
   /\bi\s+(have\s+to|need\s+to|gotta)\s+go\b/i,
   /\bthat'?s\s+enough\s+for\s+(today|now)\b/i,
   /\bcan\s+we\s+(stop|end|finish)\s+(here|now|for\s+today)\b/i,
+
+  // ── F2 (real-student session, 2026-08-22): the patterns above caught only
+  // 8 whole-phrase shapes and missed the most natural stop phrasings a
+  // student types — "I want to stop", "I'm done", "bye", "enough", "I need
+  // a break", and every Russian/Hindi equivalent. Measured: 1 of 35 natural
+  // phrasings matched. The discriminator between a session-stop and a
+  // method-complaint ("stop asking me questions") is what follows "stop":
+  // nothing (or generic filler) = session; a specific object = method, and
+  // that is handled by recoveryGuard's too_many_questions family.
+
+  // Bare "I want/need to stop" or "I wanna stop" — session intent when nothing specific follows
+  /\bi\s+(want|need)\s+to\s+stop[.!?\s]*$/i,
+  /\bi\s+wanna\s+stop[.!?\s]*$/i,
+  // "please stop" / "just stop" / "ok stop" as the whole message
+  /^(?:ok(?:ay)?|please|just)?[\s,.]*stop[\s,.]*(?:please|now)?[.!?\s]*$/i,
+  // "I'm done" / "I am done" without "for today/now" (the "for today" form
+  // is already covered above — this catches the bare form)
+  /^(?:ok(?:ay)?[\s,.]*)?(?:i'?m|i\s+am)\s+done[.!?\s]*$/i,
+  // Bare "done" as the whole message
+  /^done[.!?\s]*$/i,
+  // "enough" / "ok enough" as the whole message
+  /^(?:ok(?:ay)?[\s,.]*)?(?:that'?s\s+)?enough[.!?\s]*$/i,
+  // "bye" / "goodbye" / "ok bye" — the clearest exit signal
+  /^(?:ok(?:ay)?[\s,.]*)?(?:good\s*bye|bye(?:\s*bye)?)[.!?\s]*$/i,
+  // "I'm leaving" / "I'm going" — departure signal, but NOT "I'm going to
+  // try..." (a continuation, not departure). The $ anchor (with optional
+  // "now" and trailing filler) ensures nothing meaningful follows.
+  /\bi(?:'?m|\s+am)\s+(leaving|going)(\s+now)?[.!?\s]*$/i,
+  // "I'm tired" / "I am tired" — fatigue-driven exit
+  /\bi(?:'?m|\s+am)\s+(so\s+|really\s+)?tired[.!?\s]*$/i,
+  // "I need a break" / "let me take a break"
+  /\b(i\s+need|let\s+me\s+(take|have))\s+a\s+break\b/i,
+  // "let's stop" (with or without "here"/"now")
+  /\blet'?s\s+stop(\s+(here|now|for\s+today))?[.!?\s]*$/i,
+  // "can we stop" (without "here/now/for today" — the "here/now" form is
+  // already covered above, this catches the bare form)
+  /\bcan\s+we\s+stop[.!?\s]*$/i,
+  // "I don't want to continue" / "I don't want to do this anymore"
+  /\bi\s+(don'?t|do\s+not)\s+want\s+to\s+(continue|do\s+this|keep\s+going|go\s+on)\b/i,
+  // "no more" / "no more questions" / "no more please" as the whole message
+  /^no\s+more(\s+(questions|please))?[.!?\s]*$/i,
+  // Defer intent: "let's continue/do this later/another time"
+  /\b(let'?s|can\s+we)\s+(continue|do\s+this|come\s+back)\s+(later|another\s+time|tomorrow|next\s+time)\b/i,
+  /\b(i'?ll|i\s+will)\s+(come\s+back|continue|do\s+this)\s+(later|another\s+time|tomorrow|next\s+time)\b/i,
+  // "that's it for today" / "that's all for today"
+  /\bthat'?s\s+(it|all)\s+for\s+(today|now)\b/i,
+  // "not now" / "not right now" as the whole message
+  /^not\s+(right\s+)?now[.!?\s]*$/i,
+
+  // ── Russian stop/defer patterns ────────────────────────────────────────
+  // Script-discriminated (Cyrillic can never collide with Latin patterns).
+  /(?<!\p{L})хватит(?!\p{L})/iu,
+  /(?<!\p{L})всё(?!\p{L})/iu,
+  /(?<!\p{L})мне\s+пора(?!\p{L})/iu,
+  /(?<!\p{L})давай\s+(закончим|остановимся)(?!\p{L})/iu,
+  /(?<!\p{L})я\s+(ухожу|пошёл|пошла)(?!\p{L})/iu,
+  /(?<!\p{L})(хочу|надо)\s+(остановиться|закончить|перерыв)(?!\p{L})/iu,
+  /(?<!\p{L})пока(?!\p{L})/iu,
+  /(?<!\p{L})до\s+свидания(?!\p{L})/iu,
+  /(?<!\p{L})устал[аи]?(?!\p{L})/iu,
+
+  // ── Hindi (Devanagari) stop/defer patterns ─────────────────────────────
+  /मुझे\s+जाना\s+है/u,
+  /बस\s+कर(ो|ें)?/u,
+  /रुक(ो|ें)?/u,
+  /काफ़?ी\s+है/u,
+  /बंद\s+कर(ो|ें)?/u,
+  /थक\s+गय[ाीे]/u,
+
+  // ── Romanized Hindi (Hinglish) ─────────────────────────────────────────
+  /\bbas\s+kar(o|en)?\b/i,
+  /\bband\s+kar(o|en)?\b/i,
+  /\bmujhe\s+(?:jaana|jana)\s+hai\b/i,
+  /\bthak\s+gay[aie]\b/i,
 ]
 
 export function detectExplicitFinishRequest(message: string): boolean {
