@@ -4523,7 +4523,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                   subjectName={subjectName}
                   isReplay={preludeReplay}
                   busy={preludeSaving}
-                  continueLabel={preludeReplay ? t('prelude_done_btn') : t('prelude_continue_btn')}
+                  continueLabel={preludeReplay ? t('prelude_done_btn') : t('prelude_continue_btn').replace('{subject}', subjectName)}
                   onContinue={() => { void completePrelude() }}
                   // Same voice pipeline as every tutor message: the shared
                   // playback manager, the learner's saved voice and speed, and
