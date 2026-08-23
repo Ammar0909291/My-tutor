@@ -40,6 +40,9 @@ const baseInput = {
   teachingLanguage: 'en',
   hasPendingAnswerToReactTo: false,
   hasAttachedFigure: false,
+  // Refusal 3: the learner asked for something this turn. The default is
+  // false — these cases are about a learner who ANSWERED, not one who asked.
+  learnerMadeARequest: false,
 }
 
 describe('the assessment itself is untouched (1-5)', () => {

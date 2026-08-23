@@ -3459,6 +3459,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 teachingLanguage: teachingLang,
                 hasPendingAnswerToReactTo: mcqGradeHoisted !== null,
                 hasAttachedFigure: visualDecisionHoisted?.graphical === true,
+                // Computed ~800 lines above for the teaching-action dispatch;
+                // read here, never set. A learner who asked for a diagram, an
+                // example, or a different explanation gets the model's turn,
+                // and the authored probe is still attached beneath it.
+                learnerMadeARequest: learnerRequestHoisted !== null,
               })
             } catch (err) {
               // Rendering is an optimisation; the model path is the contract.

@@ -32,7 +32,35 @@
  *      mentions a diagram the learner can plainly see is worse than no
  *      diagram, so the figure keeps the model.
  *
- *   3. THE LESSON IS NOT IN ENGLISH. These templates are English. The tutor
+ *   3. THE LEARNER ASKED FOR SOMETHING. Measured live on
+ *      chem.found.pure-substances, a concept with no visual binding, twice in
+ *      one seven-turn beginner journey:
+ *
+ *          learner  "can you show me a picture?"
+ *          tutor    "A question about Pure Substances and Mixtures now — read
+ *                    it carefully first."      [a graded question, no figure]
+ *
+ *      The request was not declined. It was DISCARDED: a rendered lead-in
+ *      means the provider is never called, so nothing in the turn ever saw
+ *      what the learner typed. The two refusals above model "is teaching
+ *      owed?" as exactly two things — a pending answer and an attached figure
+ *      — and a direct request from the learner is a third.
+ *
+ *      This is not visual-specific and the fix deliberately is not either: on
+ *      a gate turn, "what does that word mean?" was being overwritten by the
+ *      same mechanism. The signal consumed is the one the route already
+ *      computes for this exact purpose, `detectLearnerRequest` — whose own
+ *      docblock records the previous, closely related defect of a picture
+ *      request being silenced. No new detector, no widened pattern list.
+ *
+ *      NOTE WHAT THIS DOES NOT DO. The gate still fires, the same authored
+ *      probe is still selected and still attached, and grading is untouched:
+ *      `buildGateAssessmentBlock` is added to the prompt either way. Only the
+ *      SENTENCE above the question returns to the model, so it can answer the
+ *      learner and then lead in. A request does not outrank teaching; it stops
+ *      being thrown away.
+ *
+ *   4. THE LESSON IS NOT IN ENGLISH. These templates are English. The tutor
  *      teaches in en/hi/ru, and a Hindi learner must not receive an English
  *      sentence stapled to an authored question. Translating them is authoring
  *      work with a review requirement, not a string table, so a non-English
@@ -103,6 +131,16 @@ export interface GateLeadInInput {
   hasPendingAnswerToReactTo: boolean
   /** True when a figure is attached to this turn. */
   hasAttachedFigure: boolean
+  /**
+   * True when the learner's message THIS turn was an explicit request —
+   * a diagram, a real-life example, or "explain it differently".
+   *
+   * The caller passes `detectLearnerRequest(message) !== null`; that function
+   * is already computed earlier in the same turn for the teaching-action
+   * dispatch, so this consumes an existing decision rather than re-deciding
+   * it. See refusal 3 above for the measured failure.
+   */
+  learnerMadeARequest: boolean
 }
 
 /**
@@ -115,6 +153,9 @@ export interface GateLeadInInput {
 export function renderGateLeadIn(input: GateLeadInInput): string | null {
   if (input.hasPendingAnswerToReactTo) return null
   if (input.hasAttachedFigure) return null
+  // The learner asked for something. Answering it is the model's, and a
+  // rendered lead-in would mean nothing in this turn ever read the request.
+  if (input.learnerMadeARequest) return null
   if (input.teachingLanguage !== 'en') return null
 
   const question = typeof input.question === 'string' ? input.question.trim() : ''
