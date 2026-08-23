@@ -411,3 +411,55 @@ export function buildLessonOpeningOverride(lessonTitle: string): string {
 
 LESSON OPENING — THIS TURN IS NOT A NAVIGATION REQUEST. The lesson has ALREADY been selected by the UI and you are opening it. The NAVIGATION RULE above does NOT apply to this turn: do NOT tell the student to use the lesson navigation panel, do NOT treat the instruction to start or restart "${lessonTitle}" as a request to switch lessons, and do NOT refuse it. Open the lesson: name it, state in one or two sentences what it is about and what the student will be able to do by the end, then begin teaching it.`
 }
+
+/**
+ * Did the model answer a lesson OPENING with the navigation refusal?
+ *
+ * buildLessonOpeningOverride (above) was written to prevent exactly this, and
+ * it is a PROMPT instruction — so it reduces the failure rate and cannot
+ * eliminate it. Measured against production on 2026-08-23, twelve openings
+ * across four lessons and three subjects: ELEVEN opened correctly and ONE
+ * returned the refusal as the entire turn —
+ *
+ *     learner   taps "Critical Points"
+ *     tutor     "Use the lesson navigation panel at the top to switch lessons."
+ *
+ * That is a learner's first contact with a lesson answered by a refusal to
+ * teach it, with no lesson content at all, after they navigated. Roughly one
+ * opening in twelve is not a cosmetic rate.
+ *
+ * Two changes address it, and they are deliberately different in kind:
+ *
+ *  1. buildInstruction no longer sends "restart lesson" as the user turn.
+ *     That phrase is verbatim in the NAVIGATION RULE's own trigger list, so
+ *     the endpoint's instruction was tripping the endpoint's guard. Removing
+ *     the collision at source is the root-cause fix and costs nothing.
+ *
+ *  2. This predicate is the backstop, because (1) still leaves the model free
+ *     to classify an opening as navigation on its own. It is deliberately
+ *     NARROW: it fires only when the refusal sentence is essentially the whole
+ *     turn. A real opening that happens to mention the navigation panel in
+ *     passing — a legitimate thing to say at the end of a lesson — is longer
+ *     than this and is left alone. It never rewrites teaching; the caller
+ *     re-asks once, and no content is invented on the model's behalf.
+ */
+// All three localized refusal sentences, read from the three NAVIGATION RULE
+// blocks in this same file rather than guessed at. The defect is structural,
+// not English-only: the Russian rule's trigger list contains «начать заново»
+// and the Russian restart instruction said «начнём урок «X» заново» — the same
+// collision, in Russian, for learners this session could not measure live.
+const NAV_REFUSAL_RE = new RegExp([
+  'use the lesson navigation panel at the top to switch lessons',
+  'используй панель навигации вверху, чтобы переключить урок',
+  'lesson switch karne ke liye upar wali navigation panel use karein',
+].join('|'), 'i')
+
+export function isNavigationRefusalOpening(text: string): boolean {
+  const stripped = text.replace(/[\s*_`#>-]+/g, ' ').trim()
+  if (!NAV_REFUSAL_RE.test(stripped)) return false
+  // "Essentially the whole turn": the refusal sentence is ~60 characters, so a
+  // turn that also opened the lesson is several times longer. The threshold is
+  // generous on purpose — withholding a real opening would be a worse failure
+  // than serving an occasional refusal.
+  return stripped.length <= 160
+}

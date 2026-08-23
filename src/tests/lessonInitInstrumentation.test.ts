@@ -67,8 +67,20 @@ describe('2 — provider and count are persisted on the opening', () => {
 })
 
 describe('4 — instrumentation introduces no provider call', () => {
-  it('lesson-init still has exactly one routeAI call site', () => {
-    expect((INIT.match(/await routeAI\(/g) ?? []).length).toBe(1)
+  it('lesson-init has exactly two routeAI call sites, and the second is guarded', () => {
+    // UPDATED 2026-08-23. This test's subject is that INSTRUMENTATION never
+    // adds a provider call, and that remains true and remains asserted — the
+    // count is still exact, so a stray or accidental call still fails here.
+    //
+    // The second site is not instrumentation. It is the navigation-refusal
+    // backstop: measured at 1 opening in 12, the model answered a lesson
+    // opening with "Use the lesson navigation panel at the top to switch
+    // lessons." and nothing else. That call is deliberate, rare, and must stay
+    // conditional — so the guard is asserted alongside the count. Relaxing the
+    // count to "at least one" would have hidden exactly what this test exists
+    // to catch.
+    expect((INIT.match(/await routeAI\(/g) ?? []).length).toBe(2)
+    expect(INIT).toContain('if (isNavigationRefusalOpening(routed.text))')
   })
 
   it('the chat route is untouched at three sites', () => {

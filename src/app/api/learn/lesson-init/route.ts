@@ -33,7 +33,7 @@ import { prisma } from '@/lib/prisma'
 import { z } from 'zod'
 import { routeAI } from '@/lib/ai/router'
 import { AIBudgetExceededError } from '@/lib/ai/budget'
-import { buildTutorSystemPrompt, buildLessonOpeningOverride, type LessonContext } from '@/lib/ai/client'
+import { buildTutorSystemPrompt, buildLessonOpeningOverride, isNavigationRefusalOpening, type LessonContext } from '@/lib/ai/client'
 import { MessageRole } from '@prisma/client'
 
 const schema = z.object({
@@ -409,6 +409,35 @@ export async function POST(req: Request) {
         teachingLanguage,
         { userId, subject: learnSession.subject.slug },
       )
+      // BACKSTOP — a lesson opening that refuses to open the lesson is not
+      // served. buildLessonOpeningOverride is a prompt instruction, so it
+      // lowers this rate without removing it: measured 1 in 12 openings
+      // against production. Re-ask ONCE, with the refusal named explicitly,
+      // and keep whichever answer is not a refusal. Nothing is invented here —
+      // if the retry refuses too, the original is served rather than replaced
+      // with content this route made up.
+      if (isNavigationRefusalOpening(routed.text)) {
+        console.warn('[lesson-init] opening returned the navigation refusal; re-asking once')
+        try {
+          llmCallCount++
+          const retry = await routeAI(
+            [...historyMessages, { role: 'user', content: instruction }],
+            systemPrompt
+              + '\n\nYOUR PREVIOUS ATTEMPT REFUSED THIS TURN by replying "Use the lesson '
+              + 'navigation panel at the top to switch lessons." That reply is WRONG here: '
+              + `the UI has already opened "${lessonTitle}" and there is nothing to switch to. `
+              + 'Open the lesson and teach it.',
+            country,
+            1200,
+            teachingLanguage,
+            { userId, subject: learnSession.subject.slug },
+          )
+          if (!isNavigationRefusalOpening(retry.text)) routed = retry
+        } catch (retryError) {
+          console.warn('[lesson-init] opening retry failed; serving the original:',
+            retryError instanceof Error ? retryError.message : String(retryError))
+        }
+      }
     } catch (aiError) {
       if (aiError instanceof AIBudgetExceededError) throw aiError
       console.error('[lesson-init] all providers down — serving degraded template (RS P-3):',
@@ -516,17 +545,24 @@ function buildInstruction(
   lang: 'en' | 'ru' | 'hi',
 ): string {
   if (lang === 'ru') {
-    if (mode === 'restart') return `Давай начнём урок «${lessonTitle}» заново. Пожалуйста, начни сначала с полным вступлением по структуре урока.`
+    // NOT «заново»: that exact word is in the Russian NAVIGATION RULE's
+    // trigger list, the same collision the English instruction had.
+    if (mode === 'restart') return `Открой урок «${lessonTitle}» и проведи его с самого начала. Пожалуйста, начни с полного вступления по структуре урока.`
     if (mode === 'review')  return `🔁 РЕЖИМ ПОВТОРЕНИЯ: Давай повторим тему "${lessonTitle}". Объясни ключевые концепции и дай практические задания.`
     return `Продолжим с урока: ${lessonTitle}`
   }
   if (lang === 'hi') {
-    if (mode === 'restart') return `"${lessonTitle}" dobara shuru karte hain. Bilkul shuruaat se poora lesson opening karo.`
+    // Same reason as en/ru: keep the instruction clear of the Hindi rule's
+    // restart/"dobara" phrasing so it cannot read as a switch request.
+    if (mode === 'restart') return `Lesson "${lessonTitle}" ab kholo aur shuruaat se padhao. Poora lesson opening karo.`
     if (mode === 'review')  return `🔁 REVISION MODE: "${lessonTitle}" dobara padho. Key concepts explain karo aur practice exercises do.`
     return `Lesson shuru karte hain: ${lessonTitle}`
   }
   // English (default)
-  if (mode === 'restart') return `Let's restart lesson "${lessonTitle}" from the beginning. Please begin the full lesson opening.`
+  // NOT "restart lesson": that exact phrase is in the shared NAVIGATION
+  // RULE's trigger list, so this instruction used to trip the guard the same
+  // prompt carries. See isNavigationRefusalOpening.
+  if (mode === 'restart') return `Open lesson "${lessonTitle}" now and teach it from the beginning. Please begin the full lesson opening.`
   if (mode === 'review')  return `🔁 REVISION MODE: Let's review "${lessonTitle}". Please explain the key concepts and give me practice exercises.`
   return `Let's start lesson "${lessonTitle}".`
 }

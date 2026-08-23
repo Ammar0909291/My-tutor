@@ -18,14 +18,25 @@ import { buildTutorSystemPrompt, buildLessonOpeningOverride } from '@/lib/ai/cli
 const ROUTE = readFileSync('src/app/api/learn/lesson-init/route.ts', 'utf8')
 
 describe('lesson-init opening override', () => {
-  it('the collision is real: the shared prompt refuses the phrase lesson-init sends', () => {
-    // Both halves asserted from the SOURCE, so this test fails if either the
-    // rule's trigger list or the instruction wording changes — which is what
-    // would silently re-open the defect.
+  it('the collision is GONE: the instruction no longer sends a trigger phrase', () => {
+    // UPDATED 2026-08-23, and this is a strengthening, not a relaxation.
+    //
+    // This test used to assert that the collision EXISTED — that the route
+    // sends `Let's restart lesson "<title>"` while the rule refuses exactly
+    // that phrase — because at the time the only mitigation was the prompt
+    // override, and the collision was the thing worth pinning.
+    //
+    // Live measurement then showed the override is not sufficient on its own:
+    // 1 opening in 12 still returned the refusal as the whole turn. The
+    // collision has since been removed AT SOURCE, so asserting it still exists
+    // would now fail for the right reason. What must be pinned instead is that
+    // it stays removed: the rule still refuses the phrase (unchanged, and the
+    // chat route depends on it) and the instruction no longer contains it.
     const prompt = buildTutorSystemPrompt('Physics', 'S', 'beginner', 'learn', null, 'en', null)
     expect(prompt).toContain('restart lesson')
     expect(prompt).toContain('Use the lesson navigation panel at the top to switch lessons.')
-    expect(ROUTE).toContain('Let\'s restart lesson "${lessonTitle}" from the beginning.')
+    const fn = ROUTE.slice(ROUTE.indexOf('function buildInstruction'))
+    expect(fn).not.toMatch(/restart lesson "/i)
   })
 
   it('the override cancels the rule for this turn and names the lesson', () => {
@@ -45,7 +56,11 @@ describe('lesson-init opening override', () => {
 
   it('lesson-init appends it to the system prompt', () => {
     expect(ROUTE).toContain('buildLessonOpeningOverride(lessonTitle)')
-    expect(ROUTE).toContain('buildLessonOpeningOverride, type LessonContext')
+    // Asserted as an imported SYMBOL rather than as an exact import-line
+    // spelling: the line legitimately grew a second import when the
+    // navigation-refusal backstop was added, and pinning its formatting
+    // measures nothing about the override being wired.
+    expect(ROUTE).toMatch(/import \{[^}]*\bbuildLessonOpeningOverride\b[^}]*\} from '@\/lib\/ai\/client'/)
   })
 
   it('the CHAT route is untouched — it must still refuse navigation', () => {
