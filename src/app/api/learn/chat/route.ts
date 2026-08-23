@@ -1695,6 +1695,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     // EOS M1 (Evidence Spine): decision facts hoisted for the parallel spine
     // emitter — observation only, zero effect on the turn.
     let evidenceMoveHoisted: string | null = null
+    // PHASE 0 — TURN DECISION PROVENANCE. Same contract as the Evidence Spine
+    // hoists directly above: these capture values the turn ALREADY computed,
+    // for one structured log line before the response. Nothing reads them to
+    // make a decision, and a value that was never computed stays null rather
+    // than being reconstructed later from the text that shipped.
+    let decisionConceptIdHoisted: string | null = null
+    let decisionGranularityHoisted:
+      import('@/lib/teaching/teachingGranularity').TeachingLevel | null = null
+    let decisionProbeIdHoisted: string | null = null
     // P1-1 (Phase 1 Stage 1): this turn's DECLARED AttemptVector, parsed from
     // the TEACHING INTENT tag. Null when the composer declared nothing — which
     // is "not captured", never an empty intent.
@@ -2098,6 +2107,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         })
         excursionDecisionHoisted = excursionDecision
         const teachingTargetConceptId = excursionDecision.targetConceptId ?? excursionLessonConceptId
+        // Phase 0 provenance: the TEACHING TARGET, captured where it is decided.
+        // Read-only copy; the const above remains the value everything uses.
+        decisionConceptIdHoisted = teachingTargetConceptId
         // An excursion whose target is a topic the KG cannot name. It has no
         // concept id at all, so `teachingTargetConceptId` above has fallen back
         // to the LESSON's — correct for the blocks that need some concept to
@@ -2851,7 +2863,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // was already being parsed and persisted; it simply never reached
             // a teaching decision, so a learner who said "too fast" or "that
             // went over my head" was answered at unchanged granularity.
-            granularity: decideTeachingGranularity({
+            // Phase 0 provenance: the assignment captures the SAME value this
+            // property already received, in the SAME evaluation position — the
+            // expression is unchanged and is still evaluated exactly once here.
+            granularity: (decisionGranularityHoisted = decideTeachingGranularity({
               state: conversationStateHoisted,
               learnerRequest: learnerRequestHoisted,
               remediationTier,
@@ -2859,7 +2874,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               signalConfusion: (snapshot?.lastSignal && typeof snapshot.lastSignal === 'object')
                 ? (snapshot.lastSignal as { confusion?: boolean }).confusion ?? null
                 : null,
-            }),
+            })),
             // The value the route already computed for the verifier context and
             // the parity facts — now also reaching the SERVED prompt, through
             // the same owner that carries the length budget.
@@ -3471,6 +3486,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               gateLeadInHoisted = null
             }
           }
+          // Phase 0 provenance: the probe the gate actually selected, captured
+          // where it is known. Null when none was selected — including when the
+          // gate deliberately withheld one.
+          decisionProbeIdHoisted = probe?.assetId ?? null
           console.log('[gate-assessment] ' + JSON.stringify({
             phase: phaseBeforeTurn,
             move: evidenceMoveHoisted,
@@ -6826,6 +6845,47 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             gatePending: masteryGatePendingHoisted,
           })
         } catch { /* summary is informational — never blocks the turn */ }
+      }
+
+      // ── PHASE 0: TURN DECISION PROVENANCE ────────────────────────────
+      //
+      // The latest point at which everything is known: after every text
+      // rewriter, after the lesson-close replacement, after mastery is
+      // summarised — and before the learner receives anything.
+      //
+      // OBSERVATION ONLY. It reads already-decided values, writes one log line,
+      // and returns nothing to the turn. `detectDecisionDivergence` reports
+      // where a downstream layer disagreed with the decision; Phase 0
+      // deliberately does not act on that, because acting on it is an authority
+      // change and this phase is provenance.
+      //
+      // Wrapped because a provenance line must never be able to cost a learner
+      // their turn.
+      try {
+        const {
+          detectDecisionDivergence, formatTurnDecisionLog,
+        } = await import('@/lib/teaching/turnDecision')
+        const turnDecision = {
+          conceptId: decisionConceptIdHoisted ?? resolvedConceptId,
+          teachingAct: evidenceMoveHoisted,
+          representation: visualDecisionHoisted?.representation ?? null,
+          probeId: decisionProbeIdHoisted,
+          figureId: visualDecisionHoisted?.asset?.assetId ?? null,
+          lifecycle: sessionEpisodeHoisted?.phase ?? null,
+          granularity: decisionGranularityHoisted,
+          reason: visualDecisionHoisted?.provenance ?? null,
+        }
+        const observed = {
+          mcqAttached: mcqHoisted !== null,
+          figureAttached: visualDecisionHoisted?.graphical === true,
+          figureConceptId: visualDecisionHoisted?.asset?.conceptId ?? null,
+          textAsksAQuestion: /\?\s*$/.test(cleanText.trim()),
+        }
+        console.log(formatTurnDecisionLog(
+          turnDecision, observed, detectDecisionDivergence(turnDecision, observed),
+        ))
+      } catch (err) {
+        console.warn('[turn-decision] provenance line skipped:', err)
       }
 
       return NextResponse.json({
