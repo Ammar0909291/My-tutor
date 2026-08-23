@@ -84,6 +84,10 @@ export interface LessonRef {
 
 export async function openLesson(
   cookie: string, sessionId: string, lesson: LessonRef,
+  /** The learner's selected teaching language. Defaults to the English path
+   *  every existing probe used; ru/hi carry their own NAVIGATION RULE and
+   *  their own opening instruction, so they are separately reachable. */
+  teachingLanguage: 'en' | 'ru' | 'hi' = 'en',
 ): Promise<TurnPayload> {
   return post('/api/learn/lesson-init', {
     sessionId,
@@ -94,7 +98,7 @@ export async function openLesson(
     unitTitle: lesson.unitTitle,
     totalLessons: lesson.totalLessons,
     completedLessons: [],
-    teachingLanguage: 'en',
+    teachingLanguage,
   }, cookie)
 }
 
