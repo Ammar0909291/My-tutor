@@ -15,6 +15,35 @@
 #
 # Generated from the registry + all six KGs; see
 # scripts/validate-visualization-coverage.ts.
+#
+# ── Why the remaining entries are NOT mechanically fixable (orphan census) ──
+# Measured with scripts/qa/orphan-census.ts. Every remaining key falls into one
+# of three groups, and renaming any of them would make things worse, not better:
+#
+# 1. DUPLICATE ROWS. The generator they name is ALREADY reachable through a
+#    real concept: cell_division via bio.cell.mitosis/meiosis, dna_structure via
+#    bio.mol.dna-replication, coordinate_geometry_line via
+#    math.geom.distance-formula, triangle via math.geom.triangle, vector via its
+#    own live keys. Nothing is unreachable; the row is redundant.
+#
+# 2. REPOINTING WOULD STRIP A DEMOTION. Every real math.geom counterpart
+#    (congruent-triangles, similar-triangles, area, perimeter, surface-area,
+#    volume, solid-3d, line) ALREADY resolves to geometry_shape through the
+#    math.geom domain default, which scopeForAsset auto-demotes. Giving it an
+#    exact concept row would move it domain -> concept tier and turn an
+#    honestly-demoted generic shapes card into a STRONG claim to depict the
+#    concept. Same figure, worse honesty.
+#
+# 3. NO CONCEPT EXISTS. heights_and_distances draws applied trigonometry
+#    (distance, angle of elevation) and math.trig holds only pure trigonometry.
+#    math.vec and math.stat are not KG domains at all. Inventing curriculum to
+#    retire an orphan is the wrong trade.
+#
+# Three exact-title matches are deliberately REJECTED, with reasons, so they are
+# not retried: math.geom.congruence -> math.nt.congruence is a false friend
+# (number-theory congruence, a === b mod n); math.trig.trigonometric-identities
+# would downgrade a live geometry_shape default to a bare grid;
+# cs.ds.linked-lists -> cs.struct.linked-lists covers only singly linked lists.
 bio.cell.cell-division
 bio.eco.ecosystems
 bio.eco.water-cycle
