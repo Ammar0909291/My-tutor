@@ -2336,6 +2336,36 @@
   that the client performs the write. Full suite 374 files / 8,273 passed / 9 skipped; tsc clean;
   build clean. Deployed `dpl_FJE9TBEGkTAdrc4pBD2KNLMZiNZp` READY on `7ca5d4b`.
 
+## Architecture hardening — Series B (2026-08-23)
+- **TWO phase series ran on 2026-08-23 and both number from Phase 1.** Read this before
+  interpreting any "Phase N" reference from that date. Series A = Phase 0-4, TurnDecision /
+  decision ownership / ambiguity (`5741148`..`34f15fa1`, blueprint §28). Series B = architecture
+  hardening: Phase 1 stop persistence (`ceb7bd3`), Phase 2 cross-turn characterisation
+  (`feabc4c`), Phase 3 turn arbitration (`5ae4295`, blueprint §29). The collision already cost one
+  session handoff its bearings.
+- **Phase 3 — turn arbitration.** `src/lib/teaching/turnArbitration.ts` is now the SINGLE
+  statement of which educational action owns a turn:
+  `RECOVERY > LEARNER_REQUEST > CLOSE > COMPLETE > TEACH` (floor, always claims). Seven prompt
+  blocks used to assert authority over "everything above" in English, resolved by the model;
+  three call sites each kept a different incomplete copy of the same precedence order, and every
+  hole in them was a measured-reachable defect. Losing actions are now ABSENT from the prompt
+  rather than out-argued inside it. Suppression is per-CAPABILITY, never per-block — a block's
+  length budget and register are a different axis and must survive a close or a recovery.
+  Consumers: TURN DIRECTIVE, `shouldInjectAffectClose`, placement probe, `gateEligible`,
+  `shouldRepairFillerTurn`, the false-completion nudge, and the CONVERSATION block header.
+- **Read `docs/architecture/PHASE3_ARBITRATION_AUDIT.md` before any Phase 4 work.** It is the
+  Step 0 evidence (73 append sites, the 7 prose authority claims, the three-site table, the
+  four-axis model, the contradiction matrix). Committed specifically because Phase 1/2's own
+  cited audit was NOT committed, and when that session hit its usage limit Phase 3's scope became
+  unrecoverable from the repository.
+- **Known open items, measured not guessed:** (1) the post-model prose-question withhold is
+  PARAGRAPH-scoped, so a closing turn that is one paragraph ending in a question is logged and
+  left alone rather than repaired with invented copy; (2) no knowledge-gap state exists in the
+  runtime at all (Phase 2 C5) — a named gap is filed as distress and the concept discarded, so
+  that rung could not be built and is reported, not patched around; (3) `src/lib/kernel/policy`'s
+  7-band engine remains in SHADOW, and promoting it is an owner decision gated on reviewing
+  real-traffic replay diffs (K4 DoD) — deliberately untouched.
+
 ## Run locally
 ```
 cp .env.example .env   # set DATABASE_URL, AUTH_SECRET (openssl rand -base64 32), GROQ_API_KEY
