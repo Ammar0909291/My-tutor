@@ -167,6 +167,23 @@ export interface ExcursionInput {
   requestedTopicTitle: string | null
   /** Whether the tutor's previous turn ended in a question. */
   lastAssistantAskedQuestion: boolean
+  /**
+   * THE TURN'S READING OF ITSELF DISAGREED. (Phase 2.)
+   *
+   * `TurnIntent.ambiguous` — true when two independent readings of the same
+   * message contradict each other ("I'm done for today, but why does it
+   * bend?" is both a stop and a question, and genuinely means both).
+   *
+   * Every branch below this module's safety valves reads the learner's text to
+   * justify CHANGING what is being taught. When the reading of that text is
+   * self-contradictory, no change it could justify is trustworthy — so the
+   * turn changes nothing and the current teaching context stands. The learner
+   * is still answered; only the CONTEXT is held.
+   *
+   * OPTIONAL ON PURPOSE: absent means "not ambiguous", so every existing
+   * caller behaves exactly as before.
+   */
+  ambiguous?: boolean
 }
 
 /**
@@ -247,6 +264,31 @@ export function decideExcursion(input: ExcursionInput): ExcursionDecision {
 
   // Safety valve — a missed close can never strand a learner off-lesson.
   if (active && state.turns >= MAX_EXCURSION_TURNS) return closed('closed-turn-limit')
+
+  // ── AMBIGUOUS TURN = HOLD (Phase 2) ────────────────────────────────────────
+  //
+  // Placed HERE, and the position is the whole design:
+  //
+  //   ABOVE it sit the two structural valves — the lesson moved underneath us,
+  //   and the turn limit. Neither reads the learner's text, both exist so a
+  //   learner can never be stranded off-lesson, and an unreadable turn is
+  //   exactly when a safety valve matters most. They keep their priority.
+  //
+  //   BELOW it sits every branch that reads the text to justify a CHANGE:
+  //   return, satisfaction, correction, the answer-hold, a named concept, a
+  //   named topic. All of them are downstream of a reading that just
+  //   contradicted itself, so none of them may act on it.
+  //
+  // The outcome is the same shape the answer-hold already returns, because it
+  // is the same idea: an open excursion continues (and its turn counter still
+  // advances, so the safety valve above still converges), and an ordinary
+  // lesson turn stays on the lesson. Nothing is closed, nothing is opened,
+  // nothing switches. Mastery attribution is unaffected by construction —
+  // `turnCountsForLesson` reads the state this returns, which is the state
+  // that was already in force.
+  if (input.ambiguous) {
+    return active ? held(state, 'continued') : none(lessonConceptId)
+  }
 
   // The learner asked to go back, in their own words.
   if (active && isReturnRequest(message)) return closed('closed-returned')

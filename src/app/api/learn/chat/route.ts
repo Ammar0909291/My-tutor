@@ -2128,6 +2128,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           requestedConceptId: requestedConceptIdThisTurn,
           requestedTopicTitle: requestedTopicTitleThisTurn,
           lastAssistantAskedQuestion: excursionPriorAskedQuestion,
+          // Phase 2: the turn read itself two contradictory ways. Hold the
+          // teaching context rather than let either reading change it. This is
+          // the ONE place ambiguity is given authority — everything else on
+          // this axis (teaching target, mastery attribution, teaching title,
+          // the visual target, the persisted excursion state) reads the
+          // decision below, so one boundary governs all of it.
+          ambiguous: turnIntent.ambiguous,
         })
         excursionDecisionHoisted = excursionDecision
         const teachingTargetConceptId = excursionDecision.targetConceptId ?? excursionLessonConceptId

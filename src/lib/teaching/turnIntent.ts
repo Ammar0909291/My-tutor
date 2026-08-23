@@ -61,6 +61,31 @@ export interface TurnIntentConflict {
 }
 
 /**
+ * THE CONFLICTS THAT ARE ACTUALLY CONTRADICTIONS. (Phase 2.)
+ *
+ * Not every co-occurrence is a disagreement, and the difference only started
+ * to matter once `ambiguous` was given authority.
+ *
+ * STOP_AND_QUESTION and STOP_AND_REQUEST are genuine contradictions: one
+ * reading says the session is over, the other says it continues, and only one
+ * of those can be acted on.
+ *
+ * DISTRESS_AND_REQUEST is NOT. "I am lost" and "I don't understand this" both
+ * report distress AND read as a request to explain differently — because that
+ * is one coherent thing to mean, not two incompatible ones. They are the most
+ * common remediation turns a struggling learner types. Treating them as
+ * ambiguous would have made the HOLD fire on precisely the learner who most
+ * needs the tutor to act, which is the opposite of what the rule is for.
+ *
+ * It stays in `conflicts` — the co-occurrence is still worth recording, and
+ * telemetry still sees it — but it does not make a turn ambiguous.
+ */
+const CONTRADICTORY_CONFLICTS: ReadonlySet<TurnIntentConflict['code']> = new Set([
+  'STOP_AND_QUESTION',
+  'STOP_AND_REQUEST',
+])
+
+/**
  * Everything the raw message says, read once.
  *
  * Deliberately small: only the readings that were previously derived from raw
@@ -83,8 +108,16 @@ export interface TurnIntent {
   /** Readings that disagree. Empty is the common case. */
   conflicts: TurnIntentConflict[]
   /**
-   * True when two readings disagree.
+   * True when two readings CONTRADICT each other — see
+   * `CONTRADICTORY_CONFLICTS` for why this is a subset of `conflicts` and not
+   * simply `conflicts.length > 0`.
    *
+   * PHASE 2 GIVES THIS AUTHORITY, in exactly one place: `decideExcursion`
+   * holds the current teaching context rather than letting a self-contradictory
+   * reading change it. Nothing else reads it. See excursion.ts's
+   * AMBIGUOUS TURN = HOLD block.
+   *
+   * Phase 1's original note follows, since it explains the shape:
    * PHASE 1 RECORDS THIS AND NOTHING ACTS ON IT. The architectural rule it is
    * being built for — ambiguity must not cause an educational action — is a
    * behaviour change and belongs to a later phase. Wiring it now would have
@@ -138,6 +171,6 @@ export function readTurnIntent(
     learnerRequest,
     visualForm,
     conflicts,
-    ambiguous: conflicts.length > 0,
+    ambiguous: conflicts.some((c) => CONTRADICTORY_CONFLICTS.has(c.code)),
   }
 }
