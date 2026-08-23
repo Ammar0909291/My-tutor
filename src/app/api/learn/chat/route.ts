@@ -3848,7 +3848,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             }
             if (conversationDecisionHoisted && conversationDecisionHoisted.type !== 'RECOVERY') {
               const { buildConversationDirective } = await import('@/lib/teaching/conversationDecision')
-              execOpts.conversationDirective = buildConversationDirective(conversationDecisionHoisted)
+              // PHASE 3 — the SECOND call site, and it was missed on the first
+              // pass. The BRAIN EXECUTION block embeds the conversation
+              // directive on LLM_RENDERER turns, so fixing only the standalone
+              // site at the CUE branch would have left "then teach" leaking into
+              // a close for exactly the turns the Brain drives. Same defect,
+              // different trigger — the pattern this route's own history records
+              // more than once.
+              execOpts.conversationDirective = buildConversationDirective(
+                conversationDecisionHoisted, turnArbitrationHoisted,
+              )
             }
             systemPrompt += buildBrainExecutionBlock(dispatchPlanHoisted, cueDecisionHoisted, execOpts)
           }

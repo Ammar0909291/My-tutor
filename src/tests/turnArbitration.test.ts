@@ -374,8 +374,18 @@ describe('5. every competing site asks the authority', () => {
     expect(buildConversationDirective(ack)).toContain('then teach')
   })
 
-  it('the route hands the CONVERSATION block the verdict', () => {
-    expect(src()).toContain('buildConversationDirective(conversationDecisionHoisted, turnArbitrationHoisted)')
+  it('EVERY conversation-directive call site is arbitrated, not just the obvious one', () => {
+    // Written this way because the first pass fixed one of two. The BRAIN
+    // EXECUTION block embeds the same directive on LLM_RENDERER turns, so a
+    // substring check on one call site passed while "then teach" still leaked
+    // into a close for every Brain-driven turn. Counting call sites and
+    // requiring the argument on ALL of them is what makes a third one safe.
+    const s = src()
+    const sites = [...s.matchAll(/buildConversationDirective\(([\s\S]{0,200}?)\)/g)]
+    expect(sites.length).toBeGreaterThanOrEqual(2)
+    for (const m of sites) {
+      expect(m[1], `unarbitrated call site: ${m[0].slice(0, 80)}`).toContain('turnArbitrationHoisted')
+    }
   })
 
   it('the closing prose guard runs post-model', () => {
