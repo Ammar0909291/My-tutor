@@ -2226,7 +2226,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // timestamps — the newest loaded message predates this turn's user
         // insert, so the gap is genuine learner inactivity, never LLM-claimed.
         {
-          const { deriveEpisode, buildOpeningBlock, buildAffectCloseBlock, detectExplicitFinishRequest, forceClosing } = await import('@/lib/teaching/sessionLifecycle')
+          const { deriveEpisode, buildOpeningBlock, buildAffectCloseBlock, detectExplicitFinishRequest, forceClosing, shouldInjectAffectClose } = await import('@/lib/teaching/sessionLifecycle')
           const lastMsgAt = lastMessageAtMs
           const prevEpisode = (snapshot?.sessionEpisode && typeof snapshot.sessionEpisode === 'object')
             ? snapshot.sessionEpisode as import('@/lib/teaching/sessionLifecycle').SessionEpisode
@@ -2283,7 +2283,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 previousLessonTitle: studentProgress?.lastLessonTitle ?? null,
               } : null,
             })
-          } else if (sessionEpisodeHoisted.phase === 'CLOSING' && !excursionActiveHoisted) {
+          } else if (shouldInjectAffectClose({
+            phase: sessionEpisodeHoisted.phase,
+            excursionActive: excursionActiveHoisted,
+            // Phase 4: an ambiguous turn defers the close for the same reason
+            // an open excursion does — the learner has something outstanding.
+            // See shouldInjectAffectClose for the production trace.
+            ambiguousTurn: turnIntent.ambiguous,
+          })) {
             // Affect budget spent earlier this session (07 §6): the close
             // instruction holds until a boundary resets the episode.
             //

@@ -326,6 +326,50 @@ export function forceClosing(ep: SessionEpisode): SessionEpisode {
 }
 
 /**
+ * MAY THE SESSION-CLOSE BLOCK SPEAK THIS TURN? (Phase 4.)
+ *
+ * The close block orders the tutor to introduce no new content and no new
+ * questions, and to forecast the next session. That is right when the session
+ * is genuinely over, and wrong whenever the learner still has something
+ * outstanding — so it is DEFERRED, never removed. The episode stays CLOSING and
+ * the close fires on the first turn that has nothing outstanding.
+ *
+ * Two things count as outstanding, and they are the same failure twice:
+ *
+ *   · AN OPEN EXCURSION. Measured in production: the block rendered as "let's
+ *     pause on that for today — next time we will return to our lesson on
+ *     scalar and vector quantities" while the learner was still asking about
+ *     the side concept they had requested.
+ *
+ *   · AN AMBIGUOUS TURN. "I'm done for today, but what is a compound?" is BOTH
+ *     a stop (so the episode is forced to CLOSING) and a question (so the
+ *     decision layer routes ANSWER-STUDENT-FIRST). Ambiguity HOLDs the teaching
+ *     context, so no excursion opens and the excursion guard above is false by
+ *     construction — the case that most needs the deferral was the one the
+ *     guard could not see. The prompt then carried "do NOT introduce new
+ *     content, new questions" alongside a routing to answer the student, with
+ *     nothing telling the model the turn was ambiguous; which side won was the
+ *     model's to decide.
+ *
+ * The stop is honoured either way. It is simply not honoured by discarding the
+ * question asked in the same breath.
+ *
+ * Pure predicate, extracted rather than left inline for the same reason
+ * `shouldRepairFillerTurn` was — an inline boolean governing a real teaching
+ * behaviour cannot be tested.
+ */
+export function shouldInjectAffectClose(input: {
+  phase: SessionPhase
+  excursionActive: boolean
+  ambiguousTurn: boolean
+}): boolean {
+  if (input.phase !== 'CLOSING') return false
+  if (input.excursionActive) return false
+  if (input.ambiguousTurn) return false
+  return true
+}
+
+/**
  * CLOSING block (07 §6): the affect budget is spent — end via a win and
  * the close script. No new content is legal past this point this session.
  */

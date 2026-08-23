@@ -731,6 +731,36 @@ provider output ≠ educational state; persistence ≠ decision-making).
    overwriting a response — `shouldRepairFillerTurn` reads closing / recovery /
    new-intent for exactly this reason.
 
+**Ambiguity propagation (Phase 4).** `turnIntent.ambiguous` has exactly one
+consumer — `decideExcursion`. That is correct and sufficient, because the two
+sides of a contradictory turn are owned by two different systems and BOTH are
+honoured: `wantsToStop` reaches `forceClosing` through the session lifecycle
+while the question reaches the teaching decision. Ambiguity is not "one side
+silently chosen".
+
+The exception is where both owners write into the SAME prompt. The session-close
+block orders "do NOT introduce new content, new questions" and was already
+deferred while an excursion is open, for exactly this contradiction. Ambiguity
+HOLDs the context, so no excursion opens, so that guard was false **by
+construction** on the turns needing it most (*"I'm done for today, but what is a
+compound?"* — a stop and a question at once). The guard now also defers on an
+ambiguous turn. **Deferred, never removed**: the episode stays `CLOSING`, so the
+close fires on the next turn. The stop is honoured; it is simply not honoured by
+discarding the question asked in the same breath. Owner:
+`sessionLifecycle.shouldInjectAffectClose` (a pure predicate, extracted for the
+same reason `shouldRepairFillerTurn` was — an inline boolean governing a real
+teaching behaviour cannot be tested).
+
+Invariant 6 follows: **a deterministic runtime must not hand the model two
+contradictory instructions and let it pick.** Where two owners legitimately act
+on the same turn, the one that would discard the other's outcome defers.
+
+Not addressed, and deliberately: *"Stop the lesson, but explain this one thing
+first."* and *"Explain it simply, actually challenge me."* read as NON-ambiguous
+because no detector matches their second clause. That is a DETECTION gap, not an
+ambiguity-propagation gap; widening detectors was out of scope. Characterised in
+`ambiguityReachesTeaching.test.ts` so a future change is measured, not assumed.
+
 **The one violation found and closed.** Auditing every consumer of the five
 `turnIntent`-owned detectors: six modules (`teachingGranularity`,
 `teachingPlan`, `teachingPlanner`, `teachingGenerationRequest`,
@@ -752,6 +782,7 @@ untouched.)
 
 | Date | Change |
 |---|---|
+| 2026-08-23 | §28 amended by the Phase 4 migration: ambiguity propagation, invariant 6, and the session-close deferral (`shouldInjectAffectClose`). No other section edited. |
 | 2026-08-23 | §28 Decision Ownership added by the Phase 3 architecture migration (commit on `main`). Records the consume-never-re-derive rule, the per-concern ownership map, the runtime invariants, and the single re-derivation site that was migrated. No other section was edited. |
 | 2026-08-23 | First edition of this canonical blueprint, synthesized from six parallel research passes (Content/Curriculum, Visual Intelligence, Tutor Runtime/Mastery, Frontend/UX, AI Provider/Database, Testing/CI/Deployment) plus direct repository inspection, at HEAD `f13ac3215fce51cad817572a15cbc4db3154fb6f` on `main`. No application code, curriculum content, or database schema was modified to produce this document. |
 
