@@ -87,29 +87,36 @@ describe('compact progress bar — present, wired, and NOT crowded out', () => {
 // Standing UI instruction: with the Lesson/Code/Chat tab strip removed, the
 // learner needs to see which lesson they're in from the SAME header, not a
 // separate navigation surface. Paired visually with CompactLessonProgressBar
-// (both live inside the same right-aligned block, per the mockup's two-line
-// "Lesson N · Title" / "[progress]" pairing) — not a second card, not an
-// oversized standalone title.
+// (both live inside the same right-aligned block) — not a second card, not
+// an oversized standalone title.
+//
+// Real-student report (2026-08-23): the header showed "Lesson 26 · <title>"
+// during a subject-introduction screen, and a raw lesson ordinal has no
+// meaning to a learner reading an intro — fixed to show the lesson title
+// only. `progress_lesson_label`/`currentLessonData.order` remain used
+// elsewhere (the options-menu progress line, the lesson picker) — this
+// header specifically no longer surfaces the number.
 
 describe('lesson identity lives in the Tutor Max header, compactly', () => {
-  it('renders "Lesson N · Title" using the existing progress_lesson_label key, gated on currentLessonData', () => {
-    const idx = HEADER.indexOf("t('progress_lesson_label')")
+  it('renders the lesson title only — no ordinal, no "Lesson N" label — gated on currentLessonData', () => {
+    const idx = HEADER.indexOf('currentLessonData.lessonTitle')
     expect(idx).toBeGreaterThan(-1)
     const before = HEADER.slice(Math.max(0, idx - 700), idx)
     expect(before).toContain('currentLessonData && (')
-    const after = HEADER.slice(idx, idx + 120)
-    expect(after).toContain('currentLessonData.order')
-    expect(after).toContain('currentLessonData.lessonTitle')
+    const after = HEADER.slice(idx, idx + 40)
+    // The label/ordinal must not immediately precede the title in this block.
+    expect(after).not.toContain("t('progress_lesson_label')")
+    expect(after).not.toContain('currentLessonData.order')
   })
 
   it('CompactLessonProgressBar sits in the SAME block as the lesson identity text, not a separate header slot', () => {
-    const idx = HEADER.indexOf("t('progress_lesson_label')")
+    const idx = HEADER.indexOf('currentLessonData.lessonTitle')
     const block = HEADER.slice(idx, idx + 900)
     expect(block).toContain('<CompactLessonProgressBar')
   })
 
   it('the identity text truncates rather than wrapping into a large header', () => {
-    const idx = HEADER.indexOf("t('progress_lesson_label')")
+    const idx = HEADER.indexOf('currentLessonData.lessonTitle')
     const block = HEADER.slice(Math.max(0, idx - 400), idx + 200)
     expect(block).toMatch(/whiteSpace:\s*'nowrap'/)
     expect(block).toMatch(/textOverflow:\s*'ellipsis'/)

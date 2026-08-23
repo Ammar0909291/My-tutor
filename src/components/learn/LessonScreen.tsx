@@ -4394,7 +4394,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                     fontSize: 12.6, fontWeight: 700, color: 'var(--text-secondary)',
                     maxWidth: '100%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
                   }}>
-                    {t('progress_lesson_label')} {currentLessonData.order} · {currentLessonData.lessonTitle}
+                    {currentLessonData.lessonTitle}
                   </p>
                   {/* Compact 6-bar lesson phase indicator — driven by the same
                       server-authoritative phase as the removed large
