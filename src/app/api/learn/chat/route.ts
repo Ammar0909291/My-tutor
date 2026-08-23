@@ -36,6 +36,7 @@ import {
   type StudentState, type AssembledLesson,
 } from '@/lib/teaching/assets'
 import { stripIpaNotation } from '@/lib/text/ipaSanitizer'
+import { readTurnIntent } from '@/lib/teaching/turnIntent'
 import {
   pickCurrentTopicSlug, selectCurrentLesson, foldProgressionMetrics,
   readProgressionMetrics, progressionTags, needsSignalRepair,
@@ -237,6 +238,27 @@ export async function POST(req: Request) {
     // nothing downstream consumes this yet.
     const cueObservations: import('@/lib/understanding').CueObservations = {}
 
+    // ── PHASE 1: THE AUTHORITATIVE READ OF THIS TURN ────────────────────
+    //
+    // The learner's message is read ONCE, here, before any consumer. Every site
+    // below that used to call a detector on `message` reads this object
+    // instead, so the answer can no longer depend on which line number ran
+    // first.
+    //
+    // A HOIST, NOT A REINTERPRETATION: readTurnIntent calls the SAME detectors
+    // with the SAME inputs. Where two readings disagree it RECORDS the
+    // disagreement rather than resolving it — resolution is an authority change
+    // and belongs to a later phase.
+    //
+    // DELIBERATELY UNCONDITIONAL, and this is the whole reason it sits here.
+    // Placed inside any try/catch, a throw before it would leave every consumer
+    // reading null — silently disabling stop, question, request and
+    // visual-form detection that previously still ran at their own call sites.
+    // That would have been a behaviour change hiding inside a refactor.
+    const turnIntent = readTurnIntent(
+      message,
+      learnSession.messages.find((m) => m.role === MessageRole.USER)?.content ?? null,
+    )
     const subjectCode = learnSession.subject.slug
     const ebEnabled = isEduBrainEnabled(subjectCode)
     const progressCode = subjectCode
@@ -1806,10 +1828,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         const { detectFailureState } = await import('@/lib/teaching/recoveryGuard')
         // P0-3: the learner's immediately preceding message (already loaded,
         // newest-first, predates this turn's insert) — enables the repeated-
-        // identical-answer frustration check. Optional param; every other
-        // call site (School Mode, EOS kernel) is unaffected.
-        const priorUserMessage = learnSession.messages.find((m) => m.role === MessageRole.USER)?.content ?? null
-        recoveryKeyHoisted = detectFailureState(message, priorUserMessage)
+        // identical-answer frustration check. That prior message is now passed
+        // to the single authoritative read at the top of the handler, so this
+        // site no longer looks it up or re-detects anything.
+        //
+        // Phase 1: read from the ONE authoritative reading of this turn.
+        recoveryKeyHoisted = turnIntent.failureState
         const { buildSignalInstruction } = await import('@/lib/teaching/signals')
         const { isFirstLessonContext, buildFirstLessonBlock, buildFirstLessonCloseBlock } = await import('@/lib/teaching/firstLessonGuard')
         const { emptyPlacementState, nextProbe, buildPlacementProbeBlock, buildPlacementAwaitBlock } = await import('@/lib/teaching/placementVerification')
@@ -2182,7 +2206,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           lessonCompletionRespectsNewIntentHoisted = excursionDecision.state.active
             || requestedConceptIdThisTurn != null
             || requestedTopicTitleThisTurn != null
-            || isGenuineQuestion(message)
+            || turnIntent.isQuestion   // Phase 1: the one authoritative read
             || recoveryKeyHoisted !== null
             || isQuestionAnnouncement(message)
           if (lessonCompletionRespectsNewIntentHoisted) {
@@ -2211,7 +2235,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // 07 §6 extension: an explicit, unambiguous "finish it now" outranks
           // the affect-failure-budget trigger — close immediately this turn
           // rather than waiting for a failure count to accumulate.
-          if (detectExplicitFinishRequest(message)) {
+          if (turnIntent.wantsToStop) {   // Phase 1: the one authoritative read
             sessionEpisodeHoisted = forceClosing(sessionEpisodeHoisted)
           }
           if (boundary && sessionEpisodeHoisted.phase !== 'CLOSING') {
@@ -2610,7 +2634,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // dispatched as forced TeachingActions, injected AFTER the turn
           // directive so they override the phase's default move. A diagram
           // request also overrides Phase G's ask-turn visual suppression.
-          learnerRequestHoisted = detectLearnerRequest(message)
+          learnerRequestHoisted = turnIntent.learnerRequest  // Phase 1
           // Visualization Registry Phase 2: an explicit "show me a diagram"
           // request with a known visual is FORCED to render server-side —
           // never left to the LLM's discretion to emit (or skip) the tag.
@@ -2757,7 +2781,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // the turn read as though nothing was asked.
               systemPrompt += buildVisualContractBlock(decision, {
                 learnerAskedForAVisual: learnerRequestHoisted === 'diagram',
-                requestedForm: requestedVisualForm(message),
+                requestedForm: turnIntent.visualForm,  // Phase 1
               })
               if (decision.payload?.renderer === 'card') {
                 // Keep the legacy hoisted vars coherent for the RRM log and the

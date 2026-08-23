@@ -160,7 +160,14 @@ describe('route.ts wiring — new-intent signal reaches every consumer', () => {
     const window = ROUTE.slice(signalAt, signalAt + 400)
     expect(window).toContain('requestedConceptIdThisTurn')
     expect(window).toContain('requestedTopicTitleThisTurn')
-    expect(window).toContain('isGenuineQuestion(message)')
+    // UPDATED for the Phase 1 authority boundary, and this is a strengthening.
+    // The requirement is unchanged — the new-intent signal must still consider
+    // genuine-question detection — but the reading now comes from the single
+    // authoritative read of the turn (readTurnIntent) instead of this site
+    // calling the detector on the raw message itself. Pinning the old call form
+    // would pin the very duplication Phase 1 removed; pinning the field keeps
+    // the requirement and additionally guarantees it is the SHARED reading.
+    expect(window).toContain('turnIntent.isQuestion')
   })
 
   it('F2 fix: the signal also considers recoveryKeyHoisted (an already-computed, generic distress/failure-state signal) and isQuestionAnnouncement (the one narrowly-scoped, completion-only detector added for this fix)', () => {
