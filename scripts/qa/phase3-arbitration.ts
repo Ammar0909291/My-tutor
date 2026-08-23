@@ -32,6 +32,18 @@ const LESSON = {
 }
 
 const clean = (t?: string) => (t ?? '').replace(/\s+/g, ' ').trim()
+
+/**
+ * Did this turn attach a graded question?
+ *
+ * `mcq` is OPTIONAL on TurnPayload: the route omits the key entirely when no
+ * question is attached, so the value is `undefined`, not `null`. The first
+ * version of this file asserted `p.mcq === null` and reported FAIL on four
+ * checks while printing `mcq=null` — a harness bug that would have been read as
+ * four product defects. It is written as a named helper so the comparison
+ * happens in exactly one place.
+ */
+const noQuestionAttached = (p: TurnPayload): boolean => p.mcq == null
 const CLOSEY = /(next time|next session|come back|see you|well done today|great work today|for today|pick (this|it) up)/i
 
 type Check = { id: string; what: string; ok: boolean | null; detail: string }
@@ -74,14 +86,14 @@ async function main(): Promise<void> {
     const t1 = await say(acct.cookie, sid, 'show me a diagram')
     const d1 = show('1 LEARNER REQUEST — a diagram was asked for', t1)
     record('D3', 'an explicit visual request is NOT converted into a graded quiz',
-      d1 ? null : t1.mcq === null,
+      d1 ? null : noQuestionAttached(t1),
       d1 ? 'provider outage' : `mcq=${t1.mcq ? 'ATTACHED (defect)' : 'null'} figure=${carriesFigure(t1)}`)
 
     // ── D4/D5: distress owns the turn ──────────────────────────────────────
     const t2 = await say(acct.cookie, sid, "I'm lost. I don't understand any of this.")
     const d2 = show('2 RECOVERY — the learner voiced a failure state', t2)
     record('D5', 'a recovery turn carries NO graded question',
-      d2 ? null : t2.mcq === null,
+      d2 ? null : noQuestionAttached(t2),
       d2 ? 'provider outage' : `mcq=${t2.mcq ? 'ATTACHED (defect)' : 'null'}`)
     record('D5b', 'a recovery turn banks no mastery',
       d2 ? null : (t2.mastery?.verified !== true),
@@ -91,7 +103,7 @@ async function main(): Promise<void> {
     const t3 = await say(acct.cookie, sid, "I'm done for today.")
     const d3 = show('3 EXPLICIT STOP', t3)
     record('D2', 'the closing turn carries NO graded question',
-      d3 ? null : t3.mcq === null,
+      d3 ? null : noQuestionAttached(t3),
       d3 ? 'provider outage' : `mcq=${t3.mcq ? 'ATTACHED (defect)' : 'null'}`)
     record('D2-proxy', 'INFERRED ONLY — the closing turn reads as a close',
       d3 ? null : CLOSEY.test(t3.text ?? ''),
@@ -100,7 +112,7 @@ async function main(): Promise<void> {
     const t4 = await say(acct.cookie, sid, 'ok')
     const d4 = show('4 TURN AFTER THE STOP — CLOSING must still own it', t4)
     record('D1', 'the turn after a stop carries NO graded question (episode still CLOSING)',
-      d4 ? null : t4.mcq === null,
+      d4 ? null : noQuestionAttached(t4),
       d4 ? 'provider outage' : `mcq=${t4.mcq ? 'ATTACHED (defect)' : 'null'}`)
     record('D1-proxy', 'INFERRED ONLY — the turn after a stop does not teach new content',
       d4 ? null : CLOSEY.test(t4.text ?? ''),

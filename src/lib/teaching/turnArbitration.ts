@@ -341,6 +341,17 @@ export function arbitrateTurn(claims: TurnClaims): TurnArbitration {
  * ungraded question, a spent asset or an overwritten turn in front of them.
  * The same reasoning as the visual engine's "an unreadable budget counts as
  * exhausted" — a bound fails toward doing less.
+ *
+ * THIS IS A BEHAVIOUR CHANGE ON THE ERROR PATH, stated rather than left to be
+ * discovered. The only way a turn reaches it is route.ts's wave-0 block
+ * throwing before the verdict is computed — and a turn in that state has ALSO
+ * lost recovery detection, the episode, the first-lesson guard, the placement
+ * state, the turn directive and the excursion directive. Previously the
+ * authored-probe gate still ran there, with every exclusion reading null:
+ * `closingTurnWithholdsQuestion(undefined)` is false, so a learner who had just
+ * said "I'm done" or "I'm lost" could be handed a graded question BECAUSE the
+ * turn had failed. Refusing to quiz a learner whose state we could not read is
+ * the correct reading of that situation, not a degradation of it.
  */
 export function arbitrationUnavailable(): TurnArbitration {
   return {

@@ -349,6 +349,35 @@ describe('5. every competing site asks the authority', () => {
     expect(s.slice(Math.max(0, at - 600), at)).toContain("allows('FILLER_REPAIR')")
   })
 
+  it('the CONVERSATION block does not order teaching when it does not own the turn', async () => {
+    // Found by LIVE VERIFICATION, not by the Step 0 matrix. On a measured
+    // CLOSING turn every structural protection worked and the learner was still
+    // taught a new example — because this block's header says "then teach" for
+    // every conversation type, from a position near the END of the prompt.
+    const { buildConversationDirective, classifyConversation } =
+      await import('@/lib/teaching/conversationDecision')
+    const ack = classifyConversation('ok', {
+      recoveryKey: null, studentIntent: 'unknown', lastAssistantAskedQuestion: false,
+      lastSignalCorrectness: null, hedged: false, helpRequestKind: null,
+    })
+    const closing = arbitrateTurn(claiming('CLOSE'))
+    const suppressed = buildConversationDirective(ack, closing)
+    expect(suppressed).not.toContain('then teach')
+    expect(suppressed).toContain('CLOSE block above')
+    // The REGISTER half — how to acknowledge the learner — is Axis 4 and must
+    // survive untouched, or a closing turn loses its manner as well as its move.
+    expect(suppressed).toContain(ack.rendererDirective)
+
+    // Unchanged on an ordinary turn, and byte-identical with no verdict at all.
+    expect(buildConversationDirective(ack, arbitrateTurn(NO_CLAIMS)))
+      .toBe(buildConversationDirective(ack))
+    expect(buildConversationDirective(ack)).toContain('then teach')
+  })
+
+  it('the route hands the CONVERSATION block the verdict', () => {
+    expect(src()).toContain('buildConversationDirective(conversationDecisionHoisted, turnArbitrationHoisted)')
+  })
+
   it('the closing prose guard runs post-model', () => {
     expect(src()).toContain('withholdClosingProseQuestion({')
   })

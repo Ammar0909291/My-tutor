@@ -3869,7 +3869,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         const brainBlockFired = brainRuntimeActive && dispatchPlanHoisted?.executor === 'LLM_RENDERER'
         if (!brainBlockFired) {
           const { buildConversationDirective } = await import('@/lib/teaching/conversationDecision')
-          systemPrompt += '\n\n' + buildConversationDirective(conversationDecisionHoisted)
+          systemPrompt += '\n\n' + buildConversationDirective(conversationDecisionHoisted, turnArbitrationHoisted)
         }
       }
 

@@ -172,6 +172,38 @@ export function classifyConversation(
   }
 }
 
-export function buildConversationDirective(decision: ConversationDecision): string {
-  return `CONVERSATION (respond to the student FIRST, then teach):\n- ${decision.type}: ${decision.rendererDirective}`
+/**
+ * PHASE 3 — THE HEADER CARRIED AN AXIS-1 CLAUSE, AND NOTHING KNEW.
+ *
+ * MEASURED IN PRODUCTION, not reasoned about. Live run on a CLOSING turn
+ * (disposable account, chem.found.pure-substances): arbitration correctly
+ * reported `owner: CLOSE`, the TURN DIRECTIVE correctly withheld its phase
+ * frame and move, the close block was injected, and the post-model guard
+ * withheld the model's question (300 -> 210 chars). The learner was still
+ * taught a new oil-and-water example on their way out.
+ *
+ * The cause is this function's own header: "respond to the student FIRST,
+ * **then teach**" is emitted for EVERY conversation type, from a block appended
+ * near the very END of the prompt — after the close block, after the
+ * now-suppressed turn directive. It is the same defect as the TURN DIRECTIVE's:
+ * an Axis-1 instruction, positioned last, structurally unaware of the episode.
+ * Phase 3 closed the loudest instance and this one kept speaking.
+ *
+ * WHAT IS AND IS NOT TOUCHED. `classifyConversation` — the Conversation
+ * Understanding Engine itself — is NOT modified: not its types, not its
+ * ordering, not one regex, and not one `rendererDirective`. Those describe HOW
+ * to acknowledge the learner (Axis 4, REGISTER), they conflict with nothing,
+ * and they survive whoever owns the turn. Only the hardcoded trailing clause of
+ * the block's header changes, and only when another authority owns the action.
+ * The engine decides what to say about the learner's message; it never decided
+ * that teaching follows.
+ */
+export function buildConversationDirective(
+  decision: ConversationDecision,
+  arbitration?: import('./turnArbitration').TurnArbitration | null,
+): string {
+  const header = (!arbitration || arbitration.allows('PHASE_FRAME'))
+    ? 'CONVERSATION (respond to the student FIRST, then teach):'
+    : `CONVERSATION (respond to the student FIRST — then follow the ${arbitration.owner} block above, which owns what happens next this turn):`
+  return `${header}\n- ${decision.type}: ${decision.rendererDirective}`
 }
