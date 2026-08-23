@@ -109,8 +109,17 @@ describe('B2 changed nothing else', () => {
     // 5 pre-existing (reflection, mirrors, inelastic, meiosis, dihybrid)
     // + 2 from B2 + 7 from the M4 Physics pilot = 14, + 1 for
     // phys.meas.vector-products (the vector family's third claim — see
-    // vectorProductVisualSelection.test.ts) = 15.
-    expect(CONCEPT_SCENE_OVERRIDES).toHaveLength(15)
+    // vectorProductVisualSelection.test.ts) = 15, + 1 for
+    // math.calc.critical-points = 16.
+    //
+    // The last one is the orphan census's single PROMOTION. calculus_graph's
+    // kind default is a parabola with ONE critical point; the concept now owns
+    // a cubic with a maximum AND a minimum, so the figure teaches the concept
+    // better than the shared instance and its provenance becomes 'generator'.
+    // That is what earns concept scope — the other four concepts the same
+    // census wired stay demoted precisely because they own no parameters.
+    expect(CONCEPT_SCENE_OVERRIDES).toHaveLength(16)
+    expect(CONCEPT_SCENE_OVERRIDES).toContain('math.calc.critical-points')
     expect(CONCEPT_SCENE_OVERRIDES).toContain('phys.em.kirchhoffs-laws')
     expect(CONCEPT_SCENE_OVERRIDES).toContain('phys.mech.satellites')
     expect(CONCEPT_SCENE_OVERRIDES).toContain('phys.meas.vector-products')

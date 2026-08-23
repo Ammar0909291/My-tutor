@@ -189,6 +189,23 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   // Meiosis is not mitosis; the generator already models both.
   'bio.cell.meiosis': () => buildCellDivisionScene({ divisionType: 'meiosis' }),
 
+  // ── Orphan-census promotion: a figure chosen FOR this concept ─────────────
+  // calculus_graph's kind default is x^2 - 4x + 3 on [-1, 5] — a parabola with
+  // exactly ONE critical point. For "Critical Points" that teaches half the
+  // idea: it shows a minimum and never shows that critical points come in
+  // kinds. The cubic x^3 - 3x on [-2.5, 2.5] has TWO, a maximum at x = -1 and a
+  // minimum at x = +1, and the generator derives and labels both (its title
+  // reads "2 critical points" where the default reads "1").
+  //
+  // This is what promotion is supposed to mean: the concept OWNS an instance
+  // that teaches it better than the shared default, so its provenance becomes
+  // 'generator' and it earns concept scope instead of being declared into it.
+  // The four other concepts wired by the same census are deliberately NOT here
+  // — see scope.ts for why each keeps its demotion.
+  'math.calc.critical-points': () => buildCalculusGraphScene({
+    functionType: 'polynomial', coefficients: [1, 0, -3, 0], domainMin: -2.5, domainMax: 2.5,
+  }),
+
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong
   // thing, so no scene is produced and the concept's card is used instead.

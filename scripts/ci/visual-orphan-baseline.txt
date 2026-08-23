@@ -44,10 +44,8 @@
 # (number-theory congruence, a === b mod n); math.trig.trigonometric-identities
 # would downgrade a live geometry_shape default to a bare grid;
 # cs.ds.linked-lists -> cs.struct.linked-lists covers only singly linked lists.
-bio.cell.cell-division
 bio.eco.ecosystems
 bio.eco.water-cycle
-bio.mol.dna-structure
 cs.algo.searching
 cs.algo.sorting
 cs.ds.arrays
@@ -57,17 +55,12 @@ math.alg.linear-equations
 math.alg.linear-inequalities
 math.calc.integration
 math.geom.3d-geometry
-math.geom.angle-sum
 math.geom.area-perimeter
 math.geom.congruence
-math.geom.coordinate-geometry
 math.geom.heights-distances
-math.geom.section-formula
 math.geom.similarity
 math.geom.straight-lines
 math.geom.surface-area-volume
 math.stat.probability
 math.trig.trigonometric-identities
 math.trig.trigonometric-ratios
-math.vec.vector-operations
-math.vec.vectors

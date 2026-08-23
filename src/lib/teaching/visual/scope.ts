@@ -150,11 +150,30 @@ export const INSUFFICIENT_FOR_CONCEPT: ReadonlySet<string> = new Set([
   // of asserting it. Until someone does that, under-claiming is the safe
   // direction — over-claiming is the failure this architecture exists to
   // prevent.
+  //
+  // PROMOTED, and no longer in this set: 'math.calc.critical-points'. It now
+  // owns a cubic with a maximum AND a minimum in CONCEPT_SCENES, where the
+  // shared default is a parabola with one critical point — a figure genuinely
+  // better FOR the concept, which is what earns scope.
+  //
+  // The remaining four are NOT promotable, each for a measured reason rather
+  // than for lack of effort:
+  //   · bio.gen.mendelian-genetics — the Punnett generator is single-gene BY
+  //     CONSTRUCTION (its own table returns null for dihybrid-cross), so
+  //     independent assortment, half of Mendel's laws, cannot be drawn at all.
+  //   · bio.eco.ecosystem-structure-function — a trophic pyramid shows
+  //     structure and energy flow, never nutrient cycling, decomposition or
+  //     community interaction, which the concept also covers.
+  //   · math.stats.data-visualization — one bar chart among the many chart
+  //     types the concept is about.
+  //   · cs.db.er-modeling — the kind default (Student -M:N- Course, with
+  //     attributes) ALREADY depicts the concept fully, so authoring identical
+  //     parameters would change provenance without changing the figure. That
+  //     is declaring scope, not earning it, so the demotion stands.
   'bio.eco.ecosystem-structure-function', // an energy pyramid; structure and function are broader
   'math.stats.data-visualization',   // one frequency distribution; the concept covers many charts
   'bio.gen.mendelian-genetics',      // one Aa x Aa monohybrid square; Mendel's laws are broader
   'cs.db.er-modeling',               // one Student/Course ER diagram, not authored for this concept
-  'math.calc.critical-points',       // one polynomial's single critical point, from a shared scene
 
   // ── added by the visual semantic moat sweep ──────────────────────────────
   // Three concept-level rows that were carrying the STRONG contract ("a

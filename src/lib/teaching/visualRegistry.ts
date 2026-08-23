@@ -60,6 +60,24 @@ const CONCEPT_VISUALS: Record<string, VisualEntry> = {
   'phys.mech.universal-gravitation':  { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'gravitation_orbit' },
   'phys.mech.satellites':             { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'gravitation_orbit' },
 
+  // ── DEAD DUPLICATE ROWS REMOVED (orphan census) ──────────────────────────
+  // Seven keys named no concept in any KG AND named a generator that is
+  // already reachable through a real concept, so each was dead code whose
+  // deletion loses nothing:
+  //   bio.cell.cell-division      cell_division is served via bio.cell.mitosis
+  //                               and bio.cell.meiosis
+  //   bio.mol.dna-structure       dna_structure via bio.mol.dna-replication
+  //   math.geom.coordinate-geometry, math.geom.section-formula
+  //                               coordinate_geometry_line via
+  //                               math.geom.distance-formula
+  //   math.geom.angle-sum         triangle via math.geom.triangle
+  //   math.vec.vectors, math.vec.vector-operations
+  //                               math.vec is not a KG domain at all; the
+  //                               vector generator is reachable via its own
+  //                               live keys
+  // Removing a row is only legitimate when the content stays reachable — that
+  // was checked per generator before deleting, not assumed from the name.
+
   // Physics — Mechanics (P2: eliminate broad domain-default dependence).
   // Audit of every phys.mech concept previously resolved ONLY through the
   // 'phys.mech' → force_diagram domain default (see DOMAIN_VISUALS below,
@@ -91,6 +109,21 @@ const CONCEPT_VISUALS: Record<string, VisualEntry> = {
   // (b) A different existing visual type is the better fit.
   // Work is force-times-displacement — best shown as an F–d graph (area
   // under the curve = work), not a static force diagram.
+  //
+  // AUTHORING REQUIRED, investigated and confirmed. The comment above states
+  // the right figure and no generator on this platform draws it. Checked, not
+  // assumed:
+  //   · calculus_graph plots a function and marks critical points; it shades no
+  //     area and labels axes f(x)/x, not F and d.
+  //   · vectorProducts renders "Dot and cross products of the same two
+  //     vectors" — it would put a CROSS product beside a work lesson, which is
+  //     irrelevant to W = F·d and actively confusing.
+  //   · kinematics_graphs labels its axes in m/s and m/s²; force_diagram draws
+  //     forces with no displacement and no projection.
+  // What work needs is either an F–d graph with the area shaded, or a
+  // force-at-an-angle diagram labelling d and d·cos(theta). Neither exists, and
+  // swapping one insufficient figure for another is not a repair, so the
+  // demotion in scope.ts stands and this is recorded as authoring work.
   'phys.mech.work':                   { primary: 'coordinate_plane', all: ['coordinate_plane'] },
   // REMOVED (live P0, Lesson 39): 'phys.mech.angular-kinematics' ->
   // coordinate_plane. Reproduced against production — the tutor taught a
@@ -439,12 +472,10 @@ const CONCEPT_VISUALS: Record<string, VisualEntry> = {
   'bio.gen.mendelian-genetics':       { primary: 'food_chain', all: ['food_chain'], sceneGenerator: 'punnett_square' },
 
   // Biology — Cell biology
-  'bio.cell.cell-division':           { primary: 'food_chain', all: ['food_chain'], sceneGenerator: 'cell_division' },
   'bio.cell.mitosis':                 { primary: 'food_chain', all: ['food_chain'], sceneGenerator: 'cell_division' },
   'bio.cell.meiosis':                 { primary: 'food_chain', all: ['food_chain'], sceneGenerator: 'cell_division' },
 
   // Biology — Molecular biology
-  'bio.mol.dna-structure':            { primary: 'food_chain', all: ['food_chain'], sceneGenerator: 'dna_structure' },
   'bio.mol.dna-replication':          { primary: 'food_chain', all: ['food_chain'], sceneGenerator: 'dna_structure' },
 
   // Biology — Ecology
@@ -461,14 +492,11 @@ const CONCEPT_VISUALS: Record<string, VisualEntry> = {
   'bio.eco.water-cycle':              { primary: 'water_cycle', all: ['water_cycle'] },
 
   // Mathematics — Coordinate geometry
-  'math.geom.coordinate-geometry':    { primary: 'coordinate_plane', all: ['coordinate_plane', 'three_coordinate_system'], sceneGenerator: 'coordinate_geometry_line' },
   'math.geom.distance-formula':       { primary: 'coordinate_plane', all: ['coordinate_plane'], sceneGenerator: 'coordinate_geometry_line' },
-  'math.geom.section-formula':        { primary: 'coordinate_plane', all: ['coordinate_plane'], sceneGenerator: 'coordinate_geometry_line' },
   'math.geom.straight-lines':         { primary: 'coordinate_plane', all: ['coordinate_plane'] },
 
   // Mathematics — Geometry
   'math.geom.triangle':              { primary: 'geometry_shape', all: ['geometry_shape', 'three_geometric_solids'], sceneGenerator: 'triangle' },
-  'math.geom.angle-sum':              { primary: 'geometry_shape', all: ['geometry_shape'], sceneGenerator: 'triangle' },
   'math.geom.congruence':             { primary: 'geometry_shape', all: ['geometry_shape'] },
   'math.geom.similarity':             { primary: 'geometry_shape', all: ['geometry_shape'] },
   'math.geom.circle':                { primary: 'geometry_shape', all: ['geometry_shape'] },
@@ -531,8 +559,6 @@ const CONCEPT_VISUALS: Record<string, VisualEntry> = {
   'math.stat.probability':            { primary: 'number_line', all: ['number_line'] },
 
   // Mathematics — Vectors
-  'math.vec.vectors':                 { primary: 'three_vector_visualization', all: ['three_vector_visualization'], sceneGenerator: 'vector' },
-  'math.vec.vector-operations':       { primary: 'three_vector_visualization', all: ['three_vector_visualization'], sceneGenerator: 'vector' },
 
   // Mathematics — Calculus
   // REPAIRED (orphan census): calculus_graph was reachable through no real

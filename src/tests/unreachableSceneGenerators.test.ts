@@ -40,7 +40,25 @@ describe('previously unreachable generators now serve a real concept', () => {
     expect(scene, conceptId).not.toBeNull()
   })
 
-  it('all five are DEMOTED — provenance decides, not resemblance', () => {
+  it('critical-points is PROMOTED — it owns a figure better than the default', () => {
+    // Earned, not declared: the shared default is a parabola with ONE critical
+    // point; this concept owns a cubic with a maximum AND a minimum, so the
+    // figure teaches the concept better than the kind default does.
+    expect(CONCEPT_SCENE_OVERRIDES.includes('math.calc.critical-points')).toBe(true)
+    expect(INSUFFICIENT_FOR_CONCEPT.has('math.calc.critical-points')).toBe(false)
+  })
+
+  it('and the promoted figure really does show TWO critical points', () => {
+    // The whole basis of the promotion. If a future edit reverts the
+    // parameters to the one-critical-point default, the claim is no longer
+    // earned and this fails.
+    const own = buildCanonicalScene('calculus_graph' as never, 'math.calc.critical-points') as unknown as { title?: string } | null
+    const shared = buildCanonicalScene('calculus_graph' as never, 'some.other.concept') as unknown as { title?: string } | null
+    expect(own?.title).toMatch(/2 critical points/)
+    expect(shared?.title).toMatch(/1 critical point/)
+  })
+
+  it('the other four stay DEMOTED — provenance decides, not resemblance', () => {
     // Three of them arguably DO depict their concept (a Punnett square is a
     // Mendelian cross; an ER diagram is entity-relationship modelling; the
     // calculus scene marks the critical points). They are demoted anyway,
@@ -50,6 +68,7 @@ describe('previously unreachable generators now serve a real concept', () => {
     // visualGeneratorDefaultScope.test.ts exists to stop that set growing, and
     // its rule is that it may only ever shrink.
     for (const [id] of WIRED) {
+      if (id === 'math.calc.critical-points') continue
       expect(INSUFFICIENT_FOR_CONCEPT.has(id), id).toBe(true)
     }
   })
@@ -62,11 +81,14 @@ describe('previously unreachable generators now serve a real concept', () => {
     }
   })
 
-  it('the promotion path stays open and is the better long-term answer', () => {
-    // Authoring a concept's own parameters moves provenance to 'generator'
-    // (concept-owned) and EARNS concept scope instead of asserting it. None of
-    // the five has done that yet, which is precisely why they are demoted.
+  it('the four that stay demoted genuinely own no concept parameters', () => {
+    // Which is exactly why they are demoted — they borrow the generator kind's
+    // one shared instance. cs.db.er-modeling is the interesting case: its kind
+    // default already depicts the concept, so authoring identical parameters
+    // would change provenance without changing the figure. That is declaring
+    // scope, not earning it.
     for (const [id] of WIRED) {
+      if (id === 'math.calc.critical-points') continue
       expect(CONCEPT_SCENE_OVERRIDES.includes(id), id).toBe(false)
     }
   })
