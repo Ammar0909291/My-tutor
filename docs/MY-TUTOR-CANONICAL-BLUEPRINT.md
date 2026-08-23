@@ -691,7 +691,15 @@ Where this document and `CLAUDE.md`/existing ADRs agree (the majority of claims 
 
 ---
 
-## 28. Decision Ownership (Phase 3, 2026-08-23)
+## 28. Decision Ownership (Series A Phase 3, 2026-08-23)
+
+> **Two different phase series both ran on 2026-08-23 and both number their
+> phases from the start.** This section belongs to SERIES A (Phase 0-4,
+> TurnDecision / decision ownership / ambiguity propagation, commits
+> `5741148`..`34f15fa1`). The architecture-hardening SERIES B (Phase 1 stop
+> persistence, Phase 2 cross-turn characterisation, Phase 3 turn arbitration,
+> commits `ceb7bd3`..`5ae4295`) is §29. Naming them both "Phase 3" already cost
+> one session-handoff its bearings; the disambiguation is deliberate.
 
 **The rule.** *An authoritative reading is CONSUMED by everything downstream of
 it. A component that consumes an authoritative reading may not re-derive it.*
@@ -778,10 +786,83 @@ untouched.)
 
 ---
 
+## 29. Turn Arbitration (Series B Phase 3, 2026-08-23)
+
+**The rule.** *Where two educational actions cannot both be true of one turn,
+the runtime decides which one owns it — and the losing action is ABSENT from the
+prompt, not out-argued inside it.*
+
+§28 established who owns each READING. This section establishes who owns the
+TURN. They are different questions: §28 stops two components disagreeing about
+what the learner said; §29 stops two components each telling the model to do
+something incompatible with the other.
+
+**What it replaces.** The prompt is assembled by concatenating 73
+`systemPrompt +=` blocks, and precedence between them was expressed as
+(a) source position — later append, later in the prompt, recency advantage — and
+(b) prose authority claims addressed to the model. Seven blocks each asserted
+supremacy over "everything above": TURN DIRECTIVE ("overrides any earlier
+advisory pacing"), FIRST LESSON PROTOCOL ("OVERRIDES ANY CONFLICTING GUIDANCE
+ABOVE"), RECOVERY ("PREEMPTS EVERYTHING ABOVE"), RESPONSE LANGUAGE ("OUTRANKS
+EVERY INSTRUCTION ABOVE"), two TEACHING ACTION blocks, NEW REQUEST AFTER
+COMPLETION, OBSERVATION REPAIR. Untyped, non-transitive, unchecked — and
+resolved by the model. That is Invariant 6 of §28 being violated structurally
+rather than occasionally.
+
+**Four axes; only one can contradict.** Classifying all 73 blocks by what they
+constrain: TURN ACTION (what the tutor does), SUBJECT (which concept — excursion),
+MEDIUM (which figure — visual contract), REGISTER (how to acknowledge, which
+language — CUE, output language). Contradiction exists only within TURN ACTION.
+This is why 73 blocks coexist without 73-way conflict, and why RECOVERY and the
+EXCURSION DIRECTIVE can both be "injected LAST" without fighting. Arbitration is
+scoped to the first axis; the other three are not consulted and not suppressed.
+
+**The order** (`teaching/turnArbitration.ts`, stated exactly once in the
+runtime, first-match-wins, total):
+
+    RECOVERY  >  LEARNER_REQUEST  >  CLOSE  >  COMPLETE  >  TEACH (floor)
+
+`TEACH` always claims, so the verdict is total and the owner is never null —
+EOS v2 §5.2's completeness rule restated for this axis. The winner denies a
+declared set of CAPABILITIES (`PHASE_FRAME`, `NEXT_MOVE`, `NEW_QUESTION`,
+`AUTHORED_PROBE`, `SESSION_CLOSE`, `FILLER_REPAIR`) to everything below it.
+Suppression is per-capability rather than per-block on purpose: the TURN
+DIRECTIVE's length budget, new-term ceiling and register are Axis 3/4 and must
+survive a close or a recovery, which are exactly the turns where an unbounded
+response does most harm.
+
+**Three rungs deliberately absent**, each because it cannot claim — a rung that
+never fires is dead code that reads as protection. SAFETY/PROVIDER FAILURE: the
+degraded path runs after the provider call fails and replaces the whole turn, so
+there is no block to outrank. PLACEMENT: its recovery collision was already
+guarded, and its others are closed by making it a consumer of `NEW_QUESTION`,
+which also keeps the verdict computable once. KNOWLEDGE GAP: no knowledge-gap
+state exists in the runtime at all — a named gap is filed as distress and the
+concept discarded (§25). Reported, not patched around.
+
+**Consumers** — six sites ask the verdict instead of keeping private copies of
+the order: the TURN DIRECTIVE, `shouldInjectAffectClose`, the placement probe,
+`gateEligible`, `shouldRepairFillerTurn`, and the false-completion nudge. Before
+this, three of them each encoded a different incomplete subset of the same
+precedence, and every hole was a measured-reachable defect.
+
+**Invariant 7** extends §28's Invariant 6 from a principle to a mechanism: *no
+two Axis-1 blocks may occupy one prompt. Where both claim, the lower-ranked one
+is not written.*
+
+**Known limit, recorded rather than hidden.** The post-model prose-question
+withhold removes whole PARAGRAPHS (half a question is still a question). When an
+entire closing turn is one paragraph ending in a question, nothing is separable,
+and the guard deliberately does nothing and logs it rather than substituting an
+invented closing sentence. The case is narrowed, not eliminated.
+
+---
+
 ## 27. Change Log
 
 | Date | Change |
 |---|---|
+| 2026-08-23 | §29 Turn Arbitration added by Series B Phase 3: the Axis-1 precedence order, the capability model, the six consumers, Invariant 7, and the two rungs excluded on evidence. §28 retitled "Series A Phase 3" to disambiguate the two same-day phase series. No other section edited. |
 | 2026-08-23 | §28 amended by the Phase 4 migration: ambiguity propagation, invariant 6, and the session-close deferral (`shouldInjectAffectClose`). No other section edited. |
 | 2026-08-23 | §28 Decision Ownership added by the Phase 3 architecture migration (commit on `main`). Records the consume-never-re-derive rule, the per-concern ownership map, the runtime invariants, and the single re-derivation site that was migrated. No other section was edited. |
 | 2026-08-23 | First edition of this canonical blueprint, synthesized from six parallel research passes (Content/Curriculum, Visual Intelligence, Tutor Runtime/Mastery, Frontend/UX, AI Provider/Database, Testing/CI/Deployment) plus direct repository inspection, at HEAD `f13ac3215fce51cad817572a15cbc4db3154fb6f` on `main`. No application code, curriculum content, or database schema was modified to produce this document. |
