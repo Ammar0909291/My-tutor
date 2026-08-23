@@ -23,7 +23,7 @@ async function main(): Promise<void> {
   console.log(`account: ${acct.email}\n`)
   let refusals = 0, total = 0
   try {
-    for (let round = 0; round < 3; round++) {
+    for (let round = 0; round < 4; round++) {
       for (const [subject, lesson] of LESSONS) {
         const sid = await createSession(acct.cookie, subject)
         const p = await openLesson(acct.cookie, sid, lesson)
