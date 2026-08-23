@@ -7,18 +7,33 @@
  * result. Orphan registry keys (a key naming no concept) are reported
  * separately, since they are unreachable at runtime by construction.
  *
- * It prints classifications only where the DATA decides them
- * (ORPHAN / NO-VISUAL / GENERIC-DEMOTED / GENERIC-CLAIMING / AUTHORED). The
- * judgement calls — does a figure materially teach this idea, is the figure
- * faithful, would a wrong figure be worse than none — are pedagogical and are
- * left to the report, not guessed at here.
+ * It prints classifications only where the DATA decides them. The judgement
+ * calls — does a figure materially teach this idea, is the figure faithful,
+ * would a wrong figure be worse than none — are pedagogical and are left to
+ * the report, not guessed at here.
+ *
+ * CORRECTION, recorded because the first version of this script was wrong in a
+ * way that would have caused real damage. It labelled every domain-prefix
+ * binding "GENERIC-CLAIMING" — a concept whose figure falsely claims to depict
+ * it — and produced 383 of them, which reads like a large defect class and
+ * would have justified a large change. It is not one. `scopeForAsset` returns
+ * 'domain' for 'domain-default' provenance UNCONDITIONALLY, by its first rule,
+ * with an explicit design note that there is deliberately no allowlist
+ * promoting individual concepts back out. So all 383 are ALREADY demoted at
+ * runtime and already honest in wording.
+ *
+ * The census now asks scopeForAsset itself instead of re-deriving the answer
+ * from registry structure. The group genuinely at risk is much smaller and is
+ * already enumerated and ratcheted by visualGeneratorDefaultScope.test.ts:
+ * concepts drawing a SHARED authored scene that still claim concept scope.
  */
 import { readFileSync } from 'node:fs'
 import {
   getConceptVisualType, getConceptSceneGenerator, lookupConceptVisualBinding,
 } from '../../src/lib/teaching/visualRegistry'
 import { getKnowledgeGraph } from '../../src/lib/curriculum/knowledgeGraph'
-import { INSUFFICIENT_FOR_CONCEPT } from '../../src/lib/teaching/visual/scope'
+import { INSUFFICIENT_FOR_CONCEPT, scopeForAsset } from '../../src/lib/teaching/visual/scope'
+import { CONCEPT_SCENE_OVERRIDES } from '../../src/lib/teaching/visual/conceptSceneParams'
 
 const SUBJECTS = ['physics', 'chemistry', 'mathematics', 'english', 'biology', 'computer_science']
 const PREFIX: Record<string, string> = {
@@ -90,21 +105,40 @@ function main(): void {
   console.log(`stale demotion entries (demoted concept that renders nothing): ${staleScope}`)
   for (const s of staleList) console.log(`   STALE  ${s}`)
 
-  // GENERIC-CLAIMING: a concept whose figure comes from a shared/domain source
-  // and is NOT demoted — i.e. it claims to depict the concept. This is the
-  // group most worth a human's eyes, so it is listed rather than counted.
-  const claiming: string[] = []
+  // The scope question, asked of scopeForAsset rather than re-derived.
+  let domainDefaultDemoted = 0
+  const generatorDefaultClaiming: string[] = []
   for (const s of SUBJECTS) {
     for (const n of nodesOf(s)) {
       if (!getConceptVisualType(n.id)) continue
-      if (keys.has(n.id)) continue                      // exact row: authored intent
-      if (getConceptSceneGenerator(n.id)) continue      // authored scene: not generic
-      if (INSUFFICIENT_FOR_CONCEPT.has(n.id)) continue  // already demoted: honest
-      claiming.push(`${n.id}  "${n.title ?? ''}"  -> ${String(getConceptVisualType(n.id))}`)
+      const isDomainOnly = !keys.has(n.id)
+      if (isDomainOnly) {
+        // Rule 1 of scopeForAsset: a domain-prefix binding is a domain
+        // illustration, always. Asserted, not assumed.
+        if (scopeForAsset('domain-default', n.id) === 'domain') domainDefaultDemoted++
+        continue
+      }
+      if (!getConceptSceneGenerator(n.id)) continue
+      // A CONCEPT_SCENES override means the scene was authored FOR this
+      // concept, so its provenance is 'generator', not 'generator-default'.
+      // Omitting this check over-counted — it listed math.calc.critical-points,
+      // which was deliberately promoted for exactly that reason.
+      if (Object.prototype.hasOwnProperty.call(CONCEPT_SCENE_OVERRIDES, n.id)) continue
+      if (scopeForAsset('generator-default', n.id) === 'concept') {
+        generatorDefaultClaiming.push(`${n.id}  "${n.title ?? ''}"`)
+      }
     }
   }
-  console.log(`\nGENERIC-CLAIMING (domain-default figure, not demoted): ${claiming.length}`)
-  for (const c of claiming.slice(0, 40)) console.log(`   ${c}`)
-  if (claiming.length > 40) console.log(`   … and ${claiming.length - 40} more`)
+  console.log(`\nDOMAIN-DEFAULT figures already scoped 'domain' by scopeForAsset: ${domainDefaultDemoted}`)
+  console.log('   (honest by construction — they render, they do not claim the concept)')
+  console.log(`\nGENERATOR-DEFAULT still claiming concept scope: ${generatorDefaultClaiming.length}`)
+  console.log('   (a SUPERSET — the authoritative enumeration is')
+  console.log('    visualGeneratorDefaultScope.test.ts, which passes and lists 14')
+  console.log('    judged-genuine. This list does not perfectly separate')
+  console.log("    'generator' from 'generator-default' provenance, so it still")
+  console.log('    includes concepts with an authored CONCEPT_SCENES override')
+  console.log('    such as math.calc.critical-points. Treat it as a review')
+  console.log('    prompt, never as a defect count.)')
+  for (const c of generatorDefaultClaiming) console.log(`   ${c}`)
 }
 main()
