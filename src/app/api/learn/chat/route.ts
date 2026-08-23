@@ -4200,6 +4200,35 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       {
         const { closingTurnWithholdsQuestion } = await import('@/lib/teaching/gateAssessment')
         if (closingTurnWithholdsQuestion(sessionEpisodeHoisted?.phase)) mcqHoisted = null
+        // PHASE 3 — MEASURED IN PRODUCTION, and the Step 0 matrix missed it.
+        //
+        // Live run, disposable account: the learner typed "I'm lost. I don't
+        // understand any of this." and received a tappable graded question,
+        // "Which of the following is a pure substance?".
+        //
+        // The matrix recorded RECOVERY x ASSESS as already prevented, and for
+        // the AUTHORED probe it is — `gateEligible` excludes recovery. What it
+        // did not check is the OTHER question source: the model's own MCQ tag,
+        // which until now was withheld for CLOSING and for nothing else. So
+        // recovery's own block ("No new content this turn. No assessment. No
+        // calibration questions.") was advisory against a channel with no
+        // server-side enforcement at all, and a distressed learner got a quiz.
+        //
+        // Generalised to the authority rather than special-cased to recovery:
+        // ANY owner that denies NEW_QUESTION drops the model's tag. That is
+        // one rule covering RECOVERY, CLOSE and COMPLETE, and it covers the
+        // next authority added to the ladder without a fourth incident.
+        // `closingTurnWithholdsQuestion` stays above it deliberately — it is
+        // shared with the authored-probe gate, and keeping one function
+        // answering "is this a closing turn?" for both sources is what stops
+        // them drifting apart.
+        if (!(turnArbitrationHoisted ?? arbitrationUnavailable()).allows('NEW_QUESTION') && mcqHoisted) {
+          console.warn('[arbitration] ' + JSON.stringify({
+            event: 'model-mcq-tag-withheld',
+            owner: (turnArbitrationHoisted ?? arbitrationUnavailable()).owner,
+          }))
+          mcqHoisted = null
+        }
       }
       text = mcqParse.cleanText
       // P1-1: strip the TEACHING INTENT tag in the same place and for the same

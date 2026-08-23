@@ -259,3 +259,40 @@ PARAGRAPHS (`dropAnswerableContent`: half a question is still a question). When 
 turn is ONE paragraph ending in a question, nothing is separable — the guard does nothing and logs
 `closing-turn-was-entirely-a-question` rather than substituting an invented close. Phase 2's C2 is
 narrowed, not eliminated.
+
+---
+
+## J. TWO THINGS THIS AUDIT GOT WRONG, FOUND BY LIVE VERIFICATION
+
+Both were recorded in §F as "already prevented". Both were half-true, and the half that was
+false is the one a learner meets. Offline tests agreed with the audit, because they were written
+from it — which is exactly why Step 7 exists and why it runs against production rather than a mock.
+
+**J1. RECOVER x ASSESS was NOT prevented.** §F cited `gateEligible`'s `!recoveryKeyHoisted`,
+which is real — for the AUTHORED probe. There is a SECOND question source, the model's own
+`<!--MCQ-->` tag, and it was withheld for CLOSING and for nothing else. So recovery's own block
+("No new content this turn. No assessment. No calibration questions.") was advisory against a
+channel with zero server-side enforcement.
+
+MEASURED: a learner typed *"I'm lost. I don't understand any of this."* and received a tappable
+graded question, "Which of the following is a pure substance?". The audit had two question
+sources in view for CLOSE and only one for RECOVERY.
+
+Closed by generalising the withhold from a phase to the AUTHORITY: any owner denying
+`NEW_QUESTION` drops the model's tag — one rule covering RECOVERY, CLOSE and COMPLETE, and the
+next rung added to the ladder, without waiting for a fourth incident.
+
+**J2. The CONVERSATION block was never classified at all.** §E put it on Axis 4 (REGISTER) and
+therefore out of scope. Its per-type `rendererDirective` genuinely is Axis 4 — but its HEADER
+hardcodes "respond to the student FIRST, **then teach**" for every type, from a position near the
+very end of the prompt. That is an Axis-1 clause, and it is C1's mechanism exactly: an instruction
+to teach, positioned last, unaware of the episode.
+
+MEASURED: on a CLOSING turn where arbitration, the turn directive, the close block and the
+post-model withhold all worked correctly, the learner was still taught a new example on their way
+out. It also had TWO call sites and the first fix caught one.
+
+**THE LESSON WORTH KEEPING.** Classifying a block by its main purpose is not the same as
+classifying every clause it emits. Both misses are the same error: a block was judged by what it
+is FOR rather than by what it SAYS. A future audit of this kind should read the emitted strings,
+not the module's job description.

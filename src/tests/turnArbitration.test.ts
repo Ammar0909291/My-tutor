@@ -388,6 +388,29 @@ describe('5. every competing site asks the authority', () => {
     }
   })
 
+  it('the model\'s OWN mcq tag is withheld by the authority, not only on CLOSING', () => {
+    // MEASURED IN PRODUCTION. A learner who typed "I'm lost. I don't understand
+    // any of this." received a tappable graded question. The Step 0 matrix
+    // recorded RECOVERY x ASSESS as prevented — true of the AUTHORED probe
+    // (gateEligible excludes recovery) and false of the model's own tag, which
+    // was withheld for CLOSING and nothing else.
+    for (const a of ['RECOVERY', 'CLOSE', 'COMPLETE'] as const) {
+      expect(arbitrateTurn(claiming(a)).allows('NEW_QUESTION'), a).toBe(false)
+    }
+    // ...and an ordinary turn is untouched, or the gate could never fire.
+    expect(arbitrateTurn(NO_CLAIMS).allows('NEW_QUESTION')).toBe(true)
+    expect(arbitrateTurn(claiming('LEARNER_REQUEST')).allows('NEW_QUESTION')).toBe(true)
+
+    const s = src()
+    const at = s.indexOf('mcqHoisted = gateMcqHoisted ?? mcqParse.mcq')
+    expect(at).toBeGreaterThan(0)
+    const window = s.slice(at, at + 2600)
+    // Both withholds present: the shared closing predicate AND the authority.
+    expect(window).toContain('closingTurnWithholdsQuestion(sessionEpisodeHoisted?.phase)')
+    expect(window).toContain("allows('NEW_QUESTION')")
+    expect(window).toContain('model-mcq-tag-withheld')
+  })
+
   it('the closing prose guard runs post-model', () => {
     expect(src()).toContain('withholdClosingProseQuestion({')
   })
