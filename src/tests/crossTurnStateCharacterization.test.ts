@@ -214,29 +214,79 @@ describe('B — cross-turn persistence', () => {
 
 // ═══════════════════════════════════════════════════════════════════════════
 describe('C — dangerous transitions (classification, not correction)', () => {
-  it('C1 CLOSING -> teaching: REACHABLE (the ladder ignores the episode)', () => {
+  it('C1 CLOSING -> teaching: INSTRUCTION CLOSED BY PHASE 3; ladder advance remains, by design', async () => {
     // The episode is CLOSING and correctly persists as such…
     const t1 = episodeTurn({ persisted: episode('CORE'), boundary: false, wantsToStop: true, signal: null })
     expect(t1.persistedAfter?.phase).toBe('CLOSING')
     // …and the close block is correctly injected on the next turn.
     expect(shouldInjectAffectClose({ phase: 'CLOSING', excursionActive: false, ambiguousTurn: false })).toBe(true)
-    // BUT the ladder is a separate machine that never consults the episode:
-    // a CLOSING turn still advances it. This is the audit's S3/C-a collision.
+
+    // ── WHAT PHASE 3 CLOSED ─────────────────────────────────────────────────
+    // The harm this case named was that the tutor TEACHES instead of closing.
+    // The mechanism was never model disobedience: the TURN DIRECTIVE opens by
+    // claiming it "overrides any earlier advisory pacing", is appended ~580
+    // lines after the close block, and conversationState.ts contained zero
+    // references to CLOSING or the episode — the block claiming override
+    // authority could not know the session was ending. It now receives the
+    // arbitration verdict and issues no phase frame and no move when it does
+    // not own the turn.
+    const { arbitrateTurn } = await import('@/lib/teaching/turnArbitration')
+    const { buildTurnDirective } = await import('@/lib/teaching/conversationState')
+    const closing = arbitrateTurn({
+      recoveryActive: false, learnerRequestActive: false, closing: true, completionReady: false,
+    })
+    const directive = buildTurnDirective({
+      state: initialConversationState(CONCEPT), nextMove: 'ask', maxParagraphs: 4,
+      workedExampleFirst: false, visualType: null, arbitration: closing,
+    } as never)
+    expect(directive).not.toContain('- Teaching phase:')
+    expect(directive).not.toContain('- Next move:')
+
+    // ── WHAT REMAINS, AND WHY IT IS NOT A DEFECT ────────────────────────────
+    // The ladder is still a separate machine that never consults the episode:
+    // a CLOSING turn still advances it. Phase 3 deliberately did NOT change
+    // that. If a learner answers something on their way out, the answer is
+    // real evidence and banking it is correct — refusing to record it would
+    // lose genuine mastery to punish the timing. What was wrong was ASKING,
+    // and the asking is what was closed.
     const before = initialConversationState(CONCEPT)
     const after = advanceConversationState(before, {
       askedQuestion: true, signalCorrect: null, deliveredTeaching: true,
     })
-    expect(after).not.toEqual(before)   // REACHABLE — recorded, not fixed
+    expect(after).not.toEqual(before)   // unchanged, and intentionally so
   })
 
-  it('C2 CLOSING -> new question: MCQs BLOCKED, prose questions REACHABLE', async () => {
-    const { closingTurnWithholdsQuestion } = await import('@/lib/teaching/gateAssessment')
+  it('C2 CLOSING -> new question: MCQs BLOCKED; prose now withheld where separable', async () => {
+    const { closingTurnWithholdsQuestion, withholdClosingProseQuestion } =
+      await import('@/lib/teaching/gateAssessment')
     expect(closingTurnWithholdsQuestion('CLOSING')).toBe(true)   // strips the MCQ
     expect(closingTurnWithholdsQuestion('CORE')).toBe(false)
-    // The guard removes MCQs only. A prose question in the model's text is not
-    // structurally detectable here and is NOT withheld — REACHABLE.
-    // Observed live in Phase 1 verification: CLOSING persisted, mcq null, and
-    // the reply was still a prose question.
+
+    // AS CHARACTERISED: "The guard removes MCQs only. A prose question in the
+    // model's text is not structurally detectable here and is NOT withheld —
+    // REACHABLE. Observed live in Phase 1 verification: CLOSING persisted,
+    // mcq null, and the reply was still a prose question."
+    //
+    // PHASE 3 closes the prompt-side cause (the directive no longer orders a
+    // question stage or a move on a closing turn) and adds the validation.
+    const posed = 'You worked hard today, and it clearly landed.'
+      + '\n\nWhich of these is a vector: speed or velocity?'
+    const r = withholdClosingProseQuestion({ text: posed, episodePhase: 'CLOSING', hasStructuredMcq: false })
+    expect(r.withheld).toBe(true)
+    expect(r.text).not.toContain('Which of these is a vector')
+
+    // ── THE LIMIT, STATED RATHER THAN HIDDEN ────────────────────────────────
+    // Removal is PARAGRAPH-scoped (dropAnswerableContent: "half a question is
+    // still a question"). When the entire closing turn is one paragraph that
+    // ends in a question, there is nothing separable to keep, and the guard
+    // deliberately does NOTHING and logs it, rather than substituting an
+    // invented closing sentence — a withhold must never produce a worse turn
+    // than the one it repairs. So this case is narrowed, not eliminated.
+    const single = 'Which of these is a vector: speed or velocity?'
+    const r2 = withholdClosingProseQuestion({ text: single, episodePhase: 'CLOSING', hasStructuredMcq: false })
+    expect(r2.withheld).toBe(false)
+    expect(r2.reason).toBe('nothing-would-survive')
+    expect(r2.text).toBe(single)
   })
 
   it('C3 MASTERED -> remediation: BLOCKED at the counters (high-water mark)', () => {
@@ -273,24 +323,54 @@ describe('C — dangerous transitions (classification, not correction)', () => {
     // affect, not by knowledge. The gap itself is never recorded anywhere.
   })
 
-  it('C6 VISUAL_REQUEST -> unrelated quiz: REACHABLE (gate ignores the request)', async () => {
+  it('C6 VISUAL_REQUEST -> unrelated quiz: CLOSED BY PHASE 3 (was REACHABLE)', async () => {
+    // ── THE ONLY CLASSIFICATION IN THIS FILE THAT PHASE 3 CHANGED ───────────
+    // This file's header states the contract for exactly this moment: it
+    // records CURRENT behaviour "so a later phase changing it is a deliberate,
+    // visible act rather than a surprise". This is that act. The original
+    // finding is preserved below verbatim, because the classification was
+    // right and the evidence for it is what justified the fix.
+    //
+    // AS CHARACTERISED (2026-08-23, at c998026):
+    //   "The gate excludes recovery, first lesson, excursion and closing…
+    //    …but NOT a visual request. REACHABLE by construction — recorded, not
+    //    fixed."
+    //   expect(gate).not.toContain('learnerRequest')
+    //
+    //   LIVE REPRODUCTION ATTEMPTED, NOT ACHIEVED (disposable account,
+    //   chemistry lesson 3): five substantive correct answers advanced the
+    //   ladder only to GUIDE, so `phaseAllowsProbe` was false and no gate
+    //   question could attach regardless of the visual request. The collision
+    //   was proven in the code path; its runtime precondition was not reached
+    //   in one session. Classified REACHABLE (source) / NOT REPRODUCED
+    //   (runtime) rather than claimed either way.
+    //
+    // WHAT PHASE 3 DID. The missing term was not added as a fifth hand-rolled
+    // negation — that conjunction was one of three sites each keeping its own
+    // incomplete copy of the same precedence order, and adding a term to one
+    // of them would have left the other two just as blind. The gate now asks
+    // the single authority, which denies an authored probe whenever the
+    // learner asked for something specific.
+    const { arbitrateTurn } = await import('@/lib/teaching/turnArbitration')
+    const asked = arbitrateTurn({
+      recoveryActive: false, learnerRequestActive: true, closing: false, completionReady: false,
+    })
+    expect(asked.owner).toBe('LEARNER_REQUEST')
+    expect(asked.allows('AUTHORED_PROBE')).toBe(false)
+    // The detector that reads the request is unchanged — Phase 3 widened nothing.
+    expect(detectLearnerRequest('show me a diagram')).toBe('diagram')
+    // And the gate consults the verdict.
     const route = (await import('node:fs')).readFileSync(
       (await import('node:path')).join(process.cwd(), 'src/app/api/learn/chat/route.ts'), 'utf8')
-    const gate = route.slice(route.indexOf('const gateEligible ='), route.indexOf('const gateEligible =') + 700)
-    // The gate excludes recovery, first lesson, excursion and closing…
-    expect(gate).toContain('!recoveryKeyHoisted')
+    const gate = route.slice(route.indexOf('const gateEligible ='),
+      route.indexOf('if (gateEligible && memoryState)'))
+    expect(gate).toContain("allows('AUTHORED_PROBE')")
     expect(gate).toContain('!excursionActiveHoisted')
     expect(gate).toContain('closingTurnWithholdsQuestion')
-    // …but NOT a visual request. REACHABLE by construction — recorded, not fixed.
-    expect(gate).not.toContain('learnerRequest')
-    expect(detectLearnerRequest('show me a diagram')).toBe('diagram')
-    // LIVE REPRODUCTION ATTEMPTED, NOT ACHIEVED (2026-08-23, disposable
-    // account, chemistry lesson 3): five substantive correct answers advanced
-    // the ladder only to GUIDE, so `phaseAllowsProbe` was false and no gate
-    // question could attach regardless of the visual request. The collision is
-    // proven in the code path above; the runtime precondition for it was not
-    // reached in one session. Classified REACHABLE (source) / NOT REPRODUCED
-    // (runtime) rather than claimed either way.
+    // STILL NOT REPRODUCED AT RUNTIME, and that has not changed: the ladder
+    // precondition above was never reached, so this remains a source-level
+    // proof of a source-level collision, now closed at the source. It is not
+    // a claim that a live session was observed doing either thing.
   })
 
   it('C7 VISUAL_ATTACHED -> wrong description: BLOCKED (identity is compared)', async () => {

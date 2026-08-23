@@ -402,10 +402,24 @@ export function shouldInjectAffectClose(input: {
   phase: SessionPhase
   excursionActive: boolean
   ambiguousTurn: boolean
+  /**
+   * PHASE 3 — the turn-arbitration verdict's answer for SESSION_CLOSE.
+   *
+   * Defect D4: this predicate encoded a private, two-term subset of a
+   * precedence order that two other sites also encoded differently
+   * (`gateEligible` had four terms, `shouldRepairFillerTurn` three). None had
+   * a recovery term, so a CLOSING turn that was ALSO a recovery turn emitted
+   * the close block AND the recovery block and left the model to choose.
+   *
+   * Optional so every existing caller and test behaves exactly as before when
+   * omitted — the route is the only thing that supplies it.
+   */
+  arbitrationAllowsClose?: boolean
 }): boolean {
   if (input.phase !== 'CLOSING') return false
   if (input.excursionActive) return false
   if (input.ambiguousTurn) return false
+  if (input.arbitrationAllowsClose === false) return false
   return true
 }
 

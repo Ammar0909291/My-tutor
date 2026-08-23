@@ -23,6 +23,7 @@
 import { describe, it, expect } from 'vitest'
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
+import { arbitrateTurn } from '@/lib/teaching/turnArbitration'
 
 const ROUTE = readFileSync(join(process.cwd(), 'src/app/api/learn/chat/route.ts'), 'utf8')
 const lines = ROUTE.split('\n')
@@ -97,9 +98,17 @@ describe('the exclusions are on the eligibility test, not assumed', () => {
     // A2a split the phase test into `phaseAllowsProbe` immediately above
     // `gateEligible`, so the window starts there — the conditions are the same
     // conditions, one binding earlier.
-    const start = codeLines.findIndex((l) => /const phaseAllowsProbe =/.test(l))
+    //
+    // Bounded by the CONSUMER rather than by a line count: a fixed window
+    // silently shrinks the assertion every time a comment is added above the
+    // expression, which is exactly how it broke when Phase 3 documented the
+    // arbitration term. Spanning to `if (gateEligible ...)` cannot drift.
+    const src = codeLines.join('\n')
+    const start = src.indexOf('const phaseAllowsProbe =')
+    const end = src.indexOf('if (gateEligible && memoryState)')
     expect(start).toBeGreaterThan(-1)
-    return codeLines.slice(start, start + 12).join('\n')
+    expect(end).toBeGreaterThan(start)
+    return src.slice(start, end)
   })()
 
   it('still fires unconditionally at a mastery gate', () => {
@@ -117,7 +126,40 @@ describe('the exclusions are on the eligibility test, not assumed', () => {
   })
 
   it('never during recovery — no content into a flooded mind', () => {
-    expect(eligibility).toMatch(/!recoveryKeyHoisted/)
+    // PHASE 3 changed the MECHANISM, not the guarantee. This exclusion used to
+    // be spelled `!recoveryKeyHoisted` inline here — one of three places that
+    // each kept a private, differently-incomplete copy of the same precedence
+    // order. It is now one question asked of the single authority.
+    //
+    // Asserted end-to-end rather than as a substring, which is strictly
+    // stronger than the line this replaces: the gate must consult the verdict,
+    // AND the verdict must actually deny an authored probe under recovery.
+    expect(eligibility).toMatch(/allows\('AUTHORED_PROBE'\)/)
+    expect(arbitrateTurn({
+      recoveryActive: true, learnerRequestActive: false, closing: false, completionReady: false,
+    }).allows('AUTHORED_PROBE')).toBe(false)
+  })
+
+  it('never when the learner asked for something specific (Phase 3, C6)', () => {
+    // The term this conjunction never had. Phase 2 classified
+    // `VISUAL_REQUEST -> unrelated quiz` REACHABLE precisely because the list
+    // had no learner-request column, so an explicit "show me a diagram" could
+    // be answered with a graded quiz — spending a scarce authored probe to do it.
+    expect(arbitrateTurn({
+      recoveryActive: false, learnerRequestActive: true, closing: false, completionReady: false,
+    }).allows('AUTHORED_PROBE')).toBe(false)
+  })
+
+  it('never once the session is closing', () => {
+    expect(arbitrateTurn({
+      recoveryActive: false, learnerRequestActive: false, closing: true, completionReady: false,
+    }).allows('AUTHORED_PROBE')).toBe(false)
+  })
+
+  it('still fires on an ordinary teaching turn — the exclusions are not a blanket ban', () => {
+    expect(arbitrateTurn({
+      recoveryActive: false, learnerRequestActive: false, closing: false, completionReady: false,
+    }).allows('AUTHORED_PROBE')).toBe(true)
   })
 
   it('never in lesson one — a first lesson does not open with a quiz', () => {

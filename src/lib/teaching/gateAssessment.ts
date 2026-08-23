@@ -508,3 +508,74 @@ function dropAnswerableContent(text: string): string {
 export function closingTurnWithholdsQuestion(episodePhase: unknown): boolean {
   return episodePhase === 'CLOSING'
 }
+
+export interface ClosingProseQuestionResult {
+  text: string
+  withheld: boolean
+  reason: 'ok' | 'not-closing' | 'prose-question-withheld' | 'nothing-would-survive'
+}
+
+/**
+ * PHASE 3 — the THIRD question source on a closing turn: the model's own prose.
+ *
+ * `closingTurnWithholdsQuestion` already covers the two STRUCTURED sources (the
+ * server-attached authored probe, and the model's `<!--MCQ-->` tag). Phase 2
+ * measured the remaining hole exactly: "C2 CLOSING -> new question: MCQ
+ * BLOCKED, prose question REACHABLE". A tappable four-option widget was
+ * stripped while the same question written as a sentence went straight through.
+ *
+ * The prompt-side cause is closed upstream — the TURN DIRECTIVE no longer
+ * orders a move or a question when it does not own the turn — so this is
+ * VALIDATION, not the fix: the last check that the contract the close block
+ * states was actually honoured. It withholds; it never rewrites a teaching
+ * decision, never grades, never invents a question, and makes no provider call.
+ *
+ * TWO DELIBERATE LIMITS, both of which make it withhold LESS:
+ *
+ *  1. It reuses `askedAnswerableQuestion`/`dropAnswerableContent` rather than
+ *     matching '?'. Those already exclude confirmation tails — "does that make
+ *     sense?", "shall we carry on?" — which is essential here, because the
+ *     close block's own script ends warmly and invites the learner back. A
+ *     naive question-mark strip would mutilate exactly the sentence the close
+ *     is for.
+ *
+ *  2. If nothing meaningful would survive the cut it returns the text
+ *     UNTOUCHED and says so (`nothing-would-survive`), instead of substituting
+ *     a continuation line. `withholdUngradedGateQuestion` can safely fall back
+ *     to "Let's stay with this idea for a moment" because its turn continues;
+ *     on a closing turn that sentence would promise the opposite of what the
+ *     learner asked for. A withhold must never produce a worse turn than the
+ *     one it was repairing.
+ */
+export function withholdClosingProseQuestion(input: {
+  text: string
+  /** The episode phase for THIS turn — the same value both other sources read. */
+  episodePhase: unknown
+  /** True when a structured MCQ survived; then this turn has an authorised
+   *  question and prose restating it is not a second question. */
+  hasStructuredMcq: boolean
+}): ClosingProseQuestionResult {
+  try {
+    if (!closingTurnWithholdsQuestion(input.episodePhase)) {
+      return { text: input.text, withheld: false, reason: 'not-closing' }
+    }
+    // Defensive: the two structured sources are already stripped on a closing
+    // turn, so this should be unreachable. If one ever survives, the turn has
+    // an authorised question and removing its prose would orphan the widget.
+    if (input.hasStructuredMcq) return { text: input.text, withheld: false, reason: 'ok' }
+
+    const text = typeof input.text === 'string' ? input.text : ''
+    if (!(askedAnswerableQuestion(text) || containsOptionList(text))) {
+      return { text: input.text, withheld: false, reason: 'ok' }
+    }
+    const kept = dropAnswerableContent(text)
+    if (kept.trim().length === 0) {
+      return { text: input.text, withheld: false, reason: 'nothing-would-survive' }
+    }
+    return { text: kept, withheld: true, reason: 'prose-question-withheld' }
+  } catch {
+    // Total, like every other guard on this path: a failure here must never
+    // cost the learner their turn.
+    return { text: input.text, withheld: false, reason: 'ok' }
+  }
+}

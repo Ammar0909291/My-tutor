@@ -37,6 +37,7 @@ import {
 } from '@/lib/teaching/assets'
 import { stripIpaNotation } from '@/lib/text/ipaSanitizer'
 import { readTurnIntent } from '@/lib/teaching/turnIntent'
+import { arbitrateTurn, arbitrationUnavailable } from '@/lib/teaching/turnArbitration'
 import {
   pickCurrentTopicSlug, selectCurrentLesson, foldProgressionMetrics,
   readProgressionMetrics, progressionTags, needsSignalRepair,
@@ -1703,6 +1704,21 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     // deterministically (Principle 20: stated state is ground truth) and
     // preempts calibration, assessment, and the asset memory path this turn.
     let recoveryKeyHoisted: import('@/lib/teaching/recoveryGuard').FailureStateKey | null = null
+    /**
+     * PHASE 3 — WHO OWNS THIS TURN (turnArbitration.ts).
+     *
+     * ONE verdict, computed ONCE (below, as soon as the episode is derived),
+     * read by every site that previously re-derived a private subset of the
+     * same precedence: the session-close block, the placement probe, the TURN
+     * DIRECTIVE, the authored-probe gate, and the post-model filler repair.
+     * Before Phase 3 there were three such subsets and every hole in them was a
+     * Phase 2 REACHABLE finding.
+     *
+     * Null only before it is computed, and on the paths that never reach the
+     * wave-0 block at all; consumers fall back to `arbitrationUnavailable()`,
+     * which grants TEACH and denies every question/probe/repair capability.
+     */
+    let turnArbitrationHoisted: import('@/lib/teaching/turnArbitration').TurnArbitration | null = null
     // Phases C–G (2026-07-14): server-side conversation state machine —
     // read pre-LLM (drives the TURN DIRECTIVE), folded post-AI with this
     // turn's evidence, persisted on the existing snapshot ride.
@@ -2254,6 +2270,34 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           if (turnIntent.wantsToStop) {   // Phase 1: the one authoritative read
             sessionEpisodeHoisted = forceClosing(sessionEpisodeHoisted)
           }
+
+          // PHASE 3 — ARBITRATE THE TURN. Computed HERE because this is the
+          // first point at which every claim is final: recovery was read at
+          // the top of the turn, the learner's request likewise, completion is
+          // known, and the episode has just taken its last mutation of the
+          // turn. Everything downstream reads this verdict; nothing downstream
+          // re-derives it.
+          //
+          // Claims only — no detector runs here. Each field is a value its
+          // designated owner already produced.
+          {
+            turnArbitrationHoisted = arbitrateTurn({
+              recoveryActive: recoveryKeyHoisted !== null,
+              // turnIntent is the ONE authoritative read of the message
+              // (Phase 1). `ambiguous` is the stop-carrying-a-question case
+              // Series A Phase 4 already defers the close for; including it
+              // here is that same rule, stated once instead of inline.
+              learnerRequestActive:
+                turnIntent.learnerRequest !== null || turnIntent.ambiguous,
+              closing: sessionEpisodeHoisted.phase === 'CLOSING',
+              completionReady: lessonCompletedHoisted,
+            })
+            const arb = turnArbitrationHoisted
+            console.log('[arbitration]', {
+              owner: arb.owner, overridden: arb.overridden, denied: arb.denied,
+            })
+          }
+
           if (boundary && sessionEpisodeHoisted.phase !== 'CLOSING') {
             // Spaced Retrieval Scheduler (Claude Recommendation #8, wired in
             // here per the follow-up recommendation): the session OPENING's
@@ -2299,6 +2343,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // an open excursion does — the learner has something outstanding.
             // See shouldInjectAffectClose for the production trace.
             ambiguousTurn: turnIntent.ambiguous,
+            // PHASE 3 (defect D4): a distressed learner is met first. This
+            // predicate carried no recovery term, so a CLOSING turn that was
+            // ALSO a recovery turn emitted both blocks and let the model pick.
+            // Deferred, never cancelled: the episode stays CLOSING (Phase 1),
+            // so the close fires on the first turn that is not a rescue.
+            arbitrationAllowsClose: (turnArbitrationHoisted ?? arbitrationUnavailable()).allows('SESSION_CLOSE'),
           })) {
             // Affect budget spent earlier this session (07 §6): the close
             // instruction holds until a boundary resets the episode.
@@ -2378,6 +2428,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           } catch { /* non-fatal — worst case is a redundant (bounded) re-verification */ }
         }
 
+        // PHASE 3 (defect D6): this guard already excluded recovery, and nothing
+        // else. A learner who had said "I'm done for today", or who had just
+        // asked for a diagram, could still be handed a fresh placement probe.
+        // Placement is a CONSUMER of the arbitration verdict rather than a rung
+        // in it (see turnArbitration.ts for why), and it consumes NEW_QUESTION
+        // because asking IS the action in conflict. The AWAIT branch below is
+        // deliberately still reachable: a probe already on screen is being
+        // GRADED, and dropping its tagging instruction would lose the answer.
+        const placementMayAsk = (turnArbitrationHoisted ?? arbitrationUnavailable()).allows('NEW_QUESTION')
         if (level && resolvedConceptId && placementEligible && !(placementPrevHoisted?.verified) && !recoveryKeyHoisted) {
           const state = placementPrevHoisted ?? emptyPlacementState()
           if (snapshotPendingProbe) {
@@ -2387,7 +2446,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             systemPrompt += buildPlacementAwaitBlock(snapshotPendingProbe)
             placementProbeActive = true
             placementLevelHoisted = level
-          } else {
+          } else if (placementMayAsk) {
             const probe = nextProbe(state)
             if (probe && lessonCtx) {
               systemPrompt += buildPlacementProbeBlock(probe, learnSession.subject.name, lessonCtx.lessonTitle)
@@ -2894,6 +2953,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           systemPrompt += buildTurnDirective({
             state: conversationStateHoisted,
             nextMove,
+            // PHASE 3 — the input this block never had. It opens by claiming it
+            // "overrides any earlier advisory pacing" and is appended ~580 lines
+            // AFTER the session-close block, while conversationState.ts contains
+            // zero references to CLOSING or the episode. That is Phase 2's C1 and
+            // C2, and it is a missing argument rather than a model failure.
+            arbitration: turnArbitrationHoisted,
             // First-lesson protocol mandates 2-sentence bursts; the regular
             // responseBudget(beginner)=4 paragraphs conflicts with that and
             // must be overridden for every first-lesson turn.
@@ -3467,14 +3532,31 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           isMasteryGatePhase(phaseBeforeTurn) ||
           (phaseBeforeTurn === 'GUIDE' && evidenceMoveHoisted === 'ask')
         phaseAllowsProbeHoisted = phaseAllowsProbe
+        // PHASE 3. Three of the terms this conjunction used to spell out by hand
+        // — recovery, closing, and the learner-request term it was MISSING —
+        // are now one question asked of the single precedence authority. What
+        // stays inline is what is genuinely local to this gate: the phase, the
+        // asset, the probe already on screen, and lesson one.
+        //
+        // The missing term was defect D3 / Phase 2 C6: a learner who explicitly
+        // asked to be SHOWN something could have that request answered with a
+        // graded quiz, because this list had no learner-request column. It also
+        // spent a scarce authored probe to do it.
+        //
+        // `closingTurnWithholdsQuestion` is deliberately KEPT alongside the
+        // verdict rather than replaced by it. It is consulted at the OTHER
+        // question source too (the model's own MCQ tag, post-model, where no
+        // arbitration verdict is in scope), and having one function answer
+        // "is this a closing turn?" for both sources is what stops those two
+        // sources drifting apart again. Belt and braces, on purpose.
         const gateEligible =
           phaseAllowsProbe &&
           isProbeAttachablePhase(phaseBeforeTurn) &&
           memoryState !== null &&
           !unansweredProbeOnScreen &&
-          !recoveryKeyHoisted &&
           !firstLessonActiveHoisted &&
           !excursionActiveHoisted &&
+          (turnArbitrationHoisted ?? arbitrationUnavailable()).allows('AUTHORED_PROBE') &&
           // The session is ending: no question is attached, and no authored
           // probe is spent. See closingTurnWithholdsQuestion.
           !closingTurnWithholdsQuestion(sessionEpisodeHoisted?.phase)
@@ -4466,7 +4548,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // 2026-08-22): see `shouldRepairFillerTurn`'s doc comment
       // (lessonCompletion.ts) for the full trace — extracted there as a
       // pure, testable predicate rather than left as an inline boolean.
-      if (!assembled && !mcqHoisted && (await import('@/lib/teaching/lessonCompletion')).shouldRepairFillerTurn({
+      // PHASE 3: this predicate's three exclusions were the third independent
+      // re-derivation of the same precedence order (see turnArbitration.ts).
+      // They are kept — each was added after a live defect and each is still
+      // true — and the verdict is now asked ALONGSIDE them, so a future
+      // authority added to the ladder protects this site automatically instead
+      // of waiting for a fourth production incident to add a fourth boolean.
+      if (!assembled && !mcqHoisted
+        && (turnArbitrationHoisted ?? arbitrationUnavailable()).allows('FILLER_REPAIR')
+        && (await import('@/lib/teaching/lessonCompletion')).shouldRepairFillerTurn({
         lessonCompleted: lessonCompletedHoisted,
         respectsNewIntent: lessonCompletionRespectsNewIntentHoisted,
         // A close is the third turn-shape that looks empty and is not — see
@@ -5198,6 +5288,47 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // A repair must never break a turn.
             console.warn('[gate-contract] ungraded-question check skipped:', err)
           }
+
+          // PHASE 3 — THE THIRD QUESTION SOURCE ON A CLOSING TURN: PROSE.
+          //
+          // Phase 2 measured C2 precisely: "CLOSING -> new question: MCQ
+          // BLOCKED, prose question REACHABLE". The two STRUCTURED sources are
+          // withheld (the authored gate at gateEligible, the model's own MCQ
+          // tag above), so a tappable widget was stripped while the identical
+          // question written as a sentence went straight through.
+          //
+          // The prompt-side cause is closed upstream: the TURN DIRECTIVE no
+          // longer issues a phase frame, a move, or a question stage when it
+          // does not own the turn. This is the VALIDATION that the contract was
+          // honoured — it withholds only, and it declines to act at all when
+          // withholding would leave nothing (see withholdClosingProseQuestion).
+          try {
+            const { withholdClosingProseQuestion } = await import('@/lib/teaching/gateAssessment')
+            const closingProse = withholdClosingProseQuestion({
+              text: cleanText,
+              episodePhase: sessionEpisodeHoisted?.phase,
+              hasStructuredMcq: mcqHoisted !== null,
+            })
+            if (closingProse.withheld) {
+              console.warn('[arbitration] ' + JSON.stringify({
+                event: 'closing-prose-question-withheld',
+                charsBefore: cleanText.length,
+                charsAfter: closingProse.text.length,
+              }))
+              cleanText = closingProse.text
+            } else if (closingProse.reason === 'nothing-would-survive') {
+              // Reported rather than forced. The whole closing turn was a
+              // question, so the close block was not followed at all — a
+              // prompt-compliance signal worth seeing, and NOT something to
+              // paper over by inventing a closing sentence here.
+              console.warn('[arbitration] ' + JSON.stringify({
+                event: 'closing-turn-was-entirely-a-question',
+                conceptId: resolvedConceptId ?? null,
+              }))
+            }
+          } catch (err) {
+            console.warn('[arbitration] closing-prose check skipped:', err)
+          }
           const askedQuestionThisTurn = repliesWithQuestion(cleanText) || mcqHoisted !== null
           // Turn Parity Observer: compare what the server decided against
           // what the LLM actually rendered. Measurement only — no blocking.
@@ -5282,7 +5413,23 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // open. Say so, in the learner's own terms, from the counters the
           // server already holds. No invention: if the gate is waiting on
           // practice, that is exactly what this asks for.
-          if (claimedCompletionInProse) {
+          // PHASE 3 (Step 4 E — a collision found while auditing the post-model
+          // layer, not in the Step 0 matrix). This is the LAST site that adds a
+          // question to a turn after the model has answered, and it was
+          // unguarded: on a turn where the learner said "I'm done for today" or
+          // voiced distress, a model that also claimed the lesson was finished
+          // would have its claim stripped and then be handed
+          // "…let's do 2 practice questions together — ready?" — the exact harm
+          // the close and recovery contracts exist to prevent, arriving after
+          // every prompt-side protection had already done its job.
+          //
+          // Suppressing the nudge is safe, and that is the whole reason it is
+          // the right call: completion is SERVER-gated (`gateLessonCompletion`),
+          // so the stripped claim cannot become a real completion, and the
+          // mastery gate is still pending on the next turn. Nothing is lost but
+          // a sentence that should not have been said yet.
+          if (claimedCompletionInProse
+              && (turnArbitrationHoisted ?? arbitrationUnavailable()).allows('NEW_QUESTION')) {
             const { MASTERY_PRACTICE_REQUIRED } = await import('@/lib/teaching/masteryGate')
             const need = Math.max(
               0,
@@ -5292,6 +5439,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               ? `Before we call this lesson finished, let's do ${need === 1 ? 'one more practice question' : `${need} practice questions`} together — ready?`
               : `We are not quite finished yet — let's check one more thing before we move on.`)
             console.log('[completion-claim]', { stripped: true, practiceStillNeeded: need })
+          } else if (claimedCompletionInProse) {
+            // The lie is still stripped; only the follow-up is withheld.
+            console.log('[completion-claim]', {
+              stripped: true,
+              nudgeWithheld: (turnArbitrationHoisted ?? arbitrationUnavailable()).owner,
+            })
           }
           stanceViolationsHoisted = stanceVerdict.violations.map((v) => v.code)
 

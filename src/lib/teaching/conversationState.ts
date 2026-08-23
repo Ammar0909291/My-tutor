@@ -1348,6 +1348,22 @@ export interface TurnDirectiveParams {
   phaseJustAdvanced?: boolean
   /** B.13-17: context-aware acknowledgement instruction. */
   acknowledgementContext?: AcknowledgementContext
+  /**
+   * PHASE 3 — who owns this turn (turnArbitration.ts).
+   *
+   * THE GAP THIS CLOSES, exactly. Before Phase 3,
+   * `grep -c "CLOSING\|episode" conversationState.ts` returned 0: this block
+   * opens by claiming it "overrides any earlier advisory pacing", is appended
+   * ~580 lines AFTER the session-close block, and was structurally incapable
+   * of knowing the session was closing. The model obeyed the last and loudest
+   * instruction, which is exactly what it was told to do. That is Phase 2's
+   * C1 (CLOSING -> teaching) and C2 (CLOSING -> new question).
+   *
+   * When omitted, behaviour is byte-for-byte what it was before Phase 3 — so
+   * every existing caller and test is unaffected, and the route is the only
+   * thing that turns arbitration on.
+   */
+  arbitration?: import('./turnArbitration').TurnArbitration | null
 }
 
 const PHASE_FRAME: Record<TeachingPhase, string> = {
@@ -1372,7 +1388,26 @@ const MOVE_LINE: Record<NextMove, string> = {
  * opinion on top of it.
  */
 export function buildTurnDirective(p: TurnDirectiveParams): string {
-  const lines: string[] = ['\n\nTURN DIRECTIVE (server-decided — follow exactly; overrides any earlier advisory pacing):']
+  // PHASE 3 — ARBITRATION BY ABSENCE.
+  //
+  // Two of this block's lines are Axis-1 (they say what the tutor DOES):
+  // the teaching phase frame and the next move. Everything else it emits —
+  // length budget, new-term ceiling, register, acknowledgement handling,
+  // visual pairing — is Axis 3/4 and conflicts with nothing, so it survives
+  // whoever owns the turn. Suppressing the whole block to settle an Axis-1
+  // conflict would throw away the second kind with the first, and a closing
+  // or recovery turn would silently lose its length and register bounds.
+  //
+  // The header's authority claim goes with them: a block that does not own
+  // the turn must not tell the model it overrides the block that does.
+  const ownsPhase = p.arbitration ? p.arbitration.allows('PHASE_FRAME') : true
+  const ownsMove = p.arbitration ? p.arbitration.allows('NEXT_MOVE') : true
+  const allowsQuestion = p.arbitration ? p.arbitration.allows('NEW_QUESTION') : true
+  const lines: string[] = [
+    (ownsPhase || ownsMove)
+      ? '\n\nTURN DIRECTIVE (server-decided — follow exactly; overrides any earlier advisory pacing):'
+      : `\n\nTURN DIRECTIVE (constraints only — the ${p.arbitration!.owner} block above owns this turn's action; follow it, and apply the limits below to however it is written):`,
+  ]
   let phaseFrame: string
   if (p.firstLessonActive && p.state.phase === 'OBSERVE') {
     phaseFrame = 'OBSERVE — follow the FIRST LESSON PROTOCOL opening approach: use the concrete hook the subject rule specifies to create the NEED. Then ask exactly ONE Stage 1–2 observation question.'
@@ -1383,8 +1418,8 @@ export function buildTurnDirective(p: TurnDirectiveParams): string {
   } else {
     phaseFrame = PHASE_FRAME[p.state.phase]
   }
-  lines.push(`- Teaching phase: ${phaseFrame}`)
-  lines.push(`- Next move: ${MOVE_LINE[p.nextMove]}`)
+  if (ownsPhase) lines.push(`- Teaching phase: ${phaseFrame}`)
+  if (ownsMove) lines.push(`- Next move: ${MOVE_LINE[p.nextMove]}`)
 
   // Bug 2: bare acknowledgements are not evidence of understanding. Require a
   // concrete check question before allowing the phase to advance.
@@ -1396,10 +1431,17 @@ export function buildTurnDirective(p: TurnDirectiveParams): string {
   // line said "do not explain further", and a model given two opposite orders
   // resolves them with a content-free holding message — which the learner
   // acknowledges again, forever.
-  if (p.lowSignalAcknowledgement) {
+  // PHASE 3: every branch below orders either a QUESTION or the NEXT TEACHING
+  // STEP, so the whole clause is Axis-1. When another authority owns the turn's
+  // action — a recovery script, a session close — that authority is what says
+  // how the acknowledgement is met, and this block must not answer over it.
+  // (Suppressing only the ask-branch would leave the else-branch ordering "give
+  // them the next piece of teaching" into a close, which is defect D1 again at
+  // a smaller scale.)
+  if (p.lowSignalAcknowledgement && ownsPhase) {
     if (isDeliveryPhase(p.state.phase)) {
       lines.push('- LEARNER ASKED TO PROCEED: they sent a bare acknowledgement or a request to continue ("Got it", "go", "continue", "ready"). They are telling you they are done with the last step, not that they have proven understanding. Deliver the NEXT step of the lesson now — new content, a demonstration, or a worked step, per the teaching phase above. Do NOT restate, re-summarise, or reword your previous message, and do NOT send another holding line ("let\'s take one small step", "whenever you\'re ready"): they already said they are ready.')
-    } else if (p.nextMove === 'ask') {
+    } else if (p.nextMove === 'ask' && allowsQuestion) {
       lines.push('- LOW-SIGNAL RESPONSE DETECTED: the learner sent a bare social acknowledgement ("Got it", "okay", "I see", etc.). This is NOT evidence of understanding. You MUST ask ONE concrete check question to verify comprehension before doing anything else — do not advance, do not explain further, ask now.')
     } else {
       // Same acknowledgement, same mastery gate — but the server has already
@@ -1431,7 +1473,7 @@ export function buildTurnDirective(p: TurnDirectiveParams): string {
   // selectQuestionStage(). Without this the follow-up form was the model's free
   // choice every turn, and it repeated one Stage-4 reasoning probe.
   {
-    const stage = selectQuestionStage(p.state, p.nextMove)
+    const stage = allowsQuestion ? selectQuestionStage(p.state, p.nextMove) : null
     if (stage !== null) {
       lines.push(`- Question stage THIS TURN: Stage ${stage}. Ask at this stage, not below it — the ceiling above is the limit, this is the target.`)
     }
