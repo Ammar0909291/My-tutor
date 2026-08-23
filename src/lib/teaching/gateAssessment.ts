@@ -470,3 +470,41 @@ function dropAnswerableContent(text: string): string {
 
   return kept.join('\n\n').trim()
 }
+
+/**
+ * A CLOSING episode withholds every question this turn — the authored gate
+ * probe and a model-emitted MCQ tag alike.
+ *
+ * FIFTH ROOT-CAUSE FIX of one recurring shape (live-reproduced 2026-08-23,
+ * real-student acceptance run, physics / Newton's First Law). The learner
+ * typed "i'm done for today, thanks" and received a graded multiple-choice
+ * question: "What would happen to a ball that rolls on a perfectly smooth
+ * surface with no friction?" with four tappable options.
+ *
+ * Everything upstream was correct and none of it was enough.
+ * `detectExplicitFinishRequest` matched, `forceClosing` set the episode to
+ * CLOSING, and `buildAffectCloseBlock` was injected — a block whose first
+ * clause is literally "do NOT introduce new content, new questions, or another
+ * attempt". The question was then attached BELOW all of that, by a stage that
+ * had never been told the session was ending: `gateEligible` excluded
+ * recovery turns, first lessons, excursions and an unanswered probe, but not a
+ * close.
+ *
+ * This is the same defect the filler repair had twice and the recovery guard
+ * had once: the server orders a close, and a later stage — obeying its own
+ * perfectly good local rule — undoes it. The close block cannot fix it,
+ * because the gate probe is not model output; it is server-attached, so no
+ * prompt instruction could have prevented it.
+ *
+ * Applied at BOTH question sources, because either one alone leaves the defect
+ * reachable: withholding only the gate probe lets the model's own MCQ tag
+ * through, and dropping only the tag still spends an authored probe (which
+ * `excludeProbeStem` then never re-asks) on a turn nobody will answer.
+ *
+ * Scope is deliberately the whole CLOSING phase, not just an explicit stop:
+ * the affect-budget close carries the identical "no new questions" contract,
+ * so a question is wrong there for the same reason.
+ */
+export function closingTurnWithholdsQuestion(episodePhase: unknown): boolean {
+  return episodePhase === 'CLOSING'
+}

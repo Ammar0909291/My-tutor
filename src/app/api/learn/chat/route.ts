@@ -3355,6 +3355,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       try {
         const { isProbeAttachablePhase, isMasteryGatePhase, probeToMcq, buildGateAssessmentBlock } =
           await import('@/lib/teaching/gateAssessment')
+        // Imported separately, and deliberately: the destructure above is
+        // asserted line-for-line by gateAssessmentRouteWiring's "the whole
+        // block is guarded" test, which exists to prove this gate can never
+        // cost the learner their turn. Widening that line to carry one more
+        // name would have silently blinded that guard.
+        const { closingTurnWithholdsQuestion } = await import('@/lib/teaching/gateAssessment')
         const phaseBeforeTurn = (snapshot as { conversationState?: { phase?: unknown } } | null)
           ?.conversationState?.phase
         // The same exclusions the memory path already applies, for the same
@@ -3406,7 +3412,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           !unansweredProbeOnScreen &&
           !recoveryKeyHoisted &&
           !firstLessonActiveHoisted &&
-          !excursionActiveHoisted
+          !excursionActiveHoisted &&
+          // The session is ending: no question is attached, and no authored
+          // probe is spent. See closingTurnWithholdsQuestion.
+          !closingTurnWithholdsQuestion(sessionEpisodeHoisted?.phase)
         if (gateEligible && memoryState) {
           const { findBestProbe } = await import('@/lib/teaching/assets')
           const { hasAskedMcq } = await import('@/lib/teaching/teachingHistory')
@@ -4012,6 +4021,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // where a wrong answer key costs the learner their progress. The tag is
       // still STRIPPED either way (mcqParse.cleanText), so nothing leaks.
       mcqHoisted = gateMcqHoisted ?? mcqParse.mcq
+      // A CLOSING turn withholds BOTH question sources. The gate is already
+      // excluded above, so this covers the model emitting an MCQ tag anyway,
+      // against the close block's explicit instruction. Written as a separate
+      // override rather than folded into the line above so that the attach
+      // line's precedence rule — the server's gate question outranks the
+      // model's — stays exactly as it was, and this reads as what it is: the
+      // session is over, so the question is dropped. The tag is still stripped
+      // from the text either way, so nothing leaks.
+      {
+        const { closingTurnWithholdsQuestion } = await import('@/lib/teaching/gateAssessment')
+        if (closingTurnWithholdsQuestion(sessionEpisodeHoisted?.phase)) mcqHoisted = null
+      }
       text = mcqParse.cleanText
       // P1-1: strip the TEACHING INTENT tag in the same place and for the same
       // reason — before asset capture and every other parser, so it can never
