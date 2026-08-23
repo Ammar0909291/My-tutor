@@ -20,6 +20,30 @@ export interface ConversationReaderInput {
   history: Array<{ role: 'user' | 'assistant'; content: string }>
   /** recoveryGuard.detectFailureState() result the route already computed this turn (null = none). */
   recoveryKey: string | null
+  /**
+   * THE TURN'S AUTHORITATIVE READING, when the caller has one. (Phase 3.)
+   *
+   * `recoveryKey` above has always been CONSUMED rather than re-derived here,
+   * and that is the correct pattern — these two complete it for the other two
+   * raw-text readings this reader used to compute for itself.
+   *
+   * WHY THIS MATTERS EVEN THOUGH THE VALUES MATCH TODAY. Until Phase 2,
+   * `turnIntent` was a pure hoist: it held exactly what the detectors said, so
+   * calling `isGenuineQuestion` here gave a value that was identical in both
+   * value AND meaning. Phase 2 ended that symmetry. `turnIntent` now also
+   * carries `ambiguous`, a property of the WHOLE turn that no single detector
+   * can see, and it governs whether the turn may change the teaching context.
+   * A reader that re-derives its own answer from the raw message is reading a
+   * turn the rest of the runtime has already interpreted, and cannot be told
+   * about that interpretation.
+   *
+   * OPTIONAL ON PURPOSE: absent means "no authoritative reading was supplied",
+   * and this reader falls back to calling the same detector it always called.
+   * Every existing caller and fixture behaves exactly as before.
+   */
+  isQuestion?: boolean
+  /** masteryGate.detectLearnerRequest() as the route already read it. See `isQuestion`. */
+  helpRequestKind?: ReturnType<typeof detectLearnerRequest> | null
   /** Previous turn's SIGNAL from contextSnapshot.lastSignal. */
   lastSignal: { correctness?: boolean; confidence?: string } | null
   episode: SessionEpisode | null
@@ -74,10 +98,16 @@ export function readConversation(input: ConversationReaderInput): ConversationRe
   const lastAssistant = [...history].reverse().find((m) => m.role === 'assistant')
   const lastAssistantAskedQuestion = lastAssistant ? lastAssistant.content.includes('?') : false
   const trimmed = message.trim()
-  // Kept identical to isGenuineQuestion() above (same widened "? anywhere"
-  // test) so the two cannot silently drift into disagreeing about the same
-  // message within one turn.
-  const isQuestion = isGenuineQuestion(trimmed)
+  // CONSUMED, not re-derived, when the caller supplies the turn's
+  // authoritative reading — see `isQuestion` on the input type. The fallback
+  // is the same call this reader always made, so a caller that supplies
+  // nothing is unaffected. (The previous note here said the two readings were
+  // "kept identical ... so they cannot silently drift" — true by convention,
+  // enforced by nothing. This makes it structural.)
+  const isQuestion = input.isQuestion ?? isGenuineQuestion(trimmed)
+  const helpRequestKind = input.helpRequestKind !== undefined
+    ? input.helpRequestKind
+    : detectLearnerRequest(message)
 
   // P1 Human Teacher Reasoning: "is it 4?" / "maybe 12?" after a pending
   // question is a hesitant ANSWER — the learner is offering a candidate
@@ -96,7 +126,7 @@ export function readConversation(input: ConversationReaderInput): ConversationRe
     studentIntent = sourced('expressing_distress', 'recoveryGuard', 0.9)
   } else if (isBareAcknowledgement(message)) {
     studentIntent = sourced('acknowledging', 'masteryGate', 0.85)
-  } else if (detectLearnerRequest(message) !== null) {
+  } else if (helpRequestKind !== null) {
     studentIntent = sourced('requesting_help', 'masteryGate', 0.8)
   } else if (tentativeAnswer) {
     studentIntent = sourced('answering', 'conversationHeuristic', 0.7)
@@ -151,7 +181,7 @@ export function readConversation(input: ConversationReaderInput): ConversationRe
     lastAssistantAskedQuestion,
     currentMessageChars: message.length,
     currentMessageIsQuestion: isQuestion,
-    helpRequestKind: detectLearnerRequest(message),
+    helpRequestKind,
     hedged,
     source: 'conversationHeuristic',
   }

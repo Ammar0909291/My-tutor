@@ -3588,6 +3588,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           message,
           history: historyMessages,
           recoveryKey: recoveryKeyHoisted,
+          // Phase 3: the turn was already read authoritatively at the top of
+          // this handler. The CUE consumes that reading instead of re-deriving
+          // its own from the raw message — the same way it has always consumed
+          // `recoveryKey` above.
+          isQuestion: turnIntent.isQuestion,
+          helpRequestKind: turnIntent.learnerRequest,
           firstLessonActive: firstLessonActiveHoisted,
           lastSignal: cueLastSignal,
           sessionFailureCount: snapshotSessionFailureCount,

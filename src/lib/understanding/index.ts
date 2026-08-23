@@ -60,6 +60,14 @@ export interface UnderstandingInputs {
   message: string
   history: Array<{ role: 'user' | 'assistant'; content: string }>
   recoveryKey: string | null
+  /**
+   * The turn's authoritative reading (Phase 3), forwarded to the conversation
+   * reader so it consumes rather than re-derives. Optional — see
+   * ConversationReaderInput.isQuestion for why, and for what changes when it
+   * is absent (nothing).
+   */
+  isQuestion?: boolean
+  helpRequestKind?: import('@/lib/teaching/masteryGate').LearnerRequest | null
   firstLessonActive: boolean
   lastSignal: { correctness?: boolean; confidence?: string } | null
   sessionFailureCount: number
@@ -111,6 +119,8 @@ export function understandStudentTurn(inputs: UnderstandingInputs): StudentTurnU
     message: inputs.message,
     history: inputs.history,
     recoveryKey: inputs.recoveryKey,
+    isQuestion: inputs.isQuestion,
+    helpRequestKind: inputs.helpRequestKind,
     lastSignal: inputs.lastSignal,
     episode: inputs.episode,
     freshBoundary: inputs.freshBoundary,
