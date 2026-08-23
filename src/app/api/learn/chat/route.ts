@@ -1689,6 +1689,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     // CTO iteration (session lifecycle — decision-engine/07 §1/§6/§8):
     // the episode state machine that makes per-session rules enforceable.
     let sessionEpisodeHoisted: import('@/lib/teaching/sessionLifecycle').SessionEpisode | null = null
+    /**
+     * The episode AS STORED at the start of this turn — the baseline the
+     * write-back compares against. Hoisted because the comparison happens
+     * ~3,940 lines after the value is read, and comparing against the
+     * in-request value instead is what discarded an explicit stop.
+     * See sessionLifecycle.episodeNeedsPersist.
+     */
+    let persistedEpisodeHoisted: import('@/lib/teaching/sessionLifecycle').SessionEpisode | null = null
     let sessionEpisodeFreshHoisted = false
     // CTO iteration (recovery guard — decision-engine/03 §0 preemption):
     // a failure-state utterance in the learner's message is detected
@@ -2237,6 +2245,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // Computed once at the top of the turn, alongside the failure counter
           // it also scopes — see episodeBoundary's definition there.
           const boundary = episodeBoundary
+          persistedEpisodeHoisted = prevEpisode
           sessionEpisodeHoisted = deriveEpisode(prevEpisode, boundary, turnReceivedAt, prevLastSignal)
           sessionEpisodeFreshHoisted = boundary
           // 07 §6 extension: an explicit, unambiguous "finish it now" outranks
@@ -6192,7 +6201,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // P4: episode already advanced via synthetic signal above
               episodeUpdate = { sessionEpisode: sessionEpisodeHoisted }
             } else {
-              const { applySignalToEpisode } = await import('@/lib/teaching/sessionLifecycle')
+              const { applySignalToEpisode, episodeNeedsPersist } = await import('@/lib/teaching/sessionLifecycle')
               // Same boundary as the synthetic recovery failure above: a wrong
               // answer about the side concept is not a failure on the paused
               // lesson, so it does not spend that session's affect budget.
@@ -6201,7 +6210,17 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 : applySignalToEpisode(sessionEpisodeHoisted, teachingSignal, {
                     isFirstLesson: firstLessonActiveHoisted,
                   })
-              if (sessionEpisodeFreshHoisted || nextEpisode !== sessionEpisodeHoisted) {
+              // Compare against what is STORED, not against the in-request
+              // value this turn has already mutated. The old baseline
+              // (`sessionEpisodeHoisted`) had been force-closed ~3,940 lines
+              // earlier, so this test only ever saw changes made by the fold
+              // immediately above it — and an explicit stop produces no graded
+              // signal, so CLOSING was computed, used, and dropped.
+              if (episodeNeedsPersist({
+                persisted: persistedEpisodeHoisted,
+                next: nextEpisode,
+                freshBoundary: sessionEpisodeFreshHoisted,
+              })) {
                 episodeUpdate = { sessionEpisode: nextEpisode }
               }
             }

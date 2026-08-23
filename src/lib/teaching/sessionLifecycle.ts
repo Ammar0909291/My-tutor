@@ -318,6 +318,46 @@ export function detectExplicitFinishRequest(message: string): boolean {
   return FINISH_REQUEST_PATTERNS.some((re) => re.test(text))
 }
 
+/**
+ * MUST THIS TURN'S EPISODE BE WRITTEN BACK?
+ *
+ * The one question the persistence site should ask: does this turn's episode
+ * DIVERGE FROM THE STORED ONE? Not "did the last subsystem to touch it return
+ * a new object reference" — which is the question the call site used to ask,
+ * and the reason an explicit stop was discarded.
+ *
+ * THE DEFECT THIS REPLACES. route.ts derives the episode, force-closes it on an
+ * explicit stop, and ~3,940 lines later folds this turn's signal in and decides
+ * whether to persist. That decision compared the folded value against the
+ * ALREADY-FORCE-CLOSED value, so it only ever detected changes made by the fold
+ * itself. `applySignalToEpisode` returns the SAME reference when there is no
+ * graded signal, and a stop turn has none (a bare acknowledgement sets the
+ * signal to null outright) — so CLOSING was computed, used for that turn, and
+ * dropped. The learner's explicit request to stop lasted exactly one turn,
+ * while their confusion — persisted unconditionally on the recovery branch —
+ * was remembered.
+ *
+ * WHY REFERENCE COMPARISON IS EXACT HERE, not a heuristic. `deriveEpisode`
+ * returns `prev` ITSELF when there is no boundary, and every mutation path
+ * (`forceClosing`, `applySignalToEpisode`) constructs a new object. So
+ * `next !== persisted` is true if and only if something genuinely changed —
+ * which is also why an unchanged turn still writes nothing.
+ *
+ * `freshBoundary` keeps its own clause: a new episode must be written even
+ * though it legitimately differs from nothing that came before.
+ */
+export function episodeNeedsPersist(input: {
+  /** The episode as loaded from the snapshot at the START of this turn. */
+  persisted: SessionEpisode | null
+  /** This turn's episode after every authoritative mutation. */
+  next: SessionEpisode
+  /** A 30-minute inactivity boundary opened a new episode this turn. */
+  freshBoundary: boolean
+}): boolean {
+  if (input.freshBoundary) return true
+  return input.next !== input.persisted
+}
+
 /** Force the episode into CLOSING this turn — idempotent, never downgrades
  * an already-CLOSING episode, never re-opens/rewinds visibleFailures. */
 export function forceClosing(ep: SessionEpisode): SessionEpisode {
