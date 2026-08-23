@@ -429,9 +429,14 @@ const CONCEPT_VISUALS: Record<string, VisualEntry> = {
   'chem.found.states-of-matter':      { primary: 'three_crystal_lattice', all: ['three_crystal_lattice'] },
 
   // Biology — Genetics
-  'bio.gen.mendels-laws':             { primary: 'food_chain', all: ['food_chain'], sceneGenerator: 'punnett_square' },
-  'bio.gen.monohybrid-cross':         { primary: 'food_chain', all: ['food_chain'], sceneGenerator: 'punnett_square' },
-  'bio.gen.dihybrid-cross':           { primary: 'food_chain', all: ['food_chain'], sceneGenerator: 'punnett_square' },
+  // REPAIRED (orphan census): these three keys named no concept in any KG, and
+  // punnett_square was reachable through NONE of them — the generator renders
+  // "Punnett Square: AA x Aa" and no learner could ever see it. All three are
+  // aspects of ONE real concept, bio.gen.mendelian-genetics "Mendelian
+  // Genetics", which had NO visual at all. A Punnett square is the canonical
+  // figure for Mendelian crosses, so this attaches an authored figure to a
+  // concept that had none and replaces nothing.
+  'bio.gen.mendelian-genetics':       { primary: 'food_chain', all: ['food_chain'], sceneGenerator: 'punnett_square' },
 
   // Biology — Cell biology
   'bio.cell.cell-division':           { primary: 'food_chain', all: ['food_chain'], sceneGenerator: 'cell_division' },
@@ -443,8 +448,15 @@ const CONCEPT_VISUALS: Record<string, VisualEntry> = {
   'bio.mol.dna-replication':          { primary: 'food_chain', all: ['food_chain'], sceneGenerator: 'dna_structure' },
 
   // Biology — Ecology
-  'bio.eco.food-chains':              { primary: 'food_chain', all: ['food_chain'], sceneGenerator: 'ecological_pyramid' },
-  'bio.eco.energy-flow':              { primary: 'food_chain', all: ['food_chain'], sceneGenerator: 'ecological_pyramid' },
+  // REPAIRED (orphan census): ecological_pyramid was reachable through no real
+  // concept. It renders "Ecological Pyramid: producers -> ..." — trophic levels
+  // and the energy passing between them, which is exactly what
+  // bio.eco.ecosystem-structure-function is about. That concept previously got
+  // only the bio domain default (a generic food_chain card, auto-demoted by
+  // provenance), so this replaces a generic card with an authored,
+  // concept-specific scene. No other bio.eco concept fits the pyramid better:
+  // nutrient-cycling, community-ecology and biodiversity are separate concepts.
+  'bio.eco.ecosystem-structure-function': { primary: 'food_chain', all: ['food_chain'], sceneGenerator: 'ecological_pyramid' },
   'bio.eco.ecosystems':               { primary: 'food_chain', all: ['food_chain'] },
   'bio.eco.water-cycle':              { primary: 'water_cycle', all: ['water_cycle'] },
 
@@ -503,9 +515,19 @@ const CONCEPT_VISUALS: Record<string, VisualEntry> = {
   'math.alg.linear-inequalities':     { primary: 'coordinate_plane', all: ['coordinate_plane', 'number_line'] },
 
   // Mathematics — Statistics
-  'math.stat.mean-median-mode':       { primary: 'number_line', all: ['number_line'], sceneGenerator: 'statistics_bar_chart' },
-  'math.stat.frequency-distribution': { primary: 'coordinate_plane', all: ['coordinate_plane'], sceneGenerator: 'statistics_bar_chart' },
-  'math.stat.data-representation':    { primary: 'coordinate_plane', all: ['coordinate_plane'], sceneGenerator: 'statistics_bar_chart' },
+  // REPAIRED (orphan census): the domain is 'math.stats', not 'math.stat' — a
+  // domain-prefix typo, the same class this file already fixed for physics. All
+  // three keys were unreachable and statistics_bar_chart was reachable through
+  // none of them.
+  //
+  // The generator renders "Frequency Distribution: <title>", i.e. a real
+  // frequency-distribution bar chart. Wired to math.stats.data-visualization
+  // "Data Visualization", which a frequency-distribution chart genuinely IS,
+  // and which previously received only the domain default (a bare
+  // coordinate_plane). math.stats.measures-of-center was considered and
+  // REJECTED: a frequency distribution does not draw the mean, median or mode,
+  // so it cannot claim to depict them.
+  'math.stats.data-visualization':    { primary: 'coordinate_plane', all: ['coordinate_plane'], sceneGenerator: 'statistics_bar_chart' },
   'math.stat.probability':            { primary: 'number_line', all: ['number_line'] },
 
   // Mathematics — Vectors
@@ -513,9 +535,15 @@ const CONCEPT_VISUALS: Record<string, VisualEntry> = {
   'math.vec.vector-operations':       { primary: 'three_vector_visualization', all: ['three_vector_visualization'], sceneGenerator: 'vector' },
 
   // Mathematics — Calculus
-  'math.calc.differentiation':        { primary: 'coordinate_plane', all: ['coordinate_plane'], sceneGenerator: 'calculus_graph' },
-  'math.calc.applications-derivative':{ primary: 'coordinate_plane', all: ['coordinate_plane'], sceneGenerator: 'calculus_graph' },
-  'math.calc.maxima-minima':          { primary: 'coordinate_plane', all: ['coordinate_plane'], sceneGenerator: 'calculus_graph' },
+  // REPAIRED (orphan census): calculus_graph was reachable through no real
+  // concept. It renders "<function> on [a, b] - N critical points", which is
+  // precisely math.calc.critical-points "Critical Points" — a concept that
+  // previously received only the domain default (a bare coordinate_plane).
+  // The three removed keys (differentiation, applications-derivative,
+  // maxima-minima) name no KG concept; the KG splits differentiation into
+  // derivative-rules, implicit- and logarithmic-differentiation, none of which
+  // is what this generator draws.
+  'math.calc.critical-points':        { primary: 'coordinate_plane', all: ['coordinate_plane'], sceneGenerator: 'calculus_graph' },
   'math.calc.integration':            { primary: 'coordinate_plane', all: ['coordinate_plane'] },
 
   // Mathematics — Trigonometry
@@ -533,7 +561,12 @@ const CONCEPT_VISUALS: Record<string, VisualEntry> = {
   'cs.algo.sorting':                  { primary: 'three_algorithm_visualization', all: ['three_algorithm_visualization'] },
   'cs.algo.searching':                { primary: 'three_algorithm_visualization', all: ['three_algorithm_visualization'] },
   'cs.net.networking-basics':         { primary: 'three_network_packet_flow', all: ['three_network_packet_flow'] },
-  'cs.db.relational-databases':       { primary: 'three_data_structure', all: ['three_data_structure'], sceneGenerator: 'er_diagram' },
+  // REPAIRED (orphan census): er_diagram was reachable through no real concept.
+  // It renders "ER Diagram: <entities>", which is exactly
+  // cs.db.er-modeling "Entity-Relationship Modeling" — a concept that had NO
+  // visual at all. cs.db.relational-model was considered and rejected: the
+  // relational model is tables and keys, not an ER diagram.
+  'cs.db.er-modeling':                { primary: 'three_data_structure', all: ['three_data_structure'], sceneGenerator: 'er_diagram' },
 }
 
 // ── Tier 2: domain prefix → default visual ───────────────────────────────────

@@ -127,6 +127,35 @@ export const INSUFFICIENT_FOR_CONCEPT: ReadonlySet<string> = new Set([
   'math.found.rational-numbers',     // integer ticks only; no fraction between them
   'math.found.real-numbers',         // integer ticks only; no irrational, no density
 
+  // ── Newly wired generators that draw ONE INSTANCE of a broader concept ────
+  // Both were unreachable before the orphan census and are now served an
+  // authored scene, which is a real upgrade over the generic domain default
+  // they had. They are demoted for the same reason round 6 demoted
+  // crystal-systems (an FCC cell for "seven crystal systems"): the figure is a
+  // faithful instance, not a depiction of the whole concept.
+  //
+  // ALL FIVE are demoted, including the three whose figure arguably DOES depict
+  // its concept (a Punnett square is a Mendelian cross; an ER diagram is
+  // entity-relationship modelling; the calculus scene marks the critical
+  // points). The deciding fact is provenance, not resemblance: none of the five
+  // authors its own parameters in CONCEPT_SCENES, so each is served that
+  // generator KIND's ONE shared canonical instance and its identity is widened
+  // from something shared rather than declared for it — exactly the condition
+  // visualGeneratorDefaultScope.test.ts exists to stop growing, and its rule is
+  // that the enumerated set may only ever shrink.
+  //
+  // The honest promotion path is open and is the better long-term answer:
+  // author this concept's own parameters in CONCEPT_SCENES, which moves the
+  // provenance to 'generator' (concept-owned) and earns concept scope instead
+  // of asserting it. Until someone does that, under-claiming is the safe
+  // direction — over-claiming is the failure this architecture exists to
+  // prevent.
+  'bio.eco.ecosystem-structure-function', // an energy pyramid; structure and function are broader
+  'math.stats.data-visualization',   // one frequency distribution; the concept covers many charts
+  'bio.gen.mendelian-genetics',      // one Aa x Aa monohybrid square; Mendel's laws are broader
+  'cs.db.er-modeling',               // one Student/Course ER diagram, not authored for this concept
+  'math.calc.critical-points',       // one polynomial's single critical point, from a shared scene
+
   // ── added by the visual semantic moat sweep ──────────────────────────────
   // Three concept-level rows that were carrying the STRONG contract ("a
   // <representation> of <concept> is attached") while pointing at a generic

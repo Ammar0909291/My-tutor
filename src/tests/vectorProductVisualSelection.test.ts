@@ -327,7 +327,16 @@ describe('the repair path is the general one, not a special case', () => {
     // ADDED 'math.found.rational-numbers' and 'math.found.real-numbers' — the
     // number-line renderer is hardcoded -5..5 with integer ticks only, so it
     // never draws anything between them, which is precisely what defines both.
-    expect(INSUFFICIENT_FOR_CONCEPT.size).toBe(44)
+    // 44 -> 49: the orphan census wired five previously UNREACHABLE authored
+    // scene generators to real concepts. Three depict their concept and keep
+    // concept scope (punnett_square IS a Mendelian cross, er_diagram IS
+    // entity-relationship modelling, calculus_graph identifies the critical
+    // points). Two draw ONE INSTANCE of a broader concept and are demoted for
+    // exactly the reason round 6 demoted crystal-systems: an energy pyramid
+    // for "Ecosystem Structure and Function", one frequency distribution for
+    // "Data Visualization". Both are still a real upgrade on the generic
+    // domain default they previously received.
+    expect(INSUFFICIENT_FOR_CONCEPT.size).toBe(49)
     expect([...INSUFFICIENT_FOR_CONCEPT].some((id) => id.startsWith('chem.'))).toBe(true)
     // The queue now tracks mathematics too, which it did not before.
     expect([...INSUFFICIENT_FOR_CONCEPT].some((id) => id.startsWith('math.'))).toBe(true)

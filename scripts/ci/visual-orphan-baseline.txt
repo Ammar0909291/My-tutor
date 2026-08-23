@@ -17,25 +17,16 @@
 # scripts/validate-visualization-coverage.ts.
 bio.cell.cell-division
 bio.eco.ecosystems
-bio.eco.energy-flow
-bio.eco.food-chains
 bio.eco.water-cycle
-bio.gen.dihybrid-cross
-bio.gen.mendels-laws
-bio.gen.monohybrid-cross
 bio.mol.dna-structure
 cs.algo.searching
 cs.algo.sorting
-cs.db.relational-databases
 cs.ds.arrays
 cs.ds.linked-lists
 cs.ds.stacks-queues
 math.alg.linear-equations
 math.alg.linear-inequalities
-math.calc.applications-derivative
-math.calc.differentiation
 math.calc.integration
-math.calc.maxima-minima
 math.geom.3d-geometry
 math.geom.angle-sum
 math.geom.area-perimeter
@@ -46,9 +37,6 @@ math.geom.section-formula
 math.geom.similarity
 math.geom.straight-lines
 math.geom.surface-area-volume
-math.stat.data-representation
-math.stat.frequency-distribution
-math.stat.mean-median-mode
 math.stat.probability
 math.trig.trigonometric-identities
 math.trig.trigonometric-ratios
