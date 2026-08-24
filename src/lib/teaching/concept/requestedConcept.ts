@@ -24,6 +24,7 @@ import { resolveConceptMatches, normalizeToTokens, titleHead } from './conceptIn
 import { matchTopicRequest } from '@/lib/teaching/visual/session'
 import { buildConceptIndexFromKnowledgeGraph } from './conceptIndexSource'
 import { VISUAL_MEDIUM_NOUNS } from '@/lib/teaching/masteryGate'
+import { DISCOURSE_NOUNS } from '@/lib/teaching/visual/requestedTopic'
 import type { ConceptIndexEntry } from './conceptUnderstanding'
 
 /** Minimum confidence before a learner-named concept may override the lesson. */
@@ -145,6 +146,58 @@ function isIncidentalWord(message: string, matchedText: string): boolean {
     }
   }
   return true
+}
+
+/**
+ * DISCOURSE DEIXIS — the Phase-6 P0, and the third filter this chain was
+ * missing.
+ *
+ * ── THE DEFECT, observed live in production ────────────────────────────────
+ * A learner in a CHEMISTRY lesson typed "explain the main idea please". The
+ * tutor replied with the English reading-comprehension method, attached
+ * `eng.reading.main-idea-and-details`'s figure, and abandoned chemistry.
+ * Identical in physics. Measured across 30 ordinary discourse phrases x 3
+ * lessons: 15/90 false positives, 10/90 CROSS-SUBJECT.
+ *
+ * ── WHY THE TWO EXISTING FILTERS CANNOT CATCH IT (traced, not assumed) ─────
+ *   "explain the main idea please" -> matchedText "Main Idea", TITLE_COMPONENT,
+ *      confidence 0.80. `isMediumUsage` handles only single-word VISUAL medium
+ *      nouns; `isIncidentalWord` returns false immediately for any multi-word
+ *      title ("multi-word titles are specific").
+ *   "what is the point of this?"   -> matchedText "Point", EXACT_TITLE, 0.95.
+ *      `isIncidentalWord` DOES look at it, finds "what" inside its 3-token
+ *      window, and concludes the noun is GOVERNED, i.e. a genuine topic.
+ *
+ * That governance rule is correct for real topics ("what is a vector") and
+ * exactly wrong for discourse nouns, because "what is the point of this?" uses
+ * the same grammar to mean something entirely different. Neither filter asks
+ * the one question that separates them: IS THE MATCHED TEXT A SUBJECT, OR IS IT
+ * THE VOCABULARY OF TALKING ABOUT A LESSON?
+ *
+ * ── THE RULE ───────────────────────────────────────────────────────────────
+ * A match whose matched text is made ENTIRELY of discourse vocabulary names
+ * nothing. It is deixis — it points at whatever is already being taught — so
+ * the honest answer is null, which leaves the lesson exactly where it is and
+ * lets the tutor answer in context. That is the same "an honest 'I could not
+ * name it' rather than a guess" stance the rest of this module already takes.
+ *
+ * `DISCOURSE_NOUNS` is IMPORTED, not redefined: it is the same list
+ * `namedTopicUnknownTo` uses for the unresolved-topic path, and the P0 was
+ * reachable through BOTH paths precisely because they disagreed about what
+ * counts as naming a topic. One list, both paths, no third mechanism.
+ *
+ * ── MEASURED COST ──────────────────────────────────────────────────────────
+ * Across all 1,775 KG concepts in all six subjects, exactly ONE has a title
+ * made entirely of discourse vocabulary: `math.geom.point "Point"`. So a bare
+ * "teach me point" no longer resolves. That is an accepted, measured trade —
+ * one out-of-scope concept against a defect that silently switches the taught
+ * subject — and "points and lines", "point of view", "boiling point",
+ * "decimal point" are all unaffected, because one real word is enough.
+ */
+function isDiscourseOnlyMatch(matchedText: string): boolean {
+  const words = tokens(matchedText)
+  if (words.length === 0) return false
+  return words.every((w) => DISCOURSE_NOUNS.has(w))
 }
 
 /**
@@ -304,6 +357,14 @@ function resolveNamedTopicHead(
   const clause = (message ?? '').slice(request.end).split(/[?.!,;:]|\b(?:and|but|so|because|then)\b/i)[0] ?? ''
   const named = normalizeToTokens(clause).filter((t) => !HEAD_STOP.has(t))
   if (named.length === 0 || named.length > 4) return null
+  // THE SAME DISCOURSE RULE AS THE MAIN CHAIN, and the reason it must be
+  // repeated here rather than only in the filter above. This fallback runs
+  // precisely WHEN the main chain found nothing, so filtering a discourse
+  // match out of `viable` only hands the same phrase to this function instead:
+  // "can you explain the main idea" tokenizes to exactly "main idea", which IS
+  // the head of "Main Idea and Supporting Details". Measured — it was the one
+  // case still resolving after the filter above was added.
+  if (named.every((t) => DISCOURSE_NOUNS.has(t))) return null
   const phrase = named.join(' ')
 
   const hits: ConceptIndexEntry[] = []
@@ -359,7 +420,11 @@ export function resolveRequestedConceptId(
       (m) =>
         m.confidence >= EXCURSION_CONFIDENCE_FLOOR &&
         !isMediumUsage(message ?? '', m.matchedText) &&
-        !isIncidentalWord(message ?? '', m.matchedText),
+        !isIncidentalWord(message ?? '', m.matchedText) &&
+        // PHASE 6 P0: "the main idea", "the point" — deixis, not a subject.
+        // Sits alongside the other two "is this really a topic?" filters
+        // rather than anywhere else, so all three are read together.
+        !isDiscourseOnlyMatch(m.matchedText),
     )
     // Same-subject candidates win over an equally-confident foreign one. The
     // lesson's own id prefix is the subject signal — it needs no mapping table

@@ -224,11 +224,38 @@ export function isMediumWord(word: string): boolean {
  * needs only ONE word to survive this list, so "chemical formula", "first law"
  * and "percentage difference" all still name their topic.
  */
-const DISCOURSE_NOUNS = new Set([
+export const DISCOURSE_NOUNS = new Set([
   // the apparatus of an exercise
   'answer', 'question', 'step', 'part', 'example', 'formula', 'difference',
   'problem', 'exercise', 'solution', 'mistake', 'error', 'result', 'reason',
   'way', 'method', 'rule', 'idea', 'meaning', 'word', 'note', 'point',
+  // GENERIC MODIFIERS — the Phase-6 P0's missing word.
+  //
+  // 'idea' and 'point' were already here, and "what is the point of this?"
+  // correctly returned null because of it. "explain the main idea please" did
+  // NOT, because `.every()` needs EVERY word to be discourse and 'main' was
+  // absent — so the phrase survived as the named topic "main idea please" and
+  // opened an unresolved-topic excursion, pausing the lesson.
+  //
+  // Only 'main' is added, and only on measured evidence. Its obvious siblings
+  // were deliberately REJECTED because each is real subject vocabulary
+  // somewhere in the curriculum: 'basic' (acid-base chemistry), 'general'
+  // (general relativity), 'simple' (simple machines), 'core' (planetary core),
+  // 'central' (central atom). Adding those would trade this defect for a worse
+  // one. 'key' was checked and is not needed — "what is the key idea?" already
+  // resolves to null today.
+  //
+  // One surviving real word is still enough, so "main sequence stars" and
+  // "main group elements" are untouched: 'sequence'/'stars'/'group'/'elements'
+  // all survive.
+  'main',
+  // POLITENESS — never names a subject, in any curriculum.
+  //
+  // Found by the Phase-6 P0 test rather than by inspection: after 'main' was
+  // added, "explain the main idea please" STILL produced the topic "main idea
+  // please", because ONE non-discourse word is enough to survive and 'please'
+  // was that word. A phrase cannot be rescued from being deixis by being polite.
+  'please', 'thanks', 'thank',
   // the apparatus of a course
   'lesson', 'topic', 'chapter', 'test', 'quiz', 'exam', 'homework',
   'assignment', 'score', 'mark', 'grade', 'progress',
