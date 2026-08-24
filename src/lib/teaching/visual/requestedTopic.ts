@@ -229,6 +229,40 @@ export const DISCOURSE_NOUNS = new Set([
   'answer', 'question', 'step', 'part', 'example', 'formula', 'difference',
   'problem', 'exercise', 'solution', 'mistake', 'error', 'result', 'reason',
   'way', 'method', 'rule', 'idea', 'meaning', 'word', 'note', 'point',
+  // ASKING FOR THE EXERCISE ITSELF — the Phase-7C defect.
+  //
+  // Measured in production, physics `phys.opt.total-internal-reflection`, a
+  // clean single-concept session sitting at GUIDE. The learner typed:
+  //
+  //     "ok yes lets try practice problem"
+  //
+  //   [excursion] requestedTopic: 'practice problem', transition: 'started',
+  //               active: true
+  //   [ladder]    excursion: true
+  //
+  // 'problem' was already here, but ONE surviving word is enough and
+  // 'practice' was absent — so a request FOR a practice question was read as
+  // a request to be taught a topic called "practice problem". The excursion
+  // opened, `excursionActiveHoisted` went true, `gateEligible` went false,
+  // `findBestProbe` was never called, and the concept's three reviewed
+  // authored probes were skipped in favour of an unconstrained model
+  // question. The route's own detector flagged it unprompted:
+  // `divergences: ["QUESTION_SHIPPED_WITHOUT_PROBE"]`. The substitute
+  // question then shipped a WRONG answer key (water->air, correct option
+  // 55°, key said 48°), which is the harm the authored path exists to
+  // prevent, and the lesson's figure was dropped the same turn
+  // ("named-topic-left-the-figure").
+  //
+  // 'check' is added on the same measured evidence — "let's do the check"
+  // named the topic "check" — and is the other half of how a learner asks
+  // for the gate's own question.
+  //
+  // Both are safe for the same reason 'main' was: ONE surviving real word is
+  // enough. Checked against every concept title in all six registered
+  // subjects — 'check' appears in NONE, and 'practice' in exactly one
+  // (`cs.se.agile-design-principles`, "Agile Practices and Software Design
+  // Principles"), where 'agile' survives and still names the topic.
+  'practice', 'check',
   // GENERIC MODIFIERS — the Phase-6 P0's missing word.
   //
   // 'idea' and 'point' were already here, and "what is the point of this?"
