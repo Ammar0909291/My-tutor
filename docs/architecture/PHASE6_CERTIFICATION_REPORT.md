@@ -1,6 +1,12 @@
 # Phase 6 — Full Experience & Curriculum Certification
 
-**Verdict: 🟠 NOT READY — FIX REQUIRED.**
+> **UPDATE — the P0 has since been FIXED (commit `55cee14e`).** The body of this
+> report is preserved as the certification record that FOUND it, unedited. The
+> fix, its root-cause trace, its 90-case before/after and its negative controls
+> are recorded in **[PHASE6_P0_FIX.md](./PHASE6_P0_FIX.md)**. The verdict below
+> was correct when written; re-certification is the next step.
+
+**Verdict at time of writing: 🟠 NOT READY — FIX REQUIRED.**
 
 One P0 defect was found, proved deterministically, and observed live in
 production. It is a systemic architecture defect, so per Phase 6's own rule it
