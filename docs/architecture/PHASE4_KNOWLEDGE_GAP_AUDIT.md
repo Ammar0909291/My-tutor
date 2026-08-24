@@ -237,3 +237,49 @@ so the closing SCRIPT is deferred. Pre-existing (Series A Phase 4, live-verified
 "explain X" excursion; Phase 4 did not create it but makes it reachable by a second route. Fixing
 it means deciding that a session stop closes an excursion outright — an excursion-lifecycle change,
 out of scope here.
+
+---
+
+## I. LIVE VERIFICATION (production, `dpl_6f6dzxB5...`, commit `2b524ed6`)
+
+Disposable account, chemistry / `chem.found.pure-substances`, deleted afterwards with re-login
+independently confirmed blocked. `scripts/qa/phase4-knowledge-gap.ts`: **8 PASS / 0 FAIL / 0
+unmeasured.**
+
+Server-side `[knowledge-gap]` / `[excursion]` / `[arbitration]` log lines read directly (not
+inferred from reply text) confirm the full causal chain on the RESOLVED gap turn:
+
+    [knowledge-gap] { concept: 'chem.found.mole-concept', relationship: 'related',
+                       signal: 'dont_know', lesson: 'chem.found.pure-substances' }
+    [excursion]      { target: 'chem.found.mole-concept', transition: 'started', active: true,
+                        returnTo: 'chem.found.pure-substances', turns: 0 }
+    [arbitration]    { owner: 'KNOWLEDGE_GAP', overridden: ['RECOVERY', 'TEACH'],
+                        denied: ['RECOVERY_SCRIPT','SESSION_CLOSE','AUTHORED_PROBE','FILLER_REPAIR'] }
+
+CUE's own shadow decision independently read `D0-RECOVERY-PREEMPT` on this same turn — confirming
+CUE is a non-driving shadow system exactly as documented, and Phase-3 arbitration (not CUE) is
+what actually governed the response. `visual-v2` resolved a `labelled_figure` for
+`chem.found.mole-concept` specifically (not the parent lesson), so the generated teaching aid
+matched the actual gap concept.
+
+The distress control ("I give up") and the bare-"I don't know" control both showed
+`arbitration: { owner: 'RECOVERY', ... }` with `RECOVERY_SCRIPT` correctly **absent** from
+`denied` — recovery still owns its own script exactly as before Phase 4.
+
+**ONE genuine finding, verified empirically, not a Phase 4 regression.** The follow-up gap turn
+("I still don't know enough about the mole concept") produced `arbitration: { owner: 'TEACH' }`,
+not `KNOWLEDGE_GAP`. Direct testing confirms the cause:
+
+    detectFailureState("I still don't know enough about the mole concept", <any prior>) -> null
+    detectFailureState("I don't know enough about the mole concept", null)              -> 'dont_know'
+
+`recoveryGuard.ts`'s pattern list does not match once "still" is inserted — a pre-existing gap in
+a module Phase 4 never touched. **No harm resulted, verified by two independent safety nets**:
+the already-open excursion's own `held(state, 'continued')` fallback (excursion.ts's "everything
+else... stays where the teaching already is") kept the correct prerequisite concept on screen with
+no reclassification needed, and `gateEligible`'s pre-existing `!excursionActiveHoisted` exclusion
+independently prevented any question from attaching regardless of arbitration's owner. Confirmed
+in the reply: no MCQ, correct concept continued teaching, no mastery/budget effect.
+
+Flagged as a Phase 5 candidate (recoveryGuard intensifier coverage — "still", "really", "just"),
+not fixed here: fixing it means widening a detector, which this phase's own rules forbid.

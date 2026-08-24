@@ -2365,6 +2365,26 @@
   that rung could not be built and is reported, not patched around; (3) `src/lib/kernel/policy`'s
   7-band engine remains in SHADOW, and promoting it is an owner decision gated on reviewing
   real-traffic replay diffs (K4 DoD) — deliberately untouched.
+- **Phase 4 — knowledge gap is now first-class** (`410a7aee`, merged with a parallel-session
+  Track K/EOS commit at `2b524ed6`, blueprint/audit: `docs/architecture/PHASE4_KNOWLEDGE_GAP_AUDIT.md`).
+  A learner naming a concept they are missing ("I don't know enough about the mole concept") used
+  to be read only as the failure-state PREDICATE (`dont_know`) — the named OBJECT was discarded,
+  so the turn spent the affect budget and wrote a MistakeRecord against the LESSON concept, not
+  the one the learner actually named. `knowledgeGap.ts` (new, no detector, no regex — reuses
+  `isDontKnowSignal` + the existing `resolveRequestedConceptId`) classifies a RESOLVED gap only;
+  it opens the EXISTING excursion machine as a prerequisite detour (one new disjunct in
+  `decideExcursion`'s open condition, gated on `knowledgeGapConceptId === requestedConceptId`) and
+  claims a new `KNOWLEDGE_GAP` rung at the TOP of Phase 3's ladder (denies `RECOVERY_SCRIPT` so the
+  prerequisite actually gets taught; nothing below it was reordered). Also fixed:
+  `remediationCount` had one writer and no reset ever — cleared now on the same graded-correct
+  evidence that already clears `consecutiveFailures`. SCOPE, decided by the owner: only concepts
+  the KG resolver can already title are handled — "compound structures", "atoms", "periodic table"
+  still fall through unchanged (recovery, budget spent). Carrying an unresolvable name is Phase 5.
+  Live-verified: `[knowledge-gap]`/`[excursion]`/`[arbitration]` logs confirm the chain in
+  production. One PRE-EXISTING `recoveryGuard` gap found live (not fixed, out of scope): "I still
+  don't know about X" doesn't match `dont_know` at all (the word "still" breaks the pattern) — no
+  harm resulted because the excursion's own continuity and `gateEligible`'s existing
+  `!excursionActiveHoisted` exclusion both independently absorbed it.
 
 ## Run locally
 ```
