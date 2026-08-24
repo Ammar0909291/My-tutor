@@ -8,6 +8,34 @@ currently green (it pins the defects; it does not fix them).
 **Verdict:** S5 must NOT be executed as specified. Doing so would silently
 disable lesson completion for every learner.
 
+> **PHASE 4 UPDATE (2026-08-24) — read `ISS_01_RESOLUTION_ANALYSIS.md` next.**
+> All three defects below were independently re-verified and **four more were
+> found**, one of them decisive: **D4, the absorbing barrier.** Under canonical
+> authority, bridged by this repository's own `canonicalToLegacy`, a learner
+> who answers *every* question correctly **never leaves DEMONSTRATE** — ASSESS
+> and TRANSFER are not reached in sixty turns. D2's walk below is therefore the
+> *optimistic* reading: it feeds the machine a correct signal on turns the
+> runtime would never have asked on. The consequence is that **fixing D1, D2
+> and D3 would not make the canonical machine promotable**, which strengthens
+> this document's Option C recommendation considerably.
+>
+> Also new: D5 (the canonical `TurnEvidence` cannot express `acknowledgement`,
+> `explain_differently`, `degradedTurn` or the signal-verification status, so
+> the P4/F7 degraded-turn invariant and strict mastery are both lost), D6 (two
+> stage-ceiling authorities that agree only on the legacy vocabulary — and
+> `checkEpisode`'s I-1 invariant goes *blind* under canonical names), and D7
+> (failure edges at DIAGNOSE/ANCHOR labelled `down` while moving the learner up
+> two states).
+>
+> §5's exit criteria are extended there, and item 4 is corrected: a production
+> census (716 snapshots, 488 ladders, 474 phase values) found **zero canonical
+> values persisted**, so there is nothing to migrate — what is needed instead
+> is a written commitment never to write them, because the read path discards
+> 8 of the 10 canonical names and silently revokes earned mastery.
+>
+> Evidence: `src/tests/ladderReconciliation.test.ts`,
+> `src/tests/conversationStateMigration.test.ts`. Nothing below is retracted.
+
 ---
 
 ## 1. What S5 asked for, and why it stopped
