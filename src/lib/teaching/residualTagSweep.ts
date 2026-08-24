@@ -74,6 +74,55 @@ const MACHINE_TAG_RE = /<!--\s*[A-Z][A-Z0-9_]{2,}\b[\s\S]*?(?:-->|\/>)/g
 const RAW_VISUAL_ELEMENT_RE = /<visual\b[^>]*>[\s\S]*?<\/visual\s*>|<visual\b[^>]*\/?>/gi
 
 /**
+ * PHASE 6 — THE THIRD MARKUP SHAPE, and the one this module's own header
+ * wrongly claimed to already cover ("for every tag family, including ones not
+ * invented yet"). That was true of the two COMMENT-shaped families above and
+ * false of a third shape the prompts actively ask for: SQUARE BRACKETS.
+ *
+ * ── OBSERVED LIVE (Phase 6 certification, eng.grammar.nouns, disposable QA
+ * account) ─────────────────────────────────────────────────────────────────
+ * The learner's chat bubble ended with:
+ *
+ *   …how countable and uncountable nouns affect article use and quantifiers.
+ *   [ASSESSMENT_RESULT correctness=1 reasoning=2 confidence=3]
+ *
+ * `src/app/api/learn/chat/route.ts` INSTRUCTS the model to emit exactly this
+ * tag, and then strips two of the three bracket tags it asks for: `[HINT]` is
+ * consumed by the hint parser, `[LESSON_COMPLETE]` has dedicated handling, and
+ * `[ASSESSMENT_RESULT …]` had no stripper anywhere on the Library path. The
+ * comment-shaped sweep above cannot see it, so it reached the learner and was
+ * persisted to message history.
+ *
+ * Worse, and the reason this belongs HERE rather than at the call site:
+ * `hasResidualMachineTag` reported that text as CLEAN, so the repository's own
+ * residual-tag assertion was structurally blind to the entire bracket shape.
+ *
+ * The codebase already knew: `kernel/verifier/lexicons.ts` carries a
+ * `BRACKET_TAG_PATTERN` and a V-TAG rule ("any bracketed tag not in this list
+ * is STRIPPED") — but the K5 Output Verifier is off by default, so that
+ * knowledge never runs on the serving path. This is the always-on equivalent.
+ *
+ * ── WHAT MUST SURVIVE, AND WHY (checked before writing this) ───────────────
+ * `[LESSON_COMPLETE]` is NOT residue — it is a LIVE CLIENT CONTROL TAG.
+ * `LessonScreen.tsx` calls `parseLessonCompletionTag(full)` on the response
+ * text to trigger the completion transition, and the route's own two
+ * `[LESSON_COMPLETE]` strips are FAIL-CLOSED error paths (a gate throw, or a
+ * Library turn with no state machine) — on the authorized happy path the tag
+ * is deliberately allowed through. Sweeping it here would have silently broken
+ * lesson completion for every subject. It is excluded by name, not by luck.
+ *
+ * Everything else is deleted on the same SHOUTED-name discipline as
+ * `MACHINE_TAG_RE`: an uppercase opening token of three or more characters.
+ * The trailing `(?!\()` protects markdown links — `[NASA](https://nasa.gov)`
+ * is prose a tutor may legitimately write, and is not markup.
+ */
+const CLIENT_CONTROL_TAGS = ['LESSON_COMPLETE'] as const
+const BRACKET_MACHINE_TAG_RE = new RegExp(
+  `\\[(?!(?:${CLIENT_CONTROL_TAGS.join('|')})\\b)[A-Z][A-Z0-9_]{2,}(?:[ \\t][^\\]\\n]*)?\\](?!\\()`,
+  'g',
+)
+
+/**
  * An UNTERMINATED tag at the very end — the model ran out of tokens mid-tag.
  * attemptVectorSignal.ts documents the same hazard for its own tag and resolves
  * it the same way: a visible `<!--ATTEMPT` fragment is worse than over-deleting
@@ -95,10 +144,13 @@ export function stripResidualMachineTags(text: string): string {
   // Fast path: neither shape of markup this sweep removes is present.
   // `/<visual\b/i` is cheap and only tested once here (not per-pass), since
   // the loop below re-tests via the full regex on each pass anyway.
-  if (!text.includes('<!--') && !/<visual\b/i.test(text)) return text
+  if (!text.includes('<!--') && !/<visual\b/i.test(text) && !text.includes('[')) return text
   let out = text
   for (let pass = 0; pass < 4; pass++) {
-    const next = out.replace(MACHINE_TAG_RE, '').replace(RAW_VISUAL_ELEMENT_RE, '')
+    const next = out
+      .replace(MACHINE_TAG_RE, '')
+      .replace(RAW_VISUAL_ELEMENT_RE, '')
+      .replace(BRACKET_MACHINE_TAG_RE, '')
     if (next === out) break
     out = next
   }
@@ -110,6 +162,13 @@ export function stripResidualMachineTags(text: string): string {
 
 /** True when the text still carries machine markup. For assertions and tests. */
 export function hasResidualMachineTag(text: string): boolean {
-  return typeof text === 'string'
-    && (/<!--\s*[A-Z][A-Z0-9_]{2,}\b/.test(text) || /<visual\b/i.test(text))
+  if (typeof text !== 'string') return false
+  // The bracket shape is included because its ABSENCE here is what let the
+  // observed `[ASSESSMENT_RESULT …]` leak be reported as clean. A detector
+  // that cannot see a leak class is worse than no detector, because it is
+  // trusted. `[LESSON_COMPLETE]` is excluded for the same reason the sweep
+  // excludes it: it is a live client control tag, not residue.
+  return /<!--\s*[A-Z][A-Z0-9_]{2,}\b/.test(text)
+    || /<visual\b/i.test(text)
+    || new RegExp(BRACKET_MACHINE_TAG_RE.source).test(text)
 }
