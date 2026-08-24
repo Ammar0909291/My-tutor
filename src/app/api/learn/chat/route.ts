@@ -1719,6 +1719,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
      * which grants TEACH and denies every question/probe/repair capability.
      */
     let turnArbitrationHoisted: import('@/lib/teaching/turnArbitration').TurnArbitration | null = null
+    /**
+     * PHASE 4 — the concept the learner reported MISSING, when the curriculum
+     * could name it (knowledgeGap.ts). Null on every ordinary turn, and null
+     * for a bare "I don't know", which names nothing.
+     */
+    let knowledgeGapHoisted: import('@/lib/teaching/knowledgeGap').KnowledgeGap | null = null
     // Phases C–G (2026-07-14): server-side conversation state machine —
     // read pre-LLM (drives the TURN DIRECTIVE), folded post-AI with this
     // turn's evidence, persisted on the existing snapshot ride.
@@ -2112,6 +2118,37 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         const { parseExcursionState, decideExcursion, buildExcursionDirective } =
           await import('@/lib/teaching/excursion')
         const requestedConceptIdThisTurn = resolveRequestedConceptId(message, excursionLessonConceptId, subjectCode)
+        // PHASE 4 — IS THIS A REPORTED KNOWLEDGE GAP RATHER THAN DISTRESS?
+        //
+        // Nothing new is read. The resolver above already ran on this exact
+        // message on every turn, and its answer was already handed to
+        // `decideExcursion`; what was missing is that nobody asked whether a
+        // "don't know" turn had NAMED something. MEASURED before this existed:
+        // "I don't know enough about the mole concept" resolved to
+        // `chem.found.mole-concept` and opened nothing, because the branch that
+        // opens a detour also demanded a request frame — so the learner named
+        // exactly what to teach, was answered with a recovery script, and the
+        // turn spent their affect budget for saying it.
+        {
+          const { classifyKnowledgeGap } = await import('@/lib/teaching/knowledgeGap')
+          const { getKGNode } = await import('@/lib/curriculum/knowledgeGraph')
+          knowledgeGapHoisted = classifyKnowledgeGap({
+            failureState: recoveryKeyHoisted,
+            resolvedConceptId: requestedConceptIdThisTurn,
+            lessonConceptId: excursionLessonConceptId,
+            lessonPrerequisites: excursionLessonConceptId
+              ? (getKGNode(excursionLessonConceptId)?.prerequisites ?? null)
+              : null,
+          })
+          if (knowledgeGapHoisted) {
+            console.log('[knowledge-gap]', {
+              concept: knowledgeGapHoisted.conceptId,
+              relationship: knowledgeGapHoisted.relationship,
+              signal: knowledgeGapHoisted.signal,
+              lesson: excursionLessonConceptId,
+            })
+          }
+        }
         // THE TOPIC THE CURRICULUM COULD NOT NAME.
         //
         // Only consulted when the resolver returned nothing. `namedTopicUnknownTo`
@@ -2151,6 +2188,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           lessonConceptId: excursionLessonConceptId,
           requestedConceptId: requestedConceptIdThisTurn,
           requestedTopicTitle: requestedTopicTitleThisTurn,
+          // Phase 4: a reported gap is a third reason to open the SAME branch
+          // an explicit request opens. It never changes WHICH concept opens —
+          // excursion.ts requires it to equal `requestedConceptId`.
+          knowledgeGapConceptId: knowledgeGapHoisted?.conceptId ?? null,
           lastAssistantAskedQuestion: excursionPriorAskedQuestion,
           // Phase 2: the turn read itself two contradictory ways. Hold the
           // teaching context rather than let either reading change it. This is
@@ -2282,6 +2323,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // designated owner already produced.
           {
             turnArbitrationHoisted = arbitrateTurn({
+              knowledgeGapResolved: knowledgeGapHoisted !== null,
               recoveryActive: recoveryKeyHoisted !== null,
               // turnIntent is the ONE authoritative read of the message
               // (Phase 1). `ambiguous` is the stop-carrying-a-question case
@@ -3087,7 +3129,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // RECOVERY preemption (decision-engine/03 §0; foundations/01 §3
         // scripts; first-lesson/05 deltas) — injected LAST of all blocks:
         // the affect band outranks every teaching instruction above it.
-        if (recoveryKeyHoisted) {
+        // PHASE 4: the recovery script is now a CONSUMER of the arbitration
+        // verdict, exactly like every other Axis-1 block since Phase 3. It was
+        // the last one injected unconditionally on its own trigger, which is
+        // why a resolved knowledge gap could not be taught: the script's whole
+        // content ("no new content this turn, validate and shrink") is the one
+        // instruction that forbids teaching the prerequisite the learner just
+        // named. Nothing about how recovery answers DISTRESS changes — on any
+        // turn where RECOVERY owns, it allows its own script.
+        if (recoveryKeyHoisted
+            && (turnArbitrationHoisted ?? arbitrationUnavailable()).allows('RECOVERY_SCRIPT')) {
           const { buildRecoveryBlock } = await import('@/lib/teaching/recoveryGuard')
           // P2: pass session failure count so the script escalates on repeated struggle.
           // Rule 2 (pre-demonstration escalation): when nothing has been
@@ -6148,7 +6199,20 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
 
         // P5 — Recovery memory: write a MistakeRecord so decide() enters
         // remediate mode on the next turn for this concept. Fire-and-forget.
-        if (resolvedConceptId) {
+        //
+        // PHASE 4 — NOT FOR A REPORTED GAP. This row is keyed to
+        // `resolvedConceptId`, the concept being TAUGHT, so a learner saying
+        // "I don't know enough about the mole concept" recorded a weakness
+        // against the LESSON — an error they never made, on a concept they
+        // never mentioned. MistakeRecords are never deleted or updated anywhere
+        // in this codebase (`grep mistakeRecord.(delete|update)` = 0), so that
+        // row is permanent and feeds `weak_concepts` forever.
+        //
+        // Writing it against the GAP concept instead would be no better: it
+        // would fabricate evidence of a mistake on a concept the learner has
+        // not attempted. Reporting a missing foundation is not an error, so the
+        // correct number of rows to write is zero.
+        if (resolvedConceptId && !knowledgeGapHoisted) {
           prisma.mistakeRecord.create({
             data: {
               userId,

@@ -165,6 +165,34 @@ export interface ExcursionInput {
    * always better identified by its id.
    */
   requestedTopicTitle: string | null
+  /**
+   * THE LEARNER REPORTED MISSING THIS CONCEPT. (Phase 4.)
+   *
+   * A knowledge gap and an explicit request are the same DECISION — teach that
+   * concept next, come back after — reached by two different sentences:
+   *
+   *     "explain the mole concept"                     -> a request
+   *     "I don't know enough about the mole concept"   -> a gap
+   *
+   * MEASURED before this field existed: the resolver returned
+   * `chem.found.mole-concept` for BOTH, and the second opened no excursion,
+   * because the branch below also demands a request frame. The learner named
+   * exactly what to teach and was answered with a recovery script instead,
+   * while the turn spent their affect budget for saying it.
+   *
+   * THE CALLER'S CONTRACT — the same shape, and the same reason, as
+   * `requestedTopicTitle` above: the qualifying test cannot live here. It needs
+   * the failure-state partition (`isDontKnowSignal`) and the lesson's KG
+   * prerequisites, and keeping both out of this file is what lets the whole
+   * lifecycle stay pure and exhaustively testable. Pass
+   * `classifyKnowledgeGap(...)?.conceptId ?? null` (knowledgeGap.ts) and
+   * nothing else; `null` is always the safe value.
+   *
+   * It does not compete with a request: an explicit request already opens the
+   * same branch, so this only ever ADDS a reason to open, never changes which
+   * concept is opened.
+   */
+  knowledgeGapConceptId?: string | null
   /** Whether the tutor's previous turn ended in a question. */
   lastAssistantAskedQuestion: boolean
   /**
@@ -321,7 +349,14 @@ export function decideExcursion(input: ExcursionInput): ExcursionDecision {
   // explicit correction ("I meant X, not Y") — the same negation signal
   // checked above, but this time paired with a concept the correction itself
   // named, so it redirects to what was actually meant instead of the lesson.
-  if (requestedConceptId && (isExplicitTopicRequest(message) || isExplicitCorrection(message))) {
+  // Phase 4 adds the third qualifying reason. A gap qualifies only for the
+  // concept it actually named — `knowledgeGapConceptId === requestedConceptId`
+  // — so a stale or mismatched gap can never redirect the detour to a concept
+  // the resolver did not return for THIS message.
+  const gapOpensThisConcept =
+    requestedConceptId != null && input.knowledgeGapConceptId === requestedConceptId
+  if (requestedConceptId
+      && (isExplicitTopicRequest(message) || isExplicitCorrection(message) || gapOpensThisConcept)) {
     // They asked for the lesson's own concept — the detour is over.
     if (requestedConceptId === lessonConceptId) {
       return active ? closed('closed-on-lesson') : none(lessonConceptId)

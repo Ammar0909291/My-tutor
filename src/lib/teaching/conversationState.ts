@@ -713,6 +713,27 @@ export function advanceConversationState(
 
   if (succeeded) {
     next.consecutiveFailures = 0
+    // PHASE 4 — THE REMEDIATION EXIT.
+    //
+    // `remediationCount` had ONE writer (`prev.remediationCount + 1`, on an
+    // explain-differently turn) and NO reset anywhere. grep gave four
+    // references in this file: the declaration, the initialiser, that
+    // increment, and a read. So it was a monotonic TALLY being read as if it
+    // were a STATE, and remediation was never exited at all — not "exited only
+    // by graded correct evidence", never.
+    //
+    // MEASURED before this line existed: after two explain-differently turns
+    // the learner answered correctly three times and climbed OBSERVE -> GUIDE
+    // -> CHECK -> PRACTICE, while `remediationTier` still told the prompt
+    // "Strategies already attempted: 2. Do NOT reuse any previous approach."
+    // — forever, or until a concept change reset the whole ladder.
+    //
+    // The exit is the evidence that ALREADY clears `consecutiveFailures` on
+    // the line above: a graded CORRECT answer. Nothing is fabricated and no
+    // new evidence class is invented — the learner demonstrably answered. In
+    // particular a bare "Got it" does NOT clear it: an acknowledgement is not
+    // evidence, masteryGate already refuses it, and that stays true here.
+    next.remediationCount = 0
     const verified = evidence.signalVerificationStatus === 'CLEAN' || evidence.signalVerificationStatus === undefined
     switch (prev.phase) {
       case 'OBSERVE':
