@@ -97,7 +97,26 @@
  * proposed for this phase. Both divergences are argued from shipped behaviour,
  * not preference.
  *
- *  1 RECOVERY — basePack `B0.recovery.preempt.v1` is the ONLY Band-0 rule and
+ *  1 KNOWLEDGE_GAP — the learner NAMED a concept they are missing and the
+ *    curriculum could title it (knowledgeGap.ts).
+ *
+ *    >> WHY THIS SITS ABOVE RECOVERY, argued from the repository rather than
+ *    assumed. Recovery's justification is foundations/04 P5, "no content into a
+ *    flooded mind". A learner naming a missing prerequisite is not flooded:
+ *    recoveryGuard's OWN partition, `DONT_KNOW_SIGNAL_KEYS`, already separates
+ *    the explain-me family {dont_know, dont_understand, confused} from the
+ *    affective family {give_up, stupid, scared, too_hard, cant, frustrated},
+ *    and its docblock calls itself the single owner of that membership. This
+ *    rung is NOT "a gap outranks distress" — it is that the turn was never
+ *    distress. Placing it below RECOVERY would leave the tutor forbidden from
+ *    teaching the prerequisite it had just correctly identified, because
+ *    RECOVERY denies PHASE_FRAME, NEXT_MOVE and NEW_QUESTION.
+ *
+ *    The bar is deliberately high: the concept must RESOLVE against the KG. A
+ *    bare "I don't know", or a name the curriculum cannot title, does not claim
+ *    this rung and behaves exactly as it does today.
+ *
+ *  2 RECOVERY — basePack `B0.recovery.preempt.v1` is the ONLY Band-0 rule and
  *    is `mandatory: true`; decision-engine/03 §0; recoveryGuard.ts:710.
  *
  *    >> DIVERGENCE 1: RECOVERY ABOVE CLOSE, not below.
@@ -110,7 +129,7 @@
  *    session still ends — it ends warmly instead of abruptly. Nothing about
  *    the learner's stop is discarded.
  *
- *  2 LEARNER_REQUEST — masteryGate.ts:602 "learner request outranks the
+ *  3 LEARNER_REQUEST — masteryGate.ts:602 "learner request outranks the
  *    machine's own pacing"; questionLegality QL-3 calls a stated learner
  *    directive "the one signal that is ground truth rather than inference".
  *
@@ -122,12 +141,12 @@
  *    deferred, never cancelled — the episode stays CLOSING and it fires on the
  *    first turn with nothing outstanding.
  *
- *  3 CLOSE — sessionLifecycle 07 §6; Phase 1 made it survive the request
+ *  4 CLOSE — sessionLifecycle 07 §6; Phase 1 made it survive the request
  *    boundary, which is what makes it arbitrable at all.
  *
- *  4 COMPLETE — the lesson is finished; no further teaching move applies.
+ *  5 COMPLETE — the lesson is finished; no further teaching move applies.
  *
- *  5 TEACH — the ordinary ladder turn. THE FLOOR: it always claims, so the
+ *  6 TEACH — the ordinary ladder turn. THE FLOOR: it always claims, so the
  *    verdict is total and `owner` is never null. EOS v2 §5.2's completeness
  *    rule, restated for this axis.
  *
@@ -153,15 +172,14 @@
  *     conceivable but was NOT measured reachable, and inventing a rung for an
  *     unproven collision is the speculation this phase is meant to replace.
  *
- *  >> KNOWLEDGE GAP / PREREQUISITE — proposed 4th. NOT A RUNG, and this is a
- *     finding rather than an omission: Phase 2 C5 measured that NO
- *     knowledge-gap state exists in the runtime at all — a named gap is filed
- *     as distress and the named concept is discarded. There is nothing to
- *     claim with. Building that state is a different architectural layer and
- *     is explicitly out of this phase's scope; it is reported, not patched
- *     around.
+ *  >> KNOWLEDGE GAP / PREREQUISITE — excluded in Phase 3 because Phase 2 C5
+ *     had measured that no knowledge-gap state existed to claim with. PHASE 4
+ *     BUILT THAT STATE, so the rung now exists and is first in the order. The
+ *     exclusion is kept here rather than deleted: it records that the rung was
+ *     added only once something could actually claim it.
  */
 export const TURN_AUTHORITY_ORDER = [
+  'KNOWLEDGE_GAP',
   'RECOVERY',
   'LEARNER_REQUEST',
   'CLOSE',
@@ -182,6 +200,7 @@ export type TurnAuthority = (typeof TURN_AUTHORITY_ORDER)[number]
  * lines are Axis 4 and must survive. Suppressing whole blocks would throw away
  * the second kind with the first.
  *
+ *  RECOVERY_SCRIPT the authored calming script (recoveryGuard's block)
  *  PHASE_FRAME     the ladder's "Teaching phase: ..." instruction
  *  NEXT_MOVE       the ladder's "Next move: TEACH/SHOW/ASK" instruction
  *  NEW_QUESTION    may this turn pose ANY new question (prose included)
@@ -193,6 +212,7 @@ export type TurnAuthority = (typeof TURN_AUTHORITY_ORDER)[number]
  *  FILLER_REPAIR   may the post-model repair overwrite the turn with a question
  */
 export const TURN_CAPABILITIES = [
+  'RECOVERY_SCRIPT',
   'PHASE_FRAME',
   'NEXT_MOVE',
   'NEW_QUESTION',
@@ -209,6 +229,12 @@ export type TurnCapability = (typeof TURN_CAPABILITIES)[number]
  * no detector.
  */
 export interface TurnClaims {
+  /**
+   * knowledgeGap.ts: the learner NAMED a concept they are missing, and the
+   * curriculum could title it. Not "they said they don't know" — a bare
+   * "I don't know" names nothing and does not claim this rung.
+   */
+  knowledgeGapResolved: boolean
   /** recoveryGuard: a failure state was detected (route's `recoveryKey`). */
   recoveryActive: boolean
   /**
@@ -246,6 +272,26 @@ interface AuthoritySpec {
  */
 const AUTHORITIES: readonly AuthoritySpec[] = [
   {
+    authority: 'KNOWLEDGE_GAP',
+    claims: (c) => c.knowledgeGapResolved,
+    // It takes the RECOVERY SCRIPT and nothing that teaches. A learner who has
+    // just named the prerequisite they are missing must be TAUGHT it, and the
+    // recovery script's whole content ("no new content this turn, validate and
+    // shrink") is the one instruction that would forbid exactly that.
+    //
+    // It keeps PHASE_FRAME, NEXT_MOVE and NEW_QUESTION on purpose: teaching the
+    // prerequisite IS this turn, and the excursion has already redirected the
+    // teaching target to the gap concept, so the ladder's instructions now
+    // describe the detour rather than the paused lesson.
+    //
+    // SESSION_CLOSE, because closing on the turn a learner asked for
+    // foundations abandons them at the worst moment; AUTHORED_PROBE, because
+    // the parent lesson's gate question is about the concept they just told us
+    // they cannot yet reach.
+    suppresses: ['RECOVERY_SCRIPT', 'SESSION_CLOSE', 'AUTHORED_PROBE', 'FILLER_REPAIR'],
+    reason: 'the learner named a concept they are missing — teach it, then return',
+  },
+  {
     authority: 'RECOVERY',
     claims: (c) => c.recoveryActive,
     // recoveryGuard's own block: "No new content this turn. No assessment. No
@@ -254,6 +300,8 @@ const AUTHORITIES: readonly AuthoritySpec[] = [
     // arrives, one turn later and warmly (defect D4).
     suppresses: ['PHASE_FRAME', 'NEXT_MOVE', 'NEW_QUESTION', 'AUTHORED_PROBE', 'SESSION_CLOSE', 'FILLER_REPAIR'],
     reason: 'the learner voiced a failure state — recovery owns the turn (Band 0, mandatory)',
+    // RECOVERY_SCRIPT is deliberately absent from that list: this authority IS
+    // the recovery, exactly as CLOSE does not suppress SESSION_CLOSE.
   },
   {
     authority: 'LEARNER_REQUEST',

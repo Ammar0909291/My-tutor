@@ -24,6 +24,7 @@ import { shouldInjectAffectClose } from '@/lib/teaching/sessionLifecycle'
 import { withholdClosingProseQuestion, closingTurnWithholdsQuestion } from '@/lib/teaching/gateAssessment'
 
 const NO_CLAIMS: TurnClaims = {
+  knowledgeGapResolved: false,
   recoveryActive: false,
   learnerRequestActive: false,
   closing: false,
@@ -32,6 +33,7 @@ const NO_CLAIMS: TurnClaims = {
 
 /** The claim field that makes each authority fire. TEACH is the floor and has none. */
 const CLAIM_FOR: Record<Exclude<TurnAuthority, 'TEACH'>, keyof TurnClaims> = {
+  KNOWLEDGE_GAP: 'knowledgeGapResolved',
   RECOVERY: 'recoveryActive',
   LEARNER_REQUEST: 'learnerRequestActive',
   CLOSE: 'closing',
@@ -75,8 +77,17 @@ describe('1. the precedence ladder itself', () => {
     }
   })
 
-  it('the order is the one Phase 3 derived, and it is stated exactly once', () => {
+  it('the order is the one Phase 3 derived plus Phase 4\'s rung, stated exactly once', () => {
+    // THIS TEST FAILING IS THE POINT. It was written so that a future edit to
+    // the order has to argue with a failing assertion rather than with a
+    // comment, and Phase 4 is the first edit to meet it. What changed:
+    // KNOWLEDGE_GAP was INSERTED at the top. Nothing was reordered — the
+    // Phase 3 sequence below it is unchanged, element for element.
     expect([...TURN_AUTHORITY_ORDER]).toEqual([
+      'KNOWLEDGE_GAP', 'RECOVERY', 'LEARNER_REQUEST', 'CLOSE', 'COMPLETE', 'TEACH',
+    ])
+    // Phase 3's order, still intact underneath the insertion.
+    expect(TURN_AUTHORITY_ORDER.filter((a) => a !== 'KNOWLEDGE_GAP')).toEqual([
       'RECOVERY', 'LEARNER_REQUEST', 'CLOSE', 'COMPLETE', 'TEACH',
     ])
     // The two divergences from the proposed ordering, pinned as behaviour so a
