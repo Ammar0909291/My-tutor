@@ -206,7 +206,17 @@ const MILD_PATTERNS: Array<[FailureStateKey, RegExp]> = [
   // preemptive classifier, needs it directly.
   ['confused',        /\b(this|that|it)\s+(doesn'?t|does\s+not)\s+make\s+(any\s+)?sense\b/i],
   ['confused',        /\bmakes?\s+no\s+sense\b/i],
-  ['dont_know',       /\bi\s+(don'?t|do\s+not)\s+know\b/i],
+  // PHASE 5 (Case G, R3 from Phase 4's own live-verification finding): every
+  // sibling pattern in this file that negates a verb already allows an
+  // optional intensifier between the subject and the negation — scared
+  // (really|so), confused (so|really|totally), dont_understand at line 184
+  // (really|just), dont_understand's "get it" variant at line 222 (still).
+  // This was the one bare "I ... know" pattern with no such group at all, so
+  // "I still don't know enough about the mole concept" and "I really don't
+  // know how to start" matched nothing — not a new frame, just this pattern
+  // catching up to a convention already used ten times elsewhere in this
+  // file.
+  ['dont_know',       /\bi\s+(?:really\s+|still\s+|just\s+)?(don'?t|do\s+not)\s+know\b/i],
   ['dont_know',       /\bi\s+know\s+nothing\b/i],
   // P1: bare "don't know" / "dunno" with no subject pronoun — a common
   // terse reply the "I ..." patterns above miss entirely. Whole-message

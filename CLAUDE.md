@@ -2385,6 +2385,67 @@
   don't know about X" doesn't match `dont_know` at all (the word "still" breaks the pattern) — no
   harm resulted because the excursion's own continuity and `gateEligible`'s existing
   `!excursionActiveHoisted` exclusion both independently absorbed it.
+- **Phase 5 — Lesson Integrity, Evidence & Progression** (2026-08-24, commit range starting
+  after `1929e8c1`; audit: `docs/architecture/PHASE5_LESSON_INTEGRITY_AUDIT.md`). Full read-only
+  audit (owner/reader/writer/persistence/authority/conflicts for all 12 lesson-loop surfaces)
+  found the grading/evidence architecture already correct for 5 of 7 required failure cases (A,
+  B, C, E, F) — `gradeMcqAnswer` deterministic ground-truth grading, `answerableTurn.ts`'s
+  no-question-posed suppression, `isBareAcknowledgement` nulling the WHOLE signal on a bare ack
+  regardless of what was asked, `masteryVerifiedStrict` reading only verified counters,
+  `pendingMcq` written post-arbitration so it can't go stale — all re-verified with new
+  characterization tests (`phase5CaseCharacterization.test.ts`, 26 tests) rather than assumed.
+  Two genuine defects found and fixed, both minimal, both reusing existing mechanisms (no new
+  parallel state machine, no new detector):
+  1. **Case D — filler-repair could loop the identical canned sentence forever.**
+     `ConversationState.fillerRepairStreak` (new counter, folds exactly like
+     `consecutiveFailures`/`consecutiveDontKnows`) + `shouldApplyFillerRepair` (caps the
+     EXISTING repair at 2 consecutive filler-shaped turns, then lets the model's own text stand
+     rather than force a third identical robotic question). Counts consecutive FILLER-SHAPED
+     turns, not consecutive repairs — an early design that counted repairs instead re-armed
+     every other turn instead of staying suppressed while the model kept producing filler; found
+     and corrected via a negative-control test before shipping. `transcriptReplayFramework.test.ts`
+     extended to replay it (the transcript already carries the tutor's own text, so no
+     approximation was needed) — this closed a structural-guard test (`replayDrift.test.ts`) that
+     would otherwise have let this field silently drift between the harness and the route.
+  2. **Case G — two of the six audited edge-case phrasings were genuine defects, four were
+     already correct.** `recoveryGuard.ts`'s bare `dont_know` pattern was the ONE negated-verb
+     pattern in the file with no optional intensifier group, while ten sibling patterns already
+     had one (scared: really|so; the sibling `dont_understand` pattern: really|just; its "get
+     it" variant: still) — so "I still don't know enough about the mole concept" (the exact R3
+     gap Phase 4 recorded and deferred) matched nothing; fixed by adding `(really|still|just)?`,
+     words already used elsewhere in the same file, to the one outlier. Separately,
+     `visual/session.ts`'s `TOPIC_REQUEST_RE` (shared verbatim by `isExplicitTopicRequest` in
+     `excursion.ts` and the visual layer) had "I want to learn X" but not "I need to learn X" —
+     added as a synonym. The other four phrasings ("compound structures", bare "I don't know",
+     "I really don't understand this", "atoms") are CORRECTLY unresolved as-is: the KG genuinely
+     has no such title (checked directly against the live KG, not assumed) and the resolver's
+     refusal to guess is the same anti-guessing discipline the L1 fix established — extending
+     resolution to guess at these would be a regression, not a fix.
+  One residual, structurally-hard gap reported honestly, not fixed (STILL UNKNOWN): a genuinely
+  free-response (non-MCQ) prose question, below asset-contract probe coverage, where the model's
+  self-report is internally self-consistent (`signalVerification` reports CLEAN) but factually
+  wrong. Closing it needs either full probe coverage (content work, protected) or a new
+  independent answer-verification subsystem (explicitly out of scope — "another parallel state
+  machine" / "making the model answer better"). Adversarial review (topic-change mid-remediation,
+  prerequisite-of-a-prerequisite, diagram request during remediation, "I'm done" during a detour,
+  provider failure during a detour) found no new defect; one cosmetic-only finding
+  (`classifyKnowledgeGap`'s `lessonPrerequisites` are always the ORIGINAL lesson's, not the
+  current excursion target's, so a prerequisite-of-a-prerequisite is labeled `relationship:
+  'related'` instead of `'prerequisite'` — does not affect `gapOpensThisConcept`, which only
+  compares concept ids, so no wrong excursion results; not fixed, telemetry-only). Live-verified
+  against the deployed app with one disposable account (Physics: wrong MCQ answer left
+  check/practice at 0/0 and did not authorize `[LESSON_COMPLETE]`, four repeated acknowledgements
+  never moved mastery counters even as the delivery phase legitimately advanced; Chemistry:
+  knowledge-gap detour taught the mole concept with `mastery.verified: false` for the parent
+  lesson throughout, then returned to the lesson topic; English: misunderstanding → remediation
+  → acknowledgement (one turn served `provider: "memory"`, curated content, and still fabricated
+  no mastery) → a genuine on-topic follow-up question, proving the tutor was not stuck) — account
+  deleted afterwards, re-login confirmed blocked. One live-run assertion (this script's own G-1
+  check, copied from Phase 4's harness) read FAIL and was diagnosed as a test miscalibration, not
+  a product defect: the gap turn legitimately attached an MCQ ABOUT the gap concept itself
+  (teach-then-check), not about the parent lesson — recorded rather than silently adjusted.
+  Full suite 423 files / 9,113 passed / 9 skipped, `npx tsc --noEmit` clean, `npm run build`
+  clean. Track K/S5 untouched; Phase 1-4 invariants re-verified intact, not reopened.
 
 ## Run locally
 ```

@@ -71,8 +71,16 @@ export const MAX_EXCURSION_TURNS = 40
 // patterns are the difference between "teach me vectors" (a request) and
 // "the starting point" (an answer). Deterministic, no scoring, no model.
 
+// PHASE 5 (Case G, item 2): "I need to learn X first" named a topic exactly
+// like "I want to learn X" does — same modal request, different auxiliary —
+// but only the "want" form was in this set, so an explicit prerequisite
+// request phrased with "need" matched nothing here (or in
+// isExplicitTopicRequest, which is this same regex) and could not open an
+// excursion. Added as a synonym of the existing "want to learn" alternative,
+// not a new clause shape — same measured-extension discipline the
+// QUESTION_FORM_RE comment below documents for this file.
 const TOPIC_REQUEST_RE =
-  /\b(teach|show|explain|describe|demonstrate|illustrate|draw|visuali[sz]e|what\s+(?:is|are|was|were)|what'?s|tell\s+me\s+about|help\s+me\s+(?:with|understand)|move\s+on\s+to|switch\s+to|change\s+to|let'?s\s+(?:do|try|learn|study)|now\s+(?:do|teach|explain)|i\s+want\s+to\s+learn|can\s+you\s+(?:teach|show|explain))\b/i
+  /\b(teach|show|explain|describe|demonstrate|illustrate|draw|visuali[sz]e|what\s+(?:is|are|was|were)|what'?s|tell\s+me\s+about|help\s+me\s+(?:with|understand)|move\s+on\s+to|switch\s+to|change\s+to|let'?s\s+(?:do|try|learn|study)|now\s+(?:do|teach|explain)|i\s+(?:want|need)\s+to\s+learn|can\s+you\s+(?:teach|show|explain))\b/i
 
 /**
  * QUESTION FORMS — weaker than a request to be taught, and deliberately kept

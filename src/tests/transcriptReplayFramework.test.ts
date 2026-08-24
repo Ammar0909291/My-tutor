@@ -41,6 +41,7 @@ import { describe, it, expect } from 'vitest'
 import {
   initialConversationState, advanceConversationState, decideNextMoveDetailed,
   repliesWithQuestion, isPriorKnowledgeProbe, isLowSignalAcknowledgement,
+  detectFillerTurn,
   type ConversationState, type TeachingPhase,
 } from '@/lib/teaching/conversationState'
 import { detectFailureState, isDontKnowSignal, buildRecoveryBlock } from '@/lib/teaching/recoveryGuard'
@@ -205,6 +206,11 @@ export function replay(t: ReplayTranscript): ReplayOutcome {
       // masteryLadderReachable.test.ts exists to prevent, and a replay that
       // models a fixed bug is worse than no replay.
       deliveredTeaching: decision.move === 'teach' || decision.move === 'show',
+      // PHASE 5 (Case D): replayable for the same reason deliveredTeaching
+      // is — the transcript carries the tutor's own rendered text
+      // (`turn.tutor`), which is exactly what route.ts's real
+      // detectFillerTurn(cleanText) call reads. No approximation needed.
+      fillerTurnDetected: detectFillerTurn(turn.tutor),
     })
     phases.push(state.phase)
 

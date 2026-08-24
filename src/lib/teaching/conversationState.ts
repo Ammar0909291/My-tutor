@@ -205,6 +205,10 @@ export interface ConversationState {
   /** Counts turns where the server-decided move disagrees with what the
    *  LLM actually rendered (e.g., decided 'ask' but no question appeared). */
   parityViolations: number
+  /** PHASE 5 (Case D): consecutive turns the filler-repair mechanism has
+   *  fired on, back to back. Resets to 0 the instant a turn does NOT need
+   *  repairing. See `shouldApplyFillerRepair` — this is what it caps. */
+  fillerRepairStreak: number
 }
 
 export function initialConversationState(conceptId: string | null): ConversationState {
@@ -243,6 +247,7 @@ export function initialConversationState(conceptId: string | null): Conversation
     verifiedCorrectAtPractice: 0,
     signalContradictions: 0,
     parityViolations: 0,
+    fillerRepairStreak: 0,
   }
 }
 
@@ -383,6 +388,16 @@ export interface TurnEvidence {
    *  the machine re-issued the same phase directive on every acknowledgement.
    *  See advanceConversationState()'s acknowledgement branch. */
   acknowledgement?: boolean
+  /** PHASE 5 (Case D): true when this turn's raw text was filler-shaped
+   *  (`detectFillerTurn`), regardless of whether the repair mechanism
+   *  actually overwrote it. Drives `fillerRepairStreak` — this is
+   *  deliberately NOT "was the repair applied", because gating the streak on
+   *  the repair's own application would let the streak reset the instant the
+   *  cap suppresses one repair, re-arming it every other turn instead of
+   *  staying suppressed while the model keeps producing filler. Omitted or
+   *  false resets the streak, exactly like every other consecutive-counter
+   *  in this file. */
+  fillerTurnDetected?: boolean
 }
 
 /**
@@ -496,6 +511,14 @@ export function advanceConversationState(
   // signal (a misconception is "addressed", not "erased", per
   // studentIntelligence.ts's activity model).
   if (evidence.misconceptionDetected) next.misconceptionDetectedThisLesson = true
+
+  // PHASE 5 (Case D): folded unconditionally, before any branch, so every
+  // exit of this function sees the same streak regardless of which path the
+  // turn takes — same placement rule as turnsOnConcept/misconceptionDetected
+  // above. Counts CONSECUTIVE filler-shaped turns, not consecutive REPAIRS —
+  // see fillerTurnDetected's doc comment for why that distinction is what
+  // keeps the cap suppressed instead of re-arming every other turn.
+  next.fillerRepairStreak = evidence.fillerTurnDetected ? (prev.fillerRepairStreak ?? 0) + 1 : 0
 
   // Phase E counters — driven by what the assistant actually did.
   if (evidence.askedQuestion) {
@@ -1233,6 +1256,39 @@ export function detectFillerTurn(text: string): boolean {
   // more likely content-free, but we still require the phrase check.
   if (!FILLER_PHRASE_RE.test(text)) return false
   return true
+}
+
+/**
+ * PHASE 5 (Case D) — the filler-repair mechanism (route.ts's call to
+ * `detectFillerTurn`, immediately below) replaces a content-free turn with
+ * ONE fixed sentence: "Let me ask you something concrete…". That is correct
+ * the first time — a wasted turn deserves a concrete question — but the
+ * replacement is stateless: nothing before this fix recorded that it had
+ * already fired, so a model that kept producing filler kept receiving the
+ * byte-identical canned sentence, turn after turn, forever. That is exactly
+ * the failure Case D names: "the tutor must not repeatedly emit... without
+ * educational progress."
+ *
+ * This is not a smarter repair — inventing a second, third, fourth canned
+ * sentence would just be a fallback-repair ladder, the thing the phase
+ * explicitly forbids adding. Instead the EXISTING repair is bounded: it may
+ * fire on consecutive turns up to the cap, and beyond that it steps back and
+ * lets the model's own (possibly still weak) text stand rather than force a
+ * third identical robotic question — never fabricating progress, but also
+ * never obviously looping.
+ *
+ * `priorStreak` is `ConversationState.fillerRepairStreak` as read BEFORE this
+ * turn — i.e. how many CONSECUTIVE prior turns were filler-shaped (whether
+ * or not the repair actually fired on each). Once the model has produced
+ * filler for `FILLER_REPAIR_STREAK_CAP` turns running, this stays false for
+ * as long as the model KEEPS producing filler — it does not re-arm every
+ * other turn — and re-arms the moment a turn is genuinely not filler-shaped
+ * (which resets the streak to 0 via the fold in advanceConversationState).
+ */
+export const FILLER_REPAIR_STREAK_CAP = 2
+
+export function shouldApplyFillerRepair(priorStreak: number): boolean {
+  return (priorStreak ?? 0) < FILLER_REPAIR_STREAK_CAP
 }
 
 /** ONLY injected when masteryVerified(state) is already true (see

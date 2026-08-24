@@ -1729,6 +1729,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     // read pre-LLM (drives the TURN DIRECTIVE), folded post-AI with this
     // turn's evidence, persisted on the existing snapshot ride.
     let conversationStateHoisted: import('@/lib/teaching/conversationState').ConversationState | null = null
+    /**
+     * PHASE 5 (Case D) — was this turn's raw text filler-shaped
+     * (detectFillerTurn), regardless of whether the repair actually
+     * overwrote it? Feeds ConversationState.fillerRepairStreak so the
+     * mechanism cannot repeat the identical canned sentence forever (see
+     * shouldApplyFillerRepair).
+     */
+    let fillerDetectedHoisted = false
     // The chemistry CHECK-phase D2-ungradeable defect (2026-08-21 sweep,
     // 4/12 concepts): `withholdUngradedGateQuestion`'s scope was
     // `isMasteryGatePhase` (CHECK|PRACTICE) alone, a docblock left over from
@@ -4660,8 +4668,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         recoveryTurn: recoveryKeyHoisted !== null,
       })) {
         try {
-          const { detectFillerTurn } = await import('@/lib/teaching/conversationState')
-          if (detectFillerTurn(cleanText)) {
+          const { detectFillerTurn, shouldApplyFillerRepair } = await import('@/lib/teaching/conversationState')
+          // PHASE 5 (Case D): bound the repair — see shouldApplyFillerRepair's
+          // doc comment (conversationState.ts) for why this cannot loop forever.
+          const priorFillerStreak = conversationStateHoisted?.fillerRepairStreak ?? 0
+          const isFillerThisTurn = detectFillerTurn(cleanText)
+          fillerDetectedHoisted = isFillerThisTurn
+          if (isFillerThisTurn && shouldApplyFillerRepair(priorFillerStreak)) {
             const conceptHint = lessonCtx?.lessonTitle ? ` about ${lessonCtx.lessonTitle}` : ''
             cleanText = `Let me ask you something concrete${conceptHint}: what's one thing you notice or find surprising about what we just covered?`
           }
@@ -5463,6 +5476,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // Advances the delivery phases only (OBSERVE→DEMONSTRATE→GUIDE→
               // CHECK); the mastery gates still require a real answer.
               acknowledgement: lowSignalAckHoisted,
+              // PHASE 5 (Case D): folds into fillerRepairStreak.
+              fillerTurnDetected: fillerDetectedHoisted,
             })
 
           // Loop 2: advance narrative state with this turn's evidence
@@ -6729,6 +6744,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 degradedTurn: isDegradedProvider(provider),
                 deliveredTeaching: evidenceMoveHoisted === 'teach' || evidenceMoveHoisted === 'show',
                 acknowledgement: lowSignalAckHoisted,
+                fillerTurnDetected: fillerDetectedHoisted,
               }),
             })
           }
