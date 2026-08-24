@@ -226,6 +226,38 @@ passes in a clean full run. Recorded rather than quietly re-run.
 
 ---
 
+## 9b. LIVE VERIFICATION — the decisive evidence
+
+Re-ran `scripts/qa/phase6-visual-certification.ts` (the harness that originally
+reproduced the P0) against deployment **`dpl_DEVbxLA12fNxiuWKgdLam5FDbCvV`**
+(commit `55cee14e`, state READY), disposable account, deleted afterwards with
+`{"deleted":true,"reloginBlocked":true}`.
+
+Identical scenario, identical phrase (`"explain the main idea please"`), all
+three subjects:
+
+| lesson | BEFORE (`e644e677`) | AFTER (`55cee14e`) |
+|---|---|---|
+| **physics** `phys.mech.newtons-first-law` | figure *"Identifying Main Idea and Supporting Details"*; taught reading comprehension | *"Newton's First Law says that an object will keep doing what it's already doing unless something outside it pushes or pulls on it."* — **physics**, plus a genuine force diagram (gravity / normal force arrows) |
+| **chemistry** `chem.found.pure-substances` | *"**Main Idea and Supporting Details** — The main idea is the core point or central claim that a text or passage is trying to convey…"* — **English reading comprehension inside a chemistry lesson** | *"**Main idea of pure substances and mixtures** — Picture a clear glass of still water… a cup of coffee…"* — **chemistry** |
+| **english** `eng.grammar.nouns` | reading-comprehension figure, taught the reading skill | *"**Main idea of this lesson: "Nouns"** — A noun is a word that gives a name to something…"* — **nouns** |
+
+**The cross-subject substitution is gone in all three, and the foreign figure is
+gone entirely.** Note the phrase "main idea" still appears in the replies — it is
+ordinary English and the tutor uses it naturally *about the lesson in progress*,
+which is exactly the intended outcome: the phrase is understood as deixis rather
+than as a concept request.
+
+Secondary observations from the same run, both correct:
+
+- **Physics** received a genuinely concept-appropriate figure for Newton's First
+  Law, where before it received an English reading flowchart.
+- **Chemistry and English** received honest inline ASCII diagrams with
+  `figure = NO-FIGURE`, and neither claimed an attached figure — the
+  `visualContract` NO-FIGURE rules held (0 phantom claims).
+
+---
+
 ## 10. Remaining Phase-6 issues — untouched, as instructed
 
 - **P1** — English asset-contract shortfall (2 closed-choice probes per concept
