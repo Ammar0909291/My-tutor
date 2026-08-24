@@ -907,6 +907,16 @@ export interface NextMoveContext {
    *  conservative reading — no evidenced prior knowledge — which can only
    *  ever remove ASK, never add it. */
   legality?: LegalityContext
+  /**
+   * PHASE 7H: the learner explicitly asked to be given a question this turn
+   * (`turnIntent.wantsPractice`). TURN-LOCAL — it rides this context object,
+   * is never folded into ConversationState, and is never persisted, so no
+   * existing learner's stored state is reinterpreted and a rollback is clean.
+   *
+   * Read at exactly ONE place: the GUIDE branch below. Omitted/false is
+   * byte-identical to the previous behaviour.
+   */
+  practiceRequested?: boolean
 }
 
 export interface NextMoveDecision {
@@ -1036,7 +1046,23 @@ function decideNextMoveHeuristic(state: ConversationState, ctx: NextMoveContext)
   switch (state.phase) {
     case 'OBSERVE':     return 'ask'          // one observation question
     case 'DEMONSTRATE': return 'show'
-    case 'GUIDE':       return state.teachSegmentsSinceQuestion >= 2 ? 'ask' : 'teach'
+    // PHASE 7H: the alternation, OR an explicit request to be asked.
+    //
+    // The counter alone could not open this branch once the model began
+    // volunteering questions: `advanceConversationState` zeroes
+    // `teachSegmentsSinceQuestion` on ANY assistant question, including an
+    // unreviewed one asked on a `teach` turn, so the value was pinned at 0 and
+    // the authored-probe gate (`phaseAllowsProbe` requires `move === 'ask'`)
+    // could never open. Proven with the real modules: 6 consecutive GUIDE
+    // turns, `phaseAllowsProbe=false` on every one.
+    //
+    // This does NOT make every GUIDE turn ask — only a turn the learner
+    // explicitly asked to be questioned on. Everything that should outrank
+    // that already runs earlier or later: recovery short-circuits
+    // `decideNextMoveDetailed` above, question legality (QL-3) removes ASK
+    // above, and excursion / closing / first-lesson / unanswered-probe /
+    // arbitration are conjuncts of `gateEligible` downstream.
+    case 'GUIDE':       return (state.teachSegmentsSinceQuestion >= 2 || ctx.practiceRequested === true) ? 'ask' : 'teach'
     case 'CHECK':       return 'ask'
     case 'PRACTICE':    return 'ask'
     case 'TRANSFER':    return 'ask'

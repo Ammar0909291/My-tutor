@@ -40,7 +40,7 @@
 import { detectFailureState, type FailureStateKey } from './recoveryGuard'
 import { detectExplicitFinishRequest } from './sessionLifecycle'
 import {
-  detectLearnerRequest, requestedVisualForm,
+  detectLearnerRequest, requestedVisualForm, asksForPractice,
   type LearnerRequest, type RequestedVisualForm,
 } from './masteryGate'
 import { isGenuineQuestion } from '../understanding/readers/conversationReader'
@@ -105,6 +105,22 @@ export interface TurnIntent {
   learnerRequest: LearnerRequest | null
   /** masteryGate's specific requested visual FORM, when one was named. */
   visualForm: RequestedVisualForm | null
+  /**
+   * PHASE 7H: the learner explicitly asked to BE ASKED ("quiz me", "give me a
+   * practice problem").
+   *
+   * Deliberately NOT folded into `learnerRequest`. Every member of that type
+   * is a request for content INSTEAD of a question, which is why the
+   * LEARNER_REQUEST arbitration rung suppresses AUTHORED_PROBE; a practice
+   * request is the one kind whose correct fulfilment IS that probe, so
+   * reusing that field would deny the very thing being asked for. See
+   * `asksForPractice`'s header.
+   *
+   * A PREFERENCE, not an entitlement: read at exactly one place (the GUIDE
+   * branch of the move heuristic), which sits below recovery and question
+   * legality and upstream of every `gateEligible` conjunct.
+   */
+  wantsPractice: boolean
   /** Readings that disagree. Empty is the common case. */
   conflicts: TurnIntentConflict[]
   /**
@@ -142,6 +158,7 @@ export function readTurnIntent(
   const wantsToStop = detectExplicitFinishRequest(message)
   const learnerRequest = detectLearnerRequest(message)
   const visualForm = requestedVisualForm(message)
+  const wantsPractice = asksForPractice(message)
 
   const conflicts: TurnIntentConflict[] = []
   if (wantsToStop && isQuestion) {
@@ -170,6 +187,7 @@ export function readTurnIntent(
     wantsToStop,
     learnerRequest,
     visualForm,
+    wantsPractice,
     conflicts,
     ambiguous: conflicts.some((c) => CONTRADICTORY_CONFLICTS.has(c.code)),
   }

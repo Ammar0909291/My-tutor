@@ -567,6 +567,91 @@ export function detectLearnerRequest(message: string): LearnerRequest | null {
 }
 
 /**
+ * THE LEARNER ASKED TO BE ASKED. (Phase 7H.)
+ *
+ * ── WHY THIS IS NOT A `LearnerRequest` ──────────────────────────────────────
+ * Every member of `LearnerRequest` — diagram, real_life_example,
+ * explain_differently — is a request to be given CONTENT INSTEAD OF a
+ * question, which is exactly why the LEARNER_REQUEST arbitration rung
+ * `suppresses: ['NEXT_MOVE', 'AUTHORED_PROBE', 'SESSION_CLOSE']` and its own
+ * comment says "converting an explicit request into a graded quiz is defect
+ * D3 / Phase 2 C6". That suppression is CORRECT for that whole vocabulary.
+ *
+ * A request for practice is the one kind whose correct fulfilment IS the
+ * authored probe. Routing it through `detectLearnerRequest` would set
+ * `learnerRequestActive` (route.ts: `turnIntent.learnerRequest !== null`),
+ * hand the turn to LEARNER_REQUEST, and DENY the probe — turning "not
+ * eligible" into "explicitly forbidden". So it is deliberately a separate
+ * reading, and `detectLearnerRequest` is left untouched.
+ *
+ * ── THE DEFECT THIS EXISTS FOR ──────────────────────────────────────────────
+ * Measured live (Phase 7C/7D) on `phys.opt.total-internal-reflection` at
+ * GUIDE, with three reviewed gradeable probes ACTIVE and every safety gate
+ * clear. The learner typed "ok yes lets try practice problem" and got a
+ * MODEL-invented question instead — `[turn-decision] probeId: null,
+ * divergences: ["QUESTION_SHIPPED_WITHOUT_PROBE"]`. One such question
+ * carried a WRONG answer key (water->air: the only option above the 48.75°
+ * critical angle is 55°; the key said 48°), so a learner answering correctly
+ * would have been marked wrong.
+ *
+ * Cause: `decideNextMoveHeuristic`'s GUIDE branch alternates on
+ * `teachSegmentsSinceQuestion` alone and takes no learner input, so an
+ * explicit request for practice could not reach the move that opens the gate.
+ *
+ * ── SCOPE, DELIBERATELY NARROW ──────────────────────────────────────────────
+ * This reports a PREFERENCE, never an entitlement. It is consumed at exactly
+ * one place — the GUIDE branch of the move heuristic — which sits BELOW
+ * recovery (`decideNextMoveDetailed` short-circuits on `recoveryTurn` first)
+ * and BELOW question legality (QL-3's `askSuppressedTurns`, subtractive), and
+ * upstream of every `gateEligible` conjunct (excursion, closing, first
+ * lesson, unanswered probe, arbitration). So distress, "stop asking", a
+ * close, an excursion or a spent probe pool all still win, unchanged.
+ *
+ * Never widened to bare "practice"/"test"/"question": those are ordinary
+ * subject vocabulary ("best practice", "test tube", "research question"). The
+ * request FORM is the discriminator, not the noun.
+ */
+const PRACTICE_REQUEST_RE: readonly RegExp[] = [
+  // "quiz me", "test me", "can you test me?"
+  /\b(quiz|test)\s+me\b/i,
+  // "ask me a question", "ask me another question", "ask me some questions"
+  /\bask\s+me\s+(a|another|some|more)?\s*questions?\b/i,
+  // "give me a practice problem", "let's try a practice question"
+  /\b(practice|practise)\s+(problem|question|exercise)s?\b/i,
+  // "let's practice", "can we practice"
+  /\b(let'?s|lets|can\s+we|shall\s+we)\s+(practice|practise)\b/i,
+  // "give me something to solve", "give me one to solve"
+  /\b(something|one|anything)\s+to\s+(solve|try|work\s+on)\b/i,
+  // "give me a problem/question" — the bare give, without the word practice
+  /\bgive\s+me\s+(a|another|some|more)?\s*(problem|question)s?\b/i,
+]
+
+/**
+ * A negation of the ASK ITSELF ("don't ask me", "stop quizzing me").
+ *
+ * Bounded to two words after the negator so it cannot reach across a clause:
+ * "I don't understand, can you give me a practice problem?" is a GENUINE
+ * request whose distress is handled by recovery precedence, not by silencing
+ * the request here — `understand` is not one of the asked-for verbs, so this
+ * correctly does not fire on it.
+ *
+ * Belt and braces: `recoveryGuard`'s `too_many_questions` already makes the
+ * turn a recovery turn, which short-circuits the move engine before the
+ * heuristic ever reads this signal. This keeps the detector honest when read
+ * on its own.
+ */
+const PRACTICE_REQUEST_NEGATED_RE =
+  /\b(don'?t|do\s+not|stop|quit|no\s+more|rather\s+than|instead\s+of)\s+(\w+\s+){0,2}(ask|quiz|test|question)/i
+
+/** Did the learner explicitly ask to be given a question to answer? */
+export function asksForPractice(message: string): boolean {
+  const text = (message ?? '').trim()
+  if (!text) return false
+  if (PRACTICE_REQUEST_NEGATED_RE.test(text)) return false
+  return PRACTICE_REQUEST_RE.some((re) => re.test(text))
+}
+
+/**
  * P2 fix (remaining risk closed): the original version of this directive
  * told the model to "check your own recent turns" for an established
  * example before choosing a new one — purely advisory, AND unreliable by

@@ -2684,6 +2684,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           const moveDecision = decideNextMoveDetailed(conversationStateHoisted, {
             recoveryTurn: recoveryKeyHoisted !== null,
             workedExampleFirst,
+            // PHASE 7H: an explicit "quiz me" reaches the GUIDE branch of the
+            // move heuristic, and nothing else. Read from turnIntent — the one
+            // authoritative read of the message (Phase 1) — rather than
+            // re-detecting here, so this can never disagree with the reading
+            // every other consumer sees.
+            practiceRequested: turnIntent.wantsPractice,
             legality: {
               hasEvidencedPriorKnowledge,
               capabilityState: capabilityStateHoisted ?? undefined,
