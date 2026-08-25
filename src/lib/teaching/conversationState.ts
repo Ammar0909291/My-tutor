@@ -331,6 +331,57 @@ export function readConversationState(
   return initialConversationState(currentConceptId)
 }
 
+/**
+ * PHASE 7L — A NEW LESSON ATTEMPT STARTS ON A FRESH LADDER.
+ *
+ * THE P0 THIS CLOSES, measured in production 2026-08-25 on
+ * phys.opt.total-internal-reflection. A COMPLETED lesson was reopened
+ * ("[lesson-init] attempt opened for lesson:108: re-open for mode=restart"),
+ * the learner typed "i dont get it", and 1.6 seconds after that turn's
+ * BRAIN_EVENT the attempt was COMPLETED again (completedAt 04:28:34.795Z).
+ * Every turn after it was swallowed by D0a-LESSON-ALREADY-COMPLETE — served
+ * deterministically from the completion payload, with no teaching, no model
+ * call and no gate — while mastery.verified was false and check/practice were
+ * 0/0. Asking to practise returned the close script.
+ *
+ * THE CHAIN, every link verified in source:
+ *   evaluateConceptBudget reads turnsOnConcept / remediationCount /
+ *   consecutiveFailures from THIS ladder. On a reopen those still held the
+ *   PREVIOUS attempt's values, and turnsOnConcept was already past
+ *   CONCEPT_TURN_BUDGET (12), so:
+ *
+ *     evaluateConceptBudget -> status 'exhausted', reason 'turns'
+ *     isConceptClosed       -> true on the FIRST turn of the new attempt
+ *     recordConceptOutcome  -> not mastered, so the concept is added to
+ *                              conceptsNeedingReview (there is no third state)
+ *     closedConceptIds      -> mastered + needsReview, so the concept counts
+ *                              as CLOSED
+ *     shouldFinalizeLesson  -> true, because the lesson requires exactly this
+ *                              one concept
+ *     finalizeLessonAttempt -> COMPLETED, on turn one, having taught nothing
+ *
+ * WHY THE LADDER SURVIVED WHEN THE EPISODE DID NOT. readConversationState
+ * discards the ladder only when the STORED CONCEPT DIFFERS from this turn's.
+ * Restarting the same lesson does not change the concept, so no reset fired.
+ * Phase 7K cleared sessionEpisode and sessionFailureCount at lesson open; the
+ * ladder is a third piece of per-attempt state and was not covered.
+ *
+ * WHY THIS IS NOT A WEAKENING OF COMPLETION. Nothing here reads, writes or
+ * reinterprets completion. D0a is untouched and still authoritative for a
+ * genuinely completed CURRENT attempt: this clears the ladder only at the
+ * moment lesson-init has ALREADY decided to open a new attempt — the sanctioned
+ * "teach this to me again" act, which lesson-init itself scopes to
+ * restart/review. A learner who merely chats, or resumes, opens no attempt,
+ * clears nothing, and still receives the close.
+ */
+export function clearLadderForNewAttempt(): Record<string, unknown> {
+  // A DELTA for writeSnapshotDelta, which merges — the key is retired with an
+  // explicit null. readConversationState already maps a non-ladder value to
+  // initialConversationState(conceptId), so no reader changes: phase OBSERVE,
+  // turnsOnConcept 0, consecutiveFailures 0, remediationCount 0.
+  return { conversationState: null }
+}
+
 // ── Post-AI evidence fold ─────────────────────────────────────────────────────
 
 export interface TurnEvidence {

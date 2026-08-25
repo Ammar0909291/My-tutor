@@ -280,6 +280,9 @@ export async function POST(req: Request) {
     // A completed attempt is therefore still never reopened or replaced merely
     // because the learner chats again or resumes, which is the duplicate-1s-row
     // defect this must not reintroduce.
+    // PHASE 7L: did this request actually OPEN a new attempt? Only then may
+    // the concept ladder be cleared — see clearLadderForNewAttempt.
+    let openedNewAttempt = false
     if (lessonOrder) {
       try {
         const { lessonKeyFor } = await import('@/lib/teaching/lessonAttempt')
@@ -301,6 +304,7 @@ export async function POST(req: Request) {
               userId, subjectSlug: learnSession.subject.slug,
               lessonKey: key, lessonTitle: lessonTitle ?? null,
             })
+            openedNewAttempt = true
             console.info(`[lesson-init] attempt opened for ${key}: ${reason}`)
           }
         }
@@ -510,11 +514,20 @@ export async function POST(req: Request) {
     try {
       const { clearEpisodeForLessonOpen } = await import('@/lib/teaching/sessionLifecycle')
       const { clearVisualSessionForNewClientView } = await import('@/lib/teaching/visual/session')
+      const { clearLadderForNewAttempt } = await import('@/lib/teaching/conversationState')
       const { writeSnapshotDelta, readSnapshotVersion } = await import('@/lib/db/snapshotWrite')
+      // PHASE 7L: the ladder is cleared ONLY when a new attempt was actually
+      // opened. A `resume` of an in-progress lesson opens nothing and must keep
+      // its ladder — clearing there would erase real mid-lesson progress
+      // (demonstrated, correctAtCheck, turnsOnConcept) that the learner earned.
       await writeSnapshotDelta(prisma, {
         sessionId,
         expectedVersion: readSnapshotVersion(learnSession.contextSnapshot),
-        delta: { ...clearEpisodeForLessonOpen(), ...clearVisualSessionForNewClientView() },
+        delta: {
+          ...clearEpisodeForLessonOpen(),
+          ...clearVisualSessionForNewClientView(),
+          ...(openedNewAttempt ? clearLadderForNewAttempt() : {}),
+        },
         // Pure state replacement: re-applying the same two nulls on top of a
         // newer base is already correct, so nothing needs re-deriving.
         rederive: () => ({}),
