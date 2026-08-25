@@ -68,22 +68,47 @@ function open(cookie: string, sessionId: string, lesson: LessonRef, mode: string
   }, cookie)
 }
 
-/** Words that belong to lesson A and to nothing in lesson B. Derived from the
- *  pending question's own text rather than hardcoded, so the check follows
- *  whatever lesson A actually taught. */
-function foreignVocabulary(question: string, options: string[]): string[] {
+/**
+ * Words that belong to lesson A and to nothing in lesson B. Derived from the
+ * pending question's own text rather than hardcoded, so the check follows
+ * whatever lesson A actually taught.
+ *
+ * THE FALSE POSITIVE THIS EXCLUSION FIXES, found on the first real run. The
+ * first draft built the list from the question AND its options — but the
+ * learner TYPES one of those options as their message, so the tutor echoing it
+ * back trips the check. Measured: lesson A asked for the RMS of a 120 V peak,
+ * the learner typed "84.85 V" into a kinematics lesson, and the tutor replied
+ * "What does 84.85 V refer to in the situation you're thinking about?" — a
+ * reply that demonstrates IGNORANCE of lesson A, flagged as a leak because it
+ * quoted the learner.
+ *
+ * A leak is the tutor knowing something it could ONLY know from lesson A's
+ * context. Anything the learner just said is not evidence of that, so every
+ * word of `learnerSaid` is removed from the watch list. What remains is the
+ * real signal: the question's own vocabulary (sine, wave, peak, voltage, rms)
+ * which nothing in this turn supplies except lesson A's transcript.
+ *
+ * This is the fifth harness in this repository to nearly deliver a wrong
+ * verdict about working code, which is why the script prints the captured turn
+ * beside every result.
+ */
+function foreignVocabulary(question: string, learnerSaid: string): string[] {
   const STOP = new Set([
     'what', 'which', 'the', 'of', 'a', 'an', 'is', 'are', 'to', 'in', 'its', 'it',
     'if', 'and', 'or', 'that', 'this', 'you', 'your', 'for', 'with', 'by', 'on',
     'happens', 'when', 'does', 'do', 'how', 'why', 'true', 'following', 'about',
     'value', 'values', 'one', 'two', 'its', 'be', 'as', 'at', 'from', 'has',
   ])
+  const tokens = (s: string) => s
+    .toLowerCase()
+    .replace(/[^a-z0-9\s.-]/g, ' ')
+    .split(/\s+/)
+    .filter(Boolean)
+  // Everything the learner just typed is removed: an echo of their own words
+  // is not evidence the tutor read lesson A. See the note above.
+  const said = new Set(tokens(learnerSaid))
   return [...new Set(
-    `${question} ${options.join(' ')}`
-      .toLowerCase()
-      .replace(/[^a-z0-9\s.-]/g, ' ')
-      .split(/\s+/)
-      .filter((w) => w.length >= 4 && !STOP.has(w)),
+    tokens(question).filter((w) => w.length >= 4 && !STOP.has(w) && !said.has(w)),
   )]
 }
 
@@ -115,7 +140,7 @@ async function main() {
   }
   if (!pending) { line('\n!! no MCQ in lesson A — case not exercised this run'); return }
   const answer = pending.options[pending.correctIndex]
-  const foreign = foreignVocabulary(pending.question, pending.options)
+  const foreign = foreignVocabulary(pending.question, answer)
   line(`\nPENDING IN A: ${pending.question}`)
   line(`ANSWER TO BE TYPED IN B: "${answer}"`)
   line(`LESSON-A VOCABULARY TO WATCH FOR: ${foreign.slice(0, 14).join(', ')}`)
