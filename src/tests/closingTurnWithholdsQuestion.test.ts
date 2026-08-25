@@ -44,7 +44,7 @@ describe('a CLOSING turn withholds every question', () => {
 
     // Source 1 — the server-attached authored gate probe. Must be part of
     // gateEligible, so no probe is selected AND none is spent.
-    const gate = src.slice(src.indexOf('const gateEligible ='), src.indexOf('if (gateEligible && memoryState)'))
+    const gate = src.slice(src.indexOf('const gateTerms = {'), src.indexOf('if (gateEligible && memoryState)'))
     expect(gate).toContain('closingTurnWithholdsQuestion(sessionEpisodeHoisted?.phase)')
 
     // Source 2 — the model's own MCQ tag, emitted against the close block.

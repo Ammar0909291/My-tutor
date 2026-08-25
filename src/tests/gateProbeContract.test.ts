@@ -263,7 +263,10 @@ describe('P1 — authoring labels never reach a learner', () => {
 describe('route wiring — the two runtime rules', () => {
   it('P0-a: the gate does NOT run while an unanswered probe is on screen', () => {
     expect(ROUTE).toContain('const unansweredProbeOnScreen = pendingMcqHoisted !== null && mcqGradeHoisted === null')
-    expect(ROUTE).toContain('!unansweredProbeOnScreen &&')
+    // Phase 7Q named the conjuncts instead of spelling out an `a && b && …`
+    // chain; the TERM is unchanged and is still ANDed into gateEligible.
+    expect(ROUTE).toContain('noUnansweredProbeOnScreen: !unansweredProbeOnScreen,')
+    expect(ROUTE).toContain('const gateEligible = Object.values(gateTerms).every(Boolean)')
   })
 
   it('P1: a bare readiness ack at a gate does not serve a stored explanation', () => {

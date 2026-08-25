@@ -327,7 +327,7 @@ describe('5. every competing site asks the authority', () => {
 
   it('the authored-probe gate asks for AUTHORED_PROBE', () => {
     const s = src()
-    const gate = s.slice(s.indexOf('const gateEligible ='), s.indexOf('if (gateEligible && memoryState)'))
+    const gate = s.slice(s.indexOf('const gateTerms = {'), s.indexOf('if (gateEligible && memoryState)'))
     expect(gate).toContain("allows('AUTHORED_PROBE')")
     // the local terms that are genuinely this gate's own business stay put
     expect(gate).toContain('!unansweredProbeOnScreen')

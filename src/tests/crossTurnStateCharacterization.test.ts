@@ -362,7 +362,7 @@ describe('C — dangerous transitions (classification, not correction)', () => {
     // And the gate consults the verdict.
     const route = (await import('node:fs')).readFileSync(
       (await import('node:path')).join(process.cwd(), 'src/app/api/learn/chat/route.ts'), 'utf8')
-    const gate = route.slice(route.indexOf('const gateEligible ='),
+    const gate = route.slice(route.indexOf('const gateTerms = {'),
       route.indexOf('if (gateEligible && memoryState)'))
     expect(gate).toContain("allows('AUTHORED_PROBE')")
     expect(gate).toContain('!excursionActiveHoisted')

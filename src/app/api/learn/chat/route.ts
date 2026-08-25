@@ -3677,17 +3677,40 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // arbitration verdict is in scope), and having one function answer
         // "is this a closing turn?" for both sources is what stops those two
         // sources drifting apart again. Belt and braces, on purpose.
-        const gateEligible =
-          phaseAllowsProbe &&
-          isProbeAttachablePhase(phaseBeforeTurn) &&
-          memoryState !== null &&
-          !unansweredProbeOnScreen &&
-          !firstLessonActiveHoisted &&
-          !excursionActiveHoisted &&
-          (turnArbitrationHoisted ?? arbitrationUnavailable()).allows('AUTHORED_PROBE') &&
+        // PHASE 7Q — WHY THE GATE DID NOT OPEN.
+        //
+        // `[gate-assessment]` is emitted INSIDE `if (gateEligible)`, so a gate
+        // that never opened was silent: the only observable difference between
+        // "no authored probe exists" and "the phase was wrong" and "arbitration
+        // gave the turn to something else" was the absence of a log line. Every
+        // live investigation from 7K onward had to re-derive the closed case by
+        // reading the source and guessing which conjunct fell over.
+        //
+        // Each conjunct is now named once, evaluated once, and reported on
+        // EVERY turn. `gateEligible` is the AND of exactly these eight — it is
+        // not re-spelled below, so the log and the decision cannot drift.
+        const gateTerms = {
+          phaseAllowsProbe,
+          probeAttachablePhase: isProbeAttachablePhase(phaseBeforeTurn),
+          hasMemoryState: memoryState !== null,
+          noUnansweredProbeOnScreen: !unansweredProbeOnScreen,
+          notFirstLesson: !firstLessonActiveHoisted,
+          notExcursion: !excursionActiveHoisted,
           // The session is ending: no question is attached, and no authored
           // probe is spent. See closingTurnWithholdsQuestion.
-          !closingTurnWithholdsQuestion(sessionEpisodeHoisted?.phase)
+          arbitrationAllowsProbe: (turnArbitrationHoisted ?? arbitrationUnavailable()).allows('AUTHORED_PROBE'),
+          notClosingTurn: !closingTurnWithholdsQuestion(sessionEpisodeHoisted?.phase),
+        }
+        const gateEligible = Object.values(gateTerms).every(Boolean)
+        console.log('[gate-eligibility] ' + JSON.stringify({
+          phase: phaseBeforeTurn,
+          move: evidenceMoveHoisted,
+          eligible: gateEligible,
+          // The terms that were FALSE, in declaration order. Empty on an
+          // eligible turn. This is the field to read first.
+          blockedBy: Object.entries(gateTerms).filter(([, v]) => !v).map(([k]) => k),
+          ...gateTerms,
+        }))
         if (gateEligible && memoryState) {
           const { findBestProbe } = await import('@/lib/teaching/assets')
           const { hasAskedMcq } = await import('@/lib/teaching/teachingHistory')
