@@ -5637,6 +5637,45 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             phaseAfter: conversationStateAfterTurnHoisted?.phase ?? null,
             check: conversationStateAfterTurnHoisted?.correctAtCheck ?? null,
             practice: conversationStateAfterTurnHoisted?.correctAtPractice ?? null,
+            // ── PHASE 7N-2: WHY `move` WAS WHAT IT WAS ──────────────────────
+            //
+            // Phase 7M-B proved, in production, that a learner can ask to be
+            // quizzed five times at GUIDE and receive five UNREVIEWED model
+            // questions while three authored gradeable probes sit unused:
+            //
+            //   [gate-assessment]  no lines at all — the gate never ran
+            //   [turn-decision]    probeId: null,
+            //                      divergences: [QUESTION_SHIPPED_WITHOUT_PROBE]
+            //   [ladder]           move: 'teach' on every turn
+            //
+            // The cause is a precedence the existing logs cannot show. The
+            // anti-interrogation budget (conversationState.ts:1089) returns
+            // BEFORE the phase switch at :1097, so Phase 7H's explicit-request
+            // override in the GUIDE branch (:1116) is unreachable once the
+            // counter reaches 2 — and the counter is incremented by
+            // `askedQuestion`, which counts the model's OWN volunteered
+            // questions. Each unreviewed question therefore holds the reviewed
+            // one shut a little harder.
+            //
+            // These five fields are read-only reads of values the turn ALREADY
+            // computed. Nothing branches on them. They exist so the decision
+            // between the two candidate 7N-1 fixes is made on production
+            // frequency rather than on my inference — this investigation has
+            // guessed wrong repeatedly and measured right repeatedly.
+            //
+            // `questionsAskedSinceTeach` is read from the PRE-turn state
+            // because that is the value the budget actually saw.
+            questionsAskedSinceTeach: conversationStateHoisted?.questionsAskedSinceTeach ?? null,
+            teachSegmentsSinceQuestion: conversationStateHoisted?.teachSegmentsSinceQuestion ?? null,
+            wantsPractice: turnIntent.wantsPractice,
+            phaseAllowsProbe: phaseAllowsProbeHoisted,
+            // The one line that names the loop when it happens: the learner
+            // asked, GUIDE would have allowed it, and the budget said no.
+            budgetDeniedRequestedAsk:
+              turnIntent.wantsPractice
+              && conversationStateHoisted?.phase === 'GUIDE'
+              && (conversationStateHoisted?.questionsAskedSinceTeach ?? 0) >= 2
+              && evidenceMoveHoisted !== 'ask',
           })
         } catch (err) {
           // Fail-closed for completion: on any gate failure, strip the tag
