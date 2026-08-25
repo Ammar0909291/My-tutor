@@ -630,6 +630,16 @@ const PRACTICE_REQUEST_RE: readonly RegExp[] = [
   // hortative opener this phrasing does not have. Found because a 7M test
   // asserted the production phrase was covered and it was not.
   /\b(i\s+want\s+to|i'?d\s+like\s+to|i\s+wanna|i\s+need\s+to)\s+(practice|practise)\b/i,
+  // PHASE 7P: the bare "next item" form. "one more please" is a REAL production
+  // message (2026-08-25) that matched none of the patterns above and was then
+  // fuzzy-matched by gradeMcqAnswer to option A of the pending MCQ, recorded as
+  // a WRONG ANSWER, and written to TopicProgress as evidence.
+  //
+  // ANCHORED AT THE START on purpose. An unanchored /one more/ would swallow
+  // "I need one more minute" and "just one more thing about waves", which are
+  // not requests for a question. A learner asking for the next item puts it
+  // first.
+  /^\s*(one|another)\s+more\b/i,
 ]
 
 /**

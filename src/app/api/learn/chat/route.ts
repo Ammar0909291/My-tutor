@@ -2015,7 +2015,36 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         if (pendingMcqHoisted) {
           const { gradeMcqAnswer } = await import('@/lib/teaching/mcq')
           const { isBareAcknowledgement } = await import('@/lib/teaching/masteryGate')
-          if (!isBareAcknowledgement(message)) {
+          // PHASE 7P — A REQUEST FOR A QUESTION IS NOT AN ANSWER TO THE LAST ONE.
+          //
+          // MEASURED IN PRODUCTION (2026-08-25, phys.opt.total-internal-
+          // reflection). With an MCQ pending, the learner typed "one more
+          // please" and the runtime recorded:
+          //
+          //   [mcq-grade] { asked:'Which of the following is true when light
+          //                 travels from a den…', chosen: 0, correct: false }
+          //   [topic-progress-evidence] { score: 25, outcome: 'applied' }
+          //   [ladder] correctness:false  GUIDE -> DEMONSTRATE
+          //
+          // A request for another question was banked as a FAILED ATTEMPT
+          // against the concept: it dropped the phase, spent the failure
+          // budget, and wrote permanent evidence the learner never produced.
+          //
+          // `isBareAcknowledgement` was the only suppression here, and a
+          // practice request is not an acknowledgement, so it fell straight
+          // through to gradeMcqAnswer's fuzzy match. Reuses the SAME
+          // suppression point and the SAME per-turn intent the move engine and
+          // the completion escape hatch already read (Phases 7H / 7M-A) — no
+          // new detector, no parallel grading path.
+          //
+          // NOTE ON SCOPE, measured rather than assumed: of the six practice
+          // phrasings audited, only "one more please" was actually mis-graded;
+          // the others already failed to match any option. This suppression is
+          // therefore belt-and-braces for five of them and the actual fix for
+          // one — and it is the correct place regardless, because whether a
+          // request happens to resemble an option is not a property anything
+          // should depend on.
+          if (!isBareAcknowledgement(message) && !turnIntent.wantsPractice) {
             const g = gradeMcqAnswer(message, pendingMcqHoisted)
             if (g.correct !== null) mcqGradeHoisted = g
           }
