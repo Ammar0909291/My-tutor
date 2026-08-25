@@ -2103,7 +2103,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           try {
             const { readConversationState } = await import('@/lib/teaching/conversationState')
             const prior = readConversationState(snapshot?.conversationState, excursionLessonConceptId)
-            return (prior.questionsAskedSinceTeach ?? 0) > 0
+            // 7N-1(ii): "did the assistant ask something and give nothing
+            // since" — true for a MODEL-volunteered question too, which is what
+            // this needs. `questionsAskedSinceTeach` now counts only
+            // engine-sanctioned asks, so it is no longer the right signal here.
+            // This is questionLegality.ts's existing idiom, not a new one.
+            return (prior.teachSegmentsSinceQuestion ?? 0) === 0
+              && (prior.taughtThisSession === true || (prior.questionsAskedSinceTeach ?? 0) > 0)
           } catch { return false }
         })()
         // ── OFF-LESSON CONCEPT EXCURSION ──────────────────────────────────
@@ -2900,8 +2906,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 learnerRequest: learnerRequestHoisted,
                 remediationTier,
                 activeSession: activeVisualSession,
+                // 7N-1(ii): any question, ours or the model's — the visual
+                // layer cares what the learner is responding to.
                 lastAssistantAskedQuestion:
-                  (conversationStateHoisted?.questionsAskedSinceTeach ?? 0) > 0,
+                  (conversationStateHoisted?.teachSegmentsSinceQuestion ?? 0) === 0
+                  && conversationStateHoisted?.taughtThisSession === true,
               }, {
                 outcomeSink: prismaGenerationOutcomeSink,
                 findApprovedFigure: findActiveVisualFigure,
@@ -5505,6 +5514,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             ? conversationStateHoisted
             : advanceConversationState(conversationStateHoisted, {
               askedQuestion: askedQuestionThisTurn,
+              // PHASE 7N-1(ii): only the engine's OWN asks spend the
+              // anti-interrogation budget. `evidenceMoveHoisted` is the move
+              // the rest of the turn was built from — this reads it, never
+              // sets it. When the model volunteers a question on a 'teach'
+              // turn, the budget holds instead of being spent on output the
+              // engine did not choose. See advanceConversationState's fold.
+              questionSanctioned: evidenceMoveHoisted === 'ask',
               signalCorrect: teachingSignal?.correctness ?? null,
               recoveryFired: recoveryKeyHoisted !== null,
               learnerRequest: learnerRequestHoisted,
@@ -7118,8 +7134,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // the fallback alone. It feeds RC-D's dropped-observation
               // counter (needsSignalRepair), so the freeze-breaker was reading
               // a partly-blind input.
+              // 7N-1(ii): an answer is expected after ANY question, including
+              // one the model volunteered — RC-D's dropped-observation counter
+              // would go blind otherwise.
               answerWasExpected: evidenceMoveHoisted === 'ask'
-                || (conversationStateHoisted?.questionsAskedSinceTeach ?? 0) > 0,
+                || ((conversationStateHoisted?.teachSegmentsSinceQuestion ?? 0) === 0
+                    && conversationStateHoisted?.taughtThisSession === true),
               learnerReplySubstantive: message.trim().length > 0
                 && !isBareAckForMetrics(message)
                 && recoveryKeyHoisted === null,

@@ -211,6 +211,14 @@ export function replay(t: ReplayTranscript): ReplayOutcome {
       // (`turn.tutor`), which is exactly what route.ts's real
       // detectFillerTurn(cleanText) call reads. No approximation needed.
       fillerTurnDetected: detectFillerTurn(turn.tutor),
+      // PHASE 7N-1(ii): replayable for the same reason parityViolation and
+      // deliveredTeaching are — the decided move IS captured, and this is the
+      // same expression route.ts uses (`evidenceMoveHoisted === 'ask'`). No
+      // approximation, so this belongs in the harness rather than in
+      // replayDrift's CANNOT_REPLAY list. Without it the replay would keep
+      // spending the anti-interrogation budget on questions the engine never
+      // selected, i.e. it would model the exact defect 7N-1 removes.
+      questionSanctioned: decision.move === 'ask',
     })
     phases.push(state.phase)
 
@@ -218,7 +226,15 @@ export function replay(t: ReplayTranscript): ReplayOutcome {
 
     // 6. Telemetry fold, with the same facts the route derives.
     metrics = foldProgressionMetrics(metrics, {
-      answerWasExpected: before.questionsAskedSinceTeach > 0,
+      // PHASE 7N-1(ii): mirrors route.ts exactly. `questionsAskedSinceTeach`
+      // now counts only ENGINE-sanctioned asks, so it is no longer the right
+      // signal for "was an answer expected" — a model-volunteered question
+      // expects an answer too, and reading the narrowed counter here would
+      // make RC-D's dropped-observation detector go blind. Same expression the
+      // route uses: the decided move, or "asked something and gave nothing
+      // since".
+      answerWasExpected: decision.move === 'ask'
+        || ((before.teachSegmentsSinceQuestion ?? 0) === 0 && before.taughtThisSession === true),
       learnerReplySubstantive: turn.learner.trim().length > 0 && !bareAck && recoveryKey === null,
       signalPresent: turn.signalCorrect !== undefined,
       phaseBefore: before.phase,

@@ -400,6 +400,20 @@ export interface TurnEvidence {
   /** Hard Rule 1: true when the student fired a dont_know or dont_understand
    *  recovery this turn — drives consecutiveDontKnows counter. */
   dontKnowSignal?: boolean
+  /**
+   * PHASE 7N-1(ii): did the TEACHING ENGINE deliberately select this question?
+   *
+   * `askedQuestion` answers "was a question asked", which is what the learner
+   * experienced and what every other consumer needs. This answers the
+   * different question "did WE choose to ask it" — true when the engine's own
+   * move was 'ask', false when the model volunteered a question on a turn the
+   * engine had decided to teach.
+   *
+   * OMITTING IT IS BYTE-IDENTICAL TO THE PREVIOUS BEHAVIOUR. Only an explicit
+   * `false` holds the anti-interrogation counter, so every existing caller and
+   * fixture is unaffected.
+   */
+  questionSanctioned?: boolean
   /** QL-3: the learner explicitly asked to be taught rather than questioned
    *  ("stop asking", "just explain it", "explain rather than keep asking").
    *  Sourced from recoveryGuard's `too_many_questions` failure state, which
@@ -572,8 +586,40 @@ export function advanceConversationState(
   next.fillerRepairStreak = evidence.fillerTurnDetected ? (prev.fillerRepairStreak ?? 0) + 1 : 0
 
   // Phase E counters — driven by what the assistant actually did.
+  //
+  // ── PHASE 7N-1(ii): THE ANTI-INTERROGATION BUDGET COUNTS OUR OWN ASKS ────
+  //
+  // MEASURED IN PRODUCTION (7N-2 telemetry build, phys.wave.interference):
+  //   [ladder] move:'teach' askedQuestion:true mcqAsked:true
+  //            questionsAskedSinceTeach: 2 -> 3 -> 4  (never decrements)
+  //            wantsPractice:true phaseAllowsProbe:false
+  //            budgetDeniedRequestedAsk:true
+  //   [turn-decision] probeId:null divergences:[QUESTION_SHIPPED_WITHOUT_PROBE]
+  //
+  // The engine decided 'teach'; the model asked anyway; that spent the budget.
+  // One turn logged `[empty-with-mcq] model wrote no prose but a valid MCQ` —
+  // no teaching at all, and it still counted. The rule was therefore not
+  // preventing interrogation (the learner was asked five times regardless); it
+  // was only ensuring the questions were UNREVIEWED rather than authored, while
+  // three authored gradeable probes for that concept sat unused.
+  //
+  // `questionsAskedSinceTeach` feeds ONE decision — the hard question budget
+  // below — plus Track K's shadow policy rules. Both reason about the SYSTEM's
+  // questioning, so counting output the system never chose is the defect.
+  //
+  // `teachSegmentsSinceQuestion` is deliberately UNCHANGED and still resets on
+  // ANY question: it answers "did the assistant ask something and give nothing
+  // since", which is a fact about the learner's experience regardless of who
+  // authored the question. questionLegality and masteryGate read it for exactly
+  // that, and the three route consumers that need "any question was asked" were
+  // migrated onto this same idiom rather than onto the narrowed counter.
   if (evidence.askedQuestion) {
-    next.questionsAskedSinceTeach = prev.questionsAskedSinceTeach + 1
+    // An unsanctioned question HOLDS the counter rather than resetting it: the
+    // engine's own prior asks have not been answered away, so forgetting them
+    // would hand out a fresh budget every time the model spoke out of turn.
+    next.questionsAskedSinceTeach = evidence.questionSanctioned === false
+      ? prev.questionsAskedSinceTeach
+      : prev.questionsAskedSinceTeach + 1
     next.teachSegmentsSinceQuestion = 0
   } else {
     next.teachSegmentsSinceQuestion = prev.teachSegmentsSinceQuestion + 1
@@ -1086,6 +1132,12 @@ function decideNextMoveHeuristic(state: ConversationState, ctx: NextMoveContext)
   // DEMONSTRATE) — the same boundary phaseAfterConcludedDiagnostic draws.
   if (remedialPending && state.phase === 'OBSERVE' && (state.observeFailures ?? 0) >= 2) return 'show'
   // Hard question budget: two asks without a give → give.
+  //
+  // PHASE 7N-1(ii) narrowed WHAT COUNTS toward this budget — see the fold in
+  // advanceConversationState — but deliberately left this rule's own shape
+  // untouched. Option (i), letting an explicit request outrank the budget
+  // here, was NOT taken: it changes teaching precedence, and the owner
+  // selected (ii).
   if (state.questionsAskedSinceTeach >= 2) {
     return state.consecutiveFailures >= 1 ? 'show' : 'teach'
   }
