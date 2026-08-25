@@ -69,6 +69,59 @@ const LEADING_CONNECTIVES = new Set([
   'topic', 'differently', 'simpler', 'detail', 'thing', 'stuff', 'bit',
 ])
 
+/**
+ * REPEAT ADVERBIALS — "say it AGAIN", spelled as a phrase.
+ *
+ * `LEADING_CONNECTIVES` above already contains `again`, `more`, `simply` and
+ * `differently`, because a request to be re-taught names no new subject. But it
+ * trims ONE WORD AT A TIME, so it stops dead on the commonest spoken form of
+ * the same thing: "one more time" begins with `one`, which is not a connective
+ * and never can be ("one" is a real word).
+ *
+ * MEASURED IN PRODUCTION, PHASE D, on phys.mech.orbital-mechanics. A weak
+ * learner typed "please explain one more time simple words" and the runtime
+ * extracted the topic "one more time simple words", opened an unresolved-topic
+ * excursion on it, and the tutor spent the rest of the lesson teaching how to
+ * explain things simply — shoelaces, bicycles, a steering wheel, a board game.
+ * Circular Orbital Mechanics was never mentioned again. The lesson ran to the
+ * 22-turn cap at check=0 practice=0 and could not close.
+ *
+ * WHY A PHRASE AND NOT MORE WORDS IN THE SET ABOVE. Both `time` and `word` were
+ * measured as single-word additions and both are unsafe on their own: trimming
+ * `time` from the front turns "explain time dilation" into "dilation" and, far
+ * worse, makes bare "explain time" name nothing — and time IS a physics topic.
+ * A leading PHRASE cannot do that: "explain time" does not begin with "one more
+ * time", so it is untouched.
+ *
+ * Anchored to the FRONT for the same reason the word list is: these can only
+ * ever sit between the request and the topic. A list about English, not about
+ * subjects — it cannot grow when the curriculum does, and it never decides
+ * WHAT to draw.
+ */
+const LEADING_REPEAT_ADVERBIAL =
+  /^\s*(?:just\s+)?(?:one\s+more\s+time|one\s+more\s+times|once\s+more|one\s+more|one\s+time)\b[\s,]*/i
+
+/**
+ * HOW TO WORD IT, not what to say — "in simple words", "in your own words".
+ *
+ * The tail of the same production utterance. After LEADING_REPEAT_ADVERBIAL
+ * removes "one more time" from "explain one more time simple words", what is
+ * left at the front is "simple words", and `simple` alone is not enough to stop
+ * it: `simple` is already a discourse noun but `word` is not, so one word
+ * survives and the phrase reads as a subject.
+ *
+ * A PHRASE, and specifically NOT the bare word `word` in DISCOURSE_NOUNS. That
+ * was written first and measured: `problem` is ALREADY a discourse noun, so
+ * adding `word` made "word problems" — a real mathematics topic — name nothing.
+ * Requiring the wording adjective keeps every genuine topic that merely
+ * contains "word": "word problems", "sight words", "word equation" are all
+ * untouched because none of them is "<wording adjective> words".
+ *
+ * A list about English, not about subjects.
+ */
+const LEADING_WORDING_CLAUSE =
+  /^\s*(?:in\s+)?(?:very\s+)?(?:simple|simpler|plain|easy|easier|basic|small|short|your\s+own|my\s+own|normal|everyday)\s+(?:words|language|terms|english)\b[\s,]*/i
+
 /** Where a named topic stops: the sentence does, or the learner's aside does. */
 const TOPIC_TERMINATORS = /[.?!;:\n—]|\s-\s/
 
@@ -174,9 +227,34 @@ export function extractRequestedTopic(
 
   // Trim connectives from the front, one at a time, so only a genuine leader is
   // removed and a topic that legitimately begins with one is kept intact.
+  //
+  // The PHRASE strip runs first, and must: "one more time" is trimmed as a unit
+  // because no single word in it can safely join the set (see
+  // LEADING_REPEAT_ADVERBIAL). Whatever follows it — "please", "in simple
+  // words" — is then handled by the existing word-by-word trim and the
+  // discourse-noun test, exactly as it already is for "again".
+  // Word trims and phrase trims INTERLEAVE until nothing more comes off.
+  //
+  // A single pass in either order is not enough, and the case that proves it is
+  // "explain it one more time please": the clause begins with `it`, which is a
+  // connective, so an anchored phrase strip run first sees "it one more…" and
+  // misses. Trimming `it` first exposes "one more time", and stripping that
+  // exposes "please", which is a connective again. Looping to a fixed point is
+  // the only order-independent answer, and it terminates because every branch
+  // removes at least one word.
   let words = clause.trim().split(/\s+/).filter(Boolean)
-  while (words.length && LEADING_CONNECTIVES.has(words[0].toLowerCase().replace(/[^a-z0-9]/g, ''))) {
-    words = words.slice(1)
+  for (;;) {
+    if (words.length && LEADING_CONNECTIVES.has(words[0].toLowerCase().replace(/[^a-z0-9]/g, ''))) {
+      words = words.slice(1)
+      continue
+    }
+    const rest = words.join(' ')
+    const stripped = rest.replace(LEADING_REPEAT_ADVERBIAL, '').replace(LEADING_WORDING_CLAUSE, '')
+    if (stripped !== rest) {
+      words = stripped.trim().split(/\s+/).filter(Boolean)
+      continue
+    }
+    break
   }
 
   const title = words.join(' ').trim().slice(0, MAX_TITLE_CHARS).trim()
