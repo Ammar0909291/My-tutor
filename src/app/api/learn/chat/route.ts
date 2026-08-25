@@ -3330,9 +3330,49 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
 
     // Messages arrive newest-first (capped query above) — restore chronological
     // order for the AI payload.
-    const historyMessages = [...learnSession.messages]
+    //
+    // ── PHASE C: THE MODEL'S TRANSCRIPT IS THE LESSON'S TRANSCRIPT ──────────
+    //
+    // This is the ONE reader of `learnSession.messages` that becomes the
+    // model's prompt, and it was the only one that ignored `lessonKey` — it
+    // read the column off the row and dropped it in the `.map()` below, so the
+    // model could answer from turns the learner cannot see (GET
+    // /api/sessions/history already scopes the SCREEN by lessonKey).
+    //
+    // The other ELEVEN readers of this array are deliberately untouched: they
+    // reason about the SESSION, not the lesson (the 30-minute episode boundary
+    // at `messages[0].createdAt`, last-assistant latency, the prose-MCQ check,
+    // the filler-repair check, evidence timing). Narrowing the QUERY would
+    // silently change all of them — see lessonHistoryScope.ts.
+    //
+    // THE KEY MUST MATCH THE WRITERS. Resolved from the SAME expression the two
+    // message write sites use (the user stamp ~3,000 lines up and the assistant
+    // write below), and the same one the restore route resolves — NOT from
+    // `lessonKeyThisTurnHoisted`, which is built from `resolvedConceptId` for
+    // the pending-question identity and is a different expression. A mismatch
+    // here would not fail loudly; it would hand every turn an empty history.
+    // Pinned by lessonHistoryScope.test.ts against this file's own source.
+    const { lessonKeyFor: lessonKeyForHistory } = await import('@/lib/teaching/lessonAttempt')
+    const historyLessonKey = lessonKeyForHistory({
+      topicSlug: studentProgress?.activeLessonSlug ?? null,
+      lessonOrder: studentProgress?.currentLesson ?? null,
+    })
+    const { scopeHistoryToLesson } = await import('@/lib/teaching/lessonHistoryScope')
+    const historyScope = scopeHistoryToLesson(
+      [...learnSession.messages].filter((m) => m.role !== MessageRole.SYSTEM),
+      historyLessonKey,
+    )
+    if (historyScope.dropped > 0) {
+      console.log('[history-scope] ' + JSON.stringify({
+        lessonKey: historyLessonKey,
+        reason: historyScope.reason,
+        kept: historyScope.messages.length,
+        dropped: historyScope.dropped,
+        droppedUntagged: historyScope.droppedUntagged,
+      }))
+    }
+    const historyMessages = [...historyScope.messages]
       .reverse()
-      .filter((m) => m.role !== MessageRole.SYSTEM)
       .map((m) => ({
         role: m.role === MessageRole.USER ? ('user' as const) : ('assistant' as const),
         content: m.content,
