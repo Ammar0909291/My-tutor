@@ -164,14 +164,27 @@ question, typed as the learner's first message in lesson B.
 
 ## 6. Open, reported not fixed
 
-**The conversation transcript is not lesson-scoped.** On the lesson B turn
-above the model's prose still said *"Correct! 230 volts is the RMS value for a
-325-volt peak sine wave"* — because lesson A's question is in the shared message
-history the prompt carries, and the learner can scroll up and see it too. No
-evidence was written, no counter moved, no probe was consumed: this is not
-transient-state contamination, it is history scoping, and closing it means
-deciding what a lesson switch should do to the visible transcript. That is a
-product decision, not a state-isolation defect, and it is the natural Phase C.
+**The conversation transcript is not lesson-scoped — in the PROMPT only.** On
+the lesson B turn above the model's prose still said *"Correct! 230 volts is the
+RMS value for a 325-volt peak sine wave"*, because lesson A's question sits in
+the 30-message window `/api/learn/chat` builds.
+
+CORRECTION, made after this section was first written: an earlier draft said
+"and the learner can scroll up and see it too". **That is wrong.**
+`GET /api/sessions/history` — the route that serves the learner's SCREEN —
+already filters by `Message.lessonKey`, resolved server-side from
+`activeLessonSlug ?? currentLesson`. So the learner CANNOT see lesson A's turns
+in lesson B; only the model can. The correction makes the defect sharper, not
+milder: the model reacts to turns the learner never sees, and the shape is the
+same "two readers of one owner disagreeing about the key" this phase fixed
+twice — at a third site, where one reader already implements the scoping the
+other ignores.
+
+No evidence was written, no counter moved, no probe was consumed, so this is not
+transient-state contamination. Full investigation, with the production exposure
+measured (89 of 597 sessions, 14.9%, carry more than one lesson in their prompt
+window; 34.6% of those messages have no `lessonKey` at all, which is the real
+constraint on any fix): `PHASE_C_HISTORY_SCOPING_INVESTIGATION.md`.
 
 **`objectiveState`'s consequence is LOG-only today.** The S2 verifier rules it
 feeds are additive and do not gate. It is cleared because the value is
