@@ -50,12 +50,26 @@ const gradedBy = (m: string) => {
 // 1. THE DEFECT — the exact production message
 // ═══════════════════════════════════════════════════════════════════════════
 describe('7P — the production failure', () => {
-  it('REPRODUCES IT: "one more please" WAS graded as a wrong answer', () => {
-    // The pre-fix condition: bare-ack was the only suppression.
+  it('the grader itself now refuses it too — Phase A, second line of defence', () => {
+    // WHAT THIS ASSERTION USED TO SAY, and why it changed.
+    //
+    // 7P found "one more please" being graded as option A and fixed it AT THE
+    // CALL SITE (`turnIntent.wantsPractice`). This case pinned the underlying
+    // grader defect as still present, so the suppression above it was the only
+    // thing standing between a practice request and false evidence.
+    //
+    // Phase A removed the defect at its source. `norm` was digitising the
+    // pronoun "one" into "1", and ORDINALS maps "1" to option A — so every
+    // sentence containing the commonest pronoun in English named option A.
+    // "one" is now a number only when explicitly marked ("option one").
+    //
+    // The call-site suppression is NOT redundant and is asserted immediately
+    // below: it is intent-based and catches "quiz me", "ask me another", which
+    // no grader rule would ever reach. Two independent guards, on purpose.
     expect(isBareAcknowledgement('one more please')).toBe(false)
     const g = gradeMcqAnswer('one more please', PENDING)
-    expect(g.chosenIndex).toBe(0)
-    expect(g.correct).toBe(false)      // the false evidence, from the real grader
+    expect(g.chosenIndex).toBeNull()
+    expect(g.correct).toBeNull()
   })
 
   it('FIXES IT: it is now recognised as a practice request and never graded', () => {

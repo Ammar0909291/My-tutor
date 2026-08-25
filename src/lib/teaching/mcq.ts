@@ -280,8 +280,18 @@ const ORDINALS: Record<string, number> = {
   fourth: 3, '4': 3, '4th': 3,
 }
 
-/** Words that explicitly announce a letter choice, so "a" can be told from the article. */
-const LETTER_MARKERS = new Set(['option', 'answer', 'choice', 'pick', 'select', 'letter'])
+/**
+ * Words that explicitly announce a choice, so "a" can be told from the article
+ * and "one" from the pronoun.
+ *
+ * `number` was missing even though rule 2's own comment names "number 2" as a
+ * supported form — it worked only because a DIGIT needs no marker. Once "one"
+ * required one (see digitiseNumbers), "number one" started refusing, which is
+ * how the gap surfaced.
+ */
+const LETTER_MARKERS = new Set([
+  'option', 'answer', 'choice', 'pick', 'select', 'letter', 'number',
+])
 
 /**
  * Superscripts carry the ENTIRE meaning of a dimensional formula, and stripping
@@ -362,6 +372,35 @@ function digitiseNumbers(text: string): string {
     const next = toks[i + 1]
     const after = toks[i + 2] !== undefined ? NUMBER_WORDS[toks[i + 2]] : undefined
     if (next === 'point' && after !== undefined) { out.push(`${d}.${after}`); i += 2; continue }
+    // ── "one" IS ALSO THE ENGLISH PRONOUN ───────────────────────────────────
+    //
+    // MEASURED against the real grader, 2026-08-25. Digitising it
+    // unconditionally turns "one" into "1", and ORDINALS maps "1" to option A.
+    // So EVERY sentence containing the commonest pronoun in English named
+    // option A:
+    //
+    //     "the one"                          -> A
+    //     "one more"                         -> A
+    //     "I need one more minute"           -> A
+    //     "which one is correct?"            -> A
+    //     "can you explain the left one?"    -> A      <- a HELP REQUEST
+    //     "I think it is the one"            -> A
+    //
+    // The last two are the dangerous ones: a request for help and a question
+    // were both banked as answers. That is false evidence from ordinary
+    // English, and it is the same defect class Phase 7P was opened for.
+    //
+    // "one" counts as a NUMBER only when something explicitly says so —
+    // "option one", "number one", "answer one". Bare, it is the pronoun.
+    // Fixing it HERE rather than in the ordinal rule fixes the numeric rule
+    // (5) in the same stroke, because both read this output; and it stays
+    // symmetric, because option text is normalised through the same function.
+    //
+    // Deliberately narrow: only "one". "two"/"three"/"five" are not English
+    // pronouns and a learner typing them means the number.
+    if (toks[i] === 'one' && !(i > 0 && LETTER_MARKERS.has(toks[i - 1]))) {
+      out.push(toks[i]); continue
+    }
     out.push(d)
   }
   return out.join(' ')
@@ -421,6 +460,44 @@ const words = (s: string) => norm(s).split(' ').filter((w) => w.length > 2)
 const ANSWER_INTENT = /\b(i think|i guess|i say|i believe|i choose|i pick|i select|answer is|it is|it's|its|maybe it|probably)\b/i
 const statesAnAnswer = (s: string): boolean => ANSWER_INTENT.test(s)
 
+/**
+ * Has the learner explicitly told us they have NOT chosen?
+ *
+ * "I don't know", "not sure", "no idea" are statements about the learner's
+ * state, not selections. They are handled by the recovery/diagnostic path
+ * (`consecutiveDontKnows`, `observeFailures`), which advances the ladder on
+ * its own — so refusing to grade here does NOT re-create the OBSERVE deadlock,
+ * it routes the turn to the machinery that exists for exactly this.
+ *
+ * Blocks EVERY rule, including the explicit label. "I don't know, maybe C."
+ * loses a turn, and that is the trade: a hedge banked as an answer is
+ * permanent evidence the learner never committed to.
+ */
+const NON_COMMITTAL =
+  /\b(i\s+(really\s+|still\s+|just\s+)?(don'?t|do\s+not)\s+know|not\s+sure|no\s+idea|unsure|can'?t\s+decide|cannot\s+decide)\b/i
+
+/**
+ * Words that cannot begin a noun phrase — so an "a" in front of one is the
+ * OPTION LETTER, not the English article.
+ *
+ * This is what lets rule 1 read "I think A because it starts there" as a
+ * choice while still refusing "a dimension is about quantity" and "I think a
+ * lens bends light", which is the refusal an earlier session pinned with a
+ * test. An article must be followed by a noun phrase; "because", "but", "is"
+ * and the pronouns cannot start one.
+ *
+ * `undefined` (the letter ends the sentence) counts: English does not end a
+ * sentence on a bare article either.
+ */
+const CANNOT_FOLLOW_AN_ARTICLE = new Set([
+  'because', 'but', 'and', 'so', 'since', 'then', 'sir', 'maam', 'madam',
+  'is', 'was', 'are', 'were', 'or', 'if', 'when', 'while', 'though', 'although',
+  'i', 'we', 'you', 'he', 'she', 'it', 'they', 'that', 'this', 'these', 'those',
+  'please', 'thanks', 'thank', 'ok', 'okay', 'yes', 'no', 'not', 'my', 'your',
+])
+const cannotFollowAnArticle = (next: string | undefined): boolean =>
+  next === undefined || CANNOT_FOLLOW_AN_ARTICLE.has(next)
+
 const looksLikeAQuestion = (s: string): boolean =>
   /\?\s*$/.test(s.trim()) || /^\s*(why|how|what|when|where|which|who|is|are|does|do|can|could|should)\b/i.test(s)
 
@@ -436,6 +513,11 @@ export function resolveMcqChoice(message: string, mcq: TutorMCQ): number | null 
   if (!n) return null
   const tokens = n.split(' ')
   const limit = Math.min(mcq.options.length, OPTION_KEYS.length)
+
+  // An explicit "I have not chosen" outranks every rule below, including the
+  // punctuated label. See NON_COMMITTAL for why refusing does not stall the
+  // ladder.
+  if (NON_COMMITTAL.test(message)) return null
 
   // 0a. A LABELLED LETTER, ANYWHERE IN THE SENTENCE.
   //
@@ -495,6 +577,27 @@ export function resolveMcqChoice(message: string, mcq: TutorMCQ): number | null 
   if (exact.length === 1) return exact[0].i
   if (exact.length > 1) return null
 
+  // ── PRECONDITIONS FOR EVERY WEAKER RULE ────────────────────────────────
+  //
+  // Rules 0a and 0 above are POSITIVE STATEMENTS OF CHOICE: an explicitly
+  // punctuated label, or text identical to an option (which is what tapping
+  // the option sends). Everything below infers a choice from a sentence, and
+  // inference needs to know when the sentence is not a choice at all.
+  //
+  // MEASURED, all three against the real grader:
+  //   "A or B"                  -> B    two options named; the learner is
+  //                                     weighing, not choosing
+  //   "B? Can you explain?"     -> B    a question, banked as an answer
+  //   "I dont know but maybe B" -> B    explicit non-commitment, banked
+  //
+  // One check, applied once, ahead of every inferring rule — rather than
+  // repeating three guards inside each of rules 1-5, which is how rule 4a
+  // ended up with its own copy of the question guard.
+  const namedStandalone = new Set<number>()
+  for (let i = 0; i < limit; i++) if (tokens.includes(OPTION_KEYS[i])) namedStandalone.add(i)
+  if (namedStandalone.size > 1) return null
+  if (looksLikeAQuestion(message)) return null
+
   // 1. A bare letter, alone or as "option b" / "b)" — normalisation has already
   //    removed the bracket. Standalone-token matching alone is NOT enough, and
   //    this module's own test caught why: "a dimension is about quantity" — the
@@ -503,13 +606,34 @@ export function resolveMcqChoice(message: string, mcq: TutorMCQ): number | null 
   //    article is the one option key that is also an ordinary word, so it needs
   //    an explicit marker; b/c/d are not English words and are safe in the
   //    positions a learner actually puts them ("b) they must be identical").
+  //
+  //    THE LETTER INSIDE A SENTENCE (added 2026-08-25, measured). Requiring an
+  //    edge position or an immediately-preceding marker refused every learner
+  //    who wrote a sentence around their choice:
+  //
+  //      "I think A"                              -> not graded
+  //      "answer is A"          ("is" sits between the marker and the letter)
+  //      "ok I think A"                           -> not graded
+  //      "I think C because it has more energy"   -> not graded
+  //      "sir I think C because..."               -> not graded
+  //
+  //    Five of them, and every one is a learner answering. `statesAnAnswer`
+  //    is the same first-person phrase test rule 4a already uses — no new
+  //    detector. For "a" alone that is not enough, because "I think a lens
+  //    bends light" also states an answer: the letter must additionally be
+  //    followed by a word that cannot follow an article.
   for (let i = 0; i < limit; i++) {
     const key = OPTION_KEYS[i]
     const pos = tokens.indexOf(key)
     if (pos === -1) continue
     const marked = pos > 0 && LETTER_MARKERS.has(tokens[pos - 1])
     const alone = tokens.length === 1
-    if (key === 'a' ? (marked || alone) : (marked || alone || pos === 0 || pos === tokens.length - 1)) {
+    const atEdge = pos === 0 || pos === tokens.length - 1
+    const insideAStatedAnswer = statesAnAnswer(message)
+      && (key !== 'a' || cannotFollowAnArticle(tokens[pos + 1]))
+    if (key === 'a'
+      ? (marked || alone || insideAStatedAnswer)
+      : (marked || alone || atEdge || insideAStatedAnswer)) {
       return i
     }
   }
@@ -568,8 +692,9 @@ export function resolveMcqChoice(message: string, mcq: TutorMCQ): number | null 
   //   - the message must not be a QUESTION. "why is the lowest point
   //     fastest?" names an option while answering nothing, and grading it
   //     would bank a wrong answer against a learner who was asking for help.
-  if (best === 1 && scores.filter((s) => s > 0).length === 1
-      && !looksLikeAQuestion(message) && statesAnAnswer(message)) {
+  // The question guard that used to sit here is now a precondition above, so
+  // it protects rules 1-5 rather than only this one.
+  if (best === 1 && scores.filter((s) => s > 0).length === 1 && statesAnAnswer(message)) {
     const winner = scores.indexOf(best)
     const distinctive = [...new Set(words(mcq.options[winner]))]
       .filter((w) => counts.get(w) === 1 && w.length >= 4)

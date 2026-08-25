@@ -176,17 +176,22 @@ describe('rule 4a — one distinctive word, only when nothing competes', () => {
     expect(resolveMcqChoice('i think it is the point', SHM)).toBeNull()
   })
 
-  it('PRE-EXISTING, recorded not fixed: "the one" resolves to option A', () => {
-    // `norm` digitises number words, so "one" becomes "1", and rule 2 reads
-    // "1" as the ordinal FIRST. A learner saying "i think it is the one"
-    // means "that one", not "the first one", and is graded as choosing A.
+  it('FLIPPED BY PHASE A: "the one" is the pronoun and grades nothing', () => {
+    // This assertion previously read `.toBe(0)` and was labelled "PRE-EXISTING,
+    // recorded not fixed ... so a future fix has a test to flip". Phase A is
+    // that fix, and this is the flip.
     //
-    // This predates the 0a/4a rules — verified against the unmodified module
-    // — and is left alone deliberately: it lives in the ordinal/number path,
-    // which this change does not touch, and narrowing it is a separate piece
-    // of work with its own negative controls. Pinned here so it is a known
-    // quantity rather than a surprise, and so a future fix has a test to flip.
-    expect(resolveMcqChoice('i think it is the one', SHM)).toBe(0)
+    // `norm` digitised the number word "one" into "1", and ORDINALS maps "1"
+    // to option A — so any sentence containing English's commonest pronoun
+    // named option A, including "can you explain the left one?" (a help
+    // request) and "which one is correct?" (a question). "one" now counts as
+    // a number only when explicitly marked: "option one", "number one".
+    expect(resolveMcqChoice('i think it is the one', SHM)).toBeNull()
+    expect(resolveMcqChoice('the one', SHM)).toBeNull()
+    expect(resolveMcqChoice('one more', SHM)).toBeNull()
+    // ...while a genuine ordinal, and an explicitly marked cardinal, still work.
+    expect(resolveMcqChoice('the third one', SHM)).toBe(2)
+    expect(resolveMcqChoice('option one', SHM)).toBe(0)
   })
 
   it('refuses when two options are both named', () => {
