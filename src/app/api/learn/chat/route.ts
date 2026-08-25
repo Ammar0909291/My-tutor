@@ -1992,7 +1992,34 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         try {
           const { readTeachingHistory: readTHForPrompt, buildTeachingMemoryBlock } =
             await import('@/lib/teaching/teachingHistory')
-          const memConceptId = snapshotCurrentConceptId ?? resolvedConceptId ?? null
+          // PHASE B — THE STALE SNAPSHOT ID CAME FIRST, AND IT IS A TURN BEHIND.
+          //
+          // MEASURED IN PRODUCTION, first turn of a switched-to lesson
+          // (2026-08-25, session cmt7oxj3a…, verbatim from `[ladder-reset]`):
+          //
+          //   snapshotCurrentConceptId: 'phys.em.ac-basics'        <- lesson A
+          //   libraryConceptNodeId:     'phys.mech.kinematics-1d'  <- lesson B
+          //
+          // `currentConceptNodeId` is written at the END of a turn, so on the
+          // first turn of lesson B it still names lesson A. Reading the ledger
+          // under that id MATCHED lesson A's stored history, and
+          // buildTeachingMemoryBlock then put lesson A's used strategies, shown
+          // visuals and asked MCQs into lesson B's prompt — the leak this phase
+          // exists to close, arriving through the key rather than the value.
+          // The persist then wrote it back under lesson A's id too.
+          //
+          // The fix is the precedence this route already uses at its other two
+          // concept-identity sites (`currentConceptForMastery`,
+          // `activeConceptIdForDecide`) and at the OTHER reader of this very
+          // store 1,180 lines below (`readTeachingHistory(…, convConceptId)`):
+          // the LIVE library node first, the snapshot only as a fallback. This
+          // site was the single outlier, and it disagreed with the second
+          // reader of its own store within the same turn.
+          //
+          // School Mode leaves `libraryConceptNodeIdHoisted` null and so falls
+          // through to exactly the previous expression — unchanged there.
+          const memConceptId =
+            libraryConceptNodeIdHoisted ?? snapshotCurrentConceptId ?? resolvedConceptId ?? null
           // Hoisted rather than discarded: this is the only UNCONDITIONAL read
           // of the teaching history on the turn (the other assignment, in the
           // 'explain_differently' branch below, fires on a small minority of

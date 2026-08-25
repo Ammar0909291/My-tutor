@@ -280,9 +280,23 @@ export async function POST(req: Request) {
     // A completed attempt is therefore still never reopened or replaced merely
     // because the learner chats again or resumes, which is the duplicate-1s-row
     // defect this must not reintroduce.
-    // PHASE 7L: did this request actually OPEN a new attempt? Only then may
-    // the concept ladder be cleared — see clearLadderForNewAttempt.
-    let openedNewAttempt = false
+    // PHASE 7L: did this request actually OPEN a new attempt, and is that
+    // attempt a genuinely FRESH start rather than the recording of one already
+    // in progress? Only then may the per-attempt stores be cleared — see
+    // attemptIsolation.clearTransientStateForNewAttempt.
+    //
+    // PHASE B: "opened an attempt" and "started afresh" come apart in exactly
+    // one case, and it is a case that must not clear anything —
+    // `mode: 'resume'` on a lesson with NO attempt row at all.
+    // Attempts have only been opened at lesson start since 2026-08-16, so a
+    // learner mid-lesson in an older session has live snapshot state and no row
+    // — a refresh then opens the row (correctly, so the duration is recorded)
+    // while meaning "carry on", which is the definition of a resume.
+    //
+    // Clearing there would drop the ladder they earned and the MCQ still on
+    // their screen. `resume` is the ONE mode that never means "start again", so
+    // it never triggers the reset regardless of what the attempt table says.
+    let attemptIsFreshStart = false
     if (lessonOrder) {
       try {
         const { lessonKeyFor } = await import('@/lib/teaching/lessonAttempt')
@@ -304,8 +318,11 @@ export async function POST(req: Request) {
               userId, subjectSlug: learnSession.subject.slug,
               lessonKey: key, lessonTitle: lessonTitle ?? null,
             })
-            openedNewAttempt = true
-            console.info(`[lesson-init] attempt opened for ${key}: ${reason}`)
+            attemptIsFreshStart = mode !== 'resume'
+            console.info(
+              `[lesson-init] attempt opened for ${key}: ${reason}`
+              + ` (freshStart=${attemptIsFreshStart})`,
+            )
           }
         }
       } catch (err) {
@@ -534,7 +551,7 @@ export async function POST(req: Request) {
         delta: {
           ...clearEpisodeForLessonOpen(),
           ...clearVisualSessionForNewClientView(),
-          ...(openedNewAttempt ? clearTransientStateForNewAttempt() : {}),
+          ...(attemptIsFreshStart ? clearTransientStateForNewAttempt() : {}),
         },
         // Pure state replacement: re-applying the same two nulls on top of a
         // newer base is already correct, so nothing needs re-deriving.
