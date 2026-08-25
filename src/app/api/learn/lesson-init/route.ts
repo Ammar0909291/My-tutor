@@ -509,11 +509,12 @@ export async function POST(req: Request) {
     // episode degrades a lesson, but a throw here would prevent one entirely.
     try {
       const { clearEpisodeForLessonOpen } = await import('@/lib/teaching/sessionLifecycle')
+      const { clearVisualSessionForNewClientView } = await import('@/lib/teaching/visual/session')
       const { writeSnapshotDelta, readSnapshotVersion } = await import('@/lib/db/snapshotWrite')
       await writeSnapshotDelta(prisma, {
         sessionId,
         expectedVersion: readSnapshotVersion(learnSession.contextSnapshot),
-        delta: clearEpisodeForLessonOpen(),
+        delta: { ...clearEpisodeForLessonOpen(), ...clearVisualSessionForNewClientView() },
         // Pure state replacement: re-applying the same two nulls on top of a
         // newer base is already correct, so nothing needs re-deriving.
         rederive: () => ({}),

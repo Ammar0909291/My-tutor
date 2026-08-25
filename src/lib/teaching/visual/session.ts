@@ -405,6 +405,52 @@ export function tickSession(session: VisualSession): VisualSession {
 }
 
 /** Narrow unknown JSONB back into a VisualSession, or null. */
+/**
+ * PHASE 7K TRACK D — a remembered figure is not a rendered figure.
+ *
+ * THE PHANTOM, reproduced live (2026-08-25, phys.opt.total-internal-reflection).
+ * The learner opened the lesson and the tutor wrote, on a turn that carried NO
+ * figure of any kind:
+ *
+ *   "Key points from the figure you're looking at: … the labels 'θ < θc',
+ *    'θ = θc', and 'θ > θc' show what happens as the angle changes"
+ *
+ * and when told no figure was visible, answered:
+ *
+ *   "I'm sorry—there's a figure already attached to this message… Please look
+ *    at the screen next to this text… try refreshing the page or switching
+ *    your browser window."
+ *
+ * The server was not hallucinating. It was reading `contextSnapshot.
+ * visualSession`, whose load site describes it as "the figure already on the
+ * learner's screen", and deciding to HOLD rather than re-send:
+ *
+ *   [visual-v2] { provenance: 'generator:…:concept-authored',
+ *                 continuity: 'continuity', heldTurns: 5 }   (then 6, then 7)
+ *
+ * heldTurns had been climbing since a session hours earlier. The figure was on
+ * a screen that no longer existed. So a confused beginner was told the fault
+ * was their browser.
+ *
+ * THE PRINCIPLE, and why this is not a phrase filter: persisted continuity
+ * INTENT is not evidence that a client is currently rendering anything. A view
+ * that has just been opened is showing nothing, whatever the server remembers.
+ * Clearing the session makes the next turn re-derive and re-SEND the figure —
+ * continuity is not lost, it is re-established against a client that really has
+ * it.
+ *
+ * Scope is deliberately narrow: this fires only when a lesson is opened, so
+ * hold-and-carry across uninterrupted turns — the behaviour that stops an
+ * answer swapping a vector figure for a geometry one mid-correction — is
+ * completely untouched.
+ */
+export function clearVisualSessionForNewClientView(): Record<string, unknown> {
+  // A DELTA for writeSnapshotDelta, which merges: the key is retired with an
+  // explicit null, and `parseVisualSession` already reads a non-object as
+  // "no active session", so no reader changes.
+  return { visualSession: null }
+}
+
 export function parseVisualSession(raw: unknown): VisualSession | null {
   if (!raw || typeof raw !== 'object') return null
   const v = raw as Record<string, unknown>
