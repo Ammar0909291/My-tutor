@@ -33,13 +33,28 @@ const EMAIL = process.env.QA_EMAIL ?? ''
 const PASSWORD = process.env.QA_PASSWORD ?? ''
 const MAX_TURNS = Number(process.env.QA_MAX_TURNS ?? '22')
 
-/** Drawn at random, seed 20260825, from difficult + visually teachable pools. */
-const TARGETS: Array<{ subject: string; concept: string }> = [
+/**
+ * Drawn at random from difficult + visually teachable pools.
+ *
+ * QA_TARGETS overrides, so re-verification after a fix runs on concepts the fix
+ * was NOT derived from — the reproduction set must never be the proof set.
+ *   seed 20260825 (reproduction): orbital-mechanics, quantum-tunneling,
+ *                                 metallic-bonding, hybridization
+ *   seed 20260826 (verification): wave-function, spin, covalent-bonding,
+ *                                 ionic-bonding
+ */
+const DEFAULT_TARGETS: Array<{ subject: string; concept: string }> = [
   { subject: 'physics',   concept: 'phys.mech.orbital-mechanics' },
   { subject: 'physics',   concept: 'phys.qm.quantum-tunneling' },
   { subject: 'chemistry', concept: 'chem.bond.metallic-bonding' },
   { subject: 'chemistry', concept: 'chem.bond.hybridization' },
 ]
+const TARGETS = process.env.QA_TARGETS
+  ? process.env.QA_TARGETS.split(',').map((c) => ({
+      subject: c.trim().startsWith('phys.') ? 'physics' : 'chemistry',
+      concept: c.trim(),
+    }))
+  : DEFAULT_TARGETS
 
 async function login(): Promise<string> {
   const csrfRes = await fetch(`${BASE}/api/auth/csrf`)
