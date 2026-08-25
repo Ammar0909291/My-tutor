@@ -155,11 +155,22 @@ async function bootstrapAssets() {
       // corpora have not been measured against the contract.
       const { CHEMISTRY_EXPLANATIONS, CHEMISTRY_PROBES } =
         await import('./lib/teaching/assets/chemistrySeedAssets')
+      // Physics band-gap probes joined 2026-08-25. The cross-subject contract
+      // audit found 21 (concept, band) pairs — units, velocity, acceleration,
+      // force, all three of Newton's laws, momentum, impulse, power at MIDDLE
+      // and ADULT — taught with ZERO gradeable probes at the band being
+      // served, because every probe for them is authored at HIGH and
+      // matcher.ts REFUSES an adjacent band (60 against a threshold of 65).
+      // The rest of physics is in authoredSeedAssets, which is already in this
+      // corpus; leaving these out would repeat chemistry's exact failure —
+      // authored, in git, and unreachable.
+      const { PHYSICS_BAND_GAP_PROBES } =
+        await import('./lib/teaching/assets/physicsBandGapAssets')
       const { hashContent } = await import('./lib/teaching/assets/similarity')
       const { AssetFamily, AssetStatus, AuthorKind, ExplanationStyle } = await import('@prisma/client')
 
       const ALL_EXPLANATIONS = [...SEED_EXPLANATIONS, ...AUTHORED_EXPLANATIONS, ...CHEMISTRY_EXPLANATIONS]
-      const ALL_PROBES = [...SEED_PROBES, ...AUTHORED_PROBES, ...CHEMISTRY_PROBES]
+      const ALL_PROBES = [...SEED_PROBES, ...AUTHORED_PROBES, ...CHEMISTRY_PROBES, ...PHYSICS_BAND_GAP_PROBES]
       // ADR 14 §13 (Item 6): ladder rungs get a difficulty segment; singleton
       // slots keep the identity they already have. One resolver drives BOTH
       // the pre-flight check and the write loop so they cannot disagree.
