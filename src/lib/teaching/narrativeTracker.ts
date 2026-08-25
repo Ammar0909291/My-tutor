@@ -21,27 +21,64 @@
  */
 
 export interface NarrativeState {
+  /**
+   * PHASE B — WHOSE ARC IS THIS?
+   *
+   * This module's own first line calls the thing it tracks "the LESSON's
+   * teaching arc", and `advanceNarrativeState` documents the three milestones
+   * as "monotonic — once reached, never reverted". Both are correct about a
+   * lesson and were being applied to a SESSION: the state carried no key, so
+   * nothing reset it when the learner moved to another lesson. Lesson B
+   * inherited lesson A's `coreTaught`, and `narrativeComplete` — which is
+   * exactly `coreTaught` — reported the new lesson's arc finished before it
+   * had begun, skipping the circle-back close on an autonomy request.
+   *
+   * Keyed the same way its sibling ledger `teachingHistory` already is, by the
+   * concept the arc belongs to, so the reset rule is one idiom in both places
+   * rather than two. A stored state from before this key existed carries
+   * `undefined` and therefore resets once, which is the safe direction: the
+   * milestones are re-earned from the next turn's evidence, and a milestone
+   * wrongly believed already-reached is the defect being closed.
+   */
+  conceptId: string | null
   hookDelivered: boolean
   coreTaught: boolean
   hookResolved: boolean
 }
 
-export function initialNarrativeState(): NarrativeState {
+export function initialNarrativeState(conceptId: string | null = null): NarrativeState {
   return {
+    conceptId,
     hookDelivered: false,
     coreTaught: false,
     hookResolved: false,
   }
 }
 
-export function readNarrativeState(raw: unknown): NarrativeState {
+export function readNarrativeState(
+  raw: unknown,
+  currentConceptId: string | null = null,
+): NarrativeState {
   if (raw && typeof raw === 'object') {
     const s = raw as NarrativeState
-    if (typeof s.hookDelivered === 'boolean') {
-      return { ...initialNarrativeState(), ...s }
+    if (typeof s.hookDelivered === 'boolean' && s.conceptId === currentConceptId) {
+      return { ...initialNarrativeState(currentConceptId), ...s }
     }
   }
-  return initialNarrativeState()
+  return initialNarrativeState(currentConceptId)
+}
+
+/**
+ * PHASE B — a new attempt re-opens the arc.
+ *
+ * The key above resets the arc when the learner moves to another CONCEPT; a
+ * restart keeps the concept, so the fresh attempt would inherit a completed
+ * arc and skip its own hook. Same boundary as every other per-attempt store —
+ * see attemptIsolation.ts. A DELTA for writeSnapshotDelta; `readNarrativeState`
+ * maps a non-object to `initialNarrativeState`, so no reader changes.
+ */
+export function clearNarrativeForNewAttempt(): Record<string, unknown> {
+  return { narrativeState: null }
 }
 
 export interface NarrativeEvidence {
@@ -62,6 +99,10 @@ export function advanceNarrativeState(
   evidence: NarrativeEvidence,
 ): NarrativeState {
   return {
+    // Carried, never re-derived: the fold must not be able to re-label an arc
+    // as belonging to a different concept. Only readNarrativeState decides
+    // whose arc this is, and it does so by discarding one that is not.
+    conceptId: prev.conceptId ?? null,
     hookDelivered: prev.hookDelivered || evidence.deliveredHook,
     coreTaught: prev.coreTaught || evidence.taughtCore,
     hookResolved: prev.hookResolved || evidence.resolvedHook,

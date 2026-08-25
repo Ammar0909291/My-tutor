@@ -137,3 +137,24 @@ export const NO_PROGRESS_TURN_THRESHOLD = 8
 export function hasStalled(state: ObjectiveState): boolean {
   return state.turnsSinceProgress >= NO_PROGRESS_TURN_THRESHOLD
 }
+
+/**
+ * PHASE B — A NEW ATTEMPT HAS COMPLETED NOTHING.
+ *
+ * `completedAt` is documented above as "set once, never cleared — mastery,
+ * once verified, is stable WITHIN THE CONCEPT". A restart keeps the concept,
+ * so the objective of a brand-new attempt is born already carrying the
+ * previous attempt's `completedAt`, `attemptCount` and `assessmentCount`, and
+ * `isObjectiveLockedFromAssessment` reports true on turn one.
+ *
+ * Consequence today is LOG-ONLY (the verifier's S2 rules are additive and do
+ * not gate), and that is stated rather than overclaimed — but the value is
+ * demonstrably false about the attempt it describes, and the S2 rules exist to
+ * be promoted to REJECT.
+ *
+ * A DELTA for writeSnapshotDelta. `readObjectiveState` maps a non-object to
+ * `initialObjectiveState(objectiveId)`, so no reader changes.
+ */
+export function clearObjectiveForNewAttempt(): Record<string, unknown> {
+  return { objectiveState: null }
+}

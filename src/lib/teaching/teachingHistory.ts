@@ -369,3 +369,31 @@ export function buildTeachingMemoryBlock(h: TeachingHistory | null | undefined):
   if (lines.length === 0) return ''
   return '\n\nTEACHING MEMORY (what you have ALREADY done on this concept):\n' + lines.join('\n')
 }
+
+/**
+ * PHASE B — A NEW ATTEMPT STARTS WITH ITS TEACHING UNSPENT.
+ *
+ * This ledger resets on a CONCEPT change (readTeachingHistory above), which is
+ * the right rule for navigation and the wrong one for a restart: restarting
+ * lesson A keeps concept A, so the fresh attempt inherits everything the
+ * previous one spent —
+ *
+ *   strategiesUsed      all seven used => selectNextStrategy returns -1, i.e.
+ *                       "prerequisite remediation is the only move left", on
+ *                       turn one of a lesson the learner asked to redo
+ *   explanationsServed  the authored Explanation Memory asset is marked
+ *                       already-read, so the fresh attempt never serves it
+ *   mcqAsked            every authored probe fingerprint is marked spent, so
+ *                       the gate treats the concept's whole probe pool as used
+ *   visualsShown        the concept's figure is marked already-rendered
+ *
+ * Phase 7L cleared the ladder at exactly this boundary for exactly this
+ * reason; this is the same fact about a second store that was missed. Same
+ * scope, same trigger, no new trigger.
+ *
+ * A DELTA for writeSnapshotDelta. `readTeachingHistory` maps a non-object to
+ * `initialTeachingHistory(conceptId)`, so no reader changes.
+ */
+export function clearTeachingHistoryForNewAttempt(): Record<string, unknown> {
+  return { teachingHistory: null }
+}

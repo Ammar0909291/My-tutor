@@ -644,6 +644,19 @@ export async function POST(req: Request) {
     // at the end of the turn that asks; cleared once graded, so one question is
     // never graded twice.
     let pendingMcqHoisted: import('@/lib/teaching/mcq').TutorMCQ | null = null
+    /**
+     * PHASE B — THE LESSON THE PENDING QUESTION BELONGS TO.
+     *
+     * Computed once, read at the grading site and written back at the persist
+     * site, so the two can never disagree about which lesson a question was
+     * asked in. Same `lessonKeyFor` shape every other lesson-identity site in
+     * this route uses — no second lesson-identity scheme.
+     *
+     * Null in School Mode and on any turn with no resolved lesson; null on both
+     * sides matches, so those turns behave exactly as they did before.
+     * Assigned below, once `lessonCtx`/`resolvedConceptId` are resolved.
+     */
+    let lessonKeyThisTurnHoisted: string | null = null
     /** Learner's message is a bare receipt ("ok", "yes", "ready") — see readinessAtGate. */
     let isBareAckHoisted = false
     /** This turn's deterministic grade of the pending MCQ, computed once. */
@@ -1998,15 +2011,24 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         questionLedgerHoisted = readLedgerForPrompt(snapshot?.questionLedger)
         // Same snapshot, same turn — the pending MCQ rides the mechanism the
         // ledger already uses rather than introducing a second store.
-        const rawPending = (snapshot as { pendingMcq?: unknown } | null)?.pendingMcq
-        if (rawPending && typeof rawPending === 'object') {
-          const p = rawPending as { question?: unknown; options?: unknown; correctIndex?: unknown }
-          if (typeof p.question === 'string' && Array.isArray(p.options)
-            && p.options.every((o) => typeof o === 'string')
-            && typeof p.correctIndex === 'number'
-            && p.correctIndex >= 0 && p.correctIndex < p.options.length) {
-            pendingMcqHoisted = { question: p.question, options: p.options as string[], correctIndex: p.correctIndex }
-          }
+        //
+        // PHASE B: read through the identity guard. The structural validation
+        // that used to be inlined here now lives in pendingQuestion.ts beside
+        // the lesson-key check, because "is this well formed" and "is this
+        // ours" are one question — a question from another lesson is not a
+        // pending question at all, and grading a reply against it writes
+        // permanent evidence the learner never produced.
+        {
+          const { lessonKeyFor } = await import('@/lib/teaching/lessonAttempt')
+          const { readPendingQuestion } = await import('@/lib/teaching/pendingQuestion')
+          lessonKeyThisTurnHoisted = lessonKeyFor({
+            topicSlug: resolvedConceptId,
+            lessonOrder: lessonCtx?.currentLesson ?? null,
+          })
+          pendingMcqHoisted = readPendingQuestion(
+            (snapshot as { pendingMcq?: unknown } | null)?.pendingMcq,
+            lessonKeyThisTurnHoisted,
+          )
         }
         // Graded HERE rather than at the signal site, because the answer to
         // "did the learner just answer a question?" is needed BEFORE the
@@ -2657,7 +2679,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // Loop 2: read narrative state for this concept's teaching arc
           {
             const { readNarrativeState } = await import('@/lib/teaching/narrativeTracker')
-            narrativeStateHoisted = readNarrativeState(snapshotNarrativeState)
+            // PHASE B: keyed to the same concept objectiveState and
+            // conversationState are keyed to, one line above. The arc belongs
+            // to a LESSON (this module's own first line), and without a key it
+            // was a session-wide monotonic flag — lesson B inherited lesson A's
+            // completed arc and skipped its own hook.
+            narrativeStateHoisted = readNarrativeState(snapshotNarrativeState, convConceptId)
           }
 
           // P3 — Learner autonomy, now mastery-gated (Bug 4): "next topic"
@@ -6676,9 +6703,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // UNCONDITIONAL on purpose: the first draft of this sat inside
           // `if (teachingHistoryHoisted)`, which is exactly the mistake that
           // left the teaching ledger stale for months (see the note above it).
-          conversationStateUpdate.pendingMcq = mcqHoisted
-            ? { question: mcqHoisted.question, options: mcqHoisted.options, correctIndex: mcqHoisted.correctIndex }
-            : null
+          // PHASE B: stamped with the lesson it was asked in, read back through
+          // readPendingQuestion's identity guard next turn. Same value the
+          // grading site above used, so the write and the read can never
+          // disagree about which lesson this question belongs to.
+          {
+            const { writePendingQuestion } = await import('@/lib/teaching/pendingQuestion')
+            conversationStateUpdate.pendingMcq =
+              writePendingQuestion(mcqHoisted, lessonKeyThisTurnHoisted)
+          }
           // P6.5: fold a CLOSED concept into the lesson attempt — the single
           // owner of lesson-scoped outcomes. A concept closes exactly two ways
           // (mastered, or budget spent), and isConceptClosed owns that test so

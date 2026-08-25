@@ -87,7 +87,12 @@ describe('the gate assessment is on the turn path', () => {
     // Both are pre-existing plumbing keyed on `mcqHoisted`; asserted so a later
     // refactor cannot quietly serve a question it never persists — which would
     // make it ungradeable next turn, recreating E6 by a different route.
-    expect(lineOf(/conversationStateUpdate\.pendingMcq = mcqHoisted/)).toBeGreaterThan(0)
+    // PHASE B: the persist now runs through pendingQuestion.ts's owner, which
+    // stamps the lesson the question was asked in. `mcqHoisted` is still the
+    // ONE source of the question — that is what this assertion guards, and it
+    // is unchanged. See lessonStateIsolationWiring.test.ts for the identity.
+    expect(lineOf(/conversationStateUpdate\.pendingMcq =$/)).toBeGreaterThan(0)
+    expect(lineOf(/writePendingQuestion\(mcqHoisted, lessonKeyThisTurnHoisted\)/)).toBeGreaterThan(0)
     expect(lineOf(/mcq: mcqHoisted \?\? undefined/)).toBeGreaterThan(0)
   })
 })

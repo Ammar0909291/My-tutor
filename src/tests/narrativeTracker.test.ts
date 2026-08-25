@@ -12,7 +12,10 @@ describe('narrativeTracker', () => {
   describe('initialNarrativeState', () => {
     it('starts with all milestones false', () => {
       const s = initialNarrativeState()
-      expect(s).toEqual({ hookDelivered: false, coreTaught: false, hookResolved: false })
+      // PHASE B: the arc now carries the concept it belongs to. Milestones are
+      // unchanged — the key answers "whose arc", never "how far along".
+      expect(s).toEqual({ conceptId: null, hookDelivered: false, coreTaught: false, hookResolved: false })
+      expect(initialNarrativeState('phys.opt.lenses').conceptId).toBe('phys.opt.lenses')
     })
   })
 
@@ -22,14 +25,23 @@ describe('narrativeTracker', () => {
       expect(readNarrativeState(undefined)).toEqual(initialNarrativeState())
     })
 
-    it('restores persisted state', () => {
-      const persisted = { hookDelivered: true, coreTaught: true, hookResolved: false }
-      expect(readNarrativeState(persisted)).toEqual(persisted)
+    it('restores persisted state for the SAME concept', () => {
+      const persisted = { conceptId: 'phys.opt.lenses', hookDelivered: true, coreTaught: true, hookResolved: false }
+      expect(readNarrativeState(persisted, 'phys.opt.lenses')).toEqual(persisted)
+    })
+
+    // PHASE B: the arc belongs to a lesson, so a different concept discards it.
+    // Without this the milestones were a session-wide monotonic flag and the
+    // next lesson opened with its arc already reported complete.
+    it('DISCARDS a persisted arc that belongs to another concept', () => {
+      const persisted = { conceptId: 'phys.wave.interference', hookDelivered: true, coreTaught: true, hookResolved: true }
+      expect(readNarrativeState(persisted, 'phys.opt.lenses'))
+        .toEqual(initialNarrativeState('phys.opt.lenses'))
     })
 
     it('fills missing fields from initial state', () => {
-      const partial = { hookDelivered: true }
-      const result = readNarrativeState(partial)
+      const partial = { conceptId: 'phys.opt.lenses', hookDelivered: true }
+      const result = readNarrativeState(partial, 'phys.opt.lenses')
       expect(result.hookDelivered).toBe(true)
       expect(result.coreTaught).toBe(false)
       expect(result.hookResolved).toBe(false)
@@ -54,16 +66,24 @@ describe('narrativeTracker', () => {
     })
 
     it('never reverts a reached milestone', () => {
-      const reached = { hookDelivered: true, coreTaught: true, hookResolved: true }
+      const reached = { conceptId: 'phys.opt.lenses', hookDelivered: true, coreTaught: true, hookResolved: true }
       const after = advanceNarrativeState(reached, { deliveredHook: false, taughtCore: false, resolvedHook: false })
       expect(after).toEqual(reached)
+    })
+
+    it('carries the concept forward — the fold never re-labels an arc', () => {
+      const s = advanceNarrativeState(
+        initialNarrativeState('phys.opt.lenses'),
+        { deliveredHook: true, taughtCore: false, resolvedHook: false },
+      )
+      expect(s.conceptId).toBe('phys.opt.lenses')
     })
   })
 
   describe('narrativeComplete', () => {
     it('requires coreTaught', () => {
-      expect(narrativeComplete({ hookDelivered: true, coreTaught: false, hookResolved: true })).toBe(false)
-      expect(narrativeComplete({ hookDelivered: false, coreTaught: true, hookResolved: false })).toBe(true)
+      expect(narrativeComplete({ conceptId: 'c', hookDelivered: true, coreTaught: false, hookResolved: true })).toBe(false)
+      expect(narrativeComplete({ conceptId: 'c', hookDelivered: false, coreTaught: true, hookResolved: false })).toBe(true)
     })
   })
 

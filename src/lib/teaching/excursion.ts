@@ -646,3 +646,26 @@ export function buildExcursionDirective(input: {
       : '')
   )
 }
+
+/**
+ * PHASE B — A NEW ATTEMPT DOES NOT BEGIN MID-EXCURSION.
+ *
+ * `decideExcursion` already closes an excursion when the lesson moves
+ * underneath it (`closed-lesson-changed`, gated on
+ * `state.returnToConceptId !== lessonConceptId`). That valve cannot see a
+ * RESTART: restarting lesson A keeps concept A, so `returnToConceptId` still
+ * matches and an excursion opened in the previous attempt stays open into the
+ * fresh one — the learner asks to start over and turn one is spent on a side
+ * topic they left behind, with the lesson still marked "paused, owed a return".
+ *
+ * The same boundary Phase 7L used for the ladder: cleared only at the moment
+ * lesson-init has already decided to open an attempt. A resume clears nothing,
+ * so an excursion opened two turns ago survives a page refresh exactly as
+ * before. Cross-lesson behaviour is untouched — the valve above still owns it.
+ *
+ * A DELTA for writeSnapshotDelta, which merges. `parseExcursionState` reads a
+ * non-object as NO_EXCURSION, so no reader changes.
+ */
+export function clearExcursionForNewAttempt(): Record<string, unknown> {
+  return { excursion: null }
+}

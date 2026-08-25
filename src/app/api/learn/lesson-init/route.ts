@@ -514,19 +514,27 @@ export async function POST(req: Request) {
     try {
       const { clearEpisodeForLessonOpen } = await import('@/lib/teaching/sessionLifecycle')
       const { clearVisualSessionForNewClientView } = await import('@/lib/teaching/visual/session')
-      const { clearLadderForNewAttempt } = await import('@/lib/teaching/conversationState')
+      const { clearTransientStateForNewAttempt } = await import('@/lib/teaching/attemptIsolation')
       const { writeSnapshotDelta, readSnapshotVersion } = await import('@/lib/db/snapshotWrite')
-      // PHASE 7L: the ladder is cleared ONLY when a new attempt was actually
-      // opened. A `resume` of an in-progress lesson opens nothing and must keep
-      // its ladder — clearing there would erase real mid-lesson progress
-      // (demonstrated, correctAtCheck, turnsOnConcept) that the learner earned.
+      // PHASE 7L, WIDENED BY PHASE B: the per-attempt stores are cleared ONLY
+      // when a new attempt was actually opened. A `resume` of an in-progress
+      // lesson opens nothing and must keep all of them — clearing there would
+      // erase real mid-lesson progress (demonstrated, correctAtCheck,
+      // turnsOnConcept) that the learner earned, and would drop the MCQ still
+      // on their screen so their answer to it could no longer be graded.
+      //
+      // 7L cleared the ladder alone. Phase B found four more stores with the
+      // identical lifecycle (the pending question, the teaching ledger, the
+      // excursion, the objective and the narrative arc) — see
+      // attemptIsolation.ts, which is the single statement of this boundary
+      // and of what it deliberately leaves alone.
       await writeSnapshotDelta(prisma, {
         sessionId,
         expectedVersion: readSnapshotVersion(learnSession.contextSnapshot),
         delta: {
           ...clearEpisodeForLessonOpen(),
           ...clearVisualSessionForNewClientView(),
-          ...(openedNewAttempt ? clearLadderForNewAttempt() : {}),
+          ...(openedNewAttempt ? clearTransientStateForNewAttempt() : {}),
         },
         // Pure state replacement: re-applying the same two nulls on top of a
         // newer base is already correct, so nothing needs re-deriving.
