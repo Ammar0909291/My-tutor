@@ -2283,10 +2283,35 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         if (lessonCompletedHoisted) {
           const { isGenuineQuestion } = await import('@/lib/understanding/readers/conversationReader')
           const { isQuestionAnnouncement } = await import('@/lib/teaching/lessonCompletion')
+          //   - PHASE 7M-A: the learner asks to PRACTISE or be QUIZZED on the
+          //     lesson that just ended ("give me a practice problem", "quiz
+          //     me"). Every signal above is about going ELSEWHERE (an
+          //     excursion, a resolvable off-lesson concept, a named unknown
+          //     topic) or about ASKING something (a question, a question
+          //     announcement, distress). The one intent meaning "keep teaching
+          //     me THIS" was structurally invisible, and Phase 7D made it more
+          //     so: "practice problem" is deliberately resolved to NO concept
+          //     and NO topic title, so disjuncts 2 and 3 can never fire for it.
+          //
+          //     PRODUCTION EVIDENCE (2026-08-25, phys.opt.total-internal-
+          //     reflection): with the attempt COMPLETED at 0/0, "give me a
+          //     practice problem" and then "no wait i dont want to stop, i want
+          //     to practice" both returned the close script —
+          //     newIntentAfterCompletion false, provider=deterministic,
+          //     groq_invoked=false. A learner asking to keep working was told
+          //     to press "Start next lesson".
+          //
+          //     Reuses Phase 7H's `wantsPractice`, read once per turn on the
+          //     SAME object as `isQuestion` one line below. No new detector, no
+          //     new state, and completion semantics are untouched: as this
+          //     block's own header says, the lesson stays recorded COMPLETED
+          //     and nothing here reopens it — D0a simply yields for this turn,
+          //     exactly as it already does for a question or for distress.
           lessonCompletionRespectsNewIntentHoisted = excursionDecision.state.active
             || requestedConceptIdThisTurn != null
             || requestedTopicTitleThisTurn != null
             || turnIntent.isQuestion   // Phase 1: the one authoritative read
+            || turnIntent.wantsPractice // Phase 7M-A
             || recoveryKeyHoisted !== null
             || isQuestionAnnouncement(message)
           if (lessonCompletionRespectsNewIntentHoisted) {

@@ -624,6 +624,12 @@ const PRACTICE_REQUEST_RE: readonly RegExp[] = [
   /\b(something|one|anything)\s+to\s+(solve|try|work\s+on)\b/i,
   // "give me a problem/question" — the bare give, without the word practice
   /\bgive\s+me\s+(a|another|some|more)?\s*(problem|question)s?\b/i,
+  // PHASE 7M-A: the bare first-person form. "no wait i dont want to stop, i
+  // want to practice" is a REAL production message (2026-08-25) that none of
+  // the six patterns above matched — the "let's/can we" forms require a
+  // hortative opener this phrasing does not have. Found because a 7M test
+  // asserted the production phrase was covered and it was not.
+  /\b(i\s+want\s+to|i'?d\s+like\s+to|i\s+wanna|i\s+need\s+to)\s+(practice|practise)\b/i,
 ]
 
 /**
@@ -641,7 +647,10 @@ const PRACTICE_REQUEST_RE: readonly RegExp[] = [
  * on its own.
  */
 const PRACTICE_REQUEST_NEGATED_RE =
-  /\b(don'?t|do\s+not|stop|quit|no\s+more|rather\s+than|instead\s+of)\s+(\w+\s+){0,2}(ask|quiz|test|question)/i
+  // 'practice|practise' added with the first-person pattern above: without it
+  // "I don't want to practice" would match that new pattern and be read as a
+  // REQUEST for practice — the exact inversion this guard exists to prevent.
+  /\b(don'?t|do\s+not|stop|quit|no\s+more|rather\s+than|instead\s+of)\s+(\w+\s+){0,2}(ask|quiz|test|question|practice|practise)/i
 
 /** Did the learner explicitly ask to be given a question to answer? */
 export function asksForPractice(message: string): boolean {
