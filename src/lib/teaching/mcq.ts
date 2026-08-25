@@ -395,6 +395,36 @@ const norm = (s: string) =>
 const words = (s: string) => norm(s).split(' ').filter((w) => w.length > 2)
 
 /**
+ * Is this reply a question to the TUTOR rather than an answer?
+ *
+ * Used only to hold back rule 4a, the weakest matching rule. A learner who
+ * asks "why is the lowest point fastest?" has named an option without
+ * choosing it, and rule 4a is the one rule loose enough to mistake the two.
+ * Everything stronger — an explicit label, exact text, an ordinal, full
+ * containment — is a positive statement of choice and is NOT gated on this:
+ * "C. but why does the string not get longer?" is both an answer and a
+ * question, and the answer half is real.
+ */
+/**
+ * Does the learner explicitly present this as their answer?
+ *
+ * Rule 4a needs this because one distinctive word is genuinely ambiguous
+ * between naming an option and merely using its vocabulary. This module's own
+ * pinned case proves it: "a dimension is about quantity" uses the word
+ * "quantity" while answering nothing, and an earlier session tightened rule 1
+ * specifically to stop it being graded. Requiring a first-person answer phrase
+ * keeps that refusal intact while admitting "i think it is the lowest point".
+ *
+ * Whole phrases, never the bare verb: "dimension IS about quantity" must not
+ * qualify on "is" alone.
+ */
+const ANSWER_INTENT = /\b(i think|i guess|i say|i believe|i choose|i pick|i select|answer is|it is|it's|its|maybe it|probably)\b/i
+const statesAnAnswer = (s: string): boolean => ANSWER_INTENT.test(s)
+
+const looksLikeAQuestion = (s: string): boolean =>
+  /\?\s*$/.test(s.trim()) || /^\s*(why|how|what|when|where|which|who|is|are|does|do|can|could|should)\b/i.test(s)
+
+/**
  * Resolve a learner's free-text reply to one of the offered options.
  *
  * Returns `null` whenever the answer is ambiguous or unrecognisable — including
@@ -406,6 +436,46 @@ export function resolveMcqChoice(message: string, mcq: TutorMCQ): number | null 
   if (!n) return null
   const tokens = n.split(' ')
   const limit = Math.min(mcq.options.length, OPTION_KEYS.length)
+
+  // 0a. A LABELLED LETTER, ANYWHERE IN THE SENTENCE.
+  //
+  // MEASURED IN PRODUCTION (2026-08-25, phys.opt.lenses, real learner account).
+  // The learner replied "ok i think A. but sir i still not understand lens.
+  // can you show picture please" — a valid choice AND a question in one
+  // breath, which is how a learner with weak English actually writes. It was
+  // NOT GRADED at all: rule 1 below reaches "a" at token 3, and because "a" is
+  // also the English indefinite article it demands an explicit marker word,
+  // which "think" is not. The answer was discarded, `signalCorrect` stayed
+  // undefined, and OBSERVE -> DEMONSTRATE (which needs a graded correct
+  // answer) could not fire. Across four lessons and sixteen turns the ladder
+  // never left OBSERVE.
+  //
+  // The discriminator is PUNCTUATION, not vocabulary, and it is destroyed by
+  // `norm` before rule 1 ever runs — so this reads the RAW message. A learner
+  // labelling a choice writes "A." / "A)" / "A," / "A:" / "A -". The English
+  // article never carries punctuation: "a lens bends light" has no delimiter
+  // after "a", so the sentence that motivated rule 1's caution
+  // ("a dimension is about quantity") still resolves to nothing.
+  //
+  // Deliberately placed BEFORE the exact-text rule but AFTER nothing: an
+  // explicit label is the strongest statement of intent a learner can make,
+  // and ambiguity is still fatal — two different labelled letters select
+  // neither, because we cannot tell which one they meant.
+  {
+    const labelled = new Set<number>()
+    const named = new Set<number>()
+    for (const m of message.matchAll(/(?:^|[\s(])([a-dA-D])(\s*[.)\],:;-])?(?=\s|$)/g)) {
+      const idx = OPTION_KEYS.indexOf(m[1].toLowerCase() as typeof OPTION_KEYS[number])
+      if (idx < 0 || idx >= limit) continue
+      named.add(idx)
+      if (m[2]) labelled.add(idx)
+    }
+    // "A or B, i am not sure" labels only B (the comma) but NAMES both. A
+    // learner weighing two options has chosen neither, so the label is not
+    // decisive unless it is the only option letter in the sentence.
+    if (labelled.size === 1 && named.size === 1) return [...labelled][0]
+    if (labelled.size > 1) return null
+  }
 
   // 0. EXACT MATCH — the strongest signal, and the one the UI actually
   //    produces: tapping an option sends that option's text verbatim
@@ -475,6 +545,36 @@ export function resolveMcqChoice(message: string, mcq: TutorMCQ): number | null 
   })
   const best = Math.max(...scores)
   if (best >= 2 && scores.filter((s) => s === best).length === 1) return scores.indexOf(best)
+
+  // 4a. ONE distinctive word, when nothing at all competes with it.
+  //
+  // MEASURED IN PRODUCTION (2026-08-25, phys.wave.shm). Options were
+  // "At the highest point on the left" / "...on the right" / "At the LOWEST
+  // point in the MIDDLE" / "It moves at a constant speed". The learner wrote
+  // "i think it is the lowest point sir" — unambiguously the third option, to
+  // any human. It scored 1 ("lowest"; they did not say "middle"), the
+  // threshold above is 2, and the answer was thrown away.
+  //
+  // Two learners are hurt by a threshold of 2 and neither is careless: the one
+  // who paraphrases instead of quoting, and the one whose English is short.
+  // Both are exactly this product's audience.
+  //
+  // Narrowed three ways, because a false grade writes PERMANENT evidence the
+  // learner never produced (the defect class Phase 7P was opened for):
+  //   - the word must be SUBSTANTIAL (>= 4 chars), so "the"/"one"/"in" cannot
+  //     carry a grade on their own;
+  //   - every other option must score ZERO, not merely less — one distinctive
+  //     word is only decisive when nothing competes;
+  //   - the message must not be a QUESTION. "why is the lowest point
+  //     fastest?" names an option while answering nothing, and grading it
+  //     would bank a wrong answer against a learner who was asking for help.
+  if (best === 1 && scores.filter((s) => s > 0).length === 1
+      && !looksLikeAQuestion(message) && statesAnAnswer(message)) {
+    const winner = scores.indexOf(best)
+    const distinctive = [...new Set(words(mcq.options[winner]))]
+      .filter((w) => counts.get(w) === 1 && w.length >= 4)
+    if (distinctive.some((w) => tokens.includes(w))) return winner
+  }
 
   // 5. THE NUMBER ITSELF. In physics and mathematics the natural answer to
   //    "what is the resulting torque?" is "5" — no unit, no sentence, no
