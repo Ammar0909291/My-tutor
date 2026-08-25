@@ -4907,6 +4907,25 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                   for (const mc of eb.context.ebMisconceptions) {
                     knownMisconceptionText += ` ${mc.title} ${mc.symptom ?? ''}`
                   }
+                  // PHASE 7K TRACK E. An anti-analogy IS a misconception the
+                  // concept's author anticipated — it names the wrong idea a
+                  // taught analogy invites ("do NOT describe VSEPR as
+                  // 'electrons choose their positions'"). It was already
+                  // authored, and already loaded by this very call, and the
+                  // guard simply never read it. Feeding it here widens the
+                  // guard using existing content, with no new architecture and
+                  // no curriculum change.
+                  //
+                  // HONEST LIMIT, measured: this does NOT close the reported
+                  // Bohr failure. chem.atomic.bohr-model has 544 chars of
+                  // misconception register — the LARGEST of the four concepts
+                  // audited — and ZERO anti-analogies, so the planetary
+                  // over-extension the tutor affirmed is absent from both
+                  // sources. That is a CONTENT gap in protected curriculum,
+                  // reported rather than silently authored here.
+                  for (const anti of eb.context.antiAnalogies) {
+                    knownMisconceptionText += ` ${anti}`
+                  }
                 }
               }
             } catch { /* conservative default */ }

@@ -497,6 +497,31 @@ export async function POST(req: Request) {
     const { lessonKeyFor } = await import('@/lib/teaching/lessonAttempt')
     const openingLessonKey = lessonKeyFor({ topicSlug, lessonOrder })
 
+    // PHASE 7K TRACK B: opening a lesson starts a NEW episode.
+    //
+    // This write must happen because the message.create below is what breaks
+    // the boundary: it refreshes the "last message" clock the next chat turn
+    // measures inactivity against, so the 30-minute rule can never fire on a
+    // lesson the learner just opened, and a CLOSING phase earned hours earlier
+    // is inherited into a brand-new lesson. See clearEpisodeForLessonOpen.
+    //
+    // FAIL-OPEN, and for the same reason as the message write below: a stale
+    // episode degrades a lesson, but a throw here would prevent one entirely.
+    try {
+      const { clearEpisodeForLessonOpen } = await import('@/lib/teaching/sessionLifecycle')
+      const { writeSnapshotDelta, readSnapshotVersion } = await import('@/lib/db/snapshotWrite')
+      await writeSnapshotDelta(prisma, {
+        sessionId,
+        expectedVersion: readSnapshotVersion(learnSession.contextSnapshot),
+        delta: clearEpisodeForLessonOpen(),
+        // Pure state replacement: re-applying the same two nulls on top of a
+        // newer base is already correct, so nothing needs re-deriving.
+        rederive: () => ({}),
+      })
+    } catch (episodeErr) {
+      console.error('[lesson-init] episode reset failed (lesson still opens):', episodeErr)
+    }
+
     // Persist ONLY the assistant response
     // FAIL-OPEN, same rule as the chat route's assistant write: a lesson must
     // never fail to start because of a telemetry column a deploy has not

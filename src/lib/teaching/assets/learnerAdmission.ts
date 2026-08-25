@@ -35,6 +35,9 @@
  *
  * Pure predicates. No LLM, no I/O, no database.
  */
+import { DISCOURSE_NOUNS, isMediumWord } from '../visual/requestedTopic'
+import { asksForPractice } from '../masteryGate'
+
 
 /** Why an asset was refused. Logged; never shown to a learner. */
 export type AdmissionRefusal =
@@ -131,12 +134,47 @@ function contentWords(text: string): Set<string> {
  *     a false refusal costs only an ordinary LLM turn.
  */
 export function isRelevantToLearnerQuestion(content: string, userMessage: string): boolean {
-  const asked = contentWords(userMessage)
+  const asked = namedTopicWords(userMessage)
   if (asked.size === 0) return true          // nothing named — cannot disagree
   const said = contentWords(content)
   if (said.size === 0) return false
   for (const word of asked) if (said.has(word)) return true
   return false
+}
+
+/**
+ * The words in a learner message that actually NAME something, as opposed to
+ * naming the shape of the request.
+ *
+ * PHASE 7K TRACK G. "give me a practice problem" survived `contentWords`
+ * with {give, practice, problem}, so this rule compared an authored
+ * explanation of total internal reflection against the word "practice",
+ * found no overlap, and refused it. Measured in production:
+ *
+ *   [explanationMemory] refused 3e1a39b6… irrelevant-to-question —
+ *     asked "give me a practice problem", asset shares no topic word
+ *   [explanationMemory] refused ab503978… (same)
+ *
+ * EVERY authored asset for the concept was refused, on the one turn the
+ * learner explicitly asked to work on it, and the turn fell through to an
+ * ungoverned model answer. The relevance test is sound; its input was wrong.
+ * A meta-request names no topic, so it belongs in the `size === 0` branch
+ * that already exists directly above — "nothing named, cannot disagree".
+ *
+ * Deliberately reuses `DISCOURSE_NOUNS` and `isMediumWord` rather than
+ * declaring a second list. Phase 7D added 'practice' and 'check' to that set
+ * to stop the SAME phrase being read as a topic name by the excursion path;
+ * two vocabularies for one idea is how those paths would drift apart, and one
+ * of them would be fixed alone again.
+ */
+function namedTopicWords(userMessage: string): Set<string> {
+  const words = contentWords(userMessage)
+  const named = new Set<string>()
+  for (const w of words) {
+    if (DISCOURSE_NOUNS.has(w) || isMediumWord(w)) continue
+    named.add(w)
+  }
+  return named
 }
 
 /**
@@ -219,7 +257,20 @@ export function admitForLearner(input: { content: string; userMessage: string })
   const scaffolding = findLearnerFacingScaffolding(content)
   if (scaffolding) return { admit: false, reason: 'author-scaffolding', evidence: scaffolding }
 
-  if (!isRelevantToLearnerQuestion(content, input.userMessage ?? '')) {
+  // PHASE 7K TRACK G: an explicit request to be ASKED names no topic by
+  // construction, so "is this asset relevant to the words in the message" is
+  // the wrong question for it — the relevant context is the lesson already
+  // under way. Reuses Phase 7H's `asksForPractice`, the signal the runtime
+  // already computes once per turn (turnIntent.wantsPractice), rather than
+  // declaring a second vocabulary for the same idea.
+  //
+  // This does NOT admit foreign topics: a request that also names a real
+  // subject ("give me a practice problem about photosynthesis") still carries
+  // that word through the relevance test below, and excursion handling still
+  // owns genuine topic changes.
+  const isPracticeRequest = asksForPractice(input.userMessage ?? '')
+
+  if (!isPracticeRequest && !isRelevantToLearnerQuestion(content, input.userMessage ?? '')) {
     return {
       admit: false,
       reason: 'irrelevant-to-question',

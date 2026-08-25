@@ -85,12 +85,39 @@ describe('why the existing relevance guard could not catch it', () => {
     expect(admitForLearner({ content: SERVED_ASSET, userMessage: 'b' }).admit).toBe(true)
   })
 
-  it('the same asset IS refused once the learner uses words', () => {
+  it('a FOREIGN topic is still refused once the learner uses words', () => {
     // The other half, straight from the production log line.
-    const r = admitForLearner({ content: SERVED_ASSET, userMessage: 'ok give me a question to practise' })
+    const r = admitForLearner({ content: SERVED_ASSET, userMessage: 'ok tell me about photosynthesis' })
     expect(r.admit).toBe(false)
     if (r.admit) return
     expect(r.reason).toBe('irrelevant-to-question')
+  })
+
+  it('PHASE 7K TRACK G CHANGED THIS: a practice request is no longer refused', () => {
+    // This assertion previously read `.admit === false` for
+    // "ok give me a question to practise", pinning the refusal as the "other
+    // half" of the production log line. Phase 7K reclassified that refusal as
+    // the P2-2 DEFECT, not as desired behaviour: on the one turn a learner
+    // explicitly asks to work on the concept, every authored asset for it was
+    // discarded and the turn fell through to an ungoverned model answer.
+    //
+    // THIS FILE'S PROTECTION IS UNAFFECTED, and the header says why in its own
+    // words: "the gate is not 'was the asset relevant' but 'did the learner
+    // just answer something'". That gate is `serveFromMemory`, asserted
+    // directly below — the relevance guard never enforced it, which is what
+    // this whole describe block ("why the existing relevance guard could not
+    // catch it") exists to document.
+    const r = admitForLearner({ content: SERVED_ASSET, userMessage: 'ok give me a question to practise' })
+    expect(r.admit).toBe(true)
+  })
+
+  it('...and the REAL gate still refuses that same turn when an answer is pending', () => {
+    // The strengthening half: admission is not the protection, so prove the
+    // protection independently. A pending MCQ that the message answers still
+    // blocks the memory path regardless of what admitForLearner now says.
+    expect(serveFromMemory({
+      assembled: true, pendingMcq: MCQ, message: 'b', isBareAck: false,
+    })).toBe(false)
   })
 })
 

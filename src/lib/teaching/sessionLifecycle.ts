@@ -103,6 +103,46 @@ export function episodeFailureCount(persisted: unknown, newBoundary: boolean): n
 }
 
 /**
+ * PHASE 7K TRACK B — opening a lesson starts a new episode.
+ *
+ * THE TRAP THIS REMOVES, reproduced live (2026-08-25, TIR). The learner opened
+ * a lesson through `/api/learn/lesson-init` after a ~7 hour gap and the very
+ * first chat turn logged `lifecycle: "CLOSING"` and `phaseBefore: "GUIDE"` —
+ * on a lesson that had just been opened. Asking to practise returned the close
+ * script; saying "no wait i dont want to stop, i want to practice" returned it
+ * again. The lesson could not be entered at all.
+ *
+ * THE MECHANISM. lesson-init writes an assistant message for the opening, then
+ * returns. The next chat turn measures the episode boundary from the newest
+ * message timestamp — which is now SECONDS old, because lesson-init just wrote
+ * it — so `isNewEpisode` reads false, `deriveEpisode(prev, false)` returns the
+ * previous episode verbatim, and a CLOSING phase earned hours or days ago is
+ * inherited into a brand-new lesson. The 30-minute boundary could never fire,
+ * because the act of opening the lesson always refreshed the clock it reads.
+ *
+ * WHY THIS AND NOT AN ARBITRATION CHANGE. The close was not mis-arbitrated —
+ * CLOSE legitimately outranks a practice request, and decision-engine/07 §6 is
+ * explicit that a spent affect budget ends the session rather than negotiating.
+ * The defect is that the budget was not the CURRENT lesson's. So this fixes the
+ * STATE, and close semantics are untouched: within an episode an explicit close
+ * still closes, an earned CLOSING still closes, and no learner message gains
+ * any new power to override either.
+ *
+ * Deliberately clears both counters that scope "failures this session" —
+ * `episodeFailureCount`'s doc comment above records that they have different
+ * lifetimes and must not drift apart again.
+ */
+export function clearEpisodeForLessonOpen(): Record<string, unknown> {
+  // A DELTA, not a rewritten snapshot. contextSnapshot has exactly one
+  // mutating writer (writeSnapshotDelta, ADR 10's single-writer invariant, and
+  // `snapshotWriterDiscipline.test.ts` enforces it) — that writer MERGES, so a
+  // key is retired by writing an explicit null rather than by deleting it.
+  // `deriveEpisode`'s caller already treats a non-object as "no episode", so
+  // null reads as absent without any reader change.
+  return { sessionEpisode: null, sessionFailureCount: 0 }
+}
+
+/**
  * Fold this turn's parsed signal into the episode — the only mutation path.
  * OPENING → CORE on the first answered item (the due retrieval, or the
  * engineered win). CORE → CLOSING when the affect budget is spent
