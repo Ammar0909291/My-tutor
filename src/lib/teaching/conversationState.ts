@@ -1014,6 +1014,67 @@ export function advanceConversationState(
     }
   }
 
+  // ── PHASE E: OBSERVE MUST BE ABLE TO CONCLUDE, NOT ONLY TO BE FAILED OUT ──
+  //
+  // `phaseAfterConcludedDiagnostic` — the transition meaning "we ran the
+  // diagnostic, it produced nothing, start teaching" — is invoked at exactly
+  // ONE other place in this fold: inside `if (failed)`. So it could only ever
+  // fire on a turn the learner answered WRONG or fired a dont_know recovery.
+  //
+  // A learner who never fails and never answers cannot reach it. Measured
+  // against this module: thirty "say it more simply" turns end at OBSERVE with
+  // observeFailures 0 and consecutiveDontKnows 0 — every learner request,
+  // practice request and no-signal turn leaves both counters untouched, so the
+  // transition is unreachable however long the learner stays.
+  //
+  // Live, isolated sessions, zero degraded turns, budget 12:
+  //   gauss-law 6 OBSERVE turns MASTERED · moment-of-inertia 5 MASTERED ·
+  //   atomic-orbitals 8 MASTERED (needed the extension) ·
+  //   titration 8 OBSERVE turns, 2 gradeable questions, budget exhausted.
+  //
+  // THIS IS NOT "after N turns, skip OBSERVE". `observeFailures`'s own comment
+  // above defines it as "an OBSERVE probe was run and produced nothing". A turn
+  // where the ENGINE decided to ask and no gradeable answer came back IS that
+  // fact, by that definition — it was simply never recorded, because the only
+  // writer sat inside the failure branch. Recording it lets the EXISTING
+  // transition fire at the EXISTING >= 2 threshold. No new state, no new
+  // threshold, no new phase meaning, and no blind jump: the machine still
+  // leaves OBSERVE only once the diagnostic has demonstrably produced nothing
+  // twice.
+  //
+  // `questionSanctioned` is reused rather than a new field: route.ts sets it
+  // from `evidenceMoveHoisted === 'ask'`, so it already means exactly "the
+  // engine's own decided move was to ask". A model-volunteered '?' on a teach
+  // turn carries `false` and cannot count — the engine never ran a probe.
+  //
+  // Excluded, each for a reason that is already law elsewhere in this file:
+  //   · degraded turns — an outage template is content-free, so it is not a
+  //     diagnostic RESULT (same guard `deliveredAGive` applies);
+  //   · recovery turns — dont_know has its own channel, and the failure branch
+  //     above already raises both counters for it (which is why the transition
+  //     takes max(), not sum());
+  //   · anything that already moved the phase — this only ever fires on a turn
+  //     that would otherwise have left the learner exactly where they were.
+  //
+  // The authored-probe policy is deliberately NOT touched. OBSERVE remains
+  // probe-free: 267 of 374 physics+chemistry concepts hold exactly the three
+  // gradeable probes the mastery gates themselves need, so spending one here
+  // would starve CHECK/PRACTICE. This changes only WHEN teaching starts.
+  const diagnosticProducedNothing =
+    prev.phase === 'OBSERVE'
+    && next.phase === 'OBSERVE'
+    && evidence.questionSanctioned === true
+    && evidence.signalCorrect === null
+    && evidence.degradedTurn !== true
+    && evidence.recoveryFired !== true
+  if (diagnosticProducedNothing) {
+    next.observeFailures = (next.observeFailures ?? 0) + 1
+    next.phase = phaseAfterConcludedDiagnostic(
+      next.phase,
+      Math.max(next.consecutiveDontKnows ?? 0, next.observeFailures),
+    )
+  }
+
   // A.6: track turns in the current phase — reset on transition.
   next.turnsInCurrentPhase = foldTurnsInCurrentPhase(
     prev.phase, next.phase, prev.turnsInCurrentPhase ?? 0,
