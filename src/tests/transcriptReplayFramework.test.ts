@@ -372,6 +372,20 @@ describe('STEP 3 — harness self-test on a labelled control sequence', () => {
         { learner: 'ready',                     tutor: 'What do you notice about the block?' },
         { learner: 'it slows down over time',   tutor: 'Interesting.' },
         { learner: 'because of friction',       tutor: 'Say more.' },
+        // A FOURTH turn, because `signalRepairIndices` is read at the START of
+        // a turn against the PREVIOUS turn's metrics: a drop on the last turn
+        // of a transcript can never be observed being repaired, however
+        // correctly the runtime would repair it.
+        //
+        // Added when the Phase E rhetorical-question repair moved this
+        // sequence's first sanctioned ASK from turn 1 to turn 2. That shift is
+        // the fix working — turn 0's tutor asks a question the engine did not
+        // sanction (QL-1 had removed ASK because nothing was taught yet), and
+        // crediting that turn as the give it was lets the ladder climb
+        // OBSERVE → DEMONSTRATE → GUIDE and actually ask, where before it kept
+        // showing. The assertion's intent is unchanged: prove the harness
+        // flags the freeze-breaker.
+        { learner: 'i think it is friction',    tutor: 'Let us check that.' },
       ],
     }
     const o = replay(dropped)

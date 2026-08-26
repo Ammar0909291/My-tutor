@@ -607,16 +607,54 @@ export function advanceConversationState(
   // below — plus Track K's shadow policy rules. Both reason about the SYSTEM's
   // questioning, so counting output the system never chose is the defect.
   //
-  // `teachSegmentsSinceQuestion` is deliberately UNCHANGED and still resets on
-  // ANY question: it answers "did the assistant ask something and give nothing
-  // since", which is a fact about the learner's experience regardless of who
-  // authored the question. questionLegality and masteryGate read it for exactly
-  // that, and the three route consumers that need "any question was asked" were
-  // migrated onto this same idiom rather than onto the narrowed counter.
-  if (evidence.askedQuestion) {
-    // An unsanctioned question HOLDS the counter rather than resetting it: the
-    // engine's own prior asks have not been answered away, so forgetting them
-    // would hand out a fresh budget every time the model spoke out of turn.
+  // ── PHASE E: 7N-1(ii) REACHED THE INCREMENT AND NOTHING ELSE ─────────────
+  //
+  // The narrowing above was applied to ONE of the three places this branch
+  // decides something, and the two it missed are what starve the ladder:
+  //
+  //   · `questionsAskedSinceTeach` is only RESET in the `else` arm — the arm
+  //     that requires the turn to contain no '?' at all. An unsanctioned
+  //     question HOLDS it. So once it reaches 2 it can never fall while the
+  //     model keeps ending paragraphs with "Why might that happen?", and the
+  //     budget gate in decideNextMoveHeuristic (`>= 2 → return 'teach'`, which
+  //     sits ABOVE the phase switch) fires for the rest of the concept's life.
+  //
+  //   · `teachSegmentsSinceQuestion` is zeroed on ANY '?', so the GUIDE arm's
+  //     own `teachSegmentsSinceQuestion >= 2` can never fire either. PHASE 7H's
+  //     comment inside that arm describes exactly this and works around it with
+  //     `|| ctx.practiceRequested` rather than repairing the counter.
+  //
+  // MEASURED with the real modules, weak learner, 14 turns: a model that ends
+  // its teaching with a rhetorical question sits at GUIDE for ELEVEN
+  // consecutive turns and is served ZERO probes; an otherwise identical model
+  // that omits the '?' reaches TRANSFER with verified mastery and four probes.
+  // Same engine, same learner, same concept — different prose. That is the
+  // runtime taking its assessment cadence from the model's wording.
+  //
+  // THE PREDICATE IS ALREADY IN THIS FILE. Forty lines below, `deliveredAGive`
+  // computes `!degradedTurn && (!askedQuestion || deliveredTeaching)` — a turn
+  // that taught and ended on a question IS a give. The counters were the only
+  // place still disagreeing with it. `degradedTurn` is carried for the same
+  // reason it is carried there: an outage template is content-free, so it must
+  // not be credited as a teach segment however it happens to be punctuated.
+  //
+  // Omitting either optional field is byte-identical to the previous behaviour
+  // — `=== false` and `=== true` both fail on `undefined` — so every existing
+  // caller, fixture and the route's own fallback fold are untouched.
+  //
+  // `teachSegmentsSinceQuestion` still answers "did the assistant ask something
+  // and give nothing since". This does not change that reading; it corrects the
+  // arithmetic, because a turn that taught DID give.
+  const engineTaughtThisTurn =
+    evidence.degradedTurn !== true && evidence.deliveredTeaching === true
+  const rhetoricalAsideOnATeachTurn =
+    evidence.askedQuestion && evidence.questionSanctioned === false && engineTaughtThisTurn
+
+  if (evidence.askedQuestion && !rhetoricalAsideOnATeachTurn) {
+    // An unsanctioned question that taught nothing HOLDS the counter rather
+    // than resetting it: the engine's own prior asks have not been answered
+    // away, so forgetting them would hand out a fresh budget every time the
+    // model spoke out of turn.
     next.questionsAskedSinceTeach = evidence.questionSanctioned === false
       ? prev.questionsAskedSinceTeach
       : prev.questionsAskedSinceTeach + 1
