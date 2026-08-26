@@ -360,3 +360,71 @@ turns, which consume no budget); not the concept budget (§4 above).
 Investigation only. `CONCEPT_TURN_BUDGET`, `BUDGET_EXTENSION_TURNS`, mastery
 thresholds, `gradeMcqAnswer`, arbitration precedence and the episode machine
 are all untouched.
+
+---
+
+# Second-latch fix: shipped and proven. Live verification: 0/4 — a THIRD constraint.
+
+## The fix works. Production says so directly.
+
+`learn_sessions.contextSnapshot` after a run in which the learner answered
+**wrong twice** in every lesson:
+
+```
+cmt967kuj…  ep {phase CORE, visibleFailures 1}   (physics session)
+cmt8thovg…  ep {phase CORE, visibleFailures 1}   (chemistry session)
+```
+
+Pre-fix, two wrong answers meant `visibleFailures 2` → CLOSING → starvation.
+Both sessions now sit at CORE with the budget cleared by the correct answer in
+between, exactly as designed.
+
+The `[gate-eligibility]` blocker distribution moved with it:
+
+```
+BEFORE  ["arbitrationAllowsProbe","notClosingTurn"]  × 15, at GUIDE/CHECK, move:'ask'
+AFTER   ["arbitrationAllowsProbe","notClosingTurn"]  × 1,  on a DEMONSTRATE turn
+                                                            already blocked by phase
+```
+
+## And all four learning concepts still failed
+
+```
+Torque             conceptsMastered []  needsReview  budgetExhaustions 1  GUIDE
+Carnot Cycle       conceptsMastered []  needsReview  budgetExhaustions 1  GUIDE
+Galvanic Cell      conceptsMastered []  needsReview  budgetExhaustions 1  GUIDE
+Gibbs Free Energy  conceptsMastered []  needsReview  budgetExhaustions 1  CHECK
+```
+
+Zero degraded turns — not an outage. The new dominant blockers:
+
+```
+7 × OBSERVE      blockedBy ["phaseAllowsProbe","probeAttachablePhase"]
+4 × GUIDE        blockedBy ["phaseAllowsProbe"]        with move:'teach'
+```
+
+Both are the **first latch's documented residue**: `isProbeAttachablePhase` is
+`GUIDE | CHECK | PRACTICE`, so the authored gate is structurally forbidden below
+GUIDE; and at GUIDE it fires only on an `ask` turn, while the move heuristic
+alternates on `teachSegmentsSinceQuestion`. Escaping OBSERVE therefore still
+depends on a model-volunteered MCQ or an acknowledgement, and the harness's
+script supplies its first `ok sir` at turn ~10 of 12.
+
+OBSERVE dwell, previous run vs this one: 2–5 turns → 4–8 turns.
+MCQs served: 1–6 → 1–3.
+
+## An instrument error of mine, stated rather than buried
+
+I changed the learner (one wrong answer → two) in the **same** run that was
+meant to verify the fix. That makes this run non-comparable with the 2/4
+baseline: "the fix did not deliver mastery" and "the learner got harder" cannot
+be separated from it. The correct experiment was to re-run the identical
+learner first, confirm 2/4 → 4/4 or not, and only then harden the script.
+
+## The negative control did not run
+
+Its trigger requires the ladder to reach CHECK or PRACTICE, and the control
+lesson (`chem.equil.buffer`) never got past DEMONSTRATE. `"I'm done for today,
+thanks."` was never sent. The explicit-close protection is therefore
+**UNMEASURED live** — it remains covered offline by `affectBudgetSpiral.test.ts`
+§F, which is not the same thing.
