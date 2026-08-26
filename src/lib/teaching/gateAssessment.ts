@@ -448,6 +448,40 @@ function withheldContinuation(justGraded: GradedThisTurn | null | undefined): st
     : `Not quite. ${WITHHELD_QUESTION_CONTINUATION}`
 }
 
+/**
+ * Drop trailing lines that only ANNOUNCE the question just removed.
+ *
+ * ── THE DEFECT THIS CLOSES (chem.bond.polar-molecules, session cmtapm78v…,
+ * 2026-08-26) ───────────────────────────────────────────────────────────────
+ * The entire stored assistant message was 37 characters — "Please answer the
+ * following question:" — with no question and no widget beneath it. Sixteen
+ * production turns carry that shape ("Here is a question to check your
+ * understanding:" ×7, "Quick question:", "Try this quick practice question:",
+ * …), 9 of them since 2026-08-19.
+ *
+ * `dropAnswerableContent` was right to remove the question and
+ * `askedAnswerableQuestion` is right that this sentence is not one — it asks
+ * nothing. So the introduction outlived the thing it introduced, and the turn
+ * shipped a promise it could not keep, which is strictly worse than the
+ * placeholder it displaced.
+ *
+ * A line ending in a colon is, by construction, an introduction to what
+ * follows; here nothing follows. Scoped to the TRAILING LINE rather than the
+ * paragraph, because real teaching routinely shares a paragraph with the
+ * lead-in ("That's right — the cross product is zero.\nNow, here's a quick
+ * check for you:") and must survive. Never reached when a structured MCQ is
+ * attached: that branch returns above, and there the widget really does follow.
+ */
+function dropOrphanedLeadIn(kept: string): string {
+  let out = kept.trimEnd()
+  // Repeat: a model that wrote two lead-in lines leaves two orphans.
+  for (let i = 0; i < 4 && out.endsWith(':'); i += 1) {
+    const cut = out.lastIndexOf('\n')
+    out = (cut === -1 ? '' : out.slice(0, cut)).trimEnd()
+  }
+  return out
+}
+
 export function withholdUngradedGateQuestion(
   input: UngradedGateQuestionInput,
 ): UngradedGateQuestionResult {
@@ -493,7 +527,8 @@ export function withholdUngradedGateQuestion(
     const poses = askedAnswerableQuestion(text) || containsOptionList(text)
     if (!poses) return { text: input.text, withheld: false, reason: 'ok' }
 
-    const kept = dropAnswerableContent(text)
+    // An introduction has nothing left to introduce — see `dropOrphanedLeadIn`.
+    const kept = dropOrphanedLeadIn(dropAnswerableContent(text))
     return {
       text: kept.length > 0 ? kept : withheldContinuation(input.justGraded),
       withheld: true,
