@@ -145,7 +145,13 @@ const ENGINE_ROUTES: Record<TeachingDecisionType, { executor: DispatchExecutor; 
   },
   ESCALATE_TO_LLM: {
     executor: 'LLM_OPEN',
-    engine: 'routeAI (Groq primary / Yandex fallback) — current pipeline as-is',
+    // Was 'routeAI (Groq primary / Yandex fallback)', which was wrong twice
+    // over: the default chain is Groq -> Gemini -> OpenRouter, and Yandex is
+    // the RUSSIAN chain's primary, never the default's fallback. A descriptive
+    // note that names a provider order will go stale every time the chain is
+    // reordered — router.ts is the single authority on that, so this points at
+    // it instead of restating it.
+    engine: 'routeAI — the language-selected failover chain (see ai/router.ts)',
     note: 'Open conversation, recovery rendering, or honest ignorance.',
   },
 }

@@ -4375,9 +4375,19 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           `[learn/chat] RESPONSE provider=${provider}` +
           ` resolvedConceptId=${resolvedConceptId ?? 'unknown'}` +
           ` subject=${learnSession.subject.slug}` +
-          ` source=Groq` +
+          // `source` names the SERVING PATH, as it does at the other three
+          // sites (LessonAttempt / ExplanationMemory / GateAssessmentRenderer).
+          // This one used to read `Groq`, naming a provider instead — and
+          // Phase G caught it printing `source=Groq` on a turn independently
+          // proven to have been served by Gemini. The provider is already on
+          // this line as `provider=${provider}`; the path is what this field is
+          // for. Key unchanged so existing log consumers still match.
+          ` source=LLM` +
           ` fallback_reason=${memoryFallbackReason ?? 'unknown (bug: reason not set)'}` +
-          ` groq_invoked=true` +
+          // Was hardcoded true. It asserts a specific provider, so it must read
+          // the one actually used — the deterministic paths above keep their
+          // literal `false` because they make no model call at all.
+          ` groq_invoked=${provider === 'groq'}` +
           ` finish_reason=${finishReason}` +
           ` chars=${text ? text.length : 0}` +
           ` memoryServingMode=null memoryFallbackReason=${memoryFallbackReasonCode}`
