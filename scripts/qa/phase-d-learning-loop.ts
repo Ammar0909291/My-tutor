@@ -117,24 +117,58 @@ const PRACTICE = [
   'give me one more question sir',
 ]
 
-/** How a weak learner writes the correct option: paraphrased, hedged, lowercase,
- *  never a clean quote. This is the grader's real audience. */
+/**
+ * How a weak learner writes their answer.
+ *
+ * REWRITTEN AFTER THE PHASE E RUN, because the first version was producing
+ * input no human would ever send and was therefore measuring nothing. It did
+ * `text.replace(/[^\w\s]/g,' ').split(/\s+/).slice(0,4)`, which destroys any
+ * option containing mathematics:
+ *
+ *      "v = ωr"   ->  "i think it is v 2 r"
+ *      "2.0"      ->  "maybe 2 0"
+ *      "MgO's ions carry a higher charge"  ->  "maybe mgo s ions carry a"
+ *
+ * Half the served assessments in that run went ungraded, and I could not tell
+ * whether that was a real grading gap or my own generator — which makes the
+ * measurement worthless either way. Six harnesses in this repository have now
+ * been on the verge of condemning working code; the instrument gets fixed
+ * before the product is judged.
+ *
+ * The four forms below are what a struggling student actually types, and every
+ * one of them is something the grader could in principle read:
+ *   - the bare letter, with the punctuation they habitually add
+ *   - "sir i think B"
+ *   - the option ECHOED off the screen, verbatim and unmangled, which is the
+ *     commonest thing a weak reader does
+ *   - a short lead-in plus that echo
+ *
+ * `echo()` truncates on a WORD boundary and never strips characters, so
+ * notation survives intact.
+ */
+function echoOption(text: string, maxWords: number): string {
+  const words = text.trim().split(/\s+/)
+  const kept = words.slice(0, maxWords).join(' ')
+  return kept.replace(/[,;:]$/, '')
+}
+
 function weakCorrectAnswer(options: string[], correctIndex: number, variant: number): string {
   const text = options[correctIndex]
-  const words = text.replace(/[^\w\s]/g, ' ').split(/\s+/).filter(Boolean)
   const letter = 'ABCD'[correctIndex]
   switch (variant % 4) {
-    case 0: return `i think it is ${words.slice(0, 4).join(' ').toLowerCase()} sir`
-    case 1: return `${letter}. but sir i not fully sure`
-    case 2: return `maybe ${words.slice(0, 5).join(' ').toLowerCase()}`
+    case 0:  return `i think it is ${echoOption(text, 6).toLowerCase()} sir`
+    case 1:  return `${letter}. but sir i not fully sure`
+    case 2:  return `maybe ${echoOption(text, 5).toLowerCase()}`
     default: return `sir i think ${letter}`
   }
 }
 
-/** A wrong answer, chosen deliberately once per lesson to exercise remediation. */
+/** A wrong answer, chosen deliberately once per lesson to exercise remediation.
+ *  Same echo rule — a learner picking the wrong option still reads it off the
+ *  screen rather than inventing a mangled fragment of it. */
 function weakWrongAnswer(options: string[], correctIndex: number): string {
   const wrong = options.findIndex((_, i) => i !== correctIndex)
-  return `i think it is ${options[wrong].replace(/[^\w\s]/g, ' ').split(/\s+/).slice(0, 4).join(' ').toLowerCase()}`
+  return `i think it is ${echoOption(options[wrong], 6).toLowerCase()}`
 }
 
 interface TurnRow {
