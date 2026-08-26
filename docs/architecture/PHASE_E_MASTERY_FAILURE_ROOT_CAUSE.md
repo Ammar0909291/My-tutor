@@ -428,3 +428,82 @@ lesson (`chem.equil.buffer`) never got past DEMONSTRATE. `"I'm done for today,
 thanks."` was never sent. The explicit-close protection is therefore
 **UNMEASURED live** — it remains covered offline by `affectBudgetSpiral.test.ts`
 §F, which is not the same thing.
+
+---
+
+# Clean spiral-fix measurement — 0/4, and the first latch is now proven binding
+
+Learner restored to the exact profile that produced 2/4 (CONFUSED, PRACTICE,
+`echoOption`, `weakCorrectAnswer`, `weakWrongAnswer` all hash identical to
+cedd8cc; one deliberate wrong answer). Four fresh concepts, all verified before
+the run to hold ≥3 ACTIVE gradeable MCQs and an explanation at HIGH.
+
+```
+phys.opt.diffraction       GUIDE   1 mcq   0/0   needsReview  budgetExh 1  253s
+phys.wave.doppler-effect   CHECK   5 mcq   0/0   needsReview  budgetExh 1  237s
+chem.kinet.arrhenius       CHECK   2 mcq   0/0   needsReview  budgetExh 1  264s
+chem.hal.sn2               GUIDE   1 mcq   0/0   needsReview  budgetExh 1  236s
+```
+
+0 degraded turns in 53.
+
+## The spiral fix is confirmed by its absence
+
+**Arbitration owners across the whole run: 38 TEACH, 2 LEARNER_REQUEST, ZERO
+CLOSE.** The second latch did not fire once. Combined with the earlier
+two-wrong-answer run ending at `{phase CORE, visibleFailures 1}` where pre-fix
+it would have been 2 → CLOSING, the fix is doing exactly what it was designed
+to do.
+
+## The first latch is now, definitively, the binding blocker
+
+Gate refusals this run — 37 blocked, 4 eligible:
+
+```
+20 × OBSERVE      ["phaseAllowsProbe","probeAttachablePhase"]
+ 5 × DEMONSTRATE  ["phaseAllowsProbe","probeAttachablePhase"]
+ 6 × GUIDE        ["phaseAllowsProbe"]              (move: 'teach')
+ 3 × GUIDE        eligible
+ 1 × CHECK        eligible
+```
+
+**25 of 37 refusals are the OBSERVE/DEMONSTRATE structural prohibition**
+(`isProbeAttachablePhase = GUIDE | CHECK | PRACTICE`). Phase dwell:
+
+```
+diffraction  OBSERVE 8  DEMONSTRATE 1  GUIDE 3
+sn2          OBSERVE 8  DEMONSTRATE 1  GUIDE 3
+arrhenius    OBSERVE 8  DEMONSTRATE 1  GUIDE 3  CHECK 1
+doppler      OBSERVE 6  DEMONSTRATE 2  GUIDE 2  CHECK 2
+```
+
+Three of four spent **8 of 12 turns at OBSERVE**, where the authored gate cannot
+fire at all, so escaping depends on the model volunteering an MCQ. The
+learner's first acknowledgement (`ok sir`, sixth in the CONFUSED cycle) does not
+arrive until turn ~9–10.
+
+## Variance, measured directly
+
+`phys.wave.doppler-effect` was run **twice with an identical learner**:
+5 MCQs → CHECK, and 2 MCQs → GUIDE. Same concept, same script, same deploy.
+That is what an outcome looks like when the deterministic gate is switched off
+for the first two rungs: the result is set by how many questions the model
+happens to volunteer. The earlier 2/4 is best read as the same variance, not as
+a materially better system state.
+
+## Harness defect found, real but not dominant
+
+Two of the nine answers sent were truncated fragments no human would type —
+`"maybe 1 khz × (1 +"` and `"i think it is from the same side as the"`.
+`echoOption` truncates on a word boundary and strips nothing (the cedd8cc
+repair), but truncation ITSELF still mangles a formula or a clause. One of them
+(`doppler` turn 9) graded WRONG on a turn the harness intended to answer
+correctly, costing a rung. Worth fixing before the next run; it does not explain
+0/4, because only 9 answers were sent in total across four lessons where ~12
+graded-correct answers are needed.
+
+## Explicit-close control: UNMEASURED
+
+Re-run on `doppler` for the control reached only GUIDE, so `"I'm done for today,
+thanks."` was never sent. Not manufactured. Still covered offline by
+`affectBudgetSpiral.test.ts` §F1–F5 only.
