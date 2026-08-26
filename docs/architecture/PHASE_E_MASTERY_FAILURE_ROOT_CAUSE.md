@@ -267,3 +267,96 @@ is called. Each chemistry lesson earned its own CLOSING.
 Investigation only, per instruction. Nothing about CLOSE's precedence, the
 affect budget, or the episode machine has been changed, and no production code
 was touched by this run.
+
+---
+
+# The second latch — CLOSING starves mastery (investigation, no code changed)
+
+Reproduction: `npx tsx scripts/qa/phase-e-closing-latch-repro.ts` — real
+production modules, no provider, no DB, deterministic.
+
+## Root cause
+
+`applySignalToEpisode` moves the episode CORE → CLOSING at two visible
+failures, **no transition out of CLOSING exists anywhere in the runtime**, and
+CLOSING denies `AUTHORED_PROBE` through two independent gates — so a learner
+who has reached CHECK is permanently starved of the graded questions
+`correctAtCheck`/`correctAtPractice` can only be earned from, and the lesson
+runs out the concept budget at 0/0.
+
+## The production state, both sides, read from `learn_sessions.contextSnapshot`
+
+```
+chem.equil.le-chatelier   episode {phase CLOSING, visibleFailures 2}
+                          conversation {phase CHECK,    c 0, p 0, turns 12}
+phys.em.faradays-law      episode {phase CORE,    visibleFailures 1}
+                          conversation {phase TRANSFER, c 1, p 2, turns 13}
+```
+
+Offline, from two scripts differing by exactly one graded answer:
+
+```
+ONE failure   -> ep CORE    -> 5 questions served -> TRANSFER c=1 p=2  MASTERED
+TWO failures  -> ep CLOSING -> 2 questions served -> CHECK    c=0 p=0  budget exhausted
+```
+
+Both reproduce their production counterpart exactly.
+
+## Every writer of the closing state
+
+| writer | transition | where |
+|---|---|---|
+| `deriveEpisode` | → OPENING, only on a >30 min inactivity boundary | sessionLifecycle:69 |
+| `applySignalToEpisode` | OPENING→CORE; CORE→CLOSING at `failures >= budget` | sessionLifecycle:162-168 |
+| `forceClosing` | →CLOSING on an explicit finish request | sessionLifecycle:404 |
+| `clearEpisodeForLessonOpen` | episode → null, at lesson-init | sessionLifecycle:135 |
+
+Exhaustively probed: a correct answer, ten correct answers, a wrong answer, a
+turn with no signal, `forceClosing` again, and `deriveEpisode` with no
+boundary all leave the phase at CLOSING. **There is no CLOSING → CORE edge.**
+
+## The two gates, one fact
+
+```
+arbitrateTurn({closing:true}) -> owner CLOSE,
+  denied [PHASE_FRAME, NEXT_MOVE, NEW_QUESTION, AUTHORED_PROBE, FILLER_REPAIR]
+closingTurnWithholdsQuestion('CLOSING') -> true
+```
+
+Both are conjuncts of `gateEligible`, which is why the live log read
+`blockedBy:["arbitrationAllowsProbe","notClosingTurn"]` — removing either alone
+changes nothing. And a learner request does **not** rescue it: LEARNER_REQUEST
+outranks CLOSE but itself suppresses `AUTHORED_PROBE`.
+
+Measured permanence: 200 turns at CHECK, the learner asking for a question on
+every one and willing to answer correctly — **0 questions served**, episode
+still CLOSING.
+
+## The amplifier
+
+`route.ts:6455` synthesizes `{correctness: false}` into the episode on **every
+recovery turn**, so the affect budget is spent by expressions of confusion, not
+only by wrong answers. Measured: `"I don't understand"` then `"I am confused"`
+— no wrong answer anywhere — reaches CLOSING. A standard-register learner
+therefore hits the latch *faster* than the weak-register learner, whose
+confusion `detectFailureState` does not recognise at all.
+
+`SessionEpisode` carries no `closeReason`, so an affect-budget close and an
+explicit "I'm done" close are indistinguishable downstream — which is the
+central constraint on any fix.
+
+## Alternatives tested and ruled out
+
+Threshold is exactly 2 (1 in lesson one); one wrong answer is survivable; an
+acknowledgement cannot spend the budget; a correct answer cannot spend it;
+CLOSING blocks the probe at PRACTICE as well as CHECK; not cross-lesson
+leakage (`clearEpisodeForLessonOpen` fires per lesson open, and both episodes'
+`startedAt` are inside their own lesson); not content (all four concepts hold
+≥3 ACTIVE gradeable probes at the served band); not the outage (1–2 degraded
+turns, which consume no budget); not the concept budget (§4 above).
+
+## Not fixed
+
+Investigation only. `CONCEPT_TURN_BUDGET`, `BUDGET_EXTENSION_TURNS`, mastery
+thresholds, `gradeMcqAnswer`, arbitration precedence and the episode machine
+are all untouched.
