@@ -53,9 +53,48 @@ One deviation, stated rather than smoothed: the live mo-theory ended at DEMONSTR
 because its final answer graded correct; the replay models it as ungraded and ends at
 OBSERVE. Everything else matches turn for turn.
 
+## C2. Twelve lessons, three runs — the outcome is bimodal, not slow
+
+All three live runs are on disk (`reverify.log` 03:00, `phaseE.log` 04:20,
+`phaseE2.log` 05:07). MCQs served per lesson, in run order:
+
+```
+run 1   wave-function 6   spin 2            covalent-bonding 2   ionic-bonding 3
+run 2   rolling-motion 3  particle-in-box 1 mo-theory 2          vsepr 2
+run 3   rolling-motion 3  particle-in-box 2 mo-theory 2          vsepr 6
+```
+
+Twelve lessons. **Both 6s mastered. None of the ten below did. Not one lesson
+served four or five.** A "the weak learner is simply slower" model predicts a
+spread across the range; the data has a hole in the middle of it.
+
+The reason is that this is a **latch**, not a linear cost:
+
+```
+no recognised input -> no rung -> the phase stays below GUIDE
+-> the authored gate cannot attach -> no gradeable question
+-> no gradeable input -> no rung -> ...
+```
+
+Proved rather than argued (repro section G): run the weak register for **100
+turns with the budget ignored** and the ladder **never moves once**, serving zero
+questions. The same hundred turns in standard register move a rung at turn 7 and
+reach TRANSFER. A lesson either breaks into the gate early enough to sustain
+itself, or it never receives a second gradeable question at all — which is
+exactly the hole in the distribution.
+
+`chem.bond.vsepr` demonstrates the loop from the other side. In run 2 the harness
+still mangled mathematical options, so its answers were ungradeable: 2 MCQs,
+GUIDE, not mastered. In run 3 with readable answers: 6 MCQs, TRANSFER, mastered.
+Not a clean natural experiment — the input genuinely differed — but it is the
+same feedback loop, entered through unreadable answers instead of unread
+acknowledgements, and it ends in the same place.
+
 ## D. Is 12 turns enough?
 
-**Yes, and this is not a budget problem.**
+**Yes. Raising it could not have rescued a single one of these lessons** — section
+G runs 100 turns with no budget at all and nothing moves. The budget is not
+merely sufficient; it is irrelevant to this failure.
 
 * A perfect learner needs 6 turns. Slack = 6.
 * The vocative-strip simulation (repro section F) takes the *unchanged* weak-register

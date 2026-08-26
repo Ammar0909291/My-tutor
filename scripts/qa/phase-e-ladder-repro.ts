@@ -351,6 +351,73 @@ function candidateFix() {
   fixRun('WITH the vocative strip', weak, true)
 }
 
+// ═══════════════════════════════════════════════════════════════════════════
+// G. THE LATCH — why the outcome is bimodal rather than merely slow
+// ═══════════════════════════════════════════════════════════════════════════
+/**
+ * The three live runs on disk served, per lesson: 6,2,2,3 / 3,1,2,2 / 3,2,2,6.
+ * Twelve lessons, and NOT ONE at four or five. Both 6s mastered; none of the
+ * ten below did. A linear "the weak learner is just slower" model predicts a
+ * spread. A LATCH predicts exactly this gap, because:
+ *
+ *   no recognised input -> no rung -> the gate stays below GUIDE
+ *   -> no deterministic question -> no gradeable input -> no rung -> ...
+ *
+ * So the state below GUIDE is a FIXED POINT for this learner, and the only
+ * thing that can break it is the model volunteering a question unprompted.
+ * A lesson either breaks in early enough to self-sustain, or never gets a
+ * second gradeable question at all.
+ *
+ * Proved here rather than argued: run the weak register for a hundred turns
+ * with the budget ignored, and see whether anything ever moves.
+ */
+function latchProof() {
+  rule('G. THE STATE BELOW GUIDE IS A FIXED POINT FOR THIS LEARNER')
+  const weak = [
+    'sir i not understand this', 'ok but why it happen like that',
+    'sorry sir can you say more simple', 'i want practice please',
+    'hmm i think i get little bit', 'can you show picture please',
+    'ok sir', 'give me one more question sir',
+    'i am bit confused sir', 'sir can you give me one question to try',
+  ]
+  for (const [label, register] of [['weak', weak], ['standard', [
+    'I don\'t understand this', 'but why does it happen like that',
+    'can you explain it more simply', 'can we practice',
+    'I think I get it a little', 'can you show me a picture',
+    'ok', 'ask me another question', 'I am confused', 'give me a question to try',
+  ]]] as Array<[string, string[]]>) {
+    let s = initialConversationState('demo.concept')
+    let questions = 0
+    let firstMove: number | null = null
+    for (let i = 0; i < 100; i++) {
+      const said = register[i % register.length]
+      const gradeable = questionOnScreen(s.phase, said)
+      if (gradeable) questions++
+      const key = detectFailureState(said, null)
+      const before = s.phase
+      s = advanceConversationState(s, {
+        askedQuestion: true, questionSanctioned: true,
+        signalCorrect: gradeable ? true : null,
+        recoveryFired: key !== null, learnerRequest: detectLearnerRequest(said),
+        misconceptionDetected: false, isPriorKnowledgeProbe: false,
+        dontKnowSignal: isDontKnowSignal(key), learnerIssuedDirective: false,
+        degradedTurn: false, deliveredTeaching: true,
+        acknowledgement: isLowSignalAcknowledgement(said),
+      } as Parameters<typeof advanceConversationState>[1])
+      if (firstMove === null && before !== s.phase) firstMove = i + 1
+      if (masteryVerifiedStrict(s)) break
+    }
+    console.log(
+      `  ${label.padEnd(9)} register, 100 turns, budget ignored:`
+      + ` first rung moved at turn ${firstMove ?? 'NEVER'},`
+      + ` questions=${questions}, final=${s.phase} c=${s.correctAtCheck} p=${s.correctAtPractice}`,
+    )
+  }
+  console.log('\n  The weak register is a fixed point: unbounded turns change nothing, so')
+  console.log('  raising the budget could not have rescued these lessons. What rescued the')
+  console.log('  two that mastered was the MODEL volunteering questions, which is variance.')
+}
+
 function main() {
   reportDetectors()
 
@@ -437,6 +504,7 @@ function main() {
 
   registerExperiment()
   candidateFix()
+  latchProof()
   minimumCost()
   extensionAudit()
 
