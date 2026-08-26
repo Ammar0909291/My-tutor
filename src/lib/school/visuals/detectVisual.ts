@@ -261,9 +261,27 @@ export function detectVisual(opts: DetectVisualOptions): VisualType | null {
  * still `null` on a request nothing here validated, same as before.
  */
 export function parseVisualTag(text: string): { visual: VisualType | null; cleanText: string } {
+  // ── THE ANGLE-BRACKETED SHAPE ────────────────────────────────────────────
+  //
+  // The prompt asks for a bare `VISUAL: <type>` line, but a model can wrap it
+  // in angle brackets. `\bVISUAL:` below begins matching at the "V", so the
+  // opening `<` was left in the learner-facing text, and `[^\n]*` ran to the
+  // end of the LINE — taking any teaching that followed the tag with it.
+  //
+  // OBSERVED IN PRODUCTION (phys.mech.rotational-dynamics, session
+  // cmtaiddvd…): the learner asked for a picture and the stored assistant
+  // message begins `"<Look at the arm of 0.3 m where the 20 N force is
+  // applied; …"`. The stray bracket is cosmetic; the same-line variant is not,
+  // because it deletes the tutor's sentence.
+  //
+  // Matched FIRST and stripped as a unit, bounded by `[^>\n]*` so it can only
+  // ever consume the tag itself. The well-formed path below is untouched: a
+  // bare `VISUAL: type` line strips exactly as it always did, and a line with
+  // no candidate is still left alone.
+  const bracketed = text.match(/<\s*VISUAL:\s*([^>\n]*)>/i)
   // Everything from "VISUAL:" to the end of its line — captures a
   // comma-separated list whole rather than only its first token.
-  const lineMatch = text.match(/\bVISUAL:\s*([^\n]*)/i)
+  const lineMatch = bracketed ?? text.match(/\bVISUAL:\s*([^\n]*)/i)
   if (!lineMatch) return { visual: null, cleanText: text }
   const VALID: Set<string> = new Set([
     'number_line', 'fraction_bar', 'percentage_grid', 'coordinate_plane',
@@ -305,7 +323,11 @@ export function parseVisualTag(text: string): { visual: VisualType | null; clean
   // (candidates.length > 0), regardless of whether any candidate validated:
   // every candidate on the line — valid or not — is consumed together, so a
   // mixed or fully-invalid list can never leave a raw remainder behind.
-  const cleanText = text.replace(/\bVISUAL:\s*[^\n]*\n?/i, '').trim()
+  const cleanText = (bracketed
+    // Literal string replace of the exact match: the bracketed tag is removed
+    // whole, and whatever sat before or after it on the line survives.
+    ? text.replace(bracketed[0], '')
+    : text.replace(/\bVISUAL:\s*[^\n]*\n?/i, '')).trim()
   return { visual, cleanText }
 }
 
