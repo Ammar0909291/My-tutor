@@ -154,7 +154,61 @@ export function applySignalToEpisode(
   opts: { isFirstLesson: boolean },
 ): SessionEpisode {
   if (!signal || signal.correctness === undefined) return ep
-  const failures = ep.visibleFailures + (signal.correctness === false ? 1 : 0)
+  // ── PHASE E: THE AFFECT BUDGET MEASURES A SPIRAL, NOT A LIFETIME ─────────
+  //
+  // This read `ep.visibleFailures + (correctness === false ? 1 : 0)`, so the
+  // field was a MONOTONIC TALLY that nothing anywhere decremented — and the
+  // line below reads it as if it were a STATE, "this learner is in a failure
+  // spiral". Two failures ANYWHERE in a lesson closed the episode, however far
+  // apart and however completely the learner recovered in between.
+  //
+  // That is fatal rather than untidy, because CLOSING has no exit: nothing in
+  // this module or any other moves an episode back to CORE (pinned by an
+  // exhaustive state walk in affectBudgetSpiral.test.ts §H1), and a CLOSING
+  // turn denies AUTHORED_PROBE through two independent gates — CLOSE's
+  // suppression list in turnArbitration, and closingTurnWithholdsQuestion. So
+  // a learner sitting at CHECK is starved of the only evidence
+  // correctAtCheck/correctAtPractice can ever be earned from, and the lesson
+  // runs out the concept budget at 0/0.
+  //
+  // MEASURED IN PRODUCTION, both sides, from learn_sessions.contextSnapshot:
+  //   chem.equil.le-chatelier  episode {CLOSING, visibleFailures 2}
+  //                            conversation {CHECK,    c 0, p 0, turns 12}
+  //   phys.em.faradays-law     episode {CORE,    visibleFailures 1}
+  //                            conversation {TRANSFER, c 1, p 2, turns 13}
+  // One increment against a budget of two is the entire difference between a
+  // finished lesson and an unfinishable one. Offline, two scripts differing by
+  // exactly one graded answer reproduce both end states verbatim.
+  //
+  // This is the SAME defect Phase 4 already fixed once for `remediationCount`
+  // — "a monotonic TALLY being read as if it were a STATE, and remediation was
+  // never exited at all" — and the remedy is the same one, for the same
+  // reason: clear it on the evidence that already clears its sibling
+  // `consecutiveFailures` in advanceConversationState's `succeeded` branch, a
+  // GRADED-CORRECT answer. Nothing is fabricated; the learner demonstrably
+  // answered.
+  //
+  // WHAT THIS DELIBERATELY IS NOT. It does not add a CLOSING → CORE
+  // transition, touch arbitration precedence, let a probe outrank CLOSE, add a
+  // closeReason, or move any budget or threshold. It PREVENTS a premature
+  // close; it does not reverse one, and an episode already CLOSING stays
+  // CLOSING even as this clears its count (§G).
+  //
+  // AND IT LEAVES THE EXPLICIT CLOSE UNTOUCHED, which is what makes it the
+  // safe choice: `forceClosing` sets the phase directly and never reads or
+  // writes `visibleFailures`, so "I'm done for today, thanks" still closes
+  // absolutely and stays protected from every question source (§F). That
+  // independence is pinned by test, because it is the whole safety argument.
+  //
+  // A learner in a genuine spiral still closes: they have no correct answer to
+  // clear it with. Lesson one's budget of 1 is unchanged.
+  //
+  // NOT ADDRESSED HERE, and recorded rather than bundled: route.ts's recovery
+  // block synthesizes `{correctness: false}` on every recovery turn, so
+  // expressions of confusion — "I don't understand", "I am confused" — spend
+  // this budget at the same rate as a wrong answer. Whether distress should
+  // count as failure is a separate product decision.
+  const failures = signal.correctness === false ? ep.visibleFailures + 1 : 0
   const budget = opts.isFirstLesson ? 1 : 2
   let phase: SessionPhase = ep.phase
   let openingSatisfied = ep.openingSatisfied
