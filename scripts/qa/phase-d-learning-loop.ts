@@ -224,29 +224,15 @@ async function runLesson(cookie: string, subject: string, conceptId: string, clo
   for (let n = 1; n <= MAX_TURNS; n++) {
     let said: string
     if (pending) {
-      // ── TWO WRONG ANSWERS, DELIBERATELY SEPARATED ────────────────────────
+      // ── ONE deliberately wrong answer, as in the valid 2/4 run (cedd8cc) ──
       //
-      // The previous run answered wrong exactly ONCE, which is BELOW the
-      // affect budget of two — so it could not exercise the second-failure
-      // latch at all, and a pass would have proved nothing about it.
-      //
-      // Wrong on the learner's 1st and 4th graded answers, with correct ones
-      // between: that is a learner who misses something, recovers, and misses
-      // again later. It is NOT a learner failing everything (which SHOULD
-      // still close the episode — that is the safety behaviour, and the
-      // explicit-close control below is not the only thing protecting it).
-      //
-      // Non-consecutive is the whole point: two CONSECUTIVE failures are a
-      // genuine spiral and must still close. This shape is the one production
-      // showed on chem.equil.le-chatelier and chem.org.isomerism.
-      // 1st and 3rd graded answers, with a correct one between. Pre-fix that
-      // is visibleFailures 1 -> 2 -> CLOSING; post-fix the correct answer
-      // clears the spiral so the second miss reads 1 and the gate stays open.
-      // Deliberately NOT the 4th: mastery still needs three more correct
-      // answers after it, and several physics concepts hold exactly three
-      // authored probes, so demanding seven graded questions would make the
-      // experiment fail on inventory rather than on the fix.
-      const answersWrong = answered === 0 || answered === 2
+      // RESTORED for the clean spiral-fix measurement. A run that changes the
+      // learner in the same pass that verifies a fix cannot attribute its own
+      // result, which is exactly what invalidated the two-wrong-answer run:
+      // "the fix did not deliver mastery" and "the learner got harder" become
+      // inseparable. The learner profile is now byte-identical to the run that
+      // produced 2/4, so the only variable is the production fix.
+      const answersWrong = answered === 0
       said = answersWrong
         ? weakWrongAnswer(pending.options, pending.correctIndex)
         : weakCorrectAnswer(pending.options, pending.correctIndex, answered)
