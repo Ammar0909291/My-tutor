@@ -40,6 +40,26 @@ export interface EpisodeOptions {
    * Off by default: existing battery results stay byte-identical.
    */
   engineShadow?: boolean
+  /**
+   * R1 — the ladder input this simulator could not previously express.
+   *
+   * PRODUCTION derives it once, at route.ts:2756:
+   *   snapshotSessionFailureCount >= 2 || strategyHoisted === 'FOUNDATION_REBUILD'
+   * and hands it to `decideNextMoveDetailed`, where it gates
+   *   `ctx.workedExampleFirst && !state.demonstrated && state.phase !== 'OBSERVE'`.
+   *
+   * Both of this file's decision call sites hardcoded `false`, so the replay
+   * could not reach that gate at any seed, with any persona, for any number of
+   * turns — including the OBSERVE deadlock fixed in f2294ae, the most recent
+   * defect to have reached real learners.
+   *
+   * TOLD, NOT RE-DERIVED. The caller supplies the value production computed;
+   * duplicating the derivation here would create a second implementation of a
+   * rule that must have exactly one, and the two would drift.
+   *
+   * Off by default, so every existing battery result stays byte-identical.
+   */
+  workedExampleFirst?: boolean
 }
 
 export interface EpisodeResult {
@@ -74,6 +94,9 @@ export interface EpisodeResult {
 export async function runEpisode(opts: EpisodeOptions): Promise<EpisodeResult> {
   const rand = rng(opts.seed)
   const register = opts.contentRegister ?? 'beginner'
+  // R1: one binding, read by BOTH decision call sites below, so the adapter
+  // path and the engineShadow verdict can never be given different inputs.
+  const workedExampleFirst = opts.workedExampleFirst === true
   let cs: ConversationState = initialConversationState(opts.conceptId ?? 'sim.concept')
   const turns: EpisodeTurn[] = []
   const engineTurns: EpisodeTurn[] = []
@@ -109,7 +132,7 @@ export async function runEpisode(opts: EpisodeOptions): Promise<EpisodeResult> {
       legality: {},
       contentRegister: register,
       episodePhase: 'CORE',
-      workedExampleFirst: false,
+      workedExampleFirst,
       actionClass: null,
       availableVisualType: null,
       vocabularyBans: [],
@@ -127,7 +150,7 @@ export async function runEpisode(opts: EpisodeOptions): Promise<EpisodeResult> {
       // simulator must not load it for callers that never asked for it.
       const { policyGate } = await import('@/lib/eos-runtime/policyGate')
       const detail = decideNextMoveDetailed(cs, {
-        recoveryTurn: recoveryActive, workedExampleFirst: false, legality: {},
+        recoveryTurn: recoveryActive, workedExampleFirst, legality: {},
       })
       const gate = policyGate({
         state: s, mode: 'shadow',
@@ -197,6 +220,8 @@ export interface BatteryOptions {
   baseSeed?: number
   /** Also run the K4 engine in shadow on every turn (see EpisodeOptions). */
   engineShadow?: boolean
+  /** R1: forwarded to every episode (see EpisodeOptions.workedExampleFirst). */
+  workedExampleFirst?: boolean
 }
 
 export interface BatteryResult {
@@ -233,6 +258,7 @@ export async function runBattery(opts: BatteryOptions): Promise<BatteryResult> {
       const seed = base + n
       const r = await runEpisode({
         persona, seed, turns: opts.turnsPerEpisode, engineShadow: opts.engineShadow,
+        workedExampleFirst: opts.workedExampleFirst,
       })
       episodes++
       totalTurns += r.turns.length
