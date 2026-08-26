@@ -183,3 +183,87 @@ Not yet. G-1 and G-2 are real and are working — the ladder now reaches CHECK, 
 could not before — but they fixed the rungs, not the fuel. Phase E closes when the
 detector gap above is fixed and a live four-concept run reaches verified mastery on
 concepts the fix was not derived from.
+
+---
+
+# Phase E verification run — 2 of 4, and the second latch
+
+**Deploy `c120790` (the detector fix). Disjoint concept set, none of it used to
+derive the fix. Server-side `lesson_attempts` quoted, not inferred.**
+
+| lesson | ladder reached | mcqs | check/practice | conceptsMastered | budgetExhaustions |
+|---|---|---|---|---|---|
+| phys.wave.standing-waves | …→CHECK→PRACTICE→TRANSFER | 5 | 1 / 2 | `["phys.wave.standing-waves"]` | 0 |
+| phys.em.faradays-law | …→CHECK→PRACTICE→TRANSFER | 6 | 1 / 2 | `["phys.em.faradays-law"]` | 0 |
+| chem.org.isomerism | …→GUIDE→CHECK | 2 | 0 / 0 | `[]` — needsReview | 1 |
+| chem.equil.le-chatelier | …→GUIDE→CHECK | 1 | 0 / 0 | `[]` — needsReview | 1 |
+
+**2 of 4 meet the strict bar. This does not close Phase E.**
+
+## What the fix demonstrably did
+
+Both failures now CLIMB. `chem.org.isomerism` and `chem.equil.le-chatelier`
+each reached CHECK on turn 9, and in both the move that got them out of GUIDE
+was the learner typing `ok sir` — the exact utterance that was inert before.
+Compare the pre-fix runs on the same harness: `chem.bond.mo-theory` sat at
+OBSERVE for all 12 turns, `phys.qm.particle-in-box` stalled at GUIDE. The
+fixed point below GUIDE is gone in production, not just offline.
+
+Mastery went 1 of 4 (and that one only on the budget extension, at turn 13) to
+2 of 4, both inside budget with `budgetExhaustions: 0`.
+
+## The second latch — measured, not hypothesised
+
+Both chemistry lessons reached CHECK and were then never asked a question.
+Production `[gate-eligibility]` for the window, tallied:
+
+```
+"phase":"CHECK","move":"ask","eligible":false,"blockedBy":["arbitrationAllowsProbe","notClosingTurn"]   × 6
+"phase":"GUIDE","move":"ask","eligible":false,"blockedBy":["arbitrationAllowsProbe","notClosingTurn"]   × 6
+"phase":"CHECK","move":"teach","eligible":false,"blockedBy":["arbitrationAllowsProbe","notClosingTurn"] × 3
+```
+
+`move: 'ask'` — the engine wanted a question and the gate refused. Both
+blockers are the same fact: `closingTurnWithholdsQuestion(episode.phase)` is
+true, and Phase 3's ladder puts CLOSE above AUTHORED_PROBE. The arbitration log
+confirms it verbatim: `owner: 'CLOSE', overridden: ['TEACH'], denied: [...]`.
+
+The chain, each link from source or log:
+
+1. `applySignalToEpisode` moves CORE → CLOSING at `visibleFailures >= 2`
+   (budget 2; 1 in lesson one).
+2. CLOSING is a property of the EPISODE. Once entered it is never left —
+   there is no CLOSING → CORE transition in `sessionLifecycle.ts`.
+3. `closingTurnWithholdsQuestion` then denies the authored probe on EVERY
+   remaining turn of that lesson.
+4. So the learner sits at CHECK with nothing to answer until the 12-turn
+   concept budget runs out — `budgetExhaustions: 1` on exactly the two
+   lessons that failed, `0` on the two that passed.
+
+**This is a second latch of the same shape as the first**: the ladder can only
+climb on evidence, the evidence needs a question, and a condition unrelated to
+the learner's current state permanently removes the question. The first latch
+was a deaf detector; this one is a one-way phase.
+
+Two wrong answers is a low bar for the learner this product exists for, and the
+harness's weak learner deliberately answers wrong once by design. Ruled out as
+the cause: this is NOT cross-lesson leakage — `clearEpisodeForLessonOpen()`
+resets `sessionEpisode` and `sessionFailureCount` at every lesson open, and it
+is called. Each chemistry lesson earned its own CLOSING.
+
+## Not the cause, checked
+
+* **Content.** All four concepts hold >= 3 ACTIVE gradeable MCQ probes and an
+  explanation at the HIGH band, verified against production before the run.
+* **Provider outage.** 1 degraded turn in isomerism, 2 in le-chatelier, 0-1 in
+  the physics lessons. Degraded turns do not consume budget and did not move
+  the ladder either way.
+* **Prior mastery carry-in.** Both chemistry concepts were mastered in older
+  attempts (16:51 and 18:16 rows), so the content is teachable; those rows are
+  history, and this run's rows are distinct and start clean.
+
+## Not fixed
+
+Investigation only, per instruction. Nothing about CLOSE's precedence, the
+affect budget, or the episode machine has been changed, and no production code
+was touched by this run.
