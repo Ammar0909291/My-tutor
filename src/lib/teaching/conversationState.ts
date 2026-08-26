@@ -1403,13 +1403,69 @@ export function detectAutonomyRequest(message: string): boolean {
 const LOW_SIGNAL_TOKENS_RE =
   /^[\s,!.]*(?:(?:got it|i see|okay|ok|alright|sure|right|yep|yup|yeah|i understand|understood|makes sense|i get it|i got it|sounds good|sounds right|fine|hmm|uh huh|uh-huh|mhm|m-hm|cool|great|perfect|nice|good|yes|no problem|fair enough|noted|of course|definitely|go|go on|go ahead|continue|next|ready|i'?m ready|let'?s go|let'?s continue|keep going|carry on|proceed)[,!.\s]*)+([\?].*)?$/i
 
+/**
+ * ── PHASE E: POLITENESS IS NOT CONTENT ──────────────────────────────────────
+ *
+ * `LOW_SIGNAL_TOKENS_RE` above and `PRACTICE_REQUEST_RE` in masteryGate are
+ * both WHOLE-STRING or phrase-shaped matchers over closed token lists, and
+ * neither list contains a vocative. One word therefore silenced both:
+ *
+ *   isLowSignalAcknowledgement('ok')     true
+ *   isLowSignalAcknowledgement('ok sir') FALSE
+ *
+ * That is not a cosmetic miss. The ladder climbs on exactly two inputs — a
+ * graded-correct answer or an acknowledgement — and below GUIDE the authored
+ * probe gate cannot fire (`gateAssessment.isProbeAttachablePhase`), so the
+ * acknowledgement is the ONLY deterministic rung-mover there. With it deaf,
+ * the state below GUIDE is a fixed point: measured offline, the weak register
+ * run for 100 turns with the budget ignored never moved the ladder once and
+ * was served zero questions. Measured live across twelve lessons in three
+ * runs, the two lessons the model happened to ask six questions mastered, the
+ * ten asked three or fewer did not, and not one landed in between.
+ * Full evidence: docs/architecture/PHASE_E_MASTERY_FAILURE_ROOT_CAUSE.md.
+ *
+ * ── WHY A STRIP AND NOT A WIDER PATTERN ─────────────────────────────────────
+ * Adding "ok sir" to the token list fixes one phrasing and leaves "got it
+ * sir", "yes ma'am", "thanks teacher" and the rest. The words being removed
+ * carry no propositional content in ANY of these detectors' vocabularies, so
+ * removing them once, in one place, is the whole of the change — no new
+ * classifier, no new state, and nothing added to either token list.
+ *
+ * ── THE HARD BOUNDARY ───────────────────────────────────────────────────────
+ * The normalised string NEVER LEAVES THESE TWO FUNCTION BODIES. It is not a
+ * parameter, not a return value, and no caller can obtain it. It must never
+ * reach `gradeMcqAnswer`, `resolveRequestedConceptId`, excursion detection,
+ * the visual layer, or the model's prompt or history — feeding a rewritten
+ * learner message to a resolver is the exact change shape that produced the
+ * L1 qualifier defect. Pinned by `politeRegisterDetectors.test.ts` §E, which
+ * fails if the name appears anywhere else in `src/`.
+ *
+ * This does NOT move the mastery bar. `correctAtCheck` / `correctAtPractice`
+ * are incremented only from a graded answer in the `succeeded` branch; the
+ * acknowledgement branch's CHECK / PRACTICE / TRANSFER cases remain empty, so
+ * a polite acknowledgement buys the same nothing an impolite one always did.
+ */
+const ADDRESS_TOKENS_RE = /\b(?:sir|ma'?am|madam|miss|teacher|please|thanks|thank\s+you)\b/gi
+
+/** Exported ONLY so `masteryGate.asksForPractice` — the one other detector
+ *  with the same deafness — shares this single definition rather than growing
+ *  a second copy that can drift. Not for any other caller: see the boundary
+ *  note above, pinned by politeRegisterDetectors.test.ts §E. */
+export function stripAddressTokens(message: string): string {
+  return message
+    .replace(ADDRESS_TOKENS_RE, ' ')
+    .replace(/\s{2,}/g, ' ')
+    .replace(/^[\s,]+|[\s,]+$/g, '')
+}
+
 export function isLowSignalAcknowledgement(message: string): boolean {
-  const trimmed = message.trim()
+  const trimmed = stripAddressTokens(message).trim()
   if (!trimmed) return false
   // More than 10 words: the learner added real content — not a bare ack.
   if (trimmed.split(/\s+/).length > 10) return false
-  // A question mark means they asked something substantive.
-  if (trimmed.includes('?')) return false
+  // A question mark means they asked something substantive. Read on the
+  // ORIGINAL, so a stripped token can never hide one.
+  if (message.includes('?')) return false
   return LOW_SIGNAL_TOKENS_RE.test(trimmed)
 }
 

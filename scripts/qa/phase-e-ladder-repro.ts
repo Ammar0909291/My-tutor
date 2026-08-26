@@ -372,7 +372,7 @@ function candidateFix() {
  * with the budget ignored, and see whether anything ever moves.
  */
 function latchProof() {
-  rule('G. THE STATE BELOW GUIDE IS A FIXED POINT FOR THIS LEARNER')
+  rule('G. THE LATCH — WAS A FIXED POINT BELOW GUIDE, NOW BROKEN')
   const weak = [
     'sir i not understand this', 'ok but why it happen like that',
     'sorry sir can you say more simple', 'i want practice please',
@@ -413,9 +413,10 @@ function latchProof() {
       + ` questions=${questions}, final=${s.phase} c=${s.correctAtCheck} p=${s.correctAtPractice}`,
     )
   }
-  console.log('\n  The weak register is a fixed point: unbounded turns change nothing, so')
-  console.log('  raising the budget could not have rescued these lessons. What rescued the')
-  console.log('  two that mastered was the MODEL volunteering questions, which is variance.')
+  console.log('\n  BEFORE the Phase E detector fix the weak row read "first rung moved at')
+  console.log('  turn NEVER, questions=0, final=OBSERVE" — a fixed point, which is why')
+  console.log('  raising the budget could not have rescued those lessons. Both registers')
+  console.log('  now climb, and the mastery bar was not touched to achieve it.')
 }
 
 function main() {

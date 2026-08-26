@@ -27,7 +27,7 @@
  * Pure module: no DB, no I/O — everything here is unit-testable.
  */
 
-import { repliesWithQuestion } from './conversationState'
+import { repliesWithQuestion, stripAddressTokens } from './conversationState'
 import type { ConversationState } from '@/lib/teaching/conversationState'
 
 // ── Mastery definition (Bug 3 / Bug 12) ──────────────────────────────────────
@@ -622,14 +622,30 @@ const PRACTICE_REQUEST_RE: readonly RegExp[] = [
   /\b(let'?s|lets|can\s+we|shall\s+we)\s+(practice|practise)\b/i,
   // "give me something to solve", "give me one to solve"
   /\b(something|one|anything)\s+to\s+(solve|try|work\s+on)\b/i,
-  // "give me a problem/question" — the bare give, without the word practice
-  /\bgive\s+me\s+(a|another|some|more)?\s*(problem|question)s?\b/i,
+  // "give me a problem/question" — the bare give, without the word practice.
+  //
+  // PHASE E: the quantifier was a single OPTIONAL slot, so "give me one
+  // question to try" and "give me one more question" — the two forms the live
+  // weak-learner run actually sent — both missed: "one" was not in the list,
+  // and even with it added a single slot cannot hold "one more". A bounded
+  // RUN of quantifiers holds both. Still bounded, and still only quantifiers,
+  // so "give me more time to answer the question" does not match — after
+  // "more" the pattern demands the noun and finds "time".
+  /\bgive\s+me\s+(?:(?:a|an|one|another|some|more)\s+){0,2}(problem|question)s?\b/i,
   // PHASE 7M-A: the bare first-person form. "no wait i dont want to stop, i
   // want to practice" is a REAL production message (2026-08-25) that none of
   // the six patterns above matched — the "let's/can we" forms require a
   // hortative opener this phrasing does not have. Found because a 7M test
   // asserted the production phrase was covered and it was not.
-  /\b(i\s+want\s+to|i'?d\s+like\s+to|i\s+wanna|i\s+need\s+to)\s+(practice|practise)\b/i,
+  //
+  // PHASE E: the infinitive "to" was mandatory, and dropping it is the
+  // defining grammatical feature of the register this product exists for —
+  // "i want practice please" was the live run's own phrasing and matched
+  // nothing. Making it optional is the whole change; the negation guard
+  // below still catches "i don't want practice" and "i don't want to
+  // practice", because its {0,2} word window spans "want" and "want to"
+  // alike.
+  /\b(i\s+want(?:\s+to)?|i'?d\s+like(?:\s+to)?|i\s+wanna|i\s+need(?:\s+to)?)\s+(practice|practise)\b/i,
   // PHASE 7P: the bare "next item" form. "one more please" is a REAL production
   // message (2026-08-25) that matched none of the patterns above and was then
   // fuzzy-matched by gradeMcqAnswer to option A of the pending MCQ, recorded as
@@ -662,9 +678,21 @@ const PRACTICE_REQUEST_NEGATED_RE =
   // REQUEST for practice — the exact inversion this guard exists to prevent.
   /\b(don'?t|do\s+not|stop|quit|no\s+more|rather\s+than|instead\s+of)\s+(\w+\s+){0,2}(ask|quiz|test|question|practice|practise)/i
 
-/** Did the learner explicitly ask to be given a question to answer? */
+/** Did the learner explicitly ask to be given a question to answer?
+ *
+ *  PHASE E — read on the politeness-stripped form, so "give me one more
+ *  question sir" is the same request as "give me one more question". The
+ *  stripped string never leaves this function; every caller still passes, and
+ *  every other consumer still sees, the learner's own words. See
+ *  `stripAddressTokens`'s note in conversationState.ts for why this is the
+ *  whole fix and what it must never touch.
+ *
+ *  The NEGATION guard is evaluated on the same stripped form on purpose:
+ *  "please don't ask me questions sir" must stay a refusal, and it would be
+ *  read as one either way, but running both tests over one string is what
+ *  keeps a stripped token from ever flipping the sign. */
 export function asksForPractice(message: string): boolean {
-  const text = (message ?? '').trim()
+  const text = stripAddressTokens((message ?? '').trim())
   if (!text) return false
   if (PRACTICE_REQUEST_NEGATED_RE.test(text)) return false
   return PRACTICE_REQUEST_RE.some((re) => re.test(text))
