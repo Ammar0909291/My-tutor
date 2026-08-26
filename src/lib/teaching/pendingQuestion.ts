@@ -95,7 +95,10 @@ export function readPendingQuestion(
   currentLessonKey: string | null,
 ): TutorMCQ | null {
   if (!isWellFormed(raw)) return null
-  const p = raw as { question: string; options: string[]; correctIndex: number; lessonKey?: unknown }
+  const p = raw as {
+    question: string; options: string[]; correctIndex: number
+    lessonKey?: unknown; assetId?: unknown
+  }
 
   // Legacy row (key absent entirely) — see LEGACY ROWS above.
   const stored = typeof p.lessonKey === 'string' ? p.lessonKey
@@ -103,7 +106,16 @@ export function readPendingQuestion(
       : undefined
   if (stored !== undefined && stored !== currentLessonKey) return null
 
-  return { question: p.question, options: p.options, correctIndex: p.correctIndex }
+  // PHASE F: restore the authored identity when the stored row has one. Read
+  // defensively — every row written before this change has no assetId, and a
+  // legacy row must restore and grade exactly as it always did.
+  const assetId = typeof p.assetId === 'string' && p.assetId ? p.assetId : undefined
+  return {
+    question: p.question,
+    options: p.options,
+    correctIndex: p.correctIndex,
+    ...(assetId ? { assetId } : {}),
+  }
 }
 
 /**
@@ -122,6 +134,10 @@ export function writePendingQuestion(
     options: mcq.options,
     correctIndex: mcq.correctIndex,
     lessonKey: currentLessonKey,
+    // PHASE F: persist the authored identity across the turn boundary. Written
+    // conditionally so a model-generated question stores exactly the shape it
+    // always did — the row stays anonymous, which is the contract.
+    ...(mcq.assetId ? { assetId: mcq.assetId } : {}),
   }
 }
 

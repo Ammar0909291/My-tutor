@@ -109,6 +109,11 @@ export function isProbeAttachablePhase(phase: unknown): boolean {
 export interface ConvertibleProbe {
   stem: string
   choices: Array<{ text: string; isCorrect: boolean }> | null
+  /** PHASE F: the authored asset's id, carried onto the converted TutorMCQ so
+   *  next turn's PROBE_OUTCOME can name what it scored. Optional because the
+   *  narrowed shape is also satisfied by callers that do not have one; absent
+   *  produces exactly the previous output. */
+  assetId?: string
 }
 
 const norm = (s: string) => s.trim().toLowerCase().replace(/\s+/g, ' ')
@@ -159,7 +164,18 @@ export function probeToMcq(probe: ConvertibleProbe): TutorMCQ | null {
     .filter((i) => i >= 0)
   if (correctIndexes.length !== 1) return null
 
-  return { question, options, correctIndex: correctIndexes[0] }
+  // PHASE F: carry the authored identity forward. This is the ONLY writer of
+  // TutorMCQ.assetId — a model-parsed tag has no asset and must stay anonymous.
+  // Presentation, selection, the answer key and grading are all untouched;
+  // what this adds is the ability for next turn's PROBE_OUTCOME to name which
+  // authored probe it scored. Spread last and conditionally so a probe without
+  // an assetId produces a byte-identical object to the previous behaviour.
+  return {
+    question,
+    options,
+    correctIndex: correctIndexes[0],
+    ...(probe.assetId ? { assetId: probe.assetId } : {}),
+  }
 }
 
 /**

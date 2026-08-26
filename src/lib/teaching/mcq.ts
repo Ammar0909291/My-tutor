@@ -28,6 +28,28 @@ export interface TutorMCQ {
   options: string[]
   /** 0-based index into `options`. */
   correctIndex: number
+  /**
+   * PHASE F: the authored asset this question came from, when it came from one.
+   *
+   * OPTIONAL, and absent is the model path's normal state — a question parsed
+   * from the model's own `<!--MCQ-->` tag has no authored identity and must
+   * never acquire one. Only `probeToMcq` sets it.
+   *
+   * WHY IT EXISTS. Grading happens on the NEXT turn, a separate request that
+   * reads the stored question back from `pendingMcq`. Without a field here the
+   * identity died at conversion, so `PROBE_OUTCOME` could not name the asset it
+   * was scoring: measured in production, 2,199 outcome rows and zero carrying
+   * an assetId, against 2,419 ACTIVE probe assets all sitting at sampleSize 0.
+   * No authored probe could ever accumulate evidence, so ADR 13/14's
+   * quality/deprecation machinery had nothing to run on and a wrong authored
+   * answer key would stay invisible indefinitely.
+   *
+   * READ BY EVIDENCE ONLY. Nothing in grading, selection, the ladder or
+   * arbitration consults it — `gradeMcqAnswer` reads `correctIndex` and nothing
+   * else, which is why an authored and an anonymous copy of the same question
+   * grade identically.
+   */
+  assetId?: string
 }
 
 const MCQ_RE = /<!--\s*MCQ\s+([\s\S]*?)(?:-->|\/>)/i

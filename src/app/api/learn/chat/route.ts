@@ -6423,6 +6423,24 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           language:  teachingLang,
           gradeBand: memoryState?.gradeBand ?? GradeBand.ADULT,
           category:  EvidenceCategory.PROBE_OUTCOME,
+          // PHASE F: name the authored probe this outcome scored.
+          //
+          // `pendingMcqHoisted` is the question THIS turn graded — the one
+          // asked last turn and read back through readPendingQuestion's
+          // identity guard, so it is already the right question or null. When
+          // it came from the authored corpus it now carries its assetId; when
+          // the model wrote the question there is none, and the row stays
+          // anonymous exactly as before. Nothing else reads this field, so
+          // grading, the ladder and mastery are untouched.
+          //
+          // WHY IT WAS MISSING. probeToMcq dropped the identity at conversion,
+          // so by this line — a different request from the one that served the
+          // probe — there was nothing left to record. Measured before this
+          // change: 2,199 PROBE_OUTCOME rows, none carrying an assetId, and
+          // 2,419 ACTIVE probe assets all at sampleSize 0. No authored probe
+          // could accumulate evidence, so ADR 13/14's quality and deprecation
+          // machinery had nothing to run on.
+          assetId:   pendingMcqHoisted?.assetId,
           outcome:   `${teachingSignal.correctness ? 'pass' : 'fail'}` +
                      `|conf=${teachingSignal.confidence ?? 'na'}` +
                      `|confusion=${teachingSignal.confusion === true}` +
