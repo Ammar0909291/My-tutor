@@ -49,12 +49,20 @@ const DEFAULT_TARGETS: Array<{ subject: string; concept: string }> = [
   { subject: 'chemistry', concept: 'chem.bond.metallic-bonding' },
   { subject: 'chemistry', concept: 'chem.bond.hybridization' },
 ]
-const TARGETS = process.env.QA_TARGETS
-  ? process.env.QA_TARGETS.split(',').map((c) => ({
-      subject: c.trim().startsWith('phys.') ? 'physics' : 'chemistry',
-      concept: c.trim(),
-    }))
-  : DEFAULT_TARGETS
+/** A target suffixed `!control` runs the explicit-close negative control
+ *  instead of the ordinary weak-learner script. */
+const TARGETS: Array<{ subject: string; concept: string; control?: boolean }> =
+  process.env.QA_TARGETS
+    ? process.env.QA_TARGETS.split(',').map((raw) => {
+        const control = raw.trim().endsWith('!control')
+        const c = raw.trim().replace(/!control$/, '')
+        return {
+          subject: c.startsWith('phys.') ? 'physics' : 'chemistry',
+          concept: c,
+          control,
+        }
+      })
+    : DEFAULT_TARGETS
 
 async function login(): Promise<string> {
   const csrfRes = await fetch(`${BASE}/api/auth/csrf`)
@@ -193,7 +201,10 @@ const fmt = (r: TurnRow) =>
   + `${r.verified ? 'VERIFIED' : '        '} ${r.mcq ? 'MCQ' : '   '} ${r.complete ? 'COMPLETE' : '        '} `
   + `${r.provider.padEnd(11)}\n     learner: "${r.said}"\n     tutor  : ${r.text.slice(0, 230)}`
 
-async function runLesson(cookie: string, subject: string, conceptId: string) {
+/** `closeAtCheck` drives the explicit-close NEGATIVE CONTROL lesson: once the
+ *  ladder reaches a mastery gate the learner says "I'm done for today, thanks."
+ *  That lesson must close and must NOT be handed a question or a mastery. */
+async function runLesson(cookie: string, subject: string, conceptId: string, closeAtCheck = false) {
   console.log(`\n${'═'.repeat(78)}\n${subject.toUpperCase()}  ${conceptId}\n${'═'.repeat(78)}`)
   const lessons = await curriculum(cookie, subject)
   const lesson = lessons.find((l) => l.topicSlug === conceptId)
@@ -208,21 +219,37 @@ async function runLesson(cookie: string, subject: string, conceptId: string) {
   const rows: TurnRow[] = []
   let pending: TurnPayload['mcq'] = null
   let answered = 0
-  let spentWrongAnswer = false
   let confusedIdx = 0
 
   for (let n = 1; n <= MAX_TURNS; n++) {
     let said: string
     if (pending) {
-      // A weak learner answers the question in front of them — badly worded,
-      // and once, wrongly.
-      if (!spentWrongAnswer && answered === 0) {
-        said = weakWrongAnswer(pending.options, pending.correctIndex)
-        spentWrongAnswer = true
-      } else {
-        said = weakCorrectAnswer(pending.options, pending.correctIndex, answered)
-      }
+      // ── TWO WRONG ANSWERS, DELIBERATELY SEPARATED ────────────────────────
+      //
+      // The previous run answered wrong exactly ONCE, which is BELOW the
+      // affect budget of two — so it could not exercise the second-failure
+      // latch at all, and a pass would have proved nothing about it.
+      //
+      // Wrong on the learner's 1st and 4th graded answers, with correct ones
+      // between: that is a learner who misses something, recovers, and misses
+      // again later. It is NOT a learner failing everything (which SHOULD
+      // still close the episode — that is the safety behaviour, and the
+      // explicit-close control below is not the only thing protecting it).
+      //
+      // Non-consecutive is the whole point: two CONSECUTIVE failures are a
+      // genuine spiral and must still close. This shape is the one production
+      // showed on chem.equil.le-chatelier and chem.org.isomerism.
+      const answersWrong = answered === 0 || answered === 3
+      said = answersWrong
+        ? weakWrongAnswer(pending.options, pending.correctIndex)
+        : weakCorrectAnswer(pending.options, pending.correctIndex, answered)
       answered++
+    } else if (closeAtCheck && rows.some((r) => r.phase === 'CHECK' || r.phase === 'PRACTICE')) {
+      // NEGATIVE CONTROL. Once the ladder has actually reached a mastery gate
+      // — the exact state the fix reopens — the learner asks to stop. The
+      // episode must enter CLOSING and STAY protected: no authored probe, no
+      // model MCQ, and no mastery.
+      said = "I'm done for today, thanks."
     } else if (n % 4 === 0) {
       said = PRACTICE[Math.floor(n / 4) % PRACTICE.length]
     } else {
@@ -253,7 +280,7 @@ async function main() {
   console.log(`logged in as ${EMAIL}`)
   const results = []
   for (const t of TARGETS) {
-    try { results.push(await runLesson(cookie, t.subject, t.concept)) }
+    try { results.push(await runLesson(cookie, t.subject, t.concept, t.control === true)) }
     catch (e: any) { console.log(`  !! ${t.concept} FAILED: ${e?.message ?? e}`) }
   }
   console.log(`\n${'═'.repeat(78)}\nSUMMARY\n${'═'.repeat(78)}`)

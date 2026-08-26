@@ -196,8 +196,22 @@ function fullLoop() {
     { said: 'ok sir' }, { said: 'ok sir' }, { said: 'ok sir' },
     { said: 'ok sir' }, { said: 'ok sir' },
   ]
+  // The shape the live chem lessons actually had: two failures SEPARATED by a
+  // correct answer. Before the spiral fix this was indistinguishable from a
+  // genuine spiral; after it, the learner has demonstrably recovered and the
+  // gate stays open.
+  const recoveredThenFailedAgain: Turn[] = [
+    ...climb,
+    { said: 'i think it is the wrong one', graded: false },   // failure 1
+    { said: 'ok sir' },
+    { said: 'sir i think it is the right one', graded: true }, // RECOVERED
+    { said: 'i think it is the wrong one', graded: false },   // failure 2, far apart
+    { said: 'ok sir' }, { said: 'ok sir' }, { said: 'ok sir' },
+    { said: 'ok sir' }, { said: 'ok sir' },
+  ]
   runLesson('ONE visible failure  (the shape phys.em.faradays-law had)', oneFailure)
-  runLesson('TWO visible failures (the shape chem.equil.le-chatelier had)', twoFailures)
+  runLesson('TWO CONSECUTIVE failures — a genuine spiral, MUST still close', twoFailures)
+  runLesson('TWO failures SEPARATED by a correct answer (the live chem shape)', recoveredThenFailedAgain)
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
