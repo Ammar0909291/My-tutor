@@ -135,13 +135,38 @@ describe('the outage guard still holds', () => {
 })
 
 describe('callers that do not supply the field are unaffected', () => {
-  it('omitting deliveredTeaching reproduces the previous behaviour exactly', () => {
+  it('omitting deliveredTeaching still supplies no GIVE of its own', () => {
     // Backward compatibility is asserted, not assumed: `undefined` must behave
-    // as it did before the field existed, so every existing call site and test
-    // keeps its meaning.
+    // as it did before the field existed, so every existing call site keeps its
+    // meaning. That is still true — an omitted field is still not a give.
+    //
+    // UPDATED BY PHASE E (G-1), and this is a DELIBERATE change to what this
+    // case guarantees. It previously asserted `phase === 'DEMONSTRATE'` and
+    // `demonstrated === false` after EIGHT correct answers — i.e. it pinned the
+    // absorbing state as intended behaviour. Phase D measured what that costs:
+    // driving four hard concepts as a genuinely weak learner, 3 of 4 lessons
+    // hit the 12-turn budget at check=0 while the runtime logs carry
+    // `[mcq-grade] correct: true` for those same lessons. The learner answered
+    // authored questions correctly and was recorded as needing review.
+    //
+    // A correct answer is now itself evidence that something answerable was
+    // delivered (conversationState.ts, the reachability law). The FIELD's
+    // contract is unchanged — what changed is that a correct SIGNAL is a second,
+    // independent route to the same flag.
     const s = play(Array(8).fill({ signalCorrect: true, askedQuestion: true }))
-    expect(s.phase).toBe('DEMONSTRATE')
+    expect(s.phase).toBe('TRANSFER')
+    expect(s.demonstrated).toBe(true)
+    // The bar itself is untouched: this learner earned it with real answers.
+    expect(s.correctAtCheck).toBeGreaterThanOrEqual(1)
+    expect(s.correctAtPractice).toBeGreaterThanOrEqual(2)
+  })
+
+  it('and a turn that asks WITHOUT a correct answer still supplies no give', () => {
+    // The narrow guarantee the case above used to carry, kept intact: it is the
+    // CORRECT SIGNAL that now counts, never the mere act of asking.
+    const s = play(Array(8).fill({ signalCorrect: null, askedQuestion: true }))
     expect(s.demonstrated).toBe(false)
+    expect(s.correctAtCheck).toBe(0)
   })
 
   it('a silent teach turn is still a give, as it always was', () => {

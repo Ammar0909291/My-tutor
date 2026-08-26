@@ -321,8 +321,20 @@ describe('explain-differently remediation', () => {
     })
     expect(s1.remediationCount).toBe(1)
     expect(s1.consecutiveFailures).toBe(1)
-    expect(s1.phase).toBe('GUIDE')            // down one — re-show
-    expect(s1.correctAtCheck).toBe(1)         // high-water kept
+    // PHASE E (G-2): the FIRST clarification inside a mastery gate re-teaches
+    // IN PLACE rather than demoting. Measured live in Phase D — demoting on a
+    // weak learner's commonest utterance is why 3 of 4 hard lessons closed at
+    // check=0. The stray-signal guarantee this case exists for is untouched and
+    // asserted below: a SIGNAL on a remediation turn still advances nothing.
+    expect(s1.phase).toBe('CHECK')
+    expect(s1.correctAtCheck).toBe(1)         // high-water kept, NOT incremented
+    // The second one demotes, exactly as before.
+    const s2 = advanceConversationState(s1, {
+      askedQuestion: false, signalCorrect: true,
+      recoveryFired: false, learnerRequest: 'explain_differently',
+    })
+    expect(s2.phase).toBe('GUIDE')
+    expect(s2.correctAtCheck).toBe(1)
   })
 })
 

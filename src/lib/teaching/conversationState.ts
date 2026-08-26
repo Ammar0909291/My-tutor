@@ -739,7 +739,33 @@ export function advanceConversationState(
     next.frustrationLevel = Math.min(5, Math.round(
       (prev.consecutiveFailures + 1) + (prev.remediationCount + 1) * 0.5
     ))
-    next.phase = phaseDown(prev.phase, next.demonstrated)
+    // ── G-2: ONE CLARIFICATION MUST NOT EVICT A LEARNER FROM A MASTERY GATE ──
+    //
+    // The demotion above was unconditional, and "sorry sir can you say more
+    // simple" is the defining move of the learner this product is for. Measured
+    // offline: a learner who has just reached CHECK is pushed to GUIDE by a
+    // single clarification request — so the gate is entered and left without a
+    // CHECK-phase question ever being asked, and the authored probe, which
+    // unlocks at that same phase, never attaches. That is the second half of
+    // why 3 of 4 Phase D lessons closed at check=0.
+    //
+    // A human tutor re-explains INSIDE the check. So does this now — ONCE.
+    //
+    // No new counter and no new state: the budget is the EXISTING
+    // `remediationCount`, read at its pre-turn value, and the gate test is the
+    // EXISTING `isDeliveryPhase` — this module's own single source of truth for
+    // the delivery/mastery split. `remediationCount` is already cleared by a
+    // graded-correct answer (Phase 4's remediation exit), so the hold renews
+    // itself exactly when the learner has demonstrably recovered.
+    //
+    // Deliberately NOT weakened: the request is still counted as remediation,
+    // still spends `consecutiveFailures`, still raises frustration, and the
+    // SECOND clarification inside the same gate demotes exactly as before. A
+    // WRONG answer at CHECK is a different branch entirely (`failed`, below)
+    // and still demotes on the first occurrence — CHECK is not made sticky.
+    const holdsTheGate =
+      !isDeliveryPhase(prev.phase) && (prev.remediationCount ?? 0) === 0
+    next.phase = holdsTheGate ? prev.phase : phaseDown(prev.phase, next.demonstrated)
     next.reflectionAskedThisEntry = foldReflectionAskedThisEntry(
       prev.phase, next.phase, evidence.askedQuestion, prev.reflectionAskedThisEntry ?? false,
     )
@@ -827,7 +853,37 @@ export function advanceConversationState(
   // guard drifted out of reach in the first place. The failure and
   // remediation paths return above this line, so a struggling learner is
   // still never carried forward.
-  if (prev.phase === 'DEMONSTRATE' && next.demonstrated) {
+  //
+  // ── G-1: A CORRECT ANSWER IS ITSELF EVIDENCE SOMETHING WAS DELIVERED ──────
+  //
+  // `demonstrated` is set only by a GIVE (`!askedQuestion || deliveredTeaching`
+  // above). A turn that ASKS and does not also teach is not a give — so a run
+  // of pure question-and-answer never set it, and DEMONSTRATE stayed absorbing
+  // for a learner who was answering perfectly. Measured offline against this
+  // module: 30 consecutive CORRECT answers end at DEMONSTRATE with check=0.
+  //
+  // Measured LIVE in Phase D, on four hard concepts driven as a genuinely weak
+  // student: 3 of 4 lessons hit the 12-turn budget at check=0 while the runtime
+  // logs carry `[mcq-grade] correct: true` for those very lessons. The learner
+  // answered real authored questions correctly and was recorded as needing
+  // review, because a correct answer at this rung bought nothing.
+  //
+  // The reasoning, and why this is not a weakening: a learner cannot answer a
+  // question about the concept CORRECTLY unless something answerable was put in
+  // front of them. That is precisely what `demonstrated` asserts — "the teacher
+  // has actually demonstrated" — and it asserts nothing about what the LEARNER
+  // has mastered. The mastery bar is `correctAtCheck` / `correctAtPractice`,
+  // which this does not touch; a correct answer here still increments neither.
+  //
+  // `demonstrated` is SET, not merely stepped past. Moving the phase without
+  // recording the give would relocate the trap one rung up, because GUIDE→CHECK
+  // is gated on the same flag — pinned by a test.
+  //
+  // The failure and remediation branches both return ABOVE this line, so a
+  // struggling learner is still never carried forward, and `succeeded` already
+  // excludes a recovery turn.
+  if (prev.phase === 'DEMONSTRATE' && (next.demonstrated || succeeded)) {
+    next.demonstrated = true
     next.phase = 'GUIDE'
   }
 

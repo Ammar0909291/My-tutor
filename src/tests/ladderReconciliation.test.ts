@@ -158,7 +158,10 @@ describe('A — the two state spaces, enumerated in full', () => {
 
     // And each of the two has a real, non-identity transition in the shipping fold.
     expect(legacyStep('GUIDE', 'acknowledgement', true).phase).toBe('CHECK')
-    expect(legacyStep('CHECK', 'explain_differently', true).phase).toBe('GUIDE')
+    // PHASE E (G-2): the first remediation request inside a mastery gate holds
+    // the rung, so the non-identity transition is asserted where it still is —
+    // in a DELIVERY phase, and on the second request inside the gate.
+    expect(legacyStep('GUIDE', 'explain_differently', true).phase).toBe('DEMONSTRATE')
   })
 
   it('D5b — the canonical machine has no degraded-turn guard (the P4/F7 invariant)', () => {
@@ -425,15 +428,15 @@ const RECONCILIATION: Row[] = [
   { from: 'GUIDE', kind: 'explain_differently', shipping: 'DEMONSTRATE', canonicalAsLegacy: null,
     disposition: 'UNEXPLAINED',
     reason: 'D5: shipping drops from guidance back to demonstration when the learner asks to be re-taught. Canonical cannot distinguish that request from silence.' },
-  { from: 'CHECK', kind: 'explain_differently', shipping: 'GUIDE', canonicalAsLegacy: null,
+  { from: 'CHECK', kind: 'explain_differently', shipping: 'CHECK', canonicalAsLegacy: null,
     disposition: 'UNEXPLAINED',
-    reason: 'D5: a learner asking for a different explanation at a formative check is returned to guidance in the shipping ladder; under canonical the check would simply be re-issued.' },
-  { from: 'PRACTICE', kind: 'explain_differently', shipping: 'CHECK', canonicalAsLegacy: null,
+    reason: 'D5 (amended by Phase E, G-2): the FIRST re-teach request inside a mastery gate now holds the gate and re-explains in place — measured live, demoting on a weak learner\'s commonest utterance meant the check was entered and left without ever being asked. The SECOND demotes to GUIDE as before. Canonical still has no channel for the request at all.' },
+  { from: 'PRACTICE', kind: 'explain_differently', shipping: 'PRACTICE', canonicalAsLegacy: null,
     disposition: 'UNEXPLAINED',
-    reason: 'D5: shipping treats a remediation request during practice as a failure signal and steps down one rung. Canonical has no channel for it, so practice would continue unchanged.' },
-  { from: 'TRANSFER', kind: 'explain_differently', shipping: 'PRACTICE', canonicalAsLegacy: null,
+    reason: 'D5 (amended by Phase E, G-2): a first remediation request during practice now holds the rung and re-explains; a second steps down one, as before. Canonical has no channel for it.' },
+  { from: 'TRANSFER', kind: 'explain_differently', shipping: 'TRANSFER', canonicalAsLegacy: null,
     disposition: 'UNEXPLAINED',
-    reason: 'D5: shipping steps a struggling transfer learner back to practice. Canonical cannot see the request, so a learner who says they do not understand stays on transfer-level work.' },
+    reason: 'D5 (amended by Phase E, G-2): a first remediation request at transfer holds the rung and re-explains; a second steps down one, as before. Canonical has no channel for it.' },
   // ── no-signal ────────────────────────────────────────────────────────────
   { from: 'OBSERVE', kind: 'no-signal', shipping: 'OBSERVE', canonicalAsLegacy: 'OBSERVE',
     disposition: 'preserved', reason: 'No evidence, no movement.' },

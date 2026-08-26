@@ -302,11 +302,34 @@ describe('phase trajectory — legal regression', () => {
     }
   })
 
-  it('"explain differently" regresses one rung and counts as remediation', () => {
+  it('"explain differently" counts as remediation, and HOLDS the gate once', () => {
+    // UPDATED BY PHASE E (G-2), deliberately. This previously asserted that a
+    // clarification request at CHECK regresses to GUIDE unconditionally.
+    // Phase D measured the cost live: "sorry sir can you say more simple" is
+    // the defining move of a weak learner, and demoting on it meant the mastery
+    // gate was entered and left without a CHECK-phase question ever being
+    // asked — 3 of 4 hard lessons closed at check=0 for this reason.
+    //
+    // The FIRST clarification inside a gate now re-teaches in place. Everything
+    // else about remediation is unchanged and is still asserted here.
     const s = climbTo('CHECK')
     const after = turn(s, { learnerRequest: 'explain_differently' })
-    expect(after.phase).toBe('GUIDE')
+    expect(after.phase).toBe('CHECK')
     expect(after.remediationCount).toBe(s.remediationCount + 1)
+    expect(after.consecutiveFailures).toBe(s.consecutiveFailures + 1)
+  })
+
+  it('and the SECOND one regresses exactly as it always did', () => {
+    // The hold is once per remediation cycle, not a licence to sit in the gate.
+    const s = climbTo('CHECK')
+    const once = turn(s, { learnerRequest: 'explain_differently' })
+    const twice = turn(once, { learnerRequest: 'explain_differently' })
+    expect(twice.phase).toBe('GUIDE')
+  })
+
+  it('clarification in a DELIVERY phase regresses one rung, unchanged', () => {
+    const g = climbTo('GUIDE')
+    expect(turn(g, { learnerRequest: 'explain_differently' }).phase).toBe('DEMONSTRATE')
   })
 
   it('never regresses below DEMONSTRATE once something has been demonstrated', () => {
