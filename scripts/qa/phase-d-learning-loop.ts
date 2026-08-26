@@ -239,7 +239,14 @@ async function runLesson(cookie: string, subject: string, conceptId: string, clo
       // Non-consecutive is the whole point: two CONSECUTIVE failures are a
       // genuine spiral and must still close. This shape is the one production
       // showed on chem.equil.le-chatelier and chem.org.isomerism.
-      const answersWrong = answered === 0 || answered === 3
+      // 1st and 3rd graded answers, with a correct one between. Pre-fix that
+      // is visibleFailures 1 -> 2 -> CLOSING; post-fix the correct answer
+      // clears the spiral so the second miss reads 1 and the gate stays open.
+      // Deliberately NOT the 4th: mastery still needs three more correct
+      // answers after it, and several physics concepts hold exactly three
+      // authored probes, so demanding seven graded questions would make the
+      // experiment fail on inventory rather than on the fix.
+      const answersWrong = answered === 0 || answered === 2
       said = answersWrong
         ? weakWrongAnswer(pending.options, pending.correctIndex)
         : weakCorrectAnswer(pending.options, pending.correctIndex, answered)
