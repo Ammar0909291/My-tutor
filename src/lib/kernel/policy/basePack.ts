@@ -303,11 +303,18 @@ const b4RepeatedStruggle = P(
 )
 
 /** Until something has been demonstrated, show — when the caller asked for
- *  worked-example-first. */
+ *  worked-example-first, and NOT at OBSERVE.
+ *
+ *  The OBSERVE exemption mirrors the runtime rule exactly. `demonstrated` is
+ *  unsettable while phase is OBSERVE (the OBSERVE give is an anchor, not a
+ *  demonstration), so an unscoped gate pinned the ladder at OBSERVE forever.
+ *  Kept in lockstep here because ladderParity asserts this pack reproduces
+ *  decideNextMoveHeuristic on every scenario — it failed the moment the
+ *  runtime changed, which is the drift detector doing its job. */
 const b4WorkedExampleFirst = P(
   'B4.worked-example-first.show.v1', 4,
   'conversationState decideNextMoveHeuristic (worked-example-first)',
-  { reads: ['workedExampleFirst', 'demonstrated'], match: (i) => i.workedExampleFirst === true && !i.demonstrated, describe: 'worked-example-first requested, nothing demonstrated' },
+  { reads: ['workedExampleFirst', 'demonstrated', 'phase'], match: (i) => i.workedExampleFirst === true && !i.demonstrated && i.phase !== 'OBSERVE', describe: 'worked-example-first requested, nothing demonstrated, past OBSERVE' },
   { move: 'SHOW', actionClass: 'DEMONSTRATION' },
   { specificity: 5 },
 )

@@ -1298,8 +1298,42 @@ function decideNextMoveHeuristic(state: ConversationState, ctx: NextMoveContext)
   }
   // Repeated struggle → demonstrate, don't interrogate (Phase F).
   if (remedialPending && state.consecutiveFailures >= 2) return 'show'
-  // Worked-example-first: until something has been demonstrated, show.
-  if (ctx.workedExampleFirst && !state.demonstrated) return 'show'
+  // ── WORKED-EXAMPLE-FIRST: show until something has been demonstrated ────
+  //
+  // NOT AT OBSERVE. `demonstrated` is set by the fold only when
+  // `prev.phase !== 'OBSERVE'` — the OBSERVE give is an ANCHOR, which the fold
+  // deliberately excludes from counting as a demonstration. So at OBSERVE this
+  // gate's own release condition was unreachable, and the gate walled itself
+  // in:
+  //
+  //   gate fires -> move 'show' -> a show asks nothing -> no answer, no SIGNAL
+  //   -> `succeeded` never true -> phase cannot advance -> demonstrated stays
+  //   false -> gate fires again, forever.
+  //
+  // Measured against these modules: twelve consecutive SHOW moves, phase
+  // pinned at OBSERVE. With workedExampleFirst=false the same sequence asks
+  // from turn two. And it reached EVERY beginner rather than a struggling
+  // subset — `foundationBias` is true at confidence >= 0.4 and
+  // `profileLevel === 'beginner'` alone scores exactly 0.4, so
+  // FOUNDATION_REBUILD (hence workedExampleFirst) is the DEFAULT on turn one
+  // with zero failures.
+  //
+  // NOTHING IS LOST BY EXEMPTING OBSERVE, because the gate's stated purpose —
+  // "Lead with a worked example before theory" (teachingStrategy.ts) — is
+  // already delivered twice over by rules this does not touch:
+  //   · turn 1      QL-1 blocks ASK (nothing taught yet), so the move is SHOW
+  //                 with blockedReason QL1_NO_ANSWERABLE_SOURCE — measured
+  //                 identical with the gate on and off;
+  //   · DEMONSTRATE the phase switch below returns SHOW on its own.
+  // The gate contributes nothing at either, which is why its only measurable
+  // effect was suppressing the question at the phases that exist to ask one.
+  //
+  // Scoped to OBSERVE and nowhere else, deliberately: at CHECK/PRACTICE an
+  // exhaustive search of the real fold found NO reachable state with
+  // phase >= CHECK && !demonstrated (both transitions into CHECK are gated on
+  // the flag, and phaseDown only lowers), so the gate is already inert there
+  // and widening this fix would change behaviour no learner can reach.
+  if (ctx.workedExampleFirst && !state.demonstrated && state.phase !== 'OBSERVE') return 'show'
 
   switch (state.phase) {
     case 'OBSERVE':     return 'ask'          // one observation question
