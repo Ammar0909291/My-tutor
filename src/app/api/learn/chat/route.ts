@@ -5588,6 +5588,28 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // the production defect this closes ("got it" after
               // completion). Same authority as the D-0a completion gate.
               lessonCompleted: lessonCompletedHoisted,
+              // THE TURN ALREADY KNOWS HOW THE LEARNER DID; SAY SO.
+              //
+              // Measured (phys.mech.rotational-dynamics, 2026-08-26): the
+              // learner answered the pending MCQ correctly, the server banked
+              // `PROBE_OUTCOME pass|conf=high`, and the whole message they
+              // received was "Let's stay with this idea for a moment." Across
+              // production, 52 of the 119 placeholder-only turns landed on a
+              // just-graded answer and 51 of those were CORRECT.
+              //
+              // Both values are read, never computed here: `mcqGradeHoisted`
+              // is this turn's deterministic grade (line ~663) and the option
+              // text comes from the same `pendingMcqHoisted` it was graded
+              // against, so the sentence cannot disagree with the evidence
+              // row. Consulted only when the repair would otherwise leave the
+              // placeholder alone on screen.
+              justGraded: mcqGradeHoisted && typeof mcqGradeHoisted.correct === 'boolean'
+                ? {
+                    correct: mcqGradeHoisted.correct,
+                    correctOptionText:
+                      pendingMcqHoisted?.options?.[pendingMcqHoisted.correctIndex] ?? null,
+                  }
+                : null,
             })
             if (ungraded.withheld) {
               console.warn('[gate-contract] ' + JSON.stringify({

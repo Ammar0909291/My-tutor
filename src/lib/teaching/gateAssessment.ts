@@ -362,6 +362,26 @@ export interface UngradedGateQuestionInput {
    * keeps its exact prior behaviour.
    */
   lessonCompleted?: boolean
+  /**
+   * This turn's server-side grade of the PENDING question, when the learner
+   * answered one — `mcqGradeHoisted.correct` plus the pending MCQ's own
+   * correct option, both already computed by the route.
+   *
+   * Read ONLY on the path that would otherwise emit the bare placeholder (see
+   * `withheldContinuation`). Omitting it reproduces the exact prior behaviour,
+   * which is what every pre-existing caller and test gets.
+   *
+   * This function does not grade and does not change grading: it is told the
+   * result and decides one sentence.
+   */
+  justGraded?: GradedThisTurn | null
+}
+
+/** The route's own grade of the pending question, passed in, never derived. */
+export interface GradedThisTurn {
+  correct: boolean
+  /** The correct option's text, when the pending MCQ is still in scope. */
+  correctOptionText?: string | null
 }
 
 export interface UngradedGateQuestionResult {
@@ -381,6 +401,52 @@ export interface UngradedGateQuestionResult {
  * `gateProbeContract`'s FALLBACK_LEAD_IN.
  */
 const WITHHELD_QUESTION_CONTINUATION = "Let's stay with this idea for a moment."
+
+/**
+ * The same sentence, told what the server already knows about THIS turn.
+ *
+ * ── THE DEFECT THIS CLOSES (measured, phys.mech.rotational-dynamics,
+ * session cmtaiddvd…, 2026-08-26) ───────────────────────────────────────────
+ * The learner answered a torque MCQ with "A. but sir i not fully sure". Option
+ * A was correct; `evidence_events` carries `PROBE_OUTCOME pass|conf=high`
+ * strength 1 for that turn. The entire message they received back was
+ * `WITHHELD_QUESTION_CONTINUATION` — 39 characters that acknowledge nothing.
+ *
+ * Not an anecdote: 119 production turns consist of ONLY that sentence, and
+ * joining each to the PROBE_OUTCOME within ±4s shows 52 of them landed on a
+ * turn the server had just graded — 51 of those CORRECT. The dominant real
+ * shape is a RIGHT answer met with silence.
+ *
+ * The withhold itself is right and is untouched: a mastery question with no
+ * server answer key must not be asked. What was wrong is the fallback, which
+ * was written for the "no probe existed" case and so was chosen to claim
+ * nothing — sound when the server knows nothing, dishonest by omission when it
+ * knows the learner just got it right.
+ *
+ * ── WHAT IT MAY AND MAY NOT SAY ─────────────────────────────────────────────
+ * It reports the grade the server already computed and, on a miss, the correct
+ * option the server already holds. It never derives a grade, never explains
+ * reasoning it does not have, and never manufactures a correct option it was
+ * not given — an unknown key yields "Not quite." and nothing more. The probe
+ * is spent by this point (`excludeProbeStem` never re-asks it), so naming the
+ * answer forfeits no future assessment.
+ */
+function withheldContinuation(justGraded: GradedThisTurn | null | undefined): string {
+  if (!justGraded || typeof justGraded.correct !== 'boolean') {
+    return WITHHELD_QUESTION_CONTINUATION
+  }
+  if (justGraded.correct) {
+    return `That's right. ${WITHHELD_QUESTION_CONTINUATION}`
+  }
+  const key = typeof justGraded.correctOptionText === 'string'
+    ? justGraded.correctOptionText.trim()
+    : ''
+  // The trailing '?' the caller stripped must not come back in through the
+  // answer key, so a key that is itself a question is reported without it.
+  return key.length > 0 && !key.includes('?')
+    ? `Not quite — the answer was: ${key}. ${WITHHELD_QUESTION_CONTINUATION}`
+    : `Not quite. ${WITHHELD_QUESTION_CONTINUATION}`
+}
 
 export function withholdUngradedGateQuestion(
   input: UngradedGateQuestionInput,
@@ -414,7 +480,7 @@ export function withholdUngradedGateQuestion(
 
       const kept = dropAnswerableContent(text)
       return {
-        text: kept.length > 0 ? kept : WITHHELD_QUESTION_CONTINUATION,
+        text: kept.length > 0 ? kept : withheldContinuation(input.justGraded),
         withheld: true,
         reason: 'stray-question-alongside-mcq',
       }
@@ -429,7 +495,7 @@ export function withholdUngradedGateQuestion(
 
     const kept = dropAnswerableContent(text)
     return {
-      text: kept.length > 0 ? kept : WITHHELD_QUESTION_CONTINUATION,
+      text: kept.length > 0 ? kept : withheldContinuation(input.justGraded),
       withheld: true,
       reason: 'no-gradeable-probe',
     }
