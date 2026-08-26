@@ -5838,6 +5838,65 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               && conversationStateHoisted?.phase === 'GUIDE'
               && (conversationStateHoisted?.questionsAskedSinceTeach ?? 0) >= 2
               && evidenceMoveHoisted !== 'ask',
+            // ── PHASE E · WHY THIS MOVE, AND NOTHING ELSE ───────────────────
+            //
+            // PRODUCTION AND THE OFFLINE REPLAY DISAGREE. The same learner
+            // sequence chose `ask` offline and `show` on all 8 OBSERVE turns
+            // live. Five behavioural fixes have been proposed against that gap
+            // and every one of them was inert, because none of them was aimed
+            // at the gate production actually took — which no log names.
+            //
+            // `decideNextMoveDetailed` returns in SEVEN places, in this order:
+            //
+            //   1  ctx.recoveryTurn                      -> teach
+            //   2  questionLegality says ASK is illegal  -> teach | show   *
+            //   3  remedialPending && dontKnows    >= 2  -> show
+            //   4  remedialPending && knowledgeProbes>=2 -> show
+            //   5  remedialPending && priorKProbes >= 2  -> show
+            //   6  remedialPending && OBSERVE
+            //        && observeFailures            >= 2  -> show
+            //   7  the question budget / phase switch
+            //
+            // (*) gate 2 ALREADY computes a `blockedReason` naming which
+            // legality rule fired, the route ALREADY hoists it, and no log has
+            // ever printed it. If production is taking gate 2, that field is
+            // the entire answer and it has been sitting one line away the
+            // whole time.
+            //
+            // Gates 3-6 share the conjunct `remedialPending`
+            // (= teachSegmentsSinceQuestion === 0), so a nonzero value above
+            // means NONE of them can fire and the answer must be 2 or 7.
+            //
+            // STRICTLY OBSERVATIONAL. Every value below is read from
+            // `conversationStateHoisted` — the exact object passed to
+            // `decideNextMoveDetailed` — or from a variable that decision
+            // already produced. Nothing is recomputed, nothing is derived by a
+            // formula that could drift from the real one, and nothing here is
+            // read by any branch. This block cannot change the move.
+            gates: {
+              // gate 1
+              recoveryTurn: recoveryKeyHoisted !== null,
+              // gate 2 — the reason, if this is where production returned
+              legalityBlocked: legalityBlockedReasonHoisted,
+              taughtThisSession: conversationStateHoisted?.taughtThisSession ?? null,
+              // the shared conjunct of gates 3-6
+              remedialPending: (conversationStateHoisted?.teachSegmentsSinceQuestion ?? 0) === 0,
+              // gates 3, 4, 5, 6 — their counters, as the decision saw them
+              consecutiveDontKnows: conversationStateHoisted?.consecutiveDontKnows ?? null,
+              totalKnowledgeProbes: conversationStateHoisted?.totalKnowledgeProbes ?? null,
+              consecutivePriorKnowledgeProbes:
+                conversationStateHoisted?.consecutivePriorKnowledgeProbes ?? null,
+              observeFailures: conversationStateHoisted?.observeFailures ?? null,
+              // gate 7 and the phase ladder beneath it
+              consecutiveFailures: conversationStateHoisted?.consecutiveFailures ?? null,
+              demonstrated: conversationStateHoisted?.demonstrated ?? null,
+              workedExampleFirst: evidenceWorkedExampleFirstHoisted,
+              // context the decision was handed, and the turn's own shape
+              practiceRequested: turnIntent.wantsPractice,
+              questionSanctioned: evidenceMoveHoisted === 'ask',
+              learnerRequest: learnerRequestHoisted,
+              degradedTurn: isDegradedProvider(provider),
+            },
           })
         } catch (err) {
           // Fail-closed for completion: on any gate failure, strip the tag
