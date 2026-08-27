@@ -156,3 +156,43 @@ describe('a HELD turn that teaches nothing is rejected too', () => {
     }
   })
 })
+
+// ── The hedged reflection, measured in production ─────────────────────────────
+// phys.qm.spin, 2026-08-27, on the learner's SECOND "I still don't understand",
+// after a repair had already run once. Twenty-five words, no teaching.
+describe('a hedge in front of a reflection does not make it teaching', () => {
+  const PROD = 'I think you’re saying you’re still unsure how the two spots in the '
+    + 'experiment show that electrons have a built‑in two‑valued spin. Is that right?'
+
+  it('the production turn taught nothing', () => {
+    expect(turnTaughtSomething(PROD)).toBe(false)
+    expect(substantiveSentences(PROD)).toEqual([])
+  })
+
+  it('catches the hedges and the synonym, straight and curly', () => {
+    for (const s of [
+      "I think you're saying the field pushes them apart.",
+      'I guess you are saying the beam splits.',
+      "I believe you're meaning the two spots.",
+      "I suppose you're telling me it is unclear.",
+      "I think you mean the magnetic field.",
+      "You're saying the beam splits.",
+      'So you are saying it splits in two.',
+    ]) expect(turnTaughtSomething(s), s).toBe(false)
+  })
+
+  it('a reflection FOLLOWED by teaching still passes', () => {
+    expect(turnTaughtSomething(
+      "I think you're saying the two spots are confusing. A silver atom carries one "
+      + 'unpaired electron, and the field pushes it one of exactly two ways.',
+    )).toBe(true)
+  })
+
+  it('does not swallow ordinary teaching that mentions the learner', () => {
+    for (const s of [
+      'You are looking at two spots because the beam split.',
+      'I think the field gradient is what does the pushing here.',
+      'What you saw on the screen was two separate spots.',
+    ]) expect(turnTaughtSomething(s), s).toBe(true)
+  })
+})

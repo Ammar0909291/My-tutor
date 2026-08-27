@@ -53,7 +53,25 @@
  */
 const META_SENTENCE: RegExp[] = [
   // Reflecting the learner's own words back at them.
-  /^(and\s+|so\s+|okay,?\s+|ok,?\s+)?you(?:'re| are|r)\s+saying\b/i,
+  //
+  // A HEDGE IN FRONT DEFEATED THIS, AND WAS MEASURED DOING SO. Production,
+  // phys.qm.spin, 2026-08-27, on the second consecutive "I still don't
+  // understand" — the whole turn, twenty-five words, after a repair had already
+  // run once:
+  //
+  //     "I think you're saying you're still unsure how the two spots in the
+  //      experiment show that electrons have a built-in two-valued spin.
+  //      Is that right?"
+  //
+  // The second sentence matched as meta. The first did not, because the prefix
+  // group allowed only and/so/okay, so "I think " carried it straight past —
+  // it scored as the turn's one substantive sentence and the reflection
+  // shipped. That is the exact failure this module was written for, wearing a
+  // hedge. `mean` is included alongside `saying` as the same move with a
+  // synonym; over-matching one sentence is cheap, because a turn only fails
+  // when NO sentence is substantive, so a reflection FOLLOWED by teaching
+  // still passes.
+  /^(and\s+|so\s+|okay,?\s+|ok,?\s+)?(i\s+(think|guess|believe|suppose)\s+)?you(?:'re| are|r)?\s+(saying|mean|meaning|telling me)\b/i,
   /^(and\s+|so\s+)?i\s+(understand|hear|see|know|can see|get)\s+(that\s+)?you\b/i,
   /^(it\s+)?sounds?\s+like\s+you\b/i,
   /^(and\s+|so\s+)?you\s+(still\s+)?(feel|think|find|seem)\b/i,
