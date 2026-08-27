@@ -316,7 +316,7 @@ describe('D1 has TWO serving paths and both must honour the ledger', () => {
   it('both paths derive the spent key identically', () => {
     // One ledger, one normalisation. Two spellings here would be the defect
     // returning by a different door.
-    const uses = ROUTE.match(/hasAskedMcq(?:ForMemory)?\((?:history|historyForMemory), strip(?:AuthoringLabel|LabelForMemory)\(stem\)\)/g) ?? []
+    const uses = ROUTE.match(/hasAskedMcq(?:ForMemory)?\((?:historyForGate|historyForMemory), strip(?:AuthoringLabel|LabelForMemory)\(stem\)\)/g) ?? []
     expect(uses).toHaveLength(2)
   })
 
@@ -334,7 +334,10 @@ describe('D1 has TWO serving paths and both must honour the ledger', () => {
 
 describe('the wiring is real, not just the helper', () => {
   it('route.ts normalises the exclusion key at the gate', () => {
-    expect(ROUTE).toMatch(/excludeProbeStem: history \? \(stem\) => hasAskedMcq\(history, stripAuthoringLabel\(stem\)\) : undefined/)
+    // `historyForGate` is the persisted ledger plus THIS turn's graded
+    // question — see probeSpentOnTheGradingTurn.test.ts. The normalisation
+    // this file exists to pin is unchanged.
+    expect(ROUTE).toMatch(/excludeProbeStem: historyForGate \? \(stem\) => hasAskedMcq\(historyForGate, stripAuthoringLabel\(stem\)\) : undefined/)
   })
 
   it('and imports stripAuthoringLabel to do it', () => {
@@ -344,6 +347,6 @@ describe('the wiring is real, not just the helper', () => {
   it('the two sides of the ledger derive their key the same way', () => {
     // Drift here is the entire defect. If either expression changes, this fails.
     expect(ROUTE).toMatch(/recordMcqAsked\(memoryHistory, pendingMcqHoisted\.question\)/)
-    expect(ROUTE).toMatch(/hasAskedMcq\(history, stripAuthoringLabel\(stem\)\)/)
+    expect(ROUTE).toMatch(/hasAskedMcq\(historyForGate, stripAuthoringLabel\(stem\)\)/)
   })
 })

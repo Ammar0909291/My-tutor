@@ -189,7 +189,12 @@ describe('an exhausted corpus falls back rather than repeating itself', () => {
     // differently on each side, so the probe was never seen as spent and the
     // same authored question was served four times in one production lesson.
     // The assertion's intent is unchanged — the exclusion must reach selection.
-    expect(lineOf(/excludeProbeStem: history \? \(stem\) => hasAskedMcq\(history, stripAuthoringLabel\(stem\)\) : undefined/))
+    // The ledger the gate reads is now `historyForGate` — the persisted
+    // history plus THIS turn's graded question, so a probe cannot be
+    // re-selected on the very turn that grades it (see
+    // probeSpentOnTheGradingTurn.test.ts). Intent unchanged: the exclusion
+    // must reach selection, normalised.
+    expect(lineOf(/excludeProbeStem: historyForGate \? \(stem\) => hasAskedMcq\(historyForGate, stripAuthoringLabel\(stem\)\) : undefined/))
       .toBeGreaterThan(0)
   })
 

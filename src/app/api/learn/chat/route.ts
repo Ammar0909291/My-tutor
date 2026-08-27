@@ -3640,9 +3640,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // comment for why the key is stripped here rather than inside
           // hasAskedMcq. Null history yields `undefined`, i.e. exactly the
           // prior behaviour, never a predicate that silently excludes nothing.
-          const { hasAskedMcq: hasAskedMcqForMemory } = await import('@/lib/teaching/teachingHistory')
+          const { hasAskedMcq: hasAskedMcqForMemory, recordMcqAsked: recordMcqAskedForMemory } =
+            await import('@/lib/teaching/teachingHistory')
           const { stripAuthoringLabel: stripLabelForMemory } = await import('@/lib/teaching/gateProbeContract')
+          // Same grading-turn fold as the gate below: this selector must not
+          // hand back the probe whose answer is being graded on this very turn.
           const historyForMemory = teachingHistoryHoisted
+            && mcqGradeHoisted && pendingMcqHoisted?.question
+            ? recordMcqAskedForMemory(teachingHistoryHoisted, pendingMcqHoisted.question)
+            : teachingHistoryHoisted
           assembled = await assembleLesson(memoryState, {
             excludeProbeStem: historyForMemory
               ? (stem) => hasAskedMcqForMemory(historyForMemory, stripLabelForMemory(stem))
@@ -3831,9 +3837,38 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         }))
         if (gateEligible && memoryState) {
           const { findBestProbe } = await import('@/lib/teaching/assets')
-          const { hasAskedMcq } = await import('@/lib/teaching/teachingHistory')
+          const { hasAskedMcq, recordMcqAsked: recordMcqAskedForGate } =
+            await import('@/lib/teaching/teachingHistory')
           const { stripAuthoringLabel } = await import('@/lib/teaching/gateProbeContract')
           const history = teachingHistoryHoisted
+          // ── THE GRADING TURN'S OWN GAP ──────────────────────────────────
+          //
+          // A probe is spent when it is ANSWERED, and `recordMcqAsked` runs at
+          // the END of this turn in the teaching-history fold. The gate selects
+          // HERE, near the start. So on the turn that grades a probe it is not
+          // yet in `mcqAsked` — and it is not covered by `unansweredProbeOnScreen`
+          // either, because it is no longer unanswered. It was answered THIS turn.
+          //
+          // Measured from the gate's own logs (session cmtayc5c3…, 2026-08-27,
+          // on the build already carrying the key-normalisation fix):
+          //   03:18:46  move=ask    [gate-assessment] assetId 0c6f384c-…
+          //   03:19:06  [mcq-grade] { chosen: 0, correct: true }
+          //   03:19:06  move=teach  [gate-assessment] assetId 0c6f384c-…  ← again
+          // Same shape for 182becc3-… and 0e0e5ef4-…: three distinct probes,
+          // six PROBE_OUTCOME rows, two `pass` per asset. One question, two
+          // pieces of evidence.
+          //
+          // So the gate reads the ledger AS IT WILL BE at the end of this turn.
+          // Folded with the REAL writer rather than a local fingerprint compare:
+          // a second definition of "spent" is the exact defect class this whole
+          // investigation has been about, and it could drift from the ledger.
+          //
+          // This prevents duplicate PRESENTATION. No evidence is suppressed,
+          // deduped or reweighed, and grading, the mastery bar, CLOSE, the
+          // budget, the ladder and probe-eligibility policy are untouched.
+          const historyForGate = history && mcqGradeHoisted && pendingMcqHoisted?.question
+            ? recordMcqAskedForGate(history, pendingMcqHoisted.question)
+            : history
           const probe = await findBestProbe(memoryState, {
             // Never re-ask a question this concept has already spent. 145 of
             // physics's 238 concepts carry only two gradeable authored probes
@@ -3865,7 +3900,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // stores MODEL questions, whose persisted keys must not shift.
             // `stripAuthoringLabel` is idempotent and the identity on any stem
             // without a label, so an unlabelled probe is untouched.
-            excludeProbeStem: history ? (stem) => hasAskedMcq(history, stripAuthoringLabel(stem)) : undefined,
+            excludeProbeStem: historyForGate ? (stem) => hasAskedMcq(historyForGate, stripAuthoringLabel(stem)) : undefined,
             // The gate can ONLY use a probe that becomes the turn's MCQ — it is
             // graded by gradeMcqAnswer against the authored key, and there is
             // no prose path here. Measured 2026-08-17: without this, 7 of 9
