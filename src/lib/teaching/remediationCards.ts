@@ -1701,6 +1701,180 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
     microCheck: 'You warm the honey and it pours easily. Did its weight change?',
     ...DRAFTED,
   },
+
+  // ── ANALYTICAL MECHANICS (batch 3) — completes phys.mech 60/60 ────────────
+  // Graduate material, taught here in the same plain register as the rest: a
+  // learner who says "I don't understand" at this level needs the IDEA without
+  // the symbols, which is precisely what the notation-free rule is for.
+  {
+    conceptId: 'phys.mech.generalized-coordinates',
+    subject: 'physics',
+    canonicalIdea: 'Describe a system by the few numbers it can actually vary, not by every coordinate of every part.',
+    concreteAnchor: 'a pendulum swinging on a rigid rod',
+    plainExplanation:
+      'A pendulum bob moves in a plane, so you might describe it with two numbers, across and up. But the '
+      + 'rod is rigid, so those two are not free — fix one and the other follows. There is really only '
+      + 'ONE thing the pendulum can vary: the angle. Choosing that angle as your description turns a '
+      + 'two-number problem with a constraint into a one-number problem with none. That is what a '
+      + 'generalised coordinate is: a number the system is genuinely free to change. Count them and you '
+      + 'have counted the system\'s freedom.',
+    antiAnalogy: {
+      tempting: 'saying a constraint just adds extra forces to the equations',
+      whyItFails:
+        'the curriculum\'s own note singles this out. A constraint REMOVES freedom, and the whole benefit '
+        + 'here is that it lets you delete a coordinate rather than add a force.',
+    },
+    microCheck: 'A pendulum on a rigid rod. How many numbers does it really need?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.euler-lagrange-equation',
+    subject: 'physics',
+    canonicalIdea: 'Of all the paths a system could take, the one it takes is the one that makes a particular running total stationary.',
+    concreteAnchor: 'light taking the quickest route through water',
+    plainExplanation:
+      'Light crossing from air into water bends, and the path it takes is the quickest one available — '
+      + 'not the shortest, the quickest. Mechanics has a version of that idea. Imagine every path a '
+      + 'system COULD follow between where it starts and where it ends. For each one, keep a running '
+      + 'total of the motion energy minus the stored energy along the way. The path nature actually '
+      + 'takes is the one where that total stops changing when you nudge the path slightly. Working out '
+      + 'what that condition demands gives you equations of motion without ever drawing a force.',
+    antiAnalogy: {
+      tempting: 'saying the quantity being totalled is the system\'s energy',
+      whyItFails:
+        'the curriculum\'s own note singles this out. It is motion energy MINUS stored energy, not their '
+        + 'sum, and confusing the two makes every result come out wrong while looking familiar.',
+    },
+    microCheck: 'Is the quantity being totalled the sum of the two energies, or the difference?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.cyclic-coordinates-conservation-laws',
+    subject: 'physics',
+    canonicalIdea: 'Wherever a system does not care about a change, something is conserved.',
+    concreteAnchor: 'a puck sliding on an endless, featureless ice sheet',
+    plainExplanation:
+      'A puck slides on ice that looks identical everywhere. Shift the whole scene a metre sideways and '
+      + 'nothing about the physics differs — the ice does not care where you are. That indifference is '
+      + 'why the puck\'s sideways momentum never changes. The pattern is completely general and it is '
+      + 'one of the deepest results in physics: every symmetry has a matching conserved quantity. If the '
+      + 'physics does not care WHERE you are, momentum is conserved. If it does not care WHEN, energy '
+      + 'is. If it does not care which way round you turn things, angular momentum is.',
+    antiAnalogy: {
+      tempting: 'saying a symmetric system is one that looks the same from every angle',
+      whyItFails:
+        'the curriculum\'s own note singles this out. The symmetry is in the PHYSICS being unchanged, not '
+        + 'in the object\'s appearance. A lopsided puck on featureless ice still conserves momentum.',
+    },
+    microCheck: 'The ice looks the same everywhere. Which quantity does that make conserved?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.hamiltonian',
+    subject: 'physics',
+    canonicalIdea: 'A second way to describe a system, keeping track of momentum alongside position instead of speed.',
+    concreteAnchor: 'describing a car by its position and momentum rather than position and speed',
+    plainExplanation:
+      'One way to describe a moving system is by where things are and how fast they are going. There is '
+      + 'another, which swaps the speeds for momenta and reorganises the bookkeeping around that. It is '
+      + 'not new physics — the same motion comes out — but the equations become far more symmetric, and '
+      + 'that symmetry is what later carries mechanics into statistical physics and quantum theory. For '
+      + 'ordinary systems the quantity at the centre of this description happens to equal the total '
+      + 'energy, which is a useful coincidence rather than its definition.',
+    antiAnalogy: {
+      tempting: 'saying it is basically the energy of the system',
+      whyItFails:
+        'the curriculum\'s own note singles this out. It equals the total energy only when the setup does '
+        + 'not change with time, and treating that special case as the definition hides why the '
+        + 'construction exists at all.',
+    },
+    microCheck: 'Does this description track speed, or something else alongside position?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.hamiltons-equations',
+    subject: 'physics',
+    canonicalIdea: 'Position and momentum each tell you how the other changes, giving a flow through the space of all possible states.',
+    concreteAnchor: 'a pendulum traced as a looping curve on a position-versus-momentum chart',
+    plainExplanation:
+      'Plot a swinging pendulum not against time but with its angle across and its momentum up. The '
+      + 'motion traces a closed loop, going round and round as the pendulum swings. The equations that '
+      + 'govern this say something neat: how fast the position changes is read off the energy '
+      + 'description with respect to momentum, and how fast the momentum changes is read off with '
+      + 'respect to position, with a minus sign. Position and momentum each drive the other. Every '
+      + 'possible starting state sits somewhere on that chart and flows along its own curve.',
+    antiAnalogy: {
+      tempting: 'reading the looping curve as the path the pendulum traces through the air',
+      whyItFails:
+        'the chart is not physical space. A point on it is a whole STATE — where the pendulum is and how '
+        + 'it is moving — and the loop is that state evolving, not a trajectory you could photograph.',
+    },
+    microCheck: 'On that chart, what does a single point represent?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.poisson-brackets',
+    subject: 'physics',
+    canonicalIdea: 'A single operation tells you how any quantity changes as the system evolves.',
+    concreteAnchor: 'asking how a car\'s fuel use changes as it drives',
+    plainExplanation:
+      'Once a system is described by positions and momenta, you can ask of ANY quantity built from them '
+      + 'how it changes as the system runs. There is one operation that answers that question, whatever '
+      + 'the quantity is — feed it the quantity and the system\'s energy description, and it hands back '
+      + 'the rate of change. Conserved quantities are exactly the ones it returns zero for. The same '
+      + 'operation, applied to position and momentum themselves, gives the relationship that reappears '
+      + 'almost unchanged at the heart of quantum mechanics.',
+    antiAnalogy: {
+      tempting: 'reading it as a measure of how related two quantities are',
+      whyItFails:
+        'the curriculum\'s own note singles this out. A zero result does not mean the two are unrelated — '
+        + 'it means one does not drive the other\'s change, which is a much narrower statement.',
+    },
+    microCheck: 'The operation returns zero for a quantity. What does that tell you about it?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.canonical-transformations',
+    subject: 'physics',
+    canonicalIdea: 'You may re-label position and momentum in almost any way, provided the equations keep their shape.',
+    concreteAnchor: 'switching from street names to grid references on the same map',
+    plainExplanation:
+      'The same city can be described by street names or by grid references. Neither is more true; one '
+      + 'is simply easier for some questions. Mechanics allows the same freedom, and more of it — you may '
+      + 'mix positions and momenta together into new pairs. The one rule is that the equations of motion '
+      + 'must come out looking the same afterwards. Changes that respect that rule are worth having, '
+      + 'because a well-chosen one can turn a hard problem into an easy one, sometimes into one where '
+      + 'nothing changes at all.',
+    antiAnalogy: {
+      tempting: 'treating the function that produces the change as a potential energy for the new coordinates',
+      whyItFails:
+        'the curriculum\'s own note singles this out. It is a bridge between the old and new descriptions, '
+        + 'not an energy, and reading it as one attaches physical meaning to bookkeeping.',
+    },
+    microCheck: 'What has to stay the same after you re-label position and momentum?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.hamilton-jacobi-equation',
+    subject: 'physics',
+    canonicalIdea: 'Find one function that captures the whole motion, and the equations of motion solve themselves.',
+    concreteAnchor: 'a contour map that tells you which way water will run everywhere at once',
+    plainExplanation:
+      'A contour map does not tell you about one raindrop. It tells you, for every point on the hill, '
+      + 'which way water would run — the whole family of paths in a single object. This part of mechanics '
+      + 'does the same thing. Instead of solving for one trajectory, you look for a single function whose '
+      + 'slopes give the momenta everywhere, and finding it hands you every trajectory at once. For '
+      + 'systems that permit it, this turns motion into something that simply advances at a steady rate. '
+      + 'It is also the closest classical mechanics comes to the wave equation of quantum theory.',
+    antiAnalogy: {
+      tempting: 'picturing the function as the path of one particular particle',
+      whyItFails:
+        'it describes the whole family of possible motions at once, like the contour map rather than one '
+        + 'raindrop, and the single-path picture removes the reason for constructing it.',
+    },
+    microCheck: 'Does that one function describe a single path, or all of them?',
+    ...DRAFTED,
+  },
 ]
 
 export type RemediationCardLookup =
