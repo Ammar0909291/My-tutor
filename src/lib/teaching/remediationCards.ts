@@ -3359,6 +3359,344 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
     microCheck: 'Sound cannot cross a vacuum. How does sunlight reach us?',
     ...DRAFTED,
   },
+  {
+    conceptId: 'phys.opt.nature-of-light',
+    subject: 'physics',
+    canonicalIdea: 'Light is described by rays or by waves depending on the size of what it meets, and neither description is the truer one.',
+    concreteAnchor: 'a shadow with a sharp edge, and the soft fringe at that edge under a magnifier',
+    plainExplanation:
+      'A torch beam crossing a room casts a shadow with an edge you can point to, so drawing light as '
+      + 'straight lines works perfectly well. Put a magnifier on that same edge and it is not sharp at '
+      + 'all: there is a narrow band of light and dark stripes. Nothing about the light changed between '
+      + 'those two looks. What changed is the size of what we are comparing it to. When the openings and '
+      + 'obstacles are large, straight lines predict everything. When they shrink to something near the '
+      + 'spacing of the light\'s own ripples, the wave description is the one that matches.',
+    antiAnalogy: {
+      tempting: 'treating rays as the beginner\'s version and waves as what is really going on',
+      whyItFails:
+        'that turns a choice of scale into a ranking of truth. A physicist designing a telescope mirror '
+        + 'uses rays, not because it is simpler but because at that size it is right.',
+    },
+    microCheck: 'A camera lens is drawn with straight lines, but the same light through a pinhole spreads. What decides which description you reach for?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.opt.reflection',
+    subject: 'physics',
+    canonicalIdea: 'Both angles in reflection are measured from the line standing perpendicular to the surface, not from the surface itself.',
+    concreteAnchor: 'aiming a torch at a mirror on the floor and watching where the spot lands on the wall',
+    plainExplanation:
+      'Point a torch at a mirror lying flat and the reflected spot lands somewhere on the wall. Tilt the '
+      + 'torch closer to the mirror and the spot slides further away. The rule behind that is simple, but '
+      + 'it is stated against a particular line: an imaginary line standing straight up out of the surface '
+      + 'at the point where the light lands. Measure the incoming light\'s angle from that upright line, '
+      + 'measure the outgoing one the same way, and the two are equal. Every reflection you have ever '
+      + 'seen obeys it, including the scattered kind off paper, where the surface is rough enough that '
+      + 'the upright line points a different way at every point.',
+    antiAnalogy: {
+      tempting: 'measuring both angles from the mirror surface, since that is the thing you can see',
+      whyItFails:
+        'the numbers still come out equal to each other, so the mistake hides — until the surface curves '
+        + 'or a second surface joins it, and then every prediction is off by the amount you never noticed.',
+    },
+    microCheck: 'Light comes in almost grazing along a mirror. Is its angle of incidence large or small?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.opt.mirrors',
+    subject: 'physics',
+    canonicalIdea: 'A curved mirror forms an image at a place set by the curvature and by how far the object sits, not on the glass itself.',
+    concreteAnchor: 'the back of a spoon, and then the bowl of the same spoon',
+    plainExplanation:
+      'Hold the back of a spoon at arm\'s length and your face is small and the right way up. Turn it '
+      + 'over to the bowl and, at that distance, your face is upside down. Same spoon, same face; the only '
+      + 'difference is which way the surface bends. A curved mirror gathers the light leaving one point of '
+      + 'you and sends it back to meet at some other point in space, and the position of that meeting '
+      + 'place depends on how sharply the mirror curves and how far away you stand. Bring the spoon bowl '
+      + 'very close and your face flips back upright and grows, because you have crossed inside the '
+      + 'distance where the light can still be brought together in front.',
+    antiAnalogy: {
+      tempting: 'thinking of the image as painted on the mirror, the way a photograph sits on paper',
+      whyItFails:
+        'an image on the glass could not be caught on a card held in mid-air, and the one from a spoon '
+        + 'bowl can be. Where the image sits is the thing being predicted; fixing it to the surface throws '
+        + 'the question away.',
+    },
+    microCheck: 'The bowl of a spoon shows you upside down at arm\'s length and upright up close. What changed?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.opt.refraction',
+    subject: 'physics',
+    canonicalIdea: 'Light changes direction at a boundary because its speed changes there, and the size of the bend follows from the two speeds.',
+    concreteAnchor: 'a straw standing in a glass of water, looking broken at the surface',
+    plainExplanation:
+      'A straw in water looks snapped at the waterline. Light leaving the underwater part travels slower '
+      + 'in water than in air, and at the surface it changes direction — bending away from the upright '
+      + 'line as it speeds up on the way out. Your eye cannot know this happened, so it traces the light '
+      + 'back along the straight line it finally arrived on, and places the lower straw where that line '
+      + 'points. Going the other way, from air into water, the light slows and bends the other way, '
+      + 'towards the upright. The steeper the difference in speeds between the two materials, the sharper '
+      + 'the bend for the same incoming angle.',
+    antiAnalogy: {
+      tempting: 'picturing the light bouncing off the water surface like a ball off a kerb',
+      whyItFails:
+        'a bounce sends it back into the air it came from. Refraction is the light continuing on through '
+        + 'the water in a new direction, which is a different event with a different answer.',
+    },
+    microCheck: 'Light passing from air into glass slows down. Does it bend towards the upright line or away from it?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.opt.total-internal-reflection',
+    subject: 'physics',
+    canonicalIdea: 'Past a certain angle, light trying to leave a slower medium for a faster one cannot get out at all and is entirely reflected back.',
+    concreteAnchor: 'the silvery mirror-like underside of a swimming pool surface, seen from below',
+    plainExplanation:
+      'Underwater, look up steeply and you see the sky. Look up at a shallow angle instead and the '
+      + 'surface turns into a perfect mirror showing you the pool floor. As light inside the water meets '
+      + 'the surface at ever flatter angles, the beam escaping into the air bends further and further '
+      + 'over, until at one particular angle it would have to travel flat along the surface. Beyond that '
+      + 'angle there is nowhere for it to go, and every bit of it comes back into the water. That is what '
+      + 'keeps a signal inside an optical fibre for kilometres: it strikes the wall too shallowly, every '
+      + 'time, to leave.',
+    antiAnalogy: {
+      tempting: 'reading it as the light being too weak or too tired to break through',
+      whyItFails:
+        'strength has nothing to do with it. A powerful laser at a shallow angle stays trapped and a '
+        + 'feeble glow at a steep angle escapes, so the angle is the whole story and brightness is not '
+        + 'part of it.',
+    },
+    microCheck: 'A fibre carries light for a kilometre without leaking. What is happening at its walls each time the light meets them?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.opt.lenses',
+    subject: 'physics',
+    canonicalIdea: 'A thin lens brings the light from each point of an object back together at one place, and where that place is depends on the object distance.',
+    concreteAnchor: 'a magnifying glass focusing sunlight to a dot, then held over print',
+    plainExplanation:
+      'A magnifying glass held in sunlight makes a tiny burning dot at one particular distance below it. '
+      + 'That distance is the lens\'s own signature — the light from the Sun arrives so nearly parallel '
+      + 'that the lens brings it to its tightest possible meeting point. Hold the same lens over a page '
+      + 'instead and the light from each letter is spreading, not parallel, so it takes further to come '
+      + 'back together and the image forms somewhere else entirely. Push the page in close and the letters '
+      + 'grow and stay the right way up; pull it back past that signature distance and the image flips.',
+    antiAnalogy: {
+      tempting: 'expecting that covering half the lens will remove half the picture',
+      whyItFails:
+        'every point of the object sends light through the whole lens, so the uncovered half still '
+        + 'receives light from all of it. The image goes dimmer, not half-missing — and a learner who '
+        + 'predicts half a picture has the wrong idea of what a lens is doing.',
+    },
+    microCheck: 'You cover the top half of a camera lens with tape. What happens to the photograph?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.opt.lens-power',
+    subject: 'physics',
+    canonicalIdea: 'Lenses placed together combine by adding their powers, and power is the reciprocal of focal length.',
+    concreteAnchor: 'stacking two spectacle lenses and reading a line of text through both',
+    plainExplanation:
+      'Optometrists do not talk about focal lengths, they talk about power, and there is a practical '
+      + 'reason. Stack two lenses against each other and the pair bends light more than either alone — '
+      + 'and the amount is simply the two powers added. Power is what you get by turning the focal length '
+      + 'upside down, measured in metres, so a strongly curved lens with a short focal length has a large '
+      + 'power and a gentle one has a small power. A lens that spreads light instead of gathering it '
+      + 'counts as a negative power, which is why a spreading lens stacked on a gathering one can cancel '
+      + 'part of it.',
+    antiAnalogy: {
+      tempting: 'reaching for the resistor rule and adding the focal lengths, the way resistances in a row add',
+      whyItFails:
+        'the curriculum\'s own note flags this exact swap. It is the reciprocals that add here, so the '
+        + 'resistor habit gives an answer that is not merely imprecise but points the wrong way for '
+        + 'strong lenses.',
+    },
+    microCheck: 'Two lenses are held against each other. Which quantity do you add to describe the pair?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.opt.optical-instruments',
+    subject: 'physics',
+    canonicalIdea: 'Instruments combine lenses so that a first one forms an image the second can work on, and what the eye finally receives is an angle, not a size.',
+    concreteAnchor: 'a cheap toy telescope that magnifies hugely and shows nothing but a blur',
+    plainExplanation:
+      'A toy telescope boasting six hundred times magnification shows a fainter, wobblier Moon than a '
+      + 'plain pair of binoculars. The reason is that magnification is only half of what an instrument '
+      + 'does. The front lens gathers light and forms a small image inside the tube; the eyepiece then '
+      + 'acts as a magnifier on that image, presenting it to the eye at a wider angle than the object '
+      + 'itself subtends. Widening the angle is all magnification means. But the front lens can only '
+      + 'gather the light that falls on it and can only separate detail down to a limit set by its own '
+      + 'width, so magnifying beyond that spreads the same blur over more of your view.',
+    antiAnalogy: {
+      tempting: 'assuming a bigger magnification number is a better instrument',
+      whyItFails:
+        'magnification says how wide an angle the image arrives at, and says nothing about how much light '
+        + 'was collected or how fine the detail in it is. Those come from the width of the front lens, '
+        + 'which is why serious telescopes are described by their diameter.',
+    },
+    microCheck: 'Two telescopes magnify the same amount, but one has a much wider front lens. What does the wider one give you?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.opt.dispersion',
+    subject: 'physics',
+    canonicalIdea: 'A prism separates white light because each colour is slowed by a slightly different amount and so bends by a different amount.',
+    concreteAnchor: 'a band of colour thrown on the wall by the bevelled edge of a window pane',
+    plainExplanation:
+      'A prism does not decorate the light passing through it. White light already contains the whole '
+      + 'spread of colours, laid on top of one another. Glass slows each colour by a slightly different '
+      + 'amount — violet a little more than red — and since the amount of bending at each face follows '
+      + 'from the slowing, the colours leave along slightly different paths and fan out. Send that fan '
+      + 'into a second prism turned the other way and the colours fold back into white, which is the '
+      + 'experiment that settled the matter. A rainbow is the same effect happening inside each of '
+      + 'millions of raindrops at once.',
+    antiAnalogy: {
+      tempting: 'thinking the prism adds the colours to plain light, the way a stained window tints daylight',
+      whyItFails:
+        'a tint removes colours from what passes; the prism removes nothing and a second prism recombines '
+        + 'the fan into white again. Adding colour cannot be undone by more glass.',
+    },
+    microCheck: 'A second prism turned the other way recombines the fan into white light. What does that tell you about where the colours came from?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.opt.wave-optics',
+    subject: 'physics',
+    canonicalIdea: 'Treating every point of a wavefront as the source of a new little wave predicts where the wave goes next, including around edges.',
+    concreteAnchor: 'ripples from a stone passing through a gap in a harbour wall',
+    plainExplanation:
+      'Ripples arriving at a gap in a harbour wall do not carry on as a strip the width of the gap. They '
+      + 'spread into a fan on the far side. The way to see why is to stop thinking of the wave as a moving '
+      + 'object and think of every point along its crest as a little source in its own right, each sending '
+      + 'out a small circular ripple. Where those small ripples line up crest to crest, the next crest of '
+      + 'the big wave appears; where they cancel, nothing does. In open water the sideways ones cancel and '
+      + 'the wave looks like it is going straight. At the gap there is nothing left to cancel the outer '
+      + 'ones, so the fan appears.',
+    antiAnalogy: {
+      tempting: 'expecting the wave picture to replace the ray picture as an upgrade',
+      whyItFails:
+        'the wave construction reproduces straight-line travel wherever the openings are wide, so rays '
+        + 'are what it predicts, not what it overturns. Treating them as rivals hides that one contains '
+        + 'the other.',
+    },
+    microCheck: 'Ripples fan out after a narrow gap but travel straight in open water. What cancels the sideways spreading in open water?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.opt.youngs-experiment',
+    subject: 'physics',
+    canonicalIdea: 'Two narrow slits produce many bright and dark bands because light from the two paths arrives in step at some places and out of step at others.',
+    concreteAnchor: 'two slits scratched in soot on glass, throwing a row of stripes on a wall',
+    plainExplanation:
+      'Light through two fine slits does not make two bright patches on the far wall. It makes a long row '
+      + 'of evenly spaced stripes. Every point on that wall is reached by light from both slits, but along '
+      + 'slightly different lengths of journey. Where the two journeys differ by a whole number of the '
+      + 'light\'s own ripples, the two arrive in step and reinforce, giving a bright band. Where they '
+      + 'differ by half a ripple, a crest meets a trough and they cancel, giving darkness. Move sideways '
+      + 'along the wall and the difference in journey grows steadily, so bright and dark alternate.',
+    antiAnalogy: {
+      tempting: 'reading the dark bands as places where something blocked the light',
+      whyItFails:
+        'nothing blocks them — light from both slits is arriving there. Cover one slit and the dark bands '
+        + 'fill in and brighten, which is impossible if darkness meant absence. It means arrival out of '
+        + 'step.',
+    },
+    microCheck: 'You cover one of the two slits and a previously dark band becomes lit. What was making it dark before?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.opt.diffraction',
+    subject: 'physics',
+    canonicalIdea: 'Waves spread on passing an obstacle or opening, and the spreading is noticeable only when the opening is near the size of the wave itself.',
+    concreteAnchor: 'hearing someone around a corner long before you can see them',
+    plainExplanation:
+      'You can hear a conversation round a corner you cannot see round. Both sound and light are waves '
+      + 'and both bend at the corner, but sound ripples are metres long, comparable to the doorway, while '
+      + 'light ripples are smaller than a thousandth of a millimetre. Against a doorway that size, light\'s '
+      + 'spreading is far too slight to notice, so it appears to travel in straight lines and casts a '
+      + 'sharp shadow. Squeeze light through a slit narrow enough to approach its own scale and it fans '
+      + 'out exactly as the sound did.',
+    antiAnalogy: {
+      tempting: 'explaining the bend as the wave glancing off the edge of the obstacle',
+      whyItFails:
+        'a glance off the edge would depend on what the edge is made of, and diffraction does not. The '
+        + 'same fan appears past a razor blade, a card and a drop of ink, because the spreading belongs to '
+        + 'the wave and not to the material.',
+    },
+    microCheck: 'Sound bends round a doorway and light does not, though both are waves. What is different about them?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.opt.single-slit',
+    subject: 'physics',
+    canonicalIdea: 'One slit gives a wide central bright band with weaker bands beyond it, because light from different parts of the same slit cancels itself.',
+    concreteAnchor: 'a bright streak with faint outriggers, seen through the gap between two fingers held close',
+    plainExplanation:
+      'A single narrow slit throws a broad bright band in the middle with much fainter bands to either '
+      + 'side, fading quickly. The cancelling here happens between light coming from different points '
+      + 'across the one slit. Consider light heading off to the side: the top part of the slit and the '
+      + 'middle part have journeys differing by half a ripple, so they cancel each other, and so does '
+      + 'every other such pair down the slit, leaving nothing. That is a dark band. The central bright '
+      + 'band is broad because near straight ahead no pairing cancels, and it gets broader as the slit '
+      + 'gets narrower.',
+    antiAnalogy: {
+      tempting: 'carrying over the two-slit pattern and treating it as the same thing with the same rule',
+      whyItFails:
+        'the curriculum\'s own note names this. The two-slit rule counts a whole ripple difference for '
+        + 'brightness; here that same whole ripple difference is what produces a dark band, because it is '
+        + 'the condition for the slit to cancel itself in pairs. The similar look of the formulas hides '
+        + 'opposite meanings.',
+    },
+    microCheck: 'The central band from one slit is much wider than the stripes from two slits. Which cancellations produce the dark bands beside it?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.opt.polarization',
+    subject: 'physics',
+    canonicalIdea: 'Light waves oscillate across their direction of travel, and polarization is which way across.',
+    concreteAnchor: 'two pairs of polarised sunglasses, turned against each other until they go black',
+    plainExplanation:
+      'Hold two pairs of polarised sunglasses one behind the other and rotate one. At some angle almost '
+      + 'nothing gets through. The light in an ordinary beam wobbles sideways to its travel, but in every '
+      + 'sideways direction at once. A polarising filter passes only the wobble along one direction, so '
+      + 'the light beyond it wobbles just one way. Send that at a second filter turned across the first '
+      + 'and there is nothing left for it to pass. This works only because light wobbles across its '
+      + 'travel; sound, which wobbles along its travel, has no such property and cannot be polarised at '
+      + 'all.',
+    antiAnalogy: {
+      tempting: 'treating the filter as a dimmer that simply cuts the brightness in half',
+      whyItFails:
+        'a dimmer would let the second filter halve it again, never to black. What the first filter '
+        + 'changes is the direction of the wobble, and it is that change, not the loss of brightness, '
+        + 'that decides what the second one does.',
+    },
+    microCheck: 'Two polarising filters crossed against each other pass almost nothing. Why can a dimming explanation not account for that?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.opt.brewsters-law',
+    subject: 'physics',
+    canonicalIdea: 'Reflection off a surface at one particular angle comes out fully polarised, and a filter then passes an amount that depends on how far it is turned from that direction.',
+    concreteAnchor: 'glare off a wet road vanishing when polarised sunglasses are worn upright',
+    plainExplanation:
+      'Glare from a wet road or a lake is largely polarised in one direction, horizontal, because of the '
+      + 'angle at which it reflected off a flat surface. At one particular angle of reflection the '
+      + 'reflected light is polarised completely, and that angle is set by the two materials meeting at '
+      + 'the surface. Sunglasses cut the glare by passing only the upright wobble, and turning your head '
+      + 'sideways brings the glare back. How much a filter passes falls off smoothly as it is turned away '
+      + 'from the light\'s own direction of wobble — full when aligned, nothing when fully across, and '
+      + 'part way in between.',
+    antiAnalogy: {
+      tempting: 'assuming that if two crossed filters block everything, a third filter can only block more',
+      whyItFails:
+        'slip a third filter at a slant between two crossed ones and light reappears. Each filter resets '
+        + 'the direction of the wobble for whatever follows it, so the middle one hands the last filter '
+        + 'something it can pass. Filters do not simply subtract.',
+    },
+    microCheck: 'A third filter placed at a slant between two crossed ones lets light through again. What has the middle filter done to the light?',
+    ...DRAFTED,
+  },
 ]
 
 export type RemediationCardLookup =
