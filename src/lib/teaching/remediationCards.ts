@@ -4172,6 +4172,438 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
     microCheck: 'A small forward voltage produces almost no current through a diode. What has not yet been overcome?',
     ...DRAFTED,
   },
+  {
+    conceptId: 'phys.qm.wave-function',
+    subject: 'physics',
+    canonicalIdea: 'The wave function is not the particle; squaring it gives the chance of finding the particle in each place.',
+    concreteAnchor: 'electrons arriving one at a time as separate dots that slowly build a striped pattern',
+    plainExplanation:
+      'Quantum mechanics describes a particle with a mathematical object spread over space. That object '
+      + 'is not the particle smeared out. Whenever you look, you find a whole particle at one place, never '
+      + 'a fraction of one anywhere. What the object gives you, once squared, is the chance of finding it '
+      + 'at each place — large where it is likely, small where it is not, zero where it never turns up. '
+      + 'The spread is a spread of likelihood. That is why a single electron lands as one dot and a '
+      + 'thousand of them build a pattern: each dot is a whole arrival, and the pattern is the likelihood '
+      + 'made visible.',
+    antiAnalogy: {
+      tempting: 'picturing it as the electron itself spread out like a cloud of substance',
+      whyItFails:
+        'a spread-out substance would be detected in pieces — a bit of charge here, a bit there. Every '
+        + 'detector ever built finds the whole electron at one spot. What is spread is where it might be '
+        + 'found, not what it is made of.',
+    },
+    microCheck: 'A detector never registers half an electron, yet the description is spread across the screen. What is spread?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.qm.schrodinger-equation',
+    subject: 'physics',
+    canonicalIdea: 'The Schrodinger equation says how the spread of likelihood changes with time, and it never produces a path.',
+    concreteAnchor: 'a weather forecast that gives the chance of rain over a region, hour by hour',
+    plainExplanation:
+      'The equation takes the current description of a particle and tells you what it becomes an instant '
+      + 'later. It is completely deterministic in that sense: given the description now, the description '
+      + 'later is fixed. What it never hands you is a trajectory. Ask it where the electron is at three '
+      + 'o\'clock and it does not answer, because the thing it evolves is the spread of likelihood, not a '
+      + 'position. A forecast can tell you exactly how the chance of rain over a county shifts hour by '
+      + 'hour without ever naming the raindrop that falls on your roof.',
+    antiAnalogy: {
+      tempting: 'treating it as the quantum version of Newton\'s law, handing back the particle\'s path',
+      whyItFails:
+        'the curriculum\'s own note bans this comparison. Newton\'s law outputs a position at each moment; '
+        + 'this outputs a distribution. A learner expecting a path then reads every solution as a '
+        + 'trajectory and cannot make sense of interference, tunnelling, or measurement.',
+    },
+    microCheck: 'The equation is fully deterministic and yet cannot tell you where the electron will be found. What is it determining?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.qm.uncertainty-principle',
+    subject: 'physics',
+    canonicalIdea: 'A particle sharply located in position simply does not possess a sharp momentum, whatever instrument you bring.',
+    concreteAnchor: 'a single very short click, which has no definite pitch however carefully you listen to it',
+    plainExplanation:
+      'A long, steady musical note has a definite pitch. Shorten it and the pitch blurs. Shorten it to a '
+      + 'single click and asking for its pitch stops making sense — a click is built from a whole spread '
+      + 'of frequencies at once, and that is a fact about what a click is, not about the ear listening. '
+      + 'Position and momentum stand in exactly this relation. A description confined to a narrow region '
+      + 'is necessarily built from a wide spread of momenta. Squeeze the position and the momentum spread '
+      + 'grows, with a floor below which the product cannot go.',
+    antiAnalogy: {
+      tempting: 'explaining it as the measurement knocking the particle and spoiling the other quantity',
+      whyItFails:
+        'that says the particle had both all along and clumsy apparatus hid one. Then a gentler instrument '
+        + 'would do better, and none does. The limit is on what a particle can simultaneously have, and it '
+        + 'is there before anyone measures anything.',
+    },
+    microCheck: 'A gentler, more careful instrument does not improve the trade-off at all. What does that rule out?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.qm.operators',
+    subject: 'physics',
+    canonicalIdea: 'An observable is an instruction acting on the description, and two such instructions applied in opposite orders need not agree.',
+    concreteAnchor: 'turning a book face-down then rotating it, versus rotating it then turning it face-down',
+    plainExplanation:
+      'Lay a book flat, turn it face-down, then rotate it a quarter turn. Start again and do the rotation '
+      + 'first. The book ends in two different orientations. The operations did not commute, and that is a '
+      + 'fact about the operations, not about the book. In quantum mechanics each measurable quantity is '
+      + 'an instruction of this kind, acting on the particle\'s description, and the numbers a measurement '
+      + 'can return are the special values that instruction picks out. Position and momentum are two such '
+      + 'instructions, and applying them in the two orders does not give the same result. That mismatch is '
+      + 'the whole source of the uncertainty relation between them.',
+    antiAnalogy: {
+      tempting: 'reading them as ordinary functions of position and momentum, to be multiplied like numbers',
+      whyItFails:
+        'the curriculum\'s own note names this. Ordinary numbers multiply in either order; these do not, '
+        + 'and the size of the discrepancy is exactly what the theory is built on. Treating them as scalars '
+        + 'quietly deletes the structure.',
+    },
+    microCheck: 'Two operations applied in opposite orders give different results. What does that difference produce here?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.qm.particle-in-box',
+    subject: 'physics',
+    canonicalIdea: 'Confining a particle forces its description to fit the box, which allows only certain energies and forbids sitting still.',
+    concreteAnchor: 'a guitar string clamped at both ends, which sounds only its own note and its overtones',
+    plainExplanation:
+      'A guitar string held at both ends cannot vibrate at just any frequency. Only the shapes that fit '
+      + 'the length — with the ends held still — survive, so the string sounds a particular note and its '
+      + 'overtones and nothing between. A particle trapped between two walls is under the same constraint: '
+      + 'its description must fall to nothing at the walls, so only certain shapes fit, and each shape '
+      + 'carries a particular energy. The lowest allowed one is not zero. A description that is flat and '
+      + 'motionless everywhere is not a shape that fits, so the trapped particle can never be brought '
+      + 'fully to rest, and squeezing the box raises that floor.',
+    antiAnalogy: {
+      tempting: 'expecting the lowest state to be the particle sitting still at the bottom',
+      whyItFails:
+        'sitting still would mean a definite position and a definite momentum at once, which the box\'s own '
+        + 'confinement forbids. The leftover energy is not a flaw in the model; a narrower box raises it, '
+        + 'which is measurable.',
+    },
+    microCheck: 'Making the box narrower raises the lowest possible energy. Why can it not simply be zero?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.qm.harmonic-oscillator-qm',
+    subject: 'physics',
+    canonicalIdea: 'A particle in a smooth valley has evenly spaced allowed energies, and the lowest is above the bottom of the valley.',
+    concreteAnchor: 'a crystal still trembling at temperatures a hair above absolute zero',
+    plainExplanation:
+      'Almost every well behaves like a smooth valley near its bottom, which is why this one model turns '
+      + 'up everywhere from vibrating molecules to crystal lattices to fields. Solving it gives allowed '
+      + 'energies spaced evenly apart, each rung the same distance above the last, so a molecule absorbs '
+      + 'and emits at one characteristic frequency and its multiples. And the lowest rung sits above the '
+      + 'valley floor rather than on it. Cool a crystal as close to absolute zero as anyone can reach and '
+      + 'its atoms are still moving, because that residual motion is the lowest state the confinement '
+      + 'allows, not thermal energy that could be removed.',
+    antiAnalogy: {
+      tempting: 'assuming the rungs crowd together higher up, the way an atom\'s levels do',
+      whyItFails:
+        'hydrogen\'s levels bunch towards a ceiling because its well flares out and eventually releases the '
+        + 'electron. A valley of this shape has walls that keep steepening, so the rungs stay evenly '
+        + 'spaced and there is no ceiling to bunch towards.',
+    },
+    microCheck: 'A crystal cooled almost to absolute zero is still vibrating. Which rung is it on?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.qm.hydrogen-atom-qm',
+    subject: 'physics',
+    canonicalIdea: 'Solving hydrogen properly replaces orbits with shapes of likelihood, labelled by four numbers.',
+    concreteAnchor: 'the dumb-bell shaped regions drawn in chemistry textbooks',
+    plainExplanation:
+      'The full quantum treatment of hydrogen recovers Bohr\'s energies and then adds what Bohr could not. '
+      + 'Instead of an orbit there is a three-dimensional shape of likelihood: spherical for the lowest '
+      + 'state, dumb-bell shaped and cloverleaf shaped for others. Four numbers label a state — one fixing '
+      + 'the energy, one the amount of angular momentum, one its direction, and one the electron\'s own '
+      + 'intrinsic spin. Those four are what the periodic table\'s structure ultimately rests on. The '
+      + 'electron is not travelling round a track inside those shapes; the shape is where it is likely to '
+      + 'be found.',
+    antiAnalogy: {
+      tempting: 'reading the shapes as the paths the electron runs along, like a planet on a stranger orbit',
+      whyItFails:
+        'the lowest state is spherical with the largest likelihood at the very centre, which no orbit could '
+        + 'produce, and it carries no angular momentum at all. An orbiting electron would also radiate '
+        + 'continuously and spiral in, which is the failure the quantum treatment exists to fix.',
+    },
+    microCheck: 'The lowest hydrogen state has no angular momentum at all. Why is that impossible for an orbit?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.qm.spin',
+    subject: 'physics',
+    canonicalIdea: 'Spin is an intrinsic property with only two possible outcomes along any direction you choose to measure.',
+    concreteAnchor: 'a beam of silver atoms splitting into exactly two spots on a screen, never a smear',
+    plainExplanation:
+      'Send silver atoms through a suitably shaped magnetic field and the beam splits into exactly two '
+      + 'spots. Not a smear, not a spread — two. Measure along a different direction and you again get '
+      + 'exactly two, along that new direction. Electrons carry an intrinsic magnetic property with this '
+      + 'strictly two-valued character. It is not something the electron is doing; it is something the '
+      + 'electron is, present in the very same amount for every electron in the universe, and it cannot be '
+      + 'sped up, slowed down or stopped.',
+    antiAnalogy: {
+      tempting: 'imagining the electron as a tiny ball spinning on its axis',
+      whyItFails:
+        'the curriculum\'s own note bans this picture. A spinning ball can point any way and spin at any '
+        + 'rate, so it would give a continuous smear on the screen rather than two spots; and its rate '
+        + 'could be changed, while this cannot be changed at all.',
+    },
+    microCheck: 'Measured along any direction you choose, you get exactly two outcomes. What does a spinning ball predict instead?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.qm.pauli-exclusion',
+    subject: 'physics',
+    canonicalIdea: 'No two identical fermions may occupy the same quantum state, while bosons may pile into one without limit.',
+    concreteAnchor: 'a white dwarf star held up against gravity by nothing but this rule',
+    plainExplanation:
+      'Matter particles — electrons, protons, neutrons, the family called fermions — obey a strict rule: '
+      + 'no two identical ones may share a quantum state. That is why electrons stack into successive '
+      + 'shells around a nucleus instead of all dropping to the lowest one, and therefore why chemistry '
+      + 'and the periodic table exist at all. It is also what holds a burnt-out star up when its fuel is '
+      + 'gone: the electrons have nowhere left to go. The other family, bosons — photons among them — has '
+      + 'no such restriction and will happily crowd into one state, which is what makes a laser possible.',
+    antiAnalogy: {
+      tempting: 'stating it flatly as particles being unable to share a state',
+      whyItFails:
+        'the curriculum\'s own note requires the fermion qualifier every time. Left off, the rule appears '
+        + 'to apply to everything, and a laser — enormous numbers of photons in one identical state — '
+        + 'becomes inexplicable.',
+    },
+    microCheck: 'A laser puts vast numbers of photons in the same state. Why does the exclusion rule not forbid it?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.qm.quantum-tunneling',
+    subject: 'physics',
+    canonicalIdea: 'A particle can be found beyond a barrier it never had the energy to climb, because its description does not stop dead at the wall.',
+    concreteAnchor: 'alpha particles escaping a nucleus that, by energy alone, should hold them forever',
+    plainExplanation:
+      'Classically a ball without enough energy to reach the top of a hill will never be found on the far '
+      + 'side. Quantum mechanically the particle\'s description does not fall abruptly to nothing at the '
+      + 'barrier — it decays away inside it, and if the barrier is thin enough some is still left on the '
+      + 'far side. That leftover means a real chance of finding the whole particle there. Thicken the '
+      + 'barrier or raise it and the chance falls away extremely steeply, which is why the effect is '
+      + 'invisible for footballs and decisive for alpha decay, where it sets half-lives spanning many '
+      + 'orders of magnitude.',
+    antiAnalogy: {
+      tempting: 'describing it as the particle borrowing energy briefly to get over the top',
+      whyItFails:
+        'nothing is borrowed and nothing is repaid; the particle arrives on the far side with exactly the '
+        + 'energy it started with, never more. It was never over the top. Its description simply had not '
+        + 'reached zero by the time the barrier ended.',
+    },
+    microCheck: 'The particle emerges with exactly the energy it began with. What does that rule out about how it crossed?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.qm.perturbation-theory',
+    subject: 'physics',
+    canonicalIdea: 'When a solvable system is disturbed slightly, the corrections can be built up in order of smallness — provided the disturbance really is small compared with the gaps it must bridge.',
+    concreteAnchor: 'a spectral line splitting into several when a modest magnetic field is switched on',
+    plainExplanation:
+      'Very few quantum systems can be solved exactly. The working strategy is to start from one that can '
+      + 'be, then add the real complication as a small correction and compute its effect in successive '
+      + 'layers: a first correction, then a smaller correction to that, and so on. Switching on a modest '
+      + 'magnetic field splits an atom\'s single spectral line into several, and the size of that splitting '
+      + 'is exactly what a first-order calculation predicts. The method works because the disturbance is '
+      + 'small compared with the spacing between the original energy levels. When two of those levels sit '
+      + 'very close together, the same series stops behaving and a different treatment is needed.',
+    antiAnalogy: {
+      tempting: 'treating it as always available, since any disturbance can be called small',
+      whyItFails:
+        'small has a meaning here: small relative to the energy gaps. A weak disturbance acting between '
+        + 'two nearly identical levels is not small in the sense that matters, and the corrections grow '
+        + 'instead of shrinking. Judging smallness by the disturbance alone is what leads people astray.',
+    },
+    microCheck: 'Two energy levels sit almost on top of each other. Why does a weak disturbance stop counting as small?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.qm.selection-rules',
+    subject: 'physics',
+    canonicalIdea: 'Only transitions that respect the relevant conservation laws occur at appreciable rates, and the rest are suppressed rather than impossible.',
+    concreteAnchor: 'the forbidden green line of oxygen, seen in aurorae and almost nowhere else',
+    plainExplanation:
+      'An excited atom cannot drop to just any lower level. The photon it emits carries away angular '
+      + 'momentum, so the two levels involved must differ in a way that lets the books balance; the '
+      + 'transitions that satisfy this happen readily, and the others are enormously slower. Slower, '
+      + 'though, is not never. Oxygen has a transition of this suppressed kind that takes on the order of '
+      + 'a second — an eternity by atomic standards. On Earth an atom is jostled by collisions long before '
+      + 'then, so we never see it. High in the thin upper atmosphere nothing interrupts, and it produces '
+      + 'the green glow of the aurora.',
+    antiAnalogy: {
+      tempting: 'reading forbidden as meaning the transition cannot happen',
+      whyItFails:
+        'the aurora is that transition. Forbidden is a statement about rate, not possibility, and reading '
+        + 'it as a prohibition leaves the most familiar sight in the night sky unexplained.',
+    },
+    microCheck: 'The aurora\'s green light comes from a transition called forbidden. What does forbidden actually mean here?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.qm.variational-method',
+    subject: 'physics',
+    canonicalIdea: 'Any guessed state gives an energy no lower than the true ground state, so lowering the guess always improves the bound.',
+    concreteAnchor: 'guessing the helium ground state and getting within a fraction of a percent',
+    plainExplanation:
+      'The ground state is the state of lowest energy, so the average energy of any trial state you care '
+      + 'to write down cannot come out below it. That single fact turns guessing into a method. Write a '
+      + 'family of trial states with an adjustable knob, compute the average energy for each setting, and '
+      + 'turn the knob until it is as low as it will go. Whatever number you reach is a genuine upper '
+      + 'bound on the true ground energy, and a better family gives a lower one. Helium, which cannot be '
+      + 'solved exactly, yields to a simple trial family within a fraction of a percent.',
+    antiAnalogy: {
+      tempting: 'taking the number you reach as the ground-state energy itself',
+      whyItFails:
+        'it is a ceiling, and the truth sits at or below it. Two different trial families give two '
+        + 'different answers, both valid ceilings, and the lower one is the better bound — which makes no '
+        + 'sense if either were the answer.',
+    },
+    microCheck: 'Two different trial families give two different numbers and both are legitimate. Which is the better result, and why?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.qm.wkb-approximation',
+    subject: 'physics',
+    canonicalIdea: 'When the surroundings change slowly compared with the particle\'s own wavelength, the description can be built by accumulating the local behaviour step by step across the region.',
+    concreteAnchor: 'alpha decay half-lives spanning twenty orders of magnitude, predicted from one barrier shape',
+    plainExplanation:
+      'The exactly solvable barrier problems all have square edges, and real barriers do not. The '
+      + 'semiclassical method handles a smoothly varying one by treating each thin slice as locally simple '
+      + 'and accumulating across the whole region — valid whenever the surroundings change little over one '
+      + 'wavelength. In a region the particle could classically reach, this accumulates as an oscillation. '
+      + 'In a forbidden region it accumulates as a steady dying away, and the total dying across the '
+      + 'barrier sets the chance of getting through. Applied to the barrier holding an alpha particle in a '
+      + 'nucleus, it reproduces half-lives ranging over twenty orders of magnitude.',
+    antiAnalogy: {
+      tempting: 'carrying over the simple exponential tunnelling result as though it applied to any barrier',
+      whyItFails:
+        'the curriculum\'s own note flags this. That result assumes the barrier is one constant height '
+        + 'throughout. A real barrier varies, and the accumulation across it has to be taken slice by '
+        + 'slice — which is precisely what produces the enormous spread in decay rates.',
+    },
+    microCheck: 'One barrier shape gives decay rates spanning twenty orders of magnitude. What is being accumulated across it?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.qm.identical-particles',
+    subject: 'physics',
+    canonicalIdea: 'Identical particles are not merely alike but interchangeable in principle, and swapping two of them must leave the description either unchanged or exactly reversed in sign.',
+    concreteAnchor: 'two electrons that no experiment can tell apart, even in principle',
+    plainExplanation:
+      'Two electrons are not two similar objects with different serial numbers. Nothing whatever '
+      + 'distinguishes them, so swapping which is which cannot change any prediction. That leaves only two '
+      + 'possibilities for the description itself: it stays exactly as it was, or it flips sign — either '
+      + 'way, squaring it gives the same likelihood. Particles of the first kind are bosons and can crowd '
+      + 'into one state. Particles of the second kind are fermions, and the sign flip means the '
+      + 'description vanishes identically when two are put in the same state, which is the exclusion '
+      + 'principle appearing as a consequence rather than a separate rule.',
+    antiAnalogy: {
+      tempting: 'reading identical as meaning too similar to tell apart with present instruments',
+      whyItFails:
+        'a better instrument would then someday label them, and the interference between the swapped '
+        + 'arrangements would vanish. It does not, and that interference is measurable. The '
+        + 'indistinguishability is a fact about the particles, not about our equipment.',
+    },
+    microCheck: 'Swapping two fermions flips the sign of the description. What happens if they are put in the same state?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.qm.angular-momentum-addition',
+    subject: 'physics',
+    canonicalIdea: 'Combining two angular momenta gives a whole ladder of possible totals, from their difference up to their sum in whole steps.',
+    concreteAnchor: 'two electron spins combining into one arrangement that is silent and three that are not',
+    plainExplanation:
+      'Two sources of angular momentum in one system do not simply add to a single number. The possible '
+      + 'totals run in whole steps from the difference of the two up to their sum, and every value in '
+      + 'between is available. Two electron spins, each two-valued, therefore combine into a total of one '
+      + 'or a total of zero — four arrangements in all, of which three belong to the total of one and a '
+      + 'single one, the arrangement where they exactly oppose, belongs to zero. That split is why some '
+      + 'molecular states are magnetically active and their partner is not, and why helium\'s spectrum has '
+      + 'two families of lines.',
+    antiAnalogy: {
+      tempting: 'expecting the two amounts simply to add up to one number',
+      whyItFails:
+        'adding alone would give a single answer, and the experiment shows several. The directions are '
+        + 'themselves quantised, so the two can be aligned, opposed, or in between only in the permitted '
+        + 'steps — which is why a range of totals appears rather than one.',
+    },
+    microCheck: 'Two electron spins give four arrangements split into a group of three and a lone one. What distinguishes the lone one?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.qm.scattering-theory-born-approximation',
+    subject: 'physics',
+    canonicalIdea: 'How much scatters in each direction reveals the shape of what did the scattering, and for weak scattering the relationship is direct.',
+    concreteAnchor: 'Rutherford\'s alpha particles bouncing back and revealing a tiny hard nucleus',
+    plainExplanation:
+      'A scattering experiment never sees the target. It sees how many particles come off in each '
+      + 'direction, and the shape of that distribution is what has to be turned back into a description of '
+      + 'the target. When the scattering is weak — the incoming particle barely disturbed, most of it '
+      + 'passing straight through — the relationship becomes direct: the amount scattered through each '
+      + 'angle reflects one particular component of the target\'s spatial structure, with large angles '
+      + 'reporting on fine detail and small angles on the coarse overall shape. That is why Rutherford\'s '
+      + 'rare large deflections meant something small and hard rather than something diffuse.',
+    antiAnalogy: {
+      tempting: 'assuming the weak-scattering treatment applies to any collision',
+      whyItFails:
+        'it is built on the incoming particle being barely disturbed, so that it can be treated as having '
+        + 'passed straight through. For slow particles or strong forces the particle is thoroughly '
+        + 'redirected, may scatter more than once, and the simple correspondence between angle and '
+        + 'structure breaks down.',
+    },
+    microCheck: 'Large-angle scattering reports on fine detail, small-angle on coarse shape. What did Rutherford\'s large angles tell him?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.qm.s-matrix-basics',
+    subject: 'physics',
+    canonicalIdea: 'The scattering matrix relates what went in to what came out, without describing anything in between, and its conservation of probability constrains it tightly.',
+    concreteAnchor: 'a particle collider, which records only the beams before and the debris after',
+    plainExplanation:
+      'A collider never observes the collision. It knows what was sent in and what emerged, and everything '
+      + 'else is inference. The scattering matrix is built to match that: it maps the incoming '
+      + 'arrangement onto the outgoing one and makes no claim about the interval between. Its central '
+      + 'constraint is that nothing is lost — whatever went in must come out as something, with total '
+      + 'probability one. That requirement alone is remarkably powerful. It forces a relationship between '
+      + 'how much is scattered in total and how much continues straight ahead, so measuring the '
+      + 'undeflected beam tells you about scattering into every other direction.',
+    antiAnalogy: {
+      tempting: 'reading it as a description of what happens during the collision',
+      whyItFails:
+        'it deliberately contains no during. It is a relation between a before and an after, which is why '
+        + 'it survives situations where the particles that emerge are not even the ones that went in — '
+        + 'something no account of a trajectory through the interaction could handle.',
+    },
+    microCheck: 'Measuring only the straight-through beam constrains how much scattered everywhere else. Which requirement forces that?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.qm.density-matrix',
+    subject: 'physics',
+    canonicalIdea: 'A statistical mixture of states is a different thing from a superposition of them, and the density operator is what tells the two apart.',
+    concreteAnchor: 'a beam of atoms half prepared one way and half the other, versus a beam every atom of which is in one superposed state',
+    plainExplanation:
+      'Two situations can give identical results on one particular measurement and differ completely on '
+      + 'another. In the first, each particle is definitely in one state or the other and you simply do '
+      + 'not know which — ordinary ignorance about a definite fact. In the second, every particle is in '
+      + 'one and the same superposed state, and there is nothing further to know. Measure along the '
+      + 'obvious axis and the two give the same answer. Measure along a different one and the superposed '
+      + 'beam shows interference while the mixture does not. The density operator carries both cases, and '
+      + 'a single number computed from it distinguishes them.',
+    antiAnalogy: {
+      tempting: 'treating a mixture as just another way of writing a superposition',
+      whyItFails:
+        'the superposition keeps the relative phase between the two components and the mixture has thrown '
+        + 'it away. That phase is what produces interference, so measuring along a different axis '
+        + 'separates them decisively — the distinction is physical, not notational.',
+    },
+    microCheck: 'Two beams agree on one measurement and disagree on another. What has the mixture lost that the superposition kept?',
+    ...DRAFTED,
+  },
 ]
 
 export type RemediationCardLookup =
