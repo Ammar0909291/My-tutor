@@ -182,7 +182,14 @@ describe('the exclusions are on the eligibility test, not assumed', () => {
 
 describe('an exhausted corpus falls back rather than repeating itself', () => {
   it('passes the already-asked exclusion into selection', () => {
-    expect(lineOf(/excludeProbeStem: history \? \(stem\) => hasAskedMcq\(history, stem\) : undefined/))
+    // D1 (2026-08-27): the lookup key is now NORMALISED with the same
+    // `stripAuthoringLabel` the write side applies via `probeToMcq`. Pinning
+    // the un-normalised form is what let the two halves of the ledger drift:
+    // a labelled stem ("DIAGNOSTIC (Prerequisite PD-1/PD-2): …") fingerprinted
+    // differently on each side, so the probe was never seen as spent and the
+    // same authored question was served four times in one production lesson.
+    // The assertion's intent is unchanged — the exclusion must reach selection.
+    expect(lineOf(/excludeProbeStem: history \? \(stem\) => hasAskedMcq\(history, stripAuthoringLabel\(stem\)\) : undefined/))
       .toBeGreaterThan(0)
   })
 

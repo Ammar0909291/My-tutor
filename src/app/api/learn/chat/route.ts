@@ -3808,6 +3808,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         if (gateEligible && memoryState) {
           const { findBestProbe } = await import('@/lib/teaching/assets')
           const { hasAskedMcq } = await import('@/lib/teaching/teachingHistory')
+          const { stripAuthoringLabel } = await import('@/lib/teaching/gateProbeContract')
           const history = teachingHistoryHoisted
           const probe = await findBestProbe(memoryState, {
             // Never re-ask a question this concept has already spent. 145 of
@@ -3815,7 +3816,32 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // while closing a concept needs three graded answers, so running
             // dry is the COMMON case, not the edge case — and running dry must
             // hand the turn back to the model, not repeat itself.
-            excludeProbeStem: history ? (stem) => hasAskedMcq(history, stem) : undefined,
+            //
+            // ── D1: THE LEDGER HAD TWO KEYS AND THIS WAS THE WRONG ONE ───────
+            // Measured (phys.mech.generalized-coordinates, session cmtan7xg5…,
+            // 2026-08-26): the SAME authored probe was served four times in one
+            // lesson — four byte-identical assistant messages — and three
+            // PROBE_OUTCOME rows carrying the SAME assetId closed the concept
+            // check=1 practice=2 verified=true. One question, counted as three
+            // pieces of independent evidence. Across production, 15 of the 73
+            // sessions that used this gate re-served an identical probe.
+            //
+            // The write side records `pendingMcqHoisted.question`, and
+            // `probeToMcq` set that to `stripAuthoringLabel(probe.stem)`. This
+            // side looked up the RAW stem. `memoryFingerprint` keeps the
+            // label's words as extra tokens, so for a labelled probe the two
+            // keys can never match and the ledger never saw it. 425 of the
+            // 1,860 authored probes carry a label, and all 425 fingerprint
+            // differently raw — none was accidentally safe.
+            //
+            // Normalising HERE and not inside hasAskedMcq/recordMcqAsked is
+            // deliberate: this input is known to be an authored stem, the write
+            // side already stores the stripped form (so ledger entries recorded
+            // before this shipped now match — no migration), and the writer also
+            // stores MODEL questions, whose persisted keys must not shift.
+            // `stripAuthoringLabel` is idempotent and the identity on any stem
+            // without a label, so an unlabelled probe is untouched.
+            excludeProbeStem: history ? (stem) => hasAskedMcq(history, stripAuthoringLabel(stem)) : undefined,
             // The gate can ONLY use a probe that becomes the turn's MCQ — it is
             // graded by gradeMcqAnswer against the authored key, and there is
             // no prose path here. Measured 2026-08-17: without this, 7 of 9
