@@ -176,9 +176,10 @@ describe('a held turn that teaches past the card is rejected', () => {
     }).violation).toBeNull()
   })
 
-  it('a held turn may ask a question — the empty/question checks stay scoped to remediation', () => {
-    // "ok sir" answered with the card's micro-check is the DESIRED behaviour,
-    // and must not be rejected as a question-only turn.
+  it('a held turn may ask the micro-check — that is the DESIRED move, not a violation', () => {
+    // `question-only` stays scoped to remediation turns for exactly this
+    // reason, and the empty-turn check must not reject it either: the card's
+    // own micro-check is what the hold block asks the tutor to say.
     expect(checkRemediationOutput({
       remediationTurn: false, text: card(FRICTION).microCheck, heldCardText: CARD,
     }).violation).toBeNull()

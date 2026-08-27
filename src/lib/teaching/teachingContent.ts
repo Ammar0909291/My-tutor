@@ -88,12 +88,21 @@ const FUNCTION_WORDS = new Set([
 
 /**
  * At least this many content words before a sentence counts as saying
- * something. Four is deliberately low: "Friction resists sliding between
- * surfaces" carries five and must pass. The failures this module was built
- * from carry ZERO once the meta frame is removed, so the floor does not sit
- * near a boundary that ordinary teaching has to clear.
+ * something.
+ *
+ * TWO, AND THE REASON IS MEASURED. It was four, and four rejected a card's own
+ * micro-check — "You press down on the book with your hand. Easier or harder to
+ * slide?" carries three content words per sentence — which is the exact move
+ * the hold block asks the tutor to make. Caught by a test before it shipped.
+ *
+ * Lowering it costs nothing, because the word count was never what caught the
+ * real failures: every empty turn measured in production is made ENTIRELY of
+ * meta sentences and scores zero substantive sentences however low this floor
+ * goes. The count only ever produced false positives on short, genuine
+ * questions. The meta list is the instrument; this is a backstop against
+ * one-word noise.
  */
-const MIN_CONTENT_WORDS = 4
+const MIN_CONTENT_WORDS = 2
 
 function splitSentences(text: string): string[] {
   return text

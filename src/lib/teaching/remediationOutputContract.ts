@@ -171,7 +171,15 @@ export function checkRemediationOutput(input: RemediationOutputInput): Remediati
     //     production while teaching nothing. Warmth is not the target here: a
     //     reflection followed by teaching still passes, because it has a
     //     substantive sentence. A reflection that IS the whole turn does not.
-    if (input.remediationTurn && !turnTaughtSomething(text)) {
+    // SCOPED TO REMEDIATION *AND* HELD TURNS, and the difference matters.
+    // `question-only` stays remediation-only, because answering "ok sir" with
+    // the card's own micro-check is the DESIRED held behaviour. Teaching
+    // NOTHING is never desired, on either kind of turn — measured on the
+    // physics sweep the hour this was written: two of five "ok sir" turns came
+    // back as "So you're saying <their words>. Is that right?", 116 characters,
+    // no teaching, and shipped, because this check was scoped out of held turns
+    // when the floor was first extended to them.
+    if ((input.remediationTurn || heldText.length > 0) && !turnTaughtSomething(text)) {
       return {
         violation: 'no-teaching-content',
         reason: 'the turn spoke only about the learner, not about the concept — the learner '

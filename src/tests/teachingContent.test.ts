@@ -126,3 +126,33 @@ describe('the H3 floor now catches the empty turn it used to pass', () => {
     }
   })
 })
+
+describe('a HELD turn that teaches nothing is rejected too', () => {
+  // Measured on the physics sweep, 2026-08-27, verbatim. Both shipped.
+  const HELD_EMPTY = [
+    "So you're saying the push you give the wall and the push the wall gives you act on different objects. Is that right?",
+    "So you're saying the table stays the same length but the number changes when we switch units. Have I got that right?",
+  ]
+  const CARD = 'Stand on a skateboard and push against a wall. You roll backwards.'
+
+  it('is caught when a card is holding', () => {
+    for (const t of HELD_EMPTY) {
+      expect(checkRemediationOutput({ remediationTurn: false, text: t, heldCardText: CARD }).violation, t)
+        .toBe('no-teaching-content')
+    }
+  })
+
+  it('but the card\'s own micro-check is NOT rejected — that is the desired move', () => {
+    expect(checkRemediationOutput({
+      remediationTurn: false,
+      text: 'You press down on the book with your hand. Easier or harder to slide?',
+      heldCardText: CARD,
+    }).violation).toBeNull()
+  })
+
+  it('and nothing is checked when no card is holding', () => {
+    for (const t of HELD_EMPTY) {
+      expect(checkRemediationOutput({ remediationTurn: false, text: t }).violation).toBeNull()
+    }
+  })
+})
