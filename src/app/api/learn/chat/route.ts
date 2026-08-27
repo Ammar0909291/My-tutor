@@ -4297,6 +4297,30 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               if (remediationTurn || holding) remediationSource = 'CURATED_CARD'
               if (remediationTurn && already) {
                 systemPrompt += buildRemediationCardSourceBlock(lookup.card)
+                // THE REPEAT REMEDIATION TURN HAD THE WEAKEST ENFORCEMENT OF
+                // ALL, AND IT IS THE TURN THAT NEEDS THE MOST.
+                //
+                // `remediationHoldCardText` used to be set only in the `holding`
+                // branch below, because that is where the prompt-side hold was
+                // measured losing. This branch — the learner asking a SECOND
+                // time, with the card already served — passed the card to the
+                // prompt as a constrained source and told the output floor
+                // nothing. So `went-beyond-card` could not fire here, and the
+                // floor's fallback had no card to reach for.
+                //
+                // MEASURED (production, phys.particle.antimatter, 2026-08-27):
+                // "sir i still not understand can you explain again" came back
+                // as, in full, after a repair had already run once —
+                //
+                //     "You're saying you still don't understand how a particle
+                //      and its antiparticle can have the same mass but opposite
+                //      charge and then annihilate into energy. Is that right?"
+                //
+                // The detector DID reject that, twice. The turn shipped anyway
+                // because with no card here the fallback found nothing and the
+                // model's draft stood. The card governs this turn at least as
+                // much as it governs a held one.
+                remediationHoldCardText = lookup.card.plainExplanation
               } else if (remediationTurn) {
                 remediationCardText = renderRemediationCard(lookup.card)
                 remediationCardServedId = cardId

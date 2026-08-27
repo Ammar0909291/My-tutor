@@ -119,10 +119,17 @@ describe('the route holds on a NON-remediation turn', () => {
   })
 
   it('a held turn still counts as CURATED_CARD, so grounding stays withheld', () => {
+    // This used to slice 1,200 characters back from the hold block and look for
+    // the assignment inside that window — a proximity check, which broke the
+    // moment a comment was added between the two even though the product had
+    // not changed at all. The claim is about ORDER, not distance: the source is
+    // marked CURATED_CARD for held turns as well as remediation ones, and that
+    // marking happens before the hold block is appended. Assert that.
+    const marked = ROUTE.indexOf("if (remediationTurn || holding) remediationSource = 'CURATED_CARD'")
     // lastIndexOf: the first occurrence is the import, the last is the use.
-    const at = ROUTE.lastIndexOf('buildRemediationCardHoldBlock')
-    const scoped = ROUTE.slice(Math.max(0, at - 1200), at + 400)
-    expect(scoped).toMatch(/remediationSource = 'CURATED_CARD'/)
+    const holdBlock = ROUTE.lastIndexOf('buildRemediationCardHoldBlock')
+    expect(marked, 'CURATED_CARD is set for remediation OR held turns').toBeGreaterThan(-1)
+    expect(holdBlock, 'the hold block is appended after that marking').toBeGreaterThan(marked)
   })
 
   it('H6.2/H6.3 are untouched: four routeAI call sites, DRAFT still refused', () => {
