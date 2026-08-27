@@ -4328,7 +4328,19 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // still runs afterwards, unchanged.
       // H6 adds one condition: a card serving deterministically makes no
       // provider call, so there is no prompt for grounding to qualify.
-      if (conversationDecisionHoisted && !serveFromMemory && !remediationCardText) {
+      //
+      // H6.3 ADDS THE SECOND, AND IT IS THE POINT OF THAT PHASE. When a
+      // PROMOTED card owns this turn, this block is withheld even though a
+      // provider call is coming — because it is a competing teaching source.
+      // It quotes the KG description to the model, and in H6.2's live run that
+      // is exactly where "friction opposes relative motion" came from: a true
+      // sentence, in the curriculum, absent from the approved card, taught to a
+      // learner as though the card had authorised it. TRUE IS NOT AUTHORISED.
+      // Source isolation, not another instruction: the sentence is not sent.
+      const cardOwnsThisTurn = (
+        await import('@/lib/teaching/remediationCards')
+      ).cardIsSoleTeachingSource(remediationSource)
+      if (conversationDecisionHoisted && !serveFromMemory && !remediationCardText && !cardOwnsThisTurn) {
         try {
           const { isRemediationTurn } = await import('@/lib/teaching/remediationOutputContract')
           if (isRemediationTurn(conversationDecisionHoisted.type)) {

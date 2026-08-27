@@ -596,18 +596,70 @@ export function renderRemediationCard(card: RemediationCard): string {
  * It hands over the authored account and forbids replacing it. This is a
  * weaker guarantee than deterministic serving and is described as such: the
  * strongest result remains card text reaching the learner untouched.
+ *
+ * ── H6.3: THE FIGURE CLAUSE, AND WHAT IT IS WORTH ───────────────────────────
+ * The measured leak (the KG description) is closed by withholding that source
+ * — see `cardIsSoleTeachingSource`. One carrier CANNOT be closed the same way:
+ * a curated figure may be on screen, the learner can see it, and the visual
+ * contract necessarily tells the model what is drawn on it. In H6.2 the model
+ * read the arrows and derived a teaching point the card does not make.
+ * Removing the figure is a visual-resolver decision, out of this phase's scope,
+ * and would take a picture away from a learner mid-explanation. So the figure
+ * is handled by instruction instead: point at it, do not teach from it.
+ *
+ * BE CLEAR ABOUT THE STRENGTH OF THAT. An instruction is not a guarantee. The
+ * KG sentence is now genuinely unavailable; the figure is merely fenced. If a
+ * card-absent fact still arrives, this is the likeliest remaining route, and it
+ * is reported as an open boundary rather than counted as closed.
  */
 export function buildRemediationCardSourceBlock(card: RemediationCard): string {
   return (
     '\n\nAUTHORED ACCOUNT OF THIS CONCEPT (a human curator approved these exact '
     + 'claims; you are re-voicing them, not deciding them).\n'
     + `${card.plainExplanation.trim()}\n`
-    + 'Stay inside that account. Do not introduce a different mechanism, a '
-    + 'different comparison, a new formula or any claim it does not make. You '
+    + 'That account is the ONLY thing you may teach this turn. Do not introduce '
+    + 'a different mechanism, a different comparison, a new formula, a new '
+    + 'property or any claim it does not make. A fact being true is not enough: '
+    + 'if it is not in the account above, it is not yours to teach here. You '
     + 'may reword it, shorten it, or ask the learner about it. If you would need '
     + 'a fact it does not contain, ask the learner a question instead.\n'
+    + 'If a figure is on the learner\'s screen, you may point at what it shows '
+    + 'to orient them — but do not read a new teaching point off it, and do not '
+    + 'state a property of this concept that the account above does not state.\n'
     + `Never reach for this comparison: ${card.antiAnalogy.tempting} — ${card.antiAnalogy.whyItFails}`
   )
+}
+
+/**
+ * Which of the three serving sources produced this remediation turn. Declared
+ * here rather than in the route so the authority rule below and the route's own
+ * logging cannot drift apart.
+ */
+export type RemediationSource = 'CURATED_CARD' | 'EXISTING_GROUNDING' | 'LLM_GENERATED'
+
+/**
+ * WHEN A PROMOTED CARD OWNS THE TURN IT IS THE ONLY TEACHING SOURCE (H6.3).
+ *
+ * ── THE DEFECT THIS CLOSES, MEASURED IN PRODUCTION ──────────────────────────
+ * H6.2's continuity turn taught "friction always acts against the direction
+ * you're trying to move an object". That claim is TRUE and it is in the
+ * Knowledge Graph — and the approved card does not contain it. Where it came
+ * from is not a guess: the H5 grounding block quotes the KG description to the
+ * model, and this concept's description is, verbatim, "Friction is a contact
+ * force that opposes relative motion between surfaces in contact." The model
+ * was handed the sentence and taught from it.
+ *
+ * TRUE IS NOT AUTHORISED. H5's grounding exists to constrain a turn that has no
+ * authored account; when there IS one, the same block becomes a second,
+ * competing teaching authority. So on a card turn it is not sent at all.
+ *
+ * This is SOURCE ISOLATION, not another instruction: the competing source is
+ * withheld rather than argued with. The card's own block still says "stay
+ * inside that account", but that sentence is now the second line of defence
+ * instead of the only one.
+ */
+export function cardIsSoleTeachingSource(source: RemediationSource | null | undefined): boolean {
+  return source === 'CURATED_CARD'
 }
 
 /** DRAFT and ACTIVE reported separately, never blended into one coverage number. */
