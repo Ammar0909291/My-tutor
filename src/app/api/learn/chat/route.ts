@@ -3623,7 +3623,31 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             targetLevel: profile?.targetLevel,
             userMessage: message,
           })
-          assembled = await assembleLesson(memoryState)
+          // D1, SECOND PATH. The gate is not the only selector: assembleLesson
+          // calls the SAME findBestProbe and forwards its own options to it.
+          // This call passed none, so `excludeProbeStem` was undefined here and
+          // a spent probe could be re-served from Explanation Memory however
+          // carefully the gate excluded it.
+          //
+          // Measured on the pre-fix build (session cmtaulkav…, 2026-08-27): the
+          // labelled probe 0c6f384c-… was served at turn 6 as provider=memory
+          // and again at turns 8 and 10 as provider=gate — three `pass` rows
+          // for one question, closing the concept verified=true.
+          //
+          // The already-read guard immediately below covers EXPLANATIONS
+          // (hasServedExplanation); the probe attached alongside had nothing.
+          // Same ledger, same normalisation as the gate — see the gate's own
+          // comment for why the key is stripped here rather than inside
+          // hasAskedMcq. Null history yields `undefined`, i.e. exactly the
+          // prior behaviour, never a predicate that silently excludes nothing.
+          const { hasAskedMcq: hasAskedMcqForMemory } = await import('@/lib/teaching/teachingHistory')
+          const { stripAuthoringLabel: stripLabelForMemory } = await import('@/lib/teaching/gateProbeContract')
+          const historyForMemory = teachingHistoryHoisted
+          assembled = await assembleLesson(memoryState, {
+            excludeProbeStem: historyForMemory
+              ? (stem) => hasAskedMcqForMemory(historyForMemory, stripLabelForMemory(stem))
+              : undefined,
+          })
           // ALREADY-READ GUARD. Explanation Memory was the only authored
           // channel without one: TeachingHistory already stops a visual being
           // replayed (visualsShown) and an MCQ being re-asked (mcqAsked), but

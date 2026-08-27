@@ -286,6 +286,52 @@ describe('10 · mastery still requires independent graded evidence', () => {
   })
 })
 
+describe('D1 has TWO serving paths and both must honour the ledger', () => {
+  /**
+   * The gate is not the only selector. `assembleLesson` calls the SAME
+   * `findBestProbe` and forwards its own `options` to it — and route.ts called
+   * it as `assembleLesson(memoryState)`, with no options at all, so
+   * `excludeProbeStem` was `undefined` and a spent probe could be re-served
+   * from Explanation Memory no matter what the gate did.
+   *
+   * MEASURED on the pre-fix build (session cmtaulkav…, 2026-08-27): the D1
+   * probe was served at turn 6 as `provider: memory`, then again at turns 8
+   * and 10 as `provider: gate`. Three `pass` PROBE_OUTCOME rows, all carrying
+   * assetId 0c6f384c-…, and the lesson closed verified=true.
+   *
+   * The already-read guard beside that call covers EXPLANATIONS
+   * (`hasServedExplanation`); the probe attached alongside had nothing.
+   */
+  it('assembleLesson forwards its options to probe selection', () => {
+    expect(SELECTOR).toMatch(/const probe = await findBestProbe\(state, options\)/)
+  })
+
+  it('the route now passes the same exclusion into assembleLesson', () => {
+    expect(ROUTE).toMatch(/assembleLesson\(memoryState, \{/)
+    const at = ROUTE.indexOf('assembleLesson(memoryState, {')
+    expect(at).toBeGreaterThan(0)
+    expect(ROUTE.slice(at - 900, at + 400)).toMatch(/hasAskedMcqForMemory\(historyForMemory, stripLabelForMemory\(stem\)\)/)
+  })
+
+  it('both paths derive the spent key identically', () => {
+    // One ledger, one normalisation. Two spellings here would be the defect
+    // returning by a different door.
+    const uses = ROUTE.match(/hasAskedMcq(?:ForMemory)?\((?:history|historyForMemory), strip(?:AuthoringLabel|LabelForMemory)\(stem\)\)/g) ?? []
+    expect(uses).toHaveLength(2)
+  })
+
+  it('an exclusion that cannot be built stays undefined, never a no-op predicate', () => {
+    // `undefined` reproduces the prior behaviour exactly; a predicate that
+    // always returned false would look wired while excluding nothing.
+    expect(ROUTE).toMatch(/: undefined,?\s*\}\)/)
+  })
+
+  it('explanation matching is documented as ignoring the probe option', () => {
+    const MATCHER = REPO('src/lib/teaching/assets/matcher.ts')
+    expect(MATCHER).toMatch(/PROBE RETRIEVAL ONLY — ignored by scoreMatch and by explanation matching/)
+  })
+})
+
 describe('the wiring is real, not just the helper', () => {
   it('route.ts normalises the exclusion key at the gate', () => {
     expect(ROUTE).toMatch(/excludeProbeStem: history \? \(stem\) => hasAskedMcq\(history, stripAuthoringLabel\(stem\)\) : undefined/)
