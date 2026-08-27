@@ -2619,6 +2619,407 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
     microCheck: 'The throbbing slows down as you tune. Are the notes getting closer or further apart?',
     ...DRAFTED,
   },
+
+  // ── ELECTROSTATICS AND CIRCUITS (batch 6, phys.em part 1) ─────────────────
+  {
+    conceptId: 'phys.em.electric-charge',
+    subject: 'physics',
+    canonicalIdea: 'Charge comes in two kinds and in whole numbers of a smallest amount, and it is never created or destroyed — only moved.',
+    concreteAnchor: 'a balloon rubbed on a jumper picking up hair',
+    plainExplanation:
+      'Rub a balloon on a jumper and it picks up your hair. Nothing was made — electrons were scraped off '
+      + 'the jumper onto the balloon, leaving the jumper short of them. The balloon is now negative, the '
+      + 'jumper equally positive, and the two amounts match exactly, because charging something is always '
+      + 'a transfer. Like kinds push apart and opposite kinds pull together. Charge also comes in whole '
+      + 'multiples of one very small amount, the charge on a single electron, so you can never have half '
+      + 'of one.',
+    antiAnalogy: {
+      tempting: 'saying rubbing creates charge',
+      whyItFails:
+        'nothing is created. Electrons move from one object to the other, and the two end up equally and '
+        + 'oppositely charged — which is why the jumper attracts the balloon just as much.',
+    },
+    microCheck: 'The balloon becomes negative. What happened to the jumper?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.em.coulombs-law',
+    subject: 'physics',
+    canonicalIdea: 'The push or pull between two charges grows with both charges and falls off steeply with distance.',
+    concreteAnchor: 'two charged balloons brought closer together',
+    plainExplanation:
+      'Two charged balloons repel gently at arm\'s length and strongly when nearly touching. Two things '
+      + 'set the strength. More charge on either one means more force, straightforwardly. Distance is the '
+      + 'fierce one: halve the gap and the force becomes four times as strong; close it to a third and it '
+      + 'is nine times. That steep dependence is why atoms hold together so tightly at close range and '
+      + 'why the same forces are unnoticeable across a room. The force acts along the line joining them, '
+      + 'and both feel it equally.',
+    antiAnalogy: {
+      tempting: 'expecting the bigger charge to feel the stronger push',
+      whyItFails:
+        'both feel exactly the same size of force, in opposite directions. What differs is how much each '
+        + 'one moves in response, which depends on its mass.',
+    },
+    microCheck: 'You halve the distance between two charges. How much stronger is the force?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.em.electric-field',
+    subject: 'physics',
+    canonicalIdea: 'A field is what the space around a charge is like, before anything else is put there.',
+    concreteAnchor: 'iron filings arranging themselves around a charged rod',
+    plainExplanation:
+      'Rather than describing the force between two charges each time, it is easier to describe the space '
+      + 'around one of them: at every point there is a certain strength and direction of push waiting for '
+      + 'whatever charge arrives. That description is the field, and it belongs to the charge that made '
+      + 'it. Drop a small positive charge in and it feels a force along the field there. Field lines are '
+      + 'a drawing convention — they run from positive to negative, and where they crowd together the '
+      + 'field is strong.',
+    antiAnalogy: {
+      tempting: 'treating field lines as real wires or paths the charge travels along',
+      whyItFails:
+        'they are a drawing of direction and strength, not tracks. A charge released in a field does not '
+        + 'follow a field line unless the field happens to be uniform.',
+    },
+    microCheck: 'Field lines crowd close together in one region. What does that tell you?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.em.electric-dipole',
+    subject: 'physics',
+    canonicalIdea: 'Two opposite charges a little apart feel no net push in a uniform field, but they do feel a twist.',
+    concreteAnchor: 'a compass needle, but for electricity',
+    plainExplanation:
+      'Put a pair of equal and opposite charges, held slightly apart, into a uniform field. The positive '
+      + 'end is pushed one way and the negative end exactly the other, so the pair as a whole goes '
+      + 'nowhere. But those two pushes act at different places, so they twist it — the pair rotates until '
+      + 'it lines up with the field, exactly like a compass needle in a magnetic field. This is why a '
+      + 'stream of water bends towards a charged comb: water molecules are permanent little pairs, and '
+      + 'they turn and then get drawn in.',
+    antiAnalogy: {
+      tempting: 'expecting the pair to be pulled bodily towards the source of the field',
+      whyItFails:
+        'in a UNIFORM field the two forces cancel and only the twist survives. Net pull appears only where '
+        + 'the field is stronger at one end than the other.',
+    },
+    microCheck: 'A dipole sits in a uniform field. Does it move, turn, or both?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.em.gauss-law',
+    subject: 'physics',
+    canonicalIdea: 'What matters for the field through a closed surface is only the charge inside it.',
+    concreteAnchor: 'a charged ball inside a sealed cardboard box',
+    plainExplanation:
+      'Imagine any closed surface — a box, a sphere, any shape — drawn around a region. The total field '
+      + 'passing outward through it depends only on the charge enclosed inside. Charges outside '
+      + 'contribute nothing overall: whatever field they push in through one side comes back out the '
+      + 'other. That is enormously useful, because for a symmetrical arrangement you can choose a '
+      + 'surface where the field is the same everywhere on it and read the answer off almost without '
+      + 'calculation.',
+    antiAnalogy: {
+      tempting: 'thinking nearby external charges must affect the answer',
+      whyItFails:
+        'they change the field AT points on the surface but contribute zero to the total through it, '
+        + 'because what enters must leave. Only enclosed charge counts.',
+    },
+    microCheck: 'A charge sits just outside your imaginary box. Does it change the total through it?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.em.electric-potential',
+    subject: 'physics',
+    canonicalIdea: 'Potential is the energy per unit charge at a place, and only differences between places matter.',
+    concreteAnchor: 'height on a hillside, and where you call sea level',
+    plainExplanation:
+      'Potential is to charge what height is to a ball. It tells you how much energy each unit of charge '
+      + 'would have at that spot, and charges roll from high potential to low just as balls roll '
+      + 'downhill. Like height, its zero point is a choice — you can measure from the ground, from sea '
+      + 'level, or from anywhere — and it makes no difference to the physics, because what drives current '
+      + 'is the DIFFERENCE between two points. A battery marked nine volts is telling you about a '
+      + 'difference, not about an absolute level.',
+    antiAnalogy: {
+      tempting: 'treating a point\'s potential as an absolute quantity it really has',
+      whyItFails:
+        'the zero is a convention. Only differences are measurable, which is why every voltmeter has two '
+        + 'leads and no single-point reading exists.',
+    },
+    microCheck: 'A battery is marked nine volts. Nine volts between what?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.em.capacitance',
+    subject: 'physics',
+    canonicalIdea: 'A capacitor holds separated charge, and capacitance says how much it holds per volt applied.',
+    concreteAnchor: 'a camera flash charging up with a rising whine',
+    plainExplanation:
+      'A camera flash whines while a capacitor charges, then dumps everything in an instant. A capacitor '
+      + 'is two conductors close together but not touching. Push charge onto one and an equal opposite '
+      + 'charge gathers on the other, held there by attraction across the gap. Capacitance measures how '
+      + 'much charge it takes on for each volt across it, and it is set entirely by the geometry — bigger '
+      + 'plates, closer together, hold more. The total charge is zero: one side is as positive as the '
+      + 'other is negative.',
+    antiAnalogy: {
+      tempting: 'thinking a charged capacitor holds a net charge',
+      whyItFails:
+        'the two plates carry equal and opposite amounts, so the device as a whole is neutral. What is '
+        + 'stored is the SEPARATION, and the energy that took.',
+    },
+    microCheck: 'A capacitor is fully charged. What is its total charge overall?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.em.dielectrics',
+    subject: 'physics',
+    canonicalIdea: 'An insulator between the plates lines up internally, weakens the field, and lets the capacitor hold more.',
+    concreteAnchor: 'sliding a sheet of plastic between two charged plates',
+    plainExplanation:
+      'Slide an insulating sheet between two charged plates and the capacitor suddenly holds more charge '
+      + 'for the same voltage. Nothing conducted across. What happened is that the molecules in the sheet '
+      + 'turned and stretched slightly, lining up against the field, and their own small opposing field '
+      + 'partly cancels the original. With the field inside weakened, the plates can accept more charge '
+      + 'before pushing back as hard. That is why practical capacitors are always filled with something '
+      + 'rather than air.',
+    antiAnalogy: {
+      tempting: 'thinking the insulator lets some charge leak across to help',
+      whyItFails:
+        'nothing crosses — that would discharge the capacitor. The effect comes from charges shifting '
+        + 'slightly WITHIN fixed molecules, not travelling between the plates.',
+    },
+    microCheck: 'You slide plastic between the plates. Does charge cross the gap?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.em.energy-capacitor',
+    subject: 'physics',
+    canonicalIdea: 'The energy in a charged capacitor is only half of charge times voltage, because the voltage climbed as it filled.',
+    concreteAnchor: 'filling a water tank that gets harder to fill as it rises',
+    plainExplanation:
+      'Charging a capacitor is like pumping water into a tank: the first charge goes on easily, and each '
+      + 'later one has to be pushed against what is already there. So the voltage climbs steadily from '
+      + 'zero to its final value as you fill it. The energy stored is therefore not the final voltage '
+      + 'times the charge — that would assume every charge was pushed against the full final voltage. It '
+      + 'is HALF of that, because on average each charge only faced half the final push.',
+    antiAnalogy: {
+      tempting: 'saying the energy stored is simply charge times voltage',
+      whyItFails:
+        'the curriculum\'s own note singles this out. It omits the factor of one half, which exists '
+        + 'because the voltage rose from zero while charging rather than sitting at its final value.',
+    },
+    microCheck: 'Why is the stored energy only half of charge times final voltage?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.em.electric-current',
+    subject: 'physics',
+    canonicalIdea: 'Current is how much charge flows past a point each second, and the carriers themselves crawl.',
+    concreteAnchor: 'a light coming on the instant you flick the switch',
+    plainExplanation:
+      'The light comes on instantly, yet the electrons in the wire are shuffling along at less than a '
+      + 'millimetre a second. Both are true. The wire is already full of free electrons everywhere, so '
+      + 'when the field is applied they all begin to shift at once, all the way round — like water in a '
+      + 'full pipe moving the instant you push at one end. Current measures how much charge passes a '
+      + 'point each second, not how fast any individual carrier travels.',
+    antiAnalogy: {
+      tempting: 'picturing electrons racing from the switch to the bulb to light it',
+      whyItFails:
+        'at their actual drift speed that would take hours. The wire is already full of them, and the '
+        + 'signal to start moving travels at nearly the speed of light while the electrons crawl.',
+    },
+    microCheck: 'Electrons drift under a millimetre a second. Why does the light come on at once?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.em.ohms-law',
+    subject: 'physics',
+    canonicalIdea: 'For many materials the current is proportional to the voltage across them, and resistance is the ratio.',
+    concreteAnchor: 'a narrow pipe restricting water flow',
+    plainExplanation:
+      'Push water through a narrow pipe and you get a trickle; push harder and you get more. Double the '
+      + 'push, double the flow. Many electrical components behave the same way: double the voltage across '
+      + 'them and double the current flows. The ratio between the two is the resistance, and for these '
+      + 'components it stays put as you vary things. Plenty of components do NOT behave this way — a '
+      + 'filament lamp gets more resistant as it heats, and a diode conducts one way only — so this is a '
+      + 'description of a class of materials, not a universal law.',
+    antiAnalogy: {
+      tempting: 'treating it as a law every component obeys',
+      whyItFails:
+        'lamps, diodes and transistors all break it. Calling it universal leaves a learner unable to read '
+        + 'a curved current-voltage graph, which is most of electronics.',
+    },
+    microCheck: 'A filament lamp gets hotter as current rises. Does its resistance stay fixed?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.em.resistivity',
+    subject: 'physics',
+    canonicalIdea: 'Resistivity is a property of the material; resistance also depends on the shape of the piece.',
+    concreteAnchor: 'a long thin copper wire and a short fat one',
+    plainExplanation:
+      'A long thin copper wire has much more resistance than a short fat one, though both are copper. '
+      + 'Resistance depends on the shape: longer means more, thicker means less, in the same way a longer '
+      + 'or narrower pipe restricts water more. To describe the MATERIAL itself, independent of how it '
+      + 'has been cut, you use resistivity — a number that belongs to copper rather than to any '
+      + 'particular wire. Copper\'s is low, which is why we make wires from it; rubber\'s is enormous, '
+      + 'which is why we wrap them in it.',
+    antiAnalogy: {
+      tempting: 'using resistance and resistivity as the same idea',
+      whyItFails:
+        'one describes a particular object, the other the substance. Conflating them makes it impossible '
+        + 'to say why two copper wires can have completely different resistances.',
+    },
+    microCheck: 'Two copper wires, one long and thin. Same resistivity? Same resistance?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.em.dc-circuits',
+    subject: 'physics',
+    canonicalIdea: 'In series the current is shared and the voltage splits; in parallel the voltage is shared and the current splits.',
+    concreteAnchor: 'old fairy lights where one dead bulb kills the string',
+    plainExplanation:
+      'Old fairy lights went out entirely if one bulb failed, because they were wired in series: a single '
+      + 'path, the same current through every bulb, and the supply voltage divided between them. Break '
+      + 'the path anywhere and everything stops. House lighting is wired in parallel instead: every lamp '
+      + 'gets the full mains voltage across it, the current divides between the branches, and switching '
+      + 'one off leaves the rest untouched. The two arrangements swap which quantity is shared and which '
+      + 'is split.',
+    antiAnalogy: {
+      tempting: 'saying current and voltage behave the same way in any circuit',
+      whyItFails:
+        'the curriculum\'s own note singles this out. The whole distinction is that they swap roles '
+        + 'between series and parallel, and erasing it removes the only thing that makes circuit '
+        + 'reasoning possible.',
+    },
+    microCheck: 'One lamp in your house blows. Why do the others stay on?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.em.kirchhoffs-laws',
+    subject: 'physics',
+    canonicalIdea: 'Charge does not pile up at junctions, and voltage gains around any loop must equal the drops.',
+    concreteAnchor: 'water pipes meeting at a T-junction',
+    plainExplanation:
+      'Where pipes meet, whatever flows in must flow out — water does not accumulate at the join. The '
+      + 'same is true of charge at a junction in a circuit: the currents arriving equal the currents '
+      + 'leaving. The second rule follows a loop instead. Walk right round any closed loop and return to '
+      + 'where you began, and you must be back at the same potential, so everything gained from sources '
+      + 'exactly matches everything dropped across components. The two together solve any circuit, '
+      + 'however tangled.',
+    antiAnalogy: {
+      tempting: 'saying to just add up the drops around the loop',
+      whyItFails:
+        'the curriculum\'s own note singles this out. The sign of each term depends on which way you '
+        + 'walked round relative to the current, and dropping that detail is the most common source of '
+        + 'wrong answers here.',
+    },
+    microCheck: 'Three amps flow into a junction and one flows out of one branch. What of the other?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.em.wheatstone-bridge',
+    subject: 'physics',
+    canonicalIdea: 'The bridge balances when two RATIOS match, and then a precise reading needs no meter accuracy at all.',
+    concreteAnchor: 'a see-saw balancing with unequal weights at unequal distances',
+    plainExplanation:
+      'A Wheatstone bridge has four resistances in a diamond with a sensitive meter across the middle. '
+      + 'Adjust one until the meter reads exactly zero, and at that point the ratio of one pair equals '
+      + 'the ratio of the other. From three known values the fourth follows. What makes it powerful is '
+      + 'that you are detecting ZERO rather than measuring a size — a cheap meter can tell you reliably '
+      + 'that nothing is flowing, so the precision comes from the known resistances instead of from the '
+      + 'instrument.',
+    antiAnalogy: {
+      tempting: 'saying you balance it by making the resistors equal',
+      whyItFails:
+        'the curriculum\'s own note singles this out. It balances on matching RATIOS, not equal values — '
+        + 'exactly as a see-saw balances a child against an adult at different distances.',
+    },
+    microCheck: 'The bridge is balanced. Are all four resistances equal?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.em.potentiometer',
+    subject: 'physics',
+    canonicalIdea: 'A uniform wire lets you compare voltages by finding the length at which no current flows.',
+    concreteAnchor: 'sliding a contact along a wire until a needle reads zero',
+    plainExplanation:
+      'A steady current runs along a long uniform wire, so the potential falls evenly from one end to the '
+      + 'other — twice the length, twice the drop. Connect an unknown source against part of that wire '
+      + 'and slide the contact until no current flows at all. At that point the two are exactly matched, '
+      + 'and the length tells you the voltage. Because nothing is drawn from the source being measured, '
+      + 'you get its true value rather than one dragged down by the act of measuring, which is what a '
+      + 'voltmeter cannot avoid.',
+    antiAnalogy: {
+      tempting: 'describing it simply as a way of adjusting voltage',
+      whyItFails:
+        'the curriculum\'s own note singles this out. That describes a variable resistor. The point here '
+        + 'is measurement at zero current, which is precisely what makes it more accurate than a meter.',
+    },
+    microCheck: 'Why does drawing no current make this measurement more accurate?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.em.electrical-power',
+    subject: 'physics',
+    canonicalIdea: 'Power dissipated depends on both current and resistance, so which one dominates depends on the circuit.',
+    concreteAnchor: 'a kettle element and the thin flex feeding it',
+    plainExplanation:
+      'A kettle element glows hot while the flex carrying the same current stays cool. Both carry '
+      + 'identical current, and the element has far more resistance, so it turns far more energy into '
+      + 'heat. That is the useful rule when the current is fixed by the circuit: more resistance, more '
+      + 'heat. But connect components across a fixed VOLTAGE instead and it reverses — the low-resistance '
+      + 'one draws more current and dissipates more. The same physics, opposite conclusions, depending on '
+      + 'what is being held constant.',
+    antiAnalogy: {
+      tempting: 'saying more resistance always means more power dissipated',
+      whyItFails:
+        'the curriculum\'s own note singles this out. True at fixed current, false at fixed voltage — '
+        + 'where a high resistance draws so little current that it dissipates less.',
+    },
+    microCheck: 'Same current through the kettle element and the flex. Which gets hot?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.em.emf',
+    subject: 'physics',
+    canonicalIdea: 'A battery has a full-strength rating and a lower voltage you actually measure while it is working.',
+    concreteAnchor: 'car headlights dimming as the engine turns over',
+    plainExplanation:
+      'Headlights dim while the starter motor cranks, then brighten again. The battery has not run down '
+      + 'in those two seconds. Every source has some resistance inside it, and the huge current the '
+      + 'starter draws wastes some voltage inside the battery itself — so less reaches the lights. The '
+      + 'full figure the battery can supply is one number; what actually appears at its terminals under '
+      + 'load is smaller, and the harder it is working the bigger the gap.',
+    antiAnalogy: {
+      tempting: 'saying the battery is nine volts, without saying which nine volts',
+      whyItFails:
+        'the curriculum\'s own note singles this out. The rating is the open-circuit figure. Under load '
+        + 'the terminals read less, and a learner who does not separate the two cannot explain dimming '
+        + 'headlights.',
+    },
+    microCheck: 'Headlights dim while the starter runs. Has the battery gone flat?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.em.rc-circuits',
+    subject: 'physics',
+    canonicalIdea: 'A capacitor charges and discharges gradually, quickly at first and ever more slowly.',
+    concreteAnchor: 'a camera flash recharging, fast then slow',
+    plainExplanation:
+      'A flash recharges quickly at first and then takes its time over the last part. When a capacitor is '
+      + 'empty the full voltage drives charge in hard; as it fills it pushes back more, so the current '
+      + 'falls and the filling slows. It approaches full without a sharp arrival, and discharging is the '
+      + 'same story backwards. How long it takes is set by the resistance and the capacitance together — '
+      + 'bigger either one, slower. This is why a capacitor passes a rapidly changing signal but blocks '
+      + 'a steady one once it has settled.',
+    antiAnalogy: {
+      tempting: 'saying capacitors block direct current, without qualification',
+      whyItFails:
+        'the curriculum\'s own note singles this out. That describes the FINAL settled state. While '
+        + 'charging, current flows freely, which is the entire basis of timing circuits.',
+    },
+    microCheck: 'You connect an empty capacitor to a battery. Does current flow at first?',
+    ...DRAFTED,
+  },
 ]
 
 export type RemediationCardLookup =
