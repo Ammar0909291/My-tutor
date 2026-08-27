@@ -123,7 +123,7 @@ export function classifyConversation(
         // The direction of travel is now stated, and it is not invented here:
         // it is FOUNDATION_REBUILD's own authored instruction, transcribed
         // into the block that actually reaches the model.
-        rendererDirective: 'That previous explanation did not land. Say so, then re-teach the SAME idea differently and more simply: one concrete everyday anchor, plain words, one small step. No new formula or derivation; stay on this concept.'
+        rendererDirective: "That previous explanation didn't land. Re-teach the SAME idea differently, more simply: one concrete everyday anchor, plain words, one step. Explain first — never reply with only a question. No new formula; stay on this concept."
       }
     }
     return {
@@ -135,7 +135,7 @@ export function classifyConversation(
       // old "Never repeat any previous explanation, analogy, or wording"
       // clause is gone — it forbade the first move a human tutor makes, which
       // is to say the same idea again, more plainly.
-      rendererDirective: 'The student asked for another approach. Try a different angle — but SIMPLER, never more advanced: a fresh everyday anchor and plain words. No new formula or derivation; stay on the same concept.'
+      rendererDirective: 'The student asked for another approach. Try a different angle — but SIMPLER, never harder: a fresh everyday anchor, plain words. Explain first — never reply with only a question. No new formula; stay on the same concept.'
     }
   }
 

@@ -135,6 +135,23 @@ describe('H2 — the remediation directive tells the model to go SIMPLER', () =>
     expect(d.rendererDirective).toMatch(/simpler|more simply|plainer/i)
   })
 
+  it('the directive forbids answering a confusion turn with only a question', () => {
+    // MEASURED, POST-DEPLOY, and the reason this clause exists at all.
+    // The removed "Never repeat any previous explanation, analogy, or wording"
+    // clause was harmful in its main effect (it forbade re-saying the idea
+    // plainly) but it did incidentally forbid ECHOING. Two live chemistry
+    // remediation turns on the first H2 build answered "sir i not understand
+    // this" by re-asking the previous turn's question and nothing else —
+    // groq returned 58 and 64 characters respectively, so the model itself
+    // produced the echo; nothing downstream stripped an explanation.
+    // The protective half is restored WITHOUT the harmful half: explain
+    // first, and never reply with only a question.
+    for (const m of ['sir i not understand this', 'explain it another way']) {
+      expect(decide(m).rendererDirective, m).toMatch(/never reply with only a question/i)
+      expect(decide(m).rendererDirective, m).toMatch(/explain first/i)
+    }
+  })
+
   it('the directive forbids advancing the curriculum on a remediation turn', () => {
     for (const m of ['sir i not understand this', 'explain it another way']) {
       expect(decide(m).rendererDirective, m).toMatch(/same (idea|concept)|this concept|stay/i)
