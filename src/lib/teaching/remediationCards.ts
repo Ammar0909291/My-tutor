@@ -893,6 +893,475 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
     microCheck: 'You push a crate along a rough floor. Whose work counts, yours or everyone\'s?',
     ...OWNER_PROMOTED_PHYSICS,
   },
+
+  // ── MECHANICS CORE (2026-08-27, batch 1 of the physics completion) ────────
+  {
+    conceptId: 'phys.mech.kinematics-1d',
+    subject: 'physics',
+    canonicalIdea: 'When acceleration is steady, a few relationships tie together how far, how fast, and how long.',
+    concreteAnchor: 'a car pulling away from traffic lights at a steady rate',
+    plainExplanation:
+      'A car pulls away from the lights and gains speed steadily. Four things describe what happens: how '
+      + 'fast it started, how fast it ends up, how quickly it gained speed, and how long it took. Once you '
+      + 'know any three of those, the fourth is fixed — you do not need to watch, you can work it out. '
+      + 'That is all the kinematic relationships are. The one thing that trips people up is direction: '
+      + 'pick which way counts as positive at the start and stick to it, because a car slowing down has '
+      + 'the same numbers as one speeding up backwards, and only the signs tell them apart.',
+    antiAnalogy: {
+      tempting: 'telling the learner to use common sense for the signs',
+      whyItFails:
+        'the curriculum\'s own note singles this out. Signs must be algebraic, decided once at the start. '
+        + 'Intuition fails on an upward throw and on anything still slowing after it has passed zero.',
+    },
+    microCheck: 'You call rightwards positive. A car slows while moving right. Positive or negative acceleration?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.kinematics-2d',
+    subject: 'physics',
+    canonicalIdea: 'Motion in a plane is two separate one-dimensional motions happening at once.',
+    concreteAnchor: 'a boat crossing a river while the current carries it downstream',
+    plainExplanation:
+      'A boat points straight across a river and the current carries it downstream at the same time. Its '
+      + 'path is a diagonal, which looks complicated. It is not. The across-ness and the down-stream-ness '
+      + 'do not interfere with each other at all: the boat crosses in exactly the time it would have '
+      + 'taken with no current, and the current moves it downstream exactly as if it were sitting still. '
+      + 'So you handle each direction on its own, with the ordinary one-dimensional rules, and put the two '
+      + 'answers together at the end. Time is the one thing the two directions share.',
+    antiAnalogy: {
+      tempting: 'treating the diagonal path as a single motion needing its own new rules',
+      whyItFails:
+        'it hides the independence that makes the problem easy, and leaves the learner looking for a rule '
+        + 'that does not exist instead of using the two they already have.',
+    },
+    microCheck: 'The current gets faster. Does the boat take longer to reach the far bank?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.projectile-motion',
+    subject: 'physics',
+    canonicalIdea: 'A thrown object keeps its sideways motion unchanged while gravity works on the up-down motion alone.',
+    concreteAnchor: 'a ball rolled off the edge of a table',
+    plainExplanation:
+      'Roll a ball off a table and drop a second ball from the same height at the same instant. They hit '
+      + 'the floor together. That surprises almost everyone, and it is the whole idea: gravity pulls '
+      + 'downwards, so it changes the up-down motion and does nothing at all to the sideways motion. The '
+      + 'rolled ball keeps its sideways speed the entire time, unchanged, while falling exactly like the '
+      + 'dropped one. The curved path is those two simple motions seen together. Going faster sideways '
+      + 'makes it land further away, never later.',
+    antiAnalogy: {
+      tempting: 'saying a faster throw stays up longer because it travels further',
+      whyItFails:
+        'sideways speed has no effect on falling. Tying the two together is what makes learners predict '
+        + 'the flat-out-fired bullet stays airborne longer than the dropped one.',
+    },
+    microCheck: 'One ball rolls off the table, one is dropped beside it. Which lands first?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.relative-motion',
+    subject: 'physics',
+    canonicalIdea: 'How fast something is moving depends on who is watching, and both answers are correct.',
+    concreteAnchor: 'walking down the aisle of a moving train',
+    plainExplanation:
+      'Walk down the aisle of a train at a comfortable pace. To another passenger you are strolling. To '
+      + 'someone standing on the platform you are moving at the speed of the train plus your walking '
+      + 'speed. Neither of them is wrong. Speed is always measured against something, and once you name '
+      + 'what you are measuring against, the answer is definite. Change the thing you measure against and '
+      + 'the number changes. This is why an aeroplane\'s speed through the air and its speed over the '
+      + 'ground are different numbers on a windy day.',
+    antiAnalogy: {
+      tempting: 'saying one of the two observers has the real answer and the other is mistaken',
+      whyItFails:
+        'there is no privileged observer to appeal to. Looking for the true speed stops the learner ever '
+        + 'naming a reference, which is the only thing that makes a speed meaningful.',
+    },
+    microCheck: 'You walk forward on a train. Is your speed different for a passenger and for the platform?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.circular-motion',
+    subject: 'physics',
+    canonicalIdea: 'Going round a circle at steady speed still needs a force, pointing at the centre the whole way.',
+    concreteAnchor: 'a ball whirled on a string',
+    plainExplanation:
+      'Whirl a ball on a string and you can feel the string pulling on your hand. The ball is going at a '
+      + 'steady speed, so it is easy to assume nothing is changing — but its DIRECTION is changing every '
+      + 'instant, and changing direction is a change in motion just as much as speeding up is. Something '
+      + 'has to cause it, and here it is the string, pulling the ball towards your hand the whole time. '
+      + 'Let go and the ball does not fly outwards; it carries straight on from wherever it was, which is '
+      + 'the clearest sign that the pull was always inwards.',
+    antiAnalogy: {
+      tempting: 'saying something flings the ball outwards while it goes round',
+      whyItFails:
+        'nothing pushes outwards. What the learner feels is the string resisting their own inward pull, '
+        + 'and the outward story predicts the released ball flies away sideways, which it does not.',
+    },
+    microCheck: 'The string snaps. Does the ball fly outwards or carry straight on?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.newtons-second-law',
+    subject: 'physics',
+    canonicalIdea: 'The NET force on something decides how quickly its motion changes, and heavier things change less.',
+    concreteAnchor: 'pushing an empty trolley, then the same trolley loaded',
+    plainExplanation:
+      'Push an empty shopping trolley and it picks up speed quickly. Load it and push just as hard, and '
+      + 'it picks up speed slowly. Same push, more mass, less change of motion. Push twice as hard and the '
+      + 'change doubles. That is the relationship. The word doing the quiet work is NET: what matters is '
+      + 'everything pushing and pulling added together, not just your push. A trolley you push while '
+      + 'friction drags backwards responds to the difference between them, which is why a hard push can '
+      + 'produce no movement at all.',
+    antiAnalogy: {
+      tempting: 'using the force you apply instead of the total of all the forces',
+      whyItFails:
+        'it silently assumes nothing else is acting, which is almost never true. The learner then cannot '
+        + 'explain why a heavy box refuses to move under a strong push.',
+    },
+    microCheck: 'You push a box and friction pushes back just as hard. Does it speed up?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.tension',
+    subject: 'physics',
+    canonicalIdea: 'A rope can only pull, and it pulls equally on the things at both of its ends.',
+    concreteAnchor: 'towing a broken-down car with a rope',
+    plainExplanation:
+      'Tow a car on a rope and the rope pulls the towed car forwards while pulling back on the tow car '
+      + 'just as hard. That is what tension is: the pull carried along the rope, the same size at both '
+      + 'ends when the rope is light. The limit worth remembering is that a rope can only ever PULL. Push '
+      + 'a rope and it goes slack and does nothing. That is the difference between a rope and a rod, and '
+      + 'it decides which way the tension arrow points in every problem you will meet.',
+    antiAnalogy: {
+      tempting: 'describing a rope as a flexible version of a rigid stick',
+      whyItFails:
+        'the curriculum\'s own note singles this out. A stick pushes, a rope cannot, and the comparison '
+        + 'quietly gives the rope a power it does not have.',
+    },
+    microCheck: 'You try to push a car with a rope instead of pulling. What happens?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.inclined-plane',
+    subject: 'physics',
+    canonicalIdea: 'On a slope, only part of gravity pulls the object down the slope, and the surface handles the rest.',
+    concreteAnchor: 'a book on a tilted tray',
+    plainExplanation:
+      'Tilt a tray gently with a book on it and nothing happens. Tilt it more and the book slides. '
+      + 'Gravity has not changed. What changed is how much of that downward pull acts ALONG the slope. On '
+      + 'a flat tray, none of it does. As you tilt, more of the pull acts down the slope and less presses '
+      + 'the book into the surface — which is why the friction available drops at the same time as the '
+      + 'pull down the slope grows. Two things moving in opposite directions at once, which is why the '
+      + 'book lets go quite suddenly.',
+    antiAnalogy: {
+      tempting: 'saying friction always resists the slope',
+      whyItFails:
+        'the curriculum\'s own note singles this out for being vague about WHICH motion friction opposes. '
+        + 'Friction opposes the object\'s actual or attempted motion, and on a book being pushed UP a '
+        + 'slope it points down it.',
+    },
+    microCheck: 'You tilt the tray further. Does the surface press on the book more or less?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.work',
+    subject: 'physics',
+    canonicalIdea: 'Work is done only when a force actually moves something along the direction it is pushing.',
+    concreteAnchor: 'carrying a heavy bag along a level corridor',
+    plainExplanation:
+      'Carry a heavy bag down a corridor and your arm aches, but in the physics sense you have done no '
+      + 'work on the bag at all. You are holding it UP while it moves SIDEWAYS, and a force does work '
+      + 'only when the thing moves along the direction of that force. Lift the bag onto a shelf and you '
+      + 'have done work, because now it moves the way you are pushing. Hold it perfectly still and again '
+      + 'there is no work, however tired you get. Work is a transfer of energy, and nothing was '
+      + 'transferred to a bag that stayed at the same height.',
+    antiAnalogy: {
+      tempting: 'treating effort or tiredness as the measure of work done',
+      whyItFails:
+        'your muscles burn energy holding a weight still, and the object receives none of it. Tying work '
+        + 'to how hard it feels makes the carried-bag case impossible to accept.',
+    },
+    microCheck: 'You carry a bag along a flat corridor. Is work done on the bag?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.conservation-of-energy',
+    subject: 'physics',
+    canonicalIdea: 'Without friction, energy just moves between stored and moving forms and the total stays put.',
+    concreteAnchor: 'a skateboarder rolling down one side of a ramp and up the other',
+    plainExplanation:
+      'A skateboarder drops into a ramp and rolls up the far side to almost the same height. Coming down, '
+      + 'stored height turns into motion. Going up, motion turns back into height. Nothing is created and '
+      + 'nothing vanishes; it changes form. Almost the same height, though, not the same — a little went '
+      + 'into friction and sound and warming the wheels, and it will not come back as motion. That is why '
+      + 'the neat swap only holds when friction is small enough to ignore, and why a real skater has to '
+      + 'keep pumping.',
+    antiAnalogy: {
+      tempting: 'saying energy is conserved, full stop, while discussing a moving object',
+      whyItFails:
+        'the curriculum\'s own note singles this out. Total energy is always conserved, but the tidy '
+        + 'height-to-motion swap is MECHANICAL energy and holds only without friction. Dropping the '
+        + 'condition makes friction look like a violation instead of a transfer.',
+    },
+    microCheck: 'The skater comes up slightly lower than they started. Where did that energy go?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.power',
+    subject: 'physics',
+    canonicalIdea: 'Power is how FAST energy is delivered, not how much of it there is.',
+    concreteAnchor: 'two people carrying identical loads upstairs, one running',
+    plainExplanation:
+      'Two people carry identical boxes up the same staircase. One strolls, one runs. They do exactly the '
+      + 'same amount of work — same box, same height — but the one who ran did it in less time, and that '
+      + 'is what more power means. Power is work divided by the time it took. A powerful engine is not '
+      + 'one that holds more energy; it is one that can deliver energy quickly. A small battery can store '
+      + 'plenty of energy and still be useless for starting a car, because it cannot hand that energy '
+      + 'over fast enough.',
+    antiAnalogy: {
+      tempting: 'describing a powerful device as one that has a lot of energy',
+      whyItFails:
+        'the curriculum\'s own note singles this out. It conflates power with energy content, and then a '
+        + 'learner cannot explain why a big battery still fails to turn an engine.',
+    },
+    microCheck: 'Two people lift the same box the same height, one faster. Same work? Same power?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.impulse',
+    subject: 'physics',
+    canonicalIdea: 'How much motion changes depends on the size of the force AND how long it acts.',
+    concreteAnchor: 'catching a cricket ball with your hands moving back',
+    plainExplanation:
+      'Catch a hard ball with stiff hands and it stings. Catch the same ball while drawing your hands '
+      + 'back and it does not. The ball had the same motion to lose either way, so the change was '
+      + 'identical — but drawing your hands back stretched that change over more time, and stretching it '
+      + 'over more time means a smaller force at every instant. That trade is why cars have crumple '
+      + 'zones, why you bend your knees when you land, and why an airbag works. The total is fixed; the '
+      + 'time is what you get to choose.',
+    antiAnalogy: {
+      tempting: 'describing it as a sudden hit',
+      whyItFails:
+        'the curriculum\'s own note singles this out. A gentle push lasting a long time delivers exactly '
+        + 'the same change as a hard brief one, and calling it a hit hides the time half of the idea — '
+        + 'which is the useful half.',
+    },
+    microCheck: 'You draw your hands back as you catch. Does the ball change motion by less?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.conservation-of-momentum',
+    subject: 'physics',
+    canonicalIdea: 'If nothing pushes in from outside, the total motion of a group of objects is unchanged by what they do to each other.',
+    concreteAnchor: 'two skaters pushing off each other on ice',
+    plainExplanation:
+      'Two skaters stand still facing each other and push apart. Before, nothing was moving. After, both '
+      + 'are moving — in opposite directions, and the lighter one faster. Add their motions together '
+      + 'taking direction into account and you get nothing again, exactly what you started with. That '
+      + 'holds because the only pushes involved were between the two of them. Bring in something from '
+      + 'outside — a wall, a hand, friction with rough ground — and the total changes, because that '
+      + 'outside push is not part of the pair.',
+    antiAnalogy: {
+      tempting: 'saying momentum is always conserved, without conditions',
+      whyItFails:
+        'the curriculum\'s own note singles this out. It holds for an isolated system only, and dropping '
+        + 'that condition makes a learner apply it to situations with an unacknowledged outside push.',
+    },
+    microCheck: 'Two skaters push apart on ice. What was the total motion before, and after?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.collisions-elastic',
+    subject: 'physics',
+    canonicalIdea: 'In an elastic collision nothing bounces away as heat or sound — the motion energy survives intact.',
+    concreteAnchor: 'two snooker balls clicking off each other',
+    plainExplanation:
+      'Two snooker balls hit and click apart, and almost nothing is lost — they carry on with nearly as '
+      + 'much motion energy between them as before. That is what makes a collision elastic: not that the '
+      + 'objects bounce, but that the energy of motion is still all there afterwards. Very few real '
+      + 'collisions are perfectly elastic; the click you hear is a little of the energy leaving as sound. '
+      + 'Snooker balls, steel bearings and gas particles come close enough to treat as elastic. A '
+      + 'dropped ball of putty does not.',
+    antiAnalogy: {
+      tempting: 'saying the energy of motion is conserved in collisions',
+      whyItFails:
+        'the curriculum\'s own note singles this out. Without the word elastic that sentence is false for '
+        + 'most collisions, and it is exactly how a learner comes to believe every crash preserves motion '
+        + 'energy.',
+    },
+    microCheck: 'You hear a loud click when the balls hit. Was the collision perfectly elastic?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.collisions-inelastic',
+    subject: 'physics',
+    canonicalIdea: 'In a crash the motion energy scatters into damage, heat and sound, but the total motion is still accounted for.',
+    concreteAnchor: 'two trolleys that stick together on impact',
+    plainExplanation:
+      'Two trolleys collide and lock together, moving off as one. A lot of the energy of motion has gone '
+      + 'into bending metal and making noise, and it is not coming back. But the total motion, counted '
+      + 'with direction, is the same as before the crash — that part is untouched. These are two '
+      + 'different books being kept. Energy of motion can drain away; total motion cannot, as long as '
+      + 'nothing pushed in from outside. Sticking together is the extreme case, where the most possible '
+      + 'motion energy is lost.',
+    antiAnalogy: {
+      tempting: 'saying a crash destroys momentum along with the energy',
+      whyItFails:
+        'the curriculum\'s own note singles this out. The two are independent, and conflating them '
+        + 'removes the one tool that actually solves crash problems.',
+    },
+    microCheck: 'The trolleys crumple and stick. Is the total motion afterwards the same as before?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.center-of-mass',
+    subject: 'physics',
+    canonicalIdea: 'Every object has one balance point, weighted by where its mass actually sits.',
+    concreteAnchor: 'balancing a hammer on one finger',
+    plainExplanation:
+      'A hammer balances on one finger, but not halfway along — the balance point sits close to the '
+      + 'heavy head. That point is the centre of mass: the average position of the object\'s mass, with '
+      + 'the heavy parts counting for more. It is useful because the whole object moves as though all its '
+      + 'mass were concentrated there. Throw the hammer and it tumbles messily, but that one point traces '
+      + 'the same smooth arc a simple thrown stone would. It does not have to be inside the object at '
+      + 'all — for a ring, it sits in the empty middle.',
+    antiAnalogy: {
+      tempting: 'calling it the middle of the object',
+      whyItFails:
+        'the curriculum\'s own note singles this out. Middle is a statement about shape; centre of mass is '
+        + 'a statement about where the mass is, and the two only agree when the object is uniform.',
+    },
+    microCheck: 'Where does a hammer balance — halfway along, or nearer the head?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.torque',
+    subject: 'physics',
+    canonicalIdea: 'A turning effect depends on the force, how far out it acts, and which way it points.',
+    concreteAnchor: 'undoing a tight bolt with a short then a long spanner',
+    plainExplanation:
+      'A tight bolt will not shift with a short spanner and gives way with a long one, even though you '
+      + 'push just as hard. Pushing further from the pivot produces more turning effect. Direction matters '
+      + 'as much as distance: push along the spanner, straight towards the bolt, and nothing turns at all, '
+      + 'however hard you shove. The turning effect is greatest when you push square to the spanner, and '
+      + 'falls away as your push swings round towards pointing along it. Same force, same distance, '
+      + 'completely different result.',
+    antiAnalogy: {
+      tempting: 'saying it is just force times distance',
+      whyItFails:
+        'the curriculum\'s own note singles this out. That shorthand quietly assumes you are pushing '
+        + 'square to the spanner, and it predicts a turning effect for a push aimed straight at the '
+        + 'bolt, which produces none.',
+    },
+    microCheck: 'You push along the spanner, straight at the bolt. Does it turn?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.equilibrium',
+    subject: 'physics',
+    canonicalIdea: 'Something is in balance when the pushes cancel AND the turning effects cancel.',
+    concreteAnchor: 'a ladder leaning against a wall',
+    plainExplanation:
+      'A ladder leans against a wall and stays put. Two separate things are true at once. First, all the '
+      + 'pushes cancel: the ground and the wall together hold up its weight and stop it sliding. Second, '
+      + 'all the turning effects cancel, or the ladder would rotate even while its pushes balanced. Both '
+      + 'conditions are needed — a see-saw with equal weights at unequal distances has balanced pushes and '
+      + 'still tips. When you check the turning effects you may take any point as the pivot you like; a '
+      + 'genuinely balanced object balances about all of them.',
+    antiAnalogy: {
+      tempting: 'saying to balance the turning effects around the support',
+      whyItFails:
+        'the curriculum\'s own note singles this out. It implies the support is the only legal pivot, and '
+        + 'a learner who believes that cannot solve the problems where choosing a different point removes '
+        + 'the unknown force entirely.',
+    },
+    microCheck: 'The forces on a see-saw cancel but it still tips. What else must balance?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.universal-gravitation',
+    subject: 'physics',
+    canonicalIdea: 'Every mass pulls every other mass, more for bigger masses and much less as they get further apart.',
+    concreteAnchor: 'the Earth pulling the Moon, and the Moon pulling back',
+    plainExplanation:
+      'The Earth pulls the Moon, and the Moon pulls the Earth just as hard — that is why the tides '
+      + 'happen. Every pair of masses does this, including you and the person next to you, far too '
+      + 'faintly to notice. Two things set the strength. More mass means more pull, straightforwardly. '
+      + 'Distance is the fierce one: double the separation and the pull drops to a quarter, triple it and '
+      + 'it drops to a ninth. That steep fall is why the Sun, enormously more massive than the Earth, '
+      + 'still pulls on you far less.',
+    antiAnalogy: {
+      tempting: 'saying the bigger object pulls harder than the smaller one pulls back',
+      whyItFails:
+        'the two pulls are always equal in size. What differs is the effect: the same pull moves a small '
+        + 'mass a lot and a huge one imperceptibly.',
+    },
+    microCheck: 'Earth pulls the Moon. Does the Moon pull Earth as hard?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.hookes-law',
+    subject: 'physics',
+    canonicalIdea: 'A spring pulls back in proportion to how far you have stretched it, and always towards where it started.',
+    concreteAnchor: 'hanging weights on a spring',
+    plainExplanation:
+      'Hang a weight on a spring and it stretches. Hang two identical weights and it stretches twice as '
+      + 'far. That simple proportion is the useful thing about springs. The pull is always back towards '
+      + 'the spring\'s resting length — stretch it and it pulls in, squash it and it pushes out — which '
+      + 'is what makes springs bounce rather than simply give way. The proportion only holds while the '
+      + 'spring is behaving: stretch it far enough and it deforms permanently, and the neat doubling '
+      + 'stops being true.',
+    antiAnalogy: {
+      tempting: 'assuming the doubling continues however far you stretch it',
+      whyItFails:
+        'past its elastic limit the spring stays stretched and the relationship breaks. Treating the rule '
+        + 'as unconditional is what makes a learner extrapolate a graph well past where it is straight.',
+    },
+    microCheck: 'One weight stretches it 2 cm. What do two identical weights do?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.pressure-fluids',
+    subject: 'physics',
+    canonicalIdea: 'Pressure in a liquid grows with depth and pushes equally in every direction.',
+    concreteAnchor: 'ears hurting at the deep end of a swimming pool',
+    plainExplanation:
+      'Swim to the bottom of the deep end and your ears hurt. Swim across at the same depth and the '
+      + 'feeling does not change. Pressure in a liquid depends on how far down you are, not on how wide '
+      + 'the pool is or how much water it holds in total — a narrow tube of water the same height presses '
+      + 'just as hard. And it pushes in every direction at once, not only downwards, which is why your '
+      + 'ears hurt whichever way you turn your head. That is also why a dam is built thick at the bottom '
+      + 'and thin at the top.',
+    antiAnalogy: {
+      tempting: 'saying more water means more pressure',
+      whyItFails:
+        'depth is what counts, not volume. A learner holding the volume idea cannot explain why a thin '
+        + 'pipe of water bursts a barrel as effectively as a lake would.',
+    },
+    microCheck: 'A narrow tube and a wide tank, same depth. Which presses harder at the bottom?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.buoyancy',
+    subject: 'physics',
+    canonicalIdea: 'The upward push on something in a fluid equals the weight of the fluid it shoved out of the way.',
+    concreteAnchor: 'pushing a beach ball under water',
+    plainExplanation:
+      'Push a beach ball under water and it fights back hard. Push a stone of the same size under and it '
+      + 'barely resists. Both shoved aside the same amount of water, so both get the same upward push — '
+      + 'the difference is entirely in how heavy they are themselves. That is why floating and sinking is '
+      + 'a comparison, not a property: the object floats when the water it displaces weighs more than the '
+      + 'object does. A steel ship floats because its hull shape shoves aside an enormous amount of '
+      + 'water, far more than a solid lump of the same steel would.',
+    antiAnalogy: {
+      tempting: 'saying heavy things sink and light things float',
+      whyItFails:
+        'a steel ship is far heavier than a pebble and floats. Weight alone decides nothing without the '
+        + 'weight of the displaced water to compare it against.',
+    },
+    microCheck: 'A beach ball and a stone of the same size go under. Same upward push?',
+    ...DRAFTED,
+  },
 ]
 
 export type RemediationCardLookup =

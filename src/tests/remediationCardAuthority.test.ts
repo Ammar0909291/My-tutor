@@ -43,8 +43,10 @@ describe('H6.3-1..4 — what H6.2 proved still holds', () => {
     expect(findRemediationCard(FRICTION).servable).toBe(true)
     for (const c of REMEDIATION_CARDS) {
       const r = findRemediationCard(c.conceptId)
-      expect(r.servable, c.conceptId).toBe(c.subject === 'physics')
-      if (c.subject === 'chemistry' && !r.servable) expect(r.reason).toBe('draft-not-promoted')
+      // Promotion is per card, never per subject: the 2026-08-27 physics batch
+      // was approved, the mechanics-core batch authored afterwards is not.
+      expect(r.servable, c.conceptId).toBe(c.status === 'ACTIVE')
+      if (!r.servable) expect(r.reason).toBe('draft-not-promoted')
     }
   })
 
