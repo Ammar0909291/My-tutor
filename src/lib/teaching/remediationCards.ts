@@ -541,6 +541,340 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
     microCheck: 'Which balance was more precise, the one reading 2.5 g or 2.500 g?',
     ...DRAFTED,
   },
+
+  // ── PHYSICS BUILD-OUT (2026-08-27) ────────────────────────────────────────
+  // The whole measurement domain (8/8) plus the mechanics entry spine — the
+  // concepts a physics learner actually walks through before anything else.
+  // Every anti-analogy below is the concept's OWN authored Educational Brain
+  // note, quoted rather than invented; every card is notation-free, because a
+  // learner who has just said they do not understand does not need symbols.
+  {
+    conceptId: 'phys.meas.dimensions',
+    subject: 'physics',
+    canonicalIdea: 'Every quantity is built from a few base kinds, and both sides of an equation must be the same kind.',
+    concreteAnchor: 'trying to add two metres to three seconds',
+    plainExplanation:
+      'Two metres plus three seconds is not five of anything. Length and time are different KINDS of '
+      + 'quantity, and you cannot add across kinds. Almost everything you measure is built from a handful '
+      + 'of base kinds — length, mass, time and a few more. A speed is a length divided by a time. An area '
+      + 'is a length times a length. That gives you a free check on any equation: both sides have to be '
+      + 'built from the same kinds in the same combination. If they are not, the equation is wrong before '
+      + 'you put a single number into it.',
+    antiAnalogy: {
+      tempting: 'saying dimensions and units are the same thing, so the check is just making the units match',
+      whyItFails:
+        'the curriculum\'s own note singles this out. A dimension is the KIND of quantity; a unit is one '
+        + 'agreed size of that kind. Metres and feet are different units of the same dimension, and '
+        + 'collapsing the two hides what the check is actually testing.',
+    },
+    microCheck: 'One side of an equation is a length, the other is a time. Can it be right?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.meas.errors',
+    subject: 'physics',
+    canonicalIdea: 'Every measurement carries an uncertainty, and repeating it reveals that uncertainty rather than removing it.',
+    concreteAnchor: 'timing the same swing five times with a stopwatch',
+    plainExplanation:
+      'Time the same swing five times by hand and the five numbers will not agree. That spread is not '
+      + 'carelessness. It is your reaction time, and it is part of the measurement. Two different things '
+      + 'can go wrong. Some errors scatter either side of the truth, and averaging several goes shrinks '
+      + 'them. Others push every reading the same way — a stopwatch that always starts late — and '
+      + 'averaging never helps, because every reading is wrong by the same amount in the same direction. '
+      + 'That second kind is only found by checking against something you already trust.',
+    antiAnalogy: {
+      tempting: 'treating an error as a mistake a careful person would have avoided',
+      whyItFails:
+        'uncertainty is a property of the measurement, not a personal failing. Calling it a mistake hides '
+        + 'the kind that no amount of care or repetition will ever fix.',
+    },
+    microCheck: 'Your stopwatch always starts half a second late. Will averaging fix it?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.meas.significant-figures',
+    subject: 'physics',
+    canonicalIdea: 'The digits you write are a claim about how precisely you actually measured.',
+    concreteAnchor: 'two balances, one reading 2.5 g and one reading 2.500 g',
+    plainExplanation:
+      'Two balances weigh the same sample. One reads 2.5 grams, the other reads 2.500 grams. Those are '
+      + 'not the same statement. The first promises the mass is somewhere near 2.5. The second promises '
+      + 'it much more tightly. The extra zeros are a claim about how well the instrument knows the '
+      + 'answer, not decoration. So you cannot add precision afterwards: if you measured to the nearest '
+      + 'tenth, writing more digits later claims something you never actually measured. A result is only '
+      + 'ever as precise as the roughest measurement that went into it.',
+    antiAnalogy: {
+      tempting: 'saying more significant figures is always better',
+      whyItFails:
+        'the curriculum\'s own note singles this out: more figures are better ONLY when they come from '
+        + 'real measurements. Invented precision is worse than acknowledged imprecision, because it '
+        + 'claims a confidence nobody earned.',
+    },
+    microCheck: 'Which balance was more precise, the one reading 2.5 g or 2.500 g?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.meas.vector-addition',
+    subject: 'physics',
+    canonicalIdea: 'Vectors combine by where they take you, not by adding their sizes and their directions separately.',
+    concreteAnchor: 'walking three streets east and then four streets north',
+    plainExplanation:
+      'Walk three streets east, then four streets north. You have walked seven streets, but you are not '
+      + 'seven streets from where you started — you are five, along a diagonal. That is what makes adding '
+      + 'vectors different. You cannot just add the two sizes, because the directions matter. The way to '
+      + 'do it is to lay them nose to tail and see where you end up, or to split each one into how far '
+      + 'east it takes you and how far north, add those two lists separately, and put the answer back '
+      + 'together. Same idea, two ways of doing the arithmetic.',
+    antiAnalogy: {
+      tempting: 'adding the sizes and the angles separately, so three at thirty degrees plus four at sixty gives seven at ninety',
+      whyItFails:
+        'the curriculum\'s own note singles this out. It gets the size wrong AND invents a rule for '
+        + 'direction that does not exist. Directions do not add like numbers.',
+    },
+    microCheck: 'Three streets east then four north. How far from where you started?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.meas.unit-conversion',
+    subject: 'physics',
+    canonicalIdea: 'Changing units changes the number but not the quantity, and a bigger unit needs fewer of them.',
+    concreteAnchor: 'measuring the same table in centimetres and in metres',
+    plainExplanation:
+      'A table is one and a half metres long. The same table is a hundred and fifty centimetres long. '
+      + 'Nothing about the table changed. The centimetre is a smaller unit, so it takes many more of them '
+      + 'to cover the same length. That is the whole rule, and it is worth saying the way round that '
+      + 'helps: a bigger unit means you need FEWER of them, so the number gets smaller. Switching to '
+      + 'kilometres would give a much smaller number for the same table. The prefixes — kilo, centi, '
+      + 'milli — are just agreed names for how much bigger or smaller the unit is.',
+    antiAnalogy: {
+      tempting: 'saying a larger unit gives a larger number',
+      whyItFails:
+        'the curriculum\'s own note singles this out and gives the framing to use instead: larger unit, '
+        + 'fewer of them needed, smaller number. Getting this backwards inverts every conversion the '
+        + 'learner will ever do.',
+    },
+    microCheck: 'You measure the table in kilometres instead of metres. Bigger number or smaller?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.displacement',
+    subject: 'physics',
+    canonicalIdea: 'Displacement is where you ended up relative to your start; distance is how much ground you covered.',
+    concreteAnchor: 'one lap of a running track',
+    plainExplanation:
+      'Run one full lap of a four-hundred-metre track. You have covered four hundred metres of ground, '
+      + 'and you are standing exactly where you started. Those are two different questions, and they have '
+      + 'two different answers. How much ground did you cover is the distance: four hundred. Where did '
+      + 'you end up compared with your start is the displacement: nowhere, zero. Displacement also needs '
+      + 'a direction — two hundred metres north is a different answer from two hundred metres south. '
+      + 'Distance can only ever grow as you move; displacement can shrink back to nothing.',
+    antiAnalogy: {
+      tempting: 'saying displacement is always shorter than distance',
+      whyItFails:
+        'the curriculum\'s own note singles this out. Displacement is less than OR EQUAL TO distance, and '
+        + 'they are equal whenever the motion is in a straight line without turning back. Saying "always '
+        + 'shorter" stops the learner recognising the equal case.',
+    },
+    microCheck: 'You run one full lap of the track. What is your displacement?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.velocity',
+    subject: 'physics',
+    canonicalIdea: 'Speed says how fast; velocity says how fast AND which way.',
+    concreteAnchor: 'two cars on a motorway at the same speed, driving in opposite directions',
+    plainExplanation:
+      'Two cars are both doing sixty. One is heading north, the other south. Their speed is the same. '
+      + 'Their velocity is not, because velocity carries the direction with it. That sounds like a small '
+      + 'difference until the two cars meet, and then it is the whole story. Speed is a single number: '
+      + 'how much ground you cover each second. Velocity is that number together with the direction you '
+      + 'are going. A car going round a roundabout at a steady sixty has a constant speed and a changing '
+      + 'velocity the whole way round, because its direction keeps changing.',
+    antiAnalogy: {
+      tempting: 'saying velocity is just speed with a plus or minus sign in front',
+      whyItFails:
+        'the curriculum\'s own note allows that shorthand for motion along a single line ONLY, and warns '
+        + 'that it breaks completely in two dimensions, where a direction needs more than a sign. Used '
+        + 'unflagged it teaches a rule the learner will have to unlearn.',
+    },
+    microCheck: 'A car goes round a roundabout at a steady sixty. Is its velocity changing?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.acceleration',
+    subject: 'physics',
+    canonicalIdea: 'Acceleration is how quickly velocity is changing — speeding up, slowing down or turning.',
+    concreteAnchor: 'a bus pulling away, braking, and going round a bend',
+    plainExplanation:
+      'Stand on a bus. When it pulls away you are pushed back into the seat. When it brakes you are '
+      + 'thrown forward. When it goes round a bend you lean to the side. All three are acceleration, '
+      + 'because in all three the velocity is changing. That is the part people miss: acceleration is not '
+      + 'about going fast, it is about CHANGING. A bus at a steady sixty in a straight line has no '
+      + 'acceleration at all, however fast sixty feels. Slowing down is acceleration too — it is just '
+      + 'change in the opposite direction to the motion.',
+    antiAnalogy: {
+      tempting: 'treating acceleration and deceleration as two opposite things',
+      whyItFails:
+        'the curriculum\'s own note singles this out. They are one quantity, not two phenomena. Slowing '
+        + 'down is acceleration pointing against the motion, and splitting them stops the sign convention '
+        + 'ever taking root.',
+    },
+    microCheck: 'A bus holds a steady sixty in a straight line. Is it accelerating?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.force',
+    subject: 'physics',
+    canonicalIdea: 'A force is a push or pull between two things, happening now — not something an object carries around.',
+    concreteAnchor: 'a hand pushing a shopping trolley',
+    plainExplanation:
+      'Push a shopping trolley and it moves. The push is a force. Notice that it takes TWO things: your '
+      + 'hand and the trolley. A force is always an interaction between two objects, and it only exists '
+      + 'while they are interacting. Let go, and your push is gone. The trolley is still rolling, but '
+      + 'nothing is pushing it any more — it is simply carrying on until something else, like friction, '
+      + 'acts on it. Forces change how things move: they start motion, stop it, speed it up, slow it '
+      + 'down, or turn it.',
+    antiAnalogy: {
+      tempting: 'saying the ball has the force of the throw inside it, or that force is a kind of energy',
+      whyItFails:
+        'the curriculum\'s own note singles both out. They turn a force into a substance an object stores '
+        + 'and spends, which is the oldest wrong idea in mechanics. A force is an interaction between two '
+        + 'objects at a moment, not a thing carried.',
+    },
+    microCheck: 'You let go of the trolley and it keeps rolling. Is your push still on it?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.newtons-third-law',
+    subject: 'physics',
+    canonicalIdea: 'Whenever one thing pushes another, the second pushes back just as hard, at the same moment, on the first.',
+    concreteAnchor: 'pushing off a wall on a skateboard',
+    plainExplanation:
+      'Stand on a skateboard and push against a wall. You roll backwards. The wall did not decide to '
+      + 'push you — the push you gave it and the push it gave you are one single interaction, seen from '
+      + 'two ends. They are equal in size and opposite in direction, and they happen at the same instant. '
+      + 'The important part is that the two pushes act on DIFFERENT things: yours acts on the wall, the '
+      + 'wall\'s acts on you. That is why they never cancel each other out. Two forces only cancel when '
+      + 'they act on the same object.',
+    antiAnalogy: {
+      tempting: 'telling it as a story where your push happens first and the wall then responds',
+      whyItFails:
+        'the curriculum\'s own note singles this out. It is not cause and effect with a delay; it is one '
+        + 'interaction with two ends, simultaneous by definition. The causal telling produces a learner '
+        + 'who thinks the reaction arrives late.',
+    },
+    microCheck: 'You push the wall and roll back. Do the two pushes act on the same thing?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.free-body-diagram',
+    subject: 'physics',
+    canonicalIdea: 'A free body diagram shows one object alone, with only the forces acting on that object.',
+    concreteAnchor: 'a box sitting on a ramp',
+    plainExplanation:
+      'A box sits on a ramp. To work out what happens, you draw the box on its own — not the ramp, not '
+      + 'the floor, not the person who put it there. Just the box, and arrows for every force acting ON '
+      + 'it: gravity pulling it down, the ramp pushing back on it, friction along the surface. Anything '
+      + 'the box pushes on goes on a different diagram. It feels like you are throwing away useful '
+      + 'information, and that is exactly the point: once only one object is left, the forces on it are '
+      + 'the only things that can decide what it does.',
+    antiAnalogy: {
+      tempting: 'drawing the whole scene — ramp, box, person — with arrows on everything',
+      whyItFails:
+        'the curriculum\'s own note singles this out. A free body diagram is not a picture of the '
+        + 'situation. The scene is useful for setting the problem up, and then the diagram keeps exactly '
+        + 'one object.',
+    },
+    microCheck: 'The box pushes down on the ramp. Does that arrow belong on the box\'s diagram?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.normal-force',
+    subject: 'physics',
+    canonicalIdea: 'The normal force is the surface pushing back, perpendicular to itself, as hard as it needs to.',
+    concreteAnchor: 'a book resting on a mattress',
+    plainExplanation:
+      'Rest a book on a mattress and you can see the mattress dent and push back up. A hard table does '
+      + 'exactly the same thing — the dent is just far too small to see. That upward push from the '
+      + 'surface is the normal force, and it always points straight out of the surface, not straight up. '
+      + 'On a tilted ramp it points out of the ramp, at an angle. Its size adjusts to whatever is needed: '
+      + 'press down on the book with your hand and the surface pushes back harder, without the book '
+      + 'getting any heavier.',
+    antiAnalogy: {
+      tempting: 'saying the normal force is gravity bouncing back off the surface',
+      whyItFails:
+        'the curriculum\'s own note singles this out. It suggests the surface reflects gravity, which '
+        + 'makes the learner expect the two to be equal always — and they are not, the moment the surface '
+        + 'tilts or anything else presses down.',
+    },
+    microCheck: 'The book is on a tilted ramp. Does the surface push straight up?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.kinetic-energy',
+    subject: 'physics',
+    canonicalIdea: 'Kinetic energy is the energy of moving, and it grows much faster than the speed does.',
+    concreteAnchor: 'a car braking from thirty, then from sixty',
+    plainExplanation:
+      'A car braking from sixty does not need twice the stopping distance of one braking from thirty. '
+      + 'It needs about four times. That is the surprising part of kinetic energy, and the part worth '
+      + 'holding on to: doubling the speed does not double the energy of motion, it multiplies it by '
+      + 'four. Three times the speed is nine times the energy. Mass matters too, and simply — twice the '
+      + 'mass at the same speed is twice the energy. But speed is the one that grows fiercely, which is '
+      + 'why a small increase in speed makes a crash so much worse.',
+    antiAnalogy: {
+      tempting: 'describing it loosely as how fast something is going, energy-wise',
+      whyItFails:
+        'the curriculum\'s own note singles this out: vague framing invites the learner to assume energy '
+        + 'scales with speed in step. It does not, and the squared growth is the whole reason this '
+        + 'concept matters.',
+    },
+    microCheck: 'A car doubles its speed. How much more energy of motion does it carry?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.potential-energy',
+    subject: 'physics',
+    canonicalIdea: 'Potential energy is stored by position, and it is always counted from a starting line you choose.',
+    concreteAnchor: 'a book on a shelf, measured from the desk and from the floor',
+    plainExplanation:
+      'Lift a book onto a shelf and you have stored energy in it. Let it go and gravity gives that '
+      + 'energy back as motion. How much is stored depends on how high it is — but high compared with '
+      + 'what? Measured from the desk it is half a metre up. Measured from the floor it is a metre and a '
+      + 'half. Both answers are correct, because potential energy is always counted from a starting line '
+      + 'somebody chose. That sounds like a problem and is not: what actually matters is the CHANGE as '
+      + 'the book falls, and that comes out the same whichever line you picked.',
+    antiAnalogy: {
+      tempting: 'saying the energy stored tells you how much the object has, full stop',
+      whyItFails:
+        'the curriculum\'s own note singles this out. Without "relative to a reference point you choose", '
+        + 'the learner believes there is one true absolute value, and then cannot handle a problem where '
+        + 'somebody measures from a different height.',
+    },
+    microCheck: 'Measured from the floor instead of the desk, does the stored energy change?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.work-energy-theorem',
+    subject: 'physics',
+    canonicalIdea: 'The energy of motion changes by exactly the total work done by ALL the forces, not just the one you are pushing with.',
+    concreteAnchor: 'shoving a crate across a rough floor',
+    plainExplanation:
+      'Shove a crate across a rough floor and it speeds up less than you might expect. You did work on '
+      + 'it by pushing, and friction did work on it in the opposite direction at the same time. What the '
+      + 'crate ends up with is the net of the two. That is the whole idea: add up the work done by every '
+      + 'force acting, and the answer is exactly how much the energy of motion changed. If the total is '
+      + 'positive the crate speeds up. If friction wins, it slows down. Nothing else needs to be tracked '
+      + 'to know how fast it ends up going.',
+    antiAnalogy: {
+      tempting: 'saying the work done by your push equals the change in the energy of motion',
+      whyItFails:
+        'the curriculum\'s own note singles this out. That is true only when no other force does work, '
+        + 'and it is exactly wrong in every problem involving friction — which is most of them.',
+    },
+    microCheck: 'You push a crate along a rough floor. Whose work counts, yours or everyone\'s?',
+    ...DRAFTED,
+  },
 ]
 
 export type RemediationCardLookup =

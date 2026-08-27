@@ -56,8 +56,12 @@ const card = (id: string): RemediationCard => {
 // ── A/B — the corpus and its provenance ────────────────────────────────────
 
 describe('H6-A/B — the pilot corpus exists and declares its provenance', () => {
-  it('the pilot is 20 concepts, spanning physics and chemistry', () => {
-    expect(REMEDIATION_CARDS.length).toBe(20)
+  it('the corpus spans physics and chemistry', () => {
+    // Was 20 (the H6 pilot). 2026-08-27: the physics build-out added the whole
+    // measurement domain and the mechanics entry spine — the concepts a physics
+    // learner actually walks through — taking physics from 7 to 22.
+    expect(REMEDIATION_CARDS.length).toBe(35)
+    expect(REMEDIATION_CARDS.filter((c) => c.subject === 'physics').length).toBe(22)
     const subjects = new Set(REMEDIATION_CARDS.map((c) => c.subject))
     expect(subjects.has('physics')).toBe(true)
     expect(subjects.has('chemistry')).toBe(true)
@@ -174,8 +178,8 @@ describe('H6-C/D — only an ACTIVE, human-reviewed card can serve', () => {
     // the two numbers are reported separately and never added together — which
     // only becomes meaningful now that they differ.
     const c = cardCoverage()
-    expect(c.total).toBe(20)
-    expect(c.draft).toBe(19)
+    expect(c.total).toBe(35)
+    expect(c.draft).toBe(34)
     expect(c.active).toBe(1)
   })
 })
