@@ -36,6 +36,7 @@ import {
 } from '@/lib/teaching/conversationState'
 import { isExplicitTopicRequest } from '@/lib/teaching/visual/session'
 import { asksForPractice } from '@/lib/teaching/masteryGate'
+import { readTurnIntent } from '@/lib/teaching/turnIntent'
 
 // ── ROOT CAUSE A ────────────────────────────────────────────────────────────
 
@@ -359,5 +360,90 @@ describe('the original failure, end to end and deterministic', () => {
     s = advanceConversationState(s, evidence({ askedQuestion: true }))
     expect(s.consecutiveFailures).toBe(0)
     expect(responseBudget('expert', s.consecutiveFailures, 0)).toBeNull()
+  })
+})
+
+// ── STEP 6 — the two rated sessions, replayed without a provider ────────────
+
+/**
+ * The exact learner turns from the two sessions Phase H rated. Replayed
+ * through the REAL readers the route uses — `readTurnIntent` (which owns
+ * `detectLearnerRequest` and `detectFailureState`), the real fold, and the
+ * real budget — so the deterministic half of each session is measured rather
+ * than described. No provider, no network, no database: this says what the
+ * ENGINE now decides, and deliberately claims nothing about what the model
+ * then writes.
+ */
+describe('STEP 6 — replay: the two rated sessions', () => {
+  /** The register these sessions ran at (expert = the unbounded row). */
+  const REGISTER: Register = 'expert'
+
+  const replay = (turns: string[]) => {
+    let s = initialConversationState()
+    let prior: string | null = null
+    return turns.map((message) => {
+      const intent = readTurnIntent(message, prior)
+      s = advanceConversationState(s, evidence({
+        learnerRequest: intent.learnerRequest === 'explain_differently' ? 'explain_differently' : null,
+        recoveryFired: intent.failureState !== null,
+      }))
+      prior = message
+      return {
+        message,
+        learnerRequest: intent.learnerRequest,
+        failureState: intent.failureState,
+        consecutiveFailures: s.consecutiveFailures,
+        remediationCount: s.remediationCount,
+        budget: responseBudget(REGISTER, s.consecutiveFailures, s.correctAtCheck + s.correctAtPractice),
+      }
+    })
+  }
+
+  it('chemistry polarity — the confusion is seen on the turn it is written', () => {
+    const t = replay(['sir i not understand this', 'ok sir', 'ok sir please teach me'])
+
+    // T1 — the sentence that was invisible before H1.
+    expect(t[0].learnerRequest).toBe('explain_differently')
+    expect(t[0].consecutiveFailures).toBe(1)
+    expect(t[0].remediationCount).toBe(1)
+    expect(t[0].budget).toBe(7)              // was null — an unbounded reply
+
+    // T2 — "ok sir". THE CRITICAL ASSERTION OF THIS PHASE.
+    expect(t[1].learnerRequest).toBeNull()   // not a request
+    expect(t[1].failureState).toBeNull()     // not distress either
+    expect(t[1].consecutiveFailures).toBe(1) // does NOT erase the struggle
+    expect(t[1].remediationCount).toBe(1)    // does NOT clear remediation
+    expect(t[1].budget).toBe(7)              // does NOT restore the unbounded reply
+
+    // T3 — a bare re-teach request is now seen, and tightens further.
+    expect(t[2].learnerRequest).toBe('explain_differently')
+    expect(t[2].consecutiveFailures).toBe(2)
+    expect(t[2].budget).toBe(6)
+  })
+
+  it('physics spacetime — the same persona, and mastery is never fabricated', () => {
+    const t = replay(['sir i not understand this', 'ok sir', 'ok', 'i not understand this'])
+    expect(t.map((x) => x.consecutiveFailures)).toEqual([1, 1, 1, 2])
+    expect(t.map((x) => x.budget)).toEqual([7, 7, 7, 6])
+    // Four turns, three of them acknowledgements or confusion, and NOT ONE of
+    // them is evidence of understanding. `correctAtCheck`/`correctAtPractice`
+    // are written by graded answers only — H1 changes neither.
+    let s = initialConversationState()
+    for (const m of ['sir i not understand this', 'ok sir', 'ok', 'i not understand this']) {
+      const intent = readTurnIntent(m, null)
+      s = advanceConversationState(s, evidence({
+        learnerRequest: intent.learnerRequest === 'explain_differently' ? 'explain_differently' : null,
+      }))
+    }
+    expect(s.correctAtCheck).toBe(0)
+    expect(s.correctAtPractice).toBe(0)
+    expect(s.masteryVerified ?? false).toBe(false)
+  })
+
+  it('the BEFORE state, restated, so the delta is computed not claimed', () => {
+    // The pre-H1 readers, for the persona's own first sentence.
+    const PRE_H1_EXPLAIN_DIFF = /\b(explain\s+(it\s+)?(differently|again|another\s+way|in\s+a\s+different\s+way|more\s+simply|simpler)|different\s+explanation|another\s+explanation|say\s+it\s+differently|i\s+(don'?t|do\s+not)\s+understand|i(?:'?m|\s+am)\s+(confused|lost)|no\s+idea|not\s+following|didn'?t\s+get\s+(it|that)|makes?\s+no\s+sense)\b/i
+    expect(PRE_H1_EXPLAIN_DIFF.test('sir i not understand this')).toBe(false)   // invisible
+    expect(detectLearnerRequest('sir i not understand this')).toBe('explain_differently')  // seen
   })
 })
