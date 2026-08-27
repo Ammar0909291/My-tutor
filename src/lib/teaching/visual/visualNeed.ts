@@ -51,6 +51,12 @@ export interface VisualNeedInput {
   learnerRequest?: LearnerRequest | null
   remediationTier?: number
   lastAssistantAskedQuestion?: boolean
+  /**
+   * The options currently offered to the learner (`pendingMcq.options`). A
+   * message that IS one of them is a tap, not a request — see
+   * `looksLikeAnswer`. Optional; omitting it is the previous behaviour.
+   */
+  offeredMcqOptions?: readonly string[] | null
   activeSession?: VisualSession | null
 }
 
@@ -119,7 +125,7 @@ export function decideVisualNeed(input: VisualNeedInput): VisualNeedVerdict {
   //    worse than no suppression, because this engine shipped for months with
   //    none at all.
   const terse = input.message.trim().length <= MAX_ANSWER_LENGTH
-  if (terse && looksLikeAnswer(input.message, input.lastAssistantAskedQuestion ?? false)) {
+  if (terse && looksLikeAnswer(input.message, input.lastAssistantAskedQuestion ?? false, input.offeredMcqOptions)) {
     return { need: 'suppress', reason: 'turn-is-an-answer-not-a-request' }
   }
 

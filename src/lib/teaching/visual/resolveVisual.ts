@@ -99,6 +99,12 @@ export interface ResolveVisualInput {
    * question is an ANSWER, and an answer must never move the figure.
    */
   lastAssistantAskedQuestion?: boolean
+  /**
+   * The options currently offered to the learner (`pendingMcq.options`). A
+   * message that IS one of them is a tap, not a request — see
+   * `looksLikeAnswer`. Optional; omitting it is the previous behaviour.
+   */
+  offeredMcqOptions?: readonly string[] | null
 }
 
 /**
@@ -395,6 +401,7 @@ export function resolveVisual(input: ResolveVisualInput): VisualDecision {
     learnerRequest: input.learnerRequest,
     remediationTier: input.remediationTier,
     lastAssistantAskedQuestion: lastAsked,
+    offeredMcqOptions: input.offeredMcqOptions,
     activeSession: liveSession,
   })
   // The RAW session, not the sanitised one: a figure whose concept has since
@@ -441,6 +448,7 @@ export function resolveVisual(input: ResolveVisualInput): VisualDecision {
     lessonConceptId: input.lessonConceptId,
     requestedConceptId,
     lastAssistantAskedQuestion: lastAsked,
+    offeredMcqOptions: input.offeredMcqOptions,
     visualRequested: input.learnerRequest === 'diagram',
     requestLeftActiveFigure:
       liveSession !== null && requestLeavesActiveFigure(input.message, activeFigureText),

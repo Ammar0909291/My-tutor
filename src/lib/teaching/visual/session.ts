@@ -215,9 +215,48 @@ export function isReturnRequest(message: string): boolean {
  * HOLD the current figure. Showing the right figure for one turn too long is a
  * far smaller failure than swapping it mid-correction.
  */
-export function looksLikeAnswer(message: string, lastAssistantAskedQuestion: boolean): boolean {
+export function looksLikeAnswer(
+  message: string,
+  lastAssistantAskedQuestion: boolean,
+  /**
+   * The options the server is CURRENTLY offering (`pendingMcq.options`), when
+   * a question is on the learner's screen. Optional: omitting it reproduces
+   * this function's previous behaviour byte-for-byte, which is what keeps
+   * every message that is not one of these options on exactly its old path.
+   *
+   * ── THE DEFECT THIS CLOSES ────────────────────────────────────────────────
+   * `LessonScreen.tsx` sends the FULL option text (`sendMessage(sessionId,
+   * option)`), and the length rule below was calibrated for TYPED replies.
+   * Authored options are long precisely because distractor-rich options make
+   * a good assessment, so the guard that exists to stop an ANSWER being read
+   * as a topic REQUEST failed on exactly the corpus it matters most for.
+   *
+   * Measured live: 3,098 of 4,280 ACTIVE authored options exceed 12 words
+   * (chemistry 87.0%, english 72.3%, physics 64.5%, mathematics 36.6%).
+   * Observed consequence, phys.mech.generalized-coordinates 2026-08-27: the
+   * learner tapped an option mentioning the normal force and was shown a
+   * normal-force diagram while being taught generalized coordinates
+   * (`FIGURE_CONCEPT_MISMATCH`).
+   */
+  offeredMcqOptions?: readonly string[] | null,
+): boolean {
   const text = (message ?? '').trim()
   if (!text) return true
+  // THE STRONGEST EVIDENCE THERE IS: this message is, character for character,
+  // a string the server put on the screen a moment ago. It is an answer, and
+  // its length says nothing about that. Checked FIRST because a learner who
+  // tapped a button did not type a request, whatever the option happens to
+  // say — an authored option may legitimately contain "explain", "show" or a
+  // concept name and still be a tap.
+  //
+  // Exact equality after trimming, and nothing else. No case folding, no
+  // punctuation stripping, no similarity: any of those could let unrelated
+  // prose match an option and silently reclassify a real request. Trimming
+  // alone cannot.
+  if (offeredMcqOptions?.some((o) => typeof o === 'string' && o.trim().length > 0
+    && o.trim() === text)) {
+    return true
+  }
   if (isExplicitTopicRequest(text) || isReturnRequest(text)) return false
   if (!lastAssistantAskedQuestion) return false
   // A reply to a question, with no request of its own, in few words.
@@ -244,6 +283,12 @@ export function decideContinuity(input: {
   lessonConceptId: string | null
   requestedConceptId: string | null
   lastAssistantAskedQuestion: boolean
+  /**
+   * The options currently offered to the learner (`pendingMcq.options`). A
+   * message that IS one of them is a tap, not a request — see
+   * `looksLikeAnswer`. Optional; omitting it is the previous behaviour.
+   */
+  offeredMcqOptions?: readonly string[] | null
   /** True when the turn is an explicit visual request ("show me a graph"). */
   visualRequested?: boolean
   /**
@@ -258,7 +303,10 @@ export function decideContinuity(input: {
    */
   requestLeftActiveFigure?: boolean
 }): ContinuityAction {
-  const { session, message, lessonConceptId, requestedConceptId, lastAssistantAskedQuestion } = input
+  const {
+    session, message, lessonConceptId, requestedConceptId, lastAssistantAskedQuestion,
+    offeredMcqOptions,
+  } = input
 
   // Nothing on screen yet — resolve freshly.
   if (!session) return { kind: 'switch', targetConceptId: requestedConceptId ?? lessonConceptId, reason: 'no-active-session' }
@@ -330,7 +378,7 @@ export function decideContinuity(input: {
   }
 
   // The learner is answering the tutor, not asking for a new topic. THE FIX.
-  if (looksLikeAnswer(message, lastAssistantAskedQuestion)) {
+  if (looksLikeAnswer(message, lastAssistantAskedQuestion, offeredMcqOptions)) {
     return { kind: 'hold', session, reason: 'learner-answering-not-requesting' }
   }
 

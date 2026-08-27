@@ -196,6 +196,12 @@ export interface ExcursionInput {
   /** Whether the tutor's previous turn ended in a question. */
   lastAssistantAskedQuestion: boolean
   /**
+   * The options currently offered to the learner (`pendingMcq.options`). A
+   * message that IS one of them is a tap, not a request — see
+   * `looksLikeAnswer`. Optional; omitting it is the previous behaviour.
+   */
+  offeredMcqOptions?: readonly string[] | null
+  /**
    * THE TURN'S READING OF ITSELF DISAGREED. (Phase 2.)
    *
    * `TurnIntent.ambiguous` — true when two independent readings of the same
@@ -341,7 +347,7 @@ export function decideExcursion(input: ExcursionInput): ExcursionDecision {
   // The learner is ANSWERING the tutor, not asking for a new topic. This is the
   // most common turn in a real lesson and must never start an excursion — the
   // same guard the visual layer already applies to the figure.
-  if (looksLikeAnswer(message, input.lastAssistantAskedQuestion)) {
+  if (looksLikeAnswer(message, input.lastAssistantAskedQuestion, input.offeredMcqOptions)) {
     return active ? held(state, 'continued') : none(lessonConceptId)
   }
 

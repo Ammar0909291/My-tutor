@@ -2285,6 +2285,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // excursion.ts requires it to equal `requestedConceptId`.
           knowledgeGapConceptId: knowledgeGapHoisted?.conceptId ?? null,
           lastAssistantAskedQuestion: excursionPriorAskedQuestion,
+          // A TAP IS NOT A REQUEST. LessonScreen sends the full option TEXT, and
+          // `looksLikeAnswer`'s length rule was calibrated for typed replies —
+          // 3,098 of 4,280 live authored options exceed it, so tapping one could
+          // be read as asking for a new topic (measured: a normal-force diagram
+          // shown while teaching generalized coordinates). Passing the options
+          // the server is offering lets that guard recognise a tap by exact
+          // equality. `pendingMcqHoisted` is the CURRENT question only — it comes
+          // from readPendingQuestion, which returns null on a lesson mismatch.
+          offeredMcqOptions: pendingMcqHoisted?.options,
           // Phase 2: the turn read itself two contradictory ways. Hold the
           // teaching context rather than let either reading change it. This is
           // the ONE place ambiguity is given authority — everything else on
@@ -2994,6 +3003,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 lastAssistantAskedQuestion:
                   (conversationStateHoisted?.teachSegmentsSinceQuestion ?? 0) === 0
                   && conversationStateHoisted?.taughtThisSession === true,
+                // A TAP IS NOT A REQUEST. LessonScreen sends the full option TEXT, and
+                // `looksLikeAnswer`'s length rule was calibrated for typed replies —
+                // 3,098 of 4,280 live authored options exceed it, so tapping one could
+                // be read as asking for a new topic (measured: a normal-force diagram
+                // shown while teaching generalized coordinates). Passing the options
+                // the server is offering lets that guard recognise a tap by exact
+                // equality. `pendingMcqHoisted` is the CURRENT question only — it comes
+                // from readPendingQuestion, which returns null on a lesson mismatch.
+                offeredMcqOptions: pendingMcqHoisted?.options,
               }, {
                 outcomeSink: prismaGenerationOutcomeSink,
                 findApprovedFigure: findActiveVisualFigure,
