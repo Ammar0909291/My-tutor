@@ -37,13 +37,14 @@ const OPPOSES_MOTION = /oppos\w*\s+(the\s+)?(relative\s+)?motion/i
 // ── 1–4 · the H6.2 result, re-pinned so this phase cannot regress it ────────
 
 describe('H6.3-1..4 — what H6.2 proved still holds', () => {
-  it('the ACTIVE card is servable and the DRAFT ones are not', () => {
-    const active = findRemediationCard(FRICTION)
-    expect(active.servable).toBe(true)
+  it('every promoted card serves and every unpromoted one is refused', () => {
+    // 2026-08-27: the owner approved the whole physics set. Chemistry was not
+    // approved, so the boundary is now checked in both directions at once.
+    expect(findRemediationCard(FRICTION).servable).toBe(true)
     for (const c of REMEDIATION_CARDS) {
-      if (c.conceptId === FRICTION) continue
       const r = findRemediationCard(c.conceptId)
-      expect(r.servable, c.conceptId).toBe(false)
+      expect(r.servable, c.conceptId).toBe(c.subject === 'physics')
+      if (c.subject === 'chemistry' && !r.servable) expect(r.reason).toBe('draft-not-promoted')
     }
   })
 

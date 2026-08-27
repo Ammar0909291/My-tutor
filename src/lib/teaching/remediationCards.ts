@@ -79,6 +79,24 @@ const DRAFTED = {
   provenance: 'Drafted by Claude in Phase H6. NOT reviewed. NOT authoritative. Awaiting human promotion.',
 } as const
 
+/**
+ * OWNER PROMOTION, 2026-08-27 — the physics build-out.
+ *
+ * The owner reviewed the physics set and approved it in full: the complete
+ * measurement domain and the mechanics entry spine. AI_AUTHORED_REVIEWED, not
+ * HUMAN_CURATOR — the teaching words are the drafts', and the provenance
+ * records who signed them off rather than who wrote them.
+ *
+ * Chemistry is deliberately NOT in this batch. Its thirteen cards remain DRAFT,
+ * and chem.sol.vapour-pressure remains frozen behind the unresolved curriculum
+ * conflict about the surface-occupancy mechanism.
+ */
+const OWNER_PROMOTED_PHYSICS = {
+  status: 'ACTIVE',
+  authorKind: 'AI_AUTHORED_REVIEWED',
+  provenance: 'Reviewed and promoted by owner, 2026-08-27 (physics build-out).',
+} as const
+
 export const REMEDIATION_CARDS: readonly RemediationCard[] = [
   // ── The five concepts whose live failures drove H2–H5 ────────────────────
   {
@@ -252,7 +270,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'not the same quantity written differently.',
     },
     microCheck: 'Your friend says the rope is "five". What do you need to ask?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS,
   },
   {
     conceptId: 'phys.mech.newtons-first-law',
@@ -273,7 +291,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'needed to CHANGE motion, not to maintain it.',
     },
     microCheck: 'The ice gets perfectly smooth. When does the puck stop?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS,
   },
   {
     conceptId: 'phys.meas.vector-products',
@@ -295,7 +313,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'interchangeable.',
     },
     microCheck: 'Which one gives you an answer that points somewhere?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS,
   },
   {
     conceptId: 'phys.mech.conservative-forces',
@@ -317,7 +335,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'test is whether the energy comes back usable and whether the path matters.',
     },
     microCheck: 'You take the long way up instead of the short way. Does gravity charge you more?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS,
   },
   {
     conceptId: 'chem.found.pure-substances',
@@ -361,7 +379,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'more than a sign, which is exactly why vectors exist.',
     },
     microCheck: 'You walk 300 m out and 300 m back. How far are you from where you started?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS,
   },
   {
     conceptId: 'chem.found.states-of-matter',
@@ -476,7 +494,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'the same amount. Momentum itself is mass times velocity.',
     },
     microCheck: 'Two balls at the same speed, one heavier. Which has more momentum?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS,
   },
   {
     conceptId: 'chem.found.concentration',
@@ -568,7 +586,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'collapsing the two hides what the check is actually testing.',
     },
     microCheck: 'One side of an equation is a length, the other is a time. Can it be right?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS,
   },
   {
     conceptId: 'phys.meas.errors',
@@ -589,7 +607,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'the kind that no amount of care or repetition will ever fix.',
     },
     microCheck: 'Your stopwatch always starts half a second late. Will averaging fix it?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS,
   },
   {
     conceptId: 'phys.meas.significant-figures',
@@ -611,7 +629,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'claims a confidence nobody earned.',
     },
     microCheck: 'Which balance was more precise, the one reading 2.5 g or 2.500 g?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS,
   },
   {
     conceptId: 'phys.meas.vector-addition',
@@ -632,7 +650,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'direction that does not exist. Directions do not add like numbers.',
     },
     microCheck: 'Three streets east then four north. How far from where you started?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS,
   },
   {
     conceptId: 'phys.meas.unit-conversion',
@@ -654,7 +672,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'learner will ever do.',
     },
     microCheck: 'You measure the table in kilometres instead of metres. Bigger number or smaller?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS,
   },
   {
     conceptId: 'phys.mech.displacement',
@@ -676,7 +694,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'shorter" stops the learner recognising the equal case.',
     },
     microCheck: 'You run one full lap of the track. What is your displacement?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS,
   },
   {
     conceptId: 'phys.mech.velocity',
@@ -698,7 +716,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'unflagged it teaches a rule the learner will have to unlearn.',
     },
     microCheck: 'A car goes round a roundabout at a steady sixty. Is its velocity changing?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS,
   },
   {
     conceptId: 'phys.mech.acceleration',
@@ -720,7 +738,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'ever taking root.',
     },
     microCheck: 'A bus holds a steady sixty in a straight line. Is it accelerating?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS,
   },
   {
     conceptId: 'phys.mech.force',
@@ -742,7 +760,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'objects at a moment, not a thing carried.',
     },
     microCheck: 'You let go of the trolley and it keeps rolling. Is your push still on it?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS,
   },
   {
     conceptId: 'phys.mech.newtons-third-law',
@@ -764,7 +782,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'who thinks the reaction arrives late.',
     },
     microCheck: 'You push the wall and roll back. Do the two pushes act on the same thing?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS,
   },
   {
     conceptId: 'phys.mech.free-body-diagram',
@@ -786,7 +804,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'one object.',
     },
     microCheck: 'The box pushes down on the ramp. Does that arrow belong on the box\'s diagram?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS,
   },
   {
     conceptId: 'phys.mech.normal-force',
@@ -808,7 +826,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'tilts or anything else presses down.',
     },
     microCheck: 'The book is on a tilted ramp. Does the surface push straight up?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS,
   },
   {
     conceptId: 'phys.mech.kinetic-energy',
@@ -830,7 +848,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'concept matters.',
     },
     microCheck: 'A car doubles its speed. How much more energy of motion does it carry?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS,
   },
   {
     conceptId: 'phys.mech.potential-energy',
@@ -852,7 +870,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'somebody measures from a different height.',
     },
     microCheck: 'Measured from the floor instead of the desk, does the stored energy change?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS,
   },
   {
     conceptId: 'phys.mech.work-energy-theorem',
@@ -873,7 +891,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'and it is exactly wrong in every problem involving friction — which is most of them.',
     },
     microCheck: 'You push a crate along a rough floor. Whose work counts, yours or everyone\'s?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS,
   },
 ]
 

@@ -101,7 +101,36 @@ describe('H6-A/B — the pilot corpus exists and declares its provenance', () =>
     //   repository holds an unresolved conflict about the mechanism (the
     //   Educational Brain authors the surface-occupancy account that H5 filed
     //   as a live failure). That is a curriculum decision, not a model one.
-    const OWNER_PROMOTED = ['phys.mech.friction']
+    // THE RECORD OF WHAT THE OWNER AUTHORISED, and the guard that no card is
+    // ACTIVE without it. 2026-08-27: phys.mech.friction was approved singly at
+    // the H6.2 gate; the remaining physics set was approved in full after the
+    // build-out. CHEMISTRY WAS NOT APPROVED and every chemistry card must still
+    // read DRAFT here — chem.sol.vapour-pressure especially, which is frozen
+    // behind the unresolved surface-occupancy conflict.
+    const OWNER_PROMOTED = [
+      'phys.mech.friction',
+      'phys.meas.units',
+      'phys.mech.newtons-first-law',
+      'phys.meas.vector-products',
+      'phys.mech.conservative-forces',
+      'phys.meas.scalars-vectors',
+      'phys.mech.momentum',
+      'phys.meas.dimensions',
+      'phys.meas.errors',
+      'phys.meas.significant-figures',
+      'phys.meas.vector-addition',
+      'phys.meas.unit-conversion',
+      'phys.mech.displacement',
+      'phys.mech.velocity',
+      'phys.mech.acceleration',
+      'phys.mech.force',
+      'phys.mech.newtons-third-law',
+      'phys.mech.free-body-diagram',
+      'phys.mech.normal-force',
+      'phys.mech.kinetic-energy',
+      'phys.mech.potential-energy',
+      'phys.mech.work-energy-theorem',
+    ]
     for (const c of REMEDIATION_CARDS) {
       if (OWNER_PROMOTED.includes(c.conceptId)) {
         expect(c.status, `${c.conceptId} status`).toBe('ACTIVE')
@@ -128,7 +157,36 @@ describe('H6-C/D — only an ACTIVE, human-reviewed card can serve', () => {
   it('every UNPROMOTED card is refused by the lookup, and the promoted one is not', () => {
     // Same allow-list, same reasoning as the guard above: the claim under test
     // is that DRAFT is unreachable, not that nothing is reachable.
-    const OWNER_PROMOTED = ['phys.mech.friction']
+    // THE RECORD OF WHAT THE OWNER AUTHORISED, and the guard that no card is
+    // ACTIVE without it. 2026-08-27: phys.mech.friction was approved singly at
+    // the H6.2 gate; the remaining physics set was approved in full after the
+    // build-out. CHEMISTRY WAS NOT APPROVED and every chemistry card must still
+    // read DRAFT here — chem.sol.vapour-pressure especially, which is frozen
+    // behind the unresolved surface-occupancy conflict.
+    const OWNER_PROMOTED = [
+      'phys.mech.friction',
+      'phys.meas.units',
+      'phys.mech.newtons-first-law',
+      'phys.meas.vector-products',
+      'phys.mech.conservative-forces',
+      'phys.meas.scalars-vectors',
+      'phys.mech.momentum',
+      'phys.meas.dimensions',
+      'phys.meas.errors',
+      'phys.meas.significant-figures',
+      'phys.meas.vector-addition',
+      'phys.meas.unit-conversion',
+      'phys.mech.displacement',
+      'phys.mech.velocity',
+      'phys.mech.acceleration',
+      'phys.mech.force',
+      'phys.mech.newtons-third-law',
+      'phys.mech.free-body-diagram',
+      'phys.mech.normal-force',
+      'phys.mech.kinetic-energy',
+      'phys.mech.potential-energy',
+      'phys.mech.work-energy-theorem',
+    ]
     for (const c of REMEDIATION_CARDS) {
       const r = findRemediationCard(c.conceptId)
       if (OWNER_PROMOTED.includes(c.conceptId)) {
@@ -179,8 +237,8 @@ describe('H6-C/D — only an ACTIVE, human-reviewed card can serve', () => {
     // only becomes meaningful now that they differ.
     const c = cardCoverage()
     expect(c.total).toBe(35)
-    expect(c.draft).toBe(34)
-    expect(c.active).toBe(1)
+    expect(c.draft).toBe(13)   // chemistry, unreviewed
+    expect(c.active).toBe(22)  // physics, owner-approved 2026-08-27
   })
 })
 
