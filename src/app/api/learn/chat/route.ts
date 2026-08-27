@@ -699,6 +699,9 @@ export async function POST(req: Request) {
     let remediationCardText: string | null = null
     let remediationCardServedId: string | null = null
     let remediationSource: 'CURATED_CARD' | 'EXISTING_GROUNDING' | 'LLM_GENERATED' | null = null
+    /** The approved card's text while it HOLDS this concept — see the output
+     *  floor. Null on every turn a card is not holding, which is almost all. */
+    let remediationHoldCardText: string | null = null
     // Option B — Teaching Sequence Executor (physics only): the runtime-
     // selected current step, persisted at end of turn so the next turn
     // resumes from it instead of restarting or improvising.
@@ -4299,6 +4302,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 remediationCardServedId = cardId
               } else if (holding) {
                 systemPrompt += buildRemediationCardHoldBlock(lookup.card)
+                // The prompt-side hold LOST in production — it fired and the
+                // model taught F_f = mu N anyway. The card text travels to the
+                // output floor so the rule is checked, not merely requested.
+                remediationHoldCardText = lookup.card.plainExplanation
               }
               if (remediationTurn || holding) {
                 console.log('[remediation-card]', {
@@ -5771,9 +5778,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             text: cleanText,
             previousAssistantText,
             hasStructuredMcq: mcqHoisted !== null && mcqHoisted !== undefined,
+            heldCardText: remediationHoldCardText,
           })
           console.log('[remediation-floor]', {
             remediationTurn,
+            heldOnCard: remediationHoldCardText !== null,
             decision: conversationDecisionHoisted.type,
             // Recorded, not acted on: QL-1 was ALREADY right on both measured
             // failures ("nothing has been taught yet this session … the
@@ -5829,6 +5838,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             const stillViolating = checkRemediationOutput({
               remediationTurn, text: repaired, previousAssistantText,
               hasStructuredMcq: mcqHoisted !== null && mcqHoisted !== undefined,
+              heldCardText: remediationHoldCardText,
             }).violation !== null
             if (!stillViolating) {
               cleanText = repaired

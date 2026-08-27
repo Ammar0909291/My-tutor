@@ -22,6 +22,7 @@ import {
   REMEDIATION_CARDS, remediationWindowOpen, buildRemediationCardHoldBlock,
 } from '@/lib/teaching/remediationCards'
 import { turnTaughtSomething } from '@/lib/teaching/teachingContent'
+import { checkRemediationOutput } from '@/lib/teaching/remediationOutputContract'
 
 const FRICTION = 'phys.mech.friction'
 const card = (id: string) => REMEDIATION_CARDS.find((c) => c.conceptId === id)!
@@ -129,5 +130,64 @@ describe('the route holds on a NON-remediation turn', () => {
     // The refusal reason lives in the lookup, which is where the boundary is.
     const cards = readFileSync(join(process.cwd(), 'src/lib/teaching/remediationCards.ts'), 'utf8')
     expect(cards).toContain('draft-not-promoted')
+  })
+})
+
+// ── THE HOLD IS ENFORCED ON THE OUTPUT, NOT ONLY IN THE PROMPT ──────────────
+
+describe('a held turn that teaches past the card is rejected', () => {
+  const CARD = card(FRICTION).plainExplanation
+  // Verbatim from production, 2026-08-27: the hold block fired (mode: 'hold')
+  // and this is what came back to "ok sir".
+  const WENT_BEYOND = 'When you push the book, the force that pushes it back is called the '
+    + 'friction force. The size of that force depends on two things: how rough the surfaces '
+    + 'are, captured by \\( \\mu \\), and the normal force \\( N \\). So the friction force is '
+    + 'simply \\( F_f = \\mu N \\). Once it starts sliding, the friction force stays constant '
+    + 'at \\( \\mu_k N \\).'
+
+  it('the production failure is caught', () => {
+    const r = checkRemediationOutput({ remediationTurn: false, text: WENT_BEYOND, heldCardText: CARD })
+    expect(r.violation).toBe('went-beyond-card')
+  })
+
+  it('the card itself passes its own check — the floor cannot reject the account', () => {
+    expect(checkRemediationOutput({
+      remediationTurn: false, text: CARD, heldCardText: CARD,
+    }).violation).toBeNull()
+  })
+
+  it('plain teaching about the same idea passes', () => {
+    for (const t of [
+      'Press the book down harder and it gets harder to slide, because the two surfaces are '
+      + 'pushed together more strongly.',
+      'The weight of the book has not changed, but the pressing force has.',
+      'Which do you think matters more here, the weight or how hard you press?',
+    ]) {
+      expect(checkRemediationOutput({
+        remediationTurn: false, text: t, heldCardText: CARD,
+      }).violation, t).toBeNull()
+    }
+  })
+
+  it('NOTHING is checked when no card is holding — every other turn is untouched', () => {
+    expect(checkRemediationOutput({ remediationTurn: false, text: WENT_BEYOND }).violation).toBeNull()
+    expect(checkRemediationOutput({
+      remediationTurn: false, text: WENT_BEYOND, heldCardText: null,
+    }).violation).toBeNull()
+  })
+
+  it('a held turn may ask a question — the empty/question checks stay scoped to remediation', () => {
+    // "ok sir" answered with the card's micro-check is the DESIRED behaviour,
+    // and must not be rejected as a question-only turn.
+    expect(checkRemediationOutput({
+      remediationTurn: false, text: card(FRICTION).microCheck, heldCardText: CARD,
+    }).violation).toBeNull()
+  })
+
+  it('the route passes the held card text into the floor and logs the hold', () => {
+    expect(ROUTE).toContain('heldCardText: remediationHoldCardText')
+    expect(ROUTE).toContain('heldOnCard:')
+    // Still one repair call site, not two.
+    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(4)
   })
 })

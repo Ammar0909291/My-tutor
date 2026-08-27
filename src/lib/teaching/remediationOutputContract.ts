@@ -61,6 +61,15 @@ export type RemediationOutputViolation =
    * how friction works. Do I have that right?" See `teachingContent.ts`.
    */
   | 'no-teaching-content'
+  /**
+   * A HELD turn taught past the card. The learner has been given a
+   * human-approved account and has shown nothing yet; introducing notation the
+   * approved account does not contain walks straight past the owner's own
+   * decision about what this concept's remediation should say. Measured live:
+   * the hold block fired (`mode: 'hold'`) and the model answered "ok sir" with
+   * F_f = mu N, mu_k N and the static/kinetic split anyway.
+   */
+  | 'went-beyond-card'
 
 export interface RemediationOutputCheck {
   violation: RemediationOutputViolation | null
@@ -98,11 +107,47 @@ export interface RemediationOutputInput {
    * to answer — the same exclusion `withholdUngradedGateQuestion` makes.
    */
   hasStructuredMcq?: boolean
+  /**
+   * The approved card's teaching text, present ONLY while a promoted card is
+   * holding this concept (see `remediationWindowOpen`). When set, notation
+   * absent from that text is a violation — the enforcement moved to the output
+   * because the prompt-side hold demonstrably lost against the rest of the
+   * prompt.
+   */
+  heldCardText?: string | null
+}
+
+/**
+ * NOTATION IS THE PART THAT IS DECIDABLE.
+ *
+ * Not "did it teach something new" in general — that is a judgement no regex
+ * makes. But a formula, a subscripted symbol or a LaTeX delimiter is either in
+ * the approved account or it is not, and the owner's approval of this card
+ * named "no formula" explicitly. Narrow on purpose: ordinary teaching prose
+ * contains none of these, so this cannot fire on plain words.
+ */
+const NOTATION = /\\\(|\\\[|\$\$|\\mu|\\frac|\\times|[\u03bc\u00b5]|[A-Za-z]_\{?[A-Za-z0-9]\}?\s*=|[A-Za-z]\s*=\s*[A-Za-z\u03bc\u00b5]|\u2264|\u2265/
+
+export function notationBeyondCard(text: string, cardText: string): boolean {
+  try {
+    if (typeof text !== 'string' || typeof cardText !== 'string') return false
+    if (!NOTATION.test(text)) return false
+    // The card itself may legitimately carry notation; only what it does NOT
+    // carry is out of bounds.
+    return !NOTATION.test(cardText)
+  } catch {
+    return false
+  }
 }
 
 export function checkRemediationOutput(input: RemediationOutputInput): RemediationOutputCheck {
   try {
-    if (!input.remediationTurn) return OK
+    // A HELD turn is not a remediation turn, and must still be checked: the
+    // card is governing it, and that is exactly where the model walked past the
+    // approved account in production. Every other turn in the product returns
+    // here untouched, as before.
+    const heldText = typeof input.heldCardText === 'string' ? input.heldCardText : ''
+    if (!input.remediationTurn && heldText.length === 0) return OK
     if (input.hasStructuredMcq) return OK
     const text = typeof input.text === 'string' ? input.text : ''
     // An empty draft is a different failure with a different owner (the
@@ -112,7 +157,7 @@ export function checkRemediationOutput(input: RemediationOutputInput): Remediati
     // 1. DID IT EXPLAIN ANYTHING? Cut the turn back to its teaching using the
     //    repository's existing splitter. Nothing left ⇒ the entire turn was a
     //    question, however new or well-phrased that question is.
-    if (cutBackToTeaching(text).length === 0) {
+    if (input.remediationTurn && cutBackToTeaching(text).length === 0) {
       return {
         violation: 'question-only',
         reason: 'the entire turn was a question; the learner said they do not understand '
@@ -126,11 +171,23 @@ export function checkRemediationOutput(input: RemediationOutputInput): Remediati
     //     production while teaching nothing. Warmth is not the target here: a
     //     reflection followed by teaching still passes, because it has a
     //     substantive sentence. A reflection that IS the whole turn does not.
-    if (!turnTaughtSomething(text)) {
+    if (input.remediationTurn && !turnTaughtSomething(text)) {
       return {
         violation: 'no-teaching-content',
         reason: 'the turn spoke only about the learner, not about the concept — the learner '
           + 'said they do not understand and was reflected back at instead of taught',
+      }
+    }
+
+    // 1c. WHILE A CARD IS HOLDING, DID IT TEACH PAST THE CARD? Only checked
+    //     when `heldCardText` is supplied, which happens only for a promoted,
+    //     currently-holding card — so this is silent for every other turn in
+    //     the product.
+    if (heldText.length > 0 && notationBeyondCard(text, heldText)) {
+      return {
+        violation: 'went-beyond-card',
+        reason: 'the approved account for this concept contains no formula or notation, and '
+          + 'the learner has not yet shown they hold the plain idea',
       }
     }
 
@@ -178,6 +235,10 @@ export function buildRemediationRepairAppendix(
   const named = violation === 'question-only'
     ? 'Your reply was only a question. The learner told you they do not understand; '
       + 'asking them something else does not teach them anything.'
+    : violation === 'went-beyond-card'
+    ? 'You introduced a formula or symbol that the approved account of this concept '
+      + 'does not contain, to a learner who has not yet shown they hold the plain '
+      + 'idea. Teach the idea in words. No formula, no symbols, no subscripts.'
     : violation === 'no-teaching-content'
     ? 'Your reply talked about the learner instead of teaching them. Reflecting their '
       + 'confusion back at them ("I understand you are still unsure", "have I got that '
