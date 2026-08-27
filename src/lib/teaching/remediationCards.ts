@@ -4967,6 +4967,353 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
     microCheck: 'The model matches every collider measurement and still leaves astronomers unsatisfied. What is missing from it?',
     ...DRAFTED,
   },
+  {
+    conceptId: 'phys.stat.probability-basics',
+    subject: 'physics',
+    canonicalIdea: 'Enormous numbers of particles make probabilistic predictions sharper, not vaguer.',
+    concreteAnchor: 'the air in a room, which never once collects in one corner though nothing forbids it',
+    plainExplanation:
+      'Nothing in the laws of motion forbids all the air in a room from gathering in one corner. Every '
+      + 'molecule could happen to be there at the same instant. It never occurs, because the number of '
+      + 'arrangements in which the air is spread out exceeds the number in which it is bunched by a factor '
+      + 'so vast it has no name. Statistical mechanics works by counting arrangements. With a handful of '
+      + 'particles the predictions would be loose. With the number in a room, the spread around the '
+      + 'expected value is so tiny that the pressure on a wall is steady to more decimal places than any '
+      + 'instrument can read.',
+    antiAnalogy: {
+      tempting: 'reading a probabilistic description as one that is approximate or uncertain',
+      whyItFails:
+        'here the large numbers work the other way. The relative wobble shrinks as the count rises, so a '
+        + 'prediction about a mole of gas is among the sharpest in physics — far sharper than one about '
+        + 'ten particles, which really would be uncertain.',
+    },
+    microCheck: 'Predictions about a roomful of air are extremely precise and ones about ten molecules are not. What does the large number do?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.stat.boltzmann-factor',
+    subject: 'physics',
+    canonicalIdea: 'At a given temperature, a state of higher energy is less likely, and how much less falls away steeply as the energy rises above the thermal scale.',
+    concreteAnchor: 'the thinning of the atmosphere with altitude, halving every few kilometres',
+    plainExplanation:
+      'In thermal equilibrium, states cost energy and the price is paid in likelihood. A state one thermal '
+      + 'unit of energy above another is a few times less likely; ten units above, thousands of times less '
+      + 'likely; a hundred units above, effectively never occupied. The atmosphere shows it directly: '
+      + 'lifting a molecule higher costs gravitational energy, so the density falls off steadily with '
+      + 'altitude, halving every few kilometres. Raise the temperature and the thermal unit grows, so '
+      + 'higher states become accessible — which is why chemical reactions with a barrier speed up so '
+      + 'dramatically when a mixture is warmed.',
+    antiAnalogy: {
+      tempting: 'treating it as another way of writing entropy',
+      whyItFails:
+        'the curriculum\'s own note bans this bridge. One is the likelihood of a single state given its '
+        + 'energy; the other counts how many states there are. They answer different questions, and a '
+        + 'system can have many states each individually improbable — which is exactly the case that '
+        + 'conflating them makes impossible to think about.',
+    },
+    microCheck: 'Warming a mixture makes a slow reaction run fast. What has changed about the high-energy states?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.stat.partition-function',
+    subject: 'physics',
+    canonicalIdea: 'Summing the likelihood weights over every state produces a single quantity from which every thermodynamic property can be recovered.',
+    concreteAnchor: 'one sum yielding energy, pressure, entropy and heat capacity in turn',
+    plainExplanation:
+      'Add up the thermal weight of every state a system can be in and you get one number, depending on '
+      + 'temperature. It looks at first like housekeeping — you do need it to turn weights into '
+      + 'probabilities. But it is far more. How that sum changes as the temperature is varied gives the '
+      + 'average energy. How it changes with volume gives the pressure. Combinations give the entropy, the '
+      + 'heat capacity, and the free energy. Every thermodynamic property of the system is recoverable '
+      + 'from this one function, which is why computing it is usually the whole of the work.',
+    antiAnalogy: {
+      tempting: 'dismissing it as a normalisation constant, the sort of factor that makes probabilities add to one',
+      whyItFails:
+        'the curriculum\'s own note names this as the misconception itself. A normalisation constant is '
+        + 'discarded once used. This one is differentiated, and its derivatives are the thermodynamics. '
+        + 'Discarding it throws away everything the calculation was for.',
+    },
+    microCheck: 'The same sum yields the pressure and the heat capacity. What would a mere normalisation constant let you do with it?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.stat.maxwell-boltzmann',
+    subject: 'physics',
+    canonicalIdea: 'Molecular speeds in a gas are spread across a lopsided distribution, and its peak, its average and its root-mean-square value are three different speeds.',
+    concreteAnchor: 'a jar of air in which some molecules crawl and a few move several times the average',
+    plainExplanation:
+      'Molecules in a gas at one temperature do not share one speed. They are spread across a distribution '
+      + 'that rises from zero, peaks, and then trails off with a long tail to the right — a few molecules '
+      + 'always moving several times faster than typical. Because the tail is long and one-sided, the '
+      + 'distribution has no single characteristic speed. The peak is the most common speed. The plain '
+      + 'average is a little higher, dragged up by the tail. The root-mean-square value, which is what '
+      + 'kinetic energy calculations need, is higher still. Warming the gas shifts the whole curve right '
+      + 'and flattens it.',
+    antiAnalogy: {
+      tempting: 'quoting the root-mean-square speed as the one molecules typically travel at',
+      whyItFails:
+        'the curriculum\'s own note flags this exact swap. That value exists because energy depends on the '
+        + 'square of speed, and the long tail pulls it above the peak. It is not the most common speed, '
+        + 'and using it as one misreads the whole shape of the distribution.',
+    },
+    microCheck: 'The distribution has three different characteristic speeds. Why do they not coincide?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.stat.fermi-dirac',
+    subject: 'physics',
+    canonicalIdea: 'Fermions fill states from the bottom up, so even at absolute zero the topmost ones are moving fast, and warming affects only those near the top.',
+    concreteAnchor: 'a metal\'s electrons contributing almost nothing to its heat capacity',
+    plainExplanation:
+      'Because no two fermions may share a state, they stack into the lowest available states from the '
+      + 'bottom up. At absolute zero every state below a certain energy is full and every one above it is '
+      + 'empty, and that dividing energy is high — in a metal, corresponding to tens of thousands of '
+      + 'degrees. The electrons at the top are moving very fast with the system at zero temperature. Warm '
+      + 'the metal to room temperature and only the thin sliver near the dividing line can move, since '
+      + 'everything below has no empty state to move into. That is why the electrons in a metal contribute '
+      + 'far less to its heat capacity than counting them would suggest.',
+    antiAnalogy: {
+      tempting: 'expecting the particles to slow to a stop as the temperature approaches absolute zero',
+      whyItFails:
+        'stopping would mean crowding into the lowest state, which the exclusion rule forbids. The stack '
+        + 'is a consequence of that rule and not of temperature, which is why it survives at zero and why '
+        + 'a white dwarf resists collapse when it has no heat left.',
+    },
+    microCheck: 'Only a thin sliver of a metal\'s electrons can absorb heat. What blocks the rest?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.stat.bose-einstein',
+    subject: 'physics',
+    canonicalIdea: 'Bosons may share a state, and below a critical temperature a large fraction of them occupy the single lowest one.',
+    concreteAnchor: 'a cloud of cold atoms whose velocity distribution grows a sharp spike while the cloud itself stays put',
+    plainExplanation:
+      'Bosons carry no exclusion rule, so any number may sit in the same state. Cool a gas of them far '
+      + 'enough and something abrupt happens: below a particular temperature, a macroscopic fraction '
+      + 'occupies the single lowest-energy state at once, and that fraction grows as cooling continues. '
+      + 'What is being shared is a state of motion, not a location. In the laboratory the signature is a '
+      + 'sharp spike appearing in the distribution of velocities — nearly all the atoms with nearly the '
+      + 'same momentum — while the cloud in the trap remains a cloud, of ordinary size, in ordinary space.',
+    antiAnalogy: {
+      tempting: 'picturing the atoms clumping together into one spot',
+      whyItFails:
+        'the curriculum\'s own note bans this. The condensation happens in the distribution of momentum, '
+        + 'not of position, and the actual cloud stays spread across the trap. Expecting a clump means '
+        + 'looking for the effect in the wrong measurement entirely.',
+    },
+    microCheck: 'The cloud stays the same size in the trap while a spike appears in the velocity distribution. What condensed?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.stat.entropy-statistical',
+    subject: 'physics',
+    canonicalIdea: 'Entropy counts how many microscopic arrangements produce the same macroscopic state, and the count is what the definition is.',
+    concreteAnchor: 'a shuffled pack of cards, where every particular order is equally improbable',
+    plainExplanation:
+      'Entropy is a count. Fix what you can measure about a system — its energy, its volume, its number of '
+      + 'particles — and ask how many distinct microscopic arrangements are consistent with those '
+      + 'measurements. Entropy is the logarithm of that number, so systems with vastly more available '
+      + 'arrangements have higher entropy. This is why a gas spreads out: the spread-out arrangements '
+      + 'outnumber the bunched ones overwhelmingly. Note that a shuffled pack in one particular order is '
+      + 'exactly as improbable as a sorted one; what differs is how many orders we are prepared to call '
+      + 'shuffled.',
+    antiAnalogy: {
+      tempting: 'defining it as a measure of messiness or disorder',
+      whyItFails:
+        'the curriculum\'s own note bans this as a bare definition. Messiness is an impression, and it '
+        + 'gets cases wrong — a crystallising liquid becomes visibly more ordered while the total entropy '
+        + 'rises, because the heat released opens up far more arrangements elsewhere. Counting settles it; '
+        + 'the impression does not.',
+    },
+    microCheck: 'A liquid crystallising looks more ordered, yet total entropy rises. What are you counting to see that?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.stat.free-energy',
+    subject: 'physics',
+    canonicalIdea: 'What a system at fixed temperature settles into is decided by a balance between lowering its energy and increasing its entropy, not by energy alone.',
+    concreteAnchor: 'ice melting on its own above zero and freezing on its own below it',
+    plainExplanation:
+      'A system held at a fixed temperature does not simply seek its lowest energy. It settles where a '
+      + 'particular combination is smallest: its energy, minus its entropy multiplied by the temperature. '
+      + 'Two effects therefore compete, and temperature sets the exchange rate between them. Below zero, '
+      + 'the energy saving of forming ice wins and water freezes by itself. Above zero, the entropy gain '
+      + 'of the liquid wins and ice melts by itself. Nothing about either substance changed at the '
+      + 'crossing point; the balance did. Whichever combination applies — at fixed volume or at fixed '
+      + 'pressure — the structure is the same.',
+    antiAnalogy: {
+      tempting: 'treating it as the system\'s energy budget, the part of its energy available to spend',
+      whyItFails:
+        'the curriculum\'s own note requires the temperature-entropy trade-off to be named. Read as a '
+        + 'budget it predicts that a system always drops to lowest energy, and then ice melting on a warm '
+        + 'day — which raises energy — has no explanation at all.',
+    },
+    microCheck: 'Ice melts on its own above zero although melting takes energy in. What is paying for it?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.stat.grand-canonical-ensemble',
+    subject: 'physics',
+    canonicalIdea: 'When a system can exchange particles as well as heat with its surroundings, the particle count fluctuates and a second control parameter is needed alongside temperature.',
+    concreteAnchor: 'a small region inside a gas, whose molecule count drifts up and down while the whole gas sits still',
+    plainExplanation:
+      'Draw an imaginary box inside a gas. Molecules cross its walls constantly, so its energy fluctuates '
+      + 'and so does the number of particles inside it. Describing such a region needs two knobs from the '
+      + 'surroundings, not one: the temperature, controlling the exchange of energy, and a second quantity '
+      + 'controlling the exchange of particles. Summing the weights over all states and all particle '
+      + 'numbers gives a master function from which averages follow — and, remarkably, working it through '
+      + 'for fermions and for bosons produces the occupation rules for each directly, rather than their '
+      + 'having to be assumed.',
+    antiAnalogy: {
+      tempting: 'reading the particle-exchange parameter as telling you how likely a state is to be occupied',
+      whyItFails:
+        'the curriculum\'s own note names this conflation. That parameter is a property of the reservoir, '
+        + 'set by the surroundings. The occupation of a state is a separate result derived from it '
+        + 'together with the state\'s own energy and the temperature.',
+    },
+    microCheck: 'A region inside a gas needs two knobs from its surroundings, not one. What is the second knob controlling?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.stat.chemical-potential',
+    subject: 'physics',
+    canonicalIdea: 'The chemical potential is the free-energy cost of adding one more particle, and particles flow until it is equal on both sides.',
+    concreteAnchor: 'a sugar cube dissolving until the solution is uniform and then stopping',
+    plainExplanation:
+      'Temperature governs the flow of heat: put two bodies in contact and energy moves until their '
+      + 'temperatures match. The chemical potential does the same job for particles. It is what adding one '
+      + 'more particle costs in free energy, and particles cross a boundary until the cost is the same on '
+      + 'both sides. That is what diffusion actually is, and why a sugar cube dissolves until the solution '
+      + 'is uniform and then stops even though the sugar molecules keep moving. The name is historical and '
+      + 'unhelpful: nothing chemical is required, and for the electrons in a metal at absolute zero this '
+      + 'quantity is exactly the energy dividing the filled states from the empty ones.',
+    antiAnalogy: {
+      tempting: 'taking it for a kind of stored energy the particles carry with them',
+      whyItFails:
+        'it is a cost per particle added, not a possession, and its value depends on the whole system\'s '
+        + 'state — density, temperature, what else is present. Two identical molecules in different '
+        + 'solutions have different values, which no property carried by the molecule could give.',
+    },
+    microCheck: 'Sugar stops dissolving although its molecules are still moving. What has equalised?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.stat.fluctuations-correlations',
+    subject: 'physics',
+    canonicalIdea: 'The size of a system\'s spontaneous fluctuations tells you how strongly it responds when pushed.',
+    concreteAnchor: 'the sky being blue because air density fluctuates on small scales',
+    plainExplanation:
+      'A system in equilibrium is not still. Its energy, density and magnetisation all wobble continually '
+      + 'about their averages. Those wobbles are not noise obscuring the physics — they are the physics. '
+      + 'The size of the energy fluctuation is directly related to the heat capacity, so a system that '
+      + 'wobbles a lot in energy is one that absorbs a lot of heat for a small temperature rise. The same '
+      + 'link holds generally: how much a quantity fluctuates by itself determines how much it responds to '
+      + 'being pushed. Near a critical point the fluctuations grow enormous and so, correspondingly, do '
+      + 'the responses.',
+    antiAnalogy: {
+      tempting: 'treating the fluctuations as random error to be averaged away',
+      whyItFails:
+        'averaging them away discards the response functions, because those are computed from precisely '
+        + 'the quantity being discarded. The wobble is not a measurement imperfection; it is where the '
+        + 'heat capacity and the susceptibility come from.',
+    },
+    microCheck: 'A system that fluctuates a lot in energy has a large heat capacity. Which of those is easier to measure, and what does that buy you?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.stat.phase-transitions',
+    subject: 'physics',
+    canonicalIdea: 'A phase transition is a sudden change in the collective state, described by a quantity that is zero on one side and grows on the other.',
+    concreteAnchor: 'a magnet losing its magnetism entirely above a particular temperature',
+    plainExplanation:
+      'Heat a magnet and above a particular temperature it stops being magnetic — not gradually fading '
+      + 'away over a wide range, but with the magnetisation reaching zero at one point and staying there. '
+      + 'That quantity, zero in the disordered phase and growing below the transition, is the order '
+      + 'parameter, and it is what a description of the transition is built around. The standard approach '
+      + 'writes the free energy as a series in that quantity and lets the temperature control the sign of '
+      + 'the leading term. When the sign flips, the lowest point of the curve moves away from zero, and '
+      + 'the system orders.',
+    antiAnalogy: {
+      tempting: 'expecting the change to happen because individual particles change at the transition',
+      whyItFails:
+        'no individual atom is different above and below the temperature; the same atoms, the same forces. '
+        + 'What changes is what the collection does, and that is why the effect is sharp for a large system '
+        + 'and smeared out for a small one.',
+    },
+    microCheck: 'No individual atom changes at the transition temperature. What does change?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.stat.ising-model',
+    subject: 'physics',
+    canonicalIdea: 'The simplest possible model of interacting spins has no transition in one dimension and a genuine one in two, so dimension itself decides.',
+    concreteAnchor: 'a line of magnets that never stays aligned, and a sheet of the same magnets that does',
+    plainExplanation:
+      'Strip a magnet down to the barest model: sites on a grid, each carrying an arrow that points up or '
+      + 'down, each preferring to agree with its immediate neighbours. In one dimension this can be solved '
+      + 'exactly, and the answer is that no ordered phase survives at any temperature above zero — a '
+      + 'single flipped stretch costs almost nothing and destroys alignment along the whole line. Put the '
+      + 'same sites on a two-dimensional sheet and a flipped region must pay for its whole boundary, which '
+      + 'grows with its size. That is enough to hold order together, and the two-dimensional model has a '
+      + 'real transition at a definite temperature.',
+    antiAnalogy: {
+      tempting: 'assuming that if the rule is the same, the behaviour must be the same in any dimension',
+      whyItFails:
+        'the rule is identical and the outcomes are opposite. What differs is the cost of a boundary: in a '
+        + 'line it is two sites regardless of size, in a sheet it grows with the region. Dimension is not '
+        + 'a detail here; it decides whether order can exist at all.',
+    },
+    microCheck: 'The same rule gives no transition in a line and a real one in a sheet. What costs more in the sheet?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.stat.phase-transitions-critical-phenomena',
+    subject: 'physics',
+    canonicalIdea: 'Close to a critical point quantities follow power laws, and wildly different materials share the same exponents.',
+    concreteAnchor: 'a fluid at its critical point and a magnet at its own, obeying numerically identical laws',
+    plainExplanation:
+      'Approaching a critical point, quantities do not vary smoothly — they follow power laws in the '
+      + 'distance from the critical temperature, some diverging, some vanishing. The striking result is '
+      + 'that the powers themselves are shared. A fluid at its critical point and a magnet at its own obey '
+      + 'laws with numerically identical exponents, though one is about density and the other about '
+      + 'magnetisation. Materials fall into a small number of classes, and membership depends only on the '
+      + 'dimension of space and the nature of the order parameter, not on what the substance is made of. '
+      + 'Very near the critical point the correlated regions grow without bound, and at that scale the '
+      + 'microscopic details wash out.',
+    antiAnalogy: {
+      tempting: 'reading universality as saying the materials themselves are somehow alike',
+      whyItFails:
+        'they are not alike in any other respect — different critical temperatures, different densities, '
+        + 'different chemistry. What they share is the behaviour of the singular part near the critical '
+        + 'point, and only there. A few degrees away they have nothing in common.',
+    },
+    microCheck: 'A fluid and a magnet share exponents but nothing else. Where does that shared behaviour hold?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.stat.monte-carlo-basics',
+    subject: 'physics',
+    canonicalIdea: 'Rather than sum over every configuration, sample them with the right acceptance rule and the averages come out correct.',
+    concreteAnchor: 'a modest lattice with more configurations than there are atoms in the universe',
+    plainExplanation:
+      'A lattice of a few hundred sites, each with two possible values, has more configurations than there '
+      + 'are atoms in the observable universe. No sum over all of them is possible. The alternative is to '
+      + 'wander through configuration space: propose a small change, accept it outright if it lowers the '
+      + 'energy, and accept it with a probability set by the thermal weight if it raises it. That '
+      + 'acceptance rule is chosen so the wandering visits each configuration in proportion to its '
+      + 'equilibrium likelihood, and simple averages over the visits then give the right answers. Near a '
+      + 'critical point the method slows dramatically, because correlated regions grow and single-site '
+      + 'changes stop moving the system anywhere.',
+    antiAnalogy: {
+      tempting: 'reading it as sampling configurations at random and averaging',
+      whyItFails:
+        'uniform random sampling would almost never land on a configuration the system actually occupies, '
+        + 'since the likely ones are a vanishing fraction of the total. The acceptance rule is what makes '
+        + 'the sampling land where the weight is, and without it the average is meaningless.',
+    },
+    microCheck: 'Picking configurations uniformly at random gives a useless average. What does the acceptance rule fix?',
+    ...DRAFTED,
+  },
 ]
 
 export type RemediationCardLookup =
