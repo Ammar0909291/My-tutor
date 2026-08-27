@@ -104,8 +104,20 @@ function splitSentences(text: string): string[] {
     .filter((s) => s.length > 0)
 }
 
+/**
+ * CURLY APOSTROPHES ARE THE DEFAULT, NOT THE EXCEPTION.
+ *
+ * Caught by the first production measurement this module was used for, which is
+ * the only reason it is here. The live turn read "So you're saying you still
+ * don't understand what a kilogram is" with U+2019, every meta pattern was
+ * written with U+0027, and the sentence scored SUBSTANTIVE — so the floor stayed
+ * silent on exactly the reflection-only turn it exists to catch. One character.
+ */
+const straighten = (s: string) => s.replace(/[\u2018\u2019\u02BC]/g, "'")
+
 function isMeta(sentence: string): boolean {
-  return META_SENTENCE.some((re) => re.test(sentence))
+  const s = straighten(sentence)
+  return META_SENTENCE.some((re) => re.test(s))
 }
 
 function contentWordCount(sentence: string): number {

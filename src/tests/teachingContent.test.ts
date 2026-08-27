@@ -26,6 +26,12 @@ const EMPTY_TURNS = [
   'So you\'re saying static friction can change to match whatever push you apply, but only up to a certain maximum—has that got it right?',
   'I hear you. Does that make sense?',
   'It sounds like you are still stuck. Shall we carry on?',
+  // MEASURED IN PRODUCTION, 2026-08-27, with the curly apostrophe the model
+  // actually emits. The first version of this module scored it SUBSTANTIVE and
+  // let it through — one character, and the floor was silent on the exact turn
+  // it exists to catch. Kept verbatim, U+2019 and all.
+  'So you\u2019re saying you still don\u2019t understand what a kilogram is, and you\u2019d like another explanation. Have I got that right?',
+  'I understand you\u2019re still unsure about how friction works. Do I have that right?',
 ]
 
 const REAL_TEACHING = [
