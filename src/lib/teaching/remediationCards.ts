@@ -1362,6 +1362,345 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
     microCheck: 'A beach ball and a stone of the same size go under. Same upward push?',
     ...DRAFTED,
   },
+
+  // ── ROTATION, GRAVITY AND FLUIDS (batch 2 of the physics completion) ──────
+  {
+    conceptId: 'phys.mech.angular-kinematics',
+    subject: 'physics',
+    canonicalIdea: 'Everything on a spinning object turns at the same rate, but the outer parts travel much further.',
+    concreteAnchor: 'two children on a roundabout, one near the middle and one at the edge',
+    plainExplanation:
+      'Two children ride a playground roundabout, one near the centre and one at the rim. They go round '
+      + 'together — one full turn each, at the same moment. In that sense they move identically. But the '
+      + 'child at the rim covers a far bigger circle in that same time, so she is travelling much faster '
+      + 'through the air. Those are two different things worth naming: how fast the whole thing TURNS, '
+      + 'which is shared by every part of it, and how fast a particular point MOVES, which grows the '
+      + 'further out you sit.',
+    antiAnalogy: {
+      tempting: 'saying everything on a spinning object moves together',
+      whyItFails:
+        'the curriculum\'s own note singles this out. They share the angular rate, not the speed, and the '
+        + 'bare phrase makes a learner expect the rim and the centre to be doing the same thing.',
+    },
+    microCheck: 'Two children on a roundabout, one at the rim. Who is moving faster?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.moment-of-inertia',
+    subject: 'physics',
+    canonicalIdea: 'How hard something is to spin up depends on how far its mass sits from the axis, not just how much there is.',
+    concreteAnchor: 'spinning a hammer about its handle end, then about its middle',
+    plainExplanation:
+      'Hold a hammer by the very end of the handle and swing it — heavy work. Hold it in the middle and '
+      + 'swing it — much easier. Same hammer, same mass. What changed is how far the mass sits from the '
+      + 'point you are turning it about, and distance from the axis counts enormously: mass twice as far '
+      + 'out resists four times as much. That is why a figure skater pulls her arms in to spin faster, '
+      + 'and why a tightrope walker carries a long pole. This resistance is not a property of the object '
+      + 'alone; change the axis and it changes.',
+    antiAnalogy: {
+      tempting: 'quoting a formula for a rod without saying which axis it turns about',
+      whyItFails:
+        'the curriculum\'s own note singles this out. It makes the number look like a fixed property of '
+        + 'the rod, when the same rod has a completely different value about its end than about its '
+        + 'centre.',
+    },
+    microCheck: 'Same hammer, held at the end or in the middle. Which is easier to swing?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.rotational-dynamics',
+    subject: 'physics',
+    canonicalIdea: 'A turning effect changes how fast something spins, in proportion to how hard it is to spin.',
+    concreteAnchor: 'a heavy door and a light one on the same hinges',
+    plainExplanation:
+      'Push a heavy door and a light one with the same force at the same place. The light one swings open '
+      + 'quickly, the heavy one slowly. This is the same story as pushing a trolley, told for turning: a '
+      + 'turning effect produces a change in spin, and the harder the object is to spin, the less change '
+      + 'you get. Everything you know about pushes and motion carries across — you just swap force for '
+      + 'turning effect, mass for resistance-to-spinning, and speeding up for spinning up faster.',
+    antiAnalogy: {
+      tempting: 'saying a rolling object\'s energy is just like any moving object\'s',
+      whyItFails:
+        'the curriculum\'s own note singles this out. A rolling object carries energy in its spin as well '
+        + 'as in its travel, and the vague equivalence hides that second store entirely.',
+    },
+    microCheck: 'Same push on a heavy door and a light one. Which speeds up more?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.angular-momentum',
+    subject: 'physics',
+    canonicalIdea: 'Spinning things carry a quantity of turning that depends on both the spin rate and where the mass sits.',
+    concreteAnchor: 'a spinning office chair with your arms out, then pulled in',
+    plainExplanation:
+      'Spin on an office chair with your arms stretched out, then pull them in. You speed up sharply, '
+      + 'without pushing on anything. What stayed the same through that is the amount of turning you '
+      + 'carry — it depends on your spin rate AND on how far your mass is from the axis. Pull the mass '
+      + 'in, and the rate must rise to keep the total unchanged. This is why a diver tucks to somersault '
+      + 'faster and opens out to slow down before entering the water.',
+    antiAnalogy: {
+      tempting: 'saying a turning effect speeds spinning up or slows it down, just as a force does for straight-line motion',
+      whyItFails:
+        'the curriculum\'s own note singles this out. The parallel is only complete if you also say where '
+        + 'the mass sits, which has no counterpart in the straight-line story and is exactly what makes '
+        + 'the skater speed up with no push at all.',
+    },
+    microCheck: 'You pull your arms in while spinning. Why do you speed up?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.conservation-of-angular-momentum',
+    subject: 'physics',
+    canonicalIdea: 'With nothing twisting it from outside, the amount of turning a system carries cannot change.',
+    concreteAnchor: 'a skater pulling in her arms mid-spin',
+    plainExplanation:
+      'A skater spins with her arms out and pulls them in. She speeds up dramatically, and nobody pushed '
+      + 'her. The amount of turning she carries could not change, because nothing outside was twisting '
+      + 'her — so bringing her mass closer to the axis forced the spin rate up to compensate. The same '
+      + 'rule explains why a cat can right itself falling, why a spinning planet keeps spinning for '
+      + 'billions of years, and why a helicopter needs a tail rotor. Something outside must twist the '
+      + 'system before that total can move at all.',
+    antiAnalogy: {
+      tempting: 'saying energy is conserved, so the skater\'s spinning energy stays the same too',
+      whyItFails:
+        'the curriculum\'s own note singles this out. Her spinning energy actually INCREASES when she '
+        + 'pulls in — the work comes from her muscles. Two different quantities, and only one of them is '
+        + 'unchanged.',
+    },
+    microCheck: 'The skater pulls her arms in. Does anything push her to make her spin faster?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.rolling-motion',
+    subject: 'physics',
+    canonicalIdea: 'A rolling object is travelling and spinning at once, and its contact point is momentarily still.',
+    concreteAnchor: 'a ball and a block released together down a slope',
+    plainExplanation:
+      'Release a ball and a sliding block from the top of a slope together and the block wins. Both '
+      + 'started with the same height to spend, but the ball has to put some of it into spinning as well '
+      + 'as travelling, so less is left for going fast. That is the thing to hold on to: a rolling object '
+      + 'carries energy in two places at once. There is one more oddity worth knowing — the point of the '
+      + 'ball actually touching the ground is, for that instant, not moving at all, which is why rolling '
+      + 'does not scuff.',
+    antiAnalogy: {
+      tempting: 'saying a rolling object\'s energy is just like a sliding object\'s',
+      whyItFails:
+        'the curriculum\'s own note singles this out. Erasing the spinning share makes the ball and the '
+        + 'block look identical, and then the race down the slope has no explanation.',
+    },
+    microCheck: 'A ball and a sliding block race down a slope. Which reaches the bottom first?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.gravitational-field',
+    subject: 'physics',
+    canonicalIdea: 'A field is the pull a mass would feel at a place, described before anything is put there.',
+    concreteAnchor: 'the pull you would feel at different heights above the ground',
+    plainExplanation:
+      'Gravity is usually described as a pull between two things. It is often more useful to describe the '
+      + 'space instead: at every point around the Earth there is a certain strength and direction of pull '
+      + 'waiting for whatever is placed there. That description is the field, and it belongs to the '
+      + 'Earth, not to the object. A heavy object and a light one at the same spot feel the same field '
+      + 'and get different forces from it, in proportion to their mass — which is exactly why they fall '
+      + 'at the same rate.',
+    antiAnalogy: {
+      tempting: 'picturing the field as something the falling object carries with it',
+      whyItFails:
+        'the field is a property of the place, made by the Earth. Attaching it to the object makes it '
+        + 'impossible to say why a feather and a hammer fall together in a vacuum.',
+    },
+    microCheck: 'A heavy and a light object at the same spot. Same field? Same force?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.gravitational-potential',
+    subject: 'physics',
+    canonicalIdea: 'Lifting a mass stores energy, and near the ground the simple height rule works only because gravity barely changes.',
+    concreteAnchor: 'lifting a box onto a shelf, and lifting a satellite into orbit',
+    plainExplanation:
+      'Lift a box onto a shelf and the energy stored is simply weight times height. That rule is reliable '
+      + 'in a room, and it works for a reason worth knowing: gravity is essentially the same strength at '
+      + 'the floor and at the ceiling. Go far enough up and that stops being true — gravity weakens with '
+      + 'distance — so the simple rule quietly fails for satellites and rockets, where each extra metre '
+      + 'of height costs less than the last. Near the ground, use the simple rule with confidence. Far '
+      + 'from it, it will mislead you.',
+    antiAnalogy: {
+      tempting: 'using weight times height as a universal rule',
+      whyItFails:
+        'the curriculum\'s own note singles this out. It holds only near a surface where gravity is '
+        + 'effectively constant, and applying it to orbital distances gives badly wrong answers.',
+    },
+    microCheck: 'Does the simple height rule still work for a satellite far above Earth?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.orbital-mechanics',
+    subject: 'physics',
+    canonicalIdea: 'An orbiting object is falling continuously, and a higher orbit means moving slower, not faster.',
+    concreteAnchor: 'a cannonball fired horizontally, harder and harder',
+    plainExplanation:
+      'Fire a cannonball horizontally and it curves to the ground. Fire it harder and it lands further '
+      + 'away. Fire it hard enough and the ground curves away beneath it as fast as it falls — it never '
+      + 'lands, and that is an orbit. It is still falling the whole time; it simply keeps missing. One '
+      + 'result surprises people: a satellite in a higher orbit moves SLOWER, not faster, because gravity '
+      + 'is weaker out there and less speed is needed to keep missing. The Moon takes a month; a low '
+      + 'satellite takes ninety minutes.',
+    antiAnalogy: {
+      tempting: 'saying a higher orbit is a bigger, more energetic orbit and leaving it there',
+      whyItFails:
+        'the curriculum\'s own note singles this out. It is more energetic overall AND slower, and '
+        + 'omitting the speed half leaves the learner predicting the opposite of what happens.',
+    },
+    microCheck: 'A satellite moves to a higher orbit. Faster or slower?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.keplers-laws',
+    subject: 'physics',
+    canonicalIdea: 'Orbits are ellipses, a planet moves fastest when closest, and bigger orbits take disproportionately longer.',
+    concreteAnchor: 'a comet racing past the Sun and crawling at its far point',
+    plainExplanation:
+      'A comet whips past the Sun in weeks and then spends decades crawling through the far end of its '
+      + 'orbit. Three things are going on. Orbits are ellipses, not circles — squashed loops with the Sun '
+      + 'off to one side, not in the middle. A body moves fastest when it is closest and slowest when '
+      + 'furthest. And the further out an orbit is, the disproportionately longer it takes: doubling the '
+      + 'distance more than doubles the year. Earth takes one year, Jupiter five times further out takes '
+      + 'nearly twelve.',
+    antiAnalogy: {
+      tempting: 'saying planets orbit the Sun in circles',
+      whyItFails:
+        'the curriculum\'s own note singles this out. It presents the special case as the general rule, '
+        + 'and a learner holding it cannot explain why a planet\'s speed changes at all.',
+    },
+    microCheck: 'A comet is closest to the Sun. Is it moving fastest or slowest?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.escape-velocity',
+    subject: 'physics',
+    canonicalIdea: 'Escape speed is what an unpowered object needs at launch to coast away and never fall back.',
+    concreteAnchor: 'throwing a ball upwards harder and harder',
+    plainExplanation:
+      'Throw a ball up and it comes back. Throw it harder and it goes higher before returning. There is a '
+      + 'speed — for Earth, about eleven kilometres every second — at which it would never come back at '
+      + 'all, coasting away for ever with nothing pushing it. That is escape speed. The important word is '
+      + 'coasting: a rocket with engines running does not need it, and never reaches it, because it keeps '
+      + 'pushing all the way up. Escape speed matters for something thrown once and then left alone.',
+    antiAnalogy: {
+      tempting: 'saying a rocket needs to reach escape velocity to leave Earth',
+      whyItFails:
+        'the curriculum\'s own note singles this out. A rocket under continuous thrust leaves perfectly '
+        + 'well below that speed. The number describes an unpowered coast, not a launch requirement.',
+    },
+    microCheck: 'A rocket keeps its engines burning. Must it reach escape speed?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.satellites',
+    subject: 'physics',
+    canonicalIdea: 'A satellite is held in orbit by gravity, and how high it flies fixes how long its orbit takes.',
+    concreteAnchor: 'a television dish that never needs re-aiming',
+    plainExplanation:
+      'A satellite television dish is bolted to a wall and never moves, because the satellite it points '
+      + 'at appears to hang still in the sky. It is not still — it is racing round the Earth, at exactly '
+      + 'the height where one orbit takes precisely one day, so it keeps pace with the ground turning '
+      + 'beneath it. Height is what decides that: low satellites go round in about ninety minutes, and '
+      + 'there is only one height that gives a day. Astronauts on board float not because gravity has '
+      + 'gone, but because they are falling around the Earth alongside their spacecraft.',
+    antiAnalogy: {
+      tempting: 'saying there is no gravity in space',
+      whyItFails:
+        'the curriculum\'s own note singles this out. Gravity at the space station is nearly as strong as '
+        + 'on the ground — it is what holds the orbit. Floating is continuous falling, not absence of '
+        + 'gravity.',
+    },
+    microCheck: 'Astronauts float in orbit. Is there gravity up there?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.stress-strain',
+    subject: 'physics',
+    canonicalIdea: 'Stiffness as a material property is separate from how stiff a particular object happens to be.',
+    concreteAnchor: 'a thin steel wire and a thick steel bar',
+    plainExplanation:
+      'A thin steel wire stretches easily; a thick steel bar barely moves. Both are steel, and steel has '
+      + 'not changed. What differs is the shape. To talk about the MATERIAL rather than the object, you '
+      + 'compare the force spread over the area it acts on with the fraction of its length the thing '
+      + 'stretched. Do that and the wire and the bar give the same number — because that number belongs '
+      + 'to steel, not to either object. It is what lets an engineer choose a material before deciding '
+      + 'what shape to make it.',
+    antiAnalogy: {
+      tempting: 'saying the material\'s stiffness number tells you how stiff something is',
+      whyItFails:
+        'the curriculum\'s own note singles this out. It describes the material independent of shape and '
+        + 'size, and the loose phrasing makes the wire and the bar look like different materials.',
+    },
+    microCheck: 'A thin steel wire and a thick steel bar. Same material stiffness number?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.bernoulli',
+    subject: 'physics',
+    canonicalIdea: 'Along a smooth flow, where the fluid speeds up the pressure drops.',
+    concreteAnchor: 'blowing across the top of a strip of paper and watching it rise',
+    plainExplanation:
+      'Hold a strip of paper below your lip and blow across the top of it. The paper lifts. Blowing did '
+      + 'not push it up — the air moving fast above it presses less hard than the still air underneath, '
+      + 'and the paper is pushed up into the gap. That is the trade: along a smooth flow, faster means '
+      + 'lower pressure. It shows up in a shower curtain pulled inwards, in a football that bends, and in '
+      + 'the lift on a wing. It applies along one flowing stream, not between two unrelated places.',
+    antiAnalogy: {
+      tempting: 'explaining wing lift by saying air over the top must go faster to catch up with the air underneath',
+      whyItFails:
+        'the curriculum\'s own note singles this out as a specifically debunked explanation. Air over the '
+        + 'wing arrives well ahead of the air below; there is no catching up, and the story survives only '
+        + 'because it sounds tidy.',
+    },
+    microCheck: 'You blow across the top of the paper. Why does it rise instead of being pushed down?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.surface-tension',
+    subject: 'physics',
+    canonicalIdea: 'A liquid surface behaves like a stretched skin because the molecules there are pulled inwards.',
+    concreteAnchor: 'a paper clip floating on water',
+    plainExplanation:
+      'A steel paper clip laid gently on water floats, although steel is far denser than water. It is not '
+      + 'floating in the ordinary way — it is resting in a dent in the surface. Molecules inside a liquid '
+      + 'are pulled equally in every direction by their neighbours, but a molecule at the surface has '
+      + 'neighbours only below and beside it, so it is pulled inwards. That imbalance makes the surface '
+      + 'behave like a stretched skin. It is why drops pull themselves into spheres and why washing-up '
+      + 'liquid, which weakens it, makes the clip sink.',
+    antiAnalogy: {
+      tempting: 'calling it surface pressure, or a kind of pressure at the surface',
+      whyItFails:
+        'the curriculum\'s own note singles this out. It is a pull along the surface, not a push across '
+        + 'an area, and the wrong word sends the learner reaching for the wrong quantity entirely.',
+    },
+    microCheck: 'Add washing-up liquid under the floating paper clip. What happens?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mech.viscosity',
+    subject: 'physics',
+    canonicalIdea: 'Viscosity is a fluid\'s internal resistance to flowing, and it has nothing to do with how heavy it is.',
+    concreteAnchor: 'honey and water poured from identical jugs',
+    plainExplanation:
+      'Pour honey and pour water. The honey crawls and the water rushes out. Honey resists being made to '
+      + 'flow, because its molecules cling to each other and drag as they slide past. That resistance is '
+      + 'viscosity, and it is a completely separate matter from weight: petrol is thin and floats on '
+      + 'water, while golden syrup is thick and sinks. Viscosity is also strongly affected by '
+      + 'temperature — warm the honey and it pours almost like water, although it weighs exactly the '
+      + 'same as before.',
+    antiAnalogy: {
+      tempting: 'saying thick fluids are heavy fluids',
+      whyItFails:
+        'the curriculum\'s own note singles this out. Density and viscosity are independent, and petrol — '
+        + 'thin but lighter than water — breaks the rule immediately.',
+    },
+    microCheck: 'You warm the honey and it pours easily. Did its weight change?',
+    ...DRAFTED,
+  },
 ]
 
 export type RemediationCardLookup =
