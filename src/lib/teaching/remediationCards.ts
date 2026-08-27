@@ -2262,6 +2262,363 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
     microCheck: 'Can a fridge reach absolute zero if you give it long enough?',
     ...DRAFTED,
   },
+
+  // ── OSCILLATIONS AND WAVES (batch 5) ──────────────────────────────────────
+  {
+    conceptId: 'phys.wave.shm',
+    subject: 'physics',
+    canonicalIdea: 'When the pull back always grows with how far you are from the middle, you get a smooth repeating swing.',
+    concreteAnchor: 'a child on a swing',
+    plainExplanation:
+      'A child on a swing goes fastest at the bottom and stops dead for an instant at each end. The speed '
+      + 'is not steady at all — it changes continuously. What makes the motion so regular is the pull '
+      + 'back towards the middle: the further out the swing goes, the harder it is pulled back. That one '
+      + 'relationship produces the smooth to-and-fro you recognise instantly, and it turns up everywhere '
+      + 'a system is nudged away from a resting position — a plucked string, a bobbing float, a wobbling '
+      + 'ruler on a desk edge.',
+    antiAnalogy: {
+      tempting: 'describing it as moving back and forth at a steady pace',
+      whyItFails:
+        'the curriculum\'s own note singles this out. The speed varies continuously and reaches zero at '
+        + 'both ends. Steady pace makes the learner expect constant speed, which is the one thing this '
+        + 'motion never has.',
+    },
+    microCheck: 'Where on a swing is the child moving fastest?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.wave.shm-energy',
+    subject: 'physics',
+    canonicalIdea: 'The total stays fixed while it sloshes between motion and stored energy twice every swing.',
+    concreteAnchor: 'a swing at the bottom and at the top of its arc',
+    plainExplanation:
+      'At the bottom of its arc a swing is moving fastest and is at its lowest, so nearly all its energy '
+      + 'is motion. At the ends it is momentarily still and at its highest, so nearly all of it is '
+      + 'stored. In between the two trade off continuously. What holds constant through all of that is '
+      + 'the TOTAL — the sum of the two, not either one on its own. That is why the swing returns to the '
+      + 'same height every time until friction takes its cut, and why the trade happens twice per '
+      + 'complete swing rather than once.',
+    antiAnalogy: {
+      tempting: 'saying the motion repeats, so its energy stays the same',
+      whyItFails:
+        'the curriculum\'s own note singles this out for being ambiguous about WHICH energy. The total is '
+        + 'constant; the motion energy swings from maximum to zero and back twice a cycle.',
+    },
+    microCheck: 'At the very top of the swing\'s arc, what has happened to its motion energy?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.wave.pendulum',
+    subject: 'physics',
+    canonicalIdea: 'A pendulum\'s timing depends on its length, and hardly at all on how heavy it is or how far it swings.',
+    concreteAnchor: 'two pendulum clocks, one with a heavier bob',
+    plainExplanation:
+      'Two pendulums of the same length keep the same time even if one bob is twice as heavy. Give one a '
+      + 'bigger push, so it swings wider, and it still keeps time — it simply travels further at higher '
+      + 'speed, and the two effects cancel. What does change the timing is the LENGTH: a longer pendulum '
+      + 'swings more slowly, and that is the whole basis of a pendulum clock. This independence holds for '
+      + 'modest swings; push it out to a really wide arc and it does start to run slow.',
+    antiAnalogy: {
+      tempting: 'saying a bigger swing takes longer',
+      whyItFails:
+        'the curriculum\'s own note singles this out. It becomes true only at large angles. Applied to '
+        + 'ordinary small swings, where the period genuinely does not depend on amplitude, it teaches the '
+        + 'opposite of the useful fact.',
+    },
+    microCheck: 'You double the mass of the pendulum bob. Does it swing more slowly?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.wave.spring-mass',
+    subject: 'physics',
+    canonicalIdea: 'A mass on a spring oscillates faster with a stiffer spring and slower with a heavier mass.',
+    concreteAnchor: 'a weight bouncing on a rubber band, then on a stiff spring',
+    plainExplanation:
+      'Hang a weight on a slack rubber band and it bobs slowly. Hang the same weight on a stiff spring '
+      + 'and it bounces quickly. Stiffness pulls harder for the same stretch, so the mass is turned '
+      + 'around sooner. Add more mass and the bouncing slows, because the same pull now has more to '
+      + 'shift. Those two things — the stiffness and the mass — set the rhythm completely. How far you '
+      + 'pull it down before letting go changes how far it travels each time, and not how long each '
+      + 'bounce takes.',
+    antiAnalogy: {
+      tempting: 'saying a spring stretched further has more energy to give, so it oscillates faster',
+      whyItFails:
+        'the curriculum\'s own note singles this out. Pulling it further gives a bigger swing, not a '
+        + 'quicker one. It conflates how much energy is in the oscillation with how fast the rhythm is.',
+    },
+    microCheck: 'You pull the weight down twice as far before releasing. Does each bounce take longer?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.wave.damped-oscillations',
+    subject: 'physics',
+    canonicalIdea: 'Resistance shrinks the swing steadily while leaving the rhythm almost untouched.',
+    concreteAnchor: 'a swing left alone, and a swing in water',
+    plainExplanation:
+      'Leave a swing alone and the arcs get smaller and smaller until it stops. What is striking is that '
+      + 'the TIMING barely changes — each swing takes about as long as the last, right down to the end. '
+      + 'Air resistance and friction remove energy, so the swing gets smaller, but they hardly touch the '
+      + 'rhythm. Push a swing into water and the effect is dramatic and fast; a car\'s shock absorbers '
+      + 'are designed to be exactly heavy-handed enough that the car settles in one movement without '
+      + 'bouncing at all.',
+    antiAnalogy: {
+      tempting: 'saying damping slows things down',
+      whyItFails:
+        'the curriculum\'s own note singles this out for being vague between amplitude and frequency. It '
+        + 'shrinks the swing, not the rhythm, and the loose phrase makes learners expect a dying swing to '
+        + 'take visibly longer each time.',
+    },
+    microCheck: 'A swing dies away. Does each swing take noticeably longer than the last?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.wave.forced-oscillations',
+    subject: 'physics',
+    canonicalIdea: 'Push something at its own natural rhythm and the swing builds enormously.',
+    concreteAnchor: 'pushing a child on a swing at just the right moment',
+    plainExplanation:
+      'Push a child on a swing at random moments and very little happens — some pushes help, some fight '
+      + 'the motion. Time the pushes to the swing\'s own rhythm and small pushes build into a large arc. '
+      + 'That match is resonance, and it explains a wine glass shattering to a held note, a bridge '
+      + 'swaying under marching feet, and how a radio picks one station out of the air. Damping matters '
+      + 'most exactly at resonance, where it decides how big the build-up gets, and matters very little '
+      + 'when you are pushing at the wrong rhythm anyway.',
+    antiAnalogy: {
+      tempting: 'saying more damping always means a smaller swing',
+      whyItFails:
+        'the curriculum\'s own note singles this out. Near resonance damping is decisive; far from it the '
+        + 'swing is small regardless, and the unqualified rule hides where damping actually does its '
+        + 'work.',
+    },
+    microCheck: 'You push the swing at random times instead of in rhythm. What happens?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.wave.wave-properties',
+    subject: 'physics',
+    canonicalIdea: 'A wave is described by how tall it is, how long it is, and how often it passes.',
+    concreteAnchor: 'sea waves arriving at a harbour wall',
+    plainExplanation:
+      'Waves arriving at a harbour wall can be described completely by three things. How tall they are, '
+      + 'which sets how much energy they carry. How far apart the crests are. And how often a crest '
+      + 'arrives, which is the frequency. Those last two together fix the speed: crests a long way apart '
+      + 'arriving often means the wave is moving quickly. The height is separate from all of that — a '
+      + 'big wave and a small one with the same spacing travel at exactly the same speed.',
+    antiAnalogy: {
+      tempting: 'saying taller waves travel faster',
+      whyItFails:
+        'height carries energy, not speed. Speed is set by the spacing and the arrival rate, and in most '
+        + 'media by the medium itself, which is why all sound reaches you together however loud it is.',
+    },
+    microCheck: 'A big wave and a small one, crests equally spaced. Which arrives first?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.wave.transverse-waves',
+    subject: 'physics',
+    canonicalIdea: 'In a transverse wave the material moves across the direction the wave travels.',
+    concreteAnchor: 'a rope flicked at one end',
+    plainExplanation:
+      'Flick one end of a long rope and a hump runs away down it. Watch any single point on the rope and '
+      + 'it only moves up and down — it never travels along. The HUMP travels; the rope does not. That '
+      + 'crossways motion is what makes the wave transverse, and it is why a ribbon tied to the rope '
+      + 'ends up back where it started. Light waves are transverse too, which is why sunglasses can '
+      + 'block the ones wobbling in one particular direction and let the others through.',
+    antiAnalogy: {
+      tempting: 'thinking the material travels along with the wave',
+      whyItFails:
+        'a floating duck bobs and stays put while the wave passes under it. Believing the water travels '
+        + 'makes it impossible to explain why the duck does not end up on the beach.',
+    },
+    microCheck: 'A wave runs down a rope. Does a ribbon tied to the rope travel with it?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.wave.longitudinal-waves',
+    subject: 'physics',
+    canonicalIdea: 'In a longitudinal wave the material shuffles back and forth along the direction of travel, squeezing and spreading.',
+    concreteAnchor: 'a push given to the end of a slinky',
+    plainExplanation:
+      'Push the end of a stretched slinky sharply and a squeeze runs down its length. The coils move back '
+      + 'and forth along the slinky, not across it, bunching up and spreading out as the disturbance '
+      + 'passes. That is a longitudinal wave, and sound is exactly this in air: regions where the air is '
+      + 'briefly crowded, alternating with regions where it is thinned, racing outwards from whatever '
+      + 'made the noise. Each patch of air jostles in place and stays roughly where it was.',
+    antiAnalogy: {
+      tempting: 'picturing sound as air blowing from the source to your ear',
+      whyItFails:
+        'no air travels the distance — a candle in front of a loudspeaker does not blow out. What '
+        + 'travels is the pattern of crowding, through air that stays put.',
+    },
+    microCheck: 'Sound reaches you from across the room. Did the air travel from there to here?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.wave.wave-speed',
+    subject: 'physics',
+    canonicalIdea: 'How fast a wave travels is set by what it is travelling through, not by whoever made it.',
+    concreteAnchor: 'a tight guitar string and a slack one',
+    plainExplanation:
+      'Tighten a guitar string and waves race along it faster; slacken it and they crawl. The speed '
+      + 'belongs to the string — its tension and how heavy it is — and not to how hard you plucked. '
+      + 'Sound in air travels at the same speed whether you whisper or shout. Light slows down when it '
+      + 'enters glass and speeds up again on the way out. So when a wave crosses into a new material and '
+      + 'its speed changes, its frequency cannot change — it is set by the source — which means the '
+      + 'spacing of the crests must, and that is what bends light.',
+    antiAnalogy: {
+      tempting: 'assuming a stronger source sends the wave faster',
+      whyItFails:
+        'strength sets height, not speed. A shout and a whisper reach you together, and believing '
+        + 'otherwise makes echoes and thunder timing impossible to reason about.',
+    },
+    microCheck: 'You shout instead of whispering. Does the sound reach the far wall sooner?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.wave.superposition',
+    subject: 'physics',
+    canonicalIdea: 'Where two waves meet, the displacements simply add — and then both waves carry on unchanged.',
+    concreteAnchor: 'two ripples crossing on a pond',
+    plainExplanation:
+      'Two ripples crossing on a pond pass straight through each other and come out the other side '
+      + 'unaltered. Where they overlap the water is displaced by the sum of what each wave was asking '
+      + 'for — two crests meeting make a taller crest, a crest meeting a trough partly flattens. Then '
+      + 'they separate and continue exactly as before, carrying no memory of the meeting. That is why '
+      + 'you can hear one voice through another in a crowded room instead of everything scrambling '
+      + 'together.',
+    antiAnalogy: {
+      tempting: 'thinking waves bounce off or block each other when they meet',
+      whyItFails:
+        'they pass through unchanged. The collision picture predicts that a room full of sound would '
+        + 'become noise, and that two torch beams would scatter where they cross.',
+    },
+    microCheck: 'Two ripples cross on a pond. What happens to each one afterwards?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.wave.interference',
+    subject: 'physics',
+    canonicalIdea: 'Two waves arriving in step reinforce; arriving out of step they cancel.',
+    concreteAnchor: 'walking past two loudspeakers playing the same note',
+    plainExplanation:
+      'Two loudspeakers playing the same steady note produce, as you walk past, places that are loud and '
+      + 'places that are surprisingly quiet. At the loud spots the two sounds arrive in step, crest with '
+      + 'crest, and add. At the quiet spots one arrives half a cycle behind and they largely cancel. '
+      + 'Which happens depends only on the difference in distance travelled from the two sources. It is '
+      + 'the same effect that makes oil films iridescent and that noise-cancelling headphones use '
+      + 'deliberately.',
+    antiAnalogy: {
+      tempting: 'saying the energy is destroyed at the quiet spots',
+      whyItFails:
+        'it is redistributed, not lost — the loud places are louder than either speaker alone by exactly '
+        + 'as much as the quiet places are quieter. Destruction of energy would break conservation.',
+    },
+    microCheck: 'At a quiet spot between two speakers, where has the sound energy gone?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.wave.standing-waves',
+    subject: 'physics',
+    canonicalIdea: 'A wave reflected back on itself makes a pattern that stays put, with places that never move.',
+    concreteAnchor: 'a plucked guitar string',
+    plainExplanation:
+      'A plucked guitar string vibrates in a pattern that does not travel — the middle whips up and down '
+      + 'and the ends stay still. Waves are racing along it in both directions, reflecting off each end, '
+      + 'and where they overlap they produce points that never move at all and points that move as much '
+      + 'as possible. Because the ends must be still, only certain wavelengths fit on the string, and '
+      + 'that is why a string of a given length and tension plays one particular note rather than any '
+      + 'note at all.',
+    antiAnalogy: {
+      tempting: 'saying the wave has stopped moving',
+      whyItFails:
+        'two waves are still travelling at full speed in opposite directions. Only the PATTERN is '
+        + 'stationary, and the frozen-wave picture leaves the still points unexplained.',
+    },
+    microCheck: 'Why does a guitar string of a given length play one particular note?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.wave.sound-waves',
+    subject: 'physics',
+    canonicalIdea: 'Sound is a pressure disturbance travelling through a material, and it needs a material to travel through.',
+    concreteAnchor: 'a ringing alarm clock inside a jar being pumped empty',
+    plainExplanation:
+      'An alarm clock ringing inside a jar goes quiet as the air is pumped out, though you can still see '
+      + 'the hammer striking. Sound is a pattern of crowding and thinning passing through a material, '
+      + 'and with no material there is nothing to crowd. It travels faster through things whose '
+      + 'particles are more closely coupled — quicker in water than air, quicker still in steel — which '
+      + 'is why you can hear a train through the rail before you hear it through the air. Pitch is how '
+      + 'often the pressure swings; loudness is how big the swing is.',
+    antiAnalogy: {
+      tempting: 'assuming sound travels faster through thin air than through solids',
+      whyItFails:
+        'it is the opposite. Closely coupled particles pass the disturbance on faster, so sound is '
+        + 'quickest in solids and impossible in a vacuum.',
+    },
+    microCheck: 'The air is pumped out of the jar. Can you still hear the clock?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.wave.sound-intensity',
+    subject: 'physics',
+    canonicalIdea: 'The decibel scale is a scale of ratios, so adding a fixed number of decibels multiplies the energy.',
+    concreteAnchor: 'a whisper, a conversation, and a jet engine',
+    plainExplanation:
+      'A whisper is about thirty decibels, a conversation sixty, a jet engine a hundred and forty. Those '
+      + 'numbers look evenly spaced and are nothing of the sort. Every ten decibels means ten times the '
+      + 'energy arriving, so a conversation carries a thousand times a whisper, and the jet engine is '
+      + 'ten billion times more intense than that whisper. The scale is built this way because human '
+      + 'hearing spans an enormous range and responds in the same multiplying fashion. Doubling the '
+      + 'number of decibels does not double the sound; it makes it unimaginably larger.',
+    antiAnalogy: {
+      tempting: 'reading decibels as an ordinary scale where eighty is twice forty',
+      whyItFails:
+        'eighty decibels is ten thousand times the intensity of forty, not twice. Reading the scale '
+        + 'linearly understates every comparison by orders of magnitude.',
+    },
+    microCheck: 'Sixty decibels and seventy. How much more energy is arriving?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.wave.doppler-effect',
+    subject: 'physics',
+    canonicalIdea: 'Motion between source and listener squashes or stretches the arriving waves, changing the pitch.',
+    concreteAnchor: 'an ambulance siren passing you',
+    plainExplanation:
+      'An ambulance siren sounds high as it comes towards you and drops the moment it passes. The siren '
+      + 'itself never changes. As the ambulance approaches, each crest is emitted a little closer than '
+      + 'the last, so they arrive crowded together and the pitch sounds higher. Going away, they are '
+      + 'stretched out and the pitch falls. The driver hears no change at all. The same effect is how '
+      + 'speed cameras work, and how astronomers know distant galaxies are moving away from us.',
+    antiAnalogy: {
+      tempting: 'saying the siren gets louder and that is why it sounds higher',
+      whyItFails:
+        'loudness and pitch are separate. The pitch shift happens because of the crowding of crests, and '
+        + 'it would occur even if the loudness were held perfectly constant.',
+    },
+    microCheck: 'Does the ambulance driver hear the siren change pitch as it passes you?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.wave.beats',
+    subject: 'physics',
+    canonicalIdea: 'Two nearly matching notes drift in and out of step, making the sound throb.',
+    concreteAnchor: 'tuning a guitar string against another',
+    plainExplanation:
+      'Play two strings tuned almost but not quite alike and the sound wobbles — loud, soft, loud, soft. '
+      + 'The two waves start in step and reinforce, then gradually drift out of step and cancel, then '
+      + 'back in. How often that throb happens is exactly the difference between the two frequencies: '
+      + 'three throbs a second means the notes are three apart. Musicians tune by this, tightening until '
+      + 'the throbbing slows and stops, because a stopped throb means the two are identical.',
+    antiAnalogy: {
+      tempting: 'thinking the throbbing means one string is being played unevenly',
+      whyItFails:
+        'both are perfectly steady. The wobble comes from the two together, and treating it as a fault in '
+        + 'one string removes the tuning method entirely.',
+    },
+    microCheck: 'The throbbing slows down as you tune. Are the notes getting closer or further apart?',
+    ...DRAFTED,
+  },
 ]
 
 export type RemediationCardLookup =
