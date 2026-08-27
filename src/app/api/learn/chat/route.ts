@@ -690,6 +690,15 @@ export async function POST(req: Request) {
     let selectedStrategyHoisted: number | null = null
     let retrievalCacheHoisted: import('@/lib/teaching/retrievalCache').RetrievalCache | null = null
     let conversationDecisionHoisted: import('@/lib/teaching/conversationDecision').ConversationDecision | null = null
+    // H6 — REMEDIATION CARD. `remediationCardText` is the deterministic turn
+    // when a PROMOTED card serves; `remediationCardServedId` is the synthetic
+    // id folded into the EXISTING `explanationsServed` list (no new store, no
+    // new learner state) so the same card is never re-served verbatim;
+    // `remediationSource` is observability only, reported honestly with three
+    // values and never blended.
+    let remediationCardText: string | null = null
+    let remediationCardServedId: string | null = null
+    let remediationSource: 'CURATED_CARD' | 'EXISTING_GROUNDING' | 'LLM_GENERATED' | null = null
     // Option B — Teaching Sequence Executor (physics only): the runtime-
     // selected current step, persisted at end of turn so the next turn
     // resumes from it instead of restarting or improvising.
@@ -4230,6 +4239,74 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         }
       }
 
+      // ── H6: CURATED REMEDIATION CARD ────────────────────────────────────
+      //
+      // THE SEAM THIS CLOSES. H1-H5 fixed detection, routing, arbitration and
+      // grounding, and the live runs still ended factually wrong — because the
+      // model was still AUTHORING the re-explanation. A card is a human's
+      // account of one concept; when one exists and has been PROMOTED, the
+      // turn is built from it instead of written by the model.
+      //
+      // THE AUTHORITY BOUNDARY IS THE LOOKUP, NOT THIS BLOCK. It
+      // returns `servable: false` for anything that is not ACTIVE and
+      // human-approved, so a DRAFT card cannot reach a learner through this
+      // path or any other — every pilot card is DRAFT today, so this block is
+      // a no-op in production until a human promotes one in a reviewed commit.
+      //
+      // TWO TURNS, ONE ACCOUNT. First serve: the card's own words, no provider
+      // call. After that the SAME card stays authoritative but must not be
+      // repeated verbatim, so it is handed to the model as CONSTRAINED SOURCE
+      // — it may re-voice, shorten or question the account, never replace it.
+      // The already-served guard is the EXISTING `explanationsServed` list
+      // (a synthetic `card:<conceptId>` id), so no new learner state exists.
+      if (conversationDecisionHoisted) {
+        try {
+          const { isRemediationTurn } = await import('@/lib/teaching/remediationOutputContract')
+          if (isRemediationTurn(conversationDecisionHoisted.type)) {
+            const { findRemediationCard, renderRemediationCard, buildRemediationCardSourceBlock } =
+              await import('@/lib/teaching/remediationCards')
+            const conceptForCard =
+              excursionDecisionHoisted?.targetConceptId
+              ?? libraryConceptNodeIdHoisted
+              ?? snapshotCurrentConceptId
+              ?? resolvedConceptId
+              ?? null
+            const lookup = conceptForCard
+              ? findRemediationCard(conceptForCard)
+              : ({ servable: false, reason: 'no-card' } as const)
+            if (lookup.servable) {
+              const cardId = `card:${lookup.card.conceptId}`
+              const { hasServedExplanation } = await import('@/lib/teaching/teachingHistory')
+              const already = teachingHistoryHoisted
+                ? hasServedExplanation(teachingHistoryHoisted, cardId)
+                : false
+              remediationSource = 'CURATED_CARD'
+              if (already) {
+                systemPrompt += buildRemediationCardSourceBlock(lookup.card)
+              } else {
+                remediationCardText = renderRemediationCard(lookup.card)
+                remediationCardServedId = cardId
+              }
+              console.log('[remediation-card]', {
+                conceptId: lookup.card.conceptId,
+                remediationSource,
+                mode: already ? 'constrained-source' : 'deterministic-serve',
+              })
+            } else {
+              console.log('[remediation-card]', {
+                conceptId: conceptForCard ?? 'unknown',
+                remediationSource: 'not-card-backed',
+                reason: lookup.reason,
+              })
+            }
+          }
+        } catch (err) {
+          // A card must never take a turn down: absent is the safe outcome,
+          // and the turn is then exactly what it was before this phase.
+          console.warn('[remediation-card] skipped:', err)
+        }
+      }
+
       // ── H5: AUTHORITATIVE GROUNDING FOR A RE-EXPLANATION ────────────────
       //
       // Scoped to remediation turns only (CONFUSION / REPHRASE_REQUEST), and
@@ -4249,7 +4326,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // never checks what the tutor WROTE — H4's boundary is unmoved, and
       // remediationGrounding.ts's own header says so. H3's structural floor
       // still runs afterwards, unchanged.
-      if (conversationDecisionHoisted && !serveFromMemory) {
+      // H6 adds one condition: a card serving deterministically makes no
+      // provider call, so there is no prompt for grounding to qualify.
+      if (conversationDecisionHoisted && !serveFromMemory && !remediationCardText) {
         try {
           const { isRemediationTurn } = await import('@/lib/teaching/remediationOutputContract')
           if (isRemediationTurn(conversationDecisionHoisted.type)) {
@@ -4271,6 +4350,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 canonicalIdea: grounding.sources.canonicalIdea,
                 injected: block.length > 0,
               })
+              // H6 observability: the three sources stay distinct. A card-
+              // backed turn already claimed CURATED_CARD above and never
+              // reaches here; everything else is grounded prose or plain
+              // generation, and the two are never merged into one number.
+              if (remediationSource === null) {
+                remediationSource = block.length > 0 ? 'EXISTING_GROUNDING' : 'LLM_GENERATED'
+              }
               systemPrompt += block
             }
           }
@@ -4384,7 +4470,25 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         }
       }
 
-      if (!serveLessonComplete && assembled && serveFromMemory) {
+      // H6 — THE CARD IS THE TURN. Ahead of Explanation Memory deliberately:
+      // this is a CONFUSION turn, meaning the previous account did not land,
+      // and re-serving a general explanation asset is the failure the learner
+      // just reported. Nothing is generated, so the provider is not called.
+      if (!serveLessonComplete && remediationCardText) {
+        text = remediationCardText
+        provider = 'memory'
+        memoryFallbackReasonCode = 'curated_remediation_card'
+        try { (await import('@/lib/understanding/brainMetrics')).recordServe('memory') } catch { /* observability only */ }
+        console.log(
+          '[learn/chat] RESPONSE provider=memory' +
+          ` resolvedConceptId=${resolvedConceptId ?? 'unknown'}` +
+          ` subject=${learnSession.subject.slug}` +
+          ` source=RemediationCard` +
+          ` remediationSource=${remediationSource}` +
+          ` groq_invoked=false` +
+          ` chars=${text.length}`
+        )
+      } else if (!serveLessonComplete && assembled && serveFromMemory) {
         text = assembled.text
         // The authored probe is this turn's ACTUAL question when it is a
         // multiple-choice item: tappable for the learner, and gradeable next
@@ -7512,6 +7616,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // was never read, so it must stay servable.
             if (provider === 'memory' && assembled?.explanationAssetId) {
               memoryHistory = recordExplanationServed(memoryHistory, assembled.explanationAssetId)
+            }
+            // H6 — the write half of the card's already-served guard. Same
+            // list, same semantics, a synthetic `card:<conceptId>` id: no new
+            // store and no new learner state. Set only on the turn the card's
+            // words actually reached the learner, so a card that was looked up
+            // but not served stays servable.
+            if (remediationCardServedId) {
+              memoryHistory = recordExplanationServed(memoryHistory, remediationCardServedId)
             }
             const confReading = teachingSignal?.confidence
             if (confReading === 'high' || confReading === 'medium' || confReading === 'low') {
