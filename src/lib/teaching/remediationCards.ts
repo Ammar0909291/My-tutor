@@ -5314,6 +5314,325 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
     microCheck: 'Picking configurations uniformly at random gives a useless average. What does the acceptance rule fix?',
     ...DRAFTED,
   },
+  {
+    conceptId: 'phys.rel.postulates',
+    subject: 'physics',
+    canonicalIdea: 'The laws of physics are the same in every frame moving steadily, and the speed of light is one of those laws, so everyone measures it the same.',
+    concreteAnchor: 'a ball thrown straight up inside a smoothly flying aircraft, landing back in your hand',
+    plainExplanation:
+      'Inside a smoothly flying aircraft you can throw a ball straight up and catch it, pour a drink, walk '
+      + 'about — everything works exactly as on the ground, and no experiment done inside can tell you how '
+      + 'fast you are going. That is the first postulate, and it was old news. The second is the shock: the '
+      + 'speed of light is one of those laws, so it comes out the same for everybody. Chase a light beam at '
+      + 'nearly its own speed and it still recedes from you at the full speed. Everything strange in '
+      + 'relativity follows from taking those two statements together and refusing to abandon either.',
+    antiAnalogy: {
+      tempting: 'summarising the whole theory as everything being relative',
+      whyItFails:
+        'the curriculum\'s own note bans this phrasing. The theory\'s core claim is that something is '
+        + 'absolutely not relative — the speed of light, and the laws themselves — and that is precisely '
+        + 'what forces time and length to give way instead.',
+    },
+    microCheck: 'Chasing a light beam does not reduce its measured speed at all. Which of the two postulates is that?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.rel.simultaneity',
+    subject: 'physics',
+    canonicalIdea: 'Whether two separated events happen at the same time genuinely depends on who is asking, and no correction removes the disagreement.',
+    concreteAnchor: 'lightning striking both ends of a moving train, judged simultaneous by one observer and not by the other',
+    plainExplanation:
+      'Lightning strikes both ends of a moving train. Someone standing on the embankment, exactly midway, '
+      + 'sees the two flashes arrive together and concludes the strikes were simultaneous. A passenger at '
+      + 'the middle of the train is moving towards one flash and away from the other, and concludes the '
+      + 'front strike happened first. Both have already accounted for the travel time of the light. Both '
+      + 'are right. There is no fact of the matter about which strike came first, because whether two '
+      + 'separated events are simultaneous depends on the frame, and no frame is privileged.',
+    antiAnalogy: {
+      tempting: 'putting the disagreement down to light taking time to reach each observer',
+      whyItFails:
+        'the curriculum\'s own note bans this reduction. Both observers subtract the travel time and still '
+        + 'disagree. A delay you can correct for is a bookkeeping matter; this survives the correction, '
+        + 'which is what makes it a fact about time rather than about seeing.',
+    },
+    microCheck: 'Both observers correct for how long the light took and still disagree about the order. What does that rule out?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.rel.time-dilation',
+    subject: 'physics',
+    canonicalIdea: 'A clock moving relative to you is measured to run slow, while by its own reckoning it keeps perfectly ordinary time.',
+    concreteAnchor: 'cosmic-ray muons reaching the ground although they should decay far above it',
+    plainExplanation:
+      'Muons created high in the atmosphere live about two millionths of a second, which even at nearly '
+      + 'light speed should take them only a few hundred metres. Enormous numbers of them reach sea level '
+      + 'anyway. From the ground\'s point of view their internal clocks are running slow, so they survive '
+      + 'the trip. From the muon\'s own point of view nothing is odd about its lifetime at all — it is the '
+      + 'atmosphere that is rushing past, thinner than the ground says. The shortest time between two '
+      + 'events is always the one measured by a clock present at both, and every other clock reads longer.',
+    antiAnalogy: {
+      tempting: 'calling the moving clock\'s own reading the true time without saying it is the shorter one',
+      whyItFails:
+        'the curriculum\'s own note requires that clarification. Left vague, true sounds like the one '
+        + 'everyone should agree on, and there is no such reading. Its own time is simply the shortest of '
+        + 'them, and naming which one keeps the comparison straight.',
+    },
+    microCheck: 'The muon reaches the ground and finds nothing odd about its own lifetime. What does it find odd instead?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.rel.length-contraction',
+    subject: 'physics',
+    canonicalIdea: 'An object in motion relative to you is measured shorter along its direction of travel, though nothing has happened to the object.',
+    concreteAnchor: 'the same muon\'s journey, described as a thinner atmosphere rather than a slower clock',
+    plainExplanation:
+      'Measure a fast-moving object along its direction of travel and it comes out shorter than its length '
+      + 'at rest. Nothing has been squeezed and nothing inside it has changed; an observer travelling '
+      + 'alongside measures the full rest length and sees your laboratory contracted instead. The two '
+      + 'descriptions are two accounts of one situation. The muon reaching sea level is the clearest case: '
+      + 'from the ground the muon\'s clock runs slow, and from the muon the atmosphere is much thinner than '
+      + 'the ground claims. Both accounts predict the muon arrives, and they agree on everything anyone '
+      + 'can actually measure.',
+    antiAnalogy: {
+      tempting: 'saying the fast-moving object shrinks, full stop',
+      whyItFails:
+        'the curriculum\'s own note requires naming who is measuring. Shrinking on its own implies '
+        + 'something happened to the object, and then it should be shorter for everyone — while an '
+        + 'observer riding along measures it entirely unchanged.',
+    },
+    microCheck: 'An observer riding alongside measures the object at full length. What does that say about the contraction?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.rel.lorentz-transform',
+    subject: 'physics',
+    canonicalIdea: 'The rules for translating an event\'s time and place between two frames mix time into space and space into time.',
+    concreteAnchor: 'two observers assigning different times and positions to the very same flash',
+    plainExplanation:
+      'Everyday intuition says that if two observers disagree about where something happened they at least '
+      + 'agree about when. Keeping the speed of light the same for both makes that impossible. The correct '
+      + 'translation between their measurements mixes the two: one observer\'s time depends on both the '
+      + 'other\'s time and the other\'s position, and the same in reverse. That mixing is where time '
+      + 'dilation, length contraction and the disagreement about simultaneity all come from — they are not '
+      + 'three separate effects but three readings of one relationship. At everyday speeds the mixing is '
+      + 'far too slight to notice and the familiar rules return.',
+    antiAnalogy: {
+      tempting: 'expecting them to be the ordinary rules with a small correction bolted on for high speed',
+      whyItFails:
+        'the change is structural, not a correction term. Time and position stop being separately '
+        + 'translatable, and no adjustment to the old rules produces a disagreement about simultaneity, '
+        + 'which those rules cannot express at all.',
+    },
+    microCheck: 'Two observers disagree about when a flash happened, not only where. Which everyday assumption has gone?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.rel.relativistic-momentum',
+    subject: 'physics',
+    canonicalIdea: 'Momentum and energy both grow without limit as speed approaches that of light, which is why nothing with mass ever reaches it.',
+    concreteAnchor: 'an accelerator pouring in more and more energy for a smaller and smaller speed increase',
+    plainExplanation:
+      'Push a particle harder and harder and its speed does not climb without limit. As it approaches the '
+      + 'speed of light, its momentum and its energy grow steeply while its speed creeps closer to that '
+      + 'ceiling and never reaches it. Accelerator operators see this daily: the machine pours in energy '
+      + 'and the particles gain very little speed, but a great deal of momentum and energy. That is why no '
+      + 'object with mass can reach light speed — it would take an infinite amount of energy — and why a '
+      + 'particle with no mass at all travels at exactly that speed and no other.',
+    antiAnalogy: {
+      tempting: 'reading the mass-energy relation as saying matter turns into pure energy',
+      whyItFails:
+        'the curriculum\'s own note bans this unqualified reading. In a nuclear reaction less than a '
+        + 'percent of the mass is converted and the rest remains as ordinary matter. Total conversion '
+        + 'happens only when a particle meets its own antiparticle, which is a specific and rare event.',
+    },
+    microCheck: 'An accelerator adds enormous energy and the speed barely rises. What is receiving the energy?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.rel.mass-energy',
+    subject: 'physics',
+    canonicalIdea: 'Mass is a form of energy, so a system that gives out energy weighs less afterwards — including systems that are not nuclear.',
+    concreteAnchor: 'a wound clock spring weighing very slightly more than a slack one',
+    plainExplanation:
+      'Mass and energy are the same quantity in different units, and the conversion factor is the speed of '
+      + 'light squared — an enormous number, which is why a tiny mass corresponds to a vast energy. This '
+      + 'is not confined to nuclear physics. A wound clock spring weighs very slightly more than the same '
+      + 'spring slack, and a hot object weighs slightly more than a cold one. The differences are far too '
+      + 'small to weigh in those cases. In a nuclear reaction the energies are large enough that the mass '
+      + 'change is measurable, which is why the relation is met there first and often mistaken for a '
+      + 'nuclear rule.',
+    antiAnalogy: {
+      tempting: 'treating it as a rule that applies only inside nuclei',
+      whyItFails:
+        'it applies to every system that stores or releases energy, chemical and mechanical alike. What is '
+        + 'special about nuclear reactions is not the physics but the scale — the mass change is finally '
+        + 'big enough to detect.',
+    },
+    microCheck: 'A wound spring weighs more than a slack one. Why is that never noticed?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.rel.spacetime',
+    subject: 'physics',
+    canonicalIdea: 'Observers disagree about times and distances separately but agree exactly on one combination of them.',
+    concreteAnchor: 'two people measuring a stick along different axes and still agreeing on its length',
+    plainExplanation:
+      'Two people using differently oriented axes assign different sideways and forwards components to the '
+      + 'same stick, yet both compute the same length from them. Relativity has a counterpart. Observers '
+      + 'in relative motion disagree about the time between two events and about the distance between '
+      + 'them, but one particular combination of those two — with the time part entering with the opposite '
+      + 'sign to the space part — comes out identical for everyone. That invariant is the real geometric '
+      + 'fact about the pair of events, and its sign says whether one event could have influenced the '
+      + 'other or whether nothing, not even light, could have travelled between them.',
+    antiAnalogy: {
+      tempting: 'treating time as simply a fourth direction just like the three of space',
+      whyItFails:
+        'it enters the invariant with the opposite sign, and that difference is everything. It is what '
+        + 'separates pairs of events with a possible cause-and-effect link from those without, and a '
+        + 'fourth ordinary direction would make no such distinction.',
+    },
+    microCheck: 'Observers disagree on the time and on the distance but agree on one combination. What does its sign tell you?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.astro.stellar-structure',
+    subject: 'physics',
+    canonicalIdea: 'A star is a balance between gravity pulling in and pressure from fusion pushing out, and that balance is self-correcting.',
+    concreteAnchor: 'the Sun holding the same size for billions of years without a container',
+    plainExplanation:
+      'A star has no container. It holds itself together because gravity pulls every layer inward while '
+      + 'pressure from the hot interior pushes outward, and at every depth those two exactly balance. The '
+      + 'balance regulates itself: if fusion in the core ran faster, the extra heat would expand the star, '
+      + 'the core would cool, and fusion would slow again. That thermostat is why stars are stable for '
+      + 'billions of years, and why the main sequence is a narrow band rather than a scatter — a star\'s '
+      + 'mass essentially fixes its brightness, its temperature and its lifetime. More massive stars burn '
+      + 'far hotter and die far sooner.',
+    antiAnalogy: {
+      tempting: 'picturing a star as a ball of fire, burning like a bonfire',
+      whyItFails:
+        'burning is a chemical reaction between electrons and would exhaust the Sun in a few thousand '
+        + 'years. What sustains it happens in the nuclei, releases millions of times more per reaction, '
+        + 'and requires the crushing pressure that gravity alone provides.',
+    },
+    microCheck: 'If the Sun\'s core briefly ran faster, the star would expand and the core would cool. What does that do to the rate?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.astro.stellar-evolution',
+    subject: 'physics',
+    canonicalIdea: 'What a star becomes at the end is decided by its mass, and each end state is held up by a different mechanism.',
+    concreteAnchor: 'a teaspoon of white dwarf weighing tonnes, and a teaspoon of neutron star weighing a billion of them',
+    plainExplanation:
+      'When a star exhausts the fuel in its core the balance fails and it collapses until something new '
+      + 'stops it. For a modest star like the Sun, the electrons are packed so tightly that the exclusion '
+      + 'rule itself resists further compression, and what remains is a white dwarf. Above a certain mass '
+      + 'that resistance is overwhelmed and something different happens: the electrons are forced into the '
+      + 'protons, converting them to neutrons, and the object that remains is made of different matter '
+      + 'entirely, supported by the neutrons resisting compression instead. Heavier still and nothing '
+      + 'stops the collapse at all.',
+    antiAnalogy: {
+      tempting: 'describing a neutron star as a white dwarf squeezed a bit further',
+      whyItFails:
+        'the curriculum\'s own note requires naming the conversion. It is not the same material more '
+        + 'compressed — the electrons and protons have combined into neutrons, so the composition changed '
+        + 'and so did what holds the object up. A continuous squeeze cannot produce either.',
+    },
+    microCheck: 'A neutron star is not simply a smaller white dwarf. What happened to the electrons?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.astro.cosmology',
+    subject: 'physics',
+    canonicalIdea: 'The universe began hot and dense and has been expanding and cooling since; the expansion is of space itself, with no centre.',
+    concreteAnchor: 'the faint microwave glow arriving from every direction of the sky at once',
+    plainExplanation:
+      'Distant galaxies recede from us, and the further away they are the faster they go — in every '
+      + 'direction. That is not us sitting at a centre; it is what expansion looks like from any point in '
+      + 'it, since every observer everywhere sees the same thing. Running it backwards gives a hot dense '
+      + 'beginning, and that prediction can be checked. When the universe had cooled enough for atoms to '
+      + 'form, the light then present was set free, and it has been stretching ever since. It arrives '
+      + 'today as a faint microwave glow from every direction, at the temperature the theory predicted '
+      + 'before it was found.',
+    antiAnalogy: {
+      tempting: 'imagining an explosion at a particular point, with galaxies flying outward through space',
+      whyItFails:
+        'an explosion has a centre and an edge, and the glow arrives equally from every direction with no '
+        + 'sign of either. What expands is space between the galaxies, not the galaxies rushing through '
+        + 'it — which is also why distant ones can recede faster than light without anything overtaking a '
+        + 'light beam.',
+    },
+    microCheck: 'The microwave glow arrives equally from every direction. What would an explosion at a point have produced instead?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.astro.dark-matter',
+    subject: 'physics',
+    canonicalIdea: 'Two separate observations require far more gravitating matter than we can see, and a repulsive effect driving the expansion faster — and neither is understood.',
+    concreteAnchor: 'a galaxy whose outer stars orbit as fast as its inner ones',
+    plainExplanation:
+      'Stars in the outskirts of a galaxy should orbit more slowly than the inner ones, the way outer '
+      + 'planets do. They do not — the speed stays roughly flat far out, which means far more mass than '
+      + 'the visible stars provide, distributed well beyond them. The same conclusion arrives '
+      + 'independently from how clusters bend light and from the pattern in the microwave glow. Separately, '
+      + 'measurements of distant supernovae showed the expansion is not slowing under gravity but '
+      + 'speeding up, which requires something else again. Both are named for what we do not know about '
+      + 'them, and neither name is an explanation.',
+    antiAnalogy: {
+      tempting: 'treating dark matter as ordinary matter that is simply too faint to see',
+      whyItFails:
+        'ordinary matter that dim would still absorb and scatter light from behind it, and the amount '
+        + 'needed is ruled out by how much helium the early universe produced. Whatever it is, it '
+        + 'interacts gravitationally and essentially not otherwise.',
+    },
+    microCheck: 'Outer stars in a galaxy orbit as fast as inner ones. What does that require?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.astro.black-holes',
+    subject: 'physics',
+    canonicalIdea: 'A black hole is a region from which no path leads outward, bounded by a surface that is not made of anything.',
+    concreteAnchor: 'stars orbiting an invisible object at the centre of our galaxy, tracked for decades',
+    plainExplanation:
+      'Concentrate enough mass in a small enough region and the curvature of spacetime becomes so extreme '
+      + 'that every path leading away from the centre curves back in — including the paths light would '
+      + 'take. The boundary of that region is the horizon. It is not a wall or a surface of any material; '
+      + 'nothing marks it locally, and an infalling observer crosses it without noticing. Its radius '
+      + 'depends only on the mass. At the centre of our galaxy, stars have been tracked for decades '
+      + 'orbiting something with millions of times the Sun\'s mass and no light of its own.',
+    antiAnalogy: {
+      tempting: 'thinking of it as a cosmic vacuum cleaner that sucks in everything nearby',
+      whyItFails:
+        'at a distance its gravity is exactly that of any object of the same mass. Replace the Sun with a '
+        + 'black hole of the Sun\'s mass and Earth\'s orbit would not change at all — it would only go '
+        + 'dark. Falling in requires getting close, and nothing does the pulling that ordinary gravity '
+        + 'would not.',
+    },
+    microCheck: 'Swapping the Sun for a black hole of the same mass leaves Earth\'s orbit unchanged. What does that tell you about its pull?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.astro.gravitational-waves',
+    subject: 'physics',
+    canonicalIdea: 'Accelerating masses send ripples through spacetime itself, which stretch and squeeze everything they pass through.',
+    concreteAnchor: 'detector arms four kilometres long, changing length by a fraction of a proton\'s width',
+    plainExplanation:
+      'A mass that accelerates unevenly sends out ripples in the geometry of spacetime, travelling at the '
+      + 'speed of light. As one passes, distances stretch slightly in one direction and squeeze in the '
+      + 'perpendicular one, then reverse. The effect is almost unimaginably small: the strongest events '
+      + 'known — two black holes spiralling together — change the length of a four-kilometre detector arm '
+      + 'by a fraction of the width of a proton. Measuring that was done by bouncing laser light along two '
+      + 'perpendicular arms and watching for the difference. The first detection came in 2015, a century '
+      + 'after the prediction.',
+    antiAnalogy: {
+      tempting: 'picturing them as waves travelling through space, the way sound moves through air',
+      whyItFails:
+        'there is no medium being disturbed. What oscillates is the separation between things — the '
+        + 'geometry itself — which is why a detector measures its own arms changing length rather than '
+        + 'something arriving and pushing on them.',
+    },
+    microCheck: 'The detector measures its own arms changing length. What is passing through, if not something in a medium?',
+    ...DRAFTED,
+  },
 ]
 
 export type RemediationCardLookup =
