@@ -4604,6 +4604,369 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
     microCheck: 'Two beams agree on one measurement and disagree on another. What has the mixture lost that the superposition kept?',
     ...DRAFTED,
   },
+  {
+    conceptId: 'phys.particle.four-forces',
+    subject: 'physics',
+    canonicalIdea: 'Four forces account for every interaction, and they differ in strength, in how far they reach, and in what they can touch.',
+    concreteAnchor: 'a fridge magnet lifting a paperclip against the pull of the entire Earth',
+    plainExplanation:
+      'A small magnet picks up a paperclip while the whole planet pulls the other way and loses. That is '
+      + 'how enormously weaker gravity is than electromagnetism. Yet gravity is what shapes galaxies, '
+      + 'because it never cancels — there is no negative mass to balance it, while positive and negative '
+      + 'charge in ordinary matter cancel almost perfectly. Two more forces act only inside the nucleus '
+      + 'and reach no further: the strong one, which is stronger still than electromagnetism and holds '
+      + 'quarks and nuclei together, and the weak one, which is feeble but is the only force able to '
+      + 'change one kind of particle into another.',
+    antiAnalogy: {
+      tempting: 'ranking them by strength alone and concluding gravity hardly matters',
+      whyItFails:
+        'reach and cancellation decide what a force does at large scale, not raw strength. The strong '
+        + 'force is the most powerful of the four and is undetectable a nuclear diameter away; gravity is '
+        + 'the feeblest and runs the universe.',
+    },
+    microCheck: 'The strong force is far stronger than gravity, yet gravity shapes galaxies. What does gravity have that the strong force lacks?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.particle.particle-classification',
+    subject: 'physics',
+    canonicalIdea: 'Particles divide by whether the strong force acts on them: hadrons are built from quarks and feel it, leptons are not and do not.',
+    concreteAnchor: 'a muon punching through a mountain of rock that stops a proton dead',
+    plainExplanation:
+      'The dividing line is not size or mass but which forces touch a particle. Hadrons — protons, '
+      + 'neutrons, and a long list of shorter-lived relatives — are built out of quarks and feel the '
+      + 'strong force, which is why they clump into nuclei and why they are stopped quickly by matter. '
+      + 'Leptons, the electron and its heavier relatives together with the neutrinos, have no quarks '
+      + 'inside them and the strong force ignores them entirely. That is why cosmic-ray muons pass through '
+      + 'hundreds of metres of rock and are detected in deep mines, while a proton of the same energy is '
+      + 'stopped near the surface.',
+    antiAnalogy: {
+      tempting: 'reading leptons as the smallest possible particles',
+      whyItFails:
+        'the curriculum\'s own note bans this. Having no known substructure is not the same as being '
+        + 'small or light — the tau lepton is heavier than a proton, which is itself made of quarks. The '
+        + 'classification is about which force acts, not about size.',
+    },
+    microCheck: 'A muon crosses a mountain that stops a proton. Which force is the difference?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.particle.antimatter',
+    subject: 'physics',
+    canonicalIdea: 'Every particle has a partner of identical mass and opposite charge; a pair can annihilate into energy and enough energy can create one.',
+    concreteAnchor: 'a PET scanner, which images the body by detecting antimatter annihilating inside it',
+    plainExplanation:
+      'For each particle there is a partner with exactly the same mass and opposite electric charge. Bring '
+      + 'a particle and its own partner together and both vanish, their entire mass converted into energy '
+      + 'carried off as light. The reverse also runs: concentrate enough energy in a small space and a '
+      + 'pair appears, always as a pair, never one alone. Hospitals use this daily. A PET scan injects a '
+      + 'substance that emits the electron\'s partner; each one meets an ordinary electron within a '
+      + 'millimetre or so, both annihilate, and the two flashes of light that fly out in opposite '
+      + 'directions are what the scanner detects.',
+    antiAnalogy: {
+      tempting: 'imagining antimatter as matter with negative mass, something that would fall upwards',
+      whyItFails:
+        'the curriculum\'s own note rules this out. The mass is identical and positive — that is measured, '
+        + 'and it is why the annihilation releases the energy it does. What is opposite is the charge. No '
+        + 'experiment supports anything falling upwards.',
+    },
+    microCheck: 'A particle and its partner annihilate and release energy. What does that tell you about the partner\'s mass?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.particle.quarks',
+    subject: 'physics',
+    canonicalIdea: 'Quarks carry fractions of the elementary charge and come in six kinds, and none has ever been seen alone.',
+    concreteAnchor: 'a proton made of three quarks whose charges are thirds, adding to exactly one',
+    plainExplanation:
+      'Every hadron is built from quarks, which come in six kinds and carry electric charges that are '
+      + 'fractions — two-thirds and minus one-third of the electron\'s charge. A proton is two of the '
+      + 'first kind and one of the second, and those thirds add to exactly one. A neutron swaps the '
+      + 'proportion and adds to zero. Only the two lightest kinds make up ordinary matter; the other four '
+      + 'are heavier, appear in collisions, and decay in fractions of a second. No experiment has ever '
+      + 'isolated a single quark, and that is not a limitation of equipment but a consequence of how the '
+      + 'strong force behaves.',
+    antiAnalogy: {
+      tempting: 'expecting a hard enough collision to knock one quark loose so it can be examined',
+      whyItFails:
+        'pulling quarks apart costs more and more energy, and long before one is free the energy invested '
+        + 'has created a fresh quark and partner. You end up with two hadrons instead of one loose quark, '
+        + 'every time.',
+    },
+    microCheck: 'Hitting a proton hard enough to free a quark produces more hadrons instead. Where did the energy go?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.particle.leptons',
+    subject: 'physics',
+    canonicalIdea: 'The leptons come in three generations, each a charged particle paired with its own neutrino, and decays between them conserve the pairing.',
+    concreteAnchor: 'a muon lasting about two millionths of a second before turning into three particles',
+    plainExplanation:
+      'There are three charged leptons — the electron, and the heavier muon and tau — and each comes '
+      + 'paired with a neutrino of its own type. A muon is not a fatter electron; it is a distinct '
+      + 'particle, roughly two hundred times heavier, and it lives about two millionths of a second. What '
+      + 'it turns into is an electron plus two neutrinos: one of the muon\'s own type and one belonging to '
+      + 'the electron\'s. Both neutrinos are required, because the tally of each generation has to balance '
+      + 'separately, and without them the decay would be forbidden.',
+    antiAnalogy: {
+      tempting: 'describing the muon as a heavy electron that eventually just shrinks into a light one',
+      whyItFails:
+        'the curriculum\'s own note requires the two neutrinos to be named every time. Left out, the decay '
+        + 'looks like one particle losing weight, and there is no way to see why it could not simply keep '
+        + 'shrinking — or why the generation tallies matter at all.',
+    },
+    microCheck: 'A muon decays into an electron and two neutrinos rather than into an electron alone. What are the neutrinos there for?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.particle.neutrinos',
+    subject: 'physics',
+    canonicalIdea: 'Neutrinos feel only the weak force, so they pass through almost everything, and detecting them takes enormous detectors and patience.',
+    concreteAnchor: 'a tank of water deep in a mine, watched for years to catch a handful of them',
+    plainExplanation:
+      'Neutrinos have no electric charge and the strong force ignores them, so the only way they interact '
+      + 'is through the weak force — and weak means what it says. About sixty billion from the Sun pass '
+      + 'through every square centimetre of you each second, day and night, and essentially all of them '
+      + 'continue straight through the Earth without touching anything. Catching them means an enormous '
+      + 'volume of material, deep underground to keep everything else out, watched for years. Doing it '
+      + 'is worth the trouble: neutrinos come straight out of the Sun\'s core, which nothing else does.',
+    antiAnalogy: {
+      tempting: 'assuming they slip through because they are so small',
+      whyItFails:
+        'an electron is no larger and is stopped by a sheet of foil. What matters is which forces can act '
+        + 'on a particle, and a neutrino has only the feeblest of them. Size is not the variable.',
+    },
+    microCheck: 'An electron is stopped by foil and a neutrino crosses the Earth. What is different about them?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.particle.hadron-quark-model',
+    subject: 'physics',
+    canonicalIdea: 'Hadrons come in two shapes: three quarks together, or a quark paired with an antiquark, and the quark content fixes the charge.',
+    concreteAnchor: 'a particle predicted from a gap in a chart, then found with exactly the predicted mass and charge',
+    plainExplanation:
+      'Hadrons come in exactly two arrangements. Three quarks bound together make a baryon — the proton '
+      + 'and neutron among them. A quark bound to an antiquark makes a meson, which is why mesons are '
+      + 'short-lived: the pair inside can annihilate. Adding up the fractional charges of the constituents '
+      + 'gives the hadron\'s charge every time, and arranging the known hadrons by their quark content '
+      + 'produced a chart with one conspicuous gap. The particle that would fill it was described in '
+      + 'advance — its charge, its mass, how it would decay — and then found, with the predicted '
+      + 'properties. That is what turned the model from bookkeeping into physics.',
+    antiAnalogy: {
+      tempting: 'supposing quarks can be assembled in any number, the way atoms build molecules of any size',
+      whyItFails:
+        'only two combinations occur, and the reason lies in the strong force\'s own charge, which must '
+        + 'cancel completely in any observable particle. Three quarks cancel it one way and a quark with '
+        + 'an antiquark cancels it another; nothing else does.',
+    },
+    microCheck: 'Only two arrangements of quarks are ever seen. What must cancel out in any particle you can observe?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.particle.gauge-bosons',
+    subject: 'physics',
+    canonicalIdea: 'Each force is carried by exchanged particles, and the mass of the carrier sets how far the force reaches.',
+    concreteAnchor: 'electromagnetism reaching across the galaxy while the weak force stops inside a nucleus',
+    plainExplanation:
+      'Forces are not transmitted by contact but by particles passed between the interacting objects. '
+      + 'Electromagnetism is carried by photons, which have no mass, and that is exactly why it reaches '
+      + 'without limit — starlight crosses the galaxy. The weak force is carried by particles roughly '
+      + 'eighty times heavier than a proton, and a heavy carrier cannot travel far before the exchange '
+      + 'must be complete, which confines that force inside the nucleus. The strong force is carried by '
+      + 'gluons, massless like photons, but they carry the strong charge themselves and interact with '
+      + 'each other, which limits its reach for a different reason.',
+    antiAnalogy: {
+      tempting: 'thinking of the carriers as messengers physically thrown between the two objects',
+      whyItFails:
+        'thrown objects can only push things apart, and these produce attraction as readily as repulsion. '
+        + 'The exchange is not a delivery; it is how the interaction is accounted for, and the carrier\'s '
+        + 'mass is what fixes the range.',
+    },
+    microCheck: 'Electromagnetism reaches across a galaxy and the weak force stops inside a nucleus. What property of the carriers accounts for that?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.particle.strong-interaction',
+    subject: 'physics',
+    canonicalIdea: 'The strong force acts on a charge that comes in three varieties, and unlike every other force it does not weaken with distance.',
+    concreteAnchor: 'pulling two quarks apart and producing two new hadrons rather than two loose quarks',
+    plainExplanation:
+      'The strong force acts on a charge unrelated to electric charge, which comes in three varieties and '
+      + 'must cancel completely in anything observable — three quarks each carrying a different variety '
+      + 'cancel it, and so does a quark with the matching anticharge. What makes this force unlike the '
+      + 'others is its distance behaviour. Gravity and electromagnetism fade as things separate. This one '
+      + 'does not: pull two quarks apart and the force between them stays roughly constant, like a strong '
+      + 'elastic band, so the energy needed keeps mounting. Eventually there is enough energy to create a '
+      + 'new quark pair, the band snaps into two shorter bands, and you have two hadrons.',
+    antiAnalogy: {
+      tempting: 'expecting it to fade with distance like every other force you have met',
+      whyItFails:
+        'that expectation predicts free quarks at sufficient energy, and none has ever been seen. The '
+        + 'force not fading is precisely why they cannot be separated, and it is why the energy you invest '
+        + 'in pulling comes back as new particles instead.',
+    },
+    microCheck: 'Every other force weakens as things separate. What happens instead when you pull two quarks apart?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.particle.weak-interaction',
+    subject: 'physics',
+    canonicalIdea: 'The weak force is the only one that changes a particle into a different kind, which is why it is behind beta decay.',
+    concreteAnchor: 'a free neutron turning into a proton after about a quarter of an hour',
+    plainExplanation:
+      'A neutron outside a nucleus does not last. After about fifteen minutes on average it becomes a '
+      + 'proton, emitting an electron and an antineutrino. Nothing struck it and nothing was added; one of '
+      + 'the quarks inside it changed into a different kind of quark. That conversion of one flavour into '
+      + 'another is something no other force can do — the strong force and electromagnetism can move '
+      + 'particles and bind them, but they cannot change what a particle is. The weak force can, and beta '
+      + 'decay, the Sun\'s first fusion step and every radioactive process of that family run on it.',
+    antiAnalogy: {
+      tempting: 'picturing the emitted electron as one that was sitting inside the neutron all along',
+      whyItFails:
+        'there is no electron in there to emit. It is created at the moment of the decay, along with the '
+        + 'antineutrino, out of the energy released — which is why the electron comes out with a range of '
+        + 'energies rather than one fixed value.',
+    },
+    microCheck: 'A neutron becomes a proton with nothing striking it. Which force can change what a particle is?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.particle.electroweak-unification',
+    subject: 'physics',
+    canonicalIdea: 'Electromagnetism and the weak force are one force whose two faces look utterly different only because we live at low energy.',
+    concreteAnchor: 'the W and Z particles, predicted with their masses before anyone found them',
+    plainExplanation:
+      'Electromagnetism reaches across the galaxy and the weak force barely leaves a nucleus, so they look '
+      + 'like nothing alike. At sufficiently high energy they stop looking different: they are two aspects '
+      + 'of one interaction, and what separates them at ordinary energies is that the weak carriers '
+      + 'acquired mass while the photon did not. The theory that says so predicted the masses of those '
+      + 'weak carriers before anyone had produced them, and predicted a further neutral carrier nobody had '
+      + 'looked for. Both turned up at the predicted masses. That is the kind of evidence that settles the '
+      + 'matter.',
+    antiAnalogy: {
+      tempting: 'reading unification as one force having been renamed, or two forces added together',
+      whyItFails:
+        'unification made a specific prediction about particles nobody had seen and got their masses '
+        + 'right. Renaming predicts nothing. What was unified is the description, and the test was whether '
+        + 'it forecast something new.',
+    },
+    microCheck: 'The two forces look nothing alike at everyday energies. What makes them differ?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.particle.higgs-mechanism',
+    subject: 'physics',
+    canonicalIdea: 'Mass arises from how strongly a particle interacts with a field filling all of space, not from any substance added to it.',
+    concreteAnchor: 'the weak force carriers being heavy while the photon carrying electromagnetism is not',
+    plainExplanation:
+      'A field fills all of space, and particles interact with it to differing degrees. A particle that '
+      + 'interacts strongly with it resists being accelerated — and resistance to acceleration is exactly '
+      + 'what mass is. One that does not interact with it at all, like the photon, has no mass and travels '
+      + 'at the universal speed. That is why the weak force\'s carriers are heavy while the photon is not, '
+      + 'though they belong to one unified interaction. The boson found in 2012 is not the source of mass; '
+      + 'it is a ripple in that field, and finding it is how the field itself was confirmed to exist.',
+    antiAnalogy: {
+      tempting: 'picturing the boson as extra weight bolted onto a particle to make it heavy',
+      whyItFails:
+        'the curriculum\'s own note bans this framing. Mass here is not a substance attached but a '
+        + 'consequence of how strongly a particle couples to a field that is everywhere. Nothing is '
+        + 'added, and the boson is evidence of the field rather than the cargo.',
+    },
+    microCheck: 'The photon has no mass and the weak carriers are heavy, though they belong to one interaction. What differs between them?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.particle.conservation-laws',
+    subject: 'physics',
+    canonicalIdea: 'Some reactions are forbidden by a tally that must balance, and no amount of energy makes a forbidden reaction happen.',
+    concreteAnchor: 'the proton, which has never been observed to decay despite decades of watching',
+    plainExplanation:
+      'Alongside energy, charge and momentum, particle reactions keep two further tallies. One counts '
+      + 'baryons, the three-quark particles; the other counts leptons. Both must come out the same before '
+      + 'and after. This is why the proton, the lightest baryon there is, appears to be stable: anything '
+      + 'it could decay into would have fewer baryons, so the books would not balance. Experiments have '
+      + 'watched enormous tanks of water for decades and seen no proton decay at all. A reaction that '
+      + 'breaks one of these tallies is not merely unlikely or expensive — it does not occur, however '
+      + 'much energy is available.',
+    antiAnalogy: {
+      tempting: 'assuming a forbidden reaction just needs enough energy to force it through',
+      whyItFails:
+        'energy answers a different question. A reaction can be energetically comfortable and still never '
+        + 'happen because a tally would not balance, and a reaction needing enormous energy happens '
+        + 'readily once supplied. The two conditions are separate and both must hold.',
+    },
+    microCheck: 'A reaction releases energy and yet never occurs. What else has to balance?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.particle.feynman-diagrams',
+    subject: 'physics',
+    canonicalIdea: 'A diagram records which particles came in, which went out, and which carrier was exchanged — not the path anything travelled.',
+    concreteAnchor: 'a sketch of beta decay showing a neutron\'s quark changing kind and a carrier emitted',
+    plainExplanation:
+      'These diagrams are a bookkeeping notation. Lines entering from one side are the particles that came '
+      + 'in, lines leaving the other are what came out, and where lines meet is a point at which the '
+      + 'interaction happened, with a carrier passing between. Reading beta decay off one is quick: a quark '
+      + 'line changes kind, a weak carrier line goes out from that meeting point, and it ends in an '
+      + 'electron and an antineutrino. What the diagram never shows is a journey. The positions on the '
+      + 'page are not places and the lines are not routes; the whole content is what met what, and what '
+      + 'was exchanged.',
+    antiAnalogy: {
+      tempting: 'reading the lines as trajectories through space, with angles that mean directions',
+      whyItFails:
+        'the angles carry no information and redrawing the same diagram with different angles changes '
+        + 'nothing. Reading them as paths also reintroduces the definite trajectory quantum mechanics does '
+        + 'not have.',
+    },
+    microCheck: 'Redrawing the diagram at different angles changes nothing about what it says. What does it actually record?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.particle.accelerators-detectors',
+    subject: 'physics',
+    canonicalIdea: 'Collisions convert energy into new particles, and the properties of what is created are reconstructed from what the detectors record afterwards.',
+    concreteAnchor: 'a curved track in a magnetic field, whose bend gives the particle\'s charge and momentum',
+    plainExplanation:
+      'An accelerator does two things at once. It concentrates energy, which can turn into mass and so '
+      + 'create particles too heavy to exist in ordinary matter. And it provides the conditions in which '
+      + 'those particles can be studied — which never means observing them directly, since most last far '
+      + 'too briefly to reach any detector. What is recorded is the debris: charged fragments curving in a '
+      + 'magnetic field, with the direction of the bend giving the sign of the charge and its tightness '
+      + 'giving the momentum. Applying conservation of energy and momentum backwards through the debris '
+      + 'reconstructs the mass of whatever produced it.',
+    antiAnalogy: {
+      tempting: 'imagining the collision smashes the particles open to reveal what was inside',
+      whyItFails:
+        'most of what comes out was not inside anything — it was created from the collision energy. A '
+        + 'collision of two protons can produce particles heavier than both protons together, which no '
+        + 'account of breaking something open can allow.',
+    },
+    microCheck: 'A collision of two protons produces a particle heavier than both together. Where did the extra mass come from?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.particle.standard-model',
+    subject: 'physics',
+    canonicalIdea: 'One framework holds every known particle, classifying each by which forces act on it and which conserved numbers it carries.',
+    concreteAnchor: 'a chart on which every particle ever detected has a place, and gravity has none',
+    plainExplanation:
+      'The Standard Model gathers the quarks, the leptons, the force carriers and the Higgs boson into a '
+      + 'single framework. Each particle is fixed by a short list: its mass, its electric charge, whether '
+      + 'the strong force acts on it, what generation it belongs to, and which conserved tallies it '
+      + 'contributes to. From that list alone you can work out what a particle may turn into and what it '
+      + 'may not. It is the most precisely tested theory in physics, agreeing with measurement to many '
+      + 'decimal places. It also has known limits: it does not include gravity, it does not account for '
+      + 'the dark matter astronomers infer, and it does not explain why there are three generations.',
+    antiAnalogy: {
+      tempting: 'taking it as a complete theory of everything because it accounts for every particle found so far',
+      whyItFails:
+        'gravity is not in it at all, and the matter astronomers can weigh in galaxies is largely of a '
+        + 'kind it does not contain. Being complete for what has been detected in a collider is not the '
+        + 'same as being complete.',
+    },
+    microCheck: 'The model matches every collider measurement and still leaves astronomers unsatisfied. What is missing from it?',
+    ...DRAFTED,
+  },
 ]
 
 export type RemediationCardLookup =
