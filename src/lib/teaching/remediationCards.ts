@@ -1875,6 +1875,393 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
     microCheck: 'Does that one function describe a single path, or all of them?',
     ...DRAFTED,
   },
+
+  // ── THERMODYNAMICS (batch 4) ──────────────────────────────────────────────
+  {
+    conceptId: 'phys.therm.temperature',
+    subject: 'physics',
+    canonicalIdea: 'Temperature reports how vigorously particles are jiggling, not how much heat something contains.',
+    concreteAnchor: 'a sparkler and a bath of warm water',
+    plainExplanation:
+      'A sparkler burns at over a thousand degrees and you can hold it. A bath at forty degrees would '
+      + 'scald you. The sparkler is far hotter and carries almost no energy, because there is so little '
+      + 'of it. Temperature is not a measure of how much energy is present; it reports how vigorously '
+      + 'the particles are moving on average. Two objects touching settle to the same temperature, with '
+      + 'energy flowing from the more vigorous to the less until the jiggling matches. At that point '
+      + 'nothing further flows, and they are in equilibrium.',
+    antiAnalogy: {
+      tempting: 'talking about coldness as a substance, or cold flowing into something',
+      whyItFails:
+        'the curriculum\'s own note singles this out. There is no cold energy. Energy flows one way, from '
+        + 'warmer to cooler, and describing cold as a thing that moves reverses the direction of every '
+        + 'explanation built on it.',
+    },
+    microCheck: 'A sparkler is hotter than warm bathwater. Does it hold more energy?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.therm.zeroth-law',
+    subject: 'physics',
+    canonicalIdea: 'If two things each match a third in temperature, they match each other — which is what makes thermometers work.',
+    concreteAnchor: 'one thermometer used on two different cups of tea',
+    plainExplanation:
+      'Put a thermometer in one cup of tea, then in another, and both read the same. You conclude the two '
+      + 'cups are at the same temperature, without ever bringing them into contact. That conclusion needs '
+      + 'a rule, and this is it: things in equilibrium with the same third thing are in equilibrium with '
+      + 'each other. It sounds too obvious to state, which is why it was noticed late and numbered zero. '
+      + 'Without it, a thermometer would tell you only about itself, and temperature would not be '
+      + 'comparable between objects at all.',
+    antiAnalogy: {
+      tempting: 'dismissing it as too obvious to be a real law',
+      whyItFails:
+        'every measurement of temperature relies on it. Skipping it leaves no justification for why one '
+        + 'instrument\'s reading says anything about a second object it never touched.',
+    },
+    microCheck: 'A thermometer reads the same in two cups. Are the cups at the same temperature?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.therm.thermal-expansion',
+    subject: 'physics',
+    canonicalIdea: 'Warming makes particles jiggle harder and sit further apart, so things grow slightly.',
+    concreteAnchor: 'a stuck metal jar lid held under hot water',
+    plainExplanation:
+      'A stuck metal lid comes loose after a moment under hot water. The metal warmed, its particles '
+      + 'jiggled harder, and they sat a fraction further apart — so the lid grew just enough to release '
+      + 'its grip. Everything does this, by different amounts: metals noticeably, glass much less, which '
+      + 'is why the lid loosens before the jar does. It is why bridges have gaps in them, why railway '
+      + 'lines buckle in a heatwave, and why a hole in a heated plate gets BIGGER, not smaller — the '
+      + 'material around it expands outward in every direction.',
+    antiAnalogy: {
+      tempting: 'saying a hole shrinks when the plate around it expands',
+      whyItFails:
+        'the material grows in all directions, carrying the edge of the hole outwards with it. The '
+        + 'shrinking picture treats the hole as an object being squeezed rather than as absent material.',
+    },
+    microCheck: 'You heat a metal plate with a hole in it. Does the hole get bigger or smaller?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.therm.heat-transfer',
+    subject: 'physics',
+    canonicalIdea: 'Energy moves by touch, by fluid carrying it, or by radiation needing nothing at all.',
+    concreteAnchor: 'a saucepan on a hob, and the sun on your face',
+    plainExplanation:
+      'A saucepan on a hob shows two of these at once. The base heats by touch — particles at the hot '
+      + 'surface jostle their neighbours along, which is conduction. The water heats because warm water '
+      + 'rises and cool water sinks to replace it, physically carrying energy around, which is '
+      + 'convection. The third needs neither contact nor a fluid: the sun warms your face across empty '
+      + 'space by radiation. That is why a vacuum flask works — the vacuum stops the first two, and the '
+      + 'silvered wall reflects the third.',
+    antiAnalogy: {
+      tempting: 'explaining every warming as heat rising',
+      whyItFails:
+        'rising is specific to convection in a fluid. It cannot explain a metal spoon warming in still '
+        + 'soup, or the sun warming the Earth across a vacuum where there is nothing to rise.',
+    },
+    microCheck: 'The sun warms your face across empty space. Which of the three is that?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.therm.specific-heat',
+    subject: 'physics',
+    canonicalIdea: 'Different substances need very different amounts of energy to warm by the same amount.',
+    concreteAnchor: 'a beach on a hot day — sand scorching, sea still cool',
+    plainExplanation:
+      'On a hot afternoon the sand burns your feet and the sea is still cold. The sun has poured energy '
+      + 'into both all day. Water simply needs an enormous amount of energy to warm even slightly, and '
+      + 'sand needs very little. That property is specific heat capacity, and water has one of the '
+      + 'highest of any everyday substance. It is why the sea moderates coastal weather, why a hot water '
+      + 'bottle stays warm for hours, and why water is used as a coolant in engines and power stations.',
+    antiAnalogy: {
+      tempting: 'assuming the same energy raises every substance by the same amount',
+      whyItFails:
+        'it makes the beach impossible to explain. Two materials under identical sunshine end up at very '
+        + 'different temperatures precisely because this property differs so much between them.',
+    },
+    microCheck: 'Sand and sea get the same sunshine. Why is the sand so much hotter?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.therm.calorimetry',
+    subject: 'physics',
+    canonicalIdea: 'In an insulated container the energy one thing loses is exactly what the others gain.',
+    concreteAnchor: 'a hot spoon dropped into a cup of cold water',
+    plainExplanation:
+      'Drop a hot metal spoon into cold water in a well-insulated cup and wait. The spoon cools, the '
+      + 'water warms, and they meet somewhere in between. If nothing escapes the cup, the energy the '
+      + 'spoon gave up is exactly the energy the water took on — no more, no less. That single '
+      + 'bookkeeping statement is enough to work out the final temperature, or, run backwards, to '
+      + 'measure a property of the spoon you had no other way of finding. The final temperature lands '
+      + 'nearer the water\'s starting point, because water resists warming so strongly.',
+    antiAnalogy: {
+      tempting: 'expecting the final temperature to be halfway between the two',
+      whyItFails:
+        'halfway assumes both substances warm and cool equally easily. They rarely do, and the answer '
+        + 'sits much nearer whichever substance is harder to shift.',
+    },
+    microCheck: 'A hot spoon in cold water. Does it settle exactly halfway between?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.therm.phase-transitions',
+    subject: 'physics',
+    canonicalIdea: 'While something is melting or boiling its temperature stops rising, though energy keeps pouring in.',
+    concreteAnchor: 'a pan of boiling water that will not get hotter',
+    plainExplanation:
+      'Water on a hob climbs steadily to a hundred degrees and then stops, however hard you heat it. The '
+      + 'energy has not stopped arriving — it is going into pulling the molecules apart from each other '
+      + 'instead of into making them jiggle faster. Temperature only reports the jiggling, so it holds '
+      + 'still until the last of the liquid has gone. The same happens in reverse: iced drinks stay at '
+      + 'zero until the last ice melts. It is also why steam scalds far worse than boiling water — it '
+      + 'carries all that extra energy and releases it on your skin.',
+    antiAnalogy: {
+      tempting: 'assuming more heat always means a higher temperature',
+      whyItFails:
+        'it makes the flat stretch at boiling look like a broken hob. Energy and temperature part company '
+        + 'entirely during a change of state.',
+    },
+    microCheck: 'You heat boiling water harder. Does it get hotter than 100 degrees?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.therm.ideal-gas-law',
+    subject: 'physics',
+    canonicalIdea: 'For a gas, pressure, volume, amount and temperature are locked together — change one and another must move.',
+    concreteAnchor: 'a bicycle pump with your thumb over the end',
+    plainExplanation:
+      'Block the end of a bicycle pump and push. The air squeezes into less space and pushes back harder '
+      + '— and the pump gets warm. Three things moved together, and that is the point: for a gas, '
+      + 'pressure, volume, temperature and how much gas there is are tied in one relationship. Squeeze '
+      + 'it and pressure rises. Warm it in a sealed can and pressure rises. Let gas out and pressure '
+      + 'falls. None of the four can move alone. This holds well for ordinary gases at ordinary '
+      + 'pressures, and starts to fail when a gas is cold or squeezed near to liquid.',
+    antiAnalogy: {
+      tempting: 'treating the relationship as exact for every gas in every condition',
+      whyItFails:
+        'it is a very good approximation that assumes the particles are tiny and ignore each other. '
+        + 'Close to condensing, both assumptions fail and the predictions drift noticeably.',
+    },
+    microCheck: 'You warm a sealed can of gas. What must happen to the pressure?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.therm.kinetic-theory',
+    subject: 'physics',
+    canonicalIdea: 'Pressure and temperature of a gas are just the statistics of countless particles bouncing around.',
+    concreteAnchor: 'hail drumming on a tin roof',
+    plainExplanation:
+      'Hail on a tin roof sounds like a continuous roar, though it is really thousands of separate '
+      + 'impacts. Gas pressure is exactly that. Particles are flying about in every direction, and each '
+      + 'one that strikes the wall gives it a tiny push. So many arrive that the pushing feels perfectly '
+      + 'steady. Warming the gas makes them fly faster, so each impact is harder and they arrive more '
+      + 'often — which is why pressure rises with temperature. Everything measurable about the gas turns '
+      + 'out to be an average over particles nobody can see.',
+    antiAnalogy: {
+      tempting: 'picturing gas particles as pushing outwards on each other continuously',
+      whyItFails:
+        'they mostly ignore each other and travel in straight lines between collisions. Pressure comes '
+        + 'from impacts on the wall, not from a crowd pressing against itself.',
+    },
+    microCheck: 'You warm a gas. Why does it push harder on the container?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.therm.first-law',
+    subject: 'physics',
+    canonicalIdea: 'Energy added to a system either raises its internal energy or comes back out as work done.',
+    concreteAnchor: 'a sealed syringe of air, heated and allowed to push the plunger',
+    plainExplanation:
+      'Warm the air in a syringe. Some of the energy makes the particles jiggle harder, and some of it '
+      + 'goes into pushing the plunger outwards. That is the whole accounting: what you put in either '
+      + 'stays inside as internal energy or leaves as work done on the surroundings. Nothing else can '
+      + 'happen to it. Hold the plunger still and it must all stay inside. Let it move freely and part '
+      + 'of it leaves. The rule is just energy conservation, written in a form that keeps heat and work '
+      + 'in separate columns.',
+    antiAnalogy: {
+      tempting: 'saying that with no heat entering, nothing changes thermally',
+      whyItFails:
+        'the curriculum\'s own note singles this out. No heat transfer does not mean no temperature '
+        + 'change: squeeze a gas with no heat in or out and it warms sharply, because work was done on '
+        + 'it.',
+    },
+    microCheck: 'You heat the syringe and the plunger moves out. Did all the energy stay inside?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.therm.internal-energy',
+    subject: 'physics',
+    canonicalIdea: 'Internal energy is everything the particles have between them — motion and the pull of one on another.',
+    concreteAnchor: 'a warm cup of tea sitting still on a table',
+    plainExplanation:
+      'A cup of tea on a table is going nowhere. As a whole object it has no motion and no height to '
+      + 'speak of, yet it is unmistakably full of energy — leave it and it warms the room. That energy '
+      + 'is inside, in the molecules: they are moving about, and they also pull on one another, which '
+      + 'counts as stored energy just as a stretched spring does. Add the two together over every '
+      + 'molecule and you have the internal energy. It depends on the state the substance is in, never '
+      + 'on how it got there.',
+    antiAnalogy: {
+      tempting: 'saying an object holds a certain amount of heat',
+      whyItFails:
+        'heat is energy in transit between things, not a quantity stored inside one. What a substance '
+        + 'holds is internal energy, and the difference is why the same warmth can arrive by heating or '
+        + 'by being worked on.',
+    },
+    microCheck: 'A still cup of tea is not moving. Does it have energy?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.therm.thermodynamic-processes',
+    subject: 'physics',
+    canonicalIdea: 'Which quantity you hold fixed while a gas changes decides what happens to all the others.',
+    concreteAnchor: 'the same gas expanded in four different ways',
+    plainExplanation:
+      'Take the same gas and let it expand, but hold something different fixed each time. Keep the '
+      + 'temperature steady and heat must flow in as it expands. Let no heat in or out and it cools as '
+      + 'it pushes. Keep the pressure steady and it takes in heat while doing work. Keep the volume '
+      + 'fixed and it does no work at all, so everything you add stays inside. Same gas, same expansion, '
+      + 'four completely different accounts — because the constraint decides where the energy is allowed '
+      + 'to go.',
+    antiAnalogy: {
+      tempting: 'saying expansion always cools a gas',
+      whyItFails:
+        'the curriculum\'s own note singles this out. A gas cools when it expands doing work against '
+        + 'something. Let it expand freely into a vacuum, pushing on nothing, and its temperature does '
+        + 'not drop.',
+    },
+    microCheck: 'A gas expands into a vacuum, pushing on nothing. Does it cool?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.therm.second-law',
+    subject: 'physics',
+    canonicalIdea: 'Energy spreads out on its own and never gathers itself back up unaided.',
+    concreteAnchor: 'a drop of ink dispersing through a glass of water',
+    plainExplanation:
+      'A drop of ink spreads through water and never gathers itself back into a drop, although nothing '
+      + 'in the laws of motion forbids it. That one-way tendency is the second law, and it governs far '
+      + 'more than engines. Heat flows from hot to cold and not back. Smells spread through a room. '
+      + 'Things wear out. Every one of these is the same statement: energy and matter spread out, and '
+      + 'undoing that spread always costs you something from outside. It is what gives time a direction '
+      + 'when the underlying rules have none.',
+    antiAnalogy: {
+      tempting: 'characterising it as a rule about heat engine efficiency',
+      whyItFails:
+        'the curriculum\'s own note singles this out. Engines are one consequence. Scoping the law to '
+        + 'them leaves a learner unable to apply it to mixing, diffusion, wear, or the direction of time '
+        + 'itself.',
+    },
+    microCheck: 'Ink spreads through water. Will it ever gather back on its own?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.therm.entropy',
+    subject: 'physics',
+    canonicalIdea: 'Entropy counts how many ways the particles could be arranged and still look the same to you.',
+    concreteAnchor: 'shuffled cards, and a tidy room',
+    plainExplanation:
+      'There is only one arrangement of a deck that counts as sorted, and an astronomical number that '
+      + 'count as shuffled. Shuffling lands in the shuffled pile every time — not because there is a '
+      + 'force pushing it there, but because there are overwhelmingly more ways to be shuffled. Entropy '
+      + 'is that count. A high-entropy state is one there are many ways to be. Energy spreads out for '
+      + 'the same reason: spread-out arrangements simply outnumber concentrated ones, by margins so '
+      + 'vast that the tendency looks like a law.',
+    antiAnalogy: {
+      tempting: 'translating it flatly as disorder',
+      whyItFails:
+        'the curriculum\'s own note singles this out. Everyday untidiness is a judgement about '
+        + 'appearance; entropy is a count of arrangements. The loose word makes learners argue that a '
+        + 'tidy bedroom breaks the second law.',
+    },
+    microCheck: 'Why does shuffling never produce a sorted deck?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.therm.heat-engines',
+    subject: 'physics',
+    canonicalIdea: 'An engine takes energy from something hot, turns part of it into work, and must dump the rest somewhere cold.',
+    concreteAnchor: 'a car engine and its radiator',
+    plainExplanation:
+      'A car engine burns fuel and moves the car, and it also needs a radiator throwing heat away the '
+      + 'entire time. That waste is not bad engineering — no engine can avoid it. To get work out you '
+      + 'need energy flowing from somewhere hot to somewhere cold, and you can divert part of that flow '
+      + 'into useful work, never all of it. Efficiency is the fraction of what you took from the hot '
+      + 'side that came out as work. A typical petrol engine manages around a quarter; the rest leaves '
+      + 'as heat, necessarily.',
+    antiAnalogy: {
+      tempting: 'saying efficiency is one minus the wasted heat',
+      whyItFails:
+        'the curriculum\'s own note singles this out. It is one minus the FRACTION wasted — the waste '
+        + 'compared with what was taken in. Dropping the comparison makes the number meaningless.',
+    },
+    microCheck: 'Why does an engine need a radiator throwing heat away?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.therm.carnot-cycle',
+    subject: 'physics',
+    canonicalIdea: 'There is a hard ceiling on engine efficiency, set only by the two temperatures involved.',
+    concreteAnchor: 'a power station\'s furnace and its cooling towers',
+    plainExplanation:
+      'A power station burns fuel very hot and dumps waste heat into cooling towers. How much of that '
+      + 'heat can possibly become electricity is capped, and the cap depends on nothing but the two '
+      + 'temperatures — how hot the furnace runs and how cool the surroundings are. No cleverness of '
+      + 'design beats it. The bigger the gap between the two, the higher the ceiling, which is why '
+      + 'engineers push furnace temperatures as high as materials allow. The temperatures must be '
+      + 'counted from absolute zero, not from the freezing point of water.',
+    antiAnalogy: {
+      tempting: 'putting the temperatures straight in as given',
+      whyItFails:
+        'the curriculum\'s own note singles this out. Celsius readings give badly wrong answers here — '
+        + 'the ceiling is a ratio of absolute temperatures, and it only means anything counted from '
+        + 'absolute zero.',
+    },
+    microCheck: 'What two things set the highest efficiency an engine could ever reach?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.therm.refrigerators',
+    subject: 'physics',
+    canonicalIdea: 'A fridge uses work to push energy the wrong way, from cold to hot.',
+    concreteAnchor: 'the warm grille on the back of a refrigerator',
+    plainExplanation:
+      'The back of a fridge is warm, and that is the whole story in one observation. Energy does not '
+      + 'move from cold to hot on its own, so a fridge pays for it with work from the mains, and dumps '
+      + 'the energy it removed — plus the energy it used doing so — into your kitchen. A fridge with its '
+      + 'door open warms the room. The same machine run the other way round is a heat pump, and it is a '
+      + 'remarkably good heater, because it moves several units of energy indoors for each unit of '
+      + 'electricity it spends.',
+    antiAnalogy: {
+      tempting: 'calling the performance figure an efficiency',
+      whyItFails:
+        'the curriculum\'s own note singles this out. Efficiency language implies it cannot exceed one. '
+        + 'This figure routinely does — moving three units of heat for one of work is normal — because '
+        + 'it is a ratio of moved to spent, not of out to in.',
+    },
+    microCheck: 'You leave the fridge door open. Does the kitchen get cooler?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.therm.third-law',
+    subject: 'physics',
+    canonicalIdea: 'Absolute zero can be approached but never reached, and a perfect crystal there would have nothing left to arrange.',
+    concreteAnchor: 'a fridge that gets colder in ever-smaller steps',
+    plainExplanation:
+      'Every cooling method works by taking energy out, and the colder something already is, the less '
+      + 'there is left to take. Each step down costs more effort than the last, and the steps get '
+      + 'smaller. You can get astonishingly close to absolute zero — laboratories reach billionths of a '
+      + 'degree above it — and never arrive. What the law says about that limit is that a perfect '
+      + 'crystal, with its particles in exactly one possible arrangement, would have zero entropy there. '
+      + 'Real substances, with imperfections, keep a little.',
+    antiAnalogy: {
+      tempting: 'saying entropy is zero at absolute zero, without conditions',
+      whyItFails:
+        'the curriculum\'s own note singles this out. It requires a PERFECT crystal. Anything with '
+        + 'disorder frozen into it keeps some entropy right down to the limit.',
+    },
+    microCheck: 'Can a fridge reach absolute zero if you give it long enough?',
+    ...DRAFTED,
+  },
 ]
 
 export type RemediationCardLookup =
