@@ -370,8 +370,13 @@ describe('H6 — the serving path is wired, and refuses DRAFT at the boundary', 
   it('the card path changes no mastery, grading, probe or ladder state', () => {
     const at = ROUTE.indexOf('findRemediationCard')
     const scoped = ROUTE.slice(Math.max(0, at - 200), at + 2000)
+    // `correctAtCheck` is forbidden AS AN ASSIGNMENT, not as a mention: the
+    // H6.4 hold READS the mastery counters to decide whether the learner has
+    // shown anything yet, and reading is the opposite of writing. The claim
+    // under test has always been "the card path writes no mastery"; it now
+    // says that precisely instead of by proxy.
     for (const forbidden of [
-      /correctAtCheck/, /masteryVerified/, /mcqGradeHoisted\s*=/, /findBestProbe/,
+      /correctAtCheck\s*=[^=]/, /masteryVerified\s*=[^=]/, /mcqGradeHoisted\s*=/, /findBestProbe/,
       /conversationStateHoisted\s*=/, /arbitrateTurn\(/,
     ]) {
       expect(scoped, forbidden.source).not.toMatch(forbidden)
@@ -456,8 +461,11 @@ describe('H6-Q/R/S/T — "ok sir" is still an acknowledgement and nothing here c
     // work is required to carry; the claim under test is that no card touches
     // OBSERVE/DEMONSTRATE/GUIDE/CHECK/PRACTICE/TRANSFER or the state that
     // moves between them.
+    // Same narrowing as above, for the same reason: `RemediationWindowInput`
+    // declares `correctAtCheck` as an INPUT it is given, which is how the hold
+    // reads evidence without owning any. A mastery mechanism would assign.
     for (const forbidden of [
-      /mastery/i, /verified/i, /correctAtCheck/, /confidence/i,
+      /mastery\s*[.=]/i, /verified\s*=/i, /correctAtCheck\s*=[^=]/, /confidence\s*=/i,
       /phaseAfter|sessionPhase|conversationState|DEMONSTRATE|PRACTICE|TRANSFER/,
     ]) {
       expect(mod, forbidden.source).not.toMatch(forbidden)

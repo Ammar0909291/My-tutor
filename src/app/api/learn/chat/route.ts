@@ -4262,39 +4262,54 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       if (conversationDecisionHoisted) {
         try {
           const { isRemediationTurn } = await import('@/lib/teaching/remediationOutputContract')
-          if (isRemediationTurn(conversationDecisionHoisted.type)) {
-            const { findRemediationCard, renderRemediationCard, buildRemediationCardSourceBlock } =
-              await import('@/lib/teaching/remediationCards')
-            const conceptForCard =
-              excursionDecisionHoisted?.targetConceptId
-              ?? libraryConceptNodeIdHoisted
-              ?? snapshotCurrentConceptId
-              ?? resolvedConceptId
-              ?? null
-            const lookup = conceptForCard
-              ? findRemediationCard(conceptForCard)
-              : ({ servable: false, reason: 'no-card' } as const)
+          const remediationTurn = isRemediationTurn(conversationDecisionHoisted.type)
+          const conceptForCard =
+            excursionDecisionHoisted?.targetConceptId
+            ?? libraryConceptNodeIdHoisted
+            ?? snapshotCurrentConceptId
+            ?? resolvedConceptId
+            ?? null
+          if (conceptForCard) {
+            const {
+              findRemediationCard, renderRemediationCard, buildRemediationCardSourceBlock,
+              buildRemediationCardHoldBlock, remediationWindowOpen,
+            } = await import('@/lib/teaching/remediationCards')
+            const lookup = findRemediationCard(conceptForCard)
             if (lookup.servable) {
               const cardId = `card:${lookup.card.conceptId}`
               const { hasServedExplanation } = await import('@/lib/teaching/teachingHistory')
               const already = teachingHistoryHoisted
                 ? hasServedExplanation(teachingHistoryHoisted, cardId)
                 : false
-              remediationSource = 'CURATED_CARD'
-              if (already) {
+              // THE WINDOW. Read-only over counters this route already keeps —
+              // a graded correct answer closes it, an acknowledgement cannot.
+              // Measured defect: "ok sir" handed the concept back to the
+              // ordinary engine, which taught the exact three things the owner
+              // excluded when approving this card.
+              const holding = !remediationTurn && remediationWindowOpen({
+                cardServed: already,
+                correctAtCheck: conversationStateHoisted?.correctAtCheck ?? 0,
+                correctAtPractice: conversationStateHoisted?.correctAtPractice ?? 0,
+              })
+              if (remediationTurn || holding) remediationSource = 'CURATED_CARD'
+              if (remediationTurn && already) {
                 systemPrompt += buildRemediationCardSourceBlock(lookup.card)
-              } else {
+              } else if (remediationTurn) {
                 remediationCardText = renderRemediationCard(lookup.card)
                 remediationCardServedId = cardId
+              } else if (holding) {
+                systemPrompt += buildRemediationCardHoldBlock(lookup.card)
               }
+              if (remediationTurn || holding) {
+                console.log('[remediation-card]', {
+                  conceptId: lookup.card.conceptId,
+                  remediationSource,
+                  mode: holding ? 'hold' : already ? 'constrained-source' : 'deterministic-serve',
+                })
+              }
+            } else if (remediationTurn) {
               console.log('[remediation-card]', {
-                conceptId: lookup.card.conceptId,
-                remediationSource,
-                mode: already ? 'constrained-source' : 'deterministic-serve',
-              })
-            } else {
-              console.log('[remediation-card]', {
-                conceptId: conceptForCard ?? 'unknown',
+                conceptId: conceptForCard,
                 remediationSource: 'not-card-backed',
                 reason: lookup.reason,
               })

@@ -157,8 +157,10 @@ describe('H6.3-11..15 — repetition, acknowledgement, mastery, state', () => {
   it('13/14/15 — no mastery, no probe, no new learner state on the card path', () => {
     const at = ROUTE.indexOf('findRemediationCard')
     const scoped = ROUTE.slice(Math.max(0, at - 200), at + 2500)
+    // Assignment, not mention — the H6.4 hold reads these counters to find out
+    // whether the learner has shown anything, and never writes one.
     for (const forbidden of [
-      /correctAtCheck/, /masteryVerified/, /mcqGradeHoisted\s*=/, /findBestProbe/,
+      /correctAtCheck\s*=[^=]/, /masteryVerified\s*=[^=]/, /mcqGradeHoisted\s*=/, /findBestProbe/,
       /mcqHoisted\s*=/, /arbitrateTurn\(/,
     ]) {
       expect(scoped, forbidden.source).not.toMatch(forbidden)

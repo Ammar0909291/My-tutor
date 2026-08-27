@@ -662,6 +662,81 @@ export function cardIsSoleTeachingSource(source: RemediationSource | null | unde
   return source === 'CURATED_CARD'
 }
 
+/**
+ * IS THE CARD STILL IN CHARGE?
+ *
+ * ── THE DEFECT, MEASURED TWICE IN PRODUCTION ────────────────────────────────
+ *   T1  "sir i not understand this" → the approved card, served deterministically
+ *   T2  "ok sir"                    → f_s ≤ μ_s N, f_k = μ_k N, static vs kinetic
+ *
+ * All three of those are things the owner named as deliberate omissions when
+ * they approved that card. Nothing was violated: the card only ever owned
+ * CONFUSION and REPHRASE_REQUEST turns, so one acknowledgement handed the
+ * concept straight back to the ordinary engine.
+ *
+ * ── AN ACKNOWLEDGEMENT IS NOT UNDERSTANDING ─────────────────────────────────
+ * This repository already knows that. `isBareAcknowledgement` says so, and the
+ * mastery counters refuse to move for "ok sir". Then the lesson moved on
+ * anyway. The window closes on EVIDENCE — a graded correct answer through the
+ * existing counters — and there is deliberately no way to tell this function
+ * that the learner was polite.
+ *
+ * ── WHY THERE IS NO TURN LIMIT, STATED PLAINLY ──────────────────────────────
+ * A bound would need a counter, and a counter would be new learner state. The
+ * honest consequence: a learner who never answers correctly is held on this
+ * concept. That is the right default for a tutor — you do not walk past a
+ * concept nobody has shown they hold — but it IS a hold, and the session's own
+ * budgets and close behaviour remain the only thing that ends it.
+ *
+ * Derived entirely from state that already exists. No new field, no migration.
+ */
+export interface RemediationWindowInput {
+  /** The card's words have already reached this learner this session. */
+  cardServed: boolean
+  correctAtCheck: number
+  correctAtPractice: number
+}
+
+export function remediationWindowOpen(input: RemediationWindowInput): boolean {
+  try {
+    if (!input || input.cardServed !== true) return false
+    const check = input.correctAtCheck
+    const practice = input.correctAtPractice
+    // A counter that cannot be read is not evidence of confusion — it is no
+    // evidence at all, and a hold must not open on a malformed snapshot.
+    if (!Number.isFinite(check) || !Number.isFinite(practice)) return false
+    return check + practice === 0
+  } catch {
+    return false
+  }
+}
+
+/**
+ * What the model is told on a turn the card still governs but did not open.
+ *
+ * Distinct from `buildRemediationCardSourceBlock`, which answers "re-voice this
+ * account because they asked again". This one answers a different question:
+ * they said "ok" and they have shown nothing. Its whole job is to stop the
+ * lesson walking forward over an unverified concept, and to hand over the
+ * card's OWN micro-check so the next move is checking rather than advancing.
+ */
+export function buildRemediationCardHoldBlock(card: RemediationCard): string {
+  return (
+    '\n\nTHIS CONCEPT IS STILL OPEN. A human-approved account of it was given to '
+    + 'this learner, and they have not yet shown they hold it.\n'
+    + `${card.plainExplanation.trim()}\n`
+    + 'The learner acknowledging you — "ok", "yes sir", "I see" — does not mean '
+    + 'they understand it. It means they are being polite. Do not treat it as '
+    + 'understanding and do not move on to the next idea because of it.\n'
+    + 'So: do not introduce a new formula, a new sub-topic, a new distinction or '
+    + 'any material the account above does not contain. Stay on this one idea. '
+    + 'The useful move now is to find out whether it landed — ask them this, in '
+    + 'your own words if you prefer:\n'
+    + `${card.microCheck.trim()}\n`
+    + `And never reach for this comparison: ${card.antiAnalogy.tempting}.`
+  )
+}
+
 /** DRAFT and ACTIVE reported separately, never blended into one coverage number. */
 export function cardCoverage(): { total: number; draft: number; active: number } {
   return {
