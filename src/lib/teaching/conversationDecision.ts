@@ -31,7 +31,36 @@ export interface ConversationDecision {
   rendererDirective: string
 }
 
-const CONFUSION_RE = /\b(confused|confusing|don'?t\s+(understand|get)|lost|makes?\s+no\s+sense|doesn'?t\s+make\s+sense|what\s+do\s+you\s+mean|huh)\b/i
+/**
+ * IS THE LEARNER CONFUSED, OR ASKING FOR A DIFFERENT ANGLE?
+ *
+ * This test decides WHICH of the two remediation directives below the model
+ * receives, and it was a second, narrower copy of exactly the pattern H1 fixed
+ * in masteryGate: it recognised "don't understand" but not "i not understand",
+ * "i cannot understand", "i am not getting it". Every learner who wrote their
+ * confusion in non-standard English therefore fell through to
+ * REPHRASE_REQUEST — "the student asked for a different approach" — when what
+ * they had actually said was "I am lost".
+ *
+ * Widened by the same discipline H1 used: extensions of the alternatives
+ * already here, nothing new in kind. Deliberately NOT widened to cover
+ * "explain it another way" / "please explain easy" — those really are requests
+ * for a different approach, both branches now carry the simplify constraint,
+ * and REPHRASE_REQUEST's reading of them is pinned by two existing suites.
+ */
+const CONFUSION_RE = new RegExp([
+  String.raw`\b(?:confused|confusing)\b`,
+  String.raw`\bdon'?t\s+(?:understand|get)\b`,
+  String.raw`\bnot\s+(?:able\s+to\s+)?understand(?:ing)?\b`,
+  String.raw`\b(?:can'?t|cannot|couldn'?t|could\s+not)\s+understand\b`,
+  String.raw`\bnot\s+getting\s+(?:it|this|that)\b`,
+  String.raw`\bi(?:'?m|\s+am)\s+(?:very\s+|so\s+|really\s+)?weak\s+(?:in|at|with)\b`,
+  String.raw`\blost\b`,
+  String.raw`\bmakes?\s+no\s+sense\b`,
+  String.raw`\bdoesn'?t\s+make\s+sense\b`,
+  String.raw`\bwhat\s+do\s+you\s+mean\b`,
+  String.raw`\bhuh\b`,
+].join('|'), 'i')
 const BOREDOM_RE = /\b(boring|bored|when\s+(will|do|does)\s+(we|this)|why\s+do\s+(i|we)\s+(even\s+)?(need|have)\s+to|is\s+this\s+(even\s+)?useful|point\s+of\s+this)\b/i
 const CURIOSITY_RE = /\b(what\s+(happens|would\s+happen)\s+if|what\s+about|how\s+does\s+that\s+(relate|connect)|can\s+you\s+(also|show)\s+how|what\s+else|is\s+it\s+true\s+that|does\s+this\s+(also|mean))\b/i
 
@@ -75,12 +104,38 @@ export function classifyConversation(
     if (CONFUSION_RE.test(trimmed)) {
       return {
         type: 'CONFUSION',
-        rendererDirective: 'The previous explanation did not land. Say so plainly ("that explanation clearly wasn\'t working — let me come at it completely differently") then switch method, not just wording.',
+        // ── PHASE H2: THIS DIRECTIVE IS THE WHOLE INSTRUCTION ──────────────
+        // On a remediation turn the Brain dispatches ESCALATE_TO_LLM ->
+        // executor LLM_OPEN, for which `buildBrainExecutionBlock` returns '';
+        // and `buildTeachingStrategyBlock` — whose FOUNDATION_REBUILD lines
+        // say "use concrete, everyday examples before introducing formal
+        // definitions" and "avoid introducing extension material" — is
+        // suppressed while the Brain owns decisions. So this string is the
+        // ONLY surviving instruction telling the model how to remediate.
+        //
+        // It used to say "come at it completely differently … switch method",
+        // and said nothing at all about DIFFICULTY. Measured live
+        // (chem.thermo.bond-enthalpy, 2026-08-27): the learner wrote "sir i
+        // not understand this" and was answered with a Haber-process bond-
+        // enthalpy calculation — ΔH, tabulated bond energies, "kinetically
+        // unfavourable but thermodynamically driven". Shorter, and harder.
+        //
+        // The direction of travel is now stated, and it is not invented here:
+        // it is FOUNDATION_REBUILD's own authored instruction, transcribed
+        // into the block that actually reaches the model.
+        rendererDirective: 'That previous explanation did not land. Say so, then re-teach the SAME idea differently and more simply: one concrete everyday anchor, plain words, one small step. No new formula or derivation; stay on this concept.'
       }
     }
     return {
       type: 'REPHRASE_REQUEST',
-      rendererDirective: 'The student asked for a different approach. Acknowledge the request briefly ("let me try a completely different angle"), then deliver the new strategy. Never repeat any previous explanation, analogy, or wording.',
+      // Same constraint, different opening: this learner asked for another
+      // route rather than reporting that they are lost, so "a different angle"
+      // stays (pinned by conversationReplay/conversationDecision). What is
+      // added is the direction: a different angle must be an EASIER one. The
+      // old "Never repeat any previous explanation, analogy, or wording"
+      // clause is gone — it forbade the first move a human tutor makes, which
+      // is to say the same idea again, more plainly.
+      rendererDirective: 'The student asked for another approach. Try a different angle — but SIMPLER, never more advanced: a fresh everyday anchor and plain words. No new formula or derivation; stay on the same concept.'
     }
   }
 
