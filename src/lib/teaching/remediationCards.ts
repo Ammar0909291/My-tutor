@@ -104,7 +104,16 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'a flat surface with nothing else pushing, and silently wrong everywhere else.',
     },
     microCheck: 'You press down on the book with your hand. Easier or harder to slide?',
-    ...DRAFTED,
+    // PROMOTED BY THE OWNER, 2026-08-27 — the first card in this file to become
+    // learner-servable. Explicitly approved: the normal-force framing, the
+    // hand-press example, the horizontal-table weight equality restricted to
+    // that case, and the omission of the microscopic mechanism, of
+    // area-independence and of the static/kinetic distinction.
+    // AI_AUTHORED_REVIEWED, not HUMAN_CURATOR: the words are the draft's, and
+    // the provenance says who signed them off rather than who wrote them.
+    status: 'ACTIVE',
+    authorKind: 'AI_AUTHORED_REVIEWED',
+    provenance: 'Reviewed and promoted by owner, 2026-08-27.',
   },
   {
     conceptId: 'chem.sol.vapour-pressure',

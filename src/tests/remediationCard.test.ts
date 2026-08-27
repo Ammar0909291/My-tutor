@@ -82,10 +82,30 @@ describe('H6-A/B — the pilot corpus exists and declares its provenance', () =>
     }
   })
 
-  it('EVERY card in this pilot is AI_AUTHORED + DRAFT — nothing was self-promoted', () => {
-    // The single most important assertion in this file. If a future change
-    // flips a card to ACTIVE without a human, this fails.
+  it('nothing was self-promoted — only the owner-approved cards are ACTIVE', () => {
+    // The single most important assertion in this file, and it is NOT weakened
+    // by the first promotion. It used to read "every card is DRAFT", which was
+    // true only while the list of owner-approved cards was empty. What it
+    // always meant is: no card is ACTIVE that a human did not name. That is now
+    // said directly, against an explicit list — so a card promoted outside this
+    // list still fails, exactly as before, and the list itself is the record of
+    // who authorised what.
+    //
+    // H6.2, 2026-08-27: the owner reviewed two cards and approved ONE.
+    // phys.mech.friction  → APPROVED as written.
+    // chem.sol.vapour-pressure → REWRITE, explicitly NOT promoted, because the
+    //   repository holds an unresolved conflict about the mechanism (the
+    //   Educational Brain authors the surface-occupancy account that H5 filed
+    //   as a live failure). That is a curriculum decision, not a model one.
+    const OWNER_PROMOTED = ['phys.mech.friction']
     for (const c of REMEDIATION_CARDS) {
+      if (OWNER_PROMOTED.includes(c.conceptId)) {
+        expect(c.status, `${c.conceptId} status`).toBe('ACTIVE')
+        expect(['AI_AUTHORED_REVIEWED', 'HUMAN_CURATOR'], `${c.conceptId} authorKind`)
+          .toContain(c.authorKind)
+        expect(c.provenance, `${c.conceptId} provenance`).toMatch(/reviewed|promoted/i)
+        continue
+      }
       expect(c.status, `${c.conceptId} status`).toBe('DRAFT')
       expect(c.authorKind, `${c.conceptId} authorKind`).toBe('AI_AUTHORED')
     }
@@ -101,9 +121,16 @@ describe('H6-A/B — the pilot corpus exists and declares its provenance', () =>
 // ── C/D — DRAFT is structurally unreachable ────────────────────────────────
 
 describe('H6-C/D — only an ACTIVE, human-reviewed card can serve', () => {
-  it('every pilot card is refused by the lookup, today', () => {
+  it('every UNPROMOTED card is refused by the lookup, and the promoted one is not', () => {
+    // Same allow-list, same reasoning as the guard above: the claim under test
+    // is that DRAFT is unreachable, not that nothing is reachable.
+    const OWNER_PROMOTED = ['phys.mech.friction']
     for (const c of REMEDIATION_CARDS) {
       const r = findRemediationCard(c.conceptId)
+      if (OWNER_PROMOTED.includes(c.conceptId)) {
+        expect(r.servable, c.conceptId).toBe(true)
+        continue
+      }
       expect(r.servable, c.conceptId).toBe(false)
       if (!r.servable) expect(r.reason).toBe('draft-not-promoted')
     }
@@ -143,10 +170,13 @@ describe('H6-C/D — only an ACTIVE, human-reviewed card can serve', () => {
   })
 
   it('coverage reports DRAFT and ACTIVE separately — never as one number', () => {
+    // H6.2: one owner-approved promotion. The point of this assertion is that
+    // the two numbers are reported separately and never added together — which
+    // only becomes meaningful now that they differ.
     const c = cardCoverage()
     expect(c.total).toBe(20)
-    expect(c.draft).toBe(20)
-    expect(c.active).toBe(0)
+    expect(c.draft).toBe(19)
+    expect(c.active).toBe(1)
   })
 })
 
