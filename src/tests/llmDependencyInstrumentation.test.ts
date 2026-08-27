@@ -84,6 +84,11 @@ describe('Phase 1 instrumentation — no teaching behaviour was added', () => {
   it('adds no provider call of its own', () => {
     // Three call sites is the pre-Phase-1 count. Instrumentation that measured
     // dependency by adding a call would be self-defeating.
-    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(3)
+    // H3 (2026-08-27): 3 -> 4. The fourth is the remediation output floor's
+    // single regeneration — a reviewed, deliberate call site, counted here
+    // exactly as this guard intends. It fires only when a remediation turn's
+    // draft explained nothing at all, and it never loops (one attempt, then a
+    // deterministic branch). See remediationOutputContract.test.ts.
+    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(4)
   })
 })

@@ -160,7 +160,12 @@ describe('C — "can you show me a diagram" answered with no diagram', () => {
   })
 
   it('NO NEW PROVIDER CALL — the figure is re-derived, never regenerated', () => {
-    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(3)
+    // H3 (2026-08-27): 3 -> 4. The fourth is the remediation output floor's
+    // single regeneration — a reviewed, deliberate call site, counted here
+    // exactly as this guard intends. It fires only when a remediation turn's
+    // draft explained nothing at all, and it never loops (one attempt, then a
+    // deterministic branch). See remediationOutputContract.test.ts.
+    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(4)
   })
 })
 

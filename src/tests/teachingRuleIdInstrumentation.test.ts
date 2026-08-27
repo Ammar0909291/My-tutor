@@ -188,7 +188,12 @@ describe('5 — fail-open: telemetry never costs a learner their turn', () => {
 
 describe('6 — nothing else moved', () => {
   it('the provider call sites are unchanged in number', () => {
-    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(3)
+    // H3 (2026-08-27): 3 -> 4. The fourth is the remediation output floor's
+    // single regeneration — a reviewed, deliberate call site, counted here
+    // exactly as this guard intends. It fires only when a remediation turn's
+    // draft explained nothing at all, and it never loops (one attempt, then a
+    // deterministic branch). See remediationOutputContract.test.ts.
+    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(4)
   })
 
   it('the Phase 1 and Phase 4 telemetry fields are untouched', () => {

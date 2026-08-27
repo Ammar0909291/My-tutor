@@ -482,6 +482,33 @@ function dropOrphanedLeadIn(kept: string): string {
   return out
 }
 
+/**
+ * WHAT SURVIVES WHEN THE QUESTIONS ARE CUT AWAY.
+ *
+ * The composition `withholdUngradedGateQuestion` already uses on its
+ * no-gradeable-probe path, named and exported so a second caller can ask the
+ * same question of a turn without re-deriving it. Nothing about the withhold
+ * changes — this IS the expression from that branch, one binding earlier.
+ *
+ * Added for the H3 remediation output floor, whose whole test is "is there any
+ * teaching left in this turn at all". Reusing this composition rather than
+ * writing a second one is what keeps the two callers agreeing about what
+ * counts as a question — including the exclusions this pair already encodes: a
+ * confirmation tail ("does that make sense?") is not an answerable question and
+ * survives the cut, and an option list takes everything after it.
+ *
+ * Returns '' when the entire turn was a question and its introduction.
+ */
+export function cutBackToTeaching(text: string): string {
+  try {
+    return dropOrphanedLeadIn(dropAnswerableContent(typeof text === 'string' ? text : '')).trim()
+  } catch {
+    // Same stance as every repair here: on failure report that teaching
+    // survived, so no caller acts on a parse accident.
+    return typeof text === 'string' ? text.trim() : ''
+  }
+}
+
 export function withholdUngradedGateQuestion(
   input: UngradedGateQuestionInput,
 ): UngradedGateQuestionResult {

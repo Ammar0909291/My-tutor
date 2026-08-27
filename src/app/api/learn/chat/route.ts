@@ -5549,6 +5549,128 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         }
       }
 
+      // ── H3: THE REMEDIATION OUTPUT FLOOR ────────────────────────────────
+      //
+      // UNCONDITIONAL, and for the same reason the V-AFFIRM floor above is:
+      // the full K5 verifier is env-gated (`readVerifierMode` -> 'off' unless
+      // ENABLE_OUTPUT_VERIFIER / ENABLE_EOS_RUNTIME is set, and neither is set
+      // in production), so a rule that only runs behind that flag never runs
+      // for a real learner. A learner who has said they do not understand
+      // being answered with a question and nothing else is a teaching failure,
+      // not a style preference.
+      //
+      // WHAT IT DECIDES: one structural question — did this turn explain
+      // anything at all. It makes NO claim about whether the explanation is
+      // true; that boundary is stated in remediationOutputContract.ts.
+      //
+      // WHY HERE: after the affirmation floor, so it judges the text that
+      // floor may have repaired, and before the S1 history ring, so the ring
+      // records what the learner actually received. Excluded on
+      // deterministically-served turns by the same condition the affirmation
+      // floor uses — memory / gate / lesson-complete text is server-authored
+      // and there is nothing for an output check to catch.
+      //
+      // MEASURED (production, chem.kinet.rate-law and chem.equil.le-chatelier,
+      // 2026-08-27): both answered "sir i not understand this" by re-asking the
+      // previous turn's question, groq returning 58 and 64 chars. Both carried
+      // `legalityBlocked: QL1_NO_ANSWERABLE_SOURCE` — the kernel had already
+      // ruled a question illegal this turn and the model asked one anyway.
+      if (!servedDeterministically && conversationDecisionHoisted) {
+        try {
+          const {
+            isRemediationTurn, checkRemediationOutput,
+            buildRemediationRepairAppendix, buildRemediationFallbackText,
+          } = await import('@/lib/teaching/remediationOutputContract')
+          const remediationTurn = isRemediationTurn(conversationDecisionHoisted.type)
+          const previousAssistantText = learnSession.messages
+            .filter((m) => m.role === MessageRole.ASSISTANT)
+            .slice(-1)[0]?.content ?? null
+          const verdict = checkRemediationOutput({
+            remediationTurn,
+            text: cleanText,
+            previousAssistantText,
+            hasStructuredMcq: mcqHoisted !== null && mcqHoisted !== undefined,
+          })
+          console.log('[remediation-floor]', {
+            remediationTurn,
+            decision: conversationDecisionHoisted.type,
+            // Recorded, not acted on: QL-1 was ALREADY right on both measured
+            // failures ("nothing has been taught yet this session … the
+            // learner has no source to answer from"). This line makes the
+            // correlation visible in production without giving it authority.
+            legalityBlocked: legalityBlockedReasonHoisted,
+            violation: verdict.violation,
+          })
+          if (verdict.violation) {
+            // The concept whose authored material the repair may quote — the
+            // same resolution order the affirmation floor uses.
+            const conceptForFloor =
+              excursionDecisionHoisted?.targetConceptId
+              ?? libraryConceptNodeIdHoisted
+              ?? snapshotCurrentConceptId
+              ?? resolvedConceptId
+              ?? null
+            // Retrieval, never invention: the curriculum's own definition, if
+            // it has one. The repair still runs without it.
+            let authored = ''
+            let conceptSentence: string | null = null
+            try {
+              if (conceptForFloor) {
+                const { getKGNode } = await import('@/lib/curriculum/knowledgeGraph')
+                const desc = getKGNode(conceptForFloor)?.description?.trim() ?? null
+                if (desc) {
+                  conceptSentence = desc
+                  authored += `\nThe curriculum defines this concept as: ${desc}`
+                }
+              }
+            } catch { /* the repair still runs without authored material */ }
+
+            // ONE regeneration. Not a ladder: the branch after it is
+            // deterministic, so this can never loop.
+            let repaired = cleanText
+            try {
+              llmCallCount++ // instrumentation only (remediation-floor repair)
+              const routed = await routeAI(
+                [...historyMessages, { role: 'user', content: message }],
+                systemPrompt
+                  + buildRemediationRepairAppendix(verdict.violation, authored)
+                  + outputLanguageBlockHoisted,
+                country, 2048, teachingLang,
+                { userId, subject: learnSession.subject.slug },
+                groqModelOverride,
+              )
+              repaired = routed.text
+              if (contentRegister === 'beginner') repaired = stripIpaNotation(repaired)
+            } catch (regenErr) {
+              console.warn('[remediation-floor] regeneration failed:', regenErr)
+            }
+
+            const stillViolating = checkRemediationOutput({
+              remediationTurn, text: repaired, previousAssistantText,
+              hasStructuredMcq: mcqHoisted !== null && mcqHoisted !== undefined,
+            }).violation !== null
+            if (!stillViolating) {
+              cleanText = repaired
+            } else {
+              // FAIL CLOSED, BUT STILL TEACH. The curriculum's own single
+              // learner-facing sentence is correct by construction; when there
+              // is no usable one, the model's draft stands rather than being
+              // replaced by filler that teaches even less.
+              const fallback = buildRemediationFallbackText(conceptSentence)
+              if (fallback) cleanText = fallback
+            }
+            console.log('[remediation-floor] repaired', {
+              violation: verdict.violation,
+              accepted: !stillViolating,
+              usedCurriculumSentence: stillViolating && conceptSentence !== null,
+            })
+          }
+        } catch (err) {
+          // A floor must never take a turn down.
+          console.warn('[remediation-floor] skipped:', err)
+        }
+      }
+
       // S1 — append this turn to the history ring, unconditionally (not
       // gated on eosFlags.outputVerifier): the ring must accumulate whether
       // or not any consumer is currently enabled, matching this route's own

@@ -179,7 +179,12 @@ describe('lead-in quality (no robotic repetition)', () => {
 describe('route wiring — fewer LLM calls, nothing else changed (7,8,9,11,12)', () => {
   it('the deterministic branch makes NO provider call', () => {
     // Three routeAI() sites is the pre-Phase-2 count; this phase adds none.
-    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(3)
+    // H3 (2026-08-27): 3 -> 4. The fourth is the remediation output floor's
+    // single regeneration — a reviewed, deliberate call site, counted here
+    // exactly as this guard intends. It fires only when a remediation turn's
+    // draft explained nothing at all, and it never loops (one attempt, then a
+    // deterministic branch). See remediationOutputContract.test.ts.
+    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(4)
     expect(ROUTE).toContain("provider = 'gate'")
   })
 
