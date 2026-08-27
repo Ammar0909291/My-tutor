@@ -3020,6 +3020,345 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
     microCheck: 'You connect an empty capacitor to a battery. Does current flow at first?',
     ...DRAFTED,
   },
+
+  // ── MAGNETISM, INDUCTION AND AC (batch 7, phys.em part 2) ─────────────────
+  {
+    conceptId: 'phys.em.magnetic-field',
+    subject: 'physics',
+    canonicalIdea: 'A magnetic field acts only on things that are moving or carrying current, never on a charge at rest.',
+    concreteAnchor: 'iron filings around a bar magnet',
+    plainExplanation:
+      'Iron filings scattered near a bar magnet arrange themselves into loops running from one pole round '
+      + 'to the other. Those loops map the field. The important restriction is what a magnetic field acts '
+      + 'on: a stationary charge sitting in one feels nothing at all. It only pushes on charges that are '
+      + 'moving, and on wires carrying current, which is moving charge. Field lines always form closed '
+      + 'loops with no beginning or end, which is the same as saying nobody has ever found a single '
+      + 'magnetic pole on its own.',
+    antiAnalogy: {
+      tempting: 'treating a magnetic field like an electric one, pushing on any charge it finds',
+      whyItFails:
+        'a charge at rest in a magnetic field feels nothing. Motion is required, and forgetting that '
+        + 'makes every magnetic force problem produce a force where there is none.',
+    },
+    microCheck: 'A charge sits still in a magnetic field. Does it feel a force?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.em.magnetic-force',
+    subject: 'physics',
+    canonicalIdea: 'The magnetic push on a moving charge is sideways to both its motion and the field, so it turns without speeding it up.',
+    concreteAnchor: 'a beam of electrons bent into a circle inside a tube',
+    plainExplanation:
+      'Send electrons across a magnetic field and they curve, often right round into a circle. The push '
+      + 'they feel is at right angles both to how they are moving and to the field — sideways, always. '
+      + 'Because it is always sideways to the motion, it can never speed them up or slow them down; it '
+      + 'only changes direction. That is why a magnetic field can trap a particle in a circle forever '
+      + 'without adding energy, and it is how particle accelerators steer beams and how the Earth\'s '
+      + 'field traps solar particles into the aurora.',
+    antiAnalogy: {
+      tempting: 'expecting a magnetic field to speed a charged particle up',
+      whyItFails:
+        'the force is always perpendicular to the motion, so it does no work at all. Believing otherwise '
+        + 'makes the constant speed in a cyclotron look impossible.',
+    },
+    microCheck: 'An electron curves in a magnetic field. Does it get faster?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.em.biot-savart',
+    subject: 'physics',
+    canonicalIdea: 'Every short piece of a current-carrying wire makes its own small field, and the whole field is all of them added up.',
+    concreteAnchor: 'a compass needle deflecting near a wire carrying current',
+    plainExplanation:
+      'A compass needle near a current-carrying wire swings sideways, and the field it is responding to '
+      + 'circles the wire rather than pointing along it. To work out that field for any shape of wire, '
+      + 'you treat the wire as a chain of tiny segments. Each segment contributes a small field of its '
+      + 'own — stronger for more current, weaker further away, and pointing at right angles to both the '
+      + 'segment and the direction to your point. Add up every segment\'s contribution and you have the '
+      + 'field of the whole loop, coil or wire.',
+    antiAnalogy: {
+      tempting: 'expecting the field to point along the wire, the way the current does',
+      whyItFails:
+        'it circles the wire instead, which is why a compass turns sideways rather than aligning with the '
+        + 'current. Pointing it along the wire gets every direction in the subject wrong.',
+    },
+    microCheck: 'A compass sits beside a current-carrying wire. Which way does the field point?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.em.amperes-law',
+    subject: 'physics',
+    canonicalIdea: 'Add up the magnetic field around any closed loop and you learn only about the current threading through it.',
+    concreteAnchor: 'a loop of string drawn around a bundle of wires',
+    plainExplanation:
+      'Imagine drawing any closed loop in space and walking around it, adding up the magnetic field as '
+      + 'you go. The total depends only on the current passing THROUGH your loop. Currents outside '
+      + 'contribute nothing overall. That makes it the magnetic twin of the rule for electric fields '
+      + 'through a closed surface, and it is enormously useful for symmetric arrangements — choose the '
+      + 'loop cleverly, where the field is the same all the way round, and you read the answer off '
+      + 'almost without calculating.',
+    antiAnalogy: {
+      tempting: 'thinking a nearby wire outside the loop must contribute something',
+      whyItFails:
+        'it alters the field at points on the loop but contributes zero to the total round it. Only '
+        + 'current threading the loop counts.',
+    },
+    microCheck: 'A wire runs past your loop but not through it. Does it change the total?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.em.solenoid',
+    subject: 'physics',
+    canonicalIdea: 'A coil of wire makes a nearly uniform field along its inside, and a weak spread-out one outside.',
+    concreteAnchor: 'an electromagnet made by winding wire round a nail',
+    plainExplanation:
+      'Wind wire round a nail, pass a current, and you have a magnet that picks up paperclips and stops '
+      + 'the moment you disconnect it. Inside a long coil the contributions of all the turns add up into '
+      + 'a strong, remarkably uniform field pointing straight along the axis. Outside, the same field '
+      + 'spreads out over a huge region and becomes very weak. Packing the turns closer, adding more of '
+      + 'them, or putting iron in the middle all strengthen it, which is exactly what an electromagnet '
+      + 'does.',
+    antiAnalogy: {
+      tempting: 'saying the field outside a solenoid is exactly zero',
+      whyItFails:
+        'the curriculum\'s own note singles this out. That holds only for an idealised infinite coil. A '
+        + 'real one has a weak external field, and stating it as an absolute makes the returning field '
+        + 'lines impossible to account for.',
+    },
+    microCheck: 'Is the field just outside a real solenoid exactly zero?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.em.magnetic-materials',
+    subject: 'physics',
+    canonicalIdea: 'Materials respond to a magnetic field weakly against it, weakly with it, or strongly with it and stay that way.',
+    concreteAnchor: 'a magnet against a paperclip, a piece of aluminium, and a lump of copper',
+    plainExplanation:
+      'A magnet grabs a paperclip, ignores a piece of aluminium almost entirely, and is very slightly '
+      + 'pushed away by copper. Three different behaviours. Most materials respond either very weakly '
+      + 'with the field or very weakly against it, so weakly that you never notice. A few — iron, nickel, '
+      + 'cobalt — respond enormously, because their atoms line up in large regions that grow when a field '
+      + 'is applied and can stay lined up after it is removed. That staying-put is what makes a permanent '
+      + 'magnet possible, and heating one past a certain point destroys it.',
+    antiAnalogy: {
+      tempting: 'thinking all metals are magnetic',
+      whyItFails:
+        'aluminium and copper are metals and are not attracted. Strong magnetism belongs to a short list '
+        + 'of materials, not to metals as a class.',
+    },
+    microCheck: 'A magnet ignores an aluminium can. Is aluminium a metal?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.em.magnetic-dipole',
+    subject: 'physics',
+    canonicalIdea: 'A current loop behaves as a small magnet, and the Earth behaves as an enormous one.',
+    concreteAnchor: 'a compass needle pointing north',
+    plainExplanation:
+      'A loop of current acts exactly like a tiny bar magnet, with a strength set by the current, the '
+      + 'area enclosed and the number of turns. Put one in a field and it twists to line up, which is how '
+      + 'electric motors work. The Earth is the same thing on a vast scale, its field generated by '
+      + 'movement in the molten core. A compass needle lines up with that field — which is why the '
+      + 'magnetic pole it points at sits in the ARCTIC and must therefore, magnetically speaking, behave '
+      + 'as a south pole.',
+    antiAnalogy: {
+      tempting: 'assuming the Earth\'s magnetic poles sit exactly at the geographic ones',
+      whyItFails:
+        'they are hundreds of kilometres apart and they wander. Navigators correct for the difference, '
+        + 'and treating them as identical makes that correction inexplicable.',
+    },
+    microCheck: 'Does a compass point at the geographic North Pole?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.em.magnetic-flux',
+    subject: 'physics',
+    canonicalIdea: 'Flux counts how much field passes through a surface, and turning the surface edge-on reduces it to nothing.',
+    concreteAnchor: 'holding a hoop in falling rain, flat then edge-on',
+    plainExplanation:
+      'Hold a hoop out in falling rain. Held flat, plenty of rain passes through it. Tilt it and less '
+      + 'gets through. Turn it fully edge-on and none does, though the rain has not changed at all. '
+      + 'Magnetic flux works the same way: it counts how much field passes through a surface, and it '
+      + 'depends on the field strength, the area, and the angle between them. It is not a thing that '
+      + 'flows — nothing is moving — it is a measure of how much field crosses the surface you chose.',
+    antiAnalogy: {
+      tempting: 'picturing flux as something physically flowing through the loop',
+      whyItFails:
+        'nothing travels. The name is historical, and the flowing picture makes learners look for a rate '
+        + 'or a speed where there is only a count.',
+    },
+    microCheck: 'You turn the loop edge-on to the field. What is the flux through it?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.em.faradays-law',
+    subject: 'physics',
+    canonicalIdea: 'A CHANGING amount of field through a loop drives a voltage; a steady one drives nothing.',
+    concreteAnchor: 'a magnet pushed in and out of a coil connected to a meter',
+    plainExplanation:
+      'Push a magnet into a coil and the meter kicks. Hold it still inside and the meter reads zero, '
+      + 'though the magnet is right there. Pull it out and the meter kicks the other way. What generates '
+      + 'the voltage is CHANGE — the amount of field through the loop rising or falling — and the faster '
+      + 'the change, the bigger the voltage. This one fact is the basis of every generator, every '
+      + 'transformer, and the induction hob. Nothing is generated while things sit still, however strong '
+      + 'the field.',
+    antiAnalogy: {
+      tempting: 'expecting a strong steady field to produce a voltage',
+      whyItFails:
+        'strength does nothing on its own — only change does. That is why a magnet resting inside a coil '
+        + 'generates nothing at all, and why generators must keep turning.',
+    },
+    microCheck: 'The magnet sits still inside the coil. What does the meter read?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.em.lenzs-law',
+    subject: 'physics',
+    canonicalIdea: 'An induced current always flows the way that fights the change that produced it.',
+    concreteAnchor: 'a magnet falling slowly down a copper pipe',
+    plainExplanation:
+      'Drop a magnet down a copper pipe and it drifts down far more slowly than gravity alone would '
+      + 'allow, though copper is not magnetic. As the magnet falls, the field through each part of the '
+      + 'pipe changes, currents are induced, and those currents flow in exactly the direction whose own '
+      + 'field opposes the magnet\'s motion. Whatever you do, the induced effect pushes back against '
+      + 'what you did. That is not a coincidence: if it helped instead, you would get energy from '
+      + 'nothing, and conservation of energy forbids it.',
+    antiAnalogy: {
+      tempting: 'expecting the induced current to help the motion along',
+      whyItFails:
+        'that would create energy from nothing — a falling magnet would accelerate itself indefinitely. '
+        + 'Opposition is what makes generators need driving and brakes work.',
+    },
+    microCheck: 'Why does a magnet fall slowly through a copper pipe?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.em.self-inductance',
+    subject: 'physics',
+    canonicalIdea: 'A coil resists changes in its own current, so current in it cannot start or stop instantly.',
+    concreteAnchor: 'the spark when you unplug an electromagnet',
+    plainExplanation:
+      'Disconnect a big electromagnet and a spark jumps at the switch. The coil had a current through it '
+      + 'and its own field; breaking the circuit tries to stop that current instantly, the field '
+      + 'collapses fast, and the coil induces a large voltage of its own trying to keep the current '
+      + 'going. That is self-inductance: a coil opposes any change to its own current, whether starting '
+      + 'or stopping. Current in an inductor behaves rather like a heavy flywheel — hard to get going, '
+      + 'and hard to stop.',
+    antiAnalogy: {
+      tempting: 'thinking an inductor simply resists current, like a resistor',
+      whyItFails:
+        'it resists CHANGE, not flow. A steady current passes through an ideal coil with no opposition '
+        + 'whatever, which a resistor picture cannot account for.',
+    },
+    microCheck: 'A steady current already flows in a coil. Does the coil oppose it?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.em.mutual-inductance',
+    subject: 'physics',
+    canonicalIdea: 'A changing current in one coil induces a voltage in another, and a transformer trades voltage against current.',
+    concreteAnchor: 'a phone charger, and the pylons outside',
+    plainExplanation:
+      'Two coils wound on the same iron core: a changing current in the first makes a changing field, '
+      + 'and that changing field induces a voltage in the second. No wire connects them. The ratio of '
+      + 'turns sets the ratio of voltages, so more turns on the second means a higher voltage out. But '
+      + 'energy is not created — if the voltage goes up, the current available goes down by the same '
+      + 'factor. That trade is why power is sent across country at enormous voltage and tiny current, '
+      + 'because it is current that heats the cables and wastes energy.',
+    antiAnalogy: {
+      tempting: 'saying a transformer boosts the signal',
+      whyItFails:
+        'the curriculum\'s own note singles this out. Boost WHAT? Raising the voltage lowers the current '
+        + 'in step, and the bare word invites the belief that a transformer creates power.',
+    },
+    microCheck: 'A transformer doubles the voltage. What happens to the current available?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.em.ac-basics',
+    subject: 'physics',
+    canonicalIdea: 'Mains voltage swings back and forth, and the quoted figure is the steady value that would heat things equally.',
+    concreteAnchor: 'a 230-volt socket whose peak is actually about 325 volts',
+    plainExplanation:
+      'Mains voltage does not sit at 230 volts. It swings smoothly from positive to negative and back, '
+      + 'fifty times a second, peaking around 325 volts each way. Its true average over a cycle is '
+      + 'exactly zero, since it spends as long negative as positive — so the average would be a useless '
+      + 'thing to quote. The quoted figure is instead the steady voltage that would deliver the same '
+      + 'heating power, and it works out as the peak divided by about one and a half.',
+    antiAnalogy: {
+      tempting: 'describing the quoted figure as basically the average voltage',
+      whyItFails:
+        'the curriculum\'s own note singles this out. The true average is zero. The quoted value is an '
+        + 'equivalent-heating figure, and calling it an average conflates two genuinely different '
+        + 'quantities.',
+    },
+    microCheck: 'What is the true average of a mains voltage over a full cycle?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.em.lc-circuits',
+    subject: 'physics',
+    canonicalIdea: 'A coil and a capacitor together pass energy back and forth, oscillating at one particular rate.',
+    concreteAnchor: 'tuning a radio to one station',
+    plainExplanation:
+      'Connect a charged capacitor to a coil and the energy sloshes between them: the capacitor '
+      + 'discharges into the coil, building its field, and the coil then drives the current onward to '
+      + 'charge the capacitor the other way. It is the electrical twin of a mass bouncing on a spring, '
+      + 'and it happens at one particular rate set by the two components. Changing either changes the '
+      + 'rate, which is precisely how tuning a radio works — you adjust a capacitor until the circuit\'s '
+      + 'natural rate matches one station and ignores the rest.',
+    antiAnalogy: {
+      tempting: 'thinking the current simply stops when the capacitor empties',
+      whyItFails:
+        'the coil keeps it flowing, exactly as a mass sails past the resting point of a spring. That '
+        + 'overshoot is what makes the oscillation rather than a single discharge.',
+    },
+    microCheck: 'The capacitor has fully discharged. Does the current stop there?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.em.maxwells-equations',
+    subject: 'physics',
+    canonicalIdea: 'Four statements tie electricity and magnetism into one thing, and a changing electric field acts like a current.',
+    concreteAnchor: 'the gap between capacitor plates while it charges',
+    plainExplanation:
+      'Four rules cover the whole of electricity and magnetism: charges make electric fields, there are '
+      + 'no isolated magnetic poles, a changing magnetic field makes an electric one, and a current '
+      + 'makes a magnetic field. The last one was incomplete. While a capacitor charges, current flows '
+      + 'in the wires but nothing crosses the gap — yet a magnetic field appears around the gap all the '
+      + 'same. What produces it is the CHANGING electric field between the plates, which contributes '
+      + 'exactly as a current would. Completing that rule predicted electromagnetic waves.',
+    antiAnalogy: {
+      tempting: 'saying a displacement current flows through the gap',
+      whyItFails:
+        'the curriculum\'s own note singles this out. Nothing crosses the gap. A changing electric field '
+        + 'produces the same magnetic effect a current would, and the word invites the belief that '
+        + 'charge is literally travelling.',
+    },
+    microCheck: 'A capacitor is charging. Does charge actually cross the gap?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.em.electromagnetic-waves',
+    subject: 'physics',
+    canonicalIdea: 'Changing electric and magnetic fields regenerate each other and travel through empty space at the speed of light.',
+    concreteAnchor: 'sunlight crossing the vacuum between the Sun and Earth',
+    plainExplanation:
+      'Sunlight reaches us across a hundred and fifty million kilometres of vacuum. A changing electric '
+      + 'field creates a magnetic one, which as it changes creates an electric one, and so on — each '
+      + 'sustaining the other, needing nothing to travel through. They all move at the same speed, and '
+      + 'differ only in how rapidly they oscillate: radio at the slow end, then microwaves, infrared, '
+      + 'the narrow band our eyes detect, ultraviolet, X-rays and gamma rays. One phenomenon, one speed, '
+      + 'an enormous range of rates.',
+    antiAnalogy: {
+      tempting: 'saying they are just like sound waves but faster',
+      whyItFails:
+        'the curriculum\'s own note singles this out. Sound needs a material and these need nothing — '
+        + 'which is the single most important fact about them, and exactly what the comparison erases.',
+    },
+    microCheck: 'Sound cannot cross a vacuum. How does sunlight reach us?',
+    ...DRAFTED,
+  },
 ]
 
 export type RemediationCardLookup =
