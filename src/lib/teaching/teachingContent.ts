@@ -1,0 +1,143 @@
+/**
+ * DID THIS TURN TEACH ANYTHING?
+ *
+ * ── THE GAP THIS FILLS ──────────────────────────────────────────────────────
+ * Every instrument in this repository asks whether a turn BROKE A RULE. None
+ * asked whether it taught. So a turn can pass arbitration, pass the H3
+ * remediation floor, pass the affirmation guard, invent no mastery, cite no
+ * banned analogy, stay perfectly on concept — and contain no teaching at all.
+ *
+ * Measured in production, 2026-08-27, immediately after a learner said for the
+ * second time that they did not understand:
+ *
+ *     "I understand you're still unsure about how friction works.
+ *      Do I have that right?"
+ *
+ * `[remediation-floor] violation: null`. Every guard clean. The child learned
+ * nothing. That turn is the reason this module exists.
+ *
+ * ── WHY THE EXISTING FLOOR MISSES IT ────────────────────────────────────────
+ * H3 asks "is there any text left once the questions are cut away". A
+ * confirmation tail ("Do I have that right?") is DELIBERATELY excluded from
+ * `askedAnswerableQuestion` — correctly, it is not a mastery question — so the
+ * reflection sentence in front of it survives the cut, the remainder is
+ * non-empty, and the floor reports teaching happened. The floor is not wrong;
+ * it was answering a different question.
+ *
+ * ── WHAT THIS MEASURES ──────────────────────────────────────────────────────
+ * A SUBSTANTIVE sentence is one that says something about the SUBJECT. A
+ * sentence about the LEARNER'S STATE ("I understand you're stuck"), a
+ * confirmation ("does that make sense?"), or a piece of stage management
+ * ("let's carry on") is not teaching, however welcome it is in a lesson. A turn
+ * taught something when at least one substantive sentence survives.
+ *
+ * ── WHAT IT DOES NOT MEASURE, AND MUST NOT BE READ AS ───────────────────────
+ * Not truth. Not quality. Not whether the explanation is any good, pitched
+ * right, or on the correct concept. A confident, fluent, completely wrong
+ * paragraph is "substantive" here. This is a FLOOR — the difference between
+ * teaching and saying nothing — and it is the only claim it makes.
+ *
+ * Warmth is not the target. A reflection FOLLOWED by teaching passes, because
+ * the reflection is not the problem; the reflection being the whole turn is.
+ *
+ * Pure: no I/O, no model call, no state.
+ */
+
+/**
+ * Sentences that talk ABOUT the exchange rather than about the subject.
+ *
+ * Every pattern here was written against a turn this system actually produced,
+ * not imagined. Anchored at the start of the sentence (or matching a whole
+ * short sentence) so that the same words appearing mid-explanation — "you're
+ * saying the force doubles, so…" — do not silently delete real teaching.
+ */
+const META_SENTENCE: RegExp[] = [
+  // Reflecting the learner's own words back at them.
+  /^(and\s+|so\s+|okay,?\s+|ok,?\s+)?you(?:'re| are|r)\s+saying\b/i,
+  /^(and\s+|so\s+)?i\s+(understand|hear|see|know|can see|get)\s+(that\s+)?you\b/i,
+  /^(it\s+)?sounds?\s+like\s+you\b/i,
+  /^(and\s+|so\s+)?you\s+(still\s+)?(feel|think|find|seem)\b/i,
+  /^i'?m\s+(glad|sorry)\b/i,
+  /^(that'?s|thats)\s+(okay|ok|fine|alright|understandable)\b/i,
+  // Asking the learner to confirm the exchange rather than the content.
+  /\b(have|has|did)\s+i\s+got\s+(that|it)\s+right\b/i,
+  /\bdo\s+i\s+have\s+(that|it)\s+right\b/i,
+  /\bhas\s+that\s+got\s+it\s+right\b/i,
+  /^(is|does)\s+that\s+(right|correct|make sense|clear)\b/i,
+  /^does\s+that\s+(help|make sense)\b/i,
+  /^(am|are)\s+(i|we)\s+(right|on the right track)\b/i,
+  // Stage management.
+  /^(let'?s|lets|shall we|we'?ll)\s+(see|go|start|begin|carry on|continue|move on|try again)\b/i,
+  /^(good|great|nice|perfect|excellent|well done|exactly|correct|right|okay|ok|alright|sure)\b[\s!.,—-]*$/i,
+  /^no\s+(worries|problem)\b/i,
+  /^(take your time|no rush)\b/i,
+]
+
+/** Words that carry no subject content, excluded before counting. */
+const FUNCTION_WORDS = new Set([
+  'a', 'an', 'the', 'and', 'or', 'but', 'so', 'if', 'then', 'than', 'that', 'this',
+  'these', 'those', 'is', 'are', 'was', 'were', 'be', 'been', 'being', 'am',
+  'do', 'does', 'did', 'have', 'has', 'had', 'will', 'would', 'can', 'could',
+  'shall', 'should', 'may', 'might', 'must', 'i', 'you', 'your', 'yours', 'we',
+  'us', 'our', 'it', 'its', 'they', 'them', 'their', 'he', 'she', 'him', 'her',
+  'to', 'of', 'in', 'on', 'at', 'by', 'for', 'with', 'from', 'as', 'about',
+  'into', 'over', 'up', 'down', 'out', 'not', 'no', 'yes', 'ok', 'okay',
+  'me', 'my', 'here', 'there', 'now', 'just', 'very', 'really', 'still',
+  'what', 'which', 'who', 'how', 'why', 'when', 'where', 'lets', 'let',
+])
+
+/**
+ * At least this many content words before a sentence counts as saying
+ * something. Four is deliberately low: "Friction resists sliding between
+ * surfaces" carries five and must pass. The failures this module was built
+ * from carry ZERO once the meta frame is removed, so the floor does not sit
+ * near a boundary that ordinary teaching has to clear.
+ */
+const MIN_CONTENT_WORDS = 4
+
+function splitSentences(text: string): string[] {
+  return text
+    // Treat line breaks and list bullets as sentence boundaries too: a model
+    // that writes one idea per line must not have them read as one sentence.
+    .split(/(?<=[.!?])\s+|\n+/)
+    .map((s) => s.replace(/^[\s*\-•>#\d.)]+/, '').trim())
+    .filter((s) => s.length > 0)
+}
+
+function isMeta(sentence: string): boolean {
+  return META_SENTENCE.some((re) => re.test(sentence))
+}
+
+function contentWordCount(sentence: string): number {
+  const words = sentence
+    .toLowerCase()
+    .replace(/[^a-z0-9\s'’-]/g, ' ')
+    .split(/\s+/)
+    .filter(Boolean)
+  return words.filter((w) => !FUNCTION_WORDS.has(w.replace(/['’]s$/, ''))).length
+}
+
+/**
+ * The sentences of this turn that say something about the subject.
+ *
+ * Exported so a caller can show WHICH sentence carried the teaching rather than
+ * only a boolean — the difference between a measurement you can act on and a
+ * number you have to trust.
+ */
+export function substantiveSentences(text: string): string[] {
+  try {
+    if (typeof text !== 'string' || text.trim().length === 0) return []
+    return splitSentences(text).filter(
+      (s) => !isMeta(s) && contentWordCount(s) >= MIN_CONTENT_WORDS,
+    )
+  } catch {
+    // A measurement must never take a turn down. "Cannot tell" is reported as
+    // "nothing measured", and the one caller treats that as no violation.
+    return []
+  }
+}
+
+/** Did this turn say anything about the subject at all? */
+export function turnTaughtSomething(text: string): boolean {
+  return substantiveSentences(text).length > 0
+}

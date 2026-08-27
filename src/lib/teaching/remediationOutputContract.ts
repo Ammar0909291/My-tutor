@@ -49,8 +49,18 @@
  * Pure: no I/O, no model calls, no state. The route owns the repair.
  */
 import { cutBackToTeaching } from './gateAssessment'
+import { turnTaughtSomething } from './teachingContent'
 
-export type RemediationOutputViolation = 'question-only' | 'repeats-previous-turn'
+export type RemediationOutputViolation =
+  | 'question-only'
+  | 'repeats-previous-turn'
+  /**
+   * The turn said nothing about the subject — only about the learner. Added
+   * after a production turn that passed every guard in this repository and
+   * taught a confused child nothing: "I understand you're still unsure about
+   * how friction works. Do I have that right?" See `teachingContent.ts`.
+   */
+  | 'no-teaching-content'
 
 export interface RemediationOutputCheck {
   violation: RemediationOutputViolation | null
@@ -110,6 +120,20 @@ export function checkRemediationOutput(input: RemediationOutputInput): Remediati
       }
     }
 
+    // 1b. DID IT SAY ANYTHING ABOUT THE SUBJECT? Check 1 asks whether text
+    //     survives the question-cut, and a sentence about the LEARNER survives
+    //     it — which is exactly how a reflection-only turn scored clean in
+    //     production while teaching nothing. Warmth is not the target here: a
+    //     reflection followed by teaching still passes, because it has a
+    //     substantive sentence. A reflection that IS the whole turn does not.
+    if (!turnTaughtSomething(text)) {
+      return {
+        violation: 'no-teaching-content',
+        reason: 'the turn spoke only about the learner, not about the concept — the learner '
+          + 'said they do not understand and was reflected back at instead of taught',
+      }
+    }
+
     // 2. DID IT SAY ANYTHING NEW? Strict containment, so this can only fire on
     //    genuine repetition — a reply whose every word already appeared in the
     //    turn the learner just told us did not land.
@@ -154,6 +178,11 @@ export function buildRemediationRepairAppendix(
   const named = violation === 'question-only'
     ? 'Your reply was only a question. The learner told you they do not understand; '
       + 'asking them something else does not teach them anything.'
+    : violation === 'no-teaching-content'
+    ? 'Your reply talked about the learner instead of teaching them. Reflecting their '
+      + 'confusion back at them ("I understand you are still unsure", "have I got that '
+      + 'right?") is not an explanation — they already know they are stuck. That is why '
+      + 'they wrote to you.'
     : 'Your reply repeated what you had already said. The learner has just told you '
       + 'that exact wording did not land, so saying it again cannot help.'
   return (
