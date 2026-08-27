@@ -126,7 +126,31 @@ export interface RemediationOutputInput {
  * named "no formula" explicitly. Narrow on purpose: ordinary teaching prose
  * contains none of these, so this cannot fire on plain words.
  */
-const NOTATION = /\\\(|\\\[|\$\$|\\mu|\\frac|\\times|[\u03bc\u00b5]|[A-Za-z]_\{?[A-Za-z0-9]\}?\s*=|[A-Za-z]\s*=\s*[A-Za-z\u03bc\u00b5]|\u2264|\u2265/
+/**
+ * GREEK WAS A HOLE THE SIZE OF THE ALPHABET.
+ *
+ * The class used to be `[\u03bc\u00b5]` \u2014 mu, and only mu, because mu is what
+ * the friction card's own banned formula happened to contain. Every other Greek
+ * letter walked straight through, and a formula written in real symbols rather
+ * than LaTeX is not caught by the delimiter patterns either.
+ *
+ * MEASURED (production, phys.rel.time-dilation, 2026-08-27, on a HELD turn \u2014
+ * the learner had said "I don't understand", received the card, said "ok sir",
+ * and got this back after a repair had already run once):
+ *
+ *     \u0394t = \u03b3 \u0394\u03c4 with \u03b3 = 1 / \u221a(1 \u2013 v\u00b2/c\u00b2)
+ *
+ * Not one character of that matched. The card for that concept explains muons
+ * reaching sea level in plain words and contains no symbol at all, which is
+ * exactly the bound this check exists to hold.
+ *
+ * Now the whole Greek block and the radical sign. Both are unambiguous
+ * mathematical notation: ordinary teaching prose spells out "gamma rays" and
+ * "the square root of two". Superscripts and subscripts are deliberately NOT
+ * added \u2014 "5 m\u00b2" and "H\u2082O" are ordinary writing, and a rule that fires on them
+ * would be a different, worse rule.
+ */
+const NOTATION = /\\\(|\\\[|\$\$|\\mu|\\frac|\\times|[\u0370-\u03ff\u1f00-\u1fff\u00b5]|\u221a|[A-Za-z]_\{?[A-Za-z0-9]\}?\s*=|[A-Za-z]\s*=\s*[A-Za-z\u03bc\u00b5]|\u2264|\u2265/
 
 export function notationBeyondCard(text: string, cardText: string): boolean {
   try {
