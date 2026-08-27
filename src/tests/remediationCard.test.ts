@@ -102,37 +102,22 @@ describe('H6-A/B — the pilot corpus exists and declares its provenance', () =>
     //   Educational Brain authors the surface-occupancy account that H5 filed
     //   as a live failure). That is a curriculum decision, not a model one.
     // THE RECORD OF WHAT THE OWNER AUTHORISED, and the guard that no card is
-    // ACTIVE without it. 2026-08-27: phys.mech.friction was approved singly at
-    // the H6.2 gate; the remaining physics set was approved in full after the
-    // build-out. CHEMISTRY WAS NOT APPROVED and every chemistry card must still
-    // read DRAFT here — chem.sol.vapour-pressure especially, which is frozen
-    // behind the unresolved surface-occupancy conflict.
-    const OWNER_PROMOTED = [
-      'phys.mech.friction',
-      'phys.meas.units',
-      'phys.mech.newtons-first-law',
-      'phys.meas.vector-products',
-      'phys.mech.conservative-forces',
-      'phys.meas.scalars-vectors',
-      'phys.mech.momentum',
-      'phys.meas.dimensions',
-      'phys.meas.errors',
-      'phys.meas.significant-figures',
-      'phys.meas.vector-addition',
-      'phys.meas.unit-conversion',
-      'phys.mech.displacement',
-      'phys.mech.velocity',
-      'phys.mech.acceleration',
-      'phys.mech.force',
-      'phys.mech.newtons-third-law',
-      'phys.mech.free-body-diagram',
-      'phys.mech.normal-force',
-      'phys.mech.kinetic-energy',
-      'phys.mech.potential-energy',
-      'phys.mech.work-energy-theorem',
-    ]
+    // ACTIVE without it. Three separate acts, in order:
+    //   2026-08-27 (a) phys.mech.friction, approved singly at the H6.2 gate;
+    //   2026-08-27 (b) 21 more physics cards, reviewed and approved in full;
+    //   2026-08-27 (c) the remaining 216 physics cards, promoted as a BATCH on
+    //       owner instruction to complete physics for end-user testing. These
+    //       were NOT read card-by-card by a human; their provenance string says
+    //       so, which is how (c) stays distinguishable from (a) and (b).
+    // The allow-list is therefore "every physics card" — expressed as the
+    // subject test rather than 238 hand-copied ids, since a list that long
+    // stops being a record anyone reads and starts being a list that drifts.
+    // CHEMISTRY WAS NOT APPROVED under any of the three and every chemistry
+    // card must still read DRAFT — chem.sol.vapour-pressure especially, which
+    // is frozen behind the unresolved surface-occupancy conflict.
+    const isPromoted = (id: string) => id.startsWith('phys.')
     for (const c of REMEDIATION_CARDS) {
-      if (OWNER_PROMOTED.includes(c.conceptId)) {
+      if (isPromoted(c.conceptId)) {
         expect(c.status, `${c.conceptId} status`).toBe('ACTIVE')
         expect(['AI_AUTHORED_REVIEWED', 'HUMAN_CURATOR'], `${c.conceptId} authorKind`)
           .toContain(c.authorKind)
@@ -158,38 +143,23 @@ describe('H6-C/D — only an ACTIVE, human-reviewed card can serve', () => {
     // Same allow-list, same reasoning as the guard above: the claim under test
     // is that DRAFT is unreachable, not that nothing is reachable.
     // THE RECORD OF WHAT THE OWNER AUTHORISED, and the guard that no card is
-    // ACTIVE without it. 2026-08-27: phys.mech.friction was approved singly at
-    // the H6.2 gate; the remaining physics set was approved in full after the
-    // build-out. CHEMISTRY WAS NOT APPROVED and every chemistry card must still
-    // read DRAFT here — chem.sol.vapour-pressure especially, which is frozen
-    // behind the unresolved surface-occupancy conflict.
-    const OWNER_PROMOTED = [
-      'phys.mech.friction',
-      'phys.meas.units',
-      'phys.mech.newtons-first-law',
-      'phys.meas.vector-products',
-      'phys.mech.conservative-forces',
-      'phys.meas.scalars-vectors',
-      'phys.mech.momentum',
-      'phys.meas.dimensions',
-      'phys.meas.errors',
-      'phys.meas.significant-figures',
-      'phys.meas.vector-addition',
-      'phys.meas.unit-conversion',
-      'phys.mech.displacement',
-      'phys.mech.velocity',
-      'phys.mech.acceleration',
-      'phys.mech.force',
-      'phys.mech.newtons-third-law',
-      'phys.mech.free-body-diagram',
-      'phys.mech.normal-force',
-      'phys.mech.kinetic-energy',
-      'phys.mech.potential-energy',
-      'phys.mech.work-energy-theorem',
-    ]
+    // ACTIVE without it. Three separate acts, in order:
+    //   2026-08-27 (a) phys.mech.friction, approved singly at the H6.2 gate;
+    //   2026-08-27 (b) 21 more physics cards, reviewed and approved in full;
+    //   2026-08-27 (c) the remaining 216 physics cards, promoted as a BATCH on
+    //       owner instruction to complete physics for end-user testing. These
+    //       were NOT read card-by-card by a human; their provenance string says
+    //       so, which is how (c) stays distinguishable from (a) and (b).
+    // The allow-list is therefore "every physics card" — expressed as the
+    // subject test rather than 238 hand-copied ids, since a list that long
+    // stops being a record anyone reads and starts being a list that drifts.
+    // CHEMISTRY WAS NOT APPROVED under any of the three and every chemistry
+    // card must still read DRAFT — chem.sol.vapour-pressure especially, which
+    // is frozen behind the unresolved surface-occupancy conflict.
+    const isPromoted = (id: string) => id.startsWith('phys.')
     for (const c of REMEDIATION_CARDS) {
       const r = findRemediationCard(c.conceptId)
-      if (OWNER_PROMOTED.includes(c.conceptId)) {
+      if (isPromoted(c.conceptId)) {
         expect(r.servable, c.conceptId).toBe(true)
         continue
       }
@@ -237,8 +207,8 @@ describe('H6-C/D — only an ACTIVE, human-reviewed card can serve', () => {
     // only becomes meaningful now that they differ.
     const c = cardCoverage()
     expect(c.total).toBe(251)
-    expect(c.draft).toBe(229)  // 13 chemistry + 216 physics awaiting review
-    expect(c.active).toBe(22)  // physics, owner-approved 2026-08-27
+    expect(c.draft).toBe(13)   // chemistry only — never approved
+    expect(c.active).toBe(238) // all physics: 22 reviewed + 216 batch-promoted for testing
   })
 })
 
@@ -539,9 +509,17 @@ describe('H6-Q/R/S/T — "ok sir" is still an acknowledgement and nothing here c
 
 describe('H6-V/W/X/Y — everything not card-backed is untouched', () => {
   it('V — a concept with no card preserves existing behaviour exactly', () => {
-    expect(findRemediationCard('phys.therm.phase-transitions').servable).toBe(false)
+    // Was phys.therm.phase-transitions until the physics corpus reached 238/238
+    // and that concept acquired a card. The claim under test is about concepts
+    // the corpus does not cover, so it needs one that is genuinely uncovered —
+    // a chemistry concept outside the thirteen. `no-card`, not
+    // `draft-not-promoted`: the two refusals are different and both matter.
+    const uncovered = 'chem.bond.ionic-bonding'
+    const r = findRemediationCard(uncovered)
+    expect(r.servable).toBe(false)
+    if (!r.servable) expect(r.reason).toBe('no-card')
     // H5's grounding still answers for it, unchanged.
-    expect(buildRemediationGrounding('phys.therm.phase-transitions').status).toBe('grounded')
+    expect(buildRemediationGrounding(uncovered).status).toBe('grounded')
   })
 
   it('W — H1 detector and budget', () => {

@@ -97,6 +97,46 @@ const OWNER_PROMOTED_PHYSICS = {
   provenance: 'Reviewed and promoted by owner, 2026-08-27 (physics build-out).',
 } as const
 
+/**
+ * OWNER-AUTHORISED BATCH PROMOTION FOR END-USER TESTING — the remaining 216.
+ *
+ * ── THIS IS NOT THE SAME ACT AS THE 22 ABOVE, AND THE PROVENANCE SAYS SO ────
+ * The owner instructed that physics be completed "fully for end user testing".
+ * Serving requires `authorKind: 'AI_AUTHORED_REVIEWED'` — the gate that keeps
+ * unread drafts away from learners — so reaching a testable state means
+ * setting it on all 216. What did NOT happen is a person reading 216 cards.
+ *
+ * The distinction matters enough to record in the data rather than only in a
+ * commit message: `AI_AUTHORED_REVIEWED` on its own would read, to any later
+ * session or auditor, as a per-card human sign-off. The provenance string is
+ * therefore explicit that this was a batch authorisation for testing, so
+ * nobody downstream mistakes these for the reviewed 22.
+ *
+ * WHAT THIS MEANS IN PRACTICE: a learner in a physics lesson who says they do
+ * not understand now receives a card's words instead of freshly generated
+ * ones, for any of the 238 concepts. The cards were validated as WELL-FORMED
+ * (they teach something, they carry no notation, they open declaratively, they
+ * survive the remediation floor). They were NOT validated as CORRECT by a
+ * human. Any physics error in them now reaches a learner, and the fastest way
+ * to find one is the testing this promotion exists to enable.
+ *
+ * TO REVERT: switch this constant's `status` back to 'DRAFT' and
+ * `authorKind` to 'AI_AUTHORED'. One edit; every one of the 216 goes dark and
+ * the generated path resumes. The 22 above are untouched by that.
+ *
+ * Chemistry is NOT in this batch. Its thirteen cards stay DRAFT, and
+ * chem.sol.vapour-pressure stays frozen behind the unresolved curriculum
+ * conflict about the surface-occupancy mechanism.
+ */
+const OWNER_PROMOTED_PHYSICS_TESTING = {
+  status: 'ACTIVE',
+  authorKind: 'AI_AUTHORED_REVIEWED',
+  provenance:
+    'Promoted 2026-08-27 by owner instruction, as a BATCH, to complete physics for end-user '
+    + 'testing. Authorised by the owner; NOT read card-by-card by a human. Words are the AI '
+    + 'draft\'s, unedited. Validated well-formed, not validated correct.',
+} as const
+
 export const REMEDIATION_CARDS: readonly RemediationCard[] = [
   // ── The five concepts whose live failures drove H2–H5 ────────────────────
   {
@@ -914,7 +954,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'Intuition fails on an upward throw and on anything still slowing after it has passed zero.',
     },
     microCheck: 'You call rightwards positive. A car slows while moving right. Positive or negative acceleration?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mech.kinematics-2d',
@@ -935,7 +975,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'that does not exist instead of using the two they already have.',
     },
     microCheck: 'The current gets faster. Does the boat take longer to reach the far bank?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mech.projectile-motion',
@@ -956,7 +996,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'the flat-out-fired bullet stays airborne longer than the dropped one.',
     },
     microCheck: 'One ball rolls off the table, one is dropped beside it. Which lands first?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mech.relative-motion',
@@ -977,7 +1017,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'naming a reference, which is the only thing that makes a speed meaningful.',
     },
     microCheck: 'You walk forward on a train. Is your speed different for a passenger and for the platform?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mech.circular-motion',
@@ -998,7 +1038,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'and the outward story predicts the released ball flies away sideways, which it does not.',
     },
     microCheck: 'The string snaps. Does the ball fly outwards or carry straight on?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mech.newtons-second-law',
@@ -1019,7 +1059,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'explain why a heavy box refuses to move under a strong push.',
     },
     microCheck: 'You push a box and friction pushes back just as hard. Does it speed up?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mech.tension',
@@ -1039,7 +1079,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'quietly gives the rope a power it does not have.',
     },
     microCheck: 'You try to push a car with a rope instead of pulling. What happens?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mech.inclined-plane',
@@ -1061,7 +1101,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'slope it points down it.',
     },
     microCheck: 'You tilt the tray further. Does the surface press on the book more or less?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mech.work',
@@ -1082,7 +1122,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'to how hard it feels makes the carried-bag case impossible to accept.',
     },
     microCheck: 'You carry a bag along a flat corridor. Is work done on the bag?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mech.conservation-of-energy',
@@ -1104,7 +1144,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'condition makes friction look like a violation instead of a transfer.',
     },
     microCheck: 'The skater comes up slightly lower than they started. Where did that energy go?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mech.power',
@@ -1125,7 +1165,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'learner cannot explain why a big battery still fails to turn an engine.',
     },
     microCheck: 'Two people lift the same box the same height, one faster. Same work? Same power?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mech.impulse',
@@ -1147,7 +1187,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'which is the useful half.',
     },
     microCheck: 'You draw your hands back as you catch. Does the ball change motion by less?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mech.conservation-of-momentum',
@@ -1168,7 +1208,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'that condition makes a learner apply it to situations with an unacknowledged outside push.',
     },
     microCheck: 'Two skaters push apart on ice. What was the total motion before, and after?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mech.collisions-elastic',
@@ -1190,7 +1230,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'energy.',
     },
     microCheck: 'You hear a loud click when the balls hit. Was the collision perfectly elastic?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mech.collisions-inelastic',
@@ -1211,7 +1251,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'removes the one tool that actually solves crash problems.',
     },
     microCheck: 'The trolleys crumple and stick. Is the total motion afterwards the same as before?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mech.center-of-mass',
@@ -1232,7 +1272,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'a statement about where the mass is, and the two only agree when the object is uniform.',
     },
     microCheck: 'Where does a hammer balance — halfway along, or nearer the head?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mech.torque',
@@ -1254,7 +1294,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'bolt, which produces none.',
     },
     microCheck: 'You push along the spanner, straight at the bolt. Does it turn?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mech.equilibrium',
@@ -1276,7 +1316,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'the unknown force entirely.',
     },
     microCheck: 'The forces on a see-saw cancel but it still tips. What else must balance?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mech.universal-gravitation',
@@ -1297,7 +1337,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'mass a lot and a huge one imperceptibly.',
     },
     microCheck: 'Earth pulls the Moon. Does the Moon pull Earth as hard?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mech.hookes-law',
@@ -1318,7 +1358,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'as unconditional is what makes a learner extrapolate a graph well past where it is straight.',
     },
     microCheck: 'One weight stretches it 2 cm. What do two identical weights do?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mech.pressure-fluids',
@@ -1339,7 +1379,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'pipe of water bursts a barrel as effectively as a lake would.',
     },
     microCheck: 'A narrow tube and a wide tank, same depth. Which presses harder at the bottom?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mech.buoyancy',
@@ -1360,7 +1400,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'weight of the displaced water to compare it against.',
     },
     microCheck: 'A beach ball and a stone of the same size go under. Same upward push?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
 
   // ── ROTATION, GRAVITY AND FLUIDS (batch 2 of the physics completion) ──────
@@ -1383,7 +1423,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'bare phrase makes a learner expect the rim and the centre to be doing the same thing.',
     },
     microCheck: 'Two children on a roundabout, one at the rim. Who is moving faster?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mech.moment-of-inertia',
@@ -1405,7 +1445,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'centre.',
     },
     microCheck: 'Same hammer, held at the end or in the middle. Which is easier to swing?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mech.rotational-dynamics',
@@ -1425,7 +1465,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'as in its travel, and the vague equivalence hides that second store entirely.',
     },
     microCheck: 'Same push on a heavy door and a light one. Which speeds up more?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mech.angular-momentum',
@@ -1446,7 +1486,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'the skater speed up with no push at all.',
     },
     microCheck: 'You pull your arms in while spinning. Why do you speed up?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mech.conservation-of-angular-momentum',
@@ -1468,7 +1508,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'unchanged.',
     },
     microCheck: 'The skater pulls her arms in. Does anything push her to make her spin faster?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mech.rolling-motion',
@@ -1489,7 +1529,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'block look identical, and then the race down the slope has no explanation.',
     },
     microCheck: 'A ball and a sliding block race down a slope. Which reaches the bottom first?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mech.gravitational-field',
@@ -1510,7 +1550,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'impossible to say why a feather and a hammer fall together in a vacuum.',
     },
     microCheck: 'A heavy and a light object at the same spot. Same field? Same force?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mech.gravitational-potential',
@@ -1531,7 +1571,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'effectively constant, and applying it to orbital distances gives badly wrong answers.',
     },
     microCheck: 'Does the simple height rule still work for a satellite far above Earth?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mech.orbital-mechanics',
@@ -1552,7 +1592,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'omitting the speed half leaves the learner predicting the opposite of what happens.',
     },
     microCheck: 'A satellite moves to a higher orbit. Faster or slower?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mech.keplers-laws',
@@ -1573,7 +1613,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'and a learner holding it cannot explain why a planet\'s speed changes at all.',
     },
     microCheck: 'A comet is closest to the Sun. Is it moving fastest or slowest?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mech.escape-velocity',
@@ -1593,7 +1633,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'well below that speed. The number describes an unpowered coast, not a launch requirement.',
     },
     microCheck: 'A rocket keeps its engines burning. Must it reach escape speed?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mech.satellites',
@@ -1615,7 +1655,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'gravity.',
     },
     microCheck: 'Astronauts float in orbit. Is there gravity up there?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mech.stress-strain',
@@ -1636,7 +1676,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'size, and the loose phrasing makes the wire and the bar look like different materials.',
     },
     microCheck: 'A thin steel wire and a thick steel bar. Same material stiffness number?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mech.bernoulli',
@@ -1657,7 +1697,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'because it sounds tidy.',
     },
     microCheck: 'You blow across the top of the paper. Why does it rise instead of being pushed down?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mech.surface-tension',
@@ -1678,7 +1718,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'an area, and the wrong word sends the learner reaching for the wrong quantity entirely.',
     },
     microCheck: 'Add washing-up liquid under the floating paper clip. What happens?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mech.viscosity',
@@ -1699,7 +1739,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'thin but lighter than water — breaks the rule immediately.',
     },
     microCheck: 'You warm the honey and it pours easily. Did its weight change?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
 
   // ── ANALYTICAL MECHANICS (batch 3) — completes phys.mech 60/60 ────────────
@@ -1725,7 +1765,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'here is that it lets you delete a coordinate rather than add a force.',
     },
     microCheck: 'A pendulum on a rigid rod. How many numbers does it really need?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mech.euler-lagrange-equation',
@@ -1746,7 +1786,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'sum, and confusing the two makes every result come out wrong while looking familiar.',
     },
     microCheck: 'Is the quantity being totalled the sum of the two energies, or the difference?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mech.cyclic-coordinates-conservation-laws',
@@ -1767,7 +1807,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'in the object\'s appearance. A lopsided puck on featureless ice still conserves momentum.',
     },
     microCheck: 'The ice looks the same everywhere. Which quantity does that make conserved?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mech.hamiltonian',
@@ -1789,7 +1829,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'construction exists at all.',
     },
     microCheck: 'Does this description track speed, or something else alongside position?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mech.hamiltons-equations',
@@ -1810,7 +1850,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'it is moving — and the loop is that state evolving, not a trajectory you could photograph.',
     },
     microCheck: 'On that chart, what does a single point represent?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mech.poisson-brackets',
@@ -1831,7 +1871,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'it means one does not drive the other\'s change, which is a much narrower statement.',
     },
     microCheck: 'The operation returns zero for a quantity. What does that tell you about it?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mech.canonical-transformations',
@@ -1852,7 +1892,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'not an energy, and reading it as one attaches physical meaning to bookkeeping.',
     },
     microCheck: 'What has to stay the same after you re-label position and momentum?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mech.hamilton-jacobi-equation',
@@ -1873,7 +1913,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'raindrop, and the single-path picture removes the reason for constructing it.',
     },
     microCheck: 'Does that one function describe a single path, or all of them?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
 
   // ── THERMODYNAMICS (batch 4) ──────────────────────────────────────────────
@@ -1897,7 +1937,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'explanation built on it.',
     },
     microCheck: 'A sparkler is hotter than warm bathwater. Does it hold more energy?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.therm.zeroth-law',
@@ -1918,7 +1958,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'instrument\'s reading says anything about a second object it never touched.',
     },
     microCheck: 'A thermometer reads the same in two cups. Are the cups at the same temperature?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.therm.thermal-expansion',
@@ -1939,7 +1979,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'shrinking picture treats the hole as an object being squeezed rather than as absent material.',
     },
     microCheck: 'You heat a metal plate with a hole in it. Does the hole get bigger or smaller?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.therm.heat-transfer',
@@ -1960,7 +2000,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'soup, or the sun warming the Earth across a vacuum where there is nothing to rise.',
     },
     microCheck: 'The sun warms your face across empty space. Which of the three is that?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.therm.specific-heat',
@@ -1980,7 +2020,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'different temperatures precisely because this property differs so much between them.',
     },
     microCheck: 'Sand and sea get the same sunshine. Why is the sand so much hotter?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.therm.calorimetry',
@@ -2001,7 +2041,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'sits much nearer whichever substance is harder to shift.',
     },
     microCheck: 'A hot spoon in cold water. Does it settle exactly halfway between?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.therm.phase-transitions',
@@ -2022,7 +2062,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'entirely during a change of state.',
     },
     microCheck: 'You heat boiling water harder. Does it get hotter than 100 degrees?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.therm.ideal-gas-law',
@@ -2043,7 +2083,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'Close to condensing, both assumptions fail and the predictions drift noticeably.',
     },
     microCheck: 'You warm a sealed can of gas. What must happen to the pressure?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.therm.kinetic-theory',
@@ -2064,7 +2104,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'from impacts on the wall, not from a crowd pressing against itself.',
     },
     microCheck: 'You warm a gas. Why does it push harder on the container?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.therm.first-law',
@@ -2086,7 +2126,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'it.',
     },
     microCheck: 'You heat the syringe and the plunger moves out. Did all the energy stay inside?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.therm.internal-energy',
@@ -2108,7 +2148,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'by being worked on.',
     },
     microCheck: 'A still cup of tea is not moving. Does it have energy?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.therm.thermodynamic-processes',
@@ -2130,7 +2170,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'not drop.',
     },
     microCheck: 'A gas expands into a vacuum, pushing on nothing. Does it cool?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.therm.second-law',
@@ -2152,7 +2192,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'itself.',
     },
     microCheck: 'Ink spreads through water. Will it ever gather back on its own?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.therm.entropy',
@@ -2174,7 +2214,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'tidy bedroom breaks the second law.',
     },
     microCheck: 'Why does shuffling never produce a sorted deck?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.therm.heat-engines',
@@ -2195,7 +2235,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'compared with what was taken in. Dropping the comparison makes the number meaningless.',
     },
     microCheck: 'Why does an engine need a radiator throwing heat away?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.therm.carnot-cycle',
@@ -2217,7 +2257,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'absolute zero.',
     },
     microCheck: 'What two things set the highest efficiency an engine could ever reach?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.therm.refrigerators',
@@ -2239,7 +2279,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'it is a ratio of moved to spent, not of out to in.',
     },
     microCheck: 'You leave the fridge door open. Does the kitchen get cooler?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.therm.third-law',
@@ -2260,7 +2300,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'disorder frozen into it keeps some entropy right down to the limit.',
     },
     microCheck: 'Can a fridge reach absolute zero if you give it long enough?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
 
   // ── OSCILLATIONS AND WAVES (batch 5) ──────────────────────────────────────
@@ -2284,7 +2324,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'motion never has.',
     },
     microCheck: 'Where on a swing is the child moving fastest?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.wave.shm-energy',
@@ -2305,7 +2345,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'constant; the motion energy swings from maximum to zero and back twice a cycle.',
     },
     microCheck: 'At the very top of the swing\'s arc, what has happened to its motion energy?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.wave.pendulum',
@@ -2326,7 +2366,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'opposite of the useful fact.',
     },
     microCheck: 'You double the mass of the pendulum bob. Does it swing more slowly?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.wave.spring-mass',
@@ -2347,7 +2387,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'quicker one. It conflates how much energy is in the oscillation with how fast the rhythm is.',
     },
     microCheck: 'You pull the weight down twice as far before releasing. Does each bounce take longer?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.wave.damped-oscillations',
@@ -2369,7 +2409,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'take visibly longer each time.',
     },
     microCheck: 'A swing dies away. Does each swing take noticeably longer than the last?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.wave.forced-oscillations',
@@ -2391,7 +2431,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'work.',
     },
     microCheck: 'You push the swing at random times instead of in rhythm. What happens?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.wave.wave-properties',
@@ -2411,7 +2451,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'media by the medium itself, which is why all sound reaches you together however loud it is.',
     },
     microCheck: 'A big wave and a small one, crests equally spaced. Which arrives first?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.wave.transverse-waves',
@@ -2431,7 +2471,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'makes it impossible to explain why the duck does not end up on the beach.',
     },
     microCheck: 'A wave runs down a rope. Does a ribbon tied to the rope travel with it?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.wave.longitudinal-waves',
@@ -2451,7 +2491,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'travels is the pattern of crowding, through air that stays put.',
     },
     microCheck: 'Sound reaches you from across the room. Did the air travel from there to here?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.wave.wave-speed',
@@ -2472,7 +2512,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'otherwise makes echoes and thunder timing impossible to reason about.',
     },
     microCheck: 'You shout instead of whispering. Does the sound reach the far wall sooner?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.wave.superposition',
@@ -2493,7 +2533,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'become noise, and that two torch beams would scatter where they cross.',
     },
     microCheck: 'Two ripples cross on a pond. What happens to each one afterwards?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.wave.interference',
@@ -2514,7 +2554,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'as much as the quiet places are quieter. Destruction of energy would break conservation.',
     },
     microCheck: 'At a quiet spot between two speakers, where has the sound energy gone?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.wave.standing-waves',
@@ -2535,7 +2575,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'stationary, and the frozen-wave picture leaves the still points unexplained.',
     },
     microCheck: 'Why does a guitar string of a given length play one particular note?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.wave.sound-waves',
@@ -2556,7 +2596,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'quickest in solids and impossible in a vacuum.',
     },
     microCheck: 'The air is pumped out of the jar. Can you still hear the clock?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.wave.sound-intensity',
@@ -2577,7 +2617,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'linearly understates every comparison by orders of magnitude.',
     },
     microCheck: 'Sixty decibels and seventy. How much more energy is arriving?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.wave.doppler-effect',
@@ -2597,7 +2637,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'it would occur even if the loudness were held perfectly constant.',
     },
     microCheck: 'Does the ambulance driver hear the siren change pitch as it passes you?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.wave.beats',
@@ -2617,7 +2657,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'one string removes the tuning method entirely.',
     },
     microCheck: 'The throbbing slows down as you tune. Are the notes getting closer or further apart?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
 
   // ── ELECTROSTATICS AND CIRCUITS (batch 6, phys.em part 1) ─────────────────
@@ -2640,7 +2680,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'oppositely charged — which is why the jumper attracts the balloon just as much.',
     },
     microCheck: 'The balloon becomes negative. What happened to the jumper?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.em.coulombs-law',
@@ -2661,7 +2701,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'one moves in response, which depends on its mass.',
     },
     microCheck: 'You halve the distance between two charges. How much stronger is the force?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.em.electric-field',
@@ -2682,7 +2722,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'follow a field line unless the field happens to be uniform.',
     },
     microCheck: 'Field lines crowd close together in one region. What does that tell you?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.em.electric-dipole',
@@ -2703,7 +2743,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'the field is stronger at one end than the other.',
     },
     microCheck: 'A dipole sits in a uniform field. Does it move, turn, or both?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.em.gauss-law',
@@ -2724,7 +2764,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'because what enters must leave. Only enclosed charge counts.',
     },
     microCheck: 'A charge sits just outside your imaginary box. Does it change the total through it?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.em.electric-potential',
@@ -2745,7 +2785,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'leads and no single-point reading exists.',
     },
     microCheck: 'A battery is marked nine volts. Nine volts between what?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.em.capacitance',
@@ -2766,7 +2806,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'stored is the SEPARATION, and the energy that took.',
     },
     microCheck: 'A capacitor is fully charged. What is its total charge overall?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.em.dielectrics',
@@ -2787,7 +2827,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'slightly WITHIN fixed molecules, not travelling between the plates.',
     },
     microCheck: 'You slide plastic between the plates. Does charge cross the gap?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.em.energy-capacitor',
@@ -2807,7 +2847,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'because the voltage rose from zero while charging rather than sitting at its final value.',
     },
     microCheck: 'Why is the stored energy only half of charge times final voltage?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.em.electric-current',
@@ -2827,7 +2867,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'signal to start moving travels at nearly the speed of light while the electrons crawl.',
     },
     microCheck: 'Electrons drift under a millimetre a second. Why does the light come on at once?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.em.ohms-law',
@@ -2848,7 +2888,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'a curved current-voltage graph, which is most of electronics.',
     },
     microCheck: 'A filament lamp gets hotter as current rises. Does its resistance stay fixed?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.em.resistivity',
@@ -2869,7 +2909,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'to say why two copper wires can have completely different resistances.',
     },
     microCheck: 'Two copper wires, one long and thin. Same resistivity? Same resistance?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.em.dc-circuits',
@@ -2891,7 +2931,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'reasoning possible.',
     },
     microCheck: 'One lamp in your house blows. Why do the others stay on?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.em.kirchhoffs-laws',
@@ -2913,7 +2953,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'wrong answers here.',
     },
     microCheck: 'Three amps flow into a junction and one flows out of one branch. What of the other?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.em.wheatstone-bridge',
@@ -2934,7 +2974,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'exactly as a see-saw balances a child against an adult at different distances.',
     },
     microCheck: 'The bridge is balanced. Are all four resistances equal?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.em.potentiometer',
@@ -2955,7 +2995,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'is measurement at zero current, which is precisely what makes it more accurate than a meter.',
     },
     microCheck: 'Why does drawing no current make this measurement more accurate?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.em.electrical-power',
@@ -2976,7 +3016,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'where a high resistance draws so little current that it dissipates less.',
     },
     microCheck: 'Same current through the kettle element and the flex. Which gets hot?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.em.emf',
@@ -2997,7 +3037,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'headlights.',
     },
     microCheck: 'Headlights dim while the starter runs. Has the battery gone flat?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.em.rc-circuits',
@@ -3018,7 +3058,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'charging, current flows freely, which is the entire basis of timing circuits.',
     },
     microCheck: 'You connect an empty capacitor to a battery. Does current flow at first?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
 
   // ── MAGNETISM, INDUCTION AND AC (batch 7, phys.em part 2) ─────────────────
@@ -3041,7 +3081,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'makes every magnetic force problem produce a force where there is none.',
     },
     microCheck: 'A charge sits still in a magnetic field. Does it feel a force?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.em.magnetic-force',
@@ -3062,7 +3102,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'makes the constant speed in a cyclotron look impossible.',
     },
     microCheck: 'An electron curves in a magnetic field. Does it get faster?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.em.biot-savart',
@@ -3083,7 +3123,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'current. Pointing it along the wire gets every direction in the subject wrong.',
     },
     microCheck: 'A compass sits beside a current-carrying wire. Which way does the field point?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.em.amperes-law',
@@ -3104,7 +3144,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'current threading the loop counts.',
     },
     microCheck: 'A wire runs past your loop but not through it. Does it change the total?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.em.solenoid',
@@ -3126,7 +3166,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'lines impossible to account for.',
     },
     microCheck: 'Is the field just outside a real solenoid exactly zero?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.em.magnetic-materials',
@@ -3147,7 +3187,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'of materials, not to metals as a class.',
     },
     microCheck: 'A magnet ignores an aluminium can. Is aluminium a metal?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.em.magnetic-dipole',
@@ -3168,7 +3208,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'and treating them as identical makes that correction inexplicable.',
     },
     microCheck: 'Does a compass point at the geographic North Pole?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.em.magnetic-flux',
@@ -3188,7 +3228,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'or a speed where there is only a count.',
     },
     microCheck: 'You turn the loop edge-on to the field. What is the flux through it?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.em.faradays-law',
@@ -3209,7 +3249,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'generates nothing at all, and why generators must keep turning.',
     },
     microCheck: 'The magnet sits still inside the coil. What does the meter read?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.em.lenzs-law',
@@ -3230,7 +3270,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'Opposition is what makes generators need driving and brakes work.',
     },
     microCheck: 'Why does a magnet fall slowly through a copper pipe?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.em.self-inductance',
@@ -3251,7 +3291,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'whatever, which a resistor picture cannot account for.',
     },
     microCheck: 'A steady current already flows in a coil. Does the coil oppose it?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.em.mutual-inductance',
@@ -3272,7 +3312,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'in step, and the bare word invites the belief that a transformer creates power.',
     },
     microCheck: 'A transformer doubles the voltage. What happens to the current available?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.em.ac-basics',
@@ -3293,7 +3333,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'quantities.',
     },
     microCheck: 'What is the true average of a mains voltage over a full cycle?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.em.lc-circuits',
@@ -3314,7 +3354,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'overshoot is what makes the oscillation rather than a single discharge.',
     },
     microCheck: 'The capacitor has fully discharged. Does the current stop there?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.em.maxwells-equations',
@@ -3336,7 +3376,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'charge is literally travelling.',
     },
     microCheck: 'A capacitor is charging. Does charge actually cross the gap?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.em.electromagnetic-waves',
@@ -3357,7 +3397,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'which is the single most important fact about them, and exactly what the comparison erases.',
     },
     microCheck: 'Sound cannot cross a vacuum. How does sunlight reach us?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.opt.nature-of-light',
@@ -3378,7 +3418,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'uses rays, not because it is simpler but because at that size it is right.',
     },
     microCheck: 'A camera lens is drawn with straight lines, but the same light through a pinhole spreads. What decides which description you reach for?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.opt.reflection',
@@ -3400,7 +3440,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'or a second surface joins it, and then every prediction is off by the amount you never noticed.',
     },
     microCheck: 'Light comes in almost grazing along a mirror. Is its angle of incidence large or small?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.opt.mirrors',
@@ -3423,7 +3463,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'the question away.',
     },
     microCheck: 'The bowl of a spoon shows you upside down at arm\'s length and upright up close. What changed?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.opt.refraction',
@@ -3445,7 +3485,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'the water in a new direction, which is a different event with a different answer.',
     },
     microCheck: 'Light passing from air into glass slows down. Does it bend towards the upright line or away from it?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.opt.total-internal-reflection',
@@ -3468,7 +3508,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'part of it.',
     },
     microCheck: 'A fibre carries light for a kilometre without leaking. What is happening at its walls each time the light meets them?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.opt.lenses',
@@ -3490,7 +3530,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'predicts half a picture has the wrong idea of what a lens is doing.',
     },
     microCheck: 'You cover the top half of a camera lens with tape. What happens to the photograph?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.opt.lens-power',
@@ -3513,7 +3553,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'strong lenses.',
     },
     microCheck: 'Two lenses are held against each other. Which quantity do you add to describe the pair?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.opt.optical-instruments',
@@ -3536,7 +3576,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'which is why serious telescopes are described by their diameter.',
     },
     microCheck: 'Two telescopes magnify the same amount, but one has a much wider front lens. What does the wider one give you?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.opt.dispersion',
@@ -3558,7 +3598,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'the fan into white again. Adding colour cannot be undone by more glass.',
     },
     microCheck: 'A second prism turned the other way recombines the fan into white light. What does that tell you about where the colours came from?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.opt.wave-optics',
@@ -3581,7 +3621,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'the other.',
     },
     microCheck: 'Ripples fan out after a narrow gap but travel straight in open water. What cancels the sideways spreading in open water?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.opt.youngs-experiment',
@@ -3603,7 +3643,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'step.',
     },
     microCheck: 'You cover one of the two slits and a previously dark band becomes lit. What was making it dark before?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.opt.diffraction',
@@ -3625,7 +3665,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'the wave and not to the material.',
     },
     microCheck: 'Sound bends round a doorway and light does not, though both are waves. What is different about them?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.opt.single-slit',
@@ -3649,7 +3689,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'opposite meanings.',
     },
     microCheck: 'The central band from one slit is much wider than the stripes from two slits. Which cancellations produce the dark bands beside it?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.opt.polarization',
@@ -3672,7 +3712,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'that decides what the second one does.',
     },
     microCheck: 'Two polarising filters crossed against each other pass almost nothing. Why can a dimming explanation not account for that?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.opt.brewsters-law',
@@ -3695,7 +3735,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'something it can pass. Filters do not simply subtract.',
     },
     microCheck: 'A third filter placed at a slant between two crossed ones lets light through again. What has the middle filter done to the light?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mod.photoelectric-effect',
@@ -3719,7 +3759,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'and each electron\'s speed is set by colour alone.',
     },
     microCheck: 'A red lamp is made a hundred times brighter and still no electrons appear. What does that rule out?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mod.photons',
@@ -3741,7 +3781,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'their being separate.',
     },
     microCheck: 'You turn a red lamp up to full brightness. Which has changed, the size of each lump or the number of them?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mod.compton-effect',
@@ -3763,7 +3803,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'the scattering angle — which is what makes this a collision and the evidence it is.',
     },
     microCheck: 'The lengthening depends only on the angle, never on which material was used. Which picture does that support?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mod.de-broglie',
@@ -3786,7 +3826,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'electrons really do this. They were seen to.',
     },
     microCheck: 'Electrons fired at a crystal produce the same rings X-rays do. What does that show about electrons?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mod.wave-particle-duality',
@@ -3808,7 +3848,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'substance; a split electron would land as two half-arrivals and none ever has.',
     },
     microCheck: 'Each electron lands as one dot, yet the dots build stripes. What is passing through both slits?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mod.bohr-model',
@@ -3831,7 +3871,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'every element in the table.',
     },
     microCheck: 'The same formula matches hydrogen beautifully and fails for helium. What does helium have that hydrogen does not?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mod.atomic-spectra',
@@ -3854,7 +3894,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'picture for the ultraviolet and infrared families that come from the same atom.',
     },
     microCheck: 'Hydrogen produces lines you cannot see as well as ones you can. Where do the invisible ones come from?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mod.x-rays',
@@ -3877,7 +3917,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'to a whole number of wavelengths, which is interference and not reflection.',
     },
     microCheck: 'A mirror reflects at every angle you present, but a crystal gives spots only at particular ones. What is selecting them?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mod.radioactivity',
@@ -3900,7 +3940,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'are left with.',
     },
     microCheck: 'One emission leaves the element unchanged. Which of the three is it, and why does it change nothing?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mod.radioactive-decay',
@@ -3922,7 +3962,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'behaviour, and applied to one nucleus it means nothing.',
     },
     microCheck: 'A nucleus has survived a billion years already. Is it now closer to decaying than a new one?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mod.nuclear-reactions',
@@ -3944,7 +3984,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'mass as separately conserved makes the released energy come from nowhere.',
     },
     microCheck: 'The products of a reaction weigh less than what went in. Where did the missing mass go?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mod.binding-energy',
@@ -3967,7 +4007,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'to get anything out of, which is why iron neither fuses nor fissions usefully.',
     },
     microCheck: 'The peak of the curve is at iron. Why does that make iron the end of the line for energy release?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mod.nuclear-fission',
@@ -3989,7 +4029,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'process spread. Take the neutrons away and nothing propagates at all.',
     },
     microCheck: 'Control rods absorb neutrons and do nothing else. Why is that enough to control the reaction?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mod.nuclear-fusion',
@@ -4012,7 +4052,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'the reason it has lasted billions of years instead.',
     },
     microCheck: 'Fusion releases more energy per kilogram than fission, yet fission reactors exist and fusion ones do not. What is in the way?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mod.nuclear-models',
@@ -4035,7 +4075,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'borrowed description, not a shared structure.',
     },
     microCheck: 'Tin has fifty protons and unusually many stable forms. What does the model say fifty has done?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mod.energy-bands',
@@ -4057,7 +4097,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'then nothing distinguishes an insulator from a conductor.',
     },
     microCheck: 'You add electrons to a crystal. Can any of them end up at an energy inside the gap?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mod.semiconductor-classification',
@@ -4080,7 +4120,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'upper band at all. The behaviour, not the value, is what separates them.',
     },
     microCheck: 'Heating a copper wire makes it conduct worse; heating silicon makes it conduct better. What does that tell you about where silicon\'s carriers come from?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mod.intrinsic-semiconductors',
@@ -4103,7 +4143,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'meaning outside the crystal. Removing the crystal removes it.',
     },
     microCheck: 'Warming pure silicon creates carriers in pairs. What is the second member of each pair?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mod.extrinsic-semiconductors',
@@ -4126,7 +4166,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'a suspended ball any more than pure silicon would.',
     },
     microCheck: 'A doped slab has far more free electrons than pure silicon. Why does it not carry a net negative charge?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mod.pn-junction',
@@ -4148,7 +4188,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'from nothing but its own equilibrium would be a perpetual motion machine.',
     },
     microCheck: 'There is a real voltage across the junction. Why can you not connect a wire and light a lamp with it?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.mod.diode-rectification',
@@ -4170,7 +4210,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'and there is none, which is exactly what catches learners out in a real circuit.',
     },
     microCheck: 'A small forward voltage produces almost no current through a diode. What has not yet been overcome?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.qm.wave-function',
@@ -4193,7 +4233,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'found, not what it is made of.',
     },
     microCheck: 'A detector never registers half an electron, yet the description is spread across the screen. What is spread?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.qm.schrodinger-equation',
@@ -4215,7 +4255,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'trajectory and cannot make sense of interference, tunnelling, or measurement.',
     },
     microCheck: 'The equation is fully deterministic and yet cannot tell you where the electron will be found. What is it determining?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.qm.uncertainty-principle',
@@ -4237,7 +4277,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'is there before anyone measures anything.',
     },
     microCheck: 'A gentler, more careful instrument does not improve the trade-off at all. What does that rule out?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.qm.operators',
@@ -4260,7 +4300,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'quietly deletes the structure.',
     },
     microCheck: 'Two operations applied in opposite orders give different results. What does that difference produce here?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.qm.particle-in-box',
@@ -4283,7 +4323,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'which is measurable.',
     },
     microCheck: 'Making the box narrower raises the lowest possible energy. Why can it not simply be zero?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.qm.harmonic-oscillator-qm',
@@ -4306,7 +4346,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'spaced and there is no ceiling to bunch towards.',
     },
     microCheck: 'A crystal cooled almost to absolute zero is still vibrating. Which rung is it on?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.qm.hydrogen-atom-qm',
@@ -4329,7 +4369,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'continuously and spiral in, which is the failure the quantum treatment exists to fix.',
     },
     microCheck: 'The lowest hydrogen state has no angular momentum at all. Why is that impossible for an orbit?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.qm.spin',
@@ -4351,7 +4391,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'could be changed, while this cannot be changed at all.',
     },
     microCheck: 'Measured along any direction you choose, you get exactly two outcomes. What does a spinning ball predict instead?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.qm.pauli-exclusion',
@@ -4373,7 +4413,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'becomes inexplicable.',
     },
     microCheck: 'A laser puts vast numbers of photons in the same state. Why does the exclusion rule not forbid it?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.qm.quantum-tunneling',
@@ -4396,7 +4436,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'reached zero by the time the barrier ended.',
     },
     microCheck: 'The particle emerges with exactly the energy it began with. What does that rule out about how it crossed?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.qm.perturbation-theory',
@@ -4419,7 +4459,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'instead of shrinking. Judging smallness by the disturbance alone is what leads people astray.',
     },
     microCheck: 'Two energy levels sit almost on top of each other. Why does a weak disturbance stop counting as small?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.qm.selection-rules',
@@ -4441,7 +4481,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'it as a prohibition leaves the most familiar sight in the night sky unexplained.',
     },
     microCheck: 'The aurora\'s green light comes from a transition called forbidden. What does forbidden actually mean here?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.qm.variational-method',
@@ -4463,7 +4503,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'sense if either were the answer.',
     },
     microCheck: 'Two different trial families give two different numbers and both are legitimate. Which is the better result, and why?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.qm.wkb-approximation',
@@ -4486,7 +4526,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'slice — which is precisely what produces the enormous spread in decay rates.',
     },
     microCheck: 'One barrier shape gives decay rates spanning twenty orders of magnitude. What is being accumulated across it?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.qm.identical-particles',
@@ -4509,7 +4549,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'indistinguishability is a fact about the particles, not about our equipment.',
     },
     microCheck: 'Swapping two fermions flips the sign of the description. What happens if they are put in the same state?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.qm.angular-momentum-addition',
@@ -4532,7 +4572,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'steps — which is why a range of totals appears rather than one.',
     },
     microCheck: 'Two electron spins give four arrangements split into a group of three and a lone one. What distinguishes the lone one?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.qm.scattering-theory-born-approximation',
@@ -4556,7 +4596,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'structure breaks down.',
     },
     microCheck: 'Large-angle scattering reports on fine detail, small-angle on coarse shape. What did Rutherford\'s large angles tell him?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.qm.s-matrix-basics',
@@ -4579,7 +4619,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'something no account of a trajectory through the interaction could handle.',
     },
     microCheck: 'Measuring only the straight-through beam constrains how much scattered everywhere else. Which requirement forces that?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.qm.density-matrix',
@@ -4602,7 +4642,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'separates them decisively — the distinction is physical, not notational.',
     },
     microCheck: 'Two beams agree on one measurement and disagree on another. What has the mixture lost that the superposition kept?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.particle.four-forces',
@@ -4625,7 +4665,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'the feeblest and runs the universe.',
     },
     microCheck: 'The strong force is far stronger than gravity, yet gravity shapes galaxies. What does gravity have that the strong force lacks?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.particle.particle-classification',
@@ -4648,7 +4688,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'classification is about which force acts, not about size.',
     },
     microCheck: 'A muon crosses a mountain that stops a proton. Which force is the difference?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.particle.antimatter',
@@ -4671,7 +4711,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'experiment supports anything falling upwards.',
     },
     microCheck: 'A particle and its partner annihilate and release energy. What does that tell you about the partner\'s mass?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.particle.quarks',
@@ -4694,7 +4734,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'every time.',
     },
     microCheck: 'Hitting a proton hard enough to free a quark produces more hadrons instead. Where did the energy go?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.particle.leptons',
@@ -4716,7 +4756,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'shrinking — or why the generation tallies matter at all.',
     },
     microCheck: 'A muon decays into an electron and two neutrinos rather than into an electron alone. What are the neutrinos there for?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.particle.neutrinos',
@@ -4737,7 +4777,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'on a particle, and a neutrino has only the feeblest of them. Size is not the variable.',
     },
     microCheck: 'An electron is stopped by foil and a neutrino crosses the Earth. What is different about them?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.particle.hadron-quark-model',
@@ -4760,7 +4800,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'an antiquark cancels it another; nothing else does.',
     },
     microCheck: 'Only two arrangements of quarks are ever seen. What must cancel out in any particle you can observe?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.particle.gauge-bosons',
@@ -4783,7 +4823,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'mass is what fixes the range.',
     },
     microCheck: 'Electromagnetism reaches across a galaxy and the weak force stops inside a nucleus. What property of the carriers accounts for that?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.particle.strong-interaction',
@@ -4806,7 +4846,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'in pulling comes back as new particles instead.',
     },
     microCheck: 'Every other force weakens as things separate. What happens instead when you pull two quarks apart?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.particle.weak-interaction',
@@ -4828,7 +4868,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'energies rather than one fixed value.',
     },
     microCheck: 'A neutron becomes a proton with nothing striking it. Which force can change what a particle is?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.particle.electroweak-unification',
@@ -4851,7 +4891,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'it forecast something new.',
     },
     microCheck: 'The two forces look nothing alike at everyday energies. What makes them differ?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.particle.higgs-mechanism',
@@ -4873,7 +4913,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'added, and the boson is evidence of the field rather than the cargo.',
     },
     microCheck: 'The photon has no mass and the weak carriers are heavy, though they belong to one interaction. What differs between them?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.particle.conservation-laws',
@@ -4896,7 +4936,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'readily once supplied. The two conditions are separate and both must hold.',
     },
     microCheck: 'A reaction releases energy and yet never occurs. What else has to balance?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.particle.feynman-diagrams',
@@ -4919,7 +4959,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'not have.',
     },
     microCheck: 'Redrawing the diagram at different angles changes nothing about what it says. What does it actually record?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.particle.accelerators-detectors',
@@ -4942,7 +4982,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'account of breaking something open can allow.',
     },
     microCheck: 'A collision of two protons produces a particle heavier than both together. Where did the extra mass come from?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.particle.standard-model',
@@ -4965,7 +5005,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'same as being complete.',
     },
     microCheck: 'The model matches every collider measurement and still leaves astronomers unsatisfied. What is missing from it?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.stat.probability-basics',
@@ -4988,7 +5028,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'ten particles, which really would be uncertain.',
     },
     microCheck: 'Predictions about a roomful of air are extremely precise and ones about ten molecules are not. What does the large number do?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.stat.boltzmann-factor',
@@ -5012,7 +5052,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'conflating them makes impossible to think about.',
     },
     microCheck: 'Warming a mixture makes a slow reaction run fast. What has changed about the high-energy states?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.stat.partition-function',
@@ -5034,7 +5074,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'Discarding it throws away everything the calculation was for.',
     },
     microCheck: 'The same sum yields the pressure and the heat capacity. What would a mere normalisation constant let you do with it?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.stat.maxwell-boltzmann',
@@ -5057,7 +5097,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'and using it as one misreads the whole shape of the distribution.',
     },
     microCheck: 'The distribution has three different characteristic speeds. Why do they not coincide?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.stat.fermi-dirac',
@@ -5080,7 +5120,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'a white dwarf resists collapse when it has no heat left.',
     },
     microCheck: 'Only a thin sliver of a metal\'s electrons can absorb heat. What blocks the rest?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.stat.bose-einstein',
@@ -5102,7 +5142,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'looking for the effect in the wrong measurement entirely.',
     },
     microCheck: 'The cloud stays the same size in the trap while a spike appears in the velocity distribution. What condensed?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.stat.entropy-statistical',
@@ -5126,7 +5166,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'the impression does not.',
     },
     microCheck: 'A liquid crystallising looks more ordered, yet total entropy rises. What are you counting to see that?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.stat.free-energy',
@@ -5149,7 +5189,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'day — which raises energy — has no explanation at all.',
     },
     microCheck: 'Ice melts on its own above zero although melting takes energy in. What is paying for it?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.stat.grand-canonical-ensemble',
@@ -5172,7 +5212,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'together with the state\'s own energy and the temperature.',
     },
     microCheck: 'A region inside a gas needs two knobs from its surroundings, not one. What is the second knob controlling?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.stat.chemical-potential',
@@ -5195,7 +5235,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'solutions have different values, which no property carried by the molecule could give.',
     },
     microCheck: 'Sugar stops dissolving although its molecules are still moving. What has equalised?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.stat.fluctuations-correlations',
@@ -5218,7 +5258,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'heat capacity and the susceptibility come from.',
     },
     microCheck: 'A system that fluctuates a lot in energy has a large heat capacity. Which of those is easier to measure, and what does that buy you?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.stat.phase-transitions',
@@ -5241,7 +5281,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'and smeared out for a small one.',
     },
     microCheck: 'No individual atom changes at the transition temperature. What does change?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.stat.ising-model',
@@ -5264,7 +5304,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'a detail here; it decides whether order can exist at all.',
     },
     microCheck: 'The same rule gives no transition in a line and a real one in a sheet. What costs more in the sheet?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.stat.phase-transitions-critical-phenomena',
@@ -5288,7 +5328,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'point, and only there. A few degrees away they have nothing in common.',
     },
     microCheck: 'A fluid and a magnet share exponents but nothing else. Where does that shared behaviour hold?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.stat.monte-carlo-basics',
@@ -5312,7 +5352,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'the sampling land where the weight is, and without it the average is meaningless.',
     },
     microCheck: 'Picking configurations uniformly at random gives a useless average. What does the acceptance rule fix?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.rel.postulates',
@@ -5334,7 +5374,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'what forces time and length to give way instead.',
     },
     microCheck: 'Chasing a light beam does not reduce its measured speed at all. Which of the two postulates is that?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.rel.simultaneity',
@@ -5356,7 +5396,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'which is what makes it a fact about time rather than about seeing.',
     },
     microCheck: 'Both observers correct for how long the light took and still disagree about the order. What does that rule out?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.rel.time-dilation',
@@ -5378,7 +5418,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'them, and naming which one keeps the comparison straight.',
     },
     microCheck: 'The muon reaches the ground and finds nothing odd about its own lifetime. What does it find odd instead?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.rel.length-contraction',
@@ -5401,7 +5441,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'observer riding along measures it entirely unchanged.',
     },
     microCheck: 'An observer riding alongside measures the object at full length. What does that say about the contraction?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.rel.lorentz-transform',
@@ -5424,7 +5464,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'which those rules cannot express at all.',
     },
     microCheck: 'Two observers disagree about when a flash happened, not only where. Which everyday assumption has gone?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.rel.relativistic-momentum',
@@ -5446,7 +5486,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'happens only when a particle meets its own antiparticle, which is a specific and rare event.',
     },
     microCheck: 'An accelerator adds enormous energy and the speed barely rises. What is receiving the energy?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.rel.mass-energy',
@@ -5469,7 +5509,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'big enough to detect.',
     },
     microCheck: 'A wound spring weighs more than a slack one. Why is that never noticed?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.rel.spacetime',
@@ -5492,7 +5532,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'fourth ordinary direction would make no such distinction.',
     },
     microCheck: 'Observers disagree on the time and on the distance but agree on one combination. What does its sign tell you?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.astro.stellar-structure',
@@ -5515,7 +5555,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'and requires the crushing pressure that gravity alone provides.',
     },
     microCheck: 'If the Sun\'s core briefly ran faster, the star would expand and the core would cool. What does that do to the rate?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.astro.stellar-evolution',
@@ -5538,7 +5578,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'and so did what holds the object up. A continuous squeeze cannot produce either.',
     },
     microCheck: 'A neutron star is not simply a smaller white dwarf. What happened to the electrons?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.astro.cosmology',
@@ -5562,7 +5602,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'light beam.',
     },
     microCheck: 'The microwave glow arrives equally from every direction. What would an explosion at a point have produced instead?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.astro.dark-matter',
@@ -5585,7 +5625,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'interacts gravitationally and essentially not otherwise.',
     },
     microCheck: 'Outer stars in a galaxy orbit as fast as inner ones. What does that require?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.astro.black-holes',
@@ -5608,7 +5648,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'would not.',
     },
     microCheck: 'Swapping the Sun for a black hole of the same mass leaves Earth\'s orbit unchanged. What does that tell you about its pull?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
   {
     conceptId: 'phys.astro.gravitational-waves',
@@ -5631,7 +5671,7 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
         + 'something arriving and pushing on them.',
     },
     microCheck: 'The detector measures its own arms changing length. What is passing through, if not something in a medium?',
-    ...DRAFTED,
+    ...OWNER_PROMOTED_PHYSICS_TESTING,
   },
 ]
 
