@@ -60,8 +60,8 @@ describe('H6-A/B — the pilot corpus exists and declares its provenance', () =>
     // Was 20 (the H6 pilot). 2026-08-27: the physics build-out added the whole
     // measurement domain and the mechanics entry spine — the concepts a physics
     // learner actually walks through — taking physics from 7 to 22.
-    expect(REMEDIATION_CARDS.length).toBe(166)
-    expect(REMEDIATION_CARDS.filter((c) => c.subject === 'physics').length).toBe(153)
+    expect(REMEDIATION_CARDS.length).toBe(187)
+    expect(REMEDIATION_CARDS.filter((c) => c.subject === 'physics').length).toBe(174)
     const subjects = new Set(REMEDIATION_CARDS.map((c) => c.subject))
     expect(subjects.has('physics')).toBe(true)
     expect(subjects.has('chemistry')).toBe(true)
@@ -236,8 +236,8 @@ describe('H6-C/D — only an ACTIVE, human-reviewed card can serve', () => {
     // the two numbers are reported separately and never added together — which
     // only becomes meaningful now that they differ.
     const c = cardCoverage()
-    expect(c.total).toBe(166)
-    expect(c.draft).toBe(144)  // 13 chemistry + 131 physics awaiting review
+    expect(c.total).toBe(187)
+    expect(c.draft).toBe(165)  // 13 chemistry + 152 physics awaiting review
     expect(c.active).toBe(22)  // physics, owner-approved 2026-08-27
   })
 })

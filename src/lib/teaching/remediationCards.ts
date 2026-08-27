@@ -3697,6 +3697,481 @@ export const REMEDIATION_CARDS: readonly RemediationCard[] = [
     microCheck: 'A third filter placed at a slant between two crossed ones lets light through again. What has the middle filter done to the light?',
     ...DRAFTED,
   },
+  {
+    conceptId: 'phys.mod.photoelectric-effect',
+    subject: 'physics',
+    canonicalIdea: 'Whether electrons come out of a metal at all depends on the colour of the light, not on how bright it is.',
+    concreteAnchor: 'a dim blue lamp freeing electrons from a metal plate while a blazing red one frees none',
+    plainExplanation:
+      'Shine a very dim blue light on a clean metal plate and electrons come off immediately. Shine an '
+      + 'enormously bright red light on the same plate and none come off at all, however long you wait. '
+      + 'That was the result nobody could explain. If light delivered its energy smoothly, the bright red '
+      + 'light would eventually pour in enough to free an electron. It never does. Each electron receives '
+      + 'energy from light in one indivisible lump, and the size of that lump is set by the colour. Red '
+      + 'lumps are too small to pay the price of escape no matter how many arrive; a single blue lump is '
+      + 'large enough. Brightness only sets how many lumps arrive, and therefore how many electrons come '
+      + 'out, never whether any can.',
+    antiAnalogy: {
+      tempting: 'reasoning that more light means more energy delivered, so the electrons should at least come out faster',
+      whyItFails:
+        'the curriculum\'s own note bans exactly this sentence. It is the prediction the wave picture makes '
+        + 'and the experiment refutes: brighter red light produces not slower electrons but no electrons, '
+        + 'and each electron\'s speed is set by colour alone.',
+    },
+    microCheck: 'A red lamp is made a hundred times brighter and still no electrons appear. What does that rule out?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mod.photons',
+    subject: 'physics',
+    canonicalIdea: 'Light arrives in indivisible lumps whose individual energy is fixed by frequency, while brightness counts how many lumps arrive.',
+    concreteAnchor: 'a camera sensor in near-darkness registering separate specks rather than a faint even glow',
+    plainExplanation:
+      'Photograph something in near-darkness and the picture is not a faint even wash. It is a scatter of '
+      + 'separate specks, each one a single arrival. Light is delivered in lumps, and two quite different '
+      + 'things describe a beam. One is how much energy each lump carries, which is fixed entirely by the '
+      + 'light\'s frequency — ultraviolet lumps are large, red lumps small, radio lumps tiny. The other is '
+      + 'how many lumps per second, which is what we call brightness. A faint ultraviolet beam is few large '
+      + 'lumps. A dazzling red beam is a torrent of small ones.',
+    antiAnalogy: {
+      tempting: 'saying brighter light means stronger, more energetic photons',
+      whyItFails:
+        'the curriculum\'s own note singles this out. It merges the two independent numbers into one, and '
+        + 'then nothing about the photoelectric effect can be explained, because the whole result turns on '
+        + 'their being separate.',
+    },
+    microCheck: 'You turn a red lamp up to full brightness. Which has changed, the size of each lump or the number of them?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mod.compton-effect',
+    subject: 'physics',
+    canonicalIdea: 'An X-ray bouncing off an electron comes away with less energy and a longer wavelength, exactly as a collision between two particles would give.',
+    concreteAnchor: 'a cue ball striking a stationary ball and leaving slower and off its old line',
+    plainExplanation:
+      'Send X-rays into a block of graphite and some come out to the side with a longer wavelength than '
+      + 'they went in with. The amount of lengthening depends only on the angle they came out at, not on '
+      + 'the material and not on how intense the beam was. That is exactly the signature of a two-body '
+      + 'collision. The X-ray behaves as a particle with momentum, strikes a loosely held electron, and '
+      + 'hands over some of its energy and momentum. It leaves with less energy, and less energy for light '
+      + 'means a longer wavelength. The electron recoils, and it can be detected doing so.',
+    antiAnalogy: {
+      tempting: 'describing it as the photon being swallowed by the electron and a new one being spat out',
+      whyItFails:
+        'the curriculum\'s own note names this as the one description to avoid. Absorption and re-emission '
+        + 'would let the outgoing energy depend on the atom, and the measurement says it depends only on '
+        + 'the scattering angle — which is what makes this a collision and the evidence it is.',
+    },
+    microCheck: 'The lengthening depends only on the angle, never on which material was used. Which picture does that support?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mod.de-broglie',
+    subject: 'physics',
+    canonicalIdea: 'Every moving object has a wavelength set by its momentum, and for electrons this was confirmed by experiment, not merely proposed.',
+    concreteAnchor: 'electrons fired at a nickel crystal and coming off in the same ringed pattern X-rays give',
+    plainExplanation:
+      'De Broglie turned the photon question around and asked whether particles might behave as waves. '
+      + 'He gave the wavelength: the faster and heavier the object, the shorter it is. For a thrown cricket ball the '
+      + 'answer is so unimaginably small that no experiment could ever detect it, which is why the everyday '
+      + 'world looks like solid objects. For an electron it comes out near the spacing between atoms in a '
+      + 'crystal. Davisson and Germer fired electrons at a nickel crystal and got back the same ringed '
+      + 'diffraction pattern X-rays give from the same crystal. Electrons diffract. The hypothesis is not '
+      + 'a suggestion left hanging; it is a measured fact.',
+    antiAnalogy: {
+      tempting: 'leaving it as a lovely idea about matter waves and stopping there',
+      whyItFails:
+        'the curriculum\'s own note warns that omitting the Davisson and Germer confirmation is itself the '
+        + 'error. Left as a proposal it sounds like speculation, and a learner has no reason to believe '
+        + 'electrons really do this. They were seen to.',
+    },
+    microCheck: 'Electrons fired at a crystal produce the same rings X-rays do. What does that show about electrons?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mod.wave-particle-duality',
+    subject: 'physics',
+    canonicalIdea: 'A quantum object arrives whole at one place, but where it is likely to arrive is governed by something that spreads and interferes like a wave.',
+    concreteAnchor: 'single electrons hitting a screen one at a time and slowly building an interference pattern',
+    plainExplanation:
+      'Fire electrons at a double slit slowly enough that only one is in the apparatus at a time. Each one '
+      + 'lands as a single dot at a single place — never half a dot, never a smear. Leave it running and '
+      + 'the accumulating dots form the striped interference pattern. So each electron arrives whole, but '
+      + 'the pattern of where they arrive is the pattern a wave passing both slits would make. The wave '
+      + 'is a description of where the electron is likely to be found, and it interferes with itself. '
+      + 'Close one slit and the stripes vanish, even though each electron only ever landed in one spot.',
+    antiAnalogy: {
+      tempting: 'picturing the electron as a water wave that splits and goes through both slits',
+      whyItFails:
+        'the curriculum\'s own note allows this picture only alongside an immediate clarification, and '
+        + 'without it the error is installed. What passes both slits is the likelihood, not the electron\'s '
+        + 'substance; a split electron would land as two half-arrivals and none ever has.',
+    },
+    microCheck: 'Each electron lands as one dot, yet the dots build stripes. What is passing through both slits?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mod.bohr-model',
+    subject: 'physics',
+    canonicalIdea: 'Bohr\'s picture of fixed orbits with fixed energies works for hydrogen, and it is the last atom it works for.',
+    concreteAnchor: 'hydrogen\'s spectral lines predicted to four figures, and helium\'s missed entirely by the same formula',
+    plainExplanation:
+      'Bohr proposed that the electron in hydrogen can only sit in certain particular orbits, each with a '
+      + 'fixed energy, and that light is emitted when it drops from a higher one to a lower one. The '
+      + 'energies of those levels come out of the model, and the spectral lines they predict match '
+      + 'hydrogen\'s measured lines to several decimal places. It is one of the great successes in physics. '
+      + 'Then apply the same formula to helium, which has two electrons, and it fails outright. The reason '
+      + 'is that the two electrons push on each other, and the model has no way to account for anything but '
+      + 'a single electron around a nucleus.',
+    antiAnalogy: {
+      tempting: 'saying the Bohr formula gives you the energy levels of atoms',
+      whyItFails:
+        'the curriculum\'s own note flags this omission specifically. Dropping the words "of hydrogen" turns '
+        + 'a result about one atom into a claim about all of them, and a learner then expects it to work on '
+        + 'every element in the table.',
+    },
+    microCheck: 'The same formula matches hydrogen beautifully and fails for helium. What does helium have that hydrogen does not?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mod.atomic-spectra',
+    subject: 'physics',
+    canonicalIdea: 'An atom emits and absorbs only at the frequencies matching gaps between its own energy levels, and those gaps come in several families.',
+    concreteAnchor: 'the dark lines crossing the Sun\'s spectrum, each naming an element in its atmosphere',
+    plainExplanation:
+      'Spread sunlight into its colours carefully and it is crossed by narrow dark lines at particular '
+      + 'places. Cool gas in the Sun\'s outer layers absorbs exactly the frequencies its atoms can use, and '
+      + 'no others. Each element has its own set, fixed by the spacing of its own energy levels, and that '
+      + 'is how helium was discovered in the Sun before it was found on Earth. Hydrogen alone produces '
+      + 'several distinct families of lines, depending on which level the electron falls to: the group in '
+      + 'visible light is one family, and there are others in ultraviolet and in infrared that the eye '
+      + 'never sees.',
+    antiAnalogy: {
+      tempting: 'treating the visible group of lines as hydrogen\'s spectrum',
+      whyItFails:
+        'the curriculum\'s own note names this unqualified simplification. Those visible lines are one '
+        + 'family among several, and a learner who takes them for the whole thing has no room in the '
+        + 'picture for the ultraviolet and infrared families that come from the same atom.',
+    },
+    microCheck: 'Hydrogen produces lines you cannot see as well as ones you can. Where do the invisible ones come from?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mod.x-rays',
+    subject: 'physics',
+    canonicalIdea: 'X-rays are made by slamming fast electrons into metal, and their wavelength is short enough that a crystal\'s atomic planes act as a grating.',
+    concreteAnchor: 'a chest radiograph, and the spot pattern a crystal throws in an X-ray beam',
+    plainExplanation:
+      'Accelerate electrons hard into a metal target and they are slammed to a stop, radiating their '
+      + 'energy as light of very short wavelength. That is an X-ray tube. Because the wavelength is about '
+      + 'the size of the spacing between atoms in a crystal, a crystal does to X-rays what a fine grating '
+      + 'does to visible light: X-rays scattered from successive layers of atoms travel paths of slightly '
+      + 'different length, and at particular angles those paths differ by a whole number of wavelengths and '
+      + 'reinforce, giving sharp spots. Reading those spots is how the structures of salt, of metals, and '
+      + 'eventually of DNA were determined.',
+    antiAnalogy: {
+      tempting: 'treating the angle at which the spots appear as an ordinary reflection angle',
+      whyItFails:
+        'the curriculum\'s own note bans this bridge. Reflection happens at every angle; these spots appear '
+        + 'only at particular ones, because what selects them is the path difference between layers adding '
+        + 'to a whole number of wavelengths, which is interference and not reflection.',
+    },
+    microCheck: 'A mirror reflects at every angle you present, but a crystal gives spots only at particular ones. What is selecting them?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mod.radioactivity',
+    subject: 'physics',
+    canonicalIdea: 'Unstable nuclei throw out one of three quite different things, and which one determines what stops it and what it changes into.',
+    concreteAnchor: 'a source whose emission is stopped by paper, by aluminium foil, and by a slab of lead',
+    plainExplanation:
+      'Put a radioactive source behind a sheet of paper and one kind of emission is already gone. Behind a '
+      + 'few millimetres of aluminium a second kind stops. The third needs centimetres of lead and even '
+      + 'then is only weakened. They are three different objects. The first is a heavy, slow, doubly '
+      + 'charged chunk of nucleus, which is why paper stops it and why it changes the element '
+      + 'substantially. The second is a fast electron thrown out when a neutron turns into a proton, which '
+      + 'shifts the element by one place. The third is not a particle of matter at all but very '
+      + 'high-energy light, carrying away leftover energy and leaving the element unchanged.',
+    antiAnalogy: {
+      tempting: 'ranking them as weak, medium and strong versions of the same thing',
+      whyItFails:
+        'they differ in what they are, not in how much of it there is. One is matter with charge, one is an '
+        + 'electron created in the decay, one is light — and only the first two change which element you '
+        + 'are left with.',
+    },
+    microCheck: 'One emission leaves the element unchanged. Which of the three is it, and why does it change nothing?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mod.radioactive-decay',
+    subject: 'physics',
+    canonicalIdea: 'Each nucleus has a fixed chance of decaying in the next moment regardless of its age, and the half-life describes the population, not any individual.',
+    concreteAnchor: 'a jar of dice, rolled repeatedly, with every six removed',
+    plainExplanation:
+      'Take a thousand dice, roll them all, and remove every six. Roll the rest and do it again. The number '
+      + 'left falls by the same fraction each round, and after enough rounds half are gone — but no '
+      + 'individual die was ageing towards its removal. On any roll each one had the same chance as on the '
+      + 'first. Nuclei behave this way. A nucleus that has survived a billion years is no more likely to '
+      + 'decay in the next second than a freshly made one. The half-life is simply how long it takes for '
+      + 'half a large collection to have gone, and it says nothing about which ones or when.',
+    antiAnalogy: {
+      tempting: 'reading half-life as something like an average lifespan, the way we speak of people',
+      whyItFails:
+        'the curriculum\'s own note allows the comparison only with an immediate clarification. A person '
+        + 'ages and their risk climbs; a nucleus does not age at all. The number describes a population\'s '
+        + 'behaviour, and applied to one nucleus it means nothing.',
+    },
+    microCheck: 'A nucleus has survived a billion years already. Is it now closer to decaying than a new one?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mod.nuclear-reactions',
+    subject: 'physics',
+    canonicalIdea: 'Nuclear reactions balance charge and nucleon number, and the energy released or absorbed shows up as a change in total mass.',
+    concreteAnchor: 'weighing everything before a reaction and after, and finding a shortfall',
+    plainExplanation:
+      'Two tallies must match across any nuclear reaction: the total electric charge, and the total '
+      + 'number of nucleons. Those are bookkeeping rules and they never fail. The interesting thing shows '
+      + 'up on the scales. For a reaction that gives out energy, the products '
+      + 'together weigh slightly less than the ingredients did. The missing mass has not vanished — it is '
+      + 'the energy that came out, and mass and energy are two accounts of the same thing. A reaction that '
+      + 'needs energy poured in works the other way, and its products are slightly heavier.',
+    antiAnalogy: {
+      tempting: 'expecting mass to be conserved separately, the way it is in a chemical reaction',
+      whyItFails:
+        'in chemistry the energies involved are so small that the mass change is far too tiny to weigh, so '
+        + 'mass appears to balance on its own. In a nuclear reaction the change is measurable, and treating '
+        + 'mass as separately conserved makes the released energy come from nowhere.',
+    },
+    microCheck: 'The products of a reaction weigh less than what went in. Where did the missing mass go?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mod.binding-energy',
+    subject: 'physics',
+    canonicalIdea: 'A nucleus weighs less than its separated parts, and the shortfall is the energy you would have to supply to pull it apart.',
+    concreteAnchor: 'weighing a helium nucleus against two free protons and two free neutrons',
+    plainExplanation:
+      'Weigh two protons and two neutrons separately, add the four numbers, then weigh a helium nucleus. '
+      + 'The helium nucleus is lighter. The parts lost mass on being bound together, and the mass they lost '
+      + 'left as energy. To take the nucleus apart again you would have to put that same energy back in, '
+      + 'which is why it is called the binding energy. Doing this for every element and dividing by the '
+      + 'number of nucleons gives a curve that rises steeply from hydrogen, peaks around iron, and falls '
+      + 'slowly after. That single curve is why light nuclei give out energy when joined and heavy ones '
+      + 'give out energy when split.',
+    antiAnalogy: {
+      tempting: 'imagining the binding energy as a store of energy sitting inside the nucleus, ready to be released',
+      whyItFails:
+        'it is the opposite sign. Binding energy is what the nucleus already gave up on forming, and what '
+        + 'you must pay to undo it. A tightly bound nucleus is not a loaded spring; it is the one hardest '
+        + 'to get anything out of, which is why iron neither fuses nor fissions usefully.',
+    },
+    microCheck: 'The peak of the curve is at iron. Why does that make iron the end of the line for energy release?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mod.nuclear-fission',
+    subject: 'physics',
+    canonicalIdea: 'A heavy nucleus splitting into two middling ones releases energy, and the spare neutrons it throws out can split further nuclei.',
+    concreteAnchor: 'a reactor\'s control rods, which do nothing to the fuel but absorb neutrons',
+    plainExplanation:
+      'A heavy nucleus like uranium sits low on the binding-energy curve. Split it into two fragments '
+      + 'nearer iron and those fragments are more tightly bound, so energy comes out — an enormous amount '
+      + 'compared with any chemical process. The split also throws out two or three loose neutrons, and '
+      + 'each of those can be absorbed by another heavy nucleus and split it in turn. That is a chain '
+      + 'reaction. Control rods in a reactor do not touch the fuel; they soak up neutrons, so that on '
+      + 'average exactly one from each split goes on to cause the next, holding the rate steady.',
+    antiAnalogy: {
+      tempting: 'picturing the nucleus as exploding, the way a bomb or a firework does',
+      whyItFails:
+        'an explosion is one event that scatters things outward. Fission is a nucleus coming apart into '
+        + 'two named fragments plus loose neutrons, and it is those neutrons, not any blast, that make the '
+        + 'process spread. Take the neutrons away and nothing propagates at all.',
+    },
+    microCheck: 'Control rods absorb neutrons and do nothing else. Why is that enough to control the reaction?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mod.nuclear-fusion',
+    subject: 'physics',
+    canonicalIdea: 'Joining light nuclei releases energy, but they must first be forced close enough to touch against their mutual electric repulsion.',
+    concreteAnchor: 'the Sun\'s core at fifteen million degrees, and the difficulty of matching it on Earth',
+    plainExplanation:
+      'Two light nuclei joined together are more tightly bound than they were apart, so joining them '
+      + 'releases energy — more per kilogram than fission does. The obstacle is getting there. Both nuclei '
+      + 'carry positive charge and push each other away harder the closer they come, and the attraction '
+      + 'that binds them only reaches across a distance smaller than a nucleus. So they must be hurled at '
+      + 'each other hard enough to cross that barrier, which means temperatures of millions of degrees and '
+      + 'a density that holds them together long enough to meet. The Sun manages it with its own weight. '
+      + 'On Earth the containment, not the physics, is the hard part.',
+    antiAnalogy: {
+      tempting: 'thinking of the Sun as burning, the way a fire burns fuel',
+      whyItFails:
+        'burning is chemistry between electrons and it would have consumed the Sun in a few thousand years. '
+        + 'What the Sun does happens in the nuclei, releases millions of times more per reaction, and is '
+        + 'the reason it has lasted billions of years instead.',
+    },
+    microCheck: 'Fusion releases more energy per kilogram than fission, yet fission reactors exist and fusion ones do not. What is in the way?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mod.nuclear-models',
+    subject: 'physics',
+    canonicalIdea: 'Nucleons fill quantised shells much as electrons do, and nuclei with a full shell are unusually stable.',
+    concreteAnchor: 'lead and tin having far more stable forms than their neighbours in the table',
+    plainExplanation:
+      'Certain nucleon counts — two, eight, twenty, twenty-eight, fifty, eighty-two — show up again and '
+      + 'again as unusually stable. Nuclei with those numbers of protons or neutrons are bound more '
+      + 'tightly than their neighbours, are more abundant, and resist decay. The shell model explains this '
+      + 'by treating each nucleon as occupying one of a set of allowed energy levels within the nucleus, '
+      + 'filling them from the bottom up. A nucleus that exactly fills a shell has no easy way to '
+      + 'rearrange, and that closure is the stability. Tin, with fifty protons, has more stable forms than '
+      + 'any other element.',
+    antiAnalogy: {
+      tempting: 'assuming the nuclear shells are the same shells the electrons occupy, just smaller',
+      whyItFails:
+        'they are a separate set of levels, filled by different particles, held by a different force, and '
+        + 'their special numbers are not the ones that make a noble gas. Sharing the word "shell" is a '
+        + 'borrowed description, not a shared structure.',
+    },
+    microCheck: 'Tin has fifty protons and unusually many stable forms. What does the model say fifty has done?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mod.energy-bands',
+    subject: 'physics',
+    canonicalIdea: 'In a solid the atoms\' separate energy levels broaden into bands, and between bands lies a range of energies no electron is permitted to have.',
+    concreteAnchor: 'one atom\'s sharp spectral lines becoming a crystal\'s broad absorption bands',
+    plainExplanation:
+      'A single atom has sharp, separated energy levels. Bring a huge number of atoms together into a '
+      + 'crystal and each level splits into an enormous number of very slightly different ones, so closely '
+      + 'packed that they form a continuous band of allowed energies. Between one band and the next there '
+      + 'is a stretch with no allowed levels at all. An electron in the solid can have an energy anywhere '
+      + 'inside a band, and cannot have one in the gap — not because none happens to be there, but because '
+      + 'the crystal\'s structure provides no state at that energy for it to occupy.',
+    antiAnalogy: {
+      tempting: 'reading the gap as an energy range where electrons simply happen not to be at the moment',
+      whyItFails:
+        'the curriculum\'s own note requires the gap to be described as structurally forbidden and never as '
+        + 'merely unoccupied. An empty-by-chance gap could be filled by adding energy or electrons, and '
+        + 'then nothing distinguishes an insulator from a conductor.',
+    },
+    microCheck: 'You add electrons to a crystal. Can any of them end up at an energy inside the gap?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mod.semiconductor-classification',
+    subject: 'physics',
+    canonicalIdea: 'What sorts conductors from insulators from semiconductors is the size of the forbidden gap and whether the upper band is partly filled.',
+    concreteAnchor: 'copper wire, a glass rod, and a silicon chip at the same room temperature',
+    plainExplanation:
+      'In a metal the highest occupied band is only partly filled, so there are empty allowed states '
+      + 'immediately above the occupied ones and the slightest push sets electrons moving. That is why '
+      + 'copper conducts. In an insulator the lower band is completely full, the next one is empty, and the '
+      + 'gap between them is far too wide for room temperature to lift anything across. In a semiconductor '
+      + 'the arrangement is the insulator\'s, but the gap is small enough that ordinary warmth pushes a '
+      + 'modest number of electrons up into the empty band. The difference between glass and silicon is not '
+      + 'the structure; it is the width of the gap.',
+    antiAnalogy: {
+      tempting: 'treating a semiconductor as simply a material with a resistance halfway between the other two',
+      whyItFails:
+        'a middling resistance would be a metal with more obstruction, and it would conduct less as it '
+        + 'warms. A semiconductor conducts more as it warms, because warmth is what puts carriers in the '
+        + 'upper band at all. The behaviour, not the value, is what separates them.',
+    },
+    microCheck: 'Heating a copper wire makes it conduct worse; heating silicon makes it conduct better. What does that tell you about where silicon\'s carriers come from?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mod.intrinsic-semiconductors',
+    subject: 'physics',
+    canonicalIdea: 'In pure silicon, warmth lifts electrons across the gap in pairs, leaving behind vacancies that themselves carry current.',
+    concreteAnchor: 'a nearly full car park where the movement you notice is the empty space shifting along the row',
+    plainExplanation:
+      'In pure silicon, thermal energy occasionally lifts an electron across the gap into the empty band. '
+      + 'It leaves behind a vacancy in the band it came from, and the two are always created together. '
+      + 'The freed electron carries current in the upper band. The vacancy also lets current flow, because '
+      + 'neighbouring electrons can shuffle into it one after another — and it is far easier to track the '
+      + 'moving empty place than to track the thousands of electrons taking turns to fill it. In a nearly '
+      + 'full car park, what appears to move down the row is the gap. Heat the silicon and more pairs '
+      + 'appear, so it conducts better as it gets hotter.',
+    antiAnalogy: {
+      tempting: 'taking the vacancy to be a positron living inside the semiconductor',
+      whyItFails:
+        'the curriculum\'s own note names this exact conflation. A positron is a genuine particle that '
+        + 'exists on its own; the vacancy exists only as the absence in a crowd of electrons and has no '
+        + 'meaning outside the crystal. Removing the crystal removes it.',
+    },
+    microCheck: 'Warming pure silicon creates carriers in pairs. What is the second member of each pair?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mod.extrinsic-semiconductors',
+    subject: 'physics',
+    canonicalIdea: 'Adding a trace of a different element gives silicon a large surplus of one kind of carrier while leaving the material electrically neutral.',
+    concreteAnchor: 'one impurity atom in ten million transforming silicon\'s conductivity',
+    plainExplanation:
+      'Silicon\'s neighbours in the table have one electron more or one fewer in their outer shell. Replace '
+      + 'a few silicon atoms with an element that has one more, and each brings an electron that no bond '
+      + 'needs, sitting just below the empty band and easily freed. The material then conducts mainly by '
+      + 'electrons. Use an element with one fewer instead, and each leaves a bond short, easily filled by '
+      + 'a neighbouring electron, so conduction is mainly by the moving vacancies. Either way the added '
+      + 'atoms are neutral atoms — they brought their own nuclear charge with them — so the material as a '
+      + 'whole carries no net charge at all.',
+    antiAnalogy: {
+      tempting: 'assuming the type with surplus electrons must be negatively charged overall',
+      whyItFails:
+        'each added atom brought a matching positive nucleus along with its extra electron. The surplus is '
+        + 'in which carrier moves the current, not in the total charge, and a slab of it will not attract '
+        + 'a suspended ball any more than pure silicon would.',
+    },
+    microCheck: 'A doped slab has far more free electrons than pure silicon. Why does it not carry a net negative charge?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mod.pn-junction',
+    subject: 'physics',
+    canonicalIdea: 'Where the two doped types meet, carriers spread across, cancel each other near the boundary, and leave behind fixed charges that stop any further net flow.',
+    concreteAnchor: 'a junction that has a built-in voltage across it and still cannot light the smallest lamp',
+    plainExplanation:
+      'Join the two doped types and, right at the boundary, surplus carriers from each side wander into '
+      + 'the other and are cancelled. That leaves a thin zone near the junction stripped of carriers, and '
+      + 'the impurity atoms left there are no longer balanced — one side is left positive, the other '
+      + 'negative, and they cannot move because they are locked into the crystal. Those fixed charges set '
+      + 'up an electric field across the zone that pushes back on any further carriers trying to cross. '
+      + 'Very quickly the pushing back exactly balances the wandering across, and the net flow stops.',
+    antiAnalogy: {
+      tempting: 'treating the built-in voltage as a battery you could draw current from',
+      whyItFails:
+        'it exists precisely because the flow has stopped, and connecting a wire round the outside adds two '
+        + 'more junctions whose own built-in voltages cancel it exactly. A device that produced current '
+        + 'from nothing but its own equilibrium would be a perpetual motion machine.',
+    },
+    microCheck: 'There is a real voltage across the junction. Why can you not connect a wire and light a lamp with it?',
+    ...DRAFTED,
+  },
+  {
+    conceptId: 'phys.mod.diode-rectification',
+    subject: 'physics',
+    canonicalIdea: 'Pushing carriers towards the junction thins the barrier zone and current flows; pulling them away widens it and almost nothing gets through.',
+    concreteAnchor: 'a mains adapter turning alternating supply into the steady one a phone needs',
+    plainExplanation:
+      'Connect a battery so that it drives carriers on each side towards the junction, and they crowd into '
+      + 'the stripped zone, narrowing it and weakening the field that was holding them back. Past a modest '
+      + 'threshold voltage the barrier is low enough that current flows freely. Reverse the battery and it '
+      + 'pulls carriers away from the junction instead, widening the stripped zone and strengthening the '
+      + 'field, so essentially nothing crosses. That asymmetry is the whole of rectification: feed a supply '
+      + 'that alternates direction and only the halves of the cycle pushing the right way get through.',
+    antiAnalogy: {
+      tempting: 'thinking of it as a one-way valve that passes anything at all in the forward direction',
+      whyItFails:
+        'below the threshold voltage a forward-connected diode carries almost nothing, because the built-in '
+        + 'barrier has not yet been overcome. A valve model predicts current for the smallest forward push '
+        + 'and there is none, which is exactly what catches learners out in a real circuit.',
+    },
+    microCheck: 'A small forward voltage produces almost no current through a diode. What has not yet been overcome?',
+    ...DRAFTED,
+  },
 ]
 
 export type RemediationCardLookup =
