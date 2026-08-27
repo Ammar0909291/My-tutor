@@ -148,7 +148,6 @@ export function checkRemediationOutput(input: RemediationOutputInput): Remediati
     // here untouched, as before.
     const heldText = typeof input.heldCardText === 'string' ? input.heldCardText : ''
     if (!input.remediationTurn && heldText.length === 0) return OK
-    if (input.hasStructuredMcq) return OK
     const text = typeof input.text === 'string' ? input.text : ''
     // An empty draft is a different failure with a different owner (the
     // provider path). Claiming it here would only mislabel it.
@@ -157,7 +156,11 @@ export function checkRemediationOutput(input: RemediationOutputInput): Remediati
     // 1. DID IT EXPLAIN ANYTHING? Cut the turn back to its teaching using the
     //    repository's existing splitter. Nothing left ⇒ the entire turn was a
     //    question, however new or well-phrased that question is.
-    if (input.remediationTurn && cutBackToTeaching(text).length === 0) {
+    // The MCQ exemption used to sit above this whole function and returned OK
+    // for every check at once. It is scoped to the two checks that can be
+    // confused by a structured question, and NOT to the notation bound below —
+    // see the note there. Behaviour for these two is byte-for-byte unchanged.
+    if (input.remediationTurn && !input.hasStructuredMcq && cutBackToTeaching(text).length === 0) {
       return {
         violation: 'question-only',
         reason: 'the entire turn was a question; the learner said they do not understand '
@@ -179,7 +182,11 @@ export function checkRemediationOutput(input: RemediationOutputInput): Remediati
     // back as "So you're saying <their words>. Is that right?", 116 characters,
     // no teaching, and shipped, because this check was scoped out of held turns
     // when the floor was first extended to them.
-    if ((input.remediationTurn || heldText.length > 0) && !turnTaughtSomething(text)) {
+    if (
+      (input.remediationTurn || heldText.length > 0)
+      && !input.hasStructuredMcq
+      && !turnTaughtSomething(text)
+    ) {
       return {
         violation: 'no-teaching-content',
         reason: 'the turn spoke only about the learner, not about the concept — the learner '
@@ -191,6 +198,26 @@ export function checkRemediationOutput(input: RemediationOutputInput): Remediati
     //     when `heldCardText` is supplied, which happens only for a promoted,
     //     currently-holding card — so this is silent for every other turn in
     //     the product.
+    //
+    // AN MCQ DOES NOT EXEMPT THIS ONE, and that is the whole of the fix here.
+    // MEASURED (production, phys.opt.refraction, 2026-08-27, the first live
+    // session after physics was promoted): the learner said "sir i still not
+    // understand can you explain again" for the second time, the card was
+    // holding, and the turn came back carrying an attached MCQ and this:
+    //
+    //     \(n_1 \sin\theta_1 = n_2 \sin\theta_2\)
+    //
+    // raw LaTeX and refractive indices, to a learner who had just said twice
+    // that they did not understand. It shipped because `hasStructuredMcq`
+    // returned OK for the ENTIRE function before any check ran, so attaching a
+    // question was a complete escape hatch from the card's bound.
+    //
+    // The other two checks keep the exemption because a structured question can
+    // genuinely confuse them — the MCQ carries content this function cannot
+    // see, so "the turn was only a question" and "the turn taught nothing" can
+    // both be false alarms. Notation cannot: a LaTeX delimiter is in the
+    // approved account or it is not, and an attached MCQ says nothing either
+    // way about the prose beside it.
     if (heldText.length > 0 && notationBeyondCard(text, heldText)) {
       return {
         violation: 'went-beyond-card',

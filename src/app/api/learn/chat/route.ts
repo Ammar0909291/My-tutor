@@ -5843,17 +5843,40 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             if (!stillViolating) {
               cleanText = repaired
             } else {
-              // FAIL CLOSED, BUT STILL TEACH. The curriculum's own single
-              // learner-facing sentence is correct by construction; when there
-              // is no usable one, the model's draft stands rather than being
-              // replaced by filler that teaches even less.
-              const fallback = buildRemediationFallbackText(conceptSentence)
+              // FAIL CLOSED, BUT STILL TEACH.
+              //
+              // THE CARD COMES FIRST WHEN ONE IS HOLDING. The fallback used to
+              // reach straight for the KG description, and that sentence is
+              // written for a curriculum author, not for the learner who has
+              // just said twice that they do not understand.
+              //
+              // MEASURED (production, phys.opt.refraction, 2026-08-27, the same
+              // session that exposed the MCQ escape hatch): the learner said
+              // "ok sir", the model's draft was rejected, the regeneration was
+              // rejected, and the fallback served
+              //
+              //     Snell's law n₁sinθ₁ = n₂sinθ₂ describes how light bends at
+              //     an interface between media of different refractive indices.
+              //
+              // So the floor rejected the model's draft for going past the card
+              // and then emitted notation the card itself does not contain. The
+              // fallback was contradicting the check that invoked it.
+              //
+              // The held card is strictly the better answer here: it is the
+              // approved account for this exact concept, it is plain, it is
+              // notation-free by construction, and it is already the authority
+              // governing this turn. The KG sentence remains the fallback for
+              // concepts that have no card, which is most of the product.
+              const fallback = remediationHoldCardText
+                ?? buildRemediationFallbackText(conceptSentence)
               if (fallback) cleanText = fallback
             }
             console.log('[remediation-floor] repaired', {
               violation: verdict.violation,
               accepted: !stillViolating,
-              usedCurriculumSentence: stillViolating && conceptSentence !== null,
+              usedHeldCard: stillViolating && remediationHoldCardText !== null,
+            usedCurriculumSentence:
+              stillViolating && remediationHoldCardText === null && conceptSentence !== null,
             })
           }
         } catch (err) {
