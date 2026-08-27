@@ -138,19 +138,30 @@ describe('H4-1 — the authoritative material, measured not assumed', () => {
     }
   })
 
-  it('antiAnalogies — the one field shaped for this class of error — is empty where it is needed', () => {
-    // The Educational Brain schema HAS a field for exactly the false-analogy
-    // failure: `antiAnalogies`. It is populated for hand-authored entries
-    // (eng.phonics.phonemic-awareness carries one) and empty for every concept
-    // in this corpus. The schema is right; the content is absent.
-    for (const c of CORPUS) {
-      const eb = loadEBConceptContext(c.id)
-      const anti = (eb.context as { antiAnalogies?: unknown[] }).antiAnalogies ?? []
-      expect(Array.isArray(anti)).toBe(true)
-      expect(anti.length, `${c.id} antiAnalogies`).toBe(0)
+  it('antiAnalogies — CORRECTED BY H5: empty for the three chemistry failures, authored for physics', () => {
+    /**
+     * H4 asserted this was empty for ALL FOUR concepts and concluded the
+     * content was absent. H5's investigation proved that measurement was
+     * reading the PARSER, not the corpus: `phys.therm.phase-transitions`
+     * carries an authored `### Anti-analogy — "Condensation cools things
+     * down"` that `parseEBAntiAnalogies` could not see, and 182 of the 654
+     * authored anti-analogies across the tree were unreachable the same way.
+     *
+     * The assertion is corrected to the measured truth rather than relaxed:
+     * the three CHEMISTRY concepts genuinely have no authored anti-analogy in
+     * any form (verified by searching their source files), and physics now
+     * returns the one it always had.
+     */
+    for (const id of ['chem.kinet.catalysis', 'chem.equil.kc-kp', 'chem.kinet.mechanism']) {
+      const anti = (loadEBConceptContext(id).context as { antiAnalogies?: unknown[] }).antiAnalogies ?? []
+      expect(anti.length, `${id} antiAnalogies — a real content gap`).toBe(0)
     }
-    // …and the field is genuinely usable when authored, so this is a content
-    // gap and not a broken loader.
+    const physics = (loadEBConceptContext('phys.therm.phase-transitions')
+      .context as { antiAnalogies?: unknown[] }).antiAnalogies ?? []
+    expect(physics.length, 'phys.therm.phase-transitions — authored, and now reachable')
+      .toBeGreaterThan(0)
+    // …and the field is genuinely usable when authored, so the chemistry
+    // absence is a content gap and not a broken loader.
     const authored = loadEBConceptContext('eng.phonics.phonemic-awareness')
     expect(((authored.context as { antiAnalogies?: unknown[] }).antiAnalogies ?? []).length)
       .toBeGreaterThan(0)

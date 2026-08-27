@@ -1011,14 +1011,60 @@ function parseEBAntiAnalogies(content: string): string[] {
   if (!raw) return []
 
   const results: string[] = []
-  // Matches both "**Anti-analogy to avoid**:" (old) and "**Anti-analogy — ...**:" (new).
-  const re = /\*\*Anti-analogy[^*]*\*\*:\s*([\s\S]+?)(?=\n- \*\*|\n\*\*|\n##|---|\n\n\*\*|$)/gi
-  let m: RegExpExecArray | null
-  while ((m = re.exec(raw)) !== null) {
-    const text = m[1].trim().replace(/\s+/g, ' ')
-    if (text.length > 10) results.push(text)
+
+  /**
+   * ── PHASE H5: THE CURATORS WROTE FOUR FORMS; THIS READ ONE ────────────────
+   *
+   * Measured across all 897 Educational Brain entries: 654 carry authored
+   * anti-analogy content and only 472 were reachable. The 182 that were not
+   * are not a content gap — they are this function's reach:
+   *
+   *    111 × `### ANTI-ANALOGIES (do not use)`  heading, any case, plural
+   *     19 × `- Anti-analogy: …`                plain bullet, no bold
+   *    ~50 × `**ANTI-ANALOGIES**:` and
+   *          `- **ANTI-ANALOGY — "…"**`         plural, or no trailing colon
+   *
+   * Every one is inside the same `## Analogies` section this function already
+   * extracts, written by the same human curators, and closing the gap invents
+   * nothing. That mattered because H4 named this field the single
+   * highest-priority content gap for the false-analogy failure class — on a
+   * measurement that was reading the parser rather than the corpus.
+   *
+   * WHAT IS DELIBERATELY STILL NOT MATCHED. A POSITIVE analogy whose label
+   * merely mentions the words, e.g. chem.atomic.atomic-spectra's
+   * "**The piano string model (anti-analogy worth mentioning)**: …", whose own
+   * text ends "Mention the analogy but flag that the mechanism is not
+   * classical waves." The curator's instruction is to USE it with a caveat.
+   * Capturing it as "do not use this analogy" would invert authored intent,
+   * which is worse than missing it — so a label only qualifies when it BEGINS
+   * with the phrase.
+   */
+  const push = (text: string): void => {
+    const t = text.trim().replace(/\s+/g, ' ')
+    if (t.length > 10) results.push(t)
   }
-  return results
+
+  // 1. Bold label — `**Anti-analogy…**:` / `**ANTI-ANALOGIES**:` / `- **ANTI-ANALOGY — "…"**`.
+  //    Anchored to the START of the bold run (`\*\*` immediately followed by the
+  //    phrase) so a parenthetical mention inside a positive analogy's name
+  //    cannot match. The trailing colon is optional: several entries write the
+  //    label as a dash-headed phrase and continue on the same line.
+  const bold = /\*\*[ \t]*anti-analog(?:y|ies)[^*]*\*\*:?[ \t]*([\s\S]+?)(?=\n[ \t]*-[ \t]*\*\*|\n\*\*|\n#{2,4} |\n---|$)/gi
+  let m: RegExpExecArray | null
+  while ((m = bold.exec(raw)) !== null) push(m[1])
+
+  // 2. Heading label — `### Anti-analogy — "…"` / `### ANTI-ANALOGIES (do not use)`.
+  //    The heading's own text is kept: it usually names the banned analogy,
+  //    and the prose beneath explains why.
+  const heading = /^[ \t]*#{2,4}[ \t]*(anti-analog(?:y|ies)[^\n]*)\n([\s\S]+?)(?=\n[ \t]*#{2,4} |\n---|$)/gim
+  while ((m = heading.exec(raw)) !== null) push(`${m[1]} — ${m[2]}`)
+
+  // 3. Plain bullet — `- Anti-analogy: …`, no bold at all.
+  const bullet = /^[ \t]*-[ \t]+anti-analog(?:y|ies)[^:\n]*:[ \t]*([^\n]+)/gim
+  while ((m = bullet.exec(raw)) !== null) push(m[1])
+
+  // Same item can only be reported once, however many forms overlap.
+  return [...new Set(results)]
 }
 
 /**

@@ -4230,6 +4230,56 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         }
       }
 
+      // ── H5: AUTHORITATIVE GROUNDING FOR A RE-EXPLANATION ────────────────
+      //
+      // Scoped to remediation turns only (CONFUSION / REPHRASE_REQUEST), and
+      // injected here so it sits beside the conversation directive it
+      // qualifies — both before the provider call, both on the LLM_OPEN path
+      // where the Brain execution block is empty.
+      //
+      // WHAT IT ADDS: the concept's own authored anti-analogies, read from the
+      // hand-authored Educational Brain entry. Nothing is generated; a concept
+      // with none authored gets NO block at all and the turn is byte-identical
+      // to before this phase. H4 named this field the highest-priority content
+      // gap for the false-analogy failures; H5's investigation found 182 of
+      // the 654 authored ones were unreachable by their parser, which
+      // parseEBAntiAnalogies now reads.
+      //
+      // WHAT IT IS NOT: verification. It constrains what the tutor is TOLD,
+      // never checks what the tutor WROTE — H4's boundary is unmoved, and
+      // remediationGrounding.ts's own header says so. H3's structural floor
+      // still runs afterwards, unchanged.
+      if (conversationDecisionHoisted && !serveFromMemory) {
+        try {
+          const { isRemediationTurn } = await import('@/lib/teaching/remediationOutputContract')
+          if (isRemediationTurn(conversationDecisionHoisted.type)) {
+            const { buildRemediationGrounding, buildRemediationGroundingBlock } =
+              await import('@/lib/teaching/remediationGrounding')
+            const conceptForGrounding =
+              excursionDecisionHoisted?.targetConceptId
+              ?? libraryConceptNodeIdHoisted
+              ?? snapshotCurrentConceptId
+              ?? resolvedConceptId
+              ?? null
+            if (conceptForGrounding) {
+              const grounding = buildRemediationGrounding(conceptForGrounding)
+              const block = buildRemediationGroundingBlock(grounding)
+              console.log('[remediation-grounding]', {
+                conceptId: grounding.conceptId,
+                status: grounding.status,
+                antiAnalogies: grounding.mustNotUse.length,
+                canonicalIdea: grounding.sources.canonicalIdea,
+                injected: block.length > 0,
+              })
+              systemPrompt += block
+            }
+          }
+        } catch (err) {
+          // Grounding never takes a turn down.
+          console.warn('[remediation-grounding] skipped:', err)
+        }
+      }
+
       // OUTPUT LANGUAGE — must be the LAST block appended, after every
       // teaching block including the two that assert they override
       // everything above them (FIRST LESSON PROTOCOL, RECOVERY). The
