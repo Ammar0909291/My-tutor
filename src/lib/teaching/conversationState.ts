@@ -1395,6 +1395,39 @@ export type Register = 'beginner' | 'intermediate' | 'expert'
  *
  * Struggle still wins when both apply: a learner who has answered correctly
  * twice and then failed twice is struggling NOW.
+ *
+ * ── PHASE H1: THE FIRST STRUGGLE HAD NO EFFECT AT ALL ───────────────────────
+ * The struggle tier opened at `>= 2`, and the expert row's unstressed value is
+ * `null` — unlimited. So an expert-register learner who said "I don't
+ * understand" ONCE was answered with an UNBOUNDED reply. That is the worst
+ * possible response to a first admission of confusion, and it is precisely the
+ * learner Phase H measured: the reply got longer and denser exactly where it
+ * needed to get shorter and simpler.
+ *
+ * The fix is one new tier, `unsettled` (exactly one failure), and it changes
+ * exactly ONE cell of the table: expert / 1 failure / no demonstrated success,
+ * `null` -> 7. Proven cell-by-cell against the pre-H1 function in
+ * `weakLearnerConfusion.test.ts`.
+ *
+ * WHY `consecutiveFailures` AND NOT A NEW SIGNAL. The remediation branch above
+ * writes three things — `consecutiveFailures`, `remediationCount` and
+ * `frustrationLevel`. `consecutiveFailures` is already this function's
+ * parameter and already what the route passes, so the whole fix lives inside
+ * one pure function: no new state, no new argument, no call-site change.
+ * `frustrationLevel` is a rounded blend of the other two and the least direct
+ * reading of "struggling right now".
+ *
+ * WHY 7 AND NOT A NEW NUMBER. It is the intermediate register's own ordinary
+ * ceiling: a first wobble drops an expert to the next register down, and a
+ * SECOND one still applies the existing, tighter 6. Nothing here widens a
+ * reply — a learner with demonstrated fluency keeps the tighter 6 (the `fluent`
+ * test is checked before `unsettled`), and the budget remains monotonically
+ * non-increasing in `consecutiveFailures` for every register.
+ *
+ * KNOWN, REPORTED: the SHADOW policy pack (`src/lib/kernel/policy/basePack.ts`,
+ * Band 5) transcribes this table and is NOT updated here — it is owner-gated
+ * territory and serves no learner. `kernelParity` compares the policy STAGE,
+ * which calls this function directly, so the shipping path stays in agreement.
  */
 export function responseBudget(
   register: Register,
@@ -1402,10 +1435,11 @@ export function responseBudget(
   demonstratedCorrect = 0,
 ): number | null {
   const struggling = consecutiveFailures >= 2
+  const unsettled = !struggling && consecutiveFailures >= 1
   const fluent = !struggling && demonstratedCorrect >= 2
   if (register === 'beginner') return struggling ? 2 : fluent ? 2 : 4
   if (register === 'intermediate') return struggling ? 4 : fluent ? 4 : 7
-  return struggling ? 6 : fluent ? 6 : null
+  return struggling ? 6 : fluent ? 6 : unsettled ? 7 : null
 }
 
 // ── Learner autonomy detection (moved out of route.ts for testability) ────────

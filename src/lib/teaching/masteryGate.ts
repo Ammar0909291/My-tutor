@@ -534,7 +534,82 @@ export function requestedVisualForm(text: string): RequestedVisualForm | null {
 }
 
 const EXAMPLE_RE = /\b(real[\s-]?life|real[\s-]?world|example|application|story|use\s+case|everyday)\b/i
-const EXPLAIN_DIFF_RE = /\b(explain\s+(it\s+)?(differently|again|another\s+way|in\s+a\s+different\s+way|more\s+simply|simpler)|different\s+explanation|another\s+explanation|say\s+it\s+differently|i\s+(don'?t|do\s+not)\s+understand|i(?:'?m|\s+am)\s+(confused|lost)|no\s+idea|not\s+following|didn'?t\s+get\s+(it|that)|makes?\s+no\s+sense)\b/i
+/**
+ * "I DIDN'T UNDERSTAND — SAY IT ANOTHER WAY."
+ *
+ * ── WHY THIS PATTERN WAS WIDENED (Phase H1) ─────────────────────────────────
+ * This regex is the ONLY deterministic door into the remediation branch of
+ * `advanceConversationState` — the branch that counts the struggle, re-shows
+ * the phase, and (via `consecutiveFailures`) shortens the next reply. Before
+ * H1 it only recognised textbook English. Measured against the real modules,
+ * the sentence a real learner sent in production —
+ *
+ *     "sir i not understand this"
+ *
+ * — returned null here, null from `detectFailureState`, and false from
+ * `isDontKnowSignal`. It was invisible to every reader on the turn path, so
+ * the learner was answered as though they had said nothing at all. 19 of 27
+ * measured confusion phrasings failed the same way, including grammatical
+ * English ("i cannot understand", "i am not able to understand").
+ *
+ * ── THE RULE THAT KEPT THIS FROM BECOMING A KEYWORD SOUP ────────────────────
+ * Every alternative below is an extension of an alternative that was ALREADY
+ * here, in the same family. Nothing new in kind was added:
+ *   · "i don't understand"      -> the same claim with a dropped, non-standard
+ *                                  or modal auxiliary
+ *   · "explain it more simply"  -> the same request in plainer words
+ *   · (new, but unambiguous)      self-reported weakness, and a bare "teach me"
+ *                                  with no topic named after it
+ * A false positive is the expensive direction — it spends a failure, raises
+ * frustration and re-shows a phase for a learner who was doing fine — so the
+ * difficulty family ("this is very difficult") is deliberately NOT here: its
+ * canonical form already belongs to recoveryGuard's `too_hard`, and widening a
+ * RECOVERY trigger suppresses teaching for a whole turn, which is a different
+ * decision from widening a remediation trigger.
+ *
+ * Written as a joined list rather than one literal because the literal it
+ * replaced was already unreadable at 400 characters, and an unreadable pattern
+ * is one nobody can audit for the false positives that matter.
+ */
+const EXPLAIN_DIFF_RE = new RegExp([
+  // ── "say it another way" (unchanged) ──
+  String.raw`\bexplain\s+(?:it\s+|this\s+|that\s+)?(?:differently|again|another\s+way|in\s+a\s+different\s+way|more\s+simply|simpler)\b`,
+  String.raw`\b(?:different|another)\s+explanation\b`,
+  String.raw`\bsay\s+it\s+differently\b`,
+
+  // ── "say it MORE SIMPLY" — the same request, in the register a weak
+  //    learner actually writes. `more simply` / `simpler` were already here.
+  String.raw`\bexplain\s+(?:it\s+|this\s+|that\s+)?(?:to\s+me\s+)?(?:in\s+)?(?:an?\s+)?(?:more\s+|very\s+)?(?:easy|easier|simple|simpler)(?:\s+(?:way|words|language|terms|english))?\b`,
+  String.raw`\b(?:in\s+)?(?:easy|simple)\s+(?:way|words|language|terms|english)\b`,
+  String.raw`\b(?:more\s+)?(?:simple|simpler|easy|easier)\s+(?:please|sir|ma'?am|madam)\b`,
+  String.raw`\bmake\s+it\s+(?:more\s+)?(?:simple|simpler|easy|easier)\b`,
+
+  // ── "I do not understand" and its non-standard forms ──
+  String.raw`\bi\s+(?:don'?t|do\s+not)\s+understand\b`,
+  // Covers "i not understand", "not understand sir", "i am not understanding",
+  // "i am not able to understand". Cannot match "understandable" — the `\b`
+  // after the optional `ing` refuses it.
+  String.raw`\bnot\s+(?:able\s+to\s+)?understand(?:ing)?\b`,
+  String.raw`\b(?:can'?t|cannot|couldn'?t|could\s+not)\s+understand\b`,
+  String.raw`\bnot\s+getting\s+(?:it|this|that|any\s+of\s+(?:it|this))\b`,
+  String.raw`\bi(?:'?m|\s+am)\s+(?:confused|lost)\b`,
+  String.raw`\bno\s+idea\b`,
+  // "not following" with a PRONOUN object is the confusion idiom. With an
+  // INSTRUCTION object it is a compliance complaint about someone else, and
+  // matching it was a pre-existing false positive that spent a failure.
+  String.raw`\bnot\s+following\b(?!\s+(?:the\s+|these\s+|those\s+|your\s+|my\s+)?(?:instruction|instructions|direction|directions|rule|rules|step|steps|order|orders)\b)`,
+  String.raw`\bdidn'?t\s+get\s+(?:it|that)\b`,
+  String.raw`\bmakes?\s+no\s+sense\b`,
+
+  // ── self-reported weakness. Nobody writes this while succeeding. ──
+  String.raw`\bi(?:'?m|\s+am)\s+(?:very\s+|so\s+|really\s+)?weak\s+(?:in|at|with)\b`,
+
+  // ── a bare "teach me", END-ANCHORED so it cannot swallow a topic ──
+  // "ok sir please teach me" is a re-teach request; "teach me about
+  // relativity" NAMES a topic and belongs to the excursion reader, which is
+  // left untouched. The `$` is the entire discriminator.
+  String.raw`\bteach\s+me(?:\s+(?:again|this|it|sir|please|more|properly|slowly|once\s+more))*\s*[.!?…]*$`,
+].join('|'), 'i')
 
 /**
  * Detect an explicit teaching-action request in the learner's message.
