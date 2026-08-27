@@ -506,6 +506,26 @@ export async function POST(req: Request) {
       console.warn('[lesson-init] figure-reference check skipped:', err)
     }
 
+    // Same reasoning as the figure repair immediately above, and found the same
+    // way: the opening turn lives behind its own endpoint, so a repair added to
+    // the chat route does not reach it. The learner's FIRST contact with a
+    // lesson was "### 2. Real-life situation" … "### 7. Formula (only if
+    // needed)" — the prompt's own parenthetical, copied out to a child.
+    try {
+      const { stripScaffoldHeadings } = await import('@/lib/teaching/scaffoldHeadings')
+      const scaffold = stripScaffoldHeadings(routed.text)
+      if (scaffold.removed.length > 0) {
+        console.warn('[lesson-init] ' + JSON.stringify({
+          event: 'stage-labels-stripped',
+          topicSlug,
+          removed: scaffold.removed,
+        }))
+        routed = { ...routed, text: scaffold.text }
+      }
+    } catch (err) {
+      console.warn('[lesson-init] scaffold-heading check skipped:', err)
+    }
+
     // LESSON ISOLATION — this IS the "explicit navigation" moment
     // /api/sessions/history's own resolution treats as authoritative
     // (activeLessonSlug, prioritized over the coarser currentLesson

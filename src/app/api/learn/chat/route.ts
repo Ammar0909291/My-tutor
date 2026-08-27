@@ -6555,6 +6555,28 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         console.warn('[figure-reference] check skipped:', err)
       }
 
+      // THE LESSON PLAN IS NOT THE LESSON. The EXPLANATION SEQUENCING LAW in
+      // client.ts states the ORDER to introduce an idea in; the model reads it
+      // as a FORMAT and prints the stage names as section headings, handing the
+      // learner the scaffolding. Measured in two of four live sessions run back
+      // to back on the real account, 2026-08-27 — the ordinary case, not a
+      // corner. Only marked-up labels are removed and the teaching under them
+      // is kept; see scaffoldHeadings.ts for why this cannot eat prose.
+      try {
+        const { stripScaffoldHeadings } = await import('@/lib/teaching/scaffoldHeadings')
+        const scaffold = stripScaffoldHeadings(cleanText)
+        if (scaffold.removed.length > 0) {
+          console.warn('[scaffold-headings] ' + JSON.stringify({
+            event: 'stage-labels-stripped',
+            conceptId: resolvedConceptId ?? null,
+            removed: scaffold.removed,
+          }))
+          cleanText = scaffold.text
+        }
+      } catch (err) {
+        console.warn('[scaffold-headings] check skipped:', err)
+      }
+
       // ADR 15: create RRM entry after visual pipeline resolution.
       // Single-writer: this is the ONLY path that writes RRM entries.
       let rrmEntryThisTurn: import('@/lib/teaching/renderedRealityModel').RRMEntry | null = null
