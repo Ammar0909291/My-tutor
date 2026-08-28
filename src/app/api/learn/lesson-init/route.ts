@@ -553,6 +553,18 @@ export async function POST(req: Request) {
       const { clearVisualSessionForNewClientView } = await import('@/lib/teaching/visual/session')
       const { clearTransientStateForNewAttempt } = await import('@/lib/teaching/attemptIsolation')
       const { writeSnapshotDelta, readSnapshotVersion } = await import('@/lib/db/snapshotWrite')
+      // P3, extended to the opening turn: this endpoint's own question was
+      // never folded into the anti-repetition ledger, so the chat route's
+      // first real turn had nothing to quote in its "DO NOT REPEAT" prompt
+      // block and could freely re-ask the opening's own closing question —
+      // measured live (phys.mod.photons, phys.mod.atomic-spectra, 2026-08-27):
+      // the tutor's T1 reply repeated T0's closing observation question
+      // verbatim, ignoring the learner's "okay that makes sense so far".
+      // Root cause: this endpoint lives behind its own route (see the file
+      // header) and never imported repetitionGuard.ts at all — the ledger is
+      // folded only by route.ts's own turns. Recording the opening's question
+      // here closes the gap without touching the ledger's own fold logic.
+      const { recordQuestions, readQuestionLedger } = await import('@/lib/teaching/repetitionGuard')
       // PHASE 7L, WIDENED BY PHASE B: the per-attempt stores are cleared ONLY
       // when a new attempt was actually opened. A `resume` of an in-progress
       // lesson opens nothing and must keep all of them — clearing there would
@@ -572,10 +584,17 @@ export async function POST(req: Request) {
           ...clearEpisodeForLessonOpen(),
           ...clearVisualSessionForNewClientView(),
           ...(attemptIsFreshStart ? clearTransientStateForNewAttempt() : {}),
+          questionLedger: recordQuestions(readQuestionLedger(snapshot?.questionLedger), routed.text),
         },
-        // Pure state replacement: re-applying the same two nulls on top of a
-        // newer base is already correct, so nothing needs re-deriving.
-        rederive: () => ({}),
+        // Every other key here is pure state replacement (the same two nulls
+        // as before). questionLedger is the one ACCUMULATIVE field in this
+        // delta, so on a conflict it is re-folded against the snapshot as it
+        // actually is — the same discipline route.ts's own rederivers use —
+        // rather than risking the retry silently dropping a concurrent turn's
+        // own recorded questions.
+        rederive: (fresh) => ({
+          questionLedger: recordQuestions(readQuestionLedger(fresh.questionLedger), routed.text),
+        }),
       })
     } catch (episodeErr) {
       console.error('[lesson-init] episode reset failed (lesson still opens):', episodeErr)

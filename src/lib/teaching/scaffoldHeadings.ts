@@ -107,6 +107,28 @@ function normalise(s: string): string {
  * follow: "Formula for refraction" is a real heading about a real thing and is
  * left alone.
  */
+/**
+ * Shape 2 removes a label that was standing in as the sentence's subject —
+ * "**Real-life situation:** a car moving…" — so what survives on that line
+ * is always meant to be a fresh sentence start, and a label written with the
+ * colon inside the bold markers routinely left it lowercase.
+ *
+ * MEASURED (production, phys.rel.postulates, opening turn, 2026-08-27, same
+ * deploy as the colon-inside-bold fix above): "...a car moving at a steady
+ * speed on a straight road." — grammatically a fragment, not a sentence.
+ *
+ * Only the case comparison decides whether to act: a first character with no
+ * uppercase form (a digit, a symbol, an opening quote) is left exactly as it
+ * was, which is also what keeps this from mis-capitalizing a variable name or
+ * unit that happens to open the line.
+ */
+function capitalizeSentenceStart(text: string): string {
+  if (text.length === 0) return text
+  const first = text[0]
+  const upper = first.toUpperCase()
+  return upper === first ? text : upper + text.slice(1)
+}
+
 function isStageLabel(text: string): boolean {
   const t = normalise(text)
     .replace(/^\d+[.)]\s*/, '')          // "2. Real-life situation"
@@ -178,7 +200,7 @@ export function stripScaffoldHeadings(input: string): ScaffoldStripResult {
       const inline = line.match(/^(\s*(?:[-*•]\s+|\d+[.)]\s+)?)\*\*(.+?)\*\*\s*[-–—:]?\s*(\S.*)$/)
       if (inline && isStageLabel(inline[2])) {
         removed.push(inline[2].trim())
-        out.push(inline[1] + inline[3])
+        out.push(inline[1] + capitalizeSentenceStart(inline[3]))
         continue
       }
 

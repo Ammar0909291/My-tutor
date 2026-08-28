@@ -27,7 +27,11 @@ describe('scaffold headings — the production turns that motivated this', () =>
       + '**Real‑life situation** – you flip a coin and it lands heads or tails.',
     )
     expect(r.removed).toHaveLength(2)
-    expect(r.text).toBe('a coin.\nyou flip a coin and it lands heads or tails.')
+    // The label was standing in as the sentence's subject; what survives is
+    // capitalized into a real sentence start rather than left as a fragment
+    // — see the dedicated capitalization tests below for the production case
+    // this generalizes from.
+    expect(r.text).toBe('A coin.\nYou flip a coin and it lands heads or tails.')
   })
 
   it('phys.opt.refraction opening: "Formula (only if needed)" is the prompt copied out', () => {
@@ -82,6 +86,50 @@ describe('scaffold headings — the production turns that motivated this', () =>
     const r = stripScaffoldHeadings('* **Concept name:**\nThe rest of the lesson continues here.')
     expect(r.removed).toEqual(['Concept name:'])
     expect(r.text).toBe('The rest of the lesson continues here.')
+  })
+
+  it('phys.rel.postulates opening: colon-inside-bold left a lowercase sentence fragment', () => {
+    // Reproduced verbatim from production, 2026-08-27 — the label was
+    // stripped correctly, but "a car moving..." is not a sentence.
+    const r = stripScaffoldHeadings(
+      '**Real-life situation:** a car moving at a steady speed on a straight road.',
+    )
+    expect(r.removed).toEqual(['Real-life situation:'])
+    expect(r.text).toBe('A car moving at a steady speed on a straight road.')
+  })
+
+  it('capitalizes across a whole bulleted list, one label per line', () => {
+    const r = stripScaffoldHeadings(
+      '- **Concrete object:** a sealed box nobody can see inside.\n'
+      + '- **Mental picture:** photons bouncing between two mirrors.',
+    )
+    expect(r.text).toBe(
+      '- A sealed box nobody can see inside.\n'
+      + '- Photons bouncing between two mirrors.',
+    )
+  })
+
+  it('leaves an already-capitalized continuation untouched, byte for byte', () => {
+    const r = stripScaffoldHeadings('**Concept name:** Kinetic theory of gases.')
+    expect(r.text).toBe('Kinetic theory of gases.')
+  })
+
+  it('never invents a capital where there is no letter to capitalize', () => {
+    // A number, a symbol or a formula opening the line has no uppercase form
+    // — the comparison is a no-op, which is also what keeps a variable name
+    // or unit from being mis-capitalized.
+    expect(stripScaffoldHeadings('**Formula:** 5 m/s is the car\'s speed.').text)
+      .toBe("5 m/s is the car's speed.")
+    expect(stripScaffoldHeadings('**Concept name:** "momentum" is the term for this.').text)
+      .toBe('"momentum" is the term for this.')
+  })
+
+  it('does not capitalize a shape-1/1b removal — there is no joined continuation to fix', () => {
+    // Only Shape 2 (label + continuation on the SAME line) can leave a
+    // fragment; a heading-only removal leaves the next line exactly as the
+    // model wrote it, which is a separate sentence already.
+    const r = stripScaffoldHeadings('### Real-life situation\na car moving at a steady speed.')
+    expect(r.text).toBe('a car moving at a steady speed.')
   })
 
   it('drops the horizontal rules that only separated scaffold sections', () => {

@@ -3006,6 +3006,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 lessonConceptId: unresolvedTopicExcursion ? null : teachingTargetConceptId,
                 excursionReturnToConceptId: excursionDecision.returnToConceptId,
                 excursionActive: excursionDecision.state.active,
+                // The excursion just opened or switched onto a topic the KG
+                // cannot name — release a held figure even though the
+                // learner's own words didn't read as an EXPLICIT request
+                // (requestLeavesActiveFigure's own narrower detector). The
+                // excursion system already recognised the topic drift with
+                // its wider, curriculum-aware detector; reuse that finding
+                // rather than loosening the general-purpose one. See
+                // ResolveVisualInput.excursionJustLeftFigure's doc.
+                excursionJustLeftFigure:
+                  unresolvedTopicExcursion
+                  && (excursionDecision.transition === 'started'
+                    || excursionDecision.transition === 'switched'),
                 subject: subjectCode,
                 learnerRequest: learnerRequestHoisted,
                 remediationTier,
@@ -4078,8 +4090,50 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // is enabled (the default); with it disabled the log is all it is.
         const { decideTeaching } = await import('@/lib/understanding/decisionEngine')
         const teachingDecision = decideTeaching(understanding)
-        cueDecisionHoisted = teachingDecision
-        console.log('[learn/chat] CUE decision=' + JSON.stringify(teachingDecision))
+        // D2b READS A STALE SIGNAL, AND AN OPEN EXCURSION MUST STILL OWN ITS
+        // OWN TURN. `masteryState` (studentMemoryReader.ts) is a per-turn READ
+        // of the LAST GRADED signal, not a state machine — it does not clear
+        // itself while the learner is off on an unrelated excursion tangent,
+        // because no new signal is produced there. So D2b re-fired
+        // "elicit → commit → collide" on every excursion turn, fighting the
+        // excursion's own "answer the question first" directive.
+        //
+        // MEASURED (production, 2026-08-27): masteryState stayed 'misconceiving'
+        // and DETECT_MISCONCEPTION kept dispatching through an unrelated
+        // arithmetic tangent (phys.rel.postulates), producing a stitched turn —
+        // an "elicit the reasoning" opener concatenated with a leftover
+        // question ("How did you decide that it was the second postulate? \n\n
+        // If you have 7 pencils and you find 3 more, how many pencils do you
+        // have now?").
+        //
+        // Deferred, not dropped: only D2b (the stale-signal rule) is
+        // overridden, only while `excursionDecisionHoisted` reports the
+        // excursion genuinely open this turn. D-2 (an engine-catalogued HIGH
+        // confidence misconception, a stronger and freshly-evidenced signal)
+        // is untouched. The underlying `lastSignal` this reads is unchanged by
+        // this override, so the very next non-excursion turn re-reads the same
+        // stale 'misconceiving' state and D2b fires again — nothing here lets
+        // a real misconception drop, it only stops fighting the excursion for
+        // the turns the excursion itself owns.
+        if (
+          teachingDecision.decision === 'DETECT_MISCONCEPTION'
+          && teachingDecision.ruleId === 'D2b-CONFIDENT-WRONG'
+          && excursionDecisionHoisted?.state.active === true
+        ) {
+          cueDecisionHoisted = {
+            ...teachingDecision,
+            decision: 'ESCALATE_TO_LLM',
+            ruleId: 'D2b-DEFERRED-TO-EXCURSION',
+            rationale: [
+              ...teachingDecision.rationale,
+              'An excursion is open this turn — deferred to open escalation so the excursion\'s own directive answers the learner\'s actual question; the underlying signal is unchanged, so this repairs again the moment the excursion closes.',
+            ],
+            parameters: {},
+          }
+        } else {
+          cueDecisionHoisted = teachingDecision
+        }
+        console.log('[learn/chat] CUE decision=' + JSON.stringify(cueDecisionHoisted))
 
         // Conversation Decision — classify the student's message BEFORE
         // any teaching decision. Every student message must first produce

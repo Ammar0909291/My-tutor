@@ -105,6 +105,27 @@ export interface ResolveVisualInput {
    * `looksLikeAnswer`. Optional; omitting it is the previous behaviour.
    */
   offeredMcqOptions?: readonly string[] | null
+  /**
+   * The Teaching Engine's excursion opened or switched onto a topic the
+   * curriculum cannot name THIS turn (route.ts's `unresolvedTopicExcursion`,
+   * true only on the transition turn — `excursionDecision.transition ===
+   * 'started' | 'switched'`).
+   *
+   * `requestLeavesActiveFigure` below is deliberately narrow — it only
+   * recognises an EXPLICIT "explain X"/"teach me X" request, not a genuine
+   * question like "what happens if the numbers are bigger though" — so a
+   * figure from the paused lesson stayed pinned on screen through an entire
+   * unrelated tangent (measured live 4x in production: an S-matrix diagram,
+   * a p-n junction diagram, an alpha/beta/gamma decay diagram, all held
+   * through several turns of an unrelated arithmetic aside). The excursion
+   * system already reasons this correctly with its own wider detector
+   * (`namedTopicUnknownTo`); this reuses that decision as an additional
+   * release signal instead of loosening the general-purpose one, which
+   * stays narrow everywhere else for the asymmetric-caution reasons
+   * documented on `requestLeavesActiveFigure` itself. Omitted by callers
+   * with no excursion state, which leaves behaviour unchanged.
+   */
+  excursionJustLeftFigure?: boolean
 }
 
 /**
@@ -451,7 +472,9 @@ export function resolveVisual(input: ResolveVisualInput): VisualDecision {
     offeredMcqOptions: input.offeredMcqOptions,
     visualRequested: input.learnerRequest === 'diagram',
     requestLeftActiveFigure:
-      liveSession !== null && requestLeavesActiveFigure(input.message, activeFigureText),
+      liveSession !== null
+      && (requestLeavesActiveFigure(input.message, activeFigureText)
+        || input.excursionJustLeftFigure === true),
   })
 
   let conceptId: string | null
