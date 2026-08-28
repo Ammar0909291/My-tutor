@@ -22,6 +22,8 @@ interface P {
   text?: string; provider?: string | null; llmCallCount?: number
   mcq?: { question: string; options: string[]; correctIndex: number } | null
   mastery?: { verified?: boolean; phase?: string; checkCorrect?: number; practiceCorrect?: number } | null
+  visualSpec?: unknown
+  sceneSpec?: unknown
   [k: string]: unknown
 }
 
@@ -99,6 +101,8 @@ async function main() {
       + ` verified=${m?.verified === true} provider=${p.provider} llmCalls=${p.llmCallCount}`
       + `${p.mcq ? ` MCQ(${p.mcq.options.length})` : ''} ${wc(t)}w`)
     console.log(`  TEXT  :\n${t.split('\n').map((l) => `    | ${l}`).join('\n')}\n`)
+    const v = p.visualSpec ?? p.sceneSpec
+    if (v) console.log(`  VISUAL:\n${JSON.stringify(v, null, 2).split('\n').map((l) => `    | ${l}`).join('\n')}\n`)
   }
 
   let last = await post('/api/learn/lesson-init', {
