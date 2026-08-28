@@ -39,6 +39,24 @@ describe('scaffold headings — the production turns that motivated this', () =>
     expect(r.text).toContain('predict angles')
   })
 
+  it('phys.therm.kinetic-theory opening: the colon sits INSIDE the bold, not after it', () => {
+    // The separator-required regex could never match "**Label:**" — there is
+    // nothing but a space between the closing ** and the text. Reproduced on
+    // the SAME deploy the first scaffold fix had already shipped to.
+    const r = stripScaffoldHeadings(
+      '**Real‑life situation:** A balloon in a room, a gas in a sealed bottle, air in a tire.\n'
+      + '**Mental picture:** Tiny specks of air darting all over, bumping into each other.\n'
+      + '**Plain‑language description:** In a gas, the molecules move freely and randomly.\n'
+      + '**Concept name:** Kinetic theory of gases.',
+    )
+    expect(r.removed).toHaveLength(4)
+    expect(r.text).not.toMatch(/\*\*(Real|Mental|Plain|Concept)/)
+    expect(r.text).toContain('A balloon in a room')
+    expect(r.text).toContain('Tiny specks of air darting')
+    expect(r.text).toContain('the molecules move freely')
+    expect(r.text).toContain('Kinetic theory of gases')
+  })
+
   it('drops the horizontal rules that only separated scaffold sections', () => {
     const r = stripScaffoldHeadings(
       '### 5. Concept name\nThis bending is called refraction.\n\n---\n\n### 6. Key vocabulary\nMedium: the material light travels through.',

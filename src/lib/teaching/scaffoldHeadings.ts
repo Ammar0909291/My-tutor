@@ -143,7 +143,20 @@ export function stripScaffoldHeadings(input: string): ScaffoldStripResult {
 
       // Shape 2 — a bold label followed by the teaching, on one line. Only the
       // label and its separator go.
-      const inline = line.match(/^(\s*)\*\*(.+?)\*\*\s*[-–—:]\s*(\S.*)$/)
+      //
+      // THE SEPARATOR IS OPTIONAL, AND MISSING IT WAS THE BUG. The colon can
+      // sit INSIDE the bold markers — "**Real-life situation:** A balloon in a
+      // room…" — rather than after them, which the old mandatory
+      // `[-–—:]` between `**` and the text could never match: there is nothing
+      // there but a space. MEASURED (production, phys.therm.kinetic-theory,
+      // the opening turn, 2026-08-27, on the SAME deploy the scaffold fix had
+      // already shipped to): **Real-life situation:**, **Mental picture:**,
+      // **Plain-language description:** and **Concept name:** all survived
+      // verbatim. `isStageLabel` already strips a trailing colon from inside
+      // the label, so making the separator optional here is the only change
+      // needed — precision still comes entirely from the stage-name match, not
+      // from the punctuation shape.
+      const inline = line.match(/^(\s*)\*\*(.+?)\*\*\s*[-–—:]?\s*(\S.*)$/)
       if (inline && isStageLabel(inline[2])) {
         removed.push(inline[2].trim())
         out.push(inline[1] + inline[3])
