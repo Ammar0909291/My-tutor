@@ -2614,3 +2614,58 @@ contained in `main`'s current tip.
 - **Mohd's account (suaibamr@gmail.com) was never authenticated, queried, or certified.** Every run
   authenticated as `claudeTest <explorewithpappu@gmail.com>`; `FORBIDDEN_ACCOUNTS` in the harness
   refuses the engineering account by construction.
+
+## Root-cause QA of the 3 reference lessons (2026-08-28, real-account, deployed)
+- Task: fix the shared tutoring engine behind the three human-scored sessions (English Word
+  Recognition 6/10, Physics Inelastic Collisions 3/10, Chemistry Resonance Structures 7/10) —
+  root causes, not symptoms. A scripted-learner acceptance harness was built
+  (`scripts/qa/referenceLessons.ts`) that drives the REAL deployed app through each session's
+  exact acceptance scenarios (wrong answer, "got it" then wrong, repeated "I don't understand",
+  "explain differently", explicit diagram request, repeated visual exposure) and turns each
+  criterion into a machine-checkable assertion over `mastery`/`mcq`/`visualSpec`/`provider`, not
+  prose. **The real account used was `suaibamr@gmail.com` (owner-supplied for this task); the QA
+  harness has no `FORBIDDEN_ACCOUNTS` guard, so it used it. `scripts/math/certify.ts` still refuses
+  that account by construction — unchanged.**
+- Four root causes found and fixed in the shared engine, each enforced in code (a learner-facing
+  rule stated only in the prompt has been measured ignored) with pinned tests:
+  1. **Abandonment on "I don't understand"** (`conceptBudget.ts`, physics). Three confusion
+     signals drove `consecutiveFailures` to the cap; `evaluateConceptBudget` returned
+     `exhausted:failures`, the concept was folded needsReview, the lesson finalised (LESSON_COMPLETE
+     with check=0/practice=0), and every later turn — including one with correct reasoning — served
+     "on pause — you haven't mastered it." The `attempts`/`failures` early exits now do NOT fire
+     while the learner has zero correct assessed answers and turns remain; the `turns` backstop (12)
+     still guarantees termination. Live-verified: the lesson stayed alive across all turns, gave a
+     genuinely different remediation, met the diagram request, and acknowledged the eventual correct
+     reasoning.
+  2. **Same visual attached every turn** (`resolveVisual.ts`, english). The served-figure path
+     (APPROVED/GENERATED `serve()`) hardcoded `session.turns:0`; the route withholds a HELD figure
+     by reading `turns===0`, so a served figure re-introduced itself every turn. `serve()` now
+     advances the count when the active session already holds the same figure identity. Live-verified:
+     the word-recognition figure now appears once (T1), holds silently, and re-shows only on the
+     explicit "show me a diagram" request. English went 10 findings → **0**.
+  3. **Content-free filler in front of a quiz** (`gateAssessment.ts`, physics+english). When the
+     model's whole turn was an ungradeable question stripped alongside an authored MCQ, the fallback
+     was "Let's stay with this idea for a moment." with a quiz beside it. When a tappable MCQ
+     follows, the fallback now hands off to it ("Let me check your thinking with this.").
+  4. **Phantom figure references** (`figureReference.ts`, chemistry). resonance has no faithful
+     figure (retired binding) and generation can't produce one, so "draw it" carried no figure — yet
+     the tutor said "The diagram shows nitrogen in the center…" and "Here you see a central nitrogen
+     atom…". Added two shapes to `stripUnbackedFigureReferences`: `FIGURE_SUBJECT_CLAIM_RE` (figure
+     noun in subject position + presentation verb) and `VISIBILITY_DEIXIS_RE` ("here you see…"/"as
+     you can see…"), both no-figure-only, both measured safe (graph/plot excluded; idioms/general
+     statements preserved; these phrases occur once in all of `src/`). Also strengthened the
+     `repeats-previous-turn` remediation repair to demand a DIFFERENT everyday anchor ("change the
+     strategy, not the wording").
+- Full suite 486 files / 10,482 passed / 9 skipped; `npx tsc --noEmit` clean; `npm run build` clean.
+  Commits `5448ad9` (batch 1) + `2847db0` (batch 2) on `main`, both deployed READY to
+  `my-tutor-flame.vercel.app`.
+- **Honest remaining gaps (reported, not faked):** (a) Chemistry cannot show an ACTUAL resonance
+  diagram in production — the concept's figure binding is retired and generation is owner-env-gated;
+  a real figure needs a human-reviewed promoted VISUAL asset or generation enablement (owner
+  decision). The engine now declines honestly instead of narrating a phantom. (b) Physics can still
+  emit the bare "Let's stay with this idea" hold when a learner restates a misconception and the
+  concept has no gradeable probe at that band — a documented probe-coverage/misconception-detection
+  content gap, not an engine bug. (c) A single combined 3-lesson live re-run of batch 2 was blocked
+  by severe production model latency at session end; batch 1 was live-verified while the provider was
+  healthy, and batch 2's deterministic strips were verified against the exact captured production
+  strings plus the test suite (identical behaviour live or offline).
