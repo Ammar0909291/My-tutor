@@ -64,6 +64,11 @@ const STAGE_NAMES = [
   'concrete everyday anchor',
   'everyday object',
   'everyday anchor',
+  // Bare "concrete object", without "everyday" — production, phys.mod.pn-
+  // junction's opening bullet list: "- **Concrete object:** Imagine a
+  // door…" The other three-word variants were already covered; this
+  // two-word one was missed and the label survived verbatim.
+  'concrete object',
   'real-life situation',
   'real-life example',
   'one-sentence mental picture',
@@ -134,8 +139,9 @@ export function stripScaffoldHeadings(input: string): ScaffoldStripResult {
         continue
       }
 
-      // Shape 1b — the same thing written as a bold line on its own.
-      const boldOnly = line.match(/^\s*\*\*(.+?)\*\*\s*:?\s*$/)
+      // Shape 1b — the same thing written as a bold line on its own, bulleted
+      // or not. Whole line goes: there is nothing else on it to keep.
+      const boldOnly = line.match(/^\s*(?:[-*•]\s+|\d+[.)]\s+)?\*\*(.+?)\*\*\s*:?\s*$/)
       if (boldOnly && isStageLabel(boldOnly[1])) {
         removed.push(boldOnly[1].trim())
         continue
@@ -156,7 +162,20 @@ export function stripScaffoldHeadings(input: string): ScaffoldStripResult {
       // the label, so making the separator optional here is the only change
       // needed — precision still comes entirely from the stage-name match, not
       // from the punctuation shape.
-      const inline = line.match(/^(\s*)\*\*(.+?)\*\*\s*[-–—:]?\s*(\S.*)$/)
+      //
+      // A LEADING BULLET MARKER IS ALSO ADMITTED, AND MISSING IT WAS A SECOND
+      // BUG. The model regularly writes the whole scaffold as a bullet list —
+      // "- **Concrete object:** Imagine a door…" — and the prefix group here
+      // used to accept only whitespace before `**`, so a leading `- ` broke
+      // the match outright. MEASURED (production, phys.mod.pn-junction, the
+      // opening turn, 2026-08-27, on the deploy carrying the colon-inside-bold
+      // fix above): five full bullet lines survived verbatim — "- **Concrete
+      // object:**", "- **Real-life situation:**", "- **Mental picture:**",
+      // "- **Plain-language description:**", "- **Concept name:**". The
+      // marker is captured and put back in front of the surviving text, so a
+      // bullet list stays a bullet list with only the label gone — not
+      // discarded, not left orphaned as a bare "-" line.
+      const inline = line.match(/^(\s*(?:[-*•]\s+|\d+[.)]\s+)?)\*\*(.+?)\*\*\s*[-–—:]?\s*(\S.*)$/)
       if (inline && isStageLabel(inline[2])) {
         removed.push(inline[2].trim())
         out.push(inline[1] + inline[3])

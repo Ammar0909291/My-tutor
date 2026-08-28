@@ -55,8 +55,10 @@ describe('the repeat remediation turn is governed by the card too', () => {
   })
 
   it('and the fallback prefers that card over the curriculum sentence', () => {
+    // `let`, not `const`, since the repeat-avoidance swap (below) needs to
+    // reassign it — see wouldRepeatPreviousTurn's own test file for that.
     expect(ROUTE).toMatch(
-      /const fallback = remediationHoldCardText\s*\n?\s*\?\?\s*buildRemediationFallbackText\(conceptSentence\)/,
+      /let fallback = remediationHoldCardText\s*\n?\s*\?\?\s*buildRemediationFallbackText\(conceptSentence\)/,
     )
   })
 })

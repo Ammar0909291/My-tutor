@@ -333,6 +333,52 @@ export function buildRemediationRepairAppendix(
  * is written for an AUTHOR, and its ordinary case is a mastery rubric or a
  * metadata block, which is wrong to SAY.
  */
+/**
+ * Would serving `candidate` repeat what the learner already just received?
+ *
+ * ── WHY THIS EXISTS ──────────────────────────────────────────────────────
+ * The fallback that follows a rejected repair is deterministic — always
+ * exactly the held card's own words, or failing that the curriculum sentence
+ * — and has NO memory of what it already served. When the model fails the
+ * output check on two consecutive turns, the SAME fallback fires both times,
+ * producing byte-for-byte identical text back to back.
+ *
+ * MEASURED (production, phys.qm.uncertainty-principle, 2026-08-27, two
+ * consecutive Vercel log entries for one session):
+ *
+ *     T3: [remediation-floor] repaired { violation: 'went-beyond-card',
+ *         accepted: false, usedHeldCard: true }
+ *     T4: [remediation-floor] repaired { violation: 'went-beyond-card',
+ *         accepted: false, usedHeldCard: true }
+ *
+ * Both turns served the identical "long, steady musical note" paragraph, in
+ * response to two DIFFERENT things the learner said. Reproduced again the
+ * same day on phys.qm.selection-rules. Each individual serve is correct on
+ * its own terms — notation-free, on-topic, drawn from the approved account —
+ * but two in a row reads to a learner as the tutor being stuck.
+ *
+ * ── WHAT THIS DOES NOT DO ────────────────────────────────────────────────
+ * It does not rewrite anything and does not judge whether the candidate is
+ * good. It answers one narrow question — "is this exactly (or almost
+ * exactly) what was just said" — so the caller can reach for a DIFFERENT
+ * source instead of repeating. Reuses the same normalisation and the same
+ * containment test `checkRemediationOutput`'s own `repeats-previous-turn`
+ * rule already applies, so "repeat" means the same thing in both places.
+ */
+export function wouldRepeatPreviousTurn(
+  candidate: string | null | undefined,
+  previousAssistantText: string | null | undefined,
+): boolean {
+  try {
+    const c = norm(candidate ?? '')
+    const prev = norm(previousAssistantText ?? '')
+    if (c.length === 0 || prev.length === 0) return false
+    return prev.includes(c) || c.includes(prev)
+  } catch {
+    return false
+  }
+}
+
 export function buildRemediationFallbackText(conceptSentence: string | null | undefined): string | null {
   const s = (conceptSentence ?? '').trim()
   if (s.length < 25 || s.length > 400) return null

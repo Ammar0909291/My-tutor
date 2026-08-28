@@ -57,6 +57,33 @@ describe('scaffold headings — the production turns that motivated this', () =>
     expect(r.text).toContain('Kinetic theory of gases')
   })
 
+  it('phys.mod.pn-junction opening: bullet-list labels, five in a row', () => {
+    // The colon-inside-bold fix's regex still anchored on whitespace before
+    // "**" and could never match a leading "- " bullet marker. Reproduced
+    // on the SAME deploy that fix had already shipped to.
+    const r = stripScaffoldHeadings(
+      '- **Concrete object:** Imagine a door that only lets you pass through in one direction.\n'
+      + '- **Real-life situation:** When you walk into a room, the door opens for you.\n'
+      + '- **Mental picture:** Picture a gate that swings open toward the room.\n'
+      + '- **Plain-language description:** A one-way door allows movement in one direction.\n'
+      + '- **Concept name:** In electronics, this one-way behavior is achieved by a p-n junction.',
+    )
+    expect(r.removed).toHaveLength(5)
+    expect(r.text).not.toMatch(/\*\*(Concrete object|Real-life situation|Mental picture|Plain-language description|Concept name)/)
+    // Bullets survive — this is a list before and after, not a list turned prose.
+    expect(r.text.split('\n').every((l) => l.startsWith('- '))).toBe(true)
+    expect(r.text).toContain('Imagine a door')
+    expect(r.text).toContain('the door opens for you')
+    expect(r.text).toContain('swings open toward the room')
+    expect(r.text).toContain('achieved by a p-n junction')
+  })
+
+  it('a bulleted stage label alone on its line is removed whole', () => {
+    const r = stripScaffoldHeadings('* **Concept name:**\nThe rest of the lesson continues here.')
+    expect(r.removed).toEqual(['Concept name:'])
+    expect(r.text).toBe('The rest of the lesson continues here.')
+  })
+
   it('drops the horizontal rules that only separated scaffold sections', () => {
     const r = stripScaffoldHeadings(
       '### 5. Concept name\nThis bending is called refraction.\n\n---\n\n### 6. Key vocabulary\nMedium: the material light travels through.',
@@ -90,6 +117,11 @@ describe('scaffold headings — what it must never touch', () => {
 
   it('leaves a bold emphasis that is not a stage label', () => {
     const t = '**Refraction** - light changing direction at a boundary.'
+    expect(stripScaffoldHeadings(t).text).toBe(t)
+  })
+
+  it('leaves an ordinary bulleted term that is not a stage label', () => {
+    const t = '- **Refraction:** light bending as it crosses a boundary.\n- **Reflection:** light bouncing back.'
     expect(stripScaffoldHeadings(t).text).toBe(t)
   })
 

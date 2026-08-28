@@ -5792,6 +5792,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           const {
             isRemediationTurn, checkRemediationOutput,
             buildRemediationRepairAppendix, buildRemediationFallbackText,
+            wouldRepeatPreviousTurn,
           } = await import('@/lib/teaching/remediationOutputContract')
           const remediationTurn = isRemediationTurn(conversationDecisionHoisted.type)
           const previousAssistantText = learnSession.messages
@@ -5891,16 +5892,39 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // notation-free by construction, and it is already the authority
               // governing this turn. The KG sentence remains the fallback for
               // concepts that have no card, which is most of the product.
-              const fallback = remediationHoldCardText
+              let fallback = remediationHoldCardText
                 ?? buildRemediationFallbackText(conceptSentence)
+              // BUT NOT IF IT IS THE IDENTICAL THING JUST SAID. This fallback
+              // has no memory of what it already served, and when the repair
+              // fails on two consecutive turns the same deterministic source
+              // fires twice — measured verbatim in production, see
+              // wouldRepeatPreviousTurn's own header for the two log entries
+              // this reproduces. Reach for the OTHER source before accepting
+              // a repeat: the held card and the curriculum sentence are
+              // different text, so trying the one not just used is enough to
+              // break the loop the overwhelming majority of the time.
+              if (fallback && wouldRepeatPreviousTurn(fallback, previousAssistantText)) {
+                const alt = remediationHoldCardText
+                  ? buildRemediationFallbackText(conceptSentence)
+                  : null
+                if (alt && !wouldRepeatPreviousTurn(alt, previousAssistantText)) fallback = alt
+                // Neither source is fresh (both already said, or no curriculum
+                // sentence exists): repeating a correct, notation-free
+                // explanation is still the least-bad option left, and better
+                // than the alternative of letting the rejected draft's
+                // notation through. Stands as-is.
+              }
               if (fallback) cleanText = fallback
             }
             console.log('[remediation-floor] repaired', {
               violation: verdict.violation,
               accepted: !stillViolating,
-              usedHeldCard: stillViolating && remediationHoldCardText !== null,
-            usedCurriculumSentence:
-              stillViolating && remediationHoldCardText === null && conceptSentence !== null,
+              // Which source actually landed in cleanText when the repair was
+              // rejected, not merely which one was available — the two
+              // diverge exactly when the repeat-avoidance swap above fired.
+              usedHeldCard: stillViolating && cleanText === remediationHoldCardText,
+              usedCurriculumSentence:
+                stillViolating && cleanText !== remediationHoldCardText && cleanText !== repaired,
             })
           }
         } catch (err) {
