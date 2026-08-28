@@ -60,16 +60,45 @@ describe('evaluateConceptBudget', () => {
     expect(b.markForReview).toBe(true)
   })
 
-  it('exhausts on teaching attempts', () => {
-    const b = evaluateConceptBudget(st({ remediationCount: MAX_TEACHING_ATTEMPTS }))
+  it('exhausts on teaching attempts once the learner has been assessed', () => {
+    // The `attempts` exit is for a learner FAILING under assessment, so it
+    // requires at least one correct assessed answer on record.
+    const b = evaluateConceptBudget(st({ remediationCount: MAX_TEACHING_ATTEMPTS, correctAtCheck: 1 }))
     expect(b.status).toBe('exhausted')
     expect(b.reason).toBe('attempts')
   })
 
-  it('exhausts on consecutive failures', () => {
-    const b = evaluateConceptBudget(st({ consecutiveFailures: MAX_CONSECUTIVE_FAILURES }))
+  it('exhausts on consecutive failures once the learner has been assessed', () => {
+    const b = evaluateConceptBudget(st({ consecutiveFailures: MAX_CONSECUTIVE_FAILURES, correctAtCheck: 1 }))
     expect(b.status).toBe('exhausted')
     expect(b.reason).toBe('failures')
+  })
+
+  it('does NOT abandon an unassessed learner on repeated "I don\'t understand"', () => {
+    // phys.mech.collisions-inelastic, real account, 2026-08-28: three confusion
+    // signals with zero graded answers must keep remediating, not close the
+    // concept. The `turns` backstop still guarantees termination.
+    const failures = evaluateConceptBudget(st({
+      consecutiveFailures: MAX_CONSECUTIVE_FAILURES, correctAtCheck: 0, correctAtPractice: 0, turnsOnConcept: 5,
+    }))
+    expect(failures.status).not.toBe('exhausted')
+    expect(failures.markForReview).toBe(false)
+
+    const attempts = evaluateConceptBudget(st({
+      remediationCount: MAX_TEACHING_ATTEMPTS + 2, correctAtCheck: 0, correctAtPractice: 0, turnsOnConcept: 5,
+    }))
+    expect(attempts.status).not.toBe('exhausted')
+    expect(attempts.markForReview).toBe(false)
+  })
+
+  it('the turns backstop still closes an unassessed learner — no infinite loop', () => {
+    const b = evaluateConceptBudget(st({
+      consecutiveFailures: MAX_CONSECUTIVE_FAILURES, correctAtCheck: 0, correctAtPractice: 0,
+      turnsOnConcept: CONCEPT_TURN_BUDGET,
+    }))
+    expect(b.status).toBe('exhausted')
+    expect(b.reason).toBe('turns')
+    expect(b.markForReview).toBe(true)
   })
 
   it('never marks a MASTERED concept for review, however slow it was', () => {

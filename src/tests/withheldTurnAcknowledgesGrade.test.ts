@@ -211,3 +211,41 @@ describe('a repair may never break a turn', () => {
     expect(r.text).not.toContain('?')
   })
 })
+
+/**
+ * THE STRAY-QUESTION-ALONGSIDE-MCQ PATH HANDS OFF TO THE QUIZ, NOT A STALL.
+ *
+ * phys.mech.collisions-inelastic + eng.vocab.word-recognition, real account,
+ * 2026-08-28: the model wrote its own prose question while an authored MCQ was
+ * already attached; the prose was stripped and the WHOLE visible message became
+ * "Let's stay with this idea for a moment." with a quiz beside it — the brief's
+ * named dead-loop. When a tappable MCQ follows, the fallback must orient to it.
+ */
+describe('a stripped prose question with an MCQ attached hands off to the MCQ', () => {
+  const strayAlongsideMcq = {
+    text: 'So, why do you think the two speeds should not simply be added together?',
+    phase: 'CHECK' as const,
+    hasStructuredMcq: true,
+    attachedMcqQuestion: 'What is the final speed after a perfectly inelastic collision?',
+  }
+
+  it('does not emit the content-free hold in front of a quiz', () => {
+    const r = withholdUngradedGateQuestion({ ...strayAlongsideMcq, justGraded: null })
+    expect(r.withheld).toBe(true)
+    expect(r.reason).toBe('stray-question-alongside-mcq')
+    expect(r.text).not.toBe(PLACEHOLDER)
+    // orients toward the question that is actually there
+    expect(r.text.toLowerCase()).toMatch(/check|thinking|this/)
+    // still strips the model's own stray question
+    expect(r.text).not.toContain('?')
+  })
+
+  it('still reports a just-computed grade before handing off', () => {
+    const r = withholdUngradedGateQuestion({
+      ...strayAlongsideMcq,
+      justGraded: { correct: true },
+    })
+    expect(r.text.toLowerCase()).toMatch(/right|correct/)
+    expect(r.text).not.toBe(PLACEHOLDER)
+  })
+})

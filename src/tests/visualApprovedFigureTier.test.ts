@@ -185,3 +185,42 @@ describe('the approved tier', () => {
     expect(d).not.toBe('threw')
   })
 })
+
+/**
+ * A SERVED FIGURE IS HELD, NOT RE-INTRODUCED EVERY TURN.
+ *
+ * eng.vocab.word-recognition, real account, 2026-08-28: the same figure was
+ * attached to all ten turns because this path hardcoded `session.turns: 0`,
+ * and the route withholds a held figure from the client by reading
+ * `session.turns === 0`. Continuity turns must advance the count so the figure
+ * is introduced exactly once and then left on the learner's screen.
+ */
+describe('served-figure continuity', () => {
+  it('introduces an approved figure at turns:0, then HOLDS it (turns advances)', async () => {
+    const first = await resolveVisualForTurn(
+      { ...turn, lessonConceptId: UNCURATED, activeSession: null },
+      {
+        enabled: () => true, policy: 'reviewed',
+        findApprovedFigure: async () => approved, critic: passingCritic, budgetReader: openBudget,
+        generate: async () => { throw new Error('generation must not be reached') },
+      },
+    )
+    expect(first.graphical).toBe(true)
+    expect(first.session?.turns).toBe(0)
+
+    // The next turn continues the same figure — same concept, same renderer.
+    const held = await resolveVisualForTurn(
+      { ...turn, message: 'okay that makes sense', learnerRequest: null,
+        lessonConceptId: UNCURATED, activeSession: first.session },
+      {
+        enabled: () => true, policy: 'reviewed',
+        findApprovedFigure: async () => approved, critic: passingCritic, budgetReader: openBudget,
+        generate: async () => { throw new Error('generation must not be reached') },
+      },
+    )
+    expect(held.graphical).toBe(true)
+    // turns > 0 is exactly what makes figureIntroducedThisTurn false in the
+    // route, so the client is NOT sent a fresh card for a figure it already has.
+    expect(held.session?.turns).toBe(1)
+  })
+})

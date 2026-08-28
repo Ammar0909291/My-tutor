@@ -149,6 +149,31 @@ const DIRECT_POINTER_RE =
  * comma — with any trailing whitespace. Matched globally so the caller can
  * walk EVERY candidate boundary in the sentence, not just the first.
  */
+/**
+ * EXPLICIT VISIBILITY ASSERTIONS — "here you see…", "as you can see…",
+ * "you can see here/above/below…" — that claim a figure is being VIEWED RIGHT
+ * NOW even though they name no figure noun of their own.
+ *
+ * ── THE DEFECT THIS EXISTS FOR ─────────────────────────────
+ * chem.bond.resonance, real account, 2026-08-28. The learner asked "can you
+ * draw it for me?"; resonance has no faithful figure (its binding is retired
+ * because the only card available depicted the misconception) and generation
+ * is off in production, so the turn carried NO figure — and the tutor answered
+ * "Here you see a central nitrogen atom bonded to three oxygens…", describing a
+ * drawing that was never attached. The figure-noun test does not catch it
+ * because the sentence names no diagram/figure/picture, only atoms.
+ *
+ * ── WHY THIS IS SAFE ─────────────────────────────────────
+ * These phrases are nearly absent from real teaching prose — measured at ONE
+ * occurrence across all of src/, because a tutor writing text says "notice
+ * that", "the pattern is", "we get" — not "here you see", which presupposes a
+ * thing on screen. The false-positive surface is tiny, and it fires ONLY when
+ * no figure is attached (the whole function's precondition). Anchored to the
+ * START of a fragment: "here you see" mid-sentence is not this shape.
+ */
+const VISIBILITY_DEIXIS_RE =
+  /^(?:here\s+(?:you|we)\s+(?:can\s+|will\s+|'ll\s+)?see\b|as\s+(?:you|we)\s+can\s+see\b|you\s+can\s+see\s+(?:here|above|below)\b)[,:]?\s*/i
+
 const CLAUSE_BOUNDARY_RE = /(?:[—–]|(?<=\s)-(?=\s)|,)\s*/g
 
 /**
@@ -216,8 +241,14 @@ export function stripUnbackedFigureReferences(
   try {
     if (hasFigure) return { text, stripped: false, removed: [] }
     if (typeof text !== 'string' || text.length === 0) return { text, stripped: false, removed: [] }
-    // Cheap reject: nothing here points at anything.
-    if (!STRONG_FIGURE_NOUN.test(text) && !WEAK_FIGURE_NOUN.test(text)) {
+    // Cheap reject: nothing here points at anything. Visibility deixis
+    // ("here you see…") is a pointer that names no figure noun, so it must
+    // keep the text in scope even when no figure noun appears — tested
+    // unanchored here (it may open a LATER sentence), then re-tested anchored
+    // per sentence below.
+    const hasVisibilityDeixis =
+      /\b(?:here\s+(?:you|we)\s+(?:can\s+|will\s+|'ll\s+)?see|as\s+(?:you|we)\s+can\s+see|you\s+can\s+see\s+(?:here|above|below))\b/i.test(text)
+    if (!STRONG_FIGURE_NOUN.test(text) && !WEAK_FIGURE_NOUN.test(text) && !hasVisibilityDeixis) {
       return { text, stripped: false, removed: [] }
     }
 
@@ -229,6 +260,31 @@ export function stripUnbackedFigureReferences(
       const kept = sentences.map((sentence) => {
         const s = sentence.trim()
         if (s.length === 0) return ''
+
+        // Shape 0: a leading VISIBILITY-DEIXIS opener ("Here you see …", "As
+        // you can see, …"). It names no figure noun, so shape 1/2 below never
+        // catch it — but with no figure attached it is a claim that something
+        // is on screen. Strip the opener and keep whatever real content
+        // follows; drop the whole sentence only if nothing usable remains and
+        // it is not a question. A question is never removed.
+        if (!s.includes('?')) {
+          const m = s.match(VISIBILITY_DEIXIS_RE)
+          if (m) {
+            const rest = s.slice(m[0].length).trim()
+            // Keep the remainder only when it carries real content: it starts
+            // like a sentence AND has at least three words. "Here you see it."
+            // leaves "It." — a fragment worse than dropping the whole claim.
+            const restWords = rest.split(/\s+/).filter(Boolean).length
+            if (rest.length > 0 && /^[A-Za-z0-9]/.test(rest) && restWords >= 3) {
+              removed.push(m[0].trim())
+              return rest.charAt(0).toUpperCase() + rest.slice(1)
+            }
+            // Nothing substantive follows the claim — the sentence was only
+            // the claim, so it goes.
+            removed.push(s)
+            return ''
+          }
+        }
 
         // Shape 2 first: a pointing clause in FRONT of real content. Handled
         // before shape 1 so a sentence carrying both is trimmed, not deleted.

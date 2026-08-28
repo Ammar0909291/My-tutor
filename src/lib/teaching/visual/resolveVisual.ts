@@ -763,6 +763,33 @@ export async function resolveVisualForTurn(
     )
     if (!admission.ok) return { ...decision, provenance: `no-figure:rejected-${admission.reason}` }
 
+    // ── A SERVED FIGURE MUST BE HELD, NOT RE-INTRODUCED EVERY TURN ───────────
+    //
+    // Measured live (eng.vocab.word-recognition, real account, 2026-08-28): the
+    // same word-recognition process-flow figure was attached to all ten turns
+    // of the lesson — a fresh card after every tutor reply, the exact
+    // "same diagram injected after nearly every reply" the brief names.
+    //
+    // Cause: this is the APPROVED/GENERATED path, and it hardcoded `turns: 0`.
+    // The route withholds a HELD figure from the client payload precisely by
+    // reading `session.turns === 0` (`figureIntroducedThisTurn`), so a figure
+    // that always reports 0 is always re-introduced. The CURATED path
+    // (resolveVisual's synchronous tiers) already carries the continuity turn
+    // count via `heldTurns`; this path threw it away, so an approved figure and
+    // a curated one behaved differently for no reason.
+    //
+    // A figure is a CONTINUATION when the active session already holds the same
+    // figure identity — same concept and same renderer (for a runtime topic the
+    // conceptId is a stable hash of its title, so the same topic matches). Only
+    // then does the turn count advance; a genuinely new figure still starts at
+    // 0 and is introduced to the learner exactly once.
+    const continuesActiveFigure =
+      input.activeSession !== null
+      && input.activeSession !== undefined
+      && input.activeSession.conceptId === admission.asset.conceptId
+      && input.activeSession.renderer === admission.asset.renderer
+    const servedTurns = continuesActiveFigure ? input.activeSession!.turns + 1 : 0
+
     return {
       ...decision,
       representation,
@@ -776,7 +803,7 @@ export async function resolveVisualForTurn(
         representation,
         renderer: admission.asset.renderer,
         returnToConceptId: returnTo,
-        turns: 0,
+        turns: servedTurns,
         // A runtime topic carries its own words, because nothing else can:
         // its id is a hash of the title and the curriculum has no entry to
         // re-derive it from. Without this the figure survives every follow-up

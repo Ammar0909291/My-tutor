@@ -483,4 +483,54 @@ Can you think of another everyday example of this principle?`
     const r = stripUnbackedFigureReferences(t, false)
     expect(r.text).toContain('?')
   })
+
+describe('visibility deixis with no figure attached (chem.bond.resonance, 2026-08-28)', () => {
+  it('strips "Here you see …" and keeps the content that follows', () => {
+    const t = 'Here you see a central nitrogen atom bonded to three oxygens. Each structure has one double bond.'
+    const r = stripUnbackedFigureReferences(t, false)
+    expect(r.stripped).toBe(true)
+    expect(r.text).not.toMatch(/here you see/i)
+    expect(r.text).toMatch(/central nitrogen atom bonded to three oxygens/i)
+    expect(r.text).toMatch(/each structure has one double bond/i)
+  })
+
+  it('strips a leading "As you can see," claim', () => {
+    const r = stripUnbackedFigureReferences('As you can see, momentum is conserved but kinetic energy is not.', false)
+    expect(r.stripped).toBe(true)
+    expect(r.text).not.toMatch(/as you can see/i)
+    expect(r.text).toMatch(/momentum is conserved/i)
+  })
+
+  it('LEAVES the deixis intact when a figure IS attached — the claim is true then', () => {
+    const t = 'Here you see a central nitrogen atom bonded to three oxygens.'
+    const r = stripUnbackedFigureReferences(t, true)
+    expect(r.stripped).toBe(false)
+    expect(r.text).toBe(t)
+  })
+
+  it('does NOT touch ordinary teaching prose that never claims a figure', () => {
+    for (const t of [
+      'Notice that the pattern repeats every three terms.',
+      'We get the same answer either way.',
+      'You can think of it as a seesaw balancing.',
+    ]) {
+      const r = stripUnbackedFigureReferences(t, false)
+      expect(r.stripped).toBe(false)
+      expect(r.text).toBe(t)
+    }
+  })
+
+  it('drops a claim-only sentence rather than leaving a bare fragment', () => {
+    const r = stripUnbackedFigureReferences('Here you see it. The bond length is equal all around.', false)
+    expect(r.text).not.toMatch(/^it\.?/i)
+    expect(r.text).toMatch(/bond length is equal all around/i)
+  })
+
+  it('never removes a question', () => {
+    const t = 'What do you see here?'
+    const r = stripUnbackedFigureReferences(t, false)
+    expect(r.text).toBe(t)
+  })
+})
+
 })

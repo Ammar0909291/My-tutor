@@ -403,6 +403,25 @@ export interface UngradedGateQuestionResult {
 const WITHHELD_QUESTION_CONTINUATION = "Let's stay with this idea for a moment."
 
 /**
+ * The lead-in used when the stripped question is being REPLACED by a tappable
+ * MCQ that follows immediately beneath the text.
+ *
+ * ── WHY A SECOND SENTENCE ──────────────────────────────────────────────────
+ * `WITHHELD_QUESTION_CONTINUATION` was written for the case where NOTHING
+ * follows — a genuine hold. But on the `stray-question-alongside-mcq` path a
+ * real question DOES follow (the authored MCQ, rendered as buttons), and the
+ * hold sentence then reads as a content-free stall in front of a quiz.
+ *
+ * Measured live (phys.mech.collisions-inelastic and eng.vocab.word-recognition,
+ * real account, 2026-08-28): a learner who had just stated a misconception, and
+ * a learner who had just answered, each received ONLY "Let's stay with this
+ * idea for a moment." with an MCQ beside it — the exact dead-loop the brief
+ * names. Orienting to the question that is actually there removes the stall
+ * without claiming anything about how the learner did.
+ */
+const WITHHELD_QUESTION_HANDS_OFF_TO_MCQ = 'Let me check your thinking with this.'
+
+/**
  * The same sentence, told what the server already knows about THIS turn.
  *
  * ── THE DEFECT THIS CLOSES (measured, phys.mech.rotational-dynamics,
@@ -431,12 +450,18 @@ const WITHHELD_QUESTION_CONTINUATION = "Let's stay with this idea for a moment."
  * is spent by this point (`excludeProbeStem` never re-asks it), so naming the
  * answer forfeits no future assessment.
  */
-function withheldContinuation(justGraded: GradedThisTurn | null | undefined): string {
+function withheldContinuation(
+  justGraded: GradedThisTurn | null | undefined,
+  /** True when a tappable MCQ is being rendered immediately below this text,
+   *  so the fallback should hand off to it rather than stall in front of it. */
+  questionFollows = false,
+): string {
+  const tail = questionFollows ? WITHHELD_QUESTION_HANDS_OFF_TO_MCQ : WITHHELD_QUESTION_CONTINUATION
   if (!justGraded || typeof justGraded.correct !== 'boolean') {
-    return WITHHELD_QUESTION_CONTINUATION
+    return tail
   }
   if (justGraded.correct) {
-    return `That's right. ${WITHHELD_QUESTION_CONTINUATION}`
+    return `That's right. ${tail}`
   }
   const key = typeof justGraded.correctOptionText === 'string'
     ? justGraded.correctOptionText.trim()
@@ -444,8 +469,8 @@ function withheldContinuation(justGraded: GradedThisTurn | null | undefined): st
   // The trailing '?' the caller stripped must not come back in through the
   // answer key, so a key that is itself a question is reported without it.
   return key.length > 0 && !key.includes('?')
-    ? `Not quite — the answer was: ${key}. ${WITHHELD_QUESTION_CONTINUATION}`
-    : `Not quite. ${WITHHELD_QUESTION_CONTINUATION}`
+    ? `Not quite — the answer was: ${key}. ${tail}`
+    : `Not quite. ${tail}`
 }
 
 /**
@@ -541,7 +566,9 @@ export function withholdUngradedGateQuestion(
 
       const kept = dropAnswerableContent(text)
       return {
-        text: kept.length > 0 ? kept : withheldContinuation(input.justGraded),
+        // A tappable MCQ follows this text, so the fallback hands off to it
+        // instead of stalling with the content-free hold sentence.
+        text: kept.length > 0 ? kept : withheldContinuation(input.justGraded, true),
         withheld: true,
         reason: 'stray-question-alongside-mcq',
       }

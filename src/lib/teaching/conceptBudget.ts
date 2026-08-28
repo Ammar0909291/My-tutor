@@ -110,6 +110,19 @@ export function hasDemonstratedMastery(state: ConversationState): boolean {
   return state.correctAtPractice >= 2 || state.phase === 'TRANSFER'
 }
 
+/**
+ * Has the learner ever produced a single correct answer at an ASSESSED rung?
+ *
+ * `correctAtCheck`/`correctAtPractice` move ONLY inside CHECK/PRACTICE, on a
+ * server-graded answer — never on chat, acknowledgement or a diagnostic exit.
+ * A learner with both at zero has therefore never once demonstrated the
+ * concept under assessment: whatever else happened, the teaching has not yet
+ * landed for them.
+ */
+function neverDemonstratedAnything(state: ConversationState): boolean {
+  return (state.correctAtCheck ?? 0) === 0 && (state.correctAtPractice ?? 0) === 0
+}
+
 export function evaluateConceptBudget(state: ConversationState): ConceptBudget {
   const turnsUsed = state.turnsOnConcept ?? 0
   // An attempt is the initial teaching pass plus each remediation.
@@ -125,13 +138,41 @@ export function evaluateConceptBudget(state: ConversationState): ConceptBudget {
     return { ...base, status: 'ok', reason: null, markForReview: false }
   }
 
+  // THE `turns` BACKSTOP IS ABSOLUTE — it fires even for an unassessed
+  // learner, so termination is always guaranteed and no loop can form. This
+  // is deliberately checked BEFORE the confusion guard below.
   if (turnsUsed >= effectiveTurnBudget(state)) {
     return { ...base, status: 'exhausted', reason: 'turns', markForReview: true }
   }
-  if (attemptsUsed > MAX_TEACHING_ATTEMPTS) {
+
+  // ── NEVER ABANDON A LEARNER WHO HAS ONLY ASKED FOR HELP ──────────────────
+  //
+  // Measured live (phys.mech.collisions-inelastic, real account, 2026-08-28):
+  // a learner who said "I do not understand" / "explain differently" three
+  // times — and had never once been given, let alone failed, a graded
+  // question — drove `consecutiveFailures` to MAX_CONSECUTIVE_FAILURES. The
+  // budget read `exhausted:failures`, the concept was folded as needsReview,
+  // the lesson finalised, and every later turn (including one where the
+  // learner reasoned correctly) served "on pause — you haven't mastered it."
+  // That is the exact P0 the brief names: "I don't understand" must trigger
+  // REMEDIATION, not abandonment/completion.
+  //
+  // `attempts` and `failures` are both meant to end a concept the learner is
+  // FAILING UNDER ASSESSMENT — a bad fit for a learner who has simply not been
+  // assessed yet. While the learner has produced zero correct assessed answers
+  // AND turns remain, those two early exits are SUPPRESSED, so remediation
+  // keeps going (the engine already escalates to a different representation on
+  // each "explain differently" / recovery turn). The moment the learner lands
+  // even one correct assessed answer, `neverDemonstratedAnything` is false and
+  // the normal budget resumes — a learner who got one right and then fails
+  // repeatedly can still be moved to review. Termination is unaffected: the
+  // `turns` backstop above already fired if it was going to.
+  const stillFindingTheirFooting = neverDemonstratedAnything(state)
+
+  if (attemptsUsed > MAX_TEACHING_ATTEMPTS && !stillFindingTheirFooting) {
     return { ...base, status: 'exhausted', reason: 'attempts', markForReview: true }
   }
-  if ((state.consecutiveFailures ?? 0) >= MAX_CONSECUTIVE_FAILURES) {
+  if ((state.consecutiveFailures ?? 0) >= MAX_CONSECUTIVE_FAILURES && !stillFindingTheirFooting) {
     return { ...base, status: 'exhausted', reason: 'failures', markForReview: true }
   }
 
