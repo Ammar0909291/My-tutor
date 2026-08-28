@@ -97,6 +97,20 @@ export function isRemediationTurn(conversationDecisionType: string | null | unde
 export interface RemediationOutputInput {
   /** `isRemediationTurn(conversationDecision.type)`. */
   remediationTurn: boolean
+  /**
+   * `conversationDecision.type === 'RECOVERY'` — the learner voiced a
+   * failure-state utterance (recoveryGuard.ts) and the turn is governed by
+   * an authored SCRIPT, not the CONFUSION/REPHRASE_REQUEST directive. Scoped
+   * to ONLY the no-teaching-content check below: every SCRIPTS entry
+   * (recoveryGuard.ts) requires some follow-through — a new representation,
+   * a boundary question, cued retrieval, a split sub-step — never
+   * acknowledgment alone, so "taught nothing" is exactly as wrong here as on
+   * a CONFUSION turn. `question-only` and `went-beyond-card` stay
+   * remediation-only on purpose: several scripts' entire legitimate content
+   * IS a question (dont_know's shrink-to-two-choice, confused's boundary
+   * question), so treating a bare question as a violation would break them.
+   */
+  recoveryTurn?: boolean
   /** The cleaned, learner-visible draft. */
   text: string
   /** The previous ASSISTANT message, for the repeat check. */
@@ -171,7 +185,7 @@ export function checkRemediationOutput(input: RemediationOutputInput): Remediati
     // approved account in production. Every other turn in the product returns
     // here untouched, as before.
     const heldText = typeof input.heldCardText === 'string' ? input.heldCardText : ''
-    if (!input.remediationTurn && heldText.length === 0) return OK
+    if (!input.remediationTurn && !input.recoveryTurn && heldText.length === 0) return OK
     const text = typeof input.text === 'string' ? input.text : ''
     // An empty draft is a different failure with a different owner (the
     // provider path). Claiming it here would only mislabel it.
@@ -207,7 +221,7 @@ export function checkRemediationOutput(input: RemediationOutputInput): Remediati
     // no teaching, and shipped, because this check was scoped out of held turns
     // when the floor was first extended to them.
     if (
-      (input.remediationTurn || heldText.length > 0)
+      (input.remediationTurn || input.recoveryTurn === true || heldText.length > 0)
       && !input.hasStructuredMcq
       && !turnTaughtSomething(text)
     ) {

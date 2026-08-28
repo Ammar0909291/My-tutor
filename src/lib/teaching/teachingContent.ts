@@ -86,6 +86,22 @@ const META_SENTENCE: RegExp[] = [
   /^(am|are)\s+(i|we)\s+(right|on the right track)\b/i,
   // Stage management.
   /^(let'?s|lets|shall we|we'?ll)\s+(see|go|start|begin|carry on|continue|move on|try again)\b/i,
+  // The recovery guard's OWN authored opener for 'dont_understand'
+  // ("...then CHANGE REPRESENTATION entirely") and the classifier's
+  // FRUSTRATION directive ("let's try this differently") share this exact
+  // stage-transition phrase, and it was invisible to the pattern above —
+  // "come"/"try"/"approach" were not in that verb list. MEASURED
+  // (production, phys.qm.spin, 2026-08-28): "Okay—let's come at it
+  // differently." was the WHOLE turn — the acknowledgment half of the
+  // script, with the mandatory "then change representation" half dropped —
+  // and scored substantive under the old pattern purely because "come" and
+  // "differently" are not function words, not because either sentence
+  // taught anything.
+  // Separator after "okay"/"ok" is a comma, whitespace, OR a dash — the
+  // model's actual opener is usually "Okay—let's...", an em dash with no
+  // comma at all, matching the trailing-punctuation class the bare
+  // "okay/ok/..." pattern above already uses for exactly this reason.
+  /^(?:(?:and|so|okay|ok)[\s,—-]+)?(let'?s|lets|we'?ll)\s+(come at|approach|try)\s+(it|this)?\s*(differently|a\s+different\s+(way|angle|approach)|another\s+way)\b/i,
   /^(good|great|nice|perfect|excellent|well done|exactly|correct|right|okay|ok|alright|sure)\b[\s!.,—-]*$/i,
   /^no\s+(worries|problem)\b/i,
   /^(take your time|no rush)\b/i,

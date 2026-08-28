@@ -5849,11 +5849,23 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             wouldRepeatPreviousTurn,
           } = await import('@/lib/teaching/remediationOutputContract')
           const remediationTurn = isRemediationTurn(conversationDecisionHoisted.type)
+          // The learner voiced a failure-state utterance (recoveryGuard.ts)
+          // rather than plain confusion — a DIFFERENT prompt path
+          // (D0-RECOVERY-PREEMPT / the authored SCRIPTS in recoveryGuard.ts),
+          // but one whose own scripts require exactly the same thing
+          // CONFUSION's does: acknowledgment is never the whole turn.
+          // MEASURED (production, phys.qm.spin, 2026-08-28): "Okay—let's come
+          // at it differently." was the ENTIRE reply to "I don't understand
+          // this at all" — the script's own mandatory "then CHANGE
+          // REPRESENTATION entirely" half never arrived, and this floor had
+          // never run on a RECOVERY turn to catch it.
+          const recoveryTurn = conversationDecisionHoisted.type === 'RECOVERY'
           const previousAssistantText = learnSession.messages
             .filter((m) => m.role === MessageRole.ASSISTANT)
             .slice(-1)[0]?.content ?? null
           const verdict = checkRemediationOutput({
             remediationTurn,
+            recoveryTurn,
             text: cleanText,
             previousAssistantText,
             hasStructuredMcq: mcqHoisted !== null && mcqHoisted !== undefined,
@@ -5861,6 +5873,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           })
           console.log('[remediation-floor]', {
             remediationTurn,
+            recoveryTurn,
             heldOnCard: remediationHoldCardText !== null,
             decision: conversationDecisionHoisted.type,
             // Recorded, not acted on: QL-1 was ALREADY right on both measured
@@ -5915,7 +5928,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             }
 
             const stillViolating = checkRemediationOutput({
-              remediationTurn, text: repaired, previousAssistantText,
+              remediationTurn, recoveryTurn, text: repaired, previousAssistantText,
               hasStructuredMcq: mcqHoisted !== null && mcqHoisted !== undefined,
               heldCardText: remediationHoldCardText,
             }).violation !== null

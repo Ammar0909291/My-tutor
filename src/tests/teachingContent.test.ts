@@ -157,6 +157,97 @@ describe('a HELD turn that teaches nothing is rejected too', () => {
   })
 })
 
+// ── The recovery script's own opener, measured in production ──────────────────
+// phys.qm.spin, 2026-08-28, on "I don't understand this at all" — a RECOVERY
+// turn (recoveryGuard.ts's 'dont_understand' failure state), not a CONFUSION
+// turn. The authored script for this state is: 'Say "okay — let's come at it
+// differently" ... then CHANGE REPRESENTATION entirely'. The ENTIRE reply was
+// the acknowledgment half; the mandatory re-teaching half never arrived.
+describe('the recovery script\'s own opener is stage management, not teaching', () => {
+  const RECOVERY_EMPTY = [
+    'Okay—let’s come at it differently.',
+    "Let's come at it differently.",
+    "Okay, let's try a different way.",
+    "Let's try a different angle.",
+    "So let's approach this differently.",
+  ]
+
+  it('the production turn, and its paraphrases, taught nothing', () => {
+    for (const t of RECOVERY_EMPTY) {
+      expect(turnTaughtSomething(t), t).toBe(false)
+      expect(substantiveSentences(t), t).toEqual([])
+    }
+  })
+
+  it('the SAME opener followed by real teaching in another sentence still passes', () => {
+    // Over-matching the transition sentence is cheap by this module's own
+    // design (a turn fails only when NO sentence is substantive) — this pins
+    // that the follow-through, once actually present, is what makes the
+    // difference, not the presence or absence of the opener.
+    const t = "Okay—let's come at it differently.\n\n"
+      + 'Picture two atoms, each carrying a tiny magnetic needle that can only point up or down.'
+    expect(turnTaughtSomething(t)).toBe(true)
+  })
+
+  it('does not swallow ordinary teaching that happens to contain "differently"', () => {
+    expect(turnTaughtSomething(
+      'A charged particle moving through the field bends differently depending on its charge sign.',
+    )).toBe(true)
+  })
+})
+
+describe('the output floor now runs on RECOVERY turns too, scoped to no-teaching-content only', () => {
+  const PROD_RECOVERY_TURN = 'Okay—let’s come at it differently.'
+
+  it('a content-free RECOVERY turn is now a violation', () => {
+    const r = checkRemediationOutput({
+      remediationTurn: false, recoveryTurn: true, text: PROD_RECOVERY_TURN,
+    })
+    expect(r.violation).toBe('no-teaching-content')
+  })
+
+  it('the SAME text on an ordinary (non-recovery, non-remediation) turn is untouched', () => {
+    // Regression guard: extending the floor to RECOVERY must not silently
+    // widen it to every turn in the product.
+    const r = checkRemediationOutput({ remediationTurn: false, text: PROD_RECOVERY_TURN })
+    expect(r.violation).toBeNull()
+  })
+
+  it('question-only stays remediation-scoped — a recovery turn that is ONLY a question is not flagged by it', () => {
+    // Several SCRIPTS entries (confused's boundary question, dont_know's
+    // shrink-to-two-choice) are LEGITIMATELY nothing but a question. Their
+    // content is real (not meta, real content words), so no-teaching-content
+    // does not fire either — the two checks agree this is fine.
+    const r = checkRemediationOutput({
+      remediationTurn: false, recoveryTurn: true,
+      text: 'Is it the first part or the second part that feels fuzzy?',
+    })
+    expect(r.violation).toBeNull()
+  })
+
+  it('a structured MCQ still exempts a recovery turn from no-teaching-content', () => {
+    const r = checkRemediationOutput({
+      remediationTurn: false, recoveryTurn: true, text: PROD_RECOVERY_TURN, hasStructuredMcq: true,
+    })
+    expect(r.violation).toBeNull()
+  })
+
+  it('repeating the previous turn is caught on a recovery turn too — the script forbids it explicitly', () => {
+    const r = checkRemediationOutput({
+      remediationTurn: false, recoveryTurn: true,
+      text: 'A charged particle bends because of the field.',
+      previousAssistantText: 'A charged particle bends because of the field.',
+    })
+    expect(r.violation).toBe('repeats-previous-turn')
+  })
+
+  it('real recovery teaching passes the floor', () => {
+    const t = "Okay—let's come at it differently. "
+      + 'Picture a coin spinning on a table — even when it looks still from above, it never stops turning.'
+    expect(checkRemediationOutput({ remediationTurn: false, recoveryTurn: true, text: t }).violation).toBeNull()
+  })
+})
+
 // ── The hedged reflection, measured in production ─────────────────────────────
 // phys.qm.spin, 2026-08-27, on the learner's SECOND "I still don't understand",
 // after a repair had already run once. Twenty-five words, no teaching.
