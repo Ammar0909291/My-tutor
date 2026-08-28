@@ -174,6 +174,29 @@ const DIRECT_POINTER_RE =
 const VISIBILITY_DEIXIS_RE =
   /^(?:here\s+(?:you|we)\s+(?:can\s+|will\s+|'ll\s+)?see\b|as\s+(?:you|we)\s+can\s+see\b|you\s+can\s+see\s+(?:here|above|below)\b)[,:]?\s*/i
 
+/**
+ * A FIGURE NOUN IN SUBJECT POSITION, ASSERTING THE FIGURE IS PRESENT.
+ *
+ * "The diagram shows nitrogen in the centre…", "This figure illustrates…",
+ * "Here's the picture of the two structures". The pointer tests above all key
+ * on a POINTING VERB (look/see/notice) or a PREPOSITION (in/on the figure);
+ * this shape has neither — the figure noun is the grammatical subject and a
+ * presentation verb (shows/depicts/illustrates/…) follows it.
+ *
+ * chem.bond.resonance, real account, 2026-08-28: the learner asked for a
+ * diagram of the resonance structures, none could be shown, and the tutor
+ * answered "The diagram shows nitrogen in the center with three oxygens around
+ * it…" — narrating a figure that was never attached.
+ *
+ * STRONG artefact nouns only (diagram/figure/picture/…), deliberately NOT
+ * graph/plot/chart/number line, which also name ABSTRACT mathematical objects a
+ * lesson may legitimately discuss without a rendered figure ("this graph is a
+ * parabola"). Fires only when no figure is attached (the whole function's
+ * precondition), so a turn that really carries a diagram is never touched.
+ */
+const FIGURE_SUBJECT_CLAIM_RE =
+  /^(?:the|this|that|here(?:'s| is))\s+(?:the\s+|a\s+|an\s+)?(?:diagram|figure|picture|image|illustration|sketch|drawing|animation)\b[^.!?]{0,60}?\b(?:shows?|shown|depicts?|depicted|illustrates?|illustrated|displays?|displayed|represents?|pictures?|presents?|highlights?|indicates?)\b/i
+
 const CLAUSE_BOUNDARY_RE = /(?:[—–]|(?<=\s)-(?=\s)|,)\s*/g
 
 /**
@@ -281,6 +304,15 @@ export function stripUnbackedFigureReferences(
             }
             // Nothing substantive follows the claim — the sentence was only
             // the claim, so it goes.
+            removed.push(s)
+            return ''
+          }
+
+          // Shape 0b: a figure noun in SUBJECT position asserting the figure is
+          // present ("The diagram shows nitrogen in the center…"). The whole
+          // sentence is a claim about a figure that is not there, so it goes —
+          // the surrounding paragraphs carry the teaching.
+          if (FIGURE_SUBJECT_CLAIM_RE.test(s)) {
             removed.push(s)
             return ''
           }

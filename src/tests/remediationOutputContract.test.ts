@@ -208,6 +208,20 @@ describe('H3-B/C — the repair instruction is the contract, made enforceable', 
       .toMatch(/repeat|already said|same/i)
   })
 
+  it('a REPEAT violation demands a different representation, not just a reword', () => {
+    // phys.mech.collisions-inelastic, 2026-08-28: the second "I still do not
+    // understand" got the same analogy again. The repair for a repeat must ask
+    // for a DIFFERENT everyday anchor; the other violations must not (they are
+    // about a first, failed attempt, where "the same idea" is correct).
+    const repeat = buildRemediationRepairAppendix('repeats-previous-turn', '')
+    expect(repeat).toMatch(/different everyday example|different object|new picture/i)
+    expect(repeat).toMatch(/do not reuse the same analogy/i)
+
+    for (const v of ['question-only', 'went-beyond-card', 'no-teaching-content'] as const) {
+      expect(buildRemediationRepairAppendix(v, '')).not.toMatch(/completely different everyday example/i)
+    }
+  })
+
   it('B — it carries the curriculum\'s OWN words when they exist, and is silent when they do not', () => {
     const withAuthored = buildRemediationRepairAppendix('question-only',
       '\nThe curriculum defines this concept as: Thermal expansion is the change in size of a body with temperature.')

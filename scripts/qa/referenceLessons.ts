@@ -115,7 +115,11 @@ export function analyse(turns: readonly Turn[]): Finding[] {
     const p = t.payload
 
     // A turn that says nothing at all is the strongest form of the dead loop.
-    if (words(text).length < 12 && !p.mcq) {
+    // A genuine question (prose ending in '?' or a tappable MCQ) is not empty —
+    // a short Socratic diagnostic ("How did you arrive at 5 m/s?") is a real,
+    // purposeful turn.
+    const asksSomething = p.mcq != null || /\?\s*$/.test(text.trim())
+    if (words(text).length < 12 && !asksSomething) {
       push('EMPTY_TURN', 'P0', t.label, `${words(text).length} words and no question attached`)
     }
 

@@ -319,10 +319,27 @@ export function buildRemediationRepairAppendix(
       + 'they wrote to you.'
     : 'Your reply repeated what you had already said. The learner has just told you '
       + 'that exact wording did not land, so saying it again cannot help.'
+  // WHEN THE LAST EXPLANATION DID NOT LAND, CHANGE THE PICTURE — NOT THE WORDS.
+  //
+  // Measured live (phys.mech.collisions-inelastic, real account, 2026-08-28):
+  // the learner said "I still do not understand" a second time and received the
+  // same trolleys analogy again, because the repair below asked for "the SAME
+  // idea" and the model re-served the one anchor it had. The brief is explicit —
+  // repeated failure must CHANGE the teaching strategy, not merely reword it. So
+  // on a repeat specifically, the regeneration is told to reach for a DIFFERENT
+  // everyday anchor than the one it just used. The idea stays the same; the
+  // representation must not.
+  const changeRepresentation = violation === 'repeats-previous-turn'
+    ? ' Use a COMPLETELY DIFFERENT everyday example from the one you just gave — a '
+      + 'different object and a different situation — and do not reuse the same '
+      + 'analogy or the same sentences. A new picture is the whole point.'
+    : ''
   return (
     '\n\nOUTPUT REJECTED (server-side check). ' + named
     + ' Re-teach the SAME idea, more simply: start from one concrete everyday thing the '
-    + 'learner already knows, use plain words, and take one small step. Explain first — '
+    + 'learner already knows, use plain words, and take one small step.'
+    + changeRepresentation
+    + ' Explain first — '
     + 'do not open with a question, and do not reply with only a question. '
     + 'Do not introduce a new formula, derivation or piece of notation, and do not move '
     + 'the lesson forward: stay on this concept until it lands.'

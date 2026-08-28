@@ -533,4 +533,49 @@ describe('visibility deixis with no figure attached (chem.bond.resonance, 2026-0
   })
 })
 
+
+describe('figure-noun subject claim with no figure (chem.bond.resonance T3, 2026-08-28)', () => {
+  it('drops "The diagram shows …" and keeps the sentence that follows', () => {
+    const t = 'The diagram shows nitrogen in the center with three oxygens around it. Each of the three resonance structures has a different double bond and charge distribution.'
+    const r = stripUnbackedFigureReferences(t, false)
+    expect(r.stripped).toBe(true)
+    expect(r.text).not.toMatch(/the diagram shows/i)
+    expect(r.text).toMatch(/each of the three resonance structures/i)
+  })
+
+  it('drops "This figure illustrates …"', () => {
+    const r = stripUnbackedFigureReferences('This figure illustrates the two forces. They cancel out.', false)
+    expect(r.stripped).toBe(true)
+    expect(r.text).toBe('They cancel out.')
+  })
+
+  it('does NOT strip the idiom "figure of speech"', () => {
+    const t = 'The figure of speech we call a metaphor is powerful. It adds colour to writing.'
+    const r = stripUnbackedFigureReferences(t, false)
+    expect(r.stripped).toBe(false)
+    expect(r.text).toBe(t)
+  })
+
+  it('does NOT strip an abstract graph reference (graph is excluded)', () => {
+    const t = 'The graph is a parabola with vertex at the origin. Notice the symmetry.'
+    const r = stripUnbackedFigureReferences(t, false)
+    expect(r.stripped).toBe(false)
+    expect(r.text).toBe(t)
+  })
+
+  it('does NOT strip a general statement about diagrams', () => {
+    const t = 'A diagram can help you see the structure. Try drawing one.'
+    const r = stripUnbackedFigureReferences(t, false)
+    expect(r.stripped).toBe(false)
+    expect(r.text).toBe(t)
+  })
+
+  it('LEAVES the claim intact when a figure IS attached', () => {
+    const t = 'The diagram shows the water cycle from evaporation to rain.'
+    const r = stripUnbackedFigureReferences(t, true)
+    expect(r.stripped).toBe(false)
+    expect(r.text).toBe(t)
+  })
+})
+
 })
