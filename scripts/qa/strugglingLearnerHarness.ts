@@ -140,9 +140,65 @@ const PERSONA_LINES = [
   'can you show the picture again, i want to look one more time',
   'thank you sir, i understand a little better now with the picture',
   'ok i will try, i think i know the answer',
-  'can i go to next lesson now, i think i learn this one',
 ]
-const MAX_TURNS = 9
+
+/**
+ * Spoken once the opening arc is spent and no MCQ is pending. Cycled, never
+ * clamped.
+ *
+ * The list used to end with 'can i go to next lesson now, i think i learn this
+ * one', and `PERSONA_LINES[Math.min(idx, len-1)]` CLAMPED to it — so every turn
+ * after the sixth repeated a request to leave the lesson. At MAX_TURNS 9 that
+ * was nearly invisible. At a budget long enough to actually reach mastery it is
+ * not: the learner would ask to leave a dozen times running, which is a
+ * disengagement signal the engine is right to act on, and the run would measure
+ * the harness talking itself out of the lesson rather than the product teaching.
+ * These keep the persona in character — still weak, still confused, still
+ * asking for help — without asking to leave and without answering anything for
+ * the tutor.
+ */
+const PERSONA_CONTINUATIONS = [
+  'sorry sir i am still little confused, can you help me again please',
+  'ok i am trying, can you explain one more time slowly',
+  'i think i understand some part but not all, sorry',
+  'can you give me one more example please, easy one',
+]
+
+/**
+ * WHY THIS IS NOT 9.
+ *
+ * Verified mastery is THREE server-graded correct answers — `correctAtCheck >= 1`
+ * plus `correctAtPractice >= 2` — and the gate never re-asks a spent probe, so
+ * each one needs its own MCQ turn. The persona also answers the first MCQ
+ * deliberately WRONG (see the loop below), and spends its opening arc before the
+ * engine attaches any MCQ at all.
+ *
+ * Measured end to end on `phys.stat.boltzmann-factor` (2026-08-29, real account,
+ * deployed app) at the old budget of 9:
+ *
+ *   T1-T6  opening arc — first MCQ arrives WITH the T6 response
+ *   T7     answers it deliberately wrong          -> checkCorrect 0
+ *   T8     persona line, engine teaches
+ *   T9     second MCQ arrives WITH the T9 response — and the run ENDS
+ *
+ * The second MCQ was never answered, because answering it would have been turn
+ * 10. The session finished phase GUIDE, check 0, practice 0, and was recorded as
+ * a teaching failure. It was not one: the budget ran out one turn before the
+ * instrument could record a single correct answer, and three were needed.
+ *
+ * That is the same class of defect this harness has hit repeatedly — condemning
+ * the product for the harness's own blind spot. The prior finding it produced,
+ * "only 1 of 30 sessions reached verified mastery", is therefore not evidence
+ * about the product: at 9 turns the persona can at best answer ONE MCQ
+ * correctly, and the bar is three. No product could have passed it.
+ *
+ * 20 gives the opening arc (7), the deliberate wrong answer (1), three correct
+ * answers (3), and room for the teaching turns the engine legitimately spends
+ * between gates — without being so long that a genuinely stuck lesson looks
+ * like a passing one. A concept that has not closed by 20 turns is a real
+ * finding; one that had not closed by 9 was an arithmetic artefact.
+ */
+const MAX_TURNS = 20
 
 async function runConcept(cookie: string, subject: string, concept: KgConcept, lesson: CurriculumLesson, totalLessons: number) {
   const session = await api(cookie, 'POST', '/api/sessions', { subjectSlug: subject })
@@ -163,8 +219,14 @@ async function runConcept(cookie: string, subject: string, concept: KgConcept, l
     if (last.mcq) {
       if (!answeredWrongOnce) { msg = last.mcq.options[(last.mcq.correctIndex + 1) % last.mcq.options.length]; answeredWrongOnce = true }
       else msg = last.mcq.options[last.mcq.correctIndex]
+    } else if (personaIdx < PERSONA_LINES.length) {
+      msg = PERSONA_LINES[personaIdx]
+      personaIdx += 1
     } else {
-      msg = PERSONA_LINES[Math.min(personaIdx, PERSONA_LINES.length - 1)]
+      // Opening arc spent: cycle the continuations rather than clamping to the
+      // last line. See PERSONA_CONTINUATIONS for why clamping corrupted a long
+      // run.
+      msg = PERSONA_CONTINUATIONS[(personaIdx - PERSONA_LINES.length) % PERSONA_CONTINUATIONS.length]
       personaIdx += 1
     }
     const p = await api(cookie, 'POST', '/api/learn/chat', { sessionId, message: msg })
