@@ -69,12 +69,53 @@ export interface SceneObject {
   properties?: Record<string, unknown>
 }
 
-/** One reveal step: the narration for this beat plus the objects that appear at it. */
+/**
+ * One reveal step: the narration for this beat plus the objects that appear at it.
+ *
+ * A step is also a TEACHING STAGE. The fields below are additive and optional —
+ * a step that declares none behaves exactly as it always has (narration plus
+ * additive reveal) — but a scene that declares them can be taught rather than
+ * merely displayed: the stage says what it is FOR, what to look at, and what
+ * the learner should be asked to predict before the answer appears.
+ *
+ * Nothing here is a per-concept branch. The stage engine and the renderer read
+ * these fields identically for every scene in every subject.
+ */
 export interface SceneStep {
   /** Plain-language narration for this step — compatible with the existing segment model. */
   narration?: string
   /** Objects introduced at this step (revealed additively with all earlier steps). */
   objects: SceneObject[]
+  /**
+   * What this stage is for, in the engine's teaching vocabulary. Advisory: it
+   * names the beat for the learner and lets the tutor address the right one.
+   *
+   *   establish  put the objects and the context on screen
+   *   relate     introduce the relationship between them
+   *   vary       reveal the quantity that changes, and what changes with it
+   *   predict    stop and ask before showing the outcome
+   *   resolve    show the result / the calculation
+   *   connect    tie the picture to the schematic or the equation
+   */
+  intent?: 'establish' | 'relate' | 'vary' | 'predict' | 'resolve' | 'connect'
+  /**
+   * Object ids this stage is ABOUT. Everything else stays drawn but is dimmed,
+   * so attention is guided rather than the screen being cleared. Absent or
+   * empty means "the whole scene" — the pre-existing behaviour.
+   */
+  focus?: string[]
+  /**
+   * The question to put to the learner before this stage's objects are shown.
+   * Present only on a stage worth predicting; the frame then withholds that
+   * stage until the learner answers or chooses to reveal.
+   */
+  predict?: {
+    question: string
+    /** Optional discrete choices. Free-response when absent. */
+    options?: string[]
+    /** Index into `options`. Used to react in the figure, never to grade a lesson. */
+    answerIndex?: number
+  }
 }
 
 /** Coarse, descriptive scene category — advisory only, never branched on by the renderer. */
@@ -94,6 +135,38 @@ export interface SceneSpec {
   cameraDistance?: number
   ariaLabel?: string
   steps: SceneStep[]
+  /**
+   * The teaching frame — header, givens, result, legend, explanation panels,
+   * key insight. ADDITIVE and OPTIONAL: every scene is framed, but a scene that
+   * authors nothing here has its frame derived from the fields above by
+   * `deriveExplainer()`, so no generator had to change for the frame to ship.
+   *
+   * Author this only to state something the geometry cannot — never to repeat
+   * what derivation already reads correctly.
+   */
+  explainer?: Partial<import('./visual/explainer').ExplainerSpec>
+  /**
+   * Names the pure builder that produced this scene, and the parameters it was
+   * given, so the client can RE-RUN that same builder when a learner moves a
+   * slider. The figure they adjust is therefore derived by identical code to
+   * the one they were handed — a control can never drift from the geometry.
+   *
+   * Omitted by every generator that has no client-safe builder registered; the
+   * frame then shows no controls rather than controls that do nothing.
+   */
+  parametric?: import('./visual/explainer').SceneParametric
+  /**
+   * Stage decoration — the ground grid and the labelled axis triad. Defaults
+   * to on for `diagram` and `plot` scenes, where a sense of scale and of which
+   * way is up is part of reading the figure. Set false for scenes whose
+   * subject has no spatial frame (a process chart, an org chart).
+   */
+  stage?: {
+    grid?: boolean
+    axes?: boolean
+    /** Axis names, when the scene's axes mean something specific. */
+    axisLabels?: { x?: string; y?: string; z?: string }
+  }
 }
 
 /** The stepCount the existing playback/narration engine expects (Task 6 compatibility). */

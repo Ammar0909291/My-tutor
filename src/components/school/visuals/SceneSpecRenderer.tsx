@@ -19,7 +19,9 @@ import { MolecularNode3D } from './MolecularNode3D'
 import { SceneLabelLayer, type LayerLabel } from './SceneLabelLayer'
 import { visibleObjects, type SceneObject, type SceneSpec } from '@/lib/teaching/sceneSpec'
 import { sceneTextObjects } from '@/lib/teaching/visual/layout'
-import { themeColor } from '@/lib/teaching/sceneGenerators/visualDesign'
+import { dimColor, themeColor } from '@/lib/teaching/sceneGenerators/visualDesign'
+import { emphasisOf } from '@/lib/teaching/visual/sceneStage'
+import { SceneStageDecor } from './SceneStageDecor'
 import { useTheme, type Theme } from '@/components/Providers'
 
 /** Plain (headless) connecting cylinder between two atoms — a chemical bond has no direction/arrowhead. */
@@ -43,11 +45,18 @@ function BondLine({ from, to, color = '#9aa4b2', thickness = 0.04 }: { from: [nu
   )
 }
 
-function renderObject(obj: SceneObject, key: number, theme: Theme) {
+function renderObject(obj: SceneObject, key: number, theme: Theme, focusIds: ReadonlySet<string>) {
   // ONE mapping point. Scene colours are stored as their dark-theme value and
   // resolved role-wise here, so the same payload serves both themes and no
   // scene, asset or persistence path is theme-specific.
-  const color = themeColor(obj.color, theme)
+  //
+  // Focus is applied at this same point, as colour: an object the current stage
+  // is not about recedes toward the canvas instead of disappearing (see
+  // sceneStage.ts on why dimming, not hiding). With an empty focus set every
+  // object is in focus, which is the pre-existing behaviour exactly.
+  const color = emphasisOf(obj, focusIds) === 'context'
+    ? dimColor(obj.color, theme)
+    : themeColor(obj.color, theme)
   switch (obj.type) {
     case 'point':
     case 'node':
@@ -135,8 +144,8 @@ function renderObject(obj: SceneObject, key: number, theme: Theme) {
  * restored visual re-solves correctly on a different device.
  */
 function PlacedLabels({
-  objects, cameraDistance, theme,
-}: { objects: SceneObject[]; cameraDistance: number; theme: Theme }) {
+  objects, cameraDistance, theme, focusIds,
+}: { objects: SceneObject[]; cameraDistance: number; theme: Theme; focusIds: ReadonlySet<string> }) {
   const { labels, obstacles } = useMemo(() => {
     const scene: SceneSpec = {
       id: 'labels', title: '', sceneType: 'diagram', cameraDistance,
@@ -146,7 +155,9 @@ function PlacedLabels({
       labels: sceneTextObjects(scene).map(({ text, position, object }): LayerLabel => ({
         text,
         position,
-        color: themeColor(object.color, theme) ?? '#5B8DEF',
+        color: (emphasisOf(object, focusIds) === 'context'
+          ? dimColor(object.color, theme)
+          : themeColor(object.color, theme)) ?? '#5B8DEF',
         // `size` is a typographic tier ONLY on label objects; elsewhere it is
         // an extent, so it must not drive typography.
         tier: object.type === 'label' ? object.size : undefined,
@@ -155,24 +166,68 @@ function PlacedLabels({
       // carry text — the layer strips that text so nothing is counted twice.
       obstacles: objects,
     }
-  }, [objects, cameraDistance, theme])
+  }, [objects, cameraDistance, theme, focusIds])
 
   return <SceneLabelLayer labels={labels} obstacles={obstacles} cameraDistance={cameraDistance} theme={theme} />
+}
+
+
+/**
+ * How far the drawn geometry reaches from the origin — the ground plane's
+ * half-extent. Derived from the objects rather than fixed, so the grid frames
+ * a 2-unit molecule and a 40-unit trajectory equally well. Falls back to the
+ * camera distance when a scene has no positioned geometry at all.
+ */
+function sceneExtent(objects: SceneObject[], cameraDistance: number): number {
+  let max = 0
+  const consider = (v?: [number, number, number]) => {
+    if (!v) return
+    max = Math.max(max, Math.abs(v[0]), Math.abs(v[1]), Math.abs(v[2]))
+  }
+  for (const o of objects) {
+    consider(o.position)
+    consider(o.from)
+    consider(o.to)
+    o.points?.forEach(consider)
+  }
+  return max > 0 ? max * 1.15 : cameraDistance * 0.5
 }
 
 interface SceneSpecRendererProps {
   spec: SceneSpec
   /** Same contract as every Foundation component — additive reveal; default shows everything. */
   revealStep?: number
+  /**
+   * The objects to draw, when the caller has already decided them — the stage
+   * engine's answer for the current stage AND presentation mode, which reveal
+   * alone cannot express (a practice figure withholds the answer label at every
+   * stage). Omitted, the renderer falls back to `visibleObjects(spec,
+   * revealStep)`, which is what every existing caller gets.
+   */
+  objects?: SceneObject[]
+  /**
+   * Ids the current stage is about. Everything else dims. Empty (the default)
+   * means the whole scene is in focus.
+   */
+  focusIds?: ReadonlySet<string>
 }
 
-export function SceneSpecRenderer({ spec, revealStep = Infinity }: SceneSpecRendererProps) {
+const NO_FOCUS: ReadonlySet<string> = new Set()
+
+export function SceneSpecRenderer({
+  spec, revealStep = Infinity, objects: given, focusIds = NO_FOCUS,
+}: SceneSpecRendererProps) {
   // Read HERE, not inside the scene graph: <Canvas> mounts its own React
   // reconciler root, and app context does not cross that boundary. renderObject
   // is a plain call made during this component's render, so the value is
   // captured on the DOM side and every object below is already resolved.
   const { theme } = useTheme()
-  const objects = visibleObjects(spec, revealStep)
+  const objects = given ?? visibleObjects(spec, revealStep)
+  // The stage's own extent, so the ground plane matches the figure rather than
+  // a constant that is too small for one scene and too large for the next.
+  const extent = sceneExtent(objects, spec.cameraDistance ?? 7)
+  const decor = spec.stage
+  const spatial = decor?.grid !== false || decor?.axes !== false
   return (
     <ThreeDVisual
       revealStep={revealStep}
@@ -186,8 +241,21 @@ export function SceneSpecRenderer({ spec, revealStep = Infinity }: SceneSpecRend
       autoRotate={false}
     >
       <group>
-        {objects.map((obj, i) => renderObject(obj, i, theme))}
-        <PlacedLabels objects={objects} cameraDistance={spec.cameraDistance ?? 7} theme={theme} />
+        {/* Stage decoration is OPT-IN per scene. It defaults off so no existing
+            figure changes shape; a scene that wants a ground plane and a triad
+            says so with `stage`, and every scene of a registered generator kind
+            now does. */}
+        {decor && spatial && (
+          <SceneStageDecor
+            extent={extent}
+            grid={decor.grid !== false}
+            axes={decor.axes !== false}
+            axisLabels={decor.axisLabels}
+            theme={theme}
+          />
+        )}
+        {objects.map((obj, i) => renderObject(obj, i, theme, focusIds))}
+        <PlacedLabels objects={objects} cameraDistance={spec.cameraDistance ?? 7} theme={theme} focusIds={focusIds} />
       </group>
     </ThreeDVisual>
   )

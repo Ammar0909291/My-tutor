@@ -27,17 +27,11 @@
 
 import type { SceneSpec } from '@/lib/teaching/sceneSpec'
 import { fitSceneToFrame } from './layout'
-import { buildProjectileScene } from '@/lib/teaching/sceneGenerators/projectileMotion'
-import { buildTriangleScene } from '@/lib/teaching/sceneGenerators/triangleAngleSum'
-import { buildVectorScene } from '@/lib/teaching/sceneGenerators/vectorAddition'
+import { canonicalParametricScene } from './parametricScenes'
 import { buildVectorProductsScene } from '@/lib/teaching/sceneGenerators/vectorProducts'
-import { buildCircularScene } from '@/lib/teaching/sceneGenerators/circularMotion'
-import { buildPendulumScene } from '@/lib/teaching/sceneGenerators/pendulumMotion'
 import { buildCollisionScene } from '@/lib/teaching/sceneGenerators/momentumCollision'
 import { buildRayOpticsScene } from '@/lib/teaching/sceneGenerators/rayOptics'
 import { buildCircuitScene } from '@/lib/teaching/sceneGenerators/electricCircuit'
-import { buildKinematicsGraphScene } from '@/lib/teaching/sceneGenerators/kinematicsGraphs'
-import { buildTorqueScene } from '@/lib/teaching/sceneGenerators/torqueDiagram'
 import { buildGravitationOrbitScene } from '@/lib/teaching/sceneGenerators/gravitationOrbit'
 import {
   buildCalorimetryScene, buildFirstLawScene, buildSurfaceTensionScene,
@@ -45,8 +39,6 @@ import {
   buildViscosityScene, buildWaveInterferenceScene,
 } from '@/lib/teaching/sceneGenerators/physicsPilot'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
-import { buildCoordinateGeometryLineScene } from '@/lib/teaching/sceneGenerators/coordinateGeometryLine'
-import { buildHeightsAndDistancesScene } from '@/lib/teaching/sceneGenerators/heightsAndDistances'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildPunnettSquareScene } from '@/lib/teaching/sceneGenerators/punnettSquare'
 import { buildEcologicalPyramidScene } from '@/lib/teaching/sceneGenerators/ecologicalPyramid'
@@ -59,32 +51,34 @@ import { buildTimelineScene } from '@/lib/teaching/sceneGenerators/historicalTim
 import { buildOrgChartScene } from '@/lib/teaching/sceneGenerators/civicsOrgChart'
 import { buildDemographicPyramidScene } from '@/lib/teaching/sceneGenerators/demographicPyramid'
 import { buildEconomicsCurveScene } from '@/lib/teaching/sceneGenerators/economicsCurves'
-import { buildElectronShellScene, lookupElement } from '@/lib/teaching/sceneGenerators/electronShells'
-import { buildLatticeScene, lookupLattice } from '@/lib/teaching/sceneGenerators/crystalLattice'
-import { buildMoleculeScene, lookupMolecule } from '@/lib/teaching/sceneGenerators/moleculeGeometry'
 
 /**
- * The def-table generators (element / lattice / molecule) own their own data and
- * expose a pure lookup. Using it keeps their canonical values in ONE place —
- * theirs — instead of copying textbook constants into a second table here.
+ * A canonical figure from the variable registry.
+ *
+ * These kinds keep their textbook parameters in `parametricScenes.ts` — the
+ * same table the learner's sliders move — so there is one source of truth for
+ * "the canonical case" instead of two that can drift. The scene comes back
+ * STAMPED with its kind and values, which is what lets the frame offer controls
+ * without any concept-specific wiring.
  */
-function mustLookup<T>(def: T | null): T {
-  if (!def) throw new Error('canonical scene lookup failed')
-  return def
+function fromRegistry(kind: string): SceneSpec {
+  const spec = canonicalParametricScene(kind)
+  if (!spec) throw new Error(`canonical parametric scene missing for kind: ${kind}`)
+  return spec
 }
 
 /** Every generator kind the registry can name, bound to a canonical build. */
 const CANONICAL_SCENES: Record<string, () => SceneSpec> = {
   // ── physics ──
-  projectile:      () => buildProjectileScene({ angleDegrees: 45, speed: 20 }),
-  circular:        () => buildCircularScene({ radius: 2, speed: 4 }),
-  pendulum:        () => buildPendulumScene({ length: 1, amplitudeDeg: 15 }),
+  projectile:      () => fromRegistry('projectile'),
+  circular:        () => fromRegistry('circular'),
+  pendulum:        () => fromRegistry('pendulum'),
   // Head-on, both bodies moving: a stationary target (u2 = 0) draws a
   // zero-length velocity vector, which the scene validator correctly rejects.
-  collision:       () => buildCollisionScene({ m1: 2, m2: 1, u1: 3, u2: -2, collisionType: 'elastic' }),
-  torque_diagram:  () => buildTorqueScene({ leverLength: 2, force: 10, angleDeg: 90 }),
+  collision:       () => fromRegistry('collision'),
+  torque_diagram:  () => fromRegistry('torque_diagram'),
   gravitation_orbit: () => buildGravitationOrbitScene({ centralMass: 5.97e24, orbitRadius: 7.0e6 }),
-  ray_optics:      () => buildRayOpticsScene({ opticsType: 'convex_lens', objectDistance: 30, focalLength: 10, objectHeight: 5 }),
+  ray_optics:      () => fromRegistry('ray_optics'),
   electric_circuit: () => buildCircuitScene({
     components: [
       { type: 'resistor', value: 10, unit: 'ohm' },
@@ -93,14 +87,14 @@ const CANONICAL_SCENES: Record<string, () => SceneSpec> = {
     connection: 'series',
     voltage: 12,
   }),
-  kinematics_graphs: () => buildKinematicsGraphScene({ initialVelocity: 0, acceleration: 2, duration: 5, initialPosition: 0 }),
+  kinematics_graphs: () => fromRegistry('kinematics_graphs'),
 
   // ── mathematics ──
-  vector:   () => buildVectorScene({ aMag: 3, aAngleDeg: 0, bMag: 4, bAngleDeg: 90 }),  // the 3-4-5 case
-  triangle: () => buildTriangleScene({ angleA: 60, angleB: 60 }),
+  vector:   () => fromRegistry('vector'),  // the 3-4-5 case
+  triangle: () => fromRegistry('triangle'),
   calculus_graph: () => buildCalculusGraphScene({ functionType: 'polynomial', coefficients: [1, -4, 3], domainMin: -1, domainMax: 5 }),
-  coordinate_geometry_line: () => buildCoordinateGeometryLineScene({ x1: 0, y1: 0, x2: 4, y2: 3 }),
-  heights_and_distances: () => buildHeightsAndDistancesScene({ distance: 30, angleOfElevation: 30 }),
+  coordinate_geometry_line: () => fromRegistry('coordinate_geometry_line'),
+  heights_and_distances: () => fromRegistry('heights_and_distances'),
   statistics_bar_chart: () => buildStatisticsBarChartScene({
     chartTitle: 'Marks scored',
     bars: [
@@ -110,9 +104,9 @@ const CANONICAL_SCENES: Record<string, () => SceneSpec> = {
   }),
 
   // ── chemistry ──
-  electron_shells:  () => buildElectronShellScene(mustLookup(lookupElement('Na'))),
-  lattice:          () => buildLatticeScene(mustLookup(lookupLattice('fcc'))),
-  molecule:         () => buildMoleculeScene(mustLookup(lookupMolecule('water'))),
+  electron_shells:  () => fromRegistry('electron_shells'),
+  lattice:          () => fromRegistry('lattice'),
+  molecule:         () => fromRegistry('molecule'),
   periodic_trends:  () => buildPeriodicTrendScene({ element1Symbol: 'Na', element2Symbol: 'Cl' }),
 
   // ── biology ──

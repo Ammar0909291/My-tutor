@@ -228,3 +228,38 @@ export function hatch(x0: number, x1: number, y: number, count: number, height: 
   }
   return out
 }
+
+// ── emphasis ─────────────────────────────────────────────────────────────────
+
+/**
+ * The colour of an object that is on screen but NOT the thing being discussed.
+ *
+ * Focus is expressed as colour rather than opacity for a structural reason: the
+ * scene primitives (`MolecularNode3D`, `Vector3D`, the bond cylinder) take a
+ * colour and nothing else, so an opacity channel would mean touching every
+ * primitive and every hand-built figure that uses them. Mixing toward the
+ * canvas gives the identical read — the object recedes, it does not vanish —
+ * through the one prop they all already accept.
+ *
+ * It never mixes to nothing: a context object stays legible enough to hold the
+ * relationship the focused object belongs to. That is the whole point of
+ * dimming rather than hiding (see sceneStage.ts).
+ */
+export function dimColor(color: string | null | undefined, theme: 'dark' | 'light'): string | undefined {
+  const resolved = themeColor(color, theme)
+  if (!resolved) return undefined
+  const rgb = parseHex(resolved)
+  if (!rgb) return resolved
+  // The canvas behind the figure: --bg-elevated in each theme.
+  const ground = theme === 'light' ? [246, 248, 250] : [22, 27, 34]
+  const keep = 0.34
+  const mixed = rgb.map((c, i) => Math.round(c * keep + ground[i] * (1 - keep)))
+  return `#${mixed.map((c) => c.toString(16).padStart(2, '0')).join('')}`
+}
+
+function parseHex(hex: string): [number, number, number] | null {
+  const m = /^#([0-9a-f]{6})$/i.exec(hex.trim())
+  if (!m) return null
+  const n = parseInt(m[1], 16)
+  return [(n >> 16) & 255, (n >> 8) & 255, n & 255]
+}

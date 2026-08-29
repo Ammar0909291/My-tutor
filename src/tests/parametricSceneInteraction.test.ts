@@ -1,0 +1,206 @@
+/**
+ * The variable layer — does moving a control actually re-teach the figure?
+ *
+ * The point of these tests is NOT that a scene came back. It is that the scene
+ * that came back is a correct re-derivation: the geometry moved, the stated
+ * numbers moved with it, and the relationship the figure claims to show still
+ * holds. A slider that changes a picture without changing what the picture
+ * MEANS is decoration, and it is the specific failure this layer exists to
+ * avoid.
+ */
+import { describe, expect, it } from 'vitest'
+import {
+  canonicalParametricScene, defaultValueOf, isParametricKind, PARAMETRIC_SCENES,
+  rebuildScene, variablesFor,
+} from '@/lib/teaching/visual/parametricScenes'
+import { validateSceneSpec } from '@/lib/teaching/sceneSpecValidator'
+import { buildCanonicalScene } from '@/lib/teaching/visual/conceptSceneParams'
+
+const KINDS = Object.keys(PARAMETRIC_SCENES)
+
+describe('registry shape', () => {
+  it('covers physics, mathematics and chemistry — not one subject', () => {
+    expect(KINDS).toEqual(expect.arrayContaining(['torque_diagram', 'projectile', 'vector', 'molecule', 'lattice', 'electron_shells']))
+  })
+
+  it.each(KINDS)('%s declares defaults for every variable it exposes', (kind) => {
+    const entry = PARAMETRIC_SCENES[kind]
+    for (const v of entry.variables) {
+      expect(entry.defaults[v.key], `${kind}.${v.key}`).toBeDefined()
+    }
+  })
+
+  it.each(KINDS)('%s states the causal claim of every control', (kind) => {
+    for (const v of PARAMETRIC_SCENES[kind].variables) {
+      expect(v.effect.length, `${kind}.${v.key}`).toBeGreaterThan(15)
+    }
+  })
+
+  it.each(KINDS)('%s keeps every default inside the range its own control offers', (kind) => {
+    const entry = PARAMETRIC_SCENES[kind]
+    for (const v of entry.variables) {
+      const value = entry.defaults[v.key]
+      if (v.kind === 'number') {
+        expect(value, `${kind}.${v.key}`).toBeGreaterThanOrEqual(v.min)
+        expect(value).toBeLessThanOrEqual(v.max)
+      } else {
+        expect(v.options.map((o) => o.value)).toContain(value)
+      }
+    }
+  })
+})
+
+describe('every canonical figure is structurally valid', () => {
+  it.each(KINDS)('%s', (kind) => {
+    const scene = canonicalParametricScene(kind)
+    expect(scene, kind).not.toBeNull()
+    const result = validateSceneSpec(scene)
+    expect(result.errors.map((e) => `${e.path}: ${e.message}`)).toEqual([])
+  })
+})
+
+describe('a rebuilt scene stays interactive and stays valid', () => {
+  it.each(KINDS)('%s carries its kind and values through a rebuild', (kind) => {
+    const entry = PARAMETRIC_SCENES[kind]
+    const scene = rebuildScene(kind, entry.defaults)!
+    expect(scene.parametric?.kind).toBe(kind)
+    for (const v of entry.variables) {
+      expect(scene.parametric?.params[v.key]).toBe(entry.defaults[v.key])
+    }
+  })
+
+  it.each(KINDS)('%s stays valid across its whole declared range', (kind) => {
+    const entry = PARAMETRIC_SCENES[kind]
+    for (const v of entry.variables) {
+      const probes = v.kind === 'number'
+        ? [v.min, (v.min + v.max) / 2, v.max]
+        : v.options.map((o) => o.value)
+      for (const probe of probes) {
+        const scene = rebuildScene(kind, { ...entry.defaults, [v.key]: probe })
+        // A generator may legitimately refuse a combination; what it must never
+        // do is return a structurally invalid scene.
+        if (scene) {
+          expect(validateSceneSpec(scene).valid, `${kind} ${v.key}=${probe}`).toBe(true)
+        }
+      }
+    }
+  })
+
+  it('refuses a value the generator itself rejects rather than approximating', () => {
+    expect(rebuildScene('torque_diagram', { leverLength: -5, force: 10, angleDeg: 90 })).toBeNull()
+    expect(rebuildScene('projectile', { angleDegrees: 45, speed: 0 })).toBeNull()
+  })
+
+  it('returns null for an unregistered kind instead of guessing', () => {
+    expect(rebuildScene('no_such_generator', {})).toBeNull()
+    expect(isParametricKind('no_such_generator')).toBe(false)
+    expect(variablesFor(null)).toEqual([])
+  })
+})
+
+// ── the substance: does changing a variable change what the figure TEACHES? ──
+
+function labelTexts(kind: string, params: Record<string, number | string>): string[] {
+  const scene = rebuildScene(kind, params)!
+  return scene.steps.flatMap((s) => s.objects).filter((o) => o.type === 'label').map((o) => o.text ?? '')
+}
+
+describe('cause and effect', () => {
+  it('torque: doubling the force doubles the stated torque', () => {
+    const base = labelTexts('torque_diagram', { leverLength: 2, force: 10, angleDeg: 90 }).join(' ')
+    const twice = labelTexts('torque_diagram', { leverLength: 2, force: 20, angleDeg: 90 }).join(' ')
+    expect(base).toContain('20 N·m')
+    expect(twice).toContain('40 N·m')
+  })
+
+  it('torque: a force along the arm produces no torque at all', () => {
+    expect(labelTexts('torque_diagram', { leverLength: 2, force: 10, angleDeg: 0 }).join(' '))
+      .toContain('0 N·m')
+  })
+
+  it('torque: the drawn geometry agrees with τ = r F sin θ, not just the label', () => {
+    for (const angleDeg of [15, 30, 45, 90, 135]) {
+      const scene = rebuildScene('torque_diagram', { leverLength: 2, force: 10, angleDeg })!
+      const objs = scene.steps.flatMap((s) => s.objects)
+      const lever = objs.find((o) => o.id === 'lever')!
+      const force = objs.find((o) => o.id === 'force')!
+      // Re-derive the angle between the two drawn segments from the coordinates.
+      const arm = [lever.to![0] - lever.from![0], lever.to![1] - lever.from![1]]
+      const f = [force.to![0] - force.from![0], force.to![1] - force.from![1]]
+      const cos = (arm[0] * f[0] + arm[1] * f[1]) / (Math.hypot(...arm) * Math.hypot(...f))
+      const drawn = (Math.acos(Math.min(1, Math.max(-1, cos))) * 180) / Math.PI
+      expect(drawn, `angle ${angleDeg}`).toBeCloseTo(angleDeg, 1)
+
+      const stated = objs.find((o) => o.id === 'torqueLabel')!.text!
+      const expected = 2 * 10 * Math.sin((angleDeg * Math.PI) / 180)
+      expect(stated).toContain(String(Math.round(expected * 100) / 100))
+    }
+  })
+
+  it('projectile: range peaks at 45° and is symmetric either side of it', () => {
+    // Read the STATED range, not the drawn extent: this generator scales every
+    // trajectory to the same on-screen size (`VISUAL_MAX`), so the drawn width
+    // is identical at every angle by design. That normalisation is exactly why
+    // a quantitative claim must be checked against the figure's own numbers.
+    const range = (angleDegrees: number) => {
+      const text = labelTexts('projectile', { angleDegrees, speed: 20 })
+        .concat(rebuildScene('projectile', { angleDegrees, speed: 20 })!
+          .steps.flatMap((s) => s.objects).map((o) => o.text ?? ''))
+        .find((t) => t.includes('Range'))!
+      return Number(/([\d.]+)/.exec(text.replace('Range ~', ''))![1])
+    }
+    expect(range(45)).toBeGreaterThan(range(30))
+    expect(range(45)).toBeGreaterThan(range(60))
+    expect(range(30)).toBeCloseTo(range(60), 0)
+  })
+
+  it('chemistry: choosing a different molecule redraws it from the generator table', () => {
+    const water = rebuildScene('molecule', { molecule: 'water' })!
+    const methane = rebuildScene('molecule', { molecule: 'methane' })!
+    expect(water.title).not.toBe(methane.title)
+    // Methane has more peripheral atoms than water — the geometry really changed.
+    const count = (s: typeof water) => s.steps.flatMap((x) => x.objects).filter((o) => o.type === 'node').length
+    expect(count(methane)).toBeGreaterThan(count(water))
+  })
+
+  it('chemistry: the electron-shell figure follows the element chosen', () => {
+    const sodium = rebuildScene('electron_shells', { element: 'Na' })!
+    const carbon = rebuildScene('electron_shells', { element: 'C' })!
+    expect(sodium.title).not.toBe(carbon.title)
+    // Sodium has 11 electrons to carbon's 6, so the drawn figure carries more
+    // of them — the geometry follows the element, not just the caption.
+    const electrons = (s: typeof sodium) =>
+      s.steps.flatMap((x) => x.objects).filter((o) => o.type === 'point' || o.type === 'particle' || o.type === 'node').length
+    expect(electrons(sodium)).toBeGreaterThan(electrons(carbon))
+  })
+
+  it('physics: an inelastic collision is drawn differently from an elastic one', () => {
+    const elastic = rebuildScene('collision', { collisionType: 'elastic' })!
+    const inelastic = rebuildScene('collision', { collisionType: 'perfectly_inelastic' })!
+    expect(JSON.stringify(elastic.steps)).not.toBe(JSON.stringify(inelastic.steps))
+  })
+})
+
+describe('the canonical registry and the variable registry cannot drift', () => {
+  it.each(KINDS)('buildCanonicalScene(%s) returns the registry figure, stamped', (kind) => {
+    const canonical = buildCanonicalScene(kind)
+    expect(canonical, kind).not.toBeNull()
+    expect(canonical!.parametric?.kind).toBe(kind)
+  })
+
+  it('gives every spatial diagram a ground plane and an axis triad', () => {
+    const scene = canonicalParametricScene('torque_diagram')!
+    expect(scene.stage?.grid).toBe(true)
+    expect(scene.stage?.axes).toBe(true)
+  })
+
+  it('defaultValueOf falls back inside the control range for both kinds', () => {
+    for (const kind of KINDS) {
+      for (const v of PARAMETRIC_SCENES[kind].variables) {
+        const fallback = defaultValueOf(v)
+        if (v.kind === 'number') expect(fallback).toBe(v.min)
+        else expect(v.options.map((o) => o.value)).toContain(fallback)
+      }
+    }
+  })
+})
