@@ -493,3 +493,49 @@ describe('deixis opens no excursion', () => {
     expect(namedTopicUnknownTo('tell me about sound waves', TAUGHT)).not.toBeNull()
   })
 })
+
+/**
+ * MANNER ADVERBS ARE NOT TOPICS — the "slowly" defect.
+ *
+ * Measured 2026-08-29 against the deployed app, physics
+ * `phys.qm.hydrogen-atom-qm`, a struggling-learner run. The learner typed
+ * "ok i am trying, can you explain one more time slowly". LEADING_REPEAT_ADVERBIAL
+ * removed "one more time" and the single surviving word `slowly` read as a
+ * subject, so `namedTopicUnknownTo` named the topic "slowly", an excursion
+ * opened against it, and the tutor taught the English adverb for ELEVEN turns
+ * inside a quantum mechanics lesson — eight generated MCQs of the form "Which
+ * sentence uses 'slowly' correctly?". The learner answered six correctly; none
+ * could count, because they are unkeyed model questions about another subject.
+ * The session held at GUIDE with checkCorrect 0 and never returned to the atom.
+ *
+ * The learner this harms most is the one the manner adverb belongs to: weak
+ * English, asking constantly for a change of delivery.
+ */
+describe('a manner adverb describes delivery, not subject', () => {
+  const TAUGHT =
+    'Hydrogen Atom Quantum Model. The quantum mechanical model of the hydrogen atom, orbitals, quantum numbers, energy levels.'
+
+  it.each([
+    'ok i am trying, can you explain one more time slowly',
+    'can you explain it more simply',
+    'please say it clearly',
+    'can you teach me easy easy please',
+  ])('names nothing: %s', (message) => {
+    expect(namedTopicUnknownTo(message, TAUGHT)).toBeNull()
+  })
+
+  // The one-surviving-word rule is what keeps this narrow: a real subject
+  // beside the adverb still names the subject.
+  it('still names the topic when a real subject sits beside the adverb', () => {
+    const named = namedTopicUnknownTo('explain diffraction slowly', TAUGHT)
+    expect(named?.title).toContain('diffraction')
+  })
+
+  it.each([
+    ['what is thermal conductivity', 'thermal conductivity'],
+    ['teach me about the mole concept', 'mole concept'],
+    ['can you explain the photoelectric effect', 'photoelectric effect'],
+  ])('does not regress a genuine topic request: %s', (message, expected) => {
+    expect(namedTopicUnknownTo(message, TAUGHT)?.title).toBe(expected)
+  })
+})
