@@ -2,6 +2,18 @@ import { defineConfig } from 'vitest/config'
 import path from 'path'
 
 export default defineConfig({
+  // tsconfig.json intentionally sets `"jsx": "preserve"` (Next.js's own
+  // SWC/webpack compiler does the real JSX transform, so tsc only needs to
+  // type-check). Vite 8's default oxc-based test transform reads that same
+  // tsconfig and, left alone, treats "preserve" as "don't touch JSX" — which
+  // then can't be turned into runnable JS, so any `.test.ts` that imports a
+  // `.tsx` module fails with "invalid JS syntax" before a single test runs.
+  // This overrides ONLY Vite's own transform option (nothing in
+  // tsconfig.json changes, and the actual Next.js build is untouched) so a
+  // plain-function/pure-logic test can import a component file directly —
+  // no new test framework, no DOM, no `@vitejs/plugin-react`; oxc already
+  // transforms JSX natively once told which runtime to target.
+  oxc: { jsx: { runtime: 'automatic' } },
   test: {
     globals: true,
     environment: 'node',

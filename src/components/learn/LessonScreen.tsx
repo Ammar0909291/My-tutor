@@ -6,7 +6,7 @@ import {
   Check, ChevronDown, ChevronUp, Copy, Lightbulb, Loader2, Mic, Paperclip, Play, Send, Square, X,
   BookOpen, Dumbbell, BarChart3, Library as LibraryIcon, User, Settings as SettingsIcon,
   Bookmark, Sparkles, Users, ImageIcon, Trophy, Globe2, Gauge, ThumbsUp, ThumbsDown,
-  Network, ListChecks,
+  Network, ListChecks, Brain, Sparkle,
 } from 'lucide-react'
 import { useLanguage } from '@/components/ui/LanguageToggle'
 import { useCountry, useTheme } from '@/components/Providers'
@@ -491,15 +491,45 @@ function LessonDocument({ text }: { text: string }) {
   )
 }
 
-function TypingDots() {
+// ─── Tutor Max "thinking" indicator ─────────────────────────────────────────
+// Replaces the old blinking `•••` dots (bounceDot / .typing-dot in
+// globals.css — now unused by this component; left in place only in case
+// another surface still references it, see the search note in the CSS
+// module). A breathing brain glyph with two orbiting sparkle particles and a
+// soft pulsing glow, built entirely from CSS animation on lucide-react's
+// already-shipped Brain/Sparkle icons — no GIF, no new SVG paths to author
+// and risk looking amateurish, no new dependency.
+//
+// ONE ATOMIC, NON-WRAPPING ELEMENT (see the root-cause note in
+// LessonScreen.module.css's `.thinkingBrain` rule): the icon stage is
+// `flex-shrink: 0` so it is never the thing that gives way, and only the
+// trailing label is allowed to ellipsis if space is ever genuinely
+// insufficient — the indicator can shrink, but it can never split onto a
+// second line.
+//
+// `compact` renders the icon alone (the per-message empty-streaming-bubble
+// slot, which already sits inside a "Tutor Max" bubble and has no room or
+// need for a repeated name label); the default renders icon + label (the
+// standalone between-turns pill). Both pass `label` explicitly because this
+// is a module-level, pure, presentational function — it has no hook access
+// to `useLanguage()`'s `t`, by the same design as every other helper in this
+// file (AiBadge, MessageContent, ...) — and that keeps it trivially testable
+// in isolation.
+export function ThinkingBrain({ label, compact = false, size = 34 }: { label: string; compact?: boolean; size?: number }) {
   return (
-    <div className="flex items-center gap-3 py-1">
-      <div className="flex gap-1.5 items-center">
-        <span className="typing-dot" />
-        <span className="typing-dot" />
-        <span className="typing-dot" />
-      </div>
-    </div>
+    <span className={styles.thinkingBrain} role="status" aria-label={label}>
+      <span className={styles.brainStage} style={{ width: size, height: size }} aria-hidden="true">
+        <span className={styles.brainGlow} />
+        <Brain size={Math.round(size * 0.6)} strokeWidth={1.75} className={styles.brainIcon} />
+        <span className={`${styles.orbitRing} ${styles.orbitRing1}`}>
+          <span className={styles.particleDot}><Sparkle size={Math.max(9, Math.round(size * 0.26))} strokeWidth={1.5} /></span>
+        </span>
+        <span className={`${styles.orbitRing} ${styles.orbitRing2}`}>
+          <span className={styles.particleDot}><Sparkle size={Math.max(7, Math.round(size * 0.18))} strokeWidth={1.5} /></span>
+        </span>
+      </span>
+      {!compact && <span className={styles.thinkingLabel}>{label}</span>}
+    </span>
   )
 }
 
@@ -740,7 +770,33 @@ function HintCard({ hint }: { hint: string }) {
 }
 
 // ─── Types ────────────────────────────────────────────────────────────────────
-type ChatMsg = { id: string; role: 'user'|'assistant'; content: string; ts: number; streaming?: boolean; provider?: string; llmCallCount?: number; visual?: string; visualSpec?: VisualSpec; sceneSpec?: SceneSpec; dynamicVisualizationCode?: string; inlinePractice?: InlinePracticeQuestion; hint?: string }
+export type ChatMsg = { id: string; role: 'user'|'assistant'; content: string; ts: number; streaming?: boolean; provider?: string; llmCallCount?: number; visual?: string; visualSpec?: VisualSpec; sceneSpec?: SceneSpec; dynamicVisualizationCode?: string; inlinePractice?: InlinePracticeQuestion; hint?: string }
+
+/**
+ * Pure decision function for the auto-scroll effect (see its own comment for
+ * the full root-cause account). Exported so the two policies it encodes are
+ * exercised directly by test, independent of DOM/ref plumbing:
+ *
+ *   1. THE LEARNER'S OWN MESSAGE ALWAYS BECOMES VISIBLE — detected as ANY
+ *      entry appended to the array since the previous render having
+ *      role 'user'. A length-based diff, not "is the newest entry a user
+ *      message", because `sendMessage` appends the user message and the
+ *      empty assistant placeholder in the same React batch — by the time
+ *      this runs, the array's last entry is already 'assistant'.
+ *   2. AN IN-PLACE REPLY UPDATE (no length change — the empty placeholder's
+ *      content landing, or a later edit) follows the viewport ONLY when the
+ *      learner was already at the bottom, so an intentional upward scroll to
+ *      reread something is never overridden.
+ */
+export function shouldAutoScrollOnMessagesChange(
+  messages: readonly Pick<ChatMsg, 'role'>[],
+  prevLength: number,
+  atBottom: boolean,
+): boolean {
+  const addedSinceLastRender = messages.length > prevLength ? messages.slice(prevLength) : []
+  const learnerJustSent = addedSinceLastRender.some((m) => m.role === 'user')
+  return learnerJustSent || atBottom
+}
 type MicState = 'idle' | 'recording' | 'processing'
 type AttachedFile = { name: string; content: string; language: string }
 // Panel identity — still needed for desktop maximize/restore, even though
@@ -1241,9 +1297,44 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     return () => el.removeEventListener('scroll', handler)
   }, [])
 
-  // Auto scroll
+  // AUTO-SCROLL — split into the two policies the product actually needs,
+  // instead of one shared `if (atBottom)` gate for both.
+  //
+  // ── ROOT CAUSE of "sending a message doesn't reliably scroll to it" ──────
+  // `atBottom` is derived ENTIRELY from native 'scroll' events (the handler
+  // above). It is a perfectly good signal for "should an incoming reply
+  // follow the viewport" — but it is not a reliable signal for "did the
+  // learner just send something," because it can be legitimately (not
+  // buggy-stale, genuinely correct) `false` at the exact moment of sending:
+  // reading a long previous reply that left the scroll position a few
+  // pixels past the 60px threshold, or a mobile on-screen-keyboard resize
+  // recomputing the container's metrics right as the learner taps Send. The
+  // old code gated the learner's OWN new message behind that same flag, so
+  // on any of those (common, not-a-bug) occasions their message silently
+  // failed to scroll into view — the "press ↓ just to see what I sent" bug.
+  //
+  // The newest ARRAY ENTRY can't be used to detect "I just sent something"
+  // either: `sendMessage` appends the learner's message and the empty
+  // assistant placeholder in two `setMessages` calls with no `await`
+  // between them, so React 18 batches both into ONE render — by the time
+  // this effect runs, the array's last entry is already the assistant
+  // placeholder, not the learner's message.
+  //
+  // The reliable signal is a LENGTH-BASED DIFF: everything appended to the
+  // array since the previous render. That correctly sees BOTH entries in
+  // the batched case above, is unaffected by which of the several send
+  // paths did the appending (sendMessage, sendImageMessage, lesson-init,
+  // MCQ taps — all of them, with no per-call-site change needed), and
+  // leaves streaming's own gated behaviour untouched: a `.map()` update that
+  // lands the reply's full text in place (no length change) finds nothing
+  // new here and correctly falls through to the `atBottom`-gated branch —
+  // pinning to the bottom only when the learner was already there, exactly
+  // as before, and never yanking them down mid-reread.
+  const prevMessagesLengthRef = useRef(0)
   useEffect(() => {
-    if (atBottom) messagesEndRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' })
+    const shouldScroll = shouldAutoScrollOnMessagesChange(messages, prevMessagesLengthRef.current, atBottom)
+    prevMessagesLengthRef.current = messages.length
+    if (shouldScroll) messagesEndRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' })
   }, [messages, atBottom])
 
   // On first history restore, jump straight to the newest message (instant,
@@ -4640,9 +4731,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1, gap: 12, paddingTop: 40 }}>
                   <EagleMascot variant="hero" size={56} />
                   <p style={{ fontSize: 15.6, color: 'var(--text-secondary)' }}>{t('lesson_init')}</p>
-                  <div style={{ display: 'flex', gap: 6 }}>
-                    <span className="typing-dot" /><span className="typing-dot" /><span className="typing-dot" />
-                  </div>
+                  <ThinkingBrain compact size={32} label={t('lesson_init')} />
                 </div>
               )}
 
@@ -4804,7 +4893,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                           ? <div className="animate-message" style={{ fontSize: 16.2, lineHeight: 1.7, color: 'var(--text-primary)' }}>
                               <MessageContent text={displayText} isUser={false} />
                             </div>
-                          : <TypingDots />
+                          : <ThinkingBrain compact size={28} label={t('lesson_thinking_dots')} />
                         }
 
                         {cached?.hasMore && (
@@ -4947,11 +5036,16 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 )
               })}
 
-              {/* Thinking — candy Pill */}
+              {/* Thinking — candy Pill, now carrying the animated brain instead
+                  of the old blinking dots. `alignSelf: flex-start` (unchanged)
+                  keeps the pill from stretching to the column's full width in
+                  this flex-column message list, which is what let it shrink
+                  to content size in the first place — the brain's own
+                  `.thinkingBrain` rule is what actually guarantees it can
+                  never wrap across two lines regardless of available width. */}
               {isStreaming && messages.at(-1)?.streaming && !messages.at(-1)?.content && (
-                <Pill style={{ display: 'inline-flex', alignSelf: 'flex-start', alignItems: 'center', gap: 8, fontSize: 14.4, color: 'var(--text-secondary)', background: 'var(--bg-elevated)', padding: '6px 12px' }}>
-                  <TypingDots />
-                  <span>{t('lesson_thinking_dots')}</span>
+                <Pill style={{ display: 'inline-flex', alignSelf: 'flex-start', fontSize: 14.4, color: 'var(--text-secondary)', background: 'var(--bg-elevated)', padding: '7px 14px' }}>
+                  <ThinkingBrain label={t('lesson_thinking_dots')} />
                 </Pill>
               )}
 

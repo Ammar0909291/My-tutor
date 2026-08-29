@@ -161,3 +161,119 @@
     padding: 2px 0 0;
   }
 }
+
+/* ── Tutor Max "thinking" indicator ───────────────────────────────────────
+ * Replaces the old blinking `•••` dots (bounceDot/.typing-dot, removed from
+ * globals.css). A breathing brain glyph, a soft pulsing glow, and two tiny
+ * sparkle particles orbiting on a plain CSS `rotate()` loop — smooth at any
+ * frame rate with a single keyframe per ring, no per-frame JS.
+ *
+ * ROOT CAUSE OF THE OLD "TWO-LINE" WRAP, for the record: the old markup was
+ * `<TypingDots /><span>{label}</span>` as two SEPARATE flex children of the
+ * Pill, where the label span carried no `white-space: nowrap` and no
+ * `flex-shrink: 0` — so on any container narrower than the full phrase's
+ * natural width (a longer translation, a squeezed split-view, a bumped-up
+ * accessibility font size), the browser was free to WRAP THE LABEL TEXT
+ * ITSELF onto a second line rather than let the Pill overflow, because a
+ * flex item's default `min-width: auto` permits shrinking down to its
+ * longest WORD's width, not its full single-line width. `.thinkingBrain`
+ * below is the fix: the icon stage is pinned at `flex-shrink: 0` (it can
+ * never be the thing that gives way) and the label is `white-space: nowrap`
+ * with `overflow/text-overflow` so, if space is ever truly insufficient, the
+ * LABEL ellipsizes — it is structurally incapable of wrapping to a second
+ * line, in any locale, at any viewport.
+ */
+.thinkingBrain {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  flex-shrink: 0;
+  max-width: 100%;
+  white-space: nowrap;
+}
+
+.brainStage {
+  position: relative;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brainGlow {
+  position: absolute;
+  inset: -25%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(108,92,231,0.4), transparent 70%);
+  filter: blur(3px);
+  opacity: 0.5;
+  animation: brainGlowPulse 2s ease-in-out infinite;
+}
+
+.brainIcon {
+  position: relative;
+  z-index: 1;
+  color: var(--indigo, #6C5CE7);
+  animation: brainBreathe 2s ease-in-out infinite;
+}
+
+.orbitRing {
+  position: absolute;
+  inset: -18%;
+  animation: brainOrbit 2s linear infinite;
+}
+
+.orbitRing2 {
+  inset: -2%;
+  animation-duration: 2.4s;
+  animation-direction: reverse;
+  /* Negative delay: starts already partway through its own cycle, so the
+   * two particles never both begin at the same 12-o'clock angle. */
+  animation-delay: -0.9s;
+}
+
+.particleDot {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  display: flex;
+  transform: translate(-50%, -50%);
+  color: var(--coral, #FF7B6B);
+  animation: sparkleTwinkle 2.2s ease-in-out infinite;
+}
+
+.thinkingLabel {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@keyframes brainBreathe {
+  0%, 100% { transform: scale(1); opacity: 0.9; }
+  50%      { transform: scale(1.08); opacity: 1; }
+}
+
+@keyframes brainGlowPulse {
+  0%, 100% { opacity: 0.35; transform: scale(0.92); }
+  50%      { opacity: 0.7; transform: scale(1.08); }
+}
+
+@keyframes brainOrbit {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes sparkleTwinkle {
+  0%, 100% { opacity: 0.4; }
+  50%      { opacity: 1; }
+}
+
+/* Calm/static fallback — every animation stops and the composition settles
+ * at a deliberate resting pose rather than an arbitrary mid-keyframe frame:
+ * the brain at its natural scale, the glow at half strength, and the second
+ * particle's ring given an explicit resting angle so the two sparkles don't
+ * simply stack on top of each other at 12 o'clock. */
+@media (prefers-reduced-motion: reduce) {
+  .brainIcon, .brainGlow, .orbitRing, .particleDot { animation: none; }
+  .orbitRing2 { transform: rotate(150deg); }
+}
