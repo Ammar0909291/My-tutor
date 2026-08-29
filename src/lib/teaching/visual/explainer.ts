@@ -138,11 +138,21 @@ function swatchShape(type: string): ExplainerSwatch['shape'] {
   return 'line'
 }
 
-/** "torqueLabel" / "force-vector" / "force_x" → "Force vector". */
+/**
+ * "torqueLabel" / "force-vector" / "bond0" → "Torque label" / "Force vector" /
+ * "Bond".
+ *
+ * The trailing index is dropped because scene ids are frequently
+ * `<thing><n>` — a counter, not a name. MEASURED in the browser: the water
+ * molecule's legend read "Bond0", which tells a learner nothing and looks like
+ * a bug. One bond is being named on behalf of all of them, so the plain noun is
+ * both shorter and more truthful.
+ */
 export function humanizeId(id: string): string {
   const words = id
     .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
     .replace(/[-_]+/g, ' ')
+    .replace(/([a-zA-Z]{2,})\d+$/, '$1')
     .trim()
     .toLowerCase()
   if (!words) return ''

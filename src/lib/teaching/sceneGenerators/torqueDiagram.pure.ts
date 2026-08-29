@@ -54,27 +54,61 @@ export function validateTorqueParams(raw: unknown): TorqueParams | null {
 
 interface TorqueGeometry {
   torque: number
-  scale: number
+  armScale: number
+  forceScale: number
   pivot: Vec3
   end: Vec3
   forceTip: Vec3
 }
 
+/**
+ * ONE SCALE PER QUANTITY, not one scale for both.
+ *
+ * The original normalised BOTH the arm and the force by `max(leverLength,
+ * force)` — that is, it divided a length in metres and a force in newtons by
+ * the same number, as though 2 m and 10 N were commensurable. At the canonical
+ * 2 m / 10 N it merely looked lopsided. The sliders made it a defect: raising
+ * the force to 40 N shrinks a 2 m arm to a twentieth of the force arrow, so the
+ * lever the figure exists to explain disappears — and a learner watching that
+ * would reasonably conclude the arm gets SHORTER as the force grows, which is
+ * the opposite of what the figure teaches.
+ *
+ * Each quantity now has its own units-per-scene-unit constant, chosen so the
+ * whole of its slider range draws legibly. Both remain proportional to their
+ * own quantity — a longer arm is still a longer line, a bigger force is still a
+ * longer arrow — so the cause-and-effect the controls demonstrate is intact.
+ * A floor keeps a very small value visible rather than degenerate.
+ */
+const ARM_UNITS_PER_METRE = 2.3
+const FORCE_UNITS_PER_NEWTON = 0.35
+const MIN_DRAWN = 2.5
+
+function drawnLength(quantity: number, unitsPer: number): number {
+  return Math.min(VISUAL_MAX, Math.max(MIN_DRAWN, quantity * unitsPer))
+}
+
 function computeGeometry(p: TorqueParams): TorqueGeometry {
   const torque = p.leverLength * p.force * Math.sin((p.angleDeg * Math.PI) / 180)
-  const maxExtent = Math.max(p.leverLength, p.force, 1e-9)
-  const scale = VISUAL_MAX / maxExtent
+  const armLength = drawnLength(p.leverLength, ARM_UNITS_PER_METRE)
+  const forceLength = drawnLength(p.force, FORCE_UNITS_PER_NEWTON)
 
   const pivot: Vec3 = [0, 0, 0]
-  const end: Vec3 = [round(p.leverLength * scale), 0, 0]
+  const end: Vec3 = [round(armLength), 0, 0]
   const angleRad = (p.angleDeg * Math.PI) / 180
   const forceTip: Vec3 = [
-    round(end[0] + p.force * scale * Math.cos(angleRad)),
-    round(end[1] + p.force * scale * Math.sin(angleRad)),
+    round(end[0] + forceLength * Math.cos(angleRad)),
+    round(end[1] + forceLength * Math.sin(angleRad)),
     0,
   ]
 
-  return { torque, scale, pivot, end, forceTip }
+  return {
+    torque,
+    armScale: armLength / p.leverLength,
+    forceScale: forceLength / p.force,
+    pivot,
+    end,
+    forceTip,
+  }
 }
 
 /** The rotational sense the torque produces — the wording the label uses. */

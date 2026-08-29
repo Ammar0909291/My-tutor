@@ -204,3 +204,42 @@ describe('the canonical registry and the variable registry cannot drift', () => 
     }
   })
 })
+
+describe('the figure stays legible across the whole control range', () => {
+  // MEASURED DEFECT, now pinned. The torque generator normalised the arm and
+  // the force by the same number — a length in metres divided by the larger of
+  // (metres, newtons) — so raising the force with the slider shrank the lever
+  // toward nothing. A learner watching that would read it as "the arm gets
+  // shorter as the force grows", the opposite of what the figure teaches.
+  const drawn = (params: Record<string, number>) => {
+    const objs = rebuildScene('torque_diagram', params)!.steps.flatMap((s) => s.objects)
+    const lever = objs.find((o) => o.id === 'lever')!
+    const force = objs.find((o) => o.id === 'force')!
+    return {
+      arm: Math.hypot(lever.to![0] - lever.from![0], lever.to![1] - lever.from![1]),
+      force: Math.hypot(force.to![0] - force.from![0], force.to![1] - force.from![1]),
+    }
+  }
+
+  it('never lets one quantity crush the other, anywhere in the slider range', () => {
+    for (const force of [1, 5, 10, 20, 30, 40]) {
+      for (const leverLength of [0.5, 2, 4, 6]) {
+        const d = drawn({ leverLength, force, angleDeg: 90 })
+        const ratio = Math.min(d.arm, d.force) / Math.max(d.arm, d.force)
+        expect(ratio, `r=${leverLength} F=${force}`).toBeGreaterThan(0.12)
+      }
+    }
+  })
+
+  it('keeps each drawn length rising with its own quantity', () => {
+    expect(drawn({ leverLength: 4, force: 10, angleDeg: 90 }).arm)
+      .toBeGreaterThan(drawn({ leverLength: 2, force: 10, angleDeg: 90 }).arm)
+    expect(drawn({ leverLength: 2, force: 30, angleDeg: 90 }).force)
+      .toBeGreaterThan(drawn({ leverLength: 2, force: 10, angleDeg: 90 }).force)
+  })
+
+  it('does not let a change in force move the arm, or the reverse', () => {
+    expect(drawn({ leverLength: 2, force: 10, angleDeg: 90 }).arm)
+      .toBeCloseTo(drawn({ leverLength: 2, force: 40, angleDeg: 90 }).arm, 5)
+  })
+})

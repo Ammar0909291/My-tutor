@@ -23,8 +23,8 @@ import type { Theme } from '@/components/Providers'
 import { dimColor, ROLE, themeColor } from '@/lib/teaching/sceneGenerators/visualDesign'
 
 interface SceneStageDecorProps {
-  /** Half-extent of the ground plane, in scene units. */
-  extent: number
+  /** The box the figure's own geometry occupies, in scene units. */
+  bounds: { minX: number; maxX: number; minY: number; maxY: number; span: number }
   grid?: boolean
   axes?: boolean
   axisLabels?: { x?: string; y?: string; z?: string }
@@ -34,23 +34,40 @@ interface SceneStageDecorProps {
 /** Axis colours follow the universal convention: x red, y green, z blue. */
 const AXIS = { x: ROLE.input, y: ROLE.result, z: ROLE.output } as const
 
-export function SceneStageDecor({ extent, grid = true, axes = true, axisLabels, theme }: SceneStageDecorProps) {
-  const half = Math.max(2, extent)
+export function SceneStageDecor({ bounds, grid = true, axes = true, axisLabels, theme }: SceneStageDecorProps) {
+  // The ground sits just under the figure's lowest point, and spans the
+  // figure's own width — so it reads as the surface the figure stands on
+  // rather than as a plane floating somewhere near it.
+  const pad = bounds.span * 0.08
+  const floor = bounds.minY - pad
+  const x0 = bounds.minX - pad
+  const x1 = bounds.maxX + pad
+  const depth = (x1 - x0) / 2
+
   // Whole-unit divisions keep the grid a readable ruler rather than a texture:
-  // roughly ten cells across, snapped so a line always falls on a round value.
-  const cell = Math.max(1, Math.round(half / 5))
+  // roughly ten cells across, snapped so a line falls on a round value.
+  const cell = Math.max(0.5, Math.round((x1 - x0) / 8 * 2) / 2)
   const lines = useMemo(() => {
     const out: { points: [number, number, number][] }[] = []
     if (!grid) return out
-    for (let v = -half; v <= half; v += cell) {
-      out.push({ points: [[-half, -half, v], [half, -half, v]] })
-      out.push({ points: [[v, -half, -half], [v, -half, half]] })
+    for (let z = -depth; z <= depth + 1e-6; z += cell) {
+      out.push({ points: [[x0, floor, z], [x1, floor, z]] })
+    }
+    for (let x = x0; x <= x1 + 1e-6; x += cell) {
+      out.push({ points: [[x, floor, -depth], [x, floor, depth]] })
     }
     return out
-  }, [grid, half, cell])
+  }, [grid, x0, x1, floor, depth, cell])
 
   const gridColor = dimColor(ROLE.reference, theme) ?? '#334155'
-  const axisLen = half * 0.42
+  // The triad is a CORNER marker: it sits at the near-left corner of the ground
+  // plane, which is inside the camera's frame but outside the box the figure's
+  // own geometry and labels occupy. Placing it inside that box (the first
+  // attempt) put it straight through the result label — the decor is added at
+  // render time and so is invisible to the label placement solver, which can
+  // only avoid what the SCENE declares.
+  const axisLen = bounds.span * 0.13
+  const origin: [number, number, number] = [x0, floor, depth * 0.72]
 
   return (
     <group>
@@ -59,7 +76,7 @@ export function SceneStageDecor({ extent, grid = true, axes = true, axisLabels, 
       ))}
 
       {axes && (
-        <group position={[-half * 0.86, -half * 0.86, 0]}>
+        <group position={origin}>
           {(['x', 'y', 'z'] as const).map((k) => {
             const to: [number, number, number] =
               k === 'x' ? [axisLen, 0, 0] : k === 'y' ? [0, axisLen, 0] : [0, 0, axisLen]

@@ -38,6 +38,16 @@ const PILOT = [
   'phys.mech.surface-tension',
   'phys.meas.scalars-vectors',   // Vector3D label path
   'chem.bond.vsepr',             // MolecularNode3D label path
+  // Added for the interactive-frame pass: these are the concepts whose scenes
+  // are PARAMETRIC, so this page is the only place the sliders, the choice
+  // controls, the stage stepper and the mode chips can be exercised in a real
+  // browser without a database or a signed-in learner. They are also the
+  // concepts the visual engine is hardest on — torque, collisions, molecular
+  // geometry, electron configuration.
+  'phys.mech.torque',
+  'phys.mech.collisions-inelastic',
+  'chem.atomic.electronic-config',
+  'chem.solid.crystal-systems',
 ] as const
 
 export default function PhysicsPilotPage() {

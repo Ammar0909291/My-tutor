@@ -173,16 +173,24 @@ function PlacedLabels({
 
 
 /**
- * How far the drawn geometry reaches from the origin — the ground plane's
- * half-extent. Derived from the objects rather than fixed, so the grid frames
- * a 2-unit molecule and a 40-unit trajectory equally well. Falls back to the
- * camera distance when a scene has no positioned geometry at all.
+ * The box the drawn geometry actually occupies.
+ *
+ * The decor is placed against THIS, not against a single radius from the
+ * origin. Measured in Chromium with the first version, which used
+ * `max(|coordinate|)`: on a torque figure whose content sits between y = -2.8
+ * and y = 2.8, the ground plane landed at y = -3.2 and the axis triad at
+ * (-2.8, -2.8) — both just outside the camera's frame, so two thirds of the
+ * triad was cut off and the grid was a sliver at the bottom edge. A scene is
+ * rarely centred on the origin, so a radius is the wrong shape of answer.
  */
-function sceneExtent(objects: SceneObject[], cameraDistance: number): number {
-  let max = 0
+interface SceneBounds { minX: number; maxX: number; minY: number; maxY: number; span: number }
+
+function sceneBounds(objects: SceneObject[], cameraDistance: number): SceneBounds {
+  let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity
   const consider = (v?: [number, number, number]) => {
     if (!v) return
-    max = Math.max(max, Math.abs(v[0]), Math.abs(v[1]), Math.abs(v[2]))
+    minX = Math.min(minX, v[0]); maxX = Math.max(maxX, v[0])
+    minY = Math.min(minY, v[1]); maxY = Math.max(maxY, v[1])
   }
   for (const o of objects) {
     consider(o.position)
@@ -190,7 +198,11 @@ function sceneExtent(objects: SceneObject[], cameraDistance: number): number {
     consider(o.to)
     o.points?.forEach(consider)
   }
-  return max > 0 ? max * 1.15 : cameraDistance * 0.5
+  if (!Number.isFinite(minX)) {
+    const r = cameraDistance * 0.4
+    return { minX: -r, maxX: r, minY: -r, maxY: r, span: r * 2 }
+  }
+  return { minX, maxX, minY, maxY, span: Math.max(maxX - minX, maxY - minY, 1) }
 }
 
 interface SceneSpecRendererProps {
@@ -223,9 +235,9 @@ export function SceneSpecRenderer({
   // captured on the DOM side and every object below is already resolved.
   const { theme } = useTheme()
   const objects = given ?? visibleObjects(spec, revealStep)
-  // The stage's own extent, so the ground plane matches the figure rather than
-  // a constant that is too small for one scene and too large for the next.
-  const extent = sceneExtent(objects, spec.cameraDistance ?? 7)
+  // The stage's own box, so the ground plane and the triad sit inside the frame
+  // the camera is actually showing rather than at a guessed radius.
+  const bounds = sceneBounds(objects, spec.cameraDistance ?? 7)
   const decor = spec.stage
   const spatial = decor?.grid !== false || decor?.axes !== false
   return (
@@ -247,7 +259,7 @@ export function SceneSpecRenderer({
             now does. */}
         {decor && spatial && (
           <SceneStageDecor
-            extent={extent}
+            bounds={bounds}
             grid={decor.grid !== false}
             axes={decor.axes !== false}
             axisLabels={decor.axisLabels}

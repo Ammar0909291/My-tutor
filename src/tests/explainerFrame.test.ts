@@ -50,6 +50,9 @@ describe('humanizeId', () => {
     ['torqueLabel', 'Torque label'],
     ['force-vector', 'Force vector'],
     ['angle_arc', 'Angle arc'],
+    // A trailing counter is not a name — measured as "Bond0" in a real legend.
+    ['bond0', 'Bond'],
+    ['electron12', 'Electron'],
   ])('%s -> %s', (id, want) => expect(humanizeId(id)).toBe(want))
 })
 

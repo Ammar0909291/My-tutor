@@ -117,6 +117,8 @@ export function ExplainerFigure({ spec }: { spec: SceneSpec }) {
   }, [spec])
 
   const predicting = mode === 'predict' && !revealed
+  /** True in any mode whose whole point is that the learner works it out. */
+  const answerWithheld = predicting || mode === 'practice' || mode === 'assess'
 
   return (
     <figure
@@ -129,7 +131,12 @@ export function ExplainerFigure({ spec }: { spec: SceneSpec }) {
         <div style={{ minWidth: 0 }}>
           <h3 className={styles.title}>{explainer.title}</h3>
           {explainer.givens && <p className={styles.givens}>{explainer.givens}</p>}
-          {explainer.result && !predicting && (
+          {/* The result chip states the answer, so it is withheld by exactly
+              the modes that withhold the answer inside the figure. Without
+              this the challenge layer was defeated by its own header: measured
+              in the browser, practice mode hid the label on the canvas and
+              printed the same number in the chip above it. */}
+          {explainer.result && !answerWithheld && (
             <p className={styles.result}>
               <span>{explainer.result.expression}</span>
               {explainer.result.value && <span className={styles.resultValue}>{explainer.result.value}</span>}

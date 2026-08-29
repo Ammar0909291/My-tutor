@@ -7,8 +7,8 @@
  * contents as children and plug into the existing VisualCard revealStep
  * contract exactly like every SVG visual.
  */
-import { Suspense, useEffect, useState, type ReactNode } from 'react'
-import { Canvas } from '@react-three/fiber'
+import { Suspense, useEffect, useRef, useState, type ReactNode } from 'react'
+import { Canvas, useThree } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 
 interface ThreeDVisualProps {
@@ -42,6 +42,39 @@ function usePrefersReducedMotion(): boolean {
     return () => mql.removeEventListener('change', onChange)
   }, [])
   return reduced
+}
+
+
+/**
+ * Keep the camera on the distance the SCENE asks for.
+ *
+ * `<Canvas camera={...}>` is applied once, at mount, and never again — which
+ * was invisible while a scene was a fixed picture and became a defect the
+ * moment a figure could be re-derived. MEASURED in Chromium: raising the force
+ * on a torque figure from 10 N to 40 N grew the scene from ±2.8 to ±7 units
+ * while the camera stayed at the distance the 10 N figure had asked for, so the
+ * lever left the frame entirely and the force arrow filled the canvas with no
+ * arrowhead visible. Every panel beside it read correctly, which is what makes
+ * this the dangerous kind of bug: the numbers were right and the picture was
+ * not.
+ *
+ * It fires ONLY when the requested distance actually changes, so a learner who
+ * has zoomed or panned by hand is never yanked back on an unrelated re-render.
+ */
+function CameraDistanceSync({ distance }: { distance: number }) {
+  const camera = useThree((s) => s.camera)
+  const controls = useThree((s) => s.controls) as { update?: () => void } | null
+  const applied = useRef(distance)
+
+  useEffect(() => {
+    if (applied.current === distance) return
+    applied.current = distance
+    camera.position.set(0, 0, distance)
+    camera.updateProjectionMatrix()
+    controls?.update?.()
+  }, [distance, camera, controls])
+
+  return null
 }
 
 export function ThreeDVisual({
@@ -88,9 +121,14 @@ export function ThreeDVisual({
         <ambientLight intensity={0.6} />
         <directionalLight position={[4, 4, 4]} intensity={0.9} />
         <directionalLight position={[-4, -2, -4]} intensity={0.3} />
+        <CameraDistanceSync distance={cameraDistance} />
         <Suspense fallback={null}>{children}</Suspense>
         {enableControls && (
           <OrbitControls
+            // `makeDefault` publishes the controls on the R3F store, which is
+            // how CameraDistanceSync above reaches them to re-apply their
+            // internal state after it moves the camera.
+            makeDefault
             // Pan was disabled, so a learner who zoomed in could not bring the
             // part they were looking at back into frame. Zoom without pan is a
             // trap; both are enabled together.
