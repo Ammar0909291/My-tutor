@@ -200,11 +200,41 @@ const PERSONA_CONTINUATIONS = [
  */
 const MAX_TURNS = 20
 
+/**
+ * SESSION ISOLATION — the harness cannot assume it got a fresh session.
+ *
+ * `POST /api/sessions` RESUMES any ACTIVE session for the account from the last
+ * 24h, and `mode: 'restart'` on lesson-init does not clear the ladder. That is
+ * documented behaviour, and `scripts/math/certify.ts` already refuses to report
+ * PASS when it sees the consequence, calling it DIRTY-STATE. This harness had no
+ * such guard, and it ran a whole sweep on ONE account back to back.
+ *
+ * Measured 2026-08-29 on a 4-concept run: inside a single session declared as
+ * `phys.stat.boltzmann-factor`, `lessonOrder` moved 203 -> 62 -> 188 -> 210 and
+ * the mastery gate served probes about the WKB approximation and the
+ * Euler-Lagrange equation — two OTHER concepts in the same sample. The persona
+ * answered them, the phase machine reset to OBSERVE twice, and `checkCorrect`
+ * went 0 -> 1 -> 0. Everything that run recorded about "boltzmann-factor" was
+ * partly about three different concepts.
+ *
+ * Ruled out as the cause: concurrency. Every learn_session in the window was
+ * sequential on one user with no overlap, so this is inherited state, not two
+ * runners fighting.
+ *
+ * Two guards, both instrument-only — neither changes the product:
+ *   1. End any session this harness opened, on the FAILURE path too. It used to
+ *      end only after a clean loop, so a thrown turn leaked an ACTIVE session
+ *      that the next concept then resumed. One was still ACTIVE after the run.
+ *   2. Record the lesson the server actually served on every turn, and flag the
+ *      concept `lessonDrift` when it leaves the target. A drifted concept is
+ *      reported, never silently averaged into a score.
+ */
 async function runConcept(cookie: string, subject: string, concept: KgConcept, lesson: CurriculumLesson, totalLessons: number) {
   const session = await api(cookie, 'POST', '/api/sessions', { subjectSlug: subject })
   const sessionId = (session.data as { id: string }).id
   const turns: Turn[] = []
 
+  try {
   let last = await api(cookie, 'POST', '/api/learn/lesson-init', {
     sessionId, mode: 'restart', lessonTitle: lesson.lessonTitle, lessonOrder: lesson.order,
     topicSlug: lesson.topicSlug, unitTitle: lesson.unitTitle, totalLessons, completedLessons: [],
@@ -235,14 +265,37 @@ async function runConcept(cookie: string, subject: string, concept: KgConcept, l
     if (p.lessonComplete) break
   }
 
-  await api(cookie, 'POST', '/api/sessions/end', { sessionId }).catch(() => {})
+  return buildResult(concept, lesson, sessionId, turns)
+  } finally {
+    // ALWAYS, including when a turn threw. An ACTIVE session left behind is
+    // resumed by the NEXT concept's POST /api/sessions, which is how one
+    // concept's ladder and active lesson leak into the next one's measurement.
+    await api(cookie, 'POST', '/api/sessions/end', { sessionId }).catch(() => {})
+  }
+}
+
+/**
+ * Shared by the clean and the thrown path so a partial run is still reported
+ * with its drift, rather than discarded as a bare error string.
+ */
+function buildResult(concept: KgConcept, lesson: CurriculumLesson, sessionId: string, turns: Turn[]) {
+  const servedOrders = turns
+    .map((t) => (t.payload as { lessonOrder?: number }).lessonOrder)
+    .filter((o): o is number => typeof o === 'number')
+  const offTarget = [...new Set(servedOrders.filter((o) => o !== lesson.order))]
 
   return {
     id: concept.id, name: concept.name, difficulty: concept.difficulty, sessionId, turns,
     anyVisual: turns.some((t) => hasVisual(t.payload)),
     visualTurnCount: turns.filter((t) => hasVisual(t.payload)).length,
     providerDegraded: turns.some((t) => t.payload.provider === 'degraded'),
-    finalMastery: turns.at(-1)!.payload.mastery ?? null,
+    finalMastery: turns.at(-1)?.payload.mastery ?? null,
+    // See the runConcept header. A drifted concept measured something other
+    // than the concept it names, so its score is not evidence about that
+    // concept and must not be averaged in as if it were.
+    targetLessonOrder: lesson.order,
+    lessonDrift: offTarget.length > 0,
+    lessonOrdersServed: offTarget,
   }
 }
 
@@ -273,8 +326,13 @@ async function main() {
         id: concept.id, difficulty: concept.difficulty, ok: true, ms: Date.now() - t0,
         anyVisual: result.anyVisual, visualTurnCount: result.visualTurnCount,
         providerDegraded: result.providerDegraded, finalMastery: result.finalMastery,
+        lessonDrift: result.lessonDrift, targetLessonOrder: result.targetLessonOrder,
+        lessonOrdersServed: result.lessonOrdersServed,
       })
-      console.log(`[${i + 1}/${picked.length}] ${concept.id} visual=${result.anyVisual} degraded=${result.providerDegraded}`)
+      console.log(
+        `[${i + 1}/${picked.length}] ${concept.id} visual=${result.anyVisual} degraded=${result.providerDegraded}` +
+          (result.lessonDrift ? ` DRIFT->${result.lessonOrdersServed.join(',')}` : ''),
+      )
     } catch (e) {
       summary.push({ id: concept.id, difficulty: concept.difficulty, ok: false, ms: Date.now() - t0, error: String((e as Error).message).slice(0, 300) })
       console.error(`[${i + 1}/${picked.length}] FAILED ${concept.id}: ${(e as Error).message}`)
@@ -283,8 +341,22 @@ async function main() {
   }
 
   const ok = summary.filter((s) => s.ok)
-  const withVisual = ok.filter((s) => s.anyVisual).length
-  console.log(`\n${ok.length}/${picked.length} completed. ${withVisual}/${ok.length} showed a real visual at least once.`)
+  const clean = ok.filter((s) => !s.lessonDrift)
+  const drifted = ok.filter((s) => s.lessonDrift)
+  const withVisual = clean.filter((s) => s.anyVisual).length
+  const mastered = clean.filter((s) => {
+    const m = s.finalMastery as { checkCorrect?: number; practiceCorrect?: number } | null
+    return (m?.checkCorrect ?? 0) >= 1 && (m?.practiceCorrect ?? 0) >= 2
+  }).length
+
+  console.log(`\n${ok.length}/${picked.length} completed.`)
+  // Reported against CLEAN concepts only. A drifted concept was served a
+  // different lesson mid-session, so counting it either way would be a claim
+  // about a concept the run did not actually measure.
+  console.log(`${clean.length} clean, ${drifted.length} discarded for lesson drift.`)
+  console.log(`${withVisual}/${clean.length} showed a real visual at least once.`)
+  console.log(`${mastered}/${clean.length} reached verified mastery (check>=1 and practice>=2).`)
+  if (drifted.length > 0) console.log(`Drifted: ${drifted.map((s) => s.id).join(', ')}`)
   console.log(`Transcripts: ${dir}`)
 }
 
