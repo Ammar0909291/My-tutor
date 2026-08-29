@@ -150,8 +150,15 @@ export function analyse(turns: readonly Turn[]): Finding[] {
       }
     }
 
-    // An explicit request for a visual that came back without one.
-    if (/\b(diagram|picture|draw|visual|figure|show me)\b/i.test(t.sent) && !visualIdentity(p)) {
+    // An explicit request for a visual that came back without one. Skip a turn
+    // that was a TAP on the previous turn's MCQ — the option text may contain a
+    // medium word ("Visual perception of printed word") without being a request.
+    const wasMcqTap = i > 0
+      && Array.isArray(turns[i - 1].payload.mcq?.options)
+      && (turns[i - 1].payload.mcq as { options: string[] }).options.includes(t.sent)
+    if (!wasMcqTap
+      && /\b(diagram|picture|draw|visual|figure|show me)\b/i.test(t.sent)
+      && !visualIdentity(p)) {
       push('DIAGRAM_REQUEST_UNMET', 'P0', t.label,
         `learner asked "${t.sent.slice(0, 60)}" and the turn carried no visual`)
     }
