@@ -2447,6 +2447,54 @@
   Full suite 423 files / 9,113 passed / 9 skipped, `npx tsc --noEmit` clean, `npm run build`
   clean. Track K/S5 untouched; Phase 1-4 invariants re-verified intact, not reopened.
 
+## Visual Engine — universal interactive upgrade (2026-08-29)
+- **Read `src/lib/teaching/visual/parametricScenes.ts` before touching any scene generator.**
+  It is now the single source of truth for "the canonical case": `conceptSceneParams.ts`'s
+  numeric/lookup entries build FROM it, so a textbook parameter set has one definition, not two.
+- **Root cause found by inspection, not from the failing examples**: `SceneSpec` is a DRAWING
+  format and `conceptSceneParams` froze every canonical figure at build time from a constant
+  parameter set. After generation there were no parameters left — only coordinates. Cause-and-
+  effect, interactive manipulation, predict-then-reveal, focus, practice mode and adaptive
+  complexity were ALL blocked by that one missing layer, not by six separate gaps. Scene
+  identity/continuity across turns (`visual/session.ts`) and request intelligence
+  (`visual/visualNeed.ts`) were already implemented and were NOT the problem — do not rebuild them.
+- **Four additive layers, none concept-specific.** (1) CONTRACT: `explainer`, `parametric`,
+  `stage` on the scene; `intent`, `focus`, `predict` on the step, which is now also a teaching
+  stage — every field optional, so a scene declaring none behaves exactly as before.
+  (2) `visual/explainer.ts` — header, givens, result chip, colour legend, panels, key insight,
+  DERIVED from what the scene already declares. **It may restate, never invent**; the guard test
+  asserts every printed fragment is traceable to the source spec. Authored fields win
+  field-by-field. (3) `visual/sceneStage.ts` — reveal + focus + challenge as one pure function;
+  withholding is decided from the SEMANTIC PALETTE (a label coloured `result` is the answer in
+  any subject), which is why practice/assess work for scenes nobody wrote them for. Geometry is
+  NEVER withheld; focus dims, never deletes. (4) `visual/parametricScenes.ts` — 14 generator
+  kinds across physics/maths/chemistry declare their variables and the causal claim each makes;
+  a control re-runs the generator's own pure builder, so an adjusted figure is exactly as correct
+  as the one it replaced.
+- **The whole generator family is now split into `*.pure` halves** (28 modules). The LLM extractor
+  was the only thing tying them to the provider router / AI budget / rate limiter, which is what
+  made client-side re-derivation impossible. Fixed once, not 28 times. `sceneGeneratorPurity.test.ts`
+  asserts it — a single `@/lib/ai` import in a `.pure` module breaks the build's guarantee.
+- **`SceneSpecFigure` is now a 3-line seam** onto `ExplainerFigure`. LessonScreen and the dev
+  harnesses were untouched, which is why the frame reached every scene figure at once.
+- **Six real defects found and fixed, four of them only visible in a browser** (dev harness
+  `/dev/physics-pilot`, extended with the parametric concepts): the camera never followed a
+  rebuilt scene (`<Canvas camera>` applies at mount only — `CameraDistanceSync` in
+  `ThreeDVisual`); the torque generator divided metres and newtons by the same normaliser, so
+  raising the force shrank the lever toward nothing; the result chip printed the answer that
+  practice mode was hiding; stage decor was placed at a radius instead of the content box, so the
+  axis triad fell outside the frame; `rebuildScene` skipped `fitSceneToFrame`; and a generator's
+  parameter validator does not check the scene that comes OUT (a collision with one body at rest
+  passes validation and draws a zero-length arrow) — rebuilds now pass `validateSceneSpec` and the
+  frame holds the last good figure.
+- **NOT done, reported not hidden**: meaningful animation (scenes are still static snapshots with
+  additive reveal); misconception-contrast visuals (the engine could express one as a second
+  parameter set, but the teaching layer supplies no misconception→variable mapping — that is the
+  architectural blocker); representation transitions; adaptive complexity keyed to learner level;
+  the visual-generation progress state. **No real-account learner QA was run** — this environment
+  has no `QA_EMAIL`/`QA_PASSWORD` and no `DATABASE_URL`; verification was Chromium against the
+  real components on the dev harness plus offline runs of the real modules.
+
 ## Run locally
 ```
 cp .env.example .env   # set DATABASE_URL, AUTH_SECRET (openssl rand -base64 32), GROQ_API_KEY
