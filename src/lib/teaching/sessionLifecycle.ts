@@ -150,7 +150,7 @@ export function clearEpisodeForLessonOpen(): Record<string, unknown> {
  */
 export function applySignalToEpisode(
   ep: SessionEpisode,
-  signal: { correctness?: boolean } | null,
+  signal: { correctness?: boolean; confusion?: boolean } | null,
   opts: { isFirstLesson: boolean },
 ): SessionEpisode {
   if (!signal || signal.correctness === undefined) return ep
@@ -203,12 +203,42 @@ export function applySignalToEpisode(
   // A learner in a genuine spiral still closes: they have no correct answer to
   // clear it with. Lesson one's budget of 1 is unchanged.
   //
-  // NOT ADDRESSED HERE, and recorded rather than bundled: route.ts's recovery
-  // block synthesizes `{correctness: false}` on every recovery turn, so
-  // expressions of confusion — "I don't understand", "I am confused" — spend
-  // this budget at the same rate as a wrong answer. Whether distress should
-  // count as failure is a separate product decision.
-  const failures = signal.correctness === false ? ep.visibleFailures + 1 : 0
+  // ── DISTRESS IS NOT A GRADED FAILURE (the deferred product decision, now
+  // made) ─────────────────────────────────────────────────────────────────
+  //
+  // route.ts's recovery block synthesizes `{correctness: false, confusion:
+  // true}` on every recovery turn, so "I don't understand" / "I am confused"
+  // used to spend this budget at the same rate as a wrong ANSWER. With a
+  // budget of 2, two expressions of confusion drove the episode to CLOSING —
+  // and CLOSING denies AUTHORED_PROBE through both turnArbitration's CLOSE
+  // suppression and closingTurnWithholdsQuestion. So a confused-but-engaged
+  // learner had the entire assessment path shut off: no keyed probe ever
+  // attached, correctAtCheck/correctAtPractice could never be earned, the model
+  // improvised UNKEYED prose comprehension questions, and their answers to
+  // those (right OR wrong) could not be graded — the content-free hold.
+  //
+  // MEASURED live via production [gate-eligibility] logs (phys.mech.collisions-
+  // inelastic, real account, 2026-08-29): every GUIDE-phase 'ask' turn read
+  // `eligible:false, blockedBy:["arbitrationAllowsProbe","notClosingTurn"]`
+  // with all six other terms TRUE — the ONLY thing shutting the gate was the
+  // episode being CLOSING, and the episode was CLOSING solely because two
+  // "I don't understand" turns had spent the affect budget.
+  //
+  // The brief settles the product decision the Phase E note deferred: "I don't
+  // understand" must trigger REMEDIATION, not abandonment. So a distress
+  // signal (`confusion: true`) no longer spends the affect budget — it still
+  // advances OPENING→CORE (the episode is never frozen), but it cannot push to
+  // CLOSING. A real GRADED wrong answer (correctness:false with no confusion
+  // flag — the teachingSignal path) spends it exactly as before, so a genuine
+  // failure spiral still winds the session down, an explicit "I'm done"
+  // (forceClosing) still closes absolutely, and lesson one's budget of 1 is
+  // unchanged. This is the session-episode half of the concept-budget fix in
+  // conceptBudget.ts: neither layer abandons a learner who has only asked for
+  // help and never been assessed.
+  const distress = signal.confusion === true
+  const failures = signal.correctness === false
+    ? (distress ? ep.visibleFailures : ep.visibleFailures + 1)
+    : 0
   const budget = opts.isFirstLesson ? 1 : 2
   let phase: SessionPhase = ep.phase
   let openingSatisfied = ep.openingSatisfied

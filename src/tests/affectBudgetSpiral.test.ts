@@ -50,6 +50,50 @@ const NORMAL = { isFirstLesson: false }
 const LESSON_ONE = { isFirstLesson: true }
 const wrong = (e: SessionEpisode, o = NORMAL) => applySignalToEpisode(e, { correctness: false }, o)
 const right = (e: SessionEpisode, o = NORMAL) => applySignalToEpisode(e, { correctness: true }, o)
+// A distress signal — the synthetic `{correctness:false, confusion:true}` the
+// recovery block emits for "I don't understand".
+const distress = (e: SessionEpisode, o = NORMAL) =>
+  applySignalToEpisode(e, { correctness: false, confusion: true }, o)
+
+// ── DISTRESS DOES NOT SPEND THE AFFECT BUDGET ──────────────────────────────
+describe('distress (confusion) is not a graded failure', () => {
+  it('two "I don\'t understand" turns do NOT close the episode', () => {
+    // phys.mech.collisions-inelastic, 2026-08-29: two confusion turns used to
+    // drive the episode to CLOSING, shutting off every keyed probe.
+    const after = distress(distress(ep('CORE', 0)))
+    expect(after.phase).toBe('CORE')
+    expect(after.visibleFailures).toBe(0)
+  })
+
+  it('distress advances OPENING→CORE so the episode is never frozen', () => {
+    const after = distress(ep('OPENING', 0))
+    expect(after.phase).toBe('CORE')
+    expect(after.openingSatisfied).toBe(true)
+  })
+
+  it('a distress turn does not erase a real graded failure already on record', () => {
+    // one real wrong answer (count 1), then confusion — the count is preserved,
+    // not reset and not incremented.
+    const afterWrong = wrong(ep('CORE', 0))
+    expect(afterWrong.visibleFailures).toBe(1)
+    const afterDistress = distress(afterWrong)
+    expect(afterDistress.visibleFailures).toBe(1)
+    expect(afterDistress.phase).toBe('CORE')
+  })
+
+  it('a real graded wrong answer AFTER distress still spends the budget and closes', () => {
+    // distress (0) → distress (0) → real wrong (1) → real wrong (2) = CLOSING.
+    const e = wrong(wrong(distress(distress(ep('CORE', 0)))))
+    expect(e.phase).toBe('CLOSING')
+    expect(e.visibleFailures).toBe(2)
+  })
+
+  it('lesson one: distress does not consume the budget-of-1 either', () => {
+    const after = distress(distress(distress(ep('CORE', 0), LESSON_ONE), LESSON_ONE), LESSON_ONE)
+    expect(after.phase).toBe('CORE')
+  })
+})
+
 
 // ── A. A CURRENT SPIRAL MUST STILL CLOSE ────────────────────────────────────
 describe('A. the affect budget still protects a learner who is genuinely spiralling', () => {

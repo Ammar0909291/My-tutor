@@ -7128,9 +7128,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
 
         // P4 — Affect budget: recovery turns emit no SIGNAL tag so
         // applySignalToEpisode() never sees them, leaving the episode
-        // frozen. Synthesize a false-signal failure event here so the
-        // session lifecycle advances toward CLOSING at the same rate as
-        // a learner-signaled failure would.
+        // frozen. Synthesize a distress event here so the session lifecycle
+        // still advances OPENING→CORE. `confusion: true` marks it as distress,
+        // NOT a graded wrong answer: applySignalToEpisode no longer spends the
+        // affect budget on it, because two "I don't understand" turns driving
+        // the episode to CLOSING is what shut off the entire assessment path
+        // (no keyed probe attaches under CLOSING) and produced the content-free
+        // hold. See applySignalToEpisode's "distress is not a graded failure"
+        // note for the measured [gate-eligibility] evidence.
         // `!excursionActiveHoisted`: the same attribution boundary the ladder
         // and the completion gate use. A learner working through a concept
         // THEY asked for is not in a failure spiral on the lesson, and
