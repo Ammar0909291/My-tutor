@@ -1,0 +1,201 @@
+/* ── Tutor Max "thinking" indicator ───────────────────────────────────────
+ * Replaces the old blinking `•••` dots (bounceDot/.typing-dot, removed from
+ * globals.css). A breathing brain glyph, a soft pulsing glow, and two tiny
+ * sparkle particles orbiting on a plain CSS `rotate()` loop — smooth at any
+ * frame rate with a single keyframe per ring, no per-frame JS.
+ *
+ * ROOT CAUSE OF THE OLD "TWO-LINE" WRAP, for the record: the old markup was
+ * `<TypingDots /><span>{label}</span>` as two SEPARATE flex children of the
+ * Pill, where the label span carried no `white-space: nowrap` and no
+ * `flex-shrink: 0` — so on any container narrower than the full phrase's
+ * natural width (a longer translation, a squeezed split-view, a bumped-up
+ * accessibility font size), the browser was free to WRAP THE LABEL TEXT
+ * ITSELF onto a second line rather than let the Pill overflow, because a
+ * flex item's default `min-width: auto` permits shrinking down to its
+ * longest WORD's width, not its full single-line width. `.thinkingBrain`
+ * below is the fix: the icon stage is pinned at `flex-shrink: 0` (it can
+ * never be the thing that gives way) and the label is `white-space: nowrap`
+ * with `overflow/text-overflow` so, if space is ever truly insufficient, the
+ * LABEL ellipsizes — it is structurally incapable of wrapping to a second
+ * line, in any locale, at any viewport.
+ */
+.thinkingBrain {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  flex-shrink: 0;
+  max-width: 100%;
+  white-space: nowrap;
+}
+
+.brainStage {
+  position: relative;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brainGlow {
+  position: absolute;
+  inset: -25%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(108,92,231,0.4), transparent 70%);
+  filter: blur(3px);
+  opacity: 0.5;
+  animation: brainGlowPulse 2s ease-in-out infinite;
+}
+
+.brainIcon {
+  position: relative;
+  z-index: 1;
+  color: var(--indigo, #6C5CE7);
+  animation: brainBreathe 2s ease-in-out infinite;
+}
+
+.orbitRing {
+  position: absolute;
+  inset: -18%;
+  animation: brainOrbit 2s linear infinite;
+}
+
+.orbitRing2 {
+  inset: -2%;
+  animation-duration: 2.4s;
+  animation-direction: reverse;
+  /* Negative delay: starts already partway through its own cycle, so the
+   * two particles never both begin at the same 12-o'clock angle. */
+  animation-delay: -0.9s;
+}
+
+.particleDot {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  display: flex;
+  transform: translate(-50%, -50%);
+  color: var(--coral, #FF7B6B);
+  animation: sparkleTwinkle 2.2s ease-in-out infinite;
+}
+
+.thinkingLabel {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@keyframes brainBreathe {
+  0%, 100% { transform: scale(1); opacity: 0.9; }
+  50%      { transform: scale(1.08); opacity: 1; }
+}
+
+@keyframes brainGlowPulse {
+  0%, 100% { opacity: 0.35; transform: scale(0.92); }
+  50%      { opacity: 0.7; transform: scale(1.08); }
+}
+
+@keyframes brainOrbit {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes sparkleTwinkle {
+  0%, 100% { opacity: 0.4; }
+  50%      { opacity: 1; }
+}
+
+/* Calm/static fallback — every animation stops and the composition settles
+ * at a deliberate resting pose rather than an arbitrary mid-keyframe frame:
+ * the brain at its natural scale, the glow at half strength, and the second
+ * particle's ring given an explicit resting angle so the two sparkles don't
+ * simply stack on top of each other at 12 o'clock. */
+@media (prefers-reduced-motion: reduce) {
+  .brainIcon, .brainGlow, .orbitRing, .particleDot { animation: none; }
+  .orbitRing2 { transform: rotate(150deg); }
+}
+
+/* ── the orbital ring, and the travelling spark ───────────────────────────
+ *
+ * Two additions the Tutor Max language calls for, both deliberately quiet.
+ *
+ * The RING is a real stroke rather than an implied path: a particle orbiting
+ * nothing reads as a stray dot, and the ring is what makes the composition
+ * legible as a system. It turns slowly and in the opposite direction to the
+ * inner particle, so the two never lock into a single rigid rotation.
+ *
+ * The SPARK is occasional by construction, not by chance: it is visible for a
+ * fifth of a six-second cycle and transparent for the rest, so most of the time
+ * there is nothing there at all. That is the difference between "premium and
+ * restrained" and a chatbot spinner — the eye is drawn once, not held.
+ */
+
+.orbitTrack {
+  position: absolute;
+  inset: -14%;
+  border-radius: 50%;
+  border: 1px solid var(--indigo, #6C5CE7);
+  opacity: 0.22;
+  animation: brainOrbit 7s linear infinite reverse;
+}
+
+.spark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2.5px;
+  height: 2.5px;
+  margin: -1.25px 0 0 -1.25px;
+  border-radius: 50%;
+  background: var(--coral, #FF7B6B);
+  box-shadow: 0 0 5px 1px var(--coral, #FF7B6B);
+  opacity: 0;
+  animation: sparkTravel 6s ease-in-out infinite;
+}
+
+/* One pass around the ring, then a long pause. `transform` and `opacity` only,
+ * so it composites on the GPU and never triggers layout. */
+@keyframes sparkTravel {
+  0%   { opacity: 0; transform: rotate(0deg) translateX(var(--orbit-radius, 15px)) rotate(0deg); }
+  4%   { opacity: 0.9; }
+  16%  { opacity: 0.9; }
+  20%  { opacity: 0; transform: rotate(340deg) translateX(var(--orbit-radius, 15px)) rotate(-340deg); }
+  100% { opacity: 0; transform: rotate(340deg) translateX(var(--orbit-radius, 15px)) rotate(-340deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orbitTrack, .spark { animation: none; }
+  .spark { opacity: 0; }
+}
+
+/* ── "preparing a figure" ─────────────────────────────────────────────────
+ *
+ * A DIFFERENT MOMENT FROM "thinking", and it says so. The tutor's reply has
+ * already arrived; what the learner is waiting for is the figure — the 3D
+ * renderer's own chunk loading and its canvas mounting. Until this existed
+ * that wait was a blank gap that then jumped to full height when the figure
+ * appeared, which is both a layout shift and an unexplained pause.
+ *
+ * The box therefore holds the FIGURE'S OWN aspect ratio and minimum height, so
+ * what replaces it is the same size as what it stood in for and nothing moves.
+ */
+.preparing {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  min-height: 260px;
+  max-height: min(520px, 60vh);
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 16px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
+}
+
+.preparingLabel {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-dim);
+}

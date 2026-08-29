@@ -47,6 +47,12 @@ import {
 } from '@/lib/teaching/visual/sceneAnimation'
 import { usePrefersReducedMotion } from './usePrefersReducedMotion'
 import { availableContrasts, type MisconceptionContrast } from '@/lib/teaching/visual/misconceptionContrast'
+import {
+  availableRepresentations, decorForView, focusForView, linkSymbols, objectsForView,
+  workingLines, type RepresentationView,
+} from '@/lib/teaching/visual/representation'
+import { budgetLabels, complexityFor, labelsHeldBack } from '@/lib/teaching/visual/visualComplexity'
+import { normalizeToCanonicalLevel } from '@/lib/curriculum/levels'
 
 const MODE_LABEL: Record<SceneMode, string> = {
   explain: 'Explain',
@@ -63,14 +69,33 @@ const MODE_HINT: Record<SceneMode, string> = {
   assess: 'Every stated value is hidden. Read the figure alone.',
 }
 
-export function ExplainerFigure({ spec }: { spec: SceneSpec }) {
+export function ExplainerFigure({
+  spec, learnerLevel,
+}: {
+  spec: SceneSpec
+  learnerLevel?: string | null
+}) {
   const { theme } = useTheme()
+
+  // ── adaptive complexity ────────────────────────────────────────────────────
+  // What is shown AT ONCE, never what is true. The geometry, the numbers and
+  // the relationship are identical at every level; a beginner meets fewer of
+  // them at a time and is given more guidance. An absent level is the
+  // intermediate default — the behaviour every figure had before this existed.
+  const policy = useMemo(
+    () => complexityFor(learnerLevel ? normalizeToCanonicalLevel(learnerLevel) : null),
+    [learnerLevel],
+  )
 
   // ── the learner's own parameter values ────────────────────────────────────
   // Seeded from what the scene was built with, so the figure opens exactly as
   // the tutor sent it and only moves when the learner moves it.
   const [params, setParams] = useState<SceneParams | null>(null)
-  const variables = variablesFor(spec.parametric?.kind)
+  const allVariables = variablesFor(spec.parametric?.kind)
+  const variables = useMemo(
+    () => allVariables.slice(0, policy.maxControls),
+    [allVariables, policy.maxControls],
+  )
   const live = params ?? spec.parametric?.params ?? {}
 
   /**
@@ -91,10 +116,15 @@ export function ExplainerFigure({ spec }: { spec: SceneSpec }) {
   }, [spec, params])
 
   const explainer = useMemo(() => deriveExplainer(shown), [shown])
-  const modes = useMemo(() => availableModes(shown), [shown])
+  const modes = useMemo(
+    () => (policy.offerChallengeModes ? availableModes(shown) : ['explain' as const]),
+    [shown, policy.offerChallengeModes],
+  )
 
   const [mode, setMode] = useState<SceneMode>('explain')
-  const [stage, setStage] = useState<number | null>(null)
+  // A beginner opens ON the first stage and walks; everyone else opens
+  // complete, which is the pre-existing behaviour.
+  const [stage, setStage] = useState<number | null>(policy.openStaged ? 1 : null)
   const [revealed, setRevealed] = useState(false)
   // A colour the learner has chosen to isolate, from the legend.
   const [pinnedColor, setPinnedColor] = useState<string | null>(null)
@@ -157,7 +187,10 @@ export function ExplainerFigure({ spec }: { spec: SceneSpec }) {
   // differ (misconceptionContrast.ts). Neither figure is drawn wrongly: they
   // are two correct renderings of two different situations, and what is wrong
   // is the expectation that they would look the same.
-  const contrasts = useMemo(() => availableContrasts(shown), [shown])
+  const contrasts = useMemo(
+    () => (policy.offerContrast ? availableContrasts(shown) : []),
+    [shown, policy.offerContrast],
+  )
   const [contrast, setContrast] = useState<MisconceptionContrast | null>(null)
   const [contrastRevealed, setContrastRevealed] = useState(false)
 
@@ -179,19 +212,11 @@ export function ExplainerFigure({ spec }: { spec: SceneSpec }) {
   const total = Math.max(1, drawn.steps.length)
   const walking = stage !== null
   const animatedStage = playing?.kind === 'stages' ? stageAt(drawn, progress) : null
-  const view = stageView(drawn, animatedStage ?? (walking ? stage! : Infinity), mode)
+  const stageState = stageView(drawn, animatedStage ?? (walking ? stage! : Infinity), mode)
+  const stageObjects = stageState.objects
 
   // Legend focus and stage focus are the same mechanism, so they cannot
   // disagree: a pinned colour names the ids drawn in it.
-  const focusIds = useMemo(() => {
-    if (!pinnedColor) return view.focusIds
-    const ids = drawn.steps
-      .flatMap((s) => s.objects)
-      .filter((o) => o.color === pinnedColor && o.id)
-      .map((o) => o.id as string)
-    return ids.length ? new Set(ids) : view.focusIds
-  }, [pinnedColor, drawn, view.focusIds])
-
   const focusName = pinnedColor
     ? explainer.legend?.find((l) => l.color === pinnedColor)?.label ?? null
     : null
@@ -200,14 +225,45 @@ export function ExplainerFigure({ spec }: { spec: SceneSpec }) {
     setParams((prev) => ({ ...(prev ?? spec.parametric?.params ?? {}), [key]: value }))
   }, [spec])
 
+  // ── representation ─────────────────────────────────────────────────────────
+  const [view, setView] = useState<RepresentationView>('spatial')
+  const representations = useMemo(
+    () => (policy.offerRepresentations ? availableRepresentations(drawn, explainer) : []),
+    [drawn, explainer, policy.offerRepresentations],
+  )
+  // A view the current figure cannot support must not stay selected — a
+  // contrast or a slider can change what the scene states.
+  useEffect(() => {
+    if (!representations.some((r) => r.view === view)) setView('spatial')
+  }, [representations, view])
+
+  const focusIds = useMemo(() => {
+    if (!pinnedColor) {
+      const byView = focusForView(stageObjects, view)
+      return stageState.focusIds.size > 0 ? stageState.focusIds : byView
+    }
+    const ids = drawn.steps
+      .flatMap((s) => s.objects)
+      .filter((o) => o.color === pinnedColor && o.id)
+      .map((o) => o.id as string)
+    return ids.length ? new Set(ids) : stageState.focusIds
+  }, [pinnedColor, drawn, stageState.focusIds, stageObjects, view])
+
   // A trace draws its path up to the marker, so the route appears over time
   // rather than sitting there complete while a dot slides along it.
   const drawnObjects = useMemo(() => {
-    if (playing?.kind !== 'trace') return view.objects
-    const walked = traceObjects(view.objects, playing.objectId, progress)
+    // Order matters: the stage decides what has been REVEALED, the mode decides
+    // what is WITHHELD, and the representation decides what is FOREGROUNDED.
+    // Each narrows the last; none of them rewrites an object.
+    const staged = budgetLabels(objectsForView(stageObjects, view), policy)
+    if (playing?.kind !== 'trace') return staged
+    const walked = traceObjects(staged, playing.objectId, progress)
     const head = tracePlayhead(drawn, playing.objectId, progress)
     return head ? [...walked, head] : walked
-  }, [playing, view.objects, drawn, progress])
+  }, [playing, stageObjects, view, drawn, progress, policy])
+
+  const working = useMemo(() => workingLines(explainer), [explainer])
+  const heldBackLabels = labelsHeldBack(objectsForView(stageObjects, view), policy)
 
   const predicting = mode === 'predict' && !revealed
   /** True in any mode whose whole point is that the learner works it out. */
@@ -262,7 +318,62 @@ export function ExplainerFigure({ spec }: { spec: SceneSpec }) {
 
       <div className={styles.body}>
         <div className={styles.stage}>
-          <SceneSpecRenderer spec={drawn} objects={drawnObjects} focusIds={focusIds} />
+          <SceneSpecRenderer
+            spec={drawn}
+            objects={drawnObjects}
+            focusIds={focusIds}
+            decor={decorForView(view)}
+          />
+
+          {/* ── REPRESENTATION ──────────────────────────────────────────
+              The same objects, told four ways. Offered only as far as this
+              figure can honestly go: a scene with no apparatus has no
+              schematic step, and one that states no relationship has no
+              symbolic one. */}
+          {representations.length > 1 && (
+            <div className={styles.bar} style={{ marginTop: 10 }} role="group" aria-label="How this is shown">
+              {representations.map((r, i) => (
+                <span key={r.view} className={styles.bar}>
+                  {i > 0 && <span className={styles.arrow} aria-hidden="true">→</span>}
+                  <button
+                    type="button"
+                    className={`${styles.chip}${view === r.view ? ` ${styles.chipActive}` : ''}`}
+                    aria-pressed={view === r.view}
+                    onClick={() => setView(r.view)}
+                    title={r.teaches}
+                  >
+                    {r.label}
+                  </button>
+                </span>
+              ))}
+            </div>
+          )}
+
+          {view !== 'spatial' && (
+            <p className={styles.note}>
+              {representations.find((r) => r.view === view)?.teaches}
+            </p>
+          )}
+
+          {/* The working, raised beside the figure, with each symbol painted in
+              the colour of the object it stands for — the mapping a learner is
+              otherwise asked to make in their head. */}
+          {(view === 'symbolic' || view === 'numeric') && working.length > 0 && (
+            <div className={styles.working}>
+              {working.map((line, i) => (
+                <p key={`${line}-${i}`} className={styles.workingLine}>
+                  {linkSymbols(line, explainer.legend ?? []).map((token, j) => (
+                    <span key={j} style={token.color ? { color: themeColor(token.color, theme), fontWeight: 800 } : undefined}>
+                      {token.text}
+                    </span>
+                  ))}
+                </p>
+              ))}
+              {view === 'numeric' && explainer.result?.value && !answerWithheld && (
+                <p className={styles.workingResult}>{explainer.result.value}</p>
+              )}
+            </div>
+          )}
 
           <div className={styles.bar} style={{ marginTop: 10 }}>
             {total > 1 && (
@@ -277,8 +388,8 @@ export function ExplainerFigure({ spec }: { spec: SceneSpec }) {
                   <ChevronLeft size={14} />
                 </button>
                 <span className={styles.stageMeta}>
-                  {walking ? `Stage ${view.stage} of ${total}` : `${total} stages`}
-                  {view.intent ? ` · ${view.intent}` : ''}
+                  {walking ? `Stage ${stageState.stage} of ${total}` : `${total} stages`}
+                  {stageState.intent ? ` · ${stageState.intent}` : ''}
                 </span>
                 <button
                   type="button"
@@ -438,6 +549,13 @@ export function ExplainerFigure({ spec }: { spec: SceneSpec }) {
             </div>
           )}
 
+          {heldBackLabels > 0 && (
+            <p className={styles.note}>
+              {heldBackLabels} more {heldBackLabels === 1 ? 'label is' : 'labels are'} on this figure —
+              walk the stages to meet them one at a time.
+            </p>
+          )}
+
           {focusName && (
             <p className={styles.note} role="status">
               Focused on <strong>{focusName}</strong>. The rest of the figure is dimmed, not removed.
@@ -447,19 +565,19 @@ export function ExplainerFigure({ spec }: { spec: SceneSpec }) {
           {mode !== 'explain' && (
             <p className={styles.note}>
               {MODE_HINT[mode]}
-              {view.withheldCount > 0 && ` (${view.withheldCount} hidden)`}
+              {stageState.withheldCount > 0 && ` (${stageState.withheldCount} hidden)`}
             </p>
           )}
 
-          {walking && view.narration && <p className={styles.narration} style={{ marginTop: 8 }}>{view.narration}</p>}
+          {walking && stageState.narration && <p className={styles.narration} style={{ marginTop: 8 }}>{stageState.narration}</p>}
 
           {predicting && (
             <div className={styles.predict} style={{ marginTop: 10 }}>
               <p className={styles.panelBody} style={{ color: 'var(--text-primary)' }}>
-                {view.predict?.question ?? 'What do you think the result will be?'}
+                {stageState.predict?.question ?? 'What do you think the result will be?'}
               </p>
               <div className={styles.predictOptions}>
-                {view.predict?.options?.map((opt) => (
+                {stageState.predict?.options?.map((opt) => (
                   <button key={opt} type="button" className={styles.chip} onClick={() => setRevealed(true)}>
                     {opt}
                   </button>
@@ -519,6 +637,7 @@ export function ExplainerFigure({ spec }: { spec: SceneSpec }) {
                   variable={v}
                   value={live[v.key] ?? defaultValueOf(v)}
                   idPrefix={shown.id}
+                  showEffect={policy.showEffects}
                   onChange={setVar}
                 />
               ))}
@@ -544,11 +663,18 @@ export function ExplainerFigure({ spec }: { spec: SceneSpec }) {
  * that survives a screen reader or `prefers-reduced-motion`.
  */
 function Control({
-  variable, value, idPrefix, onChange,
+  variable, value, idPrefix, showEffect, onChange,
 }: {
   variable: SceneVariable
   value: number | string
   idPrefix: string
+  /**
+   * Print the causal claim under the control. On for a beginner, who needs the
+   * guidance; off for an advanced learner, for whom that sentence states the
+   * thing they are there to work out. The claim is never DELETED — it stays on
+   * the control as its accessible description either way.
+   */
+  showEffect: boolean
   onChange: (key: string, value: number | string) => void
 }) {
   const id = `${idPrefix}-${variable.key}`
@@ -570,7 +696,7 @@ function Control({
             </button>
           ))}
         </div>
-        <p id={`${id}-effect`} className={styles.effect}>{variable.effect}</p>
+        <p id={`${id}-effect`} className={styles.effect} hidden={!showEffect}>{variable.effect}</p>
       </div>
     )
   }
@@ -593,7 +719,7 @@ function Control({
         onChange={(e) => onChange(variable.key, Number(e.target.value))}
       />
       <output className={styles.controlValue} htmlFor={id}>{numeric}</output>
-      <p id={`${id}-effect`} className={styles.effect}>{variable.effect}</p>
+      <p id={`${id}-effect`} className={styles.effect} hidden={!showEffect}>{variable.effect}</p>
     </div>
   )
 }

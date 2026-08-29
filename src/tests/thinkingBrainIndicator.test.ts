@@ -34,8 +34,8 @@ import { readFileSync } from 'fs'
 import { join } from 'path'
 import postcss from 'postcss'
 import type { ReactElement, ReactNode } from 'react'
-import { ThinkingBrain } from '@/components/learn/LessonScreen'
-import styles from '@/components/learn/LessonScreen.module.css'
+import { ThinkingBrain, VisualPreparing } from '@/components/learn/ThinkingBrain'
+import styles from '@/components/learn/ThinkingBrain.module.css'
 
 /** Every element type in the tree, in document order — including the root. */
 function collectTypes(node: ReactNode, out: string[] = []): string[] {
@@ -109,7 +109,7 @@ describe('B — the indicator can never wrap or split across two lines', () => {
 })
 
 describe('B (CSS) — the compiled stylesheet actually enforces no-wrap containment', () => {
-  const css = readFileSync(join(__dirname, '../components/learn/LessonScreen.module.css'), 'utf8')
+  const css = readFileSync(join(__dirname, '../components/learn/ThinkingBrain.module.css'), 'utf8')
   const root = postcss.parse(css)
 
   function declOf(selector: string, prop: string): string | undefined {
@@ -138,7 +138,7 @@ describe('B (CSS) — the compiled stylesheet actually enforces no-wrap containm
 })
 
 describe('C — reduced motion: a calm, static composition, not merely paused mid-animation', () => {
-  const css = readFileSync(join(__dirname, '../components/learn/LessonScreen.module.css'), 'utf8')
+  const css = readFileSync(join(__dirname, '../components/learn/ThinkingBrain.module.css'), 'utf8')
   const root = postcss.parse(css)
 
   function reducedMotionDecls(): Record<string, string[]> {
@@ -183,5 +183,102 @@ describe('the old blinking dots are genuinely gone, not just unused', () => {
     const globalsCss = readFileSync(join(__dirname, '../app/globals.css'), 'utf8')
     expect(globalsCss).not.toMatch(/\.typing-dot\b/)
     expect(globalsCss).not.toMatch(/@keyframes\s+bounceDot\b/)
+  })
+})
+
+// ─── The completion pass: orbital ring, travelling spark, preparing state ────
+
+describe('D — the orbital ring and the travelling spark', () => {
+  const css = readFileSync(join(__dirname, '../components/learn/ThinkingBrain.module.css'), 'utf8')
+  const tree = ThinkingBrain({ label: 'Thinking' }) as any
+  const stage = tree.props.children[0]
+  const stageChildren = (Array.isArray(stage.props.children) ? stage.props.children : [stage.props.children]).flat()
+
+  it('draws a real ring, not an implied one — a particle orbiting nothing reads as a stray dot', () => {
+    expect(stageChildren.some((c: any) => c?.props?.className === styles.orbitTrack)).toBe(true)
+    expect(css).toMatch(/\.orbitTrack\s*\{[^}]*border:/)
+    expect(css).toMatch(/\.orbitTrack\s*\{[^}]*border-radius:\s*50%/)
+  })
+
+  it('turns the ring SLOWLY, and against the inner particle', () => {
+    const rule = /\.orbitTrack\s*\{([^}]*)\}/.exec(css)![1]
+    const duration = Number(/animation:[^;]*?(\d+(?:\.\d+)?)s/.exec(rule)![1])
+    expect(duration).toBeGreaterThanOrEqual(5)
+    expect(rule).toContain('reverse')
+  })
+
+  it('carries a spark that is absent most of the time, by construction', () => {
+    expect(stageChildren.some((c: any) => c?.props?.className === styles.spark)).toBe(true)
+    const frames = /@keyframes sparkTravel\s*\{([\s\S]*?)\n\}/.exec(css)![1]
+    // Visible for a fifth of the cycle; transparent from 20% to 100%.
+    expect(frames).toMatch(/20%[^}]*opacity:\s*0/)
+    expect(frames).toMatch(/100%[^}]*opacity:\s*0/)
+    expect(frames).toMatch(/4%[^}]*opacity:\s*0\.9/)
+  })
+
+  it('animates the spark on compositor-only properties, so it can never cause layout', () => {
+    const frames = /@keyframes sparkTravel\s*\{([\s\S]*?)\n\}/.exec(css)![1]
+    const properties = [...frames.matchAll(/([a-z-]+)\s*:/g)].map((m) => m[1])
+    expect([...new Set(properties)].sort()).toEqual(['opacity', 'transform'])
+  })
+
+  it('sizes the spark orbit from the stage, so it tracks the ring at any size', () => {
+    const style = stage.props.style
+    expect(style['--orbit-radius']).toBe('16px')       // default size 34
+    const big = ThinkingBrain({ label: 'x', size: 48 }) as any
+    expect(big.props.children[0].props.style['--orbit-radius']).toBe('22px')
+  })
+
+  it('stops both under reduced motion, and leaves no spark hanging mid-orbit', () => {
+    const block = /@media \(prefers-reduced-motion: reduce\)\s*\{([\s\S]*?)\n\}/g
+    const blocks = [...css.matchAll(block)].map((m) => m[1]).join('\n')
+    expect(blocks).toMatch(/\.orbitTrack, \.spark \{ animation: none; \}/)
+    expect(blocks).toMatch(/\.spark \{ opacity: 0; \}/)
+  })
+
+  it('keeps the whole loop in the 1.5-2s band for the parts that read as a pulse', () => {
+    for (const name of ['brainBreathe', 'brainGlowPulse']) {
+      const rule = new RegExp(`animation:\\s*${name}\\s+(\\d+(?:\\.\\d+)?)s`)
+      const seconds = Number(rule.exec(css)![1])
+      expect(seconds, name).toBeGreaterThanOrEqual(1.5)
+      expect(seconds, name).toBeLessThanOrEqual(2.5)
+    }
+  })
+})
+
+describe('E — "preparing the figure" is a different moment, and says so', () => {
+  const css = readFileSync(join(__dirname, '../components/learn/ThinkingBrain.module.css'), 'utf8')
+  const tree = VisualPreparing({}) as any
+
+  it('announces itself politely rather than as an alert', () => {
+    expect(tree.props.role).toBe('status')
+    expect(tree.props['aria-live']).toBe('polite')
+    expect(tree.props['aria-label']).toContain('figure')
+  })
+
+  it('says something different from "thinking" — the tutor has already replied', () => {
+    const label = tree.props['aria-label'] as string
+    expect(label.toLowerCase()).not.toContain('thinking')
+    expect(label.toLowerCase()).toContain('preparing')
+  })
+
+  it('reserves the FIGURE\'s own box, so nothing moves when the figure lands', () => {
+    const rule = /\.preparing\s*\{([^}]*)\}/.exec(css)![1]
+    // The same three terms ThreeDVisual sizes its canvas with.
+    expect(rule).toMatch(/aspect-ratio:\s*4 \/ 3/)
+    expect(rule).toMatch(/min-height:\s*260px/)
+    expect(rule).toMatch(/max-height:\s*min\(520px, 60vh\)/)
+  })
+
+  it('reuses the indicator rather than inventing a second visual language', () => {
+    const children = (Array.isArray(tree.props.children) ? tree.props.children : [tree.props.children]).flat()
+    expect(children.some((c: any) => c?.type === ThinkingBrain)).toBe(true)
+  })
+
+  it('is quieter than the thinking indicator — a smaller glyph, its own words', () => {
+    const children = (Array.isArray(tree.props.children) ? tree.props.children : [tree.props.children]).flat()
+    const brain = children.find((c: any) => c?.type === ThinkingBrain)
+    expect(brain.props.size).toBeLessThan(34)
+    expect(brain.props.compact).toBe(true)
   })
 })

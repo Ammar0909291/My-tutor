@@ -85,15 +85,24 @@ const VISUAL_FRAME: React.CSSProperties = {
   animation: 'fadeIn 300ms ease-out both',
 }
 
+// The indicator lives in its own module so the "preparing a figure" state can
+// share its visual language without importing this file. Re-exported under its
+// original name: every existing importer, and the regression suite, are
+// unchanged by the move.
+export { ThinkingBrain } from './ThinkingBrain'
+import { ThinkingBrain, VisualPreparing } from './ThinkingBrain'
+
 const SceneSpecFigure = dynamic(
   () => import('@/components/school/visuals/SceneSpecFigure').then((m) => m.SceneSpecFigure),
-  { ssr: false },
+  // `loading` is what turns a blank gap into a stated wait, and it reserves the
+  // figure's own box so the page does not jump when the figure lands.
+  { ssr: false, loading: () => <VisualPreparing /> },
 )
 // Renders inside a sandboxed iframe (see DynamicVisualRenderer.tsx) — no need
 // for SSR since it has nothing to render until the AI response arrives.
 const DynamicVisualRenderer = dynamic(
   () => import('@/components/learn/DynamicVisualRenderer').then((m) => m.DynamicVisualRenderer),
-  { ssr: false },
+  { ssr: false, loading: () => <VisualPreparing /> },
 )
 
 // ─── Config ───────────────────────────────────────────────────────────────────
@@ -488,59 +497,6 @@ function LessonDocument({ text }: { text: string }) {
         )
       })}
     </div>
-  )
-}
-
-// ─── Tutor Max "thinking" indicator ─────────────────────────────────────────
-// Replaces the old blinking `•••` dots (bounceDot / .typing-dot in
-// globals.css — now unused by this component; left in place only in case
-// another surface still references it, see the search note in the CSS
-// module). A breathing brain glyph with two orbiting sparkle particles and a
-// soft pulsing glow, built entirely from CSS animation on lucide-react's
-// already-shipped Brain/Sparkle icons — no GIF, no new SVG paths to author
-// and risk looking amateurish, no new dependency.
-//
-// ONE ATOMIC, NON-WRAPPING ELEMENT (see the root-cause note in
-// LessonScreen.module.css's `.thinkingBrain` rule): the icon stage is
-// `flex-shrink: 0` so it is never the thing that gives way, and only the
-// trailing label is allowed to ellipsis if space is ever genuinely
-// insufficient — the indicator can shrink, but it can never split onto a
-// second line.
-//
-// `compact` renders the icon alone, for spots with no room for text (the
-// full-screen lesson-loading state). The per-message empty-streaming-bubble
-// slot below intentionally uses the NON-compact (icon + label) form: the
-// "Tutor Max" avatar/name row just above it is explicitly hidden while
-// `msg.streaming` is true (see the `!msg.streaming` guard on that row), so
-// during exactly the window this indicator is visible there is no other
-// "Tutor Max" affiliation shown at all — the label here is load-bearing, not
-// redundant. (An earlier version of this component ALSO rendered a second,
-// separate "between-turns" Pill with its own label immediately after the
-// message list, on the theory that it covered a different moment than this
-// one. It didn't: both `setIsStreaming(true)` and the empty placeholder
-// message are appended in the same synchronous update in every send path,
-// so the two conditions were always true at once — a visible double-brain
-// render, not two indicators for two moments. That second Pill was removed;
-// this is the only "thinking" indicator in the message stream.)
-// Both pass `label` explicitly because this is a module-level, pure,
-// presentational function — it has no hook access to `useLanguage()`'s `t`,
-// by the same design as every other helper in this file (AiBadge,
-// MessageContent, ...) — and that keeps it trivially testable in isolation.
-export function ThinkingBrain({ label, compact = false, size = 34 }: { label: string; compact?: boolean; size?: number }) {
-  return (
-    <span className={styles.thinkingBrain} role="status" aria-label={label}>
-      <span className={styles.brainStage} style={{ width: size, height: size }} aria-hidden="true">
-        <span className={styles.brainGlow} />
-        <Brain size={Math.round(size * 0.6)} strokeWidth={1.75} className={styles.brainIcon} />
-        <span className={`${styles.orbitRing} ${styles.orbitRing1}`}>
-          <span className={styles.particleDot}><Sparkle size={Math.max(9, Math.round(size * 0.26))} strokeWidth={1.5} /></span>
-        </span>
-        <span className={`${styles.orbitRing} ${styles.orbitRing2}`}>
-          <span className={styles.particleDot}><Sparkle size={Math.max(7, Math.round(size * 0.18))} strokeWidth={1.5} /></span>
-        </span>
-      </span>
-      {!compact && <span className={styles.thinkingLabel}>{label}</span>}
-    </span>
   )
 }
 
@@ -940,6 +896,12 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   const historyScrolledRef = useRef(false)
   const [subjectMenuOpen, setSubjectMenuOpen] = useState(false)
   const [maximizedPanel, setMaximizedPanel] = useState<PanelName | null>(null)
+  // ADAPTIVE VISUAL COMPLEXITY. The learner's canonical level, as the server
+  // reports it each turn (see the note at its response site in
+  // api/learn/chat/route.ts). Held here rather than on each message because it
+  // describes the learner, not the turn; undefined until the first reply, which
+  // renders figures at the intermediate default.
+  const [learnerLevel, setLearnerLevel] = useState<string | undefined>(undefined)
 
   // Voice
   const [voiceType, setVoiceType] = useState<VoiceType>(() => resolveVoice(voiceChoice))
@@ -1732,7 +1694,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     const aid = `a-${Date.now()}`
     setMessages((p) => [...p, { id: aid, role: 'assistant', content: '', ts: Date.now(), streaming: true }])
     let res: Response | undefined
-    let data: { success?: boolean; text?: string; provider?: 'yandex'|'groq'|'fallback'; llmCallCount?: number; visual?: string; visualSpec?: unknown; sceneSpec?: unknown; dynamicVisualizationCode?: unknown; inlinePractice?: unknown; hint?: unknown; error?: any; lessonOrder?: number; completedLessons?: number[]; mastery?: { verified?: boolean; gatePending?: boolean; completionSuppressed?: boolean; phase?: string; checkCorrect?: number; practiceCorrect?: number }; mcq?: { question?: string; options?: string[]; correctIndex?: number }; lessonComplete?: { complete?: boolean; lessonTitle?: string | null; durationSeconds?: number | null; mastered?: string[]; needsReview?: string[]; nextLessonOrder?: number | null; fullyMastered?: boolean } } = {}
+    let data: { success?: boolean; text?: string; provider?: 'yandex'|'groq'|'fallback'; llmCallCount?: number; visual?: string; visualSpec?: unknown; sceneSpec?: unknown; learnerLevel?: string; dynamicVisualizationCode?: unknown; inlinePractice?: unknown; hint?: unknown; error?: any; lessonOrder?: number; completedLessons?: number[]; mastery?: { verified?: boolean; gatePending?: boolean; completionSuppressed?: boolean; phase?: string; checkCorrect?: number; practiceCorrect?: number }; mcq?: { question?: string; options?: string[]; correctIndex?: number }; lessonComplete?: { complete?: boolean; lessonTitle?: string | null; durationSeconds?: number | null; mastered?: string[]; needsReview?: string[]; nextLessonOrder?: number | null; fullyMastered?: boolean } } = {}
     try {
       // P0 (duplicate AI responses — proven root cause): retry ONLY a thrown/
       // aborted fetch (a dropped connection, or fetchWithTimeout's own abort
@@ -2004,7 +1966,8 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       // APPEND the reply instead of silently dropping it via a no-op map —
       // the tutor's answer must never vanish because of a state race.
       setMessages((p) => {
-        const landed = { content: full, streaming: false as const, provider, llmCallCount: data.llmCallCount, visual: responseVisual, visualSpec: responseVisualSpec, sceneSpec: responseSceneSpec, dynamicVisualizationCode: responseDynamicVisualizationCode, inlinePractice: responseInlinePractice, hint: responseHint }
+        if (typeof data.learnerLevel === 'string') setLearnerLevel(data.learnerLevel)
+      const landed = { content: full, streaming: false as const, provider, llmCallCount: data.llmCallCount, visual: responseVisual, visualSpec: responseVisualSpec, sceneSpec: responseSceneSpec, dynamicVisualizationCode: responseDynamicVisualizationCode, inlinePractice: responseInlinePractice, hint: responseHint }
         return p.some((m) => m.id === aid)
           ? p.map((m) => m.id === aid ? { ...m, ...landed } : m)
           : [...p, { id: aid, role: 'assistant' as const, ts: Date.now(), ...landed }]
@@ -4972,7 +4935,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                         message, so a reply never carries both. */}
                     {!isUser && !msg.streaming && msg.sceneSpec && (
                       <div style={hasCanvasVisual ? CANVAS_VISUAL_FRAME : VISUAL_FRAME}>
-                        <SceneSpecFigure spec={msg.sceneSpec} />
+                        <SceneSpecFigure spec={msg.sceneSpec} learnerLevel={learnerLevel} />
                       </div>
                     )}
 

@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { normalizeToCanonicalLevel } from '@/lib/curriculum/levels'
 import { z } from 'zod'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
@@ -8197,6 +8198,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         memoryFallbackReason: memoryFallbackReasonCode,
         visual: responseVisual ?? undefined, visualSpec: detectedVisualSpec ?? undefined,
         sceneSpec: detectedSceneSpec ?? undefined,
+        // ADAPTIVE VISUAL COMPLEXITY (visual/visualComplexity.ts). The level
+        // travels with the TURN, never with the scene: a SceneSpec is cached
+        // and shared between learners, so stamping a per-learner level into it
+        // would make one learner's pitch another learner's figure. The client
+        // applies the policy at render time; an absent value is the
+        // intermediate default, i.e. exactly what every figure did before.
+        learnerLevel: normalizeToCanonicalLevel(profile?.currentLevel),
         dynamicVisualizationCode: dynamicVisualizationCode ?? undefined,
         inlinePractice: undefined,
         hint: hintHoisted ?? undefined,

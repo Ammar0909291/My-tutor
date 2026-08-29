@@ -222,12 +222,19 @@ interface SceneSpecRendererProps {
    * means the whole scene is in focus.
    */
   focusIds?: ReadonlySet<string>
+  /**
+   * Draw the ground plane and axis triad. Defaults to whatever the scene
+   * declares; the representation layer overrides it, because only the SPATIAL
+   * view is about space — keeping the ground under a schematic makes the
+   * schematic look like a worse 3D scene rather than a cleaner idea.
+   */
+  decor?: boolean
 }
 
 const NO_FOCUS: ReadonlySet<string> = new Set()
 
 export function SceneSpecRenderer({
-  spec, revealStep = Infinity, objects: given, focusIds = NO_FOCUS,
+  spec, revealStep = Infinity, objects: given, focusIds = NO_FOCUS, decor: decorOverride,
 }: SceneSpecRendererProps) {
   // Read HERE, not inside the scene graph: <Canvas> mounts its own React
   // reconciler root, and app context does not cross that boundary. renderObject
@@ -239,7 +246,7 @@ export function SceneSpecRenderer({
   // the camera is actually showing rather than at a guessed radius.
   const bounds = sceneBounds(objects, spec.cameraDistance ?? 7)
   const decor = spec.stage
-  const spatial = decor?.grid !== false || decor?.axes !== false
+  const spatial = (decor?.grid !== false || decor?.axes !== false) && decorOverride !== false
   return (
     <ThreeDVisual
       revealStep={revealStep}
