@@ -199,8 +199,30 @@ utterances spent the affect budget and forced the episode into CLOSING, which
 denies authored probes. Deployed, and the run that produced the 5.7/10 finding
 predates it.
 
-**Open:** whether mastery closes within 20 turns. A re-run at the corrected
-budget is the falsifiable test and is the next thing to do.
+### Measured: three runs of the same 12-concept seeded sample
+
+Same seed, same concepts, all six difficulty tiers, run against the deployed app
+after each fix. Provider-degraded sessions are excluded as UNMEASURED rather
+than counted as failures.
+
+| run | visual | verified mastery |
+|---|---|---|
+| qa3 baseline (harness fixes only) | 10/12 | **5/12 (42%)** |
+| qa4 after the manner-adverb fix | 11/12 | 5/12 (42%) |
+| qa5 after the budget-extension fix | 9/11 | **8/11 (73%)** |
+
+The manner-adverb fix did NOT move the aggregate, and that is reported rather
+than smoothed: it cleared a real contamination (`phys.qm.hydrogen-atom-qm` went
+from stalling in GUIDE under English adverb drills to reaching CHECK) without
+changing how many concepts closed. The budget-extension fix is what moved the
+number.
+
+**Do not read 73% as a pass.** At n=11 the 95% interval is roughly +/-26 points,
+and per-concept churn between runs is large — `phys.particle.neutrinos` and
+`phys.em.magnetic-field` each mastered in one run and not another with no code
+change between them. This is a strong signal that the bottleneck was real and is
+now released; it is not yet the >=60-concept evidence completion criterion 2
+asks for.
 
 ---
 
