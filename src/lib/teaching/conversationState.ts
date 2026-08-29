@@ -133,6 +133,12 @@ export interface ConversationState {
   demonstrated: boolean
   correctAtCheck: number
   correctAtPractice: number
+  /**
+   * Graded-correct answers at ANY rung. Read only by
+   * `qualifiesForBudgetExtension`; never by a mastery gate. Optional so a
+   * snapshot written before this field existed deserialises unchanged.
+   */
+  correctAnswersTotal?: number
   remediationCount: number
   diagramRequests: number
   exampleRequests: number
@@ -221,6 +227,7 @@ export function initialConversationState(conceptId: string | null): Conversation
     demonstrated: false,
     correctAtCheck: 0,
     correctAtPractice: 0,
+    correctAnswersTotal: 0,
     remediationCount: 0,
     diagramRequests: 0,
     exampleRequests: 0,
@@ -948,6 +955,29 @@ export function advanceConversationState(
     // particular a bare "Got it" does NOT clear it: an acknowledgement is not
     // evidence, masteryGate already refuses it, and that stays true here.
     next.remediationCount = 0
+
+    /**
+     * EVERY graded-correct answer, at whatever rung it was given.
+     *
+     * NOT a mastery counter and it must never become one. `correctAtCheck` and
+     * `correctAtPractice` remain the only evidence the gates read, and the
+     * switch below is untouched — a correct answer at GUIDE still credits
+     * nothing, because GUIDE is a delivery phase and the hollow-advancement
+     * protection lives at the gates.
+     *
+     * It exists for ONE reader: `qualifiesForBudgetExtension`. See that
+     * function for the measured dead-end — a learner who answers correctly at
+     * GUIDE advances the ladder, earns no gate credit BY DESIGN, and is then
+     * denied the very extension written for them because their credit is zero.
+     * The extension buys turns and never certification, so answering this
+     * question with "did the learner ever actually answer something right"
+     * cannot weaken the mastery bar.
+     *
+     * Set from `prev` with a `?? 0` default, so a session whose snapshot
+     * predates this field starts at zero rather than NaN.
+     */
+    next.correctAnswersTotal = (prev.correctAnswersTotal ?? 0) + 1
+
     const verified = evidence.signalVerificationStatus === 'CLEAN' || evidence.signalVerificationStatus === undefined
     switch (prev.phase) {
       case 'OBSERVE':

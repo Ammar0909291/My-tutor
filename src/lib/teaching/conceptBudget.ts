@@ -73,7 +73,38 @@ export function qualifiesForBudgetExtension(state: ConversationState): boolean {
   // Already finished: there is nothing to extend, and granting here would put a
   // spurious flag on a concept that closed by mastery.
   if (hasDemonstratedMastery(state)) return false
-  if ((state.correctAtCheck ?? 0) + (state.correctAtPractice ?? 0) < 1) return false
+  // CONVERTING, MEASURED AT THE RUNG THE ANSWER WAS ACTUALLY GIVEN AT.
+  //
+  // This read used to be `correctAtCheck + correctAtPractice >= 1`, and that
+  // is precisely the case the extension was written for and could not serve.
+  // A correct answer given at GUIDE advances the ladder GUIDE -> CHECK and
+  // credits NOTHING (see conversationState's phase switch — GUIDE is a
+  // delivery phase, and that is correct). So a learner who converts on the
+  // GUIDE turn arrives at CHECK with zero gate credit, the base budget then
+  // expires, and the extension was denied *because* of the design decision
+  // that produced their situation. Double-penalised at the exact moment they
+  // started succeeding.
+  //
+  // Measured 2026-08-29 across a 12-concept struggling-learner sweep of
+  // physics: 7 of 12 concepts closed as needsReview at the hard stop, and in
+  // every one of them the learner had answered a keyed MCQ CORRECTLY on the
+  // turn that carried them GUIDE -> CHECK. phys.em.coulombs-law and
+  // phys.mech.moment-of-inertia are the two traced turn by turn.
+  //
+  // `correctAnswersTotal` counts a graded-correct answer at whatever rung it
+  // was given. It is NOT a mastery counter and no gate reads it. This is safe
+  // precisely because of what the extension is: it buys TURNS and never
+  // certification — mastery remains `hasDemonstratedMastery`, still from
+  // server-graded evidence at an assessed rung. A learner who answers
+  // correctly once and then cannot answer again still closes as needsReview;
+  // they simply get the turns to try.
+  //
+  // An acknowledgement still buys nothing: `correctAnswersTotal` moves only on
+  // the succeeded-evidence path, which a bare "got it" never takes.
+  const answeredSomethingRight =
+    (state.correctAtCheck ?? 0) + (state.correctAtPractice ?? 0) >= 1 ||
+    (state.correctAnswersTotal ?? 0) >= 1
+  if (!answeredSomethingRight) return false
   if ((state.consecutiveFailures ?? 0) !== 0) return false
   return state.phase === 'CHECK' || state.phase === 'PRACTICE' || state.phase === 'TRANSFER'
 }
