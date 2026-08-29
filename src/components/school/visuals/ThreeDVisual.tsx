@@ -7,9 +7,10 @@
  * contents as children and plug into the existing VisualCard revealStep
  * contract exactly like every SVG visual.
  */
-import { Suspense, useEffect, useRef, useState, type ReactNode } from 'react'
+import { Suspense, useEffect, useRef, type ReactNode } from 'react'
 import { Canvas, useThree } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
+import { usePrefersReducedMotion } from './usePrefersReducedMotion'
 
 interface ThreeDVisualProps {
   /** Scene contents (meshes, points, lights beyond the defaults) — engine-agnostic host. */
@@ -31,18 +32,6 @@ interface ThreeDVisualProps {
   autoRotate?: boolean
 }
 
-/** Detects the user's OS-level reduced-motion preference (no new narration/animation architecture — purely gates autorotation). */
-function usePrefersReducedMotion(): boolean {
-  const [reduced, setReduced] = useState(false)
-  useEffect(() => {
-    const mql = window.matchMedia('(prefers-reduced-motion: reduce)')
-    setReduced(mql.matches)
-    const onChange = () => setReduced(mql.matches)
-    mql.addEventListener('change', onChange)
-    return () => mql.removeEventListener('change', onChange)
-  }, [])
-  return reduced
-}
 
 
 /**

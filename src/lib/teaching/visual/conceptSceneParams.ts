@@ -40,17 +40,10 @@ import {
 } from '@/lib/teaching/sceneGenerators/physicsPilot'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
-import { buildPunnettSquareScene } from '@/lib/teaching/sceneGenerators/punnettSquare'
-import { buildEcologicalPyramidScene } from '@/lib/teaching/sceneGenerators/ecologicalPyramid'
-import { buildDNAStructureScene } from '@/lib/teaching/sceneGenerators/dnaStructure'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
-import { buildLogicGateScene } from '@/lib/teaching/sceneGenerators/logicGate'
-import { buildERDiagramScene } from '@/lib/teaching/sceneGenerators/erDiagram'
-import { buildPeriodicTrendScene } from '@/lib/teaching/sceneGenerators/periodicTrends'
 import { buildTimelineScene } from '@/lib/teaching/sceneGenerators/historicalTimeline'
 import { buildOrgChartScene } from '@/lib/teaching/sceneGenerators/civicsOrgChart'
 import { buildDemographicPyramidScene } from '@/lib/teaching/sceneGenerators/demographicPyramid'
-import { buildEconomicsCurveScene } from '@/lib/teaching/sceneGenerators/economicsCurves'
 
 /**
  * A canonical figure from the variable registry.
@@ -77,22 +70,15 @@ const CANONICAL_SCENES: Record<string, () => SceneSpec> = {
   // zero-length velocity vector, which the scene validator correctly rejects.
   collision:       () => fromRegistry('collision'),
   torque_diagram:  () => fromRegistry('torque_diagram'),
-  gravitation_orbit: () => buildGravitationOrbitScene({ centralMass: 5.97e24, orbitRadius: 7.0e6 }),
+  gravitation_orbit: () => fromRegistry('gravitation_orbit'),
   ray_optics:      () => fromRegistry('ray_optics'),
-  electric_circuit: () => buildCircuitScene({
-    components: [
-      { type: 'resistor', value: 10, unit: 'ohm' },
-      { type: 'resistor', value: 20, unit: 'ohm' },
-    ],
-    connection: 'series',
-    voltage: 12,
-  }),
+  electric_circuit: () => fromRegistry('electric_circuit'),
   kinematics_graphs: () => fromRegistry('kinematics_graphs'),
 
   // ── mathematics ──
   vector:   () => fromRegistry('vector'),  // the 3-4-5 case
   triangle: () => fromRegistry('triangle'),
-  calculus_graph: () => buildCalculusGraphScene({ functionType: 'polynomial', coefficients: [1, -4, 3], domainMin: -1, domainMax: 5 }),
+  calculus_graph: () => fromRegistry('calculus_graph'),
   coordinate_geometry_line: () => fromRegistry('coordinate_geometry_line'),
   heights_and_distances: () => fromRegistry('heights_and_distances'),
   statistics_bar_chart: () => buildStatisticsBarChartScene({
@@ -107,23 +93,17 @@ const CANONICAL_SCENES: Record<string, () => SceneSpec> = {
   electron_shells:  () => fromRegistry('electron_shells'),
   lattice:          () => fromRegistry('lattice'),
   molecule:         () => fromRegistry('molecule'),
-  periodic_trends:  () => buildPeriodicTrendScene({ element1Symbol: 'Na', element2Symbol: 'Cl' }),
+  periodic_trends:  () => fromRegistry('periodic_trends'),
 
   // ── biology ──
-  punnett_square:     () => buildPunnettSquareScene({ parent1Genotype: 'Aa', parent2Genotype: 'Aa' }),
-  ecological_pyramid: () => buildEcologicalPyramidScene({ trophicLevels: ['Producers', 'Herbivores', 'Carnivores'], baseEnergy: 10000 }),
-  dna_structure:      () => buildDNAStructureScene({ sequence: 'ATGC' }),
-  cell_division:      () => buildCellDivisionScene({ divisionType: 'mitosis' }),
+  punnett_square:     () => fromRegistry('punnett_square'),
+  ecological_pyramid: () => fromRegistry('ecological_pyramid'),
+  dna_structure:      () => fromRegistry('dna_structure'),
+  cell_division:      () => fromRegistry('cell_division'),
 
   // ── computer science ──
-  logic_gate: () => buildLogicGateScene({ gateType: 'AND', inputs: [true, false] }),
-  er_diagram: () => buildERDiagramScene({
-    entities: [
-      { name: 'Student', attributes: ['id', 'name'] },
-      { name: 'Course', attributes: ['code', 'title'] },
-    ],
-    relationships: [{ from: 'Student', to: 'Course', cardinality: 'many-to-many' }],
-  }),
+  logic_gate: () => fromRegistry('logic_gate'),
+  er_diagram: () => fromRegistry('er_diagram'),
 
   // ── humanities (generators exist; registry may bind them later) ──
   historical_timeline: () => buildTimelineScene({
@@ -149,10 +129,7 @@ const CANONICAL_SCENES: Record<string, () => SceneSpec> = {
       { label: '65+', malePct: 15, femalePct: 18 },
     ],
   }),
-  economics_curves: () => buildEconomicsCurveScene({
-    curveType: 'both', shiftDirection: 'none',
-    equilibriumPrice: 50, equilibriumQuantity: 100,
-  }),
+  economics_curves: () => fromRegistry('economics_curves'),
 }
 
 /**

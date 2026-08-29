@@ -11,16 +11,43 @@
 import { describe, expect, it } from 'vitest'
 import {
   canonicalParametricScene, defaultValueOf, isParametricKind, PARAMETRIC_SCENES,
-  rebuildScene, variablesFor,
+  rebuildScene, UNREGISTERED_BY_DESIGN, variablesFor,
 } from '@/lib/teaching/visual/parametricScenes'
+import { ACTIVATED_SCENE_KINDS } from '@/lib/teaching/visual/conceptSceneParams'
 import { validateSceneSpec } from '@/lib/teaching/sceneSpecValidator'
 import { buildCanonicalScene } from '@/lib/teaching/visual/conceptSceneParams'
 
 const KINDS = Object.keys(PARAMETRIC_SCENES)
 
+describe('every generator is either registered or declined on the record', () => {
+  // The rule the registry is held to: a control is honest only when the thing
+  // it moves is a degree of freedom OF THE CONCEPT. A generator may decline —
+  // but it may not simply be forgotten, which is what this asserts.
+  it('leaves no canonical generator kind unaccounted for', () => {
+    const unaccounted = ACTIVATED_SCENE_KINDS.filter(
+      (kind) => !(kind in PARAMETRIC_SCENES) && !(kind in UNREGISTERED_BY_DESIGN),
+    )
+    expect(unaccounted).toEqual([])
+  })
+
+  it('states a reason for every declined kind, and never declines a registered one', () => {
+    for (const [kind, reason] of Object.entries(UNREGISTERED_BY_DESIGN)) {
+      expect(reason.length, kind).toBeGreaterThan(20)
+      expect(kind in PARAMETRIC_SCENES, `${kind} is both registered and declined`).toBe(false)
+    }
+  })
+})
+
 describe('registry shape', () => {
-  it('covers physics, mathematics and chemistry — not one subject', () => {
-    expect(KINDS).toEqual(expect.arrayContaining(['torque_diagram', 'projectile', 'vector', 'molecule', 'lattice', 'electron_shells']))
+  it('covers every subject the engine teaches, not one', () => {
+    expect(KINDS).toEqual(expect.arrayContaining([
+      'torque_diagram', 'projectile', 'vector', 'electric_circuit',   // physics
+      'calculus_graph', 'triangle',                                    // mathematics
+      'molecule', 'lattice', 'electron_shells', 'periodic_trends',     // chemistry
+      'punnett_square', 'cell_division', 'dna_structure',              // biology
+      'logic_gate', 'er_diagram',                                      // computer science
+      'economics_curves',                                              // economics
+    ]))
   })
 
   it.each(KINDS)('%s declares defaults for every variable it exposes', (kind) => {

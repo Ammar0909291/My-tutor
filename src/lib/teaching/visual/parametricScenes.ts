@@ -55,6 +55,17 @@ import { buildRayOpticsScene, validateRayOpticsParams } from '@/lib/teaching/sce
 import { buildMoleculeScene, lookupMolecule } from '@/lib/teaching/sceneGenerators/moleculeGeometry.pure'
 import { buildLatticeScene, lookupLattice } from '@/lib/teaching/sceneGenerators/crystalLattice.pure'
 import { buildElectronShellScene, lookupElement } from '@/lib/teaching/sceneGenerators/electronShells.pure'
+import { buildCalculusGraphScene, validateCalculusParams } from '@/lib/teaching/sceneGenerators/calculusGraph.pure'
+import { buildCellDivisionScene, validateCellDivisionParams } from '@/lib/teaching/sceneGenerators/cellDivision.pure'
+import { buildEconomicsCurveScene, validateEconomicsParams } from '@/lib/teaching/sceneGenerators/economicsCurves.pure'
+import { buildCircuitScene, validateCircuitParams } from '@/lib/teaching/sceneGenerators/electricCircuit.pure'
+import { buildGravitationOrbitScene, validateGravitationParams } from '@/lib/teaching/sceneGenerators/gravitationOrbit.pure'
+import { buildLogicGateScene, validateLogicGateParams } from '@/lib/teaching/sceneGenerators/logicGate.pure'
+import { buildPeriodicTrendScene, validatePeriodicTrendParams } from '@/lib/teaching/sceneGenerators/periodicTrends.pure'
+import { buildPunnettSquareScene, validatePunnettParams } from '@/lib/teaching/sceneGenerators/punnettSquare.pure'
+import { buildDNAStructureScene, validateDNAStructureParams } from '@/lib/teaching/sceneGenerators/dnaStructure.pure'
+import { buildEcologicalPyramidScene, validateEcologicalPyramidParams } from '@/lib/teaching/sceneGenerators/ecologicalPyramid.pure'
+import { buildERDiagramScene, validateERDiagramParams } from '@/lib/teaching/sceneGenerators/erDiagram.pure'
 
 /**
  * One variable a learner may move.
@@ -133,6 +144,41 @@ function guarded<P>(
     }
   }
 }
+
+
+/** A flat control value as a number, with the generator's own fallback. */
+function num(v: number | string | undefined, fallback: number): number {
+  return typeof v === 'number' && Number.isFinite(v) ? v : fallback
+}
+
+/**
+ * A polynomial whose highest term is zero IS a lower-degree polynomial — the
+ * generator rejects a leading zero, so the term is dropped rather than the
+ * figure refused. An all-zero set has no curve to draw and stays refused.
+ */
+function dropLeadingZeros(coefficients: number[]): number[] {
+  const first = coefficients.findIndex((c) => c !== 0)
+  return first < 0 ? [0] : coefficients.slice(first)
+}
+
+/** Elements the trend generator has data for, in periodic order. */
+const PERIODIC_CHOICES = ['Li', 'Be', 'B', 'C', 'N', 'O', 'F', 'Ne', 'Na', 'Mg', 'Al', 'Si', 'P', 'S', 'Cl', 'Ar', 'K', 'Ca']
+  .map((symbol) => ({ value: symbol, label: symbol }))
+
+/** The three genotype cases a monohybrid cross can take. */
+const GENOTYPE_CHOICES = [
+  { value: 'AA', label: 'AA' },
+  { value: 'Aa', label: 'Aa' },
+  { value: 'aa', label: 'aa' },
+]
+
+const BIT_CHOICES = [
+  { value: '0', label: '0' },
+  { value: '1', label: '1' },
+]
+
+/** A food chain, longest first; a shorter chain is a prefix of it. */
+const TROPHIC_CHAIN = ['Producers', 'Herbivores', 'Carnivores', 'Top carnivores', 'Apex predators']
 
 export const PARAMETRIC_SCENES: Readonly<Record<string, ParametricScene>> = {
   torque_diagram: {
@@ -326,6 +372,264 @@ export const PARAMETRIC_SCENES: Readonly<Record<string, ParametricScene>> = {
       return def ? buildElectronShellScene(def) : null
     },
   },
+
+  // ── mathematics: the function itself is the variable ──────────────────────
+  calculus_graph: {
+    defaults: { functionType: 'polynomial', a: 1, b: -4, c: 3, domainMin: -1, domainMax: 5 },
+    variables: [
+      {
+        key: 'functionType', label: 'Function', kind: 'choice',
+        options: [
+          { value: 'polynomial', label: 'Polynomial' },
+          { value: 'trig', label: 'Trigonometric' },
+          { value: 'exponential', label: 'Exponential' },
+          { value: 'log', label: 'Logarithmic' },
+        ],
+        effect: 'the FAMILY decides the shape; the coefficients only stretch and shift it',
+      },
+      { key: 'a', label: 'a', kind: 'number', min: -5, max: 5, step: 0.5, effect: 'the leading coefficient sets how sharply the curve bends' },
+      { key: 'b', label: 'b', kind: 'number', min: -8, max: 8, step: 0.5, effect: 'shifts where the turning point sits along x' },
+      { key: 'c', label: 'c', kind: 'number', min: -8, max: 8, step: 0.5, effect: 'moves the whole curve up or down without changing its shape' },
+      { key: 'domainMin', label: 'x from', kind: 'number', min: -10, max: 0, step: 1, effect: 'the window you look through does not change the function' },
+      { key: 'domainMax', label: 'x to', kind: 'number', min: 1, max: 12, step: 1, effect: 'a wider window can reveal behaviour the first view hid' },
+    ],
+    build: (p) => {
+      const type = String(p.functionType)
+      const [a, b, c] = [num(p.a, 1), num(p.b, 0), num(p.c, 0)]
+      // Each family accepts a DIFFERENT coefficient shape (the generator's own
+      // validator enforces it), so the flat controls are mapped rather than
+      // passed through. Leading zeros are dropped because a polynomial whose
+      // highest term vanishes is a lower-degree polynomial, not an error.
+      const coefficients =
+        type === 'polynomial' ? dropLeadingZeros([a, b, c])
+        : type === 'log' ? [a || 1]
+        : [a || 1, b || 1]
+      // log is undefined at or below zero, so its window starts above it. That
+      // is the function's own domain, not a fudge to make a control work.
+      const domainMin = type === 'log' ? Math.max(0.5, num(p.domainMin, 1)) : num(p.domainMin, -1)
+      return guarded(validateCalculusParams, buildCalculusGraphScene)({
+        functionType: type, coefficients, domainMin, domainMax: num(p.domainMax, 5),
+      } as unknown as SceneParams)
+    },
+  },
+
+  // ── physics: circuits, orbits ─────────────────────────────────────────────
+  electric_circuit: {
+    defaults: { connection: 'series', voltage: 12, r1: 10, r2: 20 },
+    variables: [
+      {
+        key: 'connection', label: 'Wiring', kind: 'choice',
+        options: [
+          { value: 'series', label: 'Series' },
+          { value: 'parallel', label: 'Parallel' },
+        ],
+        effect: 'in series the resistances ADD; in parallel the total is LESS than either one',
+      },
+      { key: 'voltage', label: 'Voltage', kind: 'number', min: 1, max: 48, step: 1, effect: 'current rises in proportion to voltage at fixed resistance' },
+      { key: 'r1', label: 'R₁', kind: 'number', min: 1, max: 100, step: 1, effect: 'adding resistance in series always lowers the current' },
+      { key: 'r2', label: 'R₂', kind: 'number', min: 1, max: 100, step: 1, effect: 'in parallel, a second path lets MORE current flow, not less' },
+    ],
+    build: (p) => guarded(validateCircuitParams, buildCircuitScene)({
+      connection: String(p.connection),
+      voltage: num(p.voltage, 12),
+      components: [
+        { type: 'resistor', value: num(p.r1, 10), unit: 'ohm' },
+        { type: 'resistor', value: num(p.r2, 20), unit: 'ohm' },
+      ],
+    } as unknown as SceneParams),
+  },
+
+  gravitation_orbit: {
+    // Presented in the units a learner can actually move: Earth masses and
+    // thousands of kilometres. The generator still receives kg and metres.
+    defaults: { centralMassEarths: 1, orbitRadiusMm: 7 },
+    variables: [
+      { key: 'centralMassEarths', label: 'Central mass', kind: 'number', unit: '× Earth', min: 0.1, max: 20, step: 0.1, effect: 'a heavier central body makes the same orbit faster, not slower' },
+      { key: 'orbitRadiusMm', label: 'Orbit radius', kind: 'number', unit: 'Mm', min: 7, max: 60, step: 1, effect: 'a wider orbit is slower and takes far longer — period goes as r^(3/2)' },
+    ],
+    build: (p) => guarded(validateGravitationParams, buildGravitationOrbitScene)({
+      centralMass: num(p.centralMassEarths, 1) * 5.97e24,
+      orbitRadius: num(p.orbitRadiusMm, 7) * 1e6,
+    } as unknown as SceneParams),
+  },
+
+  // ── chemistry: which pair of elements ─────────────────────────────────────
+  periodic_trends: {
+    defaults: { element1Symbol: 'Na', element2Symbol: 'Cl' },
+    variables: [
+      { key: 'element1Symbol', label: 'Element A', kind: 'choice', options: PERIODIC_CHOICES, effect: 'radius grows DOWN a group and shrinks ACROSS a period' },
+      { key: 'element2Symbol', label: 'Element B', kind: 'choice', options: PERIODIC_CHOICES, effect: 'comparing two elements is how a trend becomes visible at all' },
+    ],
+    build: (p) => guarded(validatePeriodicTrendParams, buildPeriodicTrendScene)({
+      element1Symbol: String(p.element1Symbol), element2Symbol: String(p.element2Symbol),
+    } as unknown as SceneParams),
+  },
+
+  // ── biology ───────────────────────────────────────────────────────────────
+  punnett_square: {
+    defaults: { parent1Genotype: 'Aa', parent2Genotype: 'Aa' },
+    variables: [
+      { key: 'parent1Genotype', label: 'Parent 1', kind: 'choice', options: GENOTYPE_CHOICES, effect: 'a homozygous parent can only pass on one allele, so half the grid disappears' },
+      { key: 'parent2Genotype', label: 'Parent 2', kind: 'choice', options: GENOTYPE_CHOICES, effect: 'the classic 3:1 ratio needs BOTH parents heterozygous — change one and it goes' },
+    ],
+    build: (p) => guarded(validatePunnettParams, buildPunnettSquareScene)({
+      parent1Genotype: String(p.parent1Genotype), parent2Genotype: String(p.parent2Genotype),
+    } as unknown as SceneParams),
+  },
+
+  cell_division: {
+    defaults: { divisionType: 'mitosis' },
+    variables: [
+      {
+        key: 'divisionType', label: 'Division', kind: 'choice',
+        options: [
+          { value: 'mitosis', label: 'Mitosis' },
+          { value: 'meiosis', label: 'Meiosis' },
+        ],
+        effect: 'mitosis makes two identical cells; meiosis makes four with half the chromosomes',
+      },
+    ],
+    build: (p) => guarded(validateCellDivisionParams, buildCellDivisionScene)({
+      divisionType: String(p.divisionType),
+    } as unknown as SceneParams),
+  },
+
+  dna_structure: {
+    defaults: { sequence: 'ATGC' },
+    variables: [
+      {
+        key: 'sequence', label: 'Sequence', kind: 'choice',
+        options: [
+          { value: 'ATGC', label: 'ATGC' },
+          { value: 'AATT', label: 'AATT' },
+          { value: 'GCGC', label: 'GCGC' },
+          { value: 'ATGCATGC', label: 'ATGCATGC' },
+        ],
+        effect: 'A always pairs with T and G with C — the opposite strand is never a free choice',
+      },
+    ],
+    build: (p) => guarded(validateDNAStructureParams, buildDNAStructureScene)({
+      sequence: String(p.sequence),
+    } as unknown as SceneParams),
+  },
+
+  ecological_pyramid: {
+    defaults: { levels: '3', baseEnergy: 10000 },
+    variables: [
+      {
+        key: 'levels', label: 'Trophic levels', kind: 'choice',
+        options: [
+          { value: '3', label: '3 levels' },
+          { value: '4', label: '4 levels' },
+          { value: '5', label: '5 levels' },
+        ],
+        effect: 'each level keeps about a tenth of the last, which is why food chains are short',
+      },
+      { key: 'baseEnergy', label: 'Producer energy', kind: 'number', unit: 'kJ', min: 1000, max: 100000, step: 1000, effect: 'more energy at the bottom does not add a level — the RATIO is what limits the chain' },
+    ],
+    build: (p) => guarded(validateEcologicalPyramidParams, buildEcologicalPyramidScene)({
+      trophicLevels: TROPHIC_CHAIN.slice(0, Math.max(2, Math.min(5, Number(p.levels) || 3))),
+      baseEnergy: num(p.baseEnergy, 10000),
+    } as unknown as SceneParams),
+  },
+
+  // ── computer science ──────────────────────────────────────────────────────
+  logic_gate: {
+    defaults: { gateType: 'AND', inputA: '1', inputB: '0' },
+    variables: [
+      {
+        key: 'gateType', label: 'Gate', kind: 'choice',
+        options: (['AND', 'OR', 'NOT', 'NAND', 'NOR', 'XOR', 'XNOR'] as const).map((g) => ({ value: g, label: g })),
+        effect: 'NAND and NOR are the inverses of AND and OR — same inputs, flipped output',
+      },
+      { key: 'inputA', label: 'Input A', kind: 'choice', options: BIT_CHOICES, effect: 'walking every input combination IS the truth table' },
+      { key: 'inputB', label: 'Input B', kind: 'choice', options: BIT_CHOICES, effect: 'ignored by NOT, which takes a single input' },
+    ],
+    build: (p) => {
+      const gateType = String(p.gateType)
+      const bits = [p.inputA === '1', p.inputB === '1']
+      return guarded(validateLogicGateParams, buildLogicGateScene)({
+        gateType, inputs: gateType === 'NOT' ? bits.slice(0, 1) : bits,
+      } as unknown as SceneParams)
+    },
+  },
+
+  er_diagram: {
+    defaults: { cardinality: 'many-to-many' },
+    variables: [
+      {
+        key: 'cardinality', label: 'Cardinality', kind: 'choice',
+        options: [
+          { value: 'one-to-one', label: '1 : 1' },
+          { value: 'one-to-many', label: '1 : N' },
+          { value: 'many-to-many', label: 'N : M' },
+        ],
+        effect: 'only a many-to-many relationship needs a join table of its own',
+      },
+    ],
+    build: (p) => guarded(validateERDiagramParams, buildERDiagramScene)({
+      entities: [
+        { name: 'Student', attributes: ['id', 'name'] },
+        { name: 'Course', attributes: ['code', 'title'] },
+      ],
+      relationships: [{ from: 'Student', to: 'Course', cardinality: String(p.cardinality) }],
+    } as unknown as SceneParams),
+  },
+
+  // ── economics ─────────────────────────────────────────────────────────────
+  economics_curves: {
+    defaults: { curveType: 'both', shiftDirection: 'none', equilibriumPrice: 50, equilibriumQuantity: 100 },
+    variables: [
+      {
+        key: 'curveType', label: 'Curves', kind: 'choice',
+        options: [
+          { value: 'both', label: 'Supply & demand' },
+          { value: 'supply', label: 'Supply only' },
+          { value: 'demand', label: 'Demand only' },
+        ],
+        effect: 'a price is only settled where the two curves meet — one alone fixes nothing',
+      },
+      {
+        key: 'shiftDirection', label: 'Shift', kind: 'choice',
+        options: [
+          { value: 'none', label: 'No shift' },
+          { value: 'right', label: 'Rightward' },
+          { value: 'left', label: 'Leftward' },
+        ],
+        effect: 'a curve SHIFTING is a different event from moving along it',
+      },
+      { key: 'equilibriumPrice', label: 'Price', kind: 'number', min: 10, max: 200, step: 10, effect: 'the equilibrium is where the market settles, not where anyone chooses' },
+      { key: 'equilibriumQuantity', label: 'Quantity', kind: 'number', min: 20, max: 300, step: 10, effect: 'quantity and price are set together, never one at a time' },
+    ],
+    build: (p) => guarded(validateEconomicsParams, buildEconomicsCurveScene)({
+      curveType: String(p.curveType), shiftDirection: String(p.shiftDirection),
+      equilibriumPrice: num(p.equilibriumPrice, 50), equilibriumQuantity: num(p.equilibriumQuantity, 100),
+    } as unknown as SceneParams),
+  },
+}
+
+/**
+ * GENERATORS DELIBERATELY NOT REGISTERED, and why.
+ *
+ * A control is only honest when the thing it moves is a degree of freedom OF
+ * THE CONCEPT. For these four the parameters are the CONTENT — the dataset the
+ * figure exists to present — so a slider over them would not teach the concept,
+ * it would edit the subject matter, and in two cases it would mean inventing
+ * data in the visual registry. They keep the teaching frame, the stages, focus
+ * and the challenge modes; they simply show no variables.
+ *
+ *   historical_timeline  the events ARE the history
+ *   civics_org_chart     the institutions ARE the structure
+ *   demographic_pyramid  the age bands are national data; three plausible
+ *                        population shapes would be three fabrications
+ *   statistics_bar_chart the bars are the dataset being read, and the figure
+ *                        states no statistic that varying them would move
+ */
+export const UNREGISTERED_BY_DESIGN: Readonly<Record<string, string>> = {
+  historical_timeline: 'the events are the content, not a variable of the concept',
+  civics_org_chart: 'the institutional structure is the content, not a variable',
+  demographic_pyramid: 'its parameter is national age data; alternatives would be fabricated',
+  statistics_bar_chart: 'the bars are the dataset, and the figure states no statistic they would move',
 }
 
 /** Does this generator kind expose variables a learner may move? */

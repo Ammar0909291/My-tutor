@@ -31,8 +31,8 @@
  * it makes, and the withheld count is written out. The figure remains
  * understandable with the canvas ignored entirely.
  */
-import { useCallback, useMemo, useRef, useState } from 'react'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react'
 import { SceneSpecRenderer } from './SceneSpecRenderer'
 import styles from './ExplainerFigure.module.css'
 import { useTheme } from '@/components/Providers'
@@ -41,6 +41,12 @@ import { deriveExplainer } from '@/lib/teaching/visual/explainer'
 import { availableModes, stageView, type SceneMode } from '@/lib/teaching/visual/sceneStage'
 import { defaultValueOf, rebuildScene, variablesFor, type SceneParams, type SceneVariable } from '@/lib/teaching/visual/parametricScenes'
 import { themeColor } from '@/lib/teaching/sceneGenerators/visualDesign'
+import {
+  availableAnimations, stageAt, sweepFrame, traceObjects, tracePlayhead,
+  type SceneAnimation,
+} from '@/lib/teaching/visual/sceneAnimation'
+import { usePrefersReducedMotion } from './usePrefersReducedMotion'
+import { availableContrasts, type MisconceptionContrast } from '@/lib/teaching/visual/misconceptionContrast'
 
 const MODE_LABEL: Record<SceneMode, string> = {
   explain: 'Explain',
@@ -93,20 +99,98 @@ export function ExplainerFigure({ spec }: { spec: SceneSpec }) {
   // A colour the learner has chosen to isolate, from the legend.
   const [pinnedColor, setPinnedColor] = useState<string | null>(null)
 
-  const total = Math.max(1, shown.steps.length)
+  // ── animation ──────────────────────────────────────────────────────────────
+  const reducedMotion = usePrefersReducedMotion()
+  const animations = useMemo(() => availableAnimations(shown, variables), [shown, variables])
+  const [playing, setPlaying] = useState<SceneAnimation | null>(null)
+  const [progress, setProgress] = useState(0)
+
+  // One clock, owned here; the animation module stays pure. Under reduced
+  // motion nothing is ever driven — the same animations remain available, but
+  // only as a scrub the learner moves themselves, which shows the identical
+  // information without motion.
+  useEffect(() => {
+    if (!playing || reducedMotion) return
+    let frame = 0
+    let start = 0
+    const tick = (now: number) => {
+      if (!start) start = now
+      const elapsed = (now - start) % playing.durationMs
+      setProgress(elapsed / playing.durationMs)
+      frame = requestAnimationFrame(tick)
+    }
+    frame = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(frame)
+  }, [playing, reducedMotion])
+
+  // An animation belongs to the figure it was derived from. If the learner
+  // moves a slider or switches concept mid-play, stop rather than drive a
+  // stale animation against a new scene.
+  useEffect(() => {
+    if (playing && !animations.some((a) => a.id === playing.id)) {
+      setPlaying(null)
+      setProgress(0)
+    }
+  }, [animations, playing])
+
+  const sweep = playing?.kind === 'sweep' ? sweepFrame(shown, playing, progress) : null
+
+  /**
+   * THE CAMERA MUST NOT FOLLOW A SWEEP.
+   *
+   * Every rebuilt frame carries its own fitted camera distance, so a sweep that
+   * re-framed each frame would keep the figure the same size on screen while
+   * the quantity behind it doubled — the learner would watch a sweep of the
+   * force and see nothing move. The camera is therefore pinned, for the length
+   * of the sweep, to the WIDEST of its two endpoints, so growth reads as
+   * growth. Outside a sweep the ordinary per-figure fit applies unchanged.
+   */
+  const sweepCamera = useMemo(() => {
+    if (!playing || playing.kind !== 'sweep' || !playing.variable) return null
+    const ends = [0, 1].map((t) => sweepFrame(shown, playing, t)?.spec.cameraDistance ?? 0)
+    const widest = Math.max(...ends)
+    return widest > 0 ? widest : null
+  }, [playing, shown])
+
+  // ── misconception contrast ─────────────────────────────────────────────────
+  // Offered only where the engine has BUILT both figures and confirmed they
+  // differ (misconceptionContrast.ts). Neither figure is drawn wrongly: they
+  // are two correct renderings of two different situations, and what is wrong
+  // is the expectation that they would look the same.
+  const contrasts = useMemo(() => availableContrasts(shown), [shown])
+  const [contrast, setContrast] = useState<MisconceptionContrast | null>(null)
+  const [contrastRevealed, setContrastRevealed] = useState(false)
+
+  // A contrast belongs to the figure it was derived from; a slider move
+  // invalidates it rather than leaving a stale comparison on screen.
+  useEffect(() => {
+    if (contrast && !contrasts.some((c) => c.misconception.id === contrast.misconception.id)) {
+      setContrast(null)
+      setContrastRevealed(false)
+    }
+  }, [contrasts, contrast])
+
+  const drawn = contrast
+    ? (contrastRevealed ? contrast.actual : contrast.believed)
+    : sweep
+      ? (sweepCamera ? { ...sweep.spec, cameraDistance: sweepCamera } : sweep.spec)
+      : shown
+
+  const total = Math.max(1, drawn.steps.length)
   const walking = stage !== null
-  const view = stageView(shown, walking ? stage! : Infinity, mode)
+  const animatedStage = playing?.kind === 'stages' ? stageAt(drawn, progress) : null
+  const view = stageView(drawn, animatedStage ?? (walking ? stage! : Infinity), mode)
 
   // Legend focus and stage focus are the same mechanism, so they cannot
   // disagree: a pinned colour names the ids drawn in it.
   const focusIds = useMemo(() => {
     if (!pinnedColor) return view.focusIds
-    const ids = shown.steps
+    const ids = drawn.steps
       .flatMap((s) => s.objects)
       .filter((o) => o.color === pinnedColor && o.id)
       .map((o) => o.id as string)
     return ids.length ? new Set(ids) : view.focusIds
-  }, [pinnedColor, shown, view.focusIds])
+  }, [pinnedColor, drawn, view.focusIds])
 
   const focusName = pinnedColor
     ? explainer.legend?.find((l) => l.color === pinnedColor)?.label ?? null
@@ -116,9 +200,19 @@ export function ExplainerFigure({ spec }: { spec: SceneSpec }) {
     setParams((prev) => ({ ...(prev ?? spec.parametric?.params ?? {}), [key]: value }))
   }, [spec])
 
+  // A trace draws its path up to the marker, so the route appears over time
+  // rather than sitting there complete while a dot slides along it.
+  const drawnObjects = useMemo(() => {
+    if (playing?.kind !== 'trace') return view.objects
+    const walked = traceObjects(view.objects, playing.objectId, progress)
+    const head = tracePlayhead(drawn, playing.objectId, progress)
+    return head ? [...walked, head] : walked
+  }, [playing, view.objects, drawn, progress])
+
   const predicting = mode === 'predict' && !revealed
   /** True in any mode whose whole point is that the learner works it out. */
   const answerWithheld = predicting || mode === 'practice' || mode === 'assess'
+    || (contrast !== null && !contrastRevealed)
 
   return (
     <figure
@@ -168,7 +262,7 @@ export function ExplainerFigure({ spec }: { spec: SceneSpec }) {
 
       <div className={styles.body}>
         <div className={styles.stage}>
-          <SceneSpecRenderer spec={shown} objects={view.objects} focusIds={focusIds} />
+          <SceneSpecRenderer spec={drawn} objects={drawnObjects} focusIds={focusIds} />
 
           <div className={styles.bar} style={{ marginTop: 10 }}>
             {total > 1 && (
@@ -219,6 +313,130 @@ export function ExplainerFigure({ spec }: { spec: SceneSpec }) {
               </div>
             )}
           </div>
+
+          {/* ── MISCONCEPTION CONTRAST ──────────────────────────────────
+              Predict, then reveal, then correct — in that order. The
+              correction is not rendered at all until the learner has
+              committed, because reading the answer first is what turns a
+              contrast back into a demonstration. */}
+          {contrasts.length > 0 && !contrast && (
+            <div className={styles.bar} style={{ marginTop: 8 }} role="group" aria-label="Check a common idea">
+              {contrasts.map((c) => (
+                <button
+                  key={c.misconception.id}
+                  type="button"
+                  className={styles.chip}
+                  onClick={() => { setContrast(c); setContrastRevealed(false); setPlaying(null) }}
+                >
+                  Check a common idea
+                </button>
+              ))}
+            </div>
+          )}
+
+          {contrast && (
+            <div className={styles.contrast}>
+              <p className={styles.contrastClaim}>
+                <span className={styles.contrastTag}>A common idea</span>
+                {contrast.misconception.claim}
+              </p>
+
+              {!contrastRevealed ? (
+                <>
+                  <p className={styles.panelBody} style={{ color: 'var(--text-primary)' }}>
+                    {contrast.misconception.prompt}
+                  </p>
+                  <p className={styles.effect} style={{ margin: '4px 0 0' }}>
+                    Showing the case that idea predicts. Decide what you expect before revealing.
+                  </p>
+                  <div className={styles.predictOptions}>
+                    <button
+                      type="button"
+                      className={`${styles.chip} ${styles.chipActive}`}
+                      onClick={() => setContrastRevealed(true)}
+                    >
+                      Reveal what actually happens
+                    </button>
+                    <button type="button" className={styles.chip} onClick={() => setContrast(null)}>
+                      Close
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <p className={styles.panelBody} style={{ color: 'var(--text-primary)' }} role="status">
+                    {contrast.misconception.correction}
+                  </p>
+                  <div className={styles.predictOptions}>
+                    <button type="button" className={styles.chip} onClick={() => setContrastRevealed(false)}>
+                      Show the other case again
+                    </button>
+                    <button
+                      type="button"
+                      className={styles.chip}
+                      onClick={() => { setContrast(null); setContrastRevealed(false) }}
+                    >
+                      Back to the figure
+                    </button>
+                  </div>
+                </>
+              )}
+            </div>
+          )}
+
+          {/* ── ANIMATION ────────────────────────────────────────────────
+              Offered only where the engine has established that the motion
+              changes the figure (see sceneAnimation.ts). Each control states
+              what its motion teaches, in text, so the claim survives reduced
+              motion and a screen reader. */}
+          {animations.length > 0 && !contrast && (
+            <div className={styles.bar} style={{ marginTop: 8 }} role="group" aria-label="Animations">
+              {animations.map((a) => {
+                const active = playing?.id === a.id
+                return (
+                  <button
+                    key={a.id}
+                    type="button"
+                    className={`${styles.chip}${active ? ` ${styles.chipActive}` : ''}`}
+                    aria-pressed={active}
+                    onClick={() => {
+                      setPlaying(active ? null : a)
+                      setProgress(0)
+                    }}
+                  >
+                    <span className={styles.chipIcon} aria-hidden="true">
+                      {active && !reducedMotion ? <Pause size={11} /> : <Play size={11} />}
+                    </span>
+                    {a.label}
+                  </button>
+                )
+              })}
+            </div>
+          )}
+
+          {playing && (
+            <div className={styles.animationPanel}>
+              <p className={styles.effect} style={{ margin: 0 }}>
+                {reducedMotion ? 'Motion is off — drag to step through it. ' : ''}
+                This shows {playing.teaches}.
+              </p>
+              <div className={styles.control} style={{ gridTemplateColumns: 'minmax(0, 1fr) minmax(70px, auto)', marginTop: 6 }}>
+                <input
+                  className={styles.slider}
+                  type="range"
+                  min={0}
+                  max={1}
+                  step={0.01}
+                  value={progress}
+                  aria-label={`Position in ${playing.label}`}
+                  onChange={(e) => setProgress(Number(e.target.value))}
+                />
+                <output className={styles.controlValue}>
+                  {sweep ? `${playing.variable?.key ? '' : ''}${sweep.value}` : `${Math.round(progress * 100)}%`}
+                </output>
+              </div>
+            </div>
+          )}
 
           {focusName && (
             <p className={styles.note} role="status">
