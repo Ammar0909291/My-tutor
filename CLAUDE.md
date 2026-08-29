@@ -2669,3 +2669,35 @@ contained in `main`'s current tip.
   by severe production model latency at session end; batch 1 was live-verified while the provider was
   healthy, and batch 2's deterministic strips were verified against the exact captured production
   strings plus the test suite (identical behaviour live or offline).
+
+## Follow-up — "seed the probes so T8 can grade" → the real blocker was the affect budget (2026-08-29)
+- Task framed as "seed the inelastic-collisions probes so T8 can grade." Investigation showed the
+  premise was wrong: `phys.mech.collisions-inelastic` already has 4 ACTIVE gradeable MCQ probes at
+  the correct band (`:high`), and the ADULT-vs-HIGH band gap is already handled by the matcher
+  (`isHighAdultCompatible` → +15 → score 65 ≥ 65 threshold). Seeding more would have changed
+  nothing.
+- **Actual root cause, confirmed from production `[gate-eligibility]` logs (not inferred):** every
+  GUIDE-phase 'ask' turn read `eligible:false, blockedBy:["arbitrationAllowsProbe","notClosingTurn"]`
+  with all six other terms TRUE. The session EPISODE was in CLOSING, and it was CLOSING solely
+  because `route.ts`'s recovery block synthesizes `{correctness:false}` on every recovery turn, so
+  two "I don't understand" utterances spent the affect budget (2) → CORE→CLOSING. CLOSING denies
+  AUTHORED_PROBE through both `turnArbitration`'s CLOSE suppression and `closingTurnWithholdsQuestion`,
+  so no keyed probe ever attached, the model improvised UNKEYED prose comprehension questions, and
+  their answers (T8) could not be graded. `sessionLifecycle.ts`'s own Phase E note had already
+  flagged this as a deferred "separate product decision."
+- **Fix (`c98ea7b`, the session-episode half of the earlier concept-budget fix):** the recovery
+  block already tags its synthetic signal `confusion: true`; `applySignalToEpisode` now treats a
+  distress signal as NOT a graded failure — it still advances OPENING→CORE (never freezes the
+  episode) but does not spend the affect budget, so confusion alone can no longer force CLOSING. A
+  real GRADED wrong answer (the `teachingSignal` path, `correctness:false` with no confusion flag)
+  spends it exactly as before, so a genuine failure spiral still winds the session down, an explicit
+  "I'm done" (`forceClosing`) still closes absolutely, and lesson one's budget of 1 is unchanged.
+  Guarded by 5 new cases in `affectBudgetSpiral.test.ts`.
+- **Live-verified on the deployed app (real account, `session cmtdp7zp4…`):** physics is now
+  **0 findings** (was the T8 content-free hold). T8 "the final speed is the sum of the two speeds"
+  now attaches an AUTHORED keyed probe (`assetId b4b3ab62-…`, `correctIndex 0`, lead-in "Let me
+  check your thinking with this.") — gradeable — instead of "Let's stay with this idea for a moment."
+  Structured probes now attach on T8/T9/T10/T11 (previously only T1), the lesson reached CHECK phase
+  (previously stuck at GUIDE), and there was no abandonment and no degradation. The fix unblocked the
+  entire assessment→mastery path for a confused-but-engaged learner, not just the one turn.
+- Full suite 486 files / 10,487 passed / 9 skipped; `npx tsc --noEmit` clean; `npm run build` clean.
