@@ -507,14 +507,25 @@ function LessonDocument({ text }: { text: string }) {
 // insufficient — the indicator can shrink, but it can never split onto a
 // second line.
 //
-// `compact` renders the icon alone (the per-message empty-streaming-bubble
-// slot, which already sits inside a "Tutor Max" bubble and has no room or
-// need for a repeated name label); the default renders icon + label (the
-// standalone between-turns pill). Both pass `label` explicitly because this
-// is a module-level, pure, presentational function — it has no hook access
-// to `useLanguage()`'s `t`, by the same design as every other helper in this
-// file (AiBadge, MessageContent, ...) — and that keeps it trivially testable
-// in isolation.
+// `compact` renders the icon alone, for spots with no room for text (the
+// full-screen lesson-loading state). The per-message empty-streaming-bubble
+// slot below intentionally uses the NON-compact (icon + label) form: the
+// "Tutor Max" avatar/name row just above it is explicitly hidden while
+// `msg.streaming` is true (see the `!msg.streaming` guard on that row), so
+// during exactly the window this indicator is visible there is no other
+// "Tutor Max" affiliation shown at all — the label here is load-bearing, not
+// redundant. (An earlier version of this component ALSO rendered a second,
+// separate "between-turns" Pill with its own label immediately after the
+// message list, on the theory that it covered a different moment than this
+// one. It didn't: both `setIsStreaming(true)` and the empty placeholder
+// message are appended in the same synchronous update in every send path,
+// so the two conditions were always true at once — a visible double-brain
+// render, not two indicators for two moments. That second Pill was removed;
+// this is the only "thinking" indicator in the message stream.)
+// Both pass `label` explicitly because this is a module-level, pure,
+// presentational function — it has no hook access to `useLanguage()`'s `t`,
+// by the same design as every other helper in this file (AiBadge,
+// MessageContent, ...) — and that keeps it trivially testable in isolation.
 export function ThinkingBrain({ label, compact = false, size = 34 }: { label: string; compact?: boolean; size?: number }) {
   return (
     <span className={styles.thinkingBrain} role="status" aria-label={label}>
@@ -4893,7 +4904,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                           ? <div className="animate-message" style={{ fontSize: 16.2, lineHeight: 1.7, color: 'var(--text-primary)' }}>
                               <MessageContent text={displayText} isUser={false} />
                             </div>
-                          : <ThinkingBrain compact size={28} label={t('lesson_thinking_dots')} />
+                          : <ThinkingBrain size={26} label={t('lesson_thinking_dots')} />
                         }
 
                         {cached?.hasMore && (
@@ -5036,18 +5047,20 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 )
               })}
 
-              {/* Thinking — candy Pill, now carrying the animated brain instead
-                  of the old blinking dots. `alignSelf: flex-start` (unchanged)
-                  keeps the pill from stretching to the column's full width in
-                  this flex-column message list, which is what let it shrink
-                  to content size in the first place — the brain's own
-                  `.thinkingBrain` rule is what actually guarantees it can
-                  never wrap across two lines regardless of available width. */}
-              {isStreaming && messages.at(-1)?.streaming && !messages.at(-1)?.content && (
-                <Pill style={{ display: 'inline-flex', alignSelf: 'flex-start', fontSize: 14.4, color: 'var(--text-secondary)', background: 'var(--bg-elevated)', padding: '7px 14px' }}>
-                  <ThinkingBrain label={t('lesson_thinking_dots')} />
-                </Pill>
-              )}
+              {/* The DOUBLE-BRAIN BUG (found live, production screenshot): a
+                  second, separate "thinking" Pill used to render here,
+                  gated on `isStreaming && messages.at(-1)?.streaming &&
+                  !messages.at(-1)?.content` — which is exactly the same
+                  state the per-message ThinkingBrain above already renders
+                  for (both `setIsStreaming(true)` and the empty placeholder
+                  message land in the same synchronous update in every send
+                  path, so one can never be true without the other). The
+                  result was two independent brain glyphs on screen at once.
+                  Removed rather than reconditioned: the per-message one sits
+                  in the exact slot the real content will land in — deleting
+                  its duplicate is what actually fixes the double-render,
+                  not just hiding one copy of it. See ThinkingBrain's own
+                  comment above for the full account. */}
 
               {/* Mastery gate card (Bug 4) — the learner asked to move on (or the
                   model tried to complete) before mastery was verified. Explicit
