@@ -144,22 +144,121 @@ answer it. That is the live investigation.
 
 ---
 
-## Gap 3 — why the assessment loop does not close
+## Correction 3 — the mastery headline was the harness, not the product
 
-Not yet root-caused. Ruled out so far:
+**"Only 1 of 30 sessions reached verified mastery" is not evidence about the
+product.** It is an arithmetic artefact of the instrument, and no product at any
+quality could have passed the bar as it was set.
+
+Verified mastery is THREE server-graded correct answers (`correctAtCheck >= 1`
+plus `correctAtPractice >= 2`), and the gate never re-asks a spent probe, so each
+needs its own MCQ turn. The persona also answers the FIRST MCQ deliberately
+wrong, and spends a seven-line opening arc before the engine attaches any MCQ at
+all. `MAX_TURNS` was **9**. At that budget the persona can answer at most ONE MCQ
+correctly, against a bar of three.
+
+Measured end to end on `phys.stat.boltzmann-factor` (real account, deployed app,
+2026-08-29):
+
+```
+T1-T6  opening arc — first MCQ arrives WITH the T6 response
+T7     answers it deliberately wrong          -> checkCorrect 0
+T8     persona line, engine teaches
+T9     second MCQ arrives WITH the T9 response — and the run ENDS
+```
+
+The second MCQ was never answered, because answering it would have been turn 10.
+Recorded as phase GUIDE, check 0, practice 0 — a teaching failure. It was not
+one. The engine attached authored, keyed MCQs (`correctIndex` present) exactly
+when it should have, and correctly refused to credit the deliberately wrong
+answer.
+
+Fixed in `c846703`: `MAX_TURNS` 9 -> 20, and the persona no longer clamps to its
+last line (which was "can i go to next lesson now", so every turn past the sixth
+repeated a request to leave — invisible at 9 turns, corrupting at 20).
+
+This is the same class of defect this harness has hit repeatedly. CLAUDE.md's own
+warning stands: **read the captured turn before believing a verdict.**
+
+### What is genuinely ruled out for the assessment loop
 
 - **Probe pool exhaustion / missing probes** — ruled out. 262/262 pairs at
   contract; physics averages >3 gradeable probes per concept.
-- **Band mismatch** — ruled out, see Correction 1.
+- **Band mismatch** — ruled out, Correction 1.
+- **Probes not attaching** — ruled out. Authored keyed MCQs attached on schedule
+  in the captured session.
+- **Turn deadline** — ruled out for generation: across three days of production
+  attempts, p90 elapsed is 3.4s and the maximum is 5.9s against a 9s deadline.
+  **Zero** attempts exceeded it.
+- **Provider degradation** — not present in the captured run
+  (`providerDegraded: false`, every turn served by `groq` or `memory`).
 
-Still open, in priority order: the turn deadline (9s covering generate +
-validate + judge) abandoning figures on a slow provider; the per-session
-generation budget (6); and whatever keeps sessions in OBSERVE/GUIDE rather than
-reaching CHECK. Note that a real, closely-related defect was already fixed on
-2026-08-29 (`c98ea7b`): recovery turns synthesised `{correctness:false}`, so two
-"I don't understand" utterances spent the affect budget and forced the episode
-into CLOSING, which denies authored probes. That fix is deployed; the QA run
-that produced the 5.7/10 finding may predate it.
+A real, closely-related defect was already fixed on 2026-08-29 (`c98ea7b`):
+recovery turns synthesised `{correctness:false}`, so two "I don't understand"
+utterances spent the affect budget and forced the episode into CLOSING, which
+denies authored probes. Deployed, and the run that produced the 5.7/10 finding
+predates it.
+
+**Open:** whether mastery closes within 20 turns. A re-run at the corrected
+budget is the falsifiable test and is the next thing to do.
+
+---
+
+## Visual coverage — the corrected picture
+
+The registry number (151 of 238 with no binding at any registry tier) is real but
+it is **not** the served experience, and quoting it alone would overstate the
+gap. Generation is live and fills much of it on demand. Both halves matter:
+
+| | |
+|---|---|
+| Registry exact bindings | 76 |
+| Tier-3 keyword rescue | 11 |
+| Physics concepts generation has ever attempted | 91 |
+| …of which produced an accepted figure | **70 (77%)** |
+| …attempted and ALWAYS declined | **21** |
+
+Generation is demand-driven, so the 147 never-attempted concepts are simply ones
+no learner has reached yet, not failures. Observed live this session:
+`phys.qm.operators` and `phys.stat.boltzmann-factor` — both registry-unbound
+expert concepts — were served generated figures at ~320ms from cache.
+
+### The 21 concepts generation has tried and always declined
+
+This is the actionable set. `no-suitable-form` dominates, and for several of them
+that verdict is questionable rather than honest — `phys.em.magnetic-field` is
+titled "Magnetic Field and Field **Lines**", and a field-line diagram is its
+canonical textbook figure:
+
+```
+phys.mech.generalized-coordinates   phys.em.biot-savart        phys.em.maxwells-equations
+phys.meas.units                     phys.particle.quarks       phys.meas.dimensions
+phys.meas.significant-figures       phys.particle.antimatter   phys.qm.perturbation-theory
+phys.em.electric-charge             phys.em.magnetic-field     phys.em.magnetic-materials
+phys.mech.buoyancy                  phys.mech.power            phys.particle.standard-model
+phys.qm.pauli-exclusion             phys.rel.postulates        phys.rel.simultaneity
+phys.rel.spacetime                  phys.therm.entropy         phys.therm.specific-heat
+```
+
+Some declines ARE correct: `phys.particle.standard-model` is a CLASSIFICATION,
+and the form menu explicitly (and rightly) forbids drawing one as a process
+flow. There is no table form, so declining is the honest answer.
+
+### A staleness mechanism worth knowing about
+
+`writeDecline`/`readDecline` (`verdictCache.ts`) key a cached decline on
+`conceptId` + a grounding hash, with a 30-day TTL — deliberately shorter than a
+verdict's, and the module's own comment says why: "a decline says 'no figure
+exists for this text', which is a claim about today's generator as much as about
+the topic."
+
+It is **not** keyed on a generator or prompt version. So an improvement to the
+generation prompt cannot reach a concept that declined under the older one until
+the TTL expires. Most of the 21 declines above are dated 2026-08-11 to 08-19 —
+before the 2026-08-29 visual-engine work. Adding a generator-version component to
+the decline key would make engine improvements take effect immediately instead of
+up to 30 days later. **Not changed** — it alters a production cost-control path
+and deserves its own measured change, not a drive-by edit.
 
 ---
 
