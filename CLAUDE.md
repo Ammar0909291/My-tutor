@@ -2857,3 +2857,37 @@ contained in `main`'s current tip.
   production**; a run that would have straddled two builds was stopped and discarded rather than
   reported.
 - Full suite 494 files / 10,754 passed / 9 skipped; `tsc --noEmit` clean.
+
+## Explanation DRAFT queue — CTO decision, and the triage that followed (2026-08-30)
+- **The question.** `/admin/knowledge-assets` showed `DRAFT 4755 / ACTIVE 1592` with an Approve button
+  per row, and the owner asked what they were and whether they had to approve them. Answered from the
+  database, not the previews.
+- **What they are.** Two different things sharing a table. **ACTIVE 1,592, every one
+  `HUMAN_CURATOR`, 683 concepts** — the deliberately authored seed assets, and the only ones ever
+  served: `findBestExplanation` returns ACTIVE above a confidence threshold and nothing else.
+  **DRAFT 4,762, every one `AI_AUTHORED`, 426 concepts** — `captureGeneratedExplanation` writes one
+  after EVERY successful LLM turn. Drafts are inert by construction; the module's own header calls it
+  "a safe no-op until curated". **No approval was ever required and nothing degrades while they sit.**
+- **Why the queue could not work.** A DRAFT is whatever the tutor said on some turn, so most are
+  turn-scoped by construction. Classified against production: **3,269 of 4,762 (69%) not reusable** —
+  is-a-question 2,368, too-short 1,766, addresses-this-turn 364, praise-reply 249, ascii-figure 130,
+  learner-name 61, session-discourse 9. Reading the CLEANEST slice (>=400 chars, no praise, no fence,
+  not a question) showed roughly **1 in 6** genuinely reusable. A queue of 4,762 at that yield,
+  growing ~600/day under test load, is not a workflow anyone can finish.
+- **My own testing was most of the recent growth**, stated plainly: 1,817 of the 1,872 drafts captured
+  in the preceding three days were physics, from this session's struggling-learner runs.
+- **A false alarm I checked before raising.** 61 drafts contain the learner's name — the exact leak
+  `validation.ts` documents as a measured incident. Dates say the gate WORKS: latest 2026-08-12, none
+  in the last three days, **none ACTIVE**, and the 2 from the original incident already DEPRECATED.
+  Historical residue, not a live leak.
+- **DECISION (three parts).** (1) The review queue is abandoned as a human workflow — it will never be
+  worked through and the value it unlocks (replacing an LLM call with stored text on some turns) does
+  not justify the cost. (2) The backlog is auto-triaged, **never deleted**: the 3,269 not-reusable rows
+  moved to DEPRECATED, a state the schema already has, reversible in one statement keyed on
+  `deprecationReason LIKE 'triage 2026-08-30%'`. **Applied — DRAFT 4,762 → 1,494, ACTIVE untouched at
+  1,592.** (3) Capture becomes selective and stops recording QA/harness traffic — the inflow half,
+  which triage cannot reach. **NOT YET DONE:** it is server-side and the 60-concept certification run
+  was in flight; it is the first thing after that lands.
+- `scripts/assets/triageExplanationDrafts.ts` — the classifier, report-only by default, `--apply` to
+  write, with each rule stating the failure mode it protects against. **There is no delete path in the
+  file on purpose.**
