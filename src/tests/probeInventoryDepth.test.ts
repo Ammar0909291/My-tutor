@@ -783,6 +783,17 @@ describe('the physics depth probes are arithmetically true', () => {
     expect(correctText(fr)).toContain('2.4 mm')
   })
 
+  it('batch 13: coupling j=1 with j=1 preserves the state count', async () => {
+    const probes = await load()
+    const coup = find(probes, 'j₁ = 1 and j₂ = 1 are coupled')
+    // (2j1+1)(2j2+1) before coupling must equal the sum of (2j+1) after.
+    const before = (2 * 1 + 1) * (2 * 1 + 1)
+    const after = [2, 1, 0].map((j) => 2 * j + 1).reduce((a, b) => a + b, 0)
+    expect(before).toBe(9)
+    expect(after).toBe(9)
+    expect(correctText(coup)).toContain('Nine states')
+  })
+
   it("Hooke: 3 N gives 6 cm, so 12 N would predict 24 cm; two springs halve the extension", async () => {
     const probes = await load()
     const limit = find(probes, 'stretches 6 cm when a 3 N weight')
