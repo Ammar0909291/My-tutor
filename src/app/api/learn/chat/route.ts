@@ -1777,6 +1777,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     // read at the withhold call site ~1600 lines below) so both places agree
     // on exactly which turns the gate considered question-eligible.
     let phaseAllowsProbeHoisted = false
+    // The don't-know run INCLUDING this turn, for dontKnowCeiling.ts. Read from
+    // the pre-turn snapshot and incremented here because the fold that persists
+    // it runs after the text is built.
+    let consecutiveDontKnowsHoisted = 0
     // CRITERION 5 (answerConfirmation.ts): how many answers this session has
     // already had confirmed, used only to rotate the phrasing so a run of
     // correct answers is not one canned sentence. Read from the pre-turn
@@ -3811,6 +3815,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           const n = (cs?.correctAtCheck ?? 0) + (cs?.correctAtPractice ?? 0)
           priorConfirmationsHoisted = Number.isFinite(n) && n >= 0 ? n : 0
         }
+        {
+          const prior = (snapshot as { conversationState?: { consecutiveDontKnows?: number } } | null)
+            ?.conversationState?.consecutiveDontKnows
+          const base = typeof prior === 'number' && Number.isFinite(prior) && prior >= 0 ? prior : 0
+          const { isDontKnowSignal } = await import('@/lib/teaching/recoveryGuard')
+          consecutiveDontKnowsHoisted = isDontKnowSignal(recoveryKeyHoisted) ? base + 1 : 0
+        }
         // The same exclusions the memory path already applies, for the same
         // reasons: no content into a flooded mind (foundations/04 P5), lesson
         // one never opens with a quiz (first-lesson/02 §1), and an excursion
@@ -5321,6 +5332,34 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         })
         cleanText = confirmed.text
       } catch { /* non-fatal — the teaching is still better than no answer */ }
+
+      // A CEILING ON "I DON'T KNOW". Owner-reported from a live second-law
+      // lesson: four don't-knows in a row, and the tutor asked a question after
+      // three of them. Every piece of the intended behaviour already existed and
+      // fired — the detector matched all four utterances, sessionFailureCount
+      // incremented, and the RECOVERY block said in capitals "Stop ALL questions
+      // this turn". The model asked anyway. Same class as the figure reference,
+      // the ungradeable gate question and the repeated explanation: it holds only
+      // once it is an invariant. See dontKnowCeiling.ts.
+      //
+      // Runs AFTER the confirmation repair so a graded-correct turn is unaffected
+      // (a correct answer is not a don't-know), and before the verifier so the
+      // verifier sees the final text.
+      try {
+        const { applyDontKnowCeiling } = await import('@/lib/teaching/dontKnowCeiling')
+        const ceiling = applyDontKnowCeiling({
+          text: cleanText,
+          recoveryKey: recoveryKeyHoisted,
+          consecutiveDontKnows: consecutiveDontKnowsHoisted,
+          pendingMcq: pendingMcqHoisted,
+        })
+        if (ceiling.withheld) {
+          console.log('[dont-know-ceiling] ' + JSON.stringify({
+            reason: ceiling.reason, run: consecutiveDontKnowsHoisted,
+          }))
+        }
+        cleanText = ceiling.text
+      } catch { /* non-fatal — a repair must never break a turn */ }
 
       // K6 — EOS Runtime integration: run the K5 Output Verifier on the
       // cleaned text. Off by default; behind ENABLE_OUTPUT_VERIFIER (or the
