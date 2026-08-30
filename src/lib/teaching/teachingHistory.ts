@@ -362,6 +362,30 @@ export function buildTeachingMemoryBlock(h: TeachingHistory | null | undefined):
   const trend = confidenceTrend(h.confidenceTrail)
   if (TREND_GUIDANCE[trend]) lines.push(`- ${TREND_GUIDANCE[trend]}`)
 
+  // The authored explanation is the one already-used artefact this block never
+  // named. Analogies, demonstrations, visuals, probes and strategies each carry
+  // an explicit "do NOT repeat"; `explanationsServed` was recorded and then
+  // never spoken to the model.
+  //
+  // Measured on a 60-concept physics run (2026-08-30, deployed app, struggling
+  // -learner persona): the Explanation Memory asset is served on an early turn
+  // as `provider: "memory"`, and a LATER model turn then reproduces it
+  // byte-for-byte in **37 of 57 sessions (65%)** — 56 of 584 model turns. It
+  // lands worst exactly where it costs most: as the reply to "can you show the
+  // picture again", and as the reply to a CORRECT substantive answer, which
+  // reads to the learner as not having been heard at all.
+  //
+  // The asset text is already in the model's context (that is how it can copy
+  // it); what was missing is the instruction not to. Same shape and same
+  // authority as the five sibling lines above.
+  if (h.explanationsServed.length > 0) {
+    lines.push(
+      '- The authored explanation for this concept has ALREADY been shown to the learner, '
+      + 'word for word, earlier in this transcript. Do NOT reproduce it or any passage of it '
+      + 'verbatim — if this concept needs saying again, say it a DIFFERENT way.',
+    )
+  }
+
   if (h.explanationCount > 0) {
     lines.push(`- You have explained this concept ${h.explanationCount} time(s) already. Build on that; do not restart from the beginning.`)
   }

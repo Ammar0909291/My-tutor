@@ -2749,3 +2749,50 @@ contained in `main`'s current tip.
   (previously stuck at GUIDE), and there was no abandonment and no degradation. The fix unblocked the
   entire assessment→mastery path for a confused-but-engaged learner, not just the one turn.
 - Full suite 486 files / 10,487 passed / 9 skipped; `npx tsc --noEmit` clean; `npm run build` clean.
+
+## Physics Teachability Program — 60-concept certification (2026-08-30)
+- **Mission:** make physics (238 KG concepts) genuinely teachable end to end for a struggling,
+  visually-dependent learner — not a coverage percentage, but: open any lesson, ask for a diagram,
+  get one, be assessed with a real gradeable question, reach recorded mastery in a normal session.
+  Full record, including every falsified hypothesis, in
+  `docs/architecture/PHYSICS_TEACHABILITY_STATUS.md`. Source of truth for the subject is
+  `scripts/physics/state.ts` (commit `8db692a`) — do not trust a number in this file over it.
+- **Three of the program's own founding premises were wrong and were corrected before acting:**
+  (1) the asset contract was ranked gap #1 but is **already closed** — all 262 (concept, band) pairs
+  meet `assetContract.ts` v1, nothing to author or promote; (2) visual **generation is LIVE in
+  production**, not pending — the note elsewhere in this file that the ADR 14 catalogue is empty is
+  stale, physics holds ACTIVE serving content on 238/238 concepts; (3) the "1 of 30 reached mastery"
+  headline that motivated the program was an arithmetic artefact of the QA harness's own 9-turn
+  budget, not a product failure.
+- **Certification run:** `strugglingLearnerHarness.ts physics`, all six difficulty tiers,
+  `--count=60 --seed=2026`, deployed app, real QA account. 60/60 completed, 0 lesson drift,
+  2 excluded as UNMEASURED (provider degraded) → **58 measured**. **46/58 (79%) showed a real
+  visual**; **47/58 (81%) reached verified mastery** (`correctAtCheck>=1 && correctAtPractice>=2`).
+  Mastery does not decay with difficulty — expert is the strongest tier at 13/13.
+- **Four defects fixed and pushed, two in the instrument and two in the product:** the harness could
+  not reach mastery at any quality (9-turn budget, `c846703`) and leaked sessions between concepts
+  (`ec7d595`); a manner adverb was parsed as a topic, so "explain it slowly" spent eleven turns
+  teaching the English word "slowly" (`86a5346`); and the concept-budget extension could not serve
+  the learner it was written for (`65d1f28`). Verified mastery moved 42% → 73% on a fixed 12-concept
+  sample across three comparable runs, before the 60-concept run measured 81%.
+- **Fifth defect, found from the 60-concept transcripts and fixed here:** the authored explanation
+  was reproduced **word-for-word by a later model turn in 37 of 57 sessions (65%)**, 56 of 584 model
+  turns — landing worst as the reply to "can you show the picture again" and as the reply to a
+  CORRECT answer, which reads as not having been heard. Cause: `buildTeachingMemoryBlock` gives every
+  other already-used artefact an explicit "do NOT repeat" (analogies, demonstrations, visuals,
+  probes, strategies) but never mentioned `explanationsServed`, which it had recorded all along. The
+  missing line was added at the same authority as its five siblings; 4 regression cases in
+  `teachingMemory.test.ts`. **Not yet re-measured against production** — the defect and its cause are
+  measured, the improvement is not yet claimed.
+- **`--resume` added to the harness.** A 60-concept run takes ~7 hours; the container restarted at
+  concept 34 with all 34 transcripts still on disk and no way to use them. `--resume` skips concepts
+  that recorded `ok:true` and still hold a transcript, and retries any that failed.
+- **Honest gaps — NOT reported as met.** (a) **Quality averages ~6.0/10 against a >=7.5 bar** across
+  12 transcripts read (4 random, 8 chosen because they failed, so the raw 5.8 mean is pessimistic).
+  The floor criterion — nothing below 4/10 — IS met. (b) **5 sessions stall at GUIDE** with nothing
+  graded. The symptom is localized (keyed probes attach on 9% of turns there vs 35% elsewhere) but
+  the cause is NOT isolated; three plausible explanations were tested and falsified — the probe pool
+  is NOT dry (`phys.opt.mirrors` holds 7 ACTIVE probes at the served band and used 1), QL-2 is
+  already scoped so it cannot block permanently, and GUIDE attaches probes routinely (46%). That is
+  the named next gap.
+- Full suite green, `tsc --noEmit` clean.

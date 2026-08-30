@@ -10,7 +10,7 @@ mastery inside a normal session.
 source of truth for this subject. Do not trust a number in this file, or in
 CLAUDE.md, over that script's output.
 
-Last updated: 2026-08-29.
+Last updated: 2026-08-30.
 
 ---
 
@@ -301,3 +301,202 @@ and deserves its own measured change, not a drive-by edit.
 - **Writing to the production database** is NOT blocked for reads; write access
   via the Supabase MCP has historically been a read-only transaction for DDL.
   Not needed so far — physics required no seeding.
+
+
+---
+
+# The 60-concept certification run (2026-08-30)
+
+**What was run.** `scripts/qa/strugglingLearnerHarness.ts physics`, all six
+difficulty tiers, `--count=60 --seed=2026`, against the deployed app with a real
+QA account. A struggling, visually-dependent persona: weak English, asks for
+pictures, says "too hard", answers the first closed-choice probe WRONG by
+construction and correctly thereafter.
+
+The container restarted mid-run at concept 34. The 34 finished transcripts were
+still on disk and the harness had no way to use them, so `--resume` was added
+(commit after `9c08fea`): it skips concepts that already recorded `ok:true` and
+still hold a transcript, and retries any that failed. The run continued from 35.
+
+## Headline
+
+| Measure | Result |
+|---|---|
+| Concepts attempted | 60/60 completed, 0 discarded for lesson drift |
+| Excluded as UNMEASURED (provider degraded) | 2 — `phys.mod.diode-rectification`, `phys.mech.center-of-mass` |
+| **Measured sample** | **58** |
+| Showed a real visual at least once | **46/58 (79%)** |
+| Reached VERIFIED mastery (`correctAtCheck>=1` and `correctAtPractice>=2`) | **47/58 (81%)** |
+
+81% clears the program's >=70% mastery bar. The two degraded sessions are
+excluded rather than counted as failures — the app did not get a fair turn in
+them, and counting them either way would be a claim the run did not measure.
+
+### By difficulty tier
+
+| Tier | n | visual | mastery |
+|---|---|---|---|
+| foundational | 2 | 2/2 | 1/2 |
+| developing | 10 | 9/10 | 9/10 |
+| proficient | 18 | 14/18 | 12/18 |
+| advanced | 13 | 9/13 | 10/13 |
+| expert | 13 | 11/13 | 13/13 |
+| research | 2 | 1/2 | 2/2 |
+
+Mastery does NOT fall off with difficulty — expert is the strongest tier at
+13/13. The weak tier is `proficient` (12/18), which is where most of the
+mid-lesson stalls below land.
+
+## The 11 sessions that did not reach mastery, split by cause
+
+Two of the three are instrument limits, not product failures, and are labelled
+as such rather than folded into a single number:
+
+- **5 hit the harness's own 20-turn ceiling at PRACTICE** with
+  `checkCorrect=1, practiceCorrect=1` — one graded answer short, still being
+  served probes when the run stopped counting.
+  (`conservation-of-angular-momentum`, `surface-tension`, `nuclear-fusion`,
+  `refrigerators`, `sound-intensity`.)
+- **1 ran only 4 turns** (`phys.mech.normal-force`) and was served no keyed
+  probe at all — its trajectory reads `PRACTICE > CHECK`, i.e. it did not start
+  at the beginning of the ladder. Not explained; a single instance.
+- **5 genuinely stalled at GUIDE** with nothing graded at all — 0 correct at
+  CHECK, 0 at PRACTICE — and the concept turn budget then expired, closing the
+  lesson honestly with "Let's pause ... here for now".
+  (`unit-conversion`, `gravitational-potential`, `mirrors`, `stress-strain`,
+  `universal-gravitation`.)
+
+### The five GUIDE stalls: what was measured, and three explanations that were falsified
+
+The discriminator is **keyed-probe attachment rate**: those five sessions were
+served an authored, server-keyed probe on **7 of 75 turns (9%)**, against
+**295 of 844 (35%)** across the other 53. The gate simply asked far less, the
+concept budget ran out, and nothing was ever graded.
+
+Three plausible causes were tested and each is WRONG. Recorded so they are not
+re-derived:
+
+1. **"The probe pool ran dry."** No. `phys.opt.mirrors` holds **7** ACTIVE
+   probes at the served band (HIGH) and the session used exactly **1**. Every
+   one of the five holds 3-7. Checked against production:
+   `asset_identity` where `family='PROBE' AND status='ACTIVE'`.
+2. **"QL-2 blocks asking permanently after a non-answer."** No.
+   `questionLegality.ts` already scopes QL-2 to `teachSegmentsSinceQuestion === 0`,
+   so it lifts as soon as the tutor teaches anything — and these sessions taught
+   on nearly every turn.
+3. **"Authored probes only attach at CHECK/PRACTICE, so GUIDE is a deadlock."**
+   No. Measured attachment by phase across the run: OBSERVE 6%, DEMONSTRATE 33%,
+   **GUIDE 46%**, CHECK 62%, PRACTICE 66%, TRANSFER 0%. GUIDE attaches probes
+   routinely.
+
+**The symptom is localized; the cause is not.** This is the honest state of
+gap 3 ("why the assessment loop doesn't close") and it is the named next gap.
+
+One contributing behaviour IS confirmed and is worth its own note: the model
+sometimes writes a well-formed four-option MCQ **in prose**, on a turn where no
+authored probe was attached and the concept still holds unused ones. The server
+has no answer key for it, so `shouldSuppressSignalCorrectness` correctly refuses
+to grade the answer — the learner answers, and nothing counts it. Measured at
+11 of 919 turns (1.2%), so it is real but is NOT the main driver of the stalls.
+`assetContract.ts`'s own header predicts this failure for a dry pool; here it
+happens with the pool full.
+
+---
+
+# Teaching quality — an honest rating
+
+12 transcripts were read: 4 chosen at random (seeded) and 8 chosen because they
+failed, so the raw mean is pessimistic by construction. Ratings out of 10.
+
+| Concept | Tier | Mastered | Rating |
+|---|---|---|---|
+| `phys.mech.pressure-fluids` | developing | yes | 8 |
+| `phys.qm.angular-momentum-addition` | expert | yes | 7 |
+| `phys.meas.significant-figures` | developing | yes | 7 |
+| `phys.qm.quantum-tunneling` | expert | yes | 7 |
+| `phys.mech.universal-gravitation` | proficient | no | 6 |
+| `phys.meas.unit-conversion` | foundational | no | 6 |
+| `phys.mech.generalized-coordinates` | expert | yes | 5 |
+| `phys.em.gauss-law` | proficient | yes | 5 |
+| `phys.opt.mirrors` | proficient | no | 5 |
+| `phys.mech.stress-strain` | proficient | no | 5 |
+| `phys.mech.gravitational-potential` | proficient | no | 5 |
+| `phys.therm.refrigerators` | advanced | no | 4 |
+
+Raw mean **5.8/10**. Re-weighted to the real 47-mastered / 11-not split the
+sample was drawn from, roughly **6.0/10**.
+
+**So the ">=7.5/10 average" criterion is NOT met.** The "nothing below 4/10"
+criterion IS met — the floor is 4, and no transcript was incoherent, unsafe or
+factually broken end to end.
+
+What is genuinely good: the physics is correct; the opening reframe after "this
+is too hard" is consistently well-pitched and concrete (coins for spin addition,
+a ruler for significant figures, a pool for fluid pressure); wrong answers get a
+real diagnosis rather than a restatement (`universal-gravitation`: "Weight equals
+mass times acceleration, so to find acceleration you divide weight by mass, not
+multiply"); and `quantum-tunneling` pre-empts a genuine misconception unprompted
+("a tunneling particle does NOT borrow energy — that is a pop-science
+misapplication of the energy-time uncertainty relation").
+
+What pulls the average down, in order of how often it appeared:
+
+1. **The authored explanation is re-emitted verbatim (fixed this session, below).**
+2. **A correct substantive answer is sometimes answered with prose that ignores
+   it.** `phys.therm.refrigerators` is the worst case in the sample: the learner
+   gives three correct answers in a row and one of them is met with a statement
+   that contradicts it and is itself wrong ("the coefficient of performance
+   measures its efficiency" — COP is deliberately not an efficiency, and the
+   learner had just said so correctly). Rated 4/10 for that reason.
+3. **Content-free lead-in turns** — "Here is a question to check your
+   understanding:", "Let's stay with this idea for a moment." These carry the
+   MCQ in the payload widget, so they are not broken in the real UI, but they
+   read as filler in a transcript.
+4. **ASCII-art figures where no real visual exists.** `phys.em.gauss-law` falls
+   back to a text sketch that renders as broken slashes — for a
+   visually-dependent learner that is worse than the honest "I can't show you a
+   picture of this one" that `significant-figures` gives.
+
+## The one defect fixed from this evidence
+
+**The authored explanation was being reproduced word-for-word by a later model
+turn in 37 of 57 sessions (65%)** — 56 of 584 model turns (9.6%). Measured by
+taking each turn served as `provider: "memory"` and searching every later
+model-generated turn for its opening 200 characters.
+
+It lands worst exactly where it costs most: as the reply to "can you show the
+picture again, i want to look one more time", and as the reply to a CORRECT
+substantive answer — which reads to the learner as not having been heard at all.
+`phys.mech.generalized-coordinates` served the identical paragraph on T1
+(`memory`), then again on T3, T6 and T10 (`groq`), the last of those in reply to
+a correct answer.
+
+Root cause: `buildTeachingMemoryBlock` names every other already-used artefact
+with an explicit "do NOT repeat" — analogies, demonstrations, visuals, probes,
+strategies — but never mentioned `explanationsServed`, which it has recorded all
+along. The asset text is in the model's context (that is how it can copy it);
+the instruction not to copy it was simply absent.
+
+Fixed by adding the missing line, in the same shape and at the same authority as
+its five siblings. 4 regression cases in `teachingMemory.test.ts`, including the
+fresh-attempt and legacy-row paths.
+
+**Not yet re-measured against production.** The fix is a prompt-contract change
+whose effect can only be confirmed by another full run; the honest claim today is
+that the defect is measured and the cause is identified, not that the number has
+moved.
+
+---
+
+# Completion criteria — status
+
+| # | Criterion | Status |
+|---|---|---|
+| 1 | Asset contract compliance | **MET** — 262/262 (concept, band) pairs; was already met before the program started (Correction 1) |
+| 2 | >=60-concept evidence run | **MET** — 60 attempted, 58 measured |
+| 3 | Assessment loop closes | **PARTIAL** — 81% of sessions close it; 5 stall at GUIDE with the cause localized but not isolated |
+| 4 | >=70% verified mastery | **MET** — 81% |
+| 5 | Quality >=7.5/10 average, none below 4/10 | **NOT MET on the average** (~6.0/10); the floor of 4/10 IS met |
+| 6 | CLAUDE.md updated | **MET** |
+
+Two of six are not fully met, and neither is being reported as met.

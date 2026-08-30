@@ -309,3 +309,41 @@ describe('P15 — an authored explanation is never served twice for one concept'
     expect(() => hasServedExplanation(h, 'x')).not.toThrow()
   })
 })
+
+/**
+ * A 60-concept physics run against the deployed app (2026-08-30, struggling-
+ * learner persona) measured the authored explanation being reproduced verbatim
+ * by a LATER model turn in 37 of 57 sessions (65%). Every other already-used
+ * artefact in the teaching-memory block carried an explicit "do NOT repeat";
+ * `explanationsServed` was recorded and never spoken to the model.
+ */
+describe('teaching memory — the authored explanation is not repeated verbatim', () => {
+  it('tells the model not to reproduce an explanation it has already served', () => {
+    const block = buildTeachingMemoryBlock(
+      recordExplanationServed(initialTeachingHistory('c1'), 'asset-1'),
+    )
+    expect(block).toContain('ALREADY been shown to the learner')
+    expect(block).toContain('Do NOT reproduce it')
+  })
+
+  it('says nothing about explanations before one has been served', () => {
+    expect(buildTeachingMemoryBlock(initialTeachingHistory('c1'))).toBe('')
+    expect(buildTeachingMemoryBlock(H({ analogiesUsed: ['pizza'] })))
+      .not.toContain('ALREADY been shown to the learner')
+  })
+
+  it('does not fire again on a fresh attempt, whose teaching is unspent', () => {
+    const served = recordExplanationServed(initialTeachingHistory('concept-a'), 'asset-1')
+    const afterNavigation = readTeachingHistory(served, 'concept-b')
+    expect(buildTeachingMemoryBlock(afterNavigation))
+      .not.toContain('ALREADY been shown to the learner')
+  })
+
+  it('a legacy row missing the field does not throw or emit the line', () => {
+    const legacy = { ...initialTeachingHistory('c') } as Record<string, unknown>
+    delete legacy.explanationsServed
+    const h = readTeachingHistory(legacy, 'c')
+    expect(() => buildTeachingMemoryBlock(h)).not.toThrow()
+    expect(buildTeachingMemoryBlock(h)).not.toContain('ALREADY been shown to the learner')
+  })
+})
