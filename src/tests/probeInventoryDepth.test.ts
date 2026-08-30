@@ -516,6 +516,51 @@ describe('the physics depth probes are arithmetically true', () => {
     expect(correctText(esc)).toContain('√2')
   })
 
+  it('batch 6: the mechanics arithmetic, second set', async () => {
+    const probes = await load()
+    const fr = find(probes, 'coefficient of kinetic friction of 0.30')
+    expect(0.30 * 5.0 * 9.8).toBeCloseTo(14.7, 6)
+    expect(0.30 * 5.0).toBe(1.5)             // coefficient x MASS, out by g
+    expect(correctText(fr)).toContain('15 N')
+
+    const gf = find(probes, 'two Earth radii from the CENTRE')
+    expect(9.8 / 2 ** 2).toBeCloseTo(2.45, 6) // inverse SQUARE, not inverse
+    expect(9.8 / 2).toBe(4.9)
+    expect(correctText(gf)).toContain('2.5 N/kg')
+
+    // U goes as 1/r, so equal steps in radius are not equal steps in energy.
+    const lift = find(probes, 'out to 2R from the centre')
+    expect(1 / 1 - 1 / 2).toBe(0.5)
+    expect(1 / 2 - 1 / 3).toBeCloseTo(1 / 6, 12)
+    expect(0.5 / (1 / 6)).toBeCloseTo(3, 12)
+    expect(correctText(lift)).toContain('three times')
+
+    const spr = find(probes, 'stiffness 400 N/m when it is extended by 0.10 m')
+    expect(0.5 * 400 * 0.10 ** 2).toBeCloseTo(2.0, 12)
+    expect(400 * 0.10).toBe(40)              // the no-half distractor
+    expect(correctText(spr)).toContain('2.0 J')
+
+    const kep = find(probes, 'semi-major axis of 4 AU')
+    expect(4 ** 1.5).toBe(8)
+    expect(correctText(kep)).toContain('8 years')
+
+    // s goes as t^2, so the individual seconds follow the odd numbers 1, 3, 5.
+    const stone = find(probes, 'during the THIRD second')
+    const s = (t: number) => 0.5 * 9.8 * t ** 2
+    expect((s(3) - s(2)) / s(1)).toBeCloseTo(5, 12)
+    expect(correctText(stone)).toContain('Five times')
+
+    const moi = find(probes, 'light rod of length 0.50 m')
+    expect(2.0 * 0.50 ** 2).toBe(0.5)
+    expect(2.0 * 0.50).toBe(1.0)             // mass x radius, unsquared
+    expect(correctText(moi)).toContain('0.50 kg m²')
+
+    const lifted = find(probes, 'bathroom scale in a lift')
+    expect(70 * (9.8 + 2.0)).toBeCloseTo(826, 0)
+    expect(70 * 9.8).toBeCloseTo(686, 0)     // the weight, which is not what a scale reads here
+    expect(correctText(lifted)).toContain('826 N')
+  })
+
   it("Hooke: 3 N gives 6 cm, so 12 N would predict 24 cm; two springs halve the extension", async () => {
     const probes = await load()
     const limit = find(probes, 'stretches 6 cm when a 3 N weight')
