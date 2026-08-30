@@ -107,23 +107,64 @@ describe('the causal sentence is compressed visually, never removed', () => {
 })
 
 describe('expand is a study mode, not a second figure', () => {
-  it('it is a class on the SAME element — no portal, no remount, no regeneration', () => {
-    expect(FIG_TSX).toMatch(/\$\{styles\.frame\}\$\{expanded \? ` \$\{styles\.frameExpanded\}` : ''\}/)
+  it('the SAME element — no portal, no remount, no regeneration', () => {
+    // requestFullscreen does not move the node and does not remount the React
+    // subtree, so the canvas keeps its WebGL context and the learner keeps
+    // their stage, mode, focus and slider values.
+    expect(FIG_TSX).toMatch(/el\.requestFullscreen\(\)/)
     expect(FIG_TSX).not.toMatch(/createPortal/)
   })
 
-  it('Escape closes it, and the scrim is a real button for pointer users', () => {
+  it('NEVER position:fixed — that is what trapped it inside the lesson', () => {
+    // A fixed element is positioned against the nearest ancestor with a
+    // transform, filter, backdrop-filter, perspective, contain or will-change,
+    // and the lesson's message column has one. Reported from the deployed app:
+    // the "overlay" was trapped in the message row, clipped by the scrolling
+    // messages area, with the scene below the cut and no way to scroll to it.
+    // It passed on the dev harness, whose ancestors are plain.
+    //
+    // The browser's top layer is outside the ancestor chain by construction;
+    // the fallback is in-flow and never tries to escape anything. Neither can
+    // be trapped, and neither needs a z-index.
+    const expandedRule = FIG_CSS.match(/\.frameExpanded\s*\{[\s\S]*?\n\}/)?.[0] ?? ''
+    expect(expandedRule).not.toMatch(/position:\s*fixed/)
+    expect(FIG_CSS).not.toMatch(/\.scrim\s*\{/)
+  })
+
+  it('the expanded box scrolls, so a tall figure is reachable on a short screen', () => {
+    // `.frame:fullscreen` heads more than one rule, so take them all and
+    // require that the top-layer box scrolls in at least one of them — pinning
+    // the first match asserted against whichever rule happened to come first.
+    const rules = [...FIG_CSS.matchAll(/\.frame:fullscreen\s*\{[^}]*\}/g)].map((m) => m[0])
+    expect(rules.length).toBeGreaterThan(0)
+    expect(rules.some((r) => /overflow:\s*auto/.test(r))).toBe(true)
+  })
+
+  it('the expanded budget reaches .stage, or expanding does nothing on a phone', () => {
+    // The narrow container query declares the token ON `.stage`, and a
+    // declaration on the element beats one inherited from an ancestor however
+    // specific that ancestor's selector. Measured before this: the figure and
+    // its canvas were unchanged at 1130px and 260px after expanding.
+    expect(FIG_CSS).toMatch(/\.frameExpanded \.stage,\s*\n\s*\.frame:fullscreen \.stage/)
+  })
+
+  it('the scene may change SHAPE too — height alone cannot grow a narrow scene', () => {
+    expect(THREE_D).toMatch(/aspectRatio: 'var\(--fig-scene-aspect, 4 \/ 3\)'/)
+    expect(FIG_CSS).toMatch(/--fig-scene-aspect/)
+  })
+
+  it('the flag follows the DOM, so leaving fullscreen by any route stays in sync', () => {
+    expect(FIG_TSX).toMatch(/addEventListener\('fullscreenchange'/)
+  })
+
+  it('Escape still closes the in-flow fallback, where no browser handles it', () => {
     expect(FIG_TSX).toMatch(/e\.key === 'Escape'/)
-    expect(FIG_TSX).toMatch(/aria-label="Close the expanded figure"/)
+    expect(FIG_TSX).toMatch(/if \(!expanded \|\| canFullscreen\) return/)
   })
 
   it('the toggle says which way it goes, for a screen reader as well', () => {
     expect(FIG_TSX).toMatch(/aria-label=\{expanded \? 'Return the figure to the lesson' : 'Expand the figure'\}/)
     expect(FIG_TSX).toMatch(/aria-pressed=\{expanded\}/)
-  })
-
-  it('the page behind it does not scroll away under a phone', () => {
-    expect(FIG_TSX).toMatch(/document\.body\.style\.overflow = 'hidden'/)
   })
 })
 

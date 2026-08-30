@@ -121,25 +121,62 @@ export function ExplainerFigure({ spec }: { spec: SceneSpec }) {
   const answerWithheld = predicting || mode === 'practice' || mode === 'assess'
 
   /**
-   * Study mode. A CLASS on the existing element, deliberately — not a portal,
-   * not a second render of the figure. The React subtree never unmounts, so
-   * the scene is not regenerated and the learner keeps their stage, mode,
-   * focus and slider values on the way in and back out again.
+   * STUDY MODE — the TOP LAYER, not a fixed overlay.
+   *
+   * The first version used `position: fixed; inset: 16px`. That is correct only
+   * while no ancestor establishes a containing block, and in the real lesson
+   * one does: a fixed element is positioned against the nearest ancestor with a
+   * transform, filter, backdrop-filter, perspective, contain or will-change,
+   * and the lesson's message column has one. Reported and reproduced from the
+   * deployed app: expanding left the figure trapped inside the message row,
+   * clipped at the bottom of the scrolling messages area, with the scene below
+   * the cut and NO WAY TO SCROLL TO IT. It looked fine on the dev harness,
+   * whose ancestors are plain — which is exactly why it shipped.
+   *
+   * `requestFullscreen()` puts the element in the browser's top layer, which is
+   * outside the whole ancestor chain by construction, so no ancestor property
+   * can trap it. It does NOT move the node and does NOT remount the React
+   * subtree, so the canvas keeps its WebGL context and the learner keeps their
+   * stage, mode, focus and slider values — the property that made the class
+   * approach right in the first place is kept.
+   *
+   * Where the API is unavailable (notably iOS Safari, which allows fullscreen
+   * on <video> only) the fallback is an IN-FLOW expansion: the figure simply
+   * takes a much larger scene budget and the lesson's own scroll container
+   * reaches all of it. That cannot be trapped either, because it never tries to
+   * escape anything.
    */
+  const frameRef = useRef<HTMLElement>(null)
   const [expanded, setExpanded] = useState(false)
+  const canFullscreen = typeof document !== 'undefined'
+    && typeof HTMLElement !== 'undefined'
+    && typeof HTMLElement.prototype.requestFullscreen === 'function'
+    && (document.fullscreenEnabled ?? false)
+
+  const toggleExpanded = useCallback(() => {
+    const el = frameRef.current
+    if (!canFullscreen || !el) { setExpanded((v) => !v); return }
+    if (document.fullscreenElement === el) void document.exitFullscreen()
+    else void el.requestFullscreen().catch(() => setExpanded(true))
+  }, [canFullscreen])
+
+  // The browser owns Escape and the system fullscreen affordances, so the flag
+  // follows the DOM rather than the other way round — otherwise leaving
+  // fullscreen by any route the button did not initiate would desynchronise it.
   useEffect(() => {
-    if (!expanded) return
+    if (!canFullscreen) return
+    const sync = () => setExpanded(document.fullscreenElement === frameRef.current)
+    document.addEventListener('fullscreenchange', sync)
+    return () => document.removeEventListener('fullscreenchange', sync)
+  }, [canFullscreen])
+
+  // Escape for the in-flow fallback only; in fullscreen the browser handles it.
+  useEffect(() => {
+    if (!expanded || canFullscreen) return
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setExpanded(false) }
     window.addEventListener('keydown', onKey)
-    // A fixed overlay over a scrollable page leaves the page scrolling behind
-    // it, which on a phone reads as the lesson sliding away under the figure.
-    const prev = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
-    return () => {
-      window.removeEventListener('keydown', onKey)
-      document.body.style.overflow = prev
-    }
-  }, [expanded])
+    return () => window.removeEventListener('keydown', onKey)
+  }, [expanded, canFullscreen])
 
   /**
    * What stays in front of the learner, and what waits behind a disclosure.
@@ -156,16 +193,8 @@ export function ExplainerFigure({ spec }: { spec: SceneSpec }) {
   const hasTail = tailPanels.length > 0 || Boolean(explainer.insight)
 
   return (
-    <>
-      {expanded && (
-        <button
-          type="button"
-          className={styles.scrim}
-          aria-label="Close the expanded figure"
-          onClick={() => setExpanded(false)}
-        />
-      )}
     <figure
+      ref={frameRef}
       className={`${styles.frame}${expanded ? ` ${styles.frameExpanded}` : ''}`}
       role="figure"
       aria-label={shown.ariaLabel ?? shown.title}
@@ -194,7 +223,7 @@ export function ExplainerFigure({ spec }: { spec: SceneSpec }) {
           aria-label={expanded ? 'Return the figure to the lesson' : 'Expand the figure'}
           aria-pressed={expanded}
           title={expanded ? 'Close (Esc)' : 'Expand'}
-          onClick={() => setExpanded((v) => !v)}
+          onClick={toggleExpanded}
         >
           {expanded ? <Minimize2 size={15} /> : <Maximize2 size={15} />}
         </button>
@@ -405,7 +434,6 @@ export function ExplainerFigure({ spec }: { spec: SceneSpec }) {
         <figcaption className={styles.note}>{shown.teachingGoal}</figcaption>
       )}
     </figure>
-    </>
   )
 }
 

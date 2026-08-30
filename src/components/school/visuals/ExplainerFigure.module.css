@@ -500,26 +500,57 @@
 /* ── expanded: the same figure, given the window ──────────────────────────
  * A study mode, not a second figure. The DOM node does not move and the React
  * subtree is not remounted, so the scene is never regenerated and no state —
- * stage, mode, focus, slider values — is lost on the way in or out. */
+ * stage, mode, focus, slider values — is lost on the way in or out.
+ *
+ * NOT `position: fixed`. A fixed element is positioned against the nearest
+ * ancestor carrying a transform, filter, backdrop-filter, perspective, contain
+ * or will-change, and the lesson's message column has one — so the "overlay"
+ * was trapped inside the message row, clipped by the scrolling messages area,
+ * with the scene below the cut and no way to reach it. It looked right on the
+ * dev harness, whose ancestors are plain, which is how it shipped.
+ *
+ * The real fullscreen path is `:fullscreen` below — the browser's top layer is
+ * outside the ancestor chain by construction and cannot be trapped. This class
+ * is the FALLBACK for browsers without element fullscreen (notably iOS
+ * Safari): an in-flow expansion, which cannot be trapped either because it
+ * never tries to escape. The lesson's own scroll container reaches all of it.
+ */
 .frameExpanded {
-  position: fixed;
-  inset: 16px;
-  z-index: 70;
-  margin-top: 0;
-  overflow: auto;
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45);
-  /* The whole point of expanding is a bigger picture, so the scene takes the
-     height the window just handed it. */
-  --fig-scene-h: min(62vh, 720px);
+  --fig-scene-h: min(70vh, 640px);
 }
 
-.scrim {
-  position: fixed;
-  inset: 0;
-  z-index: 69;
-  background: rgba(0, 0, 0, 0.55);
-  border: none;
-  padding: 0;
+/* The narrow-container rule below declares the token ON `.stage`, and a
+ * declaration on the element itself beats one inherited from an ancestor
+ * however specific that ancestor's selector — so the expanded budget has to
+ * reach `.stage` directly or expanding does nothing on a phone. Measured: the
+ * figure and its canvas were unchanged at 1130px and 260px before this. */
+.frameExpanded .stage,
+.frame:fullscreen .stage {
+  --fig-scene-h: inherit;
+}
+
+/* Let the scene grow taller than 4:3 while it has the screen to itself. On a
+ * narrow viewport the 4:3 box is width-limited, so height alone could not make
+ * the picture bigger. */
+.frameExpanded,
+.frame:fullscreen {
+  --fig-scene-aspect: 1 / 1;
+}
+
+/* The top layer. The element fills the screen, and its OWN box scrolls, so a
+ * tall figure is always reachable however short the screen is — the failure
+ * that was reported. */
+.frame:fullscreen {
+  overflow: auto;
+  padding: 20px 22px 24px;
+  border-radius: 0;
+  background: var(--bg-surface);
+  --fig-scene-h: min(64vh, 760px);
+}
+
+/* Backdrop is the browser's, so no scrim element is needed or wanted. */
+.frame:fullscreen::backdrop {
+  background: rgba(0, 0, 0, 0.72);
 }
 
 .expandBtn {
@@ -543,5 +574,5 @@
 }
 
 @media (max-width: 640px) {
-  .frameExpanded { inset: 0; border-radius: 0; }
+  .frame:fullscreen { padding: 12px 12px 16px; }
 }

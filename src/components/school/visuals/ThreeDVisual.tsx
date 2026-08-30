@@ -92,7 +92,13 @@ export function ThreeDVisual({
       aria-label={ariaLabel}
       style={{
         width: '100%',
-        aspectRatio: '4 / 3',
+        // The frame may also say what SHAPE the scene should be. On a narrow
+        // screen a 4:3 box is width-limited long before it is height-limited —
+        // at 350px wide that is a 262px scene however much height the budget
+        // offers — so "expand" on a phone changed nothing at all until the
+        // shape could change with it. Fallback is the previous constant, so
+        // every other caller is unaffected.
+        aspectRatio: 'var(--fig-scene-aspect, 4 / 3)',
         // A teaching figure has to be legible before it is tidy. 360px capped
         // 3D scenes small enough that labels crowded the geometry; the floor
         // stops a narrow container collapsing the scene to a strip. The 60vh
