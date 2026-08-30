@@ -197,6 +197,55 @@ const VISIBILITY_DEIXIS_RE =
 const FIGURE_SUBJECT_CLAIM_RE =
   /^(?:the|this|that|here(?:'s| is))\s+(?:the\s+|a\s+|an\s+)?(?:diagram|figure|picture|image|illustration|sketch|drawing|animation)\b[^.!?]{0,60}?\b(?:shows?|shown|depicts?|depicted|illustrates?|illustrated|displays?|displayed|represents?|pictures?|presents?|highlights?|indicates?)\b/i
 
+/**
+ * AN EMBEDDED LOCATOR — "the histogram IN THE FIGURE".
+ *
+ * Owner-reported from a live second-law lesson, 2026-08-30. Two turns read:
+ *
+ *   "Which part of the histogram in the figure shows which outcome is most
+ *    likely?"
+ *   "What do you notice about the shape of the histogram in the figure?"
+ *
+ * and no figure was attached. The third turn — "In the figure you can see one
+ * bar that stands out…" — WAS caught, by VISIBILITY_DEIXIS_RE. These two were
+ * not, for a reason this file states deliberately: A QUESTION IS NEVER REMOVED.
+ * That rule is right and stays. But it was written for a pointing CLAUSE that
+ * sits beside the question ("look at the highlighted points — why can't 2 be
+ * divided…?"), where dropping the clause leaves a question that stands alone.
+ * Here the claim is a prepositional phrase INSIDE the question's own noun
+ * phrase, so clause-scoped removal never reaches it and the false claim ships.
+ *
+ * Removing just the phrase keeps the question and deletes the untrue part —
+ * exactly this file's contract ("removes the REFERENCE and keeps the
+ * TEACHING"). It does not make the question a good one: a histogram the
+ * learner cannot see is still being asked about, and that is a visual-coverage
+ * problem this file cannot fix. It does stop the tutor asserting a figure
+ * exists when it does not.
+ *
+ * Narrow on purpose: only "in/on the <figure noun>" directly after a noun, only
+ * when nothing is attached. "In the figure below, note that…" is already handled
+ * by the preposed locator; a fenced code block is untouched.
+ *
+ * The lookbehind is load-bearing and was added after a regression the check
+ * caught immediately: without it, the SENTENCE-INITIAL "In the figure you can
+ * see one bar that stands out" matched too, and removing the opening left
+ * "you can see one bar…" — which is worse than the input, because
+ * VISIBILITY_DEIXIS_RE is anchored per sentence and no longer recognised the
+ * mutilated remainder. Requiring a word character immediately before the
+ * preposition confines this to a locator hanging off a noun INSIDE a sentence
+ * and leaves every sentence-opening locator to the rules that already handle
+ * it.
+ *
+ * The trailing exclusion is load-bearing too, and the tests caught the need
+ * for it: "Draw the forces in the diagram you are about to make." names a
+ * figure that does not exist YET and is not claiming one is on screen —
+ * stripping it produced "Draw the forces you are about to make", which is
+ * worse than the input. A relative clause opening on a pronoun is the reliable
+ * signal for that reading, so a locator followed by one is left alone.
+ */
+const EMBEDDED_LOCATOR_RE =
+  /(?<=[A-Za-z0-9])\s+(?:in|on)\s+(?:the|this|that)\s+(?:figure|diagram|picture|image|graph|chart|illustration)\b(?!\s+(?:you|we|i|they|that|which)\b)/gi
+
 const CLAUSE_BOUNDARY_RE = /(?:[—–]|(?<=\s)-(?=\s)|,)\s*/g
 
 /**
@@ -264,6 +313,25 @@ export function stripUnbackedFigureReferences(
   try {
     if (hasFigure) return { text, stripped: false, removed: [] }
     if (typeof text !== 'string' || text.length === 0) return { text, stripped: false, removed: [] }
+    // Embedded locators come out first, so the rest of this function sees the
+    // text without them. Applied to the WHOLE string, questions included: the
+    // question survives, only the untrue claim inside it is removed. See
+    // EMBEDDED_LOCATOR_RE.
+    let working = text
+    const embeddedRemoved: string[] = []
+    if (EMBEDDED_LOCATOR_RE.test(text)) {
+      EMBEDDED_LOCATOR_RE.lastIndex = 0
+      working = text.replace(EMBEDDED_LOCATOR_RE, (m) => { embeddedRemoved.push(m.trim()); return '' })
+      EMBEDDED_LOCATOR_RE.lastIndex = 0
+    }
+    if (embeddedRemoved.length > 0) {
+      const rest = stripUnbackedFigureReferences(working, false)
+      return {
+        text: rest.text,
+        stripped: true,
+        removed: [...embeddedRemoved, ...rest.removed],
+      }
+    }
     // Cheap reject: nothing here points at anything. Visibility deixis
     // ("here you see…") is a pointer that names no figure noun, so it must
     // keep the text in scope even when no figure noun appears — tested

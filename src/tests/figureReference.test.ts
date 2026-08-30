@@ -579,3 +579,64 @@ describe('figure-noun subject claim with no figure (chem.bond.resonance T3, 2026
 })
 
 })
+
+describe('an embedded locator — "the histogram in the figure"', () => {
+  // Owner-reported from a live second-law lesson, 2026-08-30. No figure was
+  // attached and two turns asked about one anyway.
+  const Q1 = 'Which part of the histogram in the figure shows which outcome is most likely?'
+  const Q2 = 'What do you notice about the shape of the histogram in the figure?'
+
+  it('removes the false claim and keeps the question', () => {
+    const r = stripUnbackedFigureReferences(Q1, false)
+    expect(r.stripped).toBe(true)
+    expect(r.text).toBe('Which part of the histogram shows which outcome is most likely?')
+    expect(r.text).not.toMatch(/in the figure/i)
+  })
+
+  it('handles the second captured turn the same way', () => {
+    expect(stripUnbackedFigureReferences(Q2, false).text)
+      .toBe('What do you notice about the shape of the histogram?')
+  })
+
+  it('does NOT fire when a figure IS attached — the reference is then true', () => {
+    for (const q of [Q1, Q2]) {
+      const r = stripUnbackedFigureReferences(q, true)
+      expect(r.stripped).toBe(false)
+      expect(r.text).toBe(q)
+    }
+  })
+
+  it('leaves a SENTENCE-OPENING locator to the rules that already handle it', () => {
+    // The regression the lookbehind exists for: without it, removing "In the
+    // figure" left "you can see one bar…", which is worse than the input
+    // because the visibility-deixis rule is anchored per sentence.
+    const t = 'The tallest bar is the outcome that shows up most often. '
+      + 'In the figure you can see one bar that stands out— that is the most probable macrostate.'
+    const r = stripUnbackedFigureReferences(t, false)
+    expect(r.text).toContain('The tallest bar is the outcome that shows up most often.')
+    expect(r.text).not.toMatch(/^you can see|\. you can see/)
+    // The pointing clause goes; the teaching after it survives, re-capitalised
+    // by the existing clause handling.
+    expect(r.text).toContain('That is the most probable macrostate')
+  })
+
+  it('is idempotent', () => {
+    const once = stripUnbackedFigureReferences(Q1, false)
+    const twice = stripUnbackedFigureReferences(once.text, false)
+    expect(twice.text).toBe(once.text)
+  })
+
+  it('does not eat a FUTURE figure — the reference is not a claim one exists', () => {
+    // Caught by this test before shipping: the first version produced
+    // "Draw the forces you are about to make", which is worse than the input.
+    // A relative clause opening on a pronoun marks the hypothetical reading.
+    for (const t of [
+      'Draw the forces in the diagram you are about to make.',
+      'Label the axes on the graph we will build together.',
+      'A histogram in statistics groups values into bins.',
+      'The figure of speech here is a metaphor.',
+    ]) {
+      expect(stripUnbackedFigureReferences(t, false).text).toBe(t)
+    }
+  })
+})
