@@ -561,6 +561,58 @@ describe('the physics depth probes are arithmetically true', () => {
     expect(correctText(lifted)).toContain('826 N')
   })
 
+  it('batch 7: the mechanics arithmetic, third set', async () => {
+    const probes = await load()
+    const pw = find(probes, 'steady 25 m/s against a total resistive force')
+    expect(600 * 25).toBe(15000)
+    expect(600 / 25).toBe(24)                 // the divided distractor
+    expect(correctText(pw)).toContain('15 kW')
+
+    const dep = find(probes, 'depth of 3.0 m in a freshwater lake')
+    expect(1000 * 9.8 * 3.0).toBeCloseTo(29400, 6)
+    expect(correctText(dep)).toContain('29 kPa')
+
+    // Pascal multiplies force, not energy: the small piston travels 50x further.
+    const hyd = find(probes, 'hydraulic lift')
+    expect(0.50 / 0.010).toBe(50)
+    expect(200 * 50).toBe(10000)
+    expect(correctText(hyd)).toContain('10 000 N')
+
+    const proj = find(probes, '20 m/s at 30° above the horizontal')
+    expect(20 * Math.sin(Math.PI / 6)).toBeCloseTo(10, 10)
+    expect(20 * Math.cos(Math.PI / 6)).toBeCloseTo(17.32, 2) // the horizontal component
+    expect(correctText(proj)).toContain('10 m/s')
+
+    const rel = find(probes, 'roads at right angles')
+    expect(Math.hypot(15, 15)).toBeCloseTo(21.2, 1)
+    expect(correctText(rel)).toContain('21 m/s')
+
+    const lift2 = find(probes, 'accelerating DOWNWARDS at 3.0 m/s²')
+    expect(10 * (9.8 - 3.0)).toBeCloseTo(68, 6)
+    expect(10 * (9.8 + 3.0)).toBeCloseTo(128, 6)  // the sign-reversed distractor
+    expect(correctText(lift2)).toContain('68 N')
+
+    const tq = find(probes, '0.25 m spanner')
+    expect(0.25 * 40 * Math.sin(Math.PI / 3)).toBeCloseTo(8.66, 2)
+    expect(0.25 * 40).toBe(10)                // the perpendicular-assumed distractor
+    expect(correctText(tq)).toContain('8.7 N·m')
+
+    const grav = find(probes, 'Two 5.0 kg masses sit 0.50 m apart')
+    expect((6.67e-11 * 5.0 * 5.0) / 0.50 ** 2).toBeCloseTo(6.67e-9, 15)
+    expect(correctText(grav)).toContain('6.7 × 10⁻⁹')
+
+    // Average speed weights by TIME, so the slower leg counts double.
+    const avg = find(probes, 'first 30 km of a journey at 60 km/h')
+    expect(60 / (30 / 60 + 30 / 30)).toBe(40)
+    expect((60 + 30) / 2).toBe(45)            // the average-the-speeds distractor
+    expect(correctText(avg)).toContain('40 km/h')
+
+    const brake = find(probes, '1200 kg car braking from 20 m/s')
+    expect((0.5 * 1200 * 20 ** 2) / 40).toBe(6000)
+    expect((1200 * 20 ** 2) / 40).toBe(12000) // the no-half distractor
+    expect(correctText(brake)).toContain('6000 N')
+  })
+
   it("Hooke: 3 N gives 6 cm, so 12 N would predict 24 cm; two springs halve the extension", async () => {
     const probes = await load()
     const limit = find(probes, 'stretches 6 cm when a 3 N weight')
