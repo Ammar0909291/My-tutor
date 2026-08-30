@@ -26,7 +26,16 @@
  * them to an EARLY learner. Counting per concept hides exactly the defect that
  * matters.
  *
- * Run: npx tsx scripts/assets/contract-audit.ts [--json] [--subject <slug>] [--all]
+ * THE FLOOR AND THE TARGET ARE DIFFERENT NUMBERS. `--min N` re-runs the same
+ * measure against a higher bar. The contract's own floor is three, which is the
+ * mastery bar itself (`correctAtCheck >= 1` plus `correctAtPractice >= 2`) with
+ * no slack: `excludeProbeStem` never re-asks a spent probe, so a pair holding
+ * exactly three can no longer certify a learner who answers one wrong. The
+ * probe-depth programme targets five for physics and chemistry — the bar plus
+ * room for two wrong answers. `--min 5` is how that target is checked; the
+ * default stays at the contract so this audit keeps reporting the contract.
+ *
+ * Run: npx tsx scripts/assets/contract-audit.ts [--json] [--subject <slug>] [--all] [--min N]
  */
 import { readdirSync } from 'node:fs'
 import path from 'node:path'
@@ -75,6 +84,10 @@ async function main() {
   const argv = process.argv.slice(2)
   const asJson = argv.includes('--json')
   const only = argv.includes('--subject') ? argv[argv.indexOf('--subject') + 1] : null
+  // Defaults to the contract. A value below it would report PASS on pairs the
+  // contract itself calls short, so it is clamped rather than trusted.
+  const minRaw = argv.includes('--min') ? Number(argv[argv.indexOf('--min') + 1]) : MIN_CLOSED_CHOICE_PROBES
+  const minProbes = Number.isFinite(minRaw) ? Math.max(MIN_CLOSED_CHOICE_PROBES, Math.floor(minRaw)) : MIN_CLOSED_CHOICE_PROBES
 
   const { explanations, probes } = await load()
   const subjects = [...new Set([
@@ -95,7 +108,7 @@ async function main() {
       const m = isGradeable(p) ? gradeable : openRecall
       m.set(k, (m.get(k) ?? 0) + 1)
     }
-    const short = [...taught].filter((k) => (gradeable.get(k) ?? 0) < MIN_CLOSED_CHOICE_PROBES)
+    const short = [...taught].filter((k) => (gradeable.get(k) ?? 0) < minProbes)
     reports.push({
       subject,
       conceptsExplained: new Set(
@@ -119,6 +132,7 @@ async function main() {
   if (asJson) {
     console.log(JSON.stringify({
       contract: { MIN_EXPLANATIONS, MIN_CLOSED_CHOICE_PROBES },
+      measuredAgainst: { minGradeableProbes: minProbes },
       measuredAt: new Date().toISOString(),
       source: 'seed corpus on disk (NOT the production database)',
       reports,
@@ -127,7 +141,11 @@ async function main() {
   }
 
   console.log(`ASSET CONTRACT AUDIT — seed corpus on disk, per (concept, gradeBand)`)
-  console.log(`contract: >= ${MIN_EXPLANATIONS} explanation, >= ${MIN_CLOSED_CHOICE_PROBES} gradeable probes\n`)
+  console.log(`contract: >= ${MIN_EXPLANATIONS} explanation, >= ${MIN_CLOSED_CHOICE_PROBES} gradeable probes`)
+  if (minProbes !== MIN_CLOSED_CHOICE_PROBES) {
+    console.log(`measured against a raised bar: >= ${minProbes} gradeable probes (--min)`)
+  }
+  console.log('')
   const pad = (s: string | number, n: number) => String(s).padEnd(n)
   console.log(pad('subject', 18) + pad('concepts', 10) + pad('pairs', 8) + pad('at contract', 13) + pad('short', 8) + 'never quizzable')
   for (const r of reports) {

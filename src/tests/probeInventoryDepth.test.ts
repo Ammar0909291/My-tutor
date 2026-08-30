@@ -1,0 +1,349 @@
+/**
+ * PROBE DEPTH: a pool that survives a wrong answer.
+ *
+ * `assetContract.ts` sets the floor at three closed-choice probes and says in
+ * its own header what three buys — "the minimum that lets a PERFECT learner
+ * finish", "deliberately NOT padded for a learner who answers wrongly".
+ * Mastery needs `correctAtCheck >= 1` plus `correctAtPractice >= 2`, and
+ * `excludeProbeStem` never re-asks a spent probe, so a concept holding exactly
+ * three can no longer certify a learner who gets one wrong — which is the
+ * learner the gate exists for.
+ *
+ * TWO MEASUREMENTS THIS FILE PINS, both of which surprised the session that
+ * made them:
+ *
+ * 1. Counting rows in `asset_identity` overstates the pool. `short_answer` and
+ *    `checkpoint` probes carry fewer than two choices and a gate cannot grade
+ *    them. On the gradeable basis production held 235 physics pairs at three,
+ *    not the 123 the row count reported.
+ *
+ * 2. Adding a probe can REDUCE the number of distinct questions a concept
+ *    serves. `buildProbeSlugResolver` appends a difficulty segment only to a
+ *    (conceptId, probeKind, gradeBand) slot holding more than one probe, so
+ *    adding a second probe to a one-probe slot re-identifies the probe already
+ *    seeded there. The old row stays ACTIVE under the old slug and the same
+ *    question is then served under two identities — the count rises while the
+ *    pool gets shallower. That is asserted against the WHOLE corpus below, not
+ *    just against this batch, because the trap is invisible from inside the
+ *    file that springs it.
+ */
+import { describe, it, expect } from 'vitest'
+import { readdirSync, readFileSync } from 'fs'
+import path from 'path'
+import { validateProbeCandidate } from '../lib/teaching/assets/validation'
+
+const ASSET_DIR = path.join(__dirname, '..', 'lib', 'teaching', 'assets')
+const INSTRUMENTATION = path.join(__dirname, '..', 'instrumentation.ts')
+
+/** The depth target. Three is the mastery bar; five is the bar plus room for
+ *  two wrong answers, which is what a real lesson needs. */
+const DEPTH_TARGET = 5
+
+/** Modules authored by the probe-depth programme. Extend as batches land. */
+const DEPTH_MODULES = ['physicsDepthSeedAssets.ts']
+
+interface Probe {
+  conceptId: string
+  probeKind: string
+  gradeBand: unknown
+  difficulty: unknown
+  stem: string
+  choices?: { text: string; isCorrect?: boolean }[]
+}
+
+async function loadFrom(files: string[]): Promise<Probe[]> {
+  const probes: Probe[] = []
+  for (const f of files) {
+    const mod = await import(path.join(ASSET_DIR, f))
+    for (const [name, value] of Object.entries(mod)) {
+      if (Array.isArray(value) && name.endsWith('PROBES')) probes.push(...(value as Probe[]))
+    }
+  }
+  return probes
+}
+
+const allFiles = () =>
+  readdirSync(ASSET_DIR).filter((f) => f.endsWith('.ts') && !f.endsWith('.test.ts'))
+
+let cached: Promise<{ all: Probe[]; without: Probe[]; depth: Probe[] }> | null = null
+function corpus() {
+  return (cached ??= (async () => {
+    const files = allFiles()
+    return {
+      all: await loadFrom(files),
+      without: await loadFrom(files.filter((f) => !DEPTH_MODULES.includes(f))),
+      depth: await loadFrom(files.filter((f) => DEPTH_MODULES.includes(f))),
+    }
+  })())
+}
+
+/** The only probes a mastery gate can grade — `contract-audit.ts`'s own rule. */
+const isGradeable = (p: Probe) => Array.isArray(p.choices) && p.choices.length >= 2
+const pairKey = (p: Probe) => `${p.conceptId}|${String(p.gradeBand)}`
+const slotKey = (p: Probe) => `${p.conceptId}:${p.probeKind}:${String(p.gradeBand)}`
+
+function slotCounts(probes: Probe[]): Map<string, number> {
+  const m = new Map<string, number>()
+  for (const p of probes) m.set(slotKey(p), (m.get(slotKey(p)) ?? 0) + 1)
+  return m
+}
+
+/** Mirrors `buildProbeSlugResolver` exactly — deliberately re-derived here so
+ *  a change to the resolver that breaks identity shows up as a test failure
+ *  rather than as duplicate rows in production. */
+function canonicalSlug(p: Probe, slots: Map<string, number>): string {
+  const base = `${p.conceptId}:${p.probeKind}:en:${String(p.gradeBand).toLowerCase()}`
+  return (slots.get(slotKey(p)) ?? 0) > 1 ? `${base}:${String(p.difficulty).toLowerCase()}` : base
+}
+
+describe('probe depth', () => {
+  it('lifts every pair it touches to at least five gradeable probes', async () => {
+    const { all, depth } = await corpus()
+    const counts = new Map<string, number>()
+    for (const p of all) {
+      if (!isGradeable(p)) continue
+      counts.set(pairKey(p), (counts.get(pairKey(p)) ?? 0) + 1)
+    }
+    const touched = [...new Set(depth.map(pairKey))].sort()
+    expect(touched.length).toBeGreaterThan(0)
+    const short = touched.filter((k) => (counts.get(k) ?? 0) < DEPTH_TARGET)
+    expect(short.map((k) => `${k} has ${counts.get(k) ?? 0}`)).toEqual([])
+  }, 30_000)
+
+  it('converts no existing singleton slot into a ladder', async () => {
+    // The failure mode this guards is silent: the count goes UP while the
+    // number of distinct questions goes down, because the probe already seeded
+    // under the old slug keeps serving beside its own re-identified copy.
+    const { all, without } = await corpus()
+    const before = slotCounts(without)
+    const after = slotCounts(all)
+    const converted: string[] = []
+    for (const [slot, n] of after) {
+      if ((before.get(slot) ?? 0) === 1 && n > 1) converted.push(slot)
+    }
+    expect(converted).toEqual([])
+  }, 30_000)
+
+  it('gives every probe in the corpus a distinct canonical identity', async () => {
+    const { all } = await corpus()
+    const slots = slotCounts(all)
+    const seen = new Map<string, number>()
+    for (const p of all) {
+      const s = canonicalSlug(p, slots)
+      seen.set(s, (seen.get(s) ?? 0) + 1)
+    }
+    expect([...seen].filter(([, n]) => n > 1).map(([s]) => s)).toEqual([])
+  }, 30_000)
+
+  it('asks nothing the same concept already asks', async () => {
+    // A reworded repeat is spent by `excludeProbeStem` along with its twin and
+    // buys the learner nothing, so it adds a row without adding a question.
+    const { all } = await corpus()
+    const byConcept = new Map<string, string[]>()
+    for (const p of all) {
+      const norm = p.stem.toLowerCase().replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim()
+      const list = byConcept.get(p.conceptId) ?? []
+      list.push(norm)
+      byConcept.set(p.conceptId, list)
+    }
+    const { depth } = await corpus()
+    const depthConcepts = new Set(depth.map((p) => p.conceptId))
+    const offenders: string[] = []
+    for (const [concept, stems] of byConcept) {
+      if (!depthConcepts.has(concept)) continue
+      if (new Set(stems).size !== stems.length) offenders.push(concept)
+    }
+    expect(offenders).toEqual([])
+  }, 30_000)
+
+  it('keys every depth probe so the server can grade it', async () => {
+    const { depth } = await corpus()
+    const bad: string[] = []
+    for (const p of depth) {
+      const choices = p.choices ?? []
+      const correct = choices.filter((c) => c.isCorrect).length
+      // Exactly one: zero is ungradeable, and more than one makes the widget's
+      // single correctIndex a lie about which answer the learner needed.
+      if (correct !== 1) bad.push(`${p.conceptId}: ${correct} correct options`)
+      // Three is the floor, not the aim. A two-option probe rated 4/10 in
+      // production offered a wrong option nobody would pick.
+      if (choices.length < 3) bad.push(`${p.conceptId}: only ${choices.length} options`)
+      const v = validateProbeCandidate({
+        conceptId: p.conceptId, language: 'en', stem: p.stem,
+        probeKind: p.probeKind, choices: p.choices as never,
+      })
+      if (!v.valid) bad.push(`${p.conceptId}: ${v.reason}`)
+    }
+    expect(bad).toEqual([])
+  }, 30_000)
+
+  it('carries no learner name and no turn-scoped discourse', async () => {
+    // `validation.ts` records the production incident: an asset opening
+    // "Mohammad Suaib, wave interference happens when…" was served twice,
+    // byte-identical, to different sessions. These are SHARED assets.
+    const { depth } = await corpus()
+    const banned =
+      /(\bgood question\b|\bgreat question\b|\bas (?:i|we) (?:mentioned|said|explained)\b|\byou (?:chose|picked|answered)\b|\bback to (?:our|the) lesson\b|\bearlier you\b)/i
+    const offenders = depth
+      .filter((p) => banned.test(p.stem) || (p.choices ?? []).some((c) => banned.test(c.text)))
+      .map((p) => p.conceptId)
+    expect(offenders).toEqual([])
+  }, 30_000)
+
+  it('is imported by the cold-start bootstrap, or it never reaches a learner', async () => {
+    // Chemistry's 314 probes were authored, in git, and unreachable for months
+    // because the only writer that seeded them needed a DATABASE_URL no session
+    // had. Being in the corpus on disk is not the same as serving.
+    const source = readFileSync(INSTRUMENTATION, 'utf8')
+    for (const mod of DEPTH_MODULES) {
+      const stem = mod.replace(/\.ts$/, '')
+      expect(source).toContain(stem)
+    }
+    expect(source).toContain('...PHYSICS_DEPTH_PROBES')
+  })
+})
+
+/**
+ * THE ARITHMETIC, RE-DERIVED RATHER THAN READ BACK.
+ *
+ * A wrong number in a teaching asset is worse than a missing one, because it is
+ * believed — and a distractor that is accidentally CORRECT punishes the careful
+ * learner. This corpus has shipped that defect twice: an 11-rule distractor that
+ * was a valid alternative method, and an octahedron Euler count that evaluated
+ * correctly. Every quantitative probe in the depth set is recomputed here from
+ * its own premises, and each check also names the slip the distractor encodes,
+ * so a distractor cannot quietly become a second right answer.
+ */
+describe('the physics depth probes are arithmetically true', () => {
+  const load = async () => {
+    const { PHYSICS_DEPTH_PROBES } = await import('../lib/teaching/assets/physicsDepthSeedAssets')
+    return PHYSICS_DEPTH_PROBES as unknown as Probe[]
+  }
+  const find = (probes: Probe[], fragment: string) => {
+    const hit = probes.filter((p) => p.stem.includes(fragment))
+    expect(hit.length, `expected exactly one probe containing "${fragment}"`).toBe(1)
+    return hit[0]
+  }
+  const correctText = (p: Probe) => (p.choices ?? []).find((c) => c.isCorrect)!.text
+
+  it('units: 2500 mm is 2.5 m, and the distractors are the wrong power of ten', async () => {
+    const p = find(await load(), '2500 millimetres')
+    expect(2500 / 1000).toBe(2.5)
+    expect(correctText(p)).toContain('2.5 m')
+    // The 25 and 250 options divide by 100 and 10 — wrong, and wrong in the
+    // direction a learner who has not fixed "milli = one thousandth" goes.
+    expect(2500 / 100).toBe(25)
+    expect(2500 / 10).toBe(250)
+  })
+
+  it('units: 4.7 µF is 4.7e-6 F, and micro is not milli', async () => {
+    const p = find(await load(), '4.7 µF')
+    expect(4.7e-6).toBeCloseTo(0.0000047, 12)
+    expect(correctText(p)).toContain('10⁻⁶')
+    expect(4.7e-3).not.toBe(4.7e-6)
+  })
+
+  it('velocity: 20 km then an hour of rest is 10 km/h over two hours', async () => {
+    const p = find(await load(), 'rests for the whole second hour')
+    expect(20 / 2).toBe(10)
+    expect(correctText(p)).toContain('10 km/h')
+    // 20 km/h is the answer that drops the resting hour from the denominator.
+    expect(20 / 1).toBe(20)
+  })
+
+  it('velocity: 40 m in 8 s is 5 m/s, and the answer must carry a direction', async () => {
+    const p = find(await load(), 'flies 40 m due east in 8 s')
+    expect(40 / 8).toBe(5)
+    expect(correctText(p)).toContain('east')
+    // The bare "5 m/s" option is numerically right and is the WRONG answer:
+    // a velocity without a direction is incomplete, which is the point.
+    const bare = (p.choices ?? []).find((c) => c.text === '5 m/s')
+    expect(bare?.isCorrect).toBeFalsy()
+  })
+
+  it('acceleration: (2 − 8)/3 = −2 m/s², and none of the distractors evaluate to it', async () => {
+    const p = find(await load(), 'slows steadily from 8 m/s to 2 m/s over 3 s')
+    expect((2 - 8) / 3).toBe(-2)
+    expect(correctText(p)).toContain('−2 m/s²')
+    expect(2 - 8).toBe(-6)          // the un-divided Δv option
+    expect(3 / (2 - 8)).toBe(-0.5)  // the inverted-fraction option
+  })
+
+  it('force: 20 N east and 8 N north combine to about 21.5 N, not 28 or 12', async () => {
+    const p = find(await load(), '20 N due east and 8 N due north')
+    expect(Math.hypot(20, 8)).toBeCloseTo(21.54, 2)
+    expect(correctText(p)).toContain('21.5 N')
+    expect(20 + 8).toBe(28)   // adding sizes, valid only along one line
+    expect(20 - 8).toBe(12)   // subtracting, valid only in opposition
+  })
+
+  it("Newton II: 10 N on 5 kg is 2 m/s²; 24 N on 6 kg is 4 m/s²", async () => {
+    const probes = await load()
+    const mid = find(probes, 'A 5 kg box is pushed')
+    expect(10 / 5).toBe(2)
+    expect(correctText(mid)).toContain('2 m/s²')
+    expect(5 / 10).toBe(0.5)   // the inverted option
+    const adult = find(probes, 'A resultant force of 24 N acts on a 6 kg mass')
+    expect(24 / 6).toBe(4)
+    expect(correctText(adult)).toContain('4 m/s²')
+    expect(24 * 6).toBe(144)
+    expect(6 / 24).toBe(0.25)
+  })
+
+  it('momentum: 10 kg m/s on 2 kg is 5 m/s; 1200 kg at 15 m/s is 18 000 kg m/s', async () => {
+    const probes = await load()
+    const v = find(probes, 'momentum of 10 kg m/s')
+    expect(10 / 2).toBe(5)
+    expect(correctText(v)).toContain('5 m/s')
+    const p = find(probes, 'A 1200 kg car travels at 15 m/s')
+    expect(1200 * 15).toBe(18000)
+    expect(correctText(p)).toContain('18 000')
+    // The 135 000 distractor is ½mv² — a real number in this problem, and an
+    // ENERGY. It is offered precisely because it is arithmetically reachable.
+    expect(0.5 * 1200 * 15 ** 2).toBe(135000)
+  })
+
+  it('impulse: a 6 m/s bounce back at 4 m/s changes momentum by 2.0, not 0.4', async () => {
+    const p = find(await load(), 'bounces straight back at 4 m/s')
+    expect(0.2 * 6).toBeCloseTo(1.2, 10)
+    expect(0.2 * 4).toBeCloseTo(0.8, 10)
+    expect(Math.abs(0.2 * -4 - 0.2 * 6)).toBeCloseTo(2.0, 10)
+    expect(correctText(p)).toContain('2.0 kg m/s')
+    // 0.4 is what you get treating the bounce as a slowing: 0.2 × (6 − 4).
+    expect(0.2 * (6 - 4)).toBeCloseTo(0.4, 10)
+  })
+
+  it('power: 500 N through 4 m in 10 s is 200 W, and 2000 is the work not the power', async () => {
+    const p = find(await load(), 'crate weighing 500 N through a height of 4 m')
+    expect(500 * 4).toBe(2000)
+    expect((500 * 4) / 10).toBe(200)
+    expect(correctText(p)).toContain('200 W')
+  })
+
+  it('kinematics: 30 m/s to rest in 75 m gives −6 m/s² from v² = u² + 2as', async () => {
+    const p = find(await load(), 'braking uniformly from 30 m/s comes to rest in 75 m')
+    expect((0 - 30 ** 2) / (2 * 75)).toBe(-6)
+    expect(correctText(p)).toContain('−6 m/s²')
+    expect(30 / 75).toBeCloseTo(0.4, 10) // the speed-over-distance distractor
+  })
+
+  it('kinetic energy: 2 kg and 4 kg at 5 m/s carry 25 J and 50 J', async () => {
+    const p = find(await load(), 'A 2 kg book and a 4 kg book')
+    expect(0.5 * 2 * 5 ** 2).toBe(25)
+    expect(0.5 * 4 * 5 ** 2).toBe(50)
+    expect(correctText(p)).toContain('25 J')
+    expect(correctText(p)).toContain('50 J')
+  })
+
+  it("Hooke: 3 N gives 6 cm, so 12 N would predict 24 cm; two springs halve the extension", async () => {
+    const probes = await load()
+    const limit = find(probes, 'stretches 6 cm when a 3 N weight')
+    expect((6 / 3) * 12).toBe(24)   // the prediction the stem quotes
+    expect(15).toBeLessThan(24)     // and the measurement that breaks it
+    expect(correctText(limit)).toContain('limit of proportionality')
+    const shared = find(probes, 'Two identical springs hang side by side')
+    // x = F/k with each spring carrying F/2.
+    expect(0.5).toBe(1 / 2)
+    expect(correctText(shared)).toContain('Half as far')
+  })
+})

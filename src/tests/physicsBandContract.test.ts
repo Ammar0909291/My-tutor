@@ -95,7 +95,14 @@ describe('physics serving contract, per (concept, band)', () => {
     expect(readFileSync(SEED_SCRIPT, 'utf-8')).toContain('PHYSICS_BAND_GAP_PROBES')
     const boot = readFileSync(BOOTSTRAP, 'utf-8')
     expect(boot).toContain("assets/physicsBandGapAssets")
-    expect(boot).toContain('...PHYSICS_BAND_GAP_PROBES]')
+    // Asserted against the ALL_PROBES expression rather than against the
+    // literal '...PHYSICS_BAND_GAP_PROBES]'. The trailing bracket only held
+    // while this was the LAST spread in the corpus, so the check failed the
+    // first time another module was appended after it (physicsDepthSeedAssets,
+    // 2026-08-30) — a passing invariant reported as a break. What matters is
+    // that it is in the corpus, not that it is last.
+    const allProbes = boot.match(/const ALL_PROBES = \[[\s\S]*?\]/)?.[0] ?? ''
+    expect(allProbes).toContain('...PHYSICS_BAND_GAP_PROBES')
   })
 
   it('the seed script imports every asset module on disk', async () => {
