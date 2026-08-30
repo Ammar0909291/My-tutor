@@ -876,6 +876,45 @@ describe('the physics depth probes are arithmetically true', () => {
     expect(c('four bonding pairs and no lone pairs')).toContain('109.5')
   }, 30_000)
 
+  it('chemistry batch 3: the arithmetic', async () => {
+    const { CHEMISTRY_DEPTH_PROBES } = await import('../lib/teaching/assets/chemistryDepthSeedAssets')
+    const probes = CHEMISTRY_DEPTH_PROBES as unknown as Probe[]
+    const c = (fragment: string) => {
+      const hit = probes.filter((p) => p.stem.includes(fragment))
+      expect(hit.length, `expected exactly one chemistry probe containing "${fragment}"`).toBe(1)
+      return (hit[0].choices ?? []).find((x) => x.isCorrect)!.text
+    }
+
+    // pH = -log[H+]; pH + pOH = 14 at 25 C.
+    expect(-Math.log10(1.0e-9)).toBeCloseTo(9, 9)
+    expect(14 - 9).toBe(5)
+    expect(c('[H⁺] = 1.0 × 10⁻⁹')).toContain('pH 9 and pOH 5')
+
+    // 1:1 salt: Ksp = s^2.
+    expect(Math.sqrt(4.0e-10)).toBeCloseTo(2.0e-5, 12)
+    expect((4.0e-10) ** 2).toBeCloseTo(1.6e-19, 25)  // squaring instead of rooting
+    expect(c('Ksp = 4.0 × 10⁻¹⁰')).toContain('2.0 × 10⁻⁵')
+
+    // Haber: 1 + 3 = 4 moles of gas on the left, 2 on the right.
+    expect(1 + 3).toBe(4)
+    expect(c('N₂(g) + 3H₂(g) ⇌ 2NH₃(g)')).toContain('Four on the left')
+
+    // The cm3 -> dm3 factor is CUBED: 10^3, not 10.
+    expect(250 / 1000).toBe(0.25)
+    expect(c('Convert 250 cm³')).toContain('0.250')
+
+    expect(0.500 * 6.02e23).toBeCloseTo(3.01e23, 12)
+    expect(c('0.500 mol of helium')).toContain('3.01 × 10²³')
+
+    // H2 : H2O is 2:2, so the coefficients cancel to 1:1.
+    expect((3.0 * 2) / 2).toBe(3.0)
+    expect(c('3.0 mol of hydrogen')).toContain('3.0 mol')
+
+    // Leading zeros are placeholders; the embedded zero is significant.
+    expect('4503'.length).toBe(4)
+    expect(c('0.0004503')).toContain('four significant figures')
+  }, 30_000)
+
   it('batch 13: coupling j=1 with j=1 preserves the state count', async () => {
     const probes = await load()
     const coup = find(probes, 'j₁ = 1 and j₂ = 1 are coupled')
