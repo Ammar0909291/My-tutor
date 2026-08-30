@@ -21,10 +21,35 @@
   padding: 14px 16px 16px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
+
+  /* ── THE HEIGHT BUDGET ──────────────────────────────────────────────
+   * The figure used to grow without limit: header + scene + rail + insight
+   * + controls each added their natural height and nothing owned the total.
+   * Measured in Chromium against this renderer, phys.meas.scalars-vectors:
+   *
+   *   container 1018px -> 1014px tall   (1.13 desktop viewports)
+   *   container  600px -> 1316px tall   (1.46)
+   *   container  373px -> 1314px tall   (1.46)   <- the real lesson width
+   *
+   * At the lesson's own width the SCENE was pinned to its 260px floor while
+   * ~1050px of stacked prose surrounded it — the teaching picture had become
+   * the smallest thing in its own frame. The scene is sized from this token
+   * so it stays the dominant element, and the secondary prose is what gives
+   * way (compact grid, then a collapsible), never the geometry or the labels.
+   */
+  --fig-scene-h: clamp(240px, 46vh, 460px);
 }
 
 /* ── header ───────────────────────────────────────────────────────────── */
+
+/* The one growable item on the header row, so the legend never has to wrap
+   to a line of its own. `min-width: 0` lets a long result sentence wrap
+   inside it rather than forcing the row wider. */
+.titleBlock {
+  flex: 1 1 200px;
+  min-width: 0;
+}
 
 .header {
   display: flex;
@@ -61,8 +86,9 @@
   border: 1px solid var(--border-subtle);
   background: var(--bg-elevated);
   font-family: var(--font-mono);
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 600;
+  line-height: 1.4;
   color: var(--text-secondary);
 }
 
@@ -74,15 +100,19 @@
 
 /* ── legend ───────────────────────────────────────────────────────────── */
 
+/* `flex: 0 0 auto` so the legend sizes to its own content and STAYS on the
+ * title's line. Without it the legend was a growable item that wrapped to a
+ * line of its own and then spanned the full 526px, adding its whole height to
+ * the header instead of sitting beside the title. */
 .legend {
   display: flex;
-  flex-direction: column;
-  gap: 5px;
+  flex-wrap: wrap;
+  gap: 2px 16px;
   padding: 9px 11px;
-  border-radius: 11px;
+  border-radius: 12px;
   border: 1px solid var(--border-subtle);
   background: var(--bg-elevated);
-  min-width: 150px;
+  min-width: 0;
 }
 
 .legendRow {
@@ -117,21 +147,33 @@
 
 /* ── body: stage beside the explanation rail ──────────────────────────── */
 
+/* The scene spans the frame. Putting the rail BESIDE it cost the scene
+ * ~40% of its width, and below the container breakpoint the rail dropped
+ * underneath anyway while the canvas kept the narrow width it had been given.
+ * Full width means the canvas is wider at every size, so labels have more
+ * room, not less — the opposite of scaling the figure down to fit. */
 .body {
-  display: grid;
-  grid-template-columns: minmax(0, 1.55fr) minmax(210px, 0.85fr);
-  gap: 14px;
-  align-items: start;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .stage { min-width: 0; }
 
+/* Secondary reading matter, two columns while there is room for two. */
+/* The reading matter under the scene: legend and explanation share a row
+ * while there is room for two, and the controls take a full row of their own
+ * so their sliders can pair up rather than stacking one per line — four of
+ * them one-per-line was 341px of a frame that has to fit a viewport. */
 .rail {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
   gap: 10px;
+  align-items: start;
   min-width: 0;
 }
+
+.railWide { grid-column: 1 / -1; }
 
 .panel {
   padding: 11px 13px;
@@ -172,11 +214,65 @@
 
 /* ── footer: insight beside the controls ──────────────────────────────── */
 
-.footer {
+/* The controls grid inside its panel. Two-up while there is room, so four
+ * sliders are two rows rather than four — measured at 268px tall as a single
+ * column, which was a quarter of the whole frame. */
+.controls {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 12px;
-  align-items: start;
+  grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
+  gap: 4px 14px;
+}
+
+/* ── the collapsible tail ─────────────────────────────────────────────
+ * Everything a learner needs in order to READ the figure stays visible.
+ * What moves in here is the material they need only AFTER they have read
+ * it — the key insight and any explanation panel past the first. Closed by
+ * default, so the figure opens at one viewport and expands on request; the
+ * content is in the DOM either way, so it is searchable and reachable by a
+ * screen reader without opening it. */
+.more {
+  border-radius: 12px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-elevated);
+}
+
+.moreSummary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 13px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  list-style: none;
+}
+
+.moreSummary::-webkit-details-marker { display: none; }
+
+.moreSummary:hover,
+.moreSummary:focus-visible { color: var(--text-primary); }
+
+.moreChevron { transition: transform 140ms ease; flex: none; }
+
+.more[open] .moreChevron { transform: rotate(90deg); }
+
+.moreBody {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 10px;
+  padding: 0 13px 13px;
+}
+
+/* The panels inside the tail have already been framed by the tail itself. */
+.moreBody .panel {
+  border: none;
+  background: none;
+  padding: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .moreChevron { transition: none; }
 }
 
 .insightList {
@@ -229,11 +325,49 @@
 
 /* The causal claim the control makes. It is TEXT, so it survives reduced
    motion, a screen reader, and a learner who cannot see the figure change. */
+.control {
+  margin-top: 4px;
+  row-gap: 1px;
+}
+
+.control:hover .effect,
+.control:focus-within .effect {
+  visibility: visible;
+  height: auto;
+}
+
+/* Nothing is hidden from a learner who cannot hover or has asked for less
+   motion — on a touch screen and under reduced-motion the sentences are
+   simply always visible, and the figure is taller by that amount. */
+@media (hover: none), (prefers-reduced-motion: reduce) {
+  .effect { visibility: visible; height: auto; }
+}
+
+/* ── the causal sentence ──────────────────────────────────────────────
+ * It STAYS. It is what makes the control teach, and for a screen-reader or
+ * reduced-motion user it is the ONLY part of the interaction that carries
+ * meaning — so it is never removed from the DOM and never detached from its
+ * control: every Control still wires `aria-describedby` to this element, so
+ * assistive technology reads it exactly as before.
+ *
+ * What changes is when a SIGHTED learner is shown it. Printed under all four
+ * sliders at once it was ~120px of a frame that had to fit a viewport, and
+ * three of those four sentences describe a control the learner is not
+ * touching. It now appears on the control they are actually on — hover, or
+ * keyboard focus anywhere inside it.
+ *
+ * `visibility` and a zero height rather than `display: none`, because a
+ * `display: none` element is dropped from the accessibility tree in several
+ * browsers and `aria-describedby` to it then reads as nothing at all.
+ */
 .effect {
+  visibility: hidden;
+  height: 0;
+  overflow: hidden;
   grid-column: 1 / -1;
   margin: 0 0 6px;
   font-size: 11.5px;
-  line-height: 1.45;
+  line-height: 1.35;
   color: var(--text-dim);
 }
 
@@ -313,14 +447,30 @@
 /* ── narrow ───────────────────────────────────────────────────────────── */
 
 @container (max-width: 620px) {
-  .body,
-  .footer {
-    grid-template-columns: minmax(0, 1fr);
+  /* `.body` is a flex column at every width now, and `.rail`/`.footer` are
+     auto-fit grids that collapse to one column on their own when 230px no
+     longer fits — so neither needs a hand-written breakpoint. What a narrow
+     figure still needs is a shorter scene (a phone's viewport is tall but the
+     lesson panel is not) and a header that stops competing for the same row. */
+  /* NOTE the selector. `.frame` IS the container (`container-type` is on it),
+     and a container query matches DESCENDANTS of its container, never the
+     container element itself — so re-declaring the token on `.frame` here
+     would be silently inert. `.stage` is a descendant, and the scene reads
+     the token by inheritance from it. Measured: the scene stayed at 395px
+     under the `.frame` form and lands at its intended height under this one. */
+  .stage {
+    --fig-scene-h: clamp(200px, 34vh, 300px);
   }
 
-  .header {
-    flex-direction: column;
-  }
+  /* The header stays ONE ROW here. `flex-wrap: wrap` in the base rule was
+     letting the legend break onto a line of its own and then span the full
+     width, adding its whole height to the header rather than sitting beside
+     the title. `nowrap` plus a shrinkable title block keeps them level; the
+     430px query below is where stacking becomes the right answer instead.
+     Measured on phys.meas.scalars-vectors at 560px: header 245px wrapped. */
+  .header { gap: 10px; }
+
+  .result { margin-top: 6px; }
 
   .legend {
     width: 100%;
@@ -330,13 +480,68 @@
   }
 }
 
+/* Genuinely narrow. Below this a legend beside the title leaves neither
+   enough room, so it stacks and wraps into rows instead of a column. */
+@container (max-width: 430px) {
+  .header {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
 /* Browsers without container-query support fall back to the viewport, which
    is the correct answer on a phone and a tolerable one on a desktop. */
 @supports not (container-type: inline-size) {
   @media (max-width: 900px) {
-    .body,
-    .footer {
-      grid-template-columns: minmax(0, 1fr);
-    }
+    .stage { --fig-scene-h: clamp(200px, 34vh, 300px); }
   }
+}
+
+/* ── expanded: the same figure, given the window ──────────────────────────
+ * A study mode, not a second figure. The DOM node does not move and the React
+ * subtree is not remounted, so the scene is never regenerated and no state —
+ * stage, mode, focus, slider values — is lost on the way in or out. */
+.frameExpanded {
+  position: fixed;
+  inset: 16px;
+  z-index: 70;
+  margin-top: 0;
+  overflow: auto;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45);
+  /* The whole point of expanding is a bigger picture, so the scene takes the
+     height the window just handed it. */
+  --fig-scene-h: min(62vh, 720px);
+}
+
+.scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 69;
+  background: rgba(0, 0, 0, 0.55);
+  border: none;
+  padding: 0;
+}
+
+.expandBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  flex: none;
+  border-radius: 9px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-elevated);
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.expandBtn:hover,
+.expandBtn:focus-visible {
+  border-color: var(--border-emphasis);
+  color: var(--text-primary);
+}
+
+@media (max-width: 640px) {
+  .frameExpanded { inset: 0; border-radius: 0; }
 }

@@ -98,8 +98,14 @@ export function ThreeDVisual({
         // stops a narrow container collapsing the scene to a strip. The 60vh
         // term keeps a tall figure inside the chat viewport on short windows,
         // so it is never taller than the space available to read it in.
-        minHeight: 260,
-        maxHeight: 'min(520px, 60vh)',
+        // The frame around a figure knows how much height the figure may have;
+        // this component does not. `--fig-scene-h` is that budget when a frame
+        // sets one (ExplainerFigure does, and shrinks it on a narrow container
+        // and grows it when expanded). The FALLBACK is the previous constant
+        // exactly, so every other caller of ThreeDVisual — and this one, if the
+        // token is ever removed — renders byte-for-byte as it did before.
+        minHeight: 'min(260px, var(--fig-scene-h, 260px))',
+        maxHeight: 'var(--fig-scene-h, min(520px, 60vh))',
         borderRadius: 12,
         overflow: 'hidden',
         background: 'var(--bg-elevated)',

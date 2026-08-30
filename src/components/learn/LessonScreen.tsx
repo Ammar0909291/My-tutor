@@ -808,6 +808,53 @@ export function shouldAutoScrollOnMessagesChange(
   const learnerJustSent = addedSinceLastRender.some((m) => m.role === 'user')
   return learnerJustSent || atBottom
 }
+
+/**
+ * How close to the bottom still counts as "reading the newest turn".
+ * One constant, so the scroll handler's `atBottom` flag and the follow-mode
+ * latch below can never disagree about where the bottom is.
+ */
+export const NEAR_BOTTOM_PX = 60
+
+export function isNearBottom(
+  m: { scrollHeight: number; scrollTop: number; clientHeight: number },
+  threshold = NEAR_BOTTOM_PX,
+): boolean {
+  return m.scrollHeight - m.scrollTop - m.clientHeight < threshold
+}
+
+/**
+ * FOLLOW MODE — the second half of auto-scroll, and the half that was missing.
+ *
+ * `shouldAutoScrollOnMessagesChange` decides correctly, and then
+ * `scrollIntoView` runs ONCE, against the layout as it exists at that instant.
+ * A turn carrying a figure is barely any height at that instant: the scene is
+ * `next/dynamic`, the canvas box settles after first paint (ThreeDVisual sets
+ * its own resize policy for exactly this reason), and panels reflow as the
+ * spec resolves. Hundreds of pixels arrive AFTER the scroll has already
+ * happened, pushing the message the learner just sent back above the fold —
+ * which is the "I have to press the down-arrow to see my own message" report,
+ * and why it was worst on the turns that show a visual.
+ *
+ * So following has to be a STATE, not an event: while the latch is set, the
+ * container is re-pinned as its content grows. `stickToBottom` is the pure
+ * rule, kept out of the component so it can be tested without a DOM.
+ *
+ * Deliberately NOT a timeout. A timeout guesses at how long the content will
+ * take to settle, is wrong on a slow device, and fires once more regardless.
+ *
+ * The latch itself: sending always re-arms it, and otherwise it simply tracks
+ * whether the learner is still down at the newest turn. That is what keeps
+ * requirement 5 and 7 honest — scrolling up to reread turns following OFF and
+ * nothing drags the viewport back, and returning to the bottom turns it on
+ * again without the learner having to ask.
+ */
+export function nextFollowState(
+  metrics: { scrollHeight: number; scrollTop: number; clientHeight: number },
+  learnerJustSent: boolean,
+): boolean {
+  return learnerJustSent || isNearBottom(metrics)
+}
 type MicState = 'idle' | 'recording' | 'processing'
 type AttachedFile = { name: string; content: string; language: string }
 // Panel identity — still needed for desktop maximize/restore, even though
@@ -1113,6 +1160,10 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
 
   // Refs
   const messagesEndRef = useRef<HTMLDivElement>(null)
+  /** Follow mode: is the viewport currently tracking the newest turn?
+   *  A ref, not state — it is read inside a ResizeObserver callback that must
+   *  not re-subscribe on every change, and it never needs to cause a render. */
+  const followRef = useRef(true)
   const messagesAreaRef = useRef<HTMLDivElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const initializedRef = useRef(false)
@@ -1297,7 +1348,13 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   useEffect(() => {
     const el = messagesAreaRef.current; if (!el) return
     const handler = () => {
-      setAtBottom(el.scrollHeight - el.scrollTop - el.clientHeight < 60)
+      const near = isNearBottom(el)
+      setAtBottom(near)
+      // The follow latch tracks the SAME metric, so "the arrow is hidden" and
+      // "new content will be followed" can never disagree. A deliberate scroll
+      // upward turns following off on the very first event; coming back down
+      // turns it on again with no further action from the learner.
+      followRef.current = near
       if (el.scrollTop < 80 && visibleCountRef.current < messagesLenRef.current) {
         const prevHeight = el.scrollHeight
         setVisibleCount((c) => Math.min(c + HISTORY_RENDER_WINDOW, messagesLenRef.current))
@@ -1345,8 +1402,43 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   useEffect(() => {
     const shouldScroll = shouldAutoScrollOnMessagesChange(messages, prevMessagesLengthRef.current, atBottom)
     prevMessagesLengthRef.current = messages.length
-    if (shouldScroll) messagesEndRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' })
+    if (shouldScroll) {
+      // Arm follow mode as well as scrolling now: the scroll below lands
+      // against the layout as it is THIS instant, and a turn carrying a figure
+      // grows by hundreds of pixels afterwards. The observer effect below is
+      // what keeps the learner's own message in view once it does.
+      followRef.current = true
+      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' })
+    }
   }, [messages, atBottom])
+
+  // FOLLOW MODE — re-pin to the bottom while the newest turn is still growing.
+  //
+  // A ResizeObserver on the scroll container alone would never fire: its own
+  // border-box is fixed by the flex layout, and it is the CHILDREN that grow.
+  // So every mounted child is observed, re-subscribed whenever the rendered
+  // window changes. That covers a figure mounting, a canvas settling its box,
+  // a panel reflowing and a reply streaming in — without any of them needing
+  // to know this exists.
+  //
+  // `scrollTop = scrollHeight` and not `scrollIntoView({behavior:'smooth'})`:
+  // a smooth animation restarted on every growth tick is precisely the
+  // scroll-jitter this is meant to avoid. An instant re-pin during growth is
+  // invisible, because the viewport never actually leaves the bottom.
+  useEffect(() => {
+    const el = messagesAreaRef.current
+    if (!el || typeof ResizeObserver === 'undefined') return
+    const pin = () => {
+      if (!followRef.current) return
+      el.scrollTop = el.scrollHeight
+    }
+    const ro = new ResizeObserver(pin)
+    for (const child of Array.from(el.children)) ro.observe(child)
+    return () => ro.disconnect()
+    // Keyed on what actually changes the mounted child list: how many messages
+    // exist, how many of them the history window renders, and whether the
+    // streaming placeholder is present.
+  }, [messages.length, visibleCount, isStreaming])
 
   // On first history restore, jump straight to the newest message (instant,
   // not smooth — the user should open the chat AT the latest message).

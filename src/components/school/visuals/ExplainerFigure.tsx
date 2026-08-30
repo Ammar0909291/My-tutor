@@ -31,8 +31,8 @@
  * it makes, and the withheld count is written out. The figure remains
  * understandable with the canvas ignored entirely.
  */
-import { useCallback, useMemo, useRef, useState } from 'react'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { ChevronLeft, ChevronRight, Maximize2, Minimize2 } from 'lucide-react'
 import { SceneSpecRenderer } from './SceneSpecRenderer'
 import styles from './ExplainerFigure.module.css'
 import { useTheme } from '@/components/Providers'
@@ -120,15 +120,59 @@ export function ExplainerFigure({ spec }: { spec: SceneSpec }) {
   /** True in any mode whose whole point is that the learner works it out. */
   const answerWithheld = predicting || mode === 'practice' || mode === 'assess'
 
+  /**
+   * Study mode. A CLASS on the existing element, deliberately — not a portal,
+   * not a second render of the figure. The React subtree never unmounts, so
+   * the scene is not regenerated and the learner keeps their stage, mode,
+   * focus and slider values on the way in and back out again.
+   */
+  const [expanded, setExpanded] = useState(false)
+  useEffect(() => {
+    if (!expanded) return
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setExpanded(false) }
+    window.addEventListener('keydown', onKey)
+    // A fixed overlay over a scrollable page leaves the page scrolling behind
+    // it, which on a phone reads as the lesson sliding away under the figure.
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      document.body.style.overflow = prev
+    }
+  }, [expanded])
+
+  /**
+   * What stays in front of the learner, and what waits behind a disclosure.
+   *
+   * The split is by ROLE, not by length or by count: everything needed to READ
+   * the figure stays visible — the first explanation panel, the legend, the
+   * result, the controls. What moves into the tail is what is only useful once
+   * it HAS been read: the key insight, and any further explanation panels.
+   * Nothing is dropped at any width, which is the rule this frame was built on.
+   */
+  const panels = explainer.panels ?? []
+  const primaryPanels = panels.slice(0, 1)
+  const tailPanels = panels.slice(1)
+  const hasTail = tailPanels.length > 0 || Boolean(explainer.insight)
+
   return (
+    <>
+      {expanded && (
+        <button
+          type="button"
+          className={styles.scrim}
+          aria-label="Close the expanded figure"
+          onClick={() => setExpanded(false)}
+        />
+      )}
     <figure
-      className={styles.frame}
+      className={`${styles.frame}${expanded ? ` ${styles.frameExpanded}` : ''}`}
       role="figure"
       aria-label={shown.ariaLabel ?? shown.title}
       style={{ margin: 0 }}
     >
       <header className={styles.header}>
-        <div style={{ minWidth: 0 }}>
+        <div className={styles.titleBlock}>
           <h3 className={styles.title}>{explainer.title}</h3>
           {explainer.givens && <p className={styles.givens}>{explainer.givens}</p>}
           {/* The result chip states the answer, so it is withheld by exactly
@@ -144,26 +188,17 @@ export function ExplainerFigure({ spec }: { spec: SceneSpec }) {
           )}
         </div>
 
-        {explainer.legend && explainer.legend.length > 0 && (
-          <div className={styles.legend} aria-label="What the colours mean">
-            {explainer.legend.map((row) => {
-              const active = pinnedColor === row.color
-              return (
-                <button
-                  key={row.color}
-                  type="button"
-                  className={`${styles.legendRow}${active ? ` ${styles.legendRowActive}` : ''}`}
-                  aria-pressed={active}
-                  onClick={() => setPinnedColor(active ? null : row.color)}
-                  title={active ? 'Show the whole figure again' : `Focus on ${row.label}`}
-                >
-                  <Swatch shape={row.shape} color={themeColor(row.color, theme) ?? row.color} />
-                  <span>{row.label}</span>
-                </button>
-              )
-            })}
-          </div>
-        )}
+        <button
+          type="button"
+          className={styles.expandBtn}
+          aria-label={expanded ? 'Return the figure to the lesson' : 'Expand the figure'}
+          aria-pressed={expanded}
+          title={expanded ? 'Close (Esc)' : 'Expand'}
+          onClick={() => setExpanded((v) => !v)}
+        >
+          {expanded ? <Minimize2 size={15} /> : <Maximize2 size={15} />}
+        </button>
+
       </header>
 
       <div className={styles.body}>
@@ -254,9 +289,97 @@ export function ExplainerFigure({ spec }: { spec: SceneSpec }) {
           )}
         </div>
 
-        {explainer.panels && explainer.panels.length > 0 && (
+        {(primaryPanels.length > 0 || variables.length > 0 || (explainer.legend?.length ?? 0) > 0) && (
           <div className={styles.rail}>
-            {explainer.panels.map((panel) => (
+            {/* The legend reads with the explanation, not above the picture.
+                In the header it was a five-row column that either doubled the
+                header's height or wrapped onto a line of its own and spanned
+                the full width; here it is one more compact block in the same
+                grid, and it sits next to the prose that refers to it. */}
+            {explainer.legend && explainer.legend.length > 0 && (
+              <div className={styles.legend} aria-label="What the colours mean">
+                {explainer.legend.map((row) => {
+                  const active = pinnedColor === row.color
+                  return (
+                    <button
+                      key={row.color}
+                      type="button"
+                      className={`${styles.legendRow}${active ? ` ${styles.legendRowActive}` : ''}`}
+                      aria-pressed={active}
+                      onClick={() => setPinnedColor(active ? null : row.color)}
+                      title={active ? 'Show the whole figure again' : `Focus on ${row.label}`}
+                    >
+                      <Swatch shape={row.shape} color={themeColor(row.color, theme) ?? row.color} />
+                      <span>{row.label}</span>
+                    </button>
+                  )
+                })}
+              </div>
+            )}
+
+            {primaryPanels.map((panel) => (
+              <section key={panel.heading} className={styles.panel}>
+                <h4 className={styles.panelHeading}>{panel.heading}</h4>
+                {panel.body && <p className={styles.panelBody}>{panel.body}</p>}
+                {panel.lines && (
+                  <div className={styles.panelLines}>
+                    {panel.lines.map((linetext, i) => (
+                      <span
+                        key={`${linetext}-${i}`}
+                        className={linetext === panel.emphasis ? styles.panelLineEmphasis : undefined}
+                      >
+                        {linetext}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </section>
+            ))}
+
+            {/* The controls are how this figure teaches cause and effect, so
+                they stay in front of the learner at every width and are never
+                what gets collapsed. They share the grid row with the
+                explanation rather than starting a second full-width band under
+                it — two bands is how the frame grew past a viewport. */}
+            {variables.length > 0 && (
+              <section className={`${styles.panel} ${styles.railWide}`}>
+                <h4 className={styles.panelHeading}>Try changing values</h4>
+                <div className={styles.controls}>
+                  {variables.map((v) => (
+                    <Control
+                      key={v.key}
+                      variable={v}
+                      value={live[v.key] ?? defaultValueOf(v)}
+                      idPrefix={shown.id}
+                      onChange={setVar}
+                    />
+                  ))}
+                </div>
+              </section>
+            )}
+          </div>
+        )}
+      </div>
+
+      {hasTail && (
+        <details className={styles.more}>
+          <summary className={styles.moreSummary}>
+            <ChevronRight size={14} className={styles.moreChevron} aria-hidden="true" />
+            More insights
+          </summary>
+          <div className={styles.moreBody}>
+            {explainer.insight && (
+              <section className={styles.panel}>
+                <h4 className={styles.panelHeading}>{explainer.insight.heading ?? 'Key insight'}</h4>
+                {explainer.insight.bullets.length > 0 && (
+                  <ul className={styles.insightList}>
+                    {explainer.insight.bullets.map((b) => <li key={b}>{b}</li>)}
+                  </ul>
+                )}
+                {explainer.insight.note && <p className={styles.note}>{explainer.insight.note}</p>}
+              </section>
+            )}
+            {tailPanels.map((panel) => (
               <section key={panel.heading} className={styles.panel}>
                 <h4 className={styles.panelHeading}>{panel.heading}</h4>
                 {panel.body && <p className={styles.panelBody}>{panel.body}</p>}
@@ -275,44 +398,14 @@ export function ExplainerFigure({ spec }: { spec: SceneSpec }) {
               </section>
             ))}
           </div>
-        )}
-      </div>
-
-      {(explainer.insight || variables.length > 0) && (
-        <div className={styles.footer}>
-          {explainer.insight && (
-            <section className={styles.panel}>
-              <h4 className={styles.panelHeading}>{explainer.insight.heading ?? 'Key insight'}</h4>
-              {explainer.insight.bullets.length > 0 && (
-                <ul className={styles.insightList}>
-                  {explainer.insight.bullets.map((b) => <li key={b}>{b}</li>)}
-                </ul>
-              )}
-              {explainer.insight.note && <p className={styles.note}>{explainer.insight.note}</p>}
-            </section>
-          )}
-
-          {variables.length > 0 && (
-            <section className={styles.panel}>
-              <h4 className={styles.panelHeading}>Try changing values</h4>
-              {variables.map((v) => (
-                <Control
-                  key={v.key}
-                  variable={v}
-                  value={live[v.key] ?? defaultValueOf(v)}
-                  idPrefix={shown.id}
-                  onChange={setVar}
-                />
-              ))}
-            </section>
-          )}
-        </div>
+        </details>
       )}
 
       {shown.teachingGoal && !explainer.insight && (
         <figcaption className={styles.note}>{shown.teachingGoal}</figcaption>
       )}
     </figure>
+    </>
   )
 }
 
