@@ -3089,6 +3089,187 @@ const MECH_C: SeedProbe[] = [
   },
 ]
 
+
+// ═══════════════════════════════════════════════════════════════════════════
+// BATCH 8 — the six phys.mech HIGH pairs the mcq ladder could not hold.
+//
+// Each of these already has THREE mcq rungs occupied and needs two probes, so
+// one addition goes into the single free rung and the other opens a brand-new
+// misconception_probe slot. None of the six has a misconception_probe at HIGH
+// today, so nothing is re-identified — a new slot has no existing row to orphan.
+// ═══════════════════════════════════════════════════════════════════════════
+
+const MECH_D: SeedProbe[] = [
+  {
+    conceptId: 'phys.mech.conservation-of-angular-momentum', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.DEVELOPING,
+    stem: 'Under exactly what condition is the angular momentum of a system conserved?',
+    choices: [
+      { text: 'When no net external TORQUE acts on it', isCorrect: true },
+      { text: 'When no net external force acts on it', isCorrect: false },
+      { text: 'When its moment of inertia stays constant', isCorrect: false },
+      { text: 'Always — angular momentum is conserved unconditionally', isCorrect: false },
+    ],
+    correctValue: 'no net external torque',
+    targetedMisconceptions: [],
+    source: src('phys.mech.conservation-of-angular-momentum', 'the condition is on TORQUE, not force: a force through the axis exerts no torque, and the skater changes her moment of inertia freely without breaking conservation'),
+  },
+  {
+    conceptId: 'phys.mech.conservation-of-angular-momentum', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'A student says: "Angular momentum is conserved, so a spinning skater\'s angular velocity cannot change." What is wrong?',
+    choices: [
+      { text: 'The conserved quantity is the PRODUCT L = Iω, not ω on its own. Pulling her arms in cuts I, so ω must rise to keep the product fixed', isCorrect: true },
+      { text: 'Nothing is wrong — her rate of spin genuinely cannot change', isCorrect: false },
+      { text: 'It is the other way round: ω is conserved and I is what changes', isCorrect: false },
+      { text: 'Both I and ω are conserved separately, so neither can change', isCorrect: false },
+    ],
+    correctValue: 'the product is conserved, not omega',
+    targetedMisconceptions: [],
+    source: src('phys.mech.conservation-of-angular-momentum', 'a conservation law pins a product and leaves its factors free — the same structure as pV in an isothermal process, and the same place learners fix the wrong quantity'),
+  },
+  {
+    conceptId: 'phys.mech.conservation-of-momentum', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'A 60 kg astronaut is at rest in deep space and throws a 2.0 kg tool away at 15 m/s. What is the astronaut\'s recoil speed?',
+    choices: [
+      { text: '0.50 m/s', isCorrect: true },
+      { text: '15 m/s — equal and opposite to the tool', isCorrect: false },
+      { text: '30 m/s', isCorrect: false },
+      { text: '0.033 m/s', isCorrect: false },
+    ],
+    correctValue: '0.50 m/s',
+    targetedMisconceptions: [],
+    source: src('phys.mech.conservation-of-momentum', 'the total momentum stays zero, so 60v = 2.0 × 15 gives v = 0.50 m/s. Equal and opposite MOMENTA do not mean equal and opposite speeds, which is what the 15 m/s option assumes'),
+  },
+  {
+    conceptId: 'phys.mech.conservation-of-momentum', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'A student says: "Momentum is only conserved in elastic collisions — inelastic ones lose energy, so they must lose momentum too." What is wrong?',
+    choices: [
+      { text: 'Momentum is conserved in BOTH. What an inelastic collision loses is kinetic energy, to heat and deformation — the two conservation laws are independent', isCorrect: true },
+      { text: 'Nothing is wrong — losing energy does mean losing momentum', isCorrect: false },
+      { text: 'It is backwards: momentum is conserved only in inelastic collisions', isCorrect: false },
+      { text: 'Neither quantity is really conserved in any collision between real objects', isCorrect: false },
+    ],
+    correctValue: 'momentum is conserved in both',
+    targetedMisconceptions: [],
+    source: src('phys.mech.conservation-of-momentum', 'energy and momentum are separate ledgers; treating them as one is what makes an inelastic collision look like it breaks a conservation law rather than defining a category'),
+  },
+  {
+    conceptId: 'phys.mech.force', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'Three forces act on a single point object and it stays in equilibrium. What must be true of them?',
+    choices: [
+      { text: 'They add as VECTORS to zero — drawn head to tail they close into a triangle', isCorrect: true },
+      { text: 'All three must have the same magnitude', isCorrect: false },
+      { text: 'They must all act along the same straight line', isCorrect: false },
+      { text: 'Two of them must cancel exactly, and the third must be zero', isCorrect: false },
+    ],
+    correctValue: 'they form a closed triangle',
+    targetedMisconceptions: [],
+    source: src('phys.mech.force', 'the closed-triangle condition is what makes three-force equilibrium solvable by drawing; the last option is the two-force case over-generalised, and it is the reason a third force feels like it must be redundant'),
+  },
+  {
+    conceptId: 'phys.mech.force', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'A student says: "Anything that is moving must have a force pushing it in the direction it is going, or it would not still be moving." What is wrong?',
+    choices: [
+      { text: 'Motion at constant velocity needs no force at all. A force is required only to CHANGE a velocity — that is the First Law', isCorrect: true },
+      { text: 'Nothing is wrong — that is what keeps things moving', isCorrect: false },
+      { text: 'The force is supplied at the start and is then gradually used up as the object travels', isCorrect: false },
+      { text: 'It is true, but only for objects heavier than about a kilogram', isCorrect: false },
+    ],
+    correctValue: 'no force is needed for constant velocity',
+    targetedMisconceptions: ['phys.mech.force:MC-FORCE-CAUSES-MOTION', 'phys.mech.force:MC-FORCE-IS-IMPETUS'],
+    source: src('phys.mech.force', 'MC-FORCE-CAUSES-MOTION in the stem and MC-FORCE-IS-IMPETUS in the third option — the two are the same belief at different stages of repair, and separating them is what tells you which one the learner still holds'),
+  },
+  {
+    conceptId: 'phys.mech.kinematics-2d', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'A boat that moves at 4.0 m/s in still water is pointed straight across a river that flows at 3.0 m/s. What is the boat\'s speed relative to the bank?',
+    choices: [
+      { text: '5.0 m/s', isCorrect: true },
+      { text: '7.0 m/s — adding the two speeds', isCorrect: false },
+      { text: '1.0 m/s — subtracting them', isCorrect: false },
+      { text: '4.0 m/s — the current only changes the direction, not the speed', isCorrect: false },
+    ],
+    correctValue: '5.0 m/s',
+    targetedMisconceptions: [],
+    source: src('phys.mech.kinematics-2d', 'the two velocities are PERPENDICULAR, so they combine by Pythagoras rather than by adding or subtracting — the 3-4-5 numbers make the vector step visible rather than arithmetic'),
+  },
+  {
+    conceptId: 'phys.mech.kinematics-2d', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'A student says: "A projectile\'s horizontal motion must slow down, because gravity is pulling on it the whole time." What is wrong?',
+    choices: [
+      { text: 'Gravity acts vertically only. With air resistance ignored, the horizontal velocity never changes — the two axes are completely independent', isCorrect: true },
+      { text: 'Nothing is wrong — gravity slows everything down eventually', isCorrect: false },
+      { text: 'The horizontal motion actually speeds up as the projectile falls', isCorrect: false },
+      { text: 'Gravity acts along the projectile\'s curved path, so it slows the motion along that path', isCorrect: false },
+    ],
+    correctValue: 'the axes are independent',
+    targetedMisconceptions: [],
+    source: src('phys.mech.kinematics-2d', 'axis independence is the whole method of 2D kinematics; the last option is gravity imagined as acting along the trajectory, which is the picture the curved path invites'),
+  },
+  {
+    conceptId: 'phys.mech.kinetic-energy', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'Two objects have exactly the same kinetic energy. Object A has four times the mass of object B. How do their speeds compare?',
+    choices: [
+      { text: 'B is moving twice as fast as A', isCorrect: true },
+      { text: 'B is moving four times as fast as A', isCorrect: false },
+      { text: 'A is moving twice as fast as B', isCorrect: false },
+      { text: 'They are moving at the same speed', isCorrect: false },
+    ],
+    correctValue: 'B is twice as fast',
+    targetedMisconceptions: [],
+    source: src('phys.mech.kinetic-energy', 'equal ½mv² with four times the mass needs half the speed, because v goes as 1/√m — the four-times option carries the mass ratio straight across without the square root'),
+  },
+  {
+    conceptId: 'phys.mech.kinetic-energy', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'A student says: "A car at 100 km/h has twice the kinetic energy it had at 50 km/h." What is wrong, and why does it matter on the road?',
+    choices: [
+      { text: 'It has FOUR times as much, because kinetic energy goes as the square of the speed — which is why braking distance grows so sharply with speed', isCorrect: true },
+      { text: 'Nothing is wrong — doubling the speed doubles the energy', isCorrect: false },
+      { text: 'It has half as much, because it spends less time on the road', isCorrect: false },
+      { text: 'It cannot be answered without knowing the mass of the car', isCorrect: false },
+    ],
+    correctValue: 'four times',
+    targetedMisconceptions: [],
+    source: src('phys.mech.kinetic-energy', 'the RATIO needs no mass, which is what the last option misses; the square law is also the single most consequential piece of physics in road safety'),
+  },
+  {
+    conceptId: 'phys.mech.potential-energy', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'A 2.0 kg book is lifted 1.5 m onto a shelf. How much gravitational potential energy does it gain? (g = 9.8 m/s²)',
+    choices: [
+      { text: 'About 29 J', isCorrect: true },
+      { text: '3.0 J — mass multiplied by height', isCorrect: false },
+      { text: '19.6 J — leaving the height out', isCorrect: false },
+      { text: '13.1 J', isCorrect: false },
+    ],
+    correctValue: '29.4 J',
+    targetedMisconceptions: [],
+    source: src('phys.mech.potential-energy', 'ΔU = mgΔh = 2.0 × 9.8 × 1.5 = 29.4 J; the concept\'s existing probes ask about the CHOICE of reference level and about a ramp, never for a plain value'),
+  },
+  {
+    conceptId: 'phys.mech.potential-energy', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'A student says: "Gravitational potential energy is stored inside the object, like fuel in a tank." What is wrong?',
+    choices: [
+      { text: 'It belongs to the SYSTEM of the object and the Earth together — it is a property of their separation, not something the object carries', isCorrect: true },
+      { text: 'Nothing is wrong — that is exactly where it is kept', isCorrect: false },
+      { text: 'It is stored in the air surrounding the object', isCorrect: false },
+      { text: 'It is stored in the object\'s mass, and the object weighs fractionally more when raised', isCorrect: false },
+    ],
+    correctValue: 'it belongs to the system',
+    targetedMisconceptions: [],
+    source: src('phys.mech.potential-energy', 'PE as a relationship rather than a substance is what makes the arbitrary zero level sensible — the concept\'s existing two-students probe shows the consequence, and this asks for the reason behind it'),
+  },
+]
+
 /**
  * Every probe-depth probe. One array, in the order the audit reported the
  * pairs — `seed-knowledge-assets.ts`, the cold-start bootstrap and the
@@ -3124,4 +3305,6 @@ export const PHYSICS_DEPTH_PROBES: SeedProbe[] = [
   ...MECH_B,
   // Batch 7 — phys.mech @ HIGH, the last seventeen. Domain complete.
   ...MECH_C,
+  // Batch 8 — the six phys.mech HIGH pairs the mcq ladder could not hold.
+  ...MECH_D,
 ]

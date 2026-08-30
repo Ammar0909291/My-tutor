@@ -613,6 +613,32 @@ describe('the physics depth probes are arithmetically true', () => {
     expect(correctText(brake)).toContain('6000 N')
   })
 
+  it('batch 8: the constrained-pair arithmetic', async () => {
+    const probes = await load()
+    const rec = find(probes, '60 kg astronaut')
+    expect((2.0 * 15) / 60).toBe(0.5)
+    expect(correctText(rec)).toContain('0.50 m/s')
+
+    const boat = find(probes, 'river that flows at 3.0 m/s')
+    expect(Math.hypot(4, 3)).toBe(5)
+    expect(4 + 3).toBe(7)                     // the added distractor
+    expect(correctText(boat)).toContain('5.0 m/s')
+
+    // Equal KE with four times the mass needs HALF the speed: v goes as 1/sqrt(m).
+    const same = find(probes, 'four times the mass of object B')
+    const v = (m: number, ke: number) => Math.sqrt((2 * ke) / m)
+    expect(v(1, 1) / v(4, 1)).toBe(2)
+    expect(correctText(same)).toContain('twice as fast')
+
+    const road = find(probes, 'car at 100 km/h')
+    expect((100 / 50) ** 2).toBe(4)
+    expect(correctText(road)).toContain('FOUR times')
+
+    const book = find(probes, '2.0 kg book is lifted 1.5 m')
+    expect(2.0 * 9.8 * 1.5).toBeCloseTo(29.4, 10)
+    expect(correctText(book)).toContain('29 J')
+  })
+
   it("Hooke: 3 N gives 6 cm, so 12 N would predict 24 cm; two springs halve the extension", async () => {
     const probes = await load()
     const limit = find(probes, 'stretches 6 cm when a 3 N weight')
