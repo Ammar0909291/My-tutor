@@ -967,6 +967,109 @@ describe('the physics depth probes are arithmetically true', () => {
     expect(c('sodium to argon')).toContain('increase')
   }, 30_000)
 
+  it('chemistry batch 5: the arithmetic', async () => {
+    const { CHEMISTRY_DEPTH_PROBES } = await import('../lib/teaching/assets/chemistryDepthSeedAssets')
+    const probes = CHEMISTRY_DEPTH_PROBES as unknown as Probe[]
+    const c = (fragment: string) => {
+      const hit = probes.filter((p) => p.stem.includes(fragment))
+      expect(hit.length, `expected exactly one chemistry probe containing "${fragment}"`).toBe(1)
+      return (hit[0].choices ?? []).find((x) => x.isCorrect)!.text
+    }
+
+    // Valency is the octet DEFICIT, not the group number and not the maximum
+    // oxidation state — three numbers a Group 15 stem puts within reach at once.
+    expect(8 - 5).toBe(3)
+    expect(c('Group 15')).toContain('Three')
+
+    // Addition conserves mass exactly: no by-product, so 28 g in, 28 g out.
+    // The two loss options are the condensation answer in the wrong mechanism.
+    expect(28).toBe(28)
+    expect(28 - 2).toBe(26)      // losing H2 per unit
+    expect(28 - 18).toBe(10)     // losing water per unit
+    expect(c('One mole of ethene')).toContain('28 g')
+
+    // Condensation: one water per LINK, not per functional group and not n-1.
+    expect(5 * 1).toBe(5)
+    expect(5 * 2).toBe(10)       // one per group
+    expect(5 - 1).toBe(4)        // the peptide-residue count carried across
+    expect(c('five ester links')).toContain('Five')
+
+    // Isoprene is 2-methylbuta-1,3-diene: four backbone carbons + one methyl.
+    expect(4 + 1).toBe(5)
+    expect(2 * 5).toBe(10)       // the dimer option
+    expect(c('ONE isoprene repeat unit')).toContain('Five')
+
+    // Degree of polymerisation is a COUNT, so it divides. Multiplying gives a
+    // number with no meaning, which is the self-check.
+    expect(20000 / 100).toBe(200)
+    expect(20000 * 100).toBe(2000000)
+    expect(c('number-average molar mass of 20 000')).toContain('200')
+
+    // Of Mg, Zn, Cu, Ag only the two above hydrogen displace it from acid.
+    expect(['Mg', 'Zn'].length).toBe(2)
+    expect(c('magnesium, zinc, copper and silver')).toContain('Two')
+
+    // MnO4- -> Mn2+ is a change of +7 to +2: five electrons, neither endpoint.
+    expect(7 - 2).toBe(5)
+    expect(c('reduced to Mn²⁺')).toContain('Five')
+
+    // Cl2 + NaOH hot: 5 NaCl (-1) and 1 NaClO3. In ClO3-, x + 3(-2) = -1.
+    expect(-1 - 3 * -2).toBe(5)
+    // and the split must straddle the starting state of 0.
+    expect(-1).toBeLessThan(0)
+    expect(5).toBeGreaterThan(0)
+    expect(c('3Cl₂ + 6NaOH')).toContain('−1 and +5')
+
+    // Dichromate: 2x + 7(-2) = -2, so 2x = 12 and x = +6. The dropped division
+    // is the defect the +12 option encodes.
+    const twoX = -2 - 7 * -2
+    expect(twoX).toBe(12)
+    expect(twoX / 2).toBe(6)
+    expect(c('Cr₂O₇²⁻')).toContain('+6')
+
+    // Permanganate/iron titration, each distractor one omitted step.
+    const nMnO4 = 0.0200 * 0.0200          // 4.00e-4 mol
+    expect(nMnO4).toBeCloseTo(4.0e-4, 12)
+    expect((nMnO4 * 5) / 0.0250).toBeCloseTo(0.0800, 9)
+    expect(nMnO4 / 0.0250).toBeCloseTo(0.0160, 9)        // ratio not applied
+    expect(nMnO4 / 5 / 0.0250).toBeCloseTo(0.00320, 9)   // ratio inverted
+    expect((nMnO4 * 5) / 0.0200).toBeCloseTo(0.100, 9)   // wrong volume
+    expect(c('reacting ratio is 1 MnO₄⁻ : 5 Fe²⁺')).toContain('0.0800')
+
+    // Mg loses two electrons, so two H+ — the Group 1 stoichiometry does not
+    // transfer.
+    expect(2 * 1).toBe(2)
+    expect(c('react completely with one mole of magnesium')).toContain('Two')
+
+    // Tritium: mass number minus the single proton.
+    expect(3 - 1).toBe(2)
+    expect(c('Tritium')).toContain('Two')
+
+    // Ca(HCO3)2 -> CaCO3 + H2O + CO2: two carbons in, one leaves as gas.
+    expect(2 - 1).toBe(1)
+    expect(c('one mole of Ca(HCO₃)₂')).toContain('One')
+
+    // Al2(SO4)3 gives 2 cations + 3 anions = 5 ions, not 17 atoms.
+    expect(2 + 3).toBe(5)
+    expect(2 + 3 * (1 + 4)).toBe(17)   // the count-every-atom option
+    expect(c('Al₂(SO₄)₃')).toContain('Five')
+
+    // Osmotic pressure counts particles: i = 2 for NaCl against 1 for glucose.
+    expect((2 * 0.10) / (1 * 0.10)).toBe(2)
+    expect(c('0.10 mol/dm³ NaCl and 0.10 mol/dm³ glucose')).toContain('2 : 1')
+
+    // Henry's law is a straight proportionality.
+    expect(0.020 * 3).toBeCloseTo(0.060, 12)
+    expect(0.020 / 3).toBeCloseTo(0.0067, 4)   // the inverted option
+    expect(c('0.020 mol/dm³ at 1.0 atm')).toContain('0.060')
+
+    // Raoult: multiply by the SOLVENT fraction. Using the solute fraction gives
+    // a tenfold drop, which is absurd on its face — that is the self-check.
+    expect(3.17 * 0.90).toBeCloseTo(2.853, 3)
+    expect(3.17 * 0.10).toBeCloseTo(0.317, 3)
+    expect(c('mole fraction of water is 0.90')).toContain('2.85')
+  }, 30_000)
+
   it('batch 13: coupling j=1 with j=1 preserves the state count', async () => {
     const probes = await load()
     const coup = find(probes, 'j₁ = 1 and j₂ = 1 are coupled')
