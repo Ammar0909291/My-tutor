@@ -981,3 +981,126 @@ with its intervention specified: after N consecutive help-request turns with
 nothing graded, the turn must answer the learner AND attach a probe, rather
 than choosing between them. Still not implemented — it is server-side and this
 run is measuring the current build.
+
+
+---
+
+# The certification re-run, complete (2026-08-30)
+
+60/60 attempted, 4 excluded as provider-degraded, 56 measured. Compared over
+the 54 concepts BOTH runs measured, which is the only fair reading.
+
+| | after | before |
+|---|---|---|
+| showed a real visual | 41/54 (76%) | 42/54 (78%) |
+| **reached verified mastery** | **42/54 (78%)** | **44/54 (81%)** |
+| authoredExplanationRepeated | 30/54 (56%) | 34/54 (63%) |
+| probeLatch | 2/54 (4%) | 5/54 (9%) |
+| strandedProbeReference | 2/54 (4%) | 3/54 (6%) |
+| taughtHowToAsk | 1/54 (2%) | 5/54 (9%) |
+| correctAnswerNoCredit | 11/54 (20%) | 8/54 (15%) |
+| phaseRegressionOnCorrect | 4/54 (7%) | 3/54 (6%) |
+
+**The targeted defects moved and mastery did not.** Three fixes shipped between
+the runs and the headline is flat — 78% against 81%, inside the per-concept
+churn already measured between runs with no code change at all. That is the
+honest result and it is the one that matters.
+
+`correctAnswerNoCredit` went the WRONG way (8 → 11 sessions, 14 → 38
+occurrences). Partly volume: more probes were served (302 → 325) and more were
+answered correctly (245 → 269), which is the probe-echo fix working. But the
+RATE rose too — 38% → 46% of correct answers earning nothing — so it is not
+only volume, and it is not explained away.
+
+---
+
+# Learning five lessons by hand, as a student (2026-08-30)
+
+Driven through the deployed app on the real account, one message at a time,
+each message a genuine reaction to what the tutor had just said — not the
+harness's canned persona. Five concepts drawn by seeded random from all 238:
+electric-current (developing), collisions-inelastic (proficient), lenzs-law
+(proficient), nuclear-fission (advanced), s-matrix-basics (expert).
+
+**26 turns. One credit. Zero lessons mastered.** Answers were mostly correct.
+
+This found more real defects in half an hour than the day's automated sweeps
+did, and the reason is structural: the harness replays fixed lines and watches
+a counter, so it cannot see a tutor refusing to confirm a correct answer. That
+is a lesson about method, not about physics.
+
+## What was good
+Subject knowledge is strong and IMPROVES with difficulty. The binding-energy
+sweet-spot explanation for why fission releases energy was excellent, and when
+challenged that it seemed to contradict fusion it corrected itself cleanly and
+without defensiveness. Lenz's Law was taught via a magnet falling down a copper
+pipe, closing with "if it helped instead, you would get energy from nothing" —
+a real physicist's argument. The expert S-matrix lesson answered "what is T and
+why the 1?" better than the developing-tier lesson answered "show me a picture".
+
+## The twelve defects (evidence in each row)
+
+| # | Defect | Evidence |
+|---|---|---|
+| 1 | Says it cannot show pictures while a rendered scene IS attached to that turn | L1 "I can't attach a picture"; L3 ASCII art beside a 10-object scene |
+| 2 | Ignores an explicit statement of what the learner already understands | L1: same explanation 4x after "i already understand that" |
+| 3 | Will not confirm a correct answer — hedges, echoes, or changes subject | L2: five attempts to get a yes/no; L3 answer ignored entirely |
+| 4 | Stock deflection phrase used ON correct answers | "Let's check that one carefully rather than me just agreeing" — verbatim in L1 and L2 |
+| 5 | Prose question and MCQ widget ask DIFFERENT questions on one turn | L1: prose asks about simultaneity, widget asks drift-velocity magnitude |
+| 6 | Probe stem lacks the givens needed to answer it | "What is the drift velocity magnitude?" — no current, wire or carrier density |
+| 7 | Asks for a value it computed two lines earlier | L2: derives 1.33 m/s then asks for it with identical numbers |
+| 8 | Two-option probes with absurd distractors | "Elastic — kinetic energy is conserved in every collision" |
+| 9 | Correct graded answers earn no credit | 1 credit in 26 turns; L5 "That's correct!" with check=0 |
+| 10 | Scene topic mismatch | L1 (drift velocity) served "Series circuit — R_total = 30 Ohm" |
+| 11 | Verbatim reuse of the intro paragraph mid-lesson | L5 billiard-ball paragraph |
+| 12 | Loose analogy contradicting a neighbouring topic | L4 "light nuclei are already near the bottom" implies fusion cannot release energy |
+
+**A correction, recorded because it nearly became three false defects.** Three
+scenes were read as having "0 objects" — empty visuals. That was an error in
+the throwaway client, which read a top-level `objects` field; scene objects
+live in `steps[].objects`. Once fixed, those scenes carried 10 real objects
+each. The visual engine works. Defect 1 is that the tutor's WORDS contradict it.
+
+---
+
+# The mastery ceiling, located — and a fix that was wrong
+
+**78% of the questions the tutor asks cannot be graded.** 283 of 362 across the
+56-session run, and 226 of those 283 are asked at OBSERVE or DEMONSTRATE — the
+two rungs a learner must cross before any gate can credit anything. Answering
+them is unrecordable by construction.
+
+## A fix that was written, failed its tests, and was reverted
+
+The reasoning looked sound: the acknowledgement branch advances
+OBSERVE -> DEMONSTRATE on a bare "ok", while a substantive answer to an
+ungradeable question advances nothing — so engagement is worth less than a
+receipt. A rule was added to advance OBSERVE on substantive engagement.
+
+**Seven behavioural tests failed across four files** — not source-text guards,
+real phase-machine tests — and `observeDiagnosticConcludes.test.ts` explains
+why. OBSERVE is a DIAGNOSTIC phase, not a delivery phase, and the mechanism
+assumed missing already exists: unanswered ENGINE probes accumulate in
+`observeFailures` and conclude the diagnostic at >= 2. That file's header rules
+out precisely what was attempted: "emphatically not 'after N turns, skip
+OBSERVE'". Reverted; suite green.
+
+## The correct, narrower diagnosis
+
+`diagnosticProducedNothing` requires `evidence.questionSanctioned === true` —
+the ENGINE decided to ask. The model ALSO volunteers questions the engine never
+sanctioned, and those carry no answer key, so they neither grade nor count
+toward concluding the diagnostic. The learner answers them and the ladder is
+frozen. That is the nine-turn OBSERVE stall observed by hand.
+
+It already has a name here: **`QUESTION_SHIPPED_WITHOUT_PROBE`**, which
+`turnDecision.ts` detects and deliberately does not act on — "Returns findings;
+changes nothing, blocks nothing... acting on it is a later phase and
+deliberately not done here." That later phase is the fix, and it is a
+prompt-and-arbitration change on the hot path.
+
+**NOT ATTEMPTED YET, deliberately.** Two speculative changes were already made
+today on plausible mechanisms that proved wrong. The next step is to instrument
+`questionSanctioned` against production to size the unsanctioned-question rate
+first — it is not in the chat payload, so it cannot be measured from the
+transcripts already captured.
