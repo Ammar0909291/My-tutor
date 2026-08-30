@@ -100,3 +100,38 @@ wrong and should be reported as wrong.
 C1 (probe depth) is the critical path, ahead of both engine items, and E1
 is only safe **after** it — E1 spends probes earlier, and at a pool of
 three that strictly worsens the dominant failure class.
+
+---
+
+## Chemistry replicates it — the diagnosis is not subject-specific
+
+**2026-08-30, 12-concept chemistry baseline, seed 7, real QA account,
+deployed app. 12/12 completed, 1 discarded as provider-degraded, 11
+measured.**
+
+**8 of 11 reached verified mastery — 73%**, against physics's 79%.
+
+| | physics | chemistry |
+|---|---|---|
+| verified mastery | 79% (46/58) | **73% (8/11)** |
+| mean keyed probes served | 3.02 | **2.82** |
+| mean tail turns after last keyed probe, mastered | 1.8 | **1.8** |
+| mean tail turns after last keyed probe, failed | 5.6 | **8.3** |
+
+The three chemistry failures decompose into the same classes, in the same
+proportions:
+
+| concept | chk | prc | keyed served | tail | class |
+|---|---|---|---|---|---|
+| `chem.redox.balancing` | 1 | 1 | 3 | 5 | zero-slack pool |
+| `chem.state.kinetic-theory` | 1 | 1 | 3 | 5 | zero-slack pool |
+| `chem.bio.enzyme-kinetics` | 0 | 0 | **0** | 15 | gate starvation |
+
+Two near-misses that served their entire three-probe pool, got one wrong,
+and then sat through five silent turns. One session that was never asked a
+single server-keyed question in fifteen turns.
+
+**This answers Session B's Task 1 without them needing to run it.** The
+chemistry ceiling has the same cause as the physics ceiling, so the same
+fix applies and probe depth is the critical path for both subjects. Both
+near-misses also contain a backwards phase move, as in physics.
