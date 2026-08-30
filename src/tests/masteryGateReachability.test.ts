@@ -193,11 +193,26 @@ describe('G-2 NEGATIVE CONTROLS — remediation policy is not weakened', () => {
     expect(twice.remediationCount).toBe(2)
   })
 
-  it('clarification in a DELIVERY phase still demotes exactly as before', () => {
-    // The hold is scoped to the mastery gates. GUIDE is unchanged.
+  it('the SECOND clarification in a DELIVERY phase demotes — narrowed, with cause', () => {
+    // REWRITTEN, not deleted. This case previously read "clarification in a
+    // DELIVERY phase still demotes exactly as before", asserting that the
+    // FIRST one demotes and pinning the scope of the G-2 hold to the mastery
+    // gates. G-2b deliberately narrows that: the first clarification now holds
+    // at GUIDE too, and the second demotes.
+    //
+    // WHY THE OLD ASSERTION WAS WRONG. `remediationCount` is cleared by a
+    // graded-correct answer, so a learner alternating "explain it again" with
+    // a CORRECT answer met the escalation branch with the counter at 0 every
+    // single time. Every request was the first one, and GUIDE -> DEMONSTRATE
+    // -> GUIDE cycled without end. The old assertion held on a single turn and
+    // was blind to the cycle it licensed.
+    //
+    // The escalation it was protecting is intact and is what this now pins.
     const guide = run(initialConversationState('phys.x'), [CORRECT, TEACH])
     expect(guide.phase).toBe('GUIDE')
-    expect(advanceConversationState(guide, CLARIFY).phase).toBe('DEMONSTRATE')
+    const once = advanceConversationState(guide, CLARIFY)
+    expect(once.phase).toBe('GUIDE')          // re-explain in place
+    expect(advanceConversationState(once, CLARIFY).phase).toBe('DEMONSTRATE')
   })
 
   it('a clarification never touches the mastery counters', () => {
@@ -252,5 +267,86 @@ describe('the two fixes together do not fabricate anything', () => {
     const s = run(initialConversationState('phys.x'), [CORRECT, CORRECT, CORRECT])
     expect(s.phase).toBe('CHECK')
     expect(s.correctAtCheck).toBe(0)   // entering CHECK is not passing it
+  })
+})
+
+
+// ═══════════════════════════════════════════════════════════════════════════
+// G-2b — THE SAME TREADMILL, ONE RUNG LOWER
+// ═══════════════════════════════════════════════════════════════════════════
+/**
+ * G-2 fixed the mastery gates and left GUIDE demoting on the first
+ * clarification. Because `remediationCount` is cleared by a graded-correct
+ * answer, a learner who alternates a clarification request with a correct
+ * answer arrives at every request with the counter at 0 — so the escalation
+ * branch never engages and the ladder oscillates GUIDE <-> DEMONSTRATE for the
+ * whole lesson.
+ *
+ * Measured live 2026-08-30 across the 60-session physics certification sweep
+ * and the 12-session chemistry baseline: 3 physics sessions sat at
+ * OBSERVE>DEMONSTRATE>GUIDE having been served ONE keyed probe in fifteen
+ * turns, and chemistry's `chem.bio.enzyme-kinetics` was served ZERO in
+ * fifteen. All four ended at correctAtCheck 0, correctAtPractice 0.
+ */
+describe('G-2b — a clarification must not put the learner on a treadmill', () => {
+  /** The harness learner's real shape: ask for help, then answer correctly. */
+  const alternating = (turns: number) => {
+    let s: ConversationState = {
+      ...initialConversationState('phys.mech.pressure-fluids'),
+      taughtThisSession: true, demonstrated: true, phase: 'GUIDE',
+    }
+    for (let n = 1; n <= turns; n++) {
+      s = advanceConversationState(s, n % 2 === 1 ? CLARIFY : CORRECT)
+    }
+    return s
+  }
+
+  it('reaches the gates instead of cycling (was GUIDE forever, check 0)', () => {
+    const s = alternating(12)
+    expect(s.correctAtCheck).toBeGreaterThanOrEqual(1)
+    expect(s.correctAtPractice).toBeGreaterThanOrEqual(2)
+    expect(s.phase).toBe('TRANSFER')
+  })
+
+  it('the first clarification at GUIDE re-explains in place', () => {
+    const guide: ConversationState = {
+      ...initialConversationState('phys.x'),
+      taughtThisSession: true, demonstrated: true, phase: 'GUIDE',
+    }
+    expect(advanceConversationState(guide, CLARIFY).phase).toBe('GUIDE')
+  })
+
+  it('escalation still bites: consecutive requests walk the ladder down', () => {
+    const at = (phase: ConversationState['phase']): ConversationState => ({
+      ...initialConversationState('phys.x'),
+      taughtThisSession: true, demonstrated: true, phase,
+    })
+    const step = (s: ConversationState, n: number) => {
+      for (let i = 0; i < n; i++) s = advanceConversationState(s, CLARIFY)
+      return s.phase
+    }
+    expect(step(at('PRACTICE'), 1)).toBe('PRACTICE')
+    expect(step(at('PRACTICE'), 2)).toBe('CHECK')
+    expect(step(at('PRACTICE'), 3)).toBe('GUIDE')
+    expect(step(at('GUIDE'), 2)).toBe('DEMONSTRATE')
+  })
+
+  it('buys no mastery — the counters are untouched by clarification', () => {
+    let s: ConversationState = {
+      ...initialConversationState('phys.x'),
+      taughtThisSession: true, demonstrated: true, phase: 'CHECK',
+    }
+    for (let i = 0; i < 6; i++) s = advanceConversationState(s, CLARIFY)
+    expect(s.correctAtCheck).toBe(0)
+    expect(s.correctAtPractice).toBe(0)
+    expect(s.verifiedCorrectAtCheck ?? 0).toBe(0)
+  })
+
+  it('a WRONG answer is a different branch and still demotes on the first', () => {
+    const check: ConversationState = {
+      ...initialConversationState('phys.x'),
+      taughtThisSession: true, demonstrated: true, phase: 'CHECK',
+    }
+    expect(advanceConversationState(check, WRONG).phase).not.toBe('CHECK')
   })
 })

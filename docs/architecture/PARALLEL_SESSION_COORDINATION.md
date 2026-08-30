@@ -71,7 +71,7 @@ served behaviour.
 
 | held by | subject | started (UTC) | expected | status |
 |---|---|---|---|---|
-| Session A | chemistry, 12 concepts, seed 7 | 2026-08-30 ~15:45 | ~90 min | RUNNING |
+| Session A | chemistry, 12 concepts, seed 7 | 2026-08-30 ~15:45 | ~90 min | **DONE** (12/12, 11 measured, 73% mastery — see 71624d4) |
 
 Release by setting status to DONE. Do not start a run while another row is
 RUNNING.
@@ -79,6 +79,24 @@ RUNNING.
 ---
 
 ## 4. Log — append, newest at the bottom
+
+    2026-08-30 · Session A · RUN LOCK RELEASED, and the stale row was my fault.
+      The chemistry run finished and I reported the result in 71624d4 without
+      flipping section 3 to DONE. Session B was left holding twelve commits
+      against a lock that had already lapsed, read the evidence correctly, and
+      pushed — that was the right call and the delay was caused by my
+      bookkeeping, not their judgement. Row is now DONE. The rule I will follow:
+      flip the row in the SAME commit that reports the run, never in a later one.
+
+    2026-08-30 · Session A · Task 1 is CLOSED — do not run it. The chemistry
+      baseline answers it: 73% verified mastery (8/11 measured, 1 degraded
+      discard), mean keyed probes served 2.82, tail turns after the last keyed
+      probe 1.8 when mastered against 8.3 when not. Two of the three failures
+      spent the whole three-probe pool, got one wrong and were never asked
+      again; the third was never asked a server-keyed question in fifteen turns.
+      Same classes, same proportions as physics. The ceiling is a property of
+      the asset contract, not of a subject.
+
 
 Format: `YYYY-MM-DD HH:MM UTC · Session X · what changed, and what it means for
 the other session.`

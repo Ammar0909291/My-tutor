@@ -208,11 +208,19 @@ describe('acknowledgement never overrides stronger evidence', () => {
       askedQuestion: false, signalCorrect: null, recoveryFired: false,
       acknowledgement: true, learnerRequest: 'explain_differently',
     })
-    // Remediation counted and the phase stepped DOWN — the acknowledgement
-    // travelling alongside it bought nothing.
+    // Remediation counted and the acknowledgement travelling alongside it
+    // bought nothing — which is the claim this case exists to make.
     expect(after.remediationCount).toBe(1)
     expect(after.consecutiveFailures).toBe(1)
-    expect(after.phase).toBe('DEMONSTRATE')
+    // G-2b (2026-08-30): the FIRST clarification now holds at GUIDE too. `remediationCount` is cleared by a graded-correct answer, so a learner alternating "explain it again" with a correct answer met this branch with the counter at 0 every time — every request was the first, and GUIDE<->DEMONSTRATE cycled for the whole lesson (reproduced: 12 turns, 6 correct answers, check 0). The SECOND request still steps down, which is what is asserted here now.
+    // The ack still buys nothing: the phase is held by the remediation rule,
+    // not advanced by the acknowledgement, and a second request steps down.
+    expect(after.phase).toBe('GUIDE')
+    const twice = advanceConversationState(after, {
+      askedQuestion: false, signalCorrect: null, recoveryFired: false,
+      acknowledgement: true, learnerRequest: 'explain_differently',
+    })
+    expect(twice.phase).toBe('DEMONSTRATE')
   })
 
   it('recovery preempts the acknowledgement transition', () => {

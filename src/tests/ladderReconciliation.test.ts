@@ -159,9 +159,15 @@ describe('A — the two state spaces, enumerated in full', () => {
     // And each of the two has a real, non-identity transition in the shipping fold.
     expect(legacyStep('GUIDE', 'acknowledgement', true).phase).toBe('CHECK')
     // PHASE E (G-2): the first remediation request inside a mastery gate holds
-    // the rung, so the non-identity transition is asserted where it still is —
-    // in a DELIVERY phase, and on the second request inside the gate.
-    expect(legacyStep('GUIDE', 'explain_differently', true).phase).toBe('DEMONSTRATE')
+    // the rung. G-2b (2026-08-30): the FIRST clarification now holds at GUIDE too. `remediationCount` is cleared by a graded-correct answer, so a learner alternating "explain it again" with a correct answer met this branch with the counter at 0 every time — every request was the first, and GUIDE<->DEMONSTRATE cycled for the whole lesson (reproduced: 12 turns, 6 correct answers, check 0). The SECOND request still steps down, which is what is asserted here now.
+    // So the non-identity transition is asserted on the SECOND request, which
+    // is where it now lives at every phase.
+    const heldOnce = legacyStep('GUIDE', 'explain_differently', true)
+    expect(heldOnce.phase).toBe('GUIDE')
+    expect(advanceConversationState(heldOnce, {
+      askedQuestion: false, signalCorrect: null, recoveryFired: false,
+      learnerRequest: 'explain_differently',
+    }).phase).toBe('DEMONSTRATE')
   })
 
   it('D5b — the canonical machine has no degraded-turn guard (the P4/F7 invariant)', () => {
@@ -425,9 +431,9 @@ const RECONCILIATION: Row[] = [
   { from: 'DEMONSTRATE', kind: 'explain_differently', shipping: 'DEMONSTRATE', canonicalAsLegacy: null,
     disposition: 'UNEXPLAINED',
     reason: 'D5: shipping counts the remediation, raises frustration and re-shows at the floor. Canonical would treat "explain it differently" as a turn that carried no evidence and change nothing.' },
-  { from: 'GUIDE', kind: 'explain_differently', shipping: 'DEMONSTRATE', canonicalAsLegacy: null,
+  { from: 'GUIDE', kind: 'explain_differently', shipping: 'GUIDE', canonicalAsLegacy: null,
     disposition: 'UNEXPLAINED',
-    reason: 'D5: shipping drops from guidance back to demonstration when the learner asks to be re-taught. Canonical cannot distinguish that request from silence.' },
+    reason: 'D5 (amended by G-2b, 2026-08-30): the FIRST re-teach request at GUIDE now holds the rung and re-explains in place; the SECOND drops to DEMONSTRATE as before. It previously dropped on the first, and because remediationCount is cleared by a graded-correct answer, a learner alternating "explain it again" with a correct answer met that branch with the counter at 0 every time — so GUIDE<->DEMONSTRATE cycled for a whole lesson and CHECK was never reached. Measured live: 3 physics sessions and 1 chemistry session ended at check 0 / practice 0 in exactly that cycle. Canonical still has no channel for the request at all.' },
   { from: 'CHECK', kind: 'explain_differently', shipping: 'CHECK', canonicalAsLegacy: null,
     disposition: 'UNEXPLAINED',
     reason: 'D5 (amended by Phase E, G-2): the FIRST re-teach request inside a mastery gate now holds the gate and re-explains in place — measured live, demoting on a weak learner\'s commonest utterance meant the check was entered and left without ever being asked. The SECOND demotes to GUIDE as before. Canonical still has no channel for the request at all.' },
