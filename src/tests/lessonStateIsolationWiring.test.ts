@@ -26,7 +26,12 @@ describe('the chat route reads and writes the pending question through its owner
   })
 
   it('writes it via writePendingQuestion, with the SAME hoisted key', () => {
-    expect(CHAT).toMatch(/conversationStateUpdate\.pendingMcq\s*=\s*\n?\s*writePendingQuestion\(mcqHoisted, lessonKeyThisTurnHoisted\)/)
+    // The invariant here is the KEY identity — read and write must stamp the
+    // same lesson, or a question can grade a message from another lesson. The
+    // question argument became `mcqToServe(...)` on 2026-08-30 so the response
+    // and the snapshot cannot disagree about what is on screen; the key is
+    // unchanged and is what this pins.
+    expect(CHAT).toMatch(/conversationStateUpdate\.pendingMcq = writePendingQuestion\(\s*\n\s*mcqToServe\(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted\),\s*\n\s*lessonKeyThisTurnHoisted,\s*\n\s*\)/)
   })
 
   it('derives that key with lessonKeyFor — no second lesson-identity scheme', () => {

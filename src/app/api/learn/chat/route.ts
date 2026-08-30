@@ -7466,8 +7466,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // disagree about which lesson this question belongs to.
           {
             const { writePendingQuestion } = await import('@/lib/teaching/pendingQuestion')
-            conversationStateUpdate.pendingMcq =
-              writePendingQuestion(mcqHoisted, lessonKeyThisTurnHoisted)
+            const { mcqToServe } = await import('@/lib/teaching/mcq')
+            // Same value the response serves — see mcqToServe. Persisting
+            // anything else would either strand a question the learner can see
+            // (ungradeable next turn) or keep one the learner cannot.
+            conversationStateUpdate.pendingMcq = writePendingQuestion(
+              mcqToServe(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted),
+              lessonKeyThisTurnHoisted,
+            )
           }
           // P6.5: fold a CLOSED concept into the lesson attempt — the single
           // owner of lesson-scoped outcomes. A concept closes exactly two ways
@@ -8181,6 +8187,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         console.warn('[turn-decision] provenance line skipped:', err)
       }
 
+      // Same helper the persist site above uses, so the payload and the
+      // snapshot can never disagree about what is on the learner's screen.
+      const { mcqToServe: mcqToServeForResponse } = await import('@/lib/teaching/mcq')
+
       return NextResponse.json({
         success: true, text: cleanText, provider,
         // PROVENANCE SOURCE OF TRUTH. `provider` names the serving branch
@@ -8202,7 +8212,35 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         hint: hintHoisted ?? undefined,
         // P2: when present the client renders tappable options instead of
         // requiring the learner to type an answer.
-        mcq: mcqHoisted ?? undefined,
+        //
+        // ECHO AN OUTSTANDING PROBE. `unansweredProbeOnScreen` suppresses the
+        // mastery gate while a probe is pending and ungraded, and its comment
+        // states the assumption that makes that safe: "the widget keeps
+        // rendering it from `pendingMcq`". The widget does not. LessonScreen
+        // sets `activeMcq` from `data.mcq` and has a bare `else
+        // setActiveMcq(null)`, so a response that omits the field ERASES the
+        // question from the screen.
+        //
+        // Those two facts compose into a deadlock: the server withholds every
+        // new probe because it believes one is displayed, while the learner is
+        // looking at none, cannot answer what they cannot see, and so never
+        // produces the grade that would release the gate.
+        //
+        // Measured on the 60-concept physics run (2026-08-30). Across the five
+        // sessions that stalled at GUIDE, keyed-probe attachment after the
+        // first wrong answer was 0 of 21 turns — a latch, not a gradient —
+        // against 233 of 425 (55%) in every other session. Their own phase mix
+        // predicted 23.6 probes; they got 7. In phys.opt.mirrors the tutor
+        // asked "What led you to pick option B?" on a turn whose payload
+        // carried no mcq, so the learner was asked to reason about an option
+        // that was no longer on their screen.
+        //
+        // This is the same defect the block above already fixed on the server
+        // side — "the tutor then referred them to a question that was no longer
+        // on screen" — reappearing across the API boundary. Echoing the pending
+        // probe makes the payload state what the server already believes, and
+        // costs nothing when nothing is outstanding.
+        mcq: mcqToServeForResponse(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted) ?? undefined,
         // P6.6: present only on the turn the lesson completes. The client
         // renders the completion screen and must not continue teaching.
         lessonComplete: lessonCompletionHoisted ?? undefined,

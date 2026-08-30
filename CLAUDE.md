@@ -2838,3 +2838,22 @@ contained in `main`'s current tip.
   design from `65d1f28`. The genuine residue is 18/245 (7%), of which **3 moved the learner
   backwards** on a correct answer. Too few to act on; named, not fixed.
 - Full suite 493 files / 10,748 passed / 9 skipped; `tsc --noEmit` clean.
+- **Seventh defect — the GUIDE stall's ROOT CAUSE, found and fixed.** Previously reported PARTIAL; it
+  is now a located deadlock. Ruling out the innocent explanation first: the five stalled sessions'
+  own phase mix predicted 23.6 keyed probes and they got 7, so phase mix does not explain it. The
+  discriminator is a LATCH — splitting every session at its first wrong answer, the other 53 sessions
+  go 17% → **55%** attachment (a wrong answer normally STARTS the assessment loop) while the stalled
+  five go 14% → **0%**, zero across 21 turns. The switch is two reasonable behaviours composing:
+  `route.ts` suppresses the mastery gate while a probe is pending and ungraded
+  (`unansweredProbeOnScreen`) on the stated assumption that *"the widget keeps rendering it from
+  `pendingMcq`"* — and `LessonScreen.tsx` does not: it sets `activeMcq` from `data.mcq` with a bare
+  `else setActiveMcq(null)`, while the response carried only a probe attached THIS turn. So the server
+  withholds every new probe believing one is displayed, the learner sees none, cannot answer what they
+  cannot see, and never produces the grade that would release the gate. In `phys.opt.mirrors` the tutor
+  asks "What led you to pick option B?" on a turn whose payload carries no mcq. Fixed with a shared
+  `mcqToServe()` used by BOTH the response and the persisted snapshot — each half alone recreates one
+  of the two defects, and an existing guard caught exactly that while the fix was being written. A
+  probe graded this turn is deliberately not carried forward. **Not yet re-measured against
+  production**; a run that would have straddled two builds was stopped and discarded rather than
+  reported.
+- Full suite 494 files / 10,754 passed / 9 skipped; `tsc --noEmit` clean.

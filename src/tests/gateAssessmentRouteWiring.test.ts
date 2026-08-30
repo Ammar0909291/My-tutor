@@ -91,9 +91,17 @@ describe('the gate assessment is on the turn path', () => {
     // stamps the lesson the question was asked in. `mcqHoisted` is still the
     // ONE source of the question — that is what this assertion guards, and it
     // is unchanged. See lessonStateIsolationWiring.test.ts for the identity.
-    expect(lineOf(/conversationStateUpdate\.pendingMcq =$/)).toBeGreaterThan(0)
-    expect(lineOf(/writePendingQuestion\(mcqHoisted, lessonKeyThisTurnHoisted\)/)).toBeGreaterThan(0)
-    expect(lineOf(/mcq: mcqHoisted \?\? undefined/)).toBeGreaterThan(0)
+    // 2026-08-30: the response and the snapshot now BOTH run through
+    // `mcqToServe`, which is what this assertion has always been about — a
+    // question that is served must be the question that is persisted, or it is
+    // ungradeable next turn. Pinning the shared helper is stronger than pinning
+    // the old `mcqHoisted ?? undefined` literal, because it also catches the
+    // inverse defect that literal permitted: persisting a probe the response
+    // does NOT carry, which deadlocked the mastery gate (see
+    // outstandingProbeStaysOnScreen.test.ts).
+    expect(lineOf(/conversationStateUpdate\.pendingMcq = writePendingQuestion\($/)).toBeGreaterThan(0)
+    expect(lineOf(/mcqToServe\(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted\),$/)).toBeGreaterThan(0)
+    expect(lineOf(/mcq: mcqToServeForResponse\(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted\) \?\? undefined/)).toBeGreaterThan(0)
   })
 })
 

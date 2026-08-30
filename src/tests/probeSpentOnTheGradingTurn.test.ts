@@ -140,7 +140,11 @@ describe('5 · model-generated MCQs keep their existing behaviour', () => {
 
 describe('6 · pending-question lesson identity is untouched', () => {
   it('the pending question is still written and read with its lesson key', () => {
-    expect(ROUTE).toMatch(/writePendingQuestion\(mcqHoisted, lessonKeyThisTurnHoisted\)/)
+    // The lesson key — this test's actual subject — is unchanged. The question
+    // argument became `mcqToServe(...)` on 2026-08-30 so the response payload
+    // and the persisted snapshot cannot disagree about what is on the learner's
+    // screen; `mcqHoisted` is still its first and winning input.
+    expect(ROUTE).toMatch(/writePendingQuestion\(\s*\n\s*mcqToServe\(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted\),\s*\n\s*lessonKeyThisTurnHoisted,\s*\n\s*\)/)
   })
 })
 

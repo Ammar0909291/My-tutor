@@ -701,3 +701,90 @@ Recorded because measuring and then NOT acting is the point of the rule.
   answer produced neither credit nor forward movement, **3 of which moved the
   learner BACKWARDS** — including one `CHECK > GUIDE` on a correct CHECK answer.
   Three instances is too few to act on; it is written down as a named anomaly.
+
+
+---
+
+# The GUIDE stall — ROOT CAUSE FOUND (2026-08-30)
+
+The section above reported the stall as PARTIAL, with `D4b-ANSWER-STUDENT-FIRST`
+a confirmed contributing mechanism and something else unexplained. That
+something else is now found, and it is a genuine deadlock.
+
+## Ruling out the remaining innocent explanation
+
+If the stalled sessions simply never left the low-attachment early phases, their
+collapsed probe rate would need no further cause. Tested against the corpus,
+using the 53 non-stalled sessions to set a per-phase baseline (OBSERVE 0.07,
+DEMONSTRATE 0.34, GUIDE 0.54, CHECK 0.62, PRACTICE 0.66) and applying each
+stalled session's OWN phase mix:
+
+| | turns | probes observed | predicted by phase mix |
+|---|---|---|---|
+| the 5 stalled sessions | 70 | **7 (10%)** | **23.6 (34%)** |
+
+Phase mix does not explain it. A 3.4x shortfall survives controlling for it.
+
+## The discriminator: a latch, not a gradient
+
+Splitting every session at its FIRST wrong answer to a server-keyed probe:
+
+| | before first wrong answer | after |
+|---|---|---|
+| the 53 other sessions | 62/363 (17%) | **233/425 (55%)** |
+| the 5 stalled sessions | 7/49 (14%) | **0/21 (0%)** |
+
+A wrong answer normally *starts* the assessment loop — attachment more than
+triples. In the stalled sessions it stops it dead. Zero, across 21 turns. That
+is a latch, and latches have a switch.
+
+## The switch — two reasonable behaviours that deadlock
+
+1. `chat/route.ts` suppresses the mastery gate while a probe is pending and
+   ungraded (`unansweredProbeOnScreen = pendingMcqHoisted !== null &&
+   mcqGradeHoisted === null`), so `findBestProbe` — whose `excludeProbeStem`
+   guarantees a FRESH probe every time — cannot swap a different question in
+   underneath the learner. Its comment states the assumption that makes this
+   safe: *"the widget keeps rendering it from `pendingMcq`"*.
+2. **The widget does not.** `LessonScreen.tsx` sets `activeMcq` from `data.mcq`
+   and has a bare `else setActiveMcq(null)`. The response carried
+   `mcq: mcqHoisted ?? undefined` — only a probe attached THIS turn, never one
+   merely outstanding. So a response that omits the field **erases the question
+   from the screen.**
+
+Composed: the server withholds every new probe because it believes one is on
+display; the learner is looking at none, cannot answer what they cannot see, and
+so never produces the grade that would release the gate. The lesson runs out its
+concept budget at GUIDE with nothing ever assessed.
+
+`phys.opt.mirrors` shows it in the transcript: the tutor asks **"What led you to
+pick option B?"** on a turn whose payload carries no `mcq` at all. The learner is
+being asked to reason about an option that is no longer on their screen.
+
+This is the same defect the route's own comment block already records fixing on
+the server side — *"the tutor then referred them to a question that was no longer
+on screen"* — reappearing across the API boundary.
+
+## Fix
+
+A shared `mcqToServe(attachedThisTurn, pending, gradedThisTurn)` in `mcq.ts`,
+used by BOTH the response payload and the persisted `pendingMcq` snapshot. They
+are two halves of one fact — what is on the learner's screen — and each half is
+useless alone:
+
+- response without persist → the learner sees a question nothing can grade next
+  turn (the E6 defect `gateAssessmentRouteWiring.test.ts` guards, which caught
+  exactly this while the fix was being written).
+- persist without response → the deadlock above.
+
+A probe GRADED this turn is deliberately not carried forward: it has produced its
+evidence, and re-serving it would let one question be answered twice — the
+hollow advancement `probeSpentOnTheGradingTurn.test.ts` exists to prevent.
+
+Three existing wiring guards pinned the old `mcqHoisted` literal. Each now pins
+the shared helper, which is strictly stronger: the old literal permitted the
+inverse defect this fix repairs.
+
+**Not yet re-measured against production.** A full 60-concept re-run on this
+build is the next step. An in-flight run was stopped and discarded rather than
+allowed to straddle two builds.
