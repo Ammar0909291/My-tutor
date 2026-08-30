@@ -836,6 +836,46 @@ describe('the physics depth probes are arithmetically true', () => {
     expect(c('peptide bonds are there in a linear tripeptide')).toContain('Two')
   }, 30_000)
 
+  it('chemistry batch 2: the arithmetic', async () => {
+    const { CHEMISTRY_DEPTH_PROBES } = await import('../lib/teaching/assets/chemistryDepthSeedAssets')
+    const probes = CHEMISTRY_DEPTH_PROBES as unknown as Probe[]
+    const c = (fragment: string) => {
+      const hit = probes.filter((p) => p.stem.includes(fragment))
+      expect(hit.length, `expected exactly one chemistry probe containing "${fragment}"`).toBe(1)
+      return (hit[0].choices ?? []).find((x) => x.isCorrect)!.text
+    }
+
+    // Ethene: four C-H sigma + one C-C sigma, and ONE pi on top.
+    expect(4 + 1).toBe(5)
+    expect(c('one molecule of ethene')).toContain('Five sigma and one pi')
+
+    // Carbonate: (1 + 1 + 2)/3 bonds shared over three positions.
+    expect((1 + 1 + 2) / 3).toBeCloseTo(1.333, 3)
+    expect(3 / 2).toBe(1.5)                       // the benzene answer, offered
+    expect(c('carbonate ion CO₃²⁻')).toContain('1.33')
+
+    // Permanganate: x + 4(-2) = -1.
+    expect(-1 - 4 * -2).toBe(7)
+    expect(c('permanganate ion')).toContain('+7')
+
+    // Molar conductivity: 0.100 mol/dm3 is 1.00e-4 mol/cm3.
+    expect(0.100 / 1000).toBeCloseTo(1.0e-4, 12)
+    expect(0.0100 / 1.0e-4).toBeCloseTo(100, 9)
+    expect(0.0100 / 0.100).toBeCloseTo(0.100, 12) // skipping the conversion
+    expect(c('conductivity 0.0100 S cm⁻¹')).toContain('100')
+
+    // Cu2+ needs TWO electrons per atom, so two Faradays.
+    expect(2 * 96500).toBe(193000)
+    expect(c('deposit one mole of copper metal')).toContain('193 000 C')
+
+    // Aldol joins two carbonyls with no loss of carbon.
+    expect(2 + 2).toBe(4)
+    expect(c('Two molecules of ethanal')).toContain('Four')
+
+    // Four pairs go tetrahedral, not square.
+    expect(c('four bonding pairs and no lone pairs')).toContain('109.5')
+  }, 30_000)
+
   it('batch 13: coupling j=1 with j=1 preserves the state count', async () => {
     const probes = await load()
     const coup = find(probes, 'j₁ = 1 and j₂ = 1 are coupled')
