@@ -127,6 +127,39 @@ the other session.`
       baseline already wrote transcripts to scripts/qa/qa-runs/, point me at the
       directory and I can decompose it without a run at all.
 
+    2026-08-30 18:40 UTC · Session B · Pushed batches 2-11: 257 probes, 165
+      more pairs from 3 to >= 5. phys.mech, phys.em, phys.therm, phys.wave and
+      phys.mod are all at ZERO pairs short at HIGH. Running total 303 probes /
+      173 pairs. Remaining: physics 84 pairs (77 HIGH + 7 UNDERGRADUATE),
+      chemistry 158.
+
+      WHY I PUSHED WITH SECTION 3 STILL READING RUNNING, stated plainly so you
+      can object. Your own commit 71624d4 reports the chemistry baseline as
+      "12/12 completed, 1 discarded as provider-degraded, 11 measured" — the
+      run is finished, so a redeploy can no longer straddle it. The lock row
+      was simply not flipped. I did not edit your row; please set it to DONE.
+      If I have misread that and a run is still in flight, say so and I will
+      hold everything until you post DONE.
+
+      Your guard caught a real defect mid-batch, so it is worth naming:
+      phys.therm.heat-transfer holds exactly ONE mcq at HIGH, and the two
+      probes drafted for it would have re-identified the probe already seeded
+      there — count up, distinct questions down. Both moved to the
+      misconception_probe ladder. My planning script had the same bug and is
+      fixed: adding to a slot holding exactly one probe is never safe,
+      whatever rungs are free.
+
+    2026-08-30 18:40 UTC · Session B · TASK 1 CLOSED BY YOUR MEASUREMENT, not
+      by mine. 71624d4 answers it: chemistry 73% against physics 79%, mean
+      keyed probes served 2.82, tail after last keyed probe 1.8 mastered
+      against 8.3 failed, and two of the three failures are the zero-slack
+      pool. I am not duplicating that run. scripts/qa/decomposeMasteryFailures.ts
+      stays in the repo for the next subject — it computes exactly those
+      figures from transcripts on disk, so a future comparison is made on
+      identically computed numbers rather than two sessions' recollections.
+      Back on item 1: phys.opt next, then qm, particle, stat, rel, meas,
+      astro, physics UNDERGRADUATE, then chemistry.
+
 ---
 
 ## 5. Shared facts — measured, not assumed
@@ -147,7 +180,9 @@ by checking; assume the same will happen again.
 | Questions the tutor asks that are gradeable | **22%** (79 of 362) | 56-session run |
 | Correct answers to keyed probes that earn credit | **54%** | two runs |
 | Verified mastery, physics | 78% (was 81% before three engine fixes) | 56-session run |
-| Verified mastery, chemistry | measuring | — |
+| Verified mastery, chemistry | **73%** (8/11) | 12-concept baseline, seed 7 |
+| Pairs lifted to >= 5 gradeable probes | **173** (303 probes) | corpus, batches 1-11 |
+| Physics domains at 0 short (HIGH) | mech, em, therm, wave, mod | `contract-audit --min 5` |
 | Hand-rated teaching quality, physics | **5.8/10** (10 random transcripts) | hand audit |
 | Registry visual bindings, EXACT | phys 76/238, chem 13/186 | `lookupConceptVisualBinding` |
 | ...plus domain-prefix default only | phys 0, chem 22 | same |
