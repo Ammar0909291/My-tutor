@@ -98,9 +98,28 @@ against the whole corpus.
 
 ## Progress
 
-| batch | what | pairs lifted to 5 | probes authored |
+| batch | what | pairs to 5 | probes |
 |---|---|---|---|
-| 1 (2026-08-30) | physics MIDDLE + ADULT — units, scalars/vectors, velocity, displacement, acceleration, force, Newton I/II/III, momentum, impulse, power, kinematics, kinetic energy, Hooke's Law | 23 | 46 |
+| 1 | physics MIDDLE + ADULT — units, scalars/vectors, velocity, displacement, acceleration, force, Newton I/II/III, momentum, impulse, power, kinematics, kinetic energy, Hooke's Law | 23 | 46 |
+| 2 | the eight HIGH concepts measured one answer short | 8 | 14 |
+| 3 | phys.therm @ HIGH — all sixteen | 16 | 30 |
+| 4 | phys.wave @ HIGH — all sixteen | 16 | 32 |
+| 5 | phys.mech @ HIGH — first seventeen | 17 | 26 |
+| 6 | phys.mech @ HIGH — second seventeen | 17 | 23 |
+| 7 | phys.mech @ HIGH — last seventeen | 17 | 27 |
+| 8 | phys.mech @ HIGH — six slot-constrained pairs | 6 | 12 |
+| 9 | phys.em @ HIGH — first seventeen | 17 | 34 |
+| 10 | phys.em @ HIGH — last seventeen | 17 | 34 |
+| 11 | phys.mod @ HIGH — all nineteen | 19 | 25 |
+| **total** | | **173** | **303** |
 
-Remaining, from the corpus after batch 1: **physics 234 pairs / 382 probes,
-chemistry 158 pairs / 244 probes.**
+**Domains at zero pairs short at HIGH:** phys.mech, phys.em, phys.therm,
+phys.wave, phys.mod.
+
+**Remaining in the corpus:** physics 84 pairs / 127 probes, chemistry 158
+pairs / 244 probes. The physics figure is 77 at HIGH plus 7 at
+UNDERGRADUATE; HIGH breaks down as qm 16, particle 16, stat 14, opt 14,
+rel 7, meas 5, astro 4, plus one slot-constrained pair.
+
+Regenerate the table above from `git log --oneline --grep "probe depth"`;
+regenerate the CSV with the command at the top of this file.
