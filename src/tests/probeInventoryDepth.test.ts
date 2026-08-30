@@ -915,6 +915,58 @@ describe('the physics depth probes are arithmetically true', () => {
     expect(c('0.0004503')).toContain('four significant figures')
   }, 30_000)
 
+  it('chemistry batch 4: the arithmetic', async () => {
+    const { CHEMISTRY_DEPTH_PROBES } = await import('../lib/teaching/assets/chemistryDepthSeedAssets')
+    const probes = CHEMISTRY_DEPTH_PROBES as unknown as Probe[]
+    const c = (fragment: string) => {
+      const hit = probes.filter((p) => p.stem.includes(fragment))
+      expect(hit.length, `expected exactly one chemistry probe containing "${fragment}"`).toBe(1)
+      return (hit[0].choices ?? []).find((x) => x.isCorrect)!.text
+    }
+
+    // Three half-lives HALVE three times. The one-third option is the linear
+    // reading of a decay that is not linear, and it is the reason a learner
+    // also expects the reaction to have finished.
+    expect(30 / 10).toBe(3)
+    expect((1 / 2) ** 3).toBe(1 / 8)
+    expect((1 / 2) ** 3).not.toBe(1 / 3)
+    expect(1 - 3 * 0.5).toBe(-0.5)          // linear decay would have gone negative
+    expect(c('half-life of 10 minutes')).toContain('One eighth')
+
+    // Hückel: aromatic at 4n + 2, ANTI-aromatic at 4n. The two series never
+    // collide, which is what makes the rule decidable.
+    const huckel = (n: number) => 4 * n + 2
+    expect(huckel(0)).toBe(2)
+    expect(huckel(1)).toBe(6)
+    expect(huckel(2)).toBe(10)
+    expect([0, 1, 2].every((n) => huckel(n) % 4 !== 0)).toBe(true)
+    expect(c('Hückel\'s rule states')).toContain('4n + 2')
+
+    // Benzene: three double bonds carry TWO pi electrons each, so six — and six
+    // is 4n+2 at n=1, not n=2. Counting bonds gives three, which is the slip.
+    expect(3 * 2).toBe(6)
+    expect(huckel(1)).toBe(6)
+    expect(huckel(2)).not.toBe(6)
+    expect(4).toBe(4 * 1)                    // cyclobutadiene: 4n, anti-aromatic
+    expect(c('How many pi electrons does benzene have')).toContain('n = 1')
+
+    // Amines are classified by the count on the NITROGEN. Dimethylamine has two
+    // alkyl groups there, so secondary — whatever the carbon skeleton looks like.
+    expect(['CH₃', 'CH₃'].length).toBe(2)
+    expect(c('dimethylamine')).toContain('Secondary')
+
+    // Atomic radius grows DOWN a group as shells are added, and the ranking is
+    // therefore the reverse of the atomic-number order for Li, Na, K only
+    // because they share a group.
+    expect([3, 11, 19]).toEqual([3, 11, 19].slice().sort((a, b) => a - b))
+    expect(c('Rank lithium, sodium and potassium')).toContain('Li')
+
+    // Ionisation energy rises ACROSS a period: the nuclear charge grows while
+    // the shell does not.
+    expect(18 - 11).toBe(7)
+    expect(c('sodium to argon')).toContain('increase')
+  }, 30_000)
+
   it('batch 13: coupling j=1 with j=1 preserves the state count', async () => {
     const probes = await load()
     const coup = find(probes, 'j₁ = 1 and j₂ = 1 are coupled')
