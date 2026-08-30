@@ -746,6 +746,43 @@ describe('the physics depth probes are arithmetically true', () => {
     expect(correctText(wb)).toContain('30 Ω')
   })
 
+  it('batch 12: the optics arithmetic', async () => {
+    const probes = await load()
+    const pw = find(probes, 'focal length of 25 cm')
+    expect(1 / 0.25).toBe(4)
+    expect(1 / 25).toBeCloseTo(0.04, 12)      // f left in centimetres
+    expect(correctText(pw)).toContain('+4.0 D')
+
+    // 1/v = 1/f + 1/u with u = -15 cm: real image at +30 cm, m = -2.
+    const lens = find(probes, '15 cm from a converging lens')
+    const v = 1 / (1 / 10 - 1 / 15)
+    expect(v).toBeCloseTo(30, 12)
+    expect(v / -15).toBeCloseTo(-2, 12)
+    expect(correctText(lens)).toContain('30 cm')
+
+    // Unpolarised light halves at the FIRST polariser, then Malus at the second.
+    const mal = find(probes, 'second polariser at 60°')
+    expect(0.5 * Math.cos(Math.PI / 3) ** 2).toBeCloseTo(0.125, 12)
+    expect(Math.cos(Math.PI / 3) ** 2).toBeCloseTo(0.25, 12) // Malus alone
+    expect(correctText(mal)).toContain('I₀/8')
+
+    const ref = find(probes, 'glass surface (n = 1.50) at 30° to the normal')
+    const r = (Math.asin(Math.sin(Math.PI / 6) / 1.5) * 180) / Math.PI
+    expect(r).toBeCloseTo(19.47, 2)
+    expect(30 / 1.5).toBe(20)                 // dividing the ANGLE, not its sine
+    expect(correctText(ref)).toContain('19.5°')
+
+    const crit = find(probes, 'critical angle for a glass–air boundary')
+    const c = (Math.asin(1 / 1.5) * 180) / Math.PI
+    expect(c).toBeCloseTo(41.8, 1)
+    expect(90 - c).toBeCloseTo(48.2, 1)       // the complement distractor
+    expect(correctText(crit)).toContain('41.8°')
+
+    const fr = find(probes, 'slits are 0.50 mm apart')
+    expect((600e-9 * 2.0) / 0.50e-3).toBeCloseTo(2.4e-3, 12)
+    expect(correctText(fr)).toContain('2.4 mm')
+  })
+
   it("Hooke: 3 N gives 6 cm, so 12 N would predict 24 cm; two springs halve the extension", async () => {
     const probes = await load()
     const limit = find(probes, 'stretches 6 cm when a 3 N weight')
