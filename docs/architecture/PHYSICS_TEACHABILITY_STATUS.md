@@ -500,3 +500,47 @@ moved.
 | 6 | CLAUDE.md updated | **MET** |
 
 Two of six are not fully met, and neither is being reported as met.
+
+
+---
+
+# Validation run after the repetition fix (2026-08-30)
+
+Same harness, same seed, first 20 concepts of the same sample, run against the
+deployed app **after** `5c1d7c8` reached production. Directly comparable to the
+matching subset of the 60-run.
+
+| Measure | Before (`9c08fea`) | After (`5c1d7c8`) |
+|---|---|---|
+| Sessions containing a VERBATIM repeat of the authored explanation | **11/17 (65%)** | **5/16 (31%)** |
+| Model turns that reproduce it | 14/172 (8.1%) | 11/154 (7.1%) |
+| Verified mastery | 14/17 (82%) | 13/16 (81%) |
+| Showed a real visual | 13/17 (76%) | 11/16 (69%) |
+
+Degraded sessions excluded from both sides (1 before, 2 after).
+
+**What this does and does not show.**
+
+- The share of sessions carrying at least one verbatim repeat **roughly halved**,
+  65% → 31%. Fisher exact two-tailed **p = 0.084** — suggestive, not conclusive,
+  at n=17 vs n=16.
+- The **per-turn** rate barely moved (8.1% → 7.1%). So the sessions that still
+  repeat, repeat more. The fix reduced how many lessons are affected more than
+  how badly an affected lesson repeats.
+- **Mastery is unchanged** (82% → 81%), which is the expected result — this was a
+  quality fix, not a gating one.
+
+**A tempting claim that the data does NOT support.** All three concepts that
+stalled in the 60-run and reappear here — `unit-conversion`,
+`gravitational-potential`, `conservation-of-angular-momentum` — now reach
+TRANSFER with full verified mastery. That looks like the fix curing the GUIDE
+stall. It is not: over the 15 concepts common to both runs, 3 went FAIL→PASS and
+**2 went PASS→FAIL** (`electric-current`, `thermal-expansion`), net +1. That is
+the same per-concept churn already recorded between the earlier qa3/qa4/qa5 runs
+with no code change between them. The GUIDE stall is NOT fixed and is not being
+reported as fixed.
+
+**Net position after validation:** the repetition defect is measured, its cause
+identified, a fix shipped, and the fix shows a halving of affected sessions that
+falls just short of significance at this sample size. Criterion 5 (quality
+average >= 7.5/10) and the GUIDE stall under criterion 3 both remain open.

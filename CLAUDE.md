@@ -2796,3 +2796,12 @@ contained in `main`'s current tip.
   already scoped so it cannot block permanently, and GUIDE attaches probes routinely (46%). That is
   the named next gap.
 - Full suite green, `tsc --noEmit` clean.
+
+- **Validation of the repetition fix (same seed, first 20 concepts, after `5c1d7c8` deployed):**
+  sessions containing a verbatim repeat **65% → 31%** (Fisher exact two-tailed p = 0.084 — suggestive,
+  not conclusive at n=17 vs n=16); per-turn rate barely moved (8.1% → 7.1%), so affected lessons
+  repeat about as badly, there are just fewer of them. Verified mastery unchanged, 82% → 81%, which
+  is the expected result for a quality fix. **The GUIDE stall is NOT fixed.** All three previously
+  stalled concepts in this subset now reach TRANSFER, which looks like a cure and is not one: across
+  the 15 concepts common to both runs, 3 went FAIL→PASS and 2 went PASS→FAIL, net +1 — the same
+  per-concept churn already recorded between qa3/qa4/qa5 with no code change between them.
