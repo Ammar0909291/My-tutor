@@ -135,3 +135,68 @@ single server-keyed question in fifteen turns.
 chemistry ceiling has the same cause as the physics ceiling, so the same
 fix applies and probe depth is the critical path for both subjects. Both
 near-misses also contain a backwards phase move, as in physics.
+
+---
+
+## Measured, and deliberately NOT acted on
+
+Two defects were sized this session and then left alone. Recording them
+matters as much as the fixes: a programme that only writes down what it
+built cannot tell the difference between "we checked" and "we forgot".
+
+### ASCII-art fallback figures — no evidence stripping them helps
+
+When the visual engine gives the model nothing, the model draws a picture in
+a code fence. Measured with a box-drawing/arrow detector:
+
+| | sessions with an ASCII-art fence | art turns | art turns that ALSO had a real figure |
+|---|---|---|---|
+| physics | 10 of 56 (18%) | 16 | 1 |
+| chemistry | 7 of 11 (64%) | 14 | 0 |
+
+29 of 30 such turns carried no real figure, so it is genuinely a fallback,
+and the rate tracks visual darkness almost exactly (chemistry is 51% dark
+against physics's 31%).
+
+**An earlier entry in this programme recorded this as "1 of 58 sessions
+(2%) — a one-off; named, not fixed." That was measured with a blunter
+detector and understated it roughly nine-fold.** The decision not to act was
+made on a wrong number.
+
+So I re-opened it — and then still did not act, for a different and better
+reason. Verified mastery, split by whether a session contained ASCII art:
+
+| | with art | without art |
+|---|---|---|
+| physics | 60% (n=10) | 83% (n=46) |
+| chemistry | 86% (n=7) | 50% (n=4) |
+
+**The two subjects point in opposite directions.** The physics signal is
+also confounded: a session gets ASCII art precisely when the visual engine
+failed, which correlates with the harder, darker concepts. There is no
+evidence here that stripping the art helps a learner, and a real risk that
+it removes the only representation they were given.
+
+What IS defensible is already covered: presenting the art as a rendered
+figure ("what do you notice when you LOOK AT THIS DIAGRAM?") is handled by
+`figureReference.ts`, and art that is factually wrong cannot be judged
+deterministically at all. The genuine fix is visual coverage — warming the
+126 dark-but-drawable concepts — not text surgery.
+
+### The content-free hold — a content problem wearing a repair costume
+
+`"Let's stay with this idea for a moment."` shipped 9 times across 67
+sessions, and in **every single case it was the entire turn**.
+
+It fires when the gate correctly strips an ungradeable question from a turn
+that contained nothing else. At that point the server has no teaching to
+fall back on, and the only ways to fill the turn are to invent content or to
+make a second model call — the first is what produced this sentence, and the
+second breaks the one-call-per-turn rule.
+
+Patching it here would hide a content-generation problem inside a
+text-repair function. Left alone, and named.
+
+The specific case that prompted the owner's report is covered from the other
+side: `dontKnowCeiling.ts` means a repeated "I don't know" now gets the
+answer revealed rather than a hold.
