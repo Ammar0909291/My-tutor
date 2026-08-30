@@ -467,6 +467,55 @@ describe('the physics depth probes are arithmetically true', () => {
     expect(correctText(mu)).toContain('12 m/s')
   })
 
+  it('batch 5: the mechanics arithmetic', async () => {
+    const probes = await load()
+    const wheel = find(probes, 'angular velocity of 20 rad/s in 5.0 s')
+    expect(20 / 5.0).toBe(4)                 // alpha
+    expect(0.5 * 4 * 5.0 ** 2).toBe(50)      // theta = 1/2 alpha t^2
+    expect(20 * 5.0).toBe(100)               // the final-omega-throughout distractor
+    expect(correctText(wheel)).toContain('50 rad')
+
+    // L = I*omega is conserved; KE = L^2/2I is NOT. Halving I doubles the energy.
+    const skater = find(probes, 'halving her moment of inertia')
+    const I = 1, w = 1
+    const L = I * w
+    expect(L / (I / 2)).toBe(2 * w)
+    expect(0.5 * (I / 2) * (2 * w) ** 2).toBe(2 * (0.5 * I * w ** 2))
+    expect(correctText(skater)).toContain('DOUBLES')
+
+    const flo = find(probes, 'one third of its volume above')
+    expect(1000 * (2 / 3)).toBeCloseTo(666.7, 1)
+    expect(correctText(flo)).toContain('667')
+
+    const cent = find(probes, '2.0 m string is swung in a horizontal circle')
+    expect((0.5 * 4.0 ** 2) / 2.0).toBe(4.0)
+    expect(correctText(cent)).toContain('4.0 N')
+
+    const stick = find(probes, '2.0 kg trolley moving at 3.0 m/s')
+    expect((2.0 * 3.0) / (2.0 + 4.0)).toBe(1.0)
+    expect(correctText(stick)).toContain('1.0 m/s')
+
+    const drop = find(probes, 'dropped from a height of 5.0 m')
+    expect(Math.sqrt(2 * 9.8 * 5.0)).toBeCloseTo(9.90, 2)
+    expect(2 * 9.8 * 5.0).toBe(98)           // the un-rooted distractor
+    expect(correctText(drop)).toContain('9.9 m/s')
+
+    const hike = find(probes, '6.0 km due east')
+    expect(Math.hypot(6, 8)).toBe(10)
+    expect(6 + 8).toBe(14)                   // the genuine distance walked
+    expect(correctText(hike)).toContain('10 km')
+
+    // Moments about the RIGHT support: 4 R_L = 200*2 + 400*3.
+    const plank = find(probes, 'plank 4.0 m long, weighing 200 N')
+    expect((200 * 2.0 + 400 * 3.0) / 4.0).toBe(400)
+    expect((200 + 400) / 2).toBe(300)        // the split-equally distractor
+    expect(correctText(plank)).toContain('400 N')
+
+    const esc = find(probes, 'compressed to half its radius')
+    expect(Math.sqrt(1 / 0.5)).toBeCloseTo(1.414, 3)
+    expect(correctText(esc)).toContain('√2')
+  })
+
   it("Hooke: 3 N gives 6 cm, so 12 N would predict 24 cm; two springs halve the extension", async () => {
     const probes = await load()
     const limit = find(probes, 'stretches 6 cm when a 3 N weight')
