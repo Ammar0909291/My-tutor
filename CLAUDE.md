@@ -2805,3 +2805,13 @@ contained in `main`'s current tip.
   stalled concepts in this subset now reach TRANSFER, which looks like a cure and is not one: across
   the 15 concepts common to both runs, 3 went FAIL→PASS and 2 went PASS→FAIL, net +1 — the same
   per-concept churn already recorded between qa3/qa4/qa5 with no code change between them.
+- **GUIDE stall narrowed from production `[gate-eligibility]` logs (not inferred).** The gate is NOT
+  withholding probes at GUIDE: the only blocker ever recorded there is `phaseAllowsProbe:false`, and
+  only on `show`/`teach` moves — every GUIDE turn whose move was `ask` was eligible. The move is not
+  `ask`, and the log names what chose otherwise: CUE rule **`D4b-ANSWER-STUDENT-FIRST`** ("never drill
+  past a question"). Good rule, no ceiling. Measured across the 58-session corpus: a help-request turn
+  gets a keyed probe **21%** of the time vs **43%** otherwise, and the stalled sessions carry a median
+  help-request fraction of 0.50 vs 0.31 for those that mastered. Reported as PARTIAL, not solved — the
+  stalled sessions are also suppressed on their non-help turns (19% vs 43%), so D4b is a contributing
+  mechanism, not the whole cause. **No change made to the CUE decision layer**: adding a ceiling to
+  D4b is the plausible next step but would be hot-path surgery justified by a partial explanation.

@@ -544,3 +544,76 @@ reported as fixed.
 identified, a fix shipped, and the fix shows a halving of affected sessions that
 falls just short of significance at this sample size. Criterion 5 (quality
 average >= 7.5/10) and the GUIDE stall under criterion 3 both remain open.
+
+
+---
+
+# The GUIDE stall, narrowed to a mechanism (2026-08-30, production logs)
+
+The 60-run localized the stall to a collapsed probe-attachment rate but could not
+say why. Production `[gate-eligibility]` logs — the same instrument that found
+the `c98ea7b` root cause — narrow it substantially.
+
+## The gate is not the thing withholding probes
+
+28 gate-eligibility records pulled from production. Per-phase blockers on
+ineligible turns:
+
+| phase | blockers recorded |
+|---|---|
+| OBSERVE | `phaseAllowsProbe` 9, `probeAttachablePhase` 9, `arbitrationAllowsProbe` 6, `hasMemoryState` 2, `notExcursion` 2 |
+| DEMONSTRATE | `phaseAllowsProbe` 3, `probeAttachablePhase` 3, `arbitrationAllowsProbe` 2, `notExcursion` 1 |
+| **GUIDE** | **`phaseAllowsProbe` 3 — and nothing else, ever** |
+| PRACTICE | `arbitrationAllowsProbe` 1 |
+
+At GUIDE the ONLY blocker ever recorded is `phaseAllowsProbe: false`, and it
+appears exclusively on turns whose move is `show` or `teach`. Every GUIDE turn
+whose move was `ask` was **eligible** (2 of 2). So the gate is not refusing to
+attach a probe at GUIDE. The move simply is not `ask`.
+
+## What chooses `teach` instead — a confirmed contributing mechanism
+
+The same log lines carry the decision that produced the move:
+
+```
+CUE decision={"decision":"ESCALATE_TO_LLM","ruleId":"D4b-ANSWER-STUDENT-FIRST",
+  "rationale":["The student asked something (a question or an explicit help
+  request): respond to what they actually said before any teaching move.",
+  "Never drill past a question — unanswered questions teach the learner to stop
+  asking (conversation-engine register law)."]}
+```
+
+D4b is a good rule. It also has **no ceiling**, and this persona trips it
+constantly: "can you help me again please", "can you explain one more time
+slowly", "can you give me one more example please", "can you show the picture
+again" are all explicit help requests.
+
+Tested against the 58-session transcript corpus — does a help-request turn get a
+keyed probe on the reply?
+
+| learner turn | keyed probe attached |
+|---|---|
+| is a help request | **64 / 305 (21%)** |
+| is not | **238 / 556 (43%)** |
+
+A learner who asks for help is assessed at **half** the rate of one who does
+not. And the five stalled sessions carry a **median help-request fraction of
+0.50**, against **0.31** for the sessions that mastered.
+
+## Why this is reported as PARTIAL and not as the root cause
+
+Inside the five stalled sessions the suppression is much deeper than D4b alone
+predicts — 1/38 (3%) on help-request turns, but also only 6/32 (19%) on their
+NON-help turns, against a population rate of 43%. So something further depresses
+those sessions on turns D4b does not touch. **D4b is a confirmed contributing
+mechanism, not the complete explanation.**
+
+## What was deliberately NOT changed
+
+No change was made to the CUE decision layer. Adding a ceiling to D4b — "after N
+consecutive help-request turns with nothing graded, answer AND attach a probe" —
+is a plausible fix and may well be the right one, but it is a behavioural change
+to the hot path justified by a partial explanation. This file's own history is a
+list of times a plausible mechanism turned out to be wrong (three in the section
+above alone). It is written down as the next step, with the evidence needed to
+act on it, rather than shipped on a hunch.
