@@ -370,6 +370,53 @@ describe('the physics depth probes are arithmetically true', () => {
     expect(correctText(t)).toContain('doubles')
   })
 
+  it('batch 3: the thermodynamics arithmetic', async () => {
+    const probes = await load()
+    const cal = find(probes, '0.50 kg of water from 20 °C to 60 °C')
+    expect(0.50 * 4200 * (60 - 20)).toBe(84000)
+    expect(0.50 * 4200 * 60).toBe(126000)      // the ΔT-as-final-temperature slip
+    expect(correctText(cal)).toContain('84 000 J')
+
+    const carnot = find(probes, 'T_H = 500 K and T_C = 300 K')
+    // Equal absolute shifts are NOT equally effective, because eta is a ratio.
+    expect(1 - 300 / 550).toBeCloseTo(0.4545, 4)
+    expect(1 - 250 / 500).toBeCloseTo(0.5, 10)
+    expect(1 - 250 / 500).toBeGreaterThan(1 - 300 / 550)
+    expect(correctText(carnot)).toContain('Lowering T_C')
+
+    const first = find(probes, 'absorbs 800 J of heat and does 300 J')
+    expect(800 - 300).toBe(500)
+    expect(correctText(first)).toContain('+500 J')
+
+    const eng = find(probes, 'takes 2400 J from the hot reservoir')
+    expect(2400 - 600).toBe(1800)
+    expect(600 / 2400).toBe(0.25)
+    expect(600 / 1800).toBeCloseTo(0.333, 3)   // the divide-by-Q_C distractor
+    expect(correctText(eng)).toContain('25%')
+
+    const gas = find(probes, 'reads 100 kPa at 27 °C')
+    expect(100 * (400 / 300)).toBeCloseTo(133.3, 1)
+    expect(100 * (127 / 27)).toBeCloseTo(470.4, 1) // the Celsius-ratio distractor
+    expect(correctText(gas)).toContain('133 kPa')
+
+    const melt = find(probes, 'melt 0.20 kg of ice')
+    expect(0.20 * 3.34e5).toBeCloseTo(66800, 0)
+    expect(correctText(melt)).toContain('6.7 × 10⁴')
+
+    const c = find(probes, '2.0 kg block of metal absorbs 18 000 J')
+    expect(18000 / (2.0 * 20)).toBe(450)
+    expect(18000 / 20).toBe(900)               // the mass-omitted distractor
+    expect(correctText(c)).toContain('450')
+
+    const rail = find(probes, '25 m steel rail')
+    expect(12e-6 * 25 * 30).toBeCloseTo(9.0e-3, 12)
+    expect(correctText(rail)).toContain('9.0 mm')
+
+    const rms = find(probes, 'root-mean-square molecular speed')
+    expect(Math.sqrt(2)).toBeCloseTo(1.414, 3)
+    expect(correctText(rms)).toContain('√2')
+  })
+
   it("Hooke: 3 N gives 6 cm, so 12 N would predict 24 cm; two springs halve the extension", async () => {
     const probes = await load()
     const limit = find(probes, 'stretches 6 cm when a 3 N weight')

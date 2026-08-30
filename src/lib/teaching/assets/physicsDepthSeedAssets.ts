@@ -1057,6 +1057,471 @@ const QUANTUM_TUNNELING: SeedProbe[] = [
   },
 ]
 
+
+// ═══════════════════════════════════════════════════════════════════════════
+// BATCH 3 — phys.therm @ HIGH, all sixteen short pairs.
+//
+// Thermodynamics carries an unusually rich set of authored short_answer and
+// checkpoint items (the blueprint's P4-a..f and MP-1..5 ladders) and exactly
+// three probes a gate can grade. That gap is the whole reason the row count
+// overstated the pool: seven PROBE rows, three gradeable. The content was
+// there; what was missing was a keyed answer.
+// ═══════════════════════════════════════════════════════════════════════════
+
+const THERM: SeedProbe[] = [
+  // ── calorimetry ──────────────────────────────────────────────────────────
+  {
+    conceptId: 'phys.therm.calorimetry', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.DEVELOPING,
+    stem: 'How much heat is needed to raise the temperature of 0.50 kg of water from 20 °C to 60 °C? (c = 4200 J kg⁻¹ K⁻¹)',
+    choices: [
+      { text: '84 000 J', isCorrect: true },
+      { text: '126 000 J — using the final temperature as ΔT', isCorrect: false },
+      { text: '2100 J — leaving ΔT out altogether', isCorrect: false },
+      { text: '168 000 J — using 1 kg instead of 0.50 kg', isCorrect: false },
+    ],
+    correctValue: '84000 J',
+    targetedMisconceptions: [],
+    source: src('phys.therm.calorimetry', 'Q = mcΔT with ΔT as a DIFFERENCE; using 60 rather than 40 is the single most common substitution error in the whole topic'),
+  },
+  {
+    conceptId: 'phys.therm.calorimetry', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'A calorimetry calculation sets the heat lost by the hot body exactly equal to the heat gained by the cold one. What physical assumption is that equation making?',
+    choices: [
+      { text: 'That no heat leaks to or from the surroundings — the two bodies are the entire energy budget', isCorrect: true },
+      { text: 'That both substances have the same specific heat capacity', isCorrect: false },
+      { text: 'That the two masses are equal', isCorrect: false },
+      { text: 'That heat can only flow between substances of the same kind', isCorrect: false },
+    ],
+    correctValue: 'no heat exchanged with the surroundings',
+    targetedMisconceptions: [],
+    source: src('phys.therm.calorimetry', 'the closed-system assumption named rather than assumed; it is what the lagging, the lid and the symmetric start-and-finish temperatures in a real experiment are all for'),
+  },
+
+  // ── carnot-cycle ─────────────────────────────────────────────────────────
+  {
+    conceptId: 'phys.therm.carnot-cycle', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: 'What is special about the Carnot cycle compared with every other cycle running between the same two temperatures?',
+    choices: [
+      { text: 'It sets the MAXIMUM efficiency any cycle between those two temperatures can have — every real cycle does worse', isCorrect: true },
+      { text: 'It is the only cycle that conserves energy', isCorrect: false },
+      { text: 'It is the cycle used in petrol car engines', isCorrect: false },
+      { text: 'It is the cheapest cycle to build', isCorrect: false },
+    ],
+    correctValue: 'it is the upper limit',
+    targetedMisconceptions: [],
+    source: src('phys.therm.carnot-cycle', 'the Carnot result as a BOUND rather than a design; the conserves-energy option is the first law wandering into a second-law question'),
+  },
+  {
+    conceptId: 'phys.therm.carnot-cycle', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'A Carnot engine runs between T_H = 500 K and T_C = 300 K. You may either raise T_H by 50 K or lower T_C by 50 K, but not both. Which gives the greater efficiency, and what does it become?',
+    choices: [
+      { text: 'Lowering T_C wins: η = 1 − 250/500 = 0.500, against 1 − 300/550 = 0.455 for raising T_H', isCorrect: true },
+      { text: 'Raising T_H wins, because efficiency is governed by the hot reservoir', isCorrect: false },
+      { text: 'They are identical — the same 50 K appears in both', isCorrect: false },
+      { text: 'Neither changes the efficiency, which depends only on the temperature DIFFERENCE', isCorrect: false },
+    ],
+    correctValue: 'lowering T_C, to 0.500',
+    targetedMisconceptions: [],
+    source: src('phys.therm.carnot-cycle', 'η = 1 − T_C/T_H is a RATIO, so equal absolute shifts are not equally effective; the difference-only option is the reading that makes the two proposals look identical'),
+  },
+
+  // ── entropy ──────────────────────────────────────────────────────────────
+  {
+    conceptId: 'phys.therm.entropy', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: 'In statistical terms, what does the entropy of a system actually count?',
+    choices: [
+      { text: 'The number of microscopic arrangements the particles can take while the system still looks the same from outside', isCorrect: true },
+      { text: 'The total quantity of heat the system contains', isCorrect: false },
+      { text: 'The temperature of the system, measured on a different scale', isCorrect: false },
+      { text: 'How untidy the object looks to the eye', isCorrect: false },
+    ],
+    correctValue: 'the number of microstates',
+    targetedMisconceptions: [],
+    source: src('phys.therm.entropy', 'S = k ln Ω stated in words; "heat contained" is the caloric leftover, and "untidy to the eye" is the popular-science gloss that stops the counting idea from forming'),
+  },
+  {
+    conceptId: 'phys.therm.entropy', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'A gas is compressed slowly and reversibly, and its entropy falls by 20 J/K. Does that violate the second law?',
+    choices: [
+      { text: 'No — the surroundings gained at least 20 J/K in the same process, so the TOTAL entropy did not fall', isCorrect: true },
+      { text: 'Yes — entropy is never allowed to decrease anywhere', isCorrect: false },
+      { text: 'No — entropy may decrease freely in any closed system', isCorrect: false },
+      { text: 'No — the second law only applies to processes that happen quickly', isCorrect: false },
+    ],
+    correctValue: 'no — the total did not fall',
+    targetedMisconceptions: [],
+    source: src('phys.therm.entropy', 'the second law constrains the TOTAL, which is what makes refrigerators, freezing and living cells possible; this is the same structure as the concept\'s existing cooling-coffee probe, asked about a system being acted on rather than one cooling'),
+  },
+
+  // ── first-law ────────────────────────────────────────────────────────────
+  {
+    conceptId: 'phys.therm.first-law', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'A gas absorbs 800 J of heat and does 300 J of work on its surroundings. What is the change in its internal energy?',
+    choices: [
+      { text: '+500 J', isCorrect: true },
+      { text: '+1100 J — adding the work instead of subtracting it', isCorrect: false },
+      { text: '−500 J', isCorrect: false },
+      { text: '+300 J — only the work counts, since heat is not energy', isCorrect: false },
+    ],
+    correctValue: '+500 J',
+    targetedMisconceptions: [],
+    source: src('phys.therm.first-law', 'ΔU = Q − W with the sign convention exercised in the direction the concept\'s existing FOUNDATIONAL probe does not cover'),
+  },
+  {
+    conceptId: 'phys.therm.first-law', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'Why is the first law written with ΔU as a change of state, while Q and W are not given the same status?',
+    choices: [
+      { text: 'Internal energy depends only on the state the gas is in; Q and W each depend on the PATH taken, and only their combination is fixed by the endpoints', isCorrect: true },
+      { text: 'Because Q and W are harder to measure accurately', isCorrect: false },
+      { text: 'Because Q and W are always equal to each other', isCorrect: false },
+      { text: 'Because ΔU is always zero in any real process', isCorrect: false },
+    ],
+    correctValue: 'state function versus path functions',
+    targetedMisconceptions: [],
+    source: src('phys.therm.first-law', 'the distinction that makes the whole P–V diagram method work; without it a learner sees three symbols of equal standing'),
+  },
+
+  // ── heat-engines ─────────────────────────────────────────────────────────
+  {
+    conceptId: 'phys.therm.heat-engines', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: 'How many thermal reservoirs does a heat engine need in order to produce work continuously, and why?',
+    choices: [
+      { text: 'Two — a hot one to draw heat from and a cold one to reject heat to; with only one, no net work can be extracted over a complete cycle', isCorrect: true },
+      { text: 'One — the hot reservoir supplies everything the engine needs', isCorrect: false },
+      { text: 'Three — hot, cold, and one to store the work produced', isCorrect: false },
+      { text: 'None — an engine can run on the internal energy it already contains', isCorrect: false },
+    ],
+    correctValue: 'two',
+    targetedMisconceptions: [],
+    source: src('phys.therm.heat-engines', 'the one-reservoir engine is exactly what the Kelvin statement of the second law forbids; naming the cold reservoir as REQUIRED is what makes rejected heat stop looking like waste to be engineered away'),
+  },
+  {
+    conceptId: 'phys.therm.heat-engines', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'Per cycle, an engine takes 2400 J from the hot reservoir and delivers 600 J of useful work. How much heat does it reject, and what is its efficiency?',
+    choices: [
+      { text: 'Rejects 1800 J, efficiency 25%', isCorrect: true },
+      { text: 'Rejects 1800 J, efficiency 33% — dividing the work by the heat rejected', isCorrect: false },
+      { text: 'Rejects 600 J, efficiency 25%', isCorrect: false },
+      { text: 'Rejects 3000 J, efficiency 25% — adding the work to the heat taken in', isCorrect: false },
+    ],
+    correctValue: '1800 J and 25%',
+    targetedMisconceptions: [],
+    source: src('phys.therm.heat-engines', 'Q_C = Q_H − W = 1800 and η = W/Q_H = 0.25; the 33% option divides by the wrong quantity, which is the error that makes efficiencies look better than they are'),
+  },
+
+  // ── heat-transfer ────────────────────────────────────────────────────────
+  {
+    conceptId: 'phys.therm.heat-transfer', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.DEVELOPING,
+    stem: 'A metal handrail and a wooden one have been sitting in the same room all day, so they are at the same temperature. Why does the metal feel colder?',
+    choices: [
+      { text: 'Metal conducts heat away from your hand much faster, so your skin cools quickly — what you feel is the rate of heat loss, not the temperature', isCorrect: true },
+      { text: 'The metal really is colder; metals settle at a lower temperature than wood', isCorrect: false },
+      { text: 'The wood has absorbed heat from the air and the metal has not', isCorrect: false },
+      { text: 'Metal is denser, and denser materials are always at a lower temperature', isCorrect: false },
+    ],
+    correctValue: 'metal conducts heat away faster',
+    targetedMisconceptions: [],
+    source: src('phys.therm.heat-transfer', 'the skin is a rate detector, not a thermometer — the everyday observation that most reliably teaches a learner that temperature and heat flow are different questions'),
+  },
+  {
+    conceptId: 'phys.therm.heat-transfer', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'A vacuum flask has a vacuum between its double walls AND a silvered inner surface. Which mechanism is the silvering there to defeat?',
+    choices: [
+      { text: 'Radiation — the vacuum already stops conduction and convection, but infrared radiation crosses it freely', isCorrect: true },
+      { text: 'Conduction', isCorrect: false },
+      { text: 'Convection', isCorrect: false },
+      { text: 'Evaporation of the liquid inside', isCorrect: false },
+    ],
+    correctValue: 'radiation',
+    targetedMisconceptions: [],
+    source: src('phys.therm.heat-transfer', 'the flask is a three-mechanism design where each feature answers a different mechanism; the concept\'s existing probe covers radiation crossing a vacuum, and this asks what an engineer DOES about it'),
+  },
+
+  // ── ideal-gas-law ────────────────────────────────────────────────────────
+  {
+    conceptId: 'phys.therm.ideal-gas-law', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.DEVELOPING,
+    stem: 'A fixed mass of gas is held at constant volume while its absolute temperature is raised from 300 K to 600 K. What happens to its pressure?',
+    choices: [
+      { text: 'It doubles', isCorrect: true },
+      { text: 'It halves', isCorrect: false },
+      { text: 'It quadruples', isCorrect: false },
+      { text: 'It is unchanged — the container has not changed size', isCorrect: false },
+    ],
+    correctValue: 'the pressure doubles',
+    targetedMisconceptions: [],
+    source: src('phys.therm.ideal-gas-law', 'P ∝ T at fixed V and n, on an ABSOLUTE scale where the doubling is unambiguous — the concept\'s existing probe attacks the Celsius version of the same question'),
+  },
+  {
+    conceptId: 'phys.therm.ideal-gas-law', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'A sealed rigid canister of gas reads 100 kPa at 27 °C. It is warmed to 127 °C. What is the new pressure?',
+    choices: [
+      { text: 'About 133 kPa', isCorrect: true },
+      { text: 'About 470 kPa — scaling by 127/27', isCorrect: false },
+      { text: '100 kPa — the canister is sealed, so nothing changes', isCorrect: false },
+      { text: 'About 75 kPa', isCorrect: false },
+    ],
+    correctValue: '133 kPa',
+    targetedMisconceptions: [],
+    source: src('phys.therm.ideal-gas-law', 'P₂ = P₁ × T₂/T₁ = 100 × 400/300 = 133 kPa. The 470 option is the same method in Celsius, and it is wrong by more than a factor of three — which is the point'),
+  },
+
+  // ── internal-energy ──────────────────────────────────────────────────────
+  {
+    conceptId: 'phys.therm.internal-energy', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.DEVELOPING,
+    stem: 'For an IDEAL gas, the internal energy depends on which quantity alone?',
+    choices: [
+      { text: 'The absolute temperature', isCorrect: true },
+      { text: 'The pressure alone', isCorrect: false },
+      { text: 'The volume alone', isCorrect: false },
+      { text: 'The pressure and volume separately, not their combination', isCorrect: false },
+    ],
+    correctValue: 'temperature',
+    targetedMisconceptions: [],
+    source: src('phys.therm.internal-energy', 'the property that makes ΔU = 0 for an isothermal ideal-gas process — the step every isothermal-work problem silently depends on'),
+  },
+  {
+    conceptId: 'phys.therm.internal-energy', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'Two samples of the same monatomic ideal gas sit at the same temperature, but sample B contains twice as many moles as sample A. Compare their total internal energies and their AVERAGE molecular kinetic energies.',
+    choices: [
+      { text: 'B has twice the internal energy, but the average kinetic energy per molecule is identical in both', isCorrect: true },
+      { text: 'B has twice the internal energy and twice the average molecular kinetic energy', isCorrect: false },
+      { text: 'Both quantities are the same in the two samples', isCorrect: false },
+      { text: 'The internal energies are equal, but B has twice the average molecular kinetic energy', isCorrect: false },
+    ],
+    correctValue: 'twice the total, same per molecule',
+    targetedMisconceptions: [],
+    source: src('phys.therm.internal-energy', 'extensive versus intensive: U = (3/2)nRT scales with n, while (3/2)k_BT per molecule does not. Conflating them is why "hotter" and "more energy" get used interchangeably'),
+  },
+
+  // ── kinetic-theory ───────────────────────────────────────────────────────
+  {
+    conceptId: 'phys.therm.kinetic-theory', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.DEVELOPING,
+    stem: 'In kinetic theory, what produces the pressure a gas exerts on the walls of its container?',
+    choices: [
+      { text: 'Countless molecular collisions with the walls, each delivering a tiny impulse; the pressure is their average effect', isCorrect: true },
+      { text: 'The weight of the gas pressing outwards', isCorrect: false },
+      { text: 'The molecules repelling one another and pushing the walls apart', isCorrect: false },
+      { text: 'The gas straining to expand into any vacuum beyond the walls', isCorrect: false },
+    ],
+    correctValue: 'molecular collisions with the walls',
+    targetedMisconceptions: [],
+    source: src('phys.therm.kinetic-theory', 'pressure as a time-averaged impulse rate; the mutual-repulsion story is the model that makes an IDEAL gas — whose molecules do not interact — look self-contradictory'),
+  },
+  {
+    conceptId: 'phys.therm.kinetic-theory', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'The absolute temperature of a gas sample is doubled. By what factor does the root-mean-square molecular speed change?',
+    choices: [
+      { text: 'By √2, about 1.41 — v_rms goes as the square root of the absolute temperature', isCorrect: true },
+      { text: 'By 2, in step with the temperature', isCorrect: false },
+      { text: 'By 4', isCorrect: false },
+      { text: 'It does not change; only the number of collisions changes', isCorrect: false },
+    ],
+    correctValue: 'by sqrt(2)',
+    targetedMisconceptions: [],
+    source: src('phys.therm.kinetic-theory', 'temperature tracks the mean square speed, so the SPEED follows a square root; reading the proportionality straight through is the standard error'),
+  },
+
+  // ── phase-transitions ────────────────────────────────────────────────────
+  {
+    conceptId: 'phys.therm.phase-transitions', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'How much energy is required to melt 0.20 kg of ice that is already at 0 °C? (Latent heat of fusion = 3.34 × 10⁵ J/kg)',
+    choices: [
+      { text: '6.7 × 10⁴ J', isCorrect: true },
+      { text: '3.34 × 10⁵ J — the latent heat is the answer as it stands', isCorrect: false },
+      { text: '1.7 × 10⁶ J — dividing by the mass instead of multiplying', isCorrect: false },
+      { text: '0 J — no energy is needed, because the temperature does not change', isCorrect: false },
+    ],
+    correctValue: '6.7e4 J',
+    targetedMisconceptions: [],
+    source: src('phys.therm.phase-transitions', 'Q = mL = 0.20 × 3.34e5 = 6.68e4 J. The 0 J option is the belief that no temperature change means no energy transfer, which is the whole idea of latent heat'),
+  },
+  {
+    conceptId: 'phys.therm.phase-transitions', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'Water is boiling steadily. Energy is being supplied the whole time, yet the thermometer stays at 100 °C. Where is that energy going?',
+    choices: [
+      { text: 'Into pulling the molecules apart against their mutual attraction — it raises potential energy, not kinetic energy, so the temperature does not move', isCorrect: true },
+      { text: 'It is being lost to the surroundings as fast as it arrives', isCorrect: false },
+      { text: 'It is stored as pressure in the vapour above the liquid', isCorrect: false },
+      { text: 'The thermometer is simply too slow to follow the rise', isCorrect: false },
+    ],
+    correctValue: 'into potential energy, breaking bonds',
+    targetedMisconceptions: [],
+    source: src('phys.therm.phase-transitions', 'the kinetic/potential split is what makes a flat section on a heating curve intelligible; the instrument-lag option is the answer a learner reaches for when energy must go SOMEWHERE visible'),
+  },
+
+  // ── second-law ───────────────────────────────────────────────────────────
+  {
+    conceptId: 'phys.therm.second-law', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: 'Which of these is a correct statement of the second law of thermodynamics?',
+    choices: [
+      { text: 'No process is possible whose only result is the transfer of heat from a colder body to a hotter one', isCorrect: true },
+      { text: 'Energy can be neither created nor destroyed', isCorrect: false },
+      { text: 'The entropy of any system, taken on its own, always increases', isCorrect: false },
+      { text: 'Heat keeps flowing until everything reaches zero temperature', isCorrect: false },
+    ],
+    correctValue: 'the Clausius statement',
+    targetedMisconceptions: [],
+    source: src('phys.therm.second-law', 'the first law is offered as the distractor because it is the statement most often produced when the second is asked for; "any system" quietly drops the word TOTAL, which is the load-bearing word'),
+  },
+  {
+    conceptId: 'phys.therm.second-law', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'A glass falls and smashes. The reverse — the fragments leaping up and reassembling — would conserve energy perfectly well. What actually forbids it?',
+    choices: [
+      { text: 'The second law: the assembled glass corresponds to overwhelmingly fewer microscopic arrangements, so the total entropy would have to fall', isCorrect: true },
+      { text: 'The first law forbids it, because energy would have to be created', isCorrect: false },
+      { text: 'Conservation of momentum forbids it', isCorrect: false },
+      { text: 'Nothing forbids it — the fragments simply never have enough energy', isCorrect: false },
+    ],
+    correctValue: 'the second law',
+    targetedMisconceptions: [],
+    source: src('phys.therm.second-law', 'the arrow of time as a counting statement, on the example where energy conservation is obviously satisfied — which is what forces the second law to be doing the work'),
+  },
+
+  // ── specific-heat ────────────────────────────────────────────────────────
+  {
+    conceptId: 'phys.therm.specific-heat', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.DEVELOPING,
+    stem: 'Water has one of the highest specific heat capacities of any common substance. What does that mean in practice?',
+    choices: [
+      { text: 'It takes a great deal of energy to change water\'s temperature, so it warms up and cools down slowly', isCorrect: true },
+      { text: 'Water reaches high temperatures more easily than other substances', isCorrect: false },
+      { text: 'Water boils at a lower temperature than other substances', isCorrect: false },
+      { text: 'Water conducts heat better than other substances', isCorrect: false },
+    ],
+    correctValue: 'it warms and cools slowly',
+    targetedMisconceptions: [],
+    source: src('phys.therm.specific-heat', 'a high c is thermal INERTIA, not eagerness to get hot; the reaches-high-temperatures option reads the word "high" off the wrong quantity'),
+  },
+  {
+    conceptId: 'phys.therm.specific-heat', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'A 2.0 kg block of metal absorbs 18 000 J of heat and its temperature rises by 20 °C. What is its specific heat capacity?',
+    choices: [
+      { text: '450 J kg⁻¹ K⁻¹', isCorrect: true },
+      { text: '900 J kg⁻¹ K⁻¹ — leaving the mass out', isCorrect: false },
+      { text: '180 J kg⁻¹ K⁻¹', isCorrect: false },
+      { text: '720 000 J kg⁻¹ K⁻¹ — multiplying instead of dividing', isCorrect: false },
+    ],
+    correctValue: '450 J/kg/K',
+    targetedMisconceptions: [],
+    source: src('phys.therm.specific-heat', 'Q = mcΔT rearranged for c: 18000/(2.0 × 20) = 450, which is close to real steel — the concept\'s existing probes never ask for c itself'),
+  },
+
+  // ── temperature ──────────────────────────────────────────────────────────
+  {
+    conceptId: 'phys.therm.temperature', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'Two objects have been left in contact long enough to reach thermal equilibrium. Which quantity must they now share?',
+    choices: [
+      { text: 'Their temperature', isCorrect: true },
+      { text: 'Their total internal energy', isCorrect: false },
+      { text: 'Their heat capacity', isCorrect: false },
+      { text: 'Their mass', isCorrect: false },
+    ],
+    correctValue: 'temperature',
+    targetedMisconceptions: [],
+    source: src('phys.therm.temperature', 'equilibrium equalises TEMPERATURE, not energy — a swimming pool and a teaspoon in equilibrium hold wildly different amounts of internal energy'),
+  },
+
+  // ── thermal-expansion ────────────────────────────────────────────────────
+  {
+    conceptId: 'phys.therm.thermal-expansion', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'Railway track is laid in sections with small gaps between them. A 25 m steel rail (α = 12 × 10⁻⁶ K⁻¹) warms by 30 °C. By how much does it lengthen?',
+    choices: [
+      { text: '9.0 mm', isCorrect: true },
+      { text: '0.9 mm', isCorrect: false },
+      { text: '90 mm', isCorrect: false },
+      { text: '0.36 mm — leaving the length out of the calculation', isCorrect: false },
+    ],
+    correctValue: '9.0 mm',
+    targetedMisconceptions: [],
+    source: src('phys.therm.thermal-expansion', 'ΔL = αL₀ΔT = 12e-6 × 25 × 30 = 9.0e-3 m. The distractors are the same figure at the wrong power of ten, which is exactly how this calculation fails in practice'),
+  },
+
+  // ── third-law ────────────────────────────────────────────────────────────
+  {
+    conceptId: 'phys.therm.third-law', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: 'Which temperature scale does the third law give a genuine physical meaning to, and why?',
+    choices: [
+      { text: 'The absolute (Kelvin) scale — the third law fixes a real zero, the lowest temperature that can exist', isCorrect: true },
+      { text: 'The Celsius scale, because its zero is the freezing point of water', isCorrect: false },
+      { text: 'The Fahrenheit scale', isCorrect: false },
+      { text: 'Any of them — the scales are interchangeable, so none is more physical', isCorrect: false },
+    ],
+    correctValue: 'the Kelvin scale',
+    targetedMisconceptions: [],
+    source: src('phys.therm.third-law', 'why absolute zero is a different kind of zero from the freezing point of water; the interchangeable-scales option is true of conversions and false of what a zero MEANS'),
+  },
+  {
+    conceptId: 'phys.therm.third-law', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'Practical cooling methods remove a fixed FRACTION of whatever energy remains at each step. Why does that make absolute zero unreachable rather than merely hard?',
+    choices: [
+      { text: 'Repeatedly taking a fraction of what is left never reaches zero in a finite number of steps — and each step removes less than the last, so no finite process ever arrives', isCorrect: true },
+      { text: 'Because refrigeration equipment is not yet good enough, though one day it will be', isCorrect: false },
+      { text: 'Because reaching 0 K would violate conservation of energy', isCorrect: false },
+      { text: 'Because no thermometer can read a temperature that low', isCorrect: false },
+    ],
+    correctValue: 'a finite number of steps never gets there',
+    targetedMisconceptions: [],
+    source: src('phys.therm.third-law', 'unreachable in PRINCIPLE, not in engineering; the equipment option is the reading that makes the third law sound like a temporary limitation'),
+  },
+
+  // ── zeroth-law ───────────────────────────────────────────────────────────
+  {
+    conceptId: 'phys.therm.zeroth-law', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.DEVELOPING,
+    stem: 'Why is the Zeroth Law what allows a thermometer to work at all?',
+    choices: [
+      { text: 'It guarantees the relation is TRANSITIVE, so a thermometer that agrees with two separate objects tells you those objects would agree with each other', isCorrect: true },
+      { text: 'Because it states that heat always flows from hot to cold', isCorrect: false },
+      { text: 'Because it defines the size of one kelvin', isCorrect: false },
+      { text: 'Because it guarantees a thermometer never changes the temperature of what it measures', isCorrect: false },
+    ],
+    correctValue: 'transitivity',
+    targetedMisconceptions: [],
+    source: src('phys.therm.zeroth-law', 'transitivity is the whole content of the law and the reason one instrument can be compared across objects it never touches at the same time'),
+  },
+  {
+    conceptId: 'phys.therm.zeroth-law', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'Why is this law numbered ZEROTH rather than fourth?',
+    choices: [
+      { text: 'It was recognised as logically prior to the other three only after they had already been named — the first, second and third all assume temperature is well defined, which is what this law establishes', isCorrect: true },
+      { text: 'It was the first of the four to be discovered', isCorrect: false },
+      { text: 'It is regarded as the least important of the four', isCorrect: false },
+      { text: 'It applies only at zero temperature', isCorrect: false },
+    ],
+    correctValue: 'logically prior, named later',
+    targetedMisconceptions: [],
+    source: src('phys.therm.zeroth-law', 'the numbering records a LOGICAL dependency, not a chronology; "discovered first" is the natural reading and is precisely backwards'),
+  },
+]
+
 /**
  * Every probe-depth probe. One array, in the order the audit reported the
  * pairs — `seed-knowledge-assets.ts`, the cold-start bootstrap and the
@@ -1082,4 +1547,6 @@ export const PHYSICS_DEPTH_PROBES: SeedProbe[] = [
   // Batch 2 — the eight HIGH-band concepts measured one answer short.
   ...ELECTRIC_FIELD, ...REFRIGERATORS, ...STRESS_STRAIN, ...SPRING_MASS,
   ...EULER_LAGRANGE, ...THERMO_PROCESSES, ...BINDING_ENERGY, ...QUANTUM_TUNNELING,
+  // Batch 3 — phys.therm @ HIGH, all sixteen short pairs.
+  ...THERM,
 ]
