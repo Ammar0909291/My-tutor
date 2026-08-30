@@ -335,6 +335,41 @@ describe('the physics depth probes are arithmetically true', () => {
     expect(correctText(p)).toContain('50 J')
   })
 
+  it('batch 2: E = F/q gives 2.5e4 N/C, and the midpoint dipole field ADDS to 7.2e3', async () => {
+    const probes = await load()
+    const e = find(probes, 'test charge of +2.0 × 10⁻⁶ C')
+    expect(0.050 / 2.0e-6).toBeCloseTo(25000, 6)
+    expect(correctText(e)).toContain('2.5 × 10⁴')
+    const mid = find(probes, '+4.0 nC sits at x = 0')
+    // Each charge contributes kq/r² at r = 0.10 m, and at the midpoint both
+    // point the same way (+x), so they add rather than cancel.
+    const one = (8.99e9 * 4.0e-9) / 0.10 ** 2
+    expect(one).toBeCloseTo(3596, 0)
+    expect(2 * one).toBeCloseTo(7192, 0)
+    expect(correctText(mid)).toContain('7.2 × 10³')
+  })
+
+  it('batch 2: stress 60 N over 2e-6 m² is 3.0e7 Pa, and FL/AE gives 1.0 mm', async () => {
+    const probes = await load()
+    const st = find(probes, 'cross-sectional area 2.0 × 10⁻⁶ m²')
+    expect(60 / 2.0e-6).toBeCloseTo(3.0e7, 0)
+    expect(correctText(st)).toContain('3.0 × 10⁷')
+    const ext = find(probes, 'Young modulus of 200 GPa')
+    expect((100 * 2.0) / (1.0e-6 * 200e9)).toBeCloseTo(1.0e-3, 12)
+    expect(correctText(ext)).toContain('1.0 mm')
+  })
+
+  it('batch 2: omega = sqrt(k/m) = 20 rad/s, and quadrupling the mass doubles T', async () => {
+    const probes = await load()
+    const w = find(probes, 'spring of stiffness 80 N/m')
+    expect(Math.sqrt(80 / 0.20)).toBe(20)
+    expect(80 / 0.20).toBe(400)          // the un-rooted distractor
+    expect(correctText(w)).toContain('20 rad/s')
+    const t = find(probes, 'QUADRUPLED')
+    expect(Math.sqrt(4)).toBe(2)         // T scales as sqrt(m)
+    expect(correctText(t)).toContain('doubles')
+  })
+
   it("Hooke: 3 N gives 6 cm, so 12 N would predict 24 cm; two springs halve the extension", async () => {
     const probes = await load()
     const limit = find(probes, 'stretches 6 cm when a 3 N weight')

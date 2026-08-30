@@ -820,6 +820,243 @@ const HOOKES_LAW: SeedProbe[] = [
   },
 ]
 
+
+// ═══════════════════════════════════════════════════════════════════════════
+// BATCH 2 — the eight HIGH-band concepts measured as ONE ANSWER SHORT.
+//
+// Session A's decomposition of the 60-session physics corpus: 14 sessions
+// failed to verify, 8 of them with checkCorrect 1 and practiceCorrect 1 after
+// running the full turn budget. Keyed probes served in those eight sessions:
+// 3, 3, 3, 3, 3, 3, 3, 3 — the entire pool, spent, and nothing banked. Across
+// all 60, mastered sessions earned 3.00 credits from 3.02 probes: 45 of 46
+// answered EVERY authored probe correctly.
+//
+// Three probes, three credits required, no re-asking, makes the required
+// success rate exactly 1.00. Physics mastery has been asking a struggling
+// learner to go three for three. These are the eight concepts where that was
+// measured rather than inferred.
+// ═══════════════════════════════════════════════════════════════════════════
+
+const ELECTRIC_FIELD: SeedProbe[] = [
+  {
+    conceptId: 'phys.em.electric-field', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: 'A test charge of +2.0 × 10⁻⁶ C is placed at a point and experiences a force of 0.050 N to the right. What is the electric field strength at that point?',
+    choices: [
+      { text: '2.5 × 10⁴ N/C to the right', isCorrect: true },
+      { text: '0.050 N/C to the right — the field is the force', isCorrect: false },
+      { text: '1.0 × 10⁻⁷ N/C to the right — force multiplied by charge', isCorrect: false },
+      { text: '4.0 × 10⁻⁵ N/C to the right — charge divided by force', isCorrect: false },
+    ],
+    correctValue: '2.5e4 N/C',
+    targetedMisconceptions: [],
+    source: src('phys.em.electric-field', 'E = F/q as a definition rather than a formula to recall; the field-is-the-force option is the one that survives into every later problem'),
+  },
+  {
+    conceptId: 'phys.em.electric-field', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'A charge of +4.0 nC sits at x = 0 and a charge of −4.0 nC sits at x = 0.20 m. What is the net electric field at the midpoint, x = 0.10 m? (k = 8.99 × 10⁹ N m²/C²)',
+    choices: [
+      { text: 'About 7.2 × 10³ N/C, pointing from the positive charge towards the negative one — both contributions point the same way, so they ADD', isCorrect: true },
+      { text: 'Zero — the charges are equal and opposite, so their fields cancel', isCorrect: false },
+      { text: 'About 3.6 × 10³ N/C — only the nearer charge contributes', isCorrect: false },
+      { text: 'Zero — the midpoint is equidistant from both charges', isCorrect: false },
+    ],
+    correctValue: '7.2e3 N/C from + to -',
+    targetedMisconceptions: [],
+    source: src('phys.em.electric-field', 'superposition where equal and opposite charges REINFORCE: the field points away from + and towards −, which is the same direction at the midpoint. Cancellation is the intuition imported from adding the charges themselves'),
+  },
+]
+
+const REFRIGERATORS: SeedProbe[] = [
+  {
+    conceptId: 'phys.therm.refrigerators', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: 'In a working refrigerator, where does the heat taken out of the food compartment actually end up?',
+    choices: [
+      { text: 'Released into the room through the coils at the back, together with the energy the compressor used', isCorrect: true },
+      { text: 'Destroyed — that is what the refrigerant does to it', isCorrect: false },
+      { text: 'Converted back into electrical energy and returned to the supply', isCorrect: false },
+      { text: 'Stored permanently in the coolant, which is why it must be replaced', isCorrect: false },
+    ],
+    correctValue: 'released into the room',
+    targetedMisconceptions: [],
+    source: src('phys.therm.refrigerators', 'a refrigerator MOVES heat and cannot destroy it; the destroyed-heat option is the belief that makes the open-door question below feel paradoxical'),
+  },
+  {
+    conceptId: 'phys.therm.refrigerators', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'A refrigerator is left running with its door wide open in a small kitchen that is sealed and well insulated. What happens to the kitchen temperature over the next few hours?',
+    choices: [
+      { text: 'It RISES — the fridge dumps out everything it removes PLUS the compressor work, so the room gains energy overall', isCorrect: true },
+      { text: 'It falls — that is what a refrigerator does', isCorrect: false },
+      { text: 'It stays the same — the heat removed and the heat released cancel exactly', isCorrect: false },
+      { text: 'It falls at first and then holds steady once the fridge reaches its set point', isCorrect: false },
+    ],
+    correctValue: 'the kitchen gets warmer',
+    targetedMisconceptions: [],
+    source: src('phys.therm.refrigerators', 'Q_H = Q_C + W stated as a room-scale consequence; the exactly-cancel option is the energy balance with the compressor work left out, which is the whole content of the question'),
+  },
+]
+
+const STRESS_STRAIN: SeedProbe[] = [
+  {
+    conceptId: 'phys.mech.stress-strain', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.DEVELOPING,
+    stem: 'A wire of cross-sectional area 2.0 × 10⁻⁶ m² is pulled by a tensile force of 60 N. What is the tensile stress in the wire?',
+    choices: [
+      { text: '3.0 × 10⁷ Pa (30 MPa)', isCorrect: true },
+      { text: '60 Pa — stress is just the applied force', isCorrect: false },
+      { text: '1.2 × 10⁻⁴ Pa — force multiplied by area', isCorrect: false },
+      { text: '3.3 × 10⁻⁸ Pa — area divided by force', isCorrect: false },
+    ],
+    correctValue: '3.0e7 Pa',
+    targetedMisconceptions: [],
+    source: src('phys.mech.stress-strain', 'σ = F/A on a realistically small area, so the multiply and invert slips produce numbers that are obviously wrong once the unit is read'),
+  },
+  {
+    conceptId: 'phys.mech.stress-strain', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'A steel wire of length 2.0 m and cross-section 1.0 × 10⁻⁶ m² carries a load of 100 N. Steel has a Young modulus of 200 GPa. By how much does the wire extend?',
+    choices: [
+      { text: '1.0 mm', isCorrect: true },
+      { text: '2.0 mm', isCorrect: false },
+      { text: '0.5 mm', isCorrect: false },
+      { text: '1.0 m — the wire doubles in length', isCorrect: false },
+    ],
+    correctValue: '1.0 mm',
+    targetedMisconceptions: [],
+    source: src('phys.mech.stress-strain', 'ΔL = FL/(AE) = 100 × 2.0 / (1.0e-6 × 200e9) = 1.0 × 10⁻³ m. The 1.0 m option is the same arithmetic with the prefix dropped, which is the error that survives a correct method'),
+  },
+]
+
+const SPRING_MASS: SeedProbe[] = [
+  {
+    conceptId: 'phys.wave.spring-mass', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'A 0.20 kg mass hangs from a spring of stiffness 80 N/m and oscillates freely. What is the angular frequency of the oscillation?',
+    choices: [
+      { text: '20 rad/s', isCorrect: true },
+      { text: '400 rad/s — k divided by m, without the square root', isCorrect: false },
+      { text: '0.05 rad/s — m divided by k', isCorrect: false },
+      { text: '2.0 rad/s', isCorrect: false },
+    ],
+    correctValue: '20 rad/s',
+    targetedMisconceptions: [],
+    source: src('phys.wave.spring-mass', 'ω = √(k/m) = √(80/0.20) = √400 = 20. The un-rooted and inverted options are the two ways the relation is misremembered'),
+  },
+  {
+    conceptId: 'phys.wave.spring-mass', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'The mass on a spring-mass oscillator is QUADRUPLED and the spring is left unchanged. What happens to the period of oscillation?',
+    choices: [
+      { text: 'It doubles — T = 2π√(m/k), so the period follows the square root of the mass', isCorrect: true },
+      { text: 'It quadruples, in step with the mass', isCorrect: false },
+      { text: 'It is unchanged — like a pendulum, the period does not depend on the mass', isCorrect: false },
+      { text: 'It halves — a heavier mass is harder to move, so the oscillation is quicker', isCorrect: false },
+    ],
+    correctValue: 'the period doubles',
+    targetedMisconceptions: [],
+    source: src('phys.wave.spring-mass', 'the square-root dependence, with the PENDULUM result offered as the distractor — a simple pendulum genuinely is mass-independent, and carrying that across is the specific cross-concept error here'),
+  },
+]
+
+const EULER_LAGRANGE: SeedProbe[] = [
+  {
+    conceptId: 'phys.mech.euler-lagrange-equation', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'A Lagrangian contains the velocity q̇ but the coordinate q itself appears nowhere in it. What does the Euler–Lagrange equation tell you immediately?',
+    choices: [
+      { text: 'Since ∂L/∂q = 0, the equation reduces to d/dt(∂L/∂q̇) = 0 — so the momentum conjugate to q is CONSERVED', isCorrect: true },
+      { text: 'That q̇ must be zero, so the coordinate never changes', isCorrect: false },
+      { text: 'That the Lagrangian itself is zero along the motion', isCorrect: false },
+      { text: 'That q was chosen badly and the problem must be set up again in different coordinates', isCorrect: false },
+    ],
+    correctValue: 'the conjugate momentum is conserved',
+    targetedMisconceptions: [],
+    source: src('phys.mech.euler-lagrange-equation', 'a cyclic coordinate: the conserved quantity falls straight out of the equation. Reading "q does not appear" as "q does not change" is the substitution that hides the whole result'),
+  },
+]
+
+const THERMO_PROCESSES: SeedProbe[] = [
+  {
+    conceptId: 'phys.therm.thermodynamic-processes', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'An ideal gas is taken around a complete closed cycle on a P–V diagram and ends exactly where it started. What is ΔU over the whole cycle, and what does the area enclosed by the loop represent?',
+    choices: [
+      { text: 'ΔU = 0, because internal energy is a state function; the enclosed area is the NET WORK done over the cycle', isCorrect: true },
+      { text: 'ΔU equals the enclosed area, since that is the energy the cycle gained', isCorrect: false },
+      { text: 'ΔU = 0, and the enclosed area is the energy destroyed by friction in the cycle', isCorrect: false },
+      { text: 'ΔU equals the net heat supplied, and the enclosed area is zero for a closed loop', isCorrect: false },
+    ],
+    correctValue: 'ΔU = 0; the area is the net work',
+    targetedMisconceptions: [],
+    source: src('phys.therm.thermodynamic-processes', 'state function versus path function in the one situation that separates them cleanly; reading the enclosed area as an energy CHANGE rather than as work is the standard conflation'),
+  },
+]
+
+const BINDING_ENERGY: SeedProbe[] = [
+  {
+    conceptId: 'phys.mod.binding-energy', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: 'The measured mass of any nucleus is LESS than the total mass of the separate protons and neutrons that make it up. What is the missing mass called, and what became of it?',
+    choices: [
+      { text: 'The mass defect — it was carried away as the binding energy released when the nucleus formed, following E = mc²', isCorrect: true },
+      { text: 'Experimental error — the difference is too small to be real', isCorrect: false },
+      { text: 'The mass of the orbiting electrons, which is counted separately', isCorrect: false },
+      { text: 'It was converted into the strong nuclear force holding the nucleus together', isCorrect: false },
+    ],
+    correctValue: 'the mass defect',
+    targetedMisconceptions: [],
+    source: src('phys.mod.binding-energy', 'mass defect and binding energy as the SAME quantity in two units; "turned into the force" is the answer that sounds mechanistic and stops the E = mc² step from happening'),
+  },
+  {
+    conceptId: 'phys.mod.binding-energy', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'The curve of binding energy PER NUCLEON rises steeply for light nuclei, peaks around iron-56, then falls slowly for heavy nuclei. What does that single shape explain?',
+    choices: [
+      { text: 'Both fusion and fission: light nuclei release energy by fusing UP towards the peak, and heavy nuclei release it by splitting DOWN towards the peak', isCorrect: true },
+      { text: 'Only fusion — fission releases energy for a completely unrelated reason', isCorrect: false },
+      { text: 'That iron cannot take part in any nuclear reaction at all', isCorrect: false },
+      { text: 'That splitting any nucleus releases energy, which is why fission works for every element', isCorrect: false },
+    ],
+    correctValue: 'both fusion and fission move towards the peak',
+    targetedMisconceptions: [],
+    source: src('phys.mod.binding-energy', 'the peak read as a DESTINATION both directions move towards — the one idea that makes fusion and fission a single fact rather than two memorised ones'),
+  },
+]
+
+const QUANTUM_TUNNELING: SeedProbe[] = [
+  {
+    conceptId: 'phys.qm.quantum-tunneling', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: 'What is actually meant by saying a particle has "tunnelled" through a barrier that its energy is too low to cross?',
+    choices: [
+      { text: 'Its wavefunction decays inside the barrier but is still non-zero on the far side, so there is a finite probability of finding the particle beyond it', isCorrect: true },
+      { text: 'It briefly gains enough energy to pass over the top of the barrier', isCorrect: false },
+      { text: 'It travels around the barrier rather than through it', isCorrect: false },
+      { text: 'It physically breaks a hole through the barrier and passes through the gap', isCorrect: false },
+    ],
+    correctValue: 'the wavefunction is non-zero beyond the barrier',
+    targetedMisconceptions: [],
+    source: src('phys.qm.quantum-tunneling', 'tunnelling as a statement about the wavefunction, not about the particle acquiring energy; the over-the-top option is the same borrowed-energy story the concept\'s existing PROFICIENT probe attacks from the other side'),
+  },
+  {
+    conceptId: 'phys.qm.quantum-tunneling', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'An electron and a proton, each with the same energy, meet identical rectangular barriers. Which tunnels through more readily, and why?',
+    choices: [
+      { text: 'The electron — the decay constant κ = √(2m(V₀ − E))/ħ grows with mass, so the much heavier proton\'s wavefunction dies away far faster inside the barrier', isCorrect: true },
+      { text: 'The proton — it carries far more momentum, so it drives further into the barrier', isCorrect: false },
+      { text: 'Equally — transmission depends only on the height and width of the barrier', isCorrect: false },
+      { text: 'The proton — being heavier it is more energetic, and energy is what beats a barrier', isCorrect: false },
+    ],
+    correctValue: 'the electron',
+    targetedMisconceptions: [],
+    source: src('phys.qm.quantum-tunneling', 'mass in the exponent is why tunnelling is an electron phenomenon and essentially never a macroscopic one; the barrier-only option is the reading that makes that fact impossible to derive'),
+  },
+]
+
 /**
  * Every probe-depth probe. One array, in the order the audit reported the
  * pairs — `seed-knowledge-assets.ts`, the cold-start bootstrap and the
@@ -842,4 +1079,7 @@ export const PHYSICS_DEPTH_PROBES: SeedProbe[] = [
   ...KINEMATICS,
   ...KINETIC_ENERGY,
   ...HOOKES_LAW,
+  // Batch 2 — the eight HIGH-band concepts measured one answer short.
+  ...ELECTRIC_FIELD, ...REFRIGERATORS, ...STRESS_STRAIN, ...SPRING_MASS,
+  ...EULER_LAGRANGE, ...THERMO_PROCESSES, ...BINDING_ENERGY, ...QUANTUM_TUNNELING,
 ]
