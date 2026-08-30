@@ -179,12 +179,18 @@ async function bootstrapAssets() {
       // in git, and unreachable.
       const { PHYSICS_DEPTH_PROBES } =
         await import('./lib/teaching/assets/physicsDepthSeedAssets')
+      // Chemistry probe-depth probes joined 2026-08-30. Session A's chemistry
+      // baseline reproduced the physics mastery ceiling almost exactly — mean
+      // 2.82 keyed probes served, tail 1.8 turns when mastered against 8.3
+      // when not — so the zero-slack pool is not subject-specific.
+      const { CHEMISTRY_DEPTH_PROBES } =
+        await import('./lib/teaching/assets/chemistryDepthSeedAssets')
       const { hashContent } = await import('./lib/teaching/assets/similarity')
       const { AssetFamily, AssetStatus, AuthorKind, ExplanationStyle } = await import('@prisma/client')
 
       const ALL_EXPLANATIONS = [...SEED_EXPLANATIONS, ...AUTHORED_EXPLANATIONS, ...CHEMISTRY_EXPLANATIONS]
       const ALL_PROBES = [...SEED_PROBES, ...AUTHORED_PROBES, ...CHEMISTRY_PROBES, ...PHYSICS_BAND_GAP_PROBES,
-        ...PHYSICS_DEPTH_PROBES]
+        ...PHYSICS_DEPTH_PROBES, ...CHEMISTRY_DEPTH_PROBES]
       // ADR 14 §13 (Item 6): ladder rungs get a difficulty segment; singleton
       // slots keep the identity they already have. One resolver drives BOTH
       // the pre-flight check and the write loop so they cannot disagree.

@@ -40,7 +40,7 @@ const INSTRUMENTATION = path.join(__dirname, '..', 'instrumentation.ts')
 const DEPTH_TARGET = 5
 
 /** Modules authored by the probe-depth programme. Extend as batches land. */
-const DEPTH_MODULES = ['physicsDepthSeedAssets.ts']
+const DEPTH_MODULES = ['physicsDepthSeedAssets.ts', 'chemistryDepthSeedAssets.ts']
 
 interface Probe {
   conceptId: string
@@ -200,6 +200,7 @@ describe('probe depth', () => {
       expect(source).toContain(stem)
     }
     expect(source).toContain('...PHYSICS_DEPTH_PROBES')
+    expect(source).toContain('...CHEMISTRY_DEPTH_PROBES')
   })
 })
 
@@ -782,6 +783,58 @@ describe('the physics depth probes are arithmetically true', () => {
     expect((600e-9 * 2.0) / 0.50e-3).toBeCloseTo(2.4e-3, 12)
     expect(correctText(fr)).toContain('2.4 mm')
   })
+
+  it('chemistry batch 1: the arithmetic', async () => {
+    const { CHEMISTRY_DEPTH_PROBES } = await import('../lib/teaching/assets/chemistryDepthSeedAssets')
+    const probes = CHEMISTRY_DEPTH_PROBES as unknown as Probe[]
+    const c = (fragment: string) => {
+      const hit = probes.filter((p) => p.stem.includes(fragment))
+      expect(hit.length, `expected exactly one chemistry probe containing "${fragment}"`).toBe(1)
+      return (hit[0].choices ?? []).find((x) => x.isCorrect)!.text
+    }
+
+    // Rf is bounded by 1 — which is what makes the inverted ratio detectable.
+    expect(4.5 / 9.0).toBe(0.5)
+    expect(9.0 / 4.5).toBe(2)
+    expect(c('solvent front travels 9.0 cm')).toContain('0.50')
+
+    expect(1.435 / 143.5).toBeCloseTo(0.0100, 6)
+    expect(c('1.435 g of dry silver chloride')).toContain('0.0100 mol')
+
+    // The larger volume must hold the lower concentration.
+    expect((0.0200 * 0.100) / 0.0250).toBeCloseTo(0.0800, 6)
+    expect((0.0250 * 0.100) / 0.0200).toBeCloseTo(0.125, 6)  // the inverted option
+    expect(c('25.0 cm³ of sodium hydroxide')).toContain('0.0800')
+
+    expect(-13.6 / 2 ** 2).toBeCloseTo(-3.4, 6)
+    expect(-13.6 / 2).toBeCloseTo(-6.8, 6)                   // halving, not n-squared
+    expect(c('energy of the n = 2 level')).toContain('−3.4 eV')
+
+    expect(3 * 2).toBe(6)                                     // p: three orbitals, two each
+    expect(c('maximum number of electrons a p sub-shell')).toContain('Six')
+
+    expect(5.0 - 3.0).toBe(2.0)
+    expect(c('work function of 3.0 eV')).toContain('2.0 eV')
+
+    expect(1 + 3 + 5).toBe(9)
+    expect(3 ** 2).toBe(9)                                    // n^2 orbitals
+    expect(2 * 3 ** 2).toBe(18)                               // 2n^2 electrons, the distractor
+    expect(c('orbitals are there altogether in the n = 3 shell')).toContain('Nine')
+
+    expect(26 - 23).toBe(3)                                   // fewer electrons => positive
+    expect(26 + 30).toBe(56)                                  // mass number excludes electrons
+    expect(c('26 protons, 30 neutrons and 23 electrons')).toContain('3+')
+
+    expect(6 + 6).toBe(12)                                    // condensation loses O, not C
+    expect(c('How many carbon atoms does one maltose')).toContain('Twelve')
+
+    // Chargaff: A = T = 30, so G = C = (100 - 60)/2.
+    expect((100 - 2 * 30) / 2).toBe(20)
+    expect(c('30% adenine by base count')).toContain('20%')
+
+    expect(3 - 1).toBe(2)                                     // n residues, n-1 bonds
+    expect(c('peptide bonds are there in a linear tripeptide')).toContain('Two')
+  }, 30_000)
 
   it('batch 13: coupling j=1 with j=1 preserves the state count', async () => {
     const probes = await load()
