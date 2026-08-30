@@ -803,6 +803,39 @@ describe('the physics depth probes are arithmetically true', () => {
     expect(correctText(p)).toContain('+1')
   })
 
+  it('batch 15: the measurement and counting arithmetic', async () => {
+    const probes = await load()
+    const conv = find(probes, 'Convert 72 km/h')
+    expect((72 * 1000) / 3600).toBe(20)
+    expect(72 * 3.6).toBeCloseTo(259.2, 1)   // the inverted-factor distractor
+    expect(correctText(conv)).toContain('20 m/s')
+
+    // Two vectors of 3 and 4 span resultants from |3-4| to 3+4: never zero.
+    const res = find(probes, 'forces, of 3 N and 4 N')
+    expect(Math.abs(3 - 4)).toBe(1)
+    expect(3 + 4).toBe(7)
+    expect(Math.hypot(3, 4)).toBe(5)          // the perpendicular case, also offered
+    expect(correctText(res)).toContain('1 N')
+
+    // C(4,2) = 6 out of 2^4 = 16.
+    const coin = find(probes, 'fair coin is tossed four times')
+    const choose = (n: number, k: number) =>
+      Array.from({ length: k }, (_, i) => (n - i) / (i + 1)).reduce((a, b) => a * b, 1)
+    expect(choose(4, 2)).toBeCloseTo(6, 12)
+    expect(2 ** 4).toBe(16)
+    expect(correctText(coin)).toContain('Six out of sixteen')
+
+    // v = a t^2 is L, not L/T: dimensionally impossible whatever the units.
+    const dim = find(probes, 'v = at²')
+    const T = 1, L = 1
+    const velocity = [L, -T]                  // [length power, time power]
+    const rhs = [L, -2 * T + 2 * T]
+    expect(velocity[1]).toBe(-1)
+    expect(rhs[1]).toBe(0)
+    expect(velocity[1]).not.toBe(rhs[1])
+    expect(correctText(dim)).toContain('No')
+  })
+
   it("Hooke: 3 N gives 6 cm, so 12 N would predict 24 cm; two springs halve the extension", async () => {
     const probes = await load()
     const limit = find(probes, 'stretches 6 cm when a 3 N weight')
