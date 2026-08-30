@@ -788,3 +788,26 @@ inverse defect this fix repairs.
 **Not yet re-measured against production.** A full 60-concept re-run on this
 build is the next step. An in-flight run was stopped and discarded rather than
 allowed to straddle two builds.
+
+
+## Was the D4b finding just the latch in disguise?
+
+Worth asking, because the latch was found afterwards and the five latched
+sessions were also the most help-request-heavy — exactly the confound that would
+manufacture a spurious D4b effect. Re-tested three ways:
+
+| sample | help-request turns | other turns |
+|---|---|---|
+| all 58 sessions (as first reported) | 64/305 (21%) | 238/556 (43%) |
+| **excluding the 5 latched sessions** | 63/267 (**24%**) | 232/524 (44%) |
+| **only turns before any wrong answer** (no latch possible) | 14/185 (**8%**) | 55/230 (24%) |
+
+The effect survives both controls at roughly the same ratio. D4b is independent
+of the latch, and the earlier finding stands as written.
+
+**No change is being made to D4b, and the sequencing is deliberate.** D4b
+answering a learner's question instead of quizzing them is correct behaviour;
+the open question is only whether it needs a ceiling. Until the latch fix is
+measured, there is no way to tell whether a help-request-heavy session still
+fails without it — the two mechanisms were always measured together. Changing
+both at once would make the next run uninterpretable.
