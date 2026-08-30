@@ -1522,6 +1522,485 @@ const THERM: SeedProbe[] = [
   },
 ]
 
+
+// ═══════════════════════════════════════════════════════════════════════════
+// BATCH 4 — phys.wave @ HIGH, all sixteen short pairs.
+//
+// phys.wave.wave-properties is the one pair in this domain whose mcq slot
+// holds exactly ONE probe, so its two additions go into the misconception_probe
+// ladder instead. Adding them to mcq would have re-identified the probe already
+// seeded there — see this file's header, and batch 3, where the corpus-wide
+// guard caught exactly that.
+// ═══════════════════════════════════════════════════════════════════════════
+
+const WAVE: SeedProbe[] = [
+  {
+    conceptId: 'phys.wave.beats', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: 'Two steady tones of slightly different frequency sound together and the loudness rises and falls over and over. What causes that throbbing?',
+    choices: [
+      { text: 'The two waves drift in and out of step, so they alternately reinforce and cancel one another', isCorrect: true },
+      { text: 'One of the two sources is periodically getting louder', isCorrect: false },
+      { text: 'The ear tires and recovers in a cycle', isCorrect: false },
+      { text: 'The two waves collide and bounce off each other', isCorrect: false },
+    ],
+    correctValue: 'drifting in and out of phase',
+    targetedMisconceptions: [],
+    source: src('phys.wave.beats', 'beats as a phase phenomenon rather than a property of either source; the collide-and-bounce option is the particle picture of waves that superposition has to displace'),
+  },
+  {
+    conceptId: 'phys.wave.beats', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'A guitar string sounded against a 330 Hz tuning fork gives 3 beats per second. The player TIGHTENS the string slightly and now hears 5 beats per second. What was the string\'s original frequency?',
+    choices: [
+      { text: '333 Hz — it was already sharp, and tightening took it further away', isCorrect: true },
+      { text: '327 Hz — it was flat, and tightening was the right move', isCorrect: false },
+      { text: '330 Hz — the beats come from the fork alone', isCorrect: false },
+      { text: '335 Hz', isCorrect: false },
+    ],
+    correctValue: '333 Hz',
+    targetedMisconceptions: [],
+    source: src('phys.wave.beats', 'the beat frequency gives the SIZE of the mismatch but not its sign; changing the tension and watching which way the beats move is the only way to resolve it, and is what a tuner actually does'),
+  },
+
+  {
+    conceptId: 'phys.wave.damped-oscillations', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.DEVELOPING,
+    stem: 'What separates CRITICAL damping from OVER-damping in practical terms?',
+    choices: [
+      { text: 'Critical damping returns the system to equilibrium in the shortest possible time without overshooting; an over-damped system also does not overshoot, but takes longer', isCorrect: true },
+      { text: 'A critically damped system overshoots exactly once, then stops', isCorrect: false },
+      { text: 'An over-damped system never returns to equilibrium at all', isCorrect: false },
+      { text: 'They are two names for the same behaviour', isCorrect: false },
+    ],
+    correctValue: 'fastest return without overshoot',
+    targetedMisconceptions: [],
+    source: src('phys.wave.damped-oscillations', 'critical damping is a FASTEST-return condition, not a most-damped one; "more damping is always better" is the intuition that makes over-damping look like an improvement'),
+  },
+  {
+    conceptId: 'phys.wave.damped-oscillations', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'Car suspensions are designed to sit close to critical damping. Why not use very light damping instead, which wastes far less energy?',
+    choices: [
+      { text: 'The car would keep bouncing after every bump — the wheels would repeatedly lose contact with the road, which costs both comfort and grip', isCorrect: true },
+      { text: 'Light damping would overstress and eventually snap the springs', isCorrect: false },
+      { text: 'Light damping raises the natural frequency into the audible range', isCorrect: false },
+      { text: 'There is no reason — heavier damping is simply always better', isCorrect: false },
+    ],
+    correctValue: 'it would keep oscillating',
+    targetedMisconceptions: [],
+    source: src('phys.wave.damped-oscillations', 'the engineering reason a damping REGIME is chosen rather than minimised — a worn shock absorber is a lightly damped suspension, and it is a safety fault'),
+  },
+
+  {
+    conceptId: 'phys.wave.doppler-effect', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'A siren emitting 500 Hz moves towards a stationary listener at 34 m/s. The speed of sound is 340 m/s. What frequency does the listener hear?',
+    choices: [
+      { text: 'About 556 Hz', isCorrect: true },
+      { text: 'About 455 Hz — using v + v_s in the denominator', isCorrect: false },
+      { text: '500 Hz — the source frequency is what it is', isCorrect: false },
+      { text: '534 Hz', isCorrect: false },
+    ],
+    correctValue: '556 Hz',
+    targetedMisconceptions: [],
+    source: src('phys.wave.doppler-effect', "f' = f·v/(v − v_s) = 500 × 340/306 ≈ 556 Hz. The 455 Hz option puts the sign the wrong way and predicts a DROP for an approaching source, which the everyday observation immediately contradicts"),
+  },
+  {
+    conceptId: 'phys.wave.doppler-effect', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'For sound, a moving source and a moving listener at the SAME speed do not give exactly the same frequency shift. Why not?',
+    choices: [
+      { text: 'The air itself picks out a rest frame: a moving source bunches the wavefronts closer together, while a moving listener simply meets more of them per second. The two mechanisms give different formulas', isCorrect: true },
+      { text: 'They do give exactly the same shift — the difference is only apparent', isCorrect: false },
+      { text: 'Only a moving source produces any shift at all', isCorrect: false },
+      { text: 'The difference is caused by wind moving the air', isCorrect: false },
+    ],
+    correctValue: 'the medium defines a rest frame',
+    targetedMisconceptions: [],
+    source: src('phys.wave.doppler-effect', 'the asymmetry is a statement about the MEDIUM, and it is exactly what disappears for light — which is why the relativistic Doppler formula depends only on relative velocity'),
+  },
+
+  {
+    conceptId: 'phys.wave.forced-oscillations', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: 'A driven oscillator is left running until the transient has died away. At what frequency is it then oscillating?',
+    choices: [
+      { text: 'At the DRIVING frequency — not at its own natural frequency', isCorrect: true },
+      { text: 'At its own natural frequency, whatever the driver does', isCorrect: false },
+      { text: 'At the average of the driving and natural frequencies', isCorrect: false },
+      { text: 'At whichever of the two frequencies is higher', isCorrect: false },
+    ],
+    correctValue: 'the driving frequency',
+    targetedMisconceptions: [],
+    source: src('phys.wave.forced-oscillations', 'the steady state belongs to the DRIVER; the natural frequency only decides how large the response is, not how fast it happens. This is the single most common error in the topic'),
+  },
+  {
+    conceptId: 'phys.wave.forced-oscillations', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'Two identical oscillators are each driven at resonance, one lightly damped and one heavily damped. Compare their peak amplitudes and the widths of their resonance curves.',
+    choices: [
+      { text: 'The lightly damped one peaks much higher AND its peak is much narrower — light damping gives a tall, sharp resonance', isCorrect: true },
+      { text: 'The peaks reach the same height; only the widths differ', isCorrect: false },
+      { text: 'The heavily damped one peaks higher, because it absorbs more energy from the driver', isCorrect: false },
+      { text: 'Damping changes neither the height nor the width', isCorrect: false },
+    ],
+    correctValue: 'taller and narrower',
+    targetedMisconceptions: [],
+    source: src('phys.wave.forced-oscillations', 'height and sharpness are the same parameter seen twice, which is why a high-Q system is both violent at resonance and easy to miss when tuning'),
+  },
+
+  {
+    conceptId: 'phys.wave.interference', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: 'What must be true of two sources for them to produce a STABLE interference pattern?',
+    choices: [
+      { text: 'They must be coherent — the same frequency, holding a constant phase relationship', isCorrect: true },
+      { text: 'They must have exactly equal amplitudes', isCorrect: false },
+      { text: 'They must be the same distance from the screen', isCorrect: false },
+      { text: 'They must have different frequencies, or the pattern would not vary', isCorrect: false },
+    ],
+    correctValue: 'coherence',
+    targetedMisconceptions: [],
+    source: src('phys.wave.interference', 'coherence is the condition; equal amplitude only affects how COMPLETE the cancellation is, which is what the concept\'s existing unequal-amplitude probe covers'),
+  },
+  {
+    conceptId: 'phys.wave.interference', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'At the dark fringes of an interference pattern, no light arrives. Where has that energy gone?',
+    choices: [
+      { text: 'Nowhere — it is redistributed into the bright fringes, which are brighter than either source alone. Added over the whole pattern, the energy is unchanged', isCorrect: true },
+      { text: 'It is converted into heat where the waves cancel', isCorrect: false },
+      { text: 'It is destroyed — that is what destructive interference means', isCorrect: false },
+      { text: 'It is absorbed by the screen at those points', isCorrect: false },
+    ],
+    correctValue: 'redistributed into the bright fringes',
+    targetedMisconceptions: [],
+    source: src('phys.wave.interference', 'the energy-conservation question destructive interference always raises; "destroyed" is the reading the word DESTRUCTIVE actively encourages'),
+  },
+
+  {
+    conceptId: 'phys.wave.longitudinal-waves', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'A sound wave travels through air. Which two quantities reach a maximum at the SAME points in the wave?',
+    choices: [
+      { text: 'Pressure and density — both peak at the compressions', isCorrect: true },
+      { text: 'Pressure and particle displacement', isCorrect: false },
+      { text: 'Particle displacement and density', isCorrect: false },
+      { text: 'Particle velocity and particle displacement', isCorrect: false },
+    ],
+    correctValue: 'pressure and density',
+    targetedMisconceptions: [],
+    source: src('phys.wave.longitudinal-waves', 'pressure and displacement are a quarter-cycle out of step — displacement is ZERO at a compression — which is why a pressure graph and a displacement graph of the same sound look nothing alike'),
+  },
+  {
+    conceptId: 'phys.wave.longitudinal-waves', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'Longitudinal mechanical waves travel through liquids and gases, but transverse mechanical waves generally do not. Why?',
+    choices: [
+      { text: 'A transverse wave needs the medium to resist SHEAR, and fluids do not. Fluids do resist compression, which is all a longitudinal wave requires', isCorrect: true },
+      { text: 'Longitudinal waves travel faster, so they get through before the medium can absorb them', isCorrect: false },
+      { text: 'Because liquids and gases have no fixed surface for a transverse wave to move', isCorrect: false },
+      { text: 'Because longitudinal waves have much longer wavelengths', isCorrect: false },
+    ],
+    correctValue: 'fluids resist compression but not shear',
+    targetedMisconceptions: [],
+    source: src('phys.wave.longitudinal-waves', 'the restoring force is what decides which wave a medium can carry; this is exactly why seismic S-waves do not cross the Earth\'s liquid outer core, which is how the core was discovered'),
+  },
+
+  {
+    conceptId: 'phys.wave.pendulum', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'A simple pendulum has a period of 2.0 s. Its length is then QUADRUPLED. What is the new period?',
+    choices: [
+      { text: '4.0 s', isCorrect: true },
+      { text: '8.0 s — the period follows the length directly', isCorrect: false },
+      { text: '1.0 s', isCorrect: false },
+      { text: '2.0 s — the period does not depend on the length', isCorrect: false },
+    ],
+    correctValue: '4.0 s',
+    targetedMisconceptions: [],
+    source: src('phys.wave.pendulum', 'T = 2π√(L/g), so quadrupling L doubles T. The 8.0 s option reads the proportionality straight through, which is the same slip as the spring-mass mass question'),
+  },
+  {
+    conceptId: 'phys.wave.pendulum', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'A pendulum clock keeping perfect time on Earth is taken to the Moon, where g is about one sixth of its value on Earth. Does it run fast or slow, and by roughly what factor?',
+    choices: [
+      { text: 'Slow, by a factor of about √6 ≈ 2.4 — the period goes as 1/√g', isCorrect: true },
+      { text: 'Slow, by a factor of 6', isCorrect: false },
+      { text: 'Fast, by a factor of about 2.4 — weaker gravity means less resistance to swinging', isCorrect: false },
+      { text: 'Unchanged — a pendulum\'s period does not depend on the mass, so gravity cannot matter either', isCorrect: false },
+    ],
+    correctValue: 'slow by about 2.4x',
+    targetedMisconceptions: [],
+    source: src('phys.wave.pendulum', 'the last option is the interesting one: mass-independence is genuinely true and is regularly over-generalised into gravity-independence, which is exactly backwards — g is the only external quantity in T = 2π√(L/g)'),
+  },
+
+  {
+    conceptId: 'phys.wave.shm', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'What is the defining condition for a motion to count as simple harmonic motion?',
+    choices: [
+      { text: 'The restoring force is proportional to the displacement and always directed back towards equilibrium — equivalently, a = −ω²x', isCorrect: true },
+      { text: 'The motion repeats itself at regular intervals', isCorrect: false },
+      { text: 'The speed of the object stays constant throughout', isCorrect: false },
+      { text: 'The path traced out is a circle', isCorrect: false },
+    ],
+    correctValue: 'a = -omega^2 x',
+    targetedMisconceptions: [],
+    source: src('phys.wave.shm', 'periodicity is NECESSARY and nowhere near sufficient — a bouncing ball repeats and is not SHM. The definition is about the force law, not the shape of the motion'),
+  },
+  {
+    conceptId: 'phys.wave.shm', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'In simple harmonic motion, where is the acceleration greatest, and where is it zero?',
+    choices: [
+      { text: 'Greatest at maximum displacement (±A), and zero at the equilibrium position', isCorrect: true },
+      { text: 'Greatest at the equilibrium position, and zero at ±A', isCorrect: false },
+      { text: 'Constant throughout the oscillation', isCorrect: false },
+      { text: 'Greatest halfway between equilibrium and maximum displacement', isCorrect: false },
+    ],
+    correctValue: 'greatest at +/-A, zero at equilibrium',
+    targetedMisconceptions: [],
+    source: src('phys.wave.shm', 'the second option is the SPEED answer given to the acceleration question — speed and acceleration are exactly out of step in SHM, and swapping them is the standard error'),
+  },
+
+  {
+    conceptId: 'phys.wave.shm-energy', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'A mass on a spring oscillates in SHM with amplitude A. At what displacement is the kinetic energy exactly equal to the potential energy?',
+    choices: [
+      { text: 'At x = A/√2, about 0.71A', isCorrect: true },
+      { text: 'At x = A/2 — halfway out', isCorrect: false },
+      { text: 'At x = A, the point of maximum displacement', isCorrect: false },
+      { text: 'At x = 0, the equilibrium position', isCorrect: false },
+    ],
+    correctValue: 'A/sqrt(2)',
+    targetedMisconceptions: [],
+    source: src('phys.wave.shm-energy', 'PE = ½kx² is half of ½kA² when x² = A²/2. The A/2 option splits the DISPLACEMENT in half rather than the energy, and energy goes as the square'),
+  },
+  {
+    conceptId: 'phys.wave.shm-energy', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'The amplitude of an SHM oscillator is doubled while the spring is unchanged. What happens to its total energy?',
+    choices: [
+      { text: 'It quadruples — the total energy is ½kA², so it goes as the square of the amplitude', isCorrect: true },
+      { text: 'It doubles, in step with the amplitude', isCorrect: false },
+      { text: 'It halves', isCorrect: false },
+      { text: 'It is unchanged — energy is conserved in SHM', isCorrect: false },
+    ],
+    correctValue: 'it quadruples',
+    targetedMisconceptions: [],
+    source: src('phys.wave.shm-energy', 'the last option conflates conservation DURING an oscillation with the effect of setting up a different oscillation — a real and specific confusion, not a throwaway'),
+  },
+
+  {
+    conceptId: 'phys.wave.sound-intensity', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.DEVELOPING,
+    stem: 'The decibel scale is logarithmic. An increase of 10 dB corresponds to what change in sound intensity?',
+    choices: [
+      { text: 'Ten times the intensity', isCorrect: true },
+      { text: 'Ten joules more energy per second', isCorrect: false },
+      { text: 'Twice the intensity', isCorrect: false },
+      { text: 'A hundred times the intensity', isCorrect: false },
+    ],
+    correctValue: 'ten times',
+    targetedMisconceptions: [],
+    source: src('phys.wave.sound-intensity', 'the decibel as a RATIO in disguise; reading +10 dB as an additive amount of energy is what makes the scale look arbitrary rather than useful'),
+  },
+  {
+    conceptId: 'phys.wave.sound-intensity', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'You double your distance from a small sound source in the open air. By roughly how much does the sound intensity LEVEL fall?',
+    choices: [
+      { text: 'About 6 dB — the intensity falls to a quarter, and 10·log₁₀(4) ≈ 6', isCorrect: true },
+      { text: 'About 3 dB — the intensity halves', isCorrect: false },
+      { text: '10 dB', isCorrect: false },
+      { text: '20 dB', isCorrect: false },
+    ],
+    correctValue: 'about 6 dB',
+    targetedMisconceptions: [],
+    source: src('phys.wave.sound-intensity', 'the inverse-square law and the decibel definition composed — two correct steps, and the 3 dB option is what you get from halving instead of quartering'),
+  },
+
+  {
+    conceptId: 'phys.wave.sound-waves', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'Sound travels faster through warm air than through cold air. What is responsible?',
+    choices: [
+      { text: 'The molecules are moving faster at higher temperature, so a disturbance is handed on more quickly — the speed goes as √T', isCorrect: true },
+      { text: 'Warm air is denser, and denser media carry sound faster', isCorrect: false },
+      { text: 'Warm air is at higher pressure, which pushes the wave along', isCorrect: false },
+      { text: 'Sound has a shorter wavelength in warm air', isCorrect: false },
+    ],
+    correctValue: 'faster molecular motion',
+    targetedMisconceptions: [],
+    source: src('phys.wave.sound-waves', 'warm air is LESS dense, so the density option is not merely wrong but backwards; sound speed in a gas depends on temperature and not on pressure at all'),
+  },
+  {
+    conceptId: 'phys.wave.sound-waves', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'A sound wave passes from air into water, where it travels about 4.3 times faster. What happens to its frequency and to its wavelength?',
+    choices: [
+      { text: 'The frequency is unchanged — it is set by the source — so the wavelength must grow by the same factor of about 4.3', isCorrect: true },
+      { text: 'Both the frequency and the wavelength increase by about 4.3', isCorrect: false },
+      { text: 'The frequency increases by 4.3 and the wavelength is unchanged', isCorrect: false },
+      { text: 'Both are unchanged; only the speed differs', isCorrect: false },
+    ],
+    correctValue: 'frequency fixed, wavelength grows',
+    targetedMisconceptions: [],
+    source: src('phys.wave.sound-waves', 'which of v = fλ is pinned by the SOURCE and which by the MEDIUM — the last option quietly denies that v = fλ has to hold at all'),
+  },
+
+  {
+    conceptId: 'phys.wave.standing-waves', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'A string of length 1.2 m is fixed at both ends and vibrates in its fundamental mode. What is the wavelength of that standing wave?',
+    choices: [
+      { text: '2.4 m — the fundamental fits exactly half a wavelength between the fixed ends', isCorrect: true },
+      { text: '1.2 m — one whole wavelength fits on the string', isCorrect: false },
+      { text: '0.6 m', isCorrect: false },
+      { text: '4.8 m', isCorrect: false },
+    ],
+    correctValue: '2.4 m',
+    targetedMisconceptions: [],
+    source: src('phys.wave.standing-waves', 'λ = 2L for the fundamental; the 1.2 m answer is what you get from picturing a full wave on the string rather than the single loop the fundamental actually is'),
+  },
+  {
+    conceptId: 'phys.wave.standing-waves', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'A standing wave is made of two travelling waves, each of which carries energy. Why does the standing wave transport no net energy along the string?',
+    choices: [
+      { text: 'The two travelling waves carry equal energy in OPPOSITE directions, so the net transport is zero; the energy simply moves between kinetic and potential form in place', isCorrect: true },
+      { text: 'Because the ends of the string are fixed and cannot move', isCorrect: false },
+      { text: 'Because the amplitude of a standing wave is zero', isCorrect: false },
+      { text: 'Because a standing wave is only a pattern, not a real wave', isCorrect: false },
+    ],
+    correctValue: 'equal and opposite energy transport',
+    targetedMisconceptions: [],
+    source: src('phys.wave.standing-waves', 'a standing wave is not a wave that fails to move — it is two that cancel their transport, which is why the energy still sloshes locally between KE and PE'),
+  },
+
+  {
+    conceptId: 'phys.wave.superposition', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'Two pulses of equal size and opposite sign travel towards each other along a rope. At the instant they exactly overlap, the rope looks completely flat. What has happened to the energy at that instant?',
+    choices: [
+      { text: 'It is all KINETIC — the rope is flat but every part of it is moving fast, which is why the pulses reappear a moment later', isCorrect: true },
+      { text: 'It has been destroyed by the cancellation', isCorrect: false },
+      { text: 'It has been converted into heat in the rope', isCorrect: false },
+      { text: 'It is stored in the tension of the rope', isCorrect: false },
+    ],
+    correctValue: 'entirely kinetic',
+    targetedMisconceptions: [],
+    source: src('phys.wave.superposition', 'the flat instant is the moment cancellation looks like destruction; the pulses emerging unchanged afterwards is the observation the correct answer has to explain'),
+  },
+  {
+    conceptId: 'phys.wave.superposition', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'The principle of superposition holds only for LINEAR waves. What does that restriction mean physically?',
+    choices: [
+      { text: 'The medium responds in proportion to the disturbance, so waves pass through one another unchanged — at very large amplitudes the response stops being proportional and this fails', isCorrect: true },
+      { text: 'That the waves must travel along a straight line', isCorrect: false },
+      { text: 'That the waves must all have the same frequency', isCorrect: false },
+      { text: 'That the medium must be one-dimensional, like a rope or a string', isCorrect: false },
+    ],
+    correctValue: 'the medium responds proportionally',
+    targetedMisconceptions: [],
+    source: src('phys.wave.superposition', '"linear" is a statement about the MEDIUM, not the geometry; reading it as "in a straight line" is the word-level trap, and it hides the fact that superposition has a limit at all'),
+  },
+
+  {
+    conceptId: 'phys.wave.transverse-waves', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'Light can be polarised but sound in air cannot. What does that tell you about the two?',
+    choices: [
+      { text: 'Light is transverse, so its oscillation has a direction across the line of travel that a filter can select; sound in air is longitudinal, and there is no such direction to select', isCorrect: true },
+      { text: 'Sound is transverse and light is longitudinal', isCorrect: false },
+      { text: 'Both can in fact be polarised; the difference is only practical', isCorrect: false },
+      { text: 'It tells you nothing about the waves, only about the filters available', isCorrect: false },
+    ],
+    correctValue: 'light is transverse',
+    targetedMisconceptions: [],
+    source: src('phys.wave.transverse-waves', 'polarisation is the experimental test that distinguishes the two wave types, which is how light was established as transverse in the first place'),
+  },
+  {
+    conceptId: 'phys.wave.transverse-waves', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'A transverse wave on a rope has amplitude 5 cm and wavelength 40 cm. How far does one single point on the rope travel during one complete period?',
+    choices: [
+      { text: '20 cm — four amplitudes: up 5, down 10, back up 5', isCorrect: true },
+      { text: '40 cm — a point travels one wavelength per period', isCorrect: false },
+      { text: '5 cm — one amplitude', isCorrect: false },
+      { text: '10 cm — up and back down', isCorrect: false },
+    ],
+    correctValue: '20 cm',
+    targetedMisconceptions: [],
+    source: src('phys.wave.transverse-waves', 'the WAVE advances one wavelength per period; the MEDIUM does not advance at all and travels four amplitudes. The 40 cm option is that confusion exactly, and it is the same one the duck-on-a-pond probe attacks'),
+  },
+
+  {
+    conceptId: 'phys.wave.wave-speed', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'A guitar string is tightened, with nothing else changed. What happens to the speed of waves on the string, and to the pitch of the note?',
+    choices: [
+      { text: 'Both rise — v = √(T/μ), so more tension means faster waves, and a higher wave speed on the same length gives a higher fundamental frequency', isCorrect: true },
+      { text: 'The wave speed rises but the pitch falls', isCorrect: false },
+      { text: 'Both fall', isCorrect: false },
+      { text: 'The wave speed is unchanged; only the pitch rises', isCorrect: false },
+    ],
+    correctValue: 'both rise',
+    targetedMisconceptions: [],
+    source: src('phys.wave.wave-speed', 'the chain from tension to speed to pitch, on the instrument where a learner has already felt the result; the last option is pitch treated as independent of anything mechanical'),
+  },
+  {
+    conceptId: 'phys.wave.wave-speed', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'Waves travel at 24 m/s along a string. The string is replaced with one of the same length and under the same tension, but with FOUR times the mass per unit length. What is the new wave speed?',
+    choices: [
+      { text: '12 m/s', isCorrect: true },
+      { text: '6 m/s — dividing by the factor of four', isCorrect: false },
+      { text: '48 m/s', isCorrect: false },
+      { text: '96 m/s', isCorrect: false },
+    ],
+    correctValue: '12 m/s',
+    targetedMisconceptions: [],
+    source: src('phys.wave.wave-speed', 'v = √(T/μ), so quadrupling μ HALVES the speed. The 6 m/s option divides straight through, which is the same square-root omission as the spring-mass and pendulum questions elsewhere in this domain'),
+  },
+
+  // wave-properties: the mcq slot holds exactly ONE probe, so these go into the
+  // misconception_probe ladder instead. See this section's header.
+  {
+    conceptId: 'phys.wave.wave-properties', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.DEVELOPING,
+    stem: 'A student says: "If you make a wave bigger, it must also get longer — amplitude and wavelength go together." Is that right?',
+    choices: [
+      { text: 'No — amplitude and wavelength are independent. A loud low note and a quiet low note have the same wavelength and very different amplitudes', isCorrect: true },
+      { text: 'Yes — a bigger wave is bigger in every dimension', isCorrect: false },
+      { text: 'Yes, but only for sound waves', isCorrect: false },
+      { text: 'No — they are related, but inversely: a bigger amplitude means a shorter wavelength', isCorrect: false },
+    ],
+    correctValue: 'they are independent',
+    targetedMisconceptions: [],
+    source: src('phys.wave.wave-properties', 'amplitude and wavelength are separate parameters of the same wave; treating "bigger" as one undifferentiated idea is what makes loudness and pitch impossible to keep apart'),
+  },
+  {
+    conceptId: 'phys.wave.wave-properties', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'A student says: "A wave carries the medium along with it — that is how it gets from one place to another." What is wrong?',
+    choices: [
+      { text: 'A wave transports ENERGY, not matter. Each part of the medium oscillates about a fixed position and ends up exactly where it started', isCorrect: true },
+      { text: 'Nothing is wrong — that is precisely how a wave travels', isCorrect: false },
+      { text: 'It is right for water waves but wrong for sound', isCorrect: false },
+      { text: 'The medium does travel, but far more slowly than the wave', isCorrect: false },
+    ],
+    correctValue: 'energy travels, matter does not',
+    targetedMisconceptions: [],
+    source: src('phys.wave.wave-properties', 'the energy-not-matter rule stated as a general claim, where the concept\'s existing duck probe stages the same idea as a single observation; the water-waves exception is the version that survives the duck'),
+  },
+]
+
 /**
  * Every probe-depth probe. One array, in the order the audit reported the
  * pairs — `seed-knowledge-assets.ts`, the cold-start bootstrap and the
@@ -1549,4 +2028,6 @@ export const PHYSICS_DEPTH_PROBES: SeedProbe[] = [
   ...EULER_LAGRANGE, ...THERMO_PROCESSES, ...BINDING_ENERGY, ...QUANTUM_TUNNELING,
   // Batch 3 — phys.therm @ HIGH, all sixteen short pairs.
   ...THERM,
+  // Batch 4 — phys.wave @ HIGH, all sixteen short pairs.
+  ...WAVE,
 ]

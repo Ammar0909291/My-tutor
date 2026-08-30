@@ -365,7 +365,7 @@ describe('the physics depth probes are arithmetically true', () => {
     expect(Math.sqrt(80 / 0.20)).toBe(20)
     expect(80 / 0.20).toBe(400)          // the un-rooted distractor
     expect(correctText(w)).toContain('20 rad/s')
-    const t = find(probes, 'QUADRUPLED')
+    const t = find(probes, 'spring-mass oscillator is QUADRUPLED')
     expect(Math.sqrt(4)).toBe(2)         // T scales as sqrt(m)
     expect(correctText(t)).toContain('doubles')
   })
@@ -415,6 +415,56 @@ describe('the physics depth probes are arithmetically true', () => {
     const rms = find(probes, 'root-mean-square molecular speed')
     expect(Math.sqrt(2)).toBeCloseTo(1.414, 3)
     expect(correctText(rms)).toContain('√2')
+  })
+
+  it('batch 4: the wave arithmetic', async () => {
+    const probes = await load()
+    const dop = find(probes, 'siren emitting 500 Hz')
+    expect((500 * 340) / (340 - 34)).toBeCloseTo(555.6, 1)
+    expect((500 * 340) / (340 + 34)).toBeCloseTo(454.5, 1) // the wrong-sign option
+    expect(correctText(dop)).toContain('556 Hz')
+
+    // Beats give the SIZE of the mismatch, not its sign. 333 Hz tightened goes
+    // to a bigger beat; 327 Hz tightened would have gone to a smaller one.
+    const beat = find(probes, '330 Hz tuning fork gives 3 beats')
+    expect(Math.abs(333 - 330)).toBe(3)
+    expect(Math.abs(327 - 330)).toBe(3)
+    expect(correctText(beat)).toContain('333 Hz')
+
+    const pend = find(probes, 'period of 2.0 s')
+    expect(2.0 * Math.sqrt(4)).toBe(4.0)
+    expect(correctText(pend)).toContain('4.0 s')
+    const moon = find(probes, 'one sixth of its value on Earth')
+    expect(Math.sqrt(6)).toBeCloseTo(2.449, 3)
+    expect(correctText(moon)).toContain('Slow')
+
+    const half = find(probes, 'kinetic energy exactly equal to the potential energy')
+    // PE = half of the total when x^2 = A^2/2.
+    expect(1 / Math.sqrt(2)).toBeCloseTo(0.7071, 4)
+    expect(0.5 * (1 / Math.sqrt(2)) ** 2).toBeCloseTo(0.25, 10)
+    expect(correctText(half)).toContain('A/√2')
+
+    const quad = find(probes, 'amplitude of an SHM oscillator is doubled')
+    expect(2 ** 2).toBe(4)
+    expect(correctText(quad)).toContain('quadruples')
+
+    const db = find(probes, 'double your distance from a small sound source')
+    expect(10 * Math.log10(4)).toBeCloseTo(6.02, 2)
+    expect(10 * Math.log10(2)).toBeCloseTo(3.01, 2)  // the halving distractor
+    expect(correctText(db)).toContain('6 dB')
+
+    const fund = find(probes, 'string of length 1.2 m')
+    expect(2 * 1.2).toBeCloseTo(2.4, 10)
+    expect(correctText(fund)).toContain('2.4 m')
+
+    const pt = find(probes, 'amplitude 5 cm and wavelength 40 cm')
+    expect(4 * 5).toBe(20)
+    expect(correctText(pt)).toContain('20 cm')
+
+    const mu = find(probes, 'FOUR times the mass per unit length')
+    expect(24 / Math.sqrt(4)).toBe(12)
+    expect(24 / 4).toBe(6)  // the square-root-omitted distractor
+    expect(correctText(mu)).toContain('12 m/s')
   })
 
   it("Hooke: 3 N gives 6 cm, so 12 N would predict 24 cm; two springs halve the extension", async () => {
