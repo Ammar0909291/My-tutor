@@ -639,6 +639,57 @@ describe('the physics depth probes are arithmetically true', () => {
     expect(correctText(book)).toContain('29 J')
   })
 
+  it('batch 9: the electromagnetism arithmetic', async () => {
+    const probes = await load()
+    const cou = find(probes, '+3.0 μC and −2.0 μC are 0.30 m apart')
+    expect((8.99e9 * 3.0e-6 * 2.0e-6) / 0.30 ** 2).toBeCloseTo(0.599, 3)
+    expect((8.99e9 * 3.0e-6 * 2.0e-6) / 0.30).toBeCloseTo(0.180, 3) // r, not r^2
+    expect(correctText(cou)).toContain('0.60 N')
+
+    // Capacitors ADD in parallel; 2 uF is the correct SERIES value for 3 and 6.
+    const cap = find(probes, '3 μF and a 6 μF capacitor are connected in PARALLEL')
+    expect(3 + 6).toBe(9)
+    expect(1 / (1 / 3 + 1 / 6)).toBe(2)
+    expect(correctText(cap)).toContain('9 μF')
+
+    const ser = find(probes, '4.0 Ω resistor and a 2.0 Ω resistor in SERIES')
+    expect(6.0 / (4.0 + 2.0)).toBe(1.0)
+    expect(1.0 * 4.0).toBe(4.0)
+    expect(correctText(ser)).toContain('4.0 V')
+
+    const el = find(probes, 'net charge of −3.2 × 10⁻¹⁹ C')
+    expect(3.2e-19 / 1.6e-19).toBeCloseTo(2, 12)
+    expect(correctText(el)).toContain('Two')
+
+    const cur = find(probes, 'charge of 12 C passes a point')
+    expect(12 / 4.0).toBe(3.0)
+    expect(correctText(cur)).toContain('3.0 A')
+
+    const wk = find(probes, 'charge of 2.0 μC through a potential difference')
+    expect(2.0e-6 * 12).toBeCloseTo(2.4e-5, 12)
+    expect(correctText(wk)).toContain('2.4 × 10⁻⁵')
+
+    const kwh = find(probes, '60 W lamp is left on for 5.0 hours')
+    expect((60 / 1000) * 5.0).toBeCloseTo(0.30, 12)
+    expect(correctText(kwh)).toContain('0.30 kWh')
+
+    const cell = find(probes, 'emf 1.5 V and internal resistance 0.50 Ω')
+    const I = 1.5 / (0.50 + 2.5)
+    expect(I).toBe(0.5)
+    expect(1.5 - I * 0.50).toBe(1.25)
+    expect(correctText(cell)).toContain('1.25 V')
+
+    const cE = find(probes, '100 μF capacitor charged to 20 V')
+    expect(0.5 * 100e-6 * 20 ** 2).toBeCloseTo(0.020, 12)
+    expect(100e-6 * 20 ** 2).toBeCloseTo(0.040, 12)  // the no-half distractor
+    expect(correctText(cE)).toContain('0.020 J')
+
+    const far = find(probes, 'coil of 200 turns')
+    expect((200 * 4.0e-3) / 0.020).toBeCloseTo(40, 10)
+    expect(4.0e-3 / 0.020).toBeCloseTo(0.20, 12)     // N omitted
+    expect(correctText(far)).toContain('40 V')
+  })
+
   it("Hooke: 3 N gives 6 cm, so 12 N would predict 24 cm; two springs halve the extension", async () => {
     const probes = await load()
     const limit = find(probes, 'stretches 6 cm when a 3 N weight')
