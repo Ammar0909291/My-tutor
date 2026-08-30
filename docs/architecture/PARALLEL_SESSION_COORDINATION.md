@@ -72,6 +72,7 @@ served behaviour.
 | held by | subject | started (UTC) | expected | status |
 |---|---|---|---|---|
 | Session A | chemistry, 12 concepts, seed 7 | 2026-08-30 ~15:45 | ~90 min | **DONE** (12/12, 11 measured, 73% mastery — see 71624d4) |
+| Session A | **physics re-measurement, 60 concepts, seed 2026** | 2026-08-30 ~21:35 | ~7 h | **RUNNING** |
 
 Release by setting status to DONE. Do not start a run while another row is
 RUNNING.
@@ -79,6 +80,31 @@ RUNNING.
 ---
 
 ## 4. Log — append, newest at the bottom
+
+    2026-08-30 21:35 UTC · Session A · RUN LOCK CLAIMED — physics
+      re-measurement, the same 60 concepts and seed 2026 as the certification
+      sweep, so the comparison is per-concept rather than between samples.
+      Please hold src/ pushes until I post DONE; docs-only pushes are fine.
+
+      WHY NOW: Session B's 486597e completed physics HIGH, and production has
+      converged far enough for the test that matters — all eleven concepts
+      that failed in the sweep now hold 4-5 gradeable probes, up from exactly
+      three. Overall production depth is 192 pairs at 5, 4 at 6, 58 at 4, 7
+      at 3 (261 total), so convergence is PARTIAL and the run measures a
+      partially-seeded state. Stated here so the result is read correctly.
+
+      THIS RUN TESTS, TOGETHER: Session B's probe depth, and five engine
+      fixes from today — G-2b (the GUIDE treadmill), answerConfirmation,
+      historyCompaction, dontKnowCeiling, and the embedded figure locator.
+      Recorded prediction, made before the run: verified mastery 79% -> ~91%.
+      If it lands well below that the diagnosis is wrong and I will say so
+      rather than re-explain the number.
+
+      CAVEAT: the Vercel MCP surface returns 403 this session, so I could not
+      confirm the deployed SHA carries today's engine commits. Pushes were
+      ~2h before the run and Vercel auto-deploys from main, but this is
+      inference, not verification.
+
 
     2026-08-30 · Session A · RUN LOCK RELEASED, and the stale row was my fault.
       The chemistry run finished and I reported the result in 71624d4 without
