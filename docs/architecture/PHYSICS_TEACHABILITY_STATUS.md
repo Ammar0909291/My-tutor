@@ -811,3 +811,52 @@ the open question is only whether it needs a ceiling. Until the latch fix is
 measured, there is no way to tell whether a help-request-heavy session still
 fails without it — the two mechanisms were always measured together. Changing
 both at once would make the next run uninterpretable.
+
+
+---
+
+# `scripts/qa/teachingDefectScan.ts` — making the evidence re-derivable
+
+Every quality claim in this document so far rested on one person reading twelve
+transcripts. That is thin, and it is not reproducible: a later session cannot
+check it without repeating the reading, and a regression would be invisible.
+
+The scan counts six defect signatures, each one found by READING the 60-run
+transcripts, verified against the code that produced it, and only then made
+countable. Run against the same corpus it reproduces every number this document
+derived by hand — 37/58 repetition, exactly the 5 latched sessions, 3 stranded
+option references, 3 phase regressions, 1 ASCII fallback.
+
+**It is explicitly NOT a quality score, and must never be reported as one.**
+`strugglingLearnerHarness.ts`'s own header already says why and is right: "no
+regex substitutes for that judgment." A lesson can trip zero signatures and
+still teach badly — thin explanations, a correct answer met with prose that
+ignores it, a fact stated backwards. `phys.therm.refrigerators`, the worst
+transcript in the hand sample at 4/10, trips almost none of them. The ~6.0/10
+average therefore still rests on reading, and criterion 5 stays unmet on the
+evidence I actually have.
+
+What the scan buys is the other half: a fix's effect becomes a number anyone can
+re-derive from the same transcripts, rather than a claim resting on which
+sessions someone happened to read.
+
+    npx tsx scripts/qa/teachingDefectScan.ts <runDir> [<baselineDir>]
+
+With two directories it compares only the concepts both runs measured, which is
+the only fair reading of two different samples.
+
+## Repetition fix, re-derived by the scan (17 shared concepts)
+
+| signature | before | after |
+|---|---|---|
+| authoredExplanationRepeated | 12/17 (71%) | **6/17 (35%)** |
+| probeLatch | 2/17 | 0/17 |
+| correctAnswerNoCredit | 3/17 | 2/17 |
+| **phaseRegressionOnCorrect** | 0/17 | **2/17** |
+| verified mastery | 13/17 (76%) | 14/17 (82%) |
+
+Two things to be honest about. The `probeLatch` drop to 0/17 is NOT the latch
+fix — that run predates it; at n=2 it is noise. And `phaseRegressionOnCorrect`
+moved the WRONG way, 0 to 2. Also n=2, also noise on its face, but it is a
+counter-signal and is recorded rather than omitted, precisely because it is the
+kind of number that is easy not to mention.
