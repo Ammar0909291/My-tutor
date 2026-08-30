@@ -46,6 +46,7 @@ const SIGNATURES = [
   'correctAnswerNoCredit',
   'phaseRegressionOnCorrect',
   'asciiArtFallback',
+  'taughtHowToAsk',
 ] as const
 type Signature = (typeof SIGNATURES)[number]
 
@@ -58,6 +59,12 @@ function answeredOption(prev: Payload, sent: string): { correct: boolean } | nul
   const i = m.options.indexOf(sent)
   return i === -1 ? null : { correct: i === m.correctIndex }
 }
+
+/** A learner asking to SEE something. */
+const ASKS_TO_SEE = /show me (the )?(picture|diagram|image)|show the picture|display the image|picture or diagram/i
+/** A reply that teaches them the WORDS to ask with instead of showing it. */
+const TEACHES_HOW_TO_ASK =
+  /you can (simply |just )?(say|type|ask)|simply say|just say ["\u201c]|which action will let you view|lets? the (person|system) know/i
 
 function scan(t: Transcript): Record<Signature, number> {
   const hits = Object.fromEntries(SIGNATURES.map((s) => [s, 0])) as Record<Signature, number>
@@ -96,6 +103,18 @@ function scan(t: Transcript): Record<Signature, number> {
     //     Whatever the learner sees, they cannot answer what is not there.
     if (!cur.mcq && /\boption [A-D]\b|\byou (?:picked|chose|selected)\b/i.test(cur.text ?? '')) {
       hits.strandedProbeReference += 1
+    }
+
+    // 7 · the learner asked to SEE the figure and was taught the words to ask
+    //     with. Measured at 5 of 58 sessions (9%) on the 2026-08-30 run, every
+    //     instance triggered by the same request. In phys.wave.sound-intensity
+    //     the learner then dutifully repeated the suggested phrase and was told
+    //     "I can't display the image again" — two turns of the lesson spent on
+    //     how to operate the tutor, ending in a refusal. Same family as the
+    //     manner-adverb excursion (86a5346): a meta topic displacing the
+    //     subject. One of the five latched sessions is on this list too.
+    if (ASKS_TO_SEE.test(turns[i].sent) && TEACHES_HOW_TO_ASK.test(cur.text ?? '')) {
+      hits.taughtHowToAsk += 1
     }
 
     const ans = answeredOption(prev, turns[i].sent)

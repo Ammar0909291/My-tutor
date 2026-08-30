@@ -860,3 +860,66 @@ fix — that run predates it; at n=2 it is noise. And `phaseRegressionOnCorrect`
 moved the WRONG way, 0 to 2. Also n=2, also noise on its face, but it is a
 counter-signal and is recorded rather than omitted, precisely because it is the
 kind of number that is easy not to mention.
+
+
+---
+
+# Quality, re-rated on a properly random sample (2026-08-30)
+
+The ~6.0/10 figure in this file came from 12 transcripts of which 8 were chosen
+BECAUSE they failed. That is a biased sample, and re-weighting it was an
+estimate, not a measurement. Eight more were drawn at random (seeded) from the
+46 measured sessions not already read, and read end to end.
+
+| concept | tier | mastered | rating |
+|---|---|---|---|
+| `phys.mech.pressure-fluids` | developing | yes | 8 |
+| `phys.em.electrical-power` | developing | yes | 8 |
+| `phys.qm.quantum-tunneling` | expert | yes | 7 |
+| `phys.em.electric-field` | proficient | yes | 6 |
+| `phys.mech.generalized-coordinates` | expert | yes | 5 |
+| `phys.em.gauss-law` | proficient | yes | 5 |
+| `phys.mod.nuclear-reactions` | advanced | yes | 5 |
+| `phys.em.magnetic-dipole` | proficient | yes | 5 |
+| `phys.astro.black-holes` | expert | yes | 5 |
+| `phys.wave.sound-intensity` | proficient | no | 4 |
+
+**Random-sample mean: 5.8/10 (n=10).** That is LOWER than the 6.0 this file
+previously reported, so the earlier re-weighting was mildly optimistic and the
+number is corrected downward. The floor criterion still holds — nothing below
+4/10 — and criterion 5 remains clearly unmet.
+
+`phys.em.electrical-power` is what a good one looks like: concrete throughout
+(a kettle element beside its own flex, then a battery/bulb/switch loop), a
+genuine four-option question, a wrong answer met with the actual reason
+("the switch is almost a perfect conductor"), and mastery reached in twelve
+turns with no filler.
+
+## A seventh defect, found by reading and then measured
+
+**A request to SEE the figure answered by teaching the learner the words to ask
+with.** In `phys.wave.sound-intensity` the learner types "can you show the
+picture again, i want to look one more time" and the tutor replies:
+
+> When you want to see a diagram or image again, you can simply say, "Show me
+> the picture again" or "Can you show it one more time?"
+
+The learner then dutifully types "Show me the picture again." and is told "I
+can't display the image again." Two turns of a physics lesson spent on how to
+operate the tutor, ending in a refusal.
+
+Measured across the corpus: **5 of 58 sessions (9%)** — `longitudinal-waves`,
+`mirrors`, `sound-intensity`, `electric-current`, `nuclear-reactions`. Every
+instance is triggered by the same learner sentence, and the reply quotes that
+sentence back as the phrase to say, which points at the topic extractor reading
+the request as a subject. It is the same family as the manner-adverb excursion
+fixed in `86a5346`, where "explain it slowly" became a lesson on the adverb
+*slowly*. Note that `phys.opt.mirrors` is also one of the five latched sessions.
+
+Added to `teachingDefectScan.ts` as `taughtHowToAsk` so the fix, when it comes,
+has a before number to be judged against.
+
+**NOT FIXED YET, and deliberately so.** The fix is server-side — topic
+extraction or the visual-request path — and a deploy would land in the middle of
+the 60-concept run now measuring the three fixes already shipped. It is the
+first thing to do once that run lands.
