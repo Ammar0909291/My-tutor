@@ -3419,12 +3419,26 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         droppedUntagged: historyScope.droppedUntagged,
       }))
     }
-    const historyMessages = [...historyScope.messages]
-      .reverse()
-      .map((m) => ({
-        role: m.role === MessageRole.USER ? ('user' as const) : ('assistant' as const),
-        content: m.content,
-      }))
+    // CRITERION 7 — the model cannot recite what it cannot see.
+    //
+    // An authored explanation served by Explanation Memory becomes an assistant
+    // message, and the transcript is the model's context on every later turn, so
+    // it copies the text back. Measured across the physics sweep: 52 of 58
+    // verbatim-repeat pairs are exactly that, AFTER the advisory "do NOT repeat"
+    // line moved affected sessions 65% -> 31% and stalled. This compacts those
+    // turns OUT OF THE MODEL'S VIEW ONLY — the stored Message row is untouched,
+    // so the learner's own transcript still shows the full explanation where it
+    // was served. See historyCompaction.ts.
+    const { compactServedExplanations } = await import('@/lib/teaching/historyCompaction')
+    const historyMessages = compactServedExplanations(
+      [...historyScope.messages]
+        .reverse()
+        .map((m) => ({
+          role: m.role === MessageRole.USER ? ('user' as const) : ('assistant' as const),
+          content: m.content,
+          provider: m.provider,
+        })),
+    )
 
     // K3 (EOS Kernel Pipeline) — shadow-mode invocation. Off by default;
     // ENABLE_KERNEL_PIPELINE=1 activates read-only shadow. The pipeline
