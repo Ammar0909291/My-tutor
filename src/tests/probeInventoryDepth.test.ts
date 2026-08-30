@@ -794,6 +794,15 @@ describe('the physics depth probes are arithmetically true', () => {
     expect(correctText(coup)).toContain('Nine states')
   })
 
+  it('batch 14: the proton charge comes out as an integer from thirds', async () => {
+    const probes = await load()
+    const p = find(probes, 'two up quarks and one down quark')
+    // The arithmetic that made the quark model credible.
+    expect(2 / 3 + 2 / 3 - 1 / 3).toBeCloseTo(1, 12)
+    expect(2 / 3 + 2 / 3 + 1 / 3).toBeCloseTo(5 / 3, 12) // the dropped-sign option
+    expect(correctText(p)).toContain('+1')
+  })
+
   it("Hooke: 3 N gives 6 cm, so 12 N would predict 24 cm; two springs halve the extension", async () => {
     const probes = await load()
     const limit = find(probes, 'stretches 6 cm when a 3 N weight')
