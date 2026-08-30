@@ -1777,6 +1777,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     // read at the withhold call site ~1600 lines below) so both places agree
     // on exactly which turns the gate considered question-eligible.
     let phaseAllowsProbeHoisted = false
+    // CRITERION 5 (answerConfirmation.ts): how many answers this session has
+    // already had confirmed, used only to rotate the phrasing so a run of
+    // correct answers is not one canned sentence. Read from the pre-turn
+    // snapshot so it is a pure function of persisted state, never of this
+    // turn's own outcome.
+    let priorConfirmationsHoisted = 0
     // EOS M1 (Evidence Spine): decision facts hoisted for the parallel spine
     // emitter — observation only, zero effect on the turn.
     let evidenceMoveHoisted: string | null = null
@@ -3784,6 +3790,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         const { closingTurnWithholdsQuestion } = await import('@/lib/teaching/gateAssessment')
         const phaseBeforeTurn = (snapshot as { conversationState?: { phase?: unknown } } | null)
           ?.conversationState?.phase
+        {
+          const cs = (snapshot as {
+            conversationState?: { correctAtCheck?: number; correctAtPractice?: number }
+          } | null)?.conversationState
+          const n = (cs?.correctAtCheck ?? 0) + (cs?.correctAtPractice ?? 0)
+          priorConfirmationsHoisted = Number.isFinite(n) && n >= 0 ? n : 0
+        }
         // The same exclusions the memory path already applies, for the same
         // reasons: no content into a flooded mind (foundations/04 P5), lesson
         // one never opens with a quiz (first-lesson/02 §1), and an excursion
@@ -5268,6 +5281,32 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         const { normalizeMathDelimiters } = await import('@/lib/text/mathDelimiters')
         cleanText = normalizeMathDelimiters(cleanText)
       } catch { /* non-fatal — raw text is still better than no answer */ }
+
+      // CRITERION 5 — A CORRECT ANSWER IS TOLD IT WAS CORRECT.
+      //
+      // Measured 2026-08-30 by rubricScore.ts: only 39% of server-graded-correct
+      // answers in physics (57% in chemistry) were met with any acknowledgement
+      // that they were right. The gate is >= 90%. In phys.wave.spring-mass three
+      // consecutive correct answers drew "That's right.", then a bare "Here is a
+      // question to check your understanding:", then an offer of remediation.
+      //
+      // This states a fact the SERVER already established: it fires only on
+      // `mcqGradeHoisted.correct === true`, which is gradeMcqAnswer's comparison
+      // against an authored, human-reviewed key — not the model's self-report.
+      // On a wrong answer, on an ungraded turn, or on a reply that already
+      // confirms, it does nothing. See answerConfirmation.ts.
+      //
+      // Placed after the other repairs so it decorates the text that actually
+      // ships, and before the verifier so the verifier sees the final reply.
+      try {
+        const { confirmCorrectAnswer } = await import('@/lib/teaching/answerConfirmation')
+        const confirmed = confirmCorrectAnswer({
+          text: cleanText,
+          correct: mcqGradeHoisted?.correct ?? null,
+          priorConfirmations: priorConfirmationsHoisted,
+        })
+        cleanText = confirmed.text
+      } catch { /* non-fatal — the teaching is still better than no answer */ }
 
       // K6 — EOS Runtime integration: run the K5 Output Verifier on the
       // cleaned text. Off by default; behind ENABLE_OUTPUT_VERIFIER (or the
