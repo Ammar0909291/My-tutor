@@ -140,12 +140,41 @@ describe('expand is a study mode, not a second figure', () => {
     expect(rules.some((r) => /overflow:\s*auto/.test(r))).toBe(true)
   })
 
-  it('the expanded budget reaches .stage, or expanding does nothing on a phone', () => {
+  it('the in-flow fallback budget reaches .stage, or expanding does nothing on a phone', () => {
     // The narrow container query declares the token ON `.stage`, and a
     // declaration on the element beats one inherited from an ancestor however
     // specific that ancestor's selector. Measured before this: the figure and
     // its canvas were unchanged at 1130px and 260px after expanding.
-    expect(FIG_CSS).toMatch(/\.frameExpanded \.stage,\s*\n\s*\.frame:fullscreen \.stage/)
+    expect(FIG_CSS).toMatch(/\.frameExpanded \.stage\s*\{[^}]*--fig-scene-h:\s*inherit/)
+  })
+
+  it('fullscreen drives the scene through the TOKENS, which inline styles read', () => {
+    // ThreeDVisual sets width, max-height and aspect-ratio inline, and an
+    // inline declaration cannot be overridden from a stylesheet — so a
+    // `max-height: none` rule aimed at the box was simply ignored and the scene
+    // stayed capped at 640px. The tokens are the only way in.
+    const fs = [...FIG_CSS.matchAll(/\.frame:fullscreen\s*\{[^}]*\}/g)].map((m) => m[0]).join('\n')
+    expect(fs).toMatch(/--fig-scene-h:\s*none/)
+    expect(fs).toMatch(/--fig-scene-w:\s*auto/)
+    expect(fs).toMatch(/--fig-scene-aspect:\s*4 \/ 3/)
+    expect(THREE_D).toMatch(/width: 'var\(--fig-scene-w, 100%\)'/)
+  })
+
+  it('in fullscreen the SCENE takes the leftover height, so the figure fits the window', () => {
+    // A fixed share of the viewport ignores the ~500px of header, stepper,
+    // legend, explanation, controls and disclosure around it, so the total ran
+    // past the screen and had to be scrolled. Measured after: 1920x1080,
+    // 1536x900 and 1280x720 all report scrollHeight === clientHeight.
+    expect(FIG_CSS).toMatch(/\.frame:fullscreen \.stage \[data-scene-box\]/)
+    expect(FIG_CSS).toMatch(/\.frame:fullscreen \.stage\s*\{[^}]*flex: 1 1 auto/)
+    expect(THREE_D).toContain('data-scene-box')
+  })
+
+  it('the controls stop taking a row of their own once the rail is wide', () => {
+    // A full-width controls row is right while the rail is narrow and ~100px of
+    // pure cost once it is not — measured at 1280x720 fullscreen, rail 265px
+    // with the span and ~165px without, all of it taken out of the picture.
+    expect(FIG_CSS).toMatch(/@container \(min-width: 900px\)\s*\{\s*\.railWide\s*\{\s*grid-column:\s*auto/)
   })
 
   it('the scene may change SHAPE too — height alone cannot grow a narrow scene', () => {

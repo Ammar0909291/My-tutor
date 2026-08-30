@@ -173,7 +173,16 @@
   min-width: 0;
 }
 
+/* The controls take a full row so four sliders can pair up instead of stacking
+ * one per line — which is right while the rail is narrow. Given real width they
+ * fit BESIDE the legend and the explanation, and a row of their own is then
+ * ~100px of pure cost: measured in fullscreen at 1280x720, rail 265px with the
+ * span and ~165px without, all of it taken straight out of the picture. */
 .railWide { grid-column: 1 / -1; }
+
+@container (min-width: 900px) {
+  .railWide { grid-column: auto; }
+}
 
 .panel {
   padding: 11px 13px;
@@ -524,28 +533,79 @@
  * however specific that ancestor's selector — so the expanded budget has to
  * reach `.stage` directly or expanding does nothing on a phone. Measured: the
  * figure and its canvas were unchanged at 1130px and 260px before this. */
-.frameExpanded .stage,
-.frame:fullscreen .stage {
+.frameExpanded .stage {
   --fig-scene-h: inherit;
 }
 
 /* Let the scene grow taller than 4:3 while it has the screen to itself. On a
  * narrow viewport the 4:3 box is width-limited, so height alone could not make
  * the picture bigger. */
-.frameExpanded,
-.frame:fullscreen {
+.frameExpanded {
   --fig-scene-aspect: 1 / 1;
 }
 
-/* The top layer. The element fills the screen, and its OWN box scrolls, so a
- * tall figure is always reachable however short the screen is — the failure
- * that was reported. */
+/* ── the top layer ───────────────────────────────────────────────────────
+ * THE WHOLE FIGURE FITS THE WINDOW. Sizing the scene as a fixed share of the
+ * viewport (`min(64vh, 760px)`) ignores what sits around it — header, stepper,
+ * legend, explanation, controls and the disclosure add ~500px — so the total
+ * ran past the screen and the learner had to scroll a figure that was supposed
+ * to be filling their display.
+ *
+ * Instead the frame is a flex column and the SCENE is the item that grows: the
+ * chrome takes its natural height, the picture takes exactly what is left, and
+ * the sum is the window by construction, at any window size, for any figure.
+ * The scene ends up bigger than the fixed budget on a large screen and smaller
+ * on a cramped one, which is the right way round.
+ *
+ * `overflow: auto` and a floor remain as a safety net: on a very short window
+ * the chrome alone can exceed the height, and scrolling a little beats
+ * crushing the picture to nothing. */
 .frame:fullscreen {
+  height: 100%;
   overflow: auto;
-  padding: 20px 22px 24px;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 20px 18px;
   border-radius: 0;
   background: var(--bg-surface);
-  --fig-scene-h: min(64vh, 760px);
+
+  /* Both of these reach the scene box through ThreeDVisual's INLINE style, and
+   * an inline declaration cannot be overridden from a stylesheet — so the
+   * tokens are the only way in. `none` lifts the height cap so the flex column
+   * below decides the height; the shape returns to the scene's own proportion,
+   * overriding the 1/1 the in-flow fallback sets (its class is applied here
+   * too, since both mean "expanded"). */
+  --fig-scene-h: none;
+  --fig-scene-aspect: 4 / 3;
+  --fig-scene-w: auto;
+}
+
+.frame:fullscreen .body { flex: 1 1 auto; min-height: 0; }
+
+.frame:fullscreen .stage {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* The scene box itself. `height: 100%` makes the explicit height win over the
+ * inline `aspect-ratio`, which only applies while a dimension is auto — so the
+ * picture fills the space the flex column just handed it. */
+.frame:fullscreen .stage [data-scene-box] {
+  flex: 1 1 auto;
+  height: 100%;
+  min-height: 220px;
+  max-height: none;
+  /* Height-driven, with the width following the scene's own proportion and the
+   * box centred. Left to span the full width it became a 1878x557 band on a
+   * 1920 screen: the camera's vertical field of view sets how large the drawing
+   * can be, so the extra width added empty space beside the picture rather than
+   * picture. `width: auto` with an aspect ratio keeps the same drawing size and
+   * drops the dead margins. */
+  width: auto;
+  max-width: 100%;
+  align-self: center;
 }
 
 /* Backdrop is the browser's, so no scrim element is needed or wanted. */

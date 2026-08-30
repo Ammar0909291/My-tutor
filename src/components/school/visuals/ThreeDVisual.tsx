@@ -90,8 +90,18 @@ export function ThreeDVisual({
     <div
       role="img"
       aria-label={ariaLabel}
+      // A stable hook for a FRAME that needs to drive this box's height rather
+      // than let it size itself — see ExplainerFigure's fullscreen rule, where
+      // the scene takes exactly the height left over instead of a fixed share
+      // of the viewport. An attribute, not a class, so no caller's styling
+      // changes and nothing here depends on a particular stylesheet.
+      data-scene-box=""
       style={{
-        width: '100%',
+        // Same reasoning as the two tokens below: a frame that drives this
+        // box's height needs the width to follow the scene's proportion rather
+        // than stretch, and an inline declaration cannot be overridden from a
+        // stylesheet. Fallback is the previous constant.
+        width: 'var(--fig-scene-w, 100%)',
         // The frame may also say what SHAPE the scene should be. On a narrow
         // screen a 4:3 box is width-limited long before it is height-limited —
         // at 350px wide that is a 262px scene however much height the budget
