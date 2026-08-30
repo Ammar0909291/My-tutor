@@ -923,3 +923,61 @@ has a before number to be judged against.
 extraction or the visual-request path — and a deploy would land in the middle of
 the 60-concept run now measuring the three fixes already shipped. It is the
 first thing to do once that run lands.
+
+
+---
+
+# Interim read of the certification re-run (44/60), and what it says about the latch fix
+
+Partial and labelled as such — the run is still going. But two things are
+already clear enough to act on, and one of them corrects a reading I would
+otherwise have taken from the defect scan.
+
+## `probeLatch` did NOT stay flat because the fix failed
+
+The scan reports `probeLatch` 2/35 after against 3/35 before, which reads like
+a fix that barely moved. Reading the two sessions says otherwise. In
+`phys.em.magnetic-dipole` the learner answers wrong at T8 and the reply is
+"Not quite — the answer was: Geographic North. Let me check your thinking with
+this." **carrying a probe on that same turn** — which is exactly what the fix
+was for, and what the old build could not do.
+
+The signature is too blunt to tell the two mechanisms apart: it asks "was any
+keyed probe served after the first wrong answer", which was the deadlock's
+shape and is also the shape of a session that simply stops being asked.
+Measuring the deadlock specifically — did a probe come back ON the grading
+turn:
+
+| | sessions with a wrong answer | probe re-served on that turn | still dead |
+|---|---|---|---|
+| before | 57 | 12 (21%) | 3 |
+| after (partial) | 41 | 11 (**27%**) | 1 |
+
+And the one remaining "dead" case, `phys.opt.optical-instruments`, is not the
+deadlock either: the probe was correctly spent by the wrong answer, and what
+follows is three consecutive help-requests with no probe.
+
+## The remaining stall is D4b, and now it is the only one
+
+Every session that ends with NOTHING graded, split by whether it ran out of
+budget after consecutive help-requests or simply hit the harness ceiling:
+
+| | stalled, nothing graded | of those, ending in >=2 consecutive help-requests |
+|---|---|---|
+| before (58 measured) | 5 | **5** |
+| after (41 measured, partial) | 4 | **2** |
+
+The other two after-run stalls (`fluctuations-correlations` at 19 turns,
+`higgs-mechanism` at 21) ran to the harness's own turn ceiling — the instrument
+limit already documented, not a product failure.
+
+So the genuine help-request stall is 5/58 before and 2/41 so far. Too small to
+claim significance, and not claimed. What HAS changed is the diagnosis: with
+the deadlock closed, **every remaining stall of this kind ends in consecutive
+help-request turns**, which is `D4b-ANSWER-STUDENT-FIRST` and nothing else.
+
+That converts the D4b ceiling from a plausible next step into the named one,
+with its intervention specified: after N consecutive help-request turns with
+nothing graded, the turn must answer the learner AND attach a probe, rather
+than choosing between them. Still not implemented — it is server-side and this
+run is measuring the current build.
