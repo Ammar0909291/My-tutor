@@ -690,6 +690,62 @@ describe('the physics depth probes are arithmetically true', () => {
     expect(correctText(far)).toContain('40 V')
   })
 
+  it('batch 10: the electromagnetism arithmetic, second set', async () => {
+    const probes = await load()
+    const kcl = find(probes, 'currents of 3.0 A and 2.0 A flow IN')
+    expect(3.0 + 2.0 - 1.5).toBe(3.5)
+    expect(correctText(kcl)).toContain('3.5 A')
+
+    const lc = find(probes, 'L = 2.0 mH and C = 50 μF')
+    expect(2.0e-3 * 50e-6).toBeCloseTo(1.0e-7, 15)
+    expect(1 / Math.sqrt(1.0e-7)).toBeCloseTo(3162, 0)
+    expect(1 / 1.0e-7).toBe(1.0e7)             // the un-rooted distractor
+    expect(correctText(lc)).toContain('3.2 × 10³')
+
+    // 60 degrees to the PLANE is 30 degrees from the normal.
+    const flux = find(probes, '0.20 m by 0.30 m sits in a uniform 0.40 T')
+    expect(0.40 * (0.20 * 0.30) * Math.cos(Math.PI / 6)).toBeCloseTo(0.0208, 4)
+    expect(0.40 * (0.20 * 0.30) * Math.cos(Math.PI / 3)).toBeCloseTo(0.012, 3)
+    expect(correctText(flux)).toContain('0.021 Wb')
+
+    const bil = find(probes, '0.50 m length of wire carrying 3.0 A')
+    expect(0.20 * 3.0 * 0.50).toBeCloseTo(0.30, 12)
+    expect(correctText(bil)).toContain('0.30 N')
+
+    const ohm = find(probes, 'current of 0.25 A when 6.0 V')
+    expect(6.0 / 0.25).toBe(24)
+    expect(6.0 * 0.25).toBe(1.5)               // the multiplied distractor
+    expect(correctText(ohm)).toContain('24 Ω')
+
+    const pot = find(probes, '1.018 V balances at 60.0 cm')
+    expect(1.5 / (1.018 / 60.0)).toBeCloseTo(88.4, 1)
+    expect(correctText(pot)).toContain('88 cm')
+
+    // Megohms with microfarads give seconds: the prefixes cancel exactly.
+    const rc = find(probes, '2.0 MΩ resistor charges a 5.0 μF')
+    expect(2.0e6 * 5.0e-6).toBeCloseTo(10, 12)
+    expect(correctText(rc)).toContain('10 s')
+
+    // Fixed volume: doubling the length halves the cross-section, so R x 4.
+    const str = find(probes, 'stretched uniformly to twice its original length')
+    expect(2 / 0.5).toBe(4)
+    expect(correctText(str)).toContain('4R')
+
+    const ind = find(probes, '0.50 H inductor carrying a steady current')
+    expect(0.5 * 0.50 * 4.0 ** 2).toBe(4.0)
+    expect(0.50 * 4.0 ** 2).toBe(8.0)          // the no-half distractor
+    expect(correctText(ind)).toContain('4.0 J')
+
+    const sol = find(probes, '500 turns per metre and carrying 2.0 A')
+    expect(4 * Math.PI * 1e-7 * 500 * 2.0).toBeCloseTo(1.257e-3, 6)
+    expect(correctText(sol)).toContain('1.3 × 10⁻³')
+
+    const wb = find(probes, 'P = 200 Ω, Q = 50 Ω and R = 120 Ω')
+    expect((120 * 50) / 200).toBe(30)
+    expect((120 * 200) / 50).toBe(480)         // the inverted-ratio distractor
+    expect(correctText(wb)).toContain('30 Ω')
+  })
+
   it("Hooke: 3 N gives 6 cm, so 12 N would predict 24 cm; two springs halve the extension", async () => {
     const probes = await load()
     const limit = find(probes, 'stretches 6 cm when a 3 N weight')
