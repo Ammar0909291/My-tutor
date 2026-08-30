@@ -2815,3 +2815,26 @@ contained in `main`'s current tip.
   stalled sessions are also suppressed on their non-help turns (19% vs 43%), so D4b is a contributing
   mechanism, not the whole cause. **No change made to the CUE decision layer**: adding a ceiling to
   D4b is the plausible next step but would be hot-path surgery justified by a partial explanation.
+- **Sixth defect fixed — a restart over an ABANDONED lesson attempt did not restart.** This is what
+  the 60-run's unexplained 4-turn session was. `phys.mech.normal-force` closed on turn THREE having
+  taught and graded nothing, its completion payload carrying `durationSeconds: 928967` — 10.7 days.
+  `lesson-init` opened an attempt for `latest === null` or `COMPLETED && isReteach` and fell through
+  to null for **IN_PROGRESS**, so `attemptIsFreshStart` stayed false and the transient state was never
+  cleared: the fresh lesson inherited the abandoned attempt's ladder phase (turn one arrived at
+  PRACTICE) and its spent concept budget. Right for `resume` — the file's own comment calls it "the
+  ONE mode that never means start again" — and silently wrong for `restart`, whose lesson-opening
+  prompt says "teach it from the beginning". An abandoned attempt is the COMMON case: a learner who
+  walks away mid-lesson leaves an IN_PROGRESS row nothing ever completes, so a real learner returning
+  after a break got a lesson that closed on its third turn. Rule extracted to a pure
+  `lessonAttemptStartDecision(latest, mode)` with the missing case, plus `resetStartedAt` so the
+  reused row's clock moves to now. `resume`/`next` untouched and pinned by test. **Six existing
+  source-text guards** asserted the old inlined literals; each was moved to assert the same invariant
+  against the pure function (behaviour, not a regex over route source), and the one guard whose
+  invariant this deliberately narrows was rewritten with the reason rather than deleted.
+- **Two quality measurements that did NOT justify a change**, recorded because measuring and then not
+  acting is the point: ASCII-art fallback figures occur in **1 of 58 sessions (2%)** — a one-off; and
+  "38% of correct answers move no mastery counter" is a real number with a wrong reading — 76 of
+  those 94 are the ladder ADVANCING (`GUIDE>CHECK`, `DEMONSTRATE>GUIDE`), which is the documented
+  design from `65d1f28`. The genuine residue is 18/245 (7%), of which **3 moved the learner
+  backwards** on a correct answer. Too few to act on; named, not fixed.
+- Full suite 493 files / 10,748 passed / 9 skipped; `tsc --noEmit` clean.

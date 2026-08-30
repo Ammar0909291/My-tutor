@@ -617,3 +617,87 @@ to the hot path justified by a partial explanation. This file's own history is a
 list of times a plausible mechanism turned out to be wrong (three in the section
 above alone). It is written down as the next step, with the evidence needed to
 act on it, rather than shipped on a hunch.
+
+
+---
+
+# The 4-turn session, explained — restart over an abandoned attempt
+
+The 60-run left one anomaly unexplained: `phys.mech.normal-force` ran only 4
+turns, was served no keyed probe at all, and its trajectory read
+`PRACTICE > CHECK` — it did not start at the beginning of the ladder. It is a
+real defect, and the transcript names it.
+
+The completion payload on turn 3 carried **`durationSeconds: 928967`** — 10.7
+days. The harness sent `mode: 'restart'`; what it got was a resumption of an
+attempt abandoned ten days earlier by some previous run on the same account.
+Turn one arrived already at PRACTICE, the concept turn budget was already spent,
+and the lesson closed on turn three with "Let's pause Normal Force and Constraint
+Forces here for now" — having taught nothing and graded nothing.
+
+## Cause
+
+`lesson-init/route.ts` decided whether to open an attempt with:
+
+```ts
+const reason = latest === null
+  ? 'first-start'
+  : latest.status === 'COMPLETED' && isReteach ? `re-open for mode=${mode}`
+  : null
+```
+
+An **IN_PROGRESS** attempt falls through to `null`, so nothing opens,
+`attemptIsFreshStart` stays false, and `clearTransientStateForNewAttempt` never
+runs. That is right for `resume` — the file's own comment calls resume "the ONE
+mode that never means start again" — and silently wrong for `restart`, whose own
+lesson-opening prompt reads "Open lesson X now and teach it from the beginning."
+
+An abandoned attempt is the COMMON case, not an edge one: a learner who walks
+away mid-lesson leaves an IN_PROGRESS row that nothing ever completes. This is
+not a QA-only artefact — a real learner returning to a lesson after a break gets
+a lesson that closes on its third turn.
+
+## Fix
+
+The rule is extracted into a pure `lessonAttemptStartDecision(latest, mode)` in
+`lessonAttempt.ts` and given the missing case: `restart`/`review` over an
+IN_PROGRESS attempt is a fresh start. Because `openLessonAttempt` reuses the row
+rather than duplicating it, the decision also carries `resetStartedAt`, so the
+restarted attempt's clock moves to now instead of inheriting the ten-day one.
+
+`resume` and `next` are untouched, and that is pinned by test: resume must carry
+on (clearing there would drop the ladder the learner earned and the MCQ still on
+their screen) and next addresses a different lessonKey.
+
+**Six existing source-text guards asserted the old inlined literals.** Each was
+moved to assert the same invariant against the pure function — behaviour rather
+than a regex over route source, which is strictly stronger. One of them,
+`"reads the latest attempt first, so an IN_PROGRESS one is never disturbed"`,
+asserted an invariant this change deliberately narrows; it is rewritten with the
+reason rather than deleted, and now pins the part that actually matters (a lesson
+genuinely in flight is not discarded, via resume and next).
+
+**Not yet re-measured against production** — the same standing rule as the
+repetition fix. n=1 in this corpus, so the frequency in real traffic is unknown.
+
+---
+
+# Two quality measurements that did NOT justify a change
+
+Recorded because measuring and then NOT acting is the point of the rule.
+
+- **ASCII-art fallback figures.** `phys.em.gauss-law` answers a
+  visually-dependent learner with a text sketch that renders as broken slashes.
+  Measured across the corpus: **1 of 58 sessions (2%)**. A one-off, not a
+  systemic defect; no change made.
+- **"38% of correct answers are ungraded" — a real number with a wrong reading.**
+  Of 245 correct answers to server-keyed probes, 94 (38%) moved no mastery
+  counter. That headline is misleading. 76 of the 94 are `GUIDE > CHECK` (53) or
+  `DEMONSTRATE > GUIDE` (23) — the ladder *advancing*, which is the documented
+  and intended design (`65d1f28`: a correct answer at a delivery phase advances
+  and credits nothing, because the hollow-advancement protection lives at the
+  gates). The tutor acknowledges these conversationally ("Correct—", "Great
+  job!"). The genuinely suspicious residue is **18 of 245 (7%)** where a correct
+  answer produced neither credit nor forward movement, **3 of which moved the
+  learner BACKWARDS** — including one `CHECK > GUIDE` on a correct CHECK answer.
+  Three instances is too few to act on; it is written down as a named anomaly.

@@ -55,7 +55,15 @@ function toOutcome(row: {
  */
 export async function openLessonAttempt(
   db: Db,
-  args: { userId: string; subjectSlug: string; lessonKey: string; lessonTitle?: string | null },
+  args: {
+    userId: string; subjectSlug: string; lessonKey: string; lessonTitle?: string | null
+    /** Move an existing IN_PROGRESS row's clock to now. Set only when the
+     *  caller has decided this is a genuine restart over an ABANDONED attempt
+     *  (lessonAttemptStartDecision). Without it the reused row keeps the old
+     *  attempt's `startedAt`, and a restart days later reports a duration in
+     *  days — measured at 928967 seconds on physics lesson 24. */
+    resetStartedAt?: boolean
+  },
 ): Promise<{ id: string; outcome: LessonAttemptOutcome }> {
   const existing = await db.lessonAttempt.findFirst({
     where: {
@@ -66,7 +74,14 @@ export async function openLessonAttempt(
     },
     orderBy: { startedAt: 'desc' },
   })
-  if (existing) return { id: existing.id, outcome: toOutcome(existing) }
+  if (existing) {
+    if (!args.resetStartedAt) return { id: existing.id, outcome: toOutcome(existing) }
+    const restarted = await db.lessonAttempt.update({
+      where: { id: existing.id },
+      data: { startedAt: new Date() },
+    })
+    return { id: restarted.id, outcome: toOutcome(restarted) }
+  }
 
   const seed = startLessonAttempt(args.lessonKey, args.lessonTitle ?? null, new Date())
   const created = await db.lessonAttempt.create({

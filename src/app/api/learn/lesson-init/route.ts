@@ -306,21 +306,18 @@ export async function POST(req: Request) {
           const latest = await latestLessonAttempt(prisma, {
             userId, subjectSlug: learnSession.subject.slug, lessonKey: key,
           })
-          const isReteach = mode === 'restart' || mode === 'review'
-          const reason = latest === null
-            ? 'first-start'
-            : latest.status === 'COMPLETED' && isReteach
-              ? `re-open for mode=${mode}`
-              : null
+          const { lessonAttemptStartDecision } = await import('@/lib/teaching/lessonAttempt')
+          const decision = lessonAttemptStartDecision(latest, mode)
 
-          if (reason) {
+          if (decision.reason) {
             await openLessonAttempt(prisma, {
               userId, subjectSlug: learnSession.subject.slug,
               lessonKey: key, lessonTitle: lessonTitle ?? null,
+              resetStartedAt: decision.resetStartedAt,
             })
-            attemptIsFreshStart = mode !== 'resume'
+            attemptIsFreshStart = decision.freshStart
             console.info(
-              `[lesson-init] attempt opened for ${key}: ${reason}`
+              `[lesson-init] attempt opened for ${key}: ${decision.reason}`
               + ` (freshStart=${attemptIsFreshStart})`,
             )
           }

@@ -28,6 +28,7 @@
  */
 import { describe, it, expect } from 'vitest'
 import { clearTransientStateForNewAttempt } from '@/lib/teaching/attemptIsolation'
+import { lessonAttemptStartDecision } from '@/lib/teaching/lessonAttempt'
 import { applyTopicProgressEvidence, type TopicProgressDb } from '@/lib/teaching/topicProgressEvidence'
 
 const SRC = require('fs').readFileSync('src/app/api/learn/lesson-init/route.ts', 'utf8') as string
@@ -36,19 +37,37 @@ const HARNESS = require('fs').readFileSync('scripts/qa/phase-d-learning-loop.ts'
 // ── 1 · a completed concept under a NORMAL mode stays cached ────────────────
 
 describe('completed concept + normal mode remains completed/cached', () => {
+  // The reteach rule moved out of lesson-init into the pure
+  // `lessonAttemptStartDecision` when restart-over-an-abandoned-attempt was
+  // fixed. Asserting the behaviour is strictly stronger than the regex on
+  // source text it replaces; the wiring check below keeps lesson-init honest.
   it('only restart and review count as a re-teach', () => {
-    expect(SRC).toMatch(/const isReteach = mode === 'restart' \|\| mode === 'review'/)
+    for (const m of ['restart', 'review'] as const) {
+      expect(lessonAttemptStartDecision({ status: 'COMPLETED' }, m).freshStart).toBe(true)
+    }
+    for (const m of ['resume', 'next'] as const) {
+      expect(lessonAttemptStartDecision({ status: 'COMPLETED' }, m).reason).toBeNull()
+    }
+    expect(SRC).toMatch(/lessonAttemptStartDecision/)
   })
 
   it("a COMPLETED attempt is re-opened ONLY for a re-teach mode", () => {
     // `next` and `resume` fall through to `null` — no attempt is opened, so
     // the completion stands and nothing is cleared.
-    expect(SRC).toMatch(/latest\.status === 'COMPLETED' && isReteach/)
-    expect(SRC).toMatch(/: null\b/)
+    expect(lessonAttemptStartDecision({ status: 'COMPLETED' }, 'restart').reason)
+      .toContain('re-open')
+    expect(lessonAttemptStartDecision({ status: 'COMPLETED' }, 'next').reason).toBeNull()
+    expect(lessonAttemptStartDecision({ status: 'COMPLETED' }, 'resume').reason).toBeNull()
   })
 
   it('resume never triggers a fresh start even when an attempt opens', () => {
-    expect(SRC).toMatch(/attemptIsFreshStart = mode !== 'resume'/)
+    // Including the case where resume DOES open a row (latest === null): the
+    // row is opened so the duration is recorded, and nothing is cleared.
+    expect(lessonAttemptStartDecision(null, 'resume'))
+      .toMatchObject({ reason: 'first-start', freshStart: false })
+    for (const st of ['COMPLETED', 'IN_PROGRESS'] as const) {
+      expect(lessonAttemptStartDecision({ status: st }, 'resume').freshStart).toBe(false)
+    }
   })
 })
 
@@ -84,9 +103,11 @@ describe('certification mode cannot be triggered by normal learner flow', () => 
   it('the default lesson-advance path is not a re-teach mode', () => {
     // `next` is the ordinary forward path and is deliberately absent from
     // isReteach, so simply moving to the next lesson can never clear a ladder.
-    const isReteachLine = SRC.match(/const isReteach = .*/)?.[0] ?? ''
-    expect(isReteachLine).not.toContain("'next'")
-    expect(isReteachLine).not.toContain("'resume'")
+    for (const st of ['COMPLETED', 'IN_PROGRESS'] as const) {
+      const d = lessonAttemptStartDecision({ status: st }, 'next')
+      expect(d.reason).toBeNull()
+      expect(d.freshStart).toBe(false)
+    }
   })
 })
 
