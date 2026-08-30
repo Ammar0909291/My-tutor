@@ -22,7 +22,7 @@
  * summary.json, written to --out (default: a qa-runs/<subject>-<timestamp>
  * directory under this script's own folder — gitignored, see .gitignore).
  */
-import { readFileSync, writeFileSync, mkdirSync } from 'fs'
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs'
 import { join } from 'path'
 import { mergeCookies, csrfTokenFromJar } from '../math/certify'
 
@@ -58,7 +58,7 @@ interface Turn { label: string; sent: string; payload: Payload }
 
 function parseArgs(argv: string[]) {
   const subject = argv[0]
-  if (!subject) throw new Error('usage: strugglingLearnerHarness.ts <subject> [--difficulty=a,b] [--count=N] [--seed=N] [--out=dir]')
+  if (!subject) throw new Error('usage: strugglingLearnerHarness.ts <subject> [--difficulty=a,b] [--count=N] [--seed=N] [--out=dir] [--resume]')
   const opt = (name: string, def: string) => {
     const hit = argv.find((a) => a.startsWith(`--${name}=`))
     return hit ? hit.slice(name.length + 3) : def
@@ -69,6 +69,13 @@ function parseArgs(argv: string[]) {
     count: Number(opt('count', '30')),
     seed: Number(opt('seed', String(Date.now() % 100000))),
     outDir: opt('out', ''),
+    // A full run is hours long and the machine it runs on can be restarted out
+    // from under it. --resume re-reads the out dir and skips concepts that
+    // already produced a transcript, so a killed run continues instead of
+    // spending those hours again. The seed makes pickConcepts deterministic,
+    // so the resumed run walks the same list in the same order; only concepts
+    // that recorded ok:true are skipped, so a failed one is retried.
+    resume: argv.includes('--resume'),
   }
 }
 
@@ -300,7 +307,7 @@ function buildResult(concept: KgConcept, lesson: CurriculumLesson, sessionId: st
 }
 
 async function main() {
-  const { subject, difficulties, count, seed, outDir } = parseArgs(process.argv.slice(2))
+  const { subject, difficulties, count, seed, outDir, resume } = parseArgs(process.argv.slice(2))
   const cookie = await login()
 
   const cur = (await api(cookie, 'GET', `/api/curriculum?subject=${subject}`)) as unknown as { lessons: CurriculumLesson[] }
@@ -315,8 +322,27 @@ async function main() {
   mkdirSync(dir, { recursive: true })
 
   const summary: Array<Record<string, unknown>> = []
+  const alreadyDone = new Set<string>()
+  if (resume) {
+    const prior = join(dir, 'summary.json')
+    if (existsSync(prior)) {
+      const rows = JSON.parse(readFileSync(prior, 'utf8')) as Array<Record<string, unknown>>
+      for (const row of rows) {
+        if (row.ok === true && existsSync(join(dir, `out-${String(row.id).replace(/\./g, '_')}.json`))) {
+          summary.push(row)
+          alreadyDone.add(String(row.id))
+        }
+      }
+      console.log(`resuming: ${alreadyDone.size} concepts already recorded in ${dir}`)
+    }
+  }
+
   for (let i = 0; i < picked.length; i += 1) {
     const concept = picked[i]
+    if (alreadyDone.has(concept.id)) {
+      console.log(`[${i + 1}/${picked.length}] ${concept.id} SKIPPED (already recorded)`)
+      continue
+    }
     const lesson = lessonBySlug.get(concept.id)!
     const t0 = Date.now()
     try {
