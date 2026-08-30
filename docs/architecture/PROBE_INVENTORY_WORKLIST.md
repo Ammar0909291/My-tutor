@@ -98,28 +98,31 @@ against the whole corpus.
 
 ## Progress
 
-| batch | what | pairs to 5 | probes |
+**PHYSICS IS COMPLETE.** Every physics (concept, gradeBand) pair — all 261 of
+them, across all bands — now holds at least five gradeable probes. 430 probes
+authored across sixteen batches; 204 pairs lifted off the floor.
+
+| batch | scope | pairs | probes |
 |---|---|---|---|
-| 1 | physics MIDDLE + ADULT — units, scalars/vectors, velocity, displacement, acceleration, force, Newton I/II/III, momentum, impulse, power, kinematics, kinetic energy, Hooke's Law | 23 | 46 |
+| 1 | physics MIDDLE + ADULT | 23 | 46 |
 | 2 | the eight HIGH concepts measured one answer short | 8 | 14 |
-| 3 | phys.therm @ HIGH — all sixteen | 16 | 30 |
-| 4 | phys.wave @ HIGH — all sixteen | 16 | 32 |
-| 5 | phys.mech @ HIGH — first seventeen | 17 | 26 |
-| 6 | phys.mech @ HIGH — second seventeen | 17 | 23 |
-| 7 | phys.mech @ HIGH — last seventeen | 17 | 27 |
-| 8 | phys.mech @ HIGH — six slot-constrained pairs | 6 | 12 |
-| 9 | phys.em @ HIGH — first seventeen | 17 | 34 |
-| 10 | phys.em @ HIGH — last seventeen | 17 | 34 |
-| 11 | phys.mod @ HIGH — all nineteen | 19 | 25 |
-| **total** | | **173** | **303** |
+| 3 | phys.therm @ HIGH | 16 | 30 |
+| 4 | phys.wave @ HIGH | 16 | 32 |
+| 5–8 | phys.mech @ HIGH (four batches) | 57 | 88 |
+| 9–10 | phys.em @ HIGH (two batches) | 34 | 68 |
+| 11 | phys.mod @ HIGH | 19 | 25 |
+| 12 | phys.opt @ HIGH | 14 | 25 |
+| 13 | phys.qm @ HIGH | 16 | 23 |
+| 14 | phys.particle @ HIGH | 16 | 32 |
+| 15 | astro, meas, rel, stat @ HIGH | 31 | 40 |
+| 16 | physics UNDERGRADUATE | 7 | 7 |
+| **total** | | **257** | **430** |
 
-**Domains at zero pairs short at HIGH:** phys.mech, phys.em, phys.therm,
-phys.wave, phys.mod.
+**Remaining: chemistry, 158 pairs / 244 probes.** Session A's chemistry
+baseline (commit 71624d4) confirmed the ceiling is not subject-specific —
+mean keyed probes served 2.82, mean tail turns 1.8 when mastered against 8.3
+when not, matching physics to within noise. So chemistry is the same critical
+path, not a lower-priority tail.
 
-**Remaining in the corpus:** physics 84 pairs / 127 probes, chemistry 158
-pairs / 244 probes. The physics figure is 77 at HIGH plus 7 at
-UNDERGRADUATE; HIGH breaks down as qm 16, particle 16, stat 14, opt 14,
-rel 7, meas 5, astro 4, plus one slot-constrained pair.
-
-Regenerate the table above from `git log --oneline --grep "probe depth"`;
-regenerate the CSV with the command at the top of this file.
+Regenerate this table from `git log --oneline --grep "probe depth"`; regenerate
+the CSV with the command at the top of this file.

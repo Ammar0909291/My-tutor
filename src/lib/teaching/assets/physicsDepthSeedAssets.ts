@@ -6319,6 +6319,112 @@ const TAIL: SeedProbe[] = [
   },
 ]
 
+
+// ═══════════════════════════════════════════════════════════════════════════
+// BATCH 16 — the seven physics UNDERGRADUATE pairs. PHYSICS COMPLETE.
+// ═══════════════════════════════════════════════════════════════════════════
+
+const UG: SeedProbe[] = [
+  {
+    conceptId: 'phys.astro.black-holes', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: 'What is the event horizon of a black hole?',
+    choices: [
+      { text: 'The surface at which the escape velocity reaches the speed of light — inside it no signal can ever reach the outside', isCorrect: true },
+      { text: 'The physical surface of the collapsed object itself', isCorrect: false },
+      { text: 'The point at which the tidal forces become large enough to destroy an infalling body', isCorrect: false },
+      { text: 'The outer edge of the accretion disc of infalling matter', isCorrect: false },
+    ],
+    correctValue: 'where escape velocity reaches c',
+    targetedMisconceptions: [],
+    source: src('phys.astro.black-holes', 'the horizon is a one-way BOUNDARY in spacetime and not a material surface, which is why an infalling astronaut notices nothing locally as they cross it — the point of the concept\'s existing supermassive probe'),
+  },
+  {
+    conceptId: 'phys.astro.cosmology', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: 'What does it mean to say the universe is EXPANDING?',
+    choices: [
+      { text: 'Space itself is stretching, so distances between distant galaxies grow — the galaxies are not flying apart through pre-existing space', isCorrect: true },
+      { text: 'Galaxies are moving outwards through space, away from a central point', isCorrect: false },
+      { text: 'The galaxies themselves are growing larger', isCorrect: false },
+      { text: 'New space is being created at the edge of the universe', isCorrect: false },
+    ],
+    correctValue: 'space itself stretches',
+    targetedMisconceptions: [],
+    source: src('phys.astro.cosmology', 'the second option is exactly what makes "where did the Big Bang happen?" feel like a sensible question, which the concept\'s existing probe addresses; the last presumes an edge, and there is none'),
+  },
+  {
+    conceptId: 'phys.mod.photoelectric-effect', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: 'What is the WORK FUNCTION of a metal?',
+    choices: [
+      { text: 'The minimum energy needed to remove an electron from the metal\'s surface', isCorrect: true },
+      { text: 'The kinetic energy the emitted electron carries away', isCorrect: false },
+      { text: 'The total energy delivered by the incident light', isCorrect: false },
+      { text: 'The energy needed to melt the metal', isCorrect: false },
+    ],
+    correctValue: 'minimum energy to free an electron',
+    targetedMisconceptions: [],
+    source: src('phys.mod.photoelectric-effect', 'the work function is a THRESHOLD belonging to the metal, and the second option is the other term in Einstein\'s equation — hf = φ + KE_max, so the two are related and emphatically not the same'),
+  },
+  {
+    conceptId: 'phys.qm.schrodinger-equation', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: 'What distinguishes the TIME-INDEPENDENT Schrödinger equation from the time-dependent one?',
+    choices: [
+      { text: 'It is an eigenvalue equation for stationary states of definite energy, valid when the potential itself does not depend on time', isCorrect: true },
+      { text: 'It applies only to particles that are not moving', isCorrect: false },
+      { text: 'It is an approximation to the time-dependent equation, valid at low speeds', isCorrect: false },
+      { text: 'It describes classical particles rather than quantum ones', isCorrect: false },
+    ],
+    correctValue: 'eigenvalue equation for stationary states',
+    targetedMisconceptions: [],
+    source: src('phys.qm.schrodinger-equation', 'a "stationary" state is stationary in its PROBABILITY DENSITY, not in the particle standing still — which is precisely the confusion the concept\'s existing static-wavefunction probe attacks, and the second option here is that confusion stated plainly'),
+  },
+  {
+    conceptId: 'phys.qm.spin', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: 'How many values can the z-component of an electron\'s spin take, and what are they?',
+    choices: [
+      { text: 'Two: +ħ/2 and −ħ/2, and no value in between is ever measured', isCorrect: true },
+      { text: 'A continuous range from −ħ/2 to +ħ/2, depending on the orientation', isCorrect: false },
+      { text: 'Three: +ħ, 0 and −ħ', isCorrect: false },
+      { text: 'One, since the electron has a single fixed spin', isCorrect: false },
+    ],
+    correctValue: 'two values, plus and minus hbar/2',
+    targetedMisconceptions: [],
+    source: src('phys.qm.spin', 'exactly two outcomes is what the Stern–Gerlach experiment shows and what a classical spinning ball could never produce — the continuous option is the classical expectation, and it is the result the experiment ruled out'),
+  },
+  {
+    conceptId: 'phys.rel.time-dilation', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: 'What is PROPER time?',
+    choices: [
+      { text: 'The time measured by a clock travelling with the object — between two events at the same place in that clock\'s own frame', isCorrect: true },
+      { text: 'The time measured in the frame of the Earth, taken as the standard', isCorrect: false },
+      { text: 'The correct time, once the errors in the other frames have been removed', isCorrect: false },
+      { text: 'The average of the times measured in all inertial frames', isCorrect: false },
+    ],
+    correctValue: 'time in the object own rest frame',
+    targetedMisconceptions: [],
+    source: src('phys.rel.time-dilation', '"proper" means PROPRIETARY — belonging to that clock — not "correct", which is what the third option assumes and what makes the muon result look like an illusion rather than a measurement'),
+  },
+  {
+    conceptId: 'phys.stat.maxwell-boltzmann', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: 'What shape does the Maxwell–Boltzmann speed distribution have?',
+    choices: [
+      { text: 'Asymmetric: it rises from zero at zero speed, peaks, then falls away with a long tail towards high speeds', isCorrect: true },
+      { text: 'A symmetric bell curve centred on the mean speed', isCorrect: false },
+      { text: 'A flat distribution — every speed is equally likely', isCorrect: false },
+      { text: 'A simple exponential decay, highest at zero speed', isCorrect: false },
+    ],
+    correctValue: 'asymmetric with a high-speed tail',
+    targetedMisconceptions: [],
+    source: src('phys.stat.maxwell-boltzmann', 'the ASYMMETRY is why the mean, the rms and the most probable speed differ at all — the ordering the concept\'s existing probe asks for — and the long tail is why a small fraction of molecules can always escape or react'),
+  },
+]
+
 /**
  * Every probe-depth probe. One array, in the order the audit reported the
  * pairs — `seed-knowledge-assets.ts`, the cold-start bootstrap and the
@@ -6370,4 +6476,6 @@ export const PHYSICS_DEPTH_PROBES: SeedProbe[] = [
   ...PARTICLE,
   // Batch 15 — the last thirty-one physics HIGH pairs: astro, meas, rel, stat.
   ...TAIL,
+  // Batch 16 — the seven physics UNDERGRADUATE pairs. PHYSICS COMPLETE.
+  ...UG,
 ]
