@@ -214,6 +214,56 @@ structurally perfect and still be refused for naming its parts naturally.
 | `xLabel` and `yLabel` required under `requireAxisLabels` | — |
 | spec prose must share a content word with the concept | "An Absorption Spectrum" failed; "Spectroscopy: an absorption spectrum" passed |
 
+## THE BLOCKER IS NOT THE CONTENT — THERE IS NO WRITER
+
+Session A's caution was right, and the mismatch is worse than a schema detail.
+**Nothing in the seed path can write a VISUAL asset at all.** Measured:
+
+| writer | what it supports | VISUAL? |
+|---|---|---|
+| `scripts/brain/seed-knowledge-assets.ts` | `family: 'EXPLANATION'` and `family: 'PROBE'` as literals | **no** |
+| `src/instrumentation.ts` cold-start bootstrap | `explanationAsset.createMany`, `probeAsset.createMany` | **no** |
+| `brainSeedAssets.ts` types | `SeedExplanation`, `SeedProbe` | **no `SeedVisual`** |
+
+`grep VISUAL` across all three returns nothing. Every ACTIVE visual asset in
+production got there by GENERATION plus human approval — the seeding route that
+carried 674 probes has never carried a figure.
+
+So authoring visual content today produces content that nothing can write. That
+is precisely the mathematics failure mode Session A flagged this session: 31
+modules on disk, imported by no writer, ~750 probes that never reach a learner.
+
+### And the obvious helper would produce an unservable slug
+
+`seedCanonicalSlug(conceptId, familyKind, gradeBand, difficulty?)` returns
+`conceptId:familyKind:en:gradeband` — **four** segments minimum. The VISUAL rows
+actually serving in production carry **three** and no band:
+
+    chem.found.stoichiometry:concept_figure:en
+
+An authoring batch that reached for the existing helper would emit
+`chem.org.spectroscopy:concept_figure:en:adult`, which no resolver looks up.
+Rows present, nothing served, count rising — the same shape as the probe
+slug-resolver trap, in a place nobody has been yet. This is exactly the "mismatch
+discovered after 42 concepts" that the request to propose first was protecting
+against, and it would have bitten on concept one.
+
+### What has to exist before any visual authoring pays off
+
+1. `SeedVisual` type — `brainSeedAssets.ts`, **mine**.
+2. A VISUAL branch in `seed-knowledge-assets.ts` writing `family: 'VISUAL'` plus
+   a `visualAssets` content row — **mine**.
+3. A VISUAL branch in the cold-start bootstrap, **and the completeness guard's
+   `hasContent` must learn `visualAsset`** — it currently reads only
+   `probeAsset`/`explanationAsset`, so every seeded visual identity would read
+   HOLLOW forever and be "repaired" on every cold start, in a loop.
+   `src/instrumentation.ts` — **NOT mine**.
+4. A slug rule that omits `gradeBand` for VISUAL — one figure per concept per
+   language, per the production evidence above.
+
+Items 1, 2 and 4 I can do. Item 3 is Session A's file, and it is the one that
+turns a working seed into a silent repair loop if it is missed.
+
 ## What I propose to do, in order
 
 1. **Nothing yet** — this document is the proposal Session A asked for, and the
