@@ -74,7 +74,7 @@ served behaviour.
 | Session A | chemistry, 12 concepts, seed 7 | 2026-08-30 ~15:45 | ~90 min | **DONE** (12/12, 11 measured, 73% mastery — see 71624d4) |
 | Session A | physics re-measurement, 60 concepts, seed 2026 | 2026-08-30 ~21:35 | ~7 h | **DONE** (79% -> 95%, see 377b642) |
 | Session A | E1 verification, 60 concepts, seed 2026 | 2026-08-31 ~09:40 | ~8 h | **ABANDONED — lock RELEASED.** Session A hit its usage limit minutes after starting it; 0 concepts recorded. Session B: the lock is FREE, restart it with the command in the handover. |
-| Session B | E1 verification (restart), physics, 60 concepts, seed 2026 | 2026-08-31 ~04:20 | ~8 h | **RUNNING** — restarted after Session A's abandoned attempt recorded 0 concepts. Sole owner of the programme from this point; no second session to collide with. Provider-heavy: no other provider-calling script (warm-cohort included) runs until this is DONE. |
+| Session B | E1 verification (restart), physics, 60 concepts, seed 2026 | 2026-08-31 ~04:20 | ~8 h | **PAUSED at 5/60 for the egress emergency, 2026-08-31 18:55Z.** Lock RELEASED. 5 transcripts preserved on disk; `--resume` continues from concept 6 with nothing lost. Restart only after the new egress rate is confirmed under quota. Original note follows: **RUNNING** — restarted after Session A's abandoned attempt recorded 0 concepts. Sole owner of the programme from this point; no second session to collide with. Provider-heavy: no other provider-calling script (warm-cohort included) runs until this is DONE. |
 
 Release by setting status to DONE. Do not start a run while another row is
 RUNNING.
@@ -318,6 +318,51 @@ inside it. The comparison has to be against the previous sweep, and those
 baseline transcripts died with Session A's container. Stated plainly because it
 limits what the result can prove: it can show C4 moved, it cannot isolate E1
 from anything else that changed between the two runs.
+
+
+### 2026-08-31 — SESSION B — E1 PAUSED for the egress emergency, and a correction
+
+**Paused the 60-concept run at 5/60 and released the lock.** The egress audit
+names it as the largest discretionary load under a 3-day billing deadline, and
+that outranks a quality measurement that can be re-run at any time. Five
+transcripts are on disk; `--resume` picks up at concept 6.
+
+**A CORRECTION THAT CHANGES THE BOOTSTRAP DECISION.** The audit says: *"a
+parallel session reported chemistry has converged and PHYSICS still needs ~2
+more cold starts to finish seeding probes. Disabling now freezes that."*
+
+That parallel session was me, and **that claim was wrong.** Measured just now:
+
+| | value |
+|---|---|
+| last seed row written, ANY subject | 2026-08-31 03:15Z — **15.6 hours ago** |
+| last seed row written, physics | 2026-08-30 21:34Z — **21.3 hours ago** |
+| seed rows written in the last 6 hours | **0** |
+| physics pairs at >= 5 gradeable | 196 of 261, unchanged across 5 measurements |
+
+Physics is not two cold starts from finishing. It **stopped 21 hours ago** and
+has not moved since, including across at least one deploy. So:
+
+**`DISABLE_ASSET_BOOTSTRAP=true` can be set NOW. It freezes nothing, because
+nothing is happening.** Waiting for physics to finish means waiting for an event
+that is not coming, and it costs ~1.35 GB/month meanwhile.
+
+That is also consistent with the audit's own description of the remaining spend:
+the bootstrap "prefetches every seed-owned asset_identity row on EVERY cold
+start, then usually decides there is nothing to do." It is not usually deciding
+that — it is *always* deciding it, and has been for a day.
+
+**The cost of disabling, stated plainly:** 199 physics probe rows and 65
+(concept, band) pairs never reach the 5-probe depth. They already never will, so
+disabling loses nothing that was otherwise going to happen. Re-enable
+deliberately when someone is ready to run the seed to completion and watch it.
+
+**Why the bootstrap stalled is UNRESOLVED and worth a session of its own.** The
+completeness guard exits when `storedIdentities >= EXPECTED_IDENTITIES && hollow
+=== 0`, computed against the slugs the corpus declares. Production is ~199 rows
+short of the corpus, so that condition should be false and the run should
+proceed. Either the guard is satisfied by something I have not accounted for, or
+no cold start is reaching it. I did not establish which, and I am not guessing.
 
 
 ## 5. Shared facts — measured, not assumed
