@@ -2495,6 +2495,95 @@
   has no `QA_EMAIL`/`QA_PASSWORD` and no `DATABASE_URL`; verification was Chromium against the
   real components on the dev harness plus offline runs of the real modules.
 
+## Egress incident — two leaks found and fixed (2026-08-31)
+
+**Read this before touching `src/instrumentation.ts` or the capability-cache
+hydration in `route.ts`. Both carry fixes that a plausible-looking refactor
+would undo.**
+
+The Supabase org hit **50.8 GB against a 5 GB monthly egress quota** (free plan,
+cycle 05 Aug – 05 Sep, restriction threatened 02 Sep). Full forensic accounting,
+every line attributed:
+
+| source | rows | status |
+|---|---|---|
+| `spine_events` replay on every chat turn | 106,333,556 | **FIXED** (`8425992`) |
+| cold-start asset bootstrap prefetch | ~22,000,000 | **FIXED** (`92f2058`) |
+| `pg_timezone_names` | 6,677,268 | NOT app code — Supabase Studio |
+| `asset_identity` canonicalSlug groupBy | 3,302,416 | already removed 2026-08-19 |
+| `topic_progress` reads | ~5,000,000 | legitimate, deliberately untouched |
+
+**Leak 1 — the spine replay.** A cache-hydration guard could not distinguish
+"never checked" from "checked, found nothing", because `readCapabilityState()`
+returns `{}` for both and the persist only wrote a NON-empty result. So the
+guard never flipped and every turn replayed the learner's entire event log —
+220,247 calls returning 106.3M rows from a 44,323-row table. Cost GREW with
+conversation length. Fixed by recording the ATTEMPT; a FAILED replay
+deliberately does not set the marker, because a failure must be retried, not
+remembered as an answer. Pinned by `spineReplayEgress.test.ts`.
+
+**Leak 2 — the bootstrap prefetch.** It read every seed-owned `asset_identity`
+row plus two Prisma relation sub-queries (~4,300 rows + relations) on every cold
+start to answer a yes/no question. The answer was "nothing to do" every time for
+21 hours straight. Replaced with two `COUNT`s returning two rows, reaching the
+identical decision. Falls through to the full prefetch on ANY error — a false
+"complete" would strand seeding permanently. Pinned by
+`bootstrapCheapProbe.test.ts`.
+
+**The count ban was narrowed, not deleted.** `bootstrapCompletenessGuard.test.ts`
+banned `assetIdentity.count(` outright as a proxy for "never aggregate over the
+WHOLE table". The cheap probe's counts are intersected with `expectedSlugList`,
+so they cannot exhibit that defect. The assertion now states the invariant
+itself — every count must be corpus-scoped, checked across all matches — which
+is strictly stronger than the ban.
+
+**VERIFIED STOPPED, not predicted.** The spine query read 220,247 calls /
+106,333,556 rows at 18:55:39Z and the identical figures at 19:38:47Z — 43
+minutes, zero executions, against a pre-fix rate of ~390 calls per 15 minutes.
+The counter is cumulative and never resets, so a flat counter IS the proof.
+
+**`pg_timezone_names` is Supabase Studio, verified not the MCP** — two
+consecutive MCP queries left the counter frozen at 5,583. Every dashboard page
+load runs it. Not fixable in this repo; the lever is closing the dashboard tab.
+
+**`topic_progress` deliberately NOT optimised.** Already scoped by
+`userId + subjectSlug`; 85 rows is simply a learner's topic count. Narrowing the
+select was considered and rejected — those rows are returned in the API response
+body and the client consumes them, so it would change the API contract for a
+modest byte saving.
+
+**`DISABLE_ASSET_BOOTSTRAP=true` is no longer needed for egress** after leak 2.
+Harmless to set. Note that physics seeding has been stalled independently since
+2026-08-30 21:34 (zero seed rows written in the 21h before the fix), so
+disabling freezes nothing that was going to happen.
+
+**Spent egress cannot be recovered.** The meter reads 50.8 GB until the cycle
+resets 05 Sep; a code fix stops accrual, it does not refund. A support request
+with this evidence was sent 2026-08-31.
+
+## E1 verification run — PAUSED at 5/60 (2026-08-31)
+
+Session A handed over the whole physics/chemistry programme and its E1 run
+(keyed probes attachable at DEMONSTRATE, `86f58ee`) is still UNMEASURED. I
+restarted it, reached 5/60, and **paused it for the egress incident** — it was
+the largest discretionary production load. Transcripts are preserved;
+`--resume` continues at concept 6. **Do not restart it until the new egress rate
+is confirmed under quota.**
+
+Two things established about that run before it paused, both worth keeping:
+- **E1 has no internal control group.** Its gate needs FOUR available probes and
+  all 261 physics pairs are at >= 4, so it fires everywhere. The comparison must
+  be against the previous sweep, whose transcripts died with Session A's
+  container. The result can show C4 moved; it cannot isolate E1.
+- **C5's residue is probably not detector width.** Session A proposed widening
+  the confirmation detector. The two copies (`CONFIRMS_CORRECT` enforcing,
+  `CONFIRMS` in rubricScore measuring) are character-identical, so that is not
+  the gap. Prediction recorded in `docs/architecture/C5_CONFIRMATION_RESIDUE.md`:
+  the unconfirmed turns are ones the SERVER never graded, which is the
+  `pendingMcq` seam, not a regex. Widening would hide it. Pinned by
+  `confirmationDetectorParity.test.ts`.
+
+
 ## Run locally
 ```
 cp .env.example .env   # set DATABASE_URL, AUTH_SECRET (openssl rand -base64 32), GROQ_API_KEY
