@@ -1787,6 +1787,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     // snapshot so it is a pure function of persisted state, never of this
     // turn's own outcome.
     let priorConfirmationsHoisted = 0
+    /** Diagnostic only: did this turn hand the authored explanation text to the
+     *  model as retrieved context? Read by nothing; reported in the payload so a
+     *  captured run can answer the C7 question. See the cache write below. */
+    let retrievedExplanationInPrompt = false
     // EOS M1 (Evidence Spine): decision facts hoisted for the parallel spine
     // emitter — observation only, zero effect on the turn.
     let evidenceMoveHoisted: string | null = null
@@ -3745,6 +3749,23 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           if (assembled && retrievalCacheHoisted) {
             const { CACHE_KEY_EXPLANATION } = await import('@/lib/teaching/retrievalCache')
             retrievalCacheHoisted.set(CACHE_KEY_EXPLANATION, assembled.text)
+            // INSTRUMENTATION, not a fix. `historyCompaction.ts` removed the
+            // authored explanation from the model's view of the TRANSCRIPT and
+            // the verbatim-repeat rate did not move (20 -> 18 across the shared
+            // concepts of the 2026-08-30 sweep). This is the only other path by
+            // which `assembled.text` reaches the model: cached here, truncated
+            // to ~500 chars by buildRetrievedContext, and appended to the SYSTEM
+            // PROMPT inside the BRAIN EXECUTION block.
+            //
+            // The already-served guard directly above should stop it firing on a
+            // repeat turn — but that guard is skipped entirely when
+            // `teachingHistoryHoisted` is null, and I could not establish from
+            // the source alone whether that happens on the turns that recite.
+            // Reading the code twice has already produced one confidently wrong
+            // fix here, so this records the fact in the RESPONSE (the harness
+            // captures payloads; this session cannot read Vercel logs) and the
+            // next run answers it as evidence instead of inference.
+            retrievedExplanationInPrompt = true
           }
           // MEASUREMENT DEFECT FIXED 2026-08-17 (`!alreadyServedThisConcept`).
           // The already-served guard above sets `assembled = null`, which made
@@ -8297,6 +8318,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         memoryServingMode, memoryConfidence, memoryAssetId, memoryConceptId,
         memoryExactGradeMatch, memoryFallbackUsed,
         memoryFallbackReason: memoryFallbackReasonCode,
+        // Diagnostic for the C7 verbatim-repeat investigation. Reported, never
+        // read by the client. See the retrieval-cache write for why.
+        retrievedExplanationInPrompt,
         visual: responseVisual ?? undefined, visualSpec: detectedVisualSpec ?? undefined,
         sceneSpec: detectedSceneSpec ?? undefined,
         dynamicVisualizationCode: dynamicVisualizationCode ?? undefined,
