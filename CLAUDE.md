@@ -2891,3 +2891,73 @@ contained in `main`'s current tip.
 - `scripts/assets/triageExplanationDrafts.ts` — the classifier, report-only by default, `--apply` to
   write, with each rule stating the failure mode it protects against. **There is no delete path in the
   file on purpose.**
+
+## Physics + Chemistry ceiling broken — 79% -> 95% (2026-08-30/31, two sessions)
+
+- **Scope narrowed by the owner 2026-08-31: chemistry and physics ONLY.** English and
+  mathematics are recorded findings below, deliberately not worked.
+- **Read `docs/architecture/PHYSICS_MASTERY_CEILING_ROOT_CAUSE.md` and
+  `PHYSICS_REMEASUREMENT_2026-08-31.md` before touching this.** Run
+  `npx tsx scripts/qa/rubricScore.ts <runDir> [<baselineDir>]` rather than trusting a number here.
+
+### The root cause, and why it took so long to see
+Mastery needs THREE graded correct answers (`correctAtCheck>=1` + `correctAtPractice>=2`) and a
+spent probe is never re-asked. The asset contract supplied exactly THREE. **The required success
+rate was therefore 1.00** — one wrong answer made mastery unreachable for anyone. Measured: 53 of
+60 sessions served exactly 3 keyed probes; **45 of 46 mastered sessions answered every probe
+correctly**; the 8 failures each got exactly one wrong. The 79% figure was close to measuring how
+often a struggling learner goes three for three.
+
+### Result of the re-measurement (same 60 concepts, same seed 2026)
+**Verified mastery 44/56 -> 53/56 (79% -> 95%)**, against a prediction of ~91% recorded before the
+run. Ten fixed, one regressed (`phys.em.self-inductance`, within the 2-3/run churn this programme
+has measured with no code change). Six changes were in flight at once, so the mastery number
+cannot attribute between them.
+
+### Shipped this period
+- **Probe depth 3 -> 5** (Session B): physics 261/261, chemistry 186/186 pairs. THE critical path.
+- **G-2b** (`e5afa52`) — a clarification at GUIDE demoted the learner, and because
+  `remediationCount` is cleared by a graded-correct answer, every request was forever "the first":
+  GUIDE<->DEMONSTRATE cycled for whole lessons. Reproduced at 12 turns / 6 correct answers /
+  check 0. The hold now protects against a DEMOTION rather than being scoped by phase — OBSERVE is
+  untouched because `phaseDown` FLOORS at DEMONSTRATE there and would have stranded learners.
+- **`answerConfirmation.ts`** (`a4d00c4`) — only 39% of server-graded-correct answers were
+  acknowledged. Now enforced from `gradeMcqAnswer`'s verdict (server ground truth, never the
+  model's self-report). **Measured live: 39% -> 65%.** Gate is 90%; not met.
+- **`dontKnowCeiling.ts`** (`054473a`) — OWNER-REPORTED: four "I don't know"s produced a fifth
+  question. Every piece of intended behaviour already existed and fired (detector, counter, and a
+  RECOVERY block saying "Stop ALL questions this turn"); the model asked anyway. On the 2nd+
+  consecutive don't-know the question is withheld, and when nothing teaching survives the server
+  REVEALS the authored answer rather than shipping the content-free hold.
+- **`figureReference.ts` embedded locator** (`eabbdc1`) — OWNER-REPORTED: "the histogram in the
+  figure" claimed a figure that was not there. Two narrowings were caught by tests, not by reading.
+- **`historyCompaction.ts`** (`4763760`) — **DID NOT WORK.** See below.
+- **E1** (`86f58ee`) — a keyed probe may attach at DEMONSTRATE, gated on `mayAttachProbeBelowGuide`
+  requiring FOUR available (one spent, three must survive). Enforced per concept at the SERVING
+  site, so a bare-contract concept is unaffected. NOT yet measured live.
+- **`rubricScore.ts`** — scores the seven ENFORCED blueprint criteria. **Its own header records
+  that it DISAGREES with hand-scoring** (pressure-fluids 8/10 by hand, 2.9 here) because it
+  measures assessment machinery, not teaching. Never quote its mean as quality.
+
+### Enforced criteria, physics, measured
+C2 95% · C3 70% · C4 25% · C5 65% · C7 50% · C8 95% · C9 96%. Chemistry C3 is 27%.
+
+### Open, with the honest state
+- **C7 — my fix failed and I said so.** An interim split suggested it worked (50% vs 14%, p=0.11);
+  at full sample that vanished (50% vs 46%, **p=0.80**). Instrumentation established the retrieval
+  cache is enriched among repeats (8 of 19 repeat turns vs a 25% base rate) but CANNOT be the
+  mechanism — 11 of 19 repeats occur with the explanation absent from the prompt AND compaction
+  active. A third channel exists and is unidentified.
+- **C3 — Session B found there is NO WRITER for VISUAL assets** (`919ef2ef`): the seed script and
+  bootstrap handle EXPLANATION and PROBE only. Authoring visual content today would produce
+  content nothing can write — the same failure mode as mathematics's 31 unimported modules. The
+  126 dark-but-drawable concepts need a warm pass (`sceneWarming.ts` + `warm-cohort.ts` exist,
+  tested, **never run**); the 42 critic-declined need a writer first.
+- **English and mathematics, recorded not worked**: english 214 of 216 pairs hold exactly TWO
+  gradeable probes while the subject is LIVE (626 ACTIVE explanations) — no English lesson can
+  close. Mathematics: 0 of 47 pairs at contract, and **31 mathematics asset modules on disk that
+  the bootstrap imports NONE of** (corpus 846 probes, production ~100).
+- **Measured and deliberately NOT fixed**: ASCII-art fallback (18% physics / 64% chemistry
+  sessions — mastery runs 60% vs 83% in physics but 86% vs 50% in chemistry, opposite directions,
+  no evidence stripping helps); the content-free hold (9 of 67 sessions, always the whole turn — a
+  content-generation problem, not a text-repair one).
