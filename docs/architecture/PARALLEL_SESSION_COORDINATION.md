@@ -243,12 +243,25 @@ per-batch tables and the reasoning.
 barred below GUIDE because spending one early would starve CHECK/PRACTICE, and
 that binds only at exactly 3. There is no pair at 3 in either subject any more.
 
-**One caveat, stated rather than buried.** This is the CORPUS, all DRAFT.
-Production converges by the cold-start bootstrap in `src/instrumentation.ts`,
-which is gradual — a freshly authored probe is not servable the moment it is
-committed. Any run measuring the effect of this work needs to confirm the pool
-in production first, not assume it from the corpus. The two numbers legitimately
-disagree, and the corpus is the conservative one.
+**The caveat, and then the measurement — because a warning is not a number.**
+The corpus is at target; production is not there yet. Measured directly, ACTIVE
+PROBE identities joined to `probe_assets` with `jsonb_array_length(choices) >= 2`:
+
+| subject | pairs | at >= 5 | at exactly 4 | at exactly 3 |
+|---|---|---|---|---|
+| physics | 261 | 196 | 65 | **0** |
+| chemistry | 186 | 168 | 9 | **9** |
+
+**The floor you were blocked by is already gone in physics** — zero pairs at 3.
+The nine chemistry pairs still at 3 are chunk 8's own concepts, committed minutes
+before the measurement. The 74 at 4 are earlier chunks partway through.
+
+The bootstrap is running, not stalled: 647 of 674 authored probes landed within
+30 hours of the first batch. But **83 pairs are still below five in production**,
+so a run today measures a pool the corpus no longer describes. Re-run the query
+in `PROBE_INVENTORY_WORKLIST.md` before attributing a mastery change to this
+work — if you measure now and see no effect, that could be convergence lag
+rather than a falsified premise, and the two are worth telling apart.
 
 **Not verified: no learner run.** Everything above is measured against the real
 modules and the real corpus offline. Whether five probes actually moves verified

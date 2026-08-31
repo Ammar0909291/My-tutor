@@ -194,6 +194,32 @@ The corpus-wide duplicate-stem check reports exactly 1, in
 `math.arith.exponent-rules`. It is pre-existing, it is mathematics, and it is
 outside this campaign's file ownership. It needs a mathematics-owning session.
 
+### Production convergence — measured 2026-08-31, not assumed
+
+The corpus is at target; **production is not there yet, and this is the number
+any run measuring this work must check first.** Measured directly against
+production, joining `probe_assets` and requiring `jsonb_array_length(choices) >= 2`
+over ACTIVE PROBE identities:
+
+| subject | pairs | at >= 5 | at exactly 4 | at exactly 3 |
+|---|---|---|---|---|
+| physics | 261 | 196 | 65 | **0** |
+| chemistry | 186 | 168 | 9 | **9** |
+
+Two things follow, and they point in opposite directions:
+
+- **The dangerous floor is nearly gone in production already.** No physics pair
+  is at 3, and the nine chemistry pairs still at 3 are exactly chunk 8's
+  concepts, committed minutes before this measurement. The 74 pairs at 4 are
+  earlier chunks partway through.
+- **83 pairs are still below five in production**, so a run today would measure
+  a pool the corpus no longer describes.
+
+The bootstrap IS running, not stalled — 647 of the 674 authored probes had
+landed within 30 hours of the first batch (283 in one hour, 229 in the next).
+Convergence is a matter of cold starts, not of a defect. Re-run the query above
+before attributing any change in verified mastery to this campaign.
+
 ### Nothing here reaches a learner yet
 
 All of it is DRAFT in the seed corpus. Production converges by the cold-start
