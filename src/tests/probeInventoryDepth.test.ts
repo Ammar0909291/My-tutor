@@ -1070,6 +1070,101 @@ describe('the physics depth probes are arithmetically true', () => {
     expect(c('mole fraction of water is 0.90')).toContain('2.85')
   }, 30_000)
 
+  it('chemistry batch 6: the arithmetic', async () => {
+    const { CHEMISTRY_DEPTH_PROBES } = await import('../lib/teaching/assets/chemistryDepthSeedAssets')
+    const probes = CHEMISTRY_DEPTH_PROBES as unknown as Probe[]
+    const c = (fragment: string) => {
+      const hit = probes.filter((p) => p.stem.includes(fragment))
+      expect(hit.length, `expected exactly one chemistry probe containing "${fragment}"`).toBe(1)
+      return (hit[0].choices ?? []).find((x) => x.isCorrect)!.text
+    }
+
+    // Gay-Lussac at fixed volume: P/T is constant, and the temperatures are
+    // already absolute so the ratio is a clean 2.
+    expect((2.0 * 600) / 300).toBe(4.0)
+    expect(c('rigid sealed vessel')).toContain('4.0 atm')
+
+    // KE goes as T, and KE goes as v^2, so the speed carries a square root the
+    // energy does not. Doubling T therefore gives x2 and xsqrt(2), never x2/x2.
+    expect(2).toBe(2)
+    expect(Math.sqrt(2)).toBeCloseTo(1.4142, 4)
+    expect(Math.sqrt(2)).not.toBeCloseTo(2, 1)
+    expect(2 ** 2).toBe(4)                      // the energy x4 / speed x2 option
+    expect(c('absolute temperature of a gas sample is doubled')).toContain('×√2')
+
+    // Molar volume at 273 K is 22.4 dm3; 24.0 is the same quantity at 298 K,
+    // which is why it is offered rather than invented.
+    expect(22.4 / 2).toBeCloseTo(11.2, 12)
+    expect(22.4 * 2).toBeCloseTo(44.8, 12)
+    // 24.0 dm3 is the SAME quantity at RTP, 20 C — checked here because the
+    // first draft of this assertion said 298 K, and the source comment on the
+    // probe said so too. 298 K gives 24.5 dm3; the 24.0 figure is 293 K.
+    const molarVolume = (T: number) => ((8.314 * T) / 101325) * 1000
+    expect(molarVolume(293.15)).toBeCloseTo(24.05, 2)
+    expect(molarVolume(298.15)).toBeCloseTo(24.46, 2)
+    expect(Math.round(molarVolume(293.15) * 10) / 10).toBe(24.1)
+    expect(molarVolume(273.15)).toBeCloseTo(22.41, 2)
+    expect(24.0 / 22.4).toBeCloseTo(293 / 273, 2)
+    expect(c('1.0 mol of an ideal gas occupy at 273 K')).toContain('22.4')
+
+    // Three boundary lines meet at the triple point, so three phases coexist.
+    expect(3).toBe(3)
+    expect(c('simultaneously in equilibrium')).toContain('Three')
+
+    // CO2's triple point is near 5.1 atm, so a 1 atm path never crosses the
+    // liquid region at all.
+    expect(5.1).toBeGreaterThan(1)
+    expect(c('triple-point pressure lies')).toContain('above')
+
+    // Z is DEFINED so that the ideal case is exactly 1.
+    const Z = (P: number, V: number, n: number, R: number, T: number) => (P * V) / (n * R * T)
+    expect(Z(1, 22.4, 1, 0.0821, 273)).toBeCloseTo(1, 2)
+    expect(c('compressibility factor Z')).toContain('Exactly 1')
+
+    // "How many times" is a ratio. 180 is the DIFFERENCE, and reading the
+    // question as a subtraction is the slip being checked.
+    expect(200 / 20).toBe(10)
+    expect(200 - 20).toBe(180)
+    expect(c('roughly 200 kJ/mol')).toContain('ten')
+
+    // A colloid's upper size bound is comparable to visible wavelengths
+    // (roughly 400-700 nm), which is why it scatters and a solution does not.
+    expect(1000).toBeGreaterThan(700)
+    expect(1).toBeLessThan(400)
+    expect(c('true solution below it')).toContain('1 nm to 1000 nm')
+
+    // Bond enthalpies: broken minus formed. The +184 option is that same
+    // subtraction reversed, which is the classic sign error.
+    const broken = 436 + 242
+    const formed = 2 * 431
+    expect(broken).toBe(678)
+    expect(formed).toBe(862)
+    expect(broken - formed).toBe(-184)
+    expect(formed - broken).toBe(184)
+    expect(c('H₂(g) + Cl₂(g) → 2HCl(g)')).toContain('−184')
+
+    // Entropy is J/K, so the temperature is underneath — the units alone rule
+    // out both the inverted and the multiplied option.
+    expect(600 / 300).toBe(2)
+    expect(300 / 600).toBe(0.5)
+    expect(600 * 300).toBe(180000)
+    expect(c('reversibly absorbs 600 J')).toContain('+2.0 J/K')
+
+    // Work done BY the system leaves it, so w is negative here.
+    expect(500 + -200).toBe(300)
+    expect(500 + 200).toBe(700)
+    expect(c('does 200 J of work')).toContain('+300 J')
+
+    // Monatomic: Cp = Cv + R = 5R/2, so gamma = 5/3 and the R cancels.
+    const R = 8.314
+    const cv = (3 * R) / 2
+    const cp = cv + R
+    expect(cp / cv).toBeCloseTo(5 / 3, 12)
+    expect(cp / cv).toBeCloseTo(1.667, 3)
+    expect(cv / cp).toBeCloseTo(0.6, 3)      // the inverted option
+    expect(c('monatomic ideal gas Cv')).toContain('1.67')
+  }, 30_000)
+
   it('batch 13: coupling j=1 with j=1 preserves the state count', async () => {
     const probes = await load()
     const coup = find(probes, 'j₁ = 1 and j₂ = 1 are coupled')

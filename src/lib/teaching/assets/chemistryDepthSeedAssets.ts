@@ -2406,6 +2406,425 @@ const CHEM_E: SeedProbe[] = [
 ]
 
 /**
+ * CHUNK 6 — the last of the chemistry HIGH band: states of matter, surface
+ * chemistry, thermodynamics, and amorphous solids. 28 probes over 16 pairs,
+ * every one opening a brand-new `numeric` or `fill_blank` slot.
+ *
+ * `chem.thermo.heat-capacities` already carried a `true_false` probe, so its
+ * slot map was checked individually rather than assumed from the template —
+ * `numeric` and `fill_blank` are free there too.
+ */
+const CHEM_F: SeedProbe[] = [
+  {
+    conceptId: 'chem.solid.amorphous', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'X-ray diffraction of a crystalline solid gives a pattern of sharp peaks. How many sharp peaks does an amorphous solid give?',
+    choices: [
+      { text: 'None — only broad halos', isCorrect: true },
+      { text: 'The same number, but weaker', isCorrect: false },
+      { text: 'Exactly one', isCorrect: false },
+      { text: 'Twice as many, because the structure is disordered', isCorrect: false },
+    ],
+    correctValue: '0',
+    targetedMisconceptions: [],
+    source: src('chem.solid.amorphous', 'sharp peaks come from long-range repetition, so their absence is the operational definition of amorphous — "weaker peaks" is what a learner expects if they picture glass as a poor crystal rather than as no crystal at all'),
+  },
+  {
+    conceptId: 'chem.solid.amorphous', subjectSlug: S, probeKind: 'fill_blank',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'An amorphous solid has ______-range order but no ______-range order, which is why it softens over a range instead of melting sharply.',
+    choices: [
+      { text: 'short … long', isCorrect: true },
+      { text: 'long … short', isCorrect: false },
+      { text: 'no … any', isCorrect: false },
+      { text: 'short … medium', isCorrect: false },
+    ],
+    correctValue: 'short-range order; no long-range order',
+    targetedMisconceptions: [],
+    source: src('chem.solid.amorphous', '"no order at all" is the commonest reading and it is wrong — the SiO₄ tetrahedra keep their shape, which is precisely what the concept\'s existing tetrahedra probe establishes; the disorder is in how they connect, not in what they are'),
+  },
+
+  {
+    conceptId: 'chem.state.gas-laws', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'A fixed mass of gas is at 2.0 atm and 300 K in a rigid sealed vessel. It is heated to 600 K. What is the new pressure?',
+    choices: [
+      { text: '4.0 atm', isCorrect: true },
+      { text: '2.0 atm — the vessel is sealed, so nothing changes', isCorrect: false },
+      { text: '1.0 atm', isCorrect: false },
+      { text: '8.0 atm', isCorrect: false },
+    ],
+    correctValue: '4.0 atm',
+    targetedMisconceptions: [],
+    source: src('chem.state.gas-laws', 'P/T is constant at fixed volume, and the temperatures are already absolute so the ratio is a clean 2; the "sealed means unchanged" option is the confusion between fixed AMOUNT and fixed state'),
+  },
+  {
+    conceptId: 'chem.state.gas-laws', subjectSlug: S, probeKind: 'fill_blank',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.DEVELOPING,
+    stem: 'At constant temperature, halving a gas\'s volume ______ its pressure; at constant pressure, doubling its ABSOLUTE temperature ______ its volume.',
+    choices: [
+      { text: 'doubles … doubles', isCorrect: true },
+      { text: 'doubles … halves', isCorrect: false },
+      { text: 'halves … doubles', isCorrect: false },
+      { text: 'halves … halves', isCorrect: false },
+    ],
+    correctValue: 'doubles; doubles',
+    targetedMisconceptions: [],
+    source: src('chem.state.gas-laws', 'Boyle is inverse and Charles is direct, so a learner carrying one rule into the other gets exactly one half wrong — all four combinations are offered because the two errors are independent'),
+  },
+
+  {
+    conceptId: 'chem.state.kinetic-theory', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'The absolute temperature of a gas sample is doubled. By what factor does the average kinetic energy of its molecules change, and by what factor does the rms speed?',
+    choices: [
+      { text: 'Energy ×2, speed ×√2', isCorrect: true },
+      { text: 'Energy ×2, speed ×2', isCorrect: false },
+      { text: 'Energy ×4, speed ×2', isCorrect: false },
+      { text: 'Energy ×√2, speed ×√2', isCorrect: false },
+    ],
+    correctValue: 'KE ×2, rms speed ×√2',
+    targetedMisconceptions: [],
+    source: src('chem.state.kinetic-theory', 'KE is proportional to T and KE goes as v², so the speed carries a square root the energy does not; "both ×2" is what happens when temperature is read as a speed rather than as an energy'),
+  },
+  {
+    conceptId: 'chem.state.kinetic-theory', subjectSlug: S, probeKind: 'fill_blank',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.DEVELOPING,
+    stem: 'Kinetic molecular theory models an ideal gas as particles of ______ volume with ______ between them.',
+    choices: [
+      { text: 'negligible … no attractive forces', isCorrect: true },
+      { text: 'negligible … strong attractive forces', isCorrect: false },
+      { text: 'fixed, measurable … no attractive forces', isCorrect: false },
+      { text: 'fixed, measurable … strong attractive forces', isCorrect: false },
+    ],
+    correctValue: 'negligible volume; no intermolecular forces',
+    targetedMisconceptions: [],
+    source: src('chem.state.kinetic-theory', 'these are the TWO assumptions the van der Waals constants b and a each relax, so naming them separately is what makes real-gas deviation predictable rather than memorised'),
+  },
+
+  {
+    conceptId: 'chem.state.liquids', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'At a liquid\'s NORMAL boiling point, how does its vapour pressure compare with the surrounding atmospheric pressure of 101 kPa?',
+    choices: [
+      { text: 'Equal to it — 101 kPa', isCorrect: true },
+      { text: 'Half of it', isCorrect: false },
+      { text: 'Zero — the liquid has not yet vaporised', isCorrect: false },
+      { text: 'Twice it, which is what pushes the bubbles up', isCorrect: false },
+    ],
+    correctValue: '101 kPa — equal to the external pressure',
+    targetedMisconceptions: [],
+    source: src('chem.state.liquids', 'this equality IS the definition of boiling, and it is what the concept\'s existing mountain probe silently relies on — lower the outside pressure and the equality is reached at a lower temperature'),
+  },
+  {
+    conceptId: 'chem.state.liquids', subjectSlug: S, probeKind: 'fill_blank',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'Surface tension arises because a molecule at the surface has ______ neighbours than one in the bulk, so a liquid tends to minimise its ______.',
+    choices: [
+      { text: 'fewer … surface area', isCorrect: true },
+      { text: 'more … surface area', isCorrect: false },
+      { text: 'fewer … volume', isCorrect: false },
+      { text: 'more … volume', isCorrect: false },
+    ],
+    correctValue: 'fewer neighbours; minimises surface area',
+    targetedMisconceptions: [],
+    source: src('chem.state.liquids', 'the volume is fixed by the amount of liquid and cannot be minimised, so that half is not merely wrong but impossible — a check the learner can run without recalling the answer'),
+  },
+
+  {
+    conceptId: 'chem.state.molar-mass-gas', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'What volume does 1.0 mol of an ideal gas occupy at 273 K and 101 kPa?',
+    choices: [
+      { text: 'About 22.4 dm³', isCorrect: true },
+      { text: 'About 24.0 dm³', isCorrect: false },
+      { text: 'About 11.2 dm³', isCorrect: false },
+      { text: 'About 44.8 dm³', isCorrect: false },
+    ],
+    correctValue: '22.4 dm³',
+    targetedMisconceptions: [],
+    source: src('chem.state.molar-mass-gas', '24.0 dm³ is the ROOM-temperature molar volume and is correct at 293 K (RTP, 20 °C), so it is offered as the right answer to a different question — the conditions have to be read, not assumed'),
+  },
+  {
+    conceptId: 'chem.state.molar-mass-gas', subjectSlug: S, probeKind: 'fill_blank',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'Equal volumes of gases at the same temperature and pressure contain equal ______, so at fixed conditions a gas\'s density is proportional to its ______.',
+    choices: [
+      { text: 'numbers of molecules … molar mass', isCorrect: true },
+      { text: 'masses … molar mass', isCorrect: false },
+      { text: 'numbers of molecules … molecular size', isCorrect: false },
+      { text: 'masses … molecular size', isCorrect: false },
+    ],
+    correctValue: 'equal numbers of molecules; density ∝ molar mass',
+    targetedMisconceptions: [],
+    source: src('chem.state.molar-mass-gas', 'Avogadro\'s law counts PARTICLES, not mass — if equal volumes held equal masses every gas would have the same density, which is the contradiction the first distractor walks into'),
+  },
+
+  {
+    conceptId: 'chem.state.phase-diagram', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.DEVELOPING,
+    stem: 'How many phases are simultaneously in equilibrium at a substance\'s triple point?',
+    choices: [
+      { text: 'Three', isCorrect: true },
+      { text: 'Two', isCorrect: false },
+      { text: 'One', isCorrect: false },
+      { text: 'Four', isCorrect: false },
+    ],
+    correctValue: '3',
+    targetedMisconceptions: [],
+    source: src('chem.state.phase-diagram', 'the triple point is where the three two-phase boundary LINES meet, and "two" is what a learner answers when they read it as just another point on a boundary — which is also why the concept\'s existing probe has to insist it is a single point, not a range'),
+  },
+  {
+    conceptId: 'chem.state.phase-diagram', subjectSlug: S, probeKind: 'fill_blank',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'A solid sublimes at 1 atm when its triple-point pressure lies ______ 1 atm — which is why solid CO₂ ______ at room conditions.',
+    choices: [
+      { text: 'above … turns straight into gas', isCorrect: true },
+      { text: 'below … turns straight into gas', isCorrect: false },
+      { text: 'above … melts to a liquid first', isCorrect: false },
+      { text: 'below … melts to a liquid first', isCorrect: false },
+    ],
+    correctValue: 'above 1 atm; CO₂ sublimes',
+    targetedMisconceptions: [],
+    source: src('chem.state.phase-diagram', 'CO₂\'s triple point is near 5.1 atm, so at 1 atm the horizontal path never crosses a liquid region at all; "dry ice is just very cold ice" survives until that pressure comparison is made explicit'),
+  },
+
+  {
+    conceptId: 'chem.state.real-gases', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'For an IDEAL gas, what is the compressibility factor Z = PV/nRT?',
+    choices: [
+      { text: 'Exactly 1, at every pressure and temperature', isCorrect: true },
+      { text: 'Greater than 1 at high pressure', isCorrect: false },
+      { text: 'Zero', isCorrect: false },
+      { text: 'It depends on which gas it is', isCorrect: false },
+    ],
+    correctValue: '1',
+    targetedMisconceptions: [],
+    source: src('chem.state.real-gases', 'the two wrong options are both TRUE of real gases, which is the discrimination: Z is defined so that the ideal case is the flat line 1, and every deviation from it is a measurement of non-ideality'),
+  },
+  {
+    conceptId: 'chem.state.real-gases', subjectSlug: S, probeKind: 'fill_blank',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'A real gas behaves most nearly ideally at ______ pressure and ______ temperature.',
+    choices: [
+      { text: 'low … high', isCorrect: true },
+      { text: 'high … low', isCorrect: false },
+      { text: 'low … low', isCorrect: false },
+      { text: 'high … high', isCorrect: false },
+    ],
+    correctValue: 'low pressure, high temperature',
+    targetedMisconceptions: [],
+    source: src('chem.state.real-gases', 'both conditions make an assumption negligible — low pressure shrinks the molecules\' own volume against the container, high temperature swamps the attractions — so the two halves have different reasons and are wrong independently'),
+  },
+
+  {
+    conceptId: 'chem.surface.adsorption', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'Physisorption releases roughly 20 kJ/mol and chemisorption roughly 200 kJ/mol. Roughly how many times stronger is chemisorption?',
+    choices: [
+      { text: 'About ten times', isCorrect: true },
+      { text: 'About 180 times', isCorrect: false },
+      { text: 'About twice', isCorrect: false },
+      { text: 'About a hundred times', isCorrect: false },
+    ],
+    correctValue: '≈10×',
+    targetedMisconceptions: [],
+    source: src('chem.surface.adsorption', '180 is the DIFFERENCE, not the ratio, and reading a "how many times" question as a subtraction is the specific slip this checks; the order-of-magnitude gap is what makes chemisorption a single irreversible layer while physisorption stacks'),
+  },
+  {
+    conceptId: 'chem.surface.adsorption', subjectSlug: S, probeKind: 'fill_blank',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'Adsorption always has a ______ entropy change, so for it to be spontaneous the enthalpy change must be ______.',
+    choices: [
+      { text: 'negative … negative (exothermic)', isCorrect: true },
+      { text: 'positive … negative (exothermic)', isCorrect: false },
+      { text: 'negative … positive (endothermic)', isCorrect: false },
+      { text: 'positive … positive (endothermic)', isCorrect: false },
+    ],
+    correctValue: 'ΔS negative, so ΔH must be negative',
+    targetedMisconceptions: [],
+    source: src('chem.surface.adsorption', 'a free gas molecule pinned to a surface loses freedom, so ΔS is negative and ΔG = ΔH − TΔS can only be negative if ΔH is — this is WHY adsorption is exothermic rather than an isolated fact to remember, and it is what the concept\'s existing chemisorption-with-temperature probe turns on'),
+  },
+
+  {
+    conceptId: 'chem.surface.colloids', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'Roughly what particle size range defines a colloid, between a true solution below it and a suspension above it?',
+    choices: [
+      { text: 'About 1 nm to 1000 nm', isCorrect: true },
+      { text: 'Below 1 nm', isCorrect: false },
+      { text: 'About 1 µm to 1000 µm', isCorrect: false },
+      { text: 'Above 1 mm', isCorrect: false },
+    ],
+    correctValue: '≈1–1000 nm',
+    targetedMisconceptions: [],
+    source: src('chem.surface.colloids', 'the upper end is comparable to the wavelength of visible light, which is exactly why a colloid scatters a beam and a solution does not — the size range and the Tyndall effect are the same fact stated two ways'),
+  },
+  {
+    conceptId: 'chem.surface.colloids', subjectSlug: S, probeKind: 'fill_blank',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.DEVELOPING,
+    stem: 'A colloid consists of a ______ phase spread through a ______ medium; in milk these are the fat droplets and the water respectively.',
+    choices: [
+      { text: 'dispersed … continuous', isCorrect: true },
+      { text: 'continuous … dispersed', isCorrect: false },
+      { text: 'dissolved … continuous', isCorrect: false },
+      { text: 'dispersed … dissolved', isCorrect: false },
+    ],
+    correctValue: 'dispersed phase in a continuous medium',
+    targetedMisconceptions: [],
+    source: src('chem.surface.colloids', '"dissolved" is the word that has to be resisted: the fat is suspended as droplets, not broken into molecules, which is the whole distinction between a colloid and a solution'),
+  },
+
+  {
+    conceptId: 'chem.surface.emulsions', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'Mayonnaise is an oil-in-water emulsion. Which liquid is the dispersed phase and which is the continuous one?',
+    choices: [
+      { text: 'Oil dispersed, water continuous', isCorrect: true },
+      { text: 'Water dispersed, oil continuous', isCorrect: false },
+      { text: 'Both are continuous', isCorrect: false },
+      { text: 'Neither — the two have mixed completely', isCorrect: false },
+    ],
+    correctValue: 'oil dispersed in continuous water',
+    targetedMisconceptions: [],
+    source: src('chem.surface.emulsions', 'the name states the answer — "oil-IN-water" — and butter is the reverse case, so the naming convention is worth having before the concept\'s existing separation probe asks why the two phases come back apart'),
+  },
+  {
+    conceptId: 'chem.surface.emulsions', subjectSlug: S, probeKind: 'fill_blank',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'An emulsifier works because one end of its molecule is ______ and the other is ______, so it can sit in the boundary between the two liquids.',
+    choices: [
+      { text: 'hydrophilic … hydrophobic', isCorrect: true },
+      { text: 'hydrophilic … hydrophilic', isCorrect: false },
+      { text: 'hydrophobic … hydrophobic', isCorrect: false },
+      { text: 'positively charged … negatively charged', isCorrect: false },
+    ],
+    correctValue: 'one hydrophilic end, one hydrophobic end',
+    targetedMisconceptions: [],
+    source: src('chem.surface.emulsions', 'the charge option is offered because "opposite ends" gets remembered without WHICH opposition — a molecule with a + and a − end is a dipole and would dissolve happily in water, stabilising nothing'),
+  },
+
+  {
+    conceptId: 'chem.surface.surfactants', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'In a micelle formed by soap in water, which part of the surfactant molecule points inwards, towards the centre?',
+    choices: [
+      { text: 'The hydrophobic hydrocarbon tail', isCorrect: true },
+      { text: 'The ionic head', isCorrect: false },
+      { text: 'Both — the molecules fold in half', isCorrect: false },
+      { text: 'Neither — the molecules lie flat on the surface', isCorrect: false },
+    ],
+    correctValue: 'the hydrocarbon tail',
+    targetedMisconceptions: [],
+    source: src('chem.surface.surfactants', 'the tails hide from the water, which is the same reason grease ends up inside the micelle and washes away — the concept\'s existing "is it a chemical reaction" probe depends on this being a physical arrangement and nothing more'),
+  },
+  {
+    conceptId: 'chem.surface.surfactants', subjectSlug: S, probeKind: 'fill_blank',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'A surfactant lowers water\'s surface tension because its molecules gather ______, where they disrupt the ______ between the water molecules.',
+    choices: [
+      { text: 'at the air–water surface … hydrogen bonding', isCorrect: true },
+      { text: 'throughout the bulk liquid … hydrogen bonding', isCorrect: false },
+      { text: 'at the air–water surface … covalent bonding', isCorrect: false },
+      { text: 'throughout the bulk liquid … covalent bonding', isCorrect: false },
+    ],
+    correctValue: 'at the surface; disrupting hydrogen bonding',
+    targetedMisconceptions: [],
+    source: src('chem.surface.surfactants', 'surface tension is a SURFACE property, so a molecule that spread evenly through the bulk could not change it — that is also why surface tension stops falling once the surface is full, which is what the concept\'s existing past-the-CMC probe asks'),
+  },
+
+  {
+    conceptId: 'chem.thermo.bond-enthalpy', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'For H₂(g) + Cl₂(g) → 2HCl(g), the bond enthalpies are H–H 436, Cl–Cl 242 and H–Cl 431 kJ/mol. What is ΔH for the reaction?',
+    choices: [
+      { text: '−184 kJ/mol', isCorrect: true },
+      { text: '+184 kJ/mol', isCorrect: false },
+      { text: '−431 kJ/mol', isCorrect: false },
+      { text: '+862 kJ/mol', isCorrect: false },
+    ],
+    correctValue: '−184 kJ/mol',
+    targetedMisconceptions: [],
+    source: src('chem.thermo.bond-enthalpy', 'bonds broken (436 + 242) minus bonds formed (2 × 431); the +184 option is that subtraction the wrong way round, and it is the same sign error as the concept\'s existing "breaking bonds releases energy" probe, here in a form that produces a number'),
+  },
+
+  {
+    conceptId: 'chem.thermo.entropy', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'A system reversibly absorbs 600 J of heat at a constant 300 K. Using ΔS = q_rev/T, what is its entropy change?',
+    choices: [
+      { text: '+2.0 J/K', isCorrect: true },
+      { text: '+0.50 J/K — T divided by q', isCorrect: false },
+      { text: '+180 000 J/K — q multiplied by T', isCorrect: false },
+      { text: '−2.0 J/K', isCorrect: false },
+    ],
+    correctValue: '+2.0 J/K',
+    targetedMisconceptions: [],
+    source: src('chem.thermo.entropy', 'the units settle it — entropy is J/K, so the temperature must be underneath; and heat entering the system RAISES its entropy, which is what makes the negative option a sign error rather than a rounding one'),
+  },
+
+  {
+    conceptId: 'chem.thermo.first-law', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'A gas absorbs 500 J of heat and does 200 J of work ON its surroundings. Using ΔU = q + w in the chemistry convention, what is ΔU?',
+    choices: [
+      { text: '+300 J', isCorrect: true },
+      { text: '+700 J — the work added instead of subtracted', isCorrect: false },
+      { text: '−300 J', isCorrect: false },
+      { text: '+200 J', isCorrect: false },
+    ],
+    correctValue: '+300 J',
+    targetedMisconceptions: [],
+    source: src('chem.thermo.first-law', 'work done BY the system leaves it, so w is negative in this convention; the +700 option is the one sign the convention exists to fix, and it is the same decision the concept\'s existing expansion probe asks for in words'),
+  },
+  {
+    conceptId: 'chem.thermo.first-law', subjectSlug: S, probeKind: 'fill_blank',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'ΔH and ΔU differ by ______, so they are equal whenever a reaction involves ______.',
+    choices: [
+      { text: 'Δn(gas) × RT … no change in the number of moles of gas', isCorrect: true },
+      { text: 'Δn(gas) × RT … no change in temperature', isCorrect: false },
+      { text: 'q × T … no change in the number of moles of gas', isCorrect: false },
+      { text: 'the work done … no change in volume of the liquid phase', isCorrect: false },
+    ],
+    correctValue: 'ΔH = ΔU + Δn(gas)RT; equal when Δn(gas) = 0',
+    targetedMisconceptions: [],
+    source: src('chem.thermo.first-law', 'the difference is the expansion work of the GASES only, which is why solids and liquids are ignored in Δn; the concept\'s existing Haber probe gives Δn = −2 and this one says what that number is then used for'),
+  },
+
+  {
+    conceptId: 'chem.thermo.heat-capacities', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'For a monatomic ideal gas Cv = 3R/2. What is the ratio γ = Cp/Cv?',
+    choices: [
+      { text: '5/3, about 1.67', isCorrect: true },
+      { text: '1.40', isCorrect: false },
+      { text: '0.60', isCorrect: false },
+      { text: '1.00', isCorrect: false },
+    ],
+    correctValue: '5/3 ≈ 1.67',
+    targetedMisconceptions: [],
+    source: src('chem.thermo.heat-capacities', 'Cp = Cv + R = 5R/2, so the R cancels and γ is a pure number; 1.40 is the DIATOMIC value offered as the right answer to a different question, and 0.60 is the ratio inverted — which the concept\'s existing γ = 0.8 probe already establishes is impossible'),
+  },
+
+  {
+    conceptId: 'chem.thermo.system', subjectSlug: S, probeKind: 'fill_blank',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.DEVELOPING,
+    stem: 'A system that can exchange energy but NOT matter with its surroundings is called ______; one that can exchange both is called ______.',
+    choices: [
+      { text: 'closed … open', isCorrect: true },
+      { text: 'open … closed', isCorrect: false },
+      { text: 'isolated … closed', isCorrect: false },
+      { text: 'closed … isolated', isCorrect: false },
+    ],
+    correctValue: 'closed; open',
+    targetedMisconceptions: [],
+    source: src('chem.thermo.system', '"closed" is heard as sealed-against-everything, which is actually ISOLATED — the concept\'s existing insulated-container probe is the isolated case, and these two complete the set of three'),
+  },
+]
+
+/**
  * Every chemistry probe-depth probe. One array, so `seed-knowledge-assets.ts`,
  * the cold-start bootstrap and the contract tests — all of which scan for a
  * `*_PROBES` export — see the same set.
@@ -2416,4 +2835,5 @@ export const CHEMISTRY_DEPTH_PROBES: SeedProbe[] = [
   ...CHEM_C,
   ...CHEM_D,
   ...CHEM_E,
+  ...CHEM_F,
 ]
