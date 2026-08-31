@@ -66,3 +66,68 @@ describe('it REPORTS and must never withhold teaching', () => {
     // grow into a gate.
   })
 })
+
+// ═══════════════════════════════════════════════════════════════════════════
+// E1 — attaching a keyed probe BELOW the mastery gates
+// ═══════════════════════════════════════════════════════════════════════════
+import { readFileSync } from 'fs'
+import { mayAttachProbeBelowGuide } from '@/lib/teaching/masteryReachability'
+
+describe('E1 — a probe may be spent early only against real surplus', () => {
+  it('needs FOUR: one is spent here, three must survive to certify', () => {
+    expect(mayAttachProbeBelowGuide('DEMONSTRATE', 3)).toBe(false)
+    expect(mayAttachProbeBelowGuide('DEMONSTRATE', 4)).toBe(true)
+    expect(mayAttachProbeBelowGuide('DEMONSTRATE', 5)).toBe(true)
+  })
+
+  it('a bare-contract concept behaves exactly as before — this is the safety property', () => {
+    // Three gradeable probes is the contract floor. Spending one there is what
+    // held physics at 79%, and shipping E1 before probe depth would have made
+    // the dominant failure class worse.
+    for (const pool of [0, 1, 2, 3]) {
+      expect(mayAttachProbeBelowGuide('DEMONSTRATE', pool)).toBe(false)
+    }
+  })
+
+  it('OBSERVE is never opened — it is a diagnostic phase, not a thin gate', () => {
+    for (const pool of [4, 5, 10, 50]) {
+      expect(mayAttachProbeBelowGuide('OBSERVE', pool)).toBe(false)
+    }
+  })
+
+  it('says nothing about phases that were already allowed', () => {
+    // GUIDE, CHECK, PRACTICE are governed by the existing predicates; this
+    // function answers only the question it is named for.
+    for (const phase of ['GUIDE', 'CHECK', 'PRACTICE', 'TRANSFER', null, undefined]) {
+      expect(mayAttachProbeBelowGuide(phase, 50)).toBe(false)
+    }
+  })
+
+  it('refuses on an unreadable pool rather than guessing', () => {
+    for (const bad of [NaN, Infinity, undefined, null, '4']) {
+      expect(mayAttachProbeBelowGuide('DEMONSTRATE', bad as unknown as number)).toBe(false)
+    }
+  })
+})
+
+describe('the route wires E1 exactly as described', () => {
+  const route = readFileSync('src/app/api/learn/chat/route.ts', 'utf8')
+
+  it('opens DEMONSTRATE only on an ASK turn, never on a teach turn', () => {
+    expect(route).toMatch(
+      /\(phaseBeforeTurn === 'GUIDE' \|\| phaseBeforeTurn === 'DEMONSTRATE'\)\s*\n?\s*&& evidenceMoveHoisted === 'ask'/,
+    )
+  })
+
+  it('enforces the surplus at the serving site, where the pool is known', () => {
+    expect(route).toMatch(/mayAttachProbeBelowGuide\(phaseBeforeTurn, probe\.poolSize\)/)
+    expect(route).toMatch(/const converted = probe && !belowGuideBlocked \? probeToMcq\(probe\) : null/)
+  })
+
+  it('leaves the SHARED predicate alone, so the withhold guard is unchanged', () => {
+    // Widening isProbeAttachablePhase would also change where ungradeable
+    // model questions are suppressed — a different change with its own risk.
+    const fn = readFileSync('src/lib/teaching/gateAssessment.ts', 'utf8')
+    expect(fn).toMatch(/export function isProbeAttachablePhase\(phase: unknown\): boolean \{\s*\n\s*return phase === 'GUIDE' \|\| isMasteryGatePhase\(phase\)/)
+  })
+})

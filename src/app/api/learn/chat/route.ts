@@ -3881,9 +3881,31 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // never sets it. At CHECK/PRACTICE the move is always 'ask', so those
         // phases are unaffected by the extra condition and behave exactly as
         // they did before.
+        // E1 — CRITERION 4. Measured in the 2026-08-31 re-measurement: only
+        // 114 of 456 questions put to the learner carried an answer key (25%),
+        // so three quarters of what the tutor asks cannot be graded and the
+        // learner answers into a void. DEMONSTRATE is where the largest block
+        // of those sit.
+        //
+        // This was scheduled SECOND in the blueprint and would have been
+        // harmful then: at a pool of exactly three, spending a probe below the
+        // mastery gates makes mastery unreachable, which is the defect that
+        // held physics at 79%. Probe depth is now complete in both subjects
+        // (physics 261/261, chemistry 186/186 at five or more), so the surplus
+        // this needs exists for the first time. The surplus itself is enforced
+        // at the SERVING site below, where the pool size is known —
+        // `mayAttachProbeBelowGuide`.
+        //
+        // Same 'ask'-only condition as GUIDE, for the same reason: attaching a
+        // question to a TEACH turn would override a teaching decision the
+        // ladder made deliberately. OBSERVE is untouched — it is a DIAGNOSTIC
+        // phase (observeDiagnosticConcludes.test.ts), and the one previous
+        // attempt to alter its ladder behaviour broke seven behavioural tests
+        // and was reverted.
         const phaseAllowsProbe =
           isMasteryGatePhase(phaseBeforeTurn) ||
-          (phaseBeforeTurn === 'GUIDE' && evidenceMoveHoisted === 'ask')
+          ((phaseBeforeTurn === 'GUIDE' || phaseBeforeTurn === 'DEMONSTRATE')
+            && evidenceMoveHoisted === 'ask')
         phaseAllowsProbeHoisted = phaseAllowsProbe
         // PHASE 3. Three of the terms this conjunction used to spell out by hand
         // — recovery, closing, and the learner-request term it was MISSING —
@@ -3916,7 +3938,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // not re-spelled below, so the log and the decision cannot drift.
         const gateTerms = {
           phaseAllowsProbe,
-          probeAttachablePhase: isProbeAttachablePhase(phaseBeforeTurn),
+          // E1 adds DEMONSTRATE to THIS gate's scope only. `isProbeAttachablePhase`
+          // is deliberately left alone: its other caller is the ungraded-question
+          // withhold, and widening that too would suppress the model's own
+          // questions at DEMONSTRATE — a different change, with a real risk of
+          // making lessons passive (blueprint 7), which must be measured on its
+          // own rather than smuggled in beside this one.
+          probeAttachablePhase:
+            isProbeAttachablePhase(phaseBeforeTurn) || phaseBeforeTurn === 'DEMONSTRATE',
           hasMemoryState: memoryState !== null,
           noUnansweredProbeOnScreen: !unansweredProbeOnScreen,
           notFirstLesson: !firstLessonActiveHoisted,
@@ -4011,7 +4040,24 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // accepts non-MCQ probes and renders them as prose follow-ups.
             requireMcq: true,
           })
-          const converted = probe ? probeToMcq(probe) : null
+          // THE SURPLUS RULE. Spending a probe below the mastery gates is only
+          // safe while three remain afterwards, because mastery needs three
+          // credits and a spent probe is never re-asked. Enforced here rather
+          // than in `gateTerms` because the pool size is not known until the
+          // selector has run. A concept still at the bare contract therefore
+          // behaves EXACTLY as it did before this change.
+          const { mayAttachProbeBelowGuide } = await import('@/lib/teaching/masteryReachability')
+          const belowGuideBlocked =
+            phaseBeforeTurn === 'DEMONSTRATE'
+            && !(probe ? mayAttachProbeBelowGuide(phaseBeforeTurn, probe.poolSize) : false)
+          if (belowGuideBlocked) {
+            console.log('[gate-assessment] ' + JSON.stringify({
+              declined: 'below-guide-no-surplus',
+              phase: phaseBeforeTurn,
+              poolSize: probe?.poolSize ?? 0,
+            }))
+          }
+          const converted = probe && !belowGuideBlocked ? probeToMcq(probe) : null
           if (converted) {
             gateMcqHoisted = converted
             // The block still goes in: if the deterministic renderer refuses

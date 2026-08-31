@@ -128,14 +128,36 @@ describe('the exclusions are on the eligibility test, not assumed', () => {
     expect(eligibility).toMatch(/isMasteryGatePhase\(phaseBeforeTurn\)/)
   })
 
-  it('fires at GUIDE ONLY on a turn that was already going to ask (A2a)', () => {
-    // Attaching a question to a GUIDE teach-turn would override a teaching
-    // decision the ladder made deliberately.
-    expect(eligibility).toMatch(/phaseBeforeTurn === 'GUIDE' && evidenceMoveHoisted === 'ask'/)
+  it('fires below CHECK ONLY on a turn that was already going to ask (A2a)', () => {
+    // Attaching a question to a teach-turn would override a teaching decision
+    // the ladder made deliberately. E1 extended the same rule from GUIDE to
+    // DEMONSTRATE; the 'ask'-only condition is what makes that safe and is
+    // asserted here for BOTH phases together, so neither can be opened alone.
+    expect(eligibility).toMatch(
+      /\(phaseBeforeTurn === 'GUIDE' \|\| phaseBeforeTurn === 'DEMONSTRATE'\)\s*\n?\s*&& evidenceMoveHoisted === 'ask'/,
+    )
   })
 
-  it('never fires below GUIDE', () => {
-    expect(eligibility).not.toMatch(/OBSERVE|DEMONSTRATE/)
+  it('never fires at OBSERVE — narrowed from "never below GUIDE", with cause', () => {
+    // REWRITTEN, not deleted. This read `not.toMatch(/OBSERVE|DEMONSTRATE/)`
+    // and pinned the gate to GUIDE and above.
+    //
+    // E1 deliberately opens DEMONSTRATE. Criterion 4 was measured at 25% in
+    // the 2026-08-31 physics re-measurement — 114 of 456 questions carried an
+    // answer key — and DEMONSTRATE holds the largest block of the ungradeable
+    // ones. Opening it was UNSAFE until probe depth completed: at a pool of
+    // exactly three, spending one below the mastery gates makes mastery
+    // unreachable, which is the defect that held physics at 79%. Both subjects
+    // now sit at five or more, and the surplus is enforced per-concept at the
+    // serving site (`mayAttachProbeBelowGuide`), so a concept still at the
+    // bare contract behaves exactly as it did before.
+    //
+    // OBSERVE keeps the original guarantee, and that half is NOT a scarcity
+    // argument: observeDiagnosticConcludes.test.ts establishes OBSERVE as a
+    // DIAGNOSTIC phase, and the one previous attempt to alter its ladder
+    // behaviour in this programme broke seven behavioural tests and was
+    // reverted.
+    expect(eligibility).not.toMatch(/OBSERVE/)
   })
 
   it('never during recovery — no content into a flooded mind', () => {

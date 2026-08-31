@@ -88,3 +88,43 @@ export function assessMasteryReachability(input: ReachabilityInput): Reachabilit
     reason: 'insufficient-probes',
   }
 }
+
+/**
+ * May the server attach an authored probe on a turn BELOW the mastery gates?
+ *
+ * ── WHY THIS IS NOT SIMPLY "YES" ────────────────────────────────────────────
+ * Criterion 4 — every question the learner is asked should be gradeable by the
+ * server — sat at 25% in the 2026-08-31 physics re-measurement: 114 of 456
+ * questions carried an answer key. The rest were model-invented prose, which
+ * `gradeMcqAnswer` cannot score, so the learner answers into a void.
+ *
+ * The obvious fix is to let the gate attach a keyed probe earlier. The reason
+ * that was NOT done earlier is measured and specific: at a pool of exactly
+ * three, spending one below the gates makes mastery unreachable, which is the
+ * defect that held physics at 79% for the whole programme. E1 was scheduled
+ * second in the blueprint and would have made the dominant failure class
+ * WORSE if shipped then.
+ *
+ * ── WHAT CHANGED ────────────────────────────────────────────────────────────
+ * Probe depth is now complete in both subjects — physics 261/261 and chemistry
+ * 186/186 pairs at five or more gradeable probes. The surplus this needs
+ * exists, for the first time. So the rule is: spend one early only while at
+ * least three remain AFTERWARDS.
+ *
+ * DEMONSTRATE only. OBSERVE stays barred, and not for want of probes:
+ * `observeDiagnosticConcludes.test.ts` establishes OBSERVE as a DIAGNOSTIC
+ * phase whose job is to find out what the learner already knows. An earlier
+ * attempt to change OBSERVE's ladder behaviour in this programme broke seven
+ * behavioural tests and was reverted. It is left alone.
+ */
+export function mayAttachProbeBelowGuide(
+  phase: unknown,
+  /** Gradeable, not-yet-asked probes available right now, including the one
+   *  about to be served. `ProbeMatch.poolSize`. */
+  poolSize: number,
+): boolean {
+  if (phase !== 'DEMONSTRATE') return false
+  if (typeof poolSize !== 'number' || !Number.isFinite(poolSize)) return false
+  // One is spent here; CREDITS_REQUIRED_FOR_MASTERY must survive.
+  return Math.floor(poolSize) - 1 >= CREDITS_REQUIRED_FOR_MASTERY
+}

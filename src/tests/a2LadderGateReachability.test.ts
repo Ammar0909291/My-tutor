@@ -56,10 +56,25 @@ describe('A2a — where a probe may be attached', () => {
     }
   })
 
-  it('attaches at GUIDE only on a turn that was already going to ask', () => {
-    // A teach turn at GUIDE must not have a question stapled onto it.
-    expect(ROUTE).toContain("(phaseBeforeTurn === 'GUIDE' && evidenceMoveHoisted === 'ask')")
+  it('attaches below CHECK only on a turn that was already going to ask', () => {
+    // A teach turn must not have a question stapled onto it. E1 extended that
+    // same rule from GUIDE to DEMONSTRATE rather than relaxing it, so the
+    // 'ask'-only condition now covers both and neither can be opened alone.
+    //
+    // WHY DEMONSTRATE OPENED: criterion 4 measured 25% in the 2026-08-31
+    // physics re-measurement (114 of 456 questions carried an answer key), and
+    // DEMONSTRATE holds the largest block of the ungradeable ones. It was
+    // UNSAFE to open until probe depth completed — at a pool of exactly three,
+    // spending one below the mastery gates makes mastery unreachable, the
+    // defect that held physics at 79%. The per-concept surplus is enforced at
+    // the serving site, so a bare-contract concept is unaffected.
+    expect(ROUTE).toMatch(
+      /\(phaseBeforeTurn === 'GUIDE' \|\| phaseBeforeTurn === 'DEMONSTRATE'\)\s*\n?\s*&& evidenceMoveHoisted === 'ask'/,
+    )
     expect(ROUTE).toContain('const phaseAllowsProbe =')
+    // The SHARED predicate is deliberately untouched — pinned by the case
+    // above, which still requires isProbeAttachablePhase('DEMONSTRATE') false.
+    expect(ROUTE).toContain('mayAttachProbeBelowGuide')
   })
 
   it('leaves CHECK/PRACTICE eligibility exactly as it was', () => {
