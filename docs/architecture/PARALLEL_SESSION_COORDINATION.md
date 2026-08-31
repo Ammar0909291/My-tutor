@@ -72,7 +72,8 @@ served behaviour.
 | held by | subject | started (UTC) | expected | status |
 |---|---|---|---|---|
 | Session A | chemistry, 12 concepts, seed 7 | 2026-08-30 ~15:45 | ~90 min | **DONE** (12/12, 11 measured, 73% mastery — see 71624d4) |
-| Session A | **physics re-measurement, 60 concepts, seed 2026** | 2026-08-30 ~21:35 | ~7 h | **RUNNING** |
+| Session A | physics re-measurement, 60 concepts, seed 2026 | 2026-08-30 ~21:35 | ~7 h | **DONE** (79% -> 95%, see 377b642) |
+| Session A | **E1 verification, 60 concepts, seed 2026** | 2026-08-31 ~09:40 | ~8 h | **RUNNING** |
 
 Release by setting status to DONE. Do not start a run while another row is
 RUNNING.
