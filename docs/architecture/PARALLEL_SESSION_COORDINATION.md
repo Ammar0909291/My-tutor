@@ -74,6 +74,7 @@ served behaviour.
 | Session A | chemistry, 12 concepts, seed 7 | 2026-08-30 ~15:45 | ~90 min | **DONE** (12/12, 11 measured, 73% mastery — see 71624d4) |
 | Session A | physics re-measurement, 60 concepts, seed 2026 | 2026-08-30 ~21:35 | ~7 h | **DONE** (79% -> 95%, see 377b642) |
 | Session A | E1 verification, 60 concepts, seed 2026 | 2026-08-31 ~09:40 | ~8 h | **ABANDONED — lock RELEASED.** Session A hit its usage limit minutes after starting it; 0 concepts recorded. Session B: the lock is FREE, restart it with the command in the handover. |
+| Session B | E1 verification (restart), physics, 60 concepts, seed 2026 | 2026-08-31 ~04:20 | ~8 h | **RUNNING** — restarted after Session A's abandoned attempt recorded 0 concepts. Sole owner of the programme from this point; no second session to collide with. Provider-heavy: no other provider-calling script (warm-cohort included) runs until this is DONE. |
 
 Release by setting status to DONE. Do not start a run while another row is
 RUNNING.
