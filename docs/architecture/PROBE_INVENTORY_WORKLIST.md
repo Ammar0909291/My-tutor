@@ -194,31 +194,59 @@ The corpus-wide duplicate-stem check reports exactly 1, in
 `math.arith.exponent-rules`. It is pre-existing, it is mathematics, and it is
 outside this campaign's file ownership. It needs a mathematics-owning session.
 
-### Production convergence — measured 2026-08-31, not assumed
+### Production convergence — measured 2026-08-31, and watched moving
 
-The corpus is at target; **production is not there yet, and this is the number
-any run measuring this work must check first.** Measured directly against
-production, joining `probe_assets` and requiring `jsonb_array_length(choices) >= 2`
-over ACTIVE PROBE identities:
+The corpus is at target. Production was measured three times over ~15 minutes,
+and the third measurement is different from the first two — which is the useful
+part, because it shows the bootstrap converging rather than merely asserting it
+will.
 
-| subject | pairs | at >= 5 | at exactly 4 | at exactly 3 |
-|---|---|---|---|---|
-| physics | 261 | 196 | 65 | **0** |
-| chemistry | 186 | 168 | 9 | **9** |
+**Chemistry is DONE in production: 186/186 pairs at >= 5, minimum 5.** All 244
+chemistry depth probes are ACTIVE, under 244 distinct canonicalSlugs — zero
+duplicates, which is the slug-resolver trap not springing. The nine pairs that
+read "exactly 3" fifteen minutes earlier were chunk 8's own concepts, and a cold
+start landed them mid-measurement.
 
-Two things follow, and they point in opposite directions:
+**Physics has not converged, and it is lag rather than a defect:**
 
-- **The dangerous floor is nearly gone in production already.** No physics pair
-  is at 3, and the nine chemistry pairs still at 3 are exactly chunk 8's
-  concepts, committed minutes before this measurement. The 74 pairs at 4 are
-  earlier chunks partway through.
-- **83 pairs are still below five in production**, so a run today would measure
-  a pool the corpus no longer describes.
+| | corpus | production | missing |
+|---|---|---|---|
+| physics probe rows (seed-owned, ACTIVE) | 1,848 | 1,649 | **199** |
+| pairs at >= 5 gradeable | 261/261 | 196/261 | 65 pairs at exactly 4 |
+| pairs at exactly 3 | 0 | **0** | — |
+| duplicate canonicalSlugs | 0 | 0 | — |
 
-The bootstrap IS running, not stalled — 647 of the 674 authored probes had
-landed within 30 hours of the first batch (283 in one hour, 229 in the next).
-Convergence is a matter of cold starts, not of a defect. Re-run the query above
-before attributing any change in verified mastery to this campaign.
+At the bootstrap's write budget of ~150 rows per cold start, 199 rows is about
+two more cold starts. Cold starts are traffic-driven, so this cannot be forced
+from a session and polling it on a short cadence is wasted — chemistry moved
+while physics did not, in the same window, most likely because one cold start's
+budget was spent before reaching the physics tail.
+
+**The dangerous floor is already gone in BOTH subjects: zero pairs at exactly 3
+in production.** That is the condition the engine change was blocked on, and it
+does not require waiting for the last 65 pairs to reach five.
+
+The completeness guard will not skip the remainder. It was rewritten after a
+measured incident in which it compared the corpus against a slug count over
+every seed-owned row in the table — a larger set including files the hook does
+not import — and was satisfied while 314 chemistry probes were absent. It now
+intersects the same prefetch with the slugs this corpus declares, and both new
+depth modules are registered in that corpus, so they are counted as missing
+until they exist.
+
+Re-run before attributing any mastery change to this campaign:
+
+    -- pairs below five, per subject, in production
+    WITH g AS (
+      SELECT ai."conceptId", ai."gradeBand",
+             COUNT(*) FILTER (WHERE jsonb_array_length(pa.choices) >= 2) AS gradeable
+      FROM asset_identity ai
+      JOIN probe_assets pa ON pa."assetId" = ai."assetId"
+      WHERE ai.family = 'PROBE' AND ai.status = 'ACTIVE'
+      GROUP BY 1,2
+    )
+    SELECT split_part("conceptId",'.',1) AS subject, COUNT(*) FILTER (WHERE gradeable < 5)
+    FROM g GROUP BY 1;
 
 ### Nothing here reaches a learner yet
 

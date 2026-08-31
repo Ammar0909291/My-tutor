@@ -243,31 +243,34 @@ per-batch tables and the reasoning.
 barred below GUIDE because spending one early would starve CHECK/PRACTICE, and
 that binds only at exactly 3. There is no pair at 3 in either subject any more.
 
-**The caveat, and then the measurement — because a warning is not a number.**
-The corpus is at target; production is not there yet. Measured directly, ACTIVE
-PROBE identities joined to `probe_assets` with `jsonb_array_length(choices) >= 2`:
+**The caveat, then the measurement, then the correction — all within one turn.**
+Production was measured three times over ~15 minutes and the third reading
+differs from the first two, which is the useful part: it shows the bootstrap
+converging rather than asserting it will.
 
-| subject | pairs | at >= 5 | at exactly 4 | at exactly 3 |
-|---|---|---|---|---|
-| physics | 261 | 196 | 65 | **0** |
-| chemistry | 186 | 168 | 9 | **9** |
+**Chemistry is DONE in production — 186/186 pairs at >= 5, minimum 5.** All 244
+chemistry probes ACTIVE under 244 distinct slugs, zero duplicates. The nine pairs
+reading "exactly 3" fifteen minutes earlier were chunk 8's own concepts; a cold
+start landed them mid-measurement.
 
-**The floor you were blocked by is already gone in physics** — zero pairs at 3.
-The nine chemistry pairs still at 3 are chunk 8's own concepts, committed minutes
-before the measurement. The 74 at 4 are earlier chunks partway through.
+**Physics has 199 of 1,848 seed-owned probe rows still to write** (1,649 present,
+0 duplicate slugs), leaving 65 pairs at exactly 4. At ~150 rows per cold start
+that is about two more. Cold starts are traffic-driven, so it cannot be forced
+from a session, and polling it on a short cadence is wasted — chemistry moved
+while physics did not in the same window, most likely because one cold start's
+budget was spent before reaching the physics tail.
 
-The bootstrap is running, not stalled: 647 of 674 authored probes landed within
-30 hours of the first batch. But **83 pairs are still below five in production**,
-so a run today measures a pool the corpus no longer describes. Re-run the query
-in `PROBE_INVENTORY_WORKLIST.md` before attributing a mastery change to this
-work — if you measure now and see no effect, that could be convergence lag
-rather than a falsified premise, and the two are worth telling apart.
+**The thing you were blocked on is already true in BOTH subjects: zero pairs at
+exactly 3 in production.** You do not need to wait for the last 65 pairs.
 
-**Not verified: no learner run.** Everything above is measured against the real
-modules and the real corpus offline. Whether five probes actually moves verified
-mastery is Session A's measurement to make, and it is the falsifiable prediction
-this campaign rests on. If it does not move, the premise was wrong and I would
-rather that be found than assumed.
+What I got wrong an hour ago and am correcting here: I reported "83 pairs below
+five" as a single blocking figure. It was accurate at the time and it was the
+wrong shape — chemistry and physics were on different trajectories and the
+combined number hid that chemistry was one cold start from done.
+
+If a run measures no mastery change, check the query in
+`PROBE_INVENTORY_WORKLIST.md` before concluding the premise was false.
+Convergence lag and a falsified premise look identical from the transcript.
 
 Chemistry's structural obstacle is worth carrying forward: its seed template gave
 each concept exactly one probe of each kind, so every
