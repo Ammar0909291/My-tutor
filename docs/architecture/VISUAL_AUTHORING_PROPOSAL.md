@@ -140,6 +140,49 @@ already enforces:
    probes. Chemistry's seed path bypassing DRAFT is a documented deliberate
    exception for text; I am not proposing to extend it to figures.
 
+## I tested population (B) instead of asserting it
+
+The list above came from reading concept TITLES, which is inference. Before
+asking anyone to act on it I hand-authored five specs and ran them through the
+engine's own `validateGeneratedFigure` with `requireAxisLabels: true` — the
+strictest setting, the one generation itself uses.
+
+| concept | form | result |
+|---|---|---|
+| `chem.org.spectroscopy` | graph | **PASS** |
+| `phys.therm.specific-heat` | graph | **PASS** |
+| `phys.mech.power` | graph | **PASS** |
+| `phys.meas.significant-figures` | number_line | **PASS** |
+| `phys.em.magnetic-field` | scene | **FAIL — structurally-invalid** |
+
+So population (B) is real for the flat forms: four concepts the generator
+declined accept a hand-authored figure with **no engine change at all**. That is
+the claim I wanted to be able to make honestly, and it is now measured rather
+than argued.
+
+**Two of the four only passed after I fixed my own errors, and both are contract
+details an authoring batch must know:**
+
+1. The graph field is **`equation`**, not `expression`. My first three graphs
+   were rejected `structurally-invalid` for that alone.
+2. A spec is rejected **`not-anchored-to-concept`** unless its prose shares a
+   content word with the concept's title or description. "An Absorption
+   Spectrum" failed for `chem.org.spectroscopy`; "Spectroscopy: an absorption
+   spectrum" passed. The anchor is vocabulary overlap, not meaning — an
+   authored title must reuse the concept's own words.
+
+**The scene form is NOT yet demonstrated authorable.** `validateGeneratedScene`
+requires a structural pass, at least 2 objects of a DRAWN type, narration on at
+least one step, and concept anchoring. I supplied all four and it still returned
+`structurally-invalid`, so `validateSceneSpec` enforces more than I have matched.
+I stopped rather than reverse-engineer it, because scenes are Session A's area
+and the schema should come from them, not from my guessing.
+
+That matters for sequencing: `phys.em.magnetic-field`, `phys.mech.buoyancy`,
+`phys.therm.entropy` and the spacetime pair are all scene-shaped. **The
+graph/number_line half of population (B) can start immediately; the scene half
+is blocked on the SceneSpec authoring contract.**
+
 ## What I propose to do, in order
 
 1. **Nothing yet** — this document is the proposal Session A asked for, and the
