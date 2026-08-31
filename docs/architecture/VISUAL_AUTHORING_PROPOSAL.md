@@ -171,17 +171,48 @@ details an authoring batch must know:**
    spectrum" passed. The anchor is vocabulary overlap, not meaning — an
    authored title must reuse the concept's own words.
 
-**The scene form is NOT yet demonstrated authorable.** `validateGeneratedScene`
-requires a structural pass, at least 2 objects of a DRAWN type, narration on at
-least one step, and concept anchoring. I supplied all four and it still returned
-`structurally-invalid`, so `validateSceneSpec` enforces more than I have matched.
-I stopped rather than reverse-engineer it, because scenes are Session A's area
-and the schema should come from them, not from my guessing.
+**Correction, same session: the scene form IS authorable, and I had it wrong
+twice.** My first report said scenes were blocked on a schema Session A would
+have to supply. That was giving up too early. Reading `validateSceneSpec` and
+`anchorReport` — measurement, not the trial-and-error I had declined to do —
+produced a passing scene on the next attempt:
 
-That matters for sequencing: `phys.em.magnetic-field`, `phys.mech.buoyancy`,
-`phys.therm.entropy` and the spacetime pair are all scene-shaped. **The
-graph/number_line half of population (B) can start immediately; the scene half
-is blocked on the SceneSpec authoring contract.**
+```
+validateSceneSpec:        VALID
+validateGeneratedFigure:  PASS (scene)
+anchorReport: anchored=true, geometricObjects=4, challenger=null
+  matchedLabels: ["magnetic north pole", "magnetic south pole",
+                  "field line above the magnet", "field line below the magnet"]
+```
+
+So **all of population (B) is authorable with no engine change**, scenes
+included. Nothing here is blocked on Session A.
+
+### The scene authoring contract, as enforced
+
+Every rule below cost me a failed run, so they are worth stating exactly:
+
+| requirement | where enforced | what I got wrong |
+|---|---|---|
+| top-level `id`, `title`, `sceneType` | `validateSceneSpec` | omitted `id` and `sceneType` entirely |
+| `sceneType` ∈ diagram, simulation, process, comparison, plot | `validateSceneSpec` | — |
+| object label field is **`text`**, not `label` | `anchorReport` reads `obj.text` | used `label`; every object silently failed to anchor |
+| ≥ 2 objects of a GEOMETRIC type | `anchorReport` | — |
+| ≥ 2 **distinct** object `text` values each containing a content word from the concept's title or description | `MIN_ANCHORED_OBJECTS = 2` | "N pole" / "S pole" / "field line" ×2 gave ONE distinct anchored label; renaming to "magnetic north pole", "field line above the magnet" gave four |
+| ≥ 1 step with non-empty `narration` | `validateGeneratedScene` | omitted |
+| no other KG concept scores better on the labels | `crossConceptChallenger` | — |
+
+The label rule is the sharp one: repeating a label counts once, and a label
+that does not carry the concept's own vocabulary counts zero. A scene can be
+structurally perfect and still be refused for naming its parts naturally.
+
+### The flat-form contract, as enforced
+
+| requirement | what I got wrong |
+|---|---|
+| graph field is **`equation`**, not `expression` | all three graphs rejected `structurally-invalid` |
+| `xLabel` and `yLabel` required under `requireAxisLabels` | — |
+| spec prose must share a content word with the concept | "An Absorption Spectrum" failed; "Spectroscopy: an absorption spectrum" passed |
 
 ## What I propose to do, in order
 
@@ -189,8 +220,10 @@ is blocked on the SceneSpec authoring contract.**
    headline is that the job is smaller and differently shaped than the brief.
 2. If agreed: author **population (B)**, ~11 concepts, in existing forms, one
    bounded batch at a time with a guard test, same method as the probe campaign.
-   Start with `phys.em.magnetic-field` and `chem.org.spectroscopy` — the two
-   whose titles name the figure they are missing.
+   Five are already proven to pass the engine's own validator:
+   `chem.org.spectroscopy`, `phys.therm.specific-heat`, `phys.mech.power`,
+   `phys.meas.significant-figures` and `phys.em.magnetic-field`. No engine
+   change is needed for any of them.
 3. **Population (A) is blocked on Session A's form work** and I should not
    pre-author content for a form whose schema does not exist yet.
 4. **Population (C) I propose we deliberately do not author**, and record that
