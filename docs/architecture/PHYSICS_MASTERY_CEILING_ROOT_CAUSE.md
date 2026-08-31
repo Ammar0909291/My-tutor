@@ -200,3 +200,53 @@ text-repair function. Left alone, and named.
 The specific case that prompted the owner's report is covered from the other
 side: `dontKnowCeiling.ts` means a repeated "I don't know" now gets the
 answer revealed rather than a hold.
+
+---
+
+## C7 interim — I may have been wrong that the fix failed
+
+**Status at 43/60 of the re-measurement. Not a conclusion.**
+
+I reported that `historyCompaction.ts` did not work: memory-to-model verbatim
+repeats went 20 → 18 across shared concepts, essentially flat. The run has
+since split itself into two halves by accident — the first 36 sessions ran
+before a redeploy, the rest after — and the halves disagree.
+
+Restricted to the sessions actually **at risk** (those that served a long
+authored explanation; a session that never served one cannot repeat one):
+
+| | sessions with a repeat | without | rate |
+|---|---|---|---|
+| pre-redeploy | 18 | 18 | **50%** |
+| post-redeploy | 1 | 6 | **14%** |
+
+Fisher exact, two-tailed: **p = 0.11**. Suggestive, not conclusive — the same
+territory as the earlier repetition-fix validation (p = 0.084), and it needs
+the remaining ~17 concepts before it means anything.
+
+**Opportunity does not explain it.** Long memory-served turns per session are
+1.19 before and 1.29 after, so the later half had slightly MORE chance to
+recite, not less.
+
+### The uncomfortable possibility
+
+The only differences between the halves are a no-op diagnostic flag, another
+subject's seed assets, and a REDEPLOY. If `historyCompaction` was not
+actually live for the first 36 sessions, then it works, and my "the fix
+failed" report was measuring a stale build.
+
+Arguing against that: `answerConfirmation` was committed **19 minutes
+earlier** than `historyCompaction` and demonstrably fired in the first 22
+sessions (correct-answer confirmation ran at 70% against a 39% baseline). If
+deploys were landing in that window, the later commit should have been live
+too. Both stories cannot be true.
+
+### What settles it
+
+The retrieval-cache instrumentation, which is the reason the halves are
+distinguishable at all. So far: 21 turns handed the authored explanation to
+the model as retrieved context, and the single repeat that occurred was one
+of them. n = 1, which is a direction and not a finding.
+
+If the low rate holds to the end of the run, the honest report is that my
+earlier verdict was wrong, stated as plainly as the original was.
