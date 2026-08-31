@@ -2825,6 +2825,405 @@ const CHEM_F: SeedProbe[] = [
 ]
 
 /**
+ * CHUNK 7 — the UNDERGRADUATE band opens. 26 probes over 16 pairs.
+ *
+ * Four of these concepts already carry a `step_check` or `true_false` probe
+ * rather than the usual mcq/misconception/checkpoint trio, so each slot map was
+ * read individually instead of assumed from the seed template. `numeric` and
+ * `fill_blank` are free on all sixteen.
+ *
+ * Two probes here are deliberately a SECOND instance of a skill the concept
+ * already probes once (the 18-electron count on Fe(CO)5 where Ni(CO)4 exists,
+ * and a two-equilibria composition on AgBr/thiosulfate where AgCl/ammonia
+ * exists). That is a ladder rung, not a duplicate: the gate never re-asks a
+ * spent probe, so a learner who got the first one wrong currently has nothing
+ * left to demonstrate the skill on. Each is a different system with a
+ * different answer — the AgBr case composes to K > 1, so it dissolves, where
+ * the AgCl case composes to 3e-3 and barely does.
+ */
+const CHEM_G: SeedProbe[] = [
+  {
+    conceptId: 'chem.alc.epoxides', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'How many atoms make up an epoxide ring, and what is the resulting C–O–C bond angle?',
+    choices: [
+      { text: 'Three atoms, about 60°', isCorrect: true },
+      { text: 'Three atoms, about 109.5°', isCorrect: false },
+      { text: 'Four atoms, about 90°', isCorrect: false },
+      { text: 'Five atoms, about 108°', isCorrect: false },
+    ],
+    correctValue: '3 atoms, ~60°',
+    targetedMisconceptions: [],
+    source: src('chem.alc.epoxides', 'the 60° angle against a tetrahedral ideal of 109.5° IS the ring strain, and it is the whole reason an epoxide reacts where diethyl ether does not — the concept\'s existing "why is it more reactive" probe asks for that conclusion without ever making the strain countable'),
+  },
+  {
+    conceptId: 'chem.alc.epoxides', subjectSlug: S, probeKind: 'fill_blank',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'A nucleophile opens an unsymmetrical epoxide at the ______ substituted carbon under BASIC conditions, and at the ______ substituted carbon under ACIDIC conditions.',
+    choices: [
+      { text: 'less … more', isCorrect: true },
+      { text: 'more … less', isCorrect: false },
+      { text: 'less … less', isCorrect: false },
+      { text: 'more … more', isCorrect: false },
+    ],
+    correctValue: 'basic: less substituted; acidic: more substituted',
+    targetedMisconceptions: [],
+    source: src('chem.alc.epoxides', 'basic conditions are governed by sterics and acidic by carbocation character, so the two halves have DIFFERENT causes and one can be right while the other is wrong — both same-answer options are offered because "one rule per reaction" is the expectation that has to break'),
+  },
+
+  {
+    conceptId: 'chem.alc.protection', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'A synthesis protects an –OH group, runs one Grignard step, then removes the protecting group. How many EXTRA synthetic steps has the protection strategy added?',
+    choices: [
+      { text: 'Two — one to install and one to remove', isCorrect: true },
+      { text: 'One', isCorrect: false },
+      { text: 'None — protection is part of the Grignard step', isCorrect: false },
+      { text: 'Three', isCorrect: false },
+    ],
+    correctValue: '2',
+    targetedMisconceptions: [],
+    source: src('chem.alc.protection', 'protection is never free, and counting the cost is what makes "could I avoid it?" a real question rather than a reflex — the concept\'s existing interchangeability probe assumes a learner already sees protection as a deliberate expense'),
+  },
+  {
+    conceptId: 'chem.alc.protection', subjectSlug: S, probeKind: 'fill_blank',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'A protecting group must be ______ under the conditions it is shielding against, and removable under conditions that ______ the rest of the molecule.',
+    choices: [
+      { text: 'inert … leave untouched', isCorrect: true },
+      { text: 'inert … also cleave', isCorrect: false },
+      { text: 'reactive … leave untouched', isCorrect: false },
+      { text: 'reactive … also cleave', isCorrect: false },
+    ],
+    correctValue: 'inert to the reaction; removed without touching the rest',
+    targetedMisconceptions: [],
+    source: src('chem.alc.protection', 'these two requirements pull against each other, which is exactly why protecting groups are NOT interchangeable — a group that is easy to remove is usually easy to remove at the wrong moment'),
+  },
+
+  {
+    conceptId: 'chem.anal.spectroscopy', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'A ¹H NMR signal appears as a quartet. By the n + 1 rule, how many equivalent neighbouring protons does that indicate?',
+    choices: [
+      { text: 'Three', isCorrect: true },
+      { text: 'Four — the multiplicity itself', isCorrect: false },
+      { text: 'Two', isCorrect: false },
+      { text: 'One', isCorrect: false },
+    ],
+    correctValue: '3',
+    targetedMisconceptions: [],
+    source: src('chem.anal.spectroscopy', 'the rule gives peaks = n + 1, so the count of neighbours is one FEWER than the multiplicity; reading the quartet as four neighbours is the same off-by-one every time and it makes an ethyl group impossible to assign'),
+  },
+  {
+    conceptId: 'chem.anal.spectroscopy', subjectSlug: S, probeKind: 'fill_blank',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'In an infrared spectrum a strong sharp absorption near 1700 cm⁻¹ indicates a ______, while a broad absorption near 3300 cm⁻¹ indicates an ______.',
+    choices: [
+      { text: 'C=O carbonyl … O–H group', isCorrect: true },
+      { text: 'C=O carbonyl … C≡N group', isCorrect: false },
+      { text: 'C–H bond … O–H group', isCorrect: false },
+      { text: 'C=C double bond … C–H bond', isCorrect: false },
+    ],
+    correctValue: 'C=O near 1700; O–H near 3300',
+    targetedMisconceptions: [],
+    source: src('chem.anal.spectroscopy', 'these two are the entire diagnostic value of a routine IR, and the BREADTH of the 3300 band is the signature of hydrogen bonding rather than of the bond itself — a fact worth having before the concept\'s existing Beer–Lambert probe asks when a spectroscopic law stops holding'),
+  },
+
+  {
+    conceptId: 'chem.atomic.quantum-mech-model', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'For the shell n = 4, how many different values may the angular-momentum quantum number l take?',
+    choices: [
+      { text: 'Four — l = 0, 1, 2 and 3', isCorrect: true },
+      { text: 'Three', isCorrect: false },
+      { text: 'Five', isCorrect: false },
+      { text: 'Sixteen', isCorrect: false },
+    ],
+    correctValue: '4',
+    targetedMisconceptions: [],
+    source: src('chem.atomic.quantum-mech-model', 'l runs from 0 to n − 1 inclusive, so the count equals n and the largest value does not — "three" is the count of values BELOW the maximum and "five" is off by one from including l = 4, which the rule forbids'),
+  },
+
+  {
+    conceptId: 'chem.bio.enzyme-kinetics', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'In Michaelis–Menten kinetics, at what substrate concentration does the reaction rate reach exactly half of Vmax?',
+    choices: [
+      { text: 'When [S] equals Km', isCorrect: true },
+      { text: 'When [S] equals Vmax/2', isCorrect: false },
+      { text: 'When [S] equals 2Km', isCorrect: false },
+      { text: 'When [S] is zero', isCorrect: false },
+    ],
+    correctValue: '[S] = Km',
+    targetedMisconceptions: [],
+    source: src('chem.bio.enzyme-kinetics', 'this IS the definition of Km, and it is why a low Km means high affinity — the concept\'s existing 0.1 mM versus 10 mM probe cannot be reasoned about at all until this equality is the thing Km means'),
+  },
+  {
+    conceptId: 'chem.bio.enzyme-kinetics', subjectSlug: S, probeKind: 'fill_blank',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'On a Lineweaver–Burk plot of 1/v against 1/[S], the y-intercept gives ______ and the x-intercept gives ______.',
+    choices: [
+      { text: '1/Vmax … −1/Km', isCorrect: true },
+      { text: 'Vmax … Km', isCorrect: false },
+      { text: '1/Km … −1/Vmax', isCorrect: false },
+      { text: '−1/Vmax … 1/Km', isCorrect: false },
+    ],
+    correctValue: 'y-intercept 1/Vmax; x-intercept −1/Km',
+    targetedMisconceptions: [],
+    source: src('chem.bio.enzyme-kinetics', 'the double-reciprocal plot exists so that both constants are read off a straight line, and the two intercepts get swapped as often as they are recalled correctly; the minus sign on the x-intercept is the part that is dropped'),
+  },
+
+  {
+    conceptId: 'chem.bond.mo-theory', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'O₂ has 10 electrons in bonding molecular orbitals and 6 in antibonding ones. What is its bond order?',
+    choices: [
+      { text: '2', isCorrect: true },
+      { text: '4 — the difference, not halved', isCorrect: false },
+      { text: '3', isCorrect: false },
+      { text: '1', isCorrect: false },
+    ],
+    correctValue: '2',
+    targetedMisconceptions: [],
+    source: src('chem.bond.mo-theory', 'bond order is (bonding − antibonding)/2 because it counts PAIRS; dropping the division gives 4, a number that would make O₂ more strongly bonded than N₂ and is contradicted by every bond-length table'),
+  },
+  {
+    conceptId: 'chem.bond.mo-theory', subjectSlug: S, probeKind: 'fill_blank',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'A bond order of zero means the species ______, while a fractional bond order such as 2.5 means ______.',
+    choices: [
+      { text: 'does not exist as a stable molecule … an odd number of electrons, which MO theory allows', isCorrect: true },
+      { text: 'does not exist as a stable molecule … the calculation has gone wrong', isCorrect: false },
+      { text: 'is bound but very weakly … an odd number of electrons, which MO theory allows', isCorrect: false },
+      { text: 'is bound but very weakly … the calculation has gone wrong', isCorrect: false },
+    ],
+    correctValue: 'zero means no molecule; a half-integer is legitimate',
+    targetedMisconceptions: [],
+    source: src('chem.bond.mo-theory', '"bound but very weakly" is precisely what the concept\'s existing He₂ probe is written against; the fractional half is added here because a learner who accepts zero as real often then rejects 2.5 as an arithmetic mistake — the two errors are opposite readings of the same integer expectation'),
+  },
+
+  {
+    conceptId: 'chem.carb.derivatives', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'An ester is hydrolysed with aqueous hydroxide. How many equivalents of hydroxide are consumed per ester, and is the reaction reversible?',
+    choices: [
+      { text: 'One, and it is effectively irreversible', isCorrect: true },
+      { text: 'One, and it is readily reversible', isCorrect: false },
+      { text: 'Two, and it is effectively irreversible', isCorrect: false },
+      { text: 'None — hydroxide is a catalyst here', isCorrect: false },
+    ],
+    correctValue: '1 equivalent; irreversible',
+    targetedMisconceptions: [],
+    source: src('chem.carb.derivatives', 'the hydroxide is CONSUMED, not catalytic, because the carboxylic acid product is immediately deprotonated — and that deprotonation is what removes the reverse reaction, which is the difference from acid-catalysed hydrolysis that a learner has usually met first'),
+  },
+  {
+    conceptId: 'chem.carb.derivatives', subjectSlug: S, probeKind: 'fill_blank',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'Reactivity toward nucleophilic acyl substitution falls as the leaving group becomes ______, which is why the amide is the ______ reactive of the common derivatives.',
+    choices: [
+      { text: 'a stronger base, and so a poorer leaving group … least', isCorrect: true },
+      { text: 'a stronger base, and so a poorer leaving group … most', isCorrect: false },
+      { text: 'a weaker base, and so a better leaving group … least', isCorrect: false },
+      { text: 'larger and heavier … least', isCorrect: false },
+    ],
+    correctValue: 'poorer (more basic) leaving group; amide least reactive',
+    targetedMisconceptions: [],
+    source: src('chem.carb.derivatives', 'leaving-group ability is the SINGLE ordering behind the whole reactivity series the concept\'s existing ranking probe asks for — chloride is a weak base and leaves, amide nitrogen is a strong base and does not; size is offered because it is the intuitive but irrelevant variable'),
+  },
+
+  {
+    conceptId: 'chem.coord.nomenclature', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'In K₄[Fe(CN)₆], what is the oxidation state of iron?',
+    choices: [
+      { text: '+2', isCorrect: true },
+      { text: '+3', isCorrect: false },
+      { text: '−4 — the charge on the complex ion', isCorrect: false },
+      { text: '+6', isCorrect: false },
+    ],
+    correctValue: '+2',
+    targetedMisconceptions: [],
+    source: src('chem.coord.nomenclature', 'four K⁺ make the complex 4−, six CN⁻ contribute −6, so x − 6 = −4 and x = +2 — which is what the "(II)" in hexacyanidoferrate(II) records; reading the complex charge as the metal\'s oxidation state is exactly the error the concept\'s existing [Co(NH₃)₄Cl₂]⁺ probe names'),
+  },
+
+  {
+    conceptId: 'chem.coord.stability', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'A metal binds a ligand in three consecutive steps with K₁ = 10⁴, K₂ = 10³ and K₃ = 10². What is the overall formation constant β₃?',
+    choices: [
+      { text: '10⁹', isCorrect: true },
+      { text: '1.11 × 10⁴ — the constants added', isCorrect: false },
+      { text: '10²⁴ — the exponents multiplied', isCorrect: false },
+      { text: '10⁴ — only the first step matters', isCorrect: false },
+    ],
+    correctValue: '10⁹',
+    targetedMisconceptions: [],
+    source: src('chem.coord.stability', 'equilibrium constants for consecutive steps MULTIPLY, so their logs add — the concept\'s existing stepwise-versus-overall probe states that relation and this one is the same relation as a number, where adding the K values instead is visibly the wrong operation'),
+  },
+
+  {
+    conceptId: 'chem.dblock.first-row', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'Iron is [Ar]3d⁶4s². How many UNPAIRED d electrons does the Fe³⁺ ion have?',
+    choices: [
+      { text: 'Five', isCorrect: true },
+      { text: 'Three', isCorrect: false },
+      { text: 'Four', isCorrect: false },
+      { text: 'Six', isCorrect: false },
+    ],
+    correctValue: '5',
+    targetedMisconceptions: [],
+    source: src('chem.dblock.first-row', 'Fe³⁺ is 3d⁵, and five electrons in five d orbitals are all unpaired by Hund\'s rule — the half-filled shell that makes Fe³⁺ unusually stable; "six" comes from removing three electrons from the 3d subshell first, which is the ordering error'),
+  },
+  {
+    conceptId: 'chem.dblock.first-row', subjectSlug: S, probeKind: 'fill_blank',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'When a first-row transition metal is ionised it loses its ______ electrons before its ______ electrons, even though the latter were filled first.',
+    choices: [
+      { text: '4s … 3d', isCorrect: true },
+      { text: '3d … 4s', isCorrect: false },
+      { text: '4p … 4s', isCorrect: false },
+      { text: '3p … 3d', isCorrect: false },
+    ],
+    correctValue: 'loses 4s before 3d',
+    targetedMisconceptions: [],
+    source: src('chem.dblock.first-row', 'fill-order and removal-order genuinely disagree, and that is the single rule behind the concept\'s existing Fe²⁺ configuration probe — reversing it produces a wrong configuration for every transition-metal ion, not just one'),
+  },
+
+  {
+    conceptId: 'chem.dblock.general', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'Manganese is [Ar]3d⁵4s². How many d electrons does the Mn²⁺ ion have?',
+    choices: [
+      { text: 'Five', isCorrect: true },
+      { text: 'Three', isCorrect: false },
+      { text: 'Seven', isCorrect: false },
+      { text: 'Two', isCorrect: false },
+    ],
+    correctValue: '5',
+    targetedMisconceptions: [],
+    source: src('chem.dblock.general', 'the two electrons come out of 4s, leaving 3d⁵ untouched; "three" is what happens if the 2+ charge is taken out of the d subshell instead, and it is the same removal-order error one concept over'),
+  },
+  {
+    conceptId: 'chem.dblock.general', subjectSlug: S, probeKind: 'fill_blank',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'Transition-metal complexes are coloured because the ligands ______ the d orbitals, and an electron absorbs a photon to cross ______.',
+    choices: [
+      { text: 'split into two energy levels … the gap between them', isCorrect: true },
+      { text: 'split into two energy levels … the gap to the next shell', isCorrect: false },
+      { text: 'remove entirely … the gap between them', isCorrect: false },
+      { text: 'leave unchanged … the gap to the next shell', isCorrect: false },
+    ],
+    correctValue: 'ligand-field splitting; a d–d transition across the gap',
+    targetedMisconceptions: [],
+    source: src('chem.dblock.general', 'the transition is d-to-d WITHIN the same shell, which is why the gap is small enough to fall in the visible range at all — and why a d¹⁰ ion such as Zn²⁺ has no transition available and its compounds are white'),
+  },
+
+  {
+    conceptId: 'chem.dblock.lanthanides', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'How many orbitals are in a 4f sub-shell, and how many electrons can they hold in total?',
+    choices: [
+      { text: 'Seven orbitals, 14 electrons', isCorrect: true },
+      { text: 'Five orbitals, 10 electrons', isCorrect: false },
+      { text: 'Three orbitals, 6 electrons', isCorrect: false },
+      { text: 'Nine orbitals, 18 electrons', isCorrect: false },
+    ],
+    correctValue: '7 orbitals, 14 electrons',
+    targetedMisconceptions: [],
+    source: src('chem.dblock.lanthanides', 'f has l = 3, giving 2l + 1 = 7 orbitals — and 14 electrons is exactly why the lanthanide series is 14 elements long, so the length of the series stops being a fact to memorise; "five and ten" is the d subshell answer'),
+  },
+  {
+    conceptId: 'chem.dblock.lanthanides', subjectSlug: S, probeKind: 'fill_blank',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'Almost every lanthanide shows the ______ oxidation state in its common compounds, which is why their chemistry varies ______ across the series.',
+    choices: [
+      { text: '+3 … very little', isCorrect: true },
+      { text: '+3 … a great deal', isCorrect: false },
+      { text: '+2 … very little', isCorrect: false },
+      { text: 'variable … a great deal', isCorrect: false },
+    ],
+    correctValue: '+3; very little variation',
+    targetedMisconceptions: [],
+    source: src('chem.dblock.lanthanides', 'the d-block\'s defining feature is variable oxidation state, so it transfers here by default and gives exactly the wrong prediction — the concept\'s existing "do they vary as much as the d block" probe asks for the conclusion; this one names the cause'),
+  },
+
+  {
+    conceptId: 'chem.dblock.organometallics', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'Fe(CO)₅: iron is in Group 8 and each CO ligand donates two electrons. What is the total valence electron count?',
+    choices: [
+      { text: '18', isCorrect: true },
+      { text: '16', isCorrect: false },
+      { text: '13 — one electron per CO', isCorrect: false },
+      { text: '20', isCorrect: false },
+    ],
+    correctValue: '18',
+    targetedMisconceptions: [],
+    source: src('chem.dblock.organometallics', '8 + 5 × 2 = 18, and the count landing on 18 for BOTH Ni(CO)₄ and Fe(CO)₅ despite different metals and different ligand numbers is what makes the rule predictive rather than coincidental — the concept\'s existing probe does the Ni case, and the gate never re-asks a spent probe'),
+  },
+  {
+    conceptId: 'chem.dblock.organometallics', subjectSlug: S, probeKind: 'fill_blank',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'In an oxidative addition the metal\'s oxidation state ______ by two and its coordination number ______.',
+    choices: [
+      { text: 'increases … also increases by two', isCorrect: true },
+      { text: 'increases … stays the same', isCorrect: false },
+      { text: 'decreases … increases by two', isCorrect: false },
+      { text: 'decreases … stays the same', isCorrect: false },
+    ],
+    correctValue: 'both increase by two',
+    targetedMisconceptions: [],
+    source: src('chem.dblock.organometallics', 'the metal gains two new ligands AND formally loses two electrons to them in one step, so the name records only half of what changes — the concept\'s existing Wilkinson\'s-catalyst probe asks whether an external oxidant was involved, and the answer only makes sense once both counts are known to move together'),
+  },
+
+  {
+    conceptId: 'chem.equil.complex-equil', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'AgBr has Ksp = 5.0 × 10⁻¹³, and [Ag(S₂O₃)₂]³⁻ has Kf = 2.9 × 10¹³. What is K for the overall reaction AgBr(s) + 2S₂O₃²⁻ → [Ag(S₂O₃)₂]³⁻ + Br⁻?',
+    choices: [
+      { text: 'About 14 — so the silver bromide does dissolve', isCorrect: true },
+      { text: 'About 1.7 × 10⁻²⁶ — the two constants divided', isCorrect: false },
+      { text: '5.0 × 10⁻¹³ — the Ksp alone governs solubility', isCorrect: false },
+      { text: '2.9 × 10¹³ — the Kf alone governs it', isCorrect: false },
+    ],
+    correctValue: '≈14',
+    targetedMisconceptions: [],
+    source: src('chem.equil.complex-equil', 'adding two equilibria multiplies their constants, and the product here exceeds 1 — which is the photographic fixer working, and a genuinely different outcome from the concept\'s existing AgCl/ammonia case where the same composition gives about 3 × 10⁻³ and barely dissolves anything'),
+  },
+
+  {
+    conceptId: 'chem.hal.grignard', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'CH₃CH₂MgBr is added to solid CO₂ and then worked up with dilute acid. How many carbon atoms does the carboxylic acid product contain?',
+    choices: [
+      { text: 'Three', isCorrect: true },
+      { text: 'Two — the CO₂ carbon is lost on work-up', isCorrect: false },
+      { text: 'Four', isCorrect: false },
+      { text: 'One', isCorrect: false },
+    ],
+    correctValue: '3',
+    targetedMisconceptions: [],
+    source: src('chem.hal.grignard', 'the ethyl group\'s two carbons plus the CO₂ carbon give propanoic acid — the Grignard carbon attacks and KEEPS the new carbon, which is the whole synthetic point of the reaction and is lost if the work-up is read as a decomposition'),
+  },
+
+  {
+    conceptId: 'chem.hyd.polycyclic', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'How many pi electrons does naphthalene contain, and is it aromatic?',
+    choices: [
+      { text: 'Ten, and it is aromatic — though Hückel\'s rule is stated for monocyclic rings', isCorrect: true },
+      { text: 'Ten, and it is not aromatic', isCorrect: false },
+      { text: 'Twelve, and it is aromatic', isCorrect: false },
+      { text: 'Six, and it is aromatic', isCorrect: false },
+    ],
+    correctValue: '10 pi electrons; aromatic',
+    targetedMisconceptions: [],
+    source: src('chem.hyd.polycyclic', 'five double bonds carry two pi electrons each; the "six" option counts one ring only, which is the same bond-versus-electron slip seen at benzene, and the caveat is stated because Hückel is formally a monocyclic rule and naphthalene is the case where quoting it without qualification teaches something not quite true'),
+  },
+]
+
+/**
  * Every chemistry probe-depth probe. One array, so `seed-knowledge-assets.ts`,
  * the cold-start bootstrap and the contract tests — all of which scan for a
  * `*_PROBES` export — see the same set.
@@ -2836,4 +3235,5 @@ export const CHEMISTRY_DEPTH_PROBES: SeedProbe[] = [
   ...CHEM_D,
   ...CHEM_E,
   ...CHEM_F,
+  ...CHEM_G,
 ]

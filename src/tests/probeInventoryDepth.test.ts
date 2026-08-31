@@ -1165,6 +1165,110 @@ describe('the physics depth probes are arithmetically true', () => {
     expect(c('monatomic ideal gas Cv')).toContain('1.67')
   }, 30_000)
 
+  it('chemistry batch 7: the arithmetic', async () => {
+    const { CHEMISTRY_DEPTH_PROBES } = await import('../lib/teaching/assets/chemistryDepthSeedAssets')
+    const probes = CHEMISTRY_DEPTH_PROBES as unknown as Probe[]
+    const c = (fragment: string) => {
+      const hit = probes.filter((p) => p.stem.includes(fragment))
+      expect(hit.length, `expected exactly one chemistry probe containing "${fragment}"`).toBe(1)
+      return (hit[0].choices ?? []).find((x) => x.isCorrect)!.text
+    }
+
+    // A three-membered ring is a triangle: 180/3 = 60 degrees, against a
+    // tetrahedral ideal of 109.5. That gap IS the ring strain.
+    expect(180 / 3).toBe(60)
+    expect(109.5 - 60).toBeCloseTo(49.5, 6)
+    expect(c('epoxide ring')).toContain('60°')
+
+    // Install + remove = two extra steps. Protection is never free.
+    expect(1 + 1).toBe(2)
+    expect(c('EXTRA synthetic steps')).toContain('Two')
+
+    // n + 1 rule: a quartet has FOUR peaks, so three neighbours. The count is
+    // one fewer than the multiplicity, every time.
+    const multiplicity = (n: number) => n + 1
+    expect(multiplicity(3)).toBe(4)
+    expect(multiplicity(4)).toBe(5)
+    expect(4 - 1).toBe(3)
+    expect(c('appears as a quartet')).toContain('Three')
+
+    // l runs 0..n-1 inclusive, so the count of values equals n itself.
+    const lValues = (n: number) => Array.from({ length: n }, (_, i) => i)
+    expect(lValues(4)).toEqual([0, 1, 2, 3])
+    expect(lValues(4).length).toBe(4)
+    expect(Math.max(...lValues(4))).toBe(3)   // the largest value is NOT the count
+    expect(c('shell n = 4')).toContain('Four')
+
+    // Michaelis-Menten at [S] = Km: v = Vmax*Km/(Km+Km) = Vmax/2, derived
+    // rather than recalled.
+    const mm = (Vmax: number, S: number, Km: number) => (Vmax * S) / (Km + S)
+    expect(mm(100, 5, 5)).toBeCloseTo(50, 12)
+    expect(mm(100, 10, 5)).toBeCloseTo(66.67, 2)   // 2Km gives two thirds, not a half
+    expect(c('exactly half of Vmax')).toContain('Km')
+
+    // Bond order counts PAIRS, so the difference is halved.
+    expect((10 - 6) / 2).toBe(2)
+    expect(10 - 6).toBe(4)                          // the undivided option
+    expect(c('10 electrons in bonding molecular orbitals')).toContain('2')
+
+    // K4[Fe(CN)6]: four K+ make the complex 4-, six CN- give -6, so x = +2.
+    const complexCharge = -4
+    expect(complexCharge - 6 * -1).toBe(2)
+    expect(c('K₄[Fe(CN)₆]')).toContain('+2')
+
+    // Consecutive equilibria MULTIPLY, so their logs add. Adding the constants
+    // themselves is visibly a different operation.
+    expect(1e4 * 1e3 * 1e2).toBeCloseTo(1e9, 3)
+    expect(4 + 3 + 2).toBe(9)
+    expect(1e4 + 1e3 + 1e2).toBeCloseTo(11100, 6)   // the added option
+    expect(4 * 3 * 2).toBe(24)                      // exponents multiplied
+    expect(c('K₁ = 10⁴, K₂ = 10³ and K₃ = 10²')).toContain('10⁹')
+
+    // Fe3+ is 3d5: five electrons in five orbitals, all unpaired by Hund.
+    expect(6 + 2 - 3).toBe(5)
+    expect(c('UNPAIRED d electrons')).toContain('Five')
+
+    // Mn2+ loses both 4s electrons, leaving 3d5 untouched.
+    expect(5).toBe(5)
+    expect(5 + 2 - 2).toBe(5)
+    expect(c('How many d electrons does the Mn²⁺')).toContain('Five')
+
+    // f has l = 3, so 2l+1 = 7 orbitals and 14 electrons — which is exactly
+    // why the lanthanide series is 14 elements long.
+    const orbitals = (l: number) => 2 * l + 1
+    expect(orbitals(3)).toBe(7)
+    expect(2 * orbitals(3)).toBe(14)
+    expect(orbitals(2)).toBe(5)         // the d-subshell answer, offered
+    expect(2 * orbitals(2)).toBe(10)
+    expect(c('4f sub-shell')).toContain('Seven orbitals, 14')
+
+    // 18-electron rule lands on 18 for BOTH carbonyls despite different metals
+    // and different ligand counts — that is what makes it predictive.
+    expect(8 + 5 * 2).toBe(18)
+    expect(10 + 4 * 2).toBe(18)         // the Ni(CO)4 case the concept already probes
+    expect(8 + 5 * 1).toBe(13)          // one electron per CO
+    expect(c('Fe(CO)₅')).toContain('18')
+
+    // Coupled equilibria multiply. Here the product EXCEEDS 1, so the solid
+    // dissolves — the opposite outcome to the AgCl/ammonia case at ~3e-3.
+    expect(5.0e-13 * 2.9e13).toBeCloseTo(14.5, 1)
+    expect(5.0e-13 * 2.9e13).toBeGreaterThan(1)
+    expect(1.8e-10 * 1.7e7).toBeCloseTo(3.06e-3, 5)
+    expect(1.8e-10 * 1.7e7).toBeLessThan(1)
+    expect(5.0e-13 / 2.9e13).toBeCloseTo(1.72e-26, 28)   // the divided option
+    expect(c('AgBr has Ksp')).toContain('14')
+
+    // Ethyl (2 C) + the CO2 carbon = propanoic acid, 3 carbons.
+    expect(2 + 1).toBe(3)
+    expect(c('CH₃CH₂MgBr is added to solid CO₂')).toContain('Three')
+
+    // Naphthalene: five double bonds x 2 pi electrons. Counting one ring gives
+    // six, the same bond-versus-electron slip as at benzene.
+    expect(5 * 2).toBe(10)
+    expect(3 * 2).toBe(6)
+    expect(c('How many pi electrons does naphthalene')).toContain('Ten')
+  }, 30_000)
+
   it('batch 13: coupling j=1 with j=1 preserves the state count', async () => {
     const probes = await load()
     const coup = find(probes, 'j₁ = 1 and j₂ = 1 are coupled')
