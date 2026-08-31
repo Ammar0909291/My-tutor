@@ -400,13 +400,23 @@ describe('diagram container — 3cm padding, top corrected to top-align with the
   })
 
   it('no renderer component was touched by this change', () => {
-    // The padding lives entirely in the CSS module; VisualCard/VisualRenderer/
-    // SceneSpecFigure/DynamicVisualRenderer mount calls in LessonScreen.tsx
-    // are unchanged from before this task (same components, same props,
-    // still per-message via the teaching-canvas's own msg.* fields).
+    // The padding lives entirely in the CSS module; the VisualCard/
+    // VisualRenderer/SceneSpecFigure/DynamicVisualRenderer mount calls in
+    // LessonScreen.tsx still render the same components, still PER MESSAGE via
+    // the teaching-canvas's own msg.* fields.
+    //
+    // WHAT THIS GUARD IS FOR, and what it deliberately is not. It protects the
+    // per-message BINDING — that each figure is drawn from its own message's
+    // fields rather than from some shared or hoisted state, which is what the
+    // padding work could plausibly have broken. It is not a freeze on the prop
+    // list: `SceneSpecFigure` later gained `learnerLevel` for adaptive visual
+    // complexity (the learner's level travels with the turn, never with the
+    // cached scene — see visual/visualComplexity.ts), which changes nothing
+    // about the binding this test exists to defend. Asserting the exact tag
+    // text made a legitimate additive prop look like a regression.
     expect(SRC).toContain('<VisualCard')
     expect(SRC).toContain('<VisualRenderer spec={msg.visualSpec} />')
-    expect(SRC).toContain('<SceneSpecFigure spec={msg.sceneSpec} />')
+    expect(SRC).toMatch(/<SceneSpecFigure\s+spec=\{msg\.sceneSpec\}/)
     expect(SRC).toContain('<DynamicVisualRenderer code={msg.dynamicVisualizationCode} />')
   })
 })
