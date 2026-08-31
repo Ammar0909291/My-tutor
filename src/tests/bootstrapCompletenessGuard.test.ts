@@ -132,7 +132,37 @@ describe('structural lock — bootstrap guard source', () => {
     // The guard must not reintroduce an aggregate over the whole table — that
     // is precisely the measure that could disagree with the loops.
     expect(code).not.toMatch(/assetIdentity\.groupBy\(/)
-    expect(code).not.toMatch(/assetIdentity\.count\(/)
+
+    // NARROWED 2026-08-31, deliberately, and the reason is recorded rather
+    // than the assertion deleted.
+    //
+    // This line used to ban `assetIdentity.count(` outright. That was a proxy
+    // for the real invariant — "never measure completeness with an aggregate
+    // over the WHOLE TABLE" — and as a proxy it was too broad: it also banned
+    // an aggregate INTERSECTED with the slugs this corpus declares, which
+    // cannot exhibit the defect, because a foreign seed row is not in
+    // expectedSlugList and therefore cannot be counted by it.
+    //
+    // A cheap counting probe was added during a live egress incident (the org
+    // was at 50.8 GB against a 5 GB quota). The full prefetch was reading
+    // ~22 million rows across the fleet to answer a yes/no question whose
+    // answer had been "nothing to do" every time for 21 hours. Two COUNTs
+    // answer it with two rows.
+    //
+    // So the ban becomes the invariant it was standing in for: EVERY
+    // assetIdentity.count() in this file must be scoped to this corpus.
+    const counts = [...code.matchAll(/prisma\.assetIdentity\.count\(\{[\s\S]{0,400}?\}\)/g)].map((m) => m[0])
+    for (const c of counts) {
+      expect(c, 'an assetIdentity.count() must intersect the corpus slugs, never the whole table')
+        .toMatch(/canonicalSlug: \{ in: expectedSlugList \}/)
+    }
+
+    // And the cheap probe may only SKIP on the same condition the full guard
+    // uses. If those two ever diverge, one of them is wrong by construction.
+    if (counts.length > 0) {
+      expect(code).toMatch(/storedCount >= expectedSlugs\.size && hollowCount === 0/)
+      expect(code).toMatch(/storedIdentities >= EXPECTED_IDENTITIES && hollowIdentities === 0/)
+    }
   })
 
   it('duplicate validation still runs before the guard and before every write', () => {
