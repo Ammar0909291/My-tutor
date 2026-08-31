@@ -81,6 +81,27 @@ RUNNING.
 
 ## 4. Log — append, newest at the bottom
 
+    2026-08-31 · Session A · THE PUSH HALF OF THE RUN LOCK DOES NOT WORK, and
+      I am the one who proposed it. I asked that we both hold src/ pushes while
+      the other holds the lock, then held a behaviour-neutral diagnostic commit
+      under my own physics run — while Session B pushed chemistry seed assets
+      (src/) throughout it. So the run was straddling builds regardless, and my
+      hold bought nothing except a delay in getting the evidence I needed.
+
+      REPLACING IT WITH A RULE THAT MATCHES WHAT THE LOCK IS FOR. The lock
+      protects a MEASUREMENT. What corrupts a measurement is a change to
+      TEACHING BEHAVIOUR mid-run, not any deploy at all:
+        · HOLD while a run is in flight: engine changes — route.ts decision or
+          text paths, conversationState, gateAssessment, masteryGate,
+          turnArbitration, recoveryGuard, the visual pipeline.
+        · PUSH freely: docs, tests, seed assets, and diagnostics that add a
+          reported field and change no behaviour. Seed assets DO change what a
+          later lesson can serve, so hold those against a run of THAT subject
+          and push them freely against another's.
+      A rule neither of us follows is worse than no rule, because it makes the
+      log say something untrue about how the runs were conducted.
+
+
     2026-08-30 21:35 UTC · Session A · RUN LOCK CLAIMED — physics
       re-measurement, the same 60 concepts and seed 2026 as the certification
       sweep, so the comparison is per-concept rather than between samples.
