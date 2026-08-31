@@ -98,9 +98,24 @@ against the whole corpus.
 
 ## Progress
 
-**PHYSICS IS COMPLETE.** Every physics (concept, gradeBand) pair — all 261 of
-them, across all bands — now holds at least five gradeable probes. 430 probes
-authored across sixteen batches; 204 pairs lifted off the floor.
+**THE CAMPAIGN IS COMPLETE.** Every physics and chemistry
+`(concept, gradeBand)` pair — 261 physics and 186 chemistry, across every band
+— now holds at least five gradeable probes. The CSV beside this file is empty,
+which is the intended terminal state: it lists pairs below five, and there are
+none.
+
+Confirmed by `contract-audit.ts` at both the floor and the target:
+
+| subject | concepts | pairs | at contract | short | never quizzable |
+|---|---|---|---|---|---|
+| chemistry | 186 | 186 | 186 | 0 | 0 |
+| physics | 238 | 261 | 261 | 0 | 0 |
+
+Identical output for `--min 3` (the contract floor) and `--min 5` (this
+campaign's target), which is what "complete" means here: not merely at the
+contract, but with two answers of slack above it.
+
+### Physics — 430 probes, 257 pairs, sixteen batches
 
 | batch | scope | pairs | probes |
 |---|---|---|---|
@@ -118,11 +133,73 @@ authored across sixteen batches; 204 pairs lifted off the floor.
 | 16 | physics UNDERGRADUATE | 7 | 7 |
 | **total** | | **257** | **430** |
 
-**Remaining: chemistry, 158 pairs / 244 probes.** Session A's chemistry
-baseline (commit 71624d4) confirmed the ceiling is not subject-specific —
-mean keyed probes served 2.82, mean tail turns 1.8 when mastered against 8.3
-when not, matching physics to within noise. So chemistry is the same critical
-path, not a lower-priority tail.
+### Chemistry — 244 probes, 158 distinct pairs, eight batches
+
+| batch | scope | pairs touched | probes |
+|---|---|---|---|
+| 1 | anal, atomic, bio, carb @ HIGH | 20 | 31 |
+| 2 | bond, carb, dblock, elect, env @ HIGH | 22 | 33 |
+| 3 | equil, found, hal, hyd @ HIGH | 22 | 28 |
+| 4 | hyd, kinet, nitro, org, pblock, period @ HIGH | 24 | 36 |
+| 5 | poly, redox, sblock, sol @ HIGH | 20 | 35 |
+| 6 | state, surface, thermo, solid @ HIGH | 16 | 28 |
+| 7 | UNDERGRADUATE — organic, coordination, d-block | 16 | 26 |
+| 8 | UNDERGRADUATE — kinetics, p-block, solid state, thermo | 18 | 27 |
+| **total** | | **158 distinct** | **244** |
+
+The per-batch "pairs touched" column sums to 158 rather than more, because no
+pair was revisited across batches — each was lifted to five in one pass.
+
+### The structural obstacle chemistry had and physics did not
+
+Physics could put almost every addition into a free difficulty rung of an mcq
+slot that was ALREADY a ladder. Chemistry could not: its seed template gave each
+concept exactly one probe of each kind, so measured across all 186 concepts,
+**every `(conceptId, probeKind, gradeBand)` slot was a singleton and there was
+not one ladder in the subject.** Adding to any of them would have sprung the
+trap described above — 158 duplicate serves.
+
+So every chemistry probe here opens a brand-new `numeric` or `fill_blank` slot,
+which has no existing row to orphan. That those kinds are still SERVED was
+verified rather than assumed: `teachingActionRepository` filters candidates with
+`probeToMcq` itself, and `probeToMcq` never reads the kind.
+
+### What the guard caught before commit
+
+`src/tests/probeInventoryDepth.test.ts` grew to 43 tests across the campaign. It
+asserts the structural invariants corpus-wide (no singleton converted to a
+ladder, no duplicate canonical identity, no repeated stem within a concept,
+exactly one keyed answer, `validateProbeCandidate` clean) and re-derives the
+arithmetic of every quantitative probe rather than reading the answer key back.
+
+Four content defects were caught by it and fixed before commit, none of which a
+structural check would have found:
+
+- an 11-rule distractor that was a valid alternative method;
+- a cube-Euler distractor that was the octahedron's count and evaluated
+  correctly;
+- a molar-volume source comment claiming 24.0 dm³ is the value at 298 K — RT/P
+  at 298.15 K is 24.46 dm³, and the school figure of 24.0 is RTP at 293 K. The
+  stem and answer key were right; the reasoning shipped beside them was not;
+- two ambiguous test fragments, each caught by the `find` helper refusing to
+  match two probes — the second time because a later batch's dopant stem also
+  said "Group 15".
+
+Three test failures in the same period were the ASSERTIONS being wrong, not the
+content. Recorded so a future session does not "fix" correct prose.
+
+### One known defect, out of scope
+
+The corpus-wide duplicate-stem check reports exactly 1, in
+`math.arith.exponent-rules`. It is pre-existing, it is mathematics, and it is
+outside this campaign's file ownership. It needs a mathematics-owning session.
+
+### Nothing here reaches a learner yet
+
+All of it is DRAFT in the seed corpus. Production converges by the cold-start
+bootstrap in `src/instrumentation.ts`, which is gradual — a freshly authored
+concept is not servable the moment it is committed. Promotion through
+`PATCH /api/admin/knowledge-assets` remains human and deliberately so.
 
 Regenerate this table from `git log --oneline --grep "probe depth"`; regenerate
 the CSV with the command at the top of this file.

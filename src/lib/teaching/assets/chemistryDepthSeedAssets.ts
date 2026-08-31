@@ -3224,6 +3224,415 @@ const CHEM_G: SeedProbe[] = [
 ]
 
 /**
+ * CHUNK 8 — the last of the campaign. 27 probes over the final 18
+ * UNDERGRADUATE pairs. After this no physics or chemistry (concept, gradeBand)
+ * pair sits below 5 gradeable probes.
+ *
+ * Two probes here are again a ladder rung rather than a new skill, for the
+ * reason chunk 7 gives: the atom count on an FCC cell where the concept
+ * already probes a simple cubic one, and a full DeltaG = -nFE computation
+ * where the concept already probes only the SIGN of one. The gate never
+ * re-asks a spent probe, so one instance of a skill is one attempt at it.
+ */
+const CHEM_H: SeedProbe[] = [
+  {
+    conceptId: 'chem.kinet.mechanism', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'A reaction obeys rate = k[A]²[B]. What is the overall order, and the order with respect to B?',
+    choices: [
+      { text: 'Third order overall; first order in B', isCorrect: true },
+      { text: 'Second order overall; first order in B', isCorrect: false },
+      { text: 'Third order overall; second order in B', isCorrect: false },
+      { text: 'Second order overall; second order in B', isCorrect: false },
+    ],
+    correctValue: 'third overall, first in B',
+    targetedMisconceptions: [],
+    source: src('chem.kinet.mechanism', 'the overall order is the SUM of the exponents while each individual order is its own exponent, and "second overall" is what happens when only the largest exponent is read — a learner who cannot separate the two cannot check a proposed mechanism against a rate law at all'),
+  },
+  {
+    conceptId: 'chem.kinet.mechanism', subjectSlug: S, probeKind: 'fill_blank',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'The experimental rate law is set by the ______ step, and any intermediate appearing in it must be ______ before the law can be compared with experiment.',
+    choices: [
+      { text: 'slowest … re-expressed in terms of reactants using a prior equilibrium', isCorrect: true },
+      { text: 'slowest … left in the rate law as written', isCorrect: false },
+      { text: 'fastest … re-expressed in terms of reactants using a prior equilibrium', isCorrect: false },
+      { text: 'fastest … left in the rate law as written', isCorrect: false },
+    ],
+    correctValue: 'the rate-determining (slowest) step; intermediates substituted out',
+    targetedMisconceptions: [],
+    source: src('chem.kinet.mechanism', 'an intermediate has no measurable concentration, so a rate law containing one cannot be tested — which is exactly why the concept\'s existing "does a matching rate law prove the mechanism" probe has the answer it does'),
+  },
+
+  {
+    conceptId: 'chem.kinet.photochemistry', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'Blue light has a shorter wavelength than red light. Which photon carries more energy, and by what relation?',
+    choices: [
+      { text: 'Blue, since E = hc/λ — energy is inversely proportional to wavelength', isCorrect: true },
+      { text: 'Red, since E = hc/λ', isCorrect: false },
+      { text: 'Blue, since E = hλ — energy is proportional to wavelength', isCorrect: false },
+      { text: 'They carry equal energy; only the intensity differs', isCorrect: false },
+    ],
+    correctValue: 'blue; E = hc/λ',
+    targetedMisconceptions: [],
+    source: src('chem.kinet.photochemistry', 'the inverse relation is what makes UV able to break bonds that visible light cannot, and the third option gets the right colour from the wrong law — so picking blue is not by itself evidence the relation is understood'),
+  },
+
+  {
+    conceptId: 'chem.nitro.diazonium', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'In a Sandmeyer reaction the diazonium group is displaced by a nucleophile. How many nitrogen atoms leave the molecule, and in what form?',
+    choices: [
+      { text: 'Two, as N₂ gas', isCorrect: true },
+      { text: 'One, as ammonia', isCorrect: false },
+      { text: 'Two, as two separate NO molecules', isCorrect: false },
+      { text: 'None — the nitrogen stays in the ring', isCorrect: false },
+    ],
+    correctValue: '2, as N₂',
+    targetedMisconceptions: [],
+    source: src('chem.nitro.diazonium', 'N₂ is an exceptionally good leaving group precisely because it is a stable gas that escapes, and that is BOTH why the substitution works and why the salt must be kept cold — the concept\'s existing ice-bath probe is the same fact from the hazard side'),
+  },
+  {
+    conceptId: 'chem.nitro.diazonium', subjectSlug: S, probeKind: 'fill_blank',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'Diazotisation uses ______, generated in situ from sodium nitrite and ______.',
+    choices: [
+      { text: 'nitrous acid … a cold mineral acid such as HCl', isCorrect: true },
+      { text: 'nitric acid … sodium hydroxide', isCorrect: false },
+      { text: 'nitrous acid … sodium hydroxide', isCorrect: false },
+      { text: 'nitric acid … a cold mineral acid such as HCl', isCorrect: false },
+    ],
+    correctValue: 'HNO₂, made in situ from NaNO₂ and cold HCl',
+    targetedMisconceptions: [],
+    source: src('chem.nitro.diazonium', 'nitrous acid is too unstable to bottle, which is why it is made in the flask — and nitric acid, the reagent most likely to be substituted for it from memory, would nitrate the ring instead of diazotising the amine'),
+  },
+
+  {
+    conceptId: 'chem.nitro.heterocycles', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'How many pi electrons are in pyridine\'s aromatic ring, and where is the nitrogen\'s lone pair?',
+    choices: [
+      { text: 'Six, and the lone pair is in an sp² orbital in the ring plane', isCorrect: true },
+      { text: 'Six, and the lone pair is part of the pi system', isCorrect: false },
+      { text: 'Four, and the lone pair is in the ring plane', isCorrect: false },
+      { text: 'Eight, and the lone pair is part of the pi system', isCorrect: false },
+    ],
+    correctValue: '6 pi electrons; lone pair in-plane, sp²',
+    targetedMisconceptions: [],
+    source: src('chem.nitro.heterocycles', 'the lone pair being OUTSIDE the pi system is the entire reason pyridine is a base and pyrrole is not — the concept\'s existing pKa probe asks which structural feature explains that gap, and this makes the feature countable rather than named'),
+  },
+  {
+    conceptId: 'chem.nitro.heterocycles', subjectSlug: S, probeKind: 'fill_blank',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'Pyridine is ______ than benzene toward electrophilic aromatic substitution, because its ring nitrogen is ______.',
+    choices: [
+      { text: 'less reactive … electron-withdrawing', isCorrect: true },
+      { text: 'more reactive … electron-donating', isCorrect: false },
+      { text: 'less reactive … electron-donating', isCorrect: false },
+      { text: 'more reactive … electron-withdrawing', isCorrect: false },
+    ],
+    correctValue: 'less reactive; the nitrogen withdraws electron density',
+    targetedMisconceptions: [],
+    source: src('chem.nitro.heterocycles', 'nitrogen is assumed to donate because it carries a lone pair, but in pyridine that pair is not in the ring and the electronegative nitrogen only pulls — the concept\'s existing probe compares pyrrole with pyridine; this one fixes the benzene baseline both are measured against'),
+  },
+
+  {
+    conceptId: 'chem.org.pericyclic', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'A Diels–Alder reaction is a [4+2] cycloaddition. How many pi electrons take part, and how many new sigma bonds form?',
+    choices: [
+      { text: 'Six pi electrons, two new sigma bonds', isCorrect: true },
+      { text: 'Six pi electrons, one new sigma bond', isCorrect: false },
+      { text: 'Four pi electrons, two new sigma bonds', isCorrect: false },
+      { text: 'Eight pi electrons, two new sigma bonds', isCorrect: false },
+    ],
+    correctValue: '6 pi electrons; 2 new sigma bonds',
+    targetedMisconceptions: [],
+    source: src('chem.org.pericyclic', 'the [4+2] label counts ELECTRONS, so 4 + 2 = 6, and the two new sigma bonds forming at once in a single cyclic transition state is what makes it pericyclic rather than stepwise — "four" reads the label as counting only the diene'),
+  },
+  {
+    conceptId: 'chem.org.pericyclic', subjectSlug: S, probeKind: 'fill_blank',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'Under Woodward–Hoffmann rules a cycloaddition of 4n + 2 pi electrons is allowed ______ under thermal conditions, and requires ______ under photochemical ones.',
+    choices: [
+      { text: 'suprafacial–suprafacial … a suprafacial–antarafacial pathway', isCorrect: true },
+      { text: 'suprafacial–antarafacial … a suprafacial–suprafacial pathway', isCorrect: false },
+      { text: 'suprafacial–suprafacial … the same suprafacial–suprafacial pathway', isCorrect: false },
+      { text: 'antarafacial–antarafacial … a suprafacial–suprafacial pathway', isCorrect: false },
+    ],
+    correctValue: 'thermal supra–supra; photochemical supra–antara',
+    targetedMisconceptions: [],
+    source: src('chem.org.pericyclic', 'light promotes an electron and inverts the symmetry of the highest occupied orbital, which reverses the rule rather than merely supplying more energy — the concept\'s existing "what changes under UV" probe is asking for that inversion, and the third option is the answer of a learner who thinks light only adds energy'),
+  },
+
+  {
+    conceptId: 'chem.org.reactive-intermediates', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'How many valence electrons surround the positive carbon of a carbocation, and what is its geometry?',
+    choices: [
+      { text: 'Six, and it is trigonal planar', isCorrect: true },
+      { text: 'Six, and it is tetrahedral', isCorrect: false },
+      { text: 'Eight, and it is trigonal planar', isCorrect: false },
+      { text: 'Seven, and it is bent', isCorrect: false },
+    ],
+    correctValue: '6 electrons; trigonal planar',
+    targetedMisconceptions: [],
+    source: src('chem.org.reactive-intermediates', 'three bonding pairs and an EMPTY p orbital give a flat centre, and the flatness is why a carbocation can be attacked from either face — the tetrahedral option keeps the geometry of the carbon it came from, which is the commonest picture'),
+  },
+  {
+    conceptId: 'chem.org.reactive-intermediates', subjectSlug: S, probeKind: 'fill_blank',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'A free radical carries no charge, yet it is highly reactive because its carbon has only ______ valence electrons rather than ______.',
+    choices: [
+      { text: 'seven … eight', isCorrect: true },
+      { text: 'six … eight', isCorrect: false },
+      { text: 'seven … six', isCorrect: false },
+      { text: 'eight … seven', isCorrect: false },
+    ],
+    correctValue: 'seven, one short of eight',
+    targetedMisconceptions: [],
+    source: src('chem.org.reactive-intermediates', 'reactivity tracks the octet, not the charge, which is the whole answer to the concept\'s existing "no charge, so are they stable" probe — six is the carbocation count and is offered because the two intermediates get merged'),
+  },
+
+  {
+    conceptId: 'chem.pblock.group13', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'BF₃ reacts with NH₃ to form the adduct F₃B–NH₃. How many valence electrons surround boron before and after?',
+    choices: [
+      { text: 'Six before, eight after', isCorrect: true },
+      { text: 'Six before, six after', isCorrect: false },
+      { text: 'Eight before, eight after', isCorrect: false },
+      { text: 'Four before, eight after', isCorrect: false },
+    ],
+    correctValue: '6 → 8',
+    targetedMisconceptions: [],
+    source: src('chem.pblock.group13', 'the incomplete octet makes BF₃ a Lewis ACID, not an unstable molecule — it is perfectly stable in a bottle and simply accepts a pair when one is offered, which is the distinction the concept\'s existing "inherently unstable?" probe turns on'),
+  },
+
+  {
+    conceptId: 'chem.pblock.group14', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'In diamond each carbon is covalently bonded to how many others, and within a single graphite layer?',
+    choices: [
+      { text: 'Four in diamond, three in graphite', isCorrect: true },
+      { text: 'Four in both', isCorrect: false },
+      { text: 'Three in diamond, four in graphite', isCorrect: false },
+      { text: 'Four in diamond, two in graphite', isCorrect: false },
+    ],
+    correctValue: '4 and 3',
+    targetedMisconceptions: [],
+    source: src('chem.pblock.group14', 'three bonds leave one electron per carbon outside the sigma framework, and THAT electron is the delocalised one that conducts — the concept\'s existing conductivity probe asks for the conclusion, and this is the count it rests on'),
+  },
+  {
+    conceptId: 'chem.pblock.group14', subjectSlug: S, probeKind: 'fill_blank',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'CO₂ is a ______ while SiO₂ is a ______, which is why one is a gas at room temperature and the other melts above 1600 °C.',
+    choices: [
+      { text: 'simple discrete molecule … giant covalent network', isCorrect: true },
+      { text: 'giant covalent network … simple discrete molecule', isCorrect: false },
+      { text: 'simple discrete molecule … simple discrete molecule', isCorrect: false },
+      { text: 'ionic solid … giant covalent network', isCorrect: false },
+    ],
+    correctValue: 'CO₂ molecular; SiO₂ giant covalent',
+    targetedMisconceptions: [],
+    source: src('chem.pblock.group14', 'silicon is too large to form the strong pi bonds that let carbon close off a discrete O=C=O molecule, so it keeps forming single bonds until it runs out of crystal — which is also why SiO₂ does not dissolve to give an acid the way CO₂ does'),
+  },
+
+  {
+    conceptId: 'chem.pblock.group15', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'White phosphorus is a P₄ tetrahedron. How many P–P bonds does one molecule contain, and what is the P–P–P bond angle?',
+    choices: [
+      { text: 'Six bonds, 60°', isCorrect: true },
+      { text: 'Four bonds, 60°', isCorrect: false },
+      { text: 'Six bonds, 109.5°', isCorrect: false },
+      { text: 'Four bonds, 109.5°', isCorrect: false },
+    ],
+    correctValue: '6 bonds at 60°',
+    targetedMisconceptions: [],
+    source: src('chem.pblock.group15', 'a tetrahedron has six EDGES, not four, and the 60° angle against phosphorus\'s preferred ~100° is severe strain — that strain is why white phosphorus ignites in air while red phosphorus does not, which the concept\'s existing allotrope probe asks about'),
+  },
+
+  {
+    conceptId: 'chem.sol.activity', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'As a solution is made more and more dilute, what value does the activity coefficient γ approach, and what does activity then equal?',
+    choices: [
+      { text: 'γ → 1, and activity equals concentration', isCorrect: true },
+      { text: 'γ → 1, and activity equals 1', isCorrect: false },
+      { text: 'γ → 0, and activity equals 0', isCorrect: false },
+      { text: 'γ grows without limit', isCorrect: false },
+    ],
+    correctValue: 'γ → 1; a = c',
+    targetedMisconceptions: [],
+    source: src('chem.sol.activity', 'the limit is on the COEFFICIENT, not on the activity itself, and confusing the two is what makes the whole concept look circular — it is also the exact licence the concept\'s existing dilute-solution probe grants for using concentration in equilibrium expressions'),
+  },
+
+  {
+    conceptId: 'chem.solid.crystal-systems', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'A face-centred cubic unit cell has an atom at each of the 8 corners and at the centre of each of the 6 faces. How many atoms belong to one unit cell?',
+    choices: [
+      { text: 'Four', isCorrect: true },
+      { text: 'Fourteen — every atom the cell touches', isCorrect: false },
+      { text: 'Two', isCorrect: false },
+      { text: 'Six', isCorrect: false },
+    ],
+    correctValue: '4',
+    targetedMisconceptions: [],
+    source: src('chem.solid.crystal-systems', '8 × 1/8 + 6 × 1/2 = 1 + 3 = 4, since a corner is shared by eight cells and a face by two; fourteen is the count with no sharing applied at all, and "two" is the body-centred answer — the concept\'s existing probe does the simple cubic case, and the gate never re-asks a spent probe'),
+  },
+
+  {
+    conceptId: 'chem.solid.defects', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'How many ions are missing from the lattice per Schottky defect in NaCl, and what happens to the crystal\'s density?',
+    choices: [
+      { text: 'Two — one cation and one anion — and the density falls', isCorrect: true },
+      { text: 'Two, and the density is unchanged', isCorrect: false },
+      { text: 'One, and the density falls', isCorrect: false },
+      { text: 'Two, and the density rises', isCorrect: false },
+    ],
+    correctValue: '2 ions; density falls',
+    targetedMisconceptions: [],
+    source: src('chem.solid.defects', 'both ions must go or the crystal would carry a net charge, and the falling density is precisely what distinguishes Schottky from Frenkel, where an ion MOVES to an interstitial site and the density does not change — which is what the concept\'s existing AgBr/NaCl probe asks'),
+  },
+
+  {
+    conceptId: 'chem.solid.ionic-solids', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'NaCl has 6:6 coordination. What is the coordination in CsCl?',
+    choices: [
+      { text: '8:8', isCorrect: true },
+      { text: '6:6 — both are 1:1 compounds', isCorrect: false },
+      { text: '4:4', isCorrect: false },
+      { text: '12:12', isCorrect: false },
+    ],
+    correctValue: '8:8',
+    targetedMisconceptions: [],
+    source: src('chem.solid.ionic-solids', 'Cs⁺ is large enough to touch eight chlorides where Na⁺ can touch only six, so the same 1:1 formula gives a different structure — the "6:6 because both are 1:1" option is exactly the reasoning the concept\'s existing same-structure probe is written against'),
+  },
+  {
+    conceptId: 'chem.solid.ionic-solids', subjectSlug: S, probeKind: 'fill_blank',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'A Born–Haber cycle can be solved for an unknown step because enthalpy is a ______ function, so the enthalpy changes around the complete cycle sum to ______.',
+    choices: [
+      { text: 'state … zero', isCorrect: true },
+      { text: 'state … the lattice energy', isCorrect: false },
+      { text: 'path … zero', isCorrect: false },
+      { text: 'path … the lattice energy', isCorrect: false },
+    ],
+    correctValue: 'state function; the cycle sums to zero',
+    targetedMisconceptions: [],
+    source: src('chem.solid.ionic-solids', 'this is Hess\'s law being used, and naming it is what turns the cycle from a diagram to memorise into a solvable equation — the concept\'s existing probe asks which species the lattice-energy step starts from, which only matters once the cycle is known to close'),
+  },
+
+  {
+    conceptId: 'chem.solid.packing', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'In a close-packed metal structure, how many nearest neighbours does each atom have?',
+    choices: [
+      { text: 'Twelve', isCorrect: true },
+      { text: 'Eight', isCorrect: false },
+      { text: 'Six', isCorrect: false },
+      { text: 'Four', isCorrect: false },
+    ],
+    correctValue: '12',
+    targetedMisconceptions: [],
+    source: src('chem.solid.packing', 'six in the same layer plus three above and three below, in BOTH hcp and ccp — which is the structural reason the two have identical packing efficiency despite different stacking, the point the concept\'s existing Mg-versus-Cu probe makes'),
+  },
+  {
+    conceptId: 'chem.solid.packing', subjectSlug: S, probeKind: 'fill_blank',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'A close-packed structure of N atoms contains ______ tetrahedral holes and ______ octahedral holes.',
+    choices: [
+      { text: '2N … N', isCorrect: true },
+      { text: 'N … 2N', isCorrect: false },
+      { text: 'N … N', isCorrect: false },
+      { text: '2N … 2N', isCorrect: false },
+    ],
+    correctValue: '2N tetrahedral, N octahedral',
+    targetedMisconceptions: [],
+    source: src('chem.solid.packing', 'there are twice as many of the SMALLER hole, which is what fixes the stoichiometry of a filled structure — CaF₂ has fluoride in all the tetrahedral holes and so is 1:2, the case the concept\'s existing fluorite probe asks about'),
+  },
+
+  {
+    conceptId: 'chem.solid.properties', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'Silicon is doped with phosphorus, a Group 15 element, substituting for silicon in the lattice. How many electrons per phosphorus atom are left over after the four Si–P bonds are made?',
+    choices: [
+      { text: 'One', isCorrect: true },
+      { text: 'Five — all of phosphorus\'s valence electrons are free', isCorrect: false },
+      { text: 'Four', isCorrect: false },
+      { text: 'None', isCorrect: false },
+    ],
+    correctValue: '1',
+    targetedMisconceptions: [],
+    source: src('chem.solid.properties', '5 − 4 = 1, and that single spare electron per dopant atom is the whole of n-type conduction — it is also why a trace of dopant changes conductivity so much, since the pure lattice supplies almost no carriers at all'),
+  },
+
+  {
+    conceptId: 'chem.surface.heterogeneous-cat', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'A catalyst lowers a reaction\'s activation energy. What does it do to the equilibrium constant K?',
+    choices: [
+      { text: 'Nothing — K is unchanged', isCorrect: true },
+      { text: 'Raises it, because the forward reaction speeds up', isCorrect: false },
+      { text: 'Lowers it', isCorrect: false },
+      { text: 'Raises it only while the catalyst is present', isCorrect: false },
+    ],
+    correctValue: 'K is unchanged',
+    targetedMisconceptions: [],
+    source: src('chem.surface.heterogeneous-cat', 'the catalyst lowers the barrier from BOTH sides equally, so both rates rise by the same factor and their ratio does not move; "the forward reaction speeds up" is true and still gives the wrong conclusion, which is why it is the offered alternative'),
+  },
+  {
+    conceptId: 'chem.surface.heterogeneous-cat', subjectSlug: S, probeKind: 'fill_blank',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'A heterogeneous catalyst works only at its ______, which is why it is used as a ______ rather than as a solid lump.',
+    choices: [
+      { text: 'surface … finely divided powder or thin coating on a support', isCorrect: true },
+      { text: 'surface … single large crystal', isCorrect: false },
+      { text: 'centre … finely divided powder or thin coating on a support', isCorrect: false },
+      { text: 'surface … concentrated solution', isCorrect: false },
+    ],
+    correctValue: 'at the surface; used finely divided or supported',
+    targetedMisconceptions: [],
+    source: src('chem.surface.heterogeneous-cat', 'only surface atoms can adsorb anything, so the bulk of a lump is inert mass — and that is why blocking a fraction of the sites costs a proportional fraction of the activity rather than killing the catalyst, the judgement the concept\'s existing 10%-poisoned probe asks for'),
+  },
+
+  {
+    conceptId: 'chem.thermo.cell-thermo', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'A cell has E° = +0.50 V with n = 2 electrons transferred. Using ΔG° = −nFE° with F = 96 500 C/mol, what is ΔG°?',
+    choices: [
+      { text: '−96.5 kJ/mol', isCorrect: true },
+      { text: '+96.5 kJ/mol', isCorrect: false },
+      { text: '−48.3 kJ/mol — n omitted', isCorrect: false },
+      { text: '−193 kJ/mol — E° omitted', isCorrect: false },
+    ],
+    correctValue: '−96.5 kJ/mol',
+    targetedMisconceptions: [],
+    source: src('chem.thermo.cell-thermo', 'a positive cell potential must give a NEGATIVE free-energy change, which the minus sign in the formula exists to deliver — the concept\'s existing probe asks only for that sign at E° = 1.10 V, and this one is the same relation carried through to a number, with each distractor one dropped factor'),
+  },
+
+  {
+    conceptId: 'chem.thermo.third-law', subjectSlug: S, probeKind: 'numeric',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'What does the Third Law of Thermodynamics state about the entropy of a PERFECT crystal at 0 K?',
+    choices: [
+      { text: 'It is exactly zero', isCorrect: true },
+      { text: 'It is equal to the substance\'s enthalpy of formation', isCorrect: false },
+      { text: 'It is undefined, because absolute zero is unreachable', isCorrect: false },
+      { text: 'It is small but always positive', isCorrect: false },
+    ],
+    correctValue: '0',
+    targetedMisconceptions: [],
+    source: src('chem.thermo.third-law', 'one perfectly ordered arrangement means one microstate and S = k ln 1 = 0, and having that zero as a fixed reference is exactly why absolute entropies can be tabulated where absolute enthalpies cannot — the concept probes both the exceptions and the consequence, but never the law itself'),
+  },
+]
+
+/**
  * Every chemistry probe-depth probe. One array, so `seed-knowledge-assets.ts`,
  * the cold-start bootstrap and the contract tests — all of which scan for a
  * `*_PROBES` export — see the same set.
@@ -3236,4 +3645,5 @@ export const CHEMISTRY_DEPTH_PROBES: SeedProbe[] = [
   ...CHEM_E,
   ...CHEM_F,
   ...CHEM_G,
+  ...CHEM_H,
 ]

@@ -979,7 +979,7 @@ describe('the physics depth probes are arithmetically true', () => {
     // Valency is the octet DEFICIT, not the group number and not the maximum
     // oxidation state — three numbers a Group 15 stem puts within reach at once.
     expect(8 - 5).toBe(3)
-    expect(c('Group 15')).toContain('Three')
+    expect(c('An element sits in Group 15')).toContain('Three')
 
     // Addition conserves mass exactly: no by-product, so 28 g in, 28 g out.
     // The two loss options are the condensation answer in the wrong mechanism.
@@ -1267,6 +1267,100 @@ describe('the physics depth probes are arithmetically true', () => {
     expect(5 * 2).toBe(10)
     expect(3 * 2).toBe(6)
     expect(c('How many pi electrons does naphthalene')).toContain('Ten')
+  }, 30_000)
+
+  it('chemistry batch 8: the arithmetic', async () => {
+    const { CHEMISTRY_DEPTH_PROBES } = await import('../lib/teaching/assets/chemistryDepthSeedAssets')
+    const probes = CHEMISTRY_DEPTH_PROBES as unknown as Probe[]
+    const c = (fragment: string) => {
+      const hit = probes.filter((p) => p.stem.includes(fragment))
+      expect(hit.length, `expected exactly one chemistry probe containing "${fragment}"`).toBe(1)
+      return (hit[0].choices ?? []).find((x) => x.isCorrect)!.text
+    }
+
+    // Overall order is the SUM of the exponents; each individual order is its
+    // own exponent. Reading only the largest gives second, the offered error.
+    expect(2 + 1).toBe(3)
+    expect(c('rate = k[A]²[B]')).toContain('Third order overall; first order in B')
+
+    // E = hc/lambda: shorter wavelength, higher energy. Derived, not recalled.
+    const photonEnergy = (lambdaNm: number) => (6.626e-34 * 3.0e8) / (lambdaNm * 1e-9)
+    expect(photonEnergy(450)).toBeGreaterThan(photonEnergy(650))
+    expect(photonEnergy(450) / photonEnergy(650)).toBeCloseTo(650 / 450, 6)
+    expect(c('Blue light has a shorter wavelength')).toContain('Blue')
+
+    // Pyridine: three C=C contribute 6 pi electrons; the nitrogen lone pair is
+    // NOT among them, which is the whole reason pyridine is basic.
+    expect(3 * 2).toBe(6)
+    expect(c('pyridine\'s aromatic ring')).toContain('Six')
+
+    // [4+2] counts ELECTRONS: 4 + 2 = 6, and 6 is 4n+2 at n = 1.
+    expect(4 + 2).toBe(6)
+    expect(4 * 1 + 2).toBe(6)
+    expect(c('[4+2] cycloaddition')).toContain('Six pi electrons, two')
+
+    // Carbocation: three bonding pairs, empty p orbital.
+    expect(3 * 2).toBe(6)
+    expect(8 - 6).toBe(2)          // the pair it is short of
+    expect(c('positive carbon of a carbocation')).toContain('Six')
+
+    // A radical is ONE electron short of the octet, not two.
+    expect(8 - 7).toBe(1)
+    expect(8 - 6).toBe(2)          // the carbocation count, offered
+    expect(c('free radical carries no charge')).toContain('seven')
+
+    // BF3: boron has 3 bonds = 6 electrons, and the donated pair makes 8.
+    expect(3 * 2).toBe(6)
+    expect(3 * 2 + 2).toBe(8)
+    expect(c('F₃B–NH₃')).toContain('Six before, eight after')
+
+    // Graphite leaves one electron per carbon outside the sigma framework.
+    expect(4 - 3).toBe(1)
+    expect(c('each carbon is covalently bonded')).toContain('Four in diamond, three')
+
+    // A tetrahedron has six EDGES, not four — C(4,2) = 6.
+    const choose = (n: number, k: number) =>
+      Array.from({ length: k }, (_, i) => (n - i) / (i + 1)).reduce((a, b) => a * b, 1)
+    expect(choose(4, 2)).toBeCloseTo(6, 12)
+    expect(109.5 - 60).toBeCloseTo(49.5, 6)   // the strain, against phosphorus's preference
+    expect(c('P₄ tetrahedron')).toContain('Six bonds, 60°')
+
+    // FCC: a corner is shared by 8 cells and a face by 2.
+    expect(8 * (1 / 8) + 6 * (1 / 2)).toBe(4)
+    expect(8 + 6).toBe(14)                     // no sharing applied at all
+    expect(8 * (1 / 8) + 1).toBe(2)            // the body-centred case
+    expect(c('face-centred cubic unit cell')).toContain('Four')
+
+    // Schottky removes a cation AND an anion, so the crystal stays neutral and
+    // loses mass without losing volume: density falls.
+    expect(1 + 1).toBe(2)
+    expect(1 - 1).toBe(0)                      // net charge, which is why both must go
+    expect(c('per Schottky defect')).toContain('Two')
+
+    // Close packing: six in-layer, three above, three below.
+    expect(6 + 3 + 3).toBe(12)
+    expect(c('how many nearest neighbours')).toContain('Twelve')
+
+    // Twice as many tetrahedral holes as atoms, and one octahedral each — the
+    // 2:1 ratio that fixes fluorite's 1:2 stoichiometry.
+    expect(2 / 1).toBe(2)
+    expect(c('tetrahedral holes and')).toContain('2N … N')
+
+    // Phosphorus brings five valence electrons; four are used by the lattice.
+    expect(5 - 4).toBe(1)
+    expect(c('doped with phosphorus')).toContain('One')
+
+    // DeltaG = -nFE, in kJ. Each distractor is exactly one dropped factor.
+    const dG = (n: number, E: number) => (-n * 96500 * E) / 1000
+    expect(dG(2, 0.50)).toBeCloseTo(-96.5, 6)
+    expect(dG(1, 0.50)).toBeCloseTo(-48.25, 6)   // n omitted
+    expect(dG(2, 1.0)).toBeCloseTo(-193, 6)      // E omitted
+    expect(dG(2, 0.50)).toBeLessThan(0)          // a positive E must give a negative dG
+    expect(c('E° = +0.50 V with n = 2')).toContain('−96.5')
+
+    // One perfectly ordered arrangement is one microstate: S = k ln 1 = 0.
+    expect(Math.log(1)).toBe(0)
+    expect(c('PERFECT crystal at 0 K')).toContain('exactly zero')
   }, 30_000)
 
   it('batch 13: coupling j=1 with j=1 preserves the state count', async () => {

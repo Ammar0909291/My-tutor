@@ -227,6 +227,44 @@ the other session.`
 
 ---
 
+### 2026-08-31 — SESSION B — C1 PROBE DEPTH IS COMPLETE
+
+Every physics and chemistry `(concept, gradeBand)` pair now holds at least five
+gradeable probes. `probe-depth-worklist.ts` writes an empty CSV, and
+`contract-audit.ts` reports 261/261 physics and 186/186 pairs at contract with 0
+short — identical output at `--min 3` and `--min 5`, which is what complete means
+here: at the contract with two answers of slack above it.
+
+674 probes over 415 pairs, 24 batches. Physics 430/257 in sixteen; chemistry
+244/158 in eight. Section 5 updated; `PROBE_INVENTORY_WORKLIST.md` carries the
+per-batch tables and the reasoning.
+
+**Session A: the constraint you were blocked on is gone.** Keyed probes were
+barred below GUIDE because spending one early would starve CHECK/PRACTICE, and
+that binds only at exactly 3. There is no pair at 3 in either subject any more.
+
+**One caveat, stated rather than buried.** This is the CORPUS, all DRAFT.
+Production converges by the cold-start bootstrap in `src/instrumentation.ts`,
+which is gradual — a freshly authored probe is not servable the moment it is
+committed. Any run measuring the effect of this work needs to confirm the pool
+in production first, not assume it from the corpus. The two numbers legitimately
+disagree, and the corpus is the conservative one.
+
+**Not verified: no learner run.** Everything above is measured against the real
+modules and the real corpus offline. Whether five probes actually moves verified
+mastery is Session A's measurement to make, and it is the falsifiable prediction
+this campaign rests on. If it does not move, the premise was wrong and I would
+rather that be found than assumed.
+
+Chemistry's structural obstacle is worth carrying forward: its seed template gave
+each concept exactly one probe of each kind, so every
+`(conceptId, probeKind, gradeBand)` slot in the subject was a singleton and
+adding to one would have re-identified the probe already there. All 244 chemistry
+probes open a brand-new `numeric` or `fill_blank` slot instead. That those kinds
+are served was verified, not assumed — `teachingActionRepository` filters with
+`probeToMcq`, and `probeToMcq` never reads the kind.
+
+
 ## 5. Shared facts — measured, not assumed
 
 Anything here was measured against production or a captured run. **Correct it
@@ -246,8 +284,9 @@ by checking; assume the same will happen again.
 | Correct answers to keyed probes that earn credit | **54%** | two runs |
 | Verified mastery, physics | 78% (was 81% before three engine fixes) | 56-session run |
 | Verified mastery, chemistry | **73%** (8/11) | 12-concept baseline, seed 7 |
-| Pairs lifted to >= 5 gradeable probes | **173** (303 probes) | corpus, batches 1-11 |
-| Physics domains at 0 short (HIGH) | mech, em, therm, wave, mod | `contract-audit --min 5` |
+| Pairs lifted to >= 5 gradeable probes | **415 — ALL of them** (674 probes) | corpus, batches 1-24 |
+| Pairs still below 5 gradeable probes | **0** (phys 0, chem 0) | `probe-depth-worklist.ts`, empty CSV |
+| Physics + chemistry at `--min 5` | 261/261 and 186/186, 0 short | `contract-audit --min 5` |
 | Hand-rated teaching quality, physics | **5.8/10** (10 random transcripts) | hand audit |
 | Registry visual bindings, EXACT | phys 76/238, chem 13/186 | `lookupConceptVisualBinding` |
 | ...plus domain-prefix default only | phys 0, chem 22 | same |
