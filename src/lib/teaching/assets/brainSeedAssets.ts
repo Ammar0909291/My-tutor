@@ -43,6 +43,43 @@ export interface SeedProbe {
   source: string
 }
 
+/**
+ * A hand-authored figure for a concept.
+ *
+ * WHY THIS TYPE EXISTS
+ *
+ * Measured 2026-08-31: nothing in the seed path could write a VISUAL asset at
+ * all. `seed-knowledge-assets.ts` wrote the literals 'EXPLANATION' and 'PROBE';
+ * the cold-start bootstrap called `explanationAsset.createMany` and
+ * `probeAsset.createMany`; there was no SeedVisual. Every ACTIVE visual asset
+ * in production arrived by GENERATION plus human approval, so authored figures
+ * had nowhere to go — the same failure as the 31 mathematics modules the
+ * bootstrap imports none of.
+ *
+ * TWO DELIBERATE DIFFERENCES FROM SeedProbe / SeedExplanation:
+ *
+ * 1. NO gradeBand. The VISUAL rows actually serving in production carry a
+ *    THREE-segment slug and no band:
+ *    `chem.found.stoichiometry:concept_figure:en`. A figure of a concept is the
+ *    same figure whoever is looking at it; the band lives in the prose around
+ *    it, not in the drawing.
+ * 2. `renderer` is explicit rather than inferred. A SceneSpec and a VisualSpec
+ *    are both JSON objects, and telling them apart by shape is the kind of
+ *    guess this engine has already been bitten by. The author states it.
+ */
+export interface SeedVisual {
+  conceptId: string
+  subjectSlug: string
+  /** Always 'concept_figure' today — the familyKind every serving row uses. */
+  familyKind: 'concept_figure'
+  renderer: 'SCENE_SPEC' | 'VISUAL_SPEC'
+  /** The SceneSpec or VisualSpec, exactly as the engine's validator accepts it. */
+  spec: Record<string, unknown>
+  /** Mandatory: an empty a11yDescription fails Layer 1 validation. */
+  a11yDescription: string
+  source: string
+}
+
 export const SEED_LANGUAGE = 'en'
 export const SEED_AUTHOR_ID = 'EDUCATIONAL_BRAIN_SEED'
 
@@ -55,6 +92,33 @@ export function seedCanonicalSlug(
   const base = `${conceptId}:${familyKind}:${SEED_LANGUAGE}:${gradeBand.toLowerCase()}`
   return difficulty ? `${base}:${String(difficulty).toLowerCase()}` : base
 }
+
+/**
+ * The VISUAL slug, which is NOT `seedCanonicalSlug` and must never become it.
+ *
+ * MEASURED: `seedCanonicalSlug` returns `conceptId:familyKind:en:gradeband` —
+ * four segments minimum. The visual rows serving in production carry three:
+ *
+ *     chem.found.stoichiometry:concept_figure:en
+ *
+ * An authoring batch that reached for the general helper would emit
+ * `...:concept_figure:en:adult`, which no resolver looks up: rows present,
+ * nothing served, count rising. Same shape as the probe slug-resolver trap, and
+ * it would bite on concept one rather than concept forty-two. A separate
+ * function, so the wrong one cannot be reached by habit.
+ */
+export function seedVisualCanonicalSlug(conceptId: string, familyKind: string): string {
+  return `${conceptId}:${familyKind}:${SEED_LANGUAGE}`
+}
+
+/**
+ * The band stored on a seeded VISUAL identity.
+ *
+ * The slug deliberately carries no band, but the column is not nullable. ADULT
+ * matches what every generated visual row in production already carries, so
+ * seeded and generated figures form one population rather than two.
+ */
+export const SEED_VISUAL_GRADE_BAND: GradeBand = GradeBand.ADULT
 
 /**
  * Ladder-aware probe slug resolver — ADR 14 §13 (Remediation Item 6).
