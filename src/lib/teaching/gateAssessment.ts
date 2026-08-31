@@ -628,7 +628,7 @@ export function withholdUngradedGateQuestion(
  * "find" mid-narrative (never at the start of a line, so `TASK_IMPERATIVE`
  * does not match it) is never touched.
  */
-function dropAnswerableContent(text: string): string {
+export function dropAnswerableContent(text: string): string {
   const lines = text.split('\n')
   const firstOptionLine = lines.findIndex((l) => /^\s*\(?[A-Da-d][).]\s+\S/.test(l))
   const scoped = firstOptionLine >= 0 ? lines.slice(0, firstOptionLine).join('\n').trim() : text.trim()

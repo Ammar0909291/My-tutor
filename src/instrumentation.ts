@@ -166,11 +166,31 @@ async function bootstrapAssets() {
       // authored, in git, and unreachable.
       const { PHYSICS_BAND_GAP_PROBES } =
         await import('./lib/teaching/assets/physicsBandGapAssets')
+      // Physics probe-DEPTH probes joined 2026-08-30. Re-counting the contract
+      // on the gradeable basis (joining probe_assets and requiring >= 2
+      // choices, which is what a gate can actually grade) found 235 physics
+      // (concept, band) pairs holding exactly three closed-choice probes.
+      // Three is the mastery bar itself — one wrong answer and the pool can no
+      // longer supply correctAtCheck >= 1 plus correctAtPractice >= 2, because
+      // excludeProbeStem never re-asks a spent probe. So the learner who needs
+      // remediation is exactly the learner the concept then refuses to
+      // certify. This file lifts those pairs clear of that edge; leaving it
+      // out of the corpus would repeat chemistry's exact failure — authored,
+      // in git, and unreachable.
+      const { PHYSICS_DEPTH_PROBES } =
+        await import('./lib/teaching/assets/physicsDepthSeedAssets')
+      // Chemistry probe-depth probes joined 2026-08-30. Session A's chemistry
+      // baseline reproduced the physics mastery ceiling almost exactly — mean
+      // 2.82 keyed probes served, tail 1.8 turns when mastered against 8.3
+      // when not — so the zero-slack pool is not subject-specific.
+      const { CHEMISTRY_DEPTH_PROBES } =
+        await import('./lib/teaching/assets/chemistryDepthSeedAssets')
       const { hashContent } = await import('./lib/teaching/assets/similarity')
       const { AssetFamily, AssetStatus, AuthorKind, ExplanationStyle } = await import('@prisma/client')
 
       const ALL_EXPLANATIONS = [...SEED_EXPLANATIONS, ...AUTHORED_EXPLANATIONS, ...CHEMISTRY_EXPLANATIONS]
-      const ALL_PROBES = [...SEED_PROBES, ...AUTHORED_PROBES, ...CHEMISTRY_PROBES, ...PHYSICS_BAND_GAP_PROBES]
+      const ALL_PROBES = [...SEED_PROBES, ...AUTHORED_PROBES, ...CHEMISTRY_PROBES, ...PHYSICS_BAND_GAP_PROBES,
+        ...PHYSICS_DEPTH_PROBES, ...CHEMISTRY_DEPTH_PROBES]
       // ADR 14 §13 (Item 6): ladder rungs get a difficulty segment; singleton
       // slots keep the identity they already have. One resolver drives BOTH
       // the pre-flight check and the write loop so they cannot disagree.

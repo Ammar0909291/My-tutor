@@ -79,16 +79,38 @@ export function ThreeDVisual({
     <div
       role="img"
       aria-label={ariaLabel}
+      // A stable hook for a FRAME that needs to drive this box's height rather
+      // than let it size itself — see ExplainerFigure's fullscreen rule, where
+      // the scene takes exactly the height left over instead of a fixed share
+      // of the viewport. An attribute, not a class, so no caller's styling
+      // changes and nothing here depends on a particular stylesheet.
+      data-scene-box=""
       style={{
-        width: '100%',
-        aspectRatio: '4 / 3',
+        // Same reasoning as the two tokens below: a frame that drives this
+        // box's height needs the width to follow the scene's proportion rather
+        // than stretch, and an inline declaration cannot be overridden from a
+        // stylesheet. Fallback is the previous constant.
+        width: 'var(--fig-scene-w, 100%)',
+        // The frame may also say what SHAPE the scene should be. On a narrow
+        // screen a 4:3 box is width-limited long before it is height-limited —
+        // at 350px wide that is a 262px scene however much height the budget
+        // offers — so "expand" on a phone changed nothing at all until the
+        // shape could change with it. Fallback is the previous constant, so
+        // every other caller is unaffected.
+        aspectRatio: 'var(--fig-scene-aspect, 4 / 3)',
         // A teaching figure has to be legible before it is tidy. 360px capped
         // 3D scenes small enough that labels crowded the geometry; the floor
         // stops a narrow container collapsing the scene to a strip. The 60vh
         // term keeps a tall figure inside the chat viewport on short windows,
         // so it is never taller than the space available to read it in.
-        minHeight: 260,
-        maxHeight: 'min(520px, 60vh)',
+        // The frame around a figure knows how much height the figure may have;
+        // this component does not. `--fig-scene-h` is that budget when a frame
+        // sets one (ExplainerFigure does, and shrinks it on a narrow container
+        // and grows it when expanded). The FALLBACK is the previous constant
+        // exactly, so every other caller of ThreeDVisual — and this one, if the
+        // token is ever removed — renders byte-for-byte as it did before.
+        minHeight: 'min(260px, var(--fig-scene-h, 260px))',
+        maxHeight: 'var(--fig-scene-h, min(520px, 60vh))',
         borderRadius: 12,
         overflow: 'hidden',
         background: 'var(--bg-elevated)',

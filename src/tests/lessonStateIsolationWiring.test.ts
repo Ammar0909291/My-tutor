@@ -13,6 +13,7 @@
  * behaviour and strong evidence of wiring, which is exactly the gap here.
  */
 import { describe, it, expect } from 'vitest'
+import { lessonAttemptStartDecision } from '@/lib/teaching/lessonAttempt'
 import { readFileSync } from 'fs'
 import path from 'path'
 
@@ -25,7 +26,12 @@ describe('the chat route reads and writes the pending question through its owner
   })
 
   it('writes it via writePendingQuestion, with the SAME hoisted key', () => {
-    expect(CHAT).toMatch(/conversationStateUpdate\.pendingMcq\s*=\s*\n?\s*writePendingQuestion\(mcqHoisted, lessonKeyThisTurnHoisted\)/)
+    // The invariant here is the KEY identity — read and write must stamp the
+    // same lesson, or a question can grade a message from another lesson. The
+    // question argument became `mcqToServe(...)` on 2026-08-30 so the response
+    // and the snapshot cannot disagree about what is on screen; the key is
+    // unchanged and is what this pins.
+    expect(CHAT).toMatch(/conversationStateUpdate\.pendingMcq = writePendingQuestion\(\s*\n\s*mcqToServe\(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted\),\s*\n\s*lessonKeyThisTurnHoisted,\s*\n\s*\)/)
   })
 
   it('derives that key with lessonKeyFor — no second lesson-identity scheme', () => {
@@ -66,7 +72,7 @@ describe('lesson-init clears the per-attempt state, and only on an opened attemp
   it('the flag is set only where an attempt is actually opened', () => {
     // Phase 7L's own invariant. If this flag ever becomes unconditional the
     // gate above stops meaning anything.
-    expect(INIT).toMatch(/openLessonAttempt\(prisma, \{[\s\S]{0,220}?\}\)\s*\n\s*attemptIsFreshStart =/)
+    expect(INIT).toMatch(/openLessonAttempt\(prisma, \{[\s\S]{0,320}?\}\)\s*\n\s*attemptIsFreshStart =/)
     // Exactly one declaration (initialised false) and exactly one assignment.
     expect(INIT.match(/let attemptIsFreshStart = false/g) ?? []).toHaveLength(1)
     expect(INIT.match(/^\s*attemptIsFreshStart = /gm) ?? []).toHaveLength(1)
@@ -76,7 +82,14 @@ describe('lesson-init clears the per-attempt state, and only on an opened attemp
     // The one case where "an attempt was opened" and "the learner started
     // again" come apart: a mid-lesson refresh on a session predating
     // attempt-at-lesson-start. Opening the row is right; clearing is not.
-    expect(INIT).toMatch(/attemptIsFreshStart = mode !== 'resume'/)
+    // The rule moved into the pure `lessonAttemptStartDecision`; asserting the
+    // behaviour is stronger than the regex it replaces, and the wiring check
+    // above already pins that lesson-init assigns from that one decision.
+    expect(lessonAttemptStartDecision(null, 'resume').freshStart).toBe(false)
+    for (const st of ['COMPLETED', 'IN_PROGRESS'] as const) {
+      expect(lessonAttemptStartDecision({ status: st }, 'resume').freshStart).toBe(false)
+    }
+    expect(INIT).toMatch(/attemptIsFreshStart = decision\.freshStart/)
   })
 
   it('the four modes are still exactly restart / review / resume / next', () => {

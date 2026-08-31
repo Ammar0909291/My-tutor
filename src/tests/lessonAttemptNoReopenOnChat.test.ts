@@ -235,7 +235,19 @@ describe('the route keeps the completion gate on the outcome writer', () => {
 
   it('leaves lesson-init as the only path that re-opens a completed lesson', () => {
     const INIT = readFileSync('src/app/api/learn/lesson-init/route.ts', 'utf8')
-    expect(INIT).toContain("mode === 'restart' || mode === 'review'")
+    // The reteach test moved into the pure `lessonAttemptStartDecision` when
+    // restart-over-an-abandoned-attempt was fixed. The invariant is unchanged
+    // and is asserted at its new home below: lesson-init must still be the only
+    // caller that decides to re-open, and it must still delegate that decision
+    // rather than inlining a second copy of the rule.
+    expect(INIT).toContain('lessonAttemptStartDecision')
     expect(INIT).toContain('openLessonAttempt')
+  })
+
+  it('keeps the reteach rule in exactly one place — the pure decision', () => {
+    const PURE = readFileSync('src/lib/teaching/lessonAttempt.ts', 'utf8')
+    expect(PURE).toContain("mode === 'restart' || mode === 'review'")
+    const INIT = readFileSync('src/app/api/learn/lesson-init/route.ts', 'utf8')
+    expect(INIT).not.toContain("mode === 'restart' || mode === 'review'")
   })
 })

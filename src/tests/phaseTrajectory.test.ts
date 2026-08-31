@@ -327,9 +327,29 @@ describe('phase trajectory — legal regression', () => {
     expect(twice.phase).toBe('GUIDE')
   })
 
-  it('clarification in a DELIVERY phase regresses one rung, unchanged', () => {
+  it('clarification at GUIDE holds once, then regresses (G-2b)', () => {
+    // NARROWED 2026-08-30, previously "regresses one rung, unchanged".
+    // `remediationCount` is cleared by a graded-correct answer, so a learner
+    // alternating "explain it again" with a correct answer arrived here with
+    // the counter at 0 every time: every request was the first, and
+    // GUIDE <-> DEMONSTRATE cycled for the whole lesson with check 0.
+    // Reproduced offline at 12 turns / 6 correct answers, and measured live on
+    // 3 physics sessions plus chem.bio.enzyme-kinetics, all ending 0/0.
+    // The regression it protected is intact — it is now on the second request.
     const g = climbTo('GUIDE')
-    expect(turn(g, { learnerRequest: 'explain_differently' }).phase).toBe('DEMONSTRATE')
+    const once = turn(g, { learnerRequest: 'explain_differently' })
+    expect(once.phase).toBe('GUIDE')
+    expect(turn(once, { learnerRequest: 'explain_differently' }).phase).toBe('DEMONSTRATE')
+  })
+
+  it('OBSERVE still goes to DEMONSTRATE on a clarification — the hold is only against a DEMOTION', () => {
+    // phaseDown floors at DEMONSTRATE once something has been demonstrated, so
+    // at OBSERVE it moves the learner UP: "explain it differently" there has
+    // always meant go and show them. G-2b holds only when the step would walk
+    // the ladder backwards, so this path is untouched.
+    const o = climbTo('DEMONSTRATE')
+    const back = turn(o, { learnerRequest: 'explain_differently' })
+    expect(back.phase).toBe('DEMONSTRATE')
   })
 
   it('never regresses below DEMONSTRATE once something has been demonstrated', () => {

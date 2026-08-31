@@ -27,7 +27,7 @@
  * them, with no per-call-site change needed).
  */
 import { describe, it, expect } from 'vitest'
-import { shouldAutoScrollOnMessagesChange, type ChatMsg } from '@/components/learn/LessonScreen'
+import { shouldAutoScrollOnMessagesChange, isNearBottom, nextFollowState, NEAR_BOTTOM_PX, type ChatMsg } from '@/components/learn/LessonScreen'
 
 const user = (id: string): Pick<ChatMsg, 'role'> => ({ role: 'user' })
 const assistant = (): Pick<ChatMsg, 'role'> => ({ role: 'assistant' })
@@ -97,5 +97,53 @@ describe('edge cases', () => {
     // but harmless — same target, same outcome.
     const restored = [assistant(), user('u1'), assistant(), user('u2')]
     expect(shouldAutoScrollOnMessagesChange(restored, 0, false)).toBe(true)
+  })
+})
+
+
+/**
+ * FOLLOW MODE — the half that was missing.
+ *
+ * `shouldAutoScrollOnMessagesChange` decides correctly and then
+ * `scrollIntoView` runs ONCE, against the layout as it exists at that instant.
+ * A turn carrying a figure is barely any height then: the scene is loaded by
+ * `next/dynamic`, the canvas box settles after first paint, and panels reflow
+ * as the spec resolves. Hundreds of pixels arrive AFTER the scroll, pushing
+ * the learner's own message back above the fold — which is the reported "I
+ * have to press the down-arrow to see what I just sent", and why it was worst
+ * on exactly the turns that show a visual.
+ */
+describe('follow mode', () => {
+  const M = (scrollHeight: number, scrollTop: number, clientHeight: number) =>
+    ({ scrollHeight, scrollTop, clientHeight })
+
+  it('near the bottom is measured from ONE constant, shared with the arrow', () => {
+    expect(NEAR_BOTTOM_PX).toBe(60)
+    expect(isNearBottom(M(1000, 941, 0))).toBe(true)
+    expect(isNearBottom(M(1000, 940, 0))).toBe(false)
+  })
+
+  it('sending always re-arms following, however far up the learner was', () => {
+    // This is the case the one-shot scroll got wrong: `atBottom` can be
+    // legitimately false at the moment of sending — a long reply just read, or
+    // a mobile keyboard resizing the container.
+    expect(nextFollowState(M(5000, 0, 800), true)).toBe(true)
+  })
+
+  it('a deliberate scroll upward turns following off', () => {
+    expect(nextFollowState(M(5000, 0, 800), false)).toBe(false)
+  })
+
+  it('returning toward the bottom turns it on again with no further action', () => {
+    expect(nextFollowState(M(5000, 4180, 800), false)).toBe(true)
+  })
+
+  it('agrees with the down-arrow: never following while the arrow is offered', () => {
+    // The arrow renders on `!atBottom`, which is `isNearBottom` — so a state
+    // where the arrow is visible AND content is being followed cannot exist.
+    for (const top of [0, 1000, 3000, 4179, 4180, 4900]) {
+      const m = M(5000, top, 800)
+      if (!isNearBottom(m)) expect(nextFollowState(m, false)).toBe(false)
+    }
   })
 })

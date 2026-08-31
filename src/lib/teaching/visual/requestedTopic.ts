@@ -307,6 +307,39 @@ export const DISCOURSE_NOUNS = new Set([
   'answer', 'question', 'step', 'part', 'example', 'formula', 'difference',
   'problem', 'exercise', 'solution', 'mistake', 'error', 'result', 'reason',
   'way', 'method', 'rule', 'idea', 'meaning', 'word', 'note', 'point',
+  // HOW TO DELIVER IT, NOT WHAT TO TEACH — the manner adverbs.
+  //
+  // Measured 2026-08-29, physics `phys.qm.hydrogen-atom-qm`, a struggling-
+  // learner run. The learner typed:
+  //
+  //     "ok i am trying, can you explain one more time slowly"
+  //
+  // LEADING_REPEAT_ADVERBIAL correctly removes "one more time", and what
+  // survives is the single word `slowly` — not a medium noun, not lesson
+  // apparatus, so ONE word survived and the phrase read as a subject.
+  // `namedTopicUnknownTo` returned the topic "slowly", an excursion opened
+  // against it, and the tutor spent ELEVEN turns teaching the English adverb
+  // "slowly" inside a quantum mechanics lesson: "'Slowly' is an adverb that
+  // tells us how an action is performed", then eight generated MCQs of the
+  // form "Which sentence uses 'slowly' correctly?" with options like "The
+  // river flows slowly" / "The snail moves slowly across the grass".
+  //
+  // The learner answered six of them correctly. None could count — they are
+  // unkeyed model questions about a different subject — so the session sat at
+  // GUIDE with checkCorrect 0 for the whole run and the hydrogen atom was
+  // never returned to.
+  //
+  // This is the exact shape of the 'practice problem' defect below, and of the
+  // L1 qualifier defect: a word about HOW the learner wants to be taught read
+  // as WHAT they want taught. It bites hardest on precisely the learner this
+  // list matters most for — the one with weak English, who asks for delivery
+  // changes constantly.
+  //
+  // A list about how tutoring is talked about, not about any subject. The
+  // one-surviving-word rule still protects real requests: "explain diffraction
+  // slowly" keeps `diffraction` and still names its topic.
+  'slowly', 'quickly', 'simply', 'clearly', 'easily', 'properly', 'briefly',
+  'carefully', 'differently', 'easy', 'easier', 'slower', 'faster',
   // ASKING FOR THE EXERCISE ITSELF — the Phase-7C defect.
   //
   // Measured in production, physics `phys.opt.total-internal-reflection`, a

@@ -283,12 +283,32 @@ describe('diagram container — 3cm padding, top corrected to top-align with the
     expect(paddingBlock).toBeDefined()
   })
 
-  it('right/bottom/left keep the full 3cm reduction; top does not', () => {
-    // Anti-vacuity: pins the exact shorthand (top right bottom left), not
-    // just "contains 3cm somewhere" — a uniform `padding: 3cm` would also
-    // match a loose "contains 3cm" check while reintroducing the bug this
-    // fix closes.
-    expect(paddingBlock).toMatch(/padding:\s*2px 3cm 3cm 3cm;/)
+  it('the horizontal inset can never starve the figure, at any column width', () => {
+    // SUPERSEDED 2026-08-30, deliberately and with the reason recorded.
+    //
+    // This pinned `padding: 2px 3cm 3cm 3cm`. 3cm is 113.4px per side, so on
+    // DESKTOP — where the earlier fix was explicitly not allowed to change
+    // anything — the rule removed ~227px from the figure's column. The
+    // figure's own layout is decided by container queries on that width, so
+    // measured in Chromium against the real renderer:
+    //
+    //   container 1018px -> figure 1014px tall, canvas 470px
+    //   container  373px -> figure 1314px tall, canvas 260px   <- with the 3cm
+    //
+    // 373px is what a 50% lesson column becomes after the inset. Every section
+    // stacked and the canvas sat on its 260px floor: the teaching picture was
+    // the SMALLEST element in its own frame, surrounded by ~1050px of stacked
+    // prose. That is the "three scrolls to see one figure" report, and it was
+    // caused by the very declaration this test protected.
+    //
+    // The inset's PURPOSE is kept and is what is pinned now: stop a figure
+    // sprawling edge to edge on a wide desktop. Expressed as a proportion of
+    // the spare width, it yields nothing until the column can afford it, so no
+    // width can be starved again.
+    expect(paddingBlock).toMatch(/padding-inline:\s*clamp\(0px,/)
+    expect(paddingBlock).toMatch(/padding-block:\s*2px 12px;/)
+    // Still capped, or a very wide column would give the figure the whole track.
+    expect(paddingBlock).toMatch(/56px\)/)
   })
 
   it("top padding matches the tutor bubble's own top padding in canvas mode — pixel-aligned, not merely 'small'", () => {
@@ -363,12 +383,15 @@ describe('diagram container — 3cm padding, top corrected to top-align with the
     expect(CSS.match(/@media \(max-width: 900px\)/g)?.length).toBe(1)
   })
 
-  it('DESKTOP IS UNTOUCHED — the base rules still carry the full insets', () => {
-    // The mobile block must be an override, never a replacement: if these base
-    // declarations were edited instead, the fix would have silently changed
-    // the desktop design it was explicitly not allowed to touch.
-    expect(paddingBlock).toMatch(/padding:\s*2px 3cm 3cm 3cm;/)
+  it('the mobile block is still an OVERRIDE, and the text indent is untouched', () => {
+    // The original point of this test stands and is kept: the mobile block
+    // must override a base rule, never be the only rule. What changed is the
+    // base rule it overrides — see the superseded test above. `.canvasBubble`
+    // (the EXPLANATION half's indent) was never implicated in the height
+    // problem and is asserted here byte for byte, exactly as before.
     expect(CSS).toMatch(/\.canvasBubble\s*\{\s*padding:\s*2px 0 0 2cm;\s*\}/)
+    const block = CSS.match(/@media \(max-width: 900px\)\s*\{[\s\S]*?\n\}/)?.[0] ?? ''
+    expect(block).toMatch(/\.canvasVisual\s*\{[^}]*padding:\s*2px 0 12px;/)
   })
 
   it('padding sits INSIDE the existing column (box-sizing), never growing it', () => {

@@ -1778,6 +1778,20 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     // read at the withhold call site ~1600 lines below) so both places agree
     // on exactly which turns the gate considered question-eligible.
     let phaseAllowsProbeHoisted = false
+    // The don't-know run INCLUDING this turn, for dontKnowCeiling.ts. Read from
+    // the pre-turn snapshot and incremented here because the fold that persists
+    // it runs after the text is built.
+    let consecutiveDontKnowsHoisted = 0
+    // CRITERION 5 (answerConfirmation.ts): how many answers this session has
+    // already had confirmed, used only to rotate the phrasing so a run of
+    // correct answers is not one canned sentence. Read from the pre-turn
+    // snapshot so it is a pure function of persisted state, never of this
+    // turn's own outcome.
+    let priorConfirmationsHoisted = 0
+    /** Diagnostic only: did this turn hand the authored explanation text to the
+     *  model as retrieved context? Read by nothing; reported in the payload so a
+     *  captured run can answer the C7 question. See the cache write below. */
+    let retrievedExplanationInPrompt = false
     // EOS M1 (Evidence Spine): decision facts hoisted for the parallel spine
     // emitter — observation only, zero effect on the turn.
     let evidenceMoveHoisted: string | null = null
@@ -3414,12 +3428,26 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         droppedUntagged: historyScope.droppedUntagged,
       }))
     }
-    const historyMessages = [...historyScope.messages]
-      .reverse()
-      .map((m) => ({
-        role: m.role === MessageRole.USER ? ('user' as const) : ('assistant' as const),
-        content: m.content,
-      }))
+    // CRITERION 7 — the model cannot recite what it cannot see.
+    //
+    // An authored explanation served by Explanation Memory becomes an assistant
+    // message, and the transcript is the model's context on every later turn, so
+    // it copies the text back. Measured across the physics sweep: 52 of 58
+    // verbatim-repeat pairs are exactly that, AFTER the advisory "do NOT repeat"
+    // line moved affected sessions 65% -> 31% and stalled. This compacts those
+    // turns OUT OF THE MODEL'S VIEW ONLY — the stored Message row is untouched,
+    // so the learner's own transcript still shows the full explanation where it
+    // was served. See historyCompaction.ts.
+    const { compactServedExplanations } = await import('@/lib/teaching/historyCompaction')
+    const historyMessages = compactServedExplanations(
+      [...historyScope.messages]
+        .reverse()
+        .map((m) => ({
+          role: m.role === MessageRole.USER ? ('user' as const) : ('assistant' as const),
+          content: m.content,
+          provider: m.provider,
+        })),
+    )
 
     // K3 (EOS Kernel Pipeline) — shadow-mode invocation. Off by default;
     // ENABLE_KERNEL_PIPELINE=1 activates read-only shadow. The pipeline
@@ -3722,6 +3750,23 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           if (assembled && retrievalCacheHoisted) {
             const { CACHE_KEY_EXPLANATION } = await import('@/lib/teaching/retrievalCache')
             retrievalCacheHoisted.set(CACHE_KEY_EXPLANATION, assembled.text)
+            // INSTRUMENTATION, not a fix. `historyCompaction.ts` removed the
+            // authored explanation from the model's view of the TRANSCRIPT and
+            // the verbatim-repeat rate did not move (20 -> 18 across the shared
+            // concepts of the 2026-08-30 sweep). This is the only other path by
+            // which `assembled.text` reaches the model: cached here, truncated
+            // to ~500 chars by buildRetrievedContext, and appended to the SYSTEM
+            // PROMPT inside the BRAIN EXECUTION block.
+            //
+            // The already-served guard directly above should stop it firing on a
+            // repeat turn — but that guard is skipped entirely when
+            // `teachingHistoryHoisted` is null, and I could not establish from
+            // the source alone whether that happens on the turns that recite.
+            // Reading the code twice has already produced one confidently wrong
+            // fix here, so this records the fact in the RESPONSE (the harness
+            // captures payloads; this session cannot read Vercel logs) and the
+            // next run answers it as evidence instead of inference.
+            retrievedExplanationInPrompt = true
           }
           // MEASUREMENT DEFECT FIXED 2026-08-17 (`!alreadyServedThisConcept`).
           // The already-served guard above sets `assembled = null`, which made
@@ -3785,6 +3830,20 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         const { closingTurnWithholdsQuestion } = await import('@/lib/teaching/gateAssessment')
         const phaseBeforeTurn = (snapshot as { conversationState?: { phase?: unknown } } | null)
           ?.conversationState?.phase
+        {
+          const cs = (snapshot as {
+            conversationState?: { correctAtCheck?: number; correctAtPractice?: number }
+          } | null)?.conversationState
+          const n = (cs?.correctAtCheck ?? 0) + (cs?.correctAtPractice ?? 0)
+          priorConfirmationsHoisted = Number.isFinite(n) && n >= 0 ? n : 0
+        }
+        {
+          const prior = (snapshot as { conversationState?: { consecutiveDontKnows?: number } } | null)
+            ?.conversationState?.consecutiveDontKnows
+          const base = typeof prior === 'number' && Number.isFinite(prior) && prior >= 0 ? prior : 0
+          const { isDontKnowSignal } = await import('@/lib/teaching/recoveryGuard')
+          consecutiveDontKnowsHoisted = isDontKnowSignal(recoveryKeyHoisted) ? base + 1 : 0
+        }
         // The same exclusions the memory path already applies, for the same
         // reasons: no content into a flooded mind (foundations/04 P5), lesson
         // one never opens with a quiz (first-lesson/02 §1), and an excursion
@@ -3823,9 +3882,31 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // never sets it. At CHECK/PRACTICE the move is always 'ask', so those
         // phases are unaffected by the extra condition and behave exactly as
         // they did before.
+        // E1 — CRITERION 4. Measured in the 2026-08-31 re-measurement: only
+        // 114 of 456 questions put to the learner carried an answer key (25%),
+        // so three quarters of what the tutor asks cannot be graded and the
+        // learner answers into a void. DEMONSTRATE is where the largest block
+        // of those sit.
+        //
+        // This was scheduled SECOND in the blueprint and would have been
+        // harmful then: at a pool of exactly three, spending a probe below the
+        // mastery gates makes mastery unreachable, which is the defect that
+        // held physics at 79%. Probe depth is now complete in both subjects
+        // (physics 261/261, chemistry 186/186 at five or more), so the surplus
+        // this needs exists for the first time. The surplus itself is enforced
+        // at the SERVING site below, where the pool size is known —
+        // `mayAttachProbeBelowGuide`.
+        //
+        // Same 'ask'-only condition as GUIDE, for the same reason: attaching a
+        // question to a TEACH turn would override a teaching decision the
+        // ladder made deliberately. OBSERVE is untouched — it is a DIAGNOSTIC
+        // phase (observeDiagnosticConcludes.test.ts), and the one previous
+        // attempt to alter its ladder behaviour broke seven behavioural tests
+        // and was reverted.
         const phaseAllowsProbe =
           isMasteryGatePhase(phaseBeforeTurn) ||
-          (phaseBeforeTurn === 'GUIDE' && evidenceMoveHoisted === 'ask')
+          ((phaseBeforeTurn === 'GUIDE' || phaseBeforeTurn === 'DEMONSTRATE')
+            && evidenceMoveHoisted === 'ask')
         phaseAllowsProbeHoisted = phaseAllowsProbe
         // PHASE 3. Three of the terms this conjunction used to spell out by hand
         // — recovery, closing, and the learner-request term it was MISSING —
@@ -3858,7 +3939,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // not re-spelled below, so the log and the decision cannot drift.
         const gateTerms = {
           phaseAllowsProbe,
-          probeAttachablePhase: isProbeAttachablePhase(phaseBeforeTurn),
+          // E1 adds DEMONSTRATE to THIS gate's scope only. `isProbeAttachablePhase`
+          // is deliberately left alone: its other caller is the ungraded-question
+          // withhold, and widening that too would suppress the model's own
+          // questions at DEMONSTRATE — a different change, with a real risk of
+          // making lessons passive (blueprint 7), which must be measured on its
+          // own rather than smuggled in beside this one.
+          probeAttachablePhase:
+            isProbeAttachablePhase(phaseBeforeTurn) || phaseBeforeTurn === 'DEMONSTRATE',
           hasMemoryState: memoryState !== null,
           noUnansweredProbeOnScreen: !unansweredProbeOnScreen,
           notFirstLesson: !firstLessonActiveHoisted,
@@ -3953,7 +4041,24 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // accepts non-MCQ probes and renders them as prose follow-ups.
             requireMcq: true,
           })
-          const converted = probe ? probeToMcq(probe) : null
+          // THE SURPLUS RULE. Spending a probe below the mastery gates is only
+          // safe while three remain afterwards, because mastery needs three
+          // credits and a spent probe is never re-asked. Enforced here rather
+          // than in `gateTerms` because the pool size is not known until the
+          // selector has run. A concept still at the bare contract therefore
+          // behaves EXACTLY as it did before this change.
+          const { mayAttachProbeBelowGuide } = await import('@/lib/teaching/masteryReachability')
+          const belowGuideBlocked =
+            phaseBeforeTurn === 'DEMONSTRATE'
+            && !(probe ? mayAttachProbeBelowGuide(phaseBeforeTurn, probe.poolSize) : false)
+          if (belowGuideBlocked) {
+            console.log('[gate-assessment] ' + JSON.stringify({
+              declined: 'below-guide-no-surplus',
+              phase: phaseBeforeTurn,
+              poolSize: probe?.poolSize ?? 0,
+            }))
+          }
+          const converted = probe && !belowGuideBlocked ? probeToMcq(probe) : null
           if (converted) {
             gateMcqHoisted = converted
             // The block still goes in: if the deterministic renderer refuses
@@ -5269,6 +5374,60 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         const { normalizeMathDelimiters } = await import('@/lib/text/mathDelimiters')
         cleanText = normalizeMathDelimiters(cleanText)
       } catch { /* non-fatal — raw text is still better than no answer */ }
+
+      // CRITERION 5 — A CORRECT ANSWER IS TOLD IT WAS CORRECT.
+      //
+      // Measured 2026-08-30 by rubricScore.ts: only 39% of server-graded-correct
+      // answers in physics (57% in chemistry) were met with any acknowledgement
+      // that they were right. The gate is >= 90%. In phys.wave.spring-mass three
+      // consecutive correct answers drew "That's right.", then a bare "Here is a
+      // question to check your understanding:", then an offer of remediation.
+      //
+      // This states a fact the SERVER already established: it fires only on
+      // `mcqGradeHoisted.correct === true`, which is gradeMcqAnswer's comparison
+      // against an authored, human-reviewed key — not the model's self-report.
+      // On a wrong answer, on an ungraded turn, or on a reply that already
+      // confirms, it does nothing. See answerConfirmation.ts.
+      //
+      // Placed after the other repairs so it decorates the text that actually
+      // ships, and before the verifier so the verifier sees the final reply.
+      try {
+        const { confirmCorrectAnswer } = await import('@/lib/teaching/answerConfirmation')
+        const confirmed = confirmCorrectAnswer({
+          text: cleanText,
+          correct: mcqGradeHoisted?.correct ?? null,
+          priorConfirmations: priorConfirmationsHoisted,
+        })
+        cleanText = confirmed.text
+      } catch { /* non-fatal — the teaching is still better than no answer */ }
+
+      // A CEILING ON "I DON'T KNOW". Owner-reported from a live second-law
+      // lesson: four don't-knows in a row, and the tutor asked a question after
+      // three of them. Every piece of the intended behaviour already existed and
+      // fired — the detector matched all four utterances, sessionFailureCount
+      // incremented, and the RECOVERY block said in capitals "Stop ALL questions
+      // this turn". The model asked anyway. Same class as the figure reference,
+      // the ungradeable gate question and the repeated explanation: it holds only
+      // once it is an invariant. See dontKnowCeiling.ts.
+      //
+      // Runs AFTER the confirmation repair so a graded-correct turn is unaffected
+      // (a correct answer is not a don't-know), and before the verifier so the
+      // verifier sees the final text.
+      try {
+        const { applyDontKnowCeiling } = await import('@/lib/teaching/dontKnowCeiling')
+        const ceiling = applyDontKnowCeiling({
+          text: cleanText,
+          recoveryKey: recoveryKeyHoisted,
+          consecutiveDontKnows: consecutiveDontKnowsHoisted,
+          pendingMcq: pendingMcqHoisted,
+        })
+        if (ceiling.withheld) {
+          console.log('[dont-know-ceiling] ' + JSON.stringify({
+            reason: ceiling.reason, run: consecutiveDontKnowsHoisted,
+          }))
+        }
+        cleanText = ceiling.text
+      } catch { /* non-fatal — a repair must never break a turn */ }
 
       // K6 — EOS Runtime integration: run the K5 Output Verifier on the
       // cleaned text. Off by default; behind ENABLE_OUTPUT_VERIFIER (or the
@@ -7467,8 +7626,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // disagree about which lesson this question belongs to.
           {
             const { writePendingQuestion } = await import('@/lib/teaching/pendingQuestion')
-            conversationStateUpdate.pendingMcq =
-              writePendingQuestion(mcqHoisted, lessonKeyThisTurnHoisted)
+            const { mcqToServe } = await import('@/lib/teaching/mcq')
+            // Same value the response serves — see mcqToServe. Persisting
+            // anything else would either strand a question the learner can see
+            // (ungradeable next turn) or keep one the learner cannot.
+            conversationStateUpdate.pendingMcq = writePendingQuestion(
+              mcqToServe(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted),
+              lessonKeyThisTurnHoisted,
+            )
           }
           // P6.5: fold a CLOSED concept into the lesson attempt — the single
           // owner of lesson-scoped outcomes. A concept closes exactly two ways
@@ -8182,6 +8347,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         console.warn('[turn-decision] provenance line skipped:', err)
       }
 
+      // Same helper the persist site above uses, so the payload and the
+      // snapshot can never disagree about what is on the learner's screen.
+      const { mcqToServe: mcqToServeForResponse } = await import('@/lib/teaching/mcq')
+
       return NextResponse.json({
         success: true, text: cleanText, provider,
         // PROVENANCE SOURCE OF TRUTH. `provider` names the serving branch
@@ -8196,6 +8365,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         memoryServingMode, memoryConfidence, memoryAssetId, memoryConceptId,
         memoryExactGradeMatch, memoryFallbackUsed,
         memoryFallbackReason: memoryFallbackReasonCode,
+        // Diagnostic for the C7 verbatim-repeat investigation. Reported, never
+        // read by the client. See the retrieval-cache write for why.
+        retrievedExplanationInPrompt,
         visual: responseVisual ?? undefined, visualSpec: detectedVisualSpec ?? undefined,
         sceneSpec: detectedSceneSpec ?? undefined,
         // ADAPTIVE VISUAL COMPLEXITY (visual/visualComplexity.ts). The level
@@ -8210,7 +8382,35 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         hint: hintHoisted ?? undefined,
         // P2: when present the client renders tappable options instead of
         // requiring the learner to type an answer.
-        mcq: mcqHoisted ?? undefined,
+        //
+        // ECHO AN OUTSTANDING PROBE. `unansweredProbeOnScreen` suppresses the
+        // mastery gate while a probe is pending and ungraded, and its comment
+        // states the assumption that makes that safe: "the widget keeps
+        // rendering it from `pendingMcq`". The widget does not. LessonScreen
+        // sets `activeMcq` from `data.mcq` and has a bare `else
+        // setActiveMcq(null)`, so a response that omits the field ERASES the
+        // question from the screen.
+        //
+        // Those two facts compose into a deadlock: the server withholds every
+        // new probe because it believes one is displayed, while the learner is
+        // looking at none, cannot answer what they cannot see, and so never
+        // produces the grade that would release the gate.
+        //
+        // Measured on the 60-concept physics run (2026-08-30). Across the five
+        // sessions that stalled at GUIDE, keyed-probe attachment after the
+        // first wrong answer was 0 of 21 turns — a latch, not a gradient —
+        // against 233 of 425 (55%) in every other session. Their own phase mix
+        // predicted 23.6 probes; they got 7. In phys.opt.mirrors the tutor
+        // asked "What led you to pick option B?" on a turn whose payload
+        // carried no mcq, so the learner was asked to reason about an option
+        // that was no longer on their screen.
+        //
+        // This is the same defect the block above already fixed on the server
+        // side — "the tutor then referred them to a question that was no longer
+        // on screen" — reappearing across the API boundary. Echoing the pending
+        // probe makes the payload state what the server already believes, and
+        // costs nothing when nothing is outstanding.
+        mcq: mcqToServeForResponse(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted) ?? undefined,
         // P6.6: present only on the turn the lesson completes. The client
         // renders the completion screen and must not continue teaching.
         lessonComplete: lessonCompletionHoisted ?? undefined,

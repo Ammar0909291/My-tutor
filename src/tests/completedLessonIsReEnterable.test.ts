@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest'
+import { lessonAttemptStartDecision } from '@/lib/teaching/lessonAttempt'
 import { readFileSync } from 'fs'
 import path from 'path'
 
@@ -57,19 +58,34 @@ describe('lesson-init re-opens a completed lesson', () => {
     expect(src).toMatch(/await openLessonAttempt\(prisma, \{/)
   })
 
-  it('reads the latest attempt first, so an IN_PROGRESS one is never disturbed', () => {
-    // Re-opening unconditionally would discard a lesson in flight.
+  it('reads the latest attempt first, and only a re-teach disturbs an IN_PROGRESS one', () => {
+    // Re-opening unconditionally would discard a lesson in flight, so the read
+    // must still precede the open.
     const read = lineOf(/latestLessonAttempt\(prisma, \{/)
     const open = lineOf(/await openLessonAttempt\(prisma, \{/)
     expect(read).toBeGreaterThan(0)
     expect(open).toBeGreaterThan(read)
-    expect(src).toMatch(/latest\.status === 'COMPLETED'/)
+
+    // NARROWED 2026-08-30, deliberately. This previously read "an IN_PROGRESS
+    // one is never disturbed", which was too strong and hid a real defect: an
+    // ABANDONED attempt is also IN_PROGRESS, and `restart` over one inherited
+    // its spent concept budget and its ladder. Measured on the real account,
+    // physics lesson 24: turn one arrived at PRACTICE and the lesson closed on
+    // turn three having taught nothing. The invariant that actually matters —
+    // a lesson genuinely in flight is not discarded — is carried by resume and
+    // next, which is what is pinned here.
+    expect(lessonAttemptStartDecision({ status: 'IN_PROGRESS' }, 'resume').freshStart).toBe(false)
+    expect(lessonAttemptStartDecision({ status: 'IN_PROGRESS' }, 'next').reason).toBeNull()
+    expect(lessonAttemptStartDecision({ status: 'IN_PROGRESS' }, 'restart').freshStart).toBe(true)
   })
 
   it('is scoped to the two modes that mean "teach me this again"', () => {
     // 'resume' must NOT re-open — resuming a finished lesson should still
     // deliver the close. 'next' moves to a different lessonKey entirely.
-    expect(src).toMatch(/mode === 'restart' \|\| mode === 'review'/)
+    expect(lessonAttemptStartDecision({ status: 'COMPLETED' }, 'restart').freshStart).toBe(true)
+    expect(lessonAttemptStartDecision({ status: 'COMPLETED' }, 'review').freshStart).toBe(true)
+    expect(lessonAttemptStartDecision({ status: 'COMPLETED' }, 'resume').reason).toBeNull()
+    expect(lessonAttemptStartDecision({ status: 'COMPLETED' }, 'next').reason).toBeNull()
     expect(src).not.toMatch(/mode === 'resume'\s*\)\s*\{\s*[\s\S]{0,200}openLessonAttempt/)
   })
 

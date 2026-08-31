@@ -32,7 +32,7 @@
  * understandable with the canvas ignored entirely.
  */
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Maximize2, Minimize2, Pause, Play } from 'lucide-react'
 import { SceneSpecRenderer } from './SceneSpecRenderer'
 import styles from './ExplainerFigure.module.css'
 import { useTheme } from '@/components/Providers'
@@ -270,15 +270,88 @@ export function ExplainerFigure({
   const answerWithheld = predicting || mode === 'practice' || mode === 'assess'
     || (contrast !== null && !contrastRevealed)
 
+  /**
+   * STUDY MODE — the TOP LAYER, not a fixed overlay.
+   *
+   * The first version used `position: fixed; inset: 16px`. That is correct only
+   * while no ancestor establishes a containing block, and in the real lesson
+   * one does: a fixed element is positioned against the nearest ancestor with a
+   * transform, filter, backdrop-filter, perspective, contain or will-change,
+   * and the lesson's message column has one. Reported and reproduced from the
+   * deployed app: expanding left the figure trapped inside the message row,
+   * clipped at the bottom of the scrolling messages area, with the scene below
+   * the cut and NO WAY TO SCROLL TO IT. It looked fine on the dev harness,
+   * whose ancestors are plain — which is exactly why it shipped.
+   *
+   * `requestFullscreen()` puts the element in the browser's top layer, which is
+   * outside the whole ancestor chain by construction, so no ancestor property
+   * can trap it. It does NOT move the node and does NOT remount the React
+   * subtree, so the canvas keeps its WebGL context and the learner keeps their
+   * stage, mode, focus and slider values — the property that made the class
+   * approach right in the first place is kept.
+   *
+   * Where the API is unavailable (notably iOS Safari, which allows fullscreen
+   * on <video> only) the fallback is an IN-FLOW expansion: the figure simply
+   * takes a much larger scene budget and the lesson's own scroll container
+   * reaches all of it. That cannot be trapped either, because it never tries to
+   * escape anything.
+   */
+  const frameRef = useRef<HTMLElement>(null)
+  const [expanded, setExpanded] = useState(false)
+  const canFullscreen = typeof document !== 'undefined'
+    && typeof HTMLElement !== 'undefined'
+    && typeof HTMLElement.prototype.requestFullscreen === 'function'
+    && (document.fullscreenEnabled ?? false)
+
+  const toggleExpanded = useCallback(() => {
+    const el = frameRef.current
+    if (!canFullscreen || !el) { setExpanded((v) => !v); return }
+    if (document.fullscreenElement === el) void document.exitFullscreen()
+    else void el.requestFullscreen().catch(() => setExpanded(true))
+  }, [canFullscreen])
+
+  // The browser owns Escape and the system fullscreen affordances, so the flag
+  // follows the DOM rather than the other way round — otherwise leaving
+  // fullscreen by any route the button did not initiate would desynchronise it.
+  useEffect(() => {
+    if (!canFullscreen) return
+    const sync = () => setExpanded(document.fullscreenElement === frameRef.current)
+    document.addEventListener('fullscreenchange', sync)
+    return () => document.removeEventListener('fullscreenchange', sync)
+  }, [canFullscreen])
+
+  // Escape for the in-flow fallback only; in fullscreen the browser handles it.
+  useEffect(() => {
+    if (!expanded || canFullscreen) return
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setExpanded(false) }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [expanded, canFullscreen])
+
+  /**
+   * What stays in front of the learner, and what waits behind a disclosure.
+   *
+   * The split is by ROLE, not by length or by count: everything needed to READ
+   * the figure stays visible — the first explanation panel, the legend, the
+   * result, the controls. What moves into the tail is what is only useful once
+   * it HAS been read: the key insight, and any further explanation panels.
+   * Nothing is dropped at any width, which is the rule this frame was built on.
+   */
+  const panels = explainer.panels ?? []
+  const primaryPanels = panels.slice(0, 1)
+  const tailPanels = panels.slice(1)
+  const hasTail = tailPanels.length > 0 || Boolean(explainer.insight)
+
   return (
     <figure
-      className={styles.frame}
+      ref={frameRef}
+      className={`${styles.frame}${expanded ? ` ${styles.frameExpanded}` : ''}`}
       role="figure"
       aria-label={shown.ariaLabel ?? shown.title}
       style={{ margin: 0 }}
     >
       <header className={styles.header}>
-        <div style={{ minWidth: 0 }}>
+        <div className={styles.titleBlock}>
           <h3 className={styles.title}>{explainer.title}</h3>
           {explainer.givens && <p className={styles.givens}>{explainer.givens}</p>}
           {/* The result chip states the answer, so it is withheld by exactly
@@ -294,26 +367,17 @@ export function ExplainerFigure({
           )}
         </div>
 
-        {explainer.legend && explainer.legend.length > 0 && (
-          <div className={styles.legend} aria-label="What the colours mean">
-            {explainer.legend.map((row) => {
-              const active = pinnedColor === row.color
-              return (
-                <button
-                  key={row.color}
-                  type="button"
-                  className={`${styles.legendRow}${active ? ` ${styles.legendRowActive}` : ''}`}
-                  aria-pressed={active}
-                  onClick={() => setPinnedColor(active ? null : row.color)}
-                  title={active ? 'Show the whole figure again' : `Focus on ${row.label}`}
-                >
-                  <Swatch shape={row.shape} color={themeColor(row.color, theme) ?? row.color} />
-                  <span>{row.label}</span>
-                </button>
-              )
-            })}
-          </div>
-        )}
+        <button
+          type="button"
+          className={styles.expandBtn}
+          aria-label={expanded ? 'Return the figure to the lesson' : 'Expand the figure'}
+          aria-pressed={expanded}
+          title={expanded ? 'Close (Esc)' : 'Expand'}
+          onClick={toggleExpanded}
+        >
+          {expanded ? <Minimize2 size={15} /> : <Maximize2 size={15} />}
+        </button>
+
       </header>
 
       <div className={styles.body}>
@@ -590,9 +654,98 @@ export function ExplainerFigure({
           )}
         </div>
 
-        {explainer.panels && explainer.panels.length > 0 && (
+        {(primaryPanels.length > 0 || variables.length > 0 || (explainer.legend?.length ?? 0) > 0) && (
           <div className={styles.rail}>
-            {explainer.panels.map((panel) => (
+            {/* The legend reads with the explanation, not above the picture.
+                In the header it was a five-row column that either doubled the
+                header's height or wrapped onto a line of its own and spanned
+                the full width; here it is one more compact block in the same
+                grid, and it sits next to the prose that refers to it. */}
+            {explainer.legend && explainer.legend.length > 0 && (
+              <div className={styles.legend} aria-label="What the colours mean">
+                {explainer.legend.map((row) => {
+                  const active = pinnedColor === row.color
+                  return (
+                    <button
+                      key={row.color}
+                      type="button"
+                      className={`${styles.legendRow}${active ? ` ${styles.legendRowActive}` : ''}`}
+                      aria-pressed={active}
+                      onClick={() => setPinnedColor(active ? null : row.color)}
+                      title={active ? 'Show the whole figure again' : `Focus on ${row.label}`}
+                    >
+                      <Swatch shape={row.shape} color={themeColor(row.color, theme) ?? row.color} />
+                      <span>{row.label}</span>
+                    </button>
+                  )
+                })}
+              </div>
+            )}
+
+            {primaryPanels.map((panel) => (
+              <section key={panel.heading} className={styles.panel}>
+                <h4 className={styles.panelHeading}>{panel.heading}</h4>
+                {panel.body && <p className={styles.panelBody}>{panel.body}</p>}
+                {panel.lines && (
+                  <div className={styles.panelLines}>
+                    {panel.lines.map((linetext, i) => (
+                      <span
+                        key={`${linetext}-${i}`}
+                        className={linetext === panel.emphasis ? styles.panelLineEmphasis : undefined}
+                      >
+                        {linetext}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </section>
+            ))}
+
+            {/* The controls are how this figure teaches cause and effect, so
+                they stay in front of the learner at every width and are never
+                what gets collapsed. They share the grid row with the
+                explanation rather than starting a second full-width band under
+                it — two bands is how the frame grew past a viewport. */}
+            {variables.length > 0 && (
+              <section className={`${styles.panel} ${styles.railWide}`}>
+                <h4 className={styles.panelHeading}>Try changing values</h4>
+                <div className={styles.controls}>
+                  {variables.map((v) => (
+                    <Control
+                      key={v.key}
+                      variable={v}
+                      value={live[v.key] ?? defaultValueOf(v)}
+                      idPrefix={shown.id}
+                      showEffect={policy.showEffects}
+                      onChange={setVar}
+                    />
+                  ))}
+                </div>
+              </section>
+            )}
+          </div>
+        )}
+      </div>
+
+      {hasTail && (
+        <details className={styles.more}>
+          <summary className={styles.moreSummary}>
+            <ChevronRight size={14} className={styles.moreChevron} aria-hidden="true" />
+            More insights
+          </summary>
+          <div className={styles.moreBody}>
+            {explainer.insight && (
+              <section className={styles.panel}>
+                <h4 className={styles.panelHeading}>{explainer.insight.heading ?? 'Key insight'}</h4>
+                {explainer.insight.bullets.length > 0 && (
+                  <ul className={styles.insightList}>
+                    {explainer.insight.bullets.map((b) => <li key={b}>{b}</li>)}
+                  </ul>
+                )}
+                {explainer.insight.note && <p className={styles.note}>{explainer.insight.note}</p>}
+              </section>
+            )}
+            {tailPanels.map((panel) => (
               <section key={panel.heading} className={styles.panel}>
                 <h4 className={styles.panelHeading}>{panel.heading}</h4>
                 {panel.body && <p className={styles.panelBody}>{panel.body}</p>}
@@ -611,39 +764,7 @@ export function ExplainerFigure({
               </section>
             ))}
           </div>
-        )}
-      </div>
-
-      {(explainer.insight || variables.length > 0) && (
-        <div className={styles.footer}>
-          {explainer.insight && (
-            <section className={styles.panel}>
-              <h4 className={styles.panelHeading}>{explainer.insight.heading ?? 'Key insight'}</h4>
-              {explainer.insight.bullets.length > 0 && (
-                <ul className={styles.insightList}>
-                  {explainer.insight.bullets.map((b) => <li key={b}>{b}</li>)}
-                </ul>
-              )}
-              {explainer.insight.note && <p className={styles.note}>{explainer.insight.note}</p>}
-            </section>
-          )}
-
-          {variables.length > 0 && (
-            <section className={styles.panel}>
-              <h4 className={styles.panelHeading}>Try changing values</h4>
-              {variables.map((v) => (
-                <Control
-                  key={v.key}
-                  variable={v}
-                  value={live[v.key] ?? defaultValueOf(v)}
-                  idPrefix={shown.id}
-                  showEffect={policy.showEffects}
-                  onChange={setVar}
-                />
-              ))}
-            </section>
-          )}
-        </div>
+        </details>
       )}
 
       {shown.teachingGoal && !explainer.insight && (

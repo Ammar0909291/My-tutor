@@ -29,6 +29,22 @@ export interface ProbeMatch {
   choices: ProbeChoice[] | null
   correctValue: string | null
   confidence: number
+  /**
+   * How many GRADEABLE, NOT-YET-ASKED probes were available when this one was
+   * chosen, this one included.
+   *
+   * Free — the candidate list is already fetched, already filtered to
+   * convertible probes by `requireMcq`, and already stripped of anything
+   * `excludeProbeStem` has spent. Counting the survivors costs one `.length`.
+   *
+   * It exists so a caller can ask whether spending a probe HERE would leave
+   * enough behind to still certify the concept. Mastery needs three credits
+   * (`correctAtCheck >= 1` plus `correctAtPractice >= 2`) and a spent probe is
+   * never re-asked, so attaching one outside the mastery gates is only safe
+   * while at least three remain afterwards. See `masteryReachability.ts` — the
+   * zero-slack pool is the defect that held physics at 79%.
+   */
+  poolSize: number
 }
 
 interface ProbeCandidateRow extends MatchableAsset {
@@ -113,6 +129,7 @@ export async function findBestProbe(state: StudentState, options: MatchOptions =
         choices: (best.asset.probeAsset!.choices as ProbeChoice[] | null) ?? null,
         correctValue: best.asset.probeAsset!.correctValue,
         confidence: best.confidence,
+        poolSize: rows.length,
       }
     }
 
@@ -127,6 +144,7 @@ export async function findBestProbe(state: StudentState, options: MatchOptions =
           choices: (fallback.asset.probeAsset!.choices as ProbeChoice[] | null) ?? null,
           correctValue: fallback.asset.probeAsset!.correctValue,
           confidence: fallback.confidence,
+          poolSize: rows.length,
         }
       }
     }

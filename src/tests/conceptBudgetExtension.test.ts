@@ -161,3 +161,83 @@ describe('9. the flag survives serialization and restoration', () => {
     expect(restored.budgetExtensionGranted).toBe(false)
   })
 })
+
+/**
+ * THE CASE THE EXTENSION WAS WRITTEN FOR, AND COULD NOT SERVE.
+ *
+ * A correct answer given at GUIDE advances the ladder GUIDE -> CHECK and
+ * credits nothing — GUIDE is a delivery phase, and that is correct. So the
+ * learner arrives at CHECK with correctAtCheck 0, the base budget expires, and
+ * the old eligibility read (`correctAtCheck + correctAtPractice >= 1`) denied
+ * the extension *because* of the design decision that produced their
+ * situation.
+ *
+ * Measured 2026-08-29 across a 12-concept struggling-learner sweep of physics:
+ * 7 of 12 concepts closed as needsReview at the hard stop, and in every one the
+ * learner had answered a keyed MCQ correctly on the turn that carried them
+ * GUIDE -> CHECK. phys.em.coulombs-law and phys.mech.moment-of-inertia were
+ * traced turn by turn.
+ *
+ * `correctAnswersTotal` is not a mastery counter and no gate reads it. The
+ * extension buys TURNS and never certification, which is what makes this safe.
+ */
+describe('a learner who converted at GUIDE is not denied the extension', () => {
+  it('advancing GUIDE -> CHECK on a correct answer banks no gate credit', () => {
+    const guide: ConversationState = {
+      ...initialConversationState(CONCEPT), phase: 'GUIDE', demonstrated: true,
+    }
+    const after = advanceConversationState(guide, CORRECT)
+    expect(after.phase).toBe('CHECK')
+    // The mastery bar is untouched — this is the behaviour being preserved.
+    expect(after.correctAtCheck).toBe(0)
+    expect(after.correctAtPractice).toBe(0)
+    // …but the answer is remembered for the budget's benefit.
+    expect(after.correctAnswersTotal).toBe(1)
+  })
+
+  it('qualifies for the extension at the base budget with zero gate credit', () => {
+    const stalled: ConversationState = {
+      ...initialConversationState(CONCEPT),
+      turnsOnConcept: CONCEPT_TURN_BUDGET,
+      phase: 'CHECK', demonstrated: true,
+      correctAtCheck: 0, correctAtPractice: 0, correctAnswersTotal: 1,
+      consecutiveFailures: 0,
+    }
+    expect(qualifiesForBudgetExtension(stalled)).toBe(true)
+    expect(effectiveTurnBudget({ ...stalled, budgetExtensionGranted: true }))
+      .toBe(CONCEPT_TURN_BUDGET + BUDGET_EXTENSION_TURNS)
+  })
+
+  it('a learner who has answered NOTHING right still gets no extension', () => {
+    const nothing: ConversationState = {
+      ...initialConversationState(CONCEPT),
+      turnsOnConcept: CONCEPT_TURN_BUDGET,
+      phase: 'CHECK', demonstrated: true,
+      correctAtCheck: 0, correctAtPractice: 0, correctAnswersTotal: 0,
+      consecutiveFailures: 0,
+    }
+    expect(qualifiesForBudgetExtension(nothing)).toBe(false)
+  })
+
+  it('an acknowledgement never buys the extension', () => {
+    const ack: TurnEvidence = { askedQuestion: false, acknowledgement: true, recoveryFired: false }
+    const guide: ConversationState = {
+      ...initialConversationState(CONCEPT), phase: 'GUIDE', demonstrated: true,
+    }
+    const after = advanceConversationState(guide, ack)
+    expect(after.correctAnswersTotal ?? 0).toBe(0)
+    expect(qualifiesForBudgetExtension({ ...after, turnsOnConcept: CONCEPT_TURN_BUDGET })).toBe(false)
+  })
+
+  // The extension must remain a turn allowance, never a certification.
+  it('still does not certify mastery', () => {
+    const stalled: ConversationState = {
+      ...initialConversationState(CONCEPT),
+      turnsOnConcept: CONCEPT_TURN_BUDGET, phase: 'CHECK', demonstrated: true,
+      correctAtCheck: 0, correctAtPractice: 0, correctAnswersTotal: 3,
+      budgetExtensionGranted: true,
+    }
+    expect(stalled.correctAtCheck).toBe(0)
+    expect(stalled.correctAtPractice).toBe(0)
+  })
+})

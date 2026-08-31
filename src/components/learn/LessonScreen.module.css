@@ -115,7 +115,27 @@
  * full 3cm reduction unchanged. */
 .canvasVisual {
   box-sizing: border-box;
-  padding: 2px 3cm 3cm 3cm;
+  /* WAS `2px 3cm 3cm 3cm`. 3cm is 113.4px per side at 96dpi, so this rule was
+   * removing ~227px of width from the figure's column — and the figure's own
+   * layout is decided by container queries on that width.
+   *
+   * Measured in Chromium against the real renderer (phys.meas.scalars-vectors):
+   *
+   *   container 1018px -> figure 1014px tall, canvas 470px
+   *   container  373px -> figure 1314px tall, canvas 260px   <- with the 3cm
+   *
+   * 373px is what a 50% lesson column becomes after 227px of padding. Below
+   * the 620px container breakpoint every section stacked, and the canvas hit
+   * its 260px floor: the teaching picture was the SMALLEST element in its own
+   * frame while ~1050px of stacked prose surrounded it. That is the "three
+   * scrolls to see one figure" report.
+   *
+   * The inset's purpose — stop a figure sprawling edge to edge on a wide
+   * desktop — is kept, but expressed as a proportion that cannot starve a
+   * narrow column: it yields nothing until the column is wide enough to spare
+   * it. The figure's own height budget now does the containing work. */
+  padding-block: 2px 12px;
+  padding-inline: clamp(0px, calc((100% - 560px) / 2), 56px);
 }
 
 /* The tutor bubble's canvas-mode indent, as a class rather than an inline

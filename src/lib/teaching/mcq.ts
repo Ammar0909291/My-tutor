@@ -757,3 +757,42 @@ export function gradeMcqAnswer(
   if (chosenIndex === null) return { chosenIndex: null, correct: null }
   return { chosenIndex, correct: chosenIndex === mcq.correctIndex }
 }
+
+/**
+ * THE ONE QUESTION THIS TURN PUTS IN FRONT OF THE LEARNER.
+ *
+ * Both the response payload and the persisted `pendingMcq` snapshot must be
+ * this same value, and that is the whole point of extracting it. They are two
+ * halves of one fact — what is on the learner's screen — and each half is
+ * useless without the other:
+ *
+ *   response without persist -> the learner can see it and nothing can grade
+ *                               their answer next turn (the E6 defect
+ *                               gateAssessmentRouteWiring.test.ts guards).
+ *   persist without response -> the server counts a probe as displayed and
+ *                               suppresses the mastery gate on that belief,
+ *                               while LessonScreen's `else setActiveMcq(null)`
+ *                               has erased it from the screen. The learner
+ *                               cannot answer what they cannot see, so the
+ *                               grade that would release the gate never comes.
+ *
+ * That second deadlock was live. Measured on the 60-concept physics run
+ * (2026-08-30): across the five sessions that stalled at GUIDE, keyed-probe
+ * attachment after the first wrong answer was 0 of 21 turns — a latch, not a
+ * gradient — against 233 of 425 (55%) in every other session, and their own
+ * phase mix predicted 23.6 probes where they got 7. In phys.opt.mirrors the
+ * tutor asked "What led you to pick option B?" on a turn whose payload carried
+ * no mcq at all.
+ *
+ * A probe GRADED this turn is deliberately not carried forward: it has produced
+ * its evidence, and re-serving it would let one question be answered twice.
+ */
+export function mcqToServe(
+  attachedThisTurn: TutorMCQ | null,
+  pending: TutorMCQ | null,
+  gradedThisTurn: unknown | null,
+): TutorMCQ | null {
+  if (attachedThisTurn) return attachedThisTurn
+  if (pending && !gradedThisTurn) return pending
+  return null
+}

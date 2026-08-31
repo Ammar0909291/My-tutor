@@ -133,6 +133,12 @@ export interface ConversationState {
   demonstrated: boolean
   correctAtCheck: number
   correctAtPractice: number
+  /**
+   * Graded-correct answers at ANY rung. Read only by
+   * `qualifiesForBudgetExtension`; never by a mastery gate. Optional so a
+   * snapshot written before this field existed deserialises unchanged.
+   */
+  correctAnswersTotal?: number
   remediationCount: number
   diagramRequests: number
   exampleRequests: number
@@ -221,6 +227,7 @@ export function initialConversationState(conceptId: string | null): Conversation
     demonstrated: false,
     correctAtCheck: 0,
     correctAtPractice: 0,
+    correctAnswersTotal: 0,
     remediationCount: 0,
     diagramRequests: 0,
     exampleRequests: 0,
@@ -801,9 +808,49 @@ export function advanceConversationState(
     // SECOND clarification inside the same gate demotes exactly as before. A
     // WRONG answer at CHECK is a different branch entirely (`failed`, below)
     // and still demotes on the first occurrence — CHECK is not made sticky.
-    const holdsTheGate =
-      !isDeliveryPhase(prev.phase) && (prev.remediationCount ?? 0) === 0
-    next.phase = holdsTheGate ? prev.phase : phaseDown(prev.phase, next.demonstrated)
+    // ── G-2b: THE SAME TREADMILL EXISTS ONE RUNG LOWER, AT GUIDE ────────────
+    //
+    // G-2 above scoped the hold to the mastery gates and left GUIDE demoting,
+    // on the reasoning that a delivery phase is where re-showing belongs. That
+    // is right about WHAT a clarification deserves and wrong about what the
+    // demotion COSTS, because of how it composes with the counter it reads.
+    //
+    // `remediationCount` is cleared by a graded-correct answer. So a learner
+    // who alternates "explain it again" with a CORRECT answer arrives at every
+    // clarification with the counter at 0 — every request is forever the
+    // FIRST one, the escalation branch never engages, and GUIDE -> DEMONSTRATE
+    // -> GUIDE cycles without end. Reproduced offline against this module:
+    // twelve turns, six correct answers, phase still GUIDE, correctAtCheck 0,
+    // correctAtPractice 0. The learner cannot reach CHECK, so no probe can
+    // attach and no evidence can ever be banked.
+    //
+    // Measured live, 2026-08-30: of 14 physics sessions that failed to reach
+    // mastery, 3 sat at OBSERVE>DEMONSTRATE>GUIDE having been served ONE keyed
+    // probe in fifteen turns; chemistry's `chem.bio.enzyme-kinetics` was served
+    // ZERO in fifteen. Every one of them is this cycle.
+    //
+    // The fix is to make the hold UNIFORM rather than gate-only: the first
+    // clarification since the learner last demonstrated recovery re-explains
+    // in place, at any phase; the second consecutive one steps down exactly as
+    // it always did. `isDeliveryPhase` is no longer consulted here — the rung
+    // a learner stands on does not change what one request for help deserves.
+    //
+    // ONE SUBTLETY, found by the suite and not by reading. `phaseDown` floors
+    // at DEMONSTRATE once `demonstrated` is set, so calling it at OBSERVE moves
+    // the learner UP — "explain it differently" at OBSERVE has always been the
+    // signal to go and show them, and that is correct. A hold must therefore
+    // protect against a DEMOTION and nothing else: when the step would not
+    // actually walk the ladder backwards, there is nothing to hold against and
+    // the step is taken. This keeps OBSERVE -> DEMONSTRATE exactly as it was.
+    //
+    // The negative controls this narrows are rewritten rather than deleted,
+    // with this reasoning, in masteryGateReachability.test.ts,
+    // acknowledgementAdvance.test.ts, ladderReconciliation.test.ts and
+    // phaseTrajectory.test.ts.
+    const stepped = phaseDown(prev.phase, next.demonstrated)
+    const wouldDemote = phaseIndex(stepped) < phaseIndex(prev.phase)
+    const holdsTheGate = wouldDemote && (prev.remediationCount ?? 0) === 0
+    next.phase = holdsTheGate ? prev.phase : stepped
     next.reflectionAskedThisEntry = foldReflectionAskedThisEntry(
       prev.phase, next.phase, evidence.askedQuestion, prev.reflectionAskedThisEntry ?? false,
     )
@@ -948,6 +995,29 @@ export function advanceConversationState(
     // particular a bare "Got it" does NOT clear it: an acknowledgement is not
     // evidence, masteryGate already refuses it, and that stays true here.
     next.remediationCount = 0
+
+    /**
+     * EVERY graded-correct answer, at whatever rung it was given.
+     *
+     * NOT a mastery counter and it must never become one. `correctAtCheck` and
+     * `correctAtPractice` remain the only evidence the gates read, and the
+     * switch below is untouched — a correct answer at GUIDE still credits
+     * nothing, because GUIDE is a delivery phase and the hollow-advancement
+     * protection lives at the gates.
+     *
+     * It exists for ONE reader: `qualifiesForBudgetExtension`. See that
+     * function for the measured dead-end — a learner who answers correctly at
+     * GUIDE advances the ladder, earns no gate credit BY DESIGN, and is then
+     * denied the very extension written for them because their credit is zero.
+     * The extension buys turns and never certification, so answering this
+     * question with "did the learner ever actually answer something right"
+     * cannot weaken the mastery bar.
+     *
+     * Set from `prev` with a `?? 0` default, so a session whose snapshot
+     * predates this field starts at zero rather than NaN.
+     */
+    next.correctAnswersTotal = (prev.correctAnswersTotal ?? 0) + 1
+
     const verified = evidence.signalVerificationStatus === 'CLEAN' || evidence.signalVerificationStatus === undefined
     switch (prev.phase) {
       case 'OBSERVE':

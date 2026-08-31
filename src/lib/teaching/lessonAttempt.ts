@@ -192,3 +192,56 @@ export function isConceptClosed(state: ConversationState): boolean {
   if (!state.conceptId) return false
   return hasDemonstratedMastery(state) || evaluateConceptBudget(state).status === 'exhausted'
 }
+
+/**
+ * SHOULD THIS LESSON-INIT START THE ATTEMPT AFRESH?
+ *
+ * Extracted from lesson-init so the rule is testable without a route, and so
+ * the three cases sit in one place instead of a nested ternary.
+ *
+ * The original decision handled `latest === null` and `latest COMPLETED`, and
+ * fell through to "nothing to do" for IN_PROGRESS — correct for `resume`, which
+ * is the one mode that never means start again, and silently wrong for
+ * `restart`, whose own lesson-opening prompt says "teach it from the beginning".
+ *
+ * An abandoned attempt is the COMMON case, not an edge one: a learner who walks
+ * away mid-lesson leaves an IN_PROGRESS row that nothing ever completes. When
+ * they come back and press restart, the old branch cleared nothing, so the
+ * fresh lesson inherited the abandoned one's ladder phase, its spent concept
+ * turn budget and its teaching history.
+ *
+ * Measured on the real account (physics lesson 24, `phys.mech.normal-force`,
+ * 2026-08-30): a restart resumed an attempt whose `startedAt` was 10.7 DAYS
+ * old. Turn one arrived already at PRACTICE, the concept budget was already
+ * spent, and the lesson closed on turn THREE with "Let's pause Normal Force and
+ * Constraint Forces here for now" — having taught nothing and graded nothing.
+ * The stored `durationSeconds` was 928967.
+ *
+ * `resume` and `next` are untouched: resume must carry on (it is the mode that
+ * means carry on, and clearing there would drop the ladder the learner earned
+ * and the MCQ still on their screen), and next addresses a different lessonKey.
+ */
+export function lessonAttemptStartDecision(
+  latest: { status: LessonAttemptStatusValue } | null,
+  mode: 'restart' | 'review' | 'resume' | 'next',
+): { reason: string | null; freshStart: boolean; resetStartedAt: boolean } {
+  const isReteach = mode === 'restart' || mode === 'review'
+
+  if (latest === null) {
+    return { reason: 'first-start', freshStart: mode !== 'resume', resetStartedAt: false }
+  }
+  if (latest.status === 'COMPLETED' && isReteach) {
+    return { reason: `re-open for mode=${mode}`, freshStart: true, resetStartedAt: false }
+  }
+  if (latest.status === 'IN_PROGRESS' && isReteach) {
+    // The row is reused rather than duplicated (openLessonAttempt is
+    // idempotent), so `startedAt` must be moved to now — otherwise the restart
+    // inherits the abandoned attempt's clock and reports a duration in days.
+    return {
+      reason: `restart over an abandoned attempt (mode=${mode})`,
+      freshStart: true,
+      resetStartedAt: true,
+    }
+  }
+  return { reason: null, freshStart: false, resetStartedAt: false }
+}

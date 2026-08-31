@@ -106,7 +106,12 @@ describe('4 — no compatible probe means null, not a bad probe', () => {
   it('the gate already falls back to the model when selection returns nothing', () => {
     // `converted` is null-checked before gateMcqHoisted is ever set, so an
     // empty selection leaves the turn on the existing LLM path untouched.
-    expect(ROUTE).toContain('const converted = probe ? probeToMcq(probe) : null')
+    // E1 added ONE conjunct: a probe below the mastery gates is refused when
+    // spending it would leave fewer than three behind (mayAttachProbeBelowGuide).
+    // The guarantee this case exists for is unchanged and is what is asserted —
+    // selection returning nothing still yields `null` and hands the turn to the
+    // model, never a half-built or unconvertible question.
+    expect(ROUTE).toContain('const converted = probe && !belowGuideBlocked ? probeToMcq(probe) : null')
     expect(ROUTE).toContain('if (converted) {')
   })
 })
