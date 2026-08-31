@@ -1853,6 +1853,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     // emitter. Never re-derived at the emit site.
     let capabilityObservationsHoisted:
       import('@/lib/teaching/capabilityModel').CapabilityObservation[] = []
+    // EGRESS-1: did THIS turn hydrate the capability cache from the spine?
+    // Persisted as a marker so an empty result is recorded as "looked, found
+    // nothing" rather than being retried forever. See the replay site.
+    let capabilitiesHydratedThisTurn = false
     // Band 2 (questionLegality.ts): which invariant, if any, removed ASK from
     // the legal set this turn. Folded into the session's legality metrics at
     // persist time — the automatically-measurable half of the layer.
@@ -2805,14 +2809,40 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // the durable log, so this cannot diverge from replay and cannot
           // double-count. Cold cache only: one extra read per NEW session, none
           // per turn.
-          if (Object.keys(capabilityStateHoisted).length === 0) {
+          // ── EGRESS-1: THE COMMENT ABOVE WAS THE INTENT, NOT THE BEHAVIOUR ──
+          //
+          // "Cold cache only: one extra read per NEW session, none per turn."
+          // That is what this was meant to do. What it did was replay the
+          // learner's ENTIRE event log on EVERY TURN, because an empty
+          // capability cache is indistinguishable from an unhydrated one:
+          // `readCapabilityState` returns {} for both, and the persist below
+          // only wrote `capabilities` when the result was NON-empty. So for
+          // any learner who had never triggered a capability observation —
+          // the common case — nothing was ever recorded, the guard stayed
+          // true, and the next turn replayed again. The log grows every turn,
+          // so the cost grew with it.
+          //
+          // MEASURED IN PRODUCTION (pg_stat_statements, since 2026-07-05):
+          //   219,295 calls · 105,862,902 rows returned · ~46.9 GB
+          //   from a table holding 44,323 rows — the whole table, 2,389 times
+          //   over. That is ~23 GB/month against a 5.5 GB egress quota, and
+          //   it is essentially the entire bill on its own.
+          //
+          // The fix is to record the ATTEMPT, not just a non-empty result.
+          // `capabilitiesHydrated` is written below whether or not anything
+          // was found, so "looked and found nothing" is remembered.
+          if (Object.keys(capabilityStateHoisted).length === 0
+              && snapshot?.capabilitiesHydrated !== true) {
             try {
               const { replayStudentView } = await import('@/lib/evidence-spine/replay')
               const view = await replayStudentView(prisma, userId)
               capabilityStateHoisted = capMod.hydrateFromProjection(view.capability)
+              capabilitiesHydratedThisTurn = true
             } catch {
               // Fail-open: an unavailable spine means no inherited capabilities,
-              // never a broken turn. An empty state blocks nothing.
+              // never a broken turn. An empty state blocks nothing. The marker
+              // is deliberately NOT set — a failed read must be retried, not
+              // remembered as an answer.
             }
           }
           const statedNo = capMod.detectStatedInability(message)
@@ -7807,6 +7837,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // K7: the Frustration machine's state rides the same persist.
           if (frustrationAfterTurnHoisted) {
             conversationStateUpdate.frustration = frustrationAfterTurnHoisted
+          }
+          // EGRESS-1: the marker rides the same persist, and is written even
+          // when the hydrated state is EMPTY — that is the whole point. It
+          // records that the spine was read, so the next turn does not read it
+          // again. Once true it stays true: the block below only ever sets it,
+          // and a failed replay never sets it at all.
+          if (capabilitiesHydratedThisTurn || snapshot?.capabilitiesHydrated === true) {
+            conversationStateUpdate.capabilitiesHydrated = true
           }
           // Capability session tier — same snapshot persist, no new store.
           if (capabilityStateHoisted && Object.keys(capabilityStateHoisted).length > 0) {
