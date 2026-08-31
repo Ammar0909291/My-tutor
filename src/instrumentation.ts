@@ -373,6 +373,82 @@ async function bootstrapAssets() {
       // out of the entire cold start, which is the never-converges shape this
       // block already describes. withRetry's isRetryable() already classifies
       // socket timeouts and pool-acquisition failures as transient.
+      // ── Step 0.6: THE CHEAP COMPLETENESS PROBE ─────────────────────────────
+      //
+      // MEASURED 2026-08-31, during a live egress incident (the org was at
+      // 50.8 GB against a 5 GB monthly quota):
+      //
+      //   asset_identity prefetch   2,606 calls   11,278,908 rows
+      //   + probe_assets sub-select 1,838 calls    4,771,827 rows
+      //   + explanation_assets      1,812 calls    2,884,704 rows
+      //                                          ~22 MILLION rows
+      //
+      // Those three are ONE query as written below — Prisma issues a relation
+      // `select` as its own statement — and together they were the largest
+      // remaining egress line after the spine-replay fix.
+      //
+      // Every one of those rows was read to answer a YES/NO question, and for
+      // at least the last 21 hours the answer has been NO every single time:
+      // zero seed rows were written in that window while the prefetch ran on
+      // every cold start. The bootstrap was paying ~4,300 rows plus two
+      // relation reads to discover it had nothing to do.
+      //
+      // So ask the question directly. Two COUNTs return two rows and decide
+      // exactly what the full prefetch decided:
+      //
+      //   stored  — how many of the slugs THIS corpus declares exist at all
+      //   hollow  — how many of those carry no content row of either kind
+      //
+      // The condition below is character-for-character the one the full guard
+      // applies further down; this only reaches it sooner and cheaper. When it
+      // does NOT fire, nothing is skipped — the original prefetch runs exactly
+      // as before and the original guard decides again.
+      //
+      // WHY IT IS SAFE TO BE WRONG HERE: a false "complete" would strand
+      // seeding, so the whole probe is wrapped in a try/catch that FALLS
+      // THROUGH to the existing path on any error. A failed cheap probe costs
+      // one wasted round trip; it can never substitute its own failure for a
+      // completeness answer. That is the same rule the spine fix used — a
+      // failed replay is retried, never remembered as a result.
+      //
+      // The intersection with `expectedSlugs` is not optional. Counting every
+      // seed-owned row instead is the exact defect this file already carries a
+      // long comment about: rows written by the standalone script for corpora
+      // this hook does not import once satisfied the guard while 314 chemistry
+      // probes were absent.
+      try {
+        const expectedSlugList = [...expectedSlugs]
+        const ownership = seedOwnershipWhere() as Record<string, unknown>
+        const [storedCount, hollowCount] = await withRetry(() =>
+          prisma.$transaction([
+            prisma.assetIdentity.count({
+              where: { ...ownership, canonicalSlug: { in: expectedSlugList } } as never,
+            }),
+            prisma.assetIdentity.count({
+              where: {
+                ...ownership,
+                canonicalSlug: { in: expectedSlugList },
+                probeAsset: { is: null },
+                explanationAsset: { is: null },
+              } as never,
+            }),
+          ]),
+        )
+        if (storedCount >= expectedSlugs.size && hollowCount === 0) {
+          console.log(
+            `[instrumentation] asset bootstrap: ${storedCount}/${expectedSlugs.size} seed identities present, 0 hollow — skipping (cheap probe: 2 rows read, not ~${expectedSlugs.size})`,
+          )
+          return
+        }
+        console.log(
+          `[instrumentation] asset bootstrap: cheap probe says ${storedCount}/${expectedSlugs.size} present, ${hollowCount} hollow — full prefetch needed`,
+        )
+      } catch (err) {
+        // Fall through to the full prefetch. Never treat a failed probe as an
+        // answer in either direction.
+        console.warn('[instrumentation] asset bootstrap: cheap completeness probe failed, falling back to full prefetch', err)
+      }
+
       const existing = new Map<string, { assetId: string; hasContent: boolean }>()
       for (const row of await withRetry(() => prisma.assetIdentity.findMany({
         where: seedOwnershipWhere() as never,
