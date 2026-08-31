@@ -283,6 +283,43 @@ are served was verified, not assumed — `teachingActionRepository` filters with
 `probeToMcq`, and `probeToMcq` never reads the kind.
 
 
+### 2026-08-31 — SESSION B — why one commit is deliberately unpushed during the E1 run
+
+The stop hook flags an unpushed commit (`ac49c4d`, the SeedVisual type and slug
+rule). It is held on purpose, and checking WHY produced two facts that matter
+more than the commit.
+
+**1. Pushing would confound the experiment, and not for the reason the rule
+gives.** The stated rule is that a redeploy mid-run "straddles two builds". That
+does not apply here — the commit is three unreferenced declarations and changes
+no behaviour. The real reason is specific to THIS experiment:
+
+| | corpus | production |
+|---|---|---|
+| physics pairs at >= 5 gradeable | 261 | **196** |
+| physics pairs at exactly 4 | 0 | **65** |
+
+A push redeploys, a redeploy causes cold starts, and a cold start runs the asset
+bootstrap, which still has those 65 pairs' worth of probes to write. E1 is an
+experiment about PROBE SURPLUS. Writing probes into the pool mid-run would mean
+early concepts measured at a pool of 4 and later ones at 5 — the confound lands
+squarely on the variable under test. Held until the run records DONE.
+
+**2. The pool is currently STABLE, which is the good news.** 196/65 is unchanged
+across several hours and two separate measurements, so nothing is writing right
+now and the run is not being perturbed. That is only true while no one deploys.
+
+**3. E1 is firing on 100% of physics pairs — there is no internal control.**
+`mayAttachProbeBelowGuide` requires FOUR probes available, and **all 261 physics
+pairs are at >= 4**. Session A's safety case was that "a concept still at the
+bare three-probe contract behaves exactly as before"; in physics there are zero
+such concepts. So this run measures E1 everywhere, with no held-back group
+inside it. The comparison has to be against the previous sweep, and those
+baseline transcripts died with Session A's container. Stated plainly because it
+limits what the result can prove: it can show C4 moved, it cannot isolate E1
+from anything else that changed between the two runs.
+
+
 ## 5. Shared facts — measured, not assumed
 
 Anything here was measured against production or a captured run. **Correct it
