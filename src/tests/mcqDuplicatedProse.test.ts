@@ -263,6 +263,54 @@ describe('two matching option lines is the threshold, and it matters', () => {
   })
 })
 
+/**
+ * A HEADING THAT INTRODUCED THE REMOVED QUESTION IS NOW DEBRIS.
+ *
+ * MEASURED live (phys.wave.damped-oscillations, 2026-09-01, real account,
+ * studied as a learner) on the deploy that shipped the withhold: the model
+ * wrote "**Quick check**" and then its question, the question was removed, and
+ * the learner's turn ENDED on a bold "**Quick check**" with nothing under it.
+ * Same debris case `stripCompletionClaims` already handles for a bullet
+ * reduced to its own label.
+ */
+describe('a stranded label left by the strip', () => {
+  const mcq = {
+    question: 'If a damped oscillator\u2019s amplitude decreases by half, what happens to its energy?',
+    options: ['It halves', 'It falls to a quarter', 'It stays the same'],
+    correctIndex: 1,
+  }
+
+  it('drops the trailing label the removed question belonged to', () => {
+    const body = [
+      'Energy decays twice as fast as amplitude.', '', '---', '', '**Quick check**', '',
+      'If a damped oscillator\u2019s amplitude decreases by half, what happens to its energy?',
+      'A) It halves', 'B) It falls to a quarter', 'C) It stays the same',
+    ].join('\n')
+    const out = dropDuplicatedMcqProse(body, mcq)
+    expect(out).toBe('Energy decays twice as fast as amplitude.')
+    expect(out).not.toMatch(/Quick check/)
+  })
+
+  it('takes the rule that separated the removed section with it', () => {
+    const body = 'Teaching above.\n\n---\n\n**Check**\nIf a damped oscillator\u2019s amplitude decreases by half, what happens to its energy?\nA) It halves\nB) It falls to a quarter'
+    expect(dropDuplicatedMcqProse(body, mcq)).toBe('Teaching above.')
+  })
+
+  it('never mistakes a real trailing sentence for a label', () => {
+    const body = 'Energy decays twice as fast as amplitude.\n\nIf a damped oscillator\u2019s amplitude decreases by half, what happens to its energy?\nA) It halves\nB) It falls to a quarter'
+    expect(dropDuplicatedMcqProse(body, mcq)).toBe('Energy decays twice as fast as amplitude.')
+  })
+
+  it('leaves a MID-turn heading alone — documented as unhandled', () => {
+    // Only the trailing case is measured; walking inward risks removing a
+    // heading that legitimately introduces what follows it.
+    const body = '### Warm up\nRecall the amplitude law.\n\n**Quick check**\nIf a damped oscillator\u2019s amplitude decreases by half, what happens to its energy?\nA) It halves\nB) It falls to a quarter\n\n### Next\nOn to phase.'
+    const out = dropDuplicatedMcqProse(body, mcq)
+    expect(out).toContain('Quick check')
+    expect(out).toContain('### Next')
+  })
+})
+
 describe('the chat route applies it', () => {
   const ROUTE = readFileSync('src/app/api/learn/chat/route.ts', 'utf-8')
 

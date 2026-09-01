@@ -60,6 +60,9 @@
  */
 
 export type ModelProbeVerdict =
+  /** Below GUIDE: an invented key cannot reach the record here, and silencing
+   *  the model would only make the lesson passive. */
+  | 'phase-does-not-count'
   /** The gate supplied an authored probe; the model's is moot. */
   | 'authored-served'
   /** The model offered nothing to withhold. */
@@ -78,6 +81,25 @@ export interface ModelProbeDecision {
 }
 
 export interface ModelProbeInput {
+  /**
+   * Is this a phase where a question would actually COUNT — GUIDE or a mastery
+   * gate (`isProbeAttachablePhase`, in its original un-widened sense)?
+   *
+   * MEASURED, and it is a correction to this module's first version. Across
+   * three lessons studied as a learner on 2026-09-01, EVERY withhold fired
+   * with `gate-declined-by-policy` at OBSERVE or DEMONSTRATE — never once at a
+   * phase where the key could reach the record. The harm this guard exists for
+   * is a wrong key CORRUPTING MASTERY; below GUIDE a correct answer advances
+   * the rung and increments no counter, so an invented question there cannot
+   * do that harm, and suppressing it only makes the lesson passive.
+   *
+   * route.ts's own gate says this in as many words, one screen from where this
+   * is read: widening the withhold to DEMONSTRATE is "a different change, with
+   * a real risk of making lessons passive (blueprint 7), which must be
+   * measured on its own rather than smuggled in beside this one." The first
+   * version of this guard smuggled it in beside this one. This is the undo.
+   */
+  probeWouldCountThisPhase: boolean
   /** The gate produced an authored MCQ for this turn. */
   gateServedAuthoredProbe: boolean
   /** The model emitted a parseable `<!--MCQ-->` tag. */
@@ -96,6 +118,8 @@ export interface ModelProbeInput {
 export function decideModelProbe(input: ModelProbeInput): ModelProbeDecision {
   if (input.gateServedAuthoredProbe) return { serve: false, reason: 'authored-served' }
   if (!input.modelOfferedProbe) return { serve: false, reason: 'no-model-probe' }
+  // Scoped to where the harm is. See probeWouldCountThisPhase.
+  if (!input.probeWouldCountThisPhase) return { serve: true, reason: 'phase-does-not-count' }
   // Ordered so the STRONGEST evidence decides first: knowing a reviewed item
   // is available beats inferring from the gate's refusal.
   if (input.authoredProbesExist === true) return { serve: false, reason: 'authored-probes-exist' }

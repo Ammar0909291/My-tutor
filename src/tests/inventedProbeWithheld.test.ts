@@ -99,6 +99,7 @@ describe('gateRefusedOnPolicy — policy versus capability', () => {
 
 describe('decideModelProbe', () => {
   const base = {
+    probeWouldCountThisPhase: true,
     gateServedAuthoredProbe: false,
     modelOfferedProbe: true,
     authoredProbesExist: null as boolean | null,
@@ -156,6 +157,7 @@ describe('decideModelProbe', () => {
 describe('the measured turns, decided', () => {
   it('run 2 T3: friction has five authored probes, so the invented item is withheld', () => {
     expect(decideModelProbe({
+      probeWouldCountThisPhase: true,
       gateServedAuthoredProbe: false,
       modelOfferedProbe: true,
       authoredProbesExist: true,
@@ -165,11 +167,70 @@ describe('the measured turns, decided', () => {
 
   it('a concept below the asset contract is unaffected', () => {
     expect(decideModelProbe({
+      probeWouldCountThisPhase: true,
       gateServedAuthoredProbe: false,
       modelOfferedProbe: true,
       authoredProbesExist: false,
       gateDeclinedByPolicy: false,
     }).serve).toBe(true)
+  })
+})
+
+/**
+ * SCOPED TO WHERE THE HARM IS — a correction to this guard's FIRST version,
+ * forced by studying three lessons against it.
+ *
+ * MEASURED 2026-09-01, real account, on the deploy that shipped it: EVERY
+ * withhold fired with `gate-declined-by-policy`, at OBSERVE or DEMONSTRATE,
+ * and NOT ONCE at a phase where an invented key could reach the record:
+ *
+ *   phys.mech.friction        T1, phase OBSERVE
+ *     withheld "Which direction does the friction force on the chair act…"
+ *   phys.wave.damped-oscillations T2, phase DEMONSTRATE
+ *     withheld "If a damped oscillator's amplitude decreases by half, what…"
+ *     — and the turn then ENDED on a bare "**Quick check**" with nothing
+ *       under it.
+ *
+ * The harm this guard exists for is a wrong key CORRUPTING MASTERY. Below
+ * GUIDE a correct answer advances the rung and increments no counter, so an
+ * invented question there cannot do that — and suppressing it only makes the
+ * lesson passive.
+ *
+ * route.ts's own gate says exactly this, one screen from where the decision is
+ * read: widening the withhold to DEMONSTRATE is "a different change, with a
+ * real risk of making lessons passive (blueprint 7), which must be measured on
+ * its own rather than smuggled in beside this one." The first version smuggled
+ * it in beside this one. These are the tests that stop it happening again.
+ */
+describe('below GUIDE the model keeps its question', () => {
+  const atPhase = (probeWouldCountThisPhase: boolean) => decideModelProbe({
+    probeWouldCountThisPhase,
+    gateServedAuthoredProbe: false,
+    modelOfferedProbe: true,
+    authoredProbesExist: true,
+    gateDeclinedByPolicy: true,
+  })
+
+  it('OBSERVE / DEMONSTRATE: served, even with authored probes and a refusal', () => {
+    const d = atPhase(false)
+    expect(d.serve).toBe(true)
+    expect(d.reason).toBe('phase-does-not-count')
+  })
+
+  it('GUIDE and the mastery gates: withheld, exactly as before', () => {
+    expect(atPhase(true).serve).toBe(false)
+  })
+
+  it('the phase test comes FIRST, before availability or policy', () => {
+    // Otherwise the two branches below it would keep firing at DEMONSTRATE,
+    // which is the whole defect.
+    expect(decideModelProbe({
+      probeWouldCountThisPhase: false,
+      gateServedAuthoredProbe: false,
+      modelOfferedProbe: true,
+      authoredProbesExist: true,
+      gateDeclinedByPolicy: true,
+    }).reason).toBe('phase-does-not-count')
   })
 })
 
@@ -194,6 +255,13 @@ describe('the chat route applies it', () => {
     // If it re-spelled the conjunction, the decision and its evidence could
     // disagree — the exact drift the gate-eligibility log was added to end.
     expect(ROUTE).toMatch(/gateRefusedOnPolicy\(gateTerms\)/)
+  })
+
+  it('uses the ORIGINAL phase predicate, not the gate E1-widened copy', () => {
+    // The gate's own term is `isProbeAttachablePhase(p) || p === 'DEMONSTRATE'`,
+    // and its comment forbids widening the withhold the same way.
+    expect(ROUTE).toMatch(/probeWouldCountThisPhaseHoisted = isProbeAttachablePhase\(phaseBeforeTurn\)/)
+    expect(ROUTE).toMatch(/probeWouldCountThisPhase: probeWouldCountThisPhaseHoisted/)
   })
 
   it('availability is recorded only where the selector actually ran', () => {

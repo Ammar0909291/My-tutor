@@ -333,6 +333,35 @@ export function dropDuplicatedMcqProse(cleanText: string, mcq: TutorMCQ | null):
     if (rebuilt) keep.push(rebuilt)
   }
 
+  // A HEADING THAT INTRODUCED THE REMOVED QUESTION IS NOW DEBRIS.
+  //
+  // MEASURED live (phys.wave.damped-oscillations, 2026-09-01, real account,
+  // studied as a learner) on the deploy that shipped the withhold: the model
+  // wrote "**Quick check**" and then its question, the question was removed,
+  // and the learner's turn ENDED on a bold "**Quick check**" with nothing
+  // under it. Exactly the debris case `stripCompletionClaims` already handles
+  // for a bullet reduced to its own label — same rule, applied here.
+  //
+  // Only a TRAILING label goes, and only one: a heading in the middle of a
+  // turn still introduces whatever follows it.
+  while (keep.length > 0) {
+    const last = keep[keep.length - 1].trim()
+    if (last === '') { keep.pop(); continue }
+    const isBareLabel =
+      /^#{1,6}\s+[^.!?]{0,40}$/.test(last) ||
+      /^\*\*[^*]{0,40}\*\*:?$/.test(last) ||
+      // The rule that separated the removed section from the one above it.
+      /^(?:---|\*\*\*|___)$/.test(last)
+    if (!isBareLabel) break
+    keep.pop()
+  }
+
+  // NOT HANDLED, and said here rather than discovered later: a label stranded
+  // in the MIDDLE of a turn ("**Quick check**" followed by the next heading)
+  // is debris too. Only the TRAILING case has been measured, and walking
+  // inward risks removing a heading that legitimately introduces what follows
+  // it. Left alone until there is a real instance to work from.
+
   const out = keep.join('\n').replace(/\n{3,}/g, '\n\n').trim()
   // A LENGTH FLOOR WAS THE WRONG TEST, and measuring it said so: at 40 chars
   // this declined on "Let us check that." followed by the duplicated block —

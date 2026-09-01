@@ -3850,6 +3850,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // ran, which is ignorance and must not be read as "none exist".
       let authoredProbesExistHoisted: boolean | null = null
       let gateDeclinedByPolicyHoisted = false
+      // GUIDE or a mastery gate — the ORIGINAL isProbeAttachablePhase, never
+      // the gate's E1-widened copy. See ModelProbeInput.probeWouldCountThisPhase.
+      let probeWouldCountThisPhaseHoisted = false
       // The model's own item when it was WITHHELD, kept so its prose copy can
       // be stripped too — a withheld widget with the question still written
       // out above it leaves an unanswerable question on the learner's screen.
@@ -4001,6 +4004,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         {
           const { gateRefusedOnPolicy } = await import('@/lib/teaching/inventedProbeGuard')
           gateDeclinedByPolicyHoisted = gateRefusedOnPolicy(gateTerms)
+          probeWouldCountThisPhaseHoisted = isProbeAttachablePhase(phaseBeforeTurn)
         }
         console.log('[gate-eligibility] ' + JSON.stringify({
           phase: phaseBeforeTurn,
@@ -5017,6 +5021,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       {
         const { decideModelProbe } = await import('@/lib/teaching/inventedProbeGuard')
         const d = decideModelProbe({
+          // The ORIGINAL predicate, deliberately NOT the gate's E1-widened
+          // copy: GUIDE and the mastery gates only. See the field's own note.
+          probeWouldCountThisPhase: probeWouldCountThisPhaseHoisted,
           gateServedAuthoredProbe: gateMcqHoisted !== null,
           modelOfferedProbe: mcqParse.mcq !== null,
           authoredProbesExist: authoredProbesExistHoisted,
