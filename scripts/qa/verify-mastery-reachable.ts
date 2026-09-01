@@ -18,13 +18,16 @@
 import { createQaAccount, deleteQaAccount, BASE } from './liveAccount'
 import { createSession, openLesson, say, describe as d, type TurnPayload } from './liveSession'
 
-const LESSON = {
-  lessonTitle: 'Friction Forces',
-  lessonOrder: 1,
-  topicSlug: 'phys.mech.friction',
-  unitTitle: 'Mechanics',
-  totalLessons: 238,
+/** Concept under test. Friction is the well-trodden one; pass a slug to try
+ *  another, so a fix is not confirmed only on the concept it was found on. */
+const CONCEPTS: Record<string, { lessonTitle: string; topicSlug: string; unitTitle: string; lessonOrder: number }> = {
+  friction: { lessonTitle: 'Friction Forces', topicSlug: 'phys.mech.friction', unitTitle: 'Mechanics', lessonOrder: 1 },
+  'kinetic-energy': { lessonTitle: 'Kinetic Energy', topicSlug: 'phys.mech.kinetic-energy', unitTitle: 'Mechanics', lessonOrder: 1 },
+  'newtons-second-law': { lessonTitle: "Newton's Second Law", topicSlug: 'phys.mech.newtons-second-law', unitTitle: 'Mechanics', lessonOrder: 1 },
+  mirrors: { lessonTitle: 'Mirrors', topicSlug: 'phys.opt.mirrors', unitTitle: 'Optics', lessonOrder: 1 },
 }
+const KEY = process.argv[2] && CONCEPTS[process.argv[2]] ? process.argv[2] : 'friction'
+const LESSON = { ...CONCEPTS[KEY], totalLessons: 238 }
 
 /** What a learner says when there is no question in front of them. */
 const NUDGES = [
@@ -38,7 +41,8 @@ const NUDGES = [
 const MAX_TURNS = 16
 
 async function main() {
-  const acct = await createQaAccount('mastery')
+  console.log(`concept=${KEY} (${LESSON.topicSlug})`)
+  const acct = await createQaAccount(`mastery-${KEY}`)
   console.log(`BASE=${BASE} account=${acct.email}`)
   try {
     const sessionId = await createSession(acct.cookie, 'physics')
