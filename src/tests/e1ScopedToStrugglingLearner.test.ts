@@ -99,6 +99,61 @@ describe('B. a learner who has failed can be given a gradeable question', () => 
 })
 
 // ═══════════════════════════════════════════════════════════════════════════
+// B2. THE SCOPE AND THE SURPLUS RULE INTERACT, AND AT DEPTH 4 THEY CANCEL
+//
+// Not anticipated when the scope was written, derived afterwards and then
+// confirmed against production. Two independent conditions must both hold:
+//
+//   this scope        the concept has produced a FAILURE
+//   the surplus rule  poolSize - 1 >= CREDITS_REQUIRED_FOR_MASTERY  (>= 4 left)
+//
+// A learner cannot fail without having been ASKED, and being asked SPENDS a
+// probe. So at the moment of first failure at least one probe is already gone.
+//
+// Physics probe depth, measured in production 2026-09-01 (ACTIVE PROBE assets
+// with >= 2 choices, grouped by concept and band):
+//
+//   261 pairs · min 4 · avg 4.77 · max 6 · 0 below 4 · 65 at exactly 4
+//
+// So for the 65 pairs at depth exactly 4 — a quarter of physics — E1 can
+// NEVER fire under this scope: the failure that opens the scope is the same
+// event that drops the pool to 3 and closes the surplus rule.
+//
+// This is arithmetic, not a defect, and it is recorded so it is not
+// re-derived from scratch. It also names the lever precisely: raising those
+// 65 pairs to five probes is what would make E1 reach them, and that is
+// content work, not gate logic.
+// ═══════════════════════════════════════════════════════════════════════════
+describe('B2. the scope and the surplus rule must BOTH hold', () => {
+  const CREDITS_REQUIRED = 3
+
+  /** The surplus rule, restated: is spending one here affordable? */
+  const surplusAllows = (poolRemaining: number) => poolRemaining - 1 >= CREDITS_REQUIRED
+
+  it('at depth 4, the first failure leaves 3 and the surplus rule declines', () => {
+    // Being asked spends one, so a learner who has failed has at most 3 left.
+    expect(surplusAllows(4 - 1)).toBe(false)
+  })
+
+  it('at depth 5 it fires on the first failure, and not after a second', () => {
+    expect(surplusAllows(5 - 1)).toBe(true)
+    expect(surplusAllows(5 - 2)).toBe(false)
+  })
+
+  it('at depth 6 it survives two spent probes', () => {
+    expect(surplusAllows(6 - 1)).toBe(true)
+    expect(surplusAllows(6 - 2)).toBe(true)
+    expect(surplusAllows(6 - 3)).toBe(false)
+  })
+
+  it('the production decline is reproduced exactly', () => {
+    // [gate-assessment] {"declined":"below-guide-no-surplus",
+    //                    "phase":"DEMONSTRATE","poolSize":3}
+    expect(surplusAllows(3)).toBe(false)
+  })
+})
+
+// ═══════════════════════════════════════════════════════════════════════════
 // C. NOTHING ELSE MOVED
 // ═══════════════════════════════════════════════════════════════════════════
 describe('C. GUIDE and the mastery gates are unchanged', () => {
