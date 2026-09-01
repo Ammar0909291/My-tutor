@@ -2315,6 +2315,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // an explicit request opens. It never changes WHICH concept opens —
           // excursion.ts requires it to equal `requestedConceptId`.
           knowledgeGapConceptId: knowledgeGapHoisted?.conceptId ?? null,
+          // A DETOURED LEARNER ASKING TO BE ASSESSED IS ASKING TO GO BACK.
+          // The same per-turn intent the move engine and the MCQ grader
+          // already read — this consults it, never sets it. Closes a
+          // PREREQUISITE detour only; see the branch in excursion.ts.
+          wantsPractice: turnIntent.wantsPractice,
           lastAssistantAskedQuestion: excursionPriorAskedQuestion,
           // A TAP IS NOT A REQUEST. LessonScreen sends the full option TEXT, and
           // `looksLikeAnswer`'s length rule was calibrated for typed replies —

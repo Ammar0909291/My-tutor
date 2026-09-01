@@ -66,6 +66,19 @@ export interface ExcursionState {
   returnToConceptId: string | null
   /** Turns this excursion has been open (safety valve). */
   turns: number
+  /**
+   * Was this opened as a PREREQUISITE DETOUR (knowledgeGap.ts) rather than
+   * because the learner asked to explore something?
+   *
+   * The two have different exits. A learner who chose a topic decides when
+   * they are done with it. A learner who was DETOURED — "what is the normal
+   * force… i dont get it" — did not choose the detour and is owed a route
+   * back the moment they signal they want the lesson again.
+   *
+   * Optional so a snapshot persisted before this field reads as `false`,
+   * which is the previous behaviour exactly.
+   */
+  openedAsKnowledgeGap?: boolean
 }
 
 export const NO_EXCURSION: ExcursionState = {
@@ -87,6 +100,7 @@ export type ExcursionTransition =
   | 'closed-on-lesson'       // the learner asked for the lesson's own concept
   | 'closed-lesson-changed'  // the lesson moved underneath the excursion
   | 'closed-turn-limit'      // safety valve
+  | 'closed-wants-practice'  // detoured learner asked to be assessed again
 
 export interface ExcursionDecision {
   /** The state to persist for the next turn. */
@@ -193,6 +207,14 @@ export interface ExcursionInput {
    * concept is opened.
    */
   knowledgeGapConceptId?: string | null
+  /**
+   * The learner asked to practise or be assessed THIS TURN (the route's own
+   * `turnIntent.wantsPractice` — read here, never recomputed).
+   *
+   * A close signal for a prerequisite detour only. See the branch that uses
+   * it for the measured failure.
+   */
+  wantsPractice?: boolean
   /** Whether the tutor's previous turn ended in a question. */
   lastAssistantAskedQuestion: boolean
   /**
@@ -330,6 +352,34 @@ export function decideExcursion(input: ExcursionInput): ExcursionDecision {
   // The learner said they are done.
   if (active && isSatisfactionSignal(message)) return closed('closed-satisfied')
 
+  // A DETOURED LEARNER ASKING TO BE ASSESSED IS ASKING TO GO BACK.
+  //
+  // MEASURED (phys.mech.friction, 2026-09-01, real account, studied as a
+  // learner). "what is the normal force… i dont get it" correctly opened a
+  // knowledge-gap detour to phys.mech.normal-force. Four turns later the
+  // learner had answered correctly twice and been told so, then wrote:
+  //
+  //   "the one pointing up. can you quiz me properly on friction now"
+  //
+  // The engine SAW it — that turn logged `wantsPractice: true` and
+  // `practiceRequested: true` — and the detour stayed open, `transition:
+  // 'continued'`, for two more turns. While it was open `notExcursion: false`
+  // blocked every probe, so the lesson sat in OBSERVE with check 0 / practice
+  // 0 and could not have reached mastery however well the learner answered.
+  //
+  // None of the existing exits could fire: it is not a return request, it
+  // contains no satisfaction phrase, it is not a correction, the lesson did
+  // not change, and the turn limit is 40. The one signal that WAS present went
+  // unread.
+  //
+  // SCOPED TO A PREREQUISITE DETOUR. A learner who chose to explore a topic
+  // and asks to be quizzed may well mean quizzed on THAT topic; the ambiguity
+  // is real and is left alone. A learner who was detoured did not choose it,
+  // and asking to be assessed is asking for the lesson back.
+  if (active && state.openedAsKnowledgeGap === true && input.wantsPractice === true) {
+    return closed('closed-wants-practice')
+  }
+
   // F3 fix: the learner explicitly said the active excursion topic is NOT
   // what they meant ("I meant the book and table thing, not cesium"), and
   // named nothing else this turn that a later branch can redirect to. Same
@@ -376,6 +426,23 @@ export function decideExcursion(input: ExcursionInput): ExcursionDecision {
         targetTopicTitle: null,
         returnToConceptId: lessonConceptId,
         turns: 0,
+        // WHY it opened, recorded once at the start so the exit can differ.
+        // A detour the learner did not choose is owed a route back; a topic
+        // they asked for is theirs to leave.
+        //
+        // `gapOpensThisConcept` alone is the test, and the first version of
+        // this line got that wrong: it also required the message NOT to look
+        // like a topic request, which killed the flag on the very message that
+        // opened the detour — "what is the normal force though … i dont get
+        // it" is request-SHAPED and a reported gap at the same time. Caught by
+        // the test built from that verbatim turn.
+        //
+        // The discriminator already lives upstream: `knowledgeGapConceptId`
+        // comes from classifyKnowledgeGap, which fires only on a don't-know /
+        // don't-understand signal (isDontKnowSignal). "I don't understand X"
+        // versus "explain X" is exactly the distinction wanted, and it has
+        // already been made by the time this branch runs.
+        openedAsKnowledgeGap: gapOpensThisConcept,
       },
       targetConceptId: requestedConceptId,
       targetTopicTitle: null,
@@ -507,6 +574,16 @@ export function parseExcursionState(raw: unknown): ExcursionState {
       typeof v.turns === 'number' && Number.isFinite(v.turns) && v.turns > 0
         ? Math.floor(v.turns)
         : 0,
+    // WHY IT OPENED HAS TO SURVIVE A REFRESH, or the exit that depends on it
+    // never fires for a learner who reloaded the page. This parser rebuilds
+    // the state field by field, so a new field is DROPPED unless it is named
+    // here — caught by the round-trip test, not by reading.
+    //
+    // Strict `=== true`: a snapshot written before this field existed, or a
+    // hand-edited row, reads as "not a detour", which is the previous
+    // behaviour and the conservative direction (the detour stays open rather
+    // than closing on a signal it should not).
+    openedAsKnowledgeGap: v.openedAsKnowledgeGap === true,
   }
 }
 

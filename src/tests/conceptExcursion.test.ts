@@ -313,8 +313,11 @@ describe('13 · an excursion never writes lesson state', () => {
     // can appear here, and it fails if one ever does. `targetTopicTitle` is
     // the identity of a topic the KG cannot name (see excursion.ts's
     // UNRESOLVED TOPICS note), which is teaching state, not progress.
+    // `openedAsKnowledgeGap` records WHY the excursion opened so its exit can
+    // differ from a learner-chosen one — lifecycle, not progress: it moves no
+    // counter, gates no mastery, and is never read by the ladder.
     expect(Object.keys(t.excursion.state).sort()).toEqual(
-      ['active', 'returnToConceptId', 'targetConceptId', 'targetTopicTitle', 'turns'],
+      ['active', 'openedAsKnowledgeGap', 'returnToConceptId', 'targetConceptId', 'targetTopicTitle', 'turns'],
     )
     // The lesson identity handed in is returned untouched as the return anchor.
     expect(t.excursion.returnToConceptId).toBe(LESSON)
