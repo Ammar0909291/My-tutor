@@ -86,14 +86,28 @@ describe('Brain Execution — runtime ON, every decision verified', () => {
     expect(block).toContain('No new concepts and no advancement')
   })
 
-  it('VISUALIZATION: visualization engine decides, LLM only narrates — visual named', () => {
+  // NARROWED 2026-09-01, deliberately. This used to assert
+  // `block).toContain('Visual: force_diagram')` — that the block NAMES the
+  // figure. It must not: the identifier comes from visualRegistry's `primary`,
+  // which for 12 of the 29 physics concepts with a scene generator names a
+  // renderer that is not what gets drawn. Measured in production on a Mirrors
+  // lesson, `requiredVisualization: force_diagram` while `representation:
+  // ray_optics` was served — two names for one figure in one prompt. The
+  // VISUAL CONTRACT block, which reads the admitted asset, is the single
+  // owner. See `brainBlockNeverNamesTheFigure.test.ts`.
+  //
+  // What this case still guarantees is the part that was always the point:
+  // the diagram request reaches the VISUALIZATION decision and the LLM is put
+  // in the narrating role.
+  it('VISUALIZATION: visualization engine decides, LLM only narrates — and does NOT name the figure', () => {
     const { block } = pipeline({
       message: 'please show me a diagram',
       lastSignal: { correctness: true },
       observations: { availableVisual: 'force_diagram', visualDetectionRan: true },
     }, false)
-    expect(block).toContain('Visual: force_diagram')
     expect(block).toContain('narrate')
+    expect(block).toContain('the visual block above specifies')
+    expect(block).not.toContain('force_diagram')
   })
 
   it('CONTINUE_LESSON: lesson engine decides, LLM only speaks', () => {

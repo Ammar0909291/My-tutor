@@ -101,9 +101,34 @@ export function buildBrainExecutionBlock(
     if (plan.decision === 'REVIEW_PREREQUISITE' && p.prerequisiteId) {
       lines.push(`- Prerequisite: ${p.prerequisiteId}`)
     }
-    if (plan.decision === 'VISUALIZATION' && p.visualType) {
-      lines.push(`- Visual: ${p.visualType}`)
-    }
+    // THE FIGURE'S NAME IS NOT THIS BLOCK'S TO GIVE.
+    //
+    // This line used to print the raw renderer identifier — `- Visual:
+    // force_diagram` — straight into the prompt. That identifier comes from
+    // `visualRegistry`'s `primary` field, which for a whole family of concepts
+    // names a renderer that is not what gets drawn: 12 of the 29 physics
+    // concepts that have a scene generator carry a `primary` sharing no word
+    // with it. Five orbital-mechanics concepts and five OPTICS concepts are
+    // labelled `force_diagram`. Measured in production on a Mirrors lesson:
+    //
+    //   [cue] requiredVisualization: {"value":"force_diagram"}
+    //   [visual-v2] representation: ray_optics          <- what was drawn
+    //
+    // So the model was handed two names for one figure in a single prompt,
+    // one of them false. That is the exact failure route.ts's own visual
+    // comment names ("two contradictory directives in one prompt is the
+    // documented cause of wrong visuals, narration/render desync, and
+    // hallucinated labels"), and its resolution there was a SINGLE OWNER.
+    //
+    // The owner is the VISUAL CONTRACT block, which reads the ADMITTED asset —
+    // the payload the client will actually render — and states its
+    // representation, its concept title, its scope and its semantics. This
+    // block's own directive already defers to it in words ("Serve the visual
+    // aid the visual block above specifies"), so the identifier added nothing
+    // the contract does not say better, and subtracted the truth when the two
+    // disagreed. The registry's `primary` values are curated content and are
+    // deliberately NOT edited here; they are simply no longer quoted at the
+    // model as though they described the picture.
     if (plan.decision === 'DETECT_MISCONCEPTION' && p.misconceptionLabel) {
       lines.push(`- Misconception: "${p.misconceptionLabel}"`)
     }
