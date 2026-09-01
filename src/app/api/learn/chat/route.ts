@@ -5248,8 +5248,47 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // here keeps acknowledgements out of the phase ladder, mastery
       // evidence, TopicProgress, and misconception records in one place.
       if (teachingSignal) {
-        const { isBareAcknowledgement } = await import('@/lib/teaching/masteryGate')
-        if (isBareAcknowledgement(message)) teachingSignal = null
+        // ── TWO WIDTHS OF "ACKNOWLEDGEMENT", AND THE LADDER USED THE OTHER ──
+        //
+        // MEASURED live (phys.mech.friction, 2026-09-01, disposable account).
+        // At CHECK, with an authored keyed probe on screen, the learner typed
+        // "ok i think i understand" — they acknowledged, they did NOT answer:
+        //
+        //   [gate-assessment] { probeFound: true, assetId: '27a4749c-…' }
+        //   [mcq-grade] { asked: 'A 10 kg box sits on a rough floor (μ_s =
+        //                 0.4)…', chosen: null, correct: null }
+        //   [ladder] { signalTag: true, correctness: false, ack: true,
+        //              phaseBefore: 'CHECK', phaseAfter: 'GUIDE' }
+        //
+        // The server had NO grade (`chosen: null`). The MODEL self-reported the
+        // learner wrong, the fold took its `failed` branch, and the learner was
+        // DEMOTED for saying they understood.
+        //
+        // `shouldSuppressSignalCorrectness` cannot catch this: its first line
+        // returns `suppress: false` whenever a structured MCQ is pending, which
+        // is exactly the situation here — pending, and unanswered.
+        //
+        // This guard's own stated purpose is the one that failed: "keeps
+        // acknowledgements out of the phase ladder, mastery evidence,
+        // TopicProgress, and misconception records IN ONE PLACE." It used
+        // `isBareAcknowledgement` (an exact ACK_PHRASES match), while the
+        // ladder's own acknowledgement branch reads
+        // `isLowSignalAcknowledgement`. Two predicates for one idea, and the
+        // gap between them is where the demotion lived.
+        //
+        // Reading the LADDER's predicate here makes the two agree by
+        // construction. It cannot destroy a real answer: deterministic MCQ
+        // grading is a separate, later, authoritative path — a learner who
+        // actually picks an option produces `chosen: <n>` and is graded from
+        // the answer key, whatever this discards. What is discarded is only
+        // the MODEL's unverified claim about a turn that answered nothing.
+        //
+        // And it cannot manufacture progress: with the signal gone the fold
+        // takes its acknowledgement branch, whose CHECK / PRACTICE / TRANSFER
+        // cases are empty. The learner stays at CHECK — neither advanced nor
+        // demoted, which is what "I understand" actually evidences.
+        const { isLowSignalAcknowledgement } = await import('@/lib/teaching/conversationState')
+        if (isLowSignalAcknowledgement(message)) teachingSignal = null
       }
 
       // ── DETERMINISTIC MCQ GRADING ────────────────────────────────────────
