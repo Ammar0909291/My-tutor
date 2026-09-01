@@ -14,6 +14,7 @@
 
 import type { ConversationState } from './conversationState'
 import { evaluateConceptBudget, hasDemonstratedMastery } from './conceptBudget'
+import { masteryVerifiedStrict } from './masteryGate'
 import { safeConceptTitle } from '@/lib/curriculum/knowledgeGraph'
 
 export interface ConceptOutcome {
@@ -29,6 +30,18 @@ export interface ConceptOutcome {
 }
 
 /** Derive one concept's outcome from its end-of-lesson conversation state. */
+/**
+ * True when this concept's mastery would rest on an answer key the model
+ * invented. See the note inside `conceptOutcome` for the measured failure.
+ *
+ * No invented grades at all -> always false, so nothing changes for a lesson
+ * the model did not write its own graded item into.
+ */
+function launderedEvidence(state: ConversationState): boolean {
+  if ((state.unauthoredKeyGrades ?? 0) === 0) return false
+  return !masteryVerifiedStrict(state)
+}
+
 export function conceptOutcome(
   state: ConversationState,
   title?: string | null,
@@ -51,7 +64,36 @@ export function conceptOutcome(
     // A concept is only "mastered" on the server's own evidence; anything
     // else — including a spent budget — is honestly reported as needing
     // review rather than quietly counted as done.
-    status: mastered && !budget.markForReview ? 'mastered' : 'needs_review',
+    //
+    // AND THE RECORD IS A SECOND AUTHORITY, WHICH IS HOW AN INVENTED KEY GOT
+    // THROUGH. MEASURED live 2026-09-01, real account, phys.mech.friction, on
+    // the deploy that shipped the invented-key fix. Final state:
+    //
+    //   correctAtCheck 1   verifiedCorrectAtCheck 0
+    //   correctAtPractice 2   verifiedCorrectAtPractice 2
+    //   unauthoredKeyGrades 2
+    //
+    // `gateLessonCompletion` consults `masteryVerifiedStrict`, which is FALSE
+    // there, so the [LESSON_COMPLETE] tag was correctly ungated. But the
+    // permanent record does not run through that gate at all: it runs through
+    // `isConceptClosed` -> here, and `hasDemonstratedMastery` reads the PLAIN
+    // `correctAtPractice`, or merely `phase === 'TRANSFER'`, which needs no
+    // verified evidence whatsoever. So the lesson was written to
+    // lesson_attempts COMPLETED and markConceptMastered, and the learner was
+    // told "You mastered: Friction Forces" — on evidence including a graded
+    // item whose key the model invented AND got wrong (it keyed 7.9 N where
+    // μ·mg·cos30 = 10.4 N, a value not among its own four options).
+    //
+    // SCOPED SO IT CANNOT BREAK ORDINARY LESSONS. The strict test is required
+    // ONLY when this session actually graded against an invented key. With
+    // `unauthoredKeyGrades` at zero — every lesson where the model did not
+    // invent a graded item — this expression is byte-identical to what it was.
+    // Making strict mastery a universal precondition here would be a far
+    // larger change, and this codebase has repeatedly measured over-blocking
+    // doing more harm than the thing it blocked.
+    status: mastered && !budget.markForReview && !launderedEvidence(state)
+      ? 'mastered'
+      : 'needs_review',
     misconceptions: [...state.misconceptionsSeen],
     misconceptionsCorrected: mastered && state.misconceptionsSeen.length > 0,
   }

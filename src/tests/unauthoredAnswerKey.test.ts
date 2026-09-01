@@ -45,6 +45,8 @@ import { probeKeyIsAuthored } from '@/lib/teaching/mcq'
 import { advanceConversationState, initialConversationState } from '@/lib/teaching/conversationState'
 import type { ConversationState } from '@/lib/teaching/conversationState'
 import { masteryVerifiedStrict } from '@/lib/teaching/masteryGate'
+import { conceptOutcome } from '@/lib/teaching/lessonSummary'
+import { recordConceptOutcome, startLessonAttempt } from '@/lib/teaching/lessonAttempt'
 
 /** The exact item, reproduced verbatim. */
 const INVENTED = {
@@ -179,6 +181,99 @@ describe('the legacy fallback cannot launder an invented key', () => {
       verifiedCorrectAtCheck: 1, verifiedCorrectAtPractice: 2,
       unauthoredKeyGrades: 1,
     })).toBe(true)
+  })
+})
+
+/**
+ * THE RECORD IS A SECOND AUTHORITY, AND IT LET THE INVENTED KEY THROUGH.
+ *
+ * MEASURED live 2026-09-01, real account, phys.mech.friction, ON THE DEPLOY
+ * THAT SHIPPED THE FIX ABOVE. Re-studying the concept as a learner, the tutor
+ * invented a graded item and keyed it 7.9 N where μ·mg·cos30 = 10.4 N — a
+ * value not among its own four options — said "That's right", and the session
+ * ended:
+ *
+ *   correctAtCheck 1     verifiedCorrectAtCheck 0
+ *   correctAtPractice 2  verifiedCorrectAtPractice 2
+ *   unauthoredKeyGrades 2
+ *
+ * `masteryVerifiedStrict` is FALSE there, so `gateLessonCompletion` correctly
+ * refused the [LESSON_COMPLETE] tag. The learner was told "You mastered:
+ * Friction Forces" anyway, and lesson_attempts was written COMPLETED.
+ *
+ * Because the PERMANENT RECORD never runs through that gate. It runs through
+ * `isConceptClosed` -> `conceptOutcome`, and `hasDemonstratedMastery` reads
+ * the PLAIN `correctAtPractice`, or merely `phase === 'TRANSFER'` — which
+ * needs no verified evidence at all. The first fix covered the tag; the
+ * record is what actually matters, and it was untouched.
+ */
+describe('the record path, which the first fix did not reach', () => {
+  /** The exact end state of the measured session. */
+  const measuredSession = (): ConversationState => ({
+    ...initialConversationState('phys.mech.friction'),
+    phase: 'TRANSFER',
+    demonstrated: true,
+    correctAtCheck: 1,
+    correctAtPractice: 2,
+    verifiedCorrectAtCheck: 0,
+    verifiedCorrectAtPractice: 2,
+    unauthoredKeyGrades: 2,
+  })
+
+  it('the tag gate was already right — it refused', () => {
+    expect(masteryVerifiedStrict(measuredSession())).toBe(false)
+  })
+
+  it('the record no longer says mastered on that evidence', () => {
+    expect(conceptOutcome(measuredSession()).status).toBe('needs_review')
+  })
+
+  it('and it is not folded into conceptsMastered', () => {
+    const folded = recordConceptOutcome(
+      startLessonAttempt('lesson-22', 'Friction Forces', new Date()),
+      measuredSession(),
+      'Friction Forces',
+    )
+    expect(folded.conceptsMastered).not.toContain('phys.mech.friction')
+    expect(folded.conceptsNeedingReview).toContain('phys.mech.friction')
+  })
+})
+
+describe('it cannot break a lesson the model did not invent a question into', () => {
+  // The scope that keeps this surgical: the strict test is required ONLY when
+  // this session actually graded against an invented key. At zero, the
+  // expression is byte-identical to what shipped before.
+  const ordinary = (over: Partial<ConversationState> = {}): ConversationState => ({
+    ...initialConversationState('phys.mech.friction'),
+    phase: 'TRANSFER',
+    demonstrated: true,
+    correctAtPractice: 2,
+    unauthoredKeyGrades: 0,
+    ...over,
+  })
+
+  it('mastery on TRANSFER alone still records, exactly as before', () => {
+    expect(conceptOutcome(ordinary({ correctAtPractice: 0 })).status).toBe('mastered')
+  })
+
+  it('mastery on two practice answers still records', () => {
+    expect(conceptOutcome(ordinary()).status).toBe('mastered')
+  })
+
+  it('a legacy session with no verified counters at all still records', () => {
+    const { verifiedCorrectAtCheck: _a, verifiedCorrectAtPractice: _b, ...legacy } = ordinary()
+    expect(conceptOutcome(legacy as ConversationState).status).toBe('mastered')
+  })
+
+  it('a session WITH an invented key but genuine verified evidence records', () => {
+    // One invented grade must not poison a lesson that also met the bar on
+    // real probes.
+    expect(conceptOutcome(ordinary({
+      unauthoredKeyGrades: 1,
+      correctAtCheck: 2,
+      verifiedCorrectAtCheck: 1,
+      verifiedCorrectAtPractice: 2,
+    })).status).toBe('mastered')
   })
 })
 
