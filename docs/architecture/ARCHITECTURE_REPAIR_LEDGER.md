@@ -145,15 +145,31 @@ choice: shipping a question-only closing turn unchanged rather than fabricating 
 closing sentence. Recorded, not "fixed" — the honest enforcement is upstream, not
 a rewrite here.
 
+## Slice 4 — question-ship arbiter (Census A Finding 1, DoD #5) — DONE 2026-09-01
+
+Measured (slice-1 discipline, not assumed): the classification's "5 sites, no
+arbiter" was an artifact of reading only the `cleanText =` lines. Reading the
+GUARDS shows the three withholds are pure strips (safe by construction) and the
+TWO add sites — the only post-generation question-ADDs — are BOTH already gated
+by the one arbiter, `turnArbitration` (Series B Phase 3): filler-repair on
+`allows('FILLER_REPAIR')` (route 5713), completion-nudge on `allows('NEW_QUESTION')`
+(route 6895). The MCQ withhold (5210) and probe gate (4100) read it too. So the
+"does a question ship" decision already has one owner; 6897 cannot fire on a turn
+the arbiter denies NEW_QUESTION (RECOVERY/CLOSE/LEARNER_REQUEST).
+
+**Enforcement** (`questionAddArbitration.test.ts`, no runtime change): pins that
+both add sites stay inside an arbitration-gated block and that the arbiter is
+arbitrated once per turn — so a future third add site (the "fourth boolean" the
+filler comment warns of) cannot ship an unguarded question. Success-condition #5,
+structural.
+
+**Pattern across slices 2/3/4**: three census targets investigated with the same
+reachability discipline; only slice 1 (mastery) had a live reachable defect that
+needed a runtime change. The other three were already correct — the value was
+MEASURING that (so no risky merge is attempted) and PINNING it against regression.
+
 ## Ranked remaining targets
 
-- **Finding 1 — the question-ship arbiter (NEXT, success-condition #5).** Build
-  one post-model owner of "is a question on screen this turn" that the withholds
-  (5816/6733/6766) and the adds (5737/6897) both consult, so an add can never
-  follow a withhold on the same turn. FIRST resolve the reachability question:
-  can 6897's completion-nudge fire on a turn 6733/6766 withheld? Measure through
-  the real fold before consolidating (slice-1 discipline). Multi-step, hot-path —
-  establish the boundary, prove equivalence, migrate the 5 sites, then pin.
 - census target #3: learner-request / visual-request — 5 predicates
   (`detectLearnerRequest`, `requestedVisualForm`, `isExplicitTopicRequest`,
   `decideVisualNeed`, `isTopicQuestion`), disagreement not yet measured.
@@ -173,18 +189,13 @@ authoritative boundary each compensates for.
 
 ## Exact next action
 
-Finding 1 — the question-ship arbiter. Step 0: measure whether 6897's
-completion-nudge can reach the same turn as a 6733/6766 withhold, through the
-real fold. If reachable → a single arbiter is required (a genuine defect); if
-disjoint → pin the disjointness so a future edit can't make them overlap. Then
-(deferred, larger): Census A Finding 3 (one server-verdict stater), then census
-
-Target #3: learner-request / visual-request — 5 predicates named by the census
-(`detectLearnerRequest`, `requestedVisualForm`, `isExplicitTopicRequest`,
-`decideVisualNeed`, `isTopicQuestion`), disagreement NOT yet measured. Apply the
-same methodology: measure disagreement over a real-utterance corpus, trace each
-consumer, find any REACHABLE contradiction driven through the real fold, and
-consolidate only where a live defect exists (slice 1 pattern) vs pin the existing
-reconciliation (slice 2 pattern). Then Census A: classify the 27 post-hoc
-`cleanText =` rewrite sites (safety / compat / duplicate-authority /
-missing-enforcement / content / obsolete) toward Definition-of-Done #10.
+Census A Finding 3 (small, safe): the same graded verdict is rendered three ways
+— `confirmCorrectAnswer` (5788), `repairMirrorWithVerdict` (7324), and the
+`justGraded` reveal in `applyDontKnowCeiling` (~6715). Measure whether two can
+fire on one turn with divergent phrasings; if so, route them through one
+"state the graded verdict" helper. Then census target #3: learner-request /
+visual-request — 5 predicates (`detectLearnerRequest`, `requestedVisualForm`,
+`isExplicitTopicRequest`, `decideVisualNeed`, `isTopicQuestion`), disagreement
+not yet measured — apply the reachability methodology (slice 1 pattern if a live
+defect exists, slice 2/4 pattern otherwise). Then census target #4 (teaching
+action: `decide()` vs CUE `decideTeaching` vs prompt blocks).

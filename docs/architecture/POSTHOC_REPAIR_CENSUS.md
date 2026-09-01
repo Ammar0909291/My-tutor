@@ -42,22 +42,33 @@ missing enforcement (prompt-only rule ignored) · E content-specific · F obsole
 Most sites (A) are honest text-safety strips and are correct as-is. The
 category-C/D flags concentrate on THREE decisions with no single owner:
 
-## Finding 1 — "does a gradeable/prose question ship this turn?" — 5 sites, no arbiter
+## Finding 1 — "does a question ship this turn?" — MEASURED: already one owner
 
-Withheld at **5816** (`applyDontKnowCeiling`), **6733** (`withholdUngradedGateQuestion`),
-**6766** (`withholdClosingProseQuestion`); a question is ADDED at **5737** (filler
-→ canned check-question) and **6897** (completion-nudge). Five post-model sites
-decide whether a question is on screen, in sequence, **with no mutual awareness**,
-while `gateEligible` already owns *authored-probe* eligibility upstream. This is
-success-condition #5 ("gradeable-question decisions cannot be contradicted by
-shipped output") and the clearest duplicate authority in the file.
+The classification flagged 5 sites (withholds 5816/6733/6766, adds 5737/6897) as
+having "no single arbiter." **Measuring the actual guards (not just the
+`cleanText =` lines the classification saw) corrected this:** the three withholds
+are pure STRIPS — removing a question is safe by construction and needs no
+arbiter. The two ADD sites — the only sites that can put a NEW question in front
+of a learner post-generation — are BOTH already gated by the one arbiter,
+`turnArbitration` (Series B Phase 3):
 
-**Open reachability question (resolve before consolidating):** can 6897 ADD a
-completion-nudge question on the same turn 6733/6766 WITHHELD one? They fire in
-different conditions (nudge = mastery-adjacent; withholds = dry probe pool /
-closing episode), plausibly disjoint but **not structurally guaranteed**. The
-consolidation is: one post-model "question arbiter" that the withholds and the
-adds both consult, so an add can never follow a withhold on the same turn.
+- filler-repair swap (5737) is inside `allows('FILLER_REPAIR')` (route.ts 5713);
+- completion-nudge (6897) is inside `allows('NEW_QUESTION')` (route.ts 6895),
+  and fires only after a completion claim was made in prose;
+- the model's own MCQ is likewise withheld when `!allows('NEW_QUESTION')` (5210),
+  and authored-probe eligibility reads `allows('AUTHORED_PROBE')` (4100).
+
+The filler site's own comment records the intent: "a future authority added to
+the ladder protects this site automatically instead of waiting for a fourth
+production incident to add a fourth boolean." So the "does a question ship"
+decision is already owned by `turnArbitration`; the reachability worry
+(6897 firing on a withheld turn) is bounded because 6897's guard forbids it on
+any turn the arbiter denies NEW_QUESTION (RECOVERY / CLOSE / LEARNER_REQUEST).
+
+**Enforcement pinned** (`questionAddArbitration.test.ts`): both add sites must
+stay inside an arbitration-gated block, so a future third add site (the "fourth
+boolean") cannot ship an unguarded question. No runtime change — the architecture
+was already correct; it was undocumented and unpinned.
 
 ## Finding 2 — DETECTION-NOT-ENFORCEMENT at 6766's else (6767–6776)
 
