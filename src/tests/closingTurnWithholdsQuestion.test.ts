@@ -48,9 +48,20 @@ describe('a CLOSING turn withholds every question', () => {
     expect(gate).toContain('closingTurnWithholdsQuestion(sessionEpisodeHoisted?.phase)')
 
     // Source 2 — the model's own MCQ tag, emitted against the close block.
+    // ORDER, NOT A BYTE WINDOW. This read `src.slice(at, at + 900)`, and the
+    // claim it was making is that the model-tag source is covered by the
+    // closing withhold, immediately after the attach line. 900 was a proxy for
+    // "immediately", and it had already been exhausted by the explanatory
+    // comment that sits between the two statements: adding a two-line comment
+    // above the withhold pushed the target to offset 920 and failed the test
+    // without changing anything it was protecting. Asserting the ordering says
+    // what it means and cannot be broken by prose.
     const at = src.indexOf('mcqHoisted = gateMcqHoisted ?? mcqParse.mcq')
+    const withheld = src.indexOf('if (closingTurnWithholdsQuestion(sessionEpisodeHoisted?.phase)) mcqHoisted = null')
     expect(at).toBeGreaterThan(0)
-    const assign = src.slice(at, at + 900)
-    expect(assign).toContain('if (closingTurnWithholdsQuestion(sessionEpisodeHoisted?.phase)) mcqHoisted = null')
+    expect(withheld).toBeGreaterThan(at)
+    // …and still close by: after the attach line, before the turn moves on to
+    // building the response.
+    expect(src.indexOf('const mcqForProseStrip', at)).toBeGreaterThan(withheld)
   })
 })

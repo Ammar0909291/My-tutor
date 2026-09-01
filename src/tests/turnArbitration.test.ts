@@ -413,13 +413,23 @@ describe('5. every competing site asks the authority', () => {
     expect(arbitrateTurn(claiming('LEARNER_REQUEST')).allows('NEW_QUESTION')).toBe(true)
 
     const s = src()
+    // ORDER, NOT A BYTE WINDOW — see the same correction in
+    // closingTurnWithholdsQuestion.test.ts. This read `s.slice(at, at + 2600)`,
+    // and 2600 was a proxy for "in the block that follows the attach line". It
+    // had run out: a two-line comment added above a new withhold pushed
+    // `model-mcq-tag-withheld` to offset 2627 and failed the test while every
+    // claim below still held. All three must follow the attach line, in the
+    // order they run.
     const at = s.indexOf('mcqHoisted = gateMcqHoisted ?? mcqParse.mcq')
     expect(at).toBeGreaterThan(0)
-    const window = s.slice(at, at + 2600)
     // Both withholds present: the shared closing predicate AND the authority.
-    expect(window).toContain('closingTurnWithholdsQuestion(sessionEpisodeHoisted?.phase)')
-    expect(window).toContain("allows('NEW_QUESTION')")
-    expect(window).toContain('model-mcq-tag-withheld')
+    for (const needle of [
+      'closingTurnWithholdsQuestion(sessionEpisodeHoisted?.phase)',
+      "allows('NEW_QUESTION')",
+      'model-mcq-tag-withheld',
+    ]) {
+      expect(s.indexOf(needle, at), needle).toBeGreaterThan(at)
+    }
   })
 
   it('the closing prose guard runs post-model', () => {

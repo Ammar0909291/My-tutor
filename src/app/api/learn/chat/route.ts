@@ -3845,6 +3845,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // nothing authored is available, which is an honest content gap rather
       // than a server-invented question.
       let gateMcqHoisted: import('@/lib/teaching/mcq').TutorMCQ | null = null
+      // What the gate learned about THIS concept's authored probes, published
+      // for the model-probe decision below. `null` means the selector never
+      // ran, which is ignorance and must not be read as "none exist".
+      let authoredProbesExistHoisted: boolean | null = null
+      let gateDeclinedByPolicyHoisted = false
+      // The model's own item when it was WITHHELD, kept so its prose copy can
+      // be stripped too — a withheld widget with the question still written
+      // out above it leaves an unanswerable question on the learner's screen.
+      let withheldModelMcqHoisted: import('@/lib/teaching/mcq').TutorMCQ | null = null
       // Phase 2: the deterministic lead-in for this turn, or null when the
       // model must keep it. Non-null is the ONLY condition under which the
       // provider call below is skipped for a gate turn.
@@ -3987,6 +3996,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           notClosingTurn: !closingTurnWithholdsQuestion(sessionEpisodeHoisted?.phase),
         }
         const gateEligible = Object.values(gateTerms).every(Boolean)
+        // Read from the SAME terms object the log prints, so the decision and
+        // the evidence for it can never disagree. See inventedProbeGuard.
+        {
+          const { gateRefusedOnPolicy } = await import('@/lib/teaching/inventedProbeGuard')
+          gateDeclinedByPolicyHoisted = gateRefusedOnPolicy(gateTerms)
+        }
         console.log('[gate-eligibility] ' + JSON.stringify({
           phase: phaseBeforeTurn,
           move: evidenceMoveHoisted,
@@ -4127,6 +4142,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // where it is known. Null when none was selected — including when the
           // gate deliberately withheld one.
           decisionProbeIdHoisted = probe?.assetId ?? null
+          // The selector RAN, so this is knowledge rather than inference: an
+          // authored probe either was or was not available for this concept.
+          authoredProbesExistHoisted = probe !== null
           console.log('[gate-assessment] ' + JSON.stringify({
             phase: phaseBeforeTurn,
             move: evidenceMoveHoisted,
@@ -4975,7 +4993,50 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // written around — and would put an unreviewed item at the exact rung
       // where a wrong answer key costs the learner their progress. The tag is
       // still STRIPPED either way (mcqParse.cleanText), so nothing leaks.
+      // THE MODEL DOES NOT GET TO ASK THE GRADED QUESTION WHEN A REVIEWED ONE
+      // EXISTS. The `??` below already prefers the gate's probe, and the
+      // comment above says why. But it only helps on turns where the gate
+      // SUPPLIES one — every other turn fell straight through to the model's
+      // item, and that is where all three measured defects landed.
+      //
+      // phys.mech.friction holds FIVE authored gradeable probes. Across two
+      // sessions studied as a learner (2026-09-01) the model wrote three
+      // incline items of its own and ALL THREE were broken — twice keying
+      // μ·mg·sin30 where the normal force needs cos30, with the correct answer
+      // absent from its own options, and once in prose with no tag at all.
+      // A learner tapped its keyed answer and was told "That's right."
+      //
+      // unauthoredKeyGrades stops such a grade CERTIFYING. It cannot stop the
+      // learner being told they are wrong when they are right. The only way to
+      // do that is not to ask the question. See inventedProbeGuard.ts for the
+      // rule and for what it deliberately does NOT do — a concept with no
+      // authored probe at all still gets the model's question, because
+      // "teaching without certification is a degraded outcome; teaching not at
+      // all is a failure" (masteryReachability).
+      let modelProbeWithheld: import('@/lib/teaching/inventedProbeGuard').ModelProbeVerdict | null = null
+      {
+        const { decideModelProbe } = await import('@/lib/teaching/inventedProbeGuard')
+        const d = decideModelProbe({
+          gateServedAuthoredProbe: gateMcqHoisted !== null,
+          modelOfferedProbe: mcqParse.mcq !== null,
+          authoredProbesExist: authoredProbesExistHoisted,
+          gateDeclinedByPolicy: gateDeclinedByPolicyHoisted,
+        })
+        if (!d.serve && mcqParse.mcq !== null && gateMcqHoisted === null) {
+          modelProbeWithheld = d.reason
+          withheldModelMcqHoisted = mcqParse.mcq
+          console.warn('[gate-assessment] ' + JSON.stringify({
+            event: 'model-probe-withheld',
+            reason: d.reason,
+            conceptId: resolvedConceptId ?? null,
+            asked: mcqParse.mcq.question.slice(0, 70),
+          }))
+        }
+      }
       mcqHoisted = gateMcqHoisted ?? mcqParse.mcq
+      // Separate override, same shape and same reason as the CLOSING one just
+      // below. See inventedProbeGuard.ts.
+      if (modelProbeWithheld) mcqHoisted = null
       // A CLOSING turn withholds BOTH question sources. The gate is already
       // excluded above, so this covers the model emitting an MCQ tag anyway,
       // against the close block's explicit instruction. Written as a separate
@@ -7014,10 +7075,17 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // (this turn's newly tagged probe) rather than the served value, because
       // an ECHOED pending probe came from an earlier turn and cannot be
       // duplicated in this turn's prose.
-      if (mcqHoisted) {
+      // A WITHHELD QUESTION MUST NOT SURVIVE IN THE PROSE. When the model both
+      // tagged its item and wrote it out, dropping only the widget leaves the
+      // learner reading a question with nothing to answer it with — and one
+      // whose key the server has just decided it will not stand behind. Same
+      // function, same reasoning as the duplication case below; the only
+      // difference is which copy is the survivor (here, neither).
+      const mcqForProseStrip = mcqHoisted ?? withheldModelMcqHoisted
+      if (mcqForProseStrip) {
         try {
           const { dropDuplicatedMcqProse } = await import('@/lib/teaching/mcq')
-          const deduped = dropDuplicatedMcqProse(cleanText, mcqHoisted)
+          const deduped = dropDuplicatedMcqProse(cleanText, mcqForProseStrip)
           if (deduped !== cleanText) {
             console.warn('[mcq] ' + JSON.stringify({
               event: 'duplicated-prose-question-dropped',

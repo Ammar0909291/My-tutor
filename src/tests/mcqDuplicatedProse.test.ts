@@ -269,14 +269,23 @@ describe('the chat route applies it', () => {
   it('calls it on the turn text', () => {
     // Anchored on the CALL, not the identifier: structural tests in this
     // codebase have passed against an import while the call site was gone.
-    expect(ROUTE).toMatch(/dropDuplicatedMcqProse\(cleanText,\s*mcqHoisted\)/)
+    expect(ROUTE).toMatch(/dropDuplicatedMcqProse\(cleanText,\s*mcqForProseStrip\)/)
+  })
+
+  it('also strips the prose of a question that was WITHHELD', () => {
+    // Extended after the invented-probe withhold shipped. When the server
+    // refuses to serve the model's own item, the model may still have written
+    // the question out above it — and dropping only the widget leaves the
+    // learner reading a question with nothing to answer it with, keyed to an
+    // answer the server has just decided it will not stand behind.
+    expect(ROUTE).toMatch(/const mcqForProseStrip = mcqHoisted \?\? withheldModelMcqHoisted/)
   })
 
   it('runs BEFORE the message is persisted, so both copies agree', () => {
     // If it ran after, the response and durable history would disagree about
     // what was on the learner's screen — the exact class of defect
     // `mcqToServe` was extracted to prevent.
-    const dedup = ROUTE.indexOf('dropDuplicatedMcqProse(cleanText, mcqHoisted)')
+    const dedup = ROUTE.indexOf('dropDuplicatedMcqProse(cleanText, mcqForProseStrip)')
     const persist = ROUTE.indexOf('appendMcqToHistoryText(cleanText, mcqHoisted)')
     expect(dedup).toBeGreaterThan(0)
     expect(persist).toBeGreaterThan(0)
