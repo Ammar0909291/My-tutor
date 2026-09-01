@@ -1691,7 +1691,7 @@ export function detectAutonomyRequest(message: string): boolean {
 // match (AUTONOMY_RE needs "next topic" / "ready to move on"), no navigation
 // match, no recovery match, no acknowledgement match.
 const LOW_SIGNAL_TOKENS_RE =
-  /^[\s,!.]*(?:(?:got it|i see|okay|ok|alright|sure|right|yep|yup|yeah|i understand|understood|makes sense|i get it|i got it|i follow|i'?m with you|sounds good|sounds right|fine|hmm|uh huh|uh-huh|mhm|m-hm|cool|great|perfect|nice|good|yes|no problem|fair enough|noted|of course|definitely|go|go on|go ahead|continue|next|ready|i'?m ready|let'?s go|let'?s continue|keep going|carry on|proceed)[,!.\s]*)+([\?].*)?$/i
+  /^[\s,!.]*(?:(?:got it|i see|okay|ok|alright|sure|right|yep|yup|yeah|i understand|understood|makes sense|i get it|i got it|i follow|i'?m with you|sounds good|sounds right|fine|hmm|uh huh|uh-huh|mhm|m-hm|cool|great|perfect|nice|good|yes|no problem|fair enough|noted|of course|definitely|go|go on|go ahead|continue|next|what next|what'?s next|whats next|ready|i'?m ready|let'?s go|let'?s continue|keep going|carry on|proceed)[,!.\s]*)+([\?].*)?$/i
 
 /**
  * ── PHASE E: POLITENESS IS NOT CONTENT ──────────────────────────────────────
