@@ -302,3 +302,83 @@ describe('externallyNumberedHeadings — the arithmetic, pinned directly', () =>
     expect(idx([])).toEqual([])
   })
 })
+
+/**
+ * A DIGIT IS A DIGIT, HOWEVER IT IS DRAWN.
+ *
+ * MEASURED (production, phys.mech.friction, opening turn from
+ * /api/learn/lesson-init, 2026-09-01, real account) — on the deploy that
+ * shipped shape 3, written to catch exactly this scaffold:
+ *
+ *   ### 1️⃣ A concrete everyday object
+ *   ### 2️⃣ The real-life situation it appears in
+ *   ### 4️⃣ Plain-language description
+ *   ### 7️⃣ When you need a formula
+ *
+ * Nothing fired. Those are KEYCAP EMOJI (digit + U+FE0F + U+20E3), so
+ * NUMBERED_HEADING_RE found no numbered headings at all — and isStageLabel
+ * missed them too, even though "Plain-language description" IS a stage name,
+ * because its prefix strip is `^\d+[.)]` and a keycap carries no "." or ")".
+ *
+ * ONE GLYPH DEFEATED BOTH SHAPES AT ONCE, and it is the third distinct format
+ * the model has varied to escape a rule this week.
+ */
+describe('digit glyphs the model actually used', () => {
+  const LIVE = [
+    '**Lesson 22: Friction Forces**',
+    "Today we'll learn how friction works.",
+    '### 1️⃣ A concrete everyday object',
+    'Picture a **book resting on a desk**.',
+    '### 2️⃣ The real‑life situation it appears in',
+    'That book stays still because the desk pushes back.',
+    '### 4️⃣ Plain‑language description',
+    '**Friction** is the force that opposes relative motion.',
+    '### 7️⃣ When you need a formula',
+    'If you need to calculate the friction force, use f = μN.',
+  ].join('\n')
+
+  it('strips all four keycap-numbered headings', () => {
+    expect(stripScaffoldHeadings(LIVE).removed).toHaveLength(4)
+  })
+
+  it('keeps every word of teaching', () => {
+    const { text } = stripScaffoldHeadings(LIVE)
+    expect(text).toContain('Picture a **book resting on a desk**')
+    expect(text).toContain('the desk pushes back')
+    expect(text).toContain('opposes relative motion')
+    expect(text).toContain('use f = μN')
+    expect(text).not.toMatch(/⃣/)
+  })
+
+  it('handles circled digits too — same class, same rule', () => {
+    const t = '### ① Alpha\nA.\n### ② Beta\nB.\n### ⑦ Gamma\nC.'
+    expect(stripScaffoldHeadings(t).removed).toEqual(['Alpha', 'Beta', 'Gamma'])
+  })
+
+  it('contiguous keycap numbering from 1 is still left alone', () => {
+    const t = '### 1️⃣ Setup\nA block.\n### 2️⃣ Method\nPush it.\n### 3️⃣ Result\nIt slips.'
+    expect(stripScaffoldHeadings(t).removed).toEqual([])
+    expect(stripScaffoldHeadings(t).text).toBe(t)
+  })
+
+  it('a surviving line keeps its own glyphs, byte for byte', () => {
+    // Normalisation is applied to a COPY used only for matching. A turn that
+    // legitimately writes 1️⃣ in prose must come back untouched.
+    const t = 'You can remember it as 1️⃣ press, 2️⃣ push, 3️⃣ slide.'
+    expect(stripScaffoldHeadings(t).text).toBe(t)
+  })
+
+  it('surviving lines are verbatim even when other lines were stripped', () => {
+    const t = [
+      'Remember the order: 1️⃣ press, 2️⃣ push.',
+      '### 1️⃣ A concrete everyday object',
+      'Picture a book.',
+      '### 7️⃣ When you need a formula',
+      'Use f = μN.',
+    ].join('\n')
+    const { text, removed } = stripScaffoldHeadings(t)
+    expect(removed).toHaveLength(2)
+    // The prose line still carries its keycaps — only matched lines were touched.
+    expect(text).toContain('1️⃣ press, 2️⃣ push')
+  })
+})

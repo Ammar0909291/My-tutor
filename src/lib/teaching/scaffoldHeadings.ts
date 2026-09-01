@@ -85,6 +85,45 @@ const STAGE_NAMES = [
 ]
 
 /**
+ * A DIGIT IS A DIGIT, HOWEVER IT IS DRAWN.
+ *
+ * MEASURED (production, phys.mech.friction, the opening turn from
+ * /api/learn/lesson-init, 2026-09-01, real account) — on the deploy that
+ * shipped shape 3, written to catch exactly this scaffold:
+ *
+ *   ### 1️⃣ A concrete everyday object
+ *   ### 2️⃣ The real-life situation it appears in
+ *   ### 4️⃣ Plain-language description
+ *
+ * Nothing fired. Those are KEYCAP EMOJI — digit + U+FE0F + U+20E3 — not ASCII
+ * digits, so `NUMBERED_HEADING_RE`'s `\d{1,2}[.)]` found no numbered headings
+ * at all. And `isStageLabel` missed them too, even though "Plain-language
+ * description" IS a stage name: its prefix strip is `^\d+[.)]` and a keycap
+ * carries no "." or ")", so the prefix stayed glued to the label.
+ *
+ * ONE GLYPH DEFEATED BOTH SHAPES AT ONCE. That is the third distinct format
+ * the model has varied to escape a rule this week — MCQ stems, heading words,
+ * now digit glyphs — so this normalises the digit rather than widening two
+ * regexes and waiting for the fourth.
+ *
+ * Keycaps, circled digits and fullwidth digits are all unambiguous ways of
+ * writing a number and nothing else; each becomes `<digit>.` so every matcher
+ * downstream sees the canonical form it was already written for. Applied to a
+ * COPY used only for matching — a surviving line is emitted verbatim, so a
+ * turn that legitimately contains "1️⃣" keeps it.
+ */
+const KEYCAP_RE = /([0-9])\uFE0F?\u20E3/g
+/** ①..⑳ (U+2460–U+2473) and ⓪ (U+24EA). */
+const CIRCLED_START = 0x2460
+function normaliseDigitGlyphs(s: string): string {
+  return s
+    .replace(KEYCAP_RE, '$1.')
+    .replace(/[\u2460-\u2473]/g, (m) => `${m.codePointAt(0)! - CIRCLED_START + 1}.`)
+    .replace(/\u24EA/g, '0.')
+    .replace(/[\uFF10-\uFF19]/g, (m) => String.fromCharCode(m.charCodeAt(0) - 0xFF10 + 0x30))
+}
+
+/**
  * Unicode punctuation the model uses in place of ASCII: non-breaking and
  * figure hyphens, en and em dashes, curly apostrophes. Without this,
  * "Real‑life" (U+2011) does not match "real-life" and the line survives.
@@ -229,7 +268,10 @@ export function stripScaffoldHeadings(input: string): ScaffoldStripResult {
     const removed: string[] = []
     const out: string[] = []
 
-    const lines = input.split('\n')
+    const original = input.split('\n')
+    // Matched against a normalised COPY (see normaliseDigitGlyphs); a
+    // surviving line is emitted from `original`, verbatim.
+    const lines = original.map(normaliseDigitGlyphs)
     // Computed over the WHOLE turn before the line loop, because the tell is a
     // property of the set of headings, not of any one line.
     const externallyNumbered = externallyNumberedHeadings(lines)
@@ -293,7 +335,7 @@ export function stripScaffoldHeadings(input: string): ScaffoldStripResult {
         continue
       }
 
-      out.push(line)
+      out.push(original[lineIndex])
     }
 
     if (removed.length === 0) return { text: input, removed: [] }

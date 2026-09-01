@@ -4506,12 +4506,36 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // The ordinary remediation turn is untouched — there the card's
             // concept IS the lesson concept. Only a card reached for some other
             // concept is tested, and a prerequisite detour stays adjacent.
-            const cardLessonAnchor = libraryConceptNodeIdHoisted ?? snapshotCurrentConceptId ?? null
+            //
+            // THE ANCHOR IS WHAT THIS TURN TEACHES, NOT THE LESSON, and the
+            // sentence above — "a prerequisite detour stays adjacent" — was an
+            // assumption I never checked. MEASURED (phys.mech.friction,
+            // 2026-09-01, real account): the learner said "what is the normal
+            // force... i dont get it", the engine correctly opened a
+            // knowledge-gap excursion to phys.mech.normal-force, and this guard
+            // then withheld the normal-force card on EVERY turn of it:
+            //
+            //   [remediation-card] withheld — off-topic for this lesson
+            //     { lesson: 'phys.mech.friction', card: 'phys.mech.normal-force' }
+            //
+            // The two concepts are SIBLINGS, not prerequisites — both require
+            // phys.mech.free-body-diagram — so `neighbours()`, which walks
+            // prerequisite edges in both directions, was right to say they are
+            // not adjacent. Widening it to siblings would admit most of a
+            // domain and gut the protection this guard exists for.
+            //
+            // The anchor was simply the wrong one. `decisionConceptIdHoisted`
+            // is the excursion target when one is open and the lesson concept
+            // otherwise — already computed, already the thing being taught —
+            // so an authored card FOR the detour is on-topic by construction,
+            // and a card for anything else is still tested exactly as before.
+            const cardLessonAnchor =
+              decisionConceptIdHoisted ?? libraryConceptNodeIdHoisted ?? snapshotCurrentConceptId ?? null
             const { cardConceptIsOnTopic } = await import('@/lib/teaching/conceptAdjacency')
             const cardOnTopic = cardConceptIsOnTopic(cardLessonAnchor, conceptForCard)
             if (!cardOnTopic) {
-              console.log('[remediation-card] withheld — off-topic for this lesson', {
-                lesson: cardLessonAnchor, card: conceptForCard,
+              console.log('[remediation-card] withheld — off-topic for this turn', {
+                teaching: cardLessonAnchor, card: conceptForCard,
               })
             }
             const lookup = cardOnTopic

@@ -76,3 +76,63 @@ describe('a remediation card may only serve for this lesson or a neighbour', () 
     expect(route).toContain('libraryConceptNodeIdHoisted ?? snapshotCurrentConceptId ?? null')
   })
 })
+
+/**
+ * THE ANCHOR IS WHAT THIS TURN TEACHES, NOT THE LESSON.
+ *
+ * MEASURED (phys.mech.friction, 2026-09-01, real account, studied as a
+ * learner): the learner said "what is the normal force… i dont get it", the
+ * engine correctly opened a knowledge-gap excursion to
+ * phys.mech.normal-force, and this guard withheld the normal-force card on
+ * EVERY turn of that excursion:
+ *
+ *   [remediation-card] withheld — off-topic for this lesson
+ *     { lesson: 'phys.mech.friction', card: 'phys.mech.normal-force' }
+ *
+ * The guard's own comment had claimed "a prerequisite detour stays adjacent".
+ * That was an assumption, and it is false here: the two concepts are SIBLINGS,
+ * both requiring phys.mech.free-body-diagram, with no prerequisite edge
+ * between them in either direction. `neighbours()` was right; the anchor was
+ * wrong.
+ */
+describe('a legitimate excursion is not off-topic', () => {
+  const KG = require('fs').readFileSync('docs/physics/kg/graph.json', 'utf8')
+  const byId = new Map<string, { requires?: string[]; unlocks?: string[] }>(
+    (JSON.parse(KG).concepts as Array<{ id: string; requires?: string[]; unlocks?: string[] }>)
+      .map((c) => [c.id, c]),
+  )
+
+  it('the two concepts really are siblings, not prerequisites', () => {
+    // Pins WHY the guard fired, so a future KG edit that adds the edge shows
+    // up here rather than silently changing what this test is about.
+    const friction = byId.get('phys.mech.friction')!
+    const normal = byId.get('phys.mech.normal-force')!
+    expect(friction.requires).toContain('phys.mech.free-body-diagram')
+    expect(normal.requires).toContain('phys.mech.free-body-diagram')
+    expect(friction.requires ?? []).not.toContain('phys.mech.normal-force')
+    expect(normal.requires ?? []).not.toContain('phys.mech.friction')
+  })
+
+  it('so the LESSON anchor withholds the excursion card — the defect', () => {
+    expect(cardConceptIsOnTopic('phys.mech.friction', 'phys.mech.normal-force')).toBe(false)
+  })
+
+  it('and the TAUGHT-CONCEPT anchor admits it — the fix', () => {
+    // During the excursion, decisionConceptIdHoisted IS phys.mech.normal-force.
+    expect(cardConceptIsOnTopic('phys.mech.normal-force', 'phys.mech.normal-force')).toBe(true)
+  })
+
+  it('an unrelated card is still refused under the new anchor', () => {
+    // The protection the guard exists for is unchanged: the optics card served
+    // during a quantum lesson would still be withheld.
+    expect(cardConceptIsOnTopic('phys.mech.normal-force', 'phys.opt.total-internal-reflection')).toBe(false)
+  })
+})
+
+describe('the route anchors on the taught concept', () => {
+  const ROUTE = require('fs').readFileSync('src/app/api/learn/chat/route.ts', 'utf-8') as string
+
+  it('prefers decisionConceptIdHoisted over the lesson node', () => {
+    expect(ROUTE).toMatch(/const cardLessonAnchor\s*=\s*\n?\s*decisionConceptIdHoisted \?\? libraryConceptNodeIdHoisted/)
+  })
+})

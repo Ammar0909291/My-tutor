@@ -144,11 +144,19 @@ describe('H6.3-8..10 — no mechanism, formula or analogy can enter via the card
 
 describe('H6.3-11..15 — repetition, acknowledgement, mastery, state', () => {
   it('11 — the already-served guard is what prevents verbatim repetition', () => {
+    // ORDER, NOT A BYTE WINDOW — the third time this pattern has broken in
+    // this codebase for the same reason. This read `ROUTE.slice(at, at + 2500)`
+    // and 2500 was a proxy for "in the remediation-card block". Adding an
+    // explanatory comment inside that block pushed `hasServedExplanation` past
+    // it and failed the test while the guard it protects was untouched.
+    // The claim is that both appear AFTER the card lookup, in that block —
+    // which is what is asserted now, and prose cannot break it.
     expect(ROUTE).toContain('hasServedExplanation')
     const at = ROUTE.indexOf('findRemediationCard')
-    const scoped = ROUTE.slice(at, at + 2500)
-    expect(scoped).toMatch(/hasServedExplanation/)
-    expect(scoped).toMatch(/buildRemediationCardSourceBlock/)
+    expect(at).toBeGreaterThan(0)
+    for (const needle of ['hasServedExplanation', 'buildRemediationCardSourceBlock']) {
+      expect(ROUTE.indexOf(needle, at), needle).toBeGreaterThan(at)
+    }
   })
 
   it('12 — "ok sir" is still an acknowledgement', () => {
