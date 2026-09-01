@@ -198,19 +198,104 @@ export function appendMcqToHistoryText(cleanText: string, mcq: TutorMCQ | null):
  */
 export function dropDuplicatedMcqProse(cleanText: string, mcq: TutorMCQ | null): string {
   if (!mcq || typeof cleanText !== 'string') return cleanText
-  if (!containsQuestion(cleanText, mcq.question)) return cleanText
 
   const norm = (v: string) => v.replace(/\s+/g, ' ').trim().toLowerCase()
   const target = norm(mcq.question)
+  // Fold anything a model varies freely between two renderings of ONE option:
+  // dash species (– vs — vs -), quote species, and spacing. Measured need —
+  // the widget carried "20 N — static friction…" and the prose "20 N – static
+  // friction…", identical but for the dash.
+  const key = (v: string) => v.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim()
+  const servedKeys = mcq.options.map(key).filter((k) => k.length >= 2)
+
+  /** True when this line is a lettered option carrying one of the SERVED choices. */
+  const isServedOptionLine = (line: string): boolean => {
+    if (!OPTION_LINE_RE.test(line)) return false
+    const k = key(line.replace(OPTION_LINE_RE, '').trim() || line)
+    if (k.length < 2) return false
+    return servedKeys.some((sk) => k.includes(sk) || sk.includes(k))
+  }
 
   const lines = cleanText.split('\n')
+
+  // ── THE OPTIONS ARE THE RELIABLE SIGNAL, NOT THE QUESTION ─────────────────
+  //
+  // The first version of this keyed entirely on the question text being
+  // literally present, and a live run on 2026-09-01 walked straight past two
+  // real duplications because the model PARAPHRASED its own stem between the
+  // prose copy and the tag:
+  //
+  //   prose : "Which of the following best explains the friction force on the
+  //            10 kg box when a 20 N horizontal push is applied and the box
+  //            stays still?"  + A) B) C) D)
+  //   widget: "What is the friction force on the 10 kg box when a 20 N
+  //            horizontal push is applied and it does not move?"  + the SAME
+  //            four options, word for word
+  //
+  // The learner read the question and all four choices twice. The stems differ
+  // and the OPTIONS do not, which is the whole point: a model rewrites its
+  // question freely and reproduces its answer choices exactly, because
+  // changing an option would change the item. So the options carry the match.
+  //
+  // TWO is the threshold, not one: a single line beginning "A) …" is a
+  // coincidence a paragraph can produce, two consecutive ones matching served
+  // choices is a rendered options block.
+  const servedLineIdx = lines.map((l, i) => (isServedOptionLine(l) ? i : -1)).filter((i) => i >= 0)
+  const optionsBlockPresent = servedLineIdx.length >= 2
+
+  // Nothing to do: neither the stem nor its choices were written out.
+  if (!optionsBlockPresent && !containsQuestion(cleanText, mcq.question)) return cleanText
+
+  const drop = new Set<number>()
+  // The lead-in line is TRIMMED, never dropped whole: a line routinely carries
+  // teaching and then the stem ("…which surprises people. Which of the
+  // following is the SI base unit for mass?"), and dropping the line takes the
+  // teaching with it. Caught by an existing case in this module's own test —
+  // the clause-level restraint had to be re-applied here too.
+  let leadInIdx = -1
+  if (optionsBlockPresent) {
+    const first = servedLineIdx[0]
+    const last = servedLineIdx[servedLineIdx.length - 1]
+    // The whole run, including the blank lines and any stray unmatched option
+    // line inside it (a distractor the model reworded).
+    for (let i = first; i <= last; i += 1) drop.add(i)
+    // Walk back over blanks to the lead-in question that introduced the block
+    // — "Which of the following…?" is not teaching once its choices are gone.
+    for (let i = first - 1; i >= 0; i -= 1) {
+      const t = lines[i].trim()
+      if (t === '') { drop.add(i); continue }
+      if (/\?\s*$/.test(t)) leadInIdx = i
+      break
+    }
+  }
+
+  /** Remove only the TRAILING question sentences of the block's lead-in line. */
+  const trimTrailingQuestions = (line: string): string => {
+    // Trim FIRST. The model ends these lines with a trailing space, and the
+    // sentence split then yields an empty final element which stops the pop
+    // loop dead — measured: the stem survived intact with the fix "applied".
+    const sentences = line.trim().split(/(?<=[.!?])\s+/).filter((x) => x.trim() !== '')
+    while (sentences.length > 0 && /\?\s*$/.test(sentences[sentences.length - 1].trim())) {
+      sentences.pop()
+    }
+    return sentences.join(' ').trim()
+  }
+
   const keep: string[] = []
   // Once the question line is found, the lettered options that follow it
   // belong to it. A blank line does NOT end the block — the model routinely
   // puts one between the stem and the choices.
   let inOptionsRun = false
 
-  for (const line of lines) {
+  for (let i = 0; i < lines.length; i += 1) {
+    const line = lines[i]
+    if (drop.has(i)) { inOptionsRun = false; continue }
+    if (i === leadInIdx) {
+      inOptionsRun = false
+      const trimmed = trimTrailingQuestions(line)
+      if (trimmed) keep.push(trimmed)
+      continue
+    }
     if (inOptionsRun) {
       if (line.trim() === '') continue
       if (OPTION_LINE_RE.test(line)) continue
@@ -219,7 +304,9 @@ export function dropDuplicatedMcqProse(cleanText: string, mcq: TutorMCQ | null):
     // Within a line, drop only the sentence that IS the question; a stem
     // written as "... . Which of these is heavier?" keeps its first half.
     const sentences = line.split(/(?<=[.!?])\s+/)
-    const survivors = sentences.filter((sn) => !norm(sn).includes(target))
+    const survivors = target.length >= 12
+      ? sentences.filter((sn) => !norm(sn).includes(target))
+      : sentences
     if (survivors.length === sentences.length) { keep.push(line); continue }
     inOptionsRun = true
     const rebuilt = survivors.join(' ').trim()
@@ -239,8 +326,8 @@ export function dropDuplicatedMcqProse(cleanText: string, mcq: TutorMCQ | null):
   return /[A-Za-z]{3}/.test(out) ? out : cleanText
 }
 
-/** Start-anchored lettered option line: `A)`, `A.`, `A]`, `(A)`, `- A)`. */
-const OPTION_LINE_RE = /^\s*[-*\u2022]?\s*[([]?[A-Za-z][).\]]\s+\S/
+/** Start-anchored lettered option label: `A)`, `A.`, `A]`, `(A)`, `- A)`. */
+const OPTION_LINE_RE = /^\s*[-*\u2022]?\s*[([]?[A-Za-z][).\]]\s+(?=\S)/
 
 /**
  * Whitespace- and case-insensitive containment. The prose copy and the tag copy
