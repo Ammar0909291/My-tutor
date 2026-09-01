@@ -1657,7 +1657,7 @@ export function detectAutonomyRequest(message: string): boolean {
 // match (AUTONOMY_RE needs "next topic" / "ready to move on"), no navigation
 // match, no recovery match, no acknowledgement match.
 const LOW_SIGNAL_TOKENS_RE =
-  /^[\s,!.]*(?:(?:got it|i see|okay|ok|alright|sure|right|yep|yup|yeah|i understand|understood|makes sense|i get it|i got it|sounds good|sounds right|fine|hmm|uh huh|uh-huh|mhm|m-hm|cool|great|perfect|nice|good|yes|no problem|fair enough|noted|of course|definitely|go|go on|go ahead|continue|next|ready|i'?m ready|let'?s go|let'?s continue|keep going|carry on|proceed)[,!.\s]*)+([\?].*)?$/i
+  /^[\s,!.]*(?:(?:got it|i see|okay|ok|alright|sure|right|yep|yup|yeah|i understand|understood|makes sense|i get it|i got it|i follow|i'?m with you|sounds good|sounds right|fine|hmm|uh huh|uh-huh|mhm|m-hm|cool|great|perfect|nice|good|yes|no problem|fair enough|noted|of course|definitely|go|go on|go ahead|continue|next|ready|i'?m ready|let'?s go|let'?s continue|keep going|carry on|proceed)[,!.\s]*)+([\?].*)?$/i
 
 /**
  * ── PHASE E: POLITENESS IS NOT CONTENT ──────────────────────────────────────
@@ -1714,8 +1714,71 @@ export function stripAddressTokens(message: string): string {
     .replace(/^[\s,]+|[\s,]+$/g, '')
 }
 
+/**
+ * ── AN ACKNOWLEDGEMENT IS RARELY A CHAIN OF BARE TOKENS ─────────────────────
+ *
+ * MEASURED live (phys.mech.friction, 2026-09-01, disposable account, driven
+ * as a learner). Five turns, phase pinned at OBSERVE the whole way,
+ * `demonstrated: false`, check 0 / practice 0 — the "froze in OBSERVE"
+ * symptom. `OBSERVE -> DEMONSTRATE` moves on a graded-correct signal OR an
+ * acknowledgement; the learner produced neither, because:
+ *
+ *   [ladder] { ack: false }   "ok, i think i follow so far"
+ *   [ladder] { ack: false }   "ok that makes sense now, the surface pushes back"
+ *
+ * `LOW_SIGNAL_TOKENS_RE` is anchored `^...$` around a REPEAT of adjacent
+ * tokens, so the tokens must be CONTIGUOUS. Real speech interleaves glue.
+ * The sharpest case, verified against the real function:
+ *
+ *   isLowSignalAcknowledgement('yeah that makes sense')  ->  false
+ *
+ * Every word there is drawn from the detector's own receipt vocabulary. The
+ * single word "that" breaks the chain, so the most natural acknowledgement a
+ * learner can give is invisible to the one detector written to catch it.
+ *
+ * ── WHY A STRIP, AND WHY THESE WORDS ────────────────────────────────────────
+ * Exactly the precedent `stripAddressTokens` set directly above, for exactly
+ * its stated reason: these words carry no propositional content in THIS
+ * detector's vocabulary, so removing them once, in one place, is the whole of
+ * the change — no new classifier, no new state, no second detector to drift.
+ *
+ * What protects it is that content words survive the strip and still break
+ * the anchor. Measured on the negative controls: "no that is wrong" -> "no is
+ * wrong" (false), "i think that is wrong" -> "is wrong" (false), "it is fine"
+ * -> "is fine" (false). Bare "so" is deliberately NOT stripped — it is a
+ * reasoning connective ("so the answer is 30 N"); only the bigram "so far" is.
+ *
+ * This cannot move the mastery bar. An acknowledgement advances the DELIVERY
+ * phases only; the CHECK / PRACTICE / TRANSFER cases of that branch are empty,
+ * and `correctAtCheck` / `correctAtPractice` are incremented solely from a
+ * graded answer in the `succeeded` branch. A false positive here costs a
+ * delivery step, never a gate.
+ *
+ * Distress cannot reach this predicate's effect at all: `failed` (which
+ * includes `recoveryFired`) returns from the fold ABOVE the acknowledgement
+ * branch, so "ok but i still don't understand" is a recovery turn regardless
+ * of what this returns. That is structural, not a word on the list.
+ *
+ * Detector-local by the same hard boundary as `stripAddressTokens`: the
+ * normalised string never leaves this function body, is not exported, and must
+ * never reach a resolver, the visual layer, or the model's prompt.
+ */
+const FILLER_CONNECTIVES_RE =
+  // The lookbehinds are load-bearing, not caution: stripping a bare "it"
+  // turns "got it" into "got" and "i get it" into "i get", DESTROYING two
+  // tokens the list has always carried. Caught by the negative controls
+  // before this shipped, which is why they are pinned as tests.
+  /\b(?:i think|so far|pretty much|(?<!\bgot\s)(?<!\bget\s)it|that|this|now|all|totally|completely)\b/gi
+
+function stripFillerConnectives(message: string): string {
+  return message
+    .replace(FILLER_CONNECTIVES_RE, ' ')
+    .replace(/\s{2,}/g, ' ')
+    .replace(/^[\s,]+|[\s,]+$/g, '')
+}
+
 export function isLowSignalAcknowledgement(message: string): boolean {
-  const trimmed = stripAddressTokens(message).trim()
+  const trimmed = stripFillerConnectives(stripAddressTokens(message)).trim()
   if (!trimmed) return false
   // More than 10 words: the learner added real content — not a bare ack.
   if (trimmed.split(/\s+/).length > 10) return false
