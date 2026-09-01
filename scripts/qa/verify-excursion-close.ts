@@ -25,21 +25,45 @@ const LESSON = {
   totalLessons: 238,
 }
 
-const SCRIPT = [
-  // Engage normally first, so the detour is a genuine mid-lesson event and
-  // not the session opening.
+/**
+ * A — ISOLATE `closed-wants-practice`.
+ *
+ * THE FIRST RUN OF THIS SCRIPT DEFEATED ITSELF. It said "ok that makes sense
+ * now" before asking for practice, and the logs showed
+ * `transition: 'closed-satisfied'` — the PRE-EXISTING satisfaction close had
+ * already fired, so the practice-request close was never reached and 778b5a0
+ * stayed unverified. The satisfaction utterance is removed here deliberately:
+ * the detour must still be OPEN when the practice request lands.
+ */
+const SCRIPT_PRACTICE_CLOSE = [
+  // Engage first, so the detour is a genuine mid-lesson event, not the opening.
   'ok, i think i follow so far',
-  // THE GAP, phrased so it NAMES the concept — exactly the utterance ea7cefb
-  // taught `detectFailureState` to recognise.
+  // THE GAP, naming the concept — the utterance ea7cefb taught the detector.
   'wait, i dont get what the normal force is. you keep saying N',
-  // Absorb the detour's teaching.
-  'ok that makes sense now, the surface pushes back',
-  // THE CLOSE TRIGGER: a practice request while the detour is still open.
+  // THE CLOSE TRIGGER, with the detour still open. NOTHING between.
   'can you give me a practice question on friction now',
 ]
 
+/**
+ * B — THE OBSERVE PIN, re-measured after 393073b.
+ *
+ * The same run showed 5 turns pinned at OBSERVE with `demonstrated: false`,
+ * because every natural acknowledgement logged `ack: false`. These are
+ * ordinary receipts with interleaved glue — no gap, no distress, no question.
+ * If the ladder still never leaves OBSERVE, the fix did not reach the runtime.
+ */
+const SCRIPT_OBSERVE_PIN = [
+  'ok, i think i follow so far',
+  'yeah that makes sense',
+  'right, that all makes sense now',
+  'ok i think i understand',
+]
+
 async function main() {
-  const acct = await createQaAccount('excursion-close')
+  const which = process.argv[2] === 'observe' ? 'observe' : 'practice'
+  const script = which === 'observe' ? SCRIPT_OBSERVE_PIN : SCRIPT_PRACTICE_CLOSE
+  console.log(`scenario=${which}`)
+  const acct = await createQaAccount(`excursion-${which}`)
   console.log(`BASE=${BASE} account=${acct.email}`)
   try {
     const sessionId = await createSession(acct.cookie, 'physics')
@@ -47,9 +71,9 @@ async function main() {
 
     console.log(d('T1 open', await openLesson(acct.cookie, sessionId, LESSON)))
 
-    for (let i = 0; i < SCRIPT.length; i++) {
-      const p = await say(acct.cookie, sessionId, SCRIPT[i])
-      console.log(`\n--- learner: ${SCRIPT[i]}`)
+    for (let i = 0; i < script.length; i++) {
+      const p = await say(acct.cookie, sessionId, script[i])
+      console.log(`\n--- learner: ${script[i]}`)
       console.log(d(`T${i + 2}`, p))
     }
     console.log(`\nsessionId=${sessionId}`)
