@@ -35,12 +35,27 @@ const CONCEPTS: Record<string, { lessonTitle: string; topicSlug: string; unitTit
 const KEY = process.argv[2] && CONCEPTS[process.argv[2]] ? process.argv[2] : 'friction'
 const LESSON = { ...CONCEPTS[KEY], totalLessons: 238 }
 
-/** Struggle first, THEN ask for a picture — the order is the point. */
+/**
+ * Struggle first, THEN ask for a picture — the order is the point.
+ *
+ * The third request is PER CONCEPT. The first version asked every lesson to
+ * "show me a picture of the forces", which is friction's vocabulary: in a
+ * MIRRORS lesson that is an off-topic request, and the engine declining to
+ * draw a force diagram in an optics lesson is CORRECT behaviour, not the
+ * figure gap it looked like. Measured as 2-of-3 twice on mirrors before the
+ * script was the suspect — the same methodological flaw already corrected in
+ * the misconception probe.
+ */
+const SUBJECT_REQUEST: Record<string, string> = {
+  friction: 'show me a picture of the forces',
+  mirrors: 'show me a picture of the rays',
+  'kinetic-energy': 'show me a picture of the energy changing',
+}
 const SCRIPT = [
   'i dont understand this at all',
   'can you show me a diagram',          // the request, mid-struggle
   'i still dont get it, can you draw it',
-  'show me a picture of the forces',
+  SUBJECT_REQUEST[KEY] ?? SUBJECT_REQUEST.friction,
   'ok that helps a bit',
 ]
 
