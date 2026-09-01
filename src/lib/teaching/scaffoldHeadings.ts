@@ -245,6 +245,43 @@ function collectNumberedHeadings(lines: string[]): NumberedHeading[] {
 export function externallyNumberedHeadings(lines: string[]): Set<number> {
   const found = collectNumberedHeadings(lines)
   if (found.length < 2) return new Set()
+
+  // ── A NUMBERED LIST IS ONE LIST ─────────────────────────────────────────
+  //
+  // MEASURED (production, phys.mech.friction, opening turn, 2026-09-01) — on
+  // the deploy that shipped the rule below, and it is the rule below that let
+  // this through. The model printed the FULL eight-stage list, paraphrasing
+  // some titles and keeping others:
+  //
+  //   ### 1. A sliding book on a table      (paraphrased)
+  //   ### 2. The everyday situation         (paraphrased)
+  //   ### 3. Mental picture                 (stage name)
+  //   ### 4. Plain-language description     (stage name)
+  //   ### 5. The concept's name             (stage name)
+  //   ### 6. Vocabulary                     (stage name)
+  //   ### 7. Formula (only if needed)       (stage name)
+  //   ### 8. Quick check                    (paraphrased)
+  //
+  // Numbered 1..8 across eight headings, so `highest <= distinct.size` and the
+  // external-numbering test below correctly declined: by ITS evidence this is
+  // a self-numbered list. Shape 1 then removed the five whose titles it
+  // recognised, and the learner was left with
+  //
+  //   ### 1. …   ### 2. …   ### 8. …
+  //
+  // — a numbered list with a hole in it, which is MORE obviously broken than
+  // the scaffold was. The two shapes each behaved correctly and composed into
+  // something worse than either.
+  //
+  // The missing premise: these eight headings are ONE LIST. If any member of
+  // it is a confirmed stage label, the list is the prompt's list, and the
+  // paraphrased members are no more the learner's business than the literal
+  // ones. That is a far stronger signal than numbering alone — it requires a
+  // positive name match, not an inference — so it is checked first.
+  if (found.some((h) => isStageLabel(h.text))) {
+    return new Set(found.map((h) => h.index))
+  }
+
   const distinct = new Set(found.map((h) => h.number))
   const highest = Math.max(...distinct)
   // Self-numbered headings run 1..n. Anything else was numbered from a list

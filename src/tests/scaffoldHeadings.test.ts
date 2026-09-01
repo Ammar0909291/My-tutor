@@ -382,3 +382,80 @@ describe('digit glyphs the model actually used', () => {
     expect(text).toContain('1️⃣ press, 2️⃣ push')
   })
 })
+
+/**
+ * A NUMBERED LIST IS ONE LIST — and the two shapes composed into something
+ * worse than either of them alone.
+ *
+ * MEASURED (production, phys.mech.friction, opening turn from
+ * /api/learn/lesson-init, 2026-09-01) — on the deploy that shipped shape 3.
+ * The model printed the FULL eight-stage list, paraphrasing some titles and
+ * keeping others verbatim. Runtime log from that exact turn:
+ *
+ *   [lesson-init] {"event":"stage-labels-stripped","removed":
+ *     ["3. Mental picture","4. Plain‑language description",
+ *      "5. The concept’s name","6. Vocabulary","7. Formula (only if needed)"]}
+ *
+ * Shape 3 declined, CORRECTLY by its own evidence: eight headings numbered
+ * 1..8, so `highest <= distinct.size` and the numbering looks self-authored.
+ * Shape 1 then removed the five whose titles it recognised. The learner was
+ * left with
+ *
+ *   ### 1. …    ### 2. …    ### 8. …
+ *
+ * a numbered list with a hole in it — MORE obviously broken than the scaffold
+ * had been. Each shape behaved correctly; together they mangled the turn.
+ *
+ * The missing premise is that those eight headings are ONE LIST. If any member
+ * is a confirmed stage label, the list is the prompt's, and the paraphrased
+ * members are no more the learner's business than the literal ones. That
+ * requires a positive NAME match rather than an inference from numbering,
+ * which is why it is a stronger test and is checked first.
+ */
+describe('the full stage list, part paraphrased and part verbatim', () => {
+  const LIVE = [
+    '### 1. A sliding book on a table  ', 'Picture a book resting on a table.', '',
+    '### 2. The everyday situation  ', 'That force is at work whenever you walk.', '',
+    '### 3. Mental picture  ', 'Two rough surfaces rubbing.', '',
+    '### 4. Plain‑language description  ', '**Friction** opposes relative motion.', '',
+    '### 5. The concept’s name  ', 'We call it the friction force.', '',
+    '### 6. Vocabulary  ', '- **Static friction**: keeps an object at rest.', '',
+    '### 7. Formula (only if needed)  ', 'F = μN', '',
+    '### 8. Quick check  ', 'What do you notice at rest versus moving?',
+  ].join('\n')
+
+  it('removes all eight, not just the five it can name', () => {
+    expect(stripScaffoldHeadings(LIVE).removed).toHaveLength(8)
+  })
+
+  it('leaves no numbered heading behind — no hole in the list', () => {
+    // This is the assertion that would have caught the mangling.
+    expect(stripScaffoldHeadings(LIVE).text).not.toMatch(/^\s*#{1,6}\s+\d/m)
+  })
+
+  it('keeps every word of teaching', () => {
+    const { text } = stripScaffoldHeadings(LIVE)
+    for (const kept of [
+      'Picture a book resting on a table', 'whenever you walk',
+      'Two rough surfaces rubbing', 'opposes relative motion',
+      'the friction force', 'keeps an object at rest', 'F = μN',
+      'at rest versus moving',
+    ]) expect(text).toContain(kept)
+  })
+})
+
+describe('one-list only fires on a CONFIRMED stage name', () => {
+  it("a tutor's own numbered lesson is untouched", () => {
+    const t = '### 1. Setup\nA block on a table.\n### 2. Method\nPush it slowly.\n### 3. Result\nIt resists then slips.'
+    expect(stripScaffoldHeadings(t).removed).toEqual([])
+    expect(stripScaffoldHeadings(t).text).toBe(t)
+  })
+
+  it('a heading that merely STARTS with a stage word does not condemn the list', () => {
+    // "Formula for the critical angle" is a real heading about a real thing;
+    // isStageLabel rejects it because of the trailing words, so the list
+    // stands.
+    const t = '### 1. Formula for the critical angle\nThe angle depends on both materials.\n### 2. Worked example\nTry n=1.5.'
+    expect(stripScaffoldHeadings(t).text).toBe(t)
+  })
+})
