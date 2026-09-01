@@ -442,6 +442,47 @@ export function decideContinuity(input: {
     }
   }
 
+  // ASKING FOR THE PICTURE MUST PRODUCE A PICTURE.
+  //
+  // MEASURED (phys.opt.mirrors, real account, twice; reproduced offline
+  // against this function). A learner mid-struggle typed each of:
+  //
+  //   "can you show me a diagram"
+  //   "i still dont get it, can you draw it"
+  //   "show me a picture of the rays"
+  //   "show me the diagram again"
+  //
+  // and every one of them fell through to the catch-all hold below —
+  //   [visual-v2] continuity: 'continuity', heldTurns: 1 … 2
+  // — so `turns` stayed above zero, and route.ts's ownership gate
+  // (`figureIntroducedThisTurn = session.turns === 0`) withheld the figure
+  // from the payload. The reply to an explicit request for a diagram carried
+  // no diagram. The figure was real and still in the transcript, several
+  // messages up the scroll; on a phone that is off screen entirely, and
+  // asking again produced another reply with nothing in it.
+  //
+  // The ownership gate is right and is not touched: a held figure must not be
+  // re-stamped under every reply. But an EXPLICIT request is not an ordinary
+  // reply — it is a deliberate act, a handful of times per lesson at most, and
+  // the one turn where the learner is looking for the picture rather than at
+  // it. So the same figure is RE-INTRODUCED: same concept, same content,
+  // `turns` back to 0, attached to the message that answered the request.
+  //
+  // Scoped to a figure that is already the LESSON's own concept, which is
+  // where the defect was measured and where re-introducing costs nothing: for
+  // a lesson figure the `turns` counter only feeds the MAX_EXCURSION_TURNS
+  // valve, whose switch target is `lessonConceptId` — the concept it is
+  // already showing. An EXCURSION figure keeps its counter untouched, so
+  // repeated requests can never hold a detour open past that limit.
+  if (
+    input.visualRequested
+    && lessonConceptId
+    && session.conceptId === lessonConceptId
+    && (!requestedConceptId || requestedConceptId === session.conceptId)
+  ) {
+    return { kind: 'switch', targetConceptId: session.conceptId, reason: 'visual-request-reshows-figure' }
+  }
+
   // Everything else — follow-ups, corrections, "why?", "I don't get it",
   // incidental concept mentions — keeps the current figure on screen.
   return { kind: 'hold', session, reason: 'continuity' }
