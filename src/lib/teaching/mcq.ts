@@ -164,6 +164,85 @@ export function appendMcqToHistoryText(cleanText: string, mcq: TutorMCQ | null):
 }
 
 /**
+ * THE SAME QUESTION, ON SCREEN, TWICE.
+ *
+ * `appendMcqToHistoryText` above closed this defect for DURABLE HISTORY and
+ * its comment says of the live turn: "Invisible live — the API response
+ * carries the single prose copy and the client draws its wizard from the
+ * `mcq` field."
+ *
+ * That is exactly wrong about what the learner sees. `LessonScreen` renders
+ * the message body AND, underneath it, a tappable widget built from
+ * `activeMcq.question` + `activeMcq.options`. When the model writes the
+ * question inline as prose *and* emits the tag — the behaviour that forced
+ * the history guard into existence in the first place, measured live
+ * 2026-08-16 — `stripMcqTags` removes only the machine tag, so the prose copy
+ * survives into the body and the learner reads the question, then reads it
+ * again with buttons under it.
+ *
+ * The widget is the copy that must survive: it is the only gradeable one.
+ * `pendingMcq`/`gradeMcqAnswer` key off the parsed tag, and a learner who
+ * answers the prose copy by typing produces evidence nothing can grade
+ * (`proseMcqGuard`'s whole subject). So the PROSE copy is what goes.
+ *
+ * WHAT IS REMOVED, and nothing else: the sentence carrying the question, and
+ * a lettered options block immediately following it. The teaching above it is
+ * untouched — the same clause-level restraint `stripCompletionClaims` and the
+ * D3 fix both settled on, for the same reason: deleting a good explanation to
+ * remove a duplicated line is a second harm on top of the first.
+ *
+ * FAILS SAFE. If the question is not present in the prose, if it is too short
+ * to match without risking a collision, or if removing it would leave nothing
+ * worth showing, the text is returned UNCHANGED. A duplicated question is a
+ * blemish; a blank turn is a broken lesson.
+ */
+export function dropDuplicatedMcqProse(cleanText: string, mcq: TutorMCQ | null): string {
+  if (!mcq || typeof cleanText !== 'string') return cleanText
+  if (!containsQuestion(cleanText, mcq.question)) return cleanText
+
+  const norm = (v: string) => v.replace(/\s+/g, ' ').trim().toLowerCase()
+  const target = norm(mcq.question)
+
+  const lines = cleanText.split('\n')
+  const keep: string[] = []
+  // Once the question line is found, the lettered options that follow it
+  // belong to it. A blank line does NOT end the block — the model routinely
+  // puts one between the stem and the choices.
+  let inOptionsRun = false
+
+  for (const line of lines) {
+    if (inOptionsRun) {
+      if (line.trim() === '') continue
+      if (OPTION_LINE_RE.test(line)) continue
+      inOptionsRun = false
+    }
+    // Within a line, drop only the sentence that IS the question; a stem
+    // written as "... . Which of these is heavier?" keeps its first half.
+    const sentences = line.split(/(?<=[.!?])\s+/)
+    const survivors = sentences.filter((sn) => !norm(sn).includes(target))
+    if (survivors.length === sentences.length) { keep.push(line); continue }
+    inOptionsRun = true
+    const rebuilt = survivors.join(' ').trim()
+    if (rebuilt) keep.push(rebuilt)
+  }
+
+  const out = keep.join('\n').replace(/\n{3,}/g, '\n\n').trim()
+  // A LENGTH FLOOR WAS THE WRONG TEST, and measuring it said so: at 40 chars
+  // this declined on "Let us check that." followed by the duplicated block —
+  // a perfectly good turn, because the widget below it carries the question.
+  // The body does not need length, it needs SUBSTANCE. What must not ship is
+  // a scrap ("So,", a stray "A)") or an empty bubble, so the test is that a
+  // real word survives. When nothing does — the duplicate was the entire turn
+  // — the text stands unchanged and the learner sees it twice. That case is
+  // left deliberately: the alternative is an empty message bubble, or
+  // inventing a lead-in the tutor never wrote.
+  return /[A-Za-z]{3}/.test(out) ? out : cleanText
+}
+
+/** Start-anchored lettered option line: `A)`, `A.`, `A]`, `(A)`, `- A)`. */
+const OPTION_LINE_RE = /^\s*[-*\u2022]?\s*[([]?[A-Za-z][).\]]\s+\S/
+
+/**
  * Whitespace- and case-insensitive containment. The prose copy and the tag copy
  * of one question routinely differ by line wrapping and capitalisation, so an
  * exact match would miss the very case this guard exists for. Punctuation is

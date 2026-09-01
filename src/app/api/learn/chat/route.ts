@@ -6909,6 +6909,43 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         console.warn('[scaffold-headings] check skipped:', err)
       }
 
+      // THE SAME QUESTION, ON SCREEN, TWICE.
+      //
+      // When the model writes its question inline as prose AND emits the
+      // <!--MCQ--> tag, `stripMcqTags` removes only the machine tag: the prose
+      // copy survives into the body, and LessonScreen then draws the tappable
+      // widget from `activeMcq` underneath it. The learner reads the question,
+      // then reads it again with buttons under it.
+      //
+      // Not a hypothetical — `appendMcqToHistoryText` was written in
+      // 2026-08-16 for exactly this model behaviour, and its comment calls the
+      // live turn "invisible" on the strength of the client drawing its wizard
+      // from the `mcq` field. It does, and it also renders the body.
+      //
+      // Placed here so ONE deduplicated string reaches both the response and
+      // `contentForHistory` below; the history append then contributes the
+      // single canonical copy it was always meant to. Keyed on `mcqHoisted`
+      // (this turn's newly tagged probe) rather than the served value, because
+      // an ECHOED pending probe came from an earlier turn and cannot be
+      // duplicated in this turn's prose.
+      if (mcqHoisted) {
+        try {
+          const { dropDuplicatedMcqProse } = await import('@/lib/teaching/mcq')
+          const deduped = dropDuplicatedMcqProse(cleanText, mcqHoisted)
+          if (deduped !== cleanText) {
+            console.warn('[mcq] ' + JSON.stringify({
+              event: 'duplicated-prose-question-dropped',
+              conceptId: resolvedConceptId ?? null,
+              charsBefore: cleanText.length,
+              charsAfter: deduped.length,
+            }))
+            cleanText = deduped
+          }
+        } catch (err) {
+          console.warn('[mcq] duplicate-prose check skipped:', err)
+        }
+      }
+
       // ADR 15: create RRM entry after visual pipeline resolution.
       // Single-writer: this is the ONLY path that writes RRM entries.
       let rrmEntryThisTurn: import('@/lib/teaching/renderedRealityModel').RRMEntry | null = null
