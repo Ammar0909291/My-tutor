@@ -138,8 +138,26 @@ const RESOLUTION_CLAIM_RE =
 // (`completionClaimInProse.test.ts` — "keeps the praise and the recap"), and
 // overturning a documented product decision about recap language is a change
 // of policy, not a bug fix. Recorded here so the question stays visible.
+// ── THE COUNTED-PROGRESS FORM ───────────────────────────────────────────────
+//
+// MEASURED (production, phys.mech.friction, 2026-08-31, real account): the
+// entire opening turn of a re-opened lesson was a completion announcement, and
+// the strongest sentence in it was
+//
+//   "✓ Progress: You've now completed 1 of 238 lessons."
+//
+// The rule above meant to catch exactly that and missed it TWICE over. It
+// reads `completed lesson <n>` — number AFTER the noun, singular — while the
+// tutor wrote the count first and the noun plural; and its adverb slot held
+// only "just", while the tutor wrote "now". Neither miss is a judgement call:
+// this is the same bookkeeping claim in the phrasing the model actually
+// prefers, so it is added rather than argued about.
+//
+// The noun stays load-bearing. "You've completed 2 of the 3 practice
+// questions" is in-lesson progress and true, and must not be stripped; only a
+// count of LESSONS is a claim about the learner's record.
 const COMPLETION_CLAIM_RE =
-  /(you(?:'ve| have)?\s+(?:just\s+)?(?:completed|finished|wrapped up|mastered)\s+(?:this\s+|the\s+)?lesson|(?:you(?:'ve| have)?\s+)?completed\s+lesson\s+\d+|lesson\s+\d+\s+(?:of\s+\d+\s+)?(?:is\s+)?complete|this\s+lesson\s+is\s+(?:now\s+)?(?:complete|finished|done)|next\s+up\s*(?:is\b|:)|on\s+to\s+the\s+next\s+lesson|moving\s+on\s+to\s+lesson\s+\d+|your\s+next\s+lesson\s+is\b)/i
+  /(you(?:'ve| have)?\s+(?:(?:just|now|already)\s+)?(?:completed|finished|wrapped up|mastered)\s+(?:this\s+|the\s+)?lesson|(?:you(?:'ve| have)?\s+)?(?:(?:just|now|already)\s+)?completed\s+lesson\s+\d+|(?:(?:just|now|already)\s+)?completed\s+\d+\s+of\s+(?:the\s+)?\d+\s+lessons|lesson\s+\d+\s+(?:of\s+\d+\s+)?(?:is\s+)?complete|this\s+lesson\s+is\s+(?:now\s+)?(?:complete|finished|done)|next\s+up\s*(?:is\b|:)|on\s+to\s+the\s+next\s+lesson|moving\s+on\s+to\s+lesson\s+\d+|your\s+next\s+lesson\s+is\b)/i
 
 /**
  * Removes the sentences (or list items) that make a false record claim, leaving

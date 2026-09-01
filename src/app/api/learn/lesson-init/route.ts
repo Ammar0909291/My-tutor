@@ -523,6 +523,63 @@ export async function POST(req: Request) {
       console.warn('[lesson-init] scaffold-heading check skipped:', err)
     }
 
+    // THE OPENING TURN CANNOT ANNOUNCE THE LESSON IS FINISHED.
+    //
+    // Third repair ported here for the reason the two above already give: the
+    // opening turn lives behind its own endpoint, so a repair added to the chat
+    // route does not reach it. `/api/learn/chat` runs `enforceStance` (which
+    // strips completion claims) and `gateLessonCompletion` (which strips the
+    // `[LESSON_COMPLETE]` tag). lesson-init runs NEITHER, and both showed up in
+    // one turn.
+    //
+    // MEASURED (production, phys.mech.friction, 2026-08-31, studied as a
+    // learner on a real account). The concept had been mastered earlier that
+    // day. Re-opening it to revise — mode=restart — produced, as the entire
+    // first turn:
+    //
+    //   "🎉 Excellent work, Claude! You've successfully navigated the core
+    //    rules of friction.  ✓ What you mastered: … ✓ Progress: You've now
+    //    completed 1 of 238 lessons. … [LESSON_COMPLETE]"
+    //
+    // A learner who opened a lesson to study was told they were done, and the
+    // control tag was printed to their screen. `lessonAttemptStartDecision`
+    // had correctly returned freshStart for a COMPLETED attempt under restart,
+    // so the ATTEMPT was reopened properly; only the words were wrong.
+    //
+    // WHY THE EXISTING GUARD DID NOT FIRE: `enforceStance` judges a completion
+    // claim against whether mastery is verified, and here it genuinely was —
+    // from the earlier attempt. The claim was true of the learner's history and
+    // false of the turn they were looking at.
+    //
+    // THE INVARIANT IS SIMPLER THAN THE ONE ON THE CHAT PATH, and does not need
+    // the mastery state at all: this is turn ZERO of an attempt. Nothing has
+    // been taught yet in it, so nothing can have been completed by it, whatever
+    // the learner did an hour ago. That holds for every mode — a `resume`
+    // opening is mid-lesson, not post-lesson.
+    try {
+      const { claimsCompletionInProse, stripCompletionClaims } =
+        await import('@/lib/teaching/stanceEnforcement')
+      const hadTag = /\[LESSON_COMPLETE\]/i.test(routed.text)
+      const hadClaim = claimsCompletionInProse(routed.text)
+      if (hadTag || hadClaim) {
+        const cleaned = stripCompletionClaims(routed.text)
+          .replace(/\[LESSON_COMPLETE\]/gi, '')
+          .trim()
+        console.warn('[lesson-init] ' + JSON.stringify({
+          event: 'completion-claim-stripped-from-opening',
+          topicSlug, mode, hadTag, hadClaim,
+        }))
+        // Only take the repair if it left a usable turn. Stripping every
+        // sentence would hand the learner a blank opening, which is worse than
+        // the claim — the same "a repair must never take the turn down" rule
+        // the two checks above follow.
+        if (cleaned.length >= 40) routed = { ...routed, text: cleaned }
+      }
+    } catch (err) {
+      console.warn('[lesson-init] completion-claim check skipped:', err)
+    }
+
+
     // LESSON ISOLATION — this IS the "explicit navigation" moment
     // /api/sessions/history's own resolution treats as authoritative
     // (activeLessonSlug, prioritized over the coarser currentLesson
