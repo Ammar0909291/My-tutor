@@ -1,6 +1,42 @@
 /**
- * E1's DEMONSTRATE WIDENING CANNOT FIRE. THIS IS A CHARACTERIZATION TEST OF A
- * DEFECT, NOT AN APPROVAL OF IT.
+ * E1's DEMONSTRATE WIDENING — WHY IT COULD NOT FIRE, AND WHAT STOPS IT NOW.
+ *
+ * ── RESOLVED 2026-09-01 (9690536), AND THE FIX IS VERIFIED IN PRODUCTION ────
+ * This file previously asserted that E1 was UNREACHABLE. It no longer is. The
+ * gate now opens at DEMONSTRATE for a learner who has failed, and production
+ * gives the before/after directly:
+ *
+ *   BEFORE  [gate-eligibility] {"phase":"DEMONSTRATE","move":"show",
+ *            "eligible":false,"blockedBy":["phaseAllowsProbe"],
+ *            "phaseAllowsProbe":false,"probeAttachablePhase":true}
+ *   AFTER   [gate-eligibility] {"phase":"DEMONSTRATE","move":"show",
+ *            "eligible":true,"blockedBy":[],"phaseAllowsProbe":true}
+ *           [gate-assessment]  {"phase":"DEMONSTRATE","probeFound":true, ...}
+ *
+ * E1 reached the probe selector for the first time since it was written.
+ *
+ * ── AND IT STILL DECLINED, FOR A GOOD REASON ────────────────────────────────
+ *   [gate-assessment] {"declined":"below-guide-no-surplus",
+ *                      "phase":"DEMONSTRATE","poolSize":3}
+ *   [gate-assessment] {"probeFound":true,"converted":false,
+ *                      "assetId":"9a362370-287f-4537-8d05-860139150b46"}
+ *
+ * `mayAttachProbeBelowGuide` needs poolSize - 1 >= CREDITS_REQUIRED_FOR_MASTERY
+ * (so, four). By the time this learner had failed, three probes remained —
+ * the earlier ones were already spent — so spending another below the gates
+ * would have made mastery unreachable, which is the defect that held physics
+ * at 79%. The guard did exactly its job.
+ *
+ * THE REAL CONSTRAINT IS THEREFORE PROBE DEPTH, NOT GATE LOGIC. The
+ * gradeable-question rate for a struggling learner did NOT move (mirrors:
+ * 3 of 12 before, 2 of 12 after — inside the 1-to-3 range the same script
+ * produced across earlier runs). Helping that learner needs MORE authored
+ * probes per concept, which is content work; no arrangement of this gate can
+ * conjure a fourth probe that does not exist.
+ *
+ * The sections below are kept because the reachability facts they prove are
+ * what made the diagnosis possible, and because the phase-move enumeration is
+ * still a live guard.
  *
  * ── WHAT E1 WAS FOR, in route.ts's own words ────────────────────────────────
  *   "E1 — CRITERION 4. Measured in the 2026-08-31 re-measurement: only 114 of
@@ -114,7 +150,7 @@ describe('E1 — the widening is real, and it is INLINE', () => {
   })
 })
 
-describe('E1 — and it is unreachable, because the move is never "ask" there', () => {
+describe('E1 — the move is never "ask" at DEMONSTRATE, which is why the old condition was fatal', () => {
   it('no combination of the real decider returns "ask" at DEMONSTRATE', () => {
     const seen = new Set<string>()
     let asked = 0
@@ -196,12 +232,14 @@ describe('E1 — and it is unreachable, because the move is never "ask" there', 
     expect(askless).toEqual(['DEMONSTRATE'])
   })
 
-  it('the route still spells the condition that makes it moot', () => {
-    // If this string changes, the fix has been attempted and every claim in
-    // this file's header must be re-measured before the test is updated.
+  it('GUIDE keeps the ask condition; DEMONSTRATE is now scoped to failure', () => {
+    // Was: "the route still spells the condition that makes it moot". It no
+    // longer does — see the header. GUIDE's condition is unchanged and still
+    // works there; DEMONSTRATE's is now the failure scope.
     const { readFileSync } = require('node:fs')
     const { join } = require('node:path')
     const route = readFileSync(join(process.cwd(), 'src/app/api/learn/chat/route.ts'), 'utf8')
-    expect(route).toContain("&& evidenceMoveHoisted === 'ask')")
+    expect(route).toContain("(phaseBeforeTurn === 'GUIDE' && evidenceMoveHoisted === 'ask')")
+    expect(route).toContain("(phaseBeforeTurn === 'DEMONSTRATE' && strugglingOnThisConcept)")
   })
 })
