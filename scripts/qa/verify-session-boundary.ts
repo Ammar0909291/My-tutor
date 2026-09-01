@@ -70,7 +70,16 @@ async function park() {
     console.log(' boundary, but the engineered-win debt is NOT owed and this run')
     console.log(' does not test decision-engine/07 §8 rule 3)')
   }
+  // MARGIN, NOT THE THRESHOLD. `SESSION_GAP_MS` is 30 minutes and the check is
+  // a strict `>`. Two attempts were wasted resuming at 28 and ~30.7 minutes:
+  // the first was plainly inside the boundary, and the second had under a
+  // minute of margin, so a missing greeting could not be told apart from a
+  // boundary that never opened. Resume with real slack or the run says
+  // nothing.
+  const readyAt = new Date(Date.now() + 45 * 60 * 1000)
   console.log('\n──────── PARKED ────────')
+  console.log(`DO NOT RESUME BEFORE ${readyAt.toISOString().slice(11, 19)} UTC `
+    + '(45 min — the boundary is 30 and a marginal gap measures nothing)')
   console.log(`left on a graded FAILURE: ${failedBeforeParking ? 'YES — the debt is owed' : 'no'}`)
   console.log(`RESUME_WITH: npx tsx scripts/qa/verify-session-boundary.ts resume \\`)
   console.log(`  ${acct.email} ${acct.password} ${sessionId}`)
