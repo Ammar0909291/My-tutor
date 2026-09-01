@@ -6664,6 +6664,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               conversationStateHoisted?.demonstrated === true &&
               recoveryKeyHoisted === null &&
               (teachingSignal?.correctness === true || lowSignalAckHoisted === true)
+            const { mcqToServe: mcqToServeForWithhold } = await import('@/lib/teaching/mcq')
             const ungraded = withholdUngradedGateQuestion({
               text: cleanText,
               // The phase the turn was BUILT at — the same pre-fold value the
@@ -6673,6 +6674,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // docblock) — CHECK/PRACTICE never consult it.
               phaseAfter: guideFoldsToGateThisTurn ? 'CHECK' : (conversationStateHoisted?.phase ?? null),
               hasStructuredMcq: mcqHoisted !== null,
+              // What the LEARNER will see, which is not the same question.
+              // `mcqToServe` also serves a pending probe carried forward when
+              // nothing was attached and nothing was graded — measured live
+              // shipping "Let's stay with this idea for a moment." in front of
+              // a tappable question (phys.opt.mirrors, T6).
+              questionOnScreen:
+                mcqToServeForWithhold(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted) !== null,
               // The server-selected probe's own question, when the gate
               // actually attached one this turn — lets the guard tell a
               // model that quoted it back in prose (harmless) apart from a

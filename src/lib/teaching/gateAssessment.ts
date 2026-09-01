@@ -261,6 +261,28 @@ export function buildGateAssessmentBlock(mcq: TutorMCQ): string {
 // an ungradeable prose question, with zero `[gate-contract]` withholding,
 // because this function's phase check never even looked at GUIDE turns.
 export interface UngradedGateQuestionInput {
+  /**
+   * WILL THE LEARNER ACTUALLY SEE A TAPPABLE QUESTION ON THIS TURN?
+   *
+   * Distinct from `hasStructuredMcq`, which means "the gate attached a probe
+   * THIS turn". `mcqToServe` also serves a PENDING probe carried forward from
+   * an earlier turn when nothing was attached and nothing was graded — so the
+   * learner can be looking at a question while `hasStructuredMcq` is false.
+   *
+   * MEASURED live (phys.opt.mirrors, 2026-09-01, deployed app, diagram probe):
+   *   T6  mcq=yes   text: "Let's stay with this idea for a moment."
+   * The content-free hold shipped in FRONT of a tappable question, which is
+   * the exact situation the hand-off sentence exists to prevent.
+   *
+   * Read ONLY to choose the replacement sentence. The withhold DECISION is
+   * unchanged: a stray ungradeable question is still stripped, because no
+   * probe was attached this turn and the branch that compares against an
+   * attached question would have nothing to compare with.
+   *
+   * Optional and defaulting to false, so a caller that omits it behaves
+   * exactly as before.
+   */
+  questionOnScreen?: boolean
   /** The outgoing text, tags already stripped. */
   text: string
   /** The phase this turn was BUILT at (pre-fold), same value the gate read. */
@@ -602,7 +624,13 @@ export function withholdUngradedGateQuestion(
     // An introduction has nothing left to introduce — see `dropOrphanedLeadIn`.
     const kept = dropOrphanedLeadIn(dropAnswerableContent(text))
     return {
-      text: kept.length > 0 ? kept : withheldContinuation(input.justGraded),
+      // `questionOnScreen`, not `hasStructuredMcq`: a probe carried forward
+      // from an earlier turn is on the learner's screen even though the gate
+      // attached nothing here, and stalling in front of it is the defect this
+      // sentence choice exists to avoid.
+      text: kept.length > 0
+        ? kept
+        : withheldContinuation(input.justGraded, input.questionOnScreen === true),
       withheld: true,
       reason: 'no-gradeable-probe',
     }
