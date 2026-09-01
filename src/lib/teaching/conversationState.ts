@@ -1037,7 +1037,41 @@ export function advanceConversationState(
       next.unauthoredKeyGrades = (prev.unauthoredKeyGrades ?? 0) + 1
     }
 
-    const verified = evidence.signalVerificationStatus === 'CLEAN' || evidence.signalVerificationStatus === undefined
+    // ── AN INVENTED KEY MUST NOT REACH THE *VERIFIED* COUNTERS ──────────────
+    //
+    // This read only `signalVerificationStatus`, never `unauthoredKey`. So a
+    // grade against an answer key the MODEL WROTE incremented
+    // `verifiedCorrectAtCheck` / `verifiedCorrectAtPractice` — the two
+    // counters `masteryVerifiedStrict` exists to trust — as long as the model
+    // also self-reported CLEAN, which a model confident enough to invent a key
+    // generally does.
+    //
+    // MEASURED against these real modules: a lesson in which EVERY graded
+    // item's key was invented ends
+    //
+    //   check 1 / practice 2      verifiedCheck 1 / verifiedPractice 2
+    //   unauthoredKeyGrades 4
+    //   masteryVerifiedStrict  TRUE
+    //   launderedEvidence      FALSE
+    //   conceptOutcome.status  'mastered'
+    //
+    // — a full false certification, on nothing but the model's own arithmetic.
+    //
+    // AND IT DEFEATED THE GUARD WRITTEN FOR IT, CIRCULARLY. `launderedEvidence`
+    // asks "was a key invented AND is strict mastery unmet?" — but strict
+    // mastery was met BY the invented grades it is meant to distrust, so the
+    // guard returned false exactly when it was needed. It only ever bit in the
+    // narrower case where the invented grade ALSO failed signal verification.
+    //
+    // The PLAIN counters deliberately still advance: the ladder must keep
+    // moving so the lesson does not stall (that is what `unauthoredKeyGrades`
+    // records separately, "counted, never credited"). What changes is that the
+    // STRICT counters now mean what their name says — mastery evidenced by a
+    // key the server owns.
+    const verified = (
+      evidence.signalVerificationStatus === 'CLEAN'
+      || evidence.signalVerificationStatus === undefined
+    ) && evidence.unauthoredKey !== true
     switch (prev.phase) {
       case 'OBSERVE':
         next.phase = 'DEMONSTRATE'
