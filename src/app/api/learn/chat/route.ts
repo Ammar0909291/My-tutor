@@ -1961,6 +1961,48 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           if (priorProse) systemPrompt += buildProseMcqReplyDirective(true)
         } catch { /* non-fatal — falls through with no directive appended */ }
 
+        // THE MIRROR: the tutor handed the learner their own sentence back and
+        // asked them to ratify it, as the whole turn.
+        //
+        // MEASURED in 3 of 3 lessons studied as a learner on 2026-09-01, e.g.
+        //   learner: "it slows down because of air and friction i guess…"
+        //   tutor:   "So you're saying the swing slows because of air
+        //             resistance and friction, and its swings get smaller each
+        //             time—am I right?"
+        // Cost, measured: a learner who answered correctly WITH reasoning at
+        // T3 was not told they were right until T6, after demanding a verdict
+        // twice.
+        //
+        // Detection only, plus a directive for THIS turn — the same shape as
+        // the prose-MCQ directive above. The mirror cannot be repaired in
+        // place: it is the entire turn, so stripping leaves nothing, and
+        // composing a verdict would mean inventing one for a free-response
+        // answer the server has no ground truth for. Regenerating is not
+        // available either (one model call per turn). See attributionGuard's
+        // note — the detector is logged so the rate becomes measurable.
+        try {
+          const { isMirrorTurn, buildMirrorReplyDirective } =
+            await import('@/lib/teaching/attributionGuard')
+          const priorAsst = learnSession.messages.find(
+            (m: { role: string }) => m.role === MessageRole.ASSISTANT,
+          )
+          const priorLearner = learnSession.messages.filter(
+            (m: { role: string }) => m.role === MessageRole.USER,
+          )[0] as { content?: string } | undefined
+          const mirror = isMirrorTurn(
+            (priorAsst as { content?: string } | undefined)?.content ?? '',
+            priorLearner?.content ?? '',
+          )
+          if (mirror.isMirror) {
+            console.warn('[mirror] ' + JSON.stringify({
+              event: 'prior-turn-was-a-mirror',
+              conceptId: resolvedConceptId ?? null,
+              overlap: Number(mirror.overlap.toFixed(2)),
+            }))
+            systemPrompt += buildMirrorReplyDirective(true)
+          }
+        } catch { /* non-fatal — falls through with no directive appended */ }
+
         // P3: the do-not-repeat contract — the questions already asked this
         // session, quoted back, plus the banned stock formulations and the
         // "confusion → explain, new example, new MCQ" rule that replaces

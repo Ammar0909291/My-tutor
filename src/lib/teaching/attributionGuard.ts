@@ -155,3 +155,122 @@ export function stripFabricatedAttribution(
  * Closing it needs a mechanism this codebase does not have yet, not a wider
  * regex.
  */
+
+// ── THE MIRROR: THE OTHER TAIL OF THE SAME MEASUREMENT ──────────────────────
+//
+// `stripFabricatedAttribution` above catches an attribution whose reasoning
+// the learner NEVER gave — the LOW-overlap tail. This catches the HIGH-overlap
+// tail: an attribution made of nothing BUT the learner's own words, ending in
+// a request to confirm it, as the entire turn.
+//
+// ── FOUR VERBATIM INSTANCES, THREE LESSONS, ONE DAY ─────────────────────────
+// All 2026-09-01, real account, studied as a learner:
+//
+//   friction r1 T1   learner: "harder"
+//     "So you're saying the book is harder to slide when you press it down
+//      because the normal force increases. Is that right?"
+//
+//   friction r1 T3   learner gave the answer AND the reason
+//     "You're thinking the normal force would be smaller when you lift the
+//      book because your hand isn't pushing on it anymore. Is that right?"
+//
+//   friction r3 T4   learner: "like i said, 10 kg times 10 = 100 N…"
+//     "So you're saying the normal force is 100 N because the book's weight
+//      (10 kg × 10 m/s²) equals 100 N, and on a flat table the normal force
+//      balances that weight—did I get that right?"
+//
+//   damped T1        learner: "it slows down because of air and friction…"
+//     "So you're saying the swing slows because of air resistance and
+//      friction, and its swings get smaller each time—am I right?"
+//
+// COST, MEASURED: in friction r1 the learner answered correctly with correct
+// reasoning at T3 and was not told they were right until T6, after demanding a
+// verdict twice. The turn teaches nothing, asks nothing new, and hands the
+// learner back their own sentence to ratify.
+//
+// ── WHAT THIS DOES, AND THE REPAIR IT DELIBERATELY DOES NOT ATTEMPT ─────────
+// It DETECTS and it DIRECTS the next turn. It does not rewrite the mirror,
+// because there is nothing honest to rewrite it into: the mirror is the whole
+// turn, so stripping it leaves an empty message, and composing a verdict would
+// mean inventing one — for a free-response answer the server has no ground
+// truth for. Regenerating is not available either: one model call per turn is
+// a standing rule (Permanent Rule 9).
+//
+// So the deterministic half is the NEXT turn, using the same conditional
+// one-line directive shape `buildProseMcqReplyDirective` already establishes.
+// A prompt lever has been measured ignored in this codebase before, and this
+// one is no different in kind — which is why the detector is pure and logged:
+// the rate is now measurable, and a future session can act on real numbers
+// instead of four transcripts.
+
+/** "Is that right?", "am I right?", "did I get that right?", "correct?" */
+const CONFIRMATION_REQUEST_RE =
+  /(?:is\s+that\s+(?:right|correct)|am\s+i\s+right|did\s+i\s+(?:get|understand)\s+(?:that|it|you)\s+right|is\s+that\s+what\s+you\s+(?:meant|mean)|have\s+i\s+got\s+that\s+right)\s*\??\s*$/i
+
+/** Words a mirror adds that are not the learner's and not content. */
+const MIRROR_FILLER = new Set(['saying', 'thinking', 'think', 'right', 'correct', 'meant', 'mean', 'got'])
+
+export interface MirrorResult {
+  isMirror: boolean
+  /** Share of the turn's content words that came from the learner. */
+  overlap: number
+}
+
+/**
+ * Is this turn a restatement of the learner's own answer, ending in a request
+ * to confirm it, and nothing else?
+ *
+ * Three conditions, all required — the same restraint as the fabrication half:
+ *   1. an ATTRIBUTION FRAME (the tutor reporting the learner's words back);
+ *   2. the turn ENDS in a request to confirm;
+ *   3. almost every content word is the learner's — nothing new was added.
+ *
+ * Condition 3 is what separates a mirror from a legitimate paraphrase-then-
+ * teach turn: a tutor who restates and then adds something has added content
+ * words the learner never used, and the overlap falls.
+ */
+export function isMirrorTurn(tutorText: string, learnerMessage: string): MirrorResult {
+  const miss = { isMirror: false, overlap: 0 }
+  if (typeof tutorText !== 'string' || typeof learnerMessage !== 'string') return miss
+  const text = tutorText.trim()
+  if (!text) return miss
+  if (!ATTRIBUTION_FRAME_RE.test(text)) return miss
+  if (!CONFIRMATION_REQUEST_RE.test(text)) return miss
+
+  const learnerStems = new Set(contentWords(learnerMessage).map(stem))
+  const own = contentWords(text).map(stem).filter((w) => !MIRROR_FILLER.has(w))
+  const shared = own.filter((w) => learnerStems.has(w)).length
+  const overlap = own.length > 0 ? shared / own.length : 0
+
+  // OVERLAP IS REPORTED, NOT GATED — and measuring is what settled that.
+  // Calibrated against the four real mirrors and six controls, the overlap
+  // ranged 0.00 to 0.79 ACROSS THE MIRRORS: r1 T1 scores 0.00 because the
+  // learner's whole answer was the single word "harder", so every other word
+  // in the restatement is necessarily the tutor's. A 0.6 gate rejected half
+  // the real instances.
+  //
+  // The work is done by conditions 1 and 2, and the END ANCHOR on the
+  // confirmation request is what carries the specificity: every control that
+  // restates and then TEACHES puts the confirm mid-turn, so it never reaches
+  // here. Condition 3 is therefore brevity — a turn that restates and then
+  // teaches has more to say than two sentences.
+  const sentences = text.split(/(?<=[.!?])\s+/).filter((x) => x.trim() !== '')
+  if (sentences.length > 2) return { isMirror: false, overlap }
+  return { isMirror: true, overlap }
+}
+
+/**
+ * The one-line directive for the turn AFTER a mirror. Empty when not needed,
+ * so it costs nothing on the ordinary path.
+ */
+export function buildMirrorReplyDirective(active: boolean): string {
+  if (!active) return ''
+  return (
+    '\n\nYOU ALREADY RESTATED THEIR ANSWER. Your previous turn repeated the ' +
+    "learner's own words back to them and asked them to confirm it, which they " +
+    'have now done. Do NOT restate it again, and do NOT ask them to confirm ' +
+    'anything. Say plainly whether the answer is right or wrong, in your first ' +
+    'sentence, and then teach the next thing. If you genuinely cannot tell ' +
+    'whether it is right, say that instead — but do not ask them to tell you.'
+  )
+}

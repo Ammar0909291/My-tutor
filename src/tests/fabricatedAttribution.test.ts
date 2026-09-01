@@ -134,3 +134,107 @@ describe('the chat route applies it', () => {
     expect(before.lastIndexOf('try {')).toBeGreaterThan(before.lastIndexOf('} catch'))
   })
 })
+
+/**
+ * THE MIRROR — the other tail of the same measurement.
+ *
+ * The fabrication guard above catches an attribution whose reasoning the
+ * learner NEVER gave. This catches the opposite: an attribution made of the
+ * learner's own words, ending in a request to confirm it, as the entire turn.
+ *
+ * FOUR VERBATIM INSTANCES, THREE LESSONS, ONE DAY — all 2026-09-01, real
+ * account, studied as a learner. Cost, measured: in friction run 1 the learner
+ * answered correctly WITH correct reasoning at T3 and was not told they were
+ * right until T6, after demanding a verdict twice.
+ */
+import { isMirrorTurn, buildMirrorReplyDirective } from '@/lib/teaching/attributionGuard'
+
+describe('the four measured mirrors', () => {
+  const CASES: Array<[string, string, string]> = [
+    ['friction r1 T1', 'harder',
+      "So you're saying the book is harder to slide when you press it down because the normal force increases. Is that right?"],
+    ['friction r1 T3', 'smaller? because your hand isnt pushing on it anymore',
+      "You're thinking the normal force would be smaller when you lift the book because your hand isn't pushing on it anymore. Is that right?"],
+    ['friction r3 T4', 'like i said, 10 kg times 10 = 100 N, and on a flat table the normal force equals the weight',
+      "So you're saying the normal force is 100 N because the book's weight (10 kg × 10 m/s²) equals 100 N, and on a flat table the normal force balances that weight—did I get that right?"],
+    ['damped T1', 'it slows down because of air and friction i guess. the swings get smaller each time',
+      "So you're saying the swing slows because of air resistance and friction, and its swings get smaller each time—am I right?"],
+  ]
+  for (const [name, learner, tutor] of CASES) {
+    it(`fires on ${name}`, () => {
+      expect(isMirrorTurn(tutor, learner).isMirror).toBe(true)
+    })
+  }
+
+  it('overlap is REPORTED, never gated — measuring settled that', () => {
+    // Across the four real mirrors overlap ranges 0.13 to 0.79: r1 T1 scores
+    // lowest because the learner's whole answer was the single word "harder",
+    // so every other word in the restatement is necessarily the tutor's. A 0.6
+    // gate — the first version — rejected half the real instances.
+    const low = isMirrorTurn(CASES[0][2], CASES[0][1])
+    const high = isMirrorTurn(CASES[2][2], CASES[2][1])
+    expect(low.overlap).toBeLessThan(0.3)
+    expect(high.overlap).toBeGreaterThan(0.6)
+    expect(low.isMirror && high.isMirror).toBe(true)
+  })
+})
+
+describe('what the mirror detector must NOT touch', () => {
+  for (const [label, learner, tutor] of [
+    ['plain teaching with no attribution frame', 'harder',
+      'Friction grows with the normal force. Press harder and it grows.'],
+    ['a genuine diagnostic question', 'harder',
+      'How did you calculate the normal force on the box?'],
+    ['an attribution with no request to confirm', 'harder',
+      "So you're saying the book is harder to slide when you press it down."],
+    ['a confirmation followed by real content', 'harder',
+      "So you're saying it is harder. That is right, and the reason is that the normal force rises when you press, which raises the maximum static friction."],
+  ] as const) {
+    it(`stays quiet: ${label}`, () => {
+      expect(isMirrorTurn(tutor, learner).isMirror).toBe(false)
+    })
+  }
+
+  it('a deliberate elicitation that then TEACHES is not a mirror', () => {
+    // Restating a misconception to surface it is a real teaching move. The
+    // END ANCHOR on the confirmation request is what separates them: a turn
+    // that goes on to teach puts the confirm mid-turn.
+    expect(isMirrorTurn(
+      "So you're saying heavier objects fall faster — is that right? Let us test it: a hammer and a feather in a vacuum land together, which is the whole point.",
+      'heavier things fall faster',
+    ).isMirror).toBe(false)
+  })
+
+  it('three sentences is not a mirror, even ending in a confirm', () => {
+    expect(isMirrorTurn(
+      "So you're saying the swing slows because of air. Air is part of it. The pivot friction matters more — is that right?",
+      'it slows because of air',
+    ).isMirror).toBe(false)
+  })
+
+  it('is safe on empty and non-string input', () => {
+    expect(isMirrorTurn('', 'x').isMirror).toBe(false)
+    expect(isMirrorTurn(null as unknown as string, 'x').isMirror).toBe(false)
+    expect(isMirrorTurn('So you are saying X. Is that right?', null as unknown as string).isMirror).toBe(false)
+  })
+})
+
+describe('the directive, and what it deliberately is not', () => {
+  it('is empty unless a mirror was detected — costs nothing normally', () => {
+    expect(buildMirrorReplyDirective(false)).toBe('')
+  })
+
+  it('demands a verdict and forbids another restatement', () => {
+    const d = buildMirrorReplyDirective(true)
+    expect(d).toMatch(/right or wrong/i)
+    expect(d).toMatch(/do NOT restate/i)
+    expect(d).toMatch(/do not ask them to tell you/i)
+  })
+
+  it('the route consults the detector on the PRIOR assistant turn', () => {
+    const ROUTE = readFileSync('src/app/api/learn/chat/route.ts', 'utf-8')
+    expect(ROUTE).toMatch(/isMirrorTurn\(/)
+    expect(ROUTE).toMatch(/buildMirrorReplyDirective\(true\)/)
+    expect(ROUTE).toMatch(/prior-turn-was-a-mirror/)
+  })
+})
