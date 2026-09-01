@@ -63,16 +63,34 @@ export interface TopicProgressEvidenceArgs {
 export interface TopicProgressDb {
   topicProgress: {
     updateMany(args: unknown): Promise<{ count: number }>
-    create(args: unknown): Promise<unknown>
+    /**
+     * ON CONFLICT DO NOTHING, and the reason it replaced `create` here.
+     *
+     * MEASURED (production runtime logs, 2026-09-01): once a topic is
+     * CERTIFIED, every subsequent turn on it ran updateMany (0 rows, the
+     * guard excludes CERTIFIED) -> create -> UNIQUE VIOLATION -> catch. The
+     * exception was always caught and the outcome was always the correct
+     * 'locked', so nothing was broken — but Prisma logs the failed statement
+     * itself, so a healthy lesson emitted
+     *
+     *   prisma:error Invalid `prisma.topicProgress.create()` invocation:
+     *   Unique constraint failed on the fields: (`userId`,`subjectSlug`,`topicSlug`)
+     *
+     * on EVERY turn. That is not free: it is a benign error printed beside
+     * real ones, and it cost real time twice in one day — I read it as a
+     * defect, investigated it, and found it working as designed both times.
+     * An error log should mean something is wrong.
+     *
+     * `createMany` with skipDuplicates reaches the identical decision without
+     * raising: count 1 means this call inserted the row, count 0 means it was
+     * already there. Every branch below is unchanged.
+     */
+    createMany(args: unknown): Promise<{ count: number }>
     findUnique(args: unknown): Promise<{ status: string } | null>
   }
 }
 
 const CERTIFIED = ['MASTERED', 'COMPLETED']
-
-function isUniqueViolation(err: unknown): boolean {
-  return (err as { code?: string } | null)?.code === 'P2002'
-}
 
 /**
  * Apply one graded-signal evidence event, exactly once.
@@ -113,27 +131,29 @@ export async function applyTopicProgressEvidence(
 
   // Zero rows matched. Three possible reasons, and they are distinguishable
   // only by looking: no row yet, this event already applied, or certified.
-  try {
-    await db.topicProgress.create({
-      data: {
-        userId, subjectSlug, topicSlug,
-        status: 'IN_PROGRESS',
-        masteryPct: score,
-        attempts: 1,
-        lastScore: score,
-        lastEvidenceMessageId: eventId,
-      },
-    })
-    return 'applied'
-  } catch (err) {
-    if (!isUniqueViolation(err)) throw err
-    // The row existed after all — either a concurrent writer created it
-    // between our update and our create, or the guard excluded it. Re-run the
-    // guarded update: it applies if the stamped marker is a DIFFERENT event,
-    // and stays a no-op if it is ours.
-    const second = await guardedUpdate()
-    if (second.count > 0) return 'applied'
-  }
+  // Insert only if absent. See TopicProgressDb.createMany for why this is not
+  // a `create` in a try/catch: the outcome is identical and this one does not
+  // print a caught unique violation to the error log on every turn of an
+  // already-certified topic.
+  const inserted = await db.topicProgress.createMany({
+    data: [{
+      userId, subjectSlug, topicSlug,
+      status: 'IN_PROGRESS',
+      masteryPct: score,
+      attempts: 1,
+      lastScore: score,
+      lastEvidenceMessageId: eventId,
+    }],
+    skipDuplicates: true,
+  })
+  if (inserted.count > 0) return 'applied'
+
+  // The row existed after all — either a concurrent writer created it between
+  // our update and our insert, or the guard excluded it. Re-run the guarded
+  // update: it applies if the stamped marker is a DIFFERENT event, and stays a
+  // no-op if it is ours.
+  const second = await guardedUpdate()
+  if (second.count > 0) return 'applied'
 
   const row = await db.topicProgress.findUnique({
     where: { userId_subjectSlug_topicSlug: { userId, subjectSlug, topicSlug } },

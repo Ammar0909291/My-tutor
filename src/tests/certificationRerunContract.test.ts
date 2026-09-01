@@ -117,17 +117,19 @@ describe('certification never downgrades a certified topic', () => {
   /**
    * Models the REAL database for a certified topic: the guarded updateMany
    * matches nothing (its `status: { notIn: CERTIFIED }` excludes the row), and
-   * the fallback create hits the unique constraint because the row does exist.
-   * An earlier draft let create() succeed, which is a state Postgres cannot be
-   * in — and it made the module look like it returned 'applied'.
+   * the fallback insert writes nothing because the row does exist.
+   * An earlier draft let the insert succeed, which is a state Postgres cannot
+   * be in — and it made the module look like it returned 'applied'.
+   *
+   * The insert is now `createMany({ skipDuplicates: true })`, so a conflict
+   * comes back as count 0 instead of a raised P2002. Same state, same answer,
+   * and no caught error printed to the log on every turn of a certified topic
+   * — see TopicProgressDb.createMany for the production evidence.
    */
   const dbWith = (status: string, calls: string[]): TopicProgressDb => ({
     topicProgress: {
       async updateMany() { calls.push('updateMany'); return { count: 0 } },
-      async create() {
-        calls.push('create')
-        throw Object.assign(new Error('Unique constraint failed'), { code: 'P2002' })
-      },
+      async createMany() { calls.push('createMany'); return { count: 0 } },
       async findUnique() { calls.push('findUnique'); return { status } },
     },
   })

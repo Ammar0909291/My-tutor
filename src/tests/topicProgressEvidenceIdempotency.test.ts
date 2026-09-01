@@ -67,12 +67,21 @@ function store(seed?: Partial<Row>) {
         }
         return { count }
       },
-      async create({ data }: any) {
-        if (rows.some((r) => match(r, data))) {
-          throw Object.assign(new Error('Unique constraint failed'), { code: 'P2002' })
+      // ON CONFLICT DO NOTHING — what `createMany({ skipDuplicates: true })`
+      // compiles to. Models the real database exactly as the previous `create`
+      // fake did; the only difference is that a conflict is REPORTED as
+      // count 0 rather than raised, which is the whole point of the change
+      // (see TopicProgressDb.createMany for the production log evidence).
+      async createMany({ data, skipDuplicates }: any) {
+        expect(skipDuplicates).toBe(true)
+        const rowsIn = Array.isArray(data) ? data : [data]
+        let count = 0
+        for (const d of rowsIn) {
+          if (rows.some((r) => match(r, d))) continue
+          rows.push({ ...d })
+          count++
         }
-        rows.push({ ...data })
-        return data
+        return { count }
       },
       async findUnique({ where }: any) {
         const w = where.userId_subjectSlug_topicSlug
