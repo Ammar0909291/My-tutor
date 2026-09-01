@@ -244,6 +244,14 @@ describe('structural guard — the harness fold must cover the route fold', () =
     strategyUsed:             'server-selected strategy id, not visible in the conversation text',
     signalConfidence:         'SIGNAL tag confidence, not recorded in a transcript',
     signalVerificationStatus: 'produced by the signal-verification subsystem at runtime',
+    unauthoredKey:            'whether the graded item carried an AUTHORED answer key is a property '
+                            + 'of WHICH ASSET was served (TutorMCQ.assetId), not of the conversation '
+                            + 'text — the same question grades identically either way, which is '
+                            + 'exactly the property the fix ends for certification. ReplayTurn '
+                            + 'carries learner/tutor/signalCorrect only, and guessing authorship '
+                            + 'from the wording of a stem would be the keyword hack this harness '
+                            + 'exists to catch. Give ReplayTurn an `authoredKey` flag and delete '
+                            + 'this entry to replay it.',
     degradedTurn:             'AI-provider availability (Message.provider), not a property of the '
                             + 'conversation text; ReplayTurn carries learner/tutor/signalCorrect only, '
                             + 'and inferring an outage by matching the template wording would be the '

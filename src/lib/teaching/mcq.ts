@@ -110,6 +110,26 @@ export function parseMcqTag(text: string): { mcq: TutorMCQ | null; cleanText: st
 }
 
 /**
+ * IS THIS ITEM'S ANSWER KEY ONE THE SYSTEM AUTHORED?
+ *
+ * `assetId` is already the exact discriminator and this module says so:
+ * `gateAssessment.probeToMcq` is "the ONLY writer of TutorMCQ.assetId — a
+ * model-parsed tag has no asset and must stay anonymous", and
+ * `writePendingQuestion` persists it "conditionally so a model-generated
+ * question stores exactly the shape it always did — the row stays anonymous,
+ * which is the contract". `findBestProbe` reads it straight off the
+ * AssetIdentity row, so an authored probe always has one.
+ *
+ * Until now nothing in grading consulted it — this module's own note on the
+ * field says "an authored and an anonymous copy of the same question grade
+ * identically". That is the property this predicate exists to end, for
+ * CERTIFICATION only. See the call site in route.ts for the measured failure.
+ */
+export function probeKeyIsAuthored(mcq: TutorMCQ | null | undefined): boolean {
+  return typeof mcq?.assetId === 'string' && mcq.assetId.trim() !== ''
+}
+
+/**
  * THE QUESTION AND ITS CHOICES, MADE PART OF DURABLE HISTORY.
  *
  * `parseMcqTag` strips the raw `<!--MCQ-->` tag out of the tutor's text —

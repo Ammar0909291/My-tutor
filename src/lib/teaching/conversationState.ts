@@ -208,6 +208,12 @@ export interface ConversationState {
   /** Accumulates signal-verification flags across the session. A high
    *  count reduces trust in the SIGNAL and is visible in telemetry. */
   signalContradictions: number
+  /** Graded answers this session whose ANSWER KEY the system did not author —
+   *  the model wrote the question, the options AND the `correct=` index.
+   *
+   *  Read by `masteryVerifiedStrict` for one purpose: to refuse its legacy
+   *  fallback. It is NOT a mastery counter and must never become one. */
+  unauthoredKeyGrades: number
   /** Counts turns where the server-decided move disagrees with what the
    *  LLM actually rendered (e.g., decided 'ask' but no question appeared). */
   parityViolations: number
@@ -253,6 +259,7 @@ export function initialConversationState(conceptId: string | null): Conversation
     verifiedCorrectAtCheck: 0,
     verifiedCorrectAtPractice: 0,
     signalContradictions: 0,
+    unauthoredKeyGrades: 0,
     parityViolations: 0,
     fillerRepairStreak: 0,
   }
@@ -431,6 +438,10 @@ export interface TurnEvidence {
    *  'SUSPICIOUS' or 'CONTRADICTED', it counts toward regular mastery
    *  (phase advancement) but NOT strict mastery (completion authority). */
   signalVerificationStatus?: 'CLEAN' | 'SUSPICIOUS' | 'CONTRADICTED'
+  /** True when THIS turn's correctness came from grading against an answer key
+   *  the model invented rather than one the system authored. See
+   *  `probeKeyIsAuthored`. */
+  unauthoredKey?: boolean
   /** True when the server-decided move disagrees with what the LLM rendered
    *  (e.g., decided 'ask' but response had no question). */
   parityViolation?: boolean
@@ -1017,6 +1028,14 @@ export function advanceConversationState(
      * predates this field starts at zero rather than NaN.
      */
     next.correctAnswersTotal = (prev.correctAnswersTotal ?? 0) + 1
+
+    // AN INVENTED ANSWER KEY IS COUNTED, NEVER CREDITED. Recorded here so
+    // `masteryVerifiedStrict` can tell "this session has no verified evidence
+    // because it predates the feature" (fall back) from "this session has no
+    // verified evidence because every key was invented" (do not).
+    if (evidence.unauthoredKey === true) {
+      next.unauthoredKeyGrades = (prev.unauthoredKeyGrades ?? 0) + 1
+    }
 
     const verified = evidence.signalVerificationStatus === 'CLEAN' || evidence.signalVerificationStatus === undefined
     switch (prev.phase) {

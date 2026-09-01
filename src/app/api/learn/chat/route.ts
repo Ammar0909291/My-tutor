@@ -5159,6 +5159,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // SUSPICIOUS signal still drives the teaching flow but is excluded
       // from strict mastery (completion authority).
       let signalVerificationStatusHoisted: 'CLEAN' | 'SUSPICIOUS' | 'CONTRADICTED' = 'CLEAN'
+      let unauthoredKeyGradeHoisted = false
       if (teachingSignal && teachingSignal.correctness !== undefined) {
         try {
           const { verifySignal, resolveContradiction } = await import('@/lib/teaching/signalVerification')
@@ -5177,6 +5178,57 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             teachingSignal = resolveContradiction(teachingSignal, verification)
           }
         } catch { /* non-fatal — fall through with CLEAN */ }
+      }
+
+      // AN INVENTED ANSWER KEY CANNOT CERTIFY MASTERY.
+      //
+      // MEASURED live on 2026-09-01, real account, phys.mech.friction, as a
+      // learner. The tutor served this as a tappable graded question:
+      //
+      //   "A 5 kg block on a 30° incline, μ_s = 0.5. Maximum static friction?"
+      //    A) 5 N   B) 12.5 N   C) 25 N   D) 49 N      keyed answer: B
+      //
+      // N = mg·cos30 = 42.4 N, so f_max = μN = 21.2 N. The keyed 12.5 is
+      // μ·mg·**sin**30 — the down-slope component used where the normal force
+      // belongs — and the correct answer is not among the four options at all.
+      // The item does not exist as an authored asset: the model wrote the
+      // question, the options AND the `correct=` index. `gradeMcqAnswer` reads
+      // `correctIndex` as ground truth and would have marked a correct learner
+      // wrong, then written that into their permanent record.
+      //
+      // route.ts already names this danger one screen up, where it prefers the
+      // gate's probe over a model tag: taking the model's "would put an
+      // unreviewed item at the exact rung where a wrong answer key costs the
+      // learner their progress." That preference only helps when the gate HAS
+      // a probe. When it has none, `mcqParse.mcq` is served and graded, which
+      // is the hole this closes.
+      //
+      // SUSPICIOUS, NOT SUPPRESSED, and the distinction is the whole design.
+      // The existing verification layer already means exactly this — "still
+      // drives the teaching flow but is excluded from strict mastery
+      // (completion authority)" — so the lesson keeps moving, the learner
+      // still gets an answer, and only CERTIFICATION is withheld. Suppressing
+      // the grade instead would leave a learner who just answered staring at
+      // silence, which is a defect of its own.
+      //
+      // WHAT THIS DOES NOT FIX, stated rather than implied: with a wrong key
+      // the learner is still told "Correct!" or "Not quite" wrongly on that
+      // turn. Fixing that means verifying the key, which means solving the
+      // physics. This makes the RECORD honest, not the feedback.
+      //
+      // Never upgrades: a CONTRADICTED signal stays CONTRADICTED.
+      if (mcqGradedThisTurn && pendingMcqHoisted) {
+        const { probeKeyIsAuthored } = await import('@/lib/teaching/mcq')
+        if (!probeKeyIsAuthored(pendingMcqHoisted)) {
+          unauthoredKeyGradeHoisted = true
+          if (signalVerificationStatusHoisted === 'CLEAN') signalVerificationStatusHoisted = 'SUSPICIOUS'
+          console.warn('[mcq-grade] ' + JSON.stringify({
+            event: 'unauthored-key-not-certifying',
+            conceptId: resolvedConceptId ?? null,
+            asked: pendingMcqHoisted.question.slice(0, 70),
+            correct: mcqGradedThisTurn.correct,
+          }))
+        }
       }
 
       // ANSWERABLE-TURN EVIDENCE GUARD (see answerableTurn.ts).
@@ -6480,6 +6532,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               dontKnowSignal: isDontKnowSignal(recoveryKeyHoisted),
               learnerIssuedDirective: recoveryKeyHoisted === 'too_many_questions',
               signalVerificationStatus: signalVerificationStatusHoisted,
+              // Counted, never credited — see the downgrade above.
+              unauthoredKey: unauthoredKeyGradeHoisted,
               parityViolation: parityViolationThisTurn,
               // RS P-3: an outage template taught nothing, so it must not be
               // folded as a give. See TurnEvidence.degradedTurn.

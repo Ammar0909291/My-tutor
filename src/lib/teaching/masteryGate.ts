@@ -62,7 +62,20 @@ export function masteryVerifiedStrict(state: ConversationState | null): boolean 
   if (!state) return false
   const hasVerifiedCounters = (state.verifiedCorrectAtCheck ?? 0) > 0 || (state.verifiedCorrectAtPractice ?? 0) > 0
   const hasContradictions = (state.signalContradictions ?? 0) > 0
-  if (!hasVerifiedCounters && !hasContradictions) {
+  // THE LEGACY FALLBACK MUST NOT LAUNDER AN INVENTED ANSWER KEY.
+  //
+  // The fallback below exists for state persisted before verified counters
+  // existed. A session graded entirely against model-invented keys reaches it
+  // by a different road — zero verified counters, zero contradictions — and
+  // would then certify on the plain counters, defeating the whole point of
+  // excluding those grades. Measured on this exact shape while writing the
+  // fix, before it shipped.
+  //
+  // A session that has RECORDED an unauthored grade is demonstrably not a
+  // legacy session, since the field is being written, so declining the
+  // fallback here cannot reopen the case the fallback was written for.
+  const hasUnauthoredKeys = (state.unauthoredKeyGrades ?? 0) > 0
+  if (!hasVerifiedCounters && !hasContradictions && !hasUnauthoredKeys) {
     return masteryVerified(state)
   }
   const vCheck = state.verifiedCorrectAtCheck ?? 0
