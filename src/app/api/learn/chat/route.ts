@@ -4603,6 +4603,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 cardServed: already,
                 correctAtCheck: conversationStateHoisted?.correctAtCheck ?? 0,
                 correctAtPractice: conversationStateHoisted?.correctAtPractice ?? 0,
+                // A correct answer at GUIDE moves no mastery counter by
+                // design, so the two above cannot see it. See the field's
+                // note in RemediationWindowInput.
+                correctAnswersTotal: conversationStateHoisted?.correctAnswersTotal ?? 0,
               })
               if (remediationTurn || holding) remediationSource = 'CURATED_CARD'
               if (remediationTurn && already) {

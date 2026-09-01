@@ -217,3 +217,86 @@ describe('a held turn that teaches past the card is rejected', () => {
     expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(4)
   })
 })
+
+/**
+ * A CORRECT ANSWER DID NOT RELEASE THE HOLD, AND THE CARD WAS RE-SERVED OVER
+ * THE TOP OF IT.
+ *
+ * MEASURED (phys.mech.friction, 2026-09-01, real account, studied as a
+ * learner). The learner answered an AUTHORED probe correctly —
+ * `[mcq-grade] { chosen: 0, correct: true }` — and the reply they received was
+ * the curated card, verbatim, for the second time in three turns:
+ *
+ *   [remediation-floor] { heldOnCard: true, violation: 'went-beyond-card' }
+ *   [remediation-card]  { remediationSource: 'CURATED_CARD', mode: 'hold' }
+ *   [remediation-floor] repaired { accepted: false, usedHeldCard: true }
+ *
+ * The server REPLACED the model's turn with the held card, on top of a
+ * correct answer. From the learner's seat: answer right, get the same
+ * paragraph you were given two turns ago, with no acknowledgement.
+ *
+ * WHY THE HOLD DID NOT RELEASE. The window read only the two mastery
+ * counters, and that answer was given at GUIDE — where the ladder advances
+ * the rung and credits NO counter, by design, because hollow-advancement
+ * protection lives at the gates. `correctAtCheck + correctAtPractice` stayed
+ * 0, so the window stayed open while the learner was demonstrably not stuck.
+ *
+ * `correctAnswersTotal` exists for exactly this question, and its own comment
+ * describes the identical dead-end for a different reader: "a learner who
+ * answers correctly at GUIDE advances the ladder, earns no gate credit BY
+ * DESIGN, and is then denied the very extension written for them because
+ * their credit is zero."
+ */
+describe('the hold releases on ANY graded-correct answer', () => {
+  const held = (over: Record<string, number> = {}) => remediationWindowOpen({
+    cardServed: true, correctAtCheck: 0, correctAtPractice: 0, ...over,
+  })
+
+  it('the measured session: correct at GUIDE, no counter moved — now released', () => {
+    expect(held({ correctAnswersTotal: 1 })).toBe(false)
+  })
+
+  it('and stayed open before the fix, which is the defect', () => {
+    // correctAtCheck + correctAtPractice === 0 was the whole test.
+    expect(held({ correctAnswersTotal: 0 })).toBe(true)
+    expect(held()).toBe(true)
+  })
+
+  it('a gate credit still closes it, exactly as before', () => {
+    expect(held({ correctAtCheck: 1 })).toBe(false)
+    expect(held({ correctAtPractice: 1 })).toBe(false)
+  })
+
+  it('a learner who has answered nothing right is still held', () => {
+    // The documented intent survives: "you do not walk past a concept nobody
+    // has shown they hold."
+    expect(held({ correctAnswersTotal: 0 })).toBe(true)
+  })
+
+  it('a snapshot predating the field behaves exactly as before', () => {
+    expect(remediationWindowOpen({ cardServed: true, correctAtCheck: 0, correctAtPractice: 0 })).toBe(true)
+  })
+
+  it('a malformed count is not evidence, and cannot release a hold', () => {
+    expect(held({ correctAnswersTotal: Number.NaN })).toBe(true)
+    expect(held({ correctAnswersTotal: -3 })).toBe(true)
+    expect(remediationWindowOpen({
+      cardServed: true, correctAtCheck: 0, correctAtPractice: 0,
+      correctAnswersTotal: 'lots' as unknown as number,
+    })).toBe(true)
+  })
+
+  it('an unserved card is still not a hold', () => {
+    expect(held({ correctAnswersTotal: 0 } as never) && false).toBe(false)
+    expect(remediationWindowOpen({
+      cardServed: false, correctAtCheck: 0, correctAtPractice: 0, correctAnswersTotal: 0,
+    })).toBe(false)
+  })
+})
+
+describe('the route passes the field it already has', () => {
+  it('reads correctAnswersTotal from conversation state', () => {
+    const ROUTE = require('fs').readFileSync('src/app/api/learn/chat/route.ts', 'utf-8') as string
+    expect(ROUTE).toMatch(/correctAnswersTotal: conversationStateHoisted\?\.correctAnswersTotal \?\? 0/)
+  })
+})

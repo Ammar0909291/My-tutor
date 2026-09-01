@@ -5827,6 +5827,41 @@ export interface RemediationWindowInput {
   cardServed: boolean
   correctAtCheck: number
   correctAtPractice: number
+  /**
+   * EVERY graded-correct answer this concept, at whatever rung it was given.
+   *
+   * MEASURED (phys.mech.friction, 2026-09-01, real account, studied as a
+   * learner). The learner answered an authored probe CORRECTLY —
+   * `[mcq-grade] chosen: 0, correct: true` — and the reply they received was
+   * the curated card, verbatim, for the second time in three turns:
+   *
+   *   [remediation-floor] { heldOnCard: true, violation: 'went-beyond-card' }
+   *   [remediation-card]  { remediationSource: 'CURATED_CARD', mode: 'hold' }
+   *   [remediation-floor] repaired { accepted: false, usedHeldCard: true }
+   *
+   * The server REPLACED the turn with the held card, over the top of a
+   * correct answer.
+   *
+   * WHY THE HOLD DID NOT RELEASE: it read only the two mastery counters, and
+   * that answer was given at GUIDE, where the ladder advances the rung and
+   * credits no counter — BY DESIGN, because hollow-advancement protection
+   * lives at the gates. So `correctAtCheck + correctAtPractice` stayed 0 and
+   * the window stayed open while the learner was demonstrably not stuck.
+   *
+   * `correctAnswersTotal` exists for exactly this question, and its own
+   * documentation describes this identical dead-end for a DIFFERENT reader:
+   * "a learner who answers correctly at GUIDE advances the ladder, earns no
+   * gate credit BY DESIGN, and is then denied the very extension written for
+   * them because their credit is zero." Same trap, one function over.
+   *
+   * Reading it here cannot weaken the mastery bar: this window gates whether
+   * a card is re-served, never whether a lesson certifies. The gates still
+   * read only the two counters, untouched.
+   *
+   * Optional, defaulting to 0, so a snapshot written before the field existed
+   * behaves exactly as before.
+   */
+  correctAnswersTotal?: number
 }
 
 export function remediationWindowOpen(input: RemediationWindowInput): boolean {
@@ -5837,7 +5872,14 @@ export function remediationWindowOpen(input: RemediationWindowInput): boolean {
     // A counter that cannot be read is not evidence of confusion — it is no
     // evidence at all, and a hold must not open on a malformed snapshot.
     if (!Number.isFinite(check) || !Number.isFinite(practice)) return false
-    return check + practice === 0
+    if (check + practice > 0) return false
+    // ANY graded-correct answer closes the window, at whatever rung. See
+    // `correctAnswersTotal` above for the measured failure this repairs.
+    // Read defensively: a malformed value is not evidence of anything, and
+    // must not close a hold that should stay open.
+    const total = input.correctAnswersTotal
+    if (typeof total === 'number' && Number.isFinite(total) && total > 0) return false
+    return true
   } catch {
     return false
   }
