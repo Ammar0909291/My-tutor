@@ -459,3 +459,52 @@ describe('one-list only fires on a CONFIRMED stage name', () => {
     expect(stripScaffoldHeadings(t).text).toBe(t)
   })
 })
+
+/**
+ * KNOWN LIMIT — pinned so it is a DECISION on record, not an accident.
+ *
+ * Production, phys.mech.friction, opening turn, 2026-09-01, on the deploy that
+ * shipped the one-list rule. This is the whole scaffold that survived:
+ *
+ *   ### 1. A sliding book on a table
+ *   ### 2. The everyday situation
+ *
+ * Nothing was stripped, and the runtime log for that turn carries no
+ * `stage-labels-stripped` line. Every shape was RIGHT to decline: two headings
+ * numbered 1..2 is a contiguous self-numbered run, and neither title is a
+ * stage name, so the one-list rule had no confirmed label to key on.
+ *
+ * A two-heading paraphrased fragment is textually indistinguishable from a
+ * tutor's own "1. Setup / 2. Method". Widening to "any numbered heading" would
+ * strip real structure, and nothing in this codebase says a tutor may not use
+ * headings. The next move is the output verifier, not a fifth pattern.
+ */
+describe('KNOWN LIMIT: a two-heading paraphrased fragment is not caught', () => {
+  const LIVE_SURVIVOR = [
+    '### 1. A sliding book on a table  ',
+    'Imagine you push a paperback across a desk. The force that slows it is friction.',
+    '',
+    '### 2. The everyday situation  ',
+    'That same force is at work whenever you walk on a floor or drive a car.',
+  ].join('\n')
+
+  it('is left untouched — asserted as the current, understood behaviour', () => {
+    const r = stripScaffoldHeadings(LIVE_SURVIVOR)
+    expect(r.removed).toEqual([])
+    expect(r.text).toBe(LIVE_SURVIVOR)
+  })
+
+  it('and is indistinguishable from a tutor’s own two-part structure', () => {
+    // The reason it cannot be fixed with another text rule: this passes every
+    // test the survivor above does.
+    const legitimate = '### 1. Setup\nA block rests on a table.\n\n### 2. Method\nPush it slowly and watch.'
+    expect(stripScaffoldHeadings(legitimate).removed).toEqual([])
+  })
+
+  it('adding a third, out-of-run heading DOES make it detectable', () => {
+    // Not a workaround — just the boundary, so the limit is precise: the
+    // signal needs either a hole in the numbering or one confirmed stage name.
+    const withHole = `${LIVE_SURVIVOR}\n\n### 8. Quick check\nWhat do you notice?`
+    expect(stripScaffoldHeadings(withHole).removed).toHaveLength(3)
+  })
+})

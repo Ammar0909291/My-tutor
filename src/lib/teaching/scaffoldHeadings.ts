@@ -224,6 +224,34 @@ function isStageLabel(text: string): boolean {
  * It is deliberately blind to what the headings SAY. That is the point — it is
  * the half of the problem the name list can never cover.
  */
+// ── KNOWN LIMIT, MEASURED — a short paraphrased fragment is not detectable ──
+//
+// Production, phys.mech.friction, opening turn, 2026-09-01, on the deploy that
+// shipped the one-list rule. The whole scaffold that survived was:
+//
+//   ### 1. A sliding book on a table
+//   ### 2. The everyday situation
+//
+// Nothing was stripped, and every shape was RIGHT to decline by its own rule:
+// two headings numbered 1..2 is a contiguous self-numbered run, and neither
+// title is a stage name, so the one-list rule had no confirmed label to key
+// on. The runtime log for that turn carries no `stage-labels-stripped` line at
+// all.
+//
+// This is a limit of the approach, not a bug in it. "A sliding book on a
+// table" and "The everyday situation" are perfectly reasonable section titles;
+// textually a two-heading paraphrased fragment of the prompt's list is
+// indistinguishable from a tutor's own "1. Setup / 2. Method". Widening to
+// "any numbered heading in a lesson turn" would strip real structure, and this
+// codebase has no rule saying a tutor may not use headings — inventing one on
+// a single transcript is not a fix.
+//
+// FOUR FORMAT VARIATIONS IN A WEEK have now escaped a text-shape rule here and
+// elsewhere: paraphrased MCQ stems, paraphrased heading words, emoji keycap
+// digits, and now a two-heading fragment. The next move on scaffold leakage is
+// not a fifth pattern — it is the output verifier, which is built, correct and
+// switched off (see beginnerFormulaVerifier.test.ts). Recorded so the next
+// session does not re-derive this and reach for another regex.
 const NUMBERED_HEADING_RE = /^\s{0,3}#{1,6}\s+(\d{1,2})[.)]\s+(.+?)\s*#*\s*$/
 
 interface NumberedHeading { index: number; number: number; text: string }
