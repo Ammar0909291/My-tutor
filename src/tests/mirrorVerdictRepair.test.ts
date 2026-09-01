@@ -134,6 +134,27 @@ describe('D. the answer key is handled exactly as the gate handles it', () => {
 })
 
 describe('E. the route wires it with the gate\'s own derivation', () => {
+  it('repairs BEFORE contentForHistory, so response and transcript agree', () => {
+    // The repair replaces the whole turn, so it matters enormously WHERE it
+    // sits. `contentForHistory` is built from `cleanText` and, per route.ts's
+    // own note, "feeds BOTH the persisted row below and the `text:` field of
+    // the response, so sweeping it once closes both channels and cannot leave
+    // them disagreeing".
+    //
+    // If this repair ever moved AFTER that line, the learner would see the
+    // corrected turn while the stored transcript kept the mirror — and the
+    // NEXT turn's mirror detector reads the stored message, so it would fire
+    // on a mirror that had already been repaired.
+    const { readFileSync } = require('node:fs')
+    const { join } = require('node:path')
+    const route = readFileSync(join(process.cwd(), 'src/app/api/learn/chat/route.ts'), 'utf8')
+    const repairAt = route.indexOf('repairMirrorWithVerdict({')
+    const historyAt = route.indexOf('const contentForHistory = appendMcqToHistoryText(cleanText')
+    expect(repairAt).toBeGreaterThan(-1)
+    expect(historyAt).toBeGreaterThan(-1)
+    expect(repairAt).toBeLessThan(historyAt)
+  })
+
   it('takes the option text from the pending MCQ it was graded against', () => {
     const { readFileSync } = require('node:fs')
     const { join } = require('node:path')
