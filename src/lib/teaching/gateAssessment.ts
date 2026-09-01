@@ -468,9 +468,27 @@ function withheldContinuation(
     : ''
   // The trailing '?' the caller stripped must not come back in through the
   // answer key, so a key that is itself a question is reported without it.
+  //
+  // AND THE KEY MAY ALREADY END IN A FULL STOP. MEASURED live
+  // (phys.mech.friction, 2026-09-01, disposable account, driven as a
+  // confidently-wrong learner). The authored option text ended in a period,
+  // and this template appended another:
+  //
+  //   "Not quite — the answer was: It doubles because the normal force
+  //    doubles.. Let me check your thinking with this."
+  //
+  // The sibling case one line up — a key that is itself a question — was
+  // already handled; terminal punctuation is the same class and was missed.
+  // Authored option texts are written by hand across six subjects, so whether
+  // one ends in a stop is not something this template can assume either way.
   return key.length > 0 && !key.includes('?')
-    ? `Not quite — the answer was: ${key}. ${tail}`
+    ? `Not quite — the answer was: ${endStopped(key)} ${tail}`
     : `Not quite. ${tail}`
+}
+
+/** The key with exactly one terminal stop, never two and never none. */
+function endStopped(key: string): string {
+  return /[.!…]$/.test(key) ? key : `${key}.`
 }
 
 /**
