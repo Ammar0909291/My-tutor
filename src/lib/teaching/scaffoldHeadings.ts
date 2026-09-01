@@ -138,6 +138,82 @@ function isStageLabel(text: string): boolean {
   return STAGE_NAMES.includes(t)
 }
 
+/**
+ * SHAPE 3 — THE NUMBERING GIVES IT AWAY WHEN THE WORDS DO NOT.
+ *
+ * MEASURED (production, phys.mech.friction, the opening turn from
+ * /api/learn/lesson-init, 2026-09-01, real account, studied as a learner):
+ *
+ *   ### 1. A familiar scene
+ *   ### 2. Where friction shows up
+ *   ### 7. When a formula helps
+ *   ### 8. Quick practice
+ *
+ * Every shape above needs the stage name to MATCH — and not one of these does.
+ * The model paraphrased all four, so `isStageLabel` returned false for each and
+ * the whole scaffold reached the learner on a deploy where the stripper was
+ * wired and working. Same failure mode the MCQ duplication had a day earlier:
+ * a model rewrites its own words freely, so any rule keyed on the words alone
+ * is one paraphrase from useless.
+ *
+ * ── THE SIGNAL, WHICH CARRIES NO WORDS AT ALL ───────────────────────────────
+ * Those numbers are 1, 2, 7, 8. FOUR headings, numbered up to EIGHT.
+ *
+ * THE RULE IS THAT SELF-NUMBERED HEADINGS RUN 1..n. A writer numbering their
+ * own sections starts at one and does not skip; numbering that does either was
+ * copied out of a longer list the reader cannot see — here, the EXPLANATION
+ * SEQUENCING LAW's eight steps. Stated as arithmetic over the DISTINCT numbers
+ * present: `max(number) > count(distinct numbers)`, with at least two headings.
+ *
+ * That single test catches both ways a subset shows itself, and measuring it
+ * is what made the second one explicit:
+ *   · HOLES   1, 2, 7, 8   — four headings, max 8
+ *   · OFFSET  2, 3, 4      — three headings, max 4, no hole but no 1 either
+ * The offset case is a deliberate positive, not a false one. A turn whose
+ * headings begin at 2 is continuing a sequence the learner was never shown,
+ * which is the same defect wearing different clothes.
+ *
+ * ── WHY THIS CANNOT EAT A REAL LESSON ───────────────────────────────────────
+ * A tutor writing "### 1. Setup / ### 2. Method / ### 3. Result" numbers 1..3
+ * across three headings — max 3, count 3 — and is untouched, as is every
+ * contiguous list from 1, however long. Two headings are required so a single
+ * stray "### 2. …" cannot trip it, and DISTINCT numbers are counted so a
+ * repeated "### 1." cannot inflate the count into a false negative. Only the
+ * heading LINES go: every word of teaching beneath them is kept, exactly as in
+ * shapes 1 and 2.
+ *
+ * It is deliberately blind to what the headings SAY. That is the point — it is
+ * the half of the problem the name list can never cover.
+ */
+const NUMBERED_HEADING_RE = /^\s{0,3}#{1,6}\s+(\d{1,2})[.)]\s+(.+?)\s*#*\s*$/
+
+interface NumberedHeading { index: number; number: number; text: string }
+
+function collectNumberedHeadings(lines: string[]): NumberedHeading[] {
+  const found: NumberedHeading[] = []
+  lines.forEach((line, index) => {
+    const m = NUMBERED_HEADING_RE.exec(line)
+    if (!m) return
+    found.push({ index, number: Number(m[1]), text: m[2].trim() })
+  })
+  return found
+}
+
+/**
+ * The heading indices to drop, or an empty set. Exported for the test that
+ * pins the arithmetic rather than the outcome.
+ */
+export function externallyNumberedHeadings(lines: string[]): Set<number> {
+  const found = collectNumberedHeadings(lines)
+  if (found.length < 2) return new Set()
+  const distinct = new Set(found.map((h) => h.number))
+  const highest = Math.max(...distinct)
+  // Self-numbered headings run 1..n. Anything else was numbered from a list
+  // the learner cannot see.
+  if (highest <= distinct.size) return new Set()
+  return new Set(found.map((h) => h.index))
+}
+
 export interface ScaffoldStripResult {
   text: string
   /** The labels removed, for logging. Empty when nothing changed. */
@@ -153,7 +229,20 @@ export function stripScaffoldHeadings(input: string): ScaffoldStripResult {
     const removed: string[] = []
     const out: string[] = []
 
-    for (const line of input.split('\n')) {
+    const lines = input.split('\n')
+    // Computed over the WHOLE turn before the line loop, because the tell is a
+    // property of the set of headings, not of any one line.
+    const externallyNumbered = externallyNumberedHeadings(lines)
+
+    for (let lineIndex = 0; lineIndex < lines.length; lineIndex += 1) {
+      const line = lines[lineIndex]
+      // Shape 3 — a heading numbered out of a longer, unseen list.
+      if (externallyNumbered.has(lineIndex)) {
+        const m = NUMBERED_HEADING_RE.exec(line)
+        removed.push(m ? m[2].trim() : line.trim())
+        continue
+      }
+
       // Shape 1 — a heading whose entire text is a stage label.
       const heading = line.match(/^\s{0,3}#{1,6}\s+(.+?)\s*#*\s*$/)
       if (heading && isStageLabel(heading[1])) {

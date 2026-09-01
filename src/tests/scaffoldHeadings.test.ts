@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { stripScaffoldHeadings } from '@/lib/teaching/scaffoldHeadings'
+import { stripScaffoldHeadings, externallyNumberedHeadings } from '@/lib/teaching/scaffoldHeadings'
 
 // Every case below is a verbatim excerpt from a live production session on the
 // real account, 2026-08-27, or a deliberate negative control.
@@ -182,5 +182,123 @@ describe('scaffold headings — what it must never touch', () => {
   it('is safe on empty and non-string input', () => {
     expect(stripScaffoldHeadings('').text).toBe('')
     expect(stripScaffoldHeadings(undefined as unknown as string).removed).toEqual([])
+  })
+})
+
+/**
+ * SHAPE 3 — THE NUMBERING GIVES IT AWAY WHEN THE WORDS DO NOT.
+ *
+ * MEASURED (production, phys.mech.friction, the opening turn from
+ * /api/learn/lesson-init, 2026-09-01, real account, studied as a learner) —
+ * on a deploy where this stripper was wired and working:
+ *
+ *   ### 1. A familiar scene
+ *   ### 2. Where friction shows up
+ *   ### 7. When a formula helps
+ *   ### 8. Quick practice
+ *
+ * Not one of those four is a stage name, so every name-matching shape above
+ * returned false and the whole scaffold reached the learner. The model
+ * PARAPHRASED the stage list — the same failure mode the MCQ duplication had a
+ * day earlier, and the same lesson: a rule keyed on the words is one
+ * paraphrase from useless.
+ *
+ * The numbers are the tell, and they carry no words at all: four headings
+ * numbered up to eight. Self-numbered headings run 1..n.
+ */
+describe('shape 3 — headings numbered out of a list the learner cannot see', () => {
+  const LIVE_OPENING = [
+    '**Lesson 22: Friction Forces**',
+    "Today we'll learn how friction works and what equations predict it.",
+    '### 1. A familiar scene',
+    'Picture a heavy book lying on a kitchen table. When you try to slide it, it resists.',
+    '',
+    '### 2. Where friction shows up',
+    "Every time you push a box across the floor you're dealing with friction.",
+    '',
+    '### 7. When a formula helps',
+    'If you need to calculate the friction force, use f = μN.',
+    '### 8. Quick practice',
+    '**Question:** A 3 kg box rests on a flat table, μ_s = 0.6.',
+  ].join('\n')
+
+  it('strips all four paraphrased headings', () => {
+    const r = stripScaffoldHeadings(LIVE_OPENING)
+    expect(r.removed).toEqual([
+      'A familiar scene', 'Where friction shows up', 'When a formula helps', 'Quick practice',
+    ])
+  })
+
+  it('keeps every word of teaching that was under them', () => {
+    const { text } = stripScaffoldHeadings(LIVE_OPENING)
+    expect(text).toContain('Picture a heavy book lying on a kitchen table')
+    expect(text).toContain("you're dealing with friction")
+    expect(text).toContain('use f = μN')
+    expect(text).toContain('A 3 kg box rests on a flat table')
+    expect(text).toContain('**Lesson 22: Friction Forces**')
+  })
+
+  it('is blind to what the headings SAY — that is the point', () => {
+    // The half of the problem the name list can never cover.
+    const nonsense = '### 1. Aaa\nAlpha teaching.\n### 6. Bbb\nBeta teaching.'
+    expect(stripScaffoldHeadings(nonsense).removed).toEqual(['Aaa', 'Bbb'])
+    expect(stripScaffoldHeadings(nonsense).text).toContain('Alpha teaching.')
+  })
+})
+
+describe('shape 3 leaves headings a tutor numbered themselves', () => {
+  it('1, 2, 3 across three headings is untouched', () => {
+    const t = '### 1. Setup\nA block on a table.\n### 2. Method\nPush it slowly.\n### 3. Result\nIt slips.'
+    expect(stripScaffoldHeadings(t).removed).toEqual([])
+    expect(stripScaffoldHeadings(t).text).toBe(t)
+  })
+
+  it('a long contiguous run from 1 is untouched, however long', () => {
+    const t = Array.from({ length: 8 }, (_, i) => `### ${i + 1}. Section ${i + 1}\nTeaching ${i + 1}.`).join('\n')
+    expect(stripScaffoldHeadings(t).removed).toEqual([])
+  })
+
+  it('a single stray numbered heading cannot trip it', () => {
+    // Two are required, so one odd heading is never enough.
+    const t = '### 2. Something\nTeaching under it.'
+    expect(stripScaffoldHeadings(t).removed).toEqual([])
+  })
+
+  it('a repeated number cannot inflate the count into a false negative', () => {
+    // Counting rows rather than DISTINCT numbers would make 1,1,2 look like
+    // "three headings, max 2" and wave it through.
+    const t = '### 1. A\nx.\n### 1. B\ny.\n### 2. C\nz.'
+    expect(stripScaffoldHeadings(t).removed).toEqual([])
+  })
+
+  it('unnumbered headings are untouched', () => {
+    const t = '### Friction\nFriction opposes motion.\n### Normal force\nThe surface pushes back.'
+    expect(stripScaffoldHeadings(t).text).toBe(t)
+  })
+})
+
+describe('shape 3 — the offset case is a deliberate positive', () => {
+  it('headings starting at 2 are stripped, and that is intended', () => {
+    // No hole, but no 1 either: a turn whose headings begin at 2 is continuing
+    // a sequence the learner was never shown. Same defect, different clothes.
+    // Recorded here as a decision rather than discovered later as a surprise.
+    const t = '### 2. Alpha\nA.\n### 3. Beta\nB.\n### 4. Gamma\nC.'
+    expect(stripScaffoldHeadings(t).removed).toEqual(['Alpha', 'Beta', 'Gamma'])
+    expect(stripScaffoldHeadings(t).text).toContain('A.')
+  })
+})
+
+describe('externallyNumberedHeadings — the arithmetic, pinned directly', () => {
+  const idx = (lines: string[]) => [...externallyNumberedHeadings(lines)].sort((a, b) => a - b)
+
+  it('1,2,7,8 over four headings fires', () => {
+    expect(idx(['### 1. a', '### 2. b', '### 7. c', '### 8. d'])).toEqual([0, 1, 2, 3])
+  })
+  it('1,2,3 does not', () => {
+    expect(idx(['### 1. a', '### 2. b', '### 3. c'])).toEqual([])
+  })
+  it('fewer than two headings never fires', () => {
+    expect(idx(['### 9. a'])).toEqual([])
+    expect(idx([])).toEqual([])
   })
 })
