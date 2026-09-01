@@ -682,10 +682,85 @@ export function dropAnswerableContent(text: string): string {
 
   const kept = scoped
     .split(/\n{2,}/)
-    .map((p) => p.trim())
-    .filter((p) => p.length > 0 && !askedAnswerableQuestion(p))
+    .map((p) => trimTrailingQuestions(p.trim()))
+    .filter((p) => p.length > 0)
 
   return kept.join('\n\n').trim()
+}
+
+/**
+ * KEEP THE TEACHING, DROP THE QUESTION — EVEN WHEN THEY SHARE A PARAGRAPH.
+ *
+ * This filter used to work at PARAGRAPH granularity: any paragraph containing
+ * an answerable question was discarded whole. Models routinely put the
+ * explanation and its question in ONE paragraph, so the explanation went with
+ * it. That is the "PARAGRAPH-scoped withhold" limitation recorded as an open
+ * item since Phase 3.
+ *
+ * MEASURED on four turns captured from live runs this session (physics,
+ * deployed app) — THREE lost every word of their teaching:
+ *
+ *   "The figure on your screen shows a block on a horizontal surface. A
+ *    downward arrow labeled mg represents the block's weight. Now, looking
+ *    at the diagram, which arrow is the friction force?"      -> "" (187ch)
+ *   "A concave mirror bulges away from you, so parallel rays converge at the
+ *    focus. What is the focal length of that mirror?"         -> "" (119ch)
+ *   "When you push the book gently... Which force acts first?"-> "" (210ch)
+ *
+ * Only the fourth, which put the question in its own paragraph, survived.
+ *
+ * The repair is the same shape already applied to the walk-back earlier in
+ * this session: trim TRAILING question sentences instead of dropping the whole
+ * unit. Trailing only — a question in the MIDDLE of a paragraph cannot be
+ * removed without risking prose that no longer reads ("Consider this: what
+ * happens? The answer is..."), so if anything answerable survives the trim the
+ * paragraph is discarded exactly as before. Conservative by construction: this
+ * can only ever keep MORE teaching than the previous behaviour, never less.
+ */
+function trimTrailingQuestions(paragraph: string): string {
+  if (paragraph.length === 0 || !askedAnswerableQuestion(paragraph)) return paragraph
+
+  const sentences = paragraph.split(/(?<=[.!?])\s+/).filter((x) => x.trim() !== '')
+  if (sentences.length <= 1) return ''
+
+  const kept = [...sentences]
+  while (kept.length > 0 && askedAnswerableQuestion(kept[kept.length - 1])) kept.pop()
+
+  // ── WHY TWO SENTENCES AND NOT ONE ───────────────────────────────────────
+  //
+  // A first version kept ANY remainder. The suite caught the regression it
+  // introduced: a content-free lead-in survived as the entire turn.
+  //
+  //   "Let me ask you something. What is the focal length of that mirror?"
+  //     -> "Let me ask you something."          (the whole turn, no question)
+  //   "Here's a quick check for you. Which force acts first?"
+  //     -> "Here's a quick check for you."
+  //
+  // `dropOrphanedLeadIn` does not catch these: it drops trailing lines ending
+  // in a COLON, and an announcement ending in a full stop slips past. Before
+  // this change they were removed for the wrong reason — the whole paragraph
+  // went — and the hand-off sentence took the turn instead, which was right.
+  //
+  // Telling ONE teaching sentence from ONE announcement needs a classifier
+  // ("let me ask", "here's a quick check", "now, looking at the diagram") and
+  // this session has repeatedly measured that inventing one on thin evidence
+  // does more harm than the gap it closes. Two or more surviving sentences is
+  // the discriminator that needs no vocabulary: an announcement is one
+  // sentence, teaching that shares a paragraph with its question is more.
+  //
+  // KNOWN COST, stated rather than discovered later: a SINGLE teaching
+  // sentence before a question is still dropped —
+  //   "A concave mirror bulges away from you, so parallel rays converge at
+  //    the focus. What is the focal length?"  -> ''
+  // That is 1 of the 3 measured live turns still unfixed, and it is the
+  // honest price of not regressing the lead-in case.
+  if (kept.length < 2) return ''
+
+  const remainder = kept.join(' ').trim()
+  // Anything answerable still in there means the question was not merely
+  // trailing; fall back to the original all-or-nothing behaviour.
+  if (remainder.length === 0 || askedAnswerableQuestion(remainder)) return ''
+  return remainder
 }
 
 /**
