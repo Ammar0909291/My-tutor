@@ -14,7 +14,7 @@
 
 import type { ConversationState } from './conversationState'
 import { evaluateConceptBudget, hasDemonstratedMastery } from './conceptBudget'
-import { masteryVerifiedStrict } from './masteryGate'
+import { launderedEvidence } from './masteryGate'
 import { safeConceptTitle } from '@/lib/curriculum/knowledgeGraph'
 
 export interface ConceptOutcome {
@@ -37,11 +37,6 @@ export interface ConceptOutcome {
  * No invented grades at all -> always false, so nothing changes for a lesson
  * the model did not write its own graded item into.
  */
-function launderedEvidence(state: ConversationState): boolean {
-  if ((state.unauthoredKeyGrades ?? 0) === 0) return false
-  return !masteryVerifiedStrict(state)
-}
-
 export function conceptOutcome(
   state: ConversationState,
   title?: string | null,

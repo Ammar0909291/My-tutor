@@ -932,6 +932,45 @@ export function buildUnreadExplanationBlock(): string {
   )
 }
 
+/**
+ * WAS THIS SESSION'S MASTERY GRADED AGAINST A KEY THE MODEL INVENTED?
+ *
+ * Moved here from lessonSummary.ts so ONE definition serves both readers. It
+ * had one reader — the permanent record — while `buildMasterySummary` below,
+ * under a header that literally says "one source of truth", reported
+ * `masteryVerified` instead. The two disagreed, and the learner saw both.
+ *
+ * MEASURED live (phys.mech.friction, 2026-09-01, disposable account). A
+ * learner answered four questions correctly and reached TRANSFER. In the SAME
+ * turn the payload said `mastery.verified: true` and the deterministic close
+ * said "Let's pause Friction Forces here for now. Worth another look later:
+ * Friction Forces." Reproduced offline against the real modules:
+ *
+ *   correctAtCheck 1   verifiedCorrectAtCheck 0
+ *   correctAtPractice 2   verifiedCorrectAtPractice 2
+ *   unauthoredKeyGrades 1
+ *   masteryVerified true / masteryVerifiedStrict false
+ *   conceptOutcome.status = 'needs_review'
+ *
+ * — the exact state shape conceptOutcome's own comment already records from
+ * an earlier run, so this is the documented case, not a new one.
+ *
+ * Which authority is right is NOT what this changes: the record's refusal
+ * stands, because it exists for a measured reason (an invented key that was
+ * WRONG once certified a lesson). What changes is that the payload may no
+ * longer claim more than the record will grant. Telling a learner "verified"
+ * and "worth another look later" in one breath is worse than either answer
+ * alone.
+ *
+ * Scoped exactly as before: with `unauthoredKeyGrades` at zero — every session
+ * where the model invented no graded item — this returns false and both
+ * readers behave byte-identically to before.
+ */
+export function launderedEvidence(state: ConversationState): boolean {
+  if ((state.unauthoredKeyGrades ?? 0) === 0) return false
+  return !masteryVerifiedStrict(state)
+}
+
 // ── Client-facing mastery summary (Bug 9/11 — one source of truth) ──────────
 
 export interface MasterySummary {
@@ -953,7 +992,9 @@ export function buildMasterySummary(
   opts: { completionSuppressed: boolean; gatePending: boolean },
 ): MasterySummary {
   return {
-    verified: masteryVerified(state),
+    // Never claims more than the permanent record will grant — see
+    // `launderedEvidence` above for the measured incoherence this closes.
+    verified: masteryVerified(state) && !launderedEvidence(state),
     phase: state.phase,
     checkCorrect: state.correctAtCheck,
     practiceCorrect: state.correctAtPractice,
