@@ -5342,7 +5342,48 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // from strict mastery (completion authority).
       let signalVerificationStatusHoisted: 'CLEAN' | 'SUSPICIOUS' | 'CONTRADICTED' = 'CLEAN'
       let unauthoredKeyGradeHoisted = false
-      if (teachingSignal && teachingSignal.correctness !== undefined) {
+
+      // ── VERIFICATION MAY NOT OVERRULE THE SERVER'S OWN ANSWER KEY ──────────
+      //
+      // Three lines up, the MCQ grade is described as winning over the tag
+      // "because ground truth beats self-report" — and then `verifySignal`
+      // cross-checked that ground truth against the MODEL'S PROSE and two
+      // heuristics, and `resolveContradiction` was allowed to overwrite it.
+      //
+      // MEASURED against the real modules, all three on a learner who picked
+      // the RIGHT option on an AUTHORED probe:
+      //
+      //   prose hedges ("Not quite — remember...")
+      //     -> CONTRADICTED, correctness FLIPPED true -> false. The learner
+      //        answered correctly and the fold's `failed` branch DEMOTES them.
+      //   short option text ("Static friction", 2 words, no digit)
+      //     -> SUSPICIOUS via bare-content-at-advanced-phase, verified counter
+      //        withheld. An MCQ answer is short BY CONSTRUCTION.
+      //   fast correct tap (<2s)
+      //     -> SUSPICIOUS via implausibly-fast-correct, verified counter
+      //        withheld. Answering quickly is what knowing the answer looks
+      //        like.
+      //
+      // Every one of those heuristics exists to catch the MODEL fabricating a
+      // correctness claim it was never entitled to make. When the SERVER holds
+      // the key, they are estimating a fact already known, and losing.
+      //
+      // SCOPE, deliberately narrow: this skips verification ONLY when the
+      // correctness came from `gradeMcqAnswer` resolving against an AUTHORED
+      // probe's stored `correctIndex`. A key the MODEL invented is not ground
+      // truth, so it still runs the full check and still cannot certify (see
+      // the unauthored-key block below, and the strict-counter guard in
+      // conversationState). A turn with no resolved MCQ grade is unchanged in
+      // every respect — that is the ordinary prose turn, where the heuristics
+      // are the only defence there is and they keep working.
+      const gradedAgainstServerKey = await (async () => {
+        if (!mcqGradedThisTurn || !pendingMcqHoisted) return false
+        if (mcqGradedThisTurn.correct === null || mcqGradedThisTurn.correct === undefined) return false
+        const { probeKeyIsAuthored } = await import('@/lib/teaching/mcq')
+        return probeKeyIsAuthored(pendingMcqHoisted)
+      })()
+
+      if (!gradedAgainstServerKey && teachingSignal && teachingSignal.correctness !== undefined) {
         try {
           const { verifySignal, resolveContradiction } = await import('@/lib/teaching/signalVerification')
           const lastAsstForLatency = learnSession.messages.find((m: { role: string }) => m.role === 'ASSISTANT')
