@@ -83,6 +83,11 @@ const OK: RemediationOutputCheck = { violation: null, reason: null }
 /** Normalised for comparison only — never for display. */
 const norm = (s: string) => s.trim().toLowerCase().replace(/\s+/g, ' ')
 
+/** Outside remediation/recovery/held turns, only a SUBSTANTIAL verbatim
+ *  repeat is a defect — see the note at check 0. The measured production
+ *  case was ~700 characters; a short acknowledgement must stay legal. */
+const UNSCOPED_REPEAT_FLOOR_CHARS = 200
+
 /**
  * The two conversation classes whose whole purpose is to re-teach. Read from
  * `classifyConversation`'s own vocabulary rather than re-detected from the
@@ -185,6 +190,55 @@ export function checkRemediationOutput(input: RemediationOutputInput): Remediati
     // approved account in production. Every other turn in the product returns
     // here untouched, as before.
     const heldText = typeof input.heldCardText === 'string' ? input.heldCardText : ''
+    // ── 0. REPEATING THE PREVIOUS TURN IS NEVER ACCEPTABLE ─────────────────
+    //
+    // This check used to sit BELOW the early return on the next line, so it ran
+    // only on remediation, recovery and card-held turns. Every ordinary turn
+    // skipped it.
+    //
+    // MEASURED (production, phys.mech.friction, 2026-08-31, studied as a
+    // learner on a real account). The learner asked whether the coefficient of
+    // friction can exceed 1. Three consecutive turns returned the SAME
+    // ~700-character paragraph, word for word — including the turn answering
+    // "you didn't answer my question about mu being 1 — i asked that twice
+    // now." None was a remediation or recovery turn, because the learner was
+    // asking a factual question rather than voicing confusion, so this floor
+    // never ran. Session A had already measured verbatim repetition in 65% of
+    // sessions, reduced to 31%; this is the hole the remaining share fell
+    // through.
+    //
+    // Repeating the previous turn verbatim cannot be correct on ANY turn type.
+    // The other two checks below stay scoped as they were: "the whole turn was
+    // a question" and "it went beyond the approved card" are both legitimate on
+    // an ordinary turn, and only mean something in their own contexts.
+    //
+    // THE LENGTH FLOOR IS WHAT MAKES THIS SAFE TO RUN EVERYWHERE. The test is
+    // strict containment — the entire new reply must already appear inside the
+    // previous one — which on a remediation turn is conclusive. On an ordinary
+    // turn short replies would be false positives: "Correct!" is legitimately
+    // contained in a previous turn that also said "Correct!", and confirming
+    // two right answers in a row is good teaching, not repetition. So outside
+    // the three scoped turn types the repeat must be SUBSTANTIAL — a repeated
+    // explanation, not a repeated acknowledgement. The production case was
+    // ~700 characters; the floor is 200.
+    {
+      const prev0 = typeof input.previousAssistantText === 'string' ? input.previousAssistantText : ''
+      const text0 = typeof input.text === 'string' ? input.text : ''
+      const scoped = input.remediationTurn || input.recoveryTurn || heldText.length > 0
+      const here0 = norm(text0)
+      if (
+        prev0.trim().length > 0 && here0.length > 0
+        && (scoped || here0.length >= UNSCOPED_REPEAT_FLOOR_CHARS)
+        && norm(prev0).includes(here0)
+      ) {
+        return {
+          violation: 'repeats-previous-turn',
+          reason: 'the reply is contained word-for-word in the previous turn — the one the '
+            + 'learner has just said did not land',
+        }
+      }
+    }
+
     if (!input.remediationTurn && !input.recoveryTurn && heldText.length === 0) return OK
     const text = typeof input.text === 'string' ? input.text : ''
     // An empty draft is a different failure with a different owner (the
