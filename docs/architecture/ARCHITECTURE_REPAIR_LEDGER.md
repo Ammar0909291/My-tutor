@@ -88,17 +88,44 @@ yet observed live.
 
 ---
 
-## Ranked remaining targets (from OWNERSHIP_CENSUS_2026-09-01)
+## Slice 2 — acknowledgement predicates (census target #2) — DONE 2026-09-01
 
-2. **"is this a substantive learner contribution?"** — 2 owners
-   (`isBareAcknowledgement` masteryGate.ts, `isLowSignalAcknowledgement`
-   conversationState.ts), measured 31% disagreement on 35 real utterances, in
-   BOTH directions ("thanks" bare-not-lowsignal; "yeah that makes sense"
-   lowsignal-not-bare). 8 consumers across route.ts / recoveryGuard /
-   conversationReader / masteryGate. This is "the defect class fixed one
-   utterance at a time." NEXT — but each of the 8 consumers must be read before
-   merge (they gate different things: whether the turn is graded, completion-tag
-   strip, CUE intent, distress registration).
+**Decision investigated**: "is this a substantive learner contribution?"
+
+**Determination: a merge is NOT justified — the semantics are genuinely
+different, and the disagreement is already masked at every high-stakes site.**
+Full investigation: `docs/architecture/ACKNOWLEDGEMENT_PREDICATE_OWNERSHIP.md`.
+
+- `isBareAcknowledgement` (strict, whole-message exact) and
+  `isLowSignalAcknowledgement` (looser, strip-then-match) answer DIFFERENT
+  questions. Measured disagreement over the census corpus: bare-ONLY=2
+  ("thanks", "done"), low-ONLY=11 ("yeah that makes sense", "i follow", "right", …).
+- The high-stakes decisions already have ONE owner — the ladder predicate:
+  grading-null reads `isLowSignalAcknowledgement` (a prior session switched it
+  here to end a demotion bug); ladder advancement reads it; `serveFromMemory`
+  ANDs both `answersProseQuestion` and `ackToQuestion`, and the ladder predicate
+  catches every low-ONLY receipt, so it **masks** the strict predicate's miss —
+  the outcome is identical whichever fires. Verified (`scratchpad/ack_mask.ts`).
+- A merge would REGRESS genuinely ambiguous tokens ("right" = receipt OR
+  affirmative; "done" likewise) — trading a masked, harmless raw-predicate
+  difference for a real misclassification. The mission's own anti-patch-loop rule.
+
+**Enforcement** (`acknowledgementOwnership.test.ts`, no runtime change):
+- pins that the grading-null gate reads the ladder predicate, not the strict one
+  (cannot re-fork back — the exact regression the demotion fix closed);
+- pins the masking invariant — every `serveFromMemory` expression ANDs
+  `ackToQuestion` alongside `answersProse`, so dropping it (believing the prose
+  detector covers receipts) is caught;
+- characterizes the two predicates as DISTINCT so no reader assumes
+  interchangeability.
+
+**Contrast with slice 1**: mastery HAD a reachable, live-reproduced contradiction
+(record said mastered, gate refused) → one-owner merge was the fix. Acknowledgement
+does NOT (the ladder predicate already masks the disagreement) → pin, don't merge.
+Same methodology (measure reachable harm through the real consumers), opposite
+conclusion — which is the point of measuring rather than assuming.
+
+## Ranked remaining targets (from OWNERSHIP_CENSUS_2026-09-01)
 
 3. learner-request / visual-request — 5 predicates, disagreement not yet
    measured.
@@ -116,6 +143,12 @@ authoritative boundary each compensates for.
 
 ## Exact next action
 
-Target #2: read all 8 consumers of the two acknowledgement predicates, determine
-per-consumer whether the union semantics are safe, then consolidate to one owner
-with a corpus-driven agreement test. Do not blindly merge.
+Target #3: learner-request / visual-request — 5 predicates named by the census
+(`detectLearnerRequest`, `requestedVisualForm`, `isExplicitTopicRequest`,
+`decideVisualNeed`, `isTopicQuestion`), disagreement NOT yet measured. Apply the
+same methodology: measure disagreement over a real-utterance corpus, trace each
+consumer, find any REACHABLE contradiction driven through the real fold, and
+consolidate only where a live defect exists (slice 1 pattern) vs pin the existing
+reconciliation (slice 2 pattern). Then Census A: classify the 27 post-hoc
+`cleanText =` rewrite sites (safety / compat / duplicate-authority /
+missing-enforcement / content / obsolete) toward Definition-of-Done #10.
