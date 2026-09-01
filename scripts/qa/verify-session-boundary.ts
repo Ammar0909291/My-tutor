@@ -95,10 +95,48 @@ async function resume(email: string, password: string, sessionId: string, drop: 
     const p = await say(cookie, sessionId, 'ok im back')
     console.log('--- learner: ok im back')
     console.log(d('RETURN TURN', p))
+
+    // THE WHOLE TURN, UNTRUNCATED, AND THE ITEM ATTACHED TO IT.
+    //
+    // The first resume this probe ever completed (2026-09-01) printed 400
+    // characters and `mcq=yes`, and that was not enough to answer the one
+    // question the run exists for: 07 §8 rule 3 says the engineered win comes
+    // FIRST, before any review or new content, and a truncated turn with an
+    // unprinted MCQ cannot show whether it did. The run was recorded as
+    // partially verified rather than guessed at, and this is the repair.
+    console.log('\n──────── FULL RETURN TURN ────────')
+    console.log(p.text ?? '(no text)')
+    if (p.mcq) {
+      console.log('\n──────── ITEM ATTACHED TO THAT TURN ────────')
+      console.log(`Q: ${p.mcq.question}`)
+      p.mcq.options.forEach((o, i) => console.log(`   ${i === p.mcq!.correctIndex ? '*' : ' '} ${o}`))
+    } else {
+      console.log('\n(no item attached to the return turn)')
+    }
+
     console.log('\n──────── BOUNDARY FINDINGS ────────')
-    const t = (p.text ?? '').toLowerCase()
+    const text = p.text ?? ''
+    const t = text.toLowerCase()
     console.log(`re-greets the learner   : ${/welcome back|good to see you|you're back|last time|earlier/.test(t) ? 'yes' : 'NO'}`)
     console.log(`mentions where they left: ${/friction|last time|we were|picked up|recap/.test(t) ? 'yes' : 'NO'}`)
+
+    // ORDERING, MECHANICALLY. The block's own words are "BEFORE any review or
+    // new content", so the test is positional: does something the learner can
+    // answer arrive before the lesson-introduction language does? Reported as
+    // three observations rather than one verdict, because "engineered win"
+    // is a teaching judgement and only a human reading the turn above can
+    // make it — this says WHERE things are, not whether they were good.
+    const firstQuestion = text.indexOf('?')
+    const introMarker = text.search(
+      /\b(?:today (?:we|you)|in this lesson|by the end|we(?:'| wi)ll (?:master|cover|explore|learn)|this lesson)\b/i,
+    )
+    console.log(`first question at char  : ${firstQuestion < 0 ? 'none' : firstQuestion}`)
+    console.log(`lesson-intro language at: ${introMarker < 0 ? 'none' : introMarker}`)
+    console.log(`answerable item BEFORE new content: ${
+      firstQuestion >= 0 && (introMarker < 0 || firstQuestion < introMarker) ? 'yes'
+        : introMarker >= 0 && firstQuestion < 0 ? 'NO — new content, nothing to answer'
+        : introMarker >= 0 ? 'NO — new content came first' : 'no content marker found'
+    }`)
     console.log(`FINAL phase=${p.mastery?.phase} verified=${p.mastery?.verified} check=${p.mastery?.checkCorrect} practice=${p.mastery?.practiceCorrect}`)
   } finally {
     const out = await deleteQaAccount(acct)
