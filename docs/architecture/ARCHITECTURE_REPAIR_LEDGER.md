@@ -125,10 +125,40 @@ does NOT (the ladder predicate already masks the disagreement) → pin, don't me
 Same methodology (measure reachable harm through the real consumers), opposite
 conclusion — which is the point of measuring rather than assuming.
 
-## Ranked remaining targets (from OWNERSHIP_CENSUS_2026-09-01)
+## Slice 3 — post-hoc repair census (Census A, DoD #10) — DONE 2026-09-01
 
-3. learner-request / visual-request — 5 predicates, disagreement not yet
-   measured.
+All 27 `cleanText =` rewrite sites in route.ts classified (A safety / B compat /
+C duplicate-authority / D missing-enforcement-compensation / E content / F
+obsolete). Full table + findings: `docs/architecture/POSTHOC_REPAIR_CENSUS.md`.
+
+**Result**: no repair is obsolete; the ~14 A-sites are honest text-safety strips
+and correct as-is. The duplicate-authority risk concentrates on THREE decisions:
+1. **"does a question ship this turn"** — 5 sites (withholds 5816/6733/6766, adds
+   5737/6897), no single arbiter, while `gateEligible` owns authored-probe
+   eligibility upstream. Success-condition #5. THE consolidation target.
+2. completion presentation — 6866/6897/8282 (8282 = `buildLessonCloseText` is the
+   legitimate owner; 6866/6897 are compensations layered on top).
+3. one graded verdict stated three ways — 5788/7324/~6715.
+
+**Finding 2 (detection-not-enforcement, 6766 else)** is a DELIBERATE, documented
+choice: shipping a question-only closing turn unchanged rather than fabricating a
+closing sentence. Recorded, not "fixed" — the honest enforcement is upstream, not
+a rewrite here.
+
+## Ranked remaining targets
+
+- **Finding 1 — the question-ship arbiter (NEXT, success-condition #5).** Build
+  one post-model owner of "is a question on screen this turn" that the withholds
+  (5816/6733/6766) and the adds (5737/6897) both consult, so an add can never
+  follow a withhold on the same turn. FIRST resolve the reachability question:
+  can 6897's completion-nudge fire on a turn 6733/6766 withheld? Measure through
+  the real fold before consolidating (slice-1 discipline). Multi-step, hot-path —
+  establish the boundary, prove equivalence, migrate the 5 sites, then pin.
+- census target #3: learner-request / visual-request — 5 predicates
+  (`detectLearnerRequest`, `requestedVisualForm`, `isExplicitTopicRequest`,
+  `decideVisualNeed`, `isTopicQuestion`), disagreement not yet measured.
+- census target #4: teaching action — `decide()` vs CUE `decideTeaching` vs
+  prompt blocks, disagreement not yet measured.
 
 4. teaching action — `decide()` vs CUE `decideTeaching` vs prompt blocks,
    disagreement not yet measured.
@@ -142,6 +172,12 @@ obsolete). NOT yet classified. Do not delete before establishing the
 authoritative boundary each compensates for.
 
 ## Exact next action
+
+Finding 1 — the question-ship arbiter. Step 0: measure whether 6897's
+completion-nudge can reach the same turn as a 6733/6766 withhold, through the
+real fold. If reachable → a single arbiter is required (a genuine defect); if
+disjoint → pin the disjointness so a future edit can't make them overlap. Then
+(deferred, larger): Census A Finding 3 (one server-verdict stater), then census
 
 Target #3: learner-request / visual-request — 5 predicates named by the census
 (`detectLearnerRequest`, `requestedVisualForm`, `isExplicitTopicRequest`,
