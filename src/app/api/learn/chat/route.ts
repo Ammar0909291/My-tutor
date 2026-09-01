@@ -6963,6 +6963,38 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         console.warn('[scaffold-headings] check skipped:', err)
       }
 
+      // THE TUTOR TOLD THE LEARNER WHAT THEY HAD SAID, AND IT WAS NOT TRUE.
+      //
+      // MEASURED live 2026-09-01, real account, phys.mech.friction, turn one.
+      // The learner's entire message was "harder". The reply was "So you're
+      // saying the book is harder to slide when you press it down BECAUSE THE
+      // NORMAL FORCE INCREASES. Is that right?" — the learner had not said
+      // that and had never heard the term; one turn later they wrote "i dont
+      // really know what normal force means".
+      //
+      // A learner who says yes has then "demonstrated" an understanding the
+      // TUTOR supplied, and every downstream reader records it as theirs. That
+      // is hollow advancement manufactured rather than claimed, at OBSERVE, the
+      // rung whose whole job is finding out what the learner actually thinks.
+      //
+      // Removes the unsupported clause and writes no replacement — see
+      // attributionGuard.ts, including its note on what this deliberately does
+      // NOT fix (the mirroring itself, which is semantic).
+      try {
+        const { stripFabricatedAttribution } = await import('@/lib/teaching/attributionGuard')
+        const attributed = stripFabricatedAttribution(cleanText, message)
+        if (attributed.removed) {
+          console.warn('[attribution] ' + JSON.stringify({
+            event: 'fabricated-learner-reasoning-stripped',
+            conceptId: resolvedConceptId ?? null,
+            removed: attributed.removed,
+          }))
+          cleanText = attributed.text
+        }
+      } catch (err) {
+        console.warn('[attribution] check skipped:', err)
+      }
+
       // THE SAME QUESTION, ON SCREEN, TWICE.
       //
       // When the model writes its question inline as prose AND emits the
