@@ -69,3 +69,75 @@ describe('detectFailureState — negative controls: ordinary correct answers mus
     expect(detectFailureState('My best guess is that momentum is conserved.')).toBeNull()
   })
 })
+
+/**
+ * NAMING THE THING YOU ARE STUCK ON BROKE THE PATTERN.
+ *
+ * MEASURED live (phys.mech.friction, 2026-09-01, real account, studied as a
+ * learner). The object list on the "don't get" patterns was `it|that|this`,
+ * so:
+ *
+ *   "…you mentioned it in the formula but i dont get it"   (an earlier run)
+ *     -> dont_understand, and the knowledge-gap detour opened correctly
+ *   "wait, i dont get what the normal force is. you keep saying N"
+ *     -> null. No [knowledge-gap] log, no detour, nothing.
+ *
+ * THE IRONY IS THE POINT. `classifyKnowledgeGap` needs a distress signal AND
+ * a resolvable concept before it can open a prerequisite detour — so the
+ * phrasing that NAMES the concept is precisely the one it needs, and it was
+ * the one phrasing that did not register as distress at all.
+ *
+ * Found while trying to VERIFY a different fix: I set out to confirm that a
+ * knowledge-gap detour now closes on a practice request, triggered what I
+ * expected to be a detour, and the logs showed none had opened. The
+ * verification failed and produced this instead.
+ *
+ * Same shape as the Phase 5 correction to the bare `dont_know` pattern: one
+ * alternation, in one pattern, narrower than its siblings.
+ */
+describe('“don’t get” with a named object, not just “it”', () => {
+  for (const utterance of [
+    'wait, i dont get what the normal force is. you keep saying N',
+    'i dont get what the normal force is',
+    "i don't get what a normal force is",
+    'i dont get how you got 100 N',
+    "i don't get why it slows down",
+    "i didn't get what you meant there",
+    "i still don't get how that works",
+  ]) {
+    it(`registers as distress: ${JSON.stringify(utterance.slice(0, 44))}`, () => {
+      expect(detectFailureState(utterance)).toBe('dont_understand')
+    })
+  }
+
+  it('the forms that already worked are unchanged', () => {
+    expect(detectFailureState('i dont get it')).toBe('dont_understand')
+    expect(detectFailureState('i dont understand the normal force')).toBe('dont_understand')
+    expect(detectFailureState("i don't know what the normal force is")).toBe('dont_know')
+    expect(detectFailureState("i'm confused about the normal force")).toBe('confused')
+  })
+})
+
+describe('a wh-clause cannot fire without the negation in front of it', () => {
+  // This is what keeps a plain question — the most common learner utterance
+  // there is — from being read as distress. Measured: 0 false positives.
+  for (const utterance of [
+    'what is the normal force',
+    'how do i calculate the friction force',
+    'why does the book slow down',
+    'can you show me what happens when it tilts',
+  ]) {
+    it(`stays a question, not distress: ${JSON.stringify(utterance.slice(0, 40))}`, () => {
+      expect(detectFailureState(utterance)).toBeNull()
+    })
+  }
+
+  it('and an AFFIRMATIVE “get” is never distress', () => {
+    // "i get what you mean" must not become "i don't get what you mean".
+    expect(detectFailureState('i get it now')).toBeNull()
+    expect(detectFailureState('i get what you mean')).toBeNull()
+    expect(detectFailureState('ok i think i get how that works')).toBeNull()
+    expect(detectFailureState('that is what i get when i multiply')).toBeNull()
+    expect(detectFailureState('i got it')).toBeNull()
+  })
+})

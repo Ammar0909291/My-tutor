@@ -185,8 +185,8 @@ const MILD_PATTERNS: Array<[FailureStateKey, RegExp]> = [
   // Past-tense / pronoun-less variants — "Didn't understand", "still didn't
   // get it", "didn't follow" — the live-transcript bug: the present-tense
   // pattern above missed the most common student phrasings.
-  ['dont_understand', /\b(didn'?t|did\s+not)\s+(understand|get\s+(?:it|that|this)|follow)\b/i],
-  ['dont_understand', /\bstill\s+(don'?t|do\s+not|didn'?t)\s+(understand|get\s+(?:it|that|this)|know\s+what\s+you|follow)\b/i],
+  ['dont_understand', /\b(didn'?t|did\s+not)\s+(understand|get\s+(?:it|that|this|what|why|how)|follow)\b/i],
+  ['dont_understand', /\bstill\s+(don'?t|do\s+not|didn'?t)\s+(understand|get\s+(?:it|that|this|what|why|how)|know\s+what\s+you|follow)\b/i],
   ['dont_understand', /\bnot\s+understanding\b/i],
   ['confused',        /\bi(?:'?m|\s+am)\s+(so\s+|really\s+|totally\s+)?(confused|lost)\b/i],
   // "I'm nervous / anxious" — frequently replaces "scared" but shares the
@@ -229,7 +229,26 @@ const MILD_PATTERNS: Array<[FailureStateKey, RegExp]> = [
   // P1: present-tense "don't get it" — the existing masteryGate.ts pattern
   // only matched the past tense ("didn't get it"); this is the far more
   // common live phrasing.
-  ['dont_understand', /\b(i\s+)?(still\s+)?(don'?t|do\s+not)\s+get\s+(it|that|this)\b/i],
+  // NAMING THE THING YOU ARE STUCK ON BROKE THE PATTERN — measured live.
+  //
+  // The object list was `it|that|this`, so "I don't get IT" registered as
+  // distress while "I don't get WHAT THE NORMAL FORCE IS" registered as
+  // nothing at all. Production, phys.mech.friction, 2026-09-01, real account:
+  //
+  //   "wait, i dont get what the normal force is. you keep saying N"
+  //     -> detectFailureState = null, no [knowledge-gap] log, no detour
+  //   "…you mentioned it in the formula but i dont get it"   (an earlier run)
+  //     -> dont_understand, and the knowledge-gap detour opened correctly
+  //
+  // The irony is the point: the phrasing that NAMES the gap is exactly what
+  // classifyKnowledgeGap needs in order to resolve a concept and open a
+  // prerequisite detour, and it was the one phrasing that did not register.
+  // Same shape as the Phase 5 fix on the bare `dont_know` pattern — one
+  // alternation in one pattern was narrower than its siblings.
+  //
+  // A wh-clause cannot fire without the negation in front of it, so "what is
+  // the normal force" — a plain question, no distress — still reads as null.
+  ['dont_understand', /\b(i\s+)?(still\s+)?(don'?t|do\s+not)\s+get\s+(it|that|this|what|why|how)\b/i],
   ['forgot',          /\bi\s+(forgot|forget)\b|\bi\s+can'?t\s+remember\b/i],
   ['guessing',        /\bi(?:'?m|\s+was)\s+(just\s+)?guessing\b|\bthat\s+was\s+a\s+guess\b/i],
   // P1 (2026-08-22): past-tense "I guessed" / "I just guessed" — the
