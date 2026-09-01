@@ -133,8 +133,14 @@ describe('route.ts wires the excursion\'s own transition into the visual layer',
       join(process.cwd(), 'src/lib/teaching/visual/resolveVisual.ts'),
       'utf8',
     )
+    // The invariant is the OR: the excursion signal is ADDED to the strict
+    // detector, never substituted for it. The detector's argument list is not
+    // part of that invariant — it gained a third argument (the figure's
+    // concept id, for the domain-vocabulary evidence) on 2026-09-01, and this
+    // guard failed for a change that could not affect what it protects. It now
+    // states the invariant instead of the call's exact shape.
     expect(resolveVisual).toMatch(
-      /requestLeftActiveFigure:\s*\n\s*liveSession !== null\s*\n\s*&& \(requestLeavesActiveFigure\(input\.message, activeFigureText\)\s*\n\s*\|\| input\.excursionJustLeftFigure === true\)/,
+      /requestLeftActiveFigure:\s*\n\s*liveSession !== null\s*\n\s*&& \(requestLeavesActiveFigure\([^)]*\)\s*\n\s*\|\| input\.excursionJustLeftFigure === true\)/,
     )
   })
 })

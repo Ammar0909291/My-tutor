@@ -473,7 +473,7 @@ export function resolveVisual(input: ResolveVisualInput): VisualDecision {
     visualRequested: input.learnerRequest === 'diagram',
     requestLeftActiveFigure:
       liveSession !== null
-      && (requestLeavesActiveFigure(input.message, activeFigureText)
+      && (requestLeavesActiveFigure(input.message, activeFigureText, liveSession.conceptId)
         || input.excursionJustLeftFigure === true),
   })
 

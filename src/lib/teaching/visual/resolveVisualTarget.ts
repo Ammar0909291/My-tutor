@@ -270,7 +270,17 @@ export function requestTargetsSomethingElse(message: string, target: VisualTarge
  * honest empty screen as an ordinary success, and it is strictly better than
  * either the stale figure or a second unrelated one.
  */
-export function requestLeavesActiveFigure(message: string, figureText: string): boolean {
+export function requestLeavesActiveFigure(
+  message: string,
+  figureText: string,
+  /**
+   * The concept the on-screen figure belongs to. Optional, so every existing
+   * caller and test is unchanged; supplied by resolveVisual, which holds the
+   * live session. See ASKING TO SEE PART OF THE THING below for why it is
+   * needed and what it costs.
+   */
+  figureConceptId?: string | null,
+): boolean {
   const requested = extractRequestedTopic(message)
   if (!requested) return false
 
@@ -279,6 +289,50 @@ export function requestLeavesActiveFigure(message: string, figureText: string): 
   if (drawn.size === 0) return false
 
   for (const word of requested.words) if (drawn.has(word)) return false
+
+  // ── ASKING TO SEE PART OF THE THING IS NOT LEAVING IT ─────────────────────
+  //
+  // MEASURED live on phys.opt.mirrors, twice, in a struggling-learner session:
+  //
+  //   learner: "show me a picture of the rays"
+  //   -> NO FIGURE, and the tutor answered "Imagine the three standard rays
+  //      you'd trace for a concave mirror..." with an empty screen.
+  //
+  // The figure was a concave-mirror ray diagram — literally a picture of the
+  // rays. The release fired because the words it compares against are the KG
+  // node's title and description, and this concept's are
+  //
+  //   "Spherical Mirrors and Mirror Formula. The mirror formula 1/f = 1/v + 1/u
+  //    relates focal length, image distance, and object distance..."
+  //
+  // one sentence, about the FORMULA. Nothing in it says rays, light, or
+  // reflection, so a learner asking to see any of those was judged to have
+  // changed the subject and the figure was released. "show me a picture of the
+  // reflection" and "what is total internal reflection" failed the same way.
+  //
+  // The test is only ever as good as the words it is given, and a one-sentence
+  // description is a thin corpus. So a second, wider source of evidence: the
+  // vocabulary of the figure concept's own DOMAIN. A word its domain uses is
+  // evidence the learner is still inside the topic the figure belongs to.
+  //
+  // DOMAIN, not subject, and that boundary is measured rather than assumed.
+  // Subject-wide would hold the mirrors figure for "what is nuclear fission"
+  // and "explain electric current" — both physics, neither this figure's
+  // subject matter. Domain-wide releases both, and still releases every case
+  // this rule was written for: "What are SI units...", "Explain Kubernetes pod
+  // scheduling", "what is the periodic table".
+  //
+  // HONEST RESIDUE — the phrasing that started this is STILL released. "rays"
+  // folds to "ray", and `contentWords` drops every word under four characters,
+  // so "ray" is invisible to the vocabulary machinery on both sides. Reaching
+  // it means changing that minimum for the whole visual engine — anchoring and
+  // admission included — which is not justified by one phrasing. Recorded in
+  // `visualRequestLeavesFigure.test.ts` as a failing-by-design case rather than
+  // asserted away.
+  if (figureConceptId && curriculumKnowsAnyOf([...requested.words], figureConceptId, 2)) {
+    return false
+  }
+
   return true
 }
 
@@ -298,13 +352,26 @@ export function requestLeavesActiveFigure(message: string, figureText: string): 
  */
 const subjectVocabularies = new Map<string, Set<string>>()
 
-function subjectKnowsAnyOf(words: readonly string[], conceptId: string): boolean {
-  const prefix = conceptId.split('.')[0]
+/**
+ * The vocabulary of a curriculum SLICE, named by how many id segments of
+ * `conceptId` define it: 1 is the subject (`phys`), 2 is the domain
+ * (`phys.opt`).
+ *
+ * One builder, two scopes, because two builders would eventually disagree
+ * about what a word is — the same reason `contentWords` is exported and shared
+ * rather than reimplemented per caller.
+ */
+function curriculumKnowsAnyOf(
+  words: readonly string[],
+  conceptId: string,
+  depth: 1 | 2,
+): boolean {
+  const prefix = conceptId.split('.').slice(0, depth).join('.')
   let vocab = subjectVocabularies.get(prefix)
   if (!vocab) {
     vocab = new Set<string>()
     for (const entry of conceptIndex()) {
-      if (entry.conceptId.split('.')[0] !== prefix) continue
+      if (entry.conceptId.split('.').slice(0, depth).join('.') !== prefix) continue
       for (const w of contentWords(entry.title, true)) vocab.add(w)
       for (const alias of entry.aliases ?? []) for (const w of contentWords(alias, true)) vocab.add(w)
     }
@@ -312,6 +379,10 @@ function subjectKnowsAnyOf(words: readonly string[], conceptId: string): boolean
   }
   for (const w of words) if (vocab.has(w)) return true
   return false
+}
+
+function subjectKnowsAnyOf(words: readonly string[], conceptId: string): boolean {
+  return curriculumKnowsAnyOf(words, conceptId, 1)
 }
 
 /** Test seam — the vocabularies are derived from the KG and memoized with it. */
