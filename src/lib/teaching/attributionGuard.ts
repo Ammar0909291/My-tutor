@@ -52,6 +52,7 @@
  * no attribution frame and is untouched. A tutor correctly restating a reason
  * the learner DID give is untouched, because condition 3 fails.
  */
+import { endStopped } from './gateAssessment'
 
 /** The tutor reporting the learner's own position back to them. */
 const ATTRIBUTION_FRAME_RE =
@@ -273,4 +274,86 @@ export function buildMirrorReplyDirective(active: boolean): string {
     'sentence, and then teach the next thing. If you genuinely cannot tell ' +
     'whether it is right, say that instead — but do not ask them to tell you.'
   )
+}
+
+
+/**
+ * A MIRROR THAT FOLLOWS A GRADED ANSWER CAN BE REPAIRED — WITH GROUND TRUTH.
+ *
+ * route.ts records, correctly, why the mirror was detection-only: "composing a
+ * verdict would mean inventing one for a FREE-RESPONSE answer the server has
+ * no ground truth for." That reasoning is exact, and it is also SCOPED — it
+ * does not hold when the turn being mirrored was an MCQ the server graded
+ * against an authored key.
+ *
+ * MEASURED live (phys.mech.friction, 2026-09-01, disposable account, deployed
+ * app), on a session parked mid-struggle. The learner picked a wrong option
+ * and the whole reply was:
+ *
+ *   learner: "40 N — friction always equals μ_s × N"
+ *   tutor:   "So you're saying the friction force is 40 N. Is that right?"
+ *
+ *   isMirrorTurn -> true, overlap 0.33
+ *   [mcq-grade]  -> correct: false, and the authored key was in hand
+ *
+ * The learner gave a WRONG answer and was asked to confirm it. The server knew
+ * it was wrong and knew the right one, and said neither.
+ *
+ * WHAT THIS DOES AND DOES NOT INVENT. It states the verdict the server already
+ * computed and, on a wrong answer, the option text it already holds — the same
+ * sentence `withheldContinuation` builds elsewhere, through the same
+ * `endStopped` helper so the punctuation cannot drift between them. With NO
+ * grade it returns the text untouched, which is the free-response case the
+ * route's note describes and where its conclusion still stands.
+ *
+ * It replaces the turn rather than prefixing it, deliberately: a mirror IS the
+ * whole turn (the detector requires <= 2 sentences ending on a confirmation
+ * request), so there is no teaching to preserve — that is what made it
+ * unrepairable in place before ground truth was available.
+ */
+export interface MirrorVerdictInput {
+  /** The outgoing turn, after other repairs. */
+  text: string
+  /** The learner message this turn is replying to. */
+  learnerMessage: string
+  /** The server's own grade for that message, when it graded one. */
+  graded?: { correct: boolean | null; correctOptionText?: string | null } | null
+}
+
+export interface MirrorVerdictResult {
+  text: string
+  repaired: boolean
+  reason: 'not-a-mirror' | 'no-server-grade' | 'confirmed-correct' | 'revealed-answer'
+}
+
+export function repairMirrorWithVerdict(input: MirrorVerdictInput): MirrorVerdictResult {
+  const text = typeof input.text === 'string' ? input.text : ''
+  if (!isMirrorTurn(text, input.learnerMessage ?? '').isMirror) {
+    return { text, repaired: false, reason: 'not-a-mirror' }
+  }
+  const correct = input.graded?.correct
+  if (correct !== true && correct !== false) {
+    // The documented free-response case: no ground truth, no honest repair.
+    return { text, repaired: false, reason: 'no-server-grade' }
+  }
+  if (correct) {
+    return {
+      text: "That's right.",
+      repaired: true,
+      reason: 'confirmed-correct',
+    }
+  }
+  const key = typeof input.graded?.correctOptionText === 'string'
+    ? input.graded.correctOptionText.trim()
+    : ''
+  // A key that is itself a question is not revealed, exactly as the gate's
+  // own reveal refuses it.
+  const revealable = key.length > 0 && !key.includes('?')
+  return {
+    text: revealable
+      ? `Not quite — the answer was: ${endStopped(key)}`
+      : 'Not quite.',
+    repaired: true,
+    reason: 'revealed-answer',
+  }
 }

@@ -7273,6 +7273,52 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         console.warn('[attribution] check skipped:', err)
       }
 
+      // ── AND THE MIRROR ITSELF, WHEN THE SERVER GRADED THE ANSWER ──────────
+      //
+      // The note above says this deliberately does NOT fix the mirroring,
+      // "which is semantic". True for a free-response answer. NOT true when
+      // the turn being mirrored was an MCQ the server graded against an
+      // authored key — there the verdict is not a judgement to invent, it is
+      // a value already computed a few hundred lines up.
+      //
+      // MEASURED live (phys.mech.friction, 2026-09-01, deployed app):
+      //   learner: "40 N — friction always equals μ_s × N"
+      //   tutor:   "So you're saying the friction force is 40 N. Is that right?"
+      //   isMirrorTurn -> true (overlap 0.33), [mcq-grade] -> correct: false
+      // The learner gave a wrong answer and was asked to confirm it, by a
+      // server that knew it was wrong and knew the right one.
+      //
+      // With no grade this is a no-op and the detector's directive (injected
+      // on the NEXT turn) remains the only handling, exactly as before.
+      try {
+        const { repairMirrorWithVerdict } = await import('@/lib/teaching/attributionGuard')
+        const mirrored = repairMirrorWithVerdict({
+          text: cleanText,
+          learnerMessage: message,
+          // The SAME derivation the gate's own reveal uses (see `justGraded`
+          // above): the option text comes from the `pendingMcqHoisted` the
+          // answer was graded against, so the two sentences cannot disagree
+          // about the same item.
+          graded: mcqGradeHoisted && typeof mcqGradeHoisted.correct === 'boolean'
+            ? {
+                correct: mcqGradeHoisted.correct,
+                correctOptionText:
+                  pendingMcqHoisted?.options?.[pendingMcqHoisted.correctIndex] ?? null,
+              }
+            : null,
+        })
+        if (mirrored.repaired) {
+          console.warn('[mirror] ' + JSON.stringify({
+            event: 'mirror-replaced-with-server-verdict',
+            conceptId: resolvedConceptId ?? null,
+            reason: mirrored.reason,
+          }))
+          cleanText = mirrored.text
+        }
+      } catch (err) {
+        console.warn('[mirror] verdict repair skipped:', err)
+      }
+
       // THE SAME QUESTION, ON SCREEN, TWICE.
       //
       // When the model writes its question inline as prose AND emits the

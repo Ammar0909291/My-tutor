@@ -41,23 +41,37 @@ async function park() {
   console.log(`BASE=${BASE}`)
   console.log(d('T1 open', await openLesson(acct.cookie, sessionId, LESSON)))
 
+  // KEEP GOING UNTIL A GRADED QUESTION IS ACTUALLY OFFERED. The first version
+  // took two fixed turns and parked whatever state it happened to be in; no
+  // MCQ appeared, so no failure was recorded and the engineered-win debt was
+  // never owed — the one rule this probe exists for went untested. Walking
+  // away is only interesting if the learner walks away having just FAILED.
   let p: TurnPayload | null = null
-  for (const msg of ['ok, i think i follow so far', 'yeah that makes sense']) {
-    p = await say(acct.cookie, sessionId, msg)
-    console.log(`\n--- learner: ${msg}`)
+  const NUDGES = [
+    'ok, i think i follow so far', 'yeah that makes sense',
+    'can you quiz me on this', 'right, i understand that', 'ok what next',
+  ]
+  let failedBeforeParking = false
+  for (let t = 0; t < 8 && !failedBeforeParking; t++) {
+    if (p?.mcq && typeof p.mcq.correctIndex === 'number') {
+      const wrong = p.mcq.options[(p.mcq.correctIndex + 1) % p.mcq.options.length]
+      p = await say(acct.cookie, sessionId, wrong)
+      failedBeforeParking = true
+      console.log(`\n--- learner (deliberately WRONG): ${wrong}`)
+    } else {
+      const msg = NUDGES[t % NUDGES.length]
+      p = await say(acct.cookie, sessionId, msg)
+      console.log(`\n--- learner: ${msg}`)
+    }
     console.log(d('turn', p))
   }
-  // Leave on a FAILURE, which is what makes the retro-close debt come due.
-  if (p?.mcq && typeof p.mcq.correctIndex === 'number') {
-    const wrong = p.mcq.options[(p.mcq.correctIndex + 1) % p.mcq.options.length]
-    p = await say(acct.cookie, sessionId, wrong)
-    console.log(`\n--- learner (deliberately WRONG): ${wrong}`)
-    console.log(d('turn', p))
-  } else {
-    console.log('\n(no MCQ was offered before parking — the gap still tests the boundary,')
-    console.log(' but the engineered-win debt may not be owed)')
+  if (!failedBeforeParking) {
+    console.log('\n(NO graded question was ever offered — the gap still tests the')
+    console.log(' boundary, but the engineered-win debt is NOT owed and this run')
+    console.log(' does not test decision-engine/07 §8 rule 3)')
   }
   console.log('\n──────── PARKED ────────')
+  console.log(`left on a graded FAILURE: ${failedBeforeParking ? 'YES — the debt is owed' : 'no'}`)
   console.log(`RESUME_WITH: npx tsx scripts/qa/verify-session-boundary.ts resume \\`)
   console.log(`  ${acct.email} ${acct.password} ${sessionId}`)
   console.log(`phase left at: ${p?.mastery?.phase} check=${p?.mastery?.checkCorrect} practice=${p?.mastery?.practiceCorrect}`)

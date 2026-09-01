@@ -487,7 +487,7 @@ function withheldContinuation(
 }
 
 /** The key with exactly one terminal stop, never two and never none. */
-function endStopped(key: string): string {
+export function endStopped(key: string): string {
   return /[.!…]$/.test(key) ? key : `${key}.`
 }
 
