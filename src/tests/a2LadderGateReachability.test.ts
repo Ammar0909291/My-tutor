@@ -56,10 +56,26 @@ describe('A2a — where a probe may be attached', () => {
     }
   })
 
-  it('attaches below CHECK only on a turn that was already going to ask', () => {
-    // A teach turn must not have a question stapled onto it. E1 extended that
-    // same rule from GUIDE to DEMONSTRATE rather than relaxing it, so the
-    // 'ask'-only condition now covers both and neither can be opened alone.
+  it('attaches below CHECK only on an ask turn, or to a learner who has failed', () => {
+    // THE PRINCIPLE IS UNCHANGED: a teach turn must not have a question
+    // stapled onto it. What changed is who it applies to.
+    //
+    // E1 extended the 'ask'-only condition from GUIDE to DEMONSTRATE, and at
+    // DEMONSTRATE `decideNextMove` returns 'show' or 'teach' and NEVER 'ask'
+    // — proven over 1,536 combinations of the real decider in
+    // e1DemonstrateProbeUnreachable.test.ts. So there it was not a
+    // restriction but a prohibition, and E1 could never fire at all.
+    //
+    // Measured harm (confidently-wrong learner, three concepts, deployed):
+    // phys.opt.mirrors gave 3 gradeable questions in 12 turns with 5 of those
+    // turns at DEMONSTRATE. A learner who is never asked a gradeable question
+    // cannot demonstrate recovery however much they learn.
+    //
+    // DEMONSTRATE therefore opens only once the concept has produced a
+    // FAILURE. A progressing learner's show turn stays a show turn — they
+    // reach verified mastery without E1 today, measured across eight live
+    // runs on four concepts — so the principle above still governs every
+    // learner it was written for.
     //
     // WHY DEMONSTRATE OPENED: criterion 4 measured 25% in the 2026-08-31
     // physics re-measurement (114 of 456 questions carried an answer key), and
@@ -69,7 +85,10 @@ describe('A2a — where a probe may be attached', () => {
     // defect that held physics at 79%. The per-concept surplus is enforced at
     // the serving site, so a bare-contract concept is unaffected.
     expect(ROUTE).toMatch(
-      /\(phaseBeforeTurn === 'GUIDE' \|\| phaseBeforeTurn === 'DEMONSTRATE'\)\s*\n?\s*&& evidenceMoveHoisted === 'ask'/,
+      /\(phaseBeforeTurn === 'GUIDE' && evidenceMoveHoisted === 'ask'\)/,
+    )
+    expect(ROUTE).toMatch(
+      /\(phaseBeforeTurn === 'DEMONSTRATE' && strugglingOnThisConcept\)/,
     )
     expect(ROUTE).toContain('const phaseAllowsProbe =')
     // The SHARED predicate is deliberately untouched — pinned by the case

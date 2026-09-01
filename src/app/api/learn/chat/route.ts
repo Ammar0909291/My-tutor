@@ -3992,10 +3992,65 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // phase (observeDiagnosticConcludes.test.ts), and the one previous
         // attempt to alter its ladder behaviour broke seven behavioural tests
         // and was reverted.
+        //
+        // ── E1 WAS UNREACHABLE, AND THIS LINE IS WHY ────────────────────────
+        //
+        // The 'ask' condition was applied to GUIDE and DEMONSTRATE together,
+        // "for the same reason". At GUIDE the move alternates, so it is a
+        // restriction. At DEMONSTRATE `decideNextMove` returns 'show' or
+        // 'teach' and NEVER 'ask' — proven over 1,536 combinations of the real
+        // decider in e1DemonstrateProbeUnreachable.test.ts — so there it was
+        // not a restriction but a prohibition, and E1 could never fire.
+        //
+        // THE HARM, MEASURED from the learner's side (confidently-wrong
+        // learner, three concepts, deployed app):
+        //   phys.opt.mirrors  3 gradeable questions of 12 turns, 5 of those
+        //                     12 turns spent at DEMONSTRATE
+        // Roughly half a struggling learner's turns sat in the phase where an
+        // authored probe was unreachable, so they could not demonstrate
+        // recovery however much they learned.
+        //
+        // WHY DROPPING IT IS SAFE, rather than merely desirable:
+        //  1. The real guard already exists and is purpose-built. The SURPLUS
+        //     rule below (`mayAttachProbeBelowGuide`) fires only at
+        //     DEMONSTRATE and only while poolSize - 1 >= CREDITS_REQUIRED_FOR_
+        //     MASTERY, so a concept at the bare contract is untouched and
+        //     mastery stays reachable. route.ts's own note says it lives there
+        //     "because the pool size is not known until the selector has run"
+        //     — the design already delegates DEMONSTRATE safety to it.
+        //  2. This REPLACES a question rather than adding one. Measured in the
+        //     same transcripts, every DEMONSTRATE turn already asked something
+        //     ungradeable: "How did you get 40 N?", "What is the frictional
+        //     force on a 5.0 kg crate...?". The learner was answering into a
+        //     void; now the same turn carries an authored, gradeable item.
+        //
+        // ── AND WHY IT IS SCOPED TO A STRUGGLING LEARNER ────────────────────
+        //
+        // a2LadderGateReachability.test.ts states a real principle: "a teach
+        // turn must not have a question stapled onto it." Dropping the
+        // condition outright would override that for everyone, and it is a
+        // teaching rule, not an implementation detail.
+        //
+        // The harm was measured on ONE path — the confidently-wrong learner.
+        // A learner who is answering correctly reaches verified mastery today
+        // without E1 (eight live runs, four concepts), so for them the 'show'
+        // turn should stay a show turn and nothing here should change.
+        //
+        // So DEMONSTRATE opens only once this concept has actually produced a
+        // failure. That is exactly the learner who needs to be assessable —
+        // they cannot demonstrate recovery without a gradeable question — and
+        // it is exactly the learner whose DEMONSTRATE turns were measured
+        // already carrying an ungradeable one. A progressing learner's
+        // DEMONSTRATE turn is untouched.
+        //
+        // GUIDE keeps its 'ask' condition exactly as before — it works there.
+        const strugglingOnThisConcept =
+          (conversationStateHoisted?.consecutiveFailures ?? 0) > 0
+          || (conversationStateHoisted?.observeFailures ?? 0) > 0
         const phaseAllowsProbe =
           isMasteryGatePhase(phaseBeforeTurn) ||
-          ((phaseBeforeTurn === 'GUIDE' || phaseBeforeTurn === 'DEMONSTRATE')
-            && evidenceMoveHoisted === 'ask')
+          (phaseBeforeTurn === 'GUIDE' && evidenceMoveHoisted === 'ask') ||
+          (phaseBeforeTurn === 'DEMONSTRATE' && strugglingOnThisConcept)
         phaseAllowsProbeHoisted = phaseAllowsProbe
         // PHASE 3. Three of the terms this conjunction used to spell out by hand
         // — recovery, closing, and the learner-request term it was MISSING —

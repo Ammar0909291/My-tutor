@@ -113,10 +113,20 @@ describe('E1 — a probe may be spent early only against real surplus', () => {
 describe('the route wires E1 exactly as described', () => {
   const route = readFileSync('src/app/api/learn/chat/route.ts', 'utf8')
 
-  it('opens DEMONSTRATE only on an ASK turn, never on a teach turn', () => {
-    expect(route).toMatch(
-      /\(phaseBeforeTurn === 'GUIDE' \|\| phaseBeforeTurn === 'DEMONSTRATE'\)\s*\n?\s*&& evidenceMoveHoisted === 'ask'/,
-    )
+  it('opens DEMONSTRATE only for a learner who has already failed', () => {
+    // Was: "only on an ASK turn, never on a teach turn". That description was
+    // the reason E1 never ran — DEMONSTRATE cannot produce an 'ask' at any
+    // input (proven in e1DemonstrateProbeUnreachable.test.ts), so the
+    // condition was a prohibition rather than a restriction.
+    //
+    // The teach-turn principle is preserved by scope instead: a progressing
+    // learner's DEMONSTRATE turn is untouched, and only a learner who has
+    // produced a failure — the one who needs to be assessable to show
+    // recovery — can have an authored probe attached there.
+    expect(route).toMatch(/\(phaseBeforeTurn === 'GUIDE' && evidenceMoveHoisted === 'ask'\)/)
+    expect(route).toMatch(/\(phaseBeforeTurn === 'DEMONSTRATE' && strugglingOnThisConcept\)/)
+    // The surplus rule is still what keeps mastery reachable.
+    expect(route).toMatch(/mayAttachProbeBelowGuide\(phaseBeforeTurn, probe\.poolSize\)/)
   })
 
   it('enforces the surplus at the serving site, where the pool is known', () => {

@@ -128,14 +128,22 @@ describe('the exclusions are on the eligibility test, not assumed', () => {
     expect(eligibility).toMatch(/isMasteryGatePhase\(phaseBeforeTurn\)/)
   })
 
-  it('fires below CHECK ONLY on a turn that was already going to ask (A2a)', () => {
+  it('fires below CHECK on an ask turn, or for a learner who has failed (A2a)', () => {
     // Attaching a question to a teach-turn would override a teaching decision
-    // the ladder made deliberately. E1 extended the same rule from GUIDE to
-    // DEMONSTRATE; the 'ask'-only condition is what makes that safe and is
-    // asserted here for BOTH phases together, so neither can be opened alone.
-    expect(eligibility).toMatch(
-      /\(phaseBeforeTurn === 'GUIDE' \|\| phaseBeforeTurn === 'DEMONSTRATE'\)\s*\n?\s*&& evidenceMoveHoisted === 'ask'/,
-    )
+    // the ladder made deliberately — that principle is unchanged. E1 extended
+    // the 'ask'-only condition from GUIDE to DEMONSTRATE, but DEMONSTRATE
+    // cannot produce an 'ask' at any input (1,536 combinations of the real
+    // decider, e1DemonstrateProbeUnreachable.test.ts), so there it was a
+    // prohibition and E1 never fired at all.
+    //
+    // The principle is now preserved by SCOPE: a progressing learner's
+    // DEMONSTRATE turn stays a pure show turn, and only a learner who has
+    // already produced a failure — measured as receiving 3 gradeable
+    // questions in 12 turns, with 5 of those turns at DEMONSTRATE — can have
+    // an authored probe attached there. The two phases are asserted
+    // separately now, because they no longer share one condition.
+    expect(eligibility).toMatch(/\(phaseBeforeTurn === 'GUIDE' && evidenceMoveHoisted === 'ask'\)/)
+    expect(eligibility).toMatch(/\(phaseBeforeTurn === 'DEMONSTRATE' && strugglingOnThisConcept\)/)
   })
 
   it('never fires at OBSERVE — narrowed from "never below GUIDE", with cause', () => {
