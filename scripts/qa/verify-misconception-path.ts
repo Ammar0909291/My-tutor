@@ -32,13 +32,35 @@ const KEY = process.argv[2] && CONCEPTS[process.argv[2]] ? process.argv[2] : 'fr
 const LESSON = { ...CONCEPTS[KEY], totalLessons: 238 }
 const MAX_TURNS = 16
 
-/** Assertive, reasoned, and wrong — a misconception, not a shrug. */
-const CONFIDENT_WRONG = [
-  'friction depends on the surface area in contact — a wider block has more friction',
-  'no, heavier objects always slide the same because mass cancels out',
-  'i am pretty sure friction does not depend on the normal force at all',
-  'the coefficient changes with speed, that is the whole point',
-]
+/**
+ * Assertive, reasoned, and wrong — a misconception, not a shrug.
+ *
+ * PER CONCEPT, deliberately. A first version reused friction's statements for
+ * every lesson, which would have tested whether the tutor handles an OFF-TOPIC
+ * assertion — a different question — rather than whether it repairs a
+ * misconception about the thing being taught. Each set below is a real,
+ * documented misconception for its own concept.
+ */
+const CONFIDENT_WRONG: Record<string, string[]> = {
+  friction: [
+    'friction depends on the surface area in contact — a wider block has more friction',
+    'no, heavier objects always slide the same because mass cancels out',
+    'i am pretty sure friction does not depend on the normal force at all',
+    'the coefficient changes with speed, that is the whole point',
+  ],
+  'kinetic-energy': [
+    'kinetic energy doubles when you double the speed, it is proportional',
+    'no, a heavy truck parked on a hill has kinetic energy because of its height',
+    'kinetic energy is the same thing as momentum, just a different name',
+    'the half in the formula is just a convention, it does not come from anywhere',
+  ],
+  mirrors: [
+    'a concave mirror always makes a real image, that is what concave means',
+    'no, the image in a plane mirror is behind the glass at twice the distance',
+    'virtual images cannot be seen at all, that is why they are called virtual',
+    'the focal length changes depending on how far away the object is',
+  ],
+}
 
 async function main() {
   console.log(`concept=${KEY} (${LESSON.topicSlug})`)
@@ -55,6 +77,8 @@ async function main() {
     const questionsAsked: string[] = []
     let wrong = 0
     let stated = 0
+    const phases: string[] = []
+    let turns = 0
 
     for (let t = 0; t < MAX_TURNS; t++) {
       let msg: string
@@ -64,10 +88,13 @@ async function main() {
         msg = p.mcq.options[(p.mcq.correctIndex + 1) % p.mcq.options.length]
         wrong++
       } else {
-        msg = CONFIDENT_WRONG[stated % CONFIDENT_WRONG.length]
+        const pool = CONFIDENT_WRONG[KEY] ?? CONFIDENT_WRONG.friction
+        msg = pool[stated % pool.length]
         stated++
       }
       p = await say(acct.cookie, sessionId, msg)
+      turns++
+      if (p.mastery?.phase) phases.push(p.mastery.phase)
       texts.push(p.text ?? '')
       console.log(`\n--- learner: ${msg}`)
       console.log(d(`T${t + 2}`, p))
@@ -88,6 +115,16 @@ async function main() {
     console.log(`repeated same question : ${dupeQ.length}${dupeQ.length ? '  <-- defect' : ''}`)
     console.log(`verbatim repeated turns: ${dupeT.length}${dupeT.length ? '  <-- defect' : ''}`)
     console.log(`told it was mastered   : ${/you mastered/.test(joined) ? 'YES  <-- defect' : 'no'}`)
+    // ── CAN A STRUGGLING LEARNER EVEN BE ASSESSED? ────────────────────────
+    // route.ts measured 75% of questions carrying no answer key and named
+    // DEMONSTRATE as the largest block. This is the same quantity from the
+    // LEARNER's side: of the turns they were given, how many carried a
+    // question the server could grade? A learner who is never asked a
+    // gradeable question cannot demonstrate recovery however much they learn.
+    const pct = turns > 0 ? Math.round((100 * wrong) / turns) : 0
+    const atDemonstrate = phases.filter((x) => x === 'DEMONSTRATE').length
+    console.log(`GRADEABLE QUESTIONS    : ${wrong} of ${turns} turns (${pct}%)`)
+    console.log(`turns spent at DEMONSTRATE: ${atDemonstrate} of ${phases.length}  (E1's dead zone)`)
     console.log(`FINAL phase=${m?.phase} verified=${m?.verified} check=${m?.checkCorrect} practice=${m?.practiceCorrect}`)
     console.log(`sessionId=${sessionId}`)
   } finally {

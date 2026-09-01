@@ -54,6 +54,33 @@
  * WHEN SOMEONE FIXES IT, THIS TEST WILL FAIL. That is the point: it should
  * fail loudly and be updated deliberately, rather than the dead branch sitting
  * unnoticed for another month.
+ *
+ * ── THE HARM IS NOW MEASURED, AND MY EARLIER READING OF IT WAS WRONG ────────
+ * When this test was written I recorded that E1's deadness caused "no measured
+ * learner harm", because all eight live runs reached verified mastery without
+ * it. That was true and it was the wrong probe: those runs answered every
+ * question correctly, and a learner who is right about everything is barely
+ * affected by whether a question can be graded.
+ *
+ * Driving the CONFIDENTLY WRONG learner instead (2026-09-01,
+ * scripts/qa/verify-misconception-path.ts, three concepts, deployed app):
+ *
+ *   phys.opt.mirrors            3 gradeable questions of 12 turns (25%)
+ *                               5 of 12 turns spent at DEMONSTRATE
+ *   phys.mech.friction          3 of 12
+ *   phys.mech.kinetic-energy    3 of 12
+ *
+ * So roughly HALF a struggling learner's turns sit in the phase where E1 was
+ * built to attach an authored probe and structurally cannot, and three
+ * quarters of their turns carry no question the server can grade. That is
+ * route.ts's own "only 114 of 456 questions carried an answer key" figure,
+ * arrived at independently from the learner's side.
+ *
+ * The consequence is not cosmetic: a learner who is never asked a gradeable
+ * question cannot demonstrate recovery however much they actually learn. The
+ * fix is therefore justified by evidence now, not by tidiness — it needs its
+ * own measurement pass for the post-model attachment described above, not to
+ * be appended to an unrelated change.
  */
 import { describe, it, expect } from 'vitest'
 import {
