@@ -378,17 +378,35 @@ describe('H6 — the serving path is wired, and refuses DRAFT at the boundary', 
     expect(ROUTE.slice(Math.max(0, at - 2500), at)).toMatch(/isRemediationTurn/)
   })
 
+  /**
+   * The serving window, anchored on the CALL rather than the first mention.
+   *
+   * These two tests used `ROUTE.indexOf('findRemediationCard')`, which finds
+   * the IMPORT list several lines earlier, and then read a fixed 2,000
+   * characters. Adding the off-topic guard (2026-08-31) put a comment between
+   * the import and the call and pushed `.servable` past the window, failing
+   * both tests without either invariant being violated.
+   *
+   * The invariants are worth keeping exactly as they were — the card object
+   * must be reachable only through the servable branch, and the card path must
+   * cost no provider call. Only the anchor changes, from "wherever the name
+   * first appears" to the call site the invariants are actually about.
+   */
+  const servingWindow = () => {
+    const at = ROUTE.indexOf('findRemediationCard(conceptForCard)')
+    expect(at, 'the card call site should exist').toBeGreaterThan(-1)
+    return ROUTE.slice(at, at + 2000)
+  }
+
   it('the route serves ONLY a servable lookup — never a raw card', () => {
-    const at = ROUTE.indexOf('findRemediationCard')
-    const scoped = ROUTE.slice(at, at + 2000)
+    const scoped = servingWindow()
     expect(scoped).toMatch(/\.servable/)
     // The card object is only reachable through the servable branch.
     expect(scoped).not.toMatch(/REMEDIATION_CARDS/)
   })
 
   it('a served card costs no provider call', () => {
-    const at = ROUTE.indexOf('findRemediationCard')
-    const scoped = ROUTE.slice(at, at + 2000)
+    const scoped = servingWindow()
     expect(scoped).not.toMatch(/await routeAI\(/)
     // H3's four call sites, unchanged — the card path adds none.
     expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(4)

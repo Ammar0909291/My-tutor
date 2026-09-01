@@ -101,15 +101,33 @@ describe('the route holds on a NON-remediation turn', () => {
   it('consults the window and injects the hold block', () => {
     expect(ROUTE).toContain('remediationWindowOpen')
     expect(ROUTE).toContain('buildRemediationCardHoldBlock')
-    const at = ROUTE.indexOf('remediationWindowOpen')
-    const scoped = ROUTE.slice(Math.max(0, at - 1500), at + 1500)
-    // The hold is the non-remediation branch of the same lookup.
-    expect(scoped).toMatch(/remediationTurn/)
-    expect(scoped).toMatch(/buildRemediationCardHoldBlock/)
+    // ORDER, not distance. The hold is the non-remediation branch of the same
+    // lookup, so what matters is that the window is consulted after the card is
+    // found and the hold block is injected after that — not how many characters
+    // separate them. A distance check here broke twice on added comments while
+    // the product was unchanged.
+    const call = ROUTE.indexOf('remediationWindowOpen({')
+    const lookup = ROUTE.indexOf('findRemediationCard(conceptForCard)')
+    const holdBlock = ROUTE.indexOf('buildRemediationCardHoldBlock(')
+    expect(lookup, 'card lookup').toBeGreaterThan(-1)
+    expect(call, 'window consulted').toBeGreaterThan(lookup)
+    expect(holdBlock, 'hold block injected after the window is consulted').toBeGreaterThan(call)
+    // And the branch is genuinely conditional on the turn type.
+    expect(ROUTE.slice(lookup, holdBlock)).toMatch(/remediationTurn/)
   })
 
   it('the hold reads the mastery counters and never writes them', () => {
-    const at = ROUTE.indexOf('remediationWindowOpen')
+    // Anchored on the CALL, not the first mention of the name.
+    //
+    // This used `ROUTE.indexOf('remediationWindowOpen')`, which finds the
+    // IMPORT list forty lines earlier, and read a fixed window from there.
+    // Adding the off-topic card guard (2026-08-31) put a comment between the
+    // import and the call and pushed `correctAtCheck` out of range — the test
+    // failed while the invariant it protects was untouched. That is the same
+    // proximity-versus-structure mistake this file already corrected once, in
+    // the CURATED_CARD test below.
+    const at = ROUTE.indexOf('remediationWindowOpen({')
+    expect(at, 'the hold call site should exist').toBeGreaterThan(-1)
     const scoped = ROUTE.slice(Math.max(0, at - 1500), at + 1500)
     expect(scoped).toMatch(/correctAtCheck/)          // read
     expect(scoped).not.toMatch(/correctAtCheck\s*=[^=]/) // read, never assigned

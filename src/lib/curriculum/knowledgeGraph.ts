@@ -47,7 +47,10 @@ const SUBJECT_ADAPTERS: Record<string, ReturnType<typeof createSubjectAdapter>> 
 
 // Maps the first ID segment to the subject name so getKGNode() can route
 // phys.em.faradays-law → physics adapter without scanning all adapters.
-const ID_PREFIX_TO_SUBJECT: Record<string, string> = {
+/** Exported so callers that hold a concept id can reach its subject without
+ *  keeping a second copy of this table. Added 2026-08-31 for
+ *  `conceptAdjacency.ts`, which needs the subject to load the right graph. */
+export const ID_PREFIX_TO_SUBJECT: Record<string, string> = {
   math: 'mathematics',
   phys: 'physics',
   chem: 'chemistry',

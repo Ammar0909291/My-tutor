@@ -4467,7 +4467,34 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               findRemediationCard, renderRemediationCard, buildRemediationCardSourceBlock,
               buildRemediationCardHoldBlock, remediationWindowOpen,
             } = await import('@/lib/teaching/remediationCards')
-            const lookup = findRemediationCard(conceptForCard)
+            // THE CARD MUST BELONG TO THIS LESSON, OR NEXT TO IT.
+            //
+            // Measured 2026-08-31 in a real lesson: "what does that angle
+            // bracket thing even mean?" during phys.qm.perturbation-theory
+            // resolved to phys.opt.total-internal-reflection and served its
+            // owner-promoted card — swimming pools and optical fibres — mid-way
+            // through quantum mechanics, then again when the learner objected.
+            //
+            // The resolver handed this block a confident wrong id and nothing
+            // downstream could tell. Three resolver-side fixes were rejected by
+            // measurement (see conceptAdjacency.ts and
+            // docs/architecture/WRONG_CONCEPT_RETRIEVAL.md); this asks the
+            // knowledge graph instead, which vocabulary coincidence cannot fake.
+            //
+            // The ordinary remediation turn is untouched — there the card's
+            // concept IS the lesson concept. Only a card reached for some other
+            // concept is tested, and a prerequisite detour stays adjacent.
+            const cardLessonAnchor = libraryConceptNodeIdHoisted ?? snapshotCurrentConceptId ?? null
+            const { cardConceptIsOnTopic } = await import('@/lib/teaching/conceptAdjacency')
+            const cardOnTopic = cardConceptIsOnTopic(cardLessonAnchor, conceptForCard)
+            if (!cardOnTopic) {
+              console.log('[remediation-card] withheld — off-topic for this lesson', {
+                lesson: cardLessonAnchor, card: conceptForCard,
+              })
+            }
+            const lookup = cardOnTopic
+              ? findRemediationCard(conceptForCard)
+              : { servable: false as const, reason: 'off-topic-for-lesson' as const }
             if (lookup.servable) {
               const cardId = `card:${lookup.card.conceptId}`
               const { hasServedExplanation } = await import('@/lib/teaching/teachingHistory')
