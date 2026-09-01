@@ -134,6 +134,41 @@ describe('E1 — and it is unreachable, because the move is never "ask" there', 
     expect(asked).toBeGreaterThan(0)
   })
 
+  it('DEMONSTRATE is the ONLY phase that cannot ask — the defect class is bounded', () => {
+    // Generalising the audit that found E1: if other phases were also unable
+    // to produce 'ask', every feature gated on it would be dead too and this
+    // would be a class of defects rather than one. Enumerated across the same
+    // context space for all six phases: only DEMONSTRATE is 'ask'-less.
+    //
+    // Kept as a guard, not trivia. If a future change makes another phase
+    // 'ask'-less, anything gated on `move === 'ask'` there dies silently, and
+    // this is the test that says so.
+    const askless: string[] = []
+    for (const phase of ['OBSERVE', 'DEMONSTRATE', 'GUIDE', 'CHECK', 'PRACTICE', 'TRANSFER'] as const) {
+      let canAsk = false
+      for (const recoveryTurn of BOOLS)
+      for (const workedExampleFirst of BOOLS)
+      for (const practiceRequested of BOOLS)
+      for (const demonstrated of BOOLS)
+      for (const taughtThisSession of BOOLS)
+      for (const teachSegmentsSinceQuestion of [0, 1, 2, 3])
+      for (const consecutiveFailures of [0, 1, 2]) {
+        const d = decideNextMoveDetailed(
+          at(phase, {
+            demonstrated, taughtThisSession, teachSegmentsSinceQuestion, consecutiveFailures,
+          } as Partial<ConversationState>),
+          {
+            recoveryTurn, workedExampleFirst, practiceRequested,
+            legality: { hasEvidencedPriorKnowledge: false },
+          } as unknown as Ctx,
+        )
+        if (d.move === 'ask') { canAsk = true; break }
+      }
+      if (!canAsk) askless.push(phase)
+    }
+    expect(askless).toEqual(['DEMONSTRATE'])
+  })
+
   it('the route still spells the condition that makes it moot', () => {
     // If this string changes, the fix has been attempted and every claim in
     // this file's header must be re-measured before the test is updated.
