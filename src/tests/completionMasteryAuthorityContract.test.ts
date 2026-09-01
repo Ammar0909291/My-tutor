@@ -51,7 +51,13 @@ import { buildCompletionPayload, requiredConceptsForLesson, shouldFinalizeLesson
 function st(id: string, over: Partial<ConversationState> = {}): ConversationState {
   return { ...initialConversationState(id), ...over }
 }
-const mastered = (id: string) => st(id, { correctAtPractice: 2 })
+// A REACHABLE mastered state. Through the real fold, correctAtPractice can
+// only reach 2 after correctAtCheck reached 1 (CHECK requires correctAtCheck>=1
+// to advance to PRACTICE) — so `correctAtPractice: 2` alone was an unreachable
+// raw state. The single-owner mastery verdict (masteryGate.conceptMasteryVerdict)
+// reads the real bar (check>=1 && practice>=2), so this helper now supplies
+// both, matching what a genuinely-mastered lesson actually holds.
+const mastered = (id: string) => st(id, { correctAtCheck: 1, correctAtPractice: 2 })
 const exhaustedNoEvidence = (id: string) =>
   st(id, { turnsOnConcept: CONCEPT_TURN_BUDGET, correctAtCheck: 0, correctAtPractice: 0 })
 const T0 = new Date('2026-08-22T10:00:00Z')

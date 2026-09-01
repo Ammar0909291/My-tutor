@@ -13,7 +13,7 @@ import {
 function st(conceptId: string, over: Partial<ConversationState> = {}): ConversationState {
   return { ...initialConversationState(conceptId), ...over }
 }
-const mastered = (id: string) => st(id, { correctAtPractice: 2 })
+const mastered = (id: string) => st(id, { correctAtCheck: 1, correctAtPractice: 2 })
 const exhausted = (id: string) => st(id, { turnsOnConcept: CONCEPT_TURN_BUDGET })
 const T0 = new Date('2026-08-02T10:00:00Z')
 
@@ -49,7 +49,7 @@ describe('recordConceptOutcome', () => {
   it('records a corrected misconception only when mastery followed', () => {
     const fixed = recordConceptOutcome(
       startLessonAttempt('L', null, T0),
-      st('c1', { correctAtPractice: 2, misconceptionsSeen: ['m'] }),
+      st('c1', { correctAtCheck: 1, correctAtPractice: 2, misconceptionsSeen: ['m'] }),
     )
     expect(fixed.misconceptionsCorrected).toEqual(['c1'])
     const unfixed = recordConceptOutcome(
@@ -70,7 +70,7 @@ describe('recordConceptOutcome', () => {
 
   it('accumulates teaching attempts across concepts', () => {
     let a = startLessonAttempt('L', null, T0)
-    a = recordConceptOutcome(a, st('c1', { correctAtPractice: 2, remediationCount: 1 }))
+    a = recordConceptOutcome(a, st('c1', { correctAtCheck: 1, correctAtPractice: 2, remediationCount: 1 }))
     a = recordConceptOutcome(a, mastered('c2'))
     expect(a.teachingAttempts).toBe(3) // (1+1) + (1+0)
   })
@@ -103,7 +103,7 @@ describe('completeLessonAttempt', () => {
 describe('summaryFromAttempt — summary comes from persisted evidence', () => {
   it('rebuilds the buckets from the stored outcome alone', () => {
     let a = startLessonAttempt('L', null, T0)
-    a = recordConceptOutcome(a, st('c1', { correctAtPractice: 2, misconceptionsSeen: ['m'] }))
+    a = recordConceptOutcome(a, st('c1', { correctAtCheck: 1, correctAtPractice: 2, misconceptionsSeen: ['m'] }))
     a = recordConceptOutcome(a, mastered('c2'))
     a = recordConceptOutcome(a, exhausted('c3'))
     const s = summaryFromAttempt(a)

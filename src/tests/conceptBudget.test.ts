@@ -201,7 +201,7 @@ describe('buildLessonFlowBlock', () => {
 
 describe('lesson summary — from demonstrated evidence', () => {
   it('reports a mastered concept as mastered', () => {
-    const o = conceptOutcome(st({ conceptId: 'frac', correctAtPractice: 2 }), 'Fractions')
+    const o = conceptOutcome(st({ conceptId: 'frac', correctAtCheck: 1, correctAtPractice: 2 }), 'Fractions')
     expect(o.status).toBe('mastered')
     expect(o.title).toBe('Fractions')
   })
@@ -212,7 +212,7 @@ describe('lesson summary — from demonstrated evidence', () => {
   })
 
   it('counts a misconception as corrected only when mastery followed', () => {
-    const fixed = conceptOutcome(st({ correctAtPractice: 2, misconceptionsSeen: ['m1'] }))
+    const fixed = conceptOutcome(st({ correctAtCheck: 1, correctAtPractice: 2, misconceptionsSeen: ['m1'] }))
     expect(fixed.misconceptionsCorrected).toBe(true)
     const notFixed = conceptOutcome(st({ misconceptionsSeen: ['m1'] }))
     expect(notFixed.misconceptionsCorrected).toBe(false)
@@ -234,8 +234,8 @@ describe('lesson summary — from demonstrated evidence', () => {
 
   it('aggregates the three required buckets', () => {
     const summary = buildLessonSummary([
-      conceptOutcome(st({ conceptId: 'a', correctAtPractice: 2 }), 'A'),
-      conceptOutcome(st({ conceptId: 'b', correctAtPractice: 2, misconceptionsSeen: ['m'] }), 'B'),
+      conceptOutcome(st({ conceptId: 'a', correctAtCheck: 1, correctAtPractice: 2 }), 'A'),
+      conceptOutcome(st({ conceptId: 'b', correctAtCheck: 1, correctAtPractice: 2, misconceptionsSeen: ['m'] }), 'B'),
       conceptOutcome(st({ conceptId: 'c', turnsOnConcept: 99 }), 'C'),
     ])
     expect(summary.mastered.map((o) => o.title)).toEqual(['A', 'B'])
@@ -245,13 +245,13 @@ describe('lesson summary — from demonstrated evidence', () => {
   })
 
   it('is complete only when nothing needs review', () => {
-    expect(buildLessonSummary([conceptOutcome(st({ correctAtPractice: 2 }), 'A')]).complete).toBe(true)
+    expect(buildLessonSummary([conceptOutcome(st({ correctAtCheck: 1, correctAtPractice: 2 }), 'A')]).complete).toBe(true)
     expect(buildLessonSummary([]).complete).toBe(false)
   })
 
   it('renders the facts and forbids inventing coverage', () => {
     const block = buildLessonSummaryBlock(buildLessonSummary([
-      conceptOutcome(st({ conceptId: 'a', correctAtPractice: 2, misconceptionsSeen: ['m'] }), 'A'),
+      conceptOutcome(st({ conceptId: 'a', correctAtCheck: 1, correctAtPractice: 2, misconceptionsSeen: ['m'] }), 'A'),
       conceptOutcome(st({ conceptId: 'c', turnsOnConcept: 99 }), 'C'),
     ]))
     expect(block).toMatch(/do NOT add any concept/)

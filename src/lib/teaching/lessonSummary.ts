@@ -13,8 +13,7 @@
  */
 
 import type { ConversationState } from './conversationState'
-import { evaluateConceptBudget, hasDemonstratedMastery } from './conceptBudget'
-import { launderedEvidence } from './masteryGate'
+import { conceptMasteryVerdict } from './masteryGate'
 import { safeConceptTitle } from '@/lib/curriculum/knowledgeGraph'
 
 export interface ConceptOutcome {
@@ -44,8 +43,14 @@ export function conceptOutcome(
    *  unchanged; supplying it localizes the concept name. */
   lang: string = 'en',
 ): ConceptOutcome {
-  const mastered = hasDemonstratedMastery(state)
-  const budget = evaluateConceptBudget(state)
+  // The permanent record's mastery verdict is the ONE authority the completion
+  // gate and the client payload also read — see `conceptMasteryVerdict`. This
+  // used to read `hasDemonstratedMastery && !budget.markForReview &&
+  // !launderedEvidence`, which was LOOSER than the gate on reachable states
+  // (it accepted a CONTRADICTED check grade, and — in raw states — TRANSFER
+  // with no graded evidence), so the record could write "You mastered X" for a
+  // lesson the gate refused to complete. It now cannot.
+  const mastered = conceptMasteryVerdict(state)
   return {
     conceptId: state.conceptId ?? 'unknown',
     // NEVER falls back to the concept id. It used to (`|| state.conceptId`),
@@ -86,9 +91,7 @@ export function conceptOutcome(
     // Making strict mastery a universal precondition here would be a far
     // larger change, and this codebase has repeatedly measured over-blocking
     // doing more harm than the thing it blocked.
-    status: mastered && !budget.markForReview && !launderedEvidence(state)
-      ? 'mastered'
-      : 'needs_review',
+    status: mastered ? 'mastered' : 'needs_review',
     misconceptions: [...state.misconceptionsSeen],
     misconceptionsCorrected: mastered && state.misconceptionsSeen.length > 0,
   }

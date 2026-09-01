@@ -86,6 +86,50 @@ export function masteryVerifiedStrict(state: ConversationState | null): boolean 
   )
 }
 
+/**
+ * THE SINGLE AUTHORITY ON "HAS THIS LEARNER MASTERED THIS CONCEPT?"
+ *
+ * ── WHY THIS EXISTS ─────────────────────────────────────────────────────────
+ * Three components used to answer this question independently, and they
+ * disagreed on reachable states (OWNERSHIP_CENSUS_2026-09-01 §B2):
+ *
+ *   completion gate  gateLessonCompletion  ->  masteryVerifiedStrict
+ *   client payload   buildMasterySummary   ->  masteryVerified && !laundered
+ *   permanent record conceptOutcome        ->  hasDemonstratedMastery && !laundered
+ *
+ * Measured live through the REAL fold (not a raw grid): a learner reaching
+ * TRANSFER whose CHECK grade was CONTRADICTED (check 1 / practice 2 /
+ * verifiedCheck 0 / contradictions 1 / keys 0) had payload.verified = true and
+ * the record = 'mastered', while the completion gate correctly REFUSED
+ * [LESSON_COMPLETE]. The learner was told they had mastered a concept the gate
+ * would not certify — success-condition #7's exact shape.
+ *
+ * ── THE RESOLUTION ──────────────────────────────────────────────────────────
+ * There is now ONE function. `gateLessonCompletion`, `buildMasterySummary`
+ * (the payload), and `conceptOutcome` (the permanent record) all consult it,
+ * so they cannot disagree for ANY state, reachable or not — the guarantee is
+ * structural, not a coincidence over the states someone happened to test.
+ *
+ * It is `masteryVerifiedStrict` — the tightest of the three, and already the
+ * completion authority. Routing the other two through it is provably
+ * MONOTONE-TIGHTER: `strict ⟹ masteryVerified && !laundered` (the old payload)
+ * and `strict ⟹ hasDemonstratedMastery && !laundered` (the old record), so a
+ * lesson the two authorities used to certify still certifies UNLESS the
+ * completion gate would have refused it — in which case the old "mastered" was
+ * a false claim. No ordinary, cleanly-graded lesson changes: a genuine
+ * check-1/practice-2 with clean or absent verification still verifies through
+ * the strict fallback (see masteryVerifiedStrict).
+ *
+ * `hasDemonstratedMastery` (conceptBudget.ts) is deliberately NOT folded into
+ * this: it answers a DIFFERENT question — "should this concept stop being
+ * actively taught" — which is legitimately satisfied by mastery OR budget
+ * exhaustion, and must stay separate so a budget-exhausted concept still
+ * closes without being recorded as mastered.
+ */
+export function conceptMasteryVerdict(state: ConversationState | null): boolean {
+  return masteryVerifiedStrict(state)
+}
+
 // ── Bug 2: acknowledgements are not evidence ─────────────────────────────────
 
 /**
@@ -254,7 +298,7 @@ export function gateLessonCompletion(
   // transition itself rather than hiding it. A lesson genuinely completed
   // BEFORE the excursion opened is untouched: that completion is already
   // persisted and nothing here rewrites it.
-  if (!opts?.excursionActive && masteryVerifiedStrict(state)) {
+  if (!opts?.excursionActive && conceptMasteryVerdict(state)) {
     return { cleanText: text, authorized: true, suppressed: false }
   }
   return {
@@ -992,9 +1036,12 @@ export function buildMasterySummary(
   opts: { completionSuppressed: boolean; gatePending: boolean },
 ): MasterySummary {
   return {
-    // Never claims more than the permanent record will grant — see
-    // `launderedEvidence` above for the measured incoherence this closes.
-    verified: masteryVerified(state) && !launderedEvidence(state),
+    // ONE authority. The payload's "verified" is the same verdict the
+    // completion gate and the permanent record read (`conceptMasteryVerdict`),
+    // so the three can never disagree — the incoherence measured live on
+    // phys.mech.friction (payload said verified, gate refused) is now
+    // structurally impossible rather than patched at one call site.
+    verified: conceptMasteryVerdict(state),
     phase: state.phase,
     checkCorrect: state.correctAtCheck,
     practiceCorrect: state.correctAtPractice,

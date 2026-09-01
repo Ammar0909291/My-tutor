@@ -240,23 +240,36 @@ describe('the record path, which the first fix did not reach', () => {
 })
 
 describe('it cannot break a lesson the model did not invent a question into', () => {
-  // The scope that keeps this surgical: the strict test is required ONLY when
-  // this session actually graded against an invented key. At zero, the
-  // expression is byte-identical to what shipped before.
+  // An ORDINARY, genuinely-mastered lesson, built from a REACHABLE state. The
+  // permanent record now consults the one mastery verdict
+  // (masteryGate.conceptMasteryVerdict = the strict bar the completion gate
+  // reads), so a clean check-1/practice-2 lesson still records 'mastered'
+  // through the strict fallback (no verified counters, no contradictions, no
+  // invented keys). `correctAtCheck: 1` is required, not decoration — through
+  // the real fold correctAtPractice cannot reach 2 without it, so the earlier
+  // `correctAtPractice: 2` with check 0 was an unreachable raw state.
   const ordinary = (over: Partial<ConversationState> = {}): ConversationState => ({
     ...initialConversationState('phys.mech.friction'),
     phase: 'TRANSFER',
     demonstrated: true,
+    correctAtCheck: 1,
     correctAtPractice: 2,
     unauthoredKeyGrades: 0,
     ...over,
   })
 
-  it('mastery on TRANSFER alone still records, exactly as before', () => {
-    expect(conceptOutcome(ordinary({ correctAtPractice: 0 })).status).toBe('mastered')
+  it('TRANSFER phase with no graded evidence is NOT recorded as mastered', () => {
+    // CORRECTED (single-owner mastery verdict). This case used to assert
+    // 'mastered' on `phase: 'TRANSFER'` alone with correctAtPractice 0 — a
+    // state that (a) is unreachable through the fold and (b) the completion
+    // gate has always refused. The permanent record now reads the same verdict
+    // as the gate, so it declines it too instead of writing "You mastered X"
+    // for a lesson the gate would not complete.
+    expect(conceptOutcome(ordinary({ correctAtCheck: 0, correctAtPractice: 0 })).status)
+      .toBe('needs_review')
   })
 
-  it('mastery on two practice answers still records', () => {
+  it('mastery on a clean check + two practice answers still records', () => {
     expect(conceptOutcome(ordinary()).status).toBe('mastered')
   })
 
