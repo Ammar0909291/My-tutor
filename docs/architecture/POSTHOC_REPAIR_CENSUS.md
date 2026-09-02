@@ -89,6 +89,23 @@ measurement-only by design.
 grade risk disagreeing on screen. A single "state the graded verdict" owner
 would consolidate them.
 
+**MEASURED + PINNED 2026-09-02 (slice 9).** The grade VALUE already has one
+owner: `mcqGradeHoisted` is assigned exactly once (route 2171, from
+`gradeMcqAnswer`'s deterministic comparison against an authored key), and all
+three staters read that one derivation — never a self-report, never a
+re-computed grade. `repairMirrorWithVerdict`'s correct-option text also comes
+from the SAME `pendingMcqHoisted` the answer was graded against, so it cannot
+name a different option. The three are SEQUENTIAL transforms of one `cleanText`
+(a later repair replaces the mirror, it does not append a second verdict beside
+the first), so two divergent verdicts cannot co-render even in phrasing. So the
+"disagree on screen" risk is not reachable today; a full consolidation into one
+stater is unnecessary. What IS worth guarding is the one-source invariant — a
+future edit giving any stater a second grade source (`signalCorrect`, a
+re-derivation) is the reachable regression. `gradeVerdictSingleSource.test.ts`
+pins it: single assignment, every stater reads `mcqGradeHoisted`, none reads the
+SIGNAL. Same discipline as slices 2/4/5 — measure reachable harm, pin the
+invariant, don't consolidate where the semantics don't require it.
+
 ## Verdict
 
 No repair is obsolete; none should be deleted. The A-sites are correct. The

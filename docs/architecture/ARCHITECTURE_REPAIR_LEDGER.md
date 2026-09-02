@@ -254,6 +254,28 @@ so "a green suite with a hollowed-out test" cannot masquerade as prevention.
 Docs-only slice — no runtime/test change, so no suite run required; the 28 cited
 tests were green as of `f4bded73` (532 files / 11,550 passed / 9 skipped).
 
+## Slice 9 — one graded verdict, one source (Census A Finding 3) — DONE 2026-09-02
+
+**Decision**: "what did the server grade this answer?" — rendered by three
+post-model staters (`confirmCorrectAnswer` 5788, `applyDontKnowCeiling` reveal
+~6715, `repairMirrorWithVerdict` 7324).
+
+**Measured (slice-2/4/5 discipline)**: the VALUE already has one owner —
+`mcqGradeHoisted`, assigned EXACTLY ONCE (route 2171, from `gradeMcqAnswer`),
+and all three staters read that one derivation. The "disagree on screen" risk the
+census named is NOT reachable today: the option text in the mirror repair comes
+from the same `pendingMcqHoisted` graded against, and the three are sequential
+`cleanText` transforms (later replaces the mirror, does not append a second
+verdict), so two divergent verdicts cannot co-render. **Not consolidated** — the
+semantics don't require one stater; the reachable regression is a FUTURE second
+grade source.
+
+**Enforcement** (`gradeVerdictSingleSource.test.ts`, 5 tests, no runtime change):
+pins single assignment; every stater reads `mcqGradeHoisted`; the mirror's option
+text reads the graded item; none reads `signalCorrect` (the model self-report is
+one hoist away and must not be confused for the grade at a rendering site).
+POSTHOC_REPAIR_CENSUS Finding 3 updated from open to MEASURED+PINNED.
+
 ## CENSUS FULLY TRIAGED (2026-09-01)
 
 All four OWNERSHIP_CENSUS targets + Census A are measured and resolved:
