@@ -180,3 +180,57 @@ describe('stripping never hands back an empty or broken turn', () => {
     expect(claimsCompletionInProse(teaching)).toBe(false)
   })
 })
+
+// ── THE NEXT-LESSON PREVIEW, RENDERED A TURN EARLY ───────────────────────────
+// Verbatim from the real account (phys.qm.angular-momentum-addition, 2026-09-02)
+// at practiceCorrect=1, verified=false — a practice MCQ was attached in the SAME
+// turn, so the lesson was NOT over — yet the tutor ran the LESSON CLOSING FORMAT
+// and previewed the NEXT lesson's content ("Next we explore Wigner-Eckart …").
+const QM_PREMATURE_CLOSE = [
+  'Correct — well done. 🎉 Excellent work! You\'ve mastered how to combine two angular momenta into a discrete set of total J values, count the corresponding magnetic sub-states, and verify state-count consistency.',
+  '✓ What you mastered — you can now determine the range |j₁−j₂| to j₁+j₂ in integer steps, compute state multiplicities using 2J+1, and avoid the trap of simple vector addition.',
+  '✓ Common mistakes — assuming total J is just a single scalar sum, and forgetting that the total number of states must be conserved.',
+  '✓ What\'s coming — Next we explore Wigner-Eckart theorem and tensor operators, unlocking the powerful selection rules that govern quantum transitions.',
+].join('\n')
+
+describe('a next-lesson preview rendered before mastery is stripped', () => {
+  const qmUnearned = () => ({
+    ...initialConversationState('phys.qm.angular-momentum-addition'),
+    phase: 'PRACTICE' as const, demonstrated: true, correctAtCheck: 1, correctAtPractice: 1,
+    verifiedCorrectAtCheck: 1, verifiedCorrectAtPractice: 1,
+  })
+
+  it('flags the premature completion and strips the "Next we explore <next lesson>" preview', () => {
+    const { cleanText, violations } = run(QM_PREMATURE_CLOSE, qmUnearned())
+    expect(violations.map((v) => v.code)).toContain('FALSE_MASTERY_COMPLETION')
+    expect(cleanText).not.toMatch(/Next we explore/i)
+    expect(cleanText).not.toContain('Wigner-Eckart')
+  })
+
+  it('keeps the turn-level praise and the current-lesson recap (recap policy unchanged)', () => {
+    const { cleanText } = run(QM_PREMATURE_CLOSE, qmUnearned())
+    expect(cleanText).toContain('Excellent work')
+    expect(cleanText).toContain('What you mastered')      // sub-skill recap kept
+    expect(cleanText).toContain('Common mistakes')
+    expect(cleanText).toContain('mastered how to combine') // sub-skill praise kept (not "the lesson")
+  })
+
+  it('the SAME preview is allowed once mastery is genuinely verified (not a new "can never finish" defect)', () => {
+    const earned = {
+      ...initialConversationState('phys.qm.angular-momentum-addition'),
+      phase: 'TRANSFER' as const, demonstrated: true, correctAtCheck: 1, correctAtPractice: 2,
+      verifiedCorrectAtCheck: 1, verifiedCorrectAtPractice: 2,
+    }
+    const { cleanText } = run(QM_PREMATURE_CLOSE, earned)
+    expect(cleanText).toContain('Next we explore Wigner-Eckart')
+  })
+
+  it('the deliberately-kept motivational "What\'s coming" recap (no "next we <verb>") is NOT touched', () => {
+    // The existing production fixture ends with "✓ What's coming — understanding
+    // how to … builds directly on your new grasp" — a motivation, not a next-topic
+    // announcement. It must still survive, or this becomes a recap-policy overturn.
+    expect(claimsCompletionInProse(
+      "✓ What's coming — understanding how to handle measurement errors builds directly on your new grasp of dimensions.",
+    )).toBe(false)
+  })
+})

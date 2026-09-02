@@ -156,8 +156,26 @@ const RESOLUTION_CLAIM_RE =
 // The noun stays load-bearing. "You've completed 2 of the 3 practice
 // questions" is in-lesson progress and true, and must not be stripped; only a
 // count of LESSONS is a claim about the learner's record.
+// ── THE NEXT-LESSON PREVIEW FORM ─────────────────────────────────────────────
+//
+// MEASURED (production, phys.qm.angular-momentum-addition, 2026-09-02, real
+// account) at practiceCorrect=1, verified=false — the lesson was NOT over, and a
+// practice MCQ was attached in the SAME turn — the tutor rendered the LESSON
+// CLOSING FORMAT a turn early, ending with
+//
+//   "✓ What's coming — Next we explore Wigner-Eckart theorem and tensor operators…"
+//
+// This is the same premature-transition claim the entries above catch ("next up
+// is", "on to the next lesson", "your next lesson is"), in the phrasing the model
+// actually used to announce the NEXT lesson's content. It slipped through: the
+// existing rules key on "lesson"/"next up", while this names the next topic
+// directly ("Next we explore <topic>"). Added as a bug fix, not a policy change —
+// the deliberately-kept motivational "What's coming — <how it builds on this>"
+// recap (no "next we <verb>") is unaffected, and this strips only when mastery is
+// unverified (completionIsTrue gate below). The verbs connote introducing a NEW
+// topic, not an in-lesson step ("next, let's try…" / "now solve…" do not match).
 const COMPLETION_CLAIM_RE =
-  /(you(?:'ve| have)?\s+(?:(?:just|now|already)\s+)?(?:completed|finished|wrapped up|mastered)\s+(?:this\s+|the\s+)?lesson|(?:you(?:'ve| have)?\s+)?(?:(?:just|now|already)\s+)?completed\s+lesson\s+\d+|(?:(?:just|now|already)\s+)?completed\s+\d+\s+of\s+(?:the\s+)?\d+\s+lessons|lesson\s+\d+\s+(?:of\s+\d+\s+)?(?:is\s+)?complete|this\s+lesson\s+is\s+(?:now\s+)?(?:complete|finished|done)|next\s+up\s*(?:is\b|:)|on\s+to\s+the\s+next\s+lesson|moving\s+on\s+to\s+lesson\s+\d+|your\s+next\s+lesson\s+is\b)/i
+  /(you(?:'ve| have)?\s+(?:(?:just|now|already)\s+)?(?:completed|finished|wrapped up|mastered)\s+(?:this\s+|the\s+)?lesson|(?:you(?:'ve| have)?\s+)?(?:(?:just|now|already)\s+)?completed\s+lesson\s+\d+|(?:(?:just|now|already)\s+)?completed\s+\d+\s+of\s+(?:the\s+)?\d+\s+lessons|lesson\s+\d+\s+(?:of\s+\d+\s+)?(?:is\s+)?complete|this\s+lesson\s+is\s+(?:now\s+)?(?:complete|finished|done)|next\s+up\s*(?:is\b|:)|on\s+to\s+the\s+next\s+lesson|moving\s+on\s+to\s+lesson\s+\d+|your\s+next\s+lesson\s+is\b|next\s+we(?:'ll| will)?\s+(?:explore|cover|study|examine|tackle|dive\s+into|move\s+on\s+to|turn\s+to)\b)/i
 
 /**
  * Removes the sentences (or list items) that make a false record claim, leaving
