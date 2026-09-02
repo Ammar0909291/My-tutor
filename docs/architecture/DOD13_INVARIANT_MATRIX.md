@@ -50,7 +50,12 @@ Post-hoc rewrite classification: `POSTHOC_REPAIR_CENSUS.md`.
 
 ## What this proves, and what it does not
 
-**Prevented, by construction, driven through the real modules:** every row above.
+**Status (after slices 10–11): all 16 matrix classes PREVENTED**, by construction,
+driven through the real modules — every row above. The only remaining DoD #13
+detection-only site is deliberately NOT a matrix row: the TUTOR emitting a
+question-only CLOSING turn (see below), a tutor-output presentation choice left
+unrewritten under the never-fabricate rule — it is not an unauthorized
+mastery/completion path (completion authorization stays gated by rows 13 and 16).
 The mastery verdict (1) and its reachability premise (2) are the load-bearing pair —
 slice 1's single-owner merge is only sound because the fold makes the out-of-order
 mastery shapes unreachable, and rows 1–2 pin both halves so neither can drift without
