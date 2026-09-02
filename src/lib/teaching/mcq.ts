@@ -1013,6 +1013,18 @@ export function mcqToServe(
 }
 
 /**
+ * OPTION A (I1) lead-in: prepended by the route when a pending keyed MCQ is
+ * re-offered because the learner's typed answer could not be mapped to any
+ * option (a genuine attempt that `resolveMcqChoice` refused, NOT a bare
+ * acknowledgement, practice request, or question). It makes the re-offer
+ * non-silent without loosening grading — the answer stays ungraded by design.
+ * Lives here, beside `mcqToServe`, so the route and its regression test share
+ * one definition and cannot drift.
+ */
+export const MCQ_REOFFER_DISAMBIGUATION =
+  "I couldn't tell which option your answer matched — tap the choice you mean from the list below."
+
+/**
  * THE LEARNER-FACING PROJECTION OF A SERVED MCQ — question and options ONLY.
  *
  * The answer key (`correctIndex`) and the internal `assetId` are SERVER-ONLY.

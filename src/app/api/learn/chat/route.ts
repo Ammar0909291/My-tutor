@@ -8877,6 +8877,59 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         } catch { /* summary is informational — never blocks the turn */ }
       }
 
+      // OPTION A (I1) — A RE-OFFERED PROBE MUST NOT SILENTLY IGNORE AN
+      // UNGRADEABLE ANSWER ATTEMPT.
+      //
+      // Reproduced live on the real account 2026-09-02 (phys.particle.gauge-bosons
+      // and phys.qm.angular-momentum-addition): with a keyed MCQ pending, a learner
+      // who TYPES an answer instead of tapping — the move a weak-English learner
+      // actually makes, and the chat box is left enabled beside the options — can
+      // produce text that `resolveMcqChoice` cannot confidently map to an option.
+      // `gradeMcqAnswer` then returns correct:null, DELIBERATELY: a false grade
+      // writes permanent false evidence (the Phase 7P class). So nothing is graded,
+      // the mastery gate does not move, and the identical MCQ re-offers next turn
+      // with no sign the attempt was seen — the learner reads it as being ignored
+      // and repeated at (I1's "sluggish / identical re-offer" symptom).
+      //
+      // This does NOT loosen grading — the answer stays ungraded, by design. It
+      // makes the re-offer NON-SILENT: one deterministic line telling the learner
+      // their typed answer could not be matched to a choice and to tap one. It
+      // claims nothing about correctness and never fabricates a probe.
+      //
+      // Fires ONLY on a genuine, un-mappable ANSWER ATTEMPT: a probe is being
+      // re-offered (served, with none freshly attached this turn — so `mcqToServe`
+      // is returning the carried-forward `pendingMcq`), and the message was not a
+      // bare acknowledgement, not a practice request, and not a question. The
+      // question exclusion matters: a learner asking something mid-probe is
+      // answered by the model and must NOT be told to "tap a choice". Placed
+      // before the empty-with-probe backstop below so that when the model text is
+      // empty this lead-in stands alone rather than stacking two lead-ins.
+      {
+        const { mcqToServe: mcqToServeForReoffer, MCQ_REOFFER_DISAMBIGUATION } = await import('@/lib/teaching/mcq')
+        const { detectLearnerQuestion } = await import('@/lib/teaching/conversationState')
+        const servedReoffer = mcqToServeForReoffer(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted)
+        // `mcqToServe` returns the freshly-attached probe when one exists, so
+        // `served !== null && mcqHoisted === null` is exactly "the pending probe
+        // is being carried forward" — a re-offer, not a new question. And it only
+        // carries a pending probe forward when nothing graded this turn, so an
+        // answer that DID grade (even wrong) consumes the probe and never reaches
+        // here.
+        const isReoffer = servedReoffer !== null && mcqHoisted === null
+        const genuineUnmappedAttempt =
+          isReoffer
+          && mcqGradeHoisted === null
+          && message.trim() !== ''
+          && !isBareAckHoisted
+          && !turnIntent.wantsPractice
+          && !detectLearnerQuestion(message)
+        if (genuineUnmappedAttempt && !cleanText.includes(MCQ_REOFFER_DISAMBIGUATION)) {
+          console.log('[mcq-reoffer-disambiguation] ungradeable answer against a pending probe — prompting a tap')
+          cleanText = cleanText.trim()
+            ? `${MCQ_REOFFER_DISAMBIGUATION}\n\n${cleanText}`
+            : MCQ_REOFFER_DISAMBIGUATION
+        }
+      }
+
       // A LEARNER TURN MUST NEVER SHIP EMPTY WHILE A PROBE IS ON SCREEN.
       //
       // The empty-with-mcq lead-in above (~5286) runs on the RAW model text and
