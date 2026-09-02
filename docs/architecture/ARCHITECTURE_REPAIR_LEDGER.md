@@ -168,6 +168,29 @@ reachability discipline; only slice 1 (mastery) had a live reachable defect that
 needed a runtime change. The other three were already correct — the value was
 MEASURING that (so no risky merge is attempted) and PINNING it against regression.
 
+## Slice 5 — teaching-action ownership (census target #4) — MEASURED CLEAN 2026-09-01
+
+Census called it "3 partial owners, not yet measured." Measured: they are
+LAYERED, not competing owners of one decision.
+- CUE `decideTeaching` → `TeachingDecision` → the Runtime Dispatcher (Milestone
+  3, dispatcher.ts) owns the EXECUTOR fork (serve-from-memory / LESSON_COMPLETE /
+  LLM). Its own comment: "the ONE place a TeachingDecision is mapped onto an
+  existing execution path."
+- `decide()` (teaching engine) → the "TEACHING ENGINE DECISION" prompt block owns
+  the LLM-turn STRATEGY (goal/mode/action/difficulty), with the LLM as renderer.
+- No reachable contradiction: when the dispatcher routes to a non-LLM executor
+  (route 4493/4497 set `serveFromMemory`/`serveLessonComplete`), the LLM path —
+  and thus `decide()`'s block — is bypassed, so it never reaches the learner.
+Already covered by `dispatcher.test.ts`, `stageProgressionOwnership.test.ts`,
+`completionConversationRouting.test.ts`, `brainRuntimeIntegration.test.ts`. No new
+pin added (would duplicate). Fallback law documented: an inconsistent plan
+degrades to legacy, never strands a turn.
+
+**Census scorecard**: #1 mastery (real fix, slice 1), #2 acknowledgement (clean,
+pinned, slice 2), #4 teaching action (clean, covered, slice 5), Census A (slices
+3/4). Only #3 (visual/learner-request) remains — the layer the mission explicitly
+cautions against reopening.
+
 ## Ranked remaining targets
 
 - census target #3: learner-request / visual-request — 5 predicates
