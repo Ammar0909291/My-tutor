@@ -2763,6 +2763,42 @@ reset — `stats_reset: 2026-07-05 15:50:54+00`), not re-derived from the prior 
   `c98ea7b` fixes and was not re-run at scale here (provider-capacity-bound; that ceiling is the
   open infra item, not a product defect).
 
+## #1 — correct-answer confirmation rate: MEASUREMENT ARTIFACT, enforcer works (2026-09-02, no code change)
+- **VERDICT: no product defect.** The confirmation ENFORCER (`answerConfirmation.confirmCorrectAnswer`,
+  wired at `route.ts:5824`) fires on `mcqGradeHoisted?.correct === true` — the server's grade against
+  an authored key, not the model's self-report — and code-guarantees a confirmation on every
+  server-graded-correct INTERMEDIATE turn (it PREPENDS one of "That's right." / "Correct — well done."
+  / "Yes, exactly right." unless the reply already matches `CONFIRMS_CORRECT`). Live evidence from the
+  I1/I4 runs: intermediate graded-correct answers were confirmed ("Great—yes…", "You're right—photon
+  first…", "That's right.", "Exactly—quarks…").
+- **The "65%" is a scorer artifact, and the P0 fix made it worse (unmeasurable).** `rubricScore.ts`
+  scores C5 over a DIFFERENT denominator than the enforcer: `answeredOption(prev, sent)` requires
+  `prev.mcq.correctIndex` in the payload and counts any option-text match — not a server grade. The
+  P0 fix (this session, `mcqForClient` strips `correctIndex` from the payload) means `answeredOption`
+  now returns null for every turn, so post-P0 `rubricScore` can no longer compute C5 at all
+  (denominator 0). The 65% was measured 2026-08-30/31 on PRE-P0 transcripts; it is stale, and its
+  denominator never matched the enforcer's (a transcript cannot carry `mcqGradeHoisted`). The prior
+  `docs/architecture/C5_CONFIRMATION_RESIDUE.md` already argued widening the detector would be
+  measurement tampering — confirmed.
+- **The one identified real contributor is the COMPLETION turn, and it is intentional, not a defect.**
+  On the turn a lesson completes, `route.ts:8322` deterministically REPLACES the reply with
+  `buildLessonCloseText` ("That's <concept> finished — nice work. You mastered <concept>") — which runs
+  AFTER the enforcer (5824), so it discards the enforcer's confirmation. That close is a stronger,
+  complete success acknowledgement that deliberately solicits nothing further (a tappable question would
+  re-open a finished lesson). It just doesn't match the `CONFIRMS_CORRECT` regex, so a transcript scorer
+  counts it as a "miss" — a detector limitation, not a learner-facing problem. Prepending "That's right."
+  to it would read oddly; left unchanged deliberately.
+- **NO code change** (per reproduce-first / no-speculative-patching): the product behaviour is correct,
+  and the scorer's limitation is fundamental (a replayed transcript has no server-grade signal), so
+  widening `CONFIRMS`/`CONFIRMS_CORRECT` would tamper with the metric without helping a learner.
+- **Remaining uncertainty:** the live rate measurement was INCONCLUSIVE (0/0 — the model served prose
+  rather than tappable keyed MCQs that session, the same MCQ-attachment non-determinism seen in I1/I4).
+  The verdict rests on the code trace + the I1/I4 captured replies + one earlier run that showed the
+  completion turn unconfirmed. **Recommended next action if a live C5 rate is wanted:** add one
+  telemetry line at the enforcer site (`[c5] servedGradedCorrect confirmed=<bool>`) and read it from
+  production logs — that measures the enforcer's own denominator directly, which no transcript scorer
+  can. Optional instrumentation, not a defect fix.
+
 ## Run locally
 ```
 cp .env.example .env   # set DATABASE_URL, AUTH_SECRET (openssl rand -base64 32), GROQ_API_KEY
