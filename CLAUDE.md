@@ -2583,6 +2583,67 @@ Two things established about that run before it paused, both worth keeping:
   `pendingMcq` seam, not a regex. Widening would hide it. Pinned by
   `confirmationDetectorParity.test.ts`.
 
+## Egress incident — independent re-audit, both fixes confirmed holding (2026-09-02)
+
+Re-ran the full forensic protocol from scratch (not assuming the 2026-08-31 write-up), this
+time with live Supabase MCP access to production (`ywakxiqbevfuxsiwewnw`), which the sessions
+that made the original two fixes did not have for verification. Findings below are MEASURED
+against production `pg_stat_statements` (lifetime cumulative since project creation, never
+reset — `stats_reset: 2026-07-05 15:50:54+00`), not re-derived from the prior write-up.
+
+- **Leak 1 (spine replay) — code fix confirmed present and MEASURED STILL STOPPED.**
+  `route.ts`'s `capabilitiesHydrated` marker guard (§2879-2894) and `hydrateFromProjection`
+  are unchanged from the 2026-08-31 description. Took three live snapshots of the exact
+  production query (`spine_events` `learnerId`+`seq>`, ORDER BY seq ASC): flat at
+  **220,735 calls / 106,558,119 rows** across three checks spanning 08:17:55Z → 08:25:41Z
+  (~8 minutes) — zero growth in the observation window, run 2 days after the original fix
+  shipped. The only drift versus the 2026-08-31 snapshot (220,247/106,333,556) is +488 calls /
+  +224,563 rows over the intervening ~36 hours — ≈3.2 calls/hour, ≈470 bytes/row ⇒ roughly
+  10 MB/day, consistent with the fix's own design (one paid hydration per genuinely
+  never-hydrated session, not per turn) against a measured real session-creation rate of
+  ~1 new session/hour over the same window (`learn_sessions.startedAt`, last 48h). This is
+  three orders of magnitude below the pre-fix ~23 GB/month rate. **STOPPED — confirmed, not
+  assumed.** This also satisfies the precondition the E1 note above was waiting on
+  ("do NOT restart it until the new egress rate is confirmed under quota") — a future session
+  MAY resume the E1 run on that basis, though restarting it is not this session's call to make.
+- **Leak 2 (bootstrap prefetch) — code fix confirmed present; historical counters frozen.**
+  `src/instrumentation.ts`'s two-COUNT cheap probe is unchanged. Its exact pre-fix production
+  query (`asset_identity` `canonicalSlug` groupBy, tags &&) is **completely frozen** at
+  2,606 calls / 11,278,908 rows across every check this session — identical to the 2026-08-31
+  figure, i.e. genuinely zero further executions, not just a slow rate.
+- **New, not previously reported: two dead query patterns identified as historical, not live.**
+  `pg_stat_statements` also shows five `probe_assets`/`explanation_assets` "`WHERE assetId IN
+  ($1..$N)`" read-back queries (N ranging 1,592–4,328; ≈23M rows / ≈900 MB lifetime combined).
+  Grepped the current codebase (`src/`, `scripts/`) for `probeAsset.findMany`/
+  `explanationAsset.findMany` — **zero matches**. These queries do not exist in any code
+  currently on `main`; they are residue from an earlier, since-refactored version of the seed
+  script's per-asset read-back (superseded by the `createMany`+`skipDuplicates` batched flush
+  documented in the 2026-08-19 Chemistry entry). Not fixed because there is nothing left to
+  fix — reported so a future session doesn't mistake old counter mass for a live leak.
+- **Storage ruled out structurally, not just by row-count**: grepped for `supabase.storage`,
+  `createSignedUrl`, `@supabase/supabase-js` across `src/` — zero matches. The app never uses
+  Supabase Storage or the supabase-js client; every byte of "Supabase egress" this project can
+  produce is Postgres wire-protocol traffic through Prisma. This closes STEP 3/7 of the incident
+  protocol definitively rather than by inference.
+- **No new polling/retry/SWR patterns found** (`setInterval`, `useSWR`, `refetchInterval`,
+  `pollInterval` greps) — the only `setInterval` calls are client-side elapsed-time display
+  timers (`LessonScreen.tsx`, `QuizClient.tsx`), not network polling.
+- **Security regression check**: Supabase security advisor now reads **0 ERROR, 0 WARN, 114
+  INFO** (all routine RLS-enabled-no-policy / unindexed-FK hygiene, matching the app's
+  documented `rolbypassrls=true` service-role pattern). The previously-flagged
+  `public.lesson_attempts` RLS-disabled regression (noted 2026-08-10) is **no longer present**
+  — that table now shows RLS enabled, same as every other table. Not this session's fix; recorded
+  as resolved since the CLAUDE.md note calling it out was never updated.
+- **Full verification, this session**: `npx tsc --noEmit` clean; full suite 536 files / 11,573
+  passed / 9 skipped; `npm run build` clean (middleware 79.7 kB, matching the post-edge-fix
+  figure, no regression). 24 pre-existing pinned tests
+  (`spineReplayEgress.test.ts`/`bootstrapCheapProbe.test.ts`/`bootstrapCompletenessGuard.test.ts`)
+  re-run and pass.
+- **No code changes made this session** — both root causes were already fixed and pushed to
+  `main` by the 2026-08-31 session; this session's contribution is independent, fresh,
+  production-measured confirmation that those fixes hold two days later, plus closing the
+  Storage/polling/retry branches of the incident protocol that the original write-up did not
+  explicitly rule out. Nothing here contradicts or supersedes the 2026-08-31 entry above.
 
 ## Run locally
 ```
