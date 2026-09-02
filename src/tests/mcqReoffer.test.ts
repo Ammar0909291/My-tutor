@@ -51,13 +51,16 @@ function reofferGuard(
 ): string {
   const served = mcqToServe(mcqHoisted, pending, grade)
   const isReoffer = served !== null && mcqHoisted === null
+  const ti = readTurnIntent(message, null)
   const genuineUnmappedAttempt =
     isReoffer
     && grade === null
     && message.trim() !== ''
     && !isBareAcknowledgement(message)
-    && !readTurnIntent(message, null).wantsPractice
+    && !ti.wantsPractice
     && !detectLearnerQuestion(message)
+    && ti.failureState === null      // I4: not a distress/confusion signal
+    && ti.learnerRequest === null    // I4: not a help / explain-differently / diagram request
   if (genuineUnmappedAttempt && !cleanText.includes(MCQ_REOFFER_DISAMBIGUATION)) {
     return cleanText.trim() ? `${MCQ_REOFFER_DISAMBIGUATION}\n\n${cleanText}` : MCQ_REOFFER_DISAMBIGUATION
   }
@@ -78,7 +81,10 @@ describe('the ungradeable-answer-attempt fixtures are what the test claims', () 
     // consumes the probe) and the test below would be exercising nothing.
     expect(gradeMcqAnswer(UNMAPPED, PENDING).correct).toBeNull()
     expect(isBareAcknowledgement(UNMAPPED)).toBe(false)
-    expect(readTurnIntent(UNMAPPED, null).wantsPractice).toBe(false)
+    const ti = readTurnIntent(UNMAPPED, null)
+    expect(ti.wantsPractice).toBe(false)
+    expect(ti.failureState).toBeNull()   // a genuine attempt is not distress…
+    expect(ti.learnerRequest).toBeNull() // …and not a help request
     expect(detectLearnerQuestion(UNMAPPED)).toBe(false)
   })
 })
@@ -124,6 +130,23 @@ describe('it does NOT fire when the learner was not answering', () => {
   it('an empty learner message is left alone', () => {
     expect(reofferGuard(model, null, PENDING, null, '   ')).toBe(model)
   })
+
+  // I4 (found by the GUIDE-stall stress test): a confusion/distress signal or a
+  // help request has no '?', so detectLearnerQuestion misses it and it is not a
+  // bare ack — without the failureState/learnerRequest exclusion the "tap the
+  // choice" lead-in fired AT a confused learner mid-remediation.
+  for (const confusion of [
+    'sorry i dont understand this at all',        // failureState: dont_understand
+    'i am lost, this is too hard for me',         // failureState: too_hard
+    'still confused sir, can you explain differently', // learnerRequest: explain_differently
+    'can you show me a diagram',                  // learnerRequest: diagram
+  ]) {
+    it(`a distress/help turn is left alone: "${confusion.slice(0, 32)}…"`, () => {
+      const ti = readTurnIntent(confusion, null)
+      expect(ti.failureState !== null || ti.learnerRequest !== null).toBe(true) // fixture is genuinely distress/help
+      expect(reofferGuard(model, null, PENDING, null, confusion)).toBe(model)
+    })
+  }
 })
 
 describe('it does NOT fire unless a pending probe is actually being re-offered', () => {
@@ -160,6 +183,9 @@ describe('the guard is wired at the response boundary and reuses the shared lead
     expect(ROUTE).toMatch(/!isBareAckHoisted/)
     expect(ROUTE).toMatch(/!turnIntent\.wantsPractice/)
     expect(ROUTE).toMatch(/!detectLearnerQuestion\(message\)/)
+    // I4: distress and help requests are excluded too.
+    expect(ROUTE).toMatch(/turnIntent\.failureState === null/)
+    expect(ROUTE).toMatch(/turnIntent\.learnerRequest === null/)
   })
 
   it('prepends when there is model text, stands alone when there is not', () => {

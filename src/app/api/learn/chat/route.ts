@@ -8922,6 +8922,17 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           && !isBareAckHoisted
           && !turnIntent.wantsPractice
           && !detectLearnerQuestion(message)
+          // I4 (2026-09-02, found by the GUIDE-stall stress test): a CONFUSION /
+          // DISTRESS signal or a HELP request is NOT an answer attempt, so it must
+          // not draw "I couldn't tell which option your answer matched — tap the
+          // choice". "sorry i dont understand this at all" / "i am lost" carry no
+          // '?', so `detectLearnerQuestion` misses them, and they are not bare
+          // acknowledgements — without these two terms the lead-in fired AT a
+          // confused learner while the tutor was re-teaching. `turnIntent` is the
+          // same per-turn intent the route already computed (L260); a genuine
+          // answer attempt has BOTH null (measured), a distress/help turn does not.
+          && turnIntent.failureState === null
+          && turnIntent.learnerRequest === null
         if (genuineUnmappedAttempt && !cleanText.includes(MCQ_REOFFER_DISAMBIGUATION)) {
           console.log('[mcq-reoffer-disambiguation] ungradeable answer against a pending probe — prompting a tap')
           cleanText = cleanText.trim()
