@@ -2696,6 +2696,28 @@ reset — `stats_reset: 2026-07-05 15:50:54+00`), not re-derived from the prior 
 - Offline: new test 13/13; 112 route-source test files 1930 passed / 4 skipped; `npx tsc --noEmit`
   clean; `npm run build` clean (middleware 79.7 kB, unchanged). No account/DB mutation; temporary
   verification driver deleted after use.
+- **I2 and I3 investigated the same way (2026-09-02) — NEITHER warranted a fix.**
+  - **I2 ("identical MCQ re-offered before advancing")** is NOT a distinct defect — it is the same
+    seam as I1 and intended behavior. `writePendingQuestion(mcqToServe(mcqHoisted, pendingMcqHoisted,
+    mcqGradeHoisted))` carries the SAME probe forward ONLY on a turn that attached nothing new and
+    graded nothing (the "seventh defect" fix, so the client can't blank an on-screen probe). Verified
+    offline against the real modules: ungraded → re-offers same; graded → cleared to null (no
+    re-offer); fresh attach → replaced. The one case Option A would NOT cover — a SPENT probe being
+    re-served — is independently guarded: `teachingActionRepository.ts` filters by `excludeProbeStem`,
+    wired at `route.ts:4185` to `hasAskedMcq(...)`, so the gate never re-selects an already-asked
+    probe ("guarantees a FRESH probe every time"). Live evidence from the I1 run: 5 keyed probes
+    across the tapped mastery flow, all DISTINCT. So the only real residue is the ungradeable-typed-
+    answer re-offer = I1, already made non-silent by Option A. No code change.
+  - **I3 ("premature next-lesson preview prose")** was already FIXED at commit `768dfe3c`
+    ("fix(stance): strip a premature next-lesson preview before mastery"), which is in the deployed
+    history (main descends from it). `stanceEnforcement.ts`'s `COMPLETION_CLAIM_RE` includes the
+    `next we (explore|cover|study|examine|tackle|dive into|move on to|turn to)` family; `enforceStance`
+    strips it iff `!masteryVerifiedStrict(state)`. Verified offline with the real `enforceStance`:
+    UNEARNED state strips "Next we explore…"/"Wigner" and keeps the praise; EARNED state KEEPS the
+    same preview (not a "can never finish" regression). Pinned by `completionClaimInProse.test.ts`
+    (QM_PREMATURE_CLOSE block). Deliberately NOT broadened to other phrasings ("up next:", "coming
+    up:") — no evidence of them, and broadening risks stripping the legitimate motivational "What's
+    coming" recap the fix preserves. No code change.
 
 ## Run locally
 ```
