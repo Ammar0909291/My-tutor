@@ -91,13 +91,16 @@ describe('gateLessonCompletion uses strict mastery', () => {
 })
 
 describe('advanceConversationState folds verification status', () => {
-  it('increments verified counters on CLEAN signal at CHECK', () => {
+  it('increments verified counters on a SERVER-GRADED correct answer at CHECK', () => {
+    // Thread 1: a verified credit requires positive server-grade provenance.
+    // A real authored-probe grade carries serverGraded:true AND status CLEAN.
     const state = stateWith({ phase: 'CHECK', demonstrated: true, taughtThisSession: true })
     const next = advanceConversationState(state, {
       askedQuestion: false,
       signalCorrect: true,
       recoveryFired: false,
       signalVerificationStatus: 'CLEAN',
+      serverGraded: true,
     })
     expect(next.correctAtCheck).toBe(1)
     expect(next.verifiedCorrectAtCheck).toBe(1)
@@ -130,7 +133,13 @@ describe('advanceConversationState folds verification status', () => {
     expect(next.verifiedCorrectAtPractice).toBe(0)
   })
 
-  it('treats undefined verification status as CLEAN (backward compat)', () => {
+  it('a correct answer with NO server grade banks the plain credit but NO verified credit', () => {
+    // Thread 1 (the free-response defect, closed): an ungraded prose answer the
+    // model self-reports correct — clean status, no serverGraded — still moves
+    // the plain ladder (so the lesson does not stall) but must NOT bank a
+    // verified credit, because nothing graded it against an authored key. This
+    // case used to assert verifiedCorrectAtCheck === 1 (undefined status → CLEAN
+    // → verified), which was exactly the mechanism that let a self-report certify.
     const state = stateWith({ phase: 'CHECK', demonstrated: true, taughtThisSession: true })
     const next = advanceConversationState(state, {
       askedQuestion: false,
@@ -138,7 +147,7 @@ describe('advanceConversationState folds verification status', () => {
       recoveryFired: false,
     })
     expect(next.correctAtCheck).toBe(1)
-    expect(next.verifiedCorrectAtCheck).toBe(1)
+    expect(next.verifiedCorrectAtCheck).toBe(0)
   })
 
   it('folds signal contradiction counter', () => {

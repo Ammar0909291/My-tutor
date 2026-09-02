@@ -5397,6 +5397,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // from strict mastery (completion authority).
       let signalVerificationStatusHoisted: 'CLEAN' | 'SUSPICIOUS' | 'CONTRADICTED' = 'CLEAN'
       let unauthoredKeyGradeHoisted = false
+      // Thread 1: the POSITIVE provenance the verified mastery counters require —
+      // this turn's correctness came from `gradeMcqAnswer` against an AUTHORED
+      // key. Hoisted so the fold evidence (below) can require it; a CLEAN
+      // self-report on ungraded prose is NOT this and must not certify mastery.
+      let gradedAgainstServerKeyHoisted = false
 
       // ── VERIFICATION MAY NOT OVERRULE THE SERVER'S OWN ANSWER KEY ──────────
       //
@@ -5431,14 +5436,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // conversationState). A turn with no resolved MCQ grade is unchanged in
       // every respect — that is the ordinary prose turn, where the heuristics
       // are the only defence there is and they keep working.
-      const gradedAgainstServerKey = await (async () => {
+      gradedAgainstServerKeyHoisted = await (async () => {
         if (!mcqGradedThisTurn || !pendingMcqHoisted) return false
         if (mcqGradedThisTurn.correct === null || mcqGradedThisTurn.correct === undefined) return false
         const { probeKeyIsAuthored } = await import('@/lib/teaching/mcq')
         return probeKeyIsAuthored(pendingMcqHoisted)
       })()
 
-      if (!gradedAgainstServerKey && teachingSignal && teachingSignal.correctness !== undefined) {
+      if (!gradedAgainstServerKeyHoisted && teachingSignal && teachingSignal.correctness !== undefined) {
         try {
           const { verifySignal, resolveContradiction } = await import('@/lib/teaching/signalVerification')
           const lastAsstForLatency = learnSession.messages.find((m: { role: string }) => m.role === 'ASSISTANT')
@@ -6818,6 +6823,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               dontKnowSignal: isDontKnowSignal(recoveryKeyHoisted),
               learnerIssuedDirective: recoveryKeyHoisted === 'too_many_questions',
               signalVerificationStatus: signalVerificationStatusHoisted,
+              // Thread 1: positive server-grade provenance — the ONLY thing that
+              // lets this turn bank a VERIFIED mastery credit. False on every
+              // ungraded prose turn, so a self-report cannot certify mastery.
+              serverGraded: gradedAgainstServerKeyHoisted,
               // Counted, never credited — see the downgrade above.
               unauthoredKey: unauthoredKeyGradeHoisted,
               parityViolation: parityViolationThisTurn,
@@ -8378,6 +8387,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 dontKnowSignal: isDontKnowSignal(recoveryKeyHoisted),
                 learnerIssuedDirective: recoveryKeyHoisted === 'too_many_questions',
                 signalVerificationStatus: signalVerificationStatusHoisted,
+                // Thread 1: positive server-grade provenance (see the primary
+                // fold above). Same source, so both folds agree on whether this
+                // turn may bank a verified mastery credit.
+                serverGraded: gradedAgainstServerKeyHoisted,
                 parityViolation: !!(evidenceMoveHoisted === 'ask' && !fallbackAskedQ),
                 // Same guard as the upstream fold — the two must not disagree
                 // about whether an outage template taught anything.

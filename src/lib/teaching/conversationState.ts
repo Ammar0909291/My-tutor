@@ -221,6 +221,18 @@ export interface ConversationState {
    *  fired on, back to back. Resets to 0 the instant a turn does NOT need
    *  repairing. See `shouldApplyFillerRepair` — this is what it caps. */
   fillerRepairStreak: number
+  /** Thread 1 (free-response verification): set true the moment this session is
+   *  processed by the modern grading path (any turn whose evidence carries a
+   *  `serverGraded` field). It exists for exactly one reader —
+   *  `masteryVerifiedStrict`'s legacy plain-counter fallback, which was meant
+   *  only for PRE-FEATURE snapshots that never had verified machinery. Without
+   *  this marker a modern lesson taught entirely through ungraded prose (no
+   *  server-owned grade anywhere) is state-shape-identical to a pre-feature
+   *  session and would certify on self-reported plain counters through that
+   *  fallback. A session that has taken even one modern turn is NOT pre-feature,
+   *  so the fallback must not apply to it. Additive; defaults false (spread over
+   *  initialConversationState), no migration. */
+  sawModernGrading: boolean
 }
 
 export function initialConversationState(conceptId: string | null): ConversationState {
@@ -262,6 +274,7 @@ export function initialConversationState(conceptId: string | null): Conversation
     unauthoredKeyGrades: 0,
     parityViolations: 0,
     fillerRepairStreak: 0,
+    sawModernGrading: false,
   }
 }
 
@@ -442,6 +455,14 @@ export interface TurnEvidence {
    *  the model invented rather than one the system authored. See
    *  `probeKeyIsAuthored`. */
   unauthoredKey?: boolean
+  /** True when THIS turn's correctness came from `gradeMcqAnswer` resolving
+   *  against an AUTHORED probe's stored `correctIndex` — the one form of
+   *  correctness the SERVER owns as ground truth (route: `gradedAgainstServerKey`,
+   *  see `probeKeyIsAuthored`). This is the POSITIVE provenance the verified
+   *  counters require. A CLEAN `signalVerificationStatus` on a free-response
+   *  prose answer is the ABSENCE of red flags, not proof the answer was graded,
+   *  and must never certify strict mastery — only a server-owned grade can. */
+  serverGraded?: boolean
   /** True when the server-decided move disagrees with what the LLM rendered
    *  (e.g., decided 'ask' but response had no question). */
   parityViolation?: boolean
@@ -1068,10 +1089,27 @@ export function advanceConversationState(
     // records separately, "counted, never credited"). What changes is that the
     // STRICT counters now mean what their name says — mastery evidenced by a
     // key the server owns.
-    const verified = (
-      evidence.signalVerificationStatus === 'CLEAN'
-      || evidence.signalVerificationStatus === undefined
-    ) && evidence.unauthoredKey !== true
+    //
+    // ── VERIFIED REQUIRES A SERVER-OWNED GRADE, NOT THE ABSENCE OF RED FLAGS ──
+    //
+    // This test USED to read `(signalVerificationStatus CLEAN|undefined) &&
+    // unauthoredKey !== true` — both ABSENCE conditions. A genuinely
+    // free-response prose answer has NO answer key at all, so `unauthoredKey !==
+    // true` holds because there is no key, not because the server graded it; the
+    // model self-reports correctness; and signalVerification returns CLEAN for
+    // any plausible, non-bare, non-hedged, non-instant wrong answer. So a WRONG
+    // free-response answer the model marked correct banked a VERIFIED credit and
+    // could certify strict mastery on nothing but the model's self-report
+    // (Phase 5 residual; the one class the DoD #13 matrix listed as unprevented).
+    //
+    // The POSITIVE fact — this correctness came from `gradeMcqAnswer` against an
+    // AUTHORED key — already existed at the route as `gradedAgainstServerKey`;
+    // it simply was not threaded here. Require it. `serverGraded === true`
+    // subsumes both old conditions (an authored key is by definition not
+    // unauthored, and the route skips verification for it so the status is
+    // CLEAN), so NO turn that used to verify stops verifying — only the
+    // self-report ones do. The change is monotone-tighter.
+    const verified = evidence.serverGraded === true
     switch (prev.phase) {
       case 'OBSERVE':
         next.phase = 'DEMONSTRATE'
@@ -1206,6 +1244,14 @@ export function advanceConversationState(
   next.reflectionAskedThisEntry = foldReflectionAskedThisEntry(
     prev.phase, next.phase, evidence.askedQuestion, prev.reflectionAskedThisEntry ?? false,
   )
+
+  // Thread 1: any turn processed by the modern grading path supplies a
+  // `serverGraded` field (true or false). Its presence marks the session
+  // modern, which denies masteryVerifiedStrict's legacy plain-counter fallback
+  // — a fallback meant only for pre-feature snapshots, and the last way a
+  // fully-prose lesson could still certify on self-report after the verified
+  // requirement above. Set once, never cleared.
+  next.sawModernGrading = (prev.sawModernGrading ?? false) || evidence.serverGraded !== undefined
 
   // Signal verification telemetry: fold contradiction and parity counters.
   if (evidence.signalVerificationStatus === 'CONTRADICTED') {

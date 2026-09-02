@@ -104,6 +104,9 @@ const correctAnswer = (unauthoredKey: boolean) => ({
   signalCorrect: true,
   signalVerificationStatus: (unauthoredKey ? 'SUSPICIOUS' : 'CLEAN') as 'SUSPICIOUS' | 'CLEAN',
   unauthoredKey,
+  // An authored key is a server-owned grade; an invented one is not. Thread 1's
+  // verified requirement reads this positive provenance.
+  serverGraded: !unauthoredKey,
 })
 
 describe('an invented key moves the lesson but not the record', () => {

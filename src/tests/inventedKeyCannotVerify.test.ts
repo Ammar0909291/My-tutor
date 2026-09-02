@@ -58,7 +58,10 @@ function lesson(invented: boolean): ConversationState {
   for (const _ of [1, 2, 3, 4]) {
     s = advanceConversationState(s, ev({
       askedQuestion: true, signalCorrect: true, recoveryFired: false,
-      unauthoredKey: invented, signalVerificationStatus: 'CLEAN',
+      // An authored key IS a server-owned grade; an invented one is not.
+      // Thread 1's `serverGraded` requirement closes the invented-key case by a
+      // second, independent road (no server grade) alongside `unauthoredKey`.
+      unauthoredKey: invented, serverGraded: !invented, signalVerificationStatus: 'CLEAN',
     }))
   }
   return s

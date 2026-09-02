@@ -185,6 +185,10 @@ describe('CASE B — a doubt during the excursion cannot complete the lesson', (
       recoveryFired: false,
       learnerRequest: null,
       signalVerificationStatus: 'CLEAN',
+      // Thread 1: a server-graded correct answer is what WOULD push the verified
+      // ladder across the completion threshold — the exact danger the excursion
+      // freeze exists to stop. (A prose self-report could no longer do it.)
+      serverGraded: true,
     })
     // Proof the fold is what moved the lesson's counters before the fix — and
     // that it moved them across the completion threshold.

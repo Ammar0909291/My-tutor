@@ -75,7 +75,20 @@ export function masteryVerifiedStrict(state: ConversationState | null): boolean 
   // legacy session, since the field is being written, so declining the
   // fallback here cannot reopen the case the fallback was written for.
   const hasUnauthoredKeys = (state.unauthoredKeyGrades ?? 0) > 0
-  if (!hasVerifiedCounters && !hasContradictions && !hasUnauthoredKeys) {
+  // THREAD 1 — THE FALLBACK MUST NOT CERTIFY A MODERN PROSE-ONLY LESSON.
+  //
+  // Once `verified` requires a server-owned grade (conversationState fold), a
+  // lesson taught entirely through ungraded prose reaches this fallback with
+  // zero verified counters, zero contradictions and zero unauthored keys — the
+  // exact shape of a pre-feature snapshot — and would certify on the plain,
+  // self-reported counters, moving the free-response defect here instead of
+  // closing it. `sawModernGrading` is set the first time the modern grading
+  // path touches the session, so a true value proves it is NOT pre-feature and
+  // the fallback does not apply. Same reasoning as the unauthored-key line
+  // above; defaults false, so genuine pre-feature and raw-fixture states are
+  // unaffected.
+  const sawModernGrading = state.sawModernGrading === true
+  if (!hasVerifiedCounters && !hasContradictions && !hasUnauthoredKeys && !sawModernGrading) {
     return masteryVerified(state)
   }
   const vCheck = state.verifiedCorrectAtCheck ?? 0

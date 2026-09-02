@@ -109,8 +109,10 @@ describe('C. the route skips verification only for a server-owned key', () => {
   const route = SRC('app/api/learn/chat/route.ts')
 
   it('computes gradedAgainstServerKey from probeKeyIsAuthored and a resolved grade', () => {
-    expect(route).toContain('const gradedAgainstServerKey')
-    const idx = route.indexOf('const gradedAgainstServerKey')
+    // Hoisted (Thread 1) so the fold evidence can require it, not just the
+    // verification skip.
+    expect(route).toContain('gradedAgainstServerKeyHoisted = await')
+    const idx = route.indexOf('gradedAgainstServerKeyHoisted = await')
     const block = route.slice(idx, idx + 500)
     expect(block).toContain('probeKeyIsAuthored(pendingMcqHoisted)')
     // A grade that did not resolve is NOT ground truth.
@@ -119,8 +121,15 @@ describe('C. the route skips verification only for a server-owned key', () => {
 
   it('and guards the verification call with it', () => {
     expect(route).toContain(
-      'if (!gradedAgainstServerKey && teachingSignal && teachingSignal.correctness !== undefined)',
+      'if (!gradedAgainstServerKeyHoisted && teachingSignal && teachingSignal.correctness !== undefined)',
     )
+  })
+
+  it('THREAD 1: threads serverGraded into the fold evidence, so a self-report cannot verify mastery', () => {
+    // The positive provenance must reach the fold, not only the verification
+    // skip — this is what makes an ungraded prose answer unable to bank a
+    // verified mastery credit.
+    expect(route).toContain('serverGraded: gradedAgainstServerKeyHoisted')
   })
 
   it('the unauthored-key downgrade is still reached — it is a separate block', () => {

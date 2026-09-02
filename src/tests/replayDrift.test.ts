@@ -252,6 +252,14 @@ describe('structural guard — the harness fold must cover the route fold', () =
                             + 'from the wording of a stem would be the keyword hack this harness '
                             + 'exists to catch. Give ReplayTurn an `authoredKey` flag and delete '
                             + 'this entry to replay it.',
+    serverGraded:             'THREAD 1: whether THIS turn\'s correctness came from gradeMcqAnswer '
+                            + 'against an AUTHORED server key (route: gradedAgainstServerKey) is a '
+                            + 'property of which asset was served and how the server graded it, not '
+                            + 'of the conversation text — a correct-looking prose answer and a tapped '
+                            + 'authored MCQ read identically in a transcript, which is exactly why a '
+                            + 'self-report must not certify. Inferring server-grading from the words '
+                            + 'would be the keyword hack this harness exists to catch. Give ReplayTurn '
+                            + 'a `serverGraded` flag and delete this entry to replay it.',
     degradedTurn:             'AI-provider availability (Message.provider), not a property of the '
                             + 'conversation text; ReplayTurn carries learner/tutor/signalCorrect only, '
                             + 'and inferring an outage by matching the template wording would be the '

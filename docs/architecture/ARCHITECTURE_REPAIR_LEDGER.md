@@ -276,6 +276,74 @@ text reads the graded item; none reads `signalCorrect` (the model self-report is
 one hoist away and must not be confused for the grade at a rendering site).
 POSTHOC_REPAIR_CENSUS Finding 3 updated from open to MEASURED+PINNED.
 
+## Slice 10 — free-response answer cannot certify mastery (Thread 1, owner-approved) — DONE 2026-09-02
+
+**The one class the DoD #13 matrix listed as NOT prevented.** Owner explicitly
+authorized thread 1 ("go ahead with thread 1"). Phase 5 had framed the fix as
+"content (full probe coverage) OR a new answer-verification subsystem (out of
+scope)". **Both framings were wrong** — the mapping found the machinery already
+exists and the defect is a definition, not a missing subsystem.
+
+**Root cause (mapped through the real modules):** the fold's `verified` flag —
+the gate on the strict-mastery counters (`verifiedCorrectAtCheck/Practice`,
+read by `masteryVerifiedStrict` → `conceptMasteryVerdict`) — was defined by
+ABSENCE: `signalVerificationStatus CLEAN|undefined && unauthoredKey !== true`.
+A genuinely free-response prose answer has NO answer key, so `!unauthoredKey`
+holds vacuously; the model self-reports correctness; `signalVerification`
+returns CLEAN for any plausible non-bare, non-hedged, non-instant wrong answer
+(it checks self-consistency, NOT a server grade). So a WRONG prose answer the
+model marked correct banked a VERIFIED credit and could certify strict mastery
+on nothing but the self-report. The POSITIVE fact — correctness came from
+`gradeMcqAnswer` against an AUTHORED key — already existed at the route as
+`gradedAgainstServerKey` but was never threaded into the fold.
+
+**Second escape closed:** even after requiring positive provenance, a lesson
+answered ENTIRELY through prose (verified=0, no contradictions, no unauthored
+keys) is state-shape-identical to a pre-feature snapshot and would slip through
+`masteryVerifiedStrict`'s legacy plain-counter fallback. Added an additive
+`sawModernGrading` marker (set the first time the modern grading path — which
+always supplies `serverGraded` — touches the session); the fallback now applies
+only to sessions never touched by it, so a genuine pre-feature snapshot is
+unaffected (behavior-preserving) but a modern prose-only lesson cannot certify.
+
+**Change (one owner, monotone-tighter):**
+- `TurnEvidence.serverGraded?: boolean` + `ConversationState.sawModernGrading`
+  (additive, defaults false, no migration).
+- fold: `const verified = evidence.serverGraded === true` (positive provenance;
+  `serverGraded ⟹ old verified`, so no turn that used to verify stops).
+- fold: `next.sawModernGrading = prev || evidence.serverGraded !== undefined`.
+- `masteryVerifiedStrict`: legacy fallback also requires `!sawModernGrading`.
+- route: hoisted `gradedAgainstServerKeyHoisted`, threaded `serverGraded` into
+  BOTH advanceConversationState evidence objects (primary + fallback fold).
+
+**Reachability / scope:** closes the MIXED lesson (a prose credit can no longer
+stand in for a server grade — mastery is judged on server-graded evidence
+alone) AND the PURE-PROSE lesson (no server grade anywhere ⟹ never certifies).
+The plain ladder still advances on prose (lessons don't stall) — only the
+completion authority tightened.
+
+**Enforcement:** `freeResponseCannotVerifyMastery.test.ts` (drives the real
+fold + gate: prose banks plain-not-verified; pure-prose lesson refused with
+`sawModernGrading` denying the fallback; mixed lesson judged on server grades;
+pre-feature session still certifies). Contract updates: `strictMastery` (the two
+cases that pinned CLEAN-self-report→verified now assert the server-grade
+requirement), `inventedKeyCannotVerify` + `unauthoredAnswerKey` (authored
+control gets `serverGraded:true`; invented path closed by a 2nd independent
+guard), `serverKeyBeatsVerification` (rename + new serverGraded-threading
+assertion).
+
+**Validation:** `npx tsc --noEmit` clean; full suite 537 files / 11,580 passed /
+9 skipped; behavior-preserving for pre-feature snapshots by construction. Five
+test files updated for the new contract; two structural guards
+(`replayDrift` excuse list, `excursionLessonPause` negative control) updated with
+the reason, not worked around.
+
+**NOT done / honest residual:** no live-account run (behavior change is strictly
+tighter — a self-report can only ever LOSE a mastery credit it should not have
+had — and is fully fold-driven; a live run would only re-confirm). The DoD #13
+matrix row for this class moves from DETECTION-only to PREVENTED once the suite
+is green.
+
 ## CENSUS FULLY TRIAGED (2026-09-01)
 
 All four OWNERSHIP_CENSUS targets + Census A are measured and resolved:
@@ -330,20 +398,22 @@ AND DoD #13's consolidated invariant matrix is now written (slice 8,
 named is now either PREVENTED-and-pinned or an explicitly-recorded detection-only
 choice. **The mission's named scope is complete.**
 
-Two genuinely-remaining threads, neither a known live defect (each needs Step-0
-measurement first, and the visual layer stays under the preserve-don't-reopen rule):
+Thread 1 (free-response mastery certification) is now CLOSED (slice 10, owner-
+approved) — and the design showed it needed no new subsystem, just positive
+provenance. Every DoD #13 matrix row now reads PREVENTED except the one deliberate
+detection-only choice (question-only closing turn, which the never-fabricate rule
+forbids rewriting). Remaining threads, none a known live defect:
 
-1. **The one class the architecture does NOT yet prevent** (matrix, DETECTION-only
-   section): a free-response factual error below probe coverage where
-   `signalVerification` is CLEAN but the answer is wrong. Closing it needs full
-   probe coverage (content work — protected) OR an independent answer-verification
-   subsystem (explicitly out of scope — "a second parallel state machine"). Do NOT
-   build the second machine on a loop's initiative; it is an owner decision.
-2. **Census A Finding 3** (minor): one graded verdict rendered by 5788/7324 —
-   measured disjoint/agree; pin only if a future edit makes them co-render.
-3. **Prompt→enforcement ratio** (Census C): convert a prompt-only rule to
-   structural enforcement ONLY where a rule is BOTH load-bearing AND measured
-   non-complied. Do not convert cosmetic prose.
+1. **Census A Finding 3** (minor, pinned): one graded verdict rendered by
+   5788/7324 — already MEASURED+PINNED (slice 9); only revisit if a future edit
+   makes them co-render.
+2. **Prompt→enforcement ratio** (Census C): MEASURED EMPTY — every documented
+   measured-non-complied rule already has a structural enforcer. Convert another
+   prompt rule ONLY with fresh evidence it is load-bearing AND measured ignored
+   (needs a live run; do NOT re-run 60 live concepts on a loop's initiative).
+3. **Question-only closing turn**: an owner decision (upstream generation change
+   or authored close copy), deliberately not a post-hoc fabrication.
 
-If none of these has new measured evidence, the loop's honest state is DONE — wind
-it down rather than manufacture low-value work. Do NOT re-run 60 live concepts.
+The mission's named scope — including its one previously-unprevented class — is
+complete. Further work needs new measured evidence or an owner decision; wind down
+rather than manufacture low-value work.

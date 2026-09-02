@@ -43,6 +43,7 @@ Post-hoc rewrite classification: `POSTHOC_REPAIR_CENSUS.md`.
 | 12 | **Recovery demotes below the floor or is out-argued** — a recovery turn strands the learner or loses to a lower-priority action | recovery preempts via the arbiter (`RECOVERY` at the ladder top; `phaseDown` floors at DEMONSTRATE once shown) | recovery preempts everything; the demotion floor holds; a repeated acknowledgement is never reclassified as frustration | `acknowledgementAdvance.test.ts` (recovery-preempts + route-order); `recoveryDetectionCoverageGap.test.ts` | **PREVENTED** |
 | 13 | **A false `[LESSON_COMPLETE]` ships** — the model claims completion in prose on a lesson the gate refuses | `gateLessonCompletion` → `conceptMasteryVerdict`; `enforceStance` strips the false claim; fail-closed strips on gate error | completion is owned by the gate; a prose completion claim on an unmastered concept is stripped, not honoured; a gate error fails closed | `completionClaimInProse.test.ts`; `stanceEnforcement.test.ts`; `lessonCompletion.test.ts` | **PREVENTED** |
 | 14 | **Correctness recorded for an ungraded question** — the model asks in prose (no server answer key) and its self-reported grade is folded as evidence | `shouldSuppressSignalCorrectness` / `withholdUngradedGateQuestion` (gateAssessment.ts) | a question with no server answer key records no correctness and, at the gate, withholds the question while keeping the teaching | `gateAssessmentIsServerOwned.test.ts`; `answerableTurnEvidenceGuard.test.ts` | **PREVENTED** |
+| 15 | **A free-response answer certifies mastery on the model's self-report** — a prose answer the model marks correct (signalVerification CLEAN, no server key) banks a VERIFIED credit and certifies strict mastery | fold `verified` = `evidence.serverGraded === true` (conversationState.ts); `masteryVerifiedStrict` fallback gated on `!sawModernGrading` | a verified credit requires positive server-grade provenance (`gradeMcqAnswer` against an authored key); a modern prose-only lesson cannot slip through the legacy plain-counter fallback | `freeResponseCannotVerifyMastery.test.ts`; `strictMastery.test.ts`; `inventedKeyCannotVerify.test.ts` | **PREVENTED** |
 
 ---
 
@@ -52,10 +53,15 @@ Post-hoc rewrite classification: `POSTHOC_REPAIR_CENSUS.md`.
 The mastery verdict (1) and its reachability premise (2) are the load-bearing pair —
 slice 1's single-owner merge is only sound because the fold makes the out-of-order
 mastery shapes unreachable, and rows 1–2 pin both halves so neither can drift without
-the other's test failing first.
+the other's test failing first. Row 15 (slice 10) closed what was previously the one
+class the architecture did not prevent — a free-response self-report certifying
+mastery — by requiring positive server-grade provenance for a verified credit rather
+than the absence of red flags. The design turned out NOT to need a new
+answer-verification subsystem (the Phase 5 framing): the machinery existed; the defect
+was that `verified` was defined by absence.
 
-**Two DETECTION-only choices remain, both deliberate and documented — not silently
-counted as prevented:**
+**One DETECTION-only choice remains, deliberate and documented — not silently counted
+as prevented:**
 
 - **Question-only closing turn** (`POSTHOC_REPAIR_CENSUS.md` Finding 2, route 6766
   else). When the whole closing turn is a single question, it ships unchanged and is
@@ -63,13 +69,12 @@ counted as prevented:**
   which the never-fabricate rule forbids. The honest enforcement is upstream (stop the
   model producing a question-only close) or a non-fabricating fallback to authored
   close copy — not a rewrite here. Recorded as a KNOWN detection-only site.
-- **Free-response factual error below probe coverage** (Phase 5 residual). A genuinely
-  free-response prose question, below asset-contract probe coverage, where the model's
-  self-report is internally consistent (`signalVerification` CLEAN) but factually
-  wrong. Closing it needs full probe coverage (content work) or an independent
-  answer-verification subsystem (out of scope — a second parallel state machine). This
-  is the one class the architecture does **not** yet prevent, and it is named here so
-  it is not mistaken for covered.
+
+**Narrow residual on row 15 (not a false-positive risk):** a concept with genuinely
+zero server-gradeable probe coverage can no longer FALSELY certify (it is refused),
+but it also cannot certify at all until it has probe coverage — which is correct
+(there is no ground truth to verify against) and is content work tracked by the asset
+campaigns, not an architecture gap.
 
 **Not in this matrix, by mission rule:** the visual layer's internal ownership is
 PRESERVED, not reopened (ledger slice 6); rows 7–8 pin only the request/availability
