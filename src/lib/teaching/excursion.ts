@@ -352,6 +352,34 @@ export function decideExcursion(input: ExcursionInput): ExcursionDecision {
   // The learner said they are done.
   if (active && isSatisfactionSignal(message)) return closed('closed-satisfied')
 
+  // ── R1.1 · THE LEARNER IS BACK ON THE LESSON ───────────────────────────────
+  //
+  // This exit already existed, nested inside the request-shaped branch near the
+  // bottom of this function. It was UNREACHABLE for the turn that matters most.
+  //
+  // MEASURED (phys.mech.newtons-second-law, 2026-09-02, deployed app). The
+  // learner wrote "No — speed doesn't matter for F=ma, only the net force and
+  // mass do", which resolves to the LESSON'S OWN concept. Production logged
+  // `requested:'phys.mech.newtons-second-law'` with `transition:'continued'` —
+  // the detour stayed open. Two things kept it open: `looksLikeAnswer` below
+  // returns a hold before the on-lesson branch is reached, and that branch is
+  // additionally gated on the message being request-SHAPED, which an answer is
+  // not. The excursion ran five more turns; while it ran, `notExcursion:false`
+  // blocked every authored probe and `turnCountsForLesson` froze the ladder.
+  //
+  // Naming the lesson's own concept IS the return signal, whatever sentence
+  // shape it arrives in. Placed with the other close signals (return,
+  // satisfaction) and ABOVE the answer-hold, which is the ordering correction
+  // R1 asks for. Identity comparison only — no similarity, no containment.
+  //
+  // Safe direction by construction: the only thing this can do is END a detour
+  // and put the learner back on the lesson they are already talking about. A
+  // resolver false positive that happens to name exactly the lesson concept
+  // costs one detour turn, and the learner can re-open by asking again.
+  if (active && requestedConceptId && requestedConceptId === lessonConceptId) {
+    return closed('closed-on-lesson')
+  }
+
   // A DETOURED LEARNER ASKING TO BE ASSESSED IS ASKING TO GO BACK.
   //
   // MEASURED (phys.mech.friction, 2026-09-01, real account, studied as a
@@ -372,11 +400,27 @@ export function decideExcursion(input: ExcursionInput): ExcursionDecision {
   // not change, and the turn limit is 40. The one signal that WAS present went
   // unread.
   //
-  // SCOPED TO A PREREQUISITE DETOUR. A learner who chose to explore a topic
-  // and asks to be quizzed may well mean quizzed on THAT topic; the ambiguity
-  // is real and is left alone. A learner who was detoured did not choose it,
-  // and asking to be assessed is asking for the lesson back.
-  if (active && state.openedAsKnowledgeGap === true && input.wantsPractice === true) {
+  // ── R1.2 · UN-SCOPED (2026-09-02) ──────────────────────────────────────────
+  //
+  // This exit shipped scoped to `openedAsKnowledgeGap === true`, on the
+  // reasoning that "a learner who CHOSE to explore a topic and asks to be
+  // quizzed may well mean quizzed on THAT topic; the ambiguity is real and is
+  // left alone." The scoping was measured wrong on the very next real session.
+  //
+  // MEASURED (phys.mech.newtons-second-law, 2026-09-02, deployed app): a
+  // TOPIC-opened excursion, five turns in, learner writes "Can you give me one
+  // more practice question to check I've got it?" — `wantsPractice: true` — and
+  // the detour stayed open (`transition:'continued'`), because it had not been
+  // opened as a knowledge gap. The gate was blocked by `notExcursion` on that
+  // turn and on every turn around it.
+  //
+  // The ambiguity the scoping protected is not worth its cost, and the
+  // asymmetry decides it: closing early costs the learner a detour they can
+  // re-open with one sentence, while staying open costs them the assessment
+  // machinery for up to MAX_EXCURSION_TURNS. Assessment lives on the lesson,
+  // so a request to be assessed is a request for the lesson — however the
+  // detour began.
+  if (active && input.wantsPractice === true) {
     return closed('closed-wants-practice')
   }
 
@@ -413,7 +457,17 @@ export function decideExcursion(input: ExcursionInput): ExcursionDecision {
     requestedConceptId != null && input.knowledgeGapConceptId === requestedConceptId
   if (requestedConceptId
       && (isExplicitTopicRequest(message) || isExplicitCorrection(message) || gapOpensThisConcept)) {
-    // They asked for the lesson's own concept — the detour is over.
+    // ── R3 · A SELF-EXCURSION NEVER OPENS ────────────────────────────────────
+    // They asked for the lesson's own concept, so there is nothing to detour
+    // TO. `none(lessonConceptId)` is the refusal: no excursion opens, the
+    // teaching target stays the lesson. Exact identity comparison — the fuzzy
+    // sub-topic containment variant considered alongside it was deliberately
+    // NOT adopted (see the proposal's §5-R3: it is a shape test standing in
+    // for a semantic judgement, held pending measurement).
+    //
+    // The `active` arm is now handled earlier, by the hoisted R1.1 close, which
+    // fires for any sentence shape rather than only a request-shaped one. It is
+    // kept here so this branch remains correct in isolation.
     if (requestedConceptId === lessonConceptId) {
       return active ? closed('closed-on-lesson') : none(lessonConceptId)
     }

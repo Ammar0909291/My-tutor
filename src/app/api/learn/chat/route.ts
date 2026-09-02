@@ -6728,6 +6728,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // GUIDE→CHECK's own success gate, not just CHECK/PRACTICE's —
               // see `phaseAllowsProbeHoisted`'s declaration.
               gateSoughtThisTurn: phaseAllowsProbeHoisted,
+              // R4: `gateSoughtThisTurn` above says the PHASE allowed a probe;
+              // it cannot say whether the gate actually ran. When an excursion
+              // is open the gate is blocked before the selector is reached
+              // (`gateTerms.notExcursion`), so a stripped question would be
+              // stripped on a false premise. This is the ONLY gate term read
+              // here — never `gateRefusedOnPolicy`, which would also swallow
+              // the closing-turn and arbitration refusals. See the field's
+              // doc comment.
+              gateBlockedByExcursion: excursionActiveHoisted,
               // A completed lesson has no mastery gate left to guard — see
               // `UngradedGateQuestionInput.lessonCompleted`'s doc comment for
               // the production defect this closes ("got it" after

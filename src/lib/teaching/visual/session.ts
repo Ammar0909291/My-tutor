@@ -62,9 +62,29 @@ export interface VisualSession {
 /**
  * Hard ceiling on a single excursion. Not a teaching rule — a safety valve, so
  * a missed return signal can never strand a learner on the wrong figure for a
- * whole session.
+ * whole session. Read by BOTH consumers of a detour: the visual session here
+ * and the teaching excursion (`excursion.ts`), which are two views of the same
+ * detour and are bounded together on purpose.
+ *
+ * ── R2 · 40 -> 6 (2026-09-02) ───────────────────────────────────────────────
+ * 40 is longer than most whole lessons, so in both deadlocks measured on
+ * 2026-09-02 the valve sat ~35 turns away and played no part. While a detour
+ * runs, `notExcursion:false` blocks every authored probe and
+ * `turnCountsForLesson` freezes the lesson ladder — so the ceiling is also the
+ * worst case for any defect in this seam, INCLUDING ones not yet found. That
+ * is the whole value of lowering it: it classifies nothing and diagnoses
+ * nothing, it just caps the blast radius.
+ *
+ * Why 6 and not lower: below ~4 this would start truncating ordinary
+ * two-or-three-turn clarifications, and the longest legitimate detour observed
+ * was 5 turns (phys.mech.newtons-second-law). 6 leaves one turn of headroom.
+ * Why 6 and not higher: the cost of closing early is small and recoverable —
+ * the excursion closes by RETURNING TO THE LESSON, its anchor throughout, and
+ * the learner re-opens a fresh detour by asking again.
+ * One constant, no behavioural coupling beyond the two readers named above,
+ * instantly revertible.
  */
-export const MAX_EXCURSION_TURNS = 40
+export const MAX_EXCURSION_TURNS = 6
 
 // ── request detection ────────────────────────────────────────────────────────
 // A concept only takes over the screen when the learner ASKS for it. These

@@ -397,6 +397,44 @@ export interface UngradedGateQuestionInput {
    * result and decides one sentence.
    */
   justGraded?: GradedThisTurn | null
+  /**
+   * Was the gate blocked THIS TURN because an excursion is active
+   * (`gateTerms.notExcursion === false`)?
+   *
+   * ── R4 · THE GATE NEVER LOOKED, SO THERE IS NOTHING TO WITHHOLD ───────────
+   * `gateSoughtThisTurn` is `phaseAllowsProbeHoisted`, computed from phase and
+   * move ALONE. It answers "would this phase have allowed a probe?", and the
+   * withhold below reads it as "the gate looked for a probe and found none."
+   * Those differ whenever another term blocked the gate first.
+   *
+   * MEASURED (2026-09-02, deployed app, two sessions): with an excursion open,
+   * every GUIDE turn logged `blockedBy:["notExcursion"]` — the selector never
+   * ran — while `phaseAllowsProbe` stayed true. So a perfectly good Socratic
+   * question was stripped on the belief that the probe pool was dry, and the
+   * turn shipped as the bare content-free hold. In phys.mech.newtons-second-law
+   * that happened three times in five turns.
+   *
+   * Safe because an excursion turn cannot fabricate mastery even if the
+   * learner answers: the ConversationState fold is a NO-OP while an excursion
+   * is active (route.ts, "paused means paused — no phase advance, no mastery
+   * credit, no counters moved"), and an unauthored key still cannot certify.
+   * So keeping the model's own question costs no evidence integrity and
+   * restores the teaching the learner actually asked for.
+   *
+   * DELIBERATELY NARROW. This is NOT `gateRefusedOnPolicy`, which is true when
+   * any term but `hasMemoryState` is false — including `notClosingTurn` and
+   * `arbitrationAllowsProbe`, terms that exist precisely to STOP questions.
+   * Using that would ship a question on a closing turn and undo
+   * `closingTurnWithholdsQuestion`. Only the excursion term is read here.
+   *
+   * Probe STARVATION is deliberately NOT covered: when the gate ran and found
+   * nothing, withholding the ungradeable question is this function's whole
+   * purpose and stays exactly as it was.
+   *
+   * Optional and defaulting to false, so every existing caller and test keeps
+   * its exact prior behaviour.
+   */
+  gateBlockedByExcursion?: boolean
 }
 
 /** The route's own grade of the pending question, passed in, never derived. */
@@ -580,6 +618,9 @@ export function withholdUngradedGateQuestion(
   try {
     const gateActive =
       !input.lessonCompleted &&
+      // R4: the gate was blocked before it looked. Nothing was sought, so
+      // nothing may be withheld on the strength of it having been sought.
+      !input.gateBlockedByExcursion &&
       (isMasteryGatePhase(input.phase) ||
       input.gateSoughtThisTurn === true ||
       (input.phase === 'GUIDE' && isMasteryGatePhase(input.phaseAfter)))

@@ -127,16 +127,42 @@ describe('the measured turn now closes the detour', () => {
   })
 })
 
-describe('scoped, so it cannot end a detour the learner chose', () => {
-  it('a self-chosen topic excursion is NOT closed by a practice request', () => {
+describe('UN-SCOPED by R1.2 — a practice request now ends ANY detour', () => {
+  // ── SUPERSEDED, DELIBERATELY (2026-09-02, proposal revision 3 §5-R1.2) ─────
+  //
+  // The two cases below previously asserted the OPPOSITE: that a self-chosen
+  // topic excursion, and a legacy snapshot with no flag, were NOT closed by a
+  // practice request. That scoping was chosen because "a learner who CHOSE to
+  // explore a topic and asks to be quizzed may well mean quizzed on THAT
+  // topic; the ambiguity is real and is left alone."
+  //
+  // It was measured wrong on the next real session. phys.mech.newtons-second-law
+  // (2026-09-02, deployed app): a TOPIC-opened excursion, five turns in, the
+  // learner wrote "Can you give me one more practice question to check I've got
+  // it?" — `wantsPractice: true` — and the detour stayed open, while
+  // `[gate-eligibility] blockedBy:["notExcursion"]` blocked every authored
+  // probe on that turn and the ones around it.
+  //
+  // The asymmetry decides it: closing early costs a detour the learner re-opens
+  // with one sentence; staying open costs them the assessment machinery for up
+  // to MAX_EXCURSION_TURNS. Assessment lives on the lesson, so asking to be
+  // assessed is asking for the lesson — however the detour began.
+  it('a self-chosen topic excursion IS now closed by a practice request', () => {
     const d = decide(openDetour({ openedAsKnowledgeGap: false }), 'quiz me on this', { wantsPractice: true })
-    expect(d.state.active).toBe(true)
+    expect(d.state.active).toBe(false)
+    expect(d.transition).toBe('closed-wants-practice')
   })
 
-  it('a snapshot persisted before the flag existed behaves as before', () => {
+  it('a snapshot persisted before the flag existed also closes now', () => {
     const { openedAsKnowledgeGap: _drop, ...legacy } = openDetour()
     const d = decide(legacy as ExcursionState, 'quiz me on this', { wantsPractice: true })
-    expect(d.state.active).toBe(true)
+    expect(d.state.active).toBe(false)
+    expect(d.transition).toBe('closed-wants-practice')
+  })
+
+  it('and it still returns the learner to the LESSON, not nowhere', () => {
+    const d = decide(openDetour({ openedAsKnowledgeGap: false }), 'quiz me on this', { wantsPractice: true })
+    expect(d.targetConceptId).toBe(LESSON)
   })
 
   it('an ordinary answer during a detour still holds it open', () => {
