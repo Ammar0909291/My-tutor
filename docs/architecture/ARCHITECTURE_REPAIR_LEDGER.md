@@ -407,6 +407,60 @@ TUTOR producing a question-only CLOSING turn (POSTHOC_REPAIR_CENSUS Finding 2) �
 a different thing (tutor output, not learner turn); its only non-fabricating fix
 is upstream generation or authored close copy, an owner decision, unchanged.
 
+## Product-quality pass (post real-account validation) — 2026-09-02
+
+After the 5-concept real-account run (0 false mastery, 0 unauthorized completion,
+no architectural contradiction), two concrete boundary fixes and three
+classifications. NOT DoD #13 work — the invariant phase stays closed.
+
+**P0 — MCQ answer-key leak (FIXED, enforcement boundary).** `/api/learn/chat`
+serialized the full `TutorMCQ` (including `correctIndex`) to the learner; a
+learner reading the network response saw the correct option. MEASURED on the real
+account. Traced: the client renders only `question`+`options` and submits the
+option TEXT — grading is server-side (`gradeMcqAnswer` reads the PERSISTED
+pending probe), so `correctIndex` was dead-received data. Fix at the API
+boundary: `mcqForClient` (mcq.ts) projects `{question, options}` for the response
+only; the persisted snapshot keeps the full probe for next-turn grading; presence
+preserved so the on-screen-probe deadlock invariant holds. Client no longer
+requires the key. `FinalAssessmentModal` already stated this principle — applied
+it to the in-lesson probe. Pin: `mcqAnswerKeyNotLeaked.test.ts` (+ updated
+`outstandingProbeStaysOnScreen`, `gateAssessmentRouteWiring`).
+
+**P1 — empty learner turn while a probe is on screen (FIXED, route boundary).**
+MEASURED (phys.mech.friction): a correct free-response to the tutor's own prose
+question shipped EMPTY text with the pending MCQ re-offered. Root cause: the early
+empty-with-mcq lead-in (~5286) runs on RAW text and keys on the ATTACHED probe; a
+later withhold stripped the follow-up to empty on a PENDING probe, and no
+post-strip backstop existed. Fix: a final guard (before the observation-only
+provenance block) — empty text + a served probe (attached or pending) →
+introduce it with the product's existing compact lead-in; fires only when a probe
+is present, so it cannot fabricate a question-only closing turn. Pin:
+`emptyTurnWithProbe.test.ts`.
+
+**Classified, NOT patched (model-dependent, not architecture — recorded so they
+are not re-litigated):**
+- **P1 confirmation of correct answers.** The authoritative boundary already
+  exists (`answerConfirmation.confirmCorrectAnswer`, gated on `gradeMcqAnswer`'s
+  verdict) and works for server-graded MCQs (verified live). Free-responses have
+  NO authoritative verdict by design (slices 10/11), so there is nothing to
+  expose; affirming one would require grading it (reopens slice 10) or
+  fabricating. Probing an ungraded answer's reasoning is pedagogically
+  defensible. MODEL-DEPENDENT.
+- **P2 excursion-return figure/text mismatch (KE).** Observed once, self-
+  corrected next turn, no mastery impact. Excursion close-detection is
+  deterministic; root cause (visual-target picking up the named lesson concept
+  while the excursion stayed open) is UNPROVEN and not reproduced. Not fixed
+  (mission: do not reopen the visual layer without proof).
+- **P2 verbatim explanation repeat (friction).** The deterministic state
+  (`explanationsServed`) exists and is fed to the model (do-not-repeat), but
+  enforcement is advisory and the model reproduced it. MODEL-DEPENDENT; a hard
+  post-hoc strip is out of scope and risky.
+
+Validation: tsc clean; full suite 540 files / 11,612 passed / 9 skipped; build
+clean. No live retest run (both fixes are deterministic boundary changes with
+real-module tests; the answer-key strip and the empty backstop are not
+model-mediated).
+
 ## CENSUS FULLY TRIAGED (2026-09-01)
 
 All four OWNERSHIP_CENSUS targets + Census A are measured and resolved:

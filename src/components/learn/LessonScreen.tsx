@@ -1064,7 +1064,6 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   const [activeMcq, setActiveMcq] = useState<{
     question: string
     options: string[]
-    correctIndex: number
     askedAt: number
   } | null>(null)
   // P6.6: the server-decided lesson completion payload. Presence of this state
@@ -1786,7 +1785,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     const aid = `a-${Date.now()}`
     setMessages((p) => [...p, { id: aid, role: 'assistant', content: '', ts: Date.now(), streaming: true }])
     let res: Response | undefined
-    let data: { success?: boolean; text?: string; provider?: 'yandex'|'groq'|'fallback'; llmCallCount?: number; visual?: string; visualSpec?: unknown; sceneSpec?: unknown; learnerLevel?: string; dynamicVisualizationCode?: unknown; inlinePractice?: unknown; hint?: unknown; error?: any; lessonOrder?: number; completedLessons?: number[]; mastery?: { verified?: boolean; gatePending?: boolean; completionSuppressed?: boolean; phase?: string; checkCorrect?: number; practiceCorrect?: number }; mcq?: { question?: string; options?: string[]; correctIndex?: number }; lessonComplete?: { complete?: boolean; lessonTitle?: string | null; durationSeconds?: number | null; mastered?: string[]; needsReview?: string[]; nextLessonOrder?: number | null; fullyMastered?: boolean } } = {}
+    let data: { success?: boolean; text?: string; provider?: 'yandex'|'groq'|'fallback'; llmCallCount?: number; visual?: string; visualSpec?: unknown; sceneSpec?: unknown; learnerLevel?: string; dynamicVisualizationCode?: unknown; inlinePractice?: unknown; hint?: unknown; error?: any; lessonOrder?: number; completedLessons?: number[]; mastery?: { verified?: boolean; gatePending?: boolean; completionSuppressed?: boolean; phase?: string; checkCorrect?: number; practiceCorrect?: number }; mcq?: { question?: string; options?: string[] }; lessonComplete?: { complete?: boolean; lessonTitle?: string | null; durationSeconds?: number | null; mastered?: string[]; needsReview?: string[]; nextLessonOrder?: number | null; fullyMastered?: boolean } } = {}
     try {
       // P0 (duplicate AI responses — proven root cause): retry ONLY a thrown/
       // aborted fetch (a dropped connection, or fetchWithTimeout's own abort
@@ -1882,17 +1881,18 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       // malformed payload falls back to the ordinary typed reply rather than
       // rendering a broken question.
       const rawMcq = data.mcq
+      // The answer key (correctIndex) is deliberately NOT sent — grading is
+      // server-side against the stored probe (see mcqForClient). The client
+      // needs only the question and options to render and to submit the chosen
+      // option TEXT, so it must not require a key it must never receive.
       if (
         rawMcq && typeof rawMcq.question === 'string' && rawMcq.question.trim() !== '' &&
         Array.isArray(rawMcq.options) && rawMcq.options.length >= 2 && rawMcq.options.length <= 4 &&
-        rawMcq.options.every((o) => typeof o === 'string' && o.trim() !== '') &&
-        typeof rawMcq.correctIndex === 'number' &&
-        rawMcq.correctIndex >= 0 && rawMcq.correctIndex < rawMcq.options.length
+        rawMcq.options.every((o) => typeof o === 'string' && o.trim() !== '')
       ) {
         setActiveMcq({
           question: rawMcq.question,
           options: rawMcq.options as string[],
-          correctIndex: rawMcq.correctIndex,
           askedAt: Date.now(),
         })
       } else {

@@ -8877,6 +8877,31 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         } catch { /* summary is informational — never blocks the turn */ }
       }
 
+      // A LEARNER TURN MUST NEVER SHIP EMPTY WHILE A PROBE IS ON SCREEN.
+      //
+      // The empty-with-mcq lead-in above (~5286) runs on the RAW model text and
+      // keys on `mcqHoisted` (attached THIS turn). But a post-model strip can
+      // reduce `cleanText` to empty LATER — measured on the real account
+      // (phys.mech.friction, 2026-09-02): the learner answered the tutor's own
+      // prose question, the model's follow-up question was withheld because a
+      // probe was already PENDING, and the turn shipped with empty text and the
+      // re-offered MCQ. The early guard could not catch it (pending, not
+      // attached; and it ran before the strip). This is the final, post-strip
+      // backstop — placed BEFORE the observation-only provenance block below so
+      // it does not violate that block's "assigns nothing the turn reads" rule.
+      // It introduces the probe the learner can already see — the product's
+      // defined compact question presentation, deterministic, claiming nothing,
+      // never fabricated. It fires ONLY when a probe is actually served, so it
+      // cannot manufacture a question-only closing turn (Finding 2 territory).
+      {
+        const { mcqToServe: mcqToServeForEmptyGuard } = await import('@/lib/teaching/mcq')
+        if (!cleanText.trim()
+            && mcqToServeForEmptyGuard(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted) !== null) {
+          console.log('[empty-post-strip-with-probe] text stripped to empty while a probe is on screen — introducing it')
+          cleanText = 'Here is a question to check your understanding:'
+        }
+      }
+
       // ── PHASE 0: TURN DECISION PROVENANCE ────────────────────────────
       //
       // The latest point at which everything is known: after every text
@@ -8920,7 +8945,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
 
       // Same helper the persist site above uses, so the payload and the
       // snapshot can never disagree about what is on the learner's screen.
-      const { mcqToServe: mcqToServeForResponse } = await import('@/lib/teaching/mcq')
+      // `mcqForClient` then strips the answer key (correctIndex/assetId) from the
+      // LEARNER-FACING copy only — the persisted snapshot keeps the full probe so
+      // gradeMcqAnswer can grade the next turn. Presence is preserved, so the
+      // on-screen-probe invariant is unchanged.
+      const { mcqToServe: mcqToServeForResponse, mcqForClient } = await import('@/lib/teaching/mcq')
 
       return NextResponse.json({
         success: true, text: cleanText, provider,
@@ -8981,7 +9010,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // on screen" — reappearing across the API boundary. Echoing the pending
         // probe makes the payload state what the server already believes, and
         // costs nothing when nothing is outstanding.
-        mcq: mcqToServeForResponse(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted) ?? undefined,
+        mcq: mcqForClient(mcqToServeForResponse(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted)) ?? undefined,
         // P6.6: present only on the turn the lesson completes. The client
         // renders the completion screen and must not continue teaching.
         lessonComplete: lessonCompletionHoisted ?? undefined,

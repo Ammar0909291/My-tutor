@@ -101,7 +101,7 @@ describe('the gate assessment is on the turn path', () => {
     // outstandingProbeStaysOnScreen.test.ts).
     expect(lineOf(/conversationStateUpdate\.pendingMcq = writePendingQuestion\($/)).toBeGreaterThan(0)
     expect(lineOf(/mcqToServe\(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted\),$/)).toBeGreaterThan(0)
-    expect(lineOf(/mcq: mcqToServeForResponse\(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted\) \?\? undefined/)).toBeGreaterThan(0)
+    expect(lineOf(/mcq: mcqForClient\(mcqToServeForResponse\(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted\)\) \?\? undefined/)).toBeGreaterThan(0)
   })
 })
 

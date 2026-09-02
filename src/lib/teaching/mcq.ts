@@ -1011,3 +1011,28 @@ export function mcqToServe(
   if (pending && !gradedThisTurn) return pending
   return null
 }
+
+/**
+ * THE LEARNER-FACING PROJECTION OF A SERVED MCQ — question and options ONLY.
+ *
+ * The answer key (`correctIndex`) and the internal `assetId` are SERVER-ONLY.
+ * `gradeMcqAnswer` reads `correctIndex` from the PERSISTED pending probe
+ * (contextSnapshot), never from the response, and the client submits the chosen
+ * OPTION TEXT (LessonScreen: `sendMessage(sessionId, option)`), so the learner
+ * never needs the key to render or answer. Sending it leaks the answer — a
+ * learner reading the network response sees the correct option outright.
+ * `FinalAssessmentModal` already states this principle ("correctIndex is
+ * intentionally absent: the server never sends it"); this applies it to the
+ * in-lesson probe, the one place it still leaked.
+ *
+ * PRESENCE IS PRESERVED (null in → null out) so the on-screen-probe invariant
+ * that outstandingProbeStaysOnScreen guards still holds: the response carries a
+ * probe exactly when the server counts one as displayed. Only the key is
+ * removed; the question and options are byte-identical.
+ */
+export function mcqForClient(
+  mcq: TutorMCQ | null | undefined,
+): { question: string; options: string[] } | null {
+  if (!mcq) return null
+  return { question: mcq.question, options: mcq.options }
+}
