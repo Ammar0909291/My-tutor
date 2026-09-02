@@ -1,8 +1,7 @@
 # Excursion vs. the Mastery Gate — design proposal
 
 **Status:** PROPOSAL — awaiting owner sign-off. Nothing here is implemented.
-**Date:** 2026-09-02 · **Revision 2** (see §6 — revision 1's headline design was
-withdrawn after adversarial review found it would destroy authored probes)
+**Date:** 2026-09-02 · **Revision 3**
 **Scope:** runtime teaching loop only. No Educational Brain, KG, curriculum,
 authored content, mastery semantics or grading change is proposed.
 **Evidence:** the 2026-09-02 real-account mystery-student run (6 lessons:
@@ -10,6 +9,20 @@ physics ×2, chemistry ×2, english ×2), measured three independent ways —
 production Vercel runtime logs filtered by sessionId, production Postgres
 (`spine_events`, `asset_identity`, `probe_assets`), and offline reproduction
 driving the real modules with the verbatim transcript.
+
+### Revision history
+- **r1** proposed *retargeting* the gate to the excursion's concept.
+- **r2** withdrew that after adversarial review; corrected three other items.
+- **r3** (this) is the consolidated, consistent document. It also fixes a
+  labelling hazard in r2: r1 called the retarget design **"Change C"**, and r2
+  reused the letter *C* for an adopted change. **One scheme is used here:
+  adopted changes are R1-R4; the withdrawn design is called the RETARGET
+  DESIGN throughout and has no letter.**
+
+> **If you are looking for "Option C" / "Change C":** that is the RETARGET
+> DESIGN. It is **permanently withdrawn** — see §6. It is not deferred, not
+> conditional, and must not be revived without the fold problem in §6 being
+> solved first.
 
 ---
 
@@ -19,13 +32,12 @@ driving the real modules with the verbatim transcript.
 
 Today it does, unconditionally, for up to `MAX_EXCURSION_TURNS = 40` turns.
 
-Revision 1 answered "no — retarget the gate to the excursion's concept."
-**That answer was wrong and is withdrawn (§6).** This revision answers: *the
-block itself can stay; what must change is that excursions open when they
-should not, cannot close when they should, and are allowed to run far too long.*
+Revision 1 answered *"no — retarget the gate."* That answer was wrong (§6).
 
-The remedy is now four exact changes and one deletion — smaller, duller and
-safer than revision 1.
+**This revision answers: the block itself stays.** What must change is that
+excursions *open when they should not*, *cannot close when they should*, and are
+*allowed to run far too long*. The remedy is four exact changes and one
+permanent deletion — smaller, duller and safer than r1.
 
 ---
 
@@ -85,19 +97,29 @@ already in. The extractor even captured the trailing verb: `emission lines work`
 
 Every individual step behaves as designed. The composition is a deadlock.
 
-### 2.3 The contrast — and its honest limits
+### 2.3 MEASURED vs UNMEASURED — read this before quoting any number
 
-The two lessons that reached mastery (Newton's First Law, States of Matter)
-never opened an excursion. Same code, same build, same account, same session.
+**MEASURED** (production, reproducible):
+- the two deadlocks above, turn by turn, with byte-level confirmation
+- offline reproduction of both against the real modules with verbatim messages
+- 5 authored probes existed and 0 attached in Bohr
+- asset contract by subject: physics 261/261, chemistry 186/186,
+  **english 0/216**, mathematics 0/47
 
-**Do not over-read this.** It is n=2 vs n=2, uncontrolled for turn count,
-message length, or learner style. The tester deliberately probed and challenged
-and so rarely produced the satisfaction signal that closes an excursion
-(`"ok, got it"`), which real learners produce constantly. **The population rate
-of this deadlock is UNMEASURED** — excursion transitions are log-only, so it
-cannot be derived retrospectively. §9 makes measuring it step 0.
+**UNMEASURED — and must not be asserted:**
+- **how often real learners hit this deadlock.** Excursion transitions are
+  log-only and cannot be derived retrospectively.
+- The contrast in §2.1 (the two lessons that mastered never opened an
+  excursion) is **n=2 vs n=2**, uncontrolled for turn count, message length and
+  learner style. The tester deliberately probed and challenged, and therefore
+  rarely produced the satisfaction signal (`"ok, got it"`) that closes an
+  excursion — a signal ordinary learners emit constantly. **The tester's style
+  may itself be the reason the deadlocks ran 5-7 turns.**
 
-### 2.4 Prevalence of the adjacent grading failure  *(MEASURED)*
+No claim in this document asserts a population frequency for the excursion
+failure. §9 step 0 exists to obtain one.
+
+### 2.4 Prevalence of the ADJACENT grading failure  *(MEASURED)*
 
 30 days of production answers (`spine_events`, `AnswerObserved`):
 
@@ -108,25 +130,26 @@ cannot be derived retrospectively. §9 makes measuring it step 0.
 | graded wrong | 554 | 14.7% |
 | **total** | **3,762** | |
 
-The compound answer-and-question turn ("1 — the net force. But can we do a
-numbers problem?") is real and reproducible, but it is ~4% of answers, not the
-dominant failure. Revision 1 over-weighted it because the tester types answers
-with follow-ups attached.
+This measures the compound answer-and-question turn ("1 — the net force. But
+can we do a numbers problem?"), which is **not** part of this design (§13-a).
+It is recorded here only to keep r1's over-weighting of it from recurring: it
+is ~4% of answers, not the dominant failure.
 
 ---
 
-## 3. Steelman: what the current design is protecting
+## 3. Steelman: what the current design protects
 
-`notExcursion` bundles concerns that have different owners:
+`notExcursion` bundles protections that have different owners.
+*(Labelled P1-P3 to avoid collision with the changes in §5.)*
 
-| # | Concern | Who owns it today |
+| # | Protection | Who owns it today |
 |---|---|---|
-| C1 | Don't **spend** a scarce, never-re-asked authored probe on a turn where the learner's attention is elsewhere | `notExcursion` (this term) |
-| C2 | Don't **credit** a detour answer to the lesson's mastery | the fold — see below |
-| C3 | Don't **drill past a question** | arbitration (`LEARNER_REQUEST` > `TEACH`), CUE rule D4b |
+| P1 | Don't **spend** a scarce, never-re-asked authored probe on a turn where the learner's attention is elsewhere | `notExcursion` (this term) |
+| P2 | Don't **credit** a detour answer to the lesson's mastery | the fold — see below |
+| P3 | Don't **drill past a question** | arbitration (`LEARNER_REQUEST` > `TEACH`), CUE rule D4b |
 
-**C2's owner is stronger than revision 1 realised, and it is what killed
-revision 1's design.** `route.ts` L6836:
+**P2's owner is stronger than r1 realised, and it is what killed r1's design.**
+`route.ts` L6836:
 
 ```
 conversationStateAfterTurnHoisted = excursionActiveHoisted
@@ -147,38 +170,23 @@ still marks it spent, permanently.
 
 | Option | Description | Verdict |
 |---|---|---|
-| **0** | Keep patching exits as they are found | Rejected — six iterations; each narrowing produced the next gap (§8) |
-| **1** | Scope the *trigger*: a self-excursion never opens | **Adopt** (exact form only, §5-A) |
-| **2** | Make the already-written exits reachable | **Adopt — now the strongest item** (§5-B) |
-| **3** | Retarget the gate to the excursion's concept | **WITHDRAWN — see §6.** Would destroy probes |
-| **4** | Bound the excursion: `MAX_EXCURSION_TURNS` 40 → ~6 | **Adopt.** Promoted from "palliative": exact, trivial, reversible, and it bounds unknown-unknowns in this seam |
-| **5** | Delete the term entirely | Rejected — C1 is real |
+| Keep patching exits as found | status quo | Rejected — six iterations; each narrowing produced the next gap (§8) |
+| Make the already-written exits reachable | → **R1** | **Adopt — strongest item** |
+| Bound the excursion (`MAX_EXCURSION_TURNS` 40 → 6) | → **R2** | **Adopt** — promoted from "palliative" |
+| Refuse a self-excursion (`target === lesson`) | → **R3** | **Adopt**, exact form only |
+| Scope the ungraded-question withhold | → **R4** | **Adopt**, narrowly |
+| **RETARGET the gate to the excursion's concept** | r1's headline | **PERMANENTLY WITHDRAWN — §6** |
+| Delete `notExcursion` entirely | — | Rejected — P1 is real |
 
 ---
 
-## 5. Recommended design — four exact changes
+## 5. Recommended design — four exact changes (R1-R4)
 
-Ordered by value-per-risk. Each is independently shippable and independently
-reversible. **None widens a predicate; none can bank a false grade.**
+Each is independently shippable and independently reversible.
+**None widens a predicate. None adds new grading behaviour. None can bank a
+false grade.**
 
-### A. A self-excursion never opens  *(exact, not heuristic)*
-
-Refuse to open an excursion whose target **is the lesson concept**. This is an
-identity comparison, not a similarity judgement.
-
-**Deliberately NOT included:** revision 1 also proposed refusing when an
-unresolved TITLE is "covered by" the lesson's description — i.e. lexical
-containment. That is a shape test standing in for a semantic judgement, which
-is the exact systemic fault this investigation named elsewhere
-(`readsAsProse` = length + first character; `looksLikeAQuestion` = trailing
-`?`). It would acquire its own false-positive tail and its own narrowing. It is
-dropped here and may be reconsidered only with measurement behind it.
-
-**Consequence, stated honestly:** the Bohr case (`'emission lines work'`, an
-unresolved title) is **not** fully closed by A alone. It is closed in practice
-by B and bounded by Option 4.
-
-### B. Make the two exits that already exist reachable  *(strongest item)*
+### R1. Make the two exits that already exist reachable  *(strongest item)*
 
 Both are written, correct, and currently dead for a learner who answers:
 
@@ -193,16 +201,54 @@ Both are written, correct, and currently dead for a learner who answers:
    give me one more practice question to check I've got it?"* could not close a
    topic-opened excursion. Un-scope it.
 
-This invents no predicate, widens no detector, and adds no new state. It only
-lets already-agreed exits fire.
+**This invents no predicate, widens no detector, adds no state, and changes no
+grading.** It only lets already-agreed exits fire.
 
-### C. Bound the excursion  *(Option 4)*
+### R2. Bound the excursion — `MAX_EXCURSION_TURNS` 40 → 6
 
-`MAX_EXCURSION_TURNS` 40 → ~6. A detour that has not resolved in six turns is
-not a detour. This does not diagnose anything; it caps the blast radius of
-every failure in this seam, including ones not yet found.
+**Rationale.** A detour that has not resolved in six turns is not a detour. The
+constant is currently 40, which is longer than most whole lessons; in both
+measured deadlocks the safety valve was ~35 turns away and therefore played no
+part. This change diagnoses nothing — it caps the blast radius of every failure
+in this seam, **including ones not yet found**, which is precisely its value
+given the unmeasured prevalence in §2.3.
 
-### D. The withhold must key on WHY the gate declined — narrowly
+**Trade-offs, stated plainly:**
+- *Cost:* a genuinely long, legitimate detour is returned to the lesson at turn
+  6 rather than being followed indefinitely. The learner is not abandoned — the
+  excursion closes by *returning to the lesson*, which is the anchor it always
+  held; and nothing stops them asking again, which re-opens a fresh detour.
+- *Benefit:* the worst case for any excursion defect drops from 40 turns to 6,
+  bounding the two deadlocks measured here and any not yet identified.
+- *Risk of over-tightening:* a value below ~4 would start truncating ordinary
+  two-or-three-turn clarifications. 6 leaves headroom above the longest
+  legitimate detour observed (5 turns, Newton's Second Law).
+- *Reversibility:* one constant, no behavioural coupling, instantly revertible.
+- *Why not lower:* 6 is chosen over 4 deliberately — the cost of truncating a
+  real detour is a worse learner experience than the cost of two extra blocked
+  turns.
+
+### R3. A self-excursion never opens  *(exact, not heuristic)*
+
+Refuse to open an excursion whose target **is the lesson concept**
+(`requestedConceptId === lessonConceptId`). An identity comparison, not a
+similarity judgement.
+
+**Deliberately NOT included — held, not adopted:** r1 also proposed refusing
+when an unresolved TITLE is "covered by" the lesson's description, i.e. lexical
+containment. That is a shape test standing in for a semantic judgement — the
+exact systemic fault this investigation named elsewhere (`readsAsProse` =
+length + first character; `looksLikeAQuestion` = trailing `?`). It would
+acquire its own false-positive tail and its own narrowing, continuing the very
+pattern §8 identifies as the root problem. **Held pending measurement; not part
+of this proposal.**
+
+**Consequence, stated honestly:** the Bohr case (`'emission lines work'`, an
+unresolved title, `requestedConceptId === null`) is **not** closed by R3. R3
+closes only the resolved self-excursion. Bohr is closed in practice by R1 and
+bounded by R2.
+
+### R4. Scope the ungraded-question withhold — `notExcursion` and starvation only
 
 `withholdUngradedGateQuestion` receives
 `gateSoughtThisTurn: phaseAllowsProbeHoisted`, computed from phase and move
@@ -211,73 +257,87 @@ and found none"*, when in the measured cases the gate **never ran**. Stripping
 a good Socratic question because a different subsystem declined is the direct
 cause of the content-free hold.
 
-**Scoped, unlike revision 1.** Revision 1 proposed consulting
-`gateDeclinedByPolicyHoisted`. That is too broad: `gateRefusedOnPolicy()`
-returns true when **any** term but `hasMemoryState` is false — including
-`notClosingTurn` and `arbitrationAllowsProbe`, which exist precisely to stop
-questions. Using it would ship a question on a CLOSING turn and undo
+**Explicitly scoped.** r1 proposed consulting `gateDeclinedByPolicyHoisted`.
+That is too broad: `gateRefusedOnPolicy()` returns true when **any** term but
+`hasMemoryState` is false — including `notClosingTurn` and
+`arbitrationAllowsProbe`, which exist precisely to stop questions. Using it
+would ship a question on a CLOSING turn and undo
 `closingTurnWithholdsQuestion`.
 
-D therefore applies **only** where stripping is affirmatively wrong:
-- the gate was blocked by `notExcursion`, and
-- the gate was starved (`probeFound:false` — the English case).
+R4 therefore applies **only** to these two conditions, named individually:
+- the gate was blocked by **`notExcursion`**, and
+- the gate ran and was **starved** (`probeFound:false` — the English case).
 
-Every other decline reason keeps today's behaviour exactly.
+A generic "declined by policy" condition **must not be used.** Every other
+decline reason keeps today's behaviour byte-for-byte, pinned by the negative
+control in §7-6.
+
+R4 changes *which turns keep the model's own question*. It does **not** change
+grading, keys, counters, or what any answer is worth.
 
 ---
 
-## 6. WITHDRAWN: revision 1's headline design (retarget the gate)
+## 6. PERMANENTLY WITHDRAWN: the RETARGET DESIGN
 
-Recorded rather than deleted, because the reason is the most useful finding in
-this document.
+*(r1's headline; called "Change C" in r1 and informally "Option C". No adopted
+change in this document carries that letter.)*
 
-**Revision 1 proposed:** while an excursion is active, let the gate attach a
-probe drawn from the *excursion target's* pool, claiming "credit routing is
+**What it proposed:** while an excursion is active, let the gate attach a probe
+drawn from the *excursion target's* pool, on the claim that "credit routing is
 unchanged."
 
-**Why it is wrong:**
+**Why it is unsafe — this is the operative reason and it is permanent:**
 
-1. **It would destroy probes for zero evidence.** The fold is a no-op during an
-   excursion (§3). `recordMcqAsked` still records the fingerprint, and that
-   list is append-only — the probe is spent permanently. Net effect: a reviewed,
-   never-re-asked probe is consumed, nothing is banked, and it is missing from
-   that concept's pool when the learner later studies it as a lesson. Strictly
-   worse than the status quo.
-2. **It violates taught-before-quizzed.** `certify.ts` asserts D1 ("the opening
-   turn teaches, it does not quiz"). The excursion target is by definition a
-   concept the learner has just named and has *not* been taught this session.
-3. **The diagnosis was right and the prescription did not follow from it.**
-   "The gate and the excursion disagree about which concept" is true; retargeting
-   fixed *which question is asked* and ignored *where the answer goes*.
+> **Authored probes would be recorded as ASKED while the excursion FREEZES THE
+> FOLD, so the evidence is burned without certification.**
 
-Lesson for the next revision of anything in this seam: in this runtime,
-attaching a question and crediting its answer are separately owned, and a design
-that moves one must state what happens to the other.
+Concretely:
+1. `recordMcqAsked()` appends the probe's fingerprint to `mcqAsked`. That list
+   is append-only; a spent probe is never re-asked.
+2. The fold is a no-op while an excursion is active (§3, `route.ts` L6836) — no
+   phase advance, no mastery credit, no counters moved.
+3. Net effect: a reviewed, never-re-asked authored probe is **consumed for
+   zero evidence**, and is **missing from that concept's pool** when the learner
+   later studies it as a lesson. Strictly worse than the status quo.
+4. Independently, it violates `certify.ts`'s **D1 (taught before quizzed)** —
+   the excursion target is by definition a concept the learner has just named
+   and has *not* been taught this session.
+
+**Status: withdrawn permanently, not deferred.** It must not be revived unless
+the fold problem is solved first — i.e. unless some component is made an actual
+consumer of detour-turn evidence. That is a different and larger design.
+
+**The transferable lesson:** in this runtime, *attaching a question* and
+*crediting its answer* are separately owned. Any future design that moves one
+must state what happens to the other. r1's diagnosis ("the gate and the
+excursion disagree about which concept") was correct; the prescription did not
+follow from it, because it fixed which question is asked and ignored where the
+answer goes.
 
 ---
 
 ## 7. Invariants to pin (falsifiable, one test each)
 
-1. An excursion never opens whose target **is** the lesson concept.  *(A)*
-2. A learner naming the lesson's own concept closes an active excursion, even
-   when the message also reads as an answer.  *(B1)*
-3. A learner asking to be assessed closes an active excursion, however it was
-   opened.  *(B2)*
-4. No excursion survives more than `MAX_EXCURSION_TURNS` turns, and that
-   constant is ≤ 8.  *(C)*
+1. A learner naming the lesson's own concept closes an active excursion, even
+   when the message also reads as an answer.  *(R1)*
+2. A learner asking to be assessed closes an active excursion, however it was
+   opened.  *(R1)*
+3. No excursion survives more than `MAX_EXCURSION_TURNS` turns, and that
+   constant is ≤ 8.  *(R2)*
+4. An excursion never opens whose target **is** the lesson concept.  *(R3)*
 5. The content-free hold is never served on a turn where the gate was blocked
-   by `notExcursion`.  *(D)*
-6. A CLOSING turn still withholds a question — D changes nothing there.  *(D,
-   negative control)*
-7. Regression: the Phase 5 off-curriculum case still opens
+   by `notExcursion`, or where the gate ran and was starved.  *(R4)*
+6. **Negative control:** a CLOSING turn still withholds a question, and an
+   arbitration-denied turn still withholds a question. R4 changes neither.  *(R4)*
+7. **Negative control:** no authored probe is attached on a turn whose fold is
+   a no-op — the invariant the RETARGET DESIGN would have broken.  *(§6)*
+8. Regression: the Phase 5 off-curriculum case still opens
    (`"What is thermal conductivity?"` inside Free Body Diagrams).
-8. Regression: `turnCountsForLesson()` is unchanged — no detour turn credits
+9. Regression: `turnCountsForLesson()` is unchanged — no detour turn credits
    the lesson.
-9. Regression: no authored probe is attached on a turn whose fold is a no-op.
-   *(the invariant revision 1 would have broken)*
 
-Replay fixture: the two failing sessions above, verbatim, as a transcript test.
-The current build fails 1-5 on that fixture; that is the acceptance bar.
+Replay fixture: the two failing sessions in §2.1, verbatim, as a transcript
+test. The current build fails 1-5 on that fixture; that is the acceptance bar.
 
 ---
 
@@ -288,33 +348,29 @@ The current build fails 1-5 on that fixture; that is the acceptance bar.
   further excluded requests and distress. **Each exclusion was individually
   justified by a real measured harm** (the "tap a choice" lead-in firing at a
   confused learner mid-remediation; a hedge banked as a committed answer).
-  Their union is a common learner shape nothing handles. Note the asymmetry
-  that argues *against* simply widening them back: silence costs a turn and is
-  recoverable; a false grade writes permanent evidence. Every change in §5 is
-  chosen to avoid trading in that direction.
+  Their union is a common learner shape nothing handles.
+  Note the asymmetry that argues *against* simply widening them back: silence
+  costs a turn and is recoverable; a false grade writes permanent evidence.
+  **Every change in §5 is chosen to avoid trading in that direction** — R1
+  re-enables agreed exits, R2 is a constant, R3 is an identity check, R4 only
+  decides whether the model's own text survives.
 - **Ordering beats presence.** `closed-on-lesson` is correct and unreachable.
 - **Arbitration never saw it.** `[arbitration] {owner:'TEACH', overridden:[],
   denied:[]}` on the deadlocked turns. Phase 3 arbitrates which *action* owns a
   turn; the excursion is a *state* that removes a capability before arbitration
   is consulted. Phase 3 cannot arbitrate a term it does not own.
-- **Enforcement is off.** The Output Verifier ran in `log` mode
-  (`[affirm-guard-scope] {outputVerifierFlag:true, verifierMode:'log'}`); the
-  spine records `verifier:rejected` + `verifier:log-only-delivered` on the
-  over-dense turns. Deliberate (`readVerifierMode`: the master flag implies
-  `log`, never `enforce`) — worth revisiting separately, not here.
 
 ---
 
 ## 9. Rollout and measurement
 
-**Step 0 — measure prevalence first (§2.3).** Add an excursion-lifecycle
-counter (opened / closed-by-reason / turns-held) before shipping behaviour
-changes. The tester's sample is n=4 and may be unrepresentative of learners who
-naturally emit satisfaction signals. If the population rate is negligible,
-ship C only and stop.
+**Step 0 — measure prevalence (§2.3).** Add an excursion-lifecycle counter
+(opened / closed-by-reason / turns-held) before or alongside behaviour changes.
+The tester's sample is n=4 and may be unrepresentative. If the population rate
+proves negligible, ship R2 only and stop.
 
-Then B → C → A → D, each measured before the next. Metrics available today
-with no new instrumentation:
+Then **R1 → R2 → R3 → R4**, each measured before the next. Metrics available
+today with no new instrumentation:
 
 - `[gate-eligibility] blockedBy:["notExcursion"]` per 100 turns
 - `AssistantRendered length: 39` (the hold) per session
@@ -329,11 +385,11 @@ Before/after on the same seed and account. No claim without both numbers.
 ## 10. What this proposal explicitly does NOT change
 
 Mastery/completion semantics · `masteryVerifiedStrict` · the strict counters ·
-`unauthored-key-not-certifying` · `gradeMcqAnswer`'s refusal to guess ·
+`unauthored-key-not-certifying` · `gradeMcqAnswer` and every grading rule ·
 `turnCountsForLesson` and the excursion fold no-op · the excursion's return
 anchor and no-nesting rule · the Phase 5 unresolved-title feature for genuinely
-off-lesson topics · CLOSING-turn withholding · the Educational Brain, KG,
-curriculum, blueprints or any authored content.
+off-lesson topics · CLOSING-turn and arbitration withholding · the Educational
+Brain, KG, curriculum, blueprints or any authored content.
 
 ---
 
@@ -341,25 +397,48 @@ curriculum, blueprints or any authored content.
 
 | Risk | Mitigation |
 |---|---|
-| B2 closes an excursion the learner wanted to continue | "Quiz me" is a request to be assessed; the lesson is the assessable thing. Reversible |
-| C (6 turns) cuts off a legitimate long detour | The detour ends by returning to the lesson, not by abandoning the learner; tune on the step-0 counter |
-| D lets through a genuinely ungradeable question | Scoped to two decline reasons; invariant 6 is the negative control |
-| A does not close the Bohr (unresolved-title) case | Acknowledged in §5-A; B and C cover it. Do not paper over with a containment heuristic |
-| The whole seam is over-fitted to one tester's style | Step 0 exists for exactly this |
+| R1 closes an excursion the learner wanted to continue | "Quiz me" is a request to be assessed; the lesson is the assessable thing. Reversible |
+| R2 (6 turns) cuts off a legitimate long detour | The excursion closes by *returning to the lesson*, not by abandoning the learner; the learner can re-ask. Tune on the step-0 counter |
+| R3 does not close the Bohr (unresolved-title) case | Acknowledged in §5-R3; R1 and R2 cover it. Do **not** paper over it with a containment heuristic |
+| R4 lets through a genuinely ungradeable question | Scoped to two named conditions; §7-6 is the negative control |
+| The whole seam is over-fitted to one tester's style | §9 step 0 exists for exactly this; §2.3 forbids asserting a frequency |
 
 ---
 
 ## 12. Open decisions requiring a signature
 
-1. **Adopt the revised set (A, B, C, D) and treat Option 3 as withdrawn?**
+1. **Adopt R1-R4, with the RETARGET DESIGN permanently withdrawn?**
    — recommended: yes.
-2. **`MAX_EXCURSION_TURNS`: 40 → 6, or → 8?** — recommended: 6.
-3. **Gate the whole package behind step-0 prevalence measurement, or ship B and
-   C immediately (both are exact and reversible) and measure alongside?**
-   — recommended: ship B and C, measure alongside.
+2. **`MAX_EXCURSION_TURNS`: 40 → 6 (recommended) or → 8?**
+3. **Gate the package behind step-0 prevalence measurement, or ship R1 and R2
+   immediately (both exact and reversible) and measure alongside?**
+   — recommended: ship R1 and R2, measure alongside.
 
-Separate from this document, and the two highest-impact items overall:
-**english is 0 of 216 (concept, band) pairs at asset contract — no English
-lesson can reach mastery today** (physics 261/261, chemistry 186/186,
-mathematics 0/47); and `profiles.displayName` for a real learner account is
-`'Claude'`, written by an automated QA run.
+---
+
+## 13. Out of scope — separate decisions, deliberately not bundled here
+
+Each is real, evidenced elsewhere, and **must be decided on its own merits**.
+Bundling any of them into this design would repeat the pattern §8 identifies.
+
+- **(a) Compound-answer grading.** `resolveMcqChoice`'s question precondition
+  refuses "1 — the net force. But can we do a numbers problem?" (4.4% of
+  answers, §2.4), and the I1/I4 re-offer notice is suppressed for the same
+  messages. Any change here touches grading and carries permanent-false-evidence
+  risk. **Not part of this design.**
+- **(b) Figure-description enforcement.** `stripUnbackedFigureReferences` is
+  no-figure-only, so a figure that is present but *wrongly described* is
+  unguarded (measured: an acceleration number-line narrated as a "3D
+  Newton's-laws simulation").
+- **(c) `readsAsProse`.** A shape test admitting KG syllabus fragments into
+  learner-facing text (measured verbatim in chemistry).
+- **(d) Output Verifier enforcement.** Deployed in `log` mode; the spine records
+  `verifier:rejected` + `verifier:log-only-delivered` on over-dense turns.
+  Promoting to `enforce` means template substitution and needs its own rollout.
+- **(e) English authoring.** **0 of 216 (concept, band) pairs at asset
+  contract — no English lesson can reach mastery today** (physics 261/261,
+  chemistry 186/186, mathematics 0/47). Content work, not runtime. Probably the
+  single highest-impact item on the platform.
+- **(f) Profile data contamination.** `profiles.displayName` for a real learner
+  account is `'Claude'`, written by an automated QA run. One UPDATE, plus
+  stopping QA runs writing to real learner profiles.
