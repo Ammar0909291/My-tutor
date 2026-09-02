@@ -212,6 +212,18 @@ learnerAskedForAVisual: learnerRequestHoisted === 'diagram', ... })` (route
 two authorities disagree (the L3 fix: "I don't have a graph of this, but here is
 the circuit"). No competing-owner contradiction found; preserved, not touched.
 
+## Slice 7 — DoD #13 adversarial proving (first piece) — DONE 2026-09-01
+
+`foldReachabilityInvariant.test.ts` — adversarial proof that the fold PREVENTS
+(not merely fails to produce) the unreachable mastery shapes slice 1's soundness
+rests on: through the real fold, `correctAtPractice>=1 ⟹ correctAtCheck>=1`,
+TRANSFER needs practice>=2, the first practice credit only appears AFTER a check
+credit, and no trajectory yields `{check:0,practice:2}` or `TRANSFER` with zero
+evidence. Complements masteryLadderReachable (positive path) with the negative
+ordering invariant nothing else pinned. If a future edit lets PRACTICE accrue
+before CHECK, slice 1's premise breaks and this test fails first. Also re-pins
+acks/wrong-answers never climbing the assessed rungs.
+
 ## CENSUS FULLY TRIAGED (2026-09-01)
 
 All four OWNERSHIP_CENSUS targets + Census A are measured and resolved:
