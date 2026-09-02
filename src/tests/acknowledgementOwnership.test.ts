@@ -44,9 +44,11 @@ describe('B. the ladder predicate is the OWNER of the grading-null decision', ()
   // predicate to end a demotion bug ("I understand" being graded). Pin it: the
   // grading gate must read the ladder predicate, so it cannot re-fork.
   it('route.ts nulls the teaching signal on isLowSignalAcknowledgement, not the strict predicate', () => {
-    expect(ROUTE).toMatch(/if \(isLowSignalAcknowledgement\(message\)\) teachingSignal = null/)
+    // Braced block since a sibling learner-question guard was added at the same
+    // seam (else if); the ladder-predicate read is the invariant.
+    expect(ROUTE).toMatch(/if \(isLowSignalAcknowledgement\(message\)\) \{\s*\n?\s*teachingSignal = null/)
     // The strict predicate must NOT be the one gating the signal null.
-    expect(ROUTE).not.toMatch(/if \(isBareAcknowledgement\(message\)\) teachingSignal = null/)
+    expect(ROUTE).not.toMatch(/if \(isBareAcknowledgement\(message\)\) \{?\s*\n?\s*teachingSignal = null/)
   })
 })
 

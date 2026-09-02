@@ -44,6 +44,7 @@ Post-hoc rewrite classification: `POSTHOC_REPAIR_CENSUS.md`.
 | 13 | **A false `[LESSON_COMPLETE]` ships** — the model claims completion in prose on a lesson the gate refuses | `gateLessonCompletion` → `conceptMasteryVerdict`; `enforceStance` strips the false claim; fail-closed strips on gate error | completion is owned by the gate; a prose completion claim on an unmastered concept is stripped, not honoured; a gate error fails closed | `completionClaimInProse.test.ts`; `stanceEnforcement.test.ts`; `lessonCompletion.test.ts` | **PREVENTED** |
 | 14 | **Correctness recorded for an ungraded question** — the model asks in prose (no server answer key) and its self-reported grade is folded as evidence | `shouldSuppressSignalCorrectness` / `withholdUngradedGateQuestion` (gateAssessment.ts) | a question with no server answer key records no correctness and, at the gate, withholds the question while keeping the teaching | `gateAssessmentIsServerOwned.test.ts`; `answerableTurnEvidenceGuard.test.ts` | **PREVENTED** |
 | 15 | **A free-response answer certifies mastery on the model's self-report** — a prose answer the model marks correct (signalVerification CLEAN, no server key) banks a VERIFIED credit and certifies strict mastery | fold `verified` = `evidence.serverGraded === true` (conversationState.ts); `masteryVerifiedStrict` fallback gated on `!sawModernGrading` | a verified credit requires positive server-grade provenance (`gradeMcqAnswer` against an authored key); a modern prose-only lesson cannot slip through the legacy plain-counter fallback | `freeResponseCannotVerifyMastery.test.ts`; `strictMastery.test.ts`; `inventedKeyCannotVerify.test.ts` | **PREVENTED** |
+| 16 | **A learner QUESTION is graded as an answer** — the tutor asked a gradeable question, the learner replies with a question, and the model's self-reported correctness banks evidence / advances the ladder / could ride an already-earned mastery into a close | signal-finalization seam (route.ts): the acknowledgement guard's sibling, the learner-question guard, reusing `detectLearnerQuestion`; completion still owned by `gateLessonCompletion` → `conceptMasteryVerdict` | a learner question with no resolved server grade drops the model's `correctness` (undefined, never false — no fabrication); the fold banks no plain or verified credit; completion needs verified mastery a question cannot supply; confusion survives so the question routes to teaching | `questionOnlyTurnCannotComplete.test.ts` | **PREVENTED** |
 
 ---
 
@@ -61,14 +62,17 @@ answer-verification subsystem (the Phase 5 framing): the machinery existed; the 
 was that `verified` was defined by absence.
 
 **One DETECTION-only choice remains, deliberate and documented — not silently counted
-as prevented:**
+as prevented. Note it is about the TUTOR's OUTPUT, not a learner turn** (the
+learner-question case is row 16, PREVENTED):
 
-- **Question-only closing turn** (`POSTHOC_REPAIR_CENSUS.md` Finding 2, route 6766
-  else). When the whole closing turn is a single question, it ships unchanged and is
-  logged, because the only enforcement alternative is fabricating a closing sentence,
-  which the never-fabricate rule forbids. The honest enforcement is upstream (stop the
-  model producing a question-only close) or a non-fabricating fallback to authored
-  close copy — not a rewrite here. Recorded as a KNOWN detection-only site.
+- **Tutor question-only closing turn** (`POSTHOC_REPAIR_CENSUS.md` Finding 2, route
+  6766 else). When the TUTOR's whole closing turn is a single question, it ships
+  unchanged and is logged, because the only enforcement alternative is fabricating a
+  closing sentence, which the never-fabricate rule forbids. The honest enforcement is
+  upstream (stop the model producing a question-only close) or a non-fabricating
+  fallback to authored close copy — not a rewrite here, and an owner decision.
+  Distinct from row 16: that is the LEARNER replying with a question (now prevented
+  from becoming evidence); this is the TUTOR ending on a bare question.
 
 **Narrow residual on row 15 (not a false-positive risk):** a concept with genuinely
 zero server-gradeable probe coverage can no longer FALSELY certify (it is refused),

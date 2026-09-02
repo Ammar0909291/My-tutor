@@ -148,8 +148,11 @@ describe('D. the route uses one definition', () => {
     const idx = route.indexOf('if (teachingSignal) {')
     expect(idx).toBeGreaterThan(-1)
     const block = route.slice(idx, idx + 3000)
-    expect(block).toContain('isLowSignalAcknowledgement(message)) teachingSignal = null')
+    // The ack-null guard reads the LADDER predicate and nulls the whole signal.
+    // (Now a braced block — its sibling, the learner-question guard, was added
+    // as an `else if` at the same seam; the predicate read is what matters.)
+    expect(block).toMatch(/if \(isLowSignalAcknowledgement\(message\)\) \{\s*\n?\s*teachingSignal = null/)
     // And specifically NOT the narrow one, which is what let the claim through.
-    expect(block).not.toContain('isBareAcknowledgement(message)) teachingSignal = null')
+    expect(block).not.toMatch(/isBareAcknowledgement\(message\)\) \{?\s*\n?\s*teachingSignal = null/)
   })
 })

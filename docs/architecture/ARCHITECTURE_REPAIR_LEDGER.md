@@ -344,6 +344,69 @@ had — and is fully fold-driven; a live run would only re-confirm). The DoD #13
 matrix row for this class moves from DETECTION-only to PREVENTED once the suite
 is green.
 
+## Slice 11 — question-only turn cannot complete (last DoD #13 detection-only class) — DONE 2026-09-02
+
+**The final detection-only class.** A learner turn that is a QUESTION (not an
+answer) must not become gradeable evidence, grant mastery, or authorize
+completion — while its question stays available for continuation, and without
+fabricating an answer.
+
+**MEASURED (owner/reader/writer, through the real modules):**
+- Completion owner = `gateLessonCompletion` → `conceptMasteryVerdict` →
+  `masteryVerifiedStrict` (reads only VERIFIED counters). A question banks no
+  server-graded credit (slice 10: no MCQ tap → serverGraded false), so it cannot
+  move mastery and **cannot newly authorize completion**. `gateLessonCompletion`
+  reads accumulated state, never the current message — so completion authority
+  was ALREADY enforced against a question-only turn by slice 10 + MCQ grading.
+  Proven, not refactored.
+- Gradeable-evidence owner = the signal-finalization seam (a pair of
+  deterministic non-answer filters feeding the ONE consumer, the fold):
+  the acknowledgement guard, and — the gap — no sibling for the LEARNER-question
+  shape. `shouldSuppressSignalCorrectness` (answerableTurn.ts) checks only the
+  TUTOR's prior turn; on a pending-but-unanswered structured MCQ its first line
+  returns suppress:false, the exact reason the ack guard lives inline at the seam
+  rather than there. So a learner question with a fabricated model correctness
+  could still inflate the PLAIN counters (reachable model non-compliance) — the
+  "produces no gradeable evidence" link was open, though completion was not.
+
+**ENFORCEMENT (smallest boundary, no new subsystem, no new predicate):** added
+the learner-question guard as the SIBLING of the ack guard at the same seam
+(route.ts), reusing the existing `detectLearnerQuestion`. Gated on
+`mcqGradeHoisted === null` (a learner who actually answered — tapped an option,
+a server grade resolved — is untouched; that authoritative grade sets correctness
+just below). Drops ONLY `correctness`; `confusion`/`confidence` survive so the
+clarification routes to teaching (mission case F), and nothing is fabricated —
+correctness becomes `undefined`, never `false`. With correctness gone the fold
+takes its non-answer path: no plain counter, no verified counter, no mastery.
+
+**Why the seam, not `shouldSuppressSignalCorrectness`:** the codebase already
+resolved this exact shape once — the ack guard is a separate deterministic filter
+at the seam precisely because the suppression owner bails on pending MCQs.
+Extending that owner would have flipped a load-bearing input
+(`hasPendingStructuredMcq` → resolved) and rippled across 6 test files for no
+behavior gain; the sibling filter is smaller, breaks no contract, and follows the
+established pattern. The single authoritative CONSUMER remains the fold.
+
+**Enforcement test:** `questionOnlyTurnCannotComplete.test.ts` (17, real fold +
+gate + `detectLearnerQuestion`): A question→no evidence→held ladder→gate refuses;
+B question-then-answer→later answer grades; C "I don't know"→no credit;
+D genuine answer→mastery+completion unchanged; E suppression is undefined never
+false (no fabrication); F confusion survives (teaching, not assessment);
+G change is pre-fold so replay is unaffected; plus a source-string wiring pin.
+`acknowledgementNeverDemotes` D-wiring assertion updated (ack guard is now a
+braced block with the new sibling; the predicate-read invariant is unchanged).
+
+**Validation:** `npx tsc --noEmit` clean; full suite 538 files / 11,597 passed /
+9 skipped; `npm run build` clean. Two source-string wiring pins
+(`acknowledgementNeverDemotes`, `acknowledgementOwnership`) updated: the ack guard
+is now a braced block hosting the new `else if` sibling — the ladder-predicate
+read invariant is unchanged and re-asserted.
+
+**Residual (honest):** the one remaining DoD #13 detection-only site is the
+TUTOR producing a question-only CLOSING turn (POSTHOC_REPAIR_CENSUS Finding 2) —
+a different thing (tutor output, not learner turn); its only non-fabricating fix
+is upstream generation or authored close copy, an owner decision, unchanged.
+
 ## CENSUS FULLY TRIAGED (2026-09-01)
 
 All four OWNERSHIP_CENSUS targets + Census A are measured and resolved:

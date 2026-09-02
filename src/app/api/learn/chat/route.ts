@@ -5342,8 +5342,39 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // takes its acknowledgement branch, whose CHECK / PRACTICE / TRANSFER
         // cases are empty. The learner stays at CHECK — neither advanced nor
         // demoted, which is what "I understand" actually evidences.
-        const { isLowSignalAcknowledgement } = await import('@/lib/teaching/conversationState')
-        if (isLowSignalAcknowledgement(message)) teachingSignal = null
+        const { isLowSignalAcknowledgement, detectLearnerQuestion } = await import('@/lib/teaching/conversationState')
+        if (isLowSignalAcknowledgement(message)) {
+          teachingSignal = null
+        } else if (
+          // ── A LEARNER QUESTION IS NOT AN ANSWER ──────────────────────────
+          //
+          // The sibling of the acknowledgement guard above, for the other
+          // shape of non-answer. When the tutor asked a gradeable question and
+          // the learner replies with a QUESTION instead of answering, the
+          // model's SIGNAL correctness is a claim about an answer that was not
+          // given. `shouldSuppressSignalCorrectness` (answerableTurn.ts) cannot
+          // catch it — its first line returns suppress:false whenever a
+          // structured MCQ is pending, which is exactly this turn: pending, and
+          // unanswered — the same reason the ack guard lives here rather than
+          // there. Gated on `mcqGradeHoisted === null` so a learner who ACTUALLY
+          // answered (tapped an option -> a server grade resolved) is untouched;
+          // that authoritative grade sets correctness a few lines below.
+          //
+          // Only `correctness` is dropped. `confusion`/`confidence` are the
+          // model's read of the learner's BEHAVIOUR, not a claim about an
+          // answer, so they survive and the clarification still routes to
+          // teaching (never fabricated: this records no correctness, never a
+          // wrong answer). With correctness gone the fold takes its non-answer
+          // path — no plain counter, no verified counter, no mastery credit —
+          // so a question cannot become gradeable evidence.
+          teachingSignal
+          && teachingSignal.correctness !== undefined
+          && mcqGradeHoisted === null
+          && detectLearnerQuestion(message)
+        ) {
+          console.log('[learner-asked-question]', { learnerMessage: message.slice(0, 40) })
+          teachingSignal = { ...teachingSignal, correctness: undefined }
+        }
       }
 
       // ── DETERMINISTIC MCQ GRADING ────────────────────────────────────────
