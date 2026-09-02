@@ -224,6 +224,36 @@ ordering invariant nothing else pinned. If a future edit lets PRACTICE accrue
 before CHECK, slice 1's premise breaks and this test fails first. Also re-pins
 acks/wrong-answers never climbing the assessed rungs.
 
+## Slice 8 — DoD #13 consolidated invariant matrix — DONE 2026-09-02
+
+`docs/architecture/DOD13_INVARIANT_MATRIX.md` — the "adversarial proving matrix"
+the mission named as a deliverable. It unifies slices 1/2/4/7 and the rest of the
+existing suite into ONE map: for each of 14 recurring ("Tutor Max") failure
+classes, the single OWNER of the decision, the INVARIANT that owner enforces, and
+the falsifiable TEST that pins it — all 28 cited tests verified to exist and to
+drive the real modules (not source-string matches, except where a wiring
+assertion is the point).
+
+**Why a document, not another test**: every historical failure class already has
+an adversarial or characterization pin (the census-driven slices plus
+`acknowledgementNeverDemotes`, `foldReachabilityInvariant`, the excursion/
+knowledge-gap/misconception suites). Adding a 15th test would duplicate the large
+existing suite, which the mission forbids. The additive value is legibility: a
+future session can answer "is this class of bug still architecturally possible?"
+by citation, and see at a glance if any row has slipped to detection-only or lost
+its pin.
+
+**What it makes explicit (the honest part)**: 14 classes are PREVENTED by
+construction; TWO are DETECTION-only by deliberate, documented choice
+(question-only closing turn; free-response factual error below probe coverage) and
+are named as such rather than counted as safe. The matrix's maintenance rule
+enforces the mission's core discipline structurally — if a PREVENTED row's test is
+deleted or hollowed to a string-match, the row drops to DETECTED until re-pinned,
+so "a green suite with a hollowed-out test" cannot masquerade as prevention.
+
+Docs-only slice — no runtime/test change, so no suite run required; the 28 cited
+tests were green as of `f4bded73` (532 files / 11,550 passed / 9 skipped).
+
 ## CENSUS FULLY TRIAGED (2026-09-01)
 
 All four OWNERSHIP_CENSUS targets + Census A are measured and resolved:
@@ -272,11 +302,26 @@ authoritative boundary each compensates for.
 
 ## Exact next action
 
-The census's named targets are fully triaged (see "CENSUS FULLY TRIAGED" above).
-The highest-value remaining work is DoD #13 — a consolidated OFFLINE adversarial
-invariant matrix (see "Ranked remaining targets"). Build it against the real
-pure modules (fold/gates/predicates), NOT a live 60-concept sweep. Reuse the
-enforcement already written (masteryVerdictSingleOwner, acknowledgementOwnership,
-questionAddArbitration) and add the uncovered historical failure classes.
-Every new invariant must be driven through the real fold (reachable states only)
-and assert the architecture PREVENTS the failure, not merely detects it.
+The census's named targets are fully triaged (see "CENSUS FULLY TRIAGED" above)
+AND DoD #13's consolidated invariant matrix is now written (slice 8,
+`DOD13_INVARIANT_MATRIX.md`). Every recurring failure class the census and mission
+named is now either PREVENTED-and-pinned or an explicitly-recorded detection-only
+choice. **The mission's named scope is complete.**
+
+Two genuinely-remaining threads, neither a known live defect (each needs Step-0
+measurement first, and the visual layer stays under the preserve-don't-reopen rule):
+
+1. **The one class the architecture does NOT yet prevent** (matrix, DETECTION-only
+   section): a free-response factual error below probe coverage where
+   `signalVerification` is CLEAN but the answer is wrong. Closing it needs full
+   probe coverage (content work — protected) OR an independent answer-verification
+   subsystem (explicitly out of scope — "a second parallel state machine"). Do NOT
+   build the second machine on a loop's initiative; it is an owner decision.
+2. **Census A Finding 3** (minor): one graded verdict rendered by 5788/7324 —
+   measured disjoint/agree; pin only if a future edit makes them co-render.
+3. **Prompt→enforcement ratio** (Census C): convert a prompt-only rule to
+   structural enforcement ONLY where a rule is BOTH load-bearing AND measured
+   non-complied. Do not convert cosmetic prose.
+
+If none of these has new measured evidence, the loop's honest state is DONE — wind
+it down rather than manufacture low-value work. Do NOT re-run 60 live concepts.
