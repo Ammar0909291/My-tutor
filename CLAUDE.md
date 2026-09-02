@@ -2719,6 +2719,50 @@ reset — `stats_reset: 2026-07-05 15:50:54+00`), not re-derived from the prior 
     up:") — no evidence of them, and broadening risks stripping the legitimate motivational "What's
     coming" recap the fix preserves. No code change.
 
+## I4 — GUIDE-phase stall: NOT a dead-end (intentional + recoverable), one Option-A regression fixed (2026-09-02, commit `3940daa9`)
+- **VERDICT: no genuine GUIDE dead-end for a real learner.** Reproduced live on the real account
+  (`suaibamr@gmail.com`) on two concepts. The historical "stalled at GUIDE, 0/21 probe attachment"
+  was the pre-`mcqToServe` client-blank deadlock (probe attached server-side, client blanked it,
+  learner couldn't answer) — already fixed and re-confirmed here.
+- **How GUIDE works, traced in source:** at GUIDE the move is `'ask'` iff
+  `teachSegmentsSinceQuestion >= 2 || practiceRequested` (`conversationState.ts:1526`), and
+  `phaseAllowsProbe` needs `move==='ask'` (`route.ts:4050`). A learner question/help turn (CUE rule
+  D4b-ANSWER-STUDENT-FIRST) makes the move `'teach'` (answer the student), suppressing the FRESH
+  probe THAT turn — but the pending probe is carried forward by `mcqToServe` (never lost), and the
+  alternation counter keeps climbing (a rhetorical `?` on a teach turn does NOT reset it, 7N fix),
+  so `'ask'` is always reached again. D4b is therefore a RECOVERABLE one-turn hold, not a dead-end.
+- **Reproduced (real account):** (a) gauge-bosons — a genuine confusion request injected at GUIDE
+  with a probe pending → phase HELD at GUIDE (no demotion, G-2b), the tutor answered with a simpler
+  analogy (D4b), the same probe re-offered; the next correct tap moved GUIDE→CHECK and the lesson
+  COMPLETED with verified mastery in 8 turns despite the detour. (b) angular-momentum-addition —
+  THREE consecutive confusion requests at GUIDE → probe never lost, phase demoted only to the
+  DEMONSTRATE floor, **CLOSING was NOT triggered** (the `c98ea7b` fix holds: confusion does not
+  spend the affect budget), and a correct answer recovered DEMONSTRATE→GUIDE and served a fresh
+  probe. Classified against the task's A–G ladder: the "stall" is (G) resolved / (A) intentional D4b
+  behavior — NOT B/C/E. `mcqToServe` held the pending probe correctly on every confusion turn.
+- **One real regression FOUND by the stress test and FIXED** (in Option A / I1, not the ladder): a
+  CONFUSION/DISTRESS signal ("sorry i dont understand this at all", "i am lost") or a help request
+  ("explain differently", "show me a diagram") carries no `?`, so `detectLearnerQuestion` misses it
+  and it is not a bare acknowledgement — so Option A's genuine-answer-attempt guard fired the
+  "I couldn't tell which option your answer matched — tap the choice you mean" lead-in AT a confused
+  learner while the tutor was re-teaching (a false claim: they made no answer attempt). Fixed by
+  narrowing the genuine-attempt gate with the SAME per-turn intent the route already computes: also
+  require `turnIntent.failureState === null && turnIntent.learnerRequest === null`. Measured: a
+  genuine ungradeable attempt has BOTH null; every distress/help phrase has at least one non-null.
+  Grading and the disambiguation string are unchanged. `mcqReoffer.test.ts` extended (18 assertions:
+  distress/help cases + fixture-validity + route wiring). LIVE-VERIFIED on the deployed app:
+  confusion → re-teaching with NO lead-in; genuine ungradeable answer → lead-in still shown (the
+  first live run showed the pre-fix behavior — deploy lag, same as I1).
+- Offline: mcqReoffer 18/18; 112 route-source test files 1934 passed / 4 skipped; `npx tsc --noEmit`
+  clean; `npm run build` clean. NOT changed (per the task's safety rules): `resolveMcqChoice` not
+  loosened, textarea not disabled, no prompt instructions, no hot-path ceiling, mastery authority
+  untouched, EB/curriculum/KG/Visual Resolver untouched.
+- **Remaining uncertainty:** two concepts / a handful of injected confusion turns — enough to show
+  the dead-end does not occur and recovery works, not a statistical reliability proof across all 238
+  concepts. The measured 60-run "5 sessions stalled at GUIDE" figure predates the `mcqToServe` and
+  `c98ea7b` fixes and was not re-run at scale here (provider-capacity-bound; that ceiling is the
+  open infra item, not a product defect).
+
 ## Run locally
 ```
 cp .env.example .env   # set DATABASE_URL, AUTH_SECRET (openssl rand -base64 32), GROQ_API_KEY
