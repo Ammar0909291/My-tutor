@@ -2645,6 +2645,58 @@ reset — `stats_reset: 2026-07-05 15:50:54+00`), not re-derived from the prior 
   Storage/polling/retry branches of the incident protocol that the original write-up did not
   explicitly rule out. Nothing here contradicts or supersedes the 2026-08-31 entry above.
 
+## I1 — non-silent MCQ re-offer for an ungradeable typed answer (2026-09-02, commit `00e53ac1`)
+- **The investigation first, because the reported symptom was mostly an artifact.** A prior
+  real-account study logged "phys.particle.gauge-bosons stuck at OBSERVE after ~5 correct answers,
+  identical MCQ re-offered" (the "I1" note). Investigated live on the real account
+  (`suaibamr@gmail.com`, my-tutor-flame) driving gauge-bosons (#230) to completion and
+  phys.qm.angular-momentum-addition (#190) through OBSERVE→CHECK, plus a full source trace.
+  **The progression stall did NOT reproduce as a product defect:** gauge-bosons reaches VERIFIED
+  mastery in 8 turns via the normal flow (OBSERVE→DEMONSTRATE→GUIDE→CHECK→PRACTICE→TRANSFER,
+  verified=true, check=1, practice=2, LESSON_COMPLETE) when the served keyed MCQs are TAPPED.
+  Cleared, each checked not assumed: probe availability (gauge-bosons has 5 authored gradeable
+  HIGH-band probes — 3 in `authoredSeedAssets.ts`, 2 in `physicsDepthSeedAssets.ts`; angular-momentum
+  comparable), the OBSERVE→CHECK transitions, `pendingMcq`, server-side withholding, and mastery
+  authority all functioned. The "stuck at OBSERVE" was substantially a MEASUREMENT ARTIFACT of the
+  earlier study driving with free-text answers rather than tapping the option buttons — a real UI
+  learner taps.
+- **The one genuine, real-learner-reachable residue (the first divergence where valid evidence
+  stops contributing):** the chat textarea is NOT disabled while an MCQ is on screen
+  (`LessonScreen.tsx` ~L5645, `disabled={isStreaming || !sessionId}`), so a learner — especially a
+  weak-English one — can TYPE an answer instead of tapping. When that text does not confidently map
+  to an option, `resolveMcqChoice` returns null (DELIBERATELY — a false grade writes permanent false
+  evidence, the Phase 7P class), so `gradeMcqAnswer`→`mcqGradeHoisted` stays null, no gate credit
+  accrues, and the identical keyed MCQ RE-OFFERS with no sign the attempt was seen. First failing
+  owner: the answer-ingestion / re-offer seam — NOT the conversationState ladder, masteryGate, or
+  probe content. Reproduced live at gauge-bosons T3→T4 and angular-momentum T2→T3.
+- **Option A (the smallest SAFE fix — does NOT touch grading).** Loosening `resolveMcqChoice`
+  reintroduces false grades; disabling the textarea while an MCQ is pending breaks the supported
+  "ok i think A, but sir explain…" answer-plus-question flow the grader was hardened for. Both
+  rejected. Instead: `MCQ_REOFFER_DISAMBIGUATION` (new shared constant in `mcq.ts`, single source of
+  truth) is prepended by a guard in `route.ts` — placed immediately before the empty-with-probe
+  backstop (same pre-PHASE-0 discipline) — ONLY when a pending keyed probe is being re-offered
+  (`mcqToServe` returns the carried-forward pending: served && `mcqHoisted===null` && `mcqGradeHoisted===null`)
+  AND the message was a genuine answer attempt: not a bare acknowledgement (`isBareAckHoisted`), not a
+  practice request (`turnIntent.wantsPractice`), not a question (`detectLearnerQuestion`). It preserves
+  any model teaching text, stands alone if the text was stripped empty, is idempotent, never
+  fabricates a probe, and claims nothing about correctness. The answer stays UNGRADED by design.
+- **Regression test** `src/tests/mcqReoffer.test.ts` (13 assertions) mirrors the guard against the
+  REAL `mcqToServe`/`gradeMcqAnswer`/`readTurnIntent`/`isBareAcknowledgement`/`detectLearnerQuestion`/
+  shared constant, plus route-source wiring pins. Covers: genuine attempt → lead-in prepended, model
+  text preserved; empty text → lead-in alone; idempotent; bare-ack / practice / question / empty →
+  untouched; graded answer (correct OR wrong tap) → probe consumed, no re-offer; fresh attach this
+  turn → not a re-offer; no probe → untouched.
+- **LIVE-VERIFIED on the deployed app** (real account, gauge-bosons): a persistent driver drove until
+  a keyed MCQ attached ("Which gauge boson mediates the strong force?"), then injected an ungradeable
+  typed answer with an OFFLINE pre-check proving it maps to no option and is guard-eligible — the
+  response prepended "I couldn't tell which option your answer matched — tap the choice you mean from
+  the list below." to the model's follow-up, MCQ re-offered. The FIRST live run (~2 min post-push) had
+  shown the old silent re-offer ("What do you pick? A, B, C, or D?") because it hit pre-fix
+  `768dfe3c` before Vercel finished building — an incidental clean before/after.
+- Offline: new test 13/13; 112 route-source test files 1930 passed / 4 skipped; `npx tsc --noEmit`
+  clean; `npm run build` clean (middleware 79.7 kB, unchanged). No account/DB mutation; temporary
+  verification driver deleted after use.
+
 ## Run locally
 ```
 cp .env.example .env   # set DATABASE_URL, AUTH_SECRET (openssl rand -base64 32), GROQ_API_KEY
