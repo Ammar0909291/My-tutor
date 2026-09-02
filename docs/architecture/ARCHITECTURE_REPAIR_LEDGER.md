@@ -191,16 +191,64 @@ pinned, slice 2), #4 teaching action (clean, covered, slice 5), Census A (slices
 3/4). Only #3 (visual/learner-request) remains — the layer the mission explicitly
 cautions against reopening.
 
-## Ranked remaining targets
+## Slice 6 — learner-request / visual (census target #3) — MEASURED, PRESERVED 2026-09-01
 
-- census target #3: learner-request / visual-request — 5 predicates
-  (`detectLearnerRequest`, `requestedVisualForm`, `isExplicitTopicRequest`,
-  `decideVisualNeed`, `isTopicQuestion`), disagreement not yet measured.
-- census target #4: teaching action — `decide()` vs CUE `decideTeaching` vs
-  prompt blocks, disagreement not yet measured.
+The mission cautions against reopening the visual layer / Visual Resolver V2
+unless a genuine violation is proven; the instruction is "verify current
+ownership ... if it is genuinely the single authority, preserve it." Verified
+(read-only): the 5 predicates the census named answer DIFFERENT, complementary
+sub-questions, each with a deliberately-drawn documented boundary —
+- `detectLearnerRequest` → the teaching-action KIND (diagram/explain-differently/
+  example), consumed via `turnIntent.learnerRequest` (route 3002), the
+  established single authoritative Phase-1 read of the message;
+- `requestedVisualForm` → the visual FORM (plot/motion) only, and its own comment
+  states it must NOT change whether a visual was requested at all;
+- `isExplicitTopicRequest` / `isTopicQuestion` → topic-request / topic-question
+  (excursion layer);
+- `decideVisualNeed` → whether a visual shows this turn.
+They are coordinated at ONE point: `buildVisualContractBlock(decision, {
+learnerAskedForAVisual: learnerRequestHoisted === 'diagram', ... })` (route
+3171/3212), which DECLARES a request-vs-availability mismatch rather than letting
+two authorities disagree (the L3 fix: "I don't have a graph of this, but here is
+the circuit"). No competing-owner contradiction found; preserved, not touched.
 
-4. teaching action — `decide()` vs CUE `decideTeaching` vs prompt blocks,
-   disagreement not yet measured.
+## CENSUS FULLY TRIAGED (2026-09-01)
+
+All four OWNERSHIP_CENSUS targets + Census A are measured and resolved:
+- #1 mastery — real reachable defect, FIXED (slice 1, one owner + 512-state grid).
+- #2 acknowledgement — no reachable defect (masked), PINNED (slice 2).
+- #3 learner-request/visual — complementary/coordinated via turnIntent +
+  visualContract, PRESERVED (slice 6).
+- #4 teaching action — layered (executor/strategy/renderer), CLEAN (slice 5).
+- Census A — 27 repairs classified (slice 3, DoD #10); question-ship arbiter
+  PINNED (slice 4, DoD #5).
+
+One real correctness fix; four measured-and-pinned/preserved invariants; every
+one with a falsifiable test or existing coverage. The recurring-defect ROOT — one
+decision with multiple owners — was found live only at the mastery verdict; the
+other decisions already had a single owner that prior sessions had built but not
+documented or pinned. The value delivered: the fix, plus turning those
+undocumented reconciliations into enforced, regression-proof invariants.
+
+## Ranked remaining targets (beyond the census — future passes)
+
+The census's named targets are exhausted. Genuine remaining architecture work,
+for future passes (none is a known live defect — each needs Step-0 measurement
+first, and the visual layer stays under the mission's preserve-don't-reopen rule):
+
+- DoD #13 — a consolidated OFFLINE adversarial invariant matrix driving the real
+  fold/gates/predicates through the historical failure classes (explanation/
+  picture/question request, correct/incorrect answer, ack, "I understand",
+  "what next", misconception, repeated explanation, visual mismatch,
+  question-gating, mastery progression, excursion/recovery), asserting each
+  invariant HOLDS. Slices 1/2/4 already pin several classes; this would unify
+  them and cover the rest. Do NOT re-run 60 live concepts (mission rule).
+- Census A Finding 3 (minor): one graded verdict rendered by 5788/7324 — measured
+  disjoint/agree; pin only if a future edit makes them co-render.
+- The prompt→enforcement ratio (Census C): ~231 imperative rule strings vs 27
+  output checks. Each prompt-only rule that has been measured ignored is a
+  candidate for structural enforcement — but only where a rule is BOTH
+  load-bearing AND measured non-complied; do not convert cosmetic prose.
 
 ## Census A (post-hoc rewriting) — standing context
 
@@ -212,13 +260,11 @@ authoritative boundary each compensates for.
 
 ## Exact next action
 
-Census A Finding 3 (small, safe): the same graded verdict is rendered three ways
-— `confirmCorrectAnswer` (5788), `repairMirrorWithVerdict` (7324), and the
-`justGraded` reveal in `applyDontKnowCeiling` (~6715). Measure whether two can
-fire on one turn with divergent phrasings; if so, route them through one
-"state the graded verdict" helper. Then census target #3: learner-request /
-visual-request — 5 predicates (`detectLearnerRequest`, `requestedVisualForm`,
-`isExplicitTopicRequest`, `decideVisualNeed`, `isTopicQuestion`), disagreement
-not yet measured — apply the reachability methodology (slice 1 pattern if a live
-defect exists, slice 2/4 pattern otherwise). Then census target #4 (teaching
-action: `decide()` vs CUE `decideTeaching` vs prompt blocks).
+The census's named targets are fully triaged (see "CENSUS FULLY TRIAGED" above).
+The highest-value remaining work is DoD #13 — a consolidated OFFLINE adversarial
+invariant matrix (see "Ranked remaining targets"). Build it against the real
+pure modules (fold/gates/predicates), NOT a live 60-concept sweep. Reuse the
+enforcement already written (masteryVerdictSingleOwner, acknowledgementOwnership,
+questionAddArbitration) and add the uncovered historical failure classes.
+Every new invariant must be driven through the real fold (reachable states only)
+and assert the architecture PREVENTS the failure, not merely detects it.
