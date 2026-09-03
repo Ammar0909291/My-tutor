@@ -24,12 +24,21 @@
  *   D6  runtime quality              no referenced-but-missing figure, no
  *                                    malformed LaTeX in learner-facing text
  *
- * ── HOW IT ANSWERS ──────────────────────────────────────────────────────────
- * Correctly, from the `correctIndex` the API already returns. That is
- * legitimate: this measures the MACHINERY on a learner who knows the answer,
- * so any failure is the system's and never the learner's. It deliberately does
- * NOT answer a prose-only question — refusing is how D2 is detected rather than
- * papered over.
+ * ── HOW IT ANSWERS (A-1, 2026-09-03) ───────────────────────────────────────
+ * Correctly, but NOT from the response. Production stopped shipping the answer
+ * key (`mcqForClient`) because a learner reading the network response could see
+ * the correct option, and that protection stays. This harness previously did
+ * `String.fromCharCode(65 + last.mcq.correctIndex)`; with the field gone that
+ * is `String.fromCharCode(NaN)` — a NUL byte — so it would have answered every
+ * probe of all 424 concepts with garbage and blamed the product.
+ *
+ * The authoritative answer now comes from the authored probe corpus in this
+ * repository (scripts/certification/answerSource.ts), matched deterministically
+ * on the stem `probeToMcq` derives the question from, and the harness submits
+ * the OPTION TEXT — the same value a tap sends. Production still grades.
+ * When the corpus cannot authoritatively answer a served question the concept
+ * is UNMEASURED; the harness never guesses. It also still refuses to answer a
+ * prose-only question — refusing is how D2 is detected rather than papered over.
  *
  * Read-only with respect to the corpus: it creates ordinary learner traffic and
  * writes no assets, no schema and no content.
@@ -40,6 +49,12 @@ import { askedAnswerableQuestion } from '../../src/lib/teaching/answerableTurn'
 // than matching on template prose, so the two cannot drift apart.
 import { isDegradedProvider } from '../../src/lib/eos-runtime/degradedMode'
 import { containsOptionList } from '../../src/lib/teaching/gateProbeContract'
+// A-1. Production no longer ships the answer key (mcqForClient), and it must
+// not: a learner reading the response would see the correct option. The
+// authoritative answer comes from the authored corpus in this repository, and
+// the harness submits the OPTION TEXT — the same thing a tap sends. Production
+// still grades. See scripts/certification/answerSource.ts.
+import { resolveAnswer, type AnswerIndex } from '../certification/answerSource'
 
 const BASE = process.env.MATH_CERT_BASE_URL ?? 'https://my-tutor-flame.vercel.app'
 const EMAIL = process.env.MATH_CERT_EMAIL ?? ''
@@ -98,7 +113,12 @@ interface TurnPayload {
   text?: string
   /** 'degraded' when every AI provider failed and a template was served. */
   provider?: string | null
-  mcq?: { question: string; options: string[]; correctIndex: number } | null
+  /**
+   * A-1: the served projection is {question, options} ONLY — `mcqForClient`
+   * strips the key. Typed without `correctIndex` so a harness that tries to
+   * read it fails to COMPILE rather than silently sending NaN.
+   */
+  mcq?: { question: string; options: string[] } | null
   mastery?: { verified?: boolean; phase?: string; checkCorrect?: number; practiceCorrect?: number } | null
   lessonComplete?: { complete?: boolean } | null
   // EVERY figure channel the route can send, taken from the response literal
@@ -213,7 +233,8 @@ async function createSession(cookie: string, subjectSlug: string): Promise<strin
 }
 
 export async function certifyConcept(
-  target: ConceptTarget, cookie: string, sessionId: string, totalLessons = 908,
+  target: ConceptTarget, cookie: string, sessionId: string, answerIndex: AnswerIndex,
+  totalLessons = 908,
 ): Promise<CertificationResult> {
   const failed: string[] = []
   const notes: string[] = []
@@ -342,7 +363,26 @@ export async function certifyConcept(
 
     let reply: string
     if (last.mcq) {
-      reply = String.fromCharCode(65 + last.mcq.correctIndex)
+      // A-1. The served payload is {question, options} only. The answer is
+      // resolved from the authored corpus and submitted as OPTION TEXT; if the
+      // corpus cannot authoritatively answer this question — a model-authored
+      // one, an ambiguous stem, options that do not match the authored probe —
+      // the harness STOPS and the concept is UNMEASURED. It never guesses, and
+      // it never reads a key from the response.
+      const resolved = resolveAnswer(last.mcq, answerIndex)
+      if (!resolved.ok) {
+        failed.push(`UNMEASURED-${resolved.reason}`)
+        notes.push(
+          `no authoritative answer for the served question (${resolved.reason}): ${resolved.detail} — ` +
+          'NOT certified, NOT a teaching failure; the instrument could not answer this probe',
+        )
+        evidence.push({
+          criterion: `UNMEASURED-${resolved.reason}`,
+          phase: String(phase), turn: turns + 1, text: last.text ?? '',
+        })
+        break
+      }
+      reply = resolved.optionText
     } else {
       // D2 — a mastery-phase turn that asks without a structured MCQ cannot be
       // graded however well it is answered. Recorded once; the harness then
@@ -555,12 +595,23 @@ async function main() {
   const targets: ConceptTarget[] = JSON.parse(require('fs').readFileSync(targetsPath, 'utf-8'))
   const cookie = await authenticate()
 
+  // A-1. Built ONCE per run, before any traffic: if the authored corpus cannot
+  // be loaded there is no honest way to answer anything, and finding that out
+  // 200 concepts in would waste the whole run.
+  const { buildAnswerIndex } = await import('../certification/answerSource')
+  const answerIndex = await buildAnswerIndex()
+  process.stderr.write(
+    `answer source: ${answerIndex.stats.probes} authored probes, ` +
+    `${answerIndex.stats.distinctStems} answerable stems, ` +
+    `${answerIndex.stats.collisions} disabled by collision (${answerIndex.fingerprint})\n`,
+  )
+
   const results: CertificationResult[] = []
   for (const t of targets) {
     process.stderr.write(`certifying ${t.conceptId} … `)
     try {
       const sessionId = await createSession(cookie, subjectSlug)
-      const r = await certifyConcept(t, cookie, sessionId, totalLessons)
+      const r = await certifyConcept(t, cookie, sessionId, answerIndex, totalLessons)
       results.push(r)
       process.stderr.write(`${r.pass ? 'PASS' : `FAIL [${r.failed.join(', ')}]`} (${r.turns} turns)\n`)
     } catch (err) {
