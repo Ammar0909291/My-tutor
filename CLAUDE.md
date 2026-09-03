@@ -2868,9 +2868,9 @@ session was driving the same account, and `StudentProgress.activeLessonSlug` is 
 so the lesson pointer moved mid-run and the detour closed as `closed-lesson-changed`
 instead. **Do not verify excursion behaviour on an account another session is driving.**
 
-**Outstanding, not fixed:** (a) prevalence is still UNMEASURED — excursion
-transitions are log-only, so how often real learners hit this is unknown; the
-proposal's §9 step-0 lifecycle counter was not built. (b) Pre-existing and
+**Outstanding, not fixed:** (a) ~~prevalence is still UNMEASURED~~ — the
+INSTRUMENT is now built (see the next section); the NUMBER is still unmeasured,
+because this app has essentially no organic learner traffic. (b) Pre-existing and
 untouched: `[mcq-reoffer-disambiguation]` fires on "I am done for today" — the
 Option-A guard (`route.ts` ~L8918, `00e53ac`) excludes acks/practice/questions/
 distress/requests but not `wantsToStop`; possibly more reachable now that probes
@@ -3384,3 +3384,62 @@ C2 95% · C3 70% · C4 25% · C5 65% · C7 50% · C8 95% · C9 96%. Chemistry C3
   sessions — mastery runs 60% vs 83% in physics but 86% vs 50% in chemistry, opposite directions,
   no evidence stripping helps); the content-free hold (9 of 67 sessions, always the whole turn — a
   content-generation problem, not a text-repair one).
+
+## Excursion prevalence counter — the instrument, not the number (2026-09-03, `f9125ae`)
+
+**Read `src/lib/teaching/excursionTelemetry.ts` and the proposal's §9 "Step 0"
+table before writing any aggregation query.** The definitions live there so a
+query and the code cannot drift.
+
+Observability only. No excursion behaviour, gate, mastery, completion, grading
+or content change; **no database write, no schema, no new table** — one
+structured line per turn, `[learn/chat] EXCURSION_EVENT={…}`, emitted at the
+single site that calls `decideExcursion` (route.ts, right after the existing
+pretty `[excursion]` line), modelled on `BRAIN_EVENT`.
+
+**The denominator is on every line, on purpose.** An event fires on EVERY turn
+reaching the excursion decision, ordinary ones included (`kind:'none'`), so
+eligible turns, eligible sessions, opens and closes come from ONE stream with no
+join. Cost: ~230 bytes/turn of Vercel log volume beside the ~1 kB BRAIN_EVENT
+that already fires. Not Supabase egress.
+
+**`transition:'started'` is NOT the question "did an excursion open".** Found by
+test, not by reading — excursion.ts's request branch emits
+`active && state.targetConceptId !== requestedConceptId ? 'switched' : 'started'`,
+so re-requesting the concept an excursion is ALREADY on yields `'started'` again.
+A retry, or a learner asking twice, would have been counted as a second
+excursion. `kind` is therefore derived from the PERSISTED prior state — an open
+is a transition INTO an excursion — and the repeat is emitted as `kind:'restate'`
+rather than hidden. Same class of trap: `turnsHeld` reads the PRIOR state,
+because `decideExcursion` resets to NO_EXCURSION on a close, so the closing
+decision's own counter is 0 and would have reported every excursion as zero
+turns long. Both pinned by `excursionLifecycleTelemetry.test.ts` (35 tests
+against the REAL decideExcursion driven turn by turn).
+
+**PRODUCTION-VERIFIED** (dpl_A1oZ2VEo2Tvxx9b6utDL6hWKZNWq / `f9125ae`, session
+`cmtkzjed50001kz0477h4xb8o`, account quiet beforehand — 0 spine_events in 15 min
+— so no concurrent-session contamination). Six turns, five events read from
+runtime logs: ordinary → `kind:'none'`; "Hold on — can you explain momentum to me
+first?" → exactly ONE `kind:'open'`; two follow-ups → `kind:'continue'` (no
+second open); "ok got it thanks" → exactly ONE `kind:'close'`,
+`transition:'closed-satisfied'`, `turnsHeld:2`, `turnsBlocked:4`, `atBound:false`,
+`anchorHeld:true`. `turnsHeld:2` matches `contextSnapshot->'excursion'` read from
+the database mid-run (`{"turns":2,…}`) — verified against state, not just the log.
+**PII:** the excursion opened on an UNRESOLVED TITLE, so the pretty `[excursion]`
+line printed the learner's own words (`unresolvedTopic:'momentum to me first'`,
+`requestedTopic:'direction matter for it'`) while every EXCURSION_EVENT carried
+only `targetKind:'topic'` and no userId — the contrast is visible in the same log
+block, beside a BRAIN_EVENT that does carry userId.
+
+**PREVALENCE IS STILL NOT MEASURED, and must not be reported as if it were.**
+The only traffic in the window is this session's own scripted verification;
+computing a rate from it would measure the script. A population figure needs
+organic learner traffic, and nothing in this repo aggregates Vercel logs (the
+same limit `brainMetrics.ts` records for BRAIN_EVENT). **Do NOT revisit R2=6 on
+this instrument's output until a real-traffic sample exists.**
+
+**Known limits, stated not papered over:** two truly concurrent executions of the
+same turn would both read the state as inactive and both emit an open (no
+per-turn lock exists); a `switch` resets the counter, so `turnsBlocked` for a
+switched excursion counts only since the last switch; a turn throwing before the
+excursion decision emits nothing.
