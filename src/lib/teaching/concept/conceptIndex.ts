@@ -122,8 +122,11 @@ export const CONCEPT_ALIASES: Readonly<Record<string, readonly string[]>> = {
   'phys.mech.newtons-first-law': ['law of inertia', 'first law of motion', 'newtons 1st law'],
   'phys.mech.newtons-third-law': ['third law of motion', 'newtons 3rd law', 'action reaction'],
   'phys.therm.calorimetry': ['heat measurement'],
-  'phys.mech.kinetic-energy': ['ke'],
-  'phys.mech.potential-energy': ['pe'],
+  // 'phys.mech.kinetic-energy': ['ke'] and 'phys.mech.potential-energy': ['pe']
+  // were here. Both are below the abbreviation floor enforced by
+  // `isAdmissibleAlias` (see its note) and were dropped rather than left as
+  // dead data. Adding another one- or two-character alias here has no effect:
+  // the floor filters it out at index construction.
   'math.arith.fractions': ['fraction'],
   'bio.mol.dna-replication': ['dna copying'],
 }
@@ -223,6 +226,49 @@ export function deriveTitleComponents(
 }
 
 /**
+ * THE ABBREVIATION FLOOR, and why it is not new.
+ *
+ * `deriveAcronym` above already refuses any surface form shorter than three
+ * characters, and records why: a two-letter acronym matched the ordinary words
+ * "DO NOT" in a long message and resolved "Damped Oscillations". A two-letter
+ * token is not evidence that a concept was named — it is a coincidence waiting
+ * for a long enough sentence.
+ *
+ * The hand-authored alias table bypassed that floor entirely, and the same
+ * class of defect followed. Measured in production, in a Photoelectric Effect
+ * lesson:
+ *
+ *   learner : "what is max KE of electron"
+ *   resolved: phys.mech.kinetic-energy   (ALIAS 'ke', confidence 0.9)
+ *
+ * "KE" is the photoelectric effect's OWN governing quantity (KE_max = hf - phi),
+ * so the learner was asking about the lesson in front of them. The resolver
+ * read it as a request to be taught something else, the excursion lifecycle
+ * opened, and — because an open excursion freezes the mastery ladder and
+ * blocks every authored probe — the lesson could no longer be assessed.
+ *
+ * So the floor is applied where aliases enter the index, to aliases from EVERY
+ * source rather than to two strings in the table below, and a future one- or
+ * two-character alias cannot reintroduce the class. Multi-token aliases are
+ * untouched at any length ('f=ma' normalises to two tokens), as is every alias
+ * of three characters or more ('fraction', 'law of inertia', 'dna copying').
+ *
+ * Cost, measured and accepted: 'ke' and 'pe' are the only entries affected, so
+ * an abbreviation-only request ("explain KE please") stops resolving. Both
+ * concepts remain fully reachable by name — "kinetic energy" is an EXACT_TITLE
+ * match at 0.95, strictly stronger evidence than the alias ever was.
+ */
+const MIN_SINGLE_TOKEN_ALIAS_CHARS = 3
+
+/** Is this alias admissible evidence that a concept was named? */
+function isAdmissibleAlias(alias: string): boolean {
+  const tokens = normalizeToTokens(alias)
+  if (tokens.length === 0) return false
+  if (tokens.length > 1) return true
+  return tokens[0].length >= MIN_SINGLE_TOKEN_ALIAS_CHARS
+}
+
+/**
  * Build a searchable index from raw entries. Pure — this is the form used by
  * tests and by any caller that already has concept records in hand.
  */
@@ -230,7 +276,8 @@ export function buildConceptIndex(entries: readonly ConceptIndexEntry[]): readon
   const components = deriveTitleComponents(entries)
   return entries.map(e => ({
     ...e,
-    aliases: [...(e.aliases ?? []), ...(CONCEPT_ALIASES[e.conceptId] ?? [])],
+    aliases: [...(e.aliases ?? []), ...(CONCEPT_ALIASES[e.conceptId] ?? [])]
+      .filter(isAdmissibleAlias),
     components: [...(e.components ?? []), ...(components.get(e.conceptId) ?? [])],
   }))
 }

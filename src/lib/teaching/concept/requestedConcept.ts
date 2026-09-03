@@ -217,8 +217,59 @@ export function idPrefix(conceptId: string): string {
   return conceptId.split('.')[0] ?? ''
 }
 
+/**
+ * A HYPHENATED COMPOUND IS ONE WORD — the defect this closes.
+ *
+ * Production, physics lesson "Refraction and Snell's Law":
+ *   learner : "can you draw diagram of ray bending please"
+ *   resolved: phys.mod.x-rays — "X-Rays and Their Properties"
+ * The learner asked to see light bending and the engine opened an X-RAY
+ * excursion and drew an X-ray figure. Because an open excursion freezes the
+ * mastery ladder and blocks every authored probe, the lesson also stopped
+ * being assessable — ten turns, zero questions, the phase never moved.
+ *
+ * Cause: this function replaced EVERY non-alphanumeric with a space and then
+ * stripped trailing plurals, so
+ *
+ *   "X-Rays and Their Properties"          -> "x ray and their propertie"
+ *   "Nature of Light: Ray and Wave Models" -> "nature of light  ray and wave model"
+ *
+ * The first string contains a standalone word "ray" that the TITLE DOES NOT
+ * CONTAIN — it was manufactured by splitting the compound. `subjectLocalReading`
+ * then takes the SHORTEST qualifying title, and the manufactured match (25
+ * chars) beat the genuine one (35). The selector was never the problem; it was
+ * offered a candidate it should never have seen.
+ *
+ * Splitting on the hyphen also matches the NEGATION of a word: bare "ideal"
+ * currently reads `chem.sol.activity`, "Activity and Non-ideal Solutions".
+ *
+ * SWAPPING IN THE SHARED TOKENIZER IS NOT THE FIX, and was measured before
+ * this was written: `normalizeToTokens('X-Rays and Their Properties')` is
+ * `[x, ray, and, their, property]` — it strips hyphens to spaces and
+ * singularises exactly as this function does, so it manufactures the same
+ * token. The missing rule is hyphen INTEGRITY, which neither normaliser had.
+ *
+ * So: an ASCII hyphen joining two alphanumerics is ELIDED (x-rays -> xrays)
+ * before the existing punctuation rule runs. Everything else here is
+ * unchanged. Exposure: 92 of the 1,775 canonical titles carry an intra-word
+ * hyphen (NP-Completeness, Cauchy-Riemann, Letter-Sound Correspondence,
+ * Subject-Verb Agreement, ...), and each was a latent instance of the same
+ * defect.
+ *
+ * Deliberately ASCII-only. Two chemistry titles use an EN-dash between words
+ * ("Acid–Base Theories", "Acid–Base Titrations"); there the dash joins two
+ * independent words rather than forming one, and eliding it would stop bare
+ * "base" reading those titles — an unmeasured change, and not this defect.
+ * The lookahead (rather than consuming the following character) is what makes
+ * a doubly-hyphenated compound collapse in one pass.
+ */
 function normalizeTitle(title: string): string {
-  return title.toLowerCase().replace(/[^a-z0-9\s]+/g, ' ').replace(/s\b/g, '').trim()
+  return title
+    .toLowerCase()
+    .replace(/([a-z0-9])-(?=[a-z0-9])/g, '$1')
+    .replace(/[^a-z0-9\s]+/g, ' ')
+    .replace(/s\b/g, '')
+    .trim()
 }
 
 /**
