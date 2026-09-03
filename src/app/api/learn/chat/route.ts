@@ -690,8 +690,6 @@ export async function POST(req: Request) {
     let teachingHistoryHoisted: import('@/lib/teaching/teachingHistory').TeachingHistory | null = null
     let selectedStrategyHoisted: number | null = null
     let retrievalCacheHoisted: import('@/lib/teaching/retrievalCache').RetrievalCache | null = null
-    // TEMP DIAG (C7 root-cause): what the already-served guard actually saw.
-    let explnDiagHoisted: Record<string, unknown> | null = null
     let conversationDecisionHoisted: import('@/lib/teaching/conversationDecision').ConversationDecision | null = null
     // H6 — REMEDIATION CARD. `remediationCardText` is the deterministic turn
     // when a PROMOTED card serves; `remediationCardServedId` is the synthetic
@@ -3824,16 +3822,6 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               assembled = null
               alreadyServedThisConcept = true
               memoryFallbackReason = 'Already served this concept'
-            }
-          }
-          // TEMP DIAG (C7): capture exactly what the guard saw for a serve candidate.
-          if (assembled || alreadyServedThisConcept) {
-            explnDiagHoisted = {
-              concept: teachingHistoryHoisted?.conceptId ?? null,
-              histPresent: teachingHistoryHoisted !== null,
-              served: teachingHistoryHoisted?.explanationsServed ?? null,
-              thisAsset: (assembled?.explanationAssetId) ?? null,
-              guardFired: alreadyServedThisConcept,
             }
           }
           if (assembled && retrievalCacheHoisted) {
@@ -8597,30 +8585,71 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // actually there. Missed in the original ISS-13 pass, which
             // registered five of the seven accumulative fields.
             const capturedStrategy = selectedStrategyHoisted
-            // The history carries the concept it was read for, so the re-read
-            // is scoped identically without reaching for an out-of-scope id.
+            // ── C7 ROOT CAUSE (2026-09-02): THE ACCUMULATIVE RECORDS THIS
+            //    REDERIVER STILL DROPPED ──────────────────────────────────────
+            //
+            // The primary fold above adds FOUR accumulative records after the
+            // updateTeachingHistory call — recordMcqAsked, recordExplanationServed
+            // (asset + card), recordConfidence. This rederiver, which REPLACES
+            // that fold whenever writeSnapshotDelta hits a version conflict,
+            // re-applied only strategiesUsed/explanationCount/frustration/mastery
+            // — its own comment above already admitted "five of the seven
+            // accumulative fields". So on a concurrent write the just-served
+            // explanation's id never reached `explanationsServed`, the next turn's
+            // `hasServedExplanation` guard saw an empty ledger, and the SAME
+            // authored explanation was served verbatim again (provider=memory).
+            //
+            // MEASURED (deployed app, phys.mech.newtons-first-law): asset
+            // c9d6427a served byte-identically on three turns in one session; the
+            // guard's own diagnostic confirmed its LOGIC is correct (it fires when
+            // the ledger holds the id) — the ledger was intermittently empty,
+            // which is exactly this dropped re-fold. It was the "third channel"
+            // the C5/C7 residue note could not identify: a deterministic memory
+            // re-serve, not an LLM echo. The same gap re-asked a spent MCQ
+            // (mcqAsked) and lost a confidence reading on the same conflicts.
+            //
+            // Fix: re-apply the SAME four records onto the concurrently-updated
+            // base, under the SAME conditions as the primary fold — captured here
+            // so the closure re-runs them rather than re-deriving them.
             const historyConceptId = teachingHistoryHoisted.conceptId
+            const rederiveServedExplanation = provider === 'memory' && assembled?.explanationAssetId
+              ? assembled.explanationAssetId : null
+            const rederiveServedCard = remediationCardServedId ?? null
+            const rederiveAskedMcq = pendingMcqHoisted?.question && mcqGradeHoisted
+              ? pendingMcqHoisted.question : null
+            const rederiveConfReading = confReading === 'high' || confReading === 'medium' || confReading === 'low'
+              ? confReading : null
             snapshotRederivers.push((fresh) => {
               const base = readTeachingHistory(fresh.teachingHistory, historyConceptId)
-              return {
-                teachingHistory: updateTeachingHistory(base, {
-                  // Same strategy-scoping as the primary fold above: a turn
-                  // with no selected strategy must not invent one when
-                  // re-folding onto a concurrently-updated base.
-                  strategiesUsed: capturedStrategy !== null
-                    ? [...new Set([...base.strategiesUsed, capturedStrategy])]
-                    : base.strategiesUsed,
-                  explanationCount: base.explanationCount + 1,
-                  frustration: computeFrustration(
-                    conversationStateHoisted?.consecutiveFailures ?? 0,
-                    conversationStateHoisted?.remediationCount ?? 0,
-                  ),
-                  mastery: computeMastery(
-                    conversationStateHoisted?.correctAtCheck ?? 0,
-                    conversationStateHoisted?.correctAtPractice ?? 0,
-                  ),
-                }),
-              }
+              let rederived = updateTeachingHistory(base, {
+                // Same strategy-scoping as the primary fold above: a turn
+                // with no selected strategy must not invent one when
+                // re-folding onto a concurrently-updated base.
+                strategiesUsed: capturedStrategy !== null
+                  ? [...new Set([...base.strategiesUsed, capturedStrategy])]
+                  : base.strategiesUsed,
+                explanationCount: base.explanationCount + 1,
+                frustration: computeFrustration(
+                  conversationStateHoisted?.consecutiveFailures ?? 0,
+                  conversationStateHoisted?.remediationCount ?? 0,
+                ),
+                mastery: computeMastery(
+                  conversationStateHoisted?.correctAtCheck ?? 0,
+                  conversationStateHoisted?.correctAtPractice ?? 0,
+                ),
+              })
+              // The four accumulative records the primary fold adds, now also
+              // surviving a concurrent write. The rederiver REPLACES the primary
+              // delta (writeSnapshotDelta applies one or the other, never both), so
+              // each runs exactly once. recordExplanationServed and recordMcqAsked
+              // no-op when the id/fingerprint is already present, so re-applying
+              // onto a base another turn already updated is safe; recordConfidence
+              // appends this turn's single reading onto that base's trail.
+              if (rederiveServedExplanation) rederived = recordExplanationServed(rederived, rederiveServedExplanation)
+              if (rederiveServedCard) rederived = recordExplanationServed(rederived, rederiveServedCard)
+              if (rederiveAskedMcq) rederived = recordMcqAsked(rederived, rederiveAskedMcq)
+              if (rederiveConfReading) rederived = recordConfidence(rederived, rederiveConfReading)
+              return { teachingHistory: rederived }
             })
           }
 
@@ -9053,7 +9082,6 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // Diagnostic for the C7 verbatim-repeat investigation. Reported, never
         // read by the client. See the retrieval-cache write for why.
         retrievedExplanationInPrompt,
-        explnDiag: explnDiagHoisted ?? undefined, // TEMP DIAG (C7 root-cause)
         visual: responseVisual ?? undefined, visualSpec: detectedVisualSpec ?? undefined,
         sceneSpec: detectedSceneSpec ?? undefined,
         // ADAPTIVE VISUAL COMPLEXITY (visual/visualComplexity.ts). The level
