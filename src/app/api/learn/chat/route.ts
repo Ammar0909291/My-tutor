@@ -690,6 +690,8 @@ export async function POST(req: Request) {
     let teachingHistoryHoisted: import('@/lib/teaching/teachingHistory').TeachingHistory | null = null
     let selectedStrategyHoisted: number | null = null
     let retrievalCacheHoisted: import('@/lib/teaching/retrievalCache').RetrievalCache | null = null
+    // TEMP DIAG (C7 root-cause): what the already-served guard actually saw.
+    let explnDiagHoisted: Record<string, unknown> | null = null
     let conversationDecisionHoisted: import('@/lib/teaching/conversationDecision').ConversationDecision | null = null
     // H6 — REMEDIATION CARD. `remediationCardText` is the deterministic turn
     // when a PROMOTED card serves; `remediationCardServedId` is the synthetic
@@ -3822,6 +3824,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               assembled = null
               alreadyServedThisConcept = true
               memoryFallbackReason = 'Already served this concept'
+            }
+          }
+          // TEMP DIAG (C7): capture exactly what the guard saw for a serve candidate.
+          if (assembled || alreadyServedThisConcept) {
+            explnDiagHoisted = {
+              concept: teachingHistoryHoisted?.conceptId ?? null,
+              histPresent: teachingHistoryHoisted !== null,
+              served: teachingHistoryHoisted?.explanationsServed ?? null,
+              thisAsset: (assembled?.explanationAssetId) ?? null,
+              guardFired: alreadyServedThisConcept,
             }
           }
           if (assembled && retrievalCacheHoisted) {
@@ -9041,6 +9053,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // Diagnostic for the C7 verbatim-repeat investigation. Reported, never
         // read by the client. See the retrieval-cache write for why.
         retrievedExplanationInPrompt,
+        explnDiag: explnDiagHoisted ?? undefined, // TEMP DIAG (C7 root-cause)
         visual: responseVisual ?? undefined, visualSpec: detectedVisualSpec ?? undefined,
         sceneSpec: detectedSceneSpec ?? undefined,
         // ADAPTIVE VISUAL COMPLEXITY (visual/visualComplexity.ts). The level
