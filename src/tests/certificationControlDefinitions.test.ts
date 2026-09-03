@@ -39,17 +39,28 @@ describe('Phase 0 control definitions', () => {
     }
   })
 
-  it('expects FAILED_CONTENT for the two negative controls', () => {
-    expect(controlByRole('english-negative').expected).toBe('FAILED_CONTENT')
-    expect(controlByRole('mathematics-negative').expected).toBe('FAILED_CONTENT')
+  it('expects UNMEASURED for the two negative controls', () => {
+    // Corrected 2026-09-03 (remediation of run phase0-1788464620155): a
+    // below-contract concept forces the model to improvise a fully-formed
+    // structured MCQ tag, which resolveAnswer() correctly cannot verify —
+    // certify.ts breaks with UNMEASURED-no-authored-match before
+    // D2-ungradeable (bare prose, no MCQ tag) can ever fire. FAILED_CONTENT
+    // was the wrong prediction, not the instrument.
+    expect(controlByRole('english-negative').expected).toBe('UNMEASURED')
+    expect(controlByRole('mathematics-negative').expected).toBe('UNMEASURED')
   })
 
-  it('expects DIRTY_STATE for the duplicate/integrity control, reusing control 1 exactly', () => {
+  it('expects DIRTY_STATE for the duplicate/integrity control, on a concept W1 genuinely has history on', () => {
+    // duplicate-integrity deliberately targets phys.mech.newtons-first-law,
+    // NOT whatever positive-physics currently uses — positive-physics moved
+    // to phys.mech.angular-momentum (2026-09-03 remediation) specifically
+    // because W1 had contaminating prior history on newtons-first-law; that
+    // same history is exactly what this control exists to prove
+    // detectDirtyState catches, so it stays on the known-dirty concept.
     const dup = controlByRole('duplicate-integrity')
-    const positive = controlByRole('positive-physics')
     expect(dup.expected).toBe('DIRTY_STATE')
-    expect(dup.conceptId).toBe(positive.conceptId)
-    expect(dup.worker).toBe(positive.worker)
+    expect(dup.conceptId).toBe('phys.mech.newtons-first-law')
+    expect(dup.worker).toBe('w1')
   })
 
   it('every concept id genuinely exists in its claimed subject\'s live knowledge graph', () => {

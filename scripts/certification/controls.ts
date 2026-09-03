@@ -47,7 +47,7 @@ export interface ControlDefinition {
   lessonOrder: number
   unitTitle: string
   totalLessons: number
-  expected: 'CERTIFIED' | 'FAILED_CONTENT' | 'DIRTY_STATE'
+  expected: 'CERTIFIED' | 'FAILED_CONTENT' | 'DIRTY_STATE' | 'UNMEASURED'
   /** Why this concept, in evidence terms — never "because it was easy." */
   rationale: string
 }
@@ -57,21 +57,27 @@ export const CONTROLS: readonly ControlDefinition[] = [
     role: 'positive-physics',
     worker: 'w1',
     subjectSlug: 'physics',
-    conceptId: 'phys.mech.newtons-first-law',
-    lessonTitle: "Newton's First Law — Inertia",
-    lessonOrder: 18,
+    conceptId: 'phys.mech.angular-momentum',
+    lessonTitle: 'Angular Momentum',
+    lessonOrder: 43,
     unitTitle: 'Classical Mechanics',
     totalLessons: 238,
     expected: 'CERTIFIED',
     rationale:
-      'ACTIVE inventory measured 2026-09-03: MIDDLE 1 explanation/5 closed-choice probes, ' +
-      'HIGH 2/5, ADULT 1/5 — every served band clears the v1 contract (>=1 explanation, ' +
-      '>=3 closed-choice probes) independent of which band a QA account defaults to. The ' +
-      'Educational Brain Delivery-5 seed concept (educational-brain/concepts/physics/' +
-      'phys.mech.newtons-first-law.md) and the concept this project has certified to real ' +
-      'production mastery more times than any other physics concept in its history (Wave-0, ' +
-      'the CTO iterations, the R1-R4 excursion fixes, the I1/I4 investigations all used it as ' +
-      'a known-good reference lesson) — chosen for that documented track record, not novelty.',
+      'Replaces phys.mech.newtons-first-law (2026-09-03 remediation): run phase0-1788464620155 ' +
+      'found W1 (suaibamr@gmail.com) has extensive prior history on that concept — a COMPLETED ' +
+      'topic_progress row from 2026-08-17 (19 lifetime attempts), a second full completion on ' +
+      '2026-09-02, and an IN_PROGRESS lesson_attempts row already open from ~17h before that ' +
+      'run even started — so positive-physics returned DIRTY_STATE, an abort condition, instead ' +
+      'of CERTIFIED. phys.mech.angular-momentum was selected by cross-referencing production ' +
+      'asset_identity/probe_assets (ACTIVE inventory measured 2026-09-03: HIGH 1 explanation/7 ' +
+      'closed-choice probes — clears the v1 contract with wide margin) against BOTH ' +
+      'topic_progress AND lesson_attempts for W1 — two independent tables, since the same ' +
+      'investigation caught phys.em.ohms-law as a false positive when checked against ' +
+      'topic_progress alone (an IN_PROGRESS lesson_attempts row existed with no matching ' +
+      'topic_progress row). Zero rows for W1 in either table, re-verified immediately before ' +
+      'this edit. Same unit (Classical Mechanics) as the concept it replaces, so the control ' +
+      'stays representative of the same subject family.',
   },
   {
     role: 'positive-chemistry',
@@ -120,7 +126,7 @@ export const CONTROLS: readonly ControlDefinition[] = [
     lessonOrder: 6,
     unitTitle: 'Phonics',
     totalLessons: 216,
-    expected: 'FAILED_CONTENT',
+    expected: 'UNMEASURED',
     rationale:
       'ACTIVE inventory measured 2026-09-03: EARLY 1 explanation/0 closed-choice probes, ' +
       'ELEMENTARY 1 explanation/0 closed-choice probes — every band this concept holds any ' +
@@ -128,8 +134,15 @@ export const CONTROLS: readonly ControlDefinition[] = [
       'one). This is not incidental: CLAUDE.md\'s 2026-08-30/31 physics/chemistry ceiling ' +
       'entry records "english 214 of 216 pairs hold exactly TWO gradeable probes ... no ' +
       'English lesson can close" as a known, subject-wide asset-contract shortfall, and this ' +
-      'concept (0 probes at either band) is strictly below even that documented floor — an ' +
-      'unambiguous FAILED_CONTENT case, an inventory fact rather than a runtime defect.',
+      'concept (0 probes at either band, in fact 0 probes in the corpus at ANY status, not ' +
+      'even DRAFT) is strictly below even that documented floor. ' +
+      'Expected corrected 2026-09-03 (remediation of run phase0-1788464620155): the served MCQ ' +
+      'a below-contract concept forces the model to improvise is a fully-formed structured tag ' +
+      '(question+options), which resolveAnswer() in answerSource.ts correctly cannot verify — ' +
+      'certify.ts breaks with UNMEASURED-no-authored-match at that point (before D2-ungradeable, ' +
+      'which only fires on bare prose with no MCQ tag, can ever be reached). UNMEASURED is the ' +
+      'harness\'s own documented "first-class answer" for exactly this case, not a ' +
+      'reinterpretation — FAILED_CONTENT was the wrong prediction, not the instrument.',
   },
   {
     role: 'mathematics-negative',
@@ -140,7 +153,7 @@ export const CONTROLS: readonly ControlDefinition[] = [
     lessonOrder: 110,
     unitTitle: 'Arithmetic',
     totalLessons: 908,
-    expected: 'FAILED_CONTENT',
+    expected: 'UNMEASURED',
     rationale:
       'ACTIVE inventory measured 2026-09-03: MIDDLE 2 explanations/2 closed-choice probes ' +
       '(short 1 probe), ADULT 1 explanation/0 closed-choice probes (short all 3) — every band ' +
@@ -150,7 +163,15 @@ export const CONTROLS: readonly ControlDefinition[] = [
       'Batch 10) — a negative control on the single BEST-known mathematics concept is a ' +
       'stronger inventory signal than picking an obscure, un-authored one; the shortfall is a ' +
       'seed-content gap CLAUDE.md already documents as subject-wide for mathematics, not a ' +
-      'concept-specific defect.',
+      'concept-specific defect. ' +
+      'Expected corrected 2026-09-03 (remediation of run phase0-1788464620155): the two ' +
+      'authored MIDDLE probes ("what is 1/2 + 1/2?", "1/3 vs 1/8 chocolate") get served and ' +
+      'graded first (matches the observed checkCorrect=1/practiceCorrect=1), then, with the ' +
+      'authored pool exhausted, the model improvises a third fraction-addition MCQ with no ' +
+      'authored match — resolveAnswer() correctly refuses it and certify.ts breaks with ' +
+      'UNMEASURED-no-authored-match before D2-ungradeable can ever fire. UNMEASURED is the ' +
+      'harness\'s own documented "first-class answer" for exactly this case, not a ' +
+      'reinterpretation — FAILED_CONTENT was the wrong prediction, not the instrument.',
   },
   {
     role: 'duplicate-integrity',
