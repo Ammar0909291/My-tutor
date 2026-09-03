@@ -2876,6 +2876,48 @@ Option-A guard (`route.ts` ~L8918, `00e53ac`) excludes acks/practice/questions/
 distress/requests but not `wantsToStop`; possibly more reachable now that probes
 attach more often.
 
+## #3 — C7 verbatim explanation re-serve: ROOT CAUSE FOUND & FIXED (2026-09-02, commit `d0e94074`)
+- **VERDICT: BUG FOUND, root cause PROVEN (a code fact), fixed.** This closes the "third channel
+  the C5/C7 residue note could not identify." It is NOT an LLM echo — it is a deterministic MEMORY
+  RE-SERVE.
+- **Reproduced live** (deployed app, real account, `phys.mech.newtons-first-law`): the authored
+  explanation asset `c9d6427a` was served BYTE-IDENTICALLY on three turns of one session, all
+  `provider=memory`. Intermittent — ~1 in 8 runs on that concept (0 repeats across 9 other concepts
+  and 7 later diag-live runs of the same concept).
+- **Method** — the reproduce-first path the codebase itself endorses: a temporary in-payload
+  diagnostic (`explnDiag`, commit `55ee41d9`, since removed) captured, at the `hasServedExplanation`
+  guard site, the concept id / whether history was present / the `explanationsServed` list / this
+  turn's asset id / whether the guard fired. It proved the guard LOGIC is correct — it fires when the
+  ledger holds the id — so the failure was that the ledger was intermittently EMPTY on a re-serve
+  turn, not a logic bug, not an asset-id mismatch, not a null history.
+- **First failing owner (proven by inspection):** the ISS-13 teachingHistory rederiver in `route.ts`
+  (the `snapshotRederivers.push` after the primary fold). The primary fold records FOUR accumulative
+  fields after `updateTeachingHistory` — served explanation (asset + remediation card), asked MCQ,
+  confidence. `writeSnapshotDelta` uses optimistic concurrency: on a version conflict it DISCARDS the
+  delta and re-runs the rederivers against the fresh row. The rederiver re-applied only
+  `strategiesUsed`/`explanationCount`/`frustration`/`mastery` — its OWN comment admitted "five of the
+  seven accumulative fields." So on a concurrent write, the just-served explanation's id never
+  reached `explanationsServed`, the next turn's guard saw an empty ledger, and the same explanation
+  re-served verbatim. The intermittency is exactly "only when the write conflicts." The identical
+  mechanism dropped `mcqAsked` (a spent probe could be re-asked) and lost a confidence reading on the
+  same conflicts.
+- **Fix:** the rederiver now re-applies `recordExplanationServed` (asset + card), `recordMcqAsked`
+  and `recordConfidence` onto the concurrently-updated base, under the SAME conditions as the primary
+  fold (captured so the closure re-runs them). It REPLACES the primary delta (never both), so each
+  runs exactly once; the first two no-op on a duplicate. No new state, no schema change; the prior
+  advisory "do NOT repeat" prompt line and the `hasServedExplanation` guard are unchanged (the guard
+  was never the bug). Guarded by `src/tests/teachingHistoryRederiver.test.ts` (behavioral, real
+  teachingHistory functions — buggy rederiver loses the id, fixed keeps it — plus route wiring).
+- Offline: new test 7/7; 115 route-source+teachingHistory test files 2028 passed / 4 skipped; `npx
+  tsc --noEmit` clean; `npm run build` clean.
+- **Live re-verification is impractical to force and was NOT claimed:** the defect fires only on a
+  snapshot version conflict, which sequential client requests cannot reliably trigger, and the base
+  repeat rate (~1/8) makes a "0 repeats" run inconclusive either way. The fix rests on the proven
+  code-level root cause + the behavioral regression test, not a live before/after (which the
+  intermittency does not admit). The prior fifth-defect prompt line (65%→31%) and this rederiver fix
+  are complementary: the prompt line reduces LLM-echo repeats, this closes the deterministic
+  conflict-driven memory re-serve.
+
 ## Run locally
 ```
 cp .env.example .env   # set DATABASE_URL, AUTH_SECRET (openssl rand -base64 32), GROQ_API_KEY
