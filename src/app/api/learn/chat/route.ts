@@ -2404,6 +2404,33 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           returnTo: excursionDecision.returnToConceptId,
           turns: excursionDecision.state.turns,
         })
+        // PREVALENCE MEASUREMENT — observability only, changes nothing.
+        //
+        // The pretty-printed line above is for reading one session by eye; it
+        // cannot be aggregated and carries no session identity. This one is a
+        // single JSON line per turn, so opens, closes, turns-held AND the
+        // eligible-turn / eligible-session denominators all come from one
+        // stream. `kind` separates the excursion LIFECYCLE from the turns it
+        // spans, so a six-turn excursion is one open, not six.
+        //
+        // Instrumented HERE because this is the only site that calls
+        // decideExcursion — the single owner of the transition — and it reads
+        // the decision that has already been made. Nothing downstream consults
+        // it. No database write; no learner text (see excursionTelemetry.ts).
+        try {
+          const { buildExcursionEvent, recordExcursionEvent } = await import('@/lib/teaching/excursionTelemetry')
+          recordExcursionEvent(buildExcursionEvent({
+            // The state as PERSISTED before this turn — the authority for how
+            // long the excursion had been open, which the closing decision has
+            // already reset to zero.
+            priorState: priorExcursionState,
+            decision: excursionDecision,
+            lessonConceptId: excursionLessonConceptId,
+            sessionId: learnSession.id,
+            subject: subjectCode,
+            turnReceivedAt,
+          }))
+        } catch { /* observability never breaks a turn */ }
         // ONE attribution question, asked once. Everything that would credit
         // THIS turn to the lesson — the phase/mastery ladder, the
         // TopicProgress checkpoint, the completion gate — reads this rather
