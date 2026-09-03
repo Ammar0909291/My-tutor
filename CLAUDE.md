@@ -2799,6 +2799,75 @@ reset — `stats_reset: 2026-07-05 15:50:54+00`), not re-derived from the prior 
   production logs — that measures the enforcer's own denominator directly, which no transcript scorer
   can. Optional instrumentation, not a defect fix.
 
+## Excursion R1-R4 — an excursion no longer silently disables assessment (2026-09-02, `98939a0`)
+
+**Read `docs/architecture/EXCURSION_GATE_OWNERSHIP_PROPOSAL.md` (rev 4, APPROVED
+AND SHIPPED) before touching `excursion.ts` or `withholdUngradedGateQuestion`.**
+
+**The defect, measured on the deployed app.** While an excursion is active,
+`gateTerms.notExcursion` blocks every authored probe AND `turnCountsForLesson`
+freezes the lesson ladder. Two lessons died on it in one sitting, both in
+subjects at 100% asset contract: `phys.mech.newtons-second-law` (detour opened
+on turn 5, ran to the end, three content-free holds) and `chem.atomic.bohr-model`
+— where the detour opened on an UNRESOLVED TITLE, `'emission lines work'`, which
+is the lesson's OWN subject matter. Bohr blocked all 5 authored probes for 7
+turns; every question was model-authored and `unauthored-key-not-certifying`, so
+correct answers banked nothing. The variance between an 8/10 and a 3/10 lesson
+was not model variance — it was whether the learner happened to name a topic.
+
+**Shipped (six lines of behaviour across four files):**
+- **R1.1** `closed-on-lesson` hoisted above the `looksLikeAnswer` hold and out of
+  the request-shaped branch. Naming the lesson's own concept now ends a detour
+  from ANY sentence shape. Production had logged
+  `requested:'phys.mech.newtons-second-law'` with `transition:'continued'`.
+- **R1.2** `closed-wants-practice` un-scoped from `openedAsKnowledgeGap`. A
+  request to be assessed ends any detour, however it began.
+  `knowledgeGapExcursionCloses.test.ts`'s two cases that pinned the old scoping
+  are updated in place with the supersession recorded, not deleted.
+- **R2** `MAX_EXCURSION_TURNS` 40 → **6** (`visual/session.ts`, read by BOTH the
+  teaching excursion and the visual session). A safety bound, not a
+  classification: it caps the blast radius of defects in this seam including
+  ones not yet found. Every existing test referenced the symbol, not the literal.
+- **R3** a self-excursion never opens — `requestedConceptId === lessonConceptId`,
+  **exact identity only**. The fuzzy sub-topic containment variant was
+  deliberately NOT implemented (a shape test standing in for a semantic
+  judgement); it is held pending measurement, and R3 therefore does NOT close
+  the Bohr unresolved-title case — R1.2 and R2 do.
+- **R4** `withholdUngradedGateQuestion` gained `gateBlockedByExcursion`
+  (optional, default false). When the gate was blocked before the selector ran,
+  a question is no longer stripped on the false premise that the pool was dry.
+  **OWNER-RULED SCOPE: `notExcursion` ONLY.** Probe STARVATION still withholds —
+  that is the function's purpose and `englishAssetContractP1.test.ts` pins it as
+  correct; the remedy for starvation is content (english 0/216 at contract), not
+  runtime. `gateRefusedOnPolicy` must NEVER be used here: it is true for
+  `notClosingTurn` and `arbitrationAllowsProbe` too, and would ship a question on
+  a closing turn.
+
+**PERMANENTLY WITHDRAWN — do not revive:** the RETARGET DESIGN (attach a probe
+from the excursion target's pool). The fold is a no-op while an excursion is
+active (`route.ts` ~L6836, "paused means paused"), so an attached probe banks
+nothing while `recordMcqAsked` spends it permanently — a reviewed probe
+destroyed for zero evidence, and missing when that concept is later taught. Also
+violates `certify.ts` D1 (taught before quizzed). Reviving it requires first
+making something a consumer of detour-turn evidence.
+
+**Production-verified** (real account, `dpl_2NJMD6m8…`, SHA `98939a08`): no
+detour on a self-named lesson concept; genuine excursions still open;
+`closed-turn-limit` at 6 with target AND figure returned to the lesson;
+`closed-satisfied` on a finish request with arbitration `owner:'CLOSE'`;
+`closed-wants-practice` on a topic-opened detour; and the previously-unfinishable
+Newton's-Second-Law lesson reached `check:1 practice:2 → verified:true, COMPLETE`.
+**Zero content-free holds**; the two withholds that fired were on non-excursion
+turns and kept their teaching (230→193, 255→203 chars).
+
+**Outstanding, not fixed:** (a) prevalence is still UNMEASURED — excursion
+transitions are log-only, so how often real learners hit this is unknown; the
+proposal's §9 step-0 lifecycle counter was not built. (b) Pre-existing and
+untouched: `[mcq-reoffer-disambiguation]` fires on "I am done for today" — the
+Option-A guard (`route.ts` ~L8918, `00e53ac`) excludes acks/practice/questions/
+distress/requests but not `wantsToStop`; possibly more reachable now that probes
+attach more often.
+
 ## Run locally
 ```
 cp .env.example .env   # set DATABASE_URL, AUTH_SECRET (openssl rand -base64 32), GROQ_API_KEY

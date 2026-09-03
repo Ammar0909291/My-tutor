@@ -1,7 +1,11 @@
 # Excursion vs. the Mastery Gate — design proposal
 
-**Status:** PROPOSAL — awaiting owner sign-off. Nothing here is implemented.
-**Date:** 2026-09-02 · **Revision 3**
+**Status:** **APPROVED AND SHIPPED** — R1-R4 implemented in `98939a0`, deployed
+and production-verified 2026-09-02 (§12). The RETARGET DESIGN (§6) is
+permanently withdrawn. Fuzzy sub-topic containment (§5-R3) was NOT implemented
+and remains held pending measurement.
+**Date:** 2026-09-02 · **Revision 4** (r3 + the sign-off, the R4 ruling, and the
+production-verification record)
 **Scope:** runtime teaching loop only. No Educational Brain, KG, curriculum,
 authored content, mastery semantics or grading change is proposed.
 **Evidence:** the 2026-09-02 real-account mystery-student run (6 lessons:
@@ -264,13 +268,23 @@ That is too broad: `gateRefusedOnPolicy()` returns true when **any** term but
 would ship a question on a CLOSING turn and undo
 `closingTurnWithholdsQuestion`.
 
-R4 therefore applies **only** to these two conditions, named individually:
-- the gate was blocked by **`notExcursion`**, and
-- the gate ran and was **starved** (`probeFound:false` — the English case).
+**RULED AND SHIPPED (owner decision, 2026-09-02).** The wording of this section
+in r3 was ambiguous about which of two conditions the EXCEPTION covers, and the
+implementation stopped on it rather than guess. The ruling:
+
+- **The exception applies to `notExcursion` ONLY.** When the gate was blocked
+  before the selector ran, the question is not stripped.
+- **Probe STARVATION continues to withhold, unchanged.** When the gate ran and
+  found nothing, stripping the ungradeable question is this function's whole
+  purpose. `englishAssetContractP1.test.ts` pins that behaviour as correct and
+  honest ("no ungradeable question is served and no mastery is fabricated"),
+  and the real remedy for starvation is content, not runtime — see §13-e
+  (english is 0 of 216 pairs at asset contract).
 
 A generic "declined by policy" condition **must not be used.** Every other
-decline reason keeps today's behaviour byte-for-byte, pinned by the negative
-control in §7-6.
+decline reason — `notClosingTurn`, `arbitrationAllowsProbe`, and starvation —
+keeps today's behaviour byte-for-byte, pinned by the negative controls in
+§7-6 and by `excursionExitsR1R4.test.ts`.
 
 R4 changes *which turns keep the model's own question*. It does **not** change
 grading, keys, counters, or what any answer is worth.
@@ -405,14 +419,43 @@ Brain, KG, curriculum, blueprints or any authored content.
 
 ---
 
-## 12. Open decisions requiring a signature
+## 12. Decisions — SIGNED OFF AND SHIPPED (2026-09-02)
 
-1. **Adopt R1-R4, with the RETARGET DESIGN permanently withdrawn?**
-   — recommended: yes.
-2. **`MAX_EXCURSION_TURNS`: 40 → 6 (recommended) or → 8?**
-3. **Gate the package behind step-0 prevalence measurement, or ship R1 and R2
-   immediately (both exact and reversible) and measure alongside?**
-   — recommended: ship R1 and R2, measure alongside.
+All three were approved and implemented in commit `98939a0`, deployed as
+`dpl_2NJMD6m8…` on SHA `98939a08`.
+
+1. **Adopt R1-R4, RETARGET DESIGN permanently withdrawn?** — YES. Shipped.
+2. **`MAX_EXCURSION_TURNS` 40 → 6?** — YES, 6. Shipped.
+3. **Ship immediately and measure alongside?** — YES. Shipped; §9 step-0
+   prevalence instrumentation remains outstanding.
+4. **R4's scope (the one item implementation stopped on)** — ruled
+   `notExcursion` ONLY; starvation keeps withholding. See §5-R4.
+
+### Production verification, 2026-09-02 (deployed app, real account)
+| case | result |
+|---|---|
+| lesson concept named | `transition:'none'`, `notExcursion:true` — no detour, gate live |
+| genuine excursion | `transition:'started'` → `phys.mech.acceleration` — feature intact |
+| 6-turn bound | `transition:'closed-turn-limit'`; target and figure returned to the lesson |
+| finish request mid-detour | `closed-satisfied`; arbitration `owner:'CLOSE'` denied `AUTHORED_PROBE`; `notClosingTurn:false` intact |
+| practice request mid-detour | `closed-wants-practice` on a TOPIC-opened detour — impossible before R1.2 |
+| normal probe path | two distinct authored probes graded correct; `check:1 practice:2`; `verified:true`, lesson COMPLETE |
+
+**Zero content-free holds** across the whole run. The two `gate-contract`
+withholds that fired were on non-excursion turns and kept their teaching
+(230→193 and 255→203 chars) — R4 did not over-reach.
+
+**Observed, pre-existing, NOT fixed:** `[mcq-reoffer-disambiguation]` fired on
+"Ok I am done for today, thanks." The Option-A guard (route.ts ~L8918, commit
+`00e53ac`) excludes bare acks, practice requests, questions, `failureState` and
+`learnerRequest` — but not `wantsToStop`. Untouched by R1-R4; possibly more
+reachable now that probes attach more often. Separate decision.
+
+### Still outstanding from this document
+- §9 step 0: excursion-lifecycle prevalence counter (opened / closed-by-reason /
+  turns-held). The population rate of this failure remains UNMEASURED (§2.3).
+- R1.1's answer-shaped close is pinned offline but was not hit live (the detour
+  closed on an earlier signal first).
 
 ---
 
