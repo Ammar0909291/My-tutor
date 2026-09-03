@@ -394,6 +394,65 @@ today with no new instrumentation:
 
 Before/after on the same seed and account. No claim without both numbers.
 
+### Step 0 — BUILT 2026-09-03 (`src/lib/teaching/excursionTelemetry.ts`)
+
+One structured line per turn, `[learn/chat] EXCURSION_EVENT={…}`, emitted at the
+single site that calls `decideExcursion` (`route.ts`, immediately after the
+existing pretty `[excursion]` line). Observability only: no behaviour change,
+no database write, no new table. Modelled on the existing
+`[learn/chat] BRAIN_EVENT=` convention rather than a new framework.
+
+**Measurement semantics — chosen deliberately, not by default.**
+
+| term | definition |
+|---|---|
+| `eligible_turn` | one `EXCURSION_EVENT` with `eligible: true` — a chat turn that reached the excursion decision **with a lesson concept**. Without a lesson there is nothing to excurse from, so those turns are emitted with `eligible: false` and are excluded from every denominator rather than silently diluting one. |
+| `eligible_session` | `count(distinct sessionId)` over eligible turns. |
+| `excursion_open` | one event with `kind: 'open'` — a transition **into** an excursion, i.e. `transition === 'started'` **and** the persisted prior state was not live. THE numerator. |
+| `excursion_close` | one event with `kind: 'close'` — `transition` matching `closed-*`. `transition` itself is the reason. |
+| `turns_held` | the excursion's own counter **as persisted before the closing turn**. Emitted on `close` and `switch` only. Not the closing decision's counter, which `decideExcursion` has already reset to zero. |
+| `turns_blocked` | `turns_held + 2` — the opening turn, the held turns, and the closing turn, which `turnCountsForLesson` also excludes. The learner-facing cost. |
+| `prevalence` | **two numbers, never one**: `opens / eligible_turns` (turn prevalence) and `sessions with ≥1 open / eligible_sessions` (session prevalence). A raw excursion count is not a prevalence and must not be reported as one. |
+
+**`transition: 'started'` is not the same question as "did an excursion open".**
+Found by test while building this: the request branch emits
+
+```
+transition: active && state.targetConceptId !== requestedConceptId ? 'switched' : 'started'
+```
+
+so re-requesting the concept an excursion is **already on** yields `'started'`
+again. Counting the label would have reported a retry — or a learner asking
+twice — as a second excursion. `kind` is therefore derived from the persisted
+prior state, and that case is emitted as `kind: 'restate'` so the repeat stays
+visible instead of hidden. The excursion behaviour is untouched; only the
+counting is corrected.
+
+**Aggregation (one stream, no joins).** Over `EXCURSION_EVENT` lines, counting
+`distinct turnKey` rather than rows so duplicate log delivery cannot inflate:
+
+```
+eligible turns        count(distinct turnKey) where eligible
+eligible sessions     count(distinct sessionId) where eligible
+opens                 count(distinct turnKey) where kind = 'open'
+turn prevalence       opens / eligible turns
+session prevalence    count(distinct sessionId where kind='open') / eligible sessions
+close reasons         count by transition where kind = 'close'
+bound rate            count where atBound / count where kind = 'close'
+cost                  sum(turnsBlocked) / eligible turns
+```
+
+**Known limits, stated rather than papered over.**
+- Two truly **concurrent executions of the same turn** would both read the state
+  as inactive and both emit an open. The runtime holds no per-turn lock, so no
+  measurement placed here can rule that out.
+- A `switch` resets the turn counter, so `turnsBlocked` for an excursion that
+  switched target counts only since the last switch.
+- Coverage is bounded by the enclosing `try` in `route.ts`: a turn that throws
+  before the excursion decision emits nothing.
+- Vercel function logs are the store. Nothing in this repo aggregates them —
+  the same limitation `brainMetrics.ts` records for `BRAIN_EVENT`.
+
 ---
 
 ## 10. What this proposal explicitly does NOT change
