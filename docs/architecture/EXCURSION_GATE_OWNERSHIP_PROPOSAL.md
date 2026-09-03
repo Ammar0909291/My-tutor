@@ -439,6 +439,7 @@ All three were approved and implemented in commit `98939a0`, deployed as
 | 6-turn bound | `transition:'closed-turn-limit'`; target and figure returned to the lesson |
 | finish request mid-detour | `closed-satisfied`; arbitration `owner:'CLOSE'` denied `AUTHORED_PROBE`; `notClosingTurn:false` intact |
 | practice request mid-detour | `closed-wants-practice` on a TOPIC-opened detour — impossible before R1.2 |
+| answer-shaped turn naming the lesson concept (R1.1) | verified 2026-09-03 on `dpl_9MGjvcXAwR96uNie3SEY97D8BceC`: detour open on `phys.mech.kinetic-energy` (03:10:31 `transition:'started'`, `notExcursion:false`), then `"So linear momentum is just mass times velocity, and it is a vector."` → 03:11:21 `requested:'phys.mech.momentum'`, `transition:'closed-on-lesson'`, `active:false`; next turn 03:12:01 `notExcursion:true` — assessment eligibility restored |
 | normal probe path | two distinct authored probes graded correct; `check:1 practice:2`; `verified:true`, lesson COMPLETE |
 
 **Zero content-free holds** across the whole run. The two `gate-contract`
@@ -454,8 +455,12 @@ reachable now that probes attach more often. Separate decision.
 ### Still outstanding from this document
 - §9 step 0: excursion-lifecycle prevalence counter (opened / closed-by-reason /
   turns-held). The population rate of this failure remains UNMEASURED (§2.3).
-- R1.1's answer-shaped close is pinned offline but was not hit live (the detour
-  closed on an earlier signal first).
+- ~~R1.1's answer-shaped close is pinned offline but was not hit live.~~
+  **CLOSED 2026-09-03** — hit live, see the last row of the table above. Three
+  earlier attempts were discarded rather than reported: a concurrent session was
+  driving the same account, and because `StudentProgress.activeLessonSlug` is
+  per-USER, the lesson pointer moved mid-run and the detour closed as
+  `closed-lesson-changed` instead. A contaminated run is not evidence.
 
 ---
 

@@ -2859,6 +2859,14 @@ detour on a self-named lesson concept; genuine excursions still open;
 Newton's-Second-Law lesson reached `check:1 practice:2 → verified:true, COMPLETE`.
 **Zero content-free holds**; the two withholds that fired were on non-excursion
 turns and kept their teaching (230→193, 255→203 chars).
+**R1.1's own answer-shaped close was added 2026-09-03** (`dpl_9MGjvcXAwR96uNie3SEY97D8BceC`,
+session `cmtky68dm0009l204a7c210s7`): a detour open on `phys.mech.kinetic-energy`, then the
+statement "So linear momentum is just mass times velocity, and it is a vector." →
+`requested:'phys.mech.momentum'`, `transition:'closed-on-lesson'`, and the NEXT turn read
+`notExcursion:true`. Three earlier attempts were discarded, not reported: a concurrent
+session was driving the same account, and `StudentProgress.activeLessonSlug` is per-USER,
+so the lesson pointer moved mid-run and the detour closed as `closed-lesson-changed`
+instead. **Do not verify excursion behaviour on an account another session is driving.**
 
 **Outstanding, not fixed:** (a) prevalence is still UNMEASURED — excursion
 transitions are log-only, so how often real learners hit this is unknown; the
