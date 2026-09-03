@@ -209,6 +209,23 @@ export type WorkerResolution =
  * Expects CERT_WORKER_1_EMAIL / CERT_WORKER_1_PASSWORD … up to `wanted`.
  * Refuses on: a missing pair, a duplicated email across workers (which would
  * silently reunite two workers on one account), or a protected account.
+ *
+ * ── SCOPED, EXPLICIT OVERRIDE FOR AN OPERATOR-DESIGNATED TEST ACCOUNT ───────
+ * `PROTECTED_ACCOUNTS` exists because one specific email has been the
+ * project's engineering/owner account throughout this repository's history —
+ * every prior certification harness has refused it by construction, and that
+ * default must not weaken globally or silently.
+ *
+ * An operator can, for one run, designate that SAME email as a genuine test
+ * account instead (e.g. a throwaway alias they control). This is accepted
+ * only via an explicit, per-worker, environment-based flag —
+ * `CERT_WORKER_<n>_DESIGNATED_TEST_ACCOUNT=true` — set alongside that
+ * worker's own credentials. Unset (the default), the refusal is unchanged:
+ * nothing about `isProtectedAccount` or `PROTECTED_ACCOUNTS` itself is
+ * touched, and no other caller (e.g. scripts/math/certify.ts's own
+ * FORBIDDEN_ACCOUNTS) is affected — this override lives only in this
+ * function's own credential-resolution path, for this harness, for the one
+ * worker slot an operator explicitly flags.
  */
 export function resolveWorkers(
   env: Record<string, string | undefined>,
@@ -222,7 +239,16 @@ export function resolveWorkers(
       return { ok: false, error: `worker ${i}: CERT_WORKER_${i}_EMAIL/PASSWORD not set` }
     }
     if (isProtectedAccount(email)) {
-      return { ok: false, error: `worker ${i}: refuses to use the protected account ${email}` }
+      const designated = (env[`CERT_WORKER_${i}_DESIGNATED_TEST_ACCOUNT`] ?? '').trim().toLowerCase()
+      if (designated !== 'true') {
+        return {
+          ok: false,
+          error:
+            `worker ${i}: refuses to use the protected account ${email} — set ` +
+            `CERT_WORKER_${i}_DESIGNATED_TEST_ACCOUNT=true to explicitly designate it as a ` +
+            'test account for this run (the default protection is otherwise unchanged)',
+        }
+      }
     }
     workers.push({ workerId: `w${i}`, accountLabel: email, email, password })
   }

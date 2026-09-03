@@ -55,6 +55,16 @@ import { containsOptionList } from '../../src/lib/teaching/gateProbeContract'
 // the harness submits the OPTION TEXT — the same thing a tap sends. Production
 // still grades. See scripts/certification/answerSource.ts.
 import { resolveAnswer, type AnswerIndex } from '../certification/answerSource'
+// I-2 (Phase 0 reconciliation, 2026-09-03). This module's own turn-1 dirty
+// check used to be `turns === 1 && (verified === true || checkCorrect > 0)` —
+// narrower than production semantics actually require (a session carrying
+// `practiceCorrect > 0` with `checkCorrect === 0` is one graded answer from a
+// fabricated pass, and a RESUMED session or a non-entry starting phase are
+// both contamination even with checkCorrect/practiceCorrect at zero). Rather
+// than keep two drifting dirty-state predicates, this now calls the single
+// widened one in measurementIdentity.ts. See scripts/certification/
+// measurementIdentity.ts's own header for the full rationale.
+import { detectDirtyState } from '../certification/measurementIdentity'
 
 const BASE = process.env.MATH_CERT_BASE_URL ?? 'https://my-tutor-flame.vercel.app'
 const EMAIL = process.env.MATH_CERT_EMAIL ?? ''
@@ -215,8 +225,19 @@ async function post(pathname: string, body: unknown, cookie: string): Promise<Tu
  * a learner who knows nothing about this concept, so the session is created
  * here and never shared.
  */
-async function createSession(cookie: string, subjectSlug: string): Promise<string> {
-  const res = await fetch(`${BASE}/api/sessions`, {
+export interface SessionHandle { id: string; resumed: boolean }
+
+/**
+ * Exported so other harnesses driving the same endpoint (e.g. the Phase 0
+ * six-control runner) reuse this exact call rather than re-deriving it —
+ * `baseUrl` is threaded through explicitly rather than read from this
+ * module's own `BASE` constant, so a caller can point at a different
+ * deployment without an env var side channel.
+ */
+export async function createSession(
+  cookie: string, subjectSlug: string, baseUrl: string = BASE,
+): Promise<SessionHandle> {
+  const res = await fetch(`${baseUrl}/api/sessions`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', cookie },
     body: JSON.stringify({ subjectSlug }),
@@ -228,13 +249,18 @@ async function createSession(cookie: string, subjectSlug: string): Promise<strin
   // The endpoint RESUMES any ACTIVE session for the subject from the last 24
   // hours rather than minting a new one, and says so. A resumed session carries
   // the previous concept's ladder, which is the condition `DIRTY-STATE` below
-  // exists to catch.
-  return id
+  // exists to catch. `resumed` is now surfaced to the caller (I-2) instead of
+  // being discarded — a resumed session is itself a contamination signal even
+  // when its ladder counters happen to read zero.
+  return { id, resumed: body.resumed === true }
 }
+
+/** The ladder phases a genuinely fresh learner may start a concept in. */
+const ENTRY_PHASES = ['OBSERVE', 'DEMONSTRATE'] as const
 
 export async function certifyConcept(
   target: ConceptTarget, cookie: string, sessionId: string, answerIndex: AnswerIndex,
-  totalLessons = 908,
+  totalLessons = 908, sessionResumed = false,
 ): Promise<CertificationResult> {
   const failed: string[] = []
   const notes: string[] = []
@@ -423,7 +449,7 @@ export async function certifyConcept(
       answered: reply === 'ready' ? 'ready' : 'mcq',
     })
 
-    // ── CERTIFICATION MUST START FROM A LEARNER WHO KNOWS NOTHING ──────────
+    // ── CERTIFICATION MUST START FROM A LEARNER WHO KNOWS NOTHING (I-2) ─────
     //
     // A false PASS is worse than no harness. Measured here twice: reusing a
     // session made math.found.logic report TRANSFER / verified / check 1 /
@@ -432,17 +458,31 @@ export async function certifyConcept(
     //
     // `/api/sessions` resumes any ACTIVE session for the subject from the last
     // 24 hours, and `mode: 'restart'` does not clear the stored conversation
-    // state, so isolation cannot be assumed — it has to be checked. Mastery
-    // that is already at or past the gate one turn in did not come from this
-    // run, so the concept is reported DIRTY-STATE rather than certified.
-    if (turns === 1 && (last.mastery?.verified === true || (last.mastery?.checkCorrect ?? 0) > 0)) {
-      failed.push('DIRTY-STATE')
-      notes.push(
-        `session carried prior mastery into turn 1 (phase ${last.mastery?.phase}, ` +
-        `check ${last.mastery?.checkCorrect}, practice ${last.mastery?.practiceCorrect}) — ` +
-        'not certified; certification needs a learner with no history on this concept',
+    // state, so isolation cannot be assumed — it has to be checked. This now
+    // calls the single, widened predicate in measurementIdentity.ts (I-2)
+    // rather than this file's own narrower inline check, which covered only
+    // `verified === true || checkCorrect > 0` and missed a session carrying
+    // `practiceCorrect > 0` with `checkCorrect === 0` — one graded answer from
+    // a fabricated pass — plus a resumed session or a non-entry starting phase
+    // with both counters still at zero.
+    if (turns === 1) {
+      const dirty = detectDirtyState(
+        {
+          verified: last.mastery?.verified,
+          phase: last.mastery?.phase,
+          checkCorrect: last.mastery?.checkCorrect,
+          practiceCorrect: last.mastery?.practiceCorrect,
+        },
+        { expectedEntryPhases: ENTRY_PHASES, sessionResumed },
       )
-      break
+      if (dirty.dirty) {
+        failed.push('DIRTY-STATE')
+        notes.push(
+          `session carried prior state into turn 1 (${dirty.reasons.join(', ')}) — ` +
+          'not certified; certification needs a learner with no history on this concept',
+        )
+        break
+      }
     }
   }
 
@@ -544,12 +584,19 @@ export function csrfTokenFromJar(jar: string): string | null {
   return null
 }
 
-async function login(): Promise<string> {
-  if (!EMAIL || !PASSWORD) throw new Error('set MATH_CERT_COOKIE, or MATH_CERT_EMAIL and MATH_CERT_PASSWORD')
-  if (FORBIDDEN_ACCOUNTS.includes(EMAIL.toLowerCase())) {
-    throw new Error(`${EMAIL} is an engineering account and must never be used for certification`)
-  }
-  const csrfRes = await fetch(`${BASE}/api/auth/csrf`)
+/**
+ * The actual Auth.js credentials handshake, parameterized so a different
+ * harness (the Phase 0 six-control runner, driving CERT_WORKER_* accounts
+ * rather than MATH_CERT_EMAIL/PASSWORD) reuses this exact, already-debugged
+ * cookie-jar logic instead of re-deriving it. Carries no account-policy
+ * check of its own — `authenticate()` below applies FORBIDDEN_ACCOUNTS for
+ * this file's own math-certification flow; a caller with a different
+ * account policy (e.g. resolveWorkers' protected-account guard) applies its
+ * own before calling this.
+ */
+export async function loginAs(baseUrl: string, email: string, password: string): Promise<string> {
+  if (!email || !password) throw new Error('email and password are both required')
+  const csrfRes = await fetch(`${baseUrl}/api/auth/csrf`)
   const body = (await csrfRes.json()) as { csrfToken: string }
   const jar = mergeCookies(csrfRes.headers.getSetCookie?.() ?? [])
   // The token is taken from the COOKIE THAT WILL BE SENT, not from the JSON
@@ -557,14 +604,38 @@ async function login(): Promise<string> {
   // token and the jar keeps the other's, and the two must agree or the POST is
   // rejected. The cookie's value is `<token>|<hash>`; the form wants `<token>`.
   const csrfToken = csrfTokenFromJar(jar) ?? body.csrfToken
-  const res = await fetch(`${BASE}/api/auth/callback/credentials`, {
+  const res = await fetch(`${baseUrl}/api/auth/callback/credentials`, {
     method: 'POST', redirect: 'manual',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded', cookie: jar },
-    body: new URLSearchParams({ csrfToken, email: EMAIL, password: PASSWORD, callbackUrl: `${BASE}/learn` }),
+    body: new URLSearchParams({ csrfToken, email, password, callbackUrl: `${baseUrl}/learn` }),
   })
   const all = mergeCookies(jar.split('; ').filter(Boolean), res.headers.getSetCookie?.() ?? [])
   if (!/session-token/.test(all)) throw new Error('login failed — no session cookie returned')
   return all
+}
+
+async function login(): Promise<string> {
+  if (!EMAIL || !PASSWORD) throw new Error('set MATH_CERT_COOKIE, or MATH_CERT_EMAIL and MATH_CERT_PASSWORD')
+  if (FORBIDDEN_ACCOUNTS.includes(EMAIL.toLowerCase())) {
+    throw new Error(`${EMAIL} is an engineering account and must never be used for certification`)
+  }
+  return loginAs(BASE, EMAIL, PASSWORD)
+}
+
+/**
+ * Confirms a cookie is actually authenticated, and as WHICH account — the
+ * check I-1 worker isolation depends on: two workers accidentally sharing a
+ * cookie, or a login silently landing on the wrong account, must be caught
+ * before any lesson traffic is sent, not inferred afterward from odd mastery
+ * state. Returns the authenticated email so the caller can assert it matches
+ * the credential it just supplied.
+ */
+export async function verifySessionIdentity(baseUrl: string, cookie: string): Promise<string> {
+  const res = await fetch(`${baseUrl}/api/auth/session`, { headers: { cookie } })
+  const who = (await res.json()) as { user?: { email?: string } }
+  const email = who.user?.email
+  if (!email) throw new Error('not authenticated — no session for the supplied cookie')
+  return email
 }
 
 /**
@@ -610,8 +681,8 @@ async function main() {
   for (const t of targets) {
     process.stderr.write(`certifying ${t.conceptId} … `)
     try {
-      const sessionId = await createSession(cookie, subjectSlug)
-      const r = await certifyConcept(t, cookie, sessionId, answerIndex, totalLessons)
+      const session = await createSession(cookie, subjectSlug)
+      const r = await certifyConcept(t, cookie, session.id, answerIndex, totalLessons, session.resumed)
       results.push(r)
       process.stderr.write(`${r.pass ? 'PASS' : `FAIL [${r.failed.join(', ')}]`} (${r.turns} turns)\n`)
     } catch (err) {

@@ -176,6 +176,55 @@ describe('I-1 — isolation is per ACCOUNT, not per process', () => {
     expect(isProtectedAccount('SUAIBAMR@GMAIL.COM')).toBe(true)
     expect(isProtectedAccount('explorewithpappu@gmail.com')).toBe(false)
   })
+
+  describe('scoped, explicit test-account override for a protected email', () => {
+    it('still refuses by default — the override is opt-in, not a policy change', () => {
+      const bad = { ...env(4), CERT_WORKER_2_EMAIL: 'suaibamr@gmail.com' }
+      const r = resolveWorkers(bad, 4)
+      expect(r).toMatchObject({ ok: false })
+      if (!r.ok) expect(r.error).toMatch(/protected account/)
+    })
+
+    it('accepts it ONLY when that exact worker slot is explicitly designated', () => {
+      const designated = {
+        ...env(4),
+        CERT_WORKER_2_EMAIL: 'suaibamr@gmail.com',
+        CERT_WORKER_2_DESIGNATED_TEST_ACCOUNT: 'true',
+      }
+      const r = resolveWorkers(designated, 4)
+      expect(r.ok).toBe(true)
+      if (r.ok) expect(r.workers.find((w) => w.workerId === 'w2')?.email).toBe('suaibamr@gmail.com')
+    })
+
+    it('a designation on the WRONG worker slot does not leak protection to another slot', () => {
+      const wrongSlot = {
+        ...env(4),
+        CERT_WORKER_2_EMAIL: 'suaibamr@gmail.com',
+        // Designation flag set on worker 3, not worker 2 — must not help worker 2.
+        CERT_WORKER_3_DESIGNATED_TEST_ACCOUNT: 'true',
+      }
+      const r = resolveWorkers(wrongSlot, 4)
+      expect(r).toMatchObject({ ok: false })
+      if (!r.ok) expect(r.error).toMatch(/protected account/)
+    })
+
+    it('a falsy or malformed designation value is still refused', () => {
+      for (const value of ['false', 'yes', '1', 'TRUE_', '']) {
+        const r = resolveWorkers(
+          { ...env(4), CERT_WORKER_2_EMAIL: 'suaibamr@gmail.com', CERT_WORKER_2_DESIGNATED_TEST_ACCOUNT: value },
+          4,
+        )
+        expect(r).toMatchObject({ ok: false })
+      }
+    })
+
+    it('leaves isProtectedAccount and PROTECTED_ACCOUNTS themselves untouched', () => {
+      // The override lives entirely in resolveWorkers' own credential path —
+      // it must not weaken the general predicate every other caller relies on
+      // (e.g. scripts/math/certify.ts's own, independent FORBIDDEN_ACCOUNTS check).
+      expect(isProtectedAccount('suaibamr@gmail.com')).toBe(true)
+    })
+  })
 })
 
 describe('I-3 — the manifest is reproducible and complete', () => {

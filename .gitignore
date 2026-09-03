@@ -65,3 +65,7 @@ scripts/_audit/
 # strugglingLearnerHarness.ts transcript output — real per-run data, never
 # committed; re-run the harness to regenerate.
 scripts/qa/qa-runs/
+
+# runPhase0Controls.ts JSONL result artifacts — real per-run certification
+# data (a ConceptRecord per control), never committed; re-run to regenerate.
+scripts/certification/artifacts/
