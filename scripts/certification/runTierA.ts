@@ -140,7 +140,7 @@ function assignRows(
   }
 }
 
-interface ConceptOutcome {
+export interface ConceptOutcome {
   verdict: Verdict
   record: ConceptRecord | null
   error: string | null
@@ -153,7 +153,7 @@ interface ConceptOutcome {
  * six-role ControlDefinition. See file header for why this is a small
  * duplicate rather than a shared import.
  */
-async function runOneConcept(
+export async function runOneConcept(
   row: ManifestRow, totalLessons: number, worker: WorkerAccount, runId: string, startedAt: string,
 ): Promise<ConceptOutcome> {
   const target: ConceptTarget = {
@@ -210,7 +210,7 @@ async function runOneConcept(
 }
 
 /** Operator decision #4: one automatic retry on FAILED_INFRASTRUCTURE only. */
-async function runWithRetry(
+export async function runWithRetry(
   row: ManifestRow, totalLessons: number, worker: WorkerAccount, runId: string, startedAt: string,
 ): Promise<ConceptOutcome & { retried: boolean }> {
   const first = await runOneConcept(row, totalLessons, worker, runId, startedAt)
