@@ -3924,6 +3924,37 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // ran, which is ignorance and must not be read as "none exist".
       let authoredProbesExistHoisted: boolean | null = null
       let gateDeclinedByPolicyHoisted = false
+      // R1 — THE TOPIC-PROGRESS EVIDENCE WRITE MUST FINISH BEFORE THE RESPONSE.
+      //
+      // MEASURED in production (2026-09-04, Supabase postgres logs, batch 4 of
+      // the Tier A certification run). The write below is issued inside an
+      // async IIFE that nothing awaited, so the response returned while the
+      // statement was still in flight. A serverless instance freezes once its
+      // response is sent, so the implicit transaction stayed OPEN and held its
+      // row lock on topic_progress (userId, subjectSlug, topicSlug):
+      //
+      //   INSERT INTO "topic_progress" (...) ON CONFLICT DO NOTHING
+      //   $2 = <one learner>  $3 = 'physics'  $4 = 'phys.em.mutual-inductance'
+      //   eight backends blocked on ShareLock, 1s -> 9.8s -> 31s -> 42s -> 44s
+      //   -> 71s -> 73s -> 84s, all released within 20ms of each other
+      //
+      // ON CONFLICT DO NOTHING still waits on an UNCOMMITTED conflicting tuple,
+      // so the learner's NEXT turn blocked on their OWN previous turn — every
+      // blocked statement in that window carried the same userId and topicSlug.
+      // With lock_timeout unset those waits are bounded only by the database's
+      // statement_timeout, the client gives up at socket_timeout and withRetry
+      // re-issues, and each retry adds another blocked backend holding a pool
+      // slot until P2024 surfaces as a 500. route.ts already states this rule
+      // for a sibling write ~L299: "an un-awaited write on a serverless runtime
+      // can be reclaimed the moment this invocation ends".
+      //
+      // AWAITED AT THE RESPONSE BOUNDARY, NOT INLINE. Roughly a thousand lines
+      // of awaited work run between the launch site and the reply, so by the
+      // time this is settled it has almost always finished already — the fix
+      // buys the guarantee without serialising the write ahead of that work.
+      // The promise is total (its own .then/.catch handle both outcomes), so
+      // settling it can never fail the turn.
+      let topicProgressEvidenceWrite: Promise<void> | null = null
       // GUIDE or a mastery gate — the ORIGINAL isProbeAttachablePhase, never
       // the gate's E1-widened copy. See ModelProbeInput.probeWouldCountThisPhase.
       let probeWouldCountThisPhaseHoisted = false
@@ -7982,7 +8013,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       if (!excursionActiveHoisted && resolvedConceptId && teachingSignal && teachingSignal.correctness !== undefined) {
         const signalCorrect = teachingSignal.correctness
         const signalConfidence = teachingSignal.confidence
-        ;(async () => {
+        topicProgressEvidenceWrite = (async () => {
           const score = signalCorrect ? 65 : 25
           // IDEMPOTENT, THEN RETRIED — in that order, because the reverse is
           // unsafe. This write was previously an unguarded
@@ -8036,6 +8067,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               },
             }).catch(() => {})
           }
+        // `.catch` is KEPT, not replaced by the await below: between this line
+        // and the settle point the promise is unhandled, and a rejection there
+        // (a failed dynamic import, say) would be an unhandled rejection.
         })().catch(() => {})
       }
 
@@ -9090,6 +9124,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // LEARNER-FACING copy only — the persisted snapshot keeps the full probe so
       // gradeMcqAnswer can grade the next turn. Presence is preserved, so the
       // on-screen-probe invariant is unchanged.
+      // R1 — settle the topic-progress evidence write before replying, so the
+      // instance cannot freeze with its transaction open. See the declaration.
+      if (topicProgressEvidenceWrite) {
+        try { await topicProgressEvidenceWrite } catch { /* total by construction */ }
+      }
+
       const { mcqToServe: mcqToServeForResponse, mcqForClient } = await import('@/lib/teaching/mcq')
 
       return NextResponse.json({

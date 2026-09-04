@@ -54,6 +54,68 @@
  *                          hangs before even reaching query execution
  *                          (a TCP stall neither statement_timeout nor
  *                          pool_timeout covers).
+ *   lock_timeout=8000 (ms) — see below; new, and the reason this file
+ *                          changed.
+ *
+ * ── ROOT CAUSE #3: "statement_timeout" WAS NEVER REACHING POSTGRES ──────────
+ *
+ * Everything above about statement_timeout was TRUE AS AN INTENTION and FALSE
+ * IN PRODUCTION. `statement_timeout` is not a connection-string parameter the
+ * Prisma Postgres connector understands; it was appended to the URL, silently
+ * ignored by the query engine, and Postgres kept its own default.
+ *
+ * MEASURED, twice, independently:
+ *
+ *  1. Production (2026-09-04): db statement_timeout = 120000, lock_timeout = 0,
+ *     ZERO `57014 canceling statement due to statement timeout` events in 24h,
+ *     against an observed INSERT that ran 83,994 ms without being cancelled.
+ *
+ *  2. Locally against a throwaway PostgreSQL 16 with the exact @prisma/client
+ *     this repo installs (6.19.3), reading back `current_setting(...)`:
+ *
+ *       this function's OLD output ............ statement_timeout=0  lock_timeout=0
+ *       options=-c statement_timeout=15000 .... statement_timeout=15s
+ *       options=-c ... -c lock_timeout=8000 ... statement_timeout=15s lock_timeout=8s
+ *
+ *     and functionally, `select pg_sleep(5)`:
+ *       old form (statement_timeout=1000) ..... ran the full 5,128 ms, no cancel
+ *       options form (statement_timeout=1000) . cancelled at 1,070 ms, SQLSTATE 57014
+ *
+ *     The engine binary agrees: `connection_limit`, `pool_timeout`,
+ *     `socket_timeout`, `connect_timeout`, `pgbouncer` and `options` all appear
+ *     in libquery_engine; `statement_timeout` does not appear at all.
+ *
+ * So the timeouts move to `options`, which is libpq's documented passthrough
+ * for server settings and IS understood by the engine. Verified to compose
+ * with `pgbouncer=true` and with the existing pool params.
+ *
+ * ── WHY lock_timeout IS ADDED, AND WHY IT IS THE SHORTER OF THE TWO ─────────
+ *
+ * statement_timeout bounds a query that is RUNNING. It does not distinguish a
+ * query blocked behind another transaction's row lock, and in production that
+ * is what actually starved the pool: eight backends waited 1s-84s on ShareLock
+ * for one learner's own `topic_progress` row while `lock_timeout` was 0. A
+ * blocked writer should give up fast and let the caller retry, not sit in a
+ * pool slot — so lock_timeout (8s) < statement_timeout (15s) < pool_timeout
+ * (20s), each layer failing before the one outside it.
+ *
+ * ── THE LEGACY URL PARAM IS LEFT IN PLACE ──────────────────────────────────
+ *
+ * Removing `statement_timeout=` from the URL would be tidier and is NOT done:
+ * an operator may already have it set in DATABASE_URL, this function's contract
+ * is that operator config wins, and a param the engine ignores is inert either
+ * way. It stays as the operator-visible declaration of intent; `options` is
+ * what Postgres actually receives.
+ *
+ * ── WHAT THIS CANNOT VERIFY ────────────────────────────────────────────────
+ *
+ * Production connects through Supavisor in TRANSACTION mode (.env.example:
+ * port 6543, `?pgbouncer=true`). Whether that pooler forwards the `options`
+ * startup parameter to the backend was NOT tested here — it cannot be without
+ * production traffic. If it does not, the effective fix is a role-level
+ * `ALTER ROLE ... SET statement_timeout`, which is a database configuration
+ * change and an owner decision. Check by reading back `current_setting(
+ * 'statement_timeout')` from a production request after deploying.
  */
 export function withPoolParams(
   rawUrl: string | undefined,
@@ -73,6 +135,15 @@ export function withPoolParams(
     }
     if (!u.searchParams.has('socket_timeout')) {
       u.searchParams.set('socket_timeout', env.PRISMA_SOCKET_TIMEOUT ?? '20')
+    }
+    // The only form Postgres actually adopts — see ROOT CAUSE #3 above. Same
+    // never-override contract as every param above: an operator who has set
+    // `options` themselves keeps it verbatim, and the two PRISMA_* overrides
+    // still choose the values.
+    if (!u.searchParams.has('options')) {
+      const statementMs = env.PRISMA_STATEMENT_TIMEOUT_MS ?? '15000'
+      const lockMs = env.PRISMA_LOCK_TIMEOUT_MS ?? '8000'
+      u.searchParams.set('options', `-c statement_timeout=${statementMs} -c lock_timeout=${lockMs}`)
     }
     return u.toString()
   } catch {
