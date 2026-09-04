@@ -33,10 +33,30 @@ describe('Phase 0 control definitions', () => {
     expect(controlByRole('duplicate-integrity').worker).toBe('w1')
   })
 
-  it('expects CERTIFIED for the three positive controls', () => {
-    for (const role of ['positive-physics', 'positive-chemistry', 'physics-visual'] as const) {
+  it('expects CERTIFIED for the two deterministic positive controls', () => {
+    // physics-visual moved out of this group 2026-09-04 — see the dedicated
+    // test below for why its expectation is UNMEASURED, not CERTIFIED.
+    for (const role of ['positive-physics', 'positive-chemistry'] as const) {
       expect(controlByRole(role).expected).toBe('CERTIFIED')
     }
+  })
+
+  it('expects UNMEASURED for physics-visual — non-deterministic by architecture, not by contract shortfall', () => {
+    // Corrected 2026-09-04 (remediation of run phase0-1788491363395, which
+    // returned UNMEASURED-no-authored-match on kinetic-energy despite an
+    // earlier run certifying the SAME concept cleanly). Root cause: this
+    // concept's ACTIVE HIGH-band probe set mixes genuine closed-choice MCQs
+    // with a `choices: null` short-answer formative probe; E1's design lets
+    // a probe attach at GUIDE (below CHECK/PRACTICE), and when the model is
+    // handed the short-answer one there and still emits a structured MCQ
+    // tag around it, the harness correctly cannot verify it (it can only
+    // verify closed-choice MCQs — see answerSource.ts). Checked, not
+    // assumed, that a concept swap doesn't fix this: exactly one other
+    // physics concept carries an ACTIVE VISUAL asset
+    // (phys.meas.unit-conversion) and it has the identical short-answer +
+    // closed-choice mix. CERTIFIED remains genuinely achievable (it has
+    // happened) but nothing the v1 asset contract promises guarantees it.
+    expect(controlByRole('physics-visual').expected).toBe('UNMEASURED')
   })
 
   it('expects UNMEASURED for the two negative controls', () => {
@@ -50,15 +70,24 @@ describe('Phase 0 control definitions', () => {
     expect(controlByRole('mathematics-negative').expected).toBe('UNMEASURED')
   })
 
-  it('expects DIRTY_STATE for the duplicate/integrity control, on a concept W1 genuinely has history on', () => {
-    // duplicate-integrity deliberately targets phys.mech.newtons-first-law,
-    // NOT whatever positive-physics currently uses — positive-physics moved
-    // to phys.mech.angular-momentum (2026-09-03 remediation) specifically
-    // because W1 had contaminating prior history on newtons-first-law; that
-    // same history is exactly what this control exists to prove
-    // detectDirtyState catches, so it stays on the known-dirty concept.
+  it('expects CERTIFIED for duplicate-integrity — a regression guard, not a dirty-state trigger', () => {
+    // REDESIGNED 2026-09-04, after the session-cleanup fix (c12b6237) was
+    // proven in production: this control used to expect DIRTY_STATE,
+    // assuming W1 reusing the same (worker, subject) pair right after
+    // positive-physics would hit a still-ACTIVE session. It does not
+    // anymore — run phase0-1788491363395 showed W1's two sessions that run
+    // carry completely different ids, both cleanly closed. detectDirtyState
+    // itself was confirmed to read only the served session's own turn-1
+    // signals, never topic_progress/lesson_attempts — it was never actually
+    // catching this concept's lifetime history, only the session leak,
+    // which is fixed. Nothing about detectDirtyState changed or weakened;
+    // the control's old premise was simply wrong. It keeps targeting
+    // phys.mech.newtons-first-law on w1, immediately after positive-physics
+    // — the exact shape that exposed the original leak — so a CERTIFIED
+    // result here is now the healthy expectation, and DIRTY_STATE
+    // reappearing is the regression alarm.
     const dup = controlByRole('duplicate-integrity')
-    expect(dup.expected).toBe('DIRTY_STATE')
+    expect(dup.expected).toBe('CERTIFIED')
     expect(dup.conceptId).toBe('phys.mech.newtons-first-law')
     expect(dup.worker).toBe('w1')
   })

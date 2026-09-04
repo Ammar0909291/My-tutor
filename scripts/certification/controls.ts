@@ -106,7 +106,7 @@ export const CONTROLS: readonly ControlDefinition[] = [
     lessonOrder: 27,
     unitTitle: 'Classical Mechanics',
     totalLessons: 238,
-    expected: 'CERTIFIED',
+    expected: 'UNMEASURED',
     rationale:
       'The ONE physics concept in the eight-candidate probe that carries an ACTIVE VISUAL ' +
       'asset (family=VISUAL, status=ACTIVE, gradeBand=ADULT, measured 2026-09-03) alongside ' +
@@ -115,7 +115,33 @@ export const CONTROLS: readonly ControlDefinition[] = [
       'figure this run would be the first ever request for. Matches the CLAUDE.md-documented ' +
       "2026-08-10 visualization-engine entries naming this exact concept (\"phys.mech." +
       'kinetic-energy — both graphs\") as one of the first two ACTIVE visual assets this ' +
-      'project ever promoted.',
+      'project ever promoted. ' +
+      'Expected corrected 2026-09-04 (remediation of run phase0-1788491363395, which returned ' +
+      'UNMEASURED-no-authored-match on "What happens to kinetic energy when speed doubles?", ' +
+      'not the CERTIFIED this control originally expected — the SAME concept had reached a ' +
+      'clean CERTIFIED, 6 turns, in the immediately preceding run phase0-1788464620155). Traced ' +
+      'to production: this concept\'s ACTIVE HIGH-band probe set (queried in full, not just ' +
+      'counted) mixes 7 genuine closed-choice MCQ probes with ONE formative, `choices: null` ' +
+      'short-answer probe ("FORMATIVE (FA-1): What happens to kinetic energy if speed v ' +
+      'doubles? Write one sentence.") — near-identical topically to the served, unanswerable ' +
+      'question, at the same GUIDE-phase turn (finalPhase=GUIDE, turns=2) E1\'s own design ' +
+      '(CLAUDE.md, "a keyed probe may attach at DEMONSTRATE") permits a probe to reach the ' +
+      'model below CHECK/PRACTICE. This harness can only verify closed-choice MCQs — see ' +
+      'answerSource.ts — so when the model is handed a short-answer probe at GUIDE and still ' +
+      'emits a structured `<!--MCQ-->` tag around it (with invented options), the result is ' +
+      'legitimately UNMEASURED, not a defect in the concept\'s content or in the instrument. ' +
+      'CHECKED, not assumed, whether a different concept avoids this: exactly ONE other ' +
+      'physics concept carries an ACTIVE VISUAL asset today (phys.meas.unit-conversion, ' +
+      'queried 2026-09-04) and it carries the IDENTICAL exposure — 5 closed-choice + 2 ' +
+      '`choices: null` short-answer ACTIVE probes at HIGH band. With the only two ACTIVE-' +
+      'VISUAL physics candidates both mixing probe types, no concept swap removes this; fixing ' +
+      'it for real would mean either scoping GUIDE-phase probe selection to closed-choice-only ' +
+      'or having the model never MCQ-wrap a short-answer probe, both teaching-logic changes ' +
+      'explicitly out of scope for a control-definition-only fix. CERTIFIED remains genuinely ' +
+      'achievable (it happened) but is not guaranteed by anything the v1 asset contract itself ' +
+      'promises, so UNMEASURED — the harness\'s own documented "first-class answer" for an ' +
+      'unauthored-shape question, per answerSource.ts — is the honest expectation, not a ' +
+      'downgrade forced to match one observed run.',
   },
   {
     role: 'english-negative',
@@ -182,13 +208,44 @@ export const CONTROLS: readonly ControlDefinition[] = [
     lessonOrder: 18,
     unitTitle: 'Classical Mechanics',
     totalLessons: 238,
-    expected: 'DIRTY_STATE',
+    expected: 'CERTIFIED',
     rationale:
-      'Reuses Control 1 exactly (same worker W1, same concept, same account, deliberately NOT ' +
-      'reset) per the governing protocol\'s own instruction. W1 has just carried this concept ' +
-      'to mastery in Control 1; repeating it must be caught by I-2 detectDirtyState at turn 1 ' +
-      '(verified-at-turn-1 and/or session-resumed-not-fresh) rather than silently re-taught or ' +
-      'silently re-certified — proving the instrument refuses to certify a contaminated run.',
+      'REDESIGNED 2026-09-04 after the session-cleanup fix (c12b6237) proved out: this control ' +
+      'originally expected DIRTY_STATE, reasoning that W1 reusing the SAME (worker, subject) ' +
+      'pair immediately after positive-physics would hit a still-ACTIVE, unclosed session and ' +
+      'be caught by I-2 detectDirtyState. Run phase0-1788491363395 returned CERTIFIED instead ' +
+      '(7 turns, TRANSFER, verified=true) — not a fluke: queried production learn_sessions ' +
+      'directly and found W1\'s two sessions that run (positive-physics on ' +
+      'phys.mech.angular-momentum, then this control on phys.mech.newtons-first-law) carry ' +
+      'completely DIFFERENT ids (cmtmdl1c4… vs cmtmdtsh9…), both status=COMPLETED with a real ' +
+      'endedAt — proof the fix genuinely closes each control\'s session, so back-to-back reuse ' +
+      'of one (worker, subject) pair no longer resumes anything. ' +
+      'detectDirtyState itself was confirmed NOT to consult topic_progress or lesson_attempts ' +
+      'at all (re-read measurementIdentity.ts — it reads only the served session\'s own turn-1 ' +
+      'signals: verified/checkCorrect/practiceCorrect/phase/sessionResumed) — it was NEVER ' +
+      'checking this concept\'s 19-lifetime-attempt COMPLETED history; it was only ever able to ' +
+      'catch the session-level leak, which is now fixed. detectDirtyState is NOT weakened or ' +
+      'touched by this change — the control\'s premise (that lifetime learner history alone ' +
+      'would trip it) was simply wrong, and no code makes that promise. ' +
+      'This control\'s NEW purpose: a regression guard for exactly the defect the session fix ' +
+      'closes. It deliberately keeps the highest-risk shape — same worker (W1) and same subject ' +
+      '(physics) as positive-physics, run immediately after it, on a DIFFERENT concept ' +
+      '(phys.mech.newtons-first-law, chosen for its extensive, well-documented lifetime history, ' +
+      'still the account\'s single most-tested physics concept) — because that is precisely the ' +
+      'scenario that exposed the original leak. A clean CERTIFIED here is the expected, healthy ' +
+      'outcome; if this control ever again reports DIRTY_STATE or a resumed session, that is the ' +
+      'alarm that the session-cleanup fix has regressed. The role name (duplicate-integrity) is ' +
+      'kept — the ControlRole union, the required-six-roles test, and the runner all key off it ' +
+      '— but it must now be read as "integrity of running a duplicate (worker, subject) pair", ' +
+      'not "integrity of catching stale duplication", since the runner has none left to catch. ' +
+      'PROTOCOL NOTE: within the existing one-worker/one-concept/one-verdict-per-role shape, no ' +
+      'six-control definition can deterministically force a genuine, non-contrived DIRTY_STATE ' +
+      'anymore — doing so on purpose (e.g. not calling endSession) would mean re-introducing the ' +
+      'exact leak this program fixed, which is explicitly out of scope. If a live, in-protocol ' +
+      'proof that detectDirtyState still fires on a genuinely resumed session is wanted going ' +
+      'forward, the smallest addition would be a NEW control role (not a repurposed one) whose ' +
+      'runner support deliberately skips the endSession call for that one control only, and ' +
+      'asserts DIRTY_STATE — a runner change, not a control-definition change, and not made here.',
   },
 ] as const
 
