@@ -143,7 +143,17 @@ describe('the exclusions are on the eligibility test, not assumed', () => {
     // an authored probe attached there. The two phases are asserted
     // separately now, because they no longer share one condition.
     expect(eligibility).toMatch(/\(phaseBeforeTurn === 'GUIDE' && evidenceMoveHoisted === 'ask'\)/)
-    expect(eligibility).toMatch(/\(phaseBeforeTurn === 'DEMONSTRATE' && strugglingOnThisConcept\)/)
+    // SUPERSEDED 2026-09-04 (R3). The struggling-learner scope is removed:
+    // physics Tier A batch 5 measured 15 of 19 UNMEASURED sessions sitting at
+    // DEMONSTRATE, move 'show', NOT struggling, already carrying a model-
+    // invented question graded against a key the model wrote — on concepts
+    // each holding 4-6 reviewed authored probes. The premise that a
+    // progressing learner's DEMONSTRATE turn is a quiet show turn was false.
+    // `mayAttachProbeBelowGuide` (pool - 1 >= 3) is now the SOLE guard on the
+    // early spend. Behaviour is pinned against the real modules in
+    // demonstrateAuthoredProbeSubstitution.test.ts.
+    expect(eligibility).toMatch(/\(phaseBeforeTurn === 'DEMONSTRATE'\)/)
+    expect(eligibility).not.toContain("phaseBeforeTurn === 'DEMONSTRATE' && strugglingOnThisConcept")
   })
 
   it('never fires at OBSERVE — narrowed from "never below GUIDE", with cause', () => {

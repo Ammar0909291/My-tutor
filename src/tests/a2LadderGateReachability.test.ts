@@ -71,11 +71,39 @@ describe('A2a — where a probe may be attached', () => {
     // turns at DEMONSTRATE. A learner who is never asked a gradeable question
     // cannot demonstrate recovery however much they learn.
     //
-    // DEMONSTRATE therefore opens only once the concept has produced a
-    // FAILURE. A progressing learner's show turn stays a show turn — they
+    // DEMONSTRATE therefore opened only once the concept had produced a
+    // FAILURE. A progressing learner's show turn stayed a show turn — they
     // reach verified mastery without E1 today, measured across eight live
     // runs on four concepts — so the principle above still governs every
     // learner it was written for.
+    //
+    // ── SUPERSEDED 2026-09-04 (R3): THE FAILURE SCOPE IS GONE ───────────────
+    //
+    // The PRINCIPLE is untouched and this test still enforces it: a teach turn
+    // must not have a question STAPLED onto it. What changed is the evidence
+    // about whether a progressing learner's DEMONSTRATE turn was ever bare.
+    //
+    // Physics Tier A batch 5 (2026-09-04, 25 concepts re-run from the 63 that
+    // had returned UNMEASURED, production, 4 workers) measured it directly:
+    //
+    //   19 of 25 UNMEASURED, all `no-authored-match`
+    //   18 of 19 persisted a pendingMcq with NO assetId — the MODEL's own
+    //      invented question had become the graded item
+    //   15 of those sat at DEMONSTRATE, move 'show', NOT struggling
+    //   every one of the 19 concepts holds 4-6 ACTIVE gradeable authored
+    //      probes at the served band, and 19/19 clear the surplus rule
+    //
+    // So the progressing learner's DEMONSTRATE turn already carried a question
+    // — an ungradeable one, graded the following turn against a key the model
+    // itself wrote. Attaching an authored probe there REPLACES that question;
+    // it does not staple a new one onto a silent turn. Where the gate declines,
+    // nothing is fabricated and the model's turn is untouched — which is the
+    // property `demonstrateAuthoredProbeSubstitution.test.ts` pins against the
+    // real modules.
+    //
+    // The early-spend protection is unchanged and is now the SOLE guard:
+    // `mayAttachProbeBelowGuide` requires poolSize - 1 >= CREDITS_REQUIRED_FOR_
+    // MASTERY, so a bare-contract concept (pool 3) still gets no early probe.
     //
     // WHY DEMONSTRATE OPENED: criterion 4 measured 25% in the 2026-08-31
     // physics re-measurement (114 of 456 questions carried an answer key), and
@@ -88,8 +116,10 @@ describe('A2a — where a probe may be attached', () => {
       /\(phaseBeforeTurn === 'GUIDE' && evidenceMoveHoisted === 'ask'\)/,
     )
     expect(ROUTE).toMatch(
-      /\(phaseBeforeTurn === 'DEMONSTRATE' && strugglingOnThisConcept\)/,
+      /\(phaseBeforeTurn === 'DEMONSTRATE'\)/,
     )
+    // The failure scope is removed, not renamed.
+    expect(ROUTE).not.toContain("phaseBeforeTurn === 'DEMONSTRATE' && strugglingOnThisConcept")
     expect(ROUTE).toContain('const phaseAllowsProbe =')
     // The SHARED predicate is deliberately untouched — pinned by the case
     // above, which still requires isProbeAttachablePhase('DEMONSTRATE') false.

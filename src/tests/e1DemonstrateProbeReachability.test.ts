@@ -232,14 +232,33 @@ describe('E1 — the move is never "ask" at DEMONSTRATE, which is why the old co
     expect(askless).toEqual(['DEMONSTRATE'])
   })
 
-  it('GUIDE keeps the ask condition; DEMONSTRATE is now scoped to failure', () => {
-    // Was: "the route still spells the condition that makes it moot". It no
-    // longer does — see the header. GUIDE's condition is unchanged and still
-    // works there; DEMONSTRATE's is now the failure scope.
+  it('GUIDE keeps the ask condition; DEMONSTRATE is now open, guarded by surplus', () => {
+    // HISTORY, kept because each revision was forced by a measurement:
+    //   v1 "the route still spells the condition that makes it moot" — the
+    //      'ask'-only condition, which at DEMONSTRATE is a prohibition (the
+    //      decider never returns 'ask' there; proven in the case above).
+    //   v2 "DEMONSTRATE is now scoped to failure" — E1 replaced it with
+    //      `strugglingOnThisConcept`, on the premise that a PROGRESSING
+    //      learner's DEMONSTRATE turn is a quiet show turn needing no probe.
+    //   v3 (this) that premise was falsified by physics Tier A batch 5:
+    //      15 of 19 UNMEASURED sessions sat at DEMONSTRATE, move 'show',
+    //      NOT struggling, already carrying a model-invented question that was
+    //      graded next turn against a key the model wrote — on concepts each
+    //      holding 4-6 reviewed authored probes. The turn was never quiet.
+    //
+    // GUIDE's condition is untouched. DEMONSTRATE now opens unconditionally at
+    // this gate, and `mayAttachProbeBelowGuide` (pool - 1 >= 3) is the SOLE
+    // guard on actually spending an early probe — see the behavioural cases in
+    // demonstrateAuthoredProbeSubstitution.test.ts, which test the real
+    // modules rather than this file's source text.
     const { readFileSync } = require('node:fs')
     const { join } = require('node:path')
     const route = readFileSync(join(process.cwd(), 'src/app/api/learn/chat/route.ts'), 'utf8')
     expect(route).toContain("(phaseBeforeTurn === 'GUIDE' && evidenceMoveHoisted === 'ask')")
-    expect(route).toContain("(phaseBeforeTurn === 'DEMONSTRATE' && strugglingOnThisConcept)")
+    expect(route).toContain("(phaseBeforeTurn === 'DEMONSTRATE')")
+    // The failure scope is genuinely gone, not merely reworded.
+    expect(route).not.toContain("phaseBeforeTurn === 'DEMONSTRATE' && strugglingOnThisConcept")
+    // OBSERVE is still not a disjunct at all.
+    expect(route).not.toContain("phaseBeforeTurn === 'OBSERVE'")
   })
 })

@@ -179,11 +179,21 @@ describe('C. GUIDE and the mastery gates are unchanged', () => {
     }
   })
 
-  it('the route still spells exactly the condition modelled here', () => {
-    expect(ROUTE).toContain('const strugglingOnThisConcept =')
-    expect(ROUTE).toContain("(conversationStateHoisted?.consecutiveFailures ?? 0) > 0")
-    expect(ROUTE).toContain("(conversationStateHoisted?.observeFailures ?? 0) > 0")
-    expect(ROUTE).toContain("(phaseBeforeTurn === 'DEMONSTRATE' && strugglingOnThisConcept)")
+  it('the route NO LONGER spells the condition modelled here — superseded', () => {
+    // SUPERSEDED 2026-09-04 (R3). The struggling-learner scope is removed:
+    // physics Tier A batch 5 measured 15 of 19 UNMEASURED sessions sitting at
+    // DEMONSTRATE, move 'show', NOT struggling, already carrying a model-
+    // invented question graded against a key the model wrote — on concepts
+    // each holding 4-6 reviewed authored probes. The premise that a
+    // progressing learner's DEMONSTRATE turn is a quiet show turn was false.
+    // `mayAttachProbeBelowGuide` (pool - 1 >= 3) is now the SOLE guard on the
+    // early spend. Behaviour is pinned against the real modules in
+    // demonstrateAuthoredProbeSubstitution.test.ts.
+    // The model above is retained as the historical record of what E1 shipped
+    // and why; it is no longer the route's condition.
+    expect(ROUTE).not.toContain('const strugglingOnThisConcept =')
+    expect(ROUTE).not.toContain("(phaseBeforeTurn === 'DEMONSTRATE' && strugglingOnThisConcept)")
+    expect(ROUTE).toContain("(phaseBeforeTurn === 'DEMONSTRATE')")
   })
 
   it('the SURPLUS rule is still what keeps mastery reachable', () => {

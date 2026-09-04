@@ -124,7 +124,17 @@ describe('the route wires E1 exactly as described', () => {
     // produced a failure — the one who needs to be assessable to show
     // recovery — can have an authored probe attached there.
     expect(route).toMatch(/\(phaseBeforeTurn === 'GUIDE' && evidenceMoveHoisted === 'ask'\)/)
-    expect(route).toMatch(/\(phaseBeforeTurn === 'DEMONSTRATE' && strugglingOnThisConcept\)/)
+    // SUPERSEDED 2026-09-04 (R3). The struggling-learner scope is removed:
+    // physics Tier A batch 5 measured 15 of 19 UNMEASURED sessions sitting at
+    // DEMONSTRATE, move 'show', NOT struggling, already carrying a model-
+    // invented question graded against a key the model wrote — on concepts
+    // each holding 4-6 reviewed authored probes. The premise that a
+    // progressing learner's DEMONSTRATE turn is a quiet show turn was false.
+    // `mayAttachProbeBelowGuide` (pool - 1 >= 3) is now the SOLE guard on the
+    // early spend. Behaviour is pinned against the real modules in
+    // demonstrateAuthoredProbeSubstitution.test.ts.
+    expect(route).toMatch(/\(phaseBeforeTurn === 'DEMONSTRATE'\)/)
+    expect(route).not.toContain("phaseBeforeTurn === 'DEMONSTRATE' && strugglingOnThisConcept")
     // The surplus rule is still what keeps mastery reachable.
     expect(route).toMatch(/mayAttachProbeBelowGuide\(phaseBeforeTurn, probe\.poolSize\)/)
   })

@@ -4082,33 +4082,56 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         //     force on a 5.0 kg crate...?". The learner was answering into a
         //     void; now the same turn carries an authored, gradeable item.
         //
-        // ── AND WHY IT IS SCOPED TO A STRUGGLING LEARNER ────────────────────
+        // ── WHY THE STRUGGLING-LEARNER SCOPE IS GONE (R3, 2026-09-04) ───────
         //
-        // a2LadderGateReachability.test.ts states a real principle: "a teach
-        // turn must not have a question stapled onto it." Dropping the
-        // condition outright would override that for everyone, and it is a
-        // teaching rule, not an implementation detail.
+        // SUPERSEDED, NOT FORGOTTEN. The paragraph this replaces argued that
+        // DEMONSTRATE should open "only once this concept has actually produced
+        // a failure", because a2LadderGateReachability.test.ts states a real
+        // teaching principle — "a teach turn must not have a question stapled
+        // onto it" — and because a progressing learner "reaches verified mastery
+        // today without E1 (eight live runs, four concepts)". The principle
+        // still stands. The empirical premise did not survive measurement.
         //
-        // The harm was measured on ONE path — the confidently-wrong learner.
-        // A learner who is answering correctly reaches verified mastery today
-        // without E1 (eight live runs, four concepts), so for them the 'show'
-        // turn should stay a show turn and nothing here should change.
+        // MEASURED, physics Tier A batch 5 (2026-09-04, 25 concepts re-run from
+        // the 63 that had returned UNMEASURED, production, 4 workers):
         //
-        // So DEMONSTRATE opens only once this concept has actually produced a
-        // failure. That is exactly the learner who needs to be assessable —
-        // they cannot demonstrate recovery without a gradeable question — and
-        // it is exactly the learner whose DEMONSTRATE turns were measured
-        // already carrying an ungradeable one. A progressing learner's
-        // DEMONSTRATE turn is untouched.
+        //   19 of 25 ended UNMEASURED, every one `no-authored-match`
+        //   18 of 19 persisted a pendingMcq carrying NO assetId — i.e. the
+        //      MODEL's own invented question became the graded item
+        //   15 of those 19 were sitting at DEMONSTRATE, move 'show', with
+        //      `strugglingOnThisConcept` FALSE — the progressing learner
+        //   all 19 concepts hold 4-6 ACTIVE gradeable authored probes at the
+        //      served band, and 19/19 satisfy the surplus rule below
         //
-        // GUIDE keeps its 'ask' condition exactly as before — it works there.
-        const strugglingOnThisConcept =
-          (conversationStateHoisted?.consecutiveFailures ?? 0) > 0
-          || (conversationStateHoisted?.observeFailures ?? 0) > 0
+        // So the progressing learner's DEMONSTRATE turn was NOT a quiet show
+        // turn. It already carried a question — an ungradeable one the model
+        // wrote, graded next turn against a key the model also wrote
+        // (`unauthoredKeyGrades`), on a concept holding reviewed alternatives.
+        // That is the harm inventedProbeGuard.ts names in its own header and
+        // could not prevent below GUIDE: "it cannot stop the learner being told
+        // they are wrong when they are right."
+        //
+        // This is therefore still a SUBSTITUTION, exactly as E1 argued — the
+        // same turn, the same question slot, a server-keyed item instead of an
+        // invented one. It does not staple a question onto a turn that was not
+        // going to ask one: when the gate declines, nothing is fabricated, and
+        // the model keeps its turn unchanged.
+        //
+        // WHAT STILL PROTECTS MASTERY, unchanged: `mayAttachProbeBelowGuide`
+        // at the serving site below, which spends an early probe only while
+        // poolSize - 1 >= CREDITS_REQUIRED_FOR_MASTERY. A bare-contract concept
+        // (pool 3) is untouched and mastery stays reachable. That rule is now
+        // the SOLE guard on early attachment, which is what masteryReachability
+        // .ts's own header says the design always delegated to it.
+        //
+        // OBSERVE IS NOT TOUCHED, and not for want of probes: it is a
+        // DIAGNOSTIC phase (observeDiagnosticConcludes.test.ts), and an earlier
+        // attempt to change its ladder behaviour broke seven behavioural tests
+        // and was reverted. GUIDE keeps its 'ask' condition exactly as before.
         const phaseAllowsProbe =
           isMasteryGatePhase(phaseBeforeTurn) ||
           (phaseBeforeTurn === 'GUIDE' && evidenceMoveHoisted === 'ask') ||
-          (phaseBeforeTurn === 'DEMONSTRATE' && strugglingOnThisConcept)
+          (phaseBeforeTurn === 'DEMONSTRATE')
         phaseAllowsProbeHoisted = phaseAllowsProbe
         // PHASE 3. Three of the terms this conjunction used to spell out by hand
         // — recovery, closing, and the learner-request term it was MISSING —
