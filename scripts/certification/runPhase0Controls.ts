@@ -39,6 +39,7 @@ import {
   verifySessionIdentity,
   createSession,
   certifyConcept,
+  endSession,
   type ConceptTarget,
 } from '../math/certify'
 import { buildAnswerIndex } from './answerSource'
@@ -107,7 +108,7 @@ function classify(
   return { verdict: classifyVerdict(parts), parts }
 }
 
-async function runOne(
+export async function runOne(
   control: ControlDefinition, worker: WorkerAccount, runId: string, startedAt: string,
 ): Promise<ControlOutcome> {
   const target: ConceptTarget = {
@@ -127,22 +128,34 @@ async function runOne(
     }
     const answerIndex = await buildAnswerIndex()
     const session = await createSession(cookie, control.subjectSlug, BASE_URL)
-    const result = await certifyConcept(target, cookie, session.id, answerIndex, control.totalLessons, session.resumed)
-    const { verdict } = classify(control, result, null)
-    const record: ConceptRecord = {
-      protocol: PROTOCOL_VERSION, harnessVersion: HARNESS_VERSION, repoSha: repoSha(),
-      answerSourceFingerprint: answerIndex.fingerprint, manifestHash: manifestHashOnDisk(),
-      workerId: worker.workerId, accountLabel: worker.accountLabel, runId, startedAt,
-      subject: control.subjectSlug, conceptId: control.conceptId, language: 'en', gradeBand: null,
-      verdict, failed: result.failed, turns: result.turns, finalPhase: result.finalPhase,
-      checkCorrect: result.checkCorrect, practiceCorrect: result.practiceCorrect,
-      verified: result.verified, lessonClosed: verdict === 'CERTIFIED',
-      providersSeen: [], degradedTurns: result.failed.includes('INFRASTRUCTURE-degraded') ? 1 : 0,
-      unmeasuredReason: result.failed.find((x) => x.startsWith('UNMEASURED-')) ?? null,
-      notes: [`control=${control.role}`, ...result.notes],
-      finishedAt: new Date().toISOString(),
+    // Phase 0 remediation (2026-09-03): nothing ever closed this session, so
+    // it stayed ACTIVE and was resumed by the NEXT run's /api/sessions call
+    // for the same (worker, subject) pair — measured directly as the cause of
+    // a run where 5 of 6 controls returned DIRTY_STATE. The `finally` below
+    // guarantees cleanup whether certifyConcept resolves, resolves to a
+    // failed verdict, or throws — see endSession's own header. This never
+    // widens what a control measures: certifyConcept's result is read and
+    // the record built BEFORE the session is closed, exactly as before.
+    try {
+      const result = await certifyConcept(target, cookie, session.id, answerIndex, control.totalLessons, session.resumed)
+      const { verdict } = classify(control, result, null)
+      const record: ConceptRecord = {
+        protocol: PROTOCOL_VERSION, harnessVersion: HARNESS_VERSION, repoSha: repoSha(),
+        answerSourceFingerprint: answerIndex.fingerprint, manifestHash: manifestHashOnDisk(),
+        workerId: worker.workerId, accountLabel: worker.accountLabel, runId, startedAt,
+        subject: control.subjectSlug, conceptId: control.conceptId, language: 'en', gradeBand: null,
+        verdict, failed: result.failed, turns: result.turns, finalPhase: result.finalPhase,
+        checkCorrect: result.checkCorrect, practiceCorrect: result.practiceCorrect,
+        verified: result.verified, lessonClosed: verdict === 'CERTIFIED',
+        providersSeen: [], degradedTurns: result.failed.includes('INFRASTRUCTURE-degraded') ? 1 : 0,
+        unmeasuredReason: result.failed.find((x) => x.startsWith('UNMEASURED-')) ?? null,
+        notes: [`control=${control.role}`, ...result.notes],
+        finishedAt: new Date().toISOString(),
+      }
+      return { control, verdict, record, error: null }
+    } finally {
+      await endSession(cookie, session.id, BASE_URL)
     }
-    return { control, verdict, record, error: null }
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err)
     return { control, verdict: 'FAILED_INSTRUMENT', record: null, error: message }

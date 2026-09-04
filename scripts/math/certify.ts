@@ -255,6 +255,43 @@ export async function createSession(
   return { id, resumed: body.resumed === true }
 }
 
+/**
+ * End a session created by `createSession`, unconditionally.
+ *
+ * ROOT CAUSE (Phase 0 remediation, 2026-09-03): nothing ever called this, so
+ * every session `createSession` opened stayed ACTIVE forever. `/api/sessions`
+ * resumes any ACTIVE session for the (user, subject) pair within 24h — a
+ * behaviour this file's own `createSession` comment above already documents
+ * — so the NEXT run against the same account and subject, on ANY concept,
+ * silently inherited the previous run's ladder and was caught by
+ * `detectDirtyState`. Measured directly: two consecutive Phase 0 runs against
+ * the same four accounts produced DIRTY_STATE on 5 of 6 controls, all with
+ * identical `session-resumed-not-fresh` evidence, traced in production
+ * `learn_sessions` to ACTIVE rows the harness itself had left open 40 minutes
+ * (and, for one account, 11 hours) earlier.
+ *
+ * This calls the SAME endpoint (`POST /api/sessions/end`) a real learner's
+ * client calls on exit — production session-ending behaviour is reused
+ * exactly as-is, not reimplemented. `scripts/qa/strugglingLearnerHarness.ts`
+ * already established this exact pattern (a `finally` block calling this
+ * endpoint with `.catch(() => {})`) to fix an identical leak between
+ * concepts within one run; this generalizes it to the shared primitive both
+ * that harness's sibling call sites and this file use, so cleanup cannot be
+ * forgotten at a THIRD call site later.
+ *
+ * Never throws: a cleanup failure must not mask or replace the actual
+ * certification result the caller is about to return.
+ */
+export async function endSession(
+  cookie: string, sessionId: string, baseUrl: string = BASE,
+): Promise<void> {
+  await fetch(`${baseUrl}/api/sessions/end`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', cookie },
+    body: JSON.stringify({ sessionId }),
+  }).catch(() => {})
+}
+
 /** The ladder phases a genuinely fresh learner may start a concept in. */
 const ENTRY_PHASES = ['OBSERVE', 'DEMONSTRATE'] as const
 
@@ -680,11 +717,19 @@ async function main() {
   const results: CertificationResult[] = []
   for (const t of targets) {
     process.stderr.write(`certifying ${t.conceptId} … `)
+    let session: SessionHandle | null = null
     try {
-      const session = await createSession(cookie, subjectSlug)
-      const r = await certifyConcept(t, cookie, session.id, answerIndex, totalLessons, session.resumed)
-      results.push(r)
-      process.stderr.write(`${r.pass ? 'PASS' : `FAIL [${r.failed.join(', ')}]`} (${r.turns} turns)\n`)
+      session = await createSession(cookie, subjectSlug)
+      try {
+        const r = await certifyConcept(t, cookie, session.id, answerIndex, totalLessons, session.resumed)
+        results.push(r)
+        process.stderr.write(`${r.pass ? 'PASS' : `FAIL [${r.failed.join(', ')}]`} (${r.turns} turns)\n`)
+      } finally {
+        // ALWAYS, including when certifyConcept threw — see endSession's own
+        // header for why an unclosed session contaminates the NEXT concept's
+        // measurement, in this exact loop, on the very next iteration.
+        await endSession(cookie, session.id, BASE)
+      }
     } catch (err) {
       results.push({
         conceptId: t.conceptId, pass: false, failed: ['HARNESS-ERROR'], turns: 0,
