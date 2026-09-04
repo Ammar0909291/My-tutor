@@ -34,6 +34,7 @@ After Batches 1-4:
 - 1 FAILED_INSTRUMENT.
 - Batch 5 EXECUTED 2026-09-04 as a 25-concept diagnostic re-run of the UNMEASURED pool (run `physicsBatch5-4w-1788550977148`): 19 UNMEASURED / 6 CERTIFIED / 0 FAILED_INSTRUMENT / 1 FAILED_INFRASTRUCTURE retry. Infrastructure clean: 0 P2024, 0 57014, 0 55P03, 0 ShareLock, 0 HTTP 5xx; 26 sessions (25+retry), 0 ACTIVE after; replay +140,552 rows ≈ 63.6 MB (batch 4: 64.9 MB). VERIFIED.
 - Physics Tier A totals after Batch 5: 175/238 attempted · 92 CERTIFIED · 82 UNMEASURED · 1 FAILED_INSTRUMENT. VERIFIED.
+- Physics Tier A totals after P-1 (post-R3): **175/238 attempted · 114 CERTIFIED · 60 UNMEASURED · 1 FAILED_INSTRUMENT.** P-1 re-ran 25 already-attempted concepts, so `attempted` is unchanged; 22 moved UNMEASURED -> CERTIFIED. VERIFIED.
 - The Batch-5 pre-registered prediction ("UNMEASURED at or near 100%") was FALSIFIED at 76%. Investigation showed this was a PREDICTION-SHAPE error, not an R3 error: R3 describes a window that PERMITS an invented MCQ, not one that guarantees it. Pure-noise H0 (base rate 0.423) rejected, P(>=19 of 25) = 6.5e-4; deterministic H0 (1.00) rejected by any certification at all. Cohort propensity 0.76, 95% CI [0.59, 0.93]. VERIFIED.
 
 Prior batch results:
@@ -217,23 +218,25 @@ Remaining: the single pre-registered production 25-concept cohort (P-1).
 
 ## 9. Exact Next Step
 
-**R3 is implemented and validated (commit `77eb7df`) — do NOT redo it.**
+**R3 is implemented (`77eb7df`), deployed (`b2d1466`) and PRODUCTION-VERIFIED by
+P-1 (§9c). Do not redo any of it.**
 
-The exact next step is **P-1**: with R3 deployed to production, run exactly ONE
-25-concept Physics cohort drawn from the 38 concepts of the original 63-concept
-UNMEASURED pool that Batch 5 did NOT touch (a clean sample, no Batch-5
-contamination; the 6 that certified in Batch 5 now carry COMPLETED lesson
-attempts and would confound a re-run).
+The next step is an owner decision between:
 
-Pre-registered prediction, to be recorded BEFORE execution and judged as a RATE
-WITH AN INTERVAL, never as "near 100%" (the error that falsified Batch 5):
-- UNMEASURED falls substantially from the 76% [0.59, 0.93] pre-fix rate toward
-  the OBSERVE-only residue (~16%, i.e. 4 of 25)
-- FAILED_INSTRUMENT = 0
-- P2024 = 0
-- no concept loses ladder reachability
+- **P-2 — forward Physics coverage.** 63 of 238 concepts remain unattempted.
+  Infrastructure is verified under 4-worker load (R1/R2) and the teaching-flow
+  defect that produced most UNMEASURED verdicts is closed. This is the natural
+  continuation.
+- **P-1b — re-run the remaining 35 previously-UNMEASURED concepts** (the 60 still
+  UNMEASURED minus the 25 just re-tested) to convert them under R3. Expect ~12%
+  UNMEASURED, i.e. roughly 4 of 35 remaining as the OBSERVE residue.
+- **P-5 — the OBSERVE residue.** Now the dominant remaining cause. OBSERVE is
+  barred deliberately (a diagnostic phase; an earlier attempt broke seven
+  behavioural tests and was reverted). Changing it is a teaching-policy decision,
+  not a bug fix, and needs the same read-only diagnosis R3 received.
 
-Stop after that single cohort and report measured vs inferred vs unknown.
+Recommendation: P-1b then P-2, leaving P-5 until the residue is the only thing
+left. Do not start Chemistry (P-3) until Physics closes.
 
 ## 9b. P-1 PRE-REGISTRATION (recorded BEFORE execution, 2026-09-04 ~20:55Z)
 
@@ -281,6 +284,83 @@ the predicted shape. Only an outcome at or above 76% falsifies R3's mechanism.
 
 ---
 
+## 9c. P-1 RESULT — R3 CONFIRMED (2026-09-04, run `physicsBatch6-4w-1788555199176`)
+
+**All five pre-registered predictions CONFIRMED. No deviation from the protocol.**
+
+Deployment under test: production SHA `b2d1466`, deployment
+`dpl_7KiN5TgViWSpKXui6z7G1WPzk4cE`, READY, aliased to the learner-facing domain.
+Run window 20:53:19Z -> 21:06:32Z (13m 13s). Runner SHA recorded in the artifact:
+`6dc9476`.
+
+### Headline (VERIFIED)
+| | Batch 5 (pre-R3) | P-1 (post-R3) |
+|---|---|---|
+| UNMEASURED | 19/25 = **76%** | 3/25 = **12%** |
+| CERTIFIED | 6/25 = 24% | 22/25 = **88%** |
+| FAILED_INSTRUMENT | 0 | 0 |
+| retries | 1 | 0 |
+
+Wilson 95% CI for P-1: **[0.042, 0.300]** — does not overlap the pre-fix 0.76
+[0.59, 0.93]. P(<= 3 of 25 | p = 0.76) = **2.4e-11**. Two-proportion z = 4.56,
+p < 0.001. Prediction 1 CONFIRMED by its own pre-registered falsification rule.
+
+### The mechanism check that matters most (VERIFIED)
+Phase at the last recorded decision, from production spine `DecisionRecorded`
+joined to `contextSnapshot.pendingMcq` — the same query shape used for Batch 5:
+
+| | Batch 5 | P-1 |
+|---|---|---|
+| UNMEASURED at DEMONSTRATE | **15** | **0** |
+| UNMEASURED at OBSERVE | 4 | **3** |
+| CERTIFIED at PRACTICE, pendingMcq authored | 6/6 | 21/22 |
+
+R3 closed the DEMONSTRATE window completely — 15 -> 0. The 3 remaining are all
+OBSERVE/ask with an invented pendingMcq: precisely the residue R3 deliberately did
+not touch, and within the predicted ~16% (P(<= 3 of 25 | p = 0.16) = 0.42).
+
+### Other predictions
+- **FAILED_INSTRUMENT 0** — CONFIRMED. Also 0 retries, 0 errors.
+- **P2024 0** — CONFIRMED. Also 0 × 57014, 55P03, ShareLock, connection-pool,
+  42P05, 26000, FATAL, slow-query duration lines; 0 HTTP 5xx (241×200, 25×201,
+  25×302).
+- **No concept loses reachability** — CONFIRMED. 22/22 CERTIFIED are uniform
+  (TRANSFER, check 1, practice 2, verified, lessonClosed), 20 in 6 turns and 2 in
+  7. `lesson_attempts`: 22 COMPLETED all carrying `conceptsMastered`, 3
+  IN_PROGRESS none claiming mastery. Spending a probe early did not starve any
+  concept.
+- **Session cleanup exact** — CONFIRMED. 25 sessions created for 25 concepts +
+  0 retries; **0 ACTIVE** afterwards on all four workers.
+
+### Other observations (VERIFIED)
+- Replay egress +297 calls / +142,701 rows ≈ 64.6 MB (Batch 5: 63.6 MB). No
+  regression; the per-new-session hydration model is unchanged.
+- degradedTurns 0/25. answerSourceFingerprint `probes:2750:h5e86a3a9`, identical
+  to every prior batch — same instrument.
+- Health before and after: 3/3 and 3/3 HTTP 200, `db:true`, 30s/15s.
+- Worker split of the 3 UNMEASURED: all on w1 (3 of its 4 concepts); w2/w3/w4
+  were 21/21 CERTIFIED. **UNKNOWN whether this is a w1 property or small-n
+  chance** — 3 events is far too few to separate them, and all three are the
+  OBSERVE residue, which is concept/model-driven rather than account-driven.
+  Do not act on this without more data.
+- One CERTIFIED session ended with an invented pendingMcq. Harmless: mastery was
+  already earned on authored probes (check 1 / practice 2 / verified), and the
+  trailing item was never graded. Noted, not a defect.
+
+### Deviations from the task spec
+None. Batch size 25, existing 4-worker runner and protocol, no change to replay
+design, worker architecture, mastery definitions, EB/KG/content, or unrelated
+code. One new thin dispatcher (`runPhysicsP1_4Worker.ts`) was generated from the
+Batch-5 one by substitution only; it is untracked and uncommitted, like its
+siblings.
+
+### Status
+**R3 VERIFIED IN PRODUCTION.** The remaining UNMEASURED population is now
+dominated by the OBSERVE residue, which is a separate, deliberately-deferred
+decision (P-5).
+
+---
+
 ## 10. Handover History
 
 | Date | Session | Action | Result |
@@ -290,7 +370,7 @@ the predicted shape. Only an outcome at or above 76% falsifies R3's mechanism.
 | 2026-09-03 | Physics certification | Real-account audit | NO-GO due to refraction/X-ray and photoelectric/max-KE excursion failures; resolver fix followed. |
 | 2026-09-04 | Physics certification | Batch-5 executed + R3 diagnosis | 19/25 UNMEASURED, 6 CERTIFIED; infra clean; pre-registered prediction falsified at 76% (prediction-shape error, not an R3 error); smallest fix identified. |
 | 2026-09-04 | R3 implementation (T-005) | Implemented + validated | Commit `77eb7df`; 554 files / 11,877 passed; tsc + build clean; negative control passes. NOT deployed at time of commit. |
-| 2026-09-04 | R3 deployment + P-1 | Push to `main`, production deploy, single 25-concept cohort | In progress — see §9. |
+| 2026-09-04 | R3 deployment + P-1 | Push to `main` (`b2d1466`), production deploy, single 25-concept cohort | COMPLETE. UNMEASURED 76% -> 12%; DEMONSTRATE residue 15 -> 0; all five predictions confirmed; infra clean. See §9c. |
 
 ## 11. Do Not Rediscover
 
