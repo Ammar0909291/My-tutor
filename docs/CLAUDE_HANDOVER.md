@@ -235,6 +235,52 @@ WITH AN INTERVAL, never as "near 100%" (the error that falsified Batch 5):
 
 Stop after that single cohort and report measured vs inferred vs unknown.
 
+## 9b. P-1 PRE-REGISTRATION (recorded BEFORE execution, 2026-09-04 ~20:55Z)
+
+Recorded before the run so it cannot be adjusted after seeing results — the
+discipline whose absence falsified Batch 5.
+
+**Deployment under test.** Production SHA `b2d1466` (merge of R3 `77eb7df` +
+handover `e8efa5d`), deployment `dpl_7KiN5TgViWSpKXui6z7G1WPzk4cE`, READY,
+aliased to `my-tutor-flame.vercel.app`. Health before the run: 3/3 HTTP 200,
+`db:true`, `statementTimeout "30s"`, `lockTimeout "15s"`. 0 ACTIVE sessions on
+all four workers.
+
+**Cohort (25, deterministic).** The original 63-concept UNMEASURED pool minus the
+25 Batch 5 touched = 38 remaining; sorted by manifest lessonOrder; first 25 taken.
+Chosen over re-running Batch 5's own 25 because 6 of those now carry COMPLETED
+lesson attempts, which would put them on the re-teach path and confound the
+comparison. Domains: phys.mech 16 · phys.therm 4 · phys.wave 3 · phys.meas 2.
+
+  significant-figures, vector-products, displacement, force, newtons-third-law,
+  tension, kinetic-energy, work-energy-theorem, momentum, collisions-elastic,
+  torque, angular-momentum, universal-gravitation, escape-velocity,
+  stress-strain, bernoulli, cyclic-coordinates-conservation-laws,
+  poisson-brackets, zeroth-law, internal-energy, heat-engines, refrigerators,
+  damped-oscillations, wave-speed, doppler-effect
+
+**Baselines.** Every one of the 25 returned UNMEASURED on its first attempt
+(batches 1-4), so the naive per-concept baseline is 100%. The measured pre-fix
+re-run rate on a comparable cohort is Batch 5's **76%, 95% CI [0.59, 0.93]**.
+
+**Predictions.**
+1. UNMEASURED falls substantially below the 76% pre-fix rate, toward the
+   OBSERVE-only residue. Batch 5's phase split (15 DEMONSTRATE : 4 OBSERVE of 19)
+   implies ~4/25 = **16%** if R3 closes every DEMONSTRATE case.
+   FALSIFIED IF the observed rate's 95% CI overlaps 0.76, or exceeds it.
+2. FAILED_INSTRUMENT = 0.
+3. P2024 = 0 (also 57014, 55P03, ShareLock, HTTP 5xx = 0).
+4. No concept loses ladder reachability — no CERTIFIED concept regresses and no
+   session ends unable to reach CHECK/PRACTICE for want of a probe.
+5. Session cleanup exact: sessions created == concepts attempted + retries, and
+   0 ACTIVE afterwards.
+
+**Interpretation rule, fixed in advance.** A result between ~16% and ~76% is a
+PARTIAL success, not a failure — DEMONSTRATE closing while OBSERVE persists is
+the predicted shape. Only an outcome at or above 76% falsifies R3's mechanism.
+
+---
+
 ## 10. Handover History
 
 | Date | Session | Action | Result |
