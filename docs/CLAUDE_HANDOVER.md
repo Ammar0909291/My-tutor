@@ -361,6 +361,77 @@ decision (P-5).
 
 ---
 
+## 9d. P-1b PRE-REGISTRATION (recorded BEFORE execution, 2026-09-04 ~21:2xZ)
+
+**Objective.** Re-run under R3 every Physics concept whose LATEST verdict is
+UNMEASURED, to convert what R3 can convert and isolate what it cannot.
+
+**State verified from artifacts, not assumed.** Reading all seven artifact files
+in chronological order and taking the LATEST verdict per concept:
+149 distinct concepts attempted · **114 CERTIFIED · 35 UNMEASURED**. The 35 are
+this cohort. HEAD `addfe07` == origin/main; production
+`dpl_7qT6Df2k1Y9Lx3tBURnpzvQJAnkc` SHA `addfe07` READY (contains R3 `77eb7df`).
+
+**Cohort (35, all still UNMEASURED), by lessonOrder.** phys.meas 4 · phys.mech 13
+· phys.therm 3 · phys.wave 2 · phys.opt 1 · phys.em 12.
+
+  dimensions, significant-figures, vector-products, unit-conversion, force,
+  newtons-second-law, free-body-diagram, work, potential-energy, power,
+  collisions-inelastic, rotational-dynamics, gravitational-potential,
+  hookes-law, viscosity, hamiltons-equations, canonical-transformations,
+  entropy, carnot-cycle, third-law, forced-oscillations, superposition,
+  brewsters-law, electric-dipole, gauss-law, energy-capacitor, ohms-law,
+  resistivity, kirchhoffs-laws, electrical-power, magnetic-force, amperes-law,
+  solenoid, magnetic-flux, ac-basics
+
+**THIS COHORT IS ENRICHED FOR RESISTANCE — the prediction must not be a flat 12%.**
+Stated before running so the result cannot be reinterpreted afterwards. Three
+distinct sub-populations:
+- **3 concepts already failed POST-R3** (significant-figures, vector-products,
+  force) — P-1's OBSERVE residue. Most likely to stay UNMEASURED.
+- **19 failed TWICE pre-R3** (the Batch-5 hard core). Batch 5's phase split among
+  them was 15 DEMONSTRATE : 4 OBSERVE; R3 closes DEMONSTRATE, so if
+  OBSERVE-proneness were a fixed per-concept property ~4 would remain (21%).
+  Phase is decided per RUN, not fixed, so the true figure should be lower.
+- **13 attempted only ONCE, never re-tested** (12 phys.em + brewsters-law). These
+  should behave like P-1's cohort, ~12%.
+
+P-1's 12% was measured on a cohort with none of the first two groups in it. A
+naive comparison against it would be wrong.
+
+**Point estimate: ~6 of 35 ≈ 17%** (1.6 from the 13 fresh + ~3 from the 19 + ~2
+from the 3 known-residue).
+
+**Decision rule, fixed in advance:**
+- **SUCCESS** UNMEASURED <= 30% (<= 10 of 35). R3 is holding on a hard cohort.
+- **PARTIAL** 30-50%. R3 helps but something else is also active — investigate
+  before any further cohort.
+- **FALSIFIED** the Wilson 95% CI lower bound >= 0.50, i.e. materially back
+  toward the pre-R3 76%. STOP and investigate; do not run another cohort.
+- Any residual UNMEASURED must be checked by MECHANISM (phase at last decision +
+  pendingMcq assetId), not by rate alone. A rate improvement with DEMONSTRATE
+  cases reappearing would mean R3 is NOT the thing that moved.
+
+**Also predicted:** FAILED_INSTRUMENT = 0 · P2024 = 0 (and 57014, 55P03,
+ShareLock, pool, 42P05, 26000, FATAL, HTTP 5xx = 0) · no concept loses ladder
+reachability (no CERTIFIED regresses; every certifying session reaches TRANSFER
+with check 1 / practice 2) · session cleanup exact (sessions created ==
+35 + retries; 0 ACTIVE afterwards).
+
+**Protocol.** Existing 4-worker runner and protocol, unchanged. One cohort of 35.
+Worker split 5/10/10/10, preserving the established bias away from w1. No change
+to batch semantics, replay/egress, grading, mastery logic, or instrumentation.
+
+**Dispatcher decision (recorded per instruction).** `runPhysicsP1_4Worker.ts`
+asserts a 25-concept cohort, so P-1b needs its own thin dispatcher
+(`runPhysicsP1b_4Worker.ts`), generated from it by substitution. It is NOT
+committed: it imports `runTierA.ts`'s exported `runWithRetry` unchanged, adds no
+protocol logic, and the run is fully reproducible from this ledger entry (cohort
+list + split + protocol) plus the committed runner. Same standing treatment as
+its four siblings. Committing it is tracked as P-7, an open owner decision.
+
+---
+
 ## 10. Handover History
 
 | Date | Session | Action | Result |
