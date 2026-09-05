@@ -600,7 +600,16 @@ a content/model problem. Per the stop condition, no further cohort was started.
   writer then creates a second ACTIVE row for the same question. 3 physics cases
   measured. Over-counts the probe pool the E1 surplus rule reads. Fix is NOT small
   (it changes existing identities) — see §9g R-c.
-- **P-7 (existing) — whether to commit the five batch dispatchers.**
+- **P-7 — CLOSED 2026-09-05 (commit `7aaf45e7`).** Owner chose to commit all
+  five (`runPhysicsBatch3/4/5_4Worker.ts`, `runPhysicsP1_4Worker.ts`,
+  `runPhysicsP1b_4Worker.ts`), so every Tier A run is now reproducible from the
+  repository rather than only from this ledger's cohort lists. Reviewed before
+  staging: each imports `runWithRetry` from `runTierA.ts` unchanged and holds no
+  protocol, retry, verdict or answer-source logic; no credential or account email
+  appears in any of them. `tsc --noEmit` clean. Committed verbatim, so one stale
+  prose header remains: `runPhysicsP1b_4Worker.ts` still describes a 25-concept
+  Batch 5 cohort in its comment while the code asserts 35. Code correct, comment
+  stale — not edited, because the instruction was to commit them, not revise them.
 
 ---
 
@@ -984,6 +993,7 @@ open. P-2 / P-5 not started.**
 | 2026-09-05 | P-8 | Read-only diagnosis of production/repo probe drift | Root cause verified (identity excludes content + create-only writers). Physics drift = exactly 2 probes; 3 duplicate rows found (P-10). Nothing remediated. See §9g. |
 | 2026-09-05 | P-8R | Attempt remediation of the two drifted probes | STOPPED at the write boundary: no DATABASE_URL, so the canonical seeder cannot run, and the bootstrap cannot revive a DEPRECATED row (status-agnostic prefetch + partial unique index). No production write. See §9h. |
 | 2026-09-05 | O-1 | Complete the P-8 remediation from a DATABASE_URL environment | STOPPED: this container still has no DATABASE_URL (re-verified). No production write. Copy-paste runbook recorded for an environment that does. See §9i. |
+| 2026-09-05 | P-7 | Commit the five untracked batch dispatchers | CLOSED. Owner authorised; committed verbatim as `7aaf45e7`. Working tree now clean. |
 
 ## 11. Do Not Rediscover
 
