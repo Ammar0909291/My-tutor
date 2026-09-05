@@ -1873,6 +1873,91 @@ symbolic-option failures (ratcheted, §9n), **P-10** (3 duplicate-slug rows),
 
 ---
 
+## 9r. P-10 PRE-REGISTRATION — recorded BEFORE the production write (2026-09-05)
+
+Read-only diagnosis complete; all three pairs are unambiguous. Committed before
+any mutation, and it is the rollback source (the write is a status change only,
+so restoring `status='ACTIVE'` on the three ids below is the whole undo).
+
+### Root mechanism (VERIFIED, corrected against the P-8 hypothesis)
+`buildProbeSlugResolver` (`brainSeedAssets.ts:150-164`) appends the difficulty
+segment ONLY when more than one probe shares a base slot. Adding a second probe
+to a slot therefore **re-slugs the first probe** from 4 segments to 5. Both
+seed writers are create-only for an existing row (§9g), so they create the new
+5-segment identity and leave the 4-segment one ACTIVE. The slug is not stable
+under corpus growth.
+
+**Proved against the current corpus, not assumed.** Running the REAL resolver
+over the six modules production is seeded from:
+
+| slug | produced by today's corpus? |
+|---|---|
+| `phys.mech.displacement:mcq:en:middle` | **NO** |
+| `phys.mech.displacement:mcq:en:middle:foundational` | **YES** |
+| `phys.mech.hookes-law:mcq:en:middle` | **NO** |
+| `phys.mech.hookes-law:mcq:en:middle:developing` | **YES** |
+| `phys.mech.momentum:misconception_probe:en:high` | **NO** |
+| `phys.mech.momentum:misconception_probe:en:high:developing` | **YES** |
+
+The corpus emits **0 duplicate slugs** of its own, so this is purely production
+residue. **The 4-segment rows are the surplus ones** — determined from resolver
+output, not from slug shape.
+
+### The three pairs (MEASURED; content is byte-identical within each pair)
+
+| concept | KEEP (canonical) | DEPRECATE (surplus) | shared contentHash |
+|---|---|---|---|
+| displacement | `2de355c3-664d-47fc-b558-12415b688c38` `…:middle:foundational` created 2026-08-25 | `d9a940d4-b092-4177-bce9-c0793ebee81c` `…:middle` created 2026-07-27 | `hc1a14c77` |
+| hookes-law | `c7f78057-8a32-429f-bd3b-642c82353b81` `…:middle:developing` created 2026-08-25 | `5c825c2c-d89a-4369-94d0-52757d4ea559` `…:middle` created 2026-07-27 | `h3189d4a7` |
+| momentum | `ff21c488-92e0-44b6-9b4d-d42268cf4f89` `…:high:developing` created 2026-08-13 | `3d652a4f-352c-4375-a669-43c2078ee6c7` `…:high` created 2026-08-11 | `he05deec3` |
+
+Within each pair: identical `contentHash`, identical stem md5 and length,
+identical `difficulty`, identical `correctValue`, identical choice count. All
+six ACTIVE, version 1, HUMAN_CURATOR.
+
+**The surplus row carries no unique content and no required identity**: the
+resolver produces nothing that maps to its slug, and its twin holds byte-identical
+content. Deprecating it removes a duplicate serving slot, not a question.
+
+Worth recording because it is easy to misread: the two 2026-07-27 rows carry a
+long `deprecationReason` from a **2026-08-18 owner-authorized restoration** —
+they were deprecated in error in August and restored. That history is about a
+missing content row, not about this duplication, and it does not make them
+canonical today.
+
+### Safety checks before writing (all MEASURED)
+- Physics seed-owned probe rows: **1,852**.
+- Duplicate stem groups physics-wide: **exactly 3** — these, and no others.
+- No `canonicalSlug` is used twice (the partial unique index forbids it).
+- **0 sessions reference any of the three surplus assetIds** in
+  `contextSnapshot` — nothing is mid-question on one, nothing is stranded.
+- Coverage before: displacement 13 ACTIVE / 11 gradeable / 12 distinct stems;
+  hookes-law 14 / 11 / 13; momentum 18 / 16 / 17. Each loses one ACTIVE ROW and
+  **zero distinct questions**; all stay far above the 3-gradeable contract.
+
+### The write
+Three guarded statements, one per row: `UPDATE asset_identity SET
+status='DEPRECATED', deprecationReason='<P-10 …>' WHERE assetId = <id> AND
+status='ACTIVE' AND version=1 AND canonicalSlug=<4-segment> AND
+contentHash=<hash>`. Expect exactly 1 row each. **No delete, no content change,
+no change to the canonical row, no schema change, no reseed.** Unlike §9j, a
+`deprecationReason` IS written here: these rows stay DEPRECATED, so the reason
+is the durable record of why, and the seeder's revive path (dead anyway, P-11)
+is not in play.
+
+### Expected after
+1,852 -> **1,849** physics seed rows; duplicate stem groups 3 -> **0**; true
+content drift stays **0**; prod-missing stays **0**; every other physics row
+untouched (`max(updatedAt)` elsewhere unchanged).
+
+### Design question, answered as asked
+**No source change in this task.** The data remediation is sufficient: the
+resolver's instability is a pipeline defect that will re-create this the next
+time a slot gains a probe, but nothing in this repair depends on fixing it.
+Recorded as **P-10-FOLLOW-UP** rather than silently expanding scope.
+
+---
+
 ## 10. Handover History
 
 | Date | Session | Action | Result |
