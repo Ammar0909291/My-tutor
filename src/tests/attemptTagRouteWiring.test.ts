@@ -204,9 +204,20 @@ describe('C-A · the empty guard runs after every content-removing step', () => 
     // would keep shipping beside valid questions.
     const emptyChecks = codeMatches(/if \(!text\.trim\(\)/)
     expect(emptyChecks).toHaveLength(2)
-    const mcqBranch = codeMatches(/if \(!text\.trim\(\) && mcqHoisted\)/)
+    // AMP-A (2026-09-05): this asserted the literal `&& mcqHoisted`, which
+    // pinned the defect rather than the invariant. `mcqHoisted` is only the
+    // probe attached THIS turn; a probe carried forward is equally on screen,
+    // and the route serves `mcqToServe(mcqHoisted, pendingMcqHoisted,
+    // mcqGradeHoisted)`. Reading the narrower value degraded turns a model had
+    // actually answered — ledger §9m/§9q. The ORDER, which is what this test
+    // exists to protect, is unchanged and still asserted.
+    const mcqBranch = codeMatches(/if \(!text\.trim\(\) && servedProbeThisTurn\)/)
     expect(mcqBranch).toHaveLength(1)
     expect(mcqBranch[0]).toBeLessThan(codeMatches(/empty response from model/)[0])
+    // …and that the narrower branch reads what the response actually serves.
+    const servedFrom = codeMatches(/const servedProbeThisTurn = mcqToServeForEmptyGuardEarly\(/)
+    expect(servedFrom).toHaveLength(1)
+    expect(servedFrom[0]).toBeLessThan(mcqBranch[0])
   })
 
   it('treats whitespace-only as unusable, not just the empty string', () => {

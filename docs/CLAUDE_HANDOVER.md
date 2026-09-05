@@ -1759,6 +1759,120 @@ P-10 and P-11 untouched.
 
 ---
 
+## 9q. AMP-A FIXED — "on screen" is not "attached this turn" (2026-09-05)
+
+One condition changed in one guard. `measurementIdentity.ts` untouched (AMP-B is
+VALID BY DESIGN per §9p and stays exactly as it is).
+
+### Root cause
+`src/app/api/learn/chat/route.ts`, the early empty-turn guard, asked
+`!text.trim() && mcqHoisted`. **`mcqHoisted` is only the probe attached on THIS
+turn.** A probe carried forward — pending, ungraded, still rendered — is equally
+on the learner's screen.
+
+Reproduced path (P-9, §9m): groq answered (`outcome=ok http_status=200
+chars=632`); the model put its whole turn in the MCQ tag, which parses and
+strips first; an unanswered authored probe was already displayed, so
+`decideModelProbe` declined the model's question
+(`model-probe-withheld / gate-declined-by-policy`) and the route nulled
+`mcqHoisted` twelve lines earlier. Text empty + `mcqHoisted` null ⇒ the guard
+fell through and stamped `provider = 'degraded'` on a turn a model **had**
+answered. AMP-B then did its job correctly on an untrue signal:
+FAILED_INFRASTRUCTURE, twice.
+
+**The route already knew better, 3,700 lines later.** A post-strip backstop
+(`[empty-post-strip-with-probe]`) uses `mcqToServe(mcqHoisted, pendingMcqHoisted,
+mcqGradeHoisted)` for exactly this decision — but it runs long after `provider`
+is set, so it repaired the TEXT and never the identity. The two guards disagreed
+about what "empty" means.
+
+### The fix
+The early guard now reads the same owner the response and the snapshot use:
+
+```
+const { mcqToServe: mcqToServeForEmptyGuardEarly } = await import('@/lib/teaching/mcq')
+const servedProbeThisTurn = mcqToServeForEmptyGuardEarly(
+  mcqHoisted, pendingMcqHoisted, mcqGradeHoisted,
+)
+if (!text.trim() && servedProbeThisTurn) { … }
+else if (!text.trim()) { …degradedTurn()… }
+```
+
+No new abstraction: `mcqToServe` already existed and is already what
+`response.mcq` (`mcqForClient(mcqToServe(…))`) and `writePendingQuestion` serve.
+Both inputs are assigned far upstream (`pendingMcqHoisted` line 2128,
+`mcqGradeHoisted` line 2171), so nothing about ordering changed.
+
+**Deliberately NOT widened:** `withheldModelMcqHoisted` is not consulted. A probe
+the gate refused is not on screen, and counting it as content would launder a
+policy decision this guard has no business reopening. Pinned by test.
+
+### Safety conditions, each verified
+- Genuine all-provider failure (`route.ts` catch, `lesson-init`,
+  `kernel/stages/render`) — **untouched**; still `provider='degraded'`.
+- Genuinely empty turn with nothing on screen — **still degrades**.
+- A probe ANSWERED this turn is spent (`mcqToServe` returns null once graded), so
+  it is not content for the next turn — **still degrades**. This is the boundary
+  that keeps the fix from becoming "never degrade".
+- MCQ/model-probe gating unchanged; no gate bypassed; no withheld probe exposed;
+  grading and mastery semantics untouched.
+
+### Files changed
+- `src/app/api/learn/chat/route.ts` — the guard condition (+ the comment
+  explaining what was measured).
+- `src/tests/degradedProviderRequiresRealOutage.test.ts` — **new**, 15 cases.
+- `src/tests/attemptTagRouteWiring.test.ts` — one assertion updated **in place,
+  with the supersession recorded in the file**: it pinned the literal
+  `if (!text.trim() && mcqHoisted)`, i.e. it pinned the defect. It now asserts
+  the invariant (the guard reads what is served) and still asserts the ORDER,
+  which is what that test exists to protect.
+
+### Tests — cases A-D as specified
+Drive the REAL `mcqToServe`, `degradedTurn`, `isDegradedProvider` and
+`decideModelProbe`.
+- **A** empty text + `mcqHoisted` null + pending ungraded probe ⇒ **NOT**
+  degraded (plus whitespace-only, attached-probe, and the graded-probe boundary).
+- **B** empty text + nothing on screen ⇒ degraded, unchanged; non-empty text
+  never touched.
+- **C** the real `decideModelProbe` still declines; a withheld model probe is
+  NOT treated as content; the served probe is the authored one, never the
+  withheld one.
+- **D** `degradedTurn` still yields `provider='degraded'`/`finishReason:
+  'template'`, and the all-providers-failed catch is upstream and separate.
+- Plus 5 route-source wiring pins, including that the guard's condition does not
+  read `withheldModelMcqHoisted`.
+
+**Negative control:** with `route.ts` reverted, **4 of 15 fail** — the four
+route-wiring assertions. **Stated honestly: the behavioural cases pass in both
+states**, because they exercise a mirror of the guard, not the route itself. The
+source assertions are what couple the mirror to the route, and they are the half
+that fails pre-fix. The test header says so rather than implying deeper coverage
+than exists.
+
+### Validation
+Targeted (10 files incl. the empty-turn, gate-wiring, reoffer, parser and BOTH
+verdict-classifier suites): **172 passed**. `npx tsc --noEmit` **clean**. Full
+suite **556 files / 11,905 passed / 9 skipped**. `npm run build` **clean**,
+middleware 79.7 kB (unchanged).
+
+### Production validation: deliberately NOT performed, and why
+The AMP-A seam needs three things to coincide — an unanswered probe on screen,
+the model putting its entire turn in an MCQ tag, and the gate declining that
+question. **None of them can be summoned on demand**; they are model behaviour.
+Re-running `phys.em.resistivity` would almost certainly just certify again (it
+did after the P-9 fix, §9o) and would exercise none of this. That is the
+"manufacturing unnecessary failures" the task rules out, so no run was made. The
+path is deterministically covered offline, and the next ordinary cohort will
+carry the fix.
+
+### Status
+**AMP-A FIXED.** AMP-B unchanged and still VALID BY DESIGN.
+Open, untouched: `providersSeen` corroboration (§9p, owner decision), the 16
+symbolic-option failures (ratcheted, §9n), **P-10** (3 duplicate-slug rows),
+**P-11** (the seeder's revive path is dead code).
+
+---
+
 ## 10. Handover History
 
 | Date | Session | Action | Result |
@@ -1779,6 +1893,7 @@ P-10 and P-11 untouched.
 | 2026-09-05 | P-9 fix | Exact-match precedence in resolveMcqChoice + regression tests | Ordering-only change; rule 0a unchanged. Corpus mis-attributions 6 -> 0 (4 were false credit), rule-0a nulls 3 -> 0, unrelated symbolic class 16 left ratcheted. 13 new tests, 6 fail pre-fix. Suite 11,890 pass, tsc + build clean. See §9n. |
 | 2026-09-05 | P-9 validation | One production run after deploying the fix | BOTH CERTIFIED. resistivity FAILED_INFRASTRUCTURE -> CERTIFIED first attempt, 6 turns to TRANSFER, check 1 / practice 2, 0 degraded turns. Physics Tier-A now 142 CERTIFIED / 7 UNMEASURED. See §9o. |
 | 2026-09-05 | AMP-B | Diagnose the degradedTurns verdict precedence (read-only) | VALID BY DESIGN — documented in 3 places and pinned by an existing test. 3 of the 4 producers of provider='degraded' are real outages; the 4th is AMP-A. No fix proposed here; the repair is AMP-A. Recorded: providersSeen is hardcoded [] in 240/240 records. See §9p. |
+| 2026-09-05 | AMP-A fix | Empty-turn guard reads what is served, not what was attached | route.ts guard now uses mcqToServe(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted), matching the post-strip backstop 3,700 lines later. 15 new tests (A-D), one pre-existing assertion updated in place. Suite 11,905 pass, tsc + build clean. Production run deliberately not manufactured. See §9q. |
 
 ## 11. Do Not Rediscover
 

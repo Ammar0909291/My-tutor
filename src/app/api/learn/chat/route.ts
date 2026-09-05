@@ -5364,10 +5364,42 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // after the filler detector and the affirmation floor. The standing rule
       // it implies: a turn's content is its text PLUS its structured payloads,
       // and any check for "nothing here" must look at both.
-      if (!text.trim() && mcqHoisted) {
+      //
+      // AMP-A: "ON SCREEN" IS NOT "ATTACHED THIS TURN".
+      //
+      // This guard read `mcqHoisted`, which is only the probe attached on THIS
+      // turn. A probe carried FORWARD — pending, ungraded, still rendered — is
+      // equally on the learner's screen, and `mcqToServe` is the single owner
+      // of that question: it is what the response actually serves (the `mcq`
+      // field is `mcqForClient(mcqToServe(…))`) and what the snapshot persists.
+      //
+      // MEASURED (P-9, ledger §9m/§9l). At PRACTICE with an unanswered probe
+      // displayed, the model put its whole turn in an MCQ tag; the tag parsed
+      // and stripped, `decideModelProbe` declined the model's question by
+      // policy (an unanswered probe was already up), and `mcqHoisted` was
+      // nulled twelve lines earlier. So `text` was empty, `mcqHoisted` was
+      // null, and this guard fell through to the degraded branch — stamping
+      // `provider: 'degraded'` on a turn a model HAD answered and whose probe
+      // the learner could still see. That is what reached the certification
+      // harness as FAILED_INFRASTRUCTURE on phys.em.resistivity, twice.
+      //
+      // The post-strip backstop further down already uses exactly this
+      // expression for the same decision about `cleanText`; it just runs far
+      // too late to correct the provider identity. Using the same owner here
+      // makes the two agree instead of disagreeing by ~3,700 lines.
+      //
+      // NOT widened any further, deliberately: `withheldModelMcqHoisted` is
+      // NOT consulted. A probe the gate refused is not on screen, and treating
+      // it as content would launder a policy decision this guard has no
+      // business reopening.
+      const { mcqToServe: mcqToServeForEmptyGuardEarly } = await import('@/lib/teaching/mcq')
+      const servedProbeThisTurn = mcqToServeForEmptyGuardEarly(
+        mcqHoisted, pendingMcqHoisted, mcqGradeHoisted,
+      )
+      if (!text.trim() && servedProbeThisTurn) {
         // Not degraded — introduce the question the learner can already see.
         // Deterministic, claims nothing, and leaves the MCQ to carry the turn.
-        console.log('[empty-with-mcq] model wrote no prose but a valid MCQ — introducing it instead of degrading')
+        console.log('[empty-with-mcq] model wrote no prose but a probe is on screen — introducing it instead of degrading')
         text = 'Here is a question to check your understanding:'
       } else if (!text.trim()) {
         console.error('[learn/chat] empty response from model, finish_reason:', finishReason ?? 'unknown')
