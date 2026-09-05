@@ -572,7 +572,16 @@ a content/model problem. Per the stop condition, no further cohort was started.
 
 ## 9f. OPEN ITEMS RAISED BY P-1b (owner decision — none acted on)
 
-- **P-8 (NEW, instrument) — production/repo probe-corpus drift.** Production
+- **P-8 — DIAGNOSED 2026-09-05, see §9g.** Root cause: asset identity excludes
+  content and both seed writers are create-only for ACTIVE rows, so an ACTIVE probe's
+  text is frozen in production forever. Physics drift population MEASURED at exactly
+  **2 probes** (`phys.em.resistivity`, `phys.em.solenoid`), both rewritten by
+  `2c1a393a` two days after they were seeded, on a commit that wrongly stated they
+  were never live. Both are known non-discriminating probes still being served.
+  Smallest safe fix R-a (deprecate + reseed, existing code) is recorded, NOT applied.
+  Also found: 3 duplicate ACTIVE rows from an unstable `canonicalSlug` (P-10).
+  Superseded framing follows.
+- **P-8 (original framing, superseded) — production/repo probe-corpus drift.** Production
   serves ACTIVE `HUMAN_CURATOR` probes whose exact stems no longer exist in the
   repo corpus, so the harness scores them `no-authored-match`. 2 of 9 residuals
   in this run. Options: re-seed production from the current corpus; or index the
@@ -586,7 +595,183 @@ a content/model problem. Per the stop condition, no further cohort was started.
 - **P-5 (existing) — the OBSERVE window.** 5 of 9 residuals. Unchanged.
 - **R4 (existing, out of scope by instruction) — model-invented questions.**
   6 of 9 residuals, though see P-8: `no-authored-match` overstates this class.
+- **P-10 (NEW, product) — `canonicalSlug` is not stable under corpus growth.**
+  Adding a second probe to a slot re-slugs the FIRST probe, and the create-only
+  writer then creates a second ACTIVE row for the same question. 3 physics cases
+  measured. Over-counts the probe pool the E1 surplus rule reads. Fix is NOT small
+  (it changes existing identities) — see §9g R-c.
 - **P-7 (existing) — whether to commit the five batch dispatchers.**
+
+---
+
+## 9g. P-8 DIAGNOSIS — production/repo probe drift: ROOT CAUSE FOUND, POPULATION MEASURED (2026-09-05, READ-ONLY)
+
+Diagnosis only. **No code, production data, grading, matching, seeding, `.gitignore`
+or dispatcher was changed.** One read-only `git fetch --unshallow` was performed
+(see "an instrument error I made" below).
+
+### ROOT CAUSE (VERIFIED — two code facts, both necessary, together sufficient)
+
+1. **Asset identity excludes content.** `seedCanonicalSlug`
+   (`src/lib/teaching/assets/brainSeedAssets.ts:86-94`) returns
+   `conceptId:familyKind:en:gradeband[:difficulty]`. The stem is NOT part of the
+   identity, so editing a probe's text does not change its `canonicalSlug`.
+2. **Both writers are CREATE-ONLY for an ACTIVE row.**
+   - `scripts/brain/seed-knowledge-assets.ts:233-269` — `findFirst({canonicalSlug})`;
+     `REVIVABLE = {DEPRECATED, RETIRED}`; anything else falls to
+     `skipped++ … continue`. An ACTIVE row is never compared and never refreshed.
+   - `src/instrumentation.ts:690-700` (cold-start bootstrap) — on an existing slug
+     it repairs only a MISSING child row (`!dup.hasContent`) and otherwise
+     `skipped++; continue`. It never inspects `stem` or `contentHash`.
+
+   `contentHash` IS written by both writers but is read for reconciliation ONLY in
+   the AI capture path (`versioning.ts` `decideCaptureAction`, used by
+   `explanationMemory.ts` / `teachingActionRepository.ts`). **Nothing anywhere
+   compares a seeded row against the corpus it came from.**
+
+**So: once a probe is seeded ACTIVE, its text is frozen in production forever, and
+every later repo edit to that probe is invisible to production.** That is the whole
+mechanism. It is not a Studio edit, not a migration, not a generated asset, not a
+different branch.
+
+### WHY THE TWO KNOWN ASSETS BECAME STALE (VERIFIED, with the commit)
+
+Both stems were introduced 2026-08-13 (`48c8cf58`, `bd94a620`), seeded to production
+**2026-08-14 15:17:17Z / 15:17:33Z** (`HUMAN_CURATOR`, ACTIVE), then **rewritten in
+the repo on 2026-08-16 02:37:28Z by `2c1a393a`** — "moat(physics): Stage 4 across all
+35 phys.em concepts — 5 defects". Two days after they were already live.
+
+That commit rewrote them because they were measured **pedagogically defective**:
+- `phys.em.resistivity` — tagged with "longer wire has lower resistance" but varied
+  AREA only, and the same "more room is easier" intuition yields the CORRECT answer
+  for area, so a learner holding the misconception scored right. Non-discriminating.
+- `phys.em.solenoid` — tagged "a wider solenoid has a stronger field" but held the
+  radius FIXED. Same defect class.
+
+**`2c1a393a`'s own commit message states: "Production: none of the five is live; all
+repo-only, never seeded." That claim is FALSE and is the proximate cause.** The two
+rewritten probes had been seeded 34 hours earlier and are ACTIVE in production today.
+Consequence beyond the harness: **production is serving two probes this repository
+has already recorded as non-discriminating** — a content-quality issue, not merely a
+certification mismatch. (The other three of that commit's five were misconception-id
+renames on checkpoint probes; production's rows for those carry the NEW ids and are
+DEPRECATED, so they are not part of the live drift.)
+
+### POPULATION — MEASURED, not estimated (physics, all 238 concepts)
+
+Method: normalise every stem identically on both sides (the real
+`stripAuthoringLabel` + `normaliseQuestion`), aggregate per concept, compare.
+Repo side = the SIX modules `answerSource.ts::loadCorpus` and
+`instrumentation.ts` both use. Production side = `authorKind='HUMAN_CURATOR'`
+probe rows, ALL statuses.
+
+- Repo physics probes: **1,849**. Production physics seed-owned probe rows:
+  **1,852** (1,649 ACTIVE, 203 DEPRECATED; seeded 2026-07-26 → 2026-08-31).
+  The difference is exactly the 3 duplicates below — **the arithmetic closes
+  with no residue**.
+- **231 of 238 concepts are byte-identical** to the current repo corpus.
+- 7 flagged. Resolved individually by per-stem multiset diff:
+
+| class | count | concepts |
+|---|---|---|
+| **TRUE CONTENT DRIFT** (one stem replaced in repo; production keeps the old) | **2** | `phys.em.resistivity`, `phys.em.solenoid` |
+| **DUPLICATE ROW** (one question, two ACTIVE identities) | **3** | `phys.mech.displacement`, `phys.mech.hookes-law`, `phys.mech.momentum` |
+| comparison artifact (multisets identical; first method's sorted-join differed only by SQL-vs-JS collation) | 2 | `phys.em.dc-circuits`, `phys.therm.refrigerators` |
+
+The 231 figure is SOUND in the safe direction: an identical hash implies an
+identical multiset, so collation can only produce false positives, never hide drift.
+
+**So the physics content-drift population is exactly TWO probes — the two already
+known. There is no wider drift.**
+
+### A THIRD DEFECT, FOUND WHILE MEASURING (VERIFIED, NEW — not previously recorded)
+
+Three probes exist **twice** in production, both rows ACTIVE, same normalised stem,
+different `canonicalSlug` — the 4-segment slug and the 5-segment difficulty-suffixed one:
+
+- `phys.mech.displacement:mcq:en:middle` (2026-07-27) + `…:middle:foundational` (2026-08-25)
+- `phys.mech.hookes-law:mcq:en:middle` (2026-07-27) + `…:middle:developing` (2026-08-25)
+- `phys.mech.momentum:misconception_probe:en:high` (2026-08-11) + `…:high:developing` (2026-08-13)
+
+Cause (INFERRED from `buildProbeSlugResolver`, `brainSeedAssets.ts:150-164`, and the
+dates): the difficulty segment is appended only when MORE THAN ONE probe shares a
+base slot. Adding a second probe to a slot therefore CHANGES THE FIRST PROBE'S SLUG
+from 4 to 5 segments; the create-only writer finds no row under the new slug and
+creates one, while the original row stays ACTIVE. **The slug is not stable under
+corpus growth.** Effect: the served pool is over-counted by these rows (the E1
+surplus rule `pool − 1 >= 3` counts rows), though `excludeProbeStem`/`hasAskedMcq`
+still dedupe by stem so a learner should not see the same question twice.
+
+### THE SYNCHRONISATION CONTRACT — reconstructed, and it is AMBIGUOUS
+
+- **A. Is production supposed to equal the current repo corpus?** **UNKNOWN — no
+  document states it.** `answerSource.ts`'s header asserts the harness indexes "the
+  SAME authored corpus production was seeded from", and `loadCorpus`'s comment says
+  its module list is "deliberately the SAME list `src/instrumentation.ts`'s cold-start
+  bootstrap assembles" — both of which ASSUME equality without any mechanism
+  enforcing it. ADR 14's lifecycle (DRAFT→REVIEW→ACTIVE→DEPRECATED→RETIRED, at most
+  one ACTIVE per `canonicalSlug`) is about review state, not corpus parity.
+- **B. If yes, what enforces it?** **Nothing does today.** VERIFIED.
+- **C. If no, what is the legitimate revision contract?** The only content-refresh
+  path that exists is REVIVAL: `seed-knowledge-assets.ts:235-266` updates `stem`,
+  `choices`, `correctValue`, `difficulty`, `targetedMisconceptions`, `contentHash`
+  and bumps `version` — but ONLY for a DEPRECATED/RETIRED row. So the de-facto
+  contract is "ACTIVE is immutable; change requires deprecate-then-reseed", and
+  nothing in the repo says so or automates it.
+
+### REMEDIATION OPTIONS (recorded, NOT implemented — owner decision)
+
+- **R-a — smallest safe fix, uses only existing mechanisms, no new code.** Set the
+  two drifted rows to DEPRECATED, then run `scripts/brain/seed-knowledge-assets.ts`.
+  The revive path restores them to ACTIVE with the current corrected stems and
+  `version+1`. Two rows, reversible, no schema change. **This also fixes the
+  content-quality problem, which is the stronger reason to do it.**
+- **R-b — detection, so this cannot recur silently.** A CI/test check comparing each
+  corpus probe's `contentHash` against production, or an offline drift report. The
+  hash is already written on every row; nothing reads it.
+- **R-c — make the identity stable under growth** (addresses the duplicates): always
+  emit the difficulty segment, or reconcile old 4-segment rows on promotion. This
+  changes `canonicalSlug` for existing rows and is NOT small — needs its own design.
+- **R-d — REJECTED, do not do this.** Broadening the harness's matcher, indexing the
+  answer source from production, or relaxing grading. Any of these would hide a real
+  content defect and would breach the A-1 answer-source contract.
+
+### VALIDATION REQUIRED BEFORE ANY REMEDIATION
+
+1. Re-run the exact per-stem multiset comparison used here and confirm the drift set
+   is still exactly those two (it is derived from live data and can move).
+2. `--dry-run` the seeder first and confirm it reports `revived=2`, `created=0`.
+3. Confirm the two revived stems then match the repo exactly, and that
+   `phys.em.resistivity` / `phys.em.solenoid` still hold >= 3 gradeable ACTIVE probes
+   (asset contract) afterwards.
+4. Re-certify only those two concepts and check they leave `UNMEASURED-no-authored-match`.
+5. Do NOT touch the 3 duplicates in the same change — different cause, different risk.
+
+### AN INSTRUMENT ERROR I MADE, RECORDED SO IT IS NOT REPEATED
+
+Mid-investigation I ran `git log -S "<production stem>" --all` and concluded the
+stems had **"never existed in this repository's git history"**. That was WRONG: this
+container's clone was **SHALLOW (63 commits, 2026-09-01 → 2026-09-05)**, so `--all`
+searched almost nothing. After `git fetch --unshallow` (3,314 commits, from
+2026-05-31) both stems were found immediately, with the commits that added and later
+replaced them. **Check `git rev-parse --is-shallow-repository` before trusting any
+history-based conclusion in this environment.**
+
+### Effect on the P-1b write-up (§9e)
+§9e's stated cause — "the corpus was edited after being seeded and never re-seeded" —
+is CONFIRMED, and now has the commit, the timestamps and the code path behind it.
+§9e's consequence — `UNMEASURED-no-authored-match` is an UPPER bound on
+model-invention — also stands. What §9e could not say, and now can: the physics drift
+population is **exactly 2 probes**, so for physics the overstatement is bounded at 2
+concepts, not open-ended.
+
+### Not measured
+Chemistry and every other subject: **UNKNOWN**. The same create-only mechanism
+applies to them, and the same measurement would work, but this task was scoped to
+physics and no chemistry comparison was run.
+
+### P-8 status
+**DIAGNOSED. Root cause verified in code. Population measured. Nothing remediated.**
 
 ---
 
@@ -601,6 +786,7 @@ a content/model problem. Per the stop condition, no further cohort was started.
 | 2026-09-04 | R3 implementation (T-005) | Implemented + validated | Commit `77eb7df`; 554 files / 11,877 passed; tsc + build clean; negative control passes. NOT deployed at time of commit. |
 | 2026-09-04 | R3 deployment + P-1 | Push to `main` (`b2d1466`), production deploy, single 25-concept cohort | COMPLETE. UNMEASURED 76% -> 12%; DEMONSTRATE residue 15 -> 0; all five predictions confirmed; infra clean. See §9c. |
 | 2026-09-04/05 | P-1b | 35-concept UNMEASURED re-run under R3 | 26 CERTIFIED / 9 UNMEASURED (25.7%), SUCCESS band met; residual re-diagnosed into 3 causes; corpus drift (P-8) newly found. |
+| 2026-09-05 | P-8 | Read-only diagnosis of production/repo probe drift | Root cause verified (identity excludes content + create-only writers). Physics drift = exactly 2 probes; 3 duplicate rows found (P-10). Nothing remediated. See §9g. |
 
 ## 11. Do Not Rediscover
 
