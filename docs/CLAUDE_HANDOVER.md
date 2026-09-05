@@ -884,6 +884,92 @@ their P-1b verdicts stand unchanged (both UNMEASURED).
 
 ---
 
+## 9i. O-1 — SECOND STOP: this container still has no DATABASE_URL (2026-09-05)
+
+O-1 was addressed to "an environment that has the real production DATABASE_URL".
+**This session is not one, and nothing about that has changed since §9h.**
+Step 5 of the task ("confirm DATABASE_URL exists") FAILS, so no production
+mutation was attempted. **NO PRODUCTION WRITE WAS MADE.**
+
+### Environment check (VERIFIED, no value printed)
+- `DATABASE_URL` — **ABSENT**.
+- No `DIRECT_URL`, no `POSTGRES_*`, no `SUPABASE_*`, no `PG*` variable is set.
+- Only `.env.example` exists (a committed template, no credentials).
+- Nothing sets a database URL in `~/.bashrc`, `~/.profile`, `~/.bash_profile`
+  or `/etc/profile.d/`.
+So `npx tsx scripts/brain/seed-knowledge-assets.ts` still cannot connect. The
+Supabase MCP surface does not expose the Postgres password and the Vercel MCP
+surface has no env-var read, so the URL cannot be assembled here either — all
+re-verified, not assumed from §9h.
+
+### Targets re-verified, unchanged (VERIFIED)
+Both rows are byte-identical to the §9h pre-registration, so that record can be
+used as-is when O-1 is finally run:
+
+| assetId | concept | status | ver | contentHash | updatedAt |
+|---|---|---|---|---|---|
+| `61582820-e1e2-43cc-ae61-4b167c3316c6` | phys.em.resistivity | ACTIVE | 1 | `hbecff101` | 2026-08-14 15:17:17.584 |
+| `8e90af3e-ca2b-48c5-ad44-16c37b8c69e6` | phys.em.solenoid | ACTIVE | 1 | `h3d5dbdf7` | 2026-08-14 15:17:33.412 |
+
+Repo targets: `h12ea45f5` (resistivity), `h6045c777` (solenoid).
+Production health at check time: HTTP 200, `db:true`, 30s / 15s.
+Git: HEAD == `origin/main` == `40640c42`.
+
+### RUNBOOK — paste this where `DATABASE_URL` is real (checked out at `main`)
+
+```
+# 1. pre-state (expect: 2 rows, ACTIVE, version 1, hashes hbecff101 / h3d5dbdf7)
+psql "$DATABASE_URL" -c "SELECT \"assetId\",\"conceptId\",status,version,\"contentHash\"
+  FROM asset_identity WHERE \"assetId\" IN
+  ('61582820-e1e2-43cc-ae61-4b167c3316c6','8e90af3e-ca2b-48c5-ad44-16c37b8c69e6');"
+
+# 2. deprecate EXACTLY these two (expect: UPDATE 2)
+psql "$DATABASE_URL" -c "UPDATE asset_identity SET status='DEPRECATED',
+  \"deprecationReason\"='P-8 corpus drift remediation 2026-09-05'
+  WHERE \"assetId\" IN
+  ('61582820-e1e2-43cc-ae61-4b167c3316c6','8e90af3e-ca2b-48c5-ad44-16c37b8c69e6');"
+
+# 3. run the canonical seeder UNCHANGED, no flags
+npx tsx scripts/brain/seed-knowledge-assets.ts
+
+# 4. REQUIRED result line: revived=2 created=0 (skipped will be large; that is normal)
+#    STOP and report if created > 0, or if any row other than these two is revived.
+
+# 5. post-state (expect: ACTIVE, version 2, hashes h12ea45f5 / h6045c777)
+psql "$DATABASE_URL" -c "SELECT \"assetId\",\"conceptId\",status,version,\"contentHash\"
+  FROM asset_identity WHERE \"assetId\" IN
+  ('61582820-e1e2-43cc-ae61-4b167c3316c6','8e90af3e-ca2b-48c5-ad44-16c37b8c69e6');"
+```
+
+Rollback if step 4 misbehaves: set both rows back to `status='ACTIVE'`. The
+seeder never deletes, so nothing is lost; a wrong revive is corrected by
+re-running after fixing the corpus.
+
+Do NOT substitute `--draft` (it would seed DRAFT and the rows would not serve),
+and do NOT add flags. The 3 duplicate-slug P-10 rows are untouched by this
+sequence because they are not DEPRECATED.
+
+### Alternative, if this session is meant to do it
+**O-2 still stands and is one message away**: authorise applying the seeder's
+revive UPDATE verbatim through the Supabase MCP — the same fields
+(`stem`, `choices`, `correctValue`, `difficulty`, `targetedMisconceptions`,
+`contentHash`, `status`, `version+1`) that `seed-knowledge-assets.ts:235-266`
+writes, executed as two statements. Identical end state; the difference is
+transport and reviewability, not semantics. Without that authorisation the
+remediation cannot happen from here at all.
+
+### Certification: NOT performed
+Conditional on successful remediation, which did not occur. Both concepts keep
+their P-1b verdict (UNMEASURED). Physics Tier-A totals unchanged: 149 attempted,
+140 CERTIFIED / 9 UNMEASURED.
+
+### Status
+**P-8 remains OPEN** — diagnosed, runbook written, blocked only on an
+environment with a real `DATABASE_URL` (or on O-2). **P-7, P-9, P-10 remain
+open. P-2 / P-5 not started.**
+
+---
+
 ## 10. Handover History
 
 | Date | Session | Action | Result |
@@ -897,6 +983,7 @@ their P-1b verdicts stand unchanged (both UNMEASURED).
 | 2026-09-04/05 | P-1b | 35-concept UNMEASURED re-run under R3 | 26 CERTIFIED / 9 UNMEASURED (25.7%), SUCCESS band met; residual re-diagnosed into 3 causes; corpus drift (P-8) newly found. |
 | 2026-09-05 | P-8 | Read-only diagnosis of production/repo probe drift | Root cause verified (identity excludes content + create-only writers). Physics drift = exactly 2 probes; 3 duplicate rows found (P-10). Nothing remediated. See §9g. |
 | 2026-09-05 | P-8R | Attempt remediation of the two drifted probes | STOPPED at the write boundary: no DATABASE_URL, so the canonical seeder cannot run, and the bootstrap cannot revive a DEPRECATED row (status-agnostic prefetch + partial unique index). No production write. See §9h. |
+| 2026-09-05 | O-1 | Complete the P-8 remediation from a DATABASE_URL environment | STOPPED: this container still has no DATABASE_URL (re-verified). No production write. Copy-paste runbook recorded for an environment that does. See §9i. |
 
 ## 11. Do Not Rediscover
 
