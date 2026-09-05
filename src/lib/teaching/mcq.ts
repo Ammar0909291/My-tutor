@@ -756,6 +756,49 @@ export function resolveMcqChoice(message: string, mcq: TutorMCQ): number | null 
   // ladder.
   if (NON_COMMITTAL.test(message)) return null
 
+  // 0. EXACT MATCH — RUNS FIRST, AND THE ORDER IS THE POINT.
+  //
+  //    Tapping an option sends that option's text verbatim (LessonScreen
+  //    sends `option`, not a letter), so an exact match is the learner
+  //    saying WHICH option in the only way the UI can say it. Rule 0a below
+  //    infers a choice from letters found in the sentence; when the sentence
+  //    IS an option, those letters belong to the author, not the learner.
+  //
+  //    MEASURED (P-9, ledger 9m/9n) with this function over the whole
+  //    authored corpus, submitting each option verbatim — i.e. simulating a
+  //    tap on every choice of every probe:
+  //
+  //      phys.em.resistivity  "Wire A: 2R (…) … Wire B: R/2 (…)"
+  //        -> rule 0a saw two labelled letters, called it ambiguous, and
+  //           returned null for ALL THREE options. The probe could not be
+  //           graded by any answer, including the correct tap.
+  //      phys.mech.impulse    "A, because it is a much bigger force"
+  //        -> rule 0a saw ONE labelled letter and returned index 0. That is
+  //           a DISTRACTOR being graded as the correct answer: false
+  //           evidence, which is worse than no evidence.
+  //
+  //    Across 2,750 gradeable probes this cost 47 ungradeable option-taps and
+  //    6 mis-attributed ones, 4 of them false credit. Running the exact match
+  //    first fixes every one, because a verbatim option always matches itself.
+  //
+  //    Nothing about rule 0a is weakened: it is unchanged and still decides
+  //    every message that is NOT verbatim an option — the labelled answer
+  //    ("A."), the answer inside a sentence ("ok i think A. but sir explain"),
+  //    and the ambiguous one ("A or B") all still reach it and behave exactly
+  //    as before, because none of them exact-matches an option.
+  //
+  //    This rule also exists for a second reason, which predates the reorder:
+  //    `[M][L][T]⁻²` normalises to "m l t", below the containment rule's
+  //    length floor and with every token too short for the distinctive-word
+  //    rule. Without it, SYMBOLIC options — the most common form in physics
+  //    and mathematics — could not be graded at all.
+  //
+  //    Ambiguity is still fatal: two options that normalise identically
+  //    select neither.
+  const exact = mcq.options.map((o, i) => ({ i, hit: norm(o) === n })).filter((x) => x.hit)
+  if (exact.length === 1) return exact[0].i
+  if (exact.length > 1) return null
+
   // 0a. A LABELLED LETTER, ANYWHERE IN THE SENTENCE.
   //
   // MEASURED IN PRODUCTION (2026-08-25, phys.opt.lenses, real learner account).
@@ -796,29 +839,11 @@ export function resolveMcqChoice(message: string, mcq: TutorMCQ): number | null 
     if (labelled.size > 1) return null
   }
 
-  // 0. EXACT MATCH — the strongest signal, and the one the UI actually
-  //    produces: tapping an option sends that option's text verbatim
-  //    (LessonScreen sends `option`, not a letter).
-  //
-  //    This rule exists because the first draft did NOT have it and a test
-  //    caught what that cost: `[M][L][T]⁻²` normalises to "m l t", which is
-  //    below the containment rule's length floor and whose every token is too
-  //    short for the distinctive-word rule. So SYMBOLIC options — the most
-  //    common form in physics and mathematics — could not be graded at all,
-  //    and the entire evidence pipeline would have stayed frozen for exactly
-  //    the subjects being audited.
-  //
-  //    Ambiguity is still fatal: two options that normalise identically select
-  //    neither.
-  const exact = mcq.options.map((o, i) => ({ i, hit: norm(o) === n })).filter((x) => x.hit)
-  if (exact.length === 1) return exact[0].i
-  if (exact.length > 1) return null
-
   // ── PRECONDITIONS FOR EVERY WEAKER RULE ────────────────────────────────
   //
-  // Rules 0a and 0 above are POSITIVE STATEMENTS OF CHOICE: an explicitly
-  // punctuated label, or text identical to an option (which is what tapping
-  // the option sends). Everything below infers a choice from a sentence, and
+  // Rules 0 and 0a above are POSITIVE STATEMENTS OF CHOICE: text identical to
+  // an option (which is what tapping the option sends), or an explicitly
+  // punctuated label. Everything below infers a choice from a sentence, and
   // inference needs to know when the sentence is not a choice at all.
   //
   // MEASURED, all three against the real grader:

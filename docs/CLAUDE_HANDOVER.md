@@ -1454,6 +1454,103 @@ separate, smaller changes. **P-9 remains OPEN; nothing was patched.**
 
 ---
 
+## 9n. P-9 ROOT FIX — exact match now runs before the label scan (2026-09-05)
+
+Ordering change only, in one function. Rule 0a is byte-for-byte unchanged; it
+simply no longer runs first.
+
+### The fix
+`src/lib/teaching/mcq.ts` — the rule 0 EXACT MATCH block (`norm(option) === n`)
+moved ABOVE the rule 0a labelled-letter scan, inside `resolveMcqChoice`, after
+the `NON_COMMITTAL` guard. 46 insertions / 21 deletions, nearly all comment.
+No other file's behaviour is touched: no route, no gate, no mastery, no schema,
+no corpus content.
+
+Why this is the right cut: tapping an option sends that option's text verbatim,
+so an exact match is the learner saying WHICH option in the only way the UI can
+say it. Rule 0a INFERS a choice from letters in the sentence; when the sentence
+IS an option, those letters belong to the author.
+
+### The defect was worse than §9m reported — a correction
+§9m said the failure direction "is always under-credit … cannot create false
+mastery". **That is wrong, and the measurement that proves it was made while
+implementing this fix.** Rule 0a returning ONE labelled letter did not return
+null — it returned THAT LETTER'S INDEX, which is a different option than the one
+tapped. Measured across the corpus before the fix:
+
+| | before | after |
+|---|---|---|
+| option taps resolving to a DIFFERENT option | **6** | **0** |
+| — of which a DISTRACTOR graded as CORRECT (false credit) | **4** | **0** |
+| — of which the CORRECT option graded as a distractor | 2 | 0 |
+| option taps resolving to null | 47 | 42 |
+| correct options unresolvable | 21 | **16** |
+| probes where NO option resolves | 4 | **3** |
+| of those, caused by rule 0a | 3 | **0** |
+
+The four false-credit cases were `phys.em.dc-circuits`, `phys.mech.impulse`
+("A, because it is a much bigger force" -> index 0), `phys.mech.angular-momentum`
+("Object A, since it spins faster" -> 0) and `phys.wave.shm-energy`
+("At x = A, the point of maximum displacement" -> 0). A learner tapping any of
+those distractors was recorded as answering correctly. **So this defect COULD
+fabricate mastery evidence, and did so on four probes.** §9m stands otherwise.
+
+The remaining **16** unresolvable correct options are the unrelated symbolic
+class (`+500 J`, `MgCl₂`, `Δx · Δp ≥ ħ/2`, `−3.4 eV`, `pH 9 and pOH 5`). **Out
+of P-9's scope, untouched, and not hidden** — they are ratcheted by a test.
+
+### Tests added — `src/tests/mcqExactMatchPrecedence.test.ts` (13 cases, new file)
+Drives the REAL `resolveMcqChoice` over the REAL corpus modules; nothing is
+hand-transcribed, so a future edit to one of these probes is exercised as
+written.
+
+1. The three probes rule 0a mis-read (`phys.em.resistivity`,
+   `chem.equil.solubility`, `chem.bio.nucleic-acids`): every option must resolve
+   to its own index.
+2. A FIXTURE guard — `phys.em.resistivity`'s correct option must still carry two
+   labelled letters. Without it, test 1 could go green because the content was
+   rewritten rather than the parser fixed.
+3. Negative controls, all preserved: `"A."` -> 0; `"ok i think A. but sir
+   explain"` -> 0 (the 2026-08-25 production case rule 0a exists for);
+   `"A or B, i am not sure"` -> null; `"a lens bends light"` -> null;
+   `"maybe A. or maybe B."` -> null (two labels in the LEARNER's own sentence
+   are still ambiguous); two options normalising alike -> null.
+4. **Corpus guard, not ratcheted:** no option anywhere may resolve to a
+   DIFFERENT option. The only acceptable number is zero, because this is the
+   false-evidence half.
+5. **Corpus guard, scoped:** no correct option may be unresolvable *because of
+   the labelled-letter rule*. Deliberately not asserted over the other 16 —
+   asserting there would either fail for something this fix never claimed to
+   address, or invite editing the corpus to make a test pass.
+6. **Ratchet:** total unresolvable correct options `<= 16`, and corpus size
+   `>= 2750`. It must not grow; lowering it is separate work.
+
+**NEGATIVE CONTROL RUN (the check this repo has been bitten for skipping):**
+with `mcq.ts` reverted to pre-fix, **6 of the 13 fail**; the 7 that pass in both
+states are exactly the negative controls, which is their job. The suite is not a
+mirror of the implementation.
+
+### Validation
+- Targeted first: 7 mcq/parser test files, **200 passed**.
+- `npx tsc --noEmit` **clean**.
+- Full suite **555 files / 11,890 passed / 9 skipped**.
+- `npm run build` **clean**, middleware 79.7 kB (unchanged).
+
+### Production validation
+PENDING at the time of this commit — the fix has to be deployed before the
+resistivity path can be exercised, and this commit is the deploy. Result is
+recorded immediately below in §9o. **No repeated attempts will be manufactured:
+one run of the established two-concept dispatcher, and whatever it reports.**
+
+### Status
+**P-9 root defect FIXED.** Explicitly NOT in this change and still open:
+**AMP-A** (`route.ts` empty-turn/degraded classification) and **AMP-B**
+(`measurementIdentity.ts` degraded-turn verdict precedence) — both still
+mislabel a turn and a run, and both were left alone deliberately.
+**P-10** and **P-11** untouched.
+
+---
+
 ## 10. Handover History
 
 | Date | Session | Action | Result |
@@ -1471,6 +1568,7 @@ separate, smaller changes. **P-9 remains OPEN; nothing was patched.**
 | 2026-09-05 | P-7 | Commit the five untracked batch dispatchers | CLOSED. Owner authorised; committed verbatim as `7aaf45e7`. Working tree now clean. |
 | 2026-09-05 | O-2 | Apply the P-8 remediation via Supabase MCP, then certify the two concepts | Both rows revived to v2 with repo content; physics content drift measured at ZERO; solenoid UNMEASURED -> CERTIFIED (twice); resistivity blocked by the pre-existing ungradeable-answer seam, misreported as FAILED_INFRASTRUCTURE. P-8 CLOSED. See 9j/9k/9l. |
 | 2026-09-05 | P-9 | Diagnose the ungradeable-answer seam (read-only) | ROOT CAUSE FOUND: resolveMcqChoice rule 0a reads `Wire A:`/`Wire B:` in the option TEXT as two learner labels and returns null before the exact match. 21 of 2,750 corpus probes have an ungradeable correct option (3 this cause, 18 another). Two amplifiers identified. Nothing patched. See §9m. |
+| 2026-09-05 | P-9 fix | Exact-match precedence in resolveMcqChoice + regression tests | Ordering-only change; rule 0a unchanged. Corpus mis-attributions 6 -> 0 (4 were false credit), rule-0a nulls 3 -> 0, unrelated symbolic class 16 left ratcheted. 13 new tests, 6 fail pre-fix. Suite 11,890 pass, tsc + build clean. See §9n. |
 
 ## 11. Do Not Rediscover
 
