@@ -1177,6 +1177,99 @@ the rollback values). HEAD == origin/main. No source file changed by O-2.
 
 ---
 
+## 9l. O-2 CERTIFICATION — solenoid CERTIFIED; resistivity blocked by a DIFFERENT, pre-existing seam (2026-09-05)
+
+Protocol unchanged: `runPhysicsO2_2Concept.ts` imports `runTierA.ts`'s exported
+`runWithRetry` verbatim and adds no verdict, retry or answer-source logic. Two
+workers, one concept each; w1 deliberately unused (its spine log makes every
+hydration expensive, §9e). Committed, per the P-7 policy.
+
+### Result — two runs, both against `de879a09`
+
+| run | concept | verdict | turns | phase | check/practice | verified | closed |
+|---|---|---|---|---|---|---|---|
+| `physicsO2-2c-1788582016781` | **phys.em.solenoid** | **CERTIFIED** | 6 | TRANSFER | 1 / 2 | true | true |
+| | phys.em.resistivity | FAILED_INFRASTRUCTURE (retried) | 6 | CHECK | 1 / 0 | false | false |
+| `physicsO2-2c-1788582254077` | **phys.em.solenoid** | **CERTIFIED** | 6 | TRANSFER | 1 / 2 | true | true |
+| | phys.em.resistivity | FAILED_INFRASTRUCTURE (retried) | 5 | PRACTICE | 1 / 0 | false | false |
+
+**`phys.em.solenoid` moves UNMEASURED -> CERTIFIED, reproducibly.** For that
+concept the drift WAS the whole reason it was unmeasured.
+
+### The remediation is verified correct for BOTH concepts, independently of the verdict
+- The harness's answer index (`buildAnswerIndex`, real module, fingerprint
+  `probes:2750:h5e86a3a9`) now contains **both** remediated stems, unambiguous,
+  with the authored correct text. Neither can return `no-authored-match` again.
+- Production's stored choices are **byte-identical to the repo**: per-option md5
+  matches on all six options (207/107/71 and 198/106/100 chars). An earlier
+  aggregate-hash mismatch was **my own query artifact** (`string_agg` with an
+  `E''` separator), not a content difference — corrected here rather than left
+  standing.
+- Production **served the remediated resistivity probe**: runtime log
+  `[gate-assessment] {"phase":"CHECK","move":"ask","probeFound":true,
+  "converted":true,"assetId":"61582820-e1e2-43cc-ae61-4b167c3316c6"}`.
+
+### `FAILED_INFRASTRUCTURE` on resistivity is a MISCLASSIFICATION (VERIFIED)
+**No provider failed.** In the whole run window the Vercel logs contain **zero**
+`all providers failed` and **zero** `AIRateLimitError` lines, and every
+`[ai/attempt]` reads `provider=groq outcome=ok http_status=200`. What actually
+happened, from the captured turn at 04:27:03:
+
+1. groq returned 200 with 632 chars.
+2. The learner's answer to the remediated probe came back ungradeable —
+   `[mcq-grade] { asked: 'Start from a copper wire of resistance R', chosen: null,
+   correct: null }` — and the I1 guard fired
+   (`[mcq-reoffer-disambiguation] ungradeable answer against a pending probe`).
+3. The model asked its own question instead; the gate declined it
+   (`[gate-assessment] {"event":"model-probe-withheld","reason":"gate-declined-by-policy"}`).
+4. Stripping that question left the reply EMPTY (`empty response from model,
+   finish_reason: stop`), so the route served the degraded template and stamped
+   `provider: "degraded"`.
+5. The harness reads `isDegradedProvider` and reports FAILED_INFRASTRUCTURE.
+
+So the verdict is honest about "the teaching engine was not exercised" and wrong
+about WHY. This is the fourth-blind-spot pattern CLAUDE.md already warns about:
+**read the captured turn before believing a verdict.**
+
+**Root cause of the ungradeable submission: UNKNOWN.** It is NOT content
+(byte-identical), NOT the answer index (present and unambiguous), and NOT the
+provider. Option length alone does not explain it either — solenoid's correct
+option is 198 chars and graded fine, twice. It belongs to the I1 / P-9
+ungradeable-answer seam, which this task forbids touching. **Not diagnosed
+further, not patched.**
+
+**No third attempt was made.** The registered retry policy fired once per run,
+twice in total; the cause is not transient, so more attempts would only
+manufacture the same evidence.
+
+### Session and attempt hygiene (MEASURED)
+- Sessions created in the window: w2 4, w3 2 (two runs x one concept x
+  {lesson-init + retry}). **0 ACTIVE afterwards** on both accounts.
+- `lesson_attempts`: solenoid (`lesson:142`) **2 x COMPLETED, 1 concept mastered
+  each, 0 needing review, 0 budget exhaustions**, 107 s and 82 s. Resistivity
+  (`lesson:130`) 1 IN_PROGRESS, 0 mastered, **0 needing review, 0 budget
+  exhaustions** — no teaching failure was recorded against it.
+- No regression: nothing previously CERTIFIED was re-run or changed.
+
+### Updated Physics Tier-A totals
+149 attempted -> **141 CERTIFIED / 8 UNMEASURED**. `phys.em.solenoid` moves
+UNMEASURED -> CERTIFIED. `phys.em.resistivity` is **no longer UNMEASURED-by-drift
+but is not certified**: its latest verdict is FAILED_INFRASTRUCTURE, which is
+neither a certification nor a teaching failure. **No historical
+no-authored-match population is reclassified beyond these two concepts.**
+
+### P-8 closure
+**P-8 is CLOSED.** Root cause verified (§9g), remediation applied and validated
+(§9k), physics content drift measured at **zero**, and one of the two affected
+concepts certified. The residue is not drift.
+
+Open: **P-9** (ungradeable-answer seam — now with a second, sharper instance),
+**P-10** (3 duplicate-slug rows), **P-11** (the seeder's revive path is dead code:
+`where: { id: … }` against an `assetId` primary key, in a file `tsconfig`
+excludes). P-2 / P-5 not started. **P-7 closed** (§9f).
+
+---
+
 ## 10. Handover History
 
 | Date | Session | Action | Result |
@@ -1192,6 +1285,7 @@ the rollback values). HEAD == origin/main. No source file changed by O-2.
 | 2026-09-05 | P-8R | Attempt remediation of the two drifted probes | STOPPED at the write boundary: no DATABASE_URL, so the canonical seeder cannot run, and the bootstrap cannot revive a DEPRECATED row (status-agnostic prefetch + partial unique index). No production write. See §9h. |
 | 2026-09-05 | O-1 | Complete the P-8 remediation from a DATABASE_URL environment | STOPPED: this container still has no DATABASE_URL (re-verified). No production write. Copy-paste runbook recorded for an environment that does. See §9i. |
 | 2026-09-05 | P-7 | Commit the five untracked batch dispatchers | CLOSED. Owner authorised; committed verbatim as `7aaf45e7`. Working tree now clean. |
+| 2026-09-05 | O-2 | Apply the P-8 remediation via Supabase MCP, then certify the two concepts | Both rows revived to v2 with repo content; physics content drift measured at ZERO; solenoid UNMEASURED -> CERTIFIED (twice); resistivity blocked by the pre-existing ungradeable-answer seam, misreported as FAILED_INFRASTRUCTURE. P-8 CLOSED. See 9j/9k/9l. |
 
 ## 11. Do Not Rediscover
 
