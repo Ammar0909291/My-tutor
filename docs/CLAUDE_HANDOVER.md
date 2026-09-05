@@ -1537,10 +1537,9 @@ mirror of the implementation.
 - `npm run build` **clean**, middleware 79.7 kB (unchanged).
 
 ### Production validation
-PENDING at the time of this commit — the fix has to be deployed before the
-resistivity path can be exercised, and this commit is the deploy. Result is
-recorded immediately below in §9o. **No repeated attempts will be manufactured:
-one run of the established two-concept dispatcher, and whatever it reports.**
+Result in §9o below. Deployed as `dpl_HeX9M9r3Pgc5RjnmefRpjM4FqwEA` (SHA
+`c850af53`), READY, then ONE run of the established two-concept dispatcher —
+no repeated attempts.
 
 ### Status
 **P-9 root defect FIXED.** Explicitly NOT in this change and still open:
@@ -1548,6 +1547,55 @@ one run of the established two-concept dispatcher, and whatever it reports.**
 (`measurementIdentity.ts` degraded-turn verdict precedence) — both still
 mislabel a turn and a run, and both were left alone deliberately.
 **P-10** and **P-11** untouched.
+
+---
+
+## 9o. P-9 PRODUCTION VALIDATION — resistivity CERTIFIED on the first run after the fix (2026-09-05)
+
+One run, `physicsO2-2c-1788583912536`, against `dpl_HeX9M9r3Pgc5RjnmefRpjM4FqwEA`
+(SHA `c850af53`, READY). Protocol unchanged. No attempt was repeated.
+
+| concept | verdict | turns | phase | check/practice | verified | closed | degraded |
+|---|---|---|---|---|---|---|---|
+| **phys.em.resistivity** | **CERTIFIED** | 6 | TRANSFER | 1 / 2 | true | true | 0 |
+| **phys.em.solenoid** | **CERTIFIED** | 6 | TRANSFER | 1 / 2 | true | true | 0 |
+
+`phys.em.resistivity` goes **FAILED_INFRASTRUCTURE -> CERTIFIED** on the first
+attempt after the fix deployed, having failed twice on two separate runs before
+it. `failed: []`, `unmeasuredReason: null`, **0 degraded turns** — the empty-turn
+and degraded-classification path (AMP-A) was never entered, because the answer
+graded instead. That is the causal chain from §9m closed end to end in
+production, not just offline.
+
+**Hygiene (MEASURED):** 1 session per worker, **0 ACTIVE afterwards**;
+`lesson_attempts` both COMPLETED with 1 concept mastered, **0 needing review, 0
+budget exhaustions**, 89 s and 82 s. Health after: 3x HTTP 200, `db:true`,
+30s / 15s.
+
+### Updated Physics Tier-A totals
+149 attempted -> **142 CERTIFIED / 7 UNMEASURED**. Both P-8 concepts are now
+certified. No other concept was re-run and no historical verdict is
+reinterpreted.
+
+### Status
+**P-9 ROOT DEFECT FIXED AND VALIDATED IN PRODUCTION.**
+
+Still open, deliberately untouched:
+- **AMP-A** — `route.ts:5366` treats a turn as empty when its only content is a
+  probe carried forward rather than attached this turn, and degrades it. Not
+  exercised by this run, but unchanged and still reachable.
+- **AMP-B** — `measurementIdentity.ts:111` lets one degraded turn outrank every
+  other signal in the verdict.
+- **The 16 unrelated unresolvable correct options** (short symbolic text), now
+  ratcheted by test so they cannot grow.
+- **P-10** (3 duplicate-slug rows), **P-11** (the seeder's revive path is dead
+  code).
+
+### Exact next action
+Owner's choice between AMP-A, AMP-B, the symbolic-option class, P-10 and P-11.
+Recommended first: **AMP-B**, because it is the one that makes every other
+failure in this system look like an outage — it is what turned this content
+defect into two wasted runs and a wrong diagnosis.
 
 ---
 
@@ -1569,6 +1617,7 @@ mislabel a turn and a run, and both were left alone deliberately.
 | 2026-09-05 | O-2 | Apply the P-8 remediation via Supabase MCP, then certify the two concepts | Both rows revived to v2 with repo content; physics content drift measured at ZERO; solenoid UNMEASURED -> CERTIFIED (twice); resistivity blocked by the pre-existing ungradeable-answer seam, misreported as FAILED_INFRASTRUCTURE. P-8 CLOSED. See 9j/9k/9l. |
 | 2026-09-05 | P-9 | Diagnose the ungradeable-answer seam (read-only) | ROOT CAUSE FOUND: resolveMcqChoice rule 0a reads `Wire A:`/`Wire B:` in the option TEXT as two learner labels and returns null before the exact match. 21 of 2,750 corpus probes have an ungradeable correct option (3 this cause, 18 another). Two amplifiers identified. Nothing patched. See §9m. |
 | 2026-09-05 | P-9 fix | Exact-match precedence in resolveMcqChoice + regression tests | Ordering-only change; rule 0a unchanged. Corpus mis-attributions 6 -> 0 (4 were false credit), rule-0a nulls 3 -> 0, unrelated symbolic class 16 left ratcheted. 13 new tests, 6 fail pre-fix. Suite 11,890 pass, tsc + build clean. See §9n. |
+| 2026-09-05 | P-9 validation | One production run after deploying the fix | BOTH CERTIFIED. resistivity FAILED_INFRASTRUCTURE -> CERTIFIED first attempt, 6 turns to TRANSFER, check 1 / practice 2, 0 degraded turns. Physics Tier-A now 142 CERTIFIED / 7 UNMEASURED. See §9o. |
 
 ## 11. Do Not Rediscover
 
