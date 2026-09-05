@@ -1599,6 +1599,166 @@ defect into two wasted runs and a wrong diagnosis.
 
 ---
 
+## 9p. AMP-B DIAGNOSIS — the precedence rule is correct; its INPUT is not (2026-09-05, READ-ONLY)
+
+Diagnosis only. No source, test or production change; no certification re-run.
+
+### CLASSIFICATION: **VALID BY DESIGN**
+`measurementIdentity.ts:111` (`if (input.degradedTurns > 0) return
+'FAILED_INFRASTRUCTURE'`) did the right thing with the input it was given. It is
+an intentional, documented, tested contract. The wrong verdict on
+`phys.em.resistivity` came from the SIGNAL being untrue, and that untruth is
+**AMP-A**, not this line. **No fix is warranted here.** One optional hardening
+and one dead field are recorded below.
+
+### The verdict state machine
+**Inputs** (`classifyVerdict`, a pure function): `instrumentFailed`,
+`degradedTurns`, `dirtyState`, `belowContract`, `unmeasuredReason`,
+`hardFailures[]`, `verified`, `lessonClosed`, `attempted`.
+
+**Precedence, in source order:**
+1. `instrumentFailed` -> FAILED_INSTRUMENT
+2. **`degradedTurns > 0` -> FAILED_INFRASTRUCTURE**  <- AMP-B
+3. `dirtyState` -> DIRTY_STATE
+4. `belowContract` -> FAILED_CONTENT
+5. `unmeasuredReason` -> UNMEASURED
+6. `hardFailures.length > 0` -> FAILED_PRODUCT
+7. `verified && lessonClosed` -> CERTIFIED
+8. `!attempted` -> UNMEASURED
+9. otherwise -> FAILED_PRODUCT
+
+The stated design (function doc): *"Every category above FAILED_PRODUCT is a
+reason the product was never fairly tested, so FAILED_PRODUCT is last. This
+ordering is what stops the campaign manufacturing product defects out of the
+instrument's own faults."* Rule 2 therefore overrides **rules 3-9** — every
+verdict, including CERTIFIED.
+
+### 1-2. What `degradedTurns` is, and every path that can set it
+It is **not** a count of turns and **not** measured by the harness. It is a
+one-bit re-encoding: `runTierA.ts:179` sets
+`degradedTurns = failed.includes('INFRASTRUCTURE-degraded') ? 1 : 0`
+(identically at `runPhase0Controls.ts:97`). That string has exactly ONE writer:
+`scripts/math/certify.ts:414`, `if (isDegradedProvider(last.provider))`, which
+then **`break`s the turn loop**. So a degraded turn is always the LAST turn of
+the run.
+
+`isDegradedProvider` tests `provider === 'degraded'`
+(`src/lib/eos-runtime/degradedMode.ts`). Every producer of that value in the
+product, enumerated:
+
+| # | site | trigger | genuinely infrastructure? |
+|---|---|---|---|
+| 1 | `route.ts:5114` | every provider in the failover chain threw | **YES** |
+| 2 | **`route.ts:5375`** | `!text.trim()` after tag-strip + probe withhold — **AMP-A** | **NO** |
+| 3 | `lesson-init/route.ts:464` | every provider threw | **YES** |
+| 4 | `kernel/stages/render.ts:49` | provider threw in the kernel render stage | **YES** |
+
+**Three of the four are real outages. Exactly one is not, and it is AMP-A.**
+
+### 3. Does `degradedTurns > 0` necessarily mean infrastructure failure?
+**No — but only because of site 2.** Remove site 2 and the answer becomes yes.
+The signal is a single overloaded string carrying two different meanings: "no
+model answered" (sites 1, 3, 4) and "a model answered, but nothing survived the
+turn's own guards" (site 2).
+
+### 4. Can a degraded turn coexist with valid server-graded evidence?
+**Yes, and it did — measured.** Both O-2 resistivity records:
+`degradedTurns: 1` with `checkCorrect: 1`, reached CHECK/PRACTICE. That credit
+was real: production logs show `[gate-assessment] probeFound:true converted:true
+assetId:61582820-…` and `[mcq-grade] … correct: true` on earlier turns. So
+evidence and a degraded turn are not mutually exclusive, and the run breaks
+before the concept can finish.
+
+### 5. What can rule 2 override?
+DIRTY_STATE, FAILED_CONTENT, UNMEASURED, FAILED_PRODUCT and **CERTIFIED**. Only
+FAILED_INSTRUMENT outranks it.
+
+### 6. Can it hide a teaching/content/grading failure as infrastructure?
+**Yes — demonstrated twice, via site 2.** P-9's parser defect (a valid tap
+scoring `null`) reached this line as `degradedTurns: 1` and was reported
+FAILED_INFRASTRUCTURE on `physicsO2-2c-1788582016781` and `…-1788582254077`.
+`runTierA.ts:217` then spent its one automatic retry on a fault a retry cannot
+fix, and §9l initially recorded the cause as unknown. **Through sites 1/3/4 it
+cannot**: no model output exists, so there is no teaching to misjudge.
+
+### 7. Can it suppress or distort certification accounting?
+It **cannot fabricate a pass** — FAILED_INFRASTRUCTURE is never CERTIFIED, and
+the safe direction is preserved. What it does is **withhold a verdict and
+mislabel the reason**: a concept with real earned evidence is reported as an
+outage, so it is neither certified nor honestly recorded as blocked. Cost
+measured: 2 runs, 2 retries, one wrong diagnosis.
+
+### 8. Do existing tests establish this precedence? **YES — explicitly**
+- `src/tests/certificationMeasurementIdentity.test.ts:42-44` — *"a degraded
+  provider outranks a teaching verdict"*: `degradedTurns: 1` +
+  `hardFailures: ['D3-unreachable']` -> `FAILED_INFRASTRUCTURE`.
+- Also pinned there: FAILED_INSTRUMENT outranks it (`degradedTurns: 3`).
+
+### 9. Is it an intentional documented contract? **YES — in three places**
+- `classifyVerdict`'s own doc comment (Protocol v1 §6 precedence).
+- `scripts/math/certify.ts:397-413` — *"AN OUTAGE IS NOT A TEACHING VERDICT"*,
+  with the measured nine-concept 429 sweep that motivated it.
+- `src/tests/certifyOutageClassification.test.ts` — the same header, plus the
+  deliberate rule *"an outage stays unmeasured even when the run also recorded
+  teaching codes … The outage still wins: those turns cannot be trusted."*
+
+This is not an accident to be corrected. It was written to stop the campaign
+manufacturing product defects out of provider faults, and it has done that.
+
+### 10. Smallest safe fix, if one were warranted
+**None in `measurementIdentity.ts`.** The correct repair is AMP-A: stop site 2
+claiming `provider = 'degraded'` for a turn a model DID author. That restores
+the precondition rule 2 already assumes, and no verdict logic changes.
+
+Weakening rule 2 instead — e.g. "degraded only wins when there is no graded
+evidence" — would be **the wrong cut**, and the repository already argues why:
+under a genuine outage the run breaks mid-concept, so surviving evidence is
+partial by construction, and letting it produce a teaching verdict is exactly
+the mistake `certify.ts:397-413` records being burned by three times.
+
+### Recorded, not recommended as urgent: `providersSeen` is dead
+`ConceptRecord.providersSeen: string[]` exists to corroborate which provider
+served a run — precisely the cross-check that would have caught site 2. It is
+hardcoded `[]` at BOTH writers (`runTierA.ts:198`, `runPhase0Controls.ts:150`)
+and is empty in **240 of 240** artifact records ever written. Populating it, and
+having the harness require agreement between the payload's `provider` string and
+what it observed, is the only defensible AMP-B-side hardening — a corroboration
+improvement, not a precedence change. **Owner decision; not proposed as part of
+AMP-A.**
+
+### Regression test design (designed, NOT implemented — no tests were modified)
+Pure-function cases against the real `classifyVerdict`:
+1. `degradedTurns: 1` with valid graded evidence (`verified: true`,
+   `lessonClosed: true`) -> FAILED_INFRASTRUCTURE. **Pins the contract as it
+   stands** — this must NOT be "fixed" by AMP-A work.
+2. `degradedTurns: 1` with no evidence -> FAILED_INFRASTRUCTURE.
+3. `instrumentFailed: true` + `degradedTurns: 1` -> FAILED_INSTRUMENT
+   (already covered; keep as the negative control on ordering).
+4. A content/grading failure with `degradedTurns: 0` -> FAILED_CONTENT /
+   FAILED_PRODUCT / UNMEASURED as the lower rules dictate — the assertion that
+   would have failed loudly once AMP-A stops mislabelling such turns.
+5. Producer-level, the one that actually matters: a route-shaped case where a
+   model DID answer but the reply emptied — assert the payload's `provider` is
+   NOT `'degraded'`. **That test belongs to AMP-A**, and it is the test that
+   would have prevented this entire misdiagnosis.
+
+### Affected downstream consumers of the verdict
+`runTierA.ts:217` (the one automatic retry), the per-run `counts` summary and
+`.jsonl` artifacts, every cohort tally in this ledger (§9c/§9e/§9l/§9o), and the
+Physics Tier-A totals. None fabricate mastery; all inherit the mislabelled
+reason.
+
+### Status / exact next action
+**AMP-B: VALID BY DESIGN — no change proposed.** The defect it exposed is
+**AMP-A**, still open at `route.ts:5366-5378`: a turn whose only content is a
+probe carried forward (not attached this turn) is treated as empty and stamped
+degraded, with `withheldModelMcqHoisted` and the pending probe both available
+and unconsulted. **Next action: fix AMP-A**, with test 5 above. Then the
+optional `providersSeen` corroboration, as an owner decision.
+P-10 and P-11 untouched.
+
+---
+
 ## 10. Handover History
 
 | Date | Session | Action | Result |
@@ -1618,6 +1778,7 @@ defect into two wasted runs and a wrong diagnosis.
 | 2026-09-05 | P-9 | Diagnose the ungradeable-answer seam (read-only) | ROOT CAUSE FOUND: resolveMcqChoice rule 0a reads `Wire A:`/`Wire B:` in the option TEXT as two learner labels and returns null before the exact match. 21 of 2,750 corpus probes have an ungradeable correct option (3 this cause, 18 another). Two amplifiers identified. Nothing patched. See §9m. |
 | 2026-09-05 | P-9 fix | Exact-match precedence in resolveMcqChoice + regression tests | Ordering-only change; rule 0a unchanged. Corpus mis-attributions 6 -> 0 (4 were false credit), rule-0a nulls 3 -> 0, unrelated symbolic class 16 left ratcheted. 13 new tests, 6 fail pre-fix. Suite 11,890 pass, tsc + build clean. See §9n. |
 | 2026-09-05 | P-9 validation | One production run after deploying the fix | BOTH CERTIFIED. resistivity FAILED_INFRASTRUCTURE -> CERTIFIED first attempt, 6 turns to TRANSFER, check 1 / practice 2, 0 degraded turns. Physics Tier-A now 142 CERTIFIED / 7 UNMEASURED. See §9o. |
+| 2026-09-05 | AMP-B | Diagnose the degradedTurns verdict precedence (read-only) | VALID BY DESIGN — documented in 3 places and pinned by an existing test. 3 of the 4 producers of provider='degraded' are real outages; the 4th is AMP-A. No fix proposed here; the repair is AMP-A. Recorded: providersSeen is hardcoded [] in 240/240 records. See §9p. |
 
 ## 11. Do Not Rediscover
 
