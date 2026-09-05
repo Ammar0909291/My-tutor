@@ -114,6 +114,54 @@ export async function register() {
   if (onDeadline) clearTimeout(onDeadline)
 }
 
+/**
+ * Is this slot ALREADY served by a live difficulty-ladder sibling?
+ * P-10-FOLLOW-UP-D (docs/CLAUDE_HANDOVER.md §9w classified this CATEGORY 3).
+ *
+ * THE DEFECT THIS CLOSES. The manual seeder's corpus and this bootstrap's are
+ * not the same set — 45 mathematics slots hold two probes in the seeder's
+ * corpus (so it emits the 5-segment `…:gradeBand:difficulty` identities) and
+ * exactly one in this hook's (so this hook emits the plain 4-segment identity).
+ * Both writers own the same rows, and the partial unique index keys on the slug
+ * STRING, so the two identities are distinct keys and BOTH can be ACTIVE. If
+ * the seeder writes first, this hook would then silently add a 4-segment
+ * duplicate of a question already served — measured at exactly 45.
+ *
+ * Step 0.8 cannot see it: from THIS corpus the slot is a legitimate singleton,
+ * so its base slug is not "abandoned" and `abandonedLegacyProbeSlugs` correctly
+ * says nothing. This is the mirror question, asked per slot.
+ *
+ * WHY A SKIP AND NOT A REFUSAL. A live 5-segment sibling is not a stale row
+ * needing cleanup — it is the RICHER, correct identity, and the question is
+ * already being served. There is nothing for a human to resolve, so the slot is
+ * simply passed over. That is the opposite of Step 0.8, where the offending row
+ * IS wrong and the run must stop.
+ *
+ * WHY DEPRECATED/RETIRED SIBLINGS DO NOT SUPPRESS. Those are not served
+ * (`findBestProbe` filters on ACTIVE), so a slot whose ladder has been retired
+ * is genuinely uncovered and this hook's 4-segment row is the only thing that
+ * would serve it. Suppressing there would remove content rather than deduplicate
+ * it.
+ *
+ * EXACT MATCHES ONLY — never a prefix scan. The candidate must BE the base slug
+ * (if the resolver already appended a difficulty, this writer agrees the slot is
+ * a ladder and its own identity is correct), and each sibling is constructed by
+ * exact concatenation, so a different concept, band, kind or an unrelated slug
+ * that merely starts with the same characters can never match.
+ */
+export function servedByLiveLadderSibling(
+  candidateSlug: string,
+  baseSlug: string,
+  liveSeedSlugs: ReadonlySet<string>,
+  difficulties: readonly string[],
+): boolean {
+  if (candidateSlug !== baseSlug) return false
+  for (const d of difficulties) {
+    if (liveSeedSlugs.has(`${baseSlug}:${String(d).toLowerCase()}`)) return true
+  }
+  return false
+}
+
 async function bootstrapAssets() {
   try {
     // ONE POOL PER PROCESS, NOT TWO.
@@ -187,7 +235,10 @@ async function bootstrapAssets() {
       const { CHEMISTRY_DEPTH_PROBES } =
         await import('./lib/teaching/assets/chemistryDepthSeedAssets')
       const { hashContent } = await import('./lib/teaching/assets/similarity')
-      const { AssetFamily, AssetStatus, AuthorKind, ExplanationStyle } = await import('@prisma/client')
+      const { AssetFamily, AssetStatus, AuthorKind, ExplanationStyle, ProbeDifficulty } = await import('@prisma/client')
+      // The ladder rungs a slug may carry, from the enum itself rather than a
+      // hand-written list, so a new rung cannot silently escape the check.
+      const PROBE_DIFFICULTIES = Object.values(ProbeDifficulty) as string[]
 
       const ALL_EXPLANATIONS = [...SEED_EXPLANATIONS, ...AUTHORED_EXPLANATIONS, ...CHEMISTRY_EXPLANATIONS]
       const ALL_PROBES = [...SEED_PROBES, ...AUTHORED_PROBES, ...CHEMISTRY_PROBES, ...PHYSICS_BAND_GAP_PROBES,
@@ -480,6 +531,11 @@ async function bootstrapAssets() {
       // cold start with nothing to do does not pay for it at all.
       const abandonedSlugs = abandonedLegacyProbeSlugs(ALL_PROBES)
       const liveAbandoned: Array<{ assetId: string; canonicalSlug: string; status: string }> = []
+      // Every seed-owned slug that is currently SERVING, collected in the same
+      // pass. `servedByLiveLadderSibling` (P-10-FOLLOW-UP-D) asks its four exact
+      // questions against this set, so that guard costs no query either — the
+      // rows are the ones already being read on the line below.
+      const liveSeedSlugs = new Set<string>()
       for (const row of await withRetry(() => prisma.assetIdentity.findMany({
         where: seedOwnershipWhere() as never,
         select: {
@@ -500,7 +556,10 @@ async function bootstrapAssets() {
         // Live == not revivable. A DEPRECATED/RETIRED row under an abandoned
         // slug is the RESOLVED state (it is what the P-10 remediation left
         // behind), so it must not block a legitimate ladder from seeding.
-        if (abandonedSlugs.has(row.canonicalSlug) && !SEED_REVIVABLE_STATUSES.includes(row.status)) {
+        // The same rule answers both guards, which is why it is computed once.
+        const live = !SEED_REVIVABLE_STATUSES.includes(row.status)
+        if (live) liveSeedSlugs.add(row.canonicalSlug)
+        if (abandonedSlugs.has(row.canonicalSlug) && live) {
           liveAbandoned.push({ assetId: row.assetId, canonicalSlug: row.canonicalSlug, status: row.status })
         }
       }
@@ -644,6 +703,10 @@ async function bootstrapAssets() {
       // hollow. Counted separately from `created` so the log distinguishes
       // "new asset" from "repaired a shell", which are different events.
       let repaired = 0
+      // Slots passed over because a live ladder sibling already serves them
+      // (P-10-FOLLOW-UP-D). Counted, not warned about: this is a correct,
+      // expected outcome, not a fault anyone needs to clean up.
+      let siblingCovered = 0
 
       // ── HOLLOW IDENTITIES SELF-HEAL ───────────────────────────────────────
       //
@@ -778,6 +841,21 @@ async function bootstrapAssets() {
           skipped++
           continue
         }
+        // P-10-FOLLOW-UP-D. Nothing exists under OUR slug — but the other
+        // writer's corpus may hold this slot as a ladder and already serve it
+        // under the richer 5-segment identity. Creating here would duplicate a
+        // live question under a second identity (measured: 45 mathematics
+        // slots). Per slot, no query, no abort: the slot is covered.
+        if (servedByLiveLadderSibling(
+          canonicalSlug,
+          seedCanonicalSlug(p.conceptId, p.probeKind, p.gradeBand),
+          liveSeedSlugs,
+          PROBE_DIFFICULTIES,
+        )) {
+          siblingCovered++
+          skipped++
+          continue
+        }
         const assetId = randomUUID()
         newIdentities.push({
           assetId,
@@ -869,7 +947,8 @@ async function bootstrapAssets() {
 
       console.log(
         `[instrumentation] asset bootstrap slice: created=${created} repaired=${repaired}` +
-        ` skipped=${skipped} failed=${failed} spent=${budgetSpent}/${WRITE_BUDGET}` +
+        ` skipped=${skipped}${siblingCovered > 0 ? ` (${siblingCovered} covered by a live ladder sibling)` : ''}` +
+        ` failed=${failed} spent=${budgetSpent}/${WRITE_BUDGET}` +
         ` total=${EXPECTED_IDENTITIES}` +
         (budgetSpent >= WRITE_BUDGET ? ' — budget spent, the next cold start continues' : ' — nothing left to do') +
         (failed > 0 ? '; some writes failed (likely DB timeouts) and will be retried' : '')

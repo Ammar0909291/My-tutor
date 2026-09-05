@@ -237,7 +237,17 @@ describe('the guard is wired into src/instrumentation.ts, not merely simulated',
 
   it('computes abandonment from the bootstrap corpus and refuses on a live hit', () => {
     expect(CODE).toMatch(/const abandonedSlugs = abandonedLegacyProbeSlugs\(ALL_PROBES\)/)
-    expect(CODE).toMatch(/abandonedSlugs\.has\(row\.canonicalSlug\)\s*&&\s*!SEED_REVIVABLE_STATUSES\.includes\(row\.status\)/)
+    // AMENDED 2026-09-05 (P-10-FOLLOW-UP-D), in place, supersession recorded.
+    // This used to pin the fused expression
+    //   abandonedSlugs.has(row.canonicalSlug) && !SEED_REVIVABLE_STATUSES.includes(row.status)
+    // D hoisted the liveness half into `const live = ...` because the new
+    // ladder-sibling guard needs the SAME answer for the same row, and computing
+    // it twice is how two guards drift apart. The invariant is unchanged and is
+    // now asserted in two halves, which is strictly stronger than the fused
+    // regex: liveness must still be derived from the shared constant, AND the
+    // abandoned check must still be conjoined with it.
+    expect(CODE).toMatch(/const live = !SEED_REVIVABLE_STATUSES\.includes\(row\.status\)/)
+    expect(CODE).toMatch(/abandonedSlugs\.has\(row\.canonicalSlug\)\s*&&\s*live/)
     expect(CODE).toMatch(/if \(liveAbandoned\.length > 0\) \{/)
   })
 

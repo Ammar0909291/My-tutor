@@ -2699,7 +2699,109 @@ because they are measurements rather than product code.
 ### Status
 **P-10-FOLLOW-UP-C: INVESTIGATED AND CLASSIFIED — CATEGORY 3.** No code
 changed. Awaiting an owner decision on the presented fix (§9) and, separately,
-on the ownership question (§10).
+on the ownership question (§10). **The fix was approved and implemented in
+§9x; the ownership question (§10) REMAINS OPEN.**
+
+---
+
+## 9x. P-10-FOLLOW-UP-D — the ladder-sibling guard, implemented (2026-09-05)
+
+**One product file changed: `src/instrumentation.ts`.** No production DB access,
+no schema change, no migration, no corpus or ownership-tag change, no resolver
+or canonicalSlug change, no change to the manual seeder, no change to
+`abandonedLegacyProbeSlugs` / Step 0.8.
+
+### The defect (CATEGORY 3, diagnosed in §9w)
+The manual seeder's corpus holds 45 mathematics slots as ladders; the
+bootstrap's narrower corpus holds them as singletons. Both writers own the same
+rows, and the partial unique index keys on the canonicalSlug STRING with no
+status predicate, so `…:middle` and `…:middle:developing` are distinct keys and
+both can be ACTIVE. **Direction A** — seeder writes the 5-segment rungs, a later
+cold start sees only its singleton and creates the 4-segment row — ended with 45
+live duplicates of questions already served. Step 0.8 is correctly silent: from
+the bootstrap's own corpus that slot IS a singleton, so nothing is abandoned.
+
+### The fix
+A per-slot check in the probe planning loop, immediately after the ordinary
+`existing` dedup and before the create. If the candidate IS the 4-segment base
+slug and a **live** row exists at `base:<difficulty>` for any `ProbeDifficulty`
+rung, the slot is already served and is passed over.
+
+`servedByLiveLadderSibling(candidate, base, liveSeedSlugs, difficulties)` is a
+pure exported function in the same file, so the semantics are unit-testable
+without a database. Rungs come from `Object.values(ProbeDifficulty)`, not a
+hand-written list, so a new rung cannot escape the check. Each sibling is built
+by **exact concatenation** — never a prefix scan — so a different concept, band
+or kind, or an unrelated slug that merely shares a prefix, can never match.
+
+### Why an ACTIVE sibling suppresses and DEPRECATED/RETIRED do not
+An ACTIVE 5-segment sibling is not a stale row awaiting cleanup: it is the
+RICHER, correct identity and the question is already being served, so there is
+nothing for a human to resolve and the slot is simply skipped — deliberately a
+**per-slot skip, not an abort**, which is the opposite of Step 0.8 where the
+offending row IS wrong and the run must stop. A DEPRECATED/RETIRED sibling is
+not served at all (`findBestProbe` filters on ACTIVE), so that slot is genuinely
+uncovered and this hook's 4-segment row is the only thing that would serve it —
+suppressing there would remove content rather than deduplicate it. Liveness is
+the existing shared `SEED_REVIVABLE_STATUSES` complement, hoisted to a single
+`const live` now used by BOTH guards, because computing it twice is how two
+guards drift apart.
+
+### Zero new queries
+The prefetch already reads every seed-owned row unfiltered by slug and, since
+`cbb898d`, selects `status`. `liveSeedSlugs` is filled in that same pass, so the
+guard asks four in-memory questions per candidate: **no new query, no round
+trip, no connection, nothing added to the cheap-probe fast path.** A count
+(`siblingCovered`) is added to the existing slice summary; nothing is logged as
+a fault, because it is not one.
+
+### Tests (`src/tests/bootstrapLadderSiblingGuard.test.ts`, 15)
+Behavioural against the real helper, real resolver and real shared constant.
+A live sibling covers (A); DEPRECATED (B) and RETIRED (C) do not; unrelated
+slug, different concept, different band, different kind, prefix look-alike and
+a non-rung suffix never match (D); no sibling leaves creation alone (E);
+multiple rungs skip safely (F); Step 0.8's detector is unchanged, still 429/711
+and still silent on all 45 (G); one query with the guard firing or not (H).
+Plus a simulated planning loop showing only the covered slot is skipped, a
+DEPRECATED sibling still seeds, and an existing own-slug row is still the
+ordinary dedup — and a casing assertion, because a lower-cased slug versus the
+upper-case enum value is exactly how this guard would have been silently dead.
+
+**Corpus-level regression over the REAL 45, with a built-in control (I):** from
+Direction A's starting state (90 ACTIVE 5-segment rows, no 4-segment rows), the
+guard creates **0 of the 45** and reports `siblingCovered === 45`; with the guard
+disabled the same simulation creates **exactly 45**, and the difference between
+the two runs is exactly 45 — so nothing else was suppressed and the file cannot
+pass vacuously. A separate wiring test pins that the hook actually CALLS the
+guard, after the dedup and before the create, with `continue` and without
+`return`, `console.error/warn` or any `prisma.` call. **Manual negative control
+run: deleting the guard call from the loop fails that test; restoring it
+passes.** One FOLLOW-UP-B assertion was amended in place (supersession recorded)
+because D hoisted the liveness check into `const live`; it is now asserted in
+two halves, strictly stronger than the fused regex it replaced.
+
+### Validation
+new file 15/15 · 13 related bootstrap/seed suites **226/226** ·
+`npm run typecheck:seed-script` clean · `npx tsc --noEmit` clean · full suite
+**560 files / 11,969 passed / 9 skipped** (from 559 / 11,954 — exactly +1 file,
++15 tests) · `npm run build` exit 0, **middleware 79.7 kB unchanged**,
+`.next/server/edge-instrumentation.js` still **248 bytes**.
+
+### Remaining risk
+1. Not exercised against a real database (none reachable); correctness rests on
+   the behavioural tests, the corpus regression and both negative controls.
+2. **THE OWNERSHIP QUESTION REMAINS OPEN** (§9w §10). This stops the duplicate;
+   it does not decide which corpus is canonical. The bootstrap still claims
+   mathematics ownership while importing none of the ~30 modules that define
+   most of it, so mathematics still cannot be seeded by any automated path — the
+   bootstrap does not import the modules and the manual seeder aborts on the 45
+   (Guard 3) until a human deprecates them. The two durable options — add the
+   maths modules to the bootstrap corpus, or drop `'mathematics'` from its
+   ownership tags — are both ownership decisions and neither was taken.
+
+### Status
+**P-10-FOLLOW-UP-D COMPLETE.** Direction A closed; Direction B was already
+contained by Guard 3. Open: the ownership question above.
 
 ---
 
@@ -2726,6 +2828,7 @@ on the ownership question (§10).
 | 2026-09-05 | AMP-A fix | Empty-turn guard reads what is served, not what was attached | route.ts guard now uses mcqToServe(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted), matching the post-strip backstop 3,700 lines later. 15 new tests (A-D), one pre-existing assertion updated in place. Suite 11,905 pass, tsc + build clean. Production run deliberately not manufactured. See §9q. |
 | 2026-09-05 | P-10 | Deprecate the 3 duplicate ACTIVE seed rows | Done. Surplus rows identified by running the real slug resolver, not by slug shape. ACTIVE duplicates 3 -> 0; distinct questions unchanged; all-status row count deliberately unchanged at 1,852 (deprecation is not deletion). Exactly 3 rows touched; 0 sessions/attempts/progress. Mechanism NOT fixed — P-10-FOLLOW-UP. See §9r/§9s. |
 | 2026-09-05 | P-11 | Fix the seeder's dead revive path | `where: { id: existing.id }` -> `{ assetId: existing.assetId }` at lines 165 and 237. Proven by a scoped compiler run: 4 errors pre-fix, clean after. Added tsconfig.seed-script.json + npm run typecheck:seed-script + an 8-case DMMF test (3 fail pre-fix). Suite 11,913 pass, tsc + build clean. Path executable but not yet executed — no DATABASE_URL here. See §9t. |
+| 2026-09-05 | P-10-FOLLOW-UP-D | Implement the approved 45-slot cross-writer safety fix | `src/instrumentation.ts` only: a per-slot ladder-sibling guard (`servedByLiveLadderSibling`, pure + exported) skips a 4-segment candidate when a LIVE `base:<rung>` sibling already serves the slot; DEPRECATED/RETIRED never suppress. Exact concatenation over `Object.values(ProbeDifficulty)` — no prefix scan. **Zero new queries**: `liveSeedSlugs` is filled in the existing prefetch pass, liveness hoisted to one `const live` shared by both guards. Per-slot skip, never an abort, never logged as cleanup. 15 new tests incl. a corpus regression over the real 45 (guard ON creates 0, guard OFF creates exactly 45) + a wiring pin verified by deleting the call. Suite 560 files / 11,969 pass; tsc, seed-script typecheck, build clean; middleware 79.7 kB and edge bundle 248 B unchanged. **Ownership question still OPEN.** See §9x. |
 | 2026-09-05 | P-10-FOLLOW-UP-C | Investigate the 45-slot cross-writer divergence | **CATEGORY 3 (real open defect), fix presented NOT implemented.** 45 reproduced exactly (reverse 0, all maths, 45/45 second rung from `mathematicsSeedAssets.ts`, which the bootstrap has never imported in 3,332 commits); content identical 45/45. ONE namespace PROVEN (same authorId/authorKind/tags; `'mathematics'` in BOOTSTRAP_SEED_SUBJECTS; the hook's own comment). DB cannot prevent it: unique key is the slug STRING with no status predicate, so 4-seg and 5-seg coexist ACTIVE. Direction A (manual→bootstrap) REACHABLE and UNGUARDED — demonstrated, exactly 45 duplicates, Step 0.8 silent; Direction B (bootstrap→manual) CONTAINED by Guard 3 (aborts, 0 duplicates). Remediation path proven convergent (deprecate 45 → seeder creates 1,262 → next cold start creates 0). Also found: maths cannot currently be seeded by ANY automated path. Shallow-clone trap hit and corrected via `--unshallow`. See §9w. |
 | 2026-09-05 | P-10-FOLLOW-UP-B | Protect the automatic production cold-start writer | `src/instrumentation.ts` now runs the SAME shared detector, reusing the prefetch it already issues: `status: true` added to that existing select, decision collected in the same loop, refuses with `return` (never process.exit) before any create. **0 new queries / 0 round trips / 0 schema change**; fast path untouched; middleware 79.7 kB and edge bundle 248 B unchanged. Liveness unified as `SEED_REVIVABLE_STATUSES` so both writers cannot drift. 23 new tests, 8 fail pre-fix. Suite 11,954 pass. NEW FINDING: 45 mathematics slots resolve to different slugs between the two writers (script-only modules) — a separate mechanism, NOT fixed. See §9v. |
 | 2026-09-05 | P-10-FOLLOW-UP | Prevent recurrence of the duplicate-ACTIVE-row mechanism | Added `abandonedLegacyProbeSlugs` (brainSeedAssets.ts) + Guard 3 in seed-knowledge-assets.ts: refuses to seed (process.exit(1), no rows written) if a promoted slot's abandoned base slug still names a live row. Chosen over unconditional-difficulty (mass identity migration) and reconcile-by-rename (still an identity migration). No identity touched, no migration, no production write. instrumentation.ts's cold-start bootstrap deliberately NOT covered (runtime guardrail) — named residual risk. 18 new tests (2 caught and corrected a wrong assumption during authoring). Suite 11,931 pass, typecheck:seed-script + tsc + build clean. See §9u. |
