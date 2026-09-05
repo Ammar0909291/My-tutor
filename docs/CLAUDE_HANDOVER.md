@@ -979,6 +979,118 @@ open. P-2 / P-5 not started.**
 
 ---
 
+## 9j. O-2 PRE-REGISTRATION — recorded BEFORE the production write (2026-09-05)
+
+Owner authorised O-2: apply the canonical seeder's revive semantics to the two
+drifted rows through the Supabase MCP, because O-1's environment does not exist
+here. **This section was committed BEFORE any production mutation.**
+
+### A DEFECT FOUND WHILE RE-READING THE SEEDER — READ THIS FIRST (VERIFIED)
+
+**The canonical seeder's revive path cannot run at all. It has never run.**
+
+`scripts/brain/seed-knowledge-assets.ts` calls, in BOTH the explanation revive
+(line 165) and the probe revive (line 236):
+
+```
+await prisma.assetIdentity.update({ where: { id: existing.id }, … })
+```
+
+`AssetIdentity`'s primary key is `assetId` (`prisma/schema.prisma`:
+`assetId String @id @default(uuid())`). The generated client's
+`AssetIdentityWhereUniqueInput` (node_modules/.prisma/client/index.d.ts:155900)
+offers `assetId` and has **no `id` field at all**, so `existing.id` is
+`undefined` and the call fails Prisma validation before reaching the database.
+
+It was never caught because **`tsconfig.json` excludes `scripts`**
+(`exclude: ["node_modules","vitest.config.ts","src/tests","scripts"]`), verified
+with `tsc --listFiles`: the seeder is not in the program.
+
+**Consequences, stated plainly:**
+- O-1's expected `revived=2 created=0` was **never achievable**. The runbook in
+  §9i would have thrown at its step 4. §9i is corrected by this section.
+- Revival — the ONLY content-refresh path the pipeline has (§9g) — has never
+  worked. So P-8's drift has no working automated repair today, in any
+  environment, with or without `DATABASE_URL`.
+- This does NOT block O-2: the seeder's *intended* field updates are stated
+  unambiguously in its own `data` block, and the broken part is the row
+  SELECTOR, not the semantics. I have the two `assetId`s exactly. So the
+  semantics can be reproduced confidently — but they are reproduced from
+  INTENT, not from observed behaviour, and that distinction is recorded here
+  rather than glossed.
+- Raised as **P-11**. Not fixed here: fixing it is a source change, which this
+  task forbids.
+
+### Pre-write state (VERIFIED, re-read immediately before this entry)
+
+| field | resistivity `61582820-e1e2-43cc-ae61-4b167c3316c6` | solenoid `8e90af3e-ca2b-48c5-ad44-16c37b8c69e6` |
+|---|---|---|
+| status / version | ACTIVE / 1 | ACTIVE / 1 |
+| canonicalSlug | `phys.em.resistivity:mcq:en:high:proficient` | `phys.em.solenoid:mcq:en:high:developing` |
+| contentHash | `hbecff101` | `h3d5dbdf7` |
+| tags | `{physics,mcq}` | `{physics,mcq}` |
+| deprecationReason | null | null |
+| difficulty | PROFICIENT | DEVELOPING |
+| choices | 2 | 2 |
+| keywords / requiredVisuals | `{}` / `{}` | `{}` / `{}` |
+
+Repo targets: contentHash `h12ea45f5` / `h6045c777`; tags `{physics,mcq}`
+(unchanged); difficulty PROFICIENT / DEVELOPING (unchanged);
+targetedMisconceptions unchanged; **stem, choices (2 -> 3) and correctValue
+change**. Git HEAD == origin/main == `baa471a6`, tree clean. Production health
+200 / `db:true` / 30s / 15s.
+
+### Exactly what will be written, and nothing else
+
+Two rows in `asset_identity`, two rows in `probe_assets`. Selected by `assetId`
+IN (those two literals) and additionally guarded on the expected pre-state, so a
+row that has moved cannot be hit.
+
+Step 1 — reach the revivable state the seeder requires
+(`REVIVABLE = {DEPRECATED, RETIRED}`, line 156): `status = 'DEPRECATED'`, nothing
+else. `deprecationReason` deliberately left NULL — the seeder's revive never
+clears it, so writing one would leave a false reason on a row that ends ACTIVE.
+
+Step 2 — the seeder's revive `data` block, field for field:
+- `asset_identity`: `status='ACTIVE'`, `version = version + 1` (1 -> 2),
+  `contentHash` = repo hash, `tags = {physics,mcq}`, `updatedAt = now()`
+  (Prisma's `@updatedAt` would set it; raw SQL must).
+- `probe_assets` (the `upsert.update` branch — FIVE fields only): `stem`,
+  `choices`, `correctValue`, `difficulty`, `targetedMisconceptions`.
+  `keywords` and `requiredVisuals` appear ONLY in the `create` branch and are
+  therefore NOT touched (both are already `{}`).
+- Untouched everywhere: `parentVersionId`, `qualityScore`, `qualityConfidence`,
+  `sampleSize`, `sourceTraceId`, `intellectualProperty`, `curriculumMappings`,
+  `incompatibilities`, `prerequisites`, `createdAt`, `deprecationReason`,
+  `tolerance`, `sampleAnswer`, `discriminationScore`.
+
+### Expected result (the pass/fail criteria, fixed in advance)
+- Exactly 2 rows updated per statement; 0 rows created; no new `canonicalSlug`.
+- Both rows end ACTIVE, version 2, carrying `h12ea45f5` / `h6045c777`, with
+  production stems byte-equal to the repo stems.
+- Both keep exactly one `isCorrect` choice (3 choices each) — still gradeable.
+- resistivity keeps >= 3 ACTIVE gradeable probes (5 before, 5 after);
+  solenoid likewise (5 before, 5 after).
+- Physics drift comparison afterwards: **0 true content-drift probes**; the 3
+  P-10 duplicate-slug cases unchanged and still separate.
+- No row outside these two changes: `asset_identity` physics seed rows total
+  stays 1,852, and `max(updatedAt)` for every OTHER row stays
+  2026-08-30 21:34:08.
+
+### Rollback
+Restore from this section: `status='ACTIVE'`, `version=1`,
+`contentHash='hbecff101'`/`'h3d5dbdf7'`, and the pre-write stem/choices/
+correctValue, which are recorded in production's own history only here — so
+**this ledger entry is the rollback source** and is committed before the write
+for that reason.
+
+### STOP conditions honoured
+Both identities matched exactly; only two rows are addressed; the semantics are
+reproducible (see the defect note above for the one caveat); every statement is
+verifiable by read-back. Proceeding.
+
+---
+
 ## 10. Handover History
 
 | Date | Session | Action | Result |
