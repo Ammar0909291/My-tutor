@@ -432,6 +432,164 @@ its four siblings. Committing it is tracked as P-7, an open owner decision.
 
 ---
 
+## 9e. P-1b RESULT — SUCCESS BAND MET; residual re-diagnosed (2026-09-04/05, run `physicsP1b-4w-1788564223318`)
+
+Window 23:23:43Z -> 23:43:03Z. HEAD `bed04b6` == origin/main at launch;
+production `dpl_7qT6Df2k1Y9Lx3tBURnpzvQJAnkc` SHA `addfe07` READY (contains R3
+`77eb7df`). Split 5/10/10/10. Fingerprint `probes:2750:h5e86a3a9`.
+
+### Headline (VERIFIED)
+**26 CERTIFIED / 9 UNMEASURED = 25.7% UNMEASURED.** Wilson 95% CI
+**[0.142, 0.421]**. Pre-registered SUCCESS band was <= 30% -> **MET**;
+FALSIFIED required CI lower bound >= 0.50 -> **NOT falsified**. Point estimate
+was ~17%; the outcome is above it but inside the band declared in advance.
+P(<= 9 of 35 | pre-R3 p=0.76) = 5.1e-10. P(>= 9 of 35 | P-1's p=0.12) = 0.0197 —
+i.e. this cohort IS measurably harder than P-1's, exactly as pre-registered.
+
+Per worker: w1 1C/4U · w2 8C/2U · w3 10C/0U · w4 7C/3U. All 26 CERTIFIED are
+uniform: finalPhase TRANSFER, check 1, practice 2, verified true, lesson closed.
+0 retries · 0 degraded turns · 0 providers failed.
+
+### THE RESIDUAL IS NOT WHAT I FIRST REPORTED — read this before acting on it
+Mid-run I recorded an INFERRED hypothesis that the deep-ladder residuals were
+caused by **probe-pool exhaustion**, from a production log line
+`[gate-assessment] {"phase":"CHECK","probeFound":false}`. **That inference is now
+FALSIFIED.** The log window contained several concurrent sessions and that line
+belonged to a different one. Every one of the 9 residuals carries an explicit
+`unmeasuredReason` in the artifact, and none of them is an empty pool: 8 are
+`no-authored-match`, 1 is `options-mismatch`. Do not re-derive the exhaustion
+story from that log line.
+
+The 9 split into **three distinct causes** (VERIFIED by comparing each served
+question against the production ACTIVE probe catalogue AND the repo corpus):
+
+| # | Cause | Concepts | Owner |
+|---|---|---|---|
+| 6 | **Model-invented question** — the served question exists in neither the production ACTIVE catalogue nor the repo corpus | dimensions, significant-figures, unit-conversion, gravitational-potential, viscosity, amperes-law | **R4** — explicitly out of scope by owner instruction |
+| 2 | **Corpus drift (NEW)** — the served question IS an ACTIVE `HUMAN_CURATOR` probe in production, but its exact stem is ABSENT from the repo corpus the harness indexes | resistivity, solenoid | **INSTRUMENT** — new item P-8 |
+| 1 | **options-mismatch** — stem matched an authored probe, served options did not contain the authored answer | vector-products | R4-adjacent |
+
+### Corpus drift, the new finding (VERIFIED, and it is an INSTRUMENT defect)
+Two probes served in this run are authored, human-curated, ACTIVE and gradeable
+in production, yet the harness answered `no-authored-match`, because production
+holds a **stale revision** of the stem:
+
+- `phys.em.resistivity` — production (`HUMAN_CURATOR`, ACTIVE, seeded
+  2026-08-14 15:17:17Z): `PRACTICE: Two copper wires have the same length, but
+  one has DOUBLE the cross-sectional area. How do their resistances compare?`
+  Repo corpus today: `PRACTICE: Start from a copper wire of resistance R. Wire A
+  is ... Wire B is the same wire with DOUBLE the cross-sectional area ...` —
+  a **different question**. Exact-match count of the production stem in
+  `src/lib/teaching/assets/*.ts`: **0**.
+- `phys.em.solenoid` — production: `PRACTICE: You hold the current and the TOTAL
+  number of turns fixed but stretch a solenoid to twice its length. What happens
+  to the internal field?` Repo: `... turns fixed, then stretch a solenoid to
+  twice its length AND double its radius.` Exact-match count: **0**.
+
+Label-prefix stripping is NOT the cause and was ruled out: `answerSource.ts`
+calls `stripAuthoringLabel` when building the index and
+`gateProbeContract.ts` strips on the serving side. The corpus was **edited after
+being seeded and never re-seeded**, so the two sides diverged.
+
+**Consequence, stated plainly: `UNMEASURED-no-authored-match` does NOT reliably
+mean "the model invented a question."** It means the harness's answer source did
+not contain the served stem, which has at least two causes. Every prior cohort's
+`no-authored-match` count is therefore an UPPER bound on model-invention, not a
+measurement of it. This affects the reading of earlier batches, not their
+verdicts (UNMEASURED remains the correct, honest verdict either way).
+
+Bounded magnitude check (VERIFIED, 9 residual concepts only): of their 62 ACTIVE
+`HUMAN_CURATOR` probes, 58 prefixes are findable in the repo corpus and 4 are
+not. The **population-wide** drift rate across all 238 physics concepts is
+**UNKNOWN** — not measured, and deliberately not measured here (out of scope).
+
+### `phys.em.amperes-law` — the one genuine pool exhaustion (VERIFIED state, INFERRED cause)
+It spent **all 5** of its authored probes (`teachingHistory.mcqAsked` = 5 entries,
+each matching an ACTIVE catalogue stem) and finished at check 2 / practice 1 —
+one graded practice answer short of mastery — after which the served question was
+model-invented. So exhaustion IS real, in exactly ONE of 35 sessions.
+**Whether R3's extra DEMONSTRATE spend caused it is UNKNOWN**: confirming it
+needs the per-turn `[gate-assessment]` trace for that session, and the Vercel
+runtime-log API returned `ExceedsBillingLimitError` before it could be read.
+This is the residual risk that was pre-registered before R3 deployed; it is now
+observed once, not explained.
+
+### The other 3 deep-ladder residuals were NOT probe-bound (VERIFIED)
+Read from `contextSnapshot`: resistivity spent 2 of 5 probes (check 1),
+vector-products 2 of 5 (check 1), solenoid 1 of 5 (check 0). They stopped
+because the harness could not answer the question in front of it, not because
+the pool was empty.
+
+### 5 OBSERVE residue — unchanged and as designed (VERIFIED)
+dimensions, significant-figures, unit-conversion, gravitational-potential,
+viscosity: turns = 1, finalPhase DEMONSTRATE, check 0 / practice 0. The very
+first served question was unanswerable, so the session stopped on turn 1. This is
+R3's deliberately untouched window (P-5).
+
+### Everything else predicted, measured (all VERIFIED)
+- **Errors: 0.** P2024, 57014, 55P03, ShareLock, connection-pool, 42P05, 26000,
+  FATAL: **0 occurrences each** in Vercel runtime logs for the window. 0 logs at
+  `error`/`fatal` level. Query mechanism negative-controlled (an unrelated term
+  returns logs), so the zeros are absence, not a broken query.
+- **HTTP: 0 5xx.** Status codes for the window: 200 x330, 201 x35, 302 x35.
+  Paths: `/api/learn/chat` 186 · `/api/sessions` 35 · `/api/learn/lesson-init` 35
+  · `/api/sessions/end` 35 · auth 105 · `/api/health` 3.
+- **Sessions: exact.** 35 created (w1 5 / w2 10 / w3 10 / w4 10), matching the
+  split with **0 retries**. **0 ACTIVE afterwards** on all four worker accounts;
+  `/api/sessions/end` called 35/35.
+- **lesson_attempts: 35 rows** — 26 COMPLETED each with exactly 1 concept
+  mastered, 9 IN_PROGRESS with 0. **`conceptsNeedingReview` = 0 on all 35** and
+  **`budgetExhaustions` = 0 on all 35**: no UNMEASURED session recorded a
+  teaching failure or spent its concept budget. Completed durations 74-129 s.
+- **No CERTIFIED regressed** and no session lost ladder reachability.
+- **Health after: 3/3 HTTP 200, `db:true`, `statementTimeout:"30s"`,
+  `lockTimeout:"15s"`** — R2 role defaults still adopted. 0 sessions waiting on a
+  lock at time of check.
+- **Replay/egress.** 910 spine rows written in the window (w1 67 / w2 270 /
+  w3 297 / w4 276). Hydration is once per session (post-`8425992`), so ~35 paid
+  replays; the lifetime counter for the replay query reads 226,764 calls /
+  109,493,512 rows, versus 220,735 / 106,558,119 documented on 2026-09-02 —
+  a delta of +6,029 calls / +2.94M rows spanning **all seven cohorts since**, not
+  P-1b alone. **The P-1b-only share is INFERRED at ~190k rows**, dominated by w1,
+  whose learner log is 30,773 rows (each of its 5 hydrations replays all of it).
+  Not a defect; an efficiency note about using the long-lived engineering account
+  as a worker.
+
+### Deviations from the task spec
+1. `runPhysicsP1b_4Worker.ts` remains **uncommitted**, per §9d and standing
+   instruction. Reproducible from §9d's cohort + split + the committed runner.
+2. Vercel runtime-log queries stopped being available mid-collection
+   (`ExceedsBillingLimitError`). Everything above was captured before that; the
+   one item it blocked is named as UNKNOWN above rather than inferred.
+
+### Status
+**SUCCESS band met. R3 continues to hold on a cohort deliberately enriched for
+resistance.** The residual is now three named causes rather than one, and one of
+them (corpus drift) is an instrument defect that was previously being counted as
+a content/model problem. Per the stop condition, no further cohort was started.
+
+---
+
+## 9f. OPEN ITEMS RAISED BY P-1b (owner decision — none acted on)
+
+- **P-8 (NEW, instrument) — production/repo probe-corpus drift.** Production
+  serves ACTIVE `HUMAN_CURATOR` probes whose exact stems no longer exist in the
+  repo corpus, so the harness scores them `no-authored-match`. 2 of 9 residuals
+  in this run. Options: re-seed production from the current corpus; or index the
+  answer source from production instead of the repo; or reconcile per-concept.
+  **Do not change grading or the A-1 answer-source contract to work around it.**
+  Population-wide rate is UNMEASURED.
+- **P-9 (NEW, product) — single-session probe exhaustion.** `phys.em.amperes-law`
+  spent all 5 authored probes and finished one graded practice answer short.
+  1 of 35. Whether R3's DEMONSTRATE spend contributed is UNKNOWN (log access
+  lapsed). Needs a per-turn trace of one such session before any change.
+- **P-5 (existing) — the OBSERVE window.** 5 of 9 residuals. Unchanged.
+- **R4 (existing, out of scope by instruction) — model-invented questions.**
+  6 of 9 residuals, though see P-8: `no-authored-match` overstates this class.
+- **P-7 (existing) — whether to commit the five batch dispatchers.**
+
+---
+
 ## 10. Handover History
 
 | Date | Session | Action | Result |
@@ -442,6 +600,7 @@ its four siblings. Committing it is tracked as P-7, an open owner decision.
 | 2026-09-04 | Physics certification | Batch-5 executed + R3 diagnosis | 19/25 UNMEASURED, 6 CERTIFIED; infra clean; pre-registered prediction falsified at 76% (prediction-shape error, not an R3 error); smallest fix identified. |
 | 2026-09-04 | R3 implementation (T-005) | Implemented + validated | Commit `77eb7df`; 554 files / 11,877 passed; tsc + build clean; negative control passes. NOT deployed at time of commit. |
 | 2026-09-04 | R3 deployment + P-1 | Push to `main` (`b2d1466`), production deploy, single 25-concept cohort | COMPLETE. UNMEASURED 76% -> 12%; DEMONSTRATE residue 15 -> 0; all five predictions confirmed; infra clean. See §9c. |
+| 2026-09-04/05 | P-1b | 35-concept UNMEASURED re-run under R3 | 26 CERTIFIED / 9 UNMEASURED (25.7%), SUCCESS band met; residual re-diagnosed into 3 causes; corpus drift (P-8) newly found. |
 
 ## 11. Do Not Rediscover
 
