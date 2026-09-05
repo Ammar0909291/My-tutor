@@ -747,7 +747,51 @@ const looksLikeAQuestion = (s: string): boolean =>
  */
 export function resolveMcqChoice(message: string, mcq: TutorMCQ): number | null {
   const n = norm(message)
-  if (!n) return null
+
+  /**
+   * THE VERBATIM FALLBACK — for answers `norm()` cannot tell apart.
+   *
+   * `norm()` keeps only [a-z0-9.- ], which is right for prose but destroys the
+   * characters that ARE the answer in a symbolic option. Measured across the
+   * 2,750 servable authored probes, 16 correct options were ungradeable for
+   * exactly this reason, and a tap sends the option text verbatim
+   * (`LessonScreen` -> `sendMessage(sessionId, option)`), so a learner tapping
+   * the RIGHT answer on any of them earned nothing and the lesson could not
+   * close. Chemistry 14, physics 2. The collisions:
+   *
+   *   "+500 J" / "−500 J"            both -> "500 j"   (sign; 9 of the 16)
+   *   "MgCl₂" / "MgCl"               both -> "mgcl"    (subscript)
+   *   "O₃ … O₂" / "O₂ … O₃"          both -> "o o"
+   *   "α … β" / "β … α"              both -> ""        (Greek: nothing survives)
+   *   "×√2" / "×2"                   both -> "2"       (radical)
+   *   "Δx·Δp ≥ ħ/2" / "≤ ħ/2"        both -> "x p 2"   (relational operator)
+   *
+   * The old behaviour was not a wrong ANSWER — `exact.length > 1` refuses
+   * rather than guesses, which is correct. The defect is upstream: the fold
+   * throws the distinguishing character away before the comparison.
+   *
+   * So when the lossy fold gives up, compare again with case and whitespace
+   * folded and EVERY symbol preserved. This is strictly narrowing: it runs
+   * only where the function already returned null, and it returns an index
+   * only when exactly one option matches character-for-character. Verified
+   * over the whole corpus: 16 -> 0 ungradeable, misattributions 0 -> 0, all
+   * 4,357 distractor taps still resolve to their own index (graded wrong, as
+   * they should be) and none to any other, and a learner who omits the sign
+   * ("500 J" for "+500 J") is still refused — the sign is the answer.
+   */
+  const verbatimOption = (): number | null => {
+    const fold = (v: string) => v.replace(/\s+/g, ' ').trim().toLowerCase()
+    const v = fold(message)
+    if (!v) return null
+    const hits = mcq.options.map((o, i) => ({ i, hit: fold(o) === v })).filter((x) => x.hit)
+    return hits.length === 1 ? hits[0].i : null
+  }
+
+  // An option made ENTIRELY of characters norm() strips (Greek, arrows, maths
+  // operators) folds to nothing. NON_COMMITTAL is still honoured first: a
+  // hedge always contains letters, so it can never reach the fallback, but
+  // stating the order here keeps that guarantee explicit rather than lucky.
+  if (!n) return NON_COMMITTAL.test(message) ? null : verbatimOption()
   const tokens = n.split(' ')
   const limit = Math.min(mcq.options.length, OPTION_KEYS.length)
 
@@ -797,7 +841,10 @@ export function resolveMcqChoice(message: string, mcq: TutorMCQ): number | null 
   //    select neither.
   const exact = mcq.options.map((o, i) => ({ i, hit: norm(o) === n })).filter((x) => x.hit)
   if (exact.length === 1) return exact[0].i
-  if (exact.length > 1) return null
+  // Two options that normalise alike may still differ by a character norm()
+  // discarded — a sign, a subscript, a radical. Ask the verbatim question
+  // before giving up; if they are identical there too, refuse exactly as before.
+  if (exact.length > 1) return verbatimOption()
 
   // 0a. A LABELLED LETTER, ANYWHERE IN THE SENTENCE.
   //

@@ -2805,6 +2805,107 @@ contained by Guard 3. Open: the ownership question above.
 
 ---
 
+## 9y. SYMBOLIC-OPTION GRADING — the ratcheted 16 are CLOSED (2026-09-05)
+
+One function changed (`src/lib/teaching/mcq.ts`), 10 lines of behaviour. No
+production access, no certification run, no corpus edit, no schema, no
+Mathematics work.
+
+### Current population, recomputed before touching anything
+**2,750 servable probes · exactly 16 ungradeable correct options** — matching
+P-9's ratchet precisely. Split **chemistry 14, physics 2**. Misattributions
+(the false-credit half) **0**, as P-9 left them.
+
+### Root mechanism — ONE, not many
+`norm()` keeps only `[a-z0-9.- ]`. That is right for prose and fatal when the
+symbol IS the answer: two options collapse to the same normalised string and
+`resolveMcqChoice` refuses (`exact.length > 1 -> null`). **The refusal was
+correct on the information it had; the defect is upstream — the fold discards
+the distinguishing character before the comparison.**
+
+| collision | normalises to | count |
+|---|---|---|
+| `+500 J` / `−500 J` (sign; ASCII `+` and U+2212 both stripped) | `500 j` | 9 |
+| `MgCl₂` / `MgCl`, `O₃ … O₂` / `O₂ … O₃` (subscripts) | `mgcl`, `o o` | 2 |
+| `α … β` / `β … α` (Greek — **nothing survives**, folds to `""`) | `` | 1 |
+| `Energy ×√2` / `×2` (radical) | `2` | 1 |
+| `Δx · Δp ≥ ħ/2` / `≤ ħ/2` / `/` (relational operator) | `x p 2` | 1 |
+| combinations of the above | — | 2 |
+
+### Classification: (A) REAL PRODUCT DEFECT, learner-facing — not content, not artifact
+NOT authored ambiguity: `+500 J` and `−500 J` are unambiguous to a human, and a
+sign error is *the* classic thermodynamics misconception, so those distractors
+are doing exactly their job. NOT a corpus defect — nothing was edited. NOT a
+harness artifact: **a tap sends the option text verbatim**
+(`LessonScreen.tsx` -> `void sendMessage(sessionId, option)`; there is no index
+in the payload), so on all 16 a real learner tapping the RIGHT answer was graded
+nothing, no gate counter moved, and the lesson could not close.
+
+### The fix
+When the lossy fold gives up, compare again with case and whitespace folded and
+every symbol preserved. Two call sites, both replacing `return null`:
+`if (!n)` (an option made entirely of stripped characters) and
+`if (exact.length > 1)`. **Strictly narrowing by construction** — it runs only
+where the function already returned null, and returns an index only when
+exactly one option matches character-for-character. `NON_COMMITTAL` still
+outranks it; P-9's exact-match-before-label-scan ordering is untouched.
+
+### Measured over the whole corpus, with the REAL resolver
+| | before | after |
+|---|---|---|
+| ungradeable correct options | **16** | **0** |
+| options resolving to a DIFFERENT option (false credit) | 0 | **0** |
+| distractor taps resolving to their own index | — | **4,357** |
+| distractor taps resolving to any OTHER index | — | **0** |
+| sign-omitted variants (`500 J` for `+500 J`) credited | — | **0** |
+
+Previously-ungradeable distractors now resolve too — to *themselves*, so they
+are graded WRONG rather than leaving the turn ungraded. That is the correct
+direction.
+
+### Tests — `src/tests/mcqSymbolicOptionGrading.test.ts` (25, new)
+One case per collision MECHANISM, each asserting **every** option of the probe
+resolves to its own index (not just the correct one, or the ambiguity would
+merely have moved). Probes are located by a distinctive option fragment, **not
+by concept id** — several of these concepts carry more than one probe, and
+picking the wrong one is a mistake this investigation made and caught.
+Controls, which are most of the file: no option resolves to a different option;
+no distractor resolves to the correct index; omitting the sign earns nothing;
+two options identical after whitespace/case folding still refuse; a hedge is
+refused even on the empty-fold path; and P-9's five controls plus its fixture
+guard are re-asserted here.
+
+**NEGATIVE CONTROL: 11 of 25 fail against the pre-fix parser; the 14 that pass
+in both states are exactly the controls, which is their job.**
+
+**P-9's ratchet is now closed, not merely satisfied:** the `<= 16` assertion in
+`mcqExactMatchPrecedence.test.ts` is tightened to `=== 0`, with the supersession
+recorded in place — that test explicitly invited this ("this assertion is the
+thing that will notice if that work happens").
+
+### Validation
+new file 25/25 · 55 mcq/grading/probe suites **1,128 passed** ·
+`npx tsc --noEmit` clean · full suite **561 files / 11,994 passed / 9 skipped**
+(from 560 / 11,969 — exactly +1 file, +25 tests) · `npm run build` exit 0,
+middleware **79.7 kB unchanged**.
+
+### Remaining risk
+1. Not exercised against production; no certification was re-run (deliberately —
+   the task forbade a cohort for diagnosis). The 2 physics concepts
+   (`phys.therm.first-law`, `phys.qm.uncertainty-principle`) and 14 chemistry
+   ones are now gradeable offline; a live run would confirm it end to end.
+2. A learner TYPING an ASCII hyphen for U+2212 was already credited before this
+   change by a later containment rule — verified pre-existing, unchanged here.
+3. The fix helps every subject, not only physics/chemistry, because the grader
+   is shared. No subject's content was touched.
+
+### Status
+**CLOSED.** The 16 are gradeable and the ratchet is retired. Physics/Chemistry
+certification close-out is unblocked on this item; the outstanding certification
+work is unchanged (P-5 OBSERVE residue, R4 model-invented questions, AMP-A/AMP-B).
+
+---
+
 ## 10. Handover History
 
 | Date | Session | Action | Result |
@@ -2828,6 +2929,7 @@ contained by Guard 3. Open: the ownership question above.
 | 2026-09-05 | AMP-A fix | Empty-turn guard reads what is served, not what was attached | route.ts guard now uses mcqToServe(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted), matching the post-strip backstop 3,700 lines later. 15 new tests (A-D), one pre-existing assertion updated in place. Suite 11,905 pass, tsc + build clean. Production run deliberately not manufactured. See §9q. |
 | 2026-09-05 | P-10 | Deprecate the 3 duplicate ACTIVE seed rows | Done. Surplus rows identified by running the real slug resolver, not by slug shape. ACTIVE duplicates 3 -> 0; distinct questions unchanged; all-status row count deliberately unchanged at 1,852 (deprecation is not deletion). Exactly 3 rows touched; 0 sessions/attempts/progress. Mechanism NOT fixed — P-10-FOLLOW-UP. See §9r/§9s. |
 | 2026-09-05 | P-11 | Fix the seeder's dead revive path | `where: { id: existing.id }` -> `{ assetId: existing.assetId }` at lines 165 and 237. Proven by a scoped compiler run: 4 errors pre-fix, clean after. Added tsconfig.seed-script.json + npm run typecheck:seed-script + an 8-case DMMF test (3 fail pre-fix). Suite 11,913 pass, tsc + build clean. Path executable but not yet executed — no DATABASE_URL here. See §9t. |
+| 2026-09-05 | Symbolic-option grading | Close the 16 ratcheted ungradeable correct options | **Real product defect, learner-facing.** Recomputed first: 2,750 servable probes, exactly 16 (chem 14 / phys 2), misattributions 0. ONE mechanism: `norm()` keeps only [a-z0-9.- ], so the sign / subscript / Greek / radical / relational character that IS the answer is discarded and two options collapse — `+500 J` vs `−500 J`, `MgCl₂` vs `MgCl`, `α … β` vs `β … α` (folds to ""), `×√2` vs `×2`, `≥ ħ/2` vs `≤ ħ/2`. The refusal was correct; the fold was lossy. A tap sends option text verbatim (`sendMessage(sessionId, option)`), so tapping the RIGHT answer earned nothing and the lesson could not close. Fix: fall back to a verbatim (case+whitespace only) comparison where the lossy fold gives up — strictly narrowing, 10 lines. Measured 16 -> 0; false credit 0 -> 0; 4,357 distractor taps resolve to their own index and 0 to any other; sign-omitted answers still refused. 25 new tests, 11 fail pre-fix; P-9's `<= 16` ratchet tightened to `=== 0`. Suite 561 files / 11,994 pass; tsc + build clean; middleware 79.7 kB. See §9y. |
 | 2026-09-05 | P-10-FOLLOW-UP-D | Implement the approved 45-slot cross-writer safety fix | `src/instrumentation.ts` only: a per-slot ladder-sibling guard (`servedByLiveLadderSibling`, pure + exported) skips a 4-segment candidate when a LIVE `base:<rung>` sibling already serves the slot; DEPRECATED/RETIRED never suppress. Exact concatenation over `Object.values(ProbeDifficulty)` — no prefix scan. **Zero new queries**: `liveSeedSlugs` is filled in the existing prefetch pass, liveness hoisted to one `const live` shared by both guards. Per-slot skip, never an abort, never logged as cleanup. 15 new tests incl. a corpus regression over the real 45 (guard ON creates 0, guard OFF creates exactly 45) + a wiring pin verified by deleting the call. Suite 560 files / 11,969 pass; tsc, seed-script typecheck, build clean; middleware 79.7 kB and edge bundle 248 B unchanged. **Ownership question still OPEN.** See §9x. |
 | 2026-09-05 | P-10-FOLLOW-UP-C | Investigate the 45-slot cross-writer divergence | **CATEGORY 3 (real open defect), fix presented NOT implemented.** 45 reproduced exactly (reverse 0, all maths, 45/45 second rung from `mathematicsSeedAssets.ts`, which the bootstrap has never imported in 3,332 commits); content identical 45/45. ONE namespace PROVEN (same authorId/authorKind/tags; `'mathematics'` in BOOTSTRAP_SEED_SUBJECTS; the hook's own comment). DB cannot prevent it: unique key is the slug STRING with no status predicate, so 4-seg and 5-seg coexist ACTIVE. Direction A (manual→bootstrap) REACHABLE and UNGUARDED — demonstrated, exactly 45 duplicates, Step 0.8 silent; Direction B (bootstrap→manual) CONTAINED by Guard 3 (aborts, 0 duplicates). Remediation path proven convergent (deprecate 45 → seeder creates 1,262 → next cold start creates 0). Also found: maths cannot currently be seeded by ANY automated path. Shallow-clone trap hit and corrected via `--unshallow`. See §9w. |
 | 2026-09-05 | P-10-FOLLOW-UP-B | Protect the automatic production cold-start writer | `src/instrumentation.ts` now runs the SAME shared detector, reusing the prefetch it already issues: `status: true` added to that existing select, decision collected in the same loop, refuses with `return` (never process.exit) before any create. **0 new queries / 0 round trips / 0 schema change**; fast path untouched; middleware 79.7 kB and edge bundle 248 B unchanged. Liveness unified as `SEED_REVIVABLE_STATUSES` so both writers cannot drift. 23 new tests, 8 fail pre-fix. Suite 11,954 pass. NEW FINDING: 45 mathematics slots resolve to different slugs between the two writers (script-only modules) — a separate mechanism, NOT fixed. See §9v. |

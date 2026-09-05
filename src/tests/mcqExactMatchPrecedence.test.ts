@@ -181,14 +181,22 @@ describe('P-9 corpus guard: a tap must never be attributed to another option', (
   })
 
   it('records the unrelated symbolic-option population as a ratchet, not a pass', () => {
-    // A number, kept honest: it must not grow. Lowering it is a separate piece
-    // of work (P-9 §9m "18 have a different cause"), and this assertion is the
-    // thing that will notice if that work happens — or if new authoring makes
-    // it worse.
+    // RATCHET CLOSED 2026-09-05. This asserted `<= 16` and said "lowering it is
+    // a separate piece of work … this assertion is the thing that will notice
+    // if that work happens". That work happened: the 16 were one mechanism —
+    // `norm()` discarding the sign / subscript / Greek / radical / relational
+    // character that WAS the answer, so two options collapsed to one string and
+    // the resolver correctly refused. `resolveMcqChoice` now falls back to a
+    // verbatim comparison when the lossy fold is ambiguous. Measured 16 -> 0.
+    //
+    // The bound is therefore now ZERO, not a ratchet, and it is asserted in
+    // full in `mcqSymbolicOptionGrading.test.ts` alongside the controls proving
+    // the fallback cannot manufacture credit. Kept here as well because this
+    // file owns the corpus-wide view of the grader.
     const unresolvable = servableProbes.filter(
       ({ mcq }) => resolveMcqChoice(mcq.options[mcq.correctIndex], mcq) !== mcq.correctIndex,
     ).length
     expect(servableProbes.length).toBeGreaterThanOrEqual(2750)
-    expect(unresolvable).toBeLessThanOrEqual(16)
+    expect(unresolvable).toBe(0)
   })
 })
