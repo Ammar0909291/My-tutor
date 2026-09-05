@@ -1091,6 +1091,92 @@ verifiable by read-back. Proceeding.
 
 ---
 
+## 9k. O-2 REMEDIATION APPLIED AND VALIDATED — physics content drift is ZERO (2026-09-05)
+
+Written through the Supabase MCP, reproducing the canonical seeder's revive
+`data` block field for field (see §9j for why the seeder itself cannot run).
+**Exactly two `asset_identity` rows and their two `probe_assets` rows changed.**
+
+### The write (MEASURED, each statement read back)
+1. `UPDATE asset_identity SET status='DEPRECATED'` guarded on
+   `assetId IN (…two…) AND status='ACTIVE' AND version=1 AND
+   authorKind='HUMAN_CURATOR' AND contentHash IN ('hbecff101','h3d5dbdf7')`
+   -> **RETURNING confirmed exactly 2 rows.** `deprecationReason` left NULL by
+   design (the seeder's revive never clears it).
+2. Two per-asset CTE statements, each reporting `identities_updated=1`,
+   `children_updated=1`, `n_choices=3`:
+   - `asset_identity`: `status='ACTIVE'`, `version=version+1`,
+     `contentHash` = repo hash, `tags=ARRAY['physics','mcq']`, `updatedAt=now()`
+     (Prisma `@updatedAt` equivalent).
+   - `probe_assets`: `stem`, `choices`, `correctValue`, `difficulty`,
+     `targetedMisconceptions` — the seeder's `upsert.update` branch, five fields.
+     `keywords` / `requiredVisuals` NOT touched (create-branch only; both `{}`).
+
+### Before -> after (MEASURED)
+
+| | resistivity `61582820-…c6` | solenoid `8e90af3e-…e6` |
+|---|---|---|
+| status | ACTIVE -> ACTIVE | ACTIVE -> ACTIVE |
+| version | 1 -> **2** | 1 -> **2** |
+| contentHash | `hbecff101` -> **`h12ea45f5`** | `h3d5dbdf7` -> **`h6045c777`** |
+| choices | 2 -> **3** | 2 -> **3** |
+| exactly one `isCorrect` | yes -> **yes** | yes -> **yes** |
+| difficulty | PROFICIENT (unchanged) | DEVELOPING (unchanged) |
+| targetedMisconceptions | unchanged | unchanged |
+| correctValue | replaced by the repo's | replaced by the repo's |
+| tags / deprecationReason / parentVersionId / keywords / requiredVisuals | `{physics,mcq}` / null / null / `{}` / `{}` | same |
+| updatedAt | 2026-08-14 15:17:17.584 -> 2026-09-05 04:15:59.425 | 2026-08-14 15:17:33.412 -> 2026-09-05 04:16:11.327 |
+
+**Stems are byte-equal to the repo**, checked by md5 + length rather than by eye:
+`c7cc45dd53541b73f373f68bc81f896b` / 217 chars (resistivity) and
+`32e9473f1254e0d72ceab5d5a419b1a2` / 170 chars (solenoid) on BOTH sides.
+
+The two probes production now serves are the corrected, discriminating ones:
+resistivity varies length AND area (the old one varied area only, where the
+tagged misconception yields the right answer anyway); solenoid varies length AND
+radius (the old one held radius fixed while claiming to test a radius belief).
+
+### Full physics parity re-run (MEASURED, order-independent method)
+All 238 concepts, production `HUMAN_CURATOR` probe rows (all statuses) vs the six
+corpus modules:
+
+- **identical: 235** (was 231)
+- **TRUE CONTENT DRIFT: 0** — the objective, met
+- production-has-extra-rows: **3** — `mech.displacement` (14/13),
+  `mech.hookes-law` (15/14), `mech.momentum` (19/18): exactly the P-10
+  duplicate-slug cases, **untouched and still tracked separately**
+- production-missing-rows: 0
+
+235 + 3 = 238. The count rose from P-8's 231 because this run used the
+order-independent digest, which does not produce the two collation false
+positives (`em.dc-circuits`, `therm.refrigerators`) P-8 recorded and resolved by
+per-stem diff. Nothing about those two concepts changed.
+
+### Unrelated-row safety (MEASURED, not asserted)
+- Physics seed-owned probe rows: **1,852 before and after** — no row created,
+  none deleted, no duplicate slug (2 rows across the two target slugs).
+- Rows with `updatedAt` after 2026-08-31: **exactly 2** — the targets.
+- `max(updatedAt)` across **every other** physics seed row: still
+  **2026-08-30 21:34:08.046**, unchanged.
+
+### Asset contract after the change (MEASURED)
+- `phys.em.resistivity`: 9 ACTIVE probes, **5 ACTIVE gradeable closed-choice**
+- `phys.em.solenoid`: 5 ACTIVE probes, **5 ACTIVE gradeable closed-choice**
+Both >= 3. Unchanged by the remediation (a replacement, not an addition).
+
+### Production health after
+4 consecutive `/api/health` calls: HTTP 200, `db:true`,
+`statementTimeout 30s`, `lockTimeout 15s`, ~1.1 s each. One earlier probe
+returned curl code 000 (a transport-level failure with no HTTP response);
+re-checked four times immediately and it did not recur — recorded as transient
+rather than quietly dropped.
+
+### Git
+Pre-registration `f6033799` (committed BEFORE the write, and the sole source of
+the rollback values). HEAD == origin/main. No source file changed by O-2.
+
+---
+
 ## 10. Handover History
 
 | Date | Session | Action | Result |
