@@ -1,7 +1,16 @@
 import { describe, it, expect } from 'vitest'
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
-import { wouldRepeatPreviousTurn } from '@/lib/teaching/remediationOutputContract'
+import {
+  wouldRepeatPreviousTurn,
+  selectRemediationFallback,
+  buildRemediationFallbackText,
+} from '@/lib/teaching/remediationOutputContract'
+
+// A real KG description, long enough to clear buildRemediationFallbackText's
+// own 25–400 character window, so the alternate source genuinely exists.
+const KG_SENTENCE = 'The uncertainty principle states that the product of the uncertainties in '
+  + 'position and momentum has a lower bound, so narrowing one necessarily widens the other.'
 
 const ROUTE = readFileSync(
   join(process.cwd(), 'src/app/api/learn/chat/route.ts'),
@@ -52,23 +61,50 @@ describe('wouldRepeatPreviousTurn', () => {
 })
 
 describe('the route reaches for a different source before repeating', () => {
-  it('imports and calls wouldRepeatPreviousTurn around the fallback assignment', () => {
-    expect(ROUTE).toMatch(/wouldRepeatPreviousTurn,\s*\n\s*} = await import\('@\/lib\/teaching\/remediationOutputContract'\)/)
-    expect(ROUTE).toMatch(/if \(fallback && wouldRepeatPreviousTurn\(fallback, previousAssistantText\)\)/)
+  // SUPERSEDED SHAPE (2026-09-05). These three assertions pinned the selection
+  // while it was written INLINE in route.ts — the destructured
+  // `wouldRepeatPreviousTurn` import, the `if (fallback && …)` swap, the
+  // `const alt = …` ternary and the `cleanText === remediationHoldCardText`
+  // log comparison. That logic now lives in `selectRemediationFallback`, where
+  // it can be driven directly instead of matched as text; the swap it performs
+  // is unchanged. Each assertion below now checks the same invariant against
+  // the real function, with the route wiring pinned only where a source check
+  // is the only thing available. See remediationFallbackRepeat.test.ts for the
+  // defect that motivated the extraction (the fallback repeated FOUR times in
+  // production because `previousAssistantText` was the oldest message, not the
+  // previous turn — so this swap could never fire at all).
+
+  it('the swap still runs, and still uses wouldRepeatPreviousTurn to decide', () => {
+    // Behaviour, not text: the card is what was just said, so the OTHER source
+    // must be chosen — which is only decidable via the same repeat test.
+    const alt = selectRemediationFallback({
+      heldCardText: CARD_TEXT,
+      conceptSentence: KG_SENTENCE,
+      previousAssistantText: CARD_TEXT,
+      conceptResolved: true,
+    })
+    expect(alt.source).toBe('curriculum-sentence')
+    expect(alt.text).not.toBe(CARD_TEXT)
+    // And the route must actually delegate to it.
+    expect(ROUTE).toMatch(/choice = selectRemediationFallback\(\{/)
   })
 
   it('tries the curriculum sentence as the alternate source, not a third invention', () => {
-    // The swap must reach for buildRemediationFallbackText again — the ONLY
-    // other source this floor is allowed to use — never a freshly generated
+    // The swap must reach for buildRemediationFallbackText — the ONLY other
+    // source this floor is allowed to use — never a freshly generated
     // sentence, which would reopen the exact notation risk the floor exists
-    // to close.
-    const swap = ROUTE.match(
-      /const alt = remediationHoldCardText\s*\n\s*\? buildRemediationFallbackText\(conceptSentence\)\s*\n\s*: null/,
-    )
-    expect(swap).not.toBeNull()
+    // to close. Proven by identity with that builder's own output.
+    const alt = selectRemediationFallback({
+      heldCardText: CARD_TEXT,
+      conceptSentence: KG_SENTENCE,
+      previousAssistantText: CARD_TEXT,
+      conceptResolved: true,
+    })
+    expect(alt.text).toBe(buildRemediationFallbackText(KG_SENTENCE))
   })
 
   it('the repaired log now reports which source actually landed, not merely which existed', () => {
-    expect(ROUTE).toMatch(/usedHeldCard: stillViolating && cleanText === remediationHoldCardText/)
+    expect(ROUTE).toMatch(/usedHeldCard: stillViolating && choice\?\.source === 'held-card'/)
+    expect(ROUTE).toMatch(/usedCurriculumSentence: stillViolating && choice\?\.source === 'curriculum-sentence'/)
   })
 })
