@@ -162,7 +162,7 @@ async function main() {
     if (existing) {
       if (REVIVABLE.has(existing.status)) {
         await prisma.assetIdentity.update({
-          where: { id: existing.id },
+          where: { assetId: existing.assetId },
           data: {
             status,
             version: existing.version + 1,
@@ -234,7 +234,7 @@ async function main() {
     if (existing) {
       if (REVIVABLE.has(existing.status)) {
         await prisma.assetIdentity.update({
-          where: { id: existing.id },
+          where: { assetId: existing.assetId },
           data: {
             status,
             version: existing.version + 1,

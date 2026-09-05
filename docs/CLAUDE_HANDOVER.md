@@ -2060,6 +2060,109 @@ symbolic-option grading failures (ratcheted, §9n).
 
 ---
 
+## 9t. P-11 FIXED — the seeder's revive path can now reach the database (2026-09-05)
+
+Two characters of behaviour, plus the validation that makes this class of error
+impossible to reintroduce silently. No runtime, schema, identity, slug or
+reconciliation change; no production write; no certification run.
+
+### Root cause, PROVEN (not inferred)
+`scripts/brain/seed-knowledge-assets.ts` lines **165** (explanation revive) and
+**237** (probe revive):
+
+```
+await prisma.assetIdentity.update({ where: { id: existing.id }, … })
+```
+
+`AssetIdentity`'s primary key is `assetId`. From the **generated client**, not
+the schema file:
+- `AssetIdentityScalarFieldEnum` (index.d.ts:146104-146130) lists 25 fields; **`id`
+  is not among them**, so `existing.id` is `undefined` at runtime.
+- `AssetIdentityWhereUniqueInput` (index.d.ts:155900) offers `assetId` plus
+  `AND`/`OR`/`NOT`; **no `id`**.
+- Prisma runtime DMMF: `AssetIdentity` id fields `['assetId']`, `has field "id":
+  false`.
+
+It survived because `tsconfig.json` excludes `scripts`, so the repo's type check
+never compiled the file (confirmed with `tsc --listFiles`, §9j).
+
+**The decisive evidence is the scoped compiler run.** Against the PRE-FIX source
+it reports exactly 4 errors, at the two lines, on both halves of the mistake:
+```
+165,20 TS2353 'id' does not exist in type 'AssetIdentityWhereUniqueInput'
+165,33 TS2339 Property 'id' does not exist on type '{ … assetId: string; … }'
+237,20 TS2353 …
+237,33 TS2339 …
+```
+Against the fixed source it is clean.
+
+**A DB-free runtime probe was attempted and is NOT offered as evidence**: Prisma
+connects before validating argument shape, so `{ id: … }`, `{ id: undefined }`
+and `{ assetId: … }` all failed identically with a connection error. Recorded
+because an inconclusive experiment should not be quietly dropped.
+
+### The fix
+Both occurrences, and only those:
+`where: { id: existing.id }` -> `where: { assetId: existing.assetId }`.
+`existing.id` appears nowhere else in the file (grepped); the only other `where:`
+clauses are the two `findFirst({ where: { canonicalSlug } })` calls, which are
+correct. Semantics are unchanged: the same row, the same `data` block, the same
+REVIVABLE = {DEPRECATED, RETIRED} gate. ACTIVE/DRAFT/REVIEW rows are still
+skipped untouched.
+
+### Why it mattered
+Revival is the ONLY content-refresh path the seeding pipeline has (§9g). For the
+life of the project the pipeline could create an asset and never correct one —
+which is exactly why P-8's corpus drift had no working automated repair in ANY
+environment (§9i), and why O-2 had to reproduce the revive semantics by hand.
+
+### Validation instrument (two layers, both measured)
+1. **`npm run typecheck:seed-script`** — new `tsconfig.seed-script.json`
+   (extends the project config, adds `types: ["node"]`, includes exactly this one
+   file, clears `exclude`). The real compiler on the one file the project skips.
+   **4 errors pre-fix, clean post-fix.**
+2. **`src/tests/seedScriptPrismaFields.test.ts`** — 8 cases, runs in the ordinary
+   suite. Extracts every `prisma.<delegate>.update({ where: { <key>: … } })` from
+   the seeder and validates `<key>` against the **generated client's runtime
+   DMMF** — is it a field of that model, and does it uniquely identify a row —
+   so the check tracks the schema instead of restating it. Also asserts the scan
+   is not vacuously green, that `AssetIdentity` is keyed on `assetId` with no
+   `id`, that `existing.id` is gone, and that both halves of the gate stay wired
+   (tsconfig still excludes `scripts`; the scoped config and npm script exist).
+   **3 of 8 fail pre-fix.**
+Layer 1 alone would not run in the suite; layer 2 alone would not catch a
+mistyped `data` field. Neither was made broader than that.
+
+### Files changed (4, nothing unrelated — `git diff --stat` verified)
+- `scripts/brain/seed-knowledge-assets.ts` — 2 lines
+- `tsconfig.seed-script.json` — new, 6 lines
+- `package.json` — 1 line (`typecheck:seed-script`)
+- `src/tests/seedScriptPrismaFields.test.ts` — new
+
+### Validation results
+`npm run typecheck:seed-script` **clean** · new test **8/8** · `npx tsc --noEmit`
+**clean** · full suite **557 files / 11,913 passed / 9 skipped** · `npm run build`
+**clean**, middleware 79.7 kB unchanged.
+
+### Remaining limitation, stated plainly
+**The revive path is now executable; it has NOT been executed.** No environment
+reachable from here has a `DATABASE_URL` (§9i), so the fix is proven correct by
+the compiler and the generated client's own metadata, not by a live revive. The
+first real run of `scripts/brain/seed-knowledge-assets.ts` against a database is
+still the first end-to-end exercise of this path — and it is now the supported
+route for P-8-class drift, replacing the hand-written SQL O-2 had to use.
+
+The gate covers **this one script**. Every other file under `scripts/` remains
+outside type checking; widening that is a tooling decision, deliberately not
+taken here.
+
+### Status
+**P-11 FIXED.** Open: **P-10-FOLLOW-UP** (the slug resolver still re-slugs the
+first probe of a slot, so duplicates will recur), `providersSeen` corroboration
+(§9p), and the 16 symbolic-option grading failures (ratcheted, §9n).
+
+---
+
 ## 10. Handover History
 
 | Date | Session | Action | Result |
@@ -2082,6 +2185,7 @@ symbolic-option grading failures (ratcheted, §9n).
 | 2026-09-05 | AMP-B | Diagnose the degradedTurns verdict precedence (read-only) | VALID BY DESIGN — documented in 3 places and pinned by an existing test. 3 of the 4 producers of provider='degraded' are real outages; the 4th is AMP-A. No fix proposed here; the repair is AMP-A. Recorded: providersSeen is hardcoded [] in 240/240 records. See §9p. |
 | 2026-09-05 | AMP-A fix | Empty-turn guard reads what is served, not what was attached | route.ts guard now uses mcqToServe(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted), matching the post-strip backstop 3,700 lines later. 15 new tests (A-D), one pre-existing assertion updated in place. Suite 11,905 pass, tsc + build clean. Production run deliberately not manufactured. See §9q. |
 | 2026-09-05 | P-10 | Deprecate the 3 duplicate ACTIVE seed rows | Done. Surplus rows identified by running the real slug resolver, not by slug shape. ACTIVE duplicates 3 -> 0; distinct questions unchanged; all-status row count deliberately unchanged at 1,852 (deprecation is not deletion). Exactly 3 rows touched; 0 sessions/attempts/progress. Mechanism NOT fixed — P-10-FOLLOW-UP. See §9r/§9s. |
+| 2026-09-05 | P-11 | Fix the seeder's dead revive path | `where: { id: existing.id }` -> `{ assetId: existing.assetId }` at lines 165 and 237. Proven by a scoped compiler run: 4 errors pre-fix, clean after. Added tsconfig.seed-script.json + npm run typecheck:seed-script + an 8-case DMMF test (3 fail pre-fix). Suite 11,913 pass, tsc + build clean. Path executable but not yet executed — no DATABASE_URL here. See §9t. |
 
 ## 11. Do Not Rediscover
 
