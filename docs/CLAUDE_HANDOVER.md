@@ -2054,9 +2054,10 @@ not small); or have the seeder reconcile an old 4-segment row when it emits the
 5-segment one. This is a pipeline design decision and belongs to its own task.
 
 ### Status
-**P-10 REMEDIATED.** Open: **P-10-FOLLOW-UP** (above), **P-11** (the seeder's
-revive path is dead code), `providersSeen` corroboration (§9p), and the 16
-symbolic-option grading failures (ratcheted, §9n).
+**P-10 REMEDIATED.** Open: **P-10-FOLLOW-UP** (above — CLOSED 2026-09-05, see
+§9u), **P-11** (the seeder's revive path is dead code), `providersSeen`
+corroboration (§9p), and the 16 symbolic-option grading failures (ratcheted,
+§9n).
 
 ---
 
@@ -2158,8 +2159,190 @@ taken here.
 
 ### Status
 **P-11 FIXED.** Open: **P-10-FOLLOW-UP** (the slug resolver still re-slugs the
-first probe of a slot, so duplicates will recur), `providersSeen` corroboration
-(§9p), and the 16 symbolic-option grading failures (ratcheted, §9n).
+first probe of a slot, so duplicates will recur — CLOSED 2026-09-05, see §9u),
+`providersSeen` corroboration (§9p), and the 16 symbolic-option grading
+failures (ratcheted, §9n).
+
+---
+
+## 9u. P-10-FOLLOW-UP CLOSED — the seeder now refuses to recreate the duplicate (2026-09-05)
+
+**No production write. No certification run. No Physics/Chemistry corpus edit.
+No identity migration. No teaching/API/schema change. No changes to the five
+untracked certification dispatchers.** Two source files changed (76 insertions,
+1 deletion) plus one new test file.
+
+### Root mechanism, re-verified against current source (unchanged from §9r)
+`buildProbeSlugResolver` (`brainSeedAssets.ts:150-164`) appends the difficulty
+segment to a (conceptId, probeKind, gradeBand) slot only once a SECOND probe
+joins it. The moment that happens, EVERY probe in the slot — including one
+already seeded — resolves to the 5-segment slug; the base 4-segment slug then
+names no probe in the corpus. Both seed writers
+(`scripts/brain/seed-knowledge-assets.ts`, `src/instrumentation.ts`'s
+cold-start bootstrap) look a probe up by its OWN resolved slug and are
+create-only for a row that doesn't exist under that slug — neither ever
+revisits the row still sitting under the abandoned base slug. Confirmed this
+still matches current source exactly (line numbers unchanged from §9r; no
+change to either writer's core create/update logic other than this task's
+addition below).
+
+### Options compared (per the task's A/B/C framing)
+- **A — make the difficulty segment unconditional.** Rejected: re-identifies
+  every already-seeded singleton probe across all six subjects (thousands of
+  rows) — a mass identity migration, explicitly out of scope.
+- **B — reconcile/reuse the old 4-segment identity by renaming it to the new
+  5-segment one on promotion.** Rejected: still an identity migration (just
+  scoped to one row per promotion instead of the whole corpus), it makes
+  `canonicalSlug` mutable over the life of a row (contradicts the "canonical"
+  invariant the seed-lineage partial unique index and ADR 14 §4.5 rely on),
+  and it was explicitly named as a non-taken option in §9r for the same
+  reason ("changes existing identities — not small").
+- **C — detect-and-refuse (chosen).** Add a pure detector,
+  `abandonedLegacyProbeSlugs(probes)`, that returns exactly the base slugs the
+  CURRENT corpus no longer produces because their slot became a ladder.
+  Before writing anything, the seeder checks whether any of those base slugs
+  still names a LIVE (non-DEPRECATED, non-RETIRED) row. If so, it aborts
+  loudly with `process.exit(1)` and writes nothing — the same fail-fast idiom
+  the file already uses for the KG check and the corpus-internal duplicate
+  check (Guard 1 / Guard 2). No identity is renamed, migrated, or deleted;
+  the corpus author is forced to deprecate the legacy row first (the exact
+  P-10 remediation) before the promoted probes can be seeded.
+
+### Why C is the smallest fix that actually prevents recurrence
+It touches zero existing identities, requires no migration, and reuses the
+writer's own existing idiom (a pre-flight guard that refuses to write rather
+than silently corrupting the catalogue). `abandonedLegacyProbeSlugs` is
+derived directly from `buildProbeSlugResolver`'s own output (never a
+re-implementation of its slot-counting), so it cannot disagree with what the
+resolver actually assigns. The check is a single additional `findMany` scoped
+to `authorId: SEED_AUTHOR_ID` and `canonicalSlug: { in: <abandoned slugs> }`
+— cheap, and skipped entirely in `--dry-run` (which already touches no
+database, consistent with the rest of the file).
+
+### What was fixed
+- `src/lib/teaching/assets/brainSeedAssets.ts` — new exported function
+  `abandonedLegacyProbeSlugs<T>(probes)`, placed directly after
+  `buildProbeSlugResolver`. Pure, dependency-free, no Prisma.
+- `scripts/brain/seed-knowledge-assets.ts` — "Guard 3": imports the new
+  function; before the probe-writing loop, if the corpus has any abandoned
+  slugs, queries for live rows under them and aborts with a diagnostic
+  message (naming the offending assetId/canonicalSlug/status and pointing at
+  this ledger's §9r/§9s precedent for how to resolve it) if any are found.
+
+### What was deliberately NOT changed, and why
+- **`src/instrumentation.ts`'s cold-start bootstrap.** It contains the
+  IDENTICAL mechanism (`buildProbeSlugResolver` + create-only writer,
+  `src/instrumentation.ts:197` onward) and — unlike the manual script, which
+  no session in this project's history has ever been able to run against
+  production for lack of `DATABASE_URL` — it is the path that actually
+  executes in production automatically on every cold start. A future corpus
+  promotion could still recreate a P-10-class duplicate via THIS path before
+  anyone runs the manual script. It was not touched here because the task's
+  guardrails read "NO runtime teaching/API/schema changes" and "NO broad
+  seeder rewrite," and this file's own history (repeated connection-pool and
+  egress incidents, each requiring careful, isolated fixes) argues for
+  extreme caution about any change to it outside a dedicated task. **This is
+  a real, named residual risk, not an oversight** — see "Remaining
+  limitations" below. If a future task authorizes touching it, the fix is
+  structurally identical and cheap: the bootstrap already prefetches every
+  seed-owned row into an in-memory map (`existing`, built once per cold
+  start) before writing anything; add `status` to that map's stored fields
+  (one more column on an already-executing query, no new query) and check it
+  against `abandonedLegacyProbeSlugs(ALL_PROBES)` right after the map is
+  built, refusing to seed (a `return`, matching the file's own non-fatal
+  refusal idiom for its existing identity-conflict guard) if a live orphan is
+  found.
+- `scripts/brain/seed-physics-assets.ts` — a separate, narrower physics-only
+  variant of the same writer, always seeds DRAFT (never ACTIVE), so it cannot
+  reproduce the duplicate-ACTIVE-row defect this task is about. Left
+  untouched (unrelated cleanup was out of scope); noted only because it also
+  calls `buildProbeSlugResolver` and was inspected for completeness.
+- The three already-remediated production rows (P-10) — untouched, per
+  standing instruction not to repeat that remediation.
+
+### Regression coverage (`src/tests/abandonedLegacyProbeSlugs.test.ts`, 18 tests)
+1. **Synthetic corpora**: singleton abandons nothing; a promoted slot abandons
+   exactly its own base slug (never a promoted 5-segment slug); a 3-rung
+   ladder abandons its base slug once, not once per rung; isolation (a
+   promotion in one slot does not flag an unrelated stable singleton);
+   different probeKind/gradeBand at the same concept are different slots;
+   determinism; and a direct cross-check that the detector can never disagree
+   with `buildProbeSlugResolver`'s own per-probe output.
+2. **Real, whole, current corpus** (loaded the same way
+   `probeInventoryDepth.test.ts` already does — a directory scan over every
+   non-test module in `src/lib/teaching/assets/`, not a hand-maintained
+   import list that could drift from the seeder's own): the detector still
+   includes all three known P-10 base slugs; every flagged slug independently
+   cross-checks as a genuine >1-probe slot (a raw group-by count, not a
+   re-derivation of the resolver's internals); a known-stable singleton is
+   confirmed NOT flagged. **Correction made while writing this test**: an
+   initial assertion claimed the detector returns EXACTLY the three known
+   P-10 slugs — false, and caught immediately by running it. The corpus
+   today legitimately contains many multi-rung ladders authored as ladders
+   from the start (`physicsDepthSeedAssets.ts`/`physicsBandGapAssets.ts`),
+   which the corpus-only detector correctly flags as "abandoned" even though
+   no row was ever live under their base slug. Only the DB-scoped `findMany`
+   in the real seeder narrows this down to genuine collisions — the test now
+   asserts inclusion, not exhaustive equality.
+3. **End-to-end simulation, using the real detector** (never a
+   re-implementation of it) against a tiny in-memory fake store: a slot
+   moving from one probe to two, with its legacy row still ACTIVE, is
+   BLOCKED — the store ends the cycle with exactly the one original row,
+   unchanged, and the promoted slug is never created. The same corpus change,
+   with the legacy row DEPRECATED first (the P-10 precedent), is NOT
+   blocked — both rungs seed cleanly under their new slugs, the old row stays
+   deprecated (never deleted, never migrated), and every live slug across the
+   whole store is confirmed distinct.
+4. **Wiring, not decoration** (the exact class of trap
+   `CLAUDE.md`/R3 already warns about): source-text assertions confirm the
+   script imports the real function (not a local copy), calls it against
+   `ALL_PROBES`, queries `canonicalSlug: { in: abandonedSlugs }` and
+   `status: { notIn: [DEPRECATED, RETIRED] }` before `process.exit(1)`,
+   strictly before the probe-creation loop, skipped under `--dry-run`; plus
+   negative controls that Guard 1 (KG check), Guard 2 (identity check), and
+   the P-11 `existing.assetId` revive fix are all still present and
+   unmodified.
+
+### Validation
+- `npx vitest run src/tests/abandonedLegacyProbeSlugs.test.ts` — 18/18 pass.
+- `npx vitest run src/tests/seedScriptPrismaFields.test.ts
+  src/tests/difficultyLadderIdentity.test.ts src/tests/probeInventoryDepth.test.ts
+  src/tests/brainSeedAssets.test.ts src/tests/physicsS2MisconceptionCoverage.test.ts`
+  — 209/209 pass, unaffected.
+- `npm run typecheck:seed-script` — clean.
+- `npx tsc --noEmit` — clean.
+- Full suite: **558 files / 11,931 passed / 9 skipped** (up from P-11's 557
+  files / 11,913 passed — exactly +1 file / +18 tests, nothing else moved).
+- `npm run build` — clean, middleware **79.7 kB, unchanged**.
+- `git diff --stat` on the two production files: **76 insertions, 1
+  deletion** — the deletion is the import-line edit adding the new symbol.
+
+### Remaining limitations (stated plainly, not hidden)
+1. **`src/instrumentation.ts`'s cold-start bootstrap is NOT covered.** It is
+   the path that actually seeds production automatically and contains the
+   identical mechanism. Until a dedicated, explicitly-authorized task extends
+   the same guard there (design sketched above, reusing data the bootstrap
+   already fetches), a future corpus promotion could still recreate a
+   P-10-class duplicate via that path before the manual script ever runs.
+   Recurrence is prevented for `scripts/brain/seed-knowledge-assets.ts` — the
+   canonical, DATABASE_URL-driven seeder this project's own history calls
+   "the supported route for P-8-class drift" — not for every writer.
+2. **No environment reachable from this session has a `DATABASE_URL`**, so
+   Guard 3 has not been exercised against a real database — its correctness
+   rests on the pure-function tests, the simulation, and the source-wiring
+   checks above, the same evidence standard P-11's revive-path fix used.
+3. **`scripts/brain/seed-physics-assets.ts`** shares the same resolver call
+   but seeds DRAFT only, so it was inspected and deliberately left out of
+   scope (see above) rather than fixed alongside it.
+4. This fix prevents a NEW P-10-class duplicate from being created. It does
+   not, and was not asked to, re-scan production for any OTHER instance of
+   the defect beyond the three P-10 already found and remediated.
+
+### Status
+**P-10-FOLLOW-UP CLOSED.** Open: `providersSeen` corroboration (§9p), the 16
+symbolic-option grading failures (ratcheted, §9n), and the instrumentation.ts
+residual risk named above (no ticket opened — recorded here pending an
+explicit future task).
 
 ---
 
@@ -2186,6 +2369,7 @@ first probe of a slot, so duplicates will recur), `providersSeen` corroboration
 | 2026-09-05 | AMP-A fix | Empty-turn guard reads what is served, not what was attached | route.ts guard now uses mcqToServe(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted), matching the post-strip backstop 3,700 lines later. 15 new tests (A-D), one pre-existing assertion updated in place. Suite 11,905 pass, tsc + build clean. Production run deliberately not manufactured. See §9q. |
 | 2026-09-05 | P-10 | Deprecate the 3 duplicate ACTIVE seed rows | Done. Surplus rows identified by running the real slug resolver, not by slug shape. ACTIVE duplicates 3 -> 0; distinct questions unchanged; all-status row count deliberately unchanged at 1,852 (deprecation is not deletion). Exactly 3 rows touched; 0 sessions/attempts/progress. Mechanism NOT fixed — P-10-FOLLOW-UP. See §9r/§9s. |
 | 2026-09-05 | P-11 | Fix the seeder's dead revive path | `where: { id: existing.id }` -> `{ assetId: existing.assetId }` at lines 165 and 237. Proven by a scoped compiler run: 4 errors pre-fix, clean after. Added tsconfig.seed-script.json + npm run typecheck:seed-script + an 8-case DMMF test (3 fail pre-fix). Suite 11,913 pass, tsc + build clean. Path executable but not yet executed — no DATABASE_URL here. See §9t. |
+| 2026-09-05 | P-10-FOLLOW-UP | Prevent recurrence of the duplicate-ACTIVE-row mechanism | Added `abandonedLegacyProbeSlugs` (brainSeedAssets.ts) + Guard 3 in seed-knowledge-assets.ts: refuses to seed (process.exit(1), no rows written) if a promoted slot's abandoned base slug still names a live row. Chosen over unconditional-difficulty (mass identity migration) and reconcile-by-rename (still an identity migration). No identity touched, no migration, no production write. instrumentation.ts's cold-start bootstrap deliberately NOT covered (runtime guardrail) — named residual risk. 18 new tests (2 caught and corrected a wrong assumption during authoring). Suite 11,931 pass, typecheck:seed-script + tsc + build clean. See §9u. |
 
 ## 11. Do Not Rediscover
 

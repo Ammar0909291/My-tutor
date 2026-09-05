@@ -30,7 +30,7 @@
 import { PrismaClient, AssetFamily, AssetStatus, AuthorKind, ExplanationStyle } from '@prisma/client'
 import {
   SEED_EXPLANATIONS, SEED_PROBES, SEED_LANGUAGE, SEED_AUTHOR_ID, seedCanonicalSlug,
-  buildProbeSlugResolver,
+  buildProbeSlugResolver, abandonedLegacyProbeSlugs,
 } from '../../src/lib/teaching/assets/brainSeedAssets'
 import { AUTHORED_EXPLANATIONS, AUTHORED_PROBES } from '../../src/lib/teaching/assets/authoredSeedAssets'
 import { CHEMISTRY_EXPLANATIONS, CHEMISTRY_PROBES } from '../../src/lib/teaching/assets/chemistrySeedAssets'
@@ -149,6 +149,47 @@ async function main() {
   console.log(
     `Identity check passed: ${identityCheck.totalItems} items, ${identityCheck.distinctIdentities} distinct identities, 0 duplicates`,
   )
+
+  // Guard 3 (P-10-FOLLOW-UP): a slot promoted from singleton to ladder
+  // abandons its old 4-segment slug — every probe in the slot, including one
+  // already seeded, moves to the 5-segment slug (see `abandonedLegacyProbeSlugs`
+  // in brainSeedAssets.ts). This writer is create-only, so a live row still
+  // carrying an abandoned slug is never revisited by the probe loop below, and
+  // a second ACTIVE identity for the same question gets created beside it —
+  // exactly the defect P-10 remediated by hand (docs/CLAUDE_HANDOVER.md
+  // §9r/§9s). Refuse before the first write rather than repeat it.
+  // Skipped in --dry-run, which never touches the database (consistent with
+  // the loops below, which also skip their own findFirst in that mode).
+  if (!dryRun) {
+    const abandonedSlugs = [...abandonedLegacyProbeSlugs(ALL_PROBES)]
+    if (abandonedSlugs.length > 0) {
+      const liveOrphans = await prisma.assetIdentity.findMany({
+        where: {
+          authorId: SEED_AUTHOR_ID,
+          canonicalSlug: { in: abandonedSlugs },
+          status: { notIn: [AssetStatus.DEPRECATED, AssetStatus.RETIRED] },
+        },
+        select: { assetId: true, canonicalSlug: true, status: true },
+      })
+      if (liveOrphans.length > 0) {
+        console.error(
+          `ABORT: ${liveOrphans.length} legacy probe identit${liveOrphans.length === 1 ? 'y is' : 'ies are'} ` +
+            'still live under a slug this corpus no longer produces, because its slot was ' +
+            'promoted to a difficulty ladder. Seeding would create a second ACTIVE identity ' +
+            'for the same question (the P-10 defect). No rows written.',
+        )
+        for (const o of liveOrphans) {
+          console.error(`  ${o.status} ${o.canonicalSlug} (assetId ${o.assetId})`)
+        }
+        console.error(
+          'Resolve by deprecating these rows first (see docs/CLAUDE_HANDOVER.md §9r/§9s ' +
+            'for the P-10 precedent), then re-run.',
+        )
+        process.exit(1)
+      }
+      console.log(`Legacy-slug check passed: ${abandonedSlugs.length} promoted slot(s), 0 still live under the old slug`)
+    }
+  }
 
   let created = 0
   let skipped = 0

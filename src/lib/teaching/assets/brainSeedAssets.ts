@@ -163,6 +163,40 @@ export function buildProbeSlugResolver<
   }
 }
 
+/**
+ * The base (pre-ladder) slugs a resolver promotion ABANDONS — P-10-FOLLOW-UP.
+ *
+ * The moment a second probe joins a (conceptId, probeKind, gradeBand) slot,
+ * `buildProbeSlugResolver` moves EVERY probe in that slot — including one
+ * already seeded — off the plain 4-segment base slug onto the 5-segment
+ * difficulty-suffixed one. The base slug then names no probe in the current
+ * corpus. Both seed writers (`scripts/brain/seed-knowledge-assets.ts`,
+ * `src/instrumentation.ts`) are create-only: they look a probe up by ITS OWN
+ * resolved slug, never by a slug it used to carry, so a row seeded under the
+ * base slug before the promotion is never revisited. Left unchecked, the
+ * database ends up serving the same question under two ACTIVE identities —
+ * P-10, three confirmed physics instances (`docs/CLAUDE_HANDOVER.md` §9r/§9s).
+ *
+ * This returns exactly the set a caller must check against LIVE (non-
+ * DEPRECATED, non-RETIRED) rows before writing a promoted slot: any base slug
+ * returned here that still names a live row is the P-10 defect about to
+ * recur, and the caller should refuse to seed rather than create the second
+ * identity silently. Derived directly from `buildProbeSlugResolver`'s own
+ * output — never a re-implementation of its slot-counting — so it cannot
+ * disagree with what the resolver actually assigns.
+ */
+export function abandonedLegacyProbeSlugs<
+  T extends { conceptId: string; probeKind: string; gradeBand: GradeBand; difficulty: ProbeDifficulty },
+>(probes: readonly T[]): Set<string> {
+  const resolve = buildProbeSlugResolver(probes)
+  const abandoned = new Set<string>()
+  for (const p of probes) {
+    const base = seedCanonicalSlug(p.conceptId, p.probeKind, p.gradeBand)
+    if (resolve(p) !== base) abandoned.add(base)
+  }
+  return abandoned
+}
+
 /** Subjects the automatic cold-start bootstrap (src/instrumentation.ts) seeds. */
 export const BOOTSTRAP_SEED_SUBJECTS = ['mathematics', 'physics', 'english', 'chemistry'] as const
 
