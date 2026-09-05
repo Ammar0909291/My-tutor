@@ -2519,7 +2519,187 @@ than pinning the literal it replaced.
 **P-10-FOLLOW-UP CLOSED GLOBALLY** — both the manual canonical seeder (§9u)
 and the automatic production cold-start writer (this section) now refuse to
 recreate the demonstrated duplicate. Newly opened: the 45-slot corpus
-divergence (above), which is a different mechanism.
+divergence (above), which is a different mechanism — **now investigated and
+classified in §9w**.
+
+---
+
+## 9w. P-10-FOLLOW-UP-C — the 45-slot divergence: CATEGORY 3, fix presented NOT implemented (2026-09-05)
+
+**Investigation only. No code change. No production DB read or write. No
+schema/corpus/KG/EB change. No identity migration.** Per the task's own rule,
+Category 3 requires stopping before implementation and presenting the smallest
+safe fix first — which is what this section does.
+
+### An instrument check that changed the answer
+`git log` initially attributed EVERY relevant change to one commit dated
+2026-09-02. That is the shallow-clone trap CLAUDE.md already records:
+`git rev-parse --is-shallow-repository` returned **true** (54 commits). After
+`git fetch --unshallow` (3,332 commits, from 2026-05-31) the real timeline
+appeared. **Every history conclusion below is from the full clone.**
+
+### 1. THE 45, REPRODUCED EXACTLY (measured from repo code, no DB)
+| | probes | modules | abandoned base slugs |
+|---|---|---|---|
+| manual seeder corpus | 4,510 | 58 scanned | 711 |
+| bootstrap corpus | 3,293 | 6 imported | 429 |
+
+Divergent slots (ladder in manual, singleton in bootstrap): **exactly 45**.
+Reverse divergence: **0**. All 45 have a `math.` concept id.
+
+The shape is uniform and singular: the bootstrap's singleton comes from
+`authoredSeedAssets.ts` (44) or `brainSeedAssets.ts` (1) — both in its corpus —
+and the second rung comes from **`mathematicsSeedAssets.ts` in 45 of 45**,
+which the bootstrap has **never** imported in any commit in the full history.
+Examples: `math.arith.addition:mcq:en:elementary` (bootstrap) vs
+`…:elementary:foundational` + `…:elementary:developing` (manual);
+`math.alg.equation:mcq:en:middle` vs `…:middle:developing` + `…:middle:advanced`.
+
+**Content identity: 45/45.** The bootstrap's probe stem is byte-identical to
+one of the manual ladder's rungs, so a collision would serve the SAME question
+under two identities — the P-10 defect class exactly, not a near-miss.
+
+### 2. ONE NAMESPACE — PROVEN, NOT INFERRED (rules out Category 1)
+Both writers write `authorId: SEED_AUTHOR_ID`, `authorKind: HUMAN_CURATOR`,
+`tags: [p.subjectSlug, p.probeKind]` into the same `asset_identity` table.
+`mathematicsSeedAssets.ts` tags `subjectSlug = 'mathematics'` (`const S`), and
+`BOOTSTRAP_SEED_SUBJECTS` **includes `'mathematics'`**, so
+`seedOwnershipWhere()` matches script-written maths rows: the bootstrap
+prefetches, status-converges and counts them. The hook says so itself
+(`src/instrumentation.ts`, completeness-guard comment): rows from
+"files this hook does not import (the mathematics batch assets, biology,
+computer_science) — carry the same authorKind, authorId and subject tags, so
+they COUNT toward the guard while being invisible to the loops below."
+
+The only subjects documented as *intentionally* script-only are **biology and
+computer_science**. Mathematics is named nowhere as a deliberate exclusion.
+**This is C — one namespace, incidentally different corpus subsets — not B.**
+
+### 3. TIMELINE (full clone) — the identity rule outgrew its constraint
+- **2026-08-04 `72d6776b`** — partial unique index added. Its own SQL comment
+  states seed rows are "**4-segment** slug … exactly one row per slug".
+- **2026-08-05 `d4762a61`** — the ladder resolver lands, introducing
+  **5-segment** slugs. **One day later.** The index was never revisited.
+- **2026-08-18 `6b77c7b6`** — `mathematicsSeedAssets.ts` created, manual seeder only.
+- **2026-08-30 `7b2b00d7`** — last bootstrap corpus-list change (physics depth):
+  the list is actively curated, and maths was simply never added to it.
+
+### 4. THE DATABASE DOES NOT PREVENT IT (exact key)
+`asset_identity_seed_slug_key`: `UNIQUE ("canonicalSlug") WHERE "authorId" =
+'EDUCATIONAL_BRAIN_SEED'`. The key is the **slug string alone**, and there is
+**no status predicate**. `math.arith.addition:mcq:en:elementary` and
+`math.arith.addition:mcq:en:elementary:foundational` are different strings →
+two different index entries → **both rows can exist and both can be ACTIVE**.
+The index enforces one row per exact slug; it cannot express "one identity per
+slot", which is the invariant that actually matters here.
+
+### 5. THE TWO DIRECTIONS (behavioural simulation over the REAL corpora)
+Both writers modelled with their real resolver, real detector, real shared
+status constant and real guards, against a shared store enforcing the partial
+unique index.
+
+**DIRECTION A — manual seeder first, then bootstrap: REACHABLE, UNGUARDED.**
+Fresh store → manual creates 4,510 (Guard 3 finds nothing live, correctly) →
+next cold start the bootstrap creates **exactly 45** rows → **45 cross-writer
+duplicate-content groups**, every one a live 4-segment row beside a live
+5-segment row of the same question. A second cold start creates 0 more, so the
+damage is one-time and bounded at 45, not growing. **Step 0.8 does not fire:**
+for these slots the bootstrap's own corpus sees a singleton, so the base slug
+is not "abandoned" from its point of view — measured, `false` for all 45.
+
+**DIRECTION B — bootstrap first, then manual seeder: CONTAINED.**
+Bootstrap creates 3,293 → the manual seeder **aborts, blocked by exactly 45**,
+creates 0, duplicates 0. P-10-FOLLOW-UP-A's Guard 3 catches all 45/45, because
+it computes abandonment from the FULL corpus. Working exactly as designed.
+
+**Future new divergent slot:** same asymmetry — manual→bootstrap yields 1
+duplicate; bootstrap→manual aborts with 0.
+
+### 6. THE REMEDIATION PATH CONVERGES SAFELY (measured)
+From the Direction-B blocked state, following the guard's own advice:
+deprecate the 45 blockers (status change only, the P-10 precedent) → the
+manual seeder proceeds and creates **1,262** maths rows → **the next cold start
+creates 0**. Cross-writer duplicates: **0**.
+
+Why it is safe: the bootstrap's dedup is `existing.get(canonicalSlug)` over a
+prefetch with **no status filter**, so a DEPRECATED 4-segment row still
+suppresses the create. Verified in source, not assumed.
+
+**Operational consequence worth knowing:** in the Direction-B state (which is
+what production most plausibly is, since the bootstrap has run for weeks and
+the manual seeder has never had a `DATABASE_URL`), **the maths corpus cannot
+currently be seeded by any automated path** — the bootstrap does not import the
+modules, and the manual seeder aborts on the 45. The deprecate-then-rerun path
+above is the unblock, and it is proven convergent.
+
+### 7. WHAT IS *NOT* PART OF THIS (measured, so it is not mistaken for it)
+The combined run shows 47 duplicate-content groups, not 45. The extra 2 are
+**pre-existing same-stem authoring** inside the corpora themselves (e.g. three
+`eng.grammar.*` probes sharing one stem; `math.geom.circle:mcq:en:middle` and
+`math.geom.circle-parts:misconception_probe:en:middle`). Baselines: manual
+alone 3, bootstrap alone 1. These are content-authoring artifacts across
+DIFFERENT concepts, not identity collisions. Out of scope, recorded so the 45
+is not inflated.
+
+### 8. CLASSIFICATION — **CATEGORY 3 (REAL OPEN DEFECT)**
+Direction A is a complete, supported path — fresh or restored database, a new
+staging/preview environment, or any future divergent slot — that ends with 45
+conflicting ACTIVE identities in one namespace, with **no guard firing and no
+log line**. Category 1 is ruled out (one namespace, proven). Category 2 was
+considered seriously and rejected: Direction B's containment is real but does
+not touch Direction A, and today's production being *probably* safe rests on an
+ordering accident this session cannot verify (no DB reads permitted) rather
+than on any mechanism. Category 4 is not required for the tactical fix, though
+the underlying ownership question remains open (§10 below).
+
+**Urgency: LOW.** Live production is most likely already in the contained
+Direction-B state. This is a correctness gap to close deliberately, not an
+incident.
+
+### 9. SMALLEST SAFE FIX — PRESENTED, NOT IMPLEMENTED
+Mirror of Step 0.8, in `src/instrumentation.ts` only:
+
+> Before creating a row at its resolved slug `S`, if `S` is a 4-segment slug,
+> check whether a **live** row already exists under `S + ':' + d` for any
+> `d` in `ProbeDifficulty` (4 exact string lookups — no prefix scan). If one
+> does, the other writer has already laddered this slot and serves it, so this
+> writer must not add its impoverished duplicate.
+
+Properties: **zero new queries** (the `existing` map already holds every
+seed-owned slug and, since `cbb898d`, its status); zero schema change; no
+canonicalSlug is created, renamed, migrated or deleted; no corpus is aligned;
+`abandonedLegacyProbeSlugs` is untouched, so §9u/§9v behaviour is unchanged.
+
+**Recommended shape: per-slot SKIP, not a whole-run refusal.** Unlike Step 0.8
+— where the stale row is wrong and a human must resolve it — here the
+5-segment rows are the CORRECT, richer identity and the question is already
+served. Skipping is semantically right, needs no human, and has no blast
+radius; a refusal would halt all seeding over 45 slots that are in fact fine.
+It is also a proven no-op in the remediated state, where the create is already
+suppressed by the DEPRECATED 4-segment row.
+
+### 10. THE ARCHITECTURAL QUESTION THIS DOES NOT ANSWER (owner decision)
+The tactical fix stops the duplicate; it does not decide **which corpus is
+canonical for production**. Today the bootstrap claims maths ownership
+(`BOOTSTRAP_SEED_SUBJECTS`) while importing none of the 30-odd maths modules
+that define most of it. The durable options — (a) add the maths modules to the
+bootstrap corpus (watch the edge/node bundle budget and the write-budget/
+deadline; the edge substitution keeps middleware at 79.7 kB but the node bundle
+grows), or (b) remove `'mathematics'` from the bootstrap's ownership tags and
+declare it script-only like biology/computer_science — are both ownership
+changes and neither was attempted here.
+
+### Evidence / reproduction
+All numbers came from throwaway read-only scripts run against the real modules
+(no DB, no network): corpus sizes, the 45-row table with per-probe source
+module, stem-identity check, both collision directions, the remediation path
+and the future-slot case. They live in the session scratchpad, not the repo,
+because they are measurements rather than product code.
+
+### Status
+**P-10-FOLLOW-UP-C: INVESTIGATED AND CLASSIFIED — CATEGORY 3.** No code
+changed. Awaiting an owner decision on the presented fix (§9) and, separately,
+on the ownership question (§10).
 
 ---
 
@@ -2546,6 +2726,7 @@ divergence (above), which is a different mechanism.
 | 2026-09-05 | AMP-A fix | Empty-turn guard reads what is served, not what was attached | route.ts guard now uses mcqToServe(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted), matching the post-strip backstop 3,700 lines later. 15 new tests (A-D), one pre-existing assertion updated in place. Suite 11,905 pass, tsc + build clean. Production run deliberately not manufactured. See §9q. |
 | 2026-09-05 | P-10 | Deprecate the 3 duplicate ACTIVE seed rows | Done. Surplus rows identified by running the real slug resolver, not by slug shape. ACTIVE duplicates 3 -> 0; distinct questions unchanged; all-status row count deliberately unchanged at 1,852 (deprecation is not deletion). Exactly 3 rows touched; 0 sessions/attempts/progress. Mechanism NOT fixed — P-10-FOLLOW-UP. See §9r/§9s. |
 | 2026-09-05 | P-11 | Fix the seeder's dead revive path | `where: { id: existing.id }` -> `{ assetId: existing.assetId }` at lines 165 and 237. Proven by a scoped compiler run: 4 errors pre-fix, clean after. Added tsconfig.seed-script.json + npm run typecheck:seed-script + an 8-case DMMF test (3 fail pre-fix). Suite 11,913 pass, tsc + build clean. Path executable but not yet executed — no DATABASE_URL here. See §9t. |
+| 2026-09-05 | P-10-FOLLOW-UP-C | Investigate the 45-slot cross-writer divergence | **CATEGORY 3 (real open defect), fix presented NOT implemented.** 45 reproduced exactly (reverse 0, all maths, 45/45 second rung from `mathematicsSeedAssets.ts`, which the bootstrap has never imported in 3,332 commits); content identical 45/45. ONE namespace PROVEN (same authorId/authorKind/tags; `'mathematics'` in BOOTSTRAP_SEED_SUBJECTS; the hook's own comment). DB cannot prevent it: unique key is the slug STRING with no status predicate, so 4-seg and 5-seg coexist ACTIVE. Direction A (manual→bootstrap) REACHABLE and UNGUARDED — demonstrated, exactly 45 duplicates, Step 0.8 silent; Direction B (bootstrap→manual) CONTAINED by Guard 3 (aborts, 0 duplicates). Remediation path proven convergent (deprecate 45 → seeder creates 1,262 → next cold start creates 0). Also found: maths cannot currently be seeded by ANY automated path. Shallow-clone trap hit and corrected via `--unshallow`. See §9w. |
 | 2026-09-05 | P-10-FOLLOW-UP-B | Protect the automatic production cold-start writer | `src/instrumentation.ts` now runs the SAME shared detector, reusing the prefetch it already issues: `status: true` added to that existing select, decision collected in the same loop, refuses with `return` (never process.exit) before any create. **0 new queries / 0 round trips / 0 schema change**; fast path untouched; middleware 79.7 kB and edge bundle 248 B unchanged. Liveness unified as `SEED_REVIVABLE_STATUSES` so both writers cannot drift. 23 new tests, 8 fail pre-fix. Suite 11,954 pass. NEW FINDING: 45 mathematics slots resolve to different slugs between the two writers (script-only modules) — a separate mechanism, NOT fixed. See §9v. |
 | 2026-09-05 | P-10-FOLLOW-UP | Prevent recurrence of the duplicate-ACTIVE-row mechanism | Added `abandonedLegacyProbeSlugs` (brainSeedAssets.ts) + Guard 3 in seed-knowledge-assets.ts: refuses to seed (process.exit(1), no rows written) if a promoted slot's abandoned base slug still names a live row. Chosen over unconditional-difficulty (mass identity migration) and reconcile-by-rename (still an identity migration). No identity touched, no migration, no production write. instrumentation.ts's cold-start bootstrap deliberately NOT covered (runtime guardrail) — named residual risk. 18 new tests (2 caught and corrected a wrong assumption during authoring). Suite 11,931 pass, typecheck:seed-script + tsc + build clean. See §9u. |
 
