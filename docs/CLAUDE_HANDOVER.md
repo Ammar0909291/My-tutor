@@ -775,6 +775,115 @@ physics and no chemistry comparison was run.
 
 ---
 
+## 9h. P-8R PRE-REGISTRATION AND **STOP** — remediation blocked at the seeder step (2026-09-05)
+
+**NO PRODUCTION WRITE WAS MADE.** Every precondition below was verified read-only
+BEFORE any change, as the task required; one of them fails, and the task's own rule
+5 ("if any precondition differs from P-8, STOP") applies. Recorded here in full so
+the next session does not re-derive it.
+
+### Pre-registration (what was authorised, recorded before the write boundary)
+- Exactly TWO rows, no others:
+  - `phys.em.resistivity` — assetId `61582820-e1e2-43cc-ae61-4b167c3316c6`,
+    slug `phys.em.resistivity:mcq:en:high:proficient`, ACTIVE, **version 1**,
+    contentHash **`hbecff101`**, created/updated 2026-08-14 15:17:17.584,
+    HUMAN_CURATOR, 2 choices / exactly 1 correct.
+  - `phys.em.solenoid` — assetId `8e90af3e-ca2b-48c5-ad44-16c37b8c69e6`,
+    slug `phys.em.solenoid:mcq:en:high:developing`, ACTIVE, **version 1**,
+    contentHash **`h3d5dbdf7`**, created/updated 2026-08-14 15:17:33.412,
+    HUMAN_CURATOR, 2 choices / exactly 1 correct.
+- Repo counterparts carry the SAME canonicalSlug and a DIFFERENT contentHash —
+  `h12ea45f5` (resistivity) and `h6045c777` (solenoid) — which is exactly the
+  create-only-skip signature P-8 established. **Precondition 2 and 3: MET.**
+- Expected transition: ACTIVE -> DEPRECATED -> (seeder revive) -> ACTIVE, version 2,
+  contentHash equal to the repo's, stem/choices/correctValue/difficulty/
+  targetedMisconceptions all refreshed by `seed-knowledge-assets.ts:235-266`.
+- Expected seeder report: **revived=2, created=0**.
+- Post-state requirement: each concept retains >= 3 ACTIVE gradeable probes.
+  Current ACTIVE gradeable MCQ counts (MEASURED): resistivity **5**, solenoid **5**
+  (9 and 5 ACTIVE probe rows respectively). Both would remain >= 3 throughout.
+- The 3 duplicate-slug rows (P-10) are explicitly NOT touched.
+
+### Drift set re-confirmed without re-running the whole comparison (VERIFIED)
+`asset_identity` for physics seed-owned probes is **immutable since 2026-08-30
+21:34:08**: 1,852 rows, `max(updatedAt) = max(createdAt) = 2026-08-30 21:34:08`,
+and **0 rows updated since 2026-09-04**. P-8's exhaustive 238-concept comparison ran
+against this same unchanged table, so its result — exactly two content-drift probes —
+still holds. **Precondition: MET.**
+
+### THE BLOCKING PRECONDITION (VERIFIED — this is why the task stopped)
+
+**The canonical seeder cannot be run from this session, and the cold-start bootstrap
+is not a substitute.**
+
+1. **No `DATABASE_URL`.** Unset in this container; no `.env`/`.env.local` exists.
+   `scripts/brain/seed-knowledge-assets.ts` constructs `new PrismaClient()` and
+   cannot connect. This is the same long-standing environment constraint recorded in
+   CLAUDE.md ("Seeding cannot be done from a session"), re-verified today. Neither
+   the Supabase MCP surface nor the Vercel MCP surface exposes the Postgres password
+   or an env-var read, so the connection string cannot be assembled here either.
+2. **The production cold-start bootstrap will NOT heal a DEPRECATED row**, so
+   deprecating and waiting is not an alternative route. Two independent reasons,
+   both read from code:
+   - `src/instrumentation.ts:452-469` builds its `existing` map from
+     `seedOwnershipWhere()`, which filters on `authorKind`/`authorId`/`tags` and
+     **not on status**. A DEPRECATED row is therefore IN the map, so line 691's
+     `dup` branch fires and the row is `skipped` — it is never revived and no
+     replacement is created.
+   - Even if it tried, the partial unique index
+     `asset_identity_seed_slug_key ON ("canonicalSlug") WHERE "authorId" =
+     'EDUCATIONAL_BRAIN_SEED'` (migration `20260804000000_...`) is **also
+     status-agnostic**, so a second row for that slug would be rejected.
+   The bootstrap's only status convergence is `DRAFT -> ACTIVE`
+   (`src/instrumentation.ts:297`), which changes status and never content.
+
+**Consequence.** Deprecating the two rows in this session would produce a stable,
+NON-self-healing half-state: the two concepts would drop to 8 and 4 ACTIVE probes
+(contract still met), the two defective probes would stop serving, and the corrected
+probes would never arrive. It would also make the P-8 drift measurement read "0
+drift" for the wrong reason — the drifted row removed rather than corrected —
+corrupting the very measurement this work depends on. **So the deprecation was NOT
+performed**, even though the task authorises it in isolation: half of an authorised
+two-step repair is not the authorised repair.
+
+### What was deliberately NOT done instead
+Hand-writing the seeder's revive UPDATE through the Supabase MCP would reproduce the
+right end state, and prior sessions have written seed content that way. It was not
+done here: the task authorises "run the existing canonical seeder", not a
+hand-composed production content write, and the rule "do not manually rewrite
+stems/content unless the existing seeder itself performs that operation" is at best
+ambiguous about a different transport. That is an owner call, not mine — see the
+options below.
+
+### OPTIONS FOR THE OWNER (none taken)
+- **O-1 (matches P-8 R-a exactly).** Run, from any environment that has a real
+  `DATABASE_URL`: deprecate the two `assetId`s named above, then
+  `npx tsx scripts/brain/seed-knowledge-assets.ts` (no flags), and confirm it prints
+  `revived=2 created=0`. Two rows, reversible, no schema change, no code change.
+- **O-2.** Authorise this session to apply the seeder's revive UPDATE verbatim
+  through the Supabase MCP — same fields, same version bump, same content, executed
+  as two statements instead of by the script. Reaches the identical end state; the
+  difference is transport and reviewability, not semantics.
+- **O-3.** Defer. The two probes keep serving. They are gradeable and answerable, so
+  learners are not blocked; they are simply the two probes this repo already recorded
+  as non-discriminating, and the harness will keep reporting those two concepts
+  `UNMEASURED-no-authored-match`.
+
+### Certification: NOT performed
+The task makes it conditional on "after successful remediation". No remediation
+happened, so `phys.em.resistivity` and `phys.em.solenoid` were NOT re-certified, and
+their P-1b verdicts stand unchanged (both UNMEASURED).
+
+### State (VERIFIED)
+- Git: HEAD == `origin/main`; production health before this work 200 / `db:true` /
+  30s / 15s; no infrastructure error observed. Working tree carries only the five
+  standing untracked dispatchers, untouched.
+- Production `asset_identity`: **unchanged by this task** — still 1,852 physics
+  seed-owned probe rows, `max(updatedAt) 2026-08-30 21:34:08`.
+- **P-8 remains OPEN** (diagnosed, not remediated). **P-10 and P-7 remain open.**
+
+---
+
 ## 10. Handover History
 
 | Date | Session | Action | Result |
@@ -787,6 +896,7 @@ physics and no chemistry comparison was run.
 | 2026-09-04 | R3 deployment + P-1 | Push to `main` (`b2d1466`), production deploy, single 25-concept cohort | COMPLETE. UNMEASURED 76% -> 12%; DEMONSTRATE residue 15 -> 0; all five predictions confirmed; infra clean. See §9c. |
 | 2026-09-04/05 | P-1b | 35-concept UNMEASURED re-run under R3 | 26 CERTIFIED / 9 UNMEASURED (25.7%), SUCCESS band met; residual re-diagnosed into 3 causes; corpus drift (P-8) newly found. |
 | 2026-09-05 | P-8 | Read-only diagnosis of production/repo probe drift | Root cause verified (identity excludes content + create-only writers). Physics drift = exactly 2 probes; 3 duplicate rows found (P-10). Nothing remediated. See §9g. |
+| 2026-09-05 | P-8R | Attempt remediation of the two drifted probes | STOPPED at the write boundary: no DATABASE_URL, so the canonical seeder cannot run, and the bootstrap cannot revive a DEPRECATED row (status-agnostic prefetch + partial unique index). No production write. See §9h. |
 
 ## 11. Do Not Rediscover
 
