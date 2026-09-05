@@ -2339,10 +2339,187 @@ database, consistent with the rest of the file).
    the defect beyond the three P-10 already found and remediated.
 
 ### Status
-**P-10-FOLLOW-UP CLOSED.** Open: `providersSeen` corroboration (§9p), the 16
-symbolic-option grading failures (ratcheted, §9n), and the instrumentation.ts
-residual risk named above (no ticket opened — recorded here pending an
-explicit future task).
+**P-10-FOLLOW-UP CLOSED** for the manual seeder (this section, "A").
+**Superseded in part 2026-09-05 by §9v (P-10-FOLLOW-UP-B)**, which closes
+limitation 1 below by protecting `src/instrumentation.ts` as well. Open:
+`providersSeen` corroboration (§9p), the 16 symbolic-option grading failures
+(ratcheted, §9n).
+
+---
+
+## 9v. P-10-FOLLOW-UP-B CLOSED — the production cold-start writer is protected too (2026-09-05)
+
+**No production write. No certification run. No corpus/KG/EB change. No schema
+change. No identity migration. No broad instrumentation refactor.** Three
+source files changed plus one new test file; `src/instrumentation.ts` gains
+**71 lines, 52 of which are comment**, and 3 lines of behaviour.
+
+### Why A was not enough (the gap A itself named)
+A put Guard 3 in `scripts/brain/seed-knowledge-assets.ts`. That is the
+canonical seeder but **not the writer that runs**: no session in this
+project's history has had a `DATABASE_URL` to run it with, while
+`src/instrumentation.ts`'s cold-start bootstrap seeds production
+automatically on every cold start and carries the identical mechanism.
+
+### The production bootstrap, traced (VERIFIED against current source)
+1. `register()` → `bootstrapAssets()`, awaited under `ASSET_BOOTSTRAP_DEADLINE_MS`
+   (12 s), non-fatal by construction.
+2. Corpus assembled from SIX modules — a SUBSET of the manual seeder's ~40
+   (`ALL_PROBES` = SEED + AUTHORED + CHEMISTRY + PHYSICS_BAND_GAP +
+   PHYSICS_DEPTH + CHEMISTRY_DEPTH). `probeSlug = buildProbeSlugResolver(ALL_PROBES)`;
+   `expectedSlugs` is the identity set this corpus declares.
+3. **Step 0** duplicate-identity check → on failure `console.error` + **`return`**
+   (deliberately not `process.exit`: this runs inside the Next.js server
+   process, so exiting would turn a data fault into a boot outage).
+4. **Step 1** status convergence: `updateMany(seedOwnershipWhere() + DRAFT → ACTIVE)`.
+   Creates nothing.
+5. **Step 0.6 cheap probe**: two `count`s intersected with `expectedSlugList`.
+   Skips the whole run when `storedCount >= expectedSlugs.size && hollowCount === 0`.
+   This is the 2026-08-31 egress fix (the full prefetch was reading ~22M rows
+   to answer a yes/no question).
+6. **Full prefetch**: ONE `findMany({ where: seedOwnershipWhere() })` — **no
+   canonicalSlug filter** — building `existing: Map<canonicalSlug, {assetId, hasContent}>`.
+7. Completeness guard → plan in memory → `createMany` flushes.
+
+**The legacy row IS observable from the existing prefetch** (step 6 is
+unfiltered by slug), it is simply keyed under a slug no loop looks up. That
+single fact is what makes a zero-query fix possible.
+
+### Architectural options compared
+- **A — reuse the existing prefetch + the shared pure detector (CHOSEN).**
+  Zero new queries, zero new round trips, zero new connections, no schema
+  change. The only DB-facing change is `status: true` added to a `select`
+  that was already executing.
+- **B — a separate DB query** (e.g. a third statement in the cheap probe's
+  `$transaction`, or its own `findMany`). Rejected: it would run on every cold
+  start including the "nothing to do" path the egress fix exists to protect,
+  and the task's own stop-condition names a new query as a reason to stop.
+- **C — align the two writers' corpora** so both resolvers agree. Rejected as
+  a broader redesign (see the new finding below), and unnecessary for this
+  defect.
+
+### What was implemented
+- `src/lib/teaching/assets/brainSeedAssets.ts` — new export
+  `SEED_REVIVABLE_STATUSES` (`[DEPRECATED, RETIRED]`). **"Live" is defined
+  exactly once, as the complement of "revivable"**, so the two writers cannot
+  drift into different answers about which rows block seeding.
+- `src/instrumentation.ts` ("Step 0.8"): destructures
+  `abandonedLegacyProbeSlugs` + `SEED_REVIVABLE_STATUSES` from the seed module
+  it **already** dynamically imports (no new module in the graph — the edge
+  bundle is untouched); adds `status: true` to the existing prefetch select;
+  collects live rows under abandoned slugs **inside the same loop** that fills
+  `existing`; and, if any are found, logs a bounded diagnostic and **`return`s**
+  before any create — matching Step 0's failure semantics exactly.
+- `scripts/brain/seed-knowledge-assets.ts` — now consumes the shared constant
+  in both places (Guard 3's `notIn`, and `REVIVABLE`), so the pair is defined
+  once rather than three times.
+
+### DB / connection impact (QUANTIFIED)
+| property | impact |
+|---|---|
+| additional queries | **0** |
+| additional Prisma round trips | **0** |
+| additional connection acquisition | **0** |
+| schema changes | **0** |
+| cost on the cheap-probe fast path | **0** — the guard and the detector call both sit AFTER its early return |
+| extra egress | one enum column on a query already returning ~4.3k rows, and only when the bootstrap has work to do |
+| extra CPU | one O(n) pass over 3,293 probes, after the fast path |
+
+### Placement, stated rather than glossed
+The guard sits after Step 1's status convergence, because deciding earlier
+would require a second query. That is sound: the defect prevented is a
+CREATE, and convergence creates nothing — it can only change the status of a
+row that already exists, which it would equally have done before this guard.
+The reachable states are therefore a strict subset of the pre-guard ones,
+minus the duplicate. Likewise the cheap-probe fast path may skip the guard:
+it fires only when every declared slug is already stored, and in that state
+the create loops are a no-op by construction, so no duplicate is reachable
+there (pinned by a test).
+
+### NEW FINDING — the two writers disagree about 45 mathematics identities
+Measured offline against the real corpora (no DB), because the guard's
+correctness depends on which corpus computes abandonment:
+
+| | probes | abandoned base slugs |
+|---|---|---|
+| bootstrap corpus (6 modules) | 3,293 | 429 |
+| manual-seeder corpus (all modules) | 4,510 | 711 |
+
+All three P-10 slugs are abandoned in BOTH, so the bootstrap guard covers
+them. But **45 slots are a ladder in the full corpus and a singleton in the
+bootstrap corpus** (all mathematics, e.g. `math.arith.addition:mcq:en:elementary`,
+`math.alg.equation:mcq:en:middle`), because the ~30 mathematics modules are
+script-only while mathematics is in `seedOwnershipWhere()`'s tags. For those
+45 probes **the two writers resolve DIFFERENT canonicalSlugs** (4-segment vs
+5-segment). Reverse divergence: 0.
+
+Consequence, stated honestly: this is a SECOND duplicate-generation path,
+pre-existing and distinct from P-10's. A's Guard 3 already blocks one
+direction (a manual seeder run would abort on finding the bootstrap's
+4-segment row live). The other direction — the bootstrap creating its
+4-segment row after a script run created the 5-segment pair — is **NOT**
+covered by either guard, because from the bootstrap's view that slot is a
+legitimate singleton. Closing it means aligning the two corpora, which is a
+broader redesign; **NOT attempted, deliberately.** Recorded as an open item.
+
+### Regression coverage (`src/tests/bootstrapAbandonedSlugGuard.test.ts`, 23 tests)
+A behavioural simulation of the bootstrap's real control flow driven by the
+REAL shared detector and REAL shared status constant, plus source coupling:
+singleton → no guard, seeds normally; complete catalogue → no creates, no
+refusal; **promotion + live legacy row → refuses, creates nothing, and the
+store is byte-identical to before (the canonical ACTIVE row is not modified,
+renamed or deprecated)**; promotion + DEPRECATED legacy row → proceeds and
+seeds both rungs, old row untouched; ACTIVE/DRAFT/REVIEW all block while
+DEPRECATED/RETIRED do not; an unrelated live row under a still-used slug never
+blocks; one query whether refusing or proceeding; the fast-path safety
+property; and wiring assertions that the hook imports the shared detector
+(never re-implements it — `slotCounts` is banned in that file), collects the
+decision inside the existing prefetch loop with **exactly one `prisma.` call
+in the whole region**, sits after the cheap probe, refuses with `return` and
+never `process.exit`, writes nothing on the way out, refuses before any
+create/flush, and leaves the anchors `bootstrapCheapProbe.test.ts` and
+`bootstrapCompletenessGuard.test.ts` depend on intact.
+
+**Negative control (measured, twice): 8 of the 23 fail against the pre-fix
+hook and all 23 pass after.** The first control run exposed one test passing
+vacuously (`indexOf` returning −1 beats every comparison); it was hardened and
+the control re-run. One pre-existing assertion in
+`abandonedLegacyProbeSlugs.test.ts` was amended in place, with the
+supersession recorded, because pinning the shared symbol is strictly stronger
+than pinning the literal it replaced.
+
+### Validation
+- New file 23/23 · `abandonedLegacyProbeSlugs` 18/18.
+- The four pre-existing bootstrap/instrumentation suites (`bootstrapCheapProbe`,
+  `bootstrapCompletenessGuard`, `seedActivationLifecycle`,
+  `edgeBundleExcludesSeedCorpora`) + 6 more seed suites: **170/170**, unchanged.
+- `npm run typecheck:seed-script` clean · `npx tsc --noEmit` clean.
+- Full suite **559 files / 11,954 passed / 9 skipped** (from 558 / 11,931 —
+  exactly +1 file / +23 tests).
+- `npm run build` exit 0, **middleware 79.7 kB unchanged**, and
+  `.next/server/edge-instrumentation.js` still **248 bytes** — the edge
+  substitution is unaffected, which was the specific risk of touching this file.
+
+### Remaining limitations
+1. **Not exercised against a real database.** No environment reachable from
+   this session has a `DATABASE_URL`; correctness rests on the simulation, the
+   source coupling, and the negative control — the same standard P-11 and A used.
+2. **Blast radius, stated:** the bootstrap corpus has 429 abandoned base slugs.
+   If ANY of them names a live row in production, the bootstrap refuses the
+   whole run until a human deprecates it. That is the intended, loud behaviour
+   (and matches Step 0's all-or-nothing precedent), but it is a whole-catalogue
+   pause, not a per-slot skip. Production is expected to have zero such rows —
+   the three known ones were deprecated by P-10 — but that could not be
+   verified from here.
+3. **The 45-slot cross-writer corpus divergence above is NOT fixed.**
+4. `scripts/brain/seed-physics-assets.ts` still shares the resolver call; it
+   seeds DRAFT only, so it cannot produce a duplicate ACTIVE row. Out of scope.
+
+### Status
+**P-10-FOLLOW-UP CLOSED GLOBALLY** — both the manual canonical seeder (§9u)
+and the automatic production cold-start writer (this section) now refuse to
+recreate the demonstrated duplicate. Newly opened: the 45-slot corpus
+divergence (above), which is a different mechanism.
 
 ---
 
@@ -2369,6 +2546,7 @@ explicit future task).
 | 2026-09-05 | AMP-A fix | Empty-turn guard reads what is served, not what was attached | route.ts guard now uses mcqToServe(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted), matching the post-strip backstop 3,700 lines later. 15 new tests (A-D), one pre-existing assertion updated in place. Suite 11,905 pass, tsc + build clean. Production run deliberately not manufactured. See §9q. |
 | 2026-09-05 | P-10 | Deprecate the 3 duplicate ACTIVE seed rows | Done. Surplus rows identified by running the real slug resolver, not by slug shape. ACTIVE duplicates 3 -> 0; distinct questions unchanged; all-status row count deliberately unchanged at 1,852 (deprecation is not deletion). Exactly 3 rows touched; 0 sessions/attempts/progress. Mechanism NOT fixed — P-10-FOLLOW-UP. See §9r/§9s. |
 | 2026-09-05 | P-11 | Fix the seeder's dead revive path | `where: { id: existing.id }` -> `{ assetId: existing.assetId }` at lines 165 and 237. Proven by a scoped compiler run: 4 errors pre-fix, clean after. Added tsconfig.seed-script.json + npm run typecheck:seed-script + an 8-case DMMF test (3 fail pre-fix). Suite 11,913 pass, tsc + build clean. Path executable but not yet executed — no DATABASE_URL here. See §9t. |
+| 2026-09-05 | P-10-FOLLOW-UP-B | Protect the automatic production cold-start writer | `src/instrumentation.ts` now runs the SAME shared detector, reusing the prefetch it already issues: `status: true` added to that existing select, decision collected in the same loop, refuses with `return` (never process.exit) before any create. **0 new queries / 0 round trips / 0 schema change**; fast path untouched; middleware 79.7 kB and edge bundle 248 B unchanged. Liveness unified as `SEED_REVIVABLE_STATUSES` so both writers cannot drift. 23 new tests, 8 fail pre-fix. Suite 11,954 pass. NEW FINDING: 45 mathematics slots resolve to different slugs between the two writers (script-only modules) — a separate mechanism, NOT fixed. See §9v. |
 | 2026-09-05 | P-10-FOLLOW-UP | Prevent recurrence of the duplicate-ACTIVE-row mechanism | Added `abandonedLegacyProbeSlugs` (brainSeedAssets.ts) + Guard 3 in seed-knowledge-assets.ts: refuses to seed (process.exit(1), no rows written) if a promoted slot's abandoned base slug still names a live row. Chosen over unconditional-difficulty (mass identity migration) and reconcile-by-rename (still an identity migration). No identity touched, no migration, no production write. instrumentation.ts's cold-start bootstrap deliberately NOT covered (runtime guardrail) — named residual risk. 18 new tests (2 caught and corrected a wrong assumption during authoring). Suite 11,931 pass, typecheck:seed-script + tsc + build clean. See §9u. |
 
 ## 11. Do Not Rediscover

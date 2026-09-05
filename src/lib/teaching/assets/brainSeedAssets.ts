@@ -16,7 +16,7 @@
  * by conceptId + language + status — so the suffix is invisible to the
  * hot path and only scopes the lineage/versioning rules.
  */
-import { GradeBand, ProbeDifficulty } from '@prisma/client'
+import { AssetStatus, GradeBand, ProbeDifficulty } from '@prisma/client'
 import type { ExplanationKind, ProbeKind, ProbeChoice } from './assetIdentity'
 
 export interface SeedExplanation {
@@ -196,6 +196,26 @@ export function abandonedLegacyProbeSlugs<
   }
   return abandoned
 }
+
+/**
+ * The statuses that mean a seed identity is NOT serving — and is therefore
+ * free to be revived under its slug.
+ *
+ * ONE definition, because two separate consumers must agree exactly:
+ *   - `scripts/brain/seed-knowledge-assets.ts` revives a row in one of these
+ *     states, skips any other, and its Guard 3 treats a row in one of these
+ *     states as no obstacle to seeding a promoted ladder.
+ *   - `src/instrumentation.ts`'s cold-start bootstrap decides "is this
+ *     abandoned legacy slug still LIVE?" as the negation of this set.
+ *
+ * "Live" is the complement of "revivable", and stating it once is what stops
+ * the two writers drifting into different answers about whether a given row
+ * blocks seeding.
+ */
+export const SEED_REVIVABLE_STATUSES: readonly AssetStatus[] = [
+  AssetStatus.DEPRECATED,
+  AssetStatus.RETIRED,
+]
 
 /** Subjects the automatic cold-start bootstrap (src/instrumentation.ts) seeds. */
 export const BOOTSTRAP_SEED_SUBJECTS = ['mathematics', 'physics', 'english', 'chemistry'] as const

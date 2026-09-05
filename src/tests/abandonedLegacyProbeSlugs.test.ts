@@ -315,7 +315,15 @@ describe('Guard 3 is actually wired into scripts/brain/seed-knowledge-assets.ts'
     expect(guardStart).toBeGreaterThan(-1)
     const guardBlock = SEEDER.slice(guardStart, guardStart + 1500)
     expect(guardBlock).toMatch(/canonicalSlug:\s*\{\s*in:\s*abandonedSlugs\s*\}/)
-    expect(guardBlock).toMatch(/status:\s*\{\s*notIn:\s*\[AssetStatus\.DEPRECATED,\s*AssetStatus\.RETIRED\]\s*\}/)
+    // SUPERSEDED 2026-09-05 (P-10-FOLLOW-UP-B), assertion amended in place
+    // rather than deleted. It used to pin the literal
+    // `[AssetStatus.DEPRECATED, AssetStatus.RETIRED]`. The cold-start
+    // bootstrap now runs the same guard and the two writers must agree
+    // EXACTLY on which statuses count as live, so the pair became one shared
+    // constant (SEED_REVIVABLE_STATUSES in brainSeedAssets.ts). Pinning the
+    // shared symbol is strictly stronger than pinning the literal: a literal
+    // here would pass while the bootstrap used a different pair.
+    expect(guardBlock).toMatch(/status:\s*\{\s*notIn:\s*\[\.\.\.SEED_REVIVABLE_STATUSES\]\s*\}/)
     expect(guardBlock).toMatch(/process\.exit\(1\)/)
     // The abort happens strictly before the probe-creation loop, not after.
     const probeLoopStart = SEEDER.indexOf("for (const p of ALL_PROBES)")

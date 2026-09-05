@@ -141,7 +141,8 @@ async function bootstrapAssets() {
     {
       // Load seed arrays first so we know the expected total before querying.
       const { SEED_EXPLANATIONS, SEED_PROBES, SEED_LANGUAGE, SEED_AUTHOR_ID, seedCanonicalSlug,
-        buildProbeSlugResolver, seedOwnershipWhere } =
+        buildProbeSlugResolver, abandonedLegacyProbeSlugs, SEED_REVIVABLE_STATUSES,
+        seedOwnershipWhere } =
         await import('./lib/teaching/assets/brainSeedAssets')
       const { AUTHORED_EXPLANATIONS, AUTHORED_PROBES } =
         await import('./lib/teaching/assets/authoredSeedAssets')
@@ -450,11 +451,41 @@ async function bootstrapAssets() {
       }
 
       const existing = new Map<string, { assetId: string; hasContent: boolean }>()
+      // ── Step 0.8: THE ABANDONED-LEGACY-SLUG GUARD (P-10-FOLLOW-UP-B) ───────
+      //
+      // `buildProbeSlugResolver` gives a (conceptId, probeKind, gradeBand) slot
+      // the plain 4-segment slug until a SECOND probe joins it, at which point
+      // every probe in that slot — including one already seeded — moves to the
+      // 5-segment difficulty slug. The base slug then names no probe in this
+      // corpus, but the row seeded under it is untouched: the loops below look
+      // a probe up by ITS OWN resolved slug, find nothing, and create a second
+      // row. Production ends up serving one question under two ACTIVE
+      // identities. That is P-10, measured three times in physics
+      // (docs/CLAUDE_HANDOVER.md §9r/§9s), remediated by hand, and this is the
+      // writer that would recreate it — the manual seeder's Guard 3 cannot,
+      // because it is not the writer that runs in production.
+      //
+      // COSTS NOTHING EXTRA TO ASK. The prefetch below already reads every
+      // seed-owned row, unfiltered by slug, so the abandoned row is ALREADY in
+      // the result set — it is simply keyed under a slug no loop looks up. The
+      // only addition is `status` on the existing select (one scalar column on
+      // a query that was already running): no new query, no new round trip, no
+      // new connection, nothing added to the cheap-probe fast path, which
+      // returns before any of this. The egress incident of 2026-08-31 is the
+      // reason that distinction is spelled out rather than assumed.
+      //
+      // The detector is imported, never re-implemented: one definition of
+      // "which slugs did this corpus abandon", shared with the manual seeder.
+      // It is computed HERE rather than beside the resolver above so that a
+      // cold start with nothing to do does not pay for it at all.
+      const abandonedSlugs = abandonedLegacyProbeSlugs(ALL_PROBES)
+      const liveAbandoned: Array<{ assetId: string; canonicalSlug: string; status: string }> = []
       for (const row of await withRetry(() => prisma.assetIdentity.findMany({
         where: seedOwnershipWhere() as never,
         select: {
           assetId: true,
           canonicalSlug: true,
+          status: true,
           probeAsset: { select: { assetId: true } },
           explanationAsset: { select: { assetId: true } },
         },
@@ -466,6 +497,56 @@ async function bootstrapAssets() {
           assetId: row.assetId,
           hasContent: row.probeAsset !== null || row.explanationAsset !== null,
         })
+        // Live == not revivable. A DEPRECATED/RETIRED row under an abandoned
+        // slug is the RESOLVED state (it is what the P-10 remediation left
+        // behind), so it must not block a legitimate ladder from seeding.
+        if (abandonedSlugs.has(row.canonicalSlug) && !SEED_REVIVABLE_STATUSES.includes(row.status)) {
+          liveAbandoned.push({ assetId: row.assetId, canonicalSlug: row.canonicalSlug, status: row.status })
+        }
+      }
+
+      if (liveAbandoned.length > 0) {
+        // Same failure semantics as Step 0's duplicate-identity check, and for
+        // the same reason: this runs inside the Next.js server process via
+        // register(), so a process.exit would turn a data-quality fault into a
+        // boot outage. Refusing to seed and returning is the equivalent
+        // outcome for a server hook — nothing created, nothing renamed,
+        // nothing deleted, existing rows still serving — and bootstrapAssets()
+        // is awaited under a deadline rather than trusted to finish, so
+        // returning early is a normal exit, not an error path.
+        //
+        // WHERE THIS SITS, STATED PLAINLY. Step 1's status convergence
+        // (seed-owned DRAFT -> ACTIVE) has already run by now, because the only
+        // way to decide this question earlier would be a second query, and the
+        // whole point of the design is that it costs none. That is sound: the
+        // defect being prevented is a CREATE, and convergence creates nothing.
+        // It cannot manufacture a duplicate identity; it can only change the
+        // status of a row that already exists — which it would equally have
+        // done before this guard existed. So the reachable states are strictly
+        // a subset of the pre-guard ones, minus the duplicate.
+        //
+        // Bounded, like the identity report: an unbounded list would repeat in
+        // full on every cold start.
+        const shown = liveAbandoned.slice(0, 10)
+        console.error(
+          `[instrumentation] asset bootstrap ABORTED before any write — ${liveAbandoned.length} seed-owned ` +
+            'identity/identities are still live under a canonicalSlug this corpus no longer produces, ' +
+            'because that slot was promoted to a difficulty ladder. Seeding would create a SECOND ' +
+            'ACTIVE identity for the same question (the P-10 defect). No rows created; nothing ' +
+            'renamed or deleted; everything already stored continues to serve.',
+        )
+        for (const r of shown) {
+          console.error(`  ${r.status} ${r.canonicalSlug} (assetId ${r.assetId})`)
+        }
+        if (liveAbandoned.length > shown.length) {
+          console.error(`  … and ${liveAbandoned.length - shown.length} more not shown.`)
+        }
+        console.error(
+          '  Resolve by deprecating these rows (docs/CLAUDE_HANDOVER.md §9r/§9s records the P-10 ' +
+            'precedent: a status change only, no delete, reversible), after which this bootstrap ' +
+            'resumes on the next cold start.',
+        )
+        return
       }
 
 
