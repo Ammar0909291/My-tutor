@@ -1270,6 +1270,190 @@ excludes). P-2 / P-5 not started. **P-7 closed** (§9f).
 
 ---
 
+## 9m. P-9 DIAGNOSIS — the ungradeable-answer seam: ROOT CAUSE FOUND (2026-09-05, READ-ONLY)
+
+Diagnosis only. **No source, test, schema, grading, mastery or production change.
+No certification re-run** — the failure reproduces deterministically offline
+against the real modules, so no new failed attempt was manufactured.
+
+### ROOT CAUSE (VERIFIED — reproduced with the real grader, not inferred)
+
+**`resolveMcqChoice`'s rule 0a treats letters inside the OPTION TEXT as the
+learner labelling a choice.** `src/lib/teaching/mcq.ts:783-797`:
+
+```
+for (const m of message.matchAll(/(?:^|[\s(])([a-dA-D])(\s*[.)\],:;-])?(?=\s|$)/g)) { … }
+if (labelled.size === 1 && named.size === 1) return [...labelled][0]
+if (labelled.size > 1) return null          // <- fires here
+```
+
+Rule 0a runs on the RAW message and **before** rule 0, the exact-text match
+(`mcq.ts:799`) that a UI tap is supposed to hit — deliberately, because "an
+explicit label is the strongest statement of intent a learner can make."
+
+The remediated `phys.em.resistivity` option text begins
+`Wire A: 2R (…) … Wire B: R/2 (…)`. Rule 0a sees ` A:` and ` B:` — each a
+standalone letter preceded by whitespace, followed by a delimiter from its own
+class, followed by whitespace — and reads them as the learner naming TWO
+different options. `labelled.size === 2 > 1` ⇒ **`return null`**, before the
+exact match can succeed.
+
+**Measured with the real `resolveMcqChoice`, submitting each option verbatim
+(exactly what tapping sends):**
+
+| probe | option 0 | option 1 | option 2 |
+|---|---|---|---|
+| `phys.em.resistivity` (remediated) | **null** | **null** | **null** |
+| `phys.em.solenoid` (remediated) | 0 OK | 1 OK | 2 OK |
+
+Rule-0a scan of each correct option: resistivity `named=[A,B,a] labelled=[A:,B:]`;
+solenoid `named=[B,B] labelled=[]` — solenoid's "B = mu_0" and "in B at all"
+carry no delimiter, so it falls through to the exact match and grades. **That is
+the entire difference between the two concepts, and it is not option length**
+(198 vs 207 chars), which §9l left as an open possibility and this closes.
+
+**`phys.em.resistivity`'s remediated probe cannot be graded by ANY answer,
+including a real learner tapping the correct option in the UI.**
+
+### The remediation EXPOSED this; it did not cause it (VERIFIED)
+The pre-remediation probe, recovered from git (`2c1a393a^`), had options
+`The thicker one has HALF the resistance — …` / `The thicker one has double the
+resistance — …`. Both resolve correctly (0 -> 0, 1 -> 1). The corrected text
+introduced the `Wire A:` / `Wire B:` construction, and with it the collision.
+So O-2 was right to write it, and the defect is older than O-2.
+
+### FIRST INCORRECT STATE TRANSITION
+`resolveMcqChoice(<the option the learner tapped>, pendingMcq)` -> `null`
+at `src/lib/teaching/mcq.ts:796`. Everything after that is downstream.
+
+### THE FULL CHAIN, and how many defects it really is
+Three distinct issues, one root cause and two amplifiers:
+
+1. **ROOT CAUSE — `mcq.ts:796`.** A valid answer scores `null`, so
+   `gradeMcqAnswer` returns null and `[mcq-grade] chosen:null correct:null` is
+   logged. No evidence is written. **Correct-by-design given its inputs**: the
+   rule cannot tell a learner's label from an author's prose.
+2. **AMPLIFIER A — the empty-text guard ignores a probe that is on screen but not
+   attached THIS turn.** `route.ts:5366` reads
+   `if (!text.trim() && mcqHoisted)`. But twelve lines earlier
+   (`route.ts:~5254`) `if (modelProbeWithheld) mcqHoisted = null` — the model's
+   own question was declined by policy (`decideModelProbe`, logged
+   `model-probe-withheld / gate-declined-by-policy`) because an unanswered probe
+   was already displayed (`gate-eligibility … blockedBy:["noUnansweredProbeOnScreen"]`).
+   The MCQ tag had already been parsed out of `text`, so `text` was empty and
+   `mcqHoisted` was null ⇒ the guard could not fire ⇒
+   `degradedTurn()` ⇒ `provider = 'degraded'`.
+   The guard's own comment states the rule it breaks: *"a turn's content is its
+   text PLUS its structured payloads, and any check for 'nothing here' must look
+   at both."* A carried-forward `pendingMcq` — and `withheldModelMcqHoisted`,
+   which the route already holds — are structured payloads it does not consult.
+3. **AMPLIFIER B — one degraded turn outranks every other signal in the verdict.**
+   `scripts/certification/measurementIdentity.ts:111`:
+   `if (input.degradedTurns > 0) return 'FAILED_INFRASTRUCTURE'`, ahead of
+   everything. So a content defect is reported as an infrastructure outage, and
+   `runTierA.ts:217` then spends the one automatic retry on it, which cannot help.
+
+**Root cause vs symptom:** (1) is the defect. (2) mislabels the turn. (3)
+mislabels the run. (2) and (3) are each independently wrong and each would
+misreport other situations, but neither would have fired without (1).
+
+### Why the empty response is classified as degraded/infrastructure
+`route.ts:5373-5378`: empty text with no `mcqHoisted` calls `degradedTurn()` from
+`@/lib/eos-runtime`, which returns the outage template and sets
+`provider='degraded'`. `isDegradedProvider(provider)` then stamps
+`degradedTurn: true` on the ladder gates (`route.ts:6956/7171/8521`), which the
+route's own comment says "stops a turn counting as a give". The harness reads
+the same flag and applies the precedence at `measurementIdentity.ts:111`.
+
+### SCOPE — does this affect normal learner grading? YES, and it is measured
+Ran the real `resolveMcqChoice` over the whole authored corpus, submitting each
+correct option verbatim (the tap payload):
+
+- **2,750** gradeable-by-shape probes examined.
+- **21 (0.76%)** where the CORRECT option does not resolve to itself — a learner
+  who taps the right answer is not graded.
+- **4** where EVERY option fails.
+- Split by cause: **3 are this rule-0a defect** (`phys.em.resistivity`,
+  `chem.equil.solubility`, `chem.bio.nucleic-acids` — all with two labelled
+  letters in the option text); **18 have a DIFFERENT cause**, overwhelmingly
+  short symbolic options (`+500 J`, `Δx · Δp ≥ ħ/2`, `MgCl₂`, `−3.4 eV`,
+  `O₃ … O₂`, `pH 9 and pOH 5`). That second class is real but is NOT this seam
+  and was **not** diagnosed here — it is out of P-9's scope and is flagged, not
+  guessed at.
+- Per subject (broken correct-option): chemistry 16/931, physics 4/1308,
+  mathematics 1/83, english 0/428.
+
+This is a **live learner-facing defect, not a harness artifact**: the harness
+submits exactly what the UI submits, so a real learner tapping the correct
+option on any of those 21 probes gets no credit.
+
+### Can it corrupt certification / mastery accounting?
+- **It cannot create false mastery.** The failure direction is always
+  *under*-credit: `null` writes no signal, no `TopicProgress` evidence, no gate
+  counter. `masteryVerifiedStrict` reads only verified counters.
+- **It can and does suppress earned mastery**: the learner's correct answer is
+  discarded, `correctAtCheck`/`correctAtPractice` do not advance, the lesson
+  cannot close. Measured twice on resistivity (check 1 / practice 0, never
+  verified).
+- **It corrupts the verdict, not the evidence**: via amplifier B the run is
+  labelled FAILED_INFRASTRUCTURE, which is neither a certification nor a teaching
+  failure — so the concept is neither certified nor honestly recorded as blocked.
+
+### REGRESSION-TEST DESIGN (designed, NOT implemented, per instruction)
+Deterministic, no provider, no database, no network.
+
+1. **`resolveMcqChoice` — author prose must not be read as a learner label.**
+   Drive the REAL function with the real remediated `phys.em.resistivity` probe:
+   assert each option submitted verbatim resolves to its own index. Add the two
+   sibling cases (`chem.equil.solubility`, `chem.bio.nucleic-acids`). Negative
+   controls that must KEEP working, or the fix has over-reached: `"A."` alone ->
+   0; `"ok i think A. but sir explain"` -> 0 (the 2026-08-25 production case the
+   rule exists for); `"A or B, i am not sure"` -> null; `"a lens bends light"`
+   -> null.
+2. **Corpus guard (the durable one).** Iterate every authored probe the seed
+   corpus exposes and assert `resolveMcqChoice(correctOption, mcq) ===
+   correctIndex`. Today that fails on 21 probes; ratchet it at the current count
+   and drive to 0, so no future authoring can add an ungradeable probe silently.
+   This is the test that would have caught O-2's content before it shipped.
+3. **Empty-turn guard (amplifier A).** Pure-function test of the branch's
+   inputs: text empty + `mcqHoisted === null` + a pending probe on screen must
+   NOT produce `provider='degraded'`. Written against the decision inputs, not
+   by matching template prose.
+4. **Verdict precedence (amplifier B).** `classifyVerdict` with
+   `degradedTurns: 1` alongside real graded evidence — assert the verdict
+   distinguishes "the provider failed" from "the turn emptied for another
+   reason". Requires deciding what the right verdict IS, which is an owner call.
+
+### Confidence
+- Root cause, first bad transition, exact file/line: **VERIFIED**, reproduced
+  deterministically offline with the real `resolveMcqChoice` and confirmed
+  against the captured production turn.
+- The three-link chain (null -> withheld -> empty -> degraded -> verdict):
+  **VERIFIED** against route.ts source and the captured log lines.
+- The 21/2,750 corpus figure and its 3-vs-18 split: **MEASURED**.
+- **UNRESOLVED:** the 18 non-rule-0a failures are counted but not explained —
+  short/symbolic options are the visible pattern, not a diagnosis. Also
+  **UNKNOWN**: whether any of the 21 has ever blocked a real (non-harness)
+  learner, since this deployment has essentially no organic traffic.
+
+### Correction to an earlier ledger claim
+§9l left the resistivity cause "UNKNOWN … option length does not explain it".
+That is now resolved: the cause is rule 0a, and length is confirmed irrelevant.
+§9l's facts are otherwise unchanged. **Separately, §9j overstated the rollback:**
+it called itself "the rollback source", but it recorded hashes and the choice
+COUNT, not the pre-write option TEXT. The true rollback source is git
+(`2c1a393a^`), where the pre-remediation options are intact — verified while
+investigating.
+
+### EXACT NEXT ACTION (not taken)
+Fix (1) — make rule 0a ignore a letter that is part of the option text the
+learner is quoting, most cheaply by running the exact-text match BEFORE the
+label scan, since a verbatim option match is a stronger statement of intent than
+a letter inside it. Then land regression tests 1 and 2. Treat (2) and (3) as
+separate, smaller changes. **P-9 remains OPEN; nothing was patched.**
+
+---
+
 ## 10. Handover History
 
 | Date | Session | Action | Result |
@@ -1286,6 +1470,7 @@ excludes). P-2 / P-5 not started. **P-7 closed** (§9f).
 | 2026-09-05 | O-1 | Complete the P-8 remediation from a DATABASE_URL environment | STOPPED: this container still has no DATABASE_URL (re-verified). No production write. Copy-paste runbook recorded for an environment that does. See §9i. |
 | 2026-09-05 | P-7 | Commit the five untracked batch dispatchers | CLOSED. Owner authorised; committed verbatim as `7aaf45e7`. Working tree now clean. |
 | 2026-09-05 | O-2 | Apply the P-8 remediation via Supabase MCP, then certify the two concepts | Both rows revived to v2 with repo content; physics content drift measured at ZERO; solenoid UNMEASURED -> CERTIFIED (twice); resistivity blocked by the pre-existing ungradeable-answer seam, misreported as FAILED_INFRASTRUCTURE. P-8 CLOSED. See 9j/9k/9l. |
+| 2026-09-05 | P-9 | Diagnose the ungradeable-answer seam (read-only) | ROOT CAUSE FOUND: resolveMcqChoice rule 0a reads `Wire A:`/`Wire B:` in the option TEXT as two learner labels and returns null before the exact match. 21 of 2,750 corpus probes have an ungradeable correct option (3 this cause, 18 another). Two amplifiers identified. Nothing patched. See §9m. |
 
 ## 11. Do Not Rediscover
 
