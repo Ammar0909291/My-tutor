@@ -1958,6 +1958,108 @@ Recorded as **P-10-FOLLOW-UP** rather than silently expanding scope.
 
 ---
 
+## 9s. P-10 REMEDIATED — the three duplicate serving slots are closed (2026-09-05)
+
+Three `asset_identity` rows changed status. Nothing else in the database moved.
+No delete, no content change, no schema change, no reseed, no source change.
+
+### The write (each statement guarded on assetId + status + version + slug + hash)
+All three returned exactly 1 row:
+
+| concept | DEPRECATED (surplus) | still ACTIVE (canonical) |
+|---|---|---|
+| displacement | `d9a940d4-b092-4177-bce9-c0793ebee81c` `:mcq:en:middle` | `2de355c3-664d-47fc-b558-12415b688c38` `:mcq:en:middle:foundational` |
+| hookes-law | `5c825c2c-d89a-4369-94d0-52757d4ea559` `:mcq:en:middle` | `c7f78057-8a32-429f-bd3b-642c82353b81` `:mcq:en:middle:developing` |
+| momentum | `3d652a4f-352c-4375-a669-43c2078ee6c7` `:misconception_probe:en:high` | `ff21c488-92e0-44b6-9b4d-d42268cf4f89` `:misconception_probe:en:high:developing` |
+
+Each carries a `deprecationReason` naming the mechanism, the twin that holds the
+identical content, and that it is reversible by setting `status='ACTIVE'`.
+
+A fourth statement stamped `updatedAt = now()` on those same three rows, guarded
+on `status='DEPRECATED' AND deprecationReason LIKE 'P-10 2026-09-05%'`. **Why,
+stated because it was an inconsistency in my own method:** raw SQL does not fire
+Prisma's `@updatedAt`, so without it this change would have been invisible to the
+`max(updatedAt)` unrelated-row check this programme uses everywhere — including
+in §9k, where I did stamp it. Correcting that was worth one extra guarded write.
+
+### One predicted criterion did NOT hold, and it could not have
+The task expected physics seed-owned probe rows to go **1852 -> 1849**. They did
+not: they are **still 1,852**, because deprecation is not deletion and deletion
+was forbidden. The number that moved is the **serving surface**:
+
+| measure | before | after |
+|---|---|---|
+| physics seed rows, all statuses | 1,852 | **1,852** (unchanged, by design) |
+| physics seed rows, ACTIVE | 1,649 | **1,646** |
+| duplicate stem groups among ACTIVE | 3 | **0** |
+| duplicate stem groups, any status | 3 | 3 (the deprecated originals remain) |
+
+The all-status parity figures from §9k (235 identical / 0 drift / 3 prod-extra)
+are therefore **unchanged and must stay unchanged** — a status change cannot move
+an all-status digest. Reporting "parity now perfect" would have been false.
+
+### Parity of the SERVING surface, per concept (MEASURED, per-stem hashes)
+ACTIVE stems compared against the corpus, hash by hash:
+
+| concept | repo | ACTIVE | duplicate present? | difference |
+|---|---|---|---|---|
+| displacement | 13 | 12 | **no** (was `0575ff` x2) | `64c933` |
+| hookes-law | 14 | 13 | **no** (was `be4fb8` x2) | `fd75b3` |
+| momentum | 18 | 17 | **no** (was `a1da56` x2) | `7246a1` |
+
+**Every difference is fully explained and predates this task.** Each is the
+concept's MASTERY GATE checkpoint (`…:checkpoint:en:high`), deprecated
+**2026-08-12 21:59:37** by the earlier hollow-identity audit — visible in the
+same query as a second non-ACTIVE row per concept with that timestamp, beside
+the P-10 row at 05:24:47 today. **No drift was introduced and no distinct
+question was lost.**
+
+### Coverage (MEASURED) — rows fell, questions did not
+| concept | ACTIVE probes | ACTIVE gradeable | **distinct ACTIVE stems** |
+|---|---|---|---|
+| displacement | 13 -> 12 | 11 -> 10 | **12 -> 12** |
+| hookes-law | 14 -> 13 | 11 -> 10 | **13 -> 13** |
+| momentum | 18 -> 17 | 16 -> 15 | **17 -> 17** |
+
+The distinct-stem count is the one that matters and it is unchanged: what was
+removed is a duplicate slot, not a question. All three remain far above the
+3-gradeable asset contract.
+
+### Unrelated-row safety (MEASURED, not asserted)
+Rows with `updatedAt` after the write began: **exactly 3**, and the query names
+them — the three intended assetIds. `learn_sessions` touched: **0**.
+`lesson_attempts`: **0**. `topic_progress`: **0**. Non-physics seed assets:
+**0**. `max(updatedAt)` across every other physics seed row: 2026-09-05
+04:16:11.327, i.e. the O-2 solenoid write, unmoved. Before writing, **0 sessions
+referenced any of the three surplus assetIds**, so nothing was mid-question on
+one.
+
+### Certification
+Not re-run, correctly: no probe content changed, so no verdict can move. No
+historical verdict is reinterpreted. Physics Tier-A totals stand at **142
+CERTIFIED / 7 UNMEASURED**.
+
+### Validation
+No source or test file was changed, so `tsc`/suite/build were not re-run — there
+is nothing new for them to check. Production health after: 3x HTTP 200,
+`db:true`, 30s / 15s.
+
+### P-10-FOLLOW-UP (open, NOT actioned — deliberately out of this task)
+The data is clean; **the mechanism is not fixed**. `buildProbeSlugResolver` still
+re-slugs the first probe of a slot from 4 segments to 5 the moment a second probe
+joins it, and both seed writers are create-only, so **the next authoring batch
+that adds a probe to an existing slot will create this again**. Options, none
+taken: make the difficulty segment unconditional (changes existing identities —
+not small); or have the seeder reconcile an old 4-segment row when it emits the
+5-segment one. This is a pipeline design decision and belongs to its own task.
+
+### Status
+**P-10 REMEDIATED.** Open: **P-10-FOLLOW-UP** (above), **P-11** (the seeder's
+revive path is dead code), `providersSeen` corroboration (§9p), and the 16
+symbolic-option grading failures (ratcheted, §9n).
+
+---
+
 ## 10. Handover History
 
 | Date | Session | Action | Result |
@@ -1979,6 +2081,7 @@ Recorded as **P-10-FOLLOW-UP** rather than silently expanding scope.
 | 2026-09-05 | P-9 validation | One production run after deploying the fix | BOTH CERTIFIED. resistivity FAILED_INFRASTRUCTURE -> CERTIFIED first attempt, 6 turns to TRANSFER, check 1 / practice 2, 0 degraded turns. Physics Tier-A now 142 CERTIFIED / 7 UNMEASURED. See §9o. |
 | 2026-09-05 | AMP-B | Diagnose the degradedTurns verdict precedence (read-only) | VALID BY DESIGN — documented in 3 places and pinned by an existing test. 3 of the 4 producers of provider='degraded' are real outages; the 4th is AMP-A. No fix proposed here; the repair is AMP-A. Recorded: providersSeen is hardcoded [] in 240/240 records. See §9p. |
 | 2026-09-05 | AMP-A fix | Empty-turn guard reads what is served, not what was attached | route.ts guard now uses mcqToServe(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted), matching the post-strip backstop 3,700 lines later. 15 new tests (A-D), one pre-existing assertion updated in place. Suite 11,905 pass, tsc + build clean. Production run deliberately not manufactured. See §9q. |
+| 2026-09-05 | P-10 | Deprecate the 3 duplicate ACTIVE seed rows | Done. Surplus rows identified by running the real slug resolver, not by slug shape. ACTIVE duplicates 3 -> 0; distinct questions unchanged; all-status row count deliberately unchanged at 1,852 (deprecation is not deletion). Exactly 3 rows touched; 0 sessions/attempts/progress. Mechanism NOT fixed — P-10-FOLLOW-UP. See §9r/§9s. |
 
 ## 11. Do Not Rediscover
 
