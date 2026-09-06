@@ -266,7 +266,23 @@ async function runConcept(cookie: string, subject: string, concept: KgConcept, l
       msg = PERSONA_CONTINUATIONS[(personaIdx - PERSONA_LINES.length) % PERSONA_CONTINUATIONS.length]
       personaIdx += 1
     }
-    const p = await api(cookie, 'POST', '/api/learn/chat', { sessionId, message: msg })
+    let p: Payload
+    try {
+      p = await api(cookie, 'POST', '/api/learn/chat', { sessionId, message: msg })
+    } catch (e) {
+      // Diagnostic-only: capture the partial transcript instead of discarding
+      // it, and retry the identical turn ONCE (the harness's own investigation
+      // found this class of failure to be a transient cold-start blip on the
+      // deployed function, not a stable per-concept defect).
+      console.error(`  [turn ${i + 1}] ${(e as Error).message} — retrying once`)
+      await new Promise((res) => setTimeout(res, 3000))
+      try {
+        p = await api(cookie, 'POST', '/api/learn/chat', { sessionId, message: msg })
+      } catch (e2) {
+        turns.push({ label: `T${i + 1}`, sent: msg, payload: { error: String((e2 as Error).message) } as unknown as Payload })
+        break
+      }
+    }
     turns.push({ label: `T${i + 1}`, sent: msg, payload: p })
     last = p
     if (p.lessonComplete) break
