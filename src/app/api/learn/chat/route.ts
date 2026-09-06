@@ -1109,6 +1109,60 @@ export async function POST(req: Request) {
       }
     }
 
+    // WEAK-TOPIC / SPACED-REPETITION ADVISORY SUPPRESSION.
+    //
+    // THE DEFECT THIS CLOSES. Four blocks below (ADAPTIVE TUTOR CONTEXT's
+    // "Give extra reinforcement on", MASTERY & SPACED REPETITION's "Weak
+    // concepts"/"OVERDUE for review", and KNOWLEDGE GAPS' "Weave in targeted
+    // reinforcement") are pure advisory prose, computed from the learner's
+    // HISTORICAL mastery data and appended to every single turn regardless of
+    // what the turn is actually about. Each carries only a soft qualifier
+    // ("where natural", "if a natural opening arises") — nothing enforces it,
+    // and nothing suppresses it once the learner objects, because it is
+    // recomputed fresh from the same DB rows on every subsequent turn.
+    //
+    // MEASURED (real-account student-experience study, 2026-09-06): a
+    // Projectile Motion lesson and a Covalent Bonding lesson each derailed
+    // for several consecutive turns into an unrelated historical weak topic
+    // (Electric Field and Field Lines; Electron Affinity) the instant the
+    // learner expressed confusion — and continued even after an explicit
+    // "go back to the ball lesson" / "why change topic again, can we finish
+    // bonding lesson please". The advisory line has no relationship to the
+    // arbitration ladder (RECOVERY > LEARNER_REQUEST > CLOSE > COMPLETE >
+    // TEACH) that governs every other competing instruction in this prompt,
+    // so a distress signal or an explicit correction — which should preempt
+    // everything — left it standing, and a weaker model followed "weave in
+    // reinforcement" far more literally than "where natural" intended.
+    //
+    // THE FIX reuses three existing, already-tested, pure signals — no new
+    // detector, no new persisted state: a distress/confusion signal this turn
+    // (`turnIntent.failureState` — the SAME authoritative, once-per-turn read
+    // every other consumer uses; see turnIntentAuthority.test.ts, which pins
+    // that detectFailureState is never called a second time on the raw
+    // message) or an explicit request to return/correct course (excursion.ts's
+    // own isReturnRequest/isExplicitCorrection, not part of that authority
+    // boundary) means this is exactly the moment an unrelated reinforcement
+    // aside must not compete for the turn. An already-active excursion is
+    // included for the same reason — a detour is not the place to open a
+    // second, unrelated one. The feature itself is untouched: on an ordinary,
+    // calm, on-topic turn it still fires exactly as before.
+    const weakTopicAdvisorySuppressed = await (async () => {
+      try {
+        if (turnIntent.failureState !== null) return true
+        const { isReturnRequest, isExplicitCorrection } = await import('@/lib/teaching/visual/session')
+        if (isReturnRequest(message) || isExplicitCorrection(message)) return true
+        const { parseExcursionState } = await import('@/lib/teaching/excursion')
+        const excursionState = parseExcursionState(
+          (learnSession.contextSnapshot as Record<string, unknown> | null)?.excursion,
+        )
+        return excursionState.active
+      } catch {
+        // Absent is the safe outcome: on any failure, behave exactly as
+        // before this guard existed (the advisory may fire).
+        return false
+      }
+    })()
+
     // Append Adaptive Tutor context — preferences + recent performance trend,
     // so the Tutor adjusts pacing/depth/examples per learner instead of
     // teaching everyone the same way. Additive — independent of other context blocks.
@@ -1125,7 +1179,7 @@ export async function POST(req: Request) {
         if (subjectAnalytics) {
           if (subjectAnalytics.trend === 'DECLINING') lines.push(`- Recent trend: struggling lately — slow down, simplify, add more worked examples and check understanding often.`)
           else if (subjectAnalytics.trend === 'IMPROVING') lines.push(`- Recent trend: excelling lately — move faster, increase depth/challenge, introduce more advanced angles.`)
-          if (subjectAnalytics.weakTopics.length) lines.push(`- Give extra reinforcement on: ${subjectAnalytics.weakTopics.join(', ')}`)
+          if (subjectAnalytics.weakTopics.length && !weakTopicAdvisorySuppressed) lines.push(`- Give extra reinforcement on: ${subjectAnalytics.weakTopics.join(', ')}`)
           if (subjectAnalytics.strongTopics.length) lines.push(`- Can move quickly through (already solid): ${subjectAnalytics.strongTopics.join(', ')}`)
         }
         lines.push(`Adapt explanations, pacing, and example density to this learner — never use a one-size-fits-all approach.`)
@@ -1179,14 +1233,14 @@ export async function POST(req: Request) {
 
       if (weakMetrics.length || dueReviews.length || recentSubmissions.length) {
         const lines = [`\n\nMASTERY & SPACED REPETITION CONTEXT — use this to target your teaching:`]
-        if (weakMetrics.length) {
+        if (weakMetrics.length && !weakTopicAdvisorySuppressed) {
           lines.push(`- Weak concepts (mastery score in parentheses, out of 100): ${weakMetrics.map((m) => `${m.topic} (${m.masteryScore})`).join(', ')}. Weave in extra reinforcement and check understanding before moving on.`)
         }
         if (dueReviews.length) {
           const now = new Date()
           const overdueTopics = dueReviews.filter((r) => r.nextReviewAt < now).map((r) => r.topic)
           const upcomingTopics = dueReviews.filter((r) => r.nextReviewAt >= now).map((r) => r.topic)
-          if (overdueTopics.length) lines.push(`- OVERDUE for review: ${overdueTopics.join(', ')}. If a natural opening arises, briefly revisit one of these before introducing new material.`)
+          if (overdueTopics.length && !weakTopicAdvisorySuppressed) lines.push(`- OVERDUE for review: ${overdueTopics.join(', ')}. If a natural opening arises, briefly revisit one of these before introducing new material.`)
           if (upcomingTopics.length) lines.push(`- Coming up for review soon: ${upcomingTopics.join(', ')}.`)
         }
         if (recentSubmissions.length) {
@@ -1255,7 +1309,7 @@ export async function POST(req: Request) {
         const weakTopics = topicProgressRows.filter(
           (r) => (r.status === 'COMPLETED' || r.status === 'MASTERED') && r.masteryPct > 0 && r.masteryPct < 70
         )
-        if (weakTopics.length > 0) {
+        if (weakTopics.length > 0 && !weakTopicAdvisorySuppressed) {
           systemPrompt += `\n\nKNOWLEDGE GAPS — completed with mastery < 70%: ${weakTopics.map((r) => `${r.topicSlug} (${r.masteryPct}%)`).join(', ')}. Weave in targeted reinforcement for these topics where natural.`
         }
 
@@ -6372,6 +6426,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                   if (s.length < 25 || s.length > 400) return false
                   if (/^[[(]/.test(s)) return false          // "[Boundary statement] …"
                   if (/^\s*\d+[.)]\s/.test(s)) return false  // a numbered rubric item
+                  // A syllabus outline is not a sentence — see
+                  // remediationOutputContract.ts's buildRemediationFallbackText
+                  // for the measured incident and corpus-wide count (485 of
+                  // 1,775 KG descriptions share this semicolon-joined shape).
+                  if ((s.match(/;/g)?.length ?? 0) >= 2) return false
                   return true
                 }
                 let spine: string | null = null

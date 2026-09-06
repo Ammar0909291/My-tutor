@@ -307,6 +307,18 @@ export const DISCOURSE_NOUNS = new Set([
   'answer', 'question', 'step', 'part', 'example', 'formula', 'difference',
   'problem', 'exercise', 'solution', 'mistake', 'error', 'result', 'reason',
   'way', 'method', 'rule', 'idea', 'meaning', 'word', 'note', 'point',
+  // MEASURED (real-account student-experience study, 2026-09-06): "i see
+  // picture but i dont understand what it show. what this line and numbers
+  // mean?" — a learner asking what a LINE DRAWN IN A DIAGRAM means — resolved
+  // to `math.geom.line "Line"` (EXACT_TITLE, 0.95) and opened a knowledge-gap
+  // excursion into basic coordinate geometry mid-physics-lesson. Same shape as
+  // `point` above ("what is the point of this?" -> math.geom.point): a
+  // single-word KG title that is also the ordinary English word for a mark on
+  // a diagram, far more often meant that way than as a request for the
+  // geometric definition. "field line", "number line", "parallel lines" all
+  // survive (each needs only the OTHER word, which is not discourse), and the
+  // narrow, single-concept cost matches the one `point` already accepted.
+  'line',
   // HOW TO DELIVER IT, NOT WHAT TO TEACH — the manner adverbs.
   //
   // Measured 2026-08-29, physics `phys.qm.hydrogen-atom-qm`, a struggling-

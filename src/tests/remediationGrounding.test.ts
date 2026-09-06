@@ -139,8 +139,17 @@ describe('H5-2 — the measured corpus, audited concept by concept', () => {
         expect(g.status).toBe('insufficient_authoritative_grounding')
         expect(g.mustNotUse).toEqual([])
       }
-      // The canonical idea is the KG description and only ever that.
-      expect(g.canonicalIdea).toBe(getKGNode(c.id)?.description?.trim() ?? null)
+      // The canonical idea is the KG description and only ever that — UNLESS
+      // the description itself is a syllabus outline rather than a sentence
+      // (2+ semicolons; see readsAsProse's 2026-09-06 addition, added after a
+      // real-account incident where exactly this shape was spoken verbatim to
+      // a confused learner). Three of these four descriptions are themselves
+      // semicolon-joined topic lists ("Kc and Kp expressions; Kp/Kc
+      // relationship; …"), which is precisely the shape that guard exists to
+      // catch — asserted here rather than smoothed over.
+      const rawDescription = getKGNode(c.id)?.description?.trim() ?? null
+      const readsAsProse = rawDescription !== null && (rawDescription.match(/;/g)?.length ?? 0) < 2
+      expect(g.canonicalIdea).toBe(readsAsProse ? rawDescription : null)
     })
   }
 

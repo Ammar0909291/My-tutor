@@ -187,12 +187,14 @@ function isIncidentalWord(message: string, matchedText: string): boolean {
  * counts as naming a topic. One list, both paths, no third mechanism.
  *
  * ── MEASURED COST ──────────────────────────────────────────────────────────
- * Across all 1,775 KG concepts in all six subjects, exactly ONE has a title
- * made entirely of discourse vocabulary: `math.geom.point "Point"`. So a bare
- * "teach me point" no longer resolves. That is an accepted, measured trade —
- * one out-of-scope concept against a defect that silently switches the taught
- * subject — and "points and lines", "point of view", "boiling point",
- * "decimal point" are all unaffected, because one real word is enough.
+ * Across all 1,775 KG concepts in all six subjects, exactly TWO have a title
+ * made entirely of discourse vocabulary: `math.geom.point "Point"` and (added
+ * 2026-09-06, same reasoning) `math.geom.line "Line"`. So a bare "teach me
+ * point" or "teach me line" no longer resolves. That is an accepted, measured
+ * trade — two out-of-scope concepts against a defect that silently switches
+ * the taught subject — and "points and lines", "point of view", "boiling
+ * point", "decimal point", "field line", "number line" are all unaffected,
+ * because one real word is enough.
  */
 function isDiscourseOnlyMatch(matchedText: string): boolean {
   const words = tokens(matchedText)

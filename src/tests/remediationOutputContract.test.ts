@@ -255,6 +255,28 @@ describe('H3-N — failing closed is safe and terminal', () => {
     expect(buildRemediationFallbackText('short')).toBeNull()
   })
 
+  it('it refuses a syllabus outline — the chem.atomic.bohr-model incident, 2026-09-06', () => {
+    // MEASURED (real-account student-experience study): a confused learner
+    // begged "easy easy please", and this fallback served, verbatim, the KG's
+    // own semicolon-joined topic-list description as if it were a simplified
+    // explanation. Every OTHER shape check above let it through — it is 25+
+    // chars, does not start with a bracket or a numbered rubric — so the
+    // semicolon count is what has to catch it.
+    expect(buildRemediationFallbackText(
+      "Postulates of Bohr's model; energy levels in hydrogen; radii, velocities "
+      + 'and energies; limitations of the model.',
+    )).toBeNull()
+  })
+
+  it('a single semicolon inside a genuine sentence is untouched', () => {
+    // The guard must not over-reject ordinary prose that happens to contain
+    // one semicolon as a clause connector.
+    const t = buildRemediationFallbackText(
+      'The mole is a counting unit; one mole of anything contains Avogadro\'s number of particles.')
+    expect(t).not.toBeNull()
+    expect(t).toContain('The mole is a counting unit')
+  })
+
   it('the fallback text itself passes the floor — a repair may not need repairing', () => {
     const t = buildRemediationFallbackText(
       'Thermal expansion is the increase in the size of a material when its temperature rises.')!
