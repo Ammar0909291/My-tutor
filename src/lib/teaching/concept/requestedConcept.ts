@@ -373,6 +373,132 @@ function isLessonTopicRestated(matchedTitle: string, lessonTitle: string | null)
 }
 
 /**
+ * The phrase a title is ABOUT — its leading conjunct.
+ *
+ * "Temperature and Thermal Equilibrium" is about TEMPERATURE. "Viruses,
+ * Viroids and Lichens" is about VIRUSES. The trailing conjuncts are things
+ * the concept also covers, not what it is named for. This is the same
+ * leading-conjunct reading `resolveNamedTopicHead` already uses; it is
+ * factored out here so both callers cannot drift apart about what a title
+ * names.
+ */
+function leadingConjunct(title: string): string {
+  const head = titleHead(title) ?? title
+  return head.split(/\s+(?:and|or)\s+/i)[0] ?? head
+}
+
+// Every phrase that some concept is ABOUT, built once from the same index the
+// matcher uses. Memoized alongside `cachedIndex` and cleared with it.
+let cachedHeadNamed: ReadonlySet<string> | null = null
+function headNamedPhrases(): ReadonlySet<string> {
+  if (!cachedHeadNamed) {
+    const out = new Set<string>()
+    for (const entry of conceptIndex()) {
+      const key = tokens(leadingConjunct(entry.title)).join(' ')
+      if (key) out.add(key)
+    }
+    cachedHeadNamed = out
+  }
+  return cachedHeadNamed
+}
+
+/**
+ * E2 · THE LESSON'S OWN VOCABULARY IS NOT A TRIP AWAY FROM THE LESSON.
+ *
+ * ── THE DEFECT, reproduced offline from a production transcript ─────────────
+ * Physics lesson `phys.therm.zeroth-law` ("Zeroth Law of Thermodynamics"),
+ * real account, 2026-09-05. The learner's FIRST message of the lesson — the
+ * most ordinary opening a beginner can make — was:
+ *
+ *   "sir i dont understand what is thermal equilibrium meaning.
+ *    my english is weak please explain simple"
+ *
+ * That resolved to `phys.therm.temperature`, a listed prerequisite, and opened
+ * a knowledge-gap detour. Production telemetry: turnsHeld 6, turnsBlocked 8,
+ * closed only by R2's turn limit. While it ran, `notExcursion` blocked every
+ * authored probe and the ladder sat at OBSERVE with check 0 / practice 0 while
+ * the learner answered four questions correctly.
+ *
+ * The lesson's own KG description is, verbatim:
+ *   "If two systems are each in thermal equilibrium with a third, they are in
+ *    thermal equilibrium with each other."
+ * The learner asked about the lesson's DEFINING TERM. The resolver held that
+ * text and never read it — `isLessonTopicRestated` compares the matched text
+ * against the lesson's TITLE alone, and "Zeroth Law of Thermodynamics" does
+ * not contain the words "thermal equilibrium".
+ *
+ * ── THE THREE CONDITIONS, AND WHY EACH IS LOAD-BEARING ─────────────────────
+ * A blanket "the phrase is in the lesson description" rule was measured first
+ * and REJECTED: 397 corpus collisions, suppressing genuine prerequisite
+ * detours like "i dont understand photosynthesis" inside a plant-respiration
+ * lesson, whose description names photosynthesis outright. All three
+ * conditions together are what make this narrow enough to be safe.
+ *
+ *   1. NON-HEAD COMPONENT. The phrase must be a trailing conjunct of the
+ *      candidate's title, not what the candidate is named for. "Photosynthesis"
+ *      IS the head of `bio.plant.photosynthesis`, so that request is untouched.
+ *
+ *   2. NO CONCEPT IS HEAD-NAMED BY THE PHRASE. If any concept in any subject
+ *      is ABOUT this phrase, the learner named a real curriculum topic and may
+ *      travel to it. This single condition is what preserves every legitimate
+ *      request measured: photosynthesis, mole concept, mitochondria, benzene,
+ *      eigenvalues, entropy, apoptosis. It also preserves the CROSS-SUBJECT
+ *      contract — "teach me the mole concept" from a physics lesson still
+ *      reaches chemistry, because `chem.found.mole-concept` is head-named.
+ *      When nothing is head-named by it, the phrase is VOCABULARY rather than
+ *      a topic: no lesson exists to send the learner to.
+ *
+ *   3. THE CURRENT LESSON'S OWN DESCRIPTION USES IT. This is the positive
+ *      evidence that the lesson can answer the question where it stands.
+ *      Without it the rule would be a claim about the phrase in general; with
+ *      it, the claim is only ever "THIS lesson already covers this term".
+ *
+ * A fourth case is deliberately left to its existing owner: when the LESSON'S
+ * TITLE contains the phrase, `isLessonTopicRestated` already handles it, so
+ * this rule steps aside rather than duplicating that judgement.
+ *
+ * ── MEASURED, corpus-wide over all 1,775 concepts in six subjects ───────────
+ * 175 (lesson, phrase, candidate) triples satisfy all four conditions — 60
+ * cross-subject, 115 same-subject. Reading them, the overwhelming majority are
+ * resolutions that are WRONG TODAY and are corrected by suppression:
+ *   "resolution" in a Scope-and-Namespaces / Hashing / DNS / Plot-Structure
+ *      lesson -> `phys.meas.vector-addition` ("Vector Addition and Resolution")
+ *   "interior" in Parallel Lines / Polygon Angle Sum / Triangle Angle Sum
+ *      -> `math.top.interior-closure` (point-set topology)
+ *   "closure" in Vector Space / Group Theory / Binary Operation -> the same
+ *      topology concept, which is a different closure entirely
+ *   "range"  in a Python loops lesson -> `math.func.domain-range`
+ *   "beta"   in Signal Transduction -> `phys.mod.radioactivity`
+ *   "surroundings" in an English Interjections lesson -> `chem.thermo.system`
+ * The remainder are same-subject terms the lesson demonstrably explains
+ * (eigenvectors during Diagonalization, rate of change during Derivative
+ * (Definition), pH during Buffer Solutions), which is exactly the behaviour
+ * this rule is for: answer it here rather than pausing the lesson.
+ *
+ * Returning null does not silence the tutor. It leaves the teaching target on
+ * the lesson, and the lesson's own material is what the term is explained
+ * from — the same "an honest 'I could not name it' rather than a guess" stance
+ * the rest of this module takes.
+ */
+function lessonOwnsTheTerm(
+  matchedText: string,
+  candidateTitle: string,
+  lessonNodeTitle: string,
+  lessonDescription: string,
+): boolean {
+  const phrase = tokens(matchedText).join(' ')
+  if (!phrase) return false
+  // 1. the phrase is not what the candidate is named for
+  if (phrase === tokens(leadingConjunct(candidateTitle)).join(' ')) return false
+  // 2. no concept anywhere is ABOUT this phrase
+  if (headNamedPhrases().has(phrase)) return false
+  // 4. the lesson's TITLE already covers it -> isLessonTopicRestated's case
+  if (` ${tokens(lessonNodeTitle).join(' ')} `.includes(` ${phrase} `)) return false
+  // 3. the lesson's own definition uses the term
+  return ` ${tokens(lessonDescription).join(' ')} `.includes(` ${phrase} `)
+}
+
+/**
  * SUBJECT-LOCAL READING — the defect this closes.
  *
  * Production, 2026-08-08, lesson "Dimensional Analysis" (physics):
@@ -433,6 +559,7 @@ export function conceptIndex(): readonly ConceptIndexEntry[] {
 /** Test seam — lets a test reset memoized KG state between cases. */
 export function __resetConceptIndexCache(): void {
   cachedIndex = null
+  cachedHeadNamed = null
 }
 
 /** Stop words that never carry a topic on their own. */
@@ -585,14 +712,31 @@ export function resolveRequestedConceptId(
 
     // A shorter name for the lesson's own topic is the lesson, not a trip away
     // from it — keep the lesson concept and its registry binding.
+    const lessonNode = lessonConceptId ? getKGNode(lessonConceptId) : null
     if (
       requested &&
       lessonConceptId &&
       requested !== lessonConceptId &&
       best &&
-      isLessonTopicRestated(best.matchedText, getKGNode(lessonConceptId)?.title ?? null)
+      isLessonTopicRestated(best.matchedText, lessonNode?.title ?? null)
     ) {
       requested = null
+    }
+
+    // E2: the learner asked about a term the lesson's own definition already
+    // uses, and no concept in the curriculum is named for that term. Answer it
+    // here. Tested against the concept that would ACTUALLY be returned, not
+    // against `best`, because `subjectLocalReading` above may have replaced it.
+    if (requested && lessonConceptId && requested !== lessonConceptId && best && lessonNode) {
+      const candidateTitle = getKGNode(requested)?.title ?? null
+      const lessonDescription = lessonNode.description ?? null
+      if (
+        candidateTitle &&
+        lessonDescription &&
+        lessonOwnsTheTerm(best.matchedText, candidateTitle, lessonNode.title, lessonDescription)
+      ) {
+        requested = null
+      }
     }
 
     // Nothing cleared the floor. Before giving up — and giving up is what

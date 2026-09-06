@@ -363,46 +363,51 @@ describe('F10 — R2 and R3 are unchanged', () => {
 })
 
 /**
- * F4 — CHARACTERIZATION, NOT A FIX.
+ * F4 — CLOSED. (Was: CHARACTERIZATION, NOT A FIX.)
  *
- * The brief asks that "thermal equilibrium" at `phys.therm.zeroth-law` should
- * not open a sibling excursion. That behaviour is E2, which is explicitly NOT
- * authorized in this change. E3 cannot reach it and was measured not to:
- * "thermal equilibrium" occurs AFTER the "what is" request phrase, so it is
- * inside the governed clause and the positional rule correctly stands down.
+ * SUPERSEDED 2026-09-06 by E2 (`lessonOwnsTheTerm` in requestedConcept.ts).
  *
- * These assertions therefore pin what the code ACTUALLY does today, so that
- * (a) the gap is visible rather than silently absent, and (b) implementing E2
- * later will fail these tests loudly and force them to be updated deliberately.
+ * When E1/E3/E4 shipped, E2 was not authorized, so this block asserted the
+ * SURVIVING defect — that "thermal equilibrium" in a Zeroth Law lesson still
+ * resolved to `phys.therm.temperature` and still opened a prerequisite
+ * excursion — and its header said: "implementing E2 later will fail these
+ * tests loudly and force them to be updated deliberately."
+ *
+ * That is exactly what happened. Both assertions failed the moment E2 landed,
+ * and they are updated here rather than deleted, so the history of what this
+ * block claimed stays readable. The positive behaviour is owned by
+ * `lessonTermNotAnExcursion.test.ts`; what remains here is the narrow
+ * before/after pin plus the R2 bound, which was correct then and now.
  */
-describe('F4 — P1 survives: E2 is NOT implemented (characterization)', () => {
+describe('F4 — P1 is now CLOSED by E2', () => {
   const ZEROTH = 'phys.therm.zeroth-law'
   const ASK = 'sir i dont understand what is thermal equilibrium meaning. '
     + 'my english is weak please explain simple'
 
-  it('STILL resolves to the sibling concept — this is the open P1', () => {
-    expect(resolveRequestedConceptId(ASK, ZEROTH, null)).toBe('phys.therm.temperature')
+  it('no longer resolves to the sibling concept', () => {
+    // WAS: expect(...).toBe('phys.therm.temperature')
+    expect(resolveRequestedConceptId(ASK, ZEROTH, null)).toBeNull()
   })
 
-  it('STILL opens a prerequisite excursion, which still blocks the probe gate', () => {
-    const gap = gapFor(ASK, ZEROTH)
-    expect(gap?.relationship).toBe('prerequisite')
+  it('no longer opens a prerequisite excursion, so the probe gate stays open', () => {
+    // WAS: expect(gap?.relationship).toBe('prerequisite') and
+    //      expect(decision.transition).toBe('started')
+    expect(gapFor(ASK, ZEROTH)).toBeNull()
     const decision = decideExcursion({
       state: NO_EXCURSION,
       message: ASK,
       lessonConceptId: ZEROTH,
-      requestedConceptId: 'phys.therm.temperature',
-      knowledgeGapConceptId: gap?.conceptId ?? null,
+      requestedConceptId: resolveRequestedConceptId(ASK, ZEROTH, null),
+      knowledgeGapConceptId: gapFor(ASK, ZEROTH)?.conceptId ?? null,
     })
-    expect(decision.transition).toBe('started')
-    // gateTerms.notExcursion is `!excursionActive`; on the NEXT turn it is
-    // therefore FALSE, which is precisely the 8-turn assessment block measured
-    // in production. Asserted so the cost of leaving E2 unimplemented is
-    // recorded in the suite rather than in a report nobody re-reads.
-    expect(decision.state.active).toBe(true)
+    expect(decision.transition).toBe('none')
+    // `gateTerms.notExcursion` is `!excursionActive`, so an inactive excursion
+    // is what keeps authored probes attachable on the following turn. This is
+    // the 8-turn assessment block measured in production, now absent.
+    expect(decision.state.active).toBe(false)
   })
 
-  it('R2 still bounds that excursion at 6 turns — the only thing that saved the lesson', () => {
+  it('R2 still bounds any excursion that DOES open — unchanged by E2', () => {
     const decision = decideExcursion({
       state: {
         active: true, targetConceptId: 'phys.therm.temperature',
