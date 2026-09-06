@@ -5911,6 +5911,39 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         cleanText = normalizeMathDelimiters(cleanText)
       } catch { /* non-fatal — raw text is still better than no answer */ }
 
+      // THE FIELD-LINE SIGN CONTRACT — the same guard the opening turn runs.
+      //
+      // L3 was MEASURED at lesson-init (1 inversion in 22 openings) and wired
+      // there first, because that is where it was observed. This route was
+      // sampled 8 times with a question aimed straight at the sign and
+      // inverted 0 times — which at a ~4.5% base rate is "no evidence", not
+      // "proven safe": 8 samples cannot distinguish 0% from 4.5%.
+      //
+      // What IS established is that this route generates the same class of
+      // prose about the same concept. Measured in the same sampling run, real
+      // production replies from here included "The arrows you see labeled
+      // **Electric Field Lines (E)** are showing the direction of the electric
+      // field **E**…" and "The field lines also show where the field starts
+      // and ends…". A route that teaches field-line direction can get its sign
+      // backwards exactly as the opening turn did.
+      //
+      // The SAME function, not a second implementation — one contract, one
+      // definition, so the two paths cannot drift about what is true. It is
+      // concept-scoped to phys.em.electric-field, idempotent, and a no-op for
+      // every other lesson and for text it does not govern.
+      try {
+        const { repairFieldLineSign } = await import('@/lib/teaching/fieldLineSignGuard')
+        const sign = repairFieldLineSign(cleanText, decisionConceptIdHoisted)
+        if (sign.repaired.length > 0) {
+          console.warn('[learn/chat] ' + JSON.stringify({
+            event: 'field-line-sign-repaired',
+            conceptId: decisionConceptIdHoisted,
+            repaired: sign.repaired,
+          }))
+          cleanText = sign.text
+        }
+      } catch { /* non-fatal — a repair must never break a turn */ }
+
       // CRITERION 5 — A CORRECT ANSWER IS TOLD IT WAS CORRECT.
       //
       // Measured 2026-08-30 by rubricScore.ts: only 39% of server-graded-correct

@@ -1,5 +1,10 @@
 import { describe, it, expect } from 'vitest'
+import { readFileSync } from 'node:fs'
+import { join } from 'node:path'
 import { repairFieldLineSign, isInvertedFieldLineClaim } from '@/lib/teaching/fieldLineSignGuard'
+
+const CHAT_ROUTE = readFileSync(join(process.cwd(), 'src/app/api/learn/chat/route.ts'), 'utf8')
+const INIT_ROUTE = readFileSync(join(process.cwd(), 'src/app/api/learn/lesson-init/route.ts'), 'utf8')
 
 const EF = 'phys.em.electric-field'
 
@@ -142,4 +147,59 @@ describe('the guard needs BOTH a field subject and a direction claim', () => {
     const t = 'The electric field is measured in newtons per coulomb, and a negative charge has units of coulombs.'
     expect(isInvertedFieldLineClaim(t)).toBe(false)
   })
+})
+
+
+// ── BOTH GENERATION PATHS ARE COVERED, BY THE SAME FUNCTION ─────────────────
+//
+// The defect was measured at lesson-init and wired there first. The chat route
+// generates the same class of prose about the same concept, so it runs the
+// same guard. These are source assertions because neither route handler can be
+// invoked from a unit test — and the specific risk being pinned is a SECOND
+// IMPLEMENTATION appearing, which only a source check can see.
+describe('both routes run the guard, and only this one guard exists', () => {
+  it('lesson-init calls the shared guard', () => {
+    expect(INIT_ROUTE).toMatch(/repairFieldLineSign\(routed\.text, topicSlug\)/)
+    // Dynamic import, matching every sibling repair in this chain.
+    expect(INIT_ROUTE).toContain("await import('@/lib/teaching/fieldLineSignGuard')")
+  })
+
+  it('the chat route calls the SAME shared guard, on the teaching target', () => {
+    expect(CHAT_ROUTE).toMatch(/repairFieldLineSign\(cleanText, decisionConceptIdHoisted\)/)
+    expect(CHAT_ROUTE).toContain("await import('@/lib/teaching/fieldLineSignGuard')")
+  })
+
+  it('neither route reimplements the contract inline', () => {
+    // A second copy would drift from this one about what is true. The polarity
+    // vocabulary must appear ONLY inside the guard module.
+    for (const [name, src] of [['chat', CHAT_ROUTE], ['lesson-init', INIT_ROUTE]] as const) {
+      expect(src, `${name} reimplements the sign rule`).not.toMatch(/negative\s*\(\?:ly\)\?/)
+      expect(src, `${name} hardcodes a polarity replacement`).not.toMatch(/replace\([^)]*negative[^)]*positive/i)
+    }
+  })
+
+  it('both log the same event name, so one query finds every repair', () => {
+    expect(INIT_ROUTE).toContain("event: 'field-line-sign-repaired'")
+    expect(CHAT_ROUTE).toContain("event: 'field-line-sign-repaired'")
+  })
+})
+
+// ── THE CHAT ROUTE'S OWN REAL PROSE ────────────────────────────────────────
+//
+// Verbatim replies captured from this route during the 8-sample chat run and
+// the live negative-charge check. They are correct, and must stay untouched.
+describe('real chat-route replies survive unchanged', () => {
+  const REAL = [
+    'The arrows you see labeled **Electric Field Lines (E)** are showing the direction of the electric field **E** produced by the source charge.',
+    'The field lines also show where the field starts and ends: they begin on a positive source charge (+Q) and end on a negative charge.',
+    '- The field lines start on a positive source and end on a negative source (or at infinity), and they never cross each other.',
+    'A negative charge feels a force that is **opposite** to the direction of the electric field lines.',
+    'The field lines show the direction that a *positive* test charge would be pushed; a negative test charge is pushed in the opposite direction, so its motion is reversed relative to the arrows on the diagram.',
+  ]
+  for (const r of REAL) {
+    it(`untouched: "${r.slice(0, 58)}…"`, () => {
+      expect(isInvertedFieldLineClaim(r)).toBe(false)
+      expect(repairFieldLineSign(r, 'phys.em.electric-field').text).toBe(r)
+    })
+  }
 })
