@@ -201,6 +201,92 @@ function isDiscourseOnlyMatch(matchedText: string): boolean {
 }
 
 /**
+ * E3 · A REQUEST GOVERNS ITS OWN CLAUSE, AND ONLY ITS OWN CLAUSE.
+ *
+ * ── THE DEFECT, reproduced offline from a production transcript ─────────────
+ * Physics lesson `phys.wave.beats`, real account, 2026-09-05. A weak-English
+ * learner typed:
+ *
+ *   "i dont know sir. that is what i am asking you. please dont ask me
+ *    question, please teach me why loud and soft happens"
+ *                    ^^^^^^                        ^^^^^
+ *                    matched here                  requested here
+ *
+ * and the tutor switched to teaching `eng.speaking.asking-and-answering-
+ * questions`. The concept the resolver returned was named in a DIFFERENT
+ * CLAUSE from the one the request verb governs: "teach me" governs "why loud
+ * and soft happens", which names no concept at all. "Asking" is a report of
+ * what the learner is doing, not a topic they asked for.
+ *
+ * ── WHY THIS IS NOT ANOTHER WORD LIST ──────────────────────────────────────
+ * Five lexical discriminators for this defect family have now been measured
+ * and REJECTED — three recorded in docs/architecture/WRONG_CONCEPT_RETRIEVAL.md,
+ * plus two more measured during the 2026-09-06 investigation (a deictic
+ * complement rule wrongly blocked 8 of 10 genuine requests; a definite-
+ * determiner rule wrongly blocked 3 of 11, including "teach me the
+ * derivative"). This rule is POSITIONAL: it asks where the match sits relative
+ * to the request, and reads no vocabulary at all.
+ *
+ * ── SCOPE, deliberately narrow ─────────────────────────────────────────────
+ * It applies ONLY when the message contains an explicit request phrase, i.e.
+ * only when the request is what would justify moving the teaching target. A
+ * message with no request phrase ("i dont understand photosynthesis", "i dont
+ * know enough about the mole concept") is untouched, which is what keeps every
+ * knowledge-gap path working.
+ *
+ * The DEICTIC-CLAUSE EXEMPTION matters as much as the rule. "photosynthesis,
+ * can you explain it" names its topic BEFORE the request and the request's own
+ * clause names nothing but "it". Suppressing that would be a false positive of
+ * exactly the kind this file keeps measuring and rejecting, so when the
+ * governed clause carries no content word the rule stands down and the earlier
+ * mention is honoured.
+ *
+ * ── MEASURED ───────────────────────────────────────────────────────────────
+ * Blocks the production utterance above and its sibling phrasing. Wrongly
+ * blocks 0 of 11 genuine requests measured (photosynthesis, mole concept,
+ * entropy, vectors, derivative, apoptosis, mitochondria, "teach me the
+ * derivative", "can you explain the mitochondria", "what is a derivative",
+ * "explain photosynthesis to me please"). Pinned by F7.
+ *
+ * Token-based, using the SAME tokenizer as the matcher. A raw substring search
+ * was written first and rejected: matchedText comes from a KG TITLE, so
+ * "Newton's Second Law" would not be found inside "teach me newtons second
+ * law" and a genuine request would have been suppressed by punctuation.
+ */
+function matchPrecedesItsRequest(message: string, matchedText: string): boolean {
+  const request = matchTopicRequest(message ?? '')
+  if (!request) return false                    // no request: rule inapplicable
+
+  const needle = tokens(matchedText)
+  if (needle.length === 0) return false
+
+  // Where the governed clause begins, counted in TOKENS so punctuation and
+  // spelling folds cannot shift the boundary.
+  const governedFrom = tokens((message ?? '').slice(0, request.end)).length
+  const words = tokens(message ?? '')
+
+  // Does the governed clause name anything at all? If every word after the
+  // request is discourse or deixis, the request points at what is already
+  // being taught and cannot be used to reject an earlier, genuine mention.
+  const governed = words.slice(governedFrom)
+  const namesSomething = governed.some(
+    (w) => !DISCOURSE_NOUNS.has(w) && !HEAD_STOP.has(w) && !TEACHING_CUE.has(w),
+  )
+  if (!namesSomething) return false
+
+  for (let i = 0; i + needle.length <= words.length; i++) {
+    let hit = true
+    for (let j = 0; j < needle.length; j++) {
+      if (words[i + j] !== needle[j]) { hit = false; break }
+    }
+    // An occurrence at or after the request's end IS inside the governed
+    // clause — one such occurrence is enough to keep the match.
+    if (hit && i >= governedFrom) return false
+  }
+  return true                                   // every occurrence precedes it
+}
+
+/**
  * Topic governance for the incidental rule. Wider than TEACHING_CUE because a
  * request verb governs a topic just as a teaching verb does — "show me VECTOR
  * graph" asks for vectors. It stays separate from TEACHING_CUE so that
@@ -475,7 +561,11 @@ export function resolveRequestedConceptId(
         // PHASE 6 P0: "the main idea", "the point" — deixis, not a subject.
         // Sits alongside the other two "is this really a topic?" filters
         // rather than anywhere else, so all three are read together.
-        !isDiscourseOnlyMatch(m.matchedText),
+        !isDiscourseOnlyMatch(m.matchedText) &&
+        // E3: named in a different clause from the request that would justify
+        // moving the teaching target. The fourth member of the same family,
+        // and the only one that reads position rather than vocabulary.
+        !matchPrecedesItsRequest(message ?? '', m.matchedText),
     )
     // Same-subject candidates win over an equally-confident foreign one. The
     // lesson's own id prefix is the subject signal — it needs no mapping table

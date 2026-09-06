@@ -445,6 +445,46 @@ export const DISCOURSE_NOUNS = new Set([
   // keep a real word and are unaffected.
   'real', 'life', 'everyday', 'practical', 'simple', 'basic', 'easy',
   'quick', 'short', 'another', 'different',
+  // THE INFLECTIONS OF THE APPARATUS NOUNS — E1, the P0 of 2026-09-05.
+  //
+  // Measured in production, physics `phys.wave.beats`, real account. A
+  // weak-English learner mid-lesson typed:
+  //
+  //     "i dont know sir. that is what i am asking you. please dont ask me
+  //      question, please teach me why loud and soft happens"
+  //
+  //   [knowledge-gap] concept: 'eng.speaking.asking-and-answering-questions'
+  //   [excursion]     transition: 'started'
+  //   [arbitration]   owner: 'KNOWLEDGE_GAP', overridden: ['RECOVERY','TEACH']
+  //
+  // The tutor abandoned physics, taught the ENGLISH concept, drew its figure,
+  // and — when the learner protested "sir this is wrong, i am studying physics
+  // beats lesson not english" — kept going for two more turns.
+  //
+  // The single match was the one-word TITLE_COMPONENT "Asking" at 0.80.
+  // `deriveTitleComponents` admits it because "asking" occurs in exactly ONE
+  // title across all 1,775 concepts — a fact about the CURRICULUM'S
+  // COMPLETENESS read as a fact about English, the same confusion the L1
+  // qualifier entry records. `isIncidentalWord` then failed to drop it because
+  // "what" sits exactly 3 tokens before "asking" in "that is WHAT i am ASKING
+  // you" and is a TEACHING_CUE, so the noun read as GOVERNED.
+  //
+  // `isDiscourseOnlyMatch` is the guard built for precisely this and it missed
+  // by ONE WORD: 'question' and 'answer' were already here, their verb and
+  // gerund inflections were not. So this is not a new rule — it is the same
+  // apparatus vocabulary in the forms a learner actually types.
+  //
+  // MEASURED COST, over every title, component and alias in all six subjects:
+  // surfaces that are entirely discourse today = 3; NEWLY suppressed = 2, and
+  // both belong to the single concept eng.speaking.asking-and-answering-
+  // questions ("Asking", "Answering Questions"). Its FULL title survives —
+  // tokens [asking, and, answering, question] contain 'and', which is not in
+  // this list — so "teach me asking and answering questions" still reaches it
+  // and the concept remains teachable by name. Pinned by F3.
+  //
+  // 'answered'/'asked' are deliberately NOT added: no measurement demanded
+  // them, and this list grows only on evidence.
+  'ask', 'asking', 'answering',
 ])
 
 /**
