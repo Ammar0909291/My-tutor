@@ -45,7 +45,10 @@ interface Payload {
   text?: string
   provider?: string | null
   mastery?: { verified?: boolean; phase?: string; checkCorrect?: number; practiceCorrect?: number; gatePending?: boolean } | null
-  mcq?: { question: string; options: string[]; correctIndex: number } | null
+  // correctIndex is NOT part of the real API contract — the server never
+  // sends it (grading is server-side). Do not reintroduce a field access on
+  // it; see the root-cause comment at the MCQ-answering site below.
+  mcq?: { question: string; options: string[] } | null
   visualSpec?: unknown
   sceneSpec?: unknown
   visual?: unknown
@@ -250,12 +253,27 @@ async function runConcept(cookie: string, subject: string, concept: KgConcept, l
   turns.push({ label: 'T0', sent: '(lesson-init)', payload: last })
 
   let personaIdx = 0
-  let answeredWrongOnce = false
+  let mcqAttemptCount = 0
   for (let i = 0; i < MAX_TURNS; i += 1) {
     let msg: string
     if (last.mcq) {
-      if (!answeredWrongOnce) { msg = last.mcq.options[(last.mcq.correctIndex + 1) % last.mcq.options.length]; answeredWrongOnce = true }
-      else msg = last.mcq.options[last.mcq.correctIndex]
+      // ROOT-CAUSE FIX (2026-09-06): the server deliberately never sends
+      // correctIndex to the client — LessonScreen.tsx's own comment states
+      // grading is server-side against the stored probe, and the client
+      // needs only the question/options text to render and submit a choice.
+      // This harness's `Payload` type inherited a `correctIndex` field that
+      // the live API has never actually populated, so `last.mcq.correctIndex`
+      // was always `undefined`: `(undefined + 1) % options.length` is `NaN`,
+      // `options[NaN]` is `undefined`, and `JSON.stringify` then DROPS the
+      // `message` key entirely — the server correctly rejects the resulting
+      // body with 400 "Required". Measured: this killed every one of 10
+      // concept runs at the exact turn the first MCQ was answered, none of
+      // them ever reaching CHECK/PRACTICE. Fixed by cycling through option
+      // TEXT without assuming which one is correct — the harness has no way
+      // to know the answer key any more than a real learner does, so this
+      // naturally produces a mix of right and wrong answers across a run.
+      msg = last.mcq.options[mcqAttemptCount % last.mcq.options.length]
+      mcqAttemptCount += 1
     } else if (personaIdx < PERSONA_LINES.length) {
       msg = PERSONA_LINES[personaIdx]
       personaIdx += 1
