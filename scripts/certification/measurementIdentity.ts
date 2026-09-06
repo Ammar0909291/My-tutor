@@ -211,16 +211,47 @@ export type WorkerResolution =
 /**
  * Read worker credentials from the environment.
  *
- * Expects CERT_WORKER_1_EMAIL / CERT_WORKER_1_PASSWORD … up to `wanted`.
- * Refuses on: a missing pair, or a duplicated email across workers (which
- * would silently reunite two workers on one account).
+ * Expects CERT_WORKER_1_EMAIL / CERT_WORKER_1_PASSWORD … for each requested
+ * slot. Refuses on: a missing pair, or a duplicated email across workers
+ * (which would silently reunite two workers on one account). No account is
+ * refused by identity — see the REVOKED note above.
+ *
+ * ── WHICH SLOTS: A COUNT, OR THE EXACT SET ─────────────────────────────────
+ * `wanted` as a NUMBER means the contiguous prefix 1..wanted, which is what
+ * every whole-pool caller (runPhase0Controls, the eight runPhysics*_4Worker
+ * runners) needs and what this function has always done — that path is
+ * unchanged, byte for byte.
+ *
+ * A subject-partitioned caller needs something a count cannot express. Tier A
+ * assigns physics -> w1,w3 and chemistry -> w2,w4, so a chemistry-only run
+ * needs the NON-CONTIGUOUS set {2,4}: `wanted: 4` would demand w1 and w3 it
+ * never authenticates, and `wanted: 2` would demand w1 (wrong worker) while
+ * omitting w4 (which it does use). Passing an explicit slot list lets the
+ * caller require exactly the workers it will run, and nothing else.
+ *
+ * Every validation below is unchanged and applies per REQUESTED slot: a slot
+ * that is not requested is not resolved, and a worker that is not resolved
+ * cannot be used (its caller looks workers up by id and skips a miss). So
+ * narrowing the request never widens what may run, and the distinctness rule
+ * still holds across the whole set that WILL run — which is the set that can
+ * contaminate itself.
  */
 export function resolveWorkers(
   env: Record<string, string | undefined>,
-  wanted: number,
+  wanted: number | readonly number[],
 ): WorkerResolution {
+  const slots = typeof wanted === 'number'
+    ? Array.from({ length: wanted }, (_, i) => i + 1)
+    : [...wanted]
+  // Defensive: a caller that computed an empty set would otherwise resolve an
+  // empty pool and "succeed" into a run that certifies nothing. Refusing is
+  // the same posture as every other check here — say what is wrong rather
+  // than proceed with a pool that cannot do the work.
+  if (slots.length === 0) {
+    return { ok: false, error: 'no worker slots requested — nothing would run' }
+  }
   const workers: WorkerAccount[] = []
-  for (let i = 1; i <= wanted; i++) {
+  for (const i of slots) {
     const email = (env[`CERT_WORKER_${i}_EMAIL`] ?? '').trim()
     const password = env[`CERT_WORKER_${i}_PASSWORD`] ?? ''
     if (!email || !password) {

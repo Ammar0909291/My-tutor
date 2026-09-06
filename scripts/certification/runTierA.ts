@@ -286,7 +286,15 @@ async function main(): Promise<void> {
   process.stderr.write(`  baseUrl=${BASE_URL}\n`)
   process.stderr.write(`  subject=${args.subject} batchSize=${args.batchSize} batch=${args.batch ?? '(all)'}\n`)
 
-  const resolution = resolveWorkers(process.env, 4)
+  // Derived BEFORE resolution so the run requires exactly the workers it will
+  // actually authenticate: physics -> w1,w3 · chemistry -> w2,w4 · all -> both
+  // pairs. PHYSICS_WORKERS/CHEMISTRY_WORKERS stay the single source of truth —
+  // there is deliberately no second subject->worker mapping here, so the
+  // resolved set can never drift from the set that runs.
+  const subjects: Array<'physics' | 'chemistry'> = args.subject === 'all' ? ['physics', 'chemistry'] : [args.subject]
+  const workerIds = subjects.flatMap((s) => (s === 'physics' ? PHYSICS_WORKERS : CHEMISTRY_WORKERS))
+
+  const resolution = resolveWorkers(process.env, workerIds.map((id) => Number(id.slice(1))))
   if (!resolution.ok) {
     process.stderr.write(`WORKER RESOLUTION FAILED: ${resolution.error}\n`)
     process.exitCode = 1
@@ -300,9 +308,6 @@ async function main(): Promise<void> {
     chemistry: manifest.filter((r) => r.subject === 'chemistry').length,
   }
   const assignments = assignRows(manifest)
-
-  const subjects: Array<'physics' | 'chemistry'> = args.subject === 'all' ? ['physics', 'chemistry'] : [args.subject]
-  const workerIds = subjects.flatMap((s) => (s === 'physics' ? PHYSICS_WORKERS : CHEMISTRY_WORKERS))
 
   const summary: Array<{ workerId: string; conceptId: string; subject: string; verdict: string; retried: boolean; error: string | null }> = []
 
