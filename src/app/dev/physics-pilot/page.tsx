@@ -48,6 +48,8 @@ const PILOT = [
   'phys.mech.collisions-inelastic',
   'chem.atomic.electronic-config',
   'chem.solid.crystal-systems',
+  // Physics Interactive Lesson Upgrade — the electric-dipole torque generator.
+  'phys.em.electric-dipole',
 ] as const
 
 export default function PhysicsPilotPage() {

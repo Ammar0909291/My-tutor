@@ -262,8 +262,17 @@ const CONCEPT_VISUALS: Record<string, VisualEntry> = {
   // law, lenzs-law, maxwells-equations, electromagnetic-waves. Before this
   // fix ALL of them silently inherited circuit_diagram — a battery/wire/
   // bulb picture — via the domain default. No existing visual type models a
-  // field-lines diagram, so these are correctly left unmapped rather than
-  // stretched onto a circuit picture (see DOMAIN_VISUALS below).
+  // field-lines diagram, so 20 of these are correctly left unmapped rather
+  // than stretched onto a circuit picture (see DOMAIN_VISUALS below).
+  //
+  // electric-dipole is the one exception (Physics Interactive Lesson
+  // Upgrade, DeepSeek recommendation #1): a dedicated interactive scene
+  // generator exists for it (electricDipole.pure.ts) — two charges, the
+  // dipole moment p = qd, the field E, the forces on each charge and the
+  // torque τ = pE sinθ, all re-derivable live as the learner moves q, d, E
+  // or θ — so it earns a real binding rather than a circuit/field-lines
+  // substitute.
+  'phys.em.electric-dipole':          { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'electric_dipole' },
 
   // Physics — Kinematics (P0 fix: these are NOT force/dynamics concepts —
   // 'phys.mech.displacement' had no exact entry here, so it fell through to

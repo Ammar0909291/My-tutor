@@ -170,7 +170,7 @@ describe('intentional zero coverage is documented, not silent', () => {
 })
 
 describe('coverage floor — this fix must not regress below its own result', () => {
-  it('at least 76 of 238 physics concepts resolve to a visual', () => {
+  it('at least 77 of 238 physics concepts resolve to a visual', () => {
     // A FLOOR, not a target: future content work should raise this number by
     // adding more genuinely-fitting exact entries, never by reintroducing a
     // blanket domain default. Set from this fix's own measured result so a
@@ -186,10 +186,19 @@ describe('coverage floor — this fix must not regress below its own result', ()
     // documented removal, and remains a floor: it still fails on the next
     // accidental deletion. See visualRegistry.test.ts, 'generic-canvas bindings
     // must not stand in for a real figure'.
+    //
+    // 76 -> 77 (Physics Interactive Lesson Upgrade): 'phys.em.electric-dipole'
+    // was one of the 21 field/magnetism concepts this file's own comment above
+    // named as correctly unmapped, because no existing visual type modelled a
+    // field-lines diagram. That is still true of the other 20 — this is a
+    // genuinely NEW visual (a dedicated electric_dipole scene generator: two
+    // charges, p = qd, the field, the forces, and the torque τ = pE sinθ, all
+    // re-derivable as the learner moves a slider), not a stretched substitute,
+    // so the floor rises by exactly one rather than being reinterpreted.
     const covered = PHYS.filter((c) => lookupConceptVisual(c.id) !== null).length
-    expect(covered).toBeGreaterThanOrEqual(76)
-    // And the removal really was exactly one: nothing else silently vanished.
-    expect(covered).toBe(76)
+    expect(covered).toBeGreaterThanOrEqual(77)
+    // And the addition really was exactly one: nothing else silently changed.
+    expect(covered).toBe(77)
   })
 
   it('zero orphan keys and zero duplicates remain physics-specific to this fix', () => {

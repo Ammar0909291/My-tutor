@@ -118,11 +118,18 @@ describe('B2 changed nothing else', () => {
     // better than the shared instance and its provenance becomes 'generator'.
     // That is what earns concept scope — the other four concepts the same
     // census wired stay demoted precisely because they own no parameters.
-    expect(CONCEPT_SCENE_OVERRIDES).toHaveLength(16)
+    //
+    // 16 -> 17 (Physics Interactive Lesson Upgrade): 'phys.em.electric-dipole'
+    // is the ONLY concept bound to the new 'electric_dipole' generator kind —
+    // there is no second concept to share a kind default with, so it is
+    // registered here as concept-owned rather than as a CANONICAL_SCENES
+    // default, exactly like math.calc.critical-points above.
+    expect(CONCEPT_SCENE_OVERRIDES).toHaveLength(17)
     expect(CONCEPT_SCENE_OVERRIDES).toContain('math.calc.critical-points')
     expect(CONCEPT_SCENE_OVERRIDES).toContain('phys.em.kirchhoffs-laws')
     expect(CONCEPT_SCENE_OVERRIDES).toContain('phys.mech.satellites')
     expect(CONCEPT_SCENE_OVERRIDES).toContain('phys.meas.vector-products')
+    expect(CONCEPT_SCENE_OVERRIDES).toContain('phys.em.electric-dipole')
   })
 
   it('the generator kind-defaults themselves are unchanged', () => {

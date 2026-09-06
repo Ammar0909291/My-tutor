@@ -108,6 +108,18 @@ export const SCENE_MISCONCEPTIONS: Readonly<Record<string, readonly SceneMisconc
     },
   ],
 
+  electric_dipole: [
+    {
+      id: 'dipole:uniform-field-net-force',
+      variable: 'fieldType',
+      belief: 'expects-value',
+      value: 'non_uniform',
+      claim: 'A dipole sitting in a field should feel a net push, the same way a single charged particle would.',
+      prompt: 'The same dipole, but now the field really is perfectly uniform everywhere. Does it still feel a net force pushing it sideways?',
+      correction: 'In a uniform field the force on +q and the force on −q are equal and opposite — they cancel exactly, so the net FORCE is zero (there is still a torque). Only in a non-uniform field, where the field itself is stronger on one side, do the two forces differ enough to leave a net push.',
+    },
+  ],
+
   projectile: [
     {
       id: 'projectile:steeper-is-further',

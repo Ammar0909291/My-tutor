@@ -610,6 +610,7 @@ const SCENE_KIND_REPRESENTATION: Record<string, Representation> = {
   gravitation_orbit: 'orbit',
   ray_optics: 'ray_optics',
   torque_diagram: 'force_diagram',
+  electric_dipole: 'force_diagram',
   vector: 'vector',
   triangle: 'geometry',
   heights_and_distances: 'geometry',
