@@ -45,6 +45,7 @@ import type { SceneSpec } from '@/lib/teaching/sceneSpec'
 import { validateSceneSpec } from '@/lib/teaching/sceneSpecValidator'
 import { parseVisualSpec, type VisualSpec } from '@/lib/visuals/visualSpec'
 import { applyRestoredVisuals } from '@/lib/teaching/visual/messageMerge'
+import { createRevealController } from '@/lib/teaching/progressiveReveal'
 import type { InlinePracticeQuestion } from '@/lib/school/practice/generateInlinePractice'
 import { parseLessonCompletionTag, parseMathCodeAnswerTags, parseAssessmentResultTag } from '@/lib/school/tutoring/parseAssistantTags'
 import { Card, CandyButton, Pill, EagleMascot, useConfetti } from '@/components/ui/candy'
@@ -737,7 +738,16 @@ function HintCard({ hint }: { hint: string }) {
 }
 
 // ─── Types ────────────────────────────────────────────────────────────────────
-export type ChatMsg = { id: string; role: 'user'|'assistant'; content: string; ts: number; streaming?: boolean; provider?: string; llmCallCount?: number; visual?: string; visualSpec?: VisualSpec; sceneSpec?: SceneSpec; dynamicVisualizationCode?: string; inlinePractice?: InlinePracticeQuestion; hint?: string }
+export type ChatMsg = { id: string; role: 'user'|'assistant'; content: string; ts: number; streaming?: boolean; provider?: string; llmCallCount?: number; visual?: string; visualSpec?: VisualSpec; sceneSpec?: SceneSpec; dynamicVisualizationCode?: string; inlinePractice?: InlinePracticeQuestion; hint?: string;
+  // Progressive reveal (client-side fallback — see progressiveReveal.ts):
+  // how many characters of the STRIPPED content are currently shown. Present
+  // only while `streaming` is true for a landed-but-still-revealing turn;
+  // absent (undefined) means "show it all", which is every other message
+  // (user turns, historical turns, error/recovery text). msg.content itself
+  // always holds the true, complete final text — this field only controls
+  // how much of it is sliced for display, so persistence/history/TTS/the
+  // code-block panel all keep reading the real, complete string.
+  revealedLength?: number }
 
 /**
  * Pure decision function for the auto-scroll effect (see its own comment for
@@ -1023,6 +1033,59 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   // opportunistic update if an authoritative action landed while it was
   // in flight. Same generation-guard idiom already used for TTS (ttsGeneration).
   const progressGenerationRef = useRef(0)
+
+  // ── Progressive response reveal (client-side fallback) ───────────────────
+  // See src/lib/teaching/progressiveReveal.ts's header for why this exists:
+  // no provider or server streaming exists anywhere in the chat/lesson-init
+  // pipeline, so a landed complete response is revealed here instead of
+  // appearing as one block. `cancelActiveRevealRef` remembers how to stop
+  // whatever reveal is currently running so a NEW one (a later turn landing,
+  // or a lesson transition wiping `messages` mid-reveal) can supersede it
+  // cleanly — createRevealController's own `start()` already self-cancels
+  // for same-controller re-entry, but sendMessage/callLessonInit/
+  // sendImageMessage each build a fresh controller per call, so this ref is
+  // what makes a cross-call handoff (e.g. a completed lesson's closing reply
+  // still revealing when the NEXT lesson's opening lands) leak-free too.
+  const cancelActiveRevealRef = useRef<() => void>(() => {})
+  useEffect(() => () => cancelActiveRevealRef.current(), [])
+
+  /**
+   * Reveal `revealText` (the exact string that will be shown — already
+   * stripped of fenced code the same way the renderer strips it) into the
+   * message `id`, then invoke `onDone` once the full text is visible. The
+   * message must already exist with `content` set to the true full text and
+   * `streaming: true` — this only ever grows `revealedLength` on it.
+   */
+  const revealAssistantMessage = useCallback((id: string, revealText: string, onDone: () => void) => {
+    cancelActiveRevealRef.current()
+    const controller = createRevealController({
+      now: () => performance.now(),
+      requestFrame: (cb) => requestAnimationFrame(cb),
+      cancelFrame: (h) => cancelAnimationFrame(h),
+      onUpdate: (len) => {
+        setMessages((prev) => {
+          const idx = prev.findIndex((m) => m.id === id)
+          if (idx === -1 || prev[idx].revealedLength === len) return prev
+          const next = prev.slice()
+          next[idx] = { ...next[idx], revealedLength: len }
+          return next
+        })
+      },
+      onDone: () => {
+        setMessages((prev) => {
+          const idx = prev.findIndex((m) => m.id === id)
+          if (idx === -1 || prev[idx].streaming !== true) return prev
+          const next = prev.slice()
+          next[idx] = { ...next[idx], streaming: false }
+          return next
+        })
+        onDone()
+      },
+    })
+    cancelActiveRevealRef.current = () => controller.cancel()
+    controller.start(revealText)
+  }, [])
+
   const [xpCelebration, setXpCelebration] = useState(false)
   const fireConfetti = useConfetti()
   const [expandedUnits, setExpandedUnits] = useState<number[]>([1])
@@ -1353,17 +1416,29 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   // array since the previous render. That correctly sees BOTH entries in
   // the batched case above, is unaffected by which of the several send
   // paths did the appending (sendMessage, sendImageMessage, lesson-init,
-  // MCQ taps — all of them, with no per-call-site change needed), and
-  // leaves streaming's own gated behaviour untouched: a `.map()` update that
-  // lands the reply's full text in place (no length change) finds nothing
-  // new here and correctly falls through to the `atBottom`-gated branch —
-  // pinning to the bottom only when the learner was already there, exactly
-  // as before, and never yanking them down mid-reread.
+  // MCQ taps — all of them, with no per-call-site change needed).
+  //
+  // ONE-SHOT smooth-scroll on a genuinely NEW message only — deliberately
+  // NOT on every `.map()` update that only grows an EXISTING message's
+  // content (no length change). Before progressive reveal that was a single
+  // incidental case (the reply landing all at once); revealAssistantMessage
+  // now produces many such same-length updates per turn as the text grows
+  // in place, and re-running `scrollIntoView({behavior:'smooth'})` on each
+  // one is exactly the restarted-animation scroll-jitter the ResizeObserver
+  // effect right below is already built (and already commented, see its own
+  // header) to avoid for "a reply streaming in" — its instant
+  // `scrollTop = scrollHeight` re-pin, gated on the SAME `followRef.current`
+  // this effect arms, is what keeps a reveal-in-progress pinned to the
+  // bottom smoothly instead. So a same-length content update finds nothing
+  // new here and is deliberately left to that mechanism — never yanking a
+  // learner who scrolled up back down, and never double-scrolling one who
+  // didn't.
   const prevMessagesLengthRef = useRef(0)
   useEffect(() => {
     const shouldScroll = shouldAutoScrollOnMessagesChange(messages, prevMessagesLengthRef.current, atBottom)
+    const lengthChanged = messages.length !== prevMessagesLengthRef.current
     prevMessagesLengthRef.current = messages.length
-    if (shouldScroll) {
+    if (shouldScroll && lengthChanged) {
       // Arm follow mode as well as scrolling now: the scroll below lands
       // against the layout as it is THIS instant, and a turn carrying a figure
       // grows by hundreds of pixels afterwards. The observer effect below is
@@ -1775,6 +1850,12 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     // MCQ taps) funnels through here, so this one call covers them all.
     voicePlayback.stop()
     setIsStreaming(true)
+    // Set right before revealAssistantMessage is called below — tells the
+    // `finally` block not to flip isStreaming back off immediately, since a
+    // reveal is now driving that (its onDone does it once the text finishes
+    // appearing). Stays false for every error/early-return path, so those
+    // keep releasing the composer immediately, exactly as before.
+    let revealStarted = false
     // P0 (duplicate AI responses): captured at dispatch time, checked before
     // applying this call's opportunistic lessonOrder sync below. If a
     // skip/complete/restart landed while this request was in flight, this
@@ -2057,12 +2138,27 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       // mount-time history restore) removed this turn's placeholder bubble,
       // APPEND the reply instead of silently dropping it via a no-op map —
       // the tutor's answer must never vanish because of a state race.
+      //
+      // Progressive reveal (client-side fallback — no provider/server
+      // streaming exists, see progressiveReveal.ts): `content` is set to the
+      // TRUE complete text immediately (so TTS, the code-block panel, and
+      // history all read the real string right away), but `streaming` stays
+      // true and `revealedLength` starts the on-screen reveal — every other
+      // gate in this render already keys off `!msg.streaming` (the visual/
+      // MCQ/hint/practice/timestamp blocks below, and the top-level
+      // `isStreaming` the MCQ widget and composer use), so they continue to
+      // wait for the reply exactly as before; nothing new to widen for them.
       setMessages((p) => {
         if (typeof data.learnerLevel === 'string') setLearnerLevel(data.learnerLevel)
-      const landed = { content: full, streaming: false as const, provider, llmCallCount: data.llmCallCount, visual: responseVisual, visualSpec: responseVisualSpec, sceneSpec: responseSceneSpec, dynamicVisualizationCode: responseDynamicVisualizationCode, inlinePractice: responseInlinePractice, hint: responseHint }
+      const landed = { content: full, streaming: true as const, revealedLength: 0, provider, llmCallCount: data.llmCallCount, visual: responseVisual, visualSpec: responseVisualSpec, sceneSpec: responseSceneSpec, dynamicVisualizationCode: responseDynamicVisualizationCode, inlinePractice: responseInlinePractice, hint: responseHint }
         return p.some((m) => m.id === aid)
           ? p.map((m) => m.id === aid ? { ...m, ...landed } : m)
           : [...p, { id: aid, role: 'assistant' as const, ts: Date.now(), ...landed }]
+      })
+      revealStarted = true
+      revealAssistantMessage(aid, stripCode(full), () => {
+        setIsStreaming(false)
+        textareaRef.current?.focus()
       })
       const codeBlock = extractLastCodeBlock(full)
       if (codeBlock) {
@@ -2095,8 +2191,8 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       setMessages((p) => p.some((m) => m.id === aid)
         ? p.map((m) => m.id === aid ? { ...m, content: recoveryText, streaming: false } : m)
         : [...p, { id: aid, role: 'assistant' as const, content: recoveryText, ts: Date.now(), streaming: false }])
-    } finally { setIsStreaming(false); textareaRef.current?.focus() }
-  }, [handleSpeak, curriculumLessons, curriculumProgress.currentLesson, handleLessonComplete, userId, subjectSlug])
+    } finally { if (!revealStarted) { setIsStreaming(false); textareaRef.current?.focus() } }
+  }, [handleSpeak, curriculumLessons, curriculumProgress.currentLesson, handleLessonComplete, userId, subjectSlug, revealAssistantMessage])
 
   // Lesson initialization via dedicated endpoint — does NOT persist the
   // navigation instruction as a USER message (unlike sendMessage which
@@ -2109,6 +2205,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     lesson: CurriculumLesson,
   ) => {
     setIsStreaming(true)
+    let revealStarted = false
     const aid = `a-${Date.now()}`
     setMessages((p) => [...p, { id: aid, role: 'assistant' as const, content: '', ts: Date.now(), streaming: true }])
     try {
@@ -2162,12 +2259,16 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       ))
 
       // Clobber-proof landing (same as sendMessage): a late history restore
-      // must never make the lesson opening vanish.
+      // must never make the lesson opening vanish. Progressive reveal, same
+      // contract as sendMessage above: content lands complete immediately,
+      // `streaming` stays true until revealAssistantMessage's onDone flips it.
       setMessages((p) => p.some((m) => m.id === aid)
         ? p.map((m) => m.id === aid
-          ? { ...m, content: data.text as string, streaming: false, provider: data.provider, llmCallCount: data.llmCallCount }
+          ? { ...m, content: data.text as string, streaming: true, revealedLength: 0, provider: data.provider, llmCallCount: data.llmCallCount }
           : m)
-        : [...p, { id: aid, role: 'assistant' as const, content: data.text as string, ts: Date.now(), streaming: false, provider: data.provider, llmCallCount: data.llmCallCount }])
+        : [...p, { id: aid, role: 'assistant' as const, content: data.text as string, ts: Date.now(), streaming: true, revealedLength: 0, provider: data.provider, llmCallCount: data.llmCallCount }])
+      revealStarted = true
+      revealAssistantMessage(aid, stripCode(data.text as string), () => setIsStreaming(false))
       // CompactLessonProgressBar reads masteryState.phase, which this
       // endpoint's response never carries (lesson-init is intentionally
       // minimal and skips the mastery-gate pipeline — see its own header
@@ -2191,9 +2292,9 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         : [...p, { id: aid, role: 'assistant' as const, content: recoveryText, ts: Date.now(), streaming: false }])
       console.error('[lesson-init]', err)
     } finally {
-      setIsStreaming(false)
+      if (!revealStarted) setIsStreaming(false)
     }
-  }, [teachingLanguage, curriculumLessons.length, curriculumProgress.completedLessons])
+  }, [teachingLanguage, curriculumLessons.length, curriculumProgress.completedLessons, revealAssistantMessage])
 
   const subjectPrelude = useMemo(() => getSubjectPrelude(subjectSlug), [subjectSlug])
 
@@ -2894,6 +2995,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
     clearDraft(`lesson_${subjectSlug}`)
     if (textareaRef.current) textareaRef.current.style.height = 'auto'
     setIsStreaming(true)
+    let revealStarted = false
     const uid = `u-${Date.now()}`
     setMessages((p) => [...p, { id: uid, role: 'user', content: `📸 [Изображение]${question ? '\n' + question : ''}`, ts: Date.now() }])
     const aid = `a-${Date.now()}`
@@ -2907,10 +3009,17 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
       const visionErr = typeof data.error === 'string' ? data.error : data.error?.message ?? 'Vision error'
       if (!data.success || !data.text) throw new Error(visionErr)
       const full = data.text
-      // Clobber-proof landing — same contract as sendMessage/callLessonInit.
+      // Clobber-proof landing — same contract as sendMessage/callLessonInit,
+      // including the progressive reveal (content lands complete immediately,
+      // streaming stays true until revealAssistantMessage's onDone flips it).
       setMessages((p) => p.some((m) => m.id === aid)
-        ? p.map((m) => m.id === aid ? { ...m, content: full, streaming: false } : m)
-        : [...p, { id: aid, role: 'assistant' as const, content: full, ts: Date.now(), streaming: false }])
+        ? p.map((m) => m.id === aid ? { ...m, content: full, streaming: true, revealedLength: 0 } : m)
+        : [...p, { id: aid, role: 'assistant' as const, content: full, ts: Date.now(), streaming: true, revealedLength: 0 }])
+      revealStarted = true
+      revealAssistantMessage(aid, stripCode(full), () => {
+        setIsStreaming(false)
+        textareaRef.current?.focus()
+      })
       const codeBlock = extractLastCodeBlock(full)
       if (codeBlock) {
         setCode(codeBlock)
@@ -2923,7 +3032,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
       setMessages((p) => p.some((m) => m.id === aid)
         ? p.map((m) => m.id === aid ? { ...m, content: `Analysis error: ${msg}`, streaming: false } : m)
         : [...p, { id: aid, role: 'assistant' as const, content: `Analysis error: ${msg}`, ts: Date.now(), streaming: false }])
-    } finally { setIsStreaming(false); textareaRef.current?.focus() }
+    } finally { if (!revealStarted) { setIsStreaming(false); textareaRef.current?.focus() } }
   }
 
   // Chat-typed navigation intents ("go next", "I finished this lesson",
@@ -4838,7 +4947,21 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 const isSpeaking = speakingId === msg.id
                 const cached = previewCache[msg.id]
                 const isExpanded = expanded[msg.id] ?? false
-                const rawDisplayText = cached ? (cached.hasMore && !isExpanded ? cached.preview : cached.full) : stripCode(msg.content)
+                // Progressive reveal: while a landed turn is still revealing
+                // (streaming stays true for exactly that window — see
+                // revealAssistantMessage), show only the first
+                // `revealedLength` characters of the same stripped text the
+                // renderer always uses. previewCache skips streaming
+                // messages by construction, so `cached` is never set here
+                // during a reveal; this only ever narrows the existing
+                // `stripCode(msg.content)` fallback, never the cached branch.
+                const strippedContent = cached ? null : stripCode(msg.content)
+                const isRevealingText = !cached && msg.streaming === true && typeof msg.revealedLength === 'number'
+                const rawDisplayText = cached
+                  ? (cached.hasMore && !isExpanded ? cached.preview : cached.full)
+                  : isRevealingText
+                    ? (strippedContent as string).slice(0, msg.revealedLength)
+                    : (strippedContent as string)
                 const isIntro = !isUser && msg.id === introMessageId
                 // Parsed from the message the tutor actually sent, never
                 // fabricated: no match (or a malformed one) leaves the original
