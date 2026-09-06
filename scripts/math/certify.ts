@@ -71,12 +71,14 @@ const EMAIL = process.env.MATH_CERT_EMAIL ?? ''
 const PASSWORD = process.env.MATH_CERT_PASSWORD ?? ''
 
 /**
- * The engineering account is not a learner and must never appear in a
- * certification record. Enforced here rather than left to discipline, because
- * every prior mix-up in this project was a discipline failure, not a knowledge
- * failure.
+ * REVOKED (explicit owner instruction): suaibamr@gmail.com is no longer
+ * refused here. It was previously carried in a repo-wide FORBIDDEN_ACCOUNTS
+ * list on the theory that the engineering account must never appear in a
+ * certification record — the owner has since directed that this account be
+ * available like any other account throughout My Tutor, including for
+ * certification. See the same revocation in scripts/qa/liveAccount.ts and
+ * scripts/certification/measurementIdentity.ts (PROTECTED_ACCOUNTS).
  */
-const FORBIDDEN_ACCOUNTS = ['suaibamr@gmail.com']
 
 /** A lesson that cannot finish inside this many learner turns has failed D3. */
 const MAX_TURNS = 24
@@ -561,8 +563,7 @@ export async function certifyConcept(
  * fleet of HARNESS-ERRORs that look exactly like teaching failures, so the
  * robust path is the default one.
  *
- * The account is verified against /api/auth/session either way — the forbidden
- * account must be refused whether it arrived as a password or as a cookie.
+ * The account is verified against /api/auth/session either way.
  */
 async function authenticate(): Promise<string> {
   const cookie = process.env.MATH_CERT_COOKIE ? process.env.MATH_CERT_COOKIE : await login()
@@ -570,9 +571,6 @@ async function authenticate(): Promise<string> {
   const who = (await res.json()) as { user?: { email?: string; name?: string } }
   const email = who.user?.email
   if (!email) throw new Error('not authenticated — no session for the supplied cookie')
-  if (FORBIDDEN_ACCOUNTS.includes(email.toLowerCase())) {
-    throw new Error(`${email} is an engineering account and must never be used for certification`)
-  }
   process.stderr.write(`authenticated as ${who.user?.name} <${email}>\n`)
   return cookie
 }
@@ -626,10 +624,7 @@ export function csrfTokenFromJar(jar: string): string | null {
  * harness (the Phase 0 six-control runner, driving CERT_WORKER_* accounts
  * rather than MATH_CERT_EMAIL/PASSWORD) reuses this exact, already-debugged
  * cookie-jar logic instead of re-deriving it. Carries no account-policy
- * check of its own — `authenticate()` below applies FORBIDDEN_ACCOUNTS for
- * this file's own math-certification flow; a caller with a different
- * account policy (e.g. resolveWorkers' protected-account guard) applies its
- * own before calling this.
+ * check of its own — any caller applies its own before calling this.
  */
 export async function loginAs(baseUrl: string, email: string, password: string): Promise<string> {
   if (!email || !password) throw new Error('email and password are both required')
@@ -653,9 +648,6 @@ export async function loginAs(baseUrl: string, email: string, password: string):
 
 async function login(): Promise<string> {
   if (!EMAIL || !PASSWORD) throw new Error('set MATH_CERT_COOKIE, or MATH_CERT_EMAIL and MATH_CERT_PASSWORD')
-  if (FORBIDDEN_ACCOUNTS.includes(EMAIL.toLowerCase())) {
-    throw new Error(`${EMAIL} is an engineering account and must never be used for certification`)
-  }
   return loginAs(BASE, EMAIL, PASSWORD)
 }
 

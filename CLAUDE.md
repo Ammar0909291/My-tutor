@@ -3443,3 +3443,89 @@ same turn would both read the state as inactive and both emit an open (no
 per-turn lock exists); a `switch` resets the counter, so `turnsBlocked` for a
 switched excursion counts only since the last switch; a turn throwing before the
 excursion decision emits nothing.
+
+## Electric Dipole interactive visual (2026-09-06, commit `4683122`)
+- Implemented the Physics Interactive Lesson Upgrade for `phys.em.electric-dipole`
+  (previously unmapped to any visual — no existing visual type modelled a
+  field-lines diagram). New `src/lib/teaching/sceneGenerators/electricDipole.pure.ts`,
+  registered in the existing parametric-scene engine (`parametricScenes.ts`)
+  exactly like `torque_diagram` — no new visualization framework. A learner
+  moves θ, q, d, E (and, at the advanced complexity level, a uniform/non-uniform
+  field choice) and the same pure builder re-derives the figure client-side:
+  two charges + the dipole moment p = qd, forces on each charge (equal-and-
+  opposite / net force exactly zero in a uniform field, genuinely unequal in a
+  non-uniform one — net force derived from F ≈ p·(dE/dx)·cosθ, correctly zero
+  again at θ=90° even in a non-uniform field since there is no component along
+  the gradient), torque τ = pE sinθ (identical in both field types, since only
+  the average field enters torque about the dipole's own centre), an
+  equilibrium panel (θ=0° STABLE / θ=180° UNSTABLE, U = −pE cosθ), a predict-
+  mode question, and one registered misconception contrast. Bound to the
+  concept as concept-owned (`CONCEPT_SCENES`, not a shared kind default — it
+  is the only concept on this generator). 42 new deterministic tests; physics
+  visual coverage floor bumped 76→77; `CONCEPT_SCENE_OVERRIDES` count bumped
+  16→17 (both pre-existing audit tests updated per their own established
+  convention, not weakened). Full suite green, tsc clean, build clean.
+- **Real-account production validation, same day.** Verified end-to-end against
+  the deployed app (`my-tutor-flame.vercel.app`, confirmed via Vercel API to be
+  running exactly commit `4683122`) using a real learner account: requesting a
+  diagram served the genuine `electric_dipole` sceneSpec (q=4nC, d=3cm, E=8N/C,
+  θ=60°, uniform); four authored MCQs were served and graded correctly across
+  the run; the lesson reached `verified:true`, `phase:TRANSFER`,
+  `checkCorrect:1`, `practiceCorrect:2`, `lessonComplete.complete:true` in 8
+  real chat turns. τ=pE sinθ, U=−pE cosθ, and the uniform/non-uniform net-force
+  model were independently re-derived from the exact deployed code at θ =
+  0°/30°/60°/90°/120°/150°/180° using the account's own served parameters —
+  exact agreement (θ=0°→τ=0 STABLE, θ=90°→τ=9.6×10⁻¹⁰ N·m max, θ=180°→τ=0
+  UNSTABLE). No regressions observed (topic resolution, grading, mastery,
+  no cross-subject excursion). One real, non-obvious finding: this account's
+  own profile is `currentLevel: beginner`, under which the visual's adaptive-
+  complexity policy (pre-existing, shared by every generator) shows only 2 of
+  5 sliders (θ, q) and offers no Predict/Practice/Test-me mode chips — the
+  field-type control and the visual's own predict toggle are reachable only at
+  higher levels. This is intentional platform behaviour, not a defect, and was
+  not bypassed. Chromium in this sandbox cannot reach the public internet
+  (confirmed again: `ERR_CONNECTION_RESET` against the live domain, while
+  plain HTTPS/fetch succeeds), so pixel-level UI verification used the
+  byte-identical production code via the local dev server rather than the
+  literal hosted page; production itself was driven over real HTTP the same
+  way a real browser's requests would be. No code was changed as part of this
+  validation.
+
+## Account safety — suaibamr@gmail.com forbidden-account restriction REVOKED (2026-09-06)
+- **Explicit owner instruction, following the real-account validation above:**
+  `suaibamr@gmail.com` must be available for all accounts/harnesses throughout
+  My Tutor, like any other account — not refused, not specially gated.
+- This account was previously refused by construction in three independent
+  places, each added because "every prior mix-up in this project was a
+  discipline failure, not a knowledge failure":
+  `FORBIDDEN_ACCOUNTS = ['suaibamr@gmail.com']` in `scripts/math/certify.ts`
+  (`authenticate()` and `login()`); the identical constant in
+  `scripts/qa/liveAccount.ts` (`assertDisposable()`, called from
+  `createQaAccount()` and `login()`); and `PROTECTED_ACCOUNTS`/
+  `isProtectedAccount()` in `scripts/certification/measurementIdentity.ts`
+  (`resolveWorkers()`), the last of which had grown a per-worker
+  `CERT_WORKER_<n>_DESIGNATED_TEST_ACCOUNT=true` opt-in override for exactly
+  this account (used by `scripts/certification/runTierA.ts` to let W1 run).
+- **All three checks removed**, along with the now-pointless override
+  mechanism (there is nothing left to override). `resolveWorkers()` keeps its
+  one remaining rule — I-1 isolation, no two workers sharing one account —
+  and now accepts `suaibamr@gmail.com` in any worker slot with no flag needed.
+  `src/tests/certificationMeasurementIdentity.test.ts` updated: the
+  refusal/override test block replaced with one test confirming the account
+  resolves normally. `scripts/certification/runTierA.ts`'s header comment and
+  `scripts/qa/phase6-live-certification.ts`/`scripts/qa/phase-b-isolation.ts`'s
+  headers corrected in place (marked REVOKED, not rewritten) since they
+  described the now-removed enforcement as a live constraint.
+  `docs/MY-TUTOR-CANONICAL-BLUEPRINT.md` §22.3 corrected the same way.
+- **Not touched, and not implied by this instruction:** the disposable-QA-
+  account lifecycle in `liveAccount.ts` (register `qa-*@mytutor-qa.invalid`,
+  drive, `DELETE /api/user/delete-account`, verify) is unrelated machinery
+  that never depended on the forbidden-account check and is unaffected. This
+  revocation is about one specific account no longer being singled out; it is
+  not a change to any other account-safety practice, to runtime/production
+  code, to the database, or to curriculum/KG/Educational Brain content.
+  Historical CLAUDE.md entries above that describe this account as "the
+  engineering account" or record `certify.ts` refusing it are accurate
+  history of what was true when they were written and are left as-is, per
+  this file's own convention of recording supersession rather than rewriting
+  the past.

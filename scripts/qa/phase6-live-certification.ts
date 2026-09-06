@@ -9,7 +9,9 @@
  * (scripts/qa/phase6-structural-certification.ts).
  *
  * Disposable account only; deleted afterwards with re-login verified blocked.
- * Never suaibamr@gmail.com (liveAccount.ts enforces this structurally).
+ * (liveAccount.ts no longer refuses suaibamr@gmail.com specifically — REVOKED
+ * by explicit owner instruction — but this script's own account is still a
+ * throwaway `qa-*@mytutor-qa.invalid` one, since it is deleted at the end.)
  *
  * MEASURED vs INFERRED is enforced, not remembered:
  *   STRUCTURAL (server-owned, exact) — mastery counters, phase, mcq, provider.

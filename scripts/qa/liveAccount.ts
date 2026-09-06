@@ -14,14 +14,16 @@
  * login, and a second private copy of the workaround would be a second thing to
  * get wrong.
  *
- * Refuses the engineering account by construction, exactly as certify.ts does.
+ * REVOKED (explicit owner instruction): this module previously refused
+ * suaibamr@gmail.com by construction, exactly as certify.ts did. The owner
+ * has since directed that account be available like any other account
+ * throughout My Tutor, so that check has been removed here too — see the
+ * same revocation in scripts/math/certify.ts and
+ * scripts/certification/measurementIdentity.ts (PROTECTED_ACCOUNTS).
  */
 import { mergeCookies, csrfTokenFromJar } from '../math/certify'
 
 export const BASE = process.env.QA_BASE_URL ?? 'https://my-tutor-flame.vercel.app'
-
-/** Never a real person's account. Enforced here, not left to discipline. */
-const FORBIDDEN_ACCOUNTS = ['suaibamr@gmail.com']
 
 export interface QaAccount {
   email: string
@@ -30,19 +32,12 @@ export interface QaAccount {
   cookie: string
 }
 
-function assertDisposable(email: string): void {
-  if (FORBIDDEN_ACCOUNTS.includes(email.trim().toLowerCase())) {
-    throw new Error(`${email} is an engineering account and must never be used for QA`)
-  }
-}
-
 /** Register + log in a fresh throwaway learner. */
 export async function createQaAccount(label: string): Promise<QaAccount> {
   const stamp = `${Date.now()}${Math.floor(Math.random() * 1000)}`
   const email = `qa-${label}-${stamp}@mytutor-qa.invalid`
   const password = `Qa!${stamp}aA9`
   const name = `QA ${label}`
-  assertDisposable(email)
 
   const reg = await fetch(`${BASE}/api/auth/register`, {
     method: 'POST',
@@ -58,7 +53,6 @@ export async function createQaAccount(label: string): Promise<QaAccount> {
 }
 
 export async function login(email: string, password: string): Promise<string> {
-  assertDisposable(email)
   const csrfRes = await fetch(`${BASE}/api/auth/csrf`)
   const body = (await csrfRes.json()) as { csrfToken: string }
   const jar = mergeCookies(csrfRes.headers.getSetCookie?.() ?? [])

@@ -192,12 +192,17 @@ export interface WorkerAccount {
   password: string
 }
 
-/** Accounts a certification run must never touch, whatever the environment says. */
-export const PROTECTED_ACCOUNTS = ['suaibamr@gmail.com'] as const
-
-export function isProtectedAccount(email: string): boolean {
-  return PROTECTED_ACCOUNTS.some((p) => p === email.trim().toLowerCase())
-}
+/**
+ * REVOKED (explicit owner instruction): this module previously carried
+ * PROTECTED_ACCOUNTS = ['suaibamr@gmail.com'] plus an isProtectedAccount()
+ * predicate that resolveWorkers() below refused by default (liftable only
+ * via a per-worker CERT_WORKER_<n>_DESIGNATED_TEST_ACCOUNT=true override).
+ * The owner has since directed that account be available like any other
+ * account throughout My Tutor, so the predicate, the constant, and the
+ * refusal (and its override mechanism, which no longer has anything to
+ * override) have been removed. See the same revocation in
+ * scripts/math/certify.ts and scripts/qa/liveAccount.ts.
+ */
 
 export type WorkerResolution =
   | { ok: true; workers: WorkerAccount[] }
@@ -207,25 +212,8 @@ export type WorkerResolution =
  * Read worker credentials from the environment.
  *
  * Expects CERT_WORKER_1_EMAIL / CERT_WORKER_1_PASSWORD … up to `wanted`.
- * Refuses on: a missing pair, a duplicated email across workers (which would
- * silently reunite two workers on one account), or a protected account.
- *
- * ── SCOPED, EXPLICIT OVERRIDE FOR AN OPERATOR-DESIGNATED TEST ACCOUNT ───────
- * `PROTECTED_ACCOUNTS` exists because one specific email has been the
- * project's engineering/owner account throughout this repository's history —
- * every prior certification harness has refused it by construction, and that
- * default must not weaken globally or silently.
- *
- * An operator can, for one run, designate that SAME email as a genuine test
- * account instead (e.g. a throwaway alias they control). This is accepted
- * only via an explicit, per-worker, environment-based flag —
- * `CERT_WORKER_<n>_DESIGNATED_TEST_ACCOUNT=true` — set alongside that
- * worker's own credentials. Unset (the default), the refusal is unchanged:
- * nothing about `isProtectedAccount` or `PROTECTED_ACCOUNTS` itself is
- * touched, and no other caller (e.g. scripts/math/certify.ts's own
- * FORBIDDEN_ACCOUNTS) is affected — this override lives only in this
- * function's own credential-resolution path, for this harness, for the one
- * worker slot an operator explicitly flags.
+ * Refuses on: a missing pair, or a duplicated email across workers (which
+ * would silently reunite two workers on one account).
  */
 export function resolveWorkers(
   env: Record<string, string | undefined>,
@@ -237,18 +225,6 @@ export function resolveWorkers(
     const password = env[`CERT_WORKER_${i}_PASSWORD`] ?? ''
     if (!email || !password) {
       return { ok: false, error: `worker ${i}: CERT_WORKER_${i}_EMAIL/PASSWORD not set` }
-    }
-    if (isProtectedAccount(email)) {
-      const designated = (env[`CERT_WORKER_${i}_DESIGNATED_TEST_ACCOUNT`] ?? '').trim().toLowerCase()
-      if (designated !== 'true') {
-        return {
-          ok: false,
-          error:
-            `worker ${i}: refuses to use the protected account ${email} — set ` +
-            `CERT_WORKER_${i}_DESIGNATED_TEST_ACCOUNT=true to explicitly designate it as a ` +
-            'test account for this run (the default protection is otherwise unchanged)',
-        }
-      }
     }
     workers.push({ workerId: `w${i}`, accountLabel: email, email, password })
   }

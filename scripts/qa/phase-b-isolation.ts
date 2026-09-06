@@ -9,10 +9,11 @@
  * verdict. The server-side proof — what `pendingMcq` actually holds, and whose
  * lesson it names — is read from the database, not inferred from prose.
  *
- * ACCOUNT. `liveAccount.ts` refuses `suaibamr@gmail.com` by construction and
- * that guard is deliberately NOT relaxed: it is the right default. This script
- * takes credentials from the environment instead, so using the real account is
- * an explicit act at the call site rather than a weakened shared helper.
+ * ACCOUNT. `liveAccount.ts` no longer refuses `suaibamr@gmail.com` (REVOKED
+ * by explicit owner instruction — that account is now available like any
+ * other account throughout My Tutor). This script still takes credentials
+ * from the environment rather than hardcoding one, so which account is used
+ * remains an explicit act at the call site.
  *
  *   QA_EMAIL=... QA_PASSWORD=... npx tsx scripts/qa/phase-b-isolation.ts
  *

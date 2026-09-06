@@ -2,8 +2,10 @@
  * PHASE 5 LIVE — lesson integrity, evidence & progression.
  *
  * Disposable account only, deleted afterwards with re-login verified blocked.
- * Never the real user account (liveAccount.ts's FORBIDDEN_ACCOUNTS enforces
- * this structurally, not by discipline).
+ * (liveAccount.ts's FORBIDDEN_ACCOUNTS check was REVOKED by explicit owner
+ * instruction, 2026-09-06 — the real account is no longer refused
+ * structurally — but this script's own account is still a throwaway
+ * `qa-*@mytutor-qa.invalid` one, since it is deleted at the end.)
  *
  * ── MEASURED vs INFERRED, enforced rather than remembered ───────────────────
  * STRUCTURAL (server-owned, exact): `mastery` (phase and counters) and `mcq`.

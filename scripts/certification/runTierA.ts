@@ -23,10 +23,15 @@
  * ── OPERATOR DECISIONS THIS RUNNER ENCODES (recorded, not invented) ────────
  * Asked and answered explicitly before this file was written:
  *   1. Runner path:      NEW Tier-A runner (this file), not certify.ts's CLI
- *                         — so W1 (suaibamr@gmail.com) can run via the
- *                         existing DESIGNATED_TEST_ACCOUNT override, which
- *                         certify.ts's own FORBIDDEN_ACCOUNTS has no
- *                         override for.
+ *                         — at the time this was written, so W1
+ *                         (suaibamr@gmail.com) could run via the
+ *                         DESIGNATED_TEST_ACCOUNT override, which
+ *                         certify.ts's own FORBIDDEN_ACCOUNTS had no
+ *                         override for. REVOKED since (explicit owner
+ *                         instruction): that account is no longer refused
+ *                         anywhere, so the override this reasoning depended
+ *                         on no longer exists — recorded here as history,
+ *                         not as a live constraint on this file's design.
  *   2. Worker assignment: subject-partitioned, 2 workers per subject —
  *                         physics -> w1, w3 / chemistry -> w2, w4. Each
  *                         worker's slice of a subject is processed serially

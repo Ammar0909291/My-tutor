@@ -14,7 +14,6 @@ import {
   PROTOCOL_VERSION,
   classifyVerdict,
   detectDirtyState,
-  isProtectedAccount,
   resolveWorkers,
 } from '../../scripts/certification/measurementIdentity'
 import {
@@ -168,62 +167,17 @@ describe('I-1 — isolation is per ACCOUNT, not per process', () => {
     if (!r.ok) expect(r.error).toMatch(/share one account/)
   })
 
-  it('refuses the protected engineering account anywhere in the pool', () => {
-    const bad = { ...env(4), CERT_WORKER_3_EMAIL: 'suaibamr@gmail.com' }
-    const r = resolveWorkers(bad, 4)
-    expect(r).toMatchObject({ ok: false })
-    if (!r.ok) expect(r.error).toMatch(/protected account/)
-    expect(isProtectedAccount('SUAIBAMR@GMAIL.COM')).toBe(true)
-    expect(isProtectedAccount('explorewithpappu@gmail.com')).toBe(false)
-  })
-
-  describe('scoped, explicit test-account override for a protected email', () => {
-    it('still refuses by default — the override is opt-in, not a policy change', () => {
-      const bad = { ...env(4), CERT_WORKER_2_EMAIL: 'suaibamr@gmail.com' }
-      const r = resolveWorkers(bad, 4)
-      expect(r).toMatchObject({ ok: false })
-      if (!r.ok) expect(r.error).toMatch(/protected account/)
-    })
-
-    it('accepts it ONLY when that exact worker slot is explicitly designated', () => {
-      const designated = {
-        ...env(4),
-        CERT_WORKER_2_EMAIL: 'suaibamr@gmail.com',
-        CERT_WORKER_2_DESIGNATED_TEST_ACCOUNT: 'true',
-      }
-      const r = resolveWorkers(designated, 4)
-      expect(r.ok).toBe(true)
-      if (r.ok) expect(r.workers.find((w) => w.workerId === 'w2')?.email).toBe('suaibamr@gmail.com')
-    })
-
-    it('a designation on the WRONG worker slot does not leak protection to another slot', () => {
-      const wrongSlot = {
-        ...env(4),
-        CERT_WORKER_2_EMAIL: 'suaibamr@gmail.com',
-        // Designation flag set on worker 3, not worker 2 — must not help worker 2.
-        CERT_WORKER_3_DESIGNATED_TEST_ACCOUNT: 'true',
-      }
-      const r = resolveWorkers(wrongSlot, 4)
-      expect(r).toMatchObject({ ok: false })
-      if (!r.ok) expect(r.error).toMatch(/protected account/)
-    })
-
-    it('a falsy or malformed designation value is still refused', () => {
-      for (const value of ['false', 'yes', '1', 'TRUE_', '']) {
-        const r = resolveWorkers(
-          { ...env(4), CERT_WORKER_2_EMAIL: 'suaibamr@gmail.com', CERT_WORKER_2_DESIGNATED_TEST_ACCOUNT: value },
-          4,
-        )
-        expect(r).toMatchObject({ ok: false })
-      }
-    })
-
-    it('leaves isProtectedAccount and PROTECTED_ACCOUNTS themselves untouched', () => {
-      // The override lives entirely in resolveWorkers' own credential path —
-      // it must not weaken the general predicate every other caller relies on
-      // (e.g. scripts/math/certify.ts's own, independent FORBIDDEN_ACCOUNTS check).
-      expect(isProtectedAccount('suaibamr@gmail.com')).toBe(true)
-    })
+  it('REVOKED (explicit owner instruction): suaibamr@gmail.com is accepted like any other account', () => {
+    // This module previously refused this email everywhere in the pool
+    // (PROTECTED_ACCOUNTS / isProtectedAccount, liftable only via a
+    // per-worker CERT_WORKER_<n>_DESIGNATED_TEST_ACCOUNT=true override). The
+    // owner has since directed that it be available like any other account
+    // throughout My Tutor, so resolveWorkers no longer special-cases it at
+    // all — no override flag needed, isolation (I-1) is still the only rule.
+    const ok = { ...env(4), CERT_WORKER_3_EMAIL: 'suaibamr@gmail.com' }
+    const r = resolveWorkers(ok, 4)
+    expect(r.ok).toBe(true)
+    if (r.ok) expect(r.workers.find((w) => w.workerId === 'w3')?.email).toBe('suaibamr@gmail.com')
   })
 })
 
