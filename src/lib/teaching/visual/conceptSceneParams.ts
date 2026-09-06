@@ -70,6 +70,7 @@ const CANONICAL_SCENES: Record<string, () => SceneSpec> = {
   // zero-length velocity vector, which the scene validator correctly rejects.
   collision:       () => fromRegistry('collision'),
   torque_diagram:  () => fromRegistry('torque_diagram'),
+  electric_dipole: () => fromRegistry('electric_dipole'),
   gravitation_orbit: () => fromRegistry('gravitation_orbit'),
   ray_optics:      () => fromRegistry('ray_optics'),
   electric_circuit: () => fromRegistry('electric_circuit'),
@@ -150,6 +151,13 @@ const CANONICAL_SCENES: Record<string, () => SceneSpec> = {
  * concept's VisualCard rather than showing a figure of something else.
  */
 const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
+  // The ONLY concept bound to the 'electric_dipole' generator kind (Physics
+  // Interactive Lesson Upgrade) — a concept-owned figure, not a kind default
+  // shared across several concepts, so it is registered here rather than in
+  // CANONICAL_SCENES: two charges, p = qd, the field, the forces, and the
+  // torque τ = pE sinθ, built specifically for phys.em.electric-dipole.
+  'phys.em.electric-dipole': () => fromRegistry('electric_dipole'),
+
   // Reflection and mirrors are mirror problems, not lens problems.
   'phys.opt.reflection': () => buildRayOpticsScene({ opticsType: 'concave_mirror', objectDistance: 30, focalLength: 10, objectHeight: 5 }),
   'phys.opt.mirrors':    () => buildRayOpticsScene({ opticsType: 'concave_mirror', objectDistance: 30, focalLength: 10, objectHeight: 5 }),

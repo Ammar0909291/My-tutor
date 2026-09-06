@@ -475,3 +475,151 @@ export function buildRemediationFallbackText(conceptSentence: string | null | un
     + 'Tell me which part of that is the fuzzy one, and I will go slower there.'
   )
 }
+
+/**
+ * THE MOST RECENT ASSISTANT TURN — the input every repeat rule above depends on.
+ *
+ * ── THE DEFECT THIS CLOSES (measured, production, 2026-09-05) ───────────────
+ * `route.ts` loads its window as `orderBy: { createdAt: 'desc' }` — NEWEST
+ * FIRST — and every one of its fourteen other readers takes `.find(...)` or
+ * `[0]`, which on that ordering is the most recent message. The one reader that
+ * feeds the repeat rules took `.slice(-1)[0]` instead: the LAST element of a
+ * newest-first array, i.e. the OLDEST assistant message in a 30-message window.
+ *
+ * So `previousAssistantText` was not the previous turn. Both consumers of it
+ * were therefore comparing against the wrong message, and neither could fire:
+ *
+ *   · `checkRemediationOutput`'s check 0 (`repeats-previous-turn`) — the
+ *     unscoped floor written FOR the three-consecutive-repeat incident on
+ *     phys.mech.friction — never once reported that violation in production.
+ *   · `wouldRepeatPreviousTurn`'s swap to the other source never engaged:
+ *     measured on phys.stat.phase-transitions, four consecutive rejected
+ *     repairs all logged `usedHeldCard: true, usedCurriculumSentence: false`
+ *     while the learner received the identical paragraph four times, including
+ *     on the turn they said "sir you say same thing again about magnet".
+ *
+ * Both rules were correct. Both were fed a value that could not trigger them —
+ * the same shape as AMP-B: the line does the right thing with the input it is
+ * given, and the input was wrong.
+ *
+ * ── WHY IT READS `createdAt` RATHER THAN AN INDEX ───────────────────────────
+ * Taking `[0]` would be correct today and silently wrong the day that query's
+ * `orderBy` changes, which is exactly how this defect was born. Picking the
+ * maximum `createdAt` is correct under ANY ordering, so the caller cannot
+ * reintroduce it. Falls back to array order only when no timestamp is present.
+ *
+ * Pure. Never throws — a repeat check that cannot read its input must degrade
+ * to "no previous turn" (no violation), never take the turn down.
+ */
+export function mostRecentAssistantText(
+  messages: ReadonlyArray<{ role: unknown; content?: unknown; createdAt?: unknown }> | null | undefined,
+  assistantRole: unknown = 'ASSISTANT',
+): string | null {
+  try {
+    if (!Array.isArray(messages) || messages.length === 0) return null
+    let best: { content: string; at: number } | null = null
+    for (let i = 0; i < messages.length; i++) {
+      const m = messages[i]
+      if (!m || m.role !== assistantRole) continue
+      if (typeof m.content !== 'string' || m.content.length === 0) continue
+      const raw = m.createdAt
+      const at =
+        raw instanceof Date ? raw.getTime()
+          : typeof raw === 'string' || typeof raw === 'number' ? new Date(raw).getTime()
+            : Number.NaN
+      // No usable timestamp anywhere: fall back to "first match wins", which is
+      // the newest under this route's own newest-first ordering.
+      if (!Number.isFinite(at)) {
+        if (best === null) best = { content: m.content, at: Number.NEGATIVE_INFINITY }
+        continue
+      }
+      if (best === null || at > best.at) best = { content: m.content, at }
+    }
+    return best?.content ?? null
+  } catch {
+    return null
+  }
+}
+
+/** Why the curriculum-sentence alternative could not be offered this turn. */
+export type RemediationAltUnavailable =
+  | 'unresolved-concept'      // no concept id resolved for this turn
+  | 'no-kg-description'       // concept resolved; the KG carries no description
+  | 'sentence-rejected'       // a description exists; buildRemediationFallbackText refused it
+  | 'alt-also-repeats'        // the alternative was itself just said
+
+export interface RemediationFallbackChoice {
+  /** The text to serve, or null when there is nothing trusted to say. */
+  text: string | null
+  source: 'held-card' | 'curriculum-sentence' | 'none'
+  /**
+   * Set ONLY when the held card would repeat the previous turn and the
+   * alternative could not replace it — i.e. the learner is about to receive
+   * the same words twice and this run knows exactly why it could not avoid it.
+   * Null whenever no repeat was in prospect, or the swap succeeded.
+   */
+  repeatUnavoidableReason: RemediationAltUnavailable | null
+}
+
+/**
+ * WHICH TRUSTED SOURCE TO SERVE WHEN THE REPAIR HAS ALREADY FAILED.
+ *
+ * Behaviour is byte-for-byte the selection `route.ts` already performed — held
+ * card first, swap to the curriculum sentence when the card would repeat the
+ * previous turn — extracted so it can be driven by tests directly instead of
+ * through a mirror, and so the "could not avoid the repeat" case reports WHY
+ * instead of passing silently.
+ *
+ * It invents nothing. Both candidates are existing trusted material: the
+ * owner-approved card, and the curriculum's own sentence. When neither is
+ * fresh, the repeat still ships — repeating a correct, notation-free
+ * explanation remains better than emitting the rejected draft's notation — but
+ * it ships NAMED, which is the difference between a known cost and a silent one.
+ */
+export function selectRemediationFallback(input: {
+  heldCardText: string | null | undefined
+  conceptSentence: string | null | undefined
+  previousAssistantText: string | null | undefined
+  /** Present only when the KG lookup itself could not run or found nothing. */
+  conceptResolved?: boolean
+}): RemediationFallbackChoice {
+  // `?? `, not a truthiness test: the inline selection this replaces used
+  // `heldCardText ?? buildRemediationFallbackText(…)`, so ONLY null/undefined
+  // fall through to the sentence. An empty string cannot occur here in practice
+  // (`remediationHoldCardText` is either null or a card's own plainExplanation)
+  // but matching the old operator exactly keeps the extraction provably
+  // behaviour-preserving instead of quietly changing an unrelated edge case.
+  const held = input.heldCardText ?? null
+  const sentenceText = buildRemediationFallbackText(input.conceptSentence)
+  const prev = input.previousAssistantText
+
+  // Why the alternative is unavailable, decided once and reused below.
+  const altReason: RemediationAltUnavailable | null = sentenceText
+    ? null
+    : input.conceptResolved === false ? 'unresolved-concept'
+      : (input.conceptSentence ?? '').trim().length === 0 ? 'no-kg-description'
+        : 'sentence-rejected'
+
+  const first = held ?? sentenceText
+  if (!first) return { text: null, source: 'none', repeatUnavoidableReason: altReason }
+
+  if (!wouldRepeatPreviousTurn(first, prev)) {
+    return {
+      text: first,
+      source: held ? 'held-card' : 'curriculum-sentence',
+      repeatUnavoidableReason: null,
+    }
+  }
+
+  // The first choice would repeat. Reach for the OTHER trusted source.
+  const alt = held ? sentenceText : null
+  if (alt && !wouldRepeatPreviousTurn(alt, prev)) {
+    return { text: alt, source: 'curriculum-sentence', repeatUnavoidableReason: null }
+  }
+
+  return {
+    text: first,
+    source: held ? 'held-card' : 'curriculum-sentence',
+    repeatUnavoidableReason: alt ? 'alt-also-repeats' : altReason,
+  }
+}

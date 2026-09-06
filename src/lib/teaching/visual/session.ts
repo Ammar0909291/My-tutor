@@ -202,9 +202,40 @@ export function isExplicitTopicRequest(message: string): boolean {
   return TOPIC_REQUEST_RE.test(message ?? '')
 }
 
+/**
+ * E4 · THE WRONG-SUBJECT CORRECTION — a different speech act from "I meant X,
+ * not Y", and the reason a learner could not escape a cross-subject detour.
+ *
+ * MEASURED, production, 2026-09-05, physics `phys.wave.beats`. A bogus
+ * knowledge gap had opened a detour onto `eng.speaking.asking-and-answering-
+ * questions`. The learner wrote:
+ *
+ *   "sir this is wrong. i am studying physics beats lesson not english.
+ *    why you are teaching me about asking questions"
+ *
+ * and the detour STAYED OPEN (`transition: 'continued'`) for two more turns.
+ * `isExplicitCorrection` returned FALSE: every alternative above is built
+ * around "I meant"/"didn't mean", which corrects the TOPIC. This learner is
+ * correcting the SUBJECT, and said so as plainly as it can be said.
+ *
+ * The shape is a statement about what they are studying, carrying an explicit
+ * contrastive negation. It is NOT a sentiment detector and deliberately does
+ * not fire on "this is wrong" alone — a learner says that about an ANSWER far
+ * more often than about a lesson, and the studying verb is what separates the
+ * two. No subject names appear here; a list of subjects would be a list about
+ * the curriculum, which this file does not keep.
+ *
+ * The negative lookahead exists because "i am studying this but i do not
+ * understand" would otherwise match: a negated VERB is a report of difficulty,
+ * not a contrast between two subjects. Only a negated OBJECT is a correction.
+ */
+const WRONG_SUBJECT_CORRECTION_RE =
+  /\bi(?:\s+am|'?m)\b[^.!?]{0,60}\b(?:studying|study|learning|doing)\b[^.!?]{0,60}\bnot\b(?!\s+(?:understand|understanding|know|knowing|knew|sure|get|getting|able|really|very|clear|clearly|going|good|ok|okay|done|finished))|\bi(?:\s+am|'?m)\s+not\s+(?:studying|study|learning|doing)\b/i
+
 /** Did the learner explicitly say the current topic is not what they meant? */
 export function isExplicitCorrection(message: string): boolean {
-  return EXPLICIT_CORRECTION_RE.test(message ?? '')
+  const text = message ?? ''
+  return EXPLICIT_CORRECTION_RE.test(text) || WRONG_SUBJECT_CORRECTION_RE.test(text)
 }
 
 /**

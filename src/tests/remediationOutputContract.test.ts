@@ -288,8 +288,18 @@ describe('H3 — the floor is actually on the turn path', () => {
   })
 
   it('it is excluded on deterministically-served turns, exactly like the affirm floor', () => {
-    const block = ROUTE.slice(ROUTE.indexOf('[remediation-floor]') - 2000, ROUTE.indexOf('[remediation-floor]'))
-    expect(block).toMatch(/servedDeterministically/)
+    // SUPERSEDED ASSERTION (2026-09-05). This read the 2,000 characters
+    // immediately before the first `[remediation-floor]` log and matched
+    // /servedDeterministically/ in them. That is a proxy for "the guard is
+    // near", not for the invariant, and it measured BYTE DISTANCE: adding a
+    // comment between the guard and the log broke it while the guard itself was
+    // untouched and still enclosing the floor. It now asserts the invariant
+    // directly — the guard exists, and it opens before the floor it governs —
+    // which is what this test was always for and cannot be moved by prose.
+    const guard = ROUTE.indexOf('if (!servedDeterministically && conversationDecisionHoisted)')
+    const floor = ROUTE.indexOf('[remediation-floor]')
+    expect(guard).toBeGreaterThan(-1)
+    expect(floor).toBeGreaterThan(guard)
   })
 
   it('O — it touches no mastery, grading or ladder state', () => {

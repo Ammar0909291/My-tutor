@@ -5911,6 +5911,39 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         cleanText = normalizeMathDelimiters(cleanText)
       } catch { /* non-fatal — raw text is still better than no answer */ }
 
+      // THE FIELD-LINE SIGN CONTRACT — the same guard the opening turn runs.
+      //
+      // L3 was MEASURED at lesson-init (1 inversion in 22 openings) and wired
+      // there first, because that is where it was observed. This route was
+      // sampled 8 times with a question aimed straight at the sign and
+      // inverted 0 times — which at a ~4.5% base rate is "no evidence", not
+      // "proven safe": 8 samples cannot distinguish 0% from 4.5%.
+      //
+      // What IS established is that this route generates the same class of
+      // prose about the same concept. Measured in the same sampling run, real
+      // production replies from here included "The arrows you see labeled
+      // **Electric Field Lines (E)** are showing the direction of the electric
+      // field **E**…" and "The field lines also show where the field starts
+      // and ends…". A route that teaches field-line direction can get its sign
+      // backwards exactly as the opening turn did.
+      //
+      // The SAME function, not a second implementation — one contract, one
+      // definition, so the two paths cannot drift about what is true. It is
+      // concept-scoped to phys.em.electric-field, idempotent, and a no-op for
+      // every other lesson and for text it does not govern.
+      try {
+        const { repairFieldLineSign } = await import('@/lib/teaching/fieldLineSignGuard')
+        const sign = repairFieldLineSign(cleanText, decisionConceptIdHoisted)
+        if (sign.repaired.length > 0) {
+          console.warn('[learn/chat] ' + JSON.stringify({
+            event: 'field-line-sign-repaired',
+            conceptId: decisionConceptIdHoisted,
+            repaired: sign.repaired,
+          }))
+          cleanText = sign.text
+        }
+      } catch { /* non-fatal — a repair must never break a turn */ }
+
       // CRITERION 5 — A CORRECT ANSWER IS TOLD IT WAS CORRECT.
       //
       // Measured 2026-08-30 by rubricScore.ts: only 39% of server-graded-correct
@@ -6541,8 +6574,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         try {
           const {
             isRemediationTurn, checkRemediationOutput,
-            buildRemediationRepairAppendix, buildRemediationFallbackText,
-            wouldRepeatPreviousTurn,
+            buildRemediationRepairAppendix,
+            mostRecentAssistantText, selectRemediationFallback,
           } = await import('@/lib/teaching/remediationOutputContract')
           const remediationTurn = isRemediationTurn(conversationDecisionHoisted.type)
           // The learner voiced a failure-state utterance (recoveryGuard.ts)
@@ -6556,9 +6589,21 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // REPRESENTATION entirely" half never arrived, and this floor had
           // never run on a RECOVERY turn to catch it.
           const recoveryTurn = conversationDecisionHoisted.type === 'RECOVERY'
-          const previousAssistantText = learnSession.messages
-            .filter((m) => m.role === MessageRole.ASSISTANT)
-            .slice(-1)[0]?.content ?? null
+          // THE PREVIOUS TURN — and the input both repeat rules below depend on.
+          //
+          // This read was `.filter(ASSISTANT).slice(-1)[0]`. The window above is
+          // loaded `orderBy: { createdAt: 'desc' }` — NEWEST FIRST — so the last
+          // element is the OLDEST assistant message in a 30-message window, not
+          // the previous turn. Every other reader of `learnSession.messages` in
+          // this file takes `.find(...)` or `[0]`, which is the recent end; this
+          // was the single outlier, and it fed BOTH `checkRemediationOutput`'s
+          // `repeats-previous-turn` floor and the fallback's repeat-avoidance
+          // swap. Neither could fire, because neither was ever shown the turn it
+          // was comparing against. See mostRecentAssistantText's own header for
+          // the production measurement.
+          const previousAssistantText = mostRecentAssistantText(
+            learnSession.messages, MessageRole.ASSISTANT,
+          )
           const verdict = checkRemediationOutput({
             remediationTurn,
             recoveryTurn,
@@ -6592,6 +6637,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // it has one. The repair still runs without it.
             let authored = ''
             let conceptSentence: string | null = null
+            // Declared here so the log line below reports what actually landed;
+            // stays null unless the repair was rejected and a fallback ran.
+            let choice: ReturnType<typeof selectRemediationFallback> | null = null
             try {
               if (conceptForFloor) {
                 const { getKGNode } = await import('@/lib/curriculum/knowledgeGraph')
@@ -6655,8 +6703,6 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // notation-free by construction, and it is already the authority
               // governing this turn. The KG sentence remains the fallback for
               // concepts that have no card, which is most of the product.
-              let fallback = remediationHoldCardText
-                ?? buildRemediationFallbackText(conceptSentence)
               // BUT NOT IF IT IS THE IDENTICAL THING JUST SAID. This fallback
               // has no memory of what it already served, and when the repair
               // fails on two consecutive turns the same deterministic source
@@ -6666,18 +6712,19 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // a repeat: the held card and the curriculum sentence are
               // different text, so trying the one not just used is enough to
               // break the loop the overwhelming majority of the time.
-              if (fallback && wouldRepeatPreviousTurn(fallback, previousAssistantText)) {
-                const alt = remediationHoldCardText
-                  ? buildRemediationFallbackText(conceptSentence)
-                  : null
-                if (alt && !wouldRepeatPreviousTurn(alt, previousAssistantText)) fallback = alt
-                // Neither source is fresh (both already said, or no curriculum
-                // sentence exists): repeating a correct, notation-free
-                // explanation is still the least-bad option left, and better
-                // than the alternative of letting the rejected draft's
-                // notation through. Stands as-is.
-              }
-              if (fallback) cleanText = fallback
+              //
+              // The selection itself now lives in the contract module so it can
+              // be driven by tests directly rather than through a mirror, and so
+              // the case it CANNOT solve reports which of the four reasons it
+              // hit instead of passing silently. Same two candidates, same
+              // order, same outcome — nothing new is generated or paraphrased.
+              choice = selectRemediationFallback({
+                heldCardText: remediationHoldCardText,
+                conceptSentence,
+                previousAssistantText,
+                conceptResolved: conceptForFloor !== null,
+              })
+              if (choice.text) cleanText = choice.text
             }
             console.log('[remediation-floor] repaired', {
               violation: verdict.violation,
@@ -6685,9 +6732,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // Which source actually landed in cleanText when the repair was
               // rejected, not merely which one was available — the two
               // diverge exactly when the repeat-avoidance swap above fired.
-              usedHeldCard: stillViolating && cleanText === remediationHoldCardText,
-              usedCurriculumSentence:
-                stillViolating && cleanText !== remediationHoldCardText && cleanText !== repaired,
+              usedHeldCard: stillViolating && choice?.source === 'held-card',
+              usedCurriculumSentence: stillViolating && choice?.source === 'curriculum-sentence',
+              // THE PREVIOUSLY UNPROVEN PATH. Null on every healthy turn; set
+              // only when the learner is about to receive the same words twice
+              // and this run could not avoid it. Names which of the four causes
+              // it was, so the next incident is diagnosable from logs alone
+              // rather than by reconstructing a transcript.
+              repeatUnavoidable: choice?.repeatUnavoidableReason ?? null,
             })
           }
         } catch (err) {

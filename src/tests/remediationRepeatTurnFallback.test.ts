@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { REMEDIATION_CARDS, renderRemediationCard } from '@/lib/teaching/remediationCards'
-import { checkRemediationOutput } from '@/lib/teaching/remediationOutputContract'
+import { checkRemediationOutput, selectRemediationFallback } from '@/lib/teaching/remediationOutputContract'
 import { turnTaughtSomething } from '@/lib/teaching/teachingContent'
 
 const ROUTE = readFileSync(
@@ -55,10 +55,18 @@ describe('the repeat remediation turn is governed by the card too', () => {
   })
 
   it('and the fallback prefers that card over the curriculum sentence', () => {
-    // `let`, not `const`, since the repeat-avoidance swap (below) needs to
-    // reassign it — see wouldRepeatPreviousTurn's own test file for that.
-    expect(ROUTE).toMatch(
-      /let fallback = remediationHoldCardText\s*\n?\s*\?\?\s*buildRemediationFallbackText\(conceptSentence\)/,
-    )
+    // SUPERSEDED SHAPE (2026-09-05). This matched the inline
+    // `let fallback = remediationHoldCardText ?? buildRemediationFallbackText(…)`
+    // expression. That selection moved into `selectRemediationFallback` so it
+    // could be tested directly; the PREFERENCE it encodes is unchanged, and is
+    // now asserted as behaviour rather than as source text.
+    const choice = selectRemediationFallback({
+      heldCardText: CARD,
+      conceptSentence: 'A perfectly good curriculum sentence that is long enough to be used here.',
+      previousAssistantText: null,   // nothing repeated yet: pure preference
+      conceptResolved: true,
+    })
+    expect(choice.source).toBe('held-card')
+    expect(choice.text).toBe(CARD)
   })
 })

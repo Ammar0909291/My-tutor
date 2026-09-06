@@ -37,6 +37,7 @@ import { extractPyramidParams, buildDemographicPyramidScene, checkPyramidConsist
 import { extractCoordinateGeometryParams, buildCoordinateGeometryLineScene, checkCoordinateGeometryConsistency } from './coordinateGeometryLine'
 import { extractPunnettParams, buildPunnettSquareScene, checkPunnettConsistency } from './punnettSquare'
 import { extractTorqueParams, buildTorqueScene, checkTorqueConsistency } from './torqueDiagram'
+import { extractDipoleParams, buildDipoleScene, checkDipoleConsistency } from './electricDipole'
 import { extractGravitationParams, buildGravitationOrbitScene, checkGravitationConsistency } from './gravitationOrbit'
 import { extractStatisticsParams, buildStatisticsBarChartScene, checkStatisticsConsistency } from './statisticsBarChart'
 import { extractEcologicalPyramidParams, buildEcologicalPyramidScene, checkEcologicalPyramidConsistency } from './ecologicalPyramid'
@@ -46,7 +47,7 @@ import { extractPeriodicTrendParams, buildPeriodicTrendScene, checkPeriodicTrend
 import { extractCellDivisionParams, buildCellDivisionScene, checkCellDivisionConsistency } from './cellDivision'
 import { extractDNAStructureParams, buildDNAStructureScene, checkDNAStructureConsistency } from './dnaStructure'
 
-export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum' | 'electron_shells' | 'lattice' | 'collision' | 'ray_optics' | 'historical_timeline' | 'economics_curves' | 'calculus_graph' | 'civics_org_chart' | 'electric_circuit' | 'kinematics_graphs' | 'heights_and_distances' | 'demographic_pyramid' | 'coordinate_geometry_line' | 'punnett_square' | 'torque_diagram' | 'gravitation_orbit' | 'statistics_bar_chart' | 'ecological_pyramid' | 'logic_gate' | 'er_diagram' | 'periodic_trends' | 'cell_division' | 'dna_structure'
+export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum' | 'electron_shells' | 'lattice' | 'collision' | 'ray_optics' | 'historical_timeline' | 'economics_curves' | 'calculus_graph' | 'civics_org_chart' | 'electric_circuit' | 'kinematics_graphs' | 'heights_and_distances' | 'demographic_pyramid' | 'coordinate_geometry_line' | 'punnett_square' | 'torque_diagram' | 'gravitation_orbit' | 'statistics_bar_chart' | 'ecological_pyramid' | 'logic_gate' | 'er_diagram' | 'periodic_trends' | 'cell_division' | 'dna_structure' | 'electric_dipole'
 
 // INTENTIONALLY OUT OF SCOPE — do not add these as scene generators:
 //  • SHM / y=A·sin(ωt) graphs — already owned by the existing 2D graph engine
@@ -122,6 +123,19 @@ const ROUTE_RULES: RouteRule[] = [
     keywords: [
       'projectile', 'trajectory', 'launch angle', 'launched at', 'thrown at',
       'ballistic', 'initial speed', 'initial velocity', 'parabolic path',
+    ],
+  },
+  {
+    // Checked BEFORE torque_diagram: dipole prose usually says "torque on the
+    // dipole", which would otherwise be caught by torque_diagram's bare
+    // 'torque' keyword. These keys are dipole-specific ("dipole moment",
+    // "two equal and opposite charges", "p = qd") and never appear in a
+    // plain lever-arm torque problem, so the reverse can't happen either.
+    kind: 'electric_dipole',
+    keywords: [
+      'electric dipole', 'electric dipole moment', 'dipole in a field', 'dipole in an electric field',
+      'two equal and opposite charges', 'polar molecule', 'p = qd', 'torque on the dipole',
+      'torque on a dipole', 'dipole in an external field',
     ],
   },
   {
@@ -503,6 +517,7 @@ export async function generateRoutedScene(text: string): Promise<SceneSpec | nul
     case 'coordinate_geometry_line': return runWithLogging(kind, text, extractCoordinateGeometryParams, buildCoordinateGeometryLineScene, checkCoordinateGeometryConsistency)
     case 'punnett_square': return runWithLogging(kind, text, extractPunnettParams, buildPunnettSquareScene, checkPunnettConsistency)
     case 'torque_diagram': return runWithLogging(kind, text, extractTorqueParams, buildTorqueScene, checkTorqueConsistency)
+    case 'electric_dipole': return runWithLogging(kind, text, extractDipoleParams, buildDipoleScene, checkDipoleConsistency)
     case 'gravitation_orbit': return runWithLogging(kind, text, extractGravitationParams, buildGravitationOrbitScene, checkGravitationConsistency)
     case 'statistics_bar_chart': return runWithLogging(kind, text, extractStatisticsParams, buildStatisticsBarChartScene, checkStatisticsConsistency)
     case 'ecological_pyramid': return runWithLogging(kind, text, extractEcologicalPyramidParams, buildEcologicalPyramidScene, checkEcologicalPyramidConsistency)

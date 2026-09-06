@@ -508,6 +508,39 @@ export async function POST(req: Request) {
     // the chat route does not reach it. The learner's FIRST contact with a
     // lesson was "### 2. Real-life situation" … "### 7. Formula (only if
     // needed)" — the prompt's own parenthetical, copied out to a child.
+    // THE OPENING TURN CANNOT GET THE FIELD-LINE SIGN BACKWARDS.
+    //
+    // Fourth repair in this chain, ported here for the reason the three around
+    // it already give: the opening turn lives behind its own endpoint.
+    //
+    // MEASURED on the real account, 22 openings of `phys.em.electric-field`:
+    // one said "those arrows are the *electric field lines* that show the
+    // direction a small NEGATIVE test charge would move" — the concept's
+    // central misconception, in the lesson's first sentence. 17 said
+    // "positive", 3 made no sign claim; both providers were observed. The
+    // authored content is correct, so this is generated prose and there is
+    // nothing upstream to fix.
+    //
+    // Deterministic rather than a prompt line, for the reason
+    // `fieldLineSignGuard`'s header sets out: a 4.5% error cannot be shown
+    // fixed by resampling, and this repo has measured prompt-stated rules
+    // being ignored. Concept-scoped — it is inert for every other lesson.
+    try {
+      const { repairFieldLineSign } = await import('@/lib/teaching/fieldLineSignGuard')
+      const sign = repairFieldLineSign(routed.text, topicSlug)
+      if (sign.repaired.length > 0) {
+        console.warn('[lesson-init] ' + JSON.stringify({
+          event: 'field-line-sign-repaired',
+          topicSlug,
+          repaired: sign.repaired,
+        }))
+        routed = { ...routed, text: sign.text }
+      }
+    } catch (err) {
+      // A repair must never stop a lesson from opening.
+      console.warn('[lesson-init] field-line sign check skipped:', err)
+    }
+
     try {
       const { stripScaffoldHeadings } = await import('@/lib/teaching/scaffoldHeadings')
       const scaffold = stripScaffoldHeadings(routed.text)

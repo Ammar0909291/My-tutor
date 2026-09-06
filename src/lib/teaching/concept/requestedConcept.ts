@@ -201,6 +201,92 @@ function isDiscourseOnlyMatch(matchedText: string): boolean {
 }
 
 /**
+ * E3 · A REQUEST GOVERNS ITS OWN CLAUSE, AND ONLY ITS OWN CLAUSE.
+ *
+ * ── THE DEFECT, reproduced offline from a production transcript ─────────────
+ * Physics lesson `phys.wave.beats`, real account, 2026-09-05. A weak-English
+ * learner typed:
+ *
+ *   "i dont know sir. that is what i am asking you. please dont ask me
+ *    question, please teach me why loud and soft happens"
+ *                    ^^^^^^                        ^^^^^
+ *                    matched here                  requested here
+ *
+ * and the tutor switched to teaching `eng.speaking.asking-and-answering-
+ * questions`. The concept the resolver returned was named in a DIFFERENT
+ * CLAUSE from the one the request verb governs: "teach me" governs "why loud
+ * and soft happens", which names no concept at all. "Asking" is a report of
+ * what the learner is doing, not a topic they asked for.
+ *
+ * ── WHY THIS IS NOT ANOTHER WORD LIST ──────────────────────────────────────
+ * Five lexical discriminators for this defect family have now been measured
+ * and REJECTED — three recorded in docs/architecture/WRONG_CONCEPT_RETRIEVAL.md,
+ * plus two more measured during the 2026-09-06 investigation (a deictic
+ * complement rule wrongly blocked 8 of 10 genuine requests; a definite-
+ * determiner rule wrongly blocked 3 of 11, including "teach me the
+ * derivative"). This rule is POSITIONAL: it asks where the match sits relative
+ * to the request, and reads no vocabulary at all.
+ *
+ * ── SCOPE, deliberately narrow ─────────────────────────────────────────────
+ * It applies ONLY when the message contains an explicit request phrase, i.e.
+ * only when the request is what would justify moving the teaching target. A
+ * message with no request phrase ("i dont understand photosynthesis", "i dont
+ * know enough about the mole concept") is untouched, which is what keeps every
+ * knowledge-gap path working.
+ *
+ * The DEICTIC-CLAUSE EXEMPTION matters as much as the rule. "photosynthesis,
+ * can you explain it" names its topic BEFORE the request and the request's own
+ * clause names nothing but "it". Suppressing that would be a false positive of
+ * exactly the kind this file keeps measuring and rejecting, so when the
+ * governed clause carries no content word the rule stands down and the earlier
+ * mention is honoured.
+ *
+ * ── MEASURED ───────────────────────────────────────────────────────────────
+ * Blocks the production utterance above and its sibling phrasing. Wrongly
+ * blocks 0 of 11 genuine requests measured (photosynthesis, mole concept,
+ * entropy, vectors, derivative, apoptosis, mitochondria, "teach me the
+ * derivative", "can you explain the mitochondria", "what is a derivative",
+ * "explain photosynthesis to me please"). Pinned by F7.
+ *
+ * Token-based, using the SAME tokenizer as the matcher. A raw substring search
+ * was written first and rejected: matchedText comes from a KG TITLE, so
+ * "Newton's Second Law" would not be found inside "teach me newtons second
+ * law" and a genuine request would have been suppressed by punctuation.
+ */
+function matchPrecedesItsRequest(message: string, matchedText: string): boolean {
+  const request = matchTopicRequest(message ?? '')
+  if (!request) return false                    // no request: rule inapplicable
+
+  const needle = tokens(matchedText)
+  if (needle.length === 0) return false
+
+  // Where the governed clause begins, counted in TOKENS so punctuation and
+  // spelling folds cannot shift the boundary.
+  const governedFrom = tokens((message ?? '').slice(0, request.end)).length
+  const words = tokens(message ?? '')
+
+  // Does the governed clause name anything at all? If every word after the
+  // request is discourse or deixis, the request points at what is already
+  // being taught and cannot be used to reject an earlier, genuine mention.
+  const governed = words.slice(governedFrom)
+  const namesSomething = governed.some(
+    (w) => !DISCOURSE_NOUNS.has(w) && !HEAD_STOP.has(w) && !TEACHING_CUE.has(w),
+  )
+  if (!namesSomething) return false
+
+  for (let i = 0; i + needle.length <= words.length; i++) {
+    let hit = true
+    for (let j = 0; j < needle.length; j++) {
+      if (words[i + j] !== needle[j]) { hit = false; break }
+    }
+    // An occurrence at or after the request's end IS inside the governed
+    // clause — one such occurrence is enough to keep the match.
+    if (hit && i >= governedFrom) return false
+  }
+  return true                                   // every occurrence precedes it
+}
+
+/**
  * Topic governance for the incidental rule. Wider than TEACHING_CUE because a
  * request verb governs a topic just as a teaching verb does — "show me VECTOR
  * graph" asks for vectors. It stays separate from TEACHING_CUE so that
@@ -287,6 +373,132 @@ function isLessonTopicRestated(matchedTitle: string, lessonTitle: string | null)
 }
 
 /**
+ * The phrase a title is ABOUT — its leading conjunct.
+ *
+ * "Temperature and Thermal Equilibrium" is about TEMPERATURE. "Viruses,
+ * Viroids and Lichens" is about VIRUSES. The trailing conjuncts are things
+ * the concept also covers, not what it is named for. This is the same
+ * leading-conjunct reading `resolveNamedTopicHead` already uses; it is
+ * factored out here so both callers cannot drift apart about what a title
+ * names.
+ */
+function leadingConjunct(title: string): string {
+  const head = titleHead(title) ?? title
+  return head.split(/\s+(?:and|or)\s+/i)[0] ?? head
+}
+
+// Every phrase that some concept is ABOUT, built once from the same index the
+// matcher uses. Memoized alongside `cachedIndex` and cleared with it.
+let cachedHeadNamed: ReadonlySet<string> | null = null
+function headNamedPhrases(): ReadonlySet<string> {
+  if (!cachedHeadNamed) {
+    const out = new Set<string>()
+    for (const entry of conceptIndex()) {
+      const key = tokens(leadingConjunct(entry.title)).join(' ')
+      if (key) out.add(key)
+    }
+    cachedHeadNamed = out
+  }
+  return cachedHeadNamed
+}
+
+/**
+ * E2 · THE LESSON'S OWN VOCABULARY IS NOT A TRIP AWAY FROM THE LESSON.
+ *
+ * ── THE DEFECT, reproduced offline from a production transcript ─────────────
+ * Physics lesson `phys.therm.zeroth-law` ("Zeroth Law of Thermodynamics"),
+ * real account, 2026-09-05. The learner's FIRST message of the lesson — the
+ * most ordinary opening a beginner can make — was:
+ *
+ *   "sir i dont understand what is thermal equilibrium meaning.
+ *    my english is weak please explain simple"
+ *
+ * That resolved to `phys.therm.temperature`, a listed prerequisite, and opened
+ * a knowledge-gap detour. Production telemetry: turnsHeld 6, turnsBlocked 8,
+ * closed only by R2's turn limit. While it ran, `notExcursion` blocked every
+ * authored probe and the ladder sat at OBSERVE with check 0 / practice 0 while
+ * the learner answered four questions correctly.
+ *
+ * The lesson's own KG description is, verbatim:
+ *   "If two systems are each in thermal equilibrium with a third, they are in
+ *    thermal equilibrium with each other."
+ * The learner asked about the lesson's DEFINING TERM. The resolver held that
+ * text and never read it — `isLessonTopicRestated` compares the matched text
+ * against the lesson's TITLE alone, and "Zeroth Law of Thermodynamics" does
+ * not contain the words "thermal equilibrium".
+ *
+ * ── THE THREE CONDITIONS, AND WHY EACH IS LOAD-BEARING ─────────────────────
+ * A blanket "the phrase is in the lesson description" rule was measured first
+ * and REJECTED: 397 corpus collisions, suppressing genuine prerequisite
+ * detours like "i dont understand photosynthesis" inside a plant-respiration
+ * lesson, whose description names photosynthesis outright. All three
+ * conditions together are what make this narrow enough to be safe.
+ *
+ *   1. NON-HEAD COMPONENT. The phrase must be a trailing conjunct of the
+ *      candidate's title, not what the candidate is named for. "Photosynthesis"
+ *      IS the head of `bio.plant.photosynthesis`, so that request is untouched.
+ *
+ *   2. NO CONCEPT IS HEAD-NAMED BY THE PHRASE. If any concept in any subject
+ *      is ABOUT this phrase, the learner named a real curriculum topic and may
+ *      travel to it. This single condition is what preserves every legitimate
+ *      request measured: photosynthesis, mole concept, mitochondria, benzene,
+ *      eigenvalues, entropy, apoptosis. It also preserves the CROSS-SUBJECT
+ *      contract — "teach me the mole concept" from a physics lesson still
+ *      reaches chemistry, because `chem.found.mole-concept` is head-named.
+ *      When nothing is head-named by it, the phrase is VOCABULARY rather than
+ *      a topic: no lesson exists to send the learner to.
+ *
+ *   3. THE CURRENT LESSON'S OWN DESCRIPTION USES IT. This is the positive
+ *      evidence that the lesson can answer the question where it stands.
+ *      Without it the rule would be a claim about the phrase in general; with
+ *      it, the claim is only ever "THIS lesson already covers this term".
+ *
+ * A fourth case is deliberately left to its existing owner: when the LESSON'S
+ * TITLE contains the phrase, `isLessonTopicRestated` already handles it, so
+ * this rule steps aside rather than duplicating that judgement.
+ *
+ * ── MEASURED, corpus-wide over all 1,775 concepts in six subjects ───────────
+ * 175 (lesson, phrase, candidate) triples satisfy all four conditions — 60
+ * cross-subject, 115 same-subject. Reading them, the overwhelming majority are
+ * resolutions that are WRONG TODAY and are corrected by suppression:
+ *   "resolution" in a Scope-and-Namespaces / Hashing / DNS / Plot-Structure
+ *      lesson -> `phys.meas.vector-addition` ("Vector Addition and Resolution")
+ *   "interior" in Parallel Lines / Polygon Angle Sum / Triangle Angle Sum
+ *      -> `math.top.interior-closure` (point-set topology)
+ *   "closure" in Vector Space / Group Theory / Binary Operation -> the same
+ *      topology concept, which is a different closure entirely
+ *   "range"  in a Python loops lesson -> `math.func.domain-range`
+ *   "beta"   in Signal Transduction -> `phys.mod.radioactivity`
+ *   "surroundings" in an English Interjections lesson -> `chem.thermo.system`
+ * The remainder are same-subject terms the lesson demonstrably explains
+ * (eigenvectors during Diagonalization, rate of change during Derivative
+ * (Definition), pH during Buffer Solutions), which is exactly the behaviour
+ * this rule is for: answer it here rather than pausing the lesson.
+ *
+ * Returning null does not silence the tutor. It leaves the teaching target on
+ * the lesson, and the lesson's own material is what the term is explained
+ * from — the same "an honest 'I could not name it' rather than a guess" stance
+ * the rest of this module takes.
+ */
+function lessonOwnsTheTerm(
+  matchedText: string,
+  candidateTitle: string,
+  lessonNodeTitle: string,
+  lessonDescription: string,
+): boolean {
+  const phrase = tokens(matchedText).join(' ')
+  if (!phrase) return false
+  // 1. the phrase is not what the candidate is named for
+  if (phrase === tokens(leadingConjunct(candidateTitle)).join(' ')) return false
+  // 2. no concept anywhere is ABOUT this phrase
+  if (headNamedPhrases().has(phrase)) return false
+  // 4. the lesson's TITLE already covers it -> isLessonTopicRestated's case
+  if (` ${tokens(lessonNodeTitle).join(' ')} `.includes(` ${phrase} `)) return false
+  // 3. the lesson's own definition uses the term
+  return ` ${tokens(lessonDescription).join(' ')} `.includes(` ${phrase} `)
+}
+
+/**
  * SUBJECT-LOCAL READING — the defect this closes.
  *
  * Production, 2026-08-08, lesson "Dimensional Analysis" (physics):
@@ -347,6 +559,7 @@ export function conceptIndex(): readonly ConceptIndexEntry[] {
 /** Test seam — lets a test reset memoized KG state between cases. */
 export function __resetConceptIndexCache(): void {
   cachedIndex = null
+  cachedHeadNamed = null
 }
 
 /** Stop words that never carry a topic on their own. */
@@ -475,7 +688,11 @@ export function resolveRequestedConceptId(
         // PHASE 6 P0: "the main idea", "the point" — deixis, not a subject.
         // Sits alongside the other two "is this really a topic?" filters
         // rather than anywhere else, so all three are read together.
-        !isDiscourseOnlyMatch(m.matchedText),
+        !isDiscourseOnlyMatch(m.matchedText) &&
+        // E3: named in a different clause from the request that would justify
+        // moving the teaching target. The fourth member of the same family,
+        // and the only one that reads position rather than vocabulary.
+        !matchPrecedesItsRequest(message ?? '', m.matchedText),
     )
     // Same-subject candidates win over an equally-confident foreign one. The
     // lesson's own id prefix is the subject signal — it needs no mapping table
@@ -495,14 +712,31 @@ export function resolveRequestedConceptId(
 
     // A shorter name for the lesson's own topic is the lesson, not a trip away
     // from it — keep the lesson concept and its registry binding.
+    const lessonNode = lessonConceptId ? getKGNode(lessonConceptId) : null
     if (
       requested &&
       lessonConceptId &&
       requested !== lessonConceptId &&
       best &&
-      isLessonTopicRestated(best.matchedText, getKGNode(lessonConceptId)?.title ?? null)
+      isLessonTopicRestated(best.matchedText, lessonNode?.title ?? null)
     ) {
       requested = null
+    }
+
+    // E2: the learner asked about a term the lesson's own definition already
+    // uses, and no concept in the curriculum is named for that term. Answer it
+    // here. Tested against the concept that would ACTUALLY be returned, not
+    // against `best`, because `subjectLocalReading` above may have replaced it.
+    if (requested && lessonConceptId && requested !== lessonConceptId && best && lessonNode) {
+      const candidateTitle = getKGNode(requested)?.title ?? null
+      const lessonDescription = lessonNode.description ?? null
+      if (
+        candidateTitle &&
+        lessonDescription &&
+        lessonOwnsTheTerm(best.matchedText, candidateTitle, lessonNode.title, lessonDescription)
+      ) {
+        requested = null
+      }
     }
 
     // Nothing cleared the floor. Before giving up — and giving up is what

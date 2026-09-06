@@ -434,7 +434,32 @@ export function decideExcursion(input: ExcursionInput): ExcursionDecision {
   // requestedTopicTitle resolved this turn), this falls through instead: the
   // branches below redirect to what was actually named rather than the
   // lesson, via the isExplicitCorrection addition to the concept branch.
-  if (active && isExplicitCorrection(message) && !requestedConceptId && !requestedTopicTitle) {
+  //
+  // ── E4 · A CORRECTION THAT NAMES THE TARGET IS REJECTING IT ────────────────
+  //
+  // MEASURED, production 2026-09-05, `phys.wave.beats` detoured onto
+  // `eng.speaking.asking-and-answering-questions`:
+  //
+  //   "sir this is wrong. i am studying physics beats lesson not english.
+  //    why you are teaching me about asking questions"
+  //
+  // Two independent things kept the detour alive, and BOTH had to move. The
+  // detector is fixed in session.ts (WRONG_SUBJECT_CORRECTION_RE). The second
+  // is here: the complaint NAMES the thing being complained about, so
+  // `requestedConceptId` resolved to the excursion's own current target, this
+  // branch's `!requestedConceptId` guard failed, and control fell through to
+  // the concept branch below — whose `isExplicitCorrection` disjunct then
+  // REDIRECTED the detour to the very concept the learner had just rejected.
+  //
+  // "I meant X, not Y" is the case that branch was built for and it is
+  // untouched: there X is a DIFFERENT concept, so the redirect still happens.
+  // The addition fires only when the named concept IS the standing target,
+  // which is not a redirect at all — it is a negation, and it belongs with
+  // the other close signals.
+  const correctionRejectsCurrentTarget =
+    requestedConceptId != null && requestedConceptId === state.targetConceptId
+  if (active && isExplicitCorrection(message)
+      && ((!requestedConceptId && !requestedTopicTitle) || correctionRejectsCurrentTarget)) {
     return closed('closed-returned')
   }
 

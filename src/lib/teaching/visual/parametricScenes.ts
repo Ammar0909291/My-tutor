@@ -42,6 +42,7 @@ import type { SceneSpec } from '@/lib/teaching/sceneSpec'
 import { fitSceneToFrame } from './layout'
 import { validateSceneSpec } from '@/lib/teaching/sceneSpecValidator'
 import { buildTorqueScene, validateTorqueParams } from '@/lib/teaching/sceneGenerators/torqueDiagram.pure'
+import { buildDipoleScene, validateDipoleParams } from '@/lib/teaching/sceneGenerators/electricDipole.pure'
 import { buildProjectileScene, validateProjectileParams } from '@/lib/teaching/sceneGenerators/projectileMotion.pure'
 import { buildVectorScene, validateVectorParams } from '@/lib/teaching/sceneGenerators/vectorAddition.pure'
 import { buildCircularScene, validateCircularParams } from '@/lib/teaching/sceneGenerators/circularMotion.pure'
@@ -189,6 +190,25 @@ export const PARAMETRIC_SCENES: Readonly<Record<string, ParametricScene>> = {
       { key: 'angleDeg', label: 'θ', kind: 'number', unit: '°', min: 0, max: 180, step: 5, effect: 'only the perpendicular part of the force turns the arm' },
     ],
     build: guarded(validateTorqueParams, buildTorqueScene),
+  },
+
+  electric_dipole: {
+    defaults: { chargeMagnitude: 4, separation: 3, fieldStrength: 8, angleDeg: 60, fieldType: 'uniform' },
+    variables: [
+      { key: 'angleDeg', label: 'θ', kind: 'number', unit: '°', min: 0, max: 180, step: 5, effect: 'torque peaks at 90° and vanishes when p is aligned or anti-aligned with E' },
+      { key: 'chargeMagnitude', label: 'q', kind: 'number', unit: 'nC', min: 1, max: 10, step: 1, effect: 'a bigger charge makes a bigger dipole moment, and stronger forces and torque' },
+      { key: 'separation', label: 'd', kind: 'number', unit: 'cm', min: 1, max: 8, step: 0.5, effect: 'the dipole moment scales directly with how far apart the charges are' },
+      { key: 'fieldStrength', label: 'E', kind: 'number', unit: 'N/C', min: 1, max: 20, step: 1, effect: 'torque grows in direct proportion to the field, exactly like the charges do' },
+      {
+        key: 'fieldType', label: 'Field', kind: 'choice',
+        options: [
+          { value: 'uniform', label: 'Uniform' },
+          { value: 'non_uniform', label: 'Non-uniform' },
+        ],
+        effect: 'only a non-uniform field can push the dipole sideways with a net force',
+      },
+    ],
+    build: guarded(validateDipoleParams, buildDipoleScene),
   },
 
   projectile: {
