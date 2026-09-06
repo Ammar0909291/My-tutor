@@ -2905,12 +2905,24 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // The fix is to record the ATTEMPT, not just a non-empty result.
           // `capabilitiesHydrated` is written below whether or not anything
           // was found, so "looked and found nothing" is remembered.
+          //
+          // ── EGRESS-2 (layered on EGRESS-1 above) ──────────────────────────
+          // EGRESS-1 bounded this to once per genuinely-new session, but the
+          // bounded call still replayed the learner's ENTIRE spine event log
+          // to answer a question only ONE event type (CapabilityObserved) can
+          // affect — see fold.ts's foldEvent switch. For a heavily-used
+          // learner (hundreds of sessions), that one-time-per-session cost is
+          // itself large and recurs on every new session. Replaced the full
+          // (unfiltered) replay below with a type-filtered one, which
+          // fetches only CapabilityObserved rows via the existing
+          // @@index([learnerId, type]) index — provably identical result,
+          // see spineCapabilityReplayScope.test.ts.
           if (Object.keys(capabilityStateHoisted).length === 0
               && snapshot?.capabilitiesHydrated !== true) {
             try {
-              const { replayStudentView } = await import('@/lib/evidence-spine/replay')
-              const view = await replayStudentView(prisma, userId)
-              capabilityStateHoisted = capMod.hydrateFromProjection(view.capability)
+              const { replayCapabilityProjection } = await import('@/lib/evidence-spine/replay')
+              const capabilityProjection = await replayCapabilityProjection(prisma, userId)
+              capabilityStateHoisted = capMod.hydrateFromProjection(capabilityProjection)
               capabilitiesHydratedThisTurn = true
             } catch {
               // Fail-open: an unavailable spine means no inherited capabilities,

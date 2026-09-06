@@ -9,13 +9,13 @@
  * arrives with later milestones — this module deliberately stops at "the
  * log is foldable, the fold is deterministic, snapshots equal re-folds".
  */
-import { foldAll, foldEvents, initialStudentView, type StudentViewProjection } from './fold'
-import type { SpineEventRecord, SpineSource } from './types'
+import { foldAll, foldEvents, initialStudentView, type CapabilityProjection, type StudentViewProjection } from './fold'
+import type { SpineEventRecord, SpineEventType, SpineSource } from './types'
 
 type PrismaLike = {
   spineEvent: {
     findMany(args: {
-      where: { learnerId: string; seq?: { gt: number } }
+      where: { learnerId: string; seq?: { gt: number }; type?: { in: string[] } }
       orderBy: { seq: 'asc' }
       take?: number
     }): Promise<Array<{
@@ -59,6 +59,63 @@ export async function loadSpineEvents(prisma: PrismaLike, learnerId: string): Pr
 export async function replayStudentView(prisma: PrismaLike, learnerId: string): Promise<StudentViewProjection> {
   const events = await loadSpineEvents(prisma, learnerId)
   return foldAll(learnerId, events)
+}
+
+/**
+ * EGRESS-2. Load only events of the given types for a learner, seq-ascending,
+ * paged exactly like `loadSpineEvents` — the only difference is a `type`
+ * filter added to the WHERE clause. `spine_events` already carries
+ * `@@index([learnerId, type])` (prisma/schema.prisma), so this is index-
+ * backed and needed no migration.
+ */
+export async function loadSpineEventsOfType(
+  prisma: PrismaLike, learnerId: string, types: readonly SpineEventType[],
+): Promise<SpineEventRecord[]> {
+  const out: SpineEventRecord[] = []
+  let after = 0
+  for (;;) {
+    const page = await prisma.spineEvent.findMany({
+      where: { learnerId, type: { in: [...types] }, seq: { gt: after } },
+      orderBy: { seq: 'asc' },
+      take: PAGE,
+    })
+    if (page.length === 0) break
+    for (const r of page) out.push(toRecord(r))
+    after = page[page.length - 1].seq
+    if (page.length < PAGE) break
+  }
+  return out
+}
+
+/**
+ * Replay ONLY the capability projection — the one slice route.ts's
+ * cold-session hydration actually reads (`hydrateFromProjection(view
+ * .capability)`; `.teaching`/`.conversation`/`.recovery`/`.answers`/
+ * `.decisions` were always discarded at that call site).
+ *
+ * PROVABLY IDENTICAL to `(await replayStudentView(prisma, learnerId))
+ * .capability`: `foldEvent`'s switch (fold.ts) writes `.capability` in
+ * exactly one branch, `case 'CapabilityObserved'`; every other case reads
+ * only its own event's payload and writes only its own projection slice —
+ * none reads `v.capability` as an input to its own transition. So filtering
+ * the input stream to CapabilityObserved events before folding cannot
+ * change the `.capability` result, by inspection of that switch statement
+ * (see spineCapabilityReplayScope.test.ts for the equivalence proved
+ * against the real fold, and a structural guard that a future case
+ * touching `.capability` outside that branch fails the build).
+ *
+ * This is the EGRESS-2 fix layered on EGRESS-1 (2026-08-31, route.ts):
+ * EGRESS-1 correctly bounded the replay to once per genuinely-new session,
+ * but the bounded call still fetched the learner's ENTIRE event log to
+ * answer a question only one event type can affect. For a heavily-used
+ * learner (hundreds of sessions), that one-time-per-session cost is itself
+ * large and recurs on every new session.
+ */
+export async function replayCapabilityProjection(
+  prisma: PrismaLike, learnerId: string,
+): Promise<CapabilityProjection> {
+  const events = await loadSpineEventsOfType(prisma, learnerId, ['CapabilityObserved'])
+  return foldAll(learnerId, events).capability
 }
 
 /**

@@ -27,6 +27,11 @@
  * The fix records the ATTEMPT (`capabilitiesHydrated`) rather than only a
  * non-empty result. These tests assert the two halves that have to hold
  * together; either one alone re-opens the loop.
+ *
+ * EGRESS-2 (layered on this, not a replacement): bounding the replay to once
+ * per new session still left the ONE bounded call fetching the learner's
+ * ENTIRE event log. spineCapabilityReplayScope.test.ts covers that half —
+ * this file's job stays the once-per-session guard, unchanged.
  */
 import { describe, expect, it } from 'vitest'
 import { readFileSync } from 'fs'
@@ -65,19 +70,19 @@ describe('the replay is guarded by the marker', () => {
 
   it('sets the marker on a SUCCESSFUL replay', () => {
     const block = route.slice(
-      route.indexOf('const { replayStudentView }'),
+      route.indexOf('const { replayCapabilityProjection }'),
       route.indexOf('const statedNo = capMod.detectStatedInability'),
     )
     expect(block).toContain('capabilitiesHydratedThisTurn = true')
     // The assignment must sit in the try, AFTER the await — a marker set in
     // the catch would remember a failure as an answer.
-    expect(block.indexOf('await replayStudentView'))
+    expect(block.indexOf('await replayCapabilityProjection'))
       .toBeLessThan(block.indexOf('capabilitiesHydratedThisTurn = true'))
   })
 
   it('does NOT set the marker when the replay throws', () => {
     const block = route.slice(
-      route.indexOf('const { replayStudentView }'),
+      route.indexOf('const { replayCapabilityProjection }'),
       route.indexOf('const statedNo = capMod.detectStatedInability'),
     )
     const catchBody = block.slice(block.indexOf('} catch {'))
@@ -106,9 +111,16 @@ describe('the marker is persisted independently of emptiness', () => {
 })
 
 describe('the expensive read is still the one being guarded', () => {
-  it('replayStudentView remains the only spine read on the chat path', () => {
-    const reads = [...route.matchAll(/replayStudentView\s*\(/g)]
-    expect(reads.length).toBe(1)
+  it('replayCapabilityProjection remains the only spine read on the chat path', () => {
+    // EGRESS-2 replaced replayStudentView (full-log replay) with
+    // replayCapabilityProjection (type-filtered replay) at this one guarded
+    // site — see spineCapabilityReplayScope.test.ts for why that is
+    // provably equivalent. The property this test protects is unchanged:
+    // exactly one guarded expensive read on the chat path, never two.
+    const capReads = [...route.matchAll(/replayCapabilityProjection\s*\(/g)]
+    expect(capReads.length).toBe(1)
+    const fullReads = [...route.matchAll(/replayStudentView\s*\(/g)]
+    expect(fullReads.length).toBe(0)
   })
 
   it('loadSpineEvents still reads the WHOLE log — which is why it must not repeat', () => {
