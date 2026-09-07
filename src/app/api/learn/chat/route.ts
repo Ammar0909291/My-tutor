@@ -38,6 +38,9 @@ import {
 } from '@/lib/teaching/assets'
 import { stripIpaNotation } from '@/lib/text/ipaSanitizer'
 import { readTurnIntent } from '@/lib/teaching/turnIntent'
+// S7 rung 2. Pure, synchronous, no I/O — imported at the top rather than
+// dynamically because it is read inside the ladder fold, on the hot path.
+import { diagnosticStalledThisTurn } from '@/lib/teaching/turnProgress'
 import { arbitrateTurn, arbitrationUnavailable } from '@/lib/teaching/turnArbitration'
 import {
   pickCurrentTopicSlug, selectCurrentLesson, foldProgressionMetrics,
@@ -1832,6 +1835,39 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     // read at the withhold call site ~1600 lines below) so both places agree
     // on exactly which turns the gate considered question-eligible.
     let phaseAllowsProbeHoisted = false
+    // S4 OBSERVABILITY. The gate's own terms and the phase it saw, hoisted so
+    // the end-of-turn TURN_EVENT line can carry them. Read-only for the turn:
+    // nothing below branches on these, they exist to be logged. See
+    // turnTelemetry.ts for why one joined line beats twenty object logs.
+    let gateTermsHoisted: Record<string, boolean> | null = null
+    let phaseBeforeTurnHoisted: string | null = null
+    let legalityBlockHoisted: string | null = null
+    let modelProbeVerdictHoisted: string | null = null
+    // S5 LIVENESS. Computed once, just before the snapshot persist, and read
+    // by exactly two places: the pending-probe write (rung 1) and the
+    // end-of-turn TURN_EVENT line. Never recomputed — one verdict per turn.
+    // S5: the question rung 1 released, so the teaching-history fold below can
+    // record it as spent. See the release site for why releasing without
+    // spending re-serves the identical probe.
+    let releasedProbeQuestionHoisted: string | null = null
+    // Rung 1 must take the probe off the SCREEN as well as out of the snapshot.
+    // Persisting null while the response still carried the question would serve
+    // a probe that cannot be graded next turn — the served-but-unpersisted
+    // deadlock outstandingProbeStaysOnScreen.test.ts exists for, and exactly
+    // what gateAssessmentRouteWiring caught in this change's first draft.
+    let probeReleasedThisTurnHoisted = false
+    // S7 rung 2 reads the stagnation the PREVIOUS turns already accrued, because
+    // the ladder folds long before this turn's own verdict is computed. That is
+    // the correct reading anyway: "the diagnostic has produced nothing for N
+    // turns already".
+    let priorStagnantTurnsHoisted = 0
+    let turnProgressHoisted: {
+      outcome: import('@/lib/teaching/turnProgress').TurnOutcome
+      stagnantTurns: number
+      rung: number
+      probeHeldTurns: number
+    } | null = null
+    let signalSuppressedReasonHoisted: string | null = null
     // The don't-know run INCLUDING this turn, for dontKnowCeiling.ts. Read from
     // the pre-turn snapshot and incremented here because the fold that persists
     // it runs after the text is built.
@@ -4097,6 +4133,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // (~L5845) rather than adding a third, disagreeing convention. The raw
         // read survives as a fallback only for the case `conversationStateHoisted`
         // itself is unexpectedly null.
+        {
+          const prior = (snapshot as { turnProgress?: { stagnantTurns?: unknown } } | null)
+            ?.turnProgress?.stagnantTurns
+          priorStagnantTurnsHoisted =
+            typeof prior === 'number' && Number.isFinite(prior) && prior >= 0 ? Math.floor(prior) : 0
+        }
         const phaseBeforeTurn = conversationStateHoisted?.phase
           ?? (snapshot as { conversationState?: { phase?: unknown } } | null)
             ?.conversationState?.phase
@@ -4375,6 +4417,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           notClosingTurn: !closingTurnWithholdsQuestion(sessionEpisodeHoisted?.phase),
         }
         const gateEligible = Object.values(gateTerms).every(Boolean)
+        gateTermsHoisted = gateTerms
+        phaseBeforeTurnHoisted = typeof phaseBeforeTurn === 'string' ? phaseBeforeTurn : null
         // Read from the SAME terms object the log prints, so the decision and
         // the evidence for it can never disagree. See inventedProbeGuard.
         {
@@ -5439,6 +5483,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           authoredProbesExist: authoredProbesExistHoisted,
           gateDeclinedByPolicy: gateDeclinedByPolicyHoisted,
         })
+        modelProbeVerdictHoisted = d.reason
         if (!d.serve && mcqParse.mcq !== null && gateMcqHoisted === null) {
           modelProbeWithheld = d.reason
           withheldModelMcqHoisted = mcqParse.mcq
@@ -5982,6 +6027,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             hasPendingStructuredMcq: Boolean(pendingMcqHoisted),
           })
           if (decision.suppress) {
+            signalSuppressedReasonHoisted = decision.reason
             console.log(`[${decision.reason}]`, {
               claimed: teachingSignal.correctness,
               learnerMessage: message.slice(0, 40),
@@ -7306,6 +7352,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // turn, the budget holds instead of being spent on output the
               // engine did not choose. See advanceConversationState's fold.
               questionSanctioned: evidenceMoveHoisted === 'ask',
+              diagnosticStalled: diagnosticStalledThisTurn(priorStagnantTurnsHoisted),
               signalCorrect: teachingSignal?.correctness ?? null,
               recoveryFired: recoveryKeyHoisted !== null,
               learnerRequest: learnerRequestHoisted,
@@ -7539,6 +7586,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // context the decision was handed, and the turn's own shape
               practiceRequested: turnIntent.wantsPractice,
               questionSanctioned: evidenceMoveHoisted === 'ask',
+              diagnosticStalled: diagnosticStalledThisTurn(priorStagnantTurnsHoisted),
               learnerRequest: learnerRequestHoisted,
               degradedTurn: isDegradedProvider(provider),
             },
@@ -8648,14 +8696,183 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // readPendingQuestion's identity guard next turn. Same value the
           // grading site above used, so the write and the read can never
           // disagree about which lesson this question belongs to.
+          // ── S5: DID ANYTHING HAPPEN THIS TURN? ────────────────────────
+          //
+          // The one axis this runtime never had. Every other guard answers
+          // "MAY this happen?"; correct refusals compose into states the
+          // machine cannot leave (livenessEndToEnd.test.ts drives the real
+          // route into one; reachabilityProof.test.ts shows that with the
+          // server grade unproducible NOT ONE reachable state can reach
+          // mastery). This asks only whether the SYSTEM moved, never what the
+          // learner knows — see turnProgress.ts's four constraints.
+          {
+            const { classifyTurn, foldStagnation, escalationRung } =
+              await import('@/lib/teaching/turnProgress')
+            const { wouldRepeatPreviousTurn, mostRecentAssistantText } =
+              await import('@/lib/teaching/remediationOutputContract')
+            const { isDegradedProvider: isDegradedForProgress } =
+              await import('@/lib/eos-runtime/degradedMode')
+            const before = conversationStateHoisted
+            const after = conversationStateAfterTurnHoisted
+            const outcome = classifyTurn({
+              phaseChanged: (before?.phase ?? null) !== (after?.phase ?? null),
+              masteryCounterMoved:
+                (after?.correctAtCheck ?? 0) !== (before?.correctAtCheck ?? 0)
+                || (after?.correctAtPractice ?? 0) !== (before?.correctAtPractice ?? 0),
+              // Right OR wrong: a graded wrong answer is evidence, and the
+              // lesson moves on it.
+              serverGradeRecorded: mcqGradeHoisted !== null,
+              // A CARRIED-FORWARD probe is not a fresh one — that distinction
+              // is the whole point here, because re-serving the same question
+              // is the symptom, not progress.
+              freshProbeAttached: mcqHoisted !== null,
+              // DISTINCT, not merely non-empty. Measured 2026-09-07 with the
+              // real route: a model that repeats the SAME sentence every turn
+              // ("Let us look at weak acids.") kept this true forever, so a
+              // lesson frozen at GUIDE with correctAtCheck 0 reported
+              // stagnantTurns 0 and no rung could ever fire. Repetition is the
+              // symptom — it must never count as progress.
+              //
+              // Reuses `wouldRepeatPreviousTurn` and `mostRecentAssistantText`,
+              // the pair the remediation floor already uses, so "repeat" means
+              // exactly one thing in this runtime rather than two.
+              distinctTeachingDelivered:
+                cleanText.trim().length > 0
+                && !wouldRepeatPreviousTurn(
+                  cleanText,
+                  mostRecentAssistantText(learnSession.messages, MessageRole.ASSISTANT),
+                ),
+              learnerRequestHonoured: learnerRequestHoisted !== null,
+              knowledgeGapOpened: knowledgeGapHoisted !== null,
+              degradedTurn: isDegradedForProgress(provider),
+              recoveryFired: recoveryKeyHoisted !== null,
+              excursionActive: excursionActiveHoisted,
+              firstLessonActive: firstLessonActiveHoisted,
+            })
+            const prior = (snapshot as { turnProgress?: { stagnantTurns?: unknown } } | null)
+              ?.turnProgress?.stagnantTurns
+            const stagnantTurns = foldStagnation(prior, outcome)
+
+            // The narrow signal rung 1 actually runs on. `stagnantTurns` cannot
+            // see an assessment deadlock underneath a tutor that keeps teaching
+            // new material — measured, see foldProbeHeldTurns's note.
+            const { foldProbeHeldTurns } = await import('@/lib/teaching/turnProgress')
+            const priorHeld = (snapshot as { turnProgress?: { probeHeldTurns?: unknown } } | null)
+              ?.turnProgress?.probeHeldTurns
+            const priorPendingId = (snapshot as { turnProgress?: { heldProbeId?: unknown } } | null)
+              ?.turnProgress?.heldProbeId
+            const carriedForwardUngradedForCount =
+              mcqHoisted === null && pendingMcqHoisted !== null && mcqGradeHoisted === null
+            const probeHeldTurns = foldProbeHeldTurns(priorHeld, {
+              carriedForwardUngraded: carriedForwardUngradedForCount,
+              // A DIFFERENT probe restarts the clock: the learner has not been
+              // staring at this one.
+              sameProbeAsLastTurn:
+                priorPendingId === undefined || priorPendingId === null
+                  ? true
+                  : priorPendingId === (pendingMcqHoisted?.assetId ?? null),
+            })
+            turnProgressHoisted = {
+              outcome, stagnantTurns, rung: escalationRung(stagnantTurns), probeHeldTurns,
+            }
+            conversationStateUpdate.turnProgress = {
+              stagnantTurns,
+              probeHeldTurns,
+              heldProbeId: carriedForwardUngradedForCount ? (pendingMcqHoisted?.assetId ?? null) : null,
+            }
+          }
           {
             const { writePendingQuestion } = await import('@/lib/teaching/pendingQuestion')
             const { mcqToServe } = await import('@/lib/teaching/mcq')
             // Same value the response serves — see mcqToServe. Persisting
             // anything else would either strand a question the learner can see
             // (ungradeable next turn) or keep one the learner cannot.
+            const served = mcqToServe(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted)
+            // ── RUNG 1: RELEASE A PROBE NOBODY IS ANSWERING ────────────────
+            //
+            // THE DEFECT THIS EXISTS FOR, measured end to end: a learner who
+            // types "the anode" instead of tapping it produces no server grade
+            // (resolveMcqChoice correctly refuses to guess), so `pendingMcq`
+            // survives, `noUnansweredProbeOnScreen` shuts the gate, and the
+            // SAME question is re-served for as long as they keep trying —
+            // with four other reviewed probes sitting unused. Eight turns of
+            // correct answers, zero credit.
+            //
+            // WHAT THIS DOES: stops HOLDING the question, so next turn's gate
+            // may select a DIFFERENT authored probe.
+            //
+            // WHAT IT DOES NOT DO, and these are the four constraints:
+            //   · no grade is invented — the answer stays ungraded, forever;
+            //   · no counter moves and no evidence row is written;
+            //   · the phase is untouched;
+            //   · the probe stays SPENT in the ledger (it was genuinely asked),
+            //     so "never re-ask the same question" is unaffected.
+            // It releases a question the learner declined to answer in
+            // gradeable form. That is not a claim about what they know.
+            //
+            // Scoped to a CARRIED-FORWARD, UNGRADED probe only: a probe
+            // attached THIS turn has never been seen, and a graded one is
+            // already cleared by mcqToServe.
+            const carriedForwardUngraded =
+              mcqHoisted === null && pendingMcqHoisted !== null && mcqGradeHoisted === null
+            const { shouldReleaseHeldProbe } = await import('@/lib/teaching/turnProgress')
+            const releasePending =
+              carriedForwardUngraded
+              && shouldReleaseHeldProbe(turnProgressHoisted?.probeHeldTurns ?? 0)
+            // ── RUNG 3: NAME IT ─────────────────────────────────────────
+            //
+            // Four turns in which the runtime did nothing a learner could use,
+            // after the probe release (rung 1) and the diagnostic conclusion
+            // (rung 2) have both had their chance. There is no deterministic
+            // content this site can substitute without inventing pedagogy —
+            // assembleLesson has already run and either served an authored
+            // explanation or found none — so the honest action is to SAY SO in
+            // a line an operator can aggregate, rather than loop in silence.
+            //
+            // A named failure beats a silent one. This is deliberately NOT a
+            // canned learner-facing sentence: writing one here would be exactly
+            // the "invent pedagogy" move turnProgress.ts's C4 forbids, and the
+            // repair layers that DO own learner-facing text (filler repair, the
+            // remediation floor) already run upstream.
+            if ((turnProgressHoisted?.rung ?? 0) >= 3) {
+              console.log('[turn-progress] ' + JSON.stringify({
+                action: 'unservable',
+                stagnantTurns: turnProgressHoisted?.stagnantTurns ?? 0,
+                conceptId: resolvedConceptId ?? null,
+                phase: phaseBeforeTurnHoisted,
+                servedFromMemory,
+              }))
+            }
+            if (releasePending) {
+              // SPEND IT. `recordMcqAsked` fires on the GRADE, not on the ask —
+              // deliberately, so a dry pool cannot burn probes that produced no
+              // evidence. Its comment names the invariant that made deferral
+              // safe: "unansweredProbeOnScreen already stops the gate selecting
+              // a new probe while one is pending, so deferring the record
+              // cannot let the same probe be handed out twice in a row."
+              //
+              // Rung 1 is precisely what removes that premise. Measured: with
+              // the release alone, the gate re-opened and re-selected the SAME
+              // probe, so the learner saw Q1 for a seventh time and nothing
+              // changed. Recording it here restores the invariant instead of
+              // weakening the deferral rule everywhere else — and it is
+              // truthful: this probe WAS asked, repeatedly, and has been given
+              // every chance to produce evidence.
+              //
+              // Pool safety is unchanged: mayAttachProbeBelowGuide re-reads the
+              // remaining pool before any below-gate spend, so a concept at the
+              // bare contract cannot be drained by this.
+              releasedProbeQuestionHoisted = pendingMcqHoisted?.question ?? null
+              probeReleasedThisTurnHoisted = true
+              console.log('[turn-progress] ' + JSON.stringify({
+                action: 'released-pending-probe',
+                probeHeldTurns: turnProgressHoisted?.probeHeldTurns ?? 0,
+                stagnantTurns: turnProgressHoisted?.stagnantTurns ?? 0,
+                assetId: pendingMcqHoisted?.assetId ?? null,
+              }))
+            }
             conversationStateUpdate.pendingMcq = writePendingQuestion(
-              mcqToServe(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted),
+              releasePending ? null : served,
               lessonKeyThisTurnHoisted,
             )
           }
@@ -9011,8 +9228,20 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // `unansweredProbeOnScreen` already stops the gate selecting a new
             // probe while one is pending, so deferring the record cannot let
             // the same probe be handed out twice in a row.
-            if (pendingMcqHoisted?.question && mcqGradeHoisted) {
-              memoryHistory = recordMcqAsked(memoryHistory, pendingMcqHoisted.question)
+            // ONE WRITER, TWO WAYS A PROBE IS SPENT. The grade is the primary
+            // one and is unchanged. S5 rung 1 adds the other: a probe released
+            // after sitting unanswered has had every chance to produce evidence
+            // and must not come back — measured, releasing WITHOUT spending
+            // re-served the identical probe and nothing changed for the learner.
+            // Expressed as one call site on purpose: spentProbeKeyAgreement's
+            // "the ledger still has exactly one writer" is a real invariant, and
+            // a second call site would have satisfied the letter of `recordMcqAsked`
+            // while breaking the thing that guard protects.
+            const questionToSpend = (pendingMcqHoisted?.question && mcqGradeHoisted)
+              ? pendingMcqHoisted.question
+              : releasedProbeQuestionHoisted
+            if (questionToSpend) {
+              memoryHistory = recordMcqAsked(memoryHistory, questionToSpend)
             }
             // The write half of the already-read guard above. Recorded only
             // when the asset was actually SERVED to the learner this turn —
@@ -9523,6 +9752,101 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         console.warn('[turn-decision] provenance line skipped:', err)
       }
 
+      // ── S4: TURN_EVENT ───────────────────────────────────────────────
+      //
+      // One joined line per turn. The same latest-point-of-knowledge site as
+      // the provenance block above, and the same rule: OBSERVATION ONLY — it
+      // reads already-decided values, writes one log line, and returns nothing
+      // to the turn.
+      //
+      // It also computes `askViolations`, which questionLegality.ts defines and
+      // documents as "the single most diagnostic number the teaching runtime
+      // produces", and which had ZERO callers anywhere under src/app before
+      // this line — the rate at which the model overrides the kernel has never
+      // been measured in production.
+      //
+      // Log volume only. No database write: this project is under a 5 GB
+      // Supabase egress quota after a 50.8 GB incident, and observability must
+      // never be the thing that breaks it. No learner text and no model text —
+      // every field is a boolean, an enum, a count or an opaque id.
+      try {
+        const { buildTurnEvent, recordTurnEvent } = await import('@/lib/teaching/turnTelemetry')
+        const { foldLegalityMetrics } = await import('@/lib/teaching/questionLegality')
+        const { hasProseMultipleChoice } = await import('@/lib/teaching/proseMcqGuard')
+        const { classifyTurn, foldStagnation, escalationRung } = await import('@/lib/teaching/turnProgress')
+        const { isDegradedProvider: isDegraded } = await import('@/lib/eos-runtime/degradedMode')
+
+        const before = conversationStateHoisted
+        const after = conversationStateAfterTurnHoisted
+        const askedQuestionInReply = /\?/.test(cleanText)
+        // `evidenceMoveHoisted` is a widened string at its declaration; the
+        // legality fold and the event both want the closed set, so narrow once
+        // here rather than casting at two call sites.
+        const decidedMove: 'teach' | 'show' | 'ask' | null =
+          evidenceMoveHoisted === 'teach' || evidenceMoveHoisted === 'show' || evidenceMoveHoisted === 'ask'
+            ? evidenceMoveHoisted : null
+        // The one number this runtime named as most diagnostic and never computed.
+        const legality = decidedMove
+          ? foldLegalityMetrics(undefined, {
+              decidedMove,
+              askedQuestion: askedQuestionInReply,
+              blockedReason: null,
+            })
+          : null
+
+        // S5: the verdict is computed ONCE, before the persist, and read here.
+        // Recomputing it would let the logged number and the number that
+        // actually released a probe drift apart — the exact class of defect
+        // this programme exists to remove.
+        const outcome = turnProgressHoisted?.outcome ?? null
+        const stagnantTurns = turnProgressHoisted?.stagnantTurns ?? 0
+
+        recordTurnEvent(buildTurnEvent({
+          sessionId,
+          turnKey: `${sessionId}:${turnReceivedAt}`,
+          conceptId: resolvedConceptId ?? null,
+          subjectSlug: learnSession.subject?.slug ?? null,
+          phaseBefore: phaseBeforeTurnHoisted,
+          phaseAfter: after?.phase ?? null,
+          decidedMove,
+          legalityBlock: legalityBlockHoisted,
+          gateEligible: gateTermsHoisted ? Object.values(gateTermsHoisted).every(Boolean) : false,
+          blockedBy: gateTermsHoisted
+            ? Object.entries(gateTermsHoisted).filter(([, v]) => !v).map(([k]) => k)
+            : [],
+          selectedProbeId: decisionProbeIdHoisted,
+          pendingProbeId: pendingMcqHoisted?.assetId ?? null,
+          probeHeldTurns: turnProgressHoisted?.probeHeldTurns ?? 0,
+          modelOfferedTaggedMcq: mcqParse.mcq !== null,
+          // The RAW model output, deliberately NOT `cleanText`. Measured while
+          // writing this: withholdUngradedGateQuestion already strips a prose
+          // question when the gate ran dry (observed 66 chars -> 39 at OBSERVE),
+          // so reading the cleaned text would report 'the model behaved' on a
+          // turn where the model asked and the server had to remove it. This
+          // field is about what the MODEL DID, which is the only thing that
+          // makes the blind channel measurable.
+          modelOfferedProseMcq: hasProseMultipleChoice(text),
+          modelProbeVerdict: modelProbeVerdictHoisted,
+          askViolation: (legality?.askViolations ?? 0) > 0,
+          gradeSource: mcqGradeHoisted !== null ? 'server-key' : 'none',
+          gradedCorrect: mcqGradeHoisted?.correct ?? null,
+          signalSuppressedReason: signalSuppressedReasonHoisted,
+          masteryCounterMoved: outcome === 'productive'
+            && (after?.correctAtCheck ?? 0) !== (before?.correctAtCheck ?? 0),
+          verifiedMastery: masterySummary?.verified === true,
+          turnOutcome: outcome,
+          stagnantTurns,
+          escalationRung: escalationRung(stagnantTurns),
+          provider,
+          degraded: isDegraded(provider),
+          excursionActive: excursionActiveHoisted,
+          recoveryFired: recoveryKeyHoisted !== null,
+          visualServed: visualDecisionHoisted?.graphical === true,
+        }))
+      } catch (err) {
+        console.warn('[turn-event] line skipped:', err)
+      }
+
       // Same helper the persist site above uses, so the payload and the
       // snapshot can never disagree about what is on the learner's screen.
       // `mcqForClient` then strips the answer key (correctIndex/assetId) from the
@@ -9596,7 +9920,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // on screen" — reappearing across the API boundary. Echoing the pending
         // probe makes the payload state what the server already believes, and
         // costs nothing when nothing is outstanding.
-        mcq: mcqForClient(mcqToServeForResponse(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted)) ?? undefined,
+        // `probeReleasedThisTurnHoisted` keeps the response and the snapshot
+        // saying the SAME thing about what is on screen — the invariant
+        // gateAssessmentRouteWiring guards. Rung 1 removes the question from
+        // both, or from neither.
+        mcq: probeReleasedThisTurnHoisted
+          ? undefined
+          : (mcqForClient(mcqToServeForResponse(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted)) ?? undefined),
         // P6.6: present only on the turn the lesson completes. The client
         // renders the completion screen and must not continue teaching.
         lessonComplete: lessonCompletionHoisted ?? undefined,

@@ -39,6 +39,10 @@
  */
 import { describe, it, expect } from 'vitest'
 import {
+  classifyTurn, foldStagnation, diagnosticStalledThisTurn,
+} from '@/lib/teaching/turnProgress'
+import { wouldRepeatPreviousTurn } from '@/lib/teaching/remediationOutputContract'
+import {
   initialConversationState, advanceConversationState, decideNextMoveDetailed,
   repliesWithQuestion, isPriorKnowledgeProbe, isLowSignalAcknowledgement,
   detectFillerTurn,
@@ -119,6 +123,9 @@ export function replay(t: ReplayTranscript): ReplayOutcome {
   let state = initialConversationState(t.conceptId)
   let metrics = initialProgressionMetrics()
   let history = initialTurnHistory()
+  // S7 rung 2 inputs, folded per turn with the route's own functions.
+  let stagnantTurns = 0
+  let priorTutorText: string | null = null
 
   const phases: TeachingPhase[] = [state.phase]
   const out: ReplayOutcome = {
@@ -182,6 +189,9 @@ export function replay(t: ReplayTranscript): ReplayOutcome {
     // classifies real learner turns differently from the runtime.
     const bareAck = isLowSignalAcknowledgement(turn.learner)
     const effectiveSignal = bareAck ? null : (turn.signalCorrect ?? null)
+    const phaseBeforeThisTurn = state.phase
+    const checkBefore = state.correctAtCheck ?? 0
+    const practiceBefore = state.correctAtPractice ?? 0
     state = advanceConversationState(state, {
       askedQuestion,
       signalCorrect: effectiveSignal,
@@ -219,7 +229,36 @@ export function replay(t: ReplayTranscript): ReplayOutcome {
       // spending the anti-interrogation budget on questions the engine never
       // selected, i.e. it would model the exact defect 7N-1 removes.
       questionSanctioned: decision.move === 'ask',
+      // S7 RUNG 2: replayable, and therefore replayed rather than excused. A
+      // transcript carries every fact the stagnation counter needs — whether
+      // the phase moved, whether the tutor's text repeated, whether a signal
+      // arrived — so the harness folds the SAME function the route folds
+      // (turnProgress.foldStagnation over turnProgress.classifyTurn) instead of
+      // approximating it. The alternative, an entry in replayDrift's
+      // CANNOT_REPLAY list, would have been untrue.
+      diagnosticStalled: diagnosticStalledThisTurn(stagnantTurns),
     })
+    // Fold AFTER the ladder, on the same facts the route uses, so the next
+    // turn's rung-2 input is this turn's outcome. Server-only inputs a
+    // transcript cannot see (a real grade, an authored probe id) are false
+    // here, which is the conservative direction: it can only DELAY the rung.
+    stagnantTurns = foldStagnation(stagnantTurns, classifyTurn({
+      phaseChanged: phaseBeforeThisTurn !== state.phase,
+      masteryCounterMoved: checkBefore !== (state.correctAtCheck ?? 0)
+        || practiceBefore !== (state.correctAtPractice ?? 0),
+      serverGradeRecorded: false,
+      freshProbeAttached: false,
+      distinctTeachingDelivered:
+        (turn.tutor ?? '').trim().length > 0
+        && !wouldRepeatPreviousTurn(turn.tutor ?? '', priorTutorText),
+      learnerRequestHonoured: false,
+      knowledgeGapOpened: false,
+      degradedTurn: false,
+      recoveryFired: recoveryKey !== null,
+      excursionActive: false,
+      firstLessonActive: false,
+    }))
+    priorTutorText = turn.tutor ?? null
     phases.push(state.phase)
 
     if (detectPhaseOscillation(state.phase, history).isOscillating) out.oscillationIndices.push(i)

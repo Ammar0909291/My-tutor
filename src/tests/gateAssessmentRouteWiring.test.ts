@@ -99,9 +99,17 @@ describe('the gate assessment is on the turn path', () => {
     // inverse defect that literal permitted: persisting a probe the response
     // does NOT carry, which deadlocked the mastery gate (see
     // outstandingProbeStaysOnScreen.test.ts).
+    // 2026-09-07 (S5): rung 1 may take a probe nobody is answering off the
+    // screen. This assertion's subject — served and persisted must AGREE — is
+    // unchanged and is now stronger: both sides are gated on the SAME hoisted
+    // flag, so a release cannot remove one without the other. (The first draft
+    // of rung 1 persisted null while the response still carried the question;
+    // this test caught it.)
     expect(lineOf(/conversationStateUpdate\.pendingMcq = writePendingQuestion\($/)).toBeGreaterThan(0)
-    expect(lineOf(/mcqToServe\(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted\),$/)).toBeGreaterThan(0)
-    expect(lineOf(/mcq: mcqForClient\(mcqToServeForResponse\(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted\)\) \?\? undefined/)).toBeGreaterThan(0)
+    expect(lineOf(/const served = mcqToServe\(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted\)$/)).toBeGreaterThan(0)
+    expect(lineOf(/releasePending \? null : served,$/)).toBeGreaterThan(0)
+    expect(lineOf(/mcqForClient\(mcqToServeForResponse\(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted\)\)/)).toBeGreaterThan(0)
+    expect(lineOf(/probeReleasedThisTurnHoisted$/)).toBeGreaterThan(0)
   })
 })
 

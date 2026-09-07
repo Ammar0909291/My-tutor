@@ -203,6 +203,8 @@ describe('route wiring — the guard is actually present, in the right place, wi
     // Negative controls: this fix must not have touched the surrounding
     // machinery it deliberately leaves alone.
     expect(ROUTE).toMatch(/gradedAgainstServerKeyHoisted\s*=\s*await\s*\(async\s*\(\)\s*=>/)
-    expect(ROUTE).toMatch(/if\s*\(pendingMcqHoisted\?\.question\s*&&\s*mcqGradeHoisted\)/)
+    // UPDATED 2026-09-07 (S5): shape changed so rung 1 can withhold a probe
+    // nobody is answering; the invariant this asserts is unchanged.
+    expect(ROUTE).toMatch(/\(pendingMcqHoisted\?\.question\s*&&\s*mcqGradeHoisted\)/)
   })
 })

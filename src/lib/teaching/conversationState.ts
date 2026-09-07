@@ -441,6 +441,27 @@ export interface TurnEvidence {
    * fixture is unaffected.
    */
   questionSanctioned?: boolean
+  /**
+   * S7 RUNG 2 — the diagnostic has produced nothing for several turns running
+   * and the runtime is no longer willing to wait for a turn it may never take.
+   *
+   * WHY IT IS NEEDED. `diagnosticProducedNothing` below fires only when
+   * `questionSanctioned` is true, i.e. when the ENGINE's own move was 'ask'.
+   * The same predicate also gates whether an authored probe may be attached at
+   * OBSERVE (route.ts `phaseAllowsProbe`). So on a turn where the kernel
+   * legitimately removed ASK, BOTH the action and the escape from not acting
+   * are disabled by one fact — reachabilityProof.test.ts drives that case and
+   * OBSERVE never leaves. Measured end to end the route supplies 'ask' often
+   * enough to escape in practice, which is why this is a bounded hazard rather
+   * than the P0, and why the release is a stagnation count rather than a phase
+   * rule.
+   *
+   * Supplied by turnProgress.ts's rung 2. It says only "nothing has happened
+   * for N turns", never "this event is impossible" — that judgement is not
+   * decidable at runtime and is deliberately left to the design-time theorem.
+   * Omitted ⇒ byte-identical to the previous behaviour.
+   */
+  diagnosticStalled?: boolean
   /** QL-3: the learner explicitly asked to be taught rather than questioned
    *  ("stop asking", "just explain it", "explain rather than keep asking").
    *  Sourced from recoveryGuard's `too_many_questions` failure state, which
@@ -1224,7 +1245,11 @@ export function advanceConversationState(
   const diagnosticProducedNothing =
     prev.phase === 'OBSERVE'
     && next.phase === 'OBSERVE'
-    && evidence.questionSanctioned === true
+    // S7 rung 2: OR the diagnostic has demonstrably produced nothing for
+    // several turns running. Same threshold, same transition, same counter —
+    // only the trigger widens, and only for a phase whose escape was gated on
+    // the same fact as its action. See TurnEvidence.diagnosticStalled.
+    && (evidence.questionSanctioned === true || evidence.diagnosticStalled === true)
     && evidence.signalCorrect === null
     && evidence.degradedTurn !== true
     && evidence.recoveryFired !== true
