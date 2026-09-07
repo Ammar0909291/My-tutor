@@ -186,3 +186,12 @@ export const PROBE_HELD_RELEASE_AT = 2
 export function shouldReleaseHeldProbe(probeHeldTurns: number): boolean {
   return Number.isFinite(probeHeldTurns) && probeHeldTurns >= PROBE_HELD_RELEASE_AT
 }
+
+/**
+ * S7 RUNG 2, as a named predicate so the route reads one thing and the fold
+ * receives one boolean. Wraps `escalationRung` rather than re-deriving a
+ * threshold — a second copy of that number is exactly how two guards drift.
+ */
+export function diagnosticStalledThisTurn(priorStagnantTurns: number): boolean {
+  return diagnosticMayConclude(escalationRung(priorStagnantTurns))
+}

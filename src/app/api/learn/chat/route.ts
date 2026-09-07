@@ -38,6 +38,9 @@ import {
 } from '@/lib/teaching/assets'
 import { stripIpaNotation } from '@/lib/text/ipaSanitizer'
 import { readTurnIntent } from '@/lib/teaching/turnIntent'
+// S7 rung 2. Pure, synchronous, no I/O — imported at the top rather than
+// dynamically because it is read inside the ladder fold, on the hot path.
+import { diagnosticStalledThisTurn } from '@/lib/teaching/turnProgress'
 import { arbitrateTurn, arbitrationUnavailable } from '@/lib/teaching/turnArbitration'
 import {
   pickCurrentTopicSlug, selectCurrentLesson, foldProgressionMetrics,
@@ -1853,6 +1856,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     // deadlock outstandingProbeStaysOnScreen.test.ts exists for, and exactly
     // what gateAssessmentRouteWiring caught in this change's first draft.
     let probeReleasedThisTurnHoisted = false
+    // S7 rung 2 reads the stagnation the PREVIOUS turns already accrued, because
+    // the ladder folds long before this turn's own verdict is computed. That is
+    // the correct reading anyway: "the diagnostic has produced nothing for N
+    // turns already".
+    let priorStagnantTurnsHoisted = 0
     let turnProgressHoisted: {
       outcome: import('@/lib/teaching/turnProgress').TurnOutcome
       stagnantTurns: number
@@ -4125,6 +4133,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // (~L5845) rather than adding a third, disagreeing convention. The raw
         // read survives as a fallback only for the case `conversationStateHoisted`
         // itself is unexpectedly null.
+        {
+          const prior = (snapshot as { turnProgress?: { stagnantTurns?: unknown } } | null)
+            ?.turnProgress?.stagnantTurns
+          priorStagnantTurnsHoisted =
+            typeof prior === 'number' && Number.isFinite(prior) && prior >= 0 ? Math.floor(prior) : 0
+        }
         const phaseBeforeTurn = conversationStateHoisted?.phase
           ?? (snapshot as { conversationState?: { phase?: unknown } } | null)
             ?.conversationState?.phase
@@ -7338,6 +7352,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // turn, the budget holds instead of being spent on output the
               // engine did not choose. See advanceConversationState's fold.
               questionSanctioned: evidenceMoveHoisted === 'ask',
+              diagnosticStalled: diagnosticStalledThisTurn(priorStagnantTurnsHoisted),
               signalCorrect: teachingSignal?.correctness ?? null,
               recoveryFired: recoveryKeyHoisted !== null,
               learnerRequest: learnerRequestHoisted,
@@ -7571,6 +7586,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // context the decision was handed, and the turn's own shape
               practiceRequested: turnIntent.wantsPractice,
               questionSanctioned: evidenceMoveHoisted === 'ask',
+              diagnosticStalled: diagnosticStalledThisTurn(priorStagnantTurnsHoisted),
               learnerRequest: learnerRequestHoisted,
               degradedTurn: isDegradedProvider(provider),
             },
@@ -8803,6 +8819,30 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             const releasePending =
               carriedForwardUngraded
               && shouldReleaseHeldProbe(turnProgressHoisted?.probeHeldTurns ?? 0)
+            // ── RUNG 3: NAME IT ─────────────────────────────────────────
+            //
+            // Four turns in which the runtime did nothing a learner could use,
+            // after the probe release (rung 1) and the diagnostic conclusion
+            // (rung 2) have both had their chance. There is no deterministic
+            // content this site can substitute without inventing pedagogy —
+            // assembleLesson has already run and either served an authored
+            // explanation or found none — so the honest action is to SAY SO in
+            // a line an operator can aggregate, rather than loop in silence.
+            //
+            // A named failure beats a silent one. This is deliberately NOT a
+            // canned learner-facing sentence: writing one here would be exactly
+            // the "invent pedagogy" move turnProgress.ts's C4 forbids, and the
+            // repair layers that DO own learner-facing text (filler repair, the
+            // remediation floor) already run upstream.
+            if ((turnProgressHoisted?.rung ?? 0) >= 3) {
+              console.log('[turn-progress] ' + JSON.stringify({
+                action: 'unservable',
+                stagnantTurns: turnProgressHoisted?.stagnantTurns ?? 0,
+                conceptId: resolvedConceptId ?? null,
+                phase: phaseBeforeTurnHoisted,
+                servedFromMemory,
+              }))
+            }
             if (releasePending) {
               // SPEND IT. `recordMcqAsked` fires on the GRADE, not on the ask —
               // deliberately, so a dry pool cannot burn probes that produced no

@@ -157,7 +157,21 @@ describe('S2 — reachability theorem over the real conversation-state fold', ()
     expect(phases).toContain('DEMONSTRATE')
   })
 
-  it('but an UNSANCTIONED ask produces nothing at all — OBSERVE never concludes', () => {
+  it('S7 RUNG 2: an unsanctioned ask STILL concludes once the stall is recognised', () => {
+    // The same move as the latent hazard below, plus the one boolean rung 2
+    // supplies. The lock opens, through the EXISTING transition at the EXISTING
+    // threshold — no new phase, no new counter, no phase assigned by the
+    // supervisor.
+    const stalled: TurnEvidence = {
+      ...MOVES.ungradeableAnswerToUnsanctionedAsk, diagnosticStalled: true,
+    }
+    let s = initialConversationState('proof.concept')
+    const seen: string[] = []
+    for (let i = 0; i < 4; i++) { s = advanceConversationState(s, stalled); seen.push(s.phase) }
+    expect(seen).toContain('DEMONSTRATE')
+  })
+
+  it('and WITHOUT that boolean the hazard is unchanged — rung 2 is the only widening', () => {
     // The double-lock, stated exactly: when the kernel did not choose to ask,
     // the same predicate that withholds the authored probe also withholds the
     // escape. Bounded in practice (S1: the route supplies 'ask' often enough),
