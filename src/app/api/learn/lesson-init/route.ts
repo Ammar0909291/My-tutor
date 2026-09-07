@@ -541,6 +541,37 @@ export async function POST(req: Request) {
       console.warn('[lesson-init] field-line sign check skipped:', err)
     }
 
+    // THE OPENING TURN CANNOT TEACH THE EMISSION THEORY OF VISION.
+    //
+    // Fifth repair in this chain, here for the reason the four above it give:
+    // the opening turn lives behind its own endpoint.
+    //
+    // MEASURED on the real account, 2 of 2 openings of `phys.opt.reflection`:
+    // "the light that leaves your eyes hits the smooth glass" and "light from
+    // your eyes hits the mirror" — the eye as the SOURCE of the light it sees
+    // with, in the lesson's first paragraph. The authored content is correct,
+    // so this is generated prose and there is nothing upstream to fix.
+    //
+    // An authored misconception cannot reach this sentence: the opening's
+    // prompt comes from buildTutorSystemPrompt, which injects no misconception
+    // data. The corpus entry added alongside this guard is the durable
+    // representation, not the thing that stops this sentence today.
+    try {
+      const { repairVisionDirection } = await import('@/lib/teaching/visionDirectionGuard')
+      const vision = repairVisionDirection(routed.text, topicSlug)
+      if (vision.repaired.length > 0) {
+        console.warn('[lesson-init] ' + JSON.stringify({
+          event: 'vision-direction-repaired',
+          topicSlug,
+          repaired: vision.repaired,
+        }))
+        routed = { ...routed, text: vision.text }
+      }
+    } catch (err) {
+      // A repair must never stop a lesson from opening.
+      console.warn('[lesson-init] vision direction check skipped:', err)
+    }
+
     try {
       const { stripScaffoldHeadings } = await import('@/lib/teaching/scaffoldHeadings')
       const scaffold = stripScaffoldHeadings(routed.text)

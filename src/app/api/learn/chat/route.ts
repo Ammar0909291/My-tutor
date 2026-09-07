@@ -6292,6 +6292,28 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         }
       } catch { /* non-fatal — a repair must never break a turn */ }
 
+      // A TEACHING TURN CANNOT TEACH THE EMISSION THEORY OF VISION.
+      //
+      // Sibling of the field-line repair above, ported to this route for the
+      // same reason it was: a repair added to one endpoint does not reach the
+      // other. The defect was captured on the OPENING turn (lesson-init, 2 of 2
+      // openings of phys.opt.reflection), but the mirror-and-your-face anchor
+      // recurs whenever the tutor re-explains, so the claim is reachable here
+      // too. Concept-scoped to phys.opt.reflection, idempotent, and a no-op for
+      // every other lesson and for text it does not govern.
+      try {
+        const { repairVisionDirection } = await import('@/lib/teaching/visionDirectionGuard')
+        const vision = repairVisionDirection(cleanText, decisionConceptIdHoisted)
+        if (vision.repaired.length > 0) {
+          console.warn('[learn/chat] ' + JSON.stringify({
+            event: 'vision-direction-repaired',
+            conceptId: decisionConceptIdHoisted,
+            repaired: vision.repaired,
+          }))
+          cleanText = vision.text
+        }
+      } catch { /* non-fatal — a repair must never break a turn */ }
+
       // CRITERION 5 — A CORRECT ANSWER IS TOLD IT WAS CORRECT.
       //
       // Measured 2026-08-30 by rubricScore.ts: only 39% of server-graded-correct
