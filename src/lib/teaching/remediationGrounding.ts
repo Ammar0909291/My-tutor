@@ -85,6 +85,12 @@ function readsAsProse(text: string): boolean {
   if (s.length < 25 || s.length > 400) return false
   if (/^[[(]/.test(s)) return false           // "[Boundary statement] …"
   if (/^\s*\d+[.)]\s/.test(s)) return false   // a numbered rubric item
+  // A syllabus outline is not a sentence — see remediationOutputContract.ts's
+  // buildRemediationFallbackText for the measured incident (chem.atomic.
+  // bohr-model's KG description, semicolon-joined topic fragments, served
+  // verbatim as a "simplified" explanation) and the corpus-wide count (485 of
+  // 1,775 descriptions share this shape) that make this the same check here.
+  if ((s.match(/;/g)?.length ?? 0) >= 2) return false
   return true
 }
 

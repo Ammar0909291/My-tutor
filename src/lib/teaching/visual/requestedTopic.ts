@@ -307,6 +307,18 @@ export const DISCOURSE_NOUNS = new Set([
   'answer', 'question', 'step', 'part', 'example', 'formula', 'difference',
   'problem', 'exercise', 'solution', 'mistake', 'error', 'result', 'reason',
   'way', 'method', 'rule', 'idea', 'meaning', 'word', 'note', 'point',
+  // MEASURED (real-account student-experience study, 2026-09-06): "i see
+  // picture but i dont understand what it show. what this line and numbers
+  // mean?" — a learner asking what a LINE DRAWN IN A DIAGRAM means — resolved
+  // to `math.geom.line "Line"` (EXACT_TITLE, 0.95) and opened a knowledge-gap
+  // excursion into basic coordinate geometry mid-physics-lesson. Same shape as
+  // `point` above ("what is the point of this?" -> math.geom.point): a
+  // single-word KG title that is also the ordinary English word for a mark on
+  // a diagram, far more often meant that way than as a request for the
+  // geometric definition. "field line", "number line", "parallel lines" all
+  // survive (each needs only the OTHER word, which is not discourse), and the
+  // narrow, single-concept cost matches the one `point` already accepted.
+  'line',
   // HOW TO DELIVER IT, NOT WHAT TO TEACH — the manner adverbs.
   //
   // Measured 2026-08-29, physics `phys.qm.hydrogen-atom-qm`, a struggling-
@@ -488,6 +500,77 @@ export const DISCOURSE_NOUNS = new Set([
 ])
 
 /**
+ * VISUAL RE-SHOW FILLER — "show the picture AGAIN, I want to LOOK one more
+ * TIME" — words that survive `extractRequestedTopic` but never name a topic.
+ *
+ * MEASURED, live chemistry observation study (2026-09-06). The persona's own
+ * fixed line, "can you show the picture again, i want to look one more
+ * time", was sent verbatim after every visual in a 10-lesson sample and
+ * extracted as the TOPIC "picture again, i want to look one more time" in 3
+ * of 10 lessons (and the shorter "show the picture again" / "can you show
+ * that image again" independently reproduce the same defect). `picture` and
+ * `image` correctly classify as `isMediumWord`, but `again`, `want`, `look`
+ * (also independently in `DISCOURSE_NOUNS`), `more`, `once` and `see` do
+ * not, so `namedTopicUnknownTo`'s `.every()` filter never reaches true and
+ * the phrase survives as a genuine "something else" — feeding
+ * `excursionTeachingTitleHoisted` and, from there, `buildExcursionDirective`'s
+ * `target`, which literally instructs the model to "Teach 'picture again, i
+ * want to look one more time' directly and properly". Two production
+ * failures traced to exactly this: `chem.pblock.group15` spent two
+ * assessment turns quizzing "why do people look at diagrams again" instead
+ * of Group 15 chemistry, and `chem.thermo.entropy` printed the directive's
+ * own vocabulary back at the learner verbatim ("...use the phrase 'picture
+ * again, i want to look one more time' in your description").
+ *
+ * Checked against every concept title in all six registered subjects (1,775
+ * concepts): none contains any of these words as its only distinguishing
+ * vocabulary, matching the standard this file already holds `main`/
+ * `practice`/`check` to. A LOCAL set, not merged into the shared
+ * `DISCOURSE_NOUNS` export, because `resolveVisualTarget.ts`'s medium-word
+ * check does not consult `DISCOURSE_NOUNS` at all and needs these same words
+ * directly; keeping them here, consulted by both, is the ONE definition this
+ * file's own docstring for `namedTopicUnknownTo` already commits to.
+ *
+ * Deliberately does NOT include `time` on its own — the module's own
+ * `LEADING_REPEAT_ADVERBIAL` comment already records `time` as real subject
+ * vocabulary ("explain time dilation"). `time` is safe ONLY as part of the
+ * fixed phrase "one more time"/"one time"/"once more", which is why it is
+ * tested as those phrases below rather than added as a bare word.
+ */
+const VISUAL_REPEAT_FILLER = new Set(['again', 'want', 'look', 'more', 'once', 'see'])
+
+/**
+ * The "one more time" family, matched ANYWHERE in the title rather than only
+ * at the front (unlike `LEADING_REPEAT_ADVERBIAL`, which exists to trim the
+ * extracted title and must stay front-anchored for that job). Reused here so
+ * `time` is treated as consumed by the idiom precisely where the idiom
+ * occurs, and left as ordinary — and protected — subject vocabulary
+ * everywhere else. Same alternatives as `LEADING_REPEAT_ADVERBIAL`, so the
+ * two can never disagree about what this idiom is.
+ */
+const REPEAT_ADVERBIAL_PHRASE_ANYWHERE =
+  /\b(?:just\s+)?(?:one\s+more\s+times?|once\s+more|one\s+more|one\s+time)\b/gi
+
+/**
+ * Is this topic nothing but "show it again" — a medium noun, generic filler,
+ * and/or the "one more time" idiom, with no genuine subject named?
+ *
+ * `time` is handled by removing the idiom as a PHRASE first and re-deriving
+ * the word set from what remains, so a bare "time" that survives ONLY
+ * because "one more time" was stripped around it is correctly treated as
+ * filler, while "time" in "explain time dilation" (no such idiom present)
+ * is untouched and still blocks suppression via the ordinary word check.
+ */
+export function isPureVisualRepeatRequest(topic: RequestedTopic): boolean {
+  const withoutIdiom = topic.title.replace(REPEAT_ADVERBIAL_PHRASE_ANYWHERE, ' ')
+  const remaining = contentWords(withoutIdiom)
+  for (const w of remaining) {
+    if (!isMediumWord(w) && !DISCOURSE_NOUNS.has(w) && !VISUAL_REPEAT_FILLER.has(w)) return false
+  }
+  return true
+}
+
+/**
  * THE TOPIC THE LEARNER NAMED, WHEN IT IS NOT THE ONE ALREADY BEING TAUGHT.
  *
  * Extracted from `requestTargetsSomethingElse`, which asked exactly this
@@ -529,6 +612,11 @@ export function namedTopicUnknownTo(message: string, taughtText: string): Reques
   // lesson machinery has named no subject; a phrase with any real word in it
   // has, so "chemical formula" and "first law" are unaffected.
   if (named.every((w) => isMediumWord(w) || DISCOURSE_NOUNS.has(w))) return null
+  // "show the picture again, i want to look one more time" — the same
+  // medium-is-not-a-topic rule, extended to a medium noun plus generic
+  // re-show filler. See `isPureVisualRepeatRequest`'s own comment for the
+  // measured production failures this closes.
+  if (isPureVisualRepeatRequest(requested)) return null
 
   const taught = contentWords(taughtText ?? '', true)
   for (const word of named) if (taught.has(word)) return null

@@ -469,6 +469,19 @@ export function buildRemediationFallbackText(conceptSentence: string | null | un
   if (s.length < 25 || s.length > 400) return null
   if (/^[[(]/.test(s)) return null            // "[Boundary statement] …"
   if (/^\s*\d+[.)]\s/.test(s)) return null    // a numbered rubric item
+  // A SYLLABUS OUTLINE IS NOT A SENTENCE, EVEN THOUGH IT PASSES EVERY CHECK
+  // ABOVE. MEASURED (real-account student-experience study, 2026-09-06,
+  // chem.atomic.bohr-model): a confused learner begged "easy easy please",
+  // and the fallback served, verbatim, the KG's own `description` field —
+  // "Postulates of Bohr's model; energy levels in hydrogen; radii, velocities
+  // and energies; limitations of the model." — a topic list written for a
+  // curriculum author's outline, with no subject or verb, as if it were a
+  // simplified explanation. 485 of the 1,775 canonical KG descriptions share
+  // this exact semicolon-joined-fragments shape (measured across all six
+  // subjects), so this was never a single bad row. Two or more semicolons is
+  // the reliable, structural signal an outline leaves and a genuine
+  // explanatory sentence essentially never does.
+  if ((s.match(/;/g)?.length ?? 0) >= 2) return null
   return (
     'Let me put it in the simplest words I have.\n\n'
     + s + '\n\n'

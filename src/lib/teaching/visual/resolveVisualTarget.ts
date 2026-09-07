@@ -18,7 +18,7 @@
 import { getKGNode } from '@/lib/curriculum/knowledgeGraph'
 import { resolveRequestedConceptId, conceptIndex } from '@/lib/teaching/concept/requestedConcept'
 import { isTopicQuestion } from './session'
-import { extractRequestedTopic, isMediumWord } from './requestedTopic'
+import { extractRequestedTopic, isMediumWord, isPureVisualRepeatRequest } from './requestedTopic'
 import { contentWords } from './visualEngine'
 import type { ArchetypeContext } from './archetypes'
 
@@ -170,6 +170,11 @@ export function requestTargetsSomethingElse(message: string, target: VisualTarge
   // the lesson rather than suppress it. `VISUAL_MEDIUM_NOUNS` is the list the
   // engine already keeps for exactly this distinction; there is no second one.
   if (named.every((w) => isMediumWord(w))) return false
+  // "show me that image again" / "...one more time" — the same rule, extended
+  // to a medium noun plus generic re-show filler (`isPureVisualRepeatRequest`,
+  // shared with `namedTopicUnknownTo` so the visual layer and the excursion
+  // layer can never disagree about what this idiom is).
+  if (isPureVisualRepeatRequest(requested)) return false
   // POSITIVE EVIDENCE REQUIRED, and `extractRequestedTopic` already applies
   // it: a phrase with fewer than two content words is not a name, so it
   // returns null above and nothing is suppressed. "explain this again",

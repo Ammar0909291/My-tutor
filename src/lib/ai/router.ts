@@ -48,21 +48,31 @@ const OPENROUTER_MODEL = process.env.OPENROUTER_MODEL ?? 'deepseek/deepseek-chat
 // Gemini+OpenRouter outage together doesn't take teaching turns down.
 const GROQ_API_KEY = process.env.GROQ_API_KEY ?? ''
 /**
- * Default flipped to gpt-oss-20b (2026-08-21), after a real production A/B
- * test on the identical 12-concept chemistry certification batch: 10/12 PASS
- * on both models, same failure count, same failure class (a CHECK/PRACTICE
- * turn ending in an open problem instead of a graded MCQ), on a different
- * concept per model — no measurable quality difference at n=12. 20b measured
- * 51.4% cheaper on the real tokens consumed ($0.0774 vs $0.1593 for that
- * batch). GROQ_MODEL env override still works for anyone who wants 120b as
- * the actual default; GROQ_MODEL_120B below is the named fallback identifier
- * used by the certification override path (src/app/api/learn/chat/route.ts)
- * so 120b remains one line away without hunting for the string.
+ * Default flipped BACK to gpt-oss-120b (2026-09-06, explicit owner
+ * instruction), reversing the 2026-08-21 A/B-test-driven flip to gpt-oss-20b
+ * described below. GROQ_MODEL env override still works for anyone who wants
+ * 20b instead; GROQ_MODEL_20B below is the named fallback identifier for
+ * that rollback, the same way GROQ_MODEL_120B was kept when the roles were
+ * reversed.
+ *
+ * Prior reasoning (2026-08-21, superseded by the owner instruction above):
+ * flipped to gpt-oss-20b after a real production A/B test on the identical
+ * 12-concept chemistry certification batch: 10/12 PASS on both models, same
+ * failure count, same failure class (a CHECK/PRACTICE turn ending in an open
+ * problem instead of a graded MCQ), on a different concept per model — no
+ * measurable quality difference at n=12. 20b measured 51.4% cheaper on the
+ * real tokens consumed ($0.0774 vs $0.1593 for that batch). That cost
+ * finding is not disputed; the owner chose to run the larger model as the
+ * default regardless of it.
  */
-const GROQ_MODEL = process.env.GROQ_MODEL ?? 'openai/gpt-oss-20b'
-/** Named 120b identifier — kept as an explicit, documented, reversible
- *  fallback. Not read by the default chain; used by the cert-override path
- *  and available for a manual rollback (set GROQ_MODEL=openai/gpt-oss-120b). */
+const GROQ_MODEL = process.env.GROQ_MODEL ?? 'openai/gpt-oss-120b'
+/** Named 20b identifier — kept as an explicit, documented, reversible
+ *  fallback (the previous default). Not read by the default chain; available
+ *  for a manual rollback (set GROQ_MODEL=openai/gpt-oss-20b). */
+export const GROQ_MODEL_20B = 'openai/gpt-oss-20b'
+/** Named 120b identifier — now equal to the default chain's value. Kept for
+ *  the certification override path (src/app/api/learn/chat/route.ts) and as
+ *  an explicit reference so the string isn't duplicated. */
 export const GROQ_MODEL_120B = 'openai/gpt-oss-120b'
 
 /** The teaching language the learner selected. This is the ONLY routing signal. */

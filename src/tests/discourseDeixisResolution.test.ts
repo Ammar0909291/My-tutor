@@ -191,9 +191,10 @@ describe('Phase 6 P0 — the unresolved-topic excursion path is closed too', () 
 // ═══════════════════════════════════════════════════════════════════════════
 describe('Phase 6 P0 — the one measured false negative, pinned deliberately', () => {
   it('a bare "teach me point" no longer resolves to math.geom.point', () => {
-    // Across all 1,775 KG concepts in six subjects, math.geom.point is the ONLY
-    // one whose entire title is discourse vocabulary. Accepted trade, pinned
-    // here so a future reader sees it was measured rather than missed.
+    // Across all 1,775 KG concepts in six subjects, math.geom.point is one of
+    // TWO whose entire title is discourse vocabulary (see 'line' below, added
+    // 2026-09-06). Accepted trade, pinned here so a future reader sees it was
+    // measured rather than missed.
     expect(resolveRequestedConceptId('teach me point', PHYSICS, 'physics')).toBeNull()
   })
 
@@ -203,5 +204,24 @@ describe('Phase 6 P0 — the one measured false negative, pinned deliberately', 
     // the matcher only ever saw the bare fragment [Point] — which is why that
     // case is covered above as an improvement rather than here as a survivor.
     expect(resolveRequestedConceptId('explain point of view', ENGLISH, 'english')).not.toBeNull()
+  })
+
+  it('a bare "teach me line" no longer resolves to math.geom.line (2026-09-06)', () => {
+    // MEASURED (real-account student-experience study): "i see picture but i
+    // dont understand what it show. what this line and numbers mean?" —
+    // asking about a line drawn in a diagram — resolved to math.geom.line
+    // (EXACT_TITLE, 0.95) and opened an excursion into basic geometry
+    // mid-physics-lesson. Same shape as 'point', same accepted trade.
+    expect(resolveRequestedConceptId('teach me line', PHYSICS, 'physics')).toBeNull()
+    expect(resolveRequestedConceptId('what this line and numbers mean?', PHYSICS, 'physics')).toBeNull()
+  })
+
+  it('...but "Field Lines"/"Number Line" — real multi-word titles — still resolve', () => {
+    // One real word is enough: 'field'/'number' are not discourse, so these
+    // survive exactly as 'point of view' does above.
+    expect(resolveRequestedConceptId('explain electric field lines', PHYSICS, 'physics'))
+      .toBe('phys.em.electric-field')
+    expect(resolveRequestedConceptId('what is a number line', 'math.arith.counting', 'mathematics'))
+      .toBe('math.arith.number-line')
   })
 })
