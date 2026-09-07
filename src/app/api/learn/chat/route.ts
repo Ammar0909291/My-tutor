@@ -8692,6 +8692,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           {
             const { classifyTurn, foldStagnation, escalationRung } =
               await import('@/lib/teaching/turnProgress')
+            const { wouldRepeatPreviousTurn, mostRecentAssistantText } =
+              await import('@/lib/teaching/remediationOutputContract')
             const { isDegradedProvider: isDegradedForProgress } =
               await import('@/lib/eos-runtime/degradedMode')
             const before = conversationStateHoisted
@@ -8708,7 +8710,22 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // is the whole point here, because re-serving the same question
               // is the symptom, not progress.
               freshProbeAttached: mcqHoisted !== null,
-              distinctTeachingDelivered: cleanText.trim().length > 0,
+              // DISTINCT, not merely non-empty. Measured 2026-09-07 with the
+              // real route: a model that repeats the SAME sentence every turn
+              // ("Let us look at weak acids.") kept this true forever, so a
+              // lesson frozen at GUIDE with correctAtCheck 0 reported
+              // stagnantTurns 0 and no rung could ever fire. Repetition is the
+              // symptom — it must never count as progress.
+              //
+              // Reuses `wouldRepeatPreviousTurn` and `mostRecentAssistantText`,
+              // the pair the remediation floor already uses, so "repeat" means
+              // exactly one thing in this runtime rather than two.
+              distinctTeachingDelivered:
+                cleanText.trim().length > 0
+                && !wouldRepeatPreviousTurn(
+                  cleanText,
+                  mostRecentAssistantText(learnSession.messages, MessageRole.ASSISTANT),
+                ),
               learnerRequestHonoured: learnerRequestHoisted !== null,
               knowledgeGapOpened: knowledgeGapHoisted !== null,
               degradedTurn: isDegradedForProgress(provider),

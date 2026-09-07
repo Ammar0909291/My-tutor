@@ -131,3 +131,16 @@ describe('STRUCTURAL — the four constraints that stop this becoming a 2nd stat
     expect(code).not.toMatch(/correctIndex|gradeMcq|recordMcqAsked|masteryVerified/)
   })
 })
+
+describe('S6 — repetition is not progress (the weak-acid shape)', () => {
+  it('a tutor repeating itself accrues stagnation; a tutor teaching new material does not', () => {
+    const repeating = { ...NOTHING, distinctTeachingDelivered: false }
+    const teaching = { ...NOTHING, distinctTeachingDelivered: true }
+    // Measured through the real route: a model that answers with the SAME
+    // sentence every turn kept `distinctTeachingDelivered` true when it was
+    // wired to "text is non-empty", so a lesson frozen at GUIDE with
+    // correctAtCheck 0 reported stagnantTurns 0 forever and no rung could fire.
+    expect(escalationRung(run(Array(4).fill(repeating)))).toBe(3)
+    expect(escalationRung(run(Array(9).fill(teaching)))).toBe(0)
+  })
+})
