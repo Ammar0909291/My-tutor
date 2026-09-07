@@ -4060,8 +4060,46 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // cost the learner their turn. Widening that line to carry one more
         // name would have silently blinded that guard.
         const { closingTurnWithholdsQuestion } = await import('@/lib/teaching/gateAssessment')
-        const phaseBeforeTurn = (snapshot as { conversationState?: { phase?: unknown } } | null)
-          ?.conversationState?.phase
+        // R83 — READ THE PHASE readConversationState ALREADY RESOLVED, NOT A
+        // SECOND, UNDEFAULTED RE-DERIVATION OF IT.
+        //
+        // MEASURED: on turn 1 of a genuinely fresh session (no persisted
+        // snapshot yet — `[ladder-reset] {"reason":"no-stored-state",...}`),
+        // `snapshot?.conversationState?.phase` is `undefined` — the raw field
+        // simply does not exist yet — so EVERY string comparison against it
+        // below (`phaseBeforeTurn === 'OBSERVE'`, `'GUIDE'`, `'DEMONSTRATE'`,
+        // `isMasteryGatePhase(phaseBeforeTurn)`) silently fails, and
+        // `phaseAllowsProbe`/`probeAttachablePhase` come back false —
+        // `[gate-eligibility]` even DROPS its own "phase" key that turn
+        // (`JSON.stringify` omits an undefined value), which is why that log
+        // line was silently missing "phase" on exactly the turns this broke.
+        // R81's OBSERVE substitution and R82's askViolation withhold — both
+        // conditioned on `phaseBeforeTurn === 'OBSERVE'` — therefore NEVER
+        // fire on a session's true first turn, regardless of what the model
+        // does that turn. Confirmed live: `phys.mech.conservative-forces`
+        // turn 1, `[ladder] {"move":"ask","mcqAsked":true,"phaseBefore":
+        // "OBSERVE","phaseAfter":"DEMONSTRATE",...}` alongside
+        // `[turn-decision] {"divergences":["QUESTION_SHIPPED_WITHOUT_PROBE"]}`
+        // — the LADDER's own fold correctly knew this was OBSERVE; the gate's
+        // separate read of the raw snapshot did not.
+        //
+        // `conversationStateHoisted` (~L2843, `readConversationState(snapshot
+        // ?.conversationState, convConceptId)`) is the SAME snapshot field,
+        // already resolved through the SAME fallback the rest of the ladder
+        // relies on: `readConversationState` returns
+        // `initialConversationState(currentConceptId)` — phase 'OBSERVE' —
+        // whenever the raw field is missing or invalid, exactly the
+        // fresh-session case above. It is computed earlier in this same
+        // request and never reassigned before this point (only read). Reading
+        // it here instead of re-deriving from the raw snapshot makes this the
+        // ONE place that decides "the phase before this turn", matching what
+        // route.ts already does at its OWN other two `?? 'OBSERVE'` fallback
+        // (~L5845) rather than adding a third, disagreeing convention. The raw
+        // read survives as a fallback only for the case `conversationStateHoisted`
+        // itself is unexpectedly null.
+        const phaseBeforeTurn = conversationStateHoisted?.phase
+          ?? (snapshot as { conversationState?: { phase?: unknown } } | null)
+            ?.conversationState?.phase
         {
           const cs = (snapshot as {
             conversationState?: { correctAtCheck?: number; correctAtPractice?: number }
