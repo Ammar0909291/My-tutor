@@ -64,8 +64,15 @@ describe('a completed lesson cannot ask another teaching question', () => {
   it('the finalising turn REPLACES the outgoing text with the close', () => {
     // The defect was that the model's already-drafted question was returned
     // alongside the completion payload.
-    const payloadAt = ROUTE.indexOf('lessonCompletionHoisted = buildCompletionPayload(')
+    //
+    // Two call sites now build this payload with this exact snippet: the
+    // already-complete re-serve (P13, added so a stuck-forever learner always
+    // gets the actionable card back — see completedLessonRepeatedServe.test.ts)
+    // and the finalising turn itself. `lastIndexOf` scoped to just before
+    // `closeAt` finds THIS turn's own occurrence specifically, not the
+    // earlier re-serve one.
     const closeAt = ROUTE.indexOf('cleanText = buildLessonCloseText(')
+    const payloadAt = ROUTE.lastIndexOf('lessonCompletionHoisted = buildCompletionPayload(', closeAt)
     expect(payloadAt).toBeGreaterThan(-1)
     expect(closeAt).toBeGreaterThan(payloadAt)
     // and no second finalisation site sits between them
@@ -140,8 +147,11 @@ describe('Continue / Got it cannot resume a completed lesson', () => {
 
   it('the deterministic serve makes no model call', () => {
     // provider=memory on that branch is what proves no provider was invoked.
+    // Window widened: the stuck-loop fix (rebuilding the completion payload
+    // on every re-serve, not just the first finalising turn — see
+    // completedLessonRepeatedServe.test.ts) added code ahead of this line.
     const serve = ROUTE.slice(ROUTE.indexOf('if (serveLessonComplete)'))
-    expect(serve.slice(0, 1200)).toContain("provider = 'memory'")
+    expect(serve.slice(0, 2800)).toContain("provider = 'memory'")
   })
 
   it('the prompt block remains as defence in depth for later turns', () => {
