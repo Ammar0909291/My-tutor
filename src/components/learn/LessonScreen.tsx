@@ -152,7 +152,11 @@ const NON_CODE_SUBJECTS = ['english', 'russian', 'hindi', 'german', 'arabic', 'm
 // suffixed that way. --indigo/--indigo-hover in src/styles/tokens.css are the
 // canonical theme-token definition of this same color; keep both in sync.
 const UI = {
-  indigo: '#6C5CE7', indigoDark: '#5A4BD1',
+  // Study Board palette — chalk-amber / whiteboard-marker, replacing the
+  // earlier generic purple-on-dark "AI chat" accent. Not theme-reactive by
+  // itself (same as before this change), but sits legibly on both the
+  // whiteboard and chalkboard surfaces the CSS tokens above now define.
+  indigo: '#C97A22', indigoDark: '#A8611A',
   green: '#22C55E', greenBg: 'rgba(34,197,94,0.1)', greenBorder: 'rgba(34,197,94,0.3)',
   red: '#EF4444', redBg: 'rgba(239,68,68,0.08)', redBorder: 'rgba(239,68,68,0.25)',
   amber: '#F59E0B',
@@ -589,11 +593,11 @@ function InlinePracticePrompt({ practice, onAnswered }: { practice: InlinePracti
   const correct = selected !== null && selected === practice.answer
 
   return (
-    <Card style={{ padding: 18, maxWidth: '90%' }}>
-      <Pill color="var(--candy-purple, var(--coral))" style={{ marginBottom: 10 }}>
+    <Card style={{ padding: 18, maxWidth: '90%', borderTop: `3px solid var(--coral)` }}>
+      <Pill color="var(--coral)" style={{ marginBottom: 10 }}>
         🎯 Quick check
       </Pill>
-      <p style={{ fontSize: 16.8, fontWeight: 700, lineHeight: 1.5, color: 'var(--text-primary)', margin: '0 0 12px' }}>
+      <p className={styles.displayFace} style={{ fontSize: 17, fontWeight: 600, lineHeight: 1.45, color: 'var(--text-primary)', margin: '0 0 12px' }}>
         {practice.question}
       </p>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
@@ -4026,7 +4030,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 style={{ width: 30, height: 30, borderRadius: 8, border: '1px solid var(--border-default)', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-dim)', fontSize: 15, flexShrink: 0 }}>
                 ←
               </button>
-              <span style={{ fontSize: 15.6, fontWeight: 700, color: 'var(--text-primary)', flex: 1 }}>
+              <span className={styles.displayFace} style={{ fontSize: 17, fontWeight: 600, color: 'var(--text-primary)', flex: 1 }}>
                 {t('lesson_roadmap')}
               </span>
               {totalLessons > 0 && currentLessonData && (
@@ -4297,9 +4301,9 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                                 {icon}
                               </span>
                               <div style={{ flex: 1, minWidth: 0 }}>
-                                <div style={{
+                                <div className={styles.displayFace} style={{
                                   fontSize: 15, lineHeight: 1.35,
-                                  fontWeight: isCurrent ? 700 : 500,
+                                  fontWeight: isCurrent ? 600 : 500,
                                   color: (isCompleted || isMastered) ? 'var(--border-emphasis)'
                                     : isRevision ? '#79C0FF'
                                     : isSkipped ? '#F59E0B'
@@ -4701,7 +4705,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
 
               {/* Info */}
               <div style={{ flex: '1 1 auto', minWidth: 0 }}>
-                <p style={{ fontSize: 15.6, fontWeight: 600, color: 'var(--text-primary)' }}>
+                <p className={styles.displayFace} style={{ fontSize: 16.8, fontWeight: 600, color: 'var(--text-primary)' }}>
                   {t('lesson_tutor_max')}
                 </p>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 5, marginTop: 2 }}>
@@ -4781,7 +4785,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 onClick={() => setMaximizedPanel('curriculum')}
                 title={t('lesson_roadmap')}
                 aria-label={t('lesson_roadmap')}
-                style={{ height: 30, padding: '0 10px', borderRadius: 8, border: '1px solid var(--border-default)', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 5, color: 'var(--text-dim)', fontSize: 12.6, fontWeight: 700, flexShrink: 0 }}>
+                style={{ height: 30, padding: '0 12px', borderRadius: 999, border: `1px solid ${UI.indigo}40`, background: `${UI.indigo}14`, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 5, color: UI.indigo, fontSize: 12.6, fontWeight: 700, flexShrink: 0 }}>
                 <ListChecks size={14} />
                 <span className="hidden sm:inline">{t('lesson_roadmap')}</span>
               </button>
@@ -5391,7 +5395,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                   gap: 8,
                 }}
               >
-                <div style={{ fontSize: 18, fontWeight: 800, color: 'var(--text-primary)' }}>
+                <div className={styles.displayFace} style={{ fontSize: 19.8, fontWeight: 600, color: 'var(--text-primary)' }}>
                   {lessonCompletion.fullyMastered ? `\u2713 ${t('lc_complete')}` : `\u2713 ${t('lc_finished')}`}
                   {lessonCompletion.lessonTitle ? ` \u2014 ${lessonCompletion.lessonTitle}` : ''}
                 </div>
@@ -5522,7 +5526,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                     {t('lc_quick_check_label')}
                   </span>
                 </div>
-                <div style={{ fontSize: 14.4, fontWeight: 700, color: 'var(--text-primary)' }}>
+                <div className={styles.displayFace} style={{ fontSize: 15.6, fontWeight: 600, color: 'var(--text-primary)', lineHeight: 1.4 }}>
                   {activeMcq.question}
                 </div>
                 {activeMcq.options.map((option, i) => (

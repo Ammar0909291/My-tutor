@@ -5199,10 +5199,29 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             const summary = summaryFromAttempt(attempt)
             // Same builder the finalising turn uses, so the two closes cannot
             // drift into two different messages.
-            const { buildLessonCloseText } = await import('@/lib/teaching/lessonCompletion')
+            const { buildLessonCloseText, buildCompletionPayload } = await import('@/lib/teaching/lessonCompletion')
             text = buildLessonCloseText(attempt.lessonTitle, summary, {
               alreadyFinished: true, lang: teachingLang, conceptId: resolvedConceptId,
             })
+            // THE STUCK-LOOP FIX: `lessonCompletionHoisted` used to be set only
+            // on the ONE turn that finalizes a lesson (see the P6.6 outcome
+            // block below, guarded on `!lessonCompletedHoisted` — which is why
+            // it never re-fires here). Every LATER "already complete" turn
+            // therefore carried only the close TEXT, with no `data.lessonComplete`
+            // payload — so a client that never captured that one finalizing
+            // response (a reload, a resumed session, or simply not having been
+            // on screen for it) has no `lessonCompletion` state and nothing
+            // ever reconstructs it: the learner sees the same "on pause" text
+            // repeat forever with no button to act on, since the button only
+            // exists inside that ephemeral card. Rebuilding the identical
+            // payload from the SAME persisted attempt + summary this text was
+            // just built from re-attaches the actionable card to every re-serve
+            // — reusing buildCompletionPayload exactly as the finalizing turn
+            // does, so the two can never disagree.
+            lessonCompletionHoisted = buildCompletionPayload(
+              attempt, summary, lessonCtx?.currentLesson ?? null,
+              { lang: teachingLang, conceptId: resolvedConceptId },
+            )
             provider = 'memory'
             memoryFallbackReasonCode = 'lesson_complete'
             try { (await import('@/lib/understanding/brainMetrics')).recordServe('memory') } catch { /* observability only */ }
