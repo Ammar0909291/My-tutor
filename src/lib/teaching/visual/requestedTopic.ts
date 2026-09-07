@@ -436,7 +436,47 @@ export const DISCOURSE_NOUNS = new Set([
   // would make "explain sound" resolve to nothing.
   'look', 'seem', 'appear', 'like',
   // position words, safe here because one surviving word is enough
-  'next', 'last', 'first', 'previous', 'other',
+  'next', 'last', 'first', 'previous',
+  // `contentWords` (visualEngine.ts) folds any trailing-'s' word longer than
+  // 4 chars as a plural — 'previous' -> 'previou' — with no exception for a
+  // word that only LOOKS plural (the KG-resolver tokenizer's `singularize`
+  // has an explicit `/(ss|us|is)$/` guard for exactly this; `contentWords`
+  // does not). So the 'previous' entry above has been silently inert since
+  // it was added: every lookup against it is done with the folded form, and
+  // 'previou' was never in this set. Found while investigating the 'before'
+  // defect below, by testing 'previous' as a sibling position word and
+  // getting a live leak instead of the expected null. Fixing `contentWords`
+  // itself is a broader change with call sites well beyond this file (scene
+  // anchoring, grounding text) and is not attempted here; adding the actual
+  // folded string this Set is queried with is the narrow fix, same as how
+  // 'thanks' below already coexists with 'thank' for the same reason.
+  'previou',
+  'other',
+  // TEMPORAL CONNECTIVES — the sequencing counterpart of the position words
+  // just above, and the SAME gap in the SAME family: 'next'/'last'/'first'/
+  // 'previous' were covered, 'before'/'after' and their siblings were not.
+  //
+  // MEASURED (real-account student-experience re-run, 2026-09-06):
+  // `chem.bond.covalent-bonding`, an otherwise calm, on-topic turn, extracted
+  // the topic "before" ("what is before?" and its kin all match
+  // TOPIC_REQUEST_RE's `what\s+is` alternative, or QUESTION_FORM_RE's
+  // `why\s+is\s+` alternative, at a one-word floor) and opened an
+  // unresolved-topic excursion into the English word "before" mid-Chemistry-
+  // lesson. Confirmed no KG concept in any of the six subjects is titled with
+  // any of these words (`resolveRequestedConceptId` returns null for all of
+  // them), so the fallback `namedTopicUnknownTo` path is the only route in —
+  // exactly the "Unresolved-topic excursion" mechanism this file's own header
+  // comment documents for "Kubernetes pod scheduling"-shaped topics, just
+  // triggered by an ordinary function word instead of a genuine off-curriculum
+  // subject.
+  //
+  // 'while' is the one word here that is also real vocabulary somewhere in
+  // the curriculum (`eng.listening.note-taking-while-listening`,
+  // `cs.control.loops` "Iteration — while and for Loops") — safe for the same
+  // reason 'main'/'practice'/'check' are: one surviving real word is enough,
+  // so "teach me while loops" keeps 'loop' and still names its topic; only a
+  // BARE "what is while?" with nothing else is affected.
+  'before', 'after', 'then', 'while', 'during', 'earlier', 'later', 'soon',
   // WHAT KIND OF PRESENTATION, not what subject.
   //
   // Added after a real production capture: the session snapshot held
