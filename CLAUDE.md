@@ -2918,6 +2918,94 @@ attach more often.
   are complementary: the prompt line reduces LLM-echo repeats, this closes the deterministic
   conflict-driven memory re-serve.
 
+## Liveness programme — the runtime can no longer refuse forever (2026-09-07)
+
+**Read `src/tests/livenessEndToEnd.test.ts` and `src/tests/reachabilityProof.test.ts`
+before touching the assessment gate, `pendingMcq`, or `diagnosticProducedNothing`.**
+They are the before/after record, not decoration.
+
+### The diagnosis, and what it was NOT
+Two chemistry P0s (galvanic-cell stalled at CHECK with 5 ACTIVE probes unused;
+weak-acid stuck at OBSERVE producing prose questions) were investigated as fresh
+incidents. The AUTHORITY model was found SOUND and was not changed: `verified =
+evidence.serverGraded === true`, `decideModelProbe`, the suppression layer and
+`mcqForClient` already make it impossible for the LLM to manufacture mastery.
+Explicitly ruled out: missing authored content (chemistry is 186/186 at contract),
+the plain-vs-verified counter split (correct, keep), R82/R83, and "better prompting".
+
+**The real weakness: NO LIVENESS PROPERTY ANYWHERE.** Every guard answers "MAY
+this happen?"; nothing asked "HAS anything happened?", so individually-correct
+refusals compose into absorbing states. This repo had already hand-fixed the same
+shape three times (QL-2 scoping, QL-5 scoping, conceptBudget) — each time locally.
+
+### Why it was never caught: no test had ever executed the route
+Measured: `grep -rln "from '@/app/api/learn/chat/route'" src/tests` returned ZERO.
+Every "…RouteWiring"/"replay"/"integration" file asserts a regex over route SOURCE
+or re-chains the same pure functions by hand. Guards are tested; their COMPOSITION
+is not — and that is where both defects lived. `src/tests/support/turnHarness.ts`
+now executes the real `POST` with four I/O seams stubbed (auth, prisma via a
+Proxy with per-method defaults + 6 real models, a SCRIPTED model so adversarial
+output is a test INPUT, rate limiting). Acceptance: a tapping learner reaches
+`verified:true, check 1, practice 2` through the real route.
+
+### L1 — PROVEN, then CLOSED (this was P0 A)
+`resolveMcqChoice` correctly refuses to guess; measured, **10 of 12
+substantively-correct phrasings for a galvanic-cell probe are ungradeable,
+including the bare correct answer "the anode"** (the longer sentence containing
+it grades fine). So a learner who TYPES produces no grade → `pendingMcq` survives
+→ `noUnansweredProbeOnScreen` shuts the gate → the same question is re-served
+forever with 4 reviewed probes unused. Reproduced end-to-end: 8 correct answers,
+1 question, `correctAtCheck` 0.
+**Rung 1** (`turnProgress.ts` + route) releases a probe held ungraded for 2 turns.
+It grades nothing, moves no counter, changes no phase. Q1→Q2→Q3.
+Two things the tests forced: (a) rung 1 driven by the general stagnation counter
+NEVER FIRED, because a model teaching new text every turn answers "did anything
+happen" yes forever — the stuck dimension needed its own narrow counter
+(`probeHeldTurns`); (b) releasing without SPENDING re-served the identical probe,
+because `recordMcqAsked` fires on the GRADE, and its comment names the very
+invariant rung 1 removes. Spent now, through the same single writer.
+
+### L2 — REFUTED as stated, and the real residue
+End-to-end, OBSERVE holds ~4 turns then ESCAPES (the route supplies move='ask'
+often enough). A bounded delay, not a deadlock — recorded, not quietly dropped.
+Separately measured: **the prose channel's SAFETY half is already closed** —
+`withholdUngradedGateQuestion` + `shouldSuppressSignalCorrectness` strip a prose
+MCQ and drop the model's correctness claim on every turn, banking nothing false.
+So no prose stripping was added. What remained was liveness, and the gap was in
+the new code: `distinctTeachingDelivered` was wired to "text non-empty", so a
+tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
+`wouldRepeatPreviousTurn` (the remediation floor's own predicate).
+
+### What shipped
+- `src/lib/teaching/turnProgress.ts` — pure, ZERO imports. Four constraints
+  asserted STRUCTURALLY against its own source: owns only counters of system
+  inactivity, never names a phase, writes nothing, cannot grade/advance/discard.
+- Rung 1 release · Rung 2 (`diagnosticStalled`, one optional TurnEvidence
+  boolean consumed by the EXISTING `diagnosticProducedNothing` predicate — the
+  supervisor never assigns a phase) · Rung 3 = `[turn-progress] unservable`, a
+  NAMED failure; deliberately NOT a canned learner sentence (assembleLesson has
+  already run; writing one there would be inventing pedagogy).
+- `turnTelemetry.ts` — `TURN_EVENT`, one ~300-byte log line per turn, no DB
+  write (5 GB egress quota). **`foldLegalityMetrics` is finally called**: before
+  this, `askViolations` — which questionLegality documents as "the single most
+  diagnostic number the teaching runtime produces" — had ZERO callers in src/app.
+
+### Discipline notes for future sessions
+- ~10 pre-existing guards had to be touched. NONE deleted: each keeps its
+  original assertion verbatim in a dated comment and asserts the same invariant
+  against the new shape. `remediationFactuality` test 8 and this programme's own
+  diagnosis pins were INVERTED the same way.
+- Two pre-existing guards caught real bugs in this work: `gateAssessmentRouteWiring`
+  found rung 1's first draft persisting null while the response still carried the
+  question (a served-but-unpersisted probe); `replayDrift` caught the new evidence
+  field, which was REPLAYED rather than excused because a transcript genuinely
+  carries the facts.
+- The design-time invariant ("no legitimate non-terminal state may depend forever
+  on an event the runtime has made impossible to produce") is a THEOREM checked by
+  `reachabilityProof.test.ts`, parameterised by MOVE SET. It is NOT decidable at
+  runtime; the runtime carries the weaker, honest proxy "nothing happened for N
+  turns".
+
 ## Run locally
 ```
 cp .env.example .env   # set DATABASE_URL, AUTH_SECRET (openssl rand -base64 32), GROQ_API_KEY
