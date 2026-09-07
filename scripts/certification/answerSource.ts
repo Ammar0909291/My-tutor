@@ -176,7 +176,31 @@ export function indexFrom(probes: readonly CorpusProbe[]): AnswerIndex {
   const distinctStems = [...byQuestion.values()].filter((v) => v !== null).length
   // Order-independent so the fingerprint does not change when a corpus module
   // is re-ordered without its content changing.
-  const fingerprint = fingerprintOf([...byQuestion.keys()].sort(), usable)
+  //
+  // STEMS ALONE WERE NOT ENOUGH — MEASURED, NOT ANTICIPATED. Commit 7f7b34a6
+  // rewrote the CORRECT OPTION TEXT of 48 chemistry probes and touched no stem.
+  // The fingerprint therefore did not move: three certification batches and the
+  // run that exposed the problem all recorded the identical
+  // `probes:2750:h5e86a3a9`, which read as "same corpus" while production's
+  // database still held the pre-commit option text. `resolveAnswer` compares
+  // the AUTHORED CORRECT TEXT against the served options, so a corpus whose
+  // correct text has moved out from under the database returns
+  // `options-mismatch` and the concept goes UNMEASURED — which is exactly what
+  // chem.elect.electrolysis did.
+  //
+  // The fingerprint now covers precisely what `resolveAnswer` depends on: the
+  // normalised stem AND the authored correct text. Distractor-only edits still
+  // do not move it, and that is deliberate rather than an omission — no
+  // distractor can produce `options-mismatch`, so folding them in would make
+  // the marker change without any measurement consequence.
+  const fingerprint = fingerprintOf(
+    [...byQuestion.entries()]
+      .sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0))
+      // A collided stem indexes to null and is unanswerable; it contributes its
+      // key only, so poisoning a stem still moves the marker.
+      .map(([k, v]) => `${k} ${v ? normaliseQuestion(v.correctText) : ''}`),
+    usable,
+  )
   return { byQuestion, stats: { probes: usable, distinctStems, collisions }, fingerprint }
 }
 
