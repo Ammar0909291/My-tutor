@@ -5644,6 +5644,60 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         } catch (err) { console.warn('[mcq-grade] failed:', err) }
       }
 
+      // ── AN UNRESOLVED PENDING MCQ MUST NOT LEAK THROUGH THE SIGNAL TAG ──────
+      //
+      // MEASURED (chem.bio.vitamins Tier-A certification, three consecutive
+      // FAILED_PRODUCT/D4-not-verified runs, 2026-09-07). Production log,
+      // closing turn of a real run:
+      //
+      //   [mcq-grade] { asked: 'The four fat-soluble vitamins…',
+      //                 chosen: null, correct: null }
+      //   [ladder]    { signalTag: true, correctness: true,
+      //                 phaseBefore: 'PRACTICE', phaseAfter: 'TRANSFER',
+      //                 check: 1, practice: 2 }
+      //
+      // `pendingMcqHoisted` WAS a real authored probe this turn — the server
+      // attempted to grade it and `gradeMcqAnswer` could not resolve the
+      // learner's reply to any option (`mcqGradedThisTurn` is falsy, exactly
+      // the same shape as "no MCQ was pending at all"). Neither existing
+      // suppression covers this: the acknowledgement guard above only fires
+      // on a bare ack, the learner-question guard only fires when
+      // `detectLearnerQuestion` matches, and the unauthored-key check further
+      // below is itself gated on `mcqGradedThisTurn` being truthy — so it
+      // never even asks whether the pending key was authored when grading
+      // failed. With every guard silent, the model's own self-reported
+      // SIGNAL correctness for this turn flows through untouched, banks a
+      // PLAIN mastery credit and advances the phase ladder on a turn the
+      // server never verified at all.
+      //
+      // `serverGraded`/`gradedAgainstServerKeyHoisted` (computed below)
+      // correctly stays false for such a turn, so the STRICT counters never
+      // credit it — which is why `verified` correctly read false in the
+      // production run above. But the PLAIN counters and the phase ladder
+      // still moved on zero evidence, contaminating the record and (since
+      // `recordMcqAsked` is separately gated on the same `mcqGradedThisTurn`
+      // flag) leaving the same probe unmarked as spent, so it can be
+      // re-served and re-attempt the same gap on a later turn.
+      //
+      // Fix: treat "an authored (or unauthored) MCQ was pending and the
+      // server could not resolve it" as NO EVIDENCE this turn — the same
+      // class of suppression the ack/question guards above already apply,
+      // dropping only `correctness` and leaving `confidence`/`confusion`
+      // untouched (they describe the learner's behaviour, not a verified
+      // claim about this specific answer). This can only REMOVE a credit the
+      // server never earned; it cannot suppress a genuine graded answer,
+      // because that path sets `teachingSignal.correctness` from the grade
+      // itself a few lines above and is therefore never falsy here.
+      if (pendingMcqHoisted && !mcqGradedThisTurn && teachingSignal && teachingSignal.correctness !== undefined) {
+        console.warn('[mcq-grade] ' + JSON.stringify({
+          event: 'unresolved-pending-mcq-signal-suppressed',
+          conceptId: resolvedConceptId ?? null,
+          asked: pendingMcqHoisted.question.slice(0, 70),
+          claimedCorrectness: teachingSignal.correctness,
+        }))
+        teachingSignal = { ...teachingSignal, correctness: undefined }
+      }
+
       // Architectural Root Cause Fix: cross-check the SIGNAL against
       // independently observable evidence before it drives mastery state.
       // A CONTRADICTED signal is overridden (text wins over tag); a
