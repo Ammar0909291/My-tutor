@@ -4037,6 +4037,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // GUIDE or a mastery gate — the ORIGINAL isProbeAttachablePhase, never
       // the gate's E1-widened copy. See ModelProbeInput.probeWouldCountThisPhase.
       let probeWouldCountThisPhaseHoisted = false
+      // R82: was this turn's kernel-decided move NOT 'ask' at OBSERVE — the
+      // exact case conversationState.ts's 'teach'/'show' directive strings
+      // instruct as "Ask NO questions this turn"? See the withholding site
+      // below (~L5390) for the full rationale and the R81-14-residual
+      // evidence this closes.
+      let observeAskViolationHoisted = false
       // The model's own item when it was WITHHELD, kept so its prose copy can
       // be stripped too — a withheld widget with the question still written
       // out above it leaves an unanswerable question on the learner's screen.
@@ -4245,6 +4251,38 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           (phaseBeforeTurn === 'DEMONSTRATE') ||
           (phaseBeforeTurn === 'OBSERVE' && evidenceMoveHoisted === 'ask')
         phaseAllowsProbeHoisted = phaseAllowsProbe
+        // R82: the mirror image of the OBSERVE disjunct just above. R81
+        // measured 79/238 concepts failing certification because OBSERVE's
+        // first 'ask' turn served an unresolvable model-invented question;
+        // extending R81 resolved 65 of them. The remaining 14 all share one
+        // shape (turns:1, finalPhase:DEMONSTRATE): QL-1 (questionLegality.ts)
+        // legitimately ruled ASK illegal on that same turn — nothing had
+        // been taught yet — so decideNextMoveDetailed returned 'teach' or
+        // 'show', R81's ask-scoped condition correctly did not fire, and the
+        // model asked its own unkeyed question ANYWAY, in direct violation
+        // of the explicit "Ask NO questions this turn" instruction those two
+        // move strings carry (conversationState.ts TURN_DIRECTIVE). That is
+        // exactly what this codebase's own instrumentation names an
+        // askViolation (questionLegality.ts's LegalityMetrics) — a real
+        // defect reaching real learners, not a certification-instrument
+        // artifact: the runtime currently SERVES it, because
+        // `decideModelProbe`'s withhold logic gates on PHASE (does this
+        // question count toward mastery?), never on MOVE (did the kernel
+        // forbid asking at all?) — two genuinely different axes.
+        //
+        // Scoped to OBSERVE only, deliberately narrow and symmetric with
+        // R81 — NOT a blanket "any non-ask turn" rule. DEMONSTRATE's own E1
+        // substitution is unconditional on move BY DESIGN (R3: the model
+        // reliably asks at DEMONSTRATE regardless, so E1 substitutes an
+        // authored probe there instead of suppressing the question) and
+        // must not be touched. GUIDE/CHECK/PRACTICE/TRANSFER are unaffected
+        // — none of the 14 residual concepts showed a failure there, and
+        // widening past what is measured would be exactly the "smuggled in"
+        // change inventedProbeGuard.ts's own history warns against.
+        observeAskViolationHoisted =
+          phaseBeforeTurn === 'OBSERVE'
+          && evidenceMoveHoisted !== null
+          && evidenceMoveHoisted !== 'ask'
         // PHASE 3. Three of the terms this conjunction used to spell out by hand
         // — recovery, closing, and the learner-request term it was MISSING —
         // are now one question asked of the single precedence authority. What
@@ -5378,6 +5416,36 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // Separate override, same shape and same reason as the CLOSING one just
       // below. See inventedProbeGuard.ts.
       if (modelProbeWithheld) mcqHoisted = null
+      // R82 — withhold an OBSERVE askViolation, mirroring the override above.
+      //
+      // `decideModelProbe` (inventedProbeGuard.ts) already ran and, at
+      // OBSERVE, its PHASE-based check returns `serve:true, reason:
+      // 'phase-does-not-count'` — correct on ITS OWN axis (an invented key
+      // here cannot corrupt mastery) but silent on the MOVE axis this block
+      // checks: whether the kernel forbade asking on this turn at all. Both
+      // axes must independently agree to serve; either can withhold. This is
+      // therefore a SEPARATE override, not a change to that module's own
+      // logic — inventedProbeGuard.ts's own history already documents why
+      // its phase check must not be widened ("the undo").
+      //
+      // Guarded against the empty-turn trap the comment atop the
+      // `!text.trim()` degraded-response check documents (~L5470-5520): if
+      // the model wrote its ENTIRE reply into the MCQ tag with no prose,
+      // stripping it here would leave `text` empty and misroute the turn
+      // into the degraded/outage branch — a real turn stamped as an
+      // infrastructure failure. So this withholds only when clean prose
+      // survives the strip; the rarer whole-turn-was-a-tag case is left to
+      // existing behaviour rather than risking that regression.
+      if (observeAskViolationHoisted && mcqParse.mcq !== null && gateMcqHoisted === null
+        && mcqParse.cleanText.trim().length > 0) {
+        withheldModelMcqHoisted = mcqParse.mcq
+        mcqHoisted = null
+        console.warn('[gate-assessment] ' + JSON.stringify({
+          event: 'observe-ask-violation-withheld',
+          conceptId: resolvedConceptId ?? null,
+          asked: mcqParse.mcq.question.slice(0, 70),
+        }))
+      }
       // A CLOSING turn withholds BOTH question sources. The gate is already
       // excluded above, so this covers the model emitting an MCQ tag anyway,
       // against the close block's explicit instruction. Written as a separate
