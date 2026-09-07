@@ -149,6 +149,34 @@
 /* Below this width a 50% column is genuinely unusable for either a paragraph
    or a diagram, so the canvas becomes one column and the figure sits under
    its explanation — the pre-existing behaviour. Desktop never pays for this. */
+/* QUICK CHECK — the one active, server-gradeable MCQ, floating over Tutor
+ * Max instead of appearing as an ordinary chat message. Positioned relative
+ * to the chat Panel's own content wrapper (already `position: relative`),
+ * so this needs no portal and is not a browser popup — an in-app overlay
+ * only. Anchored above the composer, centred, with a comfortable reading
+ * width; on narrow screens it widens to most of the viewport instead of
+ * staying pinned to a desktop-sized card, and drops closer to the bottom
+ * edge so it never fights the keyboard for space above it. */
+.quickCheckFloating {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 88px;
+  width: min(440px, calc(100% - 24px));
+  max-height: min(56%, 420px);
+  overflow-y: auto;
+  z-index: 30;
+  border-radius: 16px;
+}
+
+@media (max-width: 640px) {
+  .quickCheckFloating {
+    bottom: 78px;
+    width: calc(100% - 16px);
+    max-height: 62%;
+  }
+}
+
 @media (max-width: 900px) {
   .teachingCanvas {
     grid-template-columns: minmax(0, 1fr);

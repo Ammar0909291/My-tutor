@@ -6,7 +6,7 @@ import {
   Check, ChevronDown, ChevronUp, Copy, Lightbulb, Loader2, Mic, Paperclip, Play, Send, Square, X,
   BookOpen, Dumbbell, BarChart3, Library as LibraryIcon, User, Settings as SettingsIcon,
   Bookmark, Sparkles, Users, ImageIcon, Trophy, Globe2, Gauge, ThumbsUp, ThumbsDown,
-  Network, ListChecks, Brain, Sparkle,
+  ListChecks, Brain, Sparkle, History as HistoryIcon,
 } from 'lucide-react'
 import { useLanguage } from '@/components/ui/LanguageToggle'
 import { useCountry, useTheme } from '@/components/Providers'
@@ -19,7 +19,7 @@ import type { VoiceTimingSignal } from '@/lib/voice/voiceSignal'
 import { fetchWithTimeout } from '@/lib/net/timeout'
 import { isFallbackResponse, pickRecoveryMessage } from '@/lib/learn/tutorRecovery'
 import { useDraftMessage, clearDraft } from '@/lib/hooks/useDraftMessage'
-import { LearnerPositionPanel, LockedTopicDetail } from '@/components/learn/LearnerPositionPanel'
+import { LockedTopicDetail } from '@/components/learn/LearnerPositionPanel'
 import { recordLastLesson } from '@/lib/hooks/useLastLesson'
 import { PracticePanel } from '@/components/learn/PracticePanel'
 import { InsightsPanel } from '@/components/learn/InsightsPanel'
@@ -821,6 +821,30 @@ export function nextFollowState(
 ): boolean {
   return learnerJustSent || isNearBottom(metrics)
 }
+
+/**
+ * Pure decision for Tutor History: did THIS answer count toward mastery?
+ *
+ * The only authoritative signal the client ever receives for "was this
+ * graded correct" is the server's aggregate checkCorrect+practiceCorrect
+ * count, because the answer key itself is deliberately never sent to the
+ * client (see the A-1 note on `resolveAnswer`/`mcqForClient` elsewhere in
+ * this codebase). A correct, gradeable answer is the only thing that moves
+ * that count, so a genuine increase since the baseline taken the instant the
+ * learner answered is the one honest test — never a guess, never a second
+ * grading path. `baseline: null` (no prior mastery snapshot existed yet, the
+ * very first probe of a lesson) is treated as 0, matching the pre-first-turn
+ * count every other mastery-gated control in this file already assumes.
+ */
+export function resolveMcqHistoryResult(
+  baseline: number | null,
+  newCheckCorrect: number | undefined,
+  newPracticeCorrect: number | undefined,
+): McqHistoryResult {
+  const before = baseline ?? 0
+  const after = (newCheckCorrect ?? 0) + (newPracticeCorrect ?? 0)
+  return after > before ? 'correct' : 'not-counted'
+}
 type MicState = 'idle' | 'recording' | 'processing'
 type AttachedFile = { name: string; content: string; language: string }
 // Panel identity — still needed for desktop maximize/restore, even though
@@ -833,6 +857,19 @@ type PanelName = 'curriculum' | 'code' | 'chat'
 // truth shared with the Lesson Navigation Panel, no duplicate type shapes.
 type RevisionTopic = { topicSlug: string; lessonTitle: string } | null
 type SkipWarning = { topicSlug: string; lessonTitle: string; unlocks: { slug: string; title: string }[] } | null
+/**
+ * One authored MCQ/assessment event, exactly as it happened, for the Tutor
+ * History panel. 'pending' until the next server turn's mastery counts
+ * confirm whether it counted; never re-derived from anything but that count.
+ */
+type McqHistoryResult = 'pending' | 'correct' | 'not-counted'
+type McqHistoryEntry = {
+  id: string
+  question: string
+  answer: string
+  askedAt: number
+  result: McqHistoryResult
+}
 type PromotionDecision = 'STAY' | 'REVIEW_REQUIRED' | 'PROMOTED'
 type EvidenceItem = { type: string; score: number; weight: number; label: string }
 type PromotionResult = {
@@ -952,7 +989,31 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   useEffect(() => { messagesLenRef.current = messages.length }, [messages.length])
   const historyScrolledRef = useRef(false)
   const [subjectMenuOpen, setSubjectMenuOpen] = useState(false)
-  const [maximizedPanel, setMaximizedPanel] = useState<PanelName | null>(null)
+  // ACTIVE LEARNING VIEW: Tutor Max (the chat panel) is the default maximized
+  // learner workspace — it starts 'chat' rather than null, so the 3-panel
+  // grid below never renders on mount and the very first paint already shows
+  // Tutor Max full-width beside the left nav rail. 'curriculum' repurposes
+  // the SAME maximize mechanism as the lesson-list overlay ("Lessons" button
+  // in the Tutor Max header); its own restore button returns to 'chat', not
+  // to a defunct 3-column split. No second state machine — this reuses the
+  // pre-existing PanelName maximize/restore plumbing exactly as it already
+  // worked for the curriculum/code panels, just re-pointed and re-defaulted.
+  const [maximizedPanel, setMaximizedPanel] = useState<PanelName | null>('chat')
+  // TUTOR HISTORY — every resolved MCQ/assessment event this session, sourced
+  // ONLY from data this component already treats as authoritative: the exact
+  // question/options the server served (activeMcq), the exact option text the
+  // learner tapped (the same string sendMessage submits), and the server's
+  // own mastery-count delta on the NEXT turn (checkCorrect + practiceCorrect)
+  // — the same signal every other mastery-gated control in this file already
+  // trusts. Never a second grading path: 'result' only ever reads a count
+  // that went up or didn't, it never re-judges the answer itself.
+  const [mcqHistoryLog, setMcqHistoryLog] = useState<McqHistoryEntry[]>([])
+  const [mcqHistoryOpen, setMcqHistoryOpen] = useState(false)
+  // Snapshot of (checkCorrect+practiceCorrect) taken the instant an option is
+  // tapped, so the next turn's delta can be attributed to THAT answer and
+  // only that answer — a ref because it must survive without forcing a
+  // render and must be read inside the response handler closure below.
+  const pendingMcqMasteryBaselineRef = useRef<number | null>(null)
   // ADAPTIVE VISUAL COMPLEXITY. The learner's canonical level, as the server
   // reports it each turn (see the note at its response site in
   // api/learn/chat/route.ts). Held here rather than on each message because it
@@ -1093,7 +1154,6 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   const [availableTopicSlugs, setAvailableTopicSlugs] = useState<string[]>([])
   const [lockReasons, setLockReasons] = useState<Record<string, { missingPrereqs: { slug: string; title: string }[] }>>({})
   const [expandedLockedTopic, setExpandedLockedTopic] = useState<string | null>(null)
-  const [knowledgeMapOpen, setKnowledgeMapOpen] = useState(false)
   const [bookmarkedLessons, setBookmarkedLessons] = useState<Set<number>>(new Set())
   // Real cross-session minutes studied today (from StudySession rows written on
   // session end), fetched once on mount as the baseline for the "Today's Goal"
@@ -1998,6 +2058,25 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
           phase: data.mastery.phase,
           checkCorrect: data.mastery.checkCorrect,
           practiceCorrect: data.mastery.practiceCorrect,
+        })
+      }
+      // TUTOR HISTORY: resolve the most recently tapped MCQ, if one is still
+      // 'pending', using the SAME authoritative mastery counts just applied
+      // above — never a second grading judgement. Runs whenever a mastery
+      // baseline was captured (i.e. an MCQ tap is awaiting this turn's
+      // result), whether or not this particular response carried a fresh
+      // `data.mastery` — an absent one means the counts did not move, which
+      // is itself the "not-counted" answer.
+      if (pendingMcqMasteryBaselineRef.current !== null) {
+        const baseline = pendingMcqMasteryBaselineRef.current
+        pendingMcqMasteryBaselineRef.current = null
+        const result = resolveMcqHistoryResult(baseline, data.mastery?.checkCorrect, data.mastery?.practiceCorrect)
+        setMcqHistoryLog((prev) => {
+          const idx = prev.findIndex((e) => e.result === 'pending')
+          if (idx === -1) return prev
+          const next = [...prev]
+          next[idx] = { ...next[idx], result }
+          return next
         })
       }
       // Sprint C: server already validated this with zod; re-validate
@@ -3310,6 +3389,24 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
 
   // Curriculum derived
   const currentLessonData = resolveActiveLesson(curriculumLessons, curriculumProgress)
+  // The lesson list's own "current" highlight must agree with the Tutor Max
+  // header above it — both must point at the same lesson. The list's row
+  // rendering calls computeLessonLockState, which compares lesson.order
+  // against the raw progress.currentLesson counter (only advances on a
+  // recorded completion); currentLessonData is this component's one
+  // authoritative "lesson on screen" value (resolveActiveLesson, honors
+  // activeLessonSlug) and can point elsewhere the moment a learner opens a
+  // lesson ahead of that counter — the same divergence class already fixed
+  // for findNextLesson/findPreviousLesson. Overriding just this one derived
+  // field for the list's lock-state lookups keeps computeLessonLockState's
+  // own contract, and every other caller of curriculumProgress, untouched.
+  const lessonListLockProgress: CurriculumProgress = useMemo(
+    () => ({
+      ...curriculumProgress,
+      currentLesson: currentLessonData?.order ?? curriculumProgress.currentLesson,
+    }),
+    [curriculumProgress, currentLessonData],
+  )
   // ── NAV ANCHORS ON THE LESSON ON SCREEN, INCLUDING A PREVIEW ──────────────
   //
   // findNextLesson/findPreviousLesson resolve their anchor from
@@ -3457,9 +3554,11 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
     <div className={`${styles.learnCandy} ${styles.learnRoot} pb-mobile-nav`} style={{ display: 'flex', background: 'var(--bg-void)', color: 'var(--text-primary)', overflow: 'hidden' }}>
 
       {/* ══ LEFT ICON NAV RAIL ══════════════════════════════════════════ */}
-      {/* Hidden while any Learn panel is maximized — a true fullscreen
-          learning experience must not show the dashboard rail beside it. */}
-      <nav className={maximizedPanel ? 'hidden' : 'hidden md:flex'} style={{
+      {/* Always visible beside the Learn panel — including while Tutor Max
+          (the chat panel) is maximized, which is now the default "Active
+          Learning View." The maximized panel covers the lesson/code panels
+          only; the rail stays put so the learner never loses navigation. */}
+      <nav className="hidden md:flex" style={{
         width: 84, flexShrink: 0, flexDirection: 'column', alignItems: 'center',
         padding: '16px 8px', gap: 4, background: 'var(--bg-surface)',
         borderRight: '1px solid var(--border-subtle)',
@@ -3899,14 +3998,34 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
         style={{ flex: 1, minHeight: 0, gridTemplateRows: '1fr', gap: maximizedPanel ? 0 : 16, padding: maximizedPanel ? 0 : 16 }}
       >
 
-        {/* ══ PANEL 1 — CURRICULUM ROADMAP (25%) — desktop only ═══════════ */}
+        {/* ══ PANEL 1 — LESSON LIST ═════════════════════════════════════════
+             Reachable on mobile too (via the "Lessons" button in the Tutor
+             Max header) — not desktop-only any more. `display: contents`
+             when maximized so this becomes the sole grid item at any
+             viewport width, the same trick the desktop-only path already
+             used; the inner content div's own `hidden md:flex` is likewise
+             overridden so the list actually renders on a phone. */}
         <div className="hidden md:contents"
-          style={maximizedPanel && maximizedPanel !== 'curriculum' ? { display: 'none' } : undefined}>
+          style={
+            maximizedPanel === 'curriculum' ? { display: 'contents' }
+            : maximizedPanel ? { display: 'none' } : undefined
+          }>
         <Panel style={{ overflow: 'hidden' }} accentColor={UI.indigo}>
-          <div style={{ flexDirection: 'column', height: '100%' }}
+          <div style={{ flexDirection: 'column', height: '100%', display: maximizedPanel === 'curriculum' ? 'flex' : undefined }}
             className="hidden md:flex">
             {/* Header */}
             <PanelHeader>
+              {/* Back to Tutor Max — visible whenever this panel fills the
+                  screen (mobile always shows it this way; desktop keeps the
+                  maximize icon too), so a learner can always get back. */}
+              <button
+                onClick={() => setMaximizedPanel('chat')}
+                className="md:hidden"
+                title={t('learn_restore')}
+                aria-label={t('learn_restore')}
+                style={{ width: 30, height: 30, borderRadius: 8, border: '1px solid var(--border-default)', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-dim)', fontSize: 15, flexShrink: 0 }}>
+                ←
+              </button>
               <span style={{ fontSize: 15.6, fontWeight: 700, color: 'var(--text-primary)', flex: 1 }}>
                 {t('lesson_roadmap')}
               </span>
@@ -3915,10 +4034,10 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                   {currentLessonData.order} {t('lesson_of')} {totalLessons}
                 </span>
               )}
-              {/* Maximize/restore — desktop only */}
+              {/* Maximize/restore — desktop only (mobile uses the ← button above) */}
               <button
                 className="hidden md:flex"
-                onClick={() => setMaximizedPanel(maximizedPanel === 'curriculum' ? null : 'curriculum')}
+                onClick={() => setMaximizedPanel(maximizedPanel === 'curriculum' ? 'chat' : 'curriculum')}
                 title={maximizedPanel === 'curriculum' ? t('learn_restore') : t('learn_maximize')}
                 aria-label={maximizedPanel === 'curriculum' ? t('learn_restore') : t('learn_maximize')}
                 style={{ width: 26, height: 26, borderRadius: 4, border: '1px solid var(--border-default)', background: 'transparent', cursor: 'pointer', alignItems: 'center', justifyContent: 'center', color: 'var(--text-dim)', fontSize: 14.4, flexShrink: 0 }}>
@@ -3936,24 +4055,6 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                   {xpProgress}% {t('lesson_complete_pct')}
                 </p>
               </div>
-            )}
-
-            {/* Knowledge Graph Position Panel — collapsed behind the "Knowledge Map" card below by default */}
-            {knowledgeMapOpen && (
-              <LearnerPositionPanel
-                subjectSlug={subjectSlug}
-                teachingLanguage={teachingLanguage}
-                onGapClick={(topicSlug) => {
-                  const lesson = curriculumLessons.find((l) => l.topicSlug === topicSlug)
-                  // Routed through requestLessonSwitch (the confirm dialog +
-                  // deferred-start gate) instead of calling navigateToLesson
-                  // directly — that bypassed "Start Lesson" the same way the
-                  // nav panel used to before this fix.
-                  if (lesson && lesson.order < curriculumProgress.currentLesson && sessionId) {
-                    requestLessonSwitch(lesson)
-                  }
-                }}
-              />
             )}
 
             {/* Revision mode banner */}
@@ -4138,7 +4239,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                         // tree and the panel can never disagree.
                         const topicData = lesson.topicSlug ? topicProgressMap[lesson.topicSlug] : undefined
                         const { isCompleted, isCurrent, isPrevious, isMastered, isRevision, isSkipped, isLocked } =
-                          computeLessonLockState(lesson, { progress: curriculumProgress, topicProgressMap, availableTopicSlugs })
+                          computeLessonLockState(lesson, { progress: lessonListLockProgress, topicProgressMap, availableTopicSlugs })
                         const isLockExpanded = expandedLockedTopic === lesson.topicSlug
                         const isSkipWarningShown = skipWarning?.topicSlug === lesson.topicSlug
 
@@ -4163,7 +4264,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                           : 'var(--text-dim)'
 
                         return (
-                          <div key={lesson.order} style={{ marginBottom: 2 }}>
+                          <div key={lesson.order} style={{ marginBottom: 5 }}>
                             <div
                               onClick={() => {
                                 // Free navigation: every lesson is switchable now
@@ -4175,15 +4276,15 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                                 requestLessonSwitch(lesson)
                               }}
                               style={{
-                                display: 'flex', alignItems: 'flex-start', gap: 6,
-                                padding: '5px 8px', borderRadius: 6,
+                                display: 'flex', alignItems: 'flex-start', gap: 11,
+                                padding: '12px 14px', borderRadius: 12,
                                 cursor: (canNavigate || isLocked) ? 'pointer' : 'default',
                                 background: isCurrent ? `${UI.indigo}14`
                                   : isRevision ? 'rgba(121,192,255,0.07)'
                                   : isSkipWarningShown ? 'rgba(245,158,11,0.07)'
                                   : isLockExpanded ? 'rgba(239,68,68,0.05)'
                                   : 'transparent',
-                                border: isCurrent ? `1px solid ${UI.indigo}4d`
+                                border: isCurrent ? `1.5px solid ${UI.indigo}66`
                                   : isRevision ? '1px solid rgba(121,192,255,0.2)'
                                   : isSkipWarningShown ? '1px solid rgba(245,158,11,0.25)'
                                   : isLockExpanded ? '1px solid rgba(239,68,68,0.15)'
@@ -4192,13 +4293,13 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                                 opacity: isLocked ? 0.6 : 1,
                               }}
                             >
-                              <span style={{ fontSize: 13.2, marginTop: 1, flexShrink: 0, color: iconColor }}>
+                              <span style={{ fontSize: 17, marginTop: 1, flexShrink: 0, color: iconColor }}>
                                 {icon}
                               </span>
                               <div style={{ flex: 1, minWidth: 0 }}>
                                 <div style={{
-                                  fontSize: 13.2, lineHeight: 1.3,
-                                  fontWeight: isCurrent ? 600 : 400,
+                                  fontSize: 15, lineHeight: 1.35,
+                                  fontWeight: isCurrent ? 700 : 500,
                                   color: (isCompleted || isMastered) ? 'var(--border-emphasis)'
                                     : isRevision ? '#79C0FF'
                                     : isSkipped ? '#F59E0B'
@@ -4209,16 +4310,33 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                                 }}>
                                   {lesson.order}. {lesson.lessonTitle}
                                   {topicData && topicData.masteryPct > 0 && (isCompleted || isMastered || isRevision) && (
-                                    <span style={{ marginLeft: 4, fontSize: 10.8, color: 'var(--text-dim)', fontWeight: 400 }}>
+                                    <span style={{ marginLeft: 5, fontSize: 11.7, color: 'var(--text-dim)', fontWeight: 400 }}>
                                       {topicData.masteryPct}%
                                     </span>
                                   )}
                                   {isRevision && topicData?.revisionCount && topicData.revisionCount > 0 && (
-                                    <span style={{ marginLeft: 4, fontSize: 10.8, color: '#79C0FF', fontWeight: 600 }}>
+                                    <span style={{ marginLeft: 5, fontSize: 11.7, color: '#79C0FF', fontWeight: 600 }}>
                                       ×{topicData.revisionCount}
                                     </span>
                                   )}
                                 </div>
+                                {/* Subtitle — the lesson's own already-authored
+                                    goal/description (CurriculumLesson.lessonGoal,
+                                    present on every lesson already, no new data
+                                    and no subject-specific text). Gives each row
+                                    a second line of real context instead of a
+                                    bare title, per the larger/more-readable-rows
+                                    requirement. */}
+                                {lesson.lessonGoal && (
+                                  <div style={{
+                                    fontSize: 12.4, lineHeight: 1.35, marginTop: 2,
+                                    color: 'var(--text-dim)', fontWeight: 400,
+                                    overflow: 'hidden', textOverflow: 'ellipsis',
+                                    whiteSpace: 'nowrap',
+                                  }}>
+                                    {lesson.lessonGoal}
+                                  </div>
+                                )}
                                 {/* Action row */}
                                 <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginTop: 2, flexWrap: 'wrap' }}>
                                   {isCurrent && (
@@ -4405,49 +4523,6 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
               </div>
             )}
 
-            {/* Knowledge Map / Unit Overview nav cards */}
-            <div style={{ padding: 10, display: 'flex', flexDirection: 'column', gap: 8, borderTop: '1px solid var(--border-subtle)', flexShrink: 0 }}>
-              <button onClick={() => setKnowledgeMapOpen((v) => !v)}
-                style={{
-                  display: 'flex', alignItems: 'center', gap: 10, padding: '9px 10px', borderRadius: 10, cursor: 'pointer',
-                  background: knowledgeMapOpen ? `${UI.indigo}14` : 'var(--bg-elevated)',
-                  border: `1px solid ${knowledgeMapOpen ? `${UI.indigo}55` : 'var(--border-subtle)'}`, textAlign: 'left',
-                }}>
-                <span style={{
-                  width: 30, height: 30, borderRadius: 8, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  background: `${UI.indigo}18`, color: UI.indigo,
-                }}><Network size={15} /></span>
-                <span style={{ flex: 1, minWidth: 0 }}>
-                  <p style={{ fontSize: 14.4, fontWeight: 700, color: 'var(--text-primary)' }}>
-                    {t('lesson_knowledge_map')}
-                  </p>
-                  <p style={{ fontSize: 12, color: 'var(--text-dim)' }}>
-                    {t('lesson_knowledge_map_sub')}
-                  </p>
-                </span>
-                <ChevronDown size={13} style={{ color: 'var(--text-dim)', transform: knowledgeMapOpen ? 'rotate(180deg)' : 'rotate(-90deg)', transition: 'transform 150ms', flexShrink: 0 }} />
-              </button>
-
-              <button onClick={() => setExpandedUnits(curriculumUnits.map((u) => u.number))}
-                style={{
-                  display: 'flex', alignItems: 'center', gap: 10, padding: '9px 10px', borderRadius: 10, cursor: 'pointer',
-                  background: 'var(--bg-elevated)', border: '1px solid var(--border-subtle)', textAlign: 'left',
-                }}>
-                <span style={{
-                  width: 30, height: 30, borderRadius: 8, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  background: 'rgba(63,185,80,0.15)', color: 'var(--green)',
-                }}><ListChecks size={15} /></span>
-                <span style={{ flex: 1, minWidth: 0 }}>
-                  <p style={{ fontSize: 14.4, fontWeight: 700, color: 'var(--text-primary)' }}>
-                    {t('lesson_unit_overview')}
-                  </p>
-                  <p style={{ fontSize: 12, color: 'var(--text-dim)' }}>
-                    {t('lesson_unit_overview_sub')}
-                  </p>
-                </span>
-                <ChevronDown size={13} style={{ color: 'var(--text-dim)', transform: 'rotate(-90deg)', flexShrink: 0 }} />
-              </button>
-            </div>
           </div>
         </Panel>
         </div>
@@ -4484,7 +4559,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
               {/* Maximize/restore — desktop only */}
               <button
                 className="hidden md:flex"
-                onClick={() => setMaximizedPanel(maximizedPanel === 'code' ? null : 'code')}
+                onClick={() => setMaximizedPanel(maximizedPanel === 'code' ? 'chat' : 'code')}
                 title={maximizedPanel === 'code' ? t('learn_restore') : t('learn_maximize')}
                 aria-label={maximizedPanel === 'code' ? t('learn_restore') : t('learn_maximize')}
                 style={{ width: 26, height: 26, borderRadius: 4, border: '1px solid var(--border-default)', background: 'transparent', cursor: 'pointer', alignItems: 'center', justifyContent: 'center', color: 'var(--text-dim)', fontSize: 14.4, flexShrink: 0 }}>
@@ -4694,18 +4769,21 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 </button>
               )}
 
-              {/* Maximize/restore — desktop only. Was buried inside the "More"
-                  menu below (two clicks, and no visible way to tell the panel
-                  was maximized without opening it); every other panel
-                  (curriculum, code) already has this as a direct one-click
-                  header button, so the chat panel now matches that pattern. */}
+              {/* Lessons — opens the lesson list over Tutor Max. Tutor Max is
+                  now the permanent "Active Learning View" (maximizedPanel
+                  defaults to 'chat', not null), so there is no more standing
+                  3-panel layout to "maximize" chat out of — this replaces the
+                  chat panel's old maximize/restore button with the one control
+                  that actually matters here. Visible on mobile too: the
+                  curriculum panel used to be desktop-only, so this is the
+                  learner's only way to reach the lesson list on a phone. */}
               <button
-                className="hidden md:flex"
-                onClick={() => setMaximizedPanel(maximizedPanel === 'chat' ? null : 'chat')}
-                title={maximizedPanel === 'chat' ? t('learn_restore') : t('learn_maximize')}
-                aria-label={maximizedPanel === 'chat' ? t('learn_restore') : t('learn_maximize')}
-                style={{ width: 26, height: 26, borderRadius: 4, border: '1px solid var(--border-default)', background: 'transparent', cursor: 'pointer', alignItems: 'center', justifyContent: 'center', color: 'var(--text-dim)', fontSize: 14.4, flexShrink: 0 }}>
-                {maximizedPanel === 'chat' ? '⊡' : '⊞'}
+                onClick={() => setMaximizedPanel('curriculum')}
+                title={t('lesson_roadmap')}
+                aria-label={t('lesson_roadmap')}
+                style={{ height: 30, padding: '0 10px', borderRadius: 8, border: '1px solid var(--border-default)', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 5, color: 'var(--text-dim)', fontSize: 12.6, fontWeight: 700, flexShrink: 0 }}>
+                <ListChecks size={14} />
+                <span className="hidden sm:inline">{t('lesson_roadmap')}</span>
               </button>
 
             </PanelHeader>
@@ -5406,25 +5484,44 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
               </div>
             )}
 
-            {/* P2 — tappable multiple-choice answers. Rendered above the
-                composer so the learner taps instead of typing. Sending the
-                option text through the SAME sendMessage path keeps one
-                answer channel: the server grades a tap exactly as it grades
-                a typed reply, so no parallel scoring path can drift. */}
+            {/* QUICK CHECK — the one active MCQ, as a small floating panel OVER
+                Tutor Max rather than a normal chat message. It answers the
+                same worry a full-message MCQ raised: a structured, server-
+                gradeable question must never look like ordinary tutor prose,
+                or a learner (and a future reader of the transcript) cannot
+                tell "the tutor said this" from "the tutor is asking to be
+                graded". Floating, not a chat bubble; the panel's own
+                position:relative parent (this Panel's content wrapper) is
+                what the position:absolute below anchors to — no portal, no
+                new overlay layer, no browser popup.
+                Sending the option text through the SAME sendMessage path
+                keeps one answer channel: the server grades a tap exactly as
+                it grades a typed reply, so no parallel scoring path can
+                drift — this is unchanged from before, only WHERE it renders
+                changed. */}
             {activeMcq && !isStreaming && !lessonCompletion && (
               <div
                 role="group"
                 aria-label={t('lc_answers_aria')}
+                className={styles.quickCheckFloating}
                 style={{
-                  flexShrink: 0,
-                  borderTop: '1px solid var(--border-subtle)',
                   background: 'var(--bg-surface)',
-                  padding: '10px 12px',
+                  border: '1px solid var(--border-subtle)',
+                  boxShadow: '0 16px 40px rgba(0,0,0,0.35)',
+                  padding: '12px 14px 14px',
                   display: 'flex',
                   flexDirection: 'column',
-                  gap: 6,
+                  gap: 8,
                 }}
               >
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                  <span style={{
+                    fontSize: 10.8, fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase',
+                    color: UI.indigo, background: `${UI.indigo}18`, padding: '2px 8px', borderRadius: 20,
+                  }}>
+                    {t('lc_quick_check_label')}
+                  </span>
+                </div>
                 <div style={{ fontSize: 14.4, fontWeight: 700, color: 'var(--text-primary)' }}>
                   {activeMcq.question}
                 </div>
@@ -5441,6 +5538,18 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                       // Clear first: the question is answered, and this also
                       // prevents a double-tap from sending two answers.
                       setActiveMcq(null)
+                      // TUTOR HISTORY: record the event now, at the one place
+                      // that genuinely knows the exact question and the exact
+                      // answer text about to be submitted. Baseline snapshot
+                      // is taken from the CURRENT (pre-answer) mastery counts
+                      // so the response handler can attribute the next delta
+                      // to this specific answer, not a later one.
+                      pendingMcqMasteryBaselineRef.current =
+                        (masteryState?.checkCorrect ?? 0) + (masteryState?.practiceCorrect ?? 0)
+                      setMcqHistoryLog((prev) => [
+                        ...prev,
+                        { id: `mcq-${activeMcq.askedAt}`, question: activeMcq.question, answer: option, askedAt: Date.now(), result: 'pending' },
+                      ])
                       void sendMessage(sessionId, option)
                     }}
                     style={{
@@ -5812,6 +5921,79 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
               </div>
 
             </div>
+
+            {/* TUTOR HISTORY — every actual MCQ/assessment event, built only
+                from data this app already treats as authoritative: the
+                question the server served, the option the learner tapped,
+                and whether the server's own mastery counters (checkCorrect/
+                practiceCorrect) moved as a result — never a client-side
+                guess at correctness, since the answer key is never sent to
+                the client. Independent of the floating Quick Check panel:
+                this never touches activeMcq, sendMessage, or the composer.
+                The toggle row stays visible even while collapsed, so hiding
+                it never stands in the way of showing it again; the list
+                below only exists in the DOM while open, so collapsing it
+                hands that vertical space back to the conversation above via
+                ordinary flexbox — no manual resize/measure logic needed. */}
+            <div style={{ flexShrink: 0, borderTop: '1px solid var(--border-subtle)', background: 'var(--bg-surface)' }}>
+              <button
+                type="button"
+                onClick={() => setMcqHistoryOpen((v) => !v)}
+                aria-expanded={mcqHistoryOpen}
+                aria-label={t('lc_tutor_history')}
+                style={{
+                  width: '100%', display: 'flex', alignItems: 'center', gap: 8,
+                  padding: '8px 14px', background: 'transparent', border: 'none', cursor: 'pointer',
+                  color: 'var(--text-secondary)', fontSize: 12.6, fontWeight: 700,
+                }}>
+                <HistoryIcon size={14} />
+                <span style={{ flex: 1, textAlign: 'left' }}>
+                  {t('lc_tutor_history')}{mcqHistoryLog.length > 0 ? ` (${mcqHistoryLog.length})` : ''}
+                </span>
+                <span style={{ fontSize: 11.7, fontWeight: 700, color: UI.indigo }}>
+                  {mcqHistoryOpen ? t('lc_history_hide') : t('lc_history_show')}
+                </span>
+                {mcqHistoryOpen ? <ChevronDown size={14} /> : <ChevronUp size={14} />}
+              </button>
+              {mcqHistoryOpen && (
+                <div style={{ maxHeight: 220, overflowY: 'auto', padding: '0 14px 12px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+                  {mcqHistoryLog.length === 0 ? (
+                    <p style={{ fontSize: 12.6, color: 'var(--text-dim)', padding: '4px 0 8px' }}>
+                      {t('lc_tutor_history_empty')}
+                    </p>
+                  ) : (
+                    [...mcqHistoryLog].reverse().map((entry) => (
+                      <div key={entry.id} style={{
+                        padding: '8px 10px', borderRadius: 10,
+                        border: '1px solid var(--border-subtle)', background: 'var(--bg-card)',
+                      }}>
+                        <div style={{ fontSize: 12.6, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 3 }}>
+                          {entry.question}
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8 }}>
+                          <span style={{ fontSize: 12, color: 'var(--text-secondary)' }}>{entry.answer}</span>
+                          <span style={{
+                            fontSize: 10.8, fontWeight: 700, padding: '2px 7px', borderRadius: 10, flexShrink: 0,
+                            background: entry.result === 'correct' ? 'rgba(63,185,80,0.15)'
+                              : entry.result === 'pending' ? 'rgba(245,158,11,0.15)' : 'var(--bg-elevated)',
+                            color: entry.result === 'correct' ? 'var(--green)'
+                              : entry.result === 'pending' ? '#F59E0B' : 'var(--text-dim)',
+                          }}>
+                            {entry.result === 'correct' ? t('lc_history_correct')
+                              : entry.result === 'pending' ? t('lc_history_pending')
+                              : t('lc_history_recorded')}
+                          </span>
+                        </div>
+                        <div style={{ fontSize: 10.5, color: 'var(--text-dim)', marginTop: 3 }}>
+                          {new Date(entry.askedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                        </div>
+                      </div>
+                    ))
+                  )}
+                </div>
+              )}
+            </div>
+
           </div>
         </Panel>
         </div>

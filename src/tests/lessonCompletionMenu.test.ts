@@ -33,10 +33,13 @@ const SRC = readFileSync(
 
 // The completion card: from its own opening comment to the closing of the
 // `{lessonCompletion && (...)}` block, bounded by the next major section
-// (the P2 tappable-MCQ block) rather than a fixed character count, matching
-// lessonTransition.test.ts's own reasoning for why a fixed window is fragile.
+// (the floating Quick Check MCQ panel — renamed from "P2 — tappable
+// multiple-choice answers" when the Tutor Max Active Learning View change
+// moved the MCQ out of the chat flow into its own floating panel) rather
+// than a fixed character count, matching lessonTransition.test.ts's own
+// reasoning for why a fixed window is fragile.
 const CARD_START = SRC.indexOf('{lessonCompletion && (')
-const CARD_END = SRC.indexOf('{/* P2 — tappable multiple-choice answers.', CARD_START)
+const CARD_END = SRC.indexOf('{/* QUICK CHECK —', CARD_START)
 const CARD = SRC.slice(CARD_START, CARD_END)
 
 describe('lesson completion menu — structure', () => {

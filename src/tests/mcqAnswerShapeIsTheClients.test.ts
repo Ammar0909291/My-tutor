@@ -69,7 +69,11 @@ describe('the client sends the option TEXT', () => {
   it('and clears the question before sending, so one tap is one answer', () => {
     const at = SCREEN.indexOf('void sendMessage(sessionId, option)')
     expect(at).toBeGreaterThan(0)
-    expect(SCREEN.slice(at - 400, at)).toMatch(/setActiveMcq\(null\)/)
+    // Widened from 400: the Tutor Max Active Learning View change interposes
+    // the Tutor History bookkeeping (baseline snapshot + pending log entry)
+    // between clearing the question and sending it — still the same single
+    // tap handler, just more of it between these two calls now.
+    expect(SCREEN.slice(at - 1000, at)).toMatch(/setActiveMcq\(null\)/)
   })
 })
 

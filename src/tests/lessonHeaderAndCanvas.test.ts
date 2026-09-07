@@ -164,10 +164,16 @@ describe('the Lesson/Code/Chat tab strip is removed, not hidden', () => {
     expect(SRC).not.toContain('<QuickActionsAndCheck')
   })
 
-  it('mobile shows the chat/teaching panel unconditionally; curriculum and code panels are desktop-only', () => {
-    // Panel 1 (curriculum) and panel 2 (code/former quick-actions): hidden on
-    // mobile unconditionally now, not toggled by a removed tab state.
-    expect(SRC).toMatch(/PANEL 1 — CURRICULUM ROADMAP[\s\S]{0,200}<div className="hidden md:contents"/)
+  it('mobile shows the chat/teaching panel by default; the lesson list is mobile-hidden UNLESS explicitly maximized', () => {
+    // Panel 1 (lesson list, formerly "curriculum roadmap — desktop only"):
+    // the base classing is still mobile-hidden by default, not toggled by a
+    // removed tab state — but the Tutor Max Active Learning View change adds
+    // an inline-style override (`maximizedPanel === 'curriculum'`) so it
+    // becomes reachable on mobile too, via the "Lessons" header button. See
+    // tutorMaxLearningView.test.ts for that override's own coverage.
+    expect(SRC).toMatch(/PANEL 1 — LESSON LIST[\s\S]{0,600}<div className="hidden md:contents"/)
+    expect(SRC).toContain("maximizedPanel === 'curriculum' ? { display: 'contents' }")
+    // Panel 2 (code): genuinely desktop-only still, no mobile override added.
     // Panel 3 (chat): always rendered — "contents"/"flex", never gated.
     expect(SRC).toMatch(/PANEL 3 — TUTOR CHAT[\s\S]{0,300}<div className="contents"/)
   })
@@ -477,7 +483,17 @@ describe('footer cleanup — disclaimer and unit breadcrumb removed at source', 
     // The removed footer was a `justifyContent: space-between` div with
     // `marginTop: 8` containing both strings. If only emptied (not removed),
     // it would still consume vertical space as an invisible gap.
-    const afterSend = INPUT_AREA.slice(INPUT_AREA.lastIndexOf("t('lesson_send')"))
+    //
+    // Bounded to stop before the Tutor History panel (added by the Tutor Max
+    // Active Learning View change): that panel legitimately sits after the
+    // composer and legitimately uses `justifyContent: 'space-between'` inside
+    // its own per-entry rows (aligning an answer against its result badge) —
+    // an unrelated, intentional container, not a reintroduced footer. The
+    // guard this test exists for is scoped to the space immediately after
+    // Send, before any other deliberate panel begins.
+    const sendIdx = INPUT_AREA.lastIndexOf("t('lesson_send')")
+    const historyIdx = INPUT_AREA.indexOf('TUTOR HISTORY', sendIdx)
+    const afterSend = INPUT_AREA.slice(sendIdx, historyIdx === -1 ? undefined : historyIdx)
     expect(afterSend).not.toMatch(/justifyContent:\s*'space-between'/)
   })
 

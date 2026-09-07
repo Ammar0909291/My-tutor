@@ -64,18 +64,23 @@ describe('repeated controls say which one they are', () => {
 
   it('the glyph-only maximize buttons have a spoken name', () => {
     const src = read('src/components/learn/LessonScreen.tsx')
-    // The visible content is "⊞", which is not a name. Three panels
-    // (curriculum, code, chat) each carry a direct one-click header button —
-    // the chat panel's used to be buried inside the "More" menu only.
+    // The visible content is "⊞", which is not a name. Two panels (curriculum,
+    // code) each carry a direct one-click header button. The chat panel's own
+    // maximize/restore button (previously the third) was REMOVED by the
+    // Tutor Max Active Learning View change: maximizedPanel now defaults to
+    // 'chat' (the permanent Active Learning View, not a null "restore to
+    // 3-panel layout" state), so there is nothing left to maximize chat OUT
+    // of — its header button slot now holds a labeled "Lessons" button
+    // instead, which is not glyph-only and needs no aria-label of this shape.
     const named = src.match(/aria-label=\{maximizedPanel === '(?:curriculum|code|chat)' \? t\('learn_restore'\) : t\('learn_maximize'\)\}/g)
-    expect(named?.length).toBe(3)
+    expect(named?.length).toBe(2)
   })
 
-  it('none of the three maximize buttons is below the 24px minimum hit area', () => {
+  it('neither of the two maximize buttons is below the 24px minimum hit area', () => {
     const src = read('src/components/learn/LessonScreen.tsx')
-    // All three were (or would have been) 22×22. Measured, not assumed: the literal is in the style.
+    // Both were (or would have been) 22×22. Measured, not assumed: the literal is in the style.
     expect(src).not.toMatch(/width: 22, height: 22, borderRadius: 4, border: '1px solid var\(--border-default\)'/)
     const sized = src.match(/width: 26, height: 26, borderRadius: 4, border: '1px solid var\(--border-default\)'/g)
-    expect(sized?.length).toBe(3)
+    expect(sized?.length).toBe(2)
   })
 })
