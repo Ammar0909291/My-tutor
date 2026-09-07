@@ -8958,6 +8958,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               provider: assembled ? 'memory' : 'llm',
               signal: teachingSignal ?? null,
               resolvedConceptId: resolvedConceptId ?? null,
+              // AnswerObserved v2 — probe provenance, observability only.
+              // `pendingMcqHoisted` is the probe being ANSWERED this turn (it
+              // is assigned exactly once, at read time, and never reassigned),
+              // so its assetId identifies the authored item the credit belongs
+              // to; null means the question carried no authored identity.
+              // `gradedAgainstServerKeyHoisted` is the SAME value the mastery
+              // fold reads as `evidence.serverGraded`, so the recorded
+              // provenance and the counter that moved can never disagree.
+              answeredProbeAssetId: pendingMcqHoisted?.assetId ?? null,
+              answerServerGraded: gradedAgainstServerKeyHoisted,
               recoveryKey: recoveryKeyHoisted,
               recoveryEscalationRung: snapshotSessionFailureCount >= 4 ? 2 : snapshotSessionFailureCount >= 2 ? 1 : 0,
               sessionFailureCount: snapshotSessionFailureCount,

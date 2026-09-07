@@ -31,6 +31,18 @@ export interface TurnFacts {
   /** parsed SIGNAL, when present */
   signal: { correctness?: boolean; confidence?: string; confusion?: boolean } | null
   resolvedConceptId: string | null
+  /**
+   * PROBE PROVENANCE for this turn's answer (AnswerObserved v2).
+   * `answeredProbeAssetId` is the authored probe the learner was ANSWERING —
+   * the pending probe carried in from the previous turn — or null when the
+   * question had no authored identity. `answerServerGraded` is the route's
+   * `gradedAgainstServerKey`: correctness came from the server grading the
+   * reply against that probe's authored key, not from the model's self-report.
+   * Both optional so a caller that cannot honestly supply them omits them
+   * rather than defaulting.
+   */
+  answeredProbeAssetId?: string | null
+  answerServerGraded?: boolean
   recoveryKey: string | null
   recoveryEscalationRung: 0 | 1 | 2
   sessionFailureCount: number
@@ -88,6 +100,11 @@ export function buildTurnEvents(f: TurnFacts): NewSpineEvent[] {
         conceptId: f.resolvedConceptId,
         capabilityRefs: (f.capabilityObservations ?? []).map((o) => o.capabilityId),
         diagnostic: (f.capabilityObservations ?? []).some((o) => o.diagnostic),
+        // v2 provenance. Spread so a caller that supplies neither writes a
+        // payload byte-identical to v1's — an omitted field stays absent
+        // rather than becoming a fabricated null/false.
+        ...(f.answeredProbeAssetId !== undefined && { servedAssetId: f.answeredProbeAssetId }),
+        ...(f.answerServerGraded !== undefined && { serverGraded: f.answerServerGraded }),
       },
     })
   }

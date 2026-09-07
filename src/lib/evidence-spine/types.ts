@@ -53,7 +53,10 @@ export const REPLAY_CLASS: Record<SpineEventType, ReplayClass> = {
 export const CURRENT_SCHEMA_VERSION: Record<SpineEventType, number> = {
   StudentMessageReceived: 1,
   AssistantRendered: 1,
-  AnswerObserved: 1,
+  // v2 adds servedAssetId + serverGraded (both optional). v1 events remain
+  // decodable — the fold accepts any version <= current — so no backfill and
+  // no rewrite of historical evidence is required.
+  AnswerObserved: 2,
   UtteranceStateDetected: 1,
   AutonomyRequested: 1,
   RecoveryEntered: 1,
@@ -79,6 +82,27 @@ export interface AnswerObservedV1 {
   conceptId: string | null
   capabilityRefs: string[]
   diagnostic: boolean
+  /**
+   * v2 — PROBE PROVENANCE. Which authored probe this answer was answering, and
+   * whether its correctness came from the SERVER grading it against that
+   * probe's authored key (`gradedAgainstServerKey` at the route) rather than
+   * from the model's self-report.
+   *
+   * WHY: `correct` alone cannot distinguish a server-graded authored answer
+   * from a model-asserted one, and only the former increments the VERIFIED
+   * mastery counters (conversationState's `verified = evidence.serverGraded`).
+   * A chem.bio.vitamins certification failure was traced to exactly that
+   * distinction and could not be attributed to a probe from stored evidence,
+   * because the spine recorded the outcome but never which probe produced it.
+   *
+   * BOTH OPTIONAL, and the reason is compatibility, not indecision: every
+   * event written before this change lacks them, and `undefined` there is
+   * honest ("not recorded") rather than a fabricated `false`. `servedAssetId`
+   * is additionally `null` when the answered question carried no authored
+   * identity at all — a model-invented MCQ — which is itself the finding.
+   */
+  servedAssetId?: string | null
+  serverGraded?: boolean
 }
 export interface UtteranceStateDetectedV1 { failureStateKey: string; strength: 'strong' | 'mild' | 'unknown' }
 export interface AutonomyRequestedV1 { honored: boolean }
