@@ -132,16 +132,20 @@ describe('THE UNGUARDED CHANNEL — enforcement keys on the tag, not the act', (
   })
 })
 
-describe('NO LIVENESS OWNER EXISTS', () => {
-  it('the runtime never computes its own kernel-override metric', () => {
+describe('NO LIVENESS OWNER EXISTS — SUPERSEDED BY S3/S4, kept as the record', () => {
+  // These two assertions were the diagnosis: the runtime defined its own
+  // most-diagnostic metric and never called it, and no module owned "the
+  // lesson must make progress". S4 wired the first and S3 built the second, so
+  // the original assertions are now deliberately FALSE. They are inverted here
+  // rather than deleted, so the repository keeps the before/after rather than
+  // just the after.
+  it('askViolations is now computed in production (was: zero callers)', () => {
     const app = fs.readFileSync(
       path.join(process.cwd(), 'src/app/api/learn/chat/route.ts'), 'utf8')
-    expect(app).not.toContain('foldLegalityMetrics')   // defined, documented, never called
+    expect(app).toContain('foldLegalityMetrics')
   })
-  it('no module owns "the lesson must make progress"', () => {
+  it('a module now owns lesson progress (was: none existed)', () => {
     const dir = path.join(process.cwd(), 'src/lib/teaching')
-    const names = fs.readdirSync(dir)
-    expect(names).not.toContain('turnProgress.ts')
-    expect(names).not.toContain('liveness.ts')
+    expect(fs.readdirSync(dir)).toContain('turnProgress.ts')
   })
 })

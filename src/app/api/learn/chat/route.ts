@@ -1832,6 +1832,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     // read at the withhold call site ~1600 lines below) so both places agree
     // on exactly which turns the gate considered question-eligible.
     let phaseAllowsProbeHoisted = false
+    // S4 OBSERVABILITY. The gate's own terms and the phase it saw, hoisted so
+    // the end-of-turn TURN_EVENT line can carry them. Read-only for the turn:
+    // nothing below branches on these, they exist to be logged. See
+    // turnTelemetry.ts for why one joined line beats twenty object logs.
+    let gateTermsHoisted: Record<string, boolean> | null = null
+    let phaseBeforeTurnHoisted: string | null = null
+    let legalityBlockHoisted: string | null = null
+    let modelProbeVerdictHoisted: string | null = null
+    let signalSuppressedReasonHoisted: string | null = null
     // The don't-know run INCLUDING this turn, for dontKnowCeiling.ts. Read from
     // the pre-turn snapshot and incremented here because the fold that persists
     // it runs after the text is built.
@@ -4375,6 +4384,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           notClosingTurn: !closingTurnWithholdsQuestion(sessionEpisodeHoisted?.phase),
         }
         const gateEligible = Object.values(gateTerms).every(Boolean)
+        gateTermsHoisted = gateTerms
+        phaseBeforeTurnHoisted = typeof phaseBeforeTurn === 'string' ? phaseBeforeTurn : null
         // Read from the SAME terms object the log prints, so the decision and
         // the evidence for it can never disagree. See inventedProbeGuard.
         {
@@ -5439,6 +5450,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           authoredProbesExist: authoredProbesExistHoisted,
           gateDeclinedByPolicy: gateDeclinedByPolicyHoisted,
         })
+        modelProbeVerdictHoisted = d.reason
         if (!d.serve && mcqParse.mcq !== null && gateMcqHoisted === null) {
           modelProbeWithheld = d.reason
           withheldModelMcqHoisted = mcqParse.mcq
@@ -5982,6 +5994,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             hasPendingStructuredMcq: Boolean(pendingMcqHoisted),
           })
           if (decision.suppress) {
+            signalSuppressedReasonHoisted = decision.reason
             console.log(`[${decision.reason}]`, {
               claimed: teachingSignal.correctness,
               learnerMessage: message.slice(0, 40),
@@ -9521,6 +9534,115 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         ))
       } catch (err) {
         console.warn('[turn-decision] provenance line skipped:', err)
+      }
+
+      // ── S4: TURN_EVENT ───────────────────────────────────────────────
+      //
+      // One joined line per turn. The same latest-point-of-knowledge site as
+      // the provenance block above, and the same rule: OBSERVATION ONLY — it
+      // reads already-decided values, writes one log line, and returns nothing
+      // to the turn.
+      //
+      // It also computes `askViolations`, which questionLegality.ts defines and
+      // documents as "the single most diagnostic number the teaching runtime
+      // produces", and which had ZERO callers anywhere under src/app before
+      // this line — the rate at which the model overrides the kernel has never
+      // been measured in production.
+      //
+      // Log volume only. No database write: this project is under a 5 GB
+      // Supabase egress quota after a 50.8 GB incident, and observability must
+      // never be the thing that breaks it. No learner text and no model text —
+      // every field is a boolean, an enum, a count or an opaque id.
+      try {
+        const { buildTurnEvent, recordTurnEvent } = await import('@/lib/teaching/turnTelemetry')
+        const { foldLegalityMetrics } = await import('@/lib/teaching/questionLegality')
+        const { hasProseMultipleChoice } = await import('@/lib/teaching/proseMcqGuard')
+        const { classifyTurn, foldStagnation, escalationRung } = await import('@/lib/teaching/turnProgress')
+        const { isDegradedProvider: isDegraded } = await import('@/lib/eos-runtime/degradedMode')
+
+        const before = conversationStateHoisted
+        const after = conversationStateAfterTurnHoisted
+        const askedQuestionInReply = /\?/.test(cleanText)
+        // `evidenceMoveHoisted` is a widened string at its declaration; the
+        // legality fold and the event both want the closed set, so narrow once
+        // here rather than casting at two call sites.
+        const decidedMove: 'teach' | 'show' | 'ask' | null =
+          evidenceMoveHoisted === 'teach' || evidenceMoveHoisted === 'show' || evidenceMoveHoisted === 'ask'
+            ? evidenceMoveHoisted : null
+        // The one number this runtime named as most diagnostic and never computed.
+        const legality = decidedMove
+          ? foldLegalityMetrics(undefined, {
+              decidedMove,
+              askedQuestion: askedQuestionInReply,
+              blockedReason: null,
+            })
+          : null
+
+        // Liveness, SHADOW ONLY at S4: computed, logged, and consumed by
+        // nothing. S5 wires rung 1; until then this changes no behaviour.
+        const outcome = classifyTurn({
+          phaseChanged: (before?.phase ?? null) !== (after?.phase ?? null),
+          masteryCounterMoved:
+            (after?.correctAtCheck ?? 0) !== (before?.correctAtCheck ?? 0)
+            || (after?.correctAtPractice ?? 0) !== (before?.correctAtPractice ?? 0),
+          serverGradeRecorded: mcqGradeHoisted !== null,
+          freshProbeAttached: mcqHoisted !== null,
+          distinctTeachingDelivered: cleanText.trim().length > 0,
+          learnerRequestHonoured: learnerRequestHoisted !== null,
+          knowledgeGapOpened: false,
+          degradedTurn: isDegraded(provider),
+          recoveryFired: recoveryKeyHoisted !== null,
+          excursionActive: excursionActiveHoisted,
+          firstLessonActive: firstLessonActiveHoisted,
+        })
+        const priorStagnant = (snapshot as { turnProgress?: { stagnantTurns?: unknown } } | null)
+          ?.turnProgress?.stagnantTurns
+        const stagnantTurns = foldStagnation(priorStagnant, outcome)
+
+        recordTurnEvent(buildTurnEvent({
+          sessionId,
+          turnKey: `${sessionId}:${turnReceivedAt}`,
+          conceptId: resolvedConceptId ?? null,
+          subjectSlug: learnSession.subject?.slug ?? null,
+          phaseBefore: phaseBeforeTurnHoisted,
+          phaseAfter: after?.phase ?? null,
+          decidedMove,
+          legalityBlock: legalityBlockHoisted,
+          gateEligible: gateTermsHoisted ? Object.values(gateTermsHoisted).every(Boolean) : false,
+          blockedBy: gateTermsHoisted
+            ? Object.entries(gateTermsHoisted).filter(([, v]) => !v).map(([k]) => k)
+            : [],
+          selectedProbeId: decisionProbeIdHoisted,
+          pendingProbeId: pendingMcqHoisted?.assetId ?? null,
+          probeHeldTurns: 0,
+          modelOfferedTaggedMcq: mcqParse.mcq !== null,
+          // The RAW model output, deliberately NOT `cleanText`. Measured while
+          // writing this: withholdUngradedGateQuestion already strips a prose
+          // question when the gate ran dry (observed 66 chars -> 39 at OBSERVE),
+          // so reading the cleaned text would report 'the model behaved' on a
+          // turn where the model asked and the server had to remove it. This
+          // field is about what the MODEL DID, which is the only thing that
+          // makes the blind channel measurable.
+          modelOfferedProseMcq: hasProseMultipleChoice(text),
+          modelProbeVerdict: modelProbeVerdictHoisted,
+          askViolation: (legality?.askViolations ?? 0) > 0,
+          gradeSource: mcqGradeHoisted !== null ? 'server-key' : 'none',
+          gradedCorrect: mcqGradeHoisted?.correct ?? null,
+          signalSuppressedReason: signalSuppressedReasonHoisted,
+          masteryCounterMoved: outcome === 'productive'
+            && (after?.correctAtCheck ?? 0) !== (before?.correctAtCheck ?? 0),
+          verifiedMastery: masterySummary?.verified === true,
+          turnOutcome: outcome,
+          stagnantTurns,
+          escalationRung: escalationRung(stagnantTurns),
+          provider,
+          degraded: isDegraded(provider),
+          excursionActive: excursionActiveHoisted,
+          recoveryFired: recoveryKeyHoisted !== null,
+          visualServed: visualDecisionHoisted?.graphical === true,
+        }))
+      } catch (err) {
+        console.warn('[turn-event] line skipped:', err)
       }
 
       // Same helper the persist site above uses, so the payload and the

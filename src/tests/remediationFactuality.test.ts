@@ -377,12 +377,22 @@ describe('H4-7/8 — output integrity and the unwired metric, characterized', ()
     expect(sweep).not.toMatch(/^###|heading/mi)
   })
 
-  it('8 — foldLegalityMetrics has NO production call site: the metric is unwired, not merely unconsumed', () => {
+  it('8 — SUPERSEDED (S4, 2026-09-07): foldLegalityMetrics now HAS a production call site', () => {
+    // ORIGINAL ASSERTION, kept verbatim in this comment because it was true and
+    // it was the finding: "foldLegalityMetrics has NO production call site: the
+    // metric is unwired, not merely unconsumed" — the route never called it and
+    // nothing persisted it, so `askViolations`, which questionLegality.ts itself
+    // documents as "the single most diagnostic number the teaching runtime
+    // produces", was never computed for a real learner.
+    //
+    // S4 wired it: route.ts folds it per turn and emits it on the TURN_EVENT
+    // line as `askViolation`. The assertion is INVERTED rather than deleted so
+    // the repository keeps the before as well as the after.
     const legality = readFileSync(join(process.cwd(), 'src/lib/teaching/questionLegality.ts'), 'utf8')
     expect(legality).toContain('export function foldLegalityMetrics')
     expect(legality).toContain('askViolations')
-    // The route never calls it, and nothing persists it.
-    expect(ROUTE).not.toContain('foldLegalityMetrics')
-    expect(ROUTE).not.toContain('askViolations')
+    expect(ROUTE).toContain('foldLegalityMetrics')
+    // and it reaches the one line a human reads per turn
+    expect(ROUTE).toContain('askViolation')
   })
 })
