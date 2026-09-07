@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, Plus_Jakarta_Sans, JetBrains_Mono, Nunito, Baloo_2 } from 'next/font/google'
+import { Inter, Plus_Jakarta_Sans, JetBrains_Mono, Nunito, Baloo_2, Fraunces, IBM_Plex_Sans, IBM_Plex_Mono } from 'next/font/google'
 import './globals.css'
 import { Providers } from '@/components/Providers'
 
@@ -34,6 +34,31 @@ const baloo2 = Baloo_2({
   subsets: ['latin'],
   weight: ['500', '600', '700', '800'],
   variable: '--font-baloo2',
+  display: 'swap',
+})
+
+// "Study Board" — the /learn lesson-screen redesign (educational-brain
+// chalkboard/notebook visual identity). Additive, used only by
+// src/components/learn/LessonScreen.module.css's re-skin; every other page
+// keeps its existing fonts untouched.
+const fraunces = Fraunces({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  variable: '--font-fraunces',
+  display: 'swap',
+})
+
+const plexSans = IBM_Plex_Sans({
+  subsets: ['latin', 'cyrillic'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-plex-sans',
+  display: 'swap',
+})
+
+const plexMono = IBM_Plex_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  variable: '--font-plex-mono',
   display: 'swap',
 })
 
@@ -78,7 +103,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${body.variable} ${mono.variable} ${nunito.variable} ${baloo2.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${body.variable} ${mono.variable} ${nunito.variable} ${baloo2.variable} ${fraunces.variable} ${plexSans.variable} ${plexMono.variable}`}>
       <head>
         <link rel="manifest" href="/manifest.json" />
         <meta name="apple-mobile-web-app-capable" content="yes" />

@@ -1,16 +1,23 @@
 /*
- * Candy re-skin for the lesson workspace (/learn) and the panels it renders
- * (PracticePanel, InsightsPanel, FinalAssessmentModal, LearnerPositionPanel,
- * VisualCard).
+ * STUDY BOARD — the chalkboard/notebook re-skin for the lesson workspace
+ * (/learn) and the panels it renders (PracticePanel, InsightsPanel,
+ * FinalAssessmentModal, LearnerPositionPanel, VisualCard).
+ *
+ * Replaces the earlier "candy" (purple-on-near-black chat app) identity with
+ * a palette grounded in the actual subject: a chalkboard for teaching, a
+ * warm desk/notebook shell around it. Dark mode is a literal blackboard
+ * (deep chalkboard green, chalk-amber ink); light mode is a literal
+ * whiteboard (crisp white board, marker green ink) on a warm paper desk —
+ * the two real physical objects a lesson has always been taught on, not an
+ * inverted copy of one palette.
  *
  * LessonScreen is a large, high-traffic streaming/voice/Monaco component
  * styled almost entirely with inline `style={{}}` blocks that reference the
  * app-wide semantic tokens (--bg-*, --text-*, --border-*, --coral, …). Rather
  * than touch ~180 inline styles (and risk the chat/voice behaviour), this
- * class re-points those CSS custom properties at the canonical candy tokens.
- * Because custom properties cascade, every inline style + child panel under
- * this root re-skins to the candy palette automatically — no JSX/logic
- * changes. This is the inverse of dashboard.module.css aliasing --bg → --candy-*.
+ * class re-points those CSS custom properties at the tokens below. Because
+ * custom properties cascade, every inline style + child panel under this
+ * root re-skins automatically — no JSX/logic changes.
  *
  * Monaco keeps its own dedicated editor theme (defineTheme in LessonScreen) —
  * a code editor staying on its own palette is expected and intentional.
@@ -26,43 +33,116 @@
 }
 
 .learnCandy {
+  /* A few child components (FinalAssessmentModal, PracticePanel,
+     DynamicVisualRenderer) reference --candy-green/--candy-yellow/
+     --candy-text-muted directly for pass/fail gradients, unrelated to this
+     re-skin's own palette — composing keeps those primitives defined so
+     removing the old candy-purple brand mapping below doesn't leave them
+     pointing at nothing. */
   composes: candyTheme from '../ui/candy/tokens.module.css';
 
+  /* ── Whiteboard (light, default) ── */
+  --sb-paper: #F1ECE0;      /* the desk the board sits on */
+  --sb-board: #FFFFFF;      /* the whiteboard itself */
+  --sb-board-alt: #FAF7EE;
+  --sb-ink: #232722;
+  --sb-ink-soft: #6B6F66;
+  --sb-rule: #DCD5C4;
+  --sb-accent: #2F7D5A;     /* whiteboard marker green */
+  --sb-accent-ink: #FFFFFF;
+  --sb-amber: #C97A22;      /* chalk-amber, secondary mark */
+
   /* Surfaces */
-  --bg-void: var(--candy-bg);
-  --bg-base: var(--candy-bg);
-  --bg-surface: var(--candy-card);
-  --bg-card: var(--candy-card);
-  --bg-elevated: var(--candy-card);
-  --bg-hover: rgba(139, 92, 246, 0.08);
-  --bg-overlay: var(--candy-bg);
+  --bg-void: var(--sb-paper);
+  --bg-base: var(--sb-paper);
+  --bg-surface: var(--sb-board-alt);
+  --bg-card: var(--sb-board);
+  --bg-elevated: var(--sb-board-alt);
+  --bg-hover: rgba(47, 125, 90, 0.08);
+  --bg-overlay: var(--sb-paper);
 
   /* Text */
-  --text-primary: var(--candy-ink);
-  --text-secondary: var(--candy-ink-soft);
-  --text-dim: var(--candy-ink-soft);
+  --text-primary: var(--sb-ink);
+  --text-secondary: var(--sb-ink-soft);
+  --text-dim: var(--sb-ink-soft);
 
   /* Borders */
-  --border-subtle: var(--candy-shadow);
-  --border-default: var(--candy-shadow);
-  --border-muted: var(--candy-shadow);
-  --border-emphasis: var(--candy-ink-soft);
+  --border-subtle: var(--sb-rule);
+  --border-default: var(--sb-rule);
+  --border-muted: var(--sb-rule);
+  --border-emphasis: var(--sb-ink-soft);
 
-  /* Brand accent — coral → candy purple (matches the dashboard accent) */
-  --coral: var(--candy-purple);
-  --coral-hover: var(--candy-purple-d);
-  --coral-muted: rgba(139, 92, 246, 0.12);
-  --coral-border: rgba(139, 92, 246, 0.25);
-  --accent-primary: var(--candy-purple);
+  /* Brand accent */
+  --coral: var(--sb-accent);
+  --coral-hover: #256A4C;
+  --coral-muted: rgba(47, 125, 90, 0.12);
+  --coral-border: rgba(47, 125, 90, 0.3);
+  --accent-primary: var(--sb-accent);
 
-  /* Semantic hues → candy equivalents */
-  --blue: var(--candy-blue);
-  --green: var(--candy-green);
-  --yellow: var(--candy-yellow);
-  --purple: var(--candy-purple);
-  --red: var(--candy-red);
+  /* Semantic hues */
+  --blue: #3B6FD9;
+  --green: #2F8F4E;
+  --yellow: var(--sb-amber);
+  --purple: var(--sb-accent);
+  --red: #B23B3B;
 
-  font-family: var(--font-nunito), 'Nunito', sans-serif;
+  font-family: var(--font-plex-sans), 'IBM Plex Sans', ui-sans-serif, sans-serif;
+}
+
+:global([data-theme='dark']) .learnCandy {
+  /* ── Chalkboard (dark) ── */
+  --sb-paper: #1B1712;      /* walnut desk */
+  --sb-board: #1E2B24;      /* the chalkboard itself */
+  --sb-board-alt: #243329;
+  --sb-ink: #F1EDE2;        /* chalk */
+  --sb-ink-soft: #A9B0A6;
+  --sb-rule: rgba(241, 237, 226, 0.14);
+  --sb-accent: #E8B84B;     /* chalk-amber becomes the primary mark */
+  --sb-accent-ink: #241B08;
+  --sb-amber: #E8B84B;
+
+  --bg-void: var(--sb-paper);
+  --bg-base: var(--sb-paper);
+  --bg-surface: var(--sb-board-alt);
+  --bg-card: var(--sb-board);
+  --bg-elevated: var(--sb-board-alt);
+  --bg-hover: rgba(232, 184, 75, 0.1);
+  --bg-overlay: var(--sb-paper);
+
+  --text-primary: var(--sb-ink);
+  --text-secondary: var(--sb-ink-soft);
+  --text-dim: var(--sb-ink-soft);
+
+  --border-subtle: var(--sb-rule);
+  --border-default: var(--sb-rule);
+  --border-muted: var(--sb-rule);
+  --border-emphasis: var(--sb-ink-soft);
+
+  --coral: var(--sb-accent);
+  --coral-hover: #D1A13F;
+  --coral-muted: rgba(232, 184, 75, 0.14);
+  --coral-border: rgba(232, 184, 75, 0.32);
+  --accent-primary: var(--sb-accent);
+
+  --blue: #8FD1C4;
+  --green: #6FCF87;
+  --yellow: var(--sb-amber);
+  --purple: var(--sb-accent);
+  --red: #E08B79;
+}
+
+/* Lesson titles, panel headings and the quick-check question get the
+   display face — the one place this page's typography is allowed to have a
+   voice, per the Study Board proposal. Applied via className (not a blanket
+   selector) so ordinary UI text stays on the body face. */
+.displayFace {
+  font-family: var(--font-fraunces), 'Fraunces', ui-serif, Georgia, serif;
+}
+
+/* Tabular, data-shaped text — lesson counters, timers, the phase ledger. */
+.dataFace {
+  font-family: var(--font-plex-mono), 'IBM Plex Mono', ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
 }
 
 /* ── INVISIBLE TWO-COLUMN TEACHING CANVAS ───────────────────────────────────
@@ -167,6 +247,10 @@
   overflow-y: auto;
   z-index: 30;
   border-radius: 16px;
+  /* A thin accent cap along the top edge — the "pinned note" identity,
+     distinguishing a gradeable question from an ordinary card at a glance
+     without changing its shape or position. */
+  border-top: 3px solid var(--coral) !important;
 }
 
 @media (max-width: 640px) {
