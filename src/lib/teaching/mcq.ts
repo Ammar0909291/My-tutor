@@ -1046,6 +1046,53 @@ export function gradeMcqAnswer(
 }
 
 /**
+ * Does this message read as the learner TAPPING (or typing verbatim) one of
+ * the pending question's own options — regardless of what that option's
+ * text happens to say?
+ *
+ * ── THE DEFECT THIS CLOSES ──────────────────────────────────────────────
+ * `masteryGate.isBareAcknowledgement`'s `ACK_PHRASES` list ('ok', 'yes',
+ * 'done', 'next', 'good', 'great', 'cool', 'fine', 'sure', 'continue', 'go',
+ * 'thanks', and — the one that fired here — 'k') exists so route.ts can
+ * refuse to hand a bare acknowledgement to `gradeMcqAnswer`'s WEAKER
+ * inference rules (1-5), which infer a choice from vocabulary or position
+ * and could otherwise mistake small talk for an answer.
+ *
+ * MEASURED IN PRODUCTION (chem.bio.vitamins Tier-A certification,
+ * 2026-09-07): the authored probe "The four fat-soluble vitamins are
+ * conventionally listed as A, D, E and ______." has the literal correct
+ * option "K". Every single reply of "K" — the exact, verbatim, correct
+ * answer, byte for byte what a tap sends — was swallowed by the
+ * acknowledgement guard BEFORE `gradeMcqAnswer` was ever called: the guard
+ * runs first and blocks the call outright, so `chosenIndex`/`correct` never
+ * had a chance to resolve. Reproduced deterministically, 100% of attempts,
+ * confirmed via the live deployed app with the served options logged raw
+ * (`options: ["K","C","B12","B6"]`) immediately before submitting "K".
+ * Any authored option whose text happens to equal an ACK_PHRASES entry is
+ * affected the identical way, for any concept, not only this one.
+ *
+ * `resolveMcqChoice`'s own EXACT MATCH rule (rule 0) already documents why
+ * it runs first and outranks every inference rule: "tapping an option sends
+ * that option's text verbatim... an exact match is the learner saying WHICH
+ * option in the only way the UI can say it." The acknowledgement guard was
+ * built for the WEAKER rules and must never suppress that strongest, least
+ * ambiguous signal. This is exactly that carve-out — true only when the
+ * message, trimmed and case-folded, equals one of the options byte-for-byte,
+ * mirroring how `LessonScreen` sends a tap (`sendMessage(sessionId, option)`,
+ * no reformatting). A near-miss ("okay" against an option spelled "OK.") is
+ * deliberately NOT caught here — it still reaches the same exact-match rule
+ * inside `resolveMcqChoice` once suppression is lifted, so nothing is lost;
+ * this function's only job is to decide whether suppression should apply at
+ * all, never to grade.
+ */
+export function isVerbatimPendingOption(message: string, mcq: TutorMCQ | null): boolean {
+  if (!mcq) return false
+  const folded = message.trim().toLowerCase()
+  if (!folded) return false
+  return mcq.options.some((o) => o.trim().toLowerCase() === folded)
+}
+
+/**
  * THE ONE QUESTION THIS TURN PUTS IN FRONT OF THE LEARNER.
  *
  * Both the response payload and the persisted `pendingMcq` snapshot must be

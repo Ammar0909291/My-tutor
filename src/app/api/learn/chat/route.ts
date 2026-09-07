@@ -2189,7 +2189,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // Explanation Memory serve decision, hundreds of lines earlier than
         // where the grade is folded into evidence.
         if (pendingMcqHoisted) {
-          const { gradeMcqAnswer } = await import('@/lib/teaching/mcq')
+          const { gradeMcqAnswer, isVerbatimPendingOption } = await import('@/lib/teaching/mcq')
           const { isBareAcknowledgement } = await import('@/lib/teaching/masteryGate')
           // PHASE 7P — A REQUEST FOR A QUESTION IS NOT AN ANSWER TO THE LAST ONE.
           //
@@ -2220,7 +2220,20 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // one — and it is the correct place regardless, because whether a
           // request happens to resemble an option is not a property anything
           // should depend on.
-          if (!isBareAcknowledgement(message) && !turnIntent.wantsPractice) {
+          // THE 'K' COLLISION (2026-09-07): 'k' is chat-speak for "okay" AND,
+          // on chem.bio.vitamins' own authored probe, the literal correct
+          // option. `isBareAcknowledgement` was swallowing every verbatim-
+          // correct "K" reply before `gradeMcqAnswer` ever ran — 100% of
+          // attempts, confirmed live. An exact, byte-for-byte match against
+          // one of THIS question's own options is the strongest, least
+          // ambiguous signal `resolveMcqChoice` has (its own rule 0, "tapping
+          // an option sends its text verbatim") and must never be suppressed
+          // by a guard built for the weaker inference rules below it — see
+          // `isVerbatimPendingOption`'s own header for the full incident.
+          if (
+            (!isBareAcknowledgement(message) || isVerbatimPendingOption(message, pendingMcqHoisted))
+            && !turnIntent.wantsPractice
+          ) {
             const g = gradeMcqAnswer(message, pendingMcqHoisted)
             if (g.correct !== null) mcqGradeHoisted = g
           }

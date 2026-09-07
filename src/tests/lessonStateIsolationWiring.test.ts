@@ -122,8 +122,19 @@ describe('Phase A is untouched', () => {
     expect(code).not.toMatch(/^import(?! type)/m)
   })
 
-  it('the two Phase 7P suppressions still guard the grade, unchanged', () => {
-    expect(CHAT).toMatch(/if \(!isBareAcknowledgement\(message\) && !turnIntent\.wantsPractice\)/)
+  it('the two Phase 7P suppressions still guard the grade — widened 2026-09-07 with an exact-option-match carve-out (the "K" collision), never removed', () => {
+    // Superseded by the 'K' collision fix: `isBareAcknowledgement` alone
+    // was swallowing a verbatim-CORRECT reply that happened to also be an
+    // ACK_PHRASES entry (chem.bio.vitamins' own authored option "K") before
+    // gradeMcqAnswer ever ran. The carve-out (isVerbatimPendingOption) only
+    // widens what counts as "not an acknowledgement" — an exact,
+    // byte-for-byte match to one of the pending question's own options,
+    // resolveMcqChoice's own strongest signal — and leaves wantsPractice
+    // untouched as an unconditional AND, so both Phase 7P suppressions
+    // still guard every non-exact-match reply exactly as before.
+    expect(CHAT).toMatch(
+      /if \(\s*\(!isBareAcknowledgement\(message\) \|\| isVerbatimPendingOption\(message, pendingMcqHoisted\)\)\s*&&\s*!turnIntent\.wantsPractice\s*\)/,
+    )
   })
 })
 
