@@ -124,7 +124,17 @@ describe('B2 changed nothing else', () => {
     // there is no second concept to share a kind default with, so it is
     // registered here as concept-owned rather than as a CANONICAL_SCENES
     // default, exactly like math.calc.critical-points above.
-    expect(CONCEPT_SCENE_OVERRIDES).toHaveLength(17)
+    //
+    // 17 -> 37 (Chemistry Visual Coverage programme, closing the chem.thermo/
+    // chem.coord/chem.elect gap visualRegistry.ts's own comment recorded):
+    // 20 new concept-owned entries across four archetypes (electrochemical
+    // cell x8, energy cycle x3, coordination geometry x5, reused
+    // statistics_bar_chart x2, system/first-law x2) — see
+    // conceptSceneParams.ts's "Chemistry Visual Coverage programme" section
+    // and the dedicated test files (electrochemicalCellScene.test.ts,
+    // energyCycleScene.test.ts, coordinationComplexScene.test.ts,
+    // chemistrySystemScenes.test.ts, chemistryVisualCoverageAudit.test.ts).
+    expect(CONCEPT_SCENE_OVERRIDES).toHaveLength(37)
     expect(CONCEPT_SCENE_OVERRIDES).toContain('math.calc.critical-points')
     expect(CONCEPT_SCENE_OVERRIDES).toContain('phys.em.kirchhoffs-laws')
     expect(CONCEPT_SCENE_OVERRIDES).toContain('phys.mech.satellites')

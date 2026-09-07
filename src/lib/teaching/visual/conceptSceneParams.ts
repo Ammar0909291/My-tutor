@@ -44,6 +44,10 @@ import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivis
 import { buildTimelineScene } from '@/lib/teaching/sceneGenerators/historicalTimeline'
 import { buildOrgChartScene } from '@/lib/teaching/sceneGenerators/civicsOrgChart'
 import { buildDemographicPyramidScene } from '@/lib/teaching/sceneGenerators/demographicPyramid'
+import { buildElectrochemicalCellScene, type ElectrochemicalCellParams } from '@/lib/teaching/sceneGenerators/electrochemicalCell'
+import { buildEnergyCycleScene } from '@/lib/teaching/sceneGenerators/energyCycle'
+import { buildCoordinationComplexScene, type CoordinationComplexDef } from '@/lib/teaching/sceneGenerators/coordinationComplex'
+import { buildSystemBoundaryScene, buildFirstLawScene as buildChemFirstLawScene } from '@/lib/teaching/sceneGenerators/chemistrySystemScenes'
 
 /**
  * A canonical figure from the variable registry.
@@ -254,6 +258,170 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'phys.therm.first-law':               buildFirstLawScene,
   'phys.mech.viscosity':                buildViscosityScene,
   'phys.mech.surface-tension':          buildSurfaceTensionScene,
+
+  // ── Chemistry Visual Coverage programme (2026-09) ─────────────────────────
+  // chem.thermo / chem.coord / chem.elect had NO curated visual of any kind
+  // (visualRegistry.ts's own comment recorded the gap). Every entry below is
+  // a genuinely reusable archetype, not a concept-specific hack — see
+  // electrochemicalCell.ts / energyCycle.ts / coordinationComplex.ts /
+  // chemistrySystemScenes.ts for why each archetype is scientifically
+  // appropriate for every concept bound to it.
+
+  // Archetype A — one electrochemical-cell generator serves every galvanic
+  // and electrolytic concept in chem.elect, plus cell thermodynamics.
+  // `electricCircuit`'s resistor/capacitor model cannot represent any of
+  // these (no electrode, no electrolyte, no half-reaction).
+  'chem.elect.galvanic-cell': () => buildElectrochemicalCellScene(DANIELL_CELL),
+  'chem.thermo.cell-thermo': () => buildElectrochemicalCellScene({
+    ...DANIELL_CELL, name: 'Daniell Cell — ΔG = −nFE',
+  }),
+  'chem.elect.standard-electrode': () => buildElectrochemicalCellScene({
+    cellType: 'galvanic',
+    anode: { material: 'Zn', ion: 'Zn2+', standardPotential: -0.76 },
+    cathode: { material: 'Pt, H2(g)', ion: 'H+', standardPotential: 0 },
+    electronsTransferred: 2,
+    name: 'Zinc vs. Standard Hydrogen Electrode',
+  }),
+  'chem.elect.nernst': () => buildElectrochemicalCellScene({
+    cellType: 'galvanic',
+    anode: { material: 'Zn', ion: 'Zn2+', standardPotential: -0.76, concentration: 1.0 },
+    cathode: { material: 'Cu', ion: 'Cu2+', standardPotential: 0.34, concentration: 0.01 },
+    electronsTransferred: 2,
+    name: 'Daniell Cell at Non-Standard Concentrations',
+  }),
+  'chem.elect.concentration-cell': () => buildElectrochemicalCellScene({
+    cellType: 'galvanic',
+    anode: { material: 'Cu', ion: 'Cu2+', standardPotential: 0.34, concentration: 0.001 },
+    cathode: { material: 'Cu', ion: 'Cu2+', standardPotential: 0.34, concentration: 1.0 },
+    electronsTransferred: 2,
+    name: 'Copper Concentration Cell',
+  }),
+  'chem.elect.electrolysis': () => buildElectrochemicalCellScene({
+    cellType: 'electrolytic',
+    anode: { material: 'C (graphite)', ion: 'Cl-' },
+    cathode: { material: 'Fe (steel)', ion: 'Na+' },
+    electronsTransferred: 2,
+    externalVoltage: 4,
+    name: 'Electrolysis of Molten NaCl',
+  }),
+  'chem.elect.industrial': () => buildElectrochemicalCellScene({
+    cellType: 'electrolytic',
+    anode: { material: 'Cu (pure, impure at cathode)', ion: 'Cu2+' },
+    cathode: { material: 'object to be plated', ion: 'Cu2+' },
+    electronsTransferred: 2,
+    externalVoltage: 2,
+    name: 'Copper Electroplating',
+  }),
+  'chem.elect.batteries': () => buildElectrochemicalCellScene({
+    cellType: 'galvanic',
+    divided: false, // a real dry cell has one paste electrolyte, not two half-cells with a salt bridge
+    anode: { material: 'Zn (case)', ion: 'Zn2+' },
+    cathode: { material: 'MnO2 / carbon rod', ion: 'NH4+' },
+    electronsTransferred: 2,
+    name: 'Zinc–Carbon Dry Cell (Primary Battery)',
+  }),
+
+  // Archetype B — one energy-level/cycle generator serves Hess's Law, the
+  // Born–Haber cycle, and Crystal Field Theory's splitting diagram.
+  'chem.thermo.enthalpy': () => buildEnergyCycleScene({
+    title: "Hess's Law: Combustion of Carbon",
+    startLabel: 'C(s) + O2(g)',
+    unit: 'kJ/mol',
+    paths: [
+      { name: 'Direct', steps: [{ label: 'CO2(g)', delta: -393.5, deltaLabel: 'ΔH = −393.5 kJ/mol' }] },
+      { name: 'Via CO(g)', steps: [
+        { label: 'CO(g) + ½O2(g)', delta: -110.5, deltaLabel: 'ΔH1 = −110.5 kJ/mol' },
+        { label: 'CO2(g)', delta: -283.0, deltaLabel: 'ΔH2 = −283.0 kJ/mol' },
+      ] },
+    ],
+  }),
+  'chem.thermo.bond-enthalpy': () => buildEnergyCycleScene({
+    title: 'Born–Haber Cycle: Formation of NaCl',
+    startLabel: 'Na(s) + ½Cl2(g)',
+    unit: 'kJ/mol',
+    paths: [
+      { name: 'Direct', steps: [{ label: 'NaCl(s)', delta: -411, deltaLabel: 'ΔHf° = −411 kJ/mol' }] },
+      { name: 'Via ions', steps: [
+        { label: 'Na(g) + ½Cl2(g)', delta: 107, deltaLabel: 'sublimation ΔHsub = +107' },
+        { label: 'Na+(g) + e− + ½Cl2(g)', delta: 496, deltaLabel: 'ionization IE = +496' },
+        { label: 'Na+(g) + e− + Cl(g)', delta: 122, deltaLabel: 'dissociation ½ΔHdiss = +122' },
+        { label: 'Na+(g) + Cl−(g)', delta: -349, deltaLabel: 'electron affinity EA = −349' },
+        { label: 'NaCl(s)', delta: -787, deltaLabel: 'lattice energy U = −787' },
+      ] },
+    ],
+  }),
+  'chem.coord.cft': () => buildEnergyCycleScene({
+    title: 'Crystal Field Splitting: [Ti(H2O)6]3+',
+    startLabel: 't2g (lower set)',
+    unit: 'Δo units',
+    paths: [{ name: 'Splitting', steps: [{ label: 'eg (upper set)', delta: 1, deltaLabel: 'Δo (octahedral splitting)' }] }],
+    occupancy: [{ levelLabel: 't2g (lower set)', dots: 1 }, { levelLabel: 'eg (upper set)', dots: 0 }],
+  }),
+
+  // Archetype D — coordination geometry, extending the same visual grammar
+  // as the existing VSEPR `molecule` generator (never modified) with the two
+  // geometries school VSEPR doesn't need: octahedral and square planar.
+  'chem.coord.werner':       () => buildCoordinationComplexScene(HEXAAMMINECOBALT),
+  'chem.coord.nomenclature': () => buildCoordinationComplexScene(HEXAAMMINECOBALT),
+  'chem.coord.bonding':      () => buildCoordinationComplexScene({
+    ...HEXAAMMINECOBALT, name: 'Hexaamminecobalt(III) — sp3d2 / d2sp3 Hybridization',
+  }),
+  'chem.coord.isomerism': () => buildCoordinationComplexScene(CISPLATIN),
+  // Cisplatin's biological activity is literally cis/trans-dependent — the
+  // isomerism figure IS the applications figure, not a decorative reuse.
+  'chem.coord.applications': () => buildCoordinationComplexScene({
+    ...CISPLATIN, name: 'Cisplatin — the Isomer That Works as a Drug',
+  }),
+
+  // Archetype E — reuse of the existing, unmodified statistics_bar_chart
+  // generator with chemistry-appropriate comparison data.
+  'chem.coord.stability': () => buildStatisticsBarChartScene({
+    chartTitle: 'log Kf: the chelate effect',
+    bars: [
+      { label: '[Cu(NH3)4]2+ (monodentate)', frequency: 13.0 },
+      { label: '[Cu(EDTA)]2− (chelate)', frequency: 18.8 },
+    ],
+  }),
+  'chem.thermo.heat-capacities': () => buildStatisticsBarChartScene({
+    chartTitle: 'Molar heat capacities (J/mol·K)',
+    bars: [
+      { label: 'Monatomic Cv', frequency: 12.47 },
+      { label: 'Monatomic Cp', frequency: 20.79 },
+      { label: 'Diatomic Cv', frequency: 20.79 },
+      { label: 'Diatomic Cp', frequency: 29.10 },
+    ],
+  }),
+
+  // Archetype C — the system-boundary/energy-balance diagram.
+  'chem.thermo.system': () => buildSystemBoundaryScene('closed'),
+  'chem.thermo.first-law': () => buildChemFirstLawScene(100, -40),
+}
+
+const DANIELL_CELL: ElectrochemicalCellParams = {
+  cellType: 'galvanic',
+  anode: { material: 'Zn', ion: 'Zn2+', standardPotential: -0.76 },
+  cathode: { material: 'Cu', ion: 'Cu2+', standardPotential: 0.34 },
+  electronsTransferred: 2,
+  name: 'Daniell Cell',
+}
+
+const HEXAAMMINECOBALT: CoordinationComplexDef = {
+  name: 'Hexaamminecobalt(III) ion',
+  centralMetal: 'Co',
+  charge: '3+',
+  geometry: 'octahedral',
+  ligands: [{ formula: 'NH3', count: 6 }],
+  coordinationNumber: 6,
+}
+
+const CISPLATIN: CoordinationComplexDef = {
+  name: 'Cisplatin',
+  centralMetal: 'Pt',
+  charge: '',
+  geometry: 'square_planar',
+  ligands: [{ formula: 'NH3', count: 2 }, { formula: 'Cl', count: 2 }],
+  isomer: 'cis',
+  coordinationNumber: 4,
 }
 
 /**

@@ -699,12 +699,26 @@ const DOMAIN_VISUALS: DomainRule[] = [
   // entry nor a fallback). These three reuse already-built chemistry
   // visual assets that are a genuine thematic fit for the whole domain,
   // matching the established pattern (e.g. math.calc -> coordinate_plane
-  // above). The other 22 chemistry domains (chem.thermo, chem.equil,
-  // chem.org, chem.carb, etc.) have no existing chemistry-specific visual
-  // asset that fits them without inventing a new one — left unmapped
-  // rather than assigning a poorly-fitting default; see the runtime audit
-  // report for this as a flagged content/architecture gap, not a renamed
-  // bug.
+  // above). Chemistry Visual Coverage programme (2026-09) closed
+  // chem.thermo/chem.coord/chem.elect specifically: 20 of their 25
+  // concepts now have a genuinely appropriate figure via new concept-owned
+  // CONCEPT_SCENES entries in conceptSceneParams.ts (an electrochemical-
+  // cell generator, an energy-cycle generator, an extended coordination-
+  // geometry generator, and reuse of the existing statistics_bar_chart
+  // generator) — no domain-wide default was added HERE because each
+  // concept needed its own instance, not one shared card. The remaining 5
+  // (chem.elect.conductance, chem.elect.corrosion, chem.thermo.entropy,
+  // chem.thermo.gibbs, chem.thermo.third-law) are deliberately still
+  // unmapped: each needs a genuinely different visual archetype (a
+  // dual-curve concentration plot, a qualitative disorder diagram, a
+  // spontaneity decision chart, a discontinuous entropy-vs-temperature
+  // curve) that would be invented rather than reused — left unmapped
+  // rather than assigning a poorly-fitting one. The other remaining
+  // chemistry domains (chem.equil, chem.org, chem.carb, etc.) still have
+  // no existing chemistry-specific visual asset that fits them without
+  // inventing a new one — left unmapped for the same reason; see the
+  // runtime audit report for this as a flagged content/architecture gap,
+  // not a renamed bug.
   domainRule('chem.atomic', 'three_atomic_structure', ['three_atomic_structure', 'three_electron_shells']),
   domainRule('chem.period', 'three_electron_shells', ['three_electron_shells']),
   domainRule('chem.solid',  'three_crystal_lattice', ['three_crystal_lattice']),
