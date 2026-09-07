@@ -83,16 +83,33 @@ describe('E1 — a probe may be spent early only against real surplus', () => {
   it('a bare-contract concept behaves exactly as before — this is the safety property', () => {
     // Three gradeable probes is the contract floor. Spending one there is what
     // held physics at 79%, and shipping E1 before probe depth would have made
-    // the dominant failure class worse.
+    // the dominant failure class worse. Holds identically for OBSERVE (R81).
     for (const pool of [0, 1, 2, 3]) {
       expect(mayAttachProbeBelowGuide('DEMONSTRATE', pool)).toBe(false)
+      expect(mayAttachProbeBelowGuide('OBSERVE', pool)).toBe(false)
     }
   })
 
-  it('OBSERVE is never opened — it is a diagnostic phase, not a thin gate', () => {
-    for (const pool of [4, 5, 10, 50]) {
-      expect(mayAttachProbeBelowGuide('OBSERVE', pool)).toBe(false)
-    }
+  it('R81: spending at OBSERVE then DEMONSTRATE in the same session cannot double-spend below the floor', () => {
+    // A pool of exactly 4: OBSERVE may spend one (4 - 1 = 3 >= 3), leaving 3.
+    // DEMONSTRATE reading that SAME reduced pool must then refuse — this is
+    // what makes it safe for both call sites to share one function rather
+    // than needing session-level bookkeeping of their own.
+    expect(mayAttachProbeBelowGuide('OBSERVE', 4)).toBe(true)
+    const remainingAfterObserveSpend = 4 - 1
+    expect(mayAttachProbeBelowGuide('DEMONSTRATE', remainingAfterObserveSpend)).toBe(false)
+  })
+
+  it('SUPERSEDED (R81, 2026-09-07): OBSERVE now opens under the SAME surplus rule as DEMONSTRATE', () => {
+    // MEASURED: 79 of 238 Mohd Physics Tier-A concepts terminated UNMEASURED
+    // at turn 1 (phaseBeforeTurn OBSERVE, the fold's initial state), every
+    // one carrying 4-12 ACTIVE production probes — never a content gap, and
+    // never OBSERVE's diagnostic LADDER (transitions/observeFailures/the
+    // 2-failure escape), which observeDiagnosticConcludes.test.ts still owns
+    // and this file does not touch. Same threshold, not a second one.
+    expect(mayAttachProbeBelowGuide('OBSERVE', 3)).toBe(false)
+    expect(mayAttachProbeBelowGuide('OBSERVE', 4)).toBe(true)
+    expect(mayAttachProbeBelowGuide('OBSERVE', 5)).toBe(true)
   })
 
   it('says nothing about phases that were already allowed', () => {

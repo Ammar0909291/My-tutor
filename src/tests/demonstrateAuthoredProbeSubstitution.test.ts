@@ -38,8 +38,14 @@ import { masteryVerifiedStrict } from '@/lib/teaching/masteryGate'
  */
 
 // ── the route's own gate condition, mirrored (source pinned elsewhere) ───────
+//
+// R81 (2026-09-07) adds OBSERVE, scoped to its own 'ask' turn exactly as
+// GUIDE already is — elided here the same way GUIDE's own ask-restriction
+// already was, per this mirror's established convention (source pinned in
+// "0 — THE MIRROR IS COUPLED TO THE ROUTE" below).
 function gateOpens(phase: string): boolean {
   return isMasteryGatePhase(phase) || phase === 'GUIDE' /* && move==='ask' */ || phase === 'DEMONSTRATE'
+    || phase === 'OBSERVE' /* && move==='ask' */
 }
 function gateOpensPreFix(phase: string, struggling: boolean): boolean {
   return isMasteryGatePhase(phase) || phase === 'GUIDE' || (phase === 'DEMONSTRATE' && struggling)
@@ -84,7 +90,8 @@ function serveTurn(opts: {
   if (eligible) {
     authoredProbesExist = true
     const belowGuideBlocked =
-      opts.phase === 'DEMONSTRATE' && !mayAttachProbeBelowGuide(opts.phase, opts.poolSize)
+      (opts.phase === 'DEMONSTRATE' || opts.phase === 'OBSERVE')
+      && !mayAttachProbeBelowGuide(opts.phase, opts.poolSize)
     gateMcq = belowGuideBlocked ? null : probeToMcq(AUTHORED_PROBE)
   }
 
@@ -116,9 +123,14 @@ describe('0 — THE MIRROR IS COUPLED TO THE ROUTE', () => {
     expect(ROUTE).not.toContain("phaseBeforeTurn === 'DEMONSTRATE' && ")
   })
 
-  it('route.ts still gates GUIDE on the ask move, and still never lists OBSERVE', () => {
+  it('route.ts still gates GUIDE on the ask move, and now gates OBSERVE the identical way (R81)', () => {
     expect(ROUTE).toContain("(phaseBeforeTurn === 'GUIDE' && evidenceMoveHoisted === 'ask')")
-    expect(ROUTE).not.toContain("phaseBeforeTurn === 'OBSERVE'")
+    // SUPERSEDED 2026-09-07 (R81): OBSERVE now IS a disjunct, scoped to its
+    // own 'ask' turn — the same restriction pattern as GUIDE, never
+    // unconditional the way DEMONSTRATE is (DEMONSTRATE can be unconditional
+    // only because decideNextMove never returns 'ask' there at all; OBSERVE
+    // can, so it needs the same move guard GUIDE has).
+    expect(ROUTE).toContain("(phaseBeforeTurn === 'OBSERVE' && evidenceMoveHoisted === 'ask')")
   })
 
   it('route.ts still delegates the early spend to the surplus rule', () => {
@@ -178,19 +190,50 @@ describe('B — DEMONSTRATE, pool = 3: the surplus rule refuses, old behaviour s
   })
 })
 
-describe('C — OBSERVE is untouched at every pool size', () => {
-  for (const pool of [0, 1, 3, 4, 5, 20]) {
-    it(`pool ${pool}: no authored probe, model keeps its question`, () => {
-      const r = serveTurn({ phase: 'OBSERVE', poolSize: pool, struggling: false })
-      expect(r.eligible).toBe(false)
-      expect(r.gateMcq).toBeNull()
-      expect(r.decision.reason).toBe('phase-does-not-count')
-      expect(probeKeyIsAuthored(r.persisted as never)).toBe(false)
-    })
-  }
+describe('C — OBSERVE, pool >= 4: the authored probe substitutes too (R81)', () => {
+  // MEASURED, the reason this reopened: 79 of 238 Mohd Physics Tier-A
+  // concepts terminated UNMEASURED at turn 1, phaseBeforeTurn OBSERVE,
+  // 100% phase-does-not-count, every one holding 4-12 ACTIVE production
+  // probes — never a content gap. Mirrors describe blocks A/B exactly,
+  // for the phase that previously had no substitution at any pool size.
+  const r = serveTurn({ phase: 'OBSERVE', poolSize: 4, struggling: false })
 
-  it('the surplus rule itself refuses OBSERVE outright, at any pool', () => {
-    for (const pool of [3, 4, 100]) expect(mayAttachProbeBelowGuide('OBSERVE', pool)).toBe(false)
+  it('the gate opens', () => {
+    expect(r.eligible).toBe(true)
+  })
+
+  it('an authored probe is attached and is gradeable', () => {
+    expect(r.gateMcq).not.toBeNull()
+    expect(r.gateMcq!.correctIndex).toBe(0)
+  })
+
+  it('decideModelProbe resolves as authored-served — no change needed to that module', () => {
+    expect(r.decision.reason).toBe('authored-served')
+    expect(r.decision.serve).toBe(false)
+  })
+
+  it('the persisted pendingMcq carries the assetId', () => {
+    expect(probeKeyIsAuthored(r.persisted as never)).toBe(true)
+  })
+})
+
+describe('D0 — OBSERVE, pool = 3: the surplus rule refuses, exactly as it does at DEMONSTRATE', () => {
+  const r = serveTurn({ phase: 'OBSERVE', poolSize: CREDITS_REQUIRED_FOR_MASTERY, struggling: false })
+
+  it('mayAttachProbeBelowGuide is the thing that refuses — same threshold, not a second one', () => {
+    expect(mayAttachProbeBelowGuide('OBSERVE', 3)).toBe(false)
+    expect(mayAttachProbeBelowGuide('OBSERVE', 4)).toBe(true)
+    expect(r.gateMcq).toBeNull()
+  })
+
+  it('the model MCQ is still governed by phase-does-not-count', () => {
+    expect(r.decision.reason).toBe('phase-does-not-count')
+    expect(r.decision.serve).toBe(true)
+  })
+
+  it('a bare-contract concept is therefore byte-identical to before the change', () => {
+    expect(probeKeyIsAuthored(r.persisted as never)).toBe(false)
+    expect((r.served as { question: string }).question).toBe(INVENTED_MCQ.question)
   })
 })
 
@@ -293,13 +336,31 @@ describe('F — NEGATIVE CONTROL: these assertions fail against pre-fix behaviou
     expect(probeKeyIsAuthored(post.persisted as never)).toBe(true)
   })
 
-  it('OBSERVE is identical pre- and post-fix at every pool size', () => {
-    for (const pool of [0, 3, 4, 20]) {
+  it('SUPERSEDED (R81): what actually SERVES is unchanged below the surplus floor, and differs at/above it', () => {
+    // `eligible` is NOT the invariant to pin here — it only reflects the
+    // PHASE test (`gateOpens`), which now fires unconditionally on OBSERVE's
+    // own 'ask' turn, exactly as GUIDE's mirror already does elsewhere in this
+    // file (move === 'ask' elided as a comment, same convention). R81 does
+    // not scope the phase test itself by pool; the surplus rule
+    // (`mayAttachProbeBelowGuide`, via `belowGuideBlocked` above) is what
+    // decides whether the gate's probe actually reaches the learner. So the
+    // invariant this test pins is what gets SERVED, matching R3's own
+    // DEMONSTRATE negative control below.
+    for (const pool of [0, 3]) {
       const pre = serveTurn({ phase: 'OBSERVE', poolSize: pool, struggling: false, preFix: true })
       const post = serveTurn({ phase: 'OBSERVE', poolSize: pool, struggling: false })
-      expect(post.eligible).toBe(pre.eligible)
-      expect(post.decision.reason).toBe(pre.decision.reason)
-      expect(probeKeyIsAuthored(post.persisted as never)).toBe(probeKeyIsAuthored(pre.persisted as never))
+      // Below the floor, neither pre- nor post-fix serves an authored probe —
+      // the bare-contract concept behaves exactly as before.
+      expect(probeKeyIsAuthored(pre.persisted as never)).toBe(false)
+      expect(probeKeyIsAuthored(post.persisted as never)).toBe(false)
+    }
+    // At and above the surplus floor, the fix changes exactly what R3's own
+    // DEMONSTRATE negative control changed — PRE-FIX invented, POST-FIX authored.
+    for (const pool of [4, 20]) {
+      const pre = serveTurn({ phase: 'OBSERVE', poolSize: pool, struggling: false, preFix: true })
+      const post = serveTurn({ phase: 'OBSERVE', poolSize: pool, struggling: false })
+      expect(probeKeyIsAuthored(pre.persisted as never)).toBe(false)
+      expect(probeKeyIsAuthored(post.persisted as never)).toBe(true)
     }
   })
 })

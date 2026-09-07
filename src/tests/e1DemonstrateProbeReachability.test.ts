@@ -258,7 +258,12 @@ describe('E1 — the move is never "ask" at DEMONSTRATE, which is why the old co
     expect(route).toContain("(phaseBeforeTurn === 'DEMONSTRATE')")
     // The failure scope is genuinely gone, not merely reworded.
     expect(route).not.toContain("phaseBeforeTurn === 'DEMONSTRATE' && strugglingOnThisConcept")
-    // OBSERVE is still not a disjunct at all.
-    expect(route).not.toContain("phaseBeforeTurn === 'OBSERVE'")
+    // SUPERSEDED 2026-09-07 (R81): OBSERVE IS now a disjunct — scoped to its
+    // own 'ask' turn, never unconditional the way DEMONSTRATE is (DEMONSTRATE
+    // can only be unconditional because decideNextMove never returns 'ask'
+    // there; OBSERVE can, so it needs the move guard). See
+    // demonstrateAuthoredProbeSubstitution.test.ts describe blocks C/D0 for
+    // the behavioural cases against the real modules.
+    expect(route).toContain("(phaseBeforeTurn === 'OBSERVE' && evidenceMoveHoisted === 'ask')")
   })
 })

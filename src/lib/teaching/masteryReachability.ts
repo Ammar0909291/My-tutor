@@ -111,11 +111,17 @@ export function assessMasteryReachability(input: ReachabilityInput): Reachabilit
  * exists, for the first time. So the rule is: spend one early only while at
  * least three remain AFTERWARDS.
  *
- * DEMONSTRATE only. OBSERVE stays barred, and not for want of probes:
- * `observeDiagnosticConcludes.test.ts` establishes OBSERVE as a DIAGNOSTIC
- * phase whose job is to find out what the learner already knows. An earlier
- * attempt to change OBSERVE's ladder behaviour in this programme broke seven
- * behavioural tests and was reverted. It is left alone.
+ * DEMONSTRATE, and (R81, 2026-09-07) OBSERVE — the SAME surplus arithmetic,
+ * not a second threshold. OBSERVE's own LADDER stays exactly as it was:
+ * `observeDiagnosticConcludes.test.ts` establishes it as a DIAGNOSTIC phase
+ * (transitions, observeFailures, the 2-failure conclusion escape), and none
+ * of that is touched here — this only decides which QUESTION fills a turn
+ * the ladder already chose to ASK. An earlier attempt changed OBSERVE's
+ * ladder itself and broke seven behavioural tests; this is a narrower
+ * substitution at the caller (route.ts gates it to `move === 'ask'`, so a
+ * teach/show turn is never touched), evidence-driven by 79 of 238 Mohd
+ * Physics concepts terminating UNMEASURED at OBSERVE turn 1 with 4-12 ACTIVE
+ * production probes each — never a content gap.
  */
 export function mayAttachProbeBelowGuide(
   phase: unknown,
@@ -123,7 +129,7 @@ export function mayAttachProbeBelowGuide(
    *  about to be served. `ProbeMatch.poolSize`. */
   poolSize: number,
 ): boolean {
-  if (phase !== 'DEMONSTRATE') return false
+  if (phase !== 'DEMONSTRATE' && phase !== 'OBSERVE') return false
   if (typeof poolSize !== 'number' || !Number.isFinite(poolSize)) return false
   // One is spent here; CREDITS_REQUIRED_FOR_MASTERY must survive.
   return Math.floor(poolSize) - 1 >= CREDITS_REQUIRED_FOR_MASTERY

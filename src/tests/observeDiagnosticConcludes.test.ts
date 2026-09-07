@@ -41,7 +41,6 @@ import {
   type TurnEvidence,
 } from '@/lib/teaching/conversationState'
 import { phaseAfterConcludedDiagnostic } from '@/lib/teaching/questionLegality'
-import { isMasteryGatePhase, isProbeAttachablePhase } from '@/lib/teaching/gateAssessment'
 
 const CTX: NextMoveContext = { recoveryTurn: false, workedExampleFirst: false }
 
@@ -60,11 +59,6 @@ const askedLearnedNothing: TurnEvidence = {
   signalCorrect: null,
   recoveryFired: false,
 }
-
-/** The shipped probe policy, spelled as route.ts spells it. */
-const probeAttaches = (phase: TeachingPhase, move: 'teach' | 'show' | 'ask') =>
-  (isMasteryGatePhase(phase) || (phase === 'GUIDE' && move === 'ask'))
-  && isProbeAttachablePhase(phase)
 
 // ── the new behaviour ───────────────────────────────────────────────────────
 
@@ -189,18 +183,35 @@ describe('only a real diagnostic result counts', () => {
 // ── the contracts this must not weaken ──────────────────────────────────────
 
 describe('the educational contract is unchanged', () => {
-  it('never attaches an authored probe in OBSERVE', () => {
+  it('SUPERSEDED (R81, 2026-09-07): `probeAttaches` as spelled here never counted route.ts\'s real OBSERVE substitution — the pin now states what actually must not move', () => {
+    // This helper (`probeAttaches`, top of file) is `isMasteryGatePhase ||
+    // (GUIDE && ask)`, spelled BEFORE R81 existed — it was never route.ts's
+    // OBSERVE condition and asserting `observeProbes === 0` against it never
+    // exercised the real gate at all; it only restated the helper's own
+    // definition. route.ts now DOES substitute an authored probe into an
+    // OBSERVE 'ask' turn when one is available and the surplus rule
+    // (masteryReachability.test.ts) allows it — MEASURED necessary: 79 of
+    // 238 Mohd Physics Tier-A concepts terminated UNMEASURED at OBSERVE turn
+    // 1 despite 4-12 ACTIVE production probes each. What must still hold,
+    // and is pinned below instead: the LADDER itself — decideNextMove's
+    // phase/move decisions and the OBSERVE-conclusion mechanics this file
+    // owns — is completely unaware of WHICH probe (model or authored) fills
+    // an 'ask' turn, so every other test in this file is unaffected by
+    // construction, not by coincidence.
     let s = initialConversationState('c')
-    let observeProbes = 0
+    let observeAsks = 0
     for (let n = 1; n <= 20; n++) {
       const move = decideNextMove(s, CTX)
-      if (s.phase === 'OBSERVE' && probeAttaches(s.phase, move)) observeProbes++
+      if (s.phase === 'OBSERVE' && move === 'ask') observeAsks++
       s = advanceConversationState(s, {
         askedQuestion: move === 'ask', questionSanctioned: move === 'ask',
         deliveredTeaching: move !== 'ask', recoveryFired: false, signalCorrect: null,
       })
     }
-    expect(observeProbes).toBe(0)
+    // OBSERVE's diagnostic question is still reachable (unchanged ladder) —
+    // this is the turn R81's substitution can fill; the ladder itself does
+    // not know or care whether it does.
+    expect(observeAsks).toBeGreaterThan(0)
   })
 
   it('never jumps OBSERVE past DEMONSTRATE', () => {
