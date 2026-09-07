@@ -233,7 +233,15 @@ describe('7 · pending-question and lesson identity guards are intact', () => {
   })
 
   it('a probe is still spent on the GRADE, not on being shown', () => {
-    expect(ROUTE).toMatch(/if \(pendingMcqHoisted\?\.question && mcqGradeHoisted\) \{/)
+    // UPDATED 2026-09-07 (S5). The condition became a ternary so the ledger
+    // keeps exactly ONE writer while rung 1 gained a second, narrower way for a
+    // probe to be spent (released after sitting unanswered). The invariant this
+    // guard exists for is unchanged and is asserted directly below: a GRADE is
+    // still the only thing that spends a probe on the grading path, and being
+    // SHOWN still spends nothing.
+    expect(ROUTE).toMatch(/\(pendingMcqHoisted\?\.question && mcqGradeHoisted\)\s*\n?\s*\? pendingMcqHoisted\.question/)
+    // being shown, on its own, still spends nothing
+    expect(ROUTE).not.toMatch(/recordMcqAsked\(memoryHistory, mcqHoisted/)
   })
 
   it('the pending question is still lesson-scoped', () => {
@@ -346,7 +354,9 @@ describe('the wiring is real, not just the helper', () => {
 
   it('the two sides of the ledger derive their key the same way', () => {
     // Drift here is the entire defect. If either expression changes, this fails.
-    expect(ROUTE).toMatch(/recordMcqAsked\(memoryHistory, pendingMcqHoisted\.question\)/)
+    // UPDATED 2026-09-07 (S5): one writer, fed by a ternary — see above.
+    expect(ROUTE).toMatch(/recordMcqAsked\(memoryHistory, questionToSpend\)/)
+    expect(ROUTE).toMatch(/\? pendingMcqHoisted\.question/)
     expect(ROUTE).toMatch(/hasAskedMcq\(historyForGate, stripAuthoringLabel\(stem\)\)/)
   })
 })

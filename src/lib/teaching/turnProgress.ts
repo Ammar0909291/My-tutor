@@ -16,7 +16,11 @@
  * asserted structurally by turnProgress.test.ts, so a later session cannot
  * widen it by accident:
  *
- *   C1  It owns ONE integer (`stagnantTurns`) and nothing else.
+ *   C1  It owns TWO counters of SYSTEM INACTIVITY (`stagnantTurns`,
+ *       `probeHeldTurns`) and nothing else. Neither describes the learner.
+ *       (This was ONE counter until the end-to-end test refused to invert: see
+ *       `foldProbeHeldTurns` for why a second, narrower signal was required
+ *       and why widening the first one would have been the wrong answer.)
  *   C2  It never assigns a phase. Rung 2 is consumed by the EXISTING
  *       diagnostic-conclusion predicate; this module only reports.
  *   C3  It writes no evidence, no counter, no grade, no progress row. It is a
@@ -138,4 +142,47 @@ export function diagnosticMayConclude(rung: EscalationRung): boolean {
  *  named failure beats a silent loop. */
 export function shouldComposeDeterministically(rung: EscalationRung): boolean {
   return rung >= 3
+}
+
+/**
+ * ── WHY A SECOND, NARROWER COUNTER ─────────────────────────────────────────
+ * `stagnantTurns` asks "did anything happen this turn?", and a tutor that keeps
+ * producing NEW teaching text answers yes forever. Measured: with rung 1 driven
+ * by `stagnantTurns`, the L1 reproduction did not invert at all — the model was
+ * teaching something different every turn while the learner's answers were
+ * never graded and the same question was re-served underneath. Teaching was
+ * happening; ASSESSMENT was deadlocked. A general "is the system moving" signal
+ * cannot see that, and widening it to call genuine teaching unproductive would
+ * have made the supervisor fire on healthy lessons — the one thing it must
+ * never do.
+ *
+ * So the stuck dimension gets its own counter. This is exactly the owner's
+ * invariant, narrowed to the state that actually depends on the unproducible
+ * event: a pending probe is waiting for a grade, and a grade requires an answer
+ * the resolver can map. Counting how long that wait has lasted claims nothing
+ * about the learner and nothing about impossibility — only duration.
+ *
+ * Increments ONLY while the SAME probe is carried forward ungraded. Any grade
+ * (right or wrong), any fresh probe, or no probe at all resets it to 0.
+ */
+export function foldProbeHeldTurns(
+  prev: unknown,
+  ctx: { carriedForwardUngraded: boolean; sameProbeAsLastTurn: boolean },
+): number {
+  const base = typeof prev === 'number' && Number.isFinite(prev) && prev >= 0
+    ? Math.floor(prev) : 0
+  if (!ctx.carriedForwardUngraded || !ctx.sameProbeAsLastTurn) return 0
+  return base + 1
+}
+
+/** Turns a probe may sit unanswered before the runtime stops holding it. */
+export const PROBE_HELD_RELEASE_AT = 2
+
+/**
+ * Stop HOLDING an ungraded probe so a different authored one can be selected.
+ * Never grades it, never marks it wrong, never advances past it, and leaves it
+ * spent in the ledger. See route.ts's rung-1 site for the full contract.
+ */
+export function shouldReleaseHeldProbe(probeHeldTurns: number): boolean {
+  return Number.isFinite(probeHeldTurns) && probeHeldTurns >= PROBE_HELD_RELEASE_AT
 }

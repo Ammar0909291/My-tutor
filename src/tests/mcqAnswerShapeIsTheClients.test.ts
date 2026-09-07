@@ -112,6 +112,14 @@ describe('the shape that fooled the harness is refused, and refused evenly', () 
   it('the route still gates the ledger write on a real grade', () => {
     const ROUTE = readFileSync(join(process.cwd(), 'src/app/api/learn/chat/route.ts'), 'utf8')
     expect(ROUTE).toMatch(/if \(g\.correct !== null\) mcqGradeHoisted = g/)
-    expect(ROUTE).toMatch(/if \(pendingMcqHoisted\?\.question && mcqGradeHoisted\) \{/)
+    // UPDATED 2026-09-07 (S5). The condition became a ternary so the ledger
+    // keeps exactly ONE writer while rung 1 gained a second, narrower way for a
+    // probe to be spent (released after sitting unanswered). The invariant this
+    // guard exists for is unchanged and is asserted directly below: a GRADE is
+    // still the only thing that spends a probe on the grading path, and being
+    // SHOWN still spends nothing.
+    expect(ROUTE).toMatch(/\(pendingMcqHoisted\?\.question && mcqGradeHoisted\)\s*\n?\s*\? pendingMcqHoisted\.question/)
+    // being shown, on its own, still spends nothing
+    expect(ROUTE).not.toMatch(/recordMcqAsked\(memoryHistory, mcqHoisted/)
   })
 })

@@ -144,7 +144,13 @@ describe('6 · pending-question lesson identity is untouched', () => {
     // argument became `mcqToServe(...)` on 2026-08-30 so the response payload
     // and the persisted snapshot cannot disagree about what is on the learner's
     // screen; `mcqHoisted` is still its first and winning input.
-    expect(ROUTE).toMatch(/writePendingQuestion\(\s*\n\s*mcqToServe\(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted\),\s*\n\s*lessonKeyThisTurnHoisted,\s*\n\s*\)/)
+    // UPDATED 2026-09-07 (S5). The served value moved to a `served` local so
+    // rung 1 can withhold it — `writePendingQuestion(releasePending ? null :
+    // served, lessonKeyThisTurnHoisted)`. This test's actual subject, the
+    // lesson key, is unchanged, and `mcqToServe(mcqHoisted, …)` is still what
+    // computes the value, with mcqHoisted still its first and winning input.
+    expect(ROUTE).toMatch(/const served = mcqToServe\(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted\)/)
+    expect(ROUTE).toMatch(/writePendingQuestion\(\s*\n\s*releasePending \? null : served,\s*\n\s*lessonKeyThisTurnHoisted,\s*\n\s*\)/)
   })
 })
 
@@ -164,7 +170,15 @@ describe('8-12 · nothing about grading, mastery, CLOSE or budget moves', () => 
   })
 
   it('a probe is still spent on the GRADE, not on being shown', () => {
-    expect(ROUTE).toMatch(/if \(pendingMcqHoisted\?\.question && mcqGradeHoisted\) \{/)
+    // UPDATED 2026-09-07 (S5). The condition became a ternary so the ledger
+    // keeps exactly ONE writer while rung 1 gained a second, narrower way for a
+    // probe to be spent (released after sitting unanswered). The invariant this
+    // guard exists for is unchanged and is asserted directly below: a GRADE is
+    // still the only thing that spends a probe on the grading path, and being
+    // SHOWN still spends nothing.
+    expect(ROUTE).toMatch(/\(pendingMcqHoisted\?\.question && mcqGradeHoisted\)\s*\n?\s*\? pendingMcqHoisted\.question/)
+    // being shown, on its own, still spends nothing
+    expect(ROUTE).not.toMatch(/recordMcqAsked\(memoryHistory, mcqHoisted/)
   })
 
   it('the mastery bar is unchanged', () => {

@@ -62,12 +62,23 @@ describe('the wiring is at the right boundary', () => {
   const SCREEN = readFileSync(join(process.cwd(), 'src/components/learn/LessonScreen.tsx'), 'utf8')
 
   it('the response serializes the client projection, not the raw probe', () => {
-    expect(ROUTE).toContain('mcq: mcqForClient(mcqToServeForResponse(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted)) ?? undefined')
+    // UPDATED 2026-09-07 (S5): the expression is now guarded by
+    // `probeReleasedThisTurnHoisted` so rung 1 removes a released probe from
+    // the response AND the snapshot together. The subject of this test — the
+    // response serializes the CLIENT PROJECTION, never the raw probe — is
+    // unchanged, and is what is asserted here.
+    expect(ROUTE).toContain('mcqForClient(mcqToServeForResponse(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted))')
+    expect(ROUTE).not.toMatch(/mcq: mcqToServeForResponse\(/)
   })
 
   it('the PERSISTED snapshot still serves the FULL probe (so the next turn can grade)', () => {
     // Persistence must keep correctIndex — gradeMcqAnswer reads it next turn.
-    expect(ROUTE).toMatch(/mcqToServe\(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted\),\s*\n\s*lessonKeyThisTurnHoisted,/)
+    // UPDATED 2026-09-07 (S5): the same value now goes through a `served`
+    // local so rung 1 can withhold it. What this test protects is unchanged —
+    // when a probe IS persisted it is the FULL probe, key included, because
+    // gradeMcqAnswer reads correctIndex from the snapshot next turn.
+    expect(ROUTE).toMatch(/const served = mcqToServe\(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted\)/)
+    expect(ROUTE).toMatch(/releasePending \? null : served,\s*\n\s*lessonKeyThisTurnHoisted,/)
   })
 
   it('the client no longer requires or stores correctIndex', () => {

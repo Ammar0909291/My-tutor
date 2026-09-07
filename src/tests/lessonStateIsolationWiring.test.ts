@@ -31,7 +31,10 @@ describe('the chat route reads and writes the pending question through its owner
     // question argument became `mcqToServe(...)` on 2026-08-30 so the response
     // and the snapshot cannot disagree about what is on screen; the key is
     // unchanged and is what this pins.
-    expect(CHAT).toMatch(/conversationStateUpdate\.pendingMcq = writePendingQuestion\(\s*\n\s*mcqToServe\(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted\),\s*\n\s*lessonKeyThisTurnHoisted,\s*\n\s*\)/)
+    // UPDATED 2026-09-07 (S5): shape changed so rung 1 can withhold a probe
+    // nobody is answering; the invariant this asserts is unchanged.
+    expect(CHAT).toMatch(/conversationStateUpdate\.pendingMcq = writePendingQuestion\(/)
+    expect(CHAT).toMatch(/releasePending \? null : served,\s*\n\s*lessonKeyThisTurnHoisted/)
   })
 
   it('derives that key with lessonKeyFor — no second lesson-identity scheme', () => {

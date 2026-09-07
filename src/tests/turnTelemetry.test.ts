@@ -73,9 +73,13 @@ describe('S4 — the joined line exists', () => {
     ], { probes: PROBES })
 
     const later = res.slice(1).map(event)
-    // the diagnosis, readable from one field
-    expect(later.every((e) => e.blockedBy.includes('noUnansweredProbeOnScreen'))).toBe(true)
-    // nothing was ever graded
+    // UPDATED 2026-09-07 (S5): the latch is now RELEASED, so it no longer holds
+    // on every turn — which is the fix, not a weaker assertion. What the line
+    // must still show is the diagnosis itself: the latch appears, is visible by
+    // name, and the held-probe counter climbs toward the release.
+    expect(later.some((e) => e.blockedBy.includes('noUnansweredProbeOnScreen'))).toBe(true)
+    expect(Math.max(...later.map((e) => e.probeHeldTurns))).toBeGreaterThanOrEqual(2)
+    // and nothing was ever graded — no answer was invented to clear the latch
     expect(later.every((e) => e.gradeSource === 'none')).toBe(true)
   }, 60_000)
 

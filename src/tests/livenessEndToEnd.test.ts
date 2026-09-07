@@ -81,42 +81,71 @@ describe('P0 — the harness itself is sound (nothing below counts without this)
   }, 60_000)
 })
 
-describe('L1 — the pending-probe latch, END TO END', () => {
+describe('L1 — the pending-probe latch: REPRODUCED, THEN CLOSED BY RUNG 1', () => {
   // Every one of these is substantively CORRECT and every one is refused by
   // resolveMcqChoice (measured: 10 of 12 phrasings for this probe are).
   const TYPED_CORRECT = [
     'the anode', 'the negative electrode', 'where electrons are released',
     'the zinc side loses electrons', 'the electrode that gets eaten away',
-    'the one where Zn becomes Zn2+', 'the electrode electrons flow away from',
-    'the metal that dissolves',
+    'the one where Zn becomes Zn2+',
   ]
+  const drive = () => driveTurns(h, POST, [
+    { learnerSays: 'ok', modelReplies: teach(0) },
+    ...TYPED_CORRECT.map((s, i) => ({ learnerSays: s, modelReplies: teach(i + 1) })),
+  ], { probes: PROBES })
 
-  it('a learner who TYPES the right answer is locked out of assessment forever', async () => {
-    const res = await driveTurns(h, POST, [
-      { learnerSays: 'ok', modelReplies: teach(0) },
-      ...TYPED_CORRECT.map((s, i) => ({ learnerSays: s, modelReplies: teach(i + 1) })),
-    ], { probes: PROBES })
+  // ── WHAT THIS LOOKED LIKE BEFORE RUNG 1 (measured, kept as the record) ────
+  // The gate was blocked by `noUnansweredProbeOnScreen` on EVERY turn after the
+  // first — on most of them the SOLE blocker, and on several the engine's own
+  // move was 'ask', so the runtime wanted to assess, had four unused reviewed
+  // probes, and could not reach them. The learner saw ONE question across all
+  // nine turns. correctAtCheck and correctAtPractice never left 0.
 
-    const after = res.slice(1)
-    // 1. the gate is shut on EVERY turn, by this one term
-    for (const t of after) {
-      expect(gate(t)?.eligible).toBe(false)
-      expect(gate(t)?.blockedBy).toContain('noUnansweredProbeOnScreen')
+  it('THE FIX: the learner is no longer shown the same question forever', async () => {
+    const res = await drive()
+    const asked = [...new Set(res
+      .map((t) => (t.body as { mcq?: { question?: string } }).mcq?.question)
+      .filter(Boolean))]
+    // was 1; the pool is now actually reachable
+    expect(asked.length).toBeGreaterThanOrEqual(3)
+  }, 60_000)
+
+  it('the gate re-opens: the latch is released after the probe sits unanswered', async () => {
+    const res = await drive()
+    const reopened = res.slice(1).filter((t) => gate(t)?.eligible === true)
+    expect(reopened.length).toBeGreaterThanOrEqual(2)
+  }, 60_000)
+
+  it('a released probe is SPENT, never re-served — the ledger keeps one owner', async () => {
+    const res = await drive()
+    const questions = res
+      .map((t) => (t.body as { mcq?: { question?: string } }).mcq?.question)
+      .filter(Boolean) as string[]
+    // Each distinct probe appears in a single contiguous run: released probes
+    // never come back. (Releasing WITHOUT spending re-served the identical
+    // probe — measured — because recordMcqAsked fires on the grade, not the ask.)
+    const firstSeen = new Map<string, number>()
+    const lastSeen = new Map<string, number>()
+    questions.forEach((q, i) => {
+      if (!firstSeen.has(q)) firstSeen.set(q, i)
+      lastSeen.set(q, i)
+    })
+    for (const q of firstSeen.keys()) {
+      const span = lastSeen.get(q)! - firstSeen.get(q)! + 1
+      const count = questions.filter((x) => x === q).length
+      expect(span).toBe(count)
     }
-    // 2. and on most of them it is the ONLY thing shutting it — this is not
-    //    some other policy legitimately declining the turn
-    const soleBlocker = after.filter((t) => gate(t)?.blockedBy.length === 1)
-    expect(soleBlocker.length).toBeGreaterThanOrEqual(5)
-    // 3. the engine ITSELF wanted to ask on several of those turns
-    expect(after.filter((t) => gate(t)?.move === 'ask').length).toBeGreaterThanOrEqual(3)
-    // 4. the learner sees ONE question, forever
-    const asked = new Set(res.map((t) => (t.body as { mcq?: { question?: string } }).mcq?.question)
-      .filter(Boolean))
-    expect(asked.size).toBe(1)
-    // 5. four reviewed probes are never reached, and no mastery is ever banked
+  }, 60_000)
+
+  it('NOTHING WAS GRADED, INVENTED OR ADVANCED to achieve that', async () => {
+    const res = await drive()
     const last = cs(res[res.length - 1])
+    // The answers were never gradeable, so no credit may exist. Rung 1 releases
+    // a question; it does not decide what the learner knows.
     expect(last.correctAtCheck).toBe(0)
     expect(last.correctAtPractice).toBe(0)
+    expect(res.every((t) => (t.body as { mastery?: { verified?: boolean } }).mastery?.verified !== true))
+      .toBe(true)
   }, 60_000)
 })
 

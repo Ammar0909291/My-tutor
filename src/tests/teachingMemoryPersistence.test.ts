@@ -80,8 +80,10 @@ describe('the ledger is written on EVERY taught turn', () => {
     // carries a mean of 3.13 gradeable probes against a bar of 3 graded
     // answers — no slack to lose. See the comment at the call site.
     const b = persistBlock()
-    expect(b).toContain('recordMcqAsked(memoryHistory, pendingMcqHoisted.question)')
-    expect(b).toContain('if (pendingMcqHoisted?.question && mcqGradeHoisted)')
+    // UPDATED 2026-09-07 (S5): shape changed so rung 1 can withhold a probe
+    // nobody is answering; the invariant this asserts is unchanged.
+    expect(b).toContain('recordMcqAsked(memoryHistory, questionToSpend)')
+    expect(b).toContain('(pendingMcqHoisted?.question && mcqGradeHoisted)')
     expect(b).toContain('recordExplanationServed(memoryHistory, assembled.explanationAssetId)')
   })
 
