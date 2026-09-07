@@ -615,7 +615,7 @@ const SIGFIG_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.HIGH,
     stem: "A distance is recorded as 4500 m, with no decimal point. How many significant figures does that show?",
     choices: [
-      { text: "Ambiguously 2 — and that is the point. Trailing zeros BEFORE an (absent) decimal point cannot be read as significant, because nothing distinguishes \"measured to the nearest metre\" from \"rounded to the nearest hundred\". Writing 4.50 × 10³ m declares 3; writing \"4500.\" with the decimal point declares 4. Scientific notation exists to remove this ambiguity", isCorrect: true },
+      { text: "Ambiguously 2 — and that is the point. Trailing zeros before an absent decimal point cannot be read as significant, since nothing shows whether it was measured to the metre or rounded to the hundred. Scientific notation (4.50 × 10³ m) removes the ambiguity", isCorrect: true },
       { text: "4 — every digit written down is significant, so the two trailing zeros count", isCorrect: false, misconceptionId: `${SIGFIG}:MC2` },
     ],
     correctValue: "Ambiguous (read as 2); use scientific notation to declare the intent",
@@ -739,7 +739,7 @@ const MOLE_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.HIGH,
     stem: "You have 3.011 × 10²³ molecules of CO₂. How many moles is that — and which way does Avogadro's number go?",
     choices: [
-      { text: "0.5 mol. Going from PARTICLES to MOLES you DIVIDE by 6.022 × 10²³: (3.011 × 10²³)/(6.022 × 10²³) = 0.5. The direction check is a sanity check, not a rule to memorise — a number of particles is always enormous and a number of moles is always small, so if your answer came out bigger than what you started with, you multiplied when you should have divided", isCorrect: true },
+      { text: "0.5 mol. Going from PARTICLES to MOLES you DIVIDE by 6.022 × 10²³: (3.011 × 10²³)/(6.022 × 10²³) = 0.5. A mole count is always a small number — if your answer is huge, you multiplied instead of dividing", isCorrect: true },
       { text: "1.81 × 10⁴⁷ mol — multiply the number of molecules by Avogadro's number", isCorrect: false, misconceptionId: `${MOLE}:MC3` },
     ],
     correctValue: "0.5 mol — divide particles by N_A",
@@ -833,7 +833,7 @@ const STOICH_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.HIGH,
     stem: "A student runs a reaction, weighs the product, and calculates a percent yield of 112%. What does that tell you?",
     choices: [
-      { text: "That something is wrong with the measurement, not with the chemistry. The theoretical yield is the maximum the reactants can possibly produce, so exceeding it would mean creating atoms. In practice 112% means the product was still wet with solvent, or an impurity was weighed with it, or the balance was mis-zeroed — the standard fix is to dry the product to constant mass and reweigh", isCorrect: true },
+      { text: "That something is wrong with the measurement, not the chemistry. Theoretical yield is the maximum possible — exceeding it would mean creating atoms. In practice it usually means the product was still wet or impure", isCorrect: true },
       { text: "That the reaction was unusually efficient and produced more than the theory predicted", isCorrect: false, misconceptionId: `${STOICH}:MC3` },
     ],
     correctValue: "A measurement error — usually a wet or impure product; >100% is impossible in principle",
@@ -956,7 +956,7 @@ const CONC_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.HIGH,
     stem: "True or false: a lead concentration of 15 ppm in soil means 15 mg of lead per litre of soil.",
     choices: [
-      { text: "False — ppm means parts per million BY MASS unless stated otherwise: 15 mg of lead per kilogram of soil. The mg/L reading works only for DILUTE AQUEOUS solutions, where 1 L of water happens to weigh about 1 kg, so the two coincide numerically. Soil is not water, and \"per litre\" of a solid is not a meaningful basis", isCorrect: true },
+      { text: "False — ppm means parts per million BY MASS unless stated: 15 mg of lead per KILOGRAM of soil. The mg/L reading only works for dilute aqueous solutions, where 1 L of water conveniently weighs about 1 kg — soil is not water", isCorrect: true },
       { text: "True — ppm always means milligrams per litre", isCorrect: false, misconceptionId: `${CONC}:MC3` },
     ],
     correctValue: "False — ppm is a mass ratio (mg/kg); mg/L only coincides for dilute aqueous solutions",
@@ -1141,7 +1141,7 @@ const EMR_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.HIGH,
     stem: "A dim blue lamp and a very bright red lamp are compared. Which emits the higher-ENERGY photons?",
     choices: [
-      { text: "The dim BLUE lamp. Photon energy depends on FREQUENCY alone (E = hν), and blue light has a higher frequency than red. Brightness is the NUMBER of photons per second, not the energy of each one — so the bright red lamp delivers more total energy while every individual photon it emits carries less. That distinction is exactly what the photoelectric effect turns on", isCorrect: true },
+      { text: "The dim BLUE lamp. Photon energy depends on FREQUENCY alone (E = hν), and blue light has a higher frequency than red. Brightness is the NUMBER of photons per second, not the energy of each one", isCorrect: true },
       { text: "The bright red lamp — it is far brighter, so it must be delivering higher-energy photons", isCorrect: false, misconceptionId: `${EMR}:MC2` },
     ],
     correctValue: "The blue lamp; intensity is photon COUNT, frequency sets photon ENERGY",
@@ -1156,7 +1156,7 @@ const EMR_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.HIGH,
     stem: "True or false: radio waves carry no energy, which is why they are harmless to pass through.",
     choices: [
-      { text: "False — every photon carries energy E = hν, and a radio photon simply carries very LITTLE of it (around 10⁻²⁴ J, some hundred million times less than a visible photon). Radio waves are harmless because each photon is far too weak to ionise a molecule, not because they carry none: a radio transmitter still radiates real power, and enough of them will heat you, which is what a microwave oven does", isCorrect: true },
+      { text: "False — every photon carries energy E = hν; a radio photon just carries very LITTLE of it. Radio waves are harmless because each photon is far too weak to ionise a molecule, not because they carry none — a transmitter still radiates real power", isCorrect: true },
       { text: "True — radio waves are at the bottom of the spectrum, so they have zero energy", isCorrect: false, misconceptionId: `${EMR}:MC3` },
     ],
     correctValue: "False — E = hν is small but never zero; the harmlessness is about ionisation, not zero energy",
@@ -1251,7 +1251,7 @@ const THSYS_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.HIGH,
     stem: "You pour half of a beaker of water at 25 °C into a second beaker. What happens to the water's temperature, and to its total heat capacity?",
     choices: [
-      { text: "Temperature is unchanged at 25 °C; total heat capacity HALVES. Temperature is INTENSIVE — it does not depend on how much you have, which is why half a cup of tea is not half as hot. Heat capacity, mass, volume and enthalpy are EXTENSIVE and scale with amount. The test is simple: split the sample in two and ask whether the number changes", isCorrect: true },
+      { text: "Temperature is unchanged at 25 °C; total heat capacity HALVES. Temperature is INTENSIVE — it does not depend on amount. Heat capacity, mass and volume are EXTENSIVE and scale with amount", isCorrect: true },
       { text: "Both halve — you have half as much water, so every property of it is half as large", isCorrect: false, misconceptionId: `${THSYS}:MC2` },
     ],
     correctValue: "Temperature unchanged (intensive); heat capacity halves (extensive)",
@@ -2003,7 +2003,7 @@ const ELCOND_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.HIGH,
     stem: "Kohlrausch's law of independent migration lets you add ionic conductivities to get Λ°_m. Can you use it at any concentration?",
     choices: [
-      { text: "No — it holds at INFINITE DILUTION only, which is what the ° denotes. The law assumes the ions migrate independently, and that is only true when they are far enough apart to ignore each other. At real concentrations interionic attraction slows them, so measured Λ_m falls below the sum. Its practical use is the reverse direction: obtaining Λ°_m for a WEAK electrolyte, whose own extrapolation to zero concentration does not converge", isCorrect: true },
+      { text: "No — it holds at INFINITE DILUTION only, which is what the ° denotes. The law assumes the ions migrate independently, true only when they are far enough apart to ignore each other; at real concentrations interionic attraction slows them", isCorrect: true },
       { text: "Yes — ionic conductivities are properties of the ions themselves, so they add at any concentration", isCorrect: false, misconceptionId: `${ELCOND}:MC2` },
     ],
     correctValue: "No — at infinite dilution only; interionic effects break independence at real concentrations",
@@ -2293,7 +2293,7 @@ const BOHR_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.HIGH,
     stem: "The Bohr model is superseded by quantum mechanics. Should it still be taught and used?",
     choices: [
-      { text: "Yes — it remains exactly right about the things it was built for. It predicts hydrogen's line spectrum to four significant figures, it introduced quantised energy levels, and E = −13.6/n² eV is still the working formula for hydrogen. A superseded model is one with a KNOWN DOMAIN, not one that was never right: quantum mechanics tells you where Bohr stops applying, which is more than \"wrong\" ever tells you", isCorrect: true },
+      { text: "Yes — it remains exactly right about what it was built for. It predicts hydrogen's line spectrum precisely and introduced quantised energy levels. A superseded model has a KNOWN DOMAIN, not one that was never right", isCorrect: true },
       { text: "No — it was proven wrong, so teaching it just installs an error that has to be unlearned later", isCorrect: false, misconceptionId: `${BOHR}:MC3` },
     ],
     correctValue: "Yes — it is exact for hydrogen and introduced quantisation; superseded means bounded, not void",
@@ -3196,7 +3196,7 @@ const HEATC_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.HIGH,
     stem: "True or false: a gas could have γ = Cₚ/Cᵥ = 0.8.",
     choices: [
-      { text: "False, and it is impossible rather than merely unobserved. Cₚ = Cᵥ + R for an ideal gas, so Cₚ EXCEEDS Cᵥ always and γ = 1 + R/Cᵥ is strictly greater than 1. The physical reason is that at constant pressure some of the heat goes into expansion work instead of temperature. The real range is 1.67 (monatomic) down towards 1 for molecules with many active modes, approached but never reached", isCorrect: true },
+      { text: "False, and it is impossible rather than merely unobserved. Cₚ = Cᵥ + R for an ideal gas, so Cₚ always EXCEEDS Cᵥ and γ = 1 + R/Cᵥ is strictly greater than 1", isCorrect: true },
       { text: "True — γ just depends on the gas, and a complicated enough molecule could bring it below 1", isCorrect: false, misconceptionId: `${HEATC}:MC3` },
     ],
     correctValue: "False — γ = 1 + R/Cᵥ > 1 always, since Cₚ = Cᵥ + R",
@@ -3495,7 +3495,7 @@ const QNUM_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.HIGH,
     stem: "An electron is in a 2p orbital with mₗ = +1. Does that mean it is in the p orbital pointing along the x-axis?",
     choices: [
-      { text: "No — the three mₗ values label three DEGENERATE, mutually orthogonal p orbitals, and which physical direction each corresponds to depends on the axes you chose. In a free atom there is no preferred direction at all, so the labelling is arbitrary; the familiar p_x, p_y, p_z are real combinations of the mₗ solutions. A direction only becomes meaningful once a field or a molecular framework picks one out", isCorrect: true },
+      { text: "No — the three mₗ values label three DEGENERATE, mutually orthogonal p orbitals; which direction each corresponds to depends on the axes you chose. In a free atom there is no preferred direction — a direction only becomes meaningful once a field picks one out", isCorrect: true },
       { text: "Yes — each mₗ value corresponds to one fixed orbital direction in space, the same for every atom", isCorrect: false, misconceptionId: `${QNUM}:MC2` },
     ],
     correctValue: "No — mₗ labels degenerate orbitals; the direction depends on the chosen axes",
@@ -3510,7 +3510,7 @@ const QNUM_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.HIGH,
     stem: "Two electrons occupy the same 2s orbital. What quantum number distinguishes them, and what is it a property OF?",
     choices: [
-      { text: "mₛ, which is +½ for one and −½ for the other — and it is a property of the ELECTRON, not of the orbital. The first three quantum numbers (n, l, mₗ) specify the orbital; spin is an intrinsic property the electron itself carries into it. That is exactly why Pauli's principle caps an orbital at two electrons: there are only two spin states available to differ in", isCorrect: true },
+      { text: "mₛ, which is +½ for one electron and −½ for the other — and it is a property of the ELECTRON, not the orbital. n, l and mₗ specify the orbital; spin is intrinsic to the electron itself", isCorrect: true },
       { text: "mₛ — a property of the ORBITAL, which can be either spin-up or spin-down", isCorrect: false, misconceptionId: `${QNUM}:MC3` },
     ],
     correctValue: "mₛ = ±½, a property of the electron; n, l, mₗ specify the orbital",
@@ -3622,7 +3622,7 @@ const ORBIT_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.HIGH,
     stem: "How many RADIAL nodes does a 3p orbital have?",
     choices: [
-      { text: "One. The count is n − l − 1 = 3 − 1 − 1 = 1. It is n − 1 only when l = 0, i.e. for s orbitals, which is why the rule looks right until the first time you apply it to a p or d orbital. The TOTAL node count is n − 1, split between radial nodes (n − l − 1) and angular nodes (l) — 3p has 1 radial and 1 angular, giving 2 in all", isCorrect: true },
+      { text: "One. The count is n − l − 1 = 3 − 1 − 1 = 1. The n − 1 rule only applies when l = 0 (s orbitals) — the TOTAL node count is n − 1, split between radial (n − l − 1) and angular (l) nodes", isCorrect: true },
       { text: "Two — the number of radial nodes is n − 1, so 3 − 1 = 2", isCorrect: false, misconceptionId: `${ORBIT}:MC2` },
     ],
     correctValue: "One: radial nodes = n − l − 1; it is the TOTAL that is n − 1",
@@ -3637,7 +3637,7 @@ const ORBIT_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.HIGH,
     stem: "True or false: in a potassium atom, the 4s and 4p orbitals have the same energy because they share the same n.",
     choices: [
-      { text: "False — that holds for HYDROGEN only. With more than one electron, inner electrons screen the nucleus, and an s electron penetrates closer to it than a p electron of the same shell, so it feels a larger effective nuclear charge and sits LOWER in energy. The ordering becomes 4s < 4p < 4d < 4f. If it were not for that splitting, 4s would never fill before 3d and the periodic table would have a different shape", isCorrect: true },
+      { text: "False — that holds for HYDROGEN only. With more than one electron, inner electrons screen the nucleus, and an s electron penetrates closer to it than a p electron of the same shell, so it sits LOWER in energy: 4s < 4p < 4d < 4f", isCorrect: true },
       { text: "True — energy depends only on the principal quantum number, so all orbitals with n = 4 are degenerate", isCorrect: false, misconceptionId: `${ORBIT}:MC3` },
     ],
     correctValue: "False — degeneracy within a shell holds only for one-electron atoms; screening splits it",
@@ -4216,7 +4216,7 @@ const GIBBS_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.HIGH,
     stem: "A reaction has ΔG° = +12 kJ/mol at 298 K. Can it ever run forward spontaneously?",
     choices: [
-      { text: "Yes — under the right concentrations. ΔG° refers to STANDARD conditions, every species at 1 M or 1 bar. The quantity that governs an actual mixture is ΔG = ΔG° + RT ln Q, so keeping Q small (excess reactant, or removing product as it forms) makes the RT ln Q term negative enough to overcome +12 kJ/mol. Cells do exactly this constantly, which is how unfavourable steps in metabolism proceed", isCorrect: true },
+      { text: "Yes — under the right concentrations. ΔG° refers to STANDARD conditions (1 M/1 bar); the actual driving force is ΔG = ΔG° + RT ln Q, so keeping Q small enough makes ΔG negative even when ΔG° is positive", isCorrect: true },
       { text: "No — a positive ΔG° means non-spontaneous, and that verdict holds at every concentration", isCorrect: false, misconceptionId: `${GIBBS}:MC2` },
     ],
     correctValue: "Yes — ΔG = ΔG° + RT ln Q; a small enough Q makes ΔG negative",
@@ -4326,7 +4326,7 @@ const THIRDL_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.UNDERGRADUATE,
     stem: "A plot of S° against T for a substance heated from 0 K through melting and boiling is drawn. Is it a smooth continuous curve?",
     choices: [
-      { text: "No — it rises smoothly WITHIN each phase and JUMPS vertically at each phase transition. At the melting point the substance absorbs its enthalpy of fusion at constant temperature, so ΔS = ΔH_fus/T_m is added with no temperature change at all; boiling adds a much larger jump, ΔH_vap/T_b. The curve is continuous in pieces with two discontinuities, and the vaporisation jump is typically the largest single contribution to S°", isCorrect: true },
+      { text: "No — it rises smoothly WITHIN each phase and JUMPS vertically at each transition. At melting, ΔS = ΔH_fus/T_m is added with no temperature change; boiling adds a larger jump, ΔH_vap/T_b", isCorrect: true },
       { text: "Yes — entropy increases monotonically and smoothly with temperature, with no breaks anywhere in the curve", isCorrect: false, misconceptionId: `${THIRDL}:MC2` },
     ],
     correctValue: "No — vertical jumps of ΔH_fus/T_m and ΔH_vap/T_b at the transitions",
@@ -4561,7 +4561,7 @@ const ECONF_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.HIGH,
     stem: "Chromium is [Ar]4s¹3d⁵ rather than the expected [Ar]4s²3d⁴. Is \"half-filled subshells are more stable\" the reason?",
     choices: [
-      { text: "That is the label, not the reason. Two real effects do the work: 4s and 3d lie very close in energy in this region, so promoting one electron costs little; and putting all six electrons in singly-occupied orbitals with parallel spins MINIMISES electron-electron repulsion while MAXIMISING exchange energy, a genuine quantum-mechanical stabilisation. \"Half-filled is stable\" is the observation being explained — which is why it fails to predict the exceptions further down the d-block", isCorrect: true },
+      { text: "That is the label, not the reason. 4s and 3d lie very close in energy here, so promoting one electron costs little, and six singly-occupied orbitals with parallel spins MINIMISE repulsion while MAXIMISING exchange energy — a real quantum-mechanical effect, not just \"stability\"", isCorrect: true },
       { text: "Yes — half-filled and fully-filled subshells are simply more stable, and that is the complete explanation", isCorrect: false, misconceptionId: `${ECONF}:MC3` },
     ],
     correctValue: "No — near-degenerate 4s/3d plus reduced repulsion and exchange energy; the \"rule\" is the observation",
@@ -4674,7 +4674,7 @@ const QMM_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.UNDERGRADUATE,
     stem: "A 1s orbital is drawn as a sphere. Is that sphere the boundary the electron stays inside?",
     choices: [
-      { text: "No — it is a chosen CONTOUR, normally the surface enclosing 90% of the probability. The electron's probability density falls off smoothly and never reaches exactly zero at any finite distance, so 10% of the time it is outside the drawn sphere. Draw the 95% surface and you get a bigger sphere for the same orbital: the boundary is a convention of the drawing, not a wall in the atom", isCorrect: true },
+      { text: "No — it is a chosen CONTOUR, normally enclosing 90% of the probability. The electron's density never truly reaches zero, so some probability always lies outside the drawn sphere — the boundary is a convention, not a wall", isCorrect: true },
       { text: "Yes — the surface is the edge of the orbital, and the electron is confined within it", isCorrect: false, misconceptionId: `${QMM}:MC2` },
     ],
     correctValue: "No — a 90% probability contour, chosen by convention; the density never truly ends",
@@ -5789,7 +5789,7 @@ const CELLTH_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.UNDERGRADUATE,
     stem: "A cell has E° = +1.10 V with n = 2. Is ΔG° = +212 kJ/mol or −212 kJ/mol?",
     choices: [
-      { text: "NEGATIVE, −212 kJ/mol. The relation is ΔG° = −nFE°, and the minus sign is what makes the two conventions agree: a spontaneous reaction has POSITIVE cell potential and NEGATIVE free-energy change. Dropping the sign would say a working battery is thermodynamically uphill. Use the sign as the check — if a positive E° gives you a positive ΔG°, the minus was lost", isCorrect: true },
+      { text: "NEGATIVE, −212 kJ/mol. The relation is ΔG° = −nFE°, and the minus sign is what makes a spontaneous reaction have both a POSITIVE cell potential and a NEGATIVE free-energy change", isCorrect: true },
       { text: "POSITIVE, +212 kJ/mol — ΔG° = nFE°, and both n and E° are positive here", isCorrect: false, misconceptionId: `${CELLTH}:MC1` },
     ],
     correctValue: "−212 kJ/mol; ΔG° = −nFE°",
@@ -5804,7 +5804,7 @@ const CELLTH_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.UNDERGRADUATE,
     stem: "True or false: a cell with E° = +2.0 V will deliver current faster than one with E° = +0.5 V.",
     choices: [
-      { text: "False — E° is a THERMODYNAMIC quantity, fixed by ΔG°, and says nothing about rate. Current is set by kinetics: electrode surface area, activation overpotential, electrolyte conductivity and internal resistance. A high-voltage cell with sluggish electrode kinetics delivers less current than a well-designed low-voltage one, which is why battery datasheets quote voltage and maximum discharge current as separate specifications", isCorrect: true },
+      { text: "False — E° is a THERMODYNAMIC quantity, fixed by ΔG°, and says nothing about rate. Current is set by kinetics: electrode surface area, activation overpotential, and internal resistance", isCorrect: true },
       { text: "True — a larger potential difference is a larger driving force, so the reaction runs faster", isCorrect: false, misconceptionId: `${CELLTH}:MC3` },
     ],
     correctValue: "False — E° is thermodynamic; current is set by kinetics and internal resistance",
@@ -6534,7 +6534,7 @@ const KSPEQ_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.HIGH,
     stem: "For Ag₂CrO₄ dissolving with molar solubility s, what are [Ag⁺] and [CrO₄²⁻], and what is Ksp?",
     choices: [
-      { text: "[Ag⁺] = 2s and [CrO₄²⁻] = s, giving Ksp = (2s)²(s) = 4s³. Each formula unit releases TWO silver ions, so the coefficient enters twice — once multiplying the concentration and once as the exponent. Writing [Ag⁺] = s loses a factor of 4 and gives a solubility about 1.6 times too large", isCorrect: true },
+      { text: "[Ag⁺] = 2s and [CrO₄²⁻] = s, giving Ksp = (2s)²(s) = 4s³. Each formula unit releases TWO silver ions, so the coefficient enters twice — once in the concentration, once as the exponent", isCorrect: true },
       { text: "[Ag⁺] = s and [CrO₄²⁻] = s, so Ksp = s²", isCorrect: false, misconceptionId: `${KSPEQ}:MC2` },
     ],
     correctValue: "[Ag⁺] = 2s, [CrO₄²⁻] = s, Ksp = 4s³",
@@ -6648,7 +6648,7 @@ const IONB_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.HIGH,
     stem: "NaCl melts at 801 °C. Is that because the bond between one Na⁺ and one Cl⁻ is exceptionally strong?",
     choices: [
-      { text: "No — a single Na⁺···Cl⁻ attraction is not remarkable. What has to be overcome is the LATTICE ENERGY: every ion is held by six nearest neighbours and by the whole surrounding array, so melting means breaking the entire three-dimensional network at once. That is also why melting point tracks charge and ionic radius, through the lattice energy, rather than any single pairwise bond", isCorrect: true },
+      { text: "No — a single Na⁺···Cl⁻ attraction is not remarkable. What must be overcome is the LATTICE ENERGY: every ion is held by six neighbours in a three-dimensional network, and melting breaks that whole network at once", isCorrect: true },
       { text: "Yes — the Na–Cl bond is unusually strong, and melting has to break that individual bond", isCorrect: false, misconceptionId: `${IONB}:MC2` },
     ],
     correctValue: "No — lattice energy over the whole 3D network, not one pairwise bond",
@@ -6864,7 +6864,7 @@ const METB_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.HIGH,
     stem: "Molten NaCl conducts and solid NaCl does not. Does molten copper likewise lose or gain conductivity compared with solid copper?",
     choices: [
-      { text: "It stays a conductor — molten metals conduct well. The carriers in a metal are DELOCALISED ELECTRONS, and melting disrupts the positions of the cations without localising those electrons. Conductivity does fall somewhat, because the disordered liquid scatters electrons more, but the mechanism is unchanged. Ionic conduction is the opposite case: it REQUIRES melting, because there the carriers are the ions themselves", isCorrect: true },
+      { text: "It stays a conductor — molten metals conduct well. The carriers are DELOCALISED ELECTRONS, and melting disrupts the cations' positions without localising those electrons. Ionic conduction is the opposite case: it REQUIRES melting, since there the ions themselves are the carriers", isCorrect: true },
       { text: "It stops conducting once molten — an ordered lattice is needed for electrons to move through the metal", isCorrect: false, misconceptionId: `${METB}:MC2` },
     ],
     correctValue: "Still conducts; electrons are the carriers and melting does not localise them",
@@ -6998,7 +6998,7 @@ const REDOX_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.HIGH,
     stem: "What is the oxidation state of hydrogen in sodium hydride, NaH?",
     choices: [
-      { text: "−1. Hydrogen is +1 only when bonded to something MORE electronegative than itself, which covers almost every common compound. Sodium is a metal and far LESS electronegative, so in the hydride the electron pair is assigned to hydrogen and it takes −1. Sodium is +1, the compound is neutral, and the arithmetic only works with H at −1. The same holds for CaH₂ and LiAlH₄, which is exactly why those reagents deliver hydride", isCorrect: true },
+      { text: "−1. Hydrogen is +1 only when bonded to something MORE electronegative than itself. Sodium is a metal and far LESS electronegative, so the electron pair is assigned to hydrogen here, giving −1", isCorrect: true },
       { text: "+1 — hydrogen always has an oxidation state of +1 in its compounds", isCorrect: false, misconceptionId: `${REDOX}:MC4` },
     ],
     correctValue: "−1; hydrogen is +1 only against a MORE electronegative partner",
@@ -7209,7 +7209,7 @@ const BUFFER_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.HIGH,
     stem: "You dilute a pH 4.76 acetate buffer tenfold with pure water. What is its new pH?",
     choices: [
-      { text: "Still about 4.76 — essentially unchanged. The Henderson–Hasselbalch equation depends on the RATIO [A⁻]/[HA], and dilution divides both by the same factor, so the ratio and the pH survive. What dilution DOES reduce is the buffer CAPACITY: there is now ten times less of each component, so far less added acid or base is needed to break it", isCorrect: true },
+      { text: "Still about 4.76 — essentially unchanged. Henderson–Hasselbalch depends on the RATIO [A⁻]/[HA], and dilution divides both by the same factor, so the ratio survives. What dilution DOES reduce is the buffer CAPACITY", isCorrect: true },
       { text: "It rises toward 7 — diluting with water always moves a solution's pH toward neutral", isCorrect: false, misconceptionId: `${BUFFER}:MC1` },
     ],
     correctValue: "Essentially unchanged; the ratio survives dilution, the capacity does not",
@@ -7320,7 +7320,7 @@ const HYDROL_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.HIGH,
     stem: "NaCl dissolves in water and separates into Na⁺ and Cl⁻. Is that hydrolysis?",
     choices: [
-      { text: "No — that is DISSOLUTION. Hydrolysis is a further, separate step in which an ion REACTS WITH WATER, taking a proton from it or giving one to it and so changing the pH. Na⁺ and Cl⁻ do neither, which is why NaCl solution is neutral. Sodium acetate also dissolves into ions, and then its acetate genuinely hydrolyses — two different events, and only the second is hydrolysis", isCorrect: true },
+      { text: "No — that is DISSOLUTION. Hydrolysis is a further step in which an ion REACTS WITH water, taking or giving a proton and changing the pH. Na⁺ and Cl⁻ do neither, which is why NaCl solution is neutral", isCorrect: true },
       { text: "Yes — hydrolysis is the salt splitting apart into its ions when water dissolves it", isCorrect: false, misconceptionId: `${HYDROL}:MC1` },
     ],
     correctValue: "No — dissolution separates ions; hydrolysis is a subsequent reaction WITH water",
@@ -7335,7 +7335,7 @@ const HYDROL_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.HIGH,
     stem: "Acetate has a parent acid with Ka = 1.8 × 10⁻⁵. What is its hydrolysis constant Kh?",
     choices: [
-      { text: "Kh = Kw/Ka = 10⁻¹⁴ / (1.8 × 10⁻⁵) = 5.6 × 10⁻¹⁰. It is a QUOTIENT, and the reason is that the hydrolysis reaction is the reverse of the acid dissociation combined with the autoionisation of water, so the constants divide. Adding Ka and Kb, or dividing Ka by Kb, would both give a number with the wrong order of magnitude entirely", isCorrect: true },
+      { text: "Kh = Kw/Ka = 10⁻¹⁴ / (1.8 × 10⁻⁵) = 5.6 × 10⁻¹⁰. It is a QUOTIENT because hydrolysis is the acid dissociation reversed, combined with water's autoionisation — so the constants divide, not add", isCorrect: true },
       { text: "Kh = Ka + Kb, adding the two constants of the conjugate pair together", isCorrect: false, misconceptionId: `${HYDROL}:MC3` },
     ],
     correctValue: "Kh = Kw/Ka = 5.6 × 10⁻¹⁰",
@@ -7350,7 +7350,7 @@ const HYDROL_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.HIGH,
     stem: "True or false: an NH₄Cl solution is basic, because NH₄Cl comes from ammonia, which is a base.",
     choices: [
-      { text: "False — it is ACIDIC, around pH 5. What ends up in solution is not ammonia but its CONJUGATE ACID, NH₄⁺, which donates a proton to water. The rule is that a salt takes its character from the STRONGER of its two parents: HCl is strong and NH₃ is weak, so the chloride is inert and the ammonium controls the pH. Being made from a base does not make a salt basic", isCorrect: true },
+      { text: "False — it is ACIDIC, around pH 5. What is in solution is not ammonia but its CONJUGATE ACID, NH₄⁺, which donates a proton to water. A salt takes its character from the STRONGER parent — HCl, not the weak NH₃", isCorrect: true },
       { text: "True — NH₄Cl is derived from the base ammonia, so its solution is basic", isCorrect: false, misconceptionId: `${HYDROL}:MC4` },
     ],
     correctValue: "False — acidic, about pH 5; NH₄⁺ is a conjugate ACID",
@@ -7559,7 +7559,7 @@ const VSEPR_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.HIGH,
     stem: "SF₄ has 4 bonding pairs and 1 lone pair — five domains, trigonal bipyramidal electron geometry. Where does the lone pair sit, and is that always the answer?",
     choices: [
-      { text: "EQUATORIAL here, giving the see-saw shape — but the reason is repulsion, not a rule. An equatorial site has only two neighbours at 90°, while an axial site has three, so the bulky lone pair costs less energy equatorially. In an OCTAHEDRAL geometry every position is equivalent, so a single lone pair has no preference at all, and with two (as in XeF₄) they go opposite each other, which is axial by convention", isCorrect: true },
+      { text: "EQUATORIAL here, giving the see-saw shape — but the reason is repulsion, not a rule. An equatorial site has only two 90° neighbours versus three for an axial site, so the lone pair costs less energy there. In an OCTAHEDRAL geometry every position is equivalent, so this preference disappears", isCorrect: true },
       { text: "Equatorial always — lone pairs occupy equatorial positions in every geometry, as a fixed rule", isCorrect: false, misconceptionId: `${VSEPR}:MC3` },
     ],
     correctValue: "Equatorial in trigonal bipyramidal, from 90° repulsion counts — not a universal rule",
@@ -7871,7 +7871,7 @@ const BPARAM_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.HIGH,
     stem: "A C–C single bond is about 350 kJ/mol. Is a C=C double bond about 700 kJ/mol?",
     choices: [
-      { text: "No — about 610 kJ/mol, stronger but well short of double. The second bond is a π bond formed by SIDEWAYS overlap of p orbitals, which is less effective than the head-on σ overlap of the first, so it contributes less. The same pattern holds for C≡C at about 835 rather than 1050, and it is exactly why π bonds are the ones that react", isCorrect: true },
+      { text: "No — about 610 kJ/mol, stronger but well short of double. The second bond is a π bond from SIDEWAYS overlap of p orbitals, which is weaker than the head-on σ overlap of the first", isCorrect: true },
       { text: "Yes — a double bond is two bonds, so it is twice as strong as a single bond", isCorrect: false, misconceptionId: `${BPARAM}:MC1` },
     ],
     correctValue: "No — about 610 kJ/mol; the π bond overlaps sideways and contributes less",
@@ -8113,7 +8113,7 @@ const COMPLEQ_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.UNDERGRADUATE,
     stem: "AgCl dissolution has Ksp = 1.8 × 10⁻¹⁰ and [Ag(NH₃)₂]⁺ formation has Kf = 1.7 × 10⁷. What is K for the overall dissolution of AgCl in ammonia?",
     choices: [
-      { text: "3.1 × 10⁻³, from Ksp × Kf. When two equilibria ADD to give an overall reaction, their constants MULTIPLY — because K is built from a ratio of concentration terms, and summing reactions concatenates those ratios. Adding the constants here would give 1.7 × 10⁷, wrong by ten orders of magnitude, and would predict that AgCl dissolves freely in ammonia", isCorrect: true },
+      { text: "3.1 × 10⁻³, from Ksp × Kf. When two equilibria ADD to give an overall reaction, their constants MULTIPLY, because K is a ratio of concentration terms and summing reactions concatenates those ratios", isCorrect: true },
       { text: "About 1.7 × 10⁷ — the reactions add, so add their equilibrium constants", isCorrect: false, misconceptionId: `${COMPLEQ}:MC1` },
     ],
     correctValue: "3.1 × 10⁻³ = Ksp × Kf; adding reactions multiplies constants",
@@ -8128,7 +8128,7 @@ const COMPLEQ_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.UNDERGRADUATE,
     stem: "A complex has Kf = 10²⁰. What is K for the DISSOCIATION of that complex?",
     choices: [
-      { text: "10⁻²⁰ — the RECIPROCAL. Reversing a reaction inverts its constant, because products and reactants swap places in the ratio. It never becomes negative: an equilibrium constant is a ratio of concentrations, and concentrations cannot be negative, so K > 0 for every reaction in either direction. In log form the sign does flip — log K goes from +20 to −20 — which is probably where the idea comes from", isCorrect: true },
+      { text: "10⁻²⁰ — the RECIPROCAL. Reversing a reaction inverts its constant, since products and reactants swap places in the ratio. K is never negative — it is a ratio of concentrations, which cannot be negative", isCorrect: true },
       { text: "−10²⁰ — reversing a reaction reverses the sign of its equilibrium constant", isCorrect: false, misconceptionId: `${COMPLEQ}:MC2` },
     ],
     correctValue: "10⁻²⁰, the reciprocal; K is always positive",
@@ -8714,7 +8714,7 @@ const IUPAC_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.HIGH,
     stem: "Propanone is a ketone. Is every IUPAC name ending in \"-one\" a ketone?",
     choices: [
-      { text: "No — the suffix that marks a ketone is \"-one\" attached to the PARENT CHAIN, as in pentan-2-one. Plenty of names end in those letters without being ketones: methanone appears inside diphenylmethanone (which IS a ketone), but lactone, quinone and silicone are not built that way at all, and cyclohexanone is a ketone while cyclohexanol is not. Read the suffix as part of the systematic name, not as three letters at the end", isCorrect: true },
+      { text: "No — the ketone suffix is \"-one\" attached to the PARENT CHAIN, as in pentan-2-one. Lactone, quinone and silicone all end the same way without being ketones — read the suffix as part of the systematic name, not as three letters", isCorrect: true },
       { text: "Yes — \"-one\" is the ketone suffix, so any name ending in those letters is a ketone", isCorrect: false, misconceptionId: `${IUPAC}:MC3` },
     ],
     correctValue: "No — \"-one\" must be the systematic suffix on the parent chain, not any word ending",
@@ -9397,7 +9397,7 @@ const G16_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.UNDERGRADUATE,
     stem: 'PRACTICE: SO2 and Cl2 both bleach a coloured flower. Is the bleaching equally permanent?',
     choices: [
-      { text: 'No — SO2 bleaches by REDUCTION and the colour slowly returns as sunlight re-oxidises the product. Chlorine bleaches by OXIDATION, which destroys the chromophore permanently', isCorrect: true },
+      { text: 'No — SO2 bleaches by REDUCTION and the colour slowly returns as sunlight re-oxidises the product. Chlorine bleaches by OXIDATION, destroying the chromophore permanently', isCorrect: true },
       { text: 'Yes — both remove the colour permanently', isCorrect: false, misconceptionId: `${G16}:MC2` },
     ],
     correctValue: 'no — SO2 bleaching reverses',
@@ -11405,7 +11405,7 @@ const ISOM_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.HIGH,
     stem: "meso-tartaric acid has two stereocentres and is optically inactive. Is that because one stereocentre's rotation cancels the other's?",
     choices: [
-      { text: "The cancellation is real but INTERNAL, and it is a symmetry statement, not an arithmetic one. The molecule has an internal mirror plane, so one half is the mirror image of the other and the molecule is superimposable on its own mirror image — it is ACHIRAL, and an achiral molecule cannot rotate light at all. A racemic MIXTURE is inactive by averaging two different molecules; a meso compound is a single achiral substance and stays inactive however carefully you purify it", isCorrect: true },
+      { text: "The cancellation is real but INTERNAL — a symmetry statement, not an arithmetic one. An internal mirror plane makes the molecule superimposable on its own mirror image, so it is ACHIRAL and cannot rotate light at all. A racemic MIXTURE, by contrast, is inactive only by averaging two different molecules", isCorrect: true },
       { text: "Yes — the two stereocentres rotate light by equal and opposite amounts, and the two rotations add to zero", isCorrect: false, misconceptionId: `${ISOM}:MC2` },
     ],
     correctValue: "An internal mirror plane makes the molecule achiral; it is not two rotations summing to zero",
@@ -11894,7 +11894,7 @@ const ORGSPEC_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.UNDERGRADUATE,
     stem: "In a mass spectrum, is the base peak the molecular ion?",
     choices: [
-      { text: "Not usually. The BASE peak is simply the most intense one, assigned 100% by convention; the MOLECULAR ion is the intact molecule minus one electron, and it appears at the mass you care about. They coincide only when the molecular ion happens to be the most stable fragment, as in benzene. For many molecules the molecular ion is weak or entirely absent — in branched alkanes it can vanish while a stable tertiary carbocation dominates the spectrum", isCorrect: true },
+      { text: "Not usually. The BASE peak is simply the most intense one; the MOLECULAR ion is the intact molecule minus one electron. They coincide only when the molecular ion is the most stable fragment — for many molecules it is weak or absent entirely", isCorrect: true },
       { text: "Yes — the tallest peak is the whole molecule, since the intact molecule is the most abundant species present", isCorrect: false, misconceptionId: `${ORGSPEC}:MC1` },
     ],
     correctValue: "No — base peak is the most intense; the molecular ion may be weak or absent",
@@ -11909,7 +11909,7 @@ const ORGSPEC_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.UNDERGRADUATE,
     stem: "A ¹H NMR signal appears as a triplet. How many neighbouring protons does that proton have?",
     choices: [
-      { text: "TWO. The n+1 rule says n neighbours give n+1 lines, so a triplet means n = 2 — the multiplicity is one MORE than the neighbour count, not equal to it. The full pattern is a giveaway: a singlet means zero neighbours, a doublet one, a quartet three. In ethanol the CH₃ appears as a triplet because it sees the two CH₂ protons, and the CH₂ appears as a quartet because it sees the three CH₃ protons", isCorrect: true },
+      { text: "TWO. The n+1 rule says n neighbours give n+1 lines, so a triplet means n = 2 — the multiplicity is one MORE than the neighbour count, not equal to it", isCorrect: true },
       { text: "THREE — a triplet has three lines, so the proton has three neighbours", isCorrect: false, misconceptionId: `${ORGSPEC}:MC2` },
     ],
     correctValue: "Two — n+1 lines for n neighbours, so a triplet means n = 2",
@@ -12029,7 +12029,7 @@ const PURIF_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.HIGH,
     stem: "On a normal-phase TLC plate, compound A has Rf 0.8 and compound B has Rf 0.2. Which is more polar?",
     choices: [
-      { text: "B, the one that moved LESS. The stationary phase is polar silica and the mobile phase is comparatively non-polar, so a polar compound sticks to the plate and travels a short distance. Rf measures how far a compound moved relative to the solvent front, so a HIGH Rf means weakly retained and therefore LESS polar. The relationship inverts on reversed-phase plates, which is why the phase has to be stated", isCorrect: true },
+      { text: "B, the one that moved LESS. The stationary phase is polar silica, so a polar compound sticks and travels less far. A HIGH Rf means weakly retained and therefore LESS polar — this inverts on reversed-phase plates", isCorrect: true },
       { text: "A — it travelled further up the plate, and a more polar compound is carried further by the solvent", isCorrect: false, misconceptionId: `${PURIF}:MC1` },
     ],
     correctValue: "B; on normal-phase silica, high Rf means LESS polar",
@@ -12901,7 +12901,7 @@ const COORDAPP_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.UNDERGRADUATE,
     stem: "True or false: chlorophyll is green because the Mg²⁺ ion at its centre absorbs green light.",
     choices: [
-      { text: "False, on both counts. Mg²⁺ is d⁰, so it can undergo no d–d transition and is not the chromophore at all — the absorption belongs to the conjugated π system of the porphyrin ring. And chlorophyll looks green precisely because it does NOT absorb green: it absorbs red and blue and reflects the green", isCorrect: true },
+      { text: "False, on both counts. Mg²⁺ is d⁰, so it cannot undergo a d–d transition — the absorption belongs to the porphyrin ring's π system. And chlorophyll looks green because it does NOT absorb green: it absorbs red and blue", isCorrect: true },
       { text: "True — the Mg²⁺ centre is the chromophore, and it absorbs green light", isCorrect: false, misconceptionId: `${COORDAPP}:MC3` },
     ],
     correctValue: "False — the porphyrin π system absorbs red and blue; green is reflected",
@@ -13272,7 +13272,7 @@ const HALINTRO_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.HIGH,
     stem: "True or false: haloalkanes do not dissolve appreciably in water, so there is no interaction at all between a haloalkane molecule and water.",
     choices: [
-      { text: "False — the two claims are different. Haloalkanes ARE polar (C–X carries a real dipole) and DO form dipole–dipole attractions with water; they simply cannot form hydrogen bonds with it, and dissolving one would cost more energy than breaking water’s existing hydrogen-bond network releases. Low solubility is a comparison of energies, not an absence of interaction — which is why haloalkanes are far more soluble in water than the corresponding alkanes", isCorrect: true },
+      { text: "False — haloalkanes ARE polar and DO form dipole–dipole attractions with water; they simply cannot form hydrogen bonds with it, and dissolving one costs more energy than it releases. Low solubility is a balance of energies, not an absence of interaction", isCorrect: true },
       { text: "True — insoluble means the molecules do not interact with water in any way", isCorrect: false, misconceptionId: `${HALINTRO}:MC3` },
     ],
     correctValue: "False — dipole–dipole interaction exists; what is missing is hydrogen bonding",
@@ -14132,7 +14132,7 @@ const CORR_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.HIGH,
     stem: "A drop of water sits on an iron plate. Rust appears in a ring at the EDGE of the drop. Is that where the iron is dissolving?",
     choices: [
-      { text: "No — the iron dissolves in the middle, where oxygen is scarcest, and that is the ANODE. Oxygen reaches the thin edge easily, so the edge is the CATHODE where O₂ is reduced. The Fe²⁺ from the centre and the OH⁻ from the edge meet partway and precipitate there. Rust marks where the two products MEET, not where metal is being lost", isCorrect: true },
+      { text: "No — the iron dissolves in the middle, where oxygen is scarcest — that is the ANODE. The edge, where oxygen reaches easily, is the CATHODE. Fe²⁺ from the centre and OH⁻ from the edge meet partway and precipitate as rust, marking where they MEET, not where metal is lost", isCorrect: true },
       { text: "Yes — rust is iron oxide, so it forms exactly where the iron is being eaten away", isCorrect: false, misconceptionId: `${CORR}:MC2` },
     ],
     correctValue: "No — the anode is the oxygen-poor centre; rust deposits where Fe²⁺ meets OH⁻",
@@ -14366,7 +14366,7 @@ const ELECTROLYSIS_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.HIGH,
     stem: "True or false: passing the same charge through molten AlCl₃ and molten AgNO₃ deposits the same mass of aluminium and silver, because Faraday's Second Law says equal charge gives equal amounts.",
     choices: [
-      { text: "False — equal charge deposits equal numbers of EQUIVALENTS, not equal masses. One faraday gives 108 g of silver (Ag⁺, one electron, M = 108) but only 9 g of aluminium (Al³⁺, three electrons, M = 27, so 27/3). Faraday's Second Law says the masses are in the ratio of the equivalent weights M/z, which is exactly what makes the two different", isCorrect: true },
+      { text: "False — equal charge deposits equal numbers of EQUIVALENTS, not equal masses. One faraday gives 108 g of silver (one electron, M = 108) but only 9 g of aluminium (three electrons, 27/3). Masses go as the equivalent weight M/z, not a flat amount", isCorrect: true },
       { text: "True — the same quantity of electricity always liberates the same mass of any metal", isCorrect: false, misconceptionId: `${ELECTROLYSIS}:MC3` },
     ],
     correctValue: "False — masses go as M/z; 108 g Ag versus 9 g Al per faraday",
@@ -14830,7 +14830,7 @@ const POLYCYC_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.UNDERGRADUATE,
     stem: "Rank benzene, furan and thiophene by reactivity toward electrophilic aromatic substitution.",
     choices: [
-      { text: "Furan > thiophene > benzene — the five-membered heterocycles are MORE reactive, not less. The heteroatom donates a lone pair into the ring, so six π electrons are spread over five atoms instead of six, making the ring electron-RICH and easier for an electrophile to attack. Furan leads because oxygen is the poorest at sharing with carbon's 2p orbitals, leaving more density on the ring carbons. \"Less aromatic\" is true of the resonance energy and does not mean less reactive — it means more", isCorrect: true },
+      { text: "Furan > thiophene > benzene — the five-membered heterocycles are MORE reactive, not less. The heteroatom donates a lone pair into the ring, spreading six π electrons over five atoms and making the ring electron-RICH. \"Less aromatic\" refers to resonance energy, not reactivity", isCorrect: true },
       { text: "Benzene > thiophene > furan — benzene is the most aromatic and therefore the most reactive toward electrophiles", isCorrect: false, misconceptionId: `${POLYCYC}:MC3` },
     ],
     correctValue: "Furan > thiophene > benzene; the heterocycles are electron-rich and more reactive",
@@ -15729,7 +15729,7 @@ const INDELEC_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.UNDERGRADUATE,
     stem: "Both the chloralkali process and the Down's cell electrolyse sodium chloride. Do they give the same products?",
     choices: [
-      { text: "No, and the difference is the STATE of the electrolyte. The Down's cell electrolyses MOLTEN NaCl, where the only species present are Na⁺ and Cl⁻, so sodium METAL is produced. The chloralkali process electrolyses AQUEOUS brine, where water is reduced in preference to Na⁺, giving hydrogen and sodium hydroxide instead. Same salt, different phase, different products", isCorrect: true },
+      { text: "No — the difference is the STATE of the electrolyte. The Down's cell electrolyses MOLTEN NaCl (only Na⁺ and Cl⁻ present), giving sodium metal. Chloralkali electrolyses AQUEOUS brine, where water is reduced instead of Na⁺, giving hydrogen and NaOH", isCorrect: true },
       { text: "Yes — both electrolyse NaCl, so both give sodium metal and chlorine gas", isCorrect: false, misconceptionId: `${INDELEC}:MC1` },
     ],
     correctValue: "No — molten gives Na metal; aqueous gives H₂ and NaOH",
@@ -18145,7 +18145,7 @@ const KETONE_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.HIGH,
     stem: "True or false: the only way to prepare a ketone is by oxidising a secondary alcohol.",
     choices: [
-      { text: "False — that is one route among many. Ketones also come from Friedel–Crafts acylation of an arene, from ozonolysis of a suitably substituted alkene, from hydration of an alkyne (Markovnikov, via the enol), from a Gilman reagent or a Weinreb amide with an acid chloride, and from oxidative cleavage. Secondary-alcohol oxidation is simply the first route usually taught, and treating it as the only one closes off most retrosynthetic options", isCorrect: true },
+      { text: "False — that is one route among many. Ketones also come from Friedel–Crafts acylation, ozonolysis of a suitable alkene, alkyne hydration, and oxidative cleavage. Secondary-alcohol oxidation is simply the first route usually taught", isCorrect: true },
       { text: "True — a ketone comes from oxidising a secondary alcohol; that is what defines its preparation", isCorrect: false, misconceptionId: `${KETONE}:MC3` },
     ],
     correctValue: "False — Friedel–Crafts acylation, ozonolysis, alkyne hydration and others",
@@ -19354,7 +19354,7 @@ const CFCS_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.HIGH,
     stem: "True or false: CCl₄ is a polar molecule, because each of its four C–Cl bonds is polar.",
     choices: [
-      { text: "False — bond polarity and MOLECULAR polarity are different things. CCl₄ is tetrahedral, so the four equal C–Cl bond dipoles point to the vertices of a tetrahedron and sum to exactly zero. The molecule has a dipole moment of 0 D and is non-polar, which is why CCl₄ is immiscible with water. CHCl₃, with the same bond types but no cancelling symmetry, IS polar", isCorrect: true },
+      { text: "False — bond polarity and MOLECULAR polarity are different things. CCl₄ is tetrahedral, so its four equal C–Cl dipoles point to the vertices of a tetrahedron and cancel to zero. CHCl₃, with no such cancelling symmetry, IS polar", isCorrect: true },
       { text: "True — four polar bonds must add up to a polar molecule", isCorrect: false, misconceptionId: `${CFCS}:MC3` },
     ],
     correctValue: "False — tetrahedral symmetry cancels the four bond dipoles",
@@ -19688,7 +19688,7 @@ const ARROWPUSH_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.HIGH,
     stem: "True or false: if a mechanism looks chemically sensible, checking formal charges is an optional extra.",
     choices: [
-      { text: "False — the charge check is what catches the errors that look sensible. Charge is CONSERVED at every step, so the total on the left must equal the total on the right; an arrow drawn from the wrong source or with the wrong head silently breaks that, and the resulting structure often still looks plausible. A neutral nucleophile attacking a neutral electrophile must give a species bearing BOTH a + and a −, and if your drawing shows neither, an arrow is wrong however reasonable the product appears", isCorrect: true },
+      { text: "False — the charge check catches errors that look sensible. Charge is CONSERVED at every step, so an arrow from the wrong source silently breaks that while the structure can still look plausible. A neutral nucleophile attacking a neutral electrophile must give a species bearing BOTH a + and a −", isCorrect: true },
       { text: "True — an experienced eye can see whether a mechanism is right, so formal-charge bookkeeping is a formality", isCorrect: false, misconceptionId: `${ARROWPUSH}:MC3` },
     ],
     correctValue: "False — charge conservation is the check that catches plausible-looking errors",
@@ -19783,7 +19783,7 @@ const PERICYC_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.UNDERGRADUATE,
     stem: "The Diels–Alder of cyclopentadiene with maleic anhydride gives the ENDO product. Is that because endo is the more stable isomer?",
     choices: [
-      { text: "No — endo is usually the LESS stable of the two, and it forms anyway because it is KINETICALLY favoured. The dienophile's π system overlaps with the diene's developing π system in the endo transition state — a secondary orbital interaction that lowers that barrier — so endo forms faster despite having more steric strain. Heat the reaction and it can revert and equilibrate to the exo product, which is the thermodynamic one. The Alder endo rule is a statement about transition states, not about products", isCorrect: true },
+      { text: "No — endo is usually the LESS stable isomer, and it forms anyway because it is KINETICALLY favoured. A secondary orbital interaction in the endo transition state lowers that barrier, so endo forms faster despite more steric strain; exo is usually the thermodynamic product", isCorrect: true },
       { text: "Yes — the endo arrangement has less steric strain, so it is the more stable product and therefore the one that forms", isCorrect: false, misconceptionId: `${PERICYC}:MC3` },
     ],
     correctValue: "No — endo is kinetically favoured by secondary orbital overlap; exo is usually the more stable",
