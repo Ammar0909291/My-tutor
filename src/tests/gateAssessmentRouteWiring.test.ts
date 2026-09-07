@@ -156,26 +156,33 @@ describe('the exclusions are on the eligibility test, not assumed', () => {
     expect(eligibility).not.toContain("phaseBeforeTurn === 'DEMONSTRATE' && strugglingOnThisConcept")
   })
 
-  it('never fires at OBSERVE — narrowed from "never below GUIDE", with cause', () => {
-    // REWRITTEN, not deleted. This read `not.toMatch(/OBSERVE|DEMONSTRATE/)`
-    // and pinned the gate to GUIDE and above.
+  it('R81 (2026-09-07): OBSERVE now fires too, scoped to ask + surplus, same as DEMONSTRATE', () => {
+    // SUPERSEDED. This test used to read `not.toMatch(/OBSERVE/)` — the claim
+    // was "narrowed from 'never below GUIDE' [to DEMONSTRATE only], with
+    // cause": DEMONSTRATE was measured unsafe-then-safe (see the DEMONSTRATE
+    // test above), and OBSERVE was left alone because its LADDER is diagnostic
+    // (observeDiagnosticConcludes.test.ts) and one earlier attempt to touch
+    // that ladder broke seven behavioural tests.
     //
-    // E1 deliberately opens DEMONSTRATE. Criterion 4 was measured at 25% in
-    // the 2026-08-31 physics re-measurement — 114 of 456 questions carried an
-    // answer key — and DEMONSTRATE holds the largest block of the ungradeable
-    // ones. Opening it was UNSAFE until probe depth completed: at a pool of
-    // exactly three, spending one below the mastery gates makes mastery
-    // unreachable, which is the defect that held physics at 79%. Both subjects
-    // now sit at five or more, and the surplus is enforced per-concept at the
-    // serving site (`mayAttachProbeBelowGuide`), so a concept still at the
-    // bare contract behaves exactly as it did before.
+    // That reasoning is still correct about the LADDER — untouched here — but
+    // it does not settle the separate question this test actually asks: which
+    // QUESTION fills a turn the ladder already decided to ASK. The Mohd
+    // Physics Tier-A certification run measured 79 of 238 concepts terminating
+    // UNMEASURED at turn 1, phaseBeforeTurn OBSERVE (the fold's initial
+    // state), every one holding 4-12 ACTIVE production probes — not a content
+    // gap, and not the DEMONSTRATE failure mode this file already documents.
+    // OBSERVE's turn-1 'ask' was being filled by the model's own unkeyed
+    // invented MCQ (inventedProbeGuard.ts's `probeWouldCountThisPhase` was
+    // deliberately false there), which no certification harness can grade.
     //
-    // OBSERVE keeps the original guarantee, and that half is NOT a scarcity
-    // argument: observeDiagnosticConcludes.test.ts establishes OBSERVE as a
-    // DIAGNOSTIC phase, and the one previous attempt to alter its ladder
-    // behaviour in this programme broke seven behavioural tests and was
-    // reverted.
-    expect(eligibility).not.toMatch(/OBSERVE/)
+    // R81 extends the SAME condition E1 already proved safe — scoped to
+    // `evidenceMoveHoisted === 'ask'` (never a teach/show turn) and gated by
+    // `mayAttachProbeBelowGuide`'s surplus rule (never spend below what
+    // mastery needs) — to OBSERVE as well. It is not a second threshold: both
+    // phases share one function, so a concept still at the bare 3-probe
+    // contract behaves exactly as before at OBSERVE too (see
+    // masteryReachability.test.ts's same-session double-spend case).
+    expect(eligibility).toMatch(/\(phaseBeforeTurn === 'OBSERVE' && evidenceMoveHoisted === 'ask'\)/)
   })
 
   it('never during recovery — no content into a flooded mind', () => {

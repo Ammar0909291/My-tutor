@@ -4140,10 +4140,43 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // DIAGNOSTIC phase (observeDiagnosticConcludes.test.ts), and an earlier
         // attempt to change its ladder behaviour broke seven behavioural tests
         // and was reverted. GUIDE keeps its 'ask' condition exactly as before.
+        //
+        // ── R81 (2026-09-07): OBSERVE, scoped to its own 'ask' turn only ────
+        // MEASURED: 79 of 238 Mohd Physics Tier-A concepts terminated
+        // UNMEASURED at turn 1, phaseBeforeTurn='OBSERVE' (the fold's own
+        // initial state, initialConversationState), 100% `phase-does-not-
+        // count` in inventedProbeGuard.ts terms — every one had 4-12 ACTIVE
+        // production probes (queried directly), so this was never a content
+        // gap. `decideModelProbe` already withholds the model's own MCQ the
+        // instant `gateServedAuthoredProbe` is true (its FIRST check, before
+        // the phase check ever runs) — so substituting an authored probe
+        // here needs no change to that module at all; it only needs this
+        // gate to be willing to select one.
+        //
+        // WHY THIS IS NOT THE REVERTED CHANGE. The prior attempt (see
+        // masteryReachability.ts) altered OBSERVE's LADDER — transitions,
+        // conclusion counters, phase semantics. This does not: OBSERVE's
+        // 'ask' move is unchanged (decideNextMove decides it exactly as
+        // before), observeFailures/the 2-failure conclusion escape are
+        // untouched (they read TurnEvidence shape, not probe origin), and no
+        // mastery counter can move here — CHECK/PRACTICE increment nowhere
+        // else in conversationState's switch. This SUBSTITUTES which
+        // question fills an 'ask' turn the ladder already decided to take,
+        // exactly as DEMONSTRATE's line below already does — never staples a
+        // question onto a 'teach'/'show' turn.
+        //
+        // WHY REACHABILITY STILL HOLDS if a session spends here AND at
+        // DEMONSTRATE: `mayAttachProbeBelowGuide` re-reads the CURRENT pool
+        // before each spend. A pool of exactly 4 spent once at OBSERVE
+        // leaves 3, and `3 - 1 = 2 < CREDITS_REQUIRED_FOR_MASTERY` correctly
+        // refuses a second early spend at DEMONSTRATE — the same guarantee
+        // that already protects DEMONSTRATE alone, extended by reusing the
+        // identical arithmetic rather than a second threshold.
         const phaseAllowsProbe =
           isMasteryGatePhase(phaseBeforeTurn) ||
           (phaseBeforeTurn === 'GUIDE' && evidenceMoveHoisted === 'ask') ||
-          (phaseBeforeTurn === 'DEMONSTRATE')
+          (phaseBeforeTurn === 'DEMONSTRATE') ||
+          (phaseBeforeTurn === 'OBSERVE' && evidenceMoveHoisted === 'ask')
         phaseAllowsProbeHoisted = phaseAllowsProbe
         // PHASE 3. Three of the terms this conjunction used to spell out by hand
         // — recovery, closing, and the learner-request term it was MISSING —
@@ -4182,8 +4215,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // questions at DEMONSTRATE — a different change, with a real risk of
           // making lessons passive (blueprint 7), which must be measured on its
           // own rather than smuggled in beside this one.
+          // R81 adds OBSERVE too, scoped to its own 'ask' turn exactly as
+          // phaseAllowsProbe is above — this local override, never
+          // isProbeAttachablePhase itself, so the ungraded-question withhold
+          // caller this comment already protects is unaffected.
           probeAttachablePhase:
-            isProbeAttachablePhase(phaseBeforeTurn) || phaseBeforeTurn === 'DEMONSTRATE',
+            isProbeAttachablePhase(phaseBeforeTurn) || phaseBeforeTurn === 'DEMONSTRATE' ||
+            (phaseBeforeTurn === 'OBSERVE' && evidenceMoveHoisted === 'ask'),
           hasMemoryState: memoryState !== null,
           noUnansweredProbeOnScreen: !unansweredProbeOnScreen,
           notFirstLesson: !firstLessonActiveHoisted,
@@ -4292,8 +4330,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // selector has run. A concept still at the bare contract therefore
           // behaves EXACTLY as it did before this change.
           const { mayAttachProbeBelowGuide } = await import('@/lib/teaching/masteryReachability')
+          // R81: OBSERVE now reaches this site too (phaseAllowsProbe above),
+          // so it must pass through the SAME surplus check DEMONSTRATE
+          // already does — mayAttachProbeBelowGuide re-reads the current
+          // pool on every call, so two early spends across OBSERVE and
+          // DEMONSTRATE in one session can never both fire when doing so
+          // would leave fewer than CREDITS_REQUIRED_FOR_MASTERY.
           const belowGuideBlocked =
-            phaseBeforeTurn === 'DEMONSTRATE'
+            (phaseBeforeTurn === 'DEMONSTRATE' || phaseBeforeTurn === 'OBSERVE')
             && !(probe ? mayAttachProbeBelowGuide(phaseBeforeTurn, probe.poolSize) : false)
           if (belowGuideBlocked) {
             console.log('[gate-assessment] ' + JSON.stringify({
