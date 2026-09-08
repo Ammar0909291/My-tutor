@@ -269,6 +269,11 @@ async function bootstrapAssets() {
       // englishProbeBatch4.ts header for detail.
       const { ENGLISH_PROBE_BATCH_4 } =
         await import('./lib/teaching/assets/englishProbeBatch4')
+      // Batch 5 — 25 concepts (all 11 remaining eng.writing + first 14
+      // eng.literature alphabetically), direct depth 2->4, same technique.
+      // See englishProbeBatch5.ts header for detail.
+      const { ENGLISH_PROBE_BATCH_5 } =
+        await import('./lib/teaching/assets/englishProbeBatch5')
       const { hashContent } = await import('./lib/teaching/assets/similarity')
       const { AssetFamily, AssetStatus, AuthorKind, ExplanationStyle, ProbeDifficulty } = await import('@prisma/client')
       // The ladder rungs a slug may carry, from the enum itself rather than a
@@ -279,7 +284,7 @@ async function bootstrapAssets() {
       const ALL_PROBES = [...SEED_PROBES, ...AUTHORED_PROBES, ...CHEMISTRY_PROBES, ...PHYSICS_BAND_GAP_PROBES,
         ...PHYSICS_DEPTH_PROBES, ...CHEMISTRY_DEPTH_PROBES, ...ENGLISH_BAND_GAP_PROBES,
         ...ENGLISH_PROBE_BATCH_1, ...ENGLISH_BATCH_1_DEPTH_4, ...ENGLISH_PROBE_BATCH_2,
-        ...ENGLISH_PROBE_BATCH_3, ...ENGLISH_PROBE_BATCH_4]
+        ...ENGLISH_PROBE_BATCH_3, ...ENGLISH_PROBE_BATCH_4, ...ENGLISH_PROBE_BATCH_5]
       // ADR 14 §13 (Item 6): ladder rungs get a difficulty segment; singleton
       // slots keep the identity they already have. One resolver drives BOTH
       // the pre-flight check and the write loop so they cannot disagree.
