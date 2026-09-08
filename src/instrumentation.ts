@@ -251,6 +251,15 @@ async function bootstrapAssets() {
       // corrected 212/194 scope measurement this campaign works from.
       const { ENGLISH_PROBE_BATCH_1 } =
         await import('./lib/teaching/assets/englishProbeBatch1')
+      // Batch-1 depth-4 upgrade + Batch 2 (2026-09-08): live Mohd validation
+      // of Batch 1 (depth 3) reproduced the same zero-slack failure already
+      // fixed for eng.grammar.nouns, so the resilience target moved to
+      // depth 4 for all applicable native-band pairs. See each file's own
+      // header for detail.
+      const { ENGLISH_BATCH_1_DEPTH_4 } =
+        await import('./lib/teaching/assets/englishBatch1Depth4')
+      const { ENGLISH_PROBE_BATCH_2 } =
+        await import('./lib/teaching/assets/englishProbeBatch2')
       const { hashContent } = await import('./lib/teaching/assets/similarity')
       const { AssetFamily, AssetStatus, AuthorKind, ExplanationStyle, ProbeDifficulty } = await import('@prisma/client')
       // The ladder rungs a slug may carry, from the enum itself rather than a
@@ -260,7 +269,7 @@ async function bootstrapAssets() {
       const ALL_EXPLANATIONS = [...SEED_EXPLANATIONS, ...AUTHORED_EXPLANATIONS, ...CHEMISTRY_EXPLANATIONS]
       const ALL_PROBES = [...SEED_PROBES, ...AUTHORED_PROBES, ...CHEMISTRY_PROBES, ...PHYSICS_BAND_GAP_PROBES,
         ...PHYSICS_DEPTH_PROBES, ...CHEMISTRY_DEPTH_PROBES, ...ENGLISH_BAND_GAP_PROBES,
-        ...ENGLISH_PROBE_BATCH_1]
+        ...ENGLISH_PROBE_BATCH_1, ...ENGLISH_BATCH_1_DEPTH_4, ...ENGLISH_PROBE_BATCH_2]
       // ADR 14 §13 (Item 6): ladder rungs get a difficulty segment; singleton
       // slots keep the identity they already have. One resolver drives BOTH
       // the pre-flight check and the write loop so they cannot disagree.
