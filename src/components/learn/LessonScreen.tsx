@@ -1193,6 +1193,18 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     options: string[]
     askedAt: number
   } | null>(null)
+  // QUICK CHECK WINDOW (UI ONLY). Minimize / maximize / close are a PURELY
+  // VISUAL presentation mode for the Quick Check panel. They never touch
+  // `activeMcq`, never send a message, never grade, and never change server
+  // state — closing hides the panel and leaves the pending assessment exactly
+  // as the server left it, reopenable from a chip. Keyed on `askedAt` so a
+  // NEWLY served question always arrives expanded: a stale mode from the
+  // previous question can never hide a fresh one.
+  const [quickCheckWindow, setQuickCheckWindow] = useState<{ askedAt: number; mode: 'expanded' | 'minimized' | 'closed' } | null>(null)
+  const quickCheckMode: 'expanded' | 'minimized' | 'closed' =
+    activeMcq && quickCheckWindow && quickCheckWindow.askedAt === activeMcq.askedAt
+      ? quickCheckWindow.mode
+      : 'expanded'
   // P6.6: the server-decided lesson completion payload. Presence of this state
   // ends the lesson in the UI — the learner never continues inside a completed
   // lesson, and the next lesson starts only when they choose to.
@@ -5503,11 +5515,11 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 it grades a typed reply, so no parallel scoring path can
                 drift — this is unchanged from before, only WHERE it renders
                 changed. */}
-            {activeMcq && !isStreaming && !lessonCompletion && (
+            {activeMcq && !isStreaming && !lessonCompletion && quickCheckMode !== 'closed' && (
               <div
                 role="group"
                 aria-label={t('lc_answers_aria')}
-                className={styles.quickCheckFloating}
+                className={quickCheckMode === 'minimized' ? `${styles.quickCheckFloating} ${styles.quickCheckMinimized}` : styles.quickCheckFloating}
                 style={{
                   background: 'var(--bg-surface)',
                   border: '1px solid var(--border-subtle)',
@@ -5525,11 +5537,47 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                   }}>
                     {t('lc_quick_check_label')}
                   </span>
+                  <span style={{ flex: 1 }} />
+                  {/* WINDOW CONTROLS — presentation only. Each handler writes
+                      ONLY `quickCheckWindow`; none of them calls sendMessage,
+                      clears activeMcq, or touches mastery/lesson state. */}
+                  {quickCheckMode === 'expanded' ? (
+                    <button
+                      type="button"
+                      aria-label={t('lc_qc_minimize')}
+                      title={t('lc_qc_minimize')}
+                      className={styles.quickCheckControl}
+                      onClick={() => setQuickCheckWindow({ askedAt: activeMcq.askedAt, mode: 'minimized' })}
+                    >
+                      &#8211;
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      aria-label={t('lc_qc_maximize')}
+                      title={t('lc_qc_maximize')}
+                      className={styles.quickCheckControl}
+                      onClick={() => setQuickCheckWindow({ askedAt: activeMcq.askedAt, mode: 'expanded' })}
+                    >
+                      &#9633;
+                    </button>
+                  )}
+                  <button
+                    type="button"
+                    aria-label={t('lc_qc_close')}
+                    title={t('lc_qc_close')}
+                    className={styles.quickCheckControl}
+                    onClick={() => setQuickCheckWindow({ askedAt: activeMcq.askedAt, mode: 'closed' })}
+                  >
+                    &#215;
+                  </button>
                 </div>
+                {quickCheckMode === 'expanded' && (
                 <div className={styles.displayFace} style={{ fontSize: 15.6, fontWeight: 600, color: 'var(--text-primary)', lineHeight: 1.4 }}>
                   {activeMcq.question}
                 </div>
-                {activeMcq.options.map((option, i) => (
+                )}
+                {quickCheckMode === 'expanded' && activeMcq.options.map((option, i) => (
                   <button
                     key={`${i}-${option}`}
                     type="button"
@@ -5577,6 +5625,21 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                   </button>
                 ))}
               </div>
+            )}
+
+            {/* CLOSED: the panel is hidden but the assessment is NOT cancelled —
+                activeMcq is untouched, the server still holds the pending probe,
+                and the learner may reopen it or answer by typing. Without this
+                chip a close would strand the only tappable answer channel. */}
+            {activeMcq && !isStreaming && !lessonCompletion && quickCheckMode === 'closed' && (
+              <button
+                type="button"
+                aria-label={t('lc_qc_reopen')}
+                className={styles.quickCheckReopen}
+                onClick={() => setQuickCheckWindow({ askedAt: activeMcq.askedAt, mode: 'expanded' })}
+              >
+                {t('lc_quick_check_label')}
+              </button>
             )}
 
             {/* ── Input area ──────────────────────────────────────────── */}

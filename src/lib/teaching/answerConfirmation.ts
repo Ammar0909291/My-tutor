@@ -61,14 +61,60 @@ const flatten = (s: string) =>
  * Deliberately NOT a bare "right" — "the right-hand side" is not praise. Every
  * alternative below was taken from a reply the tutor actually produced.
  */
+// great job added 2026-09-08: a real near-miss found by
+// stripLeadingFalseConfirmation's own reproduction (physics
+// kinematics-2d) — a Great job opener matched none of the existing
+// phrasings, only its sibling good job did. Kept in the same relative
+// position as good job below so the two files' diff stays minimal.
 export const CONFIRMS_CORRECT = new RegExp([
   '\\bcorrect\\b', '\\bexactly\\b', '\\bprecisely\\b', '\\bspot on\\b',
   '\\bwell done\\b', '\\bnicely done\\b', '\\bperfect\\b',
   "\\b(that|this) ?'?s right\\b", '\\bthat is right\\b',
   "\\byou'?re right\\b", '\\byou are right\\b', '\\bquite right\\b',
   "\\byou'?ve got it\\b", '\\bgot it right\\b', '\\byou nailed\\b',
-  '\\bgood job\\b', '\\byes[,!.]',
+  '\\bgood job\\b', '\\bgreat job\\b', '\\byes[,!.]',
 ].join('|'), 'i')
+
+/**
+ * THE OPENING CLAIM MUST NOT OUTRUN THE GRADE.
+ *
+ * ── THE DEFECT ──────────────────────────────────────────────────────────────
+ * Found in a low-IQ-persona role-play QA session (2026-09-08), reproduced on
+ * THREE different concepts across both subjects (phys.stat.phase-transitions,
+ * phys.mech.kinematics-2d, chem.atomic.orbitals), always the same shape: the
+ * learner typed a hedge with the full correct option text embedded ("im not
+ * sure but maybe <exact option>"). `resolveMcqChoice` correctly refused to
+ * grade it (a hedge is not a confident tap), so the I1 disambiguation lead-in
+ * fired ("I couldn't tell which option your answer matched...") — but the
+ * MODEL, reading the same raw learner text, recognised the embedded answer
+ * and opened its own reply with "Exactly right — magnetization is the order
+ * parameter..." The learner received both "I don't know what you picked" and
+ * "you picked correctly" in the same message. The server never banked false
+ * evidence (this is a presentation defect, not a grading one — `correctAt
+ * Check`/`correctAtPractice` are untouched either way), but the contradiction
+ * itself teaches the learner that "correct" means nothing.
+ *
+ * ── WHY ONLY THE OPENING SENTENCE, NOT EVERY MATCH OF CONFIRMS_CORRECT ──────
+ * `CONFIRMS_CORRECT` also matches plain, correct, uncontroversial teaching —
+ * "the correct answer was X" inside a wrong-answer remediation, "yes, that
+ * follows from..." mid-explanation. Stripping every sentence that matches
+ * anywhere in the reply would delete real teaching content the learner needs.
+ * In every reproduced case the false claim was the OPENING clause — the
+ * model's very first reaction to the learner's message, before any teaching
+ * — so this is scoped to the first sentence only. A confirmation appearing
+ * later in the reply is left alone; that shape was never observed and
+ * stripping it blind would risk exactly the collateral damage described
+ * above.
+ */
+export function stripLeadingFalseConfirmation(text: string): string {
+  if (typeof text !== 'string') return text
+  const trimmed = text.trim()
+  if (!trimmed) return text
+  const sentences = trimmed.split(/(?<=[.!?])\s+/)
+  const [first, ...rest] = sentences
+  if (!first || !CONFIRMS_CORRECT.test(flatten(first))) return text
+  return rest.join(' ').trim()
+}
 
 /**
  * Three phrasings, rotated deterministically.

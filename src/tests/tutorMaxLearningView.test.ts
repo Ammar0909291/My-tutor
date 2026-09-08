@@ -136,10 +136,16 @@ describe('4 — lesson list "current" highlight agrees with the authoritative ac
 //    and stays interactive/pending until answered ───────────────────────
 describe('5/6 — MCQ renders only as a floating Quick Check, never an ordinary chat bubble', () => {
   it('the MCQ block uses the floating quickCheckFloating class, gated on activeMcq and not streaming/completed', () => {
-    expect(SRC).toMatch(/\{activeMcq && !isStreaming && !lessonCompletion && \(/)
-    const idx = SRC.indexOf('{activeMcq && !isStreaming && !lessonCompletion && (')
+    // 2026-09-08: the gate gained a UI-only window mode (minimize/maximize/
+    // close). The invariant is unchanged — the panel renders only for an
+    // active, non-streaming, non-completed MCQ — so the assertion is restated
+    // against the new shape rather than dropped.
+    expect(SRC).toMatch(/\{activeMcq && !isStreaming && !lessonCompletion && quickCheckMode !== 'closed' && \(/)
+    const idx = SRC.indexOf("{activeMcq && !isStreaming && !lessonCompletion && quickCheckMode !== 'closed' && (")
     const block = SRC.slice(idx, idx + 1200)
-    expect(block).toContain('className={styles.quickCheckFloating}')
+    // The class is now conditionally combined with the minimized modifier;
+    // the floating class itself is still what positions the panel.
+    expect(block).toContain('styles.quickCheckFloating')
     expect(block).toContain("t('lc_quick_check_label')")
   })
 
@@ -151,7 +157,7 @@ describe('5/6 — MCQ renders only as a floating Quick Check, never an ordinary 
   })
 
   it('tapping an option still routes through the same sendMessage path used for typed answers — one answer channel, server remains authoritative', () => {
-    const idx = SRC.indexOf("{activeMcq.options.map((option, i) => (")
+    const idx = SRC.indexOf("activeMcq.options.map((option, i) => (")
     const block = SRC.slice(idx, idx + 2400)
     expect(block).toContain('void sendMessage(sessionId, option)')
     // Clears the question (single active MCQ) before the request goes out.
@@ -176,7 +182,7 @@ describe('7 — resolveMcqHistoryResult (Tutor History grading signal)', () => {
 
 describe('7b — the MCQ tap and its response are wired to the SAME history entry (baseline capture + resolution)', () => {
   it('the tap handler snapshots the pre-answer mastery total as the baseline before sending', () => {
-    const idx = SRC.indexOf("{activeMcq.options.map((option, i) => (")
+    const idx = SRC.indexOf("activeMcq.options.map((option, i) => (")
     const block = SRC.slice(idx, idx + 2400)
     expect(block).toMatch(/pendingMcqMasteryBaselineRef\.current =\s*\n\s*\(masteryState\?\.checkCorrect \?\? 0\) \+ \(masteryState\?\.practiceCorrect \?\? 0\)/)
     expect(block).toContain("result: 'pending'")
@@ -230,7 +236,7 @@ describe('11 — server remains authoritative; nothing here invents correctness 
   })
 
   it('the Quick Check tap handler does not call setMasteryState or otherwise fabricate a grade — it only sends the answer and records a PENDING history row', () => {
-    const idx = SRC.indexOf("{activeMcq.options.map((option, i) => (")
+    const idx = SRC.indexOf("activeMcq.options.map((option, i) => (")
     const block = SRC.slice(idx, idx + 2400)
     expect(block).not.toContain('setMasteryState')
   })

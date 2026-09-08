@@ -136,7 +136,17 @@ export function buildVisualContractBlock(
           'blaming a system they cannot see ("I can\'t show you a picture of ' +
           'this one, so let me describe it…"). Then give the clearest ' +
           'word-picture you can. Do NOT ignore the request, and do NOT ' +
-          'promise a diagram later — you cannot attach one.'
+          'promise a diagram later — you cannot attach one. ' +
+          // Reproduced live (2026-09-08): a learner who framed the request as
+          // "I learn better with pictures, I'm not smart with just words" got
+          // a generic, subject-less tutorial on HOW TO DRAW DIAGRAMS AS A
+          // STUDY TECHNIQUE ("draw a box, label the parts, connect with
+          // arrows") — zero content about the actual lesson. The word-picture
+          // above must be OF THIS CONCEPT, never advice about diagramming or
+          // studying in general, however the learner phrases the request.
+          'Do NOT respond with general study advice about how to draw ' +
+          'diagrams, take notes, or learn visually — the word-picture must be ' +
+          'ABOUT THE CONCEPT ITSELF, not about diagramming as a technique.'
         : '(5) Do not apologise for the absence of a diagram; ' +
           'a clear explanation is the complete answer.')
     )
@@ -201,7 +211,9 @@ export function buildVisualContractBlock(
     lines.push(
       `A ${asset.representation ?? 'diagram'} of ${what} is attached to THIS response ` +
       'and the learner can see it right now. It was selected by the teaching ' +
-      'engine, not by you.',
+      'engine, not by you. Describe and use THIS figure — never respond with ' +
+      'generic advice about how diagrams help someone study or learn; that ' +
+      'ignores the figure the learner is actually looking at.',
     )
     lines.push(PURPOSE_INSTRUCTION[decision.purpose])
   }
