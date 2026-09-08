@@ -38,7 +38,7 @@ import styles from './ExplainerFigure.module.css'
 import { useTheme } from '@/components/Providers'
 import type { SceneSpec } from '@/lib/teaching/sceneSpec'
 import { deriveExplainer } from '@/lib/teaching/visual/explainer'
-import { availableModes, stageView, type SceneMode } from '@/lib/teaching/visual/sceneStage'
+import { availableModes, redactExplainer, redactText, stageView, withheldValues, type SceneMode } from '@/lib/teaching/visual/sceneStage'
 import { defaultValueOf, rebuildScene, variablesFor, type SceneParams, type SceneVariable } from '@/lib/teaching/visual/parametricScenes'
 import { themeColor } from '@/lib/teaching/sceneGenerators/visualDesign'
 import {
@@ -115,7 +115,7 @@ export function ExplainerFigure({
     return rebuilt ?? lastGood.current
   }, [spec, params])
 
-  const explainer = useMemo(() => deriveExplainer(shown), [shown])
+  const explainerFull = useMemo(() => deriveExplainer(shown), [shown])
   const modes = useMemo(
     () => (policy.offerChallengeModes ? availableModes(shown) : ['explain' as const]),
     [shown, policy.offerChallengeModes],
@@ -218,7 +218,7 @@ export function ExplainerFigure({
   // Legend focus and stage focus are the same mechanism, so they cannot
   // disagree: a pinned colour names the ids drawn in it.
   const focusName = pinnedColor
-    ? explainer.legend?.find((l) => l.color === pinnedColor)?.label ?? null
+    ? explainerFull.legend?.find((l) => l.color === pinnedColor)?.label ?? null
     : null
 
   const setVar = useCallback((key: string, value: number | string) => {
@@ -228,8 +228,8 @@ export function ExplainerFigure({
   // ── representation ─────────────────────────────────────────────────────────
   const [view, setView] = useState<RepresentationView>('spatial')
   const representations = useMemo(
-    () => (policy.offerRepresentations ? availableRepresentations(drawn, explainer) : []),
-    [drawn, explainer, policy.offerRepresentations],
+    () => (policy.offerRepresentations ? availableRepresentations(drawn, explainerFull) : []),
+    [drawn, explainerFull, policy.offerRepresentations],
   )
   // A view the current figure cannot support must not stay selected — a
   // contrast or a slider can change what the scene states.
@@ -262,13 +262,47 @@ export function ExplainerFigure({
     return head ? [...walked, head] : walked
   }, [playing, stageObjects, view, drawn, progress, policy])
 
-  const working = useMemo(() => workingLines(explainer), [explainer])
   const heldBackLabels = labelsHeldBack(objectsForView(stageObjects, view), policy)
 
   const predicting = mode === 'predict' && !revealed
   /** True in any mode whose whole point is that the learner works it out. */
   const answerWithheld = predicting || mode === 'practice' || mode === 'assess'
     || (contrast !== null && !contrastRevealed)
+
+  /**
+   * THE FRAME OBEYS THE SAME WITHHOLDING AS THE FIGURE.
+   *
+   * `stageView` hides answer-bearing labels inside the canvas; `deriveExplainer`
+   * read the same scene and re-stated those quantities in the title, the panels
+   * and the narration, none of which knew a mode existed. That is how assess
+   * mode came to say "Every stated value is hidden. Read the figure alone.
+   * (5 hidden)" directly above "Total resistance is 76 Ω, giving a current of
+   * 0.16 A through every resistor."
+   *
+   * `redactExplainer` derives what may not be said FROM what the figure is
+   * hiding, so the two cannot disagree. Explain mode is returned untouched —
+   * the restriction applies only while the learner is being assessed.
+   *
+   * `answerWithheld` covers the contrast case, which is not a SceneMode and so
+   * is invisible to the redactor; passing 'practice' there withholds the answer
+   * without claiming the contrast's own figure states one.
+   */
+  const redactionMode: SceneMode = mode !== 'explain'
+    ? mode
+    : (answerWithheld ? 'practice' : 'explain')
+  const explainer = useMemo(
+    () => redactExplainer(explainerFull, drawn, redactionMode),
+    [explainerFull, drawn, redactionMode],
+  )
+  /** The same rule applied to the stage narration, which is prose too. */
+  const narration = useMemo(() => {
+    if (redactionMode === 'explain') return stageState.narration
+    return redactText(stageState.narration ?? undefined, withheldValues(drawn, redactionMode))
+  }, [stageState.narration, drawn, redactionMode])
+
+  // Derived from the REDACTED explainer: a working line is prose with numbers
+  // in it, so it leaks exactly like a panel body would.
+  const working = useMemo(() => workingLines(explainer), [explainer])
 
   /**
    * STUDY MODE — the TOP LAYER, not a fixed overlay.
@@ -633,7 +667,7 @@ export function ExplainerFigure({
             </p>
           )}
 
-          {walking && stageState.narration && <p className={styles.narration} style={{ marginTop: 8 }}>{stageState.narration}</p>}
+          {walking && narration && <p className={styles.narration} style={{ marginTop: 8 }}>{narration}</p>}
 
           {predicting && (
             <div className={styles.predict} style={{ marginTop: 10 }}>

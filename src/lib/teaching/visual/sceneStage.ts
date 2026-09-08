@@ -166,3 +166,145 @@ export function supportsMode(spec: SceneSpec, mode: SceneMode): boolean {
 export function availableModes(spec: SceneSpec): SceneMode[] {
   return (['explain', 'predict', 'practice', 'assess'] as const).filter((m) => supportsMode(spec, m))
 }
+
+// ── ANSWER LEAKAGE ───────────────────────────────────────────────────────────
+//
+// THE DEFECT THIS CLOSES, measured in production on an interactive series
+// circuit (phys.elect.current-and-drift). Assess mode reported, truthfully,
+// "Every stated value is hidden. Read the figure alone. (5 hidden)" — and the
+// frame around that same figure simultaneously printed:
+//
+//   title  "Series circuit — R_total = 76 Ω"
+//   panel  "…Total resistance is 76 Ω, giving a current of 0.16 A through
+//           every resistor."
+//   narration  the same sentence again
+//
+// Three unguarded surfaces, plus a result chip that WAS guarded. The cause is
+// not a missing `if`: `withheldIn` above decides what a mode hides for objects
+// INSIDE the scene, while `deriveExplainer` independently reads the SAME scene
+// and re-states those quantities as prose around it. Two consumers of one
+// scene, only one of them mode-aware — so the hidden count was literally true
+// of the canvas and false of the page.
+//
+// The fix therefore does NOT introduce a second withholding policy, which
+// would be the same defect one layer up and free to drift. The forbidden
+// values are derived FROM `withheldIn`'s own decision: whatever this mode
+// hides in the figure is exactly what the prose may not state. Adding a mode,
+// or changing what a mode hides, moves both together by construction.
+
+/**
+ * The VALUES the mode is hiding, as they appear in the figure.
+ *
+ * Only the right-hand side of a relation is taken, never the identifier: from
+ * "R_total = 30 Ω, I_total = 0.4 A" this yields 30 and 0.4, not the 1 and 2 of
+ * "R1"/"V2". Redacting on identifiers would blank almost every sentence.
+ */
+export function withheldValues(spec: SceneSpec, mode: SceneMode): number[] {
+  const values: number[] = []
+  for (const step of spec.steps) {
+    for (const obj of step.objects) {
+      if (!withheldIn(mode, obj)) continue
+      if (obj.type !== 'label' || typeof obj.text !== 'string') continue
+      for (const clause of obj.text.split(/[,;]/)) {
+        // "x = 12.5" -> 12.5 ; a bare "12 V" -> 12 ; "R1" -> nothing.
+        const rhs = clause.includes('=') ? clause.slice(clause.indexOf('=') + 1) : clause
+        const m = rhs.match(/-?\d+(?:\.\d+)?/)
+        if (m) values.push(Number(m[0]))
+      }
+    }
+  }
+  return [...new Set(values)].filter((v) => Number.isFinite(v))
+}
+
+/** Does this fragment state one of the values the figure is hiding? */
+function statesAWithheldValue(text: string, values: number[]): boolean {
+  if (values.length === 0) return false
+  for (const m of text.matchAll(/-?\d+(?:\.\d+)?/g)) {
+    const n = Number(m[0])
+    // Compared numerically, so "0.40" and "0.4" are the same leak, and a
+    // rounded restatement of a withheld value is caught with it.
+    if (values.some((v) => Math.abs(v - n) < 5e-3)) return true
+  }
+  return false
+}
+
+/**
+ * Drop the sentences that state a withheld value, keep the rest.
+ *
+ * Sentence-scoped rather than all-or-nothing so an explanation does not vanish
+ * because one clause carried a number — the learner keeps the reasoning and
+ * loses only the answer. Returns null when nothing survives, which the caller
+ * renders as absent rather than as an empty box.
+ */
+export function redactText(text: string | undefined, values: number[]): string | null {
+  if (!text) return text ?? null
+  const kept = text
+    .split(/(?<=[.!?])\s+/)
+    .filter((s) => !statesAWithheldValue(s, values))
+    .join(' ')
+    .trim()
+  return kept.length > 0 ? kept : null
+}
+
+/**
+ * A title must survive — a figure with no title is worse than one whose title
+ * is trimmed — so the offending clause is cut rather than the whole line. The
+ * split points are the ones titles actually use to append a computed result
+ * ("Series circuit — R_total = 76 Ω").
+ */
+export function redactTitle(title: string, values: number[]): string {
+  if (!statesAWithheldValue(title, values)) return title
+  const head = title.split(/\s+[—–-]\s+|:\s+/)[0]?.trim()
+  if (head && !statesAWithheldValue(head, values)) return head
+  return title.replace(/-?\d+(?:\.\d+)?/g, '?')
+}
+
+/**
+ * The explainer frame, with everything this mode hides in the figure removed
+ * from the prose around it. THE INVARIANT: figureOnlyAssessment => no answer
+ * leakage, for every surface the frame renders, not the two that happened to
+ * be guarded.
+ *
+ * `explain` is returned untouched — the restriction exists only while the
+ * learner is being assessed, and normal teaching must stay fully informative.
+ */
+export function redactExplainer<T extends {
+  title: string
+  givens?: string
+  result?: unknown
+  panels?: { heading: string; body?: string; lines?: string[]; emphasis?: string }[]
+  insight?: { heading?: string; bullets: string[]; note?: string }
+}>(explainer: T, spec: SceneSpec, mode: SceneMode): T {
+  if (mode === 'explain') return explainer
+  const values = withheldValues(spec, mode)
+  if (values.length === 0) return { ...explainer, result: undefined }
+
+  const panels = (explainer.panels ?? [])
+    .map((p) => {
+      const body = redactText(p.body, values) ?? undefined
+      const lines = p.lines?.filter((l) => !statesAWithheldValue(l, values))
+      return { ...p, body, lines: lines?.length ? lines : undefined,
+        emphasis: p.emphasis && !statesAWithheldValue(p.emphasis, values) ? p.emphasis : undefined }
+    })
+    // A panel reduced to a bare heading says nothing; drop it rather than
+    // leave the learner an empty labelled box.
+    .filter((p) => p.body || (p.lines?.length ?? 0) > 0)
+
+  const insight = explainer.insight && {
+    ...explainer.insight,
+    bullets: explainer.insight.bullets.filter((b) => !statesAWithheldValue(b, values)),
+    note: redactText(explainer.insight.note, values) ?? undefined,
+  }
+
+  return {
+    ...explainer,
+    title: redactTitle(explainer.title, values),
+    givens: redactText(explainer.givens, values) ?? undefined,
+    // The chip exists to state the answer, so in any withholding mode it goes
+    // whole — this is the one pre-existing guard, kept and moved here so all
+    // of the withholding lives in one place.
+    result: undefined,
+    panels: panels.length ? panels : undefined,
+    insight: insight && (insight.bullets.length > 0 || insight.note) ? insight : undefined,
+  }
+}
