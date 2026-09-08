@@ -294,3 +294,57 @@
   }
 }
 
+
+/* QUICK CHECK WINDOW CONTROLS (UI only). Minimize/maximize/close change how
+   the panel is presented; they never touch MCQ, grading or mastery state. */
+.quickCheckControl {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-card);
+  color: var(--coral);
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 160ms ease, border-color 160ms ease;
+}
+.quickCheckControl:hover {
+  background: var(--bg-surface);
+  border-color: var(--coral);
+}
+/* Minimized: the header bar alone, so the chat behind is fully readable while
+   the learner can still see a Quick Check is pending. */
+.quickCheckMinimized {
+  max-height: none;
+  overflow: visible;
+  padding-bottom: 10px !important;
+}
+.quickCheckReopen {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 88px;
+  z-index: 30;
+  min-height: 40px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid var(--coral);
+  background: var(--bg-surface);
+  color: var(--coral);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.3);
+}
+@media (max-width: 640px) {
+  .quickCheckControl { width: 34px; height: 34px; }
+  .quickCheckReopen { bottom: 78px; }
+}
