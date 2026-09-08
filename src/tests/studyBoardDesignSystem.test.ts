@@ -82,7 +82,10 @@ describe('the JS brand accent (UI.indigo) — used directly in ~60 inline styles
 describe('the display face is applied at real headline moments, not as a blanket page-wide override', () => {
   it('the Tutor Max header name', () => {
     const idx = TSX.indexOf("{t('lesson_tutor_max')}")
-    const before = TSX.slice(Math.max(0, idx - 200), idx)
+    // 2026-09-08: the element's style block grew (nowrap/ellipsis/lineHeight,
+    // added so the name cannot wrap out of the fixed-height header). Same
+    // invariant, wider window — the display face must still be applied here.
+    const before = TSX.slice(Math.max(0, idx - 420), idx)
     expect(before).toContain('styles.displayFace')
   })
 

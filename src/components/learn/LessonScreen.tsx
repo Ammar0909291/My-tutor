@@ -4715,14 +4715,28 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 <EagleMascot variant="logo" size={36} />
               </div>
 
-              {/* Info */}
-              <div style={{ flex: '1 1 auto', minWidth: 0 }}>
-                <p className={styles.displayFace} style={{ fontSize: 16.8, fontWeight: 600, color: 'var(--text-primary)' }}>
+              {/* Info — the header is a FIXED 60px (PanelHeader tall). The
+                  two lines here (16.8px name + 13.2px status) fit that only
+                  while each stays on ONE line. On a narrow viewport the
+                  sibling lesson-identity/bookmark/menu controls squeezed this
+                  block until "Tutor Max" wrapped to two lines, which pushed
+                  the whole stack past 60px and clipped "online" behind the
+                  chat below. nowrap + ellipsis prevents the wrap, and the
+                  minWidth floor keeps the name legible rather than trading a
+                  wrapped name for a truncated one. */}
+              <div style={{ flex: '1 1 auto', minWidth: 92, overflow: 'hidden' }}>
+                <p className={styles.displayFace} style={{
+                  fontSize: 16.8, fontWeight: 600, color: 'var(--text-primary)',
+                  whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', lineHeight: 1.2,
+                }}>
                   {t('lesson_tutor_max')}
                 </p>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 5, marginTop: 2 }}>
-                  <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--green)', animation: 'blink 2s infinite', display: 'inline-block' }} />
-                  <span style={{ fontSize: 13.2, color: 'var(--text-secondary)' }}>{t('lesson_online')}</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 5, marginTop: 2, minWidth: 0 }}>
+                  <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--green)', animation: 'blink 2s infinite', display: 'inline-block', flexShrink: 0 }} />
+                  <span style={{
+                    fontSize: 13.2, color: 'var(--text-secondary)',
+                    whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', lineHeight: 1.2,
+                  }}>{t('lesson_online')}</span>
                 </div>
               </div>
 
