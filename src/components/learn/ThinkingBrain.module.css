@@ -40,16 +40,25 @@
   position: absolute;
   inset: -25%;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(108,92,231,0.4), transparent 70%);
+  /* Kesari/amber (--yellow — the same theme-aware token the rest of the UI's
+   * buttons and pills already use: #C97A22 light / #E8B84B dark). The OLD
+   * gradient baked its own 0.4 alpha into rgba(108,92,231,...) — the
+   * pre-Study-Board purple, #6C5CE7, never updated when the re-skin
+   * happened — and that alpha then COMPOUNDED with this element's own 0.5
+   * opacity below, which is the arithmetic reason the glow read as "too
+   * faint to see": ~0.4 * 0.5 = 0.2 effective strength. Solid colour here,
+   * strength controlled ONLY by opacity below, so raising visibility means
+   * changing one number instead of fighting two multiplied ones. */
+  background: radial-gradient(circle, var(--yellow, #C97A22), transparent 70%);
   filter: blur(3px);
-  opacity: 0.5;
+  opacity: 0.6;
   animation: brainGlowPulse 2s ease-in-out infinite;
 }
 
 .brainIcon {
   position: relative;
   z-index: 1;
-  color: var(--indigo, #6C5CE7);
+  color: var(--yellow, #C97A22);
   animation: brainBreathe 2s ease-in-out infinite;
 }
 
@@ -74,7 +83,12 @@
   left: 50%;
   display: flex;
   transform: translate(-50%, -50%);
-  color: var(--coral, #FF7B6B);
+  /* Same kesari family as the brain and ring — the old coral (--coral) is
+   * now the theme's GREEN accent in light mode since the Study Board
+   * re-skin, which would have put a green sparkle beside an amber brain: a
+   * second, unrelated colour the "no rainbow / one accent family" brief
+   * rules out. */
+  color: var(--yellow, #C97A22);
   animation: sparkleTwinkle 2.2s ease-in-out infinite;
 }
 
@@ -133,9 +147,32 @@
   position: absolute;
   inset: -14%;
   border-radius: 50%;
-  border: 1px solid var(--indigo, #6C5CE7);
-  opacity: 0.22;
-  animation: brainOrbit 7s linear infinite reverse;
+  /* Kesari/amber, same token as the brain and the glow — was --indigo
+   * (#6C5CE7, the pre-Study-Board purple) at a bare 0.22 opacity, which
+   * against the ring's own thin 1px stroke is most of why it "disappeared":
+   * a faint colour AND a faint opacity, compounding. Raised to 1.5px/0.5 and
+   * given its own ambient glow so the ring reads as a real, lit stroke
+   * rather than a hint of one. */
+  border: 1.5px solid var(--yellow, #C97A22);
+  /* The RESTING state — what shows before the pulse keyframes below take
+   * over, and (via `animation: none` under reduced motion) what the ring
+   * falls back to permanently when animation is off. Never leave this
+   * undeclared: it is the only thing standing between "reduced motion" and
+   * "no glow at all". */
+  box-shadow: 0 0 8px 0 var(--yellow, #C97A22);
+  opacity: 0.5;
+  /* Two animations on one ring: the existing slow 7s rotation (kept exactly
+   * as before — still the FIRST value, so ringOrbitTest's duration/reverse
+   * check keeps reading it), plus a new 3s glow pulse so the ring's own
+   * light visibly breathes rather than sitting at one flat brightness. This
+   * is the literal "ring/light slowly pulses" ask, on the ring itself, not
+   * only on the separate glow blob behind the brain. */
+  animation: brainOrbit 7s linear infinite reverse, ringGlowPulse 3s ease-in-out infinite;
+}
+
+@keyframes ringGlowPulse {
+  0%, 100% { box-shadow: 0 0 4px 0 var(--yellow, #C97A22); opacity: 0.4; }
+  50%      { box-shadow: 0 0 12px 1px var(--yellow, #C97A22); opacity: 0.7; }
 }
 
 .spark {
@@ -146,8 +183,9 @@
   height: 2.5px;
   margin: -1.25px 0 0 -1.25px;
   border-radius: 50%;
-  background: var(--coral, #FF7B6B);
-  box-shadow: 0 0 5px 1px var(--coral, #FF7B6B);
+  /* Same kesari family as the rest of the indicator — see .particleDot. */
+  background: var(--yellow, #C97A22);
+  box-shadow: 0 0 5px 1px var(--yellow, #C97A22);
   opacity: 0;
   animation: sparkTravel 6s ease-in-out infinite;
 }
