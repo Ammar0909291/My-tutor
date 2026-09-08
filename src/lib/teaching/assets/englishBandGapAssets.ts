@@ -59,6 +59,29 @@
  * `BOOTSTRAP_SEED_SUBJECTS`) and `scripts/brain/seed-knowledge-assets.ts`, so
  * it converges automatically and idempotently; nothing here is a database
  * write performed by this session directly.
+ *
+ * ── DEPTH 3 -> 4: THE ZERO-SLACK DEFECT, MEASURED LIVE (2026-09-08) ─────────
+ * The first version of this file brought both concepts to exactly 3 probes —
+ * the bare mastery bar (1 CHECK + 2 PRACTICE), matching `assetContract.ts`'s
+ * stated minimum. Driving `eng.grammar.nouns` as a real learner against the
+ * deployed app (one deliberate wrong answer, then two correct, exactly the
+ * "wrong answer -> remediation -> correct -> progression" scenario a real
+ * lesson must survive) reproduced the SAME zero-slack failure this project
+ * already found and fixed in physics/chemistry (probe depth 3 -> 5, "the
+ * required success rate was therefore 1.00 — one wrong answer made mastery
+ * unreachable"): the wrong answer consumed one of the 3 probes without
+ * banking either counter, so by the time `checkCorrect:1, practiceCorrect:1`
+ * was reached, all 3 authored probes were spent and the concept could not
+ * reach `practiceCorrect >= 2` from authored content alone. Verified via
+ * production Vercel logs (`TURN_EVENT`) and the session's persisted
+ * `contextSnapshot.conversationState`, not guessed.
+ *
+ * One additional probe per concept (below) brings both to depth 4 — enough
+ * for the mastery bar (3) plus exactly one wrong-answer/remediation cycle,
+ * the realistic case this task's own validation scenario requires. Each new
+ * probe uses `probeKind: 'checkpoint'` — a THIRD distinct probeKind, verified
+ * empty for both concepts before authoring, so it is a fresh singleton slot
+ * exactly like the `true_false` slot above and carries no P-10 risk.
  */
 import { GradeBand, ProbeDifficulty } from '@prisma/client'
 import type { SeedProbe } from './brainSeedAssets'
@@ -113,4 +136,38 @@ const BLENDING_GAP: SeedProbe[] = [
   },
 ]
 
-export const ENGLISH_BAND_GAP_PROBES: SeedProbe[] = [...NOUNS_GAP, ...BLENDING_GAP]
+// ─── depth-4 probes — one wrong-answer/remediation cycle of slack ───────────
+
+const NOUNS_DEPTH: SeedProbe[] = [
+  {
+    conceptId: 'eng.grammar.nouns', subjectSlug: S, probeKind: 'checkpoint',
+    gradeBand: GradeBand.MIDDLE, difficulty: ProbeDifficulty.DEVELOPING,
+    stem: 'Which sentence is correct — "I need an advice about this" or "I need some advice about this"?',
+    choices: [
+      { text: '"Some advice" — advice is uncountable, so it takes "some", not "an", the way you would say "some water" rather than "a water"', isCorrect: true },
+      { text: '"An advice" — advice is a noun, so "a"/"an" works with it exactly like with any other singular noun', isCorrect: false, misconceptionId: 'eng.grammar.nouns:MC-COUNTABLE-VS-UNCOUNTABLE-IS-ARBITRARY' },
+    ],
+    correctValue: 'some advice',
+    targetedMisconceptions: ['eng.grammar.nouns:MC-COUNTABLE-VS-UNCOUNTABLE-IS-ARBITRARY'],
+    source: src('eng.grammar.nouns', 'MC-COUNTABLE-VS-UNCOUNTABLE-IS-ARBITRARY, a third angle (the a/an test rather than plural -s or unit-counting) so a learner who has already met the "furniture"/"advice" examples still faces a genuinely new question'),
+  },
+]
+
+const BLENDING_DEPTH: SeedProbe[] = [
+  {
+    conceptId: 'eng.phonics.blending-segmenting', subjectSlug: S, probeKind: 'checkpoint',
+    gradeBand: GradeBand.EARLY, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: 'You break the word "fish" into its smallest sounds. Is "fi-sh" (two chunks) the full segmentation, or is there more to do?',
+    choices: [
+      { text: 'There is more to do — /f/, /i/ and /sh/ are three separate sounds; "sh" is one sound (a digraph) but "fi" is still two: /f/ and /i/', isCorrect: true },
+      { text: '"Fi-sh" is fully segmented — two chunks is as small as the word can be broken', isCorrect: false, misconceptionId: 'eng.phonics.blending-segmenting:MC-SEGMENTING-STOPS-AT-SYLLABLES' },
+    ],
+    correctValue: 'there is more to do',
+    targetedMisconceptions: ['eng.phonics.blending-segmenting:MC-SEGMENTING-STOPS-AT-SYLLABLES'],
+    source: src('eng.phonics.blending-segmenting', 'MC-SEGMENTING-STOPS-AT-SYLLABLES, re-asked with "fish" (a single-syllable word, so the stopping-point error appears at the sound level rather than the syllable level) rather than the existing "rabbit" example'),
+  },
+]
+
+export const ENGLISH_BAND_GAP_PROBES: SeedProbe[] = [
+  ...NOUNS_GAP, ...BLENDING_GAP, ...NOUNS_DEPTH, ...BLENDING_DEPTH,
+]
