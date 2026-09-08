@@ -12162,8 +12162,8 @@ const GALV_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.HIGH,
     stem: "For 2Al + 3Cu²⁺ → 2Al³⁺ + 3Cu, what value of n goes into the Nernst equation?",
     choices: [
-      { text: "6 — the number of electrons ACTUALLY TRANSFERRED once the half-reactions are balanced against each other: 2Al → 2Al³⁺ + 6e⁻ and 3Cu²⁺ + 6e⁻ → 3Cu. n is not read off the coefficients of the species in the overall equation; it is the electron count that the two half-reactions had to share to cancel", isCorrect: true },
-      { text: "3 — take the largest coefficient in the balanced equation as written, which is the 3 in front of Cu²⁺", isCorrect: false, misconceptionId: `${GALV}:MC2` },
+      { text: "6 — the electrons transferred once the half-reactions are balanced: 2Al → 2Al³⁺ + 6e⁻ and 3Cu²⁺ + 6e⁻ → 3Cu", isCorrect: true },
+      { text: "3 — the largest coefficient in the overall balanced equation, the 3 in front of Cu²⁺", isCorrect: false, misconceptionId: `${GALV}:MC2` },
     ],
     correctValue: "6 — the electrons transferred, from the balanced half-reactions",
     difficulty: ProbeDifficulty.PROFICIENT,

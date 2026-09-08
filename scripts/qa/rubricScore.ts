@@ -147,7 +147,7 @@ const CONFIRMS = new RegExp([
   "\\b(that|this) ?'?s right\\b", "\\bthat is right\\b",
   "\\byou'?re right\\b", "\\byou are right\\b", "\\bquite right\\b",
   "\\byou'?ve got it\\b", "\\bgot it right\\b", "\\byou nailed\\b",
-  "\\bgood job\\b", "\\byes[,!.]",
+  "\\bgood job\\b", "\\bgreat job\\b", "\\byes[,!.]",
 ].join('|'), 'i')
 const FILLER = /let'?s stay with this idea|let'?s take a moment|take a moment to think|let'?s pause here/i
 /** A turn spent teaching the learner how to OPERATE the tutor instead of the

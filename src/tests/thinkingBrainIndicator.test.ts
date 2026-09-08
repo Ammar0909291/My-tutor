@@ -246,6 +246,97 @@ describe('D — the orbital ring and the travelling spark', () => {
   })
 })
 
+describe('F — kesari/amber recolour (2026-09-08): the indicator no longer disappears', () => {
+  const css = readFileSync(join(__dirname, '../components/learn/ThinkingBrain.module.css'), 'utf8')
+  const root = postcss.parse(css)
+
+  function declOf(selector: string, prop: string): string | undefined {
+    let found: string | undefined
+    root.walkRules(selector, (rule) => {
+      rule.walkDecls(prop, (decl) => { found = decl.value })
+    })
+    return found
+  }
+
+  it('the brain icon, the ring, the sparkle particles and the travelling spark all use the SAME kesari token (--yellow), not the stale pre-Study-Board --indigo/--coral', () => {
+    for (const selector of ['.brainIcon', '.particleDot', '.spark']) {
+      const prop = selector === '.spark' ? 'background' : 'color'
+      expect(declOf(selector, prop), selector).toMatch(/var\(--yellow,\s*#C97A22\)/)
+    }
+    expect(declOf('.orbitTrack', 'border')).toMatch(/var\(--yellow,\s*#C97A22\)/)
+    expect(declOf('.brainGlow', 'background')).toMatch(/var\(--yellow,\s*#C97A22\)/)
+    // The old colours are gone from actual CSS declarations, not merely
+    // unused — comments are allowed to name them for historical context
+    // (several already do, explaining WHY the recolour happened), so
+    // strip comments before checking rather than banning the substring
+    // outright.
+    const cssWithoutComments = css.replace(/\/\*[\s\S]*?\*\//g, '')
+    expect(cssWithoutComments).not.toContain('--indigo')
+    expect(cssWithoutComments).not.toContain('--coral')
+    expect(cssWithoutComments).not.toContain('6C5CE7')
+    expect(cssWithoutComments).not.toContain('FF7B6B')
+  })
+
+  it('the ring is meaningfully more visible than before: thicker stroke, higher opacity, and its own glow', () => {
+    expect(declOf('.orbitTrack', 'border')).toMatch(/1\.5px/)
+    expect(Number(declOf('.orbitTrack', 'opacity'))).toBeGreaterThanOrEqual(0.5)
+    expect(declOf('.orbitTrack', 'box-shadow')).toBeDefined()
+  })
+
+  it('the ring carries its own slow glow-pulse animation ALONGSIDE its existing rotation, in the 2-4s band', () => {
+    const rule = declOf('.orbitTrack', 'animation')!
+    expect(rule).toContain('brainOrbit 7s linear infinite reverse')
+    const pulseMatch = /ringGlowPulse\s+(\d+(?:\.\d+)?)s/.exec(rule)
+    expect(pulseMatch).not.toBeNull()
+    const seconds = Number(pulseMatch![1])
+    expect(seconds).toBeGreaterThanOrEqual(2)
+    expect(seconds).toBeLessThanOrEqual(4)
+    expect(css).toMatch(/@keyframes ringGlowPulse\s*\{[\s\S]*box-shadow[\s\S]*\}/)
+  })
+
+  it('the ring rotation itself is UNCHANGED by the recolour (still >=5s, still reverse) — the pre-existing D-block test pins the same thing; this just guards the exact selector this task touched', () => {
+    const rule = declOf('.orbitTrack', 'animation')!
+    const duration = Number(/brainOrbit\s+(\d+(?:\.\d+)?)s/.exec(rule)![1])
+    expect(duration).toBeGreaterThanOrEqual(5)
+    expect(rule).toContain('reverse')
+  })
+
+  it('reduced motion still leaves a visible, statically-glowing kesari ring — box-shadow/opacity/border-colour are declared OUTSIDE the animation, so "animation: none" cannot blank them', () => {
+    // .orbitTrack's own base declarations (not inside @keyframes) are what
+    // "animation: none" falls back to. If box-shadow only ever existed
+    // inside a keyframe, reduced motion would show a ring with no glow at
+    // all — the exact regression this test exists to catch.
+    const trackRuleText = (() => {
+      let text = ''
+      root.walkRules('.orbitTrack', (rule) => { text = rule.toString() })
+      return text
+    })()
+    expect(trackRuleText).toMatch(/box-shadow:\s*0 0 8px 0 var\(--yellow/)
+    expect(trackRuleText).toMatch(/opacity:\s*0\.5/)
+    // And the existing reduced-motion block (unchanged selector) genuinely
+    // turns the animation off for this element.
+    let disablesIt = false
+    root.walkAtRules('media', (atRule) => {
+      if (!/prefers-reduced-motion:\s*reduce/.test(atRule.params)) return
+      atRule.walkRules((rule) => {
+        if (rule.selector.split(',').map((s) => s.trim()).includes('.orbitTrack')) {
+          rule.walkDecls('animation', (decl) => { if (decl.value === 'none') disablesIt = true })
+        }
+      })
+    })
+    expect(disablesIt).toBe(true)
+  })
+
+  it('does not touch the brain-breathe / glow-pulse timing (still 1.5-2.5s, per the existing D-block test) — only colour and the ring changed', () => {
+    for (const name of ['brainBreathe', 'brainGlowPulse']) {
+      const rule = new RegExp(`animation:\\s*${name}\\s+(\\d+(?:\\.\\d+)?)s`)
+      const seconds = Number(rule.exec(css)![1])
+      expect(seconds, name).toBeGreaterThanOrEqual(1.5)
+      expect(seconds, name).toBeLessThanOrEqual(2.5)
+    }
+  })
+})
+
 describe('E — "preparing the figure" is a different moment, and says so', () => {
   const css = readFileSync(join(__dirname, '../components/learn/ThinkingBrain.module.css'), 'utf8')
   const tree = VisualPreparing({}) as any

@@ -33,6 +33,7 @@ import {
   mcqToServe,
   gradeMcqAnswer,
   MCQ_REOFFER_DISAMBIGUATION,
+  isRestatementOfPending,
   type TutorMCQ,
 } from '@/lib/teaching/mcq'
 import { isBareAcknowledgement } from '@/lib/teaching/masteryGate'
@@ -50,7 +51,11 @@ function reofferGuard(
   message: string,
 ): string {
   const served = mcqToServe(mcqHoisted, pending, grade)
-  const isReoffer = served !== null && mcqHoisted === null
+  // WIDENED: the model can independently re-emit its own <!--MCQ--> tag
+  // restating the SAME pending question — measured live, phys.mod.photons,
+  // 2026-09-08 — which makes `mcqHoisted` non-null even though nothing new
+  // was actually asked. See isRestatementOfPending's own header.
+  const isReoffer = (served !== null && mcqHoisted === null) || isRestatementOfPending(mcqHoisted, pending)
   const ti = readTurnIntent(message, null)
   const genuineUnmappedAttempt =
     isReoffer
@@ -170,15 +175,46 @@ describe('it does NOT fire unless a pending probe is actually being re-offered',
   })
 })
 
+describe('the model restating the SAME pending question is still a re-offer', () => {
+  const model = 'Some teaching.'
+  // Measured live, phys.mod.photons, 2026-09-08: the gate correctly declined
+  // (a probe was already pending) but the model independently re-emitted a
+  // tag restating that exact question — `mcqHoisted` non-null, `isReoffer`
+  // previously false, lead-in silently skipped.
+  const RESTATED: TutorMCQ = { ...PENDING, question: 'Which particle carries electromagnetism?' }
+  const DIFFERENT: TutorMCQ = { ...PENDING, question: 'What is the rest mass of a photon?' }
+
+  it('fires the lead-in when the freshly-attached question normalises to the pending one', () => {
+    expect(reofferGuard(model, RESTATED, PENDING, null, UNMAPPED))
+      .toBe(`${MCQ_REOFFER_DISAMBIGUATION}\n\n${model}`)
+  })
+
+  it('does NOT fire for a genuinely different freshly-attached question', () => {
+    expect(reofferGuard(model, DIFFERENT, PENDING, null, UNMAPPED)).toBe(model)
+  })
+
+  it('isRestatementOfPending itself: null-safe, normalises case/whitespace, requires both present', () => {
+    expect(isRestatementOfPending(null, PENDING)).toBe(false)
+    expect(isRestatementOfPending(PENDING, null)).toBe(false)
+    expect(isRestatementOfPending(null, null)).toBe(false)
+    expect(isRestatementOfPending(RESTATED, PENDING)).toBe(true)
+    expect(isRestatementOfPending(DIFFERENT, PENDING)).toBe(false)
+  })
+})
+
 describe('the guard is wired at the response boundary and reuses the shared lead-in', () => {
   const ROUTE = readFileSync(join(process.cwd(), 'src/app/api/learn/chat/route.ts'), 'utf8')
 
-  it('imports the single shared lead-in constant from the mcq module', () => {
-    expect(ROUTE).toMatch(/MCQ_REOFFER_DISAMBIGUATION\s*\}\s*=\s*await import\('@\/lib\/teaching\/mcq'\)/)
+  it('imports the shared lead-in constant AND the restatement check from the mcq module', () => {
+    expect(ROUTE).toMatch(/MCQ_REOFFER_DISAMBIGUATION,\s*isRestatementOfPending\s*\}\s*=\s*\n?\s*await import\('@\/lib\/teaching\/mcq'\)/)
   })
 
   it('fires only on a re-offer AND a non-ack, non-practice, non-question attempt', () => {
-    expect(ROUTE).toContain('const isReoffer = servedReoffer !== null && mcqHoisted === null')
+    expect(ROUTE).toContain(
+      'const isReoffer =\n'
+      + '          (servedReoffer !== null && mcqHoisted === null)\n'
+      + '          || isRestatementOfPending(mcqHoisted, pendingMcqHoisted)',
+    )
     expect(ROUTE).toMatch(/mcqGradeHoisted === null/)
     expect(ROUTE).toMatch(/!isBareAckHoisted/)
     expect(ROUTE).toMatch(/!turnIntent\.wantsPractice/)

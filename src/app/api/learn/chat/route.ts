@@ -9691,7 +9691,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // before the empty-with-probe backstop below so that when the model text is
       // empty this lead-in stands alone rather than stacking two lead-ins.
       {
-        const { mcqToServe: mcqToServeForReoffer, MCQ_REOFFER_DISAMBIGUATION } = await import('@/lib/teaching/mcq')
+        const { mcqToServe: mcqToServeForReoffer, MCQ_REOFFER_DISAMBIGUATION, isRestatementOfPending } =
+          await import('@/lib/teaching/mcq')
         const { detectLearnerQuestion } = await import('@/lib/teaching/conversationState')
         const servedReoffer = mcqToServeForReoffer(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted)
         // `mcqToServe` returns the freshly-attached probe when one exists, so
@@ -9700,7 +9701,21 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // carries a pending probe forward when nothing graded this turn, so an
         // answer that DID grade (even wrong) consumes the probe and never reaches
         // here.
-        const isReoffer = servedReoffer !== null && mcqHoisted === null
+        //
+        // WIDENED (2026-09-08, measured live on phys.mod.photons): `mcqHoisted`
+        // is set from EITHER the gate's own selection OR the model's own
+        // `<!--MCQ-->` tag. When the gate correctly declines (a probe is
+        // already pending) but the MODEL independently re-emits a tag
+        // restating that SAME question, `mcqHoisted` is non-null even though
+        // nothing new was actually asked — and the disambiguation lead-in
+        // stayed silent on exactly the turn a hedging learner needed it, while
+        // an identical hedge one turn later (when the model stayed quiet)
+        // correctly triggered it. `isRestatementOfPending` treats "still the
+        // one pending question, however it got rendered this turn" as a
+        // re-offer too — see its own header for the full trace.
+        const isReoffer =
+          (servedReoffer !== null && mcqHoisted === null)
+          || isRestatementOfPending(mcqHoisted, pendingMcqHoisted)
         const genuineUnmappedAttempt =
           isReoffer
           && mcqGradeHoisted === null
@@ -9721,6 +9736,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           && turnIntent.learnerRequest === null
         if (genuineUnmappedAttempt && !cleanText.includes(MCQ_REOFFER_DISAMBIGUATION)) {
           console.log('[mcq-reoffer-disambiguation] ungradeable answer against a pending probe — prompting a tap')
+          // THE CONTRADICTION FIX (2026-09-08): this branch means the SERVER
+          // could not grade the answer — but the MODEL, reading the same raw
+          // text, sometimes recognised an embedded correct option and opened
+          // its own reply praising it ("Exactly right — magnetization is the
+          // order parameter..."). Reproduced live on 3 different concepts.
+          // Strip that opening claim before prepending the honest lead-in, so
+          // the learner is never told both "I couldn't tell what you picked"
+          // and "you picked correctly" in the same message. See
+          // stripLeadingFalseConfirmation's own header for why this is
+          // scoped to the opening sentence only.
+          const { stripLeadingFalseConfirmation } = await import('@/lib/teaching/answerConfirmation')
+          cleanText = stripLeadingFalseConfirmation(cleanText)
           cleanText = cleanText.trim()
             ? `${MCQ_REOFFER_DISAMBIGUATION}\n\n${cleanText}`
             : MCQ_REOFFER_DISAMBIGUATION

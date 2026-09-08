@@ -352,6 +352,52 @@ export const DISCOURSE_NOUNS = new Set([
   // slowly" keeps `diffraction` and still names its topic.
   'slowly', 'quickly', 'simply', 'clearly', 'easily', 'properly', 'briefly',
   'carefully', 'differently', 'easy', 'easier', 'slower', 'faster',
+  // THE BARE ADJECTIVE, DROPPED "-LY" — the same manner-adverb defect, one
+  // step further into weak-English grammar.
+  //
+  // MEASURED (real English-learner report, `eng.grammar.nouns`, 2026-09-08):
+  // "sorry i not understand, can you explain again slow, with easy example"
+  // extracted the topic {slow, easy} — 'easy' is discourse, 'slow' was not —
+  // so ONE non-discourse word survived and the phrase read as a genuine
+  // subject. An unresolved-topic excursion opened on "slow, with easy
+  // example" and the tutor abandoned Nouns to teach that instead, which is
+  // exactly why a real transcript showed it improvising basic
+  // counting/addition: told to "teach 'slow, with easy example' directly and
+  // properly," the model reached for the most literal "easy example" content
+  // it could invent.
+  //
+  // Every sibling adverb just above already has its bare form here except
+  // this one: 'quick' was added (line below, in the later batch), 'easy' was
+  // added, 'different' was added — 'slow' was the one left out, an omission
+  // rather than a decision, and the exact one a learner who drops "-ly" will
+  // reach for. Dropping the adverb suffix and using the adjective in its
+  // place ("explain slow", "explain clear", "explain careful") is documented
+  // ESL grammar, not a one-off typo, and it bites hardest on exactly the
+  // learner this whole list exists to protect.
+  //
+  // REPRODUCED, not guessed, for its two nearest siblings by running the
+  // same phrase shape through this exact function: "explain again clear,
+  // with easy example" and "...careful, with easy example" both open the
+  // identical unresolved excursion today, and a realistic phonics-lesson
+  // phrasing built the same way — "can you show me picture or diagram,
+  // explain slow for me" — also escapes, with the RAW title text (not the
+  // filtered word set) still carrying "diagram" verbatim into the directive
+  // handed to the model. That is the second reported defect
+  // (`eng.phonics.blending-segmenting` derailing into generic diagram/
+  // flowchart literacy): 'diagram' is itself correctly stopworded out of the
+  // word-set comparison (shared with `visualEngine.ts`'s STOPWORDS) and
+  // 'picture' is correctly recognised as a medium noun, but the leftover
+  // 'slow' was enough to make the whole phrase read as a name, and the
+  // TITLE STRING — unfiltered — still says "diagram" when it reaches the
+  // excursion directive.
+  //
+  // Checked against every concept title in all six registered subjects
+  // (1,775 concepts): 'slow' and 'careful' appear in none. 'proper' appears
+  // in exactly one, `math.found.proper-subset` ("Proper Subset") — safe for
+  // the same reason 'practice'/'check'/'main' already are: one surviving
+  // real word is enough, so "teach me proper subset" still keeps 'subset'
+  // and still names its topic.
+  'slow', 'clear', 'proper', 'careful',
   // ASKING FOR THE EXERCISE ITSELF — the Phase-7C defect.
   //
   // Measured in production, physics `phys.opt.total-internal-reflection`, a

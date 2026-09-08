@@ -1132,6 +1132,38 @@ export function mcqToServe(
 }
 
 /**
+ * Is `candidate` just the PENDING question again, under a different origin?
+ *
+ * ── THE GAP THIS CLOSES ──────────────────────────────────────────────────
+ * `mcqHoisted` (what route.ts calls `attachedThisTurn` above) is set from
+ * EITHER the gate's own selection OR the model's own `<!--MCQ-->` tag —
+ * `mcqHoisted = gateMcqHoisted ?? mcqParse.mcq`. So when the gate correctly
+ * declines (a probe is already pending and ungraded — `noUnansweredProbeOnScreen`
+ * is false) but the MODEL independently re-emits a tag restating that SAME
+ * question — measured live, 2026-09-08, `phys.mod.photons`: the learner
+ * hedged ("I'm not 100% sure but I'll guess") on a pending "energy of a
+ * photon" probe, and the model answered by re-tagging the identical question
+ * as its own A/B/C/D listing — `mcqHoisted` becomes non-null, so the I1
+ * disambiguation lead-in's `isReoffer` check (`mcqHoisted === null`) reads
+ * this as "something NEW was attached" and stays silent. One turn later, an
+ * identical hedge on the SAME still-pending probe correctly triggered the
+ * lead-in — the only thing that differed was whether the model happened to
+ * emit its own tag that turn, not anything about the learner's message.
+ *
+ * This answers the narrower, correct question `isReoffer` actually needs:
+ * not "was anything attached this turn" but "is what's on screen still the
+ * one pending, ungraded question" — true whether the SERVER or the MODEL is
+ * the one currently rendering it.
+ */
+export function isRestatementOfPending(
+  attachedThisTurn: TutorMCQ | null,
+  pending: TutorMCQ | null,
+): boolean {
+  if (!attachedThisTurn || !pending) return false
+  return norm(attachedThisTurn.question) === norm(pending.question)
+}
+
+/**
  * OPTION A (I1) lead-in: prepended by the route when a pending keyed MCQ is
  * re-offered because the learner's typed answer could not be mapped to any
  * option (a genuine attempt that `resolveMcqChoice` refused, NOT a bare
