@@ -234,6 +234,16 @@ async function bootstrapAssets() {
       // when not — so the zero-slack pool is not subject-specific.
       const { CHEMISTRY_DEPTH_PROBES } =
         await import('./lib/teaching/assets/chemistryDepthSeedAssets')
+      // English band-gap probes joined 2026-09-08. A direct production query
+      // found ALL 214 of 216 English (concept, band) pairs holding exactly 2
+      // ACTIVE closed-choice probes against the 3-probe contract — the same
+      // one-wrong-answer-empties-the-pool failure physics/chemistry already
+      // had. This file closes the two concepts a real-learner student-
+      // readiness validation required (`eng.grammar.nouns`,
+      // `eng.phonics.blending-segmenting`); the remaining 212 pairs are a
+      // separate, multi-session content campaign, not attempted here.
+      const { ENGLISH_BAND_GAP_PROBES } =
+        await import('./lib/teaching/assets/englishBandGapAssets')
       const { hashContent } = await import('./lib/teaching/assets/similarity')
       const { AssetFamily, AssetStatus, AuthorKind, ExplanationStyle, ProbeDifficulty } = await import('@prisma/client')
       // The ladder rungs a slug may carry, from the enum itself rather than a
@@ -242,7 +252,7 @@ async function bootstrapAssets() {
 
       const ALL_EXPLANATIONS = [...SEED_EXPLANATIONS, ...AUTHORED_EXPLANATIONS, ...CHEMISTRY_EXPLANATIONS]
       const ALL_PROBES = [...SEED_PROBES, ...AUTHORED_PROBES, ...CHEMISTRY_PROBES, ...PHYSICS_BAND_GAP_PROBES,
-        ...PHYSICS_DEPTH_PROBES, ...CHEMISTRY_DEPTH_PROBES]
+        ...PHYSICS_DEPTH_PROBES, ...CHEMISTRY_DEPTH_PROBES, ...ENGLISH_BAND_GAP_PROBES]
       // ADR 14 §13 (Item 6): ladder rungs get a difficulty segment; singleton
       // slots keep the identity they already have. One resolver drives BOTH
       // the pre-flight check and the write loop so they cannot disagree.
