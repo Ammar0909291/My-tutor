@@ -16,6 +16,16 @@ export interface VisualizationCacheClient {
     findUnique: (args: { where: { conceptKey: string } }) => Promise<{ code: string } | null>
     update: (args: { where: { conceptKey: string }; data: { renderCount: { increment: number } } }) => Promise<unknown>
     create: (args: { data: { conceptKey: string; code: string } }) => Promise<unknown>
+    /**
+     * Optional: present on a real Prisma client, absent on the narrow stubs
+     * some callers pass. `replaceVisualization` degrades to a no-op without
+     * it rather than throwing, because caching is never load-bearing.
+     */
+    upsert?: (args: {
+      where: { conceptKey: string }
+      create: { conceptKey: string; code: string }
+      update: { code: string }
+    }) => Promise<unknown>
   }
 }
 
@@ -75,4 +85,35 @@ export async function saveVisualization(
   await client.visualizationCache
     .create({ data: { conceptKey, code } })
     .catch(() => {})
+}
+
+/**
+ * Overwrite an existing row, where `saveVisualization` deliberately will not.
+ *
+ * THE DIFFERENCE MATTERS AND IS NOT A REFACTOR. `saveVisualization` is
+ * create-only so a race between two learners generating the same concept keeps
+ * the first result rather than flapping — right for a first write. But it makes
+ * a cached entry PERMANENT, and that is what turned one critic-rejected figure
+ * into a concept that could never be drawn again: the rejected candidate stayed
+ * in the cache, was re-offered on every turn, and re-earned its cached
+ * rejection forever.
+ *
+ * Used only where a caller has established that the stored value is a dead end
+ * and has a vetted replacement in hand. Best-effort like every other write
+ * here: a failure costs the next learner a regeneration, never this one their
+ * turn.
+ */
+export async function replaceVisualization(
+  conceptKey: string,
+  code: string,
+  client: VisualizationCacheClient = defaultPrisma,
+): Promise<void> {
+  if (!conceptKey || !code) return
+  const upsert = client.visualizationCache.upsert
+  if (!upsert) return
+  await upsert.call(client.visualizationCache, {
+    where: { conceptKey },
+    create: { conceptKey, code },
+    update: { code },
+  }).catch(() => {})
 }

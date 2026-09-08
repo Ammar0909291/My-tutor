@@ -42,11 +42,11 @@ import { generateConceptFigure, generateConceptScene, validateGeneratedFigure, f
 import { resolveServicePolicy, servesImmediately } from './generationPolicy'
 import { decideVisualNeed, mayIntroduceFigure } from './visualNeed'
 import { criticiseFigure, type CriticReport } from './figureCritic'
-import { kgTopicIdentity, runtimeTopicIdentity, isRuntimeTopicId, type TopicIdentity } from './topicIdentity'
+import { kgTopicIdentity, runtimeTopicIdentity, isRuntimeTopicId, groundingHash, type TopicIdentity } from './topicIdentity'
 import { requestedTopicIdentity } from './requestedTopic'
 import { checkBudgetsLive, type BudgetReader } from './generationBudget'
-import { readVerdict, writeVerdict, readDecline, writeDecline, figureFingerprint } from './verdictCache'
-import { getCachedVisualization } from '@/lib/teaching/visuals/visualizationCache'
+import { readVerdict, writeVerdict, readDecline, writeDecline, figureFingerprint, verdictKey } from './verdictCache'
+import { getCachedVisualization, replaceVisualization } from '@/lib/teaching/visuals/visualizationCache'
 import { startDeadline, NO_DEADLINE, type Deadline } from './turnDeadline'
 import type { SceneSpec } from '@/lib/teaching/sceneSpec'
 
@@ -977,10 +977,27 @@ export async function resolveVisualForTurn(
     if (deadline.expired()) return { ...decision, provenance: 'no-figure:retry-deadline-before-critic' }
     const retryCritic = deps.critic ?? ((f, c, budgetMs) => criticiseFigure(f, c, { budgetMs }))
     const retryVerdict = await retryCritic(retry.figure, ctx, deadline.remaining())
-    void writeVerdict(ctx, retryPayload, retryVerdict, deps.cacheClient)
     if (retryVerdict.decision !== 'promote') {
+      // The stale reject already stands for this concept; nothing to update.
       return { ...decision, provenance: `no-figure:retry-critic-${retryVerdict.decision}` }
     }
+    /**
+     * THE VETTED FIGURE REPLACES THE DEAD ONE.
+     *
+     * Both rows are create-only under `saveVisualization`, so without this the
+     * concept keeps serving from a retry on EVERY explicit request forever: the
+     * rejected candidate stays cached, the stale reject stays stored, and the
+     * work is redone each time. Replacing both is what makes the fix converge
+     * rather than merely paper over the turn.
+     */
+    void replaceVisualization(figureCacheKey(ctx.conceptId), JSON.stringify(retryPayload), deps.cacheClient)
+    void replaceVisualization(verdictKey(ctx.conceptId), JSON.stringify({
+      decision: 'promote' as const,
+      confidence: retryVerdict.confidence,
+      grounding: groundingHash(ctx),
+      figure: figureFingerprint(retryPayload),
+      judgedAt: Date.now(),
+    }), deps.cacheClient)
     return serve(retry.figure, `generated-retry:${ctx.conceptId}`)
   }
 

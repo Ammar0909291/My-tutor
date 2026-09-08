@@ -64,6 +64,12 @@ function makeCache(seed: Record<string, string> = {}) {
           return { code: data.code }
         },
         update: async () => ({}),
+        upsert: async ({ where, create, update }: {
+          where: { conceptKey: string }; create: { conceptKey: string; code: string }; update: { code: string }
+        }) => {
+          rows[where.conceptKey] = rows[where.conceptKey] !== undefined ? update.code : create.code
+          return { code: rows[where.conceptKey] }
+        },
       },
     } as never,
   }
@@ -199,5 +205,29 @@ describe('a concept with no source text is still declined honestly', () => {
     )
     expect(out.payload).toBeNull()
     expect(calls.generate).toBe(0)
+  })
+})
+
+describe('a promoted retry converges — the concept is not stuck paying forever', () => {
+  it('the vetted figure replaces the dead candidate, so the NEXT turn is free', async () => {
+    const calls = { generate: 0, critic: 0 }
+    const cache = await seedRejectedCandidate({ generate: 0, critic: 0 })
+    const d = deps(cache, { generate: () => FRESH, critic: promote, calls })
+
+    const first = await resolve(cache, d, 'Show me a diagram')
+    expect(first.payload).not.toBeNull()
+    expect(first.provenance).toContain('generated-retry')
+
+    // The stale rejected candidate and its reject verdict are both gone.
+    expect(JSON.parse(cache.rows[figureCacheKey(CONCEPT)])).toEqual(FRESH)
+    expect(JSON.parse(cache.rows[verdictKey(CONCEPT)]).decision).toBe('promote')
+
+    // So the next turn serves the SAME figure with no generation and no judge.
+    const genBefore = calls.generate
+    const criticBefore = calls.critic
+    const second = await resolve(cache, d, 'Show me a diagram')
+    expect(second.payload).not.toBeNull()
+    expect(calls.generate).toBe(genBefore)
+    expect(calls.critic).toBe(criticBefore)
   })
 })
