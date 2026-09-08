@@ -244,6 +244,13 @@ async function bootstrapAssets() {
       // separate, multi-session content campaign, not attempted here.
       const { ENGLISH_BAND_GAP_PROBES } =
         await import('./lib/teaching/assets/englishBandGapAssets')
+      // English probe-contract campaign, Batch 1 (2026-09-08): 15 MIDDLE-band
+      // grammar/vocab concepts re-measured at closed=2, brought to depth 3 via
+      // one additional 'checkpoint' probe each, reusing an already-registered
+      // misconception from a fresh example. See the file's own header for the
+      // corrected 212/194 scope measurement this campaign works from.
+      const { ENGLISH_PROBE_BATCH_1 } =
+        await import('./lib/teaching/assets/englishProbeBatch1')
       const { hashContent } = await import('./lib/teaching/assets/similarity')
       const { AssetFamily, AssetStatus, AuthorKind, ExplanationStyle, ProbeDifficulty } = await import('@prisma/client')
       // The ladder rungs a slug may carry, from the enum itself rather than a
@@ -252,7 +259,8 @@ async function bootstrapAssets() {
 
       const ALL_EXPLANATIONS = [...SEED_EXPLANATIONS, ...AUTHORED_EXPLANATIONS, ...CHEMISTRY_EXPLANATIONS]
       const ALL_PROBES = [...SEED_PROBES, ...AUTHORED_PROBES, ...CHEMISTRY_PROBES, ...PHYSICS_BAND_GAP_PROBES,
-        ...PHYSICS_DEPTH_PROBES, ...CHEMISTRY_DEPTH_PROBES, ...ENGLISH_BAND_GAP_PROBES]
+        ...PHYSICS_DEPTH_PROBES, ...CHEMISTRY_DEPTH_PROBES, ...ENGLISH_BAND_GAP_PROBES,
+        ...ENGLISH_PROBE_BATCH_1]
       // ADR 14 §13 (Item 6): ladder rungs get a difficulty segment; singleton
       // slots keep the identity they already have. One resolver drives BOTH
       // the pre-flight check and the write loop so they cannot disagree.
