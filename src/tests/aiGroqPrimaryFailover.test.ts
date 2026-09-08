@@ -219,11 +219,18 @@ describe('8. Pre-existing provider-chain behaviour that is not about ordering st
     expect(getAIRouter('en').providerNames).toEqual(['gemini'])
   })
 
-  it('the GROQ_MODEL default is openai/gpt-oss-120b (2026-09-06 owner instruction, reverses the 2026-08-21 A/B test default)', async () => {
+  // 2026-09-08 owner instruction: 20b is the default always and 120b is
+  // removed. Same assertion — that the default is pinned rather than drifting —
+  // restated against the current model, plus the removal itself.
+  it('the GROQ_MODEL default is openai/gpt-oss-20b, and 120b is gone from the router', async () => {
     delete process.env.GROQ_MODEL
     const fs = await import('node:fs')
     const src = fs.readFileSync('src/lib/ai/router.ts', 'utf8')
-    expect(src).toContain("process.env.GROQ_MODEL ?? 'openai/gpt-oss-120b'")
+    expect(src).toContain("process.env.GROQ_MODEL ?? 'openai/gpt-oss-20b'")
+    // No selectable 120b anywhere: not a default, not a named export, not on
+    // the certification allowlist. Comments recording the history are exempt.
+    const code = src.split('\n').filter((l) => !/^\s*(\*|\/\*|\/\/)/.test(l.trim()))
+    expect(code.join('\n')).not.toContain('gpt-oss-120b')
   })
 
   it('GROQ_MODEL env override still works, unaffected by the default change', async () => {

@@ -48,32 +48,30 @@ const OPENROUTER_MODEL = process.env.OPENROUTER_MODEL ?? 'deepseek/deepseek-chat
 // Gemini+OpenRouter outage together doesn't take teaching turns down.
 const GROQ_API_KEY = process.env.GROQ_API_KEY ?? ''
 /**
- * Default flipped BACK to gpt-oss-120b (2026-09-06, explicit owner
- * instruction), reversing the 2026-08-21 A/B-test-driven flip to gpt-oss-20b
- * described below. GROQ_MODEL env override still works for anyone who wants
- * 20b instead; GROQ_MODEL_20B below is the named fallback identifier for
- * that rollback, the same way GROQ_MODEL_120B was kept when the roles were
- * reversed.
+ * `openai/gpt-oss-20b` is THE Groq model, always (2026-09-08, explicit owner
+ * instruction: "set groq gpt 20b as default to use always, remove gpt 120b").
+ * gpt-oss-120b is removed from this file entirely — it is no longer the
+ * default, no longer a named identifier, and no longer selectable through the
+ * certification override, so no request can route a teaching turn to it.
  *
- * Prior reasoning (2026-08-21, superseded by the owner instruction above):
- * flipped to gpt-oss-20b after a real production A/B test on the identical
- * 12-concept chemistry certification batch: 10/12 PASS on both models, same
- * failure count, same failure class (a CHECK/PRACTICE turn ending in an open
- * problem instead of a graded MCQ), on a different concept per model — no
- * measurable quality difference at n=12. 20b measured 51.4% cheaper on the
- * real tokens consumed ($0.0774 vs $0.1593 for that batch). That cost
- * finding is not disputed; the owner chose to run the larger model as the
- * default regardless of it.
+ * History, kept because the reasoning is evidence and the decision reversed
+ * twice: 20b was made the default on 2026-08-21 after a production A/B test on
+ * the identical 12-concept chemistry certification batch — 10/12 PASS on both
+ * models, same failure count, same failure class, on a different concept per
+ * model, i.e. no measurable quality difference at n=12, with 20b measuring
+ * 51.4% cheaper on the real tokens consumed ($0.0774 vs $0.1593 for that
+ * batch). It was flipped to 120b on 2026-09-06 by owner instruction, and is
+ * flipped back here by the instruction above.
+ *
+ * `GROQ_MODEL` remains an env-level override so a future model can be adopted
+ * without a deploy. It is set by the owner on the deployment, never by a
+ * request — the request-level path is the allowlist below, which now contains
+ * this model alone.
  */
-const GROQ_MODEL = process.env.GROQ_MODEL ?? 'openai/gpt-oss-120b'
-/** Named 20b identifier — kept as an explicit, documented, reversible
- *  fallback (the previous default). Not read by the default chain; available
- *  for a manual rollback (set GROQ_MODEL=openai/gpt-oss-20b). */
+const GROQ_MODEL = process.env.GROQ_MODEL ?? 'openai/gpt-oss-20b'
+/** The one Groq model. Named so the string is not duplicated between the
+ *  default above and the certification allowlist below. */
 export const GROQ_MODEL_20B = 'openai/gpt-oss-20b'
-/** Named 120b identifier — now equal to the default chain's value. Kept for
- *  the certification override path (src/app/api/learn/chat/route.ts) and as
- *  an explicit reference so the string isn't duplicated. */
-export const GROQ_MODEL_120B = 'openai/gpt-oss-120b'
 
 /** The teaching language the learner selected. This is the ONLY routing signal. */
 export type TeachingLanguage = 'ru' | 'en' | 'hi'
@@ -144,7 +142,7 @@ export function isGeminiOnlyMode(): boolean {
  * client sends") so a spoofed header can at most select a real Groq model,
  * never arbitrary provider config.
  */
-const GROQ_CERT_MODEL_ALLOWLIST = ['openai/gpt-oss-20b', 'openai/gpt-oss-120b']
+const GROQ_CERT_MODEL_ALLOWLIST = [GROQ_MODEL_20B]
 
 export function isAllowedGroqCertModel(model: string | null | undefined): model is string {
   return !!model && GROQ_CERT_MODEL_ALLOWLIST.includes(model)

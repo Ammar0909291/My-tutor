@@ -55,16 +55,16 @@ afterEach(() => {
 })
 
 describe('groq A/B certification override', () => {
-  it('(a) no header/override -> production default model (120b, since the 2026-09-06 owner instruction)', async () => {
+  it('(a) no header/override -> production default model (20b, the only Groq model since 2026-09-08)', async () => {
     const { routeAI } = await import('@/lib/ai/router')
     const result = await routeAI(
       [{ role: 'user', content: 'hi' }], 'sys', 'IN', 800, 'en', undefined, undefined,
     )
     expect(result.provider).toBe('groq')
-    expect(groqModelsRequested).toEqual(['openai/gpt-oss-120b'])
+    expect(groqModelsRequested).toEqual(['openai/gpt-oss-20b'])
   })
 
-  it('(b) header present but caller passes no override (flag=false case) -> still the default (120b)', async () => {
+  it('(b) header present but caller passes no override (flag=false case) -> still the default (20b)', async () => {
     // Simulates route.ts's branch when modelOverrideAllowed is false: it never
     // sets groqModelOverride at all, so routeAI is called exactly like (a).
     const { routeAI } = await import('@/lib/ai/router')
@@ -72,13 +72,14 @@ describe('groq A/B certification override', () => {
       [{ role: 'user', content: 'hi' }], 'sys', 'IN', 800, 'en', undefined, undefined,
     )
     expect(result.provider).toBe('groq')
-    expect(groqModelsRequested).toEqual(['openai/gpt-oss-120b'])
+    expect(groqModelsRequested).toEqual(['openai/gpt-oss-20b'])
   })
 
-  it('(c) header + flag=true (caller supplies override) -> 20b used for this request', async () => {
-    // 20b is now the NON-default, reversible fallback the override exists to
-    // reach (GROQ_MODEL_20B) — the opposite direction from before the
-    // 2026-09-06 default revert, same mechanism.
+  it('(c) header + flag=true, requesting the one allowed model -> that model is used', async () => {
+    // 2026-09-08: with 120b removed, the allowlist holds 20b alone, so the
+    // override can no longer CHANGE the model — it can only ever re-select the
+    // default. The mechanism is kept and pinned so a future second model
+    // reaches it through the allowlist rather than around it.
     const { routeAI } = await import('@/lib/ai/router')
     const result = await routeAI(
       [{ role: 'user', content: 'hi' }], 'sys', 'IN', 800, 'en', undefined, 'openai/gpt-oss-20b',
@@ -91,13 +92,15 @@ describe('groq A/B certification override', () => {
     const { routeAI } = await import('@/lib/ai/router')
     await routeAI([{ role: 'user', content: 'hi' }], 'sys', 'IN', 800, 'en', undefined, 'openai/gpt-oss-20b')
     await routeAI([{ role: 'user', content: 'hi' }], 'sys', 'IN', 800, 'en', undefined, undefined)
-    expect(groqModelsRequested).toEqual(['openai/gpt-oss-20b', 'openai/gpt-oss-120b'])
+    expect(groqModelsRequested).toEqual(['openai/gpt-oss-20b', 'openai/gpt-oss-20b'])
   })
 
   it('isAllowedGroqCertModel rejects anything not on the closed allowlist (spoof resistance)', async () => {
     const { isAllowedGroqCertModel } = await import('@/lib/ai/router')
     expect(isAllowedGroqCertModel('openai/gpt-oss-20b')).toBe(true)
-    expect(isAllowedGroqCertModel('openai/gpt-oss-120b')).toBe(true)
+    // 120b was removed 2026-09-08 — a spoofed header naming it must be refused
+    // exactly like any other unknown model, not quietly honoured.
+    expect(isAllowedGroqCertModel('openai/gpt-oss-120b')).toBe(false)
     expect(isAllowedGroqCertModel('some-other-model')).toBe(false)
     expect(isAllowedGroqCertModel(undefined)).toBe(false)
     expect(isAllowedGroqCertModel(null)).toBe(false)
