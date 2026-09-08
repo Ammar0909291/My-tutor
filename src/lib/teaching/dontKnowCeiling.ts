@@ -53,7 +53,7 @@
  * stripped teaching and, failing that, leaves the turn alone rather than
  * shipping a hold sentence.
  */
-import { dropAnswerableContent } from './gateAssessment'
+import { dropAnswerableContent, salvageNonQuestionSentences } from './gateAssessment'
 import { askedAnswerableQuestion } from './answerableTurn'
 
 export interface DontKnowCeilingInput {
@@ -109,16 +109,11 @@ export function applyDontKnowCeiling(input: DontKnowCeilingInput): DontKnowCeili
     // of what a learner who has said "I don't know" three times needs.
     //
     // So when paragraph scope empties the turn, keep the sentences that are NOT
-    // questions. Deliberately local to this file rather than a change to the
-    // shared helper: that helper's paragraph scope is relied on elsewhere, and a
-    // fallback that only ever runs when the strict version returned nothing
-    // cannot make any other caller worse.
+    // questions. Shared with `withholdUngradedGateQuestion`, which needed the
+    // identical technique for a second trigger (a genuine direct learner
+    // question) — see `salvageNonQuestionSentences`'s own doc comment.
     if (kept.length === 0) {
-      const sentences = text.split(/(?<=[.!?])\s+/)
-      const statements = sentences.filter((x) => x.trim().length > 0 && !x.trim().endsWith('?'))
-      const rebuilt = statements.join(' ').trim()
-      // Only worth keeping if real teaching survived, not a stray lead-in.
-      if (rebuilt.length >= 60) kept = rebuilt
+      kept = salvageNonQuestionSentences(text)
     }
     const mcq = input.pendingMcq
     const options = Array.isArray(mcq?.options) ? mcq!.options : null

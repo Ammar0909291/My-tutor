@@ -435,6 +435,50 @@ export interface UngradedGateQuestionInput {
    * its exact prior behaviour.
    */
   gateBlockedByExcursion?: boolean
+  /**
+   * Did the LEARNER'S OWN message this turn ask a genuine, substantive
+   * question (`detectLearnerQuestion(message)`, the same signal route.ts
+   * already computes to drop a stray self-reported correctness claim — see
+   * the sibling guard around `teachingSignal.correctness` a few hundred
+   * lines up in route.ts)?
+   *
+   * ── THE DEFECT THIS CLOSES (real-student session, 2026-09, live account)──
+   * A learner asked a genuine follow-up ("so if I say 'if I study hard, I
+   * would pass exam' this is second conditional right? because I use
+   * would?") during a mastery-gate-active turn. The model's entire reply was
+   * apparently nothing but its own Socratic follow-up question — paragraph-
+   * scoped AND sentence-scoped salvage both came back empty — so the whole
+   * visible reply was `WITHHELD_QUESTION_CONTINUATION`, "Let's stay with
+   * this idea for a moment.", answering nothing. A direct question met with
+   * a content-free stall is a worse failure than any of the ones this file's
+   * other fields already fixed (a just-graded answer met with silence, a
+   * stray question beside a real MCQ) — the learner did not even get
+   * acknowledged as having asked something.
+   *
+   * ── WHY "LEAVE IT ALONE" IS SAFE HERE, NOT A NEW HOLE ─────────────────────
+   * `dontKnowCeiling.ts`'s own final fallback, for the identical dead end (no
+   * teaching to keep, no key to reveal), already leaves the turn's original
+   * text untouched rather than inventing a hold sentence — this generalizes
+   * that established precedent to a second trigger, it does not introduce a
+   * new one. Evidence integrity is unaffected: `correctAtCheck`/
+   * `correctAtPractice`'s VERIFIED counters move only from
+   * `mcqGradeHoisted` (a real server grade of an attached/pending MCQ), never
+   * from prose; and the route already drops a self-reported correctness
+   * claim on any turn where `detectLearnerQuestion(message)` is true (see
+   * the guard above `teachingSignal.correctness !== undefined`), so a raw
+   * Socratic follow-up surviving on screen cannot itself manufacture
+   * evidence for the turn that produced it.
+   *
+   * Only read when BOTH paragraph- and sentence-level salvage leave nothing,
+   * AND no grade fact is available to report instead (`justGraded` is
+   * null/absent) — every other path (real teaching survives, or the turn
+   * just graded an answer) is completely unaffected, including the existing
+   * `'What is the ratio of 6 to 10?'` regression test, which omits this
+   * field and must keep getting the plain placeholder. Optional and
+   * defaulting to false, so every existing caller keeps its exact prior
+   * behaviour.
+   */
+  learnerAskedDirectQuestion?: boolean
 }
 
 /** The route's own grade of the pending question, passed in, never derived. */
@@ -447,7 +491,7 @@ export interface GradedThisTurn {
 export interface UngradedGateQuestionResult {
   text: string
   withheld: boolean
-  reason: 'ok' | 'no-gradeable-probe' | 'stray-question-alongside-mcq'
+  reason: 'ok' | 'no-gradeable-probe' | 'stray-question-alongside-mcq' | 'left-for-direct-question'
 }
 
 /**
@@ -612,6 +656,29 @@ export function cutBackToTeaching(text: string): string {
   }
 }
 
+/**
+ * SENTENCE-LEVEL SALVAGE: keep the statements when the question shares a
+ * paragraph with real teaching.
+ *
+ * `dropAnswerableContent` (used above) is paragraph-scoped, and a model
+ * routinely writes the explanation and its question in ONE paragraph — this
+ * throws the explanation away with the question. Originally written local to
+ * `dontKnowCeiling.ts` for the repeated-"I don't know" ceiling; promoted here
+ * once `withholdUngradedGateQuestion` needed the identical technique for a
+ * second trigger (a genuine direct learner question — see
+ * `learnerAskedDirectQuestion` below), so both callers share one
+ * implementation rather than drifting.
+ *
+ * Only worth keeping if real teaching survived (>= 60 chars), not a stray
+ * lead-in fragment.
+ */
+export function salvageNonQuestionSentences(text: string): string {
+  const sentences = text.split(/(?<=[.!?])\s+/)
+  const statements = sentences.filter((x) => x.trim().length > 0 && !x.trim().endsWith('?'))
+  const rebuilt = statements.join(' ').trim()
+  return rebuilt.length >= 60 ? rebuilt : ''
+}
+
 export function withholdUngradedGateQuestion(
   input: UngradedGateQuestionInput,
 ): UngradedGateQuestionResult {
@@ -663,15 +730,31 @@ export function withholdUngradedGateQuestion(
     if (!poses) return { text: input.text, withheld: false, reason: 'ok' }
 
     // An introduction has nothing left to introduce — see `dropOrphanedLeadIn`.
-    const kept = dropOrphanedLeadIn(dropAnswerableContent(text))
+    const paragraphKept = dropOrphanedLeadIn(dropAnswerableContent(text))
+    // Paragraph scope throws real teaching away with the question whenever a
+    // model writes both in ONE paragraph (the common case). Try sentence
+    // scope before giving up — see `salvageNonQuestionSentences`.
+    const kept = paragraphKept.length > 0 ? paragraphKept : salvageNonQuestionSentences(text)
+    if (kept.length > 0) {
+      return { text: kept, withheld: true, reason: 'no-gradeable-probe' }
+    }
+
+    // NOTHING survived either salvage pass: the turn really was just a bare
+    // question. When the LEARNER's own message this turn was a genuine
+    // direct question and there is no grade fact to report instead, leaving
+    // the model's original text on screen is a better outcome than the
+    // content-free placeholder — see `learnerAskedDirectQuestion`'s doc
+    // comment for why this is safe and not a new evidence-integrity hole.
+    if (input.learnerAskedDirectQuestion === true && !input.justGraded) {
+      return { text: input.text, withheld: false, reason: 'left-for-direct-question' }
+    }
+
     return {
       // `questionOnScreen`, not `hasStructuredMcq`: a probe carried forward
       // from an earlier turn is on the learner's screen even though the gate
       // attached nothing here, and stalling in front of it is the defect this
       // sentence choice exists to avoid.
-      text: kept.length > 0
-        ? kept
-        : withheldContinuation(input.justGraded, input.questionOnScreen === true),
+      text: withheldContinuation(input.justGraded, input.questionOnScreen === true),
       withheld: true,
       reason: 'no-gradeable-probe',
     }

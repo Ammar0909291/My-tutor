@@ -74,6 +74,15 @@ export function buildConceptAnchorBlock(anchor: ConceptAnchor): string {
     // explicitly overrides everything above it. When one is NOT open — the
     // learner named something the curriculum cannot resolve — the rule below
     // is what governs, and it says: answer them.
-    `\n- Rule: Teach this concept unless the student asks for something else. If they ask about a different topic, or say they are confused about one, ANSWER THAT QUESTION properly and teach it at full standard — do not reduce it to a sentence, do not refuse it, and do not announce a return to this lesson while their question is still open. Come back to this concept once they say they are satisfied.`
+    `\n- Rule: Teach this concept unless the student asks for something else. If they ask about a different topic, or say they are confused about one, ANSWER THAT QUESTION properly and teach it at full standard — do not reduce it to a sentence, do not refuse it, and do not announce a return to this lesson while their question is still open. Come back to this concept once they say they are satisfied.` +
+    // Real-student session (2026-09): a learner's own casual phrase
+    // ("...you teach me this one at start", not a question, not a topic
+    // request) got literalized into an unrelated mini-lesson two turns
+    // later — "**Teaching 'one at start'**", complete with an off-topic
+    // recipe-writing practice question. A deterministic backstop
+    // (topicDrift.ts) catches the narrow, measured shape of this; this
+    // line addresses it at the source, for shapes the backstop cannot
+    // safely generalize to.
+    `\n- Never build a new teaching moment — a heading, a definition, an example set, a practice question — around a word or short phrase because the STUDENT happened to use it in passing. Only explain a word or phrase like that when it is genuinely part of "${anchor.title}", or when the student explicitly asked what it means.`
   )
 }

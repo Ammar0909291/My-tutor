@@ -5493,6 +5493,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       let modelProbeWithheld: import('@/lib/teaching/inventedProbeGuard').ModelProbeVerdict | null = null
       {
         const { decideModelProbe } = await import('@/lib/teaching/inventedProbeGuard')
+        // A LEARNER'S EXACT QUESTION MUST NOT COME BACK VERBATIM. Real-
+        // student session (2026-09): the model confirmed a just-graded
+        // correct answer and, in the SAME reply, wrote out the identical
+        // question it had asked two turns earlier — word for word. Reuses
+        // the exact fingerprint check `excludeProbeStem` already applies to
+        // AUTHORED probe selection; see `modelProbeAlreadyAsked`'s own doc
+        // comment in inventedProbeGuard.ts for why that check never covered
+        // a model-WRITTEN tag until now.
+        const { hasAskedMcq: hasAskedMcqForModelProbe } = await import('@/lib/teaching/teachingHistory')
         const d = decideModelProbe({
           // The ORIGINAL predicate, deliberately NOT the gate's E1-widened
           // copy: GUIDE and the mastery gates only. See the field's own note.
@@ -5501,6 +5510,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           modelOfferedProbe: mcqParse.mcq !== null,
           authoredProbesExist: authoredProbesExistHoisted,
           gateDeclinedByPolicy: gateDeclinedByPolicyHoisted,
+          modelProbeAlreadyAsked: mcqParse.mcq !== null && teachingHistoryHoisted !== null
+            && hasAskedMcqForModelProbe(teachingHistoryHoisted, mcqParse.mcq.question),
         })
         modelProbeVerdictHoisted = d.reason
         if (!d.serve && mcqParse.mcq !== null && gateMcqHoisted === null) {
@@ -7241,6 +7252,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               recoveryKeyHoisted === null &&
               (teachingSignal?.correctness === true || lowSignalAckHoisted === true)
             const { mcqToServe: mcqToServeForWithhold } = await import('@/lib/teaching/mcq')
+            const { detectLearnerQuestion: detectLearnerQuestionForWithhold } =
+              await import('@/lib/teaching/conversationState')
             const ungraded = withholdUngradedGateQuestion({
               text: cleanText,
               // The phase the turn was BUILT at — the same pre-fold value the
@@ -7304,6 +7317,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                       pendingMcqHoisted?.options?.[pendingMcqHoisted.correctIndex] ?? null,
                   }
                 : null,
+              // Real-student session (2026-09): a genuine direct question met
+              // with the bare content-free placeholder — see
+              // `learnerAskedDirectQuestion`'s doc comment in gateAssessment.ts.
+              // Same detector the route already uses a few hundred lines up to
+              // drop a stray self-reported correctness claim.
+              learnerAskedDirectQuestion: detectLearnerQuestionForWithhold(message),
             })
             if (ungraded.withheld) {
               console.warn('[gate-contract] ' + JSON.stringify({
@@ -7816,6 +7835,65 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       } catch (err) {
         // A repair must never break a turn.
         console.warn('[figure-reference] check skipped:', err)
+      }
+
+      // A LEARNER'S OWN INCIDENTAL PHRASING MUST NEVER BECOME A NEW LESSON
+      // TOPIC. Real-student session (2026-09): mid-Idioms-lesson, the
+      // learner wrote "...you teach me this one at start" (no question),
+      // and two turns later the model built an entire unrelated mini-lesson
+      // — "**Teaching 'one at start'**" — around a peanut-butter-sandwich
+      // recipe, complete with its own practice question. See
+      // topicDrift.ts's module docblock for why this is deliberately NOT a
+      // general topic-relevance check (that would strip this tutor's own
+      // best behaviour, cross-domain analogies) and NOT a bare heading
+      // check (that would strip legitimate new-vocabulary introductions,
+      // e.g. a real Idioms lesson explaining a NEW idiom) — only a phrase
+      // lifted verbatim from the learner's own non-question wording fires.
+      try {
+        const { stripLearnerPhraseDrift } = await import('@/lib/teaching/topicDrift')
+        const { detectLearnerQuestion: detectLearnerQuestionForDrift } =
+          await import('@/lib/teaching/conversationState')
+        const drift = stripLearnerPhraseDrift({
+          text: cleanText,
+          recentMessages: historyMessages,
+          currentMessage: message,
+          excursionActive: excursionActiveHoisted === true,
+          learnerAskedDirectQuestion: detectLearnerQuestionForDrift(message),
+        })
+        if (drift.stripped) {
+          console.warn('[topic-drift] ' + JSON.stringify({
+            event: 'learner-phrase-drift-stripped',
+            conceptId: resolvedConceptId ?? null,
+            removedPhrase: drift.removedPhrase,
+          }))
+          cleanText = drift.text
+        }
+      } catch (err) {
+        // A repair must never break a turn.
+        console.warn('[topic-drift] check skipped:', err)
+      }
+
+      // A DELIVERED FIGURE MUST BE INTRODUCED, NOT JUST ATTACHED.
+      // Real-student session (2026-09): a requested diagram sometimes
+      // appeared with the reply carrying no reference to it at all — nothing
+      // telling the learner what the new picture was for. See
+      // visualAcknowledgement.ts for why this is safe to add deterministically
+      // (it only ever appends a sentence built from the already-admitted
+      // asset's own fields, never a new claim) and why it is scoped to the
+      // turn that actually introduces the figure.
+      try {
+        const { ensureVisualAcknowledged } = await import('@/lib/teaching/visual/visualAcknowledgement')
+        const ack = ensureVisualAcknowledged(cleanText, visualDecisionHoisted, figureIntroducedThisTurn && visualFired)
+        if (ack.appended) {
+          console.warn('[visual-acknowledgement] ' + JSON.stringify({
+            event: 'unacknowledged-figure-introduced',
+            conceptId: resolvedConceptId ?? null,
+          }))
+          cleanText = ack.text
+        }
+      } catch (err) {
+        // A repair must never break a turn.
+        console.warn('[visual-acknowledgement] check skipped:', err)
       }
 
       // THE LESSON PLAN IS NOT THE LESSON. The EXPLANATION SEQUENCING LAW in

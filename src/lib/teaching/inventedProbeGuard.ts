@@ -67,6 +67,9 @@ export type ModelProbeVerdict =
   | 'authored-served'
   /** The model offered nothing to withhold. */
   | 'no-model-probe'
+  /** This exact question (fingerprint-matched) was already asked this
+   *  lesson — see `modelProbeAlreadyAsked`'s own doc comment. */
+  | 'model-probe-already-asked'
   /** Authored probes exist for this concept — the reviewed item wins. */
   | 'authored-probes-exist'
   /** The server ruled out a question this turn; the model may not override. */
@@ -113,11 +116,45 @@ export interface ModelProbeInput {
   /** The gate was ineligible for at least one POLICY reason (never for the
    *  capability gap alone). */
   gateDeclinedByPolicy: boolean
+  /**
+   * Does the model's OWN offered question (fingerprint-matched, the exact
+   * same test `excludeProbeStem` already applies to AUTHORED probe
+   * selection — `hasAskedMcq`/`memoryFingerprint`, reused, not re-derived)
+   * match something already asked this lesson?
+   *
+   * ── THE GAP THIS CLOSES ──────────────────────────────────────────────────
+   * `excludeProbeStem` (route.ts, the gate's own authored-probe selector)
+   * already guarantees a fresh probe every time — but only for probes drawn
+   * from `AUTHORED_PROBES`. It is never consulted for a MODEL-WRITTEN tag,
+   * because that path does not go through selection at all: the model
+   * writes its own `<!--MCQ-->` (or, since the JSON-fallback fix, a raw
+   * JSON-shaped one) straight into its reply.
+   *
+   * MEASURED (real-student session, 2026-09, live production, Rhetorical
+   * Appeals — a concept with a real gap in authored coverage, so
+   * `authoredProbesExist` was not `true` and this guard's existing rules
+   * let the model's own item through): the model confirmed a just-graded
+   * correct answer ("That's right.") and, IN THE SAME REPLY, wrote out the
+   * identical bike-lane/pathos question it had asked two turns earlier —
+   * word for word, including both option texts — evidently recalled from
+   * its own recent context rather than freshly composed. Nothing checked
+   * whether this "new" question was actually new.
+   *
+   * Optional and defaulting to false, so every existing caller and every
+   * existing test — none of which had a duplicate to report — keeps its
+   * exact prior behaviour.
+   */
+  modelProbeAlreadyAsked?: boolean
 }
 
 export function decideModelProbe(input: ModelProbeInput): ModelProbeDecision {
   if (input.gateServedAuthoredProbe) return { serve: false, reason: 'authored-served' }
   if (!input.modelOfferedProbe) return { serve: false, reason: 'no-model-probe' }
+  // Asking the identical question again is never useful, in ANY phase —
+  // checked before the phase gate below, which exists for a different
+  // reason (a wrong invented KEY cannot corrupt mastery below GUIDE) that
+  // has nothing to do with whether the QUESTION itself is a repeat.
+  if (input.modelProbeAlreadyAsked) return { serve: false, reason: 'model-probe-already-asked' }
   // Scoped to where the harm is. See probeWouldCountThisPhase.
   if (!input.probeWouldCountThisPhase) return { serve: true, reason: 'phase-does-not-count' }
   // Ordered so the STRONGEST evidence decides first: knowing a reviewed item
