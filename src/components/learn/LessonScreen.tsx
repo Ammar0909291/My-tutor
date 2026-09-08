@@ -51,6 +51,13 @@ import { parseLessonCompletionTag, parseMathCodeAnswerTags, parseAssessmentResul
 import { Card, CandyButton, Pill, EagleMascot, useConfetti } from '@/components/ui/candy'
 import katex from 'katex'
 import styles from './LessonScreen.module.css'
+import {
+  quickCheckMode as quickCheckModeFor,
+  setQuickCheckMode,
+  panelIsVisible,
+  questionIsVisible,
+  type QuickCheckWindowState,
+} from '@/lib/learn/quickCheckWindow'
 
 const MonacoEditor = dynamic(() => import('@monaco-editor/react'), { ssr: false })
 // react-three-fiber needs a real DOM/WebGL context — load client-only, same as Monaco.
@@ -1200,11 +1207,8 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   // as the server left it, reopenable from a chip. Keyed on `askedAt` so a
   // NEWLY served question always arrives expanded: a stale mode from the
   // previous question can never hide a fresh one.
-  const [quickCheckWindow, setQuickCheckWindow] = useState<{ askedAt: number; mode: 'expanded' | 'minimized' | 'closed' } | null>(null)
-  const quickCheckMode: 'expanded' | 'minimized' | 'closed' =
-    activeMcq && quickCheckWindow && quickCheckWindow.askedAt === activeMcq.askedAt
-      ? quickCheckWindow.mode
-      : 'expanded'
+  const [quickCheckWindow, setQuickCheckWindow] = useState<QuickCheckWindowState | null>(null)
+  const quickCheckMode = quickCheckModeFor(quickCheckWindow, activeMcq?.askedAt ?? null)
   // P6.6: the server-decided lesson completion payload. Presence of this state
   // ends the lesson in the UI — the learner never continues inside a completed
   // lesson, and the next lesson starts only when they choose to.
@@ -5529,7 +5533,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 it grades a typed reply, so no parallel scoring path can
                 drift — this is unchanged from before, only WHERE it renders
                 changed. */}
-            {activeMcq && !isStreaming && !lessonCompletion && quickCheckMode !== 'closed' && (
+            {activeMcq && !isStreaming && !lessonCompletion && panelIsVisible(quickCheckMode) && (
               <div
                 role="group"
                 aria-label={t('lc_answers_aria')}
@@ -5561,7 +5565,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                       aria-label={t('lc_qc_minimize')}
                       title={t('lc_qc_minimize')}
                       className={styles.quickCheckControl}
-                      onClick={() => setQuickCheckWindow({ askedAt: activeMcq.askedAt, mode: 'minimized' })}
+                      onClick={() => setQuickCheckWindow(setQuickCheckMode(activeMcq.askedAt, 'minimized'))}
                     >
                       &#8211;
                     </button>
@@ -5571,7 +5575,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                       aria-label={t('lc_qc_maximize')}
                       title={t('lc_qc_maximize')}
                       className={styles.quickCheckControl}
-                      onClick={() => setQuickCheckWindow({ askedAt: activeMcq.askedAt, mode: 'expanded' })}
+                      onClick={() => setQuickCheckWindow(setQuickCheckMode(activeMcq.askedAt, 'expanded'))}
                     >
                       &#9633;
                     </button>
@@ -5581,17 +5585,17 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                     aria-label={t('lc_qc_close')}
                     title={t('lc_qc_close')}
                     className={styles.quickCheckControl}
-                    onClick={() => setQuickCheckWindow({ askedAt: activeMcq.askedAt, mode: 'closed' })}
+                    onClick={() => setQuickCheckWindow(setQuickCheckMode(activeMcq.askedAt, 'closed'))}
                   >
                     &#215;
                   </button>
                 </div>
-                {quickCheckMode === 'expanded' && (
+                {questionIsVisible(quickCheckMode) && (
                 <div className={styles.displayFace} style={{ fontSize: 15.6, fontWeight: 600, color: 'var(--text-primary)', lineHeight: 1.4 }}>
                   {activeMcq.question}
                 </div>
                 )}
-                {quickCheckMode === 'expanded' && activeMcq.options.map((option, i) => (
+                {questionIsVisible(quickCheckMode) && activeMcq.options.map((option, i) => (
                   <button
                     key={`${i}-${option}`}
                     type="button"
@@ -5645,12 +5649,12 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 activeMcq is untouched, the server still holds the pending probe,
                 and the learner may reopen it or answer by typing. Without this
                 chip a close would strand the only tappable answer channel. */}
-            {activeMcq && !isStreaming && !lessonCompletion && quickCheckMode === 'closed' && (
+            {activeMcq && !isStreaming && !lessonCompletion && !panelIsVisible(quickCheckMode) && (
               <button
                 type="button"
                 aria-label={t('lc_qc_reopen')}
                 className={styles.quickCheckReopen}
-                onClick={() => setQuickCheckWindow({ askedAt: activeMcq.askedAt, mode: 'expanded' })}
+                onClick={() => setQuickCheckWindow(setQuickCheckMode(activeMcq.askedAt, 'expanded'))}
               >
                 {t('lc_quick_check_label')}
               </button>

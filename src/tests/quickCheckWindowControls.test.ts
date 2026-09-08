@@ -10,18 +10,23 @@ const I18N = read('src/lib/i18n.ts')
 // The Quick Check panel gained window controls (minimize / maximize / close).
 // They are PRESENTATION ONLY: the invariant these tests defend is that no
 // control can answer, grade, clear the pending assessment, or move mastery.
-const gateIdx = SRC.indexOf("{activeMcq && !isStreaming && !lessonCompletion && quickCheckMode !== 'closed' && (")
+// 2026-09-08: the gate and the mode derivation now read the pure
+// `quickCheckWindow` module (see quickCheckClosePreservesAssessment.test.ts,
+// which holds the RULE as behaviour). These assertions keep their original
+// job — that the controls in the panel cannot reach assessment state — and are
+// restated against the new shape rather than dropped.
+const gateIdx = SRC.indexOf("{activeMcq && !isStreaming && !lessonCompletion && panelIsVisible(quickCheckMode) && (")
 const PANEL = SRC.slice(gateIdx, SRC.indexOf('/* CLOSED:', gateIdx))
 const REOPEN = SRC.slice(SRC.indexOf('/* CLOSED:'), SRC.indexOf('{/* ── Input area ─'))
 
 describe('Quick Check window controls — presentation state', () => {
   it('1. the window mode is its own state, separate from activeMcq', () => {
-    expect(SRC).toContain("const [quickCheckWindow, setQuickCheckWindow] = useState<{ askedAt: number; mode: 'expanded' | 'minimized' | 'closed' } | null>(null)")
+    expect(SRC).toContain('const [quickCheckWindow, setQuickCheckWindow] = useState<QuickCheckWindowState | null>(null)')
+    expect(SRC).toContain("from '@/lib/learn/quickCheckWindow'")
   })
 
   it('2. a newly served question always arrives expanded (mode is keyed on askedAt)', () => {
-    expect(SRC).toContain('quickCheckWindow.askedAt === activeMcq.askedAt')
-    expect(SRC).toMatch(/\?\s*quickCheckWindow\.mode\s*\n\s*:\s*'expanded'/)
+    expect(SRC).toContain('quickCheckModeFor(quickCheckWindow, activeMcq?.askedAt ?? null)')
   })
 
   it('3. all three controls exist with accessible labels', () => {
@@ -34,16 +39,16 @@ describe('Quick Check window controls — presentation state', () => {
   })
 
   it('4. every control handler writes ONLY the window mode — no answer, no state change', () => {
-    const handlers = [...PANEL.matchAll(/onClick=\{\(\) => (setQuickCheckWindow\([^)]*\))\}/g)]
+    const handlers = [...PANEL.matchAll(/onClick=\{\(\) => setQuickCheckWindow\((setQuickCheckMode\([^)]*\))\)\}/g)]
     expect(handlers.length).toBe(3)
     for (const h of handlers) {
-      expect(h[1]).toContain('askedAt: activeMcq.askedAt')
+      expect(h[1]).toContain('activeMcq.askedAt')
     }
     // The one forbidden thing: a control must never take the answer path.
     // Scoped to CODE only — the region's own explanatory comment names these
     // very identifiers, and a substring check would match the prose.
     const controlRegion = PANEL
-      .slice(PANEL.indexOf('WINDOW CONTROLS'), PANEL.indexOf("{quickCheckMode === 'expanded' && ("))
+      .slice(PANEL.indexOf('WINDOW CONTROLS'), PANEL.indexOf('{questionIsVisible(quickCheckMode) && ('))
       .split('\n')
       .filter((line) => !/^\s*(\/\*|\*|\/\/|ONLY `|clears activeMcq)/.test(line.trim()) && !line.includes('*/'))
       .join('\n')
@@ -55,10 +60,10 @@ describe('Quick Check window controls — presentation state', () => {
   })
 
   it('5. minimize hides the question and options, keeps the labelled header', () => {
-    expect(PANEL).toContain("{quickCheckMode === 'expanded' && (\n")
-    expect(PANEL).toContain("{quickCheckMode === 'expanded' && activeMcq.options.map((option, i) => (")
+    expect(PANEL).toContain('{questionIsVisible(quickCheckMode) && (\n')
+    expect(PANEL).toContain('{questionIsVisible(quickCheckMode) && activeMcq.options.map((option, i) => (')
     // the header label is outside the expanded guard
-    expect(PANEL.indexOf("t('lc_quick_check_label')")).toBeLessThan(PANEL.indexOf("{quickCheckMode === 'expanded' &&"))
+    expect(PANEL.indexOf("t('lc_quick_check_label')")).toBeLessThan(PANEL.indexOf('{questionIsVisible(quickCheckMode)'))
   })
 
   it('6. minimized shows a maximize control instead of minimize', () => {
@@ -67,9 +72,9 @@ describe('Quick Check window controls — presentation state', () => {
 
   it('7. close hides the panel but leaves a reopen affordance — the MCQ is not lost', () => {
     const reopen = REOPEN
-    expect(reopen).toContain("quickCheckMode === 'closed' && (")
+    expect(reopen).toContain('!panelIsVisible(quickCheckMode) && (')
     expect(reopen).toContain("aria-label={t('lc_qc_reopen')}")
-    expect(reopen).toContain("mode: 'expanded'")
+    expect(reopen).toContain("'expanded'")
     expect(reopen).toContain('activeMcq && !isStreaming && !lessonCompletion')
     expect(reopen).not.toContain('setActiveMcq')
     expect(reopen).not.toContain('sendMessage')

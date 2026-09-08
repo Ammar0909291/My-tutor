@@ -140,8 +140,8 @@ describe('5/6 — MCQ renders only as a floating Quick Check, never an ordinary 
     // close). The invariant is unchanged — the panel renders only for an
     // active, non-streaming, non-completed MCQ — so the assertion is restated
     // against the new shape rather than dropped.
-    expect(SRC).toMatch(/\{activeMcq && !isStreaming && !lessonCompletion && quickCheckMode !== 'closed' && \(/)
-    const idx = SRC.indexOf("{activeMcq && !isStreaming && !lessonCompletion && quickCheckMode !== 'closed' && (")
+    expect(SRC).toMatch(/\{activeMcq && !isStreaming && !lessonCompletion && panelIsVisible\(quickCheckMode\) && \(/)
+    const idx = SRC.indexOf('{activeMcq && !isStreaming && !lessonCompletion && panelIsVisible(quickCheckMode) && (')
     const block = SRC.slice(idx, idx + 1200)
     // The class is now conditionally combined with the minimized modifier;
     // the floating class itself is still what positions the panel.

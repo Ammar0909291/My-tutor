@@ -45,7 +45,7 @@ import { criticiseFigure, type CriticReport } from './figureCritic'
 import { kgTopicIdentity, runtimeTopicIdentity, isRuntimeTopicId, type TopicIdentity } from './topicIdentity'
 import { requestedTopicIdentity } from './requestedTopic'
 import { checkBudgetsLive, type BudgetReader } from './generationBudget'
-import { readVerdict, writeVerdict, readDecline, writeDecline } from './verdictCache'
+import { readVerdict, writeVerdict, readDecline, writeDecline, figureFingerprint } from './verdictCache'
 import { getCachedVisualization } from '@/lib/teaching/visuals/visualizationCache'
 import { startDeadline, NO_DEADLINE, type Deadline } from './turnDeadline'
 import type { SceneSpec } from '@/lib/teaching/sceneSpec'
@@ -935,7 +935,53 @@ export async function resolveVisualForTurn(
   // input — measured on a 30-topic random cohort, 2 of 30 paid a model call for
   // that answer on every turn, indefinitely.
   if (cached?.decision === 'reject') {
-    return { ...decision, provenance: 'no-figure:critic-reject-cached' }
+    /**
+     * A REJECTED CANDIDATE IS NOT A VERDICT ON THE CONCEPT.
+     *
+     * The figure cache holds ONE candidate per concept, so the reject above is
+     * re-derived on every later turn against that same frozen candidate — and
+     * with nothing able to replace it, a single unlucky generation made the
+     * concept undrawable for the life of the verdict (measured in production on
+     * phys.em.energy-capacitor: `no-figure:critic-reject-cached` on EVERY turn,
+     * including the opening, while four explicit "show me a diagram" requests
+     * went unanswered).
+     *
+     * So when the learner has actually ASKED, the cached candidate is treated
+     * as the dead end it is and ONE fresh candidate is generated. Scoped to an
+     * explicit request on purpose: the ordinary teaching turn keeps the cheap
+     * cached refusal, which is what stops this from becoming a per-turn cost.
+     *
+     * NOTHING DOWNSTREAM IS RELAXED. The new candidate is validated and judged
+     * exactly like any other and is served only on a promote — the rejected
+     * figure itself is never served, and a second reject simply returns no
+     * figure. Budget and deadline both still apply, and the budget was already
+     * spent above, so this cannot be used to escape either bound.
+     */
+    const askedForIt = input.learnerRequest === 'diagram'
+    if (!askedForIt || deadline.expired()) {
+      return { ...decision, provenance: 'no-figure:critic-reject-cached' }
+    }
+    const retry = await generateConceptFigure(ctx, {
+      purpose: decision.purpose, ...deps, budgetMs: deadline.remaining(), ignoreCachedFigure: true,
+    })
+    if (!retry.ok) {
+      void writeDecline(ctx, retry.reason, deps.cacheClient)
+      return { ...decision, provenance: `no-figure:retry-${retry.reason}` }
+    }
+    const retryPayload = retry.figure.kind === 'scene' ? retry.figure.scene : retry.figure.spec
+    if (figureFingerprint(retryPayload) === figureFingerprint(figurePayload)) {
+      // The generator produced the same figure again. Judging it would ask an
+      // identical question of identical input; the cached answer stands.
+      return { ...decision, provenance: 'no-figure:retry-identical-figure' }
+    }
+    if (deadline.expired()) return { ...decision, provenance: 'no-figure:retry-deadline-before-critic' }
+    const retryCritic = deps.critic ?? ((f, c, budgetMs) => criticiseFigure(f, c, { budgetMs }))
+    const retryVerdict = await retryCritic(retry.figure, ctx, deadline.remaining())
+    void writeVerdict(ctx, retryPayload, retryVerdict, deps.cacheClient)
+    if (retryVerdict.decision !== 'promote') {
+      return { ...decision, provenance: `no-figure:retry-critic-${retryVerdict.decision}` }
+    }
+    return serve(retry.figure, `generated-retry:${ctx.conceptId}`)
   }
 
   if (!cached) {

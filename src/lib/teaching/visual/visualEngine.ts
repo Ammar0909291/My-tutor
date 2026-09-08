@@ -463,6 +463,22 @@ export async function generateConceptScene(
     /** The turn's teaching purpose — guidance for generation, see the prompt. */
     purpose?: string
     /**
+     * SKIP THE FIGURE CACHE FOR THIS ONE CALL, and generate afresh.
+     *
+     * The cache holds ONE candidate per concept. That is right for the ordinary
+     * path — a concept costs at most one generation for the whole platform —
+     * but it means a candidate the critic REJECTED is the only candidate that
+     * will ever be offered for it, and the cached rejection then reads as a
+     * permanent verdict on the CONCEPT rather than on that one attempt.
+     *
+     * Set only by a caller that has established the cached candidate is a dead
+     * end and that a fresh attempt is warranted (resolveVisualForTurn, on an
+     * explicit learner request). It never relaxes anything downstream: the new
+     * candidate is validated and judged exactly like any other, and is served
+     * only on a promote.
+     */
+    ignoreCachedFigure?: boolean
+    /**
      * Where every attempt is written down, accepted or rejected. Optional: with
      * no sink the engine behaves exactly as before, which is what keeps the
      * audit trail from ever being able to fail a lesson.
@@ -762,7 +778,7 @@ export async function generateConceptFigure(
 
   const key = figureCacheKey(ctx.conceptId)
   try {
-    const cached = await getCachedVisualization(key, deps.cacheClient)
+    const cached = deps.ignoreCachedFigure ? null : await getCachedVisualization(key, deps.cacheClient)
     if (cached?.code) {
       const validated = validateGeneratedFigure(JSON.parse(cached.code) as unknown, ctx, { requireAxisLabels: true })
       if (validated.ok) return await finish({ ...validated, cached: true }, true)
