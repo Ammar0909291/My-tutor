@@ -40,7 +40,6 @@ const MAX_COMPONENTS = 6
 const MAX_UNIT_LEN = 10
 const VALUE_BOUND = 10000
 const VOLTAGE_BOUND = 1000
-const RADIUS = 8
 
 function isValidComponent(raw: unknown): raw is CircuitComponent {
   if (!raw || typeof raw !== 'object') return false
@@ -97,33 +96,88 @@ function branchResults(params: CircuitParams, resistors: number[], rTotal: numbe
   )
 }
 
-/** Evenly spaced positions for `n` nodes on a circle of radius RADIUS, starting at angle 0. */
-function loopPositions(n: number): Vec3[] {
-  return Array.from({ length: n }, (_, i) => {
-    const angle = (2 * Math.PI * i) / n
-    return [round(RADIUS * Math.cos(angle)), round(RADIUS * Math.sin(angle)), 0] as Vec3
-  })
+/**
+ * SCHEMATIC LAYOUT — why this is not a ring.
+ *
+ * This generator laid the battery and every resistor on a REGULAR POLYGON of
+ * identical spheres: two resistors produced an equilateral triangle of dots
+ * joined by three straight wires. Measured consequences, all of them reported
+ * from a real lesson:
+ *
+ *   · a triangle of floating nodes does not read as a circuit at all;
+ *   · SERIES AND PARALLEL PRODUCED THE IDENTICAL GEOMETRY — the one thing the
+ *     figure exists to teach was the one thing it could not express;
+ *   · labels were pushed radially outward at two radii, so a resistor's value
+ *     and its voltage drop crowded together in the same corner (the reported
+ *     "R2 = 20 Ω overlapping V2 = 8 V");
+ *   · the totals label sat at the bottom of the same ring, in that crowd.
+ *
+ * The replacement is the representation every learner has already seen: a
+ * rectangular loop, battery on the left rail, components on the horizontal
+ * rails. Series puts the resistors in ONE path, so the shared current is
+ * visible as a single line through both; parallel puts each on its own branch
+ * between two rails, so the split is visible as a fork. Reading the topology
+ * off the picture is now possible because the picture has a topology.
+ *
+ * Label slots are fixed, per component, on opposite sides of the rail it sits
+ * on. Two labels of one component can therefore never coincide, and no label
+ * is placed by pushing it away from a centre.
+ */
+const HALF_W = 9
+const HALF_H = 5
+
+/** Where each resistor sits along its rail, evenly spaced and never on a corner. */
+function resistorSlots(n: number): number[] {
+  return Array.from({ length: n }, (_, i) => round(-HALF_W + ((i + 1) * (2 * HALF_W)) / (n + 1)))
 }
 
-/** How much further out a branch-current label sits than its value label, so the two never coincide. */
-const CURRENT_LABEL_OFFSET = 2.6
+/** The battery's position — the left rail's midpoint, in both connections. */
+const BATTERY_POS: Vec3 = [-HALF_W, 0, 0]
 
 /**
- * Push a point away from the loop's centre, so a component's label sits beside
- * it rather than on top of it.
+ * The wire path.
  *
- * The components are laid on a circle centred at the origin, so "away from the
- * centre" is just the point's own direction. A component exactly at the centre
- * has no such direction (it cannot happen with `loopPositions`, but a
- * zero-length vector would produce NaN coordinates and a label the renderer
- * would silently drop), so it falls back to straight up.
+ * SERIES  one closed loop that passes THROUGH every resistor in turn: up the
+ *         left rail, across the top through each component, down the right
+ *         rail, back along the bottom. One path, so one current.
+ * PARALLEL a top rail and a bottom rail joined by one vertical branch per
+ *         resistor. Two junctions, so the current divides.
  */
-function outward(p: [number, number, number], extra = 0): [number, number, number] {
-  const [x, y, z] = p
-  const len = Math.hypot(x, y)
-  const gap = 1.8 + extra
-  if (len < 1e-6) return [x, y + gap, z]
-  return [x + (x / len) * gap, y + (y / len) * gap, z]
+function wireSegments(connection: 'series' | 'parallel', xs: number[]): { from: Vec3; to: Vec3 }[] {
+  if (connection === 'series') {
+    const path: Vec3[] = [
+      BATTERY_POS, [-HALF_W, HALF_H, 0],
+      ...xs.map((x) => [x, HALF_H, 0] as Vec3),
+      [HALF_W, HALF_H, 0], [HALF_W, -HALF_H, 0], [-HALF_W, -HALF_H, 0], BATTERY_POS,
+    ]
+    return path.slice(0, -1).map((from, i) => ({ from, to: path[i + 1] }))
+  }
+  const right = Math.max(HALF_W, ...xs)
+  return [
+    { from: BATTERY_POS, to: [-HALF_W, HALF_H, 0] },
+    { from: [-HALF_W, HALF_H, 0], to: [right, HALF_H, 0] },
+    { from: BATTERY_POS, to: [-HALF_W, -HALF_H, 0] },
+    { from: [-HALF_W, -HALF_H, 0], to: [right, -HALF_H, 0] },
+    ...xs.map((x) => ({ from: [x, HALF_H, 0] as Vec3, to: [x, -HALF_H, 0] as Vec3 })),
+  ]
+}
+
+/** Where a resistor's body sits: on the top rail in series, mid-branch in parallel. */
+function resistorPos(connection: 'series' | 'parallel', x: number): Vec3 {
+  return connection === 'series' ? [x, HALF_H, 0] : [x, 0, 0]
+}
+
+/**
+ * The two label slots for a component, chosen so they sit on OPPOSITE sides of
+ * the thing they name and can never collide with each other. `value` is the
+ * identifying label (R1 = 10 Ω), `branch` the quantity it carries.
+ */
+function labelSlots(connection: 'series' | 'parallel', x: number): { value: Vec3; branch: Vec3 } {
+  return connection === 'series'
+    // On the top rail: value above the wire, drop below it, inside the loop.
+    ? { value: [x, HALF_H + 1.7, 0], branch: [x, HALF_H - 1.9, 0] }
+    // On a vertical branch: value above the body, current below it.
+    : { value: [x, 1.8, 0], branch: [x, -1.9, 0] }
 }
 
 /** Build a circuit-loop SceneSpec: battery + resistors laid in a loop with connecting wires in step 1, per-resistor current/voltage-drop and totals in step 2. */
@@ -133,8 +187,8 @@ export function buildCircuitScene(params: CircuitParams): SceneSpec {
   const iTotal = params.voltage / rTotal
   const branches = branchResults(params, resistors, rTotal)
 
-  const positions = loopPositions(1 + resistors.length)
-  const batteryPos = positions[0]
+  const xs = resistorSlots(resistors.length)
+  const batteryPos = BATTERY_POS
 
   const battery: SceneObject = {
     type: 'node',
@@ -147,16 +201,16 @@ export function buildCircuitScene(params: CircuitParams): SceneSpec {
   const resistorNodes: SceneObject[] = resistors.map((r, i) => ({
     type: 'node',
     id: `resistor-${i}`,
-    position: positions[i + 1],
+    position: resistorPos(params.connection, xs[i]),
     color: '#3b82f6',
     radius: 0.5,
     properties: { value: round(r, 6), current: round(branches[i].current, 6), voltageDrop: round(branches[i].voltageDrop, 6) },
   }))
-  const wires: SceneObject[] = positions.map((p, i) => ({
+  const wires: SceneObject[] = wireSegments(params.connection, xs).map((seg, i) => ({
     type: 'bond',
     id: `wire-${i}`,
-    from: p,
-    to: positions[(i + 1) % positions.length],
+    from: seg.from,
+    to: seg.to,
   }))
 
   // ── THE COMPONENTS MUST SAY WHAT THEY ARE ─────────────────────────────────
@@ -182,7 +236,7 @@ export function buildCircuitScene(params: CircuitParams): SceneSpec {
     {
       type: 'label',
       id: 'battery-label',
-      position: outward(batteryPos),
+      position: [batteryPos[0] - 2.4, batteryPos[1], 0],
       text: `${round(params.voltage, 2)} V`,
       color: '#ef4444',
       properties: { voltage: round(params.voltage, 6) },
@@ -190,7 +244,7 @@ export function buildCircuitScene(params: CircuitParams): SceneSpec {
     ...resistors.map((r, i) => ({
       type: 'label' as const,
       id: `resistor-${i}-label`,
-      position: outward(positions[i + 1]),
+      position: labelSlots(params.connection, xs[i]).value,
       text: `R${i + 1} = ${round(r, 2)} Ω`,
       color: '#3b82f6',
       properties: { value: round(r, 6) },
@@ -209,7 +263,7 @@ export function buildCircuitScene(params: CircuitParams): SceneSpec {
   const branchLabels: SceneObject[] = resistors.map((r, i) => ({
     type: 'label' as const,
     id: `resistor-${i}-${params.connection === 'series' ? 'drop' : 'current'}`,
-    position: outward(positions[i + 1], CURRENT_LABEL_OFFSET),
+    position: labelSlots(params.connection, xs[i]).branch,
     text: params.connection === 'series'
       ? `V${i + 1} = ${round(branches[i].voltageDrop, 2)} V`
       : `I${i + 1} = ${round(branches[i].current, 2)} A`,
@@ -228,7 +282,7 @@ export function buildCircuitScene(params: CircuitParams): SceneSpec {
         : `Total resistance is ${round(rTotal, 2)} Ω, giving a total current of ${round(iTotal, 2)} A split across the branches.`,
       objects: [
         ...branchLabels,
-        { type: 'label', id: 'total-label', position: [0, -RADIUS - 2, 0], text: `R_total = ${round(rTotal, 2)} Ω, I_total = ${round(iTotal, 2)} A`, color: '#22c55e', properties: { rTotal: round(rTotal, 6), iTotal: round(iTotal, 6), connection: params.connection } },
+        { type: 'label', id: 'total-label', position: [0, -HALF_H - 2.2, 0], text: `R_total = ${round(rTotal, 2)} Ω, I_total = ${round(iTotal, 2)} A`, color: '#22c55e', properties: { rTotal: round(rTotal, 6), iTotal: round(iTotal, 6), connection: params.connection } },
       ],
     },
   ]
@@ -238,7 +292,7 @@ export function buildCircuitScene(params: CircuitParams): SceneSpec {
     title: `${params.connection === 'series' ? 'Series' : 'Parallel'} circuit — R_total = ${round(rTotal, 2)} Ω`,
     sceneType: 'diagram',
     teachingGoal: "Show how series and parallel resistor networks combine, and verify Ohm's law and Kirchhoff's laws at each component.",
-    cameraDistance: RADIUS * 3,
+    cameraDistance: HALF_W * 2.9,
     ariaLabel: `A ${params.connection} circuit with ${resistors.length} resistors and a ${round(params.voltage, 1)} V battery.`,
     steps,
   }
