@@ -53,6 +53,19 @@ describe('When the learner asked and no figure exists', () => {
     expect(block).toMatch(/Do NOT say "look at the figure/i)
     expect(block).toMatch(/Do NOT describe arrows, colours, axes/i)
   })
+
+  it('and is forbidden from answering with generic study advice about diagrams instead of the concept', () => {
+    // Reproduced live (2026-09-08, low-IQ-persona QA): "can u show me a
+    // picture or diagram, i learn better with pictures cuz im not smart with
+    // just words" got a subject-less tutorial on HOW TO DRAW DIAGRAMS AS A
+    // STUDY TECHNIQUE ("draw a box, label the parts, connect with arrows") —
+    // zero content about the actual lesson, on two different chemistry
+    // concepts. The word-picture this rule already requires must be scoped
+    // to the concept, not to diagramming as a skill.
+    const block = buildVisualContractBlock(noFigure(), { learnerAskedForAVisual: true })
+    expect(block).toMatch(/Do NOT respond with general study advice/i)
+    expect(block).toMatch(/ABOUT THE CONCEPT ITSELF, not about diagramming as a technique/i)
+  })
 })
 
 describe('When nobody asked', () => {
@@ -86,6 +99,23 @@ describe('When a figure IS attached', () => {
     const block = buildVisualContractBlock(d, { learnerAskedForAVisual: true })
     expect(block).not.toMatch(/LEARNER ASKED TO BE SHOWN SOMETHING/i)
     expect(block).not.toContain('NO FIGURE IS ATTACHED')
+  })
+
+  it('is told to describe THIS figure, not give generic diagramming advice', () => {
+    // Same reproduced defect as the no-figure case above, but measured on a
+    // turn where a real visual asset WAS resolved (chem.atomic.orbitals,
+    // hasVisual:true) — the model still produced the identical off-topic
+    // "draw a box, label it, connect with arrows" text, disconnected from
+    // the actual attached figure. Belt and braces with the no-figure rule.
+    const d = resolveVisual({
+      message: 'show me a diagram',
+      lessonConceptId: 'phys.meas.vector-addition',
+      subject: 'physics',
+      learnerRequest: 'diagram',
+    })
+    const block = buildVisualContractBlock(d, { learnerAskedForAVisual: true })
+    expect(block).toMatch(/Describe and use THIS figure/i)
+    expect(block).toMatch(/never respond with generic advice about how diagrams help someone study or learn/i)
   })
 })
 

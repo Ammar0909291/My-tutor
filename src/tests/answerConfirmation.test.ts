@@ -11,7 +11,7 @@
  */
 import { readFileSync } from 'fs'
 import { describe, it, expect } from 'vitest'
-import { confirmCorrectAnswer, CONFIRMS_CORRECT } from '@/lib/teaching/answerConfirmation'
+import { confirmCorrectAnswer, CONFIRMS_CORRECT, stripLeadingFalseConfirmation } from '@/lib/teaching/answerConfirmation'
 
 const REAL_UNCONFIRMED = 'Here is a question to check your understanding:'
 const REAL_REMEDIATION =
@@ -139,5 +139,62 @@ describe('the route actually applies it', () => {
   it('rotates on persisted pre-turn state, not on this turn', () => {
     expect(route).toMatch(/priorConfirmations: priorConfirmationsHoisted/)
     expect(route).toMatch(/priorConfirmationsHoisted = Number\.isFinite/)
+  })
+})
+
+describe('stripLeadingFalseConfirmation — the reoffer-guard contradiction fix', () => {
+  it('strips the exact reproduced shape: "Exactly right — <content>" ahead of an ungraded hedge', () => {
+    const text = 'Exactly right—magnetization is the order parameter for a ferromagnet.\n\n' +
+      'The order parameter is simply a quantity that is zero in the disordered phase.'
+    const out = stripLeadingFalseConfirmation(text)
+    expect(out).not.toMatch(CONFIRMS_CORRECT)
+    expect(out).toContain('The order parameter is simply a quantity')
+  })
+
+  it('strips "Great job" even though it is not in the middle of a sentence with "good job"', () => {
+    const text = "Great job—your answer shows you've got the idea. Now let's move on."
+    const out = stripLeadingFalseConfirmation(text)
+    expect(out).toBe("Now let's move on.")
+  })
+
+  it('strips "Well done" and "That\'s right" the same way', () => {
+    expect(stripLeadingFalseConfirmation("Well done—your choice matches the correct description. Next.")).toBe('Next.')
+    expect(stripLeadingFalseConfirmation("That's right—a node is a region. Now let's see how nodes relate."))
+      .toBe("Now let's see how nodes relate.")
+  })
+
+  it('leaves ordinary teaching alone — does not touch a sentence merely mentioning "correct" later in the reply', () => {
+    // The whole reason this is scoped to the OPENING sentence only: a wrong-
+    // answer remediation routinely says "the correct answer was X" deep in
+    // the reply, and that must survive untouched.
+    const text = 'Not quite. The correct answer was the minimum energy needed to remove an electron.'
+    expect(stripLeadingFalseConfirmation(text)).toBe(text)
+  })
+
+  it('leaves text alone when the opening sentence is not a confirmation', () => {
+    const text = "Let's think about this differently. Consider a ball rolling down a hill."
+    expect(stripLeadingFalseConfirmation(text)).toBe(text)
+  })
+
+  it('is null/empty-safe', () => {
+    expect(stripLeadingFalseConfirmation('')).toBe('')
+    expect(stripLeadingFalseConfirmation('   ')).toBe('   ')
+  })
+})
+
+describe('the I1 disambiguation guard applies the strip before prepending its lead-in', () => {
+  const route = readFileSync('src/app/api/learn/chat/route.ts', 'utf8')
+
+  it('imports and calls stripLeadingFalseConfirmation inside the genuineUnmappedAttempt branch', () => {
+    const guardStart = route.indexOf('if (genuineUnmappedAttempt && !cleanText.includes(MCQ_REOFFER_DISAMBIGUATION))')
+    expect(guardStart).toBeGreaterThan(-1)
+    const guardBlock = route.slice(guardStart, guardStart + 1400)
+    expect(guardBlock).toMatch(/await import\('@\/lib\/teaching\/answerConfirmation'\)/)
+    expect(guardBlock).toContain('cleanText = stripLeadingFalseConfirmation(cleanText)')
+    // The strip must run BEFORE the lead-in is prepended, not after.
+    const stripAt = guardBlock.indexOf('stripLeadingFalseConfirmation(cleanText)')
+    const prependAt = guardBlock.indexOf('MCQ_REOFFER_DISAMBIGUATION}\\n\\n')
+    expect(stripAt).toBeGreaterThan(-1)
+    expect(prependAt).toBeGreaterThan(stripAt)
   })
 })

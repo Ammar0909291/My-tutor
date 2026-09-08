@@ -9736,6 +9736,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           && turnIntent.learnerRequest === null
         if (genuineUnmappedAttempt && !cleanText.includes(MCQ_REOFFER_DISAMBIGUATION)) {
           console.log('[mcq-reoffer-disambiguation] ungradeable answer against a pending probe — prompting a tap')
+          // THE CONTRADICTION FIX (2026-09-08): this branch means the SERVER
+          // could not grade the answer — but the MODEL, reading the same raw
+          // text, sometimes recognised an embedded correct option and opened
+          // its own reply praising it ("Exactly right — magnetization is the
+          // order parameter..."). Reproduced live on 3 different concepts.
+          // Strip that opening claim before prepending the honest lead-in, so
+          // the learner is never told both "I couldn't tell what you picked"
+          // and "you picked correctly" in the same message. See
+          // stripLeadingFalseConfirmation's own header for why this is
+          // scoped to the opening sentence only.
+          const { stripLeadingFalseConfirmation } = await import('@/lib/teaching/answerConfirmation')
+          cleanText = stripLeadingFalseConfirmation(cleanText)
           cleanText = cleanText.trim()
             ? `${MCQ_REOFFER_DISAMBIGUATION}\n\n${cleanText}`
             : MCQ_REOFFER_DISAMBIGUATION
