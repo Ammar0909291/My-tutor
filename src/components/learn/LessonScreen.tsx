@@ -5174,7 +5174,18 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                     // right. Mobile stays w-full (unchanged; a further cut on
                     // an already-narrow phone screen would waste space, and
                     // this was never reported as broken there).
-                    className={hasCanvasVisual ? undefined : 'w-full md:w-[70%]'}
+                    // isUser is EXCLUDED from the 70% cap below: that
+                    // reduction was reasoned about only for the tutor's own
+                    // reading column, but it was previously applied to every
+                    // non-canvas row regardless of role. A row capped to the
+                    // left 70% is itself left-anchored (per this comment's
+                    // own point above), so the learner bubble's `alignItems:
+                    // 'flex-end'` was only pushing it to the right edge of
+                    // that narrowed 70% box — visually landing around the
+                    // middle of the chat, not the panel's true right edge.
+                    // The learner row now always gets the full row width so
+                    // flex-end reaches the panel's actual right padding.
+                    className={isUser ? 'w-full' : hasCanvasVisual ? undefined : 'w-full md:w-[70%]'}
                     style={{
                       display: 'flex', flexDirection: 'column', alignItems: isUser ? 'flex-end' : 'flex-start',
                       animation: 'fadeUp 200ms ease-out both',
