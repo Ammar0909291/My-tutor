@@ -479,6 +479,42 @@ export interface UngradedGateQuestionInput {
    * behaviour.
    */
   learnerAskedDirectQuestion?: boolean
+  /**
+   * Was the LEARNER'S OWN message this turn a bare acknowledgement — "yes",
+   * "ok", "got it", "okay", … (`isBareAcknowledgement`, `masteryGate.ts`'s
+   * own established whole-message detector, reused here rather than
+   * re-derived — see its own doc comment for why detection is whole-message,
+   * never substring, so "ok, but why does X happen?" is never caught)?
+   *
+   * ── THE DEFECT THIS CLOSES (real-student session, 2026-09, live account) ──
+   * A learner replied "yes" / "ok" / "got it" to genuine teaching — not a
+   * question, not a substantive answer, just an acknowledgement. The model's
+   * entire reply reduced, after both salvage passes, to nothing: it had
+   * asked its OWN follow-up confirmation question ("So you're saying the
+   * picture shows the descriptive steps a linguist takes. Is that right?")
+   * with no MCQ behind it, which this function correctly strips (an
+   * ungradeable question at a mastery gate must not ship — that half is
+   * untouched). What was wrong is the FALLBACK WORDING: the bare learner ack
+   * got back `WITHHELD_QUESTION_CONTINUATION`, "Let's stay with this idea
+   * for a moment." — a sentence that reads as ignoring what they just said,
+   * or as still holding on the OLD idea the instant after they signalled
+   * they were ready to move on.
+   *
+   * ── WHY THIS IS SAFE, NOT A WEAKENING OF THE WITHHOLD ─────────────────────
+   * This changes ONLY which of two claim-nothing tail sentences is chosen
+   * when NOTHING is being reported (`justGraded` is null/absent) and no MCQ
+   * follows — it never suppresses the withhold, never fabricates a grade,
+   * never touches `correctAtCheck`/`correctAtPractice`, and never applies
+   * when a real grade or a following MCQ IS present (those branches read
+   * this field not at all — see `withheldContinuation`). A bare-ack message
+   * can also be the genuine ANSWER to a pending true/false-shaped MCQ (e.g.
+   * "yes"/"no"); that case already produces a non-null `justGraded` upstream
+   * and is completely unaffected by this field.
+   *
+   * Optional and defaulting to false, so every existing caller and test
+   * keeps its exact prior behaviour.
+   */
+  learnerAcknowledged?: boolean
 }
 
 /** The route's own grade of the pending question, passed in, never derived. */
@@ -526,6 +562,17 @@ const WITHHELD_QUESTION_CONTINUATION = "Let's stay with this idea for a moment."
 const WITHHELD_QUESTION_HANDS_OFF_TO_MCQ = 'Let me check your thinking with this.'
 
 /**
+ * The tail used when there is nothing to report AND nothing follows, but the
+ * LEARNER'S OWN message this turn was a bare acknowledgement ("yes", "ok",
+ * "got it", …) — see `learnerAcknowledged`'s doc comment on
+ * `UngradedGateQuestionInput`. Claims nothing `WITHHELD_QUESTION_CONTINUATION`
+ * doesn't already claim — no grade, no promise — it only answers plainly
+ * that the ack was heard, instead of reading as still holding the learner on
+ * the idea they just said they were ready to leave.
+ */
+const WITHHELD_QUESTION_ACK_CONTINUATION = "Good — let's keep going."
+
+/**
  * The same sentence, told what the server already knows about THIS turn.
  *
  * ── THE DEFECT THIS CLOSES (measured, phys.mech.rotational-dynamics,
@@ -559,11 +606,17 @@ function withheldContinuation(
   /** True when a tappable MCQ is being rendered immediately below this text,
    *  so the fallback should hand off to it rather than stall in front of it. */
   questionFollows = false,
+  /** See `learnerAcknowledged`'s doc comment. Read ONLY on the no-grade
+   *  branch below — a real grade already reports the outcome and must not
+   *  have its wording second-guessed by what the ack detector also thinks. */
+  learnerAcknowledged = false,
 ): string {
-  const tail = questionFollows ? WITHHELD_QUESTION_HANDS_OFF_TO_MCQ : WITHHELD_QUESTION_CONTINUATION
   if (!justGraded || typeof justGraded.correct !== 'boolean') {
-    return tail
+    if (questionFollows) return WITHHELD_QUESTION_HANDS_OFF_TO_MCQ
+    if (learnerAcknowledged) return WITHHELD_QUESTION_ACK_CONTINUATION
+    return WITHHELD_QUESTION_CONTINUATION
   }
+  const tail = questionFollows ? WITHHELD_QUESTION_HANDS_OFF_TO_MCQ : WITHHELD_QUESTION_CONTINUATION
   if (justGraded.correct) {
     return `That's right. ${tail}`
   }
@@ -754,7 +807,11 @@ export function withholdUngradedGateQuestion(
       // from an earlier turn is on the learner's screen even though the gate
       // attached nothing here, and stalling in front of it is the defect this
       // sentence choice exists to avoid.
-      text: withheldContinuation(input.justGraded, input.questionOnScreen === true),
+      text: withheldContinuation(
+        input.justGraded,
+        input.questionOnScreen === true,
+        input.learnerAcknowledged === true,
+      ),
       withheld: true,
       reason: 'no-gradeable-probe',
     }

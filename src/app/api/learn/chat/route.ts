@@ -7254,6 +7254,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             const { mcqToServe: mcqToServeForWithhold } = await import('@/lib/teaching/mcq')
             const { detectLearnerQuestion: detectLearnerQuestionForWithhold } =
               await import('@/lib/teaching/conversationState')
+            const { isBareAcknowledgement: isBareAcknowledgementForWithhold } =
+              await import('@/lib/teaching/masteryGate')
             const ungraded = withholdUngradedGateQuestion({
               text: cleanText,
               // The phase the turn was BUILT at — the same pre-fold value the
@@ -7323,6 +7325,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // Same detector the route already uses a few hundred lines up to
               // drop a stray self-reported correctness claim.
               learnerAskedDirectQuestion: detectLearnerQuestionForWithhold(message),
+              // Real-student session (2026-09): a bare "yes"/"ok"/"got it"
+              // met with the same content-free placeholder — see
+              // `learnerAcknowledged`'s doc comment in gateAssessment.ts.
+              // Same established whole-message detector `route.ts` already
+              // uses a few hundred lines up to null a self-reported SIGNAL.
+              learnerAcknowledged: isBareAcknowledgementForWithhold(message),
             })
             if (ungraded.withheld) {
               console.warn('[gate-contract] ' + JSON.stringify({

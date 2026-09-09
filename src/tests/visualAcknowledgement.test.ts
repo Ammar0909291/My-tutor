@@ -128,6 +128,70 @@ describe('a repair may never break a turn', () => {
   })
 })
 
+describe('the tightened detector (post-8adaffe correction): a generic word is not enough', () => {
+  it('1. an UNRELATED use of "notice" is NOT treated as figure acknowledgement — the exact measured production repro', () => {
+    // The real reply, verbatim in substance: genuine teaching about SPEECH,
+    // using "notice" in a sentence that has nothing to do with the attached
+    // figure at all.
+    const text = 'Linguistics is the science that looks at how we use language every day. '
+      + 'Now, can you think of one thing you notice when someone talks—maybe the '
+      + 'way their voice changes or the way they put words together?'
+    const r = ensureVisualAcknowledged(text, decisionFor(), true)
+    expect(r.appended).toBe(true)
+    expect(r.text).toContain(text)
+    expect(r.text).toContain("Newton's First Law")
+  })
+
+  it('2. explicit "look at the figure" IS acknowledged — no duplicate appended', () => {
+    const text = 'Look at the figure beside this message — the two forces are equal and opposite.'
+    const r = ensureVisualAcknowledged(text, decisionFor(), true)
+    expect(r.appended).toBe(false)
+    expect(r.text).toBe(text)
+  })
+
+  it('3. "in the diagram..." IS acknowledged — no duplicate appended', () => {
+    const text = 'In the diagram, the two arrows represent the forces acting on the book.'
+    const r = ensureVisualAcknowledged(text, decisionFor(), true)
+    expect(r.appended).toBe(false)
+    expect(r.text).toBe(text)
+  })
+
+  it('4. a figure attached with NO visual reference at all activates the backstop', () => {
+    const text = "Newton's First Law says an object at rest stays at rest unless a force acts on it."
+    const r = ensureVisualAcknowledged(text, decisionFor(), true)
+    expect(r.appended).toBe(true)
+    expect(r.text).toContain(text)
+    expect(r.text).toContain('free body diagram')
+  })
+
+  it('5. an already-meaningful, multi-sentence visual explanation gets no duplicate boilerplate', () => {
+    const text = 'The diagram shows a book resting on a table, with two arrows: one pointing down '
+      + '(gravity) and one pointing up (the normal force). Because the arrows are the same length, '
+      + 'the forces are balanced and the book stays still.'
+    const r = ensureVisualAcknowledged(text, decisionFor(), true)
+    expect(r.appended).toBe(false)
+    expect(r.text).toBe(text)
+  })
+
+  it('a bare pointing verb with NO on-screen locator and NO figure noun still does not count (the root cause, isolated)', () => {
+    const text = 'What do you notice about the way stress falls on different syllables in this word?'
+    const r = ensureVisualAcknowledged(text, decisionFor(), true)
+    expect(r.appended).toBe(true)
+  })
+
+  it('a pointing verb genuinely combined with an on-screen locator DOES count, even without a figure noun', () => {
+    const text = 'Notice how the values shown on your screen relate to each other.'
+    const r = ensureVisualAcknowledged(text, decisionFor(), true)
+    expect(r.appended).toBe(false)
+  })
+
+  it('visibility deixis alone ("here you can see") counts without any figure noun', () => {
+    const text = 'Here you can see the two forces balance each other exactly.'
+    const r = ensureVisualAcknowledged(text, decisionFor(), true)
+    expect(r.appended).toBe(false)
+  })
+})
+
 describe('the route actually wires this in, scoped to a newly-introduced figure', () => {
   const ROUTE = require('fs').readFileSync('src/app/api/learn/chat/route.ts', 'utf8') as string
 

@@ -31,21 +31,65 @@
  * ── A REPAIR MUST NOT BREAK A TURN ────────────────────────────────────────
  * Pure, total, and additive only: it never removes or rewrites the model's
  * own words, and any surprise falls back to returning the text unchanged.
+ *
+ * ── CORRECTION (post-8adaffe validation, 2026-09): THE FIRST DETECTOR WAS
+ *    TOO LOOSE ─────────────────────────────────────────────────────────────
+ * The original `FIGURE_REFERENCE_RE` treated a bare occurrence of any of a
+ * long list of loosely visual-adjacent VERBS ("notice", "observe", "study
+ * the", "shown", …) as proof the figure had already been referenced.
+ * Measured live: a Linguistics opening turn asked "what do you notice when
+ * someone talks — maybe the way their voice changes?" — genuine teaching
+ * about SPEECH, using the word "notice" in a sentence that has nothing to
+ * do with the attached figure at all. The detector matched on that word
+ * alone, so the backstop believed the figure was already explained and
+ * never fired; the learner had a real figure on screen with zero
+ * explanation of what it was.
+ *
+ * The two failure directions here are NOT symmetric, and the fix leans on
+ * that: a MISSED real reference (false negative) just adds one true, if
+ * slightly redundant, sentence on top of an already-good explanation — safe
+ * by this file's own design. A FALSE "already referenced" verdict (false
+ * positive) is the exact defect above — it leaves a real figure completely
+ * unexplained. So the detector is tightened toward requiring genuine
+ * evidence of a POINTED reference, mirroring the SAME two-tier discipline
+ * `figureReference.ts` already uses for the opposite direction (stripping a
+ * false claim): a STRONG FIGURE NOUN (these essentially never appear in
+ * prose that isn't about a real rendered figure), an explicit VISIBILITY
+ * DEIXIS phrase ("here you see…", "as you can see…"), or a POINTING VERB
+ * that co-occurs with an ON-SCREEN LOCATOR — never a bare pointing verb by
+ * itself, which is precisely what let "notice" alone through before.
  */
 
 import type { VisualDecision, EducationalPurpose } from './types'
 import { clamp } from './conceptText'
 
-/**
- * Loose on purpose. The two failure directions are not symmetric here: a
- * missed real reference just adds one true, if slightly redundant, sentence
- * — a false claim would not be safe, but this never asserts anything the
- * admitted asset doesn't already carry. So this list errs toward matching,
- * not toward precision, unlike figureReference.ts's stripping detectors
- * (which err the other way, because there a false match deletes real text).
- */
-const FIGURE_REFERENCE_RE =
-  /\b(diagram|figure|graph|picture|image|chart|number ?line|animation|illustration|visual|simulation|plot|sketch|screen|worked example|look at|looking at|see the|see this|see that|see it|notice|observe|study the|examine the|shown|displayed|highlighted)\b/i
+/** Nouns that name a rendered artefact — essentially never used outside a
+ *  real reference to one. Mirrors figureReference.ts's STRONG_FIGURE_NOUN. */
+const STRONG_FIGURE_NOUN =
+  /\b(diagram|figure|graph|picture|image|chart|number ?line|animation|illustration|visual|simulation|plot|sketch|screen)\b/i
+
+/** Words that place a thing ON SCREEN rather than merely in the prose. */
+const ON_SCREEN_LOCATOR =
+  /\b(on (?:your|the) screen|beside this message|shown (?:above|below|here)?|above|below|on screen|displayed|highlighted|pictured)\b/i
+
+/** Verbs that direct the learner's eyes somewhere. A bare occurrence of one
+ *  of these — "notice", "observe", "study", "see" — is NOT enough on its
+ *  own; ordinary teaching prose uses every one of them about things that
+ *  are not a rendered figure ("what do you notice about the verb tense").
+ *  Required to co-occur with `ON_SCREEN_LOCATOR` before it counts. */
+const POINTING_VERB = /\b(look at|looking at|see|notice|observe|study|examine|watch)\b/i
+
+/** "Here you see…", "as you can see…" — a visibility claim that names no
+ *  figure noun of its own but is still a genuine pointed reference. */
+const VISIBILITY_DEIXIS =
+  /\b(here\s+(?:you|we)\s+(?:can\s+|will\s+|'ll\s+)?see\b|as\s+(?:you|we)\s+can\s+see\b|you\s+can\s+see\s+(?:here|above|below)\b)/i
+
+function referencesFigure(text: string): boolean {
+  if (STRONG_FIGURE_NOUN.test(text)) return true
+  if (VISIBILITY_DEIXIS.test(text)) return true
+  if (POINTING_VERB.test(text) && ON_SCREEN_LOCATOR.test(text)) return true
+  return false
+}
 
 const PURPOSE_CLAUSE: Record<EducationalPurpose, string> = {
   explain: 'Study it while I explain.',
@@ -80,7 +124,7 @@ export function ensureVisualAcknowledged(
     if (!figureIntroducedThisTurn) return { text, appended: false }
     if (!decision || !decision.graphical || !decision.asset) return { text, appended: false }
     if (typeof text !== 'string' || text.trim().length === 0) return { text, appended: false }
-    if (FIGURE_REFERENCE_RE.test(text)) return { text, appended: false }
+    if (referencesFigure(text)) return { text, appended: false }
 
     const asset = decision.asset
     const kind = asset.representation ? asset.representation.replace(/_/g, ' ') : 'figure'

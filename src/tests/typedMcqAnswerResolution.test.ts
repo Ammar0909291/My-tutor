@@ -32,6 +32,22 @@
  * disambiguated it from the article, so "A or B, i am not sure" still names
  * both and is still refused as ambiguous (pinned below). Every existing
  * grading rule, threshold and refusal is otherwise unchanged.
+ *
+ * ── FOLLOW-UP (post-8adaffe validation, 2026-09): "A BECAUSE <REASON>" ─────
+ * A second, narrower gap in the SAME function, found in a follow-up
+ * real-student session: "A because they use different tenses" and "A
+ * because as here means while" both refused to resolve, while "B
+ * because ..." (any non-'a' letter) always worked. Root cause: rule 1's
+ * `atEdge` shortcut (bare letter is the first token) is deliberately
+ * excluded for 'a' — see the module's own history above — so a leading "A"
+ * needed `insideAStatedAnswer`, which ALSO requires an explicit first-person
+ * phrase ("I think"/"my answer is"/…). A bare reason clause states nothing
+ * about the learner, so it fell through every rule. Fixed by recognising
+ * that `cannotFollowAnArticle` (already used two other places in this same
+ * function) is BY ITSELF sufficient evidence a leading "A" is the letter,
+ * independent of whether a first-person phrase is also present — "a car"/"a
+ * good answer" still refuse, because "car"/"good" genuinely can follow an
+ * article and the ambiguity is real. See the new describe block below.
  */
 import { describe, it, expect } from 'vitest'
 import { resolveMcqChoice } from '@/lib/teaching/mcq'
@@ -125,5 +141,79 @@ describe('every other option key is unaffected (only "a" is also an article)', (
 
   it('"D because it matches" resolves to D', () => {
     expect(resolveMcqChoice('D because it matches', mcq)).toBe(3)
+  })
+})
+
+describe('"A because <reason>" resolves with no first-person marker required', () => {
+  const YES_NO_MCQ: TutorMCQ = {
+    question: 'Does "won" mean it already happened?',
+    options: [
+      'No — the second conditional uses past-tense FORM to signal a hypothetical situation',
+      'Yes — using "won" means the speaker is describing something that already happened',
+    ],
+  }
+
+  it('the exact measured production repro: "A because they use different tenses"', () => {
+    expect(resolveMcqChoice('A because they use different tenses', YES_NO_MCQ)).toBe(0)
+  })
+
+  it('a second measured production repro: "A because as here means while"', () => {
+    expect(resolveMcqChoice('A because as here means while', YES_NO_MCQ)).toBe(0)
+  })
+
+  it('"A but ..." — another CANNOT_FOLLOW_AN_ARTICLE word after a leading A', () => {
+    expect(resolveMcqChoice('A but i am not fully sure', YES_NO_MCQ)).toBe(0)
+  })
+
+  it('"B because ..." already worked and keeps working (no regression)', () => {
+    expect(resolveMcqChoice('B because it doesn\'t mean past time', YES_NO_MCQ)).toBe(1)
+  })
+
+  it('"I think A because ..." still resolves via the pre-existing first-person path', () => {
+    expect(resolveMcqChoice('I think A because reasons', YES_NO_MCQ)).toBe(0)
+  })
+
+  it('"my answer is A because ..." still resolves via the pre-existing first-person path', () => {
+    expect(resolveMcqChoice('my answer is A because reasons', YES_NO_MCQ)).toBe(0)
+  })
+
+  it('bare "A" alone is unaffected', () => {
+    expect(resolveMcqChoice('A', YES_NO_MCQ)).toBe(0)
+  })
+
+  it('"A sir" / "a sir" — a QA-harness artifact with no reasoning content — still refuses (mcqAnswerShapeIsTheClients.test.ts\'s own pin, guarded here too)', () => {
+    expect(resolveMcqChoice('A sir', YES_NO_MCQ)).toBeNull()
+    expect(resolveMcqChoice('a sir', YES_NO_MCQ)).toBeNull()
+  })
+})
+
+describe('negative controls: ordinary uses of the article "a" still refuse', () => {
+  const CAR_MCQ: TutorMCQ = {
+    question: 'Which is faster?',
+    options: ['A red car', 'A blue bike'],
+  }
+
+  it('"a car" alone is not graded as choosing option A', () => {
+    expect(resolveMcqChoice('a car', CAR_MCQ)).toBeNull()
+  })
+
+  it('"a good answer" is not graded as choosing option A', () => {
+    expect(resolveMcqChoice('a good answer', CAR_MCQ)).toBeNull()
+  })
+
+  it('the pinned "a dimension is about quantity" false-positive guard still holds', () => {
+    const mcq: TutorMCQ = {
+      question: 'What is a dimension?',
+      options: ['A quantity used to describe a system', 'A unit of measurement', 'A symbol', 'A formula'],
+    }
+    expect(resolveMcqChoice('a dimension is about quantity', mcq)).toBeNull()
+  })
+
+  it('"I think a lens bends light" still refuses (article mid-sentence, not the leading-letter shape) — options chosen with no textual overlap so an unrelated containment rule cannot be the one resolving it', () => {
+    const mcq: TutorMCQ = {
+      question: 'What is the correct term?',
+      options: ['Refraction is the correct term', 'Reflection is the correct term', 'Diffraction is the correct term', 'Absorption is the correct term'],
+    }
+    expect(resolveMcqChoice('I think a lens bends light', mcq)).toBeNull()
   })
 })

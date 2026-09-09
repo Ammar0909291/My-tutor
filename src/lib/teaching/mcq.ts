@@ -871,6 +871,19 @@ const CANNOT_FOLLOW_AN_ARTICLE = new Set([
 const cannotFollowAnArticle = (next: string | undefined): boolean =>
   next === undefined || CANNOT_FOLLOW_AN_ARTICLE.has(next)
 
+/**
+ * Words that, immediately after a LEADING "A", signal a REASONING CLAUSE is
+ * about to follow — used ONLY by rule 1's `leadingLetterBeforeReasoning`
+ * below. Deliberately a strict SUBSET of `CANNOT_FOLLOW_AN_ARTICLE`, not the
+ * same set: that set exists to tell the article apart from the letter, and
+ * includes plenty of words ("sir", "maam", pronouns, "ok", "yes", "please")
+ * that disambiguate the article without being any evidence the learner is
+ * about to give a REASON for their choice. `mcqAnswerShapeIsTheClients.test.ts`
+ * pins "A sir" / "a sir" as refused (a QA-harness artifact with a title
+ * tacked on and no reasoning content), so this set may never include "sir".
+ */
+const REASONING_CONNECTIVE = new Set(['because', 'but', 'so', 'since'])
+
 const looksLikeAQuestion = (s: string): boolean =>
   /\?\s*$/.test(s.trim()) || /^\s*(why|how|what|when|where|which|who|is|are|does|do|can|could|should)\b/i.test(s)
 
@@ -1100,6 +1113,33 @@ export function resolveMcqChoice(message: string, mcq: TutorMCQ): number | null 
   //    detector. For "a" alone that is not enough, because "I think a lens
   //    bends light" also states an answer: the letter must additionally be
   //    followed by a word that cannot follow an article.
+  //
+  //    "A BECAUSE <REASON>" WITH NO FIRST-PERSON MARKER (measured, real-
+  //    student session, 2026-09). "A because they use different tenses" and
+  //    "A because as here means while" both refused to resolve, while "B
+  //    because ..." resolved every time. The asymmetry: for b/c/d, `atEdge`
+  //    (the letter is the FIRST token) is sufficient on its own — but `atEdge`
+  //    is deliberately excluded for 'a' (see the module docblock), so a bare
+  //    leading "A" needed `insideAStatedAnswer`, which additionally requires
+  //    an explicit "I think"/"my answer is"/… phrase. "A because <reason>"
+  //    has none — the reason clause states nothing about the LEARNER, only
+  //    about the CONCEPT — so it fell through every rule.
+  //
+  //    NOT FIXED BY WIDENING ON `cannotFollowAnArticle` GENERALLY. A first
+  //    attempt did exactly that and broke a DIFFERENT pinned guard
+  //    (mcqAnswerShapeIsTheClients.test.ts): "A sir" and "a sir" — a QA-
+  //    harness artifact with a title tacked on and no reasoning content at
+  //    all — must stay refused, and `cannotFollowAnArticle`'s set includes
+  //    "sir"/"maam"/pronouns/politeness words precisely so THOSE can be told
+  //    apart from the article, not so they count as evidence of a reasoned
+  //    choice. A narrower, PURPOSE-BUILT set is used instead: words that
+  //    themselves signal a REASONING CLAUSE is coming — "because", "but",
+  //    "so", "since" — a strict subset of `cannotFollowAnArticle`'s, chosen
+  //    so "A sir"/"a sir" (no reasoning connective) keep refusing exactly as
+  //    pinned, while "A because …" (a reasoning connective) now resolves.
+  //    Scoped to `pos === 0` (the letter opens the message) because that is
+  //    the measured shape and the narrowest one that closes it; "I think A
+  //    because…" is unaffected — it already resolves via `insideAStatedAnswer`.
   for (let i = 0; i < limit; i++) {
     const key = OPTION_KEYS[i]
     const pos = tokens.indexOf(key)
@@ -1109,8 +1149,10 @@ export function resolveMcqChoice(message: string, mcq: TutorMCQ): number | null 
     const atEdge = pos === 0 || pos === tokens.length - 1
     const insideAStatedAnswer = statesAnAnswer(message)
       && (key !== 'a' || cannotFollowAnArticle(tokens[pos + 1]))
+    const leadingLetterBeforeReasoning =
+      key === 'a' && pos === 0 && REASONING_CONNECTIVE.has(tokens[pos + 1])
     if (key === 'a'
-      ? (marked || alone || insideAStatedAnswer)
+      ? (marked || alone || insideAStatedAnswer || leadingLetterBeforeReasoning)
       : (marked || alone || atEdge || insideAStatedAnswer)) {
       return i
     }
