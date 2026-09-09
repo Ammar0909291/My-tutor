@@ -673,7 +673,7 @@ export async function POST(req: Request) {
     // P3: the session's asked-question ledger, read from contextSnapshot before
     // the prompt is built and re-persisted with this turn's questions folded in.
     let questionLedgerHoisted: import('@/lib/teaching/repetitionGuard').QuestionLedger =
-      { fingerprints: [], recent: [] }
+      { fingerprints: [], recent: [], optionSetFingerprints: [], recentOptionSets: [] }
     // How many OUTAGE turns have happened in a row. Persisted so the degraded
     // path can escalate its wording instead of repeating one content-free
     // template forever (the observed six-identical-replies failure).
@@ -2036,8 +2036,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // prior turn shows the shape, tell the model not to claim correctness
         // this turn and to re-issue the question WITH the tag instead. The
         // deterministic backstop (correctness stripped from teachingSignal)
-        // sits with the SIGNAL parse below; this is the prompt-level partner
-        // that reduces the harm the LEARNER SEES.
+        // sits with the SIGNAL parse below, via answerableTurn.ts's
+        // `shouldSuppressSignalCorrectness` (which itself calls
+        // `hasProseMultipleChoice`); this is the prompt-level partner that
+        // reduces the harm the LEARNER SEES.
         try {
           const { hasProseMultipleChoice, buildProseMcqReplyDirective } =
             await import('@/lib/teaching/proseMcqGuard')
@@ -5114,6 +5116,49 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         } catch (err) {
           // Grounding never takes a turn down.
           console.warn('[remediation-grounding] skipped:', err)
+        }
+      }
+
+      // P1 FIX — FACTUAL CONTENT INTEGRITY: the learner is challenging a
+      // claim the tutor just made. See claimChallengeGuard.ts's own header
+      // for the full defect (a false etymology, defended with MORE fabricated
+      // detail once challenged, instead of acknowledged as possibly wrong).
+      //
+      // Independent of the remediation-turn gate above: a challenge is not
+      // necessarily an "explain differently" turn, and must fire whenever it
+      // happens. Still requires an actual LLM generation this turn (a served
+      // card/memory hit has no prompt to add this to) — same precondition as
+      // the block above, checked fresh rather than reusing its narrower
+      // `isRemediationTurn` scoping.
+      if (conversationDecisionHoisted && !serveFromMemory && !remediationCardText && !cardOwnsThisTurn) {
+        try {
+          const { isClaimChallenge, buildClaimChallengeBlock } = await import('@/lib/teaching/claimChallengeGuard')
+          if (isClaimChallenge(message)) {
+            const { buildRemediationGrounding, buildRemediationGroundingBlock } =
+              await import('@/lib/teaching/remediationGrounding')
+            const conceptForChallenge =
+              excursionDecisionHoisted?.targetConceptId
+              ?? libraryConceptNodeIdHoisted
+              ?? snapshotCurrentConceptId
+              ?? resolvedConceptId
+              ?? null
+            // Grounding is a BONUS when it happens to cover the exact concept
+            // being challenged — most challenged claims (an etymology, a
+            // historical aside) are not KG concepts at all, so '' (no
+            // grounding) is the ordinary case and the humility instruction
+            // alone still applies.
+            const groundingBlock = conceptForChallenge
+              ? buildRemediationGroundingBlock(buildRemediationGrounding(conceptForChallenge))
+              : ''
+            console.log('[claim-challenge]', {
+              conceptId: conceptForChallenge ?? null,
+              groundingAvailable: groundingBlock.length > 0,
+            })
+            systemPrompt += buildClaimChallengeBlock(groundingBlock)
+          }
+        } catch (err) {
+          // Never takes a turn down — the ordinary prompt stands unchanged.
+          console.warn('[claim-challenge] skipped:', err)
         }
       }
 
@@ -8808,8 +8853,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // what makes "never ask the same thing twice" enforceable — the
           // previous runtime counted questions but never remembered them.
           {
-            const { recordQuestions } = await import('@/lib/teaching/repetitionGuard')
-            conversationStateUpdate.questionLedger = recordQuestions(questionLedgerHoisted, cleanText)
+            const { recordQuestions, recordMcqOptions } = await import('@/lib/teaching/repetitionGuard')
+            let ledgerNow = recordQuestions(questionLedgerHoisted, cleanText)
+            // P2 FIX: also fold this turn's SERVED MCQ options (authored or
+            // model-generated) into the ledger, so a later turn's templated
+            // duplicate (same options, different stem example) can be named
+            // to the model even though its question TEXT never repeats. See
+            // QuestionLedger.optionSetFingerprints's doc comment.
+            ledgerNow = recordMcqOptions(ledgerNow, mcqHoisted?.options ?? null)
+            conversationStateUpdate.questionLedger = ledgerNow
           }
           // A healthy turn clears the outage streak; an outage turn carries it.
           conversationStateUpdate.consecutiveOutages = consecutiveOutagesHoisted
@@ -9128,7 +9180,31 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                     // source — buildLessonCloseText is the one builder the
                     // already-complete serve path uses too.
                     const { buildLessonCloseText } = await import('@/lib/teaching/lessonCompletion')
-                    cleanText = buildLessonCloseText(finalOutcome.lessonTitle, summary, {
+                    // P1 FIX: `summary` above is RECONSTRUCTED from the
+                    // persisted attempt's plain id lists (summaryFromAttempt),
+                    // which cannot carry the live `answeredButUnverified` fact
+                    // — that requires the actual ConversationState, not an id.
+                    // Patch it in for THIS turn's concept from the state we
+                    // already have in hand (`stateForOutcome`, defined above),
+                    // so the live close — the one place the reported defect
+                    // occurs — can choose the honest message. No schema
+                    // change: nothing here is persisted, and a later resumed/
+                    // already-finished render (which has no live state) falls
+                    // back to the generic wording exactly as before.
+                    const summaryForClose = stateForOutcome
+                      ? {
+                          ...summary,
+                          needsReview: await Promise.all(summary.needsReview.map(async (o) => {
+                            if (o.conceptId !== stateForOutcome.conceptId) return o
+                            const { conceptOutcome: liveConceptOutcome } = await import('@/lib/teaching/lessonSummary')
+                            return {
+                              ...o,
+                              answeredButUnverified: liveConceptOutcome(stateForOutcome, lessonCtx?.lessonTitle ?? null).answeredButUnverified,
+                            }
+                          })),
+                        }
+                      : summary
+                    cleanText = buildLessonCloseText(finalOutcome.lessonTitle, summaryForClose, {
                       lang: teachingLang, conceptId: resolvedConceptId,
                     })
                     // Nothing that solicits a further answer may ride along:

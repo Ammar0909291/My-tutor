@@ -143,6 +143,30 @@ describe('5 — the existing prose-MCQ guard is intact and still reported as its
     expect(askedAnswerableQuestion(STOICHIOMETRY_PROSE_MCQ)).toBe(true)
     expect(suppress(STOICHIOMETRY_PROSE_MCQ).reason).toBe('prose-mcq-ungradeable')
   })
+
+  // P2 FIX: the INLINE prose-MCQ shape (a real-student English session).
+  // `hasProseMultipleChoice` used to require each lettered option on its OWN
+  // LINE; a genuine production turn folded all four options into ONE
+  // sentence with no `<!--MCQ-->` tag, which the old detector could not see
+  // — so `shouldSuppressSignalCorrectness` (this exact function) fell through
+  // to `askedAnswerableQuestion`, which correctly reports true for a real
+  // question, meaning the claimed correctness was NOT suppressed even though
+  // there was still no ground truth to grade it against. Fixed at the
+  // detector, consumed here automatically.
+  const INLINE_PROSE_MCQ =
+    "Which suffix turns the noun 'joy' into an adjective? A) -ly B) -ful C) -tion D) -ize"
+
+  it('the inline shape is now also diagnosed as a prose MCQ, not merely an answerable question', () => {
+    expect(hasProseMultipleChoice(INLINE_PROSE_MCQ)).toBe(true)
+    expect(askedAnswerableQuestion(INLINE_PROSE_MCQ)).toBe(true) // it IS a real question…
+    // …but the prose-MCQ diagnosis wins, exactly as it does for the
+    // line-anchored shape above — suppressed, never silently accepted.
+    expect(suppress(INLINE_PROSE_MCQ)).toEqual({ suppress: true, reason: 'prose-mcq-ungradeable' })
+  })
+
+  it('a pending STRUCTURED MCQ still short-circuits the inline shape too', () => {
+    expect(suppress(INLINE_PROSE_MCQ, true)).toEqual({ suppress: false, reason: null })
+  })
 })
 
 // ── ladder consumption ───────────────────────────────────────────────────────

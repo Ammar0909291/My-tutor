@@ -50,11 +50,38 @@ describe('proseMcqGuard — detection', () => {
     ['a) foo\nb) bar', 'lowercase', true],
     ['A) only', 'one option only', false],
     ['A) foo\nB) bar\nC) baz\nD) qux\nE) quux', 'five options', false],
-    ['this mentions A) something inline in a sentence', 'inline lettering', false],
+    ['this mentions A) something inline in a sentence', 'inline lettering, one option only', false],
     ['Just plain prose with no options at all.', 'no options', false],
     ['1. foo\n2. bar\n3. baz', 'numbered list', false],
     ['A) foo\nA) also foo', 'same letter twice', false],
     ['', 'empty', false],
+    // P2 FIX: the INLINE shape — the real defect this session found. All
+    // options run together in one sentence, no `<!--MCQ-->` tag, no per-line
+    // structure — the exact shape `OPTION_LINE` above cannot see.
+    [
+      "What does the prefix 're‑' add in 'replay'? A) Time: again (repeat) B) Negation: not play C) Location: under play D) Number: two plays",
+      'the measured production repro — inline A-D after a question',
+      true,
+    ],
+    [
+      'Which of these words is the noun that results from adding -tion to a verb? A) building B) builded C) builder D) building',
+      'inline A-D, a second measured production repro',
+      true,
+    ],
+    ['Does X? A) yes B) no', 'inline two-option, the minimum bound', true],
+    [
+      'Which one is correct? Consider carefully. A) first choice here B) second choice here C) third choice here',
+      'inline options in a later sentence than the question mark',
+      true,
+    ],
+    [
+      'See section A) for background and B) for the proof, as discussed earlier in the chapter.',
+      'a citation-style A)/B) enumeration with NO question — must not fire',
+      false,
+    ],
+    ['B) second thing? A) first thing', 'inline letters present but out of order — not a real option run', false],
+    ['Is it A) first or C) third?', 'inline letters with a gap (no B) — not a real option run', false],
+    ['A) one B) two C) three D) four E) five ?', 'five inline options — not this shape', false],
   ])('%s => %s', (text, _label, expected) => {
     expect(hasProseMultipleChoice(text)).toBe(expected)
   })

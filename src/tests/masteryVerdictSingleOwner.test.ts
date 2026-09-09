@@ -108,7 +108,15 @@ describe('B. structural — all three consult conceptMasteryVerdict', () => {
   it('lessonSummary derives the record from it, not from hasDemonstratedMastery', () => {
     const sum = read('src/lib/teaching/lessonSummary.ts')
     expect(sum).toContain('conceptMasteryVerdict(state)')
-    expect(/import\b[^\n]*hasDemonstratedMastery/.test(sum)).toBe(false)
+    // P1 FIX (2026-09-09): `status` itself is still, and only, derived from
+    // `mastered = conceptMasteryVerdict(state)` a few lines above — asserted
+    // directly below rather than by banning the import. `hasDemonstratedMastery`
+    // IS now imported, but only to compute the SEPARATE, purely explanatory
+    // `answeredButUnverified` field (true only alongside a needs_review status
+    // this same conceptMasteryVerdict call already decided) — it is never a
+    // second input to `status`, which is what this invariant actually protects.
+    const statusLine = sum.slice(sum.indexOf('status: mastered'))
+    expect(statusLine.slice(0, statusLine.indexOf('\n'))).not.toContain('hasDemonstratedMastery')
   })
 })
 

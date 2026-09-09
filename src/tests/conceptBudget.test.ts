@@ -104,10 +104,23 @@ describe('evaluateConceptBudget', () => {
   it('never marks a MASTERED concept for review, however slow it was', () => {
     // The critical case: a learner who struggled but got there must not be
     // told the thing they just proved needs review.
+    //
+    // P1 FIX: `evaluateConceptBudget`'s "already finished" test is now
+    // `isAuthoritativelyMastered` (== `conceptMasteryVerdict`, the SAME
+    // check|practice bar the completion gate certifies against), not the
+    // looser `hasDemonstratedMastery` (practice alone, or bare TRANSFER). A
+    // raw fixture setting only `correctAtPractice` — with `correctAtCheck`
+    // left at its default 0 — is not actually a REACHABLE mastered state (the
+    // real fold can only raise `correctAtPractice` after `correctAtCheck>=1`
+    // has already moved the phase to PRACTICE), so `correctAtCheck: 1` is
+    // added here to make this fixture the genuinely-mastered state its own
+    // comment describes — matching the same convention every `conceptOutcome`
+    // fixture in this file already uses.
     const b = evaluateConceptBudget(st({
       turnsOnConcept: CONCEPT_TURN_BUDGET + 5,
       remediationCount: 9,
       consecutiveFailures: 0,
+      correctAtCheck: 1,
       correctAtPractice: 2,
     }))
     expect(b.status).toBe('ok')
@@ -192,8 +205,11 @@ describe('buildLessonFlowBlock', () => {
   })
 
   it('does not tell a mastered concept it is out of budget', () => {
+    // P1 FIX: see the equivalent note in `evaluateConceptBudget`'s "never
+    // marks a MASTERED concept for review" test above — `correctAtCheck: 1`
+    // makes this the genuinely, reachably mastered state the test describes.
     const block = buildLessonFlowBlock(st({
-      turnsOnConcept: CONCEPT_TURN_BUDGET + 3, correctAtPractice: 2,
+      turnsOnConcept: CONCEPT_TURN_BUDGET + 3, correctAtCheck: 1, correctAtPractice: 2,
     }))
     expect(block).not.toMatch(/SPENT/)
   })

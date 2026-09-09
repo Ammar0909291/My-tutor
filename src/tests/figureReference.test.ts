@@ -640,3 +640,46 @@ describe('an embedded locator — "the histogram in the figure"', () => {
     }
   })
 })
+
+// P2 FIX — "Here's a diagram of X:" offered with nothing rendered behind it.
+// The one shape this file REWRITES rather than deletes: deleting it would
+// leave the ASCII/text content that follows with no introduction at all.
+describe('Shape OFFER: an honest rewrite for a false "here\'s a diagram" offer', () => {
+  it('rewrites the offer and keeps everything that follows it', () => {
+    const t = "Here's a diagram of the parts of a drama script:\n```\nTITLE PAGE\n```"
+    const r = stripUnbackedFigureReferences(t, false)
+    expect(r.stripped).toBe(true)
+    expect(r.text).toMatch(/^I can't show you a rendered image right now, but here's a text version of the parts of a drama script:/)
+    expect(r.text).toContain('TITLE PAGE')
+  })
+
+  it('works for "picture" and mid-sentence, not just "diagram" at the start', () => {
+    const t = "Sure! Here's a picture of the water cycle: rain falls, evaporates, and repeats."
+    const r = stripUnbackedFigureReferences(t, false)
+    expect(r.text).toBe(
+      "Sure! I can't show you a rendered image right now, but here's a text version of the water cycle: rain falls, evaporates, and repeats.",
+    )
+  })
+
+  it('does NOT rewrite when the tutor is already honest about the medium', () => {
+    for (const t of [
+      "Here's a quick text diagram of what you'll find in a typical drama script: some content.",
+      "Here's an ASCII diagram of the structure: rows and columns.",
+      "Here's a mental picture of the cycle: imagine water rising and falling.",
+    ]) {
+      expect(stripUnbackedFigureReferences(t, false).text).toBe(t)
+    }
+  })
+
+  it('does NOT rewrite when a real figure IS attached — the offer would then be true', () => {
+    const t = "Here's a diagram of the water cycle: see the figure above."
+    expect(stripUnbackedFigureReferences(t, true).text).toBe(t)
+  })
+
+  it('is idempotent', () => {
+    const t = "Here's a diagram of the parts of a drama script: some content."
+    const once = stripUnbackedFigureReferences(t, false)
+    const twice = stripUnbackedFigureReferences(once.text, false)
+    expect(twice.text).toBe(once.text)
+  })
+})

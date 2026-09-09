@@ -31,7 +31,7 @@
  */
 
 import type { ConversationState } from './conversationState'
-import { evaluateConceptBudget, hasDemonstratedMastery } from './conceptBudget'
+import { evaluateConceptBudget, isAuthoritativelyMastered } from './conceptBudget'
 import { conceptOutcome, buildLessonSummary, type ConceptOutcome, type LessonSummary } from './lessonSummary'
 
 export type LessonAttemptStatusValue = 'IN_PROGRESS' | 'COMPLETED' | 'ABANDONED'
@@ -157,6 +157,7 @@ export function summaryFromAttempt(attempt: LessonAttemptOutcome): LessonSummary
       status: 'mastered',
       misconceptions: attempt.misconceptionsCorrected.includes(id) ? [id] : [],
       misconceptionsCorrected: attempt.misconceptionsCorrected.includes(id),
+      answeredButUnverified: false,
     })),
     ...attempt.conceptsNeedingReview.map((id): ConceptOutcome => ({
       conceptId: id,
@@ -164,6 +165,13 @@ export function summaryFromAttempt(attempt: LessonAttemptOutcome): LessonSummary
       status: 'needs_review',
       misconceptions: [],
       misconceptionsCorrected: false,
+      // Not persisted (no schema change made for this — see P1 fix note in
+      // conceptOutcome): a RESUMED/re-rendered already-finished lesson falls
+      // back to the generic needs-review wording rather than the honest one.
+      // Not a regression — this is exactly today's existing behaviour for
+      // every needs_review case; only the live, in-session close (which is
+      // where the reported defect actually occurs) gets the honest message.
+      answeredButUnverified: false,
     })),
   ]
   return buildLessonSummary(outcomes)
@@ -187,10 +195,21 @@ export function isLessonFinished(
  * either been mastered or run out of budget — the two ways P6 lets a concept
  * close. Keeps the fold trigger in one place so the caller cannot invent a
  * third closing condition.
+ *
+ * P1 FIX: "mastered" here means `isAuthoritativelyMastered` — the SAME strict
+ * verdict `conceptOutcome` (lessonSummary.ts) will classify this fold against
+ * a few lines later in the caller. The previous test, `hasDemonstratedMastery`,
+ * is satisfied by PLAIN evidence alone (see that function's own doc comment in
+ * conceptBudget.ts) — so a concept could close here on evidence the very next
+ * line's classification would refuse to certify, permanently locking in
+ * `needs_review` on the first turn that merely LOOKED like success. Folding
+ * only once the closure test and the classification test agree means a
+ * concept never closes into a verdict this same call already knows it will
+ * contradict.
  */
 export function isConceptClosed(state: ConversationState): boolean {
   if (!state.conceptId) return false
-  return hasDemonstratedMastery(state) || evaluateConceptBudget(state).status === 'exhausted'
+  return isAuthoritativelyMastered(state) || evaluateConceptBudget(state).status === 'exhausted'
 }
 
 /**

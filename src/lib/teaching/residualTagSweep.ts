@@ -200,6 +200,79 @@ function stripStandaloneMachineJson(text: string): string {
 const UNTERMINATED_TRAILING_RE = /\n?[ \t]*<!--\s*[A-Z][A-Z0-9_]{2,}\b[^>]*$/
 
 /**
+ * PHASE 8 — INTERNAL PACING/NUMBERING LABELS, THE FOURTH DISTINCT LEAK CLASS.
+ *
+ * ── OBSERVED LIVE (real-student English verification, 2026-09) ─────────────
+ * Learner-facing text read, verbatim:
+ *
+ *   "Question (Stage 1 Observation): What do you notice about…"
+ *   "Observation question (Stage 1): In the sentence…"
+ *   "Lesson 191 of 216 – Introduction to Computational Linguistics"
+ *
+ * Neither is machine MARKUP (no `<!--…-->`, no `[NAME…]`, no bare JSON) — the
+ * three sweeps above cannot see either, by design, because both are ordinary
+ * English WORDS the prompt itself hands the model as internal planning
+ * vocabulary: `client.ts`'s QUESTION STAGE POLICY names its own seven-rung
+ * ladder (Observation/Recognition/Identification/Simple reasoning/
+ * Application/Calculation/Transfer) so the model can PACE ITSELF, and the
+ * CURRENT LESSON block hands it "Lesson N of M" so it knows where it is in
+ * the syllabus — neither was ever meant to be read aloud, and (as of this
+ * fix) the prompt for each now says so explicitly. Prompt compliance is
+ * advisory; this is the deterministic partner, on the SAME closed-vocabulary
+ * discipline the JSON-key sweep above already established for exactly this
+ * reason ("no parser keyed to a tag NAME can ever recover from the model
+ * choosing a different name" — true of markup names, equally true of a
+ * planning label the model echoes instead of hiding).
+ *
+ * ── WHY A CLOSED VOCABULARY, NOT A GUESS ─────────────────────────────────
+ * The seven stage names are the EXACT, fixed set client.ts's own prompt
+ * already defines — not invented here, and not a general blacklist of
+ * "suspicious" words (a real lesson may legitimately discuss an "application"
+ * of a formula, a "transfer" of heat, or "identification" of a chemical — the
+ * bare word is ordinary vocabulary). Only the LABEL SHAPE is stripped:
+ * "Stage" immediately followed by a digit, optionally one of the seven names
+ * — that combination is not a sentence a tutor would otherwise write. The
+ * lesson-numbering shape is narrower still: "Lesson N of M" with both N and M
+ * numeric, which is the CURRENT LESSON block's own header format and nothing
+ * a tutor would say in ordinary prose ("this is lesson three" has no "of M").
+ */
+const STAGE_NAME = '(?:Observation|Recognition|Identification|Simple reasoning|Application|Calculation|Transfer)'
+/** "(Stage 1 Observation)", "(Stage 3)" — a parenthesised label suffix, as in
+ *  "Question (Stage 1 Observation): …". Removed whole, including the parens
+ *  and one leading space, so "Question: …" is what remains. */
+const STAGE_PAREN_RE = new RegExp(`\\s*\\(\\s*Stage\\s+\\d+(?:\\s*[:\\-]?\\s*${STAGE_NAME})?\\s*\\)`, 'gi')
+/** "Stage 1 Observation:", "Stage 3:" as a bare prefix/label, not
+ *  parenthesised — e.g. "Stage 1 Observation: What do you notice?". Removed
+ *  along with its trailing separator so the real sentence starts clean. */
+const STAGE_LABEL_RE = new RegExp(`\\bStage\\s+\\d+(?:\\s*[:\\-]?\\s*${STAGE_NAME})?\\s*[:\\-]\\s*`, 'gi')
+/** "Lesson 191 of 216" — the CURRENT LESSON block's own header shape,
+ *  numeric on both sides. Removed whole; a trailing " – "/": " separator
+ *  the model appended to it is cleaned up by the whitespace collapse below. */
+const LESSON_COUNT_RE = /\bLesson\s+\d+\s+of\s+\d+\b\s*[-–—:]?\s*/gi
+
+/**
+ * Remove internal pacing/numbering labels a model echoed instead of hiding —
+ * the "Stage N (Name)" question-ladder label and the "Lesson N of M" header
+ * shape. Idempotent-safe (single pass is sufficient; the shapes cannot nest),
+ * and always safe to call: on any surprise the caller already wraps this in
+ * `stripResidualMachineTags`'s pass loop, which never throws for a plain
+ * string input.
+ */
+function stripInternalPacingLabels(text: string): string {
+  if (!text.includes('Stage') && !text.includes('Lesson')) return text
+  const out = text
+    .replace(STAGE_PAREN_RE, '')
+    .replace(STAGE_LABEL_RE, '')
+    .replace(LESSON_COUNT_RE, '')
+  // A label removed from the very start of the text leaves a leading space
+  // (STAGE_PAREN_RE's own leading `\s*` only absorbs whitespace BEFORE the
+  // paren, which is empty at position 0) — trimmed here rather than widening
+  // the caller's trim, since that trims the whole message, not just this
+  // sweep's own output.
+  return out === text ? text : out.trimStart()
+}
+
+/**
  * Remove any machine markup the named parsers left behind.
  *
  * Total: never throws, and never returns null/undefined for a string input.
@@ -211,8 +284,14 @@ export function stripResidualMachineTags(text: string): string {
   if (typeof text !== 'string') return text
   // Fast path: none of the shapes of markup this sweep removes is present.
   // `/<visual\b/i` is cheap and only tested once here (not per-pass), since
-  // the loop below re-tests via the full regex on each pass anyway.
-  if (!text.includes('<!--') && !/<visual\b/i.test(text) && !text.includes('[') && !text.includes('{')) return text
+  // the loop below re-tests via the full regex on each pass anyway. PHASE 8:
+  // "Stage"/"Lesson" added — the internal pacing/numbering labels carry
+  // neither brackets, braces nor comment markers, so the pre-existing fast
+  // path would otherwise skip them entirely.
+  if (
+    !text.includes('<!--') && !/<visual\b/i.test(text) && !text.includes('[') && !text.includes('{')
+    && !text.includes('Stage') && !text.includes('Lesson')
+  ) return text
   let out = text
   for (let pass = 0; pass < 4; pass++) {
     const next = out
@@ -223,6 +302,7 @@ export function stripResidualMachineTags(text: string): string {
     out = next
   }
   out = stripStandaloneMachineJson(out)
+  out = stripInternalPacingLabels(out)
   out = out.replace(UNTERMINATED_TRAILING_RE, '')
   // Collapse the blank-line crater a removed tag block leaves mid-message.
   out = out.replace(/\n{3,}/g, '\n\n')
@@ -244,4 +324,10 @@ export function hasResidualMachineTag(text: string): boolean {
     // blind to it would report a leak like this file's own header example as
     // clean.
     || text.split('\n').some((line) => isMachineJsonFragment(line))
+    // PHASE 8: the internal pacing/numbering labels, same reasoning again —
+    // reset each regex's `lastIndex` first since `g`-flagged regexes are
+    // stateful and this function may run after a `.replace` call elsewhere.
+    || (STAGE_PAREN_RE.lastIndex = 0, STAGE_PAREN_RE.test(text))
+    || (STAGE_LABEL_RE.lastIndex = 0, STAGE_LABEL_RE.test(text))
+    || (LESSON_COUNT_RE.lastIndex = 0, LESSON_COUNT_RE.test(text))
 }

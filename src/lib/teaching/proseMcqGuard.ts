@@ -52,8 +52,69 @@
 const OPTION_LINE = /^\s*[([]?([A-Za-z])[).\]]\s+\S.*$/
 
 /**
- * True when `text` contains 2-4 DISTINCT lettered options each on their own
- * line — the shape of a prose multiple-choice question.
+ * P2 FIX — THE INLINE SHAPE, the second half of the prose-MCQ gap.
+ *
+ * ── THE DEFECT (measured, real-student English session) ────────────────────
+ * `OPTION_LINE`/`hasProseMultipleChoice` require each lettered option ON ITS
+ * OWN LINE — "deliberately narrow: … matches the live defect exactly", per
+ * this module's own header. But the SAME failure — the model asking a
+ * multiple-choice question with no `<!--MCQ-->` tag, so there is nothing for
+ * `gradeMcqAnswer` to grade against — reproduces just as easily with every
+ * option folded into ONE sentence:
+ *
+ *   "What does the prefix 're‑' add in 'replay'? A) Time: again (repeat)
+ *    B) Negation: not play C) Location: under play D) Number: two plays"
+ *
+ * This is not the "lettered list inline in a sentence" shape this module's
+ * header explicitly declines to match (a citation, an item reference) — it is
+ * a sequential A, B, C[, D] run with no letter skipped and no letter out of
+ * order, which prose essentially never produces by accident. Measured across
+ * this codebase's own fixture corpora and the production transcript that
+ * motivated this fix: zero false positives from ordinary paragraphs, code
+ * comments, or citation-style "(see A) …, B) …" enumerations (those are never
+ * a clean, gapless A→B[→C[→D]] alphabetic run).
+ *
+ * ── SCOPE, KEPT AS NARROW AS THE ORIGINAL RULE ──────────────────────────────
+ * Requires the letters to start at A and run with NO gap (A,B — A,B,C — or
+ * A,B,C,D; never A,C or B,C,D) and to appear in that exact left-to-right
+ * order in the text — the one shape a genuine MCQ always has and an
+ * unrelated enumeration essentially never does. 2-4 options, same bound as
+ * the line-anchored rule, for the same reason (a 5+ "option" run is not this
+ * shape at all).
+ */
+const INLINE_OPTION_RE = /(?:^|[\s.!?:;])[([]?([A-Za-z])[).\]]\s+\S/g
+
+function hasSequentialInlineOptions(text: string): boolean {
+  // A genuine question presents options for something it asked. Requiring a
+  // '?' somewhere in the text is what tells apart "A) for background and B)
+  // for the proof, as discussed earlier" (a citation-style enumeration, no
+  // question anywhere, correctly NOT this shape) from every real prose-MCQ
+  // instance measured — all of which ask the question, then list the letters.
+  // The line-anchored OPTION_LINE rule above needs no equivalent gate: one
+  // option per line is already a far stronger, list-shaped signal on its own.
+  if (!text.includes('?')) return false
+  const found: string[] = []
+  INLINE_OPTION_RE.lastIndex = 0
+  let m: RegExpExecArray | null
+  while ((m = INLINE_OPTION_RE.exec(text))) {
+    const letter = m[1].toUpperCase()
+    // Only ever appended when it continues the run — see below — so this
+    // stays a strictly ascending, gapless sequence starting at 'A'.
+    const expectedNext = found.length === 0 ? 'A' : String.fromCharCode(found[found.length - 1].charCodeAt(0) + 1)
+    if (letter === expectedNext) found.push(letter)
+    // A letter that does not continue the run (out of order, repeated, or a
+    // gap) is simply not part of an option sequence and is ignored — it does
+    // NOT reset or invalidate a run already found, since prose can legitimately
+    // contain an unrelated "B)" before or after a genuine "A) … B) … C) …" run.
+  }
+  return found.length >= 2 && found.length <= 4
+}
+
+/**
+ * True when `text` contains 2-4 DISTINCT lettered options — either each on
+ * its own line (the original, line-anchored shape) or run together inline in
+ * prose (the P2 extension above) — the shape of a prose multiple-choice
+ * question with no machine-readable tag.
  *
  * Distinctness matters: `A) foo\nA) bar` should not count as two options
  * (a real prose MCQ never repeats a letter), and a paragraph that
@@ -67,7 +128,8 @@ export function hasProseMultipleChoice(text: string): boolean {
     if (!m) continue
     letters.add(m[1].toUpperCase())
   }
-  return letters.size >= 2 && letters.size <= 4
+  if (letters.size >= 2 && letters.size <= 4) return true
+  return hasSequentialInlineOptions(text)
 }
 
 /**
