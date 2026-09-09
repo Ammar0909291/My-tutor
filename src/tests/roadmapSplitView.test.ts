@@ -165,19 +165,42 @@ describe('12 — no horizontal overflow at supported desktop widths', () => {
   })
 })
 
-describe('Tutor explanation content is more compact — max width, line-height, and a small typography trim (not a blanket font shrink)', () => {
-  const rowStart = SRC.indexOf("<div key={msg.id} style={{")
+// SUPERSEDES this file's own prior "capped ... and centered" assertions
+// below. `margin: '0 auto'` CENTERS a capped-width row — that moves the
+// LEFT edge inward exactly as much as the right, which is a real, reported
+// regression ("the panel shrank from the left"), not merely a naming
+// nitpick. The fix drops centering entirely: a left-anchored width (no
+// auto margin) sits flush at the start of its flex-column parent by
+// default, so the same ~30% compactness goal is met with the removed
+// space appearing ONLY on the right. See the row's own comment in
+// LessonScreen.tsx for the full reasoning.
+describe('Tutor explanation content is ~30% narrower on desktop, anchored to its LEFT edge (not centered)', () => {
+  const rowStart = SRC.indexOf('<div key={msg.id}')
   const rowBlockEnd = SRC.indexOf('{/* Tutor avatar row', rowStart)
   const rowBlock = SRC.slice(rowStart, rowBlockEnd)
 
-  it('a plain (non-canvas) message row is capped to a comfortable reading width and centered — canvas (figure) rows are completely untouched', () => {
-    expect(rowBlock).toContain("hasCanvasVisual ? { width: '100%' } : { width: '100%', maxWidth: 760, margin: '0 auto' }")
+  it('a plain (non-canvas) message row gets a responsive width class — 100% on mobile, 70% on desktop — never a centering margin', () => {
+    expect(rowBlock).toContain("className={hasCanvasVisual ? undefined : 'w-full md:w-[70%]'}")
+    // The regression this superseded is a NEGATIVE control — checked against
+    // the REAL style object only (rowBlock's own explanatory comment quotes
+    // the old, superseded literal verbatim for context, so asserting against
+    // the whole block would trip on the comment, not the code).
+    const styleStart = rowBlock.indexOf('style={{')
+    const styleObject = rowBlock.slice(styleStart, rowBlock.indexOf('}}>', styleStart))
+    expect(styleObject).not.toMatch(/margin:\s*['"]0 auto['"]/)
+    expect(styleObject).not.toContain('maxWidth: 760')
   })
 
-  it("760 reuses the file's own pre-existing prose reading-width decision (LessonDocument), rather than inventing a new number", () => {
-    const lessonDocIdx = SRC.indexOf('function LessonDocument')
-    const lessonDocBlock = SRC.slice(lessonDocIdx, lessonDocIdx + 400)
-    expect(lessonDocBlock).toContain('maxWidth: 760')
+  it('canvas (figure) rows are completely untouched — className stays undefined, inline width:100% unchanged', () => {
+    expect(rowBlock).toContain("...(hasCanvasVisual ? { width: '100%' } : null)")
+  })
+
+  it('mobile is unaffected (still full width) — only the md: (desktop) breakpoint introduces the 70% reduction', () => {
+    const classAttr = "className={hasCanvasVisual ? undefined : 'w-full md:w-[70%]'}"
+    expect(rowBlock).toContain(classAttr)
+    const value = "w-full md:w-[70%]"
+    const unprefixed = value.split(' ').filter((c) => !c.startsWith('md:'))
+    expect(unprefixed).toEqual(['w-full'])
   })
 
   it('the message-text wrapper gets a modest, deliberate trim (16.2->15.6 fontSize, 1.7->1.6 lineHeight) — not a blanket 30% font shrink, and still a comfortable size for a weak/lower-intermediate learner (>=15px)', () => {

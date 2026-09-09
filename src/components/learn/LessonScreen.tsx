@@ -5154,22 +5154,32 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 )
 
                 return (
-                  <div key={msg.id} style={{
-                    display: 'flex', flexDirection: 'column', alignItems: isUser ? 'flex-end' : 'flex-start',
-                    animation: 'fadeUp 200ms ease-out both',
-                    // Compact Tutor explanation (UI-only sizing pass): a plain
-                    // (non-canvas) row is capped to a comfortable reading
-                    // measure and centered, instead of stretching edge to edge
-                    // whenever Tutor Max fills the whole viewport width
-                    // (maximizedPanel === 'chat', the default). 760 reuses the
-                    // exact reading-width value the file's own (unused)
-                    // LessonDocument component already established for prose —
-                    // not a new number. Canvas rows (figure alongside
-                    // explanation) are untouched: that layout already governs
-                    // its own width via the grid class, and this task's scope
-                    // is the plain explanation text, not the figure pairing.
-                    ...(hasCanvasVisual ? { width: '100%' } : { width: '100%', maxWidth: 760, margin: '0 auto' }),
-                  }}>
+                  <div key={msg.id}
+                    // LEFT-ANCHORED compact width (fix for the regression this
+                    // superseded): the previous attempt capped this row to
+                    // `maxWidth: 760, margin: '0 auto'`, which CENTERS the row
+                    // — that pulls the left edge inward exactly as much as the
+                    // right edge, so the bubble's left edge (which the row's
+                    // own `alignItems: 'flex-start'` had always kept flush
+                    // against the panel's left padding) visibly moved right.
+                    // Reported as "the panel shrank from the left," and it
+                    // was right to report it that way.
+                    //
+                    // A plain width with NO auto margin is flush against the
+                    // START (left) of its flex-column parent by default — no
+                    // centering math needed, the left edge simply never moves.
+                    // 70% (desktop only — see the md: prefix) reduces the
+                    // available width by the same ~30% the compactness pass
+                    // wanted, with the removed space appearing only on the
+                    // right. Mobile stays w-full (unchanged; a further cut on
+                    // an already-narrow phone screen would waste space, and
+                    // this was never reported as broken there).
+                    className={hasCanvasVisual ? undefined : 'w-full md:w-[70%]'}
+                    style={{
+                      display: 'flex', flexDirection: 'column', alignItems: isUser ? 'flex-end' : 'flex-start',
+                      animation: 'fadeUp 200ms ease-out both',
+                      ...(hasCanvasVisual ? { width: '100%' } : null),
+                    }}>
 
                     {/* Tutor avatar row — EagleMascot replaces the generic initials avatar */}
                     {!isUser && !msg.streaming && (
