@@ -2674,10 +2674,25 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   // start teaching it. That only happens once the learner explicitly
   // presses "Start Lesson" on the resulting welcome screen, same gate as
   // every other entry point (first open, refresh, etc.).
+  //
+  // NAVIGATION FIX (Learning Roadmap lesson selection): the Start Lesson
+  // welcome screen this stages lives in the chat/"Learn" panel (Panel 3),
+  // which is hidden whenever maximizedPanel !== 'chat' — including
+  // 'curriculum', the state the "Lessons"/Learning Roadmap button puts the
+  // screen in. Selecting a lesson from the roadmap tree previously staged
+  // the preview correctly but never restored the panel, so the learner
+  // stayed looking at the roadmap and had to manually tap the restore
+  // button to reach the lesson they had just picked. This is the one
+  // shared confirmation point for every switch that goes through the
+  // dialog (Learning Roadmap tree AND the Lesson Navigation Panel's
+  // Previous/Current/Next, per requestLessonSwitch's own comment), so
+  // restoring the chat view here fixes both without a second navigation
+  // mechanism; it is a no-op whenever the chat panel is already showing.
   const confirmLessonSwitch = useCallback(async () => {
     if (!lessonSwitchDialog) return
     const { target } = lessonSwitchDialog
     setLessonSwitchDialog(null)
+    setMaximizedPanel('chat')
     stageLessonPreview(target)
   }, [lessonSwitchDialog, stageLessonPreview])
 
