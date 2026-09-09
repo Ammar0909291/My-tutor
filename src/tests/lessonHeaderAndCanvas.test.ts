@@ -173,9 +173,29 @@ describe('the Lesson/Code/Chat tab strip is removed, not hidden', () => {
     // tutorMaxLearningView.test.ts for that override's own coverage.
     expect(SRC).toMatch(/PANEL 1 — LESSON LIST[\s\S]{0,600}<div className="hidden md:contents"/)
     expect(SRC).toContain("maximizedPanel === 'curriculum' ? { display: 'contents' }")
-    // Panel 2 (code): genuinely desktop-only still, no mobile override added.
-    // Panel 3 (chat): always rendered — "contents"/"flex", never gated.
-    expect(SRC).toMatch(/PANEL 3 — TUTOR CHAT[\s\S]{0,300}<div className="contents"/)
+    // Panel 2 (code): genuinely desktop-only still, no mobile override added
+    // and no involvement in the roadmap split view (still hidden whenever
+    // maximizedPanel !== 'code', at every breakpoint).
+    const panel2Idx = SRC.indexOf('PANEL 2 — CODE EDITOR')
+    expect(SRC.slice(panel2Idx, panel2Idx + 600)).toContain("className={isNotebook ? 'hidden' : 'hidden md:contents'}")
+  })
+
+  // SUPERSEDES this file's own prior assertion that Panel 3 (chat)'s
+  // className was the plain, unconditional literal "contents" at every
+  // maximizedPanel value — true before the Learning Roadmap split-view fix,
+  // no longer the full story. Panel 3 must now ALSO be reachable on desktop
+  // (not hidden) specifically while maximizedPanel === 'curriculum', so its
+  // className becomes conditional, exactly mirroring Panel 1's own
+  // established `hidden md:contents` pattern above. Every other value
+  // ('chat', 'code', null) is untouched: className is still the plain
+  // 'contents' literal and the inline style still governs visibility alone.
+  it("desktop keeps Tutor Max (Panel 3) visible beside the roadmap; mobile still hides it exactly as before", () => {
+    const idx = SRC.indexOf('PANEL 3 — TUTOR CHAT')
+    const block = SRC.slice(idx, idx + 1200)
+    expect(block).toContain("className={maximizedPanel === 'curriculum' ? 'hidden md:contents' : 'contents'}")
+    // The inline style no longer force-hides Panel 3 for 'curriculum' — that
+    // case is governed by the className's own md breakpoint instead.
+    expect(block).toContain("maximizedPanel && maximizedPanel !== 'chat' && maximizedPanel !== 'curriculum' ? { display: 'none' } : undefined")
   })
 })
 

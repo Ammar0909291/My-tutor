@@ -4023,14 +4023,40 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
           third "quick actions" panel is never a permanent grid column there
           — its former mobile-only content (QuickActionsAndCheck) is gone,
           folded into the chat panel's own push-up Actions menu, which is
-          reachable on both mobile and desktop. */}
+          reachable on both mobile and desktop.
+
+          LEARNING ROADMAP SPLIT VIEW: every other maximizedPanel value
+          ('chat', 'code') still collapses to one full-width column — that
+          full-screen toggle is unchanged. 'curriculum' is a deliberate
+          exception on DESKTOP only: instead of replacing Tutor Max, the
+          roadmap opens as a ~32% side panel beside a ~68% Tutor Max column
+          (minmax floor keeps the roadmap from going unusably narrow on a
+          smaller desktop window). On MOBILE the roadmap still takes the
+          whole screen — a 32/68 split has no usable width to give either
+          side on a phone, and this is exactly the existing mobile pattern
+          for lesson selection, left untouched. Panel 3 (Tutor Chat) below
+          carries the matching responsive visibility change; Panel 1
+          (Lesson List) and Panel 2 (Code) need no change — their existing
+          `maximizedPanel === 'curriculum'` / `!== 'code'` checks already do
+          the right thing once the grid gives them a real second column to
+          sit in. */}
       <div
         className={
-          maximizedPanel ? 'grid grid-cols-1'
+          maximizedPanel === 'curriculum' ? 'grid grid-cols-1 gap-0 p-0 md:grid-cols-[minmax(280px,32%)_1fr] md:gap-4 md:p-4'
+          : maximizedPanel ? 'grid grid-cols-1'
           : isNotebook ? 'grid grid-cols-1 md:grid-cols-[22%_78%]'
           : 'grid grid-cols-1 md:grid-cols-[25%_45%_30%]'
         }
-        style={{ flex: 1, minHeight: 0, gridTemplateRows: '1fr', gap: maximizedPanel ? 0 : 16, padding: maximizedPanel ? 0 : 16 }}
+        style={{
+          flex: 1, minHeight: 0, gridTemplateRows: '1fr',
+          // The split view's spacing comes entirely from the responsive
+          // gap-0/p-0/md:gap-4/md:p-4 classes above (0 on mobile — matching
+          // the existing full-bleed roadmap — 16px equivalent on desktop,
+          // matching the normal 3-panel gap/padding below); an inline style
+          // here would win over those classes and couldn't vary by
+          // breakpoint, so it is intentionally omitted only for this case.
+          ...(maximizedPanel === 'curriculum' ? null : { gap: maximizedPanel ? 0 : 16, padding: maximizedPanel ? 0 : 16 }),
+        }}
       >
 
         {/* ══ PANEL 1 — LESSON LIST ═════════════════════════════════════════
@@ -4718,9 +4744,19 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
 
         {/* ══ PANEL 3 — TUTOR CHAT — the Learn window's primary/only mobile
              panel now; unchanged desktop role (promoted to center/wide for
-             non-code subjects) ══ */}
-        <div className="contents"
-          style={maximizedPanel && maximizedPanel !== 'chat' ? { display: 'none' } : undefined}>
+             non-code subjects).
+             LEARNING ROADMAP SPLIT VIEW: on desktop, Tutor Max must stay
+             visible beside the roadmap instead of being hidden — the same
+             `hidden md:contents` pattern Panel 1 already uses, so both
+             panels appear together at the identical md breakpoint the grid
+             above switches at. On mobile this still hides Panel 3 exactly
+             as before (the roadmap keeps the whole screen there). Every
+             other maximizedPanel value ('chat', 'code', null) is completely
+             unaffected — className stays the plain, unconditional
+             'contents' and the inline style keeps deciding visibility, same
+             as always. ══ */}
+        <div className={maximizedPanel === 'curriculum' ? 'hidden md:contents' : 'contents'}
+          style={maximizedPanel && maximizedPanel !== 'chat' && maximizedPanel !== 'curriculum' ? { display: 'none' } : undefined}>
         <Panel accentColor={isNotebook ? UI.indigo : '#3FB950'} style={{ order: isNotebook ? 2 : 3 }}>
           <div style={{ flexDirection: 'column', height: '100%', position: 'relative' }} className="flex">
 
@@ -5118,7 +5154,22 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 )
 
                 return (
-                  <div key={msg.id} style={{ display: 'flex', flexDirection: 'column', alignItems: isUser ? 'flex-end' : 'flex-start', animation: 'fadeUp 200ms ease-out both', ...(hasCanvasVisual ? { width: '100%' } : null) }}>
+                  <div key={msg.id} style={{
+                    display: 'flex', flexDirection: 'column', alignItems: isUser ? 'flex-end' : 'flex-start',
+                    animation: 'fadeUp 200ms ease-out both',
+                    // Compact Tutor explanation (UI-only sizing pass): a plain
+                    // (non-canvas) row is capped to a comfortable reading
+                    // measure and centered, instead of stretching edge to edge
+                    // whenever Tutor Max fills the whole viewport width
+                    // (maximizedPanel === 'chat', the default). 760 reuses the
+                    // exact reading-width value the file's own (unused)
+                    // LessonDocument component already established for prose —
+                    // not a new number. Canvas rows (figure alongside
+                    // explanation) are untouched: that layout already governs
+                    // its own width via the grid class, and this task's scope
+                    // is the plain explanation text, not the figure pairing.
+                    ...(hasCanvasVisual ? { width: '100%' } : { width: '100%', maxWidth: 760, margin: '0 auto' }),
+                  }}>
 
                     {/* Tutor avatar row — EagleMascot replaces the generic initials avatar */}
                     {!isUser && !msg.streaming && (
@@ -5206,7 +5257,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                         transition: 'border-color 200ms',
                       }}>
                         {msg.content
-                          ? <div className="animate-message" style={{ fontSize: 16.2, lineHeight: 1.7, color: 'var(--text-primary)' }}>
+                          ? <div className="animate-message" style={{ fontSize: 15.6, lineHeight: 1.6, color: 'var(--text-primary)' }}>
                               <MessageContent text={displayText} isUser={false} />
                             </div>
                           : <ThinkingBrain size={26} label={t('lesson_thinking_dots')} />
