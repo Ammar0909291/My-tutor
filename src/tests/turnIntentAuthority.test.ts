@@ -109,11 +109,27 @@ describe('route wiring — no competing raw-text read remains', () => {
     }
   })
 
-  it('the two state-dependent readers are UNCHANGED and still where they were', () => {
+  it('the two state-dependent readers are still where they were, and now share turnIntent\'s ephemeral guarantee', () => {
     // Reported, not moved: hoisting these means hoisting excursion state, which
     // is an excursion redesign and out of scope for this phase.
-    expect(ROUTE).toContain('resolveRequestedConceptId(message, excursionLessonConceptId, subjectCode)')
-    expect(ROUTE).toContain('namedTopicUnknownTo(message, taughtText)')
+    //
+    // P1 LESSON-OPENING CONTEXT CORRUPTION FIX (later phase): `message` itself
+    // is not always the learner's raw text — LessonScreen's ephemeral
+    // lesson-opening instruction is machine-authored and must never be read as
+    // learner intent (see `learnerAuthoredMessage`'s own comment at its
+    // definition, right above `readTurnIntent`'s call). Since these two
+    // readers were never hoisted INTO turnIntent, they must independently be
+    // fed the SAME safe value turnIntent.message now carries, or the boundary
+    // this file pins would have a hole exactly the size of these two
+    // functions — which is exactly what the production defect this fix closes
+    // walked through (`namedTopicUnknownTo` extracted the topic "someone else
+    // in plain words" from the opening template's own worked example).
+    expect(ROUTE).toContain('resolveRequestedConceptId(learnerAuthoredMessage, excursionLessonConceptId, subjectCode)')
+    expect(ROUTE).toContain('namedTopicUnknownTo(learnerAuthoredMessage, taughtText)')
+    // The raw `message` identifier must not reach either call directly —
+    // confirming the substitution is total, not partial.
+    expect(ROUTE).not.toMatch(/resolveRequestedConceptId\(message,/)
+    expect(ROUTE).not.toMatch(/namedTopicUnknownTo\(message,/)
   })
 
   it('Phase 0 provenance is untouched and still records after the close', () => {

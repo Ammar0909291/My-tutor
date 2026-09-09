@@ -260,8 +260,39 @@ export async function POST(req: Request) {
     // reading null — silently disabling stop, question, request and
     // visual-form detection that previously still ran at their own call sites.
     // That would have been a behaviour change hiding inside a refactor.
+    //
+    // P1 — LESSON-OPENING CONTEXT CORRUPTION FIX.
+    //
+    // `message` is not always the learner's own words: `ephemeral` (see the
+    // schema field's own contract above) marks LessonScreen's internal
+    // lesson-opening/resume instruction — a ~280-word, machine-authored
+    // prompt-engineering template, never typed by anyone, never persisted.
+    // Before this fix, every "what does the learner want" reader in this
+    // handler still ran on it exactly as if it were genuine speech.
+    //
+    // MEASURED, reproducing the real production defect against the real
+    // functions (not the model): the template's own worked example — 'Final
+    // bullet always: "✓ Explain this to someone else in plain words."' —
+    // starts with the word "explain", which `matchTopicRequest`'s
+    // TOPIC_REQUEST_RE matches as an explicit teach-me request. Feeding the
+    // template into `namedTopicUnknownTo` extracts the "topic"
+    // *"someone else in plain words"*, byte-for-byte the production
+    // learner-visible defect ("Could you tell me what you'd like to learn
+    // about 'someone else in plain words'?") — an unresolved-topic excursion
+    // opened on a fragment of the tutor's OWN stage directions.
+    //
+    // The fix is not a blacklist of that phrase: it is that an ephemeral
+    // instruction must never be readable as learner intent AT ALL, so this is
+    // where every authoritative reader is fed a message that genuinely
+    // reflects "the learner said nothing this turn" — never the template.
+    // `learnerAuthoredMessage` is used everywhere downstream that asks what
+    // the LEARNER wants (turnIntent, the excursion/topic resolvers at their
+    // own two call sites below, and the CUE's studentIntent classification);
+    // the RAW `message` is still sent to the model unchanged, because
+    // instructing the model IS this turn's entire purpose.
+    const learnerAuthoredMessage = ephemeral ? '' : message
     const turnIntent = readTurnIntent(
-      message,
+      learnerAuthoredMessage,
       learnSession.messages.find((m) => m.role === MessageRole.USER)?.content ?? null,
     )
     const subjectCode = learnSession.subject.slug
@@ -2387,7 +2418,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         const { resolveRequestedConceptId } = await import('@/lib/teaching/concept/requestedConcept')
         const { parseExcursionState, decideExcursion, buildExcursionDirective } =
           await import('@/lib/teaching/excursion')
-        const requestedConceptIdThisTurn = resolveRequestedConceptId(message, excursionLessonConceptId, subjectCode)
+        const requestedConceptIdThisTurn = resolveRequestedConceptId(learnerAuthoredMessage, excursionLessonConceptId, subjectCode)
         // PHASE 4 — IS THIS A REPORTED KNOWLEDGE GAP RATHER THAN DISTRESS?
         //
         // Nothing new is read. The resolver above already ran on this exact
@@ -2450,11 +2481,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             lessonNode?.description ?? '',
             activeTopic,
           ].join(' ')
-          return namedTopicUnknownTo(message, taughtText)?.title ?? null
+          return namedTopicUnknownTo(learnerAuthoredMessage, taughtText)?.title ?? null
         })()
         const excursionDecision = decideExcursion({
           state: priorExcursionState,
-          message,
+          message: learnerAuthoredMessage,
           lessonConceptId: excursionLessonConceptId,
           requestedConceptId: requestedConceptIdThisTurn,
           requestedTopicTitle: requestedTopicTitleThisTurn,
@@ -4662,7 +4693,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // P13: a runtime fact the CUE records and the ladder acts on.
           lessonCompleted: lessonCompletedHoisted,
           newIntentAfterCompletion: lessonCompletionRespectsNewIntentHoisted,
-          message,
+          // P1 lesson-opening fix: an ephemeral instruction is not learner
+          // speech (see learnerAuthoredMessage's own comment). readConversation
+          // runs its OWN confusion/tentative-answer/deixis checks directly on
+          // this field, independent of the isQuestion/helpRequestKind overrides
+          // below, so it must see the same safe value turnIntent already does.
+          message: learnerAuthoredMessage,
           history: historyMessages,
           recoveryKey: recoveryKeyHoisted,
           // Phase 3: the turn was already read authoritatively at the top of
@@ -4748,7 +4784,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // teaching. Pipeline: Student → Understand → ConvDecision → TeachDecision → Render
         try {
           const { classifyConversation } = await import('@/lib/teaching/conversationDecision')
-          conversationDecisionHoisted = classifyConversation(message, {
+          // P1 lesson-opening fix: classifyConversation runs its OWN
+          // CONFUSION_RE/BOREDOM_RE/CURIOSITY_RE/TENTATIVE_RE/QUESTION_END
+          // checks directly on this argument — independent of the
+          // studentIntent override passed below — so an ephemeral
+          // instruction must not reach it either.
+          conversationDecisionHoisted = classifyConversation(learnerAuthoredMessage, {
             recoveryKey: recoveryKeyHoisted,
             studentIntent: understanding.studentIntent.value,
             lastAssistantAskedQuestion: understanding.conversationSummary.lastAssistantAskedQuestion,
