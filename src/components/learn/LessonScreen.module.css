@@ -60,6 +60,18 @@
   --bg-elevated: var(--sb-board-alt);
   --bg-hover: rgba(47, 125, 90, 0.08);
   --bg-overlay: var(--sb-paper);
+  /* Panel background inconsistency fix: the shared candy <Card> primitive
+     (used by every panel wrapper here — Lesson List, Code Editor, Tutor
+     Chat) reads `--candy-card` directly (primitives.module.css), which this
+     re-skin never re-pointed. It stayed at its stale pre-Study-Board value
+     (a cool near-black, unrelated to this warm palette), while the Tutor
+     Chat messages area already paints itself `var(--bg-void)` explicitly —
+     two different color families on screen at once, which is exactly the
+     reported "left/right panel don't match" seam. Re-pointing it to the
+     SAME `--bg-void` every panel's main surface should share (rather than
+     `--bg-card`/`--sb-board`, a related but distinct tone) guarantees an
+     exact match, not just a same-family approximation. */
+  --candy-card: var(--bg-void);
 
   /* Text */
   --text-primary: var(--sb-ink);
@@ -108,6 +120,8 @@
   --bg-elevated: var(--sb-board-alt);
   --bg-hover: rgba(232, 184, 75, 0.1);
   --bg-overlay: var(--sb-paper);
+  /* See the identical override + comment in the light block above. */
+  --candy-card: var(--bg-void);
 
   --text-primary: var(--sb-ink);
   --text-secondary: var(--sb-ink-soft);
