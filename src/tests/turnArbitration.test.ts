@@ -29,6 +29,7 @@ const NO_CLAIMS: TurnClaims = {
   learnerRequestActive: false,
   closing: false,
   completionReady: false,
+  genuineQuestionActive: false,
 }
 
 /** The claim field that makes each authority fire. TEACH is the floor and has none. */
@@ -38,6 +39,7 @@ const CLAIM_FOR: Record<Exclude<TurnAuthority, 'TEACH'>, keyof TurnClaims> = {
   LEARNER_REQUEST: 'learnerRequestActive',
   CLOSE: 'closing',
   COMPLETE: 'completionReady',
+  LEARNER_QUESTION: 'genuineQuestionActive',
 }
 
 const claiming = (...authorities: Exclude<TurnAuthority, 'TEACH'>[]): TurnClaims => {
@@ -77,17 +79,18 @@ describe('1. the precedence ladder itself', () => {
     }
   })
 
-  it('the order is the one Phase 3 derived plus Phase 4\'s rung, stated exactly once', () => {
+  it('the order is the one Phase 3 derived plus Phase 4\'s and the English-reliability rungs, stated exactly once', () => {
     // THIS TEST FAILING IS THE POINT. It was written so that a future edit to
     // the order has to argue with a failing assertion rather than with a
-    // comment, and Phase 4 is the first edit to meet it. What changed:
-    // KNOWLEDGE_GAP was INSERTED at the top. Nothing was reordered — the
-    // Phase 3 sequence below it is unchanged, element for element.
+    // comment. Phase 4 inserted KNOWLEDGE_GAP at the top; the English
+    // reliability fix inserted LEARNER_QUESTION just above the floor. Neither
+    // insertion reordered anything else — the Phase 3 sequence in between is
+    // unchanged, element for element.
     expect([...TURN_AUTHORITY_ORDER]).toEqual([
-      'KNOWLEDGE_GAP', 'RECOVERY', 'LEARNER_REQUEST', 'CLOSE', 'COMPLETE', 'TEACH',
+      'KNOWLEDGE_GAP', 'RECOVERY', 'LEARNER_REQUEST', 'CLOSE', 'COMPLETE', 'LEARNER_QUESTION', 'TEACH',
     ])
-    // Phase 3's order, still intact underneath the insertion.
-    expect(TURN_AUTHORITY_ORDER.filter((a) => a !== 'KNOWLEDGE_GAP')).toEqual([
+    // Phase 3's order, still intact underneath both insertions.
+    expect(TURN_AUTHORITY_ORDER.filter((a) => a !== 'KNOWLEDGE_GAP' && a !== 'LEARNER_QUESTION')).toEqual([
       'RECOVERY', 'LEARNER_REQUEST', 'CLOSE', 'COMPLETE', 'TEACH',
     ])
     // The two divergences from the proposed ordering, pinned as behaviour so a
@@ -502,5 +505,120 @@ describe('6. negative controls — valid behaviour is unchanged', () => {
     // arbitrated.
     expect(shouldInjectAffectClose({ phase: 'CLOSING', excursionActive: false, ambiguousTurn: false })).toBe(true)
     expect(directive(null)).toContain('- Next move:')
+  })
+})
+
+// ── 7. THE ENGLISH RELIABILITY FIX — LEARNER_QUESTION ───────────────────────
+//
+// MEASURED IN PRODUCTION (session cmttytj5p0004l1049tmxn1bo,
+// eng.vocab.suffixes): a learner asked "Is this sentence correct: 'The box
+// of chocolates are on the table'?" and the deterministic gate renderer
+// served ONLY a canned assessment lead-in — zero explanation, zero model
+// call — because every OTHER rung already denies AUTHORED_PROBE and none of
+// them claims on a bare genuine question. This section pins the rung that
+// closes that one specific gap.
+
+describe('7. LEARNER_QUESTION — a genuine question denies a NEW authored probe, and nothing else', () => {
+  it('the confirmed defect: an ordinary TEACH-owned turn with a genuine question now denies AUTHORED_PROBE', () => {
+    // Before this rung existed, this was indistinguishable from NO_CLAIMS —
+    // owner TEACH, AUTHORED_PROBE allowed — which is exactly how the
+    // deterministic gate renderer bypassed the LLM (and the D4b/
+    // conversation-directive "answer it first" text with it) on the
+    // production turn above.
+    const v = arbitrateTurn({ ...NO_CLAIMS, genuineQuestionActive: true })
+    expect(v.owner).toBe('LEARNER_QUESTION')
+    expect(v.allows('AUTHORED_PROBE')).toBe(false)
+  })
+
+  it('suppresses ONLY AUTHORED_PROBE — PHASE_FRAME, NEXT_MOVE, NEW_QUESTION and SESSION_CLOSE all survive', () => {
+    // Deliberately narrower than LEARNER_REQUEST (D3), which also takes
+    // NEXT_MOVE and SESSION_CLOSE. A genuine question does not end the
+    // session or override the ladder's pacing; the model may still ask its
+    // own natural follow-up after answering.
+    const v = arbitrateTurn({ ...NO_CLAIMS, genuineQuestionActive: true })
+    expect(v.allows('PHASE_FRAME')).toBe(true)
+    expect(v.allows('NEXT_MOVE')).toBe(true)
+    expect(v.allows('NEW_QUESTION')).toBe(true)
+    expect(v.allows('SESSION_CLOSE')).toBe(true)
+    expect(v.allows('RECOVERY_SCRIPT')).toBe(true)
+    expect(v.allows('FILLER_REPAIR')).toBe(true)
+  })
+
+  it('loses to every higher authority — a question does not contest RECOVERY, a REQUEST, CLOSE, COMPLETE or a KNOWLEDGE_GAP', () => {
+    for (const higher of ['KNOWLEDGE_GAP', 'RECOVERY', 'LEARNER_REQUEST', 'CLOSE', 'COMPLETE'] as const) {
+      const v = arbitrateTurn(claiming(higher, 'LEARNER_QUESTION'))
+      expect(v.owner, `${higher} must still win over LEARNER_QUESTION`).toBe(higher)
+      expect(v.overridden).toContain('LEARNER_QUESTION')
+    }
+  })
+
+  it('wins over nothing but TEACH — the floor still yields to it', () => {
+    // TEACH always claims (the floor), so it is always in `overridden` when
+    // it loses — the same shape every other rung's "wins alone" case has.
+    const v = arbitrateTurn(claiming('LEARNER_QUESTION'))
+    expect(v.owner).toBe('LEARNER_QUESTION')
+    expect(v.overridden).toEqual(['TEACH'])
+  })
+
+  it('an ordinary question during a CLOSING turn still gets CLOSE\'s stricter denial — no capability leaks through', () => {
+    // Both CLOSE and LEARNER_QUESTION deny AUTHORED_PROBE, so ordering
+    // between them is moot for that capability, but CLOSE's OWN, wider
+    // denial (NEW_QUESTION, NEXT_MOVE, PHASE_FRAME) must not be weakened by
+    // a question also being present this turn.
+    const v = arbitrateTurn(claiming('CLOSE', 'LEARNER_QUESTION'))
+    expect(v.owner).toBe('CLOSE')
+    expect(v.allows('NEW_QUESTION')).toBe(false)
+    expect(v.allows('NEXT_MOVE')).toBe(false)
+  })
+
+  it('an explicit learner request (D3) still governs exactly as before when both are present', () => {
+    const v = arbitrateTurn(claiming('LEARNER_REQUEST', 'LEARNER_QUESTION'))
+    expect(v.owner).toBe('LEARNER_REQUEST')
+    expect(v.allows('AUTHORED_PROBE')).toBe(false)
+    expect(v.allows('NEW_QUESTION')).toBe(true)
+  })
+
+  it('is total and first-match-wins across the full claim space including the new rung', () => {
+    const fields = Object.values(CLAIM_FOR)
+    for (let mask = 0; mask < (1 << fields.length); mask++) {
+      const claims = { ...NO_CLAIMS }
+      fields.forEach((f, i) => { if (mask & (1 << i)) claims[f] = true })
+      const v = arbitrateTurn(claims)
+      expect(TURN_AUTHORITY_ORDER).toContain(v.owner)
+    }
+  })
+
+  it('route.ts wires the claim from the EXISTING detectLearnerQuestion — never a new regex', () => {
+    const src = readFileSync('src/app/api/learn/chat/route.ts', 'utf8')
+    const at = src.indexOf('genuineQuestionActive:')
+    expect(at).toBeGreaterThan(0)
+    expect(src.slice(at, at + 100)).toContain(
+      'genuineQuestionActive: detectLearnerQuestion(turnIntent.message) && pendingMcqHoisted === null',
+    )
+    // The call site imports the EXISTING detector rather than inventing one —
+    // the same function `buildTurnDirective`'s A.4 "STUDENT QUESTION
+    // DETECTED" line already relies on for the identical concern.
+    const near = src.slice(Math.max(0, at - 1500), at)
+    expect(near).toContain("await import('@/lib/teaching/conversationState')")
+    expect(near).toContain('detectLearnerQuestion')
+    // No fresh regex is authored at the call site itself.
+    expect(near).not.toMatch(/=\s*\/[^/\n*]+\/[gimsuy]*/)
+  })
+
+  it('deliberately NOT turnIntent.isQuestion — that reading is broader, for a different consumer, and has a measured false positive here', () => {
+    // Regression pin: livenessEndToEnd.test.ts's L1 replay found a TYPED
+    // ANSWER ("where electrons are released") misread as a genuine question
+    // by the raw, context-free isGenuineQuestion because it opens with a
+    // WH-word. detectLearnerQuestion requires an actual '?' too, so it does
+    // not repeat that mistake.
+    const src = readFileSync('src/app/api/learn/chat/route.ts', 'utf8')
+    const at = src.indexOf('genuineQuestionActive:')
+    expect(src.slice(at, at + 100)).not.toContain('turnIntent.isQuestion')
+  })
+
+  it('the gate does not need its own change — it already consumes allows(\'AUTHORED_PROBE\')', () => {
+    const s = readFileSync('src/app/api/learn/chat/route.ts', 'utf8')
+    const gate = s.slice(s.indexOf('const gateTerms = {'), s.indexOf('if (gateEligible && memoryState)'))
+    expect(gate).toContain("allows('AUTHORED_PROBE')")
   })
 })

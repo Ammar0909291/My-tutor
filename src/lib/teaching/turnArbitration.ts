@@ -146,7 +146,45 @@
  *
  *  5 COMPLETE — the lesson is finished; no further teaching move applies.
  *
- *  6 TEACH — the ordinary ladder turn. THE FLOOR: it always claims, so the
+ *  6 LEARNER_QUESTION — the learner asked a genuine substantive question
+ *    (turnIntent.isQuestion — Phase 1's one authoritative read; the SAME
+ *    field `lessonCompletionRespectsNewIntentHoisted` already reuses for an
+ *    identical concern). Milestone: English reliability validation, session-
+ *    opening/pacing fix.
+ *
+ *    >> WHY THIS EXISTS. `learnerRequestActive` above is DELIBERATELY narrow
+ *    — "not the message contains a question mark" — so an ordinary genuine
+ *    question ("is this sentence correct?", "why do we double the
+ *    consonant?") claims nothing in this ladder at all today. Every other
+ *    rung already denies AUTHORED_PROBE (KNOWLEDGE_GAP, RECOVERY,
+ *    LEARNER_REQUEST, CLOSE, COMPLETE all list it), so the gap was invisible
+ *    everywhere except the one case none of them claims: an ordinary
+ *    TEACH-owned turn where the learner happens to have asked something.
+ *    Measured in production (session cmttytj5p0004l1049tmxn1bo,
+ *    eng.vocab.suffixes): a learner asked "Is this sentence correct: 'The
+ *    box of chocolates are on the table'?" and the deterministic gate
+ *    renderer served ONLY a canned assessment lead-in — zero explanation of
+ *    the question, zero model call, because `gateEligible`'s
+ *    `arbitrationAllowsProbe` term read true (owner was TEACH; nothing
+ *    claimed).
+ *
+ *    >> WHY IT SITS JUST ABOVE THE FLOOR, NOT ABOVE CLOSE/COMPLETE/REQUEST.
+ *    Every rung above it already denies AUTHORED_PROBE, so its relative
+ *    position to them is moot for that capability — it only ever WINS when
+ *    NOTHING else claimed, which is exactly the gap. Placing it any higher
+ *    would risk exactly what `learnerRequestActive`'s own comment warns
+ *    against for the SAME reasoning: contesting CLOSE or a real learner
+ *    request over a bare question mark is not this fix's job.
+ *
+ *    >> WHY IT SUPPRESSES ONLY AUTHORED_PROBE, NOTHING ELSE. Unlike
+ *    LEARNER_REQUEST (which also takes NEXT_MOVE and SESSION_CLOSE), a
+ *    genuine question does not itself end a session or override the ladder's
+ *    pacing — it only means a NEW authored assessment must not be introduced
+ *    before the question is answered. PHASE_FRAME, NEXT_MOVE and
+ *    NEW_QUESTION all survive: the model may still ask its own natural
+ *    follow-up after answering, exactly as LEARNER_REQUEST already argues.
+ *
+ *  7 TEACH — the ordinary ladder turn. THE FLOOR: it always claims, so the
  *    verdict is total and `owner` is never null. EOS v2 §5.2's completeness
  *    rule, restated for this axis.
  *
@@ -184,6 +222,7 @@ export const TURN_AUTHORITY_ORDER = [
   'LEARNER_REQUEST',
   'CLOSE',
   'COMPLETE',
+  'LEARNER_QUESTION',
   'TEACH',
 ] as const
 
@@ -252,6 +291,15 @@ export interface TurnClaims {
   closing: boolean
   /** masteryGate: the lesson is finished / concluding this turn. */
   completionReady: boolean
+  /**
+   * turnIntent.isQuestion: the learner asked a genuine substantive question
+   * (English reliability fix). Deliberately the SAME broad reading
+   * `learnerRequestActive` above explicitly declines to use for itself —
+   * here that breadth is correct, because this claim suppresses only
+   * AUTHORED_PROBE (see the rung's doc comment above `TURN_AUTHORITY_ORDER`),
+   * never NEXT_MOVE or SESSION_CLOSE the way LEARNER_REQUEST does.
+   */
+  genuineQuestionActive: boolean
 }
 
 interface AuthoritySpec {
@@ -332,6 +380,17 @@ const AUTHORITIES: readonly AuthoritySpec[] = [
     claims: (c) => c.completionReady,
     suppresses: ['PHASE_FRAME', 'NEXT_MOVE', 'NEW_QUESTION', 'AUTHORED_PROBE'],
     reason: 'the lesson is finished — no further teaching move applies',
+  },
+  {
+    authority: 'LEARNER_QUESTION',
+    claims: (c) => c.genuineQuestionActive,
+    // ONLY the authored probe. PHASE_FRAME, NEXT_MOVE, NEW_QUESTION and
+    // SESSION_CLOSE all survive — a genuine question does not end the
+    // session or override the ladder's pacing, it only means a NEW authored
+    // assessment must not be introduced this turn before the question is
+    // answered. See the rung's doc comment above TURN_AUTHORITY_ORDER.
+    suppresses: ['AUTHORED_PROBE'],
+    reason: 'the learner asked a genuine question — answer it before introducing a new authored assessment',
   },
   {
     authority: 'TEACH',

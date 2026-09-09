@@ -2658,6 +2658,26 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // Claims only — no detector runs here. Each field is a value its
           // designated owner already produced.
           {
+            // English reliability fix: the LEARNER_QUESTION claim reuses
+            // `detectLearnerQuestion` — the SAME detector `buildTurnDirective`
+            // (A.4, conversationState.ts:2282, "STUDENT QUESTION DETECTED:
+            // address FIRST") already relies on for the identical concern.
+            // Deliberately NOT `turnIntent.isQuestion` (`isGenuineQuestion`):
+            // that reading is intentionally broader for ITS consumer
+            // (`lessonCompletionRespectsNewIntentHoisted`, above) and, being
+            // context-free, has a measured false positive here —
+            // livenessEndToEnd.test.ts's real end-to-end L1 replay caught a
+            // TYPED ANSWER, "where electrons are released", misread as a
+            // genuine question because it opens with a WH-word.
+            // `detectLearnerQuestion` requires an actual '?' AND a recognized
+            // question-word pattern, which every one of that replay's typed
+            // answers lacks. Belt and braces on top of that: `&&
+            // pendingMcqHoisted === null`, so a hedged answer that DOES carry
+            // a '?' ("is it the anode?") still can't claim this rung while a
+            // probe from a PRIOR turn is genuinely pending — that case is
+            // already, and more specifically, governed by
+            // `noUnansweredProbeOnScreen`.
+            const { detectLearnerQuestion } = await import('@/lib/teaching/conversationState')
             turnArbitrationHoisted = arbitrateTurn({
               knowledgeGapResolved: knowledgeGapHoisted !== null,
               recoveryActive: recoveryKeyHoisted !== null,
@@ -2669,6 +2689,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 turnIntent.learnerRequest !== null || turnIntent.ambiguous,
               closing: sessionEpisodeHoisted.phase === 'CLOSING',
               completionReady: lessonCompletedHoisted,
+              genuineQuestionActive: detectLearnerQuestion(turnIntent.message) && pendingMcqHoisted === null,
             })
             const arb = turnArbitrationHoisted
             console.log('[arbitration]', {
