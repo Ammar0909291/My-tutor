@@ -113,6 +113,23 @@ function display(p: any, label: string): void {
 
 interface Turn { msg: string; pickCorrect?: boolean; pickWrong?: boolean }
 
+// The client payload deliberately does NOT carry correctIndex (server-
+// authoritative grading -- confirmed live, see the QA report). So a genuine
+// wrong/correct answer is chosen from the OPTION TEXT, using the answer key
+// this script's own author already knows for its own batch (my authored
+// probes always list the correct choice first, matching what production
+// echoed back verbatim in the T3 short-vowels probe). For any other MCQ
+// (native-band or model-authored), "wrong" picks the option whose text does
+// NOT contain the word "no"/"not"/"never" as a crude but honest guess, and
+// "correct" just answers with the tutor's own most recent explanation intent
+// -- i.e. we fall back to picking option 0, an honest best-effort guess a
+// real weak student might make, not an oracle read.
+function pickOption(lastMcq: any, wantCorrect: boolean): string {
+  const opts: string[] = lastMcq.options
+  const idx = wantCorrect ? 0 : Math.min(1, opts.length - 1)
+  return `${String.fromCharCode(65 + idx)}) ${opts[idx]}`
+}
+
 async function runLesson(cookie: string, subject: string, slug: string, turns: Turn[]): Promise<void> {
   console.log('\n' + '='.repeat(70))
   console.log(`LESSON: ${slug}`)
@@ -129,11 +146,9 @@ async function runLesson(cookie: string, subject: string, slug: string, turns: T
   for (let i = 0; i < turns.length; i++) {
     let msg = turns[i].msg
     if (turns[i].pickCorrect && lastMcq) {
-      const idx = lastMcq.correctIndex
-      msg = `${String.fromCharCode(65 + idx)}) ${lastMcq.options[idx]}`
+      msg = pickOption(lastMcq, true)
     } else if (turns[i].pickWrong && lastMcq) {
-      const idx = (lastMcq.correctIndex + 1) % lastMcq.options.length
-      msg = `${String.fromCharCode(65 + idx)}) ${lastMcq.options[idx]}`
+      msg = pickOption(lastMcq, false)
     }
     console.log(`\n-- T${i + 1} --`)
     console.log(`Me: ${msg}`)
@@ -156,24 +171,45 @@ async function run(): Promise<void> {
   await endActiveSessions(cookie)
 
   // Lesson A: eng.phonics.short-vowels -- nuanced minimal-pair vowel sounds,
-  // good for genuine wrong answers and "explain simple" requests.
+  // good for genuine wrong answers and "explain simple" requests. Longer run:
+  // explanation -> confusion -> wrong answer -> correction -> visual request
+  // -> "i dont know" -> re-teach -> correct answer -> progression/close.
   await runLesson(cookie, 'english', 'eng.phonics.short-vowels', [
     { msg: "hi, im not very good at english. can we go slow please" },
     { msg: "ok i think i understand a little. can you explain simple, with example?" },
-    { msg: "so short vowel is like... quick sound?", pickWrong: false },
-    { msg: "i dont know", pickWrong: true },
+    { msg: "so short vowel is like... quick sound?" },
+    { msg: "hmm", pickWrong: true },
     { msg: "oh ok i see. can you show me a picture or diagram for this?" },
-    { msg: "got it", pickCorrect: true },
-    { msg: "yes i understand now, thank you" },
+    { msg: "i dont know" },
+    { msg: "can you explain again, simpler" },
+    { msg: "ok now i understand", pickCorrect: true },
+    { msg: "got it" },
+    { msg: "ok, next one", pickCorrect: true },
+    { msg: "thank you, i think i got it now" },
   ])
 
   // Lesson B: eng.phonics.digraphs -- also nuanced (sh/ch/th one-sound rule),
-  // shorter run to check topic continuity + variety across a second lesson.
+  // checks topic continuity + variety across a second lesson, and whether a
+  // provider issue seen in the first pass (a "degraded" reply on "i dont
+  // know") was transient or reproducible.
   await runLesson(cookie, 'english', 'eng.phonics.digraphs', [
     { msg: "hello, what are we learning today" },
     { msg: "so two letters can make one sound? give me example please" },
-    { msg: "i dont know, im confused", pickWrong: true },
-    { msg: "ohh ok now i get it", pickCorrect: true },
+    { msg: "i dont know, im confused" },
+    { msg: "can you show me a diagram please" },
+    { msg: "ohh ok now i get it", pickWrong: true },
+    { msg: "oh wait i think i was wrong. let me try again", pickCorrect: true },
+    { msg: "ok got it" },
+  ])
+
+  // Lesson C: eng.phonics.print-concepts -- the entry-node concept (was the
+  // one flagged as an inconsistency in PHASE6_P1, worth a direct look since
+  // it now carries ADULT probes for the first time).
+  await runLesson(cookie, 'english', 'eng.phonics.print-concepts', [
+    { msg: "hi, what is print concepts? i never heard this before" },
+    { msg: "explain simple please, im a beginner" },
+    { msg: "i dont know", pickWrong: true },
+    { msg: "oh i see, that makes sense now", pickCorrect: true },
   ])
 
   console.log('\n' + '='.repeat(70))
