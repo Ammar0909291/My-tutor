@@ -302,6 +302,20 @@ async function bootstrapAssets() {
       // concepts. See englishProbeBatch10.ts header for detail.
       const { ENGLISH_PROBE_BATCH_10 } =
         await import('./lib/teaching/assets/englishProbeBatch10')
+      // English ADULT-band probe-contract campaign, Batch 1 (2026-09-10): the
+      // native-band campaign above deliberately left the ADULT band untouched
+      // (flagged in englishProbeBatch1.ts's own header as an open scope
+      // question). Measured directly from the corpus: all 214 applicable
+      // English concepts hold ZERO ADULT-band closed-choice probes, so any
+      // learner with no school grade on file (gradeToGradeBand's ADULT
+      // default — the ordinary self-directed Library learner) gets no
+      // gradeable assessment on most English concepts, whose native band
+      // sits below the HIGH<->ADULT matcher compatibility bonus. This batch
+      // brings the first 10 concepts (eng.phonics.print-concepts through
+      // eng.phonics.sight-words) to 3 ADULT-band closed-choice probes each.
+      // See englishAdultBandBatch1.ts's own header for detail.
+      const { ENGLISH_ADULT_BAND_BATCH_1 } =
+        await import('./lib/teaching/assets/englishAdultBandBatch1')
       const { hashContent } = await import('./lib/teaching/assets/similarity')
       const { AssetFamily, AssetStatus, AuthorKind, ExplanationStyle, ProbeDifficulty } = await import('@prisma/client')
       // The ladder rungs a slug may carry, from the enum itself rather than a
@@ -314,7 +328,7 @@ async function bootstrapAssets() {
         ...ENGLISH_PROBE_BATCH_1, ...ENGLISH_BATCH_1_DEPTH_4, ...ENGLISH_PROBE_BATCH_2,
         ...ENGLISH_PROBE_BATCH_3, ...ENGLISH_PROBE_BATCH_4, ...ENGLISH_PROBE_BATCH_5,
         ...ENGLISH_PROBE_BATCH_6, ...ENGLISH_PROBE_BATCH_7, ...ENGLISH_PROBE_BATCH_8, ...ENGLISH_PROBE_BATCH_9,
-        ...ENGLISH_PROBE_BATCH_10]
+        ...ENGLISH_PROBE_BATCH_10, ...ENGLISH_ADULT_BAND_BATCH_1]
       // ADR 14 §13 (Item 6): ladder rungs get a difficulty segment; singleton
       // slots keep the identity they already have. One resolver drives BOTH
       // the pre-flight check and the write loop so they cannot disagree.
