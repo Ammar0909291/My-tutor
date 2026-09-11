@@ -3006,6 +3006,31 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   runtime; the runtime carries the weaker, honest proxy "nothing happened for N
   turns".
 
+## Mathematics Educational Brain completion campaign (started 2026-09-11)
+- Dedicated, exclusively-Mathematics continuation of the Curriculum Completion Program above
+  (Physics/Chemistry/English/Biology/Computer Science, UI/UX, and runtime work explicitly out of
+  scope for this campaign). Goal: every one of Mathematics' 908 KG concepts reaches a complete,
+  Standard-compliant Educational Brain entry. Verified state on start (`scripts/math/state.ts`,
+  not the task's own stated baseline): KG 908/908, EB 257/908 (not 256), math.alg 12/59 (not
+  11/59 — a `like-terms` Wave 2 addition had not been reflected in `COVERAGE.md`'s summary row).
+  Four domains already CERTIFIED (`math.found` 82/82, `math.geom` 69/69, `math.arith` 58/58,
+  `math.nt` 36/36); `math.alg` in progress; 19 domains unstarted.
+- **Batch 1 — math.alg Wave 3** (2026-09-11): authored the 3 concepts computed programmatically as
+  the topologically-ready `math.alg` frontier — `math.alg.simplification`,
+  `math.alg.polynomial-operations`, `math.alg.radicals` — all Blueprint-grounded, reused by
+  reference per the Standard's ownership boundary, each with birth-type-classified misconceptions
+  not present in the Blueprints themselves. `math.alg` 12/59 → **15/59**. Mathematics
+  **257/908 → 260/908**. Full per-concept detail in `educational-brain/concepts/COVERAGE.md`
+  Batch 57. Corrected two stale tracking numbers found on start: `ROADMAP.md`'s totals (still
+  reading 256/908) and `COVERAGE.md`'s math.alg summary row (still reading 11/59). Validated: KG
+  validator PASS (908/908 reachable, file untouched), 0 orphan/duplicate EB files, `tsc --noEmit`
+  clean, targeted tests 479/479 passed. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/
+  runtime file touched. Per this program's own established "one bounded batch, re-derive the
+  frontier fresh next time" discipline, Wave 4 was deliberately NOT started this batch — 651
+  concepts remain (908 − 257 at campaign start), now 648 remain after this batch. This is a
+  genuinely multi-session campaign at the established authoring depth; continuation should verify
+  state via `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
+
 ## Run locally
 ```
 cp .env.example .env   # set DATABASE_URL, AUTH_SECRET (openssl rand -base64 32), GROQ_API_KEY
