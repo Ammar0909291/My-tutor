@@ -220,6 +220,52 @@ normalcy and evidence quality); correct answers confirmed properly
 `process_flow` visuals auto-attached (5-step conversation-flow diagram); no
 topic drift.
 
+## Group 12 update (FINAL GROUP) — a new sub-variant: fabricated content attached to the ordinary (non-confirmation) lead-in
+
+`eng.literature.point-of-view`, T8: the learner sent `"thanks that makes sense"`
+(elaborated acknowledgement, no answer attempt) while an MCQ about first-person
+account reliability was pending. The reply was the ordinary disambiguation
+lead-in — **"I couldn't tell which option your answer matched — tap the choice
+you mean from the list below."** — but followed by **four fabricated lettered
+options** ("A) First person  B) Second person  C) Third person limited
+D) Third person omniscient") that do not appear anywhere in the actual pending
+MCQ (whose two real options were about whether a first-person account is
+automatically complete/unbiased, not a list of POV categories). This is a new
+sub-variant distinct from Group 9's fabrication: Group 9's fabricated content
+rode the **false-confirmation** branch ("That's right." + an invented option);
+this one rides the **ordinary disambiguation** branch (no false "That's
+right.", but still invents plausible-looking options that don't match the
+served MCQ). Same root symptom as Group 9 (content leaking from earlier
+prompt/teaching context rather than the actual `pendingMcq` state), now shown
+to reach both branches of the mechanism.
+
+Also observed (not clearly part of either tracked finding, noted for
+completeness): T5 in the same lesson, immediately after a wrong pick, returned
+a completely empty tutor reply (no text, no MCQ, no visual) before the next
+turn's meta-commentary correctly triggered a fresh probe. Single occurrence;
+not enough to classify, so not added as a new tracked finding.
+
+Otherwise this group's run was clean: `eng.literature.point-of-view` T6
+("oh wait, i think i see my mistake," pure meta-commentary) did NOT
+false-fire — reinforcing the state-dependent nature already documented.
+1 more ordinary disambiguation-lead-in recurrence
+(`eng.communication.digital-communication` T6). Running total across Groups
+3-12: **28 disambiguation (1 with the new fabricated-content-on-ordinary-
+lead-in sub-variant) + 2 false-confirmation** occurrences. Batch 12 content
+confirmed served correctly (verbatim stem matches, e.g. the exact "case-study
+narrator... insists their manager always treats them unfairly" and "employee
+sends a client a formal email proposal" stems); wrong answers correctly
+identified as wrong via accurate `[memory]` explanations; correct answers
+confirmed properly (`"That's right."`, `"That's right. You're absolutely
+right—tone can get lost in plain text..."`); a real `process_flow` visual
+auto-attached (`eng.communication.digital-communication` T2); no topic drift.
+
+This is the final group of the "continue until you finish all English
+concepts" campaign (Batches 1-12). The tracked findings in this document and
+in `ENGLISH_TOPIC_DRIFT_FINDING.md` remain OPEN, out of this campaign's
+asset-authoring scope, and are handed off as-is for a dedicated
+route.ts/prompt-context session.
+
 ## Suggested next steps for a dedicated session
 
 1. Reproduce offline against the real `mcqReoffer.test.ts` harness with these
