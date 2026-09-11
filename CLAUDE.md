@@ -3129,6 +3129,21 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. This is a genuinely
   multi-session campaign; continuation should verify state via `scripts/math/state.ts` fresh each
   time rather than trusting any number recorded here.
+- **Batch 9 — math.alg Wave 11** (2026-09-11, loop iteration 6): authored the 2 concepts computed
+  as the next topologically-ready `math.alg` frontier — `math.alg.completing-the-square`,
+  `math.alg.polynomial-roots` — both Blueprint-grounded, reused by reference. `math.alg`
+  40/59 → **42/59**. Mathematics **285/908 → 287/908**, 621 remaining. `completing-the-square`
+  has an explicit division of labour with its own parent `quadratic-equation` (extends that
+  entry's monic-only derivation into the full non-monic procedure plus a new vertex-form
+  optimisation application). `polynomial-roots`' cross-link `math.cx.complex-numbers-analysis` has
+  an authored Blueprint (content genuinely reused in the transfer probe) but no EB entry yet, since
+  math.cx is unstarted — flagged as a standing forward note. No genuine content-overlap or
+  metadata discrepancy found in either entry. Full per-concept detail in `COVERAGE.md` Batch 65.
+  Validated: KG validator PASS (908/908 reachable, file untouched), 0 orphan/duplicate EB files,
+  `tsc --noEmit` clean, targeted tests 479/479 passed, both heading structures diffed clean against
+  `math.alg.like-terms.md`. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file
+  touched. This is a genuinely multi-session campaign; continuation should verify state via
+  `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
 
 ## Run locally
 ```
