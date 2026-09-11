@@ -11,7 +11,7 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 302 | **Four domains CERTIFIED.** 82 `math.found.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 69 `math.geom.*` (**COMPLETE, DOMAIN CERTIFIED** — the final 13 entries were restored by commit `0d2c76dd`'s Wave 0 recovery, which this row previously did not reflect) + 36 `math.nt.*` (**COMPLETE, DOMAIN CERTIFIED 2026-08-12** — the domain's final 8 concepts, `prime-distribution`, `continued-fractions`, `analytic-number-theory`, `prime-number-theorem`, `riemann-hypothesis`, `algebraic-number-theory`, `algebraic-integers`, `number-fields`, were authored this session, ending the PARKED status this row previously recorded). 53 `math.alg.*` (**IN PROGRESS, 53/59** — Wave 1 (2026-08-12, 11 concepts): `expression`, `equation`, `term`, `coefficient`, `exponent-rules`, `polynomial`, `degree`, `zero-exponent`, `negative-exponent`, `solution-set`, `inequality`; Wave 2 (2026-08-12, 1 concept): `like-terms`; Wave 3 (2026-09-11, 3 concepts): `simplification`, `polynomial-operations`, `radicals`; Wave 4 (2026-09-11, 5 concepts): `linear-equation-1var`, `polynomial-division`, `fractional-exponent`, `simplifying-radicals`, `radical-equations`; Wave 5 (2026-09-11, 5 concepts): `inequality-1var`, `absolute-value-equations`, `linear-equation-2var`, `remainder-theorem`, `rationalizing-denominators`; Wave 6 (2026-09-11, 3 concepts): `inequality-2var`, `system-linear-equations`, `factor-theorem`; Wave 7 (2026-09-11, 4 concepts): `substitution-method`, `elimination-method`, `system-3var`, `factoring`; Wave 8 (2026-09-11, 3 concepts): `factoring-gcf`, `factoring-special`, `rational-expressions`; Wave 9 (2026-09-11, 4 concepts): `factoring-trinomials`, `rational-expressions-addition`, `rational-expressions-multiplication`, `rational-equations`; Wave 10 (2026-09-11, 1 concept): `quadratic-equation`; Wave 11 (2026-09-11, 2 concepts): `completing-the-square`, `polynomial-roots`; Wave 12 part 1 (2026-09-11, 1 concept): `quadratic-formula`; Wave 12 part 2 (2026-09-11, 2 concepts): `discriminant`, `rational-root-theorem`; Wave 12 part 3 (2026-09-11, 3 concepts): `fundamental-theorem-algebra`, `polynomial-inequality`, `vietas-formulas`; Wave 13 (2026-09-11, 2 concepts): `complex-polynomial-roots`, `rational-inequality`; Batch 15 (2026-09-11, 1 concept): `exponential-function`; Batch 16 (2026-09-11, 2 concepts): `logarithm`, `exponential-equations`; all Blueprint-grounded, reused by reference). Remaining 6 math.alg concepts (`binomial-theorem`, `change-of-base`, `logarithm-properties`, `logarithmic-equations`, `natural-logarithm`, `pascals-triangle`), 3 already topologically ready — `binomial-theorem` via the now-authored `math.disc.combinations`, `logarithm-properties`/`natural-logarithm` via the now-authored `math.alg.logarithm`. `math.disc`/`math.func` excursion (opened Batch 14, continued Batches 15-16): 3 `math.disc.*` entries (`counting-principles`, `permutations`, `combinations`) + 1 `math.func.*` entry (`function-concept`). All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. See Delivery history for full per-concept lists and misconception detail. |
+| mathematics | 908 | 305 | **Four domains CERTIFIED, math.alg one batch from a fifth.** 82 `math.found.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 69 `math.geom.*` (**COMPLETE, DOMAIN CERTIFIED** — the final 13 entries were restored by commit `0d2c76dd`'s Wave 0 recovery, which this row previously did not reflect) + 36 `math.nt.*` (**COMPLETE, DOMAIN CERTIFIED 2026-08-12** — the domain's final 8 concepts, `prime-distribution`, `continued-fractions`, `analytic-number-theory`, `prime-number-theorem`, `riemann-hypothesis`, `algebraic-number-theory`, `algebraic-integers`, `number-fields`, were authored this session, ending the PARKED status this row previously recorded). 56 `math.alg.*` (**IN PROGRESS, 56/59** — Wave 1 (2026-08-12, 11 concepts): `expression`, `equation`, `term`, `coefficient`, `exponent-rules`, `polynomial`, `degree`, `zero-exponent`, `negative-exponent`, `solution-set`, `inequality`; Wave 2 (2026-08-12, 1 concept): `like-terms`; Wave 3 (2026-09-11, 3 concepts): `simplification`, `polynomial-operations`, `radicals`; Wave 4 (2026-09-11, 5 concepts): `linear-equation-1var`, `polynomial-division`, `fractional-exponent`, `simplifying-radicals`, `radical-equations`; Wave 5 (2026-09-11, 5 concepts): `inequality-1var`, `absolute-value-equations`, `linear-equation-2var`, `remainder-theorem`, `rationalizing-denominators`; Wave 6 (2026-09-11, 3 concepts): `inequality-2var`, `system-linear-equations`, `factor-theorem`; Wave 7 (2026-09-11, 4 concepts): `substitution-method`, `elimination-method`, `system-3var`, `factoring`; Wave 8 (2026-09-11, 3 concepts): `factoring-gcf`, `factoring-special`, `rational-expressions`; Wave 9 (2026-09-11, 4 concepts): `factoring-trinomials`, `rational-expressions-addition`, `rational-expressions-multiplication`, `rational-equations`; Wave 10 (2026-09-11, 1 concept): `quadratic-equation`; Wave 11 (2026-09-11, 2 concepts): `completing-the-square`, `polynomial-roots`; Wave 12 part 1 (2026-09-11, 1 concept): `quadratic-formula`; Wave 12 part 2 (2026-09-11, 2 concepts): `discriminant`, `rational-root-theorem`; Wave 12 part 3 (2026-09-11, 3 concepts): `fundamental-theorem-algebra`, `polynomial-inequality`, `vietas-formulas`; Wave 13 (2026-09-11, 2 concepts): `complex-polynomial-roots`, `rational-inequality`; Batch 15 (2026-09-11, 1 concept): `exponential-function`; Batch 16 (2026-09-11, 2 concepts): `logarithm`, `exponential-equations`; Batch 17 (2026-09-11, 3 concepts): `binomial-theorem`, `logarithm-properties`, `natural-logarithm`; all Blueprint-grounded, reused by reference). Remaining 3 math.alg concepts (`change-of-base`, `logarithmic-equations`, `pascals-triangle`), all already topologically ready. `math.disc`/`math.func` excursion (opened Batch 14, continued Batches 15-16): 3 `math.disc.*` entries (`counting-principles`, `permutations`, `combinations`) + 1 `math.func.*` entry (`function-concept`). All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. See Delivery history for full per-concept lists and misconception detail. |
 | physics | 238 | 238 | **100% COMPLETE (2026-07-23).** pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 + 9 Wave 15 + 7 Wave 16 + 12 Wave 17 + 8 Wave 18 + 8 Wave 19 + 5 Wave 20 + 5 Wave 21 + 2 Wave 22 + 2 Wave 23 + 1 Wave 24 (FINAL): `phys.mod.diode-rectification` — every physics KG concept now has a full Educational Brain entry; see Delivery history for the full pre-existing-67, Wave-6 through Wave-23 name lists |
 | english | 216 | 216 | **100% COMPLETE (2026-08-11).** 212/216 through Batch 29 (full per-batch narrative in git commit messages and prior revisions of this file), plus Batch 30 — FINAL BATCH (4, autonomous /loop, level-30 frontier BATCH COMPLETE: `eng.communication.professional-communication`, `eng.communication.presentation-design`, `eng.communication.editing-for-publication`, `eng.communication.negotiation-language` — the last of these the English KG's final terminal node). Every English KG concept now has a full 21-section Educational Brain entry. English is the fourth subject to reach 100% Educational Brain coverage, after physics and chemistry (both 2026-07-23/26) and mathematics (domain-by-domain, ongoing). |
 | chemistry | 186 | 186 | **100% COMPLETE (2026-07-26).** Completion Loop 2026-07-25/26, batch 5 of 5: chem.poly.condensation, natural, biodegradable, properties authored, closing chem.poly to 5/5 (chem.poly.addition was already covered). Batches 1-4 closed chem.alc (6/6), chem.carb (7/7), chem.nitro (5/5), chem.bio (6/6) in that order. Every Chemistry KG concept now has a full 21-section Educational Brain entry, a fully authored 16-section Blueprint (`docs/curriculum/blueprints/chem.*.md`), and an authored Teaching Asset (`docs/chemistry/teaching-assets/assets.json`, status draft) — the stale 2026-07-23 note below claiming all-placeholder Blueprint content is corrected here. **Known bookkeeping gap (not corrected this batch):** `EDUCATIONAL_BRAIN_INDEX.md`, `AUTHORING_QUEUE.md`, and `QUALITY.md` were not regenerated for the 21 chemistry entries authored 2026-07-25/26 (chem.alc.epoxides/protection, chem.carb.ketones/carboxylic/alpha-reactions/derivatives/spectro/named-reactions, chem.nitro.amino-acids/diazonium/heterocycles, chem.bio.proteins/carbohydrates/lipids/enzyme-kinetics/nucleic-acids/vitamins, chem.poly.condensation/natural/biodegradable/properties) — those three registry files still show chemistry as 165/186 and should be regenerated from source in a future pass, per `PRODUCTION_PIPELINE.md`'s workflow. |
@@ -5818,3 +5818,88 @@ untouched); 0 orphan EB files; 0 duplicate EB files (via `scripts/math/state.ts`
 479/479 passed. All 3 new entries' heading structure diffed clean against `math.alg.like-terms.md`
 (0 diffs, exact 21-section Standard match). No Physics, Chemistry, English, Biology, Computer
 Science, KG, Blueprint, or runtime file was modified.
+
+### Batch 17 — math.alg-unblocking excursion, closing the logarithm/binomial-theorem threads
+
+Fresh frontier computation against the live KG and live `educational-brain/concepts/mathematics`
+directory (post-Batch-16, math.alg 53/59): exactly 3 candidates ready —
+`math.alg.binomial-theorem` (unblocked by Batch 16's `math.disc.combinations`),
+`math.alg.logarithm-properties` and `math.alg.natural-logarithm` (both unblocked by Batch 16's
+`math.alg.logarithm`). All 3 have existing Blueprints, reused by reference; all 3 authored.
+
+- **`math.alg.binomial-theorem`** (developing/apply, mastery 0.8, MAMR 4/5, 8 hr, requires
+  `math.alg.polynomial` + `math.disc.combinations` + `math.found.proof-by-induction`, unlocks
+  `math.prob.discrete-distributions`, cross-links `math.prob.discrete-distributions` — verified
+  not yet authored, independence mode) — the theorem stated and confirmed on small cases, then
+  proved by induction using Pascal's identity as the specific combinatorial mechanism (not
+  generic algebra), with Pascal's triangle previewed as the coefficient table. 3 misconceptions:
+  MC-1 BINOMIAL-EXPANSION-TREATED-AS-LINEAR (Type 1, foundational — the "freshman's dream"
+  $(a+b)^n = a^n + b^n$), MC-2 INDUCTION-STEP-TREATED-AS-GENERIC-ALGEBRA (Type 1, high — missing
+  that Pascal's identity is the specific mechanism, not incidental simplification), MC-3
+  PASCALS-TRIANGLE-TREATED-AS-COINCIDENCE (Type 5, moderate — the visual pattern presented before
+  its algebraic cause is understood). No genuine content-overlap or metadata discrepancy found
+  against the KG. This is the concept that closes the math.disc side of this program's excursion
+  — `math.disc.combinations` (Batch 16) was authored specifically to unblock it.
+- **`math.alg.logarithm-properties`** (developing/apply, mastery 0.85, MAMR 5/5, 5 hr, requires
+  `math.alg.logarithm` only, Blueprint states "Unlocks: none listed" and "Cross-link: none
+  listed") — the product, quotient, and power rules each derived directly from the corresponding
+  exponent law via the logarithm-as-exponent-translator model, then combined for compound
+  simplification. 3 misconceptions: MC-1 PRODUCT-RULE-ASSUMED-INDEPENDENT-FACT (Type 5,
+  foundational — taught as an isolated formula to memorize rather than a consequence of the
+  exponent law already known), MC-2 THREE-RULES-ASSUMED-UNRELATED-TECHNIQUES (Type 1, high —
+  each rule re-derived from scratch instead of recognized as the same translation mechanism
+  applied three times), MC-3 LOG-OF-SUM-ASSUMED-TO-SPLIT-LIKE-PRODUCT (Type 1, moderate —
+  overgeneralizing the product rule's "splits across the operation" behavior to addition, refuted
+  by a direct numeric counterexample). **Genuine Blueprint/KG metadata discrepancy found, not
+  fixed:** the Blueprint's Component 7 states no `unlocks`, but the live KG lists
+  `unlocks: ['math.alg.logarithmic-equations']` for this concept — this entry's Identity section
+  follows the KG (authoritative per this program's standing rule); the Blueprint file was not
+  modified, and the discrepancy is recorded for a future reconciliation pass.
+- **`math.alg.natural-logarithm`** (developing/understand, mastery 0.8, MAMR 4/5, 4 hr, requires
+  `math.alg.logarithm` only, Blueprint states "Unlocks: none listed," Blueprint Component 7
+  cross-link `math.calc.derivative-ln` confirmed not yet authored, independence mode) — $\ln x$
+  identified as simply $\log_e x$, the general logarithm definition with base fixed at $e$, so
+  every rule already proved for an arbitrary base (including this batch's own
+  `logarithm-properties`) transfers unchanged with no new derivation; base-$e$ simplifications
+  ($\ln(e^3)$, $\ln(1/e)$, $\ln(\sqrt e)$) practiced via the inverse relationship and power rule;
+  $e$'s genuine specialness (the derivative of $\ln x$ being exactly $1/x$) named at orientation
+  level only and explicitly deferred to `math.calc.derivative-ln`. 3 misconceptions: MC-1
+  LN-ASSUMED-DIFFERENT-KIND-OF-LOG (Type 5, foundational — the dedicated notation and separate
+  calculator button obscure the base-$e$ relationship), MC-2
+  LN-RULES-ASSUMED-TO-NEED-SEPARATE-DERIVATION (Type 1, high — appropriately cautious "verify
+  before using" habits overapplied to a proof that already covers every valid base including
+  $e$), MC-3 E-ASSUMED-ALGEBRAICALLY-SPECIAL (Type 5, moderate — $e$'s genuine calculus-level
+  specialness misattributed to the algebra covered here, an instruction-induced conflation from
+  encountering "e is special" messaging before the calculus vocabulary that explains it). Taught
+  by direct instruction with an immediate transfer check, not discovery — the entire teaching
+  point is recognizing nothing new needs deriving, so an extended discovery process would
+  undermine the lesson. **Second genuine Blueprint/KG metadata discrepancy found this batch, not
+  fixed:** the Blueprint's Component 7 states no `unlocks`, but the live KG lists
+  `unlocks: ['math.calc.derivative-ln']` — same class of omission as `logarithm-properties`
+  above; KG followed, Blueprint file not modified.
+
+`math.alg` **53/59 → 56/59** (3 remain: `change-of-base`, `logarithmic-equations`,
+`pascals-triangle` — all 3 verified already topologically ready via a fresh frontier computation
+after this batch: `change-of-base` and `logarithmic-equations` via the now-authored
+`logarithm-properties`, `pascals-triangle` via the now-authored `binomial-theorem`). This is the
+domain's closing batch's precondition — the next batch authoring all 3 remaining concepts brings
+math.alg to CERTIFIED, the fifth mathematics domain after math.found/math.geom/math.arith/math.nt.
+`math.disc` and `math.func` unchanged this batch (no new concept in either — both excursions'
+purpose is now served by this batch's 3 concepts). Mathematics **302/908 → 305/908**. No genuine
+content-overlap was found between any of this batch's 3 entries and their already-authored
+siblings; the 2 metadata discrepancies above are both KG-vs-Blueprint `unlocks` omissions,
+recorded honestly rather than silently reconciled or used to justify editing the Blueprint files.
+All tracking files updated in the same commit: `ROADMAP.md` Section 1/2 totals and domain table
+regenerated from source, `COVERAGE.md`'s mathematics summary row and this Delivery history entry,
+`CLAUDE.md`'s campaign section. `EDUCATIONAL_BRAIN_INDEX.md` and `QUALITY.md` again deferred (same
+generated-artifact rationale as prior batches). Re-verified: `npx tsx
+scripts/validate-knowledge-graph.ts docs/mathematics/kg/graph.json` PASS, 908/908 reachable, 0
+failures, 0 warnings (KG file untouched); 0 orphan EB files; 0 duplicate EB files (via
+`scripts/math/state.ts`); `npx tsc --noEmit` clean; targeted tests `mathPackageCorpus.test.ts` +
+`mathematicsAssetContract.test.ts` 479/479 passed. All 3 new entries' heading structure diffed
+clean against `math.alg.like-terms.md` (0 diffs, exact 21-section Standard match — one entry,
+`natural-logarithm`, initially introduced an extra "Anti-Analogies" heading not in the canonical
+21-section list and was corrected in place by folding that content into the Analogies section as
+an inline warning before this check was run, rather than being left as a structural deviation).
+No Physics, Chemistry, English, Biology, Computer Science, KG, Blueprint, or runtime file was
+modified.

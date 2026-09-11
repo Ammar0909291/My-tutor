@@ -3281,6 +3281,32 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   `math.alg.binomial-theorem`, `math.alg.logarithm-properties`, `math.alg.natural-logarithm` are
   all topologically ready. This is a genuinely multi-session campaign; continuation should verify
   state via `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
+- **Batch 17 — math.alg-unblocking excursion, closing the logarithm/binomial-theorem threads**
+  (2026-09-11): re-computed the frontier fresh — `math.alg.binomial-theorem` (unblocked by
+  Batch 16's `math.disc.combinations`), `math.alg.logarithm-properties` and
+  `math.alg.natural-logarithm` (both unblocked by Batch 16's `math.alg.logarithm`) were all
+  ready; all 3 Blueprint-grounded, reused by reference. `binomial-theorem` (theorem stated,
+  confirmed on small cases, proved by induction via Pascal's identity as the specific mechanism,
+  Pascal's triangle previewed) closes the math.disc side of this program's excursion.
+  `logarithm-properties` (product/quotient/power rules each derived from the matching exponent
+  law via the translator model, then combined) and `natural-logarithm` ($\ln x = \log_e x$, every
+  already-proved rule transfers with no new derivation, $e$'s genuine calculus-level specialness
+  named but deferred to `math.calc.derivative-ln`) both authored. Two genuine Blueprint/KG
+  `unlocks` discrepancies found (not fixed, KG followed): `logarithm-properties`'s Blueprint says
+  "Unlocks: none listed" but the KG has `math.alg.logarithmic-equations`;
+  `natural-logarithm`'s Blueprint likewise says "none listed" but the KG has
+  `math.calc.derivative-ln`. `math.alg` 53/59 → **56/59** (3 remain: `change-of-base`,
+  `logarithmic-equations`, `pascals-triangle`, all already topologically ready — one more batch
+  reaches domain CERTIFICATION, the fifth after math.found/math.geom/math.arith/math.nt).
+  `math.disc`/`math.func` unchanged this batch. Mathematics **302/908 → 305/908**, 603 remaining.
+  Full per-concept detail in `COVERAGE.md` Batch 17. Validated: KG validator PASS (908/908
+  reachable, file untouched), 0 orphan/duplicate EB files, `tsc --noEmit` clean, targeted tests
+  479/479 passed, all 3 heading structures diffed clean against `math.alg.like-terms.md` (one
+  entry, `natural-logarithm`, briefly introduced a non-canonical "Anti-Analogies" heading and was
+  corrected in place before this check, by folding its content into the Analogies section). No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. This is a genuinely
+  multi-session campaign; continuation should verify state via `scripts/math/state.ts` fresh each
+  time rather than trusting any number recorded here.
 
 ## Run locally
 ```

@@ -13,9 +13,9 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **302** mathematics + 238 physics + 216 english + 186 chemistry + 0 biology + 0 computer_science = **942** |
-| Remaining | **833** |
-| Completion percentage | **53.07%** |
+| Concepts with an Educational Brain entry | **305** mathematics + 238 physics + 216 english + 186 chemistry + 0 biology + 0 computer_science = **945** |
+| Remaining | **830** |
+| Completion percentage | **53.24%** |
 
 *(Recomputed programmatically 2026-09-11 against the live KG files and the
 live `educational-brain/concepts/` tree, mid-way through a dedicated
@@ -27,11 +27,12 @@ session's math.alg Wave 3 (3 concepts), Wave 4 (5 concepts), Wave 5
 (2 concepts), Wave 12 part 1 (1 concept), Wave 12 part 2 (2 concepts),
 Wave 12 part 3 (3 concepts), Wave 13 (2 concepts), Batch 14's 2-concept
 cross-domain excursion into `math.disc`/`math.func`, Batch 15's
-continuation of that excursion (2 more concepts), and Batch 16's
-continuation (3 more concepts: 2 math.alg, 1 math.disc) together
-brought mathematics from 257 to 302. Cross-checked: 0 orphan EB files,
-0 duplicate EB files, 0 EB filenames that do not resolve to a live KG
-concept id, across all six subjects.)*
+continuation of that excursion (2 more concepts), Batch 16's
+continuation (3 more concepts: 2 math.alg, 1 math.disc), and Batch 17
+(3 more math.alg concepts, closing the logarithm/binomial-theorem
+excursion threads) together brought mathematics from 257 to 305.
+Cross-checked: 0 orphan EB files, 0 duplicate EB files, 0 EB filenames
+that do not resolve to a live KG concept id, across all six subjects.)*
 
 ---
 
@@ -39,7 +40,7 @@ concept id, across all six subjects.)*
 
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
-| mathematics | 908 | 302 | 33.26% | `math.found.mathematical-thinking` | **Yes** |
+| mathematics | 908 | 305 | 33.59% | `math.found.mathematical-thinking` | **Yes** |
 
 **Mathematics per-domain state (recomputed 2026-09-11, programmatic):**
 
@@ -51,7 +52,7 @@ concept id, across all six subjects.)*
 | `math.nt` | 36/36 | **CERTIFIED** (2026-08-12) — closed by this session's Phase 1 batch |
 | `math.calc` | 0/76 | not started |
 | `math.linalg` | 0/61 | not started |
-| `math.alg` | 53/59 | **IN PROGRESS** — Wave 1 (11, levels 0–2, 2026-08-12) + Wave 2 (1, `like-terms`, 2026-08-12) + Wave 3 (3, `simplification`/`polynomial-operations`/`radicals`, 2026-09-11) + Wave 4 (5, `linear-equation-1var`/`polynomial-division`/`fractional-exponent`/`simplifying-radicals`/`radical-equations`, 2026-09-11) + Wave 5 (5, `inequality-1var`/`absolute-value-equations`/`linear-equation-2var`/`remainder-theorem`/`rationalizing-denominators`, 2026-09-11) + Wave 6 (3, `inequality-2var`/`system-linear-equations`/`factor-theorem`, 2026-09-11) + Wave 7 (4, `substitution-method`/`elimination-method`/`system-3var`/`factoring`, 2026-09-11) + Wave 8 (3, `factoring-gcf`/`factoring-special`/`rational-expressions`, 2026-09-11) + Wave 9 (4, `factoring-trinomials`/`rational-expressions-addition`/`rational-expressions-multiplication`/`rational-equations`, 2026-09-11) + Wave 10 (1, `quadratic-equation`, 2026-09-11) + Wave 11 (2, `completing-the-square`/`polynomial-roots`, 2026-09-11) + Wave 12 part 1 (1, `quadratic-formula`, 2026-09-11) + Wave 12 part 2 (2, `discriminant`/`rational-root-theorem`, 2026-09-11) + Wave 12 part 3 (3, `fundamental-theorem-algebra`/`polynomial-inequality`/`vietas-formulas`, 2026-09-11) + Wave 13 (2, `complex-polynomial-roots`/`rational-inequality`, 2026-09-11) + Batch 15 (1, `exponential-function`, 2026-09-11) + Batch 16 (2, `logarithm`/`exponential-equations`, 2026-09-11) — remaining 6 concepts (`binomial-theorem`, `change-of-base`, `logarithm-properties`, `logarithmic-equations`, `natural-logarithm`, `pascals-triangle`), 3 already ready (`binomial-theorem` via `math.disc.combinations`, `logarithm-properties`/`natural-logarithm` via `math.alg.logarithm`) — close to CERTIFIED |
+| `math.alg` | 56/59 | **IN PROGRESS** — Wave 1 (11, levels 0–2, 2026-08-12) + Wave 2 (1, `like-terms`, 2026-08-12) + Wave 3 (3, `simplification`/`polynomial-operations`/`radicals`, 2026-09-11) + Wave 4 (5, `linear-equation-1var`/`polynomial-division`/`fractional-exponent`/`simplifying-radicals`/`radical-equations`, 2026-09-11) + Wave 5 (5, `inequality-1var`/`absolute-value-equations`/`linear-equation-2var`/`remainder-theorem`/`rationalizing-denominators`, 2026-09-11) + Wave 6 (3, `inequality-2var`/`system-linear-equations`/`factor-theorem`, 2026-09-11) + Wave 7 (4, `substitution-method`/`elimination-method`/`system-3var`/`factoring`, 2026-09-11) + Wave 8 (3, `factoring-gcf`/`factoring-special`/`rational-expressions`, 2026-09-11) + Wave 9 (4, `factoring-trinomials`/`rational-expressions-addition`/`rational-expressions-multiplication`/`rational-equations`, 2026-09-11) + Wave 10 (1, `quadratic-equation`, 2026-09-11) + Wave 11 (2, `completing-the-square`/`polynomial-roots`, 2026-09-11) + Wave 12 part 1 (1, `quadratic-formula`, 2026-09-11) + Wave 12 part 2 (2, `discriminant`/`rational-root-theorem`, 2026-09-11) + Wave 12 part 3 (3, `fundamental-theorem-algebra`/`polynomial-inequality`/`vietas-formulas`, 2026-09-11) + Wave 13 (2, `complex-polynomial-roots`/`rational-inequality`, 2026-09-11) + Batch 15 (1, `exponential-function`, 2026-09-11) + Batch 16 (2, `logarithm`/`exponential-equations`, 2026-09-11) + Batch 17 (3, `binomial-theorem`/`logarithm-properties`/`natural-logarithm`, 2026-09-11) — remaining 3 concepts (`change-of-base`, `logarithmic-equations`, `pascals-triangle`), all already ready — one more batch from CERTIFIED |
 | `math.de` | 0/56 | not started |
 | `math.prob` | 0/49 | not started |
 | `math.stats` | 0/40 | not started |
@@ -70,13 +71,16 @@ concept id, across all six subjects.)*
 | `math.cat` | 0/15 | not started |
 | `math.meas` | 0/13 | not started |
 
-Four domains certified plus math.alg, math.disc, and math.func in progress, 302 of 908. The four
+Four domains certified plus math.alg, math.disc, and math.func in progress, 305 of 908. The four
 certified domains are the graph's foundation layer; every remaining domain draws on at least one of
-them, so the prerequisite debt for the remaining 606 concepts is now substantially lower than the
+them, so the prerequisite debt for the remaining 603 concepts is now substantially lower than the
 raw count suggests. math.disc and math.func were opened this session as small, deliberately
 bounded cross-domain excursions out of math.alg (per the established `math.nt.divisibility`/
 `math.geom` precedent) — each excursion authors only what's needed to unblock math.alg's own
-remaining frontier, not a full parallel domain campaign.
+remaining frontier, not a full parallel domain campaign. math.alg's remaining 3 concepts
+(`change-of-base`, `logarithmic-equations`, `pascals-triangle`) are all already topologically
+ready — the next batch closes the domain (the fifth CERTIFIED), ending both excursions'
+immediate purpose.
 
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
 | english | 216 | 216 | **100.00% COMPLETE (2026-08-11)** | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) — every English KG concept now has a full Educational Brain entry |
