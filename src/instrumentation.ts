@@ -368,6 +368,12 @@ async function bootstrapAssets() {
       // own header for detail.
       const { ENGLISH_ADULT_BAND_BATCH_9 } =
         await import('./lib/teaching/assets/englishAdultBandBatch9')
+      // English ADULT-band probe-contract campaign, Batch 10 (2026-09-11):
+      // 10 more concepts (6 writing + 4 listening, all MIDDLE-native),
+      // same TRUE-gap targeting as Batches 2-9. See
+      // englishAdultBandBatch10.ts's own header for detail.
+      const { ENGLISH_ADULT_BAND_BATCH_10 } =
+        await import('./lib/teaching/assets/englishAdultBandBatch10')
       const { hashContent } = await import('./lib/teaching/assets/similarity')
       const { AssetFamily, AssetStatus, AuthorKind, ExplanationStyle, ProbeDifficulty } = await import('@prisma/client')
       // The ladder rungs a slug may carry, from the enum itself rather than a
@@ -383,7 +389,8 @@ async function bootstrapAssets() {
         ...ENGLISH_PROBE_BATCH_10, ...ENGLISH_ADULT_BAND_BATCH_1, ...ENGLISH_ADULT_BAND_BATCH_2,
         ...ENGLISH_ADULT_BAND_BATCH_3, ...ENGLISH_ADULT_BAND_BATCH_4, ...ENGLISH_ADULT_BAND_BATCH_5,
         ...ENGLISH_ADULT_BAND_BATCH_6, ...ENGLISH_ADULT_BAND_BATCH_7,
-        ...ENGLISH_ADULT_BAND_BATCH_8, ...ENGLISH_ADULT_BAND_BATCH_9]
+        ...ENGLISH_ADULT_BAND_BATCH_8, ...ENGLISH_ADULT_BAND_BATCH_9,
+        ...ENGLISH_ADULT_BAND_BATCH_10]
       // ADR 14 §13 (Item 6): ladder rungs get a difficulty segment; singleton
       // slots keep the identity they already have. One resolver drives BOTH
       // the pre-flight check and the write loop so they cannot disagree.
