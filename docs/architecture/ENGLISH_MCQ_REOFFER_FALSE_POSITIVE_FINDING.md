@@ -150,6 +150,15 @@ visualSpec (not just the usual ASCII fallback) for two auto-attached figures
 — positive evidence the visual pipeline works correctly when not explicitly
 requested via "show me a diagram."
 
+## Group 7 update
+
+3 more recurrences (`eng.grammar.apostrophes` T6/T8, `eng.reading.main-idea-
+and-details` T6) — running total 13 disambiguation + 1 false-confirmation
+across Groups 3-7. No new episode classes. Batch 7 content confirmed served
+correctly (verbatim stem matches); wrong answers were correctly identified as
+wrong (not falsely confirmed) throughout; no topic drift observed; 2 more
+real `process_flow` visualSpecs auto-attached.
+
 ## Suggested next steps for a dedicated session
 
 1. Reproduce offline against the real `mcqReoffer.test.ts` harness with these
