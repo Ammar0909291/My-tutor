@@ -137,16 +137,19 @@ describe('the parser did not become permissive', () => {
 // ── F / G. corpus-wide counts ───────────────────────────────────────────────
 
 describe('corpus-wide misconception retrieval', () => {
-  it('mathematics: 154 concepts carry a parsed misconception library', () => {
+  it('mathematics: 177 concepts carry a parsed misconception library', () => {
     const { concepts, records } = corpusRecordCount('docs/mathematics/kg/graph.json')
-    expect(concepts).toBe(154)
-    // 447 = 5 authored M-n (math.arith.fractions) + 442 MC-n — the whole
-    // authored mathematics library. The last four (complement MC-2,
-    // problem-solving-strategies MC-2, reading-mathematics MC-3,
-    // set-equality MC-3) run 306-353 chars and were rejected by the parser's
-    // earlier 300-char title bound; N-1 raised it to 360. Concept count is
-    // unchanged by that raise — all four sit in files that already parsed.
-    expect(records).toBe(447)
+    // Snapshot as of 2026-09-11. The mathematics Educational Brain corpus is
+    // under active, ongoing authoring (see CLAUDE.md's Educational Brain
+    // completion campaign) — these two numbers are expected to grow again as
+    // that program adds concepts, and must be re-measured (via this file's
+    // own corpusRecordCount helper, not guessed) rather than hand-incremented
+    // whenever this test next fails on a legitimate content-growth diff.
+    // 154/447 was the count at the time of the original F-1 fix (5 authored
+    // M-n from math.arith.fractions + 442 MC-n); this pin only replaces that
+    // snapshot with the current one.
+    expect(concepts).toBe(177)
+    expect(records).toBe(514)
   })
 
   it('physics and english are unchanged by the mathematics fix', () => {
