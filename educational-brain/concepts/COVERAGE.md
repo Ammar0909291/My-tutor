@@ -11,7 +11,7 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 260 | **Four domains CERTIFIED.** 82 `math.found.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 69 `math.geom.*` (**COMPLETE, DOMAIN CERTIFIED** — the final 13 entries were restored by commit `0d2c76dd`'s Wave 0 recovery, which this row previously did not reflect) + 36 `math.nt.*` (**COMPLETE, DOMAIN CERTIFIED 2026-08-12** — the domain's final 8 concepts, `prime-distribution`, `continued-fractions`, `analytic-number-theory`, `prime-number-theorem`, `riemann-hypothesis`, `algebraic-number-theory`, `algebraic-integers`, `number-fields`, were authored this session, ending the PARKED status this row previously recorded). 15 `math.alg.*` (**IN PROGRESS, 15/59** — Wave 1 (2026-08-12, 11 concepts): `expression`, `equation`, `term`, `coefficient`, `exponent-rules`, `polynomial`, `degree`, `zero-exponent`, `negative-exponent`, `solution-set`, `inequality`; Wave 2 (2026-08-12, 1 concept): `like-terms`; Wave 3 (2026-09-11, 3 concepts): `simplification`, `polynomial-operations`, `radicals`; all Blueprint-grounded, reused by reference). Remaining: 648 concepts across 19 unstarted domains plus math.alg's remaining 44. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. See Delivery history for full per-concept lists and misconception detail. |
+| mathematics | 908 | 265 | **Four domains CERTIFIED.** 82 `math.found.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 69 `math.geom.*` (**COMPLETE, DOMAIN CERTIFIED** — the final 13 entries were restored by commit `0d2c76dd`'s Wave 0 recovery, which this row previously did not reflect) + 36 `math.nt.*` (**COMPLETE, DOMAIN CERTIFIED 2026-08-12** — the domain's final 8 concepts, `prime-distribution`, `continued-fractions`, `analytic-number-theory`, `prime-number-theorem`, `riemann-hypothesis`, `algebraic-number-theory`, `algebraic-integers`, `number-fields`, were authored this session, ending the PARKED status this row previously recorded). 20 `math.alg.*` (**IN PROGRESS, 20/59** — Wave 1 (2026-08-12, 11 concepts): `expression`, `equation`, `term`, `coefficient`, `exponent-rules`, `polynomial`, `degree`, `zero-exponent`, `negative-exponent`, `solution-set`, `inequality`; Wave 2 (2026-08-12, 1 concept): `like-terms`; Wave 3 (2026-09-11, 3 concepts): `simplification`, `polynomial-operations`, `radicals`; Wave 4 (2026-09-11, 5 concepts): `linear-equation-1var`, `polynomial-division`, `fractional-exponent`, `simplifying-radicals`, `radical-equations`; all Blueprint-grounded, reused by reference). Remaining: 643 concepts across 19 unstarted domains plus math.alg's remaining 39. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. See Delivery history for full per-concept lists and misconception detail. |
 | physics | 238 | 238 | **100% COMPLETE (2026-07-23).** pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 + 9 Wave 15 + 7 Wave 16 + 12 Wave 17 + 8 Wave 18 + 8 Wave 19 + 5 Wave 20 + 5 Wave 21 + 2 Wave 22 + 2 Wave 23 + 1 Wave 24 (FINAL): `phys.mod.diode-rectification` — every physics KG concept now has a full Educational Brain entry; see Delivery history for the full pre-existing-67, Wave-6 through Wave-23 name lists |
 | english | 216 | 216 | **100% COMPLETE (2026-08-11).** 212/216 through Batch 29 (full per-batch narrative in git commit messages and prior revisions of this file), plus Batch 30 — FINAL BATCH (4, autonomous /loop, level-30 frontier BATCH COMPLETE: `eng.communication.professional-communication`, `eng.communication.presentation-design`, `eng.communication.editing-for-publication`, `eng.communication.negotiation-language` — the last of these the English KG's final terminal node). Every English KG concept now has a full 21-section Educational Brain entry. English is the fourth subject to reach 100% Educational Brain coverage, after physics and chemistry (both 2026-07-23/26) and mathematics (domain-by-domain, ongoing). |
 | chemistry | 186 | 186 | **100% COMPLETE (2026-07-26).** Completion Loop 2026-07-25/26, batch 5 of 5: chem.poly.condensation, natural, biodegradable, properties authored, closing chem.poly to 5/5 (chem.poly.addition was already covered). Batches 1-4 closed chem.alc (6/6), chem.carb (7/7), chem.nitro (5/5), chem.bio (6/6) in that order. Every Chemistry KG concept now has a full 21-section Educational Brain entry, a fully authored 16-section Blueprint (`docs/curriculum/blueprints/chem.*.md`), and an authored Teaching Asset (`docs/chemistry/teaching-assets/assets.json`, status draft) — the stale 2026-07-23 note below claiming all-placeholder Blueprint content is corrected here. **Known bookkeeping gap (not corrected this batch):** `EDUCATIONAL_BRAIN_INDEX.md`, `AUTHORING_QUEUE.md`, and `QUALITY.md` were not regenerated for the 21 chemistry entries authored 2026-07-25/26 (chem.alc.epoxides/protection, chem.carb.ketones/carboxylic/alpha-reactions/derivatives/spectro/named-reactions, chem.nitro.amino-acids/diazonium/heterocycles, chem.bio.proteins/carbohydrates/lipids/enzyme-kinetics/nucleic-acids/vitamins, chem.poly.condensation/natural/biodegradable/properties) — those three registry files still show chemistry as 165/186 and should be regenerated from source in a future pass, per `PRODUCTION_PIPELINE.md`'s workflow. |
@@ -4861,4 +4861,72 @@ precedent of deferring registry regeneration rather than hand-editing a generate
 reachable, 0 failures, 0 warnings (KG file itself untouched); 0 orphan EB files; 0 duplicate EB
 files; `npx tsc --noEmit` clean; full suite unaffected (doc-only change, confirmed via targeted
 `mathPackageCorpus.test.ts` + `mathematicsAssetContract.test.ts`, 479/479 passed). No Physics,
+Chemistry, English, Biology, Computer Science, KG, Blueprint, or runtime file was modified.
+
+### Batch 58 — math.alg Wave 4 (2026-09-11, Mathematics Educational Brain completion campaign)
+
+Re-computed the topologically-ready `math.alg` frontier programmatically against the live KG and
+the live EB directory (post-Batch-57, math.alg 15/59): exactly 5 concepts had every prerequisite
+already authored — `math.alg.linear-equation-1var` (requires `equation`, `simplification`, both
+present), `math.alg.polynomial-division` (requires `polynomial-operations`, present),
+`math.alg.fractional-exponent` (requires `exponent-rules`, `radicals`, both present),
+`math.alg.simplifying-radicals` (requires `radicals`, present), `math.alg.radical-equations`
+(requires `radicals`, present).
+
+All 5 had existing Blueprints, read in full and reused by reference per the Standard's ownership
+boundary — no worked example, mastery-probe item bank, or turn-by-turn script restated, only
+cited. Each entry authored its own birth-type classification for every Blueprint-registered
+misconception:
+
+- **`math.alg.linear-equation-1var`** (developing/apply, mastery 0.90, 8 hr) — solving ax+b=c via
+  the balance principle, with an isolation-order strategy (eliminate constants before dividing by
+  the coefficient) taught as convenience, not necessity. 3 misconceptions: MC-1
+  BALANCE-NOT-MAINTAINED (Type 1 — reading an equation as a symbol string to rearrange rather than
+  a claim of equality), MC-2 WRONG-OPERATION-ORDER (Type 1 — PEMDAS read in reverse without
+  understanding the order is a convenience choice), MC-3 SIGN-ERROR-TRANSPOSING (Type 4 —
+  "moving a term" read as physical relocation rather than as the trace of a mirrored operation).
+- **`math.alg.polynomial-division`** (proficient/apply, mastery 0.80, 6 hr) — long division via
+  leading-term cancellation, synthetic division as its compact monic-linear-divisor special case,
+  and the Division Algorithm's own guarantee that a nonzero remainder is normal. 3 misconceptions:
+  MC-1 REMAINDER-MUST-BE-ZERO (Type 1 — overgeneralizing from a practice-set artefact where every
+  exercise divides evenly), MC-2 DIVIDE-WRONG-TERM (Type 4 — a false visual pattern-match to
+  integer long division's layout), MC-3 SYNTHETIC-FOR-ANY-DIVISOR (Type 5 — instruction-induced;
+  the monic-linear precondition demonstrated but never stated as an explicit checkable rule).
+- **`math.alg.fractional-exponent`** (proficient/apply, mastery 0.80, 4 hr) — a^(m/n) = ⁿ√(aᵐ) =
+  (ⁿ√a)ᵐ as a genuine extension of integer exponent rules, with root-first evaluation taught as the
+  more efficient (not merely equivalent) computation order. 2 misconceptions: MC-1
+  POWER-FIRST-COMPUTATION-ORDER-DEFAULTED-TO-INEFFICIENTLY (Type 5 — no explicit order-comparison
+  habit ever built), MC-2 FRACTIONAL-EXPONENT-NUMERATOR-DENOMINATOR-ROLES-SWAPPED (Type 4 — the
+  fraction gives no visual cue for which part is the root and which is the power).
+- **`math.alg.simplifying-radicals`** (proficient/apply, mastery 0.80, 4 hr) — deepening
+  `math.alg.radicals`'s own extraction skill to full rigor (largest factor, not merely a factor)
+  and higher indices. 2 misconceptions: MC-1 PARTIAL-EXTRACTION-MISTAKEN-FOR-FULL-SIMPLIFICATION
+  (Type 1 — "I performed the step correctly, so I am done" applied to an iterative task), MC-2
+  NON-PERFECT-POWER-FACTOR-INCORRECTLY-EXTRACTED (Type 1 — collapsing "is a perfect power" into
+  the weaker "divides the radicand"). **Genuine Curriculum Feedback finding**: this concept's own
+  MC-1 and `math.alg.radicals`'s MC-3 are, in substance, the same misconception (both Blueprints
+  independently author the identical √72→6√2 worked example as their primary repair vehicle) —
+  recorded as a Blueprint-level content-overlap finding, not fixed (no Blueprint or KG file may be
+  modified by this program); this entry cross-references `radicals`' MC-3 explicitly rather than
+  treating the overlap as a novel, unconnected finding.
+- **`math.alg.radical-equations`** (proficient/apply, mastery 0.75, 5 hr) — isolate-then-square,
+  with the extraneous-solution check (squaring loses sign information) as the concept's structural
+  centerpiece. 3 misconceptions: MC-1 RADICAL-EQUATION-CANDIDATES-NOT-CHECKED-AGAINST-ORIGINAL
+  (Type 1 — every prior equation-solving concept guaranteed a valid step sequence implies a
+  correct solution set; squaring is the learner's first non-reversible step), MC-2
+  RADICAL-SQUARED-BEFORE-BEING-ISOLATED (Type 4 — "square the equation" read as squaring whatever
+  currently sits on each side), MC-3 SQUARED-SUM-EXPANDED-INCORRECTLY (Type 1 — an imported
+  `math.alg.factoring-special` gap, not native to this concept; noted, not treated as this
+  concept's own root cause).
+
+`math.alg` **15/59 → 20/59**, still IN PROGRESS. Mathematics **260/908 → 265/908**. Topologically
+next-ready `math.alg` candidates deliberately NOT pre-computed for a Wave 5 selection this batch,
+per this program's own "re-derive the frontier fresh each batch" discipline. All five tracking
+files updated in the same commit: `ROADMAP.md` Section 1/2 totals regenerated from source,
+`COVERAGE.md`'s math.alg summary row and this Delivery history entry, `EDUCATIONAL_BRAIN_INDEX.md`
+and `QUALITY.md` again deferred (same generated-artifact rationale as Batch 57). Re-verified: `npx
+tsx scripts/validate-knowledge-graph.ts docs/mathematics/kg/graph.json` PASS, 908/908 reachable,
+0 failures, 0 warnings (KG file untouched); 0 orphan EB files; 0 duplicate EB files (via
+`scripts/math/state.ts`); `npx tsc --noEmit` clean; targeted tests
+`mathPackageCorpus.test.ts` + `mathematicsAssetContract.test.ts` 479/479 passed. No Physics,
 Chemistry, English, Biology, Computer Science, KG, Blueprint, or runtime file was modified.

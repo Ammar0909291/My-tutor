@@ -13,22 +13,18 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **260** mathematics + 238 physics + 216 english + 186 chemistry + 0 biology + 0 computer_science = **900** |
-| Remaining | **875** |
-| Completion percentage | **50.70%** |
+| Concepts with an Educational Brain entry | **265** mathematics + 238 physics + 216 english + 186 chemistry + 0 biology + 0 computer_science = **905** |
+| Remaining | **870** |
+| Completion percentage | **50.99%** |
 
 *(Recomputed programmatically 2026-09-11 against the live KG files and the
-live `educational-brain/concepts/` tree, at the start of a dedicated
+live `educational-brain/concepts/` tree, mid-way through a dedicated
 Mathematics Educational Brain completion campaign (see
-`CLAUDE.md`'s "Mathematics Educational Brain completion" note). The
-previous revision (2026-08-12) read 256 mathematics / 896 total and was
-stale: mathematics had since gained one more `math.alg` entry
-(`math.alg.like-terms`, Wave 2) prior to this session's own batch, and
-this session's Wave 3 batch (`math.alg.simplification`,
-`math.alg.polynomial-operations`, `math.alg.radicals`) added three more,
-bringing mathematics from 257 to 260. Cross-checked: 0 orphan EB files, 0
-duplicate EB files, 0 EB filenames that do not resolve to a live KG
-concept id, across all six subjects.)*
+`CLAUDE.md`'s "Mathematics Educational Brain completion" note). This
+session's math.alg Wave 3 batch (3 concepts) and Wave 4 batch (5 concepts)
+together brought mathematics from 257 to 265. Cross-checked: 0 orphan EB
+files, 0 duplicate EB files, 0 EB filenames that do not resolve to a live
+KG concept id, across all six subjects.)*
 
 ---
 
@@ -36,7 +32,7 @@ concept id, across all six subjects.)*
 
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
-| mathematics | 908 | 260 | 28.63% | `math.found.mathematical-thinking` | **Yes** |
+| mathematics | 908 | 265 | 29.19% | `math.found.mathematical-thinking` | **Yes** |
 
 **Mathematics per-domain state (recomputed 2026-09-11, programmatic):**
 
@@ -48,7 +44,7 @@ concept id, across all six subjects.)*
 | `math.nt` | 36/36 | **CERTIFIED** (2026-08-12) — closed by this session's Phase 1 batch |
 | `math.calc` | 0/76 | not started |
 | `math.linalg` | 0/61 | not started |
-| `math.alg` | 15/59 | **IN PROGRESS** — Wave 1 (11, levels 0–2, 2026-08-12) + Wave 2 (1, `like-terms`, 2026-08-12) + Wave 3 (3, `simplification`/`polynomial-operations`/`radicals`, 2026-09-11) |
+| `math.alg` | 20/59 | **IN PROGRESS** — Wave 1 (11, levels 0–2, 2026-08-12) + Wave 2 (1, `like-terms`, 2026-08-12) + Wave 3 (3, `simplification`/`polynomial-operations`/`radicals`, 2026-09-11) + Wave 4 (5, `linear-equation-1var`/`polynomial-division`/`fractional-exponent`/`simplifying-radicals`/`radical-equations`, 2026-09-11) |
 | `math.de` | 0/56 | not started |
 | `math.prob` | 0/49 | not started |
 | `math.stats` | 0/40 | not started |
@@ -67,9 +63,9 @@ concept id, across all six subjects.)*
 | `math.cat` | 0/15 | not started |
 | `math.meas` | 0/13 | not started |
 
-Four domains certified plus math.alg in progress, 260 of 908. The four certified domains are the
+Four domains certified plus math.alg in progress, 265 of 908. The four certified domains are the
 graph's foundation layer; every remaining domain draws on at least one of
-them, so the prerequisite debt for the remaining 648 concepts is now
+them, so the prerequisite debt for the remaining 643 concepts is now
 substantially lower than the raw count suggests.
 
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |

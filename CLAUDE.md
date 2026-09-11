@@ -3026,10 +3026,22 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   validator PASS (908/908 reachable, file untouched), 0 orphan/duplicate EB files, `tsc --noEmit`
   clean, targeted tests 479/479 passed. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/
   runtime file touched. Per this program's own established "one bounded batch, re-derive the
-  frontier fresh next time" discipline, Wave 4 was deliberately NOT started this batch — 651
-  concepts remain (908 − 257 at campaign start), now 648 remain after this batch. This is a
-  genuinely multi-session campaign at the established authoring depth; continuation should verify
-  state via `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
+  frontier fresh next time" discipline, Wave 4 was deliberately NOT started in Batch 1 — 651
+  concepts remained (908 − 257 at campaign start), 648 after Batch 1. This is a genuinely
+  multi-session campaign at the established authoring depth; continuation should verify state via
+  `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
+- **Batch 2 — math.alg Wave 4** (2026-09-11, same session): authored the 5 concepts computed as the
+  next topologically-ready `math.alg` frontier — `math.alg.linear-equation-1var`,
+  `math.alg.polynomial-division`, `math.alg.fractional-exponent`, `math.alg.simplifying-radicals`,
+  `math.alg.radical-equations` — all Blueprint-grounded, reused by reference. `math.alg`
+  15/59 → **20/59**. Mathematics **260/908 → 265/908**, 643 remaining. Genuine Curriculum Feedback
+  finding recorded (not fixed): `math.alg.simplifying-radicals`'s MC-1 and `math.alg.radicals`'s
+  MC-3 are, in substance, the same misconception, authored independently by two Blueprints using
+  the identical √72→6√2 worked example — a Blueprint-level content-overlap, out of this program's
+  scope to resolve. Full per-concept detail in `COVERAGE.md` Batch 58. Validated: KG validator
+  PASS (908/908 reachable, file untouched), 0 orphan/duplicate EB files, `tsc --noEmit` clean,
+  targeted tests 479/479 passed. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file
+  touched. Wave 5 deliberately NOT started this batch, per the same one-bounded-batch discipline.
 
 ## Run locally
 ```
