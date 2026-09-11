@@ -3444,6 +3444,29 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   recurrence relations, Catalan/Stirling numbers) belong to largely separate, not-yet-opened
   subtrees. This is a genuinely multi-session campaign; continuation should verify state via
   `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
+- **Batch 23 — math.disc: closing the `graph-trees → spanning-tree` chain** (2026-09-11):
+  re-computed the frontier fresh — the sole candidate deferred from Batch 22,
+  `math.disc.spanning-tree` (requires `graph-trees` only), was confirmed still ready;
+  Blueprint-grounded, reused by reference. Spanning-tree definition built directly on
+  `graph-trees`' own tree definition (spans every vertex AND is a tree); existence proof; Cayley's
+  formula ($n^{n-2}$); the genuinely separate MST optimization question; the cut property and
+  cycle property as Kruskal's/Prim's correctness arguments; distinct-vs-tied-weight MST uniqueness.
+  3 misconceptions, birth types already assigned by the Blueprint, independently confirmed — MC-1
+  explicitly cross-referenced to `graph-trees`' own MC-1 as the identical relaxation-of-a-
+  conjunction mechanism recurring one structural level up. No genuine content-overlap or metadata
+  discrepancy found beyond that deliberate cross-reference. `math.disc` 19/32 → **20/32**.
+  `math.func` unchanged (1/29, parked). Mathematics **324/908 → 325/908**, 583 remaining. Full
+  per-concept detail in `COVERAGE.md` Batch 23. Validated: KG validator PASS (908/908 reachable,
+  file untouched), 0 orphan/duplicate EB files, `tsc --noEmit` clean, targeted tests 479/479
+  passed, heading structure diffed clean on the first pass (0 diffs). No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. This closes the
+  `graph-trees → spanning-tree` chain opened in Batch 20 — 0 topologically-ready math.disc
+  candidates remain; the domain's other 12 unauthored concepts all require prerequisites entirely
+  outside math.disc (`math.calc.limits`, `math.seq.sequence`, `math.seq.series`,
+  `math.linalg.matrix`, none yet authored), so the next step is a genuine cross-domain excursion
+  decision (into math.calc, math.seq, or math.linalg), or selecting a different unstarted domain
+  entirely. This is a genuinely multi-session campaign; continuation should verify state via
+  `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
 
 ## Run locally
 ```
