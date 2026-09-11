@@ -11,7 +11,7 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 270 | **Four domains CERTIFIED.** 82 `math.found.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 69 `math.geom.*` (**COMPLETE, DOMAIN CERTIFIED** — the final 13 entries were restored by commit `0d2c76dd`'s Wave 0 recovery, which this row previously did not reflect) + 36 `math.nt.*` (**COMPLETE, DOMAIN CERTIFIED 2026-08-12** — the domain's final 8 concepts, `prime-distribution`, `continued-fractions`, `analytic-number-theory`, `prime-number-theorem`, `riemann-hypothesis`, `algebraic-number-theory`, `algebraic-integers`, `number-fields`, were authored this session, ending the PARKED status this row previously recorded). 25 `math.alg.*` (**IN PROGRESS, 25/59** — Wave 1 (2026-08-12, 11 concepts): `expression`, `equation`, `term`, `coefficient`, `exponent-rules`, `polynomial`, `degree`, `zero-exponent`, `negative-exponent`, `solution-set`, `inequality`; Wave 2 (2026-08-12, 1 concept): `like-terms`; Wave 3 (2026-09-11, 3 concepts): `simplification`, `polynomial-operations`, `radicals`; Wave 4 (2026-09-11, 5 concepts): `linear-equation-1var`, `polynomial-division`, `fractional-exponent`, `simplifying-radicals`, `radical-equations`; Wave 5 (2026-09-11, 5 concepts): `inequality-1var`, `absolute-value-equations`, `linear-equation-2var`, `remainder-theorem`, `rationalizing-denominators`; all Blueprint-grounded, reused by reference). Remaining: 638 concepts across 19 unstarted domains plus math.alg's remaining 34. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. See Delivery history for full per-concept lists and misconception detail. |
+| mathematics | 908 | 273 | **Four domains CERTIFIED.** 82 `math.found.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 69 `math.geom.*` (**COMPLETE, DOMAIN CERTIFIED** — the final 13 entries were restored by commit `0d2c76dd`'s Wave 0 recovery, which this row previously did not reflect) + 36 `math.nt.*` (**COMPLETE, DOMAIN CERTIFIED 2026-08-12** — the domain's final 8 concepts, `prime-distribution`, `continued-fractions`, `analytic-number-theory`, `prime-number-theorem`, `riemann-hypothesis`, `algebraic-number-theory`, `algebraic-integers`, `number-fields`, were authored this session, ending the PARKED status this row previously recorded). 28 `math.alg.*` (**IN PROGRESS, 28/59** — Wave 1 (2026-08-12, 11 concepts): `expression`, `equation`, `term`, `coefficient`, `exponent-rules`, `polynomial`, `degree`, `zero-exponent`, `negative-exponent`, `solution-set`, `inequality`; Wave 2 (2026-08-12, 1 concept): `like-terms`; Wave 3 (2026-09-11, 3 concepts): `simplification`, `polynomial-operations`, `radicals`; Wave 4 (2026-09-11, 5 concepts): `linear-equation-1var`, `polynomial-division`, `fractional-exponent`, `simplifying-radicals`, `radical-equations`; Wave 5 (2026-09-11, 5 concepts): `inequality-1var`, `absolute-value-equations`, `linear-equation-2var`, `remainder-theorem`, `rationalizing-denominators`; Wave 6 (2026-09-11, 3 concepts): `inequality-2var`, `system-linear-equations`, `factor-theorem`; all Blueprint-grounded, reused by reference). Remaining: 635 concepts across 19 unstarted domains plus math.alg's remaining 31. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. See Delivery history for full per-concept lists and misconception detail. |
 | physics | 238 | 238 | **100% COMPLETE (2026-07-23).** pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 + 9 Wave 15 + 7 Wave 16 + 12 Wave 17 + 8 Wave 18 + 8 Wave 19 + 5 Wave 20 + 5 Wave 21 + 2 Wave 22 + 2 Wave 23 + 1 Wave 24 (FINAL): `phys.mod.diode-rectification` — every physics KG concept now has a full Educational Brain entry; see Delivery history for the full pre-existing-67, Wave-6 through Wave-23 name lists |
 | english | 216 | 216 | **100% COMPLETE (2026-08-11).** 212/216 through Batch 29 (full per-batch narrative in git commit messages and prior revisions of this file), plus Batch 30 — FINAL BATCH (4, autonomous /loop, level-30 frontier BATCH COMPLETE: `eng.communication.professional-communication`, `eng.communication.presentation-design`, `eng.communication.editing-for-publication`, `eng.communication.negotiation-language` — the last of these the English KG's final terminal node). Every English KG concept now has a full 21-section Educational Brain entry. English is the fourth subject to reach 100% Educational Brain coverage, after physics and chemistry (both 2026-07-23/26) and mathematics (domain-by-domain, ongoing). |
 | chemistry | 186 | 186 | **100% COMPLETE (2026-07-26).** Completion Loop 2026-07-25/26, batch 5 of 5: chem.poly.condensation, natural, biodegradable, properties authored, closing chem.poly to 5/5 (chem.poly.addition was already covered). Batches 1-4 closed chem.alc (6/6), chem.carb (7/7), chem.nitro (5/5), chem.bio (6/6) in that order. Every Chemistry KG concept now has a full 21-section Educational Brain entry, a fully authored 16-section Blueprint (`docs/curriculum/blueprints/chem.*.md`), and an authored Teaching Asset (`docs/chemistry/teaching-assets/assets.json`, status draft) — the stale 2026-07-23 note below claiming all-placeholder Blueprint content is corrected here. **Known bookkeeping gap (not corrected this batch):** `EDUCATIONAL_BRAIN_INDEX.md`, `AUTHORING_QUEUE.md`, and `QUALITY.md` were not regenerated for the 21 chemistry entries authored 2026-07-25/26 (chem.alc.epoxides/protection, chem.carb.ketones/carboxylic/alpha-reactions/derivatives/spectro/named-reactions, chem.nitro.amino-acids/diazonium/heterocycles, chem.bio.proteins/carbohydrates/lipids/enzyme-kinetics/nucleic-acids/vitamins, chem.poly.condensation/natural/biodegradable/properties) — those three registry files still show chemistry as 165/186 and should be regenerated from source in a future pass, per `PRODUCTION_PIPELINE.md`'s workflow. |
@@ -5006,3 +5006,65 @@ reachable, 0 failures, 0 warnings (KG file untouched); 0 orphan EB files; 0 dupl
 (via `scripts/math/state.ts`); `npx tsc --noEmit` clean; targeted tests
 `mathPackageCorpus.test.ts` + `mathematicsAssetContract.test.ts` 479/479 passed. No Physics,
 Chemistry, English, Biology, Computer Science, KG, Blueprint, or runtime file was modified.
+
+### Batch 60 — math.alg Wave 6 (2026-09-11, Mathematics Educational Brain completion campaign,
+autonomous loop, /loop 60s)
+
+Re-computed the topologically-ready `math.alg` frontier programmatically against the live KG and
+the live EB directory (post-Batch-59, math.alg 25/59): exactly 3 concepts had every prerequisite
+already authored — `math.alg.inequality-2var` (requires `inequality-1var`, `linear-equation-2var`,
+both present), `math.alg.system-linear-equations` (requires `linear-equation-2var`, present),
+`math.alg.factor-theorem` (requires `remainder-theorem`, present).
+
+All 3 had existing Blueprints, read in full and reused by reference per the Standard's ownership
+boundary. Each entry authored its own birth-type classification for every Blueprint-registered
+misconception:
+
+- **`math.alg.inequality-2var`** (proficient/apply, mastery 0.80, 5 hr) — graphing a half-plane via
+  boundary-line-then-shade, the solid/dashed distinction derived from whether a boundary point
+  satisfies the inequality (never a memorised convention), and origin-exception handling when the
+  boundary passes through (0,0). 3 misconceptions: MC-1
+  BOUNDARY-LINE-STYLE-NOT-MATCHED-TO-INEQUALITY-SYMBOL (Type 5 — instruction-induced, solid/dashed
+  demonstrated without ever connecting it to the underlying boundary-point check), MC-2
+  ORIGIN-USED-AS-TEST-POINT-WITHOUT-CHECKING-IT-IS-OFF-THE-LINE (Type 1 — "origin always works"
+  overgeneralized past its precondition), MC-3 SHADED-HALF-PLANE-REVERSED (Type 1 — a correct
+  true/false evaluation not reliably reconciled back to which physical side it names). **Genuine
+  Blueprint/KG metadata discrepancy found and resolved toward the KG**: the Blueprint's own
+  Component 0/7 state `cross_links: (none)`, but the live KG genuinely lists
+  `math.opt.linear-programming` (matching the KG's own `related` field and the Blueprint's own
+  prose/P76 design) — recorded in Curriculum Feedback, not fixed (no Blueprint or KG file
+  modified).
+- **`math.alg.system-linear-equations`** (proficient/apply, mastery 0.85, 12 hr) — substitution
+  (target-equation discipline) and elimination (coefficient-sign matching) as two mechanical routes
+  to the same one-unknown reduction, plus the three-outcome classification (unique/none/infinite)
+  read directly off the post-elimination result. 3 misconceptions: MC-1
+  SUBSTITUTE-INTO-SAME-EQUATION (Type 1 — no distinction yet held between "equation solved FROM"
+  and "the other equation"), MC-2 ELIMINATION-WRONG-SIGN (Type 1 — "combine the equations"
+  overgeneralized without the additive-inverse precondition), MC-3
+  ZERO-EQUALS-ZERO-MEANS-NO-SOLUTION (Type 3 — language contamination, "nothing left" conflated
+  with "nothing works," inverting the correct reading). Genuine KG cross-link
+  (`math.linalg.linear-system`) verified real and already correctly documented by the Blueprint —
+  no discrepancy.
+- **`math.alg.factor-theorem`** (proficient/apply, mastery 0.85, 3 hr) — the Remainder Theorem's own
+  r=0 special case, made explicit, plus deflation (divide out a confirmed factor, repeat) as the
+  mechanism turning a single factor test into a complete factorisation, plus the Rational Root
+  candidate list as the finite, systematic search strategy. 3 misconceptions: MC-1
+  SUBSTITUTE-WRONG-SIGN (Type 4 — identical mechanism to `remainder-theorem`'s own MC-1, direct
+  carry-over), MC-2 FACTOR-FOUND-MEANS-DONE (Type 1 — the theorem's own name, "find A factor," read
+  as the whole task), MC-3 RATIONAL-ROOT-NOT-NEEDED (Type 5 — instruction-induced, the Rational
+  Root connection left implicit, degenerating into unstructured guessing).
+
+`math.alg` **25/59 → 28/59**, still IN PROGRESS. Mathematics **270/908 → 273/908**. Topologically
+next-ready `math.alg` candidates deliberately NOT pre-computed for a Wave 7 selection this batch,
+per this program's own "re-derive the frontier fresh each batch" discipline. All five tracking
+files updated in the same commit: `ROADMAP.md` Section 1/2 totals regenerated from source,
+`COVERAGE.md`'s math.alg summary row and this Delivery history entry, `EDUCATIONAL_BRAIN_INDEX.md`
+and `QUALITY.md` again deferred (same generated-artifact rationale as Batches 57-59). Re-verified:
+`npx tsx scripts/validate-knowledge-graph.ts docs/mathematics/kg/graph.json` PASS, 908/908
+reachable, 0 failures, 0 warnings (KG file untouched); 0 orphan EB files; 0 duplicate EB files
+(via `scripts/math/state.ts`); `npx tsc --noEmit` clean; targeted tests
+`mathPackageCorpus.test.ts` + `mathematicsAssetContract.test.ts` 479/479 passed. No Physics,
+Chemistry, English, Biology, Computer Science, KG, Blueprint, or runtime file was modified.
+This is the first batch run under the autonomous `/loop 60s` mode activated this session (recurring
+1-minute cron, fires only while idle, auto-expires after 7 days) — subsequent batches continue
+automatically per the loop's own standing prompt.

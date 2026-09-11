@@ -3052,9 +3052,21 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   `math.alg.radicals`' own LO2/MC-2. Full per-concept detail in `COVERAGE.md` Batch 59. Validated:
   KG validator PASS (908/908 reachable, file untouched), 0 orphan/duplicate EB files, `tsc
   --noEmit` clean, targeted tests 479/479 passed. No Physics/Chemistry/English/Biology/CS/KG/
-  Blueprint/runtime file touched. Wave 6 deliberately NOT started this batch, per the same
-  one-bounded-batch discipline — 638 concepts remain; this is a genuinely multi-session campaign
-  and continuation should verify state via `scripts/math/state.ts` fresh each time.
+  Blueprint/runtime file touched.
+- **Autonomous `/loop 60s` activated (2026-09-11, same session)**: recurring 1-minute cron job
+  (fires only while idle), continuing this campaign batch-after-batch without per-iteration
+  re-prompting, until 908/908 or a verified blocker. **Batch 4 — math.alg Wave 6** (loop iteration
+  1): authored the 3 concepts computed as the next topologically-ready `math.alg` frontier —
+  `math.alg.inequality-2var`, `math.alg.system-linear-equations`, `math.alg.factor-theorem` — all
+  Blueprint-grounded, reused by reference. `math.alg` 25/59 → **28/59**. Mathematics
+  **270/908 → 273/908**, 635 remaining. A genuine Blueprint/KG cross_links metadata discrepancy
+  found for `inequality-2var` and resolved toward the KG (real cross-link to
+  `math.opt.linear-programming` that the Blueprint's own metadata table omitted) — recorded, not
+  fixed (out of program scope). Full per-concept detail in `COVERAGE.md` Batch 60. Validated: KG
+  validator PASS (908/908 reachable, file untouched), 0 orphan/duplicate EB files, `tsc --noEmit`
+  clean, targeted tests 479/479 passed. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/
+  runtime file touched. This is a genuinely multi-session campaign; continuation should verify
+  state via `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
 
 ## Run locally
 ```
