@@ -159,6 +159,17 @@ correctly (verbatim stem matches); wrong answers were correctly identified as
 wrong (not falsely confirmed) throughout; no topic drift observed; 2 more
 real `process_flow` visualSpecs auto-attached.
 
+## Group 8 update
+
+3 more recurrences (`eng.reading.inference-in-reading` T4/T8,
+`eng.reading.critical-reading` T6) — running total 16 disambiguation + 1
+false-confirmation across Groups 3-8. No new episode classes. Batch 8
+content confirmed served correctly; wrong answers correctly identified as
+wrong throughout (via accurate [memory] explanations); no topic drift; 3
+more real `process_flow` visuals auto-attached (including a genuinely
+useful 5-step critical-reading diagram: Identify Claim/Examine Evidence/
+Identify Assumptions/Detect Bias/Form Judgment).
+
 ## Suggested next steps for a dedicated session
 
 1. Reproduce offline against the real `mcqReoffer.test.ts` harness with these
