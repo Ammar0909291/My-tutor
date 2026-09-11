@@ -13,9 +13,9 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **293** mathematics + 238 physics + 216 english + 186 chemistry + 0 biology + 0 computer_science = **933** |
-| Remaining | **842** |
-| Completion percentage | **52.56%** |
+| Concepts with an Educational Brain entry | **295** mathematics + 238 physics + 216 english + 186 chemistry + 0 biology + 0 computer_science = **935** |
+| Remaining | **840** |
+| Completion percentage | **52.68%** |
 
 *(Recomputed programmatically 2026-09-11 against the live KG files and the
 live `educational-brain/concepts/` tree, mid-way through a dedicated
@@ -25,10 +25,10 @@ session's math.alg Wave 3 (3 concepts), Wave 4 (5 concepts), Wave 5
 (5 concepts), Wave 6 (3 concepts), Wave 7 (4 concepts), Wave 8
 (3 concepts), Wave 9 (4 concepts), Wave 10 (1 concept), Wave 11
 (2 concepts), Wave 12 part 1 (1 concept), Wave 12 part 2 (2 concepts),
-and Wave 12 part 3 (3 concepts) batches together brought mathematics
-from 257 to 293. Cross-checked: 0 orphan EB files, 0 duplicate EB
-files, 0 EB filenames that do not resolve to a live KG concept id,
-across all six subjects.)*
+Wave 12 part 3 (3 concepts), and Wave 13 (2 concepts) batches together
+brought mathematics from 257 to 295. Cross-checked: 0 orphan EB files,
+0 duplicate EB files, 0 EB filenames that do not resolve to a live KG
+concept id, across all six subjects.)*
 
 ---
 
@@ -36,7 +36,7 @@ across all six subjects.)*
 
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
-| mathematics | 908 | 293 | 32.27% | `math.found.mathematical-thinking` | **Yes** |
+| mathematics | 908 | 295 | 32.49% | `math.found.mathematical-thinking` | **Yes** |
 
 **Mathematics per-domain state (recomputed 2026-09-11, programmatic):**
 
@@ -48,7 +48,7 @@ across all six subjects.)*
 | `math.nt` | 36/36 | **CERTIFIED** (2026-08-12) — closed by this session's Phase 1 batch |
 | `math.calc` | 0/76 | not started |
 | `math.linalg` | 0/61 | not started |
-| `math.alg` | 48/59 | **IN PROGRESS** — Wave 1 (11, levels 0–2, 2026-08-12) + Wave 2 (1, `like-terms`, 2026-08-12) + Wave 3 (3, `simplification`/`polynomial-operations`/`radicals`, 2026-09-11) + Wave 4 (5, `linear-equation-1var`/`polynomial-division`/`fractional-exponent`/`simplifying-radicals`/`radical-equations`, 2026-09-11) + Wave 5 (5, `inequality-1var`/`absolute-value-equations`/`linear-equation-2var`/`remainder-theorem`/`rationalizing-denominators`, 2026-09-11) + Wave 6 (3, `inequality-2var`/`system-linear-equations`/`factor-theorem`, 2026-09-11) + Wave 7 (4, `substitution-method`/`elimination-method`/`system-3var`/`factoring`, 2026-09-11) + Wave 8 (3, `factoring-gcf`/`factoring-special`/`rational-expressions`, 2026-09-11) + Wave 9 (4, `factoring-trinomials`/`rational-expressions-addition`/`rational-expressions-multiplication`/`rational-equations`, 2026-09-11) + Wave 10 (1, `quadratic-equation`, 2026-09-11) + Wave 11 (2, `completing-the-square`/`polynomial-roots`, 2026-09-11) + Wave 12 part 1 (1, `quadratic-formula`, 2026-09-11) + Wave 12 part 2 (2, `discriminant`/`rational-root-theorem`, 2026-09-11) + Wave 12 part 3 (3, `fundamental-theorem-algebra`/`polynomial-inequality`/`vietas-formulas`, 2026-09-11 — only 11 concepts remain before math.alg reaches CERTIFIED) |
+| `math.alg` | 50/59 | **IN PROGRESS** — Wave 1 (11, levels 0–2, 2026-08-12) + Wave 2 (1, `like-terms`, 2026-08-12) + Wave 3 (3, `simplification`/`polynomial-operations`/`radicals`, 2026-09-11) + Wave 4 (5, `linear-equation-1var`/`polynomial-division`/`fractional-exponent`/`simplifying-radicals`/`radical-equations`, 2026-09-11) + Wave 5 (5, `inequality-1var`/`absolute-value-equations`/`linear-equation-2var`/`remainder-theorem`/`rationalizing-denominators`, 2026-09-11) + Wave 6 (3, `inequality-2var`/`system-linear-equations`/`factor-theorem`, 2026-09-11) + Wave 7 (4, `substitution-method`/`elimination-method`/`system-3var`/`factoring`, 2026-09-11) + Wave 8 (3, `factoring-gcf`/`factoring-special`/`rational-expressions`, 2026-09-11) + Wave 9 (4, `factoring-trinomials`/`rational-expressions-addition`/`rational-expressions-multiplication`/`rational-equations`, 2026-09-11) + Wave 10 (1, `quadratic-equation`, 2026-09-11) + Wave 11 (2, `completing-the-square`/`polynomial-roots`, 2026-09-11) + Wave 12 part 1 (1, `quadratic-formula`, 2026-09-11) + Wave 12 part 2 (2, `discriminant`/`rational-root-theorem`, 2026-09-11) + Wave 12 part 3 (3, `fundamental-theorem-algebra`/`polynomial-inequality`/`vietas-formulas`, 2026-09-11) + Wave 13 (2, `complex-polynomial-roots`/`rational-inequality`, 2026-09-11 — only 9 concepts remain before math.alg reaches CERTIFIED) |
 | `math.de` | 0/56 | not started |
 | `math.prob` | 0/49 | not started |
 | `math.stats` | 0/40 | not started |

@@ -3197,6 +3197,24 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   against `math.alg.like-terms.md`. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime
   file touched. This is a genuinely multi-session campaign; continuation should verify state via
   `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
+- **Batch 13 — math.alg Wave 13** (2026-09-11): re-computed the frontier fresh — exactly 2
+  concepts — `math.alg.complex-polynomial-roots` (conjugate-root theorem + FTA-driven root-list
+  completion + factoring over the reals into real quadratics), `math.alg.rational-inequality`
+  (extends the polynomial-inequality sign-chart procedure to a second critical-point source with a
+  source-dependent endpoint rule, plus the cross-multiplication-is-unsafe warning) — both
+  Blueprint-grounded, reused by reference. `math.alg` 48/59 → **50/59** — **only 9 concepts remain
+  before the domain reaches DOMAIN CERTIFICATION** (the fifth after math.found, math.geom,
+  math.arith, math.nt). Mathematics **293/908 → 295/908**, 613 remaining. One genuine Curriculum
+  Feedback finding recorded (not fixed): `complex-polynomial-roots`'s Blueprint names
+  `math.alg.rational-root-theorem` as a sibling concept, but that already-authored entry (Batch 11)
+  does not name it back — recorded as a one-directional forward note. `rational-inequality`
+  fulfills the standing forward-work note left in `polynomial-inequality`'s own entry (Batch 68).
+  Full per-concept detail in `COVERAGE.md` Batch 69. Validated: KG validator PASS (908/908
+  reachable, file untouched), 0 orphan/duplicate EB files, `tsc --noEmit` clean, targeted tests
+  479/479 passed, both heading structures diffed clean against `math.alg.like-terms.md`. No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. This is a genuinely
+  multi-session campaign; continuation should verify state via `scripts/math/state.ts` fresh each
+  time rather than trusting any number recorded here.
 
 ## Run locally
 ```
