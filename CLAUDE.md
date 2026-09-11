@@ -3419,6 +3419,31 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   `graph-trees`, `planar-graph`, all in the graph-theory subtree). This is a genuinely
   multi-session campaign; continuation should verify state via `scripts/math/state.ts` fresh
   each time rather than trusting any number recorded here.
+- **Batch 22 — math.disc: substantially developing the graph-theory subtree** (2026-09-11):
+  re-computed the frontier fresh — all 3 candidates deferred from Batch 21 were ready:
+  `euler-hamiltonian` and `graph-trees` (both requiring `graph-connectivity`), `planar-graph`
+  (requiring `graph`); all 3 Blueprint-grounded, reused by reference. `euler-hamiltonian`
+  (Euler's theorem as a pure degree-count test, no tracing required; the open-path extension via
+  exactly 0 or 2 odd-degree vertices; the bowtie-graph counterexample proving Eulerian and
+  Hamiltonian are logically independent) — a second instance of the cross-link intermediate case
+  (both `math.graph.eulerian-circuit`/`hamiltonian-cycle` have Blueprints, neither has an EB
+  entry). `graph-trees` (connected AND acyclic simultaneously, never either alone; $n-1$ edges as
+  necessary but not sufficient; the same free tree rooted differently producing genuinely
+  different hierarchies) — unlocks `spanning-tree`, the domain's next frontier. `planar-graph`
+  (Euler's formula with its disconnected-graph $C+1$ correction; the edge-density bounds as
+  strictly one-directional non-planarity tests, never sufficiency proofs; Kuratowski's theorem's
+  precise "subdivision," not strict-subgraph, wording). No genuine content-overlap or metadata
+  discrepancy found in any of the 3. `math.disc` 16/32 → **19/32**. `math.func` unchanged (1/29,
+  parked). Mathematics **321/908 → 324/908**, 584 remaining. Full per-concept detail in
+  `COVERAGE.md` Batch 22. Validated: KG validator PASS (908/908 reachable, file untouched), 0
+  orphan/duplicate EB files, `tsc --noEmit` clean, targeted tests 479/479 passed, all 3 heading
+  structures diffed clean on the first pass (0 diffs each). No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Fresh math.disc
+  frontier computed: only 1 candidate ready (`spanning-tree`) — the domain's remaining 12
+  concepts (algorithm complexity/asymptotic notation, generating functions and variants,
+  recurrence relations, Catalan/Stirling numbers) belong to largely separate, not-yet-opened
+  subtrees. This is a genuinely multi-session campaign; continuation should verify state via
+  `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
 
 ## Run locally
 ```
