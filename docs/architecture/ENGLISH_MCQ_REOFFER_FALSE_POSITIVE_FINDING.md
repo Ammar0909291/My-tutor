@@ -133,6 +133,23 @@ the opposite (false-positive-graded-correct) branch instead of the
 ungradeable branch, rather than a separate defect in the confirmation
 enforcer itself.
 
+## Recurrence tally (kept brief from Group 6 onward — see git log for detail)
+
+Group 6 live QA reproduced the same disambiguation-lead-in false positive 3
+more times (`eng.grammar.active-and-passive-voice` T4/T6,
+`eng.grammar.subject-verb-agreement` T6 — all genuine follow-ups/meta-
+commentary, no answer attempt). Running total across Groups 3-6: **10
+disambiguation-lead-in occurrences + 1 false-confirmation occurrence**. Also
+observed this group (not part of this finding, noted for completeness): one
+correct answer (`active-and-passive-voice` T7) got a hedging "Let me know if
+that's right" instead of a clear confirmation — consistent with the already-
+documented C5 confirmation-rate gap in CLAUDE.md (~65%), not a new defect.
+Batch 6's own authored probes were independently confirmed served correctly
+(verbatim stem matches), and this run also served a genuine `process_flow`
+visualSpec (not just the usual ASCII fallback) for two auto-attached figures
+— positive evidence the visual pipeline works correctly when not explicitly
+requested via "show me a diagram."
+
 ## Suggested next steps for a dedicated session
 
 1. Reproduce offline against the real `mcqReoffer.test.ts` harness with these
