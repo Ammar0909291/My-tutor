@@ -196,6 +196,16 @@ were correctly identified as wrong via accurate [memory] explanations; Batch
 process_flow visual (6-step narrative-writing stages) auto-attached; no
 topic drift.
 
+## Group 10 update
+
+3 more recurrences (`eng.listening.active-listening` T4/T6,
+`eng.writing.editing-and-proofreading` T6) — running total 22
+disambiguation + 2 false-confirmation across Groups 3-10. No new episode
+classes this group (a clean run apart from the tracked recurrence). Batch 10
+content confirmed served correctly; wrong answers correctly identified as
+wrong; correct answers confirmed properly; multiple real `process_flow`
+visuals auto-attached (5-step active-listening diagram); no topic drift.
+
 ## Suggested next steps for a dedicated session
 
 1. Reproduce offline against the real `mcqReoffer.test.ts` harness with these
