@@ -13,19 +13,19 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **277** mathematics + 238 physics + 216 english + 186 chemistry + 0 biology + 0 computer_science = **917** |
-| Remaining | **858** |
-| Completion percentage | **51.66%** |
+| Concepts with an Educational Brain entry | **280** mathematics + 238 physics + 216 english + 186 chemistry + 0 biology + 0 computer_science = **920** |
+| Remaining | **855** |
+| Completion percentage | **51.83%** |
 
 *(Recomputed programmatically 2026-09-11 against the live KG files and the
 live `educational-brain/concepts/` tree, mid-way through a dedicated
 Mathematics Educational Brain completion campaign (see
 `CLAUDE.md`'s "Mathematics Educational Brain completion" note). This
 session's math.alg Wave 3 (3 concepts), Wave 4 (5 concepts), Wave 5
-(5 concepts), Wave 6 (3 concepts), and Wave 7 (4 concepts) batches
-together brought mathematics from 257 to 277. Cross-checked: 0 orphan
-EB files, 0 duplicate EB files, 0 EB filenames that do not resolve to
-a live KG concept id, across all six subjects.)*
+(5 concepts), Wave 6 (3 concepts), Wave 7 (4 concepts), and Wave 8
+(3 concepts) batches together brought mathematics from 257 to 280.
+Cross-checked: 0 orphan EB files, 0 duplicate EB files, 0 EB filenames
+that do not resolve to a live KG concept id, across all six subjects.)*
 
 ---
 
@@ -33,7 +33,7 @@ a live KG concept id, across all six subjects.)*
 
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
-| mathematics | 908 | 277 | 30.51% | `math.found.mathematical-thinking` | **Yes** |
+| mathematics | 908 | 280 | 30.84% | `math.found.mathematical-thinking` | **Yes** |
 
 **Mathematics per-domain state (recomputed 2026-09-11, programmatic):**
 
@@ -45,7 +45,7 @@ a live KG concept id, across all six subjects.)*
 | `math.nt` | 36/36 | **CERTIFIED** (2026-08-12) — closed by this session's Phase 1 batch |
 | `math.calc` | 0/76 | not started |
 | `math.linalg` | 0/61 | not started |
-| `math.alg` | 32/59 | **IN PROGRESS** — Wave 1 (11, levels 0–2, 2026-08-12) + Wave 2 (1, `like-terms`, 2026-08-12) + Wave 3 (3, `simplification`/`polynomial-operations`/`radicals`, 2026-09-11) + Wave 4 (5, `linear-equation-1var`/`polynomial-division`/`fractional-exponent`/`simplifying-radicals`/`radical-equations`, 2026-09-11) + Wave 5 (5, `inequality-1var`/`absolute-value-equations`/`linear-equation-2var`/`remainder-theorem`/`rationalizing-denominators`, 2026-09-11) + Wave 6 (3, `inequality-2var`/`system-linear-equations`/`factor-theorem`, 2026-09-11) + Wave 7 (4, `substitution-method`/`elimination-method`/`system-3var`/`factoring`, 2026-09-11) |
+| `math.alg` | 35/59 | **IN PROGRESS** — Wave 1 (11, levels 0–2, 2026-08-12) + Wave 2 (1, `like-terms`, 2026-08-12) + Wave 3 (3, `simplification`/`polynomial-operations`/`radicals`, 2026-09-11) + Wave 4 (5, `linear-equation-1var`/`polynomial-division`/`fractional-exponent`/`simplifying-radicals`/`radical-equations`, 2026-09-11) + Wave 5 (5, `inequality-1var`/`absolute-value-equations`/`linear-equation-2var`/`remainder-theorem`/`rationalizing-denominators`, 2026-09-11) + Wave 6 (3, `inequality-2var`/`system-linear-equations`/`factor-theorem`, 2026-09-11) + Wave 7 (4, `substitution-method`/`elimination-method`/`system-3var`/`factoring`, 2026-09-11) + Wave 8 (3, `factoring-gcf`/`factoring-special`/`rational-expressions`, 2026-09-11) |
 | `math.de` | 0/56 | not started |
 | `math.prob` | 0/49 | not started |
 | `math.stats` | 0/40 | not started |
@@ -64,9 +64,9 @@ a live KG concept id, across all six subjects.)*
 | `math.cat` | 0/15 | not started |
 | `math.meas` | 0/13 | not started |
 
-Four domains certified plus math.alg in progress, 277 of 908. The four certified domains are the
+Four domains certified plus math.alg in progress, 280 of 908. The four certified domains are the
 graph's foundation layer; every remaining domain draws on at least one of
-them, so the prerequisite debt for the remaining 631 concepts is now
+them, so the prerequisite debt for the remaining 628 concepts is now
 substantially lower than the raw count suggests.
 
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |

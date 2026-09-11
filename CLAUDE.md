@@ -3083,6 +3083,22 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. This is a genuinely multi-session
   campaign; continuation should verify state via `scripts/math/state.ts` fresh each time rather
   than trusting any number recorded here.
+- **Batch 6 — math.alg Wave 8** (2026-09-11, loop iteration 3): authored the 3 concepts computed as
+  the next topologically-ready `math.alg` frontier — `math.alg.factoring-gcf`,
+  `math.alg.factoring-special`, `math.alg.rational-expressions` — all Blueprint-grounded, reused by
+  reference. `math.alg` 32/59 → **35/59**. Mathematics **277/908 → 280/908**, 628 remaining. Two
+  genuine Curriculum Feedback findings recorded (not fixed): explicitly checked and ruled out any
+  overlap between `factoring-gcf`'s misconceptions and `factoring`'s own MC-1 (structurally distinct
+  — computing the GCF correctly vs. stopping after computing it); `factoring-special`'s MC-1
+  (sum-of-squares mistaken for factorable) is the identical Type-2 perceptual mechanism as
+  `factoring`'s own MC-3, now cross-referenced in both entries, with `factoring-special` reusing
+  `factoring`'s "Minus splits, plus doesn't" memory hook verbatim. Full per-concept detail in
+  `COVERAGE.md` Batch 62. Validated: KG validator PASS (908/908 reachable, file untouched), 0
+  orphan/duplicate EB files, `tsc --noEmit` clean, targeted tests 479/479 passed, all 3 heading
+  structures diffed clean against `math.alg.like-terms.md`. No Physics/Chemistry/English/Biology/
+  CS/KG/Blueprint/runtime file touched. This is a genuinely multi-session campaign; continuation
+  should verify state via `scripts/math/state.ts` fresh each time rather than trusting any number
+  recorded here.
 
 ## Run locally
 ```
