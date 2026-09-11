@@ -3238,6 +3238,26 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   candidate; with `counting-principles` authored, `math.disc.permutations` is the next ready
   math.disc candidate. This is a genuinely multi-session campaign; continuation should verify
   state via `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
+- **Batch 15 — math.alg-unblocking cross-domain excursion continued** (2026-09-11): re-computed
+  the frontier fresh — `math.alg.exponential-function` (unblocked by Batch 14's
+  `function-concept`) and `math.disc.permutations` (unblocked by Batch 14's
+  `counting-principles`) were both ready. `exponential-function` ($a^x$ vs. power function $x^a$
+  — the critical structural distinction, ranked the Blueprint's own most-emphasized
+  misconception; growth/decay classification) and `permutations` ($P(n,r)=n!/(n-r)!$ derived from
+  the multiplication principle, plus circular/repetition/identical-objects variants and the
+  order-matters test) both authored, both 0 Blueprint/KG discrepancies this time. `math.alg`
+  50/59 → **51/59** (8 remain: 2 via math.disc, 6 via the now-unblocked `logarithm` family).
+  `math.disc` 1/32 → **2/32**, unblocking `math.disc.combinations` next — the final blocker for
+  math.alg's last 2 concepts. `math.func` stays at 1/29 (exponential-function is math.alg, not
+  math.func). Mathematics **297/908 → 299/908**, 836 remaining. Full per-concept detail in
+  `COVERAGE.md` Batch 15. Validated: KG validator PASS (908/908 reachable, file untouched), 0
+  orphan/duplicate EB files, `tsc --noEmit` clean, targeted tests 479/479 passed, both heading
+  structures diffed clean against `math.alg.like-terms.md`. No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Next: `math.alg.logarithm`
+  is the next ready math.alg candidate; `math.disc.combinations` is the next ready math.disc
+  candidate (and once authored, unblocks math.alg's final 2 concepts at once). This is a
+  genuinely multi-session campaign; continuation should verify state via `scripts/math/state.ts`
+  fresh each time rather than trusting any number recorded here.
 
 ## Run locally
 ```
