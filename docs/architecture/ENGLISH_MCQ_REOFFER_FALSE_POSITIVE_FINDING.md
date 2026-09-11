@@ -206,6 +206,20 @@ content confirmed served correctly; wrong answers correctly identified as
 wrong; correct answers confirmed properly; multiple real `process_flow`
 visuals auto-attached (5-step active-listening diagram); no topic drift.
 
+## Group 11 update
+
+4 more recurrences (`eng.speaking.conversation-skills` T4/T6/T8,
+`eng.listening.critical-listening` T6) — running total 26 disambiguation + 2
+false-confirmation across Groups 3-11. No new episode classes this group.
+Batch 11 content confirmed served correctly (verbatim stem matches, e.g. the
+exact "networking conversation, one person does almost all the talking" and
+"business pitch... offers weak evidence" stems); wrong answers correctly
+identified as wrong (via accurate [memory] explanations distinguishing pause
+normalcy and evidence quality); correct answers confirmed properly
+(`"That's right."`, `"That's right. You got it!"` via `[gemini]`); real
+`process_flow` visuals auto-attached (5-step conversation-flow diagram); no
+topic drift.
+
 ## Suggested next steps for a dedicated session
 
 1. Reproduce offline against the real `mcqReoffer.test.ts` harness with these
