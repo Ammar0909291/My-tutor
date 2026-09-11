@@ -41,6 +41,7 @@ import { ENGLISH_ADULT_BAND_BATCH_5 } from '../../src/lib/teaching/assets/englis
 import { ENGLISH_ADULT_BAND_BATCH_6 } from '../../src/lib/teaching/assets/englishAdultBandBatch6'
 import { ENGLISH_ADULT_BAND_BATCH_7 } from '../../src/lib/teaching/assets/englishAdultBandBatch7'
 import { ENGLISH_ADULT_BAND_BATCH_8 } from '../../src/lib/teaching/assets/englishAdultBandBatch8'
+import { ENGLISH_ADULT_BAND_BATCH_9 } from '../../src/lib/teaching/assets/englishAdultBandBatch9'
 import type { SeedProbe } from '../../src/lib/teaching/assets/brainSeedAssets'
 import { getKnowledgeGraph, getAllNodes } from '../../src/lib/curriculum/knowledgeGraph'
 
@@ -54,7 +55,7 @@ export const ADULT_PROBE_SOURCES: SeedProbe[] = [
   ...ENGLISH_PROBE_BATCH_8, ...ENGLISH_PROBE_BATCH_9, ...ENGLISH_PROBE_BATCH_10,
   ...ENGLISH_ADULT_BAND_BATCH_1, ...ENGLISH_ADULT_BAND_BATCH_2, ...ENGLISH_ADULT_BAND_BATCH_3,
   ...ENGLISH_ADULT_BAND_BATCH_4, ...ENGLISH_ADULT_BAND_BATCH_5, ...ENGLISH_ADULT_BAND_BATCH_6,
-  ...ENGLISH_ADULT_BAND_BATCH_7, ...ENGLISH_ADULT_BAND_BATCH_8,
+  ...ENGLISH_ADULT_BAND_BATCH_7, ...ENGLISH_ADULT_BAND_BATCH_8, ...ENGLISH_ADULT_BAND_BATCH_9,
 ]
 
 const isClosedChoice = (p: SeedProbe): boolean => Array.isArray(p.choices) && p.choices.length >= 2
