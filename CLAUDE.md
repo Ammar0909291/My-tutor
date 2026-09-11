@@ -3161,6 +3161,25 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   `math.alg.like-terms.md`. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file
   touched. This is a genuinely multi-session campaign; continuation should verify state via
   `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
+- **Batch 11 — math.alg Wave 12 part 2** (2026-09-11, closed early a second time per explicit user
+  instruction mid-batch): session started by pulling 2 concurrent unrelated commits from
+  `origin/main` (test-file corpus-count updates, zero file overlap) via clean fast-forward. The
+  re-computed frontier was 5 concepts (`discriminant` newly unblocked by `quadratic-formula`,
+  `fundamental-theorem-algebra`, `polynomial-inequality`, `rational-root-theorem`,
+  `vietas-formulas`); all 5 Blueprints read, but only 2 — `math.alg.discriminant`,
+  `math.alg.rational-root-theorem` — authored, validated, and committed before stopping.
+  `math.alg` 43/59 → **45/59**. Mathematics **288/908 → 290/908**, 618 remaining.
+  `discriminant` fully develops `quadratic-formula`'s own deliberately-deferred discriminant
+  preview. `rational-root-theorem` is the first genuinely exercised cross-domain dependency in
+  this campaign's math.alg work (`math.nt.divisibility`, already-certified `math.nt` domain). No
+  genuine content-overlap or metadata discrepancy found. The remaining 3 already-read candidates
+  (`fundamental-theorem-algebra`, `polynomial-inequality`, `vietas-formulas`) are deferred to a
+  future batch (Wave 12 part 3), to be re-verified fresh. Full per-concept detail in `COVERAGE.md`
+  Batch 67. Validated: KG validator PASS (908/908 reachable, file untouched), 0 orphan/duplicate EB
+  files, `tsc --noEmit` clean, targeted tests 479/479 passed, both heading structures diffed clean
+  against `math.alg.like-terms.md`. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime
+  file touched. This is a genuinely multi-session campaign; continuation should verify state via
+  `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
 
 ## Run locally
 ```
