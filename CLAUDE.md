@@ -3307,6 +3307,33 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. This is a genuinely
   multi-session campaign; continuation should verify state via `scripts/math/state.ts` fresh each
   time rather than trusting any number recorded here.
+- **Batch 18 — math.alg's final 3 concepts, DOMAIN CERTIFICATION** (2026-09-11): re-computed the
+  frontier fresh — all 3 remaining math.alg concepts (`change-of-base`, `logarithmic-equations`,
+  `pascals-triangle`) were confirmed already topologically ready; all 3 Blueprint-grounded, reused
+  by reference. `change-of-base` (the formula $\log_a(x)=\frac{\log_b(x)}{\log_b(a)}$ derived from
+  solving $a^y=x$ rather than asserted, base-independence verified numerically) and
+  `logarithmic-equations` (condense/exponentiate/solve/domain-check pipeline, domain check framed
+  as structurally necessary like radical-equation extraneous-solution checking) both authored with
+  no genuine content-overlap or metadata discrepancy. `pascals-triangle` (construction rule proved
+  combinatorially via the include/exclude argument, row/position read as $\binom{n}{k}$ under
+  0-indexing, used to read off `binomial-theorem`'s coefficients directly) closes the domain — one
+  genuine Blueprint/KG discrepancy found (not fixed, KG followed): the Blueprint states
+  "cross_links: (none)" but the KG has `cross_links: ['math.disc.combinations']`, already
+  authored, so this entry genuinely incorporates that cross-linked content rather than merely
+  flagging it. **`math.alg` 56/59 → 59/59 — DOMAIN CERTIFIED**, the fifth mathematics domain after
+  math.found/math.geom/math.arith/math.nt. `math.disc`/`math.func` unchanged this batch — both now
+  stand as independent in-progress domains rather than math.alg-serving excursions.
+  `math.disc`'s fresh frontier computed: 7 topologically-ready candidates
+  (`binomial-theorem`/`combinatorics`/`graph`/`inclusion-exclusion`/`pigeonhole`/
+  `propositional-logic`/`stars-bars`). Mathematics **305/908 → 308/908**, 600 remaining. Full
+  per-concept detail in `COVERAGE.md` Batch 18. Validated: KG validator PASS (908/908 reachable,
+  file untouched), `scripts/math/state.ts` confirms math.alg `"ebComplete": true` and 5
+  EB-certified domains, 0 orphan/duplicate EB files, `tsc --noEmit` clean, targeted tests 479/479
+  passed, all 3 heading structures diffed clean on the first pass (0 diffs each). No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. This is a genuinely
+  multi-session campaign; continuation should verify state via `scripts/math/state.ts` fresh each
+  time rather than trusting any number recorded here. Next domain selection (continue math.disc as
+  a full campaign, continue math.func, or start fresh) is an open decision for the next batch.
 
 ## Run locally
 ```
