@@ -3180,6 +3180,23 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   against `math.alg.like-terms.md`. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime
   file touched. This is a genuinely multi-session campaign; continuation should verify state via
   `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
+- **Batch 12 — math.alg Wave 12 part 3** (2026-09-11): re-computed the frontier fresh (per this
+  program's own standing discipline, not assumed still ready) — the exact 3 concepts deferred from
+  Batch 11 remained ready: `math.alg.fundamental-theorem-algebra`, `math.alg.polynomial-
+  inequality`, `math.alg.vietas-formulas`, all authored, validated, and committed this batch.
+  `math.alg` 45/59 → **48/59** — **only 11 concepts remain before the domain reaches DOMAIN
+  CERTIFICATION** (the fifth after math.found, math.geom, math.arith, math.nt). Mathematics
+  **290/908 → 293/908**, 615 remaining. `fundamental-theorem-algebra`'s cross-link
+  `math.cx.fundamental-theorem-algebra` has no Blueprint yet either (distinct from
+  `polynomial-roots`'s own `math.cx.complex-numbers-analysis` cross-link, which does). A genuine
+  unnamed connection was identified (not fixed): `factoring-trinomials`' own product/sum search is,
+  in substance, Vieta's quadratic case applied in reverse — recorded as the forward-pointing half
+  of the cross-reference, no prior entry modified. Full per-concept detail in `COVERAGE.md`
+  Batch 68. Validated: KG validator PASS (908/908 reachable, file untouched), 0 orphan/duplicate EB
+  files, `tsc --noEmit` clean, targeted tests 479/479 passed, all 3 heading structures diffed clean
+  against `math.alg.like-terms.md`. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime
+  file touched. This is a genuinely multi-session campaign; continuation should verify state via
+  `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
 
 ## Run locally
 ```
