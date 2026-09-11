@@ -3389,6 +3389,36 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   `predicate-logic-disc`). This is a genuinely multi-session campaign; continuation should verify
   state via `scripts/math/state.ts` fresh each time rather than trusting any number recorded
   here.
+- **Batch 21 — math.disc: deepening the graph-theory and formal-logic subtrees** (2026-09-11):
+  re-computed the frontier fresh — 6 candidates ready; authored 5 (`boolean-circuits`,
+  `graph-coloring`, `graph-connectivity`, `graph-types`, `predicate-logic-disc`), deferring
+  `planar-graph` to a future batch; all Blueprint-grounded, reused by reference.
+  `boolean-circuits` (DNF-to-circuit recipe, depth-vs-size as genuinely different measures,
+  NAND/NOR universality as a binary property independent of gate-count efficiency).
+  `graph-coloring` (the two-part upper+lower-bound proof structure required to establish
+  $\chi(G)$ exactly, the Four Color Theorem's asymmetric difficulty, chromatic polynomial vs.
+  chromatic number) — surfaced a new cross-link intermediate case: `math.graph.graph-coloring`
+  has a genuine Blueprint but no EB entry (math.graph 0/16 unstarted), so neither independence
+  nor substantive incorporation applied; handled by not citing it as a peer entry.
+  `graph-connectivity` (path/cycle distinctness, connectedness as a universal claim needing
+  systematic search, strong connectivity's much stricter both-directions-every-pair
+  requirement). `graph-types` (bipartiteness as an edge-structure property, never a connectivity
+  claim; $K_n$ vs. $K_{m,n}$'s different completeness notions; the Handshaking Lemma's full
+  generality across multigraphs/pseudographs/digraphs). `predicate-logic-disc` (nested-quantifier
+  order genuinely changing meaning, the quantified De Morgan negation laws, counterexample's
+  asymmetric refutation power) — cross-linked to the already-authored `math.found.predicate-logic`,
+  substantively incorporated as this entry's direct foundation, the THIRD such genuine cross-link
+  this campaign (after `binomial-theorem` in Batch 19 and `propositional-logic` in Batch 20). No
+  genuine content-overlap or metadata discrepancy found in any of the 5. `math.disc` 11/32 →
+  **16/32** — past the halfway point. `math.func` unchanged (1/29, parked). Mathematics
+  **316/908 → 321/908**, 587 remaining. Full per-concept detail in `COVERAGE.md` Batch 21.
+  Validated: KG validator PASS (908/908 reachable, file untouched), 0 orphan/duplicate EB files,
+  `tsc --noEmit` clean, targeted tests 479/479 passed, all 5 heading structures diffed clean on
+  the first pass (0 diffs each). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime
+  file touched. Fresh math.disc frontier computed: 3 candidates ready (`euler-hamiltonian`,
+  `graph-trees`, `planar-graph`, all in the graph-theory subtree). This is a genuinely
+  multi-session campaign; continuation should verify state via `scripts/math/state.ts` fresh
+  each time rather than trusting any number recorded here.
 
 ## Run locally
 ```
