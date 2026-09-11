@@ -3067,6 +3067,22 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   clean, targeted tests 479/479 passed. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/
   runtime file touched. This is a genuinely multi-session campaign; continuation should verify
   state via `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
+- **Batch 5 — math.alg Wave 7** (2026-09-11, loop iteration 2): authored the 4 concepts computed as
+  the next topologically-ready `math.alg` frontier — `math.alg.substitution-method`,
+  `math.alg.elimination-method`, `math.alg.system-3var`, `math.alg.factoring` — all Blueprint-
+  grounded, reused by reference. `math.alg` 28/59 → **32/59**. Mathematics **273/908 → 277/908**,
+  631 remaining. Two genuine Curriculum Feedback findings recorded (not fixed): `substitution-
+  method`'s misconceptions substantially overlap `system-linear-equations`' MC-1/MC-3 (intentional
+  depth, cross-referenced); `factoring`'s MC-1 (GCF-THEN-DONE) and `factor-theorem`'s MC-2
+  (FACTOR-FOUND-MEANS-DONE, Batch 4) are the same premature-termination mechanism at two different
+  pipeline stages, now cross-referenced in both entries. Real forward cross-links to
+  `math.linalg.row-reduction` documented for both `elimination-method` and `system-3var`. Full
+  per-concept detail in `COVERAGE.md` Batch 61. Validated: KG validator PASS (908/908 reachable,
+  file untouched), 0 orphan/duplicate EB files, `tsc --noEmit` clean, targeted tests 479/479
+  passed, all 4 heading structures diffed clean against `math.alg.like-terms.md`. No Physics/
+  Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. This is a genuinely multi-session
+  campaign; continuation should verify state via `scripts/math/state.ts` fresh each time rather
+  than trusting any number recorded here.
 
 ## Run locally
 ```
