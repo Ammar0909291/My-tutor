@@ -137,19 +137,23 @@ describe('the parser did not become permissive', () => {
 // ── F / G. corpus-wide counts ───────────────────────────────────────────────
 
 describe('corpus-wide misconception retrieval', () => {
-  it('mathematics: 177 concepts carry a parsed misconception library', () => {
+  it('mathematics: at least 182 concepts carry a parsed misconception library', () => {
     const { concepts, records } = corpusRecordCount('docs/mathematics/kg/graph.json')
-    // Snapshot as of 2026-09-11. The mathematics Educational Brain corpus is
-    // under active, ongoing authoring (see CLAUDE.md's Educational Brain
-    // completion campaign) — these two numbers are expected to grow again as
-    // that program adds concepts, and must be re-measured (via this file's
-    // own corpusRecordCount helper, not guessed) rather than hand-incremented
-    // whenever this test next fails on a legitimate content-growth diff.
-    // 154/447 was the count at the time of the original F-1 fix (5 authored
-    // M-n from math.arith.fractions + 442 MC-n); this pin only replaces that
-    // snapshot with the current one.
-    expect(concepts).toBe(177)
-    expect(records).toBe(514)
+    // A FLOOR, not an exact pin — deliberately, and only for this one pair.
+    // The mathematics Educational Brain corpus is under active, ongoing
+    // authoring (CLAUDE.md's Educational Brain completion campaign, an
+    // autonomous loop that lands new concepts every few minutes): an exact
+    // count here fails on every legitimate content addition, which is what
+    // broke CI repeatedly (measured 154->174->177->182 across four separate
+    // commits within roughly 30 minutes while diagnosing this very test).
+    // A monotonic floor still catches the real regression this test guards
+    // against — the F-1 parser losing previously-recognised records, which
+    // would DECREASE these numbers — without demanding a maintenance commit
+    // on every authoring batch. Raise the floor opportunistically; never
+    // lower it without first confirming the drop is a genuine parser
+    // regression, not further corpus growth outrunning a stale floor.
+    expect(concepts).toBeGreaterThanOrEqual(182)
+    expect(records).toBeGreaterThanOrEqual(529)
   })
 
   it('physics and english are unchanged by the mathematics fix', () => {
