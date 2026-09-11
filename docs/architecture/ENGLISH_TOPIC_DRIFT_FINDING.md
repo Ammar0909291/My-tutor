@@ -1,10 +1,45 @@
-# English topic-drift via self-referential latching — tracked finding, NOT fixed
+# English topic-drift — tracked finding, NOT fixed
 
 **Status: OPEN, reported not diagnosed further. Found 2026-09-10 during real-learner
 QA of the English ADULT-band probe-contract campaign's Group 1. Confirmed
 pre-existing and unrelated to that campaign's content — reported here as a
 standalone item so the asset-authoring campaign is not blocked on it and the
-finding is not lost between sessions.**
+finding is not lost between sessions. Extended 2026-09-11 with a Group 5
+episode that does NOT fit the original "echoes the learner's own text"
+hypothesis — see "Second episode class" below. The title was generalized
+from "via self-referential latching" since that no longer describes both
+observed episode classes.**
+
+## Second episode class (Group 5, 2026-09-11) — NOT text-echoing
+
+**eng.grammar.complex-sentences**, session `cmtwim0wn0001l70421o06r1v`, T4-T6
+(production, `scripts/qa/englishAdultBandBatch5LiveQa.ts`): the learner asked
+"please explain it another way" (about complex sentences, the lesson's own
+topic). The reply abandoned complex sentences entirely and taught the
+**pronoun "they"** instead — subject/object/possessive-adjective/possessive-
+pronoun forms, a full table, and a practice prompt ("Rewrite the following
+sentence using 'they': ...") — for 2 full turns (T4, T5). T6
+("hold on, let me reconsider") got a reply that said "Let me ask you
+something concrete about **Complex Sentences**: what's one thing you notice
+or find surprising about what we just covered?" — referring back to the
+lesson by name while what was actually "just covered" was the unrelated
+pronoun content, producing an internally incoherent turn. T7 ("got it now")
+finally returned to genuine complex-sentence content (comma placement with
+subordinate clauses).
+
+This does **NOT** match the original hypothesis: "they" does not appear
+anywhere in the learner's own T1-T4 messages, so this is not the tutor
+re-explaining the learner's own recent phrasing as vocabulary. Instead, the
+drifted content ("they" as a pronoun, subject/object/possessive forms) is
+recognizable, on-curriculum content for a DIFFERENT concept
+(`eng.grammar.pronouns`, this campaign's own Group 3) — raising a new,
+unconfirmed possibility that this episode class is a **cross-concept content
+leak** (e.g. a spaced-revision/prior-mastery/"due review" injection pulling
+in unrelated already-taught material mid-lesson) rather than the
+excursion/topic-request misdetection the original hypothesis pointed at.
+**Not confirmed** — this is a second lead, not a diagnosis. A dedicated
+investigation should check both mechanisms independently rather than assume
+they share one root cause.
 
 ## Symptom, reproduced twice in three test lessons
 

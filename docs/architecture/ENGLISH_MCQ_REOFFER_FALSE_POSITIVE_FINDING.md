@@ -105,6 +105,34 @@ and "memo... an hour-long meeting" probes). The false-positive lead-in is a
 defect in the shared re-offer/disambiguation mechanism, not in this
 campaign's authored assets.
 
+## More serious variant found (Group 5 live QA, 2026-09-11) — false "That's right." confirmation
+
+Group 5's live QA (`eng.grammar.past-tenses`, session `cmtwim0wn0001l70421o06r1v`,
+T3) surfaced a variant of this same false-positive family that is MORE
+serious than the disambiguation lead-in: instead of "I couldn't tell which
+option...", the reply OPENED WITH "That's right." — a genuine correctness
+confirmation — in response to `"i dont understand irregular verbs, can you
+explain"`, a message that made **no answer attempt at all**. The MCQ pending
+at that point ("is 'went' formed by adding -ed...") was not addressed by the
+learner's message in any way.
+
+This is a sharper defect than the disambiguation lead-in: that one at least
+tells the learner nothing was understood as an answer; this one **falsely
+tells the learner they got something right** when they asked an unrelated
+question. `check`/`practice` counters did not increment (0 throughout), so
+this appears to be a text-only false confirmation, not a false mastery
+credit — but the learner-facing message is actively misleading. Given the
+Option-A/I1 mechanism's own design intent (never claim correctness without a
+server grade), this specific occurrence warrants checking whether
+`answerConfirmation.confirmCorrectAnswer` (the C5 enforcer,
+`route.ts:5824`, documented in CLAUDE.md's "#1 — correct-answer confirmation
+rate" section) is itself firing on a turn where `mcqGradeHoisted?.correct`
+was never legitimately set to `true` — i.e. whether this is the SAME
+turn-intent misclassification as the disambiguation lead-in, just landing on
+the opposite (false-positive-graded-correct) branch instead of the
+ungradeable branch, rather than a separate defect in the confirmation
+enforcer itself.
+
 ## Suggested next steps for a dedicated session
 
 1. Reproduce offline against the real `mcqReoffer.test.ts` harness with these
