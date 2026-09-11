@@ -324,6 +324,42 @@ export async function POST(req: Request) {
       prisma.subjectAnalytics.findUnique({ where: { userId_subjectId: { userId, subjectId: learnSession.subjectId } } }).catch(() => null),
     ])
 
+    // ── PCD-004: THE LESSON THIS SESSION IS TEACHING ──────────────────────
+    //
+    // Resolved ONCE, here, and used by every site below that previously read
+    // `studentProgress.activeLessonSlug` directly: the user-turn lessonKey
+    // stamp, both lessonCtx branches, the prompt-history scope and the
+    // assistant-turn stamp. One resolution per turn means those five sites
+    // cannot disagree about which lesson this turn belongs to — the property
+    // lessonHistoryScope.ts already requires of the key, now extended to the
+    // tier above it.
+    //
+    // StudentProgress is per-USER, so with two sessions open on one account
+    // whichever opened a lesson LAST owned the pointer for BOTH. The session's
+    // own pointer (contextSnapshot.lessonPointer, written by lesson-init)
+    // outranks it; when absent — an older session, a subject with no topicSlug
+    // grain, a failed pointer write — this resolves to exactly the per-user
+    // value that was read before, so the fallback is byte-identical to the
+    // pre-PCD-004 behaviour. See src/lib/teaching/sessionLessonPointer.ts.
+    const { resolveSessionLessonSlug, clearSessionLessonPointer: clearSessionLessonPointerFn } =
+      await import('@/lib/teaching/sessionLessonPointer')
+    const lessonPointerHoisted = resolveSessionLessonSlug({
+      sessionSnapshot: snapshot,
+      activeLessonSlug: studentProgress?.activeLessonSlug ?? null,
+    })
+    const activeLessonSlugHoisted = lessonPointerHoisted.slug
+    if (lessonPointerHoisted.source === 'session'
+        && studentProgress?.activeLessonSlug
+        && studentProgress.activeLessonSlug !== activeLessonSlugHoisted) {
+      // The per-user pointer names a DIFFERENT lesson than this session opened
+      // — i.e. another session for this account moved it. Logged because it is
+      // the PCD-004 signature and, until now, was invisible.
+      console.log('[lesson-pointer] ' + JSON.stringify({
+        sessionId, resolved: activeLessonSlugHoisted,
+        studentProgress: studentProgress.activeLessonSlug, source: lessonPointerHoisted.source,
+      }))
+    }
+
     // LESSON ISOLATION (write side) — stamps the USER turn just persisted
     // above with the same identity /api/sessions/history now filters by.
     // `studentProgress.currentLesson` is the identical source that route's
@@ -339,7 +375,7 @@ export async function POST(req: Request) {
     if (userMessageRow) {
       try {
         const { lessonKeyFor } = await import('@/lib/teaching/lessonAttempt')
-        const userLessonKey = lessonKeyFor({ topicSlug: studentProgress?.activeLessonSlug ?? null, lessonOrder: studentProgress?.currentLesson ?? null })
+        const userLessonKey = lessonKeyFor({ topicSlug: activeLessonSlugHoisted, lessonOrder: studentProgress?.currentLesson ?? null })
         if (userLessonKey) {
           await prisma.message.update({
             where: { id: userMessageRow.id },
@@ -450,7 +486,7 @@ export async function POST(req: Request) {
               syntheticLessons,
               studentProgress?.currentLesson ?? placementEntryOrder,
               topicProgressRows,
-              studentProgress?.activeLessonSlug,
+              activeLessonSlugHoisted,
             )
             ?? syntheticLessons[0]
           const completedSlugs = new Set(
@@ -511,7 +547,7 @@ export async function POST(req: Request) {
             const topicProgressRows = topicProgressRowsShared
             // OBJECTIVE 2: same authoritative-owner precedence as the KG branch.
             const currentLesson =
-              selectCurrentLesson(syntheticLessons, studentProgress?.currentLesson, topicProgressRows, studentProgress?.activeLessonSlug)
+              selectCurrentLesson(syntheticLessons, studentProgress?.currentLesson, topicProgressRows, activeLessonSlugHoisted)
               ?? syntheticLessons[0]
             const completedSlugs = new Set(
               topicProgressRows
@@ -3684,7 +3720,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     // Pinned by lessonHistoryScope.test.ts against this file's own source.
     const { lessonKeyFor: lessonKeyForHistory } = await import('@/lib/teaching/lessonAttempt')
     const historyLessonKey = lessonKeyForHistory({
-      topicSlug: studentProgress?.activeLessonSlug ?? null,
+      topicSlug: activeLessonSlugHoisted,
       lessonOrder: studentProgress?.currentLesson ?? null,
     })
     const { scopeHistoryToLesson } = await import('@/lib/teaching/lessonHistoryScope')
@@ -8404,7 +8440,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // resolving it fresh from the same field keeps this write self-
       // contained without assuming anything about code between the two.
       const { lessonKeyFor } = await import('@/lib/teaching/lessonAttempt')
-      const assistantLessonKey = lessonKeyFor({ topicSlug: studentProgress?.activeLessonSlug ?? null, lessonOrder: studentProgress?.currentLesson ?? null })
+      const assistantLessonKey = lessonKeyFor({ topicSlug: activeLessonSlugHoisted, lessonOrder: studentProgress?.currentLesson ?? null })
 
       // Phase 1 instrumentation payload. Every value is already computed by
       // this turn — nothing here calls a model, reads the learner's content,
@@ -8820,6 +8856,24 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                   // the third and last writer of currentLesson.
                   data: { currentLesson: lowered, activeLessonSlug: null },
                 }).catch(() => {})
+                // PCD-004: the SESSION pointer outranks the per-user one, so
+                // clearing only the latter would leave the lowered position
+                // still overridden — the exact staleness the line above exists
+                // to prevent. This session is the one being adjusted, so its id
+                // is known directly; the clear goes through the same versioned
+                // writer as every other contextSnapshot write.
+                //
+                // AWAITED. This route sets no `maxDuration` and uses no
+                // `waitUntil`, so a serverless instance can be frozen the
+                // moment the response is returned — the documented cause of
+                // the dropped `activeLessonSlug` write in lesson-init. A
+                // dropped clear here leaves the session pinned to a lesson the
+                // learner has just been moved off. `clearSessionLessonPointer`
+                // is total (never throws), so awaiting it cannot fail the turn.
+                const cleared = await clearSessionLessonPointerFn(prisma, sessionId)
+                if (!cleared.applied) {
+                  console.warn('[lesson-pointer] placement clear not applied', { sessionId, reason: cleared.reason })
+                }
               }
             }
           }

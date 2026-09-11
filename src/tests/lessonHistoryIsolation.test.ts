@@ -133,11 +133,25 @@ describe('write side: /api/learn/chat stamps both turns with lessonKey', () => {
     expect(block).toContain('...(assistantLessonKey ? { lessonKey: assistantLessonKey } : {})')
   })
 
-  it('both stamps resolve the SAME shape — activeLessonSlug prioritized over currentLesson, never a client-supplied value', () => {
+  it('both stamps resolve the SAME shape — the session-scoped lesson prioritized over currentLesson, never a client-supplied value', () => {
+    // ORIGINAL ASSERTION (pre-PCD-004, 2026-09-11), kept verbatim so the
+    // invariant's history is legible rather than rewritten:
+    //   /lessonKeyFor\(\{ topicSlug: studentProgress\?\.activeLessonSlug \?\? null,
+    //     lessonOrder: studentProgress\?\.currentLesson \?\? null \}\)/g  ->  2 matches
+    // PCD-004 moved the slug tier ahead of `studentProgress.activeLessonSlug`:
+    // it is now resolved ONCE per turn into `activeLessonSlugHoisted`
+    // (session pointer -> activeLessonSlug), because a per-USER row cannot
+    // answer for two concurrent sessions. The INVARIANT is unchanged and is
+    // asserted here against the new shape — both stamps still use ONE
+    // expression, still prefer the explicit slug over the counter, and still
+    // read nothing from the request body.
     const occurrences = [
-      ...SRC.matchAll(/lessonKeyFor\(\{ topicSlug: studentProgress\?\.activeLessonSlug \?\? null, lessonOrder: studentProgress\?\.currentLesson \?\? null \}\)/g),
+      ...SRC.matchAll(/lessonKeyFor\(\{ topicSlug: activeLessonSlugHoisted, lessonOrder: studentProgress\?\.currentLesson \?\? null \}\)/g),
     ]
     expect(occurrences).toHaveLength(2)
+    // ...and that hoisted value is the resolver's output, not a new ad-hoc read.
+    expect(SRC).toContain('const activeLessonSlugHoisted = lessonPointerHoisted.slug')
+    expect(SRC).toContain('resolveSessionLessonSlug({')
   })
 
   it('never trusts a request-body field for lesson identity on this route', () => {
@@ -192,8 +206,14 @@ describe('write side: /api/learn/lesson-init stamps the opening message', () => 
 describe('read side: /api/sessions/history scopes by the resolved lesson', () => {
   const SRC = read('src/app/api/sessions/history/route.ts')
 
-  it('resolves lessonKey from StudentProgress before building the query, activeLessonSlug prioritized', () => {
-    expect(SRC).toMatch(/lessonKeyFor\(\{ topicSlug: sp\.activeLessonSlug, lessonOrder: sp\.currentLesson \}\)/)
+  it('resolves lessonKey before building the query, the session pointer prioritized over StudentProgress', () => {
+    // ORIGINAL ASSERTION (pre-PCD-004): /lessonKeyFor\(\{ topicSlug: sp\.activeLessonSlug,
+    // lessonOrder: sp\.currentLesson \}\)/. The slug now comes from the shared
+    // resolver so this route and the chat route cannot disagree about which
+    // lesson a session is on; `sp.currentLesson` is still the fallback tier
+    // and is still read from the DB row, never from the client.
+    expect(SRC).toMatch(/lessonKeyFor\(\{ topicSlug: resolved\.slug, lessonOrder: sp\?\.currentLesson \?\? null \}\)/)
+    expect(SRC).toContain('resolveSessionLessonSlug({')
     const resolveIdx = SRC.indexOf('let lessonKey: string | null = null')
     const whereIdx = SRC.indexOf('const where = {')
     expect(resolveIdx).toBeGreaterThan(-1)
@@ -227,8 +247,15 @@ describe('read side: /api/sessions/history scopes by the resolved lesson', () =>
 describe('read side: /api/sessions POST resumed-session fallback also scopes by lesson', () => {
   const SRC = read('src/app/api/sessions/route.ts')
 
-  it('resolves resumeLessonKey BEFORE the existing-session lookup, same StudentProgress priority', () => {
-    expect(SRC).toMatch(/lessonKeyFor\(\{ topicSlug: sp\.activeLessonSlug, lessonOrder: sp\.currentLesson \}\)/)
+  it('resolves resumeLessonKey BEFORE the existing-session lookup, session pointer prioritized', () => {
+    // ORIGINAL ASSERTION (pre-PCD-004): /lessonKeyFor\(\{ topicSlug: sp\.activeLessonSlug,
+    // lessonOrder: sp\.currentLesson \}\)/. PCD-004 resolves the slug from the
+    // session ABOUT TO BE RESUMED (read by the identical where/orderBy, so it
+    // is the identical row) before falling back to the per-user field. The
+    // ordering invariant this test exists for — resolved BEFORE the lookup
+    // whose `messages` include it narrows — is unchanged and still asserted.
+    expect(SRC).toMatch(/lessonKeyFor\(\{ topicSlug: resolved\.slug, lessonOrder: sp\?\.currentLesson \?\? null \}\)/)
+    expect(SRC).toContain('resolveSessionLessonSlug({')
     const resolveIdx = SRC.indexOf('let resumeLessonKey: string | null = null')
     const lookupIdx = SRC.indexOf('const existingSession = await dbCall')
     expect(resolveIdx).toBeGreaterThan(-1)

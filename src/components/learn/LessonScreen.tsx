@@ -1341,6 +1341,12 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
           userId: userId ?? undefined,
           schoolChapterId: schoolChapterId ?? undefined,
         })
+        // PCD-004: NO `sessionId` here, deliberately. These two run in
+        // parallel precisely because the session id does not exist yet — the
+        // sequential order was the original cause of the "Loading your
+        // lesson..." delay. This call therefore keeps the pre-PCD-004 per-user
+        // lesson resolution; the restore effect further down, which HAS the
+        // id, passes it.
         const [histRes, sessionRes] = await Promise.all([
           fetchWithTimeout(`/api/sessions/history?subject=${encodeURIComponent(subjectSlug)}`, {}, 15000),
           fetchWithTimeout('/api/sessions', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: sessionBody }, 15000),
@@ -2855,7 +2861,11 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       let anyMessageVisual = false
 
       try {
-        const histRes = await fetchWithTimeout(`/api/sessions/history?subject=${encodeURIComponent(subjectSlug)}`, {}, 15000)
+        // PCD-004: name the session so the screen is filtered by the lesson
+        // THIS conversation is on, not by whichever lesson another concurrent
+        // session for the same account opened last. `sid` is resolved directly
+        // above, so unlike the mount-time fetch this call genuinely has one.
+        const histRes = await fetchWithTimeout(`/api/sessions/history?subject=${encodeURIComponent(subjectSlug)}&sessionId=${encodeURIComponent(sid)}`, {}, 15000)
         const hist = await histRes.json()
         const histMsgs = hist?.data?.messages
         if (hist.success && Array.isArray(histMsgs) && histMsgs.length > 0) {

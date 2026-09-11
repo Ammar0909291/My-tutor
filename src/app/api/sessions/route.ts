@@ -72,40 +72,63 @@ export async function POST(req: Request) {
     if (!subject) return NextResponse.json({ success: false, error: "Subject not found" }, { status: 404 });
 
     // LESSON ISOLATION — same resolution as /api/sessions/history (which
-    // this whole branch exists to stand in for when that call fails):
-    // activeLessonSlug prioritized over currentLesson, same lessonKeyFor()
-    // helper. Resolved BEFORE the session lookup below so it can narrow the
-    // nested `messages` include at the query level, instead of returning a
-    // resumed session's full 30-message window undifferentiated by lesson —
-    // the same cross-lesson leak the primary endpoint had.
+    // this whole branch exists to stand in for when that call fails): the
+    // session's own lesson pointer prioritized over the per-user
+    // activeLessonSlug, then currentLesson, same lessonKeyFor() helper.
+    // Resolved BEFORE the session lookup below so it can narrow the nested
+    // `messages` include at the query level, instead of returning a resumed
+    // session's full 30-message window undifferentiated by lesson — the same
+    // cross-lesson leak the primary endpoint had.
+    //
+    // Resume an existing ACTIVE session from within the last 24 hours instead of
+    // creating a new one — this preserves the conversation across page refreshes.
+    const cutoff = new Date(Date.now() - 24 * 60 * 60 * 1000);
+    const resumeWhere = {
+      userId: session.user.id,
+      subjectId: subject.id,
+      status: "ACTIVE" as const,
+      startedAt: { gte: cutoff },
+      // Only resume sessions that have at least one assistant message (i.e. the
+      // lesson actually started — not a session that was created but never used).
+      messages: { some: { role: "ASSISTANT" as const } },
+    };
+    const resumeOrder = { startedAt: "desc" as const };
+
+    // PCD-004: the lesson key must come from the session ABOUT TO BE RESUMED,
+    // not from the per-user pointer another session may have moved. That
+    // session is not known until it is found, and the key is needed to narrow
+    // the nested `messages` include at the query level — so the candidate's
+    // snapshot is read first, by the IDENTICAL where/orderBy, which therefore
+    // selects the identical row. One extra indexed lookup on the resume path;
+    // the create path is untouched.
+    const resumeCandidate = await dbCall('sessions-resume-pointer-lookup', () => prisma.learnSession.findFirst({
+      where: resumeWhere,
+      orderBy: resumeOrder,
+      select: { contextSnapshot: true },
+    })).catch(() => null);
+
     let resumeLessonKey: string | null = null;
     try {
       const sp = await dbCall('sessions-progress-lookup', () => prisma.studentProgress.findUnique({
         where: { userId_subjectCode: { userId: session.user.id, subjectCode: subjectSlug } },
         select: { currentLesson: true, activeLessonSlug: true },
       }));
-      if (sp) {
+      if (sp || resumeCandidate) {
         const { lessonKeyFor } = await import('@/lib/teaching/lessonAttempt');
-        resumeLessonKey = lessonKeyFor({ topicSlug: sp.activeLessonSlug, lessonOrder: sp.currentLesson });
+        const { resolveSessionLessonSlug } = await import('@/lib/teaching/sessionLessonPointer');
+        const resolved = resolveSessionLessonSlug({
+          sessionSnapshot: resumeCandidate?.contextSnapshot,
+          activeLessonSlug: sp?.activeLessonSlug ?? null,
+        });
+        resumeLessonKey = lessonKeyFor({ topicSlug: resolved.slug, lessonOrder: sp?.currentLesson ?? null });
       }
     } catch (err) {
       console.warn('[sessions POST] lesson-key resolution skipped:', err);
     }
 
-    // Resume an existing ACTIVE session from within the last 24 hours instead of
-    // creating a new one — this preserves the conversation across page refreshes.
-    const cutoff = new Date(Date.now() - 24 * 60 * 60 * 1000);
     const existingSession = await dbCall('sessions-existing-lookup', () => prisma.learnSession.findFirst({
-      where: {
-        userId: session.user.id,
-        subjectId: subject.id,
-        status: "ACTIVE",
-        startedAt: { gte: cutoff },
-        // Only resume sessions that have at least one assistant message (i.e. the
-        // lesson actually started — not a session that was created but never used).
-        messages: { some: { role: "ASSISTANT" } },
-      },
-      orderBy: { startedAt: "desc" },
+      where: resumeWhere,
+      orderBy: resumeOrder,
       include: {
         // Cap to the most-recent 30 messages — matches HISTORY_LIMIT in
         // /api/learn/chat. This is a fallback path only (used when the

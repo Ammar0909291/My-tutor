@@ -105,14 +105,34 @@ describe('lesson-init wires the fold into its own snapshot write', () => {
   })
 
   it('the fold sits inside the SAME writeSnapshotDelta call as the episode/visual/attempt resets', () => {
-    // Not a second write — one atomic merge, so a lesson opening still costs
-    // exactly one round trip.
-    const writeCall = LESSON_INIT.slice(
-      LESSON_INIT.indexOf('await writeSnapshotDelta(prisma, {'),
-      LESSON_INIT.indexOf('await writeSnapshotDelta(prisma, {') + 900,
-    )
+    // Not a second write for these four keys — one atomic merge.
+    //
+    // ORIGINAL COMMENT (pre-PCD-004, 2026-09-11), kept because the cost claim
+    // in it is no longer true and quietly deleting it would hide that:
+    //   "Not a second write — one atomic merge, so a lesson opening still
+    //    costs exactly one round trip."
+    // PCD-004 added a SECOND merge to this handler — the session-scoped lesson
+    // pointer — so a lesson open now costs two. That is deliberate and is
+    // argued at the write site: folding the pointer into THIS call would put
+    // it after the model call, so a model failure would leave the per-user
+    // pointer moved while the session pointer still named the previous lesson
+    // — and the session pointer OUTRANKS the per-user one, which is a worse
+    // defect than the one being fixed. The two pointers move together or not
+    // at all; the extra merge is the price.
+    //
+    // The invariant this test actually protects is untouched: the episode,
+    // visual, attempt and questionLedger resets share ONE merge.
+    const at = LESSON_INIT.indexOf('clearEpisodeForLessonOpen(),')
+    expect(at).toBeGreaterThan(-1)
+    const callStart = LESSON_INIT.lastIndexOf('await writeSnapshotDelta(prisma, {', at)
+    expect(callStart).toBeGreaterThan(-1)
+    const writeCall = LESSON_INIT.slice(callStart, callStart + 900)
     expect(writeCall).toContain('clearEpisodeForLessonOpen()')
     expect(writeCall).toContain('clearVisualSessionForNewClientView()')
     expect(writeCall).toContain('questionLedger: recordQuestions')
+    // and the pointer write is a genuinely DIFFERENT call, before this one
+    const pointerAt = LESSON_INIT.indexOf('sessionLessonPointerDelta(topicSlug)')
+    expect(pointerAt).toBeGreaterThan(-1)
+    expect(pointerAt).toBeLessThan(callStart)
   })
 })
