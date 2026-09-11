@@ -3215,6 +3215,29 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. This is a genuinely
   multi-session campaign; continuation should verify state via `scripts/math/state.ts` fresh each
   time rather than trusting any number recorded here.
+- **Batch 14 — math.alg-unblocking cross-domain excursion into math.disc + math.func**
+  (2026-09-11): the topologically-ready `math.alg` frontier was 0 — all 9 remaining concepts need
+  a prerequisite outside math.alg (7 blocked by `math.func.function-concept`, 2 by
+  `math.disc.combinations`→`permutations`→`counting-principles`). Authored the 2 concepts that
+  unblock those chains, both verified immediately ready: `math.disc.counting-principles` (the
+  domain's first entry; multiplication vs. addition principle, AND/OR classification as the real
+  "threshold concept") and `math.func.function-concept` (the domain's first entry; the single
+  highest-leverage concept remaining for math.alg — unblocks 7 of the 9 remaining math.alg
+  concepts at once, the exponential/logarithm family). `math.alg` stays at 50/59 this batch
+  (neither new concept is itself math.alg). `math.disc` 0/32 → 1/32, `math.func` 0/29 → 1/29.
+  Mathematics **295/908 → 297/908**, 838 remaining. One genuine Blueprint/KG metadata discrepancy
+  found and resolved toward the KG: `function-concept`'s Blueprint claims requires
+  `[variable, set-theory]`/unlocks 4 concepts/cross_links `[set-theory]`; the live KG instead has
+  requires `[function-set-theoretic, variable]`/unlocks 2 concepts/cross_links
+  `[function-set-theoretic]` — this entry follows the KG. Full per-concept detail in `COVERAGE.md`
+  Batch 14 (new "math.alg-unblocking cross-domain excursion" entry). Validated: KG validator PASS
+  (908/908 reachable, file untouched), 0 orphan/duplicate EB files, `tsc --noEmit` clean, targeted
+  tests 479/479 passed, both heading structures diffed clean against `math.alg.like-terms.md`. No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Next: with
+  `function-concept` authored, `math.alg.exponential-function` is the next ready math.alg
+  candidate; with `counting-principles` authored, `math.disc.permutations` is the next ready
+  math.disc candidate. This is a genuinely multi-session campaign; continuation should verify
+  state via `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
 
 ## Run locally
 ```
