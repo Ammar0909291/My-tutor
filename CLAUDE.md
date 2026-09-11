@@ -3115,6 +3115,20 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   `math.alg.like-terms.md`. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file
   touched. This is a genuinely multi-session campaign; continuation should verify state via
   `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
+- **Batch 8 — math.alg Wave 10** (2026-09-11, loop iteration 5): authored the 1 concept computed as
+  the next topologically-ready `math.alg` frontier — `math.alg.quadratic-equation` (a single-
+  concept wave; only one concept had every prerequisite met) — Blueprint-grounded, reused by
+  reference. `math.alg` 39/59 → **40/59**. Mathematics **284/908 → 285/908**, 623 remaining.
+  High-value node (unlocks `math.func.quadratic-function` + `math.alg.polynomial-roots`, has 3
+  unauthored KG children the Blueprint deliberately scopes around: `completing-the-square`
+  introduced here only as the formula's derivation, `discriminant` as the method-selection tool,
+  full standalone treatment deferred to those children). No genuine content-overlap or metadata
+  discrepancy found. Full per-concept detail in `COVERAGE.md` Batch 64. Validated: KG validator
+  PASS (908/908 reachable, file untouched), 0 orphan/duplicate EB files, `tsc --noEmit` clean,
+  targeted tests 479/479 passed, heading structure diffed clean against `math.alg.like-terms.md`.
+  No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. This is a genuinely
+  multi-session campaign; continuation should verify state via `scripts/math/state.ts` fresh each
+  time rather than trusting any number recorded here.
 
 ## Run locally
 ```
