@@ -73,6 +73,38 @@ improvised on. `route.ts`'s Option-A guard, `detectLearnerQuestion`, and
 subject's grading flow, not English-specific — a fix here needs its own
 dedicated investigation/session (same posture as the topic-drift finding).
 
+## Additional evidence (Group 4 live QA, 2026-09-11)
+
+Group 4's live QA (`scripts/qa/englishAdultBandBatch4LiveQa.ts`,
+`eng.grammar.conjunctions` + `eng.grammar.articles-and-determiners`, same
+production run) reproduced the same class of false positive **4 more times**
+across 17 turns:
+
+- `"can you try a different way to explain it"` (a genuine help request,
+  phrased as a question but without a `?`)
+- `"oh wait, i think i see my mistake now"` (meta-commentary about a past
+  answer)
+- `"thank you, that makes more sense"` (an elaborated acknowledgement)
+- `"hold on, let me reconsider that"` (meta-commentary/stalling)
+
+Notably, an almost-identical phrase in the SAME lesson did NOT false-fire at a
+different turn (`"im confused about the comma rule, can you explain more"` at
+T3, one turn after a probe attached, produced normal teaching with no
+lead-in) — reinforcing that the trigger is state-dependent (how many turns the
+probe has been held, and the exact shape of the turn-intent classifiers) and
+not simply "any prose without `?`". Across the two groups' live QA (Group 3 + 4),
+this lead-in has now fired **7 times** in roughly 27 conversational turns where
+a probe was pending — a substantial, repeated false-positive rate, not a
+one-off.
+
+Reassuringly, this run also confirms Batch 4's own authored content serves
+correctly in production: the `[gate]` MCQs and `[memory]` explanations served
+word-for-word matched the exact probe stems and explanation text authored in
+`englishAdultBandBatch4.ts` (e.g. the "cover letter... an honest assessment"
+and "memo... an hour-long meeting" probes). The false-positive lead-in is a
+defect in the shared re-offer/disambiguation mechanism, not in this
+campaign's authored assets.
+
 ## Suggested next steps for a dedicated session
 
 1. Reproduce offline against the real `mcqReoffer.test.ts` harness with these
