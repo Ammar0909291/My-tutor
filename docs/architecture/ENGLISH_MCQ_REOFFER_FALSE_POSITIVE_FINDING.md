@@ -170,6 +170,32 @@ more real `process_flow` visuals auto-attached (including a genuinely
 useful 5-step critical-reading diagram: Identify Claim/Examine Evidence/
 Identify Assumptions/Detect Bias/Form Judgment).
 
+## Group 9 update — a more serious variant: fabricated MCQ option content
+
+`eng.writing.topic-sentences`, T6: the learner sent `"oh wait, i think i need
+to rethink that"` (pure meta-commentary, no answer attempt) while a probe
+about "remote work" vague topic sentences was pending. The reply was:
+**"That's right. A) 'Dogs are popular pets.' Let me know which one you
+pick."** — this is worse than the Group 5 false-confirmation finding in two
+ways: (1) it falsely confirms correctness on a non-answer turn as before, but
+(2) it also **invents an MCQ option text** ("Dogs are popular pets") that
+does not appear anywhere in the actual pending MCQ's two real options (which
+were about specificity vs. vagueness in topic sentences, not dogs). "Dogs are
+popular pets" appears to be leaked from an earlier scaffolding analogy in
+T1/T3/T4's teaching prose ("Dogs make excellent family pets..."), not from
+the served MCQ at all — suggesting the model is drawing on stale prompt
+context rather than the actual `pendingMcq` state when constructing this
+reply. This is a genuine hallucination-adjacent defect, not just a
+misclassified turn-intent, and is more concerning than the other tracked
+occurrences. 3 more ordinary disambiguation-lead-in recurrences also occurred
+this group (`eng.writing.topic-sentences` T4/T8, `eng.writing.narrative-
+writing` T6) — running total 19 disambiguation + 2 false-confirmation (1
+bare, 1 with fabricated content) across Groups 3-9. Otherwise: wrong answers
+were correctly identified as wrong via accurate [memory] explanations; Batch
+9 content confirmed served correctly (verbatim stem matches); a real
+process_flow visual (6-step narrative-writing stages) auto-attached; no
+topic drift.
+
 ## Suggested next steps for a dedicated session
 
 1. Reproduce offline against the real `mcqReoffer.test.ts` harness with these
