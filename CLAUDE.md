@@ -3258,6 +3258,29 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   candidate (and once authored, unblocks math.alg's final 2 concepts at once). This is a
   genuinely multi-session campaign; continuation should verify state via `scripts/math/state.ts`
   fresh each time rather than trusting any number recorded here.
+- **Batch 16 — math.alg-unblocking cross-domain excursion, third continuation** (2026-09-11):
+  re-computed the frontier fresh — `math.alg.logarithm` and `math.alg.exponential-equations`
+  (both unblocked by Batch 15's `exponential-function`) and `math.disc.combinations` (unblocked by
+  Batch 15's `permutations`) were all ready. `logarithm` (the inverse-function definition, domain
+  restriction $x>0$ DERIVED from the exponential function's range rather than stated as a rule —
+  the Blueprint's own central-focus misconception) and `exponential-equations` (same-base method
+  vs. logarithm method, with the power-rule misapplication ranked most severe) both authored;
+  `combinations` (derived from `permutations` by dividing out $r!$; Pascal's identity proved
+  combinatorially, not algebraically) authored — the concept this program's entire math.disc
+  excursion exists to unblock, now closing that excursion's math.disc side. One genuine
+  requires/unlocks asymmetry found (not fixed): `exponential-equations`' KG `unlocks` names
+  `math.alg.logarithm`, but `logarithm`'s own KG `requires` doesn't name it back — recorded in
+  both entries. `math.alg` 51/59 → **53/59** (6 remain, 3 already ready:
+  `binomial-theorem` via the now-authored `combinations`, `logarithm-properties`/
+  `natural-logarithm` via the now-authored `logarithm`). `math.disc` 2/32 → **3/32**. `math.func`
+  stays at 1/29. Mathematics **299/908 → 302/908**, 833 remaining. Full per-concept detail in
+  `COVERAGE.md` Batch 16. Validated: KG validator PASS (908/908 reachable, file untouched), 0
+  orphan/duplicate EB files, `tsc --noEmit` clean, targeted tests 479/479 passed, all 3 heading
+  structures diffed clean against `math.alg.like-terms.md`. No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Next:
+  `math.alg.binomial-theorem`, `math.alg.logarithm-properties`, `math.alg.natural-logarithm` are
+  all topologically ready. This is a genuinely multi-session campaign; continuation should verify
+  state via `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
 
 ## Run locally
 ```
