@@ -11,11 +11,13 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 313 | **Five domains CERTIFIED, math.disc now a standalone campaign at 8/32.** 82 `math.found.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 69 `math.geom.*` (**COMPLETE, DOMAIN CERTIFIED** — the final 13 entries were restored by commit `0d2c76dd`'s Wave 0 recovery, which this row previously did not reflect) + 36 `math.nt.*` (**COMPLETE, DOMAIN CERTIFIED 2026-08-12** — the domain's final 8 concepts, `prime-distribution`, `continued-fractions`, `analytic-number-theory`, `prime-number-theorem`, `riemann-hypothesis`, `algebraic-number-theory`, `algebraic-integers`, `number-fields`, were authored this session, ending the PARKED status this row previously recorded) + 59 `math.alg.*` (**COMPLETE, DOMAIN CERTIFIED 2026-09-11** — Wave 1 (2026-08-12, 11 concepts): `expression`, `equation`, `term`, `coefficient`, `exponent-rules`, `polynomial`, `degree`, `zero-exponent`, `negative-exponent`, `solution-set`, `inequality`; Wave 2 (2026-08-12, 1 concept): `like-terms`; Wave 3 (2026-09-11, 3 concepts): `simplification`, `polynomial-operations`, `radicals`; Wave 4 (2026-09-11, 5 concepts): `linear-equation-1var`, `polynomial-division`, `fractional-exponent`, `simplifying-radicals`, `radical-equations`; Wave 5 (2026-09-11, 5 concepts): `inequality-1var`, `absolute-value-equations`, `linear-equation-2var`, `remainder-theorem`, `rationalizing-denominators`; Wave 6 (2026-09-11, 3 concepts): `inequality-2var`, `system-linear-equations`, `factor-theorem`; Wave 7 (2026-09-11, 4 concepts): `substitution-method`, `elimination-method`, `system-3var`, `factoring`; Wave 8 (2026-09-11, 3 concepts): `factoring-gcf`, `factoring-special`, `rational-expressions`; Wave 9 (2026-09-11, 4 concepts): `factoring-trinomials`, `rational-expressions-addition`, `rational-expressions-multiplication`, `rational-equations`; Wave 10 (2026-09-11, 1 concept): `quadratic-equation`; Wave 11 (2026-09-11, 2 concepts): `completing-the-square`, `polynomial-roots`; Wave 12 part 1 (2026-09-11, 1 concept): `quadratic-formula`; Wave 12 part 2 (2026-09-11, 2 concepts): `discriminant`, `rational-root-theorem`; Wave 12 part 3 (2026-09-11, 3 concepts): `fundamental-theorem-algebra`, `polynomial-inequality`, `vietas-formulas`; Wave 13 (2026-09-11, 2 concepts): `complex-polynomial-roots`, `rational-inequality`; Batch 15 (2026-09-11, 1 concept): `exponential-function`; Batch 16 (2026-09-11, 2 concepts): `logarithm`, `exponential-equations`; Batch 17 (2026-09-11, 3 concepts): `binomial-theorem`, `logarithm-properties`, `natural-logarithm`; Batch 18 (2026-09-11, 3 concepts, FINAL): `change-of-base`, `logarithmic-equations`, `pascals-triangle`; all Blueprint-grounded, reused by reference). 8 `math.disc.*` entries (**IN PROGRESS, standalone campaign since math.alg's certification** —
+| mathematics | 908 | 316 | **Five domains CERTIFIED, math.disc now a standalone campaign at 11/32.** 82 `math.found.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 69 `math.geom.*` (**COMPLETE, DOMAIN CERTIFIED** — the final 13 entries were restored by commit `0d2c76dd`'s Wave 0 recovery, which this row previously did not reflect) + 36 `math.nt.*` (**COMPLETE, DOMAIN CERTIFIED 2026-08-12** — the domain's final 8 concepts, `prime-distribution`, `continued-fractions`, `analytic-number-theory`, `prime-number-theorem`, `riemann-hypothesis`, `algebraic-number-theory`, `algebraic-integers`, `number-fields`, were authored this session, ending the PARKED status this row previously recorded) + 59 `math.alg.*` (**COMPLETE, DOMAIN CERTIFIED 2026-09-11** — Wave 1 (2026-08-12, 11 concepts): `expression`, `equation`, `term`, `coefficient`, `exponent-rules`, `polynomial`, `degree`, `zero-exponent`, `negative-exponent`, `solution-set`, `inequality`; Wave 2 (2026-08-12, 1 concept): `like-terms`; Wave 3 (2026-09-11, 3 concepts): `simplification`, `polynomial-operations`, `radicals`; Wave 4 (2026-09-11, 5 concepts): `linear-equation-1var`, `polynomial-division`, `fractional-exponent`, `simplifying-radicals`, `radical-equations`; Wave 5 (2026-09-11, 5 concepts): `inequality-1var`, `absolute-value-equations`, `linear-equation-2var`, `remainder-theorem`, `rationalizing-denominators`; Wave 6 (2026-09-11, 3 concepts): `inequality-2var`, `system-linear-equations`, `factor-theorem`; Wave 7 (2026-09-11, 4 concepts): `substitution-method`, `elimination-method`, `system-3var`, `factoring`; Wave 8 (2026-09-11, 3 concepts): `factoring-gcf`, `factoring-special`, `rational-expressions`; Wave 9 (2026-09-11, 4 concepts): `factoring-trinomials`, `rational-expressions-addition`, `rational-expressions-multiplication`, `rational-equations`; Wave 10 (2026-09-11, 1 concept): `quadratic-equation`; Wave 11 (2026-09-11, 2 concepts): `completing-the-square`, `polynomial-roots`; Wave 12 part 1 (2026-09-11, 1 concept): `quadratic-formula`; Wave 12 part 2 (2026-09-11, 2 concepts): `discriminant`, `rational-root-theorem`; Wave 12 part 3 (2026-09-11, 3 concepts): `fundamental-theorem-algebra`, `polynomial-inequality`, `vietas-formulas`; Wave 13 (2026-09-11, 2 concepts): `complex-polynomial-roots`, `rational-inequality`; Batch 15 (2026-09-11, 1 concept): `exponential-function`; Batch 16 (2026-09-11, 2 concepts): `logarithm`, `exponential-equations`; Batch 17 (2026-09-11, 3 concepts): `binomial-theorem`, `logarithm-properties`, `natural-logarithm`; Batch 18 (2026-09-11, 3 concepts, FINAL): `change-of-base`, `logarithmic-equations`, `pascals-triangle`; all Blueprint-grounded, reused by reference). 8 `math.disc.*` entries (**IN PROGRESS, standalone campaign since math.alg's certification** —
 Batch 14 (2026-09-11, 1 concept): `counting-principles`; Batch 15 (2026-09-11, 1 concept):
 `permutations`; Batch 16 (2026-09-11, 1 concept): `combinations`; Batch 19 (2026-09-11, 5
 concepts): `combinatorics`, `pigeonhole`, `stars-bars`, `inclusion-exclusion`,
-`binomial-theorem`; all Blueprint-grounded, reused by reference) + 1 `math.func.*` entry
+`binomial-theorem`; Batch 20 (2026-09-11, 3 concepts): `derangements`, `graph`,
+`propositional-logic` — opened the graph-theory and formal-logic subtrees deferred from Batch
+19; all Blueprint-grounded, reused by reference) + 1 `math.func.*` entry
 (`function-concept`, parked at 1/29, its own math.alg-serving purpose fully served). All
 confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired —
 0 known violations remain in mathematics. See Delivery history for full per-concept lists and
@@ -6070,3 +6072,71 @@ math.disc 8/32, 0 orphan EB files, 0 duplicate EB files; `npx tsc --noEmit` clea
 entries' heading structure diffed clean against `math.alg.like-terms.md` on the first pass (0
 diffs each). No Physics, Chemistry, English, Biology, Computer Science, KG, Blueprint, or runtime
 file was modified.
+
+### Batch 20 — math.disc: derangements, and opening two new subtrees (graph theory, formal logic)
+
+Fresh frontier computation against the live KG and live `educational-brain/concepts/mathematics`
+directory (post-Batch-19, math.disc 8/32): 3 candidates ready — `math.disc.derangements`
+(newly unblocked by Batch 19's `inclusion-exclusion`), `math.disc.graph` (opening the domain's
+graph-theory subtree, requires only `math.found.set-theory`), `math.disc.propositional-logic`
+(opening the domain's formal-logic subtree, requires `math.found.proposition` +
+`math.found.logical-connectives`) — both `graph` and `propositional-logic` deliberately deferred
+from Batch 19's coherent-subset selection. All 3 have existing Blueprints, reused by reference;
+all 3 authored.
+
+- **`math.disc.derangements`** (proficient/apply, mastery 0.8, MAMR 4/5, 3 hr, requires
+  `math.disc.inclusion-exclusion` only, no unlocks/cross-links) — $D(n)=n!\sum_{k=0}^n\frac{(-1)^k}{k!}$
+  derived directly as an application of inclusion-exclusion (the $A_i=$"element $i$ fixed" sets
+  previewed in that concept's own entry, fully developed here), the fast convergence of
+  $D(n)/n!\to1/e$ (already accurate by $n\approx10$), and the precise "every position, not just
+  one" definition of a derangement. 3 misconceptions: MC-1
+  INCLUSION-EXCLUSION-TERM-COUNT-MISCOMPUTED-FOR-DERANGEMENTS (Type 1, foundational), MC-2
+  ONE-OVER-E-APPROXIMATION-ASSUMED-TO-NEED-HUGE-N (Type 1, moderate), MC-3
+  DERANGEMENT-CONFUSED-WITH-ANY-PERMUTATION-WITHOUT-A-SPECIFIC-FIXED-POINT (Type 1,
+  foundational). No genuine content-overlap or metadata discrepancy found; explicitly not
+  duplicating `inclusion-exclusion`'s own orientation-level derangement preview.
+- **`math.disc.graph`** (developing/understand, mastery 0.9, MAMR 5/5, 3 hr, requires
+  `math.found.set-theory`, unlocks `math.disc.graph-connectivity` + `math.disc.graph-trees`,
+  cross-links `math.graph.graph` — confirmed genuinely unauthored, independence mode) — $G=(V,E)$,
+  undirected (unordered-pair) vs. directed (ordered-pair) edges formally grounded in
+  `math.found.set-theory`'s Cartesian-product framework, self-loop degree-2 rule, and the
+  Handshaking Lemma ($\sum\deg(v)=2|E|$) re-derived from "every edge has two ends" rather than
+  presented as a bare formula. 3 misconceptions, birth-type classified independently (this
+  Blueprint did not pre-assign them, unlike several other math.disc sources): MC-1
+  DIRECTED-EDGE-ASSUMED-SYMMETRIC (Type 6, moderate — an everyday-connection analogy
+  overextended into the directed-graph context), MC-2 SELF-LOOP-DEGREE-ONE (Type 2, moderate —
+  a perceptual-intuition undercount from the loop's single-curve visual appearance), MC-3
+  HANDSHAKE-SUM-EQUALS-EDGES (Type 4, foundational — the formula's factor of 2 easy to drop
+  under notation pressure). No genuine content-overlap found; opens `math.disc`'s graph-theory
+  subtree for the first time this campaign.
+- **`math.disc.propositional-logic`** (developing/apply, mastery 0.9, MAMR 5/5, 4 hr, requires
+  `math.found.proposition` + `math.found.logical-connectives`, unlocks
+  `math.disc.boolean-circuits`, cross-links `math.found.truth-table` — already authored) — DNF
+  built mechanically from a truth table's TRUE rows and CNF from the FALSE rows (dual
+  constructions, opposite negation conventions), and, at orientation level, the SAT problem's
+  easy-to-verify/hard-to-decide gap (NP-completeness named, not proved). 3 misconceptions: MC-1
+  DNF-TREATED-AS-ARBITRARY-REWRITE (Type 5, foundational), MC-2 CNF-BUILT-LIKE-DNF (Type 1,
+  high), MC-3 EASY-VERIFICATION-ASSUMED-TO-IMPLY-EASY-DECISION (Type 1, moderate). **Second
+  genuinely non-empty, already-authored cross-link substantively incorporated this campaign**
+  (after `math.disc.binomial-theorem`'s in Batch 19) — `math.found.truth-table`'s row-by-row
+  method is this entry's mechanical foundation throughout, not merely flagged. One honesty note
+  recorded, not silently assumed: the Blueprint's own SAT/Hamiltonian-cycle complexity parallel
+  cites `math.disc.euler-hamiltonian` as "already authored," but that concept is outside
+  `math.disc`'s currently-authored EB set — presented here as a stated Blueprint fact, not
+  independently verified against the live EB directory.
+
+`math.disc` **8/32 → 11/32**. `math.func` unchanged this batch (1/29, parked). Mathematics
+**313/908 → 316/908**. No genuine content-overlap was found among this batch's 3 entries. All
+tracking files updated in the same commit: `ROADMAP.md` Section 1/2 totals and domain table
+regenerated from source (math.disc row updated with its 6 freshly-computed topologically-ready
+candidates: `boolean-circuits`/`graph-coloring`/`graph-connectivity`/`graph-types`/
+`planar-graph`/`predicate-logic-disc`), `COVERAGE.md`'s mathematics summary row and this
+Delivery history entry, `CLAUDE.md`'s campaign section. `EDUCATIONAL_BRAIN_INDEX.md` and
+`QUALITY.md` again deferred (same generated-artifact rationale as prior batches). Re-verified:
+`npx tsx scripts/validate-knowledge-graph.ts docs/mathematics/kg/graph.json` PASS, 908/908
+reachable, 0 failures, 0 warnings (KG file untouched); `scripts/math/state.ts` confirms
+math.disc 11/32, 0 orphan EB files, 0 duplicate EB files; `npx tsc --noEmit` clean; targeted
+tests `mathPackageCorpus.test.ts` + `mathematicsAssetContract.test.ts` 479/479 passed. All 3 new
+entries' heading structure diffed clean against `math.alg.like-terms.md` on the first pass (0
+diffs each). No Physics, Chemistry, English, Biology, Computer Science, KG, Blueprint, or
+runtime file was modified.

@@ -3363,6 +3363,32 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   by `inclusion-exclusion` — `graph`, `propositional-logic`). This is a genuinely multi-session
   campaign; continuation should verify state via `scripts/math/state.ts` fresh each time rather
   than trusting any number recorded here.
+- **Batch 20 — math.disc: derangements, opening graph theory and formal logic subtrees**
+  (2026-09-11): re-computed the frontier fresh — all 3 candidates deferred from Batch 19 were
+  ready: `derangements` (unblocked by `inclusion-exclusion`), `graph` (requires only
+  `math.found.set-theory`), `propositional-logic` (requires `math.found.proposition` +
+  `math.found.logical-connectives`); all 3 Blueprint-grounded, reused by reference.
+  `derangements` ($D(n)=n!\sum(-1)^k/k!$ derived as a direct inclusion-exclusion application, the
+  fast $1/e$-convergence, and the precise "every position, not just one" definition) closes the
+  branch unblocked by Batch 19. `graph` (undirected/directed edges grounded in
+  `math.found.set-theory`'s Cartesian-product framework, self-loop degree-2, the Handshaking
+  Lemma re-derived from "every edge has two ends") opens the domain's graph-theory subtree — its
+  cross-link `math.graph.graph` confirmed genuinely unauthored (independence mode).
+  `propositional-logic` (DNF from true rows, CNF from false rows as dual constructions, SAT's
+  easy-verify/hard-decide gap at orientation level) opens the formal-logic subtree — its
+  cross-link `math.found.truth-table` (already authored) substantively incorporated as this
+  entry's mechanical foundation, the second such genuine cross-link this campaign (after
+  `binomial-theorem`'s in Batch 19). No genuine content-overlap or metadata discrepancy found in
+  any of the 3. `math.disc` 8/32 → **11/32**. `math.func` unchanged (1/29, parked). Mathematics
+  **313/908 → 316/908**, 592 remaining. Full per-concept detail in `COVERAGE.md` Batch 20.
+  Validated: KG validator PASS (908/908 reachable, file untouched), 0 orphan/duplicate EB files,
+  `tsc --noEmit` clean, targeted tests 479/479 passed, all 3 heading structures diffed clean on
+  the first pass (0 diffs each). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime
+  file touched. Fresh math.disc frontier computed: 6 candidates ready (`boolean-circuits`,
+  `graph-coloring`, `graph-connectivity`, `graph-types`, `planar-graph`,
+  `predicate-logic-disc`). This is a genuinely multi-session campaign; continuation should verify
+  state via `scripts/math/state.ts` fresh each time rather than trusting any number recorded
+  here.
 
 ## Run locally
 ```
