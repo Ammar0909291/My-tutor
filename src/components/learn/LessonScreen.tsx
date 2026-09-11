@@ -2308,7 +2308,18 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     const aid = `a-${Date.now()}`
     setMessages((p) => [...p, { id: aid, role: 'assistant' as const, content: '', ts: Date.now(), streaming: true }])
     try {
-      const res = await fetch('/api/learn/lesson-init', {
+      // PCD-002 (physics/chemistry defect audit): this used a bare `fetch`
+      // with no client-side bound, unlike the chat turn below (which caps at
+      // 50_000ms, comfortably under the server's own 60_000ms maxDuration, and
+      // retries a dropped/aborted attempt). A genuinely stalled network
+      // request here — not just a slow server, which the server's own 60s
+      // limit and graceful error responses already handle — could hold this
+      // screen in its loading state indefinitely, with no path back to the
+      // warm `lesson_load_error` recovery text below. Bounding it the same
+      // way closes that one asymmetry between the two endpoints' client-side
+      // robustness; no retry loop is added here since lesson-init runs at
+      // most once per navigation action, not on every keystroke-adjacent send.
+      const res = await fetchWithTimeout('/api/learn/lesson-init', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -2326,7 +2337,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
           completedLessons: curriculumProgress.completedLessons,
           teachingLanguage,
         }),
-      })
+      }, 55000)
       const data = await res.json().catch(() => ({}))
       if (!res.ok || !data.success || !data.text) throw new Error(data.error ?? `HTTP ${res.status}`)
 
