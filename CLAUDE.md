@@ -3099,6 +3099,22 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   CS/KG/Blueprint/runtime file touched. This is a genuinely multi-session campaign; continuation
   should verify state via `scripts/math/state.ts` fresh each time rather than trusting any number
   recorded here.
+- **Batch 7 — math.alg Wave 9** (2026-09-11, loop iteration 4): authored the 4 concepts computed as
+  the next topologically-ready `math.alg` frontier — `math.alg.factoring-trinomials`,
+  `math.alg.rational-expressions-addition`, `math.alg.rational-expressions-multiplication`,
+  `math.alg.rational-equations` — all Blueprint-grounded, reused by reference. `math.alg`
+  35/59 → **39/59**. Mathematics **280/908 → 284/908**, 624 remaining. `factoring-trinomials`' MC-3
+  is a THIRD cross-referenced instance of the sum-of-squares mechanism already documented in
+  `factoring`'s MC-3 and `factoring-special`'s MC-1. `rational-expressions-addition`'s MC-2 overlaps
+  `rational-expressions`' own MC-1 (intentional depth, cross-referenced). A genuine KG/Blueprint
+  metadata discrepancy found and resolved toward the KG: `rational-equations`' Blueprint states its
+  prerequisite as `rational-expressions-addition`, but the live KG lists `rational-expressions`
+  directly — recorded in both entries, not fixed. Full per-concept detail in `COVERAGE.md` Batch 63.
+  Validated: KG validator PASS (908/908 reachable, file untouched), 0 orphan/duplicate EB files,
+  `tsc --noEmit` clean, targeted tests 479/479 passed, all 4 heading structures diffed clean against
+  `math.alg.like-terms.md`. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file
+  touched. This is a genuinely multi-session campaign; continuation should verify state via
+  `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
 
 ## Run locally
 ```
