@@ -3041,7 +3041,20 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   scope to resolve. Full per-concept detail in `COVERAGE.md` Batch 58. Validated: KG validator
   PASS (908/908 reachable, file untouched), 0 orphan/duplicate EB files, `tsc --noEmit` clean,
   targeted tests 479/479 passed. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file
-  touched. Wave 5 deliberately NOT started this batch, per the same one-bounded-batch discipline.
+  touched.
+- **Batch 3 — math.alg Wave 5** (2026-09-11, same session): authored the 5 concepts computed as the
+  next topologically-ready `math.alg` frontier — `math.alg.inequality-1var`,
+  `math.alg.absolute-value-equations`, `math.alg.linear-equation-2var`,
+  `math.alg.remainder-theorem`, `math.alg.rationalizing-denominators` — all Blueprint-grounded,
+  reused by reference. `math.alg` 20/59 → **25/59**. Mathematics **265/908 → 270/908**, 638
+  remaining. A second genuine Curriculum Feedback overlap finding recorded (not fixed), same class
+  as Batch 2's: `rationalizing-denominators`' core technique substantially overlaps
+  `math.alg.radicals`' own LO2/MC-2. Full per-concept detail in `COVERAGE.md` Batch 59. Validated:
+  KG validator PASS (908/908 reachable, file untouched), 0 orphan/duplicate EB files, `tsc
+  --noEmit` clean, targeted tests 479/479 passed. No Physics/Chemistry/English/Biology/CS/KG/
+  Blueprint/runtime file touched. Wave 6 deliberately NOT started this batch, per the same
+  one-bounded-batch discipline — 638 concepts remain; this is a genuinely multi-session campaign
+  and continuation should verify state via `scripts/math/state.ts` fresh each time.
 
 ## Run locally
 ```
