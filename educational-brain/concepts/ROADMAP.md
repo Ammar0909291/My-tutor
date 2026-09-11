@@ -13,9 +13,9 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **308** mathematics + 238 physics + 216 english + 186 chemistry + 0 biology + 0 computer_science = **948** |
-| Remaining | **827** |
-| Completion percentage | **53.41%** |
+| Concepts with an Educational Brain entry | **313** mathematics + 238 physics + 216 english + 186 chemistry + 0 biology + 0 computer_science = **953** |
+| Remaining | **822** |
+| Completion percentage | **53.69%** |
 
 *(Recomputed programmatically 2026-09-11 against the live KG files and the
 live `educational-brain/concepts/` tree, mid-way through a dedicated
@@ -30,11 +30,12 @@ cross-domain excursion into `math.disc`/`math.func`, Batch 15's
 continuation of that excursion (2 more concepts), Batch 16's
 continuation (3 more concepts: 2 math.alg, 1 math.disc), Batch 17
 (3 more math.alg concepts, closing the logarithm/binomial-theorem
-excursion threads), and Batch 18 (the final 3 math.alg concepts —
-**math.alg CERTIFIED, 59/59**, the fifth domain) together brought
-mathematics from 257 to 308. Cross-checked: 0 orphan EB files, 0
-duplicate EB files, 0 EB filenames that do not resolve to a live KG
-concept id, across all six subjects.)*
+excursion threads), Batch 18 (the final 3 math.alg concepts —
+**math.alg CERTIFIED, 59/59**, the fifth domain), and Batch 19 (5
+`math.disc` concepts, continuing that domain as a standalone campaign)
+together brought mathematics from 257 to 313. Cross-checked: 0 orphan
+EB files, 0 duplicate EB files, 0 EB filenames that do not resolve to
+a live KG concept id, across all six subjects.)*
 
 ---
 
@@ -42,7 +43,7 @@ concept id, across all six subjects.)*
 
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
-| mathematics | 908 | 308 | 33.92% | `math.found.mathematical-thinking` | **Yes** |
+| mathematics | 908 | 313 | 34.47% | `math.found.mathematical-thinking` | **Yes** |
 
 **Mathematics per-domain state (recomputed 2026-09-11, programmatic):**
 
@@ -59,7 +60,7 @@ concept id, across all six subjects.)*
 | `math.prob` | 0/49 | not started |
 | `math.stats` | 0/40 | not started |
 | `math.abst` | 0/37 | not started |
-| `math.disc` | 3/32 | **IN PROGRESS (cross-domain excursion out of math.alg, now standalone since math.alg CERTIFIED)** — Batch 14 (1, `counting-principles`, 2026-09-11) + Batch 15 (1, `permutations`, 2026-09-11) + Batch 16 (1, `combinations`, 2026-09-11 — unblocked `math.alg.binomial-theorem` and, transitively, `math.alg.pascals-triangle`, both now authored). 7 topologically-ready candidates computed: `binomial-theorem`, `combinatorics`, `graph`, `inclusion-exclusion`, `pigeonhole`, `propositional-logic`, `stars-bars`. |
+| `math.disc` | 8/32 | **IN PROGRESS (standalone campaign since math.alg CERTIFIED)** — Batch 14 (1, `counting-principles`, 2026-09-11) + Batch 15 (1, `permutations`, 2026-09-11) + Batch 16 (1, `combinations`, 2026-09-11) + Batch 19 (5, `combinatorics`/`pigeonhole`/`stars-bars`/`inclusion-exclusion`/`binomial-theorem`, 2026-09-11). 3 topologically-ready candidates computed: `derangements` (newly unblocked by `inclusion-exclusion`), `graph`, `propositional-logic`. |
 | `math.cx` | 0/31 | not started |
 | `math.real` | 0/30 | not started |
 | `math.func` | 1/29 | **IN PROGRESS (cross-domain excursion out of math.alg)** — Batch 14 (1, `function-concept`, 2026-09-11 — unblocked `math.alg.exponential-function`, authored in Batch 15, which in turn unblocks the remaining `logarithm` family) |
@@ -74,15 +75,15 @@ concept id, across all six subjects.)*
 | `math.meas` | 0/13 | not started |
 
 **Five domains certified** (math.found, math.geom, math.alg, math.arith, math.nt), math.disc and
-math.func in progress, 308 of 908. The five certified domains are the graph's foundation layer;
+math.func in progress, 313 of 908. The five certified domains are the graph's foundation layer;
 every remaining domain draws on at least one of them, so the prerequisite debt for the remaining
-600 concepts is now substantially lower than the raw count suggests. math.disc and math.func were
-opened as small, deliberately bounded cross-domain excursions out of math.alg (per the established
-`math.nt.divisibility`/`math.geom` precedent) — each excursion authored only what was needed to
-unblock math.alg's own frontier, and that purpose is now served (math.alg CERTIFIED). Continuing
-either domain as a full standalone campaign, or opening a fresh domain, is an open decision for
-the next batch — math.disc (3/32, 7 topologically-ready candidates already computed) is the
-furthest along and the lowest-friction default.
+595 concepts is now substantially lower than the raw count suggests. math.disc and math.func were
+originally opened as small, deliberately bounded cross-domain excursions out of math.alg (per the
+established `math.nt.divisibility`/`math.geom` precedent); with math.alg CERTIFIED, this program
+elected to continue math.disc as a full standalone domain campaign (Batch 19) rather than opening
+a fresh domain, since it was already furthest along. math.disc is now 8/32, with 3 topologically-
+ready candidates already computed (`derangements`, `graph`, `propositional-logic`). math.func
+remains parked at 1/29, its own math.alg-serving purpose likewise fully served.
 
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
 | english | 216 | 216 | **100.00% COMPLETE (2026-08-11)** | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) — every English KG concept now has a full Educational Brain entry |

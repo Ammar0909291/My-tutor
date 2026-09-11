@@ -3334,6 +3334,35 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   multi-session campaign; continuation should verify state via `scripts/math/state.ts` fresh each
   time rather than trusting any number recorded here. Next domain selection (continue math.disc as
   a full campaign, continue math.func, or start fresh) is an open decision for the next batch.
+- **Batch 19 — math.disc continued as a standalone domain campaign** (2026-09-11): with math.alg
+  CERTIFIED, elected to continue `math.disc` (furthest along of the two excursion-opened domains)
+  as a full standalone campaign. Fresh frontier: 7 candidates ready; selected a coherent subset of
+  5 sharing `math.disc.combinations`/`counting-principles` as their prerequisite, deferring `graph`
+  and `propositional-logic` (each opening a structurally distinct subtree) to a future batch. All 5
+  Blueprint-grounded, reused by reference — and notably 4 of the 5 Blueprints already carried
+  birth-type classifications in their own text (a newer Blueprint convention), independently
+  confirmed rather than accepted uncritically. `combinatorics` (the whole FIELD of counting
+  techniques — bijection, recursion-as-complete-answer, generating functions/named-children
+  preview — not a synonym for $\binom{n}{r}$/$P(n,r)$), `pigeonhole` (creative hole-construction as
+  the genuine skill; $\lceil m/n\rceil$ as a lower bound, never exact; non-constructive existence),
+  `stars-bars` ($\binom{n+k-1}{k-1}$, $k-1$-not-$k$ bars, at-least-one via $n-k$, identical-vs-
+  distinct discrimination), `inclusion-exclusion` (full alternating-sign formula, union-vs-
+  complement discrimination, systematic surjection formula), and `binomial-theorem` (math.disc's
+  own combinatorial derivation, cross-linked to the already-authored `math.alg.binomial-theorem`'s
+  complementary algebraic proof of the identical theorem — the first genuinely non-empty,
+  already-authored cross-link this program has substantively incorporated rather than merely
+  flagged) all authored. `math.disc` 3/32 → **8/32**. `math.func` unchanged (1/29, parked).
+  Mathematics **308/908 → 313/908**, 595 remaining. No genuine content-overlap found beyond
+  deliberate cross-references (Pascal's identity's shared include/exclude argument across
+  `math.alg.pascals-triangle`/`vietas-formulas`; `stars-bars`'s deferral of upper-bound
+  restrictions to `inclusion-exclusion`). Full per-concept detail in `COVERAGE.md` Batch 19.
+  Validated: KG validator PASS (908/908 reachable, file untouched), 0 orphan/duplicate EB files,
+  `tsc --noEmit` clean, targeted tests 479/479 passed, all 5 heading structures diffed clean on
+  the first pass (0 diffs each). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file
+  touched. Fresh math.disc frontier computed: 3 candidates ready (`derangements` — newly unblocked
+  by `inclusion-exclusion` — `graph`, `propositional-logic`). This is a genuinely multi-session
+  campaign; continuation should verify state via `scripts/math/state.ts` fresh each time rather
+  than trusting any number recorded here.
 
 ## Run locally
 ```
