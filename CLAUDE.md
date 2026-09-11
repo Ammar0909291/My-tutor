@@ -3144,6 +3144,23 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   `math.alg.like-terms.md`. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file
   touched. This is a genuinely multi-session campaign; continuation should verify state via
   `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
+- **Batch 10 — math.alg Wave 12 part 1** (2026-09-11, loop iteration 7, closed early per explicit
+  user instruction mid-batch): the computed frontier was 5 concepts (`quadratic-formula`,
+  `rational-root-theorem`, `fundamental-theorem-algebra`, `polynomial-inequality`,
+  `vietas-formulas`, all Blueprint-grounded); all 5 Blueprints were read, but only 1 —
+  `math.alg.quadratic-formula` — was authored, validated, and committed before stopping, matching
+  this program's own precedent for closing a partial wave as its own smaller batch rather than
+  leaving uncommitted work. `math.alg` 42/59 → **43/59**. Mathematics **287/908 → 288/908**, 620
+  remaining. `quadratic-formula` is the symbolic generalisation of `completing-the-square`'s own
+  verified non-monic procedure plus the formula's direct-substitution efficiency payoff and an
+  orientation-level discriminant preview. No genuine content-overlap or metadata discrepancy found.
+  The remaining 4 already-read candidates are deferred to a future batch (Wave 12 part 2),
+  to be re-verified fresh rather than assumed still ready. Full per-concept detail in `COVERAGE.md`
+  Batch 66. Validated: KG validator PASS (908/908 reachable, file untouched), 0 orphan/duplicate EB
+  files, `tsc --noEmit` clean, targeted tests 479/479 passed, heading structure diffed clean against
+  `math.alg.like-terms.md`. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file
+  touched. This is a genuinely multi-session campaign; continuation should verify state via
+  `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
 
 ## Run locally
 ```
