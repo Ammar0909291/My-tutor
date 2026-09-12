@@ -3747,6 +3747,34 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   frontier computed: 3 candidates ready (`derivative-definition`, `parametric-curves`,
   `riemann-sums`). This is a genuinely multi-session campaign; continuation should verify state
   via `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
+- **Batch 38 — math.calc: the derivative's formal definition, parametric curves, Riemann sums**
+  (2026-09-12): re-computed the frontier fresh — the exact 3 candidates left ready after
+  Batch 37 were confirmed still ready, closing the ENTIRE frontier available at batch start
+  with none deferred: `derivative-definition`, `parametric-curves`, `riemann-sums`, all
+  Blueprint-grounded, reused by reference. **None of the 3 Blueprints carried an explicit
+  birth-type column** — the twelfth, thirteenth, and fourteenth such gaps this campaign —
+  every misconception independently classified (`derivative-definition` MC-1
+  DIFFERENCE-QUOTIENT-IS-DERIVATIVE/MC-2 CONTINUITY-IMPLIES-DIFFERENTIABILITY/MC-3
+  DIRECT-SUBSTITUTION-INTO-QUOTIENT, all Type 1; `parametric-curves` MC-1
+  DIRECTION-OF-TRACING-IGNORED Type 2/MC-2 EVERY-PARAMETRIC-CURVE-IS-A-FUNCTION Type 1/MC-3
+  ELIMINATING-PARAMETER-LOSES-NOTHING Type 5; `riemann-sums` MC-1
+  RECTANGLES-TOUCH-CURVE-AT-TOP Type 2/MC-2 MORE-RECTANGLES-CHANGES-EXACT-AREA Type 1/MC-3
+  RIEMANN-SUM-IS-THE-INTEGRAL Type 1). `derivative-definition` formalizes `derivative-intro`'s
+  informal secant-to-tangent picture into the computable limit definition; its own MC-1 and
+  `riemann-sums`' own MC-3 are both the identical pre-limit-expression-is-the-answer mechanism
+  already documented for `math.calc.limits`' own MC-1 — `riemann-sums`' Blueprint explicitly
+  names this cross-reference in its own root-cause text. **A first for this domain's batches:
+  none of the 3 concepts carried a Blueprint/KG metadata discrepancy** — every stated
+  unlocks/cross_links field matched the live KG exactly, confirmed by direct query. `math.calc`
+  **12/76** (9→12). Mathematics **378/908** (375→378), 757 remaining. Full per-concept detail
+  in `COVERAGE.md` Batch 38. Validated: KG validator PASS (908/908 reachable, file untouched),
+  `scripts/math/state.ts` confirms math.calc 12/76 and mathematics 378/908 (6 EB-certified
+  domains unchanged), `tsc --noEmit` clean, targeted tests 479/479 passed, all 3 heading
+  structures diffed clean on the first pass (0 diffs each). No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. A fresh math.calc
+  frontier check is deferred to the next batch. This is a genuinely multi-session campaign;
+  continuation should verify state via `scripts/math/state.ts` fresh each time rather than
+  trusting any number recorded here.
 
 ## Run locally
 ```
