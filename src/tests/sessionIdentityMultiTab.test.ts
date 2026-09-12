@@ -95,11 +95,17 @@ describe('fact 3 — navigation never asks for a different session', () => {
   it('callLessonInit posts to lesson-init with the sessionId it was handed', () => {
     const at = SCREEN.indexOf('const callLessonInit = useCallback(async (')
     expect(at).toBeGreaterThan(-1)
-    const body = SCREEN.slice(at, at + 1200)
-    expect(body).toContain("fetch('/api/learn/lesson-init'")
+    // Window widened past 1200: PCD-002 (physics/chemistry defect audit)
+    // added a client-side timeout bound (fetchWithTimeout, matching the
+    // chat call's own robustness) ahead of this call, pushing the request
+    // itself and its body further into the function than before — the
+    // literal call shape changed, not the invariant this test pins.
+    const body = SCREEN.slice(at, at + 1600)
+    expect(body).toContain("fetchWithTimeout('/api/learn/lesson-init'")
     expect(body).toContain('sessionId: sid')
     // documents current behaviour: no re-negotiation of the session on switch
     expect(body).not.toContain("fetch('/api/sessions'")
+    expect(body).not.toContain("fetchWithTimeout('/api/sessions'")
   })
 
   it('and lesson-init moves the pointer of whatever session it is given', () => {
