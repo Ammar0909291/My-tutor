@@ -459,6 +459,44 @@ export const DISCOURSE_NOUNS = new Set([
   // please", because ONE non-discourse word is enough to survive and 'please'
   // was that word. A phrase cannot be rescued from being deixis by being polite.
   'please', 'thanks', 'thank',
+  // WHEN, AND WHO IS ASKING — the two words left in the English topic-drift
+  // episodes (ENG-D08), reproduced deterministically 2026-09-12 by running
+  // `namedTopicUnknownTo` on the exact messages the transcripts record:
+  //
+  //   "hello, what are we learning today"      -> topic "we learning today"
+  //   "explain simple please, im a beginner"   -> topic "simple please, im a beginner"
+  //
+  // Those extracted titles are VERBATIM the phrases the transcripts say the
+  // tutor then taught — "we learning today" explained as group-learning
+  // dynamics for five turns inside `eng.phonics.digraphs`, and "simple please,
+  // im a beginner" explained as a four-step meta-lesson on how to give a
+  // simple explanation inside `eng.phonics.print-concepts`. So this is the
+  // root cause of that episode class, not a lead: the learner's own opening
+  // pleasantry was read as a request to be taught a subject by that name.
+  //
+  // In each case exactly ONE word survived the existing filters, and neither
+  // is about any subject:
+  //
+  //   'today'    — WHEN the lesson is, never what it is about. ('simple',
+  //                'please' and the rest were already caught; 'today' was the
+  //                single word holding the whole phrase up.)
+  //   'beginner' — WHO IS ASKING and at what level. A learner declaring their
+  //                own level is the commonest thing a nervous adult says in
+  //                their first message, and it names nothing.
+  //
+  // Their immediate siblings are added on the same reasoning — a learner who
+  // says "today" says "tomorrow", and one who says "beginner" says "novice" —
+  // rather than waiting to measure each separately in production.
+  //
+  // Checked against every concept title in all six registered subjects (1,775
+  // concepts), same discipline as 'slow'/'proper'/'practice' above: 'today',
+  // 'tomorrow', 'yesterday', 'beginner', 'beginners', 'novice' and 'expert'
+  // appear in NONE. 'learning' was deliberately NOT added despite appearing in
+  // both episodes' vicinity — it is real subject vocabulary ("Machine
+  // Learning", "Supervised Learning Models"), it is not what held either
+  // phrase up, and the measured defect closes without it.
+  'today', 'tomorrow', 'yesterday',
+  'beginner', 'beginners', 'novice', 'expert',
   // the apparatus of a course
   'lesson', 'topic', 'chapter', 'test', 'quiz', 'exam', 'homework',
   'assignment', 'score', 'mark', 'grade', 'progress',

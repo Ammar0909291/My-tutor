@@ -1,3 +1,34 @@
+# English topic-drift — DIAGNOSED 2026-09-12, two independent causes fixed
+
+> **RESOLVED for ENG-D08 and ENG-D09; ENG-D07 recorded as having no runtime
+> mechanism.** The file's own warning that the two episode classes might not
+> share a root cause was correct — they were investigated independently and do
+> not. Original text below is kept unedited as the record of what was observed.
+>
+> - **Self-echoing class (digraphs / print-concepts)** — the topic-request
+>   detector. Reproduced deterministically offline against the real
+>   `namedTopicUnknownTo`: "hello, what are we learning today" extracted the
+>   topic **"we learning today"** and "explain simple please, im a beginner"
+>   extracted **"simple please, im a beginner"** — verbatim the phrases the
+>   transcripts record being taught. In each case exactly ONE word held the
+>   phrase up (`today`, `beginner`), neither about any subject. Fixed by
+>   extending `DISCOURSE_NOUNS` — the SAME list and the SAME
+>   one-real-word-survives rule that already closed `slowly`, `please`, `main`
+>   and `practice` — never by widening the request detector. All added words
+>   occur in 0 of 1,775 concept titles. Guard: `src/tests/englishTopicDrift.test.ts`.
+> - **Cross-concept class (Group 5 pronouns)** — NOT the detector; every
+>   detector returns null on "please explain it another way". It is the
+>   weak-topic reinforcement advisory, whose 2026-09-06 suppression guard
+>   consults the RECOVERY rung of the arbitration ladder (`failureState`) but
+>   not the LEARNER_REQUEST rung that also outranks TEACH. Measured: all four
+>   pre-existing terms read false while `learnerRequest` read
+>   `explain_differently`. Fixed by adding that one rung, same authoritative
+>   per-turn read, no new detector.
+> - **ENG-D07 "hello, new topic for me"** — every detector returns null and an
+>   excursion cannot open without a resolved concept id or a topic title, so no
+>   runtime path acts on it. Model behaviour, recorded rather than patched with
+>   a speculative regex.
+
 # English topic-drift — tracked finding, NOT fixed
 
 **Status: OPEN, reported not diagnosed further. Found 2026-09-10 during real-learner

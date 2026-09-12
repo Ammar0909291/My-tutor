@@ -1224,6 +1224,37 @@ export async function POST(req: Request) {
     const weakTopicAdvisorySuppressed = await (async () => {
       try {
         if (turnIntent.failureState !== null) return true
+        // ENG-D09 (2026-09-12): THE LADDER RUNG THIS GUARD MISSED.
+        //
+        // The argument above is that the advisory "has no relationship to the
+        // arbitration ladder (RECOVERY > LEARNER_REQUEST > CLOSE > COMPLETE >
+        // TEACH)". LEARNER_REQUEST is IN that ladder and outranks TEACH, and
+        // this guard consulted RECOVERY (`failureState`) but not it.
+        //
+        // MEASURED 2026-09-12 against the real `readTurnIntent`, reproducing
+        // the Group 5 episode of ENGLISH_TOPIC_DRIFT_FINDING.md
+        // (`eng.grammar.complex-sentences`, session cmtwim0wn0001l70421o06r1v,
+        // T4-T6): the learner typed "please explain it another way" — about
+        // the lesson's OWN topic — and every one of this guard's four terms
+        // read false (`failureState` null, `isReturnRequest` false,
+        // `isExplicitCorrection` false, no excursion), while
+        // `learnerRequest` read 'explain_differently'. So the advisory stood,
+        // and the tutor spent two full turns teaching the pronoun "they" —
+        // recognizable, already-taught content for a DIFFERENT concept
+        // (`eng.grammar.pronouns`), i.e. exactly what a weak-topic
+        // reinforcement aside pulls in. That episode is NOT the
+        // excursion/topic-misdetection class the same finding records for
+        // `eng.phonics.digraphs`; the two were investigated independently and
+        // have different causes and different fixes.
+        //
+        // A learner asking for a different explanation, a diagram, or an
+        // example is asking about THE TOPIC IN FRONT OF THEM. That is the
+        // single worst moment to weave in an unrelated historical weak topic,
+        // for the same reason distress was: the request is what owns the turn.
+        // Same authoritative once-per-turn intent read as the line above — no
+        // new detector, no new persisted state, and an ordinary calm on-topic
+        // turn still fires the advisory exactly as before.
+        if (turnIntent.learnerRequest !== null) return true
         const { isReturnRequest, isExplicitCorrection } = await import('@/lib/teaching/visual/session')
         if (isReturnRequest(message) || isExplicitCorrection(message)) return true
         const { parseExcursionState } = await import('@/lib/teaching/excursion')
