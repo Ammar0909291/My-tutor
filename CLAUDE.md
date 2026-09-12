@@ -4201,6 +4201,41 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   concepts remain. This is a genuinely multi-session campaign; continuation should verify
   state via `scripts/math/state.ts` fresh each time rather than trusting any number
   recorded here.
+- **Batch 52 — math.calc: Stokes' Theorem, the Divergence Theorem, plus a cross-domain
+  excursion opening math.trig and math.seq** (2026-09-12): fetch clean (0/0), state.ts
+  confirmed 60/76 matching Batch 51's end state. Re-computed the frontier fresh — the
+  exact 2 candidates predicted at the end of Batch 51 were confirmed still ready
+  (`stokes-theorem`, `divergence-theorem`), closing the ENTIRE math.calc frontier
+  available at batch start with none deferred. Both Blueprint-grounded, neither carrying
+  an explicit birth-type column (`stokes-theorem` MC-1/MC-2 both Type 5 instruction-induced;
+  `divergence-theorem` MC-1 Type 5 cross-referenced to stokes-theorem's own MC-2, MC-2
+  Type 1 cross-referenced to greens-theorem's own MC-3). **All 2 concepts
+  zero-discrepancy**, the TENTH consecutive zero-discrepancy batch. `math.calc` **62/76**
+  (60→62). Re-computing the frontier after these two found **0 topologically-ready
+  candidates** — all 14 remaining math.calc concepts need a `math.trig`/`math.seq`/
+  `math.linalg` prerequisite. Traced the chains and, following this program's own
+  Batch 14 precedent, authored a bounded 3-concept cross-domain excursion:
+  `math.trig.angle-measure` (MC-1 Type 2 perceptual/MC-2 Type 5 instruction-induced/MC-3
+  Type 3 language contamination), `math.trig.right-triangle-trig` (MC-1 Type 3 language
+  contamination/MC-2 Type 1 overgeneralization/MC-3 Type 2 perceptual), `math.seq.sequence`
+  (MC-1/MC-2 both Type 1 overgeneralization/MC-3 Type 6 analogy overextension — importing
+  programming's 0-indexing; one genuine Blueprint/KG unlocks discrepancy found, KG
+  followed). `math.trig` **0/25 → 2/25** (opened), `math.seq` **0/21 → 1/21** (opened).
+  Mathematics **426/908 → 431/908**, 704 remaining. The excursion IMMEDIATELY unblocked
+  `math.calc.sequence-limits` (now ready) and opened a 2-concept chain toward
+  `math.trig.unit-circle`/`trig-functions`, the eventual unblock for
+  `math.calc.derivative-trig`. Full per-concept detail in `COVERAGE.md` Batch 52.
+  Validated: KG validator PASS (908/908 reachable, file untouched), `scripts/math/
+  state.ts` confirms math.calc 62/76, math.trig 2/25, math.seq 1/21, mathematics 431/908
+  (6 EB-certified domains unchanged), `tsc --noEmit` clean, targeted tests 479/479
+  passed, all 5 heading structures diffed clean on the first pass (0 diffs each). No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Fresh frontier:
+  `math.calc.sequence-limits` ready; `math.trig` 5 candidates (`degree-radian-conversion`,
+  `basic-ratios`, `unit-circle`, `law-of-sines`, `law-of-cosines`); `math.seq` 5
+  candidates (`arithmetic-sequence`, `geometric-sequence`, `recursive-sequences`,
+  `convergent`, `series`). This is a genuinely multi-session campaign; continuation
+  should verify state via `scripts/math/state.ts` fresh each time rather than trusting
+  any number recorded here.
 
 ## Physics Teacher Migration Architecture V2 — AUDITED, NOT ADOPTED (2026-09-12)
 
