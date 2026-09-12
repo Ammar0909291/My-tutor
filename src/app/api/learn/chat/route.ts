@@ -10205,12 +10205,34 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // defined compact question presentation, deterministic, claiming nothing,
       // never fabricated. It fires ONLY when a probe is actually served, so it
       // cannot manufacture a question-only closing turn (Finding 2 territory).
+      //
+      // CRITERION 5, closing the exact gap its own header documents: this is
+      // precisely the T15 shape ("Here is a question to check your
+      // understanding:" <- none) that `answerConfirmation.ts` names as the
+      // residual after the 39%->65% fix. `confirmCorrectAnswer` ran at ~6452,
+      // but a strip that empties `cleanText` between there and here deletes
+      // whatever it prepended along with everything else — so a turn the
+      // SERVER graded correct can still ship this bare intro line with no
+      // acknowledgement. Reusing the same enforcer (not a new phrase) keeps
+      // the phrasing rotation and the "never speaks twice" guard intact; it is
+      // a no-op whenever `correct !== true`, so a wrong or ungraded answer is
+      // unaffected.
       {
         const { mcqToServe: mcqToServeForEmptyGuard } = await import('@/lib/teaching/mcq')
         if (!cleanText.trim()
             && mcqToServeForEmptyGuard(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted) !== null) {
           console.log('[empty-post-strip-with-probe] text stripped to empty while a probe is on screen — introducing it')
-          cleanText = 'Here is a question to check your understanding:'
+          const introLine = 'Here is a question to check your understanding:'
+          if (mcqGradeHoisted?.correct === true) {
+            const { confirmCorrectAnswer } = await import('@/lib/teaching/answerConfirmation')
+            cleanText = confirmCorrectAnswer({
+              text: introLine,
+              correct: true,
+              priorConfirmations: priorConfirmationsHoisted,
+            }).text
+          } else {
+            cleanText = introLine
+          }
         }
       }
 

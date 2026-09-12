@@ -340,13 +340,31 @@ const ROUTE_RULES: RouteRule[] = [
   },
   {
     // Calculus keys are derivative/critical-point specific ("derivative",
-    // "critical point", "local maximum/minimum", "f'(x)"...) — none of these
-    // terms appear in any other rule's vocabulary, so it can sit anywhere in
-    // the order. Placed before molecule/vector since it shares no cues with
-    // either.
+    // "local maximum/minimum", "f'(x)"...) — none of these terms appear in
+    // any other rule's vocabulary, so it can sit anywhere in the order.
+    // Placed before molecule/vector since it shares no cues with either.
+    //
+    // REMOVED 2026-09-11 (physics/chemistry defect audit, PCD-026/PCD-027):
+    // the bare, unqualified phrases 'critical point'/'critical points' used
+    // to sit in this list. "Critical point" is NOT calculus-specific — it is
+    // a standard chemistry term (a phase diagram's liquid-gas critical
+    // point) and a standard physics term (statistical mechanics, e.g. a
+    // phase-transition critical point), so this rule was hijacking a
+    // chemistry phase-diagram turn into a calculus scene purely on a
+    // cross-domain vocabulary collision the rule's own header comment did
+    // not anticipate. This router is currently NOT reachable from the
+    // request path that serves a figure to a learner (M1 — see
+    // src/tests/visualFailClosed.test.ts's header: "the resolver decides,
+    // or nothing does" — routeSceneGenerator/generateRoutedScene are named
+    // there as removed runtime authorities, kept on disk only as authoring
+    // backends), so this was not learner-reachable today. It is fixed
+    // anyway as a latent defect: the module comment calls it an authoring
+    // backend, implying future reconnection, and the remaining keywords
+    // below already reliably co-occur in any genuine calculus
+    // critical-points discussion, so no real coverage is lost.
     kind: 'calculus_graph',
     keywords: [
-      'critical point', 'critical points', 'derivative', 'differentiate',
+      'derivative', 'differentiate',
       "f'(x)", 'local maximum', 'local minimum', 'inflection point',
       'graph of the function', 'rate of change of the function',
       'where the slope is zero', 'maxima and minima',

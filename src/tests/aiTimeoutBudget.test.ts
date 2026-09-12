@@ -190,7 +190,13 @@ describe('SEV-1: AI timeout budget fits the function budget', () => {
     expect(groq.calls).toBe(0)   // fallback never touched on the happy path
   })
 
-  it('Gemini keeps the largest share of the budget as the primary tier', () => {
+  it('Gemini keeps the largest per-provider timeout share, wherever it sits in the chain', () => {
+    // Not "primary" any more — the 2026-08-20 Groq-primary reorder (see
+    // router.ts) put Groq first in the DEFAULT chain, Gemini second. Each
+    // provider's own TIMEOUT_MS constant is untouched by that reorder, so
+    // Gemini still gets the largest single-provider budget (20_000 vs 8_000)
+    // regardless of attempt order — that arithmetic fact, not "primary
+    // status", is what this pins.
     expect(GEMINI_TIMEOUT_MS).toBeGreaterThan(GROQ_TIMEOUT_MS)
     expect(GEMINI_TIMEOUT_MS).toBeGreaterThan(OPENROUTER_TIMEOUT_MS)
   })
@@ -209,24 +215,31 @@ describe('SEV-1: AI timeout budget fits the function budget', () => {
     expect(result.provider).toBe('groq')
   })
 
-  it('provider ORDER is untouched: Gemini first, Groq last', () => {
-    // Scoped to the main `candidates` array specifically — the 2026-08-21
-    // A/B certification override (router.ts's per-request early-return
-    // branch, ABOVE this array in the file) intentionally lists Groq first
-    // within its own one-off array, since the whole point of that branch is
-    // to try the overridden Groq model first for that single request. That
-    // is a different array from the one this test pins; searching the whole
-    // file (as this test previously did) picked up the override block's
-    // earlier `key: GROQ_API_KEY` occurrence instead.
+  it('DEFAULT chain provider order: Groq first, Gemini second, OpenRouter last (2026-08-20 reorder)', () => {
+    // Found stale while investigating PCD-001/PCD-002 (physics/chemistry
+    // defect audit): this test previously asserted "Gemini first, Groq
+    // last", scoped from `const candidates: Array<` onward. But BOTH chains
+    // (`ru` and the default one) live inside that same array literal — the
+    // `ru` branch is listed FIRST in source (Yandex -> Gemini -> OpenRouter
+    // -> Groq) — so `indexOf` from that point found the `ru` chain's own
+    // Gemini/OpenRouter/Groq positions, which happen to satisfy
+    // `gi < oi < qi` too. The test always passed, but it was silently
+    // verifying the RUSSIAN chain's order, never the default chain the
+    // 2026-08-20 CLAUDE.md entry documents as reordered to Groq-primary.
+    // Scoping from the DEFAULT branch's own opening bracket (`] : [`, the
+    // ternary's else-arm) fixes that and pins the order that branch
+    // actually documents: Groq -> Gemini -> OpenRouter.
     const src = readSource('src/lib/ai/router.ts')
     const candidatesStart = src.indexOf('const candidates: Array<')
     expect(candidatesStart).toBeGreaterThan(-1)
-    const scoped = src.slice(candidatesStart)
+    const defaultBranchStart = src.indexOf('] : [', candidatesStart)
+    expect(defaultBranchStart, 'could not find the default (non-ru) branch of the candidates ternary').toBeGreaterThan(-1)
+    const scoped = src.slice(defaultBranchStart, src.indexOf(']', defaultBranchStart + 5))
     const gi = scoped.indexOf('key: GEMINI_API_KEY')
     const oi = scoped.indexOf('key: OPENROUTER_API_KEY')
     const qi = scoped.indexOf('key: GROQ_API_KEY')
-    expect(gi).toBeGreaterThan(-1)
+    expect(qi).toBeGreaterThan(-1)
+    expect(qi).toBeLessThan(gi)
     expect(gi).toBeLessThan(oi)
-    expect(oi).toBeLessThan(qi)
   })
 })
