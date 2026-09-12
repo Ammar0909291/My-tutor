@@ -13,9 +13,9 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **382** mathematics + 238 physics + 216 english + 186 chemistry + 0 biology + 0 computer_science = **1,022** |
-| Remaining | **753** |
-| Completion percentage | **57.58%** |
+| Concepts with an Educational Brain entry | **386** mathematics + 238 physics + 216 english + 186 chemistry + 0 biology + 0 computer_science = **1,026** |
+| Remaining | **749** |
+| Completion percentage | **57.80%** |
 
 *(Recomputed programmatically 2026-09-13 against the live KG files and the
 live `educational-brain/concepts/` tree, mid-way through a dedicated
@@ -66,9 +66,11 @@ a new domain), Batch 36 (4 more `math.calc` concepts —
 Batch 37 (4 more `math.calc` concepts — `continuity-types`, `ivt`,
 `derivative-intro`, `squeeze-theorem`), Batch 38 (the final 3
 topologically-ready `math.calc` concepts — `derivative-definition`,
-`parametric-curves`, `riemann-sums`), and Batch 39 (4 more `math.calc`
+`parametric-curves`, `riemann-sums`), Batch 39 (4 more `math.calc`
 concepts — `definite-integral`, `derivative-rules`, `differentiability`,
-`linearization`) together brought mathematics from 257 to 382.
+`linearization`), and Batch 40 (4 more `math.calc` concepts —
+`antiderivatives`, `critical-points`, `higher-order-derivatives`,
+`product-rule`) together brought mathematics from 257 to 386.
 Cross-checked: 0 orphan EB files, 0 duplicate EB files, 0 EB filenames
 that do not resolve to a live KG concept id, across all six subjects.)*
 
@@ -78,7 +80,7 @@ that do not resolve to a live KG concept id, across all six subjects.)*
 
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
-| mathematics | 908 | 382 | 42.07% | `math.found.mathematical-thinking` | **Yes** |
+| mathematics | 908 | 386 | 42.51% | `math.found.mathematical-thinking` | **Yes** |
 
 **Mathematics per-domain state (recomputed 2026-09-12, programmatic):**
 
@@ -88,7 +90,7 @@ that do not resolve to a live KG concept id, across all six subjects.)*
 | `math.geom` | 69/69 | **CERTIFIED** — closed by commit `0d2c76dd`'s Wave 0 recovery |
 | `math.arith` | 58/58 | **CERTIFIED** (2026-07-26) |
 | `math.nt` | 36/36 | **CERTIFIED** (2026-08-12) — closed by this session's Phase 1 batch |
-| `math.calc` | 16/76 | **STANDALONE CAMPAIGN, IN PROGRESS (2026-09-12)** — Batch 35 (1, `limits`), the domain's entry node, selected as the highest-leverage next step after math.func's certification (verified programmatically: authoring `limits` alone unblocks 7 further `math.calc` concepts at once) + Batch 36 (4, `one-sided-limits`/`limit-laws`/`limits-at-infinity`/`continuity`, closing the entire 4-concept selected subset of the 7-concept frontier available after Batch 35, deferring `derivative-intro`/`riemann-sums`/`parametric-curves`) + Batch 37 (4, `continuity-types`/`ivt`/`derivative-intro`/`squeeze-theorem`, closing the 6-concept frontier available after Batch 36 down to 3, deferring `parametric-curves`/`riemann-sums`; `derivative-intro` is the domain's central payoff concept) + Batch 38 (3, `derivative-definition`/`parametric-curves`/`riemann-sums`, closing the ENTIRE 3-concept frontier available after Batch 37 with none deferred) + Batch 39 (4, `definite-integral`/`derivative-rules`/`differentiability`/`linearization`, selected from the 8-concept frontier available after Batch 38, deferring `lhopitals-rule`/`line-integrals`/`mean-value-theorem`/`multivariable-intro`; the first math.calc batch with zero Blueprint/KG metadata discrepancies across all 4 concepts). Largest unstarted mathematics domain (76 concepts). |
+| `math.calc` | 20/76 | **STANDALONE CAMPAIGN, IN PROGRESS (2026-09-12)** — Batch 35 (1, `limits`), the domain's entry node, selected as the highest-leverage next step after math.func's certification (verified programmatically: authoring `limits` alone unblocks 7 further `math.calc` concepts at once) + Batch 36 (4, `one-sided-limits`/`limit-laws`/`limits-at-infinity`/`continuity`, closing the entire 4-concept selected subset of the 7-concept frontier available after Batch 35, deferring `derivative-intro`/`riemann-sums`/`parametric-curves`) + Batch 37 (4, `continuity-types`/`ivt`/`derivative-intro`/`squeeze-theorem`, closing the 6-concept frontier available after Batch 36 down to 3, deferring `parametric-curves`/`riemann-sums`; `derivative-intro` is the domain's central payoff concept) + Batch 38 (3, `derivative-definition`/`parametric-curves`/`riemann-sums`, closing the ENTIRE 3-concept frontier available after Batch 37 with none deferred) + Batch 39 (4, `definite-integral`/`derivative-rules`/`differentiability`/`linearization`, selected from the 8-concept frontier available after Batch 38, deferring `lhopitals-rule`/`line-integrals`/`mean-value-theorem`/`multivariable-intro`; the first math.calc batch with zero Blueprint/KG metadata discrepancies across all 4 concepts) + Batch 40 (4, `antiderivatives`/`critical-points`/`higher-order-derivatives`/`product-rule`, selected from the 13-concept frontier available after Batch 39, sharing the tightest single-prerequisite coupling to `derivative-rules`; continued the zero-discrepancy streak for a fourth consecutive batch). Largest unstarted mathematics domain (76 concepts). |
 | `math.linalg` | 0/61 | not started |
 | `math.alg` | 59/59 | **CERTIFIED** (2026-09-11) — the fifth domain, closed this session. Wave 1 (11, levels 0–2, 2026-08-12) + Wave 2 (1, `like-terms`, 2026-08-12) + Wave 3 (3, `simplification`/`polynomial-operations`/`radicals`, 2026-09-11) + Wave 4 (5, `linear-equation-1var`/`polynomial-division`/`fractional-exponent`/`simplifying-radicals`/`radical-equations`, 2026-09-11) + Wave 5 (5, `inequality-1var`/`absolute-value-equations`/`linear-equation-2var`/`remainder-theorem`/`rationalizing-denominators`, 2026-09-11) + Wave 6 (3, `inequality-2var`/`system-linear-equations`/`factor-theorem`, 2026-09-11) + Wave 7 (4, `substitution-method`/`elimination-method`/`system-3var`/`factoring`, 2026-09-11) + Wave 8 (3, `factoring-gcf`/`factoring-special`/`rational-expressions`, 2026-09-11) + Wave 9 (4, `factoring-trinomials`/`rational-expressions-addition`/`rational-expressions-multiplication`/`rational-equations`, 2026-09-11) + Wave 10 (1, `quadratic-equation`, 2026-09-11) + Wave 11 (2, `completing-the-square`/`polynomial-roots`, 2026-09-11) + Wave 12 part 1 (1, `quadratic-formula`, 2026-09-11) + Wave 12 part 2 (2, `discriminant`/`rational-root-theorem`, 2026-09-11) + Wave 12 part 3 (3, `fundamental-theorem-algebra`/`polynomial-inequality`/`vietas-formulas`, 2026-09-11) + Wave 13 (2, `complex-polynomial-roots`/`rational-inequality`, 2026-09-11) + Batch 15 (1, `exponential-function`, 2026-09-11) + Batch 16 (2, `logarithm`/`exponential-equations`, 2026-09-11) + Batch 17 (3, `binomial-theorem`/`logarithm-properties`/`natural-logarithm`, 2026-09-11) + Batch 18 (3, `change-of-base`/`logarithmic-equations`/`pascals-triangle`, 2026-09-11) |
 | `math.de` | 0/56 | not started |
@@ -111,7 +113,7 @@ that do not resolve to a live KG concept id, across all six subjects.)*
 
 **Six domains certified** (math.found, math.geom, math.arith, math.nt, math.alg, math.func);
 math.disc and math.graph parked; math.calc the active standalone campaign (opened 2026-09-13),
-382 of 908. The six certified domains are the graph's
+386 of 908. The six certified domains are the graph's
 foundation layer; every remaining domain draws on at least one of them, so the prerequisite debt
 for the remaining 580 concepts is now substantially lower than the raw count suggests. math.disc
 and math.func were originally opened as small, deliberately bounded cross-domain excursions out of
@@ -187,7 +189,15 @@ unlocks/cross_links matched the live KG exactly. A fresh frontier check after Ba
 found 13 candidates ready (`antiderivatives`, `arc-length`, `chain-rule`,
 `critical-points`, `ftc-part1`, `higher-order-derivatives`, `improper-integrals`,
 `integral-area`, `lhopitals-rule`, `line-integrals`, `mean-value-theorem`,
-`multivariable-intro`, `product-rule`).
+`multivariable-intro`, `product-rule`). Batch 40 authored the 4 sharing the
+tightest single-prerequisite coupling to `derivative-rules` (`antiderivatives`,
+`critical-points`, `higher-order-derivatives`, `product-rule`), deferring
+`arc-length`/`chain-rule`/`ftc-part1`/`improper-integrals`/`integral-area`/
+`lhopitals-rule`/`line-integrals`/`mean-value-theorem`/`multivariable-intro`,
+bringing `math.calc` to 20/76. A fresh frontier check after Batch 40 found 11
+candidates ready (`arc-length`, `chain-rule`, `concavity`, `ftc-part1`,
+`improper-integrals`, `integral-area`, `lhopitals-rule`, `line-integrals`,
+`mean-value-theorem`, `multivariable-intro`, `quotient-rule`).
 
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
 | english | 216 | 216 | **100.00% COMPLETE (2026-08-11)** | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) — every English KG concept now has a full Educational Brain entry |

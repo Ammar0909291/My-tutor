@@ -3808,6 +3808,38 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   `multivariable-intro`, `product-rule`). This is a genuinely multi-session campaign;
   continuation should verify state via `scripts/math/state.ts` fresh each time rather than
   trusting any number recorded here.
+- **Batch 40 — math.calc: antiderivatives, critical points, higher-order derivatives,
+  the product rule** (2026-09-12): re-computed the frontier fresh — 13 candidates ready.
+  Selected the 4 sharing the tightest single-prerequisite coupling to `derivative-rules`
+  (`antiderivatives`, `critical-points`, `higher-order-derivatives`, `product-rule`),
+  deferring the 9 needing a second prerequisite or built on `definite-integral`. All 4
+  Blueprint-grounded, reused by reference. None carried an explicit birth-type column —
+  every misconception independently classified (`antiderivatives` MC-1
+  CONSTANT-OMISSION/MC-2 REVERSE-POWER-RULE-WRONG/MC-3 ANTIDERIVATIVE-IS-UNIQUE, all Type
+  1; `critical-points` MC-1 CRITICAL-POINT-ASSUMED-EXTREMUM Type 1 — a FOURTH recurrence
+  of the implication-reversal mechanism already documented for
+  `continuity-types`/`derivative-definition`/`differentiability` — MC-2
+  UNDEFINED-DERIVATIVE-CATEGORY-MISSED Type 5/MC-3
+  OUTSIDE-DOMAIN-POINT-TREATED-AS-CRITICAL Type 1; `higher-order-derivatives` MC-1
+  SECOND-DERIVATIVE-IS-FIRST-SQUARED Type 3/MC-2
+  NOTATION-D2Y-DX2-READ-AS-SQUARED-DERIVATIVE Type 4 (the Blueprint's own Teaching Notes
+  link MC-1/MC-2 as one mechanism at two levels)/MC-3
+  EXPONENT-SUBTRACTED-COEFFICIENT-IGNORED Type 1, plus a genuine Tier-1 cross-link to the
+  unauthored `math.de.second-order-ode`; `product-rule` MC-1
+  DERIVATIVE-DISTRIBUTED-OVER-PRODUCT Type 1 (the identical misconception already
+  documented as `derivative-rules`' own MC-3)/MC-2/MC-3 Type 5). **Fourth consecutive
+  batch with zero Blueprint/KG metadata discrepancies.** `math.calc` **20/76** (16→20).
+  Mathematics **386/908** (382→386), 749 remaining. Full per-concept detail in
+  `COVERAGE.md` Batch 40. Validated: KG validator PASS (908/908 reachable, file
+  untouched), `scripts/math/state.ts` confirms math.calc 20/76 and mathematics 386/908 (6
+  EB-certified domains unchanged), `tsc --noEmit` clean, targeted tests 479/479 passed,
+  all 4 heading structures diffed clean on the first pass (0 diffs each). No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Fresh math.calc
+  frontier computed: 11 candidates ready (`arc-length`, `chain-rule`, `concavity`,
+  `ftc-part1`, `improper-integrals`, `integral-area`, `lhopitals-rule`, `line-integrals`,
+  `mean-value-theorem`, `multivariable-intro`, `quotient-rule`). This is a genuinely
+  multi-session campaign; continuation should verify state via `scripts/math/state.ts`
+  fresh each time rather than trusting any number recorded here.
 
 ## Run locally
 ```
