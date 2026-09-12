@@ -3840,6 +3840,38 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   `mean-value-theorem`, `multivariable-intro`, `quotient-rule`). This is a genuinely
   multi-session campaign; continuation should verify state via `scripts/math/state.ts`
   fresh each time rather than trusting any number recorded here.
+- **Batch 41 — math.calc: concavity, the quotient rule, area by integration, FTC Part 1**
+  (2026-09-12): re-computed the frontier fresh — 11 candidates ready. Selected `concavity`
+  (single-prereq `higher-order-derivatives`), `quotient-rule` (single-prereq
+  `product-rule`), `integral-area` and `ftc-part1` (both built on `definite-integral`,
+  `ftc-part1`'s second prereq `continuity` long-authored), deferring `arc-length`/
+  `chain-rule`/`improper-integrals`/`lhopitals-rule`/`line-integrals`/
+  `mean-value-theorem`/`multivariable-intro`. All 4 Blueprint-grounded, reused by
+  reference. None carried an explicit birth-type column — every misconception
+  independently classified (`concavity` MC-1 SECOND-DERIVATIVE-ZERO-ASSUMED-INFLECTION
+  Type 1 — a FIFTH recurrence of the necessary-vs-sufficient candidate pattern already
+  documented for `critical-points`' own MC-1 — MC-2 CONCAVITY-CONFLATED-WITH-MONOTONICITY
+  Type 2/MC-3 INFLECTION-POINT-SEARCH-IGNORES-UNDEFINED-F-DOUBLE-PRIME Type 5, the same
+  mechanism as `critical-points`' own MC-2; `quotient-rule` MC-1
+  NUMERATOR-AND-DENOMINATOR-SWAPPED-AS-F-AND-G Type 4/MC-2
+  QUOTIENT-RULE-SUBTRACTION-ORDER-REVERSED Type 1; `integral-area` MC-1
+  AREA-UNDER-CURVE-ASSUMED-NEW-OPERATION Type 5 (same mechanism as `linearization`'s own
+  MC-1)/MC-2 TOP-BOTTOM-ORDER-ASSUMED-ARBITRARY Type 1 (same mechanism as this batch's
+  own `quotient-rule` MC-2)/MC-3 SIGNED-INTEGRAL-ASSUMED-TO-ALWAYS-GIVE-UNSIGNED-AREA
+  Type 3 (the inverse direction of `definite-integral`'s own MC-1); `ftc-part1` MC-1
+  VARIABLE-CONFUSION-T-AND-X Type 4/MC-2 LOWER-LIMIT-DETERMINES-FTC1 Type 5/MC-3
+  CHAIN-RULE-OMITTED Type 1). **Fifth consecutive batch with zero Blueprint/KG metadata
+  discrepancies.** `math.calc` **24/76** (20→24). Mathematics **390/908** (386→390), 745
+  remaining. Full per-concept detail in `COVERAGE.md` Batch 41. Validated: KG validator
+  PASS (908/908 reachable, file untouched), `scripts/math/state.ts` confirms math.calc
+  24/76 and mathematics 390/908 (6 EB-certified domains unchanged), `tsc --noEmit`
+  clean, targeted tests 479/479 passed, all 4 heading structures diffed clean on the
+  first pass (0 diffs each). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/
+  runtime file touched. Fresh math.calc frontier computed: 9 candidates ready
+  (`arc-length`, `chain-rule`, `ftc-part2`, `improper-integrals`, `lhopitals-rule`,
+  `line-integrals`, `mean-value-theorem`, `multivariable-intro`, `volume-revolution`).
+  This is a genuinely multi-session campaign; continuation should verify state via
+  `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
 
 ## Run locally
 ```
