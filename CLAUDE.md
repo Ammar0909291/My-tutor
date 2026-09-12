@@ -3601,6 +3601,23 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   `piecewise-function`). This is a genuinely multi-session campaign; continuation should verify
   state via `scripts/math/state.ts` fresh each time rather than trusting any number recorded
   here.
+- **Batch 31 — math.func: zeros, parity, transformations, periodicity** (2026-09-12):
+  re-computed the frontier fresh — the exact 8 concepts deferred from Batch 30 were confirmed
+  still ready; authored 4 (`zero-of-function`, `even-odd-functions`,
+  `transformations-functions`, `periodic-function`), deferring
+  `quadratic-function`/`exponential-function`/`logarithmic-function`/`piecewise-function` to a
+  future batch. All Blueprint-grounded, reused by reference, birth types adopted directly from
+  each Blueprint's own classification. `math.func` **17/29** (13→17) — only 12 concepts remain
+  before the domain reaches DOMAIN CERTIFICATION. Mathematics **354/908** (350→354), 781
+  remaining. No genuine content-overlap or Blueprint/KG metadata discrepancy found. Full
+  per-concept detail in `COVERAGE.md` Batch 31. Validated: KG validator PASS (908/908 reachable,
+  file untouched), 0 orphan/duplicate EB files, `tsc --noEmit` clean, targeted tests 479/479
+  passed, all 4 heading structures diffed clean on the first pass (0 diffs each). No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Fresh math.func
+  frontier computed: 4 candidates ready (`quadratic-function`, `exponential-function`,
+  `logarithmic-function`, `piecewise-function`). This is a genuinely multi-session campaign;
+  continuation should verify state via `scripts/math/state.ts` fresh each time rather than
+  trusting any number recorded here.
 
 ## Run locally
 ```
