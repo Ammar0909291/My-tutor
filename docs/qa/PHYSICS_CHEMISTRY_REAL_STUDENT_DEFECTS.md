@@ -184,8 +184,15 @@ here for accuracy, not performed as part of this task.
   two-simultaneous-sessions isolation the audit asks for is explicitly covered
   (`sessionIdentityMultiTab.test.ts`: "whereas two SESSIONS keep two pointers"), alongside
   CAS-conflict and clear-pointer cases.
-- **Status (superseded):** OPEN — this is a genuine architectural finding from the audit; no fix has been
-  made to `StudentProgress`'s per-user field design as of this compilation.
+- **Status (superseded, kept for history):** OPEN — this is a genuine architectural finding
+  from the audit; no fix has been made to `StudentProgress`'s per-user field design as of
+  this compilation.
+- **Status:** **FIXED** before this entry was written (`6e94a3c`), re-verified 2026-09-12.
+  The finding was real; the file was simply compiled against an older tree. Note the
+  premise that also needs correcting: `StudentProgress`'s per-user field design was NOT
+  changed and did not need to be — `activeLessonSlug` remains the session-less fallback,
+  and the lesson a SESSION is teaching moved to `LearnSession.contextSnapshot` instead. No
+  schema change was required to fix it.
 
 ### PCD-005 — Chemistry Defect-1 pattern (stale/duplicate `lessonComplete` across sessions)
 - **Subject/Concept:** Chemistry, checked at every 10-concept checkpoint across the full audit.
