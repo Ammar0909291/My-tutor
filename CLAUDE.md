@@ -3565,6 +3565,24 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   `monotonic-function`, `function-operations`). This is a genuinely multi-session campaign;
   continuation should verify state via `scripts/math/state.ts` fresh each time rather than
   trusting any number recorded here.
+- **Batch 29 — math.func: operations, composition, monotonicity, bijection** (2026-09-12):
+  re-computed the frontier fresh — 10 candidates confirmed ready; authored 4
+  (`function-operations`, `composition`, `monotonic-function`, `bijection`), deferring
+  `graph-of-function`/`real-valued-function`/`periodic-function`/`linear-function`/
+  `exponential-function`/`piecewise-function` to a future batch. All Blueprint-grounded.
+  `math.func` **5/29 → 9/29**. Mathematics **342/908 → 346/908**, 789 remaining. Genuine
+  Blueprint-staleness finding (`bijection`'s own Blueprint claims its `math.found.cardinality`
+  cross-link is unauthored; verified both files exist, since `math.found` was CERTIFIED
+  2026-07-26 — corrected in that entry's own Curriculum Feedback). Full per-concept detail in
+  `COVERAGE.md` Batch 29. Validated: KG validator PASS (908/908 reachable, file untouched), 0
+  orphan/duplicate EB files, `tsc --noEmit` clean, targeted tests 479/479 passed, all 4 heading
+  structures diffed clean on the first pass (0 diffs each). No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Fresh math.func
+  frontier computed: 7 candidates ready (`inverse-functions` newly unblocked by `bijection`;
+  `graph-of-function`, `real-valued-function`, `periodic-function`, `linear-function`,
+  `exponential-function`, `piecewise-function`). This is a genuinely multi-session campaign;
+  continuation should verify state via `scripts/math/state.ts` fresh each time rather than
+  trusting any number recorded here.
 
 ## Run locally
 ```
