@@ -3946,6 +3946,42 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   `implicit-differentiation` — `surface-area-integral`). This is a genuinely multi-session
   campaign; continuation should verify state via `scripts/math/state.ts` fresh each time
   rather than trusting any number recorded here.
+- **Batch 44 — math.calc: logarithmic differentiation, related rates, surface area of
+  revolution, integration by parts** (2026-09-12): re-fetched `main` (0 divergence, clean).
+  Re-computed the frontier fresh — the exact 10 candidates predicted at the end of Batch 43
+  were confirmed still ready. Selected 4 sharing either a single already-authored
+  prerequisite or two long-authored ones: `logarithmic-differentiation` (`derivative-ln`),
+  `related-rates` (`implicit-differentiation`), `surface-area-integral` (`arc-length`),
+  `integration-by-parts` (`u-substitution`+`product-rule`), deferring
+  `improper-integrals`/`lhopitals-rule`/`line-integrals`/`mean-value-theorem`/
+  `multivariable-intro`/`parametric-calculus`. All 4 Blueprint-grounded, none carrying an
+  explicit birth-type column — every misconception independently classified
+  (`logarithmic-differentiation` MC-1 Type 1 overgeneralizing the technique into a universal
+  substitute for simpler rules/MC-2 Type 5 the identical mechanism already documented for
+  `implicit-differentiation`'s own MC-2, omitting the final back-substitution step;
+  `related-rates` MC-1 Type 1 overgeneralizing the ordinary-algebra early-substitution habit
+  into an unsafe context/MC-2 Type 2 perceptual intuition that a degenerate rate result must
+  be a setup error; `surface-area-integral` MC-1 Type 1 overgeneralizing from the
+  superficially similar volume-of-revolution formula family, omitting the arc-length
+  factor/MC-2 Type 1 the same computational-slip class as `derivative-rules`' own MC-2;
+  `integration-by-parts` — three misconceptions, not two — MC-1 Type 5 instruction-induced
+  (the u/dv choice is algebraically valid either way, so nothing signals it carries a
+  consequence without an explicit backfire demonstration)/MC-2 Type 1 overgeneralizing from
+  simple single-application examples/MC-3 Type 1 the identical misapplied-"+C" mechanism
+  already documented for `ftc-part2`'s own MC-2). **All 4 concepts zero-discrepancy**, the
+  second consecutive all-4-zero-discrepancy batch; `integration-by-parts` unlocks
+  `math.calc.reduction-formulas`, confirmed matching the live KG exactly. `math.calc`
+  **36/76** (32→36). Mathematics **402/908** (398→402), 733 remaining. Full per-concept
+  detail in `COVERAGE.md` Batch 44. Validated: KG validator PASS (908/908 reachable, file
+  untouched), `scripts/math/state.ts` confirms math.calc 36/76 and mathematics 402/908 (6
+  EB-certified domains unchanged), `tsc --noEmit` clean, targeted tests 479/479 passed, all
+  4 heading structures diffed clean on the first pass (0 diffs each). No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Fresh math.calc
+  frontier computed: 7 candidates ready (`improper-integrals`, `lhopitals-rule`,
+  `line-integrals`, `mean-value-theorem`, `multivariable-intro`, `parametric-calculus`,
+  `reduction-formulas` — the last newly unblocked by `integration-by-parts`). This is a
+  genuinely multi-session campaign; continuation should verify state via
+  `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
 
 ## Physics Teacher Migration Architecture V2 — AUDITED, NOT ADOPTED (2026-09-12)
 
