@@ -3583,6 +3583,24 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   `exponential-function`, `piecewise-function`). This is a genuinely multi-session campaign;
   continuation should verify state via `scripts/math/state.ts` fresh each time rather than
   trusting any number recorded here.
+- **Batch 30 — math.func: inverses, graphs, real-valued functions, linear functions**
+  (2026-09-12): re-computed the frontier fresh — the exact 7 concepts deferred from Batch 29
+  were confirmed still ready; authored 4 (`inverse-functions`, `graph-of-function`,
+  `real-valued-function`, `linear-function`), deferring
+  `periodic-function`/`exponential-function`/`piecewise-function` to a future batch. All
+  Blueprint-grounded, reused by reference. `math.func` **9/29 → 13/29**. Mathematics
+  **346/908 → 350/908**, 785 remaining. No genuine content-overlap or Blueprint/KG metadata
+  discrepancy found in any of the 4 entries. Full per-concept detail in `COVERAGE.md` Batch 30.
+  Validated: KG validator PASS (908/908 reachable, file untouched), 0 orphan/duplicate EB files,
+  `tsc --noEmit` clean, targeted tests 479/479 passed, all 4 heading structures diffed clean on
+  the first pass (0 diffs each). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime
+  file touched. Fresh math.func frontier computed: 8 candidates ready (`zero-of-function`,
+  `even-odd-functions`, `transformations-functions` newly unblocked by `graph-of-function`;
+  `periodic-function`, `quadratic-function` newly unblocked by `linear-function`;
+  `exponential-function`, `logarithmic-function` newly unblocked by `inverse-functions`;
+  `piecewise-function`). This is a genuinely multi-session campaign; continuation should verify
+  state via `scripts/math/state.ts` fresh each time rather than trusting any number recorded
+  here.
 
 ## Run locally
 ```
