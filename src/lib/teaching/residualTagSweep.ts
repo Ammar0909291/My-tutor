@@ -78,13 +78,42 @@
  * mandatory terminator both still apply, so an ASCII arrow in prose is
  * untouched — `<-- back` is lowercase, and `<-- BACK` carries no `-->`.
  */
-const MACHINE_TAG_RE = /<!?-{1,3}\s*[A-Z][A-Z0-9_]{2,}\b[\s\S]*?(?:-->|\/>)/g
+/**
+ * ENG-D04 residual (2026-09-12, second pass): A THIRD OPENER VARIANT, `[!--`,
+ * PROVEN FROM THE RAW STORED MESSAGE.
+ *
+ * The first pass recorded the `eng.writing.supporting-details` (order 113, T9)
+ * instance as UNRESOLVED, because the audit log showed `[!--ATTEMPT` and the
+ * log is demonstrably lossy (the same line is truncated mid-attribute) — so a
+ * square bracket could have been the capture's own rendering of `<`. Marking
+ * it covered on that evidence was explicitly declined.
+ *
+ * The stored assistant message itself was then read out of production, which
+ * is the evidence that separates the two readings. It ends, verbatim:
+ *
+ *   🎉
+ *   [!--ATTEMPT channel="verbal" representation="concrete-object" … -->]
+ *
+ * The bracket is REAL and in the persisted content, and the terminator carries
+ * a trailing `]`: the model wrapped a comment in square brackets rather than
+ * mistyping one delimiter. Three variants are now measured from production —
+ * `<!--` (well-formed), `<--` (dropped `!`), `[!--` (bracket-wrapped) — which
+ * is this module's own header argument about tag NAMES holding equally for
+ * delimiters. The opener admits `[` alongside `<`, and the terminator admits an
+ * optional closing `]`, so the wrapper leaves no stray bracket behind.
+ *
+ * Nothing else is relaxed, and the bracket does not widen the blast radius: at
+ * least one dash is still mandatory after the opener, so a Markdown link
+ * (`[Chapter 2](…)`) and a citation (`[A]`) cannot match; the SHOUTED-name rule
+ * (uppercase token, 3+ chars) and the mandatory terminator both still apply.
+ */
+const MACHINE_TAG_RE = /[<[]!?-{1,3}\s*[A-Z][A-Z0-9_]{2,}\b[\s\S]*?(?:-->|\/>)\]?/g
 
 /** The OPENER alone — no terminator required. One definition serves the sweep's
  *  fast path and `hasResidualMachineTag`, so the three cannot drift apart again
  *  (they already had, which is how the malformed opener survived a widened
  *  MACHINE_TAG_RE). Not global: every use is a one-shot `.test`. */
-const MACHINE_TAG_OPENER_RE = /<!?-{1,3}\s*[A-Z][A-Z0-9_]{2,}\b/
+const MACHINE_TAG_OPENER_RE = /[<[]!?-{1,3}\s*[A-Z][A-Z0-9_]{2,}\b/
 
 /**
  * P1 (visual reference integrity, 2026-08-22): a raw HTML-ELEMENT-shaped
