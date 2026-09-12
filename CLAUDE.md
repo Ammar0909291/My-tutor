@@ -3872,6 +3872,44 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   `line-integrals`, `mean-value-theorem`, `multivariable-intro`, `volume-revolution`).
   This is a genuinely multi-session campaign; continuation should verify state via
   `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
+- **Batch 42 — math.calc: volumes of revolution, FTC Part 2, arc length, the chain rule**
+  (2026-09-12): re-synced `main` to `origin/main` (13 divergent English/physics/chemistry
+  defect-fix commits, zero overlap with mathematics files, fast-forward merge). Re-computed
+  the frontier fresh — the exact 9 candidates predicted at the end of Batch 41 were confirmed
+  still ready. Selected `volume-revolution` (single-prereq `integral-area`), `ftc-part2`
+  (`ftc-part1`+`antiderivatives`), `arc-length` (`definite-integral`+`derivative-rules`,
+  cross-link `math.geom.differential-geometry-curves` genuinely incorporated), `chain-rule`
+  (`derivative-rules`+`math.func.composition`), deferring `improper-integrals`/
+  `lhopitals-rule`/`line-integrals`/`mean-value-theorem`/`multivariable-intro`. All 4
+  Blueprint-grounded, none carrying an explicit birth-type column — every misconception
+  independently classified (`volume-revolution` MC-1 Type 1 disk-method overgeneralized past
+  its touches-the-axis boundary/MC-2 Type 5 shell-method undertaught; `ftc-part2` MC-1 Type 4
+  notation-induced bounds-swap/MC-2 Type 1 overgeneralized $+C$ from indefinite integrals/MC-3
+  Type 1 imported single-point-evaluation template; `arc-length` MC-1 Type 5 missing
+  Riemann-sum connection/MC-2 Type 2 perceptual slope-alone intuition/MC-3 Type 5 the same
+  missing-connection mechanism recurring at the parametric level; `chain-rule` MC-1 Type 1 —
+  the Blueprint's own declared foundational misconception, dropped inner-derivative factor,
+  paralleling `derivative-rules`' MC-2 — MC-2 Type 1 outer evaluated at $x$ not $g(x)$/MC-3
+  Type 1 product misclassified as composition, mirroring `derivative-rules`' MC-3 and
+  `product-rule`'s MC-1). **3 of 4 zero-discrepancy** (`volume-revolution`, `ftc-part2`,
+  `chain-rule`); `arc-length` carries one genuine discrepancy (Blueprint `mastery_threshold`
+  0.8/`estimated_hours` 6 vs. KG 0.7/5, resolved toward the KG, MAMR unaffected — both give
+  4/5 by coincidence of the ceiling function), breaking the five-consecutive-zero streak.
+  `chain-rule` also resolves a previously-open verification item: its Blueprint's stated
+  `unlocks: math.calc.implicit-differentiation` is confirmed to match the live KG exactly.
+  `math.calc` **28/76** (24→28). Mathematics **394/908** (390→394), 741 remaining. Full
+  per-concept detail in `COVERAGE.md` Batch 42. Validated: KG validator PASS (908/908
+  reachable, file untouched), `scripts/math/state.ts` confirms math.calc 28/76 and
+  mathematics 394/908 (6 EB-certified domains unchanged), `tsc --noEmit` clean, targeted
+  tests 479/479 passed, all 4 heading structures diffed clean on the first pass (0 diffs
+  each). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Fresh
+  math.calc frontier computed: 11 candidates ready (`derivative-exponential`,
+  `derivative-ln`, `implicit-differentiation` — newly unblocked by `chain-rule` —
+  `improper-integrals`, `lhopitals-rule`, `line-integrals`, `mean-value-theorem`,
+  `multivariable-intro`, `parametric-calculus`, `surface-area-integral`,
+  `u-substitution` — the last newly unblocked by `ftc-part2`). This is a genuinely
+  multi-session campaign; continuation should verify state via `scripts/math/state.ts`
+  fresh each time rather than trusting any number recorded here.
 
 ## Physics Teacher Migration Architecture V2 — AUDITED, NOT ADOPTED (2026-09-12)
 

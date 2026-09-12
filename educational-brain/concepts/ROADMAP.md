@@ -13,9 +13,9 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **390** mathematics + 238 physics + 216 english + 186 chemistry + 0 biology + 0 computer_science = **1,030** |
-| Remaining | **745** |
-| Completion percentage | **58.03%** |
+| Concepts with an Educational Brain entry | **394** mathematics + 238 physics + 216 english + 186 chemistry + 0 biology + 0 computer_science = **1,034** |
+| Remaining | **741** |
+| Completion percentage | **58.25%** |
 
 *(Recomputed programmatically 2026-09-13 against the live KG files and the
 live `educational-brain/concepts/` tree, mid-way through a dedicated
@@ -70,9 +70,12 @@ topologically-ready `math.calc` concepts — `derivative-definition`,
 concepts — `definite-integral`, `derivative-rules`, `differentiability`,
 `linearization`), Batch 40 (4 more `math.calc` concepts —
 `antiderivatives`, `critical-points`, `higher-order-derivatives`,
-`product-rule`), and Batch 41 (4 more `math.calc` concepts — `concavity`,
-`quotient-rule`, `integral-area`, `ftc-part1`) together brought
-mathematics from 257 to 390.
+`product-rule`), Batch 41 (4 more `math.calc` concepts — `concavity`,
+`quotient-rule`, `integral-area`, `ftc-part1`), and Batch 42 (4 more
+`math.calc` concepts — `volume-revolution`, `ftc-part2`, `arc-length`,
+`chain-rule`; 3 of 4 zero-discrepancy, `arc-length` a genuine
+Blueprint/KG mastery_threshold+estimated_hours discrepancy resolved
+toward the KG) together brought mathematics from 257 to 394.
 Cross-checked: 0 orphan EB files, 0 duplicate EB files, 0 EB filenames
 that do not resolve to a live KG concept id, across all six subjects.)*
 
@@ -82,7 +85,7 @@ that do not resolve to a live KG concept id, across all six subjects.)*
 
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
-| mathematics | 908 | 390 | 42.95% | `math.found.mathematical-thinking` | **Yes** |
+| mathematics | 908 | 394 | 43.39% | `math.found.mathematical-thinking` | **Yes** |
 
 **Mathematics per-domain state (recomputed 2026-09-12, programmatic):**
 
@@ -92,7 +95,7 @@ that do not resolve to a live KG concept id, across all six subjects.)*
 | `math.geom` | 69/69 | **CERTIFIED** — closed by commit `0d2c76dd`'s Wave 0 recovery |
 | `math.arith` | 58/58 | **CERTIFIED** (2026-07-26) |
 | `math.nt` | 36/36 | **CERTIFIED** (2026-08-12) — closed by this session's Phase 1 batch |
-| `math.calc` | 24/76 | **STANDALONE CAMPAIGN, IN PROGRESS (2026-09-12)** — Batch 35 (1, `limits`), the domain's entry node, selected as the highest-leverage next step after math.func's certification (verified programmatically: authoring `limits` alone unblocks 7 further `math.calc` concepts at once) + Batch 36 (4, `one-sided-limits`/`limit-laws`/`limits-at-infinity`/`continuity`, closing the entire 4-concept selected subset of the 7-concept frontier available after Batch 35, deferring `derivative-intro`/`riemann-sums`/`parametric-curves`) + Batch 37 (4, `continuity-types`/`ivt`/`derivative-intro`/`squeeze-theorem`, closing the 6-concept frontier available after Batch 36 down to 3, deferring `parametric-curves`/`riemann-sums`; `derivative-intro` is the domain's central payoff concept) + Batch 38 (3, `derivative-definition`/`parametric-curves`/`riemann-sums`, closing the ENTIRE 3-concept frontier available after Batch 37 with none deferred) + Batch 39 (4, `definite-integral`/`derivative-rules`/`differentiability`/`linearization`, selected from the 8-concept frontier available after Batch 38, deferring `lhopitals-rule`/`line-integrals`/`mean-value-theorem`/`multivariable-intro`; the first math.calc batch with zero Blueprint/KG metadata discrepancies across all 4 concepts) + Batch 40 (4, `antiderivatives`/`critical-points`/`higher-order-derivatives`/`product-rule`, selected from the 13-concept frontier available after Batch 39, sharing the tightest single-prerequisite coupling to `derivative-rules`; continued the zero-discrepancy streak for a fourth consecutive batch) + Batch 41 (4, `concavity`/`quotient-rule`/`integral-area`/`ftc-part1`, selected from the 11-concept frontier available after Batch 40; fifth consecutive zero-discrepancy batch). Largest unstarted mathematics domain (76 concepts). |
+| `math.calc` | 28/76 | **STANDALONE CAMPAIGN, IN PROGRESS (2026-09-12)** — Batch 35 (1, `limits`), the domain's entry node, selected as the highest-leverage next step after math.func's certification (verified programmatically: authoring `limits` alone unblocks 7 further `math.calc` concepts at once) + Batch 36 (4, `one-sided-limits`/`limit-laws`/`limits-at-infinity`/`continuity`, closing the entire 4-concept selected subset of the 7-concept frontier available after Batch 35, deferring `derivative-intro`/`riemann-sums`/`parametric-curves`) + Batch 37 (4, `continuity-types`/`ivt`/`derivative-intro`/`squeeze-theorem`, closing the 6-concept frontier available after Batch 36 down to 3, deferring `parametric-curves`/`riemann-sums`; `derivative-intro` is the domain's central payoff concept) + Batch 38 (3, `derivative-definition`/`parametric-curves`/`riemann-sums`, closing the ENTIRE 3-concept frontier available after Batch 37 with none deferred) + Batch 39 (4, `definite-integral`/`derivative-rules`/`differentiability`/`linearization`, selected from the 8-concept frontier available after Batch 38, deferring `lhopitals-rule`/`line-integrals`/`mean-value-theorem`/`multivariable-intro`; the first math.calc batch with zero Blueprint/KG metadata discrepancies across all 4 concepts) + Batch 40 (4, `antiderivatives`/`critical-points`/`higher-order-derivatives`/`product-rule`, selected from the 13-concept frontier available after Batch 39, sharing the tightest single-prerequisite coupling to `derivative-rules`; continued the zero-discrepancy streak for a fourth consecutive batch) + Batch 41 (4, `concavity`/`quotient-rule`/`integral-area`/`ftc-part1`, selected from the 11-concept frontier available after Batch 40; fifth consecutive zero-discrepancy batch) + Batch 42 (4, `volume-revolution`/`ftc-part2`/`arc-length`/`chain-rule`, closing the 9-concept frontier's tightest-coupled subset available after Batch 41; 3 of 4 zero-discrepancy, `arc-length` a genuine Blueprint/KG `mastery_threshold`(0.8 vs 0.7)+`estimated_hours`(6 vs 5) discrepancy resolved toward the KG, MAMR unaffected by coincidence of the ceiling function). Largest unstarted mathematics domain (76 concepts). |
 | `math.linalg` | 0/61 | not started |
 | `math.alg` | 59/59 | **CERTIFIED** (2026-09-11) — the fifth domain, closed this session. Wave 1 (11, levels 0–2, 2026-08-12) + Wave 2 (1, `like-terms`, 2026-08-12) + Wave 3 (3, `simplification`/`polynomial-operations`/`radicals`, 2026-09-11) + Wave 4 (5, `linear-equation-1var`/`polynomial-division`/`fractional-exponent`/`simplifying-radicals`/`radical-equations`, 2026-09-11) + Wave 5 (5, `inequality-1var`/`absolute-value-equations`/`linear-equation-2var`/`remainder-theorem`/`rationalizing-denominators`, 2026-09-11) + Wave 6 (3, `inequality-2var`/`system-linear-equations`/`factor-theorem`, 2026-09-11) + Wave 7 (4, `substitution-method`/`elimination-method`/`system-3var`/`factoring`, 2026-09-11) + Wave 8 (3, `factoring-gcf`/`factoring-special`/`rational-expressions`, 2026-09-11) + Wave 9 (4, `factoring-trinomials`/`rational-expressions-addition`/`rational-expressions-multiplication`/`rational-equations`, 2026-09-11) + Wave 10 (1, `quadratic-equation`, 2026-09-11) + Wave 11 (2, `completing-the-square`/`polynomial-roots`, 2026-09-11) + Wave 12 part 1 (1, `quadratic-formula`, 2026-09-11) + Wave 12 part 2 (2, `discriminant`/`rational-root-theorem`, 2026-09-11) + Wave 12 part 3 (3, `fundamental-theorem-algebra`/`polynomial-inequality`/`vietas-formulas`, 2026-09-11) + Wave 13 (2, `complex-polynomial-roots`/`rational-inequality`, 2026-09-11) + Batch 15 (1, `exponential-function`, 2026-09-11) + Batch 16 (2, `logarithm`/`exponential-equations`, 2026-09-11) + Batch 17 (3, `binomial-theorem`/`logarithm-properties`/`natural-logarithm`, 2026-09-11) + Batch 18 (3, `change-of-base`/`logarithmic-equations`/`pascals-triangle`, 2026-09-11) |
 | `math.de` | 0/56 | not started |
@@ -207,7 +210,19 @@ deferring `arc-length`/`chain-rule`/`improper-integrals`/`lhopitals-rule`/
 to 24/76. A fresh frontier check after Batch 41 found 9 candidates ready
 (`arc-length`, `chain-rule`, `ftc-part2`, `improper-integrals`, `lhopitals-rule`,
 `line-integrals`, `mean-value-theorem`, `multivariable-intro`,
-`volume-revolution`).
+`volume-revolution`). Batch 42 authored `volume-revolution` (single-prerequisite
+on `integral-area`), `ftc-part2` (two prerequisites, `ftc-part1`+`antiderivatives`,
+both already authored), `arc-length` (two prerequisites, `definite-integral`+
+`derivative-rules`, both long-authored), and `chain-rule` (two prerequisites,
+`derivative-rules`+`math.func.composition`, both long-authored) — closing the
+entire 9-concept frontier's tightest-coupled subset, deferring
+`improper-integrals`/`lhopitals-rule`/`line-integrals`/`mean-value-theorem`/
+`multivariable-intro`, bringing `math.calc` to 28/76. A fresh frontier check
+after Batch 42 found 11 candidates ready (`derivative-exponential`,
+`derivative-ln`, `implicit-differentiation` — newly unblocked by `chain-rule` —
+`improper-integrals`, `lhopitals-rule`, `line-integrals`, `mean-value-theorem`,
+`multivariable-intro`, `parametric-calculus`, `surface-area-integral`,
+`u-substitution` — the last newly unblocked by `ftc-part2`).
 
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
 | english | 216 | 216 | **100.00% COMPLETE (2026-08-11)** | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) — every English KG concept now has a full Educational Brain entry |
