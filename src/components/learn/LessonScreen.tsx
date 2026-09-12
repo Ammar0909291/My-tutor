@@ -2430,7 +2430,25 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
           : m)
         : [...p, { id: aid, role: 'assistant' as const, content: data.text as string, ts: Date.now(), streaming: true, revealedLength: 0, provider: data.provider, llmCallCount: data.llmCallCount }])
       revealStarted = true
-      revealAssistantMessage(aid, stripCode(data.text as string), () => setIsStreaming(false))
+      // FIRST-MESSAGE SILENT FAILURE (real-student report). A disabled
+      // textarea auto-blurs in every browser, and `disabled={isStreaming ||
+      // !sessionId}` on the composer means the field loses focus for the
+      // entire lesson-opening reveal, exactly the window a learner is most
+      // likely to start typing their first question in. The two sibling
+      // reveal call sites (sendMessage, sendImageMessage) both already
+      // restore focus in their own onDone; this one — the lesson-opening
+      // path, reached by every restart/resume/next/review — was the one
+      // missing it, so a learner's very first keystrokes after the intro
+      // finished went to nothing: the textarea was enabled again but never
+      // refocused, so typing (and Enter) had nowhere to land. Silent to the
+      // learner and to the network — no fetch, no bubble, no error — exactly
+      // "zero network requests" until they clicked directly into the field
+      // (or the Send button) themselves. Matches the sibling sites'
+      // behaviour exactly; no new mechanism.
+      revealAssistantMessage(aid, stripCode(data.text as string), () => {
+        setIsStreaming(false)
+        textareaRef.current?.focus()
+      })
       // CompactLessonProgressBar reads masteryState.phase, which this
       // endpoint's response never carries (lesson-init is intentionally
       // minimal and skips the mastery-gate pipeline — see its own header

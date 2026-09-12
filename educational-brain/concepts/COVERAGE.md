@@ -11,7 +11,7 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 325 | **Five domains CERTIFIED, math.disc now a standalone campaign at 20/32.** 82 `math.found.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 69 `math.geom.*` (**COMPLETE, DOMAIN CERTIFIED** — the final 13 entries were restored by commit `0d2c76dd`'s Wave 0 recovery, which this row previously did not reflect) + 36 `math.nt.*` (**COMPLETE, DOMAIN CERTIFIED 2026-08-12** — the domain's final 8 concepts, `prime-distribution`, `continued-fractions`, `analytic-number-theory`, `prime-number-theorem`, `riemann-hypothesis`, `algebraic-number-theory`, `algebraic-integers`, `number-fields`, were authored this session, ending the PARKED status this row previously recorded) + 59 `math.alg.*` (**COMPLETE, DOMAIN CERTIFIED 2026-09-11** — Wave 1 (2026-08-12, 11 concepts): `expression`, `equation`, `term`, `coefficient`, `exponent-rules`, `polynomial`, `degree`, `zero-exponent`, `negative-exponent`, `solution-set`, `inequality`; Wave 2 (2026-08-12, 1 concept): `like-terms`; Wave 3 (2026-09-11, 3 concepts): `simplification`, `polynomial-operations`, `radicals`; Wave 4 (2026-09-11, 5 concepts): `linear-equation-1var`, `polynomial-division`, `fractional-exponent`, `simplifying-radicals`, `radical-equations`; Wave 5 (2026-09-11, 5 concepts): `inequality-1var`, `absolute-value-equations`, `linear-equation-2var`, `remainder-theorem`, `rationalizing-denominators`; Wave 6 (2026-09-11, 3 concepts): `inequality-2var`, `system-linear-equations`, `factor-theorem`; Wave 7 (2026-09-11, 4 concepts): `substitution-method`, `elimination-method`, `system-3var`, `factoring`; Wave 8 (2026-09-11, 3 concepts): `factoring-gcf`, `factoring-special`, `rational-expressions`; Wave 9 (2026-09-11, 4 concepts): `factoring-trinomials`, `rational-expressions-addition`, `rational-expressions-multiplication`, `rational-equations`; Wave 10 (2026-09-11, 1 concept): `quadratic-equation`; Wave 11 (2026-09-11, 2 concepts): `completing-the-square`, `polynomial-roots`; Wave 12 part 1 (2026-09-11, 1 concept): `quadratic-formula`; Wave 12 part 2 (2026-09-11, 2 concepts): `discriminant`, `rational-root-theorem`; Wave 12 part 3 (2026-09-11, 3 concepts): `fundamental-theorem-algebra`, `polynomial-inequality`, `vietas-formulas`; Wave 13 (2026-09-11, 2 concepts): `complex-polynomial-roots`, `rational-inequality`; Batch 15 (2026-09-11, 1 concept): `exponential-function`; Batch 16 (2026-09-11, 2 concepts): `logarithm`, `exponential-equations`; Batch 17 (2026-09-11, 3 concepts): `binomial-theorem`, `logarithm-properties`, `natural-logarithm`; Batch 18 (2026-09-11, 3 concepts, FINAL): `change-of-base`, `logarithmic-equations`, `pascals-triangle`; all Blueprint-grounded, reused by reference). 20 `math.disc.*` entries (**IN PROGRESS, standalone campaign since math.alg's certification** —
+| mathematics | 908 | 358 | **Five domains CERTIFIED, math.disc at 20/32 (parked), math.graph at 13/16 (parked), math.func the active campaign at 21/29.** 82 `math.found.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 69 `math.geom.*` (**COMPLETE, DOMAIN CERTIFIED** — the final 13 entries were restored by commit `0d2c76dd`'s Wave 0 recovery, which this row previously did not reflect) + 36 `math.nt.*` (**COMPLETE, DOMAIN CERTIFIED 2026-08-12** — the domain's final 8 concepts, `prime-distribution`, `continued-fractions`, `analytic-number-theory`, `prime-number-theorem`, `riemann-hypothesis`, `algebraic-number-theory`, `algebraic-integers`, `number-fields`, were authored this session, ending the PARKED status this row previously recorded) + 59 `math.alg.*` (**COMPLETE, DOMAIN CERTIFIED 2026-09-11** — Wave 1 (2026-08-12, 11 concepts): `expression`, `equation`, `term`, `coefficient`, `exponent-rules`, `polynomial`, `degree`, `zero-exponent`, `negative-exponent`, `solution-set`, `inequality`; Wave 2 (2026-08-12, 1 concept): `like-terms`; Wave 3 (2026-09-11, 3 concepts): `simplification`, `polynomial-operations`, `radicals`; Wave 4 (2026-09-11, 5 concepts): `linear-equation-1var`, `polynomial-division`, `fractional-exponent`, `simplifying-radicals`, `radical-equations`; Wave 5 (2026-09-11, 5 concepts): `inequality-1var`, `absolute-value-equations`, `linear-equation-2var`, `remainder-theorem`, `rationalizing-denominators`; Wave 6 (2026-09-11, 3 concepts): `inequality-2var`, `system-linear-equations`, `factor-theorem`; Wave 7 (2026-09-11, 4 concepts): `substitution-method`, `elimination-method`, `system-3var`, `factoring`; Wave 8 (2026-09-11, 3 concepts): `factoring-gcf`, `factoring-special`, `rational-expressions`; Wave 9 (2026-09-11, 4 concepts): `factoring-trinomials`, `rational-expressions-addition`, `rational-expressions-multiplication`, `rational-equations`; Wave 10 (2026-09-11, 1 concept): `quadratic-equation`; Wave 11 (2026-09-11, 2 concepts): `completing-the-square`, `polynomial-roots`; Wave 12 part 1 (2026-09-11, 1 concept): `quadratic-formula`; Wave 12 part 2 (2026-09-11, 2 concepts): `discriminant`, `rational-root-theorem`; Wave 12 part 3 (2026-09-11, 3 concepts): `fundamental-theorem-algebra`, `polynomial-inequality`, `vietas-formulas`; Wave 13 (2026-09-11, 2 concepts): `complex-polynomial-roots`, `rational-inequality`; Batch 15 (2026-09-11, 1 concept): `exponential-function`; Batch 16 (2026-09-11, 2 concepts): `logarithm`, `exponential-equations`; Batch 17 (2026-09-11, 3 concepts): `binomial-theorem`, `logarithm-properties`, `natural-logarithm`; Batch 18 (2026-09-11, 3 concepts, FINAL): `change-of-base`, `logarithmic-equations`, `pascals-triangle`; all Blueprint-grounded, reused by reference). 20 `math.disc.*` entries (**IN PROGRESS, standalone campaign since math.alg's certification** —
 Batch 14 (2026-09-11, 1 concept): `counting-principles`; Batch 15 (2026-09-11, 1 concept):
 `permutations`; Batch 16 (2026-09-11, 1 concept): `combinations`; Batch 19 (2026-09-11, 5
 concepts): `combinatorics`, `pigeonhole`, `stars-bars`, `inclusion-exclusion`,
@@ -23,8 +23,37 @@ concepts): `combinatorics`, `pigeonhole`, `stars-bars`, `inclusion-exclusion`,
 developing the graph-theory subtree; Batch 23 (2026-09-11, 1 concept): `spanning-tree` —
 closing the `graph-trees → spanning-tree` chain, leaving 0 topologically-ready math.disc
 candidates; all Blueprint-grounded, reused by reference) + 1
-`math.func.*` entry (`function-concept`, parked at 1/29, its own math.alg-serving purpose fully
-served). All
+`math.func.*` entries (**STANDALONE CAMPAIGN, IN PROGRESS, 2026-09-12** — `function-concept`
+(Batch 14) + Batch 28 (2026-09-12, 4 concepts): `domain-range`, `function-notation`,
+`injectivity`, `surjectivity`; resumed after both `math.disc` and `math.graph` were found
+PARKED with 0 topologically-ready candidates, while `math.func` alone had 13 ready, all gated
+only on the already-authored `function-concept`; Batch 29 (2026-09-12, 4 concepts):
+`function-operations`, `composition`, `monotonic-function`, `bijection` — closing 4 of the 10
+concepts left ready after Batch 28, one of which (`bijection`) corrected a stale Blueprint
+cross-link claim about its own `math.found.cardinality` sibling; Batch 30 (2026-09-12, 4
+concepts): `inverse-functions`, `graph-of-function`, `real-valued-function`, `linear-function` —
+closing 4 of the 7 concepts left ready after Batch 29; Batch 31 (2026-09-12, 4 concepts):
+`zero-of-function`, `even-odd-functions`, `transformations-functions`, `periodic-function` —
+closing 4 of the 8 concepts left ready after Batch 30, all 4 Blueprint-grounded with birth types
+adopted directly from each Blueprint's own classification (independently confirmed); Batch 32
+(2026-09-12, 4 concepts): `quadratic-function`, `exponential-function`, `logarithmic-function`,
+`piecewise-function` — closing the ENTIRE 4-concept frontier available after Batch 31, all
+Blueprint-grounded, reused by reference; 3 further concepts already topologically ready:
+`vertex-form`, `polynomial-function` (newly unblocked by `quadratic-function`), `step-function`
+(newly unblocked by `piecewise-function`) — only 8 concepts remain before the domain reaches
+DOMAIN CERTIFICATION) + 13 `math.graph.*` entries (**PARKED, opened 2026-09-12** — Batch 24 (2026-09-12,
+3 concepts): `graph`, `tree`, `minimum-spanning-tree`; opened because every one of `math.disc`'s
+own graph-theory entries had already named a `math.graph` sibling as a Blueprint-exists-no-EB-yet
+cross-link; Batch 25 (2026-09-12, 4 concepts): `connectivity`, `eulerian-circuit`,
+`hamiltonian-cycle`, `graph-coloring` — closing all 4 concepts left ready after Batch 24, one of
+which (`graph-coloring`) corrected a stale Blueprint cross-link claim about its own
+`math.disc.graph-coloring` sibling; Batch 26 (2026-09-12, 3 concepts): `graph-invariants`,
+`graph-operations`, `matching` — closing 3 of the 6 concepts left ready after Batch 25; Batch 27
+(2026-09-12, 3 concepts): `maximum-flow`, `ramsey-theory`, `extremal-graph-theory` — closing the
+final 3 topologically-ready concepts, all Blueprint-grounded, reused by reference. math.graph is
+now PARKED at 13/16: its remaining 3 concepts (`shortest-path`, `algebraic-graph-theory`,
+`random-graph`) each require a cross-domain prerequisite outside math.graph that is not yet
+authored). All
 confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired —
 0 known violations remain in mathematics. See Delivery history for full per-concept lists and
 misconception detail. |
@@ -6337,3 +6366,584 @@ files; `npx tsc --noEmit` clean; targeted tests `mathPackageCorpus.test.ts` +
 `mathematicsAssetContract.test.ts` 479/479 passed. The new entry's heading structure diffed
 clean against `math.alg.like-terms.md` on the first pass (0 diffs). No Physics, Chemistry,
 English, Biology, Computer Science, KG, Blueprint, or runtime file was modified.
+
+### Batch 24 — opening `math.graph` (graph theory's deeper-formalism domain)
+
+With `math.disc` at 0 topologically-ready candidates (Batch 23's conclusion) and its remaining 12
+concepts all blocked on prerequisites entirely outside the domain, computed the full topologically-
+ready frontier across ALL mathematics domains rather than restricting to math.disc/math.func.
+Result: `math.graph` had 7 ready candidates (`connectivity`, `eulerian-circuit`, `graph`,
+`graph-coloring`, `hamiltonian-cycle`, `minimum-spanning-tree`, `tree`) — every one gated on ONLY
+its already-authored `math.disc` sibling, since `math.disc`'s own graph-theory entries
+(`graph`, `graph-connectivity`, `graph-trees`, `euler-hamiltonian`, `graph-coloring`) had each
+already named a `math.graph` counterpart as a genuine Blueprint-exists-no-EB-yet cross-link
+throughout Batches 20-22. `math.func` had 13 ready candidates (the `function-concept` children);
+`math.graph` was selected because its content is a genuinely DEEPER formalism paralleling
+already-authored `math.disc` content (Menger's theorem, Cayley's formula/Prüfer sequences,
+Kruskal's/Prim's algorithms via the cut/cycle properties) rather than a fresh, unrelated subject
+area, and because opening it retroactively closes several outstanding "Blueprint exists, no EB
+yet" cross-link notes recorded in already-authored `math.disc` entries. Authored a coherent
+3-concept subset (the domain root plus the tree/MST pair), deferring the coloring/connectivity/
+Eulerian-Hamiltonian family to a future batch.
+
+- **`math.graph.graph`** (developing/understand, mastery 0.9, MAMR 5/5, 3 hr, requires
+  `math.found.set-theory` only, unlocks `connectivity`/`tree`, cross-link
+  `math.disc.graph` already authored) — the domain's root node; explicitly does NOT re-teach
+  `math.disc.graph`'s vertex/edge/directed/self-loop/Handshaking-Lemma content (that entry's own
+  division of labor, stated in its Blueprint's Component 7), instead developing ORDER/SIZE
+  notation ($n=|V|$, $m=|E|$) and two genuine structural generalizations: WEIGHTED graphs (a
+  numeric label on top of an already-existing edge, never a different structure) and MULTIGRAPHS
+  (more than one edge between the same pair, with degree counting edge-incidences, not distinct
+  neighbors). 3 misconceptions, birth types independently derived since the Blueprint pre-assigns
+  none: MC-1 ORDER-SIZE-ASSUMED-EQUAL (Type 1, moderate), MC-2 WEIGHTED-GRAPH-DIFFERENT-OBJECT
+  (Type 2, moderate), MC-3 MULTIGRAPH-DEGREE-BY-NEIGHBOR-COUNT (Type 1, foundational).
+- **`math.graph.tree`** (proficient/understand, mastery 0.9, MAMR 5/5, 3 hr, requires
+  `math.disc.graph-trees` only, unlocks `minimum-spanning-tree`, cross-link
+  `math.disc.graph-trees` already authored) — the six equivalent tree characterizations (any two
+  of connected/acyclic/$m=n-1$ force the third — a proof TOOL, not three independent checks);
+  rooted trees, forests, and spanning trees; Cayley's formula $n^{n-2}$ proved via the Prüfer
+  sequence bijection, including the degree-multiplicity read ($\deg_T(v)-1$ from a vertex's
+  sequence multiplicity) that makes the sequence transparent rather than opaque. 3 misconceptions:
+  MC-1 TREE-REQUIRES-THREE-PROPERTIES (Type 1, foundational), MC-2
+  PRUFER-SEQUENCE-ENCODES-STRUCTURE-NOT-DEGREES (Type 4, moderate), MC-3
+  CAYLEY-COUNTS-UNLABELED-TREES (Type 3, moderate — labeled-vs-unlabeled tree counts).
+- **`math.graph.minimum-spanning-tree`** (proficient/apply, mastery 0.85, MAMR 5/5, 4 hr,
+  requires `math.disc.spanning-tree` only, no unlocks) — the cut property and cycle property as
+  the unifying justification for BOTH Kruskal's (sort-and-add, restricted by cycle-avoidance) and
+  Prim's (frontier-growth, restricted by cut-crossing) algorithms — genuinely rare cases where
+  greedy provably works; the sufficient-not-necessary relationship between distinct edge weights
+  and MST uniqueness; and the MST-vs-shortest-path-tree distinction (cheapest to connect everyone
+  vs. fastest from one source). 3 misconceptions: MC-1 GREEDY-ALWAYS-GIVES-MST (Type 1,
+  foundational), MC-2 UNIQUE-WEIGHTS-NOT-REQUIRED-FOR-UNIQUENESS (Type 4, moderate), MC-3
+  MST-GIVES-SHORTEST-PATHS (Type 6, critical). A genuine Blueprint-staleness finding (not a
+  Blueprint/KG metadata mismatch): the Blueprint's own Component 7 and Validation Checklist
+  record `math.disc.spanning-tree` as MISSING and declare independence mode — accurate when the
+  Blueprint was authored, but stale now that `math.disc.spanning-tree` was authored in Batch 23 of
+  this same campaign; this EB entry's own Transfer Connections substantively incorporate that
+  now-authored concept, correcting the staleness without modifying the Blueprint file itself.
+
+`math.graph` **0/16 → 3/16**. `math.disc`/`math.func` unchanged this batch (20/32 and 1/29,
+parked). Mathematics **325/908 → 328/908**, 807 remaining. No genuine content-overlap found
+beyond the one deliberate, explicitly-recorded Blueprint-staleness correction above. All tracking
+files updated in the same commit: `ROADMAP.md` Section 1/2 totals and domain table regenerated
+from source (new `math.graph` row, updated summary paragraph), `COVERAGE.md`'s mathematics
+summary row and this Delivery history entry, `CLAUDE.md`'s campaign section.
+`EDUCATIONAL_BRAIN_INDEX.md` and `QUALITY.md` again deferred (same generated-artifact rationale
+as prior batches). Validated: `npx tsx scripts/validate-knowledge-graph.ts
+docs/mathematics/kg/graph.json` PASS, 908/908 reachable, 0 failures, 0 warnings (KG file
+untouched); `scripts/math/state.ts` confirms math.graph 3/16 and mathematics 328/908, 0 orphan EB
+files, 0 duplicate EB files; `npx tsc --noEmit` clean; targeted tests `mathPackageCorpus.test.ts`
++ `mathematicsAssetContract.test.ts` 479/479 passed. All 3 new entries' heading structure diffed
+clean against `math.alg.like-terms.md` on the first pass (0 diffs each). Fresh `math.graph`
+frontier computed: 4 candidates ready (`connectivity`, `eulerian-circuit`, `hamiltonian-cycle`,
+`graph-coloring`), each gated on only its already-authored `math.disc` sibling. No Physics,
+Chemistry, English, Biology, Computer Science, KG, Blueprint, or runtime file was modified.
+
+### Batch 25 — closing math.graph's post-Batch-24 frontier (2026-09-12)
+
+Re-computed the frontier fresh (per this program's own standing discipline) — the exact 4
+concepts left ready after Batch 24 were confirmed still ready: `connectivity`, `eulerian-circuit`,
+`hamiltonian-cycle`, `graph-coloring`, each gated on only its already-authored `math.disc`
+sibling. All 4 authored this batch, Blueprint-grounded, reused by reference.
+
+- **`math.graph.connectivity`** (proficient/analyze, requires `math.disc.graph-connectivity`
+  only, cross-link `math.disc.graph-connectivity` already authored) — the quantitative
+  refinement of that entry's binary connectedness notion: vertex connectivity $\kappa(G)$, edge
+  connectivity $\lambda(G)$, the inequality $\kappa(G)\le\lambda(G)\le\delta(G)$, and Menger's
+  theorem at orientation level (max vertex-disjoint paths = min vertex cut). 3 misconceptions,
+  birth types independently derived (Blueprint pre-assigns none): MC-1
+  BINARY-CONNECTEDNESS-ASSUMED-SUFFICIENT (Type 1, foundational), MC-2
+  KAPPA-LAMBDA-DELTA-INEQUALITY-ASSUMED-COINCIDENTAL (Type 1, high), MC-3
+  MENGERS-THEOREM-ASSUMED-LOOSE-CORRELATION (Type 2, moderate).
+- **`math.graph.eulerian-circuit`** (proficient/apply, requires `math.disc.euler-hamiltonian`
+  only, cross-link `math.disc.euler-hamiltonian` already authored) — Euler's theorem (iff
+  even-degree/exactly-two-odd), Hierholzer's algorithm, Eulerian digraphs, plus an
+  introductory-depth Hamiltonian survey (Dirac's/Ore's theorems as sufficient-not-necessary) and
+  the Eulerian-vs-Hamiltonian complexity asymmetry ($O(n+m)$ vs. NP-complete). 3 misconceptions:
+  MC-1 EULERIAN-CIRCUIT-REQUIRES-EVEN-NUMBER-OF-EDGES (Type 4, moderate — Blueprint-pre-assigned,
+  independently confirmed), MC-2 DIRAC-IMPLIES-HAMILTONICITY-IS-NECESSARY (Type 4, critical,
+  same), MC-3 EULERIAN-IMPLIES-HAMILTONIAN (Type 6, moderate, same — directly cross-referenced to
+  the identically-named misconception already registered in `math.disc.euler-hamiltonian`'s own
+  MC-3). Documented a genuine content-overlap in its own Curriculum Feedback: its Blueprint's
+  Dirac's-theorem survey substantially overlaps `math.graph.hamiltonian-cycle`'s own Blueprint,
+  which develops the identical theorem (same wheel-graph $W_5$ example) in far greater depth —
+  resolved by keeping this entry's own treatment at introductory breadth and deferring depth to
+  that sibling.
+- **`math.graph.hamiltonian-cycle`** (expert/apply, requires `math.disc.euler-hamiltonian` only,
+  cross-link `math.disc.complexity-classes` re-verified genuinely unauthored — independence mode
+  confirmed) — Dirac's theorem developed as its own dedicated focus: the sufficient-not-necessary
+  logical structure, the $P_4$-vs-$C_4$ single-edge-flip demonstration, and the TSP extension at
+  orientation level (existence-vs-optimal-weight, metric-case approximability). 3
+  misconceptions: MC-1 DIRAC-THEOREM-ASSUMED-TO-CONTRADICT-NP-COMPLETENESS (Type 1, foundational),
+  MC-2 FAILED-DIRAC-CONDITION-ASSUMED-TO-PROVE-NON-EXISTENCE (Type 4, high — matching
+  `math.graph.eulerian-circuit`'s own MC-2 mechanism, cited directly), MC-3
+  EXISTENCE-ASSUMED-TO-SOLVE-TSP (Type 1, moderate). Its own Curriculum Feedback confirms and
+  closes `eulerian-circuit`'s forward-pointing note: the deeper Dirac's-theorem treatment that
+  entry deferred is authored here, using the same running $W_5$ example.
+- **`math.graph.graph-coloring`** (expert/analyze, requires `math.disc.graph-coloring`, cross-link
+  `math.disc.graph-coloring`) — chromatic number bounded from both sides (clique/independence
+  lower bounds, greedy/Brooks upper bounds), the Mycielski-construction gap between $\chi$ and
+  $\omega$, the Five Color Theorem's full constructive proof in explicit contrast with the Four
+  Color Theorem's fundamentally different computer-assisted proof, and edge coloring via Vizing's
+  theorem (Class 1 vs. Class 2, Holyer's NP-hardness result). 3 misconceptions: MC-1
+  CHROMATIC-NUMBER-EQUALS-CLIQUE-NUMBER (Type 1, critical), MC-2
+  FIVE-COLOR-PROOF-EXTENDS-TO-FOUR (Type 1, foundational), MC-3 VIZING-HOLDS-FOR-MULTIGRAPHS
+  (Type 1, moderate). **A second genuine Blueprint-staleness finding this same domain** (same
+  class as Batch 24's `minimum-spanning-tree` finding, not fixed per standing scope — Blueprints
+  are never edited by this program): this concept's own Blueprint (Component 7 and Validation
+  Checklist V-5) declares its `math.disc.graph-coloring` cross-link "MISSING on disk," setting
+  independence mode on that stale basis — verified via direct directory listing that BOTH the
+  Blueprint file and the Educational Brain entry for `math.disc.graph-coloring` genuinely exist.
+  This entry follows the corrected, current state: that sibling's misconception register was
+  consulted directly to ground this entry's own Transfer Connections, per case-2 cross-link
+  handling (substantive incorporation of an already-authored peer).
+
+`math.graph` **3/16 → 7/16**. `math.disc`/`math.func` unchanged this batch (20/32 and 1/29,
+parked). Mathematics **328/908 → 332/908**, 803 remaining. No genuine content-overlap found
+beyond the two deliberately-recorded items above (the Eulerian-circuit/Hamiltonian-cycle
+division of labor, and the second Blueprint-staleness correction). All tracking files updated in
+the same commit: `ROADMAP.md` Section 1/2 totals and the `math.graph` domain row, `COVERAGE.md`'s
+mathematics summary row and this Delivery history entry, `CLAUDE.md`'s campaign section.
+`EDUCATIONAL_BRAIN_INDEX.md` and `QUALITY.md` again deferred (same generated-artifact rationale
+as prior batches). Validated: `npx tsx scripts/validate-knowledge-graph.ts
+docs/mathematics/kg/graph.json` PASS, 908/908 reachable, 0 failures, 0 warnings (KG file
+untouched); `scripts/math/state.ts` confirms math.graph 7/16 and mathematics 332/908, 0 orphan EB
+files, 0 duplicate EB files; `npx tsc --noEmit` clean; targeted tests `mathPackageCorpus.test.ts`
++ `mathematicsAssetContract.test.ts` 479/479 passed. All 4 new entries' heading structure diffed
+clean against `math.alg.like-terms.md` on the first pass (0 diffs each). Fresh `math.graph`
+frontier computed: 6 candidates ready (`graph-invariants`, `graph-operations`, `maximum-flow`,
+`matching`, `ramsey-theory`, `extremal-graph-theory`). No Physics, Chemistry, English, Biology,
+Computer Science, KG, Blueprint, or runtime file was modified.
+
+### Batch 26 — closing 3 of math.graph's post-Batch-25 frontier (2026-09-12)
+
+Re-computed the frontier fresh — 6 candidates confirmed ready: `graph-invariants`,
+`graph-operations`, `maximum-flow`, `matching`, `ramsey-theory`, `extremal-graph-theory`. Selected
+a coherent 3-concept subset sharing `math.graph.graph` as their sole prerequisite
+(`graph-invariants`, `graph-operations`, `matching`), deferring the two deeper-prerequisite/
+higher-difficulty concepts (`maximum-flow`, requiring `connectivity`; `ramsey-theory` and
+`extremal-graph-theory`, each requiring a `math.disc` cross-domain prerequisite in addition to
+`graph`) to a future batch. All 3 Blueprint-grounded, reused by reference.
+
+- **`math.graph.graph-invariants`** (proficient/understand, requires `math.graph.graph` only,
+  no cross-links) — graph isomorphism via bijection, the six standard invariants (degree
+  sequence, order, size, components, girth, diameter) as a one-way filter (mismatch proves
+  non-isomorphism; a match never proves isomorphism), and the canonical equal-invariant
+  non-isomorphic pairs ($C_6$ vs. $C_3\sqcup C_3$; $K_{3,3}$ vs. the triangular prism). 3
+  misconceptions, birth types independently derived (Blueprint pre-assigns none): MC-1
+  EQUAL-INVARIANTS-MEANS-ISOMORPHIC (Type 1, critical), MC-2 DIAMETER-EQUALS-GIRTH (Type 3,
+  foundational), MC-3 ISOMORPHISM-IS-SAME-AS-EQUAL-GRAPHS (Type 3, moderate).
+- **`math.graph.graph-operations`** (proficient/apply, requires `math.graph.graph` only, no
+  cross-links) — union/intersection/complement/join, subgraph vs. induced subgraph, edge/vertex
+  deletion and contraction, the line graph and its degree formula, the Cartesian product, and a
+  property-preservation table (bipartiteness/connectivity/regularity across operations). 3
+  misconceptions: MC-1 COMPLEMENT-PRESERVES-BIPARTITE (Type 1, moderate), MC-2
+  INDUCED-SUBGRAPH-VS-SUBGRAPH (Type 4, foundational), MC-3 CONTRACTION-ALWAYS-SIMPLE (Type 1,
+  moderate).
+- **`math.graph.matching`** (expert/apply, requires `math.graph.graph` only, no cross-links) —
+  matching/maximum matching/maximal matching/perfect matching distinguished via counterexample,
+  $M$-alternating/augmenting paths and Berge's theorem, Hall's theorem (the all-subsets
+  quantifier, not just singletons), König's theorem for bipartite graphs, and the Gallai
+  inequality's weaker bound for general graphs (via $K_3$). 3 misconceptions: MC-1
+  MAXIMAL-EQUALS-MAXIMUM (Type 3, critical), MC-2 HALL-CONDITION-ONLY-FOR-SINGLETONS (Type 1,
+  critical), MC-3 KÖNIG-HOLDS-FOR-ALL-GRAPHS (Type 1, foundational).
+
+`math.graph` **7/16 → 10/16**. `math.disc`/`math.func` unchanged this batch (20/32 and 1/29,
+parked). Mathematics **332/908 → 335/908**, 800 remaining. No genuine content-overlap or
+metadata discrepancy found in any of the 3 entries; one genuine forward connection recorded in
+`matching`'s own Curriculum Feedback (König's theorem and `connectivity`'s Menger's theorem share
+the same max-flow-min-cut/LP-duality structural pattern — noted, not developed, to avoid
+overreach). Full per-concept detail above. All tracking files updated in the same commit:
+`ROADMAP.md` Section 1/2 totals and the `math.graph` domain row, `COVERAGE.md`'s mathematics
+summary row and this Delivery history entry, `CLAUDE.md`'s campaign section.
+`EDUCATIONAL_BRAIN_INDEX.md` and `QUALITY.md` again deferred (same generated-artifact rationale
+as prior batches). Validated: `npx tsx scripts/validate-knowledge-graph.ts
+docs/mathematics/kg/graph.json` PASS, 908/908 reachable, 0 failures, 0 warnings (KG file
+untouched); `scripts/math/state.ts` confirms math.graph 10/16 and mathematics 335/908, 0 orphan
+EB files, 0 duplicate EB files; `npx tsc --noEmit` clean; targeted tests
+`mathPackageCorpus.test.ts` + `mathematicsAssetContract.test.ts` 479/479 passed. All 3 new
+entries' heading structure diffed clean against `math.alg.like-terms.md` on the first pass (0
+diffs each). Fresh `math.graph` frontier computed: 3 candidates ready (`maximum-flow`,
+`ramsey-theory`, `extremal-graph-theory`), all expert/research difficulty. No Physics, Chemistry,
+English, Biology, Computer Science, KG, Blueprint, or runtime file was modified.
+
+### Batch 27 — closing math.graph's final ready frontier (2026-09-12)
+
+Re-computed the frontier fresh — the exact 3 concepts deferred from Batch 26 were confirmed still
+ready: `maximum-flow`, `ramsey-theory`, `extremal-graph-theory`. All 3 Blueprint-grounded, reused
+by reference, all authored this batch.
+
+- **`math.graph.maximum-flow`** (expert/apply, requires `math.graph.connectivity` only, no
+  cross-links) — flow networks, feasible flow, the residual graph and augmenting paths, the
+  Max-Flow Min-Cut Theorem (three equivalent statements, with the canonical minimum-cut
+  construction via reachability in the final residual graph), Edmonds-Karp's polynomial
+  guarantee, and the bipartite-matching-to-flow reduction (unit capacities forcing integer flow
+  to exactly encode a matching). 3 misconceptions: MC-1 BACKWARD-EDGES-ARE-PHYSICAL (Type 6,
+  foundational), MC-2 MIN-CUT-IS-UNIQUE (Type 1, moderate), MC-3
+  MAX-FLOW-SOLVES-GENERAL-MATCHING (Type 1, critical).
+- **`math.graph.ramsey-theory`** (expert/analyze, requires `math.disc.pigeonhole` +
+  `math.graph.graph`, no cross-links) — Ramsey numbers, the full two-sided proof that
+  $R(3,3)=6$ (Pigeonhole upper bound plus an explicit $K_5$ 2-coloring lower bound), the
+  recursive upper bound, the Erdős probabilistic lower bound as a genuine existence-without-
+  construction argument, and the honest state of knowledge (only a handful of exact Ramsey
+  numbers known, $R(5,5)$ still open). 3 misconceptions: MC-1 RAMSEY-NUMBER-R-3-3-IS-5 (Type 1,
+  critical), MC-2 PROBABILISTIC-EXISTENCE-IS-CONSTRUCTION (Type 1, foundational), MC-3
+  RAMSEY-NUMBERS-ARE-KNOWN-FOR-ALL-SMALL-VALUES (Type 1, moderate).
+- **`math.graph.extremal-graph-theory`** (research/analyze, requires `math.graph.graph` +
+  `math.disc.combinatorics`, no cross-links) — Turán's theorem as a genuine extremal-
+  optimization question (not mere edge-counting), the Turán graph $T(n,r)$ as a concrete,
+  pigeonhole-verified $K_{r+1}$-free construction achieving the bound exactly, and the Szemerédi
+  Regularity Lemma at orientation level as a qualitatively different (structural, not numerical)
+  extremal result. 3 misconceptions: MC-1 TURAN-THEOREM-ASSUMED-MERE-EDGE-COUNTING (Type 1,
+  foundational), MC-2 TURAN-BOUND-ASSUMED-MERELY-ABSTRACT (Type 2, high), MC-3
+  REGULARITY-LEMMA-ASSUMED-ANOTHER-NUMERICAL-FORMULA (Type 1, moderate).
+
+`math.graph` **10/16 → 13/16**. **Correction made during this batch's own validation** (initial
+drafts of all 3 entries' Version History sections incorrectly claimed this batch would reach
+16/16 DOMAIN CERTIFIED — `scripts/math/state.ts` was run fresh per standing discipline and showed
+`eb: 13`, not 16; investigating found the domain's remaining 3 concepts — `shortest-path`,
+`algebraic-graph-theory`, `random-graph` — each require a cross-domain prerequisite outside
+math.graph that is not yet authored (`math.disc.asymptotic-notation`, `math.linalg.eigenvalues`,
+`math.prob.probability-axioms` respectively), so they were never in the topologically-ready
+frontier this batch computed. All 3 entries' Version History sections were corrected in place
+before commit to state 13/16 PARKED, not 16/16 CERTIFIED.** `math.graph` is now PARKED, joining
+`math.disc` and `math.func` as domains blocked on external cross-domain prerequisites.
+`math.disc`/`math.func` unchanged this batch (20/32 and 1/29). Mathematics **335/908 → 338/908**,
+797 remaining. No genuine content-overlap or metadata discrepancy found in any of the 3 entries.
+Full per-concept detail above. All tracking files updated in the same commit: `ROADMAP.md`
+Section 1/2 totals and the `math.graph` domain row (status corrected to PARKED), `COVERAGE.md`'s
+mathematics summary row and this Delivery history entry, `CLAUDE.md`'s campaign section.
+`EDUCATIONAL_BRAIN_INDEX.md` and `QUALITY.md` again deferred (same generated-artifact rationale
+as prior batches). Validated: `npx tsx scripts/validate-knowledge-graph.ts
+docs/mathematics/kg/graph.json` PASS, 908/908 reachable, 0 failures, 0 warnings (KG file
+untouched); `scripts/math/state.ts` confirms math.graph 13/16 and mathematics 338/908, 0 orphan
+EB files, 0 duplicate EB files; `npx tsc --noEmit` clean; targeted tests
+`mathPackageCorpus.test.ts` + `mathematicsAssetContract.test.ts` 479/479 passed. All 3 new
+entries' heading structure diffed clean against `math.alg.like-terms.md` on the first pass (0
+diffs each). math.graph has 0 topologically-ready candidates remaining; the next step for
+mathematics is either a bounded cross-domain excursion to unblock one of the three parked domains
+(math.disc, math.func, math.graph) or selecting a fresh unstarted domain entirely. No Physics,
+Chemistry, English, Biology, Computer Science, KG, Blueprint, or runtime file was modified.
+
+### Batch 28 — resuming math.func as a standalone domain campaign (2026-09-12)
+
+With math.disc and math.graph both PARKED (0 topologically-ready candidates each), computed the
+frontier fresh across ALL mathematics domains rather than defaulting to a brand-new unstarted
+domain (each of which has only 1-2 root-node candidates ready). Result: `math.func` — previously
+parked at 1/29 as a small math.alg-unblocking excursion (Batch 14) — had 13 concepts
+topologically ready, all gated only on the already-authored `math.func.function-concept`.
+Selected `math.func` to resume as a full standalone domain campaign, matching the precedent set
+when `math.disc` was continued after `math.alg`'s certification. Authored a coherent 4-concept
+subset (the "function properties" cluster), all Blueprint-grounded, reused by reference.
+
+- **`math.func.domain-range`** (proficient/understand, requires `function-concept` only, no
+  cross-links) — domain found by algebraic restriction (denominator/radical/logarithm rules,
+  chained inside-out for composite expressions); range found by STRUCTURAL reasoning (never
+  sampling) — minimum/maximum, achievability, gap-checking, and the algebraic solve-for-$x$
+  technique; the two-condition domain-of-composition rule (inner domain AND inner output in
+  outer domain). 3 misconceptions, matching the Blueprint's own classification: MC-1
+  RANGE-EQUALS-DOMAIN (Type 1), MC-2 DOMAIN-ONLY-EXCLUDES-ZEROS (Type 5), MC-3
+  RANGE-IS-COMPUTED-NOT-REASONED (Type 1).
+- **`math.func.function-notation`** (proficient/apply, requires `function-concept` only, no
+  cross-links) — $f(x)$ as substitution (never multiplication, exactly parallel to
+  $\cos(x)$), full-substitution discipline for compound arguments, the general failure of
+  $f(a+b)=f(a)+f(b)$ outside linear functions, and the difference quotient
+  $[f(x+h)-f(x)]/h$ as the calculus-foundational culmination of correct substitution. 3
+  misconceptions: MC-1 f(x)-MEANS-f-TIMES-x (Type 3), MC-2 f(a+b)=f(a)+f(b) (Type 1), MC-3
+  f(a)-IS-f-APPLIED-AMBIGUOUSLY (Type 3).
+- **`math.func.injectivity`** (proficient/understand, requires `function-concept` only, unlocks
+  `math.func.inverse-functions`, no cross-links) — the universal "for all" definition proven
+  generally (never by sampling), the non-automatic direction distinguished from every function's
+  trivially-automatic well-definedness, and the all-or-nothing horizontal line test (one failing
+  line is total disqualification). 3 misconceptions, all independently classified as Type 1
+  (overgeneralization): MC-1 INJECTIVITY-CONFIRMED-BY-SAMPLING, MC-2
+  INJECTIVITY-DIRECTION-CONFUSED-WITH-AUTOMATIC-WELL-DEFINEDNESS, MC-3
+  HORIZONTAL-LINE-TEST-TREATED-AS-DEGREE-OF-INJECTIVITY.
+- **`math.func.surjectivity`** (proficient/understand, requires `function-concept` only,
+  unlocks `math.func.bijection`, no cross-links) — every codomain element hit (never mind how
+  many times), the range-equals-codomain characterization, the asymmetry between confirming
+  surjectivity (check every codomain element) and disproving it (one counterexample suffices),
+  and its complete independence from injectivity (demonstrated via $x^2$ restricted to
+  $\mathbb{R}\to[0,\infty)$: surjective but not injective). 3 misconceptions: MC-1
+  SURJECTIVE-CONFLATED-WITH-INJECTIVE (Type 6, independently classified — the Blueprint assigns
+  severity but not birth type), MC-2 ALL-DOMAIN-ELEMENTS-MAPPED-ASSUMED-SUFFICIENT (Type 1),
+  MC-3 SINGLE-COUNTEREXAMPLE-NOT-RECOGNIZED-AS-SUFFICIENT (Type 1).
+
+`math.func` **1/29 → 5/29**. `math.disc`/`math.graph` unchanged this batch (20/32 parked, 13/16
+parked). Mathematics **338/908 → 342/908**, 793 remaining. No genuine content-overlap or
+metadata discrepancy found in any of the 4 entries — all requires/unlocks/cross_links verified
+directly against the live KG (`injectivity` unlocks `math.func.inverse-functions`,
+`surjectivity` unlocks `math.func.bijection`, both confirmed). Full per-concept detail above.
+All tracking files updated in the same commit: `ROADMAP.md` Section 1/2 totals and the
+`math.func` domain row (status corrected to RESUMED/standalone campaign), `COVERAGE.md`'s
+mathematics summary row and this Delivery history entry, `CLAUDE.md`'s campaign section.
+`EDUCATIONAL_BRAIN_INDEX.md` and `QUALITY.md` again deferred (same generated-artifact rationale
+as prior batches). Validated: `npx tsx scripts/validate-knowledge-graph.ts
+docs/mathematics/kg/graph.json` PASS, 908/908 reachable, 0 failures, 0 warnings (KG file
+untouched); `scripts/math/state.ts` confirms math.func 5/29 and mathematics 342/908, 0 orphan EB
+files, 0 duplicate EB files; `npx tsc --noEmit` clean; targeted tests
+`mathPackageCorpus.test.ts` + `mathematicsAssetContract.test.ts` 479/479 passed. All 4 new
+entries' heading structure diffed clean against `math.alg.like-terms.md` on the first pass (0
+diffs each). Fresh `math.func` frontier computed: 10 candidates ready (`bijection` newly
+unblocked by `surjectivity`; `graph-of-function`, `real-valued-function`, `composition`,
+`periodic-function`, `linear-function`, `exponential-function`, `piecewise-function`,
+`monotonic-function`, `function-operations`). No Physics, Chemistry, English, Biology, Computer
+Science, KG, Blueprint, or runtime file was modified.
+
+### Batch 29 — math.func: operations, composition, monotonicity, bijection (2026-09-12)
+
+Re-computed the frontier fresh — 10 candidates confirmed ready. Selected a coherent 4-concept
+subset (`function-operations`, `composition`, `monotonic-function`, `bijection`), deferring the
+remaining 6 (`graph-of-function`, `real-valued-function`, `periodic-function`, `linear-function`,
+`exponential-function`, `piecewise-function`) to a future batch. All 4 Blueprint-grounded, reused
+by reference.
+
+- **`math.func.function-operations`** (proficient/apply, requires `function-concept` only,
+  unlocks `math.func.composition`) — the four pointwise operations, the combined-domain
+  intersection rule (with the extra division-by-zero exclusion), and the pointwise-product-
+  versus-composition distinction, including composition's non-commutativity in contrast with
+  pointwise addition/multiplication's genuine commutativity. 3 misconceptions, matching the
+  Blueprint's own classification: MC-1 COMBINED-DOMAIN-ASSUMED-FROM-ONE-FUNCTION-ONLY (Type 1),
+  MC-2 POINTWISE-PRODUCT-CONFLATED-WITH-COMPOSITION (Type 4), MC-3
+  COMPOSITION-ASSUMED-COMMUTATIVE (Type 1).
+- **`math.func.composition`** (proficient/apply, requires `function-concept` only, unlocks
+  `math.calc.chain-rule`, cross-link `math.calc.chain-rule` confirmed genuinely unauthored) —
+  the right-to-left "f AFTER g" reading convention, the two-gate domain rule (membership in
+  $g$'s domain AND $g(x)$'s membership in $f$'s domain), non-commutativity across three worked
+  pairs, and composite-expression decomposition as the direct structural prerequisite for the
+  (not-yet-authored) chain rule. 3 misconceptions, matching the Blueprint's own MAMR priority
+  ordering (MC-1 cleared first as FOUNDATIONAL): MC-1 COMPOSITION-REVERSED (Type 3), MC-2
+  DOMAIN-IGNORED (Type 1), MC-3 COMPOSITION-COMMUTATIVE (Type 1).
+- **`math.func.monotonic-function`** (proficient/understand, requires `function-concept` only,
+  unlocks `math.func.inverse-functions`) — strict versus weak monotonicity (a constant function
+  as the dividing case), the sample-points-can-mislead demonstration (a cubic reversing just
+  beyond a consistent-looking sample), and the proof that strict monotonicity implies
+  injectivity with the converse's failure ($1/x$ genuinely injective yet not monotonic). 3
+  misconceptions: MC-1 STRICT-WEAK-MONOTONICITY-CONFLATED (Type 3), MC-2
+  MONOTONICITY-EXTRAPOLATED-FROM-SAMPLE-POINTS (Type 1), MC-3 INJECTIVE-IMPLIES-MONOTONIC
+  (Type 1).
+- **`math.func.bijection`** (proficient/understand, requires `injectivity` + `surjectivity`,
+  unlocks `math.func.inverse-functions` + `math.found.cardinality`) — bijective as the
+  conjunction of both prerequisite properties, the "exactly one preimage" joint consequence
+  (at-least-one from surjectivity plus at-most-one from injectivity), and the two specific
+  failure modes (multi-valued, or undefined-somewhere) an inverse-construction attempt produces
+  when either property is missing. 3 misconceptions, all Type 1 (overgeneralization): MC-1
+  INJECTIVE-OR-SURJECTIVE-ASSUMED-SUFFICIENT-FOR-BIJECTIVE, MC-2
+  AT-LEAST-ONE-PREIMAGE-ASSUMED-SUFFICIENT-FOR-PERFECT-PAIRING, MC-3
+  INVERSE-RELATION-ASSUMED-ALWAYS-A-VALID-FUNCTION. **A genuine Blueprint-staleness finding**
+  (not fixed, per standing scope): this concept's own Blueprint declares its
+  `math.found.cardinality` cross-link "not yet authored" — verified via directory listing that
+  both the Blueprint and the EB entry genuinely exist (`math.found` has been CERTIFIED at 82/82
+  since 2026-07-26); corrected in this entry's own Curriculum Feedback, Blueprint left
+  unmodified.
+
+`math.func` **5/29 → 9/29**. `math.disc`/`math.graph` unchanged this batch (20/32 parked, 13/16
+parked). Mathematics **342/908 → 346/908**, 789 remaining. No genuine content-overlap found
+beyond the one deliberately-recorded Blueprint-staleness correction above. Full per-concept
+detail above. All tracking files updated in the same commit: `ROADMAP.md` Section 1/2 totals
+and the `math.func` domain row, `COVERAGE.md`'s mathematics summary row and this Delivery
+history entry, `CLAUDE.md`'s campaign section. `EDUCATIONAL_BRAIN_INDEX.md` and `QUALITY.md`
+again deferred (same generated-artifact rationale as prior batches). Validated: `npx tsx
+scripts/validate-knowledge-graph.ts docs/mathematics/kg/graph.json` PASS, 908/908 reachable, 0
+failures, 0 warnings (KG file untouched); `scripts/math/state.ts` confirms math.func 9/29 and
+mathematics 346/908, 0 orphan EB files, 0 duplicate EB files; `npx tsc --noEmit` clean; targeted
+tests `mathPackageCorpus.test.ts` + `mathematicsAssetContract.test.ts` 479/479 passed. All 4 new
+entries' heading structure diffed clean against `math.alg.like-terms.md` on the first pass (0
+diffs each). Fresh `math.func` frontier computed: 7 candidates ready (`inverse-functions` newly
+unblocked by `bijection`; `graph-of-function`, `real-valued-function`, `periodic-function`,
+`linear-function`, `exponential-function`, `piecewise-function`). No Physics, Chemistry,
+English, Biology, Computer Science, KG, Blueprint, or runtime file was modified.
+
+### Batch 30 — math.func: inverses, graphs, real-valued functions, linear functions (2026-09-12)
+
+Re-computed the frontier fresh — 7 candidates confirmed ready (matching Batch 29's deferred
+list exactly). Selected a 4-concept subset (`inverse-functions`, `graph-of-function`,
+`real-valued-function`, `linear-function`), deferring the remaining 3 (`periodic-function`,
+`exponential-function`, `piecewise-function`) to a future batch. All 4 Blueprint-grounded,
+reused by reference.
+
+- **`math.func.inverse-functions`** (proficient/apply, requires `bijection`, unlocks
+  `math.trig.inverse-trig` + `math.alg.logarithm`, cross-link `math.trig.inverse-trig` confirmed
+  genuinely unauthored — independence mode) — the two "undoing" identities
+  ($f^{-1}(f(x))=x$ and $f(f^{-1}(y))=y$) built directly on `bijection`'s own "exactly one
+  preimage" construction, algebraic construction-plus-general-verification (never a single
+  sampled value), bijectivity-first as a genuine existence prerequisite (restrict the domain if
+  it fails), and the graph's reflection over $y=x$ (never either coordinate axis). 3
+  misconceptions, independently birth-type classified (the Blueprint assigns severity but not a
+  formal type): MC-1 INVERSE-VERIFIED-BY-SAMPLING (Type 1), MC-2
+  INVERSE-ASSUMED-TO-EXIST-WITHOUT-BIJECTIVITY-CHECK (Type 1), MC-3
+  INVERSE-GRAPH-REFLECTED-OVER-WRONG-AXIS (Type 6).
+- **`math.func.graph-of-function`** (proficient/understand, requires `function-concept` +
+  `math.geom.coordinate-plane`, no unlocks or cross-links listed in the KG) — the graph as the
+  literal set of $(x,f(x))$ pairs (never a separate geometric object), the vertical line test as
+  a direct visual restatement of "one output per input," and the orientation-level finding that
+  a curve failing the test (a full circle) genuinely is not one function's graph but typically
+  splits into several (upper/lower semicircles) that each are. 3 misconceptions, independently
+  birth-type classified: MC-1 GRAPH-ASSUMED-SEPARATE-OBJECT-FROM-FUNCTION (Type 1), MC-2
+  VERTICAL-LINE-TEST-ASSUMED-ARBITRARY-CONVENTION (Type 4), MC-3
+  FAILED-TEST-ASSUMED-ONE-FLAWED-FUNCTION (Type 1).
+- **`math.func.real-valued-function`** (proficient/understand, requires `function-concept` +
+  `math.found.real-numbers`, unlocks `math.calc.limits`, cross-link `math.calc.limits`
+  confirmed genuinely unauthored — the P76 transfer probe previews limits self-containedly,
+  same pattern as `composition`'s handling of its own unauthored `math.calc.chain-rule`
+  cross-link in Batch 29) — $f:D\to\mathbb{R}$, the natural-domain determination procedure
+  (testing denominators, even roots, logarithms for failure), domain-versus-range as genuinely
+  different sets, and the single-output rule ruling out $\pm\sqrt{x}$ as a function. 3
+  misconceptions, independently birth-type classified, with MC-1 designated FOUNDATIONAL by the
+  Blueprint: MC-1 DOMAIN-RANGE-CONFUSED (Type 3), MC-2 DOMAIN-IS-ALWAYS-ALL-REALS (Type 1), MC-3
+  MULTI-VALUED-IS-A-FUNCTION (Type 5).
+- **`math.func.linear-function`** (proficient/apply, requires `function-concept` +
+  `math.geom.slope`, unlocks `math.func.quadratic-function`, cross-link
+  `math.geom.line-equation` confirmed authored — substantive cross-link-probe incorporation,
+  directly reusing that concept's own $(1,5)$-$(3,11)$ worked line and standard-form
+  conversion) — a linear function as a genuine FUNCTION (evaluated, not just graphed), the
+  slope as a constant rate of change verified across two very different input pairs, and the
+  identical algebra connecting `math.geom.line-equation`'s three geometric forms to function
+  notation. 3 misconceptions, independently birth-type classified, with MC-1 and MC-2 both
+  designated FOUNDATIONAL by the Blueprint: MC-1
+  LINEAR-FUNCTIONS-AND-LINE-EQUATIONS-TREATED-AS-UNRELATED (Type 3), MC-2
+  RATE-OF-CHANGE-ASSUMED-TO-VARY-ACROSS-THE-DOMAIN (Type 1), MC-3
+  FUNCTION-EVALUATION-CONFUSED-WITH-SOLVING-FOR-X (Type 3).
+
+`math.func` **9/29 → 13/29**. `math.disc`/`math.graph` unchanged this batch (20/32 parked, 13/16
+parked). Mathematics **346/908 → 350/908**, 785 remaining. No genuine content-overlap or
+Blueprint/KG metadata discrepancy found in any of the 4 entries this batch. Full per-concept
+detail above. All tracking files updated in the same commit: `ROADMAP.md` Section 1/2 totals and
+the `math.func` domain row, `COVERAGE.md`'s mathematics summary row and this Delivery history
+entry, `CLAUDE.md`'s campaign section. `EDUCATIONAL_BRAIN_INDEX.md` and `QUALITY.md` again
+deferred (same generated-artifact rationale as prior batches). Validated: `npx tsx
+scripts/validate-knowledge-graph.ts docs/mathematics/kg/graph.json` PASS, 908/908 reachable, 0
+failures, 0 warnings (KG file untouched); `scripts/math/state.ts` confirms math.func 13/29 and
+mathematics 350/908, 0 orphan EB files, 0 duplicate EB files; `npx tsc --noEmit` clean; targeted
+tests `mathPackageCorpus.test.ts` + `mathematicsAssetContract.test.ts` 479/479 passed. All 4 new
+entries' heading structure diffed clean against `math.alg.like-terms.md` on the first pass (0
+diffs each). Fresh `math.func` frontier computed: 8 candidates ready (`zero-of-function`,
+`even-odd-functions`, `transformations-functions` newly unblocked by `graph-of-function`;
+`periodic-function`, `quadratic-function` newly unblocked by `linear-function`;
+`exponential-function`, `logarithmic-function` newly unblocked by `inverse-functions`;
+`piecewise-function`). No Physics, Chemistry, English, Biology, Computer Science, KG, Blueprint,
+or runtime file was modified.
+
+### Batch 31 — math.func: zeros, parity, transformations, periodicity (2026-09-12)
+
+Re-computed the frontier fresh — the exact 8 candidates deferred from Batch 30 were confirmed
+still ready. Selected a 4-concept subset (`zero-of-function`, `even-odd-functions`,
+`transformations-functions`, `periodic-function`), deferring the remaining 4
+(`quadratic-function`, `exponential-function`, `logarithmic-function`, `piecewise-function`) to
+a future batch. All 4 Blueprint-grounded, reused by reference.
+
+- **`math.func.zero-of-function`** (proficient/understand, requires `graph-of-function`, unlocks
+  `math.num.root-finding`, cross-link `math.num.root-finding` confirmed genuinely unauthored —
+  independence mode) — a zero as an $x$-value ($f(x^*)=0$) distinct from the $y$-intercept, the
+  possibility of zero/one/many real zeros, and the hole-vs-zero discrimination for rational
+  functions (a candidate must survive both numerator-zero AND denominator-nonzero). 3
+  misconceptions, birth types adopted directly from the Blueprint's own classification: MC-1
+  ZEROS-ARE-Y-VALUES (Type 3), MC-2 EVERY-FUNCTION-HAS-A-ZERO (Type 5), MC-3 HOLE-VS-ZERO
+  (Type 5).
+- **`math.func.even-odd-functions`** (proficient/apply, requires `graph-of-function`, no
+  unlocks or cross-links listed in the KG) — the algebraic test $f(-x)$ vs. $f(x)$ vs. $-f(x)$
+  as ground truth over a picture, even=$y$-axis/odd=origin symmetry with $x$-axis symmetry ruled
+  out as structurally impossible (violates the vertical line test), the product/sum parity
+  rules, and the symmetric-integral shortcut. 3 misconceptions, birth types adopted directly
+  from the Blueprint: MC-1 EVEN-ODD-FROM-EXPONENTS (Type 5), MC-2 NEITHER-MEANS-BOTH (Type 1),
+  MC-3 EVEN-MEANS-SYMMETRIC-ABOUT-x-AXIS (Type 3).
+- **`math.func.transformations-functions`** (proficient/apply, requires `graph-of-function`, no
+  unlocks or cross-links listed in the KG) — the canonical form $g(x)=af(b(x-h))+k$, the
+  inside-affects-horizontal/outside-affects-vertical rule, the counter-intuitive shift direction
+  (opposite to the visible sign), and the non-commutativity of horizontal shift and horizontal
+  compression (order matters, resolved by factoring the argument first). 3 misconceptions, birth
+  types adopted directly from the Blueprint: MC-1 HORIZONTAL-SHIFT-WRONG-DIRECTION (Type 3),
+  MC-2 HORIZONTAL-AFFECTS-VERTICAL (Type 1), MC-3 ORDER-INDEPENDENT (Type 1).
+- **`math.func.periodic-function`** (proficient/understand, requires `function-concept`,
+  cross-link `math.trig.trig-functions` confirmed genuinely unauthored — cross-link mode) — the
+  exact algebraic condition $f(x+T)=f(x)$ for the FUNDAMENTAL (smallest positive) period,
+  period-vs-frequency as reciprocals with different units, the $2\pi/|B|$ rule for sinusoidal
+  functions, period as a distance between identical-phase points (never a single peak's
+  location), and damping/irrational-ratio counterexamples that destroy exact periodicity despite
+  visual similarity. 3 misconceptions, birth types adopted directly from the Blueprint: MC-1
+  PERIOD-VS-FREQUENCY (Type 3), MC-2 PERIOD-IS-THE-PEAK (Type 5), MC-3
+  ALMOST-PERIODIC-IS-PERIODIC (Type 1).
+
+`math.func` **13/29 → 17/29** — only 12 concepts remain before the domain reaches DOMAIN
+CERTIFICATION. `math.disc`/`math.graph` unchanged this batch (20/32 parked, 13/16 parked).
+Mathematics **350/908 → 354/908**, 781 remaining. No genuine content-overlap or Blueprint/KG
+metadata discrepancy found in any of the 4 entries this batch (one stray typo caught and
+corrected during self-review, before validation: `periodic-function`'s own Identity section
+briefly carried an incomplete sentence fragment in its Cross-links line, fixed to read
+"cross-link mode" cleanly). Full per-concept detail above. All tracking files updated in the
+same commit: `ROADMAP.md` Section 1/2 totals and the `math.func` domain row, `COVERAGE.md`'s
+mathematics summary row and this Delivery history entry, `CLAUDE.md`'s campaign section.
+`EDUCATIONAL_BRAIN_INDEX.md` and `QUALITY.md` again deferred (same generated-artifact rationale
+as prior batches). Validated: `npx tsx scripts/validate-knowledge-graph.ts
+docs/mathematics/kg/graph.json` PASS, 908/908 reachable, 0 failures, 0 warnings (KG file
+untouched); `scripts/math/state.ts` confirms math.func 17/29 and mathematics 354/908, 0 orphan
+EB files, 0 duplicate EB files; `npx tsc --noEmit` clean; targeted tests
+`mathPackageCorpus.test.ts` + `mathematicsAssetContract.test.ts` 479/479 passed. All 4 new
+entries' heading structure diffed clean against `math.alg.like-terms.md` on the first pass (0
+diffs each). Fresh `math.func` frontier computed: 4 candidates ready (`quadratic-function`,
+`exponential-function`, `logarithmic-function`, `piecewise-function`). No Physics, Chemistry,
+English, Biology, Computer Science, KG, Blueprint, or runtime file was modified.
+
+### Batch 32 — math.func: quadratics, exponentials, logarithms, piecewise functions (2026-09-12)
+
+Re-computed the frontier fresh — the exact 4 candidates deferred from Batch 31 were confirmed
+still ready. This batch closes the ENTIRE frontier available at batch start (all 4 authored, none
+deferred). All 4 Blueprint-grounded, reused by reference.
+
+- **`math.func.quadratic-function`** (proficient/apply, requires `linear-function` +
+  `math.alg.quadratic-equation`, unlocks `math.func.polynomial-function`, cross-link
+  `math.geom.parabola` confirmed genuinely unauthored — independence mode) — explicit division
+  of labor with `math.alg.quadratic-equation` (that concept owns roots; this concept owns
+  function evaluation, the vertex, and modeling), the vertex formula as `completing-the-square`'s
+  own result packaged for direct use, and the vertex-vs-roots discrimination (two different
+  real-world questions, never substitutable) demonstrated on one shared projectile function
+  throughout. 3 misconceptions, birth types adopted directly from the Blueprint: MC-1
+  VERTEX-AND-ROOTS-CONFLATED (Type 1), MC-2
+  VERTEX-FORMULA-X-COORDINATE-MISTAKEN-FOR-THE-FULL-VERTEX (Type 5), MC-3
+  QUADRATIC-FUNCTION-EVALUATION-CONFUSED-WITH-SOLVING (Type 3).
+- **`math.func.exponential-function`** (proficient/apply, requires `math.alg.exponential-function`
+  + `function-concept`, unlocks `math.calc.derivative-exponential`, cross-link
+  `math.calc.derivative-exponential` confirmed genuinely unauthored — independence mode) — $e$ as
+  a genuine compound-interest limit (not an arbitrary constant), multiplicative vs. additive
+  growth modeling with a checkable numerical discrepancy (911 vs. 800), and $e^x$'s self-derivative
+  property as the specific, non-coincidental reason $e$ is "natural" (contrasted against $2^x$'s
+  extra $\ln2$ factor). 3 misconceptions, birth types adopted directly from the Blueprint: MC-1
+  E-ASSUMED-ARBITRARY (Type 1), MC-2 EXPONENTIAL-GROWTH-REASONED-LINEARLY (Type 1), MC-3
+  SELF-DERIVATIVE-PROPERTY-ASSUMED-COINCIDENTAL (Type 1).
+- **`math.func.logarithmic-function`** (proficient/apply, requires `math.alg.logarithm` +
+  `inverse-functions`, unlocks `math.calc.derivative-ln`, cross-link `math.calc.derivative-ln`
+  confirmed genuinely unauthored — independence mode) — the domain restriction as a direct
+  consequence of the exponential's own range (never an arbitrary rule), graphing entirely by
+  reflection across $y=x$ (zero independent memorization), and $\ln x$'s special status inherited
+  directly from `math.func.exponential-function`'s own self-derivative property, closing the
+  forward reference that concept's own entry left open. 3 misconceptions, birth types adopted
+  directly from the Blueprint: MC-1 LOG-DOMAIN-ASSUMED-ARBITRARY (Type 1), MC-2
+  LOG-GRAPH-ASSUMED-INDEPENDENT-FACTS (Type 5), MC-3 LN-X-ASSUMED-ARBITRARILY-CHOSEN (Type 1).
+- **`math.func.piecewise-function`** (proficient/apply, requires `function-concept`, no unlocks or
+  cross-links listed in the KG) — boundary ownership decided precisely by the closed-vs-open
+  inequality symbol, continuity as a mandatory three-way test (left limit, right limit, function
+  value) rather than an assumption from notation, the domain-partition discipline (exactly one
+  closed condition per boundary), and absolute value as the canonical continuous piecewise
+  counterexample. 3 misconceptions, birth types adopted directly from the Blueprint: MC-1
+  OPEN-ENDPOINT-IGNORED (Type 5), MC-2 PIECEWISE-MUST-BE-DISCONTINUOUS (Type 1), MC-3
+  DOMAIN-PIECES-OVERLAP (Type 1).
+
+`math.func` **17/29 → 21/29** — only 8 concepts remain before the domain reaches DOMAIN
+CERTIFICATION (the sixth after math.found/math.geom/math.arith/math.nt/math.alg). `math.disc`/
+`math.graph` unchanged this batch (20/32 parked, 13/16 parked). Mathematics **354/908 → 358/908**,
+777 remaining. No genuine content-overlap or Blueprint/KG metadata discrepancy found in any of
+the 4 entries this batch; one genuine cross-concept dependency closed (logarithmic-function's own
+forward reference to exponential-function's self-derivative property, now a live, resolvable
+Transfer Connection rather than a dangling citation). Full per-concept detail above. All tracking
+files updated in the same commit: `ROADMAP.md` Section 1/2 totals and the `math.func` domain row,
+`COVERAGE.md`'s mathematics summary row and this Delivery history entry, `CLAUDE.md`'s campaign
+section. `EDUCATIONAL_BRAIN_INDEX.md` and `QUALITY.md` again deferred (same generated-artifact
+rationale as prior batches). Validated: `npx tsx scripts/validate-knowledge-graph.ts
+docs/mathematics/kg/graph.json` PASS, 908/908 reachable, 0 failures, 0 warnings (KG file
+untouched); `scripts/math/state.ts` confirms math.func 21/29 and mathematics 358/908, 0 orphan EB
+files, 0 duplicate EB files; `npx tsc --noEmit` clean; targeted tests `mathPackageCorpus.test.ts`
++ `mathematicsAssetContract.test.ts` 479/479 passed. All 4 new entries' heading structure diffed
+clean against `math.alg.like-terms.md` on the first pass (0 diffs each). Fresh `math.func`
+frontier computed: 3 candidates ready (`vertex-form`, `polynomial-function` newly unblocked by
+`quadratic-function`; `step-function` newly unblocked by `piecewise-function`). No Physics,
+Chemistry, English, Biology, Computer Science, KG, Blueprint, or runtime file was modified.

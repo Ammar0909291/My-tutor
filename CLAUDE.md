@@ -3467,6 +3467,176 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   decision (into math.calc, math.seq, or math.linalg), or selecting a different unstarted domain
   entirely. This is a genuinely multi-session campaign; continuation should verify state via
   `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
+- **Batch 24 — opening `math.graph`** (2026-09-12): with math.disc at 0 topologically-ready
+  candidates, computed the frontier across ALL mathematics domains — `math.graph` had 7 ready
+  (each gated only on its already-authored `math.disc` sibling, since `math.disc`'s own
+  graph-theory entries had repeatedly named `math.graph` counterparts as Blueprint-exists-no-EB
+  cross-links across Batches 20-22). Selected `math.graph` over `math.func`'s 13 ready candidates
+  since it closes existing cross-link debt with zero new prerequisite cost. Authored 3 concepts:
+  `graph` (order/size notation, weighted/multigraph extensions — deliberately does NOT re-teach
+  `math.disc.graph`'s foundational content), `tree` (six equivalent tree characterizations,
+  Cayley's formula via Prüfer sequences), `minimum-spanning-tree` (cut/cycle properties
+  unifying Kruskal's/Prim's correctness, MST-vs-shortest-path-tree distinction). `math.graph`
+  0/16 → **3/16**. `math.disc`/`math.func` unchanged (20/32, 1/29, both parked). Mathematics
+  **325/908 → 328/908**, 807 remaining. Genuine Blueprint-staleness finding corrected (not fixed
+  in the Blueprint itself, per standing rule): `minimum-spanning-tree`'s Blueprint declared
+  `math.disc.spanning-tree` MISSING/independence-mode, stale since that concept was authored in
+  Batch 23 of this same campaign — this entry's own Transfer Connections substantively
+  incorporate it instead. Full per-concept detail in `COVERAGE.md` Batch 24. Validated: KG
+  validator PASS (908/908 reachable, file untouched), 0 orphan/duplicate EB files, `tsc --noEmit`
+  clean, targeted tests 479/479 passed, all 3 heading structures diffed clean on the first pass
+  (0 diffs each). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched.
+  Fresh math.graph frontier computed: 4 candidates ready (`connectivity`, `eulerian-circuit`,
+  `hamiltonian-cycle`, `graph-coloring`). This is a genuinely multi-session campaign;
+  continuation should verify state via `scripts/math/state.ts` fresh each time rather than
+  trusting any number recorded here.
+- **Batch 25 — closing math.graph's post-Batch-24 frontier** (2026-09-12): re-computed the
+  frontier fresh — the exact 4 concepts deferred from Batch 24 were confirmed still ready:
+  `connectivity`, `eulerian-circuit`, `hamiltonian-cycle`, `graph-coloring`, all authored, all
+  Blueprint-grounded. `hamiltonian-cycle` develops Dirac's theorem in full depth (deferred by
+  `eulerian-circuit`'s own introductory-breadth treatment of the same theorem, resolved by
+  division of labor, cross-referenced both ways). A second genuine Blueprint-staleness finding
+  (same class as Batch 24's): `graph-coloring`'s own Blueprint declares its
+  `math.disc.graph-coloring` cross-link "MISSING on disk" — verified via directory listing that
+  both the Blueprint and the EB entry genuinely exist; corrected in this entry's own Curriculum
+  Feedback, Blueprint left unmodified. `math.graph` **3/16 → 7/16**. Mathematics
+  **328/908 → 332/908**, 803 remaining. Full per-concept detail in `COVERAGE.md` Batch 25.
+  Validated: KG validator PASS (908/908 reachable, file untouched), 0 orphan/duplicate EB files,
+  `tsc --noEmit` clean, targeted tests 479/479 passed, all 4 heading structures diffed clean on
+  the first pass (0 diffs each). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime
+  file touched. Fresh math.graph frontier computed: 6 candidates ready (`graph-invariants`,
+  `graph-operations`, `maximum-flow`, `matching`, `ramsey-theory`, `extremal-graph-theory`). This
+  is a genuinely multi-session campaign; continuation should verify state via
+  `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
+- **Batch 26 — closing 3 of math.graph's post-Batch-25 frontier** (2026-09-12): re-computed the
+  frontier fresh — 6 candidates confirmed ready; selected the 3 sharing `math.graph.graph` as
+  their sole prerequisite (`graph-invariants`, `graph-operations`, `matching`), deferring
+  `maximum-flow`/`ramsey-theory`/`extremal-graph-theory` (each needing a deeper or cross-domain
+  prerequisite) to a future batch. All 3 authored, all Blueprint-grounded. `math.graph`
+  **7/16 → 10/16**. Mathematics **332/908 → 335/908**, 800 remaining. One genuine forward
+  connection recorded (not developed further): König's theorem (`matching`) and Menger's theorem
+  (`connectivity`) share the same max-flow-min-cut/LP-duality pattern. Full per-concept detail in
+  `COVERAGE.md` Batch 26. Validated: KG validator PASS (908/908 reachable, file untouched), 0
+  orphan/duplicate EB files, `tsc --noEmit` clean, targeted tests 479/479 passed, all 3 heading
+  structures diffed clean on the first pass (0 diffs each). No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Fresh math.graph
+  frontier computed: 3 candidates ready (`maximum-flow`, `ramsey-theory`,
+  `extremal-graph-theory`), all expert/research difficulty. This is a genuinely multi-session
+  campaign; continuation should verify state via `scripts/math/state.ts` fresh each time rather
+  than trusting any number recorded here.
+- **Batch 27 — closing math.graph's final ready frontier, domain now PARKED** (2026-09-12):
+  re-computed the frontier fresh — the exact 3 concepts deferred from Batch 26 were confirmed
+  still ready: `maximum-flow`, `ramsey-theory`, `extremal-graph-theory`, all authored, all
+  Blueprint-grounded. `math.graph` **10/16 → 13/16**. **Self-correction during validation**: draft
+  Version History text in all 3 entries initially (incorrectly) claimed this batch would reach
+  16/16 DOMAIN CERTIFIED; running `scripts/math/state.ts` fresh (per standing discipline) showed
+  `eb: 13`, not 16 — the domain's remaining 3 concepts (`shortest-path`, `algebraic-graph-theory`,
+  `random-graph`) each need a cross-domain prerequisite outside math.graph not yet authored
+  (`math.disc.asymptotic-notation`, `math.linalg.eigenvalues`, `math.prob.probability-axioms`
+  respectively). Corrected all 3 files' Version History sections to state 13/16 PARKED before
+  commit. math.graph joins math.disc and math.func as a parked domain. Mathematics
+  **335/908 → 338/908**, 797 remaining. Full per-concept detail in `COVERAGE.md` Batch 27.
+  Validated: KG validator PASS (908/908 reachable, file untouched), 0 orphan/duplicate EB files,
+  `tsc --noEmit` clean, targeted tests 479/479 passed, all 3 heading structures diffed clean on
+  the first pass (0 diffs each). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime
+  file touched. math.graph has 0 topologically-ready candidates remaining; the next step is
+  either a bounded cross-domain excursion to unblock one of the three parked domains, or
+  selecting a fresh unstarted domain. This is a genuinely multi-session campaign; continuation
+  should verify state via `scripts/math/state.ts` fresh each time rather than trusting any number
+  recorded here.
+- **Batch 28 — resuming math.func as a standalone domain campaign** (2026-09-12): with
+  math.disc and math.graph both PARKED (0 topologically-ready candidates each), computed the
+  frontier fresh across ALL mathematics domains rather than defaulting to a brand-new unstarted
+  domain. Result: `math.func` — parked at 1/29 since Batch 14's small cross-domain excursion —
+  actually had 13 concepts topologically ready, all gated only on the already-authored
+  `function-concept`. Resumed it as a full standalone campaign (matching the precedent of
+  continuing math.disc after math.alg's certification). Authored 4 concepts: `domain-range`
+  (algebraic domain restriction vs. structural range reasoning), `function-notation` ($f(x)$ as
+  substitution, never multiplication), `injectivity` (the universal claim proven generally, the
+  horizontal line test's all-or-nothing verdict), `surjectivity` (range-equals-codomain,
+  independence from injectivity). `math.func` **1/29 → 5/29**. Mathematics
+  **338/908 → 342/908**, 793 remaining. Full per-concept detail in `COVERAGE.md` Batch 28.
+  Validated: KG validator PASS (908/908 reachable, file untouched), 0 orphan/duplicate EB files,
+  `tsc --noEmit` clean, targeted tests 479/479 passed, all 4 heading structures diffed clean on
+  the first pass (0 diffs each). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime
+  file touched. Fresh math.func frontier computed: 10 candidates ready (`bijection` newly
+  unblocked by `surjectivity`; `graph-of-function`, `real-valued-function`, `composition`,
+  `periodic-function`, `linear-function`, `exponential-function`, `piecewise-function`,
+  `monotonic-function`, `function-operations`). This is a genuinely multi-session campaign;
+  continuation should verify state via `scripts/math/state.ts` fresh each time rather than
+  trusting any number recorded here.
+- **Batch 29 — math.func: operations, composition, monotonicity, bijection** (2026-09-12):
+  re-computed the frontier fresh — 10 candidates confirmed ready; authored 4
+  (`function-operations`, `composition`, `monotonic-function`, `bijection`), deferring
+  `graph-of-function`/`real-valued-function`/`periodic-function`/`linear-function`/
+  `exponential-function`/`piecewise-function` to a future batch. All Blueprint-grounded.
+  `math.func` **5/29 → 9/29**. Mathematics **342/908 → 346/908**, 789 remaining. Genuine
+  Blueprint-staleness finding (`bijection`'s own Blueprint claims its `math.found.cardinality`
+  cross-link is unauthored; verified both files exist, since `math.found` was CERTIFIED
+  2026-07-26 — corrected in that entry's own Curriculum Feedback). Full per-concept detail in
+  `COVERAGE.md` Batch 29. Validated: KG validator PASS (908/908 reachable, file untouched), 0
+  orphan/duplicate EB files, `tsc --noEmit` clean, targeted tests 479/479 passed, all 4 heading
+  structures diffed clean on the first pass (0 diffs each). No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Fresh math.func
+  frontier computed: 7 candidates ready (`inverse-functions` newly unblocked by `bijection`;
+  `graph-of-function`, `real-valued-function`, `periodic-function`, `linear-function`,
+  `exponential-function`, `piecewise-function`). This is a genuinely multi-session campaign;
+  continuation should verify state via `scripts/math/state.ts` fresh each time rather than
+  trusting any number recorded here.
+- **Batch 30 — math.func: inverses, graphs, real-valued functions, linear functions**
+  (2026-09-12): re-computed the frontier fresh — the exact 7 concepts deferred from Batch 29
+  were confirmed still ready; authored 4 (`inverse-functions`, `graph-of-function`,
+  `real-valued-function`, `linear-function`), deferring
+  `periodic-function`/`exponential-function`/`piecewise-function` to a future batch. All
+  Blueprint-grounded, reused by reference. `math.func` **9/29 → 13/29**. Mathematics
+  **346/908 → 350/908**, 785 remaining. No genuine content-overlap or Blueprint/KG metadata
+  discrepancy found in any of the 4 entries. Full per-concept detail in `COVERAGE.md` Batch 30.
+  Validated: KG validator PASS (908/908 reachable, file untouched), 0 orphan/duplicate EB files,
+  `tsc --noEmit` clean, targeted tests 479/479 passed, all 4 heading structures diffed clean on
+  the first pass (0 diffs each). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime
+  file touched. Fresh math.func frontier computed: 8 candidates ready (`zero-of-function`,
+  `even-odd-functions`, `transformations-functions` newly unblocked by `graph-of-function`;
+  `periodic-function`, `quadratic-function` newly unblocked by `linear-function`;
+  `exponential-function`, `logarithmic-function` newly unblocked by `inverse-functions`;
+  `piecewise-function`). This is a genuinely multi-session campaign; continuation should verify
+  state via `scripts/math/state.ts` fresh each time rather than trusting any number recorded
+  here.
+- **Batch 31 — math.func: zeros, parity, transformations, periodicity** (2026-09-12):
+  re-computed the frontier fresh — the exact 8 concepts deferred from Batch 30 were confirmed
+  still ready; authored 4 (`zero-of-function`, `even-odd-functions`,
+  `transformations-functions`, `periodic-function`), deferring
+  `quadratic-function`/`exponential-function`/`logarithmic-function`/`piecewise-function` to a
+  future batch. All Blueprint-grounded, reused by reference, birth types adopted directly from
+  each Blueprint's own classification. `math.func` **17/29** (13→17) — only 12 concepts remain
+  before the domain reaches DOMAIN CERTIFICATION. Mathematics **354/908** (350→354), 781
+  remaining. No genuine content-overlap or Blueprint/KG metadata discrepancy found. Full
+  per-concept detail in `COVERAGE.md` Batch 31. Validated: KG validator PASS (908/908 reachable,
+  file untouched), 0 orphan/duplicate EB files, `tsc --noEmit` clean, targeted tests 479/479
+  passed, all 4 heading structures diffed clean on the first pass (0 diffs each). No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Fresh math.func
+  frontier computed: 4 candidates ready (`quadratic-function`, `exponential-function`,
+  `logarithmic-function`, `piecewise-function`). This is a genuinely multi-session campaign;
+  continuation should verify state via `scripts/math/state.ts` fresh each time rather than
+  trusting any number recorded here.
+- **Batch 32 — math.func: quadratics, exponentials, logarithms, piecewise functions**
+  (2026-09-12): re-computed the frontier fresh — the exact 4 concepts deferred from Batch 31
+  were confirmed still ready; authored all 4 (`quadratic-function`, `exponential-function`,
+  `logarithmic-function`, `piecewise-function`), closing the ENTIRE frontier available at batch
+  start with none deferred. All Blueprint-grounded, reused by reference, birth types adopted
+  directly from each Blueprint's own classification. `math.func` **21/29** (17→21) — only 8
+  concepts remain before the domain reaches DOMAIN CERTIFICATION (would be the sixth, after
+  math.found/math.geom/math.arith/math.nt/math.alg). Mathematics **358/908** (354→358), 777
+  remaining. No genuine content-overlap or Blueprint/KG metadata discrepancy found; one genuine
+  cross-concept dependency closed (`logarithmic-function`'s forward reference to
+  `exponential-function`'s self-derivative property). Full per-concept detail in `COVERAGE.md`
+  Batch 32. Validated: KG validator PASS (908/908 reachable, file untouched), 0 orphan/duplicate
+  EB files, `tsc --noEmit` clean, targeted tests 479/479 passed, all 4 heading structures diffed
+  clean on the first pass (0 diffs each). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/
+  runtime file touched. Fresh math.func frontier computed: 3 candidates ready (`vertex-form`,
+  `polynomial-function` newly unblocked by `quadratic-function`; `step-function` newly unblocked
+  by `piecewise-function`). This is a genuinely multi-session campaign; continuation should
+  verify state via `scripts/math/state.ts` fresh each time rather than trusting any number
+  recorded here.
 
 ## Run locally
 ```

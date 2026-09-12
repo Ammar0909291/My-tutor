@@ -154,3 +154,65 @@ export function buildProseMcqReplyDirective(active: boolean): string {
     'been verified.'
   )
 }
+
+/**
+ * A DANGLING, INCOMPLETE LETTERED OPTION IS NEVER A QUESTION — STRIP IT.
+ *
+ * ── THE DEFECT THIS CLOSES (real-student report, Chemistry Lesson 2,
+ *    States of Matter) ──────────────────────────────────────────────────────
+ * The learner answered a graded evaporation checkpoint correctly. The
+ * server-authoritative grade was correct (`gradeMcqAnswer` against the
+ * authored evaporation probe), and the tutor's reply correctly opened with
+ * a genuine confirmation of it. But the SAME completion then trailed off
+ * into a truncated, un-tagged attempt at a NEW multiple-choice question of
+ * the model's own — cut short after exactly one option:
+ *
+ *   "That's right. A) The particles split into H₂ and O₂"
+ *
+ * Read naively this looks like the tutor praising the wrong thing. It is
+ * not: `mcqGradeHoisted` never touches this text, and the "H₂ and O₂"
+ * wording does not even belong to the evaporation probe — it is the wrong
+ * distractor of a DIFFERENT authored probe for the same concept (the
+ * ice-melt item), which strongly suggests the model free-associated a new,
+ * unauthorized item while composing the reaction sentence, and the
+ * completion ended before a second option — or the closing tag — ever
+ * arrived. Reproduced live 3 ways (verbatim-tap, wrong-then-right, typed
+ * paraphrase) without forcing the exact truncation, confirming this is
+ * real but non-deterministic LLM completion variance, not a deterministic
+ * state-corruption bug in grading or probe selection — both were verified
+ * correct in every reproduction attempt.
+ *
+ * ── WHY `hasProseMultipleChoice` DOES NOT ALREADY CATCH THIS ───────────────
+ * That guard is deliberately narrow to 2-4 DISTINCT lettered options — a
+ * genuine (if unauthorized) askable question, which this codebase's
+ * documented policy is to leave VISIBLE and merely stop trusting for
+ * self-reported correctness (see this file's header: "an imperfect
+ * question beats silence"). A single, un-continued "A) ..." fragment can
+ * never be that — a real multiple-choice question always offers at least
+ * two choices — so it is not a policy question at all, only truncation
+ * debris that confuses without ever being answerable or gradeable. This
+ * function targets exactly and only that narrower, unambiguous case.
+ *
+ * ── SCOPE, KEPT NARROW ───────────────────────────────────────────────────
+ * Matches ONLY a lettered option starting at "A" (never "B"/"C" alone —
+ * those are not the START of a truncated list) that is the LAST line of
+ * the text, and ONLY when `hasProseMultipleChoice` is false for the whole
+ * text (so a genuine 2-4-option prose MCQ — even one where "A) ..." is
+ * also, coincidentally, the last line — is left completely untouched,
+ * matching existing policy exactly). Never touches anything but the
+ * trailing fragment; never fires mid-sentence or mid-paragraph.
+ */
+const DANGLING_LEADING_OPTION_RE = /(?:^|\n|(?<=[.!?:;]))\s*[([]?[Aa][).\]][ \t]+\S[^\n]*$/
+
+export function stripDanglingLeadingOption(text: string): string {
+  if (typeof text !== 'string' || text.trim().length === 0) return text
+  if (hasProseMultipleChoice(text)) return text
+  const m = DANGLING_LEADING_OPTION_RE.exec(text)
+  if (!m) return text
+  const kept = text.slice(0, m.index).replace(/[ \t]+$/, '')
+  // If the ENTIRE reply was the dangling fragment, there is nothing to fall
+  // back to here — leaving the original text is better than returning an
+  // empty reply; the surrounding pipeline's own empty-text handling (if any)
+  // is a separate, general concern this narrow fix does not take on.
+  return kept.trim().length > 0 ? kept : text
+}
