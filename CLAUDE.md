@@ -3873,6 +3873,61 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   This is a genuinely multi-session campaign; continuation should verify state via
   `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
 
+## Physics tutor zero→research architecture — DESIGN EXERCISE, NOT ADOPTED (2026-09-12)
+- `docs/architecture/PHYSICS_TUTOR_ZERO_TO_RESEARCH_ARCHITECTURE.md` — a from-scratch
+  architecture for a personal physics teacher taking a learner from zero physics knowledge to
+  research-readiness, commissioned as an explicit first-principles exercise ("do NOT assume the
+  existing My Tutor architecture is automatically correct"). **It is not an ADR, it changes
+  nothing, and it does not supersede or reopen `EDUCATIONAL_BRAIN_BIBLE.md` or any ADR** —
+  Educational Brain Architecture v1.0 remains frozen and authoritative. Anything in it that would
+  ever become code stays G1/G2-gated like everything else. The doc says all of this in its own
+  status banner and §20; read those before quoting any of it as a decision.
+- **Its central argument, stated here because it is the part worth disagreeing with:** the
+  current runtime's shape is *the model speaks, then the system repairs what it said*, and the
+  accumulated guard layer (post-hoc question withholder, false-confirmation stripper,
+  phantom-figure stripper, filler repairer, stance enforcer, prose-option stripper, the seven
+  prompt blocks each claiming authority "over everything above", and the arbitration layer added
+  later to adjudicate between them) is not a series of unrelated bugs but the predictable cost of
+  that shape — an exclusion list with an unbounded complement (I1's three exclusions → I4's two
+  more → ENG-D02's nine measured escapes), an inability to restore information the generator never
+  produced, and composition into absorbing states (the GUIDE deadlock, the excursion gate, the
+  pending-probe latch). The proposed inversion is the ARTIFACT-FIRST RULE: every graded artifact
+  and every figure exists as a typed object BEFORE prose is generated; prose is rendered around
+  them and may not introduce new ones; verification then checks faithfulness to a decision instead
+  of classifying unbounded free text.
+- Contents (all 16 requested outputs): behavioural contract + three-way authority separation
+  (knowledge / state / language, with "interpretation may steer, only verified grading may
+  score"); a SPIRAL knowledge graph — nodes are (concept × rung R0-R5) with ASCENDS/SUPERSEDES/
+  CONTRASTS_WITH/MATH_REQUIRES/SPINE_OF edges, 28 strands, 8 cross-cutting spines, per-EDGE
+  mastery thresholds; a two-level concept model (durable instruments vs depreciating prose); an
+  evidence-log-projection student model with independence discount and verification class; a
+  pedagogical engine whose assessment acts are chosen by expected INFORMATION gain; a 10-invariant
+  Turn Contract with a render receipt; a 9-facet mastery predicate with 6 states; FigureSpec
+  semantic contracts; an operation-typed Math Graph with step decomposition; a closed-taxonomy
+  Turn Interpreter with an UNINTERPRETABLE class and a confidence gate (the stated alternative to
+  a detector zoo); 5 separated LLM roles; a deterministic Physics Verifier (dimensions, limiting
+  cases, signs, magnitudes, conservation); commutative append-only learner state; 10 Mermaid
+  diagrams; an 11-item failure analysis with 10 named redesigns (R1-R10) plus 3 self-rejections;
+  20 principles; 8 phased stages with measured exit criteria.
+- **Convergent with work already in this repo, and says so** (§20): the asset contract is the
+  direct ancestor of its publishability gate, and the misconception birth taxonomy, excursion
+  lifecycle, turn arbitration, the figure critic's `no-suitable-form` exit, the liveness
+  programme's `turnProgress` counters and the append-only evidence spine are all generalized
+  rather than replaced. Genuinely new: the Artifact-First Rule as a system-wide shape, the spiral
+  (concept × rung) graph, the Approximation Ledger (physics-specific — every lie-to-children is a
+  recorded debt with a domain of validity and a repaying cell), operation-typed math dependencies,
+  expected-information-gain probe selection, the render receipt, commutative learner-state events,
+  and the deterministic Physics Verifier.
+- Evidence used: a direct read of `docs/physics/kg/graph.json` (238 concepts, 12 domains, single
+  root `phys.meas.units`) and this file's own recorded defect history, used as a corpus of real
+  failure modes. **No claim in the document is asserted as verified production behaviour** — the
+  KG shape is the only measured fact in it.
+- No code, schema, route, KG, Blueprint, Educational Brain, or curriculum file was touched. Repo
+  state at the time: local `main` appeared to have diverged 79/87 against `origin/main` — that was
+  purely a SHALLOW-CLONE artifact (`.git/shallow` present, so no merge base was visible);
+  `git fetch --deepen=300` resolved it to 0 local-only / 102 behind, a clean fast-forward. Worth
+  knowing for future sessions: **deepen before believing a divergence count in this container.**
+
 ## Run locally
 ```
 cp .env.example .env   # set DATABASE_URL, AUTH_SECRET (openssl rand -base64 32), GROQ_API_KEY
