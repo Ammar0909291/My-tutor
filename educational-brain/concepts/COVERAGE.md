@@ -11,7 +11,7 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 406 | **Six domains CERTIFIED, math.disc at 20/32 (parked), math.graph at 13/16 (parked), math.calc the active campaign at 40/76.** 82 `math.found.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 69 `math.geom.*` (**COMPLETE, DOMAIN CERTIFIED** — the final 13 entries were restored by commit `0d2c76dd`'s Wave 0 recovery, which this row previously did not reflect) + 36 `math.nt.*` (**COMPLETE, DOMAIN CERTIFIED 2026-08-12** — the domain's final 8 concepts, `prime-distribution`, `continued-fractions`, `analytic-number-theory`, `prime-number-theorem`, `riemann-hypothesis`, `algebraic-number-theory`, `algebraic-integers`, `number-fields`, were authored this session, ending the PARKED status this row previously recorded) + 59 `math.alg.*` (**COMPLETE, DOMAIN CERTIFIED 2026-09-11** — Wave 1 (2026-08-12, 11 concepts): `expression`, `equation`, `term`, `coefficient`, `exponent-rules`, `polynomial`, `degree`, `zero-exponent`, `negative-exponent`, `solution-set`, `inequality`; Wave 2 (2026-08-12, 1 concept): `like-terms`; Wave 3 (2026-09-11, 3 concepts): `simplification`, `polynomial-operations`, `radicals`; Wave 4 (2026-09-11, 5 concepts): `linear-equation-1var`, `polynomial-division`, `fractional-exponent`, `simplifying-radicals`, `radical-equations`; Wave 5 (2026-09-11, 5 concepts): `inequality-1var`, `absolute-value-equations`, `linear-equation-2var`, `remainder-theorem`, `rationalizing-denominators`; Wave 6 (2026-09-11, 3 concepts): `inequality-2var`, `system-linear-equations`, `factor-theorem`; Wave 7 (2026-09-11, 4 concepts): `substitution-method`, `elimination-method`, `system-3var`, `factoring`; Wave 8 (2026-09-11, 3 concepts): `factoring-gcf`, `factoring-special`, `rational-expressions`; Wave 9 (2026-09-11, 4 concepts): `factoring-trinomials`, `rational-expressions-addition`, `rational-expressions-multiplication`, `rational-equations`; Wave 10 (2026-09-11, 1 concept): `quadratic-equation`; Wave 11 (2026-09-11, 2 concepts): `completing-the-square`, `polynomial-roots`; Wave 12 part 1 (2026-09-11, 1 concept): `quadratic-formula`; Wave 12 part 2 (2026-09-11, 2 concepts): `discriminant`, `rational-root-theorem`; Wave 12 part 3 (2026-09-11, 3 concepts): `fundamental-theorem-algebra`, `polynomial-inequality`, `vietas-formulas`; Wave 13 (2026-09-11, 2 concepts): `complex-polynomial-roots`, `rational-inequality`; Batch 15 (2026-09-11, 1 concept): `exponential-function`; Batch 16 (2026-09-11, 2 concepts): `logarithm`, `exponential-equations`; Batch 17 (2026-09-11, 3 concepts): `binomial-theorem`, `logarithm-properties`, `natural-logarithm`; Batch 18 (2026-09-11, 3 concepts, FINAL): `change-of-base`, `logarithmic-equations`, `pascals-triangle`; all Blueprint-grounded, reused by reference). 20 `math.disc.*` entries (**IN PROGRESS, standalone campaign since math.alg's certification** —
+| mathematics | 908 | 410 | **Six domains CERTIFIED, math.disc at 20/32 (parked), math.graph at 13/16 (parked), math.calc the active campaign at 44/76.** 82 `math.found.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 69 `math.geom.*` (**COMPLETE, DOMAIN CERTIFIED** — the final 13 entries were restored by commit `0d2c76dd`'s Wave 0 recovery, which this row previously did not reflect) + 36 `math.nt.*` (**COMPLETE, DOMAIN CERTIFIED 2026-08-12** — the domain's final 8 concepts, `prime-distribution`, `continued-fractions`, `analytic-number-theory`, `prime-number-theorem`, `riemann-hypothesis`, `algebraic-number-theory`, `algebraic-integers`, `number-fields`, were authored this session, ending the PARKED status this row previously recorded) + 59 `math.alg.*` (**COMPLETE, DOMAIN CERTIFIED 2026-09-11** — Wave 1 (2026-08-12, 11 concepts): `expression`, `equation`, `term`, `coefficient`, `exponent-rules`, `polynomial`, `degree`, `zero-exponent`, `negative-exponent`, `solution-set`, `inequality`; Wave 2 (2026-08-12, 1 concept): `like-terms`; Wave 3 (2026-09-11, 3 concepts): `simplification`, `polynomial-operations`, `radicals`; Wave 4 (2026-09-11, 5 concepts): `linear-equation-1var`, `polynomial-division`, `fractional-exponent`, `simplifying-radicals`, `radical-equations`; Wave 5 (2026-09-11, 5 concepts): `inequality-1var`, `absolute-value-equations`, `linear-equation-2var`, `remainder-theorem`, `rationalizing-denominators`; Wave 6 (2026-09-11, 3 concepts): `inequality-2var`, `system-linear-equations`, `factor-theorem`; Wave 7 (2026-09-11, 4 concepts): `substitution-method`, `elimination-method`, `system-3var`, `factoring`; Wave 8 (2026-09-11, 3 concepts): `factoring-gcf`, `factoring-special`, `rational-expressions`; Wave 9 (2026-09-11, 4 concepts): `factoring-trinomials`, `rational-expressions-addition`, `rational-expressions-multiplication`, `rational-equations`; Wave 10 (2026-09-11, 1 concept): `quadratic-equation`; Wave 11 (2026-09-11, 2 concepts): `completing-the-square`, `polynomial-roots`; Wave 12 part 1 (2026-09-11, 1 concept): `quadratic-formula`; Wave 12 part 2 (2026-09-11, 2 concepts): `discriminant`, `rational-root-theorem`; Wave 12 part 3 (2026-09-11, 3 concepts): `fundamental-theorem-algebra`, `polynomial-inequality`, `vietas-formulas`; Wave 13 (2026-09-11, 2 concepts): `complex-polynomial-roots`, `rational-inequality`; Batch 15 (2026-09-11, 1 concept): `exponential-function`; Batch 16 (2026-09-11, 2 concepts): `logarithm`, `exponential-equations`; Batch 17 (2026-09-11, 3 concepts): `binomial-theorem`, `logarithm-properties`, `natural-logarithm`; Batch 18 (2026-09-11, 3 concepts, FINAL): `change-of-base`, `logarithmic-equations`, `pascals-triangle`; all Blueprint-grounded, reused by reference). 20 `math.disc.*` entries (**IN PROGRESS, standalone campaign since math.alg's certification** —
 Batch 14 (2026-09-11, 1 concept): `counting-principles`; Batch 15 (2026-09-11, 1 concept):
 `permutations`; Batch 16 (2026-09-11, 1 concept): `combinations`; Batch 19 (2026-09-11, 5
 concepts): `combinatorics`, `pigeonhole`, `stars-bars`, `inclusion-exclusion`,
@@ -8239,3 +8239,94 @@ candidates ready (`improper-integrals`, `increasing-decreasing`,
 `partial-derivatives`, `rolles-theorem` — the last four newly unblocked by
 `mean-value-theorem`/`multivariable-intro`). No Physics, Chemistry, English,
 Biology, Computer Science, KG, Blueprint, or runtime file was modified.
+
+### Batch 46 — math.calc: increasing/decreasing functions, Rolle's Theorem, improper integrals, partial derivatives (2026-09-12)
+
+Re-fetched `main` (0 divergence, clean). Re-computed the frontier fresh — the
+exact 7 candidates predicted at the end of Batch 45 were confirmed still
+ready. Selected 4: `increasing-decreasing` and `rolles-theorem` (both direct
+children of Batch 45's `mean-value-theorem`), `partial-derivatives` (single:
+`multivariable-intro`, high-leverage — unlocks 3 further concepts at once),
+`improper-integrals` (`definite-integral`+`limits-at-infinity`, both
+long-authored), deferring `line-integrals`/`multiple-integrals`/
+`parametric-calculus`. All 4 Blueprint-grounded, reused by reference. **None
+of the 4 Blueprints carried an explicit birth-type column** — the
+twenty-third through twenty-sixth such gaps this campaign — every
+misconception independently classified:
+
+- `math.calc.increasing-decreasing` (advanced/apply, mastery_threshold 0.8,
+  estimated_hours 4; requires `mean-value-theorem` only, unlocks
+  `critical-points` — already authored in Batch 40, a genuine forward
+  relationship confirmed via directory listing) — the test's DERIVATION from
+  the MVT (never a standalone fact), the IVT-based one-sample-point-per-
+  interval efficiency guarantee, and a critical point that does NOT actually
+  interrupt monotonicity. MC-1 CRITICAL-POINT-ASSUMED-TO-BREAK-MONOTONICITY
+  (Type 1, overgeneralizing typical examples where a critical point DOES
+  mark a sign change), MC-2 SIGN-ANALYSIS-REQUIRES-EXHAUSTIVE-TESTING (Type
+  5, instruction-induced — the efficient shortcut is often taught without
+  its own IVT-based justification), MC-3
+  TEST-CITED-WITHOUT-MVT-JUSTIFICATION (Type 5, instruction-induced — the
+  test is often presented as an immediately usable rule, derivation
+  optional).
+- `math.calc.rolles-theorem` (advanced/apply, mastery_threshold 0.80,
+  estimated_hours 3; requires `mean-value-theorem` only) — the theorem as
+  the EXACT special case of the MVT where $f(a)=f(b)$ collapses the
+  conclusion to $f'(c)=0$, and the all-or-nothing nature of its three
+  hypotheses. MC-1 EQUAL-ENDPOINT-HYPOTHESIS-NOT-EXPLICITLY-VERIFIED (Type
+  5, instruction-induced — the identical hypothesis-skipping mechanism
+  already documented for `mean-value-theorem`'s own MC-1, here recurring in
+  Rolle's narrower special case), MC-2
+  PARTIAL-HYPOTHESIS-SATISFACTION-ASSUMED-TO-STILL-GUARANTEE-THE-CONCLUSION
+  (Type 1, overgeneralizing the everyday "mostly meeting conditions is
+  mostly enough" reasoning into formal logic's all-or-nothing hypotheses).
+- `math.calc.improper-integrals` (advanced/apply, mastery_threshold 0.75,
+  estimated_hours 8; requires `definite-integral`+`limits-at-infinity`,
+  unlocks `math.seq.integral-test` — confirmed genuinely unauthored,
+  math.seq entirely unstarted) — Type I (infinite-limit) and Type II
+  (singularity) impropriety, both resolved by the same
+  replace-then-limit strategy, and convergence-must-be-checked-never-
+  assumed. MC-1 IMPROPRIETY-ASSUMED-TO-REQUIRE-INFINITE-LIMITS (Type 1,
+  overgeneralizing from Type I examples), MC-2
+  IMPROPER-INTEGRAL-ASSUMED-TO-ALWAYS-CONVERGE (Type 1, overgeneralizing
+  "valid setup always produces a number" from every prior proper integral),
+  MC-3 SINGULARITY-LOCATION-OVERLOOKED-WITHIN-INTERVAL (Type 1,
+  overgeneralizing the endpoint-only pattern from typical introductory
+  examples).
+- `math.calc.partial-derivatives` (advanced/apply, mastery_threshold 0.8,
+  estimated_hours 8; requires `multivariable-intro` only, unlocks
+  `math.calc.gradient`+`math.calc.directional-derivative`+
+  `math.calc.chain-rule-multivariable` — a high-leverage node unblocking 2
+  of those 3 immediately) — freeze-the-other-variable computation,
+  Clairaut's theorem (mixed partials commute), and partial-versus-total
+  rate of change. MC-1 OTHER-VARIABLE-TREATED-AS-VARIABLE (Type 1,
+  overgeneralizing the single-variable "differentiate everything" reflex),
+  MC-2 MIXED-PARTIALS-NONCOMMUTATIVE (Type 6, analogy overextension — the
+  "order matters" pattern from matrix multiplication/composition
+  over-applied where Clairaut's theorem guarantees the opposite), MC-3
+  PARTIAL-IS-TOTAL-DERIVATIVE (Type 1, overgeneralizing the 1D
+  identification of "the derivative" with "the" rate of change).
+
+`math.calc` **40/76 → 44/76**. `math.disc`/`math.graph` unchanged this batch
+(20/32 parked, 13/16 parked). Mathematics **406/908 → 410/908**, 725
+remaining. **All 4 concepts zero-discrepancy** — the FOURTH consecutive
+all-4-zero-discrepancy batch, continuing the streak restarted in Batch 43
+after Batch 42's `arc-length` broke the prior five-consecutive-zero run.
+Full per-concept detail above. All tracking files updated in the same
+commit: `ROADMAP.md` Section 1/2 totals and the `math.calc` domain row,
+`COVERAGE.md`'s mathematics summary row and this Delivery history entry,
+`CLAUDE.md`'s campaign section. `EDUCATIONAL_BRAIN_INDEX.md` and
+`QUALITY.md` again deferred (same generated-artifact rationale as prior
+batches). Validated: `npx tsx scripts/validate-knowledge-graph.ts
+docs/mathematics/kg/graph.json` PASS, 908/908 reachable, 0 failures, 0
+warnings (KG file untouched); `scripts/math/state.ts` confirms math.calc
+44/76, mathematics 410/908, 6 EB-certified domains (unchanged); `npx tsc
+--noEmit` clean; targeted tests `mathPackageCorpus.test.ts` +
+`mathematicsAssetContract.test.ts` 479/479 passed. All 4 new entries'
+heading structure diffed clean against `math.alg.like-terms.md` on the
+first pass (0 diffs each). Fresh `math.calc` frontier computed: 6
+candidates ready (`chain-rule-multivariable`, `gradient`, `line-integrals`,
+`local-extrema`, `multiple-integrals`, `parametric-calculus` — the first
+two and `local-extrema` newly unblocked by
+`partial-derivatives`/`increasing-decreasing`). No Physics, Chemistry,
+English, Biology, Computer Science, KG, Blueprint, or runtime file was
+modified.

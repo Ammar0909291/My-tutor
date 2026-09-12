@@ -4018,6 +4018,43 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   `mean-value-theorem`/`multivariable-intro`). This is a genuinely multi-session campaign;
   continuation should verify state via `scripts/math/state.ts` fresh each time rather than
   trusting any number recorded here.
+- **Batch 46 — math.calc: increasing/decreasing functions, Rolle's Theorem, improper
+  integrals, partial derivatives** (2026-09-12): re-fetched `main` (0 divergence, clean).
+  Re-computed the frontier fresh — the exact 7 candidates predicted at the end of Batch 45
+  were confirmed still ready. Selected 4: `increasing-decreasing`/`rolles-theorem` (both
+  direct children of Batch 45's `mean-value-theorem`), `partial-derivatives` (single:
+  `multivariable-intro`, high-leverage — unlocks 3 further concepts at once),
+  `improper-integrals` (`definite-integral`+`limits-at-infinity`, both long-authored),
+  deferring `line-integrals`/`multiple-integrals`/`parametric-calculus`. All 4
+  Blueprint-grounded, none carrying an explicit birth-type column — every misconception
+  independently classified (`increasing-decreasing` MC-1 Type 1 overgeneralizing "critical
+  point marks a sign change" from typical examples/MC-2 Type 5 instruction-induced, the
+  IVT-based efficiency shortcut taught without justification/MC-3 Type 5 instruction-induced,
+  the test presented as a rule with derivation optional; `rolles-theorem` MC-1 Type 5 the
+  identical hypothesis-skipping mechanism as `mean-value-theorem`'s own MC-1, recurring in
+  the special case/MC-2 Type 1 overgeneralizing everyday "mostly meeting conditions" into
+  formal all-or-nothing logic; `improper-integrals` MC-1 Type 1 overgeneralizing from Type I
+  (infinite-limit) examples/MC-2 Type 1 overgeneralizing "valid setup always produces a
+  number"/MC-3 Type 1 overgeneralizing the endpoint-only singularity pattern; `partial-
+  derivatives` MC-1 Type 1 overgeneralizing the single-variable "differentiate everything"
+  reflex/MC-2 Type 6 analogy overextension, the "order matters" pattern from matrix
+  multiplication over-applied where Clairaut's theorem guarantees the opposite/MC-3 Type 1
+  overgeneralizing "the derivative" as "the" rate of change into a multi-rate setting). **All
+  4 concepts zero-discrepancy**, the FOURTH consecutive all-4-zero-discrepancy batch;
+  `partial-derivatives` unlocks `gradient`/`directional-derivative`/`chain-rule-multivariable`
+  at once, and `increasing-decreasing`'s own unlock `critical-points` was found already
+  authored (Batch 40), confirmed via directory listing as a genuine forward relationship.
+  `math.calc` **44/76** (40→44). Mathematics **410/908** (406→410), 725 remaining. Full
+  per-concept detail in `COVERAGE.md` Batch 46. Validated: KG validator PASS (908/908
+  reachable, file untouched), `scripts/math/state.ts` confirms math.calc 44/76 and
+  mathematics 410/908 (6 EB-certified domains unchanged), `tsc --noEmit` clean, targeted
+  tests 479/479 passed, all 4 heading structures diffed clean on the first pass (0 diffs
+  each). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Fresh
+  math.calc frontier computed: 6 candidates ready (`chain-rule-multivariable`, `gradient`,
+  `line-integrals`, `local-extrema`, `multiple-integrals`, `parametric-calculus` — the first
+  two and `local-extrema` newly unblocked by `partial-derivatives`/`increasing-decreasing`).
+  This is a genuinely multi-session campaign; continuation should verify state via
+  `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
 
 ## Physics Teacher Migration Architecture V2 — AUDITED, NOT ADOPTED (2026-09-12)
 
