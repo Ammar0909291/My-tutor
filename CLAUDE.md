@@ -3982,6 +3982,42 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   `reduction-formulas` — the last newly unblocked by `integration-by-parts`). This is a
   genuinely multi-session campaign; continuation should verify state via
   `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
+- **Batch 45 — math.calc: reduction formulas, L'Hôpital's rule, the Mean Value Theorem,
+  introduction to multivariable calculus** (2026-09-12): re-fetched `main` (0 divergence,
+  clean). Re-computed the frontier fresh — the exact 7 candidates predicted at the end of
+  Batch 44 were confirmed still ready. Selected 4 sharing either a single already-authored
+  prerequisite or two long-authored ones: `reduction-formulas` (`integration-by-parts`, a
+  direct continuation from Batch 44), `lhopitals-rule` (`derivative-definition`+`limits`),
+  `mean-value-theorem` (`derivative-definition`+`continuity`), `multivariable-intro`
+  (`derivative-definition`+`math.geom.vectors-3d`), deferring
+  `improper-integrals`/`line-integrals`/`parametric-calculus`. All 4 Blueprint-grounded,
+  none carrying an explicit birth-type column — every misconception independently
+  classified (`reduction-formulas` MC-1 Type 1 overgeneralizing "apply the rule, get the
+  answer" from single-step techniques/MC-2 Type 5 instruction-induced, worked examples
+  rarely show an incorrect further-reduction attempt; `lhopitals-rule` MC-1 Type 1
+  overgeneralizing "differentiate top and bottom when the denominator vanishes" past the
+  required numerator condition/MC-2 Type 4 notation-induced, the shared "indeterminate"
+  label obscuring a quotient-vs-product distinction; `mean-value-theorem` — three
+  misconceptions — MC-1 Type 1 overgeneralization/MC-2 Type 3 language contamination
+  ("there exists" misread as "exactly one")/MC-3 Type 4 notation-induced, the closed/open
+  hypothesis asymmetry collapsed into one; `multivariable-intro` — three misconceptions,
+  all Type 1 overgeneralization of a correct 1D procedure extended unmodified into 2D —
+  MC-1 SINGLE-PATH-LIMIT/MC-2 EVERY-SURFACE-IS-FUNCTION/MC-3 DOMAIN-IS-INTERVAL). **All 4
+  concepts zero-discrepancy**, the THIRD consecutive all-4-zero-discrepancy batch;
+  `mean-value-theorem`'s cross-link `math.real.mvt` confirmed genuinely unauthored
+  (independence mode, matching the Blueprint's own verification). `math.calc` **40/76**
+  (36→40). Mathematics **406/908** (402→406), 729 remaining. Full per-concept detail in
+  `COVERAGE.md` Batch 45. Validated: KG validator PASS (908/908 reachable, file untouched),
+  `scripts/math/state.ts` confirms math.calc 40/76 and mathematics 406/908 (6 EB-certified
+  domains unchanged), `tsc --noEmit` clean, targeted tests 479/479 passed, all 4 heading
+  structures diffed clean on the first pass (0 diffs each). No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Fresh math.calc
+  frontier computed: 7 candidates ready (`improper-integrals`, `increasing-decreasing`,
+  `line-integrals`, `multiple-integrals`, `parametric-calculus`, `partial-derivatives`,
+  `rolles-theorem` — the last four newly unblocked by
+  `mean-value-theorem`/`multivariable-intro`). This is a genuinely multi-session campaign;
+  continuation should verify state via `scripts/math/state.ts` fresh each time rather than
+  trusting any number recorded here.
 
 ## Physics Teacher Migration Architecture V2 — AUDITED, NOT ADOPTED (2026-09-12)
 
