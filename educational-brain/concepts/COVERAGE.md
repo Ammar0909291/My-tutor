@@ -11,7 +11,7 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 332 | **Five domains CERTIFIED, math.disc at 20/32, math.graph at 7/16.** 82 `math.found.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 69 `math.geom.*` (**COMPLETE, DOMAIN CERTIFIED** — the final 13 entries were restored by commit `0d2c76dd`'s Wave 0 recovery, which this row previously did not reflect) + 36 `math.nt.*` (**COMPLETE, DOMAIN CERTIFIED 2026-08-12** — the domain's final 8 concepts, `prime-distribution`, `continued-fractions`, `analytic-number-theory`, `prime-number-theorem`, `riemann-hypothesis`, `algebraic-number-theory`, `algebraic-integers`, `number-fields`, were authored this session, ending the PARKED status this row previously recorded) + 59 `math.alg.*` (**COMPLETE, DOMAIN CERTIFIED 2026-09-11** — Wave 1 (2026-08-12, 11 concepts): `expression`, `equation`, `term`, `coefficient`, `exponent-rules`, `polynomial`, `degree`, `zero-exponent`, `negative-exponent`, `solution-set`, `inequality`; Wave 2 (2026-08-12, 1 concept): `like-terms`; Wave 3 (2026-09-11, 3 concepts): `simplification`, `polynomial-operations`, `radicals`; Wave 4 (2026-09-11, 5 concepts): `linear-equation-1var`, `polynomial-division`, `fractional-exponent`, `simplifying-radicals`, `radical-equations`; Wave 5 (2026-09-11, 5 concepts): `inequality-1var`, `absolute-value-equations`, `linear-equation-2var`, `remainder-theorem`, `rationalizing-denominators`; Wave 6 (2026-09-11, 3 concepts): `inequality-2var`, `system-linear-equations`, `factor-theorem`; Wave 7 (2026-09-11, 4 concepts): `substitution-method`, `elimination-method`, `system-3var`, `factoring`; Wave 8 (2026-09-11, 3 concepts): `factoring-gcf`, `factoring-special`, `rational-expressions`; Wave 9 (2026-09-11, 4 concepts): `factoring-trinomials`, `rational-expressions-addition`, `rational-expressions-multiplication`, `rational-equations`; Wave 10 (2026-09-11, 1 concept): `quadratic-equation`; Wave 11 (2026-09-11, 2 concepts): `completing-the-square`, `polynomial-roots`; Wave 12 part 1 (2026-09-11, 1 concept): `quadratic-formula`; Wave 12 part 2 (2026-09-11, 2 concepts): `discriminant`, `rational-root-theorem`; Wave 12 part 3 (2026-09-11, 3 concepts): `fundamental-theorem-algebra`, `polynomial-inequality`, `vietas-formulas`; Wave 13 (2026-09-11, 2 concepts): `complex-polynomial-roots`, `rational-inequality`; Batch 15 (2026-09-11, 1 concept): `exponential-function`; Batch 16 (2026-09-11, 2 concepts): `logarithm`, `exponential-equations`; Batch 17 (2026-09-11, 3 concepts): `binomial-theorem`, `logarithm-properties`, `natural-logarithm`; Batch 18 (2026-09-11, 3 concepts, FINAL): `change-of-base`, `logarithmic-equations`, `pascals-triangle`; all Blueprint-grounded, reused by reference). 20 `math.disc.*` entries (**IN PROGRESS, standalone campaign since math.alg's certification** —
+| mathematics | 908 | 335 | **Five domains CERTIFIED, math.disc at 20/32, math.graph at 10/16.** 82 `math.found.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 69 `math.geom.*` (**COMPLETE, DOMAIN CERTIFIED** — the final 13 entries were restored by commit `0d2c76dd`'s Wave 0 recovery, which this row previously did not reflect) + 36 `math.nt.*` (**COMPLETE, DOMAIN CERTIFIED 2026-08-12** — the domain's final 8 concepts, `prime-distribution`, `continued-fractions`, `analytic-number-theory`, `prime-number-theorem`, `riemann-hypothesis`, `algebraic-number-theory`, `algebraic-integers`, `number-fields`, were authored this session, ending the PARKED status this row previously recorded) + 59 `math.alg.*` (**COMPLETE, DOMAIN CERTIFIED 2026-09-11** — Wave 1 (2026-08-12, 11 concepts): `expression`, `equation`, `term`, `coefficient`, `exponent-rules`, `polynomial`, `degree`, `zero-exponent`, `negative-exponent`, `solution-set`, `inequality`; Wave 2 (2026-08-12, 1 concept): `like-terms`; Wave 3 (2026-09-11, 3 concepts): `simplification`, `polynomial-operations`, `radicals`; Wave 4 (2026-09-11, 5 concepts): `linear-equation-1var`, `polynomial-division`, `fractional-exponent`, `simplifying-radicals`, `radical-equations`; Wave 5 (2026-09-11, 5 concepts): `inequality-1var`, `absolute-value-equations`, `linear-equation-2var`, `remainder-theorem`, `rationalizing-denominators`; Wave 6 (2026-09-11, 3 concepts): `inequality-2var`, `system-linear-equations`, `factor-theorem`; Wave 7 (2026-09-11, 4 concepts): `substitution-method`, `elimination-method`, `system-3var`, `factoring`; Wave 8 (2026-09-11, 3 concepts): `factoring-gcf`, `factoring-special`, `rational-expressions`; Wave 9 (2026-09-11, 4 concepts): `factoring-trinomials`, `rational-expressions-addition`, `rational-expressions-multiplication`, `rational-equations`; Wave 10 (2026-09-11, 1 concept): `quadratic-equation`; Wave 11 (2026-09-11, 2 concepts): `completing-the-square`, `polynomial-roots`; Wave 12 part 1 (2026-09-11, 1 concept): `quadratic-formula`; Wave 12 part 2 (2026-09-11, 2 concepts): `discriminant`, `rational-root-theorem`; Wave 12 part 3 (2026-09-11, 3 concepts): `fundamental-theorem-algebra`, `polynomial-inequality`, `vietas-formulas`; Wave 13 (2026-09-11, 2 concepts): `complex-polynomial-roots`, `rational-inequality`; Batch 15 (2026-09-11, 1 concept): `exponential-function`; Batch 16 (2026-09-11, 2 concepts): `logarithm`, `exponential-equations`; Batch 17 (2026-09-11, 3 concepts): `binomial-theorem`, `logarithm-properties`, `natural-logarithm`; Batch 18 (2026-09-11, 3 concepts, FINAL): `change-of-base`, `logarithmic-equations`, `pascals-triangle`; all Blueprint-grounded, reused by reference). 20 `math.disc.*` entries (**IN PROGRESS, standalone campaign since math.alg's certification** —
 Batch 14 (2026-09-11, 1 concept): `counting-principles`; Batch 15 (2026-09-11, 1 concept):
 `permutations`; Batch 16 (2026-09-11, 1 concept): `combinations`; Batch 19 (2026-09-11, 5
 concepts): `combinatorics`, `pigeonhole`, `stars-bars`, `inclusion-exclusion`,
@@ -24,15 +24,16 @@ developing the graph-theory subtree; Batch 23 (2026-09-11, 1 concept): `spanning
 closing the `graph-trees → spanning-tree` chain, leaving 0 topologically-ready math.disc
 candidates; all Blueprint-grounded, reused by reference) + 1
 `math.func.*` entry (`function-concept`, parked at 1/29, its own math.alg-serving purpose fully
-served) + 7 `math.graph.*` entries (**IN PROGRESS, opened 2026-09-12** — Batch 24 (2026-09-12,
+served) + 10 `math.graph.*` entries (**IN PROGRESS, opened 2026-09-12** — Batch 24 (2026-09-12,
 3 concepts): `graph`, `tree`, `minimum-spanning-tree`; opened because every one of `math.disc`'s
 own graph-theory entries had already named a `math.graph` sibling as a Blueprint-exists-no-EB-yet
 cross-link; Batch 25 (2026-09-12, 4 concepts): `connectivity`, `eulerian-circuit`,
 `hamiltonian-cycle`, `graph-coloring` — closing all 4 concepts left ready after Batch 24, one of
 which (`graph-coloring`) corrected a stale Blueprint cross-link claim about its own
-`math.disc.graph-coloring` sibling; 6 further concepts already topologically ready:
-`graph-invariants`, `graph-operations`, `maximum-flow`, `matching`, `ramsey-theory`,
-`extremal-graph-theory`; all Blueprint-grounded, reused by reference). All
+`math.disc.graph-coloring` sibling; Batch 26 (2026-09-12, 3 concepts): `graph-invariants`,
+`graph-operations`, `matching` — closing 3 of the 6 concepts left ready after Batch 25; 3 further
+concepts already topologically ready: `maximum-flow`, `ramsey-theory`, `extremal-graph-theory`
+(all expert/research difficulty); all Blueprint-grounded, reused by reference). All
 confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired —
 0 known violations remain in mathematics. See Delivery history for full per-concept lists and
 misconception detail. |
@@ -6493,3 +6494,55 @@ clean against `math.alg.like-terms.md` on the first pass (0 diffs each). Fresh `
 frontier computed: 6 candidates ready (`graph-invariants`, `graph-operations`, `maximum-flow`,
 `matching`, `ramsey-theory`, `extremal-graph-theory`). No Physics, Chemistry, English, Biology,
 Computer Science, KG, Blueprint, or runtime file was modified.
+
+### Batch 26 — closing 3 of math.graph's post-Batch-25 frontier (2026-09-12)
+
+Re-computed the frontier fresh — 6 candidates confirmed ready: `graph-invariants`,
+`graph-operations`, `maximum-flow`, `matching`, `ramsey-theory`, `extremal-graph-theory`. Selected
+a coherent 3-concept subset sharing `math.graph.graph` as their sole prerequisite
+(`graph-invariants`, `graph-operations`, `matching`), deferring the two deeper-prerequisite/
+higher-difficulty concepts (`maximum-flow`, requiring `connectivity`; `ramsey-theory` and
+`extremal-graph-theory`, each requiring a `math.disc` cross-domain prerequisite in addition to
+`graph`) to a future batch. All 3 Blueprint-grounded, reused by reference.
+
+- **`math.graph.graph-invariants`** (proficient/understand, requires `math.graph.graph` only,
+  no cross-links) — graph isomorphism via bijection, the six standard invariants (degree
+  sequence, order, size, components, girth, diameter) as a one-way filter (mismatch proves
+  non-isomorphism; a match never proves isomorphism), and the canonical equal-invariant
+  non-isomorphic pairs ($C_6$ vs. $C_3\sqcup C_3$; $K_{3,3}$ vs. the triangular prism). 3
+  misconceptions, birth types independently derived (Blueprint pre-assigns none): MC-1
+  EQUAL-INVARIANTS-MEANS-ISOMORPHIC (Type 1, critical), MC-2 DIAMETER-EQUALS-GIRTH (Type 3,
+  foundational), MC-3 ISOMORPHISM-IS-SAME-AS-EQUAL-GRAPHS (Type 3, moderate).
+- **`math.graph.graph-operations`** (proficient/apply, requires `math.graph.graph` only, no
+  cross-links) — union/intersection/complement/join, subgraph vs. induced subgraph, edge/vertex
+  deletion and contraction, the line graph and its degree formula, the Cartesian product, and a
+  property-preservation table (bipartiteness/connectivity/regularity across operations). 3
+  misconceptions: MC-1 COMPLEMENT-PRESERVES-BIPARTITE (Type 1, moderate), MC-2
+  INDUCED-SUBGRAPH-VS-SUBGRAPH (Type 4, foundational), MC-3 CONTRACTION-ALWAYS-SIMPLE (Type 1,
+  moderate).
+- **`math.graph.matching`** (expert/apply, requires `math.graph.graph` only, no cross-links) —
+  matching/maximum matching/maximal matching/perfect matching distinguished via counterexample,
+  $M$-alternating/augmenting paths and Berge's theorem, Hall's theorem (the all-subsets
+  quantifier, not just singletons), König's theorem for bipartite graphs, and the Gallai
+  inequality's weaker bound for general graphs (via $K_3$). 3 misconceptions: MC-1
+  MAXIMAL-EQUALS-MAXIMUM (Type 3, critical), MC-2 HALL-CONDITION-ONLY-FOR-SINGLETONS (Type 1,
+  critical), MC-3 KÖNIG-HOLDS-FOR-ALL-GRAPHS (Type 1, foundational).
+
+`math.graph` **7/16 → 10/16**. `math.disc`/`math.func` unchanged this batch (20/32 and 1/29,
+parked). Mathematics **332/908 → 335/908**, 800 remaining. No genuine content-overlap or
+metadata discrepancy found in any of the 3 entries; one genuine forward connection recorded in
+`matching`'s own Curriculum Feedback (König's theorem and `connectivity`'s Menger's theorem share
+the same max-flow-min-cut/LP-duality structural pattern — noted, not developed, to avoid
+overreach). Full per-concept detail above. All tracking files updated in the same commit:
+`ROADMAP.md` Section 1/2 totals and the `math.graph` domain row, `COVERAGE.md`'s mathematics
+summary row and this Delivery history entry, `CLAUDE.md`'s campaign section.
+`EDUCATIONAL_BRAIN_INDEX.md` and `QUALITY.md` again deferred (same generated-artifact rationale
+as prior batches). Validated: `npx tsx scripts/validate-knowledge-graph.ts
+docs/mathematics/kg/graph.json` PASS, 908/908 reachable, 0 failures, 0 warnings (KG file
+untouched); `scripts/math/state.ts` confirms math.graph 10/16 and mathematics 335/908, 0 orphan
+EB files, 0 duplicate EB files; `npx tsc --noEmit` clean; targeted tests
+`mathPackageCorpus.test.ts` + `mathematicsAssetContract.test.ts` 479/479 passed. All 3 new
+entries' heading structure diffed clean against `math.alg.like-terms.md` on the first pass (0
+diffs each). Fresh `math.graph` frontier computed: 3 candidates ready (`maximum-flow`,
+`ramsey-theory`, `extremal-graph-theory`), all expert/research difficulty. No Physics, Chemistry,
+English, Biology, Computer Science, KG, Blueprint, or runtime file was modified.

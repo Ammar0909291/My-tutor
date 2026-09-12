@@ -3508,6 +3508,22 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   `graph-operations`, `maximum-flow`, `matching`, `ramsey-theory`, `extremal-graph-theory`). This
   is a genuinely multi-session campaign; continuation should verify state via
   `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
+- **Batch 26 — closing 3 of math.graph's post-Batch-25 frontier** (2026-09-12): re-computed the
+  frontier fresh — 6 candidates confirmed ready; selected the 3 sharing `math.graph.graph` as
+  their sole prerequisite (`graph-invariants`, `graph-operations`, `matching`), deferring
+  `maximum-flow`/`ramsey-theory`/`extremal-graph-theory` (each needing a deeper or cross-domain
+  prerequisite) to a future batch. All 3 authored, all Blueprint-grounded. `math.graph`
+  **7/16 → 10/16**. Mathematics **332/908 → 335/908**, 800 remaining. One genuine forward
+  connection recorded (not developed further): König's theorem (`matching`) and Menger's theorem
+  (`connectivity`) share the same max-flow-min-cut/LP-duality pattern. Full per-concept detail in
+  `COVERAGE.md` Batch 26. Validated: KG validator PASS (908/908 reachable, file untouched), 0
+  orphan/duplicate EB files, `tsc --noEmit` clean, targeted tests 479/479 passed, all 3 heading
+  structures diffed clean on the first pass (0 diffs each). No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Fresh math.graph
+  frontier computed: 3 candidates ready (`maximum-flow`, `ramsey-theory`,
+  `extremal-graph-theory`), all expert/research difficulty. This is a genuinely multi-session
+  campaign; continuation should verify state via `scripts/math/state.ts` fresh each time rather
+  than trusting any number recorded here.
 
 ## Run locally
 ```
