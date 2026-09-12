@@ -141,8 +141,25 @@ authoritative record for that range.
   audit independently reproduces the same mechanism 19+ more times across a
   different set of concepts (orders 11–105), confirming it is not scoped to any
   particular batch of content.
+- **2026-09-12 — FIXED (commit `3bb4cc4`, deployed).** Root cause was structural, not
+  another missing exclusion: `genuineUnmappedAttempt` carried ONE positive term
+  (`message.trim() !== ''`) and six negatives, so its DEFAULT answer to "is this an
+  answer attempt?" was YES and every non-answer had to be excluded by name — which is
+  why each prior round of exclusions was followed by a fresh false-positive class.
+  Reproduced independently before changing anything: 9 of the 10 documented phrasings
+  escape EVERY pre-existing exclusion, for two deliberate reasons in the classifiers
+  (`detectLearnerQuestion` REQUIRES a `?`; `isBareAcknowledgement` matches the WHOLE
+  message against a phrase list). `engagesPendingOptions` inverts the default —
+  the lead-in may fire only on positive evidence the message reached for one of the
+  REAL pending options. It never grades; `resolveMcqChoice` is untouched.
+  PRODUCTION-VERIFIED on a disposable QA account (`eng.grammar.verbs`): all three
+  tested documented phrasings served NO lead-in. **Recall is NOT live-verified** —
+  that turn attached a new probe so it was not a re-offer; recall is pinned offline
+  only. Guard: `src/tests/engMcqReofferFalsePositive.test.ts`.
+- **Status (superseded):** the KNOWN/RECURRING line above is the pre-fix record and is
+  kept as history. Current status: **FIXED**.
 - **Severity:** P1 (per the original finding doc's own classification).
-- **Fix priority:** High.
+- **Fix priority:** High — DONE.
 - **Fix category:** code (`route.ts` Option-A guard, `detectLearnerQuestion`,
   `isBareAcknowledgement`).
 
@@ -176,7 +193,18 @@ authoritative record for that range.
   in the real probe. (Does not fabricate recorded mastery evidence — `check`/
   `practice` counters were confirmed to stay at 0 through these turns — which is why
   this is classified P1 rather than P0 under this file's severity convention.)
-- **Fix priority:** Critical.
+- **2026-09-12 — FIXED (commit `3bb4cc4`, deployed), in two halves.** (1) The false
+  confirmation: `stripLeadingFalseConfirmation` already existed but was gated behind
+  `genuineUnmappedAttempt`, which the Group-9 turn was not. It now runs on ANY ungraded
+  re-offer — a re-offer means the same probe is still pending and NOTHING was graded, so
+  the server has no verdict the model could be reporting. (2) The invented option
+  content: `stripContradictingProseOptions` removes a lettered option run whose options
+  are not the pending probe's, which is the Group-12 shape (four fabricated options
+  beside a different real widget while the lead-in pointed at "the list below"). A
+  FAITHFUL prose restatement of the real options is returned untouched, only option
+  fragments are ever removed, and it never returns an empty reply.
+- **Status (current):** **FIXED** — the KNOWN line above is kept as the pre-fix record.
+- **Fix priority:** Critical — DONE.
 - **Fix category:** code (same guard as ENG-D02).
 
 ---
@@ -232,13 +260,32 @@ authoritative record for that range.
   SHOUTED-name and terminator requirements are unchanged, so prose arrows are untouched
   (4 negative controls pinned). Guard: `src/tests/englishOpenDefects.test.ts`. The second
   instance recorded above (`eng.writing.supporting-details`, order 113) is additional
-  production evidence for the SAME shared-code-path root cause this fix addresses — it
-  was found before the fix and is covered by it, not a separate residual case.
+  production evidence for the SAME shared-code-path root cause this fix addresses.
+- **2026-09-12 (second pass) — CORRECTION: the order-113 instance is NOT confirmed
+  covered, and the earlier claim that it was is withdrawn.** The two instances do not
+  share an opener. Order 60 leaked `<--ATTEMPT` (angle bracket) and is reproduced
+  fixed. Order 113 is recorded in the capture as **`[!--ATTEMPT`** — a SQUARE bracket.
+  Run against the real module: `stripResidualMachineTags` leaves `[!--ATTEMPT …-->`
+  UNTOUCHED and `hasResidualMachineTag` reports it CLEAN (both terminated and
+  truncated forms), because the comment sweep requires a leading `<` and the bracket
+  sweep requires an uppercase letter immediately after `[`, so `[!--` satisfies
+  neither. **Two readings remain open and this audit cannot separate them:** (a) the
+  model emitted a third opener variant, which the fix genuinely does not cover; or
+  (b) the `[` is the log capture's own rendering of `<` (the same line shows the text
+  truncated mid-attribute, so the capture is demonstrably lossy). Resolving it needs
+  the raw stored assistant message for that turn, not the audit log. Recorded as an
+  open residual rather than closed, per this file's rule against marking anything
+  fixed because a related defect was.
   **The "argued discovery step" half is NOT fixed** — that is model output echoing
   authoring-style prose, not a tag, and no stripper can tell it from teaching text.
-- **Status:** PARTIALLY FIXED — the `<--ATTEMPT ...-->` control-tag half is FIXED
-  and reproduced across 2 confirmed production instances; the "argued discovery
-  step" prose-echo half remains open (see Root cause above).
+- **Status:** PARTIALLY FIXED, with one residual — the `<--ATTEMPT ...-->`
+  (angle-bracket) control-tag half is FIXED and reproduced on the order-60 instance.
+  TWO halves remain OPEN: (1) the "argued discovery step" prose-echo (3 instances,
+  orders 20/21/27) — model output, not a tag, and no stripper can tell it from
+  teaching text; (2) the order-113 `[!--ATTEMPT` opener, measured NOT covered by the
+  fix, with capture-artifact vs. third-variant unresolved (see the 2026-09-12 second-
+  pass correction above). Counted as OPEN in the summary on the strength of (1),
+  which is unambiguous.
 - **Severity:** P1 — this is a genuine breach of the prompt/learner-output boundary:
   real students saw raw internal authoring/control text. Does not fabricate mastery
   evidence, so not P0 under this file's convention, but it is a serious trust and
@@ -369,13 +416,26 @@ authoritative record for that range.
   scoping instruction. That doc traces a related but different trigger phrase
   ("what are we learning today"); this is additional evidence the same detector
   family is over-broad, with a new, distinct trigger phrase.
-- **Status:** RECURRING — extends `docs/architecture/ENGLISH_TOPIC_DRIFT_FINDING.md`
-  with a new, previously-undocumented trigger phrase.
+- **2026-09-12 — INVESTIGATED, NO RUNTIME MECHANISM FOUND, deliberately NOT patched
+  (commit `77ac685`).** Ran the trigger through every real detector:
+  `namedTopicUnknownTo`, `extractRequestedTopic` (both floors), `isExplicitTopicRequest`,
+  `resolveRequestedConceptId` and `readTurnIntent` ALL return null/false for
+  "hello, new topic for me". An excursion cannot open without a resolved concept id or
+  a topic title, so no deterministic path acts on this message — the observed drift is
+  model behaviour reading its own context, with nothing to narrow. Adding a regex to
+  match the phrase is precisely the move that produced the ENG-D02 exclusion-list trap,
+  so it was recorded rather than guessed at. Pinned by
+  `src/tests/englishTopicDrift.test.ts`.
+- **Status:** OPEN — RECURRING, and now also NOT-RUNTIME-ADDRESSABLE on current
+  evidence (the pre-fix "extends ENGLISH_TOPIC_DRIFT_FINDING.md with a new trigger
+  phrase" record above is kept as history). Any future fix is prompt-level, not
+  detector-level.
 - **Severity:** P2 — usually self-corrects within the same or next turn (the driver's
   next message typically returns to the actual lesson); does not appear to derail a
   whole lesson by itself (contrast ENG-D08).
 - **Fix priority:** Medium.
-- **Fix category:** code (topic/excursion-request detector).
+- **Fix category:** prompt (re-categorised from code, 2026-09-12 — the detector layer
+  was measured not to fire on this phrase at all).
 
 ---
 
@@ -407,7 +467,17 @@ authoritative record for that range.
   concept, including content that is itself wrong. Not P0 because no mastery
   evidence was fabricated (the learner was simply never assessed on the real
   concept during this window).
-- **Fix priority:** Critical.
+- **2026-09-12 — EXPLICITLY NOT CLOSED by the topic-drift fixes of commit `77ac685`.**
+  Stated because two sibling entries in this family (ENG-D09) WERE fixed that day and
+  it would be easy to assume this one came with them. It did not, and the mechanisms
+  differ: the ENG-D09 fix narrows what counts as a NAMED TOPIC in a learner request
+  (`DISCOURSE_NOUNS`), and this episode has no such request — its own evidence above
+  identifies the trigger as a bare "give me an example" landing on the ordinary
+  English word *find*, with no topic named by the learner at any point. ENG-D07, the
+  entry this one names as a possible contributing cause, was separately measured to
+  have NO runtime mechanism at all, so it cannot supply one here either. Root cause
+  remains UNCONFIRMED and this remains the most severe open drift instance.
+- **Fix priority:** Critical — STILL OPEN.
 - **Fix category:** code (topic/excursion-request detector) and prompt (grounding
   "give me an example" requests to the concept actually being taught).
 
@@ -436,11 +506,36 @@ authoritative record for that range.
   — plausibly the same topic/excursion-request detector family implicated in
   ENG-D07/ENG-D08, over-reading a first-person/meta phrase as a lesson-scoping
   instruction.
-- **Status:** KNOWN — `docs/architecture/ENGLISH_TOPIC_DRIFT_FINDING.md`.
+- **2026-09-12 — FIXED (commit `77ac685`, deployed). BOTH episode classes, and they
+  did NOT share a root cause** — the source doc's own warning about that was correct,
+  and each was investigated independently.
+  - **Self-echo half** (`digraphs`, `print-concepts`) — the topic-request detector.
+    Reproduced deterministically against the real `namedTopicUnknownTo`: "hello, what
+    are we learning today" extracted the topic **"we learning today"** and "explain
+    simple please, im a beginner" extracted **"simple please, im a beginner"** —
+    verbatim the phrases the transcripts record being taught, so this is the root
+    cause, not the lead it was filed as. Exactly ONE word held each phrase up
+    (`today`, `beginner`), neither about any subject. Fixed inside `DISCOURSE_NOUNS`
+    under the existing one-real-word-survives rule; every added word occurs in 0 of
+    1,775 concept titles, and `learning` was deliberately NOT added (real vocabulary:
+    "Machine Learning"). The request detector itself is untouched — the learner DID
+    ask; what they named was not a subject.
+  - **Cross-concept half** (`complex-sentences` → pronoun content) — NOT the detector.
+    Every detector returns null on "please explain it another way". It is the
+    weak-topic reinforcement advisory, whose suppression guard consults the RECOVERY
+    rung of the arbitration ladder but not the LEARNER_REQUEST rung that also outranks
+    TEACH. Measured: all four pre-existing suppression terms read false while
+    `learnerRequest` read `explain_differently`, so the advisory stood and pulled
+    already-taught `eng.grammar.pronouns` content into the lesson. One rung added.
+  Guard: `src/tests/englishTopicDrift.test.ts`, including negative controls that an
+  ordinary calm turn still leaves the advisory standing.
+- **Status:** **FIXED** — both episode classes; the KNOWN line is kept as the pre-fix
+  record. Does NOT close ENG-D08 or ENG-D22 (different mechanisms — see those entries).
 - **Severity:** P1 (matches this file's classification for ENG-D08, the same defect
   family).
-- **Fix priority:** High.
-- **Fix category:** code (topic/excursion-request detector).
+- **Fix priority:** High — DONE.
+- **Fix category:** code (topic/excursion-request detector + weak-topic advisory
+  suppression).
 
 ---
 
@@ -825,7 +920,17 @@ authoritative record for that range.
 - **Status:** NEW — extends the topic-drift defect family with a new episode class.
 - **Severity:** P1 — a real chunk of the lesson (T7 onward) teaches content entirely
   unrelated to the concept being assessed.
-- **Fix priority:** High.
+- **2026-09-12 — EXPLICITLY NOT CLOSED by commit `77ac685`.** ENG-D09's two mechanisms
+  were fixed that day and this entry names the same detector family, so the
+  non-closure is stated rather than left to inference. Neither fix reaches this
+  episode: the self-echo fix narrows what counts as a named topic in a LEARNER
+  REQUEST, and the transcript records no topic request at any point before the drift;
+  the weak-topic-advisory fix suppresses an aside naming an already-taught weak topic,
+  and the drifted content (poetry meter/rhyme) is not recorded as a prior weak topic
+  for this learner. Root cause remains UNCONFIRMED. This is the family's only
+  adjacent-sub-domain episode and is the strongest remaining evidence that a drift
+  channel exists which none of the three 2026-09-12 fixes touches.
+- **Fix priority:** High — STILL OPEN.
 - **Fix category:** code (topic/excursion-request detector — same family as
   ENG-D07/D08/D09).
 
@@ -933,22 +1038,52 @@ authoritative record for that range.
 batches 1–19) — this revision adds ENG-D21/D22/D23 and extends ENG-D04, D16, D17,
 D18 with additional confirmed instances found in Checkpoints 8–13.
 
-| Severity | Count |
+| Severity (OPEN only) | Count |
 |---|---|
 | P0 | 0 |
-| P1 | 13 (ENG-D01, D02, D03, D04, D05, D08, D09, D11, D14, D17, D18, D22, D23) |
+| P1 | 10 (ENG-D01, D04, D05, D08, D11, D14, D17, D18, D22, D23) |
 | P2 | 6 (ENG-D07, D10, D12, D13, D15, D21) |
 | P3 | 1 (ENG-D19) |
+| **Total confirmed OPEN defects** | **17** |
+
+| Closed | Count |
+|---|---|
+| Fixed, reproduced first, deployed | 4 (ENG-D02, D03, D09, D16) |
 | Closed — benign (instrument defect, not a product defect) | 1 (ENG-D06) |
-| Fixed | 1 (ENG-D16 — both confirmed instances, same root cause, same fix) |
-| Partially fixed (still counted in P1 above) | 1 (ENG-D04 — the `<--ATTEMPT...-->` control-tag half is fixed; the "argued discovery step" prose-echo half remains open) |
 | Resolved (pre-existing, separate campaign) | 1 (ENG-D20) |
-| **Total unique confirmed defects** | **23** |
+| **Total closed** | **6** |
+| **Total unique confirmed defects found (open + closed)** | **23** |
 | Observations (not confirmed as defects) | 5 (OBS-01 … OBS-05) |
 
-Fix-category breakdown of the 23 confirmed defects: 13 code, 5 content, 2
-architecture, 2 prompt, 1 visual, 1 QA (some entries span two categories and are
-counted under their primary one above).
+ENG-D04 is counted ONCE, under P1 open, though it is partially fixed: its
+angle-bracket `<--ATTEMPT ...-->` half is fixed and reproduced, while the
+"argued discovery step" prose-echo half and the order-113 `[!--ATTEMPT` opener
+both remain open. See its entry.
+
+### Open defects by owning discipline
+
+Deliberately kept separate — these need different people and different evidence,
+and collapsing them has previously made this register's counts read as one
+backlog when they are four.
+
+| Discipline | Count | Entries |
+|---|---|---|
+| Runtime / teaching-engine code | 7 | ENG-D05, D08, D10, D11, D21, D22, D23 |
+| Content authoring (probes/assets) | 4 | ENG-D12, D14, D15, D19 |
+| Prompt / model-output behaviour | 3 | ENG-D01, D04, D07 |
+| Infrastructure (DB, timeouts) | 2 | ENG-D17, D18 |
+| Visual authoring | 1 | ENG-D13 |
+
+Two re-categorisations were made on 2026-09-12 evidence, not on judgement:
+**ENG-D07** moved code → prompt (every detector was measured not to fire on its
+trigger phrase, so there is no detector to narrow), and **ENG-D01** moved
+"code or prompt, undetermined" → prompt (the residual-tag pipeline was ruled out
+by inspection — it removes markup, never characters inside prose, and no
+sanitiser in `src/` strips non-ASCII — leaving generation as the remaining
+hypothesis, still unproven). **ENG-D12** is listed under content authoring on the
+strength of its own entry's reasoning ("the durable fix is closing the probe-pool
+shortfall — see ENG-D14 — not patching this fallback path"), not because the
+fallback path is acceptable.
 
 **Coverage note:** this register was compiled while the audit was still roughly
 halfway through the English KG (through order ~105). The audit has since run to
@@ -962,17 +1097,26 @@ of every single occurrence logged across all 19 batches.
 
 **Merge note (2026-09-12):** this file was updated concurrently by two sessions —
 this campaign's completion pass (adding ENG-D21/D22/D23 and extending D04/D16/D17/
-D18 with new instances) and a separate fix session (`0f8d454`, `fcd2a4c`) that
-closed ENG-D06 as benign and fixed ENG-D04's tag half and ENG-D16 in full, both
-reproduced against the real modules with passing tests. Both sets of changes are
-merged above. **One discrepancy found while merging, flagged rather than silently
-resolved either way:** the fix session's own commit `fcd2a4c` summary-table edit
-additionally claimed ENG-D02, D03, D08, D09 as "Fixed 2026-09-12" and ENG-D07 as
-"no runtime mechanism," but neither that commit's message nor its diff touched the
-ENG-D02/D03/D07/D08/D09 entry sections themselves (verified via `git show
-fcd2a4c` — only ENG-D04, ENG-D05, ENG-D16, and the stop-request gap are discussed
-or diffed). Those five entries are therefore left as OPEN in this table, matching
-their own unedited section content, rather than trusting an unsubstantiated
-summary-row claim. A future session should verify whether those five were
-genuinely addressed elsewhere and, if so, update their individual entries with the
-same reproduce-first evidence standard the other fixes in this file demonstrate.
+D18 with new instances) and a separate fix session that closed ENG-D06 as benign
+and fixed ENG-D04's tag half and ENG-D16 in full. That pass flagged a discrepancy
+rather than resolving it: a summary row claimed ENG-D02, D03, D08, D09 fixed and
+ENG-D07 as having no runtime mechanism, while `git show fcd2a4c` showed none of
+those five entry sections touched — so it left all five OPEN and asked a future
+session to verify them to the same reproduce-first standard.
+
+**Resolved (2026-09-12, second pass) — that verification was done, per entry, and
+the five did NOT all land the same way.** The flag was right to be raised and its
+premise was incomplete: the work was real but lived in EARLIER commits
+(`3bb4cc4` for ENG-D02/D03, `77ac685` for the topic-drift family), not in
+`fcd2a4c`, which is why a diff of that one commit could not find it. Each entry now
+carries its own evidence:
+- **ENG-D02, ENG-D03 → FIXED** (`3bb4cc4`), root cause reproduced before the change,
+  ENG-D02 additionally production-verified on a disposable QA account.
+- **ENG-D09 → FIXED** (`77ac685`), both of its episode classes, which were confirmed
+  to have two genuinely different root causes.
+- **ENG-D07 → still OPEN**, but re-categorised: measured to have no runtime
+  mechanism at all, so it is a prompt-level item, not a detector one.
+- **ENG-D08 → still OPEN, explicitly NOT closed** by the ENG-D09 fixes. Its trigger
+  is a bare "give me an example" with no topic named, which neither fix reaches.
+  Marking it fixed because a sibling in its family was would have been exactly the
+  error this register warns against, and the same reasoning is recorded on ENG-D22.
