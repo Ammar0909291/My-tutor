@@ -4087,6 +4087,38 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   `gradient`/`chain-rule-multivariable`/`local-extrema`). This is a genuinely multi-session
   campaign; continuation should verify state via `scripts/math/state.ts` fresh each time
   rather than trusting any number recorded here.
+- **Batch 48 — math.calc: directional derivatives, optimization, curve sketching,
+  extrema of multivariable functions** (2026-09-12): fetch clean (0/0), state.ts confirmed
+  48/76 matching Batch 47's end state. Re-computed the frontier fresh — the exact 7
+  candidates predicted at the end of Batch 47 were confirmed still ready. Selected 4
+  (`directional-derivative` single-prereq `gradient`; `optimization` single-prereq
+  `local-extrema`; `curve-sketching` all 3 prereqs long-authored; `multivariable-extrema`
+  both prereqs long-authored), deferring `line-integrals`/`multiple-integrals`/
+  `vector-fields` (needing `math.geom.vectors-3d`, not yet authored). All 4
+  Blueprint-grounded, none carrying an explicit birth-type column — every misconception
+  independently classified (`directional-derivative` MC-1 Type 5 instruction-induced,
+  normalization skipped/MC-2 Type 4 notation-induced, vector conflated with its scalar
+  rate; `optimization` MC-1/MC-2/MC-3 all Type 1 overgeneralization — endpoints skipped,
+  EVT's bounded/closed hypothesis ignored, local extremum assumed global; `curve-sketching`
+  MC-1 Type 5 instruction-induced, domain/asymptote steps skipped/MC-2 Type 2 perceptual,
+  "connect the dots" habit; `multivariable-extrema` MC-1/MC-2/MC-3 all Type 1
+  overgeneralization, MC-3 cross-referenced to `multivariable-intro`'s own MC-1
+  SINGLE-PATH-LIMIT as the identical 1D-into-2D mechanism). **All 4 concepts
+  zero-discrepancy**, the SIXTH consecutive all-4-zero-discrepancy batch. Two genuine
+  Blueprint-STALENESS findings (not KG discrepancies): `optimization`'s and
+  `multivariable-extrema`'s Blueprints each claim their `math.opt.*` cross-link sibling has
+  no Blueprint file yet, but both sibling Blueprint files now exist on disk (independence
+  mode correctly retained since neither has an EB entry). `math.calc` **52/76** (48→52).
+  Mathematics **418/908** (414→418), 717 remaining. Full per-concept detail in
+  `COVERAGE.md` Batch 48. Validated: KG validator PASS (908/908 reachable, file
+  untouched), `scripts/math/state.ts` confirms math.calc 52/76 and mathematics 418/908 (6
+  EB-certified domains unchanged), `tsc --noEmit` clean, targeted tests 479/479 passed, all
+  4 heading structures diffed clean on the first pass (0 diffs each). No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Fresh math.calc
+  frontier computed: 3 candidates ready (`line-integrals`, `multiple-integrals`,
+  `vector-fields` — the exact three deferred from this batch's own selection). This is a
+  genuinely multi-session campaign; continuation should verify state via
+  `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
 
 ## Physics Teacher Migration Architecture V2 — AUDITED, NOT ADOPTED (2026-09-12)
 
