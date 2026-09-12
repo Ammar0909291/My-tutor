@@ -4055,6 +4055,38 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   two and `local-extrema` newly unblocked by `partial-derivatives`/`increasing-decreasing`).
   This is a genuinely multi-session campaign; continuation should verify state via
   `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
+- **Batch 47 — math.calc: gradient, the multivariable chain rule, local extrema, calculus
+  of parametric curves** (2026-09-12): re-fetched `main` (0 divergence, clean). Re-computed
+  the frontier fresh — the exact 6 candidates predicted at the end of Batch 46 were
+  confirmed still ready. Selected 4: `gradient`/`chain-rule-multivariable` (both direct
+  children of Batch 46's `partial-derivatives`), `local-extrema` (direct child of Batch 46's
+  `increasing-decreasing`, unlocking `optimization`), `parametric-calculus` (all 3
+  prerequisites long-authored), deferring `line-integrals`/`multiple-integrals`. All 4
+  Blueprint-grounded, none carrying an explicit birth-type column — every misconception
+  independently classified (`gradient` MC-1 Type 4 notation-induced, $f$/$\nabla f$ both
+  "evaluated at a point"/MC-2 Type 2 perceptual, level curve's visual salience/MC-3 Type 5
+  instruction-induced, interpretive step skipped; `chain-rule-multivariable` MC-1 Type 5
+  instruction-induced, additive structure under-applied without the tree/MC-2 Type 4
+  notation-induced, $d/dt$ vs $\partial/\partial t$; `local-extrema` MC-1 Type 1
+  overgeneralization/MC-2 Type 5 instruction-induced/MC-3 Type 1 overgeneralization;
+  `parametric-calculus` MC-1 Type 4 notation-induced/MC-2 Type 1 overgeneralization). **All
+  4 concepts zero-discrepancy**, the FIFTH consecutive all-4-zero-discrepancy batch;
+  `local-extrema` confirmed to substantively cross-reference the already-authored
+  `math.calc.critical-points` (Batch 40), which explicitly names `local-extrema` as
+  resolving its own left-open ambiguity via the identical $x^3$ counterexample —
+  verified both entries reference each other consistently. `math.calc` **48/76** (44→48).
+  Mathematics **414/908** (410→414), 721 remaining. Full per-concept detail in
+  `COVERAGE.md` Batch 47. Validated: KG validator PASS (908/908 reachable, file
+  untouched), `scripts/math/state.ts` confirms math.calc 48/76 and mathematics 414/908 (6
+  EB-certified domains unchanged), `tsc --noEmit` clean, targeted tests 479/479 passed, all
+  4 heading structures diffed clean on the first pass (0 diffs each). No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Fresh math.calc
+  frontier computed: 7 candidates ready (`curve-sketching`, `directional-derivative`,
+  `line-integrals`, `multiple-integrals`, `multivariable-extrema`, `optimization`,
+  `vector-fields` — several newly unblocked by
+  `gradient`/`chain-rule-multivariable`/`local-extrema`). This is a genuinely multi-session
+  campaign; continuation should verify state via `scripts/math/state.ts` fresh each time
+  rather than trusting any number recorded here.
 
 ## Physics Teacher Migration Architecture V2 — AUDITED, NOT ADOPTED (2026-09-12)
 
