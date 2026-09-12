@@ -10029,7 +10029,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // before the empty-with-probe backstop below so that when the model text is
       // empty this lead-in stands alone rather than stacking two lead-ins.
       {
-        const { mcqToServe: mcqToServeForReoffer, MCQ_REOFFER_DISAMBIGUATION, isRestatementOfPending } =
+        const { mcqToServe: mcqToServeForReoffer, MCQ_REOFFER_DISAMBIGUATION, isRestatementOfPending, engagesPendingOptions } =
           await import('@/lib/teaching/mcq')
         const { detectLearnerQuestion } = await import('@/lib/teaching/conversationState')
         const servedReoffer = mcqToServeForReoffer(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted)
@@ -10072,6 +10072,60 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // answer attempt has BOTH null (measured), a distress/help turn does not.
           && turnIntent.failureState === null
           && turnIntent.learnerRequest === null
+          // ENG-D02 (2026-09-12): THE POSITIVE TERM. Every term above this one
+          // is a NOT, so before this line the predicate's default answer to
+          // "is this an answer attempt?" was YES and each non-answer had to be
+          // excluded by name — which is why I1's three exclusions and I4's two
+          // were each followed by a fresh false-positive class (28 more
+          // measured across Groups 3-12 of the English real-student campaign:
+          // implicit questions with no '?', elaborated acknowledgements, and
+          // deferrals/meta-commentary about a past answer). The exclusion list
+          // is finite; the space of non-answer prose is not. This term inverts
+          // the default: the lead-in claims the learner's answer could not be
+          // matched to an OPTION, so it may only fire when the message reached
+          // for one of the REAL pending options. See engagesPendingOptions —
+          // it never grades and is deliberately weaker than resolveMcqChoice,
+          // whose strictness is untouched.
+          && engagesPendingOptions(message, servedReoffer ?? pendingMcqHoisted)
+        // ENG-D03 (2026-09-12): THE OPENING CLAIM IS UNBACKED ON ANY RE-OFFER,
+        // not only on the turns that draw the lead-in. A re-offer means the
+        // same probe is still pending and NOTHING was graded this turn
+        // (mcqToServe only carries a probe forward when mcqGradeHoisted is
+        // null), so the server has no verdict the model could be reporting —
+        // yet Group 9 of the English campaign captured "That's right. A) 'Dogs
+        // are popular pets.' ..." on exactly such a turn. stripLeadingFalse
+        // Confirmation was already the right tool and was simply gated behind
+        // `genuineUnmappedAttempt`, which this turn was not. Scoped to re-offer
+        // turns only (never an ordinary teaching turn) and, per its own header,
+        // to the opening sentence only.
+        if (isReoffer && mcqGradeHoisted === null) {
+          const { stripLeadingFalseConfirmation } = await import('@/lib/teaching/answerConfirmation')
+          const deClaimed = stripLeadingFalseConfirmation(cleanText)
+          if (deClaimed !== cleanText) {
+            console.log('[mcq-reoffer-unbacked-confirmation] stripped an opening correctness claim on an ungraded re-offer')
+            cleanText = deClaimed
+          }
+        }
+        // ENG-D03, second half: MCQ-SHAPED MODEL PROSE MUST NOT MASQUERADE AS
+        // THE PENDING ASSESSMENT. On a re-offer the client renders the REAL
+        // pending probe as the tappable widget; a lettered option run in the
+        // reply that does not correspond to those options presents the learner
+        // with a second, ungradeable question set — and the lead-in's own "tap
+        // the choice you mean from the list below" then points at the wrong
+        // list (Group 12: four fabricated point-of-view options beside a
+        // different real probe). Removed only when it contradicts; a faithful
+        // prose restatement of the real options is left exactly as written.
+        if (isReoffer && (servedReoffer ?? pendingMcqHoisted)) {
+          const { stripContradictingProseOptions } = await import('@/lib/teaching/proseMcqGuard')
+          const deFabricated = stripContradictingProseOptions(
+            cleanText,
+            (servedReoffer ?? pendingMcqHoisted) as { options: string[] },
+          )
+          if (deFabricated !== cleanText) {
+            console.log('[mcq-reoffer-fabricated-options] stripped a lettered option run that is not the pending probe')
+            cleanText = deFabricated
+          }
+        }
         if (genuineUnmappedAttempt && !cleanText.includes(MCQ_REOFFER_DISAMBIGUATION)) {
           console.log('[mcq-reoffer-disambiguation] ungradeable answer against a pending probe — prompting a tap')
           // THE CONTRADICTION FIX (2026-09-08): this branch means the SERVER

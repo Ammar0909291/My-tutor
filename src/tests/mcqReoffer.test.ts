@@ -206,7 +206,15 @@ describe('the guard is wired at the response boundary and reuses the shared lead
   const ROUTE = readFileSync(join(process.cwd(), 'src/app/api/learn/chat/route.ts'), 'utf8')
 
   it('imports the shared lead-in constant AND the restatement check from the mcq module', () => {
-    expect(ROUTE).toMatch(/MCQ_REOFFER_DISAMBIGUATION,\s*isRestatementOfPending\s*\}\s*=\s*\n?\s*await import\('@\/lib\/teaching\/mcq'\)/)
+    // ORIGINAL ASSERTION, kept verbatim (2026-09-12). ENG-D02 added a fourth
+    // name to the same destructuring (`engagesPendingOptions`), so the pattern
+    // below no longer permits `}` immediately after isRestatementOfPending:
+    //   expect(ROUTE).toMatch(/MCQ_REOFFER_DISAMBIGUATION,\s*isRestatementOfPending\s*\}\s*=\s*\n?\s*await import\('@\/lib\/teaching\/mcq'\)/)
+    // The INVARIANT it exists for — both names come from the shared mcq module
+    // in one import, never re-declared locally — is unchanged and re-asserted.
+    expect(ROUTE).toMatch(
+      /MCQ_REOFFER_DISAMBIGUATION,\s*isRestatementOfPending[^}]*\}\s*=\s*\n?\s*await import\('@\/lib\/teaching\/mcq'\)/,
+    )
   })
 
   it('fires only on a re-offer AND a non-ack, non-practice, non-question attempt', () => {
