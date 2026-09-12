@@ -3775,6 +3775,39 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   frontier check is deferred to the next batch. This is a genuinely multi-session campaign;
   continuation should verify state via `scripts/math/state.ts` fresh each time rather than
   trusting any number recorded here.
+- **Batch 39 — math.calc: the definite integral, differentiation rules, differentiability,
+  linearization** (2026-09-12): re-computed the frontier fresh — 8 candidates ready
+  (`definite-integral`, `derivative-rules`, `differentiability`, `lhopitals-rule`,
+  `line-integrals`, `linearization`, `mean-value-theorem`, `multivariable-intro`). Selected
+  the 4 sharing the tightest single-prerequisite coupling to `derivative-definition`
+  (`definite-integral` via `riemann-sums`), deferring the 4 needing a second prerequisite
+  (`continuity`, `limits`, or `math.geom.vectors-3d`). All 4 Blueprint-grounded, reused by
+  reference. None of the 4 Blueprints carried an explicit birth-type column — every
+  misconception independently classified (`definite-integral` MC-1
+  INTEGRAL-IS-ALWAYS-POSITIVE-AREA Type 3/MC-2 DEFINITE-INTEGRAL-NEEDS-ANTIDERIVATIVE Type
+  5/MC-3 INTEGRAL-ORDER-DOESNT-MATTER Type 1; `derivative-rules` MC-1
+  POWER-RULE-FOR-EXPONENTIAL/MC-2 COEFFICIENT-MULTIPLICATION-OMITTED/MC-3
+  DISTRIBUTING-DERIVATIVE-OVER-PRODUCTS, all Type 1; `differentiability` MC-1
+  DIFFERENTIABILITY-ASSUMED-FROM-SMOOTH-APPEARANCE Type 2/MC-2
+  CONTINUITY-ASSUMED-TO-IMPLY-DIFFERENTIABILITY Type 1 — a third recurrence of the same
+  implication-reversal mechanism already documented for `continuity-types` and
+  `derivative-definition`; `linearization` MC-1 LINEARIZATION-ASSUMED-NEW-PROCEDURE Type
+  5/MC-2 LINEARIZATION-ACCURACY-ASSUMED-UNIFORM Type 1/MC-3
+  DIFFERENTIAL-ASSUMED-SEPARATE-CONCEPT Type 4). **Continues the zero-Blueprint/KG-
+  discrepancy pattern begun in Batch 38** — all 4 concepts' stated unlocks/cross_links
+  matched the live KG exactly, for the second consecutive batch. `math.calc` **16/76**
+  (12→16). Mathematics **382/908** (378→382), 753 remaining. Full per-concept detail in
+  `COVERAGE.md` Batch 39. Validated: KG validator PASS (908/908 reachable, file untouched),
+  `scripts/math/state.ts` confirms math.calc 16/76 and mathematics 382/908 (6 EB-certified
+  domains unchanged), `tsc --noEmit` clean, targeted tests 479/479 passed, all 4 heading
+  structures diffed clean on the first pass (0 diffs each). No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Fresh math.calc
+  frontier computed: 13 candidates ready (`antiderivatives`, `arc-length`, `chain-rule`,
+  `critical-points`, `ftc-part1`, `higher-order-derivatives`, `improper-integrals`,
+  `integral-area`, `lhopitals-rule`, `line-integrals`, `mean-value-theorem`,
+  `multivariable-intro`, `product-rule`). This is a genuinely multi-session campaign;
+  continuation should verify state via `scripts/math/state.ts` fresh each time rather than
+  trusting any number recorded here.
 
 ## Run locally
 ```

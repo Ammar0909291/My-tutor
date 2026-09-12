@@ -11,7 +11,7 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 378 | **Six domains CERTIFIED, math.disc at 20/32 (parked), math.graph at 13/16 (parked), math.calc the active campaign at 12/76.** 82 `math.found.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 69 `math.geom.*` (**COMPLETE, DOMAIN CERTIFIED** — the final 13 entries were restored by commit `0d2c76dd`'s Wave 0 recovery, which this row previously did not reflect) + 36 `math.nt.*` (**COMPLETE, DOMAIN CERTIFIED 2026-08-12** — the domain's final 8 concepts, `prime-distribution`, `continued-fractions`, `analytic-number-theory`, `prime-number-theorem`, `riemann-hypothesis`, `algebraic-number-theory`, `algebraic-integers`, `number-fields`, were authored this session, ending the PARKED status this row previously recorded) + 59 `math.alg.*` (**COMPLETE, DOMAIN CERTIFIED 2026-09-11** — Wave 1 (2026-08-12, 11 concepts): `expression`, `equation`, `term`, `coefficient`, `exponent-rules`, `polynomial`, `degree`, `zero-exponent`, `negative-exponent`, `solution-set`, `inequality`; Wave 2 (2026-08-12, 1 concept): `like-terms`; Wave 3 (2026-09-11, 3 concepts): `simplification`, `polynomial-operations`, `radicals`; Wave 4 (2026-09-11, 5 concepts): `linear-equation-1var`, `polynomial-division`, `fractional-exponent`, `simplifying-radicals`, `radical-equations`; Wave 5 (2026-09-11, 5 concepts): `inequality-1var`, `absolute-value-equations`, `linear-equation-2var`, `remainder-theorem`, `rationalizing-denominators`; Wave 6 (2026-09-11, 3 concepts): `inequality-2var`, `system-linear-equations`, `factor-theorem`; Wave 7 (2026-09-11, 4 concepts): `substitution-method`, `elimination-method`, `system-3var`, `factoring`; Wave 8 (2026-09-11, 3 concepts): `factoring-gcf`, `factoring-special`, `rational-expressions`; Wave 9 (2026-09-11, 4 concepts): `factoring-trinomials`, `rational-expressions-addition`, `rational-expressions-multiplication`, `rational-equations`; Wave 10 (2026-09-11, 1 concept): `quadratic-equation`; Wave 11 (2026-09-11, 2 concepts): `completing-the-square`, `polynomial-roots`; Wave 12 part 1 (2026-09-11, 1 concept): `quadratic-formula`; Wave 12 part 2 (2026-09-11, 2 concepts): `discriminant`, `rational-root-theorem`; Wave 12 part 3 (2026-09-11, 3 concepts): `fundamental-theorem-algebra`, `polynomial-inequality`, `vietas-formulas`; Wave 13 (2026-09-11, 2 concepts): `complex-polynomial-roots`, `rational-inequality`; Batch 15 (2026-09-11, 1 concept): `exponential-function`; Batch 16 (2026-09-11, 2 concepts): `logarithm`, `exponential-equations`; Batch 17 (2026-09-11, 3 concepts): `binomial-theorem`, `logarithm-properties`, `natural-logarithm`; Batch 18 (2026-09-11, 3 concepts, FINAL): `change-of-base`, `logarithmic-equations`, `pascals-triangle`; all Blueprint-grounded, reused by reference). 20 `math.disc.*` entries (**IN PROGRESS, standalone campaign since math.alg's certification** —
+| mathematics | 908 | 382 | **Six domains CERTIFIED, math.disc at 20/32 (parked), math.graph at 13/16 (parked), math.calc the active campaign at 16/76.** 82 `math.found.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 69 `math.geom.*` (**COMPLETE, DOMAIN CERTIFIED** — the final 13 entries were restored by commit `0d2c76dd`'s Wave 0 recovery, which this row previously did not reflect) + 36 `math.nt.*` (**COMPLETE, DOMAIN CERTIFIED 2026-08-12** — the domain's final 8 concepts, `prime-distribution`, `continued-fractions`, `analytic-number-theory`, `prime-number-theorem`, `riemann-hypothesis`, `algebraic-number-theory`, `algebraic-integers`, `number-fields`, were authored this session, ending the PARKED status this row previously recorded) + 59 `math.alg.*` (**COMPLETE, DOMAIN CERTIFIED 2026-09-11** — Wave 1 (2026-08-12, 11 concepts): `expression`, `equation`, `term`, `coefficient`, `exponent-rules`, `polynomial`, `degree`, `zero-exponent`, `negative-exponent`, `solution-set`, `inequality`; Wave 2 (2026-08-12, 1 concept): `like-terms`; Wave 3 (2026-09-11, 3 concepts): `simplification`, `polynomial-operations`, `radicals`; Wave 4 (2026-09-11, 5 concepts): `linear-equation-1var`, `polynomial-division`, `fractional-exponent`, `simplifying-radicals`, `radical-equations`; Wave 5 (2026-09-11, 5 concepts): `inequality-1var`, `absolute-value-equations`, `linear-equation-2var`, `remainder-theorem`, `rationalizing-denominators`; Wave 6 (2026-09-11, 3 concepts): `inequality-2var`, `system-linear-equations`, `factor-theorem`; Wave 7 (2026-09-11, 4 concepts): `substitution-method`, `elimination-method`, `system-3var`, `factoring`; Wave 8 (2026-09-11, 3 concepts): `factoring-gcf`, `factoring-special`, `rational-expressions`; Wave 9 (2026-09-11, 4 concepts): `factoring-trinomials`, `rational-expressions-addition`, `rational-expressions-multiplication`, `rational-equations`; Wave 10 (2026-09-11, 1 concept): `quadratic-equation`; Wave 11 (2026-09-11, 2 concepts): `completing-the-square`, `polynomial-roots`; Wave 12 part 1 (2026-09-11, 1 concept): `quadratic-formula`; Wave 12 part 2 (2026-09-11, 2 concepts): `discriminant`, `rational-root-theorem`; Wave 12 part 3 (2026-09-11, 3 concepts): `fundamental-theorem-algebra`, `polynomial-inequality`, `vietas-formulas`; Wave 13 (2026-09-11, 2 concepts): `complex-polynomial-roots`, `rational-inequality`; Batch 15 (2026-09-11, 1 concept): `exponential-function`; Batch 16 (2026-09-11, 2 concepts): `logarithm`, `exponential-equations`; Batch 17 (2026-09-11, 3 concepts): `binomial-theorem`, `logarithm-properties`, `natural-logarithm`; Batch 18 (2026-09-11, 3 concepts, FINAL): `change-of-base`, `logarithmic-equations`, `pascals-triangle`; all Blueprint-grounded, reused by reference). 20 `math.disc.*` entries (**IN PROGRESS, standalone campaign since math.alg's certification** —
 Batch 14 (2026-09-11, 1 concept): `counting-principles`; Batch 15 (2026-09-11, 1 concept):
 `permutations`; Batch 16 (2026-09-11, 1 concept): `combinations`; Batch 19 (2026-09-11, 5
 concepts): `combinatorics`, `pigeonhole`, `stars-bars`, `inclusion-exclusion`,
@@ -65,7 +65,7 @@ Blueprint References section; Batch 35 (2026-09-13, 2 concepts, FINAL): `horizon
 explicit birth-type classifications adopted directly (`horizontal-asymptote` MC-1 Type 1/MC-2
 Type 5/MC-3 Type 5; `vertical-asymptote` MC-1 Type 3/MC-2 Type 5/MC-3 Type 5). **math.func
 REACHES 29/29 — DOMAIN CERTIFIED**, the sixth after math.found/math.geom/math.arith/math.nt/
-math.alg) + 12 `math.calc.*` entries (**STANDALONE CAMPAIGN, IN PROGRESS (2026-09-12)** — Batch 35
+math.alg) + 16 `math.calc.*` entries (**STANDALONE CAMPAIGN, IN PROGRESS (2026-09-12)** — Batch 35
 (2026-09-13, 1 concept): `limits`, the domain's entry node, selected as the highest-leverage
 next step after math.func's certification — a fresh frontier check across ALL mathematics
 domains found 14 candidates spread across 11 different unstarted domains with no clustering,
@@ -109,7 +109,24 @@ discrepancy to record. `parametric-curves` and `riemann-sums` (their Blueprints 
 birth-type columns, independently classified: `parametric-curves` MC-1 Type 2/MC-2 Type 1/MC-3
 Type 5; `riemann-sums` MC-1 Type 2/MC-2 Type 1/MC-3 Type 1, the last explicitly
 cross-referencing `math.calc.limits`' own MC-1 as the Blueprint's own root-cause text names)
-likewise matched the KG exactly. `math.calc` reaches 12/76) + 13 `math.graph.*` entries (**PARKED, opened 2026-09-12** — Batch 24 (2026-09-12,
+likewise matched the KG exactly. `math.calc` reaches 12/76; Batch 39 (2026-09-12, 4
+concepts, selected from the 8-concept frontier available after Batch 38, deferring
+`lhopitals-rule`/`line-integrals`/`mean-value-theorem`/`multivariable-intro`):
+`definite-integral` (signed area, reversal/additivity/linearity properties derived
+from the Riemann sum's own structure, MC-1 Type 3 language contamination from
+everyday "area", MC-2 Type 5 instruction-induced FTC-first teaching, MC-3 Type 1
+overgeneralized commutativity), `derivative-rules` (the power/constant-multiple/
+sum rules derived from the definition, MC-1 Type 1 power-rule-on-exponentials,
+MC-2 Type 1 dropped coefficients, MC-3 Type 1 distributing over products),
+`differentiability` (the corner/cusp/vertical-tangent taxonomy, MC-1 Type 2
+perceptual smooth-appearance assumption, MC-2 Type 1 the same
+implication-reversal mechanism already documented for `continuity-types` and
+`derivative-definition`), `linearization` ($L(x)=f(a)+f'(a)(x-a)$ reusing the
+derivative's own slope, MC-1 Type 5 instruction-induced new-vocabulary effect,
+MC-2 Type 1 uniform-accuracy overgeneralization, MC-3 Type 4 notation-induced
+differential/linearization separation). Continuing the zero-discrepancy pattern
+begun in Batch 38 — all 4 Blueprints' stated unlocks/cross_links matched the KG
+exactly. `math.calc` reaches 16/76) + 13 `math.graph.*` entries (**PARKED, opened 2026-09-12** — Batch 24 (2026-09-12,
 3 concepts): `graph`, `tree`, `minimum-spanning-tree`; opened because every one of `math.disc`'s
 own graph-theory entries had already named a `math.graph` sibling as a Blueprint-exists-no-EB-yet
 cross-link; Batch 25 (2026-09-12, 4 concepts): `connectivity`, `eulerian-circuit`,
@@ -7467,3 +7484,86 @@ tests `mathPackageCorpus.test.ts` + `mathematicsAssetContract.test.ts` 479/479 p
 new entries' heading structure diffed clean against `math.alg.like-terms.md` on the first pass
 (0 diffs each). A fresh `math.calc` frontier check is deferred to the next batch. No Physics,
 Chemistry, English, Biology, Computer Science, KG, Blueprint, or runtime file was modified.
+
+### Batch 39 — math.calc: the definite integral, differentiation rules, differentiability, linearization (2026-09-12)
+
+Re-computed the frontier fresh — 8 candidates confirmed ready
+(`definite-integral`, `derivative-rules`, `differentiability`, `lhopitals-rule`,
+`line-integrals`, `linearization`, `mean-value-theorem`, `multivariable-intro`).
+Selected the 4 sharing the tightest single-prerequisite coupling to
+`derivative-definition` (or, for `definite-integral`, to `riemann-sums`), deferring
+the 4 remaining candidates (each needing a second prerequisite — `continuity`,
+`limits`, or `math.geom.vectors-3d` — or a two-way convergence). All 4
+Blueprint-grounded, reused by reference.
+
+- **`math.calc.definite-integral`** (advanced/understand, requires `riemann-sums`,
+  unlocks `ftc-part1`/`ftc-part2`, cross-link `math.real.riemann-integral` confirmed
+  genuinely unauthored — independence mode) — the named limit of Riemann sums as
+  SIGNED area, with reversal/additivity/linearity all derivable from the sum's own
+  structure ($\Delta x$'s sign, the sum splitting/distributing) rather than
+  memorized as separate rules. Older document format (matching `limits`/
+  `continuity`/`derivative-intro`/`derivative-definition`), no birth-type column —
+  3 misconceptions independently classified: MC-1 INTEGRAL-IS-ALWAYS-POSITIVE-AREA
+  (Type 3, language contamination — the Blueprint's own root-cause note names the
+  everyday word "area" directly), MC-2 DEFINITE-INTEGRAL-NEEDS-ANTIDERIVATIVE
+  (Type 5, instruction-induced — FTC-first teaching conflates definition with
+  computation method), MC-3 INTEGRAL-ORDER-DOESNT-MATTER (Type 1, overgeneralized
+  commutativity of ordinary sums).
+- **`math.calc.derivative-rules`** (advanced/apply, requires `derivative-definition`,
+  unlocks `product-rule`/`quotient-rule`/`chain-rule`, no cross-links) — the power/
+  constant-multiple/sum rules derived directly from the limit definition (not
+  stated as arbitrary formulas), with the base/exponent scope condition
+  (power functions vs. exponential functions) as the concept's single most
+  important boundary. Blueprint lacks a birth-type column — 3 misconceptions
+  independently classified, all Type 1 overgeneralization: MC-1
+  POWER-RULE-FOR-EXPONENTIAL (the power-rule pattern extended past its
+  base/exponent precondition), MC-2 COEFFICIENT-MULTIPLICATION-OMITTED
+  (over-applying "constants vanish" to a coefficient that multiplies rather than
+  stands alone), MC-3 DISTRIBUTING-DERIVATIVE-OVER-PRODUCTS (the sum rule's
+  genuine distributivity wrongly extended to products).
+- **`math.calc.differentiability`** (advanced/analyze, requires
+  `derivative-definition`, no unlocks/cross-links) — the corner/cusp/vertical-
+  tangent taxonomy for where $f'(a)$ fails to exist, and the one-directional
+  implication (differentiable $\Rightarrow$ continuous, never the reverse) with
+  $|x|$ at $0$ as the standing counterexample. Blueprint carries a Severity
+  column (both MCs "Foundational") but no birth-type column — MC-1
+  DIFFERENTIABILITY-ASSUMED-FROM-SMOOTH-APPEARANCE-WITHOUT-CHECKING-ONE-SIDED-
+  DERIVATIVES (Type 2, perceptual intuition), MC-2
+  CONTINUITY-ASSUMED-TO-IMPLY-DIFFERENTIABILITY (Type 1, the identical
+  implication-reversal mechanism already documented for `continuity-types`'
+  own MC-2 and `derivative-definition`'s own MC-2, now a third recurrence).
+- **`math.calc.linearization`** (advanced/apply, requires `derivative-definition`,
+  no unlocks/cross-links) — $L(x)=f(a)+f'(a)(x-a)$ reusing the derivative's own
+  slope value in the ordinary point-slope formula, with the approximation's
+  accuracy genuinely degrading with distance from $a$, and the differential
+  $dy=f'(x)\,dx$ as the identical idea reframed as an increment. Blueprint carries
+  a Severity column but no birth-type column — MC-1
+  LINEARIZATION-ASSUMED-NEW-PROCEDURE (Type 5, instruction-induced — new
+  vocabulary/notation presented without an explicit link back to the
+  already-known derivative computation), MC-2
+  LINEARIZATION-ACCURACY-ASSUMED-UNIFORM (Type 1, overgeneralizing "the tangent
+  line approximates the curve" past its local scope), MC-3
+  DIFFERENTIAL-ASSUMED-SEPARATE-CONCEPT (Type 4, notation-induced — $L(x)$'s and
+  $dy$'s visibly different notation obscures their identical underlying
+  arithmetic).
+
+`math.calc` **12/76 → 16/76**. `math.disc`/`math.graph` unchanged this batch (20/32
+parked, 13/16 parked). Mathematics **378/908 → 382/908**, 753 remaining. **This batch
+continues the zero-Blueprint/KG-discrepancy pattern begun in Batch 38** — all 4
+concepts' stated unlocks/cross_links matched the live KG's own fields exactly,
+confirmed by direct query, for the second consecutive batch. Full per-concept detail
+above. All tracking files updated in the same commit: `ROADMAP.md` Section 1/2 totals
+and the `math.calc` domain row, `COVERAGE.md`'s mathematics summary row and this
+Delivery history entry, `CLAUDE.md`'s campaign section. `EDUCATIONAL_BRAIN_INDEX.md`
+and `QUALITY.md` again deferred (same generated-artifact rationale as prior batches).
+Validated: `npx tsx scripts/validate-knowledge-graph.ts docs/mathematics/kg/graph.json`
+PASS, 908/908 reachable, 0 failures, 0 warnings (KG file untouched); `scripts/math/
+state.ts` confirms math.calc 16/76, mathematics 382/908, 6 EB-certified domains
+(unchanged); `npx tsc --noEmit` clean; targeted tests `mathPackageCorpus.test.ts` +
+`mathematicsAssetContract.test.ts` 479/479 passed. All 4 new entries' heading
+structure diffed clean against `math.alg.like-terms.md` on the first pass (0 diffs
+each). Fresh `math.calc` frontier computed: 13 candidates ready (`antiderivatives`,
+`arc-length`, `chain-rule`, `critical-points`, `ftc-part1`, `higher-order-derivatives`,
+`improper-integrals`, `integral-area`, `lhopitals-rule`, `line-integrals`,
+`mean-value-theorem`, `multivariable-intro`, `product-rule`). No Physics, Chemistry,
+English, Biology, Computer Science, KG, Blueprint, or runtime file was modified.
