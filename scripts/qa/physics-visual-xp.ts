@@ -94,8 +94,8 @@ async function chat(message: string, sid: string, cookie: string): Promise<any> 
 function display(p: any, label: string): void {
   const m = p.mastery
   const phase = m?.phase ?? '?'
-  const check = m?.correctAtCheck ?? 0
-  const practice = m?.correctAtPractice ?? 0
+  const check = m?.checkCorrect ?? 0
+  const practice = m?.practiceCorrect ?? 0
   const verified = m?.verified ?? false
   const prov = p.provider ? ` [${p.provider}]` : ''
 

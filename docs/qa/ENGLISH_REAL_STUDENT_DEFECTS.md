@@ -262,8 +262,38 @@ authoritative record for that range.
   mastery gate actually reads). **This was not independently verified against the
   database** — per this audit's standing egress-minimization instruction, no
   additional Supabase queries were run to confirm which explanation is correct.
-- **Status:** NEW.
-- **Severity:** **P0 if confirmed** — a mastery claim without recorded evidence would
+- **RESOLVED 2026-09-12 — BENIGN, explanation (b) CONFIRMED. Not a mastery defect.**
+  Decided from the repository with no DB query, which the "verification first"
+  instruction above turns out to have been satisfiable all along:
+  - `MasterySummary` (`src/lib/teaching/masteryGate.ts`) exposes **`checkCorrect`**
+    and **`practiceCorrect`**. The driver `display()` reads
+    `m?.correctAtCheck ?? 0` — a field the payload has never carried — so
+    `undefined ?? 0` printed **0 on every turn of every run**, whatever the real
+    evidence. `verified` was read from the real field. The logged line was
+    structurally `check=0 practice=0 verified=<truth>`, so the 0/0 measured
+    nothing at all, and all three sightings came through that same `display()`
+    (which is why "two different driver scripts" agreed). **19 QA drivers in
+    `scripts/qa/` carried this; all corrected in the same commit** — a
+    known-broken instrument left in place guarantees the false P0 recurs.
+  - Separately, explanation (a) is ruled out structurally, not assumed:
+    `verifiedCorrectAtX <= correctAtX` holds on every real fold path (one
+    increment site per pair, the verified increment nested inside the same
+    branch as the unconditional plain one), and BOTH roads through
+    `masteryVerifiedStrict` — the verified-counter road and the legacy fallback
+    — independently require the plain counters to reach 1/2. Proved by DRIVING
+    the real fold over 49,152 states in
+    `src/tests/masteryCounterInvariant.test.ts`, which also asserts that
+    `buildMasterySummary` reads the verdict and the printed counters from the
+    same state, so they cannot disagree.
+  - Nothing was weakened: `masteryVerifiedStrict` and its anti-laundering
+    safeguards are untouched, and no counter bookkeeping was changed.
+  - Residual, reported not patched: `readConversationState` restores a stored
+    ladder with a raw spread and does not re-establish the invariant at the
+    boundary — it is a property of the writer. Unreachable in practice (only the
+    fold writes that snapshot) and left alone rather than adding a clamp to a
+    mastery-authority path for a state nothing can produce.
+- **Status:** CLOSED — BENIGN (instrument defect; product behaviour correct).
+- **Severity:** ~~**P0 if confirmed**~~ — not confirmed; see above. Original text kept: **P0 if confirmed** — a mastery claim without recorded evidence would
   be the single most serious class of defect this platform can have, directly
   contradicting the verified-evidence architecture this project treats as its core
   differentiator. Recorded as P0 here specifically because the *possibility* of false
@@ -725,7 +755,7 @@ authoritative record for that range.
 
 | Severity | Count |
 |---|---|
-| P0 | 1 (ENG-D06 — pending DB verification) |
+| P0 | 0 (ENG-D06 CLOSED 2026-09-12 — BENIGN, instrument defect, not a mastery defect) |
 | P1 | 11 (ENG-D01, D02, D03, D04, D05, D08, D09, D11, D14, D17, D18) |
 | P2 | 6 (ENG-D07, D10, D12, D13, D15, D16) |
 | P3 | 1 (ENG-D19) |

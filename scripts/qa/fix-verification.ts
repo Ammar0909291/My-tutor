@@ -208,8 +208,8 @@ async function runConcept(
     const mastery = resp.mastery
     const text = resp.text ?? ''
     const phase = mastery?.phase ?? '?'
-    const check = mastery?.correctAtCheck ?? 0
-    const practice = mastery?.correctAtPractice ?? 0
+    const check = mastery?.checkCorrect ?? 0
+    const practice = mastery?.practiceCorrect ?? 0
     const verified = mastery?.verified ?? false
     const prov = resp.provider ? `[${resp.provider}]` : ''
 
