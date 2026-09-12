@@ -4173,6 +4173,34 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   `greens-theorem`). 19 concepts remain. This is a genuinely multi-session campaign;
   continuation should verify state via `scripts/math/state.ts` fresh each time rather than
   trusting any number recorded here.
+- **Batch 51 — math.calc: triple integrals, surface integrals, Green's Theorem**
+  (2026-09-12): fetch clean (0/0), state.ts confirmed 57/76 matching Batch 50's end state.
+  Re-computed the frontier fresh — the exact 3 candidates predicted at the end of Batch 50
+  were confirmed still ready (`triple-integrals`, `surface-integrals`, `greens-theorem`),
+  closing the ENTIRE frontier available at batch start with none deferred. All 3
+  Blueprint-grounded, none carrying an explicit birth-type column — every misconception
+  independently classified (`triple-integrals` MC-1 Type 5 instruction-induced,
+  nested-hierarchy verification not visually enforced/MC-2 Type 1, the scaling-factor-
+  omission mechanism recurring twice (cylindrical, spherical); `surface-integrals` MC-1
+  Type 1, a THIRD recurrence of the scaling-factor mechanism cross-referenced to
+  double-integrals' MC-1 and triple-integrals' MC-2/MC-2 Type 5 instruction-induced,
+  transferred normalization habit/MC-3 Type 1, the mirror-image instance of
+  line-integrals' own MC-1 (there both types wrongly flip, here neither wrongly flips);
+  `greens-theorem` MC-1 Type 1, cross-referenced to line-integrals' reversal rule and
+  surface-integrals' orientation-dependent flux/MC-2 Type 4 notation-induced, the
+  near-symmetric P/Q-to-x/y term pairing/MC-3 Type 5 instruction-induced, continuity
+  checked where computation "happens" rather than throughout the full interior). **All 3
+  concepts zero-discrepancy**, the NINTH consecutive zero-discrepancy batch. `math.calc`
+  **60/76** (57→60). Mathematics **426/908** (423→426), 709 remaining. Full per-concept
+  detail in `COVERAGE.md` Batch 51. Validated: KG validator PASS (908/908 reachable, file
+  untouched), `scripts/math/state.ts` confirms math.calc 60/76 and mathematics 426/908 (6
+  EB-certified domains unchanged), `tsc --noEmit` clean, targeted tests 479/479 passed, all
+  3 heading structures diffed clean on the first pass (0 diffs each). No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Fresh math.calc
+  frontier computed: 2 candidates ready (`stokes-theorem`, `divergence-theorem`). 16
+  concepts remain. This is a genuinely multi-session campaign; continuation should verify
+  state via `scripts/math/state.ts` fresh each time rather than trusting any number
+  recorded here.
 
 ## Physics Teacher Migration Architecture V2 — AUDITED, NOT ADOPTED (2026-09-12)
 
