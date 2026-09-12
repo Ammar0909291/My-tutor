@@ -11,7 +11,7 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 371 | **Six domains CERTIFIED, math.disc at 20/32 (parked), math.graph at 13/16 (parked), math.calc the active campaign at 5/76.** 82 `math.found.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 69 `math.geom.*` (**COMPLETE, DOMAIN CERTIFIED** — the final 13 entries were restored by commit `0d2c76dd`'s Wave 0 recovery, which this row previously did not reflect) + 36 `math.nt.*` (**COMPLETE, DOMAIN CERTIFIED 2026-08-12** — the domain's final 8 concepts, `prime-distribution`, `continued-fractions`, `analytic-number-theory`, `prime-number-theorem`, `riemann-hypothesis`, `algebraic-number-theory`, `algebraic-integers`, `number-fields`, were authored this session, ending the PARKED status this row previously recorded) + 59 `math.alg.*` (**COMPLETE, DOMAIN CERTIFIED 2026-09-11** — Wave 1 (2026-08-12, 11 concepts): `expression`, `equation`, `term`, `coefficient`, `exponent-rules`, `polynomial`, `degree`, `zero-exponent`, `negative-exponent`, `solution-set`, `inequality`; Wave 2 (2026-08-12, 1 concept): `like-terms`; Wave 3 (2026-09-11, 3 concepts): `simplification`, `polynomial-operations`, `radicals`; Wave 4 (2026-09-11, 5 concepts): `linear-equation-1var`, `polynomial-division`, `fractional-exponent`, `simplifying-radicals`, `radical-equations`; Wave 5 (2026-09-11, 5 concepts): `inequality-1var`, `absolute-value-equations`, `linear-equation-2var`, `remainder-theorem`, `rationalizing-denominators`; Wave 6 (2026-09-11, 3 concepts): `inequality-2var`, `system-linear-equations`, `factor-theorem`; Wave 7 (2026-09-11, 4 concepts): `substitution-method`, `elimination-method`, `system-3var`, `factoring`; Wave 8 (2026-09-11, 3 concepts): `factoring-gcf`, `factoring-special`, `rational-expressions`; Wave 9 (2026-09-11, 4 concepts): `factoring-trinomials`, `rational-expressions-addition`, `rational-expressions-multiplication`, `rational-equations`; Wave 10 (2026-09-11, 1 concept): `quadratic-equation`; Wave 11 (2026-09-11, 2 concepts): `completing-the-square`, `polynomial-roots`; Wave 12 part 1 (2026-09-11, 1 concept): `quadratic-formula`; Wave 12 part 2 (2026-09-11, 2 concepts): `discriminant`, `rational-root-theorem`; Wave 12 part 3 (2026-09-11, 3 concepts): `fundamental-theorem-algebra`, `polynomial-inequality`, `vietas-formulas`; Wave 13 (2026-09-11, 2 concepts): `complex-polynomial-roots`, `rational-inequality`; Batch 15 (2026-09-11, 1 concept): `exponential-function`; Batch 16 (2026-09-11, 2 concepts): `logarithm`, `exponential-equations`; Batch 17 (2026-09-11, 3 concepts): `binomial-theorem`, `logarithm-properties`, `natural-logarithm`; Batch 18 (2026-09-11, 3 concepts, FINAL): `change-of-base`, `logarithmic-equations`, `pascals-triangle`; all Blueprint-grounded, reused by reference). 20 `math.disc.*` entries (**IN PROGRESS, standalone campaign since math.alg's certification** —
+| mathematics | 908 | 375 | **Six domains CERTIFIED, math.disc at 20/32 (parked), math.graph at 13/16 (parked), math.calc the active campaign at 9/76.** 82 `math.found.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 69 `math.geom.*` (**COMPLETE, DOMAIN CERTIFIED** — the final 13 entries were restored by commit `0d2c76dd`'s Wave 0 recovery, which this row previously did not reflect) + 36 `math.nt.*` (**COMPLETE, DOMAIN CERTIFIED 2026-08-12** — the domain's final 8 concepts, `prime-distribution`, `continued-fractions`, `analytic-number-theory`, `prime-number-theorem`, `riemann-hypothesis`, `algebraic-number-theory`, `algebraic-integers`, `number-fields`, were authored this session, ending the PARKED status this row previously recorded) + 59 `math.alg.*` (**COMPLETE, DOMAIN CERTIFIED 2026-09-11** — Wave 1 (2026-08-12, 11 concepts): `expression`, `equation`, `term`, `coefficient`, `exponent-rules`, `polynomial`, `degree`, `zero-exponent`, `negative-exponent`, `solution-set`, `inequality`; Wave 2 (2026-08-12, 1 concept): `like-terms`; Wave 3 (2026-09-11, 3 concepts): `simplification`, `polynomial-operations`, `radicals`; Wave 4 (2026-09-11, 5 concepts): `linear-equation-1var`, `polynomial-division`, `fractional-exponent`, `simplifying-radicals`, `radical-equations`; Wave 5 (2026-09-11, 5 concepts): `inequality-1var`, `absolute-value-equations`, `linear-equation-2var`, `remainder-theorem`, `rationalizing-denominators`; Wave 6 (2026-09-11, 3 concepts): `inequality-2var`, `system-linear-equations`, `factor-theorem`; Wave 7 (2026-09-11, 4 concepts): `substitution-method`, `elimination-method`, `system-3var`, `factoring`; Wave 8 (2026-09-11, 3 concepts): `factoring-gcf`, `factoring-special`, `rational-expressions`; Wave 9 (2026-09-11, 4 concepts): `factoring-trinomials`, `rational-expressions-addition`, `rational-expressions-multiplication`, `rational-equations`; Wave 10 (2026-09-11, 1 concept): `quadratic-equation`; Wave 11 (2026-09-11, 2 concepts): `completing-the-square`, `polynomial-roots`; Wave 12 part 1 (2026-09-11, 1 concept): `quadratic-formula`; Wave 12 part 2 (2026-09-11, 2 concepts): `discriminant`, `rational-root-theorem`; Wave 12 part 3 (2026-09-11, 3 concepts): `fundamental-theorem-algebra`, `polynomial-inequality`, `vietas-formulas`; Wave 13 (2026-09-11, 2 concepts): `complex-polynomial-roots`, `rational-inequality`; Batch 15 (2026-09-11, 1 concept): `exponential-function`; Batch 16 (2026-09-11, 2 concepts): `logarithm`, `exponential-equations`; Batch 17 (2026-09-11, 3 concepts): `binomial-theorem`, `logarithm-properties`, `natural-logarithm`; Batch 18 (2026-09-11, 3 concepts, FINAL): `change-of-base`, `logarithmic-equations`, `pascals-triangle`; all Blueprint-grounded, reused by reference). 20 `math.disc.*` entries (**IN PROGRESS, standalone campaign since math.alg's certification** —
 Batch 14 (2026-09-11, 1 concept): `counting-principles`; Batch 15 (2026-09-11, 1 concept):
 `permutations`; Batch 16 (2026-09-11, 1 concept): `combinations`; Batch 19 (2026-09-11, 5
 concepts): `combinatorics`, `pigeonhole`, `stars-bars`, `inclusion-exclusion`,
@@ -65,7 +65,7 @@ Blueprint References section; Batch 35 (2026-09-13, 2 concepts, FINAL): `horizon
 explicit birth-type classifications adopted directly (`horizontal-asymptote` MC-1 Type 1/MC-2
 Type 5/MC-3 Type 5; `vertical-asymptote` MC-1 Type 3/MC-2 Type 5/MC-3 Type 5). **math.func
 REACHES 29/29 — DOMAIN CERTIFIED**, the sixth after math.found/math.geom/math.arith/math.nt/
-math.alg) + 5 `math.calc.*` entries (**STANDALONE CAMPAIGN, IN PROGRESS (2026-09-13)** — Batch 35
+math.alg) + 9 `math.calc.*` entries (**STANDALONE CAMPAIGN, IN PROGRESS (2026-09-13)** — Batch 35
 (2026-09-13, 1 concept): `limits`, the domain's entry node, selected as the highest-leverage
 next step after math.func's certification — a fresh frontier check across ALL mathematics
 domains found 14 candidates spread across 11 different unstarted domains with no clustering,
@@ -87,7 +87,17 @@ columns, independently classified; `continuity` (an older document format matchi
 own) likewise lacked one, independently classified; only `limits-at-infinity` carried explicit
 classifications. `limits-at-infinity` substantively incorporates the already-authored
 `math.func.horizontal-asymptote` (Batch 35) as a direct cross-link, closing that entry's own
-orientation-level preview) + 13 `math.graph.*` entries (**PARKED, opened 2026-09-12** — Batch 24 (2026-09-12,
+orientation-level preview; Batch 37 (2026-09-13, 4 concepts): `continuity-types`, `ivt`,
+`derivative-intro`, `squeeze-theorem` — closing 4 of the 6-concept frontier available after
+Batch 36, deferring `parametric-curves`/`riemann-sums`. All 4 Blueprint-grounded. None of the
+4 Blueprints this batch carried an explicit birth-type column (the eighth through eleventh
+such gaps this campaign) — every misconception independently classified:
+`continuity-types` MC-1 Type 1/MC-2 Type 1; `ivt` MC-1 Type 1/MC-2 Type 5/MC-3 Type 5;
+`derivative-intro` MC-1 Type 2/MC-2 Type 2/MC-3 Type 1; `squeeze-theorem` MC-1 Type 1/MC-2
+Type 1. `derivative-intro` is this domain's central payoff concept — the concept everything
+since `limits` has been building toward — and its own MC-1 (TANGENT-IS-JUST-ONE-POINT)
+directly resolves the classic "you can't find a slope from one point" objection via the
+constructed-second-point-in-the-limit technique) + 13 `math.graph.*` entries (**PARKED, opened 2026-09-12** — Batch 24 (2026-09-12,
 3 concepts): `graph`, `tree`, `minimum-spanning-tree`; opened because every one of `math.disc`'s
 own graph-theory entries had already named a `math.graph` sibling as a Blueprint-exists-no-EB-yet
 cross-link; Batch 25 (2026-09-12, 4 concepts): `connectivity`, `eulerian-circuit`,
@@ -7306,3 +7316,71 @@ new entries' heading structure diffed clean against `math.alg.like-terms.md` on 
 `parametric-curves` (requires `function-concept` + `coordinate-plane`), `riemann-sums`
 (requires `limits`), `squeeze-theorem` (requires `limit-laws`). No Physics, Chemistry, English,
 Biology, Computer Science, KG, Blueprint, or runtime file was modified.
+
+### Batch 37 — math.calc: discontinuity types, IVT, the derivative, squeeze theorem (2026-09-13)
+
+Re-computed the frontier fresh — the exact 6 candidates unblocked by Batch 36 were confirmed
+still ready. Selected 4 (`continuity-types`, `ivt`, `derivative-intro`, `squeeze-theorem`),
+deferring `parametric-curves` and `riemann-sums` (each pulling in a prerequisite set less
+tightly coupled to the limits/continuity chain this program has been building). All 4
+Blueprint-grounded, reused by reference. **None of the 4 Blueprints this batch carried an
+explicit birth-type column** (the eighth through eleventh such gaps this campaign) — every
+misconception independently classified.
+
+- **`math.calc.continuity-types`** (advanced/analyze, requires `continuity` + `one-sided-limits`,
+  no unlocks/cross-links) — the three-way removable/jump/infinite classification, each tied to
+  a precise diagnostic (does the two-sided limit exist and match? do both one-sided limits exist
+  but disagree? is either side unbounded?), and the rule that a zero denominator alone never
+  determines the type without a factor-and-cancel check. 2 misconceptions independently
+  classified: MC-1 ZERO-DENOMINATOR-ASSUMED-TO-ALWAYS-MEAN-INFINITE-DISCONTINUITY (Type 1), MC-2
+  REMOVABILITY-JUDGED-BY-WHETHER-F-OF-A-IS-DEFINED-RATHER-THAN-WHETHER-ONE-SIDED-LIMITS-AGREE
+  (Type 1). Substantively cross-references the already-authored `math.func.vertical-asymptote`
+  as the same infinite-discontinuity phenomenon viewed through a different lens.
+- **`math.calc.ivt`** (advanced/apply, requires `continuity`, cross-link `math.num.root-finding`
+  confirmed genuinely unauthored — independence mode) — continuity as the essential (never
+  optional) hypothesis, a sign-change-plus-continuity check as a COMPLETE existence proof
+  requiring no further computation, and IVT's purely existential character (proves a root
+  exists, never locates it). 3 misconceptions independently classified: MC-1
+  IVT-ASSUMED-TO-HOLD-WITHOUT-CONTINUITY (Type 1), MC-2
+  ROOT-EXISTENCE-PROOF-ASSUMED-TO-NEED-LOCATION (Type 5), MC-3 IVT-ASSUMED-TO-LOCATE-THE-ROOT
+  (Type 5, the mirror-image expectation of MC-2, from the same instructional history of prior
+  root-finding techniques always delivering both existence and location together).
+- **`math.calc.derivative-intro`** (understand/advanced, requires `math.geom.slope` + `limits`,
+  no unlocks/cross-links listed in the KG though the Blueprint names
+  `math.calc.derivative-definition`, a genuine Blueprint/KG discrepancy recorded not fixed) —
+  **the domain's central payoff concept**, everything since `limits` has been building toward:
+  the derivative as the limit of the difference quotient, the constructed-second-point
+  resolution to "a tangent needs two points," and the exact-versus-approximate distinction
+  between the limit and any finite-$h$ evaluation. An older document format (matching `limits`'
+  and `continuity`'s own) lacking a birth-type column (TENTH such gap) — 3 misconceptions
+  independently classified: MC-1 TANGENT-IS-JUST-ONE-POINT (Type 2, perceptual intuition — the
+  naive geometric picture of a single point of tangency), MC-2 INSTANTANEOUS-IS-UNDEFINED (Type
+  2, the pre-limit intuition that change requires two distinct states), MC-3
+  DIFFERENCE-QUOTIENT-IS-THE-DERIVATIVE (Type 1).
+- **`math.calc.squeeze-theorem`** (advanced/apply, requires `limit-laws`, no unlocks/cross-links)
+  — trapping a difficult function between two converging bounds, the requirement for BOTH
+  inequalities (never one alone), and recognizing when ordinary limit laws genuinely fail
+  (an oscillating piece with no limit) as the signal this theorem is needed. 2 misconceptions
+  independently classified: MC-1 ONLY-ONE-SIDE-OF-THE-SANDWICH-INEQUALITY-ESTABLISHED (Type 1),
+  MC-2 ORDINARY-LIMIT-LAWS-ATTEMPTED-WHEN-A-PIECES-LIMIT-DOES-NOT-EXIST (Type 1, the same
+  precondition-ignored pattern already classified this way in `math.calc.limit-laws`' own MC-1).
+
+`math.calc` **5/76 → 9/76**. `math.disc`/`math.graph` unchanged this batch (20/32 parked, 13/16
+parked). Mathematics **371/908 → 375/908**, 760 remaining. No genuine content-overlap found
+beyond the two Blueprint/KG `unlocks` discrepancies noted (`ivt`'s Blueprint correctly declares
+no unlocks; `derivative-intro`'s Blueprint names `derivative-definition`, absent from the KG's
+own field). Full per-concept detail above. All tracking files updated in the same commit:
+`ROADMAP.md` Section 1/2 totals and the `math.calc` domain row, `COVERAGE.md`'s mathematics
+summary row and this Delivery history entry, `CLAUDE.md`'s campaign section.
+`EDUCATIONAL_BRAIN_INDEX.md` and `QUALITY.md` again deferred (same generated-artifact rationale
+as prior batches). Validated: `npx tsx scripts/validate-knowledge-graph.ts
+docs/mathematics/kg/graph.json` PASS, 908/908 reachable, 0 failures, 0 warnings (KG file
+untouched); `scripts/math/state.ts` confirms math.calc 9/76, mathematics 375/908, 6
+EB-certified domains (unchanged); `npx tsc --noEmit` clean; targeted tests
+`mathPackageCorpus.test.ts` + `mathematicsAssetContract.test.ts` 479/479 passed. All 4 new
+entries' heading structure diffed clean against `math.alg.like-terms.md` on the first pass (0
+diffs each). Fresh `math.calc` frontier computed (verified programmatically, not assumed): 3
+candidates ready — `derivative-definition` (requires `continuity` + `derivative-intro`),
+`parametric-curves` (requires `function-concept` + `coordinate-plane`), `riemann-sums`
+(requires `limits`). No Physics, Chemistry, English, Biology, Computer Science, KG, Blueprint,
+or runtime file was modified.

@@ -3727,6 +3727,26 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   `derivative-intro`, `parametric-curves`, `riemann-sums`, `squeeze-theorem`). This is a
   genuinely multi-session campaign; continuation should verify state via
   `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
+- **Batch 37 — math.calc: discontinuity types, IVT, the derivative, squeeze theorem**
+  (2026-09-13): re-computed the frontier fresh — the exact 6 candidates unblocked by Batch 36
+  were confirmed still ready. Selected 4 (`continuity-types`, `ivt`, `derivative-intro`,
+  `squeeze-theorem`), deferring `parametric-curves`/`riemann-sums` (each needing a prerequisite
+  set less tightly coupled to the limits/continuity chain). All 4 Blueprint-grounded, reused by
+  reference. **None of the 4 Blueprints carried an explicit birth-type column** — the
+  eighth/ninth/tenth/eleventh such gaps this campaign — every misconception independently
+  classified. `derivative-intro` is this domain's central payoff concept, everything since
+  `limits` has been building toward — its own MC-1 resolves the classic "a tangent needs two
+  points" objection via the constructed-second-point-in-the-limit technique. `math.calc`
+  **9/76** (5→9). Mathematics **375/908** (371→375), 760 remaining. No genuine content-overlap
+  found beyond two Blueprint/KG `unlocks` discrepancies (recorded, not fixed, KG followed). Full
+  per-concept detail in `COVERAGE.md` Batch 37. Validated: KG validator PASS (908/908 reachable,
+  file untouched), `scripts/math/state.ts` confirms math.calc 9/76 and mathematics 375/908 (6
+  EB-certified domains unchanged), `tsc --noEmit` clean, targeted tests 479/479 passed, all 4
+  heading structures diffed clean on the first pass (0 diffs each). No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Fresh math.calc
+  frontier computed: 3 candidates ready (`derivative-definition`, `parametric-curves`,
+  `riemann-sums`). This is a genuinely multi-session campaign; continuation should verify state
+  via `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
 
 ## Run locally
 ```
