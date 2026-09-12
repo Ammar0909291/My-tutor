@@ -3873,60 +3873,79 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   This is a genuinely multi-session campaign; continuation should verify state via
   `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
 
-## Physics tutor zero→research architecture — DESIGN EXERCISE, NOT ADOPTED (2026-09-12)
-- `docs/architecture/PHYSICS_TUTOR_ZERO_TO_RESEARCH_ARCHITECTURE.md` — a from-scratch
-  architecture for a personal physics teacher taking a learner from zero physics knowledge to
-  research-readiness, commissioned as an explicit first-principles exercise ("do NOT assume the
-  existing My Tutor architecture is automatically correct"). **It is not an ADR, it changes
-  nothing, and it does not supersede or reopen `EDUCATIONAL_BRAIN_BIBLE.md` or any ADR** —
-  Educational Brain Architecture v1.0 remains frozen and authoritative. Anything in it that would
-  ever become code stays G1/G2-gated like everything else. The doc says all of this in its own
-  status banner and §20; read those before quoting any of it as a decision.
-- **Its central argument, stated here because it is the part worth disagreeing with:** the
-  current runtime's shape is *the model speaks, then the system repairs what it said*, and the
-  accumulated guard layer (post-hoc question withholder, false-confirmation stripper,
-  phantom-figure stripper, filler repairer, stance enforcer, prose-option stripper, the seven
-  prompt blocks each claiming authority "over everything above", and the arbitration layer added
-  later to adjudicate between them) is not a series of unrelated bugs but the predictable cost of
-  that shape — an exclusion list with an unbounded complement (I1's three exclusions → I4's two
-  more → ENG-D02's nine measured escapes), an inability to restore information the generator never
-  produced, and composition into absorbing states (the GUIDE deadlock, the excursion gate, the
-  pending-probe latch). The proposed inversion is the ARTIFACT-FIRST RULE: every graded artifact
-  and every figure exists as a typed object BEFORE prose is generated; prose is rendered around
-  them and may not introduce new ones; verification then checks faithfulness to a decision instead
-  of classifying unbounded free text.
-- Contents (all 16 requested outputs): behavioural contract + three-way authority separation
-  (knowledge / state / language, with "interpretation may steer, only verified grading may
-  score"); a SPIRAL knowledge graph — nodes are (concept × rung R0-R5) with ASCENDS/SUPERSEDES/
-  CONTRASTS_WITH/MATH_REQUIRES/SPINE_OF edges, 28 strands, 8 cross-cutting spines, per-EDGE
-  mastery thresholds; a two-level concept model (durable instruments vs depreciating prose); an
-  evidence-log-projection student model with independence discount and verification class; a
-  pedagogical engine whose assessment acts are chosen by expected INFORMATION gain; a 10-invariant
-  Turn Contract with a render receipt; a 9-facet mastery predicate with 6 states; FigureSpec
-  semantic contracts; an operation-typed Math Graph with step decomposition; a closed-taxonomy
-  Turn Interpreter with an UNINTERPRETABLE class and a confidence gate (the stated alternative to
-  a detector zoo); 5 separated LLM roles; a deterministic Physics Verifier (dimensions, limiting
-  cases, signs, magnitudes, conservation); commutative append-only learner state; 10 Mermaid
-  diagrams; an 11-item failure analysis with 10 named redesigns (R1-R10) plus 3 self-rejections;
-  20 principles; 8 phased stages with measured exit criteria.
-- **Convergent with work already in this repo, and says so** (§20): the asset contract is the
-  direct ancestor of its publishability gate, and the misconception birth taxonomy, excursion
-  lifecycle, turn arbitration, the figure critic's `no-suitable-form` exit, the liveness
-  programme's `turnProgress` counters and the append-only evidence spine are all generalized
-  rather than replaced. Genuinely new: the Artifact-First Rule as a system-wide shape, the spiral
-  (concept × rung) graph, the Approximation Ledger (physics-specific — every lie-to-children is a
-  recorded debt with a domain of validity and a repaying cell), operation-typed math dependencies,
-  expected-information-gain probe selection, the render receipt, commutative learner-state events,
-  and the deterministic Physics Verifier.
-- Evidence used: a direct read of `docs/physics/kg/graph.json` (238 concepts, 12 domains, single
-  root `phys.meas.units`) and this file's own recorded defect history, used as a corpus of real
-  failure modes. **No claim in the document is asserted as verified production behaviour** — the
-  KG shape is the only measured fact in it.
-- No code, schema, route, KG, Blueprint, Educational Brain, or curriculum file was touched. Repo
-  state at the time: local `main` appeared to have diverged 79/87 against `origin/main` — that was
-  purely a SHALLOW-CLONE artifact (`.git/shallow` present, so no merge base was visible);
-  `git fetch --deepen=300` resolved it to 0 local-only / 102 behind, a clean fast-forward. Worth
-  knowing for future sessions: **deepen before believing a divergence count in this container.**
+## Physics Teacher Migration Architecture V2 — AUDITED, NOT ADOPTED (2026-09-12)
+
+**File renamed this turn.** `docs/architecture/PHYSICS_TUTOR_ZERO_TO_RESEARCH_ARCHITECTURE.md` →
+**`docs/architecture/PHYSICS_TEACHER_MIGRATION_ARCHITECTURE.md`** (`git mv`, history preserved).
+V1 was a from-scratch design; V2 is the same document rewritten after a full evidence-based audit
+against `main`, and it is now a **migration architecture** rather than a replacement. Still NOT an
+ADR, still changes nothing, still does not supersede or reopen `EDUCATIONAL_BRAIN_BIBLE.md` or any
+ADR; everything in it that would become code stays G1/G2-gated.
+
+- **Four of V1's load-bearing novelty claims were FALSE and are corrected in place.** Verified by
+  reading the modules and their call sites, not the docs:
+  (1) "only verified grading may score" is **already enforced** — `conversationState.ts:1136`
+  `const verified = evidence.serverGraded === true`, plus `unauthoredKeyGrades` (`:1079`) counting
+  a model-invented key without ever crediting it, with the invariant proved over **49,152 states**
+  (`masteryCounterInvariant.test.ts`). It is BETTER than V1's own nine-facet replacement, which V2
+  now rejects. (2) Artifact-first probes are **already true on the authored path** — the probe
+  object exists at `route.ts:4664`, the provider call is at `:5531`, and the gate path serves a
+  complete assessed turn with **zero provider calls** (`provider='gate'`, `:5480`).
+  (3) The "operation-typed Math Graph" is **~70% already built** — `capabilityModel.ts` has 34
+  capabilities in 7 clusters, a `CAPABILITY_REQUIRES` prerequisite DAG, a 5-state ladder,
+  cross-session persistence via `replayCapabilityProjection` (`route.ts:3152`), and it DRIVES a
+  decision (`classifyFailure` → `capability_missing`, `:3592`). (4) Turn arbitration and the
+  liveness invariant are **both implemented and wired** (`turnArbitration.ts`, `turnProgress.ts`).
+- **V1's composed 11-check verifier is REFUTED by this repo's own experiment** and is dropped, not
+  deferred: `kernel/verifier/rules.ts` holds 22 rules and a real 2-attempt rerender loop and is
+  **OFF by default** (`route.ts:6635`), for the reason recorded at `route.ts:6780` — `V-Q2` rejects
+  any TEACH/SHOW/RECOVER/CLOSE draft ending in a question, so "a 'permissive' context is not
+  actually reachable". V2 adds only TOTAL DETERMINISTIC checks and keeps the one content-grounded
+  floor (`vAffirm`, `route.ts:6792`). **Do not re-enable K5 on the strength of V2.**
+- **The §4 ordering question, answered by tracing rather than assuming:** the turn is a HYBRID.
+  Mastery/state is DECIDE-only; the authored assessment path is DECIDE→ARTIFACT→RENDER→VERIFY; the
+  visual path is DECIDE→CONTRACT→RENDER→REPAIR-RESIDUAL; and exactly two surfaces remain
+  GENERATE→DETECT→REPAIR — the `mcqHoisted = gateMcqHoisted ?? mcqParse.mcq` fallback
+  (`route.ts:5707`, parsed from prose at `:5642`, plus four post-model overrides) and all prose
+  teaching content. Those two are what V2 closes.
+- **What V2 actually proposes — four primitives, nothing else:** (1) the **Turn Contract** as a
+  typed object compiled before the model call and asserted after (today the contract is ~40
+  `…Hoisted` locals plus ~20 post-hoc overrides, four of which are consecutive `mcqHoisted = null`
+  statements within 45 lines); (2) a **deterministic Physics Verifier** — dimensions first, then
+  limiting cases/signs/magnitude (there is NO physics correctness checking anywhere in `src/`, and
+  `mathjs` sits in `package.json:46` imported by zero files); (3) a **closed-taxonomy learner-move
+  interpreter** with a confidence gate and a first-class `UNINTERPRETABLE` class, replacing
+  `readTurnIntent`'s six-detector aggregation (measured surface: 63 detector-shaped exported
+  predicates, 60 regex constants); (4) **durable per-concept learner state** — `ConceptMasteryRecord`
+  and `ActiveMisconception` exist in schema with **0 writers each**, and `EvidenceRecord`'s only 2
+  writers are the visual path at weight 0. Plus two long-horizon additions: the **rung** dimension
+  (`KGNode` exposes only id/slug/title/description/prerequisites/estimatedHours/difficulty — a
+  concept appears exactly once, so "understands energy at 11" and "at 21" are not distinguishable)
+  and **retention** (Library `spacedRevision` call sites were removed).
+- **Explicitly DEFERRED with the evidence against each**, so a future session does not revive them:
+  the composed verifier, expected-information-gain probe selection, a CRDT rewrite of the snapshot
+  store (the proven defect was ONE field set in ONE rederiver — refactor those fields monotone
+  instead), the nine-facet mastery predicate as a REPLACEMENT, the Approximation Ledger, physics
+  spines, the five-role LLM split, and full 6-rung authoring.
+- **A documentation/implementation conflict found and recorded (not fixed):** `figureReference.ts`'s
+  header states "whether a figure is attached is decided AFTER the text is generated" — FALSE on
+  `main`; `resolveVisualForTurn` runs at `route.ts:3352` and injects its contract block at `:3439`,
+  1,179 lines before the provider call. `visualContract.ts`'s header is the correct one. The
+  stripper still has a real residual job (a figure decided pre-model can fail to FIRE), but its
+  stated rationale describes a pre-V2-resolver world.
+- **Verdict recorded in the document:** keep My Tutor and migrate four layers — Turn Contract →
+  Physics Verifier (dimensional) → interpreter → durable learner model, then rung + retention.
+  Not a rewrite: the repo has already introduced five deterministic authorities into a running
+  system without one (`conversationState` 2026-07-14, `masteryGate` 07-15, `gateAssessment` 08-12,
+  `turnArbitration` 08-23, `turnProgress` 09-07).
+- **Audit method and its limits** (§12 of the doc): `git fetch --unshallow` is REQUIRED — the clone
+  grafts at 2026-08-23 and makes every mechanism look three weeks old; full history is 3,542
+  commits from 2026-05-31, `route.ts` grew 120 → 10,513 lines across 434 commits, and August ran
+  256 fixes against 139 features. No production DB was reachable (`scripts/physics/state.ts` reports
+  `serving: UNAVAILABLE`), so **no DB row count in the document is claimed as verified**; no live
+  learner session was driven; the full 640-file suite was not run (6 core architectural files were,
+  120/120 pass). Physics content layer measured complete: KG 238 / Blueprints 238/238 / Educational
+  Brain 238/238, visual bindings exact 77 / none 161.
 
 ## Run locally
 ```
