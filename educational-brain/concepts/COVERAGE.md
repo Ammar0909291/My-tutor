@@ -11,7 +11,7 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 418 | **Six domains CERTIFIED, math.disc at 20/32 (parked), math.graph at 13/16 (parked), math.calc the active campaign at 52/76.** 82 `math.found.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 69 `math.geom.*` (**COMPLETE, DOMAIN CERTIFIED** — the final 13 entries were restored by commit `0d2c76dd`'s Wave 0 recovery, which this row previously did not reflect) + 36 `math.nt.*` (**COMPLETE, DOMAIN CERTIFIED 2026-08-12** — the domain's final 8 concepts, `prime-distribution`, `continued-fractions`, `analytic-number-theory`, `prime-number-theorem`, `riemann-hypothesis`, `algebraic-number-theory`, `algebraic-integers`, `number-fields`, were authored this session, ending the PARKED status this row previously recorded) + 59 `math.alg.*` (**COMPLETE, DOMAIN CERTIFIED 2026-09-11** — Wave 1 (2026-08-12, 11 concepts): `expression`, `equation`, `term`, `coefficient`, `exponent-rules`, `polynomial`, `degree`, `zero-exponent`, `negative-exponent`, `solution-set`, `inequality`; Wave 2 (2026-08-12, 1 concept): `like-terms`; Wave 3 (2026-09-11, 3 concepts): `simplification`, `polynomial-operations`, `radicals`; Wave 4 (2026-09-11, 5 concepts): `linear-equation-1var`, `polynomial-division`, `fractional-exponent`, `simplifying-radicals`, `radical-equations`; Wave 5 (2026-09-11, 5 concepts): `inequality-1var`, `absolute-value-equations`, `linear-equation-2var`, `remainder-theorem`, `rationalizing-denominators`; Wave 6 (2026-09-11, 3 concepts): `inequality-2var`, `system-linear-equations`, `factor-theorem`; Wave 7 (2026-09-11, 4 concepts): `substitution-method`, `elimination-method`, `system-3var`, `factoring`; Wave 8 (2026-09-11, 3 concepts): `factoring-gcf`, `factoring-special`, `rational-expressions`; Wave 9 (2026-09-11, 4 concepts): `factoring-trinomials`, `rational-expressions-addition`, `rational-expressions-multiplication`, `rational-equations`; Wave 10 (2026-09-11, 1 concept): `quadratic-equation`; Wave 11 (2026-09-11, 2 concepts): `completing-the-square`, `polynomial-roots`; Wave 12 part 1 (2026-09-11, 1 concept): `quadratic-formula`; Wave 12 part 2 (2026-09-11, 2 concepts): `discriminant`, `rational-root-theorem`; Wave 12 part 3 (2026-09-11, 3 concepts): `fundamental-theorem-algebra`, `polynomial-inequality`, `vietas-formulas`; Wave 13 (2026-09-11, 2 concepts): `complex-polynomial-roots`, `rational-inequality`; Batch 15 (2026-09-11, 1 concept): `exponential-function`; Batch 16 (2026-09-11, 2 concepts): `logarithm`, `exponential-equations`; Batch 17 (2026-09-11, 3 concepts): `binomial-theorem`, `logarithm-properties`, `natural-logarithm`; Batch 18 (2026-09-11, 3 concepts, FINAL): `change-of-base`, `logarithmic-equations`, `pascals-triangle`; all Blueprint-grounded, reused by reference). 20 `math.disc.*` entries (**IN PROGRESS, standalone campaign since math.alg's certification** —
+| mathematics | 908 | 421 | **Six domains CERTIFIED, math.disc at 20/32 (parked), math.graph at 13/16 (parked), math.calc the active campaign at 55/76.** 82 `math.found.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 69 `math.geom.*` (**COMPLETE, DOMAIN CERTIFIED** — the final 13 entries were restored by commit `0d2c76dd`'s Wave 0 recovery, which this row previously did not reflect) + 36 `math.nt.*` (**COMPLETE, DOMAIN CERTIFIED 2026-08-12** — the domain's final 8 concepts, `prime-distribution`, `continued-fractions`, `analytic-number-theory`, `prime-number-theorem`, `riemann-hypothesis`, `algebraic-number-theory`, `algebraic-integers`, `number-fields`, were authored this session, ending the PARKED status this row previously recorded) + 59 `math.alg.*` (**COMPLETE, DOMAIN CERTIFIED 2026-09-11** — Wave 1 (2026-08-12, 11 concepts): `expression`, `equation`, `term`, `coefficient`, `exponent-rules`, `polynomial`, `degree`, `zero-exponent`, `negative-exponent`, `solution-set`, `inequality`; Wave 2 (2026-08-12, 1 concept): `like-terms`; Wave 3 (2026-09-11, 3 concepts): `simplification`, `polynomial-operations`, `radicals`; Wave 4 (2026-09-11, 5 concepts): `linear-equation-1var`, `polynomial-division`, `fractional-exponent`, `simplifying-radicals`, `radical-equations`; Wave 5 (2026-09-11, 5 concepts): `inequality-1var`, `absolute-value-equations`, `linear-equation-2var`, `remainder-theorem`, `rationalizing-denominators`; Wave 6 (2026-09-11, 3 concepts): `inequality-2var`, `system-linear-equations`, `factor-theorem`; Wave 7 (2026-09-11, 4 concepts): `substitution-method`, `elimination-method`, `system-3var`, `factoring`; Wave 8 (2026-09-11, 3 concepts): `factoring-gcf`, `factoring-special`, `rational-expressions`; Wave 9 (2026-09-11, 4 concepts): `factoring-trinomials`, `rational-expressions-addition`, `rational-expressions-multiplication`, `rational-equations`; Wave 10 (2026-09-11, 1 concept): `quadratic-equation`; Wave 11 (2026-09-11, 2 concepts): `completing-the-square`, `polynomial-roots`; Wave 12 part 1 (2026-09-11, 1 concept): `quadratic-formula`; Wave 12 part 2 (2026-09-11, 2 concepts): `discriminant`, `rational-root-theorem`; Wave 12 part 3 (2026-09-11, 3 concepts): `fundamental-theorem-algebra`, `polynomial-inequality`, `vietas-formulas`; Wave 13 (2026-09-11, 2 concepts): `complex-polynomial-roots`, `rational-inequality`; Batch 15 (2026-09-11, 1 concept): `exponential-function`; Batch 16 (2026-09-11, 2 concepts): `logarithm`, `exponential-equations`; Batch 17 (2026-09-11, 3 concepts): `binomial-theorem`, `logarithm-properties`, `natural-logarithm`; Batch 18 (2026-09-11, 3 concepts, FINAL): `change-of-base`, `logarithmic-equations`, `pascals-triangle`; all Blueprint-grounded, reused by reference). 20 `math.disc.*` entries (**IN PROGRESS, standalone campaign since math.alg's certification** —
 Batch 14 (2026-09-11, 1 concept): `counting-principles`; Batch 15 (2026-09-11, 1 concept):
 `permutations`; Batch 16 (2026-09-11, 1 concept): `combinations`; Batch 19 (2026-09-11, 5
 concepts): `combinatorics`, `pigeonhole`, `stars-bars`, `inclusion-exclusion`,
@@ -8525,3 +8525,114 @@ passed. All 4 new entries' heading structure diffed clean against
 `multiple-integrals`, `vector-fields` — the exact three deferred from this
 batch's own selection). No Physics, Chemistry, English, Biology, Computer
 Science, KG, Blueprint, or runtime file was modified.
+
+### Batch 49 — math.calc: vector fields, line integrals, multiple integrals (closes the Batch-48 frontier) (2026-09-12)
+
+Fetch confirmed clean (0/0). `scripts/math/state.ts` confirmed math.calc
+52/76, mathematics 418/908, matching Batch 48's end state exactly.
+Re-computed the frontier fresh — the exact 3 candidates deferred from
+Batch 48 were confirmed still ready: `vector-fields`
+(requires `gradient`+`math.geom.vectors-3d`, unlocks `line-integrals`),
+`line-integrals` (requires `parametric-curves`+`math.geom.vectors-3d`,
+unlocks `greens-theorem`), `multiple-integrals` (requires
+`definite-integral`+`multivariable-intro`, no unlocks) — all 3
+Blueprint-grounded, reused by reference, closing the ENTIRE frontier
+available at batch start with none deferred. **None of the 3 Blueprints
+carried an explicit birth-type column** — every misconception independently
+classified:
+
+- `vector-fields` (expert/analyze, mastery_threshold 0.7, estimated_hours
+  8) — a vector field as ANY assignment of a vector to each point,
+  generalizing `gradient`'s $\nabla f$ to one special case among many;
+  conservative fields (those with a potential $f$ satisfying
+  $\mathbf{F}=\nabla f$) and the Fundamental Theorem for Line Integrals'
+  path-independence payoff; the necessary condition
+  $\partial P/\partial y=\partial Q/\partial x$ and the precise "no
+  potential exists at all" conclusion when it fails, confirmed via a
+  nonzero closed-loop line integral. MC-1
+  EVERY-VECTOR-FIELD-ASSUMED-CONSERVATIVE (Type 1, overgeneralizing from
+  `gradient`'s own exclusively-gradient examples, since no non-gradient
+  vector field had been seen before this concept), MC-2
+  PATH-INDEPENDENCE-ASSUMED-TO-NEED-MULTI-PATH-VERIFICATION (Type 5,
+  instruction-induced — the Fundamental Theorem's completeness as a
+  single, direct proof is not visually self-evident), MC-3
+  APPROXIMATE-POTENTIAL-ASSUMED-AVAILABLE-FOR-NON-CONSERVATIVE-FIELDS
+  (Type 1, overgeneralizing math's usual tolerance for approximation into
+  a binary existence question with no partial version). The Blueprint's
+  own worked examples deliberately reuse the SAME rotational field
+  $\mathbf{F}=(-y,x)$ first as a plain vector-field example, later
+  revealed to fail the conservativeness test — reused verbatim as this
+  entry's own Demonstrations section.
+- `line-integrals` (expert/apply, mastery_threshold 0.7, estimated_hours
+  10) — the scalar line integral $\int_C f\,ds$ (arc-length-weighted,
+  built from a norm) versus the vector line integral
+  $\int_C\mathbf{F}\cdot d\mathbf{r}$ (work done, built from the actual
+  tangent vector); the genuinely opposite path-reversal behavior (scalar
+  unchanged, vector flips sign) as a direct structural consequence of
+  norm-vs-vector. MC-1 BOTH-INTEGRAL-TYPES-ASSUMED-TO-FLIP-SIGN-UNDER-
+  REVERSAL (Type 1, overgeneralizing from the shared name and shared
+  setup recipe across two structurally different behaviors), MC-2
+  ARC-LENGTH-ELEMENT-CONFUSED-WITH-VECTOR-DIFFERENTIAL (Type 4,
+  notation-induced — $ds$ vs $d\mathbf{r}$'s near-identical notation and
+  derivation), MC-3 PARAMETRIZATION-DIRECTION-NOT-TRACKED-FOR-VECTOR-
+  INTEGRALS (Type 5, instruction-induced — the direction-check step is
+  not visually flagged by the parametrization itself). The Blueprint's own
+  worked-example extension (a constant-force field added specifically
+  because the initial example's coincidental zero-both-ways result would
+  otherwise fail to demonstrate the general sign-flip rule) is reused
+  verbatim as this entry's own Demonstrations section.
+- `multiple-integrals` (advanced/apply, mastery_threshold 0.75,
+  estimated_hours 15) — the double integral $\iint_R f(x,y)\,dA$ as signed
+  volume, extending `definite-integral`'s signed-area interpretation;
+  iterated integration and Fubini's Theorem's order-swap guarantee for
+  continuous integrands on a rectangle; the requirement that a
+  non-rectangular region's inner bounds be FUNCTIONS of the outer
+  variable, not constants. MC-1
+  INNER-INTEGRAL-BOUNDS-ASSUMED-ALWAYS-CONSTANT (Type 1, overgeneralizing
+  from the rectangular-region default, where constant bounds genuinely
+  are correct, to the general case), MC-2
+  ORDER-OF-INTEGRATION-ASSUMED-TO-ALWAYS-MATTER (Type 1, overgeneralizing
+  general mathematical order-sensitivity caution against Fubini's genuine
+  guarantee), MC-3 REGION-BOUNDARY-CURVES-MISIDENTIFIED-AS-UPPER-OR-LOWER
+  (Type 2, perceptual intuition — a quick visual glance at two curves'
+  shapes can misleadingly suggest which sits higher without testing a
+  specific value). The Blueprint's own deliberate reuse of Example 2's
+  exact non-rectangular region, recomputed with constant bounds to show
+  the wrong-region consequence concretely, is reused verbatim as this
+  entry's own Demonstrations section.
+
+`math.calc` **52/76 → 55/76**. `math.disc`/`math.graph` unchanged this
+batch (20/32 parked, 13/16 parked). Mathematics **418/908 → 421/908**, 714
+remaining. **All 3 concepts zero-discrepancy** — the SEVENTH consecutive
+zero-discrepancy batch, continuing the streak restarted in Batch 43.
+
+**Self-correction caught before commit**: a draft of `multiple-integrals`'
+own Curriculum Feedback and Version History sections initially claimed
+this batch brought `math.calc` to 76/76 DOMAIN CERTIFIED. Re-running
+`scripts/math/state.ts` fresh (per this program's own standing discipline
+of never trusting a number without re-verifying) showed `eb: 55`, not 76
+— `math.calc` has 76 total concepts and 21 remain unauthored after this
+batch (the trigonometric-derivative/integral family, the series/
+convergence family, and the remaining vector-calculus-theorem family
+including `greens-theorem`/`stokes-theorem`/`divergence-theorem`). Both
+sections were corrected in place before committing, matching this
+program's own Batch 27 precedent for catching and fixing exactly this
+class of premature-certification error before it reached git history.
+
+Full per-concept detail above. All tracking files updated in the same
+commit: `ROADMAP.md` Section 1/2 totals and the `math.calc` domain row,
+`COVERAGE.md`'s mathematics summary row and this Delivery history entry,
+`CLAUDE.md`'s campaign section. `EDUCATIONAL_BRAIN_INDEX.md` and
+`QUALITY.md` again deferred (same generated-artifact rationale as prior
+batches). Validated: `npx tsx scripts/validate-knowledge-graph.ts
+docs/mathematics/kg/graph.json` PASS, 908/908 reachable, 0 failures, 0
+warnings (KG file untouched); `scripts/math/state.ts` confirms math.calc
+55/76, mathematics 421/908, 6 EB-certified domains (unchanged); `npx tsc
+--noEmit` clean; targeted tests `mathPackageCorpus.test.ts` +
+`mathematicsAssetContract.test.ts` 479/479 passed. All 3 new entries'
+heading structure diffed clean against `math.alg.like-terms.md` on the
+first pass (0 diffs each). Fresh `math.calc` frontier computed: 2
+candidates ready (`double-integrals` — requires `multiple-integrals` only
+— `curl-divergence` — requires `vector-fields`+`partial-derivatives`, both
+long-authored). No Physics, Chemistry, English, Biology, Computer Science,
+KG, Blueprint, or runtime file was modified.

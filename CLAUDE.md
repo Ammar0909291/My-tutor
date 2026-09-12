@@ -4119,6 +4119,35 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   `vector-fields` — the exact three deferred from this batch's own selection). This is a
   genuinely multi-session campaign; continuation should verify state via
   `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
+- **Batch 49 — math.calc: vector fields, line integrals, multiple integrals** (2026-09-12):
+  fetch clean (0/0), state.ts confirmed 52/76 matching Batch 48's end state. Re-computed the
+  frontier fresh — the exact 3 candidates deferred from Batch 48 were confirmed still ready
+  (`vector-fields`, `line-integrals`, `multiple-integrals`), closing the ENTIRE frontier
+  available at batch start with none deferred. All 3 Blueprint-grounded, none carrying an
+  explicit birth-type column — every misconception independently classified (`vector-fields`
+  MC-1 Type 1 overgeneralizing from `gradient`'s exclusively-gradient examples/MC-2 Type 5
+  instruction-induced, the Fundamental Theorem's completeness not visually self-evident/MC-3
+  Type 1 overgeneralizing math's usual approximation tolerance into a binary existence
+  question; `line-integrals` MC-1 Type 1 overgeneralizing from the shared name/setup recipe
+  across two structurally different behaviors/MC-2 Type 4 notation-induced, $ds$ vs
+  $d\mathbf{r}$'s near-identical notation/MC-3 Type 5 instruction-induced, direction-check not
+  visually flagged; `multiple-integrals` MC-1 Type 1 overgeneralizing the rectangular-region
+  constant-bounds default/MC-2 Type 1 overgeneralizing general order-sensitivity caution
+  against Fubini's guarantee/MC-3 Type 2 perceptual, curves' shapes misleadingly suggesting
+  which sits higher). **All 3 concepts zero-discrepancy**, the SEVENTH consecutive
+  zero-discrepancy batch. **Self-correction caught before commit**: a draft claimed this
+  batch reached 76/76 DOMAIN CERTIFIED; `scripts/math/state.ts` showed `eb: 55`, not 76 —
+  corrected in place (21 concepts remain, matching Batch 27's precedent for catching this
+  exact error class before commit). `math.calc` **55/76** (52→55). Mathematics **421/908**
+  (418→421), 714 remaining. Full per-concept detail in `COVERAGE.md` Batch 49. Validated: KG
+  validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts` confirms
+  math.calc 55/76 and mathematics 421/908 (6 EB-certified domains unchanged), `tsc --noEmit`
+  clean, targeted tests 479/479 passed, all 3 heading structures diffed clean on the first
+  pass (0 diffs each). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file
+  touched. Fresh math.calc frontier computed: 2 candidates ready (`double-integrals`,
+  `curl-divergence`). This is a genuinely multi-session campaign; continuation should verify
+  state via `scripts/math/state.ts` fresh each time rather than trusting any number recorded
+  here.
 
 ## Physics Teacher Migration Architecture V2 — AUDITED, NOT ADOPTED (2026-09-12)
 
