@@ -11,7 +11,7 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 434 | **Six domains CERTIFIED, math.disc at 20/32 (parked), math.graph at 13/16 (parked), math.calc the active campaign at 63/76, math.trig 4/25 (opened), math.seq 1/21 (opened).** 82 `math.found.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 69 `math.geom.*` (**COMPLETE, DOMAIN CERTIFIED** — the final 13 entries were restored by commit `0d2c76dd`'s Wave 0 recovery, which this row previously did not reflect) + 36 `math.nt.*` (**COMPLETE, DOMAIN CERTIFIED 2026-08-12** — the domain's final 8 concepts, `prime-distribution`, `continued-fractions`, `analytic-number-theory`, `prime-number-theorem`, `riemann-hypothesis`, `algebraic-number-theory`, `algebraic-integers`, `number-fields`, were authored this session, ending the PARKED status this row previously recorded) + 59 `math.alg.*` (**COMPLETE, DOMAIN CERTIFIED 2026-09-11** — Wave 1 (2026-08-12, 11 concepts): `expression`, `equation`, `term`, `coefficient`, `exponent-rules`, `polynomial`, `degree`, `zero-exponent`, `negative-exponent`, `solution-set`, `inequality`; Wave 2 (2026-08-12, 1 concept): `like-terms`; Wave 3 (2026-09-11, 3 concepts): `simplification`, `polynomial-operations`, `radicals`; Wave 4 (2026-09-11, 5 concepts): `linear-equation-1var`, `polynomial-division`, `fractional-exponent`, `simplifying-radicals`, `radical-equations`; Wave 5 (2026-09-11, 5 concepts): `inequality-1var`, `absolute-value-equations`, `linear-equation-2var`, `remainder-theorem`, `rationalizing-denominators`; Wave 6 (2026-09-11, 3 concepts): `inequality-2var`, `system-linear-equations`, `factor-theorem`; Wave 7 (2026-09-11, 4 concepts): `substitution-method`, `elimination-method`, `system-3var`, `factoring`; Wave 8 (2026-09-11, 3 concepts): `factoring-gcf`, `factoring-special`, `rational-expressions`; Wave 9 (2026-09-11, 4 concepts): `factoring-trinomials`, `rational-expressions-addition`, `rational-expressions-multiplication`, `rational-equations`; Wave 10 (2026-09-11, 1 concept): `quadratic-equation`; Wave 11 (2026-09-11, 2 concepts): `completing-the-square`, `polynomial-roots`; Wave 12 part 1 (2026-09-11, 1 concept): `quadratic-formula`; Wave 12 part 2 (2026-09-11, 2 concepts): `discriminant`, `rational-root-theorem`; Wave 12 part 3 (2026-09-11, 3 concepts): `fundamental-theorem-algebra`, `polynomial-inequality`, `vietas-formulas`; Wave 13 (2026-09-11, 2 concepts): `complex-polynomial-roots`, `rational-inequality`; Batch 15 (2026-09-11, 1 concept): `exponential-function`; Batch 16 (2026-09-11, 2 concepts): `logarithm`, `exponential-equations`; Batch 17 (2026-09-11, 3 concepts): `binomial-theorem`, `logarithm-properties`, `natural-logarithm`; Batch 18 (2026-09-11, 3 concepts, FINAL): `change-of-base`, `logarithmic-equations`, `pascals-triangle`; all Blueprint-grounded, reused by reference). 20 `math.disc.*` entries (**IN PROGRESS, standalone campaign since math.alg's certification** —
+| mathematics | 908 | 438 | **Six domains CERTIFIED, math.disc at 20/32 (parked), math.graph at 13/16 (parked), math.calc the active campaign at 63/76, math.trig 6/25 (opened), math.seq 3/21 (opened).** 82 `math.found.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 69 `math.geom.*` (**COMPLETE, DOMAIN CERTIFIED** — the final 13 entries were restored by commit `0d2c76dd`'s Wave 0 recovery, which this row previously did not reflect) + 36 `math.nt.*` (**COMPLETE, DOMAIN CERTIFIED 2026-08-12** — the domain's final 8 concepts, `prime-distribution`, `continued-fractions`, `analytic-number-theory`, `prime-number-theorem`, `riemann-hypothesis`, `algebraic-number-theory`, `algebraic-integers`, `number-fields`, were authored this session, ending the PARKED status this row previously recorded) + 59 `math.alg.*` (**COMPLETE, DOMAIN CERTIFIED 2026-09-11** — Wave 1 (2026-08-12, 11 concepts): `expression`, `equation`, `term`, `coefficient`, `exponent-rules`, `polynomial`, `degree`, `zero-exponent`, `negative-exponent`, `solution-set`, `inequality`; Wave 2 (2026-08-12, 1 concept): `like-terms`; Wave 3 (2026-09-11, 3 concepts): `simplification`, `polynomial-operations`, `radicals`; Wave 4 (2026-09-11, 5 concepts): `linear-equation-1var`, `polynomial-division`, `fractional-exponent`, `simplifying-radicals`, `radical-equations`; Wave 5 (2026-09-11, 5 concepts): `inequality-1var`, `absolute-value-equations`, `linear-equation-2var`, `remainder-theorem`, `rationalizing-denominators`; Wave 6 (2026-09-11, 3 concepts): `inequality-2var`, `system-linear-equations`, `factor-theorem`; Wave 7 (2026-09-11, 4 concepts): `substitution-method`, `elimination-method`, `system-3var`, `factoring`; Wave 8 (2026-09-11, 3 concepts): `factoring-gcf`, `factoring-special`, `rational-expressions`; Wave 9 (2026-09-11, 4 concepts): `factoring-trinomials`, `rational-expressions-addition`, `rational-expressions-multiplication`, `rational-equations`; Wave 10 (2026-09-11, 1 concept): `quadratic-equation`; Wave 11 (2026-09-11, 2 concepts): `completing-the-square`, `polynomial-roots`; Wave 12 part 1 (2026-09-11, 1 concept): `quadratic-formula`; Wave 12 part 2 (2026-09-11, 2 concepts): `discriminant`, `rational-root-theorem`; Wave 12 part 3 (2026-09-11, 3 concepts): `fundamental-theorem-algebra`, `polynomial-inequality`, `vietas-formulas`; Wave 13 (2026-09-11, 2 concepts): `complex-polynomial-roots`, `rational-inequality`; Batch 15 (2026-09-11, 1 concept): `exponential-function`; Batch 16 (2026-09-11, 2 concepts): `logarithm`, `exponential-equations`; Batch 17 (2026-09-11, 3 concepts): `binomial-theorem`, `logarithm-properties`, `natural-logarithm`; Batch 18 (2026-09-11, 3 concepts, FINAL): `change-of-base`, `logarithmic-equations`, `pascals-triangle`; all Blueprint-grounded, reused by reference). 20 `math.disc.*` entries (**IN PROGRESS, standalone campaign since math.alg's certification** —
 Batch 14 (2026-09-11, 1 concept): `counting-principles`; Batch 15 (2026-09-11, 1 concept):
 `permutations`; Batch 16 (2026-09-11, 1 concept): `combinations`; Batch 19 (2026-09-11, 5
 concepts): `combinatorics`, `pigeonhole`, `stars-bars`, `inclusion-exclusion`,
@@ -9041,3 +9041,114 @@ passed. All 3 new entries' heading structure diffed clean against
 `math.alg.like-terms.md` on the first pass (0 diffs each). No Physics,
 Chemistry, English, Biology, Computer Science, KG, Blueprint, or runtime
 file was modified.
+
+### Batch 54 — math.trig: reference angles and trig functions; math.seq: series and convergent sequences (2026-09-12)
+
+Re-fetched `main` (0 divergence, clean). Re-computed the frontier fresh across
+all three active fronts: `math.calc` had 0 candidates ready (unchanged from
+Batch 53's end state — all 13 remaining concepts need `math.trig.trig-functions`
+or the series/convergence family), `math.trig` had 5 (`basic-ratios`,
+`reference-angles`, `trig-functions`, `law-of-sines`, `law-of-cosines`), `math.seq`
+had 5 (`arithmetic-sequence`, `geometric-sequence`, `recursive-sequences`,
+`convergent`, `series`) — all matching Batch 53's own end-of-report predictions
+exactly. Selected 4, one coherent pair from each of `math.trig` and `math.seq`:
+`math.trig.reference-angles` and `math.trig.trig-functions` (the highest-leverage
+`math.trig` pair — `trig-functions` unlocks `trig-identities`/`inverse-trig`, the
+eventual unblock for `math.calc.derivative-trig`, the original motivating goal of
+this program's math.trig excursion), `math.seq.series` and `math.seq.convergent`
+(the two immediate children of the already-authored `math.seq.sequence`, with
+`convergent` also requiring the already-authored `math.calc.limits`).
+
+**`math.trig.reference-angles`** (requires `math.trig.unit-circle`, unlocks
+`math.trig.trig-functions`, cross_links none, proficient/apply, mastery_threshold
+0.85, estimated_hours 3). Blueprint-grounded, reused by reference. Three
+misconceptions, none carrying an explicit birth-type column — independently
+classified: MC-1 REFERENCE-ANGLE-FORMULA-ASSUMED-UNIVERSAL (Type 1,
+overgeneralizing one memorized quadrant formula to every quadrant), MC-2
+TRIG-VALUE-COPIED-WITHOUT-SIGN-ADJUSTMENT (Type 5, instruction-induced — the
+sign-check step silently dropped once the magnitude lookup becomes habitual),
+MC-3 REFERENCE-ANGLE-ASSUMED-NON-ACUTE-FOR-LARGE-ANGLES (Type 2, perceptual
+intuition that a "large" original angle implies a correspondingly large
+reference angle). Zero KG/Blueprint metadata discrepancy.
+
+**`math.trig.trig-functions`** (requires `math.trig.unit-circle`, unlocks
+`math.trig.trig-identities`+`math.trig.inverse-trig`, cross_links
+`math.func.periodic-function`, proficient/understand, mastery_threshold 0.85,
+estimated_hours 10). Blueprint-grounded, reused by reference. Three
+misconceptions, none carrying an explicit birth-type column — independently
+classified: MC-1 PERIOD-IS-360-IN-RADIANS (Type 4, notation-induced — the
+overlearned degree period persisting once the input silently becomes radians),
+MC-2 TAN-PERIOD-IS-2PI (Type 1, overgeneralizing sin/cos's shared period onto
+tan without tracing the sign-cancellation mechanism), MC-3
+DOMAIN-RESTRICTED-TO-FIRST-QUADRANT (Type 5, instruction-induced — the
+right-triangle domain restriction persisting as the only internalized rule when
+the unit-circle extension to all reals isn't presented as explicitly overriding
+it). Genuinely incorporates the already-authored `math.func.periodic-function`
+(Batch 31) as a substantive Transfer Connection — that concept's abstract
+periodicity definition is directly instantiated here by sin/cos ($T=2\pi$) and
+tan ($T=\pi$) — even though the Blueprint sets P76 to independence mode
+regardless of the cross-link's Tier-1 status. Zero KG/Blueprint metadata
+discrepancy.
+
+**`math.seq.series`** (requires `math.seq.sequence`, unlocks
+`math.seq.arithmetic-series`+`math.seq.geometric-series`, cross_links none,
+proficient/understand, mastery_threshold 0.8, estimated_hours 5).
+Blueprint-grounded, reused by reference. Three misconceptions, none carrying an
+explicit birth-type column — independently classified: MC-1
+SERIES-IS-A-SEQUENCE (Type 1, overgeneralizing from the shared underlying terms
+to conflate the two distinct objects), MC-2 INFINITE-SUM-CANT-CONVERGE (Type 2,
+perceptual intuition that infinitely many additions must produce an infinite
+total), MC-3 CONVERGENT-TERMS-IMPLY-CONVERGENT-SERIES (Type 1, a logical-converse
+inversion of the nth-term test's true one-directional implication). **One
+genuine Blueprint/KG discrepancy found, resolved toward the KG (not fixed)**:
+the Blueprint's "Unlocked blueprints" section lists a third concept,
+`math.seq.partial-sums`, that the live KG's `unlocks` field does not include.
+
+**`math.seq.convergent`** (requires `math.seq.sequence`+`math.calc.limits`,
+unlocks `math.seq.series-convergence`+`math.real.convergence-sequences`,
+cross_links `math.calc.limits`+`math.real.convergence-sequences`,
+advanced/analyze, mastery_threshold 0.75, estimated_hours 8). Blueprint-grounded,
+reused by reference. Three misconceptions, none carrying an explicit birth-type
+column — independently classified: MC-1 CONVERGENCE-MEANS-EVENTUALLY-ZERO (Type
+1, overgeneralizing from the many textbook examples whose limit happens to be 0),
+MC-2 BOUNDED-IMPLIES-CONVERGENT (Type 1, a second instance this campaign of the
+identical "converse inversion" mechanism already documented for
+`math.seq.series`' own MC-3), MC-3 LIMIT-MEANS-EVENTUALLY-REACHES-L (Type 3,
+language contamination — "getting close to" casually collapsed into "arriving
+at"). **This entry resolves the Batch 53 forward note left by
+`math.calc.sequence-limits`**: that entry's own Curriculum Feedback recorded a
+Blueprint-staleness-adjacent P76_mode finding (the Blueprint's stated
+"cross-link probe" mode rested on a Blueprint-file-existence check rather than
+an EB-entry-existence check for this exact concept) and used independence mode
+instead, since `math.seq.convergent` had no EB entry yet. Now that it does, this
+entry's own P76 transfer probe genuinely implements cross-link-probe mode
+against the already-authored `math.calc.limits`, directly connecting the
+sequence-limit $\varepsilon$-$N$ framework to that concept's own continuous-limit
+framework. One minor field-overlap finding recorded (not a contradiction): the
+Blueprint's "Unlocked blueprints" section names only `math.seq.series-convergence`,
+while the live KG's `unlocks` field also includes `math.real.convergence-sequences`
+(which the Blueprint separately, correctly, lists as a NOT-Tier-1 cross-link).
+
+`math.trig` **4/25 → 6/25**. `math.seq` **1/21 → 3/21**. `math.calc` unchanged at
+**63/76** (not touched this batch). Mathematics **434/908 → 438/908**, 697
+remaining. Fresh frontier computed after this batch: `math.calc` still 0
+candidates ready (a fresh check should be run before the next math.calc batch,
+since `math.trig.trig-functions` is now authored); `math.trig` has 3 candidates
+ready (`basic-ratios`, `law-of-sines`, `law-of-cosines`, all unblocked by
+`right-triangle-trig`); `math.seq` has 3 candidates ready (`arithmetic-sequence`,
+`geometric-sequence`, `recursive-sequences`).
+
+Full per-concept detail above. All tracking files updated in the same commit:
+`ROADMAP.md` Section 1 totals, the `math.calc`/`math.trig`/`math.seq` domain
+rows; `COVERAGE.md`'s mathematics summary row and this Delivery history entry;
+`CLAUDE.md`'s campaign section. `EDUCATIONAL_BRAIN_INDEX.md` and `QUALITY.md`
+again deferred (same generated-artifact rationale as prior batches). Validated:
+`npx tsx scripts/validate-knowledge-graph.ts docs/mathematics/kg/graph.json`
+PASS, 908/908 reachable, 0 failures, 0 warnings (KG file untouched);
+`scripts/math/state.ts` confirms math.calc 63/76, math.trig 6/25, math.seq
+3/21, mathematics 438/908, 6 EB-certified domains (unchanged); `npx tsc
+--noEmit` clean; targeted tests `mathPackageCorpus.test.ts` +
+`mathematicsAssetContract.test.ts` 479/479 passed. All 4 new entries' heading
+structure diffed clean against `math.alg.like-terms.md` on the first pass (0
+diffs each). No Physics, Chemistry, English, Biology, Computer Science, KG,
+Blueprint, or runtime file was modified.

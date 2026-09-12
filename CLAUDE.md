@@ -4262,6 +4262,31 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   `unit-circle`); `math.seq` unchanged 5 candidates. This is a genuinely multi-session
   campaign; continuation should verify state via `scripts/math/state.ts` fresh each
   time rather than trusting any number recorded here.
+- **Batch 54 — math.trig: reference angles + trig functions; math.seq: series +
+  convergent sequences** (2026-09-12): re-computed the frontier fresh — `math.calc` 0
+  candidates (unchanged), `math.trig` 5, `math.seq` 5, matching Batch 53's predictions
+  exactly. Authored 4: `math.trig.reference-angles`/`math.trig.trig-functions` (highest-
+  leverage math.trig pair — `trig-functions` unlocks `trig-identities`/`inverse-trig`,
+  the eventual unblock for `math.calc.derivative-trig`; `trig-functions` genuinely
+  incorporates the already-authored `math.func.periodic-function` cross-link; zero
+  discrepancy on both), `math.seq.series`/`math.seq.convergent` (both children of the
+  already-authored `math.seq.sequence`; `series` carries one genuine `unlocks`-field
+  discrepancy, KG followed; `convergent` genuinely implements cross-link-probe mode
+  against the already-authored `math.calc.limits`, resolving the Batch 53 forward note
+  left by `math.calc.sequence-limits`). `math.trig` 4/25 → 6/25. `math.seq` 1/21 →
+  3/21. `math.calc` unchanged 63/76. Mathematics 434/908 → 438/908. Full per-concept
+  detail in `COVERAGE.md` Batch 54. Validated: KG validator PASS (908/908 reachable,
+  file untouched), `scripts/math/state.ts` confirms math.calc 63/76, math.trig 6/25,
+  math.seq 3/21, mathematics 438/908 (6 EB-certified domains unchanged), `tsc --noEmit`
+  clean, targeted tests 479/479 passed, all 4 heading structures diffed clean on the
+  first pass (0 diffs each). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/
+  runtime file touched. Fresh frontier: `math.calc` 0 candidates (fresh check needed
+  before next math.calc batch, since `trig-functions` is now authored); `math.trig` 3
+  candidates (`basic-ratios`, `law-of-sines`, `law-of-cosines`, all via
+  `right-triangle-trig`); `math.seq` 3 candidates (`arithmetic-sequence`,
+  `geometric-sequence`, `recursive-sequences`). This is a genuinely multi-session
+  campaign; continuation should verify state via `scripts/math/state.ts` fresh each
+  time rather than trusting any number recorded here.
 
 ## Physics Teacher Migration Architecture V2 — AUDITED, NOT ADOPTED (2026-09-12)
 
