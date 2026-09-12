@@ -3704,6 +3704,29 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. This is a genuinely
   multi-session campaign; continuation should verify state via `scripts/math/state.ts` fresh
   each time rather than trusting any number recorded here.
+- **Batch 36 — math.calc: one-sided limits, limit laws, limits at infinity, continuity**
+  (2026-09-13): re-computed the frontier fresh — the exact 7 candidates unblocked by Batch 35's
+  `limits` were confirmed still ready. Selected 4 most tightly coupled to `limits` itself
+  (`one-sided-limits`, `limit-laws`, `limits-at-infinity`, `continuity`), deferring
+  `derivative-intro`/`riemann-sums`/`parametric-curves` (each needing an additional
+  prerequisite). All 4 Blueprint-grounded, reused by reference. 3 of the 4 Blueprints
+  (`one-sided-limits`, `limit-laws`, `continuity`) lacked explicit birth-type columns —
+  the fourth/fifth/seventh such gaps this campaign — misconceptions independently classified
+  in each; `limits-at-infinity`'s Blueprint likewise lacked one (the sixth such gap), also
+  independently classified. `limits-at-infinity` substantively incorporates the already-authored
+  `math.func.horizontal-asymptote` (Batch 35) as a direct cross-link, closing that entry's own
+  orientation-level preview — the first genuine cross-domain forward-reference-closure in this
+  domain. `math.calc` **5/76** (1→5). Mathematics **371/908** (367→371), 764 remaining. No
+  genuine content-overlap found beyond a Blueprint/KG `unlocks` discrepancy for `continuity`
+  (recorded, not fixed, KG followed). Full per-concept detail in `COVERAGE.md` Batch 36.
+  Validated: KG validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts`
+  confirms math.calc 5/76 and mathematics 371/908 (6 EB-certified domains unchanged), `tsc
+  --noEmit` clean, targeted tests 479/479 passed, all 4 heading structures diffed clean on the
+  first pass (0 diffs each). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file
+  touched. Fresh math.calc frontier computed: 6 candidates ready (`continuity-types`, `ivt`,
+  `derivative-intro`, `parametric-curves`, `riemann-sums`, `squeeze-theorem`). This is a
+  genuinely multi-session campaign; continuation should verify state via
+  `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
 
 ## Run locally
 ```
