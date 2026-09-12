@@ -3524,6 +3524,26 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   `extremal-graph-theory`), all expert/research difficulty. This is a genuinely multi-session
   campaign; continuation should verify state via `scripts/math/state.ts` fresh each time rather
   than trusting any number recorded here.
+- **Batch 27 — closing math.graph's final ready frontier, domain now PARKED** (2026-09-12):
+  re-computed the frontier fresh — the exact 3 concepts deferred from Batch 26 were confirmed
+  still ready: `maximum-flow`, `ramsey-theory`, `extremal-graph-theory`, all authored, all
+  Blueprint-grounded. `math.graph` **10/16 → 13/16**. **Self-correction during validation**: draft
+  Version History text in all 3 entries initially (incorrectly) claimed this batch would reach
+  16/16 DOMAIN CERTIFIED; running `scripts/math/state.ts` fresh (per standing discipline) showed
+  `eb: 13`, not 16 — the domain's remaining 3 concepts (`shortest-path`, `algebraic-graph-theory`,
+  `random-graph`) each need a cross-domain prerequisite outside math.graph not yet authored
+  (`math.disc.asymptotic-notation`, `math.linalg.eigenvalues`, `math.prob.probability-axioms`
+  respectively). Corrected all 3 files' Version History sections to state 13/16 PARKED before
+  commit. math.graph joins math.disc and math.func as a parked domain. Mathematics
+  **335/908 → 338/908**, 797 remaining. Full per-concept detail in `COVERAGE.md` Batch 27.
+  Validated: KG validator PASS (908/908 reachable, file untouched), 0 orphan/duplicate EB files,
+  `tsc --noEmit` clean, targeted tests 479/479 passed, all 3 heading structures diffed clean on
+  the first pass (0 diffs each). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime
+  file touched. math.graph has 0 topologically-ready candidates remaining; the next step is
+  either a bounded cross-domain excursion to unblock one of the three parked domains, or
+  selecting a fresh unstarted domain. This is a genuinely multi-session campaign; continuation
+  should verify state via `scripts/math/state.ts` fresh each time rather than trusting any number
+  recorded here.
 
 ## Run locally
 ```

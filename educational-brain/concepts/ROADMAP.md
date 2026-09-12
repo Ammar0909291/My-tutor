@@ -13,9 +13,9 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **335** mathematics + 238 physics + 216 english + 186 chemistry + 0 biology + 0 computer_science = **975** |
-| Remaining | **800** |
-| Completion percentage | **54.93%** |
+| Concepts with an Educational Brain entry | **338** mathematics + 238 physics + 216 english + 186 chemistry + 0 biology + 0 computer_science = **978** |
+| Remaining | **797** |
+| Completion percentage | **55.10%** |
 
 *(Recomputed programmatically 2026-09-12 against the live KG files and the
 live `educational-brain/concepts/` tree, mid-way through a dedicated
@@ -52,7 +52,7 @@ concept id, across all six subjects.)*
 
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
-| mathematics | 908 | 335 | 36.89% | `math.found.mathematical-thinking` | **Yes** |
+| mathematics | 908 | 338 | 37.22% | `math.found.mathematical-thinking` | **Yes** |
 
 **Mathematics per-domain state (recomputed 2026-09-11, programmatic):**
 
@@ -79,12 +79,12 @@ concept id, across all six subjects.)*
 | `math.fnal` | 0/18 | not started |
 | `math.num` | 0/16 | not started |
 | `math.opt` | 0/16 | not started |
-| `math.graph` | 10/16 | **IN PROGRESS** (opened 2026-09-12) — Batch 24 (3, `graph`/`tree`/`minimum-spanning-tree`, 2026-09-12) + Batch 25 (4, `connectivity`/`eulerian-circuit`/`hamiltonian-cycle`/`graph-coloring`, 2026-09-12) + Batch 26 (3, `graph-invariants`/`graph-operations`/`matching`, 2026-09-12), a genuinely deeper-formalism domain paralleling several already-authored `math.disc` graph-theory entries (Menger's theorem, Prüfer sequences, Kruskal's/Prim's algorithms, Euler-Hamiltonian, graph coloring), each already cross-linked to as "Blueprint exists, no EB yet" from those entries — one such cross-link (`math.disc.graph-coloring` from `graph-coloring`'s own Blueprint) turned out to be stale, since the target was already authored; corrected in that entry's own Curriculum Feedback. 3 topologically-ready candidates remain (`maximum-flow`, `ramsey-theory`, `extremal-graph-theory`) — all expert/research difficulty, each requiring one further cross-domain or deeper-prerequisite step. |
+| `math.graph` | 13/16 | **PARKED** (opened 2026-09-12) — Batch 24 (3, `graph`/`tree`/`minimum-spanning-tree`, 2026-09-12) + Batch 25 (4, `connectivity`/`eulerian-circuit`/`hamiltonian-cycle`/`graph-coloring`, 2026-09-12) + Batch 26 (3, `graph-invariants`/`graph-operations`/`matching`, 2026-09-12) + Batch 27 (3, `maximum-flow`/`ramsey-theory`/`extremal-graph-theory`, 2026-09-12), a genuinely deeper-formalism domain paralleling several already-authored `math.disc` graph-theory entries. The domain's remaining 3 concepts (`shortest-path`, `algebraic-graph-theory`, `random-graph`) each need a cross-domain prerequisite outside math.graph that is not yet authored (`math.disc.asymptotic-notation`, `math.linalg.eigenvalues`, `math.prob.probability-axioms` respectively) — 0 topologically-ready candidates remain within math.graph itself. |
 | `math.cat` | 0/15 | not started |
 | `math.meas` | 0/13 | not started |
 
-**Five domains certified** (math.found, math.geom, math.alg, math.arith, math.nt), math.disc,
-math.func, and math.graph in progress, 335 of 908. The five certified domains are the graph's
+**Five domains certified** (math.found, math.geom, math.arith, math.nt, math.alg), math.disc and
+math.func parked, math.graph now also parked, 338 of 908. The five certified domains are the graph's
 foundation layer; every remaining domain draws on at least one of them, so the prerequisite debt
 for the remaining 580 concepts is now substantially lower than the raw count suggests. math.disc
 and math.func were originally opened as small, deliberately bounded cross-domain excursions out of
@@ -102,13 +102,15 @@ yet opened. Rather than open one of THOSE, Batch 24 opened `math.graph` instead 
 `math.disc`'s own graph-theory entries (`graph`, `graph-connectivity`, `graph-trees`,
 `euler-hamiltonian`, `graph-coloring`) had already named a `math.graph` sibling as a genuine
 Blueprint-exists-no-EB-yet cross-link, so `math.graph` was immediately ready with strong Blueprint
-grounding and zero new prerequisite debt. math.graph is now 10/16 (`graph`, `tree`,
+grounding and zero new prerequisite debt. math.graph is now 13/16 (`graph`, `tree`,
 `minimum-spanning-tree`, `connectivity`, `eulerian-circuit`, `hamiltonian-cycle`,
-`graph-coloring`, `graph-invariants`, `graph-operations`, `matching` — Batch 26 closed 3 of the
-6 concepts left ready after Batch 25), with 3 further concepts (`maximum-flow`, `ramsey-theory`,
-`extremal-graph-theory`) already topologically ready — all expert/research difficulty, the
-domain's deepest remaining content. math.func remains parked at 1/29, its own math.alg-serving
-purpose fully served.
+`graph-coloring`, `graph-invariants`, `graph-operations`, `matching`, `maximum-flow`,
+`ramsey-theory`, `extremal-graph-theory` — Batch 27 closed all 3 concepts left ready after
+Batch 26), now PARKED: its remaining 3 concepts (`shortest-path`, `algebraic-graph-theory`,
+`random-graph`) each require a cross-domain prerequisite outside math.graph that is not yet
+authored (`math.disc.asymptotic-notation`, `math.linalg.eigenvalues`,
+`math.prob.probability-axioms` respectively). math.func remains parked at 1/29, its own
+math.alg-serving purpose fully served.
 
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
 | english | 216 | 216 | **100.00% COMPLETE (2026-08-11)** | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) — every English KG concept now has a full Educational Brain entry |
