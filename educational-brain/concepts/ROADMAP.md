@@ -13,9 +13,9 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **361** mathematics + 238 physics + 216 english + 186 chemistry + 0 biology + 0 computer_science = **1,001** |
-| Remaining | **774** |
-| Completion percentage | **56.37%** |
+| Concepts with an Educational Brain entry | **367** mathematics + 238 physics + 216 english + 186 chemistry + 0 biology + 0 computer_science = **1,007** |
+| Remaining | **768** |
+| Completion percentage | **56.68%** |
 
 *(Recomputed programmatically 2026-09-13 against the live KG files and the
 live `educational-brain/concepts/` tree, mid-way through a dedicated
@@ -55,9 +55,13 @@ concepts — `function-operations`, `composition`, `monotonic-function`,
 `zero-of-function`, `even-odd-functions`, `transformations-functions`,
 `periodic-function`), and Batch 32 (4 more `math.func` concepts —
 `quadratic-function`, `exponential-function`, `logarithmic-function`,
-`piecewise-function`), and Batch 33 (3 more `math.func` concepts —
-`vertex-form`, `polynomial-function`, `step-function`) together brought
-mathematics from 257 to 361.
+`piecewise-function`), Batch 33 (3 more `math.func` concepts —
+`vertex-form`, `polynomial-function`, `step-function`), Batch 34
+(3 more `math.func` concepts — `end-behavior`, `rational-function`,
+`rational-root`), and Batch 35 (the final 2 `math.func` concepts —
+`horizontal-asymptote`, `vertical-asymptote`, **math.func DOMAIN
+CERTIFIED, the sixth** — plus 1 `math.calc` concept, `limits`, opening
+a new domain) together brought mathematics from 257 to 367.
 Cross-checked: 0 orphan EB files, 0 duplicate EB files, 0 EB filenames
 that do not resolve to a live KG concept id, across all six subjects.)*
 
@@ -67,7 +71,7 @@ that do not resolve to a live KG concept id, across all six subjects.)*
 
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
-| mathematics | 908 | 361 | 39.76% | `math.found.mathematical-thinking` | **Yes** |
+| mathematics | 908 | 367 | 40.42% | `math.found.mathematical-thinking` | **Yes** |
 
 **Mathematics per-domain state (recomputed 2026-09-13, programmatic):**
 
@@ -77,7 +81,7 @@ that do not resolve to a live KG concept id, across all six subjects.)*
 | `math.geom` | 69/69 | **CERTIFIED** — closed by commit `0d2c76dd`'s Wave 0 recovery |
 | `math.arith` | 58/58 | **CERTIFIED** (2026-07-26) |
 | `math.nt` | 36/36 | **CERTIFIED** (2026-08-12) — closed by this session's Phase 1 batch |
-| `math.calc` | 0/76 | not started |
+| `math.calc` | 1/76 | **STANDALONE CAMPAIGN, OPENED 2026-09-13** — Batch 35 (1, `limits`, 2026-09-13), the domain's entry node, selected as the highest-leverage next step after math.func's certification (verified programmatically: authoring `limits` alone unblocks 7 further `math.calc` concepts at once). Largest unstarted mathematics domain. |
 | `math.linalg` | 0/61 | not started |
 | `math.alg` | 59/59 | **CERTIFIED** (2026-09-11) — the fifth domain, closed this session. Wave 1 (11, levels 0–2, 2026-08-12) + Wave 2 (1, `like-terms`, 2026-08-12) + Wave 3 (3, `simplification`/`polynomial-operations`/`radicals`, 2026-09-11) + Wave 4 (5, `linear-equation-1var`/`polynomial-division`/`fractional-exponent`/`simplifying-radicals`/`radical-equations`, 2026-09-11) + Wave 5 (5, `inequality-1var`/`absolute-value-equations`/`linear-equation-2var`/`remainder-theorem`/`rationalizing-denominators`, 2026-09-11) + Wave 6 (3, `inequality-2var`/`system-linear-equations`/`factor-theorem`, 2026-09-11) + Wave 7 (4, `substitution-method`/`elimination-method`/`system-3var`/`factoring`, 2026-09-11) + Wave 8 (3, `factoring-gcf`/`factoring-special`/`rational-expressions`, 2026-09-11) + Wave 9 (4, `factoring-trinomials`/`rational-expressions-addition`/`rational-expressions-multiplication`/`rational-equations`, 2026-09-11) + Wave 10 (1, `quadratic-equation`, 2026-09-11) + Wave 11 (2, `completing-the-square`/`polynomial-roots`, 2026-09-11) + Wave 12 part 1 (1, `quadratic-formula`, 2026-09-11) + Wave 12 part 2 (2, `discriminant`/`rational-root-theorem`, 2026-09-11) + Wave 12 part 3 (3, `fundamental-theorem-algebra`/`polynomial-inequality`/`vietas-formulas`, 2026-09-11) + Wave 13 (2, `complex-polynomial-roots`/`rational-inequality`, 2026-09-11) + Batch 15 (1, `exponential-function`, 2026-09-11) + Batch 16 (2, `logarithm`/`exponential-equations`, 2026-09-11) + Batch 17 (3, `binomial-theorem`/`logarithm-properties`/`natural-logarithm`, 2026-09-11) + Batch 18 (3, `change-of-base`/`logarithmic-equations`/`pascals-triangle`, 2026-09-11) |
 | `math.de` | 0/56 | not started |
@@ -87,7 +91,7 @@ that do not resolve to a live KG concept id, across all six subjects.)*
 | `math.disc` | 20/32 | **IN PROGRESS (standalone campaign since math.alg CERTIFIED)** — Batch 14 (1, `counting-principles`, 2026-09-11) + Batch 15 (1, `permutations`, 2026-09-11) + Batch 16 (1, `combinations`, 2026-09-11) + Batch 19 (5, `combinatorics`/`pigeonhole`/`stars-bars`/`inclusion-exclusion`/`binomial-theorem`, 2026-09-11) + Batch 20 (3, `derangements`/`graph`/`propositional-logic`, 2026-09-11) + Batch 21 (5, `boolean-circuits`/`graph-coloring`/`graph-connectivity`/`graph-types`/`predicate-logic-disc`, 2026-09-11) + Batch 22 (3, `euler-hamiltonian`/`graph-trees`/`planar-graph`, 2026-09-11) + Batch 23 (1, `spanning-tree`, 2026-09-11, closing the `graph-trees → spanning-tree` chain). 0 topologically-ready candidates remain — the remaining 12 concepts (`algorithm-complexity`, `asymptotic-notation`, `catalan-numbers`, `complexity-classes`, `divide-conquer-recurrence`, `egf`, `generating-functions`, `graph-representation`, `linear-recurrence`, `ogf`, `recurrence-relation`, `stirling-numbers`) all require prerequisites outside math.disc (`math.calc.limits`, `math.seq.sequence`, `math.seq.series`, `math.linalg.matrix` — none yet authored); the next step is a cross-domain excursion decision, not a bounded step within math.disc. |
 | `math.cx` | 0/31 | not started |
 | `math.real` | 0/30 | not started |
-| `math.func` | 24/29 | **STANDALONE CAMPAIGN, IN PROGRESS (2026-09-13)** — Batch 14 (1, `function-concept`, 2026-09-11) + Batch 28 (4, `domain-range`/`function-notation`/`injectivity`/`surjectivity`, 2026-09-12) + Batch 29 (4, `function-operations`/`composition`/`monotonic-function`/`bijection`, 2026-09-12) + Batch 30 (4, `inverse-functions`/`graph-of-function`/`real-valued-function`/`linear-function`, 2026-09-12) + Batch 31 (4, `zero-of-function`/`even-odd-functions`/`transformations-functions`/`periodic-function`, 2026-09-12) + Batch 32 (4, `quadratic-function`/`exponential-function`/`logarithmic-function`/`piecewise-function`, 2026-09-12) + Batch 33 (3, `vertex-form`/`polynomial-function`/`step-function`, 2026-09-13). Only 5 concepts remain in the domain; 3 already topologically ready (`rational-root`, `end-behavior`, `rational-function`, all newly unblocked by `polynomial-function`), leaving only `horizontal-asymptote`/`vertical-asymptote` blocked (both solely on `rational-function`) — the sixth mathematics domain to reach CERTIFICATION is close. |
+| `math.func` | 29/29 | **CERTIFIED (2026-09-13)** — the sixth domain. Batch 14 (1, `function-concept`, 2026-09-11) + Batch 28 (4, `domain-range`/`function-notation`/`injectivity`/`surjectivity`, 2026-09-12) + Batch 29 (4, `function-operations`/`composition`/`monotonic-function`/`bijection`, 2026-09-12) + Batch 30 (4, `inverse-functions`/`graph-of-function`/`real-valued-function`/`linear-function`, 2026-09-12) + Batch 31 (4, `zero-of-function`/`even-odd-functions`/`transformations-functions`/`periodic-function`, 2026-09-12) + Batch 32 (4, `quadratic-function`/`exponential-function`/`logarithmic-function`/`piecewise-function`, 2026-09-12) + Batch 33 (3, `vertex-form`/`polynomial-function`/`step-function`, 2026-09-13) + Batch 34 (3, `end-behavior`/`rational-function`/`rational-root`, 2026-09-13) + Batch 35 (2, FINAL: `horizontal-asymptote`/`vertical-asymptote`, 2026-09-13). |
 | `math.trig` | 0/25 | not started |
 | `math.top` | 0/23 | not started |
 | `math.seq` | 0/21 | not started |
@@ -98,8 +102,9 @@ that do not resolve to a live KG concept id, across all six subjects.)*
 | `math.cat` | 0/15 | not started |
 | `math.meas` | 0/13 | not started |
 
-**Five domains certified** (math.found, math.geom, math.arith, math.nt, math.alg); math.disc and
-math.graph parked; math.func the active standalone campaign, 361 of 908. The five certified domains are the graph's
+**Six domains certified** (math.found, math.geom, math.arith, math.nt, math.alg, math.func);
+math.disc and math.graph parked; math.calc the active standalone campaign (opened 2026-09-13),
+367 of 908. The six certified domains are the graph's
 foundation layer; every remaining domain draws on at least one of them, so the prerequisite debt
 for the remaining 580 concepts is now substantially lower than the raw count suggests. math.disc
 and math.func were originally opened as small, deliberately bounded cross-domain excursions out of
@@ -137,12 +142,19 @@ already have 13 concepts topologically ready, all gated only on the already-auth
 `exponential-function`, `logarithmic-function`, `piecewise-function` — Batch 32 closed the
 entire 4-concept frontier available after Batch 31), then Batch 33 (3 more —
 `vertex-form`, `polynomial-function`, `step-function`, closing the entire 3-concept
-frontier available after Batch 32) brought math.func to 24/29 — only 5 concepts remain
-before the domain reaches DOMAIN CERTIFICATION, the sixth after math.found/math.geom/
-math.arith/math.nt/math.alg. A fresh frontier check after Batch 33 shows 3 of those 5
-already ready (`rational-root`, `end-behavior`, `rational-function`, all newly unblocked
-by `polynomial-function`), leaving only `horizontal-asymptote`/`vertical-asymptote`
-blocked on `rational-function`.
+frontier available after Batch 32) brought math.func to 24/29, then Batch 34 (3 more —
+`end-behavior`, `rational-function`, `rational-root`, closing the entire 3-concept
+frontier available after Batch 33) brought math.func to 27/29, then Batch 35 (the final 2 —
+`horizontal-asymptote`, `vertical-asymptote`) brought math.func to **29/29 — DOMAIN
+CERTIFIED**, the sixth after math.found/math.geom/math.arith/math.nt/math.alg. With
+math.func certified and math.disc/math.graph still parked, Batch 35 also computed the
+frontier fresh across ALL mathematics domains: 14 candidates spread across 11 different
+unstarted domains, none clustering. `math.calc` — the largest unstarted domain at 76
+concepts — was selected: its sole ready candidate, `math.calc.limits` (the domain's entry
+node), was verified to unblock 7 further `math.calc` concepts at once
+(`derivative-intro`, `limits-at-infinity`, `riemann-sums`, `one-sided-limits`,
+`parametric-curves`, `continuity`, `limit-laws`) — the single highest-leverage available
+move. `math.calc` opened at 1/76.
 
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
 | english | 216 | 216 | **100.00% COMPLETE (2026-08-11)** | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) — every English KG concept now has a full Educational Brain entry |
