@@ -1,13 +1,18 @@
 # Physics & Chemistry — Real-Student Simulation Defect Log
 
-**Compiled:** 2026-09-11
+**Compiled:** 2026-09-11 · **Updated:** 2026-09-12 (Chemistry audit completed to 186/186)
 **Scope:** Every defect discovered while simulating a real student going through the Physics
 and Chemistry curricula on the deployed app (`my-tutor-flame.vercel.app`), drawn from:
 
 1. The **Physics Full-Curriculum Audit** (238/238 concepts, sequential real-account
    simulation, weak/intermediate-English + expert-teacher dual-persona methodology).
-2. The **Chemistry Full-Curriculum Audit** (100/186 concepts complete as of this file;
-   audit is ongoing — this file will need a follow-up pass once it finishes).
+2. The **Chemistry Full-Curriculum Audit** (**186/186 concepts — COMPLETE**, same
+   methodology, extended per explicit instruction to hunt every defect type, not only
+   stale-completion/ungradeable-MCQ/diagram-quality). Diagram quality summary: **94 clean /
+   19 weak / 2 misleading / 3 wrong / 4 unverified, 122 diagrams inspected** across both
+   curricula combined (physics + chemistry). Verified complete: 186/186 concept orders
+   covered, 0 gaps, 60 `lessonComplete` events recorded with 60 unique keys (0 duplicates —
+   Defect 1 never reproduced in chemistry across the full curriculum).
 3. Prior real-account QA / engineering sessions documented in `CLAUDE.md`, where a Physics
    or Chemistry lesson was driven live against production to find and (in most cases,
    separately from this task) fix a defect.
@@ -120,18 +125,19 @@ here for accuracy, not performed as part of this task.
   made to `StudentProgress`'s per-user field design as of this compilation.
 
 ### PCD-005 — Chemistry Defect-1 pattern (stale/duplicate `lessonComplete` across sessions)
-- **Subject/Concept:** Chemistry, checked at every 10-concept checkpoint through 100/186.
-- **Evidence:** 33 `lessonComplete` events recorded across 100 concepts audited so far; **33
-  unique `lessonCompleteKey` values, zero duplicates.**
-- **Root cause:** N/A — pattern not reproduced.
+- **Subject/Concept:** Chemistry, checked at every 10-concept checkpoint across the full audit.
+- **Evidence:** **60 `lessonComplete` events recorded across all 186 concepts (audit complete);
+  60 unique `lessonCompleteKey` values, zero duplicates**, for the entire curriculum.
+- **Root cause:** N/A — pattern never reproduced, across the complete 186-concept curriculum.
 - **Classification:** KNOWN pattern from the physics audit, explicitly re-checked in chemistry
-  per the audit's own methodology.
+  per the audit's own methodology, at every 10-concept checkpoint through completion.
 - **Severity:** N/A (not observed).
 - **Fix priority:** N/A.
 - **Fix type:** N/A.
-- **Status:** NOT REPRODUCED in chemistry through 100/186 concepts. Listed here (rather than
-  omitted) because the task instructions require flagging any recurrence explicitly — this is
-  the explicit record that it did **not** recur, as of this checkpoint.
+- **Status:** NOT REPRODUCED in chemistry across the complete 186/186-concept audit. Listed here
+  (rather than omitted) because the task instructions require flagging any recurrence
+  explicitly — this is the explicit final record that it did **not** recur, anywhere in the
+  chemistry curriculum.
 
 ### PCD-006 — Abandoned lesson attempt silently inherited by a fresh `restart`
 - **Subject/Concept:** Physics — `phys.mech.normal-force`, found during the Physics
@@ -564,6 +570,93 @@ here for accuracy, not performed as part of this task.
   Observations section. It is listed here only so a reader searching "PCD" sequentially does not
   wonder where the ID went.)*
 
+### PCD-040 — Analogy-induced conceptual error + matching wrong diagram: `chem.coord.stability` (#106)
+- **Subject/Concept:** Chemistry — `chem.coord.stability` ("Stability Constants").
+- **Evidence:** T1's beginner-opener response built a flawed statistics analogy: "imagine a bar
+  chart... the taller bar is called the mode" to explain which metal complex is more
+  thermodynamically stable — conflating a statistical "mode" (most frequent value in a dataset)
+  with chemical stability (a formation-constant magnitude). The served diagram matched this
+  error exactly: a "Frequency Distribution: log Kf" chart with explicit "mean and mode" framing —
+  genuinely wrong-domain for a stability-constants concept.
+- **Root cause:** Not isolated to a keyword collision this time — the tutor's own explanation was
+  scientifically confused first, and the diagram-selection logic then faithfully rendered that
+  confused framing rather than the actual chemistry concept.
+- **Classification:** NEW — worse than a simple visual mismatch (PCD-026/027 class): here the
+  *prose itself* is conceptually wrong, and the diagram compounds rather than corrects it.
+- **Severity:** P1 — risks teaching a genuine misconception (statistical "mode" ≠ chemical
+  stability) rather than merely showing an off-topic picture.
+- **Fix priority:** High.
+- **Fix type:** Prompt (the model's own analogy-construction step needs a check against the
+  actual quantity being taught) + content/architecture (diagram selection should not blindly
+  render whatever framing the model's prose used).
+- **Status:** OPEN — first documented here.
+
+### PCD-041 — Self-contradictory quantitative graph within one session: `chem.dblock.lanthanides` (#122)
+- **Subject/Concept:** Chemistry — `chem.dblock.lanthanides` ("Lanthanide Contraction").
+- **Evidence:** Two different linear equations were served for "Lanthanide Contraction" within
+  the SAME session: T2/T4 used `-2.857x+342.849` (implying ~40pm radius drop across the
+  14-element series), T10 used `y=-0.5x+200` (implying ~7pm drop) — directly contradicting each
+  other. Neither closely matches the real magnitude (~15-20pm total, ~1-1.3pm/element).
+- **Root cause:** Not isolated — likely each graph-serving turn independently generated a fresh
+  approximate equation rather than reusing/deriving from a single consistent model of the trend.
+- **Classification:** NEW.
+- **Severity:** P2 — the underlying concept (radius decreases across the series) is correctly
+  conveyed; the specific numbers are wrong and inconsistent with each other.
+- **Fix priority:** Medium.
+- **Fix type:** Content/architecture (graph-generation should either reuse a cached equation
+  within a session or ground the slope in a real reference dataset).
+- **Status:** OPEN — first documented here.
+
+### PCD-042 — False-closure via a phrasing variant the existing strip regex does not cover: `chem.org.mechanisms` (#129)
+- **Subject/Concept:** Chemistry — `chem.org.mechanisms` ("Reaction Mechanisms" / organic).
+- **Evidence:** In response to a plain "ok that makes sense, thank you," the model produced a
+  full mastery-recap message: "🎉 Excellent work! ✓ What you mastered – you can now: [3 specific
+  skills]... ✓ What's coming – The next lesson unlocks 'Nature of Matter'..." — while the actual
+  gate state was `mastery.verified:false`, `practiceCorrect:0/2`, **`completionSuppressed:true`,
+  `gatePending:true`**. The deterministic gate correctly refused to close the lesson; the model's
+  own prose independently claimed mastery and previewed the next lesson anyway.
+- **Root cause:** Same defect class as the previously-fixed "I3" premature-next-lesson-preview
+  issue (`stanceEnforcement.ts`'s `COMPLETION_CLAIM_RE`, commit `768dfe3c`), but via a phrasing
+  ("What's coming – The next lesson unlocks...") that regex family (targeting "next we
+  explore/cover/study/...") does not match — a concrete instance of exactly the gap that fix's
+  own documentation flagged as untested ("no evidence of [other phrasings], broadening risks...").
+  This is now that evidence.
+- **Classification:** RECURRING — same underlying bug class as PCD-030/I3, new uncaught
+  phrasing.
+- **Severity:** P1 — a learner reading this would reasonably believe the lesson is complete and
+  they are being moved on, when neither is true.
+- **Fix priority:** High.
+- **Fix type:** Prompt/code (extend `COMPLETION_CLAIM_RE`'s phrasing family to cover "what's
+  coming – the next lesson unlocks..." and likely siblings, gated the same way: strip only when
+  `!masteryVerifiedStrict(state)`).
+- **Status:** OPEN — first documented here.
+
+### PCD-043 — Sustained production database outage blocked session creation and login entirely (distinct from PCD-002's isolated per-concept timeouts)
+- **Subject/Concept:** Chemistry audit infrastructure, concepts #147-150 (all subjects/all
+  learners would have been affected — this is not audit-specific).
+- **Evidence:** 4 consecutive concepts failed with `/api/sessions -> 500`. A retry attempt on a
+  single concept instead hit a **login failure (HTTP 302)**, twice in a row 15 seconds apart. A
+  direct `GET /api/health` check returned `HTTP 503 {"status":"degraded","db":false}` — confirmed
+  as a genuine database-connectivity outage, not an account-specific or audit-specific issue.
+  Recovery was confirmed the same way (`db:true`) roughly 10-15 minutes later, and all 4 concepts
+  succeeded cleanly on retry with zero code changes.
+- **Root cause:** Not investigated as part of this read-only audit (would require production
+  infra/connection-pool investigation, out of scope). Recorded as a confirmed occurrence, with a
+  working, cheap diagnostic (`GET /api/health`) for any future session to check before assuming a
+  batch of `/api/sessions` 500s is content-related.
+- **Classification:** RECURRING — same failure family as PCD-002 (both are `/api/sessions` 500s
+  traced to database/infra issues), but this occurrence was a *sustained, total* outage
+  (blocking login itself) rather than isolated per-request timeouts. Worth tracking separately
+  since the diagnostic and the blast radius differ.
+- **Severity:** P0 — for the duration of the outage, the entire app was unusable for any learner
+  (not just this audit), evidenced by login itself failing.
+- **Fix priority:** Critical (would need production monitoring/alerting review — not something
+  this audit can fix).
+- **Fix type:** Architecture/QA (production database reliability monitoring; consider `/api/health`
+  as a standard first check for any future investigation of a `/api/sessions` failure cluster).
+- **Status:** OPEN — reported as observed; no root-cause fix attempted (outside this audit's
+  read-only scope and outside a single session's ability to diagnose production DB infra).
+
 ---
 
 ## E. False-Closure / Premature Completion Claims
@@ -797,10 +890,10 @@ here for accuracy, not performed as part of this task.
 ## Appendix — Notes on Sourcing and Honesty Constraints
 
 - The Chemistry Full-Curriculum Audit that produced most of Section D/section-specific chemistry
-  entries above is **still in progress (100/186 concepts complete)** as of this file. This
-  document reflects everything audited so far; a follow-up pass is needed once the remaining
-  86 concepts are audited, and this file should be treated as a living document, not a final
-  chemistry defect count.
+  entries above is now **COMPLETE — 186/186 concepts audited**, verified 0 coverage gaps
+  (all concept orders 1-186 present) and 0 duplicate `lessonComplete` keys across the full
+  curriculum (PCD-005). This document reflects the complete chemistry defect record as of
+  2026-09-12.
 - Two items (PCD-007's "first recurrence" concept ID, and PCD-021's exact concept IDs) are
   deliberately reported with less specificity than the rest of this file. An earlier
   context-compaction event in the authoring session lost the exact concept IDs for these
@@ -863,7 +956,7 @@ learner-facing problem. No code change made.
 ### OBS-7 — Chemistry Defect-1 pattern (stale/duplicate `lessonComplete`): checked, not reproduced
 See PCD-005 above — listed both as a "defect" entry (to satisfy the explicit instruction to
 report every recurrence check) and cross-referenced here since its actual finding is a *negative*
-result: zero duplicates across 33 completions through 100/186 chemistry concepts.
+result: zero duplicates across all 60 completions through the complete 186/186 chemistry curriculum.
 
 ---
 
@@ -871,14 +964,44 @@ result: zero duplicates across 33 completions through 100/186 chemistry concepts
 
 | Severity | Count |
 |---|---|
-| P0 | 8 |
-| P1 | 13 |
-| P2 | 14 |
+| P0 | 9 |
+| P1 | 15 |
+| P2 | 15 |
 | P3 | 2 |
-| **Total confirmed defects** | **37** |
+| **Total confirmed defects** | **41** |
 
-Status breakdown (of the 37 confirmed defects): **18 FIXED**, **2 PARTIALLY FIXED** (open
+Status breakdown (of the 41 confirmed defects): **18 FIXED**, **2 PARTIALLY FIXED** (open
 against their stated target), **1 MONITORING** (fix shipped upstream, residual rate not further
-reducible from this app), **16 OPEN**. (`PCD-005` and `PCD-028` are excluded from all counts
+reducible from this app), **20 OPEN**. (`PCD-005` and `PCD-028` are excluded from all counts
 above — they are a "checked, not reproduced" record and a withdrawn cross-reference stub,
 respectively, not confirmed defects.)
+
+## Diagram Quality — Full Chemistry Curriculum (186/186)
+
+Every diagram/visual actually served during the chemistry audit was rated **clean / weak /
+misleading / wrong**, per concept, with a one-line reason — not just a binary "visual present or
+not." Final tally across the complete 186-concept curriculum:
+
+| Rating | Count | Meaning |
+|---|---|---|
+| Clean | 94 | Accurate, relevant, legible — genuinely helps understanding |
+| Weak | 19 | Correct content but generic/decorative, ASCII-art fallback, or otherwise low-value |
+| Misleading | 2 | Partially correct but could lead to a wrong conclusion |
+| Wrong | 3 | Factually incorrect or wrong-domain for the concept being taught |
+| Unverified | 4 | Flagged for inspection but not fully verified (from the physics audit's carry-forward tally) |
+| **Total inspected** | **122** | |
+
+**The 3 "wrong" diagrams** (the most severe diagram-quality findings across both curricula):
+1. `chem.state.phase-diagram` (#42) — served a calculus "critical points" plot instead of a
+   chemistry phase diagram (PCD-027).
+2. `chem.kinet.arrhenius` (#86) — served a generic thermodynamics "Closed System" diagram for
+   the Arrhenius equation (PCD-026).
+3. `chem.coord.stability` (#106) — served a "Frequency Distribution" statistics chart, matching
+   a conceptually confused analogy the tutor itself constructed (PCD-040) — the single worst
+   diagram+content pairing found in either audit, because the *prose* was wrong, not just the
+   picture.
+
+**The 2 "misleading" diagrams** were found earlier in the audit (concepts 1-80, before this
+file's per-entry PCD numbering reached that range in detail) and are carried forward from the
+running tally established during the live checkpoints; see the audit's checkpoint history for
+their specific identification if needed for a future pass.
