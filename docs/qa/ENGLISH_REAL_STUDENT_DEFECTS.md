@@ -95,10 +95,18 @@ authoritative record for that range.
   instances (a learner cannot select the "right" option because all four read
   identically), and breaks the core deliverable of a phonics lesson (the sounds
   themselves).
-- **Fix priority:** High.
-- **Fix category:** code (render/sanitization pipeline) or prompt (if the model
-  itself is failing to reproduce the symbols) — root cause needs a dedicated trace
-  before either can be ruled in/out.
+- **2026-09-12 (second pass) — NO NEW EVIDENCE; deliberately not re-opened.** The
+  first pass had already ruled out the render/strip pipeline by inspection, which
+  leaves generation — and a generation defect cannot be closed by a stripper, a
+  detector, or a regex. Proving it needs the raw stored assistant message for one of
+  the 30+ instances, checked for whether the IPA codepoints were ever present. That
+  is the same technique that settled ENG-D04's residual this session and it would
+  work here; it was not run, because the tag residual was a yes/no question about one
+  string and this is a survey across 30+ turns in 14 concepts, which is its own task.
+  Recorded as the concrete next step rather than left as "needs a trace".
+- **Fix priority:** High — OPEN.
+- **Fix category:** prompt (generation) — the render/sanitisation half is ruled out,
+  not merely unprioritised.
 
 ---
 
@@ -278,14 +286,29 @@ authoritative record for that range.
   fixed because a related defect was.
   **The "argued discovery step" half is NOT fixed** — that is model output echoing
   authoring-style prose, not a tag, and no stripper can tell it from teaching text.
-- **Status:** PARTIALLY FIXED, with one residual — the `<--ATTEMPT ...-->`
-  (angle-bracket) control-tag half is FIXED and reproduced on the order-60 instance.
-  TWO halves remain OPEN: (1) the "argued discovery step" prose-echo (3 instances,
-  orders 20/21/27) — model output, not a tag, and no stripper can tell it from
-  teaching text; (2) the order-113 `[!--ATTEMPT` opener, measured NOT covered by the
-  fix, with capture-artifact vs. third-variant unresolved (see the 2026-09-12 second-
-  pass correction above). Counted as OPEN in the summary on the strength of (1),
-  which is unambiguous.
+- **2026-09-12 (third pass) — THE ORDER-113 RESIDUAL IS CLOSED, from the RAW
+  STORED MESSAGE (commit `1926839`).** The second pass left two readings open and
+  said resolving them needed the stored assistant message rather than the audit log.
+  That message was read out of production. It ends, verbatim:
+  `🎉 \n[!--ATTEMPT channel="verbal" representation="concrete-object" … -->]`.
+  **The square bracket is real and persisted — reading (a) is confirmed and reading
+  (b), a lossy-capture artifact, is eliminated.** The model wrapped a comment in
+  square brackets rather than mistyping one delimiter; the terminator carries a
+  trailing `]` too. Three opener variants are now measured from production: `<!--`
+  (well-formed), `<--` (dropped `!`), `[!--` (bracket-wrapped). The sweep's opener
+  admits `[` alongside `<` and its terminator an optional `]`, so the wrapper leaves
+  no stray bracket behind. Blast radius unchanged: at least one dash after the opener
+  is still mandatory, so a Markdown link (`[Chapter 2](…)`) and a citation (`[A]`)
+  cannot match, and the SHOUTED-name and mandatory-terminator rules are untouched.
+  Pinned against the verbatim stored string plus six negative controls in
+  `src/tests/englishOpenDefects.test.ts`.
+- **Status:** PARTIALLY FIXED. **The ENTIRE control-tag half is now FIXED** — all
+  three production opener variants (`<!--`, `<--`, `[!--`) are stripped and pinned,
+  the order-60 and order-113 instances both reproduced fixed. **ONE half remains
+  OPEN:** the "argued discovery step" prose-echo (3 instances, orders 20/21/27) —
+  model output, not a tag, and no stripper can tell it from teaching text; that is a
+  prompt-level item. Counted as OPEN in the summary on the strength of that half
+  alone, which is unambiguous.
 - **Severity:** P1 — this is a genuine breach of the prompt/learner-output boundary:
   real students saw raw internal authoring/control text. Does not fabricate mastery
   evidence, so not P0 under this file's convention, but it is a serious trust and
@@ -322,7 +345,18 @@ authoritative record for that range.
   persisted session state (a prior attempt's ladder/budget) that cannot be reconstructed
   offline from the log. Phase 7L already fixed the ladder-carryover class. Left open rather
   than patched on a guess.
-- **Status:** NEW.
+- **2026-09-12 (second pass) — NOT RE-OPENED; one cross-reference added.** The first
+  pass measured the trigger message through every relevant detector and ruled out the
+  stop/autonomy misread, leaving persisted session state as the remaining
+  explanation — which cannot be reconstructed offline from a log and needs either the
+  stored `contextSnapshot` for that session or a live reproduction. Neither was
+  available this pass and no speculative patch was made.
+  **Cross-reference, noted not claimed:** the concept here,
+  `eng.phonics.print-concepts`, is also the sole subject of ENG-D15 — the one
+  pre-reading node carrying closed-choice probes while its two siblings correctly
+  carry none. Whether that mismatch reaches this behaviour is untested; they are
+  recorded as co-located, not as one defect.
+- **Status:** NEW — OPEN, cause UNCONFIRMED.
 - **Severity:** P1 — a real learner's very first contact with this lesson is a
   "come back later" message with nothing taught.
 - **Fix priority:** High.
@@ -477,9 +511,34 @@ authoritative record for that range.
   entry this one names as a possible contributing cause, was separately measured to
   have NO runtime mechanism at all, so it cannot supply one here either. Root cause
   remains UNCONFIRMED and this remains the most severe open drift instance.
-- **Fix priority:** Critical — STILL OPEN.
-- **Fix category:** code (topic/excursion-request detector) and prompt (grounding
-  "give me an example" requests to the concept actually being taught).
+- **2026-09-12 (second pass) — PROMPT FIX SHIPPED (commit `1926839`); the code half
+  is REJECTED on this evidence, not deferred.** This entry's own fix category named
+  both halves; only one of them is real.
+  **Code half — rejected, with the argument in-repo.** Every real detector was
+  re-measured against this episode's trigger and all return null: the learner named
+  no topic, so there is no runtime signal to narrow. The remaining shape of a code
+  fix would be a general "does this content relate to the lesson" check, and
+  `topicDrift.ts`'s own header already argues why that is actively harmful here — it
+  would strip exactly the zero-vocabulary-overlap everyday analogies this tutor is
+  measured to be GOOD at. Adding a regex for the trigger phrase is the move that
+  produced the ENG-D02 exclusion-list trap.
+  **Prompt half — shipped, at the layer that owns it.** `buildConceptAnchorBlock`
+  now states that an example, analogy or practice item must be an example OF the
+  anchored concept, that a bare "give me an example" names no new topic, and that it
+  is never a cue to switch subject or to a different sense of a word appearing in the
+  model's own explanation — which is this episode exactly (the ordinary English word
+  *find*, reread as the programming one). It cannot reintroduce the steer-back
+  regression this block's history records: it constrains what an example is OF and
+  says nothing about refusing or shortening a question, and the detour rule above it
+  still runs first for a request that DOES name a topic. Pinned by 5 cases in
+  `src/tests/conceptAnchor.test.ts`, one of which asserts the removed steer-back has
+  not returned.
+  **Still OPEN** — a prompt rule is a lever, not an invariant, and this repo has a
+  long measured record of advisory rules being ignored. Closing it needs production
+  evidence that the drift rate fell, which single-caller traffic cannot supply.
+- **Fix priority:** Critical — STILL OPEN (prompt mitigation shipped, unverified).
+- **Fix category:** prompt (SHIPPED 2026-09-12). The code half is **rejected** on
+  measured evidence — see the second-pass note above — not merely unimplemented.
 
 ---
 
@@ -560,7 +619,16 @@ authoritative record for that range.
 - **Status:** NEW.
 - **Severity:** P2 — the learner isn't misled about correctness, but the lesson
   stalls with an unfulfilled promise, and this recurs across 6 different concepts.
-- **Fix priority:** Medium.
+- **2026-09-12 — NOT INVESTIGATED THIS PASS; one inherited assumption withdrawn.**
+  This entry's shape (the model announces a question and the response ends before it
+  arrives) was not traced — no code fix was attempted and none is claimed. The one
+  change is negative: ENG-D14's own note asserted that the runtime's honest
+  ungradeable-question backstop "is exactly what produces ENG-D10's content-free
+  hold". ENG-D14 is now resolved (0 of 333 English concept/band pairs are below
+  contract), so that explanation no longer supports this entry, and it should not be
+  carried forward as though it did. Cause remains UNCONFIRMED, and the generation-
+  cutoff reading recorded above is untouched and still the leading one.
+- **Fix priority:** Medium — OPEN, UNCONFIRMED.
 - **Fix category:** code (generation/response-completion handling).
 
 ---
@@ -589,15 +657,38 @@ authoritative record for that range.
   with `[degraded]` AI-provider responses (a known, extensively-documented
   infrastructure/capacity issue in this project's history); the other 3 occur under
   a normal (non-degraded) provider and are UNCONFIRMED as to mechanism.
-- **Status:** RECURRING — the degraded-provider sub-case is a new manifestation of
-  a documented infra issue; the normal-provider sub-case is NEW.
-  correctness-confirmation-under-99% rate).
+- **2026-09-12 — FIXED, root cause located by inspection, deployed (commit
+  `6c3be2b`, `dpl_BpCHMdRVT9m2tx13t5YU9vZmdRt1` READY).** The owner is
+  `answerConfirmation.ts`, and the defect is an ASYMMETRY rather than a detector gap:
+  `confirmCorrectAnswer` guarantees an acknowledgement on a server-graded CORRECT
+  answer and returns the reply UNTOUCHED for `correct !== true`. Nothing anywhere
+  guaranteed anything on a graded-WRONG one. New sibling
+  `stateCorrectionForWrongAnswer` (`src/lib/teaching/wrongAnswerCorrection.ts`)
+  prepends "Not quite — the answer is: X" under exactly the same authority and no
+  more: it fires only on `mcqGradeHoisted.correct === false` — `gradeMcqAnswer`'s
+  verdict against an authored, human-reviewed key, never a model self-report — and X
+  is `options[correctIndex]` read off that same probe. Both halves are facts the
+  server already holds; with no key it returns the text untouched rather than
+  guessing. It skips a turn the model already handled, and skipping requires BOTH
+  halves: the reply must state the answer was incorrect AND name the correct option
+  (containment, else two DISCRIMINATING option words, so vocabulary shared between
+  options cannot satisfy it). Half a correction is not a correction. One deliberate
+  asymmetry with its sibling, recorded in the module: that one declines to stand
+  alone on an empty reply because inventing praise fabricates a turn; this one may,
+  because the verdict and the key are server-held fact and a blank screen after a
+  wrong answer is the worse failure. Wired after the confirmation enforcer so it
+  decorates the text that ships — **including the degraded-provider template (set far
+  earlier in the route), which is where 2 of the 5 recorded instances were
+  observed**, so the infra-correlated sub-case is covered by the same change. 25
+  targeted tests in `src/tests/wrongAnswerCorrection.test.ts`.
+- **Status:** FIXED (2026-09-12) — deployed READY, but NOT yet observed in a live
+  wrong-answer transcript, so it is reported as fixed-not-production-verified.
 - **Severity:** P1 — a weak learner who answers wrong and gets no correction has no
   path to actually learn the correct answer; this directly undermines the
   platform's teaching function.
-- **Fix priority:** High.
-- **Fix category:** code (ensure a graded-wrong answer always carries an explicit
-  correction, including on the degraded-provider fallback path).
+- **Fix priority:** High — DONE.
+- **Fix category:** code (a graded-wrong answer now always carries an explicit
+  correction, the degraded-provider fallback path included).
 
 ---
 
@@ -621,10 +712,29 @@ authoritative record for that range.
   all).
 - **Severity:** P2 — does not fabricate a false grade (nothing was graded at all),
   but wastes a turn on an unanswerable, un-tracked question for a struggling learner.
-- **Fix priority:** Medium (the durable fix is closing the probe-pool shortfall —
-  see ENG-D14 — not patching this fallback path itself).
-- **Fix category:** content (root fix); code (if the plain-prose-no-tag variant is
-  itself an additional gap beyond the already-known `<!--MCQ-->` fallback).
+- **2026-09-12 — ROOT-CAUSE ATTRIBUTION WITHDRAWN, and no code fix made.** The
+  mechanism above is stated as "when the authored probe pool is exhausted", and that
+  is not what happened. `eng.vocab.synonyms-antonyms` — the concept this entry cites
+  — holds several ACTIVE closed-choice probes at BOTH served bands in production
+  (verified by direct query, see ENG-D14's resolution). The pool was not dry, so the
+  shortfall cannot be the trigger and "the durable fix is closing the probe-pool
+  shortfall" no longer follows.
+  What remains true is that the model asked an untagged prose MCQ on a turn where
+  the gate was not eligible. The EVIDENCE half of that is already closed
+  deterministically and was re-verified, not assumed: `shouldSuppressSignalCorrectness`
+  (via `hasProseMultipleChoice`) strips the model's self-reported correctness for
+  exactly this shape, so nothing false is banked; and `buildProseMcqReplyDirective`
+  already fires on the following turn telling the model to re-issue the question with
+  the tag. The LEARNER-FACING half cannot be repaired by text surgery: this
+  instance's reply IS a complete, well-formed question, and `proseMcqGuard.ts`'s
+  documented policy — leave an imperfect question visible, because an imperfect
+  question beats silence — is correct for it. Making the gate attach the authored
+  probe instead is arbitration work, and the task's own high-risk list names
+  arbitration; it is not justified by one instance with a now-disproven cause.
+  **No speculative patch was applied.**
+- **Fix priority:** Medium — mechanism re-opened, cause UNCONFIRMED again.
+- **Fix category:** code (turn eligibility / gate attachment), NOT content — the
+  content premise was measured and disproven.
 
 ---
 
@@ -642,11 +752,20 @@ authoritative record for that range.
     placed at the arrow's terminus rather than as an axis label) — confusing rather
     than clarifying for a vowel trapezoid.
 - **Root cause:** UNCONFIRMED.
-- **Status:** NEW.
+- **2026-09-12 — NOT ACTIONABLE BY A RUNTIME FIX; visual-authoring owner.** Both
+  instances are figures that are structurally valid and semantically poor: a linear
+  `graph` standing in for pitch contour, and an ASCII vowel chart with an incoherent
+  layout. Nothing in the visual pipeline can distinguish those from a good figure —
+  the critic judges relevance and correctness, and a straight line genuinely is a
+  relevant, technically correct depiction of "rising". Fixing it means authoring or
+  binding better figures for these concepts, which is the visual-authoring track, and
+  CLAUDE.md records that the VISUAL asset writer is itself an open gap. Left with the
+  owner rather than patched.
+- **Status:** NEW — OPEN.
 - **Severity:** P2 — actively confusing rather than merely absent (worse than an
   honest "no visual available," better than a completely wrong figure).
 - **Fix priority:** Medium.
-- **Fix category:** visual.
+- **Fix category:** visual authoring — **owner work**, no runtime defect identified.
 
 ---
 
@@ -671,12 +790,37 @@ authoritative record for that range.
   "content-free hold" and ENG-D12's ungraded-prose-MCQ symptoms elsewhere in this
   file. This is very likely the underlying cause of most "concept never reached
   mastery" observations throughout the rest of this audit.
-- **Status:** KNOWN — `docs/architecture/PHASE6_P1_ENGLISH_ASSET_CONTRACT.md`,
-  "CONFIRMED CONTENT/ASSET DEFECT — OWNER REQUIRED."
-- **Severity:** P1.
-- **Fix priority:** Critical (root cause of multiple other entries in this file).
-- **Fix category:** content (author one additional closed-choice probe per
-  concept, matching the existing modality).
+- **2026-09-12 — RESOLVED. The quoted premise is STALE, and this was measured
+  twice, independently, before saying so.** The `{"0": 2, "2": 214}` figure and the
+  "216 / 216 below contract" line above are a snapshot from
+  `PHASE6_P1_ENGLISH_ASSET_CONTRACT.md`; the corpus and the database have both moved
+  since.
+  - **Corpus** (`englishSeedAssets.ts` and siblings, counted from source): 333
+    (concept, band) pairs, distribution `{"0": 2, "4": 95, "7": 119}` — 0 below
+    contract.
+  - **Production**, queried directly, counting exactly what the contract counts
+    (ACTIVE `asset_identity` joined to `probe_assets` with >= 2 choices, i.e. genuine
+    closed-choice items): **333 (concept, band) pairs, every one at 3 or 4 probes.
+    Zero pairs below the contract of 3.**
+  - The only two concepts with no closed-choice probes at all are
+    `eng.phonics.letter-sound-correspondence` and `eng.phonics.phonemic-awareness` at
+    the EARLY band — **both documented pre-reading ORAL entry nodes, which correctly
+    have none.** That is the intended state, not a shortfall.
+  So mastery is NOT structurally unreachable in English, and has not been for some
+  time. The remedial content this entry asked for exists and is ACTIVE.
+  **Consequence for other entries, stated because it invalidates a shared
+  attribution:** ENG-D12 and ENG-D23 both name "the authored probe pool is
+  exhausted" as their mechanism, and ENG-D10 leans on the same reasoning. That
+  attribution is now disproven — spot-checked on the two concepts those entries
+  actually cite, `eng.vocab.synonyms-antonyms` and
+  `eng.reading.main-idea-and-details`, each of which holds several ACTIVE
+  closed-choice probes at both served bands. Each of those entries needs tracing
+  independently; see their own notes.
+- **Status:** RESOLVED (2026-09-12) — closed on production measurement, not on a
+  fix by this campaign. The source doc's snapshot is superseded.
+- **Severity:** P1 (historical).
+- **Fix priority:** — (done).
+- **Fix category:** content — no longer outstanding.
 
 ---
 
@@ -690,10 +834,36 @@ authoritative record for that range.
   (`letter-sound-correspondence`) correctly has no closed-choice probes at all.
 - **Root cause:** CONFIRMED — a corpus/design disagreement, reported directly in the
   source doc.
-- **Status:** KNOWN — same source doc as ENG-D14.
+- **2026-09-12 — RE-CONFIRMED AGAINST PRODUCTION, AND THE GAP HAS WIDENED, NOT
+  CLOSED.** ENG-D14's snapshot turned out stale, so this entry's shared premise was
+  re-measured rather than inherited. It holds, and the current numbers are worse than
+  the ones quoted above:
+  - `eng.phonics.print-concepts`, EARLY band: **4 ACTIVE closed-choice probes**
+    (`checkpoint`, `mcq`, `misconception_probe`, `true_false` — every one with 2
+    choices), plus 3 more at ADULT. The signature is no longer "mcq x1 +
+    misconception_probe x1"; the corpus growth that resolved ENG-D14 added closed-
+    choice items to this pre-reading node too.
+  - `eng.phonics.letter-sound-correspondence`, EARLY: **1 ACTIVE `short_answer`, 0
+    choices.**
+  - `eng.phonics.phonemic-awareness`, EARLY: **1 ACTIVE `short_answer`, 0 choices.**
+  So of the three pre-reading nodes, two are correctly oral-only and `print-concepts`
+  is the sole outlier — which strengthens the original reading (a corpus/design
+  disagreement) rather than weakening it.
+  **Deliberately NOT changed by this campaign, and the reason is not caution for its
+  own sake.** Deleting `print-concepts`'s closed-choice probes would take it to 0 and
+  put it in exactly the state ENG-D14 describes as "mastery structurally
+  unreachable"; the two oral siblings avoid that only because the gate is not
+  expected to close on them. Which way this concept should go is a curriculum design
+  decision with mastery consequences attached, and it belongs to the content owner.
+  **Possibly related, noted not claimed:** ENG-D05 — the only turn-1 self-closing
+  lesson in this register — is this same concept. Whether the oral/closed-choice
+  mismatch reaches that behaviour is untested.
+- **Status:** KNOWN, RE-CONFIRMED 2026-09-12 with worse numbers — OPEN, owner
+  decision.
 - **Severity:** P2.
 - **Fix priority:** Medium.
-- **Fix category:** content.
+- **Fix category:** content — **owner decision required**, not safely actionable by
+  a runtime campaign (see above).
 
 ---
 
@@ -767,7 +937,16 @@ authoritative record for that range.
 - **Status:** RECURRING — 2 confirmed instances now (upgraded from NEW/1-instance).
 - **Severity:** P1 — completely ends a lesson mid-progress with an unrecoverable raw
   error, worse than the graceful `[degraded]` fallback path used elsewhere.
-- **Fix priority:** High.
+- **2026-09-12 — CONFIRMED INFRASTRUCTURE, NOT A CODE DEFECT; no change made.** Both
+  instances are a platform-level `FUNCTION_INVOCATION_TIMEOUT` — the request never
+  returns, so no application code runs to degrade gracefully, and the existing
+  `[degraded]` fallback (which DOES fire for provider failures, as ENG-D11's own
+  evidence shows) is unreachable by construction once the invocation itself is
+  killed. Raising the function timeout or lowering the in-request budget are both
+  deployment-configuration decisions, and this environment cannot set Vercel
+  configuration (a limitation already recorded in CLAUDE.md for the visual
+  generation env vars). Owner work.
+- **Fix priority:** High — OPEN, infrastructure owner.
 - **Fix category:** architecture (timeout/latency budget) — no code defect
   identified; this is an infra-capacity symptom.
 
@@ -811,10 +990,36 @@ authoritative record for that range.
   refined to "mostly, not exclusively" DB-correlated.
 - **Severity:** P1 — during these windows, no learner can log in, create a session,
   or continue a lesson at all.
-- **Fix priority:** High.
-- **Fix category:** architecture (database connection handling/capacity) — the
-  uncorrelated 6th instance may need separate investigation once the DB-outage
-  cause (if any) is fixed, to see if a residual failure rate remains.
+- **2026-09-12 — THE INSTRUMENT IS BUILT; THE 6TH INSTANCE STILL CANNOT BE NAMED
+  FROM EXISTING EVIDENCE (commit `1926839`).** The task asked for the uncorrelated
+  instance to be investigated separately and for 500s not to be classified as DB
+  failures without evidence. Reading the route showed WHY neither was possible:
+  `/api/sessions` POST collapses every non-Zod failure into one opaque
+  `"Internal server error"` with the raw error as the only record, so the response
+  carries no discriminator and a `/api/health` poll after the fact is a second
+  measurement of a different moment. The audit's "mostly, not exclusively, DB" was
+  the honest limit of what could be known, and it still is for the six events already
+  recorded — **they are historical and cannot be re-classified retroactively.**
+  What changed is that the next one will name itself. `withRetry`'s own
+  connection-error predicate (the codes P1001/P1002/P1008/P1017/P2024 and its message
+  fragments) is lifted out UNCHANGED as `isDbConnectionError` and shared, so there is
+  one definition rather than a second drifting copy; the catch now separates
+  `db_unavailable` / `db_timeout` / `unknown`, writes a structured log line, and
+  returns `kind` additively on the response so an audit driver can record it without
+  polling. A slow database and an unreachable one were previously indistinguishable
+  and are now different findings. Coarse on purpose — no message, no stack, no query.
+  Retry behaviour is byte-for-byte unchanged; this is observability, not a fix for
+  whatever the 6th instance was. 9 tests in
+  `src/tests/sessionCreateFailureClassification.test.ts`, including negative controls
+  for the failure class the 6th instance belongs to (a 500 while the database is
+  demonstrably healthy).
+- **Status:** RECURRING — 6 confirmed instances, 5 DB-correlated, 1 unexplained and
+  now un-explainable from the existing record. OPEN.
+- **Fix priority:** High — the capacity half is unchanged; the classification half
+  is DONE.
+- **Fix category:** architecture (database connection handling/capacity), plus the
+  observability prerequisite shipped 2026-09-12 that makes the residual failure rate
+  measurable at all.
 
 ---
 
@@ -839,7 +1044,17 @@ authoritative record for that range.
   - A new drug-study scenario is introduced in teaching prose, then an unrelated
     prior MCQ is re-served verbatim, leaving the new scenario dangling/unused.
 - **Root cause:** UNCONFIRMED.
-- **Status:** NEW.
+- **2026-09-12 — ONE SUB-ITEM RELATED TO THE PROSE-OPTION FAMILY, none fixed.** The
+  stray `"D) It becomes a sound"` fragment is the same class as ENG-D23 and
+  `stripDanglingLeadingOption`'s truncation debris — a lettered option with no
+  question attached — but it is neither shape those guards cover: it starts at "D",
+  not "A", and it sits BEFORE a real `MCQ_STEM` rather than trailing the reply.
+  Widening either guard to reach it would mean dropping the start-at-A anchor, which
+  is the constraint keeping them off citations and enumerations, for a P3 with one
+  instance. Not done. The other four items are model-output quality (truncated
+  sentences, a stem that states its own answer, a dangling unused scenario) with no
+  deterministic signature to key on.
+- **Status:** NEW — OPEN.
 - **Severity:** P3 — content-quality rough edges; none block grading or mislead on
   correctness.
 - **Fix priority:** Low.
@@ -892,8 +1107,26 @@ authoritative record for that range.
 - **Status:** NEW.
 - **Severity:** P2 — a continuity/trust break, not a correctness break (both
   variants are individually accurate).
-- **Fix priority:** Medium.
-- **Fix category:** code (visual-session identity/hold logic).
+- **2026-09-12 — NARROWED BY PRODUCTION MEASUREMENT, NOT FIXED.** Two candidate
+  explanations were checked directly against production and one is eliminated:
+  - **Duplicate stored content — RULED OUT.** Neither concept has ANY ACTIVE
+    `asset_identity` VISUAL row (`eng.listening.active-listening` has a single
+    AI_AUTHORED **DRAFT** `concept_figure`; `editing-for-style` has none), so nothing
+    was being picked from two approved figures.
+  - **Duplicate cache rows — RULED OUT.** `visualization_cache` holds exactly ONE
+    `scene:v1:fig:<conceptId>` row per concept (plus its one
+    `scene:v1:verdict:` row). The cache key is per-concept and deterministic, so the
+    cache cannot itself hold both variants at once.
+  Therefore both variants were GENERATED, and only one survived in the cache — which
+  moves the suspect from stored content to the generate/serve/cache-write path (a
+  regeneration whose figure was served before or instead of the cached one). That is
+  a real narrowing and it is as far as the evidence goes: the A,B,B,A,A toggle needs
+  live traffic to reproduce, this environment has essentially none, and visual
+  routing is one of the areas where a change on an unreproduced hypothesis is
+  explicitly the wrong move. **No code change made.**
+- **Fix priority:** Medium — STILL OPEN, cause narrowed but UNCONFIRMED.
+- **Fix category:** code (visual-session identity/hold logic — specifically the
+  generation/cache-write path, not asset selection).
 
 ---
 
@@ -930,9 +1163,25 @@ authoritative record for that range.
   for this learner. Root cause remains UNCONFIRMED. This is the family's only
   adjacent-sub-domain episode and is the strongest remaining evidence that a drift
   channel exists which none of the three 2026-09-12 fixes touches.
-- **Fix priority:** High — STILL OPEN.
-- **Fix category:** code (topic/excursion-request detector — same family as
-  ENG-D07/D08/D09).
+- **2026-09-12 (second pass) — SAME TRIGGER AS ENG-D08, SAME PROMPT FIX APPLIED
+  (commit `1926839`), still OPEN.** This episode's own recorded trigger is
+  "show me an example please" — a bare example request naming no topic, which is
+  ENG-D08's trigger shape exactly, differing only in how far the model travelled
+  (an adjacent sub-domain rather than another subject). The CONCEPT ANCHOR rule
+  shipped for ENG-D08 governs it for the same reason and is pinned with this entry's
+  own concept (`Dramatic Structure`) as a test case, so the rule is verified to carry
+  the lesson title rather than being generic.
+  The detector half is **rejected here on the same measured grounds** as ENG-D08: no
+  topic was named, so nothing fires, and the general "does this content relate to the
+  lesson" check that would be needed is the one `topicDrift.ts`'s header argues
+  against — and this episode is the strongest case for that argument, since drama and
+  poetry are adjacent enough that a vocabulary-overlap test would be close to a coin
+  toss.
+  **Still OPEN** for the same reason as ENG-D08: a prompt rule is a lever, not an
+  invariant, and no production evidence yet shows the rate fell.
+- **Fix priority:** High — STILL OPEN (prompt mitigation shipped, unverified).
+- **Fix category:** prompt (SHIPPED 2026-09-12, shared with ENG-D08). The
+  detector half is **rejected** on measured evidence, not unimplemented.
 
 ---
 
@@ -954,9 +1203,34 @@ authoritative record for that range.
 - **Severity:** P1 — worse than ENG-D12: a learner sees only four unexplained
   answer choices with zero context, and their previous correct answer goes
   unacknowledged.
-- **Fix priority:** High.
-- **Fix category:** code (same fallback path as ENG-D12; this instance additionally
-  drops the question stem and the prior-turn acknowledgment).
+- **2026-09-12 — INVESTIGATED; ROOT-CAUSE ATTRIBUTION WITHDRAWN; NO SAFE CODE FIX,
+  reported rather than patched.** This entry inherits ENG-D12's "probe pool
+  exhausted" reading, and that is disproven: `eng.reading.main-idea-and-details`
+  holds several ACTIVE closed-choice probes at both served bands in production
+  (direct query, see ENG-D14).
+  Traced through the existing guards, which do cover the two neighbouring shapes and
+  genuinely do not cover this one: `hasProseMultipleChoice` DETECTS four line-anchored
+  options and its documented policy leaves them visible;
+  `stripDanglingLeadingOption` handles the opposite case (a single truncated option)
+  and deliberately refuses to touch a 2-4 option run; `stripContradictingProseOptions`
+  needs a pending probe, and none was pending here. So an option run with NO question
+  stem falls between all three — and the "an imperfect question beats silence"
+  justification does not extend to it, because a list with no question is not an
+  imperfect question.
+  **A strip was designed and then not shipped, for a reason that is the finding:**
+  the whole turn body IS the option run, so stripping it yields an empty reply, and
+  the existing post-strip backstop only rescues a turn when a probe is actually
+  served — which is exactly what is missing here. A repair that fires on neither
+  documented instance would be a speculative patch of the kind this campaign was told
+  not to make. Recovering this turn means having the gate attach the real authored
+  probe, which is arbitration work and needs more than one instance.
+  The missing acknowledgment of the prior correct answer has the same origin: that
+  answer was to an untagged prose MCQ, so the server never graded it, so
+  `confirmCorrectAnswer` (which fires on the server grade) correctly said nothing.
+  It is ENG-D12 one turn earlier, not a second defect.
+- **Fix priority:** High — STILL OPEN, cause UNCONFIRMED.
+- **Fix category:** code (gate attachment / turn eligibility — same owner as
+  ENG-D12). NOT content: that premise was measured and disproven.
 
 ---
 
@@ -1034,31 +1308,45 @@ authoritative record for that range.
 
 ## Summary
 
-**Updated after the full 216-concept campaign completed** (Checkpoints 1–16,
-batches 1–19) — this revision adds ENG-D21/D22/D23 and extends ENG-D04, D16, D17,
-D18 with additional confirmed instances found in Checkpoints 8–13.
+**Updated 2026-09-12 after the open-defect remediation pass** (commits `6c3be2b`,
+`1926839`). The previous revision's counts are superseded; the entries themselves
+carry their own dated evidence.
 
 | Severity (OPEN only) | Count |
 |---|---|
 | P0 | 0 |
-| P1 | 10 (ENG-D01, D04, D05, D08, D11, D14, D17, D18, D22, D23) |
+| P1 | 8 (ENG-D01, D04, D05, D08, D17, D18, D22, D23) |
 | P2 | 6 (ENG-D07, D10, D12, D13, D15, D21) |
 | P3 | 1 (ENG-D19) |
-| **Total confirmed OPEN defects** | **17** |
+| **Total confirmed OPEN defects** | **15** |
+
+Two entries left the open list this pass, for different reasons:
+**ENG-D11 → FIXED** (a real code defect, located and closed) and
+**ENG-D14 → RESOLVED** (its premise was stale; production measurement shows the
+shortfall no longer exists). ENG-D23 keeps its own row even though its mechanism is
+now understood as ENG-D12 one turn earlier — entries are deduplicated by mechanism
+only once a mechanism is CONFIRMED, and neither of these two has one.
 
 | Closed | Count |
 |---|---|
-| Fixed, reproduced first, deployed | 4 (ENG-D02, D03, D09, D16) |
+| Fixed, reproduced first, deployed | 5 (ENG-D02, D03, D09, D11, D16) |
 | Closed — benign (instrument defect, not a product defect) | 1 (ENG-D06) |
+| Resolved on measurement (premise stale, no fix needed) | 1 (ENG-D14) |
 | Resolved (pre-existing, separate campaign) | 1 (ENG-D20) |
-| **Total closed** | **6** |
+| **Total closed** | **8** |
 | **Total unique confirmed defects found (open + closed)** | **23** |
 | Observations (not confirmed as defects) | 5 (OBS-01 … OBS-05) |
 
-ENG-D04 is counted ONCE, under P1 open, though it is partially fixed: its
-angle-bracket `<--ATTEMPT ...-->` half is fixed and reproduced, while the
-"argued discovery step" prose-echo half and the order-113 `[!--ATTEMPT` opener
-both remain open. See its entry.
+ENG-D04 is counted ONCE, under P1 open, though it is now mostly fixed: **all three
+production control-tag opener variants (`<!--`, `<--`, `[!--`) are stripped and
+pinned**, the order-113 residual closed from the raw stored message. Only the
+"argued discovery step" prose-echo half remains open. See its entry.
+
+**Mitigated but deliberately still OPEN (2026-09-12):** ENG-D08 and ENG-D22 each
+received a CONCEPT ANCHOR prompt rule grounding bare example requests to the
+anchored concept, and ENG-D18 received the failure classification that makes its
+unexplained instance diagnosable next time. None of the three is counted as closed:
+a prompt rule is a lever rather than an invariant, and observability is not a fix.
 
 ### Open defects by owning discipline
 
@@ -1068,22 +1356,38 @@ backlog when they are four.
 
 | Discipline | Count | Entries |
 |---|---|---|
-| Runtime / teaching-engine code | 7 | ENG-D05, D08, D10, D11, D21, D22, D23 |
-| Content authoring (probes/assets) | 4 | ENG-D12, D14, D15, D19 |
-| Prompt / model-output behaviour | 3 | ENG-D01, D04, D07 |
+| Runtime / teaching-engine code | 4 | ENG-D05, D10, D12, D23 |
+| Prompt / model-output behaviour | 6 | ENG-D01, D04, D07, D08, D19, D22 |
 | Infrastructure (DB, timeouts) | 2 | ENG-D17, D18 |
-| Visual authoring | 1 | ENG-D13 |
+| Content authoring (owner decision) | 1 | ENG-D15 |
+| Visual (authoring + session identity) | 2 | ENG-D13, D21 |
 
-Two re-categorisations were made on 2026-09-12 evidence, not on judgement:
+Movements since the previous revision, each on its entry's own evidence:
+ENG-D11 closed (was runtime); ENG-D14 resolved (was content); ENG-D12 and ENG-D23
+moved content → runtime once the probe-pool premise was disproven; ENG-D08 and
+ENG-D22 moved runtime → prompt once their detector halves were measured and
+rejected; ENG-D19 moved content/prompt → prompt; ENG-D21 stays code but is now
+scoped to the visual generate/cache-write path rather than asset selection.
+
+Three re-categorisations were made on 2026-09-12 evidence, not on judgement:
 **ENG-D07** moved code → prompt (every detector was measured not to fire on its
-trigger phrase, so there is no detector to narrow), and **ENG-D01** moved
+trigger phrase, so there is no detector to narrow); **ENG-D01** moved
 "code or prompt, undetermined" → prompt (the residual-tag pipeline was ruled out
 by inspection — it removes markup, never characters inside prose, and no
 sanitiser in `src/` strips non-ASCII — leaving generation as the remaining
-hypothesis, still unproven). **ENG-D12** is listed under content authoring on the
-strength of its own entry's reasoning ("the durable fix is closing the probe-pool
-shortfall — see ENG-D14 — not patching this fallback path"), not because the
-fallback path is acceptable.
+hypothesis, still unproven); and **ENG-D12** moved content → code, reversing its
+earlier placement. That last one matters most: ENG-D12 and ENG-D23 were both
+attributed to ENG-D14's probe-pool shortfall, and that shortfall **no longer
+exists** — production holds 3 or 4 ACTIVE closed-choice probes for every one of 333
+English (concept, band) pairs, spot-checked on the exact concepts those two entries
+cite. Neither can be explained by content any more, and neither has a confirmed
+cause now.
+
+**ENG-D08 and ENG-D22 remain under prompt**, with their code halves recorded as
+REJECTED rather than pending: no topic is named in either episode, so no detector
+fires, and the general topic-relevance check that would be required is the one
+`topicDrift.ts`'s own header argues would strip the zero-vocabulary-overlap
+analogies this tutor is measured to be good at.
 
 **Coverage note:** this register was compiled while the audit was still roughly
 halfway through the English KG (through order ~105). The audit has since run to
