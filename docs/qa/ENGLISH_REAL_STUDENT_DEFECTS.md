@@ -681,8 +681,23 @@ authoritative record for that range.
   earlier in the route), which is where 2 of the 5 recorded instances were
   observed**, so the infra-correlated sub-case is covered by the same change. 25
   targeted tests in `src/tests/wrongAnswerCorrection.test.ts`.
-- **Status:** FIXED (2026-09-12) — deployed READY, but NOT yet observed in a live
-  wrong-answer transcript, so it is reported as fixed-not-production-verified.
+- **2026-09-12 — PRODUCTION-VERIFIED on a disposable QA account**
+  (`qa-engd11-…@mytutor-qa.invalid`, session `cmtylukiy0004ie04auvsoowi`,
+  `eng.grammar.nouns` order 50; account deleted afterwards, re-login confirmed
+  blocked). The driver cannot know the key — `mcqForClient` strips `correctIndex` —
+  so it taps options in rotation across successive probes and records what comes
+  back. Four answers to served probes, and the two directions separated cleanly:
+  - **Graded WRONG, T4:** *"Not quite — the answer is: Both — "patience" is an
+    abstract noun (a quality/idea), just as real a noun as the concrete "team""*,
+    followed by the model's own remediation.
+  - **Graded WRONG, T7:** *"Not quite — the answer is: "Some advice" — advice is
+    uncountable, so it takes "some", not "an"…"*.
+  - **Graded CORRECT, T3 and T6:** *"That's right. …"* and *"You got it right! …"* —
+    confirmed, and correctly given NO correction.
+  **2 of 2 graded-wrong answers carried an explicit correction naming the right
+  option; 2 of 2 graded-correct answers did not.** Instrument:
+  `scripts/qa/engD11Verify.ts`.
+- **Status:** FIXED (2026-09-12) — deployed and PRODUCTION-VERIFIED.
 - **Severity:** P1 — a weak learner who answers wrong and gets no correction has no
   path to actually learn the correct answer; this directly undermines the
   platform's teaching function.
@@ -1321,7 +1336,7 @@ carry their own dated evidence.
 | **Total confirmed OPEN defects** | **15** |
 
 Two entries left the open list this pass, for different reasons:
-**ENG-D11 → FIXED** (a real code defect, located and closed) and
+**ENG-D11 → FIXED and production-verified** (a real code defect, located and closed) and
 **ENG-D14 → RESOLVED** (its premise was stale; production measurement shows the
 shortfall no longer exists). ENG-D23 keeps its own row even though its mechanism is
 now understood as ENG-D12 one turn earlier — entries are deduplicated by mechanism
@@ -1329,7 +1344,7 @@ only once a mechanism is CONFIRMED, and neither of these two has one.
 
 | Closed | Count |
 |---|---|
-| Fixed, reproduced first, deployed | 5 (ENG-D02, D03, D09, D11, D16) |
+| Fixed, reproduced first, deployed | 5 (ENG-D02, D03, D09, D11, D16) — ENG-D02 and ENG-D11 additionally production-verified |
 | Closed — benign (instrument defect, not a product defect) | 1 (ENG-D06) |
 | Resolved on measurement (premise stale, no fix needed) | 1 (ENG-D14) |
 | Resolved (pre-existing, separate campaign) | 1 (ENG-D20) |
