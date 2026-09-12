@@ -211,7 +211,12 @@ export async function POST(req: Request) {
         console.warn('[sessions] per-message visual restore skipped:', err);
       }
       return NextResponse.json(
-        { success: true, data: existingSession, resumed: true, restoredVisual, messageVisuals },
+        // PCD-004C: `lessonKey` is the lesson THIS session resolves to. The
+        // client's mount-time history fetch cannot name a session, so it
+        // resolves per-user; comparing the two keys is how it learns, in one
+        // comparison and with no extra request in the common case, that the
+        // history it just rendered belongs to a different lesson.
+        { success: true, data: existingSession, resumed: true, restoredVisual, messageVisuals, lessonKey: resumeLessonKey },
         { status: 200 },
       );
     }
@@ -268,7 +273,11 @@ export async function POST(req: Request) {
       setUserActiveSession(session.user.id, learnSession.id),
     ]);
 
-    return NextResponse.json({ success: true, data: learnSession }, { status: 201 });
+    // PCD-004C: see the resume branch. A brand-new session has no pointer of
+    // its own yet, so this is the per-user key — which is exactly what the
+    // unscoped history fetch used, so a fresh session never triggers a
+    // corrective re-fetch.
+    return NextResponse.json({ success: true, data: learnSession, lessonKey: resumeLessonKey }, { status: 201 });
   } catch (err) {
     if (err instanceof z.ZodError) {
       return NextResponse.json({ success: false, error: err.errors[0].message }, { status: 400 });

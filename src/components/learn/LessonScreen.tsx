@@ -42,6 +42,7 @@ import { extractNarrationSegments } from '@/lib/visuals/narrationSource'
 // to the existing Sprint BW static VisualCard path — see render block below.
 import { VisualRenderer } from '@/components/visuals/VisualRenderer'
 import type { SceneSpec } from '@/lib/teaching/sceneSpec'
+import { shouldRefetchScopedHistory } from '@/lib/teaching/sessionLessonPointer'
 import { validateSceneSpec } from '@/lib/teaching/sceneSpecValidator'
 import { parseVisualSpec, type VisualSpec } from '@/lib/visuals/visualSpec'
 import { applyRestoredVisuals } from '@/lib/teaching/visual/messageMerge'
@@ -1354,13 +1355,58 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         if (cancelled) return
 
         // Session id — non-fatal if missing, send path retries.
+        let mountSessionId: string | null = null
+        let sessionLessonKey: string | null | undefined
         try {
           const sessionData = await sessionRes.json()
-          if (!cancelled && sessionData?.success && sessionData.data?.id) setSessionId(sessionData.data.id)
+          if (!cancelled && sessionData?.success && sessionData.data?.id) {
+            mountSessionId = sessionData.data.id
+            sessionLessonKey = sessionData.lessonKey ?? null
+            setSessionId(sessionData.data.id)
+          }
         } catch { /* non-fatal */ }
 
-        const hist = await histRes.json()
+        let hist = await histRes.json()
         if (cancelled) return
+
+        // ── PCD-004C: THE MOUNT FETCH CANNOT NAME ITS SESSION ──────────────
+        //
+        // The two requests above run in PARALLEL on purpose — the sequential
+        // order was the original cause of the "Loading your lesson..." delay —
+        // so the history request is issued before any session id exists and is
+        // scoped by the PER-USER pointer. With a second session open on this
+        // account (another tab, another device) that pointer can name a
+        // DIFFERENT lesson, and this is the restore path a returning learner
+        // actually takes, so the screen would render another lesson's
+        // transcript while the tutor taught this session's lesson. Nothing
+        // re-fetched afterwards, so it never self-corrected.
+        //
+        // Both endpoints already computed the key they resolved; they now
+        // return it. When they agree — every single-session learner, and every
+        // brand-new session — this costs ZERO extra requests and the behaviour
+        // is byte-identical to before. Only a genuine disagreement pays for one
+        // corrective, session-scoped re-fetch. No delay is introduced to hide
+        // the race: the first render is still driven by the first response
+        // unless it is provably the wrong lesson.
+        const scopedSid = mountSessionId
+        if (scopedSid && shouldRefetchScopedHistory({
+          sessionId: scopedSid,
+          sessionLessonKey,
+          historyLessonKey: hist?.data?.lessonKey,
+        })) {
+          try {
+            const scopedRes = await fetchWithTimeout(
+              `/api/sessions/history?subject=${encodeURIComponent(subjectSlug)}&sessionId=${encodeURIComponent(scopedSid)}`,
+              {}, 15000,
+            )
+            if (cancelled) return
+            const scoped = await scopedRes.json()
+            // Only replace on a successful, genuinely session-scoped answer —
+            // a failed correction must never blank a history that did load.
+            if (scoped?.success) hist = scoped
+          } catch { /* keep the unscoped page rather than showing nothing */ }
+        }
+
         if (!hist?.success) return
         const raw = hist?.data?.messages
         if (!Array.isArray(raw) || raw.length === 0) return

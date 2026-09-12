@@ -216,6 +216,13 @@ export async function GET(req: Request) {
         // history. Derived from the raw page, never from the stripped copy.
         nextCursor: raw.length === HISTORY_DISPLAY_LIMIT ? messages[0]?.id ?? null : null,
         hasMore: raw.length === HISTORY_DISPLAY_LIMIT,
+        // PCD-004C: the lesson this page was actually scoped to (null when
+        // unscoped). The mount-time fetch cannot name its session — it races
+        // session creation on purpose — so it resolves per-user and can land
+        // on another session's lesson. Returning the key it USED lets the
+        // client detect that in one comparison and correct itself, instead of
+        // the screen silently disagreeing with the tutor until the next turn.
+        lessonKey,
       },
     })
   } catch (err) {

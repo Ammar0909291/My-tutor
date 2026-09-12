@@ -171,3 +171,42 @@ export async function clearSessionLessonPointer(
     return { applied: false, reason: err instanceof Error ? err.message : String(err) }
   }
 }
+
+/**
+ * PCD-004C — must the mount-time history page be re-fetched, scoped to the
+ * session?
+ *
+ * `LessonScreen`'s mount effect issues its history request in PARALLEL with
+ * session creation, so it cannot name a session and the server scopes it by
+ * the PER-USER pointer. With another session open on the account that pointer
+ * can name a different lesson, and the mount path is the one a returning
+ * learner actually takes (refresh, re-open, re-login) — so the screen could
+ * render one lesson's transcript while the tutor taught another, and nothing
+ * re-fetched afterwards to correct it.
+ *
+ * Both endpoints now report the key they resolved, and this is the whole
+ * decision. It is deliberately a pure comparison, not a heuristic:
+ *
+ *  · no session id yet          -> NO (there is nothing to scope BY)
+ *  · the session reported no key -> NO (`undefined` means an older server, or
+ *                                  a response that never carried the field;
+ *                                  never re-fetch on absent information)
+ *  · the keys agree              -> NO (every single-session learner, and
+ *                                  every brand-new session — zero cost)
+ *  · the keys differ            -> YES, exactly one corrective re-fetch
+ *
+ * `null` is a REAL value here and compares normally: a session that resolves
+ * to no lesson while the unscoped page resolved to one is precisely the
+ * disagreement worth correcting.
+ */
+export function shouldRefetchScopedHistory(input: {
+  sessionId: string | null | undefined
+  /** Key reported by /api/sessions. `undefined` = not reported. */
+  sessionLessonKey: string | null | undefined
+  /** Key /api/sessions/history says it scoped the returned page by. */
+  historyLessonKey: string | null | undefined
+}): boolean {
+  if (!input.sessionId) return false
+  if (input.sessionLessonKey === undefined) return false
+  return input.sessionLessonKey !== (input.historyLessonKey ?? null)
+}
