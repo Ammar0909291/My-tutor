@@ -85,7 +85,45 @@ here for accuracy, not performed as part of this task.
 - **Fix priority:** Critical.
 - **Fix type:** Architecture (function timeout budget / provider-chain latency budget) + code
   (a graceful fallback path for a hard timeout, not just a caught provider error).
-- **Status:** OPEN — not investigated or fixed in any cited session; first documented here.
+- **2026-09-12 — FIXED (commit `6326c91`). Root cause PROVEN by arithmetic over this
+  repository's own constants, not inferred.** `vercel.json` gives `/api/learn/chat`
+  `maxDuration: 60`. Provider timeouts are gemini 20s, yandex 15s, groq 8s, openrouter
+  8s, and the primary tier gets one same-provider retry after a 500 ms backoff:
+  - default chain: groq 8 + 0.5 + groq 8 + gemini 20 + openrouter 8 = **44.5s**
+  - russian chain: yandex 15 + 0.5 + yandex 15 + gemini 20 + openrouter 8 + groq 8 = **66.5s**
+  The Russian chain **exceeds the entire function budget on its own**, before a single
+  database read; the default chain leaves 15.5s for session load, snapshot CAS, asset
+  assembly, evidence writes, message persistence, and a visual pipeline carrying its own
+  9s deadline. **No try/catch could have helped**: the route already prepares a degraded
+  template and `router.ts` deliberately does not swallow a timeout so the caller can serve
+  it, but none of that runs when the PLATFORM kills the invocation — there is no exception
+  and the lambda is gone. That is the raw 504 this entry recorded.
+  The chain now carries one wall clock (`AI_CHAIN_DEADLINE_MS`, 45s, leaving 15s to
+  persist and respond) and stops when it cannot afford another attempt. Critically, each
+  attempt is RACED against the remaining budget: checking the clock only between tiers
+  still lets the attempt already started overshoot by its own full timeout, which is
+  precisely the overshoot that kills the invocation. The same-provider retry is budgeted
+  too. It is the CHAIN that is bounded, never a provider's own timeout, so the deadline
+  can only fire on a turn that was already going to fail — a healthy fast path is
+  unaffected, and a genuine outage is still reported as itself rather than relabelled as
+  slowness (both pinned as negative controls).
+  Guard: `src/tests/pcd002ChainDeadline.test.ts`. **Three of its cases initially passed
+  VACUOUSLY** — the deadlines were below `MIN_ATTEMPT_MS`, so the chain short-circuited
+  before starting any attempt and never exercised the race; they now assert a lower bound
+  on elapsed time as well as an upper one, so they fail if no attempt ran.
+- **SECOND CONTRIBUTOR, reported NOT fixed:** `/api/learn/chat` wraps **none** of its DB
+  calls in `withTimeout`, unlike `/api/sessions`' proven `dbCall` pattern
+  (`SESSION_DB_TIMEOUT_MS` + `withRetry`). During a database outage (**PCD-043**) an
+  unbounded Prisma call can still hang to the platform limit and reproduce this same 504
+  by a different route. Real, and deliberately not patched in the same change: applying
+  that pattern across the hottest path in the product is not a speculative edit to make
+  alongside a provider-layer fix. Named here as the precise next step, with the pattern
+  to copy.
+- **Status:** **FIXED** for the provider-chain cause (2026-09-12, commit `6326c91`),
+  code-verified. **PRODUCTION VERIFICATION PENDING** — reproducing the original 504
+  requires a genuine provider stall, which cannot be induced on demand; the fix is proven
+  by the constants above and by tests that bound a real chain in milliseconds. The DB-call
+  contributor above remains OPEN.
 
 ### PCD-003 — Transient `/api/sessions` 500 errors
 - **Subject/Concept:** Chemistry — `chem.elect.galvanic-cell` (#74), `chem.elect.nernst` (#76).
@@ -97,7 +135,18 @@ here for accuracy, not performed as part of this task.
 - **Severity:** P3.
 - **Fix priority:** Low.
 - **Fix type:** QA / monitoring only — no reproducible defect to fix.
-- **Status:** OPEN (not a bug to close, just noted as non-reproducible).
+- **2026-09-12 — DIAGNOSABLE NOW; the failure could not previously be classified at all.**
+  `/api/sessions` POST collapsed every non-Zod failure into one opaque
+  `"Internal server error"`, so neither this entry nor PCD-043 could say WHICH failure a
+  500 was, and a `/api/health` poll after the fact measures a different moment. The catch
+  now separates `db_unavailable` / `db_timeout` / `unknown` using `withRetry`'s own
+  connection predicate (lifted and shared, not re-authored), logs it structurally, and
+  returns `kind` additively so an audit driver can record it without polling
+  (commit `1926839`). Retry behaviour is byte-for-byte unchanged — this is observability,
+  not a fix for whatever the transient 500s were. The events already recorded stay
+  unclassifiable; the next one will name itself.
+- **Status:** OPEN (not a bug to close — non-reproducible; now instrumented so a
+  recurrence is self-classifying).
 
 ---
 
@@ -121,7 +170,21 @@ here for accuracy, not performed as part of this task.
 - **Fix priority:** High.
 - **Fix type:** Architecture (per-session lesson-pointer scoping, or session-level locking on
   the write).
-- **Status:** OPEN — this is a genuine architectural finding from the audit; no fix has been
+- **2026-09-12 — ALREADY FIXED ON `main`; this entry was STALE when written.** The repo is
+  the source of truth and it disagrees: `6e94a3c` ("Merge PCD-004: session-scoped lesson
+  pointer, per-tab sessions, attempt concurrency"), built from `6ffbcd5` (scope the lesson
+  pointer to the session), `b8e0990` (one conversation per tab; close the LessonAttempt
+  lost update) and `57b3023` (mount-time history scope). The lesson a session is teaching
+  now lives at the SESSION grain in `LearnSession.contextSnapshot` through the existing
+  CAS writer, with `StudentProgress.activeLessonSlug` kept only as the session-less
+  fallback, so single-session progress semantics are unchanged. No schema change.
+  Re-verified this session rather than taken on trust: 79 assertions across
+  `sessionLessonPointer.test.ts`, `sessionIdentityMultiTab.test.ts`,
+  `sessionTabIdentity.test.ts` and `lessonHistoryScope.test.ts` all pass, and the
+  two-simultaneous-sessions isolation the audit asks for is explicitly covered
+  (`sessionIdentityMultiTab.test.ts`: "whereas two SESSIONS keep two pointers"), alongside
+  CAS-conflict and clear-pointer cases.
+- **Status (superseded):** OPEN — this is a genuine architectural finding from the audit; no fix has been
   made to `StudentProgress`'s per-user field design as of this compilation.
 
 ### PCD-005 — Chemistry Defect-1 pattern (stale/duplicate `lessonComplete` across sessions)
@@ -545,7 +608,17 @@ here for accuracy, not performed as part of this task.
 - **Severity:** P2 — actively confusing rather than blocking, since it doesn't touch grading.
 - **Fix priority:** Medium.
 - **Fix type:** Content / architecture (visual-registry default binding correction).
-- **Status:** OPEN — first documented here.
+- **2026-09-12 — FIXED, verified against the real resolver.** Two independent changes
+  close it. (1) `sceneRouter.ts`'s calculus rule no longer claims the bare phrases
+  "critical point"/"critical points" (removed 2026-09-11 citing PCD-026/PCD-027) — that
+  was the latent keyword collision, and the same commit records that this router is not
+  currently reachable from the path that serves a learner a figure, so it was never the
+  whole story. (2) Measured this session through `resolveVisual` with the real concept
+  id: **`chem.kinet.arrhenius` now returns `graphical:false, source:'none'`** — no
+  figure at all rather than a substitute. That is the product's documented honest
+  no-figure fallback and the correct behaviour for an unbound concept; a wrong-domain
+  diagram can no longer be selected for it.
+- **Status:** **FIXED** (router fix `2026-09-11`; serving behaviour verified 2026-09-12).
 
 ### PCD-027 — Wrong-domain diagram: `chem.state.phase-diagram` (#42) served a calculus "critical points" plot
 - **Subject/Concept:** Chemistry — `chem.state.phase-diagram` (#42).
@@ -563,7 +636,18 @@ here for accuracy, not performed as part of this task.
 - **Fix priority:** High.
 - **Fix type:** Content / architecture (disambiguate "critical point" by subject domain in the
   visual-selection logic).
-- **Status:** OPEN.
+- **2026-09-12 — FIXED, verified against the real resolver.** Same two changes as
+  PCD-026: the bare "critical point(s)" keywords were removed from the calculus route
+  rule (2026-09-11, citing this defect by number), and **`chem.state.phase-diagram` now
+  returns `graphical:false, source:'none'`** through the real `resolveVisual` — the
+  calculus plot is not reachable for this concept by any path, and nothing is substituted
+  in its place.
+  **Honest residual, content-owned not runtime:** the concept still has no chemistry
+  phase-diagram figure of its own, so a learner asking for one is told there is none. That
+  is honest rather than wrong — the P1 here was a FACTUALLY WRONG visual, and that is
+  gone — but authoring a real phase-diagram binding remains open visual-authoring work.
+- **Status:** **FIXED** for the factually-wrong-visual defect (2026-09-12). Authoring a
+  correct phase-diagram figure is separate content work, not this defect.
 
 ### PCD-028 — Learner-name-shaped false alarm ruled out; general finding on "teach from start" literalism affecting a beginner-opener's *tone*, not content
 - *(Withdrawn — this ID intentionally left as a cross-reference stub; see OBS-2 in the
@@ -589,7 +673,27 @@ here for accuracy, not performed as part of this task.
 - **Fix type:** Prompt (the model's own analogy-construction step needs a check against the
   actual quantity being taught) + content/architecture (diagram selection should not blindly
   render whatever framing the model's prose used).
-- **Status:** OPEN — first documented here.
+- **2026-09-12 — FIXED (commit `3d9fab8`). THE CAUSALITY WAS BACKWARDS, and the fix
+  is on the generator, not the concept.** This entry reads the defect as prose-first: a
+  confused analogy, with diagram selection faithfully rendering the confusion. Traced to
+  source, it is the other way round. The binding is STATIC —
+  `conceptSceneParams.ts` has always resolved `chem.coord.stability` to the
+  `statistics_bar_chart` generator, whose chrome is hardcoded: it titles the figure
+  `Frequency Distribution:`, narrates "is the mode — the most frequently occurring
+  category", and reports a mean "found by Σ(index×frequency) / Σfrequency over all 31.8
+  observations". The DATA was correct chemistry all along (log Kf 13.0 monodentate vs
+  18.8 chelate is the real chelate effect); the semantics wrapped around it were not. A
+  log Kf is a magnitude — there are no observations and it has no mode. **The tutor read
+  the figure's own narration and taught from it**, which is why the prose and the diagram
+  agreed: they had the same source.
+  Fixed on the GENERATOR because a second chemistry concept had the identical defect —
+  `chem.thermo.heat-capacities` reported "82.15 observations" of J/mol·K. An optional
+  `quantity` descriptor switches the chrome to comparison semantics (largest rather than
+  mode; the mean-of-category-index step dropped rather than reworded). Absent, behaviour
+  is byte-identical, so every genuine statistics caller is untouched — pinned as a
+  negative control. Numbers unchanged. Guard: `src/tests/pcd040MagnitudeChart.test.ts`.
+- **Status:** **FIXED** (2026-09-12, commit `3d9fab8`), code-verified against the real
+  builder and the real production bindings.
 
 ### PCD-041 — Self-contradictory quantitative graph within one session: `chem.dblock.lanthanides` (#122)
 - **Subject/Concept:** Chemistry — `chem.dblock.lanthanides` ("Lanthanide Contraction").
@@ -605,7 +709,19 @@ here for accuracy, not performed as part of this task.
 - **Fix priority:** Medium.
 - **Fix type:** Content/architecture (graph-generation should either reuse a cached equation
   within a session or ground the slope in a real reference dataset).
-- **Status:** OPEN — first documented here.
+- **2026-09-12 — FIXED (commit `3d9fab8`). Root cause CONFIRMED, and it is an ABSENCE.**
+  `chem.dblock.lanthanides` had **no curated binding at all**, so every figure request
+  fell through to GENERATION, which runs independently per turn — hence two different
+  equations in one session. Neither string exists anywhere in this repository: both were
+  invented at the turn, which is also why neither matches the real ~17 pm contraction.
+  A curated binding outranks generation, so authoring one IS the fix: Shannon ionic radii
+  (CN = 6, Ln³⁺), La³⁺ 103.2 → Lu³⁺ 86.1 pm, a published reference series rather than a
+  slope fitted at runtime. Verified deterministic (identical across builds), monotonic
+  across the six elements, structurally valid by the product's own `validateSceneSpec`,
+  and confirmed to REACH the learner through the real resolver at `source:'registry'`.
+  Magnitude mode per PCD-040, since a radius is not a count.
+- **Status:** **FIXED** (2026-09-12, commit `3d9fab8`), code-verified end to end through
+  the real resolver.
 
 ### PCD-042 — False-closure via a phrasing variant the existing strip regex does not cover: `chem.org.mechanisms` (#129)
 - **Subject/Concept:** Chemistry — `chem.org.mechanisms` ("Reaction Mechanisms" / organic).
@@ -629,7 +745,30 @@ here for accuracy, not performed as part of this task.
 - **Fix type:** Prompt/code (extend `COMPLETION_CLAIM_RE`'s phrasing family to cover "what's
   coming – the next lesson unlocks..." and likely siblings, gated the same way: strip only when
   `!masteryVerifiedStrict(state)`).
-- **Status:** OPEN — first documented here.
+- **2026-09-12 — FIXED (commit `3d9fab8`), and NOT by extending the regex.** The
+  authoritative predicate was never wrong: `gateLessonCompletion` refused the close and
+  recorded nothing, exactly as the evidence shows (`completionSuppressed:true`,
+  `gatePending:true`). The harm was learner-facing prose only, and every bookkeeping rule
+  missed it because this turn contains no bookkeeping sentence at all — no lesson count,
+  no "next up is", no "next we explore".
+  Adding "the next lesson unlocks" would close that one sentence and invite the next
+  phrasing — the enumeration trap this rule has already fallen into four times (each
+  recorded in `stanceEnforcement.ts`). The fix keys on STRUCTURE: `client.ts` defines the
+  LESSON CLOSING FORMAT and authorises it exactly once, "when evidence is secured and you
+  are ready to append [LESSON_COMPLETE]". Rendering that format while the gate refuses is
+  an unauthorised close whatever words fill it. `rendersLessonClosingFormat` requires TWO
+  distinct sections of a template this repository owns, so it cannot drift with phrasing.
+  This resolved a question the module had left open against itself: it had declined to
+  touch these bullets as "a change of policy, not a bug fix" while recording that they are
+  "a genuine claim about unearned mastery and a real candidate", and asked for the question
+  to stay visible. PCD-042 is that evidence. The old policy's protected case survives — a
+  LONE motivational recap line is not the template and is pinned as a negative control —
+  and two superseded policy assertions keep their original text verbatim in dated
+  comments. Guard: `src/tests/pcd042ClosingFormat.test.ts` (11 cases incl. a physics
+  cross-subject case, since the runtime is shared).
+- **Status:** **FIXED** (2026-09-12, commit `3d9fab8`), code-verified against the real
+  `enforceStance`. Mastery/closure AUTHORITY untouched — this strengthens the
+  learner-facing half only.
 
 ### PCD-043 — Sustained production database outage blocked session creation and login entirely (distinct from PCD-002's isolated per-concept timeouts)
 - **Subject/Concept:** Chemistry audit infrastructure, concepts #147-150 (all subjects/all
@@ -654,8 +793,23 @@ here for accuracy, not performed as part of this task.
   this audit can fix).
 - **Fix type:** Architecture/QA (production database reliability monitoring; consider `/api/health`
   as a standard first check for any future investigation of a `/api/sessions` failure cluster).
-- **Status:** OPEN — reported as observed; no root-cause fix attempted (outside this audit's
-  read-only scope and outside a single session's ability to diagnose production DB infra).
+- **2026-09-12 — NO ROOT-CAUSE FIX; two things done, both stated precisely.**
+  (1) The diagnostic half is now built rather than manual: `/api/sessions` classifies its
+  own failures as `db_unavailable` / `db_timeout` / `unknown` and returns `kind`
+  (commit `1926839`), so a future cluster of 500s identifies itself without the
+  `GET /api/health` race this entry recommends. The six events already recorded remain
+  historical and cannot be reclassified retroactively.
+  (2) Checked against the invariants this task requires and found already honest: during
+  the outage the app **refused** — it did not fabricate session state, did not serve a
+  learner a session that did not exist, and performed no automatic retry that could
+  duplicate state. `/api/health` reported `db:false` truthfully with HTTP 503. Recovery
+  was clean with zero code changes, which is the behaviour a DB outage should produce.
+  **Related and NOT fixed:** `/api/learn/chat` bounds none of its DB calls (see PCD-002's
+  second contributor), so during an outage a chat turn can hang to the platform limit
+  rather than failing fast.
+- **Status:** OPEN — infrastructure/monitoring, owner-owned. The database reliability
+  itself is not fixable from this repository; the diagnosis and the honest-refusal
+  behaviour are verified.
 
 ---
 
@@ -970,11 +1124,32 @@ result: zero duplicates across all 60 completions through the complete 186/186 c
 | P3 | 2 |
 | **Total confirmed defects** | **41** |
 
-Status breakdown (of the 41 confirmed defects): **18 FIXED**, **2 PARTIALLY FIXED** (open
-against their stated target), **1 MONITORING** (fix shipped upstream, residual rate not further
-reducible from this app), **20 OPEN**. (`PCD-005` and `PCD-028` are excluded from all counts
-above — they are a "checked, not reproduced" record and a withdrawn cross-reference stub,
-respectively, not confirmed defects.)
+Status breakdown — **UPDATED 2026-09-12 after the remediation pass** (commits `3d9fab8`,
+`6326c91`; `1926839` for the session-failure classifier). Superseded line, kept for history:
+*"18 FIXED, 2 PARTIALLY FIXED, 1 MONITORING, 20 OPEN."*
+
+Current: **25 FIXED**, **2 PARTIALLY FIXED** (open against their stated target),
+**1 MONITORING**, **13 OPEN**. (`PCD-005` and `PCD-028` remain excluded from all counts —
+a "checked, not reproduced" record and a withdrawn cross-reference stub, not confirmed
+defects.)
+
+Seven entries changed status this pass, each on its own evidence rather than by association:
+
+| PCD | Why it moved |
+|---|---|
+| **002** | P0. Root cause proven by arithmetic over the repo's own constants — the provider chain's worst case (44.5s default, **66.5s Russian**) against a 60s `maxDuration`, so the PLATFORM killed the lambda and no catch could run. Chain now bounded by one wall clock, each attempt raced against the remaining budget. Second contributor (unbounded DB calls in `/api/learn/chat`) named, not patched. |
+| **004** | P1. **Was already fixed on `main` when this entry was written** (`6e94a3c`): the lesson pointer is session-scoped in `contextSnapshot`. Re-verified, not assumed — 79 assertions, including the two-simultaneous-sessions isolation case. |
+| **026** | P2. Keyword collision removed from the calculus route rule; `chem.kinet.arrhenius` measured through the real resolver now returns `source:'none'` — no substitute figure. |
+| **027** | P1. Same; `chem.state.phase-diagram` returns `source:'none'`, so the factually-wrong calculus plot is unreachable. Authoring a real phase-diagram figure remains separate content work. |
+| **040** | P1. **Causality was backwards.** The binding is static: the statistics generator's hardcoded "Frequency Distribution"/"is the mode"/"31.8 observations" chrome taught the misconception, and the tutor read it. Fixed on the generator — a second concept had it too. |
+| **041** | P2. Root cause is an ABSENCE: no curated binding, so every turn generated independently. Authored one from Shannon radii; verified deterministic and serving at `source:'registry'`. |
+| **042** | P1. Closure AUTHORITY was never wrong — the gate refused correctly. Fixed the learner-facing half STRUCTURALLY (the closing FORMAT, which `client.ts` authorises only at `[LESSON_COMPLETE]`) rather than by adding another phrasing to a regex that has already missed four times. |
+
+**PCD-003** and **PCD-043** stay OPEN and are unchanged in substance: the database
+reliability itself is not fixable from this repository. What changed is that a recurrence
+is now self-classifying (`db_unavailable` / `db_timeout` / `unknown`) instead of an opaque
+500, and the outage behaviour was checked against this task's invariants and found honest
+— nothing fabricated, nothing auto-retried into duplicate state.
 
 ## Diagram Quality — Full Chemistry Curriculum (186/186)
 
