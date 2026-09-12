@@ -3467,6 +3467,29 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   decision (into math.calc, math.seq, or math.linalg), or selecting a different unstarted domain
   entirely. This is a genuinely multi-session campaign; continuation should verify state via
   `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
+- **Batch 24 — opening `math.graph`** (2026-09-12): with math.disc at 0 topologically-ready
+  candidates, computed the frontier across ALL mathematics domains — `math.graph` had 7 ready
+  (each gated only on its already-authored `math.disc` sibling, since `math.disc`'s own
+  graph-theory entries had repeatedly named `math.graph` counterparts as Blueprint-exists-no-EB
+  cross-links across Batches 20-22). Selected `math.graph` over `math.func`'s 13 ready candidates
+  since it closes existing cross-link debt with zero new prerequisite cost. Authored 3 concepts:
+  `graph` (order/size notation, weighted/multigraph extensions — deliberately does NOT re-teach
+  `math.disc.graph`'s foundational content), `tree` (six equivalent tree characterizations,
+  Cayley's formula via Prüfer sequences), `minimum-spanning-tree` (cut/cycle properties
+  unifying Kruskal's/Prim's correctness, MST-vs-shortest-path-tree distinction). `math.graph`
+  0/16 → **3/16**. `math.disc`/`math.func` unchanged (20/32, 1/29, both parked). Mathematics
+  **325/908 → 328/908**, 807 remaining. Genuine Blueprint-staleness finding corrected (not fixed
+  in the Blueprint itself, per standing rule): `minimum-spanning-tree`'s Blueprint declared
+  `math.disc.spanning-tree` MISSING/independence-mode, stale since that concept was authored in
+  Batch 23 of this same campaign — this entry's own Transfer Connections substantively
+  incorporate it instead. Full per-concept detail in `COVERAGE.md` Batch 24. Validated: KG
+  validator PASS (908/908 reachable, file untouched), 0 orphan/duplicate EB files, `tsc --noEmit`
+  clean, targeted tests 479/479 passed, all 3 heading structures diffed clean on the first pass
+  (0 diffs each). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched.
+  Fresh math.graph frontier computed: 4 candidates ready (`connectivity`, `eulerian-circuit`,
+  `hamiltonian-cycle`, `graph-coloring`). This is a genuinely multi-session campaign;
+  continuation should verify state via `scripts/math/state.ts` fresh each time rather than
+  trusting any number recorded here.
 
 ## Run locally
 ```

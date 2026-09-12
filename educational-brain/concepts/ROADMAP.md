@@ -13,9 +13,9 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **325** mathematics + 238 physics + 216 english + 186 chemistry + 0 biology + 0 computer_science = **965** |
-| Remaining | **810** |
-| Completion percentage | **54.37%** |
+| Concepts with an Educational Brain entry | **328** mathematics + 238 physics + 216 english + 186 chemistry + 0 biology + 0 computer_science = **968** |
+| Remaining | **807** |
+| Completion percentage | **54.54%** |
 
 *(Recomputed programmatically 2026-09-11 against the live KG files and the
 live `educational-brain/concepts/` tree, mid-way through a dedicated
@@ -36,12 +36,13 @@ excursion threads), Batch 18 (the final 3 math.alg concepts —
 Batch 20 (3 more `math.disc` concepts, opening the graph-theory and
 propositional-logic subtrees), Batch 21 (5 more `math.disc` concepts,
 deepening both subtrees), Batch 22 (3 more `math.disc` concepts:
-`euler-hamiltonian`, `graph-trees`, `planar-graph`), and Batch 23
+`euler-hamiltonian`, `graph-trees`, `planar-graph`), Batch 23
 (1 more `math.disc` concept: `spanning-tree`, closing the
-`graph-trees → spanning-tree` chain) together brought mathematics from
-257 to 325. Cross-checked: 0 orphan EB files, 0 duplicate EB files, 0 EB
-filenames that do not resolve to a live KG concept id, across all six
-subjects.)*
+`graph-trees → spanning-tree` chain), and Batch 24 (3 `math.graph`
+concepts — `graph`, `tree`, `minimum-spanning-tree`, opening a new
+domain) together brought mathematics from 257 to 328. Cross-checked: 0
+orphan EB files, 0 duplicate EB files, 0 EB filenames that do not
+resolve to a live KG concept id, across all six subjects.)*
 
 ---
 
@@ -49,7 +50,7 @@ subjects.)*
 
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
-| mathematics | 908 | 325 | 35.79% | `math.found.mathematical-thinking` | **Yes** |
+| mathematics | 908 | 328 | 36.12% | `math.found.mathematical-thinking` | **Yes** |
 
 **Mathematics per-domain state (recomputed 2026-09-11, programmatic):**
 
@@ -76,27 +77,33 @@ subjects.)*
 | `math.fnal` | 0/18 | not started |
 | `math.num` | 0/16 | not started |
 | `math.opt` | 0/16 | not started |
-| `math.graph` | 0/16 | not started |
+| `math.graph` | 3/16 | **IN PROGRESS** (opened 2026-09-12) — Batch 24 (3, `graph`/`tree`/`minimum-spanning-tree`, 2026-09-12), a genuinely deeper-formalism domain paralleling several already-authored `math.disc` graph-theory entries (Menger's theorem, Prüfer sequences, Kruskal's/Prim's algorithms), each already cross-linked to as "Blueprint exists, no EB yet" from those entries. 4 topologically-ready candidates remain (`connectivity`, `eulerian-circuit`, `hamiltonian-cycle`, `graph-coloring`), each requiring only its already-authored `math.disc` sibling. |
 | `math.cat` | 0/15 | not started |
 | `math.meas` | 0/13 | not started |
 
-**Five domains certified** (math.found, math.geom, math.alg, math.arith, math.nt), math.disc and
-math.func in progress, 325 of 908. The five certified domains are the graph's foundation layer;
-every remaining domain draws on at least one of them, so the prerequisite debt for the remaining
-583 concepts is now substantially lower than the raw count suggests. math.disc and math.func were
-originally opened as small, deliberately bounded cross-domain excursions out of math.alg (per the
-established `math.nt.divisibility`/`math.geom` precedent); with math.alg CERTIFIED, this program
-elected to continue math.disc as a full standalone domain campaign (Batches 19-23) rather than
-opening a fresh domain, since it was already furthest along. math.disc is now 20/32 — the
-graph-theory subtree's `graph-trees → spanning-tree` chain is now fully closed (`graph`,
-`graph-coloring`, `graph-connectivity`, `graph-types`, `euler-hamiltonian`, `graph-trees`,
-`planar-graph`, `spanning-tree`) — with 0 topologically-ready candidates remaining; the domain's
-other 12 unauthored concepts (algorithm complexity/asymptotic notation, generating functions and
-their variants, recurrence relations, Catalan/Stirling numbers) all require prerequisites outside
-math.disc entirely (`math.calc.limits`, `math.seq.sequence`, `math.seq.series`,
-`math.linalg.matrix`, none yet authored) and form largely separate subtrees not yet opened, so the
-next step is a genuine cross-domain excursion decision. math.func remains parked at 1/29, its own
-math.alg-serving purpose likewise fully served.
+**Five domains certified** (math.found, math.geom, math.alg, math.arith, math.nt), math.disc,
+math.func, and math.graph in progress, 328 of 908. The five certified domains are the graph's
+foundation layer; every remaining domain draws on at least one of them, so the prerequisite debt
+for the remaining 580 concepts is now substantially lower than the raw count suggests. math.disc
+and math.func were originally opened as small, deliberately bounded cross-domain excursions out of
+math.alg (per the established `math.nt.divisibility`/`math.geom` precedent); with math.alg
+CERTIFIED, this program elected to continue math.disc as a full standalone domain campaign
+(Batches 19-23) rather than opening a fresh domain, since it was already furthest along. math.disc
+is at 20/32 — the graph-theory subtree's `graph-trees → spanning-tree` chain is fully closed
+(`graph`, `graph-coloring`, `graph-connectivity`, `graph-types`, `euler-hamiltonian`,
+`graph-trees`, `planar-graph`, `spanning-tree`) — with 0 topologically-ready `math.disc` candidates
+remaining; the domain's other 12 unauthored concepts (algorithm complexity/asymptotic notation,
+generating functions and their variants, recurrence relations, Catalan/Stirling numbers) all
+require prerequisites outside math.disc entirely (`math.calc.limits`, `math.seq.sequence`,
+`math.seq.series`, `math.linalg.matrix`, none yet authored) and form largely separate subtrees not
+yet opened. Rather than open one of THOSE, Batch 24 opened `math.graph` instead — every one of
+`math.disc`'s own graph-theory entries (`graph`, `graph-connectivity`, `graph-trees`,
+`euler-hamiltonian`, `graph-coloring`) had already named a `math.graph` sibling as a genuine
+Blueprint-exists-no-EB-yet cross-link, so `math.graph` was immediately ready with strong Blueprint
+grounding and zero new prerequisite debt. math.graph is now 3/16 (`graph`, `tree`,
+`minimum-spanning-tree`), with 4 further concepts (`connectivity`, `eulerian-circuit`,
+`hamiltonian-cycle`, `graph-coloring`) already topologically ready. math.func remains parked at
+1/29, its own math.alg-serving purpose fully served.
 
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
 | english | 216 | 216 | **100.00% COMPLETE (2026-08-11)** | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) — every English KG concept now has a full Educational Brain entry |
