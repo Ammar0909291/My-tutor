@@ -3490,6 +3490,24 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   `hamiltonian-cycle`, `graph-coloring`). This is a genuinely multi-session campaign;
   continuation should verify state via `scripts/math/state.ts` fresh each time rather than
   trusting any number recorded here.
+- **Batch 25 — closing math.graph's post-Batch-24 frontier** (2026-09-12): re-computed the
+  frontier fresh — the exact 4 concepts deferred from Batch 24 were confirmed still ready:
+  `connectivity`, `eulerian-circuit`, `hamiltonian-cycle`, `graph-coloring`, all authored, all
+  Blueprint-grounded. `hamiltonian-cycle` develops Dirac's theorem in full depth (deferred by
+  `eulerian-circuit`'s own introductory-breadth treatment of the same theorem, resolved by
+  division of labor, cross-referenced both ways). A second genuine Blueprint-staleness finding
+  (same class as Batch 24's): `graph-coloring`'s own Blueprint declares its
+  `math.disc.graph-coloring` cross-link "MISSING on disk" — verified via directory listing that
+  both the Blueprint and the EB entry genuinely exist; corrected in this entry's own Curriculum
+  Feedback, Blueprint left unmodified. `math.graph` **3/16 → 7/16**. Mathematics
+  **328/908 → 332/908**, 803 remaining. Full per-concept detail in `COVERAGE.md` Batch 25.
+  Validated: KG validator PASS (908/908 reachable, file untouched), 0 orphan/duplicate EB files,
+  `tsc --noEmit` clean, targeted tests 479/479 passed, all 4 heading structures diffed clean on
+  the first pass (0 diffs each). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime
+  file touched. Fresh math.graph frontier computed: 6 candidates ready (`graph-invariants`,
+  `graph-operations`, `maximum-flow`, `matching`, `ramsey-theory`, `extremal-graph-theory`). This
+  is a genuinely multi-session campaign; continuation should verify state via
+  `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
 
 ## Run locally
 ```
