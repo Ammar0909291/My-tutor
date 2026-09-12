@@ -3910,6 +3910,42 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   `u-substitution` — the last newly unblocked by `ftc-part2`). This is a genuinely
   multi-session campaign; continuation should verify state via `scripts/math/state.ts`
   fresh each time rather than trusting any number recorded here.
+- **Batch 43 — math.calc: derivatives of exponentials/logarithms, implicit differentiation,
+  u-substitution** (2026-09-12): re-fetched `main` (0 divergence, clean). Re-computed the
+  frontier fresh — the exact 11 candidates predicted at the end of Batch 42 were confirmed
+  still ready. Selected all 4 direct children of Batch 42's `chain-rule`/`ftc-part2`:
+  `derivative-exponential` (`chain-rule`+`math.func.exponential-function`), `derivative-ln`
+  (`chain-rule`+`math.func.logarithmic-function`), `implicit-differentiation` (`chain-rule`
+  only), `u-substitution` (`ftc-part2`+`chain-rule`), deferring `improper-integrals`/
+  `lhopitals-rule`/`line-integrals`/`mean-value-theorem`/`multivariable-intro`/
+  `parametric-calculus`/`surface-area-integral`. All 4 Blueprint-grounded, none carrying an
+  explicit birth-type column — every misconception independently classified
+  (`derivative-exponential` MC-1 Type 1 overgeneralizing $e^x$'s special-case simplicity to
+  every base/MC-2 Type 1 a direct transplant of `chain-rule`'s own foundational MC-1;
+  `derivative-ln` MC-1/MC-2 the IDENTICAL mechanisms as `derivative-exponential`'s own,
+  mirrored across the inverse function — a third recurrence of the inner-derivative-missing
+  pattern across this concept family; `implicit-differentiation` MC-1 Type 1 — the
+  Blueprint's own prose explicitly names this a direct transplant of `chain-rule`'s
+  inner-derivative-missing misconception, a fourth documented recurrence this campaign —
+  MC-2/MC-3 both Type 5 instruction-induced; `u-substitution` MC-1 Type 1 overgeneralizing
+  the substitution pattern past its validity condition, the same scope-overextension shape
+  as `volume-revolution`'s own MC-1/MC-2 Type 4 notation-induced bound-conversion
+  omission/MC-3 Type 1 the identical mechanism as `derivative-rules`' own MC-2
+  COEFFICIENT-MULTIPLICATION-OMITTED). **All 4 concepts zero-discrepancy**, restarting the
+  streak after Batch 42's `arc-length` broke the prior five-consecutive-zero run. `math.calc`
+  **32/76** (28→32). Mathematics **398/908** (394→398), 737 remaining. Full per-concept
+  detail in `COVERAGE.md` Batch 43. Validated: KG validator PASS (908/908 reachable, file
+  untouched), `scripts/math/state.ts` confirms math.calc 32/76 and mathematics 398/908 (6
+  EB-certified domains unchanged), `tsc --noEmit` clean, targeted tests 479/479 passed, all
+  4 heading structures diffed clean on the first pass (0 diffs each). No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Fresh math.calc
+  frontier computed: 10 candidates ready (`improper-integrals`, `integration-by-parts` —
+  newly unblocked by `u-substitution` — `lhopitals-rule`, `line-integrals`,
+  `logarithmic-differentiation` — newly unblocked by `derivative-ln` — `mean-value-theorem`,
+  `multivariable-intro`, `parametric-calculus`, `related-rates` — newly unblocked by
+  `implicit-differentiation` — `surface-area-integral`). This is a genuinely multi-session
+  campaign; continuation should verify state via `scripts/math/state.ts` fresh each time
+  rather than trusting any number recorded here.
 
 ## Physics Teacher Migration Architecture V2 — AUDITED, NOT ADOPTED (2026-09-12)
 
