@@ -4236,6 +4236,32 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   `convergent`, `series`). This is a genuinely multi-session campaign; continuation
   should verify state via `scripts/math/state.ts` fresh each time rather than trusting
   any number recorded here.
+- **Batch 53 — math.calc: sequence limits; math.trig: unit circle + degree-radian
+  conversion** (2026-09-12): re-computed the frontier fresh — `math.calc` had 1
+  candidate (`sequence-limits`), `math.trig` 5, `math.seq` 5, all matching Batch 52's
+  predictions exactly. Authored 3: `math.calc.sequence-limits` (closes math.calc's
+  immediate unblock; resolved a Blueprint-staleness-adjacent P76_mode finding — the
+  Blueprint's stated "cross-link probe" mode for `math.seq.convergent` rests on a
+  Blueprint-file-existence check, not an EB-entry-existence check, and that concept has
+  no EB entry yet, so this entry uses independence mode instead, per the Batch 48
+  `math.opt.*` precedent; zero KG/Blueprint discrepancy otherwise), `math.trig.unit-circle`
+  (highest-leverage math.trig concept — unlocks `trig-functions`, the eventual unblock
+  for `math.calc.derivative-trig`; zero discrepancy), `math.trig.degree-radian-conversion`
+  (single-prereq companion; one genuine `unlocks`-field discrepancy, Blueprint names 3
+  forward consumers the KG doesn't list, resolved toward the KG). `math.calc` 62/76 →
+  63/76. `math.trig` 2/25 → 4/25. `math.seq` unchanged 1/21. Mathematics 431/908 →
+  434/908. Full per-concept detail in `COVERAGE.md` Batch 53. Validated: KG validator
+  PASS (908/908 reachable, file untouched), `scripts/math/state.ts` confirms math.calc
+  63/76, math.trig 4/25, math.seq 1/21, mathematics 434/908 (6 EB-certified domains
+  unchanged), `tsc --noEmit` clean, targeted tests 479/479 passed, all 3 heading
+  structures diffed clean on the first pass (0 diffs each). No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Fresh
+  frontier: `math.calc` 0 candidates (remaining 13 need `trig-functions` or the
+  series/convergence family); `math.trig` 5 candidates (`basic-ratios`, `law-of-sines`,
+  `law-of-cosines` via `right-triangle-trig`; `reference-angles`, `trig-functions` via
+  `unit-circle`); `math.seq` unchanged 5 candidates. This is a genuinely multi-session
+  campaign; continuation should verify state via `scripts/math/state.ts` fresh each
+  time rather than trusting any number recorded here.
 
 ## Physics Teacher Migration Architecture V2 — AUDITED, NOT ADOPTED (2026-09-12)
 
