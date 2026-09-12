@@ -944,11 +944,6 @@ export function resolveMcqChoice(message: string, mcq: TutorMCQ): number | null 
   const tokens = n.split(' ')
   const limit = Math.min(mcq.options.length, OPTION_KEYS.length)
 
-  // An explicit "I have not chosen" outranks every rule below, including the
-  // punctuated label. See NON_COMMITTAL for why refusing does not stall the
-  // ladder.
-  if (NON_COMMITTAL.test(message)) return null
-
   // 0. EXACT MATCH — RUNS FIRST, AND THE ORDER IS THE POINT.
   //
   //    Tapping an option sends that option's text verbatim (LessonScreen
@@ -994,6 +989,58 @@ export function resolveMcqChoice(message: string, mcq: TutorMCQ): number | null 
   // discarded — a sign, a subscript, a radical. Ask the verbatim question
   // before giving up; if they are identical there too, refuse exactly as before.
   if (exact.length > 1) return verbatimOption()
+
+  // 0b. LABEL-PREFIXED VERBATIM MATCH.
+  //
+  // A learner who TYPES a letter label in front of a copy-pasted option
+  // ("A) <exact option text>") is making the identical unambiguous
+  // statement a plain tap makes — rule 0 above only catches the bare tap
+  // because it compares the WHOLE message, and a leading "A) " adds a
+  // token that defeats norm() equality. Reproduced live (English audit,
+  // eng.vocab.context-clues #30 T7): a learner typed "A) <the correct
+  // option's full text, verbatim>" and was told "I couldn't tell which
+  // option your answer matched" even though the message contains nothing
+  // but that option's own words.
+  //
+  // Scoped narrowly so it cannot be confused with rule 0a's "labelled
+  // letter, anywhere in the sentence" reasoning-fragment case below: the
+  // label must be a standalone token at the very START of the message,
+  // immediately followed by one of the punctuation delimiters (never a
+  // bare letter-then-space, which would strip the first letter off an
+  // ordinary sentence like "According to the passage..." or "Do you..."),
+  // and what remains after stripping it must be an EXACT match to exactly
+  // one option — a short reasoned guess like "A, because it's bigger"
+  // still falls through unchanged, because "because it's bigger" is not
+  // itself any option's full text.
+  {
+    const labelStripped = message.replace(/^\s*[([]?[A-Da-d][.)\],:;-]\s*/, '')
+    if (labelStripped !== message && labelStripped.trim()) {
+      const strippedNorm = norm(labelStripped)
+      if (strippedNorm) {
+        const labelExact = mcq.options
+          .map((o, i) => ({ i, hit: norm(o) === strippedNorm }))
+          .filter((x) => x.hit)
+        if (labelExact.length === 1) return labelExact[0].i
+      }
+    }
+  }
+
+  // An explicit "I have not chosen" outranks every rule below EXCEPT the
+  // two exact-match forms above (0 and 0b): a hedge word that happens to
+  // occur as CONTENT WITHIN an option's own text (e.g. an authored option
+  // discussing "being unsure") must never defeat an otherwise-unambiguous
+  // verbatim match.
+  //
+  // MEASURED: before this reorder, NON_COMMITTAL ran BEFORE rule 0 ever
+  // got a chance to see the message — directly contradicting rule 0's own
+  // "runs first" invariant above. A bare TAP of an option whose own text
+  // contains "unsure" (e.g. an English vocabulary/context-clue probe
+  // discussing hedging language) was silently refused: `resolveMcqChoice`
+  // returned null for the single most unambiguous signal the UI can send.
+  // Genuine hedges ("not sure, maybe A") do not exact-match any option, so
+  // they still fall through to this check unaffected. See NON_COMMITTAL
+  // for why refusing does not stall the ladder.
+  if (NON_COMMITTAL.test(message)) return null
 
   // 0a. A LABELLED LETTER, ANYWHERE IN THE SENTENCE.
   //

@@ -6512,13 +6512,32 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // Placed after the other repairs so it decorates the text that actually
       // ships, and before the verifier so the verifier sees the final reply.
       try {
-        const { confirmCorrectAnswer } = await import('@/lib/teaching/answerConfirmation')
+        const { confirmCorrectAnswer, CONFIRMS_CORRECT } = await import('@/lib/teaching/answerConfirmation')
         const confirmed = confirmCorrectAnswer({
           text: cleanText,
           correct: mcqGradeHoisted?.correct ?? null,
           priorConfirmations: priorConfirmationsHoisted,
         })
         cleanText = confirmed.text
+        // PCD-029 — telemetry only, no behavior change. The 65% figure this
+        // criterion was last measured at (2026-08-30) became stale the moment
+        // `mcqForClient` stopped sending `correctIndex` to the client (the
+        // transcript scorer's OWN denominator broke), and a clean live
+        // re-measurement was never completed. This is the enforcer's own
+        // denominator, read directly rather than reconstructed from a
+        // replayed transcript: fires only on the precondition
+        // `confirmCorrectAnswer` itself gates on (`correct === true`).
+        // `confirmed` is true when either the model already said so or the
+        // enforcer had to add it — the completion-turn override (route.ts's
+        // `buildLessonCloseText` replacement, later in the pipeline) is a
+        // separate, already-understood confound and is deliberately not
+        // represented here.
+        if (mcqGradeHoisted?.correct === true) {
+          console.log('[c5] ' + JSON.stringify({
+            event: 'servedGradedCorrect',
+            confirmed: confirmed.added || CONFIRMS_CORRECT.test(confirmed.text),
+          }))
+        }
       } catch { /* non-fatal — the teaching is still better than no answer */ }
 
       // A CEILING ON "I DON'T KNOW". Owner-reported from a live second-law
