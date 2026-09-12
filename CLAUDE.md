@@ -3618,6 +3618,25 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   `logarithmic-function`, `piecewise-function`). This is a genuinely multi-session campaign;
   continuation should verify state via `scripts/math/state.ts` fresh each time rather than
   trusting any number recorded here.
+- **Batch 32 — math.func: quadratics, exponentials, logarithms, piecewise functions**
+  (2026-09-12): re-computed the frontier fresh — the exact 4 concepts deferred from Batch 31
+  were confirmed still ready; authored all 4 (`quadratic-function`, `exponential-function`,
+  `logarithmic-function`, `piecewise-function`), closing the ENTIRE frontier available at batch
+  start with none deferred. All Blueprint-grounded, reused by reference, birth types adopted
+  directly from each Blueprint's own classification. `math.func` **21/29** (17→21) — only 8
+  concepts remain before the domain reaches DOMAIN CERTIFICATION (would be the sixth, after
+  math.found/math.geom/math.arith/math.nt/math.alg). Mathematics **358/908** (354→358), 777
+  remaining. No genuine content-overlap or Blueprint/KG metadata discrepancy found; one genuine
+  cross-concept dependency closed (`logarithmic-function`'s forward reference to
+  `exponential-function`'s self-derivative property). Full per-concept detail in `COVERAGE.md`
+  Batch 32. Validated: KG validator PASS (908/908 reachable, file untouched), 0 orphan/duplicate
+  EB files, `tsc --noEmit` clean, targeted tests 479/479 passed, all 4 heading structures diffed
+  clean on the first pass (0 diffs each). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/
+  runtime file touched. Fresh math.func frontier computed: 3 candidates ready (`vertex-form`,
+  `polynomial-function` newly unblocked by `quadratic-function`; `step-function` newly unblocked
+  by `piecewise-function`). This is a genuinely multi-session campaign; continuation should
+  verify state via `scripts/math/state.ts` fresh each time rather than trusting any number
+  recorded here.
 
 ## Run locally
 ```
