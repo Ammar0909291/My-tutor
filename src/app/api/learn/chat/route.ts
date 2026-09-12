@@ -6410,6 +6410,28 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         }
       } catch { /* non-fatal — a repair must never break a turn */ }
 
+      // A TRUNCATED, NEVER-ANSWERABLE LETTERED OPTION MUST NOT REACH THE
+      // LEARNER. Real-student report, Chemistry Lesson 2 (States of Matter):
+      // a correct-answer confirmation was immediately followed by a single,
+      // un-continued "A) <option text>" fragment — the model free-associating
+      // a new, unauthorized multiple-choice item that never continued past
+      // its first option. `hasProseMultipleChoice`'s existing policy
+      // deliberately leaves a COMPLETE 2-4-option prose MCQ visible (see
+      // proseMcqGuard.ts's header); a single dangling option is never a real
+      // question and is stripped outright. See stripDanglingLeadingOption's
+      // own doc comment for the full root-cause trace.
+      try {
+        const { stripDanglingLeadingOption } = await import('@/lib/teaching/proseMcqGuard')
+        const stripped = stripDanglingLeadingOption(cleanText)
+        if (stripped !== cleanText) {
+          console.warn('[learn/chat] ' + JSON.stringify({
+            event: 'dangling-mcq-option-stripped',
+            conceptId: decisionConceptIdHoisted,
+          }))
+          cleanText = stripped
+        }
+      } catch { /* non-fatal — a repair must never break a turn */ }
+
       // A TEACHING TURN CANNOT TEACH THE EMISSION THEORY OF VISION.
       //
       // Sibling of the field-line repair above, ported to this route for the
