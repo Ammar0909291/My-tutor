@@ -4148,6 +4148,31 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   `curl-divergence`). This is a genuinely multi-session campaign; continuation should verify
   state via `scripts/math/state.ts` fresh each time rather than trusting any number recorded
   here.
+- **Batch 50 — math.calc: double integrals in polar coordinates, curl and divergence**
+  (2026-09-12): fetch clean (0/0), state.ts confirmed 55/76 matching Batch 49's end state.
+  Re-computed the frontier fresh — the exact 2 candidates predicted at the end of Batch 49
+  were confirmed still ready (`double-integrals`, `curl-divergence`), closing the ENTIRE
+  frontier available at batch start with none deferred. Both Blueprint-grounded, neither
+  carrying an explicit birth-type column — every misconception independently classified
+  (`double-integrals` MC-1 Type 1 overgeneralizing the Cartesian dA=dx dy pattern to polar,
+  where the extra factor of r is genuinely required/MC-2 Type 5 instruction-induced,
+  mechanical bound-translation habit transferred from other substitution tasks/MC-3 Type 1,
+  a newly acquired tool overgeneralized past its justifying symmetry; `curl-divergence` MC-1
+  Type 4 notation-induced, the shared ∇ symbol family visually suggesting a computational
+  detail rather than a scalar-vs-vector type difference/MC-2 Type 1 overgeneralizing shared
+  origin into correlation/MC-3 Type 1, the identical necessary-not-sufficient mechanism
+  already documented for critical-points' own MC-1 and concavity's own MC-1). **All 2
+  concepts zero-discrepancy**, the EIGHTH consecutive zero-discrepancy batch. `math.calc`
+  **57/76** (55→57). Mathematics **423/908** (421→423), 712 remaining. Full per-concept
+  detail in `COVERAGE.md` Batch 50. Validated: KG validator PASS (908/908 reachable, file
+  untouched), `scripts/math/state.ts` confirms math.calc 57/76 and mathematics 423/908 (6
+  EB-certified domains unchanged), `tsc --noEmit` clean, targeted tests 479/479 passed, both
+  heading structures diffed clean on the first pass (0 diffs each). No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Fresh math.calc
+  frontier computed: 3 candidates ready (`triple-integrals`, `surface-integrals`,
+  `greens-theorem`). 19 concepts remain. This is a genuinely multi-session campaign;
+  continuation should verify state via `scripts/math/state.ts` fresh each time rather than
+  trusting any number recorded here.
 
 ## Physics Teacher Migration Architecture V2 — AUDITED, NOT ADOPTED (2026-09-12)
 
