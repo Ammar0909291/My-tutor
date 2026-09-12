@@ -76,8 +76,9 @@ authoritative record for that range.
   - `eng.phonics.blending-segmenting` (`phase1-english.log`, T8): *"Segmenting would be
     starting with the word "stop," then pulling out each sound in order: first, then,
     then, then, until no sound re[...]"* — broken triple-comma enumeration.
-- **Root cause:** UNCONFIRMED. Strong correlation with content that requires
-  reproducing IPA/phonetic symbols specifically (every instance is in a
+- **Root cause:** CONFIRMED 2026-09-12 (third pass, see below) — GENERATION. The
+  original note, kept for history: UNCONFIRMED, strong correlation with content that
+  requires reproducing IPA/phonetic symbols specifically (every instance is in a
   phonics/phonetics concept; zero instances in grammar/vocabulary/reading concepts).
   Consistent in shape with a symbol being generated then stripped or lost before
   render — plausibly a markdown-sanitization or special-character-handling step
@@ -95,6 +96,35 @@ authoritative record for that range.
   instances (a learner cannot select the "right" option because all four read
   identically), and breaks the core deliverable of a phonics lesson (the sounds
   themselves).
+- **2026-09-12 (third pass) — ROOT CAUSE PROVEN FROM RAW STORED OUTPUT. It is
+  GENERATION, and the render/sanitisation hypothesis is now DEAD, not merely
+  deprioritised.** The technique that settled ENG-D04's residual was applied here:
+  read the stored assistant messages rather than the audit log.
+  **Negative — the defect turns.** `eng.phonics.long-vowels-silent-e` is stored
+  verbatim as `…it tells the A to say its long sound,, so "cape" sounds like
+  instead of.` The values are absent from the PERSISTED text, double comma and all,
+  so nothing between the database and the learner can be responsible.
+  `eng.phonetics.accents-and-dialects` is stored as `people say the word **"aunt"**
+  like ****, and then a few streets over in the South, people say it like ****.` —
+  **the `****` is an EMPTY BOLD SPAN in the stored text**: the model wrote the
+  emphasis markers around nothing. That is the model's own scaffolding for a value
+  it never produced, not a character a stripper removed.
+  **Positive control — the same characters, same subject, same days, INTACT.** Of
+  26,776 stored assistant messages, **46 carry extended-IPA codepoints and 24 carry
+  them slash-delimited**, e.g. `The letter "a" can make a long /eɪ/ sound (as in
+  *cake*) or a short /æ/…` — the exact contrast the silent-e turn was missing — and,
+  in `eng.phonetics.ipa-basics` itself 40 minutes after that lesson's own defect
+  turn, `A) No — /ʃ/ is one single symbol for one single sound (the "sh" sound)`.
+  A stripper is deterministic; these are the same symbols, in the same concepts, on
+  the same days, present in some turns and absent in others.
+  **Therefore: the model intermittently emits the sentence frame and the markup
+  around a phonetic value it never generates.** No stripper, sanitiser or render
+  stage is implicated, and no post-model repair can close it — a missing phoneme
+  cannot be reconstructed, and deleting the sentence would delete the teaching. The
+  empty-emphasis debris (`****`) is separately and safely strippable, but was NOT
+  patched: it is one instance, and removing it still leaves "say the word 'aunt'
+  like , and … like ." — debris removal does not make the turn teach.
+  Status upgraded from UNCONFIRMED to CONFIRMED; category confirmed prompt.
 - **2026-09-12 (second pass) — NO NEW EVIDENCE; deliberately not re-opened.** The
   first pass had already ruled out the render/strip pipeline by inspection, which
   leaves generation — and a generation defect cannot be closed by a stripper, a
@@ -104,9 +134,10 @@ authoritative record for that range.
   work here; it was not run, because the tag residual was a yes/no question about one
   string and this is a survey across 30+ turns in 14 concepts, which is its own task.
   Recorded as the concrete next step rather than left as "needs a trace".
-- **Fix priority:** High — OPEN.
-- **Fix category:** prompt (generation) — the render/sanitisation half is ruled out,
-  not merely unprioritised.
+- **Fix priority:** High — OPEN, root cause now PROVEN.
+- **Fix category:** prompt (generation), CONFIRMED by positive control — the
+  render/sanitisation half is disproven, not merely ruled out by inspection. No
+  runtime repair is possible: the missing value cannot be reconstructed.
 
 ---
 
