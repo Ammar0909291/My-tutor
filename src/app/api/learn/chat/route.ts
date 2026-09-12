@@ -6571,6 +6571,38 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         }
       } catch { /* non-fatal — the teaching is still better than no answer */ }
 
+      // ENG-D11 — THE OTHER VERDICT. `confirmCorrectAnswer` immediately above
+      // guarantees a confirmation on a server-graded-CORRECT answer; nothing
+      // guaranteed anything on a server-graded-WRONG one, and it returns the
+      // reply untouched for `correct !== true`. Five confirmed production
+      // instances of a learner answering wrong and being handed the next
+      // question, a restatement of their own choice as a query, or (twice, on
+      // the degraded-provider path) generic filler — never the verdict, never
+      // the answer.
+      //
+      // Same authority as its sibling and no more: it fires only on
+      // `mcqGradeHoisted.correct === false` (gradeMcqAnswer against an authored,
+      // human-reviewed key) and states `options[correctIndex]` off that same
+      // probe. Both halves are server ground truth; it cannot invent either.
+      // `pendingMcqHoisted` is the probe that was actually graded (assigned once,
+      // never reassigned), so the key it reads is the key the grade used.
+      //
+      // Placed here so it decorates the text that ships, including the degraded
+      // template (set far earlier, ~5551) — which is precisely where two of the
+      // five instances were observed. See wrongAnswerCorrection.ts.
+      try {
+        const { stateCorrectionForWrongAnswer } = await import('@/lib/teaching/wrongAnswerCorrection')
+        const corrected = stateCorrectionForWrongAnswer({
+          text: cleanText,
+          correct: mcqGradeHoisted?.correct ?? null,
+          probe: pendingMcqHoisted,
+        })
+        if (corrected.added) {
+          console.log('[eng-d11] ' + JSON.stringify({ event: 'wrongAnswerCorrected', reason: corrected.reason }))
+        }
+        cleanText = corrected.text
+      } catch { /* non-fatal — the teaching is still better than no answer */ }
+
       // A CEILING ON "I DON'T KNOW". Owner-reported from a live second-law
       // lesson: four don't-knows in a row, and the tutor asked a question after
       // three of them. Every piece of the intended behaviour already existed and
