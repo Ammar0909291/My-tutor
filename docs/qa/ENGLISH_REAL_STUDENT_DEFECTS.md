@@ -8,8 +8,12 @@ weak/intermediate-learner persona, across three separate simulation efforts:
 1. **Task B** — `scripts/.../weakLearnerSim.ts`, Phase 1 (English), orders 1–10,
    ~106 turns (`phase1-english.log`).
 2. **Task C** — the concept-by-concept English curriculum audit,
-   `scripts/.../englishAudit.ts`, orders 11–105+ across 9 batches
-   (`audit-batch1.log` … `audit-batch9.log`), ~900+ turns.
+   `scripts/.../englishAudit.ts`, orders 11–216 (the full remainder of the English
+   KG) across 19 batches (`audit-batch1.log` … `audit-batch19.log`), ~1650+ turns.
+   This audit is now COMPLETE — every English concept (216 total) has been driven
+   through the real-student simulation, either directly by this campaign or by the
+   `ALREADY_TOUCHED` skip set covering concepts already validated by the separate
+   ADULT-band campaign cited in item 3 below.
 3. **Pre-existing documented findings** — three standalone investigation docs already
    in this repo, produced by earlier English-focused campaigns:
    `docs/architecture/ENGLISH_MCQ_REOFFER_FALSE_POSITIVE_FINDING.md`,
@@ -181,7 +185,8 @@ authoritative record for that range.
 
 - **Concept/lesson:** `eng.phonetics.minimal-pairs` (order 20, T1),
   `eng.phonetics.syllable-stress` (order 21, T1), `eng.phonetics.phonetic-transcription`
-  (order 27, T1), `eng.grammar.word-order` (order 60, T5).
+  (order 27, T1), `eng.grammar.word-order` (order 60, T5),
+  `eng.writing.supporting-details` (order 113, T9 — **new, Checkpoint 8**).
 - **Evidence:**
   - Three near-identical leaks of what reads as an internal pedagogy-authoring
     decision: *"A brief, argued discovery step suits the precise definition itself;
@@ -200,13 +205,22 @@ authoritative record for that range.
     interleaving="blocked"-->` (`eng.grammar.word-order`, order 60, T5) — this is
     almost certainly an internal pacing/teaching-control micro-directive format that
     should never reach a chat response.
+  - **SECOND confirmed occurrence of the same tag family** (`eng.writing.
+    supporting-details`, order 113, T9): the tutor's teaching text ends mid-thought
+    with `"🎉 \n[!--ATTEMPT channel="verbal" representation="concrete-objec[...
+    truncated by the log capture]"`. Different subject domain entirely (writing, not
+    grammar/phonetics) — this rules out a concept-specific trigger and confirms the
+    leak is a systematic gap in the teaching engine's tag-stripping, not an artifact
+    of one concept's content.
 - **Root cause:** UNCONFIRMED for the exact mechanism, but strongly suggestive: the
   "argued discovery step" phrasing matches this project's own Educational Brain
   concept-entry authoring field name, implying that field's text is being echoed by
   the model into learner-facing output instead of being consumed only as an internal
   instruction. The `<--ATTEMPT ...-->` tag is an unrendered internal directive of a
   kind (channel/representation/concreteness/scaffold/pacing parameters) not
-  documented as learner-facing anywhere in this repo.
+  documented as learner-facing anywhere in this repo. Its recurrence across two
+  unrelated subject domains (grammar and writing) indicates the stripping gap was in
+  a shared code path, not concept-specific prompt content.
 - **2026-09-12 — TAG HALF FIXED AND REPRODUCED.** The `<--ATTEMPT …-->` leak is a
   MALFORMED COMMENT OPENER: `<--`, not `<!--`. Reproduced against the real module before
   changing it — `stripResidualMachineTags` returned it UNTOUCHED and `hasResidualMachineTag`
@@ -216,10 +230,15 @@ authoritative record for that range.
   sweep's FAST PATH — which returned early even after the regex was widened — and the
   detector); all three now share ONE opener definition so they cannot drift again. The
   SHOUTED-name and terminator requirements are unchanged, so prose arrows are untouched
-  (4 negative controls pinned). Guard: `src/tests/englishOpenDefects.test.ts`.
+  (4 negative controls pinned). Guard: `src/tests/englishOpenDefects.test.ts`. The second
+  instance recorded above (`eng.writing.supporting-details`, order 113) is additional
+  production evidence for the SAME shared-code-path root cause this fix addresses — it
+  was found before the fix and is covered by it, not a separate residual case.
   **The "argued discovery step" half is NOT fixed** — that is model output echoing
   authoring-style prose, not a tag, and no stripper can tell it from teaching text.
-- **Status:** NEW — not previously documented.
+- **Status:** PARTIALLY FIXED — the `<--ATTEMPT ...-->` control-tag half is FIXED
+  and reproduced across 2 confirmed production instances; the "argued discovery
+  step" prose-echo half remains open (see Root cause above).
 - **Severity:** P1 — this is a genuine breach of the prompt/learner-output boundary:
   real students saw raw internal authoring/control text. Does not fabricate mastery
   evidence, so not P0 under this file's convention, but it is a serious trust and
@@ -585,33 +604,42 @@ authoritative record for that range.
 
 ### ENG-D16 — Diagram/visual request silently ignored (no acknowledgment at all)
 
-- **Concept/lesson:** `eng.grammar.compound-sentences` (order 67, T5, this audit's
-  own Checkpoint 6).
-- **Evidence:** learner asks *"can i see a visual"*; the reply is a brand-new gate
-  MCQ (*"A question about Compound Sentences now — read it carefully first."*) with
-  zero acknowledgment of the request — no apology, no substitute description. This
-  contrasts with 8 other diagram requests observed in the same batch, all of which
-  received at least an honest "I can't show a picture, but here's a description"
-  response.
-- **Root cause:** UNCONFIRMED — not investigated (read-only audit); plausibly a race
-  between the visual-resolution path and gate-question attachment on that specific
-  turn.
-- **2026-09-12 — ROOT CAUSE FOUND AND FIXED.** Not a race. `readTurnIntent('can i see a
-  visual')` returned `learnerRequest: null`, so the arbitration ladder's LEARNER_REQUEST
-  rung — which ALREADY suppresses `AUTHORED_PROBE` — never claimed the turn, and the gate
-  attached a probe exactly as designed. Every sibling phrasing resolved ("can i see a
-  diagram/picture/image/graph/chart"), and "show me a visual" only resolved via the
-  object-less `SHOW_ME_RE`. Cause: bare `visual` is not in `VISUAL_MEDIUM_NOUNS`. Measured:
-  8 of 9 request frames for the bare noun failed. Fixed with request-frame-scoped
-  alternatives — the SAME treatment `visually` already has — WITHOUT widening the shared
-  `VISUAL_MEDIUM_NOUNS` list, which the module forbids and the visual target resolver
-  depends on. 7 negative controls pinned ("i am a visual learner" must stay false).
-  **Boundary respected:** `masteryGate.test.ts` pins `'visual'` and `'any visuals?'` as
-  null; both still hold, so the `any <noun>` frame was deliberately not added.
-  **Known residue, reported not fixed:** `MEDIUM_REQUEST_RE`'s own documentation lists
-  "any visual for this?" as a case it catches, and it does not — that doc example and the
-  test contradict each other, both predate this change, and resolving it is an owner call.
-- **Status:** NEW.
+- **Concept/lesson:** `eng.grammar.compound-sentences` (order 67, T5, Checkpoint 6),
+  `eng.literature.comparative-literature-intro` (order 186, Checkpoint 14 — **new**).
+- **Evidence:**
+  - `eng.grammar.compound-sentences`: learner asks *"can i see a visual"*; the reply
+    is a brand-new gate MCQ (*"A question about Compound Sentences now — read it
+    carefully first."*) with zero acknowledgment of the request — no apology, no
+    substitute description. This contrasts with 8 other diagram requests observed in
+    the same batch, all of which received at least an honest "I can't show a
+    picture, but here's a description" response.
+  - `eng.literature.comparative-literature-intro` (second instance): learner asks
+    *"can i see a visual"*; the reply continues straight into unrelated prose (a
+    hybrid fiction/poetry example) with zero acknowledgment of the request — no
+    apology, no substitute, `VISUAL: none`. In the same batch, 3 other diagram
+    requests spot-checked all received honest ASCII-diagram substitutes.
+- **Root cause:** initially UNCONFIRMED (not investigated, read-only audit) —
+  **now FOUND AND FIXED, 2026-09-12.** Not a race, as originally hypothesized. Both
+  confirmed instances used the identical trigger phrase *"can i see a visual"*, which
+  is the tell: `readTurnIntent('can i see a visual')` returned `learnerRequest: null`,
+  so the arbitration ladder's LEARNER_REQUEST rung — which ALREADY suppresses
+  `AUTHORED_PROBE` — never claimed the turn, and the gate attached a probe (or
+  continued teaching) exactly as designed instead of acknowledging the request. Every
+  sibling phrasing resolved ("can i see a diagram/picture/image/graph/chart"), and
+  "show me a visual" only resolved via the object-less `SHOW_ME_RE`. Cause: bare
+  `visual` is not in `VISUAL_MEDIUM_NOUNS`. Measured: 8 of 9 request frames for the
+  bare noun failed. Fixed with request-frame-scoped alternatives — the SAME treatment
+  `visually` already has — WITHOUT widening the shared `VISUAL_MEDIUM_NOUNS` list,
+  which the module forbids and the visual target resolver depends on. 7 negative
+  controls pinned ("i am a visual learner" must stay false). **Boundary respected:**
+  `masteryGate.test.ts` pins `'visual'` and `'any visuals?'` as null; both still
+  hold, so the `any <noun>` frame was deliberately not added. **Known residue,
+  reported not fixed:** `MEDIUM_REQUEST_RE`'s own documentation lists "any visual
+  for this?" as a case it catches, and it does not — that doc example and the test
+  contradict each other, both predate this change, and resolving it is an owner
+  call.
+- **Status:** FIXED — 2 confirmed production instances (both the identical bare-
+  `"visual"` trigger phrase), same root cause, same fix, both covered.
 - **Severity:** P2 — a weak learner who explicitly asked for help gets no signal the
   request was even heard.
 - **Fix priority:** Medium.
@@ -621,19 +649,27 @@ authoritative record for that range.
 
 ### ENG-D17 — Hard mid-lesson failure: 504 FUNCTION_INVOCATION_TIMEOUT
 
-- **Concept/lesson:** `eng.grammar.colons-semicolons-dashes` (order 89, T7, this
-  audit's own Checkpoint 6).
-- **Evidence:** an ordinary, valid MCQ-answer submission returns a raw
-  `ERROR: chat failed: 504 An error occurred with your deployment /
-  FUNCTION_INVOCATION_TIMEOUT` — no graceful degraded response, the lesson simply
-  ends there. The immediately preceding turn had already taken an abnormal 58.1
-  seconds to respond (vs. a normal 12–25s), i.e. visible latency escalation
-  immediately before the hard failure.
+- **Concept/lesson:** `eng.grammar.colons-semicolons-dashes` (order 89, T7,
+  Checkpoint 6), `eng.literature.dramatic-structure` (order 178, T8, Checkpoint 12
+  — **new**).
+- **Evidence:**
+  - `eng.grammar.colons-semicolons-dashes`: an ordinary, valid MCQ-answer submission
+    returns a raw `ERROR: chat failed: 504 An error occurred with your deployment /
+    FUNCTION_INVOCATION_TIMEOUT` — no graceful degraded response, the lesson simply
+    ends there. The immediately preceding turn had already taken an abnormal 58.1
+    seconds to respond (vs. a normal 12–25s), i.e. visible latency escalation
+    immediately before the hard failure.
+  - `eng.literature.dramatic-structure` (second instance): the same shape — a
+    504 timeout on an ordinary "show me an example please" request, immediately
+    following the topic-drift episode tracked as **ENG-D22** below (i.e. this
+    lesson's transcript shows both defects back to back: drift into poetry content,
+    then a hard timeout on the very next turn). Whether the two are causally linked
+    is unknown (not investigated — read-only audit).
 - **Root cause:** UNCONFIRMED (not investigated further — read-only audit), but the
   latency-escalation-then-hard-timeout shape is consistent with AI-provider
   capacity/latency issues already extensively documented elsewhere in this project's
   history.
-- **Status:** NEW.
+- **Status:** RECURRING — 2 confirmed instances now (upgraded from NEW/1-instance).
 - **Severity:** P1 — completely ends a lesson mid-progress with an unrecoverable raw
   error, worse than the graceful `[degraded]` fallback path used elsewhere.
 - **Fix priority:** High.
@@ -642,35 +678,48 @@ authoritative record for that range.
 
 ---
 
-### ENG-D18 — Recurring session-create "Internal server error," correlated with observed production DB unavailability
+### ENG-D18 — Recurring session-create "Internal server error," MOSTLY (not exclusively) correlated with observed production DB unavailability
 
 - **Concept/lesson:** not concept-specific — hit while attempting to open
   `eng.grammar.simple-sentences` (order 66), `eng.reading.literal-comprehension`
-  (order 94, first attempt), and a login attempt immediately before order 94's
-  successful retry (all this audit's own Checkpoints 5–6).
+  (order 94, first attempt), a login attempt immediately before order 94's
+  successful retry (Checkpoints 5–6), `eng.literature.literary-devices-overview`
+  (order 168, Checkpoint 11), `eng.literature.prose-fiction` (order 179, Checkpoint
+  12), and `eng.literature.literary-periods-survey` (order 184, Checkpoint 13 —
+  **new, and see the refinement below**).
 - **Evidence:**
-  - 3 separate `Fatal: session create failed: {"success":false,"error":"Internal
-    server error"}` events across ~85 concepts of audit traffic.
-  - Directly correlated with production health: `GET /api/health` was polled at the
-    moment of the third occurrence and returned `{"status":"degraded","db":false,
-    ...}` (HTTP 503); an immediate retry also failed with `"login failed (302)"`
-    (auth depends on the same DB). Re-polling ~1 minute later both times showed full
-    recovery (`"status":"ok","db":true`).
+  - 6 separate `Fatal: session create failed: {"success":false,"error":"Internal
+    server error"}` events across ~175 concepts of audit traffic (roughly 1 per 29
+    concepts).
+  - 5 of the 6 are directly correlated with production health: `GET /api/health`
+    was polled at (or immediately after) each occurrence and returned
+    `{"status":"degraded","db":false,...}` (HTTP 503); on one occurrence an
+    immediate retry also failed with `"login failed (302)"` (auth depends on the
+    same DB). Re-polling ~1 minute later consistently showed full recovery
+    (`"status":"ok","db":true"`).
+  - **The 6th occurrence (order 184) did NOT correlate** — `/api/health` checked
+    immediately afterward reported `{"status":"ok","db":true}`, a healthy database.
+    This retry succeeded immediately without any recovery wait.
 - **Root cause:** UNCONFIRMED in mechanism, but directly evidenced as a real,
-  intermittent production database-availability issue (not an audit-script
-  artifact) — outage windows of roughly 30–90 seconds, self-recovering, observed 3
-  times across ~7 hours of light, single-caller traffic (~1 outage per ~2 hours in
-  this sample). Consistent in shape with the connection-pool/DB-contention issues
-  already extensively documented elsewhere in this project's history, though not
-  independently confirmed to be the same root cause.
-- **Status:** RECURRING — the first occurrence (order 66) was initially classified
-  as one-off transient noise after a single successful retry; this file supersedes
-  that classification with the fuller pattern once 2 more occurrences were observed
-  and directly correlated with a live health-check.
+  intermittent production reliability issue (not an audit-script artifact) —
+  MOSTLY (5/6 instances) explained by database-availability windows of roughly
+  30–90 seconds, self-recovering, observed across ~1650 turns of light,
+  single-caller traffic. Consistent in shape with the connection-pool/DB-contention
+  issues already extensively documented elsewhere in this project's history, though
+  not independently confirmed to be the same root cause. **The 6th instance proves
+  the DB-outage explanation is not exhaustive** — at least one occurrence has a
+  different or additional cause that a live `/api/health` check does not surface.
+- **Status:** RECURRING — now 6 confirmed instances (was reported as 3 in the first
+  version of this file); the first occurrence (order 66) was initially classified
+  as one-off transient noise after a single successful retry, then reclassified as
+  a DB-outage-correlated pattern once more occurrences accumulated; now further
+  refined to "mostly, not exclusively" DB-correlated.
 - **Severity:** P1 — during these windows, no learner can log in, create a session,
   or continue a lesson at all.
 - **Fix priority:** High.
-- **Fix category:** architecture (database connection handling/capacity).
+- **Fix category:** architecture (database connection handling/capacity) — the
+  uncorrelated 6th instance may need separate investigation once the DB-outage
+  cause (if any) is fixed, to see if a residual failure rate remains.
 
 ---
 
@@ -718,6 +767,91 @@ authoritative record for that range.
 - **Severity:** N/A (resolved).
 - **Fix priority:** N/A (resolved).
 - **Fix category:** N/A (resolved).
+
+---
+
+### ENG-D21 — Visual-identity instability: the served diagram changes content within a single lesson
+
+- **Concept/lesson:** `eng.listening.active-listening` (order 128, Checkpoint 10),
+  `eng.writing.editing-for-style` (order 161, Checkpoint 11).
+- **Evidence:**
+  - `eng.listening.active-listening`: across 5 requests/re-displays in the same
+    session, the served visual alternated between two genuinely different
+    `process_flow` diagrams for the same concept — not just a title difference, the
+    step content differs too. "Active Listening Steps": *"Use verbal cues to show
+    attention"* / *"Reflect back key points to confirm understanding"* vs. "Active
+    Listening Process": *"Use verbal acknowledgments (e.g., 'I see')"* / *"Paraphrase
+    key points to confirm understanding"*. Pattern across the 5 occurrences: A, B, B,
+    A, A — a toggle, not a one-time regeneration.
+  - `eng.writing.editing-for-style`: the identically-titled "Editing for Style"
+    figure toggles between two step-list variants — *"Read draft aloud"* / *"Highlight
+    wordy passages"* vs. *"Read the draft thoroughly"* / *"Identify wordy or redundant
+    passages"*.
+- **Root cause:** UNCONFIRMED — not investigated (read-only audit). Both variants in
+  both instances are individually reasonable, valid content for the concept, so this
+  is not a correctness/misleading-content defect — but it contradicts this
+  project's own documented visual-session design (hold one figure identity and
+  reuse it across turns within a lesson, per the visual-engine sections of
+  CLAUDE.md). A real learner would see the diagram's wording change between turns
+  within the same lesson for no apparent reason.
+- **Status:** NEW.
+- **Severity:** P2 — a continuity/trust break, not a correctness break (both
+  variants are individually accurate).
+- **Fix priority:** Medium.
+- **Fix category:** code (visual-session identity/hold logic).
+
+---
+
+### ENG-D22 — Topic drift into an adjacent English sub-domain (not just unrelated content)
+
+- **Concept/lesson:** `eng.literature.dramatic-structure` (order 178, Checkpoint 12).
+- **Evidence:** T0 opens correctly on drama (acts, scenes, tension/resolution —
+  verified by reading the actual opening turn). By T7 the lesson has drifted
+  entirely into POETRY content — rhyme scheme (ABAB), meter (iambic tetrameter vs.
+  trimeter), a full example stanza table — none of which relates to dramatic
+  structure. The drift is followed immediately by a hard production failure: T8
+  ("show me an example please") returns a raw 504 timeout, ending the lesson (see
+  **ENG-D17**'s second instance).
+- **Root cause:** UNCONFIRMED — not investigated (read-only audit). This is a
+  distinct episode class from the already-documented topic-drift family: **ENG-D07**
+  is a misread of a specific opening phrase ("new topic for me"); **ENG-D08** drifts
+  into a completely unrelated subject (Python programming); **ENG-D09** is
+  self-referential text-echo. This instance drifts into a *related* English
+  sub-domain (poetry, within the same Literature area as the lesson's own drama
+  content) rather than an unrelated subject or the learner's own words — plausibly
+  the same underlying topic/excursion-detection weakness manifesting differently
+  when the adjacent domain shares vocabulary with the lesson (both drama and poetry
+  are literary forms).
+- **Status:** NEW — extends the topic-drift defect family with a new episode class.
+- **Severity:** P1 — a real chunk of the lesson (T7 onward) teaches content entirely
+  unrelated to the concept being assessed.
+- **Fix priority:** High.
+- **Fix category:** code (topic/excursion-request detector — same family as
+  ENG-D07/D08/D09).
+
+---
+
+### ENG-D23 — Broken turn: bare answer choices served with no question, no MCQ tag, no acknowledgment of the prior answer
+
+- **Concept/lesson:** `eng.reading.main-idea-and-details` (order 95, T8, Checkpoint
+  7).
+- **Evidence:** the entire turn body is: *"A) It is a sentence that appears exactly
+  in the text \nB) It is a summary you create from the details \nC) It is a sentence
+  that repeats the first sentence \nD) It is a question the author asks"* — no
+  question stem, no `MCQ_STEM` tag, and no acknowledgment of the learner's previous
+  (correct) answer at all. Raw, context-free, structurally ungradeable.
+- **Root cause:** UNCONFIRMED, but closely related to **ENG-D12** (the model serving
+  its own ungraded prose MCQ when the authored probe pool is exhausted) — this is a
+  more severe variant of that same fallback path: not only untagged/ungradeable, but
+  missing the question stem entirely and skipping the correctness acknowledgment a
+  learner would expect after answering the previous item.
+- **Status:** NEW.
+- **Severity:** P1 — worse than ENG-D12: a learner sees only four unexplained
+  answer choices with zero context, and their previous correct answer goes
+  unacknowledged.
+- **Fix priority:** High.
+- **Fix category:** code (same fallback path as ENG-D12; this instance additionally
+  drops the question stem and the prior-turn acknowledgment).
 
 ---
 
@@ -795,18 +929,50 @@ authoritative record for that range.
 
 ## Summary
 
+**Updated after the full 216-concept campaign completed** (Checkpoints 1–16,
+batches 1–19) — this revision adds ENG-D21/D22/D23 and extends ENG-D04, D16, D17,
+D18 with additional confirmed instances found in Checkpoints 8–13.
+
 | Severity | Count |
 |---|---|
-| P0 | 0 (ENG-D06 CLOSED 2026-09-12 — BENIGN, instrument defect, not a mastery defect) |
-| Fixed 2026-09-12 | ENG-D02, D03, D04 (tag half), D08, D09, D16; D06 closed benign; D07 no runtime mechanism |
-| Investigated, not reproduced | ENG-D01 (narrowed: not the tag pipeline), ENG-D05 (not a stop/autonomy misread) |
-| P1 | 11 (ENG-D01, D02, D03, D04, D05, D08, D09, D11, D14, D17, D18) |
-| P2 | 6 (ENG-D07, D10, D12, D13, D15, D16) |
+| P0 | 0 |
+| P1 | 13 (ENG-D01, D02, D03, D04, D05, D08, D09, D11, D14, D17, D18, D22, D23) |
+| P2 | 6 (ENG-D07, D10, D12, D13, D15, D21) |
 | P3 | 1 (ENG-D19) |
-| Resolved | 1 (ENG-D20) |
-| **Total unique confirmed defects** | **20** |
+| Closed — benign (instrument defect, not a product defect) | 1 (ENG-D06) |
+| Fixed | 1 (ENG-D16 — both confirmed instances, same root cause, same fix) |
+| Partially fixed (still counted in P1 above) | 1 (ENG-D04 — the `<--ATTEMPT...-->` control-tag half is fixed; the "argued discovery step" prose-echo half remains open) |
+| Resolved (pre-existing, separate campaign) | 1 (ENG-D20) |
+| **Total unique confirmed defects** | **23** |
 | Observations (not confirmed as defects) | 5 (OBS-01 … OBS-05) |
 
-Fix-category breakdown of the 20 confirmed defects: 10 code, 5 content, 2
+Fix-category breakdown of the 23 confirmed defects: 13 code, 5 content, 2
 architecture, 2 prompt, 1 visual, 1 QA (some entries span two categories and are
 counted under their primary one above).
+
+**Coverage note:** this register was compiled while the audit was still roughly
+halfway through the English KG (through order ~105). The audit has since run to
+completion — all 216 English concepts have been driven through the real-student
+simulation (orders 11–216 by this campaign, orders 1–10 by the earlier Task B
+simulation, plus the pre-existing `ALREADY_TOUCHED` skip set covering concepts
+already validated by the ADULT-band campaign). The entries above reflect every
+defect class found through the full campaign; instance lists for multi-occurrence
+entries (ENG-D02, D04, D17, D18) are representative, not necessarily exhaustive
+of every single occurrence logged across all 19 batches.
+
+**Merge note (2026-09-12):** this file was updated concurrently by two sessions —
+this campaign's completion pass (adding ENG-D21/D22/D23 and extending D04/D16/D17/
+D18 with new instances) and a separate fix session (`0f8d454`, `fcd2a4c`) that
+closed ENG-D06 as benign and fixed ENG-D04's tag half and ENG-D16 in full, both
+reproduced against the real modules with passing tests. Both sets of changes are
+merged above. **One discrepancy found while merging, flagged rather than silently
+resolved either way:** the fix session's own commit `fcd2a4c` summary-table edit
+additionally claimed ENG-D02, D03, D08, D09 as "Fixed 2026-09-12" and ENG-D07 as
+"no runtime mechanism," but neither that commit's message nor its diff touched the
+ENG-D02/D03/D07/D08/D09 entry sections themselves (verified via `git show
+fcd2a4c` — only ENG-D04, ENG-D05, ENG-D16, and the stop-request gap are discussed
+or diffed). Those five entries are therefore left as OPEN in this table, matching
+their own unedited section content, rather than trusting an unsubstantiated
+summary-row claim. A future session should verify whether those five were
+genuinely addressed elsewhere and, if so, update their individual entries with the
+same reproduce-first evidence standard the other fixes in this file demonstrate.
