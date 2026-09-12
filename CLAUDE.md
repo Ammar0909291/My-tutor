@@ -3544,6 +3544,27 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   selecting a fresh unstarted domain. This is a genuinely multi-session campaign; continuation
   should verify state via `scripts/math/state.ts` fresh each time rather than trusting any number
   recorded here.
+- **Batch 28 — resuming math.func as a standalone domain campaign** (2026-09-12): with
+  math.disc and math.graph both PARKED (0 topologically-ready candidates each), computed the
+  frontier fresh across ALL mathematics domains rather than defaulting to a brand-new unstarted
+  domain. Result: `math.func` — parked at 1/29 since Batch 14's small cross-domain excursion —
+  actually had 13 concepts topologically ready, all gated only on the already-authored
+  `function-concept`. Resumed it as a full standalone campaign (matching the precedent of
+  continuing math.disc after math.alg's certification). Authored 4 concepts: `domain-range`
+  (algebraic domain restriction vs. structural range reasoning), `function-notation` ($f(x)$ as
+  substitution, never multiplication), `injectivity` (the universal claim proven generally, the
+  horizontal line test's all-or-nothing verdict), `surjectivity` (range-equals-codomain,
+  independence from injectivity). `math.func` **1/29 → 5/29**. Mathematics
+  **338/908 → 342/908**, 793 remaining. Full per-concept detail in `COVERAGE.md` Batch 28.
+  Validated: KG validator PASS (908/908 reachable, file untouched), 0 orphan/duplicate EB files,
+  `tsc --noEmit` clean, targeted tests 479/479 passed, all 4 heading structures diffed clean on
+  the first pass (0 diffs each). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime
+  file touched. Fresh math.func frontier computed: 10 candidates ready (`bijection` newly
+  unblocked by `surjectivity`; `graph-of-function`, `real-valued-function`, `composition`,
+  `periodic-function`, `linear-function`, `exponential-function`, `piecewise-function`,
+  `monotonic-function`, `function-operations`). This is a genuinely multi-session campaign;
+  continuation should verify state via `scripts/math/state.ts` fresh each time rather than
+  trusting any number recorded here.
 
 ## Run locally
 ```
