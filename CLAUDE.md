@@ -3637,6 +3637,28 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   by `piecewise-function`). This is a genuinely multi-session campaign; continuation should
   verify state via `scripts/math/state.ts` fresh each time rather than trusting any number
   recorded here.
+- **Batch 33 — math.func: vertex form, polynomial functions, step functions** (2026-09-13):
+  session started with a fast-forward reconciliation to 6 unrelated upstream commits (PCD-004
+  runtime session/tab work, zero file overlap, verified via `git diff --stat` before merging).
+  Re-computed the frontier fresh — the exact 3 concepts deferred from Batch 32 were confirmed
+  still ready; authored all 3 (`vertex-form`, `polynomial-function`, `step-function`), closing the
+  ENTIRE frontier available at batch start with none deferred. All 3 Blueprint-grounded, reused by
+  reference. `vertex-form` and `step-function` had explicit Blueprint birth-type columns (adopted
+  directly); `polynomial-function`'s Blueprint was the FIRST in this entire campaign to lack one —
+  its 3 misconceptions were independently classified instead (MC-1 Type 1, MC-2 Type 5, MC-3 Type
+  3), stated explicitly as independent rather than Blueprint-adopted. `math.func` **24/29**
+  (21→24) — only 5 concepts remain before DOMAIN CERTIFICATION (would be the sixth, after
+  math.found/math.geom/math.arith/math.nt/math.alg). Mathematics **361/908** (358→361), 774
+  remaining. No genuine content-overlap found. Full per-concept detail in `COVERAGE.md` Batch 33.
+  Validated: KG validator PASS (908/908 reachable, file untouched), 0 orphan/duplicate EB files,
+  `tsc --noEmit` clean, targeted tests 479/479 passed, all 3 heading structures diffed clean on the
+  first pass (0 diffs each). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file
+  touched. Fresh math.func frontier computed (verified, not assumed): 3 of the remaining 5
+  concepts are already ready (`rational-root`, `end-behavior`, `rational-function`, all newly
+  unblocked by `polynomial-function`), leaving only `horizontal-asymptote`/`vertical-asymptote`
+  blocked on `rational-function`. This is a genuinely multi-session campaign; continuation should
+  verify state via `scripts/math/state.ts` fresh each time rather than trusting any number
+  recorded here.
 
 ## Run locally
 ```

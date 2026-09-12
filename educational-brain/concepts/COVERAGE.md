@@ -11,7 +11,7 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 358 | **Five domains CERTIFIED, math.disc at 20/32 (parked), math.graph at 13/16 (parked), math.func the active campaign at 21/29.** 82 `math.found.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 69 `math.geom.*` (**COMPLETE, DOMAIN CERTIFIED** — the final 13 entries were restored by commit `0d2c76dd`'s Wave 0 recovery, which this row previously did not reflect) + 36 `math.nt.*` (**COMPLETE, DOMAIN CERTIFIED 2026-08-12** — the domain's final 8 concepts, `prime-distribution`, `continued-fractions`, `analytic-number-theory`, `prime-number-theorem`, `riemann-hypothesis`, `algebraic-number-theory`, `algebraic-integers`, `number-fields`, were authored this session, ending the PARKED status this row previously recorded) + 59 `math.alg.*` (**COMPLETE, DOMAIN CERTIFIED 2026-09-11** — Wave 1 (2026-08-12, 11 concepts): `expression`, `equation`, `term`, `coefficient`, `exponent-rules`, `polynomial`, `degree`, `zero-exponent`, `negative-exponent`, `solution-set`, `inequality`; Wave 2 (2026-08-12, 1 concept): `like-terms`; Wave 3 (2026-09-11, 3 concepts): `simplification`, `polynomial-operations`, `radicals`; Wave 4 (2026-09-11, 5 concepts): `linear-equation-1var`, `polynomial-division`, `fractional-exponent`, `simplifying-radicals`, `radical-equations`; Wave 5 (2026-09-11, 5 concepts): `inequality-1var`, `absolute-value-equations`, `linear-equation-2var`, `remainder-theorem`, `rationalizing-denominators`; Wave 6 (2026-09-11, 3 concepts): `inequality-2var`, `system-linear-equations`, `factor-theorem`; Wave 7 (2026-09-11, 4 concepts): `substitution-method`, `elimination-method`, `system-3var`, `factoring`; Wave 8 (2026-09-11, 3 concepts): `factoring-gcf`, `factoring-special`, `rational-expressions`; Wave 9 (2026-09-11, 4 concepts): `factoring-trinomials`, `rational-expressions-addition`, `rational-expressions-multiplication`, `rational-equations`; Wave 10 (2026-09-11, 1 concept): `quadratic-equation`; Wave 11 (2026-09-11, 2 concepts): `completing-the-square`, `polynomial-roots`; Wave 12 part 1 (2026-09-11, 1 concept): `quadratic-formula`; Wave 12 part 2 (2026-09-11, 2 concepts): `discriminant`, `rational-root-theorem`; Wave 12 part 3 (2026-09-11, 3 concepts): `fundamental-theorem-algebra`, `polynomial-inequality`, `vietas-formulas`; Wave 13 (2026-09-11, 2 concepts): `complex-polynomial-roots`, `rational-inequality`; Batch 15 (2026-09-11, 1 concept): `exponential-function`; Batch 16 (2026-09-11, 2 concepts): `logarithm`, `exponential-equations`; Batch 17 (2026-09-11, 3 concepts): `binomial-theorem`, `logarithm-properties`, `natural-logarithm`; Batch 18 (2026-09-11, 3 concepts, FINAL): `change-of-base`, `logarithmic-equations`, `pascals-triangle`; all Blueprint-grounded, reused by reference). 20 `math.disc.*` entries (**IN PROGRESS, standalone campaign since math.alg's certification** —
+| mathematics | 908 | 361 | **Five domains CERTIFIED, math.disc at 20/32 (parked), math.graph at 13/16 (parked), math.func the active campaign at 24/29.** 82 `math.found.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 69 `math.geom.*` (**COMPLETE, DOMAIN CERTIFIED** — the final 13 entries were restored by commit `0d2c76dd`'s Wave 0 recovery, which this row previously did not reflect) + 36 `math.nt.*` (**COMPLETE, DOMAIN CERTIFIED 2026-08-12** — the domain's final 8 concepts, `prime-distribution`, `continued-fractions`, `analytic-number-theory`, `prime-number-theorem`, `riemann-hypothesis`, `algebraic-number-theory`, `algebraic-integers`, `number-fields`, were authored this session, ending the PARKED status this row previously recorded) + 59 `math.alg.*` (**COMPLETE, DOMAIN CERTIFIED 2026-09-11** — Wave 1 (2026-08-12, 11 concepts): `expression`, `equation`, `term`, `coefficient`, `exponent-rules`, `polynomial`, `degree`, `zero-exponent`, `negative-exponent`, `solution-set`, `inequality`; Wave 2 (2026-08-12, 1 concept): `like-terms`; Wave 3 (2026-09-11, 3 concepts): `simplification`, `polynomial-operations`, `radicals`; Wave 4 (2026-09-11, 5 concepts): `linear-equation-1var`, `polynomial-division`, `fractional-exponent`, `simplifying-radicals`, `radical-equations`; Wave 5 (2026-09-11, 5 concepts): `inequality-1var`, `absolute-value-equations`, `linear-equation-2var`, `remainder-theorem`, `rationalizing-denominators`; Wave 6 (2026-09-11, 3 concepts): `inequality-2var`, `system-linear-equations`, `factor-theorem`; Wave 7 (2026-09-11, 4 concepts): `substitution-method`, `elimination-method`, `system-3var`, `factoring`; Wave 8 (2026-09-11, 3 concepts): `factoring-gcf`, `factoring-special`, `rational-expressions`; Wave 9 (2026-09-11, 4 concepts): `factoring-trinomials`, `rational-expressions-addition`, `rational-expressions-multiplication`, `rational-equations`; Wave 10 (2026-09-11, 1 concept): `quadratic-equation`; Wave 11 (2026-09-11, 2 concepts): `completing-the-square`, `polynomial-roots`; Wave 12 part 1 (2026-09-11, 1 concept): `quadratic-formula`; Wave 12 part 2 (2026-09-11, 2 concepts): `discriminant`, `rational-root-theorem`; Wave 12 part 3 (2026-09-11, 3 concepts): `fundamental-theorem-algebra`, `polynomial-inequality`, `vietas-formulas`; Wave 13 (2026-09-11, 2 concepts): `complex-polynomial-roots`, `rational-inequality`; Batch 15 (2026-09-11, 1 concept): `exponential-function`; Batch 16 (2026-09-11, 2 concepts): `logarithm`, `exponential-equations`; Batch 17 (2026-09-11, 3 concepts): `binomial-theorem`, `logarithm-properties`, `natural-logarithm`; Batch 18 (2026-09-11, 3 concepts, FINAL): `change-of-base`, `logarithmic-equations`, `pascals-triangle`; all Blueprint-grounded, reused by reference). 20 `math.disc.*` entries (**IN PROGRESS, standalone campaign since math.alg's certification** —
 Batch 14 (2026-09-11, 1 concept): `counting-principles`; Batch 15 (2026-09-11, 1 concept):
 `permutations`; Batch 16 (2026-09-11, 1 concept): `combinations`; Batch 19 (2026-09-11, 5
 concepts): `combinatorics`, `pigeonhole`, `stars-bars`, `inclusion-exclusion`,
@@ -38,10 +38,20 @@ closing 4 of the 8 concepts left ready after Batch 30, all 4 Blueprint-grounded 
 adopted directly from each Blueprint's own classification (independently confirmed); Batch 32
 (2026-09-12, 4 concepts): `quadratic-function`, `exponential-function`, `logarithmic-function`,
 `piecewise-function` — closing the ENTIRE 4-concept frontier available after Batch 31, all
-Blueprint-grounded, reused by reference; 3 further concepts already topologically ready:
-`vertex-form`, `polynomial-function` (newly unblocked by `quadratic-function`), `step-function`
-(newly unblocked by `piecewise-function`) — only 8 concepts remain before the domain reaches
-DOMAIN CERTIFICATION) + 13 `math.graph.*` entries (**PARKED, opened 2026-09-12** — Batch 24 (2026-09-12,
+Blueprint-grounded, reused by reference; Batch 33 (2026-09-13, 3 concepts): `vertex-form`,
+`polynomial-function`, `step-function` — closing the ENTIRE 3-concept frontier available after
+Batch 32. All 3 Blueprint-grounded, reused by reference. `vertex-form`'s and `step-function`'s
+Blueprints both carried explicit birth-type classifications for their misconceptions (adopted
+directly: `vertex-form` MC-1 Type 5/MC-2 Type 3/MC-3 Type 1; `step-function` MC-1 Type 3/MC-2
+Type 1/MC-3 Type 5). `polynomial-function`'s Blueprint was the first in this entire campaign
+whose Misconception Registry table lacked an explicit birth-type column — its 3 misconceptions
+were independently classified instead (MC-1 END-BEHAVIOR-ASSUMED-SUFFICIENT-FOR-FULL-SHAPE Type
+1; MC-2 SIGN-CHANGE-ARGUMENT-APPLIED-WITHOUT-CONTINUITY-JUSTIFICATION Type 5; MC-3
+FUNCTION-EVALUATION-CONFUSED-WITH-ROOT-FINDING Type 3, matching the identical "evaluation vs.
+solving" pattern already classified this way in sibling `math.func` entries), stated explicitly
+in that entry's own Blueprint References section rather than silently adopted. Only 5 concepts
+remain before the domain reaches DOMAIN CERTIFICATION, the sixth after math.found/math.geom/
+math.arith/math.nt/math.alg) + 13 `math.graph.*` entries (**PARKED, opened 2026-09-12** — Batch 24 (2026-09-12,
 3 concepts): `graph`, `tree`, `minimum-spanning-tree`; opened because every one of `math.disc`'s
 own graph-theory entries had already named a `math.graph` sibling as a Blueprint-exists-no-EB-yet
 cross-link; Batch 25 (2026-09-12, 4 concepts): `connectivity`, `eulerian-circuit`,
@@ -6946,4 +6956,89 @@ files, 0 duplicate EB files; `npx tsc --noEmit` clean; targeted tests `mathPacka
 clean against `math.alg.like-terms.md` on the first pass (0 diffs each). Fresh `math.func`
 frontier computed: 3 candidates ready (`vertex-form`, `polynomial-function` newly unblocked by
 `quadratic-function`; `step-function` newly unblocked by `piecewise-function`). No Physics,
+Chemistry, English, Biology, Computer Science, KG, Blueprint, or runtime file was modified.
+
+### Batch 33 — math.func: vertex form, polynomial functions, step functions (2026-09-13)
+
+Session started with a fast-forward reconciliation: `origin/main` had advanced 6 commits since
+this program's last local commit (`26f8da4`/`b8e0990`/`9babaff`/`57b3023`/`6ffbcd5`/merge `6e94a3c`
+— unrelated PCD-004 session-scoped-lesson-pointer/per-tab-session/attempt-concurrency runtime
+work). Confirmed via `git diff --stat` zero file overlap with any `educational-brain/`,
+`ROADMAP.md`, `COVERAGE.md`, or `CLAUDE.md` file before fast-forwarding
+(`git merge --ff-only origin/main`, clean, no conflicts).
+
+Re-computed the frontier fresh — the exact 3 candidates deferred from Batch 32 were confirmed
+still ready: `math.func.vertex-form`, `math.func.polynomial-function`, `math.func.step-function`.
+This batch closes the ENTIRE frontier available at batch start (all 3 authored, none deferred).
+All 3 Blueprint-grounded, reused by reference.
+
+- **`math.func.vertex-form`** (proficient/apply, requires `quadratic-function` +
+  `math.alg.completing-the-square`, no unlocks or cross-links listed in the KG) — converting
+  standard to vertex form via completing the square (including the $a \ne 1$ case), reading the
+  vertex $(h,k)$ directly with the correct sign-flip convention on $h$, determining min/max from
+  the sign of $a$, and distinguishing the vertex from the $y$-intercept as genuinely different
+  points answering genuinely different questions. 3 misconceptions, birth types adopted directly
+  from the Blueprint: MC-1 VERTEX-FROM-STANDARD-WRONG (Type 5), MC-2
+  HORIZONTAL-SHIFT-SIGN-ERROR (Type 3), MC-3 K-IS-THE-MINIMUM-VALUE-ALWAYS (Type 1). Transfer
+  probe (P76, independence mode) targets conic-section center identification via the same
+  sign-flip logic.
+- **`math.func.polynomial-function`** (proficient/analyze, requires `quadratic-function` +
+  `math.alg.polynomial`, no unlocks or cross-links listed in the KG) — explicit division of labor
+  with `math.alg.polynomial` (that concept owns algebraic anatomy/end-behavior/continuity; this
+  concept owns function-notation evaluation and analytical techniques building on it), evaluation
+  as ordinary substitution extended to any degree, the informal sign-change root-location argument
+  licensed specifically by polynomial continuity, and end-behavior-plus-evaluation as the only
+  sufficient combination for full shape prediction (neither tool alone suffices — demonstrated by
+  a live counterexample where end-behavior alone conceals an interior dip). **This Blueprint's
+  Misconception Registry table was the first in this entire campaign to lack an explicit
+  birth-type column** — all 3 misconceptions were therefore independently classified by this
+  program rather than adopted: MC-1 END-BEHAVIOR-ASSUMED-SUFFICIENT-FOR-FULL-SHAPE (Type 1,
+  overgeneralization from a true-but-narrow claim about the extremes into a false claim about
+  everywhere), MC-2 SIGN-CHANGE-ARGUMENT-APPLIED-WITHOUT-CONTINUITY-JUSTIFICATION (Type 5,
+  instruction-induced — the technique is typically taught as a mechanical recipe with its
+  continuity justification never foregrounded), MC-3
+  FUNCTION-EVALUATION-CONFUSED-WITH-ROOT-FINDING (Type 3, language contamination — the identical
+  "evaluation vs. solving" surface-similarity mechanism already classified this way for the
+  equivalent misconception in `math.func.quadratic-function` and `math.func.linear-function`).
+  Stated explicitly and honestly in this entry's own Blueprint References and Curriculum Feedback
+  sections as an independent classification, not Blueprint-adopted — flagged as a possible one-off
+  gap in this specific Blueprint's authoring pass for the Curriculum Production Pipeline's
+  attention. Transfer probe (P76, independence mode) targets bridge-cable tension modeling via
+  sign-change location.
+- **`math.func.step-function`** (proficient/apply, requires `piecewise-function` only, no unlocks
+  or cross-links listed in the KG) — floor/ceiling as the specific all-constant-pieces family
+  within `piecewise-function`'s broader framework, the negative-number floor check as the single
+  most diagnostic verification point (where the "drop the decimal" positive-number shortcut
+  breaks: $\lfloor -2.3 \rfloor = -3$, not $-2$), the closed-left/open-right (floor) vs.
+  open-left/closed-right (ceiling) staircase-graph convention derived from the definition rather
+  than memorized as an arbitrary rule, and jump discontinuity at every integer as the first
+  genuinely, permanently discontinuous function family in the `math.func` sequence. 3
+  misconceptions, birth types adopted directly from the Blueprint: MC-1 FLOOR-CEILING-SWAP (Type
+  3), MC-2 STEP-FUNCTION-IS-CONTINUOUS (Type 1), MC-3 CLOSED-DOT-ON-WRONG-SIDE (Type 5). Transfer
+  probe (P76, independence mode) targets the fractional part function $\{x\}=x-\lfloor x\rfloor$
+  as a sawtooth wave of period 1, forward-bridging to `math.func.periodic-function`.
+
+`math.func` **21/29 → 24/29** — only 5 concepts remain before the domain reaches DOMAIN
+CERTIFICATION (the sixth after math.found/math.geom/math.arith/math.nt/math.alg). `math.disc`/
+`math.graph` unchanged this batch (20/32 parked, 13/16 parked). Mathematics **358/908 → 361/908**,
+774 remaining. No genuine content-overlap found; the only genuine Blueprint-quality finding is the
+missing birth-type column noted above for `polynomial-function` alone (both sibling Blueprints
+read this batch carried explicit birth-type classifications, adopted directly). Full per-concept
+detail above. All tracking files updated in the same commit: `ROADMAP.md` Section 1/2 totals and
+the `math.func` domain row, `COVERAGE.md`'s mathematics summary row and this Delivery history
+entry, `CLAUDE.md`'s campaign section. `EDUCATIONAL_BRAIN_INDEX.md` and `QUALITY.md` again
+deferred (same generated-artifact rationale as prior batches). Validated: `npx tsx
+scripts/validate-knowledge-graph.ts docs/mathematics/kg/graph.json` PASS, 908/908 reachable, 0
+failures, 0 warnings (KG file untouched); `scripts/math/state.ts` confirms math.func 24/29 and
+mathematics 361/908, 5 EB-certified domains, 0 orphan EB files, 0 duplicate EB files; `npx tsc
+--noEmit` clean; targeted tests `mathPackageCorpus.test.ts` + `mathematicsAssetContract.test.ts`
+479/479 passed. All 3 new entries' heading structure diffed clean against `math.alg.like-terms.md`
+on the first pass (0 diffs each). Fresh `math.func` frontier computed (verified programmatically,
+not assumed): 3 of the domain's final 5 concepts are already topologically ready —
+`math.func.rational-root` (requires `polynomial-function` + `math.alg.polynomial-roots`, both
+authored), `math.func.end-behavior` (requires `polynomial-function` only), and
+`math.func.rational-function` (requires `math.alg.rational-expressions` + `polynomial-function`,
+both authored) — leaving only `math.func.horizontal-asymptote` and
+`math.func.vertical-asymptote` blocked, both solely on `rational-function`. One more bounded batch
+of 3, followed by a small 2-concept wave, would reach math.func DOMAIN CERTIFICATION. No Physics,
 Chemistry, English, Biology, Computer Science, KG, Blueprint, or runtime file was modified.
