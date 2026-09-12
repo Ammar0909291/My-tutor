@@ -373,10 +373,20 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     ...CISPLATIN, name: 'Cisplatin — the Isomer That Works as a Drug',
   }),
 
-  // Archetype E — reuse of the existing, unmodified statistics_bar_chart
-  // generator with chemistry-appropriate comparison data.
+  // Archetype E — reuse of the statistics_bar_chart generator's GEOMETRY with
+  // chemistry comparison data.
+  //
+  // PCD-040: the data here was always chemistry-appropriate (13.0 vs 18.8 is
+  // the real chelate effect), but the generator's CHROME was not. It titled the
+  // figure "Frequency Distribution", called 18.8 "the mode — the most
+  // frequently occurring category", and reported a mean over "31.8
+  // observations" — of which there are none, because log Kf is a magnitude and
+  // not a count. The tutor read that narration and taught from it. Both
+  // bindings now declare what the bar heights ARE, which switches the
+  // generator to comparison chrome; the numbers are untouched.
   'chem.coord.stability': () => buildStatisticsBarChartScene({
     chartTitle: 'log Kf: the chelate effect',
+    quantity: { name: 'log Kf', kind: 'magnitude' },
     bars: [
       { label: '[Cu(NH3)4]2+ (monodentate)', frequency: 13.0 },
       { label: '[Cu(EDTA)]2− (chelate)', frequency: 18.8 },
@@ -384,11 +394,43 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   }),
   'chem.thermo.heat-capacities': () => buildStatisticsBarChartScene({
     chartTitle: 'Molar heat capacities (J/mol·K)',
+    quantity: { name: 'molar heat capacity (J/mol·K)', kind: 'magnitude' },
     bars: [
       { label: 'Monatomic Cv', frequency: 12.47 },
       { label: 'Monatomic Cp', frequency: 20.79 },
       { label: 'Diatomic Cv', frequency: 20.79 },
       { label: 'Diatomic Cp', frequency: 29.10 },
+    ],
+  }),
+
+  // PCD-041 — ONE AUTHORITATIVE FORMULATION, because there was none.
+  //
+  // `chem.dblock.lanthanides` had no curated binding, so every figure request
+  // fell through to GENERATION, and each turn generated independently. One
+  // session served TWO contradictory lines for the same trend: -2.857x+342.849
+  // at T2/T4 (a ~40 pm drop across the series) and y=-0.5x+200 at T10 (~7 pm).
+  // Neither is anywhere in this repository — both were invented at the turn —
+  // and neither matches the real contraction of ~17 pm.
+  //
+  // A curated binding outranks generation, so authoring one is the fix: the
+  // learner now gets the same figure every turn, built from Shannon ionic radii
+  // (CN = 6, Ln3+), which is a published reference series and not an
+  // approximation fitted at runtime. La3+ 103.2 -> Lu3+ 86.1 pm is a 17.1 pm
+  // contraction; the six elements are a representative spread across La-Lu,
+  // monotonic, and within this generator's 12-bar bound.
+  //
+  // Magnitude mode for the same reason as the two bindings above (PCD-040):
+  // a radius is not a count, so no frequency/mode/mean claim may be made of it.
+  'chem.dblock.lanthanides': () => buildStatisticsBarChartScene({
+    chartTitle: 'Lanthanide contraction: ionic radius of Ln3+ (pm), La to Lu',
+    quantity: { name: 'ionic radius (pm, Shannon, CN=6)', kind: 'magnitude' },
+    bars: [
+      { label: 'La3+ 103.2 pm', frequency: 103.2 },
+      { label: 'Ce3+ 101.0 pm', frequency: 101.0 },
+      { label: 'Nd3+ 98.3 pm', frequency: 98.3 },
+      { label: 'Gd3+ 93.8 pm', frequency: 93.8 },
+      { label: 'Ho3+ 90.1 pm', frequency: 90.1 },
+      { label: 'Lu3+ 86.1 pm', frequency: 86.1 },
     ],
   }),
 
