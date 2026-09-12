@@ -64,7 +64,7 @@ export async function openLessonAttempt(
      *  days — measured at 928967 seconds on physics lesson 24. */
     resetStartedAt?: boolean
   },
-): Promise<{ id: string; outcome: LessonAttemptOutcome }> {
+): Promise<{ id: string; outcome: LessonAttemptOutcome; updatedAt: Date | null }> {
   const existing = await db.lessonAttempt.findFirst({
     where: {
       userId: args.userId,
@@ -72,15 +72,18 @@ export async function openLessonAttempt(
       lessonKey: args.lessonKey,
       status: 'IN_PROGRESS',
     },
-    orderBy: { startedAt: 'desc' },
+    // Total order, same reason as latestLessonAttempt below.
+    orderBy: [{ startedAt: 'desc' }, { id: 'desc' }],
   })
   if (existing) {
-    if (!args.resetStartedAt) return { id: existing.id, outcome: toOutcome(existing) }
+    if (!args.resetStartedAt) {
+      return { id: existing.id, outcome: toOutcome(existing), updatedAt: existing.updatedAt ?? null }
+    }
     const restarted = await db.lessonAttempt.update({
       where: { id: existing.id },
       data: { startedAt: new Date() },
     })
-    return { id: restarted.id, outcome: toOutcome(restarted) }
+    return { id: restarted.id, outcome: toOutcome(restarted), updatedAt: restarted.updatedAt ?? null }
   }
 
   const seed = startLessonAttempt(args.lessonKey, args.lessonTitle ?? null, new Date())
@@ -94,28 +97,85 @@ export async function openLessonAttempt(
       startedAt: seed.startedAt,
     },
   })
-  return { id: created.id, outcome: toOutcome(created) }
+  return { id: created.id, outcome: toOutcome(created), updatedAt: created.updatedAt ?? null }
 }
 
-/** Persist a folded outcome. Overwrites the aggregates wholesale — the pure
- *  layer already produced the complete new value, so there is no read-modify
- *  race between two writers of the same field. */
+const aggregateData = (outcome: LessonAttemptOutcome) => ({
+  conceptsMastered: outcome.conceptsMastered,
+  conceptsNeedingReview: outcome.conceptsNeedingReview,
+  misconceptionsCorrected: outcome.misconceptionsCorrected,
+  teachingAttempts: outcome.teachingAttempts,
+  budgetExhaustions: outcome.budgetExhaustions,
+  lessonTitle: outcome.lessonTitle,
+})
+
+/**
+ * Persist a folded outcome.
+ *
+ * ── THE LOST UPDATE THIS GUARDS (PCD-004B) ────────────────────────────────
+ * This used to write the aggregates wholesale, justified as "the pure layer
+ * already produced the complete new value, so there is no read-modify race
+ * between two writers of the same field". That holds WITHIN one turn and fails
+ * ACROSS two: a lesson attempt is (user x subject x lesson) — deliberately, so
+ * a lesson can span sessions — so two turns that close DIFFERENT concepts of
+ * the same lesson concurrently both read the row, both fold their own concept
+ * onto it, and the later write erases the earlier concept. Measured by
+ * `lessonAttemptConcurrency.test.ts`'s negative control.
+ *
+ * ── WHY A REFOLD AND NOT A MERGE ──────────────────────────────────────────
+ * Merging two folded outcomes has no single correct answer: `conceptsMastered`
+ * and `conceptsNeedingReview` are not independent sets (mastery REMOVES a
+ * concept from review), and `teachingAttempts`/`budgetExhaustions` are
+ * increments, so unioning the sets and summing the counters double-counts the
+ * shared base. Re-folding does not have to guess any of that — it re-applies
+ * THIS turn's single concept to the row as it actually is now, which is what
+ * `recordConceptOutcome` is already built to do (it is idempotent per concept
+ * and returns the attempt unchanged when the concept is already folded).
+ *
+ * This is `writeSnapshotDelta`'s contract, applied to the same class of
+ * problem: conditional write, one retry, caller-supplied re-derivation, and
+ * never throws. `updatedAt` is the version — it already exists on the model
+ * and is maintained by Prisma, so this needs no migration.
+ *
+ * Called WITHOUT `opts` it behaves exactly as before, so existing callers and
+ * the finalising path are unchanged.
+ */
 export async function saveLessonAttempt(
   db: Db,
   attemptId: string,
   outcome: LessonAttemptOutcome,
-): Promise<void> {
-  await db.lessonAttempt.update({
-    where: { id: attemptId },
-    data: {
-      conceptsMastered: outcome.conceptsMastered,
-      conceptsNeedingReview: outcome.conceptsNeedingReview,
-      misconceptionsCorrected: outcome.misconceptionsCorrected,
-      teachingAttempts: outcome.teachingAttempts,
-      budgetExhaustions: outcome.budgetExhaustions,
-      lessonTitle: outcome.lessonTitle,
-    },
+  opts?: {
+    /** `updatedAt` as it was when `outcome` was folded. Omit for an
+     *  unconditional write (the previous behaviour). */
+    expectedUpdatedAt?: Date | null
+    /** Re-apply this turn's fold to the row as it actually is. Called at most
+     *  once, only when the conditional write found the row had moved. */
+    refold?: (fresh: LessonAttemptOutcome) => LessonAttemptOutcome
+  },
+): Promise<{ applied: boolean; conflicted: boolean }> {
+  if (!opts?.expectedUpdatedAt || !opts.refold) {
+    await db.lessonAttempt.update({ where: { id: attemptId }, data: aggregateData(outcome) })
+    return { applied: true, conflicted: false }
+  }
+
+  const first = await db.lessonAttempt.updateMany({
+    where: { id: attemptId, updatedAt: opts.expectedUpdatedAt },
+    data: aggregateData(outcome),
   })
+  if (first.count > 0) return { applied: true, conflicted: false }
+
+  // Another turn committed between our read and this write. Re-read, re-fold
+  // OUR concept onto what is actually there, and write once more.
+  const fresh = await db.lessonAttempt.findFirst({ where: { id: attemptId } })
+  if (!fresh) return { applied: false, conflicted: true }
+  const refolded = opts.refold(toOutcome(fresh))
+  const second = await db.lessonAttempt.updateMany({
+    where: { id: attemptId, updatedAt: fresh.updatedAt },
+    data: aggregateData(refolded),
+  })
+  // A second conflict loses this turn's fold — exactly what the unconditional
+  // write did every time — and never fails the turn.
+  return { applied: second.count > 0, conflicted: true }
 }
 
 /**
@@ -263,7 +323,13 @@ export async function latestLessonAttempt(
 ): Promise<LessonAttemptOutcome | null> {
   const row = await db.lessonAttempt.findFirst({
     where: { userId: args.userId, subjectSlug: args.subjectSlug, lessonKey: args.lessonKey },
-    orderBy: { startedAt: 'desc' },
+    // `startedAt` alone is not a total order: two attempts at one lesson
+    // created inside the same millisecond sorted arbitrarily, so "the latest
+    // attempt" — which the D-0a completion gate reads — could flip between
+    // calls. Found by a test that was green alone and red in the full suite.
+    // `id` breaks the tie deterministically (cuid is monotonic within a
+    // millisecond); it changes nothing when the timestamps differ.
+    orderBy: [{ startedAt: 'desc' }, { id: 'desc' }],
   })
   return row ? toOutcome(row) : null
 }

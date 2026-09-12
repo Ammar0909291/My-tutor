@@ -191,6 +191,49 @@ export async function PATCH(req: Request) {
       },
     })
 
+    // ── PCD-004: completion ends the SESSION's selection too ──────────────
+    //
+    // The upsert above sets `activeLessonSlug: null` because finishing a
+    // lesson ends the explicit selection that opened it. The session-scoped
+    // pointer records the SAME fact at the session grain and OUTRANKS the
+    // per-user field, so clearing only the latter would leave the finished
+    // lesson still selected for the session that finished it.
+    //
+    // The session is not named in this request (the client PATCHes a lesson
+    // completion, not a conversation), so it is resolved the same way the
+    // "Skip Anyway" branch below already resolves it: the learner's most
+    // recent session for this subject. Runs on EVERY completion, mastered or
+    // skipped, because `activeLessonSlug: null` above runs on every one too.
+    //
+    // NOT a read-time filter. A completed lesson must stay re-enterable —
+    // completedLessonIsReEnterable.test.ts records the production P0 caused by
+    // treating "completed" as "unteachable" — so the pointer is CLEARED here
+    // and re-set by the next explicit lesson open, never ignored on read.
+    //
+    // Fail-soft: a pointer that does not clear degrades to a stale session
+    // selection, which the next lesson open overwrites. Never fails the PATCH.
+    try {
+      const subjectRow = await prisma.subject.findUnique({ where: { slug: subjectCode } })
+      if (subjectRow) {
+        const recentSession = await prisma.learnSession.findFirst({
+          where: { userId: session.user.id, subjectId: subjectRow.id },
+          orderBy: { updatedAt: 'desc' },
+          select: { id: true },
+        })
+        if (recentSession) {
+          const { clearSessionLessonPointer } = await import('@/lib/teaching/sessionLessonPointer')
+          const cleared = await clearSessionLessonPointer(prisma, recentSession.id)
+          if (!cleared.applied) {
+            console.warn('[curriculum/progress] session lesson pointer not cleared', {
+              sessionId: recentSession.id, reason: cleared.reason,
+            })
+          }
+        }
+      }
+    } catch (err) {
+      console.error('[curriculum/progress] session lesson pointer clear failed', err)
+    }
+
     // XP and flashcards are awarded only on genuine first completion.
     // The atomic raw UPDATE above ensures concurrent calls cannot both
     // receive isNewCompletion=true for the same lesson.

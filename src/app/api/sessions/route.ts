@@ -35,6 +35,12 @@ const dbCall = <T>(label: string, fn: () => Promise<T>): Promise<T> =>
 
 const createSchema = z.object({
   subjectSlug: z.string(),
+  // PCD-004A: which BROWSER TAB is asking. Opaque, client-minted, per-tab.
+  // It is a RESUME PREFERENCE and nothing else — it never widens access (the
+  // userId clause below is untouched and still decides ownership), never names
+  // a session, and an absent or unknown value simply falls back to the
+  // pre-PCD-004A behaviour of resuming the most recent session.
+  tabId: z.string().min(1).max(64).optional(),
   memoryContext: z.string().optional(),
   // School Mode (Sprint BI): catalog chapter id (e.g. "cbse.math.8.ch1") —
   // persisted in contextSnapshot so the chat route can build board-aware context.
@@ -65,47 +71,95 @@ export async function POST(req: Request) {
 
   try {
     const body = await req.json();
-    const { subjectSlug, memoryContext, schoolChapterId } = createSchema.parse(body);
+    const { subjectSlug, memoryContext, schoolChapterId, tabId } = createSchema.parse(body);
 
 
     const subject = await dbCall('sessions-subject-lookup', () => prisma.subject.findUnique({ where: { slug: subjectSlug } }));
     if (!subject) return NextResponse.json({ success: false, error: "Subject not found" }, { status: 404 });
 
     // LESSON ISOLATION — same resolution as /api/sessions/history (which
-    // this whole branch exists to stand in for when that call fails):
-    // activeLessonSlug prioritized over currentLesson, same lessonKeyFor()
-    // helper. Resolved BEFORE the session lookup below so it can narrow the
-    // nested `messages` include at the query level, instead of returning a
-    // resumed session's full 30-message window undifferentiated by lesson —
-    // the same cross-lesson leak the primary endpoint had.
+    // this whole branch exists to stand in for when that call fails): the
+    // session's own lesson pointer prioritized over the per-user
+    // activeLessonSlug, then currentLesson, same lessonKeyFor() helper.
+    // Resolved BEFORE the session lookup below so it can narrow the nested
+    // `messages` include at the query level, instead of returning a resumed
+    // session's full 30-message window undifferentiated by lesson — the same
+    // cross-lesson leak the primary endpoint had.
+    //
+    // Resume an existing ACTIVE session from within the last 24 hours instead of
+    // creating a new one — this preserves the conversation across page refreshes.
+    const cutoff = new Date(Date.now() - 24 * 60 * 60 * 1000);
+    const resumeWhere = {
+      userId: session.user.id,
+      subjectId: subject.id,
+      status: "ACTIVE" as const,
+      startedAt: { gte: cutoff },
+      // Only resume sessions that have at least one assistant message (i.e. the
+      // lesson actually started — not a session that was created but never used).
+      messages: { some: { role: "ASSISTANT" as const } },
+    };
+    const resumeOrder = { startedAt: "desc" as const };
+
+    // PCD-004: the lesson key must come from the session ABOUT TO BE RESUMED,
+    // not from the per-user pointer another session may have moved. That
+    // session is not known until it is found, and the key is needed to narrow
+    // the nested `messages` include at the query level — so the candidate's
+    // snapshot is read first, by the IDENTICAL where/orderBy, which therefore
+    // selects the identical row. One extra indexed lookup on the resume path;
+    // the create path is untouched.
+    // PCD-004A: a TAB, not just the user, decides which session to resume.
+    //
+    // The old lookup took the single most recent resumable session, so two
+    // tabs open on one subject both landed on it and shared one conversation
+    // — and a lesson opened in one silently became the lesson taught in the
+    // other. Candidates are now fetched newest-first and `chooseResumableSession`
+    // picks: this tab's own session, else one no other LIVE tab is holding,
+    // else none (and a new one is created below).
+    //
+    // A handful is enough: tiers 1 and 2 both take the first match, and more
+    // than a few simultaneously-live tabs on one subject is not a real shape.
+    const RESUME_CANDIDATE_LIMIT = 5;
+    const resumeCandidates = await dbCall('sessions-resume-candidates', () => prisma.learnSession.findMany({
+      where: resumeWhere,
+      orderBy: resumeOrder,
+      take: RESUME_CANDIDATE_LIMIT,
+      select: { id: true, contextSnapshot: true },
+    })).catch(() => [] as { id: string; contextSnapshot: unknown }[]);
+
+    const { chooseResumableSession, sessionTabOwnerDelta } =
+      await import('@/lib/teaching/sessionLessonPointer');
+    const resumeChoice = chooseResumableSession({
+      candidates: resumeCandidates, tabId, now: new Date(),
+    });
+    const resumeCandidate = resumeChoice.session;
+
     let resumeLessonKey: string | null = null;
     try {
       const sp = await dbCall('sessions-progress-lookup', () => prisma.studentProgress.findUnique({
         where: { userId_subjectCode: { userId: session.user.id, subjectCode: subjectSlug } },
         select: { currentLesson: true, activeLessonSlug: true },
       }));
-      if (sp) {
+      if (sp || resumeCandidate) {
         const { lessonKeyFor } = await import('@/lib/teaching/lessonAttempt');
-        resumeLessonKey = lessonKeyFor({ topicSlug: sp.activeLessonSlug, lessonOrder: sp.currentLesson });
+        const { resolveSessionLessonSlug } = await import('@/lib/teaching/sessionLessonPointer');
+        const resolved = resolveSessionLessonSlug({
+          sessionSnapshot: resumeCandidate?.contextSnapshot,
+          activeLessonSlug: sp?.activeLessonSlug ?? null,
+        });
+        resumeLessonKey = lessonKeyFor({ topicSlug: resolved.slug, lessonOrder: sp?.currentLesson ?? null });
       }
     } catch (err) {
       console.warn('[sessions POST] lesson-key resolution skipped:', err);
     }
 
-    // Resume an existing ACTIVE session from within the last 24 hours instead of
-    // creating a new one — this preserves the conversation across page refreshes.
-    const cutoff = new Date(Date.now() - 24 * 60 * 60 * 1000);
-    const existingSession = await dbCall('sessions-existing-lookup', () => prisma.learnSession.findFirst({
-      where: {
-        userId: session.user.id,
-        subjectId: subject.id,
-        status: "ACTIVE",
-        startedAt: { gte: cutoff },
-        // Only resume sessions that have at least one assistant message (i.e. the
-        // lesson actually started — not a session that was created but never used).
-        messages: { some: { role: "ASSISTANT" } },
-      },
-      orderBy: { startedAt: "desc" },
+    // Loads the session `chooseResumableSession` picked — by id, so it cannot
+    // drift from the one whose snapshot supplied resumeLessonKey above. The
+    // ownership clause is kept in the WHERE as well: the id came from a query
+    // already scoped to this user, and re-asserting it here means a future
+    // refactor cannot turn this into an id-addressable lookup.
+    const existingSession = resumeCandidate ? await dbCall('sessions-existing-lookup', () => prisma.learnSession.findFirst({
+      where: { ...resumeWhere, id: resumeCandidate.id },
+      orderBy: resumeOrder,
       include: {
         // Cap to the most-recent 30 messages — matches HISTORY_LIMIT in
         // /api/learn/chat. This is a fallback path only (used when the
@@ -121,7 +175,7 @@ export async function POST(req: Request) {
           take: 30,
         },
       },
-    }));
+    })) : null;
 
     if (existingSession) {
       // ── RESTORE THE FIGURE THAT WAS ON SCREEN ────────────────────────────
@@ -187,8 +241,33 @@ export async function POST(req: Request) {
       } catch (err) {
         console.warn('[sessions] per-message visual restore skipped:', err);
       }
+      // PCD-004A: stamp/refresh this tab's claim so a second tab opened
+      // alongside does not also resume it. Goes through the SAME versioned
+      // writer as every other contextSnapshot write (snapshotWriterDiscipline),
+      // never a whole-column overwrite. No-ops when the caller sent no tabId.
+      if (tabId) {
+        try {
+          const { writeSnapshotDelta, readSnapshotVersion } = await import('@/lib/db/snapshotWrite');
+          const claimed = resumeCandidates.find((c) => c.id === existingSession.id);
+          await writeSnapshotDelta(prisma, {
+            sessionId: existingSession.id,
+            expectedVersion: readSnapshotVersion(claimed?.contextSnapshot ?? null),
+            delta: sessionTabOwnerDelta(tabId, new Date()),
+          });
+        } catch (err) {
+          // Fail-soft: an unstamped claim only means another tab may resume
+          // this session too — i.e. exactly the pre-PCD-004A behaviour.
+          console.warn('[sessions POST] tab claim not stamped:', err);
+        }
+      }
+
       return NextResponse.json(
-        { success: true, data: existingSession, resumed: true, restoredVisual, messageVisuals },
+        // PCD-004C: `lessonKey` is the lesson THIS session resolves to. The
+        // client's mount-time history fetch cannot name a session, so it
+        // resolves per-user; comparing the two keys is how it learns, in one
+        // comparison and with no extra request in the common case, that the
+        // history it just rendered belongs to a different lesson.
+        { success: true, data: existingSession, resumed: true, restoredVisual, messageVisuals, lessonKey: resumeLessonKey },
         { status: 200 },
       );
     }
@@ -226,6 +305,10 @@ export async function POST(req: Request) {
           currentStep: activePath?.currentStep,
           memoryContext: memoryContext ?? null,
           schoolChapterId: schoolChapterId ?? null,
+          // PCD-004A: the creating tab owns it from birth, folded into the
+          // snapshot this row is created with so the claim costs no extra
+          // write and there is no window in which the new session looks free.
+          ...sessionTabOwnerDelta(tabId, new Date()),
         },
       },
     }));
@@ -245,7 +328,11 @@ export async function POST(req: Request) {
       setUserActiveSession(session.user.id, learnSession.id),
     ]);
 
-    return NextResponse.json({ success: true, data: learnSession }, { status: 201 });
+    // PCD-004C: see the resume branch. A brand-new session has no pointer of
+    // its own yet, so this is the per-user key — which is exactly what the
+    // unscoped history fetch used, so a fresh session never triggers a
+    // corrective re-fetch.
+    return NextResponse.json({ success: true, data: learnSession, lessonKey: resumeLessonKey }, { status: 201 });
   } catch (err) {
     if (err instanceof z.ZodError) {
       return NextResponse.json({ success: false, error: err.errors[0].message }, { status: 400 });
