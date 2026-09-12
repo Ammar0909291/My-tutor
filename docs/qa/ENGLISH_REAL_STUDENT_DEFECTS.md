@@ -78,6 +78,13 @@ authoritative record for that range.
   Consistent in shape with a symbol being generated then stripped or lost before
   render — plausibly a markdown-sanitization or special-character-handling step
   between model output and the client, but this was not traced to a specific module.
+- **2026-09-12 — NOT FIXED, and NOT the tag pipeline.** Checked before assuming: the
+  residual-tag sweep is not involved (it removes markup, never characters inside prose),
+  and the missing items are IPA symbols and phoneme values, i.e. content the model had to
+  produce. No sanitization step in `src/` strips non-ASCII from reply text. So the
+  plausible cause is generation, not a render/strip stage — but that was NOT proven, and
+  patching a stripper that is not implicated would be a speculative fix. Left open with
+  the narrowed finding recorded.
 - **Status:** NEW — not previously documented anywhere else in this repo found during
   this audit.
 - **Severity:** P1 — makes MCQ options genuinely indistinguishable in several
@@ -200,6 +207,18 @@ authoritative record for that range.
   instruction. The `<--ATTEMPT ...-->` tag is an unrendered internal directive of a
   kind (channel/representation/concreteness/scaffold/pacing parameters) not
   documented as learner-facing anywhere in this repo.
+- **2026-09-12 — TAG HALF FIXED AND REPRODUCED.** The `<--ATTEMPT …-->` leak is a
+  MALFORMED COMMENT OPENER: `<--`, not `<!--`. Reproduced against the real module before
+  changing it — `stripResidualMachineTags` returned it UNTOUCHED and `hasResidualMachineTag`
+  reported it CLEAN, the same structural blindness this module had to the bracket shape
+  before Phase 6 and to bare JSON before Phase 7; and `<--` is not a valid HTML comment, so
+  nothing downstream hid it either. Three sites carried the `<!--` literal (the regex, the
+  sweep's FAST PATH — which returned early even after the regex was widened — and the
+  detector); all three now share ONE opener definition so they cannot drift again. The
+  SHOUTED-name and terminator requirements are unchanged, so prose arrows are untouched
+  (4 negative controls pinned). Guard: `src/tests/englishOpenDefects.test.ts`.
+  **The "argued discovery step" half is NOT fixed** — that is model output echoing
+  authoring-style prose, not a tag, and no stripper can tell it from teaching text.
 - **Status:** NEW — not previously documented.
 - **Severity:** P1 — this is a genuine breach of the prompt/learner-output boundary:
   real students saw raw internal authoring/control text. Does not fabricate mastery
@@ -229,6 +248,14 @@ authoritative record for that range.
   `eng.phonics.print-concepts` specifically (a documented pre-reading, voice-required
   entry node — see ENG-D15) has a first-lesson-guard interaction that misfires this
   early.
+- **2026-09-12 — INVESTIGATED, NOT REPRODUCED, NOT FIXED.** Ruled out by measurement
+  rather than reasoning: the trigger message "ok starting, not sure about this topic" reads
+  `wantsToStop:false`, `failureState:null`, `learnerRequest:null`, `detectAutonomyRequest:false`,
+  `isBareAcknowledgement:false` — so it is NOT a stop/autonomy misread, which was the
+  leading hypothesis. The observed reply is the closed-concept close script, which needs
+  persisted session state (a prior attempt's ladder/budget) that cannot be reconstructed
+  offline from the log. Phase 7L already fixed the ladder-carryover class. Left open rather
+  than patched on a guess.
 - **Status:** NEW.
 - **Severity:** P1 — a real learner's very first contact with this lesson is a
   "come back later" message with nothing taught.
@@ -569,6 +596,21 @@ authoritative record for that range.
 - **Root cause:** UNCONFIRMED — not investigated (read-only audit); plausibly a race
   between the visual-resolution path and gate-question attachment on that specific
   turn.
+- **2026-09-12 — ROOT CAUSE FOUND AND FIXED.** Not a race. `readTurnIntent('can i see a
+  visual')` returned `learnerRequest: null`, so the arbitration ladder's LEARNER_REQUEST
+  rung — which ALREADY suppresses `AUTHORED_PROBE` — never claimed the turn, and the gate
+  attached a probe exactly as designed. Every sibling phrasing resolved ("can i see a
+  diagram/picture/image/graph/chart"), and "show me a visual" only resolved via the
+  object-less `SHOW_ME_RE`. Cause: bare `visual` is not in `VISUAL_MEDIUM_NOUNS`. Measured:
+  8 of 9 request frames for the bare noun failed. Fixed with request-frame-scoped
+  alternatives — the SAME treatment `visually` already has — WITHOUT widening the shared
+  `VISUAL_MEDIUM_NOUNS` list, which the module forbids and the visual target resolver
+  depends on. 7 negative controls pinned ("i am a visual learner" must stay false).
+  **Boundary respected:** `masteryGate.test.ts` pins `'visual'` and `'any visuals?'` as
+  null; both still hold, so the `any <noun>` frame was deliberately not added.
+  **Known residue, reported not fixed:** `MEDIUM_REQUEST_RE`'s own documentation lists
+  "any visual for this?" as a case it catches, and it does not — that doc example and the
+  test contradict each other, both predate this change, and resolving it is an owner call.
 - **Status:** NEW.
 - **Severity:** P2 — a weak learner who explicitly asked for help gets no signal the
   request was even heard.
@@ -756,6 +798,8 @@ authoritative record for that range.
 | Severity | Count |
 |---|---|
 | P0 | 0 (ENG-D06 CLOSED 2026-09-12 — BENIGN, instrument defect, not a mastery defect) |
+| Fixed 2026-09-12 | ENG-D02, D03, D04 (tag half), D08, D09, D16; D06 closed benign; D07 no runtime mechanism |
+| Investigated, not reproduced | ENG-D01 (narrowed: not the tag pipeline), ENG-D05 (not a stop/autonomy misread) |
 | P1 | 11 (ENG-D01, D02, D03, D04, D05, D08, D09, D11, D14, D17, D18) |
 | P2 | 6 (ENG-D07, D10, D12, D13, D15, D16) |
 | P3 | 1 (ENG-D19) |

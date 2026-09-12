@@ -496,6 +496,58 @@ const MEDIUM_REQUEST_RE = new RegExp(
     // only: bare "visual"/"visuals" belongs to the Teaching Planner's
     // non-authoritative matcher, and widening to it here is forbidden.
     `\\b(?:show|see|explain|draw|do|need|want)\\s+(?:\\w+\\s+){0,3}?visually\\b`,
+    // ENG-D16 (2026-09-12): THE BARE NOUN "visual", INSIDE A REQUEST FRAME ONLY.
+    //
+    // Measured live (`eng.grammar.compound-sentences`, order 67, T5): a learner
+    // typed "can i see a visual" and the reply was a brand-new gate MCQ with no
+    // acknowledgement that they had asked for anything. The arbitration ladder
+    // was working exactly as designed — LEARNER_REQUEST suppresses
+    // AUTHORED_PROBE — but it never fired, because `readTurnIntent` returned
+    // `learnerRequest: null`: 'visual' is not in VISUAL_MEDIUM_NOUNS. Its
+    // siblings all resolve ("can i see a diagram/picture/image/graph/chart"),
+    // and "show me a visual" only resolves via the object-less SHOW_ME_RE, not
+    // via the noun.
+    //
+    // Measured across 9 request frames for the bare noun: 8 failed, including
+    // **"any visual for this?" — an example this very block's own
+    // documentation lists as a case the rule catches**. A documented example
+    // that does not work is a gap, not a deliberate omission.
+    //
+    // WHY NOT ADD IT TO VISUAL_MEDIUM_NOUNS: that list is shared with the
+    // visual TARGET resolver to tell a medium from a Knowledge Graph concept
+    // title, and the note above forbids widening it to bare 'visual'
+    // ("belongs to the Teaching Planner's non-authoritative matcher"). That
+    // ban is honoured: nothing here changes the shared vocabulary. This takes
+    // the SAME treatment 'visually' already has one line above — recognised
+    // only inside an explicit asking construction, never as a bare mention —
+    // which is the precedent this file set for exactly this situation.
+    //
+    // BOUNDARY RESPECTED, NOT OVERRIDDEN: `masteryGate.test.ts` pins
+    // `detectLearnerRequest('visual')` and `detectLearnerRequest('any visuals?')`
+    // as null, on the stated ground that bare 'visual'/'visuals' belongs to the
+    // planner's non-authoritative matcher. Both still hold — the bare word
+    // matches no frame here, and the `any <noun>` frame was deliberately NOT
+    // added for 'visual' even though it exists for every other medium noun.
+    // The measured production case ("can i see a visual") is covered by the
+    // verb-bearing frame instead, so the defect closes without crossing that
+    // line. KNOWN RESIDUE, reported not fixed: "any visual for this?" is listed
+    // in MEDIUM_REQUEST_RE's own documentation above as a case the rule
+    // catches, and it does not — that doc example and the test contradict each
+    // other and both predate this change; resolving it is an owner call, not a
+    // side effect of closing ENG-D16.
+    //
+    // The frames are deliberately closed, not the generic `can you (\w+){0,3}`
+    // one: 'visual' is an ordinary adjective, so 5 negative controls must stay
+    // false and are pinned — "i am a visual learner", "the visual was
+    // confusing", "i understand the visual now", "this visual makes sense",
+    // "visual memory is interesting".
+    `\\b(?:show|give|send|make|create|display|add|put)\\s+(?:me|us)?\\s*(?:a|an|the|some)?\\s*visuals?\\b`,
+    `\\b(?:can|could|would|will|may)\\s+(?:you|i|we)\\s+(?:see|have|get|show)\\s+(?:me|us)?\\s*(?:a|an|the|some)?\\s*visuals?\\b`,
+    `\\b(?:is|are)\\s+there\\s+(?:a|an|any|some)?\\s*visuals?\\b`,
+    `\\b(?:do|did|have)\\s+you\\s+(?:have|got)\\s+(?:a|an|any)?\\s*visuals?\\b`,
+    `\\b(?:want|need)\\s+(?:a|an|the|some)?\\s*visuals?\\b`,
+    `\\b(?:a|an|the)\\s+visuals?\\s+(?:would|will|might|could)\\s+help\\b`,
+    `\\blet\\s+(?:me|us)\\s+see\\s+(?:a|an|the)?\\s*visuals?\\b`,
   ].join('|'),
   'i',
 )

@@ -10103,6 +10103,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // answer attempt has BOTH null (measured), a distress/help turn does not.
           && turnIntent.failureState === null
           && turnIntent.learnerRequest === null
+          // A STOP REQUEST IS NOT AN ANSWER ATTEMPT (2026-09-12). Recorded as
+          // open and pre-existing when ENG-D02 shipped: "I am done for today"
+          // reads wantsToStop=true while every other exclusion reads false, so
+          // a learner ending their session was told to tap a choice. Measured
+          // after ENG-D02, this is ALREADY closed incidentally — that message
+          // engages no option, so the positive term below refuses it — but the
+          // exclusion is stated anyway, because it is the arbitration ladder's
+          // own rule rather than a coincidence: CLOSE outranks TEACH, so a turn
+          // that asks to stop cannot also be a turn that demands an answer.
+          // Without it, a mixed message ("B, and I'm done for today") would
+          // satisfy the positive term and draw the lead-in over a close.
+          && !turnIntent.wantsToStop
           // ENG-D02 (2026-09-12): THE POSITIVE TERM. Every term above this one
           // is a NOT, so before this line the predicate's default answer to
           // "is this an answer attempt?" was YES and each non-answer had to be
