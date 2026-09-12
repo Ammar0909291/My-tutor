@@ -26,6 +26,8 @@ import {
 } from '@/lib/teaching/lessonAttemptStore'
 import { recordConceptOutcome, lessonKeyFor } from '@/lib/teaching/lessonAttempt'
 import { initialConversationState, type ConversationState } from '@/lib/teaching/conversationState'
+import { readFileSync } from 'fs'
+import path from 'path'
 import { isConceptClosed } from '@/lib/teaching/lessonAttempt'
 
 const USER = 'u1'
@@ -37,27 +39,49 @@ const SUBJ = 'physics'
 function fakeDb() {
   const rows: any[] = []
   let seq = 0
+  // A monotonic write clock, so `updatedAt` is a usable version even when two
+  // writes land in the same real millisecond.
+  let clock = 1_000_000
   const db = {
     lessonAttempt: {
+      // Every clause is OPTIONAL, as Prisma's are. The first version of this
+      // fake required userId/subjectSlug/lessonKey, so the store's own
+      // `findFirst({ where: { id } })` re-read on the conflict path matched
+      // nothing and the retry silently reported "row vanished" — a limitation
+      // of the double, not of the code under test. Found by the retry tests.
       async findFirst({ where, orderBy: _o }: any) {
         const m = rows.filter((r) =>
-          r.userId === where.userId &&
-          r.subjectSlug === where.subjectSlug &&
-          r.lessonKey === where.lessonKey &&
+          (where.id === undefined || r.id === where.id) &&
+          (where.userId === undefined || r.userId === where.userId) &&
+          (where.subjectSlug === undefined || r.subjectSlug === where.subjectSlug) &&
+          (where.lessonKey === undefined || r.lessonKey === where.lessonKey) &&
           (where.status === undefined || r.status === where.status))
-        return m.sort((a, b) => +b.startedAt - +a.startedAt)[0] ?? null
+        // total order, mirroring the store's [startedAt desc, id desc]
+        return m.sort((a, b) => (+b.startedAt - +a.startedAt) || b.id.localeCompare(a.id))[0] ?? null
       },
       async create({ data }: any) {
         const row = {
           id: `att-${++seq}`, conceptsMastered: [], conceptsNeedingReview: [],
           misconceptionsCorrected: [], teachingAttempts: 0, budgetExhaustions: 0,
           completedAt: null, durationSeconds: null, lessonTitle: null, ...data,
+          updatedAt: new Date(++clock),
         }
         rows.push(row); return { ...row }
       },
       async update({ where, data }: any) {
         const row = rows.find((r) => r.id === where.id)
-        Object.assign(row, data); return { ...row }
+        Object.assign(row, data, { updatedAt: new Date(++clock) }); return { ...row }
+      },
+      // Prisma's conditional-update semantics: the WHERE is a real filter, so
+      // a stale `updatedAt` matches nothing and reports count 0. This is what
+      // makes the optimistic path testable without a database.
+      async updateMany({ where, data }: any) {
+        const row = rows.find((r) =>
+          r.id === where.id &&
+          (where.updatedAt === undefined || +r.updatedAt === +where.updatedAt))
+        if (!row) return { count: 0 }
+        Object.assign(row, data, { updatedAt: new Date(++clock) })
+        return { count: 1 }
       },
     },
     topicProgress: {
@@ -207,35 +231,87 @@ describe('the fold itself is safe under repetition', () => {
   })
 })
 
-describe('NEGATIVE CONTROL — the one genuine residue, recorded rather than hidden', () => {
-  it('concurrent folds of DIFFERENT concepts lose one, because aggregates are written wholesale', async () => {
+describe('PCD-004B — the lost update is CLOSED by a conditional write + refold', () => {
+  /** Fold this turn's concept onto whatever the row actually holds now. */
+  const refoldWith = (conceptId: string, mastered: boolean) =>
+    (fresh: any) => recordConceptOutcome(fresh, state(conceptId, mastered))
+
+  it('concurrent folds of DIFFERENT concepts now BOTH survive', async () => {
     const { db, rows } = fakeDb()
-    // Both turns read the attempt BEFORE either writes — the interleaving.
+    // Both turns read the attempt BEFORE either writes — the interleaving that
+    // used to lose one of them.
+    const s1 = await openLessonAttempt(db, { userId: USER, subjectSlug: SUBJ, lessonKey: KEY })
+    const s2 = await openLessonAttempt(db, { userId: USER, subjectSlug: SUBJ, lessonKey: KEY })
+
+    const r1 = await saveLessonAttempt(db, s1.id, recordConceptOutcome(s1.outcome, state('c1', true)),
+      { expectedUpdatedAt: s1.updatedAt, refold: refoldWith('c1', true) })
+    const r2 = await saveLessonAttempt(db, s2.id, recordConceptOutcome(s2.outcome, state('c2', true)),
+      { expectedUpdatedAt: s2.updatedAt, refold: refoldWith('c2', true) })
+
+    expect(r1).toEqual({ applied: true, conflicted: false })
+    expect(r2).toEqual({ applied: true, conflicted: true })   // detected and recovered
+    expect([...rows[0].conceptsMastered].sort()).toEqual(['c1', 'c2'])
+  })
+
+  it('the counters accumulate once each — the refold does NOT double-count', async () => {
+    const { db, rows } = fakeDb()
+    const s1 = await openLessonAttempt(db, { userId: USER, subjectSlug: SUBJ, lessonKey: KEY })
+    const s2 = await openLessonAttempt(db, { userId: USER, subjectSlug: SUBJ, lessonKey: KEY })
+    const one = recordConceptOutcome(s1.outcome, state('c1', true))
+    await saveLessonAttempt(db, s1.id, one, { expectedUpdatedAt: s1.updatedAt, refold: refoldWith('c1', true) })
+    await saveLessonAttempt(db, s2.id, recordConceptOutcome(s2.outcome, state('c2', true)),
+      { expectedUpdatedAt: s2.updatedAt, refold: refoldWith('c2', true) })
+    // exactly two folds happened, so exactly two increments
+    expect(rows[0].teachingAttempts).toBe(one.teachingAttempts * 2)
+  })
+
+  it('mastery still REMOVES a concept from review — the set relation is preserved', async () => {
+    const { db, rows } = fakeDb()
+    const s1 = await openLessonAttempt(db, { userId: USER, subjectSlug: SUBJ, lessonKey: KEY })
+    const s2 = await openLessonAttempt(db, { userId: USER, subjectSlug: SUBJ, lessonKey: KEY })
+    await saveLessonAttempt(db, s1.id, recordConceptOutcome(s1.outcome, state('c1', false)),
+      { expectedUpdatedAt: s1.updatedAt, refold: refoldWith('c1', false) })
+    await saveLessonAttempt(db, s2.id, recordConceptOutcome(s2.outcome, state('c2', true)),
+      { expectedUpdatedAt: s2.updatedAt, refold: refoldWith('c2', true) })
+    expect(rows[0].conceptsNeedingReview).toEqual(['c1'])
+    expect(rows[0].conceptsMastered).toEqual(['c2'])
+    // no concept is ever in both lists
+    expect(rows[0].conceptsMastered.filter((c: string) => rows[0].conceptsNeedingReview.includes(c)))
+      .toEqual([])
+  })
+
+  it('an uncontended write does not conflict and costs no re-read', async () => {
+    const { db, rows } = fakeDb()
+    const s1 = await openLessonAttempt(db, { userId: USER, subjectSlug: SUBJ, lessonKey: KEY })
+    const r = await saveLessonAttempt(db, s1.id, recordConceptOutcome(s1.outcome, state('c1', true)),
+      { expectedUpdatedAt: s1.updatedAt, refold: refoldWith('c1', true) })
+    expect(r).toEqual({ applied: true, conflicted: false })
+    expect(rows[0].conceptsMastered).toEqual(['c1'])
+  })
+
+  it('called WITHOUT opts it is the previous unconditional write, unchanged', async () => {
+    const { db, rows } = fakeDb()
     const s1 = await openLessonAttempt(db, { userId: USER, subjectSlug: SUBJ, lessonKey: KEY })
     const s2 = await openLessonAttempt(db, { userId: USER, subjectSlug: SUBJ, lessonKey: KEY })
     await saveLessonAttempt(db, s1.id, recordConceptOutcome(s1.outcome, state('c1', true)))
     await saveLessonAttempt(db, s2.id, recordConceptOutcome(s2.outcome, state('c2', true)))
-
-    // c1 is gone. This is an ordinary last-writer-wins lost update on an
-    // EVIDENCE row; it is documented in the report, not silently fixed,
-    // because merging the two counters (teachingAttempts, budgetExhaustions)
-    // has no single correct answer and guessing one would be worse.
+    // the ORIGINAL lost update, preserved as the negative control: this is what
+    // the conditional path above is measured against
     expect(rows[0].conceptsMastered).toEqual(['c2'])
-    expect(rows[0].conceptsMastered).not.toContain('c1')
   })
 
-  it('and the loss can only UNDER-report — it can never fabricate mastery', async () => {
-    const { db, rows } = fakeDb()
+  it('a vanished row is reported, never thrown', async () => {
+    const { db } = fakeDb()
     const s1 = await openLessonAttempt(db, { userId: USER, subjectSlug: SUBJ, lessonKey: KEY })
-    const s2 = await openLessonAttempt(db, { userId: USER, subjectSlug: SUBJ, lessonKey: KEY })
-    // one session masters a concept, the other flags a DIFFERENT one for review
-    await saveLessonAttempt(db, s1.id, recordConceptOutcome(s1.outcome, state('c1', true)))
-    await saveLessonAttempt(db, s2.id, recordConceptOutcome(s2.outcome, state('c2', false)))
-    // whatever survives, nothing was invented: every id present was genuinely
-    // folded by one of the two turns, and no concept appears in both lists
-    const all = [...rows[0].conceptsMastered, ...rows[0].conceptsNeedingReview]
-    expect(all.every((c: string) => c === 'c1' || c === 'c2')).toBe(true)
-    expect(rows[0].conceptsMastered.filter((c: string) => rows[0].conceptsNeedingReview.includes(c)))
-      .toEqual([])
+    const r = await saveLessonAttempt(db, 'gone', recordConceptOutcome(s1.outcome, state('c1', true)),
+      { expectedUpdatedAt: s1.updatedAt, refold: refoldWith('c1', true) })
+    expect(r).toEqual({ applied: false, conflicted: true })
+  })
+
+  it('the chat route passes the guard AND the refold', () => {
+    const src = readFileSync(
+      path.join(process.cwd(), 'src/app/api/learn/chat/route.ts'), 'utf8')
+    expect(src).toContain('expectedUpdatedAt: updatedAt')
+    expect(src).toMatch(/refold: \(fresh\) => recordConceptOutcome\(/)
   })
 })

@@ -210,3 +210,130 @@ export function shouldRefetchScopedHistory(input: {
   if (input.sessionLessonKey === undefined) return false
   return input.sessionLessonKey !== (input.historyLessonKey ?? null)
 }
+
+// ── PCD-004A: WHICH TAB IS THIS SESSION'S CONVERSATION? ────────────────────
+//
+// PCD-004 gave each SESSION its own lesson pointer, which fixes two sessions.
+// It cannot separate two TABS that resolve to the SAME session — and they do,
+// because `/api/sessions` resumes the most recent ACTIVE session for the user
+// and nothing in that predicate distinguishes one tab from another. Tab 2 then
+// opens a different lesson, moves the shared session's pointer, and tab 1's
+// next turn follows it. From the server both look identical to one learner
+// navigating, so no server-only rule can tell them apart: this needs a client
+// identity, and that is the ONLY thing introduced here.
+//
+// WHY A CLAIM AND NOT A FILTER. Resuming strictly by tab id would mean a tab
+// that is closed and reopened matches nothing and loses the 24h conversation —
+// a regression on "normal continuation must still work", because a per-tab id
+// necessarily dies with the tab. So the tab id is a PREFERENCE, applied in
+// three steps (chooseResumableSession): the same tab's own session first, then
+// any session no OTHER LIVE tab is holding, and only then a new one. A
+// reopened tab finds its old session unclaimed and takes it over; a second
+// tab opened alongside a live one does not.
+//
+// LIVENESS WITHOUT A HEARTBEAT. `seenAt` is refreshed by the writes the tab
+// already makes — the lesson-init pointer write and every chat turn — so there
+// is no new endpoint, no polling, and an abandoned claim simply ages out.
+
+/** How long a tab's claim on a session survives without any activity from it.
+ *  Comfortably longer than a learner reading a long explanation between turns,
+ *  and far shorter than the 24h resume window it sits inside. */
+export const TAB_CLAIM_TTL_MS = 15 * 60 * 1000
+
+export const SESSION_TAB_OWNER_KEY = 'tabOwner'
+
+export interface SessionTabOwner {
+  tabId: string
+  /** ISO timestamp of the last activity from that tab. */
+  seenAt: string
+}
+
+/** Total and forgiving, exactly like readSessionLessonPointer: any malformed
+ *  shape reads as "unowned", which falls through to today's behaviour. */
+export function readSessionTabOwner(snapshot: unknown): SessionTabOwner | null {
+  if (!snapshot || typeof snapshot !== 'object' || Array.isArray(snapshot)) return null
+  const raw = (snapshot as Record<string, unknown>)[SESSION_TAB_OWNER_KEY]
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return null
+  const tabId = (raw as Record<string, unknown>).tabId
+  const seenAt = (raw as Record<string, unknown>).seenAt
+  if (typeof tabId !== 'string' || tabId.trim() === '') return null
+  if (typeof seenAt !== 'string' || Number.isNaN(Date.parse(seenAt))) return null
+  return { tabId: tabId.trim(), seenAt }
+}
+
+/** Claim/refresh delta. `null` tabId writes nothing, so a caller with no tab
+ *  identity (an older client) never clears someone else's claim. */
+export function sessionTabOwnerDelta(tabId: string | null | undefined, now: Date): Record<string, unknown> {
+  const id = typeof tabId === 'string' && tabId.trim() !== '' ? tabId.trim() : null
+  if (!id) return {}
+  return { [SESSION_TAB_OWNER_KEY]: { tabId: id, seenAt: now.toISOString() } satisfies SessionTabOwner }
+}
+
+/** Is another tab still actively holding this session? An unowned session, a
+ *  session this same tab owns, and a claim older than the TTL are all "no". */
+export function isClaimedByAnotherTab(input: {
+  snapshot: unknown
+  tabId: string | null | undefined
+  now: Date
+}): boolean {
+  const owner = readSessionTabOwner(input.snapshot)
+  if (!owner) return false
+  const mine = typeof input.tabId === 'string' ? input.tabId.trim() : ''
+  if (mine && owner.tabId === mine) return false
+  const age = input.now.getTime() - Date.parse(owner.seenAt)
+  return age >= 0 && age < TAB_CLAIM_TTL_MS
+}
+
+export interface ResumeCandidate {
+  id: string
+  contextSnapshot: unknown
+}
+
+export type ResumeChoiceReason =
+  /** This tab's own session — a refresh, or the same tab returning. */
+  | 'same-tab'
+  /** Nobody live is holding it: an unowned session, or a claim that aged out. */
+  | 'unclaimed'
+  /** Every candidate is held by another live tab. */
+  | 'create-new'
+
+/**
+ * THE RESUME RULE. Pure: the route supplies the candidates (already scoped to
+ * this user and subject by the query) and this decides which, if any, to take.
+ *
+ * Candidates MUST arrive newest-first — the same ordering the route's own
+ * query applies — because tiers 1 and 2 both take the first match.
+ *
+ * With no tab id (an older client, or any non-browser caller) every candidate
+ * reads as unclaimed and the first is chosen, which is exactly the
+ * pre-PCD-004A behaviour: resume the most recent session.
+ */
+export function chooseResumableSession(input: {
+  candidates: readonly ResumeCandidate[]
+  tabId: string | null | undefined
+  now: Date
+}): { session: ResumeCandidate | null; reason: ResumeChoiceReason } {
+  const mine = typeof input.tabId === 'string' && input.tabId.trim() !== '' ? input.tabId.trim() : null
+
+  // NO TAB IDENTITY ⇒ NO PREFERENCE, so claims must not exclude anything and
+  // the most recent session is resumed exactly as before PCD-004A. This is not
+  // a rare path: an older client sends nothing, and `getTabId()` returns null
+  // whenever storage is unavailable (private mode). Without this guard every
+  // such request fell through to `create-new` and made a NEW session on every
+  // load — the precise regression this rule exists to avoid. Caught by
+  // sessionTabIdentity.test.ts, which held this module's own documented
+  // contract against its behaviour.
+  if (!mine) {
+    const first = input.candidates[0]
+    return first ? { session: first, reason: 'unclaimed' } : { session: null, reason: 'create-new' }
+  }
+
+  const own = input.candidates.find((c) => readSessionTabOwner(c.contextSnapshot)?.tabId === mine)
+  if (own) return { session: own, reason: 'same-tab' }
+
+  const free = input.candidates.find((c) =>
+    !isClaimedByAnotherTab({ snapshot: c.contextSnapshot, tabId: mine, now: input.now }))
+  if (free) return { session: free, reason: 'unclaimed' }
+
+  return { session: null, reason: 'create-new' }
+}

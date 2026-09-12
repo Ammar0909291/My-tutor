@@ -43,6 +43,7 @@ import { extractNarrationSegments } from '@/lib/visuals/narrationSource'
 import { VisualRenderer } from '@/components/visuals/VisualRenderer'
 import type { SceneSpec } from '@/lib/teaching/sceneSpec'
 import { shouldRefetchScopedHistory } from '@/lib/teaching/sessionLessonPointer'
+import { getTabId } from '@/lib/teaching/tabIdentity'
 import { validateSceneSpec } from '@/lib/teaching/sceneSpecValidator'
 import { parseVisualSpec, type VisualSpec } from '@/lib/visuals/visualSpec'
 import { applyRestoredVisuals } from '@/lib/teaching/visual/messageMerge'
@@ -1341,6 +1342,10 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
           memoryContext: memoryContext ?? undefined,
           userId: userId ?? undefined,
           schoolChapterId: schoolChapterId ?? undefined,
+          // PCD-004A: so a second tab opened alongside this one gets its OWN
+          // session instead of silently sharing this conversation — and so a
+          // refresh of THIS tab still resumes rather than creating one.
+          tabId: getTabId() ?? undefined,
         })
         // PCD-004: NO `sessionId` here, deliberately. These two run in
         // parallel precisely because the session id does not exist yet — the
@@ -2022,6 +2027,9 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
               // See the note on sendMessage: an instruction the learner never
               // sees must never enter their transcript.
               ephemeral: !showInUI,
+              // PCD-004A: a turn is the strongest evidence this tab is live,
+              // so it refreshes this tab's claim on the session.
+              tabId: getTabId() ?? undefined,
               // Voice Signal Recovery (Claude Recommendation #7): forwarded
               // only when this turn originated from voice dictation —
               // additive, telemetry-only, undefined for typed messages.
@@ -2377,6 +2385,9 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
           totalLessons: curriculumLessons.length,
           completedLessons: curriculumProgress.completedLessons,
           teachingLanguage,
+          // PCD-004A: opening a lesson is activity — it refreshes this tab's
+          // claim so another tab cannot resume the session out from under it.
+          tabId: getTabId() ?? undefined,
         }),
       })
       const data = await res.json().catch(() => ({}))
@@ -2879,7 +2890,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       // on Safari usually clears on the second attempt.
       const postSession = () => fetchWithTimeout('/api/sessions', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ subjectSlug, memoryContext: memoryContext ?? undefined, userId: userId ?? undefined, schoolChapterId: schoolChapterId ?? undefined }),
+        body: JSON.stringify({ subjectSlug, memoryContext: memoryContext ?? undefined, userId: userId ?? undefined, schoolChapterId: schoolChapterId ?? undefined, tabId: getTabId() ?? undefined }),
       }, 15000)
       let res: Response
       try {

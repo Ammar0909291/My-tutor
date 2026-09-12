@@ -88,6 +88,11 @@ const schema = z.object({
   // this turn's message originated from voice dictation. Optional and
   // additive — older clients simply never send it.
   voiceSignal: voiceSignalSchema,
+  // PCD-004A: which browser tab sent this turn. Used ONLY to refresh that
+  // tab's claim on this session so a second tab does not resume it out from
+  // under a learner who is actively using it. It names no session, grants no
+  // access, and is ignored entirely when absent.
+  tabId: z.string().min(1).max(64).optional(),
 })
 
 export async function POST(req: Request) {
@@ -122,7 +127,7 @@ export async function POST(req: Request) {
 
   try {
     const body = await req.json()
-    const { sessionId, message, lastExplanationRead, voiceSignal, ephemeral } = schema.parse(body)
+    const { sessionId, message, lastExplanationRead, voiceSignal, ephemeral, tabId } = schema.parse(body)
 
     // Wave 0 Step 2 (Evidence Architecture §2, ASSESSMENT contract):
     // learner response latency is measured server-side from message
@@ -9218,7 +9223,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 const lessonKey = lessonKeyFor({ lessonOrder: lessonCtx?.currentLesson ?? null })
                 if (lessonKey) {
                   const store = await import('@/lib/teaching/lessonAttemptStore')
-                  const { id, outcome } = await store.openLessonAttempt(prisma, {
+                  const { id, outcome, updatedAt } = await store.openLessonAttempt(prisma, {
                     userId,
                     subjectSlug: learnSession.subject.slug,
                     lessonKey,
@@ -9227,7 +9232,17 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                   const folded = recordConceptOutcome(
                     outcome, stateForOutcome, lessonCtx?.lessonTitle ?? null,
                   )
-                  await store.saveLessonAttempt(prisma, id, folded)
+                  // PCD-004B: conditional on the row not having moved since it
+                  // was read, with THIS turn's single concept re-folded onto
+                  // whatever a concurrent turn committed. See saveLessonAttempt
+                  // for why re-folding rather than merging is the only answer
+                  // that does not have to invent counter semantics.
+                  await store.saveLessonAttempt(prisma, id, folded, {
+                    expectedUpdatedAt: updatedAt,
+                    refold: (fresh) => recordConceptOutcome(
+                      fresh, stateForOutcome, lessonCtx?.lessonTitle ?? null,
+                    ),
+                  })
                   if (folded.conceptsNeedingReview.includes(stateForOutcome.conceptId)) {
                     await store.markConceptForReview(prisma, {
                       userId,
@@ -9871,10 +9886,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // the turn — it only costs one round-trip before the reply
             // returns, which is the correct trade against losing the turn's
             // entire learning state.
+            const { sessionTabOwnerDelta } = await import('@/lib/teaching/sessionLessonPointer')
             const writeResult = await writeSnapshotDelta(prisma, {
               sessionId,
               expectedVersion: readSnapshotVersion(snapshot),
-              delta: libSnapshotDelta,
+              // PCD-004A: a turn IS activity, so it refreshes this tab's claim.
+              // Folded into the persist the turn already performs — no extra
+              // write, no heartbeat endpoint. Empty when no tabId was sent.
+              delta: { ...libSnapshotDelta, ...sessionTabOwnerDelta(tabId, new Date()) },
               rederive: rederivers.length === 0
                 ? undefined
                 : (fresh) => Object.assign({}, ...rederivers.map((f) => f(fresh))),

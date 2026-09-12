@@ -1,5 +1,19 @@
 /**
- * A — MULTI-TAB SESSION IDENTITY. A CHARACTERIZATION FILE, NOT A FIX.
+ * A — MULTI-TAB SESSION IDENTITY.
+ *
+ * ── STATUS: THE DEFECT THIS FILE CHARACTERIZED IS NOW FIXED (PCD-004A) ─────
+ * This file was written while A was escalated, and its tests deliberately
+ * ASSERTED THE DEFECT so the escalation was checkable against the code. The
+ * decision that closed it — a per-tab id used as a resume PREFERENCE — has
+ * landed, so the two assertions that named the missing discriminator have
+ * flipped, exactly as this header predicted they would. Each keeps its
+ * original assertion verbatim in a dated comment rather than being deleted,
+ * and now asserts the same property against the new shape.
+ *
+ * The three FACTS below are still true and still worth pinning: the defect was
+ * never a resolver bug, and fact 3 in particular (navigation reuses its
+ * session) is why the fix had to land at session RESUME rather than at lesson
+ * open. sessionTabIdentity.test.ts covers the rule itself.
  *
  * PCD-004 moved the lesson pointer to the SESSION, which fixes two concurrent
  * sessions. It does not — and structurally cannot — separate two tabs that
@@ -39,12 +53,18 @@ const SCREEN = read('src/components/learn/LessonScreen.tsx')
 const LESSON_INIT = read('src/app/api/learn/lesson-init/route.ts')
 
 describe('fact 1 — session creation carries no lesson and no client identity', () => {
-  it('the POST schema accepts only subject/memory/chapter', () => {
-    const schema = SESSIONS.slice(SESSIONS.indexOf('const createSchema = z.object({'))
-      .slice(0, SESSIONS.slice(SESSIONS.indexOf('const createSchema = z.object({')).indexOf('});') + 3)
+  it('the POST schema carries a CLIENT identity but still no lesson identity', () => {
+    // ORIGINAL ASSERTION (while A was escalated, 2026-09-12), kept verbatim:
+    //   expect(schema).not.toMatch(/topicSlug|lessonOrder|lessonKey|clientId|tabId/)
+    // PCD-004A added exactly ONE discriminator — `tabId` — because separating
+    // two tabs is impossible without a client identity. The half that must
+    // stay true is that the route still takes no LESSON identity from the
+    // client: the lesson is resolved server-side, never claimed by the caller.
+    const start = SESSIONS.indexOf('const createSchema = z.object({')
+    const schema = SESSIONS.slice(start, SESSIONS.indexOf('});', start) + 3)
     expect(schema).toContain('subjectSlug')
-    // documents current behaviour: no discriminator of any kind
-    expect(schema).not.toMatch(/topicSlug|lessonOrder|lessonKey|clientId|tabId/)
+    expect(schema).toContain('tabId: z.string().min(1).max(64).optional()')
+    expect(schema).not.toMatch(/topicSlug|lessonOrder|lessonKey/)
   })
 })
 
@@ -99,7 +119,10 @@ describe('the composed consequence, stated as behaviour', () => {
     const tab1 = resolveSessionLessonSlug({ sessionSnapshot: snapshot, activeLessonSlug: null })
     const tab2 = resolveSessionLessonSlug({ sessionSnapshot: snapshot, activeLessonSlug: null })
     expect(tab1.slug).toBe('phys.mech.kinematics-1d')
-    expect(tab2.slug).toBe(tab1.slug)   // ← the defect, and it is unfixable HERE
+    // Still true, and still not fixable HERE — which is the point. One session
+    // has one pointer, so the fix had to stop two tabs from SHARING a session
+    // (chooseResumableSession) rather than teach the resolver to answer twice.
+    expect(tab2.slug).toBe(tab1.slug)
   })
 
   it('whereas two SESSIONS keep two pointers — which is what PCD-004 already fixed', () => {
@@ -116,15 +139,27 @@ describe('the composed consequence, stated as behaviour', () => {
 })
 
 describe('no per-client identity exists to build on', () => {
-  it('sessionStorage is used for UI state only, never for session identity', () => {
+  it('per-client identity now exists, in ONE place, and is not a credential', () => {
+    // ORIGINAL ASSERTION (while A was escalated, 2026-09-12), kept verbatim:
+    //   expect(SESSIONS).not.toMatch(/sessionStorage|clientId|tabId/)
+    //   expect(SCREEN).not.toMatch(/clientId|tabId/)
+    // That was the finding that forced the escalation: there was nothing to
+    // build on. PCD-004A introduced exactly one mechanism, tabIdentity.ts.
     const hits = [
       'src/lib/hooks/useDraftMessage.ts',
       'src/lib/hooks/useLastLesson.ts',
       'src/components/system/ConnectionRecovery.tsx',
     ].map(read).join('\n')
     expect(hits).toMatch(/sessionStorage/)
-    // none of them mints or stores anything the session routes read
-    expect(SESSIONS).not.toMatch(/sessionStorage|clientId|tabId/)
-    expect(SCREEN).not.toMatch(/clientId|tabId/)
+
+    // exactly one minter, and the routes never read browser storage themselves
+    expect(read('src/lib/teaching/tabIdentity.ts')).toMatch(/sessionStorage\.(get|set)Item/)
+    expect(SESSIONS).not.toMatch(/sessionStorage/)
+    expect(SCREEN).not.toMatch(/sessionStorage\.(get|set)Item/)
+
+    // and it grants nothing: ownership is still decided by the authenticated
+    // userId, which remains in the resume predicate
+    const at = SESSIONS.indexOf('const resumeWhere = {')
+    expect(SESSIONS.slice(at, SESSIONS.indexOf('};', at))).toContain('userId: session.user.id')
   })
 })

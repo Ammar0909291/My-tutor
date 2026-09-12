@@ -257,7 +257,11 @@ describe('read side: /api/sessions POST resumed-session fallback also scopes by 
     expect(SRC).toMatch(/lessonKeyFor\(\{ topicSlug: resolved\.slug, lessonOrder: sp\?\.currentLesson \?\? null \}\)/)
     expect(SRC).toContain('resolveSessionLessonSlug({')
     const resolveIdx = SRC.indexOf('let resumeLessonKey: string | null = null')
-    const lookupIdx = SRC.indexOf('const existingSession = await dbCall')
+    // PCD-004A made this lookup conditional on a session having been CHOSEN
+    // (`resumeCandidate ? await dbCall(...) : null`), so the locator moved.
+    // The ordering invariant it guards — the key is resolved BEFORE the lookup
+    // whose `messages` include it narrows — is unchanged and still asserted.
+    const lookupIdx = SRC.indexOf('const existingSession = resumeCandidate ? await dbCall')
     expect(resolveIdx).toBeGreaterThan(-1)
     expect(lookupIdx).toBeGreaterThan(resolveIdx)
   })

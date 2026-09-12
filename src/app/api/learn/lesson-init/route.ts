@@ -33,7 +33,7 @@ import { NextResponse } from 'next/server'
 // every lesson open and must not be able to fail for a module-resolution
 // reason after the per-user pointer has already moved.
 import { writeSnapshotDelta, readSnapshotVersion as readSnapshotVersionAtIngress } from '@/lib/db/snapshotWrite'
-import { sessionLessonPointerDelta } from '@/lib/teaching/sessionLessonPointer'
+import { sessionLessonPointerDelta, sessionTabOwnerDelta } from '@/lib/teaching/sessionLessonPointer'
 import { auth } from '@/auth'
 import { prisma } from '@/lib/prisma'
 import { z } from 'zod'
@@ -53,6 +53,8 @@ const schema = z.object({
   totalLessons: z.number().int().positive().optional(),
   completedLessons: z.array(z.number()).optional(),
   teachingLanguage: z.enum(['en', 'ru', 'hi']).default('en'),
+  // PCD-004A: refreshes this tab's claim on the session (see sessions/route).
+  tabId: z.string().min(1).max(64).optional(),
 })
 
 const HISTORY_LIMIT = 20
@@ -81,7 +83,7 @@ export async function POST(req: Request) {
     }
     const {
       sessionId, mode, lessonTitle, lessonGoal, lessonOrder, topicSlug,
-      unitTitle, totalLessons, completedLessons, teachingLanguage,
+      unitTitle, totalLessons, completedLessons, teachingLanguage, tabId,
     } = parsed.data
 
     // Load the session (verify ownership + get history)
@@ -241,7 +243,9 @@ export async function POST(req: Request) {
         const pointerWrite = await writeSnapshotDelta(prisma, {
           sessionId,
           expectedVersion: snapshotVersionCursor,
-          delta: sessionLessonPointerDelta(topicSlug),
+          // Opening a lesson is activity, so the tab's claim is refreshed in
+          // the same merge as the pointer it is already writing.
+          delta: { ...sessionLessonPointerDelta(topicSlug), ...sessionTabOwnerDelta(tabId, new Date()) },
         })
         if (pointerWrite.applied) {
           if (typeof pointerWrite.version === 'number') snapshotVersionCursor = pointerWrite.version

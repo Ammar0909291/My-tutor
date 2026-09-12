@@ -35,6 +35,12 @@ const dbCall = <T>(label: string, fn: () => Promise<T>): Promise<T> =>
 
 const createSchema = z.object({
   subjectSlug: z.string(),
+  // PCD-004A: which BROWSER TAB is asking. Opaque, client-minted, per-tab.
+  // It is a RESUME PREFERENCE and nothing else — it never widens access (the
+  // userId clause below is untouched and still decides ownership), never names
+  // a session, and an absent or unknown value simply falls back to the
+  // pre-PCD-004A behaviour of resuming the most recent session.
+  tabId: z.string().min(1).max(64).optional(),
   memoryContext: z.string().optional(),
   // School Mode (Sprint BI): catalog chapter id (e.g. "cbse.math.8.ch1") —
   // persisted in contextSnapshot so the chat route can build board-aware context.
@@ -65,7 +71,7 @@ export async function POST(req: Request) {
 
   try {
     const body = await req.json();
-    const { subjectSlug, memoryContext, schoolChapterId } = createSchema.parse(body);
+    const { subjectSlug, memoryContext, schoolChapterId, tabId } = createSchema.parse(body);
 
 
     const subject = await dbCall('sessions-subject-lookup', () => prisma.subject.findUnique({ where: { slug: subjectSlug } }));
@@ -101,11 +107,31 @@ export async function POST(req: Request) {
     // snapshot is read first, by the IDENTICAL where/orderBy, which therefore
     // selects the identical row. One extra indexed lookup on the resume path;
     // the create path is untouched.
-    const resumeCandidate = await dbCall('sessions-resume-pointer-lookup', () => prisma.learnSession.findFirst({
+    // PCD-004A: a TAB, not just the user, decides which session to resume.
+    //
+    // The old lookup took the single most recent resumable session, so two
+    // tabs open on one subject both landed on it and shared one conversation
+    // — and a lesson opened in one silently became the lesson taught in the
+    // other. Candidates are now fetched newest-first and `chooseResumableSession`
+    // picks: this tab's own session, else one no other LIVE tab is holding,
+    // else none (and a new one is created below).
+    //
+    // A handful is enough: tiers 1 and 2 both take the first match, and more
+    // than a few simultaneously-live tabs on one subject is not a real shape.
+    const RESUME_CANDIDATE_LIMIT = 5;
+    const resumeCandidates = await dbCall('sessions-resume-candidates', () => prisma.learnSession.findMany({
       where: resumeWhere,
       orderBy: resumeOrder,
-      select: { contextSnapshot: true },
-    })).catch(() => null);
+      take: RESUME_CANDIDATE_LIMIT,
+      select: { id: true, contextSnapshot: true },
+    })).catch(() => [] as { id: string; contextSnapshot: unknown }[]);
+
+    const { chooseResumableSession, sessionTabOwnerDelta } =
+      await import('@/lib/teaching/sessionLessonPointer');
+    const resumeChoice = chooseResumableSession({
+      candidates: resumeCandidates, tabId, now: new Date(),
+    });
+    const resumeCandidate = resumeChoice.session;
 
     let resumeLessonKey: string | null = null;
     try {
@@ -126,8 +152,13 @@ export async function POST(req: Request) {
       console.warn('[sessions POST] lesson-key resolution skipped:', err);
     }
 
-    const existingSession = await dbCall('sessions-existing-lookup', () => prisma.learnSession.findFirst({
-      where: resumeWhere,
+    // Loads the session `chooseResumableSession` picked — by id, so it cannot
+    // drift from the one whose snapshot supplied resumeLessonKey above. The
+    // ownership clause is kept in the WHERE as well: the id came from a query
+    // already scoped to this user, and re-asserting it here means a future
+    // refactor cannot turn this into an id-addressable lookup.
+    const existingSession = resumeCandidate ? await dbCall('sessions-existing-lookup', () => prisma.learnSession.findFirst({
+      where: { ...resumeWhere, id: resumeCandidate.id },
       orderBy: resumeOrder,
       include: {
         // Cap to the most-recent 30 messages — matches HISTORY_LIMIT in
@@ -144,7 +175,7 @@ export async function POST(req: Request) {
           take: 30,
         },
       },
-    }));
+    })) : null;
 
     if (existingSession) {
       // ── RESTORE THE FIGURE THAT WAS ON SCREEN ────────────────────────────
@@ -210,6 +241,26 @@ export async function POST(req: Request) {
       } catch (err) {
         console.warn('[sessions] per-message visual restore skipped:', err);
       }
+      // PCD-004A: stamp/refresh this tab's claim so a second tab opened
+      // alongside does not also resume it. Goes through the SAME versioned
+      // writer as every other contextSnapshot write (snapshotWriterDiscipline),
+      // never a whole-column overwrite. No-ops when the caller sent no tabId.
+      if (tabId) {
+        try {
+          const { writeSnapshotDelta, readSnapshotVersion } = await import('@/lib/db/snapshotWrite');
+          const claimed = resumeCandidates.find((c) => c.id === existingSession.id);
+          await writeSnapshotDelta(prisma, {
+            sessionId: existingSession.id,
+            expectedVersion: readSnapshotVersion(claimed?.contextSnapshot ?? null),
+            delta: sessionTabOwnerDelta(tabId, new Date()),
+          });
+        } catch (err) {
+          // Fail-soft: an unstamped claim only means another tab may resume
+          // this session too — i.e. exactly the pre-PCD-004A behaviour.
+          console.warn('[sessions POST] tab claim not stamped:', err);
+        }
+      }
+
       return NextResponse.json(
         // PCD-004C: `lessonKey` is the lesson THIS session resolves to. The
         // client's mount-time history fetch cannot name a session, so it
@@ -254,6 +305,10 @@ export async function POST(req: Request) {
           currentStep: activePath?.currentStep,
           memoryContext: memoryContext ?? null,
           schoolChapterId: schoolChapterId ?? null,
+          // PCD-004A: the creating tab owns it from birth, folded into the
+          // snapshot this row is created with so the claim costs no extra
+          // write and there is no window in which the new session looks free.
+          ...sessionTabOwnerDelta(tabId, new Date()),
         },
       },
     }));
