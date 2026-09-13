@@ -16,8 +16,9 @@
  * WORD SYNC IS A LABELED ESTIMATE, NOT A MEASUREMENT: `buildWordTimeWindows`
  * (timeSync.ts) divides the audio's real, measured `duration` across
  * segments (by spoken-character length) and then across each segment's
- * RENDERED words (by their own character length) once `loadedmetadata`
- * fires. This is explicitly NOT true word-level synchronization — it is the
+ * RENDERED words (by character length plus each word's own trailing gap —
+ * see that function's doc comment) once `loadedmetadata` fires. This is
+ * explicitly NOT true word-level synchronization — it is the
  * best deterministic fallback available given no provider timestamp exists,
  * isolated entirely behind this one function so real provider timestamps
  * could replace it later without touching any other file. Every tick still

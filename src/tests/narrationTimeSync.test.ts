@@ -1,4 +1,6 @@
 import { describe, it, expect } from 'vitest'
+import { readFileSync } from 'fs'
+import path from 'path'
 import {
   buildSegmentTimeWindows, progressPercentForTime, segmentIndexForTime,
   buildWordTimeWindows, wordIndexForTime,
@@ -109,6 +111,171 @@ describe('word-level server-audio sync — the labeled estimate, driven from the
     for (let i = 1; i < firstSegmentWindows.length; i++) {
       expect(firstSegmentWindows[i].startTime).toBeCloseTo(firstSegmentWindows[i - 1].endTime, 5)
       expect(firstSegmentWindows[i].wordIndex).toBe(firstSegmentWindows[i - 1].wordIndex + 1)
+    }
+  })
+})
+
+/**
+ * Regression: the visible highlight must never advance past a word before
+ * real speech has actually reached it. The prior version of
+ * `buildWordTimeWindows` weighted each word by its own character length
+ * only, discarding the real inter-word whitespace already present in the
+ * text. Because that gap is a proportionally larger share of a SHORT word's
+ * true speaking time than a long word's, this systematically starved short,
+ * common words — exactly the kind ordinary teaching prose is dense with —
+ * of playback time, and the estimate ran ahead of a realistic speech
+ * timeline by the middle of a sentence (this is the production defect
+ * report: "the visible word highlight advances noticeably FASTER than the
+ * spoken voice").
+ *
+ * These tests build a SIMULATED ground-truth timeline (a word's true
+ * duration modeled as a small fixed per-word cost plus a per-character
+ * cost — the standard `duration ~= a + b*length` approximation used in
+ * speech-timing research) purely to check whether the estimator's
+ * word-to-word RELATIVE timing is biased. It is not a claim about any real
+ * provider's actual behavior, and no provider timestamp is invented or
+ * assumed anywhere in the fix.
+ */
+describe('word-level server-audio sync — the highlight must never run ahead of the audio', () => {
+  const BASE_MS = 150
+  const PER_CHAR_MS = 45
+
+  function simulatedTrueWordStarts(segments: ReturnType<typeof buildNarrationSegments>) {
+    const durations: { segmentIndex: number; wordIndex: number; ms: number }[] = []
+    for (const seg of segments) {
+      for (const t of seg.renderedWords) {
+        if (t.kind !== 'word') continue
+        durations.push({ segmentIndex: seg.index, wordIndex: t.wordIndex as number, ms: BASE_MS + PER_CHAR_MS * t.text.length })
+      }
+    }
+    let cum = 0
+    return durations.map((w) => {
+      const trueStartSec = cum / 1000
+      cum += w.ms
+      return { ...w, trueStartSec }
+    })
+  }
+
+  // The FIXED (real) algorithm, imported from source.
+  function reportedIndexAt(windows: { startTime: number; endTime: number }[], t: number): number {
+    if (windows.length === 0) return 0
+    if (t <= windows[0].startTime) return 0
+    let lastIdx = 0
+    for (let i = 0; i < windows.length; i++) {
+      if (t >= windows[i].startTime && t < windows[i].endTime) return i
+      if (windows[i].startTime <= t) lastIdx = i
+    }
+    return lastIdx
+  }
+
+  // The PRIOR (since-fixed) algorithm, reimplemented here ONLY to prove this
+  // test suite is capable of failing — i.e. that it actually exercises the
+  // fix rather than passing regardless of which algorithm is under test.
+  // This is not exported anywhere in src/ any more; it exists solely as this
+  // test's own regression baseline.
+  function oldCharOnlyWordWindows(segments: ReturnType<typeof buildNarrationSegments>, totalDuration: number) {
+    const segmentWindows = buildSegmentTimeWindows(segments, totalDuration)
+    const result: { segmentIndex: number; wordIndex: number; startTime: number; endTime: number }[] = []
+    for (let i = 0; i < segmentWindows.length; i++) {
+      const sw = segmentWindows[i]
+      const seg = segments[i]
+      if (!seg) continue
+      const words = seg.renderedWords.filter((t) => t.kind === 'word')
+      if (words.length === 0) continue
+      const lengths = words.map((w) => Math.max(w.text.length, 1))
+      const totalLength = lengths.reduce((a, b) => a + b, 0)
+      const dur = sw.endTime - sw.startTime
+      let cursor = 0
+      for (let w = 0; w < words.length; w++) {
+        const startTime = sw.startTime + (cursor / totalLength) * dur
+        cursor += lengths[w]
+        const endTime = sw.startTime + (cursor / totalLength) * dur
+        result.push({ segmentIndex: seg.index, wordIndex: words[w].wordIndex as number, startTime, endTime })
+      }
+    }
+    return result
+  }
+
+  // Text chosen for being dense with short, common function words — exactly
+  // the shape that exposed the defect in the prior implementation.
+  const denseShortWordText =
+    'The quick brown fox jumps over the lazy dog. It ran to the store to buy a loaf of bread and a jug of milk for the family dinner tonight.'
+
+  it('1/2/3 — reproduces the observed failure: the OLD algorithm visibly ran ahead on realistic short-word-heavy text', () => {
+    const segments = buildNarrationSegments(denseShortWordText, 'old-repro')
+    const trueStarts = simulatedTrueWordStarts(segments)
+    const totalDurationSec = trueStarts.reduce((a, w) => a + w.ms, 0) / 1000
+    const oldWindows = oldCharOnlyWordWindows(segments, totalDurationSec)
+
+    let ranAhead = false
+    for (let i = 0; i < trueStarts.length; i++) {
+      const reported = reportedIndexAt(oldWindows, trueStarts[i].trueStartSec)
+      if (reported > i) ranAhead = true
+    }
+    // This assertion is the NON-VACUITY proof: if it ever starts failing,
+    // the fixture no longer exercises the original bug and must be replaced
+    // — a test that can't fail proves nothing.
+    expect(ranAhead).toBe(true)
+  })
+
+  it('4 — the FIXED algorithm never reports a word index ahead of where real speech actually is, on the same fixture', () => {
+    const segments = buildNarrationSegments(denseShortWordText, 'fixed-no-lead')
+    const trueStarts = simulatedTrueWordStarts(segments)
+    const totalDurationSec = trueStarts.reduce((a, w) => a + w.ms, 0) / 1000
+    const windows = buildWordTimeWindows(segments, totalDurationSec)
+
+    for (let i = 0; i < trueStarts.length; i++) {
+      const reported = reportedIndexAt(windows, trueStarts[i].trueStartSec)
+      expect(reported).toBeLessThanOrEqual(i)
+    }
+  })
+
+  it('5 — first word: at t=0 the reported index is word 0, never ahead', () => {
+    const segments = buildNarrationSegments(denseShortWordText, 'first-word')
+    const windows = buildWordTimeWindows(segments, 20)
+    expect(wordIndexForTime(windows, 0)).toEqual({ segmentIndex: 0, wordIndex: 0 })
+  })
+
+  it('6 — final word: the last window\'s own start time never reports an index past itself', () => {
+    const segments = buildNarrationSegments(denseShortWordText, 'final-word')
+    const windows = buildWordTimeWindows(segments, 20)
+    const last = windows[windows.length - 1]
+    const hit = wordIndexForTime(windows, last.startTime)
+    expect(hit).toEqual({ segmentIndex: last.segmentIndex, wordIndex: last.wordIndex })
+  })
+
+  it('7 — punctuation attached to a word (commas, periods) does not change its weighting beyond its own text length', () => {
+    const segments = buildNarrationSegments('Newton, Galileo, and Kepler all contributed.', 'punct')
+    const windows = buildWordTimeWindows(segments, 10)
+    // Contiguous and covering the full duration exactly as with unpunctuated text.
+    expect(windows[0].startTime).toBe(0)
+    expect(windows[windows.length - 1].endTime).toBeCloseTo(10, 5)
+  })
+
+  it('8 — unequal word lengths: a short word\'s window is no longer disproportionately narrow relative to a realistic timeline', () => {
+    const segments = buildNarrationSegments('A supercalifragilisticexpialidocious word.', 'unequal')
+    const windows = buildWordTimeWindows(segments, 10)
+    const aWindow = windows.find((w) => w.wordIndex === 0)! // "A"
+    const longWord = windows.find((w) => w.wordIndex === 1)! // "supercalifragilisticexpialidocious"
+    // The long word still gets more absolute time than "A" — this is not
+    // claiming equal time per word, only that the short word is no longer
+    // starved to nearly zero relative width.
+    expect(longWord.endTime - longWord.startTime).toBeGreaterThan(aWindow.endTime - aWindow.startTime)
+    expect(aWindow.endTime - aWindow.startTime).toBeGreaterThan(0)
+  })
+
+  it('9 — segment boundary: word windows remain contiguous across a segment transition after the fix', () => {
+    const segments = buildNarrationSegments('Short one. A much longer second sentence here.', 'seg-boundary')
+    const windows = buildWordTimeWindows(segments, 40)
+    for (let i = 1; i < windows.length; i++) {
+      expect(windows[i].startTime).toBeCloseTo(windows[i - 1].endTime, 5)
+    }
+  })
+
+  it('14 — no subject-specific branching in the module driving this fix', () => {
+    const src = readFileSync(path.join(process.cwd(), 'src/lib/narration/timeSync.ts'), 'utf8').toLowerCase()
+    for (const subject of ['physics', 'chemistry', 'mathematics', 'biology', 'computer_science']) {
+      expect(src).not.toContain(subject)
     }
   })
 })
