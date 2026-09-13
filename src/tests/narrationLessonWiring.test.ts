@@ -31,13 +31,38 @@ describe('LessonScreen.tsx is wired to the platform-wide narration layer', () =>
     expect(LESSON_SCREEN).toContain("import { NarratedPlaybackControls } from '@/components/narration/NarratedPlaybackControls'")
   })
 
-  it('wraps each tutor message in TutorNarratedMessage, passing the message id, its real rendered text, and the live teaching language/voice/speed/country — not hardcoded or subject-specific values', () => {
+  it('wraps each tutor message in TutorNarratedMessage, passing the message id, the COMPLETE-message narration text (not the Read More-collapsed display text), and the live teaching language/voice/speed/country — not hardcoded or subject-specific values', () => {
+    // 2026-09-13: `text` is `narrationSourceText`, NOT `displayText` —
+    // VISUAL COLLAPSE STATE ≠ NARRATION CONTENT SOURCE (narratedMessageText.ts).
+    // `displayText` respects the Read More collapse and is what MessageContent
+    // renders while IDLE (still asserted below); narration must always speak
+    // the whole message regardless of that collapse, so it gets its own,
+    // always-complete source string.
     const block = LESSON_SCREEN.slice(LESSON_SCREEN.indexOf('<TutorNarratedMessage'), LESSON_SCREEN.indexOf('</TutorNarratedMessage>'))
-    expect(block).toContain('id={msg.id}')
-    expect(block).toContain('text={displayText}')
-    expect(block).toContain('lang={teachingLanguage}')
-    expect(block).toContain('voiceType={voiceType}')
-    expect(block).toContain('country={country}')
+    // Scoped to the OPENING TAG's own props only — the child render-prop
+    // below legitimately still passes `displayText` to `MessageContent` for
+    // the IDLE visual branch (asserted separately below); this checks that
+    // TutorNarratedMessage's own `text` prop specifically is not it.
+    const openingTag = block.slice(0, block.indexOf('>') + 1)
+    expect(openingTag).toContain('id={msg.id}')
+    expect(openingTag).toContain('text={narrationSourceText}')
+    expect(openingTag).not.toContain('text={displayText}')
+    expect(openingTag).toContain('lang={teachingLanguage}')
+    expect(openingTag).toContain('voiceType={voiceType}')
+    expect(openingTag).toContain('country={country}')
+  })
+
+  it('narrationSourceText is derived from the narratedMessageText module\'s narrationText(), always from the COMPLETE cached message — never truncated to the Read More preview', () => {
+    expect(LESSON_SCREEN).toContain("import { displayText as deriveDisplayText, narrationText as deriveNarrationText } from '@/lib/learn/narratedMessageText'")
+    expect(LESSON_SCREEN).toContain('const narrationSourceText = cached')
+    expect(LESSON_SCREEN).toContain('? deriveNarrationText(cached, familiarityLine)')
+    // The bug this closes: narration text must never be built from
+    // `cached.preview` (the truncated Read More preview) — only `full`.
+    const narrationBlock = LESSON_SCREEN.slice(
+      LESSON_SCREEN.indexOf('const narrationSourceText = cached'),
+      LESSON_SCREEN.indexOf('const narrationSourceText = cached') + 200,
+    )
+    expect(narrationBlock).not.toContain('cached.preview')
   })
 
   it('renders plain MessageContent — completely unchanged from before this feature — while narration status is IDLE (never played)', () => {
