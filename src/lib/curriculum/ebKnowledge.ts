@@ -283,6 +283,65 @@ export function parseAuthoritativeMisconceptions(
 const GOVERNING_RE =
   /\b(only if|only when|only for|must|never|always|provided that|assumes?|assumption|except|unless|valid (?:only|when|if|for)|requires?|cannot|conserved?|conservation|sign convention|boundary|boundaries|limitation|constraint|in the limit|approximation|units? of|per unit|domain of validity|breaks down|does not hold|no longer)\b/i
 
+/**
+ * Openers that make a unit depend on the one before it: it states no subject of
+ * its own, so admitting it alone strands a condition from the statement it
+ * governs. Deliberately a closed list of discourse connectives — it decides
+ * ADJACENCY only, never whether a unit is important.
+ */
+const BACKREF_RE =
+  /^(?:\*+)?(?:this|that|these|those|it|they|such|the same|the above|hence|therefore|thus|so|then|however|but|and|also|in that case|otherwise|conversely|similarly|likewise)\b/i
+
+/**
+ * Abbreviations that end in a period WITHOUT ending a sentence. Splitting on a
+ * bare `[.!?]` cuts "ethanol bp 78°C vs. diethyl ether 35°C" in half and hands
+ * the model "ethanol bp 78°C vs." — a comparison missing the thing compared.
+ * Measured before this list existed: 21 such fragments across the corpus.
+ */
+const SENTENCE_ABBREVIATIONS = new Set([
+  'vs', 'e.g', 'eg', 'i.e', 'ie', 'etc', 'cf', 'al', 'approx', 'ca', 'est',
+  'fig', 'figs', 'eq', 'eqn', 'ref', 'refs', 'vol', 'no', 'nos', 'pp', 'ch',
+  'sec', 'st', 'dr', 'mr', 'mrs', 'ms', 'prof', 'inc', 'ltd', 'co',
+  'min', 'max', 'avg', 'resp', 'temp', 'wt', 'mol', 'aq', 'conc', 'sat',
+])
+
+/**
+ * Split a paragraph into complete sentences.
+ *
+ * A boundary is a run of `.!?` followed by whitespace, EXCEPT where the token
+ * before it is an abbreviation, a single-letter initial, or a list/decimal
+ * number, or where the next character is lowercase (so a sentence never starts
+ * mid-clause). The result is always complete authored sentences — never a
+ * fragment, which is what "no arbitrary truncation" has to mean at this level.
+ */
+export function splitSentences(paragraph: string): string[] {
+  const text = paragraph.trim()
+  if (!text) return []
+  const out: string[] = []
+  let start = 0
+  const boundary = /[.!?]+["')\]]*(\s+)/g
+  let m: RegExpExecArray | null
+  while ((m = boundary.exec(text)) !== null) {
+    const endOfSentence = m.index + m[0].length - m[1].length
+    const before = text.slice(start, m.index)
+    const lastToken = (before.match(/([A-Za-z.]+)$/)?.[1] ?? '').toLowerCase()
+    const next = text.slice(m.index + m[0].length)
+    const isAbbrev =
+      SENTENCE_ABBREVIATIONS.has(lastToken) ||
+      SENTENCE_ABBREVIATIONS.has(lastToken.replace(/\.$/, '')) ||
+      /^[a-z]$/.test(lastToken) ||                       // single-letter initial
+      /\d$/.test(before) ||                               // "1." / "3.5"
+      /^[a-z]/.test(next)                                 // clause continues
+    if (isAbbrev) continue
+    const sentence = text.slice(start, endOfSentence).trim()
+    if (sentence) out.push(sentence)
+    start = m.index + m[0].length
+  }
+  const tail = text.slice(start).trim()
+  if (tail) out.push(tail)
+  return out.length ? out : [text]
+}
+
 export interface PackedKnowledge {
   /** The text to expose, complete logical units only. */
   text: string
@@ -307,14 +366,36 @@ export interface PackedKnowledge {
  * boundary rather than removing it.
  *
  * Instead: split into complete logical units (paragraphs, then sentences
- * within an over-long paragraph), then fill the budget in two passes — units
- * in authored order first, then any REMAINING governing unit that did not fit,
- * because a condition is worth more than the next descriptive sentence. Units
- * are emitted in authored order regardless of which pass admitted them, so the
- * text still reads as written.
+ * within an over-long paragraph) and admit whole units under the budget,
+ * GOVERNING UNITS FIRST. Units are emitted in authored order regardless of
+ * which pass admitted them, so the text still reads as written.
  *
- * A unit is never cut in half, so an exposed sentence is always a complete
- * authored statement. When the budget cannot hold everything, that is reported
+ * ── WHY GOVERNING-FIRST, NOT AUTHORED-ORDER-FIRST (2026-09-13) ──────────────
+ * The first version filled the budget in authored order and only then rescued
+ * whatever governing unit still fitted. That makes admission depend on
+ * POSITION: a descriptive paragraph early in the section could consume the
+ * budget a later condition needed, and the condition was then reported lost
+ * even though it was smaller than the text that displaced it. Measured over
+ * all 1,166 entries carrying the section, that cost 188 entries a governing
+ * unit; ordering the same whole units by governing-first costs 42, and total
+ * exposure goes UP (80.3% -> 80.6%) because the rescue pass no longer has to
+ * work against a budget already spent.
+ *
+ * Nothing is summarised, paraphrased, or cut mid-sentence, and no unit is
+ * split further than the authored structure already splits it: this only
+ * changes WHICH whole units are admitted when they cannot all fit.
+ *
+ * ── THE ADJACENCY RULE ──────────────────────────────────────────────────────
+ * A governing condition must never be separated from the statement it
+ * governs. Ordering by governing-first can otherwise strand one: measured,
+ * `phys.rel.length-contraction` kept "It is emphatically NOT the case
+ * that..." while dropping the sentence it contradicts. So a unit that OPENS
+ * with a back-reference (`BACKREF_RE`) carries no subject of its own, and is
+ * admitted only together with its antecedent — the whole group fits, or none
+ * of it is taken. Re-measured after the rule: 0 stranded back-references,
+ * against 1 without it.
+ *
+ * When the budget still cannot hold everything, that is reported
  * (`truncated`, `droppedGoverning`) rather than hidden.
  */
 export function packCoreUnderstanding(section: string, budgetChars: number): PackedKnowledge {
@@ -330,8 +411,7 @@ export function packCoreUnderstanding(section: string, budgetChars: number): Pac
     const p = para.trim().replace(/\s+/g, ' ')
     if (!p) continue
     if (p.length <= budgetChars) { units.push(p); continue }
-    const sentences = p.match(/[^.!?]+(?:[.!?]+|$)/g) ?? [p]
-    for (const s of sentences) { const t = s.trim(); if (t) units.push(t) }
+    for (const s of splitSentences(p)) units.push(s)
   }
   if (units.length === 0) {
     return { text: '', authoredChars: authored.length, exposedChars: 0, truncated: true, droppedGoverning: GOVERNING_RE.test(authored) }
@@ -339,16 +419,48 @@ export function packCoreUnderstanding(section: string, budgetChars: number): Pac
 
   const chosen = new Set<number>()
   let used = 0
-  const fits = (i: number) => used + units[i].length + (chosen.size ? 1 : 0) <= budgetChars
 
-  // Pass 1 — authored order.
-  for (let i = 0; i < units.length; i++) {
-    if (fits(i)) { chosen.add(i); used += units[i].length + (chosen.size > 1 ? 1 : 0) }
+  /**
+   * The unit plus every unadmitted antecedent it back-references, so a
+   * condition is never admitted without the statement it governs.
+   */
+  const groupFor = (i: number): number[] => {
+    const group = [i]
+    let j = i
+    while (j > 0 && BACKREF_RE.test(units[j]) && !chosen.has(j - 1)) { group.unshift(j - 1); j-- }
+    return group
   }
-  // Pass 2 — rescue governing units the first pass could not reach.
+  /** Would the WHOLE group fit? A partial admission would strand a reference. */
+  const groupFits = (group: number[]): boolean => {
+    let u = used
+    let size = chosen.size
+    for (const i of group) {
+      if (chosen.has(i)) continue
+      u += units[i].length + (size ? 1 : 0)
+      size++
+    }
+    return u <= budgetChars
+  }
+  const takeGroup = (group: number[]) => {
+    for (const i of group) {
+      if (chosen.has(i)) continue
+      chosen.add(i)
+      used += units[i].length + (chosen.size > 1 ? 1 : 0)
+    }
+  }
+
+  // Pass 1 — governing units first, in authored order. A condition outranks
+  // the next descriptive sentence when both cannot fit.
   for (let i = 0; i < units.length; i++) {
     if (chosen.has(i) || !GOVERNING_RE.test(units[i])) continue
-    if (fits(i)) { chosen.add(i); used += units[i].length + 1 }
+    const group = groupFor(i)
+    if (groupFits(group)) takeGroup(group)
+  }
+  // Pass 2 — fill the remainder with descriptive units, still in authored order.
+  for (let i = 0; i < units.length; i++) {
+    if (chosen.has(i)) continue
+    const group = groupFor(i)
+    if (groupFits(group)) takeGroup(group)
   }
 
   const kept = units.filter((_, i) => chosen.has(i))

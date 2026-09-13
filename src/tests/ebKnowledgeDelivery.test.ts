@@ -5,6 +5,7 @@ import {
   loadBlueprintContent,
   buildBlueprintContextBlock,
 } from '@/lib/curriculum/blueprintLoader'
+import { carriesGoverningLanguage } from '@/lib/curriculum/ebKnowledge'
 
 /**
  * THE REAL DELIVERY PATH, not the parser in isolation.
@@ -96,6 +97,44 @@ describe('authoritative knowledge reaches the prompt', () => {
     const src = readFileSync('src/app/api/learn/chat/route.ts', 'utf8')
     expect(src).toContain('KNOWLEDGE_EXPOSURE_FAILURE=')
     expect(src).toMatch(/for \(const failure of ebContext\.knowledgeExposure\)/)
+  })
+
+  it('a RESIDUE concept still delivers its governing text AND reports the rest', () => {
+    // The 44 entries whose Core Understanding cannot fit the budget are the
+    // worklist, not a silence. Each must still expose governing text and
+    // ALSO report what could not fit — one without the other is the defect.
+    for (const id of ['chem.anal.spectroscopy', 'math.calc.limits', 'phys.qm.schrodinger-equation']) {
+      const eb = loadEBConceptContext(id)
+      expect(eb.found, id).toBe(true)
+      if (!eb.found) continue
+      const cu = eb.context.coreUnderstanding
+      expect(cu, id).toBeTruthy()
+      if (!cu) continue
+      // Governing language DID reach the prompt, despite the budget.
+      expect(carriesGoverningLanguage(cu.text), `${id} exposed no condition`).toBe(true)
+      // And the shortfall is observable, with no substitute claim attached.
+      const failure = eb.context.knowledgeExposure.find(
+        (f) => f.kind === 'core-understanding-truncated-governing',
+      )
+      expect(failure, `${id} dropped a governing unit silently`).toBeTruthy()
+      expect(failure!.conceptSlug).toBe(id)
+      expect(failure!.exposed).toBeLessThan(failure!.authored)
+      expect(Object.keys(failure!).sort()).toEqual(
+        ['authored', 'conceptSlug', 'exposed', 'kind', 'section'],
+      )
+      // The exposed text reaches the assembled prompt verbatim.
+      expect(block(id)).toContain(cu.text.slice(0, 80))
+    }
+  })
+
+  it('a residue concept never exposes a truncated sentence', () => {
+    for (const id of ['chem.anal.spectroscopy', 'math.calc.limits', 'phys.qm.schrodinger-equation']) {
+      const eb = loadEBConceptContext(id)
+      if (!eb.found || !eb.context.coreUnderstanding) continue
+      const text = eb.context.coreUnderstanding.text
+      expect(text, id).not.toMatch(/\b(?:vs|e\.g|i\.e|etc|cf|approx)\.$/i)
+      expect(text.trim(), id).not.toMatch(/\b[a-z]+$/) // never stops mid-clause
+    }
   })
 
   it('the loader is still the single EB reader (no competing knowledge loader)', () => {
