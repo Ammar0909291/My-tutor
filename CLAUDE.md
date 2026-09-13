@@ -4420,6 +4420,43 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   multi-session campaign; continuation should verify state via
   `scripts/math/state.ts` fresh each time rather than trusting any number
   recorded here.
+- **Batch 59 — math.trig: product-to-sum, hyperbolic functions; math.seq:
+  partial sums, geometric series — REOPENS math.calc** (2026-09-13):
+  re-computed the frontier fresh — `math.calc` still 0 ready, `math.trig`
+  had 5, `math.seq` had 5, matching Batch 58's predictions exactly.
+  Deliberately selected `math.trig.product-to-sum` and
+  `math.trig.hyperbolic-functions` specifically because Batch 58's own
+  forward-planning note identified them as the exact two concepts that
+  would reopen `math.calc` once authored, plus `math.seq.partial-sums`
+  and `math.seq.geometric-series`. All 4 Blueprint-grounded, reused by
+  reference. `hyperbolic-functions` is notable as the first concept this
+  entire campaign where all 3 independently-classified misconceptions
+  share the identical birth type (Type 6, analogy overextension — the
+  strong sin/cos structural parallel overextended past where it actually
+  holds: angle-based definition, identity sign, derivative sign).
+  `geometric-series` explicitly resolves `arithmetic-sequence`'s own
+  Batch 55 forward-reference gap by confirming its citation actually
+  pointed at `geometric-sequence` (Batch 58), not this concept. All 4
+  zero Blueprint/KG metadata discrepancy, including correct confirmation
+  that both `math.trig` concepts' own `P76_mode: independence` declarations
+  are accurate (their cross-link targets are genuinely unauthored).
+  `math.trig` **17/25 → 19/25**. `math.seq` **5/21 → 7/21**. `math.calc`
+  unchanged at **66/76**. Mathematics **454/908 → 458/908**, 450
+  remaining. **Fresh frontier confirms the reopening worked**: `math.calc`
+  now has 2 candidates ready (`trig-integrals`, `hyperbolic-derivatives`
+  — exactly as predicted); `math.trig` has 3 ready (`double-angle-formulas`,
+  `trig-equations`, `polar-form-complex`); `math.seq` has 6 ready
+  (`recursive-sequences`, `divergent-sequence`, `arithmetic-series`,
+  `infinite-geometric-series`, `series-convergence`, `telescoping-series`
+  — the last three newly unblocked). Validated: KG validator PASS
+  (908/908 reachable, file untouched), `scripts/math/state.ts` confirms
+  math.calc 66/76, math.trig 19/25, math.seq 7/21, mathematics 458/908 (6
+  EB-certified domains unchanged), `tsc --noEmit` clean, targeted tests
+  479/479 passed, all 4 heading structures diffed clean on the first
+  pass (0 diffs each). No Physics/Chemistry/English/Biology/CS/KG/
+  Blueprint/runtime file touched. This is a genuinely multi-session
+  campaign; continuation should verify state via `scripts/math/state.ts`
+  fresh each time rather than trusting any number recorded here.
 
 ## Physics Teacher Migration Architecture V2 — AUDITED, NOT ADOPTED (2026-09-12)
 
