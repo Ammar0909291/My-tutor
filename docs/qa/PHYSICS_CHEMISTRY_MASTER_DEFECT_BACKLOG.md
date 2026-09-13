@@ -226,9 +226,16 @@ tree. Not independently re-measured against a live database this session
 ### PCD-018 — 5-turn derailment cascade + diagram/text mismatch: `chem.kinet.rate-law` (#84)
 ### PCD-020 — Topic-deflection failure on "teach from start": `chem.solid.defects` (#93)
 ### PCD-021 — Retroactive sweep: mo-theory literalism + Bohr-model drift (chemistry #1-30)
-**Status: FIXED (new, this session) — ONE shared root-cause fix for all
-six entries**, per the task's explicit preference for one shared fix over
-repeated concept-specific patches.
+**Status: PARTIALLY FIXED — corrected 2026-09-13.** The Principle 13 entry
+below is accurate for what it changed, but it OVER-CLAIMED closure: it is a
+prompt-level fix, and PCD-018/PCD-020's topic-abandonment thread also had a
+DETERMINISTIC half that it did not touch. Re-measured 2026-09-13 against the
+live modules, `"please teach from start"` still resolved to the topic
+`"from start"` and opened an unresolved-topic excursion, pausing the lesson and
+blocking the authored-probe gate regardless of what the model was told. That
+half is now fixed in `requestedTopic.ts` (leading-modifier shape test); see the
+PCD-018/PCD-020 entries in `PHYSICS_CHEMISTRY_REAL_STUDENT_DEFECTS.md`.
+PCD-015/016/017/021 remain prompt-governed and advisory, as stated below.
 
 **Root cause (verified — no such guard existed anywhere in the prompt
 stack before this session):** the tutor had no instruction distinguishing

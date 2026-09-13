@@ -225,8 +225,17 @@ describe('lesson opening copy', () => {
   })
 
   it('speaks the introduction at the introduction rate', () => {
+    // Superseded shape: this used to be `handleSpeak(..., { intro: isIntro })`
+    // — a per-message option flowing into the old Play/Stop button's own
+    // speakText() call. The platform-wide narration hook
+    // (useNarrationPlayback, src/hooks/) took over tutor-message playback and
+    // computes the same slower intro rate directly as a prop passed into
+    // TutorNarratedMessage, rather than through handleSpeak's options object.
+    // The underlying pedagogy (introduction speaks slower) is unchanged; only
+    // the wiring shape is, so this assertion follows it rather than pinning
+    // dead code.
     expect(CODE).toContain('INTRO_SPEECH_RATE_FACTOR')
-    expect(CODE).toMatch(/intro:\s*isIntro/)
+    expect(CODE).toMatch(/speed=\{isIntro \? speed \* INTRO_SPEECH_RATE_FACTOR : speed\}/)
   })
 
   it('gives the subject introduction the shared voice pipeline, not its own', () => {

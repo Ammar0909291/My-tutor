@@ -75,9 +75,19 @@ describe('R1 — the topic-progress evidence write is settled before the reply',
   })
 
   it('the write it guards is still the idempotent, retried one — semantics unchanged', () => {
-    // If this ever stops being withRetry(applyTopicProgressEvidence(...)), the
-    // double-count protection this fix relies on is gone and awaiting it is no
-    // longer obviously safe.
-    expect(ROUTE).toMatch(/await withRetry\(\(\) => applyTopicProgressEvidence\(prisma, \{/)
+    // If this ever stops being a RETRIED apply, the double-count protection
+    // this fix relies on is gone and awaiting it is no longer obviously safe.
+    //
+    // 2026-09-13 (PCD-002): the wrapper changed from `withRetry` to
+    // `boundedDbCall`, which adds a request-wall-clock bound on top of the same
+    // retry. Superseded assertion, kept verbatim for history:
+    //   expect(ROUTE).toMatch(/await withRetry\(\(\) => applyTopicProgressEvidence\(prisma, \{/)
+    // The invariant is unchanged and is now asserted in BOTH halves — the apply
+    // is still wrapped, and it still retries. This guard did its job during that
+    // change: a first draft dropped the retry on a mistaken claim that the write
+    // was not idempotent, and this line is what caught it.
+    expect(ROUTE).toMatch(/await boundedDbCall\(deadline, 'chat-topic-progress', \(\) => applyTopicProgressEvidence\(prisma, \{/)
+    const at = ROUTE.indexOf("'chat-topic-progress'")
+    expect(ROUTE.slice(at, at + 400)).toMatch(/retries:\s*2/)
   })
 })

@@ -98,7 +98,7 @@ function failureKind(err: unknown): 'timeout' | 'rateLimit' | 'emptyResponse' | 
 }
 
 export function createFailoverRouter(opts: FailoverRouterOptions) {
-  const { providers, disableSameProviderRetry = false, deadlineMs = AI_CHAIN_DEADLINE_MS } = opts
+  const { providers, disableSameProviderRetry = false } = opts
   if (providers.length === 0) throw new Error('createFailoverRouter requires at least one provider')
 
   /**
@@ -183,8 +183,24 @@ export function createFailoverRouter(opts: FailoverRouterOptions) {
     }
   }
 
-  async function complete(req: AICompletionRequest): Promise<AICompletionResult> {
+  /**
+   * `overrideDeadlineMs` (PCD-002, second pass) lets ONE call ask for less than
+   * the router's constructed budget. It exists because the chain's clock starts
+   * HERE, not when the request arrived: the caller may already have spent part
+   * of the function's 60s on database work, and only the caller knows that. It
+   * can never ask for MORE — `Math.min` — so the chain's own bound stays the
+   * ceiling it was set to in 6326c91 and a caller that passes nothing is
+   * byte-for-byte unaffected.
+   *
+   * Passed per CALL rather than per router because routers are cached per
+   * language chain and shared across requests; a construction-time deadline
+   * cannot express "what is left of THIS request".
+   */
+  async function complete(req: AICompletionRequest, overrideDeadlineMs?: number): Promise<AICompletionResult> {
     let lastErr: any
+    const deadlineMs = typeof overrideDeadlineMs === 'number' && Number.isFinite(overrideDeadlineMs)
+      ? Math.min(opts.deadlineMs ?? AI_CHAIN_DEADLINE_MS, Math.max(overrideDeadlineMs, 0))
+      : (opts.deadlineMs ?? AI_CHAIN_DEADLINE_MS)
 
     // PCD-002. One wall clock for the whole chain — see AI_CHAIN_DEADLINE_MS.
     const chainStart = Date.now()

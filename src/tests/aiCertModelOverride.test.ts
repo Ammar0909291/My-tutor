@@ -117,9 +117,16 @@ describe('route.ts gate reads the flag from the DB, never the request (source as
     )
     // The override variable must only ever be set inside the branch that
     // follows a prisma lookup keyed on the AUTHENTICATED userId.
+    // 2026-09-13 (PCD-002): the lookup is now wrapped in `boundedDbCall`, which
+    // added two comment lines and a wrapper frame ahead of it, pushing the query
+    // past the old 900-char window. Superseded slice, kept verbatim for history:
+    //   src.slice(at, at + 900)
+    // The assertions below are UNCHANGED — the invariant they state (the flag is
+    // read from the DB by the authenticated userId, never from the request) is
+    // exactly what still has to hold.
     const gateBlock = src.slice(
       src.indexOf('A/B provider-certification gate'),
-      src.indexOf('A/B provider-certification gate') + 900,
+      src.indexOf('A/B provider-certification gate') + 1400,
     )
     expect(gateBlock).toMatch(/req\.headers\.get\('x-cert-groq-model'\)/)
     expect(gateBlock).toMatch(/prisma\.user\.findUnique/)

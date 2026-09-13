@@ -3,7 +3,14 @@ import { normalizeToCanonicalLevel } from '@/lib/curriculum/levels'
 import { z } from 'zod'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
-import { withRetry } from '@/lib/db/withRetry'
+import { withTimeout, TimeoutError } from '@/lib/net/timeout'
+import { boundedDbCall } from '@/lib/db/boundedDbCall'
+import { isDbConnectionError } from '@/lib/db/withRetry'
+import {
+  createRouteDeadline, providerBudgetMs, RouteDeadlineError, type RouteDeadline,
+} from '@/lib/net/routeDeadline'
+import { AI_CHAIN_DEADLINE_MS } from '@/lib/ai/providers/failoverRouter'
+import { recordBudgetEvent } from '@/lib/teaching/budgetTelemetry'
 import { buildTutorSystemPrompt, type LessonContext } from '@/lib/ai/client'
 import { routeAI, isAllowedGroqCertModel } from '@/lib/ai/router'
 import { AIBudgetExceededError } from '@/lib/ai/budget'
@@ -95,7 +102,57 @@ const schema = z.object({
   tabId: z.string().min(1).max(64).optional(),
 })
 
+/**
+ * ── PCD-002: THE ROUTE'S OWN WALL CLOCK ────────────────────────────────────
+ *
+ * The handler below is raced against ONE budget started here, at the first
+ * line of the request. Everything inside it that is bounded — each DB
+ * operation, each retry, the provider chain — reads what is LEFT of this same
+ * clock, so no two bounds can add up past it.
+ *
+ * WHY THE RACE EXISTS ON TOP OF THOSE BOUNDS. Bounding what you remembered to
+ * bound leaves everything you did not: this route makes ~27 direct Prisma
+ * calls and many more transitively, and a future one will not know about this
+ * clock. When something unbounded stalls, the choice is between an honest 503
+ * from this application and a raw `FUNCTION_INVOCATION_TIMEOUT` from the
+ * platform — which is the artefact PCD-002 actually recorded: no exception, no
+ * degraded template, no further turns, session unrecoverable. The per-operation
+ * budgets make that outcome rare and diagnosable; this race makes it IMPOSSIBLE
+ * for the platform to be the one that decides.
+ *
+ * WHAT LOSING THE RACE DOES NOT DO. It does not roll anything back and does not
+ * claim anything was persisted. The abandoned handler is not cancelled — the
+ * instance freezes when this response returns, exactly as it would have — so
+ * the failure mode is UNDER-reporting a write that may have landed, never
+ * over-reporting one that did not. The response is a 503 with `kind`, so a
+ * client sees a retryable server condition rather than a platform error page.
+ */
 export async function POST(req: Request) {
+  const deadline = createRouteDeadline()
+  let timer: ReturnType<typeof setTimeout> | undefined
+  try {
+    return await Promise.race([
+      handleChatTurn(req, deadline),
+      new Promise<Response>((resolve) => {
+        timer = setTimeout(() => {
+          const elapsed = deadline.elapsedMs()
+          recordBudgetEvent({ outcome: 'route-deadline', elapsedMs: elapsed, budgetMs: deadline.budgetMs })
+          captureError(new RouteDeadlineError(elapsed, deadline.budgetMs), {
+            route: 'api/learn/chat', tags: { stage: 'route-deadline' },
+          })
+          resolve(NextResponse.json(
+            { success: false, error: 'That took too long on our side. Please send it again.', kind: 'route_deadline' },
+            { status: 503 },
+          ))
+        }, Math.max(deadline.remainingMs(), 0))
+      }),
+    ])
+  } finally {
+    if (timer) clearTimeout(timer)
+  }
+}
+
+async function handleChatTurn(req: Request, deadline: RouteDeadline): Promise<Response> {
   const session = await auth()
   if (!session?.user?.id) {
     return NextResponse.json({ success: false, error: 'Forbidden' }, { status: 403 })
@@ -116,10 +173,13 @@ export async function POST(req: Request) {
   let groqModelOverride: string | undefined
   const requestedCertModel = req.headers.get('x-cert-groq-model')
   if (isAllowedGroqCertModel(requestedCertModel)) {
-    const dbUser = await prisma.user.findUnique({
-      where: { id: userId },
-      select: { modelOverrideAllowed: true },
-    })
+    // Bounded like every other query on this path. A read, so it is safely
+    // retryable; the budget decides whether a retry is affordable.
+    const dbUser = await boundedDbCall(deadline, 'chat-cert-model-flag',
+      () => prisma.user.findUnique({
+        where: { id: userId },
+        select: { modelOverrideAllowed: true },
+      }), { retries: 1 })
     if (dbUser?.modelOverrideAllowed) {
       groqModelOverride = requestedCertModel
     }
@@ -142,7 +202,7 @@ export async function POST(req: Request) {
     // for the full table scan + a ~200KB AI payload on every send. Fetched
     // newest-first so `take` keeps the RECENT end, then reversed to chronological.
     const HISTORY_LIMIT = 30
-    const learnSession = await withRetry(() => prisma.learnSession.findUnique({
+    const learnSession = await boundedDbCall(deadline, 'chat-session-load', () => prisma.learnSession.findUnique({
       where: { id: sessionId, userId },
       include: {
         subject: true,
@@ -153,7 +213,8 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: false, error: 'Session not found' }, { status: 404 })
     }
 
-    const profile = await withRetry(() => prisma.profile.findUnique({ where: { userId } }))
+    const profile = await boundedDbCall(deadline, 'chat-profile-load',
+      () => prisma.profile.findUnique({ where: { userId } }), { retries: 1 })
 
     // Only a real learner utterance is persisted. An ephemeral instruction is
     // still sent to the model (it is what triggers the opening) but is never
@@ -167,7 +228,10 @@ export async function POST(req: Request) {
     // already depends on. See the stamping site for why.
     let userMessageRow: { id: string } | null = null
     if (!ephemeral) {
-      userMessageRow = await withRetry(() => prisma.message.create({
+      // WRITE, and deliberately NOT retried: this row has no idempotency key,
+      // so a timeout that actually committed would produce the learner's message
+      // twice and corrupt history order. See boundedDbCall's header.
+      userMessageRow = await boundedDbCall(deadline, 'chat-user-message', () => prisma.message.create({
         data: { sessionId, role: MessageRole.USER, content: message },
       }))
     }
@@ -5597,7 +5661,36 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // told 'AI down'"). AIBudgetExceededError still propagates — budget
         // exhaustion is load management with a deliberate 429, not an outage.
         let routed: { text: string; provider: string; finishReason: string | null }
+        // ── PCD-002: THE CHAIN'S CLOCK IS NOT THE REQUEST'S CLOCK ──────────
+        //
+        // `AI_CHAIN_DEADLINE_MS` starts when `complete()` is called, so every
+        // second already spent on session load, history, profile and asset
+        // assembly is invisible to it: 20s of DB work plus a 45s chain is 65s
+        // against `maxDuration: 60`, and the platform kills the invocation
+        // before any catch below can run. That is the raw 504 this defect
+        // recorded — the chain never overran ITS budget, the request overran
+        // the function's.
+        //
+        // The chain is therefore granted `min(45s, remaining - reserve)`. The
+        // reserve is not discretionary: the snapshot delta and the assistant
+        // message are awaited on purpose (a serverless instance freezes the
+        // moment the response returns, so a dropped write loses the turn's
+        // entire learning state), and they have to be affordable AFTER the
+        // model replies. When even the reserve is unaffordable the provider is
+        // not called at all — a degraded reply that is saved beats a real one
+        // killed mid-write — and the catch below serves the template it
+        // already serves for a dead chain. Nothing about the chain's own
+        // deadline is weakened; this only refuses to sell it time the request
+        // does not own.
+        const aiBudgetMs = providerBudgetMs(deadline.remainingMs(), AI_CHAIN_DEADLINE_MS)
         try {
+          if (aiBudgetMs <= 0) {
+            recordBudgetEvent({
+              outcome: 'provider-deadline', label: 'ai-chain', grantedMs: 0,
+              elapsedMs: deadline.elapsedMs(), budgetMs: deadline.budgetMs,
+            })
+            throw new RouteDeadlineError(deadline.elapsedMs(), deadline.budgetMs)
+          }
           llmCallCount++ // instrumentation only — counted before the await so a
           // throw still records the call that was actually spent.
           routed = await routeAI(
@@ -5617,9 +5710,20 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           teachingLang,
             { userId, subject: learnSession.subject.slug },
             groqModelOverride,
+            aiBudgetMs,
           )
         } catch (aiError) {
           if (aiError instanceof AIBudgetExceededError) throw aiError
+          // The chain reports its own exhaustion (`AIChainDeadlineError`), so
+          // this records WHICH budget it was measured against — the request's
+          // remaining time, not the constructed 45s — which is the number that
+          // explains a short chain on a slow-database turn.
+          if (aiError instanceof Error && aiError.name === 'AIChainDeadlineError') {
+            recordBudgetEvent({
+              outcome: 'provider-deadline', label: 'ai-chain', grantedMs: aiBudgetMs,
+              elapsedMs: deadline.elapsedMs(), budgetMs: deadline.budgetMs,
+            })
+          }
           console.error('[learn/chat] all providers down — serving degraded template (RS P-3):',
             aiError instanceof Error ? aiError.message : String(aiError))
           captureError(aiError, { route: 'api/learn/chat', tags: { stage: 'ai-degraded' } })
@@ -8656,7 +8760,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
 
       let assistantMessage
       try {
-        assistantMessage = await withRetry(() => prisma.message.create({
+        // WRITE, not retried — same reason as the learner message above.
+        assistantMessage = await boundedDbCall(deadline, 'chat-assistant-message', () => prisma.message.create({
           data: {
             sessionId, role: MessageRole.ASSISTANT, content: contentForHistory, provider,
             ...dependencyInstrumentation,
@@ -8669,7 +8774,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // of a column a deploy has not applied yet. The teaching is the point;
         // the figure's identity is a nice-to-have on this write.
         console.error('[learn/chat] message.create with provider/visual failed, retrying without them:', err)
-        assistantMessage = await withRetry(() => prisma.message.create({
+        // WRITE, not retried — same reason as the learner message above.
+        assistantMessage = await boundedDbCall(deadline, 'chat-assistant-message', () => prisma.message.create({
           data: { sessionId, role: MessageRole.ASSISTANT, content: contentForHistory },
         }))
       }
@@ -8927,10 +9033,20 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // is fixed at ingress, so it is still stable across retries of THIS
           // request, which is the window withRetry operates in.
           const evidenceEventId = userMessageRow?.id ?? `${learnSession.id}:${turnReceivedAt}`
-          await withRetry(() => applyTopicProgressEvidence(prisma, {
+          // WRITE, and the ONE write on this path that IS safely retryable:
+          // `applyTopicProgressEvidence` carries a real idempotency key
+          // (`eventId` -> `lastEvidenceMessageId`) and guards its increment on
+          // it, so a repeated apply returns 'duplicate' instead of
+          // double-counting. topicProgressEvidenceAwaited.test.ts depends on
+          // exactly that ("the double-count protection this fix relies on"),
+          // and a first draft of THIS change dropped the retry on a mistaken
+          // claim that it was unsafe — caught by that guard, and the reason it
+          // is stated here rather than assumed. The budget still decides
+          // whether the retry is affordable.
+          await boundedDbCall(deadline, 'chat-topic-progress', () => applyTopicProgressEvidence(prisma, {
             userId, subjectSlug: subjectCode, topicSlug: resolvedConceptId,
             score, eventId: evidenceEventId,
-          })).then((outcome) => {
+          }), { retries: 2 }).then((outcome) => {
             console.log('[topic-progress-evidence]', {
               concept: resolvedConceptId, event: evidenceEventId, score, outcome,
             })
@@ -10597,6 +10713,34 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
   } catch (err) {
     if (err instanceof z.ZodError) {
       return NextResponse.json({ success: false, error: err.errors[0].message }, { status: 400 })
+    }
+    // ── PCD-002: AN EXHAUSTED BUDGET IS NOT AN "INTERNAL SERVER ERROR" ─────
+    //
+    // A bounded DB call that ran out of its slice, or a request that ran out
+    // altogether, is a RECOVERABLE condition the learner can retry — and the
+    // three of them need three different repairs (a query/index/pool problem,
+    // an infrastructure problem, and something unbounded stalling). Collapsing
+    // them into one opaque 500 is precisely what made PCD-002's sibling
+    // (ENG-D18, `/api/sessions`) undiagnosable from production logs, and the
+    // fix there was this same discriminator. The turn is NOT persisted as
+    // successful and no learner state is fabricated: this path reports that
+    // the turn did not complete, and says why.
+    const timedOut = err instanceof TimeoutError
+    const outOfBudget = err instanceof RouteDeadlineError
+    const unavailable = !timedOut && !outOfBudget && isDbConnectionError(err)
+    if (timedOut || outOfBudget || unavailable) {
+      const kind = outOfBudget ? 'route_deadline' : timedOut ? 'db_timeout' : 'db_unavailable'
+      recordBudgetEvent({
+        outcome: outOfBudget ? 'route-deadline' : timedOut ? 'db-timeout' : 'db-unavailable',
+        label: 'chat-turn', elapsedMs: deadline.elapsedMs(), budgetMs: deadline.budgetMs,
+      })
+      console.error('[learn/chat] ' + JSON.stringify({ event: 'turn-not-completed', kind }),
+        err instanceof Error ? err.message : String(err))
+      captureError(err, { route: 'api/learn/chat', tags: { stage: kind } })
+      return NextResponse.json(
+        { success: false, error: 'That did not go through. Please send it again.', kind },
+        { status: 503 },
+      )
     }
     console.error('[learn/chat]', err)
     captureError(err, { route: 'api/learn/chat' })
