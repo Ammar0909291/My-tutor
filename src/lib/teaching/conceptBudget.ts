@@ -18,6 +18,7 @@
  */
 
 import type { ConversationState, TeachingPhase } from './conversationState'
+import { conceptMasteryVerdict } from './masteryGate'
 
 /**
  * The teaching budget for one concept, expressed as the flow it is meant to
@@ -72,7 +73,14 @@ export function qualifiesForBudgetExtension(state: ConversationState): boolean {
   if ((state.turnsOnConcept ?? 0) < CONCEPT_TURN_BUDGET) return false
   // Already finished: there is nothing to extend, and granting here would put a
   // spurious flag on a concept that closed by mastery.
-  if (hasDemonstratedMastery(state)) return false
+  //
+  // `isAuthoritativelyMastered`, not `hasDemonstratedMastery` (P1 fix, see that
+  // function's own doc comment below). A learner who reached the PLAIN
+  // threshold on evidence the completion authority will not certify has not
+  // "already finished" in any sense this extension cares about — they are
+  // exactly the learner the extension exists for: someone who is engaging and
+  // answering, denied the turns to convert that into real, gradeable evidence.
+  if (isAuthoritativelyMastered(state)) return false
   // CONVERTING, MEASURED AT THE RUNG THE ANSWER WAS ACTUALLY GIVEN AT.
   //
   // This read used to be `correctAtCheck + correctAtPractice >= 1`, and that
@@ -142,6 +150,58 @@ export function hasDemonstratedMastery(state: ConversationState): boolean {
 }
 
 /**
+ * P1 FIX — the state-contradiction root cause.
+ *
+ * ── THE DEFECT ──────────────────────────────────────────────────────────────
+ * `hasDemonstratedMastery` reads ONLY the PLAIN counters (`correctAtPractice`)
+ * / the phase ladder — evidence that advances on ANY graded-correct answer,
+ * server-authored or model-invented (see conversationState.ts's fold: the
+ * PLAIN counters "deliberately still advance… the ladder must keep moving so
+ * the lesson does not stall"). `conceptMasteryVerdict` (masteryGate.ts) is the
+ * STRICT, single authority the completion gate/permanent record/client payload
+ * all already certify against — it requires a server-AUTHORED grade
+ * specifically (masteryVerifiedStrict).
+ *
+ * Both `evaluateConceptBudget`'s "already finished, never exhausted" short-
+ * circuit below and `isConceptClosed` (lessonAttempt.ts) used to read
+ * `hasDemonstratedMastery` as their "is this concept DONE" test — so the
+ * INSTANT a learner's PLAIN counters crossed the mastery threshold (which can
+ * happen on unauthored/model-invented-key grades — see mcq.ts's
+ * `probeKeyIsAuthored`), the concept was folded CLOSED and permanently
+ * classified via `conceptOutcome`'s STRICT verdict. If that verdict was
+ * `needs_review` (the strict evidence never arrived), the lesson finalised
+ * immediately, with zero further chance to earn real evidence — even though
+ * the turn/attempt budget had turns to spare. The learner who answered
+ * everything asked of them was told, verbatim, "checkCorrect: 2 (required 1),
+ * practiceCorrect: 2 (required 2)" and, in the same breath, "Let's pause here
+ * for now" with no explanation.
+ *
+ * ── THE FIX ─────────────────────────────────────────────────────────────────
+ * The question "is this concept DONE (may it close as certified)" must be
+ * answered by the SAME single authority the certification itself uses —
+ * `conceptMasteryVerdict` — not by the looser, liveness-only PLAIN evidence.
+ * `hasDemonstratedMastery` is untouched and keeps its own real job (it still
+ * decides when a concept has "converted" for `qualifiesForBudgetExtension`'s
+ * OTHER checks and continues to describe the phase ladder's own progress) —
+ * this file simply stops treating it as a stand-in for the completion
+ * authority.
+ *
+ * Effect: a concept whose PLAIN counters are satisfied but whose STRICT
+ * evidence is not stays OPEN. `evaluateConceptBudget` resumes evaluating the
+ * ordinary turns/attempts/failures budget for it (rather than reporting
+ * `status: 'ok'`/never-exhausted forever), so the learner gets the SAME
+ * bounded number of further turns anyone else gets to earn a genuine graded
+ * answer — via the phase ladder's own existing demotion paths (a
+ * clarification, a confusion signal) landing them back in a probe-attachable
+ * phase — before the concept is honestly closed as needing review. Nothing
+ * about WHAT counts as verified evidence changes; only WHEN the runtime gives
+ * up asking for it.
+ */
+export function isAuthoritativelyMastered(state: ConversationState): boolean {
+  return conceptMasteryVerdict(state)
+}
+
+/**
  * Has the learner ever produced a single correct answer at an ASSESSED rung?
  *
  * `correctAtCheck`/`correctAtPractice` move ONLY inside CHECK/PRACTICE, on a
@@ -162,10 +222,21 @@ export function evaluateConceptBudget(state: ConversationState): ConceptBudget {
 
   const base = { turnsUsed, turnsRemaining, attemptsUsed }
 
-  // A concept the learner has actually mastered is never "exhausted" — it is
-  // finished. Checking this first is what stops a slow-but-successful learner
-  // from being marked for review on the turn they succeed.
-  if (hasDemonstratedMastery(state)) {
+  // A concept the learner has actually mastered — by the SAME authority the
+  // completion gate/record/payload certify against — is never "exhausted", it
+  // is finished. Checking this first is what stops a slow-but-successful
+  // learner from being marked for review on the turn they succeed.
+  //
+  // `isAuthoritativelyMastered`, not `hasDemonstratedMastery` (P1 fix — see
+  // that function's own doc comment). Reading the looser, PLAIN-evidence test
+  // here is exactly what let a concept short-circuit to "ok, never exhausted"
+  // the instant unauthored-key evidence crossed the threshold, permanently
+  // stopping the turns/attempts/failures checks below from ever running for
+  // it — so a learner whose evidence the completion authority would not
+  // certify was folded closed on the very first turn that looked like success,
+  // instead of getting the same bounded budget everyone else gets to produce a
+  // genuine graded answer.
+  if (isAuthoritativelyMastered(state)) {
     return { ...base, status: 'ok', reason: null, markForReview: false }
   }
 

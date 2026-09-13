@@ -96,19 +96,20 @@ describe('C. the withhold DECISION is unchanged', () => {
     }
   })
 
-  it('MEASURED: a teaching sentence before the question is ALSO dropped', () => {
-    // I expected the teaching to survive and the question alone to go. It does
-    // not: `dropOrphanedLeadIn(dropAnswerableContent(text))` returns empty for
-    // this input, so the whole turn becomes the hand-off sentence.
+  it('FIXED: a teaching sentence before the question now survives', () => {
+    // Previously measured (and explicitly NOT endorsed): paragraph-scoped
+    // `dropOrphanedLeadIn(dropAnswerableContent(text))` returned empty for
+    // this input because the teaching and the question share one paragraph,
+    // so the whole turn became the bare hand-off sentence and the teaching
+    // was lost with it.
     //
-    // Recorded as measured behaviour, NOT endorsed. Whether a sentence that
-    // teaches ("parallel rays converge at the focus") should be treated as an
-    // orphaned lead-in is a real question — the helper's own docblock says it
-    // drops "trailing lines that only ANNOUNCE the question just removed", and
-    // this one announces nothing. Investigating that is its own measurement,
-    // not a change smuggled in beside this one, so the current behaviour is
-    // pinned here and the question is left standing rather than silently
-    // answered.
+    // Fixed as a side effect of `salvageNonQuestionSentences` (added for the
+    // real-student "direct question met with a content-free hold" defect):
+    // when paragraph scope empties the turn, sentence scope is tried before
+    // falling back to a placeholder, and the non-question sentence here
+    // clears its 60-char floor. The question is still stripped — only the
+    // stray-question decision this file documents as untouched is
+    // untouched; what survives around it improved.
     const r = run({
       text: 'A concave mirror bulges away from you, so parallel rays converge at the focus. '
         + 'What is the focal length of that mirror?',
@@ -116,7 +117,7 @@ describe('C. the withhold DECISION is unchanged', () => {
     })
     expect(r.withheld).toBe(true)
     expect(r.text).not.toContain('focal length of that mirror')
-    expect(r.text).toBe('Let me check your thinking with this.')
+    expect(r.text).toBe('A concave mirror bulges away from you, so parallel rays converge at the focus.')
   })
 })
 

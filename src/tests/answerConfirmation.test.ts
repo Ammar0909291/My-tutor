@@ -140,6 +140,21 @@ describe('the route actually applies it', () => {
     expect(route).toMatch(/priorConfirmations: priorConfirmationsHoisted/)
     expect(route).toMatch(/priorConfirmationsHoisted = Number\.isFinite/)
   })
+
+  it('PCD-029 — emits telemetry gated on the SAME precondition the enforcer itself gates on', () => {
+    // Observability only: a live re-measurement of the confirmation rate was
+    // never completed after the payload change that broke the transcript
+    // scorer's own denominator (mcqForClient stripping correctIndex). This
+    // reads the enforcer's own denominator directly instead. Must fire only
+    // when `correct === true` — the exact condition confirmCorrectAnswer
+    // itself requires — never unconditionally.
+    const callStart = route.indexOf('confirmCorrectAnswer({')
+    const block = route.slice(callStart, callStart + 1600)
+    expect(block).toContain("console.log('[c5] '")
+    expect(block).toContain("event: 'servedGradedCorrect'")
+    expect(block).toMatch(/if \(mcqGradeHoisted\?\.correct === true\)/)
+    expect(block).toContain('confirmed.added || CONFIRMS_CORRECT.test(confirmed.text)')
+  })
 })
 
 describe('stripLeadingFalseConfirmation — the reoffer-guard contradiction fix', () => {

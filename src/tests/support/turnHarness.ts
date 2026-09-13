@@ -68,6 +68,10 @@ export interface HarnessTurn {
   learnerSays: string | ((mcq: ServedMcq | null) => string)
   /** What the SCRIPTED model replies with (raw, tags included). */
   modelReplies: string
+  /** Mirrors the real request body's `ephemeral` field (LessonScreen's
+   *  internal lesson-opening/resume instruction — never learner-typed, never
+   *  persisted). Defaults to false, i.e. an ordinary learner turn. */
+  ephemeral?: boolean
 }
 
 export interface TurnResult {
@@ -304,7 +308,10 @@ export async function driveTurns(
       res = await POST(new Request('http://localhost/api/learn/chat', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ sessionId: h.state.opts.sessionId, message: learnerSays }),
+        body: JSON.stringify({
+          sessionId: h.state.opts.sessionId, message: learnerSays,
+          ...(t.ephemeral ? { ephemeral: true } : {}),
+        }),
       }))
     } finally {
       spies.forEach((s) => s.mockRestore())

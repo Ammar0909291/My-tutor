@@ -61,10 +61,35 @@ describe('2 — Tutor Max is the default Active Learning View', () => {
     expect(SRC).toMatch(/useState<PanelName \| null>\('chat'\)/)
   })
 
-  it('the 3-panel grid collapses to one column whenever maximizedPanel is set (including the default)', () => {
+  it("the 3-panel grid collapses to one column whenever maximizedPanel is 'chat' or 'code' (including the default)", () => {
     const gridIdx = SRC.indexOf('3-PANEL GRID')
-    const block = SRC.slice(gridIdx, gridIdx + 1600)
+    const classNameIdx = SRC.indexOf('className={', gridIdx)
+    const block = SRC.slice(classNameIdx, classNameIdx + 400)
     expect(block).toMatch(/maximizedPanel \? 'grid grid-cols-1'/)
+  })
+
+  // SUPERSEDES this file's own prior framing ("whenever maximizedPanel is
+  // set") — the Learning Roadmap split-view fix makes 'curriculum' a
+  // deliberate exception: on desktop it opens a ~32/68 split beside Tutor
+  // Max instead of collapsing to one column. The assertion above still
+  // holds for 'chat'/'code' (and is checked FIRST in the ternary, so
+  // 'curriculum' never reaches it); this test pins the exception itself.
+  it("'curriculum' is the one exception — a responsive 32/68 split, not a full collapse, and only on desktop", () => {
+    const gridIdx = SRC.indexOf('3-PANEL GRID')
+    const classNameIdx = SRC.indexOf('className={', gridIdx)
+    const block = SRC.slice(classNameIdx, classNameIdx + 400)
+    // Mobile-first: the unprefixed track is still grid-cols-1 (full width,
+    // matching the pre-existing mobile roadmap), and only the md: (desktop)
+    // track introduces the split.
+    expect(block).toContain(
+      "maximizedPanel === 'curriculum' ? 'grid grid-cols-1 gap-0 p-0 md:grid-cols-[minmax(280px,32%)_1fr] md:gap-4 md:p-4'",
+    )
+    // Checked before the generic `maximizedPanel ? 'grid grid-cols-1'` branch,
+    // so 'curriculum' never falls through to the full-collapse case.
+    const curriculumIdx = block.indexOf("maximizedPanel === 'curriculum'")
+    const genericIdx = block.indexOf("maximizedPanel ? 'grid grid-cols-1'")
+    expect(curriculumIdx).toBeGreaterThan(-1)
+    expect(genericIdx).toBeGreaterThan(curriculumIdx)
   })
 })
 

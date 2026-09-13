@@ -54,7 +54,66 @@
  * leaving an ordinary lowercase HTML comment alone — this deletes text from a
  * learner's message, so it should delete only what is unmistakably markup.
  */
-const MACHINE_TAG_RE = /<!--\s*[A-Z][A-Z0-9_]{2,}\b[\s\S]*?(?:-->|\/>)/g
+/**
+ * ENG-D04 (2026-09-12): A MALFORMED COMMENT OPENER IS STILL MACHINE MARKUP.
+ *
+ * Measured live (`eng.grammar.word-order`, order 60, T5, real student): the
+ * ENTIRE opening of a turn was, verbatim,
+ *
+ *   <--ATTEMPT channel="verbal" representation="diagram" … interleaving="blocked"-->
+ *
+ * — the internal pacing directive, with `<--` instead of `<!--`. Reproduced
+ * against this module before changing it: `stripResidualMachineTags` returned
+ * it UNTOUCHED and `hasResidualMachineTag` reported it CLEAN, so the
+ * repository's own residual-tag assertion was blind to it, exactly as it was
+ * blind to the bracket shape before Phase 6 and to bare JSON before Phase 7.
+ * `<--` is also not a valid HTML comment, so nothing downstream hides it
+ * either — the learner reads it.
+ *
+ * This module's own header already stated the principle ("no parser keyed to a
+ * tag NAME can ever recover from the model choosing a different name"); the
+ * same is true of a model mistyping the DELIMITER. The opener is widened to
+ * tolerate a dropped `!` or a miscounted dash, and nothing else is relaxed:
+ * the SHOUTED-name requirement (uppercase opening token, 3+ chars) and the
+ * mandatory terminator both still apply, so an ASCII arrow in prose is
+ * untouched — `<-- back` is lowercase, and `<-- BACK` carries no `-->`.
+ */
+/**
+ * ENG-D04 residual (2026-09-12, second pass): A THIRD OPENER VARIANT, `[!--`,
+ * PROVEN FROM THE RAW STORED MESSAGE.
+ *
+ * The first pass recorded the `eng.writing.supporting-details` (order 113, T9)
+ * instance as UNRESOLVED, because the audit log showed `[!--ATTEMPT` and the
+ * log is demonstrably lossy (the same line is truncated mid-attribute) — so a
+ * square bracket could have been the capture's own rendering of `<`. Marking
+ * it covered on that evidence was explicitly declined.
+ *
+ * The stored assistant message itself was then read out of production, which
+ * is the evidence that separates the two readings. It ends, verbatim:
+ *
+ *   🎉
+ *   [!--ATTEMPT channel="verbal" representation="concrete-object" … -->]
+ *
+ * The bracket is REAL and in the persisted content, and the terminator carries
+ * a trailing `]`: the model wrapped a comment in square brackets rather than
+ * mistyping one delimiter. Three variants are now measured from production —
+ * `<!--` (well-formed), `<--` (dropped `!`), `[!--` (bracket-wrapped) — which
+ * is this module's own header argument about tag NAMES holding equally for
+ * delimiters. The opener admits `[` alongside `<`, and the terminator admits an
+ * optional closing `]`, so the wrapper leaves no stray bracket behind.
+ *
+ * Nothing else is relaxed, and the bracket does not widen the blast radius: at
+ * least one dash is still mandatory after the opener, so a Markdown link
+ * (`[Chapter 2](…)`) and a citation (`[A]`) cannot match; the SHOUTED-name rule
+ * (uppercase token, 3+ chars) and the mandatory terminator both still apply.
+ */
+const MACHINE_TAG_RE = /[<[]!?-{1,3}\s*[A-Z][A-Z0-9_]{2,}\b[\s\S]*?(?:-->|\/>)\]?/g
+
+/** The OPENER alone — no terminator required. One definition serves the sweep's
+ *  fast path and `hasResidualMachineTag`, so the three cannot drift apart again
+ *  (they already had, which is how the malformed opener survived a widened
+ *  MACHINE_TAG_RE). Not global: every use is a one-shot `.test`. */
+const MACHINE_TAG_OPENER_RE = /[<[]!?-{1,3}\s*[A-Z][A-Z0-9_]{2,}\b/
 
 /**
  * P1 (visual reference integrity, 2026-08-22): a raw HTML-ELEMENT-shaped
@@ -200,6 +259,79 @@ function stripStandaloneMachineJson(text: string): string {
 const UNTERMINATED_TRAILING_RE = /\n?[ \t]*<!--\s*[A-Z][A-Z0-9_]{2,}\b[^>]*$/
 
 /**
+ * PHASE 8 — INTERNAL PACING/NUMBERING LABELS, THE FOURTH DISTINCT LEAK CLASS.
+ *
+ * ── OBSERVED LIVE (real-student English verification, 2026-09) ─────────────
+ * Learner-facing text read, verbatim:
+ *
+ *   "Question (Stage 1 Observation): What do you notice about…"
+ *   "Observation question (Stage 1): In the sentence…"
+ *   "Lesson 191 of 216 – Introduction to Computational Linguistics"
+ *
+ * Neither is machine MARKUP (no `<!--…-->`, no `[NAME…]`, no bare JSON) — the
+ * three sweeps above cannot see either, by design, because both are ordinary
+ * English WORDS the prompt itself hands the model as internal planning
+ * vocabulary: `client.ts`'s QUESTION STAGE POLICY names its own seven-rung
+ * ladder (Observation/Recognition/Identification/Simple reasoning/
+ * Application/Calculation/Transfer) so the model can PACE ITSELF, and the
+ * CURRENT LESSON block hands it "Lesson N of M" so it knows where it is in
+ * the syllabus — neither was ever meant to be read aloud, and (as of this
+ * fix) the prompt for each now says so explicitly. Prompt compliance is
+ * advisory; this is the deterministic partner, on the SAME closed-vocabulary
+ * discipline the JSON-key sweep above already established for exactly this
+ * reason ("no parser keyed to a tag NAME can ever recover from the model
+ * choosing a different name" — true of markup names, equally true of a
+ * planning label the model echoes instead of hiding).
+ *
+ * ── WHY A CLOSED VOCABULARY, NOT A GUESS ─────────────────────────────────
+ * The seven stage names are the EXACT, fixed set client.ts's own prompt
+ * already defines — not invented here, and not a general blacklist of
+ * "suspicious" words (a real lesson may legitimately discuss an "application"
+ * of a formula, a "transfer" of heat, or "identification" of a chemical — the
+ * bare word is ordinary vocabulary). Only the LABEL SHAPE is stripped:
+ * "Stage" immediately followed by a digit, optionally one of the seven names
+ * — that combination is not a sentence a tutor would otherwise write. The
+ * lesson-numbering shape is narrower still: "Lesson N of M" with both N and M
+ * numeric, which is the CURRENT LESSON block's own header format and nothing
+ * a tutor would say in ordinary prose ("this is lesson three" has no "of M").
+ */
+const STAGE_NAME = '(?:Observation|Recognition|Identification|Simple reasoning|Application|Calculation|Transfer)'
+/** "(Stage 1 Observation)", "(Stage 3)" — a parenthesised label suffix, as in
+ *  "Question (Stage 1 Observation): …". Removed whole, including the parens
+ *  and one leading space, so "Question: …" is what remains. */
+const STAGE_PAREN_RE = new RegExp(`\\s*\\(\\s*Stage\\s+\\d+(?:\\s*[:\\-]?\\s*${STAGE_NAME})?\\s*\\)`, 'gi')
+/** "Stage 1 Observation:", "Stage 3:" as a bare prefix/label, not
+ *  parenthesised — e.g. "Stage 1 Observation: What do you notice?". Removed
+ *  along with its trailing separator so the real sentence starts clean. */
+const STAGE_LABEL_RE = new RegExp(`\\bStage\\s+\\d+(?:\\s*[:\\-]?\\s*${STAGE_NAME})?\\s*[:\\-]\\s*`, 'gi')
+/** "Lesson 191 of 216" — the CURRENT LESSON block's own header shape,
+ *  numeric on both sides. Removed whole; a trailing " – "/": " separator
+ *  the model appended to it is cleaned up by the whitespace collapse below. */
+const LESSON_COUNT_RE = /\bLesson\s+\d+\s+of\s+\d+\b\s*[-–—:]?\s*/gi
+
+/**
+ * Remove internal pacing/numbering labels a model echoed instead of hiding —
+ * the "Stage N (Name)" question-ladder label and the "Lesson N of M" header
+ * shape. Idempotent-safe (single pass is sufficient; the shapes cannot nest),
+ * and always safe to call: on any surprise the caller already wraps this in
+ * `stripResidualMachineTags`'s pass loop, which never throws for a plain
+ * string input.
+ */
+function stripInternalPacingLabels(text: string): string {
+  if (!text.includes('Stage') && !text.includes('Lesson')) return text
+  const out = text
+    .replace(STAGE_PAREN_RE, '')
+    .replace(STAGE_LABEL_RE, '')
+    .replace(LESSON_COUNT_RE, '')
+  // A label removed from the very start of the text leaves a leading space
+  // (STAGE_PAREN_RE's own leading `\s*` only absorbs whitespace BEFORE the
+  // paren, which is empty at position 0) — trimmed here rather than widening
+  // the caller's trim, since that trims the whole message, not just this
+  // sweep's own output.
+  return out === text ? text : out.trimStart()
+}
+
+/**
  * Remove any machine markup the named parsers left behind.
  *
  * Total: never throws, and never returns null/undefined for a string input.
@@ -211,8 +343,19 @@ export function stripResidualMachineTags(text: string): string {
   if (typeof text !== 'string') return text
   // Fast path: none of the shapes of markup this sweep removes is present.
   // `/<visual\b/i` is cheap and only tested once here (not per-pass), since
-  // the loop below re-tests via the full regex on each pass anyway.
-  if (!text.includes('<!--') && !/<visual\b/i.test(text) && !text.includes('[') && !text.includes('{')) return text
+  // the loop below re-tests via the full regex on each pass anyway. PHASE 8:
+  // "Stage"/"Lesson" added — the internal pacing/numbering labels carry
+  // neither brackets, braces nor comment markers, so the pre-existing fast
+  // path would otherwise skip them entirely.
+  // ENG-D04: the opener test is `<` + a dash, NOT the literal `<!--`. The
+  // observed leak (`<--ATTEMPT …-->`) survived this fast path even after
+  // MACHINE_TAG_RE was widened, because the early return fired first — the
+  // same blindness one layer up, and the reason this check is stated as the
+  // regex rather than a substring.
+  if (
+    !MACHINE_TAG_OPENER_RE.test(text) && !/<visual\b/i.test(text) && !text.includes('[') && !text.includes('{')
+    && !text.includes('Stage') && !text.includes('Lesson')
+  ) return text
   let out = text
   for (let pass = 0; pass < 4; pass++) {
     const next = out
@@ -223,6 +366,7 @@ export function stripResidualMachineTags(text: string): string {
     out = next
   }
   out = stripStandaloneMachineJson(out)
+  out = stripInternalPacingLabels(out)
   out = out.replace(UNTERMINATED_TRAILING_RE, '')
   // Collapse the blank-line crater a removed tag block leaves mid-message.
   out = out.replace(/\n{3,}/g, '\n\n')
@@ -237,11 +381,17 @@ export function hasResidualMachineTag(text: string): boolean {
   // that cannot see a leak class is worse than no detector, because it is
   // trusted. `[LESSON_COMPLETE]` is excluded for the same reason the sweep
   // excludes it: it is a live client control tag, not residue.
-  return /<!--\s*[A-Z][A-Z0-9_]{2,}\b/.test(text)
+  return MACHINE_TAG_OPENER_RE.test(text)
     || /<visual\b/i.test(text)
     || new RegExp(BRACKET_MACHINE_TAG_RE.source).test(text)
     // The JSON shape, same reasoning as the bracket shape above: a detector
     // blind to it would report a leak like this file's own header example as
     // clean.
     || text.split('\n').some((line) => isMachineJsonFragment(line))
+    // PHASE 8: the internal pacing/numbering labels, same reasoning again —
+    // reset each regex's `lastIndex` first since `g`-flagged regexes are
+    // stateful and this function may run after a `.replace` call elsewhere.
+    || (STAGE_PAREN_RE.lastIndex = 0, STAGE_PAREN_RE.test(text))
+    || (STAGE_LABEL_RE.lastIndex = 0, STAGE_LABEL_RE.test(text))
+    || (LESSON_COUNT_RE.lastIndex = 0, LESSON_COUNT_RE.test(text))
 }

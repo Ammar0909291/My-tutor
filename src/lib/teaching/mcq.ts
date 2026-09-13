@@ -65,14 +65,140 @@ export function stripMcqTags(text: string): string {
 const OPTION_KEYS = ['a', 'b', 'c', 'd'] as const
 
 /**
+ * FALLBACK: A RAW JSON-SHAPED "MCQ TAG" MUST NEVER REACH THE LEARNER.
+ *
+ * ── MEASURED (real-student session, 2026-09, live production account,
+ *    provider=groq) ──────────────────────────────────────────────────────
+ * The prompt contract requires the `<!--MCQ q="..." a="..." correct="A"-->`
+ * shape `MCQ_RE` above matches. Twice in one session, the model instead
+ * wrote a raw JSON object, structurally sound but in the WRONG shape, and
+ * — because it does not match `MCQ_RE` at all — it was never stripped and
+ * reached the learner as literal visible text:
+ *
+ *   {"tag":"MCQ","question":"Which of the following sentences is a
+ *   **second conditional**?","options":{"a":"If it rains tomorrow, I will
+ *   stay at home.","b":"If I were a bird, I would fly.", ...},"correct":"b"}
+ *
+ * `salvageToolUseFailure`/`unwrapToolCallEnvelope` (groq.ts) already
+ * document this same provider drifting into JSON/tool-call shapes under a
+ * DIFFERENT trigger (a rejected tool-call error). This is the sibling case:
+ * a SUCCESSFUL response whose content itself is JSON-shaped.
+ *
+ * ── WHAT THIS DOES, AND WHAT IT NEVER DOES ──────────────────────────────
+ * Finds a `{"tag":"MCQ"...}` (or `"tag":"mcq"`, case-insensitive) object
+ * via balanced-brace scanning (quote-aware, so a brace inside option text
+ * cannot terminate the match early), and ALWAYS removes the matched raw
+ * text from what the learner sees — whether or not it parses into a valid
+ * question. A structurally sound payload (a question, >= 2 non-empty
+ * options, a correct key that resolves to one of them) is promoted to a
+ * real, gradeable `TutorMCQ`, identical in shape and grading path to the
+ * primary tag — no second grading mechanism. A malformed one (missing
+ * fields, an unresolvable correct key, options that are empty or bare
+ * letters) is discarded — `mcq: null` — and the turn degrades to whatever
+ * teaching text surrounds it, never to a broken widget and never to raw
+ * JSON on screen.
+ */
+function findJsonMcqSpan(text: string): { start: number; end: number } | null {
+  const tagMatch = text.match(/\{\s*"tag"\s*:\s*"mcq"/i)
+  if (!tagMatch || tagMatch.index === undefined) return null
+  const start = tagMatch.index
+  let depth = 0
+  let inString = false
+  let escaped = false
+  for (let i = start; i < text.length; i++) {
+    const ch = text[i]
+    if (inString) {
+      if (escaped) escaped = false
+      else if (ch === '\\') escaped = true
+      else if (ch === '"') inString = false
+      continue
+    }
+    if (ch === '"') { inString = true; continue }
+    if (ch === '{') depth++
+    else if (ch === '}') {
+      depth--
+      if (depth === 0) return { start, end: i + 1 }
+    }
+  }
+  return null // unterminated — do not guess where it ends
+}
+
+/** A raw option value that is only the letter itself is not real option text. */
+const isUsableOptionText = (v: unknown): v is string =>
+  typeof v === 'string' && v.trim().length > 0 && !/^[a-dA-D][).]?$/.test(v.trim())
+
+function parseJsonMcqFallback(text: string): { mcq: TutorMCQ | null; cleanText: string } {
+  const span = findJsonMcqSpan(text)
+  if (!span) return { mcq: null, cleanText: text }
+
+  // The raw span is removed from what the learner sees UNCONDITIONALLY,
+  // before even attempting to parse it — a payload broken enough to fail
+  // JSON.parse must still never render as literal text.
+  const cleanText = (text.slice(0, span.start) + text.slice(span.end)).replace(/\s{2,}/g, ' ').trim()
+
+  let parsed: unknown
+  try {
+    parsed = JSON.parse(text.slice(span.start, span.end))
+  } catch {
+    return { mcq: null, cleanText }
+  }
+  if (!parsed || typeof parsed !== 'object') return { mcq: null, cleanText }
+  const obj = parsed as Record<string, unknown>
+
+  const question = typeof obj.question === 'string' ? obj.question.trim() : ''
+  if (!question) return { mcq: null, cleanText }
+
+  // `options` has been observed as an object keyed a/b/c/d; an array is
+  // accepted defensively in case the model ever emits that shape instead.
+  const rawOptions = obj.options
+  const options: string[] = []
+  if (rawOptions && typeof rawOptions === 'object' && !Array.isArray(rawOptions)) {
+    const o = rawOptions as Record<string, unknown>
+    for (const key of OPTION_KEYS) {
+      const v = o[key]
+      if (v === undefined) break // contiguous, same rule as the primary parser
+      if (!isUsableOptionText(v)) return { mcq: null, cleanText }
+      options.push(v.trim())
+    }
+  } else if (Array.isArray(rawOptions)) {
+    for (const v of rawOptions) {
+      if (!isUsableOptionText(v)) return { mcq: null, cleanText }
+      options.push(v.trim())
+    }
+  }
+  if (options.length < 2) return { mcq: null, cleanText }
+
+  const correctRaw = typeof obj.correct === 'string' ? obj.correct.trim().toLowerCase() : ''
+  const correctIndex = OPTION_KEYS.indexOf(correctRaw as (typeof OPTION_KEYS)[number])
+  if (correctIndex < 0 || correctIndex >= options.length) return { mcq: null, cleanText }
+
+  const deduped = new Set(options.map((o) => o.toLowerCase()))
+  if (deduped.size !== options.length) return { mcq: null, cleanText }
+
+  return { mcq: { question, options, correctIndex }, cleanText }
+}
+
+/**
  * Parse and strip the MCQ tag. Never throws; absent or malformed tag → null
  * (the turn degrades to an ordinary typed reply rather than rendering a
  * broken question).
  */
 export function parseMcqTag(text: string): { mcq: TutorMCQ | null; cleanText: string } {
+  if (typeof text !== 'string') return { mcq: null, cleanText: '' }
   const m = text.match(MCQ_RE)
   const cleanText = stripMcqTags(text).trimEnd()
-  if (!m) return { mcq: null, cleanText }
+  if (!m) {
+    try {
+      const fallback = parseJsonMcqFallback(cleanText)
+      if (fallback.mcq || fallback.cleanText !== cleanText) {
+        return { mcq: fallback.mcq, cleanText: fallback.cleanText.trimEnd() }
+      }
+    } catch {
+      // A repair must never break a turn — fall through to the ordinary
+      // "no tag found" result below.
+    }
+    return { mcq: null, cleanText }
+  }
 
   const attrs = m[1]
   const read = (key: string): string | undefined => {
@@ -88,6 +214,16 @@ export function parseMcqTag(text: string): { mcq: TutorMCQ | null; cleanText: st
     // Options must be contiguous: a stray d="" with no c is malformed, and
     // silently compacting it would shift the correct-answer index.
     if (v === undefined) break
+    // MEASURED (real-student session, 2026-09): a syntactically well-formed
+    // tag whose option attributes were degenerate placeholders — `a="A"
+    // b="B" c="C" d="D"` — while the real option text was written separately
+    // as prose in the message body. The learner-visible widget showed four
+    // buttons reading "A", "B", "C", "D" with no actual choice text. This is
+    // not a real option any more than a bare `<!--MCQ-->` with no `q` is a
+    // real question — discard the whole tag (same as any other malformed
+    // shape) rather than serve an unusable widget; the prose the model
+    // wrote alongside it remains the learner-readable fallback.
+    if (!isUsableOptionText(v)) return { mcq: null, cleanText }
     options.push(v)
   }
 
@@ -735,6 +871,19 @@ const CANNOT_FOLLOW_AN_ARTICLE = new Set([
 const cannotFollowAnArticle = (next: string | undefined): boolean =>
   next === undefined || CANNOT_FOLLOW_AN_ARTICLE.has(next)
 
+/**
+ * Words that, immediately after a LEADING "A", signal a REASONING CLAUSE is
+ * about to follow — used ONLY by rule 1's `leadingLetterBeforeReasoning`
+ * below. Deliberately a strict SUBSET of `CANNOT_FOLLOW_AN_ARTICLE`, not the
+ * same set: that set exists to tell the article apart from the letter, and
+ * includes plenty of words ("sir", "maam", pronouns, "ok", "yes", "please")
+ * that disambiguate the article without being any evidence the learner is
+ * about to give a REASON for their choice. `mcqAnswerShapeIsTheClients.test.ts`
+ * pins "A sir" / "a sir" as refused (a QA-harness artifact with a title
+ * tacked on and no reasoning content), so this set may never include "sir".
+ */
+const REASONING_CONNECTIVE = new Set(['because', 'but', 'so', 'since'])
+
 const looksLikeAQuestion = (s: string): boolean =>
   /\?\s*$/.test(s.trim()) || /^\s*(why|how|what|when|where|which|who|is|are|does|do|can|could|should)\b/i.test(s)
 
@@ -795,11 +944,6 @@ export function resolveMcqChoice(message: string, mcq: TutorMCQ): number | null 
   const tokens = n.split(' ')
   const limit = Math.min(mcq.options.length, OPTION_KEYS.length)
 
-  // An explicit "I have not chosen" outranks every rule below, including the
-  // punctuated label. See NON_COMMITTAL for why refusing does not stall the
-  // ladder.
-  if (NON_COMMITTAL.test(message)) return null
-
   // 0. EXACT MATCH — RUNS FIRST, AND THE ORDER IS THE POINT.
   //
   //    Tapping an option sends that option's text verbatim (LessonScreen
@@ -846,6 +990,58 @@ export function resolveMcqChoice(message: string, mcq: TutorMCQ): number | null 
   // before giving up; if they are identical there too, refuse exactly as before.
   if (exact.length > 1) return verbatimOption()
 
+  // 0b. LABEL-PREFIXED VERBATIM MATCH.
+  //
+  // A learner who TYPES a letter label in front of a copy-pasted option
+  // ("A) <exact option text>") is making the identical unambiguous
+  // statement a plain tap makes — rule 0 above only catches the bare tap
+  // because it compares the WHOLE message, and a leading "A) " adds a
+  // token that defeats norm() equality. Reproduced live (English audit,
+  // eng.vocab.context-clues #30 T7): a learner typed "A) <the correct
+  // option's full text, verbatim>" and was told "I couldn't tell which
+  // option your answer matched" even though the message contains nothing
+  // but that option's own words.
+  //
+  // Scoped narrowly so it cannot be confused with rule 0a's "labelled
+  // letter, anywhere in the sentence" reasoning-fragment case below: the
+  // label must be a standalone token at the very START of the message,
+  // immediately followed by one of the punctuation delimiters (never a
+  // bare letter-then-space, which would strip the first letter off an
+  // ordinary sentence like "According to the passage..." or "Do you..."),
+  // and what remains after stripping it must be an EXACT match to exactly
+  // one option — a short reasoned guess like "A, because it's bigger"
+  // still falls through unchanged, because "because it's bigger" is not
+  // itself any option's full text.
+  {
+    const labelStripped = message.replace(/^\s*[([]?[A-Da-d][.)\],:;-]\s*/, '')
+    if (labelStripped !== message && labelStripped.trim()) {
+      const strippedNorm = norm(labelStripped)
+      if (strippedNorm) {
+        const labelExact = mcq.options
+          .map((o, i) => ({ i, hit: norm(o) === strippedNorm }))
+          .filter((x) => x.hit)
+        if (labelExact.length === 1) return labelExact[0].i
+      }
+    }
+  }
+
+  // An explicit "I have not chosen" outranks every rule below EXCEPT the
+  // two exact-match forms above (0 and 0b): a hedge word that happens to
+  // occur as CONTENT WITHIN an option's own text (e.g. an authored option
+  // discussing "being unsure") must never defeat an otherwise-unambiguous
+  // verbatim match.
+  //
+  // MEASURED: before this reorder, NON_COMMITTAL ran BEFORE rule 0 ever
+  // got a chance to see the message — directly contradicting rule 0's own
+  // "runs first" invariant above. A bare TAP of an option whose own text
+  // contains "unsure" (e.g. an English vocabulary/context-clue probe
+  // discussing hedging language) was silently refused: `resolveMcqChoice`
+  // returned null for the single most unambiguous signal the UI can send.
+  // Genuine hedges ("not sure, maybe A") do not exact-match any option, so
+  // they still fall through to this check unaffected. See NON_COMMITTAL
+  // for why refusing does not stall the ladder.
+  if (NON_COMMITTAL.test(message)) return null
+
   // 0a. A LABELLED LETTER, ANYWHERE IN THE SENTENCE.
   //
   // MEASURED IN PRODUCTION (2026-08-25, phys.opt.lenses, real learner account).
@@ -876,6 +1072,29 @@ export function resolveMcqChoice(message: string, mcq: TutorMCQ): number | null 
     for (const m of message.matchAll(/(?:^|[\s(])([a-dA-D])(\s*[.)\],:;-])?(?=\s|$)/g)) {
       const idx = OPTION_KEYS.indexOf(m[1].toLowerCase() as typeof OPTION_KEYS[number])
       if (idx < 0 || idx >= limit) continue
+      // "a" is also the English indefinite article. An UNLABELLED "a" (no
+      // trailing punctuation — m[2] undefined) must clear the same article
+      // test rule 1 already applies below, or an ordinary sentence like
+      // "if I had A car" pollutes `named` with a phantom option A.
+      //
+      // MEASURED (real-student session, 2026-09): "B, if i had a car i would
+      // drive to work" — a clearly labelled B — resolved to null, because
+      // the "a" in "had a car" was unlabelled-but-named, making
+      // named.size === 2 ({A, B}) and defeating the "exactly one labelled,
+      // exactly one named" shortcut below. `cannotFollowAnArticle` already
+      // exists for exactly this ambiguity (see its own doc comment); reused
+      // here rather than re-derived.
+      //
+      // A LABELLED "a" ("A.", "a,", "a)") is unaffected — punctuation is a
+      // strong signal it is a letter-label, and the article never carries
+      // punctuation, so "A or B, i am not sure" still names both (the
+      // unlabelled "A" there is followed by "or", which cannot follow an
+      // article, so it still counts).
+      if (!m[2] && m[1].toLowerCase() === 'a') {
+        const rest = message.slice((m.index ?? 0) + m[0].length)
+        const nextWord = rest.match(/^\s*([a-zA-Z']+)/)?.[1]?.toLowerCase()
+        if (!cannotFollowAnArticle(nextWord)) continue
+      }
       named.add(idx)
       if (m[2]) labelled.add(idx)
     }
@@ -903,7 +1122,17 @@ export function resolveMcqChoice(message: string, mcq: TutorMCQ): number | null 
   // repeating three guards inside each of rules 1-5, which is how rule 4a
   // ended up with its own copy of the question guard.
   const namedStandalone = new Set<number>()
-  for (let i = 0; i < limit; i++) if (tokens.includes(OPTION_KEYS[i])) namedStandalone.add(i)
+  for (let i = 0; i < limit; i++) {
+    const key = OPTION_KEYS[i]
+    const pos = tokens.indexOf(key)
+    if (pos === -1) continue
+    // Same article guard as rule 0a and rule 1 below: a bare "a" token is
+    // this precondition's own article collision ("B because i had a car"
+    // must not be treated as naming both A and B — see rule 0a's doc
+    // comment for the measured production repro).
+    if (key === 'a' && !cannotFollowAnArticle(tokens[pos + 1])) continue
+    namedStandalone.add(i)
+  }
   if (namedStandalone.size > 1) return null
   if (looksLikeAQuestion(message)) return null
 
@@ -931,6 +1160,33 @@ export function resolveMcqChoice(message: string, mcq: TutorMCQ): number | null 
   //    detector. For "a" alone that is not enough, because "I think a lens
   //    bends light" also states an answer: the letter must additionally be
   //    followed by a word that cannot follow an article.
+  //
+  //    "A BECAUSE <REASON>" WITH NO FIRST-PERSON MARKER (measured, real-
+  //    student session, 2026-09). "A because they use different tenses" and
+  //    "A because as here means while" both refused to resolve, while "B
+  //    because ..." resolved every time. The asymmetry: for b/c/d, `atEdge`
+  //    (the letter is the FIRST token) is sufficient on its own — but `atEdge`
+  //    is deliberately excluded for 'a' (see the module docblock), so a bare
+  //    leading "A" needed `insideAStatedAnswer`, which additionally requires
+  //    an explicit "I think"/"my answer is"/… phrase. "A because <reason>"
+  //    has none — the reason clause states nothing about the LEARNER, only
+  //    about the CONCEPT — so it fell through every rule.
+  //
+  //    NOT FIXED BY WIDENING ON `cannotFollowAnArticle` GENERALLY. A first
+  //    attempt did exactly that and broke a DIFFERENT pinned guard
+  //    (mcqAnswerShapeIsTheClients.test.ts): "A sir" and "a sir" — a QA-
+  //    harness artifact with a title tacked on and no reasoning content at
+  //    all — must stay refused, and `cannotFollowAnArticle`'s set includes
+  //    "sir"/"maam"/pronouns/politeness words precisely so THOSE can be told
+  //    apart from the article, not so they count as evidence of a reasoned
+  //    choice. A narrower, PURPOSE-BUILT set is used instead: words that
+  //    themselves signal a REASONING CLAUSE is coming — "because", "but",
+  //    "so", "since" — a strict subset of `cannotFollowAnArticle`'s, chosen
+  //    so "A sir"/"a sir" (no reasoning connective) keep refusing exactly as
+  //    pinned, while "A because …" (a reasoning connective) now resolves.
+  //    Scoped to `pos === 0` (the letter opens the message) because that is
+  //    the measured shape and the narrowest one that closes it; "I think A
+  //    because…" is unaffected — it already resolves via `insideAStatedAnswer`.
   for (let i = 0; i < limit; i++) {
     const key = OPTION_KEYS[i]
     const pos = tokens.indexOf(key)
@@ -940,8 +1196,10 @@ export function resolveMcqChoice(message: string, mcq: TutorMCQ): number | null 
     const atEdge = pos === 0 || pos === tokens.length - 1
     const insideAStatedAnswer = statesAnAnswer(message)
       && (key !== 'a' || cannotFollowAnArticle(tokens[pos + 1]))
+    const leadingLetterBeforeReasoning =
+      key === 'a' && pos === 0 && REASONING_CONNECTIVE.has(tokens[pos + 1])
     if (key === 'a'
-      ? (marked || alone || insideAStatedAnswer)
+      ? (marked || alone || insideAStatedAnswer || leadingLetterBeforeReasoning)
       : (marked || alone || atEdge || insideAStatedAnswer)) {
       return i
     }
@@ -1090,6 +1348,127 @@ export function isVerbatimPendingOption(message: string, mcq: TutorMCQ | null): 
   const folded = message.trim().toLowerCase()
   if (!folded) return false
   return mcq.options.some((o) => o.trim().toLowerCase() === folded)
+}
+
+/**
+ * DOES THIS MESSAGE ENGAGE THE PENDING OPTIONS AT ALL?
+ *
+ * ── WHY THIS EXISTS: THE EXCLUSION-LIST TRAP ────────────────────────────────
+ * The I1 disambiguation lead-in ("I couldn't tell which option your answer
+ * matched — tap the choice you mean") is gated in route.ts by a predicate
+ * named `genuineUnmappedAttempt`. Traced in full (2026-09-12), that predicate
+ * contained exactly ONE positive term — `message.trim() !== ''` — and six
+ * negative ones: not bare-ack, not practice, not a question, no failure state,
+ * no learner request, nothing graded. Its DEFAULT answer to "is this an answer
+ * attempt?" was therefore YES, and every non-answer had to be individually
+ * excluded.
+ *
+ * That is why each round of fixes produced a fresh class of false positive in
+ * the next QA campaign. I1 added three exclusions; I4 added two more; the
+ * English real-student campaign then measured 28 more false fires across
+ * Groups 3-12 of `ENGLISH_MCQ_REOFFER_FALSE_POSITIVE_FINDING.md`, in three
+ * classes none of the existing exclusions can see:
+ *
+ *   implicit question, no '?'   "wait, what about words like 'is' or 'seems',
+ *                                those arent actions"
+ *       `detectLearnerQuestion` REQUIRES `message.includes('?')`, so a
+ *       question written without one is invisible to it.
+ *   elaborated acknowledgement  "thanks that helped" / "thanks that makes
+ *                                sense" / "thank you, that makes more sense"
+ *       `isBareAcknowledgement` matches the WHOLE message against a phrase
+ *       list, deliberately ("ok, but why does the moon not fall?" must not
+ *       match), so "thanks" plus any words at all escapes it.
+ *   deferral / meta-commentary  "hmm i think i picked the wrong one, let me
+ *                                think again" / "hold on, let me reconsider
+ *                                that" / "oh wait, i think i see my mistake"
+ *       A statement ABOUT a past answer, or about not having chosen yet. No
+ *       classifier in the runtime models this at all.
+ *
+ * The list of things a learner can say that are not an answer is unbounded;
+ * an exclusion list is finite. No further exclusion closes this — only
+ * inverting the default does.
+ *
+ * ── WHAT THIS ASSERTS, AND WHY IT IS THE HONEST PRECONDITION ────────────────
+ * The lead-in's own words claim the learner's ANSWER could not be MATCHED TO
+ * AN OPTION. That claim is only true if the message reached for an option in
+ * the first place. So this returns true only on positive, option-referential
+ * evidence, computed against the REAL pending probe:
+ *
+ *   (a) an option LETTER used as a standalone token in range, read from the
+ *       RAW message with the same article guard rule 0a uses (an unlabelled
+ *       "a" must not be the English article);
+ *   (b) an ORDINAL naming a position in range ("the first one", "second",
+ *       "the last one");
+ *   (c) DISCRIMINATING option vocabulary — words that `words()` keeps and
+ *       that occur in exactly ONE option. Shared vocabulary is excluded by
+ *       construction, which is what makes this safe: every option of a probe
+ *       is about the lesson topic, and so is every ordinary learner remark
+ *       about the lesson, so overlap on shared words is no evidence at all.
+ *       Two such words are required, or one together with an explicit answer
+ *       phrase (`ANSWER_INTENT`), because a single topic word can appear in a
+ *       question about the material as easily as in an attempt at it.
+ *
+ * ── IT NEVER GRADES, AND MUST NEVER BE USED TO ──────────────────────────────
+ * This is deliberately WEAKER than `resolveMcqChoice`: it answers "was the
+ * learner reaching for one of these?", not "which one". `resolveMcqChoice`'s
+ * refusal to guess is correct and is untouched — nothing here feeds it, and a
+ * true return grants no credit, moves no counter and selects no index. The
+ * only consequence of a true return is that one advisory sentence may be
+ * prepended to the reply.
+ *
+ * Erring toward FALSE is the safe direction: a missed genuine attempt gets the
+ * silent re-offer the product had before I1, while a false fire tells a
+ * learner who asked a question that they answered one badly.
+ */
+const ORDINAL_WORDS: ReadonlyArray<readonly [RegExp, number]> = [
+  [/\b(?:the\s+)?first(?:\s+one)?\b/i, 0],
+  [/\b(?:the\s+)?second(?:\s+one)?\b/i, 1],
+  [/\b(?:the\s+)?third(?:\s+one)?\b/i, 2],
+  [/\b(?:the\s+)?fourth(?:\s+one)?\b/i, 3],
+]
+
+export function engagesPendingOptions(message: string, mcq: TutorMCQ | null): boolean {
+  if (!mcq || !Array.isArray(mcq.options) || mcq.options.length === 0) return false
+  const raw = typeof message === 'string' ? message : ''
+  if (!raw.trim()) return false
+  const limit = Math.min(mcq.options.length, OPTION_KEYS.length)
+
+  // (a) An option letter as a standalone token. Same shape rule 0a reads, and
+  //     the same article guard: an unlabelled "a" only counts when the word
+  //     after it cannot begin a noun phrase.
+  for (const m of raw.matchAll(/(?:^|[\s(])([a-dA-D])(\s*[.)\],:;-])?(?=\s|$)/g)) {
+    const idx = OPTION_KEYS.indexOf(m[1].toLowerCase() as typeof OPTION_KEYS[number])
+    if (idx < 0 || idx >= limit) continue
+    if (m[1].toLowerCase() === 'a' && !m[2]) {
+      const after = raw.slice((m.index ?? 0) + m[0].length).trim().split(/\s+/)[0]
+      if (!cannotFollowAnArticle(after?.toLowerCase().replace(/[^a-z']/g, '') || undefined)) continue
+    }
+    return true
+  }
+
+  // (b) An ordinal naming a position that exists.
+  for (const [re, idx] of ORDINAL_WORDS) {
+    if (idx < limit && re.test(raw)) return true
+  }
+  if (limit >= 2 && /\b(?:the\s+)?last(?:\s+one)?\b/i.test(raw)) return true
+
+  // (c) Discriminating option vocabulary.
+  const perOption = mcq.options.slice(0, limit).map((o) => new Set(words(o)))
+  const occurrences = new Map<string, number>()
+  for (const set of perOption) {
+    for (const w of set) occurrences.set(w, (occurrences.get(w) ?? 0) + 1)
+  }
+  const said = new Set(words(raw))
+  let best = 0
+  for (const set of perOption) {
+    let hits = 0
+    for (const w of set) {
+      if (occurrences.get(w) === 1 && said.has(w)) hits += 1
+    }
+    if (hits > best) best = hits
+  }
+  if (best >= 2) return true
+  return best >= 1 && statesAnAnswer(raw)
 }
 
 /**

@@ -3,6 +3,7 @@ import {
   emptyQuestionLedger, readQuestionLedger, fingerprintQuestion, extractQuestions,
   isRepeatQuestion, findRepeatedQuestion, recordQuestions, findBannedStockPhrases,
   buildAntiRepetitionBlock, MAX_LEDGER_ENTRIES,
+  fingerprintOptionSet, isRepeatOptionSet, recordMcqOptions,
 } from '@/lib/teaching/repetitionGuard'
 
 describe('fingerprintQuestion', () => {
@@ -141,5 +142,101 @@ describe('buildAntiRepetitionBlock', () => {
     const block = buildAntiRepetitionBlock(emptyQuestionLedger())
     expect(block).toMatch(/NEW example/)
     expect(block).toMatch(/multiple-choice/)
+  })
+})
+
+// P2 FIX — templated MCQ duplicates: same options, different stem example.
+// The measured production repro (Imagery lesson): two MCQs with IDENTICAL
+// options, only the quoted sense-word in the stem ("touch" vs. "smell") differs.
+describe('fingerprintOptionSet — the claim, independent of the stem example', () => {
+  const OPTIONS_A = [
+    'No — you must also explain the specific mood, atmosphere, or emphasis the sensory detail creates in context; naming the sense is only the first step',
+    "Yes — identifying which sense imagery appeals to is the whole analytical task",
+  ]
+  it('two option sets that are byte-identical collide', () => {
+    expect(fingerprintOptionSet(OPTIONS_A)).toBe(fingerprintOptionSet([...OPTIONS_A]))
+  })
+
+  it('collides even when the option ORDER is shuffled', () => {
+    const shuffled = [OPTIONS_A[1]!, OPTIONS_A[0]!]
+    expect(fingerprintOptionSet(OPTIONS_A)).toBe(fingerprintOptionSet(shuffled))
+  })
+
+  it('genuinely different option sets (a different concept check) do not collide', () => {
+    const different = ['Yes — this is a simile because it uses "like" or "as"', 'No — there is no comparison word here']
+    expect(fingerprintOptionSet(OPTIONS_A)).not.toBe(fingerprintOptionSet(different))
+  })
+
+  it('is empty/safe for a degenerate input', () => {
+    expect(fingerprintOptionSet([])).toBe('')
+    expect(fingerprintOptionSet(null as unknown as string[])).toBe('')
+  })
+})
+
+describe('recordMcqOptions + isRepeatOptionSet — the ledger detects the templated duplicate', () => {
+  const OPTIONS = [
+    'No — you must also explain the specific mood, atmosphere, or emphasis the sensory detail creates in context; naming the sense is only the first step',
+    "Yes — identifying which sense imagery appeals to is the whole analytical task",
+  ]
+
+  it('the exact measured repro: touch then smell, identical options, both flagged after the first', () => {
+    let ledger = emptyQuestionLedger()
+    expect(isRepeatOptionSet(ledger, OPTIONS)).toBe(false) // "touch" question — first time, not yet a repeat
+    ledger = recordMcqOptions(ledger, OPTIONS)
+    expect(isRepeatOptionSet(ledger, OPTIONS)).toBe(true) // "smell" question — same options — now a repeat
+  })
+
+  it('a genuinely different probe on the same concept is never flagged', () => {
+    let ledger = emptyQuestionLedger()
+    ledger = recordMcqOptions(ledger, OPTIONS)
+    const different = ['Sight, because the text says "bright" and "colorful"', 'Sound, because of the word "notice"']
+    expect(isRepeatOptionSet(ledger, different)).toBe(false)
+  })
+
+  it('does not record a degenerate (missing/too-short) option list', () => {
+    const ledger = recordMcqOptions(emptyQuestionLedger(), ['only one'])
+    expect(ledger.optionSetFingerprints).toEqual([])
+  })
+
+  it('is idempotent — recording the same set twice does not duplicate the ledger entry', () => {
+    let ledger = emptyQuestionLedger()
+    ledger = recordMcqOptions(ledger, OPTIONS)
+    ledger = recordMcqOptions(ledger, OPTIONS)
+    expect(ledger.optionSetFingerprints.length).toBe(1)
+  })
+
+  it('caps at MAX_LEDGER_ENTRIES, oldest dropped first', () => {
+    let ledger = emptyQuestionLedger()
+    for (let i = 0; i < MAX_LEDGER_ENTRIES + 5; i++) {
+      ledger = recordMcqOptions(ledger, [`option a ${i}`, `option b ${i}`])
+    }
+    expect(ledger.optionSetFingerprints.length).toBe(MAX_LEDGER_ENTRIES)
+    expect(ledger.recentOptionSets.length).toBe(MAX_LEDGER_ENTRIES)
+  })
+})
+
+describe('buildAntiRepetitionBlock — quotes prior option sets so the model can see the claim, not just the stem', () => {
+  it('quotes a recorded option set explicitly', () => {
+    let ledger = emptyQuestionLedger()
+    ledger = recordMcqOptions(ledger, ['Option one text', 'Option two text'])
+    const block = buildAntiRepetitionBlock(ledger)
+    expect(block).toMatch(/DO NOT RE-TEST THE SAME CLAIM/)
+    expect(block).toContain('Option one text')
+    expect(block).toContain('Option two text')
+  })
+
+  it('says nothing new when no option set was ever recorded', () => {
+    const block = buildAntiRepetitionBlock(emptyQuestionLedger())
+    expect(block).not.toMatch(/DO NOT RE-TEST THE SAME CLAIM/)
+  })
+})
+
+describe('readQuestionLedger — backward compatible with a pre-fix persisted snapshot', () => {
+  it('a snapshot with no optionSetFingerprints/recentOptionSets fields defaults them to empty, not a throw', () => {
+    const legacy = { fingerprints: ['a b c'], recent: ['What is X?'] }
+    const ledger = readQuestionLedger(legacy)
+    expect(ledger.fingerprints).toEqual(['a b c'])
+    expect(ledger.optionSetFingerprints).toEqual([])
+    expect(ledger.recentOptionSets).toEqual([])
   })
 })

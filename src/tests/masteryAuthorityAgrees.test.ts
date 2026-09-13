@@ -161,8 +161,16 @@ describe('D. ONE OWNER, not three', () => {
     const sum = read('src/lib/teaching/lessonSummary.ts')
     expect(sum).toContain("import { conceptMasteryVerdict } from './masteryGate'")
     // hasDemonstratedMastery is conceptBudget's "stop teaching" test, NOT the
-    // mastery verdict. The record must not import it back as a second owner.
-    expect(/import\b[^\n]*hasDemonstratedMastery/.test(sum)).toBe(false)
+    // mastery verdict. The record's `status` field must not import it back as
+    // a second owner — asserted directly below rather than by banning the
+    // import outright.
+    //
+    // P1 FIX (2026-09-09): the import now DOES exist, but only to compute the
+    // separate, purely-explanatory `answeredButUnverified` field (see
+    // ConceptOutcome's own doc comment) — never as a second input to `status`,
+    // which is what this invariant exists to protect and still holds.
+    const statusLine = sum.slice(sum.indexOf('status: mastered'))
+    expect(statusLine.slice(0, statusLine.indexOf('\n'))).not.toContain('hasDemonstratedMastery')
   })
 
   it('the completion gate and the payload both route through the verdict', () => {

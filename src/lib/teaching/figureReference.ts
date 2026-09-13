@@ -243,6 +243,60 @@ const FIGURE_SUBJECT_CLAIM_RE =
  * worse than the input. A relative clause opening on a pronoun is the reliable
  * signal for that reading, so a locator followed by one is left alone.
  */
+/**
+ * SHAPE OFFER — "HERE'S A DIAGRAM OF X:" WITH NOTHING RENDERED BEHIND IT.
+ *
+ * ── THE DEFECT THIS EXISTS FOR ─────────────────────────────────────────────
+ * Distinct from every shape above: those catch a claim that a figure IS
+ * being shown ("The diagram shows…", "look at the diagram…"). This one
+ * catches an OFFER to show one — "Here's a diagram of the parts of a drama
+ * script:" — immediately followed by nothing but an ASCII/text sketch. No
+ * verb like "shows"/"depicts" appears (so FIGURE_SUBJECT_CLAIM_RE correctly
+ * does not match), and no on-screen locator is present (so the pointer rules
+ * do not match either) — the false claim is the word "diagram" itself,
+ * offered as if a real rendered artefact were about to appear.
+ *
+ * ── REPLACE, NOT DELETE (the one shape in this file that does) ─────────────
+ * Every other shape here deletes the claim and lets the surrounding prose
+ * carry the teaching, because the claim was decoration on content that
+ * stands without it. Here the offer IS the transition into the ASCII/text
+ * content the tutor is about to give — deleting it would leave that content
+ * with no introduction at all, worse than the false claim it replaces. So
+ * this rewrites the opening into the SAME honest framing this codebase's own
+ * prompt guidance already asks for elsewhere ("Build the picture in text…"),
+ * rather than removing it.
+ *
+ * ── WHAT IS DELIBERATELY LEFT ALONE ─────────────────────────────────────
+ * A tutor that ALREADY says "quick text diagram" / "ASCII diagram" / "a
+ * mental picture" is already being honest — rewriting it would be pointless
+ * churn on correct output, so the qualifier words are checked for and skip
+ * this rule entirely.
+ */
+const FIGURE_OFFER_OPENING_RE =
+  /^(?:here'?s|here is)\s+(?:a|the|your)\s+(?:quick\s+|simple\s+|rough\s+)?(diagram|figure|picture|image|chart|number ?line|animation|illustration|visual|simulation|plot|sketch)\b/i
+
+/** Words that, if already present in the opening, mean the tutor is already
+ *  being honest about the medium — leave it alone. */
+const ALREADY_HONEST_RE = /\b(text|ascii|mental|imagine|picture in your mind|ascii[- ]art)\b/i
+
+export const HONEST_FIGURE_OFFER_LEAD_IN = "I can't show you a rendered image right now, but here's a text version"
+
+/**
+ * Rewrite a false "here's a diagram" OFFER into an honest one, preserving
+ * whatever comes after it on the same sentence (the colon, or the rest of
+ * the clause). Returns null when the sentence does not match this shape.
+ */
+function honestifyFigureOffer(sentence: string): string | null {
+  const m = FIGURE_OFFER_OPENING_RE.exec(sentence)
+  if (!m) return null
+  const opening = m[0]
+  if (ALREADY_HONEST_RE.test(sentence.slice(0, opening.length + 20))) return null
+  const rest = sentence.slice(opening.length)
+  // Keep a trailing colon/dash if present (the natural lead-in punctuation);
+  // otherwise just append what follows as-is.
+  return HONEST_FIGURE_OFFER_LEAD_IN + rest
+}
+
 const EMBEDDED_LOCATOR_RE =
   /(?<=[A-Za-z0-9])\s+(?:in|on)\s+(?:the|this|that)\s+(?:figure|diagram|picture|image|graph|chart|illustration)\b(?!\s+(?:you|we|i|they|that|which)\b)/gi
 
@@ -383,6 +437,14 @@ export function stripUnbackedFigureReferences(
           if (FIGURE_SUBJECT_CLAIM_RE.test(s)) {
             removed.push(s)
             return ''
+          }
+
+          // Shape OFFER: "Here's a diagram of X:" with nothing rendered
+          // behind it. Rewritten, not deleted — see honestifyFigureOffer.
+          const honest = honestifyFigureOffer(s)
+          if (honest !== null) {
+            removed.push(s)
+            return honest
           }
         }
 

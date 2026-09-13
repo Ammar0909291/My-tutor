@@ -189,18 +189,35 @@ export function buildLessonCloseText(
   // than guessed at.
   const nothingMastered = summary.mastered.length === 0 && summary.needsReview.length > 0
 
+  // P1 FIX (requirement 9 — a truthful reason, not an unexplained "pause").
+  //
+  // The learner did not fail here — every graded answer they gave was
+  // correct — the concept simply never earned certifying evidence from
+  // material the completion authority trusts. That is a materially different
+  // situation from an ordinary needs_review (where the learner genuinely got
+  // things wrong), and telling both the same content-free "worth another
+  // look later" is what the reported defect actually was: not the CLOSURE
+  // itself (which requirement 9 does not ask this file to change — a real,
+  // honest needs_review is a correct outcome), but the total absence of any
+  // reason a learner who answered well could make sense of.
+  //
+  // `answeredButUnverified` is set on the needsReview outcomes only when this
+  // is true (see ConceptOutcome's doc comment) — never on an ordinary
+  // struggling-learner review, so that wording is completely unchanged.
+  const answeredButUnverified = summary.needsReview.some((o) => o.answeredButUnverified)
+
   const parts: string[] = [
     opts?.alreadyFinished
       ? nothingMastered
         ? title
-          ? t(lang, 'lesson_close_already_review').replace('{title}', title)
+          ? t(lang, answeredButUnverified ? 'lesson_close_already_review_unverified' : 'lesson_close_already_review').replace('{title}', title)
           : t(lang, 'lesson_close_already_review_untitled')
         : title
           ? t(lang, 'lesson_close_already').replace('{title}', title)
           : t(lang, 'lesson_close_already_untitled')
       : nothingMastered
         ? title
-          ? t(lang, 'lesson_close_needs_review').replace('{title}', title)
+          ? t(lang, answeredButUnverified ? 'lesson_close_needs_review_unverified' : 'lesson_close_needs_review').replace('{title}', title)
           : t(lang, 'lesson_close_needs_review_untitled')
         : title
           ? t(lang, 'lesson_close_done').replace('{title}', title)

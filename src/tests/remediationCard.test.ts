@@ -409,7 +409,11 @@ describe('H6 — the serving path is wired, and refuses DRAFT at the boundary', 
     const scoped = servingWindow()
     expect(scoped).not.toMatch(/await routeAI\(/)
     // H3's four call sites, unchanged — the card path adds none.
-    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(4)
+    // V-CHALLENGE (factual-content-integrity fix, real-student audit) added
+    // ONE new routeAI call site (the claim-challenge repair regeneration in
+    // route.ts, right after the V-AFFIRM floor) -- the only production change
+    // to this count since this assertion was written. 4 -> 5.
+    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(5)
   })
 
   it('the serving source is logged with its three honest values', () => {

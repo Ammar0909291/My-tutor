@@ -227,15 +227,25 @@ describe('the conservative fallback', () => {
 describe('the key must match the WRITERS, or every turn gets an empty history', () => {
   const CHAT = readFileSync(path.join(process.cwd(), 'src/app/api/learn/chat/route.ts'), 'utf8')
 
-  it('all three sites resolve the key from activeLessonSlug ?? currentLesson', () => {
-    // The user stamp, the assistant write, and now the history scope. A
-    // mismatch would not fail loudly — it would silently starve every prompt.
-    // This is the exact "two readers of one owner disagreeing about the key"
-    // failure Phase B fixed twice, and no type can catch it.
+  it('all three sites resolve the key from the SAME hoisted lesson ?? currentLesson', () => {
+    // The user stamp, the assistant write, and the history scope. A mismatch
+    // would not fail loudly — it would silently starve every prompt. This is
+    // the exact "two readers of one owner disagreeing about the key" failure
+    // Phase B fixed twice, and no type can catch it.
+    //
+    // ORIGINAL ASSERTION (pre-PCD-004, 2026-09-11), kept verbatim:
+    //   /lessonKeyFor\w*\(\{\s*\n?\s*topicSlug: studentProgress\?\.activeLessonSlug \?\? null,
+    //     \s*\n?\s*lessonOrder: studentProgress\?\.currentLesson \?\? null,?\s*\n?\s*\}\)/g
+    // PCD-004 did not weaken it — it STRENGTHENED it. The slug is now resolved
+    // once per turn (session pointer -> StudentProgress.activeLessonSlug) into
+    // a single variable, so the three sites share one VALUE rather than three
+    // identical expressions that could drift apart independently.
     const sites = CHAT.match(
-      /lessonKeyFor\w*\(\{\s*\n?\s*topicSlug: studentProgress\?\.activeLessonSlug \?\? null,\s*\n?\s*lessonOrder: studentProgress\?\.currentLesson \?\? null,?\s*\n?\s*\}\)/g,
+      /lessonKeyFor\w*\(\{\s*\n?\s*topicSlug: activeLessonSlugHoisted,\s*\n?\s*lessonOrder: studentProgress\?\.currentLesson \?\? null,?\s*\n?\s*\}\)/g,
     ) ?? []
     expect(sites.length).toBe(3)
+    // exactly one resolution per turn — not one per site
+    expect((CHAT.match(/const activeLessonSlugHoisted = /g) ?? []).length).toBe(1)
   })
 
   it('the history scope does NOT reuse Phase B\'s pending-question key', () => {
@@ -246,9 +256,16 @@ describe('the key must match the WRITERS, or every turn gets an empty history', 
     expect(CHAT).toMatch(/scopeHistoryToLesson\(\s*\n?\s*\[\.\.\.learnSession\.messages\][\s\S]{0,90}?historyLessonKey,/)
   })
 
-  it('and the SAME identity function the restore route uses', () => {
+  it('and the SAME identity function AND the same resolver the restore route uses', () => {
+    // ORIGINAL ASSERTION (pre-PCD-004):
+    //   /lessonKeyFor\(\{ topicSlug: sp\.activeLessonSlug, lessonOrder: sp\.currentLesson \}\)/
+    // Both routes now go through `resolveSessionLessonSlug` before
+    // `lessonKeyFor`, which is what makes the prompt scope and the screen
+    // scope agree for a session whose lesson another session has moved.
     const RESTORE = readFileSync(path.join(process.cwd(), 'src/app/api/sessions/history/route.ts'), 'utf8')
-    expect(RESTORE).toMatch(/lessonKeyFor\(\{ topicSlug: sp\.activeLessonSlug, lessonOrder: sp\.currentLesson \}\)/)
+    expect(RESTORE).toMatch(/lessonKeyFor\(\{ topicSlug: resolved\.slug, lessonOrder: sp\?\.currentLesson \?\? null \}\)/)
+    expect(RESTORE).toContain('resolveSessionLessonSlug')
+    expect(CHAT).toContain('resolveSessionLessonSlug')
     expect(typeof lessonKeyFor).toBe('function')
   })
 

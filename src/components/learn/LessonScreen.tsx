@@ -3,7 +3,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import {
-  Check, ChevronDown, ChevronUp, Copy, Lightbulb, Loader2, Mic, Paperclip, Play, Send, Square, X,
+  Check, ChevronDown, ChevronUp, Copy, Lightbulb, Loader2, Mic, Paperclip, Play, Send, X,
   BookOpen, Dumbbell, BarChart3, Library as LibraryIcon, User, Settings as SettingsIcon,
   Bookmark, Sparkles, Users, ImageIcon, Trophy, Globe2, Gauge, ThumbsUp, ThumbsDown,
   ListChecks, Brain, Sparkle, History as HistoryIcon,
@@ -42,6 +42,8 @@ import { extractNarrationSegments } from '@/lib/visuals/narrationSource'
 // to the existing Sprint BW static VisualCard path — see render block below.
 import { VisualRenderer } from '@/components/visuals/VisualRenderer'
 import type { SceneSpec } from '@/lib/teaching/sceneSpec'
+import { shouldRefetchScopedHistory } from '@/lib/teaching/sessionLessonPointer'
+import { getTabId } from '@/lib/teaching/tabIdentity'
 import { validateSceneSpec } from '@/lib/teaching/sceneSpecValidator'
 import { parseVisualSpec, type VisualSpec } from '@/lib/visuals/visualSpec'
 import { applyRestoredVisuals } from '@/lib/teaching/visual/messageMerge'
@@ -49,6 +51,9 @@ import { createRevealController } from '@/lib/teaching/progressiveReveal'
 import type { InlinePracticeQuestion } from '@/lib/school/practice/generateInlinePractice'
 import { parseLessonCompletionTag, parseMathCodeAnswerTags, parseAssessmentResultTag } from '@/lib/school/tutoring/parseAssistantTags'
 import { Card, CandyButton, Pill, EagleMascot, useConfetti } from '@/components/ui/candy'
+import { TutorNarratedMessage } from '@/components/narration/TutorNarratedMessage'
+import { NarratedText } from '@/components/narration/NarratedText'
+import { NarratedPlaybackControls } from '@/components/narration/NarratedPlaybackControls'
 import katex from 'katex'
 import styles from './LessonScreen.module.css'
 import {
@@ -1340,7 +1345,17 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
           memoryContext: memoryContext ?? undefined,
           userId: userId ?? undefined,
           schoolChapterId: schoolChapterId ?? undefined,
+          // PCD-004A: so a second tab opened alongside this one gets its OWN
+          // session instead of silently sharing this conversation — and so a
+          // refresh of THIS tab still resumes rather than creating one.
+          tabId: getTabId() ?? undefined,
         })
+        // PCD-004: NO `sessionId` here, deliberately. These two run in
+        // parallel precisely because the session id does not exist yet — the
+        // sequential order was the original cause of the "Loading your
+        // lesson..." delay. This call therefore keeps the pre-PCD-004 per-user
+        // lesson resolution; the restore effect further down, which HAS the
+        // id, passes it.
         const [histRes, sessionRes] = await Promise.all([
           fetchWithTimeout(`/api/sessions/history?subject=${encodeURIComponent(subjectSlug)}`, {}, 15000),
           fetchWithTimeout('/api/sessions', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: sessionBody }, 15000),
@@ -1348,13 +1363,58 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         if (cancelled) return
 
         // Session id — non-fatal if missing, send path retries.
+        let mountSessionId: string | null = null
+        let sessionLessonKey: string | null | undefined
         try {
           const sessionData = await sessionRes.json()
-          if (!cancelled && sessionData?.success && sessionData.data?.id) setSessionId(sessionData.data.id)
+          if (!cancelled && sessionData?.success && sessionData.data?.id) {
+            mountSessionId = sessionData.data.id
+            sessionLessonKey = sessionData.lessonKey ?? null
+            setSessionId(sessionData.data.id)
+          }
         } catch { /* non-fatal */ }
 
-        const hist = await histRes.json()
+        let hist = await histRes.json()
         if (cancelled) return
+
+        // ── PCD-004C: THE MOUNT FETCH CANNOT NAME ITS SESSION ──────────────
+        //
+        // The two requests above run in PARALLEL on purpose — the sequential
+        // order was the original cause of the "Loading your lesson..." delay —
+        // so the history request is issued before any session id exists and is
+        // scoped by the PER-USER pointer. With a second session open on this
+        // account (another tab, another device) that pointer can name a
+        // DIFFERENT lesson, and this is the restore path a returning learner
+        // actually takes, so the screen would render another lesson's
+        // transcript while the tutor taught this session's lesson. Nothing
+        // re-fetched afterwards, so it never self-corrected.
+        //
+        // Both endpoints already computed the key they resolved; they now
+        // return it. When they agree — every single-session learner, and every
+        // brand-new session — this costs ZERO extra requests and the behaviour
+        // is byte-identical to before. Only a genuine disagreement pays for one
+        // corrective, session-scoped re-fetch. No delay is introduced to hide
+        // the race: the first render is still driven by the first response
+        // unless it is provably the wrong lesson.
+        const scopedSid = mountSessionId
+        if (scopedSid && shouldRefetchScopedHistory({
+          sessionId: scopedSid,
+          sessionLessonKey,
+          historyLessonKey: hist?.data?.lessonKey,
+        })) {
+          try {
+            const scopedRes = await fetchWithTimeout(
+              `/api/sessions/history?subject=${encodeURIComponent(subjectSlug)}&sessionId=${encodeURIComponent(scopedSid)}`,
+              {}, 15000,
+            )
+            if (cancelled) return
+            const scoped = await scopedRes.json()
+            // Only replace on a successful, genuinely session-scoped answer —
+            // a failed correction must never blank a history that did load.
+            if (scoped?.success) hist = scoped
+          } catch { /* keep the unscoped page rather than showing nothing */ }
+        }
+
         if (!hist?.success) return
         const raw = hist?.data?.messages
         if (!Array.isArray(raw) || raw.length === 0) return
@@ -1970,6 +2030,9 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
               // See the note on sendMessage: an instruction the learner never
               // sees must never enter their transcript.
               ephemeral: !showInUI,
+              // PCD-004A: a turn is the strongest evidence this tab is live,
+              // so it refreshes this tab's claim on the session.
+              tabId: getTabId() ?? undefined,
               // Voice Signal Recovery (Claude Recommendation #7): forwarded
               // only when this turn originated from voice dictation —
               // additive, telemetry-only, undefined for typed messages.
@@ -2308,7 +2371,18 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     const aid = `a-${Date.now()}`
     setMessages((p) => [...p, { id: aid, role: 'assistant' as const, content: '', ts: Date.now(), streaming: true }])
     try {
-      const res = await fetch('/api/learn/lesson-init', {
+      // PCD-002 (physics/chemistry defect audit): this used a bare `fetch`
+      // with no client-side bound, unlike the chat turn below (which caps at
+      // 50_000ms, comfortably under the server's own 60_000ms maxDuration, and
+      // retries a dropped/aborted attempt). A genuinely stalled network
+      // request here — not just a slow server, which the server's own 60s
+      // limit and graceful error responses already handle — could hold this
+      // screen in its loading state indefinitely, with no path back to the
+      // warm `lesson_load_error` recovery text below. Bounding it the same
+      // way closes that one asymmetry between the two endpoints' client-side
+      // robustness; no retry loop is added here since lesson-init runs at
+      // most once per navigation action, not on every keystroke-adjacent send.
+      const res = await fetchWithTimeout('/api/learn/lesson-init', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -2325,8 +2399,11 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
           totalLessons: curriculumLessons.length,
           completedLessons: curriculumProgress.completedLessons,
           teachingLanguage,
+          // PCD-004A: opening a lesson is activity — it refreshes this tab's
+          // claim so another tab cannot resume the session out from under it.
+          tabId: getTabId() ?? undefined,
         }),
-      })
+      }, 55000)
       const data = await res.json().catch(() => ({}))
       if (!res.ok || !data.success || !data.text) throw new Error(data.error ?? `HTTP ${res.status}`)
 
@@ -2367,7 +2444,25 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
           : m)
         : [...p, { id: aid, role: 'assistant' as const, content: data.text as string, ts: Date.now(), streaming: true, revealedLength: 0, provider: data.provider, llmCallCount: data.llmCallCount }])
       revealStarted = true
-      revealAssistantMessage(aid, stripCode(data.text as string), () => setIsStreaming(false))
+      // FIRST-MESSAGE SILENT FAILURE (real-student report). A disabled
+      // textarea auto-blurs in every browser, and `disabled={isStreaming ||
+      // !sessionId}` on the composer means the field loses focus for the
+      // entire lesson-opening reveal, exactly the window a learner is most
+      // likely to start typing their first question in. The two sibling
+      // reveal call sites (sendMessage, sendImageMessage) both already
+      // restore focus in their own onDone; this one — the lesson-opening
+      // path, reached by every restart/resume/next/review — was the one
+      // missing it, so a learner's very first keystrokes after the intro
+      // finished went to nothing: the textarea was enabled again but never
+      // refocused, so typing (and Enter) had nowhere to land. Silent to the
+      // learner and to the network — no fetch, no bubble, no error — exactly
+      // "zero network requests" until they clicked directly into the field
+      // (or the Send button) themselves. Matches the sibling sites'
+      // behaviour exactly; no new mechanism.
+      revealAssistantMessage(aid, stripCode(data.text as string), () => {
+        setIsStreaming(false)
+        textareaRef.current?.focus()
+      })
       // CompactLessonProgressBar reads masteryState.phase, which this
       // endpoint's response never carries (lesson-init is intentionally
       // minimal and skips the mastery-gate pipeline — see its own header
@@ -2674,10 +2769,25 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   // start teaching it. That only happens once the learner explicitly
   // presses "Start Lesson" on the resulting welcome screen, same gate as
   // every other entry point (first open, refresh, etc.).
+  //
+  // NAVIGATION FIX (Learning Roadmap lesson selection): the Start Lesson
+  // welcome screen this stages lives in the chat/"Learn" panel (Panel 3),
+  // which is hidden whenever maximizedPanel !== 'chat' — including
+  // 'curriculum', the state the "Lessons"/Learning Roadmap button puts the
+  // screen in. Selecting a lesson from the roadmap tree previously staged
+  // the preview correctly but never restored the panel, so the learner
+  // stayed looking at the roadmap and had to manually tap the restore
+  // button to reach the lesson they had just picked. This is the one
+  // shared confirmation point for every switch that goes through the
+  // dialog (Learning Roadmap tree AND the Lesson Navigation Panel's
+  // Previous/Current/Next, per requestLessonSwitch's own comment), so
+  // restoring the chat view here fixes both without a second navigation
+  // mechanism; it is a no-op whenever the chat panel is already showing.
   const confirmLessonSwitch = useCallback(async () => {
     if (!lessonSwitchDialog) return
     const { target } = lessonSwitchDialog
     setLessonSwitchDialog(null)
+    setMaximizedPanel('chat')
     stageLessonPreview(target)
   }, [lessonSwitchDialog, stageLessonPreview])
 
@@ -2812,7 +2922,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       // on Safari usually clears on the second attempt.
       const postSession = () => fetchWithTimeout('/api/sessions', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ subjectSlug, memoryContext: memoryContext ?? undefined, userId: userId ?? undefined, schoolChapterId: schoolChapterId ?? undefined }),
+        body: JSON.stringify({ subjectSlug, memoryContext: memoryContext ?? undefined, userId: userId ?? undefined, schoolChapterId: schoolChapterId ?? undefined, tabId: getTabId() ?? undefined }),
       }, 15000)
       let res: Response
       try {
@@ -2840,7 +2950,11 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       let anyMessageVisual = false
 
       try {
-        const histRes = await fetchWithTimeout(`/api/sessions/history?subject=${encodeURIComponent(subjectSlug)}`, {}, 15000)
+        // PCD-004: name the session so the screen is filtered by the lesson
+        // THIS conversation is on, not by whichever lesson another concurrent
+        // session for the same account opened last. `sid` is resolved directly
+        // above, so unlike the mount-time fetch this call genuinely has one.
+        const histRes = await fetchWithTimeout(`/api/sessions/history?subject=${encodeURIComponent(subjectSlug)}&sessionId=${encodeURIComponent(sid)}`, {}, 15000)
         const hist = await histRes.json()
         const histMsgs = hist?.data?.messages
         if (hist.success && Array.isArray(histMsgs) && histMsgs.length > 0) {
@@ -4008,14 +4122,40 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
           third "quick actions" panel is never a permanent grid column there
           — its former mobile-only content (QuickActionsAndCheck) is gone,
           folded into the chat panel's own push-up Actions menu, which is
-          reachable on both mobile and desktop. */}
+          reachable on both mobile and desktop.
+
+          LEARNING ROADMAP SPLIT VIEW: every other maximizedPanel value
+          ('chat', 'code') still collapses to one full-width column — that
+          full-screen toggle is unchanged. 'curriculum' is a deliberate
+          exception on DESKTOP only: instead of replacing Tutor Max, the
+          roadmap opens as a ~32% side panel beside a ~68% Tutor Max column
+          (minmax floor keeps the roadmap from going unusably narrow on a
+          smaller desktop window). On MOBILE the roadmap still takes the
+          whole screen — a 32/68 split has no usable width to give either
+          side on a phone, and this is exactly the existing mobile pattern
+          for lesson selection, left untouched. Panel 3 (Tutor Chat) below
+          carries the matching responsive visibility change; Panel 1
+          (Lesson List) and Panel 2 (Code) need no change — their existing
+          `maximizedPanel === 'curriculum'` / `!== 'code'` checks already do
+          the right thing once the grid gives them a real second column to
+          sit in. */}
       <div
         className={
-          maximizedPanel ? 'grid grid-cols-1'
+          maximizedPanel === 'curriculum' ? 'grid grid-cols-1 gap-0 p-0 md:grid-cols-[minmax(280px,32%)_1fr] md:gap-4 md:p-4'
+          : maximizedPanel ? 'grid grid-cols-1'
           : isNotebook ? 'grid grid-cols-1 md:grid-cols-[22%_78%]'
           : 'grid grid-cols-1 md:grid-cols-[25%_45%_30%]'
         }
-        style={{ flex: 1, minHeight: 0, gridTemplateRows: '1fr', gap: maximizedPanel ? 0 : 16, padding: maximizedPanel ? 0 : 16 }}
+        style={{
+          flex: 1, minHeight: 0, gridTemplateRows: '1fr',
+          // The split view's spacing comes entirely from the responsive
+          // gap-0/p-0/md:gap-4/md:p-4 classes above (0 on mobile — matching
+          // the existing full-bleed roadmap — 16px equivalent on desktop,
+          // matching the normal 3-panel gap/padding below); an inline style
+          // here would win over those classes and couldn't vary by
+          // breakpoint, so it is intentionally omitted only for this case.
+          ...(maximizedPanel === 'curriculum' ? null : { gap: maximizedPanel ? 0 : 16, padding: maximizedPanel ? 0 : 16 }),
+        }}
       >
 
         {/* ══ PANEL 1 — LESSON LIST ═════════════════════════════════════════
@@ -4703,9 +4843,19 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
 
         {/* ══ PANEL 3 — TUTOR CHAT — the Learn window's primary/only mobile
              panel now; unchanged desktop role (promoted to center/wide for
-             non-code subjects) ══ */}
-        <div className="contents"
-          style={maximizedPanel && maximizedPanel !== 'chat' ? { display: 'none' } : undefined}>
+             non-code subjects).
+             LEARNING ROADMAP SPLIT VIEW: on desktop, Tutor Max must stay
+             visible beside the roadmap instead of being hidden — the same
+             `hidden md:contents` pattern Panel 1 already uses, so both
+             panels appear together at the identical md breakpoint the grid
+             above switches at. On mobile this still hides Panel 3 exactly
+             as before (the roadmap keeps the whole screen there). Every
+             other maximizedPanel value ('chat', 'code', null) is completely
+             unaffected — className stays the plain, unconditional
+             'contents' and the inline style keeps deciding visibility, same
+             as always. ══ */}
+        <div className={maximizedPanel === 'curriculum' ? 'hidden md:contents' : 'contents'}
+          style={maximizedPanel && maximizedPanel !== 'chat' && maximizedPanel !== 'curriculum' ? { display: 'none' } : undefined}>
         <Panel accentColor={isNotebook ? UI.indigo : '#3FB950'} style={{ order: isNotebook ? 2 : 3 }}>
           <div style={{ flexDirection: 'column', height: '100%', position: 'relative' }} className="flex">
 
@@ -5103,7 +5253,43 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 )
 
                 return (
-                  <div key={msg.id} style={{ display: 'flex', flexDirection: 'column', alignItems: isUser ? 'flex-end' : 'flex-start', animation: 'fadeUp 200ms ease-out both', ...(hasCanvasVisual ? { width: '100%' } : null) }}>
+                  <div key={msg.id}
+                    // LEFT-ANCHORED compact width (fix for the regression this
+                    // superseded): the previous attempt capped this row to
+                    // `maxWidth: 760, margin: '0 auto'`, which CENTERS the row
+                    // — that pulls the left edge inward exactly as much as the
+                    // right edge, so the bubble's left edge (which the row's
+                    // own `alignItems: 'flex-start'` had always kept flush
+                    // against the panel's left padding) visibly moved right.
+                    // Reported as "the panel shrank from the left," and it
+                    // was right to report it that way.
+                    //
+                    // A plain width with NO auto margin is flush against the
+                    // START (left) of its flex-column parent by default — no
+                    // centering math needed, the left edge simply never moves.
+                    // 70% (desktop only — see the md: prefix) reduces the
+                    // available width by the same ~30% the compactness pass
+                    // wanted, with the removed space appearing only on the
+                    // right. Mobile stays w-full (unchanged; a further cut on
+                    // an already-narrow phone screen would waste space, and
+                    // this was never reported as broken there).
+                    // isUser is EXCLUDED from the 70% cap below: that
+                    // reduction was reasoned about only for the tutor's own
+                    // reading column, but it was previously applied to every
+                    // non-canvas row regardless of role. A row capped to the
+                    // left 70% is itself left-anchored (per this comment's
+                    // own point above), so the learner bubble's `alignItems:
+                    // 'flex-end'` was only pushing it to the right edge of
+                    // that narrowed 70% box — visually landing around the
+                    // middle of the chat, not the panel's true right edge.
+                    // The learner row now always gets the full row width so
+                    // flex-end reaches the panel's actual right padding.
+                    className={isUser ? 'w-full' : hasCanvasVisual ? undefined : 'w-full md:w-[70%]'}
+                    style={{
+                      display: 'flex', flexDirection: 'column', alignItems: isUser ? 'flex-end' : 'flex-start',
+                      animation: 'fadeUp 200ms ease-out both',
+                      ...(hasCanvasVisual ? { width: '100%' } : null),
+                    }}>
 
                     {/* Tutor avatar row — EagleMascot replaces the generic initials avatar */}
                     {!isUser && !msg.streaming && (
@@ -5190,39 +5376,59 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                         boxShadow: hasCanvasVisual ? 'none' : '0 1px 2px rgba(0,0,0,0.04)',
                         transition: 'border-color 200ms',
                       }}>
-                        {msg.content
-                          ? <div className="animate-message" style={{ fontSize: 16.2, lineHeight: 1.7, color: 'var(--text-primary)' }}>
-                              <MessageContent text={displayText} isUser={false} />
-                            </div>
-                          : <ThinkingBrain size={26} label={t('lesson_thinking_dots')} />
-                        }
+                        {/* NARRATED READ-ALONG (platform-wide — src/hooks/useNarrationPlayback.ts).
+                            One hook instance per message via the TutorNarratedMessage boundary
+                            (hooks can't be called conditionally inside this .map()). Before Play
+                            is ever pressed (status IDLE) the message renders EXACTLY as before —
+                            plain MessageContent, no visual change — so this is purely additive. */}
+                        {msg.content ? (
+                          <TutorNarratedMessage
+                            id={msg.id}
+                            text={displayText}
+                            lang={teachingLanguage}
+                            voiceType={voiceType}
+                            speed={isIntro ? speed * INTRO_SPEECH_RATE_FACTOR : speed}
+                            country={country}
+                          >
+                            {(narration) => (
+                              <>
+                                <div className="animate-message" style={{ fontSize: 15.6, lineHeight: 1.6, color: 'var(--text-primary)' }}>
+                                  {narration.status === 'IDLE'
+                                    ? <MessageContent text={displayText} isUser={false} />
+                                    : <NarratedText segments={narration.segments} activeSegmentIndex={narration.activeSegmentIndex} />}
+                                </div>
 
-                        {cached?.hasMore && (
-                          <button onClick={() => setExpanded((p) => ({ ...p, [msg.id]: !isExpanded }))}
-                            style={{ marginTop: 6, display: 'flex', alignItems: 'center', gap: 4, fontSize: 13.2, fontWeight: 600, color: UI.indigo, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
-                            {isExpanded ? t('lesson_collapse') : t('lesson_read_more')}
-                            <ChevronDown size={11} style={{ transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 200ms' }} />
-                          </button>
-                        )}
+                                {cached?.hasMore && (
+                                  <button onClick={() => setExpanded((p) => ({ ...p, [msg.id]: !isExpanded }))}
+                                    style={{ marginTop: 6, display: 'flex', alignItems: 'center', gap: 4, fontSize: 13.2, fontWeight: 600, color: UI.indigo, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
+                                    {isExpanded ? t('lesson_collapse') : t('lesson_read_more')}
+                                    <ChevronDown size={11} style={{ transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 200ms' }} />
+                                  </button>
+                                )}
 
-                        {!msg.streaming && msg.content && (
-                          <div style={{ marginTop: 8, display: 'flex', alignItems: 'center', gap: 6 }}>
-                            <span style={{ fontSize: 12, color: 'var(--text-dim)', fontFamily: 'var(--font-mono)' }}>
-                              {new Date(msg.ts).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false })}
-                            </span>
-                            <CandyButton onClick={() => isSpeaking ? handleStopSpeech() : handleSpeak(msg.id, msg.content, { intro: isIntro })}
-                              depth={2} activeDepth={0} shadowColor={isSpeaking ? 'var(--coral-hover)' : 'var(--border-subtle)'}
-                              style={{
-                                display: 'flex', alignItems: 'center', gap: 4, padding: '3px 10px', borderRadius: 10, border: 'none',
-                                fontSize: 13.2, fontWeight: 700, cursor: 'pointer',
-                                background: isSpeaking ? 'var(--coral)' : 'var(--bg-elevated)',
-                                color: isSpeaking ? '#fff' : 'var(--text-dim)',
-                              }}>
-                              {isSpeaking
-                                ? <><Square size={8} fill="currentColor" strokeWidth={0} />{t('lesson_stop')}</>
-                                : <><Play size={8} fill="currentColor" strokeWidth={0} />{t('lesson_play')}</>}
-                            </CandyButton>
-                          </div>
+                                {!msg.streaming && (
+                                  <div style={{ marginTop: 8, display: 'flex', alignItems: 'center', gap: 8 }}>
+                                    <span style={{ fontSize: 12, color: 'var(--text-dim)', fontFamily: 'var(--font-mono)' }}>
+                                      {new Date(msg.ts).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false })}
+                                    </span>
+                                    <NarratedPlaybackControls
+                                      status={narration.status}
+                                      progressPercent={narration.progressPercent}
+                                      onToggle={narration.toggle}
+                                      onReplay={narration.replay}
+                                      playLabel={t('lesson_play')}
+                                      pauseLabel={t('lesson_pause')}
+                                      replayLabel={t('lesson_replay')}
+                                      loadingLabel={t('lesson_narration_loading')}
+                                      errorLabel={t('lesson_narration_error')}
+                                    />
+                                  </div>
+                                )}
+                              </>
+                            )}
+                          </TutorNarratedMessage>
+                        ) : (
+                          <ThinkingBrain size={26} label={t('lesson_thinking_dots')} />
                         )}
 
                       </Card>

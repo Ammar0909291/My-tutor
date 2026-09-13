@@ -14,6 +14,7 @@
 
 import type { ConversationState } from './conversationState'
 import { conceptMasteryVerdict } from './masteryGate'
+import { hasDemonstratedMastery } from './conceptBudget'
 import { safeConceptTitle } from '@/lib/curriculum/knowledgeGraph'
 
 export interface ConceptOutcome {
@@ -26,6 +27,22 @@ export interface ConceptOutcome {
   /** True when a misconception was surfaced AND the concept still reached
    *  mastery — i.e. the repair demonstrably worked. */
   misconceptionsCorrected: boolean
+  /**
+   * P1 FIX (requirement 9 — a truthful reason, not an unexplained "pause").
+   *
+   * True ONLY for a `needs_review` outcome where the learner's PLAIN evidence
+   * (`hasDemonstratedMastery`) reached the mastery threshold but the STRICT,
+   * certifying evidence (`conceptMasteryVerdict`) did not — i.e. they answered
+   * correctly throughout, but not against material the completion authority
+   * could certify. Distinct from an ordinary `needs_review` where the learner
+   * genuinely struggled (`hasDemonstratedMastery` false): that case gets the
+   * existing "worth another look" wording, which is honest for it.
+   *
+   * Consumed by `buildLessonCloseText` (lessonCompletion.ts) to choose an
+   * honest close message instead of the generic one for this specific,
+   * measured shape of `needs_review`.
+   */
+  answeredButUnverified: boolean
 }
 
 /** Derive one concept's outcome from its end-of-lesson conversation state. */
@@ -53,6 +70,10 @@ export function conceptOutcome(
   const mastered = conceptMasteryVerdict(state)
   return {
     conceptId: state.conceptId ?? 'unknown',
+    // See the field's own doc comment on ConceptOutcome. Only meaningful
+    // (and only ever true) for a needs_review outcome; a mastered concept has
+    // nothing to explain honestly beyond "mastered".
+    answeredButUnverified: !mastered && hasDemonstratedMastery(state),
     // NEVER falls back to the concept id. It used to (`|| state.conceptId`),
     // which is how internal ids like `chem.found.states-of-matter` reached the
     // learner's completion screen: this title is rendered verbatim into the

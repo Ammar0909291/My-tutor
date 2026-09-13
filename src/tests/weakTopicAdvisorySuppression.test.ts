@@ -67,25 +67,41 @@ describe('the real signals fire on the observed production messages', () => {
     expect(state.active).toBe(true)
   })
 
-  it('an ordinary, calm, on-topic turn triggers none of the three signals', () => {
+  it('an ordinary, calm, on-topic turn triggers none of the signals', () => {
     const msg = 'the ball go up then go down slowly. it make like curve shape i think'
     expect(readTurnIntent(msg, null).failureState).toBeNull()
+    // ENG-D09: the fourth signal must be false here too, or the advisory would
+    // be suppressed on every ordinary turn and the feature silently disabled.
+    expect(readTurnIntent(msg, null).learnerRequest).toBeNull()
     expect(isReturnRequest(msg)).toBe(false)
     expect(isExplicitCorrection(msg)).toBe(false)
   })
 })
 
-describe('route.ts wires the suppression flag from exactly those three signals', () => {
+// RENAMED 2026-09-12 (ENG-D09). Original: 'route.ts wires the suppression
+// flag from exactly those three signals'. A fourth signal — the
+// LEARNER_REQUEST rung of the arbitration ladder — was added after the Group 5
+// English topic-drift episode, where all three original signals read false on
+// "please explain it another way" and the advisory pulled unrelated
+// already-taught pronoun content into a complex-sentences lesson. The
+// invariant this block exists for is unchanged: the flag is computed from the
+// authoritative per-turn intent plus the existing pure session signals, never
+// from a second raw-message detection.
+describe('route.ts wires the suppression flag from exactly those four signals', () => {
   it('computes weakTopicAdvisorySuppressed from turnIntent.failureState, isReturnRequest/isExplicitCorrection, and an active excursion', () => {
     const block = ROUTE.slice(
       ROUTE.indexOf('const weakTopicAdvisorySuppressed'),
-      ROUTE.indexOf('const weakTopicAdvisorySuppressed') + 1500,
+      // WIDENED 1500 -> 4000 (2026-09-12). ENG-D09 added a fourth signal to
+      // this guard with its measured reasoning, which overflowed the original
+      // fixed window; the assertions below are unchanged in substance.
+      ROUTE.indexOf('const weakTopicAdvisorySuppressed') + 4000,
     )
     expect(block).toBeTruthy()
     // The authoritative read, not a second call to detectFailureState on the
     // raw message — that call is banned outright (turnIntentAuthority.test.ts).
     expect(block).toMatch(/turnIntent\.failureState/)
     expect(block).not.toMatch(/detectFailureState\(message/)
+    expect(block).toMatch(/turnIntent\.learnerRequest !== null/)
     expect(block).toMatch(/isReturnRequest\(message\)/)
     expect(block).toMatch(/isExplicitCorrection\(message\)/)
     expect(block).toMatch(/parseExcursionState\(/)
@@ -102,7 +118,10 @@ describe('route.ts wires the suppression flag from exactly those three signals',
   it('fails open (advisory may still fire) if the guard itself throws', () => {
     const block = ROUTE.slice(
       ROUTE.indexOf('const weakTopicAdvisorySuppressed'),
-      ROUTE.indexOf('const weakTopicAdvisorySuppressed') + 1500,
+      // WIDENED 1500 -> 4000 (2026-09-12). ENG-D09 added a fourth signal to
+      // this guard with its measured reasoning, which overflowed the original
+      // fixed window; the assertions below are unchanged in substance.
+      ROUTE.indexOf('const weakTopicAdvisorySuppressed') + 4000,
     )
     expect(block).toMatch(/catch\s*{[\s\S]*?return false/)
   })

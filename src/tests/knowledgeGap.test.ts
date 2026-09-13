@@ -47,6 +47,7 @@ function turn(message: string, lesson: string | null = LESSON) {
 const NO_CLAIMS: TurnClaims = {
   knowledgeGapResolved: false, recoveryActive: false,
   learnerRequestActive: false, closing: false, completionReady: false,
+  genuineQuestionActive: false,
 }
 
 // ── 1. THE GAP IS FIRST-CLASS, AND DISTINCT FROM DISTRESS ───────────────────
@@ -281,7 +282,10 @@ describe('6. the gap integrates with Phase-3 arbitration rather than replacing i
 
   it('KNOWLEDGE_GAP is one INSERTED rung; nothing below it was reordered', () => {
     expect(TURN_AUTHORITY_ORDER[0]).toBe('KNOWLEDGE_GAP')
-    expect(TURN_AUTHORITY_ORDER.filter((a) => a !== 'KNOWLEDGE_GAP')).toEqual([
+    // LEARNER_QUESTION (English reliability fix) is a LATER insertion just
+    // above the floor — filtered out here too, so this stays a pin on
+    // Phase 3/4's own order rather than growing stale at every new rung.
+    expect(TURN_AUTHORITY_ORDER.filter((a) => a !== 'KNOWLEDGE_GAP' && a !== 'LEARNER_QUESTION')).toEqual([
       'RECOVERY', 'LEARNER_REQUEST', 'CLOSE', 'COMPLETE', 'TEACH',
     ])
   })
@@ -326,6 +330,7 @@ describe('6. the gap integrates with Phase-3 arbitration rather than replacing i
   it('the ladder is still total and first-match-wins with the new rung', () => {
     const fields: (keyof TurnClaims)[] = [
       'knowledgeGapResolved', 'recoveryActive', 'learnerRequestActive', 'closing', 'completionReady',
+      'genuineQuestionActive',
     ]
     for (let mask = 0; mask < (1 << fields.length); mask++) {
       const c = { ...NO_CLAIMS }

@@ -260,6 +260,133 @@ async function bootstrapAssets() {
         await import('./lib/teaching/assets/englishBatch1Depth4')
       const { ENGLISH_PROBE_BATCH_2 } =
         await import('./lib/teaching/assets/englishProbeBatch2')
+      // Batch 3 — 25 more concepts (14 grammar, 11 vocab), direct depth 2->4,
+      // same technique. See englishProbeBatch3.ts header for detail.
+      const { ENGLISH_PROBE_BATCH_3 } =
+        await import('./lib/teaching/assets/englishProbeBatch3')
+      // Batch 4 — 25 concepts in previously-untouched domains (16 eng.reading
+      // + 9 eng.writing), direct depth 2->4, same technique. See
+      // englishProbeBatch4.ts header for detail.
+      const { ENGLISH_PROBE_BATCH_4 } =
+        await import('./lib/teaching/assets/englishProbeBatch4')
+      // Batch 5 — 25 concepts (all 11 remaining eng.writing + first 14
+      // eng.literature alphabetically), direct depth 2->4, same technique.
+      // See englishProbeBatch5.ts header for detail.
+      const { ENGLISH_PROBE_BATCH_5 } =
+        await import('./lib/teaching/assets/englishProbeBatch5')
+      // Batch 6 — 25 concepts (remaining 11 eng.literature + all 12
+      // eng.communication + first 2 eng.composition alphabetically),
+      // direct depth 2->4, same technique. See englishProbeBatch6.ts
+      // header for detail.
+      const { ENGLISH_PROBE_BATCH_6 } =
+        await import('./lib/teaching/assets/englishProbeBatch6')
+      // Batch 7 — 21 concepts (remaining 7 eng.vocab + all 14
+      // eng.composition), direct depth 2->4, same technique. Closes both
+      // domains entirely. See englishProbeBatch7.ts header for detail.
+      const { ENGLISH_PROBE_BATCH_7 } =
+        await import('./lib/teaching/assets/englishProbeBatch7')
+      // Batch 8 — 25 concepts (entire eng.linguistics domain + first 7
+      // eng.phonetics alphabetically), direct depth 2->4, same technique.
+      // See englishProbeBatch8.ts header for detail.
+      const { ENGLISH_PROBE_BATCH_8 } =
+        await import('./lib/teaching/assets/englishProbeBatch8')
+      // Batch 9 — 25 concepts (remaining 7 eng.phonetics + entire
+      // eng.listening domain + first 10 eng.phonics alphabetically),
+      // direct depth 2->4, same technique. Closes eng.phonetics entirely.
+      // See englishProbeBatch9.ts header for detail.
+      const { ENGLISH_PROBE_BATCH_9 } =
+        await import('./lib/teaching/assets/englishProbeBatch9')
+      // Batch 10 (FINAL) — 11 concepts (last eng.phonics concept + entire
+      // eng.speaking domain), direct depth 2->4, same technique. Closes
+      // the English probe-contract campaign at 214/214 applicable
+      // concepts. See englishProbeBatch10.ts header for detail.
+      const { ENGLISH_PROBE_BATCH_10 } =
+        await import('./lib/teaching/assets/englishProbeBatch10')
+      // English ADULT-band probe-contract campaign, Batch 1 (2026-09-10): the
+      // native-band campaign above deliberately left the ADULT band untouched
+      // (flagged in englishProbeBatch1.ts's own header as an open scope
+      // question). Measured directly from the corpus: all 214 applicable
+      // English concepts hold ZERO ADULT-band closed-choice probes, so any
+      // learner with no school grade on file (gradeToGradeBand's ADULT
+      // default — the ordinary self-directed Library learner) gets no
+      // gradeable assessment on most English concepts, whose native band
+      // sits below the HIGH<->ADULT matcher compatibility bonus. This batch
+      // brings the first 10 concepts (eng.phonics.print-concepts through
+      // eng.phonics.sight-words) to 3 ADULT-band closed-choice probes each.
+      // See englishAdultBandBatch1.ts's own header for detail.
+      const { ENGLISH_ADULT_BAND_BATCH_1 } =
+        await import('./lib/teaching/assets/englishAdultBandBatch1')
+      // English ADULT-band probe-contract campaign, Batch 2 (2026-09-10):
+      // 10 more concepts (4 phonics/phonetics + 6 vocab, all EARLY/
+      // ELEMENTARY/MIDDLE-native -- concepts that get no HIGH<->ADULT
+      // matcher bonus and therefore genuinely need new ADULT-band probes).
+      // See englishAdultBandBatch2.ts's own header for the scope
+      // correction that refined which concepts actually need this.
+      const { ENGLISH_ADULT_BAND_BATCH_2 } =
+        await import('./lib/teaching/assets/englishAdultBandBatch2')
+      // English ADULT-band probe-contract campaign, Batch 3 (2026-09-10):
+      // 10 more concepts (6 vocab + 4 grammar, all MIDDLE-native), same
+      // TRUE-gap targeting as Batch 2. See englishAdultBandBatch3.ts's
+      // own header for detail.
+      const { ENGLISH_ADULT_BAND_BATCH_3 } =
+        await import('./lib/teaching/assets/englishAdultBandBatch3')
+      // English ADULT-band probe-contract campaign, Batch 4 (2026-09-11):
+      // 10 more concepts (all core grammar, all MIDDLE-native), same
+      // TRUE-gap targeting as Batches 2-3. See englishAdultBandBatch4.ts's
+      // own header for detail.
+      const { ENGLISH_ADULT_BAND_BATCH_4 } =
+        await import('./lib/teaching/assets/englishAdultBandBatch4')
+      // English ADULT-band probe-contract campaign, Batch 5 (2026-09-11,
+      // FINAL BATCH): 10 more concepts (all core grammar, all MIDDLE-native),
+      // same TRUE-gap targeting as Batches 2-4. See englishAdultBandBatch5.ts's
+      // own header for detail.
+      const { ENGLISH_ADULT_BAND_BATCH_5 } =
+        await import('./lib/teaching/assets/englishAdultBandBatch5')
+      // English ADULT-band probe-contract campaign, Batch 6 (2026-09-11,
+      // continuation past the original "next 50" target per explicit
+      // follow-up instruction to finish all English concepts): 10 more
+      // concepts (all core grammar, all MIDDLE-native), same TRUE-gap
+      // targeting as Batches 2-5. See englishAdultBandBatch6.ts's own
+      // header for detail.
+      const { ENGLISH_ADULT_BAND_BATCH_6 } =
+        await import('./lib/teaching/assets/englishAdultBandBatch6')
+      // English ADULT-band probe-contract campaign, Batch 7 (2026-09-11):
+      // 10 more concepts (6 grammar/punctuation + 4 reading, all
+      // MIDDLE-native), same TRUE-gap targeting as Batches 2-6. See
+      // englishAdultBandBatch7.ts's own header for detail.
+      const { ENGLISH_ADULT_BAND_BATCH_7 } =
+        await import('./lib/teaching/assets/englishAdultBandBatch7')
+      // English ADULT-band probe-contract campaign, Batch 8 (2026-09-11):
+      // 10 more concepts (all eng.reading, all MIDDLE-native), same
+      // TRUE-gap targeting as Batches 2-7. See englishAdultBandBatch8.ts's
+      // own header for detail.
+      const { ENGLISH_ADULT_BAND_BATCH_8 } =
+        await import('./lib/teaching/assets/englishAdultBandBatch8')
+      // English ADULT-band probe-contract campaign, Batch 9 (2026-09-11):
+      // 10 more concepts (1 reading + 9 writing, all MIDDLE-native), same
+      // TRUE-gap targeting as Batches 2-8. See englishAdultBandBatch9.ts's
+      // own header for detail.
+      const { ENGLISH_ADULT_BAND_BATCH_9 } =
+        await import('./lib/teaching/assets/englishAdultBandBatch9')
+      // English ADULT-band probe-contract campaign, Batch 10 (2026-09-11):
+      // 10 more concepts (6 writing + 4 listening, all MIDDLE-native),
+      // same TRUE-gap targeting as Batches 2-9. See
+      // englishAdultBandBatch10.ts's own header for detail.
+      const { ENGLISH_ADULT_BAND_BATCH_10 } =
+        await import('./lib/teaching/assets/englishAdultBandBatch10')
+      // English ADULT-band probe-contract campaign, Batch 11 (2026-09-11):
+      // 10 more concepts (4 listening + 6 speaking, all MIDDLE-native),
+      // same TRUE-gap targeting as Batches 2-10. See
+      // englishAdultBandBatch11.ts's own header for detail.
+      const { ENGLISH_ADULT_BAND_BATCH_11 } =
+        await import('./lib/teaching/assets/englishAdultBandBatch11')
+      // English ADULT-band probe-contract campaign, Batch 12 (2026-09-11,
+      // FINAL BATCH): the remaining 9 TRUE-gap concepts (public speaking,
+      // non-verbal communication, 6 literature concepts, digital
+      // communication). After this batch the TRUE-gap count reaches 0. See
+      // englishAdultBandBatch12.ts's own header for detail.
+      const { ENGLISH_ADULT_BAND_BATCH_12 } =
+        await import('./lib/teaching/assets/englishAdultBandBatch12')
       const { hashContent } = await import('./lib/teaching/assets/similarity')
       const { AssetFamily, AssetStatus, AuthorKind, ExplanationStyle, ProbeDifficulty } = await import('@prisma/client')
       // The ladder rungs a slug may carry, from the enum itself rather than a
@@ -269,7 +396,15 @@ async function bootstrapAssets() {
       const ALL_EXPLANATIONS = [...SEED_EXPLANATIONS, ...AUTHORED_EXPLANATIONS, ...CHEMISTRY_EXPLANATIONS]
       const ALL_PROBES = [...SEED_PROBES, ...AUTHORED_PROBES, ...CHEMISTRY_PROBES, ...PHYSICS_BAND_GAP_PROBES,
         ...PHYSICS_DEPTH_PROBES, ...CHEMISTRY_DEPTH_PROBES, ...ENGLISH_BAND_GAP_PROBES,
-        ...ENGLISH_PROBE_BATCH_1, ...ENGLISH_BATCH_1_DEPTH_4, ...ENGLISH_PROBE_BATCH_2]
+        ...ENGLISH_PROBE_BATCH_1, ...ENGLISH_BATCH_1_DEPTH_4, ...ENGLISH_PROBE_BATCH_2,
+        ...ENGLISH_PROBE_BATCH_3, ...ENGLISH_PROBE_BATCH_4, ...ENGLISH_PROBE_BATCH_5,
+        ...ENGLISH_PROBE_BATCH_6, ...ENGLISH_PROBE_BATCH_7, ...ENGLISH_PROBE_BATCH_8, ...ENGLISH_PROBE_BATCH_9,
+        ...ENGLISH_PROBE_BATCH_10, ...ENGLISH_ADULT_BAND_BATCH_1, ...ENGLISH_ADULT_BAND_BATCH_2,
+        ...ENGLISH_ADULT_BAND_BATCH_3, ...ENGLISH_ADULT_BAND_BATCH_4, ...ENGLISH_ADULT_BAND_BATCH_5,
+        ...ENGLISH_ADULT_BAND_BATCH_6, ...ENGLISH_ADULT_BAND_BATCH_7,
+        ...ENGLISH_ADULT_BAND_BATCH_8, ...ENGLISH_ADULT_BAND_BATCH_9,
+        ...ENGLISH_ADULT_BAND_BATCH_10, ...ENGLISH_ADULT_BAND_BATCH_11,
+        ...ENGLISH_ADULT_BAND_BATCH_12]
       // ADR 14 §13 (Item 6): ladder rungs get a difficulty segment; singleton
       // slots keep the identity they already have. One resolver drives BOTH
       // the pre-flight check and the write loop so they cannot disagree.

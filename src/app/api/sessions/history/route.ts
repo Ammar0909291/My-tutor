@@ -93,15 +93,40 @@ export async function GET(req: Request) {
   // stays ahead of what is on screen. Falling back to `currentLesson` only
   // covers subjects with no topicSlug grain, where `activeLessonSlug` is
   // never written at all.
+  //
+  // PCD-004: `activeLessonSlug` is per-USER, so with two sessions open on one
+  // account the screen could be filtered to whichever lesson was opened LAST
+  // in EITHER of them. When the caller names its session (`?sessionId=`) that
+  // session's own pointer is used instead, so the screen shows the same lesson
+  // the tutor is teaching in it. The parameter is OPTIONAL and verified against
+  // the caller's own userId: LessonScreen's MOUNT-time fetch genuinely has no
+  // session id yet — it races session creation on purpose, to kill the
+  // "Loading your lesson..." delay — and that call keeps exactly the previous
+  // per-user behaviour rather than being given a fabricated one.
+  const requestedSessionId = searchParams.get('sessionId')
   let lessonKey: string | null = null
   try {
-    const sp = await prisma.studentProgress.findUnique({
-      where: { userId_subjectCode: { userId: session.user.id, subjectCode: subjectSlug } },
-      select: { currentLesson: true, activeLessonSlug: true },
-    })
-    if (sp) {
+    const [sp, sessionRow] = await Promise.all([
+      prisma.studentProgress.findUnique({
+        where: { userId_subjectCode: { userId: session.user.id, subjectCode: subjectSlug } },
+        select: { currentLesson: true, activeLessonSlug: true },
+      }),
+      requestedSessionId
+        ? prisma.learnSession.findFirst({
+            // userId in the WHERE, never trusted from the query string.
+            where: { id: requestedSessionId, userId: session.user.id },
+            select: { contextSnapshot: true },
+          }).catch(() => null)
+        : Promise.resolve(null),
+    ])
+    if (sp || sessionRow) {
       const { lessonKeyFor } = await import('@/lib/teaching/lessonAttempt')
-      lessonKey = lessonKeyFor({ topicSlug: sp.activeLessonSlug, lessonOrder: sp.currentLesson })
+      const { resolveSessionLessonSlug } = await import('@/lib/teaching/sessionLessonPointer')
+      const resolved = resolveSessionLessonSlug({
+        sessionSnapshot: sessionRow?.contextSnapshot,
+        activeLessonSlug: sp?.activeLessonSlug ?? null,
+      })
+      lessonKey = lessonKeyFor({ topicSlug: resolved.slug, lessonOrder: sp?.currentLesson ?? null })
     }
   } catch (err) {
     console.warn('[sessions/history GET] lesson-key resolution skipped:', err)
@@ -191,6 +216,13 @@ export async function GET(req: Request) {
         // history. Derived from the raw page, never from the stripped copy.
         nextCursor: raw.length === HISTORY_DISPLAY_LIMIT ? messages[0]?.id ?? null : null,
         hasMore: raw.length === HISTORY_DISPLAY_LIMIT,
+        // PCD-004C: the lesson this page was actually scoped to (null when
+        // unscoped). The mount-time fetch cannot name its session — it races
+        // session creation on purpose — so it resolves per-user and can land
+        // on another session's lesson. Returning the key it USED lets the
+        // client detect that in one comparison and correct itself, instead of
+        // the screen silently disagreeing with the tutor until the next turn.
+        lessonKey,
       },
     })
   } catch (err) {
