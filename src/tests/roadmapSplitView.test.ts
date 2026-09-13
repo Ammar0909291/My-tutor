@@ -179,8 +179,15 @@ describe('Tutor explanation content is ~30% narrower on desktop, anchored to its
   const rowBlockEnd = SRC.indexOf('{/* Tutor avatar row', rowStart)
   const rowBlock = SRC.slice(rowStart, rowBlockEnd)
 
-  it('a plain (non-canvas) message row gets a responsive width class — 100% on mobile, 70% on desktop — never a centering margin', () => {
-    expect(rowBlock).toContain("className={hasCanvasVisual ? undefined : 'w-full md:w-[70%]'}")
+  it('a plain (non-canvas) TUTOR message row gets a responsive width class — 100% on mobile, 70% on desktop — never a centering margin', () => {
+    // SUPERSEDED literal, kept as context only: this 70% cap was later found
+    // to also apply to the LEARNER'S row, which left-anchors the whole row
+    // and defeats the bubble's own `alignItems: 'flex-end'` — see
+    // messageRowRightAlignment.test.ts for that fix and its own assertions.
+    // The className now excludes isUser from the cap; the invariant this
+    // test cares about (tutor rows still get the 70% desktop reduction,
+    // still with no centering margin) is checked against the current literal.
+    expect(rowBlock).toContain("className={isUser ? 'w-full' : hasCanvasVisual ? undefined : 'w-full md:w-[70%]'}")
     // The regression this superseded is a NEGATIVE control — checked against
     // the REAL style object only (rowBlock's own explanatory comment quotes
     // the old, superseded literal verbatim for context, so asserting against
@@ -195,8 +202,8 @@ describe('Tutor explanation content is ~30% narrower on desktop, anchored to its
     expect(rowBlock).toContain("...(hasCanvasVisual ? { width: '100%' } : null)")
   })
 
-  it('mobile is unaffected (still full width) — only the md: (desktop) breakpoint introduces the 70% reduction', () => {
-    const classAttr = "className={hasCanvasVisual ? undefined : 'w-full md:w-[70%]'}"
+  it('mobile is unaffected (still full width) — only the md: (desktop) breakpoint introduces the 70% reduction, for tutor rows', () => {
+    const classAttr = "className={isUser ? 'w-full' : hasCanvasVisual ? undefined : 'w-full md:w-[70%]'}"
     expect(rowBlock).toContain(classAttr)
     const value = "w-full md:w-[70%]"
     const unprefixed = value.split(' ').filter((c) => !c.startsWith('md:'))

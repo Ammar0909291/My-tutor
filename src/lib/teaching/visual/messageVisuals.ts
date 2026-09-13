@@ -37,7 +37,7 @@
  * for a turn that genuinely showed no picture.
  */
 
-import { restoreVisualSession, restoreRuntimeTopicSession } from './resolveVisual'
+import { restoreVisualSession, restoreRuntimeTopicSession, restoreGeneratedFigureForConcept } from './resolveVisual'
 
 /** The payload shape the client already renders for a live turn. */
 export interface RestoredMessageVisual {
@@ -65,7 +65,9 @@ export async function restoreOneMessageVisual(
   if (!raw) return null
   try {
     const decision =
-      restoreVisualSession(raw) ?? (await restoreRuntimeTopicSession(raw))
+      restoreVisualSession(raw)
+      ?? (await restoreRuntimeTopicSession(raw))
+      ?? (await restoreGeneratedFigureForConcept(raw))
     const payload = decision?.payload
     if (!payload || !decision?.asset) return null
 

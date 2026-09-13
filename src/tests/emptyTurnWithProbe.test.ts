@@ -24,6 +24,7 @@ import { describe, it, expect } from 'vitest'
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { mcqToServe, type TutorMCQ } from '@/lib/teaching/mcq'
+import { confirmCorrectAnswer } from '@/lib/teaching/answerConfirmation'
 
 const LEAD_IN = 'Here is a question to check your understanding:'
 const PROBE: TutorMCQ = { question: 'q?', options: ['a', 'b'], correctIndex: 0 }
@@ -32,6 +33,25 @@ const PROBE: TutorMCQ = { question: 'q?', options: ['a', 'b'], correctIndex: 0 }
 function finalTextGuard(cleanText: string, a: TutorMCQ | null, p: TutorMCQ | null, g: unknown | null): string {
   if (!cleanText.trim() && mcqToServe(a, p, g) !== null) return LEAD_IN
   return cleanText
+}
+
+/**
+ * PCD-029 — the same guard, extended to reuse the REAL confirmCorrectAnswer
+ * exactly as route.ts does, so a turn the server graded correct can no
+ * longer ship this bare lead-in with no acknowledgement (the exact T15 shape
+ * `answerConfirmation.ts`'s own header names as the residual after the
+ * 39%->65% fix: a strip between the confirmation prepend and the response
+ * boundary deletes both together).
+ */
+function finalTextGuardWithConfirmation(
+  cleanText: string, a: TutorMCQ | null, p: TutorMCQ | null,
+  grade: { correct: boolean } | null, priorConfirmations = 0,
+): string {
+  if (cleanText.trim() || mcqToServe(a, p, grade) === null) return cleanText
+  if (grade?.correct === true) {
+    return confirmCorrectAnswer({ text: LEAD_IN, correct: true, priorConfirmations }).text
+  }
+  return LEAD_IN
 }
 
 describe('the empty-with-probe backstop', () => {
@@ -58,6 +78,34 @@ describe('the empty-with-probe backstop', () => {
   })
 })
 
+describe('PCD-029 — the backstop acknowledges a server-graded-correct answer', () => {
+  it('a fresh probe attached right after a correct grade -> confirmation THEN the lead-in', () => {
+    expect(finalTextGuardWithConfirmation('', PROBE, null, { correct: true }))
+      .toBe(`That's right. ${LEAD_IN}`)
+  })
+
+  it('rotates through the same three phrasings confirmCorrectAnswer uses elsewhere', () => {
+    expect(finalTextGuardWithConfirmation('', PROBE, null, { correct: true }, 1))
+      .toBe(`Correct — well done. ${LEAD_IN}`)
+    expect(finalTextGuardWithConfirmation('', PROBE, null, { correct: true }, 2))
+      .toBe(`Yes, exactly right. ${LEAD_IN}`)
+  })
+
+  it('a WRONG answer gets the bare lead-in — never a false confirmation', () => {
+    expect(finalTextGuardWithConfirmation('', PROBE, null, { correct: false }))
+      .toBe(LEAD_IN)
+  })
+
+  it('an ungraded turn (nothing answered) is unaffected', () => {
+    expect(finalTextGuardWithConfirmation('', null, PROBE, null)).toBe(LEAD_IN)
+  })
+
+  it('non-empty text is never touched, correct or not', () => {
+    expect(finalTextGuardWithConfirmation('Momentum is conserved here.', PROBE, null, { correct: true }))
+      .toBe('Momentum is conserved here.')
+  })
+})
+
 describe('the guard is wired at the response boundary and reuses the product lead-in', () => {
   const ROUTE = readFileSync(join(process.cwd(), 'src/app/api/learn/chat/route.ts'), 'utf8')
 
@@ -65,6 +113,11 @@ describe('the guard is wired at the response boundary and reuses the product lea
     expect(ROUTE).toMatch(
       /!cleanText\.trim\(\)\s*\n?\s*&& mcqToServeForEmptyGuard\(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted\) !== null/,
     )
+  })
+
+  it('reuses confirmCorrectAnswer rather than inventing a new confirmation phrase', () => {
+    expect(ROUTE).toMatch(/mcqGradeHoisted\?\.correct === true/)
+    expect(ROUTE).toMatch(/const \{ confirmCorrectAnswer \} = await import\('@\/lib\/teaching\/answerConfirmation'\)/)
   })
 
   it('introduces the probe with the SAME compact lead-in the early guard uses', () => {

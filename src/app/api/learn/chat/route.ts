@@ -3,7 +3,14 @@ import { normalizeToCanonicalLevel } from '@/lib/curriculum/levels'
 import { z } from 'zod'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
-import { withRetry } from '@/lib/db/withRetry'
+import { withTimeout, TimeoutError } from '@/lib/net/timeout'
+import { boundedDbCall } from '@/lib/db/boundedDbCall'
+import { isDbConnectionError } from '@/lib/db/withRetry'
+import {
+  createRouteDeadline, providerBudgetMs, RouteDeadlineError, type RouteDeadline,
+} from '@/lib/net/routeDeadline'
+import { AI_CHAIN_DEADLINE_MS } from '@/lib/ai/providers/failoverRouter'
+import { recordBudgetEvent } from '@/lib/teaching/budgetTelemetry'
 import { buildTutorSystemPrompt, type LessonContext } from '@/lib/ai/client'
 import { routeAI, isAllowedGroqCertModel } from '@/lib/ai/router'
 import { AIBudgetExceededError } from '@/lib/ai/budget'
@@ -40,7 +47,7 @@ import { stripIpaNotation } from '@/lib/text/ipaSanitizer'
 import { readTurnIntent } from '@/lib/teaching/turnIntent'
 // S7 rung 2. Pure, synchronous, no I/O — imported at the top rather than
 // dynamically because it is read inside the ladder fold, on the hot path.
-import { diagnosticStalledThisTurn } from '@/lib/teaching/turnProgress'
+import { diagnosticStalledThisTurn, shouldRelieveProbeStarvation } from '@/lib/teaching/turnProgress'
 import { arbitrateTurn, arbitrationUnavailable } from '@/lib/teaching/turnArbitration'
 import {
   pickCurrentTopicSlug, selectCurrentLesson, foldProgressionMetrics,
@@ -88,9 +95,64 @@ const schema = z.object({
   // this turn's message originated from voice dictation. Optional and
   // additive — older clients simply never send it.
   voiceSignal: voiceSignalSchema,
+  // PCD-004A: which browser tab sent this turn. Used ONLY to refresh that
+  // tab's claim on this session so a second tab does not resume it out from
+  // under a learner who is actively using it. It names no session, grants no
+  // access, and is ignored entirely when absent.
+  tabId: z.string().min(1).max(64).optional(),
 })
 
+/**
+ * ── PCD-002: THE ROUTE'S OWN WALL CLOCK ────────────────────────────────────
+ *
+ * The handler below is raced against ONE budget started here, at the first
+ * line of the request. Everything inside it that is bounded — each DB
+ * operation, each retry, the provider chain — reads what is LEFT of this same
+ * clock, so no two bounds can add up past it.
+ *
+ * WHY THE RACE EXISTS ON TOP OF THOSE BOUNDS. Bounding what you remembered to
+ * bound leaves everything you did not: this route makes ~27 direct Prisma
+ * calls and many more transitively, and a future one will not know about this
+ * clock. When something unbounded stalls, the choice is between an honest 503
+ * from this application and a raw `FUNCTION_INVOCATION_TIMEOUT` from the
+ * platform — which is the artefact PCD-002 actually recorded: no exception, no
+ * degraded template, no further turns, session unrecoverable. The per-operation
+ * budgets make that outcome rare and diagnosable; this race makes it IMPOSSIBLE
+ * for the platform to be the one that decides.
+ *
+ * WHAT LOSING THE RACE DOES NOT DO. It does not roll anything back and does not
+ * claim anything was persisted. The abandoned handler is not cancelled — the
+ * instance freezes when this response returns, exactly as it would have — so
+ * the failure mode is UNDER-reporting a write that may have landed, never
+ * over-reporting one that did not. The response is a 503 with `kind`, so a
+ * client sees a retryable server condition rather than a platform error page.
+ */
 export async function POST(req: Request) {
+  const deadline = createRouteDeadline()
+  let timer: ReturnType<typeof setTimeout> | undefined
+  try {
+    return await Promise.race([
+      handleChatTurn(req, deadline),
+      new Promise<Response>((resolve) => {
+        timer = setTimeout(() => {
+          const elapsed = deadline.elapsedMs()
+          recordBudgetEvent({ outcome: 'route-deadline', elapsedMs: elapsed, budgetMs: deadline.budgetMs })
+          captureError(new RouteDeadlineError(elapsed, deadline.budgetMs), {
+            route: 'api/learn/chat', tags: { stage: 'route-deadline' },
+          })
+          resolve(NextResponse.json(
+            { success: false, error: 'That took too long on our side. Please send it again.', kind: 'route_deadline' },
+            { status: 503 },
+          ))
+        }, Math.max(deadline.remainingMs(), 0))
+      }),
+    ])
+  } finally {
+    if (timer) clearTimeout(timer)
+  }
+}
+
+async function handleChatTurn(req: Request, deadline: RouteDeadline): Promise<Response> {
   const session = await auth()
   if (!session?.user?.id) {
     return NextResponse.json({ success: false, error: 'Forbidden' }, { status: 403 })
@@ -111,10 +173,13 @@ export async function POST(req: Request) {
   let groqModelOverride: string | undefined
   const requestedCertModel = req.headers.get('x-cert-groq-model')
   if (isAllowedGroqCertModel(requestedCertModel)) {
-    const dbUser = await prisma.user.findUnique({
-      where: { id: userId },
-      select: { modelOverrideAllowed: true },
-    })
+    // Bounded like every other query on this path. A read, so it is safely
+    // retryable; the budget decides whether a retry is affordable.
+    const dbUser = await boundedDbCall(deadline, 'chat-cert-model-flag',
+      () => prisma.user.findUnique({
+        where: { id: userId },
+        select: { modelOverrideAllowed: true },
+      }), { retries: 1 })
     if (dbUser?.modelOverrideAllowed) {
       groqModelOverride = requestedCertModel
     }
@@ -122,7 +187,7 @@ export async function POST(req: Request) {
 
   try {
     const body = await req.json()
-    const { sessionId, message, lastExplanationRead, voiceSignal, ephemeral } = schema.parse(body)
+    const { sessionId, message, lastExplanationRead, voiceSignal, ephemeral, tabId } = schema.parse(body)
 
     // Wave 0 Step 2 (Evidence Architecture §2, ASSESSMENT contract):
     // learner response latency is measured server-side from message
@@ -137,7 +202,7 @@ export async function POST(req: Request) {
     // for the full table scan + a ~200KB AI payload on every send. Fetched
     // newest-first so `take` keeps the RECENT end, then reversed to chronological.
     const HISTORY_LIMIT = 30
-    const learnSession = await withRetry(() => prisma.learnSession.findUnique({
+    const learnSession = await boundedDbCall(deadline, 'chat-session-load', () => prisma.learnSession.findUnique({
       where: { id: sessionId, userId },
       include: {
         subject: true,
@@ -148,7 +213,8 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: false, error: 'Session not found' }, { status: 404 })
     }
 
-    const profile = await withRetry(() => prisma.profile.findUnique({ where: { userId } }))
+    const profile = await boundedDbCall(deadline, 'chat-profile-load',
+      () => prisma.profile.findUnique({ where: { userId } }), { retries: 1 })
 
     // Only a real learner utterance is persisted. An ephemeral instruction is
     // still sent to the model (it is what triggers the opening) but is never
@@ -162,7 +228,10 @@ export async function POST(req: Request) {
     // already depends on. See the stamping site for why.
     let userMessageRow: { id: string } | null = null
     if (!ephemeral) {
-      userMessageRow = await withRetry(() => prisma.message.create({
+      // WRITE, and deliberately NOT retried: this row has no idempotency key,
+      // so a timeout that actually committed would produce the learner's message
+      // twice and corrupt history order. See boundedDbCall's header.
+      userMessageRow = await boundedDbCall(deadline, 'chat-user-message', () => prisma.message.create({
         data: { sessionId, role: MessageRole.USER, content: message },
       }))
     }
@@ -324,6 +393,42 @@ export async function POST(req: Request) {
       prisma.subjectAnalytics.findUnique({ where: { userId_subjectId: { userId, subjectId: learnSession.subjectId } } }).catch(() => null),
     ])
 
+    // ── PCD-004: THE LESSON THIS SESSION IS TEACHING ──────────────────────
+    //
+    // Resolved ONCE, here, and used by every site below that previously read
+    // `studentProgress.activeLessonSlug` directly: the user-turn lessonKey
+    // stamp, both lessonCtx branches, the prompt-history scope and the
+    // assistant-turn stamp. One resolution per turn means those five sites
+    // cannot disagree about which lesson this turn belongs to — the property
+    // lessonHistoryScope.ts already requires of the key, now extended to the
+    // tier above it.
+    //
+    // StudentProgress is per-USER, so with two sessions open on one account
+    // whichever opened a lesson LAST owned the pointer for BOTH. The session's
+    // own pointer (contextSnapshot.lessonPointer, written by lesson-init)
+    // outranks it; when absent — an older session, a subject with no topicSlug
+    // grain, a failed pointer write — this resolves to exactly the per-user
+    // value that was read before, so the fallback is byte-identical to the
+    // pre-PCD-004 behaviour. See src/lib/teaching/sessionLessonPointer.ts.
+    const { resolveSessionLessonSlug, clearSessionLessonPointer: clearSessionLessonPointerFn } =
+      await import('@/lib/teaching/sessionLessonPointer')
+    const lessonPointerHoisted = resolveSessionLessonSlug({
+      sessionSnapshot: snapshot,
+      activeLessonSlug: studentProgress?.activeLessonSlug ?? null,
+    })
+    const activeLessonSlugHoisted = lessonPointerHoisted.slug
+    if (lessonPointerHoisted.source === 'session'
+        && studentProgress?.activeLessonSlug
+        && studentProgress.activeLessonSlug !== activeLessonSlugHoisted) {
+      // The per-user pointer names a DIFFERENT lesson than this session opened
+      // — i.e. another session for this account moved it. Logged because it is
+      // the PCD-004 signature and, until now, was invisible.
+      console.log('[lesson-pointer] ' + JSON.stringify({
+        sessionId, resolved: activeLessonSlugHoisted,
+        studentProgress: studentProgress.activeLessonSlug, source: lessonPointerHoisted.source,
+      }))
+    }
+
     // LESSON ISOLATION (write side) — stamps the USER turn just persisted
     // above with the same identity /api/sessions/history now filters by.
     // `studentProgress.currentLesson` is the identical source that route's
@@ -339,7 +444,7 @@ export async function POST(req: Request) {
     if (userMessageRow) {
       try {
         const { lessonKeyFor } = await import('@/lib/teaching/lessonAttempt')
-        const userLessonKey = lessonKeyFor({ topicSlug: studentProgress?.activeLessonSlug ?? null, lessonOrder: studentProgress?.currentLesson ?? null })
+        const userLessonKey = lessonKeyFor({ topicSlug: activeLessonSlugHoisted, lessonOrder: studentProgress?.currentLesson ?? null })
         if (userLessonKey) {
           await prisma.message.update({
             where: { id: userMessageRow.id },
@@ -450,7 +555,7 @@ export async function POST(req: Request) {
               syntheticLessons,
               studentProgress?.currentLesson ?? placementEntryOrder,
               topicProgressRows,
-              studentProgress?.activeLessonSlug,
+              activeLessonSlugHoisted,
             )
             ?? syntheticLessons[0]
           const completedSlugs = new Set(
@@ -511,7 +616,7 @@ export async function POST(req: Request) {
             const topicProgressRows = topicProgressRowsShared
             // OBJECTIVE 2: same authoritative-owner precedence as the KG branch.
             const currentLesson =
-              selectCurrentLesson(syntheticLessons, studentProgress?.currentLesson, topicProgressRows, studentProgress?.activeLessonSlug)
+              selectCurrentLesson(syntheticLessons, studentProgress?.currentLesson, topicProgressRows, activeLessonSlugHoisted)
               ?? syntheticLessons[0]
             const completedSlugs = new Set(
               topicProgressRows
@@ -1183,6 +1288,37 @@ export async function POST(req: Request) {
     const weakTopicAdvisorySuppressed = await (async () => {
       try {
         if (turnIntent.failureState !== null) return true
+        // ENG-D09 (2026-09-12): THE LADDER RUNG THIS GUARD MISSED.
+        //
+        // The argument above is that the advisory "has no relationship to the
+        // arbitration ladder (RECOVERY > LEARNER_REQUEST > CLOSE > COMPLETE >
+        // TEACH)". LEARNER_REQUEST is IN that ladder and outranks TEACH, and
+        // this guard consulted RECOVERY (`failureState`) but not it.
+        //
+        // MEASURED 2026-09-12 against the real `readTurnIntent`, reproducing
+        // the Group 5 episode of ENGLISH_TOPIC_DRIFT_FINDING.md
+        // (`eng.grammar.complex-sentences`, session cmtwim0wn0001l70421o06r1v,
+        // T4-T6): the learner typed "please explain it another way" — about
+        // the lesson's OWN topic — and every one of this guard's four terms
+        // read false (`failureState` null, `isReturnRequest` false,
+        // `isExplicitCorrection` false, no excursion), while
+        // `learnerRequest` read 'explain_differently'. So the advisory stood,
+        // and the tutor spent two full turns teaching the pronoun "they" —
+        // recognizable, already-taught content for a DIFFERENT concept
+        // (`eng.grammar.pronouns`), i.e. exactly what a weak-topic
+        // reinforcement aside pulls in. That episode is NOT the
+        // excursion/topic-misdetection class the same finding records for
+        // `eng.phonics.digraphs`; the two were investigated independently and
+        // have different causes and different fixes.
+        //
+        // A learner asking for a different explanation, a diagram, or an
+        // example is asking about THE TOPIC IN FRONT OF THEM. That is the
+        // single worst moment to weave in an unrelated historical weak topic,
+        // for the same reason distress was: the request is what owns the turn.
+        // Same authoritative once-per-turn intent read as the line above — no
+        // new detector, no new persisted state, and an ordinary calm on-topic
+        // turn still fires the advisory exactly as before.
+        if (turnIntent.learnerRequest !== null) return true
         const { isReturnRequest, isExplicitCorrection } = await import('@/lib/teaching/visual/session')
         if (isReturnRequest(message) || isExplicitCorrection(message)) return true
         const { parseExcursionState } = await import('@/lib/teaching/excursion')
@@ -1892,6 +2028,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     // the correct reading anyway: "the diagnostic has produced nothing for N
     // turns already".
     let priorStagnantTurnsHoisted = 0
+    // PCD-007/008/011: consecutive turns on which the phase allowed an authored
+    // probe and arbitration alone withheld it. Read from the PRE-turn snapshot
+    // for the same reason `priorStagnantTurnsHoisted` is — the gate runs long
+    // before this turn's own verdict folds.
+    let priorProbeStarvedTurnsHoisted = 0
+    let probeStarvationRelievedHoisted = false
+    let arbitrationWasSoleBlockerHoisted = false
     let turnProgressHoisted: {
       outcome: import('@/lib/teaching/turnProgress').TurnOutcome
       stagnantTurns: number
@@ -3684,7 +3827,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     // Pinned by lessonHistoryScope.test.ts against this file's own source.
     const { lessonKeyFor: lessonKeyForHistory } = await import('@/lib/teaching/lessonAttempt')
     const historyLessonKey = lessonKeyForHistory({
-      topicSlug: studentProgress?.activeLessonSlug ?? null,
+      topicSlug: activeLessonSlugHoisted,
       lessonOrder: studentProgress?.currentLesson ?? null,
     })
     const { scopeHistoryToLesson } = await import('@/lib/teaching/lessonHistoryScope')
@@ -4193,6 +4336,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           priorStagnantTurnsHoisted =
             typeof prior === 'number' && Number.isFinite(prior) && prior >= 0 ? Math.floor(prior) : 0
         }
+        {
+          const prior = (snapshot as { turnProgress?: { probeStarvedTurns?: unknown } } | null)
+            ?.turnProgress?.probeStarvedTurns
+          priorProbeStarvedTurnsHoisted =
+            typeof prior === 'number' && Number.isFinite(prior) && prior >= 0 ? Math.floor(prior) : 0
+        }
         const phaseBeforeTurn = conversationStateHoisted?.phase
           ?? (snapshot as { conversationState?: { phase?: unknown } } | null)
             ?.conversationState?.phase
@@ -4446,6 +4595,41 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // Each conjunct is now named once, evaluated once, and reported on
         // EVERY turn. `gateEligible` is the AND of exactly these eight — it is
         // not re-spelled below, so the log and the decision cannot drift.
+        // ── PCD-007 / PCD-008 / PCD-011: THE STARVATION CEILING ────────────
+        //
+        // MEASURED end-to-end (pcd007AssessmentLifecycle.test.ts), and it
+        // refutes the original audit's own attribution. A chemistry learner
+        // asking a help question every turn runs ten turns at OBSERVE ->
+        // DEMONSTRATE -> GUIDE with five ACTIVE authored probes and is served
+        // nothing gradeable. `phaseAllowsProbe` is TRUE on all ten — R81/R82/E1
+        // closed the phase axis the audit blamed (`D4b`, `phaseAllowsProbe:
+        // false`). The sole blocker is THIS term: LEARNER_REQUEST and
+        // LEARNER_QUESTION each deny AUTHORED_PROBE, correctly, for their own
+        // turn — and nothing bounds the run. `learnerRequestHonoured` is
+        // classified PRODUCTIVE by turnProgress (it IS teaching), so stagnation
+        // stays 0 and rungs 1-3 never fire. An inquisitive learner was
+        // assessable only by accident.
+        //
+        // The relief is deliberately the narrowest thing that restores the
+        // liveness property, and it is a SUBSTITUTION, never an addition:
+        //  · It fires only after the question has owned TWO consecutive turns
+        //    outright (PROBE_STARVATION_RELIEF_AT), so D4b/ANSWER-STUDENT-FIRST
+        //    keeps everything it was written to protect.
+        //  · It fires only when arbitration was the SOLE blocker — every other
+        //    gate term already true — so it can never paper over a different
+        //    refusal.
+        //  · It fires only for the two rungs that merely SEQUENCE the turn.
+        //    RECOVERY, KNOWLEDGE_GAP, CLOSE and COMPLETE are never relieved:
+        //    their suppression protects the learner (distress, a named
+        //    prerequisite, a session ending), not the ordering of a reply.
+        //  · The model's answer to the learner is untouched. The probe rides
+        //    alongside it, replacing the ungradeable question the model writes
+        //    on these turns anyway (`unauthoredKeyGrades`, inventedProbeGuard).
+        //  · Mastery reachability is unchanged: `mayAttachProbeBelowGuide` at
+        //    the serving site still re-reads the live pool before any spend
+        //    below GUIDE, so a bare-contract concept is untouched.
+        const probeArbitration = turnArbitrationHoisted ?? arbitrationUnavailable()
+        const arbitrationRawAllowsProbe = probeArbitration.allows('AUTHORED_PROBE')
         const gateTerms = {
           phaseAllowsProbe,
           // E1 adds DEMONSTRATE to THIS gate's scope only. `isProbeAttachablePhase`
@@ -4467,8 +4651,25 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           notExcursion: !excursionActiveHoisted,
           // The session is ending: no question is attached, and no authored
           // probe is spent. See closingTurnWithholdsQuestion.
-          arbitrationAllowsProbe: (turnArbitrationHoisted ?? arbitrationUnavailable()).allows('AUTHORED_PROBE'),
+          arbitrationAllowsProbe: arbitrationRawAllowsProbe,
           notClosingTurn: !closingTurnWithholdsQuestion(sessionEpisodeHoisted?.phase),
+        }
+        // "Sole blocker" is read FROM the terms object the gate itself decides
+        // on — never a second copy of the same conditions, which is precisely
+        // how two guards drift apart. Only the relievable rungs qualify;
+        // RECOVERY, KNOWLEDGE_GAP, CLOSE and COMPLETE never do.
+        {
+          const relievableOwner =
+            probeArbitration.owner === 'LEARNER_REQUEST' || probeArbitration.owner === 'LEARNER_QUESTION'
+          arbitrationWasSoleBlockerHoisted =
+            !arbitrationRawAllowsProbe && relievableOwner
+            && Object.entries(gateTerms).every(([k, v]) => k === 'arbitrationAllowsProbe' || v === true)
+          probeStarvationRelievedHoisted =
+            arbitrationWasSoleBlockerHoisted
+            && shouldRelieveProbeStarvation(priorProbeStarvedTurnsHoisted)
+          // The relief is applied to the SAME object the log prints and the
+          // decision is taken from, so the two can never disagree.
+          if (probeStarvationRelievedHoisted) gateTerms.arbitrationAllowsProbe = true
         }
         const gateEligible = Object.values(gateTerms).every(Boolean)
         gateTermsHoisted = gateTerms
@@ -4484,6 +4685,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           phase: phaseBeforeTurn,
           move: evidenceMoveHoisted,
           eligible: gateEligible,
+          // PCD-007/008/011. `arbitrationAllowsProbe` above is the DECISION;
+          // these two say whether it came from arbitration itself or from the
+          // starvation ceiling, so the log can never imply the former when the
+          // latter is what opened the gate.
+          arbitrationRawAllowsProbe,
+          probeStarvationRelieved: probeStarvationRelievedHoisted,
+          probeStarvedTurnsBefore: priorProbeStarvedTurnsHoisted,
           // The terms that were FALSE, in declaration order. Empty on an
           // eligible turn. This is the field to read first.
           blockedBy: Object.entries(gateTerms).filter(([, v]) => !v).map(([k]) => k),
@@ -5453,7 +5661,36 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // told 'AI down'"). AIBudgetExceededError still propagates — budget
         // exhaustion is load management with a deliberate 429, not an outage.
         let routed: { text: string; provider: string; finishReason: string | null }
+        // ── PCD-002: THE CHAIN'S CLOCK IS NOT THE REQUEST'S CLOCK ──────────
+        //
+        // `AI_CHAIN_DEADLINE_MS` starts when `complete()` is called, so every
+        // second already spent on session load, history, profile and asset
+        // assembly is invisible to it: 20s of DB work plus a 45s chain is 65s
+        // against `maxDuration: 60`, and the platform kills the invocation
+        // before any catch below can run. That is the raw 504 this defect
+        // recorded — the chain never overran ITS budget, the request overran
+        // the function's.
+        //
+        // The chain is therefore granted `min(45s, remaining - reserve)`. The
+        // reserve is not discretionary: the snapshot delta and the assistant
+        // message are awaited on purpose (a serverless instance freezes the
+        // moment the response returns, so a dropped write loses the turn's
+        // entire learning state), and they have to be affordable AFTER the
+        // model replies. When even the reserve is unaffordable the provider is
+        // not called at all — a degraded reply that is saved beats a real one
+        // killed mid-write — and the catch below serves the template it
+        // already serves for a dead chain. Nothing about the chain's own
+        // deadline is weakened; this only refuses to sell it time the request
+        // does not own.
+        const aiBudgetMs = providerBudgetMs(deadline.remainingMs(), AI_CHAIN_DEADLINE_MS)
         try {
+          if (aiBudgetMs <= 0) {
+            recordBudgetEvent({
+              outcome: 'provider-deadline', label: 'ai-chain', grantedMs: 0,
+              elapsedMs: deadline.elapsedMs(), budgetMs: deadline.budgetMs,
+            })
+            throw new RouteDeadlineError(deadline.elapsedMs(), deadline.budgetMs)
+          }
           llmCallCount++ // instrumentation only — counted before the await so a
           // throw still records the call that was actually spent.
           routed = await routeAI(
@@ -5473,9 +5710,20 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           teachingLang,
             { userId, subject: learnSession.subject.slug },
             groqModelOverride,
+            aiBudgetMs,
           )
         } catch (aiError) {
           if (aiError instanceof AIBudgetExceededError) throw aiError
+          // The chain reports its own exhaustion (`AIChainDeadlineError`), so
+          // this records WHICH budget it was measured against — the request's
+          // remaining time, not the constructed 45s — which is the number that
+          // explains a short chain on a slow-database turn.
+          if (aiError instanceof Error && aiError.name === 'AIChainDeadlineError') {
+            recordBudgetEvent({
+              outcome: 'provider-deadline', label: 'ai-chain', grantedMs: aiBudgetMs,
+              elapsedMs: deadline.elapsedMs(), budgetMs: deadline.budgetMs,
+            })
+          }
           console.error('[learn/chat] all providers down — serving degraded template (RS P-3):',
             aiError instanceof Error ? aiError.message : String(aiError))
           captureError(aiError, { route: 'api/learn/chat', tags: { stage: 'ai-degraded' } })
@@ -6410,6 +6658,28 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         }
       } catch { /* non-fatal — a repair must never break a turn */ }
 
+      // A TRUNCATED, NEVER-ANSWERABLE LETTERED OPTION MUST NOT REACH THE
+      // LEARNER. Real-student report, Chemistry Lesson 2 (States of Matter):
+      // a correct-answer confirmation was immediately followed by a single,
+      // un-continued "A) <option text>" fragment — the model free-associating
+      // a new, unauthorized multiple-choice item that never continued past
+      // its first option. `hasProseMultipleChoice`'s existing policy
+      // deliberately leaves a COMPLETE 2-4-option prose MCQ visible (see
+      // proseMcqGuard.ts's header); a single dangling option is never a real
+      // question and is stripped outright. See stripDanglingLeadingOption's
+      // own doc comment for the full root-cause trace.
+      try {
+        const { stripDanglingLeadingOption } = await import('@/lib/teaching/proseMcqGuard')
+        const stripped = stripDanglingLeadingOption(cleanText)
+        if (stripped !== cleanText) {
+          console.warn('[learn/chat] ' + JSON.stringify({
+            event: 'dangling-mcq-option-stripped',
+            conceptId: decisionConceptIdHoisted,
+          }))
+          cleanText = stripped
+        }
+      } catch { /* non-fatal — a repair must never break a turn */ }
+
       // A TEACHING TURN CANNOT TEACH THE EMISSION THEORY OF VISION.
       //
       // Sibling of the field-line repair above, ported to this route for the
@@ -6449,13 +6719,64 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // Placed after the other repairs so it decorates the text that actually
       // ships, and before the verifier so the verifier sees the final reply.
       try {
-        const { confirmCorrectAnswer } = await import('@/lib/teaching/answerConfirmation')
+        const { confirmCorrectAnswer, CONFIRMS_CORRECT } = await import('@/lib/teaching/answerConfirmation')
         const confirmed = confirmCorrectAnswer({
           text: cleanText,
           correct: mcqGradeHoisted?.correct ?? null,
           priorConfirmations: priorConfirmationsHoisted,
         })
         cleanText = confirmed.text
+        // PCD-029 — telemetry only, no behavior change. The 65% figure this
+        // criterion was last measured at (2026-08-30) became stale the moment
+        // `mcqForClient` stopped sending `correctIndex` to the client (the
+        // transcript scorer's OWN denominator broke), and a clean live
+        // re-measurement was never completed. This is the enforcer's own
+        // denominator, read directly rather than reconstructed from a
+        // replayed transcript: fires only on the precondition
+        // `confirmCorrectAnswer` itself gates on (`correct === true`).
+        // `confirmed` is true when either the model already said so or the
+        // enforcer had to add it — the completion-turn override (route.ts's
+        // `buildLessonCloseText` replacement, later in the pipeline) is a
+        // separate, already-understood confound and is deliberately not
+        // represented here.
+        if (mcqGradeHoisted?.correct === true) {
+          console.log('[c5] ' + JSON.stringify({
+            event: 'servedGradedCorrect',
+            confirmed: confirmed.added || CONFIRMS_CORRECT.test(confirmed.text),
+          }))
+        }
+      } catch { /* non-fatal — the teaching is still better than no answer */ }
+
+      // ENG-D11 — THE OTHER VERDICT. `confirmCorrectAnswer` immediately above
+      // guarantees a confirmation on a server-graded-CORRECT answer; nothing
+      // guaranteed anything on a server-graded-WRONG one, and it returns the
+      // reply untouched for `correct !== true`. Five confirmed production
+      // instances of a learner answering wrong and being handed the next
+      // question, a restatement of their own choice as a query, or (twice, on
+      // the degraded-provider path) generic filler — never the verdict, never
+      // the answer.
+      //
+      // Same authority as its sibling and no more: it fires only on
+      // `mcqGradeHoisted.correct === false` (gradeMcqAnswer against an authored,
+      // human-reviewed key) and states `options[correctIndex]` off that same
+      // probe. Both halves are server ground truth; it cannot invent either.
+      // `pendingMcqHoisted` is the probe that was actually graded (assigned once,
+      // never reassigned), so the key it reads is the key the grade used.
+      //
+      // Placed here so it decorates the text that ships, including the degraded
+      // template (set far earlier, ~5551) — which is precisely where two of the
+      // five instances were observed. See wrongAnswerCorrection.ts.
+      try {
+        const { stateCorrectionForWrongAnswer } = await import('@/lib/teaching/wrongAnswerCorrection')
+        const corrected = stateCorrectionForWrongAnswer({
+          text: cleanText,
+          correct: mcqGradeHoisted?.correct ?? null,
+          probe: pendingMcqHoisted,
+        })
+        if (corrected.added) {
+          console.log('[eng-d11] ' + JSON.stringify({ event: 'wrongAnswerCorrected', reason: corrected.reason }))
+        }
+        cleanText = corrected.text
       } catch { /* non-fatal — the teaching is still better than no answer */ }
 
       // A CEILING ON "I DON'T KNOW". Owner-reported from a live second-law
@@ -8404,7 +8725,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // resolving it fresh from the same field keeps this write self-
       // contained without assuming anything about code between the two.
       const { lessonKeyFor } = await import('@/lib/teaching/lessonAttempt')
-      const assistantLessonKey = lessonKeyFor({ topicSlug: studentProgress?.activeLessonSlug ?? null, lessonOrder: studentProgress?.currentLesson ?? null })
+      const assistantLessonKey = lessonKeyFor({ topicSlug: activeLessonSlugHoisted, lessonOrder: studentProgress?.currentLesson ?? null })
 
       // Phase 1 instrumentation payload. Every value is already computed by
       // this turn — nothing here calls a model, reads the learner's content,
@@ -8439,7 +8760,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
 
       let assistantMessage
       try {
-        assistantMessage = await withRetry(() => prisma.message.create({
+        // WRITE, not retried — same reason as the learner message above.
+        assistantMessage = await boundedDbCall(deadline, 'chat-assistant-message', () => prisma.message.create({
           data: {
             sessionId, role: MessageRole.ASSISTANT, content: contentForHistory, provider,
             ...dependencyInstrumentation,
@@ -8452,7 +8774,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // of a column a deploy has not applied yet. The teaching is the point;
         // the figure's identity is a nice-to-have on this write.
         console.error('[learn/chat] message.create with provider/visual failed, retrying without them:', err)
-        assistantMessage = await withRetry(() => prisma.message.create({
+        // WRITE, not retried — same reason as the learner message above.
+        assistantMessage = await boundedDbCall(deadline, 'chat-assistant-message', () => prisma.message.create({
           data: { sessionId, role: MessageRole.ASSISTANT, content: contentForHistory },
         }))
       }
@@ -8710,10 +9033,20 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // is fixed at ingress, so it is still stable across retries of THIS
           // request, which is the window withRetry operates in.
           const evidenceEventId = userMessageRow?.id ?? `${learnSession.id}:${turnReceivedAt}`
-          await withRetry(() => applyTopicProgressEvidence(prisma, {
+          // WRITE, and the ONE write on this path that IS safely retryable:
+          // `applyTopicProgressEvidence` carries a real idempotency key
+          // (`eventId` -> `lastEvidenceMessageId`) and guards its increment on
+          // it, so a repeated apply returns 'duplicate' instead of
+          // double-counting. topicProgressEvidenceAwaited.test.ts depends on
+          // exactly that ("the double-count protection this fix relies on"),
+          // and a first draft of THIS change dropped the retry on a mistaken
+          // claim that it was unsafe — caught by that guard, and the reason it
+          // is stated here rather than assumed. The budget still decides
+          // whether the retry is affordable.
+          await boundedDbCall(deadline, 'chat-topic-progress', () => applyTopicProgressEvidence(prisma, {
             userId, subjectSlug: subjectCode, topicSlug: resolvedConceptId,
             score, eventId: evidenceEventId,
-          })).then((outcome) => {
+          }), { retries: 2 }).then((outcome) => {
             console.log('[topic-progress-evidence]', {
               concept: resolvedConceptId, event: evidenceEventId, score, outcome,
             })
@@ -8820,6 +9153,24 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                   // the third and last writer of currentLesson.
                   data: { currentLesson: lowered, activeLessonSlug: null },
                 }).catch(() => {})
+                // PCD-004: the SESSION pointer outranks the per-user one, so
+                // clearing only the latter would leave the lowered position
+                // still overridden — the exact staleness the line above exists
+                // to prevent. This session is the one being adjusted, so its id
+                // is known directly; the clear goes through the same versioned
+                // writer as every other contextSnapshot write.
+                //
+                // AWAITED. This route sets no `maxDuration` and uses no
+                // `waitUntil`, so a serverless instance can be frozen the
+                // moment the response is returned — the documented cause of
+                // the dropped `activeLessonSlug` write in lesson-init. A
+                // dropped clear here leaves the session pinned to a lesson the
+                // learner has just been moved off. `clearSessionLessonPointer`
+                // is total (never throws), so awaiting it cannot fail the turn.
+                const cleared = await clearSessionLessonPointerFn(prisma, sessionId)
+                if (!cleared.applied) {
+                  console.warn('[lesson-pointer] placement clear not applied', { sessionId, reason: cleared.reason })
+                }
               }
             }
           }
@@ -9013,13 +9364,33 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                   ? true
                   : priorPendingId === (pendingMcqHoisted?.assetId ?? null),
             })
+            // PCD-007/008/011: how long a question-owned run has withheld an
+            // authored probe the phase was willing to serve. Folded from the
+            // facts the GATE computed this turn (hoisted above), never
+            // re-derived here — a second derivation is how two guards drift.
+            // Attaching a probe resets it, which is why `mcqHoisted === null`
+            // is part of the condition rather than the counter being cleared
+            // separately: relief that worked must not immediately re-arm.
+            const { foldProbeStarvedTurns } = await import('@/lib/teaching/turnProgress')
+            const probeStarvedTurns = foldProbeStarvedTurns(priorProbeStarvedTurnsHoisted, {
+              phaseAllowedProbe: phaseAllowsProbeHoisted,
+              arbitrationWasSoleBlocker: arbitrationWasSoleBlockerHoisted && mcqHoisted === null,
+            })
             turnProgressHoisted = {
               outcome, stagnantTurns, rung: escalationRung(stagnantTurns), probeHeldTurns,
             }
             conversationStateUpdate.turnProgress = {
               stagnantTurns,
               probeHeldTurns,
+              probeStarvedTurns,
               heldProbeId: carriedForwardUngradedForCount ? (pendingMcqHoisted?.assetId ?? null) : null,
+            }
+            if (probeStarvationRelievedHoisted) {
+              console.log('[turn-progress] ' + JSON.stringify({
+                action: 'probe-starvation-relief',
+                starvedTurnsBefore: priorProbeStarvedTurnsHoisted,
+                probeAttached: mcqHoisted !== null,
+              }))
             }
           }
           {
@@ -9164,7 +9535,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 const lessonKey = lessonKeyFor({ lessonOrder: lessonCtx?.currentLesson ?? null })
                 if (lessonKey) {
                   const store = await import('@/lib/teaching/lessonAttemptStore')
-                  const { id, outcome } = await store.openLessonAttempt(prisma, {
+                  const { id, outcome, updatedAt } = await store.openLessonAttempt(prisma, {
                     userId,
                     subjectSlug: learnSession.subject.slug,
                     lessonKey,
@@ -9173,7 +9544,17 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                   const folded = recordConceptOutcome(
                     outcome, stateForOutcome, lessonCtx?.lessonTitle ?? null,
                   )
-                  await store.saveLessonAttempt(prisma, id, folded)
+                  // PCD-004B: conditional on the row not having moved since it
+                  // was read, with THIS turn's single concept re-folded onto
+                  // whatever a concurrent turn committed. See saveLessonAttempt
+                  // for why re-folding rather than merging is the only answer
+                  // that does not have to invent counter semantics.
+                  await store.saveLessonAttempt(prisma, id, folded, {
+                    expectedUpdatedAt: updatedAt,
+                    refold: (fresh) => recordConceptOutcome(
+                      fresh, stateForOutcome, lessonCtx?.lessonTitle ?? null,
+                    ),
+                  })
                   if (folded.conceptsNeedingReview.includes(stateForOutcome.conceptId)) {
                     await store.markConceptForReview(prisma, {
                       userId,
@@ -9817,10 +10198,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // the turn — it only costs one round-trip before the reply
             // returns, which is the correct trade against losing the turn's
             // entire learning state.
+            const { sessionTabOwnerDelta } = await import('@/lib/teaching/sessionLessonPointer')
             const writeResult = await writeSnapshotDelta(prisma, {
               sessionId,
               expectedVersion: readSnapshotVersion(snapshot),
-              delta: libSnapshotDelta,
+              // PCD-004A: a turn IS activity, so it refreshes this tab's claim.
+              // Folded into the persist the turn already performs — no extra
+              // write, no heartbeat endpoint. Empty when no tabId was sent.
+              delta: { ...libSnapshotDelta, ...sessionTabOwnerDelta(tabId, new Date()) },
               rederive: rederivers.length === 0
                 ? undefined
                 : (fresh) => Object.assign({}, ...rederivers.map((f) => f(fresh))),
@@ -9915,7 +10300,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // before the empty-with-probe backstop below so that when the model text is
       // empty this lead-in stands alone rather than stacking two lead-ins.
       {
-        const { mcqToServe: mcqToServeForReoffer, MCQ_REOFFER_DISAMBIGUATION, isRestatementOfPending } =
+        const { mcqToServe: mcqToServeForReoffer, MCQ_REOFFER_DISAMBIGUATION, isRestatementOfPending, engagesPendingOptions } =
           await import('@/lib/teaching/mcq')
         const { detectLearnerQuestion } = await import('@/lib/teaching/conversationState')
         const servedReoffer = mcqToServeForReoffer(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted)
@@ -9958,6 +10343,72 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // answer attempt has BOTH null (measured), a distress/help turn does not.
           && turnIntent.failureState === null
           && turnIntent.learnerRequest === null
+          // A STOP REQUEST IS NOT AN ANSWER ATTEMPT (2026-09-12). Recorded as
+          // open and pre-existing when ENG-D02 shipped: "I am done for today"
+          // reads wantsToStop=true while every other exclusion reads false, so
+          // a learner ending their session was told to tap a choice. Measured
+          // after ENG-D02, this is ALREADY closed incidentally — that message
+          // engages no option, so the positive term below refuses it — but the
+          // exclusion is stated anyway, because it is the arbitration ladder's
+          // own rule rather than a coincidence: CLOSE outranks TEACH, so a turn
+          // that asks to stop cannot also be a turn that demands an answer.
+          // Without it, a mixed message ("B, and I'm done for today") would
+          // satisfy the positive term and draw the lead-in over a close.
+          && !turnIntent.wantsToStop
+          // ENG-D02 (2026-09-12): THE POSITIVE TERM. Every term above this one
+          // is a NOT, so before this line the predicate's default answer to
+          // "is this an answer attempt?" was YES and each non-answer had to be
+          // excluded by name — which is why I1's three exclusions and I4's two
+          // were each followed by a fresh false-positive class (28 more
+          // measured across Groups 3-12 of the English real-student campaign:
+          // implicit questions with no '?', elaborated acknowledgements, and
+          // deferrals/meta-commentary about a past answer). The exclusion list
+          // is finite; the space of non-answer prose is not. This term inverts
+          // the default: the lead-in claims the learner's answer could not be
+          // matched to an OPTION, so it may only fire when the message reached
+          // for one of the REAL pending options. See engagesPendingOptions —
+          // it never grades and is deliberately weaker than resolveMcqChoice,
+          // whose strictness is untouched.
+          && engagesPendingOptions(message, servedReoffer ?? pendingMcqHoisted)
+        // ENG-D03 (2026-09-12): THE OPENING CLAIM IS UNBACKED ON ANY RE-OFFER,
+        // not only on the turns that draw the lead-in. A re-offer means the
+        // same probe is still pending and NOTHING was graded this turn
+        // (mcqToServe only carries a probe forward when mcqGradeHoisted is
+        // null), so the server has no verdict the model could be reporting —
+        // yet Group 9 of the English campaign captured "That's right. A) 'Dogs
+        // are popular pets.' ..." on exactly such a turn. stripLeadingFalse
+        // Confirmation was already the right tool and was simply gated behind
+        // `genuineUnmappedAttempt`, which this turn was not. Scoped to re-offer
+        // turns only (never an ordinary teaching turn) and, per its own header,
+        // to the opening sentence only.
+        if (isReoffer && mcqGradeHoisted === null) {
+          const { stripLeadingFalseConfirmation } = await import('@/lib/teaching/answerConfirmation')
+          const deClaimed = stripLeadingFalseConfirmation(cleanText)
+          if (deClaimed !== cleanText) {
+            console.log('[mcq-reoffer-unbacked-confirmation] stripped an opening correctness claim on an ungraded re-offer')
+            cleanText = deClaimed
+          }
+        }
+        // ENG-D03, second half: MCQ-SHAPED MODEL PROSE MUST NOT MASQUERADE AS
+        // THE PENDING ASSESSMENT. On a re-offer the client renders the REAL
+        // pending probe as the tappable widget; a lettered option run in the
+        // reply that does not correspond to those options presents the learner
+        // with a second, ungradeable question set — and the lead-in's own "tap
+        // the choice you mean from the list below" then points at the wrong
+        // list (Group 12: four fabricated point-of-view options beside a
+        // different real probe). Removed only when it contradicts; a faithful
+        // prose restatement of the real options is left exactly as written.
+        if (isReoffer && (servedReoffer ?? pendingMcqHoisted)) {
+          const { stripContradictingProseOptions } = await import('@/lib/teaching/proseMcqGuard')
+          const deFabricated = stripContradictingProseOptions(
+            cleanText,
+            (servedReoffer ?? pendingMcqHoisted) as { options: string[] },
+          )
+          if (deFabricated !== cleanText) {
+            console.log('[mcq-reoffer-fabricated-options] stripped a lettered option run that is not the pending probe')
+            cleanText = deFabricated
+          }
+        }
         if (genuineUnmappedAttempt && !cleanText.includes(MCQ_REOFFER_DISAMBIGUATION)) {
           console.log('[mcq-reoffer-disambiguation] ungradeable answer against a pending probe — prompting a tap')
           // THE CONTRADICTION FIX (2026-09-08): this branch means the SERVER
@@ -9994,12 +10445,34 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // defined compact question presentation, deterministic, claiming nothing,
       // never fabricated. It fires ONLY when a probe is actually served, so it
       // cannot manufacture a question-only closing turn (Finding 2 territory).
+      //
+      // CRITERION 5, closing the exact gap its own header documents: this is
+      // precisely the T15 shape ("Here is a question to check your
+      // understanding:" <- none) that `answerConfirmation.ts` names as the
+      // residual after the 39%->65% fix. `confirmCorrectAnswer` ran at ~6452,
+      // but a strip that empties `cleanText` between there and here deletes
+      // whatever it prepended along with everything else — so a turn the
+      // SERVER graded correct can still ship this bare intro line with no
+      // acknowledgement. Reusing the same enforcer (not a new phrase) keeps
+      // the phrasing rotation and the "never speaks twice" guard intact; it is
+      // a no-op whenever `correct !== true`, so a wrong or ungraded answer is
+      // unaffected.
       {
         const { mcqToServe: mcqToServeForEmptyGuard } = await import('@/lib/teaching/mcq')
         if (!cleanText.trim()
             && mcqToServeForEmptyGuard(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted) !== null) {
           console.log('[empty-post-strip-with-probe] text stripped to empty while a probe is on screen — introducing it')
-          cleanText = 'Here is a question to check your understanding:'
+          const introLine = 'Here is a question to check your understanding:'
+          if (mcqGradeHoisted?.correct === true) {
+            const { confirmCorrectAnswer } = await import('@/lib/teaching/answerConfirmation')
+            cleanText = confirmCorrectAnswer({
+              text: introLine,
+              correct: true,
+              priorConfirmations: priorConfirmationsHoisted,
+            }).text
+          } else {
+            cleanText = introLine
+          }
         }
       }
 
@@ -10240,6 +10713,34 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
   } catch (err) {
     if (err instanceof z.ZodError) {
       return NextResponse.json({ success: false, error: err.errors[0].message }, { status: 400 })
+    }
+    // ── PCD-002: AN EXHAUSTED BUDGET IS NOT AN "INTERNAL SERVER ERROR" ─────
+    //
+    // A bounded DB call that ran out of its slice, or a request that ran out
+    // altogether, is a RECOVERABLE condition the learner can retry — and the
+    // three of them need three different repairs (a query/index/pool problem,
+    // an infrastructure problem, and something unbounded stalling). Collapsing
+    // them into one opaque 500 is precisely what made PCD-002's sibling
+    // (ENG-D18, `/api/sessions`) undiagnosable from production logs, and the
+    // fix there was this same discriminator. The turn is NOT persisted as
+    // successful and no learner state is fabricated: this path reports that
+    // the turn did not complete, and says why.
+    const timedOut = err instanceof TimeoutError
+    const outOfBudget = err instanceof RouteDeadlineError
+    const unavailable = !timedOut && !outOfBudget && isDbConnectionError(err)
+    if (timedOut || outOfBudget || unavailable) {
+      const kind = outOfBudget ? 'route_deadline' : timedOut ? 'db_timeout' : 'db_unavailable'
+      recordBudgetEvent({
+        outcome: outOfBudget ? 'route-deadline' : timedOut ? 'db-timeout' : 'db-unavailable',
+        label: 'chat-turn', elapsedMs: deadline.elapsedMs(), budgetMs: deadline.budgetMs,
+      })
+      console.error('[learn/chat] ' + JSON.stringify({ event: 'turn-not-completed', kind }),
+        err instanceof Error ? err.message : String(err))
+      captureError(err, { route: 'api/learn/chat', tags: { stage: kind } })
+      return NextResponse.json(
+        { success: false, error: 'That did not go through. Please send it again.', kind },
+        { status: 503 },
+      )
     }
     console.error('[learn/chat]', err)
     captureError(err, { route: 'api/learn/chat' })

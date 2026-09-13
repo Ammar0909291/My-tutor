@@ -137,16 +137,23 @@ describe('the parser did not become permissive', () => {
 // ── F / G. corpus-wide counts ───────────────────────────────────────────────
 
 describe('corpus-wide misconception retrieval', () => {
-  it('mathematics: 154 concepts carry a parsed misconception library', () => {
+  it('mathematics: at least 182 concepts carry a parsed misconception library', () => {
     const { concepts, records } = corpusRecordCount('docs/mathematics/kg/graph.json')
-    expect(concepts).toBe(154)
-    // 447 = 5 authored M-n (math.arith.fractions) + 442 MC-n — the whole
-    // authored mathematics library. The last four (complement MC-2,
-    // problem-solving-strategies MC-2, reading-mathematics MC-3,
-    // set-equality MC-3) run 306-353 chars and were rejected by the parser's
-    // earlier 300-char title bound; N-1 raised it to 360. Concept count is
-    // unchanged by that raise — all four sit in files that already parsed.
-    expect(records).toBe(447)
+    // A FLOOR, not an exact pin — deliberately, and only for this one pair.
+    // The mathematics Educational Brain corpus is under active, ongoing
+    // authoring (CLAUDE.md's Educational Brain completion campaign, an
+    // autonomous loop that lands new concepts every few minutes): an exact
+    // count here fails on every legitimate content addition, which is what
+    // broke CI repeatedly (measured 154->174->177->182 across four separate
+    // commits within roughly 30 minutes while diagnosing this very test).
+    // A monotonic floor still catches the real regression this test guards
+    // against — the F-1 parser losing previously-recognised records, which
+    // would DECREASE these numbers — without demanding a maintenance commit
+    // on every authoring batch. Raise the floor opportunistically; never
+    // lower it without first confirming the drop is a genuine parser
+    // regression, not further corpus growth outrunning a stale floor.
+    expect(concepts).toBeGreaterThanOrEqual(182)
+    expect(records).toBeGreaterThanOrEqual(529)
   })
 
   it('physics and english are unchanged by the mathematics fix', () => {

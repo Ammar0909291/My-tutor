@@ -148,8 +148,16 @@ describe('the concept pointer is derived, not authoritative', () => {
     // learner's explicit selection, which is the tier ABOVE currentLesson. The
     // property this test protects is unchanged — the route delegates to the one
     // selector and never re-derives identity from topic_progress itself.
+    //
+    // Updated again for PCD-004 (2026-09-11). ORIGINAL ASSERTION, verbatim:
+    //   'selectCurrentLesson(syntheticLessons, studentProgress?.currentLesson,
+    //    topicProgressRows, studentProgress?.activeLessonSlug)'
+    // The explicit-selection argument is now the SESSION-resolved slug, because
+    // `studentProgress` is per-user and cannot answer for two concurrent
+    // sessions. Same selector, same delegation, same property — one tier
+    // deeper. `selectCurrentLesson` itself is unchanged.
     expect(src).toContain(
-      'selectCurrentLesson(syntheticLessons, studentProgress?.currentLesson, topicProgressRows, studentProgress?.activeLessonSlug)',
+      'selectCurrentLesson(syntheticLessons, studentProgress?.currentLesson, topicProgressRows, activeLessonSlugHoisted)',
     )
   })
 })

@@ -223,9 +223,18 @@ describe('fresh vs. persisted session, with vs. without a prior message — the 
 describe('pending probe vs. no pending probe — the pre-existing conjunct is untouched, and the claim itself defers to it', () => {
   it('gateTerms ANDs arbitrationAllowsProbe with the pre-existing noUnansweredProbeOnScreen term', () => {
     const s = readFileSync('src/app/api/learn/chat/route.ts', 'utf8')
-    const gate = s.slice(s.indexOf('const gateTerms = {'), s.indexOf('const gateEligible ='))
+    // 2026-09-13 (PCD-007/008/011): the verdict call was hoisted two lines
+    // above the terms object so the probe-starvation ceiling could read the
+    // FINISHED terms object rather than keep a second copy of the same
+    // conditions. Superseded assertion, kept verbatim for history:
+    //   expect(gate).toContain("arbitrationAllowsProbe: (turnArbitrationHoisted ?? arbitrationUnavailable()).allows('AUTHORED_PROBE')")
+    // Same invariant, asserted against the new shape: the term still reads the
+    // arbiter's own verdict, via the fallback, and nothing else.
+    const gate = s.slice(s.indexOf('const probeArbitration ='), s.indexOf('const gateEligible ='))
     expect(gate).toContain('noUnansweredProbeOnScreen: !unansweredProbeOnScreen')
-    expect(gate).toContain("arbitrationAllowsProbe: (turnArbitrationHoisted ?? arbitrationUnavailable()).allows('AUTHORED_PROBE')")
+    expect(gate).toContain('const probeArbitration = turnArbitrationHoisted ?? arbitrationUnavailable()')
+    expect(gate).toContain("const arbitrationRawAllowsProbe = probeArbitration.allows('AUTHORED_PROBE')")
+    expect(gate).toContain('arbitrationAllowsProbe: arbitrationRawAllowsProbe')
     expect(s).toContain('const gateEligible = Object.values(gateTerms).every(Boolean)')
   })
 

@@ -32,6 +32,35 @@ export interface StatisticsParams {
   /** What the chart is measuring, e.g. "Marks scored", "Favorite color". */
   chartTitle: string
   bars: FrequencyBar[]
+  /**
+   * PCD-040 — WHAT THE BAR HEIGHTS ACTUALLY ARE.
+   *
+   * Absent (the default) means what this generator has always meant: the
+   * heights are COUNTS, the chart is a frequency distribution, and mode and
+   * mean are real statistics of it. Every existing statistics caller is
+   * unaffected, byte for byte.
+   *
+   * Set it when the heights are a MAGNITUDE rather than a count. Measured
+   * failure: `chem.coord.stability` binds this generator to log Kf values
+   * (13.0 monodentate vs 18.8 chelate — correct chemistry, the real chelate
+   * effect), and the chrome then told the learner the chart was a "Frequency
+   * Distribution", that 18.8 was "the mode — the most frequently occurring
+   * category", and that the mean came "from Σ(index×frequency) / Σfrequency
+   * over all 31.8 observations". There are no observations. log Kf has no
+   * mode. The tutor read that narration and built its lesson on it —
+   * "imagine a bar chart… the taller bar is called the mode" — so the figure
+   * taught the misconception first and the prose repeated it.
+   *
+   * `chem.thermo.heat-capacities` binds the same generator to J/mol·K and had
+   * the identical defect ("82.15 observations"), which is why this is fixed on
+   * the generator rather than on either concept.
+   */
+  quantity?: {
+    /** The measured quantity, e.g. "log Kf", "Molar heat capacity (J/mol·K)". */
+    name: string
+    /** 'magnitude' suppresses every frequency/mode/mean claim. */
+    kind: 'magnitude'
+  }
 }
 
 const MAX_TITLE_LEN = 100
@@ -120,6 +149,36 @@ export function buildStatisticsBarChartScene(params: StatisticsParams): SceneSpe
   ])
 
   const modeIdx = geo.bars.findIndex((b) => b.label === geo.modeLabel)
+
+  // PCD-040. A magnitude comparison gets comparison chrome: the largest bar is
+  // named LARGEST, not "the mode", and the mean-of-category-index step — which
+  // is only meaningful over counts — is omitted entirely rather than reworded.
+  // Nothing here invents a claim: "largest" is read off the same geometry the
+  // frequency branch already computed.
+  if (params.quantity?.kind === 'magnitude') {
+    const q = params.quantity.name
+    const magSteps: SceneStep[] = [
+      {
+        narration: `This bar chart compares ${q} across ${params.bars.length} cases, one bar per case. The height of each bar is its ${q} — not a count of anything.`,
+        objects: barObjects,
+      },
+      {
+        narration: `The tallest bar, "${geo.modeLabel}", has the largest ${q} at ${geo.modeFrequency}.`,
+        objects: [
+          { type: 'label', id: 'modeLabel', position: [geo.bars[modeIdx].x, geo.bars[modeIdx].top + 1.2, 0], text: `largest: ${geo.modeLabel}`, color: '#f59e0b', properties: { largestLabel: geo.modeLabel, largestValue: geo.modeFrequency } },
+        ],
+      },
+    ]
+    return {
+      id: `comparison-${params.chartTitle.replace(/\s+/g, '-')}`,
+      title: params.chartTitle,
+      sceneType: 'diagram',
+      teachingGoal: `Compare ${q} across cases and show which is largest.`,
+      cameraDistance: VISUAL_MAX_HEIGHT * 3,
+      ariaLabel: `A bar chart titled "${params.chartTitle}" comparing ${q} across ${params.bars.length} cases; the largest is "${geo.modeLabel}" at ${geo.modeFrequency}.`,
+      steps: magSteps,
+    }
+  }
 
   const steps: SceneStep[] = [
     {

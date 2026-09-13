@@ -42,6 +42,8 @@ import { extractNarrationSegments } from '@/lib/visuals/narrationSource'
 // to the existing Sprint BW static VisualCard path — see render block below.
 import { VisualRenderer } from '@/components/visuals/VisualRenderer'
 import type { SceneSpec } from '@/lib/teaching/sceneSpec'
+import { shouldRefetchScopedHistory } from '@/lib/teaching/sessionLessonPointer'
+import { getTabId } from '@/lib/teaching/tabIdentity'
 import { validateSceneSpec } from '@/lib/teaching/sceneSpecValidator'
 import { parseVisualSpec, type VisualSpec } from '@/lib/visuals/visualSpec'
 import { applyRestoredVisuals } from '@/lib/teaching/visual/messageMerge'
@@ -1343,7 +1345,17 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
           memoryContext: memoryContext ?? undefined,
           userId: userId ?? undefined,
           schoolChapterId: schoolChapterId ?? undefined,
+          // PCD-004A: so a second tab opened alongside this one gets its OWN
+          // session instead of silently sharing this conversation — and so a
+          // refresh of THIS tab still resumes rather than creating one.
+          tabId: getTabId() ?? undefined,
         })
+        // PCD-004: NO `sessionId` here, deliberately. These two run in
+        // parallel precisely because the session id does not exist yet — the
+        // sequential order was the original cause of the "Loading your
+        // lesson..." delay. This call therefore keeps the pre-PCD-004 per-user
+        // lesson resolution; the restore effect further down, which HAS the
+        // id, passes it.
         const [histRes, sessionRes] = await Promise.all([
           fetchWithTimeout(`/api/sessions/history?subject=${encodeURIComponent(subjectSlug)}`, {}, 15000),
           fetchWithTimeout('/api/sessions', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: sessionBody }, 15000),
@@ -1351,13 +1363,58 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         if (cancelled) return
 
         // Session id — non-fatal if missing, send path retries.
+        let mountSessionId: string | null = null
+        let sessionLessonKey: string | null | undefined
         try {
           const sessionData = await sessionRes.json()
-          if (!cancelled && sessionData?.success && sessionData.data?.id) setSessionId(sessionData.data.id)
+          if (!cancelled && sessionData?.success && sessionData.data?.id) {
+            mountSessionId = sessionData.data.id
+            sessionLessonKey = sessionData.lessonKey ?? null
+            setSessionId(sessionData.data.id)
+          }
         } catch { /* non-fatal */ }
 
-        const hist = await histRes.json()
+        let hist = await histRes.json()
         if (cancelled) return
+
+        // ── PCD-004C: THE MOUNT FETCH CANNOT NAME ITS SESSION ──────────────
+        //
+        // The two requests above run in PARALLEL on purpose — the sequential
+        // order was the original cause of the "Loading your lesson..." delay —
+        // so the history request is issued before any session id exists and is
+        // scoped by the PER-USER pointer. With a second session open on this
+        // account (another tab, another device) that pointer can name a
+        // DIFFERENT lesson, and this is the restore path a returning learner
+        // actually takes, so the screen would render another lesson's
+        // transcript while the tutor taught this session's lesson. Nothing
+        // re-fetched afterwards, so it never self-corrected.
+        //
+        // Both endpoints already computed the key they resolved; they now
+        // return it. When they agree — every single-session learner, and every
+        // brand-new session — this costs ZERO extra requests and the behaviour
+        // is byte-identical to before. Only a genuine disagreement pays for one
+        // corrective, session-scoped re-fetch. No delay is introduced to hide
+        // the race: the first render is still driven by the first response
+        // unless it is provably the wrong lesson.
+        const scopedSid = mountSessionId
+        if (scopedSid && shouldRefetchScopedHistory({
+          sessionId: scopedSid,
+          sessionLessonKey,
+          historyLessonKey: hist?.data?.lessonKey,
+        })) {
+          try {
+            const scopedRes = await fetchWithTimeout(
+              `/api/sessions/history?subject=${encodeURIComponent(subjectSlug)}&sessionId=${encodeURIComponent(scopedSid)}`,
+              {}, 15000,
+            )
+            if (cancelled) return
+            const scoped = await scopedRes.json()
+            // Only replace on a successful, genuinely session-scoped answer —
+            // a failed correction must never blank a history that did load.
+            if (scoped?.success) hist = scoped
+          } catch { /* keep the unscoped page rather than showing nothing */ }
+        }
+
         if (!hist?.success) return
         const raw = hist?.data?.messages
         if (!Array.isArray(raw) || raw.length === 0) return
@@ -1973,6 +2030,9 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
               // See the note on sendMessage: an instruction the learner never
               // sees must never enter their transcript.
               ephemeral: !showInUI,
+              // PCD-004A: a turn is the strongest evidence this tab is live,
+              // so it refreshes this tab's claim on the session.
+              tabId: getTabId() ?? undefined,
               // Voice Signal Recovery (Claude Recommendation #7): forwarded
               // only when this turn originated from voice dictation —
               // additive, telemetry-only, undefined for typed messages.
@@ -2311,7 +2371,18 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     const aid = `a-${Date.now()}`
     setMessages((p) => [...p, { id: aid, role: 'assistant' as const, content: '', ts: Date.now(), streaming: true }])
     try {
-      const res = await fetch('/api/learn/lesson-init', {
+      // PCD-002 (physics/chemistry defect audit): this used a bare `fetch`
+      // with no client-side bound, unlike the chat turn below (which caps at
+      // 50_000ms, comfortably under the server's own 60_000ms maxDuration, and
+      // retries a dropped/aborted attempt). A genuinely stalled network
+      // request here — not just a slow server, which the server's own 60s
+      // limit and graceful error responses already handle — could hold this
+      // screen in its loading state indefinitely, with no path back to the
+      // warm `lesson_load_error` recovery text below. Bounding it the same
+      // way closes that one asymmetry between the two endpoints' client-side
+      // robustness; no retry loop is added here since lesson-init runs at
+      // most once per navigation action, not on every keystroke-adjacent send.
+      const res = await fetchWithTimeout('/api/learn/lesson-init', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -2328,8 +2399,11 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
           totalLessons: curriculumLessons.length,
           completedLessons: curriculumProgress.completedLessons,
           teachingLanguage,
+          // PCD-004A: opening a lesson is activity — it refreshes this tab's
+          // claim so another tab cannot resume the session out from under it.
+          tabId: getTabId() ?? undefined,
         }),
-      })
+      }, 55000)
       const data = await res.json().catch(() => ({}))
       if (!res.ok || !data.success || !data.text) throw new Error(data.error ?? `HTTP ${res.status}`)
 
@@ -2370,7 +2444,25 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
           : m)
         : [...p, { id: aid, role: 'assistant' as const, content: data.text as string, ts: Date.now(), streaming: true, revealedLength: 0, provider: data.provider, llmCallCount: data.llmCallCount }])
       revealStarted = true
-      revealAssistantMessage(aid, stripCode(data.text as string), () => setIsStreaming(false))
+      // FIRST-MESSAGE SILENT FAILURE (real-student report). A disabled
+      // textarea auto-blurs in every browser, and `disabled={isStreaming ||
+      // !sessionId}` on the composer means the field loses focus for the
+      // entire lesson-opening reveal, exactly the window a learner is most
+      // likely to start typing their first question in. The two sibling
+      // reveal call sites (sendMessage, sendImageMessage) both already
+      // restore focus in their own onDone; this one — the lesson-opening
+      // path, reached by every restart/resume/next/review — was the one
+      // missing it, so a learner's very first keystrokes after the intro
+      // finished went to nothing: the textarea was enabled again but never
+      // refocused, so typing (and Enter) had nowhere to land. Silent to the
+      // learner and to the network — no fetch, no bubble, no error — exactly
+      // "zero network requests" until they clicked directly into the field
+      // (or the Send button) themselves. Matches the sibling sites'
+      // behaviour exactly; no new mechanism.
+      revealAssistantMessage(aid, stripCode(data.text as string), () => {
+        setIsStreaming(false)
+        textareaRef.current?.focus()
+      })
       // CompactLessonProgressBar reads masteryState.phase, which this
       // endpoint's response never carries (lesson-init is intentionally
       // minimal and skips the mastery-gate pipeline — see its own header
@@ -2830,7 +2922,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       // on Safari usually clears on the second attempt.
       const postSession = () => fetchWithTimeout('/api/sessions', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ subjectSlug, memoryContext: memoryContext ?? undefined, userId: userId ?? undefined, schoolChapterId: schoolChapterId ?? undefined }),
+        body: JSON.stringify({ subjectSlug, memoryContext: memoryContext ?? undefined, userId: userId ?? undefined, schoolChapterId: schoolChapterId ?? undefined, tabId: getTabId() ?? undefined }),
       }, 15000)
       let res: Response
       try {
@@ -2858,7 +2950,11 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       let anyMessageVisual = false
 
       try {
-        const histRes = await fetchWithTimeout(`/api/sessions/history?subject=${encodeURIComponent(subjectSlug)}`, {}, 15000)
+        // PCD-004: name the session so the screen is filtered by the lesson
+        // THIS conversation is on, not by whichever lesson another concurrent
+        // session for the same account opened last. `sid` is resolved directly
+        // above, so unlike the mount-time fetch this call genuinely has one.
+        const histRes = await fetchWithTimeout(`/api/sessions/history?subject=${encodeURIComponent(subjectSlug)}&sessionId=${encodeURIComponent(sid)}`, {}, 15000)
         const hist = await histRes.json()
         const histMsgs = hist?.data?.messages
         if (hist.success && Array.isArray(histMsgs) && histMsgs.length > 0) {
@@ -5177,7 +5273,18 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                     // right. Mobile stays w-full (unchanged; a further cut on
                     // an already-narrow phone screen would waste space, and
                     // this was never reported as broken there).
-                    className={hasCanvasVisual ? undefined : 'w-full md:w-[70%]'}
+                    // isUser is EXCLUDED from the 70% cap below: that
+                    // reduction was reasoned about only for the tutor's own
+                    // reading column, but it was previously applied to every
+                    // non-canvas row regardless of role. A row capped to the
+                    // left 70% is itself left-anchored (per this comment's
+                    // own point above), so the learner bubble's `alignItems:
+                    // 'flex-end'` was only pushing it to the right edge of
+                    // that narrowed 70% box — visually landing around the
+                    // middle of the chat, not the panel's true right edge.
+                    // The learner row now always gets the full row width so
+                    // flex-end reaches the panel's actual right padding.
+                    className={isUser ? 'w-full' : hasCanvasVisual ? undefined : 'w-full md:w-[70%]'}
                     style={{
                       display: 'flex', flexDirection: 'column', alignItems: isUser ? 'flex-end' : 'flex-start',
                       animation: 'fadeUp 200ms ease-out both',

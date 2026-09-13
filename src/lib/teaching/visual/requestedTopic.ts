@@ -137,6 +137,65 @@ const MAX_TITLE_CHARS = 90
 const MIN_TITLE_WORDS = 2
 
 /**
+ * Prepositions and subordinators that, left at the HEAD of a surviving title,
+ * mean the phrase modifies the REQUEST rather than naming its object.
+ *
+ * MEASURED, 2026-09-13, against 31 discourse-shaped learner utterances
+ * transcribed from this repo's own defect registers. Five named a topic, and
+ * every one of the five was a manner phrase of exactly this shape:
+ *
+ *   "hi sir, i only know little bit, please teach from start"  -> "from start"
+ *   "please teach from start"                                  -> "from start"
+ *   "can you teach me in an easier manner"  -> "in an easier manner"
+ *   "explain like i am five years old"      -> "like i am five years old"
+ *   "explain it in a simple manner sir"     -> "in a simple manner sir"
+ *
+ * The first two are PCD-018/PCD-020 verbatim, and they still reproduced after
+ * the 2026-09-11 prompt fix (Principle 13) that the master backlog records as
+ * closing them: that fix told the MODEL to stay on the concept, while the
+ * deterministic layer went on opening an excursion against the topic "from
+ * start". A prompt cannot out-argue a paused lesson.
+ *
+ * Why a SHAPE test and not more words in DISCOURSE_NOUNS: the surviving words
+ * here are `start`, `manner`, `five`, `years`, `old` — ordinary English that is
+ * also plausible subject matter, so each would have to be judged against the
+ * curriculum and some could not safely be added at all. That list has been
+ * extended twelve times, once per production incident, and the space of
+ * non-topic prose is not finite. This asks the question the list was proxying
+ * for: is the phrase a noun phrase naming a thing, or an adverbial describing
+ * how to teach?
+ *
+ * SAFE AGAINST THE CURRICULUM, checked rather than assumed. Across all 1,775
+ * concept titles in the six registered subjects, exactly two are headed by a
+ * word in this set: "From Print to Meaning" (`eng.phonics`) and "Like Terms"
+ * (`math.alg.like-terms`). Neither is reachable here, because both are real KG
+ * concepts: `route.ts` consults the unresolved-title path only when
+ * `resolveRequestedConceptId` returned nothing (`if (requestedConceptIdThisTurn)
+ * return null`), so a phrase the curriculum CAN name never reaches this test.
+ * A hyphenated head is one token and unaffected ("in-vitro fertilisation").
+ *
+ * ONLY THE THREE WITH MEASURED EVIDENCE. The obvious siblings — `while`,
+ * `for`, `by`, `with`, `at`, `onto`, `via`, `without`, `as`, `into`, `through`,
+ * `using`, `than`, `until`, `unless` — were drafted and then REJECTED, because
+ * a first draft containing them broke a pre-existing guard:
+ * `crossSubjectTemporalConnective.test.ts` asserts that "teach me while loops"
+ * names `while loops`, and it does — `while` and `for` are the names of real
+ * control-flow constructs, and `Iteration — while and for Loops` is a live CS
+ * concept. The head-position scan that cleared `from`/`in`/`like` did not catch
+ * it, because a learner names that topic by a word the TITLE does not begin
+ * with. `by` (Proof by Contradiction), `with` (Version Control with Git), `at`
+ * (Limits at Infinity), `onto` (Surjective (Onto) Function), `via`, `without`
+ * are all live subject vocabulary too. Same call as DISCOURSE_NOUNS' `main`
+ * entry, for the same reason: adding a word with no measured defect behind it
+ * trades this defect for a worse one.
+ *
+ * A list about English, not about subjects — it cannot grow when the
+ * curriculum does, and like every filter here it only ever decides that a
+ * phrase named NOTHING. It never decides what to teach.
+ */
+const LEADING_MODIFIER_HEADS = new Set(['from', 'in', 'like'])
+
+/**
  * Content words the grounding must carry BEYOND the title itself.
  *
  * The character floor alone is not a substance test: "explain kubernetes pod
@@ -255,6 +314,15 @@ export function extractRequestedTopic(
       continue
     }
     break
+  }
+
+  // A phrase still headed by a preposition or subordinator after every trim
+  // above is the request's MODIFIER, not its object: "teach me FROM START",
+  // "explain LIKE I AM FIVE". Rejected outright rather than trimmed — trimming
+  // the head would expose `start` and name a topic by that word instead, which
+  // is the defect one step further along.
+  if (words.length && LEADING_MODIFIER_HEADS.has(words[0].toLowerCase().replace(/[^a-z0-9]/g, ''))) {
+    return null
   }
 
   const title = words.join(' ').trim().slice(0, MAX_TITLE_CHARS).trim()
@@ -459,6 +527,44 @@ export const DISCOURSE_NOUNS = new Set([
   // please", because ONE non-discourse word is enough to survive and 'please'
   // was that word. A phrase cannot be rescued from being deixis by being polite.
   'please', 'thanks', 'thank',
+  // WHEN, AND WHO IS ASKING — the two words left in the English topic-drift
+  // episodes (ENG-D08), reproduced deterministically 2026-09-12 by running
+  // `namedTopicUnknownTo` on the exact messages the transcripts record:
+  //
+  //   "hello, what are we learning today"      -> topic "we learning today"
+  //   "explain simple please, im a beginner"   -> topic "simple please, im a beginner"
+  //
+  // Those extracted titles are VERBATIM the phrases the transcripts say the
+  // tutor then taught — "we learning today" explained as group-learning
+  // dynamics for five turns inside `eng.phonics.digraphs`, and "simple please,
+  // im a beginner" explained as a four-step meta-lesson on how to give a
+  // simple explanation inside `eng.phonics.print-concepts`. So this is the
+  // root cause of that episode class, not a lead: the learner's own opening
+  // pleasantry was read as a request to be taught a subject by that name.
+  //
+  // In each case exactly ONE word survived the existing filters, and neither
+  // is about any subject:
+  //
+  //   'today'    — WHEN the lesson is, never what it is about. ('simple',
+  //                'please' and the rest were already caught; 'today' was the
+  //                single word holding the whole phrase up.)
+  //   'beginner' — WHO IS ASKING and at what level. A learner declaring their
+  //                own level is the commonest thing a nervous adult says in
+  //                their first message, and it names nothing.
+  //
+  // Their immediate siblings are added on the same reasoning — a learner who
+  // says "today" says "tomorrow", and one who says "beginner" says "novice" —
+  // rather than waiting to measure each separately in production.
+  //
+  // Checked against every concept title in all six registered subjects (1,775
+  // concepts), same discipline as 'slow'/'proper'/'practice' above: 'today',
+  // 'tomorrow', 'yesterday', 'beginner', 'beginners', 'novice' and 'expert'
+  // appear in NONE. 'learning' was deliberately NOT added despite appearing in
+  // both episodes' vicinity — it is real subject vocabulary ("Machine
+  // Learning", "Supervised Learning Models"), it is not what held either
+  // phrase up, and the measured defect closes without it.
+  'today', 'tomorrow', 'yesterday',
+  'beginner', 'beginners', 'novice', 'expert',
   // the apparatus of a course
   'lesson', 'topic', 'chapter', 'test', 'quiz', 'exam', 'homework',
   'assignment', 'score', 'mark', 'grade', 'progress',

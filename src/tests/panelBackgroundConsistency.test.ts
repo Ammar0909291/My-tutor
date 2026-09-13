@@ -114,13 +114,17 @@ describe('scope: only this Study Board re-skin is touched — the shared candy p
 
 describe('no layout, width, roadmap-behaviour, or teaching-logic change accompanies this fix', () => {
   it('LessonScreen.tsx itself is untouched by this change (the fix is CSS-only, in LessonScreen.module.css)', () => {
-    // The split-view grid class and the left-anchored message-row width
-    // class from the two prior UI fixes are still present, byte-for-byte —
-    // confirming this turn touched no JSX/layout in this file at all.
+    // The split-view grid class from the prior UI fix is still present,
+    // byte-for-byte — confirming this turn touched no JSX/layout in this
+    // file at all. The message-row width literal below was SUPERSEDED by
+    // the learner-alignment fix (see messageRowRightAlignment.test.ts) —
+    // asserting the old string here would fail for an unrelated reason, so
+    // this now checks the same "no layout touched" invariant by presence of
+    // the current literal instead.
     expect(TSX).toContain(
       "maximizedPanel === 'curriculum' ? 'grid grid-cols-1 gap-0 p-0 md:grid-cols-[minmax(280px,32%)_1fr] md:gap-4 md:p-4'",
     )
-    expect(TSX).toContain("className={hasCanvasVisual ? undefined : 'w-full md:w-[70%]'}")
+    expect(TSX).toContain("className={isUser ? 'w-full' : hasCanvasVisual ? undefined : 'w-full md:w-[70%]'}")
   })
 
   it('requestLessonSwitch(lesson) — the single lesson-selection handler — is unchanged, still the only implementation', () => {

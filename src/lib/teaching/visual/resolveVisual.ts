@@ -1061,22 +1061,21 @@ export async function resolveVisualForTurn(
  * Returns null whenever there is no faithful figure to restore, which is a
  * successful outcome and the common one.
  */
-export async function restoreRuntimeTopicSession(
-  raw: unknown,
-  deps: { cacheClient?: Parameters<typeof readVerdict>[2] } = {},
+/**
+ * Shared by both cache-backed restore paths below (runtime topic and KG
+ * concept) — see `restoreRuntimeTopicSession`'s own header for why a
+ * cache-backed restore exists at all alongside `restoreVisualSession`'s
+ * synchronous re-derivation, and `restoreGeneratedFigureForConcept`'s header
+ * for the gap this sharing closes. Identical logic either way once `ctx` is
+ * established: read the cache row this exact figure was written under, write
+ * nothing, call nothing, generate nothing, and re-check the same admission
+ * bar the live path cleared before trusting any of it.
+ */
+async function restoreFromFigureCache(
+  ctx: TopicIdentity,
+  session: VisualSession,
+  deps: { cacheClient?: Parameters<typeof readVerdict>[2] },
 ): Promise<VisualDecision | null> {
-  const session = parseVisualSession(raw)
-  if (!session || !isRuntimeTopicId(session.conceptId) || !session.topic) return null
-
-  // THE SNAPSHOT IS NOT TRUSTED. The id is a hash of the title, so re-deriving
-  // it is a free integrity check: a hand-edited row cannot attach an arbitrary
-  // description to a cached figure, because the pair would no longer hash to
-  // the id the figure is stored under.
-  const ctx = runtimeTopicIdentity(session.topic)
-  if (!ctx || ctx.conceptId !== session.conceptId) return null
-
-  // The figure and its PASS were both written when it was first served. Read
-  // them back; write nothing, call nothing, generate nothing.
   const row = await getCachedVisualization(figureCacheKey(ctx.conceptId), deps.cacheClient as never)
     .catch(() => null)
   if (!row?.code) return null
@@ -1109,7 +1108,7 @@ export async function restoreRuntimeTopicSession(
     payload: figure.kind === 'scene'
       ? { renderer: 'scene', sceneSpec: figure.scene }
       : { renderer: 'spec', visualSpec: figure.spec },
-    provenance: 'engine-runtime-topic',
+    provenance: ctx.provenance === 'runtime' ? 'engine-runtime-topic' : 'curated',
   })
   const admission = admitVisualAsset(
     {
@@ -1138,6 +1137,71 @@ export async function restoreRuntimeTopicSession(
     session,
     continuityReason: 'restored',
   }
+}
+
+export async function restoreRuntimeTopicSession(
+  raw: unknown,
+  deps: { cacheClient?: Parameters<typeof readVerdict>[2] } = {},
+): Promise<VisualDecision | null> {
+  const session = parseVisualSession(raw)
+  if (!session || !isRuntimeTopicId(session.conceptId) || !session.topic) return null
+
+  // THE SNAPSHOT IS NOT TRUSTED. The id is a hash of the title, so re-deriving
+  // it is a free integrity check: a hand-edited row cannot attach an arbitrary
+  // description to a cached figure, because the pair would no longer hash to
+  // the id the figure is stored under.
+  const ctx = runtimeTopicIdentity(session.topic)
+  if (!ctx || ctx.conceptId !== session.conceptId) return null
+
+  return restoreFromFigureCache(ctx, session, deps)
+}
+
+/**
+ * REHYDRATION FOR A CURRICULUM CONCEPT SERVED BY THE GENERATION TIER.
+ *
+ * ── THE GAP THIS CLOSES ──────────────────────────────────────────────────
+ * `restoreRuntimeTopicSession` above exists because a figure from the
+ * generation/cache tier cannot be re-derived synchronously the way a curated
+ * registry binding or scene-generator figure can (`restoreVisualSession`) —
+ * it lives in `visualization_cache`, behind an async read. But its own guard,
+ * `!isRuntimeTopicId(session.conceptId)`, refuses every REAL curriculum (KG)
+ * concept, on the unstated assumption that a KG concept is always served by
+ * one of the two SYNCHRONOUS tiers (Tier 0 scene-generator, Tier 1 curated
+ * registry binding).
+ *
+ * That assumption is false for any KG concept with NEITHER binding: it falls
+ * through to the exact same generation/cache tier a runtime topic uses (see
+ * `buildDecision`'s "NO TIER 2" note and the generation tier beneath it), and
+ * for such a concept `restoreRuntimeTopicSession` returns null every time —
+ * REPRODUCED LIVE (real disposable QA account, chem.found.states-of-matter):
+ * a served turn carried a genuine `visualSpec`; on refresh (`GET
+ * /api/sessions/history`, twice, 3s apart to rule out a timing artefact) the
+ * restored `visuals` map came back `{}` while the stored message text kept
+ * saying "the figure you're looking at shows...". A concept-owned SCENE
+ * figure (phys.em.electric-dipole) restored correctly in the identical
+ * harness — confirming the gap is specific to concepts with no curated tier,
+ * not the restoration pipeline in general.
+ *
+ * Fix: try the curriculum identity FIRST — `kgTopicIdentity`, the same
+ * curriculum-first preference `resolveTopicIdentity` already states as
+ * deliberate ("a figure of it can be held to a higher standard than one
+ * drawn from a passing mention") — then fall back to the runtime path above
+ * for a genuine runtime topic. Everything past identity construction is the
+ * identical, already-hardened cache-read-and-revalidate logic; nothing here
+ * generates a figure, calls a provider, or trusts the cache row without
+ * re-checking the same admission bar the live turn cleared.
+ */
+export async function restoreGeneratedFigureForConcept(
+  raw: unknown,
+  deps: { cacheClient?: Parameters<typeof readVerdict>[2] } = {},
+): Promise<VisualDecision | null> {
+  const session = parseVisualSession(raw)
+  if (!session || isRuntimeTopicId(session.conceptId)) return null
+
+  const ctx = kgTopicIdentity(session.conceptId)
+  if (!ctx) return null
+
+  return restoreFromFigureCache(ctx, session, deps)
 }
 
 export function restoreVisualSession(raw: unknown): VisualDecision | null {

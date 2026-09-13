@@ -131,13 +131,20 @@ const RESOLUTION_CLAIM_RE =
 // through a rule that already meant to catch it, so the learner was moved on
 // from a lesson they had not finished. It happened twice in ten turns.
 //
-// DELIBERATELY NOT ADDED: the "✓ What you mastered" / "✓ What's coming"
-// bullets of `client.ts`'s LESSON CLOSING FORMAT, which appeared in the same
-// turn. They are a genuine claim about unearned mastery and a real candidate,
-// but this module already decided they count as RECAP rather than bookkeeping
-// (`completionClaimInProse.test.ts` — "keeps the praise and the recap"), and
-// overturning a documented product decision about recap language is a change
-// of policy, not a bug fix. Recorded here so the question stays visible.
+// ONCE DELIBERATELY NOT ADDED, NOW RESOLVED STRUCTURALLY — see
+// `rendersLessonClosingFormat` below (PCD-042, 2026-09-12). The note that stood
+// here declined to touch the "✓ What you mastered" / "✓ What's coming" bullets:
+// they were "a genuine claim about unearned mastery and a real candidate", but
+// this module had decided they count as RECAP rather than bookkeeping, and
+// overturning that was "a change of policy, not a bug fix. Recorded here so the
+// question stays visible."
+//
+// It stayed visible, and PCD-042 answered it — a chemistry turn whose ONLY
+// false content was those bullets, with no bookkeeping sentence anywhere for the
+// rules above to catch. The resolution does not overturn the recap policy and
+// does not add either phrase to this regex: it keys on the closing FORMAT as a
+// structure rather than on the words inside it, so a lone motivational recap
+// line — the case the old policy actually protected — is still untouched.
 // ── THE COUNTED-PROGRESS FORM ───────────────────────────────────────────────
 //
 // MEASURED (production, phys.mech.friction, 2026-08-31, real account): the
@@ -207,6 +214,81 @@ export function stripCompletionClaims(text: string): string {
 }
 
 /**
+ * AN UNAUTHORISED RENDERING OF THE PRODUCT'S OWN LESSON CLOSING FORMAT.
+ *
+ * ── THE MEASURED FAILURE (PCD-042, chem.org.mechanisms #129) ────────────────
+ * To a plain "ok that makes sense, thank you", the tutor replied with a full
+ * mastery recap — "🎉 Excellent work! ✓ What you mastered – you can now: [3
+ * skills] … ✓ What's coming – The next lesson unlocks 'Nature of Matter'" —
+ * while the engine's own state for that turn read `mastery.verified:false`,
+ * `practiceCorrect:0/2`, `completionSuppressed:true`, `gatePending:true`.
+ *
+ * The AUTHORITATIVE predicate was never wrong. `gateLessonCompletion` refused
+ * the close and nothing was recorded. What reached the learner was prose, and
+ * every bookkeeping rule above missed it because this turn contained no
+ * bookkeeping sentence at all — no lesson count, no "next up is", no "next we
+ * explore". The harm was carried entirely by the recap bullets.
+ *
+ * ── WHY THIS IS NOT ANOTHER ENTRY IN THE REGEX ──────────────────────────────
+ * Adding "the next lesson unlocks" would close this exact sentence and invite
+ * the next phrasing, which is the enumeration trap this repo has now measured
+ * from both directions (the exclusion-list default in `genuineUnmappedAttempt`,
+ * and this rule's own four successive misses recorded above).
+ *
+ * The structure is bounded where the phrasing is not. `client.ts` defines the
+ * LESSON CLOSING FORMAT — 🎉 celebration, "✓ What you mastered", "✓ Common
+ * mistakes", "✓ Progress", "✓ What's coming" — and authorises it exactly once:
+ * "when evidence is secured and you are ready to append [LESSON_COMPLETE]".
+ * So rendering that format while the gate refuses is, by the product's own
+ * contract, an unauthorised close, WHATEVER words fill the sections. The
+ * detector keys on the section labels the product itself specified; it cannot
+ * drift, because it is a copy of a template this repo owns.
+ *
+ * ── HOW THE OLD RECAP POLICY SURVIVES ───────────────────────────────────────
+ * TWO distinct labels are required. The case the previous policy protected — a
+ * single motivational "What's coming — how this builds on what you just did" —
+ * is not the template and is left exactly as it was. Only the multi-section
+ * close, which no ordinary teaching turn produces, is treated as a closure.
+ */
+const CLOSING_SECTIONS = [
+  { key: 'mastered', label: /✓?\s*What you(?:'ve| have)? (?:mastered|learned|learnt)\b/i, claimsClosure: true },
+  { key: 'mistakes', label: /✓?\s*Common mistakes\b/i, claimsClosure: false },
+  { key: 'progress', label: /✓?\s*Progress\s*[—:-]/i, claimsClosure: true },
+  { key: 'coming', label: /✓?\s*What'?s coming\b/i, claimsClosure: true },
+] as const
+
+/** How many DISTINCT closing-format sections this turn renders. */
+export function closingFormatSectionCount(text: string): number {
+  if (typeof text !== 'string' || !text) return 0
+  return CLOSING_SECTIONS.filter((s) => s.label.test(text)).length
+}
+
+/**
+ * True when the turn renders the LESSON CLOSING FORMAT rather than merely
+ * containing a recap line. Two distinct sections is the bar — see the header.
+ */
+export function rendersLessonClosingFormat(text: string): boolean {
+  return closingFormatSectionCount(text) >= 2
+}
+
+/**
+ * Removes the closing-format sections that assert unearned mastery or forward
+ * motion, keeping the celebration (praise is never a completion claim — the D3
+ * precedent this module has followed throughout) and "Common mistakes", which
+ * is genuine teaching and claims nothing about the learner's record.
+ *
+ * Line-scoped, because the format is a list: each section is its own line.
+ */
+export function stripUnauthorizedClosingFormat(text: string): string {
+  if (typeof text !== 'string' || !text) return text
+  const claiming = CLOSING_SECTIONS.filter((s) => s.claimsClosure)
+  const kept = text
+    .split('\n')
+    .filter((line) => !claiming.some((s) => s.label.test(line)))
+  return kept.join('\n').replace(/\n{3,}/g, '\n\n').trim()
+}
+
+/**
  * The single Stance Enforcement chokepoint. Evaluates one already-rendered
  * turn against every currently-enforced teaching law and returns one
  * verdict. Pure; deterministic; never throws (a thrown error inside a
@@ -252,6 +334,25 @@ export function enforceStance(input: StanceEnforcementInput): StanceVerdict {
   // the learner's evidence — the same strict bar the tag gate itself uses — and
   // the lesson not being paused by an excursion.
   const completionIsTrue = !input.excursionActive && masteryVerifiedStrict(input.state)
+
+  // PCD-042 — the closing FORMAT, checked before the phrasings inside it.
+  // Rendering `client.ts`'s LESSON CLOSING FORMAT is authorised by that prompt
+  // only "when evidence is secured and you are ready to append
+  // [LESSON_COMPLETE]", so producing it while the gate refuses is an
+  // unauthorised close regardless of wording. Same authority and same gate as
+  // the bookkeeping rule below — `completionIsTrue`, the learner's evidence —
+  // and the same never-blank-the-turn floor.
+  if (!completionIsTrue && rendersLessonClosingFormat(cleanText)) {
+    const stripped = stripUnauthorizedClosingFormat(cleanText)
+    if (stripped.length >= 40) cleanText = stripped
+    violations.push({
+      code: 'FALSE_MASTERY_COMPLETION',
+      detail:
+        "the response rendered the lesson CLOSING FORMAT (two or more of its sections) while " +
+        'completion was not authorized; the sections claiming mastery or a move onward were stripped',
+    })
+  }
+
   if (!completionIsTrue && COMPLETION_CLAIM_RE.test(cleanText)) {
     const stripped = stripCompletionClaims(cleanText)
     // Never hand back an empty turn. If the claim WAS the whole message there

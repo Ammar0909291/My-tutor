@@ -31,7 +31,13 @@ const ROUTE = readFileSync('src/app/api/learn/chat/route.ts', 'utf8')
 // The block, isolated once so no test accidentally matches a similar-looking
 // line elsewhere in a 7,000-line route.
 const BLOCK = (() => {
-  const start = ROUTE.indexOf('const gateTerms = {')
+  // 2026-09-13 (PCD-007/008/011): the slice now STARTS at the arbitration hoist
+  // rather than at `const gateTerms = {`. The verdict call was lifted two lines
+  // above the object so the starvation ceiling can read the finished terms
+  // object without a second copy of the same conditions; the invariant this
+  // guard protects — the gate CONSUMES the arbiter rather than re-deriving
+  // precedence — is unchanged, and is still asserted below.
+  const start = ROUTE.indexOf('const probeArbitration =')
   const end = ROUTE.indexOf('if (gateEligible && memoryState)')
   expect(start).toBeGreaterThan(-1)
   expect(end).toBeGreaterThan(start)

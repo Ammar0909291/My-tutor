@@ -154,3 +154,155 @@ export function buildProseMcqReplyDirective(active: boolean): string {
     'been verified.'
   )
 }
+
+/**
+ * A DANGLING, INCOMPLETE LETTERED OPTION IS NEVER A QUESTION — STRIP IT.
+ *
+ * ── THE DEFECT THIS CLOSES (real-student report, Chemistry Lesson 2,
+ *    States of Matter) ──────────────────────────────────────────────────────
+ * The learner answered a graded evaporation checkpoint correctly. The
+ * server-authoritative grade was correct (`gradeMcqAnswer` against the
+ * authored evaporation probe), and the tutor's reply correctly opened with
+ * a genuine confirmation of it. But the SAME completion then trailed off
+ * into a truncated, un-tagged attempt at a NEW multiple-choice question of
+ * the model's own — cut short after exactly one option:
+ *
+ *   "That's right. A) The particles split into H₂ and O₂"
+ *
+ * Read naively this looks like the tutor praising the wrong thing. It is
+ * not: `mcqGradeHoisted` never touches this text, and the "H₂ and O₂"
+ * wording does not even belong to the evaporation probe — it is the wrong
+ * distractor of a DIFFERENT authored probe for the same concept (the
+ * ice-melt item), which strongly suggests the model free-associated a new,
+ * unauthorized item while composing the reaction sentence, and the
+ * completion ended before a second option — or the closing tag — ever
+ * arrived. Reproduced live 3 ways (verbatim-tap, wrong-then-right, typed
+ * paraphrase) without forcing the exact truncation, confirming this is
+ * real but non-deterministic LLM completion variance, not a deterministic
+ * state-corruption bug in grading or probe selection — both were verified
+ * correct in every reproduction attempt.
+ *
+ * ── WHY `hasProseMultipleChoice` DOES NOT ALREADY CATCH THIS ───────────────
+ * That guard is deliberately narrow to 2-4 DISTINCT lettered options — a
+ * genuine (if unauthorized) askable question, which this codebase's
+ * documented policy is to leave VISIBLE and merely stop trusting for
+ * self-reported correctness (see this file's header: "an imperfect
+ * question beats silence"). A single, un-continued "A) ..." fragment can
+ * never be that — a real multiple-choice question always offers at least
+ * two choices — so it is not a policy question at all, only truncation
+ * debris that confuses without ever being answerable or gradeable. This
+ * function targets exactly and only that narrower, unambiguous case.
+ *
+ * ── SCOPE, KEPT NARROW ───────────────────────────────────────────────────
+ * Matches ONLY a lettered option starting at "A" (never "B"/"C" alone —
+ * those are not the START of a truncated list) that is the LAST line of
+ * the text, and ONLY when `hasProseMultipleChoice` is false for the whole
+ * text (so a genuine 2-4-option prose MCQ — even one where "A) ..." is
+ * also, coincidentally, the last line — is left completely untouched,
+ * matching existing policy exactly). Never touches anything but the
+ * trailing fragment; never fires mid-sentence or mid-paragraph.
+ */
+const DANGLING_LEADING_OPTION_RE = /(?:^|\n|(?<=[.!?:;]))\s*[([]?[Aa][).\]][ \t]+\S[^\n]*$/
+
+export function stripDanglingLeadingOption(text: string): string {
+  if (typeof text !== 'string' || text.trim().length === 0) return text
+  if (hasProseMultipleChoice(text)) return text
+  const m = DANGLING_LEADING_OPTION_RE.exec(text)
+  if (!m) return text
+  const kept = text.slice(0, m.index).replace(/[ \t]+$/, '')
+  // If the ENTIRE reply was the dangling fragment, there is nothing to fall
+  // back to here — leaving the original text is better than returning an
+  // empty reply; the surrounding pipeline's own empty-text handling (if any)
+  // is a separate, general concern this narrow fix does not take on.
+  return kept.trim().length > 0 ? kept : text
+}
+
+/**
+ * A FABRICATED OPTION LIST MUST NOT STAND IN FOR THE PENDING PROBE.
+ *
+ * ── THE DEFECT (ENG-D03, English real-student campaign, Group 12) ───────────
+ * A keyed probe was pending and being re-offered. The reply read:
+ *
+ *   "I couldn't tell which option your answer matched — tap the choice you
+ *    mean from the list below.  A) First person  B) Second person
+ *    C) Third person limited  D) Third person omniscient"
+ *
+ * None of those four options belonged to the pending probe; they were leaked
+ * from earlier teaching prose. The learner is looking at a tappable widget
+ * rendering the REAL options while the text beside it names four different
+ * ones and the lead-in points them at "the list below". Whichever list they
+ * read, the other one makes them wrong.
+ *
+ * ── WHY THE EXISTING GUARDS DO NOT COVER IT ────────────────────────────────
+ * `hasProseMultipleChoice` DETECTS this shape but its documented policy is to
+ * leave it visible and merely stop trusting self-reported correctness ("an
+ * imperfect question beats silence") — correct when no probe is pending,
+ * because an imperfect question is still a question. It is not correct when a
+ * real one IS pending: there is no silence to beat, only a contradiction.
+ * `stripDanglingLeadingOption` handles the opposite case, a single truncated
+ * option, and deliberately refuses to touch a 2-4 option run.
+ *
+ * ── SCOPE, AND WHY A FAITHFUL RESTATEMENT SURVIVES ─────────────────────────
+ * Fires only with a pending probe in hand. Every lettered option fragment it
+ * finds is compared, case- and whitespace-folded, against that probe's real
+ * options; if EVERY fragment corresponds to one of them the text is returned
+ * untouched, so a model legitimately restating the real question in prose is
+ * unaffected. Only the option fragments are removed — never the sentence that
+ * asked, never teaching content, never a line with no lettered option on it.
+ * Containment is used rather than equality because a prose restatement may
+ * carry the option's words with different surrounding punctuation.
+ */
+const PROSE_OPTION_SPAN_RE = /(?:^|[\s.!?:;])([([]?[A-Za-z][).\]]\s+)/g
+
+export function stripContradictingProseOptions(
+  text: string,
+  pending: { options?: unknown } | null,
+): string {
+  if (typeof text !== 'string' || !text.trim()) return text
+  const opts = Array.isArray(pending?.options) ? (pending!.options as unknown[]) : null
+  if (!opts || opts.length === 0) return text
+  if (!hasProseMultipleChoice(text)) return text
+
+  const fold = (v: string) => v.toLowerCase().replace(/[^a-z0-9 ]+/g, ' ').replace(/\s+/g, ' ').trim()
+  const real = opts.filter((o): o is string => typeof o === 'string').map(fold).filter(Boolean)
+  if (real.length === 0) return text
+
+  // Split the text into [prefix, option-fragment, option-fragment, ...] by the
+  // lettered markers, so each fragment is the text a single letter introduces.
+  const marks: number[] = []
+  PROSE_OPTION_SPAN_RE.lastIndex = 0
+  let m: RegExpExecArray | null
+  while ((m = PROSE_OPTION_SPAN_RE.exec(text))) {
+    marks.push((m.index ?? 0) + m[0].length - m[1].length)
+  }
+  if (marks.length < 2) return text
+
+  const fragments = marks.map((start, i) => {
+    const endOfLine = text.indexOf('\n', start)
+    const nextMark = i + 1 < marks.length ? marks[i + 1] : text.length
+    const end = endOfLine >= 0 ? Math.min(endOfLine, nextMark) : nextMark
+    return { start, end, body: text.slice(start, end) }
+  })
+
+  // Faithful restatement: every fragment corresponds to a real option.
+  const corresponds = (body: string) => {
+    const f = fold(body.replace(/^[([]?[A-Za-z][).\]]\s*/, ''))
+    if (!f) return false
+    return real.some((r) => r === f || (r.length > 3 && (f.includes(r) || r.includes(f))))
+  }
+  if (fragments.every((fr) => corresponds(fr.body))) return text
+
+  // Contradicting: remove every fragment, keeping everything between them.
+  let out = ''
+  let cursor = 0
+  for (const fr of fragments) {
+    out += text.slice(cursor, fr.start)
+    cursor = fr.end
+  }
+  out += text.slice(cursor)
+  const cleaned = out.replace(/[ \t]+/g, ' ').replace(/\n{3,}/g, '\n\n').replace(/[ \t]+\n/g, '\n').trim()
+  // Never return an empty reply — the caller's own empty-text backstop is a
+  // separate concern, and leaving the contradiction is still better than
+  // shipping nothing at all.
+  return cleaned ? cleaned : text
+}

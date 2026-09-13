@@ -13,20 +13,164 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **256** mathematics + 238 physics + 216 english + 186 chemistry + 0 biology + 0 computer_science = **896** |
-| Remaining | **879** |
-| Completion percentage | **50.48%** |
+| Concepts with an Educational Brain entry | **478** mathematics + 238 physics + 216 english + 186 chemistry + 0 biology + 0 computer_science = **1,118** |
+| Remaining | **657** |
+| Completion percentage | **62.99%** |
 
-*(Recomputed programmatically 2026-08-12 against the live KG files and the
-live `educational-brain/concepts/` tree — not carried forward from the
-previous revision, which read 864 and was stale in two ways. First, the
-mathematics figure of 224 predated commit `0d2c76dd`'s Wave 0 recovery,
-which restored 13 `math.geom` entries (56 → 69, closing that domain) and
-brought mathematics to 237. Second, this session's Phase 1 batch authored
-the final 8 `math.nt` concepts, closing that domain at 36/36 and bringing
-mathematics to 245. Cross-checked: 0 orphan EB files, 0 duplicate EB
-files, 0 EB filenames that do not resolve to a live KG concept id, across
-all six subjects.)*
+*(Recomputed programmatically 2026-09-13 against the live KG files and the
+live `educational-brain/concepts/` tree, mid-way through a dedicated
+Mathematics Educational Brain completion campaign (see
+`CLAUDE.md`'s "Mathematics Educational Brain completion" note). This
+session's math.alg Wave 3 (3 concepts), Wave 4 (5 concepts), Wave 5
+(5 concepts), Wave 6 (3 concepts), Wave 7 (4 concepts), Wave 8
+(3 concepts), Wave 9 (4 concepts), Wave 10 (1 concept), Wave 11
+(2 concepts), Wave 12 part 1 (1 concept), Wave 12 part 2 (2 concepts),
+Wave 12 part 3 (3 concepts), Wave 13 (2 concepts), Batch 14's 2-concept
+cross-domain excursion into `math.disc`/`math.func`, Batch 15's
+continuation of that excursion (2 more concepts), Batch 16's
+continuation (3 more concepts: 2 math.alg, 1 math.disc), Batch 17
+(3 more math.alg concepts, closing the logarithm/binomial-theorem
+excursion threads), Batch 18 (the final 3 math.alg concepts —
+**math.alg CERTIFIED, 59/59**, the fifth domain), Batch 19 (5
+`math.disc` concepts, continuing that domain as a standalone campaign),
+Batch 20 (3 more `math.disc` concepts, opening the graph-theory and
+propositional-logic subtrees), Batch 21 (5 more `math.disc` concepts,
+deepening both subtrees), Batch 22 (3 more `math.disc` concepts:
+`euler-hamiltonian`, `graph-trees`, `planar-graph`), Batch 23
+(1 more `math.disc` concept: `spanning-tree`, closing the
+`graph-trees → spanning-tree` chain), Batch 24 (3 `math.graph`
+concepts — `graph`, `tree`, `minimum-spanning-tree`, opening a new
+domain), Batch 25 (4 more `math.graph` concepts — `connectivity`,
+`eulerian-circuit`, `hamiltonian-cycle`, `graph-coloring`), Batch 26
+(3 more `math.graph` concepts — `graph-invariants`, `graph-operations`,
+`matching`), Batch 27 (3 more `math.graph` concepts — `maximum-flow`,
+`ramsey-theory`, `extremal-graph-theory`, closing math.graph to
+13/16 PARKED), Batch 28 (4 `math.func` concepts — `domain-range`,
+`function-notation`, `injectivity`, `surjectivity`, resuming that
+domain as a standalone campaign), Batch 29 (4 more `math.func`
+concepts — `function-operations`, `composition`, `monotonic-function`,
+`bijection`), and Batch 30 (4 more `math.func` concepts —
+`inverse-functions`, `graph-of-function`, `real-valued-function`,
+`linear-function`), and Batch 31 (4 more `math.func` concepts —
+`zero-of-function`, `even-odd-functions`, `transformations-functions`,
+`periodic-function`), and Batch 32 (4 more `math.func` concepts —
+`quadratic-function`, `exponential-function`, `logarithmic-function`,
+`piecewise-function`), Batch 33 (3 more `math.func` concepts —
+`vertex-form`, `polynomial-function`, `step-function`), Batch 34
+(3 more `math.func` concepts — `end-behavior`, `rational-function`,
+`rational-root`), Batch 35 (the final 2 `math.func` concepts —
+`horizontal-asymptote`, `vertical-asymptote`, **math.func DOMAIN
+CERTIFIED, the sixth** — plus 1 `math.calc` concept, `limits`, opening
+a new domain), Batch 36 (4 more `math.calc` concepts —
+`one-sided-limits`, `limit-laws`, `limits-at-infinity`, `continuity`),
+Batch 37 (4 more `math.calc` concepts — `continuity-types`, `ivt`,
+`derivative-intro`, `squeeze-theorem`), Batch 38 (the final 3
+topologically-ready `math.calc` concepts — `derivative-definition`,
+`parametric-curves`, `riemann-sums`), Batch 39 (4 more `math.calc`
+concepts — `definite-integral`, `derivative-rules`, `differentiability`,
+`linearization`), Batch 40 (4 more `math.calc` concepts —
+`antiderivatives`, `critical-points`, `higher-order-derivatives`,
+`product-rule`), Batch 41 (4 more `math.calc` concepts — `concavity`,
+`quotient-rule`, `integral-area`, `ftc-part1`), Batch 42 (4 more
+`math.calc` concepts — `volume-revolution`, `ftc-part2`, `arc-length`,
+`chain-rule`; 3 of 4 zero-discrepancy, `arc-length` a genuine
+Blueprint/KG mastery_threshold+estimated_hours discrepancy resolved
+toward the KG), and Batch 43 (4 more `math.calc` concepts —
+`derivative-exponential`, `derivative-ln`, `implicit-differentiation`,
+`u-substitution`, all direct children of Batch 42's `chain-rule`/
+`ftc-part2`; all 4 zero-discrepancy), Batch 44 (4 more `math.calc`
+concepts — `logarithmic-differentiation`, `related-rates`,
+`surface-area-integral`, `integration-by-parts`; all 4 zero-discrepancy,
+second consecutive all-4-zero-discrepancy batch), Batch 45 (4 more
+`math.calc` concepts — `reduction-formulas`, `lhopitals-rule`,
+`mean-value-theorem`, `multivariable-intro`; all 4 zero-discrepancy,
+third consecutive all-4-zero-discrepancy batch), Batch 46 (4 more
+`math.calc` concepts — `increasing-decreasing`, `rolles-theorem`,
+`improper-integrals`, `partial-derivatives`; all 4 zero-discrepancy,
+fourth consecutive all-4-zero-discrepancy batch), and Batch 47 (4 more
+`math.calc` concepts — `gradient`, `chain-rule-multivariable`,
+`local-extrema`, `parametric-calculus`; all 4 zero-discrepancy, fifth
+consecutive all-4-zero-discrepancy batch), and Batch 48 (4 more
+`math.calc` concepts — `directional-derivative`, `optimization`,
+`curve-sketching`, `multivariable-extrema`; all 4 zero-discrepancy, sixth
+consecutive all-4-zero-discrepancy batch), and Batch 49 (3 more
+`math.calc` concepts — `vector-fields`, `line-integrals`,
+`multiple-integrals`; all 3 zero-discrepancy, seventh consecutive
+zero-discrepancy batch), and Batch 50 (2, `double-integrals`/
+`curl-divergence`, closing the ENTIRE 2-concept frontier available after
+Batch 49 with none deferred; all 2 zero-discrepancy, eighth consecutive
+zero-discrepancy batch), and Batch 51 (3 more `math.calc` concepts —
+`triple-integrals`, `surface-integrals`, `greens-theorem`; all 3
+zero-discrepancy, ninth consecutive zero-discrepancy batch), and Batch 52
+(2 more `math.calc` concepts — `stokes-theorem`, `divergence-theorem`;
+all 2 zero-discrepancy, TENTH consecutive zero-discrepancy batch — plus a
+bounded cross-domain excursion, 3 concepts opening `math.trig`
+(`angle-measure`, `right-triangle-trig`) and `math.seq` (`sequence`), to
+unblock math.calc's remaining trigonometric-derivative and
+series/sequence-limit concepts) together
+brought mathematics from 257 to 431. Batch 53 (3 concepts: `math.calc.sequence-limits`,
+`math.trig.unit-circle`, `math.trig.degree-radian-conversion`) brought mathematics from
+431 to 434. Batch 54 (4 concepts: `math.trig.reference-angles`, `math.trig.trig-functions`,
+`math.seq.series`, `math.seq.convergent`) brought mathematics from 434 to 438. Batch 55
+(4 concepts: `math.calc.derivative-trig`, `math.trig.trig-identities`, `math.trig.inverse-trig`,
+`math.seq.arithmetic-sequence`) brought mathematics from 438 to 442 — `derivative-trig` closes
+the original motivating goal of the math.trig/math.seq cross-domain excursion begun in Batch 52.
+Batch 56 (4 concepts: `math.calc.derivative-inverse-trig`, `math.trig.basic-ratios`,
+`math.trig.law-of-sines`, `math.trig.law-of-cosines`) brought mathematics from 442 to 446.
+Batch 57 (4 concepts: `math.trig.special-angles`, `math.trig.amplitude-period-phase`,
+`math.trig.reciprocal-identities`, `math.trig.sum-difference-formulas`) brought mathematics
+from 446 to 450. Batch 58 (4 concepts: `math.calc.fourier-series-intro`, `math.trig.trig-graphs`,
+`math.trig.pythagorean-identities`, `math.seq.geometric-sequence`) brought mathematics from
+450 to 454. Batch 59 (4 concepts: `math.trig.product-to-sum`, `math.trig.hyperbolic-functions`,
+`math.seq.partial-sums`, `math.seq.geometric-series`) brought mathematics from 454 to 458 —
+`product-to-sum` and `hyperbolic-functions` were deliberately selected specifically to reopen
+`math.calc`'s frontier (per Batch 58's own forward-planning note), and a fresh frontier check
+confirmed this worked: `math.calc.trig-integrals` and `math.calc.hyperbolic-derivatives` are
+now both ready. Batch 60 (4 concepts: `math.calc.trig-integrals`, `math.calc.hyperbolic-derivatives`,
+`math.trig.double-angle-formulas`, `math.seq.divergent-sequence`) brought mathematics from 458 to
+462 — closed BOTH concepts on `math.calc`'s reopened frontier in the same batch, all 4 zero
+Blueprint/KG metadata discrepancy. Batch 61 (4 concepts: `math.calc.trig-substitution`,
+`math.trig.half-angle-formulas`, `math.seq.arithmetic-series`, `math.seq.telescoping-series`)
+brought mathematics from 462 to 466 — closed math.calc's entire remaining frontier again,
+math.trig closed the double-angle-formulas unlock, math.seq closed 2 concepts (Gauss pairing
+and telescoping cancellation), all 4 zero Blueprint/KG metadata discrepancy. Batch 62
+(4 concepts: `math.calc.partial-fractions`, `math.trig.trig-equations`,
+`math.seq.recursive-sequences`, `math.seq.infinite-geometric-series`) brought mathematics
+from 466 to 470 — closed math.calc's entire remaining frontier for a third consecutive
+batch, math.trig closed the trig-equations concept, math.seq closed 2 concepts
+(recursive sequences and infinite geometric series); 3 of 4 zero Blueprint/KG metadata
+discrepancy, `math.seq.recursive-sequences` carrying two genuine discrepancies
+(estimated_hours 5 vs 8, unlocks "none" vs `math.disc.recurrence-relation`) plus a
+P76_mode staleness correction (cross-link-probe declared against
+`math.disc.recurrence-relation`, verified via `ls` to have no EB entry, so independence
+mode was used instead), all resolved toward the KG/filesystem-verified reality.
+Batch 63 (4 concepts: `math.trig.polar-form-complex`, `math.seq.series-convergence`,
+`math.disc.recurrence-relation`, `math.disc.asymptotic-notation`) brought mathematics
+from 470 to 474 — math.trig closed its sole ready candidate (down to 2 concepts
+remaining before DOMAIN CERTIFICATION); math.seq closed `series-convergence`, whose own
+`unlocks` field directly reopens `math.calc`'s frontier next batch (`power-series`); and
+math.disc REOPENED after being PARKED since Batch 23, closing both of its two ready
+candidates — `recurrence-relation` (this entry directly resolves the standing
+Batch-62 forward-reference from `math.seq.recursive-sequences`, and itself carries a
+genuine Blueprint-staleness finding on its own P76 cross-link mode against
+`math.de.ode`, resolved via independence mode per the established precedent) and
+`asymptotic-notation`. All 4 zero Blueprint/KG metadata discrepancy on every field
+except `recurrence-relation`'s P76_mode correction above.
+Batch 64 (4 concepts: `math.trig.de-moivres-theorem`, `math.trig.eulers-formula`,
+`math.calc.power-series`, `math.seq.divergence-test`) brought mathematics from 474
+to 478 — authoring BOTH of math.trig's remaining concepts in the same batch reached
+**math.trig 25/25 — DOMAIN CERTIFIED**, the seventh mathematics domain; math.calc
+closed `power-series` (unblocked by Batch 63's own `series-convergence`), reopening
+toward `taylor-series`/`maclaurin-series`; math.seq closed `divergence-test`, whose
+own MC-1 is the identical mechanism as `series-convergence`'s own MC-1, cross-
+referenced. Two genuine Blueprint-staleness findings on P76 cross-link mode
+(`de-moivres-theorem` against `math.cx.complex-numbers-analysis`, `eulers-formula`
+against `math.cx.analytic-functions` — both Blueprint-file-existence mistaken for
+EB-entry-existence, both corrected via independence mode), plus one genuine
+Blueprint/KG `unlocks` discrepancy (`eulers-formula`'s Blueprint states "none
+listed," KG states `math.cx.analytic-functions` — resolved toward the KG).
+Cross-checked: 0 orphan EB files, 0 duplicate EB files, 0 EB filenames
+that do not resolve to a live KG concept id, across all six subjects.)*
 
 ---
 
@@ -34,9 +178,9 @@ all six subjects.)*
 
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
-| mathematics | 908 | 256 | 28.19% | `math.found.mathematical-thinking` | **Yes** |
+| mathematics | 908 | 478 | 52.64% | `math.found.mathematical-thinking` | **Yes** |
 
-**Mathematics per-domain state (recomputed 2026-08-12, programmatic):**
+**Mathematics per-domain state (recomputed 2026-09-13, programmatic):**
 
 | Domain | Authored / KG | Status |
 |---|---|---|
@@ -44,31 +188,147 @@ all six subjects.)*
 | `math.geom` | 69/69 | **CERTIFIED** — closed by commit `0d2c76dd`'s Wave 0 recovery |
 | `math.arith` | 58/58 | **CERTIFIED** (2026-07-26) |
 | `math.nt` | 36/36 | **CERTIFIED** (2026-08-12) — closed by this session's Phase 1 batch |
-| `math.calc` | 0/76 | not started |
+| `math.calc` | 71/76 | **Batch 64 (1, `power-series`, unblocked by `math.seq.series-convergence` (Batch 63), zero Blueprint/KG metadata discrepancy; its own `unlocks` field, `taylor-series`+`maclaurin-series`, is a real forward relationship confirmed against the KG). Fresh frontier after Batch 64: 1 candidate ready (`taylor-series`, requires `power-series`+`higher-order-derivatives`+`linearization`, all long-authored).** **Fresh frontier after Batch 63 (no math.calc concept authored this batch; `math.seq.series-convergence` was authored instead, its sole dependent): 1 candidate ready (`power-series`, requires `math.seq.series-convergence`, now long-authored) — reopens the domain for a fourth time.** **Batch 62 (1, `partial-fractions`, closing the ENTIRE frontier available after Batch 61 with none deferred, requires `trig-substitution`+`math.alg.rational-expressions`+`math.alg.polynomial-roots`, all long-authored; zero Blueprint/KG metadata discrepancy — the final concept in the trig-integrals/trig-substitution/partial-fractions chain opened by the Batch 52 cross-domain excursion). Fresh math.calc frontier after Batch 62: 0 candidates ready — all 6 remaining concepts chain through `math.seq.series-convergence`/`ratio-test`, `math.linalg.determinant`, or `math.calc.taylor-series`'s own siblings (`maclaurin-series`/`taylor-remainder`), none of which are yet authored.** **Batch 61 (1, `trig-substitution`, closing the ENTIRE frontier available after Batch 60 with none deferred; zero Blueprint/KG metadata discrepancy)**. Fresh frontier after Batch 61: 1 candidate ready (`math.calc.partial-fractions`, requires `trig-substitution`+`math.alg.rational-expressions`+`math.alg.polynomial-roots`, all now long-authored). **Batch 60 (2, `trig-integrals`/`hyperbolic-derivatives`, closing BOTH concepts on the Batch-59-reopened frontier with none deferred; both zero Blueprint/KG metadata discrepancy)** — confirms `math.calc` is genuinely unblocked, not just briefly reopened. Fresh frontier after Batch 60: 1 candidate ready (`math.calc.trig-substitution`, requires `trig-integrals`+`math.trig.trig-identities`). **REOPENED (2026-09-13) — Batch 59 confirmed the Batch 58 prediction**: `math.trig.hyperbolic-functions` and `math.trig.product-to-sum`, both authored in Batch 59, are exactly the two `math.trig` prerequisites that were blocking `math.calc.hyperbolic-derivatives` and `math.calc.trig-integrals` — a fresh frontier check after Batch 59 confirms both are now ready (2 candidates, up from 0 after Batch 58). No `math.calc` concept itself was authored in Batch 59 (`math.calc` remains 66/76 pending the next batch). **STANDALONE CAMPAIGN, IN PROGRESS (2026-09-12)** — Batch 35 (1, `limits`), the domain's entry node, selected as the highest-leverage next step after math.func's certification (verified programmatically: authoring `limits` alone unblocks 7 further `math.calc` concepts at once) + Batch 36 (4, `one-sided-limits`/`limit-laws`/`limits-at-infinity`/`continuity`, closing the entire 4-concept selected subset of the 7-concept frontier available after Batch 35, deferring `derivative-intro`/`riemann-sums`/`parametric-curves`) + Batch 37 (4, `continuity-types`/`ivt`/`derivative-intro`/`squeeze-theorem`, closing the 6-concept frontier available after Batch 36 down to 3, deferring `parametric-curves`/`riemann-sums`; `derivative-intro` is the domain's central payoff concept) + Batch 38 (3, `derivative-definition`/`parametric-curves`/`riemann-sums`, closing the ENTIRE 3-concept frontier available after Batch 37 with none deferred) + Batch 39 (4, `definite-integral`/`derivative-rules`/`differentiability`/`linearization`, selected from the 8-concept frontier available after Batch 38, deferring `lhopitals-rule`/`line-integrals`/`mean-value-theorem`/`multivariable-intro`; the first math.calc batch with zero Blueprint/KG metadata discrepancies across all 4 concepts) + Batch 40 (4, `antiderivatives`/`critical-points`/`higher-order-derivatives`/`product-rule`, selected from the 13-concept frontier available after Batch 39, sharing the tightest single-prerequisite coupling to `derivative-rules`; continued the zero-discrepancy streak for a fourth consecutive batch) + Batch 41 (4, `concavity`/`quotient-rule`/`integral-area`/`ftc-part1`, selected from the 11-concept frontier available after Batch 40; fifth consecutive zero-discrepancy batch) + Batch 42 (4, `volume-revolution`/`ftc-part2`/`arc-length`/`chain-rule`, closing the 9-concept frontier's tightest-coupled subset available after Batch 41; 3 of 4 zero-discrepancy, `arc-length` a genuine Blueprint/KG `mastery_threshold`(0.8 vs 0.7)+`estimated_hours`(6 vs 5) discrepancy resolved toward the KG, MAMR unaffected by coincidence of the ceiling function) + Batch 43 (4, `derivative-exponential`/`derivative-ln`/`implicit-differentiation`/`u-substitution`, all direct children of Batch 42's `chain-rule`/`ftc-part2`; all 4 zero-discrepancy, restarting the streak after Batch 42's arc-length break) + Batch 44 (4, `logarithmic-differentiation`/`related-rates`/`surface-area-integral`/`integration-by-parts`, all gated on a single already-authored prerequisite or two long-authored ones (u-substitution+product-rule); all 4 zero-discrepancy, second consecutive all-4-zero-discrepancy batch; `integration-by-parts` unlocks `math.calc.reduction-formulas`, confirmed matching the live KG exactly) + Batch 45 (4, `reduction-formulas`/`lhopitals-rule`/`mean-value-theorem`/`multivariable-intro`, closing the 7-concept frontier's tightest-coupled subset available after Batch 44, deferring `improper-integrals`/`line-integrals`/`parametric-calculus`; all 4 zero-discrepancy, third consecutive all-4-zero-discrepancy batch) + Batch 46 (4, `increasing-decreasing`/`rolles-theorem`/`improper-integrals`/`partial-derivatives`, closing the 7-concept frontier's tightest-coupled subset available after Batch 45, deferring `line-integrals`/`multiple-integrals`/`parametric-calculus`; all 4 zero-discrepancy, fourth consecutive all-4-zero-discrepancy batch; `partial-derivatives` unlocks `math.calc.gradient`/`math.calc.directional-derivative`/`math.calc.chain-rule-multivariable` at once) + Batch 47 (4, `gradient`/`chain-rule-multivariable`/`local-extrema`/`parametric-calculus`, closing the 6-concept frontier's tightest-coupled subset available after Batch 46, deferring `line-integrals`/`multiple-integrals`; all 4 zero-discrepancy, fifth consecutive all-4-zero-discrepancy batch; `local-extrema` confirmed to substantively cross-reference the already-authored `math.calc.critical-points`, resolving that entry's own deliberately left-open ambiguity via the identical $x^3$ counterexample) + Batch 48 (4, `directional-derivative`/`optimization`/`curve-sketching`/`multivariable-extrema`, closing the 7-concept frontier's tightest-coupled subset available after Batch 47, deferring `line-integrals`/`multiple-integrals`/`vector-fields` (all three needing `math.geom.vectors-3d` or a 15-hour concept); all 4 zero-discrepancy, sixth consecutive all-4-zero-discrepancy batch; two genuine Blueprint-STALENESS findings recorded (not KG discrepancies) — `optimization`'s and `multivariable-extrema`'s Blueprints each claim their `math.opt.*` cross-link sibling has no Blueprint file yet, but both sibling Blueprint files now exist on disk (independence mode correctly retained since neither has an EB entry); `multivariable-extrema`'s MC-3 cross-referenced to `multivariable-intro`'s own MC-1 as the identical 1D-slice-into-2D overgeneralization mechanism). Fresh frontier after Batch 48: 3 candidates ready (`line-integrals`, `multiple-integrals`, `vector-fields` — the exact three deferred from Batch 48's own selection) + Batch 49 (3, `vector-fields`/`line-integrals`/`multiple-integrals`, closing the ENTIRE 3-concept frontier available after Batch 48 with none deferred; all 3 zero-discrepancy, seventh consecutive zero-discrepancy batch; a draft-stage claim that this batch reached DOMAIN CERTIFICATION was caught and corrected before commit — `math.calc` has 76 total concepts, this batch reached 55/76, not 76/76). Fresh frontier after Batch 49: 2 candidates ready (`double-integrals`, `curl-divergence`) + Batch 50 (2, `double-integrals`/`curl-divergence`, closing the ENTIRE 2-concept frontier available after Batch 49 with none deferred; all 2 zero-discrepancy, eighth consecutive zero-discrepancy batch; `curl-divergence`'s MC-3 cross-referenced to the identical necessary-not-sufficient mechanism already documented for `critical-points`' own MC-1 and `concavity`'s own MC-1). Fresh frontier after Batch 50: 3 candidates ready (`triple-integrals`, `surface-integrals`, `greens-theorem`) + Batch 51 (3, `triple-integrals`/`surface-integrals`/`greens-theorem`, closing the ENTIRE 3-concept frontier available after Batch 50 with none deferred; all 3 zero-discrepancy, ninth consecutive zero-discrepancy batch; `surface-integrals`' MC-1 cross-referenced to `double-integrals`' own MC-1 and `triple-integrals`' own MC-2 as a third recurrence of the scaling-factor-omission mechanism; `surface-integrals`' MC-3 and `greens-theorem`'s MC-1 both cross-referenced to `line-integrals`' own reversal rule as instances of the same directional-quantity mechanism). Fresh frontier after Batch 51: 2 candidates ready (`stokes-theorem`, `divergence-theorem`) + Batch 52 (2, `stokes-theorem`/`divergence-theorem`, closing the ENTIRE 2-concept frontier available after Batch 51 with none deferred; all 2 zero-discrepancy, tenth consecutive zero-discrepancy batch). Fresh math.calc frontier after Batch 52: 0 candidates ready — all 14 remaining concepts need a `math.trig`, `math.seq`, or `math.linalg` prerequisite. Same-batch cross-domain excursion (3 concepts: `math.trig.angle-measure`, `math.trig.right-triangle-trig`, `math.seq.sequence`) immediately unblocked `math.calc.sequence-limits` (now ready) + Batch 53 (1, `sequence-limits`, closing the sole ready math.calc candidate, requires `math.calc.limits`+`math.seq.sequence`; resolved and recorded a Blueprint-staleness-adjacent P76_mode finding — the Blueprint's declared "cross-link probe" mode for its `math.seq.convergent` cross-link rests on a Blueprint-file-existence check rather than an EB-entry-existence check, and since `math.seq.convergent` has no EB entry yet, this entry uses independence mode instead, per the Batch 48 `math.opt.*` precedent; zero KG/Blueprint metadata discrepancy otherwise). Batch 54 re-computed the math.calc frontier: still 0 candidates ready (the 13 remaining need `math.trig.trig-functions`, now authored, or the series/convergence family, so a fresh check should be run before the next math.calc batch) + Batch 55 (1, `derivative-trig`, requires `derivative-rules`+`trig-functions`+`squeeze-theorem`, unblocked once `math.trig.trig-functions` was authored in Batch 54 — **closes the original motivating goal of the entire math.trig/math.seq cross-domain excursion begun in Batch 52**; zero Blueprint/KG metadata discrepancy). Fresh frontier after Batch 55: 2 candidates ready (`derivative-inverse-trig` — newly unblocked by `derivative-trig`+`math.trig.inverse-trig`+`math.calc.implicit-differentiation` — `fourier-series-intro`) + Batch 56 (1, `derivative-inverse-trig`, requires `derivative-trig`+`inverse-trig`+`implicit-differentiation`, all long-authored; zero Blueprint/KG metadata discrepancy; the domain's leaf position on this chain — the KG names no further math.calc concept requiring it). Fresh frontier after Batch 56: 1 candidate ready (`fourier-series-intro`, requires `definite-integral`+`math.trig.trig-functions`+`math.seq.series`, all long-authored) + Batch 58 (1, `fourier-series-intro`, closing math.calc's frontier; expert/analyze, 12 estimated hours; a genuine Blueprint-staleness finding on its own `math.fnal.hilbert-space` cross-link — declared "cross-link probe, already authored" but that concept has a Blueprint with no EB entry, so independence mode was used instead, per the established Batch 48/53 precedent). **Fresh frontier after Batch 58: 0 candidates ready**, but NOT deeply parked like math.disc/math.graph — verified per-concept (not assumed): 8 of the 10 remaining are blocked by a single missing prerequisite each, and 2 of those 8 (`math.calc.hyperbolic-derivatives` needs `math.trig.hyperbolic-functions`; `math.calc.trig-integrals` needs `math.trig.product-to-sum`) are blocked by concepts already sitting in this batch's own fresh math.trig frontier — authoring either one this campaign immediately reopens math.calc. The other 6 chain through `math.seq.series-convergence`/`ratio-test` (2), `math.linalg.determinant` (1), or their own prior math.calc siblings (`taylor-series`→`maclaurin-series`/`taylor-remainder`, `trig-integrals`→`trig-substitution`→`partial-fractions`, 3). Largest unstarted mathematics domain (76 concepts, 66 authored). |
+| `math.trig` | 25/25 | **CERTIFIED (2026-09-13) — the seventh domain.** Batch 64 (2, FINAL: `de-moivres-theorem`/`eulers-formula`, both unblocked by `polar-form-complex` (Batch 63); `de-moivres-theorem` also required `math.alg.natural-logarithm`, long-authored; both carried a genuine Blueprint-staleness finding on their own P76 cross-link modes — `de-moivres-theorem` against `math.cx.complex-numbers-analysis`, `eulers-formula` against `math.cx.analytic-functions` — both Blueprint-file-existence mistaken for EB-entry-existence, both corrected via independence mode; `eulers-formula` also carried a genuine Blueprint/KG `unlocks` discrepancy, Blueprint stating "none listed" vs. KG's `math.cx.analytic-functions`, resolved toward the KG). **Batch 63 (1, `polar-form-complex`, unblocked by `math.found.complex-numbers`+`trig-functions`+`math.geom.polar-coordinates`, all long-authored; zero Blueprint/KG metadata discrepancy). Fresh frontier after Batch 63: 2 candidates ready (`de-moivres-theorem`, `eulers-formula` — both newly unblocked by `polar-form-complex`) — only 2 concepts remain before the domain reaches DOMAIN CERTIFICATION.** **Batch 62 (1, `trig-equations`, unblocked by `trig-identities`+`inverse-trig`, both long-authored; carries all FOUR of its Blueprint's misconceptions — ONLY-PRINCIPAL-VALUE/WRONG-PERIOD-MULTIPLE/EXTRANEOUS-UNCHECKED/INTERVAL-OVERSHOOT, independently classified since it lacks a birth-type column; zero Blueprint/KG metadata discrepancy — the Blueprint's vague "Unlocks: Advanced sinusoidal modeling applications" prose is correctly not treated as a discrepancy against the KG's empty `unlocks` field, per the Batch 61 `half-angle-formulas` precedent). Fresh frontier after Batch 62: 1 candidate ready (`polar-form-complex`, requires `math.found.complex-numbers`+`trig-functions`+`math.geom.polar-coordinates`, all long-authored).** **OPENED (2026-09-12, cross-domain excursion from math.calc)** — Batch 52 (2, `angle-measure`/`right-triangle-trig`, the domain's first two entries, a direct chain toward `math.trig.unit-circle`/`math.trig.trig-functions` needed to unblock `math.calc.derivative-trig`) + Batch 53 (2, `unit-circle`/`degree-radian-conversion`, both unblocked by Batch 52's entries; zero KG/Blueprint metadata discrepancy for `unit-circle`, one genuine `unlocks`-field discrepancy for `degree-radian-conversion` — the Blueprint names 3 forward consumers the live KG's `unlocks` field doesn't list — resolved toward the KG) + Batch 54 (2, `reference-angles`/`trig-functions`, both unblocked by Batch 53's `unit-circle`; zero KG/Blueprint metadata discrepancy for both; `trig-functions`' cross-link `math.func.periodic-function` genuinely incorporated as an already-authored Transfer Connection) + Batch 55 (2, `trig-identities`/`inverse-trig`, both unblocked by Batch 54's `trig-functions`; zero KG/Blueprint metadata discrepancy for both; `inverse-trig` substantively incorporates the already-authored `math.func.inverse-functions`/`math.func.injectivity` as direct Transfer Connections, and its own cross-link to `math.calc.derivative-inverse-trig` is recorded in independence mode since that concept is not yet authored) + Batch 56 (3, `basic-ratios`/`law-of-sines`/`law-of-cosines`, all three unblocked by the already-authored `math.trig.right-triangle-trig`, sharing that single prerequisite; `basic-ratios` carries one genuine `unlocks`-field discrepancy — its Blueprint names `math.trig.special-angles`, which genuinely exists in the KG and genuinely lists `basic-ratios` in its own `requires`, but that relationship is not mirrored onto `basic-ratios`' own `unlocks` field — resolved toward the KG; `law-of-sines`/`law-of-cosines` both zero-discrepancy) + Batch 57 (4, `special-angles`/`amplitude-period-phase`/`reciprocal-identities`/`sum-difference-formulas`; `special-angles` unblocked by `basic-ratios`, closing that Batch 56 asymmetry; `amplitude-period-phase` unblocked by `trig-functions`, carries its own analogous genuine `unlocks`-field discrepancy against `math.trig.trig-graphs`, resolved toward the KG; `reciprocal-identities` and `sum-difference-formulas` both unblocked by `trig-identities`, both zero-discrepancy; `sum-difference-formulas` unlocks `math.trig.double-angle-formulas` and flags a genuine content-overlap risk against `trig-identities`' own LO3 for whoever authors that concept next). Fresh frontier computed: 7 candidates ready (`trig-graphs` — newly unblocked by `amplitude-period-phase` — `pythagorean-identities`, `double-angle-formulas`, `product-to-sum` — the last two newly unblocked by `sum-difference-formulas` — `trig-equations`, `polar-form-complex`, `hyperbolic-functions`). Also corrected a pre-existing staleness bug found while updating this row: two stale duplicate rows further down this table still read `math.trig 0/25 not started` and `math.seq 0/21 not started`, predating the Batch 52 excursion that opened both domains — removed, since the correct up-to-date rows already exist here and immediately below + Batch 58 (2, `trig-graphs`/`pythagorean-identities`; `trig-graphs` unblocked by `amplitude-period-phase`, resolving that entry's own `unlocks`-field asymmetry from Batch 57; `pythagorean-identities` unblocked by `trig-identities`+`unit-circle`, carrying a genuine content-overlap finding against `trig-identities`' own already-derived Pythagorean forms — this entry's value-add framed explicitly as identity-selection/sign-resolution application skill, not re-derivation). Fresh frontier after Batch 58: 5 candidates ready (`double-angle-formulas`, `product-to-sum` — both via `sum-difference-formulas` — `trig-equations`, `polar-form-complex`, `hyperbolic-functions`) + Batch 59 (2, `product-to-sum`/`hyperbolic-functions`, deliberately selected from that 5-candidate frontier specifically to reopen `math.calc` per Batch 58's own forward-planning note — confirmed to work, see the `math.calc` row above; `product-to-sum` completes the product-to-sum family `sum-difference-formulas` began and adds the reverse sum-to-product direction via genuine substitution; `hyperbolic-functions` defines $\sinh,\cosh,\tanh$ from `math.alg.exponential-function`'s own $e^x$ with `math.trig.trig-functions` as a constant point of contrast; both zero KG/Blueprint metadata discrepancy, including on their own cross-link's correctly-identified unauthored status). Fresh frontier after Batch 59: 3 candidates ready (`double-angle-formulas`, `trig-equations`, `polar-form-complex`) + Batch 60 (1, `double-angle-formulas`, unblocked by `sum-difference-formulas`, closing the content-overlap risk that entry's own Batch 57 Curriculum Feedback flagged for whoever authored this concept — value-add framed as the rigorous three-form derivation and efficiency-based form selection, not re-teaching `trig-identities`'s own informal LO3 substitution; zero KG/Blueprint metadata discrepancy). Fresh frontier after Batch 60: 3 candidates ready (`half-angle-formulas` — newly unblocked — `trig-equations`, `polar-form-complex`) + Batch 61 (1, `half-angle-formulas`, unblocked by `double-angle-formulas`; derives both half-angle formulas by reading the power-reducing identities backward via $2\alpha=\theta$; zero KG/Blueprint metadata discrepancy). Fresh frontier after Batch 61: 2 candidates ready (`trig-equations`, `polar-form-complex`). |
+| `math.seq` | 14/21 | **Batch 64 (1, `divergence-test`, unblocked by `series-convergence` (Batch 63), zero Blueprint/KG metadata discrepancy; its own MC-1 is the identical mechanism as `series-convergence`'s own MC-1, cross-referenced). Fresh frontier after Batch 64: 6 candidates ready (`alternating-series`, `comparison-test`, `harmonic-series`, `integral-test`, `ratio-test`, `root-test`).** **Batch 63 (1, `series-convergence`, unblocked by `partial-sums`+`convergent`, both long-authored; zero Blueprint/KG metadata discrepancy; this entry's own `unlocks` field, `math.calc.power-series`, is a real forward relationship that reopens `math.calc`'s frontier next batch, closing the standing note left at the end of Batch 62). Fresh frontier after Batch 63: 7 candidates ready (`alternating-series`, `comparison-test`, `divergence-test`, `harmonic-series`, `integral-test`, `ratio-test`, `root-test` — all newly unblocked by `series-convergence`).** **Batch 62 (2, `recursive-sequences`/`infinite-geometric-series`; `recursive-sequences` unblocked by `sequence`+`math.found.proof-by-induction`, carrying two genuine Blueprint/KG metadata discrepancies (estimated_hours 5 vs 8, unlocks "none" vs `math.disc.recurrence-relation`) plus a P76_mode staleness correction — the Blueprint's declared cross-link-probe mode against `math.disc.recurrence-relation` was verified via `ls` to be stale (that concept has no EB entry), so independence mode was used instead, all resolved toward the KG/filesystem-verified reality; `infinite-geometric-series` unblocked by `geometric-series`, zero Blueprint/KG metadata discrepancy). Fresh frontier after Batch 62: 1 candidate ready (`series-convergence`, requires `partial-sums`+`convergent`, both long-authored).** **OPENED (2026-09-12, cross-domain excursion from math.calc)** — Batch 52 (1, `sequence`, the domain's first entry, immediately unblocking `math.calc.sequence-limits`) + Batch 54 (2, `series`/`convergent`, both unblocked by `sequence`; `series` carries one genuine `unlocks`-field discrepancy, KG followed; `convergent` genuinely implements cross-link-probe mode against the already-authored `math.calc.limits`, resolving the Batch 53 forward note left by `math.calc.sequence-limits`) + Batch 55 (1, `arithmetic-sequence`, unblocked by `sequence`; zero KG/Blueprint metadata discrepancy, but a genuine forward-reference gap recorded — the Blueprint repeatedly cites `math.seq.geometric-sequence`'s own not-yet-authored Examples 2/3 as parallel content, and this entry reconstructs the needed contrast independently) + Batch 58 (1, `geometric-sequence`, unblocked by `sequence`; zero KG/Blueprint discrepancy; **resolves the exact forward-reference gap `arithmetic-sequence`'s own entry recorded** — both cited Examples (the decay contrast, the identical `$1000`-at-5%-interest computation) are now genuinely present here). Fresh frontier computed: 5 candidates ready (`recursive-sequences`, `divergent-sequence`, `partial-sums`, `arithmetic-series`, `geometric-series` — the last newly unblocked by `geometric-sequence`) + Batch 59 (2, `partial-sums`/`geometric-series`, selected from that 5-candidate frontier; `partial-sums` promotes $\{S_n\}$ to its own object of study, resolving the term-recovery relationship $a_n=S_n-S_{n-1}$; `geometric-series` derives the finite/infinite sum formulas `math.seq.series` had deferred, and its own Curriculum Feedback resolves `arithmetic-sequence`'s Batch 55 forward-reference gap by confirming it actually pointed at `geometric-sequence`, not this concept; both zero KG/Blueprint metadata discrepancy). Fresh frontier after Batch 59: 6 candidates ready (`recursive-sequences`, `divergent-sequence`, `arithmetic-series`, `infinite-geometric-series` and `series-convergence` and `telescoping-series` — the last three newly unblocked by `geometric-series`/`partial-sums`) + Batch 60 (1, `divergent-sequence`, unblocked by `convergent`; defines divergence as the exact logical negation of convergence, taxonomizes the three divergence types, and resolves the bounded-does-not-imply-convergent misconception via the Monotone Convergence Theorem's contrapositive; zero KG/Blueprint metadata discrepancy). Fresh frontier after Batch 60: 5 candidates ready (`recursive-sequences`, `arithmetic-series`, `infinite-geometric-series`, `series-convergence`, `telescoping-series`) + Batch 61 (2, `arithmetic-series`/`telescoping-series`; `arithmetic-series` derives the Gauss pairing sum formula, unblocked by `arithmetic-sequence`+`series`; `telescoping-series` derives the cancellation collapse $S_n=b_1-b_{n+1}$, unblocked by `partial-sums`; both zero KG/Blueprint metadata discrepancy). Fresh frontier after Batch 61: 3 candidates ready (`recursive-sequences`, `infinite-geometric-series`, `series-convergence`). |
 | `math.linalg` | 0/61 | not started |
-| `math.alg` | 11/59 | **IN PROGRESS** — Wave 1 (levels 0–2) authored 2026-08-12 |
+| `math.alg` | 59/59 | **CERTIFIED** (2026-09-11) — the fifth domain, closed this session. Wave 1 (11, levels 0–2, 2026-08-12) + Wave 2 (1, `like-terms`, 2026-08-12) + Wave 3 (3, `simplification`/`polynomial-operations`/`radicals`, 2026-09-11) + Wave 4 (5, `linear-equation-1var`/`polynomial-division`/`fractional-exponent`/`simplifying-radicals`/`radical-equations`, 2026-09-11) + Wave 5 (5, `inequality-1var`/`absolute-value-equations`/`linear-equation-2var`/`remainder-theorem`/`rationalizing-denominators`, 2026-09-11) + Wave 6 (3, `inequality-2var`/`system-linear-equations`/`factor-theorem`, 2026-09-11) + Wave 7 (4, `substitution-method`/`elimination-method`/`system-3var`/`factoring`, 2026-09-11) + Wave 8 (3, `factoring-gcf`/`factoring-special`/`rational-expressions`, 2026-09-11) + Wave 9 (4, `factoring-trinomials`/`rational-expressions-addition`/`rational-expressions-multiplication`/`rational-equations`, 2026-09-11) + Wave 10 (1, `quadratic-equation`, 2026-09-11) + Wave 11 (2, `completing-the-square`/`polynomial-roots`, 2026-09-11) + Wave 12 part 1 (1, `quadratic-formula`, 2026-09-11) + Wave 12 part 2 (2, `discriminant`/`rational-root-theorem`, 2026-09-11) + Wave 12 part 3 (3, `fundamental-theorem-algebra`/`polynomial-inequality`/`vietas-formulas`, 2026-09-11) + Wave 13 (2, `complex-polynomial-roots`/`rational-inequality`, 2026-09-11) + Batch 15 (1, `exponential-function`, 2026-09-11) + Batch 16 (2, `logarithm`/`exponential-equations`, 2026-09-11) + Batch 17 (3, `binomial-theorem`/`logarithm-properties`/`natural-logarithm`, 2026-09-11) + Batch 18 (3, `change-of-base`/`logarithmic-equations`/`pascals-triangle`, 2026-09-11) |
 | `math.de` | 0/56 | not started |
 | `math.prob` | 0/49 | not started |
 | `math.stats` | 0/40 | not started |
 | `math.abst` | 0/37 | not started |
-| `math.disc` | 0/32 | not started |
+| `math.disc` | 22/32 | **REOPENED (2026-09-13) — Batch 63 (2, `recurrence-relation`/`asymptotic-notation`, both reopened once `math.seq`/`math.calc` advanced far enough — `recurrence-relation` requires `math.seq.sequence`+`math.alg.polynomial`, both long-authored; `asymptotic-notation` requires `math.calc.limits`+`math.disc.counting-principles`, both long-authored; `recurrence-relation` carries a genuine Blueprint-staleness finding on its own P76 cross-link mode — declared cross-link-probe against `math.de.ode`, verified via `ls` that `math.de.ode` has no EB entry despite its Blueprint file existing, so independence mode was used instead, per the established Batch 48/53/58/62 precedent; both zero KG/Blueprint metadata discrepancy on all other fields). Fresh frontier after Batch 63: 5 candidates ready (`catalan-numbers`, `divide-conquer-recurrence`, `generating-functions`, `linear-recurrence`, `stirling-numbers` — all newly unblocked by `recurrence-relation`).** **IN PROGRESS (standalone campaign since math.alg CERTIFIED)** — Batch 14 (1, `counting-principles`, 2026-09-11) + Batch 15 (1, `permutations`, 2026-09-11) + Batch 16 (1, `combinations`, 2026-09-11) + Batch 19 (5, `combinatorics`/`pigeonhole`/`stars-bars`/`inclusion-exclusion`/`binomial-theorem`, 2026-09-11) + Batch 20 (3, `derangements`/`graph`/`propositional-logic`, 2026-09-11) + Batch 21 (5, `boolean-circuits`/`graph-coloring`/`graph-connectivity`/`graph-types`/`predicate-logic-disc`, 2026-09-11) + Batch 22 (3, `euler-hamiltonian`/`graph-trees`/`planar-graph`, 2026-09-11) + Batch 23 (1, `spanning-tree`, 2026-09-11, closing the `graph-trees → spanning-tree` chain). 0 topologically-ready candidates remain — the remaining 12 concepts (`algorithm-complexity`, `asymptotic-notation`, `catalan-numbers`, `complexity-classes`, `divide-conquer-recurrence`, `egf`, `generating-functions`, `graph-representation`, `linear-recurrence`, `ogf`, `recurrence-relation`, `stirling-numbers`) all require prerequisites outside math.disc (`math.calc.limits`, `math.seq.sequence`, `math.seq.series`, `math.linalg.matrix` — none yet authored); the next step is a cross-domain excursion decision, not a bounded step within math.disc. |
 | `math.cx` | 0/31 | not started |
 | `math.real` | 0/30 | not started |
-| `math.func` | 0/29 | not started |
-| `math.trig` | 0/25 | not started |
+| `math.func` | 29/29 | **CERTIFIED (2026-09-13)** — the sixth domain. Batch 14 (1, `function-concept`, 2026-09-11) + Batch 28 (4, `domain-range`/`function-notation`/`injectivity`/`surjectivity`, 2026-09-12) + Batch 29 (4, `function-operations`/`composition`/`monotonic-function`/`bijection`, 2026-09-12) + Batch 30 (4, `inverse-functions`/`graph-of-function`/`real-valued-function`/`linear-function`, 2026-09-12) + Batch 31 (4, `zero-of-function`/`even-odd-functions`/`transformations-functions`/`periodic-function`, 2026-09-12) + Batch 32 (4, `quadratic-function`/`exponential-function`/`logarithmic-function`/`piecewise-function`, 2026-09-12) + Batch 33 (3, `vertex-form`/`polynomial-function`/`step-function`, 2026-09-13) + Batch 34 (3, `end-behavior`/`rational-function`/`rational-root`, 2026-09-13) + Batch 35 (2, FINAL: `horizontal-asymptote`/`vertical-asymptote`, 2026-09-13). |
 | `math.top` | 0/23 | not started |
-| `math.seq` | 0/21 | not started |
 | `math.fnal` | 0/18 | not started |
 | `math.num` | 0/16 | not started |
 | `math.opt` | 0/16 | not started |
-| `math.graph` | 0/16 | not started |
+| `math.graph` | 13/16 | **REOPENED (2026-09-13, discovered during Batch 64's tracking update) — `math.graph.shortest-path` requires `math.graph.graph`+`math.disc.asymptotic-notation`, and `asymptotic-notation` was authored in Batch 63, so this concept is now topologically ready. Not yet authored — flagged for a future batch.** **PARKED** (opened 2026-09-12) — Batch 24 (3, `graph`/`tree`/`minimum-spanning-tree`, 2026-09-12) + Batch 25 (4, `connectivity`/`eulerian-circuit`/`hamiltonian-cycle`/`graph-coloring`, 2026-09-12) + Batch 26 (3, `graph-invariants`/`graph-operations`/`matching`, 2026-09-12) + Batch 27 (3, `maximum-flow`/`ramsey-theory`/`extremal-graph-theory`, 2026-09-12), a genuinely deeper-formalism domain paralleling several already-authored `math.disc` graph-theory entries. The domain's remaining 3 concepts (`shortest-path`, `algebraic-graph-theory`, `random-graph`) each need a cross-domain prerequisite outside math.graph that is not yet authored (`math.disc.asymptotic-notation`, `math.linalg.eigenvalues`, `math.prob.probability-axioms` respectively) — 0 topologically-ready candidates remain within math.graph itself. |
 | `math.cat` | 0/15 | not started |
 | `math.meas` | 0/13 | not started |
 
-Four domains certified plus math.alg in progress, 256 of 908. The four certified domains are the
-graph's foundation layer; every remaining domain draws on at least one of
-them, so the prerequisite debt for the remaining 663 concepts is now
-substantially lower than the raw count suggests.
+**Seven domains certified** (math.found, math.geom, math.arith, math.nt, math.alg, math.func,
+math.trig, the last certified 2026-09-13 in Batch 64); math.disc REOPENED (Batch 63) and
+math.graph REOPENED (discovered Batch 64, via `math.disc.asymptotic-notation`'s own Batch-63
+authoring); math.calc/math.seq the active standalone campaigns, 478 of 908. The seven certified
+domains are the graph's
+foundation layer; every remaining domain draws on at least one of them, so the prerequisite debt
+for the remaining 580 concepts is now substantially lower than the raw count suggests. math.disc
+and math.func were originally opened as small, deliberately bounded cross-domain excursions out of
+math.alg (per the established `math.nt.divisibility`/`math.geom` precedent); with math.alg
+CERTIFIED, this program elected to continue math.disc as a full standalone domain campaign
+(Batches 19-23) rather than opening a fresh domain, since it was already furthest along. math.disc
+is at 20/32 — the graph-theory subtree's `graph-trees → spanning-tree` chain is fully closed
+(`graph`, `graph-coloring`, `graph-connectivity`, `graph-types`, `euler-hamiltonian`,
+`graph-trees`, `planar-graph`, `spanning-tree`) — with 0 topologically-ready `math.disc` candidates
+remaining; the domain's other 12 unauthored concepts (algorithm complexity/asymptotic notation,
+generating functions and their variants, recurrence relations, Catalan/Stirling numbers) all
+require prerequisites outside math.disc entirely (`math.calc.limits`, `math.seq.sequence`,
+`math.seq.series`, `math.linalg.matrix`, none yet authored) and form largely separate subtrees not
+yet opened. Rather than open one of THOSE, Batch 24 opened `math.graph` instead — every one of
+`math.disc`'s own graph-theory entries (`graph`, `graph-connectivity`, `graph-trees`,
+`euler-hamiltonian`, `graph-coloring`) had already named a `math.graph` sibling as a genuine
+Blueprint-exists-no-EB-yet cross-link, so `math.graph` was immediately ready with strong Blueprint
+grounding and zero new prerequisite debt. math.graph is now 13/16 (`graph`, `tree`,
+`minimum-spanning-tree`, `connectivity`, `eulerian-circuit`, `hamiltonian-cycle`,
+`graph-coloring`, `graph-invariants`, `graph-operations`, `matching`, `maximum-flow`,
+`ramsey-theory`, `extremal-graph-theory` — Batch 27 closed all 3 concepts left ready after
+Batch 26), now PARKED: its remaining 3 concepts (`shortest-path`, `algebraic-graph-theory`,
+`random-graph`) each require a cross-domain prerequisite outside math.graph that is not yet
+authored (`math.disc.asymptotic-notation`, `math.linalg.eigenvalues`,
+`math.prob.probability-axioms` respectively). With BOTH math.disc and math.graph now parked,
+Batch 28 computed the topologically-ready frontier across ALL mathematics domains fresh: rather
+than opening any of a dozen entirely-unstarted domains (each with only 1-2 root-node candidates
+ready), `math.func` — previously parked at 1/29 as a math.alg-serving excursion — turned out to
+already have 13 concepts topologically ready, all gated only on the already-authored
+`math.func.function-concept`. Resumed as a full standalone domain campaign. math.func is now
+21/29 (`function-concept`, `domain-range`, `function-notation`, `injectivity`, `surjectivity`,
+`function-operations`, `composition`, `monotonic-function`, `bijection`, `inverse-functions`,
+`graph-of-function`, `real-valued-function`, `linear-function`, `zero-of-function`,
+`even-odd-functions`, `transformations-functions`, `periodic-function`, `quadratic-function`,
+`exponential-function`, `logarithmic-function`, `piecewise-function` — Batch 32 closed the
+entire 4-concept frontier available after Batch 31), then Batch 33 (3 more —
+`vertex-form`, `polynomial-function`, `step-function`, closing the entire 3-concept
+frontier available after Batch 32) brought math.func to 24/29, then Batch 34 (3 more —
+`end-behavior`, `rational-function`, `rational-root`, closing the entire 3-concept
+frontier available after Batch 33) brought math.func to 27/29, then Batch 35 (the final 2 —
+`horizontal-asymptote`, `vertical-asymptote`) brought math.func to **29/29 — DOMAIN
+CERTIFIED**, the sixth after math.found/math.geom/math.arith/math.nt/math.alg. With
+math.func certified and math.disc/math.graph still parked, Batch 35 also computed the
+frontier fresh across ALL mathematics domains: 14 candidates spread across 11 different
+unstarted domains, none clustering. `math.calc` — the largest unstarted domain at 76
+concepts — was selected: its sole ready candidate, `math.calc.limits` (the domain's entry
+node), was verified to unblock 7 further `math.calc` concepts at once
+(`derivative-intro`, `limits-at-infinity`, `riemann-sums`, `one-sided-limits`,
+`parametric-curves`, `continuity`, `limit-laws`) — the single highest-leverage available
+move. `math.calc` opened at 1/76. Batch 36 then authored 4 of those 7 (`one-sided-limits`,
+`limit-laws`, `limits-at-infinity`, `continuity` — the four most tightly-coupled to `limits`
+itself), deferring `derivative-intro`, `riemann-sums`, and `parametric-curves` to a future
+batch, bringing `math.calc` to 5/76. A fresh frontier check after Batch 36 found 6 new
+candidates ready (`continuity-types`, `ivt`, `derivative-intro`, `parametric-curves`,
+`riemann-sums`, `squeeze-theorem`). Batch 37 authored 4 of those 6
+(`continuity-types`, `ivt`, `derivative-intro` — the domain's central payoff concept —
+`squeeze-theorem`), deferring `parametric-curves` and `riemann-sums` (each needing a
+prerequisite set less tightly coupled to the limits/continuity chain), bringing
+`math.calc` to 9/76. A fresh frontier check after Batch 37 found 3 candidates ready
+(`derivative-definition`, `parametric-curves`, `riemann-sums`) — the ENTIRE frontier
+available at that point. Batch 38 authored all 3, closing the frontier completely with
+none deferred, bringing `math.calc` to 12/76. Notably, none of the three carried a
+Blueprint/KG metadata discrepancy — the first `math.calc` batch this campaign where the
+Blueprint's stated unlocks/cross_links matched the live KG's own fields exactly for
+every concept authored. A fresh frontier check after Batch 38 found 8 candidates ready
+(`definite-integral`, `derivative-rules`, `differentiability`, `lhopitals-rule`,
+`line-integrals`, `linearization`, `mean-value-theorem`, `multivariable-intro`). Batch 39
+authored 4 sharing the tightest single-prerequisite coupling to `derivative-definition`
+(`definite-integral`, `derivative-rules`, `differentiability`, `linearization`),
+deferring the 4 two-prerequisite/cross-domain candidates, bringing `math.calc` to 16/76.
+This batch continued the zero-discrepancy pattern — all 4 Blueprints' stated
+unlocks/cross_links matched the live KG exactly. A fresh frontier check after Batch 39
+found 13 candidates ready (`antiderivatives`, `arc-length`, `chain-rule`,
+`critical-points`, `ftc-part1`, `higher-order-derivatives`, `improper-integrals`,
+`integral-area`, `lhopitals-rule`, `line-integrals`, `mean-value-theorem`,
+`multivariable-intro`, `product-rule`). Batch 40 authored the 4 sharing the
+tightest single-prerequisite coupling to `derivative-rules` (`antiderivatives`,
+`critical-points`, `higher-order-derivatives`, `product-rule`), deferring
+`arc-length`/`chain-rule`/`ftc-part1`/`improper-integrals`/`integral-area`/
+`lhopitals-rule`/`line-integrals`/`mean-value-theorem`/`multivariable-intro`,
+bringing `math.calc` to 20/76. A fresh frontier check after Batch 40 found 11
+candidates ready (`arc-length`, `chain-rule`, `concavity`, `ftc-part1`,
+`improper-integrals`, `integral-area`, `lhopitals-rule`, `line-integrals`,
+`mean-value-theorem`, `multivariable-intro`, `quotient-rule`). Batch 41
+authored 4 of those 11 (`concavity`/`quotient-rule`/`integral-area`/`ftc-part1`
+— each single-prerequisite or a two-prerequisite pair already fully authored),
+deferring `arc-length`/`chain-rule`/`improper-integrals`/`lhopitals-rule`/
+`line-integrals`/`mean-value-theorem`/`multivariable-intro`, bringing `math.calc`
+to 24/76. A fresh frontier check after Batch 41 found 9 candidates ready
+(`arc-length`, `chain-rule`, `ftc-part2`, `improper-integrals`, `lhopitals-rule`,
+`line-integrals`, `mean-value-theorem`, `multivariable-intro`,
+`volume-revolution`). Batch 42 authored `volume-revolution` (single-prerequisite
+on `integral-area`), `ftc-part2` (two prerequisites, `ftc-part1`+`antiderivatives`,
+both already authored), `arc-length` (two prerequisites, `definite-integral`+
+`derivative-rules`, both long-authored), and `chain-rule` (two prerequisites,
+`derivative-rules`+`math.func.composition`, both long-authored) — closing the
+entire 9-concept frontier's tightest-coupled subset, deferring
+`improper-integrals`/`lhopitals-rule`/`line-integrals`/`mean-value-theorem`/
+`multivariable-intro`, bringing `math.calc` to 28/76. A fresh frontier check
+after Batch 42 found 11 candidates ready (`derivative-exponential`,
+`derivative-ln`, `implicit-differentiation` — newly unblocked by `chain-rule` —
+`improper-integrals`, `lhopitals-rule`, `line-integrals`, `mean-value-theorem`,
+`multivariable-intro`, `parametric-calculus`, `surface-area-integral`,
+`u-substitution` — the last newly unblocked by `ftc-part2`). Batch 43 authored
+all 4 direct children of `chain-rule`/`ftc-part2` (`derivative-exponential`,
+`derivative-ln`, `implicit-differentiation`, `u-substitution`), deferring
+`improper-integrals`/`lhopitals-rule`/`line-integrals`/`mean-value-theorem`/
+`multivariable-intro`/`parametric-calculus`/`surface-area-integral`, bringing
+`math.calc` to 32/76. A fresh frontier check after Batch 43 found 10
+candidates ready (`improper-integrals`, `integration-by-parts` — newly
+unblocked by `u-substitution` — `lhopitals-rule`, `line-integrals`,
+`logarithmic-differentiation` — newly unblocked by `derivative-ln` —
+`mean-value-theorem`, `multivariable-intro`, `parametric-calculus`,
+`related-rates` — newly unblocked by `implicit-differentiation` —
+`surface-area-integral`).
 
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
 | english | 216 | 216 | **100.00% COMPLETE (2026-08-11)** | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) — every English KG concept now has a full Educational Brain entry |

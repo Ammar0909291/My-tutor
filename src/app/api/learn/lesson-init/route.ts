@@ -28,6 +28,12 @@
  */
 
 import { NextResponse } from 'next/server'
+// PCD-004. Statically imported (unlike most of this handler's helpers, which
+// are dynamic) because the session-pointer write sits on the critical path of
+// every lesson open and must not be able to fail for a module-resolution
+// reason after the per-user pointer has already moved.
+import { writeSnapshotDelta, readSnapshotVersion as readSnapshotVersionAtIngress } from '@/lib/db/snapshotWrite'
+import { sessionLessonPointerDelta, sessionTabOwnerDelta } from '@/lib/teaching/sessionLessonPointer'
 import { auth } from '@/auth'
 import { prisma } from '@/lib/prisma'
 import { z } from 'zod'
@@ -47,6 +53,8 @@ const schema = z.object({
   totalLessons: z.number().int().positive().optional(),
   completedLessons: z.array(z.number()).optional(),
   teachingLanguage: z.enum(['en', 'ru', 'hi']).default('en'),
+  // PCD-004A: refreshes this tab's claim on the session (see sessions/route).
+  tabId: z.string().min(1).max(64).optional(),
 })
 
 const HISTORY_LIMIT = 20
@@ -75,7 +83,7 @@ export async function POST(req: Request) {
     }
     const {
       sessionId, mode, lessonTitle, lessonGoal, lessonOrder, topicSlug,
-      unitTitle, totalLessons, completedLessons, teachingLanguage,
+      unitTitle, totalLessons, completedLessons, teachingLanguage, tabId,
     } = parsed.data
 
     // Load the session (verify ownership + get history)
@@ -124,6 +132,12 @@ export async function POST(req: Request) {
     // `true` when there was nothing to write (no topicSlug) — that is not a
     // failed switch, it is a caller that did not ask for one.
     let activeLessonPersisted = true
+    // PCD-004: the snapshot version as this request last observed it. The
+    // session-scoped pointer write below advances it, so the episode-reset
+    // write near the end of this handler must continue from the cursor rather
+    // than from the version read at request start — otherwise every lesson
+    // open would spend its single retry on a conflict with itself.
+    let snapshotVersionCursor = readSnapshotVersionAtIngress(learnSession.contextSnapshot)
     if (topicSlug) {
       activeLessonPersisted = false
       const subjectCode = learnSession.subject.slug
@@ -204,6 +218,46 @@ export async function POST(req: Request) {
             )
             await sleep(ACTIVE_LESSON_WRITE_BACKOFF_MS[attempt - 1])
           }
+        }
+
+        // ── PCD-004: the SESSION-scoped pointer ───────────────────────────
+        //
+        // The upsert above is per-USER (StudentProgress is
+        // @@unique([userId, subjectCode])), so two concurrent sessions on one
+        // account overwrite each other's "current lesson" and each then
+        // teaches the other's lesson. This records the same fact at the grain
+        // that actually owns it — the session doing the opening — through the
+        // existing versioned writer, with no schema change.
+        //
+        // WRITTEN HERE, beside the per-user write, and deliberately NOT folded
+        // into the episode-reset write near the end of this handler. That
+        // write happens AFTER the model call; if the model failed and this
+        // handler threw, the per-user pointer would have moved while the
+        // session pointer still named the PREVIOUS lesson — and since the
+        // session pointer OUTRANKS the per-user one, the next chat turn would
+        // teach the old lesson. That is worse than the defect being fixed, so
+        // the two pointers move together or not at all.
+        //
+        // The version cursor is advanced on success so the later write
+        // continues from here instead of conflicting with this one.
+        const pointerWrite = await writeSnapshotDelta(prisma, {
+          sessionId,
+          expectedVersion: snapshotVersionCursor,
+          // Opening a lesson is activity, so the tab's claim is refreshed in
+          // the same merge as the pointer it is already writing.
+          delta: { ...sessionLessonPointerDelta(topicSlug), ...sessionTabOwnerDelta(tabId, new Date()) },
+        })
+        if (pointerWrite.applied) {
+          if (typeof pointerWrite.version === 'number') snapshotVersionCursor = pointerWrite.version
+        } else {
+          // Honest reporting (requirement 7): the pointer did NOT fully move,
+          // so the response must not claim it did. The lesson is still served
+          // — resolution falls back to the per-user field, i.e. exactly the
+          // pre-PCD-004 behaviour — but the divergence stays attributable.
+          activeLessonPersisted = false
+          console.warn('[lesson-init] session lesson pointer not applied', {
+            sessionId, conflicted: pointerWrite.conflicted, error: pointerWrite.error,
+          })
         }
       } catch (err) {
         // Still non-fatal — the learner receives their lesson either way. But
@@ -670,7 +724,8 @@ export async function POST(req: Request) {
       const { clearEpisodeForLessonOpen } = await import('@/lib/teaching/sessionLifecycle')
       const { clearVisualSessionForNewClientView } = await import('@/lib/teaching/visual/session')
       const { clearTransientStateForNewAttempt } = await import('@/lib/teaching/attemptIsolation')
-      const { writeSnapshotDelta, readSnapshotVersion } = await import('@/lib/db/snapshotWrite')
+      // PCD-004: `writeSnapshotDelta` is now statically imported above; only
+      // the version source changes here — see snapshotVersionCursor.
       // P3, extended to the opening turn: this endpoint's own question was
       // never folded into the anti-repetition ledger, so the chat route's
       // first real turn had nothing to quote in its "DO NOT REPEAT" prompt
@@ -697,7 +752,9 @@ export async function POST(req: Request) {
       // and of what it deliberately leaves alone.
       await writeSnapshotDelta(prisma, {
         sessionId,
-        expectedVersion: readSnapshotVersion(learnSession.contextSnapshot),
+        // PCD-004: the cursor, not the ingress version — the session-pointer
+        // write earlier in this handler may already have advanced it.
+        expectedVersion: snapshotVersionCursor,
         delta: {
           ...clearEpisodeForLessonOpen(),
           ...clearVisualSessionForNewClientView(),

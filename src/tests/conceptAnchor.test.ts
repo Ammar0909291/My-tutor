@@ -102,3 +102,60 @@ describe('conceptAnchor', () => {
     })
   })
 })
+
+// ENG-D08 / ENG-D22 — the bare example request must be grounded to the anchored
+// concept. Both episodes were triggered by a request that named no topic at all
+// ("give me an example" / "show me an example please") and were answered with an
+// example from another subject (Python) and an adjacent sub-domain (poetry meter
+// inside a drama lesson). Every real detector returns null on those messages, so
+// the lever is this block. These cases pin the rule's presence and, just as
+// importantly, that it did not reintroduce the steer-back regression this block's
+// own history records.
+describe('ENG-D08/D22 — example requests are grounded to the anchored concept', () => {
+  const anchor = buildConceptAnchor(
+    'eng.vocab.word-formation-processes',
+    'Word Formation Processes',
+    'Recognise derivation, compounding, conversion, blending and clipping',
+    'Vocabulary',
+  )!
+  const block = buildConceptAnchorBlock(anchor)
+
+  it('states that an example must be an example OF the anchored concept', () => {
+    expect(block).toContain('must be an example OF "Word Formation Processes"')
+  })
+
+  it('names the bare request shapes that triggered both measured episodes', () => {
+    expect(block).toContain('give me an example')
+    expect(block).toContain('show me an example')
+  })
+
+  it('forbids the two measured pivots: another subject, another sense of a word', () => {
+    expect(block).toMatch(/never read it as a cue to switch subject/i)
+    expect(block).toMatch(/different sense of a word that happens to appear in your own explanation/i)
+  })
+
+  it('does NOT reintroduce the steer-back rule this block deliberately removed', () => {
+    // The removed rule answered an off-topic question in 1-2 sentences and
+    // announced a return. Measured cost: 33% of turns steered away from what
+    // the learner had just asked. The new rule must not resurrect any of it.
+    expect(block).not.toMatch(/1[–-]2 sentences/i)
+    expect(block).not.toMatch(/belongs to a different topic/i)
+    // The removed rule's actual signature is the MID-QUESTION steer-back
+    // ("Good question — now, back to <lesson>"). A bare /back to/ would also
+    // match the surviving, correct clause "Come back to this concept once they
+    // say they are satisfied", which is a return AFTER satisfaction and is the
+    // behaviour the rewrite deliberately kept.
+    expect(block).not.toMatch(/now,?\s*back to/i)
+    expect(block).toContain('do not announce a return to this lesson while their question is still open')
+    // The detour rule it must not contradict is still stated in full.
+    expect(block).toContain('ANSWER THAT QUESTION properly and teach it at full standard')
+  })
+
+  it('carries the concept title, so the rule is never generic', () => {
+    const other = buildConceptAnchorBlock(
+      buildConceptAnchor('eng.literature.dramatic-structure', 'Dramatic Structure', 'Acts and scenes', 'Literature')!,
+    )
+    expect(other).toContain('must be an example OF "Dramatic Structure"')
+    expect(other).not.toContain('Word Formation Processes')
+  })
+})

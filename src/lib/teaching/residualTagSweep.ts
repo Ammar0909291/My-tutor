@@ -54,7 +54,66 @@
  * leaving an ordinary lowercase HTML comment alone — this deletes text from a
  * learner's message, so it should delete only what is unmistakably markup.
  */
-const MACHINE_TAG_RE = /<!--\s*[A-Z][A-Z0-9_]{2,}\b[\s\S]*?(?:-->|\/>)/g
+/**
+ * ENG-D04 (2026-09-12): A MALFORMED COMMENT OPENER IS STILL MACHINE MARKUP.
+ *
+ * Measured live (`eng.grammar.word-order`, order 60, T5, real student): the
+ * ENTIRE opening of a turn was, verbatim,
+ *
+ *   <--ATTEMPT channel="verbal" representation="diagram" … interleaving="blocked"-->
+ *
+ * — the internal pacing directive, with `<--` instead of `<!--`. Reproduced
+ * against this module before changing it: `stripResidualMachineTags` returned
+ * it UNTOUCHED and `hasResidualMachineTag` reported it CLEAN, so the
+ * repository's own residual-tag assertion was blind to it, exactly as it was
+ * blind to the bracket shape before Phase 6 and to bare JSON before Phase 7.
+ * `<--` is also not a valid HTML comment, so nothing downstream hides it
+ * either — the learner reads it.
+ *
+ * This module's own header already stated the principle ("no parser keyed to a
+ * tag NAME can ever recover from the model choosing a different name"); the
+ * same is true of a model mistyping the DELIMITER. The opener is widened to
+ * tolerate a dropped `!` or a miscounted dash, and nothing else is relaxed:
+ * the SHOUTED-name requirement (uppercase opening token, 3+ chars) and the
+ * mandatory terminator both still apply, so an ASCII arrow in prose is
+ * untouched — `<-- back` is lowercase, and `<-- BACK` carries no `-->`.
+ */
+/**
+ * ENG-D04 residual (2026-09-12, second pass): A THIRD OPENER VARIANT, `[!--`,
+ * PROVEN FROM THE RAW STORED MESSAGE.
+ *
+ * The first pass recorded the `eng.writing.supporting-details` (order 113, T9)
+ * instance as UNRESOLVED, because the audit log showed `[!--ATTEMPT` and the
+ * log is demonstrably lossy (the same line is truncated mid-attribute) — so a
+ * square bracket could have been the capture's own rendering of `<`. Marking
+ * it covered on that evidence was explicitly declined.
+ *
+ * The stored assistant message itself was then read out of production, which
+ * is the evidence that separates the two readings. It ends, verbatim:
+ *
+ *   🎉
+ *   [!--ATTEMPT channel="verbal" representation="concrete-object" … -->]
+ *
+ * The bracket is REAL and in the persisted content, and the terminator carries
+ * a trailing `]`: the model wrapped a comment in square brackets rather than
+ * mistyping one delimiter. Three variants are now measured from production —
+ * `<!--` (well-formed), `<--` (dropped `!`), `[!--` (bracket-wrapped) — which
+ * is this module's own header argument about tag NAMES holding equally for
+ * delimiters. The opener admits `[` alongside `<`, and the terminator admits an
+ * optional closing `]`, so the wrapper leaves no stray bracket behind.
+ *
+ * Nothing else is relaxed, and the bracket does not widen the blast radius: at
+ * least one dash is still mandatory after the opener, so a Markdown link
+ * (`[Chapter 2](…)`) and a citation (`[A]`) cannot match; the SHOUTED-name rule
+ * (uppercase token, 3+ chars) and the mandatory terminator both still apply.
+ */
+const MACHINE_TAG_RE = /[<[]!?-{1,3}\s*[A-Z][A-Z0-9_]{2,}\b[\s\S]*?(?:-->|\/>)\]?/g
+
+/** The OPENER alone — no terminator required. One definition serves the sweep's
+ *  fast path and `hasResidualMachineTag`, so the three cannot drift apart again
+ *  (they already had, which is how the malformed opener survived a widened
+ *  MACHINE_TAG_RE). Not global: every use is a one-shot `.test`. */
+const MACHINE_TAG_OPENER_RE = /[<[]!?-{1,3}\s*[A-Z][A-Z0-9_]{2,}\b/
 
 /**
  * P1 (visual reference integrity, 2026-08-22): a raw HTML-ELEMENT-shaped
@@ -288,8 +347,13 @@ export function stripResidualMachineTags(text: string): string {
   // "Stage"/"Lesson" added — the internal pacing/numbering labels carry
   // neither brackets, braces nor comment markers, so the pre-existing fast
   // path would otherwise skip them entirely.
+  // ENG-D04: the opener test is `<` + a dash, NOT the literal `<!--`. The
+  // observed leak (`<--ATTEMPT …-->`) survived this fast path even after
+  // MACHINE_TAG_RE was widened, because the early return fired first — the
+  // same blindness one layer up, and the reason this check is stated as the
+  // regex rather than a substring.
   if (
-    !text.includes('<!--') && !/<visual\b/i.test(text) && !text.includes('[') && !text.includes('{')
+    !MACHINE_TAG_OPENER_RE.test(text) && !/<visual\b/i.test(text) && !text.includes('[') && !text.includes('{')
     && !text.includes('Stage') && !text.includes('Lesson')
   ) return text
   let out = text
@@ -317,7 +381,7 @@ export function hasResidualMachineTag(text: string): boolean {
   // that cannot see a leak class is worse than no detector, because it is
   // trusted. `[LESSON_COMPLETE]` is excluded for the same reason the sweep
   // excludes it: it is a live client control tag, not residue.
-  return /<!--\s*[A-Z][A-Z0-9_]{2,}\b/.test(text)
+  return MACHINE_TAG_OPENER_RE.test(text)
     || /<visual\b/i.test(text)
     || new RegExp(BRACKET_MACHINE_TAG_RE.source).test(text)
     // The JSON shape, same reasoning as the bracket shape above: a detector

@@ -362,7 +362,10 @@ describe('C — dangerous transitions (classification, not correction)', () => {
     // And the gate consults the verdict.
     const route = (await import('node:fs')).readFileSync(
       (await import('node:path')).join(process.cwd(), 'src/app/api/learn/chat/route.ts'), 'utf8')
-    const gate = route.slice(route.indexOf('const gateTerms = {'),
+    // 2026-09-13 (PCD-007/008/011): slice widened to start at the arbitration
+    // hoist. Superseded line, kept verbatim for history:
+    //   route.slice(route.indexOf('const gateTerms = {'),
+    const gate = route.slice(route.indexOf('const probeArbitration ='),
       route.indexOf('if (gateEligible && memoryState)'))
     expect(gate).toContain("allows('AUTHORED_PROBE')")
     expect(gate).toContain('!excursionActiveHoisted')

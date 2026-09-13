@@ -3006,6 +3006,1787 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   runtime; the runtime carries the weaker, honest proxy "nothing happened for N
   turns".
 
+## Mathematics Educational Brain completion campaign (started 2026-09-11)
+- Dedicated, exclusively-Mathematics continuation of the Curriculum Completion Program above
+  (Physics/Chemistry/English/Biology/Computer Science, UI/UX, and runtime work explicitly out of
+  scope for this campaign). Goal: every one of Mathematics' 908 KG concepts reaches a complete,
+  Standard-compliant Educational Brain entry. Verified state on start (`scripts/math/state.ts`,
+  not the task's own stated baseline): KG 908/908, EB 257/908 (not 256), math.alg 12/59 (not
+  11/59 — a `like-terms` Wave 2 addition had not been reflected in `COVERAGE.md`'s summary row).
+  Four domains already CERTIFIED (`math.found` 82/82, `math.geom` 69/69, `math.arith` 58/58,
+  `math.nt` 36/36); `math.alg` in progress; 19 domains unstarted.
+- **Batch 1 — math.alg Wave 3** (2026-09-11): authored the 3 concepts computed programmatically as
+  the topologically-ready `math.alg` frontier — `math.alg.simplification`,
+  `math.alg.polynomial-operations`, `math.alg.radicals` — all Blueprint-grounded, reused by
+  reference per the Standard's ownership boundary, each with birth-type-classified misconceptions
+  not present in the Blueprints themselves. `math.alg` 12/59 → **15/59**. Mathematics
+  **257/908 → 260/908**. Full per-concept detail in `educational-brain/concepts/COVERAGE.md`
+  Batch 57. Corrected two stale tracking numbers found on start: `ROADMAP.md`'s totals (still
+  reading 256/908) and `COVERAGE.md`'s math.alg summary row (still reading 11/59). Validated: KG
+  validator PASS (908/908 reachable, file untouched), 0 orphan/duplicate EB files, `tsc --noEmit`
+  clean, targeted tests 479/479 passed. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/
+  runtime file touched. Per this program's own established "one bounded batch, re-derive the
+  frontier fresh next time" discipline, Wave 4 was deliberately NOT started in Batch 1 — 651
+  concepts remained (908 − 257 at campaign start), 648 after Batch 1. This is a genuinely
+  multi-session campaign at the established authoring depth; continuation should verify state via
+  `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
+- **Batch 2 — math.alg Wave 4** (2026-09-11, same session): authored the 5 concepts computed as the
+  next topologically-ready `math.alg` frontier — `math.alg.linear-equation-1var`,
+  `math.alg.polynomial-division`, `math.alg.fractional-exponent`, `math.alg.simplifying-radicals`,
+  `math.alg.radical-equations` — all Blueprint-grounded, reused by reference. `math.alg`
+  15/59 → **20/59**. Mathematics **260/908 → 265/908**, 643 remaining. Genuine Curriculum Feedback
+  finding recorded (not fixed): `math.alg.simplifying-radicals`'s MC-1 and `math.alg.radicals`'s
+  MC-3 are, in substance, the same misconception, authored independently by two Blueprints using
+  the identical √72→6√2 worked example — a Blueprint-level content-overlap, out of this program's
+  scope to resolve. Full per-concept detail in `COVERAGE.md` Batch 58. Validated: KG validator
+  PASS (908/908 reachable, file untouched), 0 orphan/duplicate EB files, `tsc --noEmit` clean,
+  targeted tests 479/479 passed. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file
+  touched.
+- **Batch 3 — math.alg Wave 5** (2026-09-11, same session): authored the 5 concepts computed as the
+  next topologically-ready `math.alg` frontier — `math.alg.inequality-1var`,
+  `math.alg.absolute-value-equations`, `math.alg.linear-equation-2var`,
+  `math.alg.remainder-theorem`, `math.alg.rationalizing-denominators` — all Blueprint-grounded,
+  reused by reference. `math.alg` 20/59 → **25/59**. Mathematics **265/908 → 270/908**, 638
+  remaining. A second genuine Curriculum Feedback overlap finding recorded (not fixed), same class
+  as Batch 2's: `rationalizing-denominators`' core technique substantially overlaps
+  `math.alg.radicals`' own LO2/MC-2. Full per-concept detail in `COVERAGE.md` Batch 59. Validated:
+  KG validator PASS (908/908 reachable, file untouched), 0 orphan/duplicate EB files, `tsc
+  --noEmit` clean, targeted tests 479/479 passed. No Physics/Chemistry/English/Biology/CS/KG/
+  Blueprint/runtime file touched.
+- **Autonomous `/loop 60s` activated (2026-09-11, same session)**: recurring 1-minute cron job
+  (fires only while idle), continuing this campaign batch-after-batch without per-iteration
+  re-prompting, until 908/908 or a verified blocker. **Batch 4 — math.alg Wave 6** (loop iteration
+  1): authored the 3 concepts computed as the next topologically-ready `math.alg` frontier —
+  `math.alg.inequality-2var`, `math.alg.system-linear-equations`, `math.alg.factor-theorem` — all
+  Blueprint-grounded, reused by reference. `math.alg` 25/59 → **28/59**. Mathematics
+  **270/908 → 273/908**, 635 remaining. A genuine Blueprint/KG cross_links metadata discrepancy
+  found for `inequality-2var` and resolved toward the KG (real cross-link to
+  `math.opt.linear-programming` that the Blueprint's own metadata table omitted) — recorded, not
+  fixed (out of program scope). Full per-concept detail in `COVERAGE.md` Batch 60. Validated: KG
+  validator PASS (908/908 reachable, file untouched), 0 orphan/duplicate EB files, `tsc --noEmit`
+  clean, targeted tests 479/479 passed. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/
+  runtime file touched. This is a genuinely multi-session campaign; continuation should verify
+  state via `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
+- **Batch 5 — math.alg Wave 7** (2026-09-11, loop iteration 2): authored the 4 concepts computed as
+  the next topologically-ready `math.alg` frontier — `math.alg.substitution-method`,
+  `math.alg.elimination-method`, `math.alg.system-3var`, `math.alg.factoring` — all Blueprint-
+  grounded, reused by reference. `math.alg` 28/59 → **32/59**. Mathematics **273/908 → 277/908**,
+  631 remaining. Two genuine Curriculum Feedback findings recorded (not fixed): `substitution-
+  method`'s misconceptions substantially overlap `system-linear-equations`' MC-1/MC-3 (intentional
+  depth, cross-referenced); `factoring`'s MC-1 (GCF-THEN-DONE) and `factor-theorem`'s MC-2
+  (FACTOR-FOUND-MEANS-DONE, Batch 4) are the same premature-termination mechanism at two different
+  pipeline stages, now cross-referenced in both entries. Real forward cross-links to
+  `math.linalg.row-reduction` documented for both `elimination-method` and `system-3var`. Full
+  per-concept detail in `COVERAGE.md` Batch 61. Validated: KG validator PASS (908/908 reachable,
+  file untouched), 0 orphan/duplicate EB files, `tsc --noEmit` clean, targeted tests 479/479
+  passed, all 4 heading structures diffed clean against `math.alg.like-terms.md`. No Physics/
+  Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. This is a genuinely multi-session
+  campaign; continuation should verify state via `scripts/math/state.ts` fresh each time rather
+  than trusting any number recorded here.
+- **Batch 6 — math.alg Wave 8** (2026-09-11, loop iteration 3): authored the 3 concepts computed as
+  the next topologically-ready `math.alg` frontier — `math.alg.factoring-gcf`,
+  `math.alg.factoring-special`, `math.alg.rational-expressions` — all Blueprint-grounded, reused by
+  reference. `math.alg` 32/59 → **35/59**. Mathematics **277/908 → 280/908**, 628 remaining. Two
+  genuine Curriculum Feedback findings recorded (not fixed): explicitly checked and ruled out any
+  overlap between `factoring-gcf`'s misconceptions and `factoring`'s own MC-1 (structurally distinct
+  — computing the GCF correctly vs. stopping after computing it); `factoring-special`'s MC-1
+  (sum-of-squares mistaken for factorable) is the identical Type-2 perceptual mechanism as
+  `factoring`'s own MC-3, now cross-referenced in both entries, with `factoring-special` reusing
+  `factoring`'s "Minus splits, plus doesn't" memory hook verbatim. Full per-concept detail in
+  `COVERAGE.md` Batch 62. Validated: KG validator PASS (908/908 reachable, file untouched), 0
+  orphan/duplicate EB files, `tsc --noEmit` clean, targeted tests 479/479 passed, all 3 heading
+  structures diffed clean against `math.alg.like-terms.md`. No Physics/Chemistry/English/Biology/
+  CS/KG/Blueprint/runtime file touched. This is a genuinely multi-session campaign; continuation
+  should verify state via `scripts/math/state.ts` fresh each time rather than trusting any number
+  recorded here.
+- **Batch 7 — math.alg Wave 9** (2026-09-11, loop iteration 4): authored the 4 concepts computed as
+  the next topologically-ready `math.alg` frontier — `math.alg.factoring-trinomials`,
+  `math.alg.rational-expressions-addition`, `math.alg.rational-expressions-multiplication`,
+  `math.alg.rational-equations` — all Blueprint-grounded, reused by reference. `math.alg`
+  35/59 → **39/59**. Mathematics **280/908 → 284/908**, 624 remaining. `factoring-trinomials`' MC-3
+  is a THIRD cross-referenced instance of the sum-of-squares mechanism already documented in
+  `factoring`'s MC-3 and `factoring-special`'s MC-1. `rational-expressions-addition`'s MC-2 overlaps
+  `rational-expressions`' own MC-1 (intentional depth, cross-referenced). A genuine KG/Blueprint
+  metadata discrepancy found and resolved toward the KG: `rational-equations`' Blueprint states its
+  prerequisite as `rational-expressions-addition`, but the live KG lists `rational-expressions`
+  directly — recorded in both entries, not fixed. Full per-concept detail in `COVERAGE.md` Batch 63.
+  Validated: KG validator PASS (908/908 reachable, file untouched), 0 orphan/duplicate EB files,
+  `tsc --noEmit` clean, targeted tests 479/479 passed, all 4 heading structures diffed clean against
+  `math.alg.like-terms.md`. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file
+  touched. This is a genuinely multi-session campaign; continuation should verify state via
+  `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
+- **Batch 8 — math.alg Wave 10** (2026-09-11, loop iteration 5): authored the 1 concept computed as
+  the next topologically-ready `math.alg` frontier — `math.alg.quadratic-equation` (a single-
+  concept wave; only one concept had every prerequisite met) — Blueprint-grounded, reused by
+  reference. `math.alg` 39/59 → **40/59**. Mathematics **284/908 → 285/908**, 623 remaining.
+  High-value node (unlocks `math.func.quadratic-function` + `math.alg.polynomial-roots`, has 3
+  unauthored KG children the Blueprint deliberately scopes around: `completing-the-square`
+  introduced here only as the formula's derivation, `discriminant` as the method-selection tool,
+  full standalone treatment deferred to those children). No genuine content-overlap or metadata
+  discrepancy found. Full per-concept detail in `COVERAGE.md` Batch 64. Validated: KG validator
+  PASS (908/908 reachable, file untouched), 0 orphan/duplicate EB files, `tsc --noEmit` clean,
+  targeted tests 479/479 passed, heading structure diffed clean against `math.alg.like-terms.md`.
+  No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. This is a genuinely
+  multi-session campaign; continuation should verify state via `scripts/math/state.ts` fresh each
+  time rather than trusting any number recorded here.
+- **Batch 9 — math.alg Wave 11** (2026-09-11, loop iteration 6): authored the 2 concepts computed
+  as the next topologically-ready `math.alg` frontier — `math.alg.completing-the-square`,
+  `math.alg.polynomial-roots` — both Blueprint-grounded, reused by reference. `math.alg`
+  40/59 → **42/59**. Mathematics **285/908 → 287/908**, 621 remaining. `completing-the-square`
+  has an explicit division of labour with its own parent `quadratic-equation` (extends that
+  entry's monic-only derivation into the full non-monic procedure plus a new vertex-form
+  optimisation application). `polynomial-roots`' cross-link `math.cx.complex-numbers-analysis` has
+  an authored Blueprint (content genuinely reused in the transfer probe) but no EB entry yet, since
+  math.cx is unstarted — flagged as a standing forward note. No genuine content-overlap or
+  metadata discrepancy found in either entry. Full per-concept detail in `COVERAGE.md` Batch 65.
+  Validated: KG validator PASS (908/908 reachable, file untouched), 0 orphan/duplicate EB files,
+  `tsc --noEmit` clean, targeted tests 479/479 passed, both heading structures diffed clean against
+  `math.alg.like-terms.md`. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file
+  touched. This is a genuinely multi-session campaign; continuation should verify state via
+  `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
+- **Batch 10 — math.alg Wave 12 part 1** (2026-09-11, loop iteration 7, closed early per explicit
+  user instruction mid-batch): the computed frontier was 5 concepts (`quadratic-formula`,
+  `rational-root-theorem`, `fundamental-theorem-algebra`, `polynomial-inequality`,
+  `vietas-formulas`, all Blueprint-grounded); all 5 Blueprints were read, but only 1 —
+  `math.alg.quadratic-formula` — was authored, validated, and committed before stopping, matching
+  this program's own precedent for closing a partial wave as its own smaller batch rather than
+  leaving uncommitted work. `math.alg` 42/59 → **43/59**. Mathematics **287/908 → 288/908**, 620
+  remaining. `quadratic-formula` is the symbolic generalisation of `completing-the-square`'s own
+  verified non-monic procedure plus the formula's direct-substitution efficiency payoff and an
+  orientation-level discriminant preview. No genuine content-overlap or metadata discrepancy found.
+  The remaining 4 already-read candidates are deferred to a future batch (Wave 12 part 2),
+  to be re-verified fresh rather than assumed still ready. Full per-concept detail in `COVERAGE.md`
+  Batch 66. Validated: KG validator PASS (908/908 reachable, file untouched), 0 orphan/duplicate EB
+  files, `tsc --noEmit` clean, targeted tests 479/479 passed, heading structure diffed clean against
+  `math.alg.like-terms.md`. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file
+  touched. This is a genuinely multi-session campaign; continuation should verify state via
+  `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
+- **Batch 11 — math.alg Wave 12 part 2** (2026-09-11, closed early a second time per explicit user
+  instruction mid-batch): session started by pulling 2 concurrent unrelated commits from
+  `origin/main` (test-file corpus-count updates, zero file overlap) via clean fast-forward. The
+  re-computed frontier was 5 concepts (`discriminant` newly unblocked by `quadratic-formula`,
+  `fundamental-theorem-algebra`, `polynomial-inequality`, `rational-root-theorem`,
+  `vietas-formulas`); all 5 Blueprints read, but only 2 — `math.alg.discriminant`,
+  `math.alg.rational-root-theorem` — authored, validated, and committed before stopping.
+  `math.alg` 43/59 → **45/59**. Mathematics **288/908 → 290/908**, 618 remaining.
+  `discriminant` fully develops `quadratic-formula`'s own deliberately-deferred discriminant
+  preview. `rational-root-theorem` is the first genuinely exercised cross-domain dependency in
+  this campaign's math.alg work (`math.nt.divisibility`, already-certified `math.nt` domain). No
+  genuine content-overlap or metadata discrepancy found. The remaining 3 already-read candidates
+  (`fundamental-theorem-algebra`, `polynomial-inequality`, `vietas-formulas`) are deferred to a
+  future batch (Wave 12 part 3), to be re-verified fresh. Full per-concept detail in `COVERAGE.md`
+  Batch 67. Validated: KG validator PASS (908/908 reachable, file untouched), 0 orphan/duplicate EB
+  files, `tsc --noEmit` clean, targeted tests 479/479 passed, both heading structures diffed clean
+  against `math.alg.like-terms.md`. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime
+  file touched. This is a genuinely multi-session campaign; continuation should verify state via
+  `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
+- **Batch 12 — math.alg Wave 12 part 3** (2026-09-11): re-computed the frontier fresh (per this
+  program's own standing discipline, not assumed still ready) — the exact 3 concepts deferred from
+  Batch 11 remained ready: `math.alg.fundamental-theorem-algebra`, `math.alg.polynomial-
+  inequality`, `math.alg.vietas-formulas`, all authored, validated, and committed this batch.
+  `math.alg` 45/59 → **48/59** — **only 11 concepts remain before the domain reaches DOMAIN
+  CERTIFICATION** (the fifth after math.found, math.geom, math.arith, math.nt). Mathematics
+  **290/908 → 293/908**, 615 remaining. `fundamental-theorem-algebra`'s cross-link
+  `math.cx.fundamental-theorem-algebra` has no Blueprint yet either (distinct from
+  `polynomial-roots`'s own `math.cx.complex-numbers-analysis` cross-link, which does). A genuine
+  unnamed connection was identified (not fixed): `factoring-trinomials`' own product/sum search is,
+  in substance, Vieta's quadratic case applied in reverse — recorded as the forward-pointing half
+  of the cross-reference, no prior entry modified. Full per-concept detail in `COVERAGE.md`
+  Batch 68. Validated: KG validator PASS (908/908 reachable, file untouched), 0 orphan/duplicate EB
+  files, `tsc --noEmit` clean, targeted tests 479/479 passed, all 3 heading structures diffed clean
+  against `math.alg.like-terms.md`. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime
+  file touched. This is a genuinely multi-session campaign; continuation should verify state via
+  `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
+- **Batch 13 — math.alg Wave 13** (2026-09-11): re-computed the frontier fresh — exactly 2
+  concepts — `math.alg.complex-polynomial-roots` (conjugate-root theorem + FTA-driven root-list
+  completion + factoring over the reals into real quadratics), `math.alg.rational-inequality`
+  (extends the polynomial-inequality sign-chart procedure to a second critical-point source with a
+  source-dependent endpoint rule, plus the cross-multiplication-is-unsafe warning) — both
+  Blueprint-grounded, reused by reference. `math.alg` 48/59 → **50/59** — **only 9 concepts remain
+  before the domain reaches DOMAIN CERTIFICATION** (the fifth after math.found, math.geom,
+  math.arith, math.nt). Mathematics **293/908 → 295/908**, 613 remaining. One genuine Curriculum
+  Feedback finding recorded (not fixed): `complex-polynomial-roots`'s Blueprint names
+  `math.alg.rational-root-theorem` as a sibling concept, but that already-authored entry (Batch 11)
+  does not name it back — recorded as a one-directional forward note. `rational-inequality`
+  fulfills the standing forward-work note left in `polynomial-inequality`'s own entry (Batch 68).
+  Full per-concept detail in `COVERAGE.md` Batch 69. Validated: KG validator PASS (908/908
+  reachable, file untouched), 0 orphan/duplicate EB files, `tsc --noEmit` clean, targeted tests
+  479/479 passed, both heading structures diffed clean against `math.alg.like-terms.md`. No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. This is a genuinely
+  multi-session campaign; continuation should verify state via `scripts/math/state.ts` fresh each
+  time rather than trusting any number recorded here.
+- **Batch 14 — math.alg-unblocking cross-domain excursion into math.disc + math.func**
+  (2026-09-11): the topologically-ready `math.alg` frontier was 0 — all 9 remaining concepts need
+  a prerequisite outside math.alg (7 blocked by `math.func.function-concept`, 2 by
+  `math.disc.combinations`→`permutations`→`counting-principles`). Authored the 2 concepts that
+  unblock those chains, both verified immediately ready: `math.disc.counting-principles` (the
+  domain's first entry; multiplication vs. addition principle, AND/OR classification as the real
+  "threshold concept") and `math.func.function-concept` (the domain's first entry; the single
+  highest-leverage concept remaining for math.alg — unblocks 7 of the 9 remaining math.alg
+  concepts at once, the exponential/logarithm family). `math.alg` stays at 50/59 this batch
+  (neither new concept is itself math.alg). `math.disc` 0/32 → 1/32, `math.func` 0/29 → 1/29.
+  Mathematics **295/908 → 297/908**, 838 remaining. One genuine Blueprint/KG metadata discrepancy
+  found and resolved toward the KG: `function-concept`'s Blueprint claims requires
+  `[variable, set-theory]`/unlocks 4 concepts/cross_links `[set-theory]`; the live KG instead has
+  requires `[function-set-theoretic, variable]`/unlocks 2 concepts/cross_links
+  `[function-set-theoretic]` — this entry follows the KG. Full per-concept detail in `COVERAGE.md`
+  Batch 14 (new "math.alg-unblocking cross-domain excursion" entry). Validated: KG validator PASS
+  (908/908 reachable, file untouched), 0 orphan/duplicate EB files, `tsc --noEmit` clean, targeted
+  tests 479/479 passed, both heading structures diffed clean against `math.alg.like-terms.md`. No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Next: with
+  `function-concept` authored, `math.alg.exponential-function` is the next ready math.alg
+  candidate; with `counting-principles` authored, `math.disc.permutations` is the next ready
+  math.disc candidate. This is a genuinely multi-session campaign; continuation should verify
+  state via `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
+- **Batch 15 — math.alg-unblocking cross-domain excursion continued** (2026-09-11): re-computed
+  the frontier fresh — `math.alg.exponential-function` (unblocked by Batch 14's
+  `function-concept`) and `math.disc.permutations` (unblocked by Batch 14's
+  `counting-principles`) were both ready. `exponential-function` ($a^x$ vs. power function $x^a$
+  — the critical structural distinction, ranked the Blueprint's own most-emphasized
+  misconception; growth/decay classification) and `permutations` ($P(n,r)=n!/(n-r)!$ derived from
+  the multiplication principle, plus circular/repetition/identical-objects variants and the
+  order-matters test) both authored, both 0 Blueprint/KG discrepancies this time. `math.alg`
+  50/59 → **51/59** (8 remain: 2 via math.disc, 6 via the now-unblocked `logarithm` family).
+  `math.disc` 1/32 → **2/32**, unblocking `math.disc.combinations` next — the final blocker for
+  math.alg's last 2 concepts. `math.func` stays at 1/29 (exponential-function is math.alg, not
+  math.func). Mathematics **297/908 → 299/908**, 836 remaining. Full per-concept detail in
+  `COVERAGE.md` Batch 15. Validated: KG validator PASS (908/908 reachable, file untouched), 0
+  orphan/duplicate EB files, `tsc --noEmit` clean, targeted tests 479/479 passed, both heading
+  structures diffed clean against `math.alg.like-terms.md`. No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Next: `math.alg.logarithm`
+  is the next ready math.alg candidate; `math.disc.combinations` is the next ready math.disc
+  candidate (and once authored, unblocks math.alg's final 2 concepts at once). This is a
+  genuinely multi-session campaign; continuation should verify state via `scripts/math/state.ts`
+  fresh each time rather than trusting any number recorded here.
+- **Batch 16 — math.alg-unblocking cross-domain excursion, third continuation** (2026-09-11):
+  re-computed the frontier fresh — `math.alg.logarithm` and `math.alg.exponential-equations`
+  (both unblocked by Batch 15's `exponential-function`) and `math.disc.combinations` (unblocked by
+  Batch 15's `permutations`) were all ready. `logarithm` (the inverse-function definition, domain
+  restriction $x>0$ DERIVED from the exponential function's range rather than stated as a rule —
+  the Blueprint's own central-focus misconception) and `exponential-equations` (same-base method
+  vs. logarithm method, with the power-rule misapplication ranked most severe) both authored;
+  `combinations` (derived from `permutations` by dividing out $r!$; Pascal's identity proved
+  combinatorially, not algebraically) authored — the concept this program's entire math.disc
+  excursion exists to unblock, now closing that excursion's math.disc side. One genuine
+  requires/unlocks asymmetry found (not fixed): `exponential-equations`' KG `unlocks` names
+  `math.alg.logarithm`, but `logarithm`'s own KG `requires` doesn't name it back — recorded in
+  both entries. `math.alg` 51/59 → **53/59** (6 remain, 3 already ready:
+  `binomial-theorem` via the now-authored `combinations`, `logarithm-properties`/
+  `natural-logarithm` via the now-authored `logarithm`). `math.disc` 2/32 → **3/32**. `math.func`
+  stays at 1/29. Mathematics **299/908 → 302/908**, 833 remaining. Full per-concept detail in
+  `COVERAGE.md` Batch 16. Validated: KG validator PASS (908/908 reachable, file untouched), 0
+  orphan/duplicate EB files, `tsc --noEmit` clean, targeted tests 479/479 passed, all 3 heading
+  structures diffed clean against `math.alg.like-terms.md`. No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Next:
+  `math.alg.binomial-theorem`, `math.alg.logarithm-properties`, `math.alg.natural-logarithm` are
+  all topologically ready. This is a genuinely multi-session campaign; continuation should verify
+  state via `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
+- **Batch 17 — math.alg-unblocking excursion, closing the logarithm/binomial-theorem threads**
+  (2026-09-11): re-computed the frontier fresh — `math.alg.binomial-theorem` (unblocked by
+  Batch 16's `math.disc.combinations`), `math.alg.logarithm-properties` and
+  `math.alg.natural-logarithm` (both unblocked by Batch 16's `math.alg.logarithm`) were all
+  ready; all 3 Blueprint-grounded, reused by reference. `binomial-theorem` (theorem stated,
+  confirmed on small cases, proved by induction via Pascal's identity as the specific mechanism,
+  Pascal's triangle previewed) closes the math.disc side of this program's excursion.
+  `logarithm-properties` (product/quotient/power rules each derived from the matching exponent
+  law via the translator model, then combined) and `natural-logarithm` ($\ln x = \log_e x$, every
+  already-proved rule transfers with no new derivation, $e$'s genuine calculus-level specialness
+  named but deferred to `math.calc.derivative-ln`) both authored. Two genuine Blueprint/KG
+  `unlocks` discrepancies found (not fixed, KG followed): `logarithm-properties`'s Blueprint says
+  "Unlocks: none listed" but the KG has `math.alg.logarithmic-equations`;
+  `natural-logarithm`'s Blueprint likewise says "none listed" but the KG has
+  `math.calc.derivative-ln`. `math.alg` 53/59 → **56/59** (3 remain: `change-of-base`,
+  `logarithmic-equations`, `pascals-triangle`, all already topologically ready — one more batch
+  reaches domain CERTIFICATION, the fifth after math.found/math.geom/math.arith/math.nt).
+  `math.disc`/`math.func` unchanged this batch. Mathematics **302/908 → 305/908**, 603 remaining.
+  Full per-concept detail in `COVERAGE.md` Batch 17. Validated: KG validator PASS (908/908
+  reachable, file untouched), 0 orphan/duplicate EB files, `tsc --noEmit` clean, targeted tests
+  479/479 passed, all 3 heading structures diffed clean against `math.alg.like-terms.md` (one
+  entry, `natural-logarithm`, briefly introduced a non-canonical "Anti-Analogies" heading and was
+  corrected in place before this check, by folding its content into the Analogies section). No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. This is a genuinely
+  multi-session campaign; continuation should verify state via `scripts/math/state.ts` fresh each
+  time rather than trusting any number recorded here.
+- **Batch 18 — math.alg's final 3 concepts, DOMAIN CERTIFICATION** (2026-09-11): re-computed the
+  frontier fresh — all 3 remaining math.alg concepts (`change-of-base`, `logarithmic-equations`,
+  `pascals-triangle`) were confirmed already topologically ready; all 3 Blueprint-grounded, reused
+  by reference. `change-of-base` (the formula $\log_a(x)=\frac{\log_b(x)}{\log_b(a)}$ derived from
+  solving $a^y=x$ rather than asserted, base-independence verified numerically) and
+  `logarithmic-equations` (condense/exponentiate/solve/domain-check pipeline, domain check framed
+  as structurally necessary like radical-equation extraneous-solution checking) both authored with
+  no genuine content-overlap or metadata discrepancy. `pascals-triangle` (construction rule proved
+  combinatorially via the include/exclude argument, row/position read as $\binom{n}{k}$ under
+  0-indexing, used to read off `binomial-theorem`'s coefficients directly) closes the domain — one
+  genuine Blueprint/KG discrepancy found (not fixed, KG followed): the Blueprint states
+  "cross_links: (none)" but the KG has `cross_links: ['math.disc.combinations']`, already
+  authored, so this entry genuinely incorporates that cross-linked content rather than merely
+  flagging it. **`math.alg` 56/59 → 59/59 — DOMAIN CERTIFIED**, the fifth mathematics domain after
+  math.found/math.geom/math.arith/math.nt. `math.disc`/`math.func` unchanged this batch — both now
+  stand as independent in-progress domains rather than math.alg-serving excursions.
+  `math.disc`'s fresh frontier computed: 7 topologically-ready candidates
+  (`binomial-theorem`/`combinatorics`/`graph`/`inclusion-exclusion`/`pigeonhole`/
+  `propositional-logic`/`stars-bars`). Mathematics **305/908 → 308/908**, 600 remaining. Full
+  per-concept detail in `COVERAGE.md` Batch 18. Validated: KG validator PASS (908/908 reachable,
+  file untouched), `scripts/math/state.ts` confirms math.alg `"ebComplete": true` and 5
+  EB-certified domains, 0 orphan/duplicate EB files, `tsc --noEmit` clean, targeted tests 479/479
+  passed, all 3 heading structures diffed clean on the first pass (0 diffs each). No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. This is a genuinely
+  multi-session campaign; continuation should verify state via `scripts/math/state.ts` fresh each
+  time rather than trusting any number recorded here. Next domain selection (continue math.disc as
+  a full campaign, continue math.func, or start fresh) is an open decision for the next batch.
+- **Batch 19 — math.disc continued as a standalone domain campaign** (2026-09-11): with math.alg
+  CERTIFIED, elected to continue `math.disc` (furthest along of the two excursion-opened domains)
+  as a full standalone campaign. Fresh frontier: 7 candidates ready; selected a coherent subset of
+  5 sharing `math.disc.combinations`/`counting-principles` as their prerequisite, deferring `graph`
+  and `propositional-logic` (each opening a structurally distinct subtree) to a future batch. All 5
+  Blueprint-grounded, reused by reference — and notably 4 of the 5 Blueprints already carried
+  birth-type classifications in their own text (a newer Blueprint convention), independently
+  confirmed rather than accepted uncritically. `combinatorics` (the whole FIELD of counting
+  techniques — bijection, recursion-as-complete-answer, generating functions/named-children
+  preview — not a synonym for $\binom{n}{r}$/$P(n,r)$), `pigeonhole` (creative hole-construction as
+  the genuine skill; $\lceil m/n\rceil$ as a lower bound, never exact; non-constructive existence),
+  `stars-bars` ($\binom{n+k-1}{k-1}$, $k-1$-not-$k$ bars, at-least-one via $n-k$, identical-vs-
+  distinct discrimination), `inclusion-exclusion` (full alternating-sign formula, union-vs-
+  complement discrimination, systematic surjection formula), and `binomial-theorem` (math.disc's
+  own combinatorial derivation, cross-linked to the already-authored `math.alg.binomial-theorem`'s
+  complementary algebraic proof of the identical theorem — the first genuinely non-empty,
+  already-authored cross-link this program has substantively incorporated rather than merely
+  flagged) all authored. `math.disc` 3/32 → **8/32**. `math.func` unchanged (1/29, parked).
+  Mathematics **308/908 → 313/908**, 595 remaining. No genuine content-overlap found beyond
+  deliberate cross-references (Pascal's identity's shared include/exclude argument across
+  `math.alg.pascals-triangle`/`vietas-formulas`; `stars-bars`'s deferral of upper-bound
+  restrictions to `inclusion-exclusion`). Full per-concept detail in `COVERAGE.md` Batch 19.
+  Validated: KG validator PASS (908/908 reachable, file untouched), 0 orphan/duplicate EB files,
+  `tsc --noEmit` clean, targeted tests 479/479 passed, all 5 heading structures diffed clean on
+  the first pass (0 diffs each). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file
+  touched. Fresh math.disc frontier computed: 3 candidates ready (`derangements` — newly unblocked
+  by `inclusion-exclusion` — `graph`, `propositional-logic`). This is a genuinely multi-session
+  campaign; continuation should verify state via `scripts/math/state.ts` fresh each time rather
+  than trusting any number recorded here.
+- **Batch 20 — math.disc: derangements, opening graph theory and formal logic subtrees**
+  (2026-09-11): re-computed the frontier fresh — all 3 candidates deferred from Batch 19 were
+  ready: `derangements` (unblocked by `inclusion-exclusion`), `graph` (requires only
+  `math.found.set-theory`), `propositional-logic` (requires `math.found.proposition` +
+  `math.found.logical-connectives`); all 3 Blueprint-grounded, reused by reference.
+  `derangements` ($D(n)=n!\sum(-1)^k/k!$ derived as a direct inclusion-exclusion application, the
+  fast $1/e$-convergence, and the precise "every position, not just one" definition) closes the
+  branch unblocked by Batch 19. `graph` (undirected/directed edges grounded in
+  `math.found.set-theory`'s Cartesian-product framework, self-loop degree-2, the Handshaking
+  Lemma re-derived from "every edge has two ends") opens the domain's graph-theory subtree — its
+  cross-link `math.graph.graph` confirmed genuinely unauthored (independence mode).
+  `propositional-logic` (DNF from true rows, CNF from false rows as dual constructions, SAT's
+  easy-verify/hard-decide gap at orientation level) opens the formal-logic subtree — its
+  cross-link `math.found.truth-table` (already authored) substantively incorporated as this
+  entry's mechanical foundation, the second such genuine cross-link this campaign (after
+  `binomial-theorem`'s in Batch 19). No genuine content-overlap or metadata discrepancy found in
+  any of the 3. `math.disc` 8/32 → **11/32**. `math.func` unchanged (1/29, parked). Mathematics
+  **313/908 → 316/908**, 592 remaining. Full per-concept detail in `COVERAGE.md` Batch 20.
+  Validated: KG validator PASS (908/908 reachable, file untouched), 0 orphan/duplicate EB files,
+  `tsc --noEmit` clean, targeted tests 479/479 passed, all 3 heading structures diffed clean on
+  the first pass (0 diffs each). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime
+  file touched. Fresh math.disc frontier computed: 6 candidates ready (`boolean-circuits`,
+  `graph-coloring`, `graph-connectivity`, `graph-types`, `planar-graph`,
+  `predicate-logic-disc`). This is a genuinely multi-session campaign; continuation should verify
+  state via `scripts/math/state.ts` fresh each time rather than trusting any number recorded
+  here.
+- **Batch 21 — math.disc: deepening the graph-theory and formal-logic subtrees** (2026-09-11):
+  re-computed the frontier fresh — 6 candidates ready; authored 5 (`boolean-circuits`,
+  `graph-coloring`, `graph-connectivity`, `graph-types`, `predicate-logic-disc`), deferring
+  `planar-graph` to a future batch; all Blueprint-grounded, reused by reference.
+  `boolean-circuits` (DNF-to-circuit recipe, depth-vs-size as genuinely different measures,
+  NAND/NOR universality as a binary property independent of gate-count efficiency).
+  `graph-coloring` (the two-part upper+lower-bound proof structure required to establish
+  $\chi(G)$ exactly, the Four Color Theorem's asymmetric difficulty, chromatic polynomial vs.
+  chromatic number) — surfaced a new cross-link intermediate case: `math.graph.graph-coloring`
+  has a genuine Blueprint but no EB entry (math.graph 0/16 unstarted), so neither independence
+  nor substantive incorporation applied; handled by not citing it as a peer entry.
+  `graph-connectivity` (path/cycle distinctness, connectedness as a universal claim needing
+  systematic search, strong connectivity's much stricter both-directions-every-pair
+  requirement). `graph-types` (bipartiteness as an edge-structure property, never a connectivity
+  claim; $K_n$ vs. $K_{m,n}$'s different completeness notions; the Handshaking Lemma's full
+  generality across multigraphs/pseudographs/digraphs). `predicate-logic-disc` (nested-quantifier
+  order genuinely changing meaning, the quantified De Morgan negation laws, counterexample's
+  asymmetric refutation power) — cross-linked to the already-authored `math.found.predicate-logic`,
+  substantively incorporated as this entry's direct foundation, the THIRD such genuine cross-link
+  this campaign (after `binomial-theorem` in Batch 19 and `propositional-logic` in Batch 20). No
+  genuine content-overlap or metadata discrepancy found in any of the 5. `math.disc` 11/32 →
+  **16/32** — past the halfway point. `math.func` unchanged (1/29, parked). Mathematics
+  **316/908 → 321/908**, 587 remaining. Full per-concept detail in `COVERAGE.md` Batch 21.
+  Validated: KG validator PASS (908/908 reachable, file untouched), 0 orphan/duplicate EB files,
+  `tsc --noEmit` clean, targeted tests 479/479 passed, all 5 heading structures diffed clean on
+  the first pass (0 diffs each). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime
+  file touched. Fresh math.disc frontier computed: 3 candidates ready (`euler-hamiltonian`,
+  `graph-trees`, `planar-graph`, all in the graph-theory subtree). This is a genuinely
+  multi-session campaign; continuation should verify state via `scripts/math/state.ts` fresh
+  each time rather than trusting any number recorded here.
+- **Batch 22 — math.disc: substantially developing the graph-theory subtree** (2026-09-11):
+  re-computed the frontier fresh — all 3 candidates deferred from Batch 21 were ready:
+  `euler-hamiltonian` and `graph-trees` (both requiring `graph-connectivity`), `planar-graph`
+  (requiring `graph`); all 3 Blueprint-grounded, reused by reference. `euler-hamiltonian`
+  (Euler's theorem as a pure degree-count test, no tracing required; the open-path extension via
+  exactly 0 or 2 odd-degree vertices; the bowtie-graph counterexample proving Eulerian and
+  Hamiltonian are logically independent) — a second instance of the cross-link intermediate case
+  (both `math.graph.eulerian-circuit`/`hamiltonian-cycle` have Blueprints, neither has an EB
+  entry). `graph-trees` (connected AND acyclic simultaneously, never either alone; $n-1$ edges as
+  necessary but not sufficient; the same free tree rooted differently producing genuinely
+  different hierarchies) — unlocks `spanning-tree`, the domain's next frontier. `planar-graph`
+  (Euler's formula with its disconnected-graph $C+1$ correction; the edge-density bounds as
+  strictly one-directional non-planarity tests, never sufficiency proofs; Kuratowski's theorem's
+  precise "subdivision," not strict-subgraph, wording). No genuine content-overlap or metadata
+  discrepancy found in any of the 3. `math.disc` 16/32 → **19/32**. `math.func` unchanged (1/29,
+  parked). Mathematics **321/908 → 324/908**, 584 remaining. Full per-concept detail in
+  `COVERAGE.md` Batch 22. Validated: KG validator PASS (908/908 reachable, file untouched), 0
+  orphan/duplicate EB files, `tsc --noEmit` clean, targeted tests 479/479 passed, all 3 heading
+  structures diffed clean on the first pass (0 diffs each). No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Fresh math.disc
+  frontier computed: only 1 candidate ready (`spanning-tree`) — the domain's remaining 12
+  concepts (algorithm complexity/asymptotic notation, generating functions and variants,
+  recurrence relations, Catalan/Stirling numbers) belong to largely separate, not-yet-opened
+  subtrees. This is a genuinely multi-session campaign; continuation should verify state via
+  `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
+- **Batch 23 — math.disc: closing the `graph-trees → spanning-tree` chain** (2026-09-11):
+  re-computed the frontier fresh — the sole candidate deferred from Batch 22,
+  `math.disc.spanning-tree` (requires `graph-trees` only), was confirmed still ready;
+  Blueprint-grounded, reused by reference. Spanning-tree definition built directly on
+  `graph-trees`' own tree definition (spans every vertex AND is a tree); existence proof; Cayley's
+  formula ($n^{n-2}$); the genuinely separate MST optimization question; the cut property and
+  cycle property as Kruskal's/Prim's correctness arguments; distinct-vs-tied-weight MST uniqueness.
+  3 misconceptions, birth types already assigned by the Blueprint, independently confirmed — MC-1
+  explicitly cross-referenced to `graph-trees`' own MC-1 as the identical relaxation-of-a-
+  conjunction mechanism recurring one structural level up. No genuine content-overlap or metadata
+  discrepancy found beyond that deliberate cross-reference. `math.disc` 19/32 → **20/32**.
+  `math.func` unchanged (1/29, parked). Mathematics **324/908 → 325/908**, 583 remaining. Full
+  per-concept detail in `COVERAGE.md` Batch 23. Validated: KG validator PASS (908/908 reachable,
+  file untouched), 0 orphan/duplicate EB files, `tsc --noEmit` clean, targeted tests 479/479
+  passed, heading structure diffed clean on the first pass (0 diffs). No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. This closes the
+  `graph-trees → spanning-tree` chain opened in Batch 20 — 0 topologically-ready math.disc
+  candidates remain; the domain's other 12 unauthored concepts all require prerequisites entirely
+  outside math.disc (`math.calc.limits`, `math.seq.sequence`, `math.seq.series`,
+  `math.linalg.matrix`, none yet authored), so the next step is a genuine cross-domain excursion
+  decision (into math.calc, math.seq, or math.linalg), or selecting a different unstarted domain
+  entirely. This is a genuinely multi-session campaign; continuation should verify state via
+  `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
+- **Batch 24 — opening `math.graph`** (2026-09-12): with math.disc at 0 topologically-ready
+  candidates, computed the frontier across ALL mathematics domains — `math.graph` had 7 ready
+  (each gated only on its already-authored `math.disc` sibling, since `math.disc`'s own
+  graph-theory entries had repeatedly named `math.graph` counterparts as Blueprint-exists-no-EB
+  cross-links across Batches 20-22). Selected `math.graph` over `math.func`'s 13 ready candidates
+  since it closes existing cross-link debt with zero new prerequisite cost. Authored 3 concepts:
+  `graph` (order/size notation, weighted/multigraph extensions — deliberately does NOT re-teach
+  `math.disc.graph`'s foundational content), `tree` (six equivalent tree characterizations,
+  Cayley's formula via Prüfer sequences), `minimum-spanning-tree` (cut/cycle properties
+  unifying Kruskal's/Prim's correctness, MST-vs-shortest-path-tree distinction). `math.graph`
+  0/16 → **3/16**. `math.disc`/`math.func` unchanged (20/32, 1/29, both parked). Mathematics
+  **325/908 → 328/908**, 807 remaining. Genuine Blueprint-staleness finding corrected (not fixed
+  in the Blueprint itself, per standing rule): `minimum-spanning-tree`'s Blueprint declared
+  `math.disc.spanning-tree` MISSING/independence-mode, stale since that concept was authored in
+  Batch 23 of this same campaign — this entry's own Transfer Connections substantively
+  incorporate it instead. Full per-concept detail in `COVERAGE.md` Batch 24. Validated: KG
+  validator PASS (908/908 reachable, file untouched), 0 orphan/duplicate EB files, `tsc --noEmit`
+  clean, targeted tests 479/479 passed, all 3 heading structures diffed clean on the first pass
+  (0 diffs each). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched.
+  Fresh math.graph frontier computed: 4 candidates ready (`connectivity`, `eulerian-circuit`,
+  `hamiltonian-cycle`, `graph-coloring`). This is a genuinely multi-session campaign;
+  continuation should verify state via `scripts/math/state.ts` fresh each time rather than
+  trusting any number recorded here.
+- **Batch 25 — closing math.graph's post-Batch-24 frontier** (2026-09-12): re-computed the
+  frontier fresh — the exact 4 concepts deferred from Batch 24 were confirmed still ready:
+  `connectivity`, `eulerian-circuit`, `hamiltonian-cycle`, `graph-coloring`, all authored, all
+  Blueprint-grounded. `hamiltonian-cycle` develops Dirac's theorem in full depth (deferred by
+  `eulerian-circuit`'s own introductory-breadth treatment of the same theorem, resolved by
+  division of labor, cross-referenced both ways). A second genuine Blueprint-staleness finding
+  (same class as Batch 24's): `graph-coloring`'s own Blueprint declares its
+  `math.disc.graph-coloring` cross-link "MISSING on disk" — verified via directory listing that
+  both the Blueprint and the EB entry genuinely exist; corrected in this entry's own Curriculum
+  Feedback, Blueprint left unmodified. `math.graph` **3/16 → 7/16**. Mathematics
+  **328/908 → 332/908**, 803 remaining. Full per-concept detail in `COVERAGE.md` Batch 25.
+  Validated: KG validator PASS (908/908 reachable, file untouched), 0 orphan/duplicate EB files,
+  `tsc --noEmit` clean, targeted tests 479/479 passed, all 4 heading structures diffed clean on
+  the first pass (0 diffs each). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime
+  file touched. Fresh math.graph frontier computed: 6 candidates ready (`graph-invariants`,
+  `graph-operations`, `maximum-flow`, `matching`, `ramsey-theory`, `extremal-graph-theory`). This
+  is a genuinely multi-session campaign; continuation should verify state via
+  `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
+- **Batch 26 — closing 3 of math.graph's post-Batch-25 frontier** (2026-09-12): re-computed the
+  frontier fresh — 6 candidates confirmed ready; selected the 3 sharing `math.graph.graph` as
+  their sole prerequisite (`graph-invariants`, `graph-operations`, `matching`), deferring
+  `maximum-flow`/`ramsey-theory`/`extremal-graph-theory` (each needing a deeper or cross-domain
+  prerequisite) to a future batch. All 3 authored, all Blueprint-grounded. `math.graph`
+  **7/16 → 10/16**. Mathematics **332/908 → 335/908**, 800 remaining. One genuine forward
+  connection recorded (not developed further): König's theorem (`matching`) and Menger's theorem
+  (`connectivity`) share the same max-flow-min-cut/LP-duality pattern. Full per-concept detail in
+  `COVERAGE.md` Batch 26. Validated: KG validator PASS (908/908 reachable, file untouched), 0
+  orphan/duplicate EB files, `tsc --noEmit` clean, targeted tests 479/479 passed, all 3 heading
+  structures diffed clean on the first pass (0 diffs each). No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Fresh math.graph
+  frontier computed: 3 candidates ready (`maximum-flow`, `ramsey-theory`,
+  `extremal-graph-theory`), all expert/research difficulty. This is a genuinely multi-session
+  campaign; continuation should verify state via `scripts/math/state.ts` fresh each time rather
+  than trusting any number recorded here.
+- **Batch 27 — closing math.graph's final ready frontier, domain now PARKED** (2026-09-12):
+  re-computed the frontier fresh — the exact 3 concepts deferred from Batch 26 were confirmed
+  still ready: `maximum-flow`, `ramsey-theory`, `extremal-graph-theory`, all authored, all
+  Blueprint-grounded. `math.graph` **10/16 → 13/16**. **Self-correction during validation**: draft
+  Version History text in all 3 entries initially (incorrectly) claimed this batch would reach
+  16/16 DOMAIN CERTIFIED; running `scripts/math/state.ts` fresh (per standing discipline) showed
+  `eb: 13`, not 16 — the domain's remaining 3 concepts (`shortest-path`, `algebraic-graph-theory`,
+  `random-graph`) each need a cross-domain prerequisite outside math.graph not yet authored
+  (`math.disc.asymptotic-notation`, `math.linalg.eigenvalues`, `math.prob.probability-axioms`
+  respectively). Corrected all 3 files' Version History sections to state 13/16 PARKED before
+  commit. math.graph joins math.disc and math.func as a parked domain. Mathematics
+  **335/908 → 338/908**, 797 remaining. Full per-concept detail in `COVERAGE.md` Batch 27.
+  Validated: KG validator PASS (908/908 reachable, file untouched), 0 orphan/duplicate EB files,
+  `tsc --noEmit` clean, targeted tests 479/479 passed, all 3 heading structures diffed clean on
+  the first pass (0 diffs each). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime
+  file touched. math.graph has 0 topologically-ready candidates remaining; the next step is
+  either a bounded cross-domain excursion to unblock one of the three parked domains, or
+  selecting a fresh unstarted domain. This is a genuinely multi-session campaign; continuation
+  should verify state via `scripts/math/state.ts` fresh each time rather than trusting any number
+  recorded here.
+- **Batch 28 — resuming math.func as a standalone domain campaign** (2026-09-12): with
+  math.disc and math.graph both PARKED (0 topologically-ready candidates each), computed the
+  frontier fresh across ALL mathematics domains rather than defaulting to a brand-new unstarted
+  domain. Result: `math.func` — parked at 1/29 since Batch 14's small cross-domain excursion —
+  actually had 13 concepts topologically ready, all gated only on the already-authored
+  `function-concept`. Resumed it as a full standalone campaign (matching the precedent of
+  continuing math.disc after math.alg's certification). Authored 4 concepts: `domain-range`
+  (algebraic domain restriction vs. structural range reasoning), `function-notation` ($f(x)$ as
+  substitution, never multiplication), `injectivity` (the universal claim proven generally, the
+  horizontal line test's all-or-nothing verdict), `surjectivity` (range-equals-codomain,
+  independence from injectivity). `math.func` **1/29 → 5/29**. Mathematics
+  **338/908 → 342/908**, 793 remaining. Full per-concept detail in `COVERAGE.md` Batch 28.
+  Validated: KG validator PASS (908/908 reachable, file untouched), 0 orphan/duplicate EB files,
+  `tsc --noEmit` clean, targeted tests 479/479 passed, all 4 heading structures diffed clean on
+  the first pass (0 diffs each). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime
+  file touched. Fresh math.func frontier computed: 10 candidates ready (`bijection` newly
+  unblocked by `surjectivity`; `graph-of-function`, `real-valued-function`, `composition`,
+  `periodic-function`, `linear-function`, `exponential-function`, `piecewise-function`,
+  `monotonic-function`, `function-operations`). This is a genuinely multi-session campaign;
+  continuation should verify state via `scripts/math/state.ts` fresh each time rather than
+  trusting any number recorded here.
+- **Batch 29 — math.func: operations, composition, monotonicity, bijection** (2026-09-12):
+  re-computed the frontier fresh — 10 candidates confirmed ready; authored 4
+  (`function-operations`, `composition`, `monotonic-function`, `bijection`), deferring
+  `graph-of-function`/`real-valued-function`/`periodic-function`/`linear-function`/
+  `exponential-function`/`piecewise-function` to a future batch. All Blueprint-grounded.
+  `math.func` **5/29 → 9/29**. Mathematics **342/908 → 346/908**, 789 remaining. Genuine
+  Blueprint-staleness finding (`bijection`'s own Blueprint claims its `math.found.cardinality`
+  cross-link is unauthored; verified both files exist, since `math.found` was CERTIFIED
+  2026-07-26 — corrected in that entry's own Curriculum Feedback). Full per-concept detail in
+  `COVERAGE.md` Batch 29. Validated: KG validator PASS (908/908 reachable, file untouched), 0
+  orphan/duplicate EB files, `tsc --noEmit` clean, targeted tests 479/479 passed, all 4 heading
+  structures diffed clean on the first pass (0 diffs each). No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Fresh math.func
+  frontier computed: 7 candidates ready (`inverse-functions` newly unblocked by `bijection`;
+  `graph-of-function`, `real-valued-function`, `periodic-function`, `linear-function`,
+  `exponential-function`, `piecewise-function`). This is a genuinely multi-session campaign;
+  continuation should verify state via `scripts/math/state.ts` fresh each time rather than
+  trusting any number recorded here.
+- **Batch 30 — math.func: inverses, graphs, real-valued functions, linear functions**
+  (2026-09-12): re-computed the frontier fresh — the exact 7 concepts deferred from Batch 29
+  were confirmed still ready; authored 4 (`inverse-functions`, `graph-of-function`,
+  `real-valued-function`, `linear-function`), deferring
+  `periodic-function`/`exponential-function`/`piecewise-function` to a future batch. All
+  Blueprint-grounded, reused by reference. `math.func` **9/29 → 13/29**. Mathematics
+  **346/908 → 350/908**, 785 remaining. No genuine content-overlap or Blueprint/KG metadata
+  discrepancy found in any of the 4 entries. Full per-concept detail in `COVERAGE.md` Batch 30.
+  Validated: KG validator PASS (908/908 reachable, file untouched), 0 orphan/duplicate EB files,
+  `tsc --noEmit` clean, targeted tests 479/479 passed, all 4 heading structures diffed clean on
+  the first pass (0 diffs each). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime
+  file touched. Fresh math.func frontier computed: 8 candidates ready (`zero-of-function`,
+  `even-odd-functions`, `transformations-functions` newly unblocked by `graph-of-function`;
+  `periodic-function`, `quadratic-function` newly unblocked by `linear-function`;
+  `exponential-function`, `logarithmic-function` newly unblocked by `inverse-functions`;
+  `piecewise-function`). This is a genuinely multi-session campaign; continuation should verify
+  state via `scripts/math/state.ts` fresh each time rather than trusting any number recorded
+  here.
+- **Batch 31 — math.func: zeros, parity, transformations, periodicity** (2026-09-12):
+  re-computed the frontier fresh — the exact 8 concepts deferred from Batch 30 were confirmed
+  still ready; authored 4 (`zero-of-function`, `even-odd-functions`,
+  `transformations-functions`, `periodic-function`), deferring
+  `quadratic-function`/`exponential-function`/`logarithmic-function`/`piecewise-function` to a
+  future batch. All Blueprint-grounded, reused by reference, birth types adopted directly from
+  each Blueprint's own classification. `math.func` **17/29** (13→17) — only 12 concepts remain
+  before the domain reaches DOMAIN CERTIFICATION. Mathematics **354/908** (350→354), 781
+  remaining. No genuine content-overlap or Blueprint/KG metadata discrepancy found. Full
+  per-concept detail in `COVERAGE.md` Batch 31. Validated: KG validator PASS (908/908 reachable,
+  file untouched), 0 orphan/duplicate EB files, `tsc --noEmit` clean, targeted tests 479/479
+  passed, all 4 heading structures diffed clean on the first pass (0 diffs each). No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Fresh math.func
+  frontier computed: 4 candidates ready (`quadratic-function`, `exponential-function`,
+  `logarithmic-function`, `piecewise-function`). This is a genuinely multi-session campaign;
+  continuation should verify state via `scripts/math/state.ts` fresh each time rather than
+  trusting any number recorded here.
+- **Batch 32 — math.func: quadratics, exponentials, logarithms, piecewise functions**
+  (2026-09-12): re-computed the frontier fresh — the exact 4 concepts deferred from Batch 31
+  were confirmed still ready; authored all 4 (`quadratic-function`, `exponential-function`,
+  `logarithmic-function`, `piecewise-function`), closing the ENTIRE frontier available at batch
+  start with none deferred. All Blueprint-grounded, reused by reference, birth types adopted
+  directly from each Blueprint's own classification. `math.func` **21/29** (17→21) — only 8
+  concepts remain before the domain reaches DOMAIN CERTIFICATION (would be the sixth, after
+  math.found/math.geom/math.arith/math.nt/math.alg). Mathematics **358/908** (354→358), 777
+  remaining. No genuine content-overlap or Blueprint/KG metadata discrepancy found; one genuine
+  cross-concept dependency closed (`logarithmic-function`'s forward reference to
+  `exponential-function`'s self-derivative property). Full per-concept detail in `COVERAGE.md`
+  Batch 32. Validated: KG validator PASS (908/908 reachable, file untouched), 0 orphan/duplicate
+  EB files, `tsc --noEmit` clean, targeted tests 479/479 passed, all 4 heading structures diffed
+  clean on the first pass (0 diffs each). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/
+  runtime file touched. Fresh math.func frontier computed: 3 candidates ready (`vertex-form`,
+  `polynomial-function` newly unblocked by `quadratic-function`; `step-function` newly unblocked
+  by `piecewise-function`). This is a genuinely multi-session campaign; continuation should
+  verify state via `scripts/math/state.ts` fresh each time rather than trusting any number
+  recorded here.
+- **Batch 33 — math.func: vertex form, polynomial functions, step functions** (2026-09-13):
+  session started with a fast-forward reconciliation to 6 unrelated upstream commits (PCD-004
+  runtime session/tab work, zero file overlap, verified via `git diff --stat` before merging).
+  Re-computed the frontier fresh — the exact 3 concepts deferred from Batch 32 were confirmed
+  still ready; authored all 3 (`vertex-form`, `polynomial-function`, `step-function`), closing the
+  ENTIRE frontier available at batch start with none deferred. All 3 Blueprint-grounded, reused by
+  reference. `vertex-form` and `step-function` had explicit Blueprint birth-type columns (adopted
+  directly); `polynomial-function`'s Blueprint was the FIRST in this entire campaign to lack one —
+  its 3 misconceptions were independently classified instead (MC-1 Type 1, MC-2 Type 5, MC-3 Type
+  3), stated explicitly as independent rather than Blueprint-adopted. `math.func` **24/29**
+  (21→24) — only 5 concepts remain before DOMAIN CERTIFICATION (would be the sixth, after
+  math.found/math.geom/math.arith/math.nt/math.alg). Mathematics **361/908** (358→361), 774
+  remaining. No genuine content-overlap found. Full per-concept detail in `COVERAGE.md` Batch 33.
+  Validated: KG validator PASS (908/908 reachable, file untouched), 0 orphan/duplicate EB files,
+  `tsc --noEmit` clean, targeted tests 479/479 passed, all 3 heading structures diffed clean on the
+  first pass (0 diffs each). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file
+  touched. Fresh math.func frontier computed (verified, not assumed): 3 of the remaining 5
+  concepts are already ready (`rational-root`, `end-behavior`, `rational-function`, all newly
+  unblocked by `polynomial-function`), leaving only `horizontal-asymptote`/`vertical-asymptote`
+  blocked on `rational-function`. This is a genuinely multi-session campaign; continuation should
+  verify state via `scripts/math/state.ts` fresh each time rather than trusting any number
+  recorded here.
+- **Batch 34 — math.func: end behavior, rational functions, rational root theorem** (2026-09-13):
+  session started with a fast-forward reconciliation to 1 unrelated upstream commit (MCQ
+  non-committal-hedge-detector fix, zero file overlap, verified via `git diff --stat` before
+  merging). Re-computed the frontier fresh — the exact 3 concepts deferred from Batch 33 were
+  confirmed still ready; authored all 3 (`end-behavior`, `rational-function`, `rational-root`),
+  closing the ENTIRE frontier available at batch start with none deferred. All 3 Blueprint-
+  grounded, reused by reference. `end-behavior` and `rational-root` had explicit Blueprint
+  birth-type columns (adopted directly); `rational-function`'s Blueprint was the SECOND in this
+  campaign (after `polynomial-function`) to lack one — its 3 misconceptions were independently
+  classified instead (MC-1 Type 5, MC-2 Type 2, MC-3 Type 1), stated explicitly as independent
+  rather than Blueprint-adopted. `math.func` **27/29** (24→27) — only 2 concepts remain
+  (`horizontal-asymptote`, `vertical-asymptote`, both already confirmed topologically ready,
+  both gated solely on the now-authored `rational-function`) before DOMAIN CERTIFICATION (would
+  be the sixth, after math.found/math.geom/math.arith/math.nt/math.alg). Mathematics **364/908**
+  (361→364), 771 remaining. No genuine content-overlap found. Full per-concept detail in
+  `COVERAGE.md` Batch 34. Validated: KG validator PASS (908/908 reachable, file untouched), 0
+  orphan/duplicate EB files, `tsc --noEmit` clean, targeted tests 479/479 passed, all 3 heading
+  structures diffed clean on the first pass (0 diffs each). No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Fresh math.func
+  frontier computed (verified, not assumed): both remaining concepts already ready, each
+  requiring only `rational-function` — one small final wave reaches DOMAIN CERTIFICATION. This
+  is a genuinely multi-session campaign; continuation should verify state via
+  `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
+- **Batch 35 — math.func FINAL wave (DOMAIN CERTIFIED) + opening math.calc** (2026-09-13):
+  re-computed the frontier fresh — the exact 2 concepts deferred from Batch 34 were confirmed
+  still ready; authored both (`horizontal-asymptote`, `vertical-asymptote`), both Blueprint-
+  grounded with explicit birth-type columns (adopted directly). **`math.func` reaches 29/29 —
+  DOMAIN CERTIFIED**, the sixth after math.found/math.geom/math.arith/math.nt/math.alg. With
+  math.disc/math.graph both still parked, computed the frontier fresh across ALL mathematics
+  domains: 14 candidates spread across 11 unstarted domains with no clustering. Selected
+  `math.calc` (76 concepts, the largest unstarted domain) — verified programmatically that
+  authoring its sole ready candidate, `limits` (the entry node), unblocks 7 further `math.calc`
+  concepts at once. Authored `math.calc.limits`; its Blueprint uses an OLDER document format
+  and was the THIRD in this campaign to lack an explicit birth-type column (after
+  `polynomial-function`, `rational-function`) — its 3 misconceptions were independently
+  classified (MC-1 Type 1, MC-2 Type 1, MC-3 Type 5), stated explicitly as independent.
+  Mathematics **367/908** (364→367); `math.calc` **1/76** (opened). No genuine content-overlap
+  found beyond a Blueprint/KG `unlocks` metadata discrepancy for `math.calc.limits` (recorded,
+  not fixed, KG followed). Full per-concept detail in `COVERAGE.md` Batch 35. Validated: KG
+  validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts` confirms
+  math.func `ebComplete: true` and 6 EB-certified domains, `tsc --noEmit` clean, targeted tests
+  479/479 passed, all 3 heading structures diffed clean on the first pass (0 diffs each). No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. This is a genuinely
+  multi-session campaign; continuation should verify state via `scripts/math/state.ts` fresh
+  each time rather than trusting any number recorded here.
+- **Batch 36 — math.calc: one-sided limits, limit laws, limits at infinity, continuity**
+  (2026-09-13): re-computed the frontier fresh — the exact 7 candidates unblocked by Batch 35's
+  `limits` were confirmed still ready. Selected 4 most tightly coupled to `limits` itself
+  (`one-sided-limits`, `limit-laws`, `limits-at-infinity`, `continuity`), deferring
+  `derivative-intro`/`riemann-sums`/`parametric-curves` (each needing an additional
+  prerequisite). All 4 Blueprint-grounded, reused by reference. 3 of the 4 Blueprints
+  (`one-sided-limits`, `limit-laws`, `continuity`) lacked explicit birth-type columns —
+  the fourth/fifth/seventh such gaps this campaign — misconceptions independently classified
+  in each; `limits-at-infinity`'s Blueprint likewise lacked one (the sixth such gap), also
+  independently classified. `limits-at-infinity` substantively incorporates the already-authored
+  `math.func.horizontal-asymptote` (Batch 35) as a direct cross-link, closing that entry's own
+  orientation-level preview — the first genuine cross-domain forward-reference-closure in this
+  domain. `math.calc` **5/76** (1→5). Mathematics **371/908** (367→371), 764 remaining. No
+  genuine content-overlap found beyond a Blueprint/KG `unlocks` discrepancy for `continuity`
+  (recorded, not fixed, KG followed). Full per-concept detail in `COVERAGE.md` Batch 36.
+  Validated: KG validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts`
+  confirms math.calc 5/76 and mathematics 371/908 (6 EB-certified domains unchanged), `tsc
+  --noEmit` clean, targeted tests 479/479 passed, all 4 heading structures diffed clean on the
+  first pass (0 diffs each). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file
+  touched. Fresh math.calc frontier computed: 6 candidates ready (`continuity-types`, `ivt`,
+  `derivative-intro`, `parametric-curves`, `riemann-sums`, `squeeze-theorem`). This is a
+  genuinely multi-session campaign; continuation should verify state via
+  `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
+- **Batch 37 — math.calc: discontinuity types, IVT, the derivative, squeeze theorem**
+  (2026-09-13): re-computed the frontier fresh — the exact 6 candidates unblocked by Batch 36
+  were confirmed still ready. Selected 4 (`continuity-types`, `ivt`, `derivative-intro`,
+  `squeeze-theorem`), deferring `parametric-curves`/`riemann-sums` (each needing a prerequisite
+  set less tightly coupled to the limits/continuity chain). All 4 Blueprint-grounded, reused by
+  reference. **None of the 4 Blueprints carried an explicit birth-type column** — the
+  eighth/ninth/tenth/eleventh such gaps this campaign — every misconception independently
+  classified. `derivative-intro` is this domain's central payoff concept, everything since
+  `limits` has been building toward — its own MC-1 resolves the classic "a tangent needs two
+  points" objection via the constructed-second-point-in-the-limit technique. `math.calc`
+  **9/76** (5→9). Mathematics **375/908** (371→375), 760 remaining. No genuine content-overlap
+  found beyond two Blueprint/KG `unlocks` discrepancies (recorded, not fixed, KG followed). Full
+  per-concept detail in `COVERAGE.md` Batch 37. Validated: KG validator PASS (908/908 reachable,
+  file untouched), `scripts/math/state.ts` confirms math.calc 9/76 and mathematics 375/908 (6
+  EB-certified domains unchanged), `tsc --noEmit` clean, targeted tests 479/479 passed, all 4
+  heading structures diffed clean on the first pass (0 diffs each). No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Fresh math.calc
+  frontier computed: 3 candidates ready (`derivative-definition`, `parametric-curves`,
+  `riemann-sums`). This is a genuinely multi-session campaign; continuation should verify state
+  via `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
+- **Batch 38 — math.calc: the derivative's formal definition, parametric curves, Riemann sums**
+  (2026-09-12): re-computed the frontier fresh — the exact 3 candidates left ready after
+  Batch 37 were confirmed still ready, closing the ENTIRE frontier available at batch start
+  with none deferred: `derivative-definition`, `parametric-curves`, `riemann-sums`, all
+  Blueprint-grounded, reused by reference. **None of the 3 Blueprints carried an explicit
+  birth-type column** — the twelfth, thirteenth, and fourteenth such gaps this campaign —
+  every misconception independently classified (`derivative-definition` MC-1
+  DIFFERENCE-QUOTIENT-IS-DERIVATIVE/MC-2 CONTINUITY-IMPLIES-DIFFERENTIABILITY/MC-3
+  DIRECT-SUBSTITUTION-INTO-QUOTIENT, all Type 1; `parametric-curves` MC-1
+  DIRECTION-OF-TRACING-IGNORED Type 2/MC-2 EVERY-PARAMETRIC-CURVE-IS-A-FUNCTION Type 1/MC-3
+  ELIMINATING-PARAMETER-LOSES-NOTHING Type 5; `riemann-sums` MC-1
+  RECTANGLES-TOUCH-CURVE-AT-TOP Type 2/MC-2 MORE-RECTANGLES-CHANGES-EXACT-AREA Type 1/MC-3
+  RIEMANN-SUM-IS-THE-INTEGRAL Type 1). `derivative-definition` formalizes `derivative-intro`'s
+  informal secant-to-tangent picture into the computable limit definition; its own MC-1 and
+  `riemann-sums`' own MC-3 are both the identical pre-limit-expression-is-the-answer mechanism
+  already documented for `math.calc.limits`' own MC-1 — `riemann-sums`' Blueprint explicitly
+  names this cross-reference in its own root-cause text. **A first for this domain's batches:
+  none of the 3 concepts carried a Blueprint/KG metadata discrepancy** — every stated
+  unlocks/cross_links field matched the live KG exactly, confirmed by direct query. `math.calc`
+  **12/76** (9→12). Mathematics **378/908** (375→378), 757 remaining. Full per-concept detail
+  in `COVERAGE.md` Batch 38. Validated: KG validator PASS (908/908 reachable, file untouched),
+  `scripts/math/state.ts` confirms math.calc 12/76 and mathematics 378/908 (6 EB-certified
+  domains unchanged), `tsc --noEmit` clean, targeted tests 479/479 passed, all 3 heading
+  structures diffed clean on the first pass (0 diffs each). No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. A fresh math.calc
+  frontier check is deferred to the next batch. This is a genuinely multi-session campaign;
+  continuation should verify state via `scripts/math/state.ts` fresh each time rather than
+  trusting any number recorded here.
+- **Batch 39 — math.calc: the definite integral, differentiation rules, differentiability,
+  linearization** (2026-09-12): re-computed the frontier fresh — 8 candidates ready
+  (`definite-integral`, `derivative-rules`, `differentiability`, `lhopitals-rule`,
+  `line-integrals`, `linearization`, `mean-value-theorem`, `multivariable-intro`). Selected
+  the 4 sharing the tightest single-prerequisite coupling to `derivative-definition`
+  (`definite-integral` via `riemann-sums`), deferring the 4 needing a second prerequisite
+  (`continuity`, `limits`, or `math.geom.vectors-3d`). All 4 Blueprint-grounded, reused by
+  reference. None of the 4 Blueprints carried an explicit birth-type column — every
+  misconception independently classified (`definite-integral` MC-1
+  INTEGRAL-IS-ALWAYS-POSITIVE-AREA Type 3/MC-2 DEFINITE-INTEGRAL-NEEDS-ANTIDERIVATIVE Type
+  5/MC-3 INTEGRAL-ORDER-DOESNT-MATTER Type 1; `derivative-rules` MC-1
+  POWER-RULE-FOR-EXPONENTIAL/MC-2 COEFFICIENT-MULTIPLICATION-OMITTED/MC-3
+  DISTRIBUTING-DERIVATIVE-OVER-PRODUCTS, all Type 1; `differentiability` MC-1
+  DIFFERENTIABILITY-ASSUMED-FROM-SMOOTH-APPEARANCE Type 2/MC-2
+  CONTINUITY-ASSUMED-TO-IMPLY-DIFFERENTIABILITY Type 1 — a third recurrence of the same
+  implication-reversal mechanism already documented for `continuity-types` and
+  `derivative-definition`; `linearization` MC-1 LINEARIZATION-ASSUMED-NEW-PROCEDURE Type
+  5/MC-2 LINEARIZATION-ACCURACY-ASSUMED-UNIFORM Type 1/MC-3
+  DIFFERENTIAL-ASSUMED-SEPARATE-CONCEPT Type 4). **Continues the zero-Blueprint/KG-
+  discrepancy pattern begun in Batch 38** — all 4 concepts' stated unlocks/cross_links
+  matched the live KG exactly, for the second consecutive batch. `math.calc` **16/76**
+  (12→16). Mathematics **382/908** (378→382), 753 remaining. Full per-concept detail in
+  `COVERAGE.md` Batch 39. Validated: KG validator PASS (908/908 reachable, file untouched),
+  `scripts/math/state.ts` confirms math.calc 16/76 and mathematics 382/908 (6 EB-certified
+  domains unchanged), `tsc --noEmit` clean, targeted tests 479/479 passed, all 4 heading
+  structures diffed clean on the first pass (0 diffs each). No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Fresh math.calc
+  frontier computed: 13 candidates ready (`antiderivatives`, `arc-length`, `chain-rule`,
+  `critical-points`, `ftc-part1`, `higher-order-derivatives`, `improper-integrals`,
+  `integral-area`, `lhopitals-rule`, `line-integrals`, `mean-value-theorem`,
+  `multivariable-intro`, `product-rule`). This is a genuinely multi-session campaign;
+  continuation should verify state via `scripts/math/state.ts` fresh each time rather than
+  trusting any number recorded here.
+- **Batch 40 — math.calc: antiderivatives, critical points, higher-order derivatives,
+  the product rule** (2026-09-12): re-computed the frontier fresh — 13 candidates ready.
+  Selected the 4 sharing the tightest single-prerequisite coupling to `derivative-rules`
+  (`antiderivatives`, `critical-points`, `higher-order-derivatives`, `product-rule`),
+  deferring the 9 needing a second prerequisite or built on `definite-integral`. All 4
+  Blueprint-grounded, reused by reference. None carried an explicit birth-type column —
+  every misconception independently classified (`antiderivatives` MC-1
+  CONSTANT-OMISSION/MC-2 REVERSE-POWER-RULE-WRONG/MC-3 ANTIDERIVATIVE-IS-UNIQUE, all Type
+  1; `critical-points` MC-1 CRITICAL-POINT-ASSUMED-EXTREMUM Type 1 — a FOURTH recurrence
+  of the implication-reversal mechanism already documented for
+  `continuity-types`/`derivative-definition`/`differentiability` — MC-2
+  UNDEFINED-DERIVATIVE-CATEGORY-MISSED Type 5/MC-3
+  OUTSIDE-DOMAIN-POINT-TREATED-AS-CRITICAL Type 1; `higher-order-derivatives` MC-1
+  SECOND-DERIVATIVE-IS-FIRST-SQUARED Type 3/MC-2
+  NOTATION-D2Y-DX2-READ-AS-SQUARED-DERIVATIVE Type 4 (the Blueprint's own Teaching Notes
+  link MC-1/MC-2 as one mechanism at two levels)/MC-3
+  EXPONENT-SUBTRACTED-COEFFICIENT-IGNORED Type 1, plus a genuine Tier-1 cross-link to the
+  unauthored `math.de.second-order-ode`; `product-rule` MC-1
+  DERIVATIVE-DISTRIBUTED-OVER-PRODUCT Type 1 (the identical misconception already
+  documented as `derivative-rules`' own MC-3)/MC-2/MC-3 Type 5). **Fourth consecutive
+  batch with zero Blueprint/KG metadata discrepancies.** `math.calc` **20/76** (16→20).
+  Mathematics **386/908** (382→386), 749 remaining. Full per-concept detail in
+  `COVERAGE.md` Batch 40. Validated: KG validator PASS (908/908 reachable, file
+  untouched), `scripts/math/state.ts` confirms math.calc 20/76 and mathematics 386/908 (6
+  EB-certified domains unchanged), `tsc --noEmit` clean, targeted tests 479/479 passed,
+  all 4 heading structures diffed clean on the first pass (0 diffs each). No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Fresh math.calc
+  frontier computed: 11 candidates ready (`arc-length`, `chain-rule`, `concavity`,
+  `ftc-part1`, `improper-integrals`, `integral-area`, `lhopitals-rule`, `line-integrals`,
+  `mean-value-theorem`, `multivariable-intro`, `quotient-rule`). This is a genuinely
+  multi-session campaign; continuation should verify state via `scripts/math/state.ts`
+  fresh each time rather than trusting any number recorded here.
+- **Batch 41 — math.calc: concavity, the quotient rule, area by integration, FTC Part 1**
+  (2026-09-12): re-computed the frontier fresh — 11 candidates ready. Selected `concavity`
+  (single-prereq `higher-order-derivatives`), `quotient-rule` (single-prereq
+  `product-rule`), `integral-area` and `ftc-part1` (both built on `definite-integral`,
+  `ftc-part1`'s second prereq `continuity` long-authored), deferring `arc-length`/
+  `chain-rule`/`improper-integrals`/`lhopitals-rule`/`line-integrals`/
+  `mean-value-theorem`/`multivariable-intro`. All 4 Blueprint-grounded, reused by
+  reference. None carried an explicit birth-type column — every misconception
+  independently classified (`concavity` MC-1 SECOND-DERIVATIVE-ZERO-ASSUMED-INFLECTION
+  Type 1 — a FIFTH recurrence of the necessary-vs-sufficient candidate pattern already
+  documented for `critical-points`' own MC-1 — MC-2 CONCAVITY-CONFLATED-WITH-MONOTONICITY
+  Type 2/MC-3 INFLECTION-POINT-SEARCH-IGNORES-UNDEFINED-F-DOUBLE-PRIME Type 5, the same
+  mechanism as `critical-points`' own MC-2; `quotient-rule` MC-1
+  NUMERATOR-AND-DENOMINATOR-SWAPPED-AS-F-AND-G Type 4/MC-2
+  QUOTIENT-RULE-SUBTRACTION-ORDER-REVERSED Type 1; `integral-area` MC-1
+  AREA-UNDER-CURVE-ASSUMED-NEW-OPERATION Type 5 (same mechanism as `linearization`'s own
+  MC-1)/MC-2 TOP-BOTTOM-ORDER-ASSUMED-ARBITRARY Type 1 (same mechanism as this batch's
+  own `quotient-rule` MC-2)/MC-3 SIGNED-INTEGRAL-ASSUMED-TO-ALWAYS-GIVE-UNSIGNED-AREA
+  Type 3 (the inverse direction of `definite-integral`'s own MC-1); `ftc-part1` MC-1
+  VARIABLE-CONFUSION-T-AND-X Type 4/MC-2 LOWER-LIMIT-DETERMINES-FTC1 Type 5/MC-3
+  CHAIN-RULE-OMITTED Type 1). **Fifth consecutive batch with zero Blueprint/KG metadata
+  discrepancies.** `math.calc` **24/76** (20→24). Mathematics **390/908** (386→390), 745
+  remaining. Full per-concept detail in `COVERAGE.md` Batch 41. Validated: KG validator
+  PASS (908/908 reachable, file untouched), `scripts/math/state.ts` confirms math.calc
+  24/76 and mathematics 390/908 (6 EB-certified domains unchanged), `tsc --noEmit`
+  clean, targeted tests 479/479 passed, all 4 heading structures diffed clean on the
+  first pass (0 diffs each). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/
+  runtime file touched. Fresh math.calc frontier computed: 9 candidates ready
+  (`arc-length`, `chain-rule`, `ftc-part2`, `improper-integrals`, `lhopitals-rule`,
+  `line-integrals`, `mean-value-theorem`, `multivariable-intro`, `volume-revolution`).
+  This is a genuinely multi-session campaign; continuation should verify state via
+  `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
+- **Batch 42 — math.calc: volumes of revolution, FTC Part 2, arc length, the chain rule**
+  (2026-09-12): re-synced `main` to `origin/main` (13 divergent English/physics/chemistry
+  defect-fix commits, zero overlap with mathematics files, fast-forward merge). Re-computed
+  the frontier fresh — the exact 9 candidates predicted at the end of Batch 41 were confirmed
+  still ready. Selected `volume-revolution` (single-prereq `integral-area`), `ftc-part2`
+  (`ftc-part1`+`antiderivatives`), `arc-length` (`definite-integral`+`derivative-rules`,
+  cross-link `math.geom.differential-geometry-curves` genuinely incorporated), `chain-rule`
+  (`derivative-rules`+`math.func.composition`), deferring `improper-integrals`/
+  `lhopitals-rule`/`line-integrals`/`mean-value-theorem`/`multivariable-intro`. All 4
+  Blueprint-grounded, none carrying an explicit birth-type column — every misconception
+  independently classified (`volume-revolution` MC-1 Type 1 disk-method overgeneralized past
+  its touches-the-axis boundary/MC-2 Type 5 shell-method undertaught; `ftc-part2` MC-1 Type 4
+  notation-induced bounds-swap/MC-2 Type 1 overgeneralized $+C$ from indefinite integrals/MC-3
+  Type 1 imported single-point-evaluation template; `arc-length` MC-1 Type 5 missing
+  Riemann-sum connection/MC-2 Type 2 perceptual slope-alone intuition/MC-3 Type 5 the same
+  missing-connection mechanism recurring at the parametric level; `chain-rule` MC-1 Type 1 —
+  the Blueprint's own declared foundational misconception, dropped inner-derivative factor,
+  paralleling `derivative-rules`' MC-2 — MC-2 Type 1 outer evaluated at $x$ not $g(x)$/MC-3
+  Type 1 product misclassified as composition, mirroring `derivative-rules`' MC-3 and
+  `product-rule`'s MC-1). **3 of 4 zero-discrepancy** (`volume-revolution`, `ftc-part2`,
+  `chain-rule`); `arc-length` carries one genuine discrepancy (Blueprint `mastery_threshold`
+  0.8/`estimated_hours` 6 vs. KG 0.7/5, resolved toward the KG, MAMR unaffected — both give
+  4/5 by coincidence of the ceiling function), breaking the five-consecutive-zero streak.
+  `chain-rule` also resolves a previously-open verification item: its Blueprint's stated
+  `unlocks: math.calc.implicit-differentiation` is confirmed to match the live KG exactly.
+  `math.calc` **28/76** (24→28). Mathematics **394/908** (390→394), 741 remaining. Full
+  per-concept detail in `COVERAGE.md` Batch 42. Validated: KG validator PASS (908/908
+  reachable, file untouched), `scripts/math/state.ts` confirms math.calc 28/76 and
+  mathematics 394/908 (6 EB-certified domains unchanged), `tsc --noEmit` clean, targeted
+  tests 479/479 passed, all 4 heading structures diffed clean on the first pass (0 diffs
+  each). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Fresh
+  math.calc frontier computed: 11 candidates ready (`derivative-exponential`,
+  `derivative-ln`, `implicit-differentiation` — newly unblocked by `chain-rule` —
+  `improper-integrals`, `lhopitals-rule`, `line-integrals`, `mean-value-theorem`,
+  `multivariable-intro`, `parametric-calculus`, `surface-area-integral`,
+  `u-substitution` — the last newly unblocked by `ftc-part2`). This is a genuinely
+  multi-session campaign; continuation should verify state via `scripts/math/state.ts`
+  fresh each time rather than trusting any number recorded here.
+- **Batch 43 — math.calc: derivatives of exponentials/logarithms, implicit differentiation,
+  u-substitution** (2026-09-12): re-fetched `main` (0 divergence, clean). Re-computed the
+  frontier fresh — the exact 11 candidates predicted at the end of Batch 42 were confirmed
+  still ready. Selected all 4 direct children of Batch 42's `chain-rule`/`ftc-part2`:
+  `derivative-exponential` (`chain-rule`+`math.func.exponential-function`), `derivative-ln`
+  (`chain-rule`+`math.func.logarithmic-function`), `implicit-differentiation` (`chain-rule`
+  only), `u-substitution` (`ftc-part2`+`chain-rule`), deferring `improper-integrals`/
+  `lhopitals-rule`/`line-integrals`/`mean-value-theorem`/`multivariable-intro`/
+  `parametric-calculus`/`surface-area-integral`. All 4 Blueprint-grounded, none carrying an
+  explicit birth-type column — every misconception independently classified
+  (`derivative-exponential` MC-1 Type 1 overgeneralizing $e^x$'s special-case simplicity to
+  every base/MC-2 Type 1 a direct transplant of `chain-rule`'s own foundational MC-1;
+  `derivative-ln` MC-1/MC-2 the IDENTICAL mechanisms as `derivative-exponential`'s own,
+  mirrored across the inverse function — a third recurrence of the inner-derivative-missing
+  pattern across this concept family; `implicit-differentiation` MC-1 Type 1 — the
+  Blueprint's own prose explicitly names this a direct transplant of `chain-rule`'s
+  inner-derivative-missing misconception, a fourth documented recurrence this campaign —
+  MC-2/MC-3 both Type 5 instruction-induced; `u-substitution` MC-1 Type 1 overgeneralizing
+  the substitution pattern past its validity condition, the same scope-overextension shape
+  as `volume-revolution`'s own MC-1/MC-2 Type 4 notation-induced bound-conversion
+  omission/MC-3 Type 1 the identical mechanism as `derivative-rules`' own MC-2
+  COEFFICIENT-MULTIPLICATION-OMITTED). **All 4 concepts zero-discrepancy**, restarting the
+  streak after Batch 42's `arc-length` broke the prior five-consecutive-zero run. `math.calc`
+  **32/76** (28→32). Mathematics **398/908** (394→398), 737 remaining. Full per-concept
+  detail in `COVERAGE.md` Batch 43. Validated: KG validator PASS (908/908 reachable, file
+  untouched), `scripts/math/state.ts` confirms math.calc 32/76 and mathematics 398/908 (6
+  EB-certified domains unchanged), `tsc --noEmit` clean, targeted tests 479/479 passed, all
+  4 heading structures diffed clean on the first pass (0 diffs each). No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Fresh math.calc
+  frontier computed: 10 candidates ready (`improper-integrals`, `integration-by-parts` —
+  newly unblocked by `u-substitution` — `lhopitals-rule`, `line-integrals`,
+  `logarithmic-differentiation` — newly unblocked by `derivative-ln` — `mean-value-theorem`,
+  `multivariable-intro`, `parametric-calculus`, `related-rates` — newly unblocked by
+  `implicit-differentiation` — `surface-area-integral`). This is a genuinely multi-session
+  campaign; continuation should verify state via `scripts/math/state.ts` fresh each time
+  rather than trusting any number recorded here.
+- **Batch 44 — math.calc: logarithmic differentiation, related rates, surface area of
+  revolution, integration by parts** (2026-09-12): re-fetched `main` (0 divergence, clean).
+  Re-computed the frontier fresh — the exact 10 candidates predicted at the end of Batch 43
+  were confirmed still ready. Selected 4 sharing either a single already-authored
+  prerequisite or two long-authored ones: `logarithmic-differentiation` (`derivative-ln`),
+  `related-rates` (`implicit-differentiation`), `surface-area-integral` (`arc-length`),
+  `integration-by-parts` (`u-substitution`+`product-rule`), deferring
+  `improper-integrals`/`lhopitals-rule`/`line-integrals`/`mean-value-theorem`/
+  `multivariable-intro`/`parametric-calculus`. All 4 Blueprint-grounded, none carrying an
+  explicit birth-type column — every misconception independently classified
+  (`logarithmic-differentiation` MC-1 Type 1 overgeneralizing the technique into a universal
+  substitute for simpler rules/MC-2 Type 5 the identical mechanism already documented for
+  `implicit-differentiation`'s own MC-2, omitting the final back-substitution step;
+  `related-rates` MC-1 Type 1 overgeneralizing the ordinary-algebra early-substitution habit
+  into an unsafe context/MC-2 Type 2 perceptual intuition that a degenerate rate result must
+  be a setup error; `surface-area-integral` MC-1 Type 1 overgeneralizing from the
+  superficially similar volume-of-revolution formula family, omitting the arc-length
+  factor/MC-2 Type 1 the same computational-slip class as `derivative-rules`' own MC-2;
+  `integration-by-parts` — three misconceptions, not two — MC-1 Type 5 instruction-induced
+  (the u/dv choice is algebraically valid either way, so nothing signals it carries a
+  consequence without an explicit backfire demonstration)/MC-2 Type 1 overgeneralizing from
+  simple single-application examples/MC-3 Type 1 the identical misapplied-"+C" mechanism
+  already documented for `ftc-part2`'s own MC-2). **All 4 concepts zero-discrepancy**, the
+  second consecutive all-4-zero-discrepancy batch; `integration-by-parts` unlocks
+  `math.calc.reduction-formulas`, confirmed matching the live KG exactly. `math.calc`
+  **36/76** (32→36). Mathematics **402/908** (398→402), 733 remaining. Full per-concept
+  detail in `COVERAGE.md` Batch 44. Validated: KG validator PASS (908/908 reachable, file
+  untouched), `scripts/math/state.ts` confirms math.calc 36/76 and mathematics 402/908 (6
+  EB-certified domains unchanged), `tsc --noEmit` clean, targeted tests 479/479 passed, all
+  4 heading structures diffed clean on the first pass (0 diffs each). No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Fresh math.calc
+  frontier computed: 7 candidates ready (`improper-integrals`, `lhopitals-rule`,
+  `line-integrals`, `mean-value-theorem`, `multivariable-intro`, `parametric-calculus`,
+  `reduction-formulas` — the last newly unblocked by `integration-by-parts`). This is a
+  genuinely multi-session campaign; continuation should verify state via
+  `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
+- **Batch 45 — math.calc: reduction formulas, L'Hôpital's rule, the Mean Value Theorem,
+  introduction to multivariable calculus** (2026-09-12): re-fetched `main` (0 divergence,
+  clean). Re-computed the frontier fresh — the exact 7 candidates predicted at the end of
+  Batch 44 were confirmed still ready. Selected 4 sharing either a single already-authored
+  prerequisite or two long-authored ones: `reduction-formulas` (`integration-by-parts`, a
+  direct continuation from Batch 44), `lhopitals-rule` (`derivative-definition`+`limits`),
+  `mean-value-theorem` (`derivative-definition`+`continuity`), `multivariable-intro`
+  (`derivative-definition`+`math.geom.vectors-3d`), deferring
+  `improper-integrals`/`line-integrals`/`parametric-calculus`. All 4 Blueprint-grounded,
+  none carrying an explicit birth-type column — every misconception independently
+  classified (`reduction-formulas` MC-1 Type 1 overgeneralizing "apply the rule, get the
+  answer" from single-step techniques/MC-2 Type 5 instruction-induced, worked examples
+  rarely show an incorrect further-reduction attempt; `lhopitals-rule` MC-1 Type 1
+  overgeneralizing "differentiate top and bottom when the denominator vanishes" past the
+  required numerator condition/MC-2 Type 4 notation-induced, the shared "indeterminate"
+  label obscuring a quotient-vs-product distinction; `mean-value-theorem` — three
+  misconceptions — MC-1 Type 1 overgeneralization/MC-2 Type 3 language contamination
+  ("there exists" misread as "exactly one")/MC-3 Type 4 notation-induced, the closed/open
+  hypothesis asymmetry collapsed into one; `multivariable-intro` — three misconceptions,
+  all Type 1 overgeneralization of a correct 1D procedure extended unmodified into 2D —
+  MC-1 SINGLE-PATH-LIMIT/MC-2 EVERY-SURFACE-IS-FUNCTION/MC-3 DOMAIN-IS-INTERVAL). **All 4
+  concepts zero-discrepancy**, the THIRD consecutive all-4-zero-discrepancy batch;
+  `mean-value-theorem`'s cross-link `math.real.mvt` confirmed genuinely unauthored
+  (independence mode, matching the Blueprint's own verification). `math.calc` **40/76**
+  (36→40). Mathematics **406/908** (402→406), 729 remaining. Full per-concept detail in
+  `COVERAGE.md` Batch 45. Validated: KG validator PASS (908/908 reachable, file untouched),
+  `scripts/math/state.ts` confirms math.calc 40/76 and mathematics 406/908 (6 EB-certified
+  domains unchanged), `tsc --noEmit` clean, targeted tests 479/479 passed, all 4 heading
+  structures diffed clean on the first pass (0 diffs each). No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Fresh math.calc
+  frontier computed: 7 candidates ready (`improper-integrals`, `increasing-decreasing`,
+  `line-integrals`, `multiple-integrals`, `parametric-calculus`, `partial-derivatives`,
+  `rolles-theorem` — the last four newly unblocked by
+  `mean-value-theorem`/`multivariable-intro`). This is a genuinely multi-session campaign;
+  continuation should verify state via `scripts/math/state.ts` fresh each time rather than
+  trusting any number recorded here.
+- **Batch 46 — math.calc: increasing/decreasing functions, Rolle's Theorem, improper
+  integrals, partial derivatives** (2026-09-12): re-fetched `main` (0 divergence, clean).
+  Re-computed the frontier fresh — the exact 7 candidates predicted at the end of Batch 45
+  were confirmed still ready. Selected 4: `increasing-decreasing`/`rolles-theorem` (both
+  direct children of Batch 45's `mean-value-theorem`), `partial-derivatives` (single:
+  `multivariable-intro`, high-leverage — unlocks 3 further concepts at once),
+  `improper-integrals` (`definite-integral`+`limits-at-infinity`, both long-authored),
+  deferring `line-integrals`/`multiple-integrals`/`parametric-calculus`. All 4
+  Blueprint-grounded, none carrying an explicit birth-type column — every misconception
+  independently classified (`increasing-decreasing` MC-1 Type 1 overgeneralizing "critical
+  point marks a sign change" from typical examples/MC-2 Type 5 instruction-induced, the
+  IVT-based efficiency shortcut taught without justification/MC-3 Type 5 instruction-induced,
+  the test presented as a rule with derivation optional; `rolles-theorem` MC-1 Type 5 the
+  identical hypothesis-skipping mechanism as `mean-value-theorem`'s own MC-1, recurring in
+  the special case/MC-2 Type 1 overgeneralizing everyday "mostly meeting conditions" into
+  formal all-or-nothing logic; `improper-integrals` MC-1 Type 1 overgeneralizing from Type I
+  (infinite-limit) examples/MC-2 Type 1 overgeneralizing "valid setup always produces a
+  number"/MC-3 Type 1 overgeneralizing the endpoint-only singularity pattern; `partial-
+  derivatives` MC-1 Type 1 overgeneralizing the single-variable "differentiate everything"
+  reflex/MC-2 Type 6 analogy overextension, the "order matters" pattern from matrix
+  multiplication over-applied where Clairaut's theorem guarantees the opposite/MC-3 Type 1
+  overgeneralizing "the derivative" as "the" rate of change into a multi-rate setting). **All
+  4 concepts zero-discrepancy**, the FOURTH consecutive all-4-zero-discrepancy batch;
+  `partial-derivatives` unlocks `gradient`/`directional-derivative`/`chain-rule-multivariable`
+  at once, and `increasing-decreasing`'s own unlock `critical-points` was found already
+  authored (Batch 40), confirmed via directory listing as a genuine forward relationship.
+  `math.calc` **44/76** (40→44). Mathematics **410/908** (406→410), 725 remaining. Full
+  per-concept detail in `COVERAGE.md` Batch 46. Validated: KG validator PASS (908/908
+  reachable, file untouched), `scripts/math/state.ts` confirms math.calc 44/76 and
+  mathematics 410/908 (6 EB-certified domains unchanged), `tsc --noEmit` clean, targeted
+  tests 479/479 passed, all 4 heading structures diffed clean on the first pass (0 diffs
+  each). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Fresh
+  math.calc frontier computed: 6 candidates ready (`chain-rule-multivariable`, `gradient`,
+  `line-integrals`, `local-extrema`, `multiple-integrals`, `parametric-calculus` — the first
+  two and `local-extrema` newly unblocked by `partial-derivatives`/`increasing-decreasing`).
+  This is a genuinely multi-session campaign; continuation should verify state via
+  `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
+- **Batch 47 — math.calc: gradient, the multivariable chain rule, local extrema, calculus
+  of parametric curves** (2026-09-12): re-fetched `main` (0 divergence, clean). Re-computed
+  the frontier fresh — the exact 6 candidates predicted at the end of Batch 46 were
+  confirmed still ready. Selected 4: `gradient`/`chain-rule-multivariable` (both direct
+  children of Batch 46's `partial-derivatives`), `local-extrema` (direct child of Batch 46's
+  `increasing-decreasing`, unlocking `optimization`), `parametric-calculus` (all 3
+  prerequisites long-authored), deferring `line-integrals`/`multiple-integrals`. All 4
+  Blueprint-grounded, none carrying an explicit birth-type column — every misconception
+  independently classified (`gradient` MC-1 Type 4 notation-induced, $f$/$\nabla f$ both
+  "evaluated at a point"/MC-2 Type 2 perceptual, level curve's visual salience/MC-3 Type 5
+  instruction-induced, interpretive step skipped; `chain-rule-multivariable` MC-1 Type 5
+  instruction-induced, additive structure under-applied without the tree/MC-2 Type 4
+  notation-induced, $d/dt$ vs $\partial/\partial t$; `local-extrema` MC-1 Type 1
+  overgeneralization/MC-2 Type 5 instruction-induced/MC-3 Type 1 overgeneralization;
+  `parametric-calculus` MC-1 Type 4 notation-induced/MC-2 Type 1 overgeneralization). **All
+  4 concepts zero-discrepancy**, the FIFTH consecutive all-4-zero-discrepancy batch;
+  `local-extrema` confirmed to substantively cross-reference the already-authored
+  `math.calc.critical-points` (Batch 40), which explicitly names `local-extrema` as
+  resolving its own left-open ambiguity via the identical $x^3$ counterexample —
+  verified both entries reference each other consistently. `math.calc` **48/76** (44→48).
+  Mathematics **414/908** (410→414), 721 remaining. Full per-concept detail in
+  `COVERAGE.md` Batch 47. Validated: KG validator PASS (908/908 reachable, file
+  untouched), `scripts/math/state.ts` confirms math.calc 48/76 and mathematics 414/908 (6
+  EB-certified domains unchanged), `tsc --noEmit` clean, targeted tests 479/479 passed, all
+  4 heading structures diffed clean on the first pass (0 diffs each). No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Fresh math.calc
+  frontier computed: 7 candidates ready (`curve-sketching`, `directional-derivative`,
+  `line-integrals`, `multiple-integrals`, `multivariable-extrema`, `optimization`,
+  `vector-fields` — several newly unblocked by
+  `gradient`/`chain-rule-multivariable`/`local-extrema`). This is a genuinely multi-session
+  campaign; continuation should verify state via `scripts/math/state.ts` fresh each time
+  rather than trusting any number recorded here.
+- **Batch 48 — math.calc: directional derivatives, optimization, curve sketching,
+  extrema of multivariable functions** (2026-09-12): fetch clean (0/0), state.ts confirmed
+  48/76 matching Batch 47's end state. Re-computed the frontier fresh — the exact 7
+  candidates predicted at the end of Batch 47 were confirmed still ready. Selected 4
+  (`directional-derivative` single-prereq `gradient`; `optimization` single-prereq
+  `local-extrema`; `curve-sketching` all 3 prereqs long-authored; `multivariable-extrema`
+  both prereqs long-authored), deferring `line-integrals`/`multiple-integrals`/
+  `vector-fields` (needing `math.geom.vectors-3d`, not yet authored). All 4
+  Blueprint-grounded, none carrying an explicit birth-type column — every misconception
+  independently classified (`directional-derivative` MC-1 Type 5 instruction-induced,
+  normalization skipped/MC-2 Type 4 notation-induced, vector conflated with its scalar
+  rate; `optimization` MC-1/MC-2/MC-3 all Type 1 overgeneralization — endpoints skipped,
+  EVT's bounded/closed hypothesis ignored, local extremum assumed global; `curve-sketching`
+  MC-1 Type 5 instruction-induced, domain/asymptote steps skipped/MC-2 Type 2 perceptual,
+  "connect the dots" habit; `multivariable-extrema` MC-1/MC-2/MC-3 all Type 1
+  overgeneralization, MC-3 cross-referenced to `multivariable-intro`'s own MC-1
+  SINGLE-PATH-LIMIT as the identical 1D-into-2D mechanism). **All 4 concepts
+  zero-discrepancy**, the SIXTH consecutive all-4-zero-discrepancy batch. Two genuine
+  Blueprint-STALENESS findings (not KG discrepancies): `optimization`'s and
+  `multivariable-extrema`'s Blueprints each claim their `math.opt.*` cross-link sibling has
+  no Blueprint file yet, but both sibling Blueprint files now exist on disk (independence
+  mode correctly retained since neither has an EB entry). `math.calc` **52/76** (48→52).
+  Mathematics **418/908** (414→418), 717 remaining. Full per-concept detail in
+  `COVERAGE.md` Batch 48. Validated: KG validator PASS (908/908 reachable, file
+  untouched), `scripts/math/state.ts` confirms math.calc 52/76 and mathematics 418/908 (6
+  EB-certified domains unchanged), `tsc --noEmit` clean, targeted tests 479/479 passed, all
+  4 heading structures diffed clean on the first pass (0 diffs each). No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Fresh math.calc
+  frontier computed: 3 candidates ready (`line-integrals`, `multiple-integrals`,
+  `vector-fields` — the exact three deferred from this batch's own selection). This is a
+  genuinely multi-session campaign; continuation should verify state via
+  `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
+- **Batch 49 — math.calc: vector fields, line integrals, multiple integrals** (2026-09-12):
+  fetch clean (0/0), state.ts confirmed 52/76 matching Batch 48's end state. Re-computed the
+  frontier fresh — the exact 3 candidates deferred from Batch 48 were confirmed still ready
+  (`vector-fields`, `line-integrals`, `multiple-integrals`), closing the ENTIRE frontier
+  available at batch start with none deferred. All 3 Blueprint-grounded, none carrying an
+  explicit birth-type column — every misconception independently classified (`vector-fields`
+  MC-1 Type 1 overgeneralizing from `gradient`'s exclusively-gradient examples/MC-2 Type 5
+  instruction-induced, the Fundamental Theorem's completeness not visually self-evident/MC-3
+  Type 1 overgeneralizing math's usual approximation tolerance into a binary existence
+  question; `line-integrals` MC-1 Type 1 overgeneralizing from the shared name/setup recipe
+  across two structurally different behaviors/MC-2 Type 4 notation-induced, $ds$ vs
+  $d\mathbf{r}$'s near-identical notation/MC-3 Type 5 instruction-induced, direction-check not
+  visually flagged; `multiple-integrals` MC-1 Type 1 overgeneralizing the rectangular-region
+  constant-bounds default/MC-2 Type 1 overgeneralizing general order-sensitivity caution
+  against Fubini's guarantee/MC-3 Type 2 perceptual, curves' shapes misleadingly suggesting
+  which sits higher). **All 3 concepts zero-discrepancy**, the SEVENTH consecutive
+  zero-discrepancy batch. **Self-correction caught before commit**: a draft claimed this
+  batch reached 76/76 DOMAIN CERTIFIED; `scripts/math/state.ts` showed `eb: 55`, not 76 —
+  corrected in place (21 concepts remain, matching Batch 27's precedent for catching this
+  exact error class before commit). `math.calc` **55/76** (52→55). Mathematics **421/908**
+  (418→421), 714 remaining. Full per-concept detail in `COVERAGE.md` Batch 49. Validated: KG
+  validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts` confirms
+  math.calc 55/76 and mathematics 421/908 (6 EB-certified domains unchanged), `tsc --noEmit`
+  clean, targeted tests 479/479 passed, all 3 heading structures diffed clean on the first
+  pass (0 diffs each). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file
+  touched. Fresh math.calc frontier computed: 2 candidates ready (`double-integrals`,
+  `curl-divergence`). This is a genuinely multi-session campaign; continuation should verify
+  state via `scripts/math/state.ts` fresh each time rather than trusting any number recorded
+  here.
+- **Batch 50 — math.calc: double integrals in polar coordinates, curl and divergence**
+  (2026-09-12): fetch clean (0/0), state.ts confirmed 55/76 matching Batch 49's end state.
+  Re-computed the frontier fresh — the exact 2 candidates predicted at the end of Batch 49
+  were confirmed still ready (`double-integrals`, `curl-divergence`), closing the ENTIRE
+  frontier available at batch start with none deferred. Both Blueprint-grounded, neither
+  carrying an explicit birth-type column — every misconception independently classified
+  (`double-integrals` MC-1 Type 1 overgeneralizing the Cartesian dA=dx dy pattern to polar,
+  where the extra factor of r is genuinely required/MC-2 Type 5 instruction-induced,
+  mechanical bound-translation habit transferred from other substitution tasks/MC-3 Type 1,
+  a newly acquired tool overgeneralized past its justifying symmetry; `curl-divergence` MC-1
+  Type 4 notation-induced, the shared ∇ symbol family visually suggesting a computational
+  detail rather than a scalar-vs-vector type difference/MC-2 Type 1 overgeneralizing shared
+  origin into correlation/MC-3 Type 1, the identical necessary-not-sufficient mechanism
+  already documented for critical-points' own MC-1 and concavity's own MC-1). **All 2
+  concepts zero-discrepancy**, the EIGHTH consecutive zero-discrepancy batch. `math.calc`
+  **57/76** (55→57). Mathematics **423/908** (421→423), 712 remaining. Full per-concept
+  detail in `COVERAGE.md` Batch 50. Validated: KG validator PASS (908/908 reachable, file
+  untouched), `scripts/math/state.ts` confirms math.calc 57/76 and mathematics 423/908 (6
+  EB-certified domains unchanged), `tsc --noEmit` clean, targeted tests 479/479 passed, both
+  heading structures diffed clean on the first pass (0 diffs each). No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Fresh math.calc
+  frontier computed: 3 candidates ready (`triple-integrals`, `surface-integrals`,
+  `greens-theorem`). 19 concepts remain. This is a genuinely multi-session campaign;
+  continuation should verify state via `scripts/math/state.ts` fresh each time rather than
+  trusting any number recorded here.
+- **Batch 51 — math.calc: triple integrals, surface integrals, Green's Theorem**
+  (2026-09-12): fetch clean (0/0), state.ts confirmed 57/76 matching Batch 50's end state.
+  Re-computed the frontier fresh — the exact 3 candidates predicted at the end of Batch 50
+  were confirmed still ready (`triple-integrals`, `surface-integrals`, `greens-theorem`),
+  closing the ENTIRE frontier available at batch start with none deferred. All 3
+  Blueprint-grounded, none carrying an explicit birth-type column — every misconception
+  independently classified (`triple-integrals` MC-1 Type 5 instruction-induced,
+  nested-hierarchy verification not visually enforced/MC-2 Type 1, the scaling-factor-
+  omission mechanism recurring twice (cylindrical, spherical); `surface-integrals` MC-1
+  Type 1, a THIRD recurrence of the scaling-factor mechanism cross-referenced to
+  double-integrals' MC-1 and triple-integrals' MC-2/MC-2 Type 5 instruction-induced,
+  transferred normalization habit/MC-3 Type 1, the mirror-image instance of
+  line-integrals' own MC-1 (there both types wrongly flip, here neither wrongly flips);
+  `greens-theorem` MC-1 Type 1, cross-referenced to line-integrals' reversal rule and
+  surface-integrals' orientation-dependent flux/MC-2 Type 4 notation-induced, the
+  near-symmetric P/Q-to-x/y term pairing/MC-3 Type 5 instruction-induced, continuity
+  checked where computation "happens" rather than throughout the full interior). **All 3
+  concepts zero-discrepancy**, the NINTH consecutive zero-discrepancy batch. `math.calc`
+  **60/76** (57→60). Mathematics **426/908** (423→426), 709 remaining. Full per-concept
+  detail in `COVERAGE.md` Batch 51. Validated: KG validator PASS (908/908 reachable, file
+  untouched), `scripts/math/state.ts` confirms math.calc 60/76 and mathematics 426/908 (6
+  EB-certified domains unchanged), `tsc --noEmit` clean, targeted tests 479/479 passed, all
+  3 heading structures diffed clean on the first pass (0 diffs each). No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Fresh math.calc
+  frontier computed: 2 candidates ready (`stokes-theorem`, `divergence-theorem`). 16
+  concepts remain. This is a genuinely multi-session campaign; continuation should verify
+  state via `scripts/math/state.ts` fresh each time rather than trusting any number
+  recorded here.
+- **Batch 52 — math.calc: Stokes' Theorem, the Divergence Theorem, plus a cross-domain
+  excursion opening math.trig and math.seq** (2026-09-12): fetch clean (0/0), state.ts
+  confirmed 60/76 matching Batch 51's end state. Re-computed the frontier fresh — the
+  exact 2 candidates predicted at the end of Batch 51 were confirmed still ready
+  (`stokes-theorem`, `divergence-theorem`), closing the ENTIRE math.calc frontier
+  available at batch start with none deferred. Both Blueprint-grounded, neither carrying
+  an explicit birth-type column (`stokes-theorem` MC-1/MC-2 both Type 5 instruction-induced;
+  `divergence-theorem` MC-1 Type 5 cross-referenced to stokes-theorem's own MC-2, MC-2
+  Type 1 cross-referenced to greens-theorem's own MC-3). **All 2 concepts
+  zero-discrepancy**, the TENTH consecutive zero-discrepancy batch. `math.calc` **62/76**
+  (60→62). Re-computing the frontier after these two found **0 topologically-ready
+  candidates** — all 14 remaining math.calc concepts need a `math.trig`/`math.seq`/
+  `math.linalg` prerequisite. Traced the chains and, following this program's own
+  Batch 14 precedent, authored a bounded 3-concept cross-domain excursion:
+  `math.trig.angle-measure` (MC-1 Type 2 perceptual/MC-2 Type 5 instruction-induced/MC-3
+  Type 3 language contamination), `math.trig.right-triangle-trig` (MC-1 Type 3 language
+  contamination/MC-2 Type 1 overgeneralization/MC-3 Type 2 perceptual), `math.seq.sequence`
+  (MC-1/MC-2 both Type 1 overgeneralization/MC-3 Type 6 analogy overextension — importing
+  programming's 0-indexing; one genuine Blueprint/KG unlocks discrepancy found, KG
+  followed). `math.trig` **0/25 → 2/25** (opened), `math.seq` **0/21 → 1/21** (opened).
+  Mathematics **426/908 → 431/908**, 704 remaining. The excursion IMMEDIATELY unblocked
+  `math.calc.sequence-limits` (now ready) and opened a 2-concept chain toward
+  `math.trig.unit-circle`/`trig-functions`, the eventual unblock for
+  `math.calc.derivative-trig`. Full per-concept detail in `COVERAGE.md` Batch 52.
+  Validated: KG validator PASS (908/908 reachable, file untouched), `scripts/math/
+  state.ts` confirms math.calc 62/76, math.trig 2/25, math.seq 1/21, mathematics 431/908
+  (6 EB-certified domains unchanged), `tsc --noEmit` clean, targeted tests 479/479
+  passed, all 5 heading structures diffed clean on the first pass (0 diffs each). No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Fresh frontier:
+  `math.calc.sequence-limits` ready; `math.trig` 5 candidates (`degree-radian-conversion`,
+  `basic-ratios`, `unit-circle`, `law-of-sines`, `law-of-cosines`); `math.seq` 5
+  candidates (`arithmetic-sequence`, `geometric-sequence`, `recursive-sequences`,
+  `convergent`, `series`). This is a genuinely multi-session campaign; continuation
+  should verify state via `scripts/math/state.ts` fresh each time rather than trusting
+  any number recorded here.
+- **Batch 53 — math.calc: sequence limits; math.trig: unit circle + degree-radian
+  conversion** (2026-09-12): re-computed the frontier fresh — `math.calc` had 1
+  candidate (`sequence-limits`), `math.trig` 5, `math.seq` 5, all matching Batch 52's
+  predictions exactly. Authored 3: `math.calc.sequence-limits` (closes math.calc's
+  immediate unblock; resolved a Blueprint-staleness-adjacent P76_mode finding — the
+  Blueprint's stated "cross-link probe" mode for `math.seq.convergent` rests on a
+  Blueprint-file-existence check, not an EB-entry-existence check, and that concept has
+  no EB entry yet, so this entry uses independence mode instead, per the Batch 48
+  `math.opt.*` precedent; zero KG/Blueprint discrepancy otherwise), `math.trig.unit-circle`
+  (highest-leverage math.trig concept — unlocks `trig-functions`, the eventual unblock
+  for `math.calc.derivative-trig`; zero discrepancy), `math.trig.degree-radian-conversion`
+  (single-prereq companion; one genuine `unlocks`-field discrepancy, Blueprint names 3
+  forward consumers the KG doesn't list, resolved toward the KG). `math.calc` 62/76 →
+  63/76. `math.trig` 2/25 → 4/25. `math.seq` unchanged 1/21. Mathematics 431/908 →
+  434/908. Full per-concept detail in `COVERAGE.md` Batch 53. Validated: KG validator
+  PASS (908/908 reachable, file untouched), `scripts/math/state.ts` confirms math.calc
+  63/76, math.trig 4/25, math.seq 1/21, mathematics 434/908 (6 EB-certified domains
+  unchanged), `tsc --noEmit` clean, targeted tests 479/479 passed, all 3 heading
+  structures diffed clean on the first pass (0 diffs each). No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Fresh
+  frontier: `math.calc` 0 candidates (remaining 13 need `trig-functions` or the
+  series/convergence family); `math.trig` 5 candidates (`basic-ratios`, `law-of-sines`,
+  `law-of-cosines` via `right-triangle-trig`; `reference-angles`, `trig-functions` via
+  `unit-circle`); `math.seq` unchanged 5 candidates. This is a genuinely multi-session
+  campaign; continuation should verify state via `scripts/math/state.ts` fresh each
+  time rather than trusting any number recorded here.
+- **Batch 54 — math.trig: reference angles + trig functions; math.seq: series +
+  convergent sequences** (2026-09-12): re-computed the frontier fresh — `math.calc` 0
+  candidates (unchanged), `math.trig` 5, `math.seq` 5, matching Batch 53's predictions
+  exactly. Authored 4: `math.trig.reference-angles`/`math.trig.trig-functions` (highest-
+  leverage math.trig pair — `trig-functions` unlocks `trig-identities`/`inverse-trig`,
+  the eventual unblock for `math.calc.derivative-trig`; `trig-functions` genuinely
+  incorporates the already-authored `math.func.periodic-function` cross-link; zero
+  discrepancy on both), `math.seq.series`/`math.seq.convergent` (both children of the
+  already-authored `math.seq.sequence`; `series` carries one genuine `unlocks`-field
+  discrepancy, KG followed; `convergent` genuinely implements cross-link-probe mode
+  against the already-authored `math.calc.limits`, resolving the Batch 53 forward note
+  left by `math.calc.sequence-limits`). `math.trig` 4/25 → 6/25. `math.seq` 1/21 →
+  3/21. `math.calc` unchanged 63/76. Mathematics 434/908 → 438/908. Full per-concept
+  detail in `COVERAGE.md` Batch 54. Validated: KG validator PASS (908/908 reachable,
+  file untouched), `scripts/math/state.ts` confirms math.calc 63/76, math.trig 6/25,
+  math.seq 3/21, mathematics 438/908 (6 EB-certified domains unchanged), `tsc --noEmit`
+  clean, targeted tests 479/479 passed, all 4 heading structures diffed clean on the
+  first pass (0 diffs each). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/
+  runtime file touched. Fresh frontier: `math.calc` 0 candidates (fresh check needed
+  before next math.calc batch, since `trig-functions` is now authored); `math.trig` 3
+  candidates (`basic-ratios`, `law-of-sines`, `law-of-cosines`, all via
+  `right-triangle-trig`); `math.seq` 3 candidates (`arithmetic-sequence`,
+  `geometric-sequence`, `recursive-sequences`). This is a genuinely multi-session
+  campaign; continuation should verify state via `scripts/math/state.ts` fresh each
+  time rather than trusting any number recorded here.
+- **Batch 55 — math.calc: derivative of trig functions (excursion payoff); math.trig:
+  identities and inverse functions; math.seq: arithmetic sequences** (2026-09-12):
+  re-computed the frontier fresh — `math.calc` had 2 candidates (`derivative-trig`,
+  `fourier-series-intro`), `math.trig` had 8 (Batch 54's own forward note had
+  undercounted this at 3), `math.seq` had 5, all verified programmatically. Authored 4:
+  `math.calc.derivative-trig` (requires `derivative-rules`+`trig-functions`+
+  `squeeze-theorem`, all long-authored — **closes the original motivating goal of this
+  program's entire math.trig/math.seq cross-domain excursion, begun Batch 52
+  specifically to eventually unblock this exact concept**; MC-2 cross-referenced to the
+  same inner-derivative-missing mechanism as `derivative-exponential`'s MC-2 and
+  `implicit-differentiation`'s MC-1), `math.trig.trig-identities`/`math.trig.inverse-trig`
+  (both children of Batch 54's `trig-functions`; `inverse-trig` substantively
+  incorporates the already-authored `math.func.inverse-functions`/`math.func.injectivity`
+  as Transfer Connections, cross-link to unauthored `math.calc.derivative-inverse-trig`
+  in independence mode), `math.seq.arithmetic-sequence` (child of Batch 52's `sequence`;
+  genuine forward-reference gap recorded — its Blueprint cites `math.seq.geometric-
+  sequence`'s own not-yet-authored Examples 2/3 as parallel content, confirmed
+  unauthored via `ls`, reconstructed independently rather than cited). All 4 zero
+  KG/Blueprint metadata discrepancy. `math.calc` 63/76 → 64/76. `math.trig` 6/25 →
+  8/25. `math.seq` 3/21 → 4/21. Mathematics 438/908 → 442/908. Full per-concept detail
+  in `COVERAGE.md` Batch 55. Validated: KG validator PASS (908/908 reachable, file
+  untouched), `scripts/math/state.ts` confirms math.calc 64/76, math.trig 8/25, math.seq
+  4/21, mathematics 442/908 (6 EB-certified domains unchanged), `tsc --noEmit` clean,
+  targeted tests 479/479 passed, all 4 heading structures diffed clean on the first pass
+  (0 diffs each). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file
+  touched. Fresh frontier: `math.calc` 2 candidates (`derivative-inverse-trig` — newly
+  unblocked — `fourier-series-intro`); `math.trig` 10 candidates (`basic-ratios`,
+  `amplitude-period-phase`, `pythagorean-identities`, `reciprocal-identities`,
+  `sum-difference-formulas`, `trig-equations`, `law-of-sines`, `law-of-cosines`,
+  `polar-form-complex`, `hyperbolic-functions`); `math.seq` 5 candidates
+  (`geometric-sequence`, `recursive-sequences`, `divergent-sequence`, `partial-sums`,
+  `arithmetic-series` — the last newly unblocked). This is a genuinely multi-session
+  campaign; continuation should verify state via `scripts/math/state.ts` fresh each
+  time rather than trusting any number recorded here.
+- **Batch 56 — math.calc: derivatives of inverse trig functions; math.trig: basic
+  ratios, Law of Sines, Law of Cosines** (2026-09-12): re-computed the frontier
+  fresh — `math.calc` had 2 candidates (`derivative-inverse-trig`,
+  `fourier-series-intro`), `math.trig` had 10, `math.seq` unchanged at 5. Authored 4:
+  `math.calc.derivative-inverse-trig` (requires `derivative-trig`+`inverse-trig`+
+  `implicit-differentiation`, all long-authored — closes another concept on the
+  excursion's own output chain; MC-2 cross-referenced as a THIRD recurrence of the
+  inner-derivative-missing mechanism, after `derivative-exponential` and
+  `implicit-differentiation`), `math.trig.basic-ratios`/`math.trig.law-of-sines`/
+  `math.trig.law-of-cosines` (all three sharing the single prerequisite
+  `right-triangle-trig`, already authored since Batch 52). `basic-ratios` carries
+  one genuine `unlocks`-field discrepancy (Blueprint names `math.trig.special-angles`,
+  which genuinely exists and genuinely requires `basic-ratios` back, but the
+  relationship isn't mirrored onto `basic-ratios`' own `unlocks` field — resolved
+  toward the KG); `law-of-sines`/`law-of-cosines` both zero-discrepancy.
+  `math.calc` 64/76 → 65/76. `math.trig` 8/25 → 11/25. Mathematics 442/908 →
+  446/908. Full per-concept detail in `COVERAGE.md` Batch 56. Validated: KG
+  validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts`
+  confirms math.calc 65/76, math.trig 11/25, mathematics 446/908 (6 EB-certified
+  domains unchanged), `tsc --noEmit` clean, targeted tests 479/479 passed, all 4
+  heading structures diffed clean on the first pass (0 diffs each). No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Fresh
+  frontier: `math.calc` 1 candidate (`fourier-series-intro`); `math.trig` 8
+  candidates (`special-angles` — newly unblocked — `amplitude-period-phase`,
+  `pythagorean-identities`, `reciprocal-identities`, `sum-difference-formulas`,
+  `trig-equations`, `polar-form-complex`, `hyperbolic-functions`); `math.seq`
+  unchanged 5 candidates. This is a genuinely multi-session campaign; continuation
+  should verify state via `scripts/math/state.ts` fresh each time rather than
+  trusting any number recorded here.
+- **Batch 57 — math.trig: special angles, amplitude/period/phase, reciprocal
+  identities, sum-difference formulas** (2026-09-12): re-computed the frontier
+  fresh — `math.calc` unchanged at 1 candidate, `math.trig` had 8, `math.seq`
+  unchanged at 5. Authored 4, all single-prerequisite children of
+  already-authored concepts: `math.trig.special-angles` (child of Batch 56's
+  `basic-ratios`, closing that entry's own `unlocks`-field asymmetry finding),
+  `math.trig.amplitude-period-phase` (child of `trig-functions`, carrying an
+  analogous genuine `unlocks`-field discrepancy against `math.trig.trig-graphs`,
+  resolved toward the KG), `math.trig.reciprocal-identities` and
+  `math.trig.sum-difference-formulas` (both children of `trig-identities`,
+  both zero-discrepancy; `sum-difference-formulas` unlocks
+  `math.trig.double-angle-formulas` and flags a genuine content-overlap risk
+  against `trig-identities`' own LO3 for whoever authors that concept next).
+  `math.trig` 11/25 → 15/25. Mathematics 446/908 → 450/908. Also corrected a
+  pre-existing ROADMAP.md staleness bug found in passing: two stale duplicate
+  rows further down that file's per-domain table still read `math.trig 0/25
+  not started`/`math.seq 0/21 not started`, predating the Batch 52 excursion
+  that opened both domains — removed. Full per-concept detail in `COVERAGE.md`
+  Batch 57. Validated: KG validator PASS (908/908 reachable, file untouched),
+  `scripts/math/state.ts` confirms math.trig 15/25, mathematics 450/908 (6
+  EB-certified domains unchanged), `tsc --noEmit` clean, targeted tests
+  479/479 passed, all 4 heading structures diffed clean on the first pass (0
+  diffs each). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime
+  file touched. Fresh frontier: `math.calc` unchanged 1 candidate
+  (`fourier-series-intro`); `math.trig` 7 candidates (`trig-graphs` — newly
+  unblocked — `pythagorean-identities`, `double-angle-formulas`,
+  `product-to-sum` — the last two newly unblocked by
+  `sum-difference-formulas` — `trig-equations`, `polar-form-complex`,
+  `hyperbolic-functions`); `math.seq` unchanged 5 candidates. This is a
+  genuinely multi-session campaign; continuation should verify state via
+  `scripts/math/state.ts` fresh each time rather than trusting any number
+  recorded here.
+- **Batch 58 — math.calc: Fourier series introduction; math.trig: graphs,
+  Pythagorean identities; math.seq: geometric sequences** (2026-09-12):
+  re-computed the frontier fresh — `math.calc` unchanged 1 candidate,
+  `math.trig` had 7, `math.seq` had 5. Authored 4: `math.calc.fourier-series-intro`
+  (closes math.calc's frontier; expert/analyze, 12 hours; a genuine
+  Blueprint-staleness finding on its `math.fnal.hilbert-space` cross-link —
+  declared "already authored" but that concept has a Blueprint with no EB
+  entry, independence mode used instead, matching the Batch 48/53
+  precedent), `math.trig.trig-graphs` (child of `amplitude-period-phase`,
+  resolving that entry's own `unlocks`-field asymmetry from Batch 57),
+  `math.trig.pythagorean-identities` (child of `trig-identities`+
+  `unit-circle`, carrying a genuine content-overlap finding against
+  `trig-identities`' own already-derived Pythagorean forms — value-add
+  framed as identity-selection/sign-resolution skill, not re-derivation),
+  `math.seq.geometric-sequence` (child of `sequence`, deliberately selected
+  to RESOLVE the standing forward-reference gap `arithmetic-sequence`'s own
+  Curriculum Feedback recorded in Batch 55 — both cited Examples now
+  genuinely exist). `math.calc` 65/76 → 66/76. `math.trig` 15/25 → 17/25.
+  `math.seq` 4/21 → 5/21. Mathematics 450/908 → 454/908 — **exactly half of
+  mathematics now has an Educational Brain entry**. Full per-concept detail
+  in `COVERAGE.md` Batch 58. Validated: KG validator PASS (908/908
+  reachable, file untouched), `scripts/math/state.ts` confirms math.calc
+  66/76, math.trig 17/25, math.seq 5/21, mathematics 454/908 (6 EB-certified
+  domains unchanged), `tsc --noEmit` clean, targeted tests 479/479 passed,
+  all 4 heading structures diffed clean on the first pass (0 diffs each).
+  No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched.
+  Fresh frontier: `math.calc` 0 candidates ready, but NOT deeply parked —
+  verified per-concept, 2 of the 10 remaining (`hyperbolic-derivatives`,
+  `trig-integrals`) are blocked only by concepts already in math.trig's own
+  fresh frontier below, so authoring either reopens math.calc immediately;
+  `math.trig` 5 candidates (`double-angle-formulas`, `product-to-sum` —
+  both via `sum-difference-formulas` — `trig-equations`, `polar-form-complex`,
+  `hyperbolic-functions`); `math.seq` 5 candidates (`recursive-sequences`,
+  `divergent-sequence`, `partial-sums`, `arithmetic-series`,
+  `geometric-series` — the last newly unblocked). This is a genuinely
+  multi-session campaign; continuation should verify state via
+  `scripts/math/state.ts` fresh each time rather than trusting any number
+  recorded here.
+- **Batch 59 — math.trig: product-to-sum, hyperbolic functions; math.seq:
+  partial sums, geometric series — REOPENS math.calc** (2026-09-13):
+  re-computed the frontier fresh — `math.calc` still 0 ready, `math.trig`
+  had 5, `math.seq` had 5, matching Batch 58's predictions exactly.
+  Deliberately selected `math.trig.product-to-sum` and
+  `math.trig.hyperbolic-functions` specifically because Batch 58's own
+  forward-planning note identified them as the exact two concepts that
+  would reopen `math.calc` once authored, plus `math.seq.partial-sums`
+  and `math.seq.geometric-series`. All 4 Blueprint-grounded, reused by
+  reference. `hyperbolic-functions` is notable as the first concept this
+  entire campaign where all 3 independently-classified misconceptions
+  share the identical birth type (Type 6, analogy overextension — the
+  strong sin/cos structural parallel overextended past where it actually
+  holds: angle-based definition, identity sign, derivative sign).
+  `geometric-series` explicitly resolves `arithmetic-sequence`'s own
+  Batch 55 forward-reference gap by confirming its citation actually
+  pointed at `geometric-sequence` (Batch 58), not this concept. All 4
+  zero Blueprint/KG metadata discrepancy, including correct confirmation
+  that both `math.trig` concepts' own `P76_mode: independence` declarations
+  are accurate (their cross-link targets are genuinely unauthored).
+  `math.trig` **17/25 → 19/25**. `math.seq` **5/21 → 7/21**. `math.calc`
+  unchanged at **66/76**. Mathematics **454/908 → 458/908**, 450
+  remaining. **Fresh frontier confirms the reopening worked**: `math.calc`
+  now has 2 candidates ready (`trig-integrals`, `hyperbolic-derivatives`
+  — exactly as predicted); `math.trig` has 3 ready (`double-angle-formulas`,
+  `trig-equations`, `polar-form-complex`); `math.seq` has 6 ready
+  (`recursive-sequences`, `divergent-sequence`, `arithmetic-series`,
+  `infinite-geometric-series`, `series-convergence`, `telescoping-series`
+  — the last three newly unblocked). Validated: KG validator PASS
+  (908/908 reachable, file untouched), `scripts/math/state.ts` confirms
+  math.calc 66/76, math.trig 19/25, math.seq 7/21, mathematics 458/908 (6
+  EB-certified domains unchanged), `tsc --noEmit` clean, targeted tests
+  479/479 passed, all 4 heading structures diffed clean on the first
+  pass (0 diffs each). No Physics/Chemistry/English/Biology/CS/KG/
+  Blueprint/runtime file touched. This is a genuinely multi-session
+  campaign; continuation should verify state via `scripts/math/state.ts`
+  fresh each time rather than trusting any number recorded here.
+- **Batch 60 — math.calc: trig integrals, hyperbolic derivatives —
+  CLOSES the reopened frontier; math.trig: double-angle formulas;
+  math.seq: divergent sequences** (2026-09-13): re-computed the frontier
+  fresh — `math.calc` had exactly the 2 candidates predicted by Batch 59
+  (`trig-integrals`, `hyperbolic-derivatives`), `math.trig` had 3,
+  `math.seq` had 6. Authored ALL of math.calc's ready frontier (closing it
+  completely) plus `math.trig.double-angle-formulas` and
+  `math.seq.divergent-sequence`. `double-angle-formulas` explicitly
+  resolves the content-overlap risk `sum-difference-formulas`'s own
+  Batch 57 Curriculum Feedback flagged, framing its value-add as the
+  rigorous three-form derivation rather than re-teaching
+  `trig-identities`'s informal substitution. `hyperbolic-derivatives`'s
+  MC-1 (carrying $\cos x$'s sign pattern to $\cosh x$) is a further
+  instance of the Type 6 analogy-overextension mechanism
+  `hyperbolic-functions`'s own three misconceptions all shared. All 4
+  concepts zero Blueprint/KG metadata discrepancy. `math.calc`
+  **66/76 → 68/76**. `math.trig` **19/25 → 20/25**. `math.seq`
+  **7/21 → 8/21**. Mathematics **458/908 → 462/908**, 446 remaining.
+  Fresh frontier confirms `math.calc`'s reopening was genuine, not
+  transient: 1 candidate ready (`trig-substitution`). Validated: KG
+  validator PASS (908/908 reachable, file untouched), `scripts/math/
+  state.ts` confirms math.calc 68/76, math.trig 20/25, math.seq 8/21,
+  mathematics 462/908 (6 EB-certified domains unchanged), `tsc --noEmit`
+  clean, targeted tests 479/479 passed, all 4 heading structures diffed
+  clean on the first pass (0 diffs each). No Physics/Chemistry/English/
+  Biology/CS/KG/Blueprint/runtime file touched. This is a genuinely
+  multi-session campaign; continuation should verify state via
+  `scripts/math/state.ts` fresh each time rather than trusting any number
+  recorded here.
+- **Batch 61 — math.calc: trig substitution — CLOSES the frontier
+  again; math.trig: half-angle formulas; math.seq: arithmetic +
+  telescoping series** (2026-09-13): re-computed the frontier fresh —
+  `math.calc` had 1 candidate (`trig-substitution`), `math.trig` had 3,
+  `math.seq` had 5. Authored math.calc's sole ready candidate plus
+  `math.trig.half-angle-formulas` and 2 math.seq concepts
+  (`arithmetic-series`, `telescoping-series`). `trig-substitution`
+  extends `trig-integrals`'s "check structure first" principle to a
+  three-way radical-shape selection. `half-angle-formulas` derives its
+  formulas by reading `double-angle-formulas`'s own power-reducing
+  identities backward via $2\alpha=\theta$; its MC-1 is the exact
+  mirror image of `double-angle-formulas`'s own MC-1. `arithmetic-series`
+  derives the Gauss pairing sum formula; `telescoping-series` derives
+  the cancellation collapse $S_n=b_1-b_{n+1}$. All 4 concepts zero
+  Blueprint/KG metadata discrepancy. `math.calc` **68/76 → 69/76**
+  (frontier closed again). `math.trig` **20/25 → 21/25**. `math.seq`
+  **8/21 → 10/21**. Mathematics **462/908 → 466/908**, 442 remaining.
+  Fresh frontier: `math.calc` 1 ready (`partial-fractions`); `math.trig`
+  2 ready (`trig-equations`, `polar-form-complex`); `math.seq` 3 ready
+  (`recursive-sequences`, `infinite-geometric-series`,
+  `series-convergence`). Validated: KG validator PASS (908/908
+  reachable, file untouched), `scripts/math/state.ts` confirms math.calc
+  69/76, math.trig 21/25, math.seq 10/21, mathematics 466/908 (6
+  EB-certified domains unchanged), `tsc --noEmit` clean, targeted tests
+  479/479 passed, all 4 heading structures diffed clean on the first
+  pass (0 diffs each). No Physics/Chemistry/English/Biology/CS/KG/
+  Blueprint/runtime file touched. This is a genuinely multi-session
+  campaign; continuation should verify state via `scripts/math/state.ts`
+  fresh each time rather than trusting any number recorded here.
+- **Batch 62 — math.calc: partial fractions — CLOSES the frontier for a
+  third consecutive batch; math.trig: trig equations; math.seq:
+  recursive sequences + infinite geometric series** (2026-09-13):
+  re-computed the frontier fresh — `math.calc` had 1 candidate
+  (`partial-fractions`), `math.trig` had 2, `math.seq` had 3, all
+  matching Batch 61's own predictions exactly. Authored all 4:
+  `partial-fractions` frames decomposition as `rational-expressions`'s
+  combining process run in reverse, with `polynomial-roots`'s
+  factorization dictating the exact form — closing the entire
+  trig-integrals/trig-substitution/partial-fractions chain opened by
+  the Batch 52 excursion. `trig-equations` states the four-step
+  isolate/reference-angle/ASTC/interval algorithm and retains all FOUR
+  of its Blueprint's misconceptions (one more than usual, none
+  trimmed). `recursive-sequences` frames a recursive definition as a
+  second specification method for the same object `math.seq.sequence`
+  studies, and distinguishes induction-as-verification from
+  deriving-a-closed-form; carries two genuine Blueprint/KG metadata
+  discrepancies (estimated_hours 5 vs 8; unlocks "none" vs
+  `math.disc.recurrence-relation`) plus a P76_mode staleness correction
+  (cross-link-probe declared against `math.disc.recurrence-relation`,
+  verified via `ls` to have no EB entry, so independence mode was used
+  instead), all resolved toward the KG/filesystem-verified reality.
+  `infinite-geometric-series` derives $S_\infty=a/(1-r)$ as the limit of
+  `geometric-series`'s own finite-sum formula, zero discrepancy. One
+  mid-batch fix: two of the four files initially merged "Why Students
+  Fail" and "Misconceptions" into one heading; split per the Standard's
+  required structure before the heading-diff check, which then passed
+  clean for all 4. `math.calc` **69/76 → 70/76** (frontier closed for a
+  third consecutive batch). `math.trig` **21/25 → 22/25**. `math.seq`
+  **10/21 → 12/21**. Mathematics **466/908 → 470/908**, 438 remaining.
+  Fresh frontier: `math.calc` 0 ready (all 6 remaining chain through
+  `math.seq.series-convergence`/`ratio-test`, `math.linalg.determinant`,
+  or `taylor-series`'s own unauthored children); `math.trig` 1 ready
+  (`polar-form-complex`); `math.seq` 1 ready (`series-convergence`).
+  Validated: KG validator PASS (908/908 reachable, file untouched),
+  `scripts/math/state.ts` confirms math.calc 70/76, math.trig 22/25,
+  math.seq 12/21, mathematics 470/908 (6 EB-certified domains
+  unchanged), `tsc --noEmit` clean, targeted tests 479/479 passed, all
+  4 heading structures diffed clean after the mid-batch fix. No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file
+  touched. This is a genuinely multi-session campaign; continuation
+  should verify state via `scripts/math/state.ts` fresh each time
+  rather than trusting any number recorded here.
+- **Batch 63 — math.trig: polar form of complex numbers; math.seq:
+  convergence of series (reopens math.calc); math.disc: REOPENED via
+  recurrence relations and asymptotic notation** (2026-09-13):
+  re-computed the frontier fresh — `math.calc` had 0 ready (matching
+  Batch 62's prediction), `math.trig` had 1, `math.seq` had 1. A
+  broader all-domain frontier check found `math.disc` had REOPENED (2
+  ready) after being PARKED since Batch 23. Authored all 4:
+  `polar-form-complex` frames modulus/argument as the Argand-plane
+  application of polar coordinates, closing math.trig down to 2
+  concepts before certification. `series-convergence` defines series
+  convergence via partial-sum-sequence convergence and the Divergence
+  Test's one-directionality; its MC-2 is the identical mechanism as
+  `infinite-geometric-series`'s own MC-3 (Batch 62), cross-referenced
+  both ways; its `unlocks` field directly reopens math.calc via
+  `power-series`. `recurrence-relation` resolves the standing forward-
+  reference `math.seq.recursive-sequences` (Batch 62) left, carries a
+  genuine Blueprint-staleness finding on its own P76 cross-link mode
+  against `math.de.ode` (Blueprint-file-existence mistaken for EB-entry-
+  existence, corrected via independence mode per established
+  precedent), and reopens math.disc, unblocking 5 further concepts.
+  `asymptotic-notation` establishes Big-O/Ω/Θ as three distinct
+  comparison directions. `math.calc` unchanged at **70/76** (reopened
+  for next batch). `math.trig` **22/25 → 23/25**. `math.seq`
+  **12/21 → 13/21**. `math.disc` **20/32 → 22/32** (REOPENED).
+  Mathematics **470/908 → 474/908**, 434 remaining. Fresh frontier:
+  `math.calc` 1 ready (`power-series`); `math.trig` 2 ready
+  (`de-moivres-theorem`, `eulers-formula`); `math.seq` 7 ready
+  (`alternating-series`, `comparison-test`, `divergence-test`,
+  `harmonic-series`, `integral-test`, `ratio-test`, `root-test`);
+  `math.disc` 5 ready (`catalan-numbers`, `divide-conquer-recurrence`,
+  `generating-functions`, `linear-recurrence`, `stirling-numbers`).
+  Validated: KG validator PASS (908/908 reachable, file untouched),
+  `scripts/math/state.ts` confirms math.calc 70/76, math.trig 23/25,
+  math.seq 13/21, math.disc 22/32, mathematics 474/908 (6 EB-certified
+  domains unchanged), `tsc --noEmit` clean, targeted tests 479/479
+  passed, all 4 heading structures diffed clean on the first pass. No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file
+  touched. This is a genuinely multi-session campaign; continuation
+  should verify state via `scripts/math/state.ts` fresh each time
+  rather than trusting any number recorded here.
+- **Batch 64 — math.trig: De Moivre's Theorem + Euler's Formula
+  (DOMAIN CERTIFIED, 7th); math.calc: power series; math.seq: the
+  Divergence Test** (2026-09-13): re-computed the frontier fresh —
+  `math.calc` had 1 ready (`power-series`), `math.trig` had 2
+  (`de-moivres-theorem`, `eulers-formula`), `math.seq` had 7 (selected
+  `divergence-test`). Authored all 4. `de-moivres-theorem` and
+  `eulers-formula` both carry genuine Blueprint-staleness findings on
+  their P76 cross-link modes (declared cross-link-probe against
+  `math.cx.complex-numbers-analysis`/`math.cx.analytic-functions`
+  respectively — Blueprint-file-existence mistaken for EB-entry-
+  existence — corrected via independence mode); `eulers-formula` also
+  carries a genuine Blueprint/KG `unlocks` discrepancy (Blueprint
+  "none listed" vs. KG's `math.cx.analytic-functions`), resolved
+  toward the KG. Authoring BOTH remaining math.trig concepts in one
+  batch reaches **math.trig 25/25 — DOMAIN CERTIFIED**, the seventh
+  domain. `power-series` closes math.calc's frontier (its own
+  `unlocks` — `taylor-series`, `maclaurin-series` — is a real forward
+  relationship). `divergence-test`'s MC-1 is the identical mechanism
+  as `series-convergence`'s own MC-1, cross-referenced. **Same-batch
+  discovery** (not authored content): updating tracking surfaced that
+  `math.graph.shortest-path` is now ready, since its own
+  `math.disc.asymptotic-notation` prerequisite was authored in Batch
+  63 — `math.graph` REOPENS from PARKED, not yet authored. `math.calc`
+  **70/76 → 71/76**. `math.trig` **23/25 → 25/25 (CERTIFIED)**.
+  `math.seq` **13/21 → 14/21**. Mathematics **474/908 → 478/908**, 430
+  remaining. Fresh frontier: `math.calc` 1 ready (`taylor-series`);
+  `math.seq` 6 ready (`alternating-series`, `comparison-test`,
+  `harmonic-series`, `integral-test`, `ratio-test`, `root-test`);
+  `math.disc` unchanged 5 ready; `math.graph` 1 ready (`shortest-
+  path`). Validated: KG validator PASS (908/908 reachable, file
+  untouched), `scripts/math/state.ts` confirms math.calc 71/76,
+  math.trig 25/25 (`ebComplete: true`), math.seq 14/21, mathematics
+  478/908 (7 EB-certified domains, math.trig newly added), `tsc
+  --noEmit` clean, targeted tests 479/479 passed, all 4 heading
+  structures diffed clean on the first pass. No Physics/Chemistry/
+  English/Biology/CS/KG/Blueprint/runtime file touched. This is a
+  genuinely multi-session campaign; continuation should verify state
+  via `scripts/math/state.ts` fresh each time rather than trusting
+  any number recorded here.
+
+## Topic/meaning loss — the extractor's default was YES (2026-09-13)
+
+**Read `LEADING_MODIFIER_HEADS` in `src/lib/teaching/visual/requestedTopic.ts`
+and `src/tests/topicModifierShape.test.ts` before adding another word to
+`DISCOURSE_NOUNS`.** The next incident probably does not need one.
+
+### What was actually wrong
+`extractRequestedTopic` accepted ANY surviving word sequence as a topic NAME.
+The only thing between a learner's ordinary prose and a lesson-pausing excursion
+was `DISCOURSE_NOUNS` — a blocklist extended **twelve times, once per production
+incident** (`point`, `line`, `slowly`, `slow`, `practice`, `check`, `main`,
+`please`, `today`, `beginner`, …). Its own comments are a run of post-mortems.
+This is the exclusion-list trap CLAUDE.md already named for
+`genuineUnmappedAttempt`: the default answer was YES, and the space of non-topic
+prose is not finite.
+
+### Measured, not reasoned
+31 discourse-shaped utterances transcribed from the defect registers and the
+`DISCOURSE_NOUNS` comments (which quote real transcripts), plus 14 genuine topic
+requests, run through the REAL `namedTopicUnknownTo`. **5 of 31 named a false
+topic**, and all five were the same shape — a manner adverbial, not a noun
+phrase:
+
+    "please teach from start"                 -> "from start"          (PCD-018)
+    "hi sir, ...please teach from start"       -> "from start"          (PCD-020)
+    "can you teach me in an easier manner"     -> "in an easier manner"
+    "explain like i am five years old"         -> "like i am five years old"
+    "explain it in a simple manner sir"        -> "in a simple manner sir"
+
+**PCD-018/PCD-020 still reproduced** — the master backlog recorded them FIXED by
+Principle 13 (2026-09-11). That prompt fix is real but covers only the MODEL's
+half; the deterministic layer went on opening an excursion, pausing the lesson
+and blocking the authored-probe gate underneath it. **A prompt cannot out-argue a
+paused lesson.** Both registers corrected.
+
+### The fix — a shape test, not more vocabulary
+A phrase still headed by a preposition/subordinator after every existing trim is
+the request's MODIFIER, not its object. **Rejected, never trimmed** — trimming
+the head exposes `start` and names a topic by that word instead, the same defect
+one step along. 5/31 -> **0/31**, genuine set unchanged (14/14, the two
+non-matches are pre-existing and unrelated).
+
+It does NOT refuse the question. It only stops the lesson being PAUSED: the
+tutor still answers, anchored, and Principle 13 supplies the restatement. The two
+halves compose — that is the point.
+
+### The list is three words, and that is a decision
+`from`, `in`, `like`. A first draft carried fifteen "obvious" siblings and a
+**pre-existing guard caught it**: `crossSubjectTemporalConnective.test.ts` asserts
+"teach me while loops" names `while loops`, and it does — `while`/`for` are real
+control-flow constructs (`Iteration — while and for Loops` is a live CS concept).
+`by` (Proof by Contradiction), `with` (Version Control with Git), `at` (Limits at
+Infinity), `onto`, `via`, `without` are all live subject vocabulary too. The
+head-position scan that cleared the three did not catch it, **because a learner
+names that topic by a word the TITLE does not begin with** — head-position in the
+KG is the wrong safety test for learner phrasing. Removing the fifteen cost
+nothing: still 0/31.
+
+### Why this is safe for the curriculum
+Exactly two of 1,775 concept titles are headed by one of the three — "Like Terms"
+and "From Print to Meaning". Neither is reachable: `route.ts` consults the
+unresolved-title path only when `resolveRequestedConceptId` returned nothing
+(`if (requestedConceptIdThisTurn) return null`), and both resolve —
+verified against the live KG, not assumed, and pinned by test.
+
+### NOT done, reported
+PCD-015/016/017/021 (meta-commentary literalism, off-domain analogy substitution)
+remain prompt-governed and advisory. They are not mechanically checkable the way
+this was — "did the tutor interpret an open instruction correctly" has no
+deterministic test — and no speculative patch was made. PCD-018's second thread,
+the figure/text mismatch (correct diagram attached while the text drifted), is
+also untouched: the repair would have to rewrite generated text, not withhold it.
+**No production verification** — offline measurement against the real modules.
+Suite 647 files / 13,474 passed / 9 skipped; tsc clean; build clean.
+
+## Physics Teacher Migration Architecture V2 — AUDITED, NOT ADOPTED (2026-09-12)
+
+**File renamed this turn.** `docs/architecture/PHYSICS_TUTOR_ZERO_TO_RESEARCH_ARCHITECTURE.md` →
+**`docs/architecture/PHYSICS_TEACHER_MIGRATION_ARCHITECTURE.md`** (`git mv`, history preserved).
+V1 was a from-scratch design; V2 is the same document rewritten after a full evidence-based audit
+against `main`, and it is now a **migration architecture** rather than a replacement. Still NOT an
+ADR, still changes nothing, still does not supersede or reopen `EDUCATIONAL_BRAIN_BIBLE.md` or any
+ADR; everything in it that would become code stays G1/G2-gated.
+
+- **Four of V1's load-bearing novelty claims were FALSE and are corrected in place.** Verified by
+  reading the modules and their call sites, not the docs:
+  (1) "only verified grading may score" is **already enforced** — `conversationState.ts:1136`
+  `const verified = evidence.serverGraded === true`, plus `unauthoredKeyGrades` (`:1079`) counting
+  a model-invented key without ever crediting it, with the invariant proved over **49,152 states**
+  (`masteryCounterInvariant.test.ts`). It is BETTER than V1's own nine-facet replacement, which V2
+  now rejects. (2) Artifact-first probes are **already true on the authored path** — the probe
+  object exists at `route.ts:4664`, the provider call is at `:5531`, and the gate path serves a
+  complete assessed turn with **zero provider calls** (`provider='gate'`, `:5480`).
+  (3) The "operation-typed Math Graph" is **~70% already built** — `capabilityModel.ts` has 34
+  capabilities in 7 clusters, a `CAPABILITY_REQUIRES` prerequisite DAG, a 5-state ladder,
+  cross-session persistence via `replayCapabilityProjection` (`route.ts:3152`), and it DRIVES a
+  decision (`classifyFailure` → `capability_missing`, `:3592`). (4) Turn arbitration and the
+  liveness invariant are **both implemented and wired** (`turnArbitration.ts`, `turnProgress.ts`).
+- **V1's composed 11-check verifier is REFUTED by this repo's own experiment** and is dropped, not
+  deferred: `kernel/verifier/rules.ts` holds 22 rules and a real 2-attempt rerender loop and is
+  **OFF by default** (`route.ts:6635`), for the reason recorded at `route.ts:6780` — `V-Q2` rejects
+  any TEACH/SHOW/RECOVER/CLOSE draft ending in a question, so "a 'permissive' context is not
+  actually reachable". V2 adds only TOTAL DETERMINISTIC checks and keeps the one content-grounded
+  floor (`vAffirm`, `route.ts:6792`). **Do not re-enable K5 on the strength of V2.**
+- **The §4 ordering question, answered by tracing rather than assuming:** the turn is a HYBRID.
+  Mastery/state is DECIDE-only; the authored assessment path is DECIDE→ARTIFACT→RENDER→VERIFY; the
+  visual path is DECIDE→CONTRACT→RENDER→REPAIR-RESIDUAL; and exactly two surfaces remain
+  GENERATE→DETECT→REPAIR — the `mcqHoisted = gateMcqHoisted ?? mcqParse.mcq` fallback
+  (`route.ts:5707`, parsed from prose at `:5642`, plus four post-model overrides) and all prose
+  teaching content. Those two are what V2 closes.
+- **What V2 actually proposes — four primitives, nothing else:** (1) the **Turn Contract** as a
+  typed object compiled before the model call and asserted after (today the contract is ~40
+  `…Hoisted` locals plus ~20 post-hoc overrides, four of which are consecutive `mcqHoisted = null`
+  statements within 45 lines); (2) a **deterministic Physics Verifier** — dimensions first, then
+  limiting cases/signs/magnitude (there is NO physics correctness checking anywhere in `src/`, and
+  `mathjs` sits in `package.json:46` imported by zero files); (3) a **closed-taxonomy learner-move
+  interpreter** with a confidence gate and a first-class `UNINTERPRETABLE` class, replacing
+  `readTurnIntent`'s six-detector aggregation (measured surface: 63 detector-shaped exported
+  predicates, 60 regex constants); (4) **durable per-concept learner state** — `ConceptMasteryRecord`
+  and `ActiveMisconception` exist in schema with **0 writers each**, and `EvidenceRecord`'s only 2
+  writers are the visual path at weight 0. Plus two long-horizon additions: the **rung** dimension
+  (`KGNode` exposes only id/slug/title/description/prerequisites/estimatedHours/difficulty — a
+  concept appears exactly once, so "understands energy at 11" and "at 21" are not distinguishable)
+  and **retention** (Library `spacedRevision` call sites were removed).
+- **Explicitly DEFERRED with the evidence against each**, so a future session does not revive them:
+  the composed verifier, expected-information-gain probe selection, a CRDT rewrite of the snapshot
+  store (the proven defect was ONE field set in ONE rederiver — refactor those fields monotone
+  instead), the nine-facet mastery predicate as a REPLACEMENT, the Approximation Ledger, physics
+  spines, the five-role LLM split, and full 6-rung authoring.
+- **A documentation/implementation conflict found and recorded (not fixed):** `figureReference.ts`'s
+  header states "whether a figure is attached is decided AFTER the text is generated" — FALSE on
+  `main`; `resolveVisualForTurn` runs at `route.ts:3352` and injects its contract block at `:3439`,
+  1,179 lines before the provider call. `visualContract.ts`'s header is the correct one. The
+  stripper still has a real residual job (a figure decided pre-model can fail to FIRE), but its
+  stated rationale describes a pre-V2-resolver world.
+- **Verdict recorded in the document:** keep My Tutor and migrate four layers — Turn Contract →
+  Physics Verifier (dimensional) → interpreter → durable learner model, then rung + retention.
+  Not a rewrite: the repo has already introduced five deterministic authorities into a running
+  system without one (`conversationState` 2026-07-14, `masteryGate` 07-15, `gateAssessment` 08-12,
+  `turnArbitration` 08-23, `turnProgress` 09-07).
+- **Audit method and its limits** (§12 of the doc): `git fetch --unshallow` is REQUIRED — the clone
+  grafts at 2026-08-23 and makes every mechanism look three weeks old; full history is 3,542
+  commits from 2026-05-31, `route.ts` grew 120 → 10,513 lines across 434 commits, and August ran
+  256 fixes against 139 features. No production DB was reachable (`scripts/physics/state.ts` reports
+  `serving: UNAVAILABLE`), so **no DB row count in the document is claimed as verified**; no live
+  learner session was driven; the full 640-file suite was not run (6 core architectural files were,
+  120/120 pass). Physics content layer measured complete: KG 238 / Blueprints 238/238 / Educational
+  Brain 238/238, visual bindings exact 77 / none 161.
+
 ## Run locally
 ```
 cp .env.example .env   # set DATABASE_URL, AUTH_SECRET (openssl rand -base64 32), GROQ_API_KEY
@@ -3617,3 +5398,72 @@ excursion decision emits nothing.
   history of what was true when they were written and are left as-is, per
   this file's own convention of recording supersession rather than rewriting
   the past.
+
+## English open-defect campaign — ENG-D02/D03, D07/D08/D09, D06 (2026-09-12)
+
+**Read this before touching the I1 disambiguation guard, `DISCOURSE_NOUNS`, or
+`weakTopicAdvisorySuppressed`.** Three defects, three different root causes, and
+one of them turned out not to be a product defect at all.
+
+### ENG-D02/D03 — the exclusion-list trap (`3bb4cc4`)
+`genuineUnmappedAttempt` in route.ts had ONE positive term
+(`message.trim() !== ''`) and six negatives, so its default answer to "is this
+an answer attempt?" was YES. That is why I1's three exclusions and I4's two were
+each followed by a new false-positive class — the exclusion list is finite, the
+space of non-answer prose is not. **Reproduced independently: 9 of the 10
+documented phrasings escape EVERY pre-existing exclusion**, for two structural
+reasons that are deliberate in the classifiers — `detectLearnerQuestion`
+REQUIRES `message.includes('?')`, and `isBareAcknowledgement` matches the WHOLE
+message against a phrase list.
+`engagesPendingOptions` (mcq.ts) inverts the default: option letter (with rule
+0a's article guard), ordinal in range, or two DISCRIMINATING option words —
+words in exactly ONE option, so shared topic vocabulary is excluded by
+construction. **It never grades and must never feed grading**;
+`resolveMcqChoice` is untouched. Erring toward false is the safe direction.
+ENG-D03: `stripLeadingFalseConfirmation` now runs on ANY ungraded re-offer (it
+was gated behind `genuineUnmappedAttempt`, which the Group 9 turn was not), and
+`stripContradictingProseOptions` removes a lettered option run that is not the
+pending probe's. A faithful prose restatement survives untouched.
+**PRODUCTION-VERIFIED** on a disposable QA account (`qa-*@mytutor-qa.invalid`,
+deleted, re-login blocked), `eng.grammar.verbs`: all three tested documented
+phrasings served NO lead-in. The recall arm is NOT live-verified — the turn
+attached a new probe, so it was not a re-offer; recall is pinned offline only.
+
+### ENG-D07/D08/D09 — two causes, not one (`77ac685`)
+The finding doc's warning was right.
+- **D08 (self-echoing)** is the topic-request detector.
+  `namedTopicUnknownTo` extracted VERBATIM the taught phrases: "hello, what are
+  we learning today" -> **"we learning today"**, "explain simple please, im a
+  beginner" -> **"simple please, im a beginner"**. Exactly one word held each
+  phrase up — `today`, `beginner`. Fixed in `DISCOURSE_NOUNS` under the existing
+  one-real-word-survives rule; all added words occur in 0 of 1,775 concept
+  titles. `learning` deliberately NOT added (real vocabulary). The request
+  detector is untouched — the learner DID ask; what they named was not a subject.
+- **D09 (cross-concept)** is NOT the detector — every detector returns null on
+  "please explain it another way". It is the weak-topic advisory, whose
+  2026-09-06 guard argues the advisory ignores the arbitration ladder and then
+  consults RECOVERY but not LEARNER_REQUEST, which also outranks TEACH. All four
+  pre-existing terms read false while `learnerRequest` read
+  `explain_differently`. One rung added.
+- **D07** "hello, new topic for me": every detector null, no excursion can open.
+  Recorded, not patched — guessing a regex is what produced the D02 trap.
+
+### ENG-D06 — an INSTRUMENT defect, closed BENIGN (`0f8d454`)
+Filed "P0 if confirmed", said DB verification was needed. It was decidable from
+the repo. **`MasterySummary` exposes `checkCorrect`/`practiceCorrect`; 19 QA
+drivers read `m?.correctAtCheck ?? 0`, a field the payload has never carried**,
+so they printed `check=0 practice=0` on every turn of every run while `verified`
+was real. All three sightings came through the same `display()`. All 19 drivers
+corrected — **any QA conclusion that cited printed check/practice from a
+`scripts/qa` driver before this date is suspect.**
+The invariant is separately proven, not assumed: one increment site per counter
+pair with the verified increment nested inside the plain one, and both roads
+through `masteryVerifiedStrict` independently require the plain counters to
+reach 1/2. Proved by DRIVING the real fold over 49,152 states
+(`masteryCounterInvariant.test.ts`). Nothing weakened.
+**Residual, reported not patched:** `readConversationState` restores a stored
+ladder with a raw spread and does not re-establish the invariant at the
+boundary — a property of the writer, unreachable in practice.
+
+Suite 634 files / 13,279 passed / 9 skipped; tsc clean; build clean. All three
+commits READY in production (`dpl_6iEHj6QLhr`, `dpl_2Ltu8tBcHc`, `dpl_WXqhvpiv5Q`).

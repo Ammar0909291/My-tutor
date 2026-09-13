@@ -944,11 +944,6 @@ export function resolveMcqChoice(message: string, mcq: TutorMCQ): number | null 
   const tokens = n.split(' ')
   const limit = Math.min(mcq.options.length, OPTION_KEYS.length)
 
-  // An explicit "I have not chosen" outranks every rule below, including the
-  // punctuated label. See NON_COMMITTAL for why refusing does not stall the
-  // ladder.
-  if (NON_COMMITTAL.test(message)) return null
-
   // 0. EXACT MATCH — RUNS FIRST, AND THE ORDER IS THE POINT.
   //
   //    Tapping an option sends that option's text verbatim (LessonScreen
@@ -994,6 +989,58 @@ export function resolveMcqChoice(message: string, mcq: TutorMCQ): number | null 
   // discarded — a sign, a subscript, a radical. Ask the verbatim question
   // before giving up; if they are identical there too, refuse exactly as before.
   if (exact.length > 1) return verbatimOption()
+
+  // 0b. LABEL-PREFIXED VERBATIM MATCH.
+  //
+  // A learner who TYPES a letter label in front of a copy-pasted option
+  // ("A) <exact option text>") is making the identical unambiguous
+  // statement a plain tap makes — rule 0 above only catches the bare tap
+  // because it compares the WHOLE message, and a leading "A) " adds a
+  // token that defeats norm() equality. Reproduced live (English audit,
+  // eng.vocab.context-clues #30 T7): a learner typed "A) <the correct
+  // option's full text, verbatim>" and was told "I couldn't tell which
+  // option your answer matched" even though the message contains nothing
+  // but that option's own words.
+  //
+  // Scoped narrowly so it cannot be confused with rule 0a's "labelled
+  // letter, anywhere in the sentence" reasoning-fragment case below: the
+  // label must be a standalone token at the very START of the message,
+  // immediately followed by one of the punctuation delimiters (never a
+  // bare letter-then-space, which would strip the first letter off an
+  // ordinary sentence like "According to the passage..." or "Do you..."),
+  // and what remains after stripping it must be an EXACT match to exactly
+  // one option — a short reasoned guess like "A, because it's bigger"
+  // still falls through unchanged, because "because it's bigger" is not
+  // itself any option's full text.
+  {
+    const labelStripped = message.replace(/^\s*[([]?[A-Da-d][.)\],:;-]\s*/, '')
+    if (labelStripped !== message && labelStripped.trim()) {
+      const strippedNorm = norm(labelStripped)
+      if (strippedNorm) {
+        const labelExact = mcq.options
+          .map((o, i) => ({ i, hit: norm(o) === strippedNorm }))
+          .filter((x) => x.hit)
+        if (labelExact.length === 1) return labelExact[0].i
+      }
+    }
+  }
+
+  // An explicit "I have not chosen" outranks every rule below EXCEPT the
+  // two exact-match forms above (0 and 0b): a hedge word that happens to
+  // occur as CONTENT WITHIN an option's own text (e.g. an authored option
+  // discussing "being unsure") must never defeat an otherwise-unambiguous
+  // verbatim match.
+  //
+  // MEASURED: before this reorder, NON_COMMITTAL ran BEFORE rule 0 ever
+  // got a chance to see the message — directly contradicting rule 0's own
+  // "runs first" invariant above. A bare TAP of an option whose own text
+  // contains "unsure" (e.g. an English vocabulary/context-clue probe
+  // discussing hedging language) was silently refused: `resolveMcqChoice`
+  // returned null for the single most unambiguous signal the UI can send.
+  // Genuine hedges ("not sure, maybe A") do not exact-match any option, so
+  // they still fall through to this check unaffected. See NON_COMMITTAL
+  // for why refusing does not stall the ladder.
+  if (NON_COMMITTAL.test(message)) return null
 
   // 0a. A LABELLED LETTER, ANYWHERE IN THE SENTENCE.
   //
@@ -1301,6 +1348,127 @@ export function isVerbatimPendingOption(message: string, mcq: TutorMCQ | null): 
   const folded = message.trim().toLowerCase()
   if (!folded) return false
   return mcq.options.some((o) => o.trim().toLowerCase() === folded)
+}
+
+/**
+ * DOES THIS MESSAGE ENGAGE THE PENDING OPTIONS AT ALL?
+ *
+ * ── WHY THIS EXISTS: THE EXCLUSION-LIST TRAP ────────────────────────────────
+ * The I1 disambiguation lead-in ("I couldn't tell which option your answer
+ * matched — tap the choice you mean") is gated in route.ts by a predicate
+ * named `genuineUnmappedAttempt`. Traced in full (2026-09-12), that predicate
+ * contained exactly ONE positive term — `message.trim() !== ''` — and six
+ * negative ones: not bare-ack, not practice, not a question, no failure state,
+ * no learner request, nothing graded. Its DEFAULT answer to "is this an answer
+ * attempt?" was therefore YES, and every non-answer had to be individually
+ * excluded.
+ *
+ * That is why each round of fixes produced a fresh class of false positive in
+ * the next QA campaign. I1 added three exclusions; I4 added two more; the
+ * English real-student campaign then measured 28 more false fires across
+ * Groups 3-12 of `ENGLISH_MCQ_REOFFER_FALSE_POSITIVE_FINDING.md`, in three
+ * classes none of the existing exclusions can see:
+ *
+ *   implicit question, no '?'   "wait, what about words like 'is' or 'seems',
+ *                                those arent actions"
+ *       `detectLearnerQuestion` REQUIRES `message.includes('?')`, so a
+ *       question written without one is invisible to it.
+ *   elaborated acknowledgement  "thanks that helped" / "thanks that makes
+ *                                sense" / "thank you, that makes more sense"
+ *       `isBareAcknowledgement` matches the WHOLE message against a phrase
+ *       list, deliberately ("ok, but why does the moon not fall?" must not
+ *       match), so "thanks" plus any words at all escapes it.
+ *   deferral / meta-commentary  "hmm i think i picked the wrong one, let me
+ *                                think again" / "hold on, let me reconsider
+ *                                that" / "oh wait, i think i see my mistake"
+ *       A statement ABOUT a past answer, or about not having chosen yet. No
+ *       classifier in the runtime models this at all.
+ *
+ * The list of things a learner can say that are not an answer is unbounded;
+ * an exclusion list is finite. No further exclusion closes this — only
+ * inverting the default does.
+ *
+ * ── WHAT THIS ASSERTS, AND WHY IT IS THE HONEST PRECONDITION ────────────────
+ * The lead-in's own words claim the learner's ANSWER could not be MATCHED TO
+ * AN OPTION. That claim is only true if the message reached for an option in
+ * the first place. So this returns true only on positive, option-referential
+ * evidence, computed against the REAL pending probe:
+ *
+ *   (a) an option LETTER used as a standalone token in range, read from the
+ *       RAW message with the same article guard rule 0a uses (an unlabelled
+ *       "a" must not be the English article);
+ *   (b) an ORDINAL naming a position in range ("the first one", "second",
+ *       "the last one");
+ *   (c) DISCRIMINATING option vocabulary — words that `words()` keeps and
+ *       that occur in exactly ONE option. Shared vocabulary is excluded by
+ *       construction, which is what makes this safe: every option of a probe
+ *       is about the lesson topic, and so is every ordinary learner remark
+ *       about the lesson, so overlap on shared words is no evidence at all.
+ *       Two such words are required, or one together with an explicit answer
+ *       phrase (`ANSWER_INTENT`), because a single topic word can appear in a
+ *       question about the material as easily as in an attempt at it.
+ *
+ * ── IT NEVER GRADES, AND MUST NEVER BE USED TO ──────────────────────────────
+ * This is deliberately WEAKER than `resolveMcqChoice`: it answers "was the
+ * learner reaching for one of these?", not "which one". `resolveMcqChoice`'s
+ * refusal to guess is correct and is untouched — nothing here feeds it, and a
+ * true return grants no credit, moves no counter and selects no index. The
+ * only consequence of a true return is that one advisory sentence may be
+ * prepended to the reply.
+ *
+ * Erring toward FALSE is the safe direction: a missed genuine attempt gets the
+ * silent re-offer the product had before I1, while a false fire tells a
+ * learner who asked a question that they answered one badly.
+ */
+const ORDINAL_WORDS: ReadonlyArray<readonly [RegExp, number]> = [
+  [/\b(?:the\s+)?first(?:\s+one)?\b/i, 0],
+  [/\b(?:the\s+)?second(?:\s+one)?\b/i, 1],
+  [/\b(?:the\s+)?third(?:\s+one)?\b/i, 2],
+  [/\b(?:the\s+)?fourth(?:\s+one)?\b/i, 3],
+]
+
+export function engagesPendingOptions(message: string, mcq: TutorMCQ | null): boolean {
+  if (!mcq || !Array.isArray(mcq.options) || mcq.options.length === 0) return false
+  const raw = typeof message === 'string' ? message : ''
+  if (!raw.trim()) return false
+  const limit = Math.min(mcq.options.length, OPTION_KEYS.length)
+
+  // (a) An option letter as a standalone token. Same shape rule 0a reads, and
+  //     the same article guard: an unlabelled "a" only counts when the word
+  //     after it cannot begin a noun phrase.
+  for (const m of raw.matchAll(/(?:^|[\s(])([a-dA-D])(\s*[.)\],:;-])?(?=\s|$)/g)) {
+    const idx = OPTION_KEYS.indexOf(m[1].toLowerCase() as typeof OPTION_KEYS[number])
+    if (idx < 0 || idx >= limit) continue
+    if (m[1].toLowerCase() === 'a' && !m[2]) {
+      const after = raw.slice((m.index ?? 0) + m[0].length).trim().split(/\s+/)[0]
+      if (!cannotFollowAnArticle(after?.toLowerCase().replace(/[^a-z']/g, '') || undefined)) continue
+    }
+    return true
+  }
+
+  // (b) An ordinal naming a position that exists.
+  for (const [re, idx] of ORDINAL_WORDS) {
+    if (idx < limit && re.test(raw)) return true
+  }
+  if (limit >= 2 && /\b(?:the\s+)?last(?:\s+one)?\b/i.test(raw)) return true
+
+  // (c) Discriminating option vocabulary.
+  const perOption = mcq.options.slice(0, limit).map((o) => new Set(words(o)))
+  const occurrences = new Map<string, number>()
+  for (const set of perOption) {
+    for (const w of set) occurrences.set(w, (occurrences.get(w) ?? 0) + 1)
+  }
+  const said = new Set(words(raw))
+  let best = 0
+  for (const set of perOption) {
+    let hits = 0
+    for (const w of set) {
+      if (occurrences.get(w) === 1 && said.has(w)) hits += 1
+    }
+    if (hits > best) best = hits
+  }
+  if (best >= 2) return true
+  return best >= 1 && statesAnAnswer(raw)
 }
 
 /**
