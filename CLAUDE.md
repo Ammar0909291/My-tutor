@@ -4771,6 +4771,52 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   runtime file touched. This is a genuinely multi-session campaign;
   continuation should verify state via `scripts/math/state.ts` fresh
   each time rather than trusting any number recorded here.
+- **Batch 69 — algorithm complexity, generating functions: closes
+  math.disc's post-Batch-68 frontier** (2026-09-13): re-computed the
+  frontier fresh — `math.disc` had exactly the 2 candidates predicted
+  at the end of Batch 68 (`algorithm-complexity`, `generating-
+  functions`); `math.calc`/`math.graph` unchanged at 0 ready (both
+  PARKED). Authored both, closing the ENTIRE math.disc frontier
+  available at batch start with none deferred. `algorithm-complexity`
+  (requires `asymptotic-notation`+`divide-conquer-recurrence`, unlocks
+  `complexity-classes`) applies Big-O to loops (nested multiplies,
+  sequential adds) and recursion (recursion tree cross-checked against
+  the Master Theorem), and distinguishes best/worst/average case via
+  linear search; 3 misconceptions independently classified (MC-1
+  NESTED-LOOP-COMPLEXITIES-ADDED-INSTEAD-OF-MULTIPLIED Type 1
+  Foundational, MC-2 ALGORITHM-COMPLEXITY-REPORTED-WITHOUT-SPECIFYING-
+  CASE Type 1 Foundational, MC-3 SMALL-INPUT-PERFORMANCE-MISTAKEN-FOR-
+  ASYMPTOTIC-COMPARISON Type 2 Moderate). `generating-functions`
+  (requires `combinatorics`+`recurrence-relation`+`math.seq.series`,
+  cross_links `math.prob.generating-function`) defines the OGF as a
+  formal power series whose coefficients carry a sequence's
+  information, solves the Fibonacci recurrence via pure series
+  manipulation as a genuinely different technique from the
+  characteristic-equation method, and previews the EGF using the fact
+  that $1/(1-x)$ is simultaneously the OGF of the constant sequence and
+  the EGF of the permutation-count sequence; cross-link confirmed via
+  `ls` to have no EB entry (`math.prob` 0/16 unstarted), independence
+  mode — the FIRST time this campaign's verification found a
+  Blueprint's own P76 claim already correct rather than stale; 3
+  misconceptions independently classified (MC-1 GENERATING-FUNCTION-
+  REQUIRES-NUMERICAL-EVALUATION Type 1 Foundational, MC-2 GENERATING-
+  FUNCTIONS-CONFLATED-WITH-CHARACTERISTIC-EQUATIONS Type 1 High, MC-3
+  OGF-EGF-TREATED-AS-INTERCHANGEABLE Type 4 Moderate). Both zero
+  Blueprint/KG metadata discrepancy on every field. `math.disc`
+  **26/32 → 28/32**. Mathematics **494/908 → 496/908**, 412 remaining.
+  Fresh frontier: `math.calc` 0 ready (unchanged, PARKED); `math.graph`
+  0 ready (unchanged, PARKED); `math.disc` 3 ready (`ogf`, `egf`,
+  `complexity-classes` — all newly unblocked); `math.linalg` 1 ready
+  (`math.linalg.vector` — a previously entirely-unstarted domain, 0/16,
+  now has its entry node reachable, not yet selected). Validated: KG
+  validator PASS (908/908 reachable, file untouched),
+  `scripts/math/state.ts` confirms math.disc 28/32, mathematics
+  496/908 (8 EB-certified domains unchanged), `tsc --noEmit` clean,
+  targeted tests 479/479 passed, both heading structures diffed clean
+  on the first pass. No Physics/Chemistry/English/Biology/CS/KG/
+  Blueprint/runtime file touched. This is a genuinely multi-session
+  campaign; continuation should verify state via `scripts/math/state.ts`
+  fresh each time rather than trusting any number recorded here.
 
 ## Topic/meaning loss — the extractor's default was YES (2026-09-13)
 
