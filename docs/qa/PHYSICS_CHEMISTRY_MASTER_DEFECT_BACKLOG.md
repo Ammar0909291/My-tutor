@@ -640,3 +640,54 @@ rule exists and never arrived). The 188 entries that still drop a
 governing unit are the remaining delivery residue, and they are
 enumerable: they emit `[learn/chat] KNOWLEDGE_EXPOSURE_FAILURE=` at
 runtime rather than failing silently.
+
+---
+
+## 2026-09-13 — the 188 residues resolved to 44, and what the 44 are
+
+Follow-up to the entry above. The 188 were **not** a content problem and not a
+budget problem — they were an ordering defect in the packer, fixed at `7dde649`
+with no EB content edited and no change to the 1,800-char budget.
+
+**188 → 44 entries (235 → 48 units); exposure 80.3% → 80.4%; english 1 → 0.**
+Plus a second, pre-existing defect fixed on the way: 21 sentences already
+reached the model cut at an abbreviation ("ethanol bp 78°C vs.") → 0.
+
+### The 44 remaining, classified — every one observable
+
+| class | units | what it is |
+|---|---|---|
+| budget conflict at whole-unit granularity | 48 | one authored unit is larger than the headroom left after governing-first packing |
+
+That is the honest single row. The finer labels used while investigating
+(`A-PACKING` 11, `C-OVERLONG` 19, `D-MANY-UNITS` 3, `E-BUDGET-CONFLICT` 15) are
+**size heuristics, not root causes**, and one of them is refuted by measurement:
+`C-OVERLONG` implies verbose authoring, but **zero of the 48 units are
+redundant** — maximum content-word overlap with already-exposed text is 53%,
+median 28%. The long units are long because they carry distinct content.
+
+By subject: chemistry 20, mathematics 19, physics 5, english 0. Residue
+sections run 1.7–3.9× the budget (chemistry median 4,772 authored chars).
+
+### CONTENT vs ARCHITECTURE, again
+
+**Architecture: closed.** Every one of the 44 still exposes governing text to
+the model AND emits `[learn/chat] KNOWLEDGE_EXPOSURE_FAILURE`. Verified live on
+three of them; the production counts match the offline prediction exactly.
+
+**Content: 0 edits warranted, and none made.** The redundancy measurement gives
+no unambiguous minimal edit, so the STEP-5 condition for editing is not met.
+Independently, `educational-brain/concepts/**` is owned by the Curriculum
+Completion Program and the Mathematics EB campaign — reported, not edited.
+
+**Not a content gap.** Unlike `chem.bond.resonance`'s missing formal-charge
+checksum (recorded above), nothing here is *absent* from the corpus. The
+knowledge exists and is authored; the prompt cannot carry all of it at once.
+Those are different problems and must not be conflated: a checksum nobody wrote
+cannot be packed, and a condition that will not fit was not left unwritten.
+
+### Declined, on purpose
+
+A lead-plus-governing sub-unit rescue clears 8 more. Not done: it admits a
+discontinuous excerpt as authoritative knowledge. Re-open only with an owner
+decision, and only with the excerpt marked as such.

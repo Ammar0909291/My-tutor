@@ -7,6 +7,7 @@ import {
   packCoreUnderstanding,
   carriesGoverningLanguage,
   MISCONCEPTION_HEAD_PATTERN,
+  splitSentences,
 } from '@/lib/curriculum/ebKnowledge'
 import { loadEBConceptContext, EB_CORE_UNDERSTANDING_BUDGET } from '@/lib/curriculum/blueprintLoader'
 
@@ -58,6 +59,16 @@ function section(content: string, ...titles: string[]): string | null {
 
 const EB_ROOT = 'educational-brain/concepts'
 const FILES = walk(EB_ROOT).filter((f) => basename(f, '.md').includes('.'))
+/** Every authored Core Understanding section, by concept. */
+function coreUnderstandingSections(): Array<{ slug: string; section: string }> {
+  const out: Array<{ slug: string; section: string }> = []
+  for (const file of FILES) {
+    const raw = section(readFileSync(file, 'utf8'), 'Core Understanding')
+    if (raw) out.push({ slug: basename(file, '.md'), section: raw })
+  }
+  return out
+}
+
 const PROV = (id: string) =>
   ({ sourceType: 'educational-brain', conceptSlug: id, section: 'Misconceptions' }) as const
 
@@ -233,6 +244,63 @@ describe('Core Understanding is packed, never sliced', () => {
     const packed = packCoreUnderstanding(src, 40)
     for (const piece of packed.text.split(/(?<=\.)\s+/)) {
       if (piece.trim()) expect(src).toContain(piece.trim())
+    }
+  })
+
+  it('M. a condition is never admitted without the statement it governs', () => {
+    // GOVERNING-FIRST ordering can otherwise strand a back-reference. Measured
+    // on the corpus: phys.rel.length-contraction kept "It is emphatically NOT
+    // the case that..." while dropping the sentence it contradicts.
+    const statement = 'Observer A measures the moving ruler as contracted by the Lorentz factor.'
+    const backref = 'It is never the case that both observers disagree about the outcome.'
+    const filler = 'Padding that is purely descriptive and carries no condition at all.'
+    // Budget holds the pair, or neither — never the dangling condition alone.
+    const tight = packCoreUnderstanding([filler, statement, backref].join('\n\n'), backref.length + 10)
+    expect(tight.text).not.toBe(backref)
+    if (tight.text.includes('It is never the case')) {
+      expect(tight.text).toContain('Observer A measures')
+    }
+    // With room for the pair, both arrive and neither is reported lost.
+    const roomy = packCoreUnderstanding([statement, backref].join('\n\n'), 400)
+    expect(roomy.text).toContain('Observer A measures')
+    expect(roomy.text).toContain('It is never the case')
+    expect(roomy.droppedGoverning).toBe(false)
+  })
+
+  it('N. a governing unit is not starved by a descriptive unit that precedes it', () => {
+    // The defect this ordering fixes: admission used to depend on POSITION, so
+    // an early descriptive paragraph could consume the budget a later, SMALLER
+    // condition needed. 188 entries lost a condition that way.
+    const bulky = `Descriptive prose about the ordinary case. ${'Extra detail that adds no condition. '.repeat(4)}`.trim()
+    const condition = 'The result is valid only when the sample is pure.'
+    const packed = packCoreUnderstanding(`${bulky}\n\n${condition}`, bulky.length + 5)
+    expect(condition.length).toBeLessThan(bulky.length) // the condition is the cheaper unit
+    expect(packed.text).toContain('valid only when the sample is pure')
+    expect(packed.droppedGoverning).toBe(false)
+  })
+
+  it('O. a sentence is never cut at an abbreviation', () => {
+    // Measured before the splitter knew abbreviations: 21 fragments reached the
+    // model, e.g. "ethanol bp 78°C vs." — a comparison missing what it compares.
+    const src = 'Ethanol boils at 78°C vs. diethyl ether at 35°C because of hydrogen bonding. That difference must never be attributed to molar mass alone.'
+    expect(splitSentences(src)).toEqual([
+      'Ethanol boils at 78°C vs. diethyl ether at 35°C because of hydrogen bonding.',
+      'That difference must never be attributed to molar mass alone.',
+    ])
+    for (const s of splitSentences('Values of 0.5 heads) are never observed. A second sentence follows.')) {
+      expect(s).not.toMatch(/^\d/)
+    }
+    // Every unit the packer emits over the whole corpus is a complete sentence.
+    for (const { slug, section } of coreUnderstandingSections()) {
+      for (const para of section.split(/\n\s*\n+/)) {
+        const p = para.trim().replace(/\s+/g, ' ')
+        if (!p || p.length <= EB_CORE_UNDERSTANDING_BUDGET) continue
+        for (const sentence of splitSentences(p)) {
+          expect(sentence, `${slug} emitted a fragment: ${sentence.slice(0, 60)}`).not.toMatch(
+            /\b(?:vs|e\.g|i\.e|etc|cf|approx|fig|eq|ref|resp)\.$/i,
+          )
+        }
+      }
     }
   })
 
