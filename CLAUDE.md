@@ -4321,6 +4321,35 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   `arithmetic-series` — the last newly unblocked). This is a genuinely multi-session
   campaign; continuation should verify state via `scripts/math/state.ts` fresh each
   time rather than trusting any number recorded here.
+- **Batch 56 — math.calc: derivatives of inverse trig functions; math.trig: basic
+  ratios, Law of Sines, Law of Cosines** (2026-09-12): re-computed the frontier
+  fresh — `math.calc` had 2 candidates (`derivative-inverse-trig`,
+  `fourier-series-intro`), `math.trig` had 10, `math.seq` unchanged at 5. Authored 4:
+  `math.calc.derivative-inverse-trig` (requires `derivative-trig`+`inverse-trig`+
+  `implicit-differentiation`, all long-authored — closes another concept on the
+  excursion's own output chain; MC-2 cross-referenced as a THIRD recurrence of the
+  inner-derivative-missing mechanism, after `derivative-exponential` and
+  `implicit-differentiation`), `math.trig.basic-ratios`/`math.trig.law-of-sines`/
+  `math.trig.law-of-cosines` (all three sharing the single prerequisite
+  `right-triangle-trig`, already authored since Batch 52). `basic-ratios` carries
+  one genuine `unlocks`-field discrepancy (Blueprint names `math.trig.special-angles`,
+  which genuinely exists and genuinely requires `basic-ratios` back, but the
+  relationship isn't mirrored onto `basic-ratios`' own `unlocks` field — resolved
+  toward the KG); `law-of-sines`/`law-of-cosines` both zero-discrepancy.
+  `math.calc` 64/76 → 65/76. `math.trig` 8/25 → 11/25. Mathematics 442/908 →
+  446/908. Full per-concept detail in `COVERAGE.md` Batch 56. Validated: KG
+  validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts`
+  confirms math.calc 65/76, math.trig 11/25, mathematics 446/908 (6 EB-certified
+  domains unchanged), `tsc --noEmit` clean, targeted tests 479/479 passed, all 4
+  heading structures diffed clean on the first pass (0 diffs each). No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Fresh
+  frontier: `math.calc` 1 candidate (`fourier-series-intro`); `math.trig` 8
+  candidates (`special-angles` — newly unblocked — `amplitude-period-phase`,
+  `pythagorean-identities`, `reciprocal-identities`, `sum-difference-formulas`,
+  `trig-equations`, `polar-form-complex`, `hyperbolic-functions`); `math.seq`
+  unchanged 5 candidates. This is a genuinely multi-session campaign; continuation
+  should verify state via `scripts/math/state.ts` fresh each time rather than
+  trusting any number recorded here.
 
 ## Physics Teacher Migration Architecture V2 — AUDITED, NOT ADOPTED (2026-09-12)
 
