@@ -6298,3 +6298,82 @@ Non-vacuity proven by neutering and restoring: reverting the parser grammar
 fails 6 tests; reverting the packer to `slice(0, 400)` fails 4.
 Suite 659 files / 13,696 passed / 9 skipped; tsc clean; build clean
 (middleware 79.7 kB, unchanged).
+
+## The 188 governing-knowledge residues were an ORDERING defect (2026-09-13, `7dde649`)
+
+**Read `packCoreUnderstanding`'s header and `BACKREF_RE` before touching the
+1,800-char budget.** The budget was never the problem and raising it is still
+the wrong move.
+
+### What they actually were
+Not a budget shortage. The packer filled the budget in **authored order** and
+only then rescued whatever governing unit still fitted, so admission depended
+on **POSITION**: an early descriptive paragraph could consume the budget a
+later, SMALLER condition needed. Measured over all 1,166 entries carrying the
+section, with the SAME whole units and the SAME budget:
+
+| | before | after |
+|---|---|---|
+| residue entries | **188** | **44** |
+| residue units | 235 | 48 |
+| exposure | 80.3% | **80.4%** (up) |
+| english residues | 1 | **0** |
+| abbreviation-cut fragments | **21** | **0** |
+
+Governing-first ordering. Nothing summarised, paraphrased, or cut mid-sentence;
+no unit split further than the authored structure already splits it. Only WHICH
+whole units are admitted changed — which is why exposure went UP, not down: the
+rescue pass no longer works against a budget already spent.
+
+### The adjacency rule — why governing-first is not enough on its own
+Ordering by governing-first can strand a condition from the statement it
+governs. Measured: `phys.rel.length-contraction` kept *"It is emphatically NOT
+the case that…"* while dropping the sentence it contradicts. A unit that OPENS
+with a back-reference (`BACKREF_RE`, a closed list of discourse connectives)
+states no subject of its own and is admitted **only together with its
+antecedent** — the whole group fits, or none of it is taken. 1 stranded
+back-reference → 0. `BACKREF_RE` decides ADJACENCY only, never importance.
+
+### A second, pre-existing defect found on the way
+The sentence splitter broke on any `.`, so **21 fragments already reached the
+model cut at an abbreviation** — "ethanol bp 78°C vs." is a comparison missing
+the thing compared. That is arbitrary truncation, which this contract forbids.
+`splitSentences` now refuses a boundary after a known abbreviation, a
+single-letter initial, a decimal, or before a lowercase continuation. It COSTS
+2 residue entries (42 → 44), and that is the correct direction: a complete
+sentence that does not fit is REPORTED; a mangled one that fits is a contract
+violation.
+
+### NO EB CONTENT WAS EDITED, and the measurement says none should be
+**Zero of the 48 remaining units are redundant** — maximum content-word overlap
+with already-exposed text is 53%, median 28%. So there is no unambiguous
+"redundant/overlong authored wording" edit to make; the omitted units carry
+distinct content. My own `C-OVERLONG` size heuristic is REFUTED by that
+measurement — those units are long because they carry a lot, not because they
+repeat. Residue sections run 1.7–3.9× the budget (chemistry median 4,772 chars).
+Any change here is Curriculum-Production-Pipeline / Curriculum-Completion-Program
+territory: **report, do not edit.**
+
+### Deliberately declined, with the number
+A lead-plus-governing **sub-unit rescue** would clear 8 more entries. Declined:
+it admits a discontinuous excerpt as authoritative knowledge, and 8 entries do
+not justify that when all 44 are already observable. This is the "do NOT
+optimize for 188 → 0 at any cost" instruction applied, not an oversight.
+
+### The instrument walked into this module's own trap
+`scripts/knowledge/residueReport.ts` kept a LOCAL copy of the unit split and
+reported a sentence fragment the real packer never produces — the same "two
+parsers that drift" defect the module header warns about, hit in the measuring
+tool. It calls `splitSentences` directly now. **Measure with the production
+functions or the number is about your script.**
+
+### Verification
+Non-vacuity proven three ways: reverting the packer fails N; removing only the
+adjacency rule fails M and K; restoring the abbreviation-blind splitter fails O.
+Production-verified on `dpl_FyZRAEEjFhy7ruZHBVASmkdPxaxM`: all 8 live cases
+echoed newly-exposed authored vocabulary, and the three residue concepts emitted
+`KNOWLEDGE_EXPOSURE_FAILURE` with counts **byte-identical to the offline
+prediction** (schrodinger 2464/1607, limits 2774/1719, spectroscopy 4462/1761).
+No mastery certified; disposable QA account deleted, re-login blocked.
+Suite 660 files / 13,719 passed / 9 skipped; tsc clean; build clean
+(middleware 79.7 kB, unchanged).

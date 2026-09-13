@@ -42,6 +42,15 @@ const CASES: Case[] = [
     ask: 'What do students usually get wrong about hybridisation?' },
   { label: 'LONG CORE UNDERSTANDING (7,643 authored chars)', conceptId: 'chem.state.liquids', subjectSlug: 'chemistry',
     ask: 'Tell me the properties of liquids and what governs each one.' },
+  // A concept still on the residue worklist: it must STILL expose governing
+  // text and STILL report what could not fit — one without the other is the
+  // defect this programme exists to prevent.
+  { label: 'RESIDUE — chemistry', conceptId: 'chem.anal.spectroscopy', subjectSlug: 'chemistry',
+    ask: 'What conditions and limits do I have to respect with these techniques?' },
+  { label: 'RESIDUE — mathematics', conceptId: 'math.calc.limits', subjectSlug: 'mathematics',
+    ask: 'What exactly has to be true for a limit to exist? Give me the conditions.' },
+  { label: 'RESIDUE — physics', conceptId: 'phys.qm.schrodinger-equation', subjectSlug: 'physics',
+    ask: 'What does this equation NOT tell me, and what must always hold?' },
 ]
 
 /** Resolve a lesson from the product's OWN curriculum API — never guessed. */
