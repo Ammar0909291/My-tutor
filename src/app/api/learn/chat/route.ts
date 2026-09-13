@@ -40,7 +40,7 @@ import { stripIpaNotation } from '@/lib/text/ipaSanitizer'
 import { readTurnIntent } from '@/lib/teaching/turnIntent'
 // S7 rung 2. Pure, synchronous, no I/O — imported at the top rather than
 // dynamically because it is read inside the ladder fold, on the hot path.
-import { diagnosticStalledThisTurn } from '@/lib/teaching/turnProgress'
+import { diagnosticStalledThisTurn, shouldRelieveProbeStarvation } from '@/lib/teaching/turnProgress'
 import { arbitrateTurn, arbitrationUnavailable } from '@/lib/teaching/turnArbitration'
 import {
   pickCurrentTopicSlug, selectCurrentLesson, foldProgressionMetrics,
@@ -1964,6 +1964,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     // the correct reading anyway: "the diagnostic has produced nothing for N
     // turns already".
     let priorStagnantTurnsHoisted = 0
+    // PCD-007/008/011: consecutive turns on which the phase allowed an authored
+    // probe and arbitration alone withheld it. Read from the PRE-turn snapshot
+    // for the same reason `priorStagnantTurnsHoisted` is — the gate runs long
+    // before this turn's own verdict folds.
+    let priorProbeStarvedTurnsHoisted = 0
+    let probeStarvationRelievedHoisted = false
+    let arbitrationWasSoleBlockerHoisted = false
     let turnProgressHoisted: {
       outcome: import('@/lib/teaching/turnProgress').TurnOutcome
       stagnantTurns: number
@@ -4265,6 +4272,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           priorStagnantTurnsHoisted =
             typeof prior === 'number' && Number.isFinite(prior) && prior >= 0 ? Math.floor(prior) : 0
         }
+        {
+          const prior = (snapshot as { turnProgress?: { probeStarvedTurns?: unknown } } | null)
+            ?.turnProgress?.probeStarvedTurns
+          priorProbeStarvedTurnsHoisted =
+            typeof prior === 'number' && Number.isFinite(prior) && prior >= 0 ? Math.floor(prior) : 0
+        }
         const phaseBeforeTurn = conversationStateHoisted?.phase
           ?? (snapshot as { conversationState?: { phase?: unknown } } | null)
             ?.conversationState?.phase
@@ -4518,6 +4531,41 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // Each conjunct is now named once, evaluated once, and reported on
         // EVERY turn. `gateEligible` is the AND of exactly these eight — it is
         // not re-spelled below, so the log and the decision cannot drift.
+        // ── PCD-007 / PCD-008 / PCD-011: THE STARVATION CEILING ────────────
+        //
+        // MEASURED end-to-end (pcd007AssessmentLifecycle.test.ts), and it
+        // refutes the original audit's own attribution. A chemistry learner
+        // asking a help question every turn runs ten turns at OBSERVE ->
+        // DEMONSTRATE -> GUIDE with five ACTIVE authored probes and is served
+        // nothing gradeable. `phaseAllowsProbe` is TRUE on all ten — R81/R82/E1
+        // closed the phase axis the audit blamed (`D4b`, `phaseAllowsProbe:
+        // false`). The sole blocker is THIS term: LEARNER_REQUEST and
+        // LEARNER_QUESTION each deny AUTHORED_PROBE, correctly, for their own
+        // turn — and nothing bounds the run. `learnerRequestHonoured` is
+        // classified PRODUCTIVE by turnProgress (it IS teaching), so stagnation
+        // stays 0 and rungs 1-3 never fire. An inquisitive learner was
+        // assessable only by accident.
+        //
+        // The relief is deliberately the narrowest thing that restores the
+        // liveness property, and it is a SUBSTITUTION, never an addition:
+        //  · It fires only after the question has owned TWO consecutive turns
+        //    outright (PROBE_STARVATION_RELIEF_AT), so D4b/ANSWER-STUDENT-FIRST
+        //    keeps everything it was written to protect.
+        //  · It fires only when arbitration was the SOLE blocker — every other
+        //    gate term already true — so it can never paper over a different
+        //    refusal.
+        //  · It fires only for the two rungs that merely SEQUENCE the turn.
+        //    RECOVERY, KNOWLEDGE_GAP, CLOSE and COMPLETE are never relieved:
+        //    their suppression protects the learner (distress, a named
+        //    prerequisite, a session ending), not the ordering of a reply.
+        //  · The model's answer to the learner is untouched. The probe rides
+        //    alongside it, replacing the ungradeable question the model writes
+        //    on these turns anyway (`unauthoredKeyGrades`, inventedProbeGuard).
+        //  · Mastery reachability is unchanged: `mayAttachProbeBelowGuide` at
+        //    the serving site still re-reads the live pool before any spend
+        //    below GUIDE, so a bare-contract concept is untouched.
+        const probeArbitration = turnArbitrationHoisted ?? arbitrationUnavailable()
+        const arbitrationRawAllowsProbe = probeArbitration.allows('AUTHORED_PROBE')
         const gateTerms = {
           phaseAllowsProbe,
           // E1 adds DEMONSTRATE to THIS gate's scope only. `isProbeAttachablePhase`
@@ -4539,8 +4587,25 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           notExcursion: !excursionActiveHoisted,
           // The session is ending: no question is attached, and no authored
           // probe is spent. See closingTurnWithholdsQuestion.
-          arbitrationAllowsProbe: (turnArbitrationHoisted ?? arbitrationUnavailable()).allows('AUTHORED_PROBE'),
+          arbitrationAllowsProbe: arbitrationRawAllowsProbe,
           notClosingTurn: !closingTurnWithholdsQuestion(sessionEpisodeHoisted?.phase),
+        }
+        // "Sole blocker" is read FROM the terms object the gate itself decides
+        // on — never a second copy of the same conditions, which is precisely
+        // how two guards drift apart. Only the relievable rungs qualify;
+        // RECOVERY, KNOWLEDGE_GAP, CLOSE and COMPLETE never do.
+        {
+          const relievableOwner =
+            probeArbitration.owner === 'LEARNER_REQUEST' || probeArbitration.owner === 'LEARNER_QUESTION'
+          arbitrationWasSoleBlockerHoisted =
+            !arbitrationRawAllowsProbe && relievableOwner
+            && Object.entries(gateTerms).every(([k, v]) => k === 'arbitrationAllowsProbe' || v === true)
+          probeStarvationRelievedHoisted =
+            arbitrationWasSoleBlockerHoisted
+            && shouldRelieveProbeStarvation(priorProbeStarvedTurnsHoisted)
+          // The relief is applied to the SAME object the log prints and the
+          // decision is taken from, so the two can never disagree.
+          if (probeStarvationRelievedHoisted) gateTerms.arbitrationAllowsProbe = true
         }
         const gateEligible = Object.values(gateTerms).every(Boolean)
         gateTermsHoisted = gateTerms
@@ -4556,6 +4621,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           phase: phaseBeforeTurn,
           move: evidenceMoveHoisted,
           eligible: gateEligible,
+          // PCD-007/008/011. `arbitrationAllowsProbe` above is the DECISION;
+          // these two say whether it came from arbitration itself or from the
+          // starvation ceiling, so the log can never imply the former when the
+          // latter is what opened the gate.
+          arbitrationRawAllowsProbe,
+          probeStarvationRelieved: probeStarvationRelievedHoisted,
+          probeStarvedTurnsBefore: priorProbeStarvedTurnsHoisted,
           // The terms that were FALSE, in declaration order. Empty on an
           // eligible turn. This is the field to read first.
           blockedBy: Object.entries(gateTerms).filter(([, v]) => !v).map(([k]) => k),
@@ -9176,13 +9248,33 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                   ? true
                   : priorPendingId === (pendingMcqHoisted?.assetId ?? null),
             })
+            // PCD-007/008/011: how long a question-owned run has withheld an
+            // authored probe the phase was willing to serve. Folded from the
+            // facts the GATE computed this turn (hoisted above), never
+            // re-derived here — a second derivation is how two guards drift.
+            // Attaching a probe resets it, which is why `mcqHoisted === null`
+            // is part of the condition rather than the counter being cleared
+            // separately: relief that worked must not immediately re-arm.
+            const { foldProbeStarvedTurns } = await import('@/lib/teaching/turnProgress')
+            const probeStarvedTurns = foldProbeStarvedTurns(priorProbeStarvedTurnsHoisted, {
+              phaseAllowedProbe: phaseAllowsProbeHoisted,
+              arbitrationWasSoleBlocker: arbitrationWasSoleBlockerHoisted && mcqHoisted === null,
+            })
             turnProgressHoisted = {
               outcome, stagnantTurns, rung: escalationRung(stagnantTurns), probeHeldTurns,
             }
             conversationStateUpdate.turnProgress = {
               stagnantTurns,
               probeHeldTurns,
+              probeStarvedTurns,
               heldProbeId: carriedForwardUngradedForCount ? (pendingMcqHoisted?.assetId ?? null) : null,
+            }
+            if (probeStarvationRelievedHoisted) {
+              console.log('[turn-progress] ' + JSON.stringify({
+                action: 'probe-starvation-relief',
+                starvedTurnsBefore: priorProbeStarvedTurnsHoisted,
+                probeAttached: mcqHoisted !== null,
+              }))
             }
           }
           {

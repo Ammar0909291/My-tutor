@@ -328,9 +328,17 @@ describe('5. every competing site asks the authority', () => {
     expect(src().slice(at, at + 1200)).toContain('arbitration: turnArbitrationHoisted')
   })
 
+  // 2026-09-13 (PCD-007/008/011): the slices below now START at the
+  // arbitration hoist rather than at `const gateTerms = {`. The verdict call
+  // was lifted two lines above the object so the probe-starvation ceiling can
+  // read the FINISHED terms object instead of keeping a second copy of the
+  // same conditions. Superseded slice, kept verbatim for history:
+  //   s.slice(s.indexOf('const gateTerms = {'), s.indexOf('if (gateEligible && memoryState)'))
+  // The invariant is unchanged and still asserted: the gate CONSUMES the
+  // arbiter's verdict rather than re-deriving precedence for itself.
   it('the authored-probe gate asks for AUTHORED_PROBE', () => {
     const s = src()
-    const gate = s.slice(s.indexOf('const gateTerms = {'), s.indexOf('if (gateEligible && memoryState)'))
+    const gate = s.slice(s.indexOf('const probeArbitration ='), s.indexOf('if (gateEligible && memoryState)'))
     expect(gate).toContain("allows('AUTHORED_PROBE')")
     // the local terms that are genuinely this gate's own business stay put
     expect(gate).toContain('!unansweredProbeOnScreen')
@@ -618,7 +626,7 @@ describe('7. LEARNER_QUESTION — a genuine question denies a NEW authored probe
 
   it('the gate does not need its own change — it already consumes allows(\'AUTHORED_PROBE\')', () => {
     const s = readFileSync('src/app/api/learn/chat/route.ts', 'utf8')
-    const gate = s.slice(s.indexOf('const gateTerms = {'), s.indexOf('if (gateEligible && memoryState)'))
+    const gate = s.slice(s.indexOf('const probeArbitration ='), s.indexOf('if (gateEligible && memoryState)'))
     expect(gate).toContain("allows('AUTHORED_PROBE')")
   })
 })

@@ -251,12 +251,44 @@ here for accuracy, not performed as part of this task.
   the session.
 - **Fix priority:** High.
 - **Fix type:** Code (probe-attachment gating logic).
-- **Status:** OPEN as an isolated finding in this audit; **note:** the general "GUIDE-phase
+- **Status (superseded 2026-09-13, kept for history):** OPEN as an isolated finding in this audit; **note:** the general "GUIDE-phase
   stall" failure mode was separately investigated end-to-end in the I4/Physics-Teachability-
   Program sessions (see PCD-017 and PCD-025) and partially mitigated there (`mcqToServe` fix +
   `D4b` scoping). Whether that fix fully covers this specific chemistry instance is
   **unverified** — flagged for re-check once the chemistry audit's remaining batches are
   reviewed against the post-fix build.
+
+- **2026-09-13 — TRACED END TO END, ROOT CAUSE CORRECTED, AND FIXED.** Driven through the REAL
+  route (`src/tests/pcd007AssessmentLifecycle.test.ts`, the Liveness Programme's `turnHarness`
+  convention: real `POST`, only auth/prisma/model/rate-limit stubbed). The failure REPRODUCES —
+  a chemistry learner asking a help question on every turn runs ten turns at OBSERVE →
+  DEMONSTRATE → GUIDE with five ACTIVE authored probes and is served nothing gradeable;
+  `correctAtCheck` never leaves 0 — **but this file's attributed cause is stale.**
+  `[gate-eligibility]` shows `phaseAllowsProbe: TRUE` on all ten turns (R81/R82/E1 closed the
+  phase axis this entry blamed), and the SOLE blocker on every one is `arbitrationAllowsProbe`.
+  Two arbitration rungs deny `AUTHORED_PROBE` to a learner who asks something — `LEARNER_REQUEST`
+  ("answering it owns the turn") and `LEARNER_QUESTION` ("a question is not an answer"). Both are
+  correct for one turn; **neither has a ceiling**, and nothing else supplies one, because
+  `learnerRequestHonoured` is classified PRODUCTIVE by `turnProgress` (it genuinely is teaching),
+  so `stagnantTurns` stays 0 and rungs 1–3 never fire. An inquisitive learner was assessable only
+  by accident. PCD-007, PCD-008 and PCD-011 are **one defect**, not three.
+- **Fix:** a third `turnProgress` counter, `probeStarvedTurns` (`foldProbeStarvedTurns` /
+  `shouldRelieveProbeStarvation`, threshold 2), and a ceiling in the gate. Deliberately narrow:
+  it fires only after a question has owned two consecutive turns outright (so
+  `D4b-ANSWER-STUDENT-FIRST` keeps everything it protects), only when arbitration was the SOLE
+  blocker, and only for the two rungs that merely SEQUENCE a turn — `RECOVERY`, `KNOWLEDGE_GAP`,
+  `CLOSE` and `COMPLETE` are never relieved. It is a SUBSTITUTION, never an addition: the model's
+  answer to the learner is served unchanged and the authored probe rides alongside it, replacing
+  the ungradeable question the model writes on those turns anyway. Mastery reachability is
+  untouched — `mayAttachProbeBelowGuide` still re-reads the live pool before any spend below
+  GUIDE. The gate log now carries `arbitrationRawAllowsProbe` / `probeStarvationRelieved` /
+  `probeStarvedTurnsBefore` so it can never imply arbitration opened a gate the ceiling opened.
+- **Targeted tests:** `src/tests/pcd007AssessmentLifecycle.test.ts` (12 assertions, both subjects).
+  Verified non-vacuous: with the relief disabled, 5 of the 12 invert. Negative controls included —
+  distress turns are never relieved, an ordinary lesson never arms the counter, and relief never
+  fires while another gate term is also false.
+- **Status:** **FIXED** 2026-09-13. Was: OPEN (unverified whether the physics liveness fixes
+  covered this chemistry instance). They did not — the seam was a different one entirely.
 
 ### PCD-008 — Ungradeable prose-formatted MCQ (second instance)
 - **Subject/Concept:** Chemistry — `chem.redox.activity-series` (#72).
@@ -271,8 +303,45 @@ here for accuracy, not performed as part of this task.
 - **Fix type:** Prompt (tighten the structured-MCQ instruction) + code (a server-side backstop
   that withholds/reformats an ungradeable prose question, as later built for the general case —
   see `withholdUngradedGateQuestion` in the Liveness Programme, PCD-017/PCD-025).
-- **Status:** OPEN as an isolated finding; general-purpose backstop exists elsewhere in the
+- **Status (superseded 2026-09-13, kept for history):** OPEN as an isolated finding; general-purpose backstop exists elsewhere in the
   codebase (see cross-reference above) — unverified whether it covers this exact case.
+
+- **2026-09-13 — TRACED END TO END, ROOT CAUSE CORRECTED, AND FIXED.** Driven through the REAL
+  route (`src/tests/pcd007AssessmentLifecycle.test.ts`, the Liveness Programme's `turnHarness`
+  convention: real `POST`, only auth/prisma/model/rate-limit stubbed). The failure REPRODUCES —
+  a chemistry learner asking a help question on every turn runs ten turns at OBSERVE →
+  DEMONSTRATE → GUIDE with five ACTIVE authored probes and is served nothing gradeable;
+  `correctAtCheck` never leaves 0 — **but this file's attributed cause is stale.**
+  `[gate-eligibility]` shows `phaseAllowsProbe: TRUE` on all ten turns (R81/R82/E1 closed the
+  phase axis this entry blamed), and the SOLE blocker on every one is `arbitrationAllowsProbe`.
+  Two arbitration rungs deny `AUTHORED_PROBE` to a learner who asks something — `LEARNER_REQUEST`
+  ("answering it owns the turn") and `LEARNER_QUESTION` ("a question is not an answer"). Both are
+  correct for one turn; **neither has a ceiling**, and nothing else supplies one, because
+  `learnerRequestHonoured` is classified PRODUCTIVE by `turnProgress` (it genuinely is teaching),
+  so `stagnantTurns` stays 0 and rungs 1–3 never fire. An inquisitive learner was assessable only
+  by accident. PCD-007, PCD-008 and PCD-011 are **one defect**, not three.
+- **Fix:** a third `turnProgress` counter, `probeStarvedTurns` (`foldProbeStarvedTurns` /
+  `shouldRelieveProbeStarvation`, threshold 2), and a ceiling in the gate. Deliberately narrow:
+  it fires only after a question has owned two consecutive turns outright (so
+  `D4b-ANSWER-STUDENT-FIRST` keeps everything it protects), only when arbitration was the SOLE
+  blocker, and only for the two rungs that merely SEQUENCE a turn — `RECOVERY`, `KNOWLEDGE_GAP`,
+  `CLOSE` and `COMPLETE` are never relieved. It is a SUBSTITUTION, never an addition: the model's
+  answer to the learner is served unchanged and the authored probe rides alongside it, replacing
+  the ungradeable question the model writes on those turns anyway. Mastery reachability is
+  untouched — `mayAttachProbeBelowGuide` still re-reads the live pool before any spend below
+  GUIDE. The gate log now carries `arbitrationRawAllowsProbe` / `probeStarvationRelieved` /
+  `probeStarvedTurnsBefore` so it can never imply arbitration opened a gate the ceiling opened.
+- **Targeted tests:** `src/tests/pcd007AssessmentLifecycle.test.ts` (12 assertions, both subjects).
+  Verified non-vacuous: with the relief disabled, 5 of the 12 invert. Negative controls included —
+  distress turns are never relieved, an ordinary lesson never arms the counter, and relief never
+  fires while another gate term is also false.
+- **Status:** **FIXED** 2026-09-13 for the liveness half; the SAFETY half was already closed and
+  is now pinned. Proven end to end: a prose-formatted MCQ never reaches the learner as a gradeable
+  item and the answer that follows credits nothing (`checkCorrect: 0`, `practiceCorrect: 0`,
+  `verified: false`) — an unkeyed question cannot move an authoritative counter. What was still
+  open was that the learner was then stranded with nothing gradeable at all; the ceiling above
+  closes that by serving the AUTHORED probe in the same slot. No question-like sentence is
+  deleted to achieve this.
 
 ### PCD-009 — MCQ silently re-offered forever for an ungradeable typed answer ("I1")
 - **Subject/Concept:** Physics — `phys.particle.gauge-bosons`, `phys.qm.angular-momentum-addition`.
@@ -326,10 +395,44 @@ here for accuracy, not performed as part of this task.
 - **Fix type:** Code (CUE decision-layer tuning) — explicitly **not attempted** in the source
   session because "adding a ceiling to D4b is the plausible next step but would be hot-path
   surgery justified by a partial explanation."
-- **Status:** OPEN / PARTIAL. A separate, deterministic root cause for a large slice of the same
+- **Status (superseded 2026-09-13, kept for history):** OPEN / PARTIAL. A separate, deterministic root cause for a large slice of the same
   symptom (the client silently dropping a probe the server believed was still displayed) was
   found and fixed the same program — see PCD-024 below — but the D4b contribution itself remains
   unresolved.
+
+- **2026-09-13 — TRACED END TO END, ROOT CAUSE CORRECTED, AND FIXED.** Driven through the REAL
+  route (`src/tests/pcd007AssessmentLifecycle.test.ts`, the Liveness Programme's `turnHarness`
+  convention: real `POST`, only auth/prisma/model/rate-limit stubbed). The failure REPRODUCES —
+  a chemistry learner asking a help question on every turn runs ten turns at OBSERVE →
+  DEMONSTRATE → GUIDE with five ACTIVE authored probes and is served nothing gradeable;
+  `correctAtCheck` never leaves 0 — **but this file's attributed cause is stale.**
+  `[gate-eligibility]` shows `phaseAllowsProbe: TRUE` on all ten turns (R81/R82/E1 closed the
+  phase axis this entry blamed), and the SOLE blocker on every one is `arbitrationAllowsProbe`.
+  Two arbitration rungs deny `AUTHORED_PROBE` to a learner who asks something — `LEARNER_REQUEST`
+  ("answering it owns the turn") and `LEARNER_QUESTION` ("a question is not an answer"). Both are
+  correct for one turn; **neither has a ceiling**, and nothing else supplies one, because
+  `learnerRequestHonoured` is classified PRODUCTIVE by `turnProgress` (it genuinely is teaching),
+  so `stagnantTurns` stays 0 and rungs 1–3 never fire. An inquisitive learner was assessable only
+  by accident. PCD-007, PCD-008 and PCD-011 are **one defect**, not three.
+- **Fix:** a third `turnProgress` counter, `probeStarvedTurns` (`foldProbeStarvedTurns` /
+  `shouldRelieveProbeStarvation`, threshold 2), and a ceiling in the gate. Deliberately narrow:
+  it fires only after a question has owned two consecutive turns outright (so
+  `D4b-ANSWER-STUDENT-FIRST` keeps everything it protects), only when arbitration was the SOLE
+  blocker, and only for the two rungs that merely SEQUENCE a turn — `RECOVERY`, `KNOWLEDGE_GAP`,
+  `CLOSE` and `COMPLETE` are never relieved. It is a SUBSTITUTION, never an addition: the model's
+  answer to the learner is served unchanged and the authored probe rides alongside it, replacing
+  the ungradeable question the model writes on those turns anyway. Mastery reachability is
+  untouched — `mayAttachProbeBelowGuide` still re-reads the live pool before any spend below
+  GUIDE. The gate log now carries `arbitrationRawAllowsProbe` / `probeStarvationRelieved` /
+  `probeStarvedTurnsBefore` so it can never imply arbitration opened a gate the ceiling opened.
+- **Targeted tests:** `src/tests/pcd007AssessmentLifecycle.test.ts` (12 assertions, both subjects).
+  Verified non-vacuous: with the relief disabled, 5 of the 12 invert. Negative controls included —
+  distress turns are never relieved, an ordinary lesson never arms the counter, and relief never
+  fires while another gate term is also false.
+- **Status:** **FIXED** 2026-09-13. Was: OPEN / PARTIAL. The `D4b` attribution was a symptom,
+  not the cause: `phaseAllowsProbe` is true on the failing turns in the current build, and the
+  hot-path CUE surgery this entry declined to attempt is not needed — the ceiling sits in the
+  gate, leaves the decision layer untouched, and bounds every question-owned rung at once.
 
 ### PCD-012 — CLOSING triggered by confusion signals alone, denying probes for the rest of the session
 - **Subject/Concept:** Physics — `phys.mech.collisions-inelastic`.
@@ -1135,8 +1238,16 @@ Status breakdown — **UPDATED 2026-09-12 after the remediation pass** (commits 
 `6326c91`; `1926839` for the session-failure classifier). Superseded line, kept for history:
 *"18 FIXED, 2 PARTIALLY FIXED, 1 MONITORING, 20 OPEN."*
 
-Current: **25 FIXED**, **2 PARTIALLY FIXED** (open against their stated target),
-**1 MONITORING**, **13 OPEN**. (`PCD-005` and `PCD-028` remain excluded from all counts —
+Superseded line, kept for history: *"25 FIXED, 2 PARTIALLY FIXED, 1 MONITORING, 13 OPEN."*
+
+Current — **UPDATED 2026-09-13 after the P1 assessment-lifecycle pass**: **28 FIXED**,
+**2 PARTIALLY FIXED** (open against their stated target), **1 MONITORING**, **10 OPEN**.
+PCD-007, PCD-008 and PCD-011 all moved OPEN → FIXED on one piece of evidence, because the
+end-to-end trace showed they are **one defect with three symptoms**: an unbounded
+`arbitrationAllowsProbe` refusal on every turn a learner asks a question. Both this file's
+own attributions for that family (`D4b`, `phaseAllowsProbe: false`) were measured STALE —
+the phase axis had already been closed by R81/R82/E1. See those three entries for the
+correction; the fix is the `probeStarvedTurns` ceiling in `turnProgress.ts`. (`PCD-005` and `PCD-028` remain excluded from all counts —
 a "checked, not reproduced" record and a withdrawn cross-reference stub, not confirmed
 defects.)
 
