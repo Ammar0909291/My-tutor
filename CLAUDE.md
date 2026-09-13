@@ -5231,6 +5231,56 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   Blueprint/runtime file touched. This is a genuinely multi-session
   campaign; continuation should verify state via `scripts/math/state.ts`
   fresh each time rather than trusting any number recorded here.
+- **Batch 78 — math.linalg: determinant properties, characteristic
+  polynomial, row reduction** (2026-09-13, autonomous loop iteration):
+  re-computed the frontier fresh — `math.linalg` had exactly the 3
+  candidates predicted at the end of Batch 77, `math.graph` confirmed
+  unchanged at 0 ready (PARKED). Authored all 3, closing the ENTIRE
+  frontier with none deferred: `det-properties` (requires
+  `determinant`), `characteristic-polynomial` (requires
+  `eigenvalues`+`determinant`), `row-reduction` (requires
+  `augmented-matrix`). `det-properties` states the multiplicative/
+  transpose/scalar properties (correctly using $c^n$ for whole-matrix
+  scaling versus $c$ for a single row) and tracks all three row
+  operations' determinant effects. 3 misconceptions: MC-1
+  SCALAR-DETERMINANT-PROPERTY-USES-C-INSTEAD-OF-C-TO-THE-N (Type 1,
+  Foundational), MC-2
+  SINGLE-ROW-SCALING-CONFUSED-WITH-WHOLE-MATRIX-SCALING (Type 1,
+  Foundational — tied with MC-1 as the same underlying confusion at
+  two scales), MC-3 ROW-SWAP-SIGN-CHANGE-FORGOTTEN (Type 5,
+  Moderate). `characteristic-polynomial` constructs
+  $p(\lambda)=\det(A-\lambda I)$ (reusing `determinant` and
+  `eigenvalues` directly) and states the Cayley-Hamilton theorem,
+  converting every constant term to a multiple of $I$. 3
+  misconceptions: MC-1 LAMBDA-SUBTRACTED-FROM-WRONG-ENTRIES (Type 4,
+  Foundational), MC-2
+  CAYLEY-HAMILTON-CONSTANT-TERM-NOT-CONVERTED-TO-IDENTITY-MULTIPLE
+  (Type 4, Foundational), MC-3
+  CHARACTERISTIC-POLYNOMIAL-DEGREE-MISMATCHED-TO-MATRIX-SIZE (Type 5,
+  Moderate). `row-reduction` applies the three row operations
+  systematically (column by column), recognizes row echelon form, and
+  distinguishes it from a solved system via back-substitution. 3
+  misconceptions: MC-1 ECHELON-FORM-MISTAKEN-FOR-SOLVED-SYSTEM (Type
+  5, Foundational — the single most common point where students stop
+  prematurely), MC-2 ROW-OPERATIONS-APPLIED-OUT-OF-SYSTEMATIC-ORDER
+  (Type 5, Foundational), MC-3 ECHELON-FORM-PIVOT-PATTERN-MISJUDGED
+  (Type 2, Moderate). 2 of 3 zero Blueprint/KG metadata discrepancy;
+  `characteristic-polynomial` carries a genuine `cross_links`
+  discrepancy (Blueprint claims none, KG has `math.de.char-equation`,
+  confirmed unauthored via `ls`, independence mode, resolved toward
+  the KG); `row-reduction` unlocks `row-echelon`+`lu-factorization`,
+  both newly ready. `math.linalg` **22/61 → 25/61**. Mathematics
+  **524/908 → 527/908**, 381 remaining. Fresh frontier: `math.linalg`
+  2 ready (`lu-factorization`, `row-echelon`); `math.graph` unchanged
+  0 ready (still PARKED). Validated: KG validator PASS (908/908
+  reachable, file untouched), `scripts/math/state.ts` confirms
+  math.linalg 25/61, mathematics 527/908 (10 EB-certified domains
+  unchanged), `tsc --noEmit` clean, targeted tests 479/479 passed,
+  all 3 heading structures diffed clean on the first pass. No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file
+  touched. This is a genuinely multi-session campaign; continuation
+  should verify state via `scripts/math/state.ts` fresh each time
+  rather than trusting any number recorded here.
 
 ## Topic/meaning loss — the extractor's default was YES (2026-09-13)
 
