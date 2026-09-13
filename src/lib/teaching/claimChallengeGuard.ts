@@ -58,9 +58,46 @@ const CHALLENGE_RE = new RegExp(
     String.raw`\bisn'?t\s+that\s+wrong\b`,
     // "that's not what I learned/heard"
     String.raw`\bthat'?s\s+not\s+what\s+i\s+(?:learned|learnt|heard|read)\b`,
+    // ── WIDENED (real-student cross-subject audit, chem.bond.resonance) ────
+    // The measured production failure used NEITHER of the shapes above. The
+    // learner's actual two challenges were:
+    //   "u said oxygen has 5 valence electron but i thought oxygen has 6?"
+    //   "i thought formal charges must add up to the real charge, thats
+    //    what my teacher said before"
+    // Neither contains "wrong", "not right", "actually" (anchored), or
+    // "read/heard/learned … not …" — so CHALLENGE_RE never fired for either,
+    // and the downstream humility instruction was never injected at all.
+    // This is the single most natural way a real (especially young or ESL)
+    // learner disputes a claim: citing a REMEMBERED counter-fact ("I
+    // thought X") or a REMEMBERED AUTHORITY ("my teacher/book/notes said
+    // X"), optionally contrasted against what the tutor just said ("but").
+    // Two new sub-patterns, kept narrow enough to require an actual
+    // cited proposition (not a bare "I don't understand"):
+    //   "i thought <at least 3 words>"      — a remembered counter-claim
+    //   "my (teacher|book|notes|class|...) (said|told me|says|taught) <..>"
+    // A bare "i thought" with nothing following, or an ordinary FORWARD-
+    // LOOKING planning statement ("i thought i'd/i would/i could try X" —
+    // intent, not a remembered fact), is excluded; a remembered-fact clause
+    // needs at least 3 more words to avoid tripping on "i thought about it".
+    String.raw`\bi\s+thought\s+(?!i\s*(?:'d|would|could|might|should|can|will)\b)\w+(?:\s+\w+){2,}`,
+    String.raw`\bmy\s+(?:teacher|book|textbook|notes|class|professor|teachers?)\s+(?:said|told\s+me|says|taught\s+(?:me|us)|says?)\b`,
+    String.raw`\bwe\s+(?:learned|learnt|were\s+taught)\s+(?:in\s+class\s+)?that\b`,
   ].join('|'),
   'i',
 )
+
+/**
+ * The set of phrasings `buildClaimChallengeBlock` itself suggests the model
+ * say ("I may have gotten that wrong…", "let me be more careful…"). Used by
+ * the post-generation `vChallenge` check (kernel/verifier/rules.ts) to ask a
+ * narrow, answerable question: did the reply show ANY sign of taking the
+ * challenge seriously, in the model's own words or close to them — never
+ * "was the reply correct", which is not decidable here. Deliberately reuses
+ * the directive's own vocabulary rather than inventing a second list, so a
+ * model that follows the instruction it was already given always passes.
+ */
+export const CHALLENGE_ACKNOWLEDGED_RE =
+  /\b(?:i\s+may\s+have|i\s+might\s+have|you\s+(?:may|might)\s+be\s+right|you'?re\s+right\s+to\s+(?:question|double[- ]?check|ask)|good\s+catch|fair\s+point|let\s+me\s+(?:be\s+more\s+careful|double[- ]?check|verify|correct)|i\s+(?:was|am)\s+(?:wrong|mistaken)|my\s+mistake|i\s+apologi[sz]e|not\s+(?:fully\s+)?(?:certain|sure)\s+(?:about|that)|needs?\s+(?:to\s+be\s+)?verif|let\s+me\s+re-?check)\b/i
 
 /**
  * True when the learner's message directly disputes a factual claim the

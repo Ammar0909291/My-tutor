@@ -12,6 +12,7 @@
 import { repliesWithQuestion } from '@/lib/teaching/conversationState'
 import type { VerifierContext, Violation } from './types'
 import { CAPABILITY_DEMAND_PATTERNS } from '@/lib/teaching/capabilityModel'
+import { CHALLENGE_ACKNOWLEDGED_RE } from '@/lib/teaching/claimChallengeGuard'
 import {
   CALCULATION_DEMAND_PATTERNS, FORMULA_PATTERNS, IPA_PATTERNS,
   HYPERBOLIC_PRAISE_PATTERNS, ASSESSMENT_RESULT_PATTERN,
@@ -473,7 +474,7 @@ export const RULES = [
   vAssess, vComplete,
   vTag,
   vQ1, vQ2, vStage, vVocName, vVocFormula, vVocReg,
-  vTerms, vLen, vCap, vRec, vClose, vPraise, vReact, vAffirm,
+  vTerms, vLen, vCap, vRec, vClose, vPraise, vReact, vAffirm, vChallenge,
   // S1 — history-aware, LOG severity (see block above). Ordered last: none
   // of them strip or reject, so their position cannot affect any earlier
   // rule's view of the text.
@@ -612,5 +613,54 @@ export function vAffirm(text: string, ctx: VerifierContext): Violation | null {
       'the learner proposed a definition and the reply agreed without ' +
       'distinguishing anything. State the correct formulation yourself and ' +
       'name explicitly how it differs from what they said.',
+  }
+}
+
+// ── V-CHALLENGE · a claim challenge produced no substantive response ────────
+//
+// THE INCIDENT (chem.bond.resonance, real-student cross-subject audit).
+// The tutor taught a wrong formal-charge rule for CO3^2-. The learner
+// challenged it TWICE, in the most natural way a real student does — citing
+// a remembered fact ("i thought oxygen has 6") and a remembered authority
+// ("that's what my teacher said before") — and both challenges were
+// followed by content-free filler ("Let's walk through the calculation
+// together — just one step at a time.") that engaged with nothing the
+// learner said. Two later turns DID engage, at length, but never once
+// acknowledged the possibility of error and instead escalated the same
+// false claim with new fabricated justification.
+//
+// WHY THIS RULE DOES NOT TRY TO DECIDE WHO IS RIGHT. There is no knowledge
+// base here (same boundary claimChallengeGuard.ts and remediationGrounding.ts
+// already document) — this module cannot tell a correct confident defense
+// from an incorrect one, and must not pretend otherwise. What it CAN decide,
+// safely, is the same narrow behavioural question V-AFFIRM decides: did the
+// reply show ANY sign of taking the dispute seriously (CHALLENGE_ACKNOWLEDGED_RE,
+// reusing the exact vocabulary the injected directive itself suggests), and —
+// only when it did not — was the reply substantive at all, or pure filler
+// that engaged with nothing.
+//
+// SCOPE, deliberately narrow, matching V-AFFIRM's own asymmetry: a reply that
+// is long and unacknowledging is NOT rejected here (this rule cannot tell if
+// it is a legitimate grounded defense), but it IS reported to the caller as
+// unresolved — see route.ts's use of CHALLENGE_ACKNOWLEDGED_RE on the FINAL
+// served text to gate mastery (masteryGate.ts's `teachingIntegrityUncertain`),
+// independent of this REJECT check. Only a SHORT, unacknowledged, contentless
+// reply is rejected here — the one shape this module CAN tell is wrong
+// regardless of who was right (T2's exact production shape).
+export function vChallenge(text: string, ctx: VerifierContext): Violation | null {
+  if (ctx.challengeActive !== true) return null
+  const clean = withoutCodeFences(text).trim()
+  if (!clean) return null
+  if (CHALLENGE_ACKNOWLEDGED_RE.test(clean)) return null
+  const wordCount = clean.split(/\s+/).filter(Boolean).length
+  if (wordCount >= 20) return null
+  return {
+    code: 'V-CHALLENGE',
+    severity: 'REJECT',
+    matched: clean.slice(0, 80),
+    detail:
+      'the learner challenged a claim the tutor made and the reply neither ' +
+      'acknowledged the possibility of a mistake nor engaged substantively ' +
+      'with what was challenged.',
   }
 }

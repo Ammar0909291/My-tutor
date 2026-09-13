@@ -49,6 +49,7 @@ import {
   type ConversationState, type TeachingPhase,
 } from '@/lib/teaching/conversationState'
 import { detectFailureState, isDontKnowSignal, buildRecoveryBlock } from '@/lib/teaching/recoveryGuard'
+import { isClaimChallenge, CHALLENGE_ACKNOWLEDGED_RE } from '@/lib/teaching/claimChallengeGuard'
 import { masteryVerified, detectLearnerRequest } from '@/lib/teaching/masteryGate'
 import {
   buildTurnRecord, appendTurn, initialTurnHistory,
@@ -237,6 +238,15 @@ export function replay(t: ReplayTranscript): ReplayOutcome {
       // approximating it. The alternative, an entry in replayDrift's
       // CANNOT_REPLAY list, would have been untrue.
       diagnosticStalled: diagnosticStalledThisTurn(stagnantTurns),
+      // FACTUAL CONTENT INTEGRITY: replayable, and therefore replayed rather
+      // than excused — a transcript carries both facts this needs (the
+      // learner's own words, to decide isClaimChallenge; the tutor's final
+      // rendered text, to check CHALLENGE_ACKNOWLEDGED_RE), which is exactly
+      // route.ts's own two inputs (message and cleanText). No server-only
+      // signal is required, unlike serverGraded/unauthoredKey/degradedTurn
+      // in replayDrift's CANNOT_REPLAY list.
+      teachingClaimUnresolved:
+        isClaimChallenge(turn.learner) && !CHALLENGE_ACKNOWLEDGED_RE.test(turn.tutor),
     })
     // Fold AFTER the ladder, on the same facts the route uses, so the next
     // turn's rung-2 input is this turn's outcome. Server-only inputs a

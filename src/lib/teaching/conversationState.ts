@@ -233,6 +233,24 @@ export interface ConversationState {
    *  so the fallback must not apply to it. Additive; defaults false (spread over
    *  initialConversationState), no migration. */
   sawModernGrading: boolean
+  /**
+   * FACTUAL CONTENT INTEGRITY (real-student cross-subject audit,
+   * chem.bond.resonance): a claim the tutor made for THIS concept was
+   * challenged by the learner and never acknowledged as possibly wrong (see
+   * TurnEvidence.teachingClaimUnresolved). Set once, never auto-cleared
+   * within the concept — matching `sawModernGrading`'s own "set once, never
+   * cleared" policy — because there is no safe, general way to detect that
+   * the dispute has since been resolved; the only reset is a fresh concept
+   * attempt (`initialConversationState`, fired whenever the concept
+   * changes). Read by masteryGate.ts's `conceptMasteryVerdict`: while true,
+   * this concept cannot certify mastery, however its graded-answer evidence
+   * looks. Does NOT touch `correctAtCheck`/`correctAtPractice`/verified
+   * counters — no legitimate evidence is erased, only the final verdict is
+   * withheld. Optional (unlike `sawModernGrading`) so every pre-existing
+   * full-object test fixture in the repo stays valid unchanged; undefined
+   * reads identically to false everywhere this is consulted. Additive;
+   * defaults false, no migration. */
+  teachingIntegrityUncertain?: boolean
 }
 
 export function initialConversationState(conceptId: string | null): ConversationState {
@@ -275,6 +293,7 @@ export function initialConversationState(conceptId: string | null): Conversation
     parityViolations: 0,
     fillerRepairStreak: 0,
     sawModernGrading: false,
+    teachingIntegrityUncertain: false,
   }
 }
 
@@ -523,6 +542,19 @@ export interface TurnEvidence {
    *  false resets the streak, exactly like every other consecutive-counter
    *  in this file. */
   fillerTurnDetected?: boolean
+  /**
+   * FACTUAL CONTENT INTEGRITY — the learner challenged a claim the tutor
+   * made THIS turn (claimChallengeGuard.ts's `isClaimChallenge`) and the
+   * FINAL served text did not contain any acknowledgement of the challenge
+   * (`CHALLENGE_ACKNOWLEDGED_RE`). Neither this module nor the caller can
+   * decide whether the challenged claim was actually true — see
+   * claimChallengeGuard.ts's own header for why that is out of scope. What
+   * IS decidable is that the dispute was raised and never acknowledged, so
+   * this concept's teaching cannot be trusted as a foundation for mastery
+   * until it is. Folds into `teachingIntegrityUncertain` (set once, never
+   * auto-cleared — see that field), read by masteryGate.ts's
+   * `conceptMasteryVerdict`. Omitted ⇒ byte-identical to previous behaviour. */
+  teachingClaimUnresolved?: boolean
 }
 
 /**
@@ -1277,6 +1309,11 @@ export function advanceConversationState(
   // fully-prose lesson could still certify on self-report after the verified
   // requirement above. Set once, never cleared.
   next.sawModernGrading = (prev.sawModernGrading ?? false) || evidence.serverGraded !== undefined
+
+  // FACTUAL CONTENT INTEGRITY: set once, never cleared within the concept —
+  // see the field's own doc comment for why an auto-reset is not safe.
+  next.teachingIntegrityUncertain =
+    (prev.teachingIntegrityUncertain ?? false) || evidence.teachingClaimUnresolved === true
 
   // Signal verification telemetry: fold contradiction and parity counters.
   if (evidence.signalVerificationStatus === 'CONTRADICTED') {

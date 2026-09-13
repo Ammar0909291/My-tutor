@@ -14,7 +14,7 @@
  * doubling down with invented detail and requires honest uncertainty instead.
  */
 import { describe, it, expect } from 'vitest'
-import { isClaimChallenge, buildClaimChallengeBlock } from '@/lib/teaching/claimChallengeGuard'
+import { isClaimChallenge, buildClaimChallengeBlock, CHALLENGE_ACKNOWLEDGED_RE } from '@/lib/teaching/claimChallengeGuard'
 
 describe('isClaimChallenge — the challenge shape, not an ordinary question', () => {
   it.each([
@@ -62,6 +62,101 @@ describe('isClaimChallenge — the challenge shape, not an ordinary question', (
     expect(isClaimChallenge('it is actually pretty simple once you see the pattern')).toBe(false)
     expect(isClaimChallenge('Actually, I think that is incorrect.')).toBe(true)
     expect(isClaimChallenge('No, actually, I read something different.')).toBe(true)
+  })
+})
+
+describe('isClaimChallenge — WIDENED (real cross-subject audit, chem.bond.resonance)', () => {
+  // ── THE EXACT PRODUCTION FAILURE ────────────────────────────────────────
+  // A real-student audit challenged a wrong formal-charge claim TWICE, in
+  // the two most natural ways a real (especially young/ESL) student
+  // disputes something: citing a remembered fact, and citing a remembered
+  // authority ("my teacher said"). NEITHER matched the pre-widening
+  // CHALLENGE_RE (verified by testing the pre-fix pattern set directly
+  // against both strings before this fix — neither "wrong", "not right",
+  // anchored "actually", nor "read/heard/learned … not …" occurs in
+  // either message), so the humility directive was never injected and the
+  // tutor was free to double down, which it did.
+  it.each([
+    'wait, im confused, u said oxygen has 5 valence electron but i thought oxygen has 6? and how can all three oxygen be -1 if total charge is only -2?',
+    'im really confused now, i thought formal charges must add up to the real charge, thats what my teacher said before',
+  ])('detects the ACTUAL reproduced production challenge: %s', (msg) => {
+    expect(isClaimChallenge(msg)).toBe(true)
+  })
+
+  it.each([
+    'i thought i would try that later',
+    "i thought i'd go outside after this",
+    'my teacher gave us homework about this',
+  ])('does NOT fire on a forward-looking/unrelated "i thought"/"my teacher" sentence: %s', (msg) => {
+    expect(isClaimChallenge(msg)).toBe(false)
+  })
+
+  it.each([
+    'my teacher said always use active voice not passive',
+    'we learned in class that oxygen has 6 valence electrons',
+    'i thought the answer was different, we learned that in school',
+  ])('detects other natural "remembered fact/authority" challenge shapes: %s', (msg) => {
+    expect(isClaimChallenge(msg)).toBe(true)
+  })
+
+  // Non-vacuity: the OLD pattern set (pre-widening) genuinely misses both
+  // reproduced production strings — proving the widening, not some other
+  // change, is what makes the two cases above pass.
+  it('NON-VACUITY: the pre-widening CHALLENGE_RE genuinely misses both reproduced strings', () => {
+    const OLD_CHALLENGE_RE = new RegExp(
+      [
+        String.raw`\bthat'?s?\s+(?:not|n'?t)\s+(?:right|true|correct|accurate)\b`,
+        String.raw`\b(?:that'?s|you'?re|you\s+are)\s+wrong\b`,
+        String.raw`\bare\s+you\s+sure\b`,
+        String.raw`\bi\s+don'?t\s+think\s+(?:that'?s\s+)?(?:right|true|correct|so)\b`,
+        String.raw`\bthat\s+doesn'?t\s+sound\s+(?:right|true|correct)\b`,
+        String.raw`\bi\s+don'?t\s+believe\s+that\b`,
+        String.raw`^(?:no,?\s+)?(?:wait,?\s+)?actually\b`,
+        String.raw`\bi\s+(?:read|heard|learned|learnt)\s+(?:that\s+)?.{0,60}\bnot\b`,
+        String.raw`\bisn'?t\s+that\s+wrong\b`,
+        String.raw`\bthat'?s\s+not\s+what\s+i\s+(?:learned|learnt|heard|read)\b`,
+      ].join('|'),
+      'i',
+    )
+    expect(OLD_CHALLENGE_RE.test(
+      'wait, im confused, u said oxygen has 5 valence electron but i thought oxygen has 6? and how can all three oxygen be -1 if total charge is only -2?',
+    )).toBe(false)
+    expect(OLD_CHALLENGE_RE.test(
+      'im really confused now, i thought formal charges must add up to the real charge, thats what my teacher said before',
+    )).toBe(false)
+  })
+})
+
+describe('CHALLENGE_ACKNOWLEDGED_RE — did the reply take the challenge seriously?', () => {
+  it.each([
+    'You may have caught something — let me double-check that calculation.',
+    "You're right to question that; let me verify the numbers.",
+    'Good catch — I was wrong about that.',
+    "That's a fair point, my mistake.",
+    "I'm not fully certain about that specific detail.",
+    'Let me correct that: the double-bonded oxygen has formal charge 0, not -1.',
+  ])('recognises an acknowledging reply: %s', (text) => {
+    expect(CHALLENGE_ACKNOWLEDGED_RE.test(text)).toBe(true)
+  })
+
+  it.each([
+    // The ACTUAL production failures, verbatim (trimmed where very long).
+    "Let's walk through the formal-charge calculation together—just one step at a time.",
+    'Hold on—lets correct that: each single-bond oxygen actually has 4 lone-pair electrons, not 8.',
+    'the formal charges in the individual resonance structures do not have to match the real charge of the ion',
+    'When you average the three, the double-bond oxygen’s +1 appears only one-third of the time.',
+  ])('does NOT recognise the actual unacknowledging production replies: %s', (text) => {
+    expect(CHALLENGE_ACKNOWLEDGED_RE.test(text)).toBe(false)
+  })
+
+  it('does not falsely fire on an ordinary confident, correct defence (no false positive against a legitimate answer)', () => {
+    const legitimateDefence =
+      'Actually, I am confident that is correct: sodium has 11 protons, matching its atomic number on the periodic table.'
+    expect(CHALLENGE_ACKNOWLEDGED_RE.test(legitimateDefence)).toBe(false)
+    // (This is a DELIBERATE, documented limitation, not a bug: this module
+    // cannot tell a correct confident defence from an incorrect one. See
+    // teachingIntegrityMastery.test.ts for how the mastery gate — not this
+    // regex — is what actually stays safe in that case.)
   })
 })
 
