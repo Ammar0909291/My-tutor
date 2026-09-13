@@ -4638,6 +4638,81 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   via `scripts/math/state.ts` fresh each time rather than trusting
   any number recorded here.
 
+## Topic/meaning loss — the extractor's default was YES (2026-09-13)
+
+**Read `LEADING_MODIFIER_HEADS` in `src/lib/teaching/visual/requestedTopic.ts`
+and `src/tests/topicModifierShape.test.ts` before adding another word to
+`DISCOURSE_NOUNS`.** The next incident probably does not need one.
+
+### What was actually wrong
+`extractRequestedTopic` accepted ANY surviving word sequence as a topic NAME.
+The only thing between a learner's ordinary prose and a lesson-pausing excursion
+was `DISCOURSE_NOUNS` — a blocklist extended **twelve times, once per production
+incident** (`point`, `line`, `slowly`, `slow`, `practice`, `check`, `main`,
+`please`, `today`, `beginner`, …). Its own comments are a run of post-mortems.
+This is the exclusion-list trap CLAUDE.md already named for
+`genuineUnmappedAttempt`: the default answer was YES, and the space of non-topic
+prose is not finite.
+
+### Measured, not reasoned
+31 discourse-shaped utterances transcribed from the defect registers and the
+`DISCOURSE_NOUNS` comments (which quote real transcripts), plus 14 genuine topic
+requests, run through the REAL `namedTopicUnknownTo`. **5 of 31 named a false
+topic**, and all five were the same shape — a manner adverbial, not a noun
+phrase:
+
+    "please teach from start"                 -> "from start"          (PCD-018)
+    "hi sir, ...please teach from start"       -> "from start"          (PCD-020)
+    "can you teach me in an easier manner"     -> "in an easier manner"
+    "explain like i am five years old"         -> "like i am five years old"
+    "explain it in a simple manner sir"        -> "in a simple manner sir"
+
+**PCD-018/PCD-020 still reproduced** — the master backlog recorded them FIXED by
+Principle 13 (2026-09-11). That prompt fix is real but covers only the MODEL's
+half; the deterministic layer went on opening an excursion, pausing the lesson
+and blocking the authored-probe gate underneath it. **A prompt cannot out-argue a
+paused lesson.** Both registers corrected.
+
+### The fix — a shape test, not more vocabulary
+A phrase still headed by a preposition/subordinator after every existing trim is
+the request's MODIFIER, not its object. **Rejected, never trimmed** — trimming
+the head exposes `start` and names a topic by that word instead, the same defect
+one step along. 5/31 -> **0/31**, genuine set unchanged (14/14, the two
+non-matches are pre-existing and unrelated).
+
+It does NOT refuse the question. It only stops the lesson being PAUSED: the
+tutor still answers, anchored, and Principle 13 supplies the restatement. The two
+halves compose — that is the point.
+
+### The list is three words, and that is a decision
+`from`, `in`, `like`. A first draft carried fifteen "obvious" siblings and a
+**pre-existing guard caught it**: `crossSubjectTemporalConnective.test.ts` asserts
+"teach me while loops" names `while loops`, and it does — `while`/`for` are real
+control-flow constructs (`Iteration — while and for Loops` is a live CS concept).
+`by` (Proof by Contradiction), `with` (Version Control with Git), `at` (Limits at
+Infinity), `onto`, `via`, `without` are all live subject vocabulary too. The
+head-position scan that cleared the three did not catch it, **because a learner
+names that topic by a word the TITLE does not begin with** — head-position in the
+KG is the wrong safety test for learner phrasing. Removing the fifteen cost
+nothing: still 0/31.
+
+### Why this is safe for the curriculum
+Exactly two of 1,775 concept titles are headed by one of the three — "Like Terms"
+and "From Print to Meaning". Neither is reachable: `route.ts` consults the
+unresolved-title path only when `resolveRequestedConceptId` returned nothing
+(`if (requestedConceptIdThisTurn) return null`), and both resolve —
+verified against the live KG, not assumed, and pinned by test.
+
+### NOT done, reported
+PCD-015/016/017/021 (meta-commentary literalism, off-domain analogy substitution)
+remain prompt-governed and advisory. They are not mechanically checkable the way
+this was — "did the tutor interpret an open instruction correctly" has no
+deterministic test — and no speculative patch was made. PCD-018's second thread,
+the figure/text mismatch (correct diagram attached while the text drifted), is
+also untouched: the repair would have to rewrite generated text, not withhold it.
+**No production verification** — offline measurement against the real modules.
+Suite 647 files / 13,474 passed / 9 skipped; tsc clean; build clean.
+
 ## Physics Teacher Migration Architecture V2 — AUDITED, NOT ADOPTED (2026-09-12)
 
 **File renamed this turn.** `docs/architecture/PHYSICS_TUTOR_ZERO_TO_RESEARCH_ARCHITECTURE.md` →

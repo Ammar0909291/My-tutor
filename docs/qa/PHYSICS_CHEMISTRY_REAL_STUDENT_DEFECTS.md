@@ -634,7 +634,22 @@ here for accuracy, not performed as part of this task.
 - **Fix type:** Prompt (interpretation of beginner-opener phrases) + code (diagram-serving
   should track what the text is actually discussing, not just what topic the lesson nominally
   is).
-- **Status:** OPEN — first documented here.
+- **Status:** **FIXED (runtime half) 2026-09-13** — the topic-abandonment thread only; the
+  literalism/analogy threads remain prompt-governed (Principle 13).
+  **Correction to the record:** `PHYSICS_CHEMISTRY_MASTER_DEFECT_BACKLOG.md` records this
+  entry as FIXED on 2026-09-11 by Principle 13. That fix is real but covers only the MODEL's
+  half. Re-measured 2026-09-13 against the live modules: `"please teach from start"` and
+  `"hi sir, i only know little bit, please teach from start"` both still resolved to the
+  **topic `"from start"`** and opened an unresolved-topic excursion, which PAUSES the lesson
+  and blocks the authored-probe gate deterministically — underneath the instruction telling
+  the model to stay on the concept. A prompt cannot out-argue a paused lesson.
+  Root cause: `extractRequestedTopic` accepted any surviving word sequence as a NAME, with a
+  finite blocklist (`DISCOURSE_NOUNS`, extended twelve times, once per incident) as the only
+  guard. Fixed by a SHAPE test — a phrase still headed by a preposition/subordinator after
+  every existing trim is the request's modifier, not its object. Measured 5/31 discourse
+  phrasings naming false topics -> 0/31, with the genuine-topic set unchanged.
+  Guard: `src/tests/topicModifierShape.test.ts` (proven non-vacuous: 6 cases fail when the
+  check is removed). See the 2026-09-13 CLAUDE.md entry.
 
 ### PCD-019 — Verbatim question repeat in response to an acknowledgement: `chem.kinet.rate-law` (#84) T9
 - **Subject/Concept:** Chemistry — `chem.kinet.rate-law` (#84).
@@ -665,7 +680,22 @@ here for accuracy, not performed as part of this task.
 - **Severity:** P2.
 - **Fix priority:** Medium.
 - **Fix type:** Prompt.
-- **Status:** OPEN — first documented here.
+- **Status:** **FIXED (runtime half) 2026-09-13** — the topic-abandonment thread only; the
+  literalism/analogy threads remain prompt-governed (Principle 13).
+  **Correction to the record:** `PHYSICS_CHEMISTRY_MASTER_DEFECT_BACKLOG.md` records this
+  entry as FIXED on 2026-09-11 by Principle 13. That fix is real but covers only the MODEL's
+  half. Re-measured 2026-09-13 against the live modules: `"please teach from start"` and
+  `"hi sir, i only know little bit, please teach from start"` both still resolved to the
+  **topic `"from start"`** and opened an unresolved-topic excursion, which PAUSES the lesson
+  and blocks the authored-probe gate deterministically — underneath the instruction telling
+  the model to stay on the concept. A prompt cannot out-argue a paused lesson.
+  Root cause: `extractRequestedTopic` accepted any surviving word sequence as a NAME, with a
+  finite blocklist (`DISCOURSE_NOUNS`, extended twelve times, once per incident) as the only
+  guard. Fixed by a SHAPE test — a phrase still headed by a preposition/subordinator after
+  every existing trim is the request's modifier, not its object. Measured 5/31 discourse
+  phrasings naming false topics -> 0/31, with the genuine-topic set unchanged.
+  Guard: `src/tests/topicModifierShape.test.ts` (proven non-vacuous: 6 cases fail when the
+  check is removed). See the 2026-09-13 CLAUDE.md entry.
 
 ### PCD-021 — Retroactive sweep findings: mo-theory literalism + Bohr-model off-domain drift (chemistry concepts 1–30)
 - **Subject/Concept:** Chemistry — a molecular-orbital-theory concept and a Bohr-model-related
