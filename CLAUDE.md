@@ -4894,6 +4894,49 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   touched. This is a genuinely multi-session campaign; continuation
   should verify state via `scripts/math/state.ts` fresh each time
   rather than trusting any number recorded here.
+- **Batch 72 — vector addition, scalar multiplication, dot product,
+  matrix: closes math.linalg's post-Batch-71 frontier and REOPENS
+  math.disc** (2026-09-13): re-computed the frontier fresh —
+  `math.linalg` had exactly the 4 candidates predicted at the end of
+  Batch 71, all direct children of `vector`; `math.disc`/`math.calc`/
+  `math.graph` confirmed unchanged at 0 ready. Authored all 4, closing
+  the ENTIRE frontier with none deferred. `vector-addition` computes
+  component-wise addition/subtraction, treating dimension mismatch as
+  a genuine type error (cross-link `math.abst.group-operation`
+  confirmed unauthored, independence mode). `scalar-multiplication`
+  computes $c\mathbf v$ component-wise, distinguishing multiplication
+  from addition and correctly carrying a negative sign into every
+  component. `dot-product` computes the scalar $\sum a_ib_i$,
+  distinguishing it from the vector-valued Hadamard product — its
+  cross-link `math.geom.dot-product` IS already authored, but the
+  Blueprint deliberately designates it NOT Tier 1 and uses an
+  independence-mode probe instead, an intentional design choice
+  preserved rather than overridden. `matrix` defines the rows-first
+  $m\times n$ convention and $(i,j)$ entry addressing, extending
+  `vector`'s own ordered-tuple structure to two dimensions (its MC-3
+  is the identical overgeneralization mechanism as `vector`'s own
+  MC-2, one dimension up). 12 misconceptions independently classified
+  across the 4 concepts (Blueprints give trigger/error-pattern
+  narratives, not birth types); all 4 zero Blueprint/KG metadata
+  discrepancy. **Authoring `matrix` REOPENS math.disc, confirmed by a
+  fresh frontier check run immediately after, not merely predicted**:
+  `math.disc.graph-representation` (requires `graph`+`matrix`, both
+  now authored) is the domain's sole remaining concept, now ready —
+  math.disc is no longer PARKED. `math.linalg` **1/61 → 5/61**.
+  Mathematics **500/908 → 504/908**, 404 remaining. Fresh frontier:
+  `math.disc` 1 ready (`graph-representation`); `math.calc`/`math.graph`
+  unchanged at 0 ready (still PARKED — `determinant`/`eigenvalues` not
+  yet authored); `math.linalg` 7 ready (`norm`, `orthogonality`,
+  `cross-product`, `matrix-addition`, `matrix-multiplication`,
+  `matrix-transpose`, `linear-system`). Validated: KG validator PASS
+  (908/908 reachable, file untouched), `scripts/math/state.ts`
+  confirms math.linalg 5/61, mathematics 504/908 (8 EB-certified
+  domains unchanged), `tsc --noEmit` clean, targeted tests 479/479
+  passed, all 4 heading structures diffed clean on the first pass. No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file
+  touched. This is a genuinely multi-session campaign; continuation
+  should verify state via `scripts/math/state.ts` fresh each time
+  rather than trusting any number recorded here.
 
 ## Topic/meaning loss — the extractor's default was YES (2026-09-13)
 
