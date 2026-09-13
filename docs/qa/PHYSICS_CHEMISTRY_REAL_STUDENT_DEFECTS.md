@@ -111,7 +111,63 @@ here for accuracy, not performed as part of this task.
   VACUOUSLY** — the deadlines were below `MIN_ATTEMPT_MS`, so the chain short-circuited
   before starting any attempt and never exercised the race; they now assert a lower bound
   on elapsed time as well as an upper one, so they fail if no attempt ran.
-- **SECOND CONTRIBUTOR, reported NOT fixed:** `/api/learn/chat` wraps **none** of its DB
+- **2026-09-13 — SECOND CONTRIBUTOR NOW FIXED.** The entry below named it and left it
+  open; this is its closure. Two holes, both proven from the repository's own constants
+  rather than inferred:
+  1. **The chain's clock is not the request's clock.** `AI_CHAIN_DEADLINE_MS` starts when
+     `complete()` is called, so every second already spent on session load, history,
+     profile and asset assembly is invisible to it. 20s of DB work plus a 45s chain is
+     **65s against `maxDuration: 60`** — the platform kills the invocation and no catch
+     runs. The chain never overran ITS budget; the request overran the function's.
+  2. **~27 direct Prisma calls, none bounded**, six of them inside `withRetry(fn, 3, 1000)`.
+     One unbounded call hangs to the platform limit during a DB stall; a retried one
+     MULTIPLIES that hang (3 unbounded attempts plus 1s+2s backoff).
+- **Fix:** one wall clock for the whole request (`src/lib/net/routeDeadline.ts`,
+  `CHAT_ROUTE_BUDGET_MS` 55s against the 60s function), and three consumers of it.
+  (a) Every bounded operation gets `min(its own cap, what is LEFT of the request)`, never
+  its own cap alone — the specific trap `/api/sessions`' `dbCall` does not close (its
+  `withRetry(withTimeout(10s), 2, 800)` has a 20.8s worst case and consults no clock above
+  itself), which is why this is NOT a copy of that pattern. (b) A retry must be
+  AFFORDABLE — backoff plus a minimally useful attempt have to fit in what remains —
+  rather than being owed one by a counter; that is the sharper half, because the first
+  timeout fires correctly and then the retry opens a fresh full budget the request cannot
+  pay. (c) The provider chain is granted `min(45s, remaining − 10s reserve)`, the reserve
+  being what the deliberately-awaited snapshot delta and assistant-message writes need
+  after the model replies. **The 6326c91 fix is preserved byte-for-byte on a healthy
+  request**: 55s is DERIVED as 45 + 10, so `providerBudgetMs` returns the full 45s and this
+  layer is inert until earlier work has already spent part of the clock. A first draft used
+  52s and was caught by its own test handing a healthy chain 42s — a silent tightening of a
+  fix this change was explicitly not allowed to weaken.
+- **And a race, because bounding what you remembered to bound leaves everything you did
+  not.** The handler is raced against the same clock, so an unbounded call — transitive, or
+  added later — produces an honest 503 from this application instead of the raw
+  `FUNCTION_INVOCATION_TIMEOUT` this entry recorded. Losing the race rolls nothing back and
+  claims nothing was persisted: the instance freezes when the response returns exactly as it
+  would have, so the failure mode is UNDER-reporting a write that may have landed, never
+  over-reporting one that did not.
+- **Write safety — no retries were added to writes.** `boundedDbCall` defaults `retries: 0`.
+  A timeout is not evidence a statement did not commit, and neither the learner message, the
+  assistant message nor the topic-progress apply carries an idempotency key, so retrying one
+  would duplicate a turn or double-count evidence. Only the three READS
+  (`chat-session-load`, `chat-profile-load`, `chat-cert-model-flag`) retry, and only when the
+  budget affords it. Pinned structurally: a test fails if `retries` ever appears near a write
+  label.
+- **Telemetry:** `BUDGET_EVENT` (`src/lib/teaching/budgetTelemetry.ts`), extending the
+  existing `TURN_EVENT`/`EXCURSION_EVENT`/`BRAIN_EVENT` line convention — one compact JSON
+  line, never a DB write (5 GB egress quota). The four exhaustions stay distinguishable
+  because they are four different repairs: `provider-deadline`, `db-timeout`,
+  `db-unavailable`, `route-deadline`. The outer catch classifies the same four into a 503
+  with `kind` instead of collapsing them into one opaque 500 — the same discriminator
+  ENG-D18 added to `/api/sessions`.
+- **Targeted tests:** `src/tests/pcd002RouteDeadline.test.ts` (21) +
+  `src/tests/pcd002RouteDeadlineEndToEnd.test.ts` (6, real `POST`, physics AND chemistry —
+  `/api/learn/chat` is shared, so a subject-keyed fix would be the wrong fix). Every timing
+  case asserts an elapsed-time LOWER bound as well as an upper one. **Verified non-vacuous:**
+  with the bound removed the two hang cases run to the test timeout (the defect itself) and
+  the retry case takes 3.6s instead of <2s; with the provider clamp removed its wiring test
+  fails. `pcd002ChainDeadline.test.ts` (8) and the graceful-degradation path are unchanged
+  and re-run green.
+- **SECOND CONTRIBUTOR, as originally reported (kept for history):** `/api/learn/chat` wraps **none** of its DB
   calls in `withTimeout`, unlike `/api/sessions`' proven `dbCall` pattern
   (`SESSION_DB_TIMEOUT_MS` + `withRetry`). During a database outage (**PCD-043**) an
   unbounded Prisma call can still hang to the platform limit and reproduce this same 504
@@ -119,11 +175,16 @@ here for accuracy, not performed as part of this task.
   that pattern across the hottest path in the product is not a speculative edit to make
   alongside a provider-layer fix. Named here as the precise next step, with the pattern
   to copy.
-- **Status:** **FIXED** for the provider-chain cause (2026-09-12, commit `6326c91`),
-  code-verified. **PRODUCTION VERIFICATION PENDING** — reproducing the original 504
-  requires a genuine provider stall, which cannot be induced on demand; the fix is proven
-  by the constants above and by tests that bound a real chain in milliseconds. The DB-call
-  contributor above remains OPEN.
+- **Status (superseded 2026-09-13, kept for history):** FIXED for the provider-chain cause
+  (2026-09-12, `6326c91`); the DB-call contributor remained OPEN.
+- **Status:** **FIXED** — both contributors. Provider chain 2026-09-12 (`6326c91`); request
+  wall clock, bounded DB calls, budgeted retries and the handler race 2026-09-13. The route
+  can no longer be killed by the platform: whatever stalls, this application answers first.
+  **PRODUCTION-STALL VERIFICATION REMAINS UNPERFORMED, and is not claimed.** Reproducing the
+  original 504 needs a genuine provider or database stall, which must not be manufactured by
+  damaging production. What IS verified in production is that the deployment is READY on this
+  commit, `/api/health` is healthy, and normal physics and chemistry chat still work; the
+  timeout behaviour itself is code- and harness-verified, by tests proven non-vacuous above.
 
 ### PCD-003 — Transient `/api/sessions` 500 errors
 - **Subject/Concept:** Chemistry — `chem.elect.galvanic-cell` (#74), `chem.elect.nernst` (#76).
@@ -1250,6 +1311,13 @@ the phase axis had already been closed by R81/R82/E1. See those three entries fo
 correction; the fix is the `probeStarvedTurns` ceiling in `turnProgress.ts`. (`PCD-005` and `PCD-028` remain excluded from all counts —
 a "checked, not reproduced" record and a withdrawn cross-reference stub, not confirmed
 defects.)
+
+**2026-09-13, second pass (PCD-002 DB deadline): counts UNCHANGED at 28 / 2 / 1 / 10.**
+PCD-002 was already in the FIXED bucket for its provider-chain cause, with its own entry
+recording that a second contributor stayed open inside it. That contributor is now fixed
+too, so the entry is FIXED *without* a caveat rather than FIXED *with* one — a change in
+what the status means, not in which bucket it sits in. No other entry was touched, and
+nothing else moved.
 
 Seven entries changed status this pass, each on its own evidence rather than by association:
 

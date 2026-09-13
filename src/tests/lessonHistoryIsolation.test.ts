@@ -112,7 +112,13 @@ describe('write side: /api/learn/chat stamps both turns with lessonKey', () => {
   const SRC = read('src/app/api/learn/chat/route.ts')
 
   it('the USER message is created BEFORE studentProgress resolves, then stamped via update once it does', () => {
-    const createIdx = SRC.indexOf('userMessageRow = await withRetry(() => prisma.message.create(')
+    // 2026-09-13 (PCD-002): the message writes moved from `withRetry` to
+    // `boundedDbCall`, which bounds them by what is left of the request's
+    // wall clock. Only the wrapper's NAME changed here; the ordering and
+    // stamping this test exists to pin are untouched. Superseded locators
+    // are kept verbatim in the lines directly below.
+    //   SRC.indexOf('userMessageRow = await withRetry(() => prisma.message.create(')
+    const createIdx = SRC.indexOf("userMessageRow = await boundedDbCall(deadline, 'chat-user-message', () => prisma.message.create(")
     const promiseAllIdx = SRC.indexOf('const [curriculumLessons, studentProgress')
     const updateIdx = SRC.indexOf('await prisma.message.update({\n            where: { id: userMessageRow.id }')
     expect(createIdx).toBeGreaterThan(-1)
@@ -128,8 +134,11 @@ describe('write side: /api/learn/chat stamps both turns with lessonKey', () => {
   })
 
   it('the assistant message is stamped inline at creation, using the same helper', () => {
-    const createIdx = SRC.indexOf('assistantMessage = await withRetry(() => prisma.message.create({\n          data: {')
-    const block = SRC.slice(createIdx, createIdx + 400)
+    //   SRC.indexOf('assistantMessage = await withRetry(() => prisma.message.create({\n          data: {')
+    const createIdx = SRC.indexOf("assistantMessage = await boundedDbCall(deadline, 'chat-assistant-message', () => prisma.message.create({\n          data: {")
+    // Window widened 400 -> 600 for the same reason as the locator above:
+    // `boundedDbCall`'s wrapper is longer than `withRetry`'s. Same assertion.
+    const block = SRC.slice(createIdx, createIdx + 600)
     expect(block).toContain('...(assistantLessonKey ? { lessonKey: assistantLessonKey } : {})')
   })
 
