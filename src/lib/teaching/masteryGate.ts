@@ -140,6 +140,25 @@ export function masteryVerifiedStrict(state: ConversationState | null): boolean 
  * closes without being recorded as mastered.
  */
 export function conceptMasteryVerdict(state: ConversationState | null): boolean {
+  // FACTUAL CONTENT INTEGRITY (real-student cross-subject audit,
+  // chem.bond.resonance). `masteryVerifiedStrict` answers "was the GRADING
+  // trustworthy" (authored keys, no contradictions, real server grades) —
+  // a completely different axis from "was what was TAUGHT trustworthy".
+  // The audited lesson certified full mastery after the tutor taught a
+  // false formal-charge rule, was correctly challenged by the learner, and
+  // defended the false rule instead of correcting it — a defect invisible
+  // to every existing check here, because the MCQs the learner answered
+  // were authored, ungamed, and genuinely answered correctly. This is the
+  // ADDITIONAL, narrower condition: a concept whose teaching integrity is
+  // unresolved (state.teachingIntegrityUncertain, set by
+  // conversationState.ts when a claim challenge was never acknowledged —
+  // see that field's own doc comment) cannot certify, regardless of how
+  // clean the grading evidence is. Monotone-tighter, matching this
+  // function's own documented contract above: a lesson this would have
+  // certified before still certifies UNLESS this new condition applies, in
+  // which case the old "mastered" was exactly the false claim this exists
+  // to stop.
+  if (state?.teachingIntegrityUncertain === true) return false
   return masteryVerifiedStrict(state)
 }
 

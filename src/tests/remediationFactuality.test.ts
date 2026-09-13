@@ -281,7 +281,11 @@ describe('H4-11 — every prior invariant, re-pinned', () => {
 
   it('15/16 — no mastery/grading/ladder change and no extra regeneration was added by H4', () => {
     // H4 ships NO production change. The call-site count is exactly H3's.
-    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(4)
+    // V-CHALLENGE (factual-content-integrity fix, real-student audit) added
+    // ONE new routeAI call site (the claim-challenge repair regeneration in
+    // route.ts, right after the V-AFFIRM floor) -- the only production change
+    // to this count since this assertion was written. 4 -> 5.
+    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(5)
   })
 })
 

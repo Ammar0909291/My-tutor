@@ -151,7 +151,11 @@ describe('the route holds on a NON-remediation turn', () => {
   })
 
   it('H6.2/H6.3 are untouched: four routeAI call sites, DRAFT still refused', () => {
-    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(4)
+    // V-CHALLENGE (factual-content-integrity fix, real-student audit) added
+    // ONE new routeAI call site (the claim-challenge repair regeneration in
+    // route.ts, right after the V-AFFIRM floor) -- the only production change
+    // to this count since this assertion was written. 4 -> 5.
+    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(5)
     // The refusal reason lives in the lookup, which is where the boundary is.
     const cards = readFileSync(join(process.cwd(), 'src/lib/teaching/remediationCards.ts'), 'utf8')
     expect(cards).toContain('draft-not-promoted')
@@ -214,7 +218,11 @@ describe('a held turn that teaches past the card is rejected', () => {
     expect(ROUTE).toContain('heldCardText: remediationHoldCardText')
     expect(ROUTE).toContain('heldOnCard:')
     // Still one repair call site, not two.
-    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(4)
+    // V-CHALLENGE (factual-content-integrity fix, real-student audit) added
+    // ONE new routeAI call site (the claim-challenge repair regeneration in
+    // route.ts, right after the V-AFFIRM floor) -- the only production change
+    // to this count since this assertion was written. 4 -> 5.
+    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(5)
   })
 })
 

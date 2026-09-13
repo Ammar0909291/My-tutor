@@ -3,7 +3,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import {
-  Check, ChevronDown, ChevronUp, Copy, Lightbulb, Loader2, Mic, Paperclip, Play, Send, Square, X,
+  Check, ChevronDown, ChevronUp, Copy, Lightbulb, Loader2, Mic, Paperclip, Play, Send, X,
   BookOpen, Dumbbell, BarChart3, Library as LibraryIcon, User, Settings as SettingsIcon,
   Bookmark, Sparkles, Users, ImageIcon, Trophy, Globe2, Gauge, ThumbsUp, ThumbsDown,
   ListChecks, Brain, Sparkle, History as HistoryIcon,
@@ -51,6 +51,9 @@ import { createRevealController } from '@/lib/teaching/progressiveReveal'
 import type { InlinePracticeQuestion } from '@/lib/school/practice/generateInlinePractice'
 import { parseLessonCompletionTag, parseMathCodeAnswerTags, parseAssessmentResultTag } from '@/lib/school/tutoring/parseAssistantTags'
 import { Card, CandyButton, Pill, EagleMascot, useConfetti } from '@/components/ui/candy'
+import { TutorNarratedMessage } from '@/components/narration/TutorNarratedMessage'
+import { NarratedText } from '@/components/narration/NarratedText'
+import { NarratedPlaybackControls } from '@/components/narration/NarratedPlaybackControls'
 import katex from 'katex'
 import styles from './LessonScreen.module.css'
 import {
@@ -5373,39 +5376,59 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                         boxShadow: hasCanvasVisual ? 'none' : '0 1px 2px rgba(0,0,0,0.04)',
                         transition: 'border-color 200ms',
                       }}>
-                        {msg.content
-                          ? <div className="animate-message" style={{ fontSize: 15.6, lineHeight: 1.6, color: 'var(--text-primary)' }}>
-                              <MessageContent text={displayText} isUser={false} />
-                            </div>
-                          : <ThinkingBrain size={26} label={t('lesson_thinking_dots')} />
-                        }
+                        {/* NARRATED READ-ALONG (platform-wide — src/hooks/useNarrationPlayback.ts).
+                            One hook instance per message via the TutorNarratedMessage boundary
+                            (hooks can't be called conditionally inside this .map()). Before Play
+                            is ever pressed (status IDLE) the message renders EXACTLY as before —
+                            plain MessageContent, no visual change — so this is purely additive. */}
+                        {msg.content ? (
+                          <TutorNarratedMessage
+                            id={msg.id}
+                            text={displayText}
+                            lang={teachingLanguage}
+                            voiceType={voiceType}
+                            speed={isIntro ? speed * INTRO_SPEECH_RATE_FACTOR : speed}
+                            country={country}
+                          >
+                            {(narration) => (
+                              <>
+                                <div className="animate-message" style={{ fontSize: 15.6, lineHeight: 1.6, color: 'var(--text-primary)' }}>
+                                  {narration.status === 'IDLE'
+                                    ? <MessageContent text={displayText} isUser={false} />
+                                    : <NarratedText segments={narration.segments} activeSegmentIndex={narration.activeSegmentIndex} activeWordIndex={narration.activeWordIndex} />}
+                                </div>
 
-                        {cached?.hasMore && (
-                          <button onClick={() => setExpanded((p) => ({ ...p, [msg.id]: !isExpanded }))}
-                            style={{ marginTop: 6, display: 'flex', alignItems: 'center', gap: 4, fontSize: 13.2, fontWeight: 600, color: UI.indigo, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
-                            {isExpanded ? t('lesson_collapse') : t('lesson_read_more')}
-                            <ChevronDown size={11} style={{ transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 200ms' }} />
-                          </button>
-                        )}
+                                {cached?.hasMore && (
+                                  <button onClick={() => setExpanded((p) => ({ ...p, [msg.id]: !isExpanded }))}
+                                    style={{ marginTop: 6, display: 'flex', alignItems: 'center', gap: 4, fontSize: 13.2, fontWeight: 600, color: UI.indigo, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
+                                    {isExpanded ? t('lesson_collapse') : t('lesson_read_more')}
+                                    <ChevronDown size={11} style={{ transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 200ms' }} />
+                                  </button>
+                                )}
 
-                        {!msg.streaming && msg.content && (
-                          <div style={{ marginTop: 8, display: 'flex', alignItems: 'center', gap: 6 }}>
-                            <span style={{ fontSize: 12, color: 'var(--text-dim)', fontFamily: 'var(--font-mono)' }}>
-                              {new Date(msg.ts).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false })}
-                            </span>
-                            <CandyButton onClick={() => isSpeaking ? handleStopSpeech() : handleSpeak(msg.id, msg.content, { intro: isIntro })}
-                              depth={2} activeDepth={0} shadowColor={isSpeaking ? 'var(--coral-hover)' : 'var(--border-subtle)'}
-                              style={{
-                                display: 'flex', alignItems: 'center', gap: 4, padding: '3px 10px', borderRadius: 10, border: 'none',
-                                fontSize: 13.2, fontWeight: 700, cursor: 'pointer',
-                                background: isSpeaking ? 'var(--coral)' : 'var(--bg-elevated)',
-                                color: isSpeaking ? '#fff' : 'var(--text-dim)',
-                              }}>
-                              {isSpeaking
-                                ? <><Square size={8} fill="currentColor" strokeWidth={0} />{t('lesson_stop')}</>
-                                : <><Play size={8} fill="currentColor" strokeWidth={0} />{t('lesson_play')}</>}
-                            </CandyButton>
-                          </div>
+                                {!msg.streaming && (
+                                  <div style={{ marginTop: 8, display: 'flex', alignItems: 'center', gap: 8 }}>
+                                    <span style={{ fontSize: 12, color: 'var(--text-dim)', fontFamily: 'var(--font-mono)' }}>
+                                      {new Date(msg.ts).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false })}
+                                    </span>
+                                    <NarratedPlaybackControls
+                                      status={narration.status}
+                                      progressPercent={narration.progressPercent}
+                                      onToggle={narration.toggle}
+                                      onReplay={narration.replay}
+                                      playLabel={t('lesson_play')}
+                                      pauseLabel={t('lesson_pause')}
+                                      replayLabel={t('lesson_replay')}
+                                      loadingLabel={t('lesson_narration_loading')}
+                                      errorLabel={t('lesson_narration_error')}
+                                    />
+                                  </div>
+                                )}
+                              </>
+                            )}
+                          </TutorNarratedMessage>
+                        ) : (
+                          <ThinkingBrain size={26} label={t('lesson_thinking_dots')} />
                         )}
 
                       </Card>

@@ -255,7 +255,11 @@ describe('H5 — the grounding is on the remediation path only', () => {
   })
 
   it('it adds NO provider call — H3\'s four call sites are unchanged', () => {
-    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(4)
+    // V-CHALLENGE (factual-content-integrity fix, real-student audit) added
+    // ONE new routeAI call site (the claim-challenge repair regeneration in
+    // route.ts, right after the V-AFFIRM floor) -- the only production change
+    // to this count since this assertion was written. 4 -> 5.
+    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(5)
   })
 
   it('it changes no decision, no arbitration, no mastery, no grading, no ladder', () => {
