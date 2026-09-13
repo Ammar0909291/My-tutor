@@ -4486,6 +4486,35 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   multi-session campaign; continuation should verify state via
   `scripts/math/state.ts` fresh each time rather than trusting any number
   recorded here.
+- **Batch 61 — math.calc: trig substitution — CLOSES the frontier
+  again; math.trig: half-angle formulas; math.seq: arithmetic +
+  telescoping series** (2026-09-13): re-computed the frontier fresh —
+  `math.calc` had 1 candidate (`trig-substitution`), `math.trig` had 3,
+  `math.seq` had 5. Authored math.calc's sole ready candidate plus
+  `math.trig.half-angle-formulas` and 2 math.seq concepts
+  (`arithmetic-series`, `telescoping-series`). `trig-substitution`
+  extends `trig-integrals`'s "check structure first" principle to a
+  three-way radical-shape selection. `half-angle-formulas` derives its
+  formulas by reading `double-angle-formulas`'s own power-reducing
+  identities backward via $2\alpha=\theta$; its MC-1 is the exact
+  mirror image of `double-angle-formulas`'s own MC-1. `arithmetic-series`
+  derives the Gauss pairing sum formula; `telescoping-series` derives
+  the cancellation collapse $S_n=b_1-b_{n+1}$. All 4 concepts zero
+  Blueprint/KG metadata discrepancy. `math.calc` **68/76 → 69/76**
+  (frontier closed again). `math.trig` **20/25 → 21/25**. `math.seq`
+  **8/21 → 10/21**. Mathematics **462/908 → 466/908**, 442 remaining.
+  Fresh frontier: `math.calc` 1 ready (`partial-fractions`); `math.trig`
+  2 ready (`trig-equations`, `polar-form-complex`); `math.seq` 3 ready
+  (`recursive-sequences`, `infinite-geometric-series`,
+  `series-convergence`). Validated: KG validator PASS (908/908
+  reachable, file untouched), `scripts/math/state.ts` confirms math.calc
+  69/76, math.trig 21/25, math.seq 10/21, mathematics 466/908 (6
+  EB-certified domains unchanged), `tsc --noEmit` clean, targeted tests
+  479/479 passed, all 4 heading structures diffed clean on the first
+  pass (0 diffs each). No Physics/Chemistry/English/Biology/CS/KG/
+  Blueprint/runtime file touched. This is a genuinely multi-session
+  campaign; continuation should verify state via `scripts/math/state.ts`
+  fresh each time rather than trusting any number recorded here.
 
 ## Physics Teacher Migration Architecture V2 — AUDITED, NOT ADOPTED (2026-09-12)
 
