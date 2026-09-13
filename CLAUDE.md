@@ -4350,6 +4350,38 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   unchanged 5 candidates. This is a genuinely multi-session campaign; continuation
   should verify state via `scripts/math/state.ts` fresh each time rather than
   trusting any number recorded here.
+- **Batch 57 — math.trig: special angles, amplitude/period/phase, reciprocal
+  identities, sum-difference formulas** (2026-09-12): re-computed the frontier
+  fresh — `math.calc` unchanged at 1 candidate, `math.trig` had 8, `math.seq`
+  unchanged at 5. Authored 4, all single-prerequisite children of
+  already-authored concepts: `math.trig.special-angles` (child of Batch 56's
+  `basic-ratios`, closing that entry's own `unlocks`-field asymmetry finding),
+  `math.trig.amplitude-period-phase` (child of `trig-functions`, carrying an
+  analogous genuine `unlocks`-field discrepancy against `math.trig.trig-graphs`,
+  resolved toward the KG), `math.trig.reciprocal-identities` and
+  `math.trig.sum-difference-formulas` (both children of `trig-identities`,
+  both zero-discrepancy; `sum-difference-formulas` unlocks
+  `math.trig.double-angle-formulas` and flags a genuine content-overlap risk
+  against `trig-identities`' own LO3 for whoever authors that concept next).
+  `math.trig` 11/25 → 15/25. Mathematics 446/908 → 450/908. Also corrected a
+  pre-existing ROADMAP.md staleness bug found in passing: two stale duplicate
+  rows further down that file's per-domain table still read `math.trig 0/25
+  not started`/`math.seq 0/21 not started`, predating the Batch 52 excursion
+  that opened both domains — removed. Full per-concept detail in `COVERAGE.md`
+  Batch 57. Validated: KG validator PASS (908/908 reachable, file untouched),
+  `scripts/math/state.ts` confirms math.trig 15/25, mathematics 450/908 (6
+  EB-certified domains unchanged), `tsc --noEmit` clean, targeted tests
+  479/479 passed, all 4 heading structures diffed clean on the first pass (0
+  diffs each). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime
+  file touched. Fresh frontier: `math.calc` unchanged 1 candidate
+  (`fourier-series-intro`); `math.trig` 7 candidates (`trig-graphs` — newly
+  unblocked — `pythagorean-identities`, `double-angle-formulas`,
+  `product-to-sum` — the last two newly unblocked by
+  `sum-difference-formulas` — `trig-equations`, `polar-form-complex`,
+  `hyperbolic-functions`); `math.seq` unchanged 5 candidates. This is a
+  genuinely multi-session campaign; continuation should verify state via
+  `scripts/math/state.ts` fresh each time rather than trusting any number
+  recorded here.
 
 ## Physics Teacher Migration Architecture V2 — AUDITED, NOT ADOPTED (2026-09-12)
 
