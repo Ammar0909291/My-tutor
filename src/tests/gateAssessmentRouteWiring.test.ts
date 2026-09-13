@@ -105,7 +105,16 @@ describe('the gate assessment is on the turn path', () => {
     // flag, so a release cannot remove one without the other. (The first draft
     // of rung 1 persisted null while the response still carried the question;
     // this test caught it.)
-    expect(lineOf(/conversationStateUpdate\.pendingMcq = writePendingQuestion\($/)).toBeGreaterThan(0)
+    // 2026-09-13 (adversarial-study mastery-rederiver fix): the direct
+    // `conversationStateUpdate.pendingMcq = writePendingQuestion(...)`
+    // assignment was replaced by a captured local
+    // (`pendingMcqValueThisTurn = writePendingQuestion(...)`) so the SAME
+    // already-decided value can be re-asserted by the ISS-13
+    // snapshotRederiver on a concurrent-write retry. The served-vs-persisted
+    // agreement this test exists for is unchanged; only the assignment now
+    // goes through the named local.
+    expect(lineOf(/const pendingMcqValueThisTurn = writePendingQuestion\($/)).toBeGreaterThan(0)
+    expect(lineOf(/conversationStateUpdate\.pendingMcq = pendingMcqValueThisTurn$/)).toBeGreaterThan(0)
     expect(lineOf(/const served = mcqToServe\(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted\)$/)).toBeGreaterThan(0)
     expect(lineOf(/releasePending \? null : served,$/)).toBeGreaterThan(0)
     expect(lineOf(/mcqForClient\(mcqToServeForResponse\(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted\)\)/)).toBeGreaterThan(0)

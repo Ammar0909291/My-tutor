@@ -33,8 +33,17 @@ describe('the chat route reads and writes the pending question through its owner
     // unchanged and is what this pins.
     // UPDATED 2026-09-07 (S5): shape changed so rung 1 can withhold a probe
     // nobody is answering; the invariant this asserts is unchanged.
-    expect(CHAT).toMatch(/conversationStateUpdate\.pendingMcq = writePendingQuestion\(/)
+    // UPDATED 2026-09-13 (adversarial-study mastery-rederiver fix): the
+    // direct `conversationStateUpdate.pendingMcq = writePendingQuestion(...)`
+    // assignment was replaced by a captured local
+    // (`pendingMcqValueThisTurn = writePendingQuestion(...)`) so the SAME
+    // already-decided value can be re-asserted by the ISS-13
+    // snapshotRederiver on a concurrent-write retry, without a second,
+    // driftable computation. The key-identity invariant is unchanged; only
+    // the assignment now goes through the named local.
+    expect(CHAT).toMatch(/const pendingMcqValueThisTurn = writePendingQuestion\(/)
     expect(CHAT).toMatch(/releasePending \? null : served,\s*\n\s*lessonKeyThisTurnHoisted/)
+    expect(CHAT).toMatch(/conversationStateUpdate\.pendingMcq = pendingMcqValueThisTurn/)
   })
 
   it('derives that key with lessonKeyFor — no second lesson-identity scheme', () => {
