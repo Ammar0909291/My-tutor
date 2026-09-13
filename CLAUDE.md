@@ -5046,6 +5046,72 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   touched. This is a genuinely multi-session campaign; continuation
   should verify state via `scripts/math/state.ts` fresh each time rather
   than trusting any number recorded here.
+- **Batch 75 — math.calc CERTIFIED (tenth domain); eigenvalues, unit
+  vector, cross product** (2026-09-13, autonomous loop iteration):
+  re-computed the frontier fresh — `math.calc` had exactly the 1
+  candidate predicted at the end of Batch 74 (`change-of-variables`, the
+  domain's FINAL remaining concept), `math.graph` had 0, `math.linalg`
+  had exactly the 9 candidates predicted. Authored `change-of-variables`
+  (closing math.calc entirely) plus 3 of math.linalg's 9 candidates
+  (`eigenvalues`, `unit-vector`, `cross-product`), deferring
+  `linear-system`/`matrix-inverse`/`cofactor-expansion`/`det-properties`/
+  `distance`/`angle-vectors`. `change-of-variables` computes the Jacobian
+  determinant (reusing `determinant`'s own $2\times2$ formula with
+  partial-derivative entries), requires the absolute value in the
+  change-of-variables formula (area is never negative), and extends
+  `determinant`'s global scaling-factor interpretation to a LOCAL,
+  pointwise one. 3 misconceptions: MC-1
+  JACOBIAN-MATRIX-ROWS-AND-COLUMNS-SET-UP-INCONSISTENTLY (Type 4,
+  Foundational), MC-2
+  JACOBIAN-SIGNED-VALUE-USED-INSTEAD-OF-ABSOLUTE-VALUE-IN-THE-FORMULA
+  (Type 1, Foundational), MC-3 LOCAL-SCALING-FACTOR-ASSUMED-CONSTANT
+  (Type 6, independently added). **This CLOSES math.calc to 76/76 —
+  DOMAIN CERTIFIED, the TENTH mathematics domain.** `eigenvalues` finds
+  eigenvalues via $\det(A-\lambda I)=0$ (reusing `determinant` directly),
+  eigenvectors via $(A-\lambda I)v=0$ excluding the zero vector, and
+  establishes the eigenspace as a genuine subspace. Both Tier-1
+  cross-links (`math.de.char-equation`/`math.fnal.spectral-theory`)
+  confirmed unauthored via `ls`, independence mode matching the
+  Blueprint's own declaration exactly. 3 misconceptions: MC-1
+  EIGENVECTOR-CAN-BE-ZERO (Type 1, Foundational), MC-2
+  EIGENVALUES-ARE-DIAGONAL-ENTRIES (Type 1), MC-3
+  EIGENVECTORS-ARE-UNIQUE (Type 1). **Authoring this concept REOPENS
+  the previously-parked `math.graph` domain** — confirmed via a fresh
+  frontier check immediately after: `math.graph.algebraic-graph-theory`
+  is now ready. `unit-vector` checks norm equals exactly 1 (reusing
+  `norm` directly), normalizes by dividing every component by the same
+  norm value, and requires standard-basis-vector entries to equal
+  exactly 1, not merely match a zero pattern. 2 misconceptions: MC-1
+  NORMALIZATION-APPLIED-TO-ONLY-PART-OF-THE-VECTOR (Type 1,
+  Foundational), MC-2
+  STANDARD-BASIS-VECTOR-IDENTIFIED-BY-ZERO-PATTERN-ALONE (Type 2,
+  Foundational). `cross-product` computes $a\times b$ in $\mathbb R^3$
+  (reusing `vector`'s component structure), verifies via
+  perpendicularity (dot product zero with both originals), and applies
+  anti-commutativity, contrasted directly with `dot-product`'s
+  commutativity. 3 misconceptions: MC-1
+  CROSS-PRODUCT-PERPENDICULARITY-NOT-VERIFIED (Type 5, Moderate), MC-2
+  CROSS-PRODUCT-ASSUMED-COMMUTATIVE (Type 6, Foundational), MC-3
+  CROSS-PRODUCT-COMPONENT-FORMULA-INDICES-MIXED-UP (Type 4,
+  Foundational). **Genuine Blueprint/KG `cross_links` discrepancy
+  found, resolved toward the KG**: the Blueprint claims none, but the
+  KG lists already-authored `math.geom.cross-product`, genuinely
+  incorporated as a Transfer Connection. `math.calc` **75/76 → 76/76
+  (CERTIFIED, 10th)**. `math.linalg` **12/61 → 15/61**. Mathematics
+  **512/908 → 516/908**, 392 remaining. Fresh frontier: `math.graph` 1
+  ready (`algebraic-graph-theory`, REOPENED); `math.linalg` 7 ready
+  (`linear-system`, `matrix-inverse`, `cofactor-expansion`,
+  `det-properties`, `characteristic-polynomial`, `distance`,
+  `angle-vectors`). Validated: KG validator PASS (908/908 reachable,
+  file untouched), `scripts/math/state.ts` confirms math.calc 76/76
+  (`ebComplete: true`), math.graph 14/16 (reopened), math.linalg
+  15/61, mathematics 516/908 (10 EB-certified domains, math.calc newly
+  added), `tsc --noEmit` clean, targeted tests 479/479 passed, all 4
+  heading structures diffed clean on the first pass. No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file
+  touched. This is a genuinely multi-session campaign; continuation
+  should verify state via `scripts/math/state.ts` fresh each time
+  rather than trusting any number recorded here.
 
 ## Topic/meaning loss — the extractor's default was YES (2026-09-13)
 
