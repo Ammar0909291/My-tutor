@@ -4937,6 +4937,54 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   touched. This is a genuinely multi-session campaign; continuation
   should verify state via `scripts/math/state.ts` fresh each time
   rather than trusting any number recorded here.
+- **Batch 73 — graph representation CERTIFIES math.disc (ninth
+  domain); matrix addition, multiplication, transpose** (2026-09-13):
+  re-computed the frontier fresh — `math.disc` had exactly the 1
+  candidate predicted at the end of Batch 72 (`graph-representation`);
+  `math.linalg` had 7; `math.calc`/`math.graph` confirmed unchanged at
+  0 ready. Selected `graph-representation` (closes math.disc entirely)
+  plus 3 of math.linalg's 7 candidates (`matrix-addition`,
+  `matrix-multiplication`, `matrix-transpose`), deferring `norm`/
+  `orthogonality`/`cross-product`/`linear-system`. `graph-
+  representation` represents graphs via adjacency/incidence matrices
+  and adjacency lists (reusing `math.linalg.matrix`'s own indexed grid
+  directly), establishes a digraph's adjacency matrix is asymmetric as
+  the RULE, and distinguishes matrix-power WALK counts from PATH
+  counts. 3 misconceptions with birth types EXPLICITLY given by the
+  Blueprint (a different pattern from most of this campaign's
+  independent classification), adopted directly: MC-1 Type 5, MC-2
+  Type 5, MC-3 Type 3. **This CLOSES math.disc to 32/32 — DOMAIN
+  CERTIFIED, the NINTH mathematics domain.** `matrix-addition` extends
+  `vector-addition`'s component-wise rule to the grid (2 misconceptions
+  only, not the usual 3: MC-1 Type 1 Foundational, MC-2 Type 2
+  Moderate). `matrix-multiplication` computes $C_{ij}=\sum_kA_{ik}
+  B_{kj}$ via `dot-product`'s own pair-multiply-sum rule and
+  establishes non-commutativity as the RULE; **genuine Blueprint-
+  staleness finding, corrected**: the Blueprint declares its
+  `math.abst.ring-theory` cross-link Tier 1/cross-link-mode, but the
+  concept is confirmed unauthored via `ls` (`math.abst` entirely
+  unstarted) — corrected to independence mode, matching the
+  established Blueprint-file-existence-mistaken-for-EB-entry-existence
+  pattern; unlocks `determinant` directly. `matrix-transpose` computes
+  $(A^T)_{ij}=A_{ji}$ and establishes the order-reversal identity
+  $(AB)^T=B^TA^T$ (forced by dimension matching); unlocks
+  `symmetric-matrix`. All 3 zero Blueprint/KG metadata discrepancy
+  beyond the noted P76-mode staleness. `math.disc` **31/32 → 32/32
+  (CERTIFIED, 9th)**. `math.linalg` **5/61 → 8/61**. Mathematics
+  **504/908 → 508/908**, 400 remaining. Fresh frontier: `math.calc`/
+  `math.graph` unchanged at 0 ready (still PARKED); `math.linalg` 6
+  ready (`norm`, `orthogonality`, `cross-product`, `symmetric-matrix`,
+  `linear-system`, `determinant` — the last newly unblocked by
+  `matrix-multiplication` and the exact concept that will reopen
+  `math.calc`). Validated: KG validator PASS (908/908 reachable, file
+  untouched), `scripts/math/state.ts` confirms math.disc 32/32
+  (`ebComplete: true`), math.linalg 8/61, mathematics 508/908 (9
+  EB-certified domains, math.disc newly added), `tsc --noEmit` clean,
+  targeted tests 479/479 passed, all 4 heading structures diffed clean
+  on the first pass. No Physics/Chemistry/English/Biology/CS/KG/
+  Blueprint/runtime file touched. This is a genuinely multi-session
+  campaign; continuation should verify state via `scripts/math/state.ts`
+  fresh each time rather than trusting any number recorded here.
 
 ## Topic/meaning loss — the extractor's default was YES (2026-09-13)
 

@@ -11,7 +11,7 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 504 | **Eight domains CERTIFIED (math.seq joined 2026-09-13), math.calc 75/76 (PARKED — only `change-of-variables` remains, blocked on `math.linalg.determinant`), math.disc 31/32 (REOPENED 2026-09-13 — only `graph-representation` remains, now unblocked by `math.linalg.matrix`), math.graph 14/16 (PARKED), math.linalg 5/61 (7 ready: `norm`/`orthogonality`/`cross-product`/`matrix-addition`/`matrix-multiplication`/`matrix-transpose`/`linear-system`).** 82 `math.found.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 69 `math.geom.*` (**COMPLETE, DOMAIN CERTIFIED** — the final 13 entries were restored by commit `0d2c76dd`'s Wave 0 recovery, which this row previously did not reflect) + 36 `math.nt.*` (**COMPLETE, DOMAIN CERTIFIED 2026-08-12** — the domain's final 8 concepts, `prime-distribution`, `continued-fractions`, `analytic-number-theory`, `prime-number-theorem`, `riemann-hypothesis`, `algebraic-number-theory`, `algebraic-integers`, `number-fields`, were authored this session, ending the PARKED status this row previously recorded) + 59 `math.alg.*` (**COMPLETE, DOMAIN CERTIFIED 2026-09-11** — Wave 1 (2026-08-12, 11 concepts): `expression`, `equation`, `term`, `coefficient`, `exponent-rules`, `polynomial`, `degree`, `zero-exponent`, `negative-exponent`, `solution-set`, `inequality`; Wave 2 (2026-08-12, 1 concept): `like-terms`; Wave 3 (2026-09-11, 3 concepts): `simplification`, `polynomial-operations`, `radicals`; Wave 4 (2026-09-11, 5 concepts): `linear-equation-1var`, `polynomial-division`, `fractional-exponent`, `simplifying-radicals`, `radical-equations`; Wave 5 (2026-09-11, 5 concepts): `inequality-1var`, `absolute-value-equations`, `linear-equation-2var`, `remainder-theorem`, `rationalizing-denominators`; Wave 6 (2026-09-11, 3 concepts): `inequality-2var`, `system-linear-equations`, `factor-theorem`; Wave 7 (2026-09-11, 4 concepts): `substitution-method`, `elimination-method`, `system-3var`, `factoring`; Wave 8 (2026-09-11, 3 concepts): `factoring-gcf`, `factoring-special`, `rational-expressions`; Wave 9 (2026-09-11, 4 concepts): `factoring-trinomials`, `rational-expressions-addition`, `rational-expressions-multiplication`, `rational-equations`; Wave 10 (2026-09-11, 1 concept): `quadratic-equation`; Wave 11 (2026-09-11, 2 concepts): `completing-the-square`, `polynomial-roots`; Wave 12 part 1 (2026-09-11, 1 concept): `quadratic-formula`; Wave 12 part 2 (2026-09-11, 2 concepts): `discriminant`, `rational-root-theorem`; Wave 12 part 3 (2026-09-11, 3 concepts): `fundamental-theorem-algebra`, `polynomial-inequality`, `vietas-formulas`; Wave 13 (2026-09-11, 2 concepts): `complex-polynomial-roots`, `rational-inequality`; Batch 15 (2026-09-11, 1 concept): `exponential-function`; Batch 16 (2026-09-11, 2 concepts): `logarithm`, `exponential-equations`; Batch 17 (2026-09-11, 3 concepts): `binomial-theorem`, `logarithm-properties`, `natural-logarithm`; Batch 18 (2026-09-11, 3 concepts, FINAL): `change-of-base`, `logarithmic-equations`, `pascals-triangle`; all Blueprint-grounded, reused by reference). 20 `math.disc.*` entries (**IN PROGRESS, standalone campaign since math.alg's certification** —
+| mathematics | 908 | 508 | **Nine domains CERTIFIED (math.disc joined 2026-09-13, the ninth), math.calc 75/76 (PARKED — only `change-of-variables` remains, blocked on `math.linalg.determinant`), math.graph 14/16 (PARKED), math.linalg 8/61 (6 ready: `norm`/`orthogonality`/`cross-product`/`symmetric-matrix`/`linear-system`/`determinant` — the last reopens math.calc).** 82 `math.found.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 69 `math.geom.*` (**COMPLETE, DOMAIN CERTIFIED** — the final 13 entries were restored by commit `0d2c76dd`'s Wave 0 recovery, which this row previously did not reflect) + 36 `math.nt.*` (**COMPLETE, DOMAIN CERTIFIED 2026-08-12** — the domain's final 8 concepts, `prime-distribution`, `continued-fractions`, `analytic-number-theory`, `prime-number-theorem`, `riemann-hypothesis`, `algebraic-number-theory`, `algebraic-integers`, `number-fields`, were authored this session, ending the PARKED status this row previously recorded) + 59 `math.alg.*` (**COMPLETE, DOMAIN CERTIFIED 2026-09-11** — Wave 1 (2026-08-12, 11 concepts): `expression`, `equation`, `term`, `coefficient`, `exponent-rules`, `polynomial`, `degree`, `zero-exponent`, `negative-exponent`, `solution-set`, `inequality`; Wave 2 (2026-08-12, 1 concept): `like-terms`; Wave 3 (2026-09-11, 3 concepts): `simplification`, `polynomial-operations`, `radicals`; Wave 4 (2026-09-11, 5 concepts): `linear-equation-1var`, `polynomial-division`, `fractional-exponent`, `simplifying-radicals`, `radical-equations`; Wave 5 (2026-09-11, 5 concepts): `inequality-1var`, `absolute-value-equations`, `linear-equation-2var`, `remainder-theorem`, `rationalizing-denominators`; Wave 6 (2026-09-11, 3 concepts): `inequality-2var`, `system-linear-equations`, `factor-theorem`; Wave 7 (2026-09-11, 4 concepts): `substitution-method`, `elimination-method`, `system-3var`, `factoring`; Wave 8 (2026-09-11, 3 concepts): `factoring-gcf`, `factoring-special`, `rational-expressions`; Wave 9 (2026-09-11, 4 concepts): `factoring-trinomials`, `rational-expressions-addition`, `rational-expressions-multiplication`, `rational-equations`; Wave 10 (2026-09-11, 1 concept): `quadratic-equation`; Wave 11 (2026-09-11, 2 concepts): `completing-the-square`, `polynomial-roots`; Wave 12 part 1 (2026-09-11, 1 concept): `quadratic-formula`; Wave 12 part 2 (2026-09-11, 2 concepts): `discriminant`, `rational-root-theorem`; Wave 12 part 3 (2026-09-11, 3 concepts): `fundamental-theorem-algebra`, `polynomial-inequality`, `vietas-formulas`; Wave 13 (2026-09-11, 2 concepts): `complex-polynomial-roots`, `rational-inequality`; Batch 15 (2026-09-11, 1 concept): `exponential-function`; Batch 16 (2026-09-11, 2 concepts): `logarithm`, `exponential-equations`; Batch 17 (2026-09-11, 3 concepts): `binomial-theorem`, `logarithm-properties`, `natural-logarithm`; Batch 18 (2026-09-11, 3 concepts, FINAL): `change-of-base`, `logarithmic-equations`, `pascals-triangle`; all Blueprint-grounded, reused by reference). 20 `math.disc.*` entries (**IN PROGRESS, standalone campaign since math.alg's certification** —
 Batch 14 (2026-09-11, 1 concept): `counting-principles`; Batch 15 (2026-09-11, 1 concept):
 `permutations`; Batch 16 (2026-09-11, 1 concept): `combinations`; Batch 19 (2026-09-11, 5
 concepts): `combinatorics`, `pigeonhole`, `stars-bars`, `inclusion-exclusion`,
@@ -11188,6 +11188,90 @@ this Delivery history entry; `CLAUDE.md`'s campaign section. `EDUCATIONAL_BRAIN_
 `npx tsx scripts/validate-knowledge-graph.ts docs/mathematics/kg/graph.json` PASS, 908/908
 reachable, 0 failures, 0 warnings (KG file untouched); `scripts/math/state.ts` confirms
 math.linalg 5/61, mathematics 504/908, 8 EB-certified domains unchanged; `npx tsc --noEmit`
+clean; targeted tests `mathPackageCorpus.test.ts` + `mathematicsAssetContract.test.ts` 479/479
+passed. All 4 new entries' heading structure diffed clean against `math.alg.like-terms.md` on the
+first pass (0 diffs each). No Physics, Chemistry, English, Biology, Computer Science, KG,
+Blueprint, or runtime file was modified.
+
+### Batch 73 — graph representation CERTIFIES math.disc (ninth domain); matrix addition, multiplication, transpose (2026-09-13)
+
+Re-fetched `main` (0 divergence, clean). Re-computed the frontier fresh — `math.disc` had exactly
+the 1 candidate predicted at the end of Batch 72 (`graph-representation`); `math.linalg` had 7;
+`math.calc`/`math.graph` confirmed unchanged at 0 ready. Selected `graph-representation` (closes
+math.disc entirely) plus 3 of math.linalg's 7 candidates (`matrix-addition`,
+`matrix-multiplication`, `matrix-transpose`), deferring `norm`/`orthogonality`/`cross-product`/
+`linear-system` to a future batch.
+
+`math.disc.graph-representation` (requires `math.disc.graph`+`math.linalg.matrix`) represents
+graphs via adjacency matrices, incidence matrices, and adjacency lists, reusing `math.linalg.
+matrix`'s own $(i,j)$-indexed grid directly; establishes that a digraph's adjacency matrix is
+asymmetric as the RULE, not the exception; and distinguishes matrix-power WALK counts (repetition
+allowed) from simple PATH counts (repetition forbidden, and NP-hard to compute directly). 3
+misconceptions with birth types EXPLICITLY given by the Blueprint — a genuinely different pattern
+from most of this campaign's own independent classification — adopted directly: MC-1
+ADJACENCY-MATRIX-IS-ALWAYS-SYMMETRIC (Type 5, instruction-induced), MC-2
+MATRIX-POWER-Aᵏ-COUNTS-PATHS (Type 5, instruction-induced), MC-3 ADJACENCY-LIST-IS-JUST-A-LIST
+(Type 3, language contamination — "list" in everyday language obscures the specific data-structure
+meaning the term carries in algorithm design). Zero Blueprint/KG metadata discrepancy.
+**This concept CLOSES `math.disc` to 32/32 — DOMAIN CERTIFIED, the NINTH mathematics domain**
+(after math.found, math.geom, math.arith, math.nt, math.alg, math.func, math.trig, math.seq),
+confirmed via `scripts/math/state.ts`.
+
+`math.linalg.matrix-addition` (requires `matrix`) extends `math.linalg.vector-addition`'s own
+component-wise addition rule to the two-dimensional grid, with dimension mismatch as the identical
+undefined-not-incomplete type error one dimension up. 2 misconceptions independently classified
+(this Blueprint carries only 2, not the usual 3): MC-1
+MISMATCHED-DIMENSION-MATRICES-ADDED-VIA-ARBITRARY-PAIRING (Type 1, Foundational — the same
+mechanism as `vector-addition`'s own MC-1), MC-2
+MATRIX-ADDITION-ENTRY-POSITIONS-MISALIGNED (Type 2, Moderate).
+
+`math.linalg.matrix-multiplication` (requires `matrix`+`dot-product`, unlocks
+`matrix-inverse`+`determinant`, cross_links `math.abst.ring-theory`) computes $C_{ij}=\sum_k
+A_{ik}B_{kj}$ via `math.linalg.dot-product`'s own pair-multiply-sum rule, establishes the
+inner-dimension compatibility requirement, and demonstrates non-commutativity as the GENERAL rule,
+not an exception. **Genuine Blueprint-staleness finding, corrected**: the Blueprint declares
+`P76_mode: cross-link (math.abst.ring-theory is Tier 1)` and writes its own transfer probe as a
+direct ring-theory question, but `math.abst.ring-theory` is confirmed via `ls` to have NO
+Educational Brain entry (`math.abst` entirely unstarted) — the same Blueprint-file-existence
+mistaken for EB-entry-existence pattern this program has corrected many times before (e.g.
+`math.disc.recurrence-relation`'s `math.de.ode` cross-link, Batch 63). Corrected to independence
+mode: the ring-axiom discussion is presented self-contained within this entry. 3 misconceptions:
+MC-1 DIMENSION-RULE-IGNORED (Type 1, Foundational, adopted directly from the Blueprint's own
+declared status), MC-2 ROW-COLUMN-ORDER-REVERSED (Type 4, independently classified), MC-3
+ASSUMES-COMMUTATIVITY (Type 1, independently classified). This concept directly unlocks
+`math.linalg.determinant`.
+
+`math.linalg.matrix-transpose` (requires `matrix`, unlocks `symmetric-matrix`) computes
+$(A^T)_{ij}=A_{ji}$, establishes the order-REVERSAL identity $(AB)^T=B^TA^T$ (forced by dimension
+matching, not arbitrary), and derives the square-shape precondition for symmetry — a matrix must
+be square before $A=A^T$ is even a well-formed question, the identical precondition-checking
+mechanism already documented for `math.linalg.vector-addition`'s own dimension-mismatch
+misconception. 3 misconceptions independently classified: MC-1
+TRANSPOSE-PRODUCT-ORDER-NOT-REVERSED (Type 1, Foundational), MC-2
+SYMMETRY-CHECKED-ON-NON-SQUARE-MATRIX (Type 1, Moderate), MC-3
+TRANSPOSE-INDEX-RULE-APPLIED-BACKWARD (Type 4, Foundational).
+
+All 3 math.linalg concepts zero Blueprint/KG metadata discrepancy on every field beyond the
+matrix-multiplication P76-mode staleness noted above.
+
+`math.disc` **31/32 → 32/32 — DOMAIN CERTIFIED (ninth)**. `math.linalg` **5/61 → 8/61**.
+Mathematics **504/908 → 508/908**, 400 remaining.
+
+Fresh frontier computed after this batch: `math.calc` 0 ready (unchanged, PARKED); `math.graph` 0
+ready (unchanged, PARKED); `math.linalg` 6 ready (`norm`, `orthogonality`, `cross-product`,
+`symmetric-matrix` — the last newly unblocked by `matrix-transpose` — `linear-system`,
+**`determinant`** — newly unblocked by `matrix-multiplication`, and the exact concept that will
+reopen `math.calc`'s `change-of-variables` once authored).
+
+Full per-concept detail above. All tracking files updated in the same commit: `ROADMAP.md`
+Section 1 totals, the `math.disc` domain row (now CERTIFIED) and the `math.linalg` domain row, and
+the domain-certification summary line (nine domains, not eight); `COVERAGE.md`'s mathematics
+summary row and this Delivery history entry; `CLAUDE.md`'s campaign section.
+`EDUCATIONAL_BRAIN_INDEX.md` and `QUALITY.md` again deferred (same generated-artifact rationale as
+prior batches). Validated: `npx tsx scripts/validate-knowledge-graph.ts
+docs/mathematics/kg/graph.json` PASS, 908/908 reachable, 0 failures, 0 warnings (KG file
+untouched); `scripts/math/state.ts` confirms math.disc 32/32 (`ebComplete: true`), math.linalg
+8/61, mathematics 508/908 (9 EB-certified domains, math.disc newly added); `npx tsc --noEmit`
 clean; targeted tests `mathPackageCorpus.test.ts` + `mathematicsAssetContract.test.ts` 479/479
 passed. All 4 new entries' heading structure diffed clean against `math.alg.like-terms.md` on the
 first pass (0 diffs each). No Physics, Chemistry, English, Biology, Computer Science, KG,
