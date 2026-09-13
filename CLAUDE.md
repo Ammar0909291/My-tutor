@@ -4457,6 +4457,35 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   Blueprint/runtime file touched. This is a genuinely multi-session
   campaign; continuation should verify state via `scripts/math/state.ts`
   fresh each time rather than trusting any number recorded here.
+- **Batch 60 — math.calc: trig integrals, hyperbolic derivatives —
+  CLOSES the reopened frontier; math.trig: double-angle formulas;
+  math.seq: divergent sequences** (2026-09-13): re-computed the frontier
+  fresh — `math.calc` had exactly the 2 candidates predicted by Batch 59
+  (`trig-integrals`, `hyperbolic-derivatives`), `math.trig` had 3,
+  `math.seq` had 6. Authored ALL of math.calc's ready frontier (closing it
+  completely) plus `math.trig.double-angle-formulas` and
+  `math.seq.divergent-sequence`. `double-angle-formulas` explicitly
+  resolves the content-overlap risk `sum-difference-formulas`'s own
+  Batch 57 Curriculum Feedback flagged, framing its value-add as the
+  rigorous three-form derivation rather than re-teaching
+  `trig-identities`'s informal substitution. `hyperbolic-derivatives`'s
+  MC-1 (carrying $\cos x$'s sign pattern to $\cosh x$) is a further
+  instance of the Type 6 analogy-overextension mechanism
+  `hyperbolic-functions`'s own three misconceptions all shared. All 4
+  concepts zero Blueprint/KG metadata discrepancy. `math.calc`
+  **66/76 → 68/76**. `math.trig` **19/25 → 20/25**. `math.seq`
+  **7/21 → 8/21**. Mathematics **458/908 → 462/908**, 446 remaining.
+  Fresh frontier confirms `math.calc`'s reopening was genuine, not
+  transient: 1 candidate ready (`trig-substitution`). Validated: KG
+  validator PASS (908/908 reachable, file untouched), `scripts/math/
+  state.ts` confirms math.calc 68/76, math.trig 20/25, math.seq 8/21,
+  mathematics 462/908 (6 EB-certified domains unchanged), `tsc --noEmit`
+  clean, targeted tests 479/479 passed, all 4 heading structures diffed
+  clean on the first pass (0 diffs each). No Physics/Chemistry/English/
+  Biology/CS/KG/Blueprint/runtime file touched. This is a genuinely
+  multi-session campaign; continuation should verify state via
+  `scripts/math/state.ts` fresh each time rather than trusting any number
+  recorded here.
 
 ## Physics Teacher Migration Architecture V2 — AUDITED, NOT ADOPTED (2026-09-12)
 
