@@ -5112,6 +5112,68 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   touched. This is a genuinely multi-session campaign; continuation
   should verify state via `scripts/math/state.ts` fresh each time
   rather than trusting any number recorded here.
+- **Batch 76 — math.graph closes its reopened frontier (PARKED
+  again); linear system, matrix inverse, angle between vectors**
+  (2026-09-13, autonomous loop iteration): re-computed the frontier
+  fresh — `math.graph` had exactly the 1 candidate predicted at the
+  end of Batch 75 (`algebraic-graph-theory`), `math.linalg` had
+  exactly the 7 candidates predicted. Authored `algebraic-graph-theory`
+  (closing math.graph's reopened frontier entirely) plus 3 of
+  math.linalg's 7 candidates (`linear-system`, `matrix-inverse`,
+  `angle-vectors`), deferring `cofactor-expansion`/`det-properties`/
+  `characteristic-polynomial`/`distance`. `algebraic-graph-theory`
+  constructs the graph Laplacian $L=D-A$, packaging `graph`'s
+  combinatorial data into a matrix that unlocks `eigenvalues`'s own
+  toolkit directly; verifies $\lambda_1=0$'s multiplicity exactly
+  equals the connected-component count; previews $\lambda_2$'s
+  connectivity-robustness role via the Cheeger inequality. 3
+  misconceptions: MC-1
+  EIGENVALUE-TOOLS-ASSUMED-DIRECTLY-APPLICABLE-TO-GRAPHS (Type 5,
+  Foundational), MC-2
+  MULTIPLICITY-COMPONENT-MATCH-ASSUMED-COINCIDENTAL (Type 1, High),
+  MC-3 LAMBDA-2-ASSUMED-BINARY-CONNECTIVITY-INDICATOR (Type 1,
+  Moderate). **This CLOSES math.graph's entire reopened frontier —
+  the domain returns to PARKED at 15/16**, only `random-graph`
+  remaining (blocked on unauthored `math.prob.probability-axioms`).
+  `linear-system` translates a system into $Ax=b$ (reusing `matrix`
+  directly), classifies outcomes via rank comparison never raw
+  equation count, and distinguishes $[0\cdots0|0]$ from
+  $[0\cdots0|c\ne0]$. 3 misconceptions: MC-1
+  EQUATION-COUNT-DETERMINES-OUTCOME (Type 1), MC-2
+  ZERO-ROW-ALWAYS-MEANS-INFINITE-SOLUTIONS (Type 4, Foundational),
+  MC-3 RANK-LESS-THAN-N-MEANS-NO-SOLUTION (Type 1). Genuinely
+  incorporates the already-authored `math.alg.system-linear-equations`
+  cross-link. `matrix-inverse` defines $A^{-1}$ (reusing
+  `determinant`'s own criterion directly), computes the $2\times2$
+  formula and row-reduction method, and treats a singular row-
+  reduction failure as diagnostic, never an error. 3 misconceptions:
+  MC-1 INVERTIBILITY-NOT-CHECKED-FIRST (Type 5, Foundational), MC-2
+  SINGULAR-ROW-REDUCTION-TREATED-AS-ERROR (Type 1, Foundational),
+  MC-3 INVERSE-FORMULA-APPLIED-WITHOUT-DIVIDING-BY-DETERMINANT (Type
+  5, Moderate). Cross-link `math.abst.group-inverse` confirmed
+  unauthored via `ls`, independence mode. `angle-vectors` computes
+  $\cos\theta=\frac{a\cdot b}{|a||b|}$ (reusing `dot-product`/`norm`
+  directly), uses the dot product alone for perpendicularity, and
+  states the Cauchy-Schwarz guarantee. 2 misconceptions: MC-1
+  FULL-ANGLE-FORMULA-USED-UNNECESSARILY-FOR-PERPENDICULARITY-CHECK
+  (Type 5, Moderate), MC-2
+  OUT-OF-RANGE-RATIO-NOT-RECOGNIZED-AS-ERROR-SIGNAL (Type 5,
+  Foundational). All 4 zero Blueprint/KG metadata discrepancy.
+  `math.graph` **14/16 → 15/16 (PARKED again)**. `math.linalg`
+  **15/61 → 18/61**. Mathematics **516/908 → 520/908**, 388
+  remaining. Fresh frontier: `math.graph` 0 ready (blocked on
+  cross-domain `math.prob`); `math.linalg` 6 ready
+  (`augmented-matrix`, `cofactor-expansion`, `det-properties`,
+  `cramer-rule`, `characteristic-polynomial`, `distance`). Validated:
+  KG validator PASS (908/908 reachable, file untouched),
+  `scripts/math/state.ts` confirms math.graph 15/16, math.linalg
+  18/61, mathematics 520/908 (10 EB-certified domains unchanged),
+  `tsc --noEmit` clean, targeted tests 479/479 passed, all 4 heading
+  structures diffed clean on the first pass. No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file
+  touched. This is a genuinely multi-session campaign; continuation
+  should verify state via `scripts/math/state.ts` fresh each time
+  rather than trusting any number recorded here.
 
 ## Topic/meaning loss — the extractor's default was YES (2026-09-13)
 
