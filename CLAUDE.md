@@ -4985,6 +4985,67 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   Blueprint/runtime file touched. This is a genuinely multi-session
   campaign; continuation should verify state via `scripts/math/state.ts`
   fresh each time rather than trusting any number recorded here.
+- **Batch 74 — determinant REOPENS math.calc; norm, orthogonality,
+  symmetric matrices** (2026-09-13, autonomous loop iteration): re-computed
+  the frontier fresh — `math.calc`/`math.graph` confirmed unchanged at 0
+  ready, `math.linalg` had exactly the 6 candidates predicted at the end of
+  Batch 73. Selected 4, prioritizing `determinant` (explicitly flagged as
+  the concept that would reopen `math.calc`) alongside `norm`,
+  `orthogonality`, `symmetric-matrix`, deferring `cross-product`/
+  `linear-system`. `determinant` computes $2\times2$/$3\times3$
+  determinants, interprets $|\det(A)|$ as the parallelepiped
+  area/volume formed by the matrix's rows (reusing `vector`'s
+  displacement reading), establishes $\det(A)=0\iff$ singular, and states
+  the product rule $\det(AB)=\det(A)\det(B)$ while rejecting the false
+  additive analog. 3 misconceptions: MC-1 DETERMINANT-IS-JUST-A-FORMULA
+  (Type 1, Foundational), MC-2 DET(A+B)=DET(A)+DET(B) (Type 1,
+  Foundational-alternate), MC-3 ZERO-DETERMINANT-MEANS-ZERO-MATRIX
+  (Type 1). **Authoring this concept REOPENS the previously-parked
+  `math.calc` domain** — confirmed via a fresh frontier check immediately
+  after: `math.calc.change-of-variables` is now ready, the domain's FINAL
+  remaining concept. `norm` computes $\|v\|=\sqrt{v\cdot v}$ (reusing
+  `dot-product` directly), establishes sign-independence via squaring, and
+  distinguishes the Euclidean norm from the 1-norm/$\infty$-norm. 3
+  misconceptions: MC-1 NORM-IS-SUM-OF-COMPONENTS (Type 1, Foundational),
+  MC-2 NEGATIVE-COMPONENTS-GIVE-NEGATIVE-NORM (Type 2), MC-3
+  ALL-NORMS-ARE-THE-SAME-VALUE (Type 5). Zero Blueprint/KG discrepancy;
+  **new P76 sub-pattern found**: its Tier-1 cross-link
+  `math.real.metric-space` is confirmed unauthored via `ls`, which would
+  normally warrant independence mode, but the Blueprint's own transfer
+  probe is self-contained (states the metric axioms directly rather than
+  assuming a retrievable peer entry), so no staleness correction was
+  needed. `orthogonality` defines $u\cdot v=0$ as a purely algebraic test
+  valid in any dimension (never merely visual), and distinguishes it from
+  the stronger orthonormality. 3 misconceptions: MC-1
+  ORTHOGONALITY-REQUIRES-VISUALIZATION (Type 2, Foundational), MC-2
+  ORTHOGONAL-REQUIRES-UNIT-LENGTH (Type 6), MC-3
+  SMALL-DOT-PRODUCT-MEANS-APPROXIMATELY-ORTHOGONAL (Type 5).
+  `symmetric-matrix` defines $A=A^T$ (reusing `matrix-transpose`
+  directly), states at orientation level the real-eigenvalues/orthogonal-
+  eigenvectors guarantee (full proof deferred to `spectral-theorem`), and
+  recognizes covariance/Hessian matrices as symmetric by guaranteed
+  construction. 3 misconceptions: MC-1
+  REAL-EIGENVALUES-ORTHOGONAL-EIGENVECTORS-OVERGENERALIZED (Type 1,
+  Foundational), MC-2 SYMMETRY-VERIFIED-BY-SPOT-CHECKING-ONE-PAIR (Type 1,
+  Foundational), MC-3
+  SYMMETRIC-MATRICES-IN-PRACTICE-ASSUMED-COINCIDENTAL (Type 5). All 4
+  zero Blueprint/KG metadata discrepancy beyond norm's noted (non-stale)
+  P76 note. `math.linalg` **8/61 → 12/61**. Mathematics
+  **508/908 → 512/908**, 396 remaining. Fresh frontier: `math.calc` 1
+  ready (`change-of-variables`, FINAL concept, REOPENED); `math.graph` 0
+  ready (still PARKED); `math.linalg` 9 ready (`unit-vector`,
+  `cross-product`, `linear-system`, `matrix-inverse`,
+  `cofactor-expansion`, `det-properties`, `eigenvalues`, `distance`,
+  `angle-vectors` — `eigenvalues` would also reopen the still-parked
+  `math.graph`). Validated: KG validator PASS (908/908 reachable, file
+  untouched), `scripts/math/state.ts` confirms math.calc 75/76
+  (reopened), math.linalg 12/61, mathematics 512/908 (9 EB-certified
+  domains unchanged), `tsc --noEmit` clean, targeted tests 479/479
+  passed, all 4 heading structures diffed clean on the first pass. No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file
+  touched. This is a genuinely multi-session campaign; continuation
+  should verify state via `scripts/math/state.ts` fresh each time rather
+  than trusting any number recorded here.
 
 ## Topic/meaning loss — the extractor's default was YES (2026-09-13)
 
