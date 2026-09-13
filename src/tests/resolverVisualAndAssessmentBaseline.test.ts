@@ -146,8 +146,18 @@ describe('A2 - the excursion freeze is INTENDED behaviour, not the defect', () =
     // Source pin: this is the mechanism that turned two resolver false
     // positives into zero-MCQ sessions. It must stay exactly as it is - the
     // fix is upstream, and nothing here may be relaxed to compensate.
+    //
+    // UPDATED (adversarial-study mastery-rederiver fix, 2026-09-13): the
+    // direct `conversationStateAfterTurnHoisted = excursionActiveHoisted`
+    // assignment was replaced by a captured local
+    // (`excursionFrozeLadderThisTurn = excursionActiveHoisted`) so the same
+    // freeze/thaw decision can be re-applied by the ISS-13 snapshotRederiver
+    // on a concurrent-write retry. The invariant this test exists for —
+    // excursionActiveHoisted is still what decides the freeze — is
+    // unchanged; only the indirection is new.
     const route = readFileSync('src/app/api/learn/chat/route.ts', 'utf8')
-    expect(route).toContain('conversationStateAfterTurnHoisted = excursionActiveHoisted')
+    expect(route).toContain('const excursionFrozeLadderThisTurn = excursionActiveHoisted')
+    expect(route).toContain('conversationStateAfterTurnHoisted = excursionFrozeLadderThisTurn')
     expect(route).toContain('notExcursion: !excursionActiveHoisted')
   })
 })
