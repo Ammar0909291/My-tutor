@@ -51,4 +51,26 @@ describe('buildNarrationSegments — pure, subject-agnostic segmentation', () =>
     const segments = buildNarrationSegments('First idea. Second idea. Third idea.', 'x')
     expect(spokenSequence(segments)).toEqual(['First idea.', 'Second idea.', 'Third idea.'])
   })
+
+  it('every segment carries its RENDERED text tokenized into words, for word-level highlighting', () => {
+    const segments = buildNarrationSegments('The cat sat. It slept.', 'w1')
+    const words0 = segments[0].renderedWords.filter((t) => t.kind === 'word')
+    expect(words0.map((w) => w.text)).toEqual(['The', 'cat', 'sat.'])
+    // Concatenating every token reproduces the segment's own rendered text.
+    expect(segments[0].renderedWords.map((t) => t.text).join('')).toBe(segments[0].text)
+  })
+
+  it('spokenWordCount reflects the SPOKEN text word count, which can differ from the rendered word count', () => {
+    // "H2O" (1 rendered word) speaks as "water" (still 1 spoken word) —
+    // exact match, the common case.
+    const exact = buildNarrationSegments('Water is H2O.', 'x1')
+    const renderedWords = exact[0].renderedWords.filter((t) => t.kind === 'word').length
+    expect(exact[0].spokenWordCount).toBe(renderedWords)
+
+    // "5m²" (1 rendered word) speaks as "5 square meters" (3 spoken words) —
+    // spokenWordCount genuinely diverges from the rendered word count.
+    const expanded = buildNarrationSegments('The area is 5m².', 'x2')
+    const expandedRenderedWords = expanded[0].renderedWords.filter((t) => t.kind === 'word').length
+    expect(expanded[0].spokenWordCount).toBeGreaterThan(expandedRenderedWords)
+  })
 })

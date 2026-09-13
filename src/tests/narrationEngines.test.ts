@@ -14,6 +14,13 @@ import { buildNarrationSegments } from '@/lib/narration/segments'
  * the trickiest logic in this feature has — real pause()/resume() call
  * sequences against a controllable fake, not just the abstract state
  * transitions covered in narrationPlaybackState.test.ts.
+ *
+ * `onWordStart(segmentIndex, wordIndex)` is the shared callback both engines
+ * report through — WORD level, never coarser. In most tests below every
+ * segment is exactly one rendered word ("One.", "Two.", "Three."), so
+ * wordIndex is always 0 and the assertions read almost identically to the
+ * old sentence-level ones; the dedicated word-boundary tests further down
+ * use multi-word segments to prove real intra-segment advancement.
  */
 
 class FakeUtterance {
@@ -26,6 +33,7 @@ class FakeUtterance {
   onstart: (() => void) | null = null
   onend: (() => void) | null = null
   onerror: (() => void) | null = null
+  onboundary: ((event: { charIndex: number }) => void) | null = null
   constructor(text: string) { this.text = text }
 }
 
@@ -56,7 +64,7 @@ describe('browser speech engine — real pause()/resume() call sequences', () =>
     const engine = createBrowserSpeechEngine(
       segments,
       { lang: 'en', voiceType: 'warm', speed: 1, speechSynthesisImpl: synth as unknown as SpeechSynthesis, UtteranceCtor: FakeUtterance as unknown as typeof SpeechSynthesisUtterance },
-      { onSegmentStart: (i) => started.push(i), onEnded: () => {}, onError: () => {} },
+      { onWordStart: (i) => started.push(i), onEnded: () => {}, onError: () => {} },
     )
     engine.start(0)
     expect(started).toEqual([0])
@@ -76,7 +84,7 @@ describe('browser speech engine — real pause()/resume() call sequences', () =>
     const engine = createBrowserSpeechEngine(
       segments,
       { lang: 'en', voiceType: 'warm', speed: 1, speechSynthesisImpl: synth as unknown as SpeechSynthesis, UtteranceCtor: FakeUtterance as unknown as typeof SpeechSynthesisUtterance },
-      { onSegmentStart: (i) => started.push(i), onEnded: () => {}, onError: () => {} },
+      { onWordStart: (i) => started.push(i), onEnded: () => {}, onError: () => {} },
     )
     engine.start(0)
     // Segment 0 ends -> engine schedules segment 1 after the breathing pause.
@@ -101,7 +109,7 @@ describe('browser speech engine — real pause()/resume() call sequences', () =>
     const engine = createBrowserSpeechEngine(
       segments,
       { lang: 'en', voiceType: 'warm', speed: 1, speechSynthesisImpl: synth as unknown as SpeechSynthesis, UtteranceCtor: FakeUtterance as unknown as typeof SpeechSynthesisUtterance },
-      { onSegmentStart: () => {}, onEnded: () => { endedCount++ }, onError: () => {} },
+      { onWordStart: () => {}, onEnded: () => { endedCount++ }, onError: () => {} },
     )
     engine.start(0)
     synth.utterances[0].onend?.()
@@ -118,7 +126,7 @@ describe('browser speech engine — real pause()/resume() call sequences', () =>
     const engine = createBrowserSpeechEngine(
       segments,
       { lang: 'en', voiceType: 'warm', speed: 1, speechSynthesisImpl: synth as unknown as SpeechSynthesis, UtteranceCtor: FakeUtterance as unknown as typeof SpeechSynthesisUtterance },
-      { onSegmentStart: (i) => started.push(i), onEnded: () => {}, onError: () => {} },
+      { onWordStart: (i) => started.push(i), onEnded: () => {}, onError: () => {} },
     )
     engine.start(0)
     synth.utterances[0].onend?.() // schedules segment 1 after a gap
@@ -134,12 +142,94 @@ describe('browser speech engine — real pause()/resume() call sequences', () =>
     const engine = createBrowserSpeechEngine(
       segments,
       { lang: 'en', voiceType: 'warm', speed: 1, speechSynthesisImpl: synth as unknown as SpeechSynthesis, UtteranceCtor: FakeUtterance as unknown as typeof SpeechSynthesisUtterance },
-      { onSegmentStart: (i) => started.push(i), onEnded: () => {}, onError: () => {} },
+      { onWordStart: (i) => started.push(i), onEnded: () => {}, onError: () => {} },
     )
     engine.start(0)
     for (let i = 0; i < 10; i++) { engine.pause(); engine.resume() }
     expect(started).toEqual([0]) // still exactly one utterance in flight
     expect(synth.utterances).toHaveLength(1)
+  })
+})
+
+describe('browser speech engine — onboundary drives real WORD-level advancement within a segment', () => {
+  beforeEach(() => vi.useFakeTimers())
+  afterEach(() => vi.useRealTimers())
+
+  // One multi-word segment so word-level advancement is actually exercised
+  // (the segment-level tests above deliberately use one-word segments).
+  const segments = buildNarrationSegments('The quick brown fox jumps.', 'boundary-msg')
+
+  it('4/5 — onstart immediately highlights word 0, before any boundary event fires', () => {
+    const synth = makeFakeSynth()
+    const wordCalls: Array<[number, number]> = []
+    const engine = createBrowserSpeechEngine(
+      segments,
+      { lang: 'en', voiceType: 'warm', speed: 1, speechSynthesisImpl: synth as unknown as SpeechSynthesis, UtteranceCtor: FakeUtterance as unknown as typeof SpeechSynthesisUtterance },
+      { onWordStart: (seg, word) => wordCalls.push([seg, word]), onEnded: () => {}, onError: () => {} },
+    )
+    engine.start(0)
+    expect(wordCalls).toEqual([[0, 0]])
+  })
+
+  it('4/5 — a real onboundary charIndex at the START of a later word advances the active word forward, never backward', () => {
+    const synth = makeFakeSynth()
+    const wordCalls: Array<[number, number]> = []
+    const engine = createBrowserSpeechEngine(
+      segments,
+      { lang: 'en', voiceType: 'warm', speed: 1, speechSynthesisImpl: synth as unknown as SpeechSynthesis, UtteranceCtor: FakeUtterance as unknown as typeof SpeechSynthesisUtterance },
+      { onWordStart: (seg, word) => wordCalls.push([seg, word]), onEnded: () => {}, onError: () => {} },
+    )
+    engine.start(0)
+    const utter = synth.utterances[0]
+    // "The quick brown fox jumps" -> "quick" starts at charIndex 4, "brown" at 10.
+    utter.onboundary?.({ charIndex: 4 })
+    utter.onboundary?.({ charIndex: 10 })
+    expect(wordCalls).toEqual([[0, 0], [0, 1], [0, 2]])
+  })
+
+  it('a charIndex at the MIDDLE of a word reports that same word, not a fake in-between position', () => {
+    const synth = makeFakeSynth()
+    const wordCalls: Array<[number, number]> = []
+    const engine = createBrowserSpeechEngine(
+      segments,
+      { lang: 'en', voiceType: 'warm', speed: 1, speechSynthesisImpl: synth as unknown as SpeechSynthesis, UtteranceCtor: FakeUtterance as unknown as typeof SpeechSynthesisUtterance },
+      { onWordStart: (seg, word) => wordCalls.push([seg, word]), onEnded: () => {}, onError: () => {} },
+    )
+    engine.start(0)
+    synth.utterances[0].onboundary?.({ charIndex: 12 }) // "o" inside "brown" (starts at 10)
+    expect(wordCalls[wordCalls.length - 1]).toEqual([0, 2])
+  })
+
+  it('an onboundary event missing a numeric charIndex is ignored rather than throwing or reporting garbage', () => {
+    const synth = makeFakeSynth()
+    const wordCalls: Array<[number, number]> = []
+    const engine = createBrowserSpeechEngine(
+      segments,
+      { lang: 'en', voiceType: 'warm', speed: 1, speechSynthesisImpl: synth as unknown as SpeechSynthesis, UtteranceCtor: FakeUtterance as unknown as typeof SpeechSynthesisUtterance },
+      { onWordStart: (seg, word) => wordCalls.push([seg, word]), onEnded: () => {}, onError: () => {} },
+    )
+    engine.start(0)
+    expect(() => synth.utterances[0].onboundary?.({} as { charIndex: number })).not.toThrow()
+    expect(wordCalls).toEqual([[0, 0]]) // only the onstart call
+  })
+
+  it('pausing mid-word and resuming continues firing boundary events for the SAME utterance (native resume keeps word position)', () => {
+    const synth = makeFakeSynth()
+    const wordCalls: Array<[number, number]> = []
+    const engine = createBrowserSpeechEngine(
+      segments,
+      { lang: 'en', voiceType: 'warm', speed: 1, speechSynthesisImpl: synth as unknown as SpeechSynthesis, UtteranceCtor: FakeUtterance as unknown as typeof SpeechSynthesisUtterance },
+      { onWordStart: (seg, word) => wordCalls.push([seg, word]), onEnded: () => {}, onError: () => {} },
+    )
+    engine.start(0)
+    const utter = synth.utterances[0]
+    utter.onboundary?.({ charIndex: 4 }) // word 1 ("quick")
+    engine.pause()
+    engine.resume()
+    // Still the same utterance instance — resume() didn't recreate it.
+    expect(synth.utterances).toHaveLength(1)
+    utter.onboundary?.({ charIndex: 10 }) // word 2 ("brown") — continues forward, not from 0
+    expect(wordCalls).toEqual([[0, 0], [0, 1], [0, 2]])
   })
 })
 
@@ -176,7 +266,7 @@ describe('server audio engine — real currentTime-driven sync + native pause/re
     return { FakeAudio, instances }
   }
 
-  it('A/D/E — segment index tracks the real currentTime via an injected clock, not a fake wall timer', async () => {
+  it('A/D/E — word/segment position tracks the real currentTime via an injected clock, not a fake wall timer', async () => {
     const { FakeAudio, instances } = makeFakeAudioCtor()
     let tick: (() => void) | null = null
     const fakeFetch = vi.fn().mockResolvedValue({ ok: true, blob: () => Promise.resolve(new Blob()) })
@@ -191,7 +281,7 @@ describe('server audio engine — real currentTime-driven sync + native pause/re
         revokeObjectURL: () => {},
         scheduleTick: (cb) => { tick = cb; return () => { tick = null } },
       },
-      { onSegmentStart: (i) => started.push(i), onEnded: () => {}, onError: () => {}, onProgress: () => {} },
+      { onWordStart: (i) => started.push(i), onEnded: () => {}, onError: () => {}, onProgress: () => {} },
     )
     engine.start(0)
     await flushAsyncWork() // let the fetch/blob promise chain settle
@@ -209,13 +299,49 @@ describe('server audio engine — real currentTime-driven sync + native pause/re
     expect(started[started.length - 1]).toBe(2)
   })
 
-  it('B — pause()/resume() use the native HTMLAudioElement calls, which preserve currentTime by construction', async () => {
+  it('word-level: a multi-word segment reports increasing word indices as currentTime advances through it', async () => {
+    const { FakeAudio, instances } = makeFakeAudioCtor()
+    let tick: (() => void) | null = null
+    const fakeFetch = vi.fn().mockResolvedValue({ ok: true, blob: () => Promise.resolve(new Blob()) })
+    const wordCalls: Array<[number, number]> = []
+    const engine = createServerAudioEngine(
+      buildNarrationSegments('The quick brown fox jumps.', 'wordy'),
+      {
+        lang: 'hi', voice: 'warm',
+        fetchImpl: fakeFetch as unknown as typeof fetch,
+        AudioCtor: FakeAudio as unknown as typeof Audio,
+        createObjectURL: () => 'blob:fake',
+        revokeObjectURL: () => {},
+        scheduleTick: (cb) => { tick = cb; return () => { tick = null } },
+      },
+      { onWordStart: (seg, word) => wordCalls.push([seg, word]), onEnded: () => {}, onError: () => {}, onProgress: () => {} },
+    )
+    engine.start(0)
+    await flushAsyncWork()
+    const audio = instances[0]
+    audio.duration = 50 // 5 words, 10s each by character-weight-ish
+    audio.onloadedmetadata?.()
+
+    audio.currentTime = 0
+    tick?.()
+    audio.currentTime = 45 // near the end -> last word
+    tick?.()
+
+    expect(wordCalls[0]).toEqual([0, 0])
+    expect(wordCalls[wordCalls.length - 1]).toEqual([0, 4])
+    // Strictly increasing word indices, never a jump backward.
+    for (let i = 1; i < wordCalls.length; i++) {
+      expect(wordCalls[i][1]).toBeGreaterThanOrEqual(wordCalls[i - 1][1])
+    }
+  })
+
+  it('B — pause()/resume() use the native HTMLAudioElement calls, which preserve currentTime (and therefore word position) by construction', async () => {
     const { FakeAudio, instances } = makeFakeAudioCtor()
     const fakeFetch = vi.fn().mockResolvedValue({ ok: true, blob: () => Promise.resolve(new Blob()) })
     const engine = createServerAudioEngine(
       buildNarrationSegments('One. Two.', 'x'),
       { lang: 'ru', voice: 'male', fetchImpl: fakeFetch as unknown as typeof fetch, AudioCtor: FakeAudio as unknown as typeof Audio, createObjectURL: () => 'blob:fake', revokeObjectURL: () => {}, scheduleTick: () => () => {} },
-      { onSegmentStart: () => {}, onEnded: () => {}, onError: () => {}, onProgress: () => {} },
+      { onWordStart: () => {}, onEnded: () => {}, onError: () => {}, onProgress: () => {} },
     )
     engine.start(0)
     await flushAsyncWork()
@@ -240,7 +366,7 @@ describe('server audio engine — real currentTime-driven sync + native pause/re
         createObjectURL: () => 'blob:fake', revokeObjectURL: () => {},
         scheduleTick: () => () => { stopped = true },
       },
-      { onSegmentStart: () => {}, onEnded: () => {}, onError: () => {}, onProgress: () => {} },
+      { onWordStart: () => {}, onEnded: () => {}, onError: () => {}, onProgress: () => {} },
     )
     engine.start(0)
     await flushAsyncWork()

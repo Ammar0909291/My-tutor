@@ -45,9 +45,9 @@ describe('LessonScreen.tsx is wired to the platform-wide narration layer', () =>
     expect(block).toMatch(/narration\.status === 'IDLE'\s*\n?\s*\?\s*<MessageContent text={displayText} isUser={false} \/>/)
   })
 
-  it('renders NarratedText (the highlighting layer) once narration has actually started, driven by the SAME segments/activeSegmentIndex the hook produces', () => {
+  it('renders NarratedText (the highlighting layer) once narration has actually started, driven by the SAME segments/activeSegmentIndex/activeWordIndex the hook produces', () => {
     const block = LESSON_SCREEN.slice(LESSON_SCREEN.indexOf('<TutorNarratedMessage'), LESSON_SCREEN.indexOf('</TutorNarratedMessage>'))
-    expect(block).toContain('<NarratedText segments={narration.segments} activeSegmentIndex={narration.activeSegmentIndex} />')
+    expect(block).toContain('<NarratedText segments={narration.segments} activeSegmentIndex={narration.activeSegmentIndex} activeWordIndex={narration.activeWordIndex} />')
   })
 
   it('wires Play/Pause/Replay to the hook\'s own toggle()/replay() — not a re-implemented local handler', () => {
@@ -148,9 +148,13 @@ describe('NarratedText checks visibility against the actual scrollable ancestor,
   })
 
   it('the scroll effect uses that helper — not containerRef.current.getBoundingClientRect() — as the visibility-check container', () => {
-    const effectBlock = SRC.slice(SRC.indexOf('useEffect(() => {\n    if (activeSegmentIndex'), SRC.indexOf('}, [activeSegmentIndex])'))
+    const effectBlock = SRC.slice(SRC.indexOf('useEffect(() => {\n    if (activeSegmentIndex'), SRC.indexOf('}, [activeSegmentIndex, activeWordIndex])'))
     expect(effectBlock).toContain('findScrollContainerRect(container)')
     expect(effectBlock).not.toContain('container.getBoundingClientRect()')
+  })
+
+  it('the scroll effect re-runs on every WORD advance, not just every segment change', () => {
+    expect(SRC).toContain('}, [activeSegmentIndex, activeWordIndex])')
   })
 })
 
@@ -176,6 +180,38 @@ describe('useNarrationPlayback notifies voicePlayback (not just its own local st
     const buildEngineBlock = HOOK.slice(HOOK.indexOf('const buildEngine ='), HOOK.indexOf('}, [segments, lang, voiceType, speed, country])'))
     expect(buildEngineBlock).toMatch(/onEnded = \(\) => \{ setState\(completed\(segments\.length\)\); notify\.onEnded\(\) \}/)
     expect(buildEngineBlock).toMatch(/onError = \(\) => \{ setState\(errored\(\)\); notify\.onError\(\) \}/)
+  })
+})
+
+describe('word-level highlighting is wired end to end through the hook and both engines', () => {
+  const HOOK = read('src/hooks/useNarrationPlayback.ts')
+  const BROWSER_ENGINE = read('src/lib/narration/engines/browserSpeechEngine.ts')
+  const SERVER_ENGINE = read('src/lib/narration/engines/serverAudioEngine.ts')
+
+  it('the hook exposes activeWordIndex from state, not a re-derived value', () => {
+    expect(HOOK).toContain('activeWordIndex: state.activeWordIndex')
+  })
+
+  it('resuming from PAUSED preserves the exact paused word index rather than dropping it', () => {
+    expect(HOOK).toContain('playing(s, s.activeSegmentIndex ?? 0, s.activeWordIndex)')
+  })
+
+  it('both engines report through the shared onWordStart(segmentIndex, wordIndex) callback — no onSegmentStart left anywhere', () => {
+    expect(BROWSER_ENGINE).toContain('onWordStart: (segmentIndex: number, wordIndex: number) => void')
+    expect(BROWSER_ENGINE).not.toContain('onSegmentStart')
+    expect(SERVER_ENGINE).not.toContain('onSegmentStart')
+  })
+
+  it('the browser engine wires a real onboundary handler (not a guessed timer) to drive word advancement', () => {
+    expect(BROWSER_ENGINE).toContain('utter.onboundary')
+    expect(BROWSER_ENGINE).toContain('spokenCharIndexToWordIndex')
+    expect(BROWSER_ENGINE).not.toMatch(/setInterval\([^)]*\/\/\s*word/i)
+  })
+
+  it('the server engine derives word position from buildWordTimeWindows over the real audio.currentTime, not a fixed ms-per-word guess', () => {
+    expect(SERVER_ENGINE).toContain('buildWordTimeWindows')
+    expect(SERVER_ENGINE).toContain('audio.currentTime')
+    expect(SERVER_ENGINE).not.toMatch(/msPerWord|millisecondsPerWord/i)
   })
 })
 

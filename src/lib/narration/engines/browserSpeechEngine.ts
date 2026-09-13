@@ -7,10 +7,28 @@
  * `speakText` (tts.ts) already uses — `rateForSegment`, `pauseBeforeSegment`,
  * `LANG_LOCALE`, `VOICE_SETTINGS` — so cadence and voice selection match the
  * platform's existing speech exactly. What it adds, that `speakText` does
- * not expose, is a per-segment `onstart` boundary (real, authoritative — the
- * browser only fires it when that utterance actually begins speaking, never
- * a fake timer) and genuine pause/resume via the Web Speech API's own
- * `pause()`/`resume()`, which preserve position natively.
+ * not expose, is WORD-LEVEL position: a per-segment `onstart` boundary
+ * (real, authoritative — the browser only fires it when that utterance
+ * actually begins speaking, never a fake timer) for word 0, refined by the
+ * browser's own `onboundary` event for every word after that, plus genuine
+ * pause/resume via the Web Speech API's own `pause()`/`resume()`, which
+ * preserve position — segment AND word — natively (resuming a paused
+ * utterance continues firing its own boundary events for the remainder,
+ * so nothing here has to re-derive where a resumed utterance is).
+ *
+ * WORD BOUNDARY MAPPING: `onboundary`'s `charIndex` is a position in the
+ * SPOKEN text (`utter.text` — post cleanTextForTTS), not the rendered text
+ * on screen. `spokenCharIndexToWordIndex` (words.ts) converts that into a
+ * spoken-text word index, then `mapProportionalIndex` maps it onto the
+ * corresponding RENDERED word index — exact when the two word counts match
+ * (the common case), a labeled estimate otherwise. Not every browser/voice
+ * fires 'word'-granularity boundary events (some only fire 'sentence',
+ * some fire none at all) — this engine does not special-case `event.name`;
+ * it derives the word index generically from `charIndex` either way, so a
+ * coarser boundary signal just means fewer word advances within that
+ * segment (never worse than the old sentence-level highlighting, since
+ * `onstart` already guarantees word 0 highlights the moment the segment
+ * begins).
  *
  * PAUSE DURING THE INTER-SEGMENT GAP: `speechSynthesis.pause()` only pauses
  * an utterance that is actively speaking — it does nothing during the
@@ -31,6 +49,7 @@
  */
 import { LANG_LOCALE, VOICE_SETTINGS, pauseBeforeSegment, rateForSegment, type TeachingLang, type VoiceType } from '../../tts'
 import type { NarrationSegment } from '../types'
+import { mapProportionalIndex, spokenCharIndexToWordIndex } from '../words'
 
 export interface NarrationEngine {
   /** Begin speaking from `fromIndex` (0 for a fresh start, or wherever a
@@ -46,7 +65,13 @@ export interface NarrationEngine {
 }
 
 export interface NarrationEngineCallbacks {
-  onSegmentStart: (index: number) => void
+  /** Fires whenever the spoken position advances to a new RENDERED word —
+   *  never coarser than word granularity. `segmentIndex` identifies which
+   *  segment; `wordIndex` is 0-based within that segment's `renderedWords`
+   *  (word-kind tokens only). Always fires at least once per segment (word
+   *  0, from the engine's own `onstart`/first tick), even on a
+   *  browser/voice that never fires a boundary event at all. */
+  onWordStart: (segmentIndex: number, wordIndex: number) => void
   onEnded: () => void
   onError: () => void
 }
@@ -90,10 +115,14 @@ export function createBrowserSpeechEngine(
   function speakFrom(index: number) {
     if (disposed || !synth || !Utterance) return
     if (index >= segments.length) { callbacks.onEnded(); return }
+    const segment = segments[index]
     // Same trailing-period strip as speakText — some voices read a bare "."
     // as "full stop"; the breathing pause between segments already supplies
-    // the rhythm cue the period would have.
-    const segmentText = segments[index].spokenText.replace(/\.\s*$/, '')
+    // the rhythm cue the period would have. Stripping one trailing character
+    // never removes a whole word, so segment.spokenWordCount (computed from
+    // the untouched spokenText) still matches this string's own word count.
+    const segmentText = segment.spokenText.replace(/\.\s*$/, '')
+    const renderedWordCount = segment.renderedWords.reduce((n, t) => n + (t.kind === 'word' ? 1 : 0), 0)
     const utter = new Utterance(segmentText)
     utter.lang = locale
     utter.pitch = voiceSettings.pitch
@@ -101,7 +130,15 @@ export function createBrowserSpeechEngine(
     utter.volume = 1.0
     const voice = resolveVoice()
     if (voice) utter.voice = voice
-    utter.onstart = () => { if (!disposed) callbacks.onSegmentStart(index) }
+    utter.onstart = () => { if (!disposed) callbacks.onWordStart(index, 0) }
+    utter.onboundary = (event: SpeechSynthesisEvent) => {
+      if (disposed || renderedWordCount === 0) return
+      const charIndex = event?.charIndex
+      if (typeof charIndex !== 'number') return
+      const spokenWordIndex = spokenCharIndexToWordIndex(segmentText, charIndex)
+      const renderedWordIndex = mapProportionalIndex(spokenWordIndex, Math.max(segment.spokenWordCount, 1), renderedWordCount)
+      callbacks.onWordStart(index, renderedWordIndex)
+    }
     utter.onend = () => {
       if (disposed) return
       const next = index + 1

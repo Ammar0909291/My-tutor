@@ -5395,7 +5395,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                                 <div className="animate-message" style={{ fontSize: 15.6, lineHeight: 1.6, color: 'var(--text-primary)' }}>
                                   {narration.status === 'IDLE'
                                     ? <MessageContent text={displayText} isUser={false} />
-                                    : <NarratedText segments={narration.segments} activeSegmentIndex={narration.activeSegmentIndex} />}
+                                    : <NarratedText segments={narration.segments} activeSegmentIndex={narration.activeSegmentIndex} activeWordIndex={narration.activeWordIndex} />}
                                 </div>
 
                                 {cached?.hasMore && (

@@ -20,6 +20,7 @@
 import { splitIntoSpeechSegments } from '../tts'
 import { cleanTextForTTS } from '../tts-cleaner'
 import type { NarrationSegment } from './types'
+import { tokenizeWords, wordCount } from './words'
 
 /**
  * Builds the ordered segment list for one narration session. `sessionId`
@@ -41,11 +42,14 @@ export function buildNarrationSegments(text: string, sessionId: string): Narrati
   for (let i = 0; i < count; i++) {
     const renderedText = rendered[i] ?? ''
     if (!renderedText) continue
+    const spokenText = spoken[i] ?? renderedText
     segments.push({
       id: `${sessionId}-seg-${i}`,
       text: renderedText,
-      spokenText: spoken[i] ?? renderedText,
+      spokenText,
       index: segments.length,
+      renderedWords: tokenizeWords(renderedText),
+      spokenWordCount: wordCount(spokenText),
     })
   }
   return segments
