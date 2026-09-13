@@ -6149,3 +6149,75 @@ boundary — a property of the writer, unreachable in practice.
 
 Suite 634 files / 13,279 passed / 9 skipped; tsc clean; build clean. All three
 commits READY in production (`dpl_6iEHj6QLhr`, `dpl_2Ltu8tBcHc`, `dpl_WXqhvpiv5Q`).
+
+## Mastery cannot certify while a claim challenge is unresolved (2026-09-13, commit `0260240a`)
+
+**Root cause of "false teaching certified as mastery" (chem.bond.resonance real-student audit)
+found and closed, cross-subject, without touching any curriculum/EB/KG content.** The tutor
+taught a wrong CO3^2- formal-charge rule, the learner challenged it twice in the two most
+natural real-student phrasings ("i thought oxygen has 6", "that's what my teacher said before"),
+the tutor defended the false claim with escalating fabricated detail, and the lesson still
+reached `mastery.verified=true`. Traced the full pipeline: `claimChallengeGuard.ts`'s
+`isClaimChallenge` never matched EITHER reproduced phrasing (neither contains "wrong"/"not
+right"/anchored "actually"/"read...not..."), so its humility directive never even injected; and
+even when it does fire, the directive is purely advisory prose with zero downstream enforcement
+— nothing checks the model complied. Separately, `masteryVerifiedStrict`/`conceptMasteryVerdict`
+answer "was the GRADING trustworthy" (authored keys, no contradictions) — a totally disconnected
+axis from "was the TEACHING trustworthy." A lesson can answer every authored MCQ correctly while
+the explanations along the way taught something false and were never retracted under challenge.
+Confirmed via git/grep: no "Physics Verifier" exists anywhere in this repo; the built K5 Output
+Verifier (`src/lib/kernel/verifier/`) is structural/pedagogical only (15 rule codes, none check
+factual correctness); the only prior-art for a generic correctness verifier or a "Turn Contract"
+is the unbuilt, explicitly non-binding EOS v3 clean-sheet proposal (`docs/architecture/eos-v3/`).
+- **Fix 1 — detection.** `CHALLENGE_RE` widened with two new semantic categories (a remembered
+  counter-fact, "i thought X"; a remembered authority, "my teacher/book/notes said X"), kept
+  narrow per the module's own asymmetric-risk philosophy (a false positive costs one extra
+  sentence; a false negative lets a fabricated defence stand). New `CHALLENGE_ACKNOWLEDGED_RE`
+  reuses the injected directive's own suggested phrasing ("I may have gotten that wrong...") to
+  ask a narrow, decidable question — did the reply take the dispute seriously — never "was it
+  correct," which the module's own header already disclaims as undecidable here.
+- **Fix 2 — enforcement.** New `vChallenge` rule (`kernel/verifier/rules.ts`, `V-CHALLENGE`,
+  REJECT), an unconditional safety floor mirroring the proven `vAffirm` mechanism exactly (same
+  repair-then-fallback shape, wired right next to it in `route.ts`, running whether or not the
+  flagged EOS verifier is enabled — that flag is unset in production). REJECTs and regenerates
+  once only the safely-decidable case (a short, unacknowledged reply under an active challenge —
+  the exact T2 filler shape); on second failure, falls back to a deliberately neither-sided
+  honest-uncertainty template (contrast `vAffirm`'s fallback, which confidently asserts the
+  curriculum's own answer — there is no authored answer to fall back to here). A long,
+  confidently-wrong, unacknowledging reply (the actual T3/T4 shape) is NOT rejected — this module
+  cannot tell a correct confident defence from an incorrect one, stated explicitly rather than
+  guessed at.
+- **Fix 3 — mastery safety.** New `ConversationState.teachingIntegrityUncertain` (set from the
+  FINAL served text via `CHALLENGE_ACKNOWLEDGED_RE`, independent of whether Fix 2's REJECT fired —
+  this is what closes the T3/T4 gap Fix 2 structurally cannot). `conceptMasteryVerdict` — the
+  single authority every mastery consumer (completion gate, client payload, permanent record)
+  already routes through — now refuses to certify while this flag is set, monotone-tighter
+  exactly like every other condition already in that function. Set once, never auto-cleared
+  within a concept (matching `sawModernGrading`'s own policy) since there is no safe way to detect
+  the dispute was later resolved; clears only on a fresh attempt at the concept. Touches zero
+  grading-integrity checks, erases zero evidence counters, makes zero DB/curriculum changes.
+- **Cross-subject by construction**: every touched module was already subject-agnostic; nothing
+  Chemistry-specific was added anywhere.
+- **Tests**: 79 new/updated assertions (`claimChallengeGuard.test.ts`,
+  `challengeDefendedVerifier.test.ts`, `teachingIntegrityMastery.test.ts`), each with a
+  non-vacuity proof against the verbatim reproduced production strings (the pre-widening
+  `CHALLENGE_RE` genuinely misses both; `masteryVerifiedStrict` alone genuinely still certifies
+  the incident's exact evidence shape). 15 pre-existing "routeAI call site count" tests updated
+  4->5 (the repair regeneration is one real new call site) with reasoning comments.
+  `replayDrift`'s structural guard extended to REPLAY the new evidence field (a transcript's own
+  learner/tutor text is sufficient to derive it exactly as route.ts does) rather than excuse it.
+- **Live-verified in production** (real account, fresh `chem.bond.resonance` session): the exact
+  challenge phrasing from the root-cause analysis ("wait, i thought resonance structures could
+  also move atoms sometimes, thats what my teacher told me last year") triggered the widened
+  detector on the deployed app, and the model's own reply — unprompted beyond the injected
+  directive — opened with "I may have gotten that part a little too quick—let's sort it out
+  together," matching `CHALLENGE_ACKNOWLEDGED_RE` exactly; the lesson went on to reach genuine
+  `mastery.verified=true` normally, confirming a properly-acknowledged challenge does NOT
+  falsely block mastery. **Honest limit**: the escalation path (REJECT->regenerate->fallback) and
+  the mastery-BLOCKED path were not independently reproduced live — this incident's failure mode
+  is non-deterministic LLM behaviour that cannot be forced to fail on demand; those paths are
+  proven via offline tests against the verbatim original bad text instead.
+- Full suite 655 files / 13,581 passed / 9 skipped (post-merge with the concurrent Mathematics EB
+  campaign, zero file-content conflicts); tsc clean; build clean. Merge commit `d9022e20`, fix
+  commit `0260240a`, both on `main`, deployed `dpl_GcYqqVJjmsq5TJxkAsGTGrKfP25r` READY on
+  `my-tutor-flame.vercel.app`.
