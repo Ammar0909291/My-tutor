@@ -1612,6 +1612,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                     recoveryNotes: ebContext.recoveryShrinkTo,
                     misconceptions: ebContext.antiAnalogies,
                   })
+                  // KNOWLEDGE-EXPOSURE FAILURE — the observable half of the
+                  // authored-content contract. Authored teaching knowledge that
+                  // did not reach the model is NEVER silent: one structured line
+                  // per affected section, same convention as TURN_EVENT /
+                  // EXCURSION_EVENT / BRAIN_EVENT, and no DB write (5 GB egress
+                  // quota). Empty is the normal case, so this costs nothing on a
+                  // healthy turn. It reports the gap; it never fills it.
+                  for (const failure of ebContext.knowledgeExposure) {
+                    console.warn(
+                      `[learn/chat] KNOWLEDGE_EXPOSURE_FAILURE=${JSON.stringify(failure)}`,
+                    )
+                  }
                 }
 
                 // Option B — Teaching Sequence Executor (physics only): the
@@ -7097,7 +7109,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                     const m = ranked[0].s > 0 ? ranked[0].m : eb.context.ebMisconceptions[0]
                     authored += `\nA known misconception here is "${m.title}".`
                     if (m.symptom) authored += ` Learners holding it say things like: ${m.symptom}`
-                    if (m.recovery) authored += ` The authored repair: ${m.recovery}`
+                    if (m.correction) authored += ` The authored repair: ${m.correction}`
                   }
                 }
               } catch { /* the repair still runs without authored material */ }
