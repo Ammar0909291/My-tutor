@@ -4817,6 +4817,44 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   Blueprint/runtime file touched. This is a genuinely multi-session
   campaign; continuation should verify state via `scripts/math/state.ts`
   fresh each time rather than trusting any number recorded here.
+- **Batch 70 — ordinary/exponential generating functions, complexity
+  classes: closes math.disc down to its final math.linalg-blocked
+  concept** (2026-09-13): re-computed the frontier fresh — `math.disc`
+  had exactly the 3 candidates predicted at the end of Batch 69 (`ogf`,
+  `egf`, `complexity-classes`); `math.calc`/`math.graph` unchanged at 0
+  ready (both PARKED); `math.linalg` (0/16) confirmed still holding its
+  1 ready candidate (`vector`), not selected. Authored all 3 math.disc
+  candidates, closing the ENTIRE frontier available at batch start with
+  none deferred. `ogf` specializes `generating-functions` for unlabeled
+  structures: products are CONVOLUTIONS, never term-by-term
+  multiplication; partial fractions recover `linear-recurrence`'s own
+  closed forms via a different route. `egf` develops the labeled
+  counterpart: dividing by $n!$ is what the labeling requires; EGF
+  products carry an EXTRA binomial weight a plain convolution would
+  miss; $e^x$ previewed as "one labeled block," cross-referencing the
+  already-authored `stirling-numbers`. `complexity-classes` defines
+  $P$/$NP$/NP-completeness (verification-ease, not solving-difficulty;
+  universal reducibility; $P$ vs $NP$ genuinely open) and genuinely
+  incorporates the already-authored, cross-domain `math.found.
+  conjecture` (theorem-vs-conjecture) as its own Teaching Action —
+  closing the loop back to Foundations. 9 misconceptions independently
+  classified across the 3 concepts (Blueprints state severity, not
+  birth type); all 3 zero Blueprint/KG metadata discrepancy. `math.disc`
+  **28/32 → 31/32** — only `graph-representation` remains, blocked on
+  unauthored `math.linalg.matrix`. Mathematics **496/908 → 499/908**,
+  409 remaining. Fresh frontier: `math.disc`/`math.calc`/`math.graph`
+  all unchanged at 0 ready — **all three now simultaneously PARKED for
+  the first time this campaign**, converging on the single unstarted
+  `math.linalg` domain (1 ready: `vector`) as the path back into all
+  three at once. Validated: KG validator PASS (908/908 reachable, file
+  untouched), `scripts/math/state.ts` confirms math.disc 31/32,
+  mathematics 499/908 (8 EB-certified domains unchanged), `tsc
+  --noEmit` clean, targeted tests 479/479 passed, all 3 heading
+  structures diffed clean on the first pass. No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file
+  touched. This is a genuinely multi-session campaign; continuation
+  should verify state via `scripts/math/state.ts` fresh each time
+  rather than trusting any number recorded here.
 
 ## Topic/meaning loss — the extractor's default was YES (2026-09-13)
 

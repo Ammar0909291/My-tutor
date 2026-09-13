@@ -11,7 +11,7 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 496 | **Eight domains CERTIFIED (math.seq joined 2026-09-13), math.calc 75/76 (PARKED — only `change-of-variables` remains, blocked on `math.linalg.determinant`), math.disc 28/32 (3 ready: `ogf`, `egf`, `complexity-classes`), math.graph 14/16 (PARKED), math.linalg 0/16 (1 ready: `vector`, not yet selected).** 82 `math.found.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 69 `math.geom.*` (**COMPLETE, DOMAIN CERTIFIED** — the final 13 entries were restored by commit `0d2c76dd`'s Wave 0 recovery, which this row previously did not reflect) + 36 `math.nt.*` (**COMPLETE, DOMAIN CERTIFIED 2026-08-12** — the domain's final 8 concepts, `prime-distribution`, `continued-fractions`, `analytic-number-theory`, `prime-number-theorem`, `riemann-hypothesis`, `algebraic-number-theory`, `algebraic-integers`, `number-fields`, were authored this session, ending the PARKED status this row previously recorded) + 59 `math.alg.*` (**COMPLETE, DOMAIN CERTIFIED 2026-09-11** — Wave 1 (2026-08-12, 11 concepts): `expression`, `equation`, `term`, `coefficient`, `exponent-rules`, `polynomial`, `degree`, `zero-exponent`, `negative-exponent`, `solution-set`, `inequality`; Wave 2 (2026-08-12, 1 concept): `like-terms`; Wave 3 (2026-09-11, 3 concepts): `simplification`, `polynomial-operations`, `radicals`; Wave 4 (2026-09-11, 5 concepts): `linear-equation-1var`, `polynomial-division`, `fractional-exponent`, `simplifying-radicals`, `radical-equations`; Wave 5 (2026-09-11, 5 concepts): `inequality-1var`, `absolute-value-equations`, `linear-equation-2var`, `remainder-theorem`, `rationalizing-denominators`; Wave 6 (2026-09-11, 3 concepts): `inequality-2var`, `system-linear-equations`, `factor-theorem`; Wave 7 (2026-09-11, 4 concepts): `substitution-method`, `elimination-method`, `system-3var`, `factoring`; Wave 8 (2026-09-11, 3 concepts): `factoring-gcf`, `factoring-special`, `rational-expressions`; Wave 9 (2026-09-11, 4 concepts): `factoring-trinomials`, `rational-expressions-addition`, `rational-expressions-multiplication`, `rational-equations`; Wave 10 (2026-09-11, 1 concept): `quadratic-equation`; Wave 11 (2026-09-11, 2 concepts): `completing-the-square`, `polynomial-roots`; Wave 12 part 1 (2026-09-11, 1 concept): `quadratic-formula`; Wave 12 part 2 (2026-09-11, 2 concepts): `discriminant`, `rational-root-theorem`; Wave 12 part 3 (2026-09-11, 3 concepts): `fundamental-theorem-algebra`, `polynomial-inequality`, `vietas-formulas`; Wave 13 (2026-09-11, 2 concepts): `complex-polynomial-roots`, `rational-inequality`; Batch 15 (2026-09-11, 1 concept): `exponential-function`; Batch 16 (2026-09-11, 2 concepts): `logarithm`, `exponential-equations`; Batch 17 (2026-09-11, 3 concepts): `binomial-theorem`, `logarithm-properties`, `natural-logarithm`; Batch 18 (2026-09-11, 3 concepts, FINAL): `change-of-base`, `logarithmic-equations`, `pascals-triangle`; all Blueprint-grounded, reused by reference). 20 `math.disc.*` entries (**IN PROGRESS, standalone campaign since math.alg's certification** —
+| mathematics | 908 | 499 | **Eight domains CERTIFIED (math.seq joined 2026-09-13), math.calc 75/76 (PARKED — only `change-of-variables` remains, blocked on `math.linalg.determinant`), math.disc 31/32 (PARKED — only `graph-representation` remains, blocked on `math.linalg.matrix`), math.graph 14/16 (PARKED), math.linalg 0/16 (1 ready: `vector`, not yet selected — all three parked domains now converge on this one domain).** 82 `math.found.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 69 `math.geom.*` (**COMPLETE, DOMAIN CERTIFIED** — the final 13 entries were restored by commit `0d2c76dd`'s Wave 0 recovery, which this row previously did not reflect) + 36 `math.nt.*` (**COMPLETE, DOMAIN CERTIFIED 2026-08-12** — the domain's final 8 concepts, `prime-distribution`, `continued-fractions`, `analytic-number-theory`, `prime-number-theorem`, `riemann-hypothesis`, `algebraic-number-theory`, `algebraic-integers`, `number-fields`, were authored this session, ending the PARKED status this row previously recorded) + 59 `math.alg.*` (**COMPLETE, DOMAIN CERTIFIED 2026-09-11** — Wave 1 (2026-08-12, 11 concepts): `expression`, `equation`, `term`, `coefficient`, `exponent-rules`, `polynomial`, `degree`, `zero-exponent`, `negative-exponent`, `solution-set`, `inequality`; Wave 2 (2026-08-12, 1 concept): `like-terms`; Wave 3 (2026-09-11, 3 concepts): `simplification`, `polynomial-operations`, `radicals`; Wave 4 (2026-09-11, 5 concepts): `linear-equation-1var`, `polynomial-division`, `fractional-exponent`, `simplifying-radicals`, `radical-equations`; Wave 5 (2026-09-11, 5 concepts): `inequality-1var`, `absolute-value-equations`, `linear-equation-2var`, `remainder-theorem`, `rationalizing-denominators`; Wave 6 (2026-09-11, 3 concepts): `inequality-2var`, `system-linear-equations`, `factor-theorem`; Wave 7 (2026-09-11, 4 concepts): `substitution-method`, `elimination-method`, `system-3var`, `factoring`; Wave 8 (2026-09-11, 3 concepts): `factoring-gcf`, `factoring-special`, `rational-expressions`; Wave 9 (2026-09-11, 4 concepts): `factoring-trinomials`, `rational-expressions-addition`, `rational-expressions-multiplication`, `rational-equations`; Wave 10 (2026-09-11, 1 concept): `quadratic-equation`; Wave 11 (2026-09-11, 2 concepts): `completing-the-square`, `polynomial-roots`; Wave 12 part 1 (2026-09-11, 1 concept): `quadratic-formula`; Wave 12 part 2 (2026-09-11, 2 concepts): `discriminant`, `rational-root-theorem`; Wave 12 part 3 (2026-09-11, 3 concepts): `fundamental-theorem-algebra`, `polynomial-inequality`, `vietas-formulas`; Wave 13 (2026-09-11, 2 concepts): `complex-polynomial-roots`, `rational-inequality`; Batch 15 (2026-09-11, 1 concept): `exponential-function`; Batch 16 (2026-09-11, 2 concepts): `logarithm`, `exponential-equations`; Batch 17 (2026-09-11, 3 concepts): `binomial-theorem`, `logarithm-properties`, `natural-logarithm`; Batch 18 (2026-09-11, 3 concepts, FINAL): `change-of-base`, `logarithmic-equations`, `pascals-triangle`; all Blueprint-grounded, reused by reference). 20 `math.disc.*` entries (**IN PROGRESS, standalone campaign since math.alg's certification** —
 Batch 14 (2026-09-11, 1 concept): `counting-principles`; Batch 15 (2026-09-11, 1 concept):
 `permutations`; Batch 16 (2026-09-11, 1 concept): `combinations`; Batch 19 (2026-09-11, 5
 concepts): `combinatorics`, `pigeonhole`, `stars-bars`, `inclusion-exclusion`,
@@ -10986,3 +10986,72 @@ targeted tests `mathPackageCorpus.test.ts` + `mathematicsAssetContract.test.ts` 
 Both new entries' heading structure diffed clean against `math.alg.like-terms.md` on the first
 pass (0 diffs each). No Physics, Chemistry, English, Biology, Computer Science, KG, Blueprint, or
 runtime file was modified.
+
+### Batch 70 — ordinary and exponential generating functions, complexity classes: closes math.disc down to its final math.linalg-blocked concept (2026-09-13)
+
+Re-fetched `main` (0 divergence, clean). Re-computed the frontier fresh — `math.disc` had exactly
+the 3 candidates predicted at the end of Batch 69 (`ogf`, `egf`, `complexity-classes`); `math.calc`
+and `math.graph` unchanged at 0 ready (both PARKED). A broader all-domain check found `math.linalg`
+(0/16, entirely unstarted) now holds 1 ready candidate, `math.linalg.vector` — not selected this
+batch. Authored all 3 math.disc candidates, closing the ENTIRE frontier available at batch start
+with none deferred.
+
+`math.disc.ogf` (requires `generating-functions`) specializes that concept's coefficient-carries-
+the-meaning idea for unlabeled structures: OGF products are CONVOLUTIONS
+($c_n=\sum_{k=0}^na_kb_{n-k}$), never term-by-term multiplication; partial fraction decomposition
+of a rational OGF recovers exactly the closed-form solutions `math.disc.linear-recurrence` produces
+via characteristic roots, reached by a completely different algebraic route. 3 misconceptions
+independently classified: MC-1 OGF-PRODUCT-TREATED-AS-POINTWISE-MULTIPLICATION (Type 1,
+Foundational), MC-2 PARTIAL-FRACTION-CONSTANTS-MISCOMPUTED (Type 1, Moderate), MC-3
+OGF-COEFFICIENT-EXTRACTION-INDEX-CONFUSED (Type 4, Moderate).
+
+`math.disc.egf` (requires `generating-functions`) develops the labeled-structure counterpart:
+dividing by $n!$ is what makes EGFs the natural tool once the $n$ elements are individually
+distinguishable; EGF products carry an EXTRA binomial weight ($b_n=\sum_{k=0}^n\binom nkb_k^{(1)}
+b_{n-k}^{(2)}$) that a plain OGF-style convolution would miss entirely; $e^x$ is identified as "one
+way to form a labeled block," previewing (not deriving) its composition into $e^{e^x-1}$, the
+Bell-number EGF, and substantively cross-referencing the already-authored `math.disc.stirling-
+numbers`' own set-partition structure. 3 misconceptions independently classified: MC-1
+EGF-PRODUCT-COMPUTED-AS-PLAIN-CONVOLUTION (Type 1, Foundational — the exact EGF analog of `ogf`'s
+own MC-1 one level deeper, cross-referenced), MC-2 EGF-COEFFICIENT-EXTRACTION-CONFUSED-WITH-OGF
+(Type 1, Foundational), MC-3 LABELED-VS-UNLABELED-STRUCTURE-TYPE-MISJUDGED (Type 5, Moderate).
+
+`math.disc.complexity-classes` (requires `algorithm-complexity`) defines $P$/$NP$/NP-completeness:
+$NP$-membership is about VERIFICATION ease, never solving difficulty; NP-completeness requires
+BOTH being in $NP$ and universal polynomial-time reducibility from every other NP problem; $P$ vs.
+$NP$ remains a genuinely OPEN question, widely believed but formally unproven. 3 misconceptions
+independently classified: MC-1 NP-MEMBERSHIP-CONFLATED-WITH-INHERENT-DIFFICULTY (Type 3, language
+contamination from "NP" as casual shorthand for "very hard," Foundational), MC-2
+P-NOT-EQUAL-NP-TREATED-AS-PROVEN-FACT (Type 1, Foundational), MC-3
+NP-COMPLETE-CONFUSED-WITH-NP-HARD-OR-WITH-ALL-OF-NP (Type 5, Moderate). **Genuine cross-domain
+cross-link substantively incorporated, not merely flagged**: `math.found.conjecture` (already
+authored, part of the CERTIFIED math.found domain) is confirmed present via `ls` and its
+theorem-vs-conjecture, belief-vs-proof distinction is directly reused as this entry's own Teaching
+Action A03/MC-2 repair — closing the loop back to Foundations at the very frontier of the domain.
+
+All 3 concepts zero Blueprint/KG metadata discrepancy on every field. `math.disc` **28/32 → 31/32**
+— only `graph-representation` remains in the domain, blocked on unauthored `math.linalg.matrix`,
+PARKED alongside `math.calc` (only `change-of-variables`, blocked on `math.linalg.determinant`)
+and `math.graph` (its final 3, two blocked on `math.linalg.eigenvalues`/
+`math.prob.probability-axioms`). Mathematics **496/908 → 499/908**, 409 remaining.
+
+Fresh frontier computed after this batch (all four fronts re-checked): `math.disc` 0 ready
+(unchanged PARKED); `math.calc` 0 ready (unchanged PARKED); `math.graph` 0 ready (unchanged
+PARKED); `math.linalg` 1 ready (`vector`, the domain's entry node — unchanged from before this
+batch, since none of the 3 authored concepts touch math.linalg). **All three previously-active
+math.disc/math.calc/math.graph fronts are now simultaneously PARKED for the first time this
+campaign, and all converge on the single unstarted `math.linalg` domain as the path back in** —
+opening it is the clear next step for a future batch.
+
+Full per-concept detail above. All tracking files updated in the same commit: `ROADMAP.md`
+Section 1 totals, the `math.disc` domain row, and the domain-certification summary line (now
+describing the three-way parked convergence on `math.linalg`); `COVERAGE.md`'s mathematics summary
+row and this Delivery history entry; `CLAUDE.md`'s campaign section. `EDUCATIONAL_BRAIN_INDEX.md`
+and `QUALITY.md` again deferred (same generated-artifact rationale as prior batches). Validated:
+`npx tsx scripts/validate-knowledge-graph.ts docs/mathematics/kg/graph.json` PASS, 908/908
+reachable, 0 failures, 0 warnings (KG file untouched); `scripts/math/state.ts` confirms math.disc
+31/32, mathematics 499/908, 8 EB-certified domains unchanged; `npx tsc --noEmit` clean; targeted
+tests `mathPackageCorpus.test.ts` + `mathematicsAssetContract.test.ts` 479/479 passed. All 3 new
+entries' heading structure diffed clean against `math.alg.like-terms.md` on the first pass (0
+diffs each). No Physics, Chemistry, English, Biology, Computer Science, KG, Blueprint, or runtime
+file was modified.
