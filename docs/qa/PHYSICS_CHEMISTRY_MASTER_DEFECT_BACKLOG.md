@@ -570,3 +570,73 @@ the harness's Git Development Branch Requirements — not `main`):
 This document supersedes `PHYSICS_CHEMISTRY_REAL_STUDENT_DEFECTS.md` as
 the current status reference; that file is left unmodified as the
 original audit record, per its own "read-only audit deliverable" framing.
+
+---
+
+## 2026-09-13 — ARCHITECTURE: authoritative teaching content now reaches the runtime
+
+Not a `PCD-*` entry. This is the delivery layer several `PCD-*` entries
+depended on without any of them naming it: authored Educational Brain
+knowledge was being silently discarded between the corpus and the prompt.
+Recorded here so a future session does not re-diagnose a CONTENT gap as a
+runtime defect, or the reverse.
+
+**Two independent silent-loss defects, both measured over all 1,169 EB
+entries, not sampled.**
+
+| | before | after |
+|---|---|---|
+| misconception candidates authored | 3,052 | 3,052 |
+| misconceptions parsed | **1,220** | **3,052** |
+| files parsing to ZERO | **706 (60%)** | **0** |
+| files parsing partially | 1 | 0 |
+| Core Understanding chars exposed | **22.7%** | **80.3%** |
+| entries silently dropping governing language | **794** | **0 (188 now REPORTED)** |
+
+Per subject, misconceptions before → after: chemistry 198 → 430, english
+5 → 444, mathematics 798 → 1,528, physics 219 → 650.
+
+**Cause 1 — the parser was stricter than the corpus in three ways**: it
+required a dash where authors write a parenthetical type qualifier
+(`**MC-3 (Type 2 — perceptual intuition)**:`), required a bold head where
+authors write `### MC-1: TITLE`, and required a numeric id where authors
+write `MC-A` or a descriptive slug. **Cause 2** — the only path from the
+authored Core Understanding section to the model was the opening hook's
+first paragraph cut at 400 chars, so every governing condition past that
+boundary (only-if / must / never / conserved / sign convention / breaks
+down) was dropped without trace.
+
+**Fix:** `src/lib/curriculum/ebKnowledge.ts` — one grammar, one counter,
+one parser, one section-aware packer, one typed
+`KnowledgeExposureFailure`. Raising 400 to a bigger number was explicitly
+rejected: it moves the boundary rather than removing it. Grading, mastery
+and assessment authority are untouched; provenance is internal and
+asserted never to reach learner-facing text; the failure type carries no
+field that could hold a substitute claim.
+
+### The content/architecture split (do not conflate these)
+
+`chem.bond.resonance` was the calibration case. **Architecture, now
+fixed:** its formal-charge formula and its three dominant-contributor
+ranking rules were authored all along and never reached the model — only
+the first 400 characters of the hook did. They now do (1,720 of 2,636
+authored characters exposed; verified by direct assertion, not inferred).
+
+**CONTENT, still a gap, correctly NOT invented by the runtime:** the
+formal-charge *checksum* — "the formal charges of a valid resonance
+structure sum to the overall charge of the species" — is absent from both
+`educational-brain/concepts/chemistry/chem.bond.resonance.md` and
+`docs/curriculum/blueprints/chem.bond.resonance.md` (grep confirms zero
+occurrences in either). The runtime must not synthesise it. The new
+CORE UNDERSTANDING prompt channel states the rule that keeps this honest:
+*do NOT invent a condition, exception, limit or convention that is not
+stated here*. Authoring it is Curriculum Production Pipeline work, owned
+by that pipeline, not by the runtime.
+
+**The general form of that split:** after this change, a concept the tutor
+teaches thinly is a content question (the section is short or the rule was
+never written) — it is no longer ambiguous with a delivery question (the
+rule exists and never arrived). The 188 entries that still drop a
+governing unit are the remaining delivery residue, and they are
+enumerable: they emit `[learn/chat] KNOWLEDGE_EXPOSURE_FAILURE=` at
+runtime rather than failing silently.
