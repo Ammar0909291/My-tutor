@@ -4637,6 +4637,39 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   genuinely multi-session campaign; continuation should verify state
   via `scripts/math/state.ts` fresh each time rather than trusting
   any number recorded here.
+- **Batch 65 — one concept per open front: Taylor series, shortest
+  paths, the harmonic series, Stirling numbers** (2026-09-13):
+  re-computed the frontier fresh across all 4 open fronts —
+  `math.calc` had 1 ready (`taylor-series`), `math.seq` had 6, `math.disc`
+  had 5, `math.graph` had 1 (`shortest-path`, discovered in Batch 64).
+  Selected one concept per front. `taylor-series` frames the Taylor
+  series as `linearization`'s own extension with forced (not freely
+  chosen) coefficients from `power-series`'s general form; caught and
+  fixed, before commit, a second genuine Blueprint/KG discrepancy on
+  `mastery_threshold`(0.85 vs 0.75)/`estimated_hours`(8 vs 12), on top
+  of the already-documented `unlocks` discrepancy. `shortest-path`
+  covers Dijkstra/Bellman-Ford/Floyd-Warshall, closing math.graph's
+  Batch-64-discovered reopening (0 candidates remain — PARKED again).
+  `harmonic-series` derives Oresme's divergence proof and the
+  Euler–Mascheroni approximation; one genuine `unlocks` discrepancy
+  (Blueprint names 2 concepts, KG lists none), resolved toward the KG.
+  `stirling-numbers` distinguishes second-kind $S(n,k)$ (unordered
+  partitions) from first-kind $s(n,k)$ (cyclic permutations) via the
+  $S(4,2)=7$ vs. $s(4,2)=11$ divergence; zero discrepancy. `math.calc`
+  **71/76 → 72/76**. `math.graph` **13/16 → 14/16**. `math.seq`
+  **14/21 → 15/21**. `math.disc` **22/32 → 23/32**. Mathematics
+  **478/908 → 482/908**, 426 remaining. Fresh frontier: `math.calc` 2
+  ready (`maclaurin-series`, `taylor-remainder`); `math.seq` 5 ready;
+  `math.disc` 4 ready; `math.graph` 0 ready (PARKED). Validated: KG
+  validator PASS (908/908 reachable, file untouched), `scripts/math/
+  state.ts` confirms math.calc 72/76, math.graph 14/16, math.seq
+  15/21, math.disc 23/32, mathematics 482/908 (7 EB-certified domains
+  unchanged), `tsc --noEmit` clean, targeted tests 479/479 passed, all
+  4 heading structures diffed clean on the first pass. No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file
+  touched. This is a genuinely multi-session campaign; continuation
+  should verify state via `scripts/math/state.ts` fresh each time
+  rather than trusting any number recorded here.
 
 ## Physics Teacher Migration Architecture V2 — AUDITED, NOT ADOPTED (2026-09-12)
 

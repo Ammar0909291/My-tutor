@@ -11,7 +11,7 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 478 | **Seven domains CERTIFIED (math.trig joined 2026-09-13), math.disc REOPENED at 22/32 (5 ready), math.graph REOPENED at 13/16 (1 ready — `shortest-path`, discovered via `math.disc.asymptotic-notation`'s own Batch-63 authoring), math.calc 71/76 (Batch 64 closed `power-series` — 1 ready), math.seq 14/21 (Batch 64 closed `divergence-test` — 6 ready).** 82 `math.found.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 69 `math.geom.*` (**COMPLETE, DOMAIN CERTIFIED** — the final 13 entries were restored by commit `0d2c76dd`'s Wave 0 recovery, which this row previously did not reflect) + 36 `math.nt.*` (**COMPLETE, DOMAIN CERTIFIED 2026-08-12** — the domain's final 8 concepts, `prime-distribution`, `continued-fractions`, `analytic-number-theory`, `prime-number-theorem`, `riemann-hypothesis`, `algebraic-number-theory`, `algebraic-integers`, `number-fields`, were authored this session, ending the PARKED status this row previously recorded) + 59 `math.alg.*` (**COMPLETE, DOMAIN CERTIFIED 2026-09-11** — Wave 1 (2026-08-12, 11 concepts): `expression`, `equation`, `term`, `coefficient`, `exponent-rules`, `polynomial`, `degree`, `zero-exponent`, `negative-exponent`, `solution-set`, `inequality`; Wave 2 (2026-08-12, 1 concept): `like-terms`; Wave 3 (2026-09-11, 3 concepts): `simplification`, `polynomial-operations`, `radicals`; Wave 4 (2026-09-11, 5 concepts): `linear-equation-1var`, `polynomial-division`, `fractional-exponent`, `simplifying-radicals`, `radical-equations`; Wave 5 (2026-09-11, 5 concepts): `inequality-1var`, `absolute-value-equations`, `linear-equation-2var`, `remainder-theorem`, `rationalizing-denominators`; Wave 6 (2026-09-11, 3 concepts): `inequality-2var`, `system-linear-equations`, `factor-theorem`; Wave 7 (2026-09-11, 4 concepts): `substitution-method`, `elimination-method`, `system-3var`, `factoring`; Wave 8 (2026-09-11, 3 concepts): `factoring-gcf`, `factoring-special`, `rational-expressions`; Wave 9 (2026-09-11, 4 concepts): `factoring-trinomials`, `rational-expressions-addition`, `rational-expressions-multiplication`, `rational-equations`; Wave 10 (2026-09-11, 1 concept): `quadratic-equation`; Wave 11 (2026-09-11, 2 concepts): `completing-the-square`, `polynomial-roots`; Wave 12 part 1 (2026-09-11, 1 concept): `quadratic-formula`; Wave 12 part 2 (2026-09-11, 2 concepts): `discriminant`, `rational-root-theorem`; Wave 12 part 3 (2026-09-11, 3 concepts): `fundamental-theorem-algebra`, `polynomial-inequality`, `vietas-formulas`; Wave 13 (2026-09-11, 2 concepts): `complex-polynomial-roots`, `rational-inequality`; Batch 15 (2026-09-11, 1 concept): `exponential-function`; Batch 16 (2026-09-11, 2 concepts): `logarithm`, `exponential-equations`; Batch 17 (2026-09-11, 3 concepts): `binomial-theorem`, `logarithm-properties`, `natural-logarithm`; Batch 18 (2026-09-11, 3 concepts, FINAL): `change-of-base`, `logarithmic-equations`, `pascals-triangle`; all Blueprint-grounded, reused by reference). 20 `math.disc.*` entries (**IN PROGRESS, standalone campaign since math.alg's certification** —
+| mathematics | 908 | 482 | **Seven domains CERTIFIED (math.trig joined 2026-09-13), math.calc 72/76 (Batch 65 closed `taylor-series` — 2 ready), math.seq 15/21 (Batch 65 closed `harmonic-series` — 5 ready), math.disc 23/32 (Batch 65 closed `stirling-numbers` — 4 ready), math.graph 14/16 (Batch 65 closed `shortest-path` — 0 ready, PARKED again).** 82 `math.found.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 69 `math.geom.*` (**COMPLETE, DOMAIN CERTIFIED** — the final 13 entries were restored by commit `0d2c76dd`'s Wave 0 recovery, which this row previously did not reflect) + 36 `math.nt.*` (**COMPLETE, DOMAIN CERTIFIED 2026-08-12** — the domain's final 8 concepts, `prime-distribution`, `continued-fractions`, `analytic-number-theory`, `prime-number-theorem`, `riemann-hypothesis`, `algebraic-number-theory`, `algebraic-integers`, `number-fields`, were authored this session, ending the PARKED status this row previously recorded) + 59 `math.alg.*` (**COMPLETE, DOMAIN CERTIFIED 2026-09-11** — Wave 1 (2026-08-12, 11 concepts): `expression`, `equation`, `term`, `coefficient`, `exponent-rules`, `polynomial`, `degree`, `zero-exponent`, `negative-exponent`, `solution-set`, `inequality`; Wave 2 (2026-08-12, 1 concept): `like-terms`; Wave 3 (2026-09-11, 3 concepts): `simplification`, `polynomial-operations`, `radicals`; Wave 4 (2026-09-11, 5 concepts): `linear-equation-1var`, `polynomial-division`, `fractional-exponent`, `simplifying-radicals`, `radical-equations`; Wave 5 (2026-09-11, 5 concepts): `inequality-1var`, `absolute-value-equations`, `linear-equation-2var`, `remainder-theorem`, `rationalizing-denominators`; Wave 6 (2026-09-11, 3 concepts): `inequality-2var`, `system-linear-equations`, `factor-theorem`; Wave 7 (2026-09-11, 4 concepts): `substitution-method`, `elimination-method`, `system-3var`, `factoring`; Wave 8 (2026-09-11, 3 concepts): `factoring-gcf`, `factoring-special`, `rational-expressions`; Wave 9 (2026-09-11, 4 concepts): `factoring-trinomials`, `rational-expressions-addition`, `rational-expressions-multiplication`, `rational-equations`; Wave 10 (2026-09-11, 1 concept): `quadratic-equation`; Wave 11 (2026-09-11, 2 concepts): `completing-the-square`, `polynomial-roots`; Wave 12 part 1 (2026-09-11, 1 concept): `quadratic-formula`; Wave 12 part 2 (2026-09-11, 2 concepts): `discriminant`, `rational-root-theorem`; Wave 12 part 3 (2026-09-11, 3 concepts): `fundamental-theorem-algebra`, `polynomial-inequality`, `vietas-formulas`; Wave 13 (2026-09-11, 2 concepts): `complex-polynomial-roots`, `rational-inequality`; Batch 15 (2026-09-11, 1 concept): `exponential-function`; Batch 16 (2026-09-11, 2 concepts): `logarithm`, `exponential-equations`; Batch 17 (2026-09-11, 3 concepts): `binomial-theorem`, `logarithm-properties`, `natural-logarithm`; Batch 18 (2026-09-11, 3 concepts, FINAL): `change-of-base`, `logarithmic-equations`, `pascals-triangle`; all Blueprint-grounded, reused by reference). 20 `math.disc.*` entries (**IN PROGRESS, standalone campaign since math.alg's certification** —
 Batch 14 (2026-09-11, 1 concept): `counting-principles`; Batch 15 (2026-09-11, 1 concept):
 `permutations`; Batch 16 (2026-09-11, 1 concept): `combinations`; Batch 19 (2026-09-11, 5
 concepts): `combinatorics`, `pigeonhole`, `stars-bars`, `inclusion-exclusion`,
@@ -10367,3 +10367,158 @@ clean; targeted tests `mathPackageCorpus.test.ts` +
 heading structure diffed clean against `math.alg.like-terms.md` on the
 first pass (0 diffs each). No Physics, Chemistry, English, Biology,
 Computer Science, KG, Blueprint, or runtime file was modified.
+
+### Batch 65 — one concept per open front: Taylor series, shortest paths, the harmonic series, Stirling numbers (2026-09-13)
+
+Fetch clean (0/0), `scripts/math/state.ts` confirmed 478/908 matching
+Batch 64's end state exactly. Re-computed the frontier fresh across all
+four currently-open fronts — `math.calc` had 1 candidate
+(`taylor-series`), `math.seq` had 6 (`alternating-series`,
+`comparison-test`, `harmonic-series`, `integral-test`, `ratio-test`,
+`root-test`), `math.disc` had 5 (`catalan-numbers`,
+`divide-conquer-recurrence`, `generating-functions`,
+`linear-recurrence`, `stirling-numbers`), `math.graph` had 1
+(`shortest-path`, discovered ready during Batch 64's own tracking
+update). Selected one concept per front — `taylor-series`,
+`shortest-path`, `harmonic-series`, `stirling-numbers` — deliberately
+spreading this batch across every currently-open domain rather than
+deepening a single one, since each front had only 1 tightly-coupled
+candidate or a genuinely independent selection to make.
+
+**`math.calc.taylor-series`** (requires `power-series`+
+`higher-order-derivatives`+`linearization`, all long-authored,
+advanced/apply, mastery_threshold 0.75, estimated_hours 12).
+Blueprint-grounded, reused by reference. Frames the Taylor series as
+`linearization`'s own degree-1 approximation directly extended with
+successively higher-derivative correction terms drawn from
+`higher-order-derivatives`, and as the specific instance of
+`power-series`'s general form where the coefficients are forced by the
+function's own derivatives rather than freely chosen. States
+(orientation level) that convergence and equality to $f$ are distinct
+questions, illustrated via the geometric series converging to
+$1/(1-x)$ within $|x|<1$ but diverging at $x=2$ despite $f(2)=-1$ being
+well-defined. Three misconceptions, independently classified (the
+Blueprint carries severity labels but no birth-type column): MC-1 Type
+5 instruction-induced (TAYLOR-SERIES-ASSUMED-UNRELATED-TO-
+LINEARIZATION, the topic's typical standalone presentation obscuring
+its continuation of linearization); MC-2 Type 1 overgeneralization
+(TAYLOR-COEFFICIENTS-ASSUMED-FREELY-CHOSEN, importing `power-series`'s
+own free-coefficient framing); MC-3 Type 1 overgeneralization
+(CONVERGENCE-ASSUMED-TO-GUARANTEE-EQUALITY-EVERYWHERE). **Two genuine
+Blueprint/KG metadata discrepancies found, both resolved toward the
+KG, the second caught and corrected before commit**: (1) the Blueprint
+states "Unlocks: none listed," but the KG lists
+`math.calc.maclaurin-series`; (2) the Blueprint's own metadata table
+states `mastery_threshold: 0.85`/`estimated_hours: 8`, but the KG
+states `0.75`/`12` — this second discrepancy was initially missed in
+the first draft (the Identity section copied the Blueprint's values
+verbatim) and was caught and corrected during this same batch's
+authoring pass, before any validation or commit, by cross-checking the
+file against the KG-query output already captured for this concept.
+
+**`math.graph.shortest-path`** (requires `graph`+
+`math.disc.asymptotic-notation`, unlocks `maximum-flow`, cross_links
+none, proficient/apply, mastery_threshold 0.85, estimated_hours 6).
+Blueprint-grounded, reused by reference. Covers Dijkstra (non-negative
+weights only, greedy correctness), Bellman-Ford (any weights, exactly
+$n-1$ relaxation rounds plus one detection round for negative cycles),
+and Floyd-Warshall (all-pairs dynamic programming, negative-cycle
+detection ONLY via a negative diagonal entry, never an off-diagonal
+one). Three misconceptions, independently classified: MC-1 Critical
+Type 1 overgeneralization (DIJKSTRA-WORKS-WITH-NEGATIVE-EDGES, the
+single most consequential misconception in the entry — Dijkstra's
+greedy finalization step is provably unsound once a later negative
+edge can undercut an already-finalized distance); MC-2 Foundational
+Type 1 overgeneralization (BELLMAN-FORD-NEEDS-MORE-THAN-N-MINUS-1-
+ROUNDS, importing an intuitive "keep going until nothing changes"
+habit past the point where the algorithm's own correctness proof
+guarantees convergence); MC-3 Moderate Type 4 notation-induced
+(FLOYD-WARSHALL-NEGATIVE-CYCLE-FROM-OFF-DIAGONAL, the full distance
+matrix's visual uniformity obscuring that only self-distances carry
+negative-cycle information). Zero Blueprint/KG metadata discrepancy.
+**One genuine one-directional `requires`/`unlocks` asymmetry recorded**
+(not a contradiction): this entry's own `unlocks` names
+`math.graph.maximum-flow`, but that already-authored entry (Batch 26)
+does not name `shortest-path` back in its own `requires` (its actual
+prerequisite is `math.graph.connectivity`) — the KG's `unlocks` field
+is not required to mirror `requires` exactly, so this is recorded as a
+forward note, not fixed.
+
+**`math.seq.harmonic-series`** (requires `series-convergence`,
+unlocks none — see discrepancy below — cross_links none,
+advanced/analyze, mastery_threshold 0.75, estimated_hours 4).
+Blueprint-grounded, reused by reference. Derives Oresme's grouping
+proof of divergence ($S_{2^k}>1+k/2\to\infty$), states the
+Euler–Mascheroni approximation $H_n\approx\ln n+\gamma$
+($\gamma\approx0.5772$) as the precise rate of that divergence, and
+establishes the p-series watershed at $p=1$ (the harmonic series as
+the exact boundary case). Three misconceptions, independently
+classified: MC-1 Foundational Type 1 overgeneralization (HARMONIC-
+CONVERGES-BECAUSE-TERMS-VANISH, cross-referenced to both
+`series-convergence`'s own MC-1 and `divergence-test`'s own MC-1 as the
+same necessary-not-sufficient mechanism); MC-2 Type 2 perceptual
+intuition (HARMONIC-CONVERGES-SLOWLY-TO-FINITE-LIMIT, cross-referenced
+to `divergence-test`'s own MC-3 — the identical visual-slowness
+intuition already documented there); MC-3 Type 3 language
+contamination (PARTIAL-SUM-GROWS-LIKE-TERM, cross-referenced to
+`divergence-test`'s own MC-2's shared-notation mechanism). **Genuine
+Blueprint/KG metadata discrepancy found, resolved toward the KG**: the
+Blueprint states "Unlocks: `math.seq.comparison-test`,
+`math.seq.absolute-convergence`," but the KG lists `unlocks: []`.
+
+**`math.disc.stirling-numbers`** (requires `combinations`+
+`recurrence-relation`, unlocks none, cross_links none, expert/analyze,
+mastery_threshold 0.7, estimated_hours 5). Blueprint-grounded, reused
+by reference. Distinguishes Stirling numbers of the second kind
+$S(n,k)$ (partitions of an $n$-set into $k$ non-empty UNORDERED
+groups) from the first kind $s(n,k)$ (permutations of $n$ elements
+into $k$ CYCLES, which carry internal cyclic order), derives both
+recurrences from `recurrence-relation`'s own case-split technique, and
+shows the coefficient difference ($k$ vs. $(n-1)$) traces directly to
+the number of distinct insertion points for a new element — one per
+unordered group for the second kind, one per already-placed element
+for the first kind's cyclic positions. Three misconceptions,
+independently classified (the Blueprint carries no birth-type column):
+MC-1 Foundational Type 1 overgeneralization (FIRST-AND-SECOND-KIND-
+STIRLING-NUMBERS-CONFLATED, generalizing from the coincidental small-
+case agreement $S(3,2)=s(3,2)=3$ without checking a case where the two
+kinds genuinely diverge, $S(4,2)=7$ vs. $s(4,2)=11$); MC-2 Foundational
+Type 4 notation-induced (RECURRENCE-COEFFICIENT-CONFUSED-BETWEEN-THE-
+TWO-KINDS, the two nearly-identical recurrences differing in exactly
+one symbol position); MC-3 Moderate Type 6 analogy overextension
+(PARTITION-COUNTED-WITH-INTERNAL-ORDER, importing `permutations`-style
+"order matters" intuition into the second kind's genuinely unordered
+context). Zero Blueprint/KG metadata discrepancy.
+
+`math.calc` **71/76 → 72/76**. `math.graph` **13/16 → 14/16**.
+`math.seq` **14/21 → 15/21**. `math.disc` **22/32 → 23/32**.
+Mathematics **478/908 → 482/908**, 426 remaining.
+
+Fresh frontier computed after this batch: `math.calc` has 2 candidates
+ready (`maclaurin-series`, `taylor-remainder`, both requiring only
+`taylor-series`); `math.seq` has 5 candidates ready
+(`alternating-series`, `comparison-test`, `integral-test`,
+`ratio-test`, `root-test`); `math.disc` has 4 candidates ready
+(`catalan-numbers`, `divide-conquer-recurrence`,
+`generating-functions`, `linear-recurrence`); `math.graph` has 0
+candidates ready — its remaining 2 concepts (`algebraic-graph-theory`,
+`random-graph`) each need `math.linalg.eigenvalues`/
+`math.prob.probability-axioms`, neither yet authored — PARKED again.
+
+Full per-concept detail above. All tracking files updated in the same
+commit: `ROADMAP.md` Section 1 totals and the `math.calc`/`math.seq`/
+`math.disc`/`math.graph` domain rows plus the domain-certification
+summary line; `COVERAGE.md`'s mathematics summary row and this
+Delivery history entry; `CLAUDE.md`'s campaign section.
+`EDUCATIONAL_BRAIN_INDEX.md` and `QUALITY.md` again deferred (same
+generated-artifact rationale as prior batches). Validated: `npx tsx
+scripts/validate-knowledge-graph.ts docs/mathematics/kg/graph.json`
+PASS, 908/908 reachable, 0 failures, 0 warnings (KG file untouched);
+`scripts/math/state.ts` confirms math.calc 72/76, math.graph 14/16,
+math.seq 15/21, math.disc 23/32, mathematics 482/908, 7 EB-certified
+domains unchanged; `npx tsc --noEmit` clean; targeted tests
+`mathPackageCorpus.test.ts` + `mathematicsAssetContract.test.ts`
+479/479 passed. All 4 new entries' heading structure diffed clean
+against `math.alg.like-terms.md` on the first pass (0 diffs each). No
+Physics, Chemistry, English, Biology, Computer Science, KG, Blueprint,
+or runtime file was modified.
