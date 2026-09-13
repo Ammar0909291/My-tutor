@@ -4670,6 +4670,41 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   touched. This is a genuinely multi-session campaign; continuation
   should verify state via `scripts/math/state.ts` fresh each time
   rather than trusting any number recorded here.
+- **Batch 66 — Maclaurin series, the Taylor remainder, alternating
+  series, comparison tests** (2026-09-13): re-computed the frontier
+  fresh — `math.calc` had 2 ready (`maclaurin-series`,
+  `taylor-remainder`, both children of `taylor-series`), `math.seq`
+  had 5. Authored both math.calc concepts (closing that frontier
+  entirely) plus the two single-prerequisite math.seq candidates
+  (`alternating-series`, `comparison-test`), deferring `integral-test`/
+  `ratio-test`/`root-test`. `maclaurin-series` frames the Maclaurin
+  series as `taylor-series`'s $a=0$ special case, deriving the
+  odd/even power-parity pattern from $\sin$/$\cos$'s own symmetry.
+  `taylor-remainder` distinguishes the true bounded error from the
+  next series term; its `math.num.error-analysis` cross-link handled
+  in independence mode (`math.num` unstarted). `alternating-series`
+  states the Leibniz test as a specialized tool distinct from
+  `series-convergence`'s general definition; caught a genuine
+  `mastery_threshold` discrepancy (0.85 vs 0.75), resolved toward the
+  KG. `comparison-test` states DCT/LCT with correct-direction and
+  boundary-case reasoning; caught a genuine `unlocks` discrepancy
+  (Blueprint names 3 concepts, KG lists none), resolved toward the KG.
+  `math.calc` **72/76 → 74/76**. `math.seq` **15/21 → 17/21**.
+  Mathematics **482/908 → 486/908**, 422 remaining. Fresh frontier:
+  `math.calc` 0 ready (remaining 2 need `math.seq.ratio-test` — in
+  math.seq's own current frontier, reopening math.calc once authored —
+  and `math.linalg.determinant`, unauthored); `math.seq` 4 ready
+  (`absolute-convergence`, `integral-test`, `ratio-test`,
+  `root-test`); `math.disc` unchanged 4 ready; `math.graph` unchanged
+  0 ready (PARKED). Validated: KG validator PASS (908/908 reachable,
+  file untouched), `scripts/math/state.ts` confirms math.calc 74/76,
+  math.seq 17/21, mathematics 486/908 (7 EB-certified domains
+  unchanged), `tsc --noEmit` clean, targeted tests 479/479 passed, all
+  4 heading structures diffed clean on the first pass. No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file
+  touched. This is a genuinely multi-session campaign; continuation
+  should verify state via `scripts/math/state.ts` fresh each time
+  rather than trusting any number recorded here.
 
 ## Topic/meaning loss — the extractor's default was YES (2026-09-13)
 
