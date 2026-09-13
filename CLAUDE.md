@@ -4705,6 +4705,38 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   touched. This is a genuinely multi-session campaign; continuation
   should verify state via `scripts/math/state.ts` fresh each time
   rather than trusting any number recorded here.
+- **Batch 67 — math.seq FINAL wave, DOMAIN CERTIFIED (8th); reopens
+  math.calc** (2026-09-13): re-computed the frontier fresh — `math.seq`
+  had exactly the 4 candidates predicted at the end of Batch 66
+  (`absolute-convergence`, `integral-test`, `ratio-test`, `root-test`).
+  Authored ALL 4, closing the domain entirely. `absolute-convergence`
+  formalizes the alternating-harmonic gap into three convergence
+  classes plus the Riemann Rearrangement Theorem. `integral-test`
+  emphasizes the integral's value and the series' sum are genuinely
+  different numbers ($\int1/x^2=1$ vs $\sum1/n^2=\pi^2/6$); its
+  cross-link to the already-authored `math.calc.improper-integrals` is
+  genuinely incorporated, not merely flagged. `ratio-test` derives
+  that every p-series gives $L=1$, explaining why the test fails there.
+  `root-test` proves $\lim n^{1/n}=1$ and establishes it as strictly
+  stronger than the ratio test. All 4 carry a genuine Blueprint/KG
+  `unlocks` discrepancy (Blueprint prose names forward relationships
+  the KG's own field doesn't list), resolved toward the KG. **`math.seq`
+  reaches 21/21 — DOMAIN CERTIFIED**, the eighth domain. Authoring
+  `ratio-test` also REOPENS `math.calc` (`radius-of-convergence`
+  requires it). `math.calc` unchanged at **74/76** this batch (no
+  math.calc concept itself authored). Mathematics **486/908 →
+  490/908**, 418 remaining. Fresh frontier: `math.calc` 1 ready
+  (`radius-of-convergence`); `math.disc` unchanged 4 ready; `math.graph`
+  unchanged 0 ready (PARKED). Validated: KG validator PASS (908/908
+  reachable, file untouched), `scripts/math/state.ts` confirms
+  math.calc 74/76, math.seq 21/21 (`ebComplete: true`), mathematics
+  490/908 (8 EB-certified domains, math.seq newly added), `tsc
+  --noEmit` clean, targeted tests 479/479 passed, all 4 heading
+  structures diffed clean on the first pass. No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file
+  touched. This is a genuinely multi-session campaign; continuation
+  should verify state via `scripts/math/state.ts` fresh each time
+  rather than trusting any number recorded here.
 
 ## Topic/meaning loss — the extractor's default was YES (2026-09-13)
 

@@ -11,7 +11,7 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 486 | **Seven domains CERTIFIED (math.trig joined 2026-09-13), math.calc 74/76 (Batch 66 closed `maclaurin-series`+`taylor-remainder` — 0 ready, reopens once `math.seq.ratio-test` is authored), math.seq 17/21 (Batch 66 closed `alternating-series`+`comparison-test` — 4 ready), math.disc 23/32 (4 ready), math.graph 14/16 (PARKED).** 82 `math.found.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 69 `math.geom.*` (**COMPLETE, DOMAIN CERTIFIED** — the final 13 entries were restored by commit `0d2c76dd`'s Wave 0 recovery, which this row previously did not reflect) + 36 `math.nt.*` (**COMPLETE, DOMAIN CERTIFIED 2026-08-12** — the domain's final 8 concepts, `prime-distribution`, `continued-fractions`, `analytic-number-theory`, `prime-number-theorem`, `riemann-hypothesis`, `algebraic-number-theory`, `algebraic-integers`, `number-fields`, were authored this session, ending the PARKED status this row previously recorded) + 59 `math.alg.*` (**COMPLETE, DOMAIN CERTIFIED 2026-09-11** — Wave 1 (2026-08-12, 11 concepts): `expression`, `equation`, `term`, `coefficient`, `exponent-rules`, `polynomial`, `degree`, `zero-exponent`, `negative-exponent`, `solution-set`, `inequality`; Wave 2 (2026-08-12, 1 concept): `like-terms`; Wave 3 (2026-09-11, 3 concepts): `simplification`, `polynomial-operations`, `radicals`; Wave 4 (2026-09-11, 5 concepts): `linear-equation-1var`, `polynomial-division`, `fractional-exponent`, `simplifying-radicals`, `radical-equations`; Wave 5 (2026-09-11, 5 concepts): `inequality-1var`, `absolute-value-equations`, `linear-equation-2var`, `remainder-theorem`, `rationalizing-denominators`; Wave 6 (2026-09-11, 3 concepts): `inequality-2var`, `system-linear-equations`, `factor-theorem`; Wave 7 (2026-09-11, 4 concepts): `substitution-method`, `elimination-method`, `system-3var`, `factoring`; Wave 8 (2026-09-11, 3 concepts): `factoring-gcf`, `factoring-special`, `rational-expressions`; Wave 9 (2026-09-11, 4 concepts): `factoring-trinomials`, `rational-expressions-addition`, `rational-expressions-multiplication`, `rational-equations`; Wave 10 (2026-09-11, 1 concept): `quadratic-equation`; Wave 11 (2026-09-11, 2 concepts): `completing-the-square`, `polynomial-roots`; Wave 12 part 1 (2026-09-11, 1 concept): `quadratic-formula`; Wave 12 part 2 (2026-09-11, 2 concepts): `discriminant`, `rational-root-theorem`; Wave 12 part 3 (2026-09-11, 3 concepts): `fundamental-theorem-algebra`, `polynomial-inequality`, `vietas-formulas`; Wave 13 (2026-09-11, 2 concepts): `complex-polynomial-roots`, `rational-inequality`; Batch 15 (2026-09-11, 1 concept): `exponential-function`; Batch 16 (2026-09-11, 2 concepts): `logarithm`, `exponential-equations`; Batch 17 (2026-09-11, 3 concepts): `binomial-theorem`, `logarithm-properties`, `natural-logarithm`; Batch 18 (2026-09-11, 3 concepts, FINAL): `change-of-base`, `logarithmic-equations`, `pascals-triangle`; all Blueprint-grounded, reused by reference). 20 `math.disc.*` entries (**IN PROGRESS, standalone campaign since math.alg's certification** —
+| mathematics | 908 | 490 | **Eight domains CERTIFIED (math.seq joined 2026-09-13), math.calc 74/76 (REOPENED via `math.seq.ratio-test` — 1 ready: `radius-of-convergence`), math.disc 23/32 (4 ready), math.graph 14/16 (PARKED).** 82 `math.found.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 69 `math.geom.*` (**COMPLETE, DOMAIN CERTIFIED** — the final 13 entries were restored by commit `0d2c76dd`'s Wave 0 recovery, which this row previously did not reflect) + 36 `math.nt.*` (**COMPLETE, DOMAIN CERTIFIED 2026-08-12** — the domain's final 8 concepts, `prime-distribution`, `continued-fractions`, `analytic-number-theory`, `prime-number-theorem`, `riemann-hypothesis`, `algebraic-number-theory`, `algebraic-integers`, `number-fields`, were authored this session, ending the PARKED status this row previously recorded) + 59 `math.alg.*` (**COMPLETE, DOMAIN CERTIFIED 2026-09-11** — Wave 1 (2026-08-12, 11 concepts): `expression`, `equation`, `term`, `coefficient`, `exponent-rules`, `polynomial`, `degree`, `zero-exponent`, `negative-exponent`, `solution-set`, `inequality`; Wave 2 (2026-08-12, 1 concept): `like-terms`; Wave 3 (2026-09-11, 3 concepts): `simplification`, `polynomial-operations`, `radicals`; Wave 4 (2026-09-11, 5 concepts): `linear-equation-1var`, `polynomial-division`, `fractional-exponent`, `simplifying-radicals`, `radical-equations`; Wave 5 (2026-09-11, 5 concepts): `inequality-1var`, `absolute-value-equations`, `linear-equation-2var`, `remainder-theorem`, `rationalizing-denominators`; Wave 6 (2026-09-11, 3 concepts): `inequality-2var`, `system-linear-equations`, `factor-theorem`; Wave 7 (2026-09-11, 4 concepts): `substitution-method`, `elimination-method`, `system-3var`, `factoring`; Wave 8 (2026-09-11, 3 concepts): `factoring-gcf`, `factoring-special`, `rational-expressions`; Wave 9 (2026-09-11, 4 concepts): `factoring-trinomials`, `rational-expressions-addition`, `rational-expressions-multiplication`, `rational-equations`; Wave 10 (2026-09-11, 1 concept): `quadratic-equation`; Wave 11 (2026-09-11, 2 concepts): `completing-the-square`, `polynomial-roots`; Wave 12 part 1 (2026-09-11, 1 concept): `quadratic-formula`; Wave 12 part 2 (2026-09-11, 2 concepts): `discriminant`, `rational-root-theorem`; Wave 12 part 3 (2026-09-11, 3 concepts): `fundamental-theorem-algebra`, `polynomial-inequality`, `vietas-formulas`; Wave 13 (2026-09-11, 2 concepts): `complex-polynomial-roots`, `rational-inequality`; Batch 15 (2026-09-11, 1 concept): `exponential-function`; Batch 16 (2026-09-11, 2 concepts): `logarithm`, `exponential-equations`; Batch 17 (2026-09-11, 3 concepts): `binomial-theorem`, `logarithm-properties`, `natural-logarithm`; Batch 18 (2026-09-11, 3 concepts, FINAL): `change-of-base`, `logarithmic-equations`, `pascals-triangle`; all Blueprint-grounded, reused by reference). 20 `math.disc.*` entries (**IN PROGRESS, standalone campaign since math.alg's certification** —
 Batch 14 (2026-09-11, 1 concept): `counting-principles`; Batch 15 (2026-09-11, 1 concept):
 `permutations`; Batch 16 (2026-09-11, 1 concept): `combinations`; Batch 19 (2026-09-11, 5
 concepts): `combinatorics`, `pigeonhole`, `stars-bars`, `inclusion-exclusion`,
@@ -10655,3 +10655,142 @@ mathematics 486/908, 7 EB-certified domains unchanged; `npx tsc
 heading structure diffed clean against `math.alg.like-terms.md` on the
 first pass (0 diffs each). No Physics, Chemistry, English, Biology,
 Computer Science, KG, Blueprint, or runtime file was modified.
+
+### Batch 67 — math.seq FINAL wave (DOMAIN CERTIFIED, 8th); reopens math.calc (2026-09-13)
+
+Fetch clean (0/0), `scripts/math/state.ts` confirmed 486/908 matching
+Batch 66's end state exactly. Re-computed the frontier fresh —
+`math.seq` had exactly 4 candidates left (`absolute-convergence`,
+`integral-test`, `ratio-test`, `root-test`), matching Batch 66's own
+forward-planning note exactly; `math.calc` had 0 ready (unchanged).
+Authored ALL 4 remaining math.seq concepts, closing the domain
+entirely with none deferred.
+
+**`math.seq.absolute-convergence`** (requires `alternating-series`,
+unlocks none — see discrepancy below — cross_links none,
+advanced/analyze, mastery_threshold 0.7, estimated_hours 5).
+Blueprint-grounded, reused by reference. Formalizes the alternating-
+harmonic-series gap from `alternating-series` into three convergence
+classes (absolutely convergent, conditionally convergent, divergent),
+states and proves absolute convergence implies convergence, gives the
+two-step classification pipeline, and states the Riemann Rearrangement
+Theorem with a concrete numeric demonstration ($\ln2$ vs
+$\frac32\ln2$, same terms reordered). Three misconceptions,
+independently classified from the Blueprint's own trigger/description
+language (no explicit birth-type column): MC-1 Moderate Type 1
+overgeneralization (CONDITIONAL-EQUALS-ABSOLUTE); MC-2 Foundational
+Type 1 overgeneralization (ABSOLUTE-DIVERGENCE-IMPLIES-SERIES-
+DIVERGENCE, the Blueprint's own declared foundational misconception);
+MC-3 Moderate Type 1 overgeneralization (REARRANGEMENT-SAFE-FOR-ALL).
+**Genuine Blueprint/KG discrepancy found, resolved toward the KG**:
+the Blueprint describes forward relationships in prose (power series
+applications) without a formal `unlocks` list; the live KG confirms
+`unlocks: []`.
+
+**`math.seq.integral-test`** (requires `series-convergence`+
+`math.calc.improper-integrals`, unlocks none — see discrepancy below
+— cross_links `math.calc.improper-integrals`, advanced/apply,
+mastery_threshold 0.7, estimated_hours 5). Blueprint-grounded, reused
+by reference. States the Integral Test's three conditions and
+area-bounding proof, emphasizes (as the Blueprint's own declared
+foundational misconception target) that the integral's VALUE and the
+series' SUM are genuinely different numbers sharing only convergence
+behavior ($\int1/x^2=1$ vs $\sum1/n^2=\pi^2/6$), derives the p-series
+test from it, and extends to the logarithmic-denominator family
+$\sum1/(n(\ln n)^p)$ (converges iff $p>1$, one level deeper than the
+ordinary p-series boundary). Three misconceptions, independently
+classified: MC-1 Foundational Type 1 overgeneralization (INTEGRAL-
+EQUALS-SERIES-SUM); MC-2 Moderate Type 5 instruction-induced
+(MONOTONE-NOT-REQUIRED); MC-3 Moderate Type 1 overgeneralization
+(STARTING-INDEX-CHANGES-CONVERGENCE). **Cross-link genuinely
+incorporated, not merely flagged**: verified via `ls` that
+`math.calc.improper-integrals` has an EB entry, so this concept's
+cross-link-probe-mode transfer probe (per the Blueprint's own
+P76_mode) substantively depends on that concept's limit definition of
+an infinite-bound integral. **Genuine Blueprint/KG discrepancy found,
+resolved toward the KG**: the Blueprint's own Component 7 states
+`Unlocks: math.seq.absolute-convergence`, but the live KG confirms
+`unlocks: []`.
+
+**`math.seq.ratio-test`** (requires `series-convergence`, unlocks
+none — see discrepancy below — cross_links none, advanced/apply,
+mastery_threshold 0.75, estimated_hours 5). Blueprint-grounded, reused
+by reference. Derives D'Alembert's Ratio Test from geometric-series
+comparison, states the three-case decision rule (with $L=1$ as
+genuinely inconclusive, not a verdict), and derives — as a single
+general computation, not case-by-case — that EVERY p-series yields
+$L=1$ under this test, explaining structurally why it fails on
+purely polynomial/rational series. Three misconceptions, independently
+classified: MC-1 Foundational Type 1 overgeneralization (RATIO-TEST-
+L=1-MEANS-DIVERGES, the Blueprint's own declared foundational
+misconception — the most frequent error, occurring after an otherwise-
+correct computation); MC-2 High Type 4 notation-induced (FACTORIAL-
+ALGEBRA-ERROR); MC-3 Moderate Type 1 overgeneralization (RATIO-TEST-
+UNIVERSAL). **Genuine Blueprint/KG discrepancy found, resolved toward
+the KG**: the Blueprint's own Component 7 states `Unlocks:
+math.seq.root-test`, but the live KG confirms `unlocks: []` (the two
+concepts do share the sibling prerequisite `series-convergence`, but
+that relationship is not mirrored onto this concept's own `unlocks`
+field). This concept's own authoring is what reopens `math.calc`'s
+frontier (`math.calc.radius-of-convergence` requires it).
+
+**`math.seq.root-test`** (requires `series-convergence`, unlocks
+none — see discrepancy below — cross_links none, advanced/apply,
+mastery_threshold 0.7, estimated_hours 4). Blueprint-grounded, reused
+by reference. Derives Cauchy's Root Test from the same geometric-
+series-comparison idea as the ratio test, states and proves the key
+limit $\lim n^{1/n}=1$ (via the logarithm argument), and formally
+establishes the root test as STRICTLY STRONGER than the ratio test
+while noting the two are usually chosen in practice by whichever
+computation is easier for the series' specific form. Three
+misconceptions, independently classified: MC-1 Moderate Type 1
+overgeneralization (ROOT-AND-RATIO-ALWAYS-SAME); MC-2 Foundational
+Type 4 notation-induced (NTH-ROOT-OF-N-IS-N, the Blueprint's own
+declared foundational misconception — once $\lim n^{1/n}=1$ is
+forgotten, errors cascade through every problem with polynomial
+factors); MC-3 Moderate Type 6 analogy overextension (ROOT-TEST-ON-
+FACTORIAL-SERIES). **Genuine Blueprint/KG discrepancy found, resolved
+toward the KG**: the Blueprint's own Component 7 states `Unlocks:
+math.seq.absolute-convergence`, but the live KG confirms
+`unlocks: []` — the third such `math.seq.*` `unlocks`-field
+discrepancy against the same sibling-relationship pattern this batch.
+
+Authoring all 4 concepts in this batch reaches **`math.seq` 21/21 —
+DOMAIN CERTIFIED**, the eighth mathematics domain after
+math.found/math.geom/math.arith/math.nt/math.alg/math.func/math.trig.
+`math.calc` unchanged at **74/76** this batch (no math.calc concept
+itself authored) but REOPENED as a direct consequence — its own
+`radius-of-convergence` requires `power-series`(long-authored)+
+`ratio-test`(this batch), and is now confirmed topologically ready.
+
+Mathematics **486/908 → 490/908**, 418 remaining.
+
+Fresh frontier computed after this batch: `math.calc` has 1 candidate
+ready (`radius-of-convergence`, requires `power-series`+`ratio-test`,
+both now long-authored) — the domain's OTHER remaining concept,
+`change-of-variables`, still needs `math.linalg.determinant`
+(unauthored); `math.disc` unchanged at 4 candidates ready
+(`catalan-numbers`, `divide-conquer-recurrence`,
+`generating-functions`, `linear-recurrence` — no math.disc concept
+was authored this batch); `math.graph` unchanged at 0 candidates
+ready (PARKED since Batch 65); `math.seq` is CERTIFIED, no further
+candidates.
+
+Full per-concept detail above. All tracking files updated in the same
+commit: `ROADMAP.md` Section 1 totals, the `math.calc`/`math.seq`
+domain rows (math.seq row now reads "CERTIFIED — the eighth domain"),
+and the domain-certification summary line (Seven → Eight domains
+certified); `COVERAGE.md`'s mathematics summary row and this Delivery
+history entry; `CLAUDE.md`'s campaign section.
+`EDUCATIONAL_BRAIN_INDEX.md` and `QUALITY.md` again deferred (same
+generated-artifact rationale as prior batches). Validated: `npx tsx
+scripts/validate-knowledge-graph.ts docs/mathematics/kg/graph.json`
+PASS, 908/908 reachable, 0 failures, 0 warnings (KG file untouched);
+`scripts/math/state.ts` confirms math.calc 74/76, math.seq 21/21
+(`ebComplete: true`), mathematics 490/908, 8 EB-certified domains
+(math.seq newly added); `npx tsc --noEmit` clean; targeted tests
+`mathPackageCorpus.test.ts` + `mathematicsAssetContract.test.ts`
+479/479 passed. All 4 new entries' heading structure diffed clean
+against `math.alg.like-terms.md` on the first pass (0 diffs each). No
+Physics, Chemistry, English, Biology, Computer Science, KG, Blueprint,
+or runtime file was modified.
