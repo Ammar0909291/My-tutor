@@ -447,7 +447,7 @@ export interface GradedThisTurn {
 export interface UngradedGateQuestionResult {
   text: string
   withheld: boolean
-  reason: 'ok' | 'no-gradeable-probe' | 'stray-question-alongside-mcq'
+  reason: 'ok' | 'no-gradeable-probe' | 'stray-question-alongside-mcq' | 'announced-question-never-delivered'
 }
 
 /**
@@ -461,6 +461,10 @@ export interface UngradedGateQuestionResult {
  * `gateProbeContract`'s FALLBACK_LEAD_IN.
  */
 const WITHHELD_QUESTION_CONTINUATION = "Let's stay with this idea for a moment."
+/** The same sentence, exported for the final-response contract enforcement in
+ *  route.ts — one string, so the two repairs cannot drift into saying
+ *  different things about the same situation. */
+export const WITHHELD_QUESTION_CONTINUATION_TEXT = WITHHELD_QUESTION_CONTINUATION
 
 /**
  * The lead-in used when the stripped question is being REPLACED by a tappable
@@ -652,6 +656,51 @@ export function withholdUngradedGateQuestion(
         text: kept.length > 0 ? kept : withheldContinuation(input.justGraded, true),
         withheld: true,
         reason: 'stray-question-alongside-mcq',
+      }
+    }
+
+    /**
+     * ── AN ANNOUNCEMENT IS A PROMISE, AND A BROKEN ONE IS A DEAD LESSON ──────
+     *
+     * THE P0 THIS CLOSES (phys.mech.torque T13-T14, production audit). The
+     * tutor said, on two consecutive turns:
+     *
+     *     "Here's a quick question for you:"
+     *     "Here's the question:"
+     *
+     * and attached nothing. `mcq: null`. The learner, cooperative and waiting
+     * to answer, sat at CHECK forever.
+     *
+     * Every repair below was skipped, and the reason is the `poses` test that
+     * used to sit here alone: this whole function assumed the failure mode is
+     * "the model asked a question the server cannot grade", so it only ever
+     * ran when a question WAS asked. A turn that ANNOUNCES a question and then
+     * asks none poses nothing, so `poses` was false and the text returned
+     * untouched with reason 'ok' — the guard reported success over the exact
+     * string that stranded the learner. Reproduced against this function
+     * before the fix: both strings above, `withheld: false, reason: 'ok'`.
+     *
+     * The detector is structural, not a phrase list. Text that ends on a colon
+     * has introduced something it did not then deliver — which is what a
+     * truncated turn also looks like, and is why this closes the truncation
+     * case in the same place rather than by raising an output limit.
+     *
+     * It fires ONLY when no artifact will reach the learner. With a structured
+     * MCQ attached, or a probe carried forward and rendered below, "Here's the
+     * question:" is TRUE and must survive — that branch is above and untouched.
+     */
+    const promisesSomethingUndelivered =
+      input.questionOnScreen !== true && /:\s*$/.test(text.trimEnd())
+    if (promisesSomethingUndelivered) {
+      const teaching = dropOrphanedLeadIn(dropAnswerableContent(text))
+      return {
+        // Recovery is deterministic and in the SAME turn: keep whatever
+        // teaching preceded the broken promise, and otherwise fall back to the
+        // established continuation sentence. Never a second announcement, and
+        // never a claim about how the learner did.
+        text: teaching.length > 0 ? teaching : withheldContinuation(input.justGraded, false),
+        withheld: true,
+        reason: 'announced-question-never-delivered',
       }
     }
 
@@ -910,5 +959,42 @@ export function withholdClosingProseQuestion(input: {
     // Total, like every other guard on this path: a failure here must never
     // cost the learner their turn.
     return { text: input.text, withheld: false, reason: 'ok' }
+  }
+}
+
+/**
+ * THE QUESTION DELIVERY CONTRACT — an ANNOUNCEMENT may not outlive its ARTIFACT.
+ *
+ * `withholdUngradedGateQuestion` above closes this at the mastery gate, which
+ * is where the Torque P0 happened (phase CHECK). But the invariant is not a
+ * property of the gate — a turn that promises the learner a question and ships
+ * none is broken in ANY phase, and measured through the real route it happens
+ * in one the gate does not cover:
+ *
+ *   GUIDE, phaseAllowsProbe:false  ->  the gate is inactive, so nothing repairs
+ *   [turn-progress] released-pending-probe  ->  liveness rung 1 spends the probe
+ *   response: "…Here's the question:"  with  mcq: null
+ *
+ * Two correct mechanisms disagreeing about whether a question exists, with the
+ * learner left holding the announcement. So the contract is enforced once more
+ * at the ONE place the artifact decision is final — after every release, every
+ * repair and every prepend — rather than by teaching each of them about the
+ * others.
+ *
+ * Call ONLY when no artifact will be served. Pure; never throws; returns a
+ * non-empty turn or the caller's own fallback.
+ */
+export function enforceQuestionDeliveryContract(text: string, fallback: string): string {
+  try {
+    const t = typeof text === 'string' ? text : ''
+    // A trailing colon is a promise of something that should follow. Nothing
+    // does. Structural, so it needs no phrase list and catches a turn the
+    // provider truncated at its own lead-in for free.
+    if (!/:\s*$/.test(t.trimEnd())) return t
+    const kept = cutBackToTeaching(t)
+    return kept.length > 0 ? kept : fallback
+  } catch {
+    // A repair must never break a turn.
+    return typeof text === 'string' ? text : fallback
   }
 }

@@ -7307,11 +7307,25 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             })
             if (ungraded.withheld) {
               console.warn('[gate-contract] ' + JSON.stringify({
-                event: 'ungraded-mastery-question-withheld',
+                // The REASON separates two very different failures that used
+                // to share one event name. 'no-gradeable-probe' is a corpus
+                // signal. 'announced-question-never-delivered' is a DELIVERY
+                // failure — the turn promised the learner a question and
+                // produced no artifact — and is the P0 that stranded a
+                // cooperative learner at CHECK indefinitely
+                // (phys.mech.torque T13-T14). They must be countable apart.
+                event: ungraded.reason === 'announced-question-never-delivered'
+                  ? 'question-announced-but-never-delivered'
+                  : 'ungraded-mastery-question-withheld',
+                reason: ungraded.reason,
                 phase: conversationStateHoisted?.phase ?? null,
                 conceptId: resolvedConceptId ?? null,
-                // A rising rate here means the CORPUS is below the asset
-                // contract, not that the runtime is misbehaving.
+                // Which delivery path failed, so a rising rate is attributable
+                // rather than merely visible.
+                hadStructuredMcq: mcqHoisted !== null,
+                gateSought: phaseAllowsProbeHoisted,
+                // A rising rate on 'no-gradeable-probe' means the CORPUS is
+                // below the asset contract, not that the runtime is misbehaving.
                 charsBefore: cleanText.length,
                 charsAfter: ungraded.text.length,
               }))
@@ -9734,6 +9748,20 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // answer attempt has BOTH null (measured), a distress/help turn does not.
           && turnIntent.failureState === null
           && turnIntent.learnerRequest === null
+          // THE LEAD-IN NAMES A LIST THE LEARNER MUST BE ABLE TO SEE.
+          //
+          // Measured through the real route (2026-09-13): on the same turn,
+          // this guard prepended "tap the choice you mean from the list below"
+          // while liveness rung 1 RELEASED the pending probe — so the response
+          // carried `mcq: null` and there was no list below. Both mechanisms
+          // are individually right; the contradiction is that this one read the
+          // probe before the release and the payload reflects it after.
+          //
+          // Same family as the Torque P0: an instruction that outlives its
+          // artifact. `probeReleasedThisTurnHoisted` is the flag the payload
+          // itself uses to decide whether an MCQ ships, so reading it here is
+          // what keeps the sentence and the screen agreeing.
+          && probeReleasedThisTurnHoisted !== true
         if (genuineUnmappedAttempt && !cleanText.includes(MCQ_REOFFER_DISAMBIGUATION)) {
           console.log('[mcq-reoffer-disambiguation] ungradeable answer against a pending probe — prompting a tap')
           // THE CONTRADICTION FIX (2026-09-08): this branch means the SERVER
@@ -9776,6 +9804,46 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             && mcqToServeForEmptyGuard(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted) !== null) {
           console.log('[empty-post-strip-with-probe] text stripped to empty while a probe is on screen — introducing it')
           cleanText = 'Here is a question to check your understanding:'
+        }
+      }
+
+      const { mcqToServe: mcqToServeForResponse, mcqForClient } = await import('@/lib/teaching/mcq')
+      /**
+       * THE QUESTION DELIVERY CONTRACT is enforced HERE — the last point at
+       * which the turn may still change what the learner receives, and
+       * deliberately BEFORE Phase 0 below, which is observation only and must
+       * assign nothing (`turnDecisionProvenance` asserts that). Putting the
+       * repair first also means provenance records the text actually served.
+       */
+      /**
+       * THE QUESTION DELIVERY CONTRACT, enforced where the artifact decision
+       * is FINAL — after every release, repair and prepend.
+       *
+       * The served MCQ is computed ONCE here and reused below, so the payload
+       * and this check can never disagree about what the learner is about to
+       * see. Measured through the real route before this existed: a GUIDE turn
+       * with `phaseAllowsProbe:false` shipped "…Here's the question:" with
+       * `mcq: null`, because the gate-level repair is inactive in that phase
+       * and liveness rung 1 had spent the pending probe on the same turn. Two
+       * correct mechanisms, one stranded learner.
+       */
+      const servedMcq = probeReleasedThisTurnHoisted
+        ? undefined
+        : (mcqForClient(mcqToServeForResponse(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted)) ?? undefined)
+      if (!servedMcq) {
+        const { enforceQuestionDeliveryContract, WITHHELD_QUESTION_CONTINUATION_TEXT } = await import('@/lib/teaching/gateAssessment')
+        const repaired = enforceQuestionDeliveryContract(cleanText, WITHHELD_QUESTION_CONTINUATION_TEXT)
+        if (repaired !== cleanText) {
+          console.warn('[gate-contract] ' + JSON.stringify({
+            event: 'question-announced-but-never-delivered',
+            surface: 'final-response',
+            phase: conversationStateHoisted?.phase ?? null,
+            conceptId: resolvedConceptId ?? null,
+            probeReleasedThisTurn: probeReleasedThisTurnHoisted === true,
+            charsBefore: cleanText.length,
+            charsAfter: repaired.length,
+          }))
+          cleanText = repaired
         }
       }
 
@@ -9927,7 +9995,6 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         try { await topicProgressEvidenceWrite } catch { /* total by construction */ }
       }
 
-      const { mcqToServe: mcqToServeForResponse, mcqForClient } = await import('@/lib/teaching/mcq')
 
       return NextResponse.json({
         success: true, text: cleanText, provider,
@@ -9992,9 +10059,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // saying the SAME thing about what is on screen — the invariant
         // gateAssessmentRouteWiring guards. Rung 1 removes the question from
         // both, or from neither.
-        mcq: probeReleasedThisTurnHoisted
-          ? undefined
-          : (mcqForClient(mcqToServeForResponse(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted)) ?? undefined),
+        mcq: servedMcq,
         // P6.6: present only on the turn the lesson completes. The client
         // renders the completion screen and must not continue teaching.
         lessonComplete: lessonCompletionHoisted ?? undefined,
