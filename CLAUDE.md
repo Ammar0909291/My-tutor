@@ -4287,6 +4287,40 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   `geometric-sequence`, `recursive-sequences`). This is a genuinely multi-session
   campaign; continuation should verify state via `scripts/math/state.ts` fresh each
   time rather than trusting any number recorded here.
+- **Batch 55 — math.calc: derivative of trig functions (excursion payoff); math.trig:
+  identities and inverse functions; math.seq: arithmetic sequences** (2026-09-12):
+  re-computed the frontier fresh — `math.calc` had 2 candidates (`derivative-trig`,
+  `fourier-series-intro`), `math.trig` had 8 (Batch 54's own forward note had
+  undercounted this at 3), `math.seq` had 5, all verified programmatically. Authored 4:
+  `math.calc.derivative-trig` (requires `derivative-rules`+`trig-functions`+
+  `squeeze-theorem`, all long-authored — **closes the original motivating goal of this
+  program's entire math.trig/math.seq cross-domain excursion, begun Batch 52
+  specifically to eventually unblock this exact concept**; MC-2 cross-referenced to the
+  same inner-derivative-missing mechanism as `derivative-exponential`'s MC-2 and
+  `implicit-differentiation`'s MC-1), `math.trig.trig-identities`/`math.trig.inverse-trig`
+  (both children of Batch 54's `trig-functions`; `inverse-trig` substantively
+  incorporates the already-authored `math.func.inverse-functions`/`math.func.injectivity`
+  as Transfer Connections, cross-link to unauthored `math.calc.derivative-inverse-trig`
+  in independence mode), `math.seq.arithmetic-sequence` (child of Batch 52's `sequence`;
+  genuine forward-reference gap recorded — its Blueprint cites `math.seq.geometric-
+  sequence`'s own not-yet-authored Examples 2/3 as parallel content, confirmed
+  unauthored via `ls`, reconstructed independently rather than cited). All 4 zero
+  KG/Blueprint metadata discrepancy. `math.calc` 63/76 → 64/76. `math.trig` 6/25 →
+  8/25. `math.seq` 3/21 → 4/21. Mathematics 438/908 → 442/908. Full per-concept detail
+  in `COVERAGE.md` Batch 55. Validated: KG validator PASS (908/908 reachable, file
+  untouched), `scripts/math/state.ts` confirms math.calc 64/76, math.trig 8/25, math.seq
+  4/21, mathematics 442/908 (6 EB-certified domains unchanged), `tsc --noEmit` clean,
+  targeted tests 479/479 passed, all 4 heading structures diffed clean on the first pass
+  (0 diffs each). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file
+  touched. Fresh frontier: `math.calc` 2 candidates (`derivative-inverse-trig` — newly
+  unblocked — `fourier-series-intro`); `math.trig` 10 candidates (`basic-ratios`,
+  `amplitude-period-phase`, `pythagorean-identities`, `reciprocal-identities`,
+  `sum-difference-formulas`, `trig-equations`, `law-of-sines`, `law-of-cosines`,
+  `polar-form-complex`, `hyperbolic-functions`); `math.seq` 5 candidates
+  (`geometric-sequence`, `recursive-sequences`, `divergent-sequence`, `partial-sums`,
+  `arithmetic-series` — the last newly unblocked). This is a genuinely multi-session
+  campaign; continuation should verify state via `scripts/math/state.ts` fresh each
+  time rather than trusting any number recorded here.
 
 ## Physics Teacher Migration Architecture V2 — AUDITED, NOT ADOPTED (2026-09-12)
 
