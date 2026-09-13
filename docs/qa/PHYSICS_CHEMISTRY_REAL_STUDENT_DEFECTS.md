@@ -182,9 +182,18 @@ here for accuracy, not performed as part of this task.
   can no longer be killed by the platform: whatever stalls, this application answers first.
   **PRODUCTION-STALL VERIFICATION REMAINS UNPERFORMED, and is not claimed.** Reproducing the
   original 504 needs a genuine provider or database stall, which must not be manufactured by
-  damaging production. What IS verified in production is that the deployment is READY on this
-  commit, `/api/health` is healthy, and normal physics and chemistry chat still work; the
-  timeout behaviour itself is code- and harness-verified, by tests proven non-vacuous above.
+  damaging production. The timeout behaviour itself is code- and harness-verified, by tests
+  proven non-vacuous above.
+- **Production verification performed 2026-09-13 (measured, not asserted):** deployment
+  `dpl_DkrFVpf4ifTEvPfGVa6DtrtyixKJ` READY on `6bef5cb`, aliased to `my-tutor-flame.vercel.app`;
+  `/api/health` -> `{"status":"ok","db":true}`; unauthenticated `POST /api/learn/chat` -> 403 in
+  1.365s (the route still answers, and fast). On a disposable QA account
+  (`qa-pcd002-*@mytutor-qa.invalid`, deleted afterwards, `{"deleted":true,"reloginBlocked":true}`):
+  physics `status=200 ms=13608 provider=groq textLen=202`, chemistry
+  `status=200 ms=10303 provider=groq textLen=233` — both well inside the 55s route budget, and
+  neither carried a `kind` discriminator, i.e. no deadline, DB-timeout or DB-unavailable path was
+  taken on a healthy request. This confirms the new layer is INERT when nothing stalls; it does
+  not, and is not claimed to, exercise a stall.
 
 ### PCD-003 — Transient `/api/sessions` 500 errors
 - **Subject/Concept:** Chemistry — `chem.elect.galvanic-cell` (#74), `chem.elect.nernst` (#76).
