@@ -1,5 +1,8 @@
 import { describe, it, expect } from 'vitest'
-import { buildSegmentTimeWindows, progressPercentForTime, segmentIndexForTime } from '@/lib/narration/timeSync'
+import {
+  buildSegmentTimeWindows, progressPercentForTime, segmentIndexForTime,
+  buildWordTimeWindows, wordIndexForTime,
+} from '@/lib/narration/timeSync'
 import { buildNarrationSegments } from '@/lib/narration/segments'
 
 /**
@@ -61,5 +64,51 @@ describe('D/E — currentTime maps to exactly the correct segment', () => {
     const shortWidth = windows[0].endTime - windows[0].startTime
     const longWidth = windows[1].endTime - windows[1].startTime
     expect(longWidth).toBeGreaterThan(shortWidth)
+  })
+})
+
+describe('word-level server-audio sync — the labeled estimate, driven from the real audio clock', () => {
+  const segments = buildNarrationSegments('Short one. A much longer second sentence here.', 'wx')
+  const wordWindows = buildWordTimeWindows(segments, 40)
+
+  it('builds one window per RENDERED word across every segment, contiguous and covering the full duration', () => {
+    const totalWords = segments.reduce((n, s) => n + s.renderedWords.filter((t) => t.kind === 'word').length, 0)
+    expect(wordWindows).toHaveLength(totalWords)
+    expect(wordWindows[0].startTime).toBe(0)
+    expect(wordWindows[wordWindows.length - 1].endTime).toBeCloseTo(40, 5)
+    for (let i = 1; i < wordWindows.length; i++) {
+      expect(wordWindows[i].startTime).toBeCloseTo(wordWindows[i - 1].endTime, 5)
+    }
+  })
+
+  it('t=0 selects the first word of the first segment', () => {
+    const hit = wordIndexForTime(wordWindows, 0)
+    expect(hit).toEqual({ segmentIndex: 0, wordIndex: 0 })
+  })
+
+  it('a time inside a later segment resolves to that segment\'s own word index, not segment 0\'s', () => {
+    const lastSegmentFirstWord = wordWindows.find((w) => w.segmentIndex === 1 && w.wordIndex === 0)
+    expect(lastSegmentFirstWord).toBeDefined()
+    const hit = wordIndexForTime(wordWindows, (lastSegmentFirstWord!.startTime + lastSegmentFirstWord!.endTime) / 2)
+    expect(hit).toEqual({ segmentIndex: 1, wordIndex: 0 })
+  })
+
+  it('a time past the very end still resolves to the last word (no gap right before onended)', () => {
+    const hit = wordIndexForTime(wordWindows, 999)
+    const last = wordWindows[wordWindows.length - 1]
+    expect(hit).toEqual({ segmentIndex: last.segmentIndex, wordIndex: last.wordIndex })
+  })
+
+  it('an empty window list (duration not yet known) resolves to null, never a fake index', () => {
+    expect(wordIndexForTime([], 5)).toBeNull()
+    expect(buildWordTimeWindows(segments, 0)).toEqual([])
+  })
+
+  it('successive words within one segment get non-overlapping, increasing windows', () => {
+    const firstSegmentWindows = wordWindows.filter((w) => w.segmentIndex === 0)
+    for (let i = 1; i < firstSegmentWindows.length; i++) {
+      expect(firstSegmentWindows[i].startTime).toBeCloseTo(firstSegmentWindows[i - 1].endTime, 5)
+      expect(firstSegmentWindows[i].wordIndex).toBe(firstSegmentWindows[i - 1].wordIndex + 1)
+    }
   })
 })
