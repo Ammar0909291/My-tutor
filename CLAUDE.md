@@ -4855,6 +4855,45 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   touched. This is a genuinely multi-session campaign; continuation
   should verify state via `scripts/math/state.ts` fresh each time
   rather than trusting any number recorded here.
+- **Batch 71 — opens math.linalg with its entry node, `vector`;
+  corrects a stale domain-size figure** (2026-09-13): re-computed the
+  frontier fresh — `math.disc`/`math.calc`/`math.graph` all confirmed
+  unchanged at 0 ready (all three PARKED); `math.linalg` confirmed
+  still holding its 1 ready candidate, `math.linalg.vector` (no
+  math.linalg prerequisite — requires only the already-authored
+  `math.found.real-numbers`+`math.geom.x-y-coordinates`). Authored it,
+  opening the domain. Defines a vector as an ordered n-tuple, unifying
+  its geometric (displacement) and algebraic (component list)
+  readings, with the point-vs-vector notational collision as the
+  Blueprint's own FOUNDATIONAL misconception. 3 misconceptions
+  independently classified: MC-1 VECTOR-IS-POINT (Type 4,
+  notation-induced), MC-2 VECTOR-ORDER-FREE (Type 6, analogy
+  overextension — a tuple's order mistaken for a set's unordered
+  membership), MC-3 VECTOR-IS-MAGNITUDE (Type 5, instruction-induced).
+  Both Tier-1 cross-links (`math.geom.vectors-2d`/`vectors-3d`)
+  confirmed already authored and genuinely incorporated. Zero
+  Blueprint/KG metadata discrepancy. **Genuine tracking-staleness
+  correction found, not authored content**: multiple prior batch notes
+  described math.linalg as "0/16, entirely unstarted" — direct
+  verification via `scripts/math/state.ts` shows the domain genuinely
+  has **61 KG concepts**, not 16, a stale figure carried forward across
+  several batches without being re-checked (the domain had never been
+  opened before, so was never queried directly until this batch).
+  Corrected in all three tracking files. `math.linalg` **0/61 → 1/61**.
+  Mathematics **499/908 → 500/908**, 408 remaining. Fresh frontier:
+  `math.disc`/`math.calc`/`math.graph` unchanged at 0 ready;
+  `math.linalg` now has 4 ready (`vector-addition`,
+  `scalar-multiplication`, `dot-product`, `matrix` — the last is the
+  concept that reopens `math.disc.graph-representation`). Validated: KG
+  validator PASS (908/908 reachable, file untouched),
+  `scripts/math/state.ts` confirms math.linalg 1/61 (61 total,
+  corrected), mathematics 500/908 (8 EB-certified domains unchanged),
+  `tsc --noEmit` clean, targeted tests 479/479 passed, heading
+  structure diffed clean on the first pass. No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file
+  touched. This is a genuinely multi-session campaign; continuation
+  should verify state via `scripts/math/state.ts` fresh each time
+  rather than trusting any number recorded here.
 
 ## Topic/meaning loss — the extractor's default was YES (2026-09-13)
 
