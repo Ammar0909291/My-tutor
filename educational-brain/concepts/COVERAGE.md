@@ -11,7 +11,7 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 520 | **Ten domains CERTIFIED (math.calc joined 2026-09-13, the tenth), math.graph 15/16 (PARKED again — only `random-graph` remains, blocked on unauthored `math.prob.probability-axioms`), math.linalg 18/61 (6 ready: `augmented-matrix`/`cofactor-expansion`/`det-properties`/`cramer-rule`/`characteristic-polynomial`/`distance`).** 82 `math.found.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 69 `math.geom.*` (**COMPLETE, DOMAIN CERTIFIED** — the final 13 entries were restored by commit `0d2c76dd`'s Wave 0 recovery, which this row previously did not reflect) + 36 `math.nt.*` (**COMPLETE, DOMAIN CERTIFIED 2026-08-12** — the domain's final 8 concepts, `prime-distribution`, `continued-fractions`, `analytic-number-theory`, `prime-number-theorem`, `riemann-hypothesis`, `algebraic-number-theory`, `algebraic-integers`, `number-fields`, were authored this session, ending the PARKED status this row previously recorded) + 59 `math.alg.*` (**COMPLETE, DOMAIN CERTIFIED 2026-09-11** — Wave 1 (2026-08-12, 11 concepts): `expression`, `equation`, `term`, `coefficient`, `exponent-rules`, `polynomial`, `degree`, `zero-exponent`, `negative-exponent`, `solution-set`, `inequality`; Wave 2 (2026-08-12, 1 concept): `like-terms`; Wave 3 (2026-09-11, 3 concepts): `simplification`, `polynomial-operations`, `radicals`; Wave 4 (2026-09-11, 5 concepts): `linear-equation-1var`, `polynomial-division`, `fractional-exponent`, `simplifying-radicals`, `radical-equations`; Wave 5 (2026-09-11, 5 concepts): `inequality-1var`, `absolute-value-equations`, `linear-equation-2var`, `remainder-theorem`, `rationalizing-denominators`; Wave 6 (2026-09-11, 3 concepts): `inequality-2var`, `system-linear-equations`, `factor-theorem`; Wave 7 (2026-09-11, 4 concepts): `substitution-method`, `elimination-method`, `system-3var`, `factoring`; Wave 8 (2026-09-11, 3 concepts): `factoring-gcf`, `factoring-special`, `rational-expressions`; Wave 9 (2026-09-11, 4 concepts): `factoring-trinomials`, `rational-expressions-addition`, `rational-expressions-multiplication`, `rational-equations`; Wave 10 (2026-09-11, 1 concept): `quadratic-equation`; Wave 11 (2026-09-11, 2 concepts): `completing-the-square`, `polynomial-roots`; Wave 12 part 1 (2026-09-11, 1 concept): `quadratic-formula`; Wave 12 part 2 (2026-09-11, 2 concepts): `discriminant`, `rational-root-theorem`; Wave 12 part 3 (2026-09-11, 3 concepts): `fundamental-theorem-algebra`, `polynomial-inequality`, `vietas-formulas`; Wave 13 (2026-09-11, 2 concepts): `complex-polynomial-roots`, `rational-inequality`; Batch 15 (2026-09-11, 1 concept): `exponential-function`; Batch 16 (2026-09-11, 2 concepts): `logarithm`, `exponential-equations`; Batch 17 (2026-09-11, 3 concepts): `binomial-theorem`, `logarithm-properties`, `natural-logarithm`; Batch 18 (2026-09-11, 3 concepts, FINAL): `change-of-base`, `logarithmic-equations`, `pascals-triangle`; all Blueprint-grounded, reused by reference). 20 `math.disc.*` entries (**IN PROGRESS, standalone campaign since math.alg's certification** —
+| mathematics | 908 | 524 | **Ten domains CERTIFIED (math.calc joined 2026-09-13, the tenth), math.graph 15/16 (PARKED again — only `random-graph` remains, blocked on unauthored `math.prob.probability-axioms`), math.linalg 22/61 (Batch 77 authored `augmented-matrix`/`cofactor-expansion`/`cramer-rule`/`distance`; 3 ready next: `det-properties`/`characteristic-polynomial`/`row-reduction`).** 82 `math.found.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 69 `math.geom.*` (**COMPLETE, DOMAIN CERTIFIED** — the final 13 entries were restored by commit `0d2c76dd`'s Wave 0 recovery, which this row previously did not reflect) + 36 `math.nt.*` (**COMPLETE, DOMAIN CERTIFIED 2026-08-12** — the domain's final 8 concepts, `prime-distribution`, `continued-fractions`, `analytic-number-theory`, `prime-number-theorem`, `riemann-hypothesis`, `algebraic-number-theory`, `algebraic-integers`, `number-fields`, were authored this session, ending the PARKED status this row previously recorded) + 59 `math.alg.*` (**COMPLETE, DOMAIN CERTIFIED 2026-09-11** — Wave 1 (2026-08-12, 11 concepts): `expression`, `equation`, `term`, `coefficient`, `exponent-rules`, `polynomial`, `degree`, `zero-exponent`, `negative-exponent`, `solution-set`, `inequality`; Wave 2 (2026-08-12, 1 concept): `like-terms`; Wave 3 (2026-09-11, 3 concepts): `simplification`, `polynomial-operations`, `radicals`; Wave 4 (2026-09-11, 5 concepts): `linear-equation-1var`, `polynomial-division`, `fractional-exponent`, `simplifying-radicals`, `radical-equations`; Wave 5 (2026-09-11, 5 concepts): `inequality-1var`, `absolute-value-equations`, `linear-equation-2var`, `remainder-theorem`, `rationalizing-denominators`; Wave 6 (2026-09-11, 3 concepts): `inequality-2var`, `system-linear-equations`, `factor-theorem`; Wave 7 (2026-09-11, 4 concepts): `substitution-method`, `elimination-method`, `system-3var`, `factoring`; Wave 8 (2026-09-11, 3 concepts): `factoring-gcf`, `factoring-special`, `rational-expressions`; Wave 9 (2026-09-11, 4 concepts): `factoring-trinomials`, `rational-expressions-addition`, `rational-expressions-multiplication`, `rational-equations`; Wave 10 (2026-09-11, 1 concept): `quadratic-equation`; Wave 11 (2026-09-11, 2 concepts): `completing-the-square`, `polynomial-roots`; Wave 12 part 1 (2026-09-11, 1 concept): `quadratic-formula`; Wave 12 part 2 (2026-09-11, 2 concepts): `discriminant`, `rational-root-theorem`; Wave 12 part 3 (2026-09-11, 3 concepts): `fundamental-theorem-algebra`, `polynomial-inequality`, `vietas-formulas`; Wave 13 (2026-09-11, 2 concepts): `complex-polynomial-roots`, `rational-inequality`; Batch 15 (2026-09-11, 1 concept): `exponential-function`; Batch 16 (2026-09-11, 2 concepts): `logarithm`, `exponential-equations`; Batch 17 (2026-09-11, 3 concepts): `binomial-theorem`, `logarithm-properties`, `natural-logarithm`; Batch 18 (2026-09-11, 3 concepts, FINAL): `change-of-base`, `logarithmic-equations`, `pascals-triangle`; all Blueprint-grounded, reused by reference). 20 `math.disc.*` entries (**IN PROGRESS, standalone campaign since math.alg's certification** —
 Batch 14 (2026-09-11, 1 concept): `counting-principles`; Batch 15 (2026-09-11, 1 concept):
 `permutations`; Batch 16 (2026-09-11, 1 concept): `combinations`; Batch 19 (2026-09-11, 5
 concepts): `combinatorics`, `pigeonhole`, `stars-bars`, `inclusion-exclusion`,
@@ -11512,3 +11512,51 @@ passed, all 4 heading structures diffed clean against `math.alg.like-terms.md` o
 (0 diffs each). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. This
 is a genuinely multi-session campaign; continuation should verify state via
 `scripts/math/state.ts` fresh each time rather than trusting any number recorded here.
+
+### Batch 77 — math.linalg: augmented matrices, cofactor expansion, Cramer's Rule, distance (2026-09-13)
+Re-fetched `main` (0 divergence, clean). Re-ran `scripts/math/state.ts` fresh: confirmed mathematics
+520/908, math.linalg 18/61, math.graph 15/16 (PARKED), 10 EB-certified domains — matched Batch 76's
+predicted end-state exactly. Re-computed the frontier via the standard topological Python script:
+`math.graph.*` 0 ready (confirmed PARKED); `math.linalg.*` 6 ready
+(`augmented-matrix`/`cofactor-expansion`/`det-properties`/`cramer-rule`/`characteristic-polynomial`/
+`distance`), matching Batch 76's own prediction exactly.
+
+Selected 4: `augmented-matrix` (requires `linear-system`, authored Batch 76), `cofactor-expansion`
+(requires `determinant`, authored Batch 74), `cramer-rule` (requires `determinant`+`matrix-inverse`,
+authored Batches 74/76), `distance` (requires `norm`, authored Batch 74) — deferring
+`det-properties`/`characteristic-polynomial` (both single-prereq children of `determinant`/
+`eigenvalues`+`determinant` respectively, already ready, held for a future batch).
+
+All 4 Blueprint-grounded, reused by reference; none carry an explicit birth-type column — every
+misconception independently classified via the birth-taxonomy diagnostic procedure:
+- `augmented-matrix`: MC-1 ROW-OPERATIONS-FEARED-TO-ALTER-SOLUTION-SET (Type 5, Foundational),
+  MC-2 AUGMENTED-MATRIX-COLUMN-ORDER-MISALIGNED (Type 4, Foundational), MC-3
+  AUGMENTED-MATRIX-TREATED-AS-A-DIFFERENT-MATHEMATICAL-OBJECT (Type 6, Moderate). Zero
+  Blueprint/KG metadata discrepancy. Unlocks `math.linalg.row-reduction` directly, now ready.
+- `cofactor-expansion`: MC-1 COFACTOR-SIGN-ALTERNATION-NOT-TRACKED-CORRECTLY (Type 4,
+  Foundational), MC-2 EXPANSION-ROW-COLUMN-CHOSEN-WITHOUT-EFFICIENCY-CONSIDERATION (Type 5,
+  Moderate), MC-3 DIFFERENT-EXPANSION-CHOICES-ASSUMED-TO-GIVE-DIFFERENT-RESULTS (Type 1,
+  Foundational). Zero Blueprint/KG metadata discrepancy.
+- `cramer-rule`: MC-1 CRAMERS-RULE-WRONG-COLUMN-REPLACED (Type 4, Foundational), MC-2
+  ZERO-DETERMINANT-MISINTERPRETED-AS-NO-SOLUTION (Type 1, Foundational — explicitly
+  cross-referenced to `math.linalg.linear-system`'s own rank-comparison method as the correct
+  follow-up), MC-3 CRAMERS-RULE-USED-FOR-LARGE-SYSTEMS-WITHOUT-EFFICIENCY-AWARENESS (Type 5,
+  Moderate). Zero Blueprint/KG metadata discrepancy.
+- `distance`: MC-1 DISTANCE-SUBTRACTION-ORDER-NOT-TRACKED-CONSISTENTLY (Type 5, Minor), MC-2
+  TRIANGLE-INEQUALITY-ASSUMED-ALWAYS-STRICT-EQUALITY (Type 1, Foundational). **Genuine
+  Blueprint/KG `cross_links` discrepancy found**: the Blueprint's own Component 0 and Validation
+  Checklist V-5 both state "cross_links: none," but the live KG lists
+  `cross_links: ['math.real.metric-space']`. Confirmed via `ls` that this target has no
+  Educational Brain entry (`math.real` entirely unstarted) — the identical finding already
+  recorded for `math.linalg.norm`'s own `math.real.metric-space` cross-link in Batch 74;
+  independence mode applies, resolved toward the KG.
+
+`math.linalg` **18/61 → 22/61**. Mathematics **520/908 → 524/908**, 384 remaining. Fresh frontier
+computed after this batch: `math.linalg` 3 ready (`det-properties`, `characteristic-polynomial`,
+`row-reduction` — the last newly unblocked by `augmented-matrix`); `math.graph` unchanged 0 ready
+(still PARKED). Validated: KG validator PASS (908/908 reachable, file untouched), 0 orphan/
+duplicate EB files, `tsc --noEmit` clean, targeted tests 479/479 passed, all 4 heading structures
+diffed clean against `math.alg.like-terms.md` on the first pass (0 diffs each). No
+Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. This is a genuinely
+multi-session campaign; continuation should verify state via `scripts/math/state.ts` fresh each
+time rather than trusting any number recorded here.

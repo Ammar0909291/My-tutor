@@ -5174,6 +5174,63 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   touched. This is a genuinely multi-session campaign; continuation
   should verify state via `scripts/math/state.ts` fresh each time
   rather than trusting any number recorded here.
+- **Batch 77 — math.linalg: augmented matrices, cofactor expansion,
+  Cramer's Rule, distance** (2026-09-13, autonomous loop iteration):
+  re-computed the frontier fresh — `math.linalg` had exactly the 6
+  candidates predicted at the end of Batch 76, `math.graph` confirmed
+  unchanged at 0 ready (PARKED). Authored 4 of the 6: `augmented-matrix`
+  (requires `linear-system`), `cofactor-expansion` (requires
+  `determinant`), `cramer-rule` (requires `determinant`+
+  `matrix-inverse`), `distance` (requires `norm`) — deferring
+  `det-properties`/`characteristic-polynomial`. `augmented-matrix`
+  constructs $[A|b]$ as a bookkeeping device reusing `linear-system`'s
+  own $Ax=b$ structure, states row operations preserve the solution
+  set, and unlocks `row-reduction` directly. 3 misconceptions: MC-1
+  ROW-OPERATIONS-FEARED-TO-ALTER-SOLUTION-SET (Type 5, Foundational),
+  MC-2 AUGMENTED-MATRIX-COLUMN-ORDER-MISALIGNED (Type 4, Foundational),
+  MC-3 AUGMENTED-MATRIX-TREATED-AS-A-DIFFERENT-MATHEMATICAL-OBJECT
+  (Type 6, Moderate). `cofactor-expansion` defines minors/cofactors
+  $C_{ij}=(-1)^{i+j}M_{ij}$, states expansion along any row/column
+  gives the identical determinant, and favors the sparsest row/column
+  for efficiency. 3 misconceptions: MC-1
+  COFACTOR-SIGN-ALTERNATION-NOT-TRACKED-CORRECTLY (Type 4,
+  Foundational), MC-2
+  EXPANSION-ROW-COLUMN-CHOSEN-WITHOUT-EFFICIENCY-CONSIDERATION
+  (Type 5, Moderate), MC-3
+  DIFFERENT-EXPANSION-CHOICES-ASSUMED-TO-GIVE-DIFFERENT-RESULTS
+  (Type 1, Foundational). `cramer-rule` states
+  $x_i=\det(A_i)/\det(A)$ via column replacement, requires
+  $\det(A)\ne0$, and flags impracticality for large systems versus row
+  reduction. 3 misconceptions: MC-1 CRAMERS-RULE-WRONG-COLUMN-REPLACED
+  (Type 4, Foundational), MC-2
+  ZERO-DETERMINANT-MISINTERPRETED-AS-NO-SOLUTION (Type 1,
+  Foundational, cross-referenced to `linear-system`'s own rank
+  comparison as the correct follow-up), MC-3
+  CRAMERS-RULE-USED-FOR-LARGE-SYSTEMS-WITHOUT-EFFICIENCY-AWARENESS
+  (Type 5, Moderate). `distance` defines $d(u,v)=\|u-v\|$ reusing
+  `norm` directly, states the metric axioms, and establishes the
+  triangle inequality's equality case (collinear points). 2
+  misconceptions: MC-1
+  DISTANCE-SUBTRACTION-ORDER-NOT-TRACKED-CONSISTENTLY (Type 5,
+  Minor), MC-2 TRIANGLE-INEQUALITY-ASSUMED-ALWAYS-STRICT-EQUALITY
+  (Type 1, Foundational). 3 of 4 zero Blueprint/KG metadata
+  discrepancy; `distance` carries a genuine `cross_links` discrepancy
+  (Blueprint claims none, KG has `math.real.metric-space`, confirmed
+  unauthored via `ls` — the identical finding already recorded for
+  `math.linalg.norm`'s own cross-link in Batch 74 — independence mode,
+  resolved toward the KG). `math.linalg` **18/61 → 22/61**.
+  Mathematics **520/908 → 524/908**, 384 remaining. Fresh frontier:
+  `math.linalg` 3 ready (`det-properties`, `characteristic-polynomial`,
+  `row-reduction` — the last newly unblocked by `augmented-matrix`);
+  `math.graph` unchanged 0 ready (still PARKED). Validated: KG
+  validator PASS (908/908 reachable, file untouched),
+  `scripts/math/state.ts` confirms math.linalg 22/61, mathematics
+  524/908 (10 EB-certified domains unchanged), `tsc --noEmit` clean,
+  targeted tests 479/479 passed, all 4 heading structures diffed clean
+  on the first pass. No Physics/Chemistry/English/Biology/CS/KG/
+  Blueprint/runtime file touched. This is a genuinely multi-session
+  campaign; continuation should verify state via `scripts/math/state.ts`
+  fresh each time rather than trusting any number recorded here.
 
 ## Topic/meaning loss — the extractor's default was YES (2026-09-13)
 
