@@ -4515,6 +4515,49 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   Blueprint/runtime file touched. This is a genuinely multi-session
   campaign; continuation should verify state via `scripts/math/state.ts`
   fresh each time rather than trusting any number recorded here.
+- **Batch 62 — math.calc: partial fractions — CLOSES the frontier for a
+  third consecutive batch; math.trig: trig equations; math.seq:
+  recursive sequences + infinite geometric series** (2026-09-13):
+  re-computed the frontier fresh — `math.calc` had 1 candidate
+  (`partial-fractions`), `math.trig` had 2, `math.seq` had 3, all
+  matching Batch 61's own predictions exactly. Authored all 4:
+  `partial-fractions` frames decomposition as `rational-expressions`'s
+  combining process run in reverse, with `polynomial-roots`'s
+  factorization dictating the exact form — closing the entire
+  trig-integrals/trig-substitution/partial-fractions chain opened by
+  the Batch 52 excursion. `trig-equations` states the four-step
+  isolate/reference-angle/ASTC/interval algorithm and retains all FOUR
+  of its Blueprint's misconceptions (one more than usual, none
+  trimmed). `recursive-sequences` frames a recursive definition as a
+  second specification method for the same object `math.seq.sequence`
+  studies, and distinguishes induction-as-verification from
+  deriving-a-closed-form; carries two genuine Blueprint/KG metadata
+  discrepancies (estimated_hours 5 vs 8; unlocks "none" vs
+  `math.disc.recurrence-relation`) plus a P76_mode staleness correction
+  (cross-link-probe declared against `math.disc.recurrence-relation`,
+  verified via `ls` to have no EB entry, so independence mode was used
+  instead), all resolved toward the KG/filesystem-verified reality.
+  `infinite-geometric-series` derives $S_\infty=a/(1-r)$ as the limit of
+  `geometric-series`'s own finite-sum formula, zero discrepancy. One
+  mid-batch fix: two of the four files initially merged "Why Students
+  Fail" and "Misconceptions" into one heading; split per the Standard's
+  required structure before the heading-diff check, which then passed
+  clean for all 4. `math.calc` **69/76 → 70/76** (frontier closed for a
+  third consecutive batch). `math.trig` **21/25 → 22/25**. `math.seq`
+  **10/21 → 12/21**. Mathematics **466/908 → 470/908**, 438 remaining.
+  Fresh frontier: `math.calc` 0 ready (all 6 remaining chain through
+  `math.seq.series-convergence`/`ratio-test`, `math.linalg.determinant`,
+  or `taylor-series`'s own unauthored children); `math.trig` 1 ready
+  (`polar-form-complex`); `math.seq` 1 ready (`series-convergence`).
+  Validated: KG validator PASS (908/908 reachable, file untouched),
+  `scripts/math/state.ts` confirms math.calc 70/76, math.trig 22/25,
+  math.seq 12/21, mathematics 470/908 (6 EB-certified domains
+  unchanged), `tsc --noEmit` clean, targeted tests 479/479 passed, all
+  4 heading structures diffed clean after the mid-batch fix. No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file
+  touched. This is a genuinely multi-session campaign; continuation
+  should verify state via `scripts/math/state.ts` fresh each time
+  rather than trusting any number recorded here.
 
 ## Physics Teacher Migration Architecture V2 — AUDITED, NOT ADOPTED (2026-09-12)
 
