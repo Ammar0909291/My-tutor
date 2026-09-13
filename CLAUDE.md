@@ -4737,6 +4737,40 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   touched. This is a genuinely multi-session campaign; continuation
   should verify state via `scripts/math/state.ts` fresh each time
   rather than trusting any number recorded here.
+- **Batch 68 — radius of convergence (closes math.calc again);
+  Catalan numbers, divide-and-conquer recurrences, linear
+  recurrences** (2026-09-13): re-computed the frontier fresh —
+  `math.calc` had 1 ready (`radius-of-convergence`), `math.disc` had
+  4. Authored `radius-of-convergence` (closing math.calc's frontier —
+  only `change-of-variables` remains, blocked on unauthored
+  `math.linalg.determinant`, PARKED again) plus 3 of math.disc's 4
+  candidates, deferring `generating-functions` (8hrs, expert,
+  cross-link to unauthored `math.prob.generating-function`).
+  `radius-of-convergence` combines power-series with the ratio test,
+  emphasizing the two endpoints need SEPARATE checking. `catalan-
+  numbers` derives $C_n=\binom{2n}{n}/(n+1)$ via the ballot-problem
+  reflection principle and via the generating function
+  $C(x)=1+xC(x)^2$, insisting shared Catalan structures need an
+  explicit BIJECTION, not just a shared count. `divide-conquer-
+  recurrence` states the Master Theorem via a leaves-vs-root
+  weighing-scale image; caught a genuine `unlocks` discrepancy
+  (Blueprint names `algorithm-complexity`, KG lists none), resolved
+  toward the KG. `linear-recurrence` derives the characteristic-
+  equation method and Binet's formula; its `math.de.char-equation`
+  cross-link handled in independence mode (`math.de` unstarted).
+  `math.calc` **74/76 → 75/76**. `math.disc` **23/32 → 26/32**.
+  Mathematics **490/908 → 494/908**, 414 remaining. Fresh frontier:
+  `math.calc` 0 ready (PARKED); `math.disc` 2 ready
+  (`algorithm-complexity` — newly unblocked — `generating-functions`);
+  `math.graph` unchanged 0 ready (PARKED). Validated: KG validator
+  PASS (908/908 reachable, file untouched), `scripts/math/state.ts`
+  confirms math.calc 75/76, math.disc 26/32, mathematics 494/908 (8
+  EB-certified domains unchanged), `tsc --noEmit` clean, targeted
+  tests 479/479 passed, all 4 heading structures diffed clean on the
+  first pass. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/
+  runtime file touched. This is a genuinely multi-session campaign;
+  continuation should verify state via `scripts/math/state.ts` fresh
+  each time rather than trusting any number recorded here.
 
 ## Topic/meaning loss — the extractor's default was YES (2026-09-13)
 
