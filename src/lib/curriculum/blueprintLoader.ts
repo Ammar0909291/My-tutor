@@ -66,6 +66,16 @@
 import fs from 'fs'
 import path from 'path'
 
+import {
+  countMisconceptionCandidates,
+  packCoreUnderstanding,
+  parseAuthoritativeMisconceptions,
+  type AuthoritativeMisconception,
+  type KnowledgeExposureFailure,
+  type PackedKnowledge,
+} from './ebKnowledge'
+
+
 // ── Public types — metadata (Phase 1C) ───────────────────────────────────────
 
 /** Structural metadata only — no educational content. */
@@ -186,6 +196,25 @@ export interface EBConceptContext {
    * finding that made this necessary.
    */
   ebMisconceptions: EBMisconception[]
+  /**
+   * The authored `## Core Understanding`, packed as AUTHORITATIVE knowledge.
+   *
+   * Distinct from `openingScenario`, which is a pedagogical hook and may stay
+   * short. This is the statement of the idea INCLUDING its governing
+   * conditions, packed in complete logical units — never cut mid-sentence, so
+   * an exposed statement is always a complete authored one. Null when the
+   * entry has no such section.
+   */
+  coreUnderstanding: PackedKnowledge | null
+  /**
+   * Authored content this load could NOT expose. Empty is the normal case.
+   *
+   * The point of the whole module: a caller can distinguish "no misconceptions
+   * authored" from "misconceptions authored and lost". Never carries a
+   * substitute claim — the runtime preserves authored truth, it does not
+   * author it.
+   */
+  knowledgeExposure: KnowledgeExposureFailure[]
   /**
    * TQ-1: Voice detection cues from Voice teaching "what to listen for".
    * Each entry maps a learner utterance pattern to its diagnostic implication.
@@ -1162,120 +1191,72 @@ function parseEBOpeningScenario(content: string): string | null {
  * misconception is — Blueprint entries keep their existing authority and are
  * emitted first; these are merged after and deduped, never replacing them.
  */
-export interface EBMisconception {
-  /** Authored label, e.g. "M1". */
-  id: string
-  /** The claim itself, as authored. */
-  title: string
-  /** What a learner holding it says or does — the detection surface. */
-  symptom: string | null
-  /** The authored probe, verbatim where one exists. */
-  probe: string | null
-  /** How to repair it. */
-  recovery: string | null
-}
-
-/** The two authored id shapes — `MC-1` first so the longer token wins.
- *  Deliberately closed: no bare number, no arbitrary label. */
-const EB_MC_ID = String.raw`(?:MC-\d+|M\d+)`
-/** Where a misconception heading may begin: at the line's start, or after a
- *  single markdown list marker. That marker is the ONLY prefix allowed, and a
- *  bold `M…`/`MC-…` token followed by a dash is still required — an ordinary
- *  bullet can never be mistaken for a misconception heading. */
-const EB_MC_HEAD = String.raw`[ \t]*(?:[-*+][ \t]+)?\*\*\s*${EB_MC_ID}\s*[—–-]`
+export type EBMisconception = AuthoritativeMisconception
 
 /**
  * Parse `## Misconceptions` from an EB concept entry.
  *
- * TWO authored shapes exist in the corpus, both matched here:
+ * The GRAMMAR now lives in `ebKnowledge.ts`, which owns the one regex that
+ * both counts authored blocks and parses them — so `authored === parsed` holds
+ * by construction for every supported shape, and the corpus contract test
+ * calls those exact functions rather than a second parser that can drift.
  *
- *   (a) `M1`, heading opening its own line — physics (218 records) and
- *       english, plus `math.arith.fractions`:
- *
- *     **M1 — Units are interchangeable labels on the same number**
- *     - *Why*: ...
- *     - *Symptom / phrases*: ...
- *     - *Detection probe (verbatim)*: "..."
- *     - *Recovery*: ...
- *
- *   (b) `MC-1`, often inside a markdown list item — the mathematics and
- *       chemistry batches, which cite the Blueprint's own MC ids by number:
- *
- *     - **MC-1 — "Sets preserve order and allow repetition" (Type 1)**: the
- *       student writes {1,2,1} and claims 3 elements. Full trigger: Blueprint
- *       Component 2, MC-1.
- *
- * Shape (b) was invisible until 2026-08-18: the id pattern accepted only
- * `M\d+` (so `MC-1` never matched) and the block anchor required the heading
- * to open its line (so a list marker suppressed the split). 442 authored
- * mathematics records across 153 files, and 198 chemistry records across 67,
- * were parsed as zero. Nothing was re-authored to fix it — only these regexes.
- *
- * Field labels vary a little between batches (`Detection probe`,
- * `Detection probe (verbatim)`, `Symptom`, `Symptom / phrases`), so matching is
- * on the label's stem rather than an exact string. An entry that yields only a
- * title is still returned: knowing the claim exists is what stops the tutor
- * agreeing with it, and that is the failure this closes.
+ * Measured across all 1,118 EB entries before that move: 3,016 authored
+ * candidate blocks produced 1,220 parsed entries, and 664 files parsed to ZERO
+ * while authoring real content (chem 75, eng 214, math 192, phys 183). Three
+ * live authored conventions were invisible — a parenthetical type qualifier
+ * where a dash was required, a non-bold `###` heading with a colon, and a
+ * non-numeric id. Nothing in the corpus was re-authored to fix it; the parser
+ * was the thing that was wrong.
  */
-function parseEBMisconceptions(content: string): EBMisconception[] {
+function parseEBMisconceptions(content: string, conceptId: string): {
+  entries: EBMisconception[]
+  authoredCandidates: number
+} {
   const raw = extractEBSection(content, 'Misconceptions', 'Misconception library', 'Misconception Library')
-  if (!raw) return []
+  if (!raw) return { entries: [], authoredCandidates: 0 }
 
-  const out: EBMisconception[] = []
-  // Split on the bolded heading that opens each entry, keeping the heading.
-  const blocks = raw.split(new RegExp(String.raw`\n(?=\s*(?:[-*+][ \t]+)?\*\*\s*${EB_MC_ID}\s*[—–-])`))
-
-  for (const block of blocks) {
-    // The title may WRAP. `[^*\n]` used to forbid that, and a wrapped heading
-    // failed the match — which silently discarded the entire entry, body and
-    // all. Corpus scan: 9 authored misconceptions across 8 files, including
-    // `phys.meas.dimensions` M4, never reached a prompt for that reason.
-    // Newlines are allowed and collapsed; the length bound and `[^*]` keep it
-    // from running past a missing closing `**` into the body.
-    //
-    // The bound is 360, not 300: four authored mathematics titles run 306-353
-    // characters and were rejected by the old value. Measured across all 917 EB
-    // files before changing it — raising the bound admits EXACTLY those four and
-    // nothing else, and the corpus is saturated (removing the bound entirely
-    // still yields 869 records, longest title 353). The guard itself is load
-    // bearing and stays: an unclosed `**` followed by asterisk-free prose and a
-    // later bold token DOES run away once the bound is large enough, so this is
-    // a raise, never a removal. Pinned by ebMisconceptionFormatCompat.test.ts.
-    const head = new RegExp(String.raw`\*\*\s*(${EB_MC_ID})\s*[—–-]\s*([^*]{3,360}?)\s*\*\*`).exec(block)
-    if (!head) continue
-    head[2] = head[2].replace(/\s+/g, ' ').trim()
-
-    const field = (...stems: string[]): string | null => {
-      for (const stem of stems) {
-        // `- *Label ...*: body` — body runs to the next bulleted field or the
-        // end of the block, so a wrapped multi-line value survives intact.
-        const re = new RegExp(
-          `\\*\\s*${stem}[^*]*\\*\\s*:?\\s*([\\s\\S]*?)(?=\\n\\s*-\\s*\\*|\\n\\s*\\*\\*\\s*M\\d|\\n${EB_MC_HEAD}|$)`,
-          'i',
-        )
-        const m = re.exec(block)
-        if (m?.[1]) {
-          const v = m[1].replace(/\s+/g, ' ').trim()
-          if (v) return v.slice(0, 400)
-        }
-      }
-      return null
-    }
-
-    out.push({
-      id: head[1],
-      title: head[2].trim(),
-      symptom: field('Symptom'),
-      probe: field('Detection probe', 'Probe'),
-      recovery: field('Recovery'),
-    })
-    // Budget guard: a handful is what a prompt can act on, and every concept
-    // entry pays this cost on every turn.
-    if (out.length >= 6) break
-  }
-
-  return out
+  const authoredCandidates = countMisconceptionCandidates(raw)
+  const entries = parseAuthoritativeMisconceptions(raw, {
+    sourceType: 'educational-brain',
+    conceptSlug: conceptId,
+    section: 'Misconceptions',
+  })
+  // Budget guard, unchanged in spirit: a handful is what a prompt can act on,
+  // and every concept entry pays this cost on every turn. Reported separately
+  // from a PARSE failure — a budget cut is deliberate, a parse of zero is not.
+  return { entries: entries.slice(0, EB_MISCONCEPTION_PROMPT_BUDGET), authoredCandidates }
 }
+
+/** How many authored misconceptions a single prompt will carry. */
+export const EB_MISCONCEPTION_PROMPT_BUDGET = 6
+
+/**
+ * Load the authored Core Understanding as AUTHORITATIVE teaching knowledge.
+ *
+ * Separate from `parseEBOpeningScenario` on purpose. The opening scenario is a
+ * pedagogical HOOK and may stay short; Core Understanding is the authoritative
+ * statement of the idea, including the conditions under which it holds, and
+ * must not lose its tail to an arbitrary character position.
+ *
+ * Measured before this split: the opening-scenario path exposed 22.7% of
+ * authored Core Understanding characters, and 794 of 1,115 entries dropped a
+ * tail containing governing language (only if / must / never / assumes /
+ * except / conserved / sign convention / boundary / valid when) — exactly the
+ * sentences whose absence lets a model state a plausible but false universal.
+ * Raising 400 to 800 would only move that boundary, so the packer is
+ * section-aware instead and never cuts a unit in half.
+ */
+function parseEBCoreUnderstanding(content: string): PackedKnowledge | null {
+  const raw = extractEBSection(content, 'Core Understanding')
+  if (!raw) return null
+  const packed = packCoreUnderstanding(raw, EB_CORE_UNDERSTANDING_BUDGET)
+  return packed.text ? packed : null
+}
+
+/** Character budget for the authoritative Core Understanding channel. Larger
+ *  than the opening hook because it carries the conditions, not the story. */
+export const EB_CORE_UNDERSTANDING_BUDGET = 1800
 
 // ── P1: Teaching Sequence / Tutor Actions / Discovery / Assessment ──────────
 
@@ -1360,12 +1341,40 @@ export function loadEBConceptContext(conceptId: string): EBConceptContextResult 
     // sections (as chemistry's 186 entries do). Gate removed so any
     // subject whose EB entry has these sections gets the same Teaching
     // Sequence Executor treatment as physics — no new architecture.
+    // SILENT-LOSS PREVENTION. Both channels report what they could NOT expose,
+    // so a caller can tell "this concept has no misconceptions" from "this
+    // concept's misconceptions did not parse". Nothing here invents a
+    // replacement claim — a failure is reported, never filled in.
+    const mc = parseEBMisconceptions(raw, conceptId)
+    const core = parseEBCoreUnderstanding(raw)
+    const knowledgeExposure: KnowledgeExposureFailure[] = []
+    if (mc.authoredCandidates > 0 && mc.entries.length === 0) {
+      knowledgeExposure.push({
+        kind: 'misconceptions-unparsed',
+        conceptSlug: conceptId,
+        section: 'Misconceptions',
+        authored: mc.authoredCandidates,
+        exposed: 0,
+      })
+    }
+    if (core?.droppedGoverning) {
+      knowledgeExposure.push({
+        kind: 'core-understanding-truncated-governing',
+        conceptSlug: conceptId,
+        section: 'Core Understanding',
+        authored: core.authoredChars,
+        exposed: core.exposedChars,
+      })
+    }
+
     const context: EBConceptContext = {
       conceptId,
       recoveryShrinkTo: shrinkTo,
       recoveryTriggers: triggers,
       antiAnalogies: parseEBAntiAnalogies(raw),
-      ebMisconceptions: parseEBMisconceptions(raw),
+      ebMisconceptions: mc.entries,
+      coreUnderstanding: core,
+      knowledgeExposure,
       voiceDetectionCues: parseEBVoiceDetectionCues(raw),
       openingScenario: parseEBOpeningScenario(raw),
       teachingSequence: parseEBTeachingSequence(raw),
@@ -1518,6 +1527,38 @@ export function buildBlueprintContextBlock(
     }
   }
 
+  // AUTHORITATIVE CORE UNDERSTANDING.
+  //
+  // Its own channel, above the opening hook, and explicitly labelled as the
+  // authority. The hook is how the lesson STARTS; this is what is TRUE,
+  // including the conditions under which it is true. Before the split, the
+  // only path to the model was the hook's first paragraph cut at 400
+  // characters — 22.7% of authored Core Understanding reached the model and
+  // 794 of 1,115 entries lost a tail carrying governing language.
+  //
+  // The instruction is deliberately about AUTHORITY, not emphasis: the model
+  // may explain this, and must not replace a missing condition with one of its
+  // own. That is the preventive half of the same job `claimChallengeGuard`
+  // does reactively.
+  if (ebContext?.coreUnderstanding?.text) {
+    if (!hasContent) {
+      lines.push('\n\nBLUEPRINT CONTEXT')
+      lines.push(`Concept: ${content.conceptId}`)
+      hasContent = true
+    }
+    lines.push(
+      '\nCORE UNDERSTANDING (authoritative — this is the authored truth for this concept.',
+    )
+    lines.push(
+      'Teach from it and explain it in your own words. Do NOT contradict it, and do NOT',
+    )
+    lines.push(
+      'invent a condition, exception, limit or convention that is not stated here or in the',
+    )
+    lines.push('material below — if you are unsure, say so instead):')
+    lines.push(ebContext.coreUnderstanding.text)
+  }
+
   // TQ-2 — Opening scenario (concrete anchor before any formal definition)
   if (ebContext?.openingScenario) {
     if (!hasContent) {
@@ -1581,7 +1622,7 @@ export function buildBlueprintContextBlock(
         lines.push(`\n${mc.id}: "${mc.title}"`)
         if (mc.symptom) lines.push(`  Watch for: ${mc.symptom}`)
         if (mc.probe) lines.push(`  Probe: ${mc.probe}`)
-        if (mc.recovery) lines.push(`  Repair: ${mc.recovery}`)
+        if (mc.correction) lines.push(`  Repair: ${mc.correction}`)
       }
     }
   }

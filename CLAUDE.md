@@ -6221,3 +6221,80 @@ is the unbuilt, explicitly non-binding EOS v3 clean-sheet proposal (`docs/archit
   campaign, zero file-content conflicts); tsc clean; build clean. Merge commit `d9022e20`, fix
   commit `0260240a`, both on `main`, deployed `dpl_GcYqqVJjmsq5TJxkAsGTGrKfP25r` READY on
   `my-tutor-flame.vercel.app`.
+
+## Authored knowledge now reaches the runtime, or fails observably (2026-09-13, `4f3ebaf`)
+
+**Read `src/lib/curriculum/ebKnowledge.ts`'s header before changing the
+misconception grammar or the Core Understanding budget.** It records the trap
+that was hit while writing it.
+
+### Two silent-loss defects between the corpus and the prompt
+Measured over all 1,169 EB entries with the production extractor, not sampled:
+
+| | before | after |
+|---|---|---|
+| misconception candidates authored | 3,052 | 3,052 |
+| parsed | **1,220** | **3,052** |
+| files parsing to ZERO | **706 (60%)** | **0** |
+| Core Understanding chars exposed | **22.7%** | **80.3%** |
+| entries silently dropping governing language | **794** | **0 (188 REPORTED)** |
+
+Per subject, misconceptions before → after: chem 198→430, eng 5→444,
+math 798→1,528, phys 219→650.
+
+**Cause 1:** blueprintLoader's inline grammar was stricter than the corpus in
+three independent ways — a parenthetical type qualifier where it demanded a
+dash (`**MC-3 (Type 2 — perceptual intuition)**:`), a non-bold `### MC-1:`
+head, and non-numeric ids (`MC-A`, descriptive slugs). **Cause 2:** the only
+path from the authored `## Core Understanding` section to the model was the
+opening hook's first paragraph cut at 400 chars.
+
+### Why the budget was NOT simply raised
+400 → 1200 moves the boundary; it does not remove it. `packCoreUnderstanding`
+packs whole logical units and runs a second pass that RESCUES units carrying
+governing language (only if / must / never / conserved / sign convention /
+breaks down / domain of validity …). What still will not fit is reported, not
+lost.
+
+### The trap, and the test that caught it
+`countMisconceptionCandidates` and `parseAuthoritativeMisconceptions` share
+`MC_HEAD_RE`, so `authored === parsed` holds **by construction** — that
+equality therefore CANNOT catch a grammar narrowing. It is the 2,800-record
+**volume floor** in `ebKnowledgeContract.test.ts` that catches it, and it did:
+a first draft required a hyphenated slug and silently dropped 157 genuine
+`MC-A`/`MC-B` entries across `eng.communication.*`. Narrowing the definition of
+"authored" until it matches the parser is the same defect this module exists to
+stop, one level up. **Do not delete that floor.**
+
+### What is deliberately NOT done
+The runtime never invents a condition the corpus does not state.
+`KnowledgeExposureFailure` has no field that could carry a substitute claim, and
+the CORE UNDERSTANDING prompt channel says so in the prompt itself. Grading,
+mastery and assessment authority are untouched; `claimChallengeGuard`,
+`V-CHALLENGE`, `teachingIntegrityUncertain` and the mastery gate are connected
+to, not duplicated. Provenance is internal and asserted never to reach
+learner-facing text. Failures log `[learn/chat] KNOWLEDGE_EXPOSURE_FAILURE=`
+per the existing `*_EVENT` convention — **no DB write** (Supabase egress quota).
+
+### Calibration case — the content/architecture split
+`chem.bond.resonance`: its formal-charge formula and three
+dominant-contributor ranking rules were authored all along and never reached
+the model; they now do (1,720 of 2,636 chars). Its formal-charge **checksum**
+("formal charges sum to the species charge") is genuinely absent from both the
+EB entry and the Blueprint — a CONTENT gap owned by the Curriculum Production
+Pipeline, correctly not synthesised by the runtime. Recorded in
+`docs/qa/PHYSICS_CHEMISTRY_MASTER_DEFECT_BACKLOG.md` with the general form of
+that split.
+
+### Guard-test discipline
+17 pre-existing assertions in two files needed updating; **none deleted** —
+each keeps its original assertion verbatim in a dated comment and re-asserts
+the same invariant against the new shape. One of them
+(`chem.bond.hybridization` expected `[]`) had frozen a parse FAILURE as
+expected behaviour: that file authors four misconceptions the old parser could
+not read.
+
+Non-vacuity proven by neutering and restoring: reverting the parser grammar
+fails 6 tests; reverting the packer to `slice(0, 400)` fails 4.
+Suite 659 files / 13,696 passed / 9 skipped; tsc clean; build clean
+(middleware 79.7 kB, unchanged).
