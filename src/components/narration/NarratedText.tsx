@@ -3,19 +3,34 @@
 /**
  * NarratedText — the ONE reusable read-along text renderer.
  *
- * Subject-agnostic: takes `segments` + `activeSegmentIndex` from
- * useNarrationPlayback and renders them as flowing text with the active
- * segment visually darker/more prominent than the rest — no subject, no
- * lesson type, no content-format assumption anywhere in this file.
+ * Subject-agnostic: takes `segments` + `activeSegmentIndex` + `activeWordIndex`
+ * from useNarrationPlayback and renders each segment's words individually,
+ * with the single word currently being spoken visually darker/more
+ * prominent than the rest — no subject, no lesson type, no content-format
+ * assumption anywhere in this file.
  *
- * AUTO-SCROLL: keeps the active segment comfortably inside its own
- * scrollable container, without fighting a learner who is deliberately
- * scrolling. `scrollFollow.ts` (pure) decides WHETHER to scroll; this
- * component only supplies the real numbers (rects, timestamps) and tells
- * apart a scroll IT triggered from one the learner triggered — a `wheel`/
- * `touchmove` event only fires from real user input, never from
- * `scrollIntoView()`, so those (not the `scroll` event itself, which fires
- * for both) are what mark "the learner scrolled."
+ * WORD-LEVEL WHEN THE ENGINE CAN BACK IT, SEGMENT-LEVEL OTHERWISE: each
+ * segment is rendered from its own `renderedWords` token list (words.ts) —
+ * an ordered mix of 'word' and 'space' tokens whose concatenation
+ * reproduces the segment's rendered text exactly, so highlighting never
+ * mangles whitespace or punctuation. `activeWordIndex` is a specific index
+ * when the engine driving playback has a real basis for that precise a
+ * claim (the server-audio engine, sampling a genuine audio clock); it is
+ * `null` when the engine only knows which SEGMENT is being read, not which
+ * word within it (the browser-speechSynthesis engine — see its own header
+ * for why `onboundary` cannot honestly support a per-word claim). In that
+ * case every word of the active segment renders in the active style
+ * together, never a single word singled out ahead of what the engine can
+ * actually prove — there is no in-between "half-known" word state.
+ *
+ * AUTO-SCROLL: keeps the active WORD comfortably inside its own scrollable
+ * container, without fighting a learner who is deliberately scrolling.
+ * `scrollFollow.ts` (pure) decides WHETHER to scroll; this component only
+ * supplies the real numbers (rects, timestamps) and tells apart a scroll IT
+ * triggered from one the learner triggered — a `wheel`/`touchmove` event
+ * only fires from real user input, never from `scrollIntoView()`, so those
+ * (not the `scroll` event itself, which fires for both) are what mark "the
+ * learner scrolled."
  */
 import { useEffect, useRef } from 'react'
 import type { NarrationSegment } from '@/lib/narration/types'
@@ -51,8 +66,16 @@ function findScrollContainerRect(el: HTMLElement | null): Rect {
 export interface NarratedTextProps {
   segments: NarrationSegment[]
   activeSegmentIndex: number | null
+  /** Index into `segments[activeSegmentIndex].renderedWords` (word-kind
+   *  tokens only) — the single word to highlight. `null` while a segment IS
+   *  active means "highlight every word of that segment" (see this file's
+   *  header) rather than "nothing is active" — that state is instead
+   *  represented by `activeSegmentIndex` itself being `null`. */
+  activeWordIndex: number | null
   /** Custom per-segment renderer (e.g. to reuse a caller's own markdown/math
-   *  inline formatter). Defaults to plain text. */
+   *  inline formatter). When supplied, that segment opts OUT of automatic
+   *  word-level highlighting — the caller owns its own rendering entirely.
+   *  Defaults to the built-in word-by-word renderer. */
   renderSegment?: (segment: NarrationSegment) => React.ReactNode
   activeColor?: string
   inactiveColor?: string
@@ -61,7 +84,7 @@ export interface NarratedTextProps {
 }
 
 export function NarratedText({
-  segments, activeSegmentIndex, renderSegment, activeColor, inactiveColor, className, style,
+  segments, activeSegmentIndex, activeWordIndex, renderSegment, activeColor, inactiveColor, className, style,
 }: NarratedTextProps) {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const activeRef = useRef<HTMLSpanElement | null>(null)
@@ -88,8 +111,10 @@ export function NarratedText({
     }
   }, [])
 
+  // Follows the active WORD, not the whole sentence — re-runs on every word
+  // advance, not just every segment change.
   useEffect(() => {
-    if (activeSegmentIndex === null) return
+    if (activeSegmentIndex === null || activeWordIndex === null) return
     const container = containerRef.current
     const active = activeRef.current
     if (!container || !active) return
@@ -104,29 +129,44 @@ export function NarratedText({
     // this triggers can't itself be read back as a manual scroll.
     programmaticScrollUntil.current = Date.now() + 600
     active.scrollIntoView({ behavior: 'smooth', block: 'center' })
-  }, [activeSegmentIndex])
+  }, [activeSegmentIndex, activeWordIndex])
 
   return (
     <div ref={containerRef} className={className} style={{ ...style, scrollBehavior: 'smooth' }}>
-      {segments.map((segment, i) => {
-        const isActive = i === activeSegmentIndex
+      {segments.map((segment, segIdx) => {
+        const isActiveSegment = segIdx === activeSegmentIndex
         return (
-          <span
-            key={segment.id}
-            ref={isActive ? activeRef : undefined}
-            data-segment-id={segment.id}
-            data-narration-active={isActive || undefined}
-            style={{
-              color: isActive ? (activeColor ?? 'var(--text-primary)') : (inactiveColor ?? 'var(--text-secondary)'),
-              fontWeight: isActive ? 700 : 400,
-              transition: 'color 150ms ease, font-weight 150ms ease',
-              borderRadius: 4,
-              padding: isActive ? '1px 3px' : undefined,
-              background: isActive ? 'var(--coral-muted)' : 'transparent',
-            }}
-          >
-            {renderSegment ? renderSegment(segment) : segment.text}
-            {i < segments.length - 1 ? ' ' : ''}
+          <span key={segment.id} data-segment-id={segment.id}>
+            {renderSegment
+              ? renderSegment(segment)
+              : segment.renderedWords.map((token, tokenIdx) => {
+                  if (token.kind === 'space') return token.text
+                  // A specific word claim when the engine supplies one;
+                  // otherwise (activeWordIndex === null) every word of the
+                  // active segment is active together — see this file's
+                  // header for why that is the honest claim in that case.
+                  const isActive = isActiveSegment && (activeWordIndex === null || token.wordIndex === activeWordIndex)
+                  const isRefTarget = isActive && (activeWordIndex === null ? token.wordIndex === 0 : token.wordIndex === activeWordIndex)
+                  return (
+                    <span
+                      key={tokenIdx}
+                      ref={isRefTarget ? activeRef : undefined}
+                      data-word-index={token.wordIndex}
+                      data-narration-active={isActive || undefined}
+                      style={{
+                        color: isActive ? (activeColor ?? 'var(--text-primary)') : (inactiveColor ?? 'var(--text-secondary)'),
+                        fontWeight: isActive ? 700 : 400,
+                        transition: 'color 150ms ease, font-weight 150ms ease',
+                        borderRadius: 3,
+                        padding: isActive ? '0 2px' : undefined,
+                        background: isActive ? 'var(--coral-muted)' : 'transparent',
+                      }}
+                    >
+                      {token.text}
+                    </span>
+                  )
+                })}
+            {segIdx < segments.length - 1 ? ' ' : ''}
           </span>
         )
       })}

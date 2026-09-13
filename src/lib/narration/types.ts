@@ -8,6 +8,9 @@
  * (src/components/narration/*) via the same hook (useNarrationPlayback).
  */
 
+import type { WordToken } from './words'
+export type { WordToken }
+
 /** One sentence-sized unit of narrated text, in spoken order. */
 export interface NarrationSegment {
   /** Stable within one narration session — `${sessionId}-seg-${index}`. */
@@ -24,6 +27,15 @@ export interface NarrationSegment {
   spokenText: string
   /** 0-based order within the narration. */
   index: number
+  /** `text` tokenized into words + whitespace separators — what NarratedText
+   *  actually renders and highlights word-by-word. Concatenating every
+   *  token's own text reproduces `text` exactly. */
+  renderedWords: WordToken[]
+  /** Word count of `spokenText` — used to map a spoken-text word position
+   *  (from a browser boundary event, or a server-audio time estimate) onto
+   *  the corresponding rendered word when the two counts differ. See
+   *  words.ts for why/when they can differ. */
+  spokenWordCount: number
 }
 
 export type NarrationPlaybackStatus =
@@ -38,6 +50,11 @@ export interface NarrationPlaybackState {
   status: NarrationPlaybackStatus
   /** Index into the segment list, or null when nothing has started yet. */
   activeSegmentIndex: number | null
+  /** Index into `segments[activeSegmentIndex].renderedWords` (word-kind
+   *  tokens only) — the single word currently being spoken. Null whenever
+   *  activeSegmentIndex is null, and always null on COMPLETED/ERROR (nothing
+   *  stays highlighted once narration is done). */
+  activeWordIndex: number | null
   /** 0-100. For the browser-speech path this is segment-count based (no
    *  sub-segment audio clock exists); for the server-audio path it is
    *  audio.currentTime / audio.duration. */
@@ -47,5 +64,6 @@ export interface NarrationPlaybackState {
 export const INITIAL_NARRATION_STATE: NarrationPlaybackState = {
   status: 'IDLE',
   activeSegmentIndex: null,
+  activeWordIndex: null,
   progressPercent: 0,
 }

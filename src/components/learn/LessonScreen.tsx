@@ -63,6 +63,8 @@ import {
   questionIsVisible,
   type QuickCheckWindowState,
 } from '@/lib/learn/quickCheckWindow'
+import { nextDragOffset, clampDragOffset, ZERO_DRAG_OFFSET, type DragPoint } from '@/lib/learn/quickCheckDrag'
+import { displayText as deriveDisplayText, narrationText as deriveNarrationText } from '@/lib/learn/narratedMessageText'
 
 const MonacoEditor = dynamic(() => import('@monaco-editor/react'), { ssr: false })
 // react-three-fiber needs a real DOM/WebGL context — load client-only, same as Monaco.
@@ -1214,6 +1216,52 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   // previous question can never hide a fresh one.
   const [quickCheckWindow, setQuickCheckWindow] = useState<QuickCheckWindowState | null>(null)
   const quickCheckMode = quickCheckModeFor(quickCheckWindow, activeMcq?.askedAt ?? null)
+  // QUICK CHECK DRAG (UI ONLY, no persistence — see quickCheckDrag.ts). A
+  // pixel offset layered on top of the panel's existing CSS position; reset
+  // whenever a genuinely NEW question arrives so a drag never carries over
+  // to a question the learner never moved the panel for.
+  const [quickCheckDragOffset, setQuickCheckDragOffset] = useState<DragPoint>(ZERO_DRAG_OFFSET)
+  const [isDraggingQuickCheck, setIsDraggingQuickCheck] = useState(false)
+  const quickCheckPanelRef = useRef<HTMLDivElement | null>(null)
+  const quickCheckDragRef = useRef<{ pointerId: number; startX: number; startY: number; startOffset: DragPoint; naturalRect: { left: number; top: number; width: number; height: number } } | null>(null)
+  useEffect(() => { setQuickCheckDragOffset(ZERO_DRAG_OFFSET) }, [activeMcq?.askedAt])
+  // Drag handle lives on the header row only — the options list and the
+  // window-control buttons never get a pointerdown listener at all, so
+  // "answer areas must never be draggable" and "controls must stay
+  // clickable" both hold structurally, not by a class-name exclusion list.
+  // A tap that started on a <button> (minimize/maximize/close) is left
+  // completely alone — no preventDefault, no pointer capture — so its own
+  // onClick still fires normally.
+  const handleQuickCheckHeaderPointerDown = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
+    if ((e.target as HTMLElement).closest('button')) return
+    const panel = quickCheckPanelRef.current
+    if (!panel) return
+    e.preventDefault() // no text selection, no native drag ghost
+    const measured = panel.getBoundingClientRect()
+    const naturalRect = {
+      left: measured.left - quickCheckDragOffset.x,
+      top: measured.top - quickCheckDragOffset.y,
+      width: measured.width,
+      height: measured.height,
+    }
+    quickCheckDragRef.current = { pointerId: e.pointerId, startX: e.clientX, startY: e.clientY, startOffset: quickCheckDragOffset, naturalRect }
+    e.currentTarget.setPointerCapture(e.pointerId)
+    setIsDraggingQuickCheck(true)
+  }, [quickCheckDragOffset])
+  const handleQuickCheckHeaderPointerMove = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
+    const drag = quickCheckDragRef.current
+    if (!drag || drag.pointerId !== e.pointerId) return
+    const dx = e.clientX - drag.startX
+    const dy = e.clientY - drag.startY
+    const proposed = nextDragOffset(drag.startOffset, dx, dy)
+    const clamped = clampDragOffset(proposed, drag.naturalRect, { width: window.innerWidth, height: window.innerHeight })
+    setQuickCheckDragOffset(clamped)
+  }, [])
+  const endQuickCheckDrag = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
+    if (quickCheckDragRef.current?.pointerId !== e.pointerId) return
+    quickCheckDragRef.current = null
+    setIsDraggingQuickCheck(false)
+  }, [])
   // P6.6: the server-decided lesson completion payload. Presence of this state
   // ends the lesson in the UI — the learner never continues inside a completed
   // lesson, and the next lesson starts only when they choose to.
@@ -5219,23 +5267,36 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 // `stripCode(msg.content)` fallback, never the cached branch.
                 const strippedContent = cached ? null : stripCode(msg.content)
                 const isRevealingText = !cached && msg.streaming === true && typeof msg.revealedLength === 'number'
-                const rawDisplayText = cached
-                  ? (cached.hasMore && !isExpanded ? cached.preview : cached.full)
-                  : isRevealingText
-                    ? (strippedContent as string).slice(0, msg.revealedLength)
-                    : (strippedContent as string)
                 const isIntro = !isUser && msg.id === introMessageId
                 // Parsed from the message the tutor actually sent, never
                 // fabricated: no match (or a malformed one) leaves the original
                 // sentence exactly where it was.
                 const familiarity = isIntro && !msg.streaming ? parseFamiliarityQuestion(msg.content) : null
-                // Printed text drops the line only when the control below is
-                // actually rendering it, so the question is never shown twice
-                // and never disappears without a replacement. msg.content is
-                // untouched, so the spoken introduction still includes it.
-                const displayText = familiarity
-                  ? rawDisplayText.replace(familiarity.line, '').replace(/\n{3,}/g, '\n\n').trim()
-                  : rawDisplayText
+                const familiarityLine = familiarity?.line ?? null
+                // DISPLAY vs. NARRATION fork (narratedMessageText.ts) — VISUAL
+                // COLLAPSE STATE ≠ NARRATION CONTENT SOURCE. `displayText`
+                // respects the learner's own Read More / Collapse choice
+                // exactly as before this fork existed. `narrationSourceText` is
+                // always the COMPLETE message regardless of that choice, so
+                // Play always speaks the whole thing and toggling Read More
+                // mid-narration can never restart or duplicate it — the string
+                // handed to useNarrationPlayback stays byte-identical across
+                // that toggle (its own [id, text] reset effect keys off `text`
+                // changing). A streaming message has no `cached` entry yet and
+                // is never actually narratable — the Play control only renders
+                // once `!msg.streaming` — so both forks share the same
+                // reveal-in-progress fallback there; that is not a truncation
+                // of real narration content, since narration cannot start yet.
+                const streamingFallback = (() => {
+                  const raw = isRevealingText ? (strippedContent as string).slice(0, msg.revealedLength) : (strippedContent as string)
+                  return familiarityLine ? raw.replace(familiarityLine, '').replace(/\n{3,}/g, '\n\n').trim() : raw
+                })()
+                const displayText = cached
+                  ? deriveDisplayText(cached, isExpanded, familiarityLine)
+                  : streamingFallback
+                const narrationSourceText = cached
+                  ? deriveNarrationText(cached, familiarityLine)
+                  : streamingFallback
 
                 // ── INVISIBLE TWO-COLUMN TEACHING CANVAS ─────────────────
                 // A tutor turn carrying a figure becomes ONE panel with two
@@ -5380,11 +5441,17 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                             One hook instance per message via the TutorNarratedMessage boundary
                             (hooks can't be called conditionally inside this .map()). Before Play
                             is ever pressed (status IDLE) the message renders EXACTLY as before —
-                            plain MessageContent, no visual change — so this is purely additive. */}
+                            plain MessageContent, no visual change — so this is purely additive.
+                            `text` is `narrationSourceText`, NOT `displayText`: narration always
+                            gets the COMPLETE message regardless of Read More collapse state (see
+                            narratedMessageText.ts) — once status leaves IDLE, NarratedText below
+                            renders every segment it is given unconditionally, which is what
+                            reveals content that was hidden behind "Read more" as narration
+                            reaches it, with no separate reveal/expand mechanism needed. */}
                         {msg.content ? (
                           <TutorNarratedMessage
                             id={msg.id}
-                            text={displayText}
+                            text={narrationSourceText}
                             lang={teachingLanguage}
                             voiceType={voiceType}
                             speed={isIntro ? speed * INTRO_SPEECH_RATE_FACTOR : speed}
@@ -5395,7 +5462,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                                 <div className="animate-message" style={{ fontSize: 15.6, lineHeight: 1.6, color: 'var(--text-primary)' }}>
                                   {narration.status === 'IDLE'
                                     ? <MessageContent text={displayText} isUser={false} />
-                                    : <NarratedText segments={narration.segments} activeSegmentIndex={narration.activeSegmentIndex} />}
+                                    : <NarratedText segments={narration.segments} activeSegmentIndex={narration.activeSegmentIndex} activeWordIndex={narration.activeWordIndex} />}
                                 </div>
 
                                 {cached?.hasMore && (
@@ -5741,6 +5808,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 changed. */}
             {activeMcq && !isStreaming && !lessonCompletion && panelIsVisible(quickCheckMode) && (
               <div
+                ref={quickCheckPanelRef}
                 role="group"
                 aria-label={t('lc_answers_aria')}
                 className={quickCheckMode === 'minimized' ? `${styles.quickCheckFloating} ${styles.quickCheckMinimized}` : styles.quickCheckFloating}
@@ -5752,9 +5820,32 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                   display: 'flex',
                   flexDirection: 'column',
                   gap: 8,
+                  // DRAG (see quickCheckDrag.ts) — a pixel offset layered on
+                  // top of the CSS centering translate; {0,0} reproduces the
+                  // untouched default position exactly.
+                  transform: `translate(calc(-50% + ${quickCheckDragOffset.x}px), ${quickCheckDragOffset.y}px)`,
+                  transition: isDraggingQuickCheck ? 'none' : 'transform 120ms ease',
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                {/* DRAG HANDLE — the header row only. The buttons inside it
+                    (minimize/maximize/close) opt themselves out via the
+                    pointerdown handler's own `closest('button')` check, so
+                    they stay fully clickable; the question/options below are
+                    outside this row entirely and never receive a drag
+                    listener at all. */}
+                <div
+                  onPointerDown={handleQuickCheckHeaderPointerDown}
+                  onPointerMove={handleQuickCheckHeaderPointerMove}
+                  onPointerUp={endQuickCheckDrag}
+                  onPointerCancel={endQuickCheckDrag}
+                  style={{
+                    display: 'flex', alignItems: 'center', gap: 6,
+                    cursor: isDraggingQuickCheck ? 'grabbing' : 'grab',
+                    touchAction: 'none',
+                    userSelect: 'none',
+                    WebkitUserSelect: 'none',
+                  }}
+                >
                   <span style={{
                     fontSize: 10.8, fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase',
                     color: UI.indigo, background: `${UI.indigo}18`, padding: '2px 8px', borderRadius: 20,

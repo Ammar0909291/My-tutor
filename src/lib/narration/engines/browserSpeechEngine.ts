@@ -6,23 +6,59 @@
  * per-message Play button does). It reuses the same building blocks
  * `speakText` (tts.ts) already uses — `rateForSegment`, `pauseBeforeSegment`,
  * `LANG_LOCALE`, `VOICE_SETTINGS` — so cadence and voice selection match the
- * platform's existing speech exactly. What it adds, that `speakText` does
- * not expose, is a per-segment `onstart` boundary (real, authoritative — the
- * browser only fires it when that utterance actually begins speaking, never
- * a fake timer) and genuine pause/resume via the Web Speech API's own
- * `pause()`/`resume()`, which preserve position natively.
+ * platform's existing speech exactly.
  *
- * PAUSE DURING THE INTER-SEGMENT GAP: `speechSynthesis.pause()` only pauses
- * an utterance that is actively speaking — it does nothing during the
- * short breathing pause this engine schedules between sentences. Without
- * extra care, pausing during that gap would let the already-scheduled
- * "start next segment" timer fire anyway, ignoring the pause. `scheduleNext`
- * is the one place a next segment is ever started, and it always checks
- * `paused` first; `pause()` also cancels any pending scheduled start and
- * remembers which segment it was, so `resume()` can start exactly that
- * segment instead of relying on a timer that may never have been allowed to
- * fire. This is the mechanism that makes "pause mid-sentence" and "pause
- * between sentences" both correctly resumable.
+ * ARCHITECTURE, AND WHY (2026-09-13 redesign — supersedes two prior attempts
+ * at this same problem, both of which tried to CORRECT `onboundary`'s timing
+ * with an invented delay: first a proportional time-window estimate, then a
+ * self-calibrating median-gap "pacing guard"). Both were reverted because
+ * they treated `onboundary`'s timing as slightly-wrong-but-fixable. It is
+ * not fixable from here, for a structural reason: `SpeechSynthesisUtterance`
+ * exposes exactly two timing-adjacent fields on a boundary event —
+ * `charIndex` and `elapsedTime` — and BOTH are produced by the same
+ * synthesis-engine implementation that also decides when to fire the event
+ * in the first place. There is no second, independent oracle (no equivalent
+ * of `<audio>.currentTime` for `speechSynthesis`) to measure that engine's
+ * own timing against, so any JS-side "hold this word back a little" scheme
+ * can, at best, smooth arrival JITTER (events bunching up because the JS
+ * thread was busy) — it cannot detect or correct a systematic BIAS in the
+ * underlying engine's self-reported boundary timing, because there is
+ * nothing to compare it to. Public documentation and browser-vendor
+ * discussion confirm boundary-event reliability is explicitly NOT
+ * guaranteed by spec ("SHOULD" language, not "MUST"), varies by browser,
+ * OS voice vs. network voice, and is not Baseline-supported — i.e. this is
+ * a known, unsolved-in-general limitation of the API itself, not a bug
+ * unique to this codebase's prior attempts.
+ *
+ * Given that ceiling, inventing a THIRD delay heuristic would only add
+ * another layer of unverifiable guessing on top of two that already failed
+ * the same way. The honest fix is a change of PROMISE, not a smarter
+ * correction: this engine now makes only claims that `onstart` and `onend`
+ * can prove outright. Both are unconditionally real per spec — `onstart`
+ * fires exactly when an utterance begins, `onend` exactly when it
+ * completes, with no "SHOULD"-qualified wording — so "this SEGMENT is
+ * currently being read" is a claim this engine can back with certainty.
+ * "This WORD, specifically, is being spoken at this exact moment" is not,
+ * and is no longer made here: `onboundary` is not consulted at all for
+ * display purposes (word-level position for the SERVER-TTS engine is a
+ * categorically different claim — see serverAudioEngine.ts's own header —
+ * because that engine samples a REAL, hardware-backed audio clock,
+ * `<audio>.currentTime`, which speechSynthesis has no equivalent of).
+ *
+ * `onWordStart(segmentIndex, wordIndex)` is called with `wordIndex: null`
+ * once per segment, from `onstart` — the caller (NarratedText) renders a
+ * `null` word index as "highlight the whole segment," which is exactly the
+ * true, provable claim being made. This also closes the "first word isn't
+ * protected" gap the pacing-guard design admitted: there is no first-word
+ * special case anymore, because there is no per-word timing decision left
+ * to get wrong for word 0 or any other word — the ENTIRE segment is marked
+ * active atomically, the instant (and only the instant) real speech for it
+ * begins.
+ *
+ * Pause/resume/replay all still work exactly as before, and are in fact
+ * SIMPLER than the pacing-guard version: with no held-back word timer to
+ * cancel, pause() only has to stop the underlying speech and clear any
+ * pending inter-segment gap timer.
  *
  * Dependency-injectable (`speechSynthesisImpl`/`UtteranceCtor`) so this can
  * be exercised in tests with a fake Web Speech API — no real browser or
@@ -46,7 +82,17 @@ export interface NarrationEngine {
 }
 
 export interface NarrationEngineCallbacks {
-  onSegmentStart: (index: number) => void
+  /** Fires whenever the spoken position advances. `segmentIndex` identifies
+   *  which segment. `wordIndex` is a specific 0-based index into that
+   *  segment's `renderedWords` (word-kind tokens only) when the engine can
+   *  back that precise a claim with a real audio-position measurement — the
+   *  server-audio engine always supplies one. `wordIndex: null` means "the
+   *  whole segment is active, no single word is claimed" — what the
+   *  browser-speech engine reports, since it has no audio clock to justify
+   *  anything finer. Always fires at least once per segment (from the
+   *  engine's own `onstart`/first tick), even on a browser/voice that never
+   *  fires a boundary event at all. */
+  onWordStart: (segmentIndex: number, wordIndex: number | null) => void
   onEnded: () => void
   onError: () => void
 }
@@ -90,10 +136,11 @@ export function createBrowserSpeechEngine(
   function speakFrom(index: number) {
     if (disposed || !synth || !Utterance) return
     if (index >= segments.length) { callbacks.onEnded(); return }
+    const segment = segments[index]
     // Same trailing-period strip as speakText — some voices read a bare "."
     // as "full stop"; the breathing pause between segments already supplies
     // the rhythm cue the period would have.
-    const segmentText = segments[index].spokenText.replace(/\.\s*$/, '')
+    const segmentText = segment.spokenText.replace(/\.\s*$/, '')
     const utter = new Utterance(segmentText)
     utter.lang = locale
     utter.pitch = voiceSettings.pitch
@@ -101,7 +148,11 @@ export function createBrowserSpeechEngine(
     utter.volume = 1.0
     const voice = resolveVoice()
     if (voice) utter.voice = voice
-    utter.onstart = () => { if (!disposed) callbacks.onSegmentStart(index) }
+
+    // The ONLY two claims this engine makes: the segment starts (real,
+    // unconditional per spec) and the segment ends (same). Nothing
+    // in between is displayed — see this file's header for why.
+    utter.onstart = () => { if (!disposed) callbacks.onWordStart(index, null) }
     utter.onend = () => {
       if (disposed) return
       const next = index + 1

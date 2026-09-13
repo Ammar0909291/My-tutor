@@ -53,6 +53,9 @@ export interface UseNarrationPlaybackResult {
   status: NarrationPlaybackState['status']
   segments: ReturnType<typeof buildNarrationSegments>
   activeSegmentIndex: number | null
+  /** Index into `segments[activeSegmentIndex].renderedWords` (word-kind
+   *  tokens only) — the single word currently being spoken. */
+  activeWordIndex: number | null
   progressPercent: number
   isPlaying: boolean
   play: () => void
@@ -83,17 +86,17 @@ export function useNarrationPlayback(opts: UseNarrationPlaybackOptions): UseNarr
   // without this, that highlight would stay lit forever after narration
   // finishes, since nothing else would ever tell the manager playback ended.
   const buildEngine = useCallback((fromIndex: number, notify: { onEnded: () => void; onError: () => void }): NarrationEngine => {
-    const onSegmentStart = (index: number) => setState((s) => playing(s, index))
+    const onWordStart = (segmentIndex: number, wordIndex: number | null) => setState((s) => playing(s, segmentIndex, wordIndex))
     const onEnded = () => { setState(completed(segments.length)); notify.onEnded() }
     const onError = () => { setState(errored()); notify.onError() }
     if (SERVER_TTS_LANGS.includes(lang)) {
       return createServerAudioEngine(
         segments,
         { lang, voice: voiceType, country },
-        { onSegmentStart, onEnded, onError, onProgress: (percent) => setState((s) => ({ ...s, progressPercent: percent })) },
+        { onWordStart, onEnded, onError, onProgress: (percent) => setState((s) => ({ ...s, progressPercent: percent })) },
       )
     }
-    return createBrowserSpeechEngine(segments, { lang, voiceType, speed }, { onSegmentStart, onEnded, onError })
+    return createBrowserSpeechEngine(segments, { lang, voiceType, speed }, { onWordStart, onEnded, onError })
   }, [segments, lang, voiceType, speed, country])
 
   // A NEW narration text (a different message, or the same message re-rendered
@@ -143,7 +146,11 @@ export function useNarrationPlayback(opts: UseNarrationPlaybackOptions): UseNarr
     if (current.status !== 'PAUSED') return
     if (engineRef.current) {
       engineRef.current.resume()
-      setState((s) => playing(s, s.activeSegmentIndex ?? 0))
+      // Preserve the EXACT paused word position — native resume() continues
+      // the same utterance/audio element, so the engine's own next
+      // onWordStart will naturally pick up from here; this just keeps the
+      // UI from flashing back to "no word highlighted" in the meantime.
+      setState((s) => playing(s, s.activeSegmentIndex ?? 0, s.activeWordIndex))
       return
     }
     // The engine was lost (e.g. voicePlayback gave it up while this
@@ -176,6 +183,7 @@ export function useNarrationPlayback(opts: UseNarrationPlaybackOptions): UseNarr
     status: state.status,
     segments,
     activeSegmentIndex: state.activeSegmentIndex,
+    activeWordIndex: state.activeWordIndex,
     progressPercent: state.progressPercent,
     isPlaying: isActivelyPlaying(state),
     play,

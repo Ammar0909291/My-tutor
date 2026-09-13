@@ -570,3 +570,124 @@ the harness's Git Development Branch Requirements — not `main`):
 This document supersedes `PHYSICS_CHEMISTRY_REAL_STUDENT_DEFECTS.md` as
 the current status reference; that file is left unmodified as the
 original audit record, per its own "read-only audit deliverable" framing.
+
+---
+
+## 2026-09-13 — ARCHITECTURE: authoritative teaching content now reaches the runtime
+
+Not a `PCD-*` entry. This is the delivery layer several `PCD-*` entries
+depended on without any of them naming it: authored Educational Brain
+knowledge was being silently discarded between the corpus and the prompt.
+Recorded here so a future session does not re-diagnose a CONTENT gap as a
+runtime defect, or the reverse.
+
+**Two independent silent-loss defects, both measured over all 1,169 EB
+entries, not sampled.**
+
+| | before | after |
+|---|---|---|
+| misconception candidates authored | 3,052 | 3,052 |
+| misconceptions parsed | **1,220** | **3,052** |
+| files parsing to ZERO | **706 (60%)** | **0** |
+| files parsing partially | 1 | 0 |
+| Core Understanding chars exposed | **22.7%** | **80.3%** |
+| entries silently dropping governing language | **794** | **0 (188 now REPORTED)** |
+
+Per subject, misconceptions before → after: chemistry 198 → 430, english
+5 → 444, mathematics 798 → 1,528, physics 219 → 650.
+
+**Cause 1 — the parser was stricter than the corpus in three ways**: it
+required a dash where authors write a parenthetical type qualifier
+(`**MC-3 (Type 2 — perceptual intuition)**:`), required a bold head where
+authors write `### MC-1: TITLE`, and required a numeric id where authors
+write `MC-A` or a descriptive slug. **Cause 2** — the only path from the
+authored Core Understanding section to the model was the opening hook's
+first paragraph cut at 400 chars, so every governing condition past that
+boundary (only-if / must / never / conserved / sign convention / breaks
+down) was dropped without trace.
+
+**Fix:** `src/lib/curriculum/ebKnowledge.ts` — one grammar, one counter,
+one parser, one section-aware packer, one typed
+`KnowledgeExposureFailure`. Raising 400 to a bigger number was explicitly
+rejected: it moves the boundary rather than removing it. Grading, mastery
+and assessment authority are untouched; provenance is internal and
+asserted never to reach learner-facing text; the failure type carries no
+field that could hold a substitute claim.
+
+### The content/architecture split (do not conflate these)
+
+`chem.bond.resonance` was the calibration case. **Architecture, now
+fixed:** its formal-charge formula and its three dominant-contributor
+ranking rules were authored all along and never reached the model — only
+the first 400 characters of the hook did. They now do (1,720 of 2,636
+authored characters exposed; verified by direct assertion, not inferred).
+
+**CONTENT, still a gap, correctly NOT invented by the runtime:** the
+formal-charge *checksum* — "the formal charges of a valid resonance
+structure sum to the overall charge of the species" — is absent from both
+`educational-brain/concepts/chemistry/chem.bond.resonance.md` and
+`docs/curriculum/blueprints/chem.bond.resonance.md` (grep confirms zero
+occurrences in either). The runtime must not synthesise it. The new
+CORE UNDERSTANDING prompt channel states the rule that keeps this honest:
+*do NOT invent a condition, exception, limit or convention that is not
+stated here*. Authoring it is Curriculum Production Pipeline work, owned
+by that pipeline, not by the runtime.
+
+**The general form of that split:** after this change, a concept the tutor
+teaches thinly is a content question (the section is short or the rule was
+never written) — it is no longer ambiguous with a delivery question (the
+rule exists and never arrived). The 188 entries that still drop a
+governing unit are the remaining delivery residue, and they are
+enumerable: they emit `[learn/chat] KNOWLEDGE_EXPOSURE_FAILURE=` at
+runtime rather than failing silently.
+
+---
+
+## 2026-09-13 — the 188 residues resolved to 44, and what the 44 are
+
+Follow-up to the entry above. The 188 were **not** a content problem and not a
+budget problem — they were an ordering defect in the packer, fixed at `7dde649`
+with no EB content edited and no change to the 1,800-char budget.
+
+**188 → 44 entries (235 → 48 units); exposure 80.3% → 80.4%; english 1 → 0.**
+Plus a second, pre-existing defect fixed on the way: 21 sentences already
+reached the model cut at an abbreviation ("ethanol bp 78°C vs.") → 0.
+
+### The 44 remaining, classified — every one observable
+
+| class | units | what it is |
+|---|---|---|
+| budget conflict at whole-unit granularity | 48 | one authored unit is larger than the headroom left after governing-first packing |
+
+That is the honest single row. The finer labels used while investigating
+(`A-PACKING` 11, `C-OVERLONG` 19, `D-MANY-UNITS` 3, `E-BUDGET-CONFLICT` 15) are
+**size heuristics, not root causes**, and one of them is refuted by measurement:
+`C-OVERLONG` implies verbose authoring, but **zero of the 48 units are
+redundant** — maximum content-word overlap with already-exposed text is 53%,
+median 28%. The long units are long because they carry distinct content.
+
+By subject: chemistry 20, mathematics 19, physics 5, english 0. Residue
+sections run 1.7–3.9× the budget (chemistry median 4,772 authored chars).
+
+### CONTENT vs ARCHITECTURE, again
+
+**Architecture: closed.** Every one of the 44 still exposes governing text to
+the model AND emits `[learn/chat] KNOWLEDGE_EXPOSURE_FAILURE`. Verified live on
+three of them; the production counts match the offline prediction exactly.
+
+**Content: 0 edits warranted, and none made.** The redundancy measurement gives
+no unambiguous minimal edit, so the STEP-5 condition for editing is not met.
+Independently, `educational-brain/concepts/**` is owned by the Curriculum
+Completion Program and the Mathematics EB campaign — reported, not edited.
+
+**Not a content gap.** Unlike `chem.bond.resonance`'s missing formal-charge
+checksum (recorded above), nothing here is *absent* from the corpus. The
+knowledge exists and is authored; the prompt cannot carry all of it at once.
+Those are different problems and must not be conflated: a checksum nobody wrote
+cannot be packed, and a condition that will not fit was not left unwritten.
+
+### Declined, on purpose
+
+A lead-plus-governing sub-unit rescue clears 8 more. Not done: it admits a
+discontinuous excerpt as authoritative knowledge. Re-open only with an owner
+decision, and only with the excerpt marked as such.

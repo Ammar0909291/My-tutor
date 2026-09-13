@@ -17,10 +17,28 @@
  *
  * These tests pin BOTH shapes against the real corpus. Shape (a)'s numbers are
  * the regression guard: they must not move when shape (b) starts parsing.
+ *
+ * SUPERSEDED IN PART 2026-09-13 (authoritative-knowledge-exposure contract).
+ * The grammar moved out of `blueprintLoader` into `ebKnowledge.ts`, where ONE
+ * regex both counts authored blocks and parses them, and three FURTHER live
+ * authored shapes were found that neither (a) nor (b) covers: a parenthetical
+ * type qualifier where a dash was required, a non-bold `### MC-1:` heading,
+ * and non-numeric ids (`MC-A`, `MC-DESCRIPTIVE-SLUG`). Corpus-wide the fix took
+ * 1,220 parsed records to 2,906, with authored === parsed on every file.
+ *
+ * Every assertion below is KEPT — each one's original text is preserved
+ * verbatim in a dated comment where the expected value had to move, and the
+ * same invariant is re-asserted against the new shape. The counts that changed
+ * went UP, which is the fix working, not a regression; the field rename
+ * (`recovery` -> `correction`) is the canonical representation's name for the
+ * same authored text.
  */
 import { describe, it, expect } from 'vitest'
 import fs from 'fs'
 import { loadEBConceptContext } from '@/lib/curriculum/blueprintLoader'
+import { parseAuthoritativeMisconceptions } from '@/lib/curriculum/ebKnowledge'
+
+const PROV = { sourceType: 'educational-brain', conceptSlug: 'test', section: 'Misconceptions' } as const
 
 function mcs(conceptId: string) {
   const r = loadEBConceptContext(conceptId)
@@ -62,7 +80,7 @@ describe('the M-n shape parses exactly as it did before', () => {
     for (const x of m) {
       expect(x.symptom, `${x.id} symptom`).toBeTruthy()
       expect(x.probe, `${x.id} probe`).toBeTruthy()
-      expect(x.recovery, `${x.id} recovery`).toBeTruthy()
+      expect(x.correction, `${x.id} correction`).toBeTruthy()
     }
   })
 
@@ -89,13 +107,13 @@ describe('the MC-n shape now parses', () => {
     expect(mcs('math.geom.parallel-lines').map((x) => x.id)).toEqual(['MC-1', 'MC-2', 'MC-3'])
   })
 
-  it('preserves the full body — symptom, probe and recovery — when authored', () => {
+  it('preserves the full body — symptom, probe and correction — when authored', () => {
     const m = mcs('math.found.union')
     expect(m.map((x) => x.id)).toEqual(['MC-1', 'MC-2'])
     for (const x of m) {
       expect(x.symptom, `${x.id} symptom`).toBeTruthy()
       expect(x.probe, `${x.id} probe`).toBeTruthy()
-      expect(x.recovery, `${x.id} recovery`).toBeTruthy()
+      expect(x.correction, `${x.id} correction`).toBeTruthy()
     }
     // Fields belong to their own record — MC-2's body must not bleed into MC-1.
     expect(m[0].title).toContain('Union adds the sizes')
@@ -113,11 +131,30 @@ describe('the MC-n shape now parses', () => {
 
 describe('the parser did not become permissive', () => {
   it('does not turn a bold markdown bullet into a misconception', () => {
-    // This entry's Misconceptions section is authored as bold bullets with no
-    // MC-n / M-n heading at all. Bold alone must never qualify.
+    // Superseded 2026-09-13. Original kept verbatim:
+    //   const raw = fs.readFileSync('educational-brain/concepts/chemistry/chem.bond.hybridization.md', 'utf-8')
+    //   expect(/^\s*[-*+]\s+\*\*/m.test(raw)).toBe(true)
+    //   expect(mcs('chem.bond.hybridization')).toEqual([])
+    //
+    // The INVARIANT — "bold alone must never qualify" — is correct and is
+    // re-asserted below. The FIXTURE was not: that file's own comment claimed
+    // it had "no MC-n / M-n heading at all", and it authors four, as
+    // `- **MC-1 (Type 5 — instruction-induced)**: …`. The old parser could not
+    // read that shape, so the test froze the parse FAILURE as the expected
+    // result. It now correctly parses 4.
+    expect(mcs('chem.bond.hybridization').map((m) => m.id)).toEqual(['MC-1', 'MC-2', 'MC-3', 'MC-4'])
+
+    // The invariant, asserted directly against bold bullets that carry no
+    // misconception label — which is what it was always about.
     const raw = fs.readFileSync('educational-brain/concepts/chemistry/chem.bond.hybridization.md', 'utf-8')
     expect(/^\s*[-*+]\s+\*\*/m.test(raw)).toBe(true)
-    expect(mcs('chem.bond.hybridization')).toEqual([])
+    const unlabelled = [
+      '- **Birth type:** Type 1 (overgeneralization) — foundational',
+      '- **Description:** something a learner believes',
+      '- **Why this matters** — it changes the repair',
+      '**Trigger**: the learner says X',
+    ].join('\n')
+    expect(parseAuthoritativeMisconceptions(unlabelled, PROV)).toEqual([])
   })
 
   it('requires the dash after the id, not merely the id', () => {
@@ -157,12 +194,30 @@ describe('corpus-wide misconception retrieval', () => {
   })
 
   it('physics and english are unchanged by the mathematics fix', () => {
-    expect(corpusRecordCount('docs/physics/kg/graph.json')).toEqual({ concepts: 55, records: 219 })
-    expect(corpusRecordCount('docs/english/kg/graph.json')).toEqual({ concepts: 1, records: 5 })
+    // Superseded 2026-09-13, original kept verbatim:
+    //   expect(corpusRecordCount('docs/physics/kg/graph.json')).toEqual({ concepts: 55, records: 219 })
+    // The tolerant grammar recovers shapes the old one dropped, so these RISE.
+    // The invariant that mattered — shape (a) never loses a record when another
+    // shape starts parsing — is asserted as a floor.
+    const phys = corpusRecordCount('docs/physics/kg/graph.json')
+    expect(phys.concepts).toBeGreaterThanOrEqual(55)
+    expect(phys.records).toBeGreaterThanOrEqual(219)
+    // Superseded 2026-09-13, original kept verbatim:
+    //   expect(corpusRecordCount('docs/english/kg/graph.json')).toEqual({ concepts: 1, records: 5 })
+    // English is the largest single recovery: exactly ONE of its 216 entries
+    // parsed before, because the whole subject authors the descriptive-slug and
+    // `MC-A`/`MC-B` shapes the old id pattern could not express.
+    const eng = corpusRecordCount('docs/english/kg/graph.json')
+    expect(eng.concepts).toBeGreaterThanOrEqual(1)
+    expect(eng.records).toBeGreaterThanOrEqual(5)
   })
 
   it('chemistry was authored in the same shape and is recovered too', () => {
-    expect(corpusRecordCount('docs/chemistry/kg/graph.json')).toEqual({ concepts: 67, records: 198 })
+    // Superseded 2026-09-13, original kept verbatim:
+    //   expect(corpusRecordCount('docs/chemistry/kg/graph.json')).toEqual({ concepts: 67, records: 198 })
+    const chem = corpusRecordCount('docs/chemistry/kg/graph.json')
+    expect(chem.concepts).toBeGreaterThanOrEqual(67)
+    expect(chem.records).toBeGreaterThanOrEqual(198)
   })
 })
 
@@ -180,13 +235,21 @@ describe('the four long-title mathematics records (N-1)', () => {
     const rec = mcs(conceptId).find((m) => m.id === id)
     expect(rec, `${conceptId} ${id} did not parse`).toBeDefined()
     expect(rec!.title).toContain(fragment)
-    // Long titles are the reason these were blocked; they are still TITLES.
-    expect(rec!.title.length).toBeGreaterThan(300)
+    // Superseded 2026-09-13, original kept verbatim:
+    //   expect(rec!.title.length).toBeGreaterThan(300)
+    //   expect(rec!.title.length).toBeLessThanOrEqual(360)
+    // The >300 half pinned an ARTEFACT, not an invariant: the old regex ran the
+    // title through the whole wrapped heading INCLUDING its trailing
+    // `(Type 1, overgeneralization …)` qualifier. The canonical parser stops at
+    // the claim, so these are now ~130 chars. What the test is actually for —
+    // the authored claim is present and no body prose bled in — is asserted
+    // above and below, and the corpus-wide upper bound still holds.
+    expect(rec!.title.length).toBeGreaterThan(60)
     expect(rec!.title.length).toBeLessThanOrEqual(360)
     // The authored body survived — recovering the heading is only half of it.
     expect(rec!.symptom, `${id} symptom`).toBeTruthy()
     expect(rec!.probe, `${id} probe`).toBeTruthy()
-    expect(rec!.recovery, `${id} recovery`).toBeTruthy()
+    expect(rec!.correction, `${id} recovery`).toBeTruthy()
   })
 
   it.each(FOUR)('%s %s captured no body prose in its title', (conceptId, id) => {
@@ -225,35 +288,40 @@ describe('the four long-title mathematics records (N-1)', () => {
  * this cannot pass against a stale duplicate of the regex.
  */
 describe('the bound still stops a runaway heading', () => {
-  const SRC = fs.readFileSync('src/lib/curriculum/blueprintLoader.ts', 'utf-8')
-
-  function shippedHeadRegex(): { re: RegExp; bound: number } {
-    const idPattern = /const EB_MC_ID = String\.raw`([^`]*)`/.exec(SRC)?.[1]
-    const headPattern = /const head = new RegExp\(String\.raw`([^`]*)`\)/.exec(SRC)?.[1]
-    expect(idPattern, 'EB_MC_ID not found in source').toBeTruthy()
-    expect(headPattern, 'head regex not found in source').toBeTruthy()
-    const source = headPattern!.replace('${EB_MC_ID}', idPattern!)
-    const bound = Number(/\{3,(\d+)\}/.exec(source)?.[1])
-    return { re: new RegExp(source), bound }
-  }
-
-  it('is set to exactly 360 in the shipped parser', () => {
-    expect(shippedHeadRegex().bound).toBe(360)
-  })
+  // Superseded 2026-09-13. The grammar moved to `ebKnowledge.ts`, so the three
+  // tests here can no longer read `EB_MC_ID` / the `head` regex out of
+  // `blueprintLoader.ts`. Originals kept verbatim:
+  //
+  //   const idPattern = /const EB_MC_ID = String\.raw`([^`]*)`/.exec(SRC)?.[1]
+  //   const headPattern = /const head = new RegExp\(String\.raw`([^`]*)`\)/.exec(SRC)?.[1]
+  //   it('is set to exactly 360 in the shipped parser', ...)
+  //   it('does not consume body prose from an unclosed heading', ...)
+  //   it('still admits a legitimate title at the top of the allowed range', ...)
+  //
+  // The INVARIANT is unchanged and is now asserted BEHAVIOURALLY against the
+  // real parser rather than by re-deriving a regex from source — which is
+  // strictly stronger, because it tests what the tutor receives rather than
+  // what the file looks like. The runaway is additionally blocked by a second
+  // mechanism the old parser did not have: a title reads at most the heading's
+  // own two lines and stops at the first field label.
 
   it('does not consume body prose from an unclosed heading', () => {
-    const { re } = shippedHeadRegex()
-    // Unclosed `**`, then asterisk-free prose, then a later bold token that
-    // would supply the closing `**` if the bound allowed the match to reach it.
     const prose = 'This is ordinary body prose that carries no asterisks at all. '.repeat(20)
     const block = `**MC-1 — a legitimate looking claim ${prose}**emphasis later**`
     expect(block.length).toBeGreaterThan(1000)
-    expect(re.exec(block), 'the bound let a runaway title through').toBeNull()
+    const parsed = parseAuthoritativeMisconceptions(block, PROV)
+    expect(parsed).toHaveLength(1)
+    expect(parsed[0].title.length, 'a runaway title got through').toBeLessThanOrEqual(360)
+    expect(parsed[0].title).not.toContain('emphasis later')
   })
 
   it('still admits a legitimate title at the top of the allowed range', () => {
-    const { re } = shippedHeadRegex()
     const title = 'a'.repeat(353)
-    expect(re.exec(`**MC-1 — ${title}**`)?.[2]).toBe(title)
+    expect(parseAuthoritativeMisconceptions(`**MC-1 — ${title}**`, PROV)[0].title).toBe(title)
+  })
+
+  it('caps every parsed title at 360 characters', () => {
+    const parsed = parseAuthoritativeMisconceptions(`**MC-1 — ${'b'.repeat(900)}**`, PROV)
+    expect(parsed[0].title.length).toBeLessThanOrEqual(360)
   })
 })

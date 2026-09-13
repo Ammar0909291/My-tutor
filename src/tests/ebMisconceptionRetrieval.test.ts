@@ -1,4 +1,11 @@
 /**
+ * FIELD RENAME, 2026-09-13: `EBMisconception.recovery` is now `.correction` —
+ * the canonical `AuthoritativeMisconception` name for the same authored text,
+ * so one representation serves every authored convention. Every assertion in
+ * this file is otherwise unchanged; the four `.recovery` reads below were
+ * renamed and nothing else.
+ */
+/**
  * THE TUTOR MUST NOT AGREE WITH A WRONG CLAIM.
  *
  * ── THE MEASURED FAILURE ────────────────────────────────────────────────────
@@ -68,7 +75,7 @@ describe('the Educational Brain misconception library reaches the prompt', () =>
     const m1 = eb.context.ebMisconceptions.find((m) => m.id === 'M1')!
     expect(m1.symptom).toBeTruthy()
     expect(m1.probe).toBeTruthy()
-    expect(m1.recovery).toBeTruthy()
+    expect(m1.correction).toBeTruthy()
   })
 
   it('emits them into the block WITHOUT displacing the Blueprint register', () => {
@@ -175,7 +182,7 @@ describe('a misconception heading that wraps is still parsed', () => {
     // The body survived too — the point of the fix is the whole entry, not the
     // heading.
     expect(m4!.probe).toBeTruthy()
-    expect(m4!.recovery).toBeTruthy()
+    expect(m4!.correction).toBeTruthy()
   })
 
   it('does not run past a heading into the body', () => {
@@ -211,7 +218,7 @@ describe('dimensions M5 — the dropped divisor', () => {
     expect(m5, 'M5 must exist — it is the failure Topic 2 exposed').toBeDefined()
     expect(m5!.symptom!.toLowerCase()).toContain('speed is l')
     expect(m5!.probe).toBeTruthy()
-    expect(m5!.recovery).toBeTruthy()
+    expect(m5!.correction).toBeTruthy()
   })
 
   it('carries the learner\'s verbatim words, which is what makes it MATCH', () => {
@@ -255,7 +262,7 @@ describe('M5 — the misconception the corpus audit actually found', () => {
     expect(m5!.symptom!.toLowerCase()).toContain('counting')
     expect(m5!.symptom!.toLowerCase()).toContain('apples')
     expect(m5!.probe).toBeTruthy()
-    expect(m5!.recovery).toBeTruthy()
+    expect(m5!.correction).toBeTruthy()
   })
 
   it('reaches the prompt block', () => {
