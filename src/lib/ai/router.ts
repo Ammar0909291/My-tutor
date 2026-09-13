@@ -302,6 +302,13 @@ export async function routeAI(
   // through if given one. Ignored for the Russian chain and in gemini-only
   // diagnostic mode.
   groqModelOverride?: string,
+  // PCD-002: what is LEFT of the CALLER's own wall clock. The chain's deadline
+  // starts at `complete()`, so it cannot see time the request already spent on
+  // database work — 20s of that plus a 45s chain is 65s against a 60s function,
+  // which is the platform kill this defect recorded. Narrowing only: the chain
+  // can never be granted more than its constructed budget, and omitting this
+  // leaves every existing caller unchanged.
+  chainDeadlineMs?: number,
 ): Promise<RouteAIResult> {
   console.log(
     `[ai/router] routing request, teaching_language=${lang} chain=${chainKeyForLanguage(lang)}` +
@@ -333,7 +340,7 @@ export async function routeAI(
   }
 
   try {
-    const result = await getRouter(lang, groqModelOverride).complete(req)
+    const result = await getRouter(lang, groqModelOverride).complete(req, chainDeadlineMs)
     console.log(
       `[ai/router] success provider=${result.provider} finish_reason=${result.finishReason}` +
       ` chars=${result.text.length}`,

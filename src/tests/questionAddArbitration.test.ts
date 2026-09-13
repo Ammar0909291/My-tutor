@@ -62,7 +62,14 @@ describe('the two post-model question-ADD sites are both arbitration-gated', () 
 
 describe('the arbiter is the single owner — consulted at the probe gate too', () => {
   it('authored-probe eligibility reads the arbiter', () => {
-    expect(ROUTE).toMatch(/arbitrationAllowsProbe:\s*\(turnArbitrationHoisted[^\n]*\)\.allows\('AUTHORED_PROBE'\)/)
+    // 2026-09-13 (PCD-007/008/011): the verdict call was hoisted above the terms
+    // object (the starvation ceiling reads the finished object rather than a
+    // second copy of its conditions). Superseded assertion, kept verbatim:
+    //   expect(ROUTE).toMatch(/arbitrationAllowsProbe:\s*\(turnArbitrationHoisted[^\n]*\)\.allows\('AUTHORED_PROBE'\)/)
+    // Same invariant: the gate's term is the arbiter's own verdict.
+    expect(ROUTE).toMatch(/const probeArbitration = turnArbitrationHoisted \?\? arbitrationUnavailable\(\)/)
+    expect(ROUTE).toMatch(/const arbitrationRawAllowsProbe = probeArbitration\.allows\('AUTHORED_PROBE'\)/)
+    expect(ROUTE).toMatch(/arbitrationAllowsProbe:\s*arbitrationRawAllowsProbe/)
   })
 
   it('turnArbitration is imported and arbitrated once per turn', () => {

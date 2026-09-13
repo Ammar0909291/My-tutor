@@ -2,8 +2,8 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db/prisma";
-import { withRetry } from "@/lib/db/withRetry";
-import { withTimeout } from "@/lib/net/timeout";
+import { withRetry, isDbConnectionError } from "@/lib/db/withRetry";
+import { withTimeout, TimeoutError } from "@/lib/net/timeout";
 import { setSessionState, setUserActiveSession } from "@/lib/redis/client";
 import type { RedisSessionState } from "@/types";
 
@@ -337,7 +337,31 @@ export async function POST(req: Request) {
     if (err instanceof z.ZodError) {
       return NextResponse.json({ success: false, error: err.errors[0].message }, { status: 400 });
     }
-    console.error("[sessions/POST]", err);
-    return NextResponse.json({ success: false, error: "Internal server error" }, { status: 500 });
+    // ENG-D18 — NAME THE FAILURE INSTEAD OF GUESSING AT IT LATER.
+    //
+    // Six `session create failed: "Internal server error"` events were recorded
+    // across ~175 concepts of English audit traffic. Five correlated with
+    // `/api/health` reporting `db:false` seconds later; the sixth read
+    // `{"status":"ok","db":true}` and its retry succeeded immediately. Nobody
+    // could say what the sixth one was, because every non-Zod failure left here
+    // as the same opaque sentence with the raw error as the only record — so
+    // "mostly, not exclusively, DB" was as far as the evidence went, and a
+    // health poll after the fact is a second measurement of a different moment.
+    //
+    // The classification is written at the point of failure, where the error
+    // itself is in hand. `isDbConnectionError` is `withRetry`'s own predicate
+    // (lifted, not re-authored), and `TimeoutError` is this route's 10s bound —
+    // a slow database and an unreachable one are different findings and were
+    // previously indistinguishable. `kind` is also returned, additively: the
+    // response already said 500 and said nothing else, and an audit driver
+    // cannot poll its way to which failure it hit. It is a coarse taxonomy on
+    // purpose — no message, no stack, no query, nothing internal.
+    const kind = err instanceof TimeoutError
+      ? 'db_timeout'
+      : isDbConnectionError(err)
+        ? 'db_unavailable'
+        : 'unknown';
+    console.error("[sessions/POST] " + JSON.stringify({ event: 'session-create-failed', kind }), err);
+    return NextResponse.json({ success: false, error: "Internal server error", kind }, { status: 500 });
   }
 }

@@ -16,11 +16,16 @@
  * asserted structurally by turnProgress.test.ts, so a later session cannot
  * widen it by accident:
  *
- *   C1  It owns TWO counters of SYSTEM INACTIVITY (`stagnantTurns`,
- *       `probeHeldTurns`) and nothing else. Neither describes the learner.
+ *   C1  It owns THREE counters of SYSTEM INACTIVITY (`stagnantTurns`,
+ *       `probeHeldTurns`, `probeStarvedTurns`) and nothing else. None of them
+ *       describes the learner.
  *       (This was ONE counter until the end-to-end test refused to invert: see
  *       `foldProbeHeldTurns` for why a second, narrower signal was required
- *       and why widening the first one would have been the wrong answer.)
+ *       and why widening the first one would have been the wrong answer. The
+ *       third was added the same way and for the same reason — see
+ *       `foldProbeStarvedTurns`, 2026-09-13, PCD-007/008/011. Each one exists
+ *       because a measured deadlock was invisible to the ones before it; a
+ *       fourth needs the same evidence, not merely a plausible argument.)
  *   C2  It never assigns a phase. Rung 2 is consumed by the EXISTING
  *       diagnostic-conclusion predicate; this module only reports.
  *   C3  It writes no evidence, no counter, no grade, no progress row. It is a
@@ -194,4 +199,69 @@ export function shouldReleaseHeldProbe(probeHeldTurns: number): boolean {
  */
 export function diagnosticStalledThisTurn(priorStagnantTurns: number): boolean {
   return diagnosticMayConclude(escalationRung(priorStagnantTurns))
+}
+
+/**
+ * ── WHY A THIRD COUNTER (PCD-007 / PCD-008 / PCD-011, 2026-09-13) ──────────
+ *
+ * MEASURED through the real route (pcd007AssessmentLifecycle.test.ts): a
+ * chemistry learner who asks a help question on every turn — "can you explain
+ * that more simply?", "why does that happen?", "can you give me an example?" —
+ * runs ten turns with five ACTIVE authored probes available, reaches GUIDE with
+ * move 'ask', and is served NOTHING gradeable. `correctAtCheck` never leaves 0.
+ *
+ * The gate log names the cause on all ten turns, and it is NOT the one the
+ * original audit attributed it to. `phaseAllowsProbe` is TRUE on every turn
+ * (R81/R82/E1 closed the phase axis); the SOLE blocker is
+ * `arbitrationAllowsProbe:false`. Two rungs deny AUTHORED_PROBE to a learner
+ * who asks something — LEARNER_REQUEST ("answering it owns the turn") and
+ * LEARNER_QUESTION ("a question is not an answer"). Both are RIGHT for one
+ * turn. Neither has a ceiling, and nothing else in the runtime supplies one:
+ * `learnerRequestHonoured` is classified PRODUCTIVE by `classifyTurn` above —
+ * correctly, it is real teaching — so `stagnantTurns` stays 0 and rungs 1-3
+ * never fire. An inquisitive learner is therefore assessable only by accident.
+ *
+ * This is the same shape as `probeHeldTurns`: a legitimate refusal with no
+ * bound, on an axis the general stagnation signal cannot see. It gets the same
+ * treatment — its own narrow counter, and a relief that SUBSTITUTES rather than
+ * adds. The learner's question is still answered in full (the model's reply is
+ * untouched); the relief only lets the answer carry a server-keyed question
+ * instead of the ungradeable one the model writes anyway.
+ *
+ * It claims nothing about the learner, grades nothing, and cannot move a
+ * mastery counter: the serving site's `mayAttachProbeBelowGuide` still re-reads
+ * the live pool before any spend below GUIDE, so reachability is unchanged.
+ *
+ * Increments ONLY while the phase would have allowed a probe and arbitration
+ * was the sole thing standing in the way. A turn that attaches a probe, or is
+ * blocked for any other reason, or whose phase does not allow one, resets to 0.
+ */
+export function foldProbeStarvedTurns(
+  prev: unknown,
+  ctx: { phaseAllowedProbe: boolean; arbitrationWasSoleBlocker: boolean },
+): number {
+  const base = typeof prev === 'number' && Number.isFinite(prev) && prev >= 0
+    ? Math.floor(prev) : 0
+  if (!ctx.phaseAllowedProbe || !ctx.arbitrationWasSoleBlocker) return 0
+  return base + 1
+}
+
+/**
+ * Consecutive question-owned turns before an authored probe may ride alongside
+ * the answer. Two, matching `RUNG_1_AT` and `PROBE_HELD_RELEASE_AT`: the
+ * learner's question owns its own turn and the next one outright, which is what
+ * D4b (ANSWER-STUDENT-FIRST) and the LEARNER_REQUEST rung exist to protect.
+ */
+export const PROBE_STARVATION_RELIEF_AT = 2
+
+/**
+ * May an authored probe attach even though a question/request rung owns the
+ * turn? Only the CALLER may decide which rungs qualify — this predicate knows
+ * about duration and nothing else, exactly as C1 requires. route.ts restricts
+ * it to LEARNER_REQUEST and LEARNER_QUESTION; RECOVERY, KNOWLEDGE_GAP, CLOSE
+ * and COMPLETE are never relieved, because their suppression protects the
+ * learner rather than merely sequencing the turn.
+ */
+export function shouldRelieveProbeStarvation(probeStarvedTurns: number): boolean {
+  return Number.isFinite(probeStarvedTurns) && probeStarvedTurns >= PROBE_STARVATION_RELIEF_AT
 }

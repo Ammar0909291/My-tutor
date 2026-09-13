@@ -134,7 +134,15 @@ describe('B2 changed nothing else', () => {
     // and the dedicated test files (electrochemicalCellScene.test.ts,
     // energyCycleScene.test.ts, coordinationComplexScene.test.ts,
     // chemistrySystemScenes.test.ts, chemistryVisualCoverageAudit.test.ts).
-    expect(CONCEPT_SCENE_OVERRIDES).toHaveLength(37)
+    //
+    // 37 -> 38 (2026-09-12, PCD-041): chem.dblock.lanthanides. It had NO
+    // binding, so every figure request fell through to generation, which ran
+    // independently per turn and served two contradictory equations for the
+    // same trend in ONE session. A curated binding outranks generation, which
+    // is why authoring one IS the fix. Counted here per this test's own
+    // convention of recording each movement and why.
+    expect(CONCEPT_SCENE_OVERRIDES).toHaveLength(38)
+    expect(CONCEPT_SCENE_OVERRIDES).toContain('chem.dblock.lanthanides')
     expect(CONCEPT_SCENE_OVERRIDES).toContain('math.calc.critical-points')
     expect(CONCEPT_SCENE_OVERRIDES).toContain('phys.em.kirchhoffs-laws')
     expect(CONCEPT_SCENE_OVERRIDES).toContain('phys.mech.satellites')

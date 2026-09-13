@@ -80,15 +80,32 @@ describe('the production turn', () => {
     expect(cleanText).not.toMatch(/Next up is/i)
   })
 
-  it('keeps the praise and the recap — only the bookkeeping goes', () => {
-    // The D3 precedent, applied again: keep the praise, drop the bookkeeping.
-    // Deleting a correct explanation to remove one false clause would be a
-    // second harm on top of the first.
+  it('keeps the praise and the teaching — the unauthorised CLOSE goes', () => {
+    // SUPERSEDED 2026-09-12 (PCD-042). The original assertion, verbatim:
+    //
+    //     expect(cleanText).toContain('Excellent work')
+    //     expect(cleanText).toContain('What you mastered')
+    //     expect(cleanText).toContain('Common mistakes')
+    //     expect(cleanText).toContain("What's coming")
+    //
+    // It encoded the policy that the closing-format bullets are RECAP rather
+    // than bookkeeping. `stanceEnforcement.ts` recorded that decision together
+    // with its own doubt — the bullets are "a genuine claim about unearned
+    // mastery and a real candidate" — and asked for the question to stay
+    // visible. PCD-042 answered it: a chemistry turn whose ONLY false content
+    // was those bullets, with no bookkeeping sentence anywhere, told a learner
+    // at practiceCorrect:0/2 what they had mastered and which lesson came next.
+    //
+    // The INVARIANT this test exists for is unchanged and re-asserted below:
+    // keep the praise and the genuine teaching, drop what the learner has not
+    // earned. Only the classification of the two claiming bullets moved.
     const { cleanText } = run(PRODUCTION_TURN, unearnedState())
-    expect(cleanText).toContain('Excellent work')
-    expect(cleanText).toContain('What you mastered')
-    expect(cleanText).toContain('Common mistakes')
-    expect(cleanText).toContain("What's coming")
+    expect(cleanText).toContain('Excellent work')      // praise — never a claim
+    expect(cleanText).toContain('Common mistakes')     // teaching — claims nothing
+    expect(cleanText).not.toContain('What you mastered')
+    expect(cleanText).not.toContain("What's coming")
+    // And the explanation the learner genuinely earned is still there.
+    expect(cleanText).toContain('treating dimensions like ordinary numbers')
   })
 
   it('leaves no orphaned bullet label behind', () => {
@@ -207,12 +224,19 @@ describe('a next-lesson preview rendered before mastery is stripped', () => {
     expect(cleanText).not.toContain('Wigner-Eckart')
   })
 
-  it('keeps the turn-level praise and the current-lesson recap (recap policy unchanged)', () => {
+  it('keeps the turn-level praise and the genuine teaching', () => {
+    // SUPERSEDED 2026-09-12 (PCD-042), same reason as the production-turn case
+    // above. The original assertion, verbatim:
+    //
+    //     expect(cleanText).toContain('What you mastered')      // sub-skill recap kept
+    //     expect(cleanText).toContain('mastered how to combine') // sub-skill praise kept
+    //
+    // This turn renders FOUR closing-format sections at practiceCorrect=1 with
+    // a practice MCQ still attached, so it is the template, not a recap line.
     const { cleanText } = run(QM_PREMATURE_CLOSE, qmUnearned())
     expect(cleanText).toContain('Excellent work')
-    expect(cleanText).toContain('What you mastered')      // sub-skill recap kept
     expect(cleanText).toContain('Common mistakes')
-    expect(cleanText).toContain('mastered how to combine') // sub-skill praise kept (not "the lesson")
+    expect(cleanText).not.toContain('What you mastered')
   })
 
   it('the SAME preview is allowed once mastery is genuinely verified (not a new "can never finish" defect)', () => {

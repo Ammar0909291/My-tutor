@@ -139,3 +139,33 @@ describe('a stop request is not an ungradeable answer attempt', () => {
     expect(block).toContain('&& !turnIntent.wantsToStop')
   })
 })
+
+// The RAW stored production message tail, read out of `messages` for
+// eng.writing.supporting-details order 113 T9 (2026-09-12). Verbatim.
+const RAW = 'Take a look — the example is right there to check it out. \n\n🎉 \n[!--ATTEMPT channel="verbal" representation="concrete-object" concreteness="iconic" entry="example-first" granularity="whole" agency="tutor-does" scaffold="2" hint="H0" difficulty="0" paceRate="1" paceDensity="1" paceWait="0" loadBudget="1" loadDecomposition="whole" interleaving="blocked" -->]'
+
+describe('ENG-D04 residual — the bracket-wrapped opener, from raw stored output', () => {
+  it('strips it, leaving no trailing bracket', () => {
+    const out = stripResidualMachineTags(RAW)
+    expect(out).not.toContain('ATTEMPT')
+    expect(out).not.toContain('[!--')
+    expect(out.trimEnd()).not.toMatch(/\]$/)
+    expect(out).toContain('the example is right there to check it out')
+  })
+  it('is reported as dirty by the detector', () => {
+    expect(hasResidualMachineTag(RAW)).toBe(true)
+  })
+  it('negative controls: ordinary brackets survive', () => {
+    for (const t of [
+      'See [Chapter 2](https://example.com) for more.',
+      'The citation [A] refers to Austen.',
+      'Options: [a] cat [b] dog',
+      'Use the [brackets] carefully.',
+      'A range like [0, 1] is inclusive.',
+      'He said "wait -- I see it now" and stopped.',
+    ]) {
+      expect(hasResidualMachineTag(t)).toBe(false)
+      expect(stripResidualMachineTags(t)).toBe(t)
+    }
+  })
+})
