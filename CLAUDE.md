@@ -4558,6 +4558,85 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   touched. This is a genuinely multi-session campaign; continuation
   should verify state via `scripts/math/state.ts` fresh each time
   rather than trusting any number recorded here.
+- **Batch 63 — math.trig: polar form of complex numbers; math.seq:
+  convergence of series (reopens math.calc); math.disc: REOPENED via
+  recurrence relations and asymptotic notation** (2026-09-13):
+  re-computed the frontier fresh — `math.calc` had 0 ready (matching
+  Batch 62's prediction), `math.trig` had 1, `math.seq` had 1. A
+  broader all-domain frontier check found `math.disc` had REOPENED (2
+  ready) after being PARKED since Batch 23. Authored all 4:
+  `polar-form-complex` frames modulus/argument as the Argand-plane
+  application of polar coordinates, closing math.trig down to 2
+  concepts before certification. `series-convergence` defines series
+  convergence via partial-sum-sequence convergence and the Divergence
+  Test's one-directionality; its MC-2 is the identical mechanism as
+  `infinite-geometric-series`'s own MC-3 (Batch 62), cross-referenced
+  both ways; its `unlocks` field directly reopens math.calc via
+  `power-series`. `recurrence-relation` resolves the standing forward-
+  reference `math.seq.recursive-sequences` (Batch 62) left, carries a
+  genuine Blueprint-staleness finding on its own P76 cross-link mode
+  against `math.de.ode` (Blueprint-file-existence mistaken for EB-entry-
+  existence, corrected via independence mode per established
+  precedent), and reopens math.disc, unblocking 5 further concepts.
+  `asymptotic-notation` establishes Big-O/Ω/Θ as three distinct
+  comparison directions. `math.calc` unchanged at **70/76** (reopened
+  for next batch). `math.trig` **22/25 → 23/25**. `math.seq`
+  **12/21 → 13/21**. `math.disc` **20/32 → 22/32** (REOPENED).
+  Mathematics **470/908 → 474/908**, 434 remaining. Fresh frontier:
+  `math.calc` 1 ready (`power-series`); `math.trig` 2 ready
+  (`de-moivres-theorem`, `eulers-formula`); `math.seq` 7 ready
+  (`alternating-series`, `comparison-test`, `divergence-test`,
+  `harmonic-series`, `integral-test`, `ratio-test`, `root-test`);
+  `math.disc` 5 ready (`catalan-numbers`, `divide-conquer-recurrence`,
+  `generating-functions`, `linear-recurrence`, `stirling-numbers`).
+  Validated: KG validator PASS (908/908 reachable, file untouched),
+  `scripts/math/state.ts` confirms math.calc 70/76, math.trig 23/25,
+  math.seq 13/21, math.disc 22/32, mathematics 474/908 (6 EB-certified
+  domains unchanged), `tsc --noEmit` clean, targeted tests 479/479
+  passed, all 4 heading structures diffed clean on the first pass. No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file
+  touched. This is a genuinely multi-session campaign; continuation
+  should verify state via `scripts/math/state.ts` fresh each time
+  rather than trusting any number recorded here.
+- **Batch 64 — math.trig: De Moivre's Theorem + Euler's Formula
+  (DOMAIN CERTIFIED, 7th); math.calc: power series; math.seq: the
+  Divergence Test** (2026-09-13): re-computed the frontier fresh —
+  `math.calc` had 1 ready (`power-series`), `math.trig` had 2
+  (`de-moivres-theorem`, `eulers-formula`), `math.seq` had 7 (selected
+  `divergence-test`). Authored all 4. `de-moivres-theorem` and
+  `eulers-formula` both carry genuine Blueprint-staleness findings on
+  their P76 cross-link modes (declared cross-link-probe against
+  `math.cx.complex-numbers-analysis`/`math.cx.analytic-functions`
+  respectively — Blueprint-file-existence mistaken for EB-entry-
+  existence — corrected via independence mode); `eulers-formula` also
+  carries a genuine Blueprint/KG `unlocks` discrepancy (Blueprint
+  "none listed" vs. KG's `math.cx.analytic-functions`), resolved
+  toward the KG. Authoring BOTH remaining math.trig concepts in one
+  batch reaches **math.trig 25/25 — DOMAIN CERTIFIED**, the seventh
+  domain. `power-series` closes math.calc's frontier (its own
+  `unlocks` — `taylor-series`, `maclaurin-series` — is a real forward
+  relationship). `divergence-test`'s MC-1 is the identical mechanism
+  as `series-convergence`'s own MC-1, cross-referenced. **Same-batch
+  discovery** (not authored content): updating tracking surfaced that
+  `math.graph.shortest-path` is now ready, since its own
+  `math.disc.asymptotic-notation` prerequisite was authored in Batch
+  63 — `math.graph` REOPENS from PARKED, not yet authored. `math.calc`
+  **70/76 → 71/76**. `math.trig` **23/25 → 25/25 (CERTIFIED)**.
+  `math.seq` **13/21 → 14/21**. Mathematics **474/908 → 478/908**, 430
+  remaining. Fresh frontier: `math.calc` 1 ready (`taylor-series`);
+  `math.seq` 6 ready (`alternating-series`, `comparison-test`,
+  `harmonic-series`, `integral-test`, `ratio-test`, `root-test`);
+  `math.disc` unchanged 5 ready; `math.graph` 1 ready (`shortest-
+  path`). Validated: KG validator PASS (908/908 reachable, file
+  untouched), `scripts/math/state.ts` confirms math.calc 71/76,
+  math.trig 25/25 (`ebComplete: true`), math.seq 14/21, mathematics
+  478/908 (7 EB-certified domains, math.trig newly added), `tsc
+  --noEmit` clean, targeted tests 479/479 passed, all 4 heading
+  structures diffed clean on the first pass. No Physics/Chemistry/
+  English/Biology/CS/KG/Blueprint/runtime file touched. This is a
+  genuinely multi-session campaign; continuation should verify state
+  via `scripts/math/state.ts` fresh each time rather than trusting
+  any number recorded here.
 
 ## Physics Teacher Migration Architecture V2 — AUDITED, NOT ADOPTED (2026-09-12)
 
