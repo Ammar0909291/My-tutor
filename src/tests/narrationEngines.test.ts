@@ -213,6 +213,125 @@ describe('browser speech engine — onboundary drives real WORD-level advancemen
     expect(wordCalls).toEqual([[0, 0]]) // only the onstart call
   })
 
+  it('REGRESSION — a burst of onboundary events arriving faster than the established pace is held back, never displayed ahead of when the highlight has been genuinely advancing', () => {
+    const synth = makeFakeSynth()
+    const wordCalls: Array<[number, number]> = []
+    const engine = createBrowserSpeechEngine(
+      segments,
+      { lang: 'en', voiceType: 'warm', speed: 1, speechSynthesisImpl: synth as unknown as SpeechSynthesis, UtteranceCtor: FakeUtterance as unknown as typeof SpeechSynthesisUtterance },
+      { onWordStart: (seg, word) => wordCalls.push([seg, word]), onEnded: () => {}, onError: () => {} },
+    )
+    engine.start(0)
+    const utter = synth.utterances[0]
+    expect(wordCalls).toEqual([[0, 0]]) // word 0, instant, from onstart
+
+    // Establish a realistic, sustained pace: word 1 genuinely 400ms after word 0.
+    vi.advanceTimersByTime(400)
+    utter.onboundary?.({ charIndex: 4 }) // "quick" -> word 1
+    expect(wordCalls).toEqual([[0, 0], [0, 1]])
+
+    // Now a BURST: word 2 reported with ZERO elapsed real time — exactly
+    // the reported production symptom (highlight advancing faster than
+    // the voice actually is). This must NOT display immediately.
+    utter.onboundary?.({ charIndex: 10 }) // "brown" -> word 2
+    expect(wordCalls).toEqual([[0, 0], [0, 1]]) // word 2 NOT yet shown — held back
+
+    // It must not be lost forever, either: once real time genuinely
+    // catches up (per the guard's own conservative fraction of the
+    // established pace), the held word is displayed.
+    vi.advanceTimersByTime(200)
+    expect(wordCalls).toEqual([[0, 0], [0, 1], [0, 2]])
+  })
+
+  it('REGRESSION — if a SECOND burst word arrives while the first is still held, the LATEST reported word wins once the hold elapses (no stale intermediate word flashed)', () => {
+    const synth = makeFakeSynth()
+    const wordCalls: Array<[number, number]> = []
+    const engine = createBrowserSpeechEngine(
+      segments,
+      { lang: 'en', voiceType: 'warm', speed: 1, speechSynthesisImpl: synth as unknown as SpeechSynthesis, UtteranceCtor: FakeUtterance as unknown as typeof SpeechSynthesisUtterance },
+      { onWordStart: (seg, word) => wordCalls.push([seg, word]), onEnded: () => {}, onError: () => {} },
+    )
+    engine.start(0)
+    const utter = synth.utterances[0]
+    vi.advanceTimersByTime(400)
+    utter.onboundary?.({ charIndex: 4 }) // word 1, establishes the 400ms pace
+    utter.onboundary?.({ charIndex: 10 }) // word 2 — held (burst)
+    utter.onboundary?.({ charIndex: 16 }) // word 3 ("fox") — also arrives during the SAME hold
+    expect(wordCalls).toEqual([[0, 0], [0, 1]]) // neither 2 nor 3 shown yet
+    vi.advanceTimersByTime(200)
+    // Word 3, the LATEST reported position, is what displays — not word 2.
+    expect(wordCalls).toEqual([[0, 0], [0, 1], [0, 3]])
+  })
+
+  it('REGRESSION — pausing while a word is held back FREEZES exactly at the previous word, never flushing the held one forward on resume', () => {
+    const synth = makeFakeSynth()
+    const wordCalls: Array<[number, number]> = []
+    const engine = createBrowserSpeechEngine(
+      segments,
+      { lang: 'en', voiceType: 'warm', speed: 1, speechSynthesisImpl: synth as unknown as SpeechSynthesis, UtteranceCtor: FakeUtterance as unknown as typeof SpeechSynthesisUtterance },
+      { onWordStart: (seg, word) => wordCalls.push([seg, word]), onEnded: () => {}, onError: () => {} },
+    )
+    engine.start(0)
+    const utter = synth.utterances[0]
+    vi.advanceTimersByTime(400)
+    utter.onboundary?.({ charIndex: 4 }) // word 1
+    utter.onboundary?.({ charIndex: 10 }) // word 2 — held
+    expect(wordCalls).toEqual([[0, 0], [0, 1]])
+
+    engine.pause()
+    vi.advanceTimersByTime(10_000) // plenty of time for the old hold to have fired
+    expect(wordCalls).toEqual([[0, 0], [0, 1]]) // still frozen at word 1 — word 2 was dropped, not flushed
+
+    engine.resume()
+    vi.advanceTimersByTime(10_000)
+    expect(wordCalls).toEqual([[0, 0], [0, 1]]) // resume alone does not resurrect the dropped word either
+  })
+
+  it('REGRESSION — a word transition still held when its segment ends is FLUSHED, never silently lost', () => {
+    const synth = makeFakeSynth()
+    const wordCalls: Array<[number, number]> = []
+    const engine = createBrowserSpeechEngine(
+      segments,
+      { lang: 'en', voiceType: 'warm', speed: 1, speechSynthesisImpl: synth as unknown as SpeechSynthesis, UtteranceCtor: FakeUtterance as unknown as typeof SpeechSynthesisUtterance },
+      { onWordStart: (seg, word) => wordCalls.push([seg, word]), onEnded: () => {}, onError: () => {} },
+    )
+    engine.start(0)
+    const utter = synth.utterances[0]
+    vi.advanceTimersByTime(400)
+    utter.onboundary?.({ charIndex: 4 }) // word 1
+    utter.onboundary?.({ charIndex: 21 }) // "jumps" -> word 4, the FINAL word — held (burst)
+    expect(wordCalls).toEqual([[0, 0], [0, 1]])
+    utter.onend?.() // the segment genuinely finishes before the hold would have elapsed
+    // The final word is flushed immediately on end — not lost.
+    expect(wordCalls).toEqual([[0, 0], [0, 1], [0, 4]])
+  })
+
+  it('REGRESSION — a fresh segment starts its OWN pacing history, not penalized by the previous segment\'s pace', () => {
+    const twoSegments = buildNarrationSegments('Slow first one here. Fast two.', 'reset-msg')
+    const synth = makeFakeSynth()
+    const wordCalls: Array<[number, number]> = []
+    const engine = createBrowserSpeechEngine(
+      twoSegments,
+      { lang: 'en', voiceType: 'warm', speed: 1, speechSynthesisImpl: synth as unknown as SpeechSynthesis, UtteranceCtor: FakeUtterance as unknown as typeof SpeechSynthesisUtterance },
+      { onWordStart: (seg, word) => wordCalls.push([seg, word]), onEnded: () => {}, onError: () => {} },
+    )
+    engine.start(0)
+    const utter0 = synth.utterances[0]
+    // Segment 0: an unusually SLOW established pace (2000ms).
+    vi.advanceTimersByTime(2000)
+    utter0.onboundary?.({ charIndex: 5 }) // word 1 of segment 0
+    utter0.onend?.()
+    vi.runAllTimers() // let the inter-segment gap elapse and segment 1 start
+    const utter1 = synth.utterances[1]
+    expect(wordCalls[wordCalls.length - 1]).toEqual([1, 0]) // segment 1, word 0 — instant
+
+    // Segment 1's own word 1 arriving fast (100ms) must NOT be judged
+    // against segment 0's 2000ms pace — it has no prior gap of its own yet.
+    vi.advanceTimersByTime(100)
+    utter1.onboundary?.({ charIndex: 5 })
+    expect(wordCalls[wordCalls.length - 1]).toEqual([1, 1])
+  })
+
   it('pausing mid-word and resuming continues firing boundary events for the SAME utterance (native resume keeps word position)', () => {
     const synth = makeFakeSynth()
     const wordCalls: Array<[number, number]> = []
@@ -333,6 +452,101 @@ describe('server audio engine — real currentTime-driven sync + native pause/re
     for (let i = 1; i < wordCalls.length; i++) {
       expect(wordCalls[i][1]).toBeGreaterThanOrEqual(wordCalls[i - 1][1])
     }
+  })
+
+  it('REGRESSION — a word the estimate reaches faster than this playback\'s own established pace is held back, then applied once real time catches up', async () => {
+    const { FakeAudio, instances } = makeFakeAudioCtor()
+    let tick: (() => void) | null = null
+    let clockMs = 0
+    const fakeFetch = vi.fn().mockResolvedValue({ ok: true, blob: () => Promise.resolve(new Blob()) })
+    const wordCalls: Array<[number, number]> = []
+    const engine = createServerAudioEngine(
+      buildNarrationSegments('The quick brown fox jumps.', 'pacing'),
+      {
+        lang: 'hi', voice: 'warm',
+        fetchImpl: fakeFetch as unknown as typeof fetch,
+        AudioCtor: FakeAudio as unknown as typeof Audio,
+        createObjectURL: () => 'blob:fake',
+        revokeObjectURL: () => {},
+        scheduleTick: (cb) => { tick = cb; return () => { tick = null } },
+        now: () => clockMs,
+      },
+      { onWordStart: (seg, word) => wordCalls.push([seg, word]), onEnded: () => {}, onError: () => {}, onProgress: () => {} },
+    )
+    engine.start(0)
+    await flushAsyncWork()
+    const audio = instances[0]
+    audio.duration = 50 // 5 words
+    audio.onloadedmetadata?.()
+
+    audio.currentTime = 0
+    tick?.() // word 0 at real t=0
+    expect(wordCalls).toEqual([[0, 0]])
+
+    clockMs = 2000
+    audio.currentTime = 12 // now within word 1's window
+    tick?.() // word 1 at real t=2000ms -> establishes a 2000ms pace
+    expect(wordCalls[wordCalls.length - 1]).toEqual([0, 1])
+
+    // The estimate suddenly reports word 3's window on the VERY NEXT tick,
+    // with ZERO additional real time elapsed — exactly the "estimate runs
+    // ahead of real time" failure mode.
+    audio.currentTime = 35
+    tick?.()
+    expect(wordCalls[wordCalls.length - 1]).toEqual([0, 1]) // NOT yet word 3 — held back
+
+    // Real time genuinely advances; the next tick re-evaluates and, once
+    // the held threshold has passed, displays the (still-current) estimate.
+    clockMs = 3200 // 1200ms later, past the guard's 1000ms threshold (half of 2000)
+    tick?.()
+    expect(wordCalls[wordCalls.length - 1]).toEqual([0, 3])
+  })
+
+  it('REGRESSION — a fresh start() resets the pacing history, so a new playback is not judged against a previous one\'s pace', async () => {
+    const { FakeAudio, instances } = makeFakeAudioCtor()
+    let tick: (() => void) | null = null
+    let clockMs = 0
+    const fakeFetch = vi.fn().mockResolvedValue({ ok: true, blob: () => Promise.resolve(new Blob()) })
+    const wordCalls: Array<[number, number]> = []
+    const engine = createServerAudioEngine(
+      buildNarrationSegments('One two three four five.', 'reset-server'),
+      {
+        lang: 'ru', voice: 'male',
+        fetchImpl: fakeFetch as unknown as typeof fetch,
+        AudioCtor: FakeAudio as unknown as typeof Audio,
+        createObjectURL: () => 'blob:fake',
+        revokeObjectURL: () => {},
+        scheduleTick: (cb) => { tick = cb; return () => { tick = null } },
+        now: () => clockMs,
+      },
+      { onWordStart: (seg, word) => wordCalls.push([seg, word]), onEnded: () => {}, onError: () => {}, onProgress: () => {} },
+    )
+    engine.start(0)
+    await flushAsyncWork()
+    let audio = instances[0]
+    audio.duration = 25
+    audio.onloadedmetadata?.()
+    audio.currentTime = 0
+    tick?.()
+    clockMs = 5000
+    audio.currentTime = 6
+    tick?.() // establishes a slow 5000ms pace
+
+    // Replay: a fresh start() must not carry that slow pace forward.
+    wordCalls.length = 0
+    engine.start(0)
+    await flushAsyncWork()
+    audio = instances[1]
+    audio.duration = 25
+    audio.onloadedmetadata?.()
+    audio.currentTime = 0
+    tick?.()
+    expect(wordCalls).toEqual([[0, 0]])
+    // A fast, 50ms-later word 1 must display immediately — no stale 5000ms threshold.
+    clockMs += 50
+    audio.currentTime = 6
+    tick?.()
+    expect(wordCalls[wordCalls.length - 1]).toEqual([0, 1])
   })
 
   it('B — pause()/resume() use the native HTMLAudioElement calls, which preserve currentTime (and therefore word position) by construction', async () => {

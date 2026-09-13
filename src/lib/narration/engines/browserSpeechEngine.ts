@@ -30,6 +30,17 @@
  * `onstart` already guarantees word 0 highlights the moment the segment
  * begins).
  *
+ * CONSERVATIVE DISPLAY, NOT BLIND TRUST: `onboundary` remains the SOLE
+ * authoritative source of word advancement — nothing here ever displays a
+ * word `onboundary` hasn't already reported. But `onboundary`'s own timing
+ * is not guaranteed to be phase-locked to actual audio output (see
+ * `pacingGuard.ts`'s doc comment for why), so every reported word is
+ * passed through that module before being shown: it may hold a word back
+ * a little if it is arriving faster, in real time, than this SAME
+ * utterance has recently been advancing — never invents progress, never
+ * shows anything ahead of what `onboundary` said, only ever biases toward
+ * showing the PREVIOUS word a moment longer.
+ *
  * PAUSE DURING THE INTER-SEGMENT GAP: `speechSynthesis.pause()` only pauses
  * an utterance that is actively speaking — it does nothing during the
  * short breathing pause this engine schedules between sentences. Without
@@ -50,6 +61,7 @@
 import { LANG_LOCALE, VOICE_SETTINGS, pauseBeforeSegment, rateForSegment, type TeachingLang, type VoiceType } from '../../tts'
 import type { NarrationSegment } from '../types'
 import { mapProportionalIndex, spokenCharIndexToWordIndex } from '../words'
+import { INITIAL_PACING_STATE, recordDisplayedAdvance, remainingHoldMs, type PacingGuardState } from '../pacingGuard'
 
 export interface NarrationEngine {
   /** Begin speaking from `fromIndex` (0 for a fresh start, or wherever a
@@ -83,6 +95,8 @@ export interface BrowserSpeechEngineOptions {
   /** Injectable for tests; defaults to the real Web Speech API. */
   speechSynthesisImpl?: SpeechSynthesis
   UtteranceCtor?: typeof SpeechSynthesisUtterance
+  /** Injectable wall clock for the pacing guard; defaults to Date.now. */
+  now?: () => number
 }
 
 export function createBrowserSpeechEngine(
@@ -105,6 +119,14 @@ export function createBrowserSpeechEngine(
   const locale = LANG_LOCALE[opts.lang]
   const voiceSettings = VOICE_SETTINGS[opts.voiceType]
   const safeSpeed = Math.min(Math.max(opts.speed || 1, 0.5), 2)
+  const now = opts.now ?? (() => Date.now())
+  /** Cancels any word transition the CURRENTLY speaking segment's pacing
+   *  guard is holding back — set fresh inside speakFrom() for whichever
+   *  segment is live, read by pause()/dispose() below. Dropping (not
+   *  flushing) a held transition on pause is deliberate: the highlight
+   *  must freeze exactly where it is at the moment of pausing, never jump
+   *  forward a beat later just because a hold timer happened to fire. */
+  let currentCancelHold: (() => void) | null = null
 
   function resolveVoice(): SpeechSynthesisVoice | undefined {
     if (!synth) return undefined
@@ -130,17 +152,61 @@ export function createBrowserSpeechEngine(
     utter.volume = 1.0
     const voice = resolveVoice()
     if (voice) utter.voice = voice
-    utter.onstart = () => { if (!disposed) callbacks.onWordStart(index, 0) }
+
+    // Per-segment pacing state (see pacingGuard.ts) — reset fresh for every
+    // utterance, since word/prosody pace genuinely can differ segment to
+    // segment (rateForSegment slows a question down, for example).
+    let pacingState: PacingGuardState = INITIAL_PACING_STATE
+    let pendingWordIndex: number | null = null
+    let holdHandle: ReturnType<typeof setTimeout> | null = null
+
+    function applyWord(wordIndex: number) {
+      pacingState = recordDisplayedAdvance(pacingState, now())
+      pendingWordIndex = null
+      callbacks.onWordStart(index, wordIndex)
+    }
+
+    // Never displays anything `onboundary` hasn't already reported — only
+    // decides WHEN an already-reported word is safe to show, biasing
+    // toward keeping the PREVIOUS word visible a little longer over
+    // showing a new one too soon.
+    function considerAdvance(wordIndex: number) {
+      pendingWordIndex = wordIndex
+      const remaining = remainingHoldMs(pacingState, now())
+      if (remaining <= 0) {
+        if (holdHandle !== null) { clearTimeout(holdHandle); holdHandle = null }
+        applyWord(wordIndex)
+        return
+      }
+      if (holdHandle !== null) return // already waiting — the timer below will pick up whatever is latest
+      holdHandle = setTimeout(() => {
+        holdHandle = null
+        if (pendingWordIndex !== null) applyWord(pendingWordIndex)
+      }, remaining)
+    }
+
+    function cancelHold() {
+      if (holdHandle !== null) { clearTimeout(holdHandle); holdHandle = null }
+      pendingWordIndex = null
+    }
+    currentCancelHold = cancelHold
+
+    utter.onstart = () => { if (!disposed) considerAdvance(0) }
     utter.onboundary = (event: SpeechSynthesisEvent) => {
       if (disposed || renderedWordCount === 0) return
       const charIndex = event?.charIndex
       if (typeof charIndex !== 'number') return
       const spokenWordIndex = spokenCharIndexToWordIndex(segmentText, charIndex)
       const renderedWordIndex = mapProportionalIndex(spokenWordIndex, Math.max(segment.spokenWordCount, 1), renderedWordCount)
-      callbacks.onWordStart(index, renderedWordIndex)
+      considerAdvance(renderedWordIndex)
     }
     utter.onend = () => {
       if (disposed) return
+      // The segment has genuinely finished playing, so real time HAS
+      // passed — any word transition still being held back is now safe to
+      // show and would otherwise be silently lost (the last word or two
+      // of a segment never displayed). Flush it before moving on.
+      if (pendingWordIndex !== null) { const w = pendingWordIndex; cancelHold(); applyWord(w) }
       const next = index + 1
       if (next >= segments.length) { callbacks.onEnded(); return }
       scheduleNext(next, pauseBeforeSegment(segments[next].spokenText))
@@ -178,6 +244,11 @@ export function createBrowserSpeechEngine(
         pendingResumeIndex = scheduledIndex
         scheduledIndex = null
       }
+      // Drop (never flush) a word transition the pacing guard was holding
+      // back — the highlight must freeze exactly where it is right now,
+      // not jump forward a moment later just because a hold timer was
+      // still pending.
+      currentCancelHold?.()
       synth?.pause()
     },
     resume() {
@@ -195,6 +266,7 @@ export function createBrowserSpeechEngine(
       if (disposed) return
       disposed = true
       if (timeoutHandle !== null) { clearTimeout(timeoutHandle); timeoutHandle = null }
+      currentCancelHold?.()
       synth?.cancel()
     },
   }
