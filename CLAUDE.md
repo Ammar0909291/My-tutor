@@ -5281,6 +5281,44 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   touched. This is a genuinely multi-session campaign; continuation
   should verify state via `scripts/math/state.ts` fresh each time
   rather than trusting any number recorded here.
+- **Batch 79 — math.linalg: row echelon form (RREF), LU
+  factorization** (2026-09-13, autonomous loop iteration): re-computed
+  the frontier fresh — `math.linalg` had exactly the 2 candidates
+  predicted at the end of Batch 78, `math.graph` confirmed unchanged
+  at 0 ready (PARKED). Authored both, closing the ENTIRE frontier
+  with none deferred: `row-echelon` (requires `row-reduction`),
+  `lu-factorization` (requires `row-reduction`+
+  `matrix-multiplication`). `row-echelon` converts REF into RREF
+  (zeros above each pivot, pivots scaled to exactly 1), states RREF's
+  uniqueness (unlike REF itself), and distinguishes pivot columns
+  (basic variables) from non-pivot columns (free variables, signaling
+  infinitely many solutions). 3 misconceptions: MC-1
+  FREE-VARIABLE-COLUMN-CONFUSED-WITH-NO-SOLUTION (Type 1,
+  Foundational), MC-2 RREF-ASSUMED-NON-UNIQUE-LIKE-REF (Type 1,
+  Foundational), MC-3 PIVOT-SCALING-TO-1-STEP-OMITTED (Type 5,
+  Moderate). `lu-factorization` recognizes row reduction's own
+  elimination multipliers as the entries of a lower-triangular $L$
+  satisfying $A=LU$, and its payoff — reusing $L,U$ across multiple
+  right-hand sides via cheap triangular solves. 3 misconceptions:
+  MC-1 LU-COMPUTATION-ASSUMED-SEPARATE-NEW-ARITHMETIC (Type 5,
+  Foundational), MC-2 LU-PAYOFF-ASSUMED-SINGLE-USE (Type 5, High),
+  MC-3 A-EQUALS-LU-ASSUMED-ALWAYS-VALID (Type 1, Moderate). Both zero
+  Blueprint/KG metadata discrepancy — `lu-factorization`'s Blueprint
+  notably correctly PRE-DECLARED independence mode for its own
+  Tier-1 cross-link (`math.num.lu-factorization`), the first
+  math.linalg Blueprint this campaign not requiring a staleness
+  correction; `row-echelon` unlocks `rank`+`null-space`, `rank`
+  newly ready. `math.linalg` **25/61 → 27/61**. Mathematics
+  **527/908 → 529/908**, 379 remaining. Fresh frontier: `math.linalg`
+  1 ready (`rank`); `math.graph` unchanged 0 ready (still PARKED).
+  Validated: KG validator PASS (908/908 reachable, file untouched),
+  `scripts/math/state.ts` confirms math.linalg 27/61, mathematics
+  529/908 (10 EB-certified domains unchanged), `tsc --noEmit` clean,
+  targeted tests 479/479 passed, both heading structures diffed clean
+  on the first pass. No Physics/Chemistry/English/Biology/CS/KG/
+  Blueprint/runtime file touched. This is a genuinely multi-session
+  campaign; continuation should verify state via `scripts/math/state.ts`
+  fresh each time rather than trusting any number recorded here.
 
 ## Topic/meaning loss — the extractor's default was YES (2026-09-13)
 
