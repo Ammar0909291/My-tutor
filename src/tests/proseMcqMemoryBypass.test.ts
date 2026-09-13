@@ -67,11 +67,17 @@ describe('the route forces the LLM path when the prior turn asked an unresolved 
 
   it('excludes Explanation Memory serving on that turn, alongside the existing exclusions', () => {
     const chainStart = ROUTE.indexOf("memoryFallbackReason = 'Explanation Memory disabled")
-    const chain = ROUTE.slice(chainStart, chainStart + 1200)
+    const chain = ROUTE.slice(chainStart, chainStart + 2200)
     expect(chain).toMatch(/firstLessonActiveHoisted/)
     expect(chain).toMatch(/recoveryKeyHoisted/)
     expect(chain).toMatch(/else if \(priorTurnUnresolvedProseMcqHoisted\) \{/)
     expect(chain).toMatch(/memoryFallbackReason = 'Prior turn asked an unresolved prose MCQ'/)
+    // `memoryState` must still be computed on this branch (unlike the
+    // first-lesson/recovery exclusions) so the deterministic mastery gate
+    // can still select a real authored probe via `gateEligible && memoryState`
+    // — only the canned-explanation path (assembleLesson) is skipped.
+    expect(chain).toMatch(/memoryState = buildStudentState\(\{/)
+    expect(chain).not.toMatch(/assembleLesson\(/)
     // Ordering: the new exclusion must come BEFORE the `else {` that actually
     // calls assembleLesson, or it would never take effect.
     const exclusionIdx = ROUTE.indexOf('priorTurnUnresolvedProseMcqHoisted', chainStart)

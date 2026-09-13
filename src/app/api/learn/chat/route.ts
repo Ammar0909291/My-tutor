@@ -4135,7 +4135,29 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // silently abandon the learner's attempt at the prior turn's untagged
         // prose MCQ. Force the LLM path so `buildProseMcqReplyDirective`
         // (already in the prompt this turn) has a generation to act on.
+        //
+        // `memoryState` is STILL computed here, unlike the first-lesson/
+        // recovery exclusions above: it feeds the deterministic mastery GATE
+        // (`gateEligible && memoryState` below selects an authored probe
+        // independently of Explanation Memory), and that gate is exactly the
+        // mechanism that can turn this turn into a real, gradeable, tagged
+        // MCQ instead of another ungradeable prose one. Only `assembleLesson`
+        // — the canned-explanation-plus-MCQ substitute for the whole turn —
+        // is skipped.
         memoryFallbackReason = 'Prior turn asked an unresolved prose MCQ'
+        try {
+          memoryState = buildStudentState({
+            conceptId: resolvedConceptId,
+            subjectSlug: learnSession.subject.slug,
+            teachingLanguage: teachingLang,
+            grade: profile?.grade,
+            currentLevel: profile?.currentLevel,
+            targetLevel: profile?.targetLevel,
+            userMessage: message,
+          })
+        } catch (err) {
+          console.warn('[learn/chat] buildStudentState failed (prose-MCQ exclusion path):', err)
+        }
       } else {
         try {
           memoryState = buildStudentState({
@@ -5691,6 +5713,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           : memoryFallbackReason === 'No concept' ? 'no_concept'
           : memoryFallbackReason === 'First lesson' ? 'first_lesson'
           : memoryFallbackReason === 'Recovery mode' ? 'recovery_mode'
+          : memoryFallbackReason === 'Prior turn asked an unresolved prose MCQ' ? 'unresolved_prose_mcq'
           : memoryFallbackReason === 'No asset' ? 'no_asset'
           : memoryFallbackReason === 'Already served this concept' ? 'already_served'
           : memoryFallbackReason === 'Confidence failed' ? 'confidence_failed'
