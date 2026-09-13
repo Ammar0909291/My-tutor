@@ -4382,6 +4382,44 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   genuinely multi-session campaign; continuation should verify state via
   `scripts/math/state.ts` fresh each time rather than trusting any number
   recorded here.
+- **Batch 58 — math.calc: Fourier series introduction; math.trig: graphs,
+  Pythagorean identities; math.seq: geometric sequences** (2026-09-12):
+  re-computed the frontier fresh — `math.calc` unchanged 1 candidate,
+  `math.trig` had 7, `math.seq` had 5. Authored 4: `math.calc.fourier-series-intro`
+  (closes math.calc's frontier; expert/analyze, 12 hours; a genuine
+  Blueprint-staleness finding on its `math.fnal.hilbert-space` cross-link —
+  declared "already authored" but that concept has a Blueprint with no EB
+  entry, independence mode used instead, matching the Batch 48/53
+  precedent), `math.trig.trig-graphs` (child of `amplitude-period-phase`,
+  resolving that entry's own `unlocks`-field asymmetry from Batch 57),
+  `math.trig.pythagorean-identities` (child of `trig-identities`+
+  `unit-circle`, carrying a genuine content-overlap finding against
+  `trig-identities`' own already-derived Pythagorean forms — value-add
+  framed as identity-selection/sign-resolution skill, not re-derivation),
+  `math.seq.geometric-sequence` (child of `sequence`, deliberately selected
+  to RESOLVE the standing forward-reference gap `arithmetic-sequence`'s own
+  Curriculum Feedback recorded in Batch 55 — both cited Examples now
+  genuinely exist). `math.calc` 65/76 → 66/76. `math.trig` 15/25 → 17/25.
+  `math.seq` 4/21 → 5/21. Mathematics 450/908 → 454/908 — **exactly half of
+  mathematics now has an Educational Brain entry**. Full per-concept detail
+  in `COVERAGE.md` Batch 58. Validated: KG validator PASS (908/908
+  reachable, file untouched), `scripts/math/state.ts` confirms math.calc
+  66/76, math.trig 17/25, math.seq 5/21, mathematics 454/908 (6 EB-certified
+  domains unchanged), `tsc --noEmit` clean, targeted tests 479/479 passed,
+  all 4 heading structures diffed clean on the first pass (0 diffs each).
+  No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched.
+  Fresh frontier: `math.calc` 0 candidates ready, but NOT deeply parked —
+  verified per-concept, 2 of the 10 remaining (`hyperbolic-derivatives`,
+  `trig-integrals`) are blocked only by concepts already in math.trig's own
+  fresh frontier below, so authoring either reopens math.calc immediately;
+  `math.trig` 5 candidates (`double-angle-formulas`, `product-to-sum` —
+  both via `sum-difference-formulas` — `trig-equations`, `polar-form-complex`,
+  `hyperbolic-functions`); `math.seq` 5 candidates (`recursive-sequences`,
+  `divergent-sequence`, `partial-sums`, `arithmetic-series`,
+  `geometric-series` — the last newly unblocked). This is a genuinely
+  multi-session campaign; continuation should verify state via
+  `scripts/math/state.ts` fresh each time rather than trusting any number
+  recorded here.
 
 ## Physics Teacher Migration Architecture V2 — AUDITED, NOT ADOPTED (2026-09-12)
 
