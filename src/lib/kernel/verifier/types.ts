@@ -37,6 +37,7 @@ export const RULE_CODES = [
   'V-REACT',    // (LOG-only in v1) REACT mandated but missing
   'V-CLOSE',    // CLOSE move introduces new content (RS I-14)
   'V-AFFIRM',   // opens by agreeing with a definition the LEARNER proposed
+  'V-CHALLENGE', // a claim challenge got no substantive/acknowledging reply
   // S1 (Runtime Redesign Mission, Part 3/4) — history-aware rules. All LOG
   // severity for now: thresholds are unvalidated against real traffic, and
   // this codebase's own promotion discipline (eos-runtime/flags.ts) is
@@ -77,6 +78,7 @@ export const SEVERITY: Record<RuleCode, Severity> = {
   'V-REACT':     'LOG',
   'V-CLOSE':     'REJECT',
   'V-AFFIRM':    'REJECT',
+  'V-CHALLENGE': 'REJECT',
   // S1 — LOG only until real-traffic false-positive rates are measured
   // (design report §S7: "never flip all at once").
   'V-DUP-EXACT':    'LOG',
@@ -150,6 +152,12 @@ export interface VerifierContext {
    * the correct default for a concept with no authored misconceptions.
    */
   knownMisconceptionText?: string
+  /**
+   * Did THIS turn's learner message directly challenge a claim the tutor
+   * made (claimChallengeGuard.ts's `isClaimChallenge`)? Feeds V-CHALLENGE.
+   * Undefined/false ⇒ no-op, matching every other optional context field.
+   */
+  challengeActive?: boolean
   /** Legal single-line tags for this turn (V-TAG whitelist). */
   legalTags: string[]
   /** S1 — recent-turn history for the V-DUP-x / V-OSCILLATE rules. Optional:

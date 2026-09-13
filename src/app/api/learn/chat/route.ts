@@ -5264,10 +5264,17 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // card/memory hit has no prompt to add this to) — same precondition as
       // the block above, checked fresh rather than reusing its narrower
       // `isRemediationTurn` scoping.
+      // Hoisted so the post-generation V-CHALLENGE check (below, near
+      // V-AFFIRM) and the mastery-integrity fold (near the end of the turn)
+      // can both read whether THIS turn's learner message was a claim
+      // challenge, without re-running the detector against a message string
+      // that may have been consumed/transformed by then.
+      let claimChallengeActiveHoisted = false
       if (conversationDecisionHoisted && !serveFromMemory && !remediationCardText && !cardOwnsThisTurn) {
         try {
           const { isClaimChallenge, buildClaimChallengeBlock } = await import('@/lib/teaching/claimChallengeGuard')
           if (isClaimChallenge(message)) {
+            claimChallengeActiveHoisted = true
             const { buildRemediationGrounding, buildRemediationGroundingBlock } =
               await import('@/lib/teaching/remediationGrounding')
             const conceptForChallenge =
@@ -6636,6 +6643,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       let eosVerifierTagsHoisted: string[] = []
       let eosVerifierUsedTemplate = false
       let eosVerifierAttempts: 1 | 2 = 1
+      // FACTUAL CONTENT INTEGRITY — set by the V-CHALLENGE block below when
+      // an active claim challenge got no acknowledging reply in the FINAL
+      // served text. Read by the mastery fold near the end of this turn
+      // (advanceConversationState's `teachingClaimUnresolved` evidence).
+      let teachingIntegrityFellThroughHoisted = false
       // Un-swallowable probe. The guard produced NO log at all on an audit turn
       // while logging normally on another learner's turns in the same
       // deployment, which leaves two candidates that the existing logging
@@ -7015,6 +7027,111 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 usedTemplate: stillViolating,
               })
             }
+
+          // ── V-CHALLENGE SAFETY FLOOR — UNCONDITIONAL, same reasoning as
+          // V-AFFIRM immediately above (the flag gating the full verifier is
+          // unset in production, so a check that only runs inside it never
+          // fires for a real learner). See kernel/verifier/rules.ts's
+          // vChallenge for the full incident this closes: a false
+          // formal-charge rule, challenged twice by the learner in the most
+          // natural way a real student does, answered both times with
+          // content-free filler or an escalating, unacknowledged defence —
+          // and the lesson still reached verified mastery, because grading
+          // integrity and teaching-content integrity were, and otherwise
+          // still are, two disconnected axes (see masteryGate.ts).
+          try {
+            const { vChallenge } = await import('@/lib/kernel/verifier/rules')
+            const challengeCtx = { challengeActive: claimChallengeActiveHoisted } as unknown as
+              import('@/lib/kernel/verifier').VerifierContext
+            const challengeViolation = vChallenge(cleanText, challengeCtx)
+            console.log('[challenge-guard-scope]', {
+              challengeActive: claimChallengeActiveHoisted,
+              violated: challengeViolation !== null,
+            })
+            if (challengeViolation) {
+              // ONE regeneration, reinforcing the SAME directive the prompt
+              // already carried (buildClaimChallengeBlock) — the draft
+              // simply did not follow it. Unlike V-AFFIRM, this rule cannot
+              // hand the model an authored correction (none exists for most
+              // challenged claims — see claimChallengeGuard.ts's own scope
+              // note), so the appendix can only re-demand the two honest
+              // options the original directive already offered.
+              const appendix =
+                '\n\nOUTPUT REJECTED (server-side check). The learner CHALLENGED ' +
+                'a claim you made and your reply neither acknowledged the ' +
+                'possibility of a mistake nor engaged with what they said ' +
+                `("${challengeViolation.matched ?? ''}"). Either (a) say plainly ` +
+                'that you may have gotten it wrong and correct it, or (b) if ' +
+                'you are genuinely certain your original claim was right, ' +
+                'explain WHY in concrete, specific detail. Do not repeat a ' +
+                'short, generic reply. Re-answer their message now.'
+              let repaired = cleanText
+              try {
+                llmCallCount++ // instrumentation only (claim-challenge repair)
+                const routed = await routeAI(
+                  [...historyMessages, { role: 'user', content: message }],
+                  systemPrompt + appendix + outputLanguageBlockHoisted,
+                  country, 2048, teachingLang,
+                  { userId, subject: learnSession.subject.slug },
+                  groqModelOverride,
+                )
+                repaired = routed.text
+                if (contentRegister === 'beginner') repaired = stripIpaNotation(repaired)
+              } catch (regenErr) {
+                console.warn('[challenge-guard] regeneration failed:', regenErr)
+              }
+              const stillViolating = vChallenge(repaired, challengeCtx) !== null
+              if (stillViolating) {
+                // FAIL SAFE, NOT SILENT, AND DELIBERATELY ONE-SIDED IN
+                // NEITHER DIRECTION. This is the one fallback template in
+                // this codebase that asserts NEITHER side of a dispute —
+                // contrast V-AFFIRM's fallback, which confidently states the
+                // curriculum's own answer. There is no authored answer to
+                // fall back to here (if there were, this rule would already
+                // have handed it to the model as grounding via
+                // buildClaimChallengeBlock), so the only safe thing left to
+                // say is the truth: this specific point is now unverified.
+                cleanText =
+                  "I'm not fully certain I explained that part correctly, and " +
+                  "I don't want to teach you something wrong. Let's set that " +
+                  'exact detail aside for now — the rest of what we covered ' +
+                  'still stands. If it matters for your class, it is worth ' +
+                  'double-checking with your teacher or textbook.'
+              } else {
+                cleanText = repaired
+              }
+              console.log('[challenge-guard]', {
+                matched: challengeViolation.matched,
+                repaired: !stillViolating,
+              })
+            }
+            // MASTERY-INTEGRITY SIGNAL — computed independently of whether
+            // the REJECT check above fired, and from the FINAL served text
+            // (after any repair/fallback). vChallenge's REJECT case only
+            // catches a SHORT, contentless reply — a long, elaborate,
+            // unacknowledging reply (this incident's actual T3/T4 shape,
+            // full of confident wrong reasoning) is NOT rejected above,
+            // because this module cannot tell a correct confident defense
+            // from an incorrect one. This signal is what closes THAT gap:
+            // regardless of length or how the text was produced, if a
+            // challenge was raised and the final text never acknowledges
+            // it, mastery for this concept is withheld (masteryGate.ts's
+            // `conceptMasteryVerdict`) until the learner reaches a fresh
+            // attempt at it.
+            if (claimChallengeActiveHoisted) {
+              const { CHALLENGE_ACKNOWLEDGED_RE } = await import('@/lib/teaching/claimChallengeGuard')
+              teachingIntegrityFellThroughHoisted = !CHALLENGE_ACKNOWLEDGED_RE.test(cleanText)
+              console.log('[challenge-guard-integrity]', {
+                unresolved: teachingIntegrityFellThroughHoisted,
+              })
+            }
+          } catch (err) {
+            // Never takes a turn down — the ordinary text stands unchanged,
+            // and the integrity flag simply stays false (fail-open, matching
+            // every other guard in this file: a guard's OWN failure must
+            // never be what breaks the turn for the learner).
+            console.warn('[challenge-guard] skipped:', err)
+          }
 
           const runFullVerifier = eosFlags.outputVerifier
           console.log('[affirm-guard-scope]', {
@@ -7670,6 +7787,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               acknowledgement: lowSignalAckHoisted,
               // PHASE 5 (Case D): folds into fillerRepairStreak.
               fillerTurnDetected: fillerDetectedHoisted,
+              // FACTUAL CONTENT INTEGRITY: see V-CHALLENGE above and
+              // masteryGate.ts's teachingIntegrityUncertain.
+              teachingClaimUnresolved: teachingIntegrityFellThroughHoisted,
             })
 
           // Loop 2: advance narrative state with this turn's evidence
@@ -9517,6 +9637,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 deliveredTeaching: evidenceMoveHoisted === 'teach' || evidenceMoveHoisted === 'show',
                 acknowledgement: lowSignalAckHoisted,
                 fillerTurnDetected: fillerDetectedHoisted,
+                // Same source as the upstream fold — see V-CHALLENGE above.
+                teachingClaimUnresolved: teachingIntegrityFellThroughHoisted,
               }),
             })
           }

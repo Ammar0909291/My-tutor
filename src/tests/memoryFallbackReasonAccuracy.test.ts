@@ -78,7 +78,11 @@ describe('nothing but the label changed', () => {
     // exactly as this guard intends. It fires only when a remediation turn's
     // draft explained nothing at all, and it never loops (one attempt, then a
     // deterministic branch). See remediationOutputContract.test.ts.
-    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(4)
+    // V-CHALLENGE (factual-content-integrity fix, real-student audit) added
+    // ONE new routeAI call site (the claim-challenge repair regeneration in
+    // route.ts, right after the V-AFFIRM floor) -- the only production change
+    // to this count since this assertion was written. 4 -> 5.
+    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(5)
   })
 
   it('the already-served guard still blocks the re-serve itself', () => {
