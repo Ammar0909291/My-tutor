@@ -1,7 +1,12 @@
 # My Tutor — Remediation Plan
 
-**Status:** proposal. Nothing here is approved, scheduled, or implemented.
+**Status:** ORDERING ADOPTED 2026-09-14 by the owner, after the steel man in §9.
+Individual items remain unimplemented and unscheduled; none is approved for
+execution by this document alone.
 **Written:** 2026-09-14. **Author:** engineering session `session_013fy8QoeuD6oGukoSFjGif3`.
+**Revision:** §9 (the strongest case AGAINST this plan) was added the same day,
+and it changed the plan. The adopted order below is the steel man's, not the
+one this document originally argued for. §2 records both.
 **Baseline:** commit `2bcc573`, deployment `dpl_BnW8Za7erUYRiPKuKS2fv5FBtJ18` (READY).
 
 This is the answer to one question: *if the whole tutor were mine to fix, what
@@ -49,9 +54,45 @@ by a person noticing.
 
 ---
 
-## 2. The plan, in priority order
+## 2. The plan
 
-### Item 1 — One turn record *(1–2 sessions)*
+### 2.0 The adopted order — and why it is not the one I first proposed
+
+This document originally ranked **observability first**. §9 argues, correctly,
+that this optimised for the engineer rather than the learner, and that with
+**zero organic traffic** an instrumentation-first plan measures an empty
+stadium. The owner adopted the steel man's ordering on 2026-09-14:
+
+| # | Step | From | Sessions |
+|---|---|---|---|
+| **1** | **Mathematics seeding wiring** | Item 3, first half | **1–2** |
+| **2** | **Minimal outcome instrumentation** — lesson closed y/n, and which decision stopped it. Nothing else. | Item 1, narrowed | **1–2** |
+| **3** | **Real learners** — put it in front of ~20, add one satisfaction question | Item 2, unblocked by step 3 itself | owner-led |
+| **4** | **Evidence-driven remediation** — real failures choose what comes next | — | as evidence dictates |
+| **—** | **DEFERRED: the four primitives (Item 4)** | Item 4 | 12–16, **not scheduled** |
+
+**Why maths wiring is now first:** it is the only step that changes what a
+learner experiences today. Maths lessons cannot close — 47 seeded (concept,
+band) pairs against 908 KG concepts — and the cause is a wiring defect, not
+missing content. See Item 3.
+
+**Why the migration is deferred:** §9 objection 5. Those 63 predicates and 60
+regexes each encode a real production failure. A clean interpreter does not
+inherit that knowledge; it re-learns it, on learners. Deferred until real
+traffic shows the guards are actually failing people.
+
+**What the two plans agree on:** a narrow outcome instrument, and harness
+discipline. That agreement is why step 2 survives at a reduced scope — enough
+to answer "did the lesson close and what stopped it", and no more.
+
+The items below are the ANALYSIS and are preserved as written. Their original
+numbering is kept so existing references stay valid; the table above overrides
+their original priority.
+
+### Item 1 — One turn record *(1–2 sessions)* — **ADOPTED AT REDUCED SCOPE, step 2**
+
+> Narrowed by §2.0 to the outcome fields only: did the lesson close, and which
+> decision stopped it. The full per-turn record is not scheduled.
 
 Every turn emits **one** structured record, with a turn id, carrying the facts
 that decide the turn:
@@ -93,7 +134,7 @@ repeatedly shown zero organic requests. **I would not promise this item.** It
 is listed because leaving it out would make the plan dishonest, not because I
 can deliver it alone.
 
-### Item 3 — Close the content inventory *(2–3 sessions — see §7, much smaller than previously recorded)*
+### Item 3 — Close the content inventory *(2–3 sessions — see §7, much smaller than previously recorded)* — **FIRST HALF ADOPTED, step 1**
 
 Measured against production, 2026-09-14 (`ACTIVE`, `en`, gradeable = 2–4
 choices, exactly one keyed correct, no duplicate option text):
@@ -119,7 +160,10 @@ defect, not an authoring one, and it is worth more than the 64 probes.
 Order: wire the maths modules into the corpus → re-measure → author only the
 genuine residue.
 
-### Item 4 — Four primitives, not a rewrite *(12–16 sessions)*
+### Item 4 — Four primitives, not a rewrite *(12–16 sessions)* — **DEFERRED, not scheduled**
+
+> Deferred by §2.0 on the strength of §9 objection 5. Kept in full because the
+> audit behind it is sound and will be needed if traffic ever justifies it.
 
 From `docs/architecture/PHYSICS_TEACHER_MIGRATION_ARCHITECTURE.md`, which
 already did the audit and already refuted four of its own load-bearing claims:
@@ -169,15 +213,27 @@ has not been tested.
 
 Sessions here are **context-bounded, not time-bounded**.
 
+**Adopted plan (§2.0):**
+
+| Step | sessions |
+|---|---|
+| 1 — maths seeding wiring | 1–2 |
+| 2 — minimal outcome instrumentation | 1–2 |
+| 3 — real learners | owner-led, not a session cost |
+| 4 — evidence-driven remediation | unknowable until step 3 returns |
+| **Committed total before real evidence** | **2–4** |
+
+**Deferred, for reference only:**
+
 | | sessions |
 |---|---|
-| Item 1 — turn record | 1–2 |
-| Item 2 — outcome KPI | 1, then blocked on traffic |
-| Item 3 — content + maths seeding wiring | 2–3 |
-| Item 4 — four primitives | 12–16 |
-| Item 5 — harness discipline | folded in |
-| **Total** | **~18–24** |
-| **High-value subset (1 + 3)** | **~4–5** |
+| Item 1 at full scope (beyond step 2) | +1 |
+| Item 3 residue authoring (64 probes) | 1–2 |
+| Item 4 — four primitives | 12–16, **not scheduled** |
+| Item 5 — harness discipline | folded into every step |
+
+The adopted plan deliberately commits **2–4 sessions**, not twenty. That is the
+point of §9: spend little until real learners say where to spend more.
 
 Basis, measured from this session: ~$120–180 and ~120k context tokens per
 focused task (investigate → fix → test → deploy → verify). Anthropic meters
@@ -209,8 +265,13 @@ deterministic test. I can prove a lesson **can** close. I cannot yet prove it
 
 ## 6. If only one thing is done
 
-**Item 1.** Then Item 3's maths wiring. In that order, and stop there until
-there is traffic to measure against.
+**The maths seeding wiring.** It is the only step in this document that changes
+what a learner experiences today, it is 1–2 sessions, and it is correct under
+both this plan and §9's.
+
+(This section originally read "Item 1, then Item 3's maths wiring." §9 reversed
+it. The original is left visible here rather than overwritten, because the
+reversal is the most useful thing in the document.)
 
 ---
 
@@ -243,9 +304,95 @@ against production), the per-pair maths/English shortfall, the
 `BOOTSTRAP_SEED_SUBJECTS` / maths-module absence (source), the physics pool
 figures (SQL + production `[gate-assessment]` logs), and the deployment/health
 state. Estimated, not measured: every session count in §4 and every figure in
-§5 — those are judgement, and are labelled as such.
+§5 — those are judgement, and are labelled as such. §9 is argument, not
+measurement, except where it cites the figures above; its force comes from
+reasoning, and §9.7 is the reason to discount the estimates it attacks.
 
 Related, and not superseded by this document:
 `EDUCATIONAL_BRAIN_BIBLE.md` · `PHYSICS_TEACHER_MIGRATION_ARCHITECTURE.md` ·
 `PHYSICS_MASTERY_CEILING_ROOT_CAUSE.md` ·
 `docs/qa/PHYSICS_CHEMISTRY_MASTER_DEFECT_BACKLOG.md`
+
+---
+
+## 9. The strongest case against this plan
+
+Written by the same author, on request, **after** §§1–8 were already committed
+(`3c6fcae`). It changed the plan: §2.0's adopted order is this section's, not
+the one the document originally argued for. A plan that argues only its own
+side is worth less than one that carries its own strongest objection.
+
+### 9.1 The plan serves the engineer, not the learner
+This is the best objection. Item 1 is what someone debugging wants; it is not
+what a student wants. It was ranked first on the grounds that it "makes every
+later estimate honest" — a benefit to the author. A learner gets nothing from a
+joined turn record. The plan was optimised for the person writing it.
+
+### 9.2 Zero traffic invalidates the whole ordering
+Vercel runtime logs have repeatedly shown no organic requests. Item 2 admits
+this and is marked blocked, but the implication runs further than the document
+allowed: if nobody uses the app, **every defect in this repository was found by
+a harness driving a synthetic learner.** Building telemetry for an empty stadium
+is measurable motion that cannot become progress. The correct first step may be
+"get twenty real students," and everything else is downstream of it.
+
+### 9.3 "Un-measurable" may be a rationalisation
+§1's table says every big defect was found by a person noticing. That is how
+defects are found in most software — the normal case, not a pathology. And each
+one **was** attributed and **was** fixed. The system demonstrably works; it is
+merely expensive. Dressing "this is hard" as "this is architecturally wrong" is
+a more flattering diagnosis, and it conveniently arrives with a plan the author
+knows how to execute.
+
+### 9.4 The 40% confidence figure defeats the plan that contains it
+§5 claims ~95/90/75% on Items 1/3/4 and ~40% that lessons measurably improve for
+real learners. Items 1, 3 and 4 are all *instrumental* to that 40%. Stated
+honestly, the original plan was: ~20 sessions of high-confidence engineering in
+service of an outcome more likely than not to be missed.
+
+### 9.5 Item 4 is Chesterton's fence, sixty-three times over
+Largest cost, weakest justification. The 63 detector-shaped predicates and 60
+regex constants are ugly **because** each encodes a real production failure — a
+learner who said "explain it slowly" and was taught the English word "slowly";
+a figure claimed in prose and never attached. A clean closed-taxonomy
+interpreter does not inherit that knowledge. It re-learns it, in production, on
+learners. "Migration, not rewrite" is the phrase every rewrite uses.
+
+### 9.6 The cost is real money, and "sessions" hid it
+~$638 for the session that wrote this. ~20 sessions is on the order of $12k of
+model usage spent on an app with no users — a sum that buys a great deal of
+actual human tutoring, or the traffic Item 2 needs. Presenting cost in
+"sessions" chose a unit that obscures this.
+
+### 9.7 The author's own week argues against the author's estimates
+A stale English figure was repeated confidently an hour before it was queried,
+and was wrong by roughly 160 pairs. D4b was investigated for a full session and
+returned `NOT PROVEN`. The content estimate moved 12–15 sessions → 2–3 on first
+contact with data. If the *measured* numbers move 5x on contact with evidence,
+the *unmeasured* ones — every figure in §4 and §5 — deserve much wider error
+bars than they were given.
+
+### 9.8 The rival plan, stated fairly, wins on expected information
+Put it in front of 20 real learners. Instrument exactly two things: did the
+lesson close, and a one-question satisfaction rating. Let real failures set the
+priority order. Every session after that is aimed by evidence rather than by the
+author's judgement about what matters. This inverts the original plan — traffic
+first, then telemetry, then engine — and it is the ordering adopted in §2.0.
+
+### 9.9 What survives the steel man
+- **Item 3's maths wiring survives outright**, and is promoted to first. A
+  wiring defect that stops maths lessons closing is a defect under any
+  prioritisation.
+- **Item 1 survives at reduced scope** — the outcome fields only, which is also
+  exactly what §9.8 requires. The two plans agree on that narrow core, and the
+  agreement is why it stays.
+- **Item 5 survives.** A harness without a negative control is not evidence,
+  under either plan.
+- **Item 4 does not survive at priority.** Deferred until real traffic shows the
+  guards are failing learners.
+
+### 9.10 The honest summary
+The plan in §§1–8 is defensible engineering. §9's ordering is better product
+judgement. The real reason the former was ranked first is that it is the one the
+author is confident he can execute — which is a fact about the author, not about
+the product.
