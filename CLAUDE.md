@@ -5559,6 +5559,49 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   file touched. This is a genuinely multi-session campaign;
   continuation should verify state via `scripts/math/state.ts` fresh
   each time rather than trusting any number recorded here.
+- **Batch 85 — math.abst: ring theory (the priority pick),
+  subgroups, computing in groups, and inverse theorems**
+  (2026-09-14, autonomous loop iteration): re-computed the frontier
+  fresh — `math.abst` had exactly the 9 candidates predicted at the
+  end of Batch 84. Selected 4, prioritizing `ring-theory` as the
+  highest-leverage pick (one of the two prerequisites for `math.
+  abst.field`), alongside `subgroup`, `group-operation`,
+  `group-inverse` — the three whose cross-link targets (`math.
+  linalg.matrix-multiplication`/`vector-addition`/`matrix-inverse`)
+  were confirmed already authored via `ls`. `ring-theory` (requires
+  `group-theory`, unlocks `ideal`+`field`): a ring's additive side
+  as a full abelian group but multiplicative side only closed/
+  associative/distributive — never inverses or identity; non-
+  commutative rings ($M_2(\mathbb R)$) still valid; 3 misconceptions
+  independently classified — MC-1 Type 6 (FOUNDATIONAL), MC-2 Type
+  4, MC-3 Type 1; zero discrepancy. `subgroup` (unlocks `coset`+
+  `normal-subgroup`): the three-part criterion, the one-line
+  criterion $ab^{-1}\in H$, trivial-vs-proper; 3 misconceptions
+  independently classified — MC-1 Type 3 (FOUNDATIONAL), MC-2 Type
+  1, MC-3 Type 4; zero discrepancy. `group-operation`: computing via
+  Cayley tables, the Latin square theorem, symmetric-vs-asymmetric
+  tables reading abelian-vs-non-abelian; 3 misconceptions
+  independently classified — MC-1 Type 1 (FOUNDATIONAL), MC-2 Type
+  4, MC-3 Type 1; zero discrepancy. `group-inverse`: uniqueness
+  (T1), product-inverse order-reversal (T2), double-inverse (T3); 2
+  misconceptions independently classified — MC-1 Type 1
+  (FOUNDATIONAL), MC-2 Type 1; zero discrepancy. `math.abst`
+  **3/37 → 7/37**. Mathematics **545/908 → 549/908**, 359 remaining.
+  Fresh frontier: 9 candidates ready (`coset`, `cyclic-group`,
+  `group-action`, `group-homomorphism`, `group-order`,
+  `math.abst.ideal` — newly unblocked by `ring-theory`, the SECOND
+  link toward `math.abst.field` — `polynomial-ring`,
+  `ring-homomorphism`, `symmetric-group`);
+  `math.opt`/`math.linalg`/`math.graph` unchanged at 0 ready (all
+  three still PARKED). Validated: KG validator PASS (908/908
+  reachable, file untouched), `scripts/math/state.ts` confirms
+  math.abst 7/37, mathematics 549/908 (10 EB-certified domains
+  unchanged), `tsc --noEmit` clean, targeted tests 479/479 passed,
+  all 4 heading structures diffed clean on the first pass. No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file
+  touched. This is a genuinely multi-session campaign; continuation
+  should verify state via `scripts/math/state.ts` fresh each time
+  rather than trusting any number recorded here.
 
 ## Topic/meaning loss — the extractor's default was YES (2026-09-13)
 

@@ -13,11 +13,24 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **545** mathematics + 238 physics + 216 english + 186 chemistry + 0 biology + 0 computer_science = **1,185** |
-| Remaining | **590** |
-| Completion percentage | **66.76%** |
+| Concepts with an Educational Brain entry | **549** mathematics + 238 physics + 216 english + 186 chemistry + 0 biology + 0 computer_science = **1,189** |
+| Remaining | **586** |
+| Completion percentage | **66.99%** |
 
-*(Recomputed programmatically 2026-09-14, after Batch 84 (1 concept:
+*(Recomputed programmatically 2026-09-14, after Batch 85 (4 concepts:
+`math.abst.ring-theory`/`math.abst.subgroup`/`math.abst.group-operation`/`math.abst.group-
+inverse` — 4 of the 9 candidates from the Batch 84 frontier, all requiring only `math.abst.
+group-theory`. `ring-theory` (cross-link `math.linalg.matrix-multiplication`, confirmed
+genuinely authored via `ls`) is the highest-leverage pick — one of the two prerequisites for
+`math.abst.field`, the shared blocker for `math.linalg`/`math.opt`; zero discrepancy.
+`subgroup` (unlocks `coset`+`normal-subgroup`), `group-operation` (cross-link `math.linalg.
+vector-addition`, confirmed authored), `group-inverse` (cross-link `math.linalg.matrix-inverse`,
+confirmed authored) — all 3 zero discrepancy. Deferred: `cyclic-group`, `group-action`,
+`group-homomorphism`, `group-order`, `symmetric-group`. `math.abst` 3/37 → 7/37. Fresh frontier
+after Batch 85: 9 candidates ready, notably including `math.abst.ideal` — the SECOND link in
+the chain toward `math.abst.field` (via `ring-theory`, authored this batch) — plus `coset`
+(unblocked by `subgroup`) and 7 others. Brought mathematics from 545 to 549.)*
+Prior update: after Batch 84 (1 concept:
 `math.abst.group-theory` — the sole topologically-ready math.abst candidate after Batch 83,
 requires `math.abst.binary-operation`; cross-link `math.linalg.vector-addition` confirmed
 genuinely authored via `ls`, zero discrepancy). `math.abst` 2/37 → 3/37. Fresh frontier after
@@ -359,7 +372,7 @@ that do not resolve to a live KG concept id, across all six subjects.)*
 
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
-| mathematics | 908 | 545 | 60.02% | `math.found.mathematical-thinking` | **Yes** |
+| mathematics | 908 | 549 | 60.46% | `math.found.mathematical-thinking` | **Yes** |
 
 **Mathematics per-domain state (recomputed 2026-09-13, programmatic):**
 
@@ -434,7 +447,16 @@ check). Fresh frontier after Batch 74: 9 candidates ready (`unit-vector`, `cross
 | `math.de` | 0/56 | not started |
 | `math.prob` | 0/49 | not started |
 | `math.stats` | 0/40 | not started |
-| `math.abst` | 3/37 | **Batch 84 (1, `group-theory`, the sole ready candidate after Batch 83,
+| `math.abst` | 7/37 | **Batch 85 (4, `ring-theory`/`subgroup`/`group-operation`/`group-
+inverse`, selected from the 9-candidate frontier after Batch 84, all requiring only `group-
+theory`; `ring-theory` is the highest-leverage pick — one of the two prerequisites for `math.
+abst.field`, the shared blocker for `math.linalg`/`math.opt` — its cross-link `math.linalg.
+matrix-multiplication` confirmed genuinely authored via `ls`; `group-operation`/`group-inverse`
+cross-links to `math.linalg.vector-addition`/`math.linalg.matrix-inverse` likewise confirmed
+authored; `subgroup` cross_links none. All 4 zero Blueprint/KG metadata discrepancy. Deferred:
+`cyclic-group`, `group-action`, `group-homomorphism`, `group-order`, `symmetric-group`). Fresh
+frontier after Batch 85: 9 candidates ready, notably `math.abst.ideal` — the SECOND link toward
+`math.abst.field` — plus `coset` (unblocked by `subgroup`) and 7 others.** **Batch 84 (1, `group-theory`, the sole ready candidate after Batch 83,
 requires `binary-operation`; cross-link `math.linalg.vector-addition` confirmed genuinely
 authored via `ls`, zero discrepancy). Fresh frontier after Batch 84 EXPANDED to 9 candidates
 (`cyclic-group`/`group-action`/`group-homomorphism`/`group-inverse`/`group-operation`/
