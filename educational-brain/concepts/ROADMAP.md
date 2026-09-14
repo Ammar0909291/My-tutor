@@ -13,11 +13,26 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **537** mathematics + 238 physics + 216 english + 186 chemistry + 0 biology + 0 computer_science = **1,177** |
-| Remaining | **598** |
-| Completion percentage | **66.31%** |
+| Concepts with an Educational Brain entry | **540** mathematics + 238 physics + 216 english + 186 chemistry + 0 biology + 0 computer_science = **1,180** |
+| Remaining | **595** |
+| Completion percentage | **66.48%** |
 
-*(Recomputed programmatically 2026-09-14, after Batch 81 (4 concepts:
+*(Recomputed programmatically 2026-09-14, after Batch 82 (3 concepts:
+`math.opt.duality`/`math.opt.linear-programming`/`math.opt.newton-optimization` — all 3 candidates
+topologically ready after Batch 81, closing the ENTIRE batch-start math.opt frontier with none
+deferred: `duality` requires `math.opt.convex-optimization` (authored Batch 80); `linear-
+programming` requires `math.opt.convex-optimization`+`math.linalg.linear-system` (the latter not
+yet an EB entry, reused conceptually per its own Blueprint citation); `newton-optimization`
+requires `math.opt.gradient-methods`+`math.calc.multivariable-extrema` (the latter not yet an EB
+entry, reused conceptually). `duality` zero Blueprint/KG metadata discrepancy. `linear-
+programming` and `newton-optimization` both carry genuine `unlocks` discrepancies (Blueprints name
+forward concepts — `quadratic-programming`+`integer-programming` for the former, `kkt` for the
+latter — that the live KG's own `unlocks` field does not list, or lists elsewhere: `duality`'s KG
+entry already correctly carries `unlocks: ['math.opt.kkt']`, suggesting `newton-optimization`'s
+Blueprint duplicated that relationship in error), both resolved toward the KG. `math.opt` 7/16 →
+10/16. `math.linalg`/`math.graph` remain PARKED at 28/61 and 15/16 respectively (0 ready,
+unchanged); brought mathematics from 537 to 540).
+Prior update: after Batch 81 (4 concepts:
 `math.opt.dynamic-programming`/`math.opt.gradient-methods`/`math.opt.lagrange-multipliers`/
 `math.opt.convex-optimization` — all 4 candidates topologically ready after Batch 80, closing the
 ENTIRE batch-start math.opt frontier with none deferred: `dynamic-programming` requires
@@ -315,7 +330,7 @@ that do not resolve to a live KG concept id, across all six subjects.)*
 
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
-| mathematics | 908 | 537 | 59.14% | `math.found.mathematical-thinking` | **Yes** |
+| mathematics | 908 | 540 | 59.47% | `math.found.mathematical-thinking` | **Yes** |
 
 **Mathematics per-domain state (recomputed 2026-09-13, programmatic):**
 
@@ -398,7 +413,20 @@ check). Fresh frontier after Batch 74: 9 candidates ready (`unit-vector`, `cross
 | `math.top` | 0/23 | not started |
 | `math.fnal` | 0/18 | not started |
 | `math.num` | 0/16 | not started |
-| `math.opt` | 7/16 | **Batch 81 (4, `dynamic-programming`/`gradient-methods`/
+| `math.opt` | 10/16 | **Batch 82 (3, `duality`/`linear-programming`/`newton-optimization`,
+closing the ENTIRE 3-candidate frontier available after Batch 81 with none deferred; `duality`
+requires `math.opt.convex-optimization` (authored, zero discrepancy); `linear-programming`
+requires `math.opt.convex-optimization`+`math.linalg.linear-system` (the latter not yet an EB
+entry, reused conceptually) and carries a genuine `unlocks` discrepancy — Blueprint names
+`math.opt.quadratic-programming`+`math.opt.integer-programming`, KG lists only
+`math.opt.duality`, resolved toward the KG; `newton-optimization` requires `math.opt.gradient-
+methods`+`math.calc.multivariable-extrema` (the latter not yet an EB entry, reused conceptually)
+and carries a genuine `unlocks` discrepancy — Blueprint names `math.opt.kkt`, KG lists `[]`
+(empty), resolved toward the KG; noted that `duality`'s own KG entry already correctly carries
+`unlocks: ['math.opt.kkt']`, suggesting `newton-optimization`'s Blueprint duplicated that
+relationship in error). Fresh frontier after Batch 82: `integer-programming`, `kkt` both ready (9
+concepts remain in math.opt: 7 ready-eventually plus 2 immediately ready).** **Batch 81 (4,
+`dynamic-programming`/`gradient-methods`/
 `lagrange-multipliers`/`convex-optimization`, closing the ENTIRE 4-candidate frontier available
 after Batch 80 with none deferred; `dynamic-programming` requires `math.disc.recurrence-relation`
 (long-authored, zero discrepancy); `gradient-methods` requires `math.opt.unconstrained-

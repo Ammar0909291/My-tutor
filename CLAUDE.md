@@ -5427,6 +5427,50 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   touched. This is a genuinely multi-session campaign; continuation
   should verify state via `scripts/math/state.ts` fresh each time
   rather than trusting any number recorded here.
+- **Batch 82 — math.opt: Lagrangian duality, linear programming,
+  Newton's method for optimization — closes the entire Batch-81
+  frontier** (2026-09-14, autonomous loop iteration): re-computed
+  the frontier fresh — `math.opt` had exactly the 3 candidates
+  predicted at the end of Batch 81 (`duality`, `linear-programming`,
+  `newton-optimization`). Authored all 3, closing the ENTIRE frontier
+  with none deferred. `duality` (requires `math.opt.convex-
+  optimization`): the Lagrangian, dual function, weak duality
+  (universal), strong duality (convex + Slater's condition), and the
+  shadow-price/complementary-slackness interpretation; 3
+  misconceptions with birth types EXPLICITLY given by the Blueprint,
+  adopted directly — MC-1 Type 5, MC-2 Type 5, MC-3 Type 2; zero
+  discrepancy. `linear-programming` (requires `math.opt.convex-
+  optimization`+`math.linalg.linear-system`): the extreme-point
+  theorem, the simplex method, LP duality, simplex-vs-interior-point
+  tradeoffs; 3 misconceptions with birth types EXPLICITLY given by
+  the Blueprint, adopted directly — MC-1 Type 2, MC-2 Type 5, MC-3
+  Type 3. **Genuine `unlocks` discrepancy found**: Blueprint names
+  `math.opt.quadratic-programming`+`math.opt.integer-programming`,
+  KG lists only `math.opt.duality` — resolved toward the KG.
+  `newton-optimization` (requires `math.opt.gradient-methods`+
+  `math.calc.multivariable-extrema`): the Newton step reusing
+  gradient descent's framework with second-order (Hessian)
+  information, quadratic convergence (a rate, never a step count),
+  and Newton's own failure modes with their remedies; 3
+  misconceptions with birth types EXPLICITLY given by the Blueprint,
+  adopted directly — MC-1 Type 5, MC-2 Type 5, MC-3 Type 3.
+  **Genuine `unlocks` discrepancy found**: Blueprint names
+  `math.opt.kkt`, KG lists `[]` (empty) — resolved toward the KG,
+  noted that `duality`'s own KG entry already correctly carries this
+  relationship, suggesting duplication in error. `math.opt`
+  **7/16 → 10/16**. Mathematics **537/908 → 540/908**, 368 remaining.
+  Fresh frontier: `math.opt.integer-programming`, `math.opt.kkt` both
+  ready (6 concepts remain in math.opt beyond these 2);
+  `math.linalg`/`math.graph` unchanged at 0 ready (both still
+  PARKED). Validated: KG validator PASS (908/908 reachable, file
+  untouched), `scripts/math/state.ts` confirms math.opt 10/16,
+  mathematics 540/908 (10 EB-certified domains unchanged), `tsc
+  --noEmit` clean, targeted tests 479/479 passed, all 3 heading
+  structures diffed clean on the first pass. No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file
+  touched. This is a genuinely multi-session campaign; continuation
+  should verify state via `scripts/math/state.ts` fresh each time
+  rather than trusting any number recorded here.
 
 ## Topic/meaning loss — the extractor's default was YES (2026-09-13)
 
