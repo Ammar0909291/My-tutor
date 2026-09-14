@@ -5992,6 +5992,78 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   Batch 86 unchanged. This is a genuinely multi-session campaign;
   continuation should verify state via `scripts/math/state.ts` fresh
   each time rather than trusting any number recorded here.
+- **Batch 92 — math.abst: Burnside's Lemma, Sylow theorems, PID,
+  algebraic extension — closes the domain's entire post-Batch-91
+  frontier** (2026-09-14, autonomous loop iteration): re-computed the
+  frontier fresh — `math.abst` had exactly the 4 candidates and
+  `math.linalg` exactly the 4 candidates predicted at the end of
+  Batch 91. Deliberately selected ALL 4 math.abst candidates
+  (`burnside-lemma`, `sylow-theorems`, `pid`, `algebraic-extension`),
+  closing the ENTIRE math.abst frontier available at batch start with
+  none deferred, and leaving all 4 math.linalg candidates (`span`,
+  `null-space`, `linear-map`, `inner-product`) for a future batch. All
+  4 Blueprint-grounded, reused by reference. `burnside-lemma` (requires
+  `group-action`, unlocks none): the fixed-point-averaging formula
+  $|G\backslash X|=\frac1{|G|}\sum_{g\in G}|X^g|$, its double-counting
+  proof sketch via `group-action`'s own orbit-stabilizer theorem, and
+  the canonical triangle-coloring worked example; 3 misconceptions
+  independently classified — MC-1 FIXED-POINT-MEANS-TOTAL-FIXED Type 1
+  (FOUNDATIONAL, conflates a fixed-point-set with an orbit-size
+  computation), MC-2 BURNSIDE-COUNTS-CONFIGURATIONS Type 1, MC-3
+  FORMULA-APPLIED-WITHOUT-ALL-GROUP-ELEMENTS Type 5. `sylow-theorems`
+  (requires `group-action`+`math.nt.prime-number`, unlocks none): all
+  three Sylow theorems, the $n_p=1\iff$normal biconditional, and the
+  element-counting non-simplicity argument; 3 misconceptions
+  independently classified — MC-1 SYLOW-SUBGROUP-ALWAYS-NORMAL Type 1
+  (FOUNDATIONAL, conflates guaranteed existence with unearned
+  normality — $S_3$'s three non-normal Sylow 2-subgroups as
+  counterexample), MC-2 SYLOW-III-WRONG-DIVISOR Type 4
+  notation-induced, MC-3 ANY-p-SUBGROUP-IS-SYLOW Type 3 language
+  contamination. `pid` (requires `euclidean-domain`, unlocks `ufd`):
+  proves every Euclidean Domain is a PID via the minimal-norm-element
+  argument (a direct consequence of `euclidean-domain`'s own division-
+  with-remainder property, never independently re-verified), states
+  the PID-specific prime-ideal-is-maximal structure theorem, and cites
+  $\mathbb Z[\frac{1+\sqrt{-19}}2]$ as the historically significant
+  PID-without-a-Euclidean-norm separating example; 3 misconceptions
+  independently classified, all Type 1 overgeneralization — MC-1
+  PID-STATUS-ASSUMED-TO-NEED-INDEPENDENT-VERIFICATION (Foundational),
+  MC-2 PID-STRUCTURE-ASSUMED-GENERAL-TO-ALL-DOMAINS (Foundational),
+  MC-3 PID-AND-ED-ASSUMED-EQUIVALENT (Moderate). `algebraic-extension`
+  (requires `field-extension`, unlocks `galois-theory`): defines the
+  minimal polynomial's three simultaneous conditions (monic,
+  irreducible, least degree), derives $[F(\alpha):F]=\deg(m_\alpha)$
+  directly from the $F(\alpha)\cong F[x]/(m_\alpha(x))$ isomorphism
+  (no separate hand-verified basis, unlike `field-extension`'s own
+  examples), and — via the $i$/$x^4-1$ factorization example — ACTUALLY
+  DERIVES, via Eisenstein's criterion, the cube-doubling degree-3 fact
+  `field-extension`'s own transfer probe had only asserted; 3
+  misconceptions independently classified — MC-1
+  MINIMAL-POLYNOMIAL-ANY-SATISFYING-POLYNOMIAL Type 1 (FOUNDATIONAL),
+  MC-2 DEGREE-REQUIRES-EXPLICIT-BASIS-VERIFICATION Type 5
+  instruction-induced, MC-3
+  MINIMAL-POLYNOMIAL-DEGREE-ASSUMED-FROM-DEFINING-EQUATION Type 1
+  (FOUNDATIONAL). **All 4 concepts zero-discrepancy**, all 4 math.abst,
+  all 4 zero KG/Blueprint metadata discrepancy on every field.
+  `math.abst` **33/37** (29→33) — only 4 concepts remain in the domain
+  (`ufd`, `galois-theory`, `galois-group`, `galois-correspondence`).
+  `math.linalg` unchanged at **30/61**. Mathematics **577/908**
+  (573→577), 331 remaining. Full per-concept detail in `COVERAGE.md`
+  Batch 92. Validated: KG validator PASS (908/908 reachable, file
+  untouched), `scripts/math/state.ts` confirms math.abst 33/37,
+  mathematics 577/908 (10 EB-certified domains unchanged), `tsc
+  --noEmit` clean, targeted tests 479/479 passed, all 4 heading
+  structures diffed clean on the first pass. No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file
+  touched. Fresh frontier: 18 candidates — `math.abst` 2 (`ufd` —
+  newly unblocked by `pid` — `galois-theory` — newly unblocked by
+  `algebraic-extension`; `galois-group`/`galois-correspondence` remain
+  blocked, each depending on `galois-theory`), `math.linalg` 4
+  unchanged (`span`, `null-space`, `linear-map`, `inner-product`),
+  plus the same 9 previously-unstarted domains from Batch 86 unchanged.
+  This is a genuinely multi-session campaign; continuation should
+  verify state via `scripts/math/state.ts` fresh each time rather than
+  trusting any number recorded here.
 
 ## Topic/meaning loss — the extractor's default was YES (2026-09-13)
 

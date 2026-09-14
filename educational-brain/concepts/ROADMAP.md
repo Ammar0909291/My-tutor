@@ -13,11 +13,30 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **573** mathematics + 238 physics + 216 english + 186 chemistry + 0 biology + 0 computer_science = **1,213** |
-| Remaining | **562** |
-| Completion percentage | **68.34%** |
+| Concepts with an Educational Brain entry | **577** mathematics + 238 physics + 216 english + 186 chemistry + 0 biology + 0 computer_science = **1,217** |
+| Remaining | **558** |
+| Completion percentage | **68.56%** |
 
-*(Recomputed programmatically 2026-09-14, after Batch 91 (4 concepts: `math.abst.group-action`/
+*(Recomputed programmatically 2026-09-14, after Batch 92 (4 concepts: `math.abst.burnside-lemma`/
+`math.abst.sylow-theorems`/`math.abst.pid`/`math.abst.algebraic-extension` — closed math.abst's
+ENTIRE topologically-ready post-Batch-91 frontier, all 4 candidates selected from the 4-candidate
+math.abst frontier opened by Batch 91 — no math.linalg concept authored this batch).
+`burnside-lemma` (requires `group-action`) states the fixed-point-averaging formula
+$|G\backslash X|=\frac1{|G|}\sum_{g\in G}|X^g|$ and its double-counting proof sketch via the
+orbit-stabilizer theorem. `sylow-theorems` (requires `group-action`+`math.nt.prime-number`)
+states existence/conjugacy/count, the $n_p=1$ normality biconditional, and the element-counting
+non-simplicity argument. `pid` (requires `euclidean-domain`, unlocks `ufd`) proves every ED is a
+PID via the minimal-norm argument, states the prime-is-maximal structure theorem, and the
+$\mathbb Z[\frac{1+\sqrt{-19}}2]$ PID/ED separation. `algebraic-extension` (requires
+`field-extension`, unlocks `galois-theory`) defines the minimal polynomial's three simultaneous
+conditions and derives $[F(\alpha):F]=\deg(m_\alpha)$ via the $F[x]/(m_\alpha)$ isomorphism. All
+4 zero Blueprint/KG metadata discrepancy. `math.abst` 29/37 → 33/37 — only 4 concepts remain in
+the domain (`ufd`, `galois-theory`, `galois-group`, `galois-correspondence`). Fresh frontier
+after Batch 92: 18 candidates ready — `math.abst` 2 (`ufd` — newly unblocked by `pid` —
+`galois-theory` — newly unblocked by `algebraic-extension`), `math.linalg` 4 unchanged (`span`,
+`null-space`, `linear-map`, `inner-product`), plus the same 9 previously-unstarted domains from
+Batch 86 unchanged. Brought mathematics from 573 to 577.)*
+Prior update: after Batch 91 (4 concepts: `math.abst.group-action`/
 `math.abst.alternating-group`/`math.abst.euclidean-domain`/`math.abst.field-extension` — closed
 math.abst's ENTIRE topologically-ready frontier, all 4 candidates selected from the 20-candidate
 frontier opened by Batch 90 — no math.linalg concept authored this batch). `group-action`
@@ -559,7 +578,13 @@ check). Fresh frontier after Batch 74: 9 candidates ready (`unit-vector`, `cross
 | `math.de` | 0/56 | not started |
 | `math.prob` | 0/49 | not started |
 | `math.stats` | 0/40 | not started |
-| `math.abst` | 29/37 | **Batch 91 (4, `group-action`/`alternating-group`/`euclidean-domain`/
+| `math.abst` | 33/37 | **Batch 92 (4, `burnside-lemma`/`sylow-theorems`/`pid`/
+`algebraic-extension`, closing the ENTIRE 4-candidate frontier available after Batch 91 with none
+deferred. `pid` unlocks `ufd`; `algebraic-extension` unlocks `galois-theory`. All 4 zero
+Blueprint/KG metadata discrepancy. Only 4 concepts remain in math.abst: `ufd`, `galois-theory`,
+`galois-group`, `galois-correspondence`). Fresh frontier after Batch 92: 2 candidates ready
+(`ufd` — newly unblocked by `pid` — `galois-theory` — newly unblocked by `algebraic-extension`).**
+**Batch 91 (4, `group-action`/`alternating-group`/`euclidean-domain`/
 `field-extension`, closing the ENTIRE 4-candidate frontier available after Batch 90 with none
 deferred. `group-action` unlocks `sylow-theorems`; `euclidean-domain` unlocks `pid`;
 `field-extension` unlocks `algebraic-extension`. All 4 zero Blueprint/KG metadata discrepancy.
