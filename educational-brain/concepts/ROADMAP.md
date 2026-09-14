@@ -13,11 +13,24 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **553** mathematics + 238 physics + 216 english + 186 chemistry + 0 biology + 0 computer_science = **1,193** |
-| Remaining | **582** |
-| Completion percentage | **67.21%** |
+| Concepts with an Educational Brain entry | **557** mathematics + 238 physics + 216 english + 186 chemistry + 0 biology + 0 computer_science = **1,197** |
+| Remaining | **578** |
+| Completion percentage | **67.44%** |
 
-*(Recomputed programmatically 2026-09-14, after Batch 86 (4 concepts: `math.abst.ideal`/
+*(Recomputed programmatically 2026-09-14, after Batch 87 (4 concepts: `math.abst.prime-ideal`/
+`math.abst.lagrange-theorem`/`math.abst.quotient-ring`/`math.abst.normal-subgroup` — selected
+from the 21-candidate frontier opened by Batch 86. `prime-ideal` (requires `ideal`) is the
+highest-leverage pick — the LAST link toward `math.abst.field`: authoring it makes `field`
+itself immediately READY, resolving the shared blocker parking `math.linalg` (since Batch 80)
+and `math.opt` (since Batch 83) since Batch 83. `lagrange-theorem` (requires `coset`, the
+central theorem of finite group theory — |H| divides |G|), `quotient-ring` (requires `ideal`,
+unlocks `ring-homomorphism`), `normal-subgroup` (requires `coset`, unlocks `quotient-group`) —
+all 4 zero Blueprint/KG discrepancy. `math.abst` 11/37 → 15/37. Fresh frontier after Batch 87:
+19 candidates ready, 8 in `math.abst` INCLUDING `math.abst.field` itself — the concept that
+will reopen both `math.linalg` and `math.opt` once authored — plus `cyclic-group`,
+`euclidean-domain`, `group-action`, `group-homomorphism`, `quotient-group`, `ring-homomorphism`,
+`symmetric-group`. Brought mathematics from 553 to 557.)*
+Prior update: after Batch 86 (4 concepts: `math.abst.ideal`/
 `math.abst.coset`/`math.abst.group-order`/`math.abst.polynomial-ring` — selected from the
 9-candidate frontier opened by Batch 85. `ideal` (requires `ring-theory`) is the highest-
 leverage pick — the SECOND link toward `math.abst.field`, the shared blocker for
@@ -463,7 +476,17 @@ check). Fresh frontier after Batch 74: 9 candidates ready (`unit-vector`, `cross
 | `math.de` | 0/56 | not started |
 | `math.prob` | 0/49 | not started |
 | `math.stats` | 0/40 | not started |
-| `math.abst` | 11/37 | **Batch 86 (4, `ideal`/`coset`/`group-order`/`polynomial-ring`, selected
+| `math.abst` | 15/37 | **Batch 87 (4, `prime-ideal`/`lagrange-theorem`/`quotient-ring`/
+`normal-subgroup`, selected from the 21-candidate frontier after Batch 86. `prime-ideal`
+(requires `ideal`) is the highest-leverage pick — the LAST link toward `math.abst.field`,
+which is now READY, resolving the shared blocker for `math.linalg`/`math.opt`. `lagrange-
+theorem` (requires `coset`), `quotient-ring` (requires `ideal`, unlocks `ring-homomorphism`),
+`normal-subgroup` (requires `coset`, unlocks `quotient-group`). All 4 zero Blueprint/KG
+metadata discrepancy). Fresh frontier after Batch 87: 19 candidates ready — 8 in `math.abst`
+including `math.abst.field` itself, plus 9 previously-unstarted domains' entry nodes still
+ready from Batch 86 (unauthored: `math.cat`, `math.cx`, `math.de`, `math.meas`, `math.num` ×2,
+`math.prob`, `math.real` ×2, `math.stats`, `math.top`).**
+**Batch 86 (4, `ideal`/`coset`/`group-order`/`polynomial-ring`, selected
 from the 9-candidate frontier after Batch 85. `ideal` (requires `ring-theory`) is the
 highest-leverage pick — the SECOND link toward `math.abst.field`, the shared blocker for
 `math.linalg`/`math.opt`, immediately unblocking `prime-ideal` (field's other prerequisite).

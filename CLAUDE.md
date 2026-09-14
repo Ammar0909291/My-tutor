@@ -5660,6 +5660,59 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   multi-session campaign; continuation should verify state via
   `scripts/math/state.ts` fresh each time rather than trusting any
   number recorded here.
+- **Batch 87 — math.abst: prime/maximal ideals (closes the chain to
+  `field`), Lagrange's theorem, quotient rings, normal subgroups**
+  (2026-09-14, autonomous loop iteration): re-computed the frontier
+  fresh — `math.abst` had exactly the 10 candidates predicted at the
+  end of Batch 86. Selected 4, prioritizing `prime-ideal` as the
+  highest-leverage pick — the LAST link toward `math.abst.field`
+  (after `ring-theory` Batch 85 and `ideal` Batch 86) — alongside
+  `lagrange-theorem`, `quotient-ring`, `normal-subgroup`.
+  `prime-ideal` (requires `ideal`, unlocks `field`): the quotient-
+  ring criterion (prime iff integral domain, maximal iff field), the
+  canonical $\langle x\rangle$-in-$\mathbb Z[x]$ prime-not-maximal
+  split case; 3 misconceptions independently classified — MC-1/MC-2
+  Type 1 overgeneralization from $\mathbb Z$'s own coincidence, MC-3
+  Type 5 instruction-induced; zero discrepancy. `lagrange-theorem`
+  (requires `coset`): $|H|$ divides $|G|$ reusing `coset`'s own
+  partition property and bijection directly, corollaries on element
+  order/prime-order cyclicity/$g^{|G|}=e$, the false converse
+  ($A_4$); 3 misconceptions independently classified — MC-1/MC-3
+  Type 1, MC-2 Type 5 (an unabsorbed prerequisite fact surfacing as
+  an apparent proof gap); zero discrepancy. `quotient-ring`
+  (requires `ideal`, unlocks `ring-homomorphism`): coset arithmetic
+  $R/I$, well-definedness reusing `ideal`'s own two-sided absorption
+  directly, $\mathbb Z/n\mathbb Z$ and $\mathbb R[x]/\langle
+  x^2+1\rangle\cong\mathbb C$; 3 misconceptions with birth types
+  EXPLICITLY given by the Blueprint, adopted directly — MC-1 Type 2,
+  MC-2 Type 5, MC-3 Type 1; zero discrepancy. `normal-subgroup`
+  (requires `coset`, unlocks `quotient-group`): $gNg^{-1}=N$,
+  set-level $gN=Ng$ versus element-wise commutation, why non-
+  normality breaks coset multiplication, worked throughout in $D_3$;
+  3 misconceptions independently classified — MC-1/MC-3 Type 1,
+  MC-2 Type 4 notation-induced (the symmetric-looking $gN=Ng$
+  visually suggesting the stronger commutativity reading); zero
+  discrepancy. `math.abst` **11/37 → 15/37**. Mathematics
+  **553/908 → 557/908**, 351 remaining. **Milestone**: authoring
+  `prime-ideal` closes the entire two-hop chain to `math.abst.field`
+  — a fresh frontier check confirms `field` is now topologically
+  ready, not yet authored, and will reopen both `math.linalg`
+  (PARKED since Batch 80) and `math.opt` (PARKED since Batch 83)
+  once authored. Fresh frontier: 19 candidates — 8 remain within
+  `math.abst` (`field` itself, `cyclic-group`, `euclidean-domain`,
+  `group-action`, `group-homomorphism`, `quotient-group` — newly
+  unblocked by `normal-subgroup` — `ring-homomorphism`,
+  `symmetric-group`), plus the same 9 previously-unstarted domains'
+  entry nodes from Batch 86 remain ready and unauthored. Validated:
+  KG validator PASS (908/908 reachable, file untouched),
+  `scripts/math/state.ts` confirms math.abst 15/37, mathematics
+  557/908 (10 EB-certified domains unchanged), `tsc --noEmit`
+  clean, targeted tests 479/479 passed, all 4 heading structures
+  diffed clean on the first pass. No Physics/Chemistry/English/
+  Biology/CS/KG/Blueprint/runtime file touched. This is a genuinely
+  multi-session campaign; continuation should verify state via
+  `scripts/math/state.ts` fresh each time rather than trusting any
+  number recorded here.
 
 ## Topic/meaning loss — the extractor's default was YES (2026-09-13)
 
