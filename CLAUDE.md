@@ -5772,6 +5772,76 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   touched. This is a genuinely multi-session campaign; continuation
   should verify state via `scripts/math/state.ts` fresh each time
   rather than trusting any number recorded here.
+- **Batch 89 — math.linalg: vector space (the domain's own reopening
+  entry point); math.abst: first isomorphism theorem, finite fields,
+  group isomorphism** (2026-09-14, autonomous loop iteration):
+  re-computed the frontier fresh — `math.abst` had exactly the 8
+  candidates and `math.linalg` exactly the 1 candidate (`vector-space`)
+  predicted at the end of Batch 88. Selected 4, prioritizing
+  `vector-space` — the domain's own reopening entry point, requires
+  `vector-addition`+`scalar-multiplication`+`math.abst.field`, all
+  authored, unlocks `linear-map`+`inner-product-space`, cross-link
+  `math.abst.group-theory` confirmed authored — alongside
+  `first-isomorphism-theorem`, `finite-field`, `group-isomorphism`.
+  `vector-space` states the 8 vector-space axioms (4 additive reusing
+  `math.abst.group-theory`'s own abelian-group structure directly, 4
+  scalar reusing `math.abst.field`'s own axioms), the pattern-induction
+  fact that the identical axioms hold across $\mathbb R^2$/$P_2$/
+  $M_{2\times2}$, and the 3-condition subspace test; 3 misconceptions
+  independently classified — MC-1 CLOSURE-UNSTATED Type 5
+  instruction-induced (FOUNDATIONAL), MC-2 ZERO-VECTOR-POSITIONAL
+  Type 2 perceptual, MC-3 SCALAR-DOMAIN-ARBITRARY Type 1
+  overgeneralization; zero discrepancy. `first-isomorphism-theorem`
+  (requires `quotient-group`+`group-homomorphism`, both authored Batch
+  88): $G/\ker(\varphi)\cong\operatorname{im}(\varphi)$, framed as
+  connecting three already-studied objects into one genuinely new
+  isomorphism claim, well-definedness specifically requiring the
+  kernel, verified via a two-representative check in $S_3$'s sign
+  homomorphism; 3 misconceptions independently classified — MC-1
+  THEOREM-ASSUMED-MERE-RESTATEMENT Type 1 (FOUNDATIONAL), MC-2
+  WELL-DEFINEDNESS-ASSUMED-INDEPENDENT-OF-KERNEL-CHOICE Type 1, MC-3
+  RING-VERSION-ASSUMED-SEPARATE-THEOREM Type 6 analogy overextension;
+  zero discrepancy. `finite-field` (requires `field`+`math.nt.
+  prime-number`, cross-link `math.nt.modular-arithmetic`): states the
+  prime-power existence/classification theorem, sharply distinguishes
+  $\mathbb Z/p\mathbb Z$ ($n=1$) from the genuinely different
+  construction needed for $n\ge2$ via a zero-divisor computation, and
+  states the guaranteed cyclic multiplicative-group structure; 3
+  misconceptions independently classified — MC-1
+  FINITE-FIELD-ORDER-ASSUMED-UNRESTRICTED Type 1, MC-2
+  FP-N-CONFLATED-WITH-Z-MOD-PN Type 1, MC-3
+  MULTIPLICATIVE-CYCLIC-STRUCTURE-DOUBTED Type 5 instruction-induced;
+  zero discrepancy. `group-isomorphism` (requires `group-homomorphism`
+  only): defines isomorphism as bijective homomorphism, establishes
+  structural invariants (element order multisets) as the proof tool
+  for showing same-order groups are NOT isomorphic, via the canonical
+  $\mathbb Z/4\mathbb Z\not\cong V_4$ example; 3 misconceptions
+  independently classified — MC-1 SAME-SIZE-MEANS-ISOMORPHIC Type 1
+  (FOUNDATIONAL), MC-2 ANY-BIJECTION-IS-ISOMORPHISM Type 5
+  instruction-induced, MC-3 ISOMORPHISM-PRESERVES-LABELS Type 6
+  analogy overextension; zero discrepancy. **Verified via `ls` that
+  `math.nt.modular-arithmetic.md` genuinely exists as an EB entry**,
+  confirming `finite-field`'s Blueprint-declared cross-link-probe mode
+  is NOT stale — a useful contrast to several prior batches' findings
+  of stale P76-mode declarations. `math.linalg` 28/61 (PARKED) →
+  **29/61 (REOPENED, no longer PARKED)**. `math.abst` **19/37 →
+  22/37**. Mathematics **561/908 → 565/908**, 343 remaining. `math.opt`
+  remains PARKED — its own chain to `field` still runs through
+  `math.linalg.positive-definite`, several concepts deeper within the
+  reopened `math.linalg`. Fresh frontier: 21 candidates — `math.abst`
+  6 (`cyclic-group`, `second-isomorphism-theorem`, `group-action`,
+  `symmetric-group`, `euclidean-domain`, `field-extension`),
+  `math.linalg` 3 (`subspace`, `linear-map`, `inner-product`), plus
+  the same 9 previously-unstarted domains from Batch 86 unchanged.
+  Validated: KG validator PASS (908/908 reachable, file untouched),
+  `scripts/math/state.ts` confirms math.linalg 29/61, math.abst
+  22/37, mathematics 565/908 (10 EB-certified domains unchanged),
+  `tsc --noEmit` clean, targeted tests 479/479 passed, all 4 heading
+  structures diffed clean on the first pass. No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file
+  touched. This is a genuinely multi-session campaign; continuation
+  should verify state via `scripts/math/state.ts` fresh each time
+  rather than trusting any number recorded here.
 
 ## Topic/meaning loss — the extractor's default was YES (2026-09-13)
 
