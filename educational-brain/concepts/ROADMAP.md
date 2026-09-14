@@ -13,11 +13,30 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **540** mathematics + 238 physics + 216 english + 186 chemistry + 0 biology + 0 computer_science = **1,180** |
-| Remaining | **595** |
-| Completion percentage | **66.48%** |
+| Concepts with an Educational Brain entry | **544** mathematics + 238 physics + 216 english + 186 chemistry + 0 biology + 0 computer_science = **1,184** |
+| Remaining | **591** |
+| Completion percentage | **66.70%** |
 
-*(Recomputed programmatically 2026-09-14, after Batch 82 (3 concepts:
+*(Recomputed programmatically 2026-09-14, after Batch 83 (4 concepts:
+`math.opt.integer-programming`/`math.opt.kkt`/`math.abst.algebraic-structure`/`math.abst.binary-
+operation` — the first 2 were the entire topologically-ready math.opt frontier after Batch 82
+(`integer-programming` requires `math.opt.linear-programming`, cross-link `math.disc.complexity-
+classes` confirmed genuinely authored via `ls`, zero discrepancy; `kkt` requires
+`math.opt.duality`+`math.opt.lagrange-multipliers`, zero discrepancy). Authoring both revealed
+math.opt's remaining 4 concepts (`quadratic-programming`, `semidefinite-programming`,
+`stochastic-gradient`, `pca`) are ALL blocked — two via `math.linalg.positive-definite`, traced
+directly (via `spectral-theorem`→`orthogonal-basis`→`basis`→`span`→`subspace`) to the SAME
+unauthored `math.abst.field` that already parked `math.linalg`, and two via entirely-unstarted
+`math.prob`/`math.stats` — so `math.opt` PARKED at 12/16. Computed the frontier across all
+domains: `math.abst` had 2 ready (`algebraic-structure`, `binary-operation`), selected as the
+highest-leverage pivot since `math.abst.field` (required by `math.abst.ring-theory`+
+`math.abst.prime-ideal`) is the shared blocker for both `math.linalg` and `math.opt`. Authored
+both — `algebraic-structure` requires `math.found.axiom`+`math.found.set-theory`, zero
+discrepancy; `binary-operation` requires `math.found.function-set-theoretic`, zero discrepancy —
+opening `math.abst` (37 KG concepts). Fresh frontier after Batch 83: `math.abst.group-theory`
+ready; `math.opt`/`math.linalg`/`math.graph` remain PARKED at 12/16, 28/61, 15/16 respectively (0
+ready each); brought mathematics from 540 to 544).
+Prior update: after Batch 82 (3 concepts:
 `math.opt.duality`/`math.opt.linear-programming`/`math.opt.newton-optimization` — all 3 candidates
 topologically ready after Batch 81, closing the ENTIRE batch-start math.opt frontier with none
 deferred: `duality` requires `math.opt.convex-optimization` (authored Batch 80); `linear-
@@ -330,7 +349,7 @@ that do not resolve to a live KG concept id, across all six subjects.)*
 
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
-| mathematics | 908 | 540 | 59.47% | `math.found.mathematical-thinking` | **Yes** |
+| mathematics | 908 | 544 | 59.91% | `math.found.mathematical-thinking` | **Yes** |
 
 **Mathematics per-domain state (recomputed 2026-09-13, programmatic):**
 
@@ -405,7 +424,18 @@ check). Fresh frontier after Batch 74: 9 candidates ready (`unit-vector`, `cross
 | `math.de` | 0/56 | not started |
 | `math.prob` | 0/49 | not started |
 | `math.stats` | 0/40 | not started |
-| `math.abst` | 0/37 | not started |
+| `math.abst` | 2/37 | **OPENED (2026-09-14)** — Batch 83 (2, `algebraic-structure`/
+`binary-operation`, both topologically ready at batch start, closing the ENTIRE math.abst
+frontier available this batch with none deferred; selected after `math.opt` reached 0
+topologically-ready candidates, its remaining 4 concepts all blocked either on
+`math.linalg.positive-definite`'s own deep chain traced directly to the same unauthored
+`math.abst.field` that already parked `math.linalg`, or on entirely-unstarted `math.prob`/
+`math.stats`; `math.abst.field` requires `math.abst.ring-theory`+`math.abst.prime-ideal`, so
+opening `math.abst` from its own entry point is the highest-leverage path toward eventually
+unblocking both `math.linalg` and `math.opt`. `algebraic-structure` requires `math.found.axiom`+
+`math.found.set-theory`, zero discrepancy; `binary-operation` requires `math.found.function-set-
+theoretic`, zero discrepancy). Fresh frontier after Batch 83: `math.abst.group-theory` ready
+(both prerequisites now authored). |
 | `math.disc` | 32/32 | **CERTIFIED (2026-09-13) — the ninth domain.** Batch 73 (1, `graph-representation`, FINAL, requires `math.disc.graph`+`math.linalg.matrix`, both authored; zero Blueprint/KG metadata discrepancy; birth types explicitly given by the Blueprint — MC-1 Type 5, MC-2 Type 5, MC-3 Type 3 — adopted directly). **Batch 70 (3, `ogf`/`egf`/`complexity-classes`, closing the ENTIRE 3-candidate frontier available after Batch 69 with none deferred; all 3 zero Blueprint/KG metadata discrepancy; `ogf`/`egf` both directly mirror `generating-functions`'s convolution/coefficient-extraction ideas one level deeper (OGF product-as-convolution vs. EGF's binomial-weighted convolution); `complexity-classes` genuinely incorporates the already-authored, cross-domain `math.found.conjecture` (theorem-vs-conjecture) as its own Teaching Action, closing the loop back to Foundations). **Only `graph-representation` remains in math.disc** — blocked on unauthored `math.linalg.matrix`, PARKED.** **Batch 69 (2, `algorithm-complexity`/`generating-functions`, closing the ENTIRE 2-candidate frontier available after Batch 68 with none deferred; `algorithm-complexity` zero Blueprint/KG metadata discrepancy on every field (requires `asymptotic-notation`+`divide-conquer-recurrence`, unlocks `complexity-classes`); `generating-functions` also zero discrepancy, its cross-link `math.prob.generating-function` confirmed via `ls` to have no EB entry (`math.prob` entirely unstarted), handled in independence mode exactly matching the Blueprint's own P76 determination — the domain's most complex remaining pair (expert/8-hour `generating-functions`), both now closed). Fresh frontier after Batch 69: 3 candidates ready (`ogf`, `egf`, `complexity-classes` — all newly unblocked).** **Batch 68 (3, `catalan-numbers`/`divide-conquer-recurrence`/`linear-recurrence`, selected from the 4-candidate frontier available after Batch 65, deferring `generating-functions`; `divide-conquer-recurrence` carries a genuine Blueprint/KG `unlocks` discrepancy (Blueprint names `math.disc.algorithm-complexity`, KG lists none), resolved toward the KG; `linear-recurrence` carries a genuine Blueprint-staleness finding on its own P76 cross-link mode against `math.de.char-equation` (Blueprint-file-existence mistaken for EB-entry-existence, `math.de` entirely unstarted), corrected via independence mode; `catalan-numbers` zero discrepancy). Authoring `divide-conquer-recurrence` unblocks `math.disc.algorithm-complexity`. Fresh frontier after Batch 68: 2 candidates ready (`algorithm-complexity`, `generating-functions`).** **Batch 65 (1, `stirling-numbers`, requires `combinations`(Batch 19)+`recurrence-relation`(Batch 63), zero Blueprint/KG metadata discrepancy; distinguishes second-kind $S(n,k)$ (unordered partitions) from first-kind $s(n,k)$ (cyclic permutations) via the $S(4,2)=7$ vs. $s(4,2)=11$ divergence, and derives both recurrences' differing coefficients — $k$ vs. $(n-1)$ — from their respective insertion-point arguments). Fresh frontier after Batch 65: 3 candidates ready (`catalan-numbers`, `divide-conquer-recurrence`, `generating-functions`).** **REOPENED (2026-09-13) — Batch 63 (2, `recurrence-relation`/`asymptotic-notation`, both reopened once `math.seq`/`math.calc` advanced far enough — `recurrence-relation` requires `math.seq.sequence`+`math.alg.polynomial`, both long-authored; `asymptotic-notation` requires `math.calc.limits`+`math.disc.counting-principles`, both long-authored; `recurrence-relation` carries a genuine Blueprint-staleness finding on its own P76 cross-link mode — declared cross-link-probe against `math.de.ode`, verified via `ls` that `math.de.ode` has no EB entry despite its Blueprint file existing, so independence mode was used instead, per the established Batch 48/53/58/62 precedent; both zero KG/Blueprint metadata discrepancy on all other fields). Fresh frontier after Batch 63: 5 candidates ready (`catalan-numbers`, `divide-conquer-recurrence`, `generating-functions`, `linear-recurrence`, `stirling-numbers` — all newly unblocked by `recurrence-relation`).** **IN PROGRESS (standalone campaign since math.alg CERTIFIED)** — Batch 14 (1, `counting-principles`, 2026-09-11) + Batch 15 (1, `permutations`, 2026-09-11) + Batch 16 (1, `combinations`, 2026-09-11) + Batch 19 (5, `combinatorics`/`pigeonhole`/`stars-bars`/`inclusion-exclusion`/`binomial-theorem`, 2026-09-11) + Batch 20 (3, `derangements`/`graph`/`propositional-logic`, 2026-09-11) + Batch 21 (5, `boolean-circuits`/`graph-coloring`/`graph-connectivity`/`graph-types`/`predicate-logic-disc`, 2026-09-11) + Batch 22 (3, `euler-hamiltonian`/`graph-trees`/`planar-graph`, 2026-09-11) + Batch 23 (1, `spanning-tree`, 2026-09-11, closing the `graph-trees → spanning-tree` chain). 0 topologically-ready candidates remain — the remaining 12 concepts (`algorithm-complexity`, `asymptotic-notation`, `catalan-numbers`, `complexity-classes`, `divide-conquer-recurrence`, `egf`, `generating-functions`, `graph-representation`, `linear-recurrence`, `ogf`, `recurrence-relation`, `stirling-numbers`) all require prerequisites outside math.disc (`math.calc.limits`, `math.seq.sequence`, `math.seq.series`, `math.linalg.matrix` — none yet authored); the next step is a cross-domain excursion decision, not a bounded step within math.disc. |
 | `math.cx` | 0/31 | not started |
 | `math.real` | 0/30 | not started |
@@ -413,7 +443,15 @@ check). Fresh frontier after Batch 74: 9 candidates ready (`unit-vector`, `cross
 | `math.top` | 0/23 | not started |
 | `math.fnal` | 0/18 | not started |
 | `math.num` | 0/16 | not started |
-| `math.opt` | 10/16 | **Batch 82 (3, `duality`/`linear-programming`/`newton-optimization`,
+| `math.opt` | 12/16 | **PARKED (2026-09-14) — Batch 83's `integer-programming` (requires
+`linear-programming`, cross-link `math.disc.complexity-classes` confirmed genuinely authored via
+`ls`, zero discrepancy) and `kkt` (requires `duality`+`lagrange-multipliers`, zero discrepancy)
+closed the entire Batch-82 frontier — but the remaining 4 concepts (`quadratic-programming`,
+`semidefinite-programming`, `stochastic-gradient`, `pca`) are ALL blocked: two via
+`math.linalg.positive-definite`, traced directly (via `spectral-theorem`→`orthogonal-basis`→
+`basis`→`span`→`subspace`) to the SAME unauthored `math.abst.field` that already parked
+`math.linalg`, and two via entirely-unstarted `math.prob`/`math.stats`. 0 topologically-ready
+candidates remain within math.opt itself.** **Batch 82 (3, `duality`/`linear-programming`/`newton-optimization`,
 closing the ENTIRE 3-candidate frontier available after Batch 81 with none deferred; `duality`
 requires `math.opt.convex-optimization` (authored, zero discrepancy); `linear-programming`
 requires `math.opt.convex-optimization`+`math.linalg.linear-system` (the latter not yet an EB
