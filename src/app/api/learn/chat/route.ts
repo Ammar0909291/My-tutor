@@ -8597,6 +8597,31 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           }))
           cleanText = figures.text
         }
+
+        // ── NOR MAY IT DRAW ONE ITSELF ─────────────────────────────────────
+        //
+        // Sibling defect to the reference above, same root cause (the
+        // NO-FIGURE prompt rule is advisory and this repo has now measured
+        // that class of rule being ignored repeatedly): reproduced live,
+        // chem.found.matter and chem.equil.weak-acid, asking for a diagram
+        // with none attached — the tutor hand-drew one in a code fence
+        // instead of following the prompt's own "teach in prose" instruction.
+        // See asciiDiagramGuard.ts for the full reproduction and for why a
+        // whole-block strip is wrong (one of the two real cases has a real
+        // equation inside the fence that the prose explanation after it
+        // depends on). Same `figureOnScreen` this guard already computed —
+        // a genuine code-fenced worked example beside a real figure is
+        // ordinary teaching and must not be touched.
+        const { stripUnbackedAsciiDiagram } = await import('@/lib/teaching/asciiDiagramGuard')
+        const asciiDiagram = stripUnbackedAsciiDiagram(cleanText, figureOnScreen)
+        if (asciiDiagram.stripped) {
+          console.warn('[ascii-diagram] ' + JSON.stringify({
+            event: 'unbacked-ascii-diagram-stripped',
+            conceptId: resolvedConceptId ?? null,
+            removedBlocks: asciiDiagram.removedBlocks,
+          }))
+          cleanText = asciiDiagram.text
+        }
       } catch (err) {
         // A repair must never break a turn.
         console.warn('[figure-reference] check skipped:', err)
