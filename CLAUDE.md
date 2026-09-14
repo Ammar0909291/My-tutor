@@ -5602,6 +5602,64 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   touched. This is a genuinely multi-session campaign; continuation
   should verify state via `scripts/math/state.ts` fresh each time
   rather than trusting any number recorded here.
+- **Batch 86 — math.abst: ideals, cosets, element order, and
+  polynomial rings** (2026-09-14, autonomous loop iteration):
+  re-computed the frontier fresh — `math.abst` had exactly the 9
+  candidates predicted at the end of Batch 85. Selected 4,
+  prioritizing `ideal` as the highest-leverage pick — the SECOND
+  link toward `math.abst.field` (after `ring-theory`, Batch 85),
+  immediately unblocking `prime-ideal`, `field`'s other
+  prerequisite — alongside `coset`, `group-order`, and
+  `polynomial-ring` (cross-link `math.alg.polynomial`, confirmed
+  authored, CERTIFIED domain). `ideal` (requires `ring-theory`,
+  unlocks `quotient-ring`+`prime-ideal`): additive-subgroup-plus-
+  two-sided-absorption, ideal-vs-subring distinction, principal
+  ideals $\langle a\rangle=aR$, the kernel-is-always-two-sided
+  theorem; 3 misconceptions independently classified, all Type 1
+  overgeneralization — MC-1 (FOUNDATIONAL, from the narrower
+  subgroup/subring closure scope), MC-2 (commutative-ring habit
+  transfer to non-commutative left/right absorption), MC-3
+  ($\mathbb Z$'s coincidental integer/ring-element multiple
+  equivalence); zero discrepancy. `coset` (requires `subgroup`,
+  unlocks `lagrange-theorem`+`normal-subgroup`): the equality
+  criterion $a^{-1}b\in H$, partition into equal-size blocks, the
+  index $[G:H]$; 3 misconceptions independently classified — MC-1/
+  MC-2 Type 1 (FOUNDATIONAL), MC-3 Type 4 notation-induced; zero
+  discrepancy. `group-order` (requires `group-theory`, unlocks
+  `lagrange-theorem`): the $|G|$-vs-$\mathrm{ord}(g)$ naming
+  collision, orbit tables, $g^n=e\iff\mathrm{ord}(g)\mid n$; 3
+  misconceptions independently classified — MC-1 Type 3 language
+  contamination (FOUNDATIONAL, the single overloaded word "order"),
+  MC-2 Type 1, MC-3 Type 5 instruction-induced; zero discrepancy.
+  `polynomial-ring` (requires `ring-theory`, unlocks `euclidean-
+  domain`): $R[x]$ generalizing `math.alg.polynomial`'s real
+  coefficients, $F[x]$ never a field even when $F$ is, the division
+  algorithm's field dependency, irreducible-generates-maximal; 3
+  misconceptions independently classified — MC-1/MC-2 Type 1
+  (both FOUNDATIONAL), MC-3 Type 5 instruction-induced; zero
+  discrepancy. `math.abst` **7/37 → 11/37**. Mathematics
+  **549/908 → 553/908**, 355 remaining. Fresh frontier EXPANDED
+  dramatically to 21 candidates: 10 remain within `math.abst`
+  (now-unblocked `prime-ideal` and `lagrange-theorem`, plus
+  `cyclic-group`, `euclidean-domain`, `group-action`,
+  `group-homomorphism`, `normal-subgroup`, `quotient-ring`,
+  `ring-homomorphism`, `symmetric-group`); for the first time this
+  campaign, 9 entirely unstarted mathematics domains simultaneously
+  gained a ready entry-node candidate — `math.cat.category`,
+  `math.cx.complex-numbers-analysis`, `math.de.ode`, `math.meas.
+  sigma-algebra`, `math.num.floating-point`+`math.num.interpolation`,
+  `math.prob.sample-space`, `math.real.completeness`+`math.real.
+  metric-space`, `math.stats.population-sample`, `math.top.
+  topological-space` — none authored this batch. Validated: KG
+  validator PASS (908/908 reachable, file untouched),
+  `scripts/math/state.ts` confirms math.abst 11/37, mathematics
+  553/908 (10 EB-certified domains unchanged), `tsc --noEmit`
+  clean, targeted tests 479/479 passed, all 4 heading structures
+  diffed clean on the first pass. No Physics/Chemistry/English/
+  Biology/CS/KG/Blueprint/runtime file touched. This is a genuinely
+  multi-session campaign; continuation should verify state via
+  `scripts/math/state.ts` fresh each time rather than trusting any
+  number recorded here.
 
 ## Topic/meaning loss — the extractor's default was YES (2026-09-13)
 

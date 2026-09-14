@@ -11,7 +11,7 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 549 | **Ten domains CERTIFIED (math.calc joined 2026-09-13, the tenth), math.graph 15/16 (PARKED again — only `random-graph` remains, blocked on unauthored `math.prob.probability-axioms`), math.linalg 28/61 (PARKED as of Batch 80 — `rank` authored, then the domain's remaining chain found blocked on unauthored `math.abst.field`), math.opt 12/16 (PARKED as of Batch 83 — `integer-programming`/`kkt` authored, closing the Batch-82 frontier, then the domain's remaining 4 concepts found blocked either via `math.linalg.positive-definite`'s own chain to the same `math.abst.field` or on unstarted `math.prob`/`math.stats`), math.abst 7/37 (Batch 85 authored `ring-theory`/`subgroup`/`group-operation`/`group-inverse`; `ring-theory` is one of the two prerequisites for `math.abst.field`; fresh frontier includes `ideal`, the second link in that chain).** 82 `math.found.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 69 `math.geom.*` (**COMPLETE, DOMAIN CERTIFIED** — the final 13 entries were restored by commit `0d2c76dd`'s Wave 0 recovery, which this row previously did not reflect) + 36 `math.nt.*` (**COMPLETE, DOMAIN CERTIFIED 2026-08-12** — the domain's final 8 concepts, `prime-distribution`, `continued-fractions`, `analytic-number-theory`, `prime-number-theorem`, `riemann-hypothesis`, `algebraic-number-theory`, `algebraic-integers`, `number-fields`, were authored this session, ending the PARKED status this row previously recorded) + 59 `math.alg.*` (**COMPLETE, DOMAIN CERTIFIED 2026-09-11** — Wave 1 (2026-08-12, 11 concepts): `expression`, `equation`, `term`, `coefficient`, `exponent-rules`, `polynomial`, `degree`, `zero-exponent`, `negative-exponent`, `solution-set`, `inequality`; Wave 2 (2026-08-12, 1 concept): `like-terms`; Wave 3 (2026-09-11, 3 concepts): `simplification`, `polynomial-operations`, `radicals`; Wave 4 (2026-09-11, 5 concepts): `linear-equation-1var`, `polynomial-division`, `fractional-exponent`, `simplifying-radicals`, `radical-equations`; Wave 5 (2026-09-11, 5 concepts): `inequality-1var`, `absolute-value-equations`, `linear-equation-2var`, `remainder-theorem`, `rationalizing-denominators`; Wave 6 (2026-09-11, 3 concepts): `inequality-2var`, `system-linear-equations`, `factor-theorem`; Wave 7 (2026-09-11, 4 concepts): `substitution-method`, `elimination-method`, `system-3var`, `factoring`; Wave 8 (2026-09-11, 3 concepts): `factoring-gcf`, `factoring-special`, `rational-expressions`; Wave 9 (2026-09-11, 4 concepts): `factoring-trinomials`, `rational-expressions-addition`, `rational-expressions-multiplication`, `rational-equations`; Wave 10 (2026-09-11, 1 concept): `quadratic-equation`; Wave 11 (2026-09-11, 2 concepts): `completing-the-square`, `polynomial-roots`; Wave 12 part 1 (2026-09-11, 1 concept): `quadratic-formula`; Wave 12 part 2 (2026-09-11, 2 concepts): `discriminant`, `rational-root-theorem`; Wave 12 part 3 (2026-09-11, 3 concepts): `fundamental-theorem-algebra`, `polynomial-inequality`, `vietas-formulas`; Wave 13 (2026-09-11, 2 concepts): `complex-polynomial-roots`, `rational-inequality`; Batch 15 (2026-09-11, 1 concept): `exponential-function`; Batch 16 (2026-09-11, 2 concepts): `logarithm`, `exponential-equations`; Batch 17 (2026-09-11, 3 concepts): `binomial-theorem`, `logarithm-properties`, `natural-logarithm`; Batch 18 (2026-09-11, 3 concepts, FINAL): `change-of-base`, `logarithmic-equations`, `pascals-triangle`; all Blueprint-grounded, reused by reference). 20 `math.disc.*` entries (**IN PROGRESS, standalone campaign since math.alg's certification** —
+| mathematics | 908 | 553 | **Ten domains CERTIFIED (math.calc joined 2026-09-13, the tenth), math.graph 15/16 (PARKED again — only `random-graph` remains, blocked on unauthored `math.prob.probability-axioms`), math.linalg 28/61 (PARKED as of Batch 80 — `rank` authored, then the domain's remaining chain found blocked on unauthored `math.abst.field`), math.opt 12/16 (PARKED as of Batch 83 — `integer-programming`/`kkt` authored, closing the Batch-82 frontier, then the domain's remaining 4 concepts found blocked either via `math.linalg.positive-definite`'s own chain to the same `math.abst.field` or on unstarted `math.prob`/`math.stats`), math.abst 11/37 (Batch 86 authored `ideal`/`coset`/`group-order`/`polynomial-ring`; `ideal` immediately unblocks `prime-ideal`, closing the two-hop chain to `math.abst.field`; fresh frontier expanded to 21 candidates, 9 previously-unstarted domains' entry nodes now ready).** 82 `math.found.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 69 `math.geom.*` (**COMPLETE, DOMAIN CERTIFIED** — the final 13 entries were restored by commit `0d2c76dd`'s Wave 0 recovery, which this row previously did not reflect) + 36 `math.nt.*` (**COMPLETE, DOMAIN CERTIFIED 2026-08-12** — the domain's final 8 concepts, `prime-distribution`, `continued-fractions`, `analytic-number-theory`, `prime-number-theorem`, `riemann-hypothesis`, `algebraic-number-theory`, `algebraic-integers`, `number-fields`, were authored this session, ending the PARKED status this row previously recorded) + 59 `math.alg.*` (**COMPLETE, DOMAIN CERTIFIED 2026-09-11** — Wave 1 (2026-08-12, 11 concepts): `expression`, `equation`, `term`, `coefficient`, `exponent-rules`, `polynomial`, `degree`, `zero-exponent`, `negative-exponent`, `solution-set`, `inequality`; Wave 2 (2026-08-12, 1 concept): `like-terms`; Wave 3 (2026-09-11, 3 concepts): `simplification`, `polynomial-operations`, `radicals`; Wave 4 (2026-09-11, 5 concepts): `linear-equation-1var`, `polynomial-division`, `fractional-exponent`, `simplifying-radicals`, `radical-equations`; Wave 5 (2026-09-11, 5 concepts): `inequality-1var`, `absolute-value-equations`, `linear-equation-2var`, `remainder-theorem`, `rationalizing-denominators`; Wave 6 (2026-09-11, 3 concepts): `inequality-2var`, `system-linear-equations`, `factor-theorem`; Wave 7 (2026-09-11, 4 concepts): `substitution-method`, `elimination-method`, `system-3var`, `factoring`; Wave 8 (2026-09-11, 3 concepts): `factoring-gcf`, `factoring-special`, `rational-expressions`; Wave 9 (2026-09-11, 4 concepts): `factoring-trinomials`, `rational-expressions-addition`, `rational-expressions-multiplication`, `rational-equations`; Wave 10 (2026-09-11, 1 concept): `quadratic-equation`; Wave 11 (2026-09-11, 2 concepts): `completing-the-square`, `polynomial-roots`; Wave 12 part 1 (2026-09-11, 1 concept): `quadratic-formula`; Wave 12 part 2 (2026-09-11, 2 concepts): `discriminant`, `rational-root-theorem`; Wave 12 part 3 (2026-09-11, 3 concepts): `fundamental-theorem-algebra`, `polynomial-inequality`, `vietas-formulas`; Wave 13 (2026-09-11, 2 concepts): `complex-polynomial-roots`, `rational-inequality`; Batch 15 (2026-09-11, 1 concept): `exponential-function`; Batch 16 (2026-09-11, 2 concepts): `logarithm`, `exponential-equations`; Batch 17 (2026-09-11, 3 concepts): `binomial-theorem`, `logarithm-properties`, `natural-logarithm`; Batch 18 (2026-09-11, 3 concepts, FINAL): `change-of-base`, `logarithmic-equations`, `pascals-triangle`; all Blueprint-grounded, reused by reference). 20 `math.disc.*` entries (**IN PROGRESS, standalone campaign since math.alg's certification** —
 Batch 14 (2026-09-11, 1 concept): `counting-principles`; Batch 15 (2026-09-11, 1 concept):
 `permutations`; Batch 16 (2026-09-11, 1 concept): `combinations`; Batch 19 (2026-09-11, 5
 concepts): `combinatorics`, `pigeonhole`, `stars-bars`, `inclusion-exclusion`,
@@ -12024,3 +12024,58 @@ clean against `math.alg.like-terms.md` on the first pass (0 diffs each). No
 Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. This is a genuinely
 multi-session campaign; continuation should verify state via `scripts/math/state.ts` fresh each
 time rather than trusting any number recorded here.
+
+**Batch 86 — math.abst: ideal, coset, group order, polynomial ring** (2026-09-14, autonomous
+loop iteration): re-computed the frontier fresh — the exact 9 candidates predicted at the end
+of Batch 85 were confirmed still ready (`coset`, `cyclic-group`, `group-action`,
+`group-homomorphism`, `group-order`, `ideal`, `polynomial-ring`, `ring-homomorphism`,
+`symmetric-group`). Selected 4: `ideal` (requires `ring-theory`, unlocks `quotient-ring`+
+`prime-ideal` — the highest-priority pick, being the SECOND link in the concrete two-hop chain
+toward `math.abst.field`, the shared blocker parking both `math.linalg` since Batch 80 and
+`math.opt` since Batch 83; authoring it immediately unblocks `prime-ideal`, `field`'s other
+prerequisite), `coset` (requires `subgroup`, unlocks `lagrange-theorem`+`normal-subgroup`),
+`group-order` (requires `group-theory`, unlocks `lagrange-theorem`), `polynomial-ring`
+(requires `ring-theory`, cross-link `math.alg.polynomial`, confirmed genuinely authored via
+`ls`, math.alg CERTIFIED) — deferring `cyclic-group`, `group-action`, `group-homomorphism`
+(cross-link `math.linalg.linear-map` confirmed unauthored, deferred per this program's
+established cross-link-staleness-complexity heuristic), `ring-homomorphism`,
+`symmetric-group`. All 4 Blueprint-grounded, reused by reference; none of the 4 Blueprints
+carried an explicit birth-type column — every misconception independently classified via the
+birth-taxonomy diagnostic procedure (`ideal` MC-1/MC-2/MC-3 all Type 1, overgeneralization from
+the already-mastered subgroup criterion's narrower closure scope, from commutative-ring habit
+transfer, and from $\mathbb Z$'s coincidental integer/ring-element multiple equivalence
+respectively; `coset` MC-1/MC-2 Type 1, MC-3 Type 4 notation-induced; `group-order` MC-1 Type 3
+language contamination — the single overloaded word "order" — MC-2 Type 1, MC-3 Type 5
+instruction-induced; `polynomial-ring` MC-1/MC-2 Type 1, MC-3 Type 5 instruction-induced). All
+4 zero Blueprint/KG metadata discrepancy — every stated requires/unlocks/cross_links/
+difficulty/bloom/mastery_threshold/estimated_hours field verified directly against the live KG
+matched exactly. `math.abst` 7/37 → **11/37**. Mathematics **549/908 → 553/908**, 355
+remaining. Full per-concept detail: `ideal`'s absorption-vs-subring-closure distinction
+(MC-1) and left/right absorption independence in a non-commutative ring (MC-2, worked via the
+$M_2(\mathbb R)$ left-ideal-not-right-ideal example) form the FOUNDATIONAL misconception pair;
+`coset`'s equality criterion $a^{-1}b\in H$ (MC-1) and the diminishing-new-cosets pattern
+(MC-2) mirror the earlier `subgroup`/`group-theory` pairing of a pairwise-comparison
+misconception against a global-counting misconception; `group-order`'s MC-1 (the
+group-order-vs-element-order naming collision) is this batch's clearest instance of a
+FOUNDATIONAL language-contamination misconception, since "order" genuinely names two distinct
+quantities with no notational signal absent explicit $|G|$-vs-$\mathrm{ord}(g)$ distinction;
+`polynomial-ring`'s MC-1 (assuming $F[x]$ inherits field-hood from $F$) is grounded in the
+degree-counting proof that $x$ has no multiplicative inverse in any polynomial ring — the
+concept's central "generalization does not mean full property inheritance" lesson. Fresh
+frontier after Batch 86 EXPANDED dramatically to 21 candidates: 10 remain within `math.abst`
+(the now-unblocked `prime-ideal` and `lagrange-theorem`, plus `cyclic-group`, `euclidean-domain`,
+`group-action`, `group-homomorphism`, `normal-subgroup`, `quotient-ring`, `ring-homomorphism`,
+`symmetric-group`), and — for the first time this campaign — 9 entirely unstarted mathematics
+domains simultaneously gained a ready entry-node candidate: `math.cat.category`, `math.cx.
+complex-numbers-analysis`, `math.de.ode`, `math.meas.sigma-algebra`, `math.num.floating-point`+
+`math.num.interpolation`, `math.prob.sample-space`, `math.real.completeness`+`math.real.
+metric-space`, `math.stats.population-sample`, `math.top.topological-space` — none authored
+this batch, all confirmed ready and available for a future batch's selection. No Physics/
+Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. All five tracking files
+updated; re-validated 0 orphans, 0 duplicates, 0 Quality Gate 3 violations. Validated: KG
+validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts` confirms math.abst
+11/37, mathematics 553/908 (10 EB-certified domains unchanged), `tsc --noEmit` clean, targeted
+tests 479/479 passed, all 4 heading structures diffed clean against `math.alg.like-terms.md`
+on the first pass (0 diffs each). This is a genuinely multi-session campaign; continuation
+should verify state via `scripts/math/state.ts` fresh each time rather than trusting any number
+recorded here.

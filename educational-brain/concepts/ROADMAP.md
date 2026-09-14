@@ -13,11 +13,27 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **549** mathematics + 238 physics + 216 english + 186 chemistry + 0 biology + 0 computer_science = **1,189** |
-| Remaining | **586** |
-| Completion percentage | **66.99%** |
+| Concepts with an Educational Brain entry | **553** mathematics + 238 physics + 216 english + 186 chemistry + 0 biology + 0 computer_science = **1,193** |
+| Remaining | **582** |
+| Completion percentage | **67.21%** |
 
-*(Recomputed programmatically 2026-09-14, after Batch 85 (4 concepts:
+*(Recomputed programmatically 2026-09-14, after Batch 86 (4 concepts: `math.abst.ideal`/
+`math.abst.coset`/`math.abst.group-order`/`math.abst.polynomial-ring` — selected from the
+9-candidate frontier opened by Batch 85. `ideal` (requires `ring-theory`) is the highest-
+leverage pick — the SECOND link toward `math.abst.field`, the shared blocker for
+`math.linalg`/`math.opt`, and immediately unblocks `prime-ideal`, the field's other
+prerequisite. `coset` (unblocked by `subgroup`, unlocks `lagrange-theorem`+`normal-subgroup`),
+`group-order` (unlocks `lagrange-theorem`), `polynomial-ring` (cross-link `math.alg.
+polynomial`, confirmed authored, CERTIFIED domain) — all 4 zero Blueprint/KG discrepancy.
+Deferred: `cyclic-group`, `group-action`, `group-homomorphism`, `ring-homomorphism`,
+`symmetric-group`. `math.abst` 7/37 → 11/37. Fresh frontier after Batch 86: 21 candidates
+ready — 10 in `math.abst` (including `prime-ideal`, now unblocked, and `lagrange-theorem`),
+plus the entry nodes of 9 previously-unstarted domains simultaneously opened:
+`math.cat.category`, `math.cx.complex-numbers-analysis`, `math.de.ode`, `math.meas.
+sigma-algebra`, `math.num.floating-point`+`math.num.interpolation`, `math.prob.sample-space`,
+`math.real.completeness`+`math.real.metric-space`, `math.stats.population-sample`,
+`math.top.topological-space`. Brought mathematics from 549 to 553.)*
+Prior update: after Batch 85 (4 concepts:
 `math.abst.ring-theory`/`math.abst.subgroup`/`math.abst.group-operation`/`math.abst.group-
 inverse` — 4 of the 9 candidates from the Batch 84 frontier, all requiring only `math.abst.
 group-theory`. `ring-theory` (cross-link `math.linalg.matrix-multiplication`, confirmed
@@ -447,7 +463,20 @@ check). Fresh frontier after Batch 74: 9 candidates ready (`unit-vector`, `cross
 | `math.de` | 0/56 | not started |
 | `math.prob` | 0/49 | not started |
 | `math.stats` | 0/40 | not started |
-| `math.abst` | 7/37 | **Batch 85 (4, `ring-theory`/`subgroup`/`group-operation`/`group-
+| `math.abst` | 11/37 | **Batch 86 (4, `ideal`/`coset`/`group-order`/`polynomial-ring`, selected
+from the 9-candidate frontier after Batch 85. `ideal` (requires `ring-theory`) is the
+highest-leverage pick — the SECOND link toward `math.abst.field`, the shared blocker for
+`math.linalg`/`math.opt`, immediately unblocking `prime-ideal` (field's other prerequisite).
+`coset` (requires `subgroup`, unlocks `lagrange-theorem`+`normal-subgroup`), `group-order`
+(requires `group-theory`, unlocks `lagrange-theorem`), `polynomial-ring` (requires
+`ring-theory`, cross-link `math.alg.polynomial`, confirmed authored, CERTIFIED domain). All 4
+zero Blueprint/KG metadata discrepancy. Deferred: `cyclic-group`, `group-action`,
+`group-homomorphism`, `ring-homomorphism`, `symmetric-group`). Fresh frontier after Batch 86:
+21 candidates ready — 10 in `math.abst` (including now-unblocked `prime-ideal` and
+`lagrange-theorem`), plus 9 previously-unstarted domains' entry nodes simultaneously opened
+(`math.cat`, `math.cx`, `math.de`, `math.meas`, `math.num` ×2, `math.prob`, `math.real` ×2,
+`math.stats`, `math.top`).**
+**Batch 85 (4, `ring-theory`/`subgroup`/`group-operation`/`group-
 inverse`, selected from the 9-candidate frontier after Batch 84, all requiring only `group-
 theory`; `ring-theory` is the highest-leverage pick — one of the two prerequisites for `math.
 abst.field`, the shared blocker for `math.linalg`/`math.opt` — its cross-link `math.linalg.
