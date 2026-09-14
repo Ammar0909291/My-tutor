@@ -48,6 +48,14 @@ import { readTurnIntent } from '@/lib/teaching/turnIntent'
 // S7 rung 2. Pure, synchronous, no I/O — imported at the top rather than
 // dynamically because it is read inside the ladder fold, on the hot path.
 import { diagnosticStalledThisTurn, shouldRelieveProbeStarvation } from '@/lib/teaching/turnProgress'
+// Typed Turn Contract, Batch 1 (docs/architecture/TYPED_TURN_CONTRACT_DESIGN.md).
+// Pure, synchronous, no I/O — imported at the top for the same reason as
+// turnProgress.ts above. SHADOW ONLY in Batch 1: nothing in this route reads
+// from either compiled object; they exist only to be asserted against
+// themselves and logged. See the CONTRACT_ASSERT shadow block below.
+import { compileTurnContract, certifies, type TurnContract, type TurnContractInput, type IdentifiedProbe, type ServerGrade } from '@/lib/teaching/turnContract'
+import { compileTurnDelivery, assertDeliverySatisfiesContract, type TurnDelivery, type TurnDeliveryInput } from '@/lib/teaching/turnDelivery'
+import type { TeachingPhase } from '@/lib/teaching/conversationState'
 import { arbitrateTurn, arbitrationUnavailable } from '@/lib/teaching/turnArbitration'
 import {
   pickCurrentTopicSlug, selectCurrentLesson, foldProgressionMetrics,
@@ -1949,6 +1957,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     // asset memory path (a static explanation+probe assembly cannot honor
     // first-lesson/04 §1's flow or 02 §1's never-quiz-first rule).
     let firstLessonActiveHoisted = false
+    // Typed Turn Contract, Batch 1 (design doc §7.1): this was a `const`
+    // declared inline at its one write site (~L2535 below), which the design
+    // doc's own §7.1 table already shows as a `const`, not the usual
+    // top-declared `let` — but a `const` scoped to that block is unreachable
+    // from the contract-compile point ~3,200 lines later. Hoisted here,
+    // matching every sibling local's pattern, so the SAME single computed
+    // value (still computed exactly once, at the exact same call site) can
+    // reach the contract. No behavior change: same call, same params, same
+    // result — only the declaration's scope widens.
+    let isFirstLessonContextHoisted = false
     // CTO iteration (session lifecycle — decision-engine/07 §1/§6/§8):
     // the episode state machine that makes per-session rules enforceable.
     let sessionEpisodeHoisted: import('@/lib/teaching/sessionLifecycle').SessionEpisode | null = null
@@ -2524,7 +2542,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             ).phase
           } catch { return null }
         })()
-        const isFirstLessonContextHoisted = isFirstLessonContext({
+        isFirstLessonContextHoisted = isFirstLessonContext({
           isSchoolMode: false,
           currentLevel: profile?.currentLevel,
           currentLessonOrder: lessonCtx?.currentLesson,
@@ -5533,6 +5551,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // dependency audit. Incremented at every routeAI() call site in this
       // route; a memory- or degraded-served turn correctly ends at 0.
       let llmCallCount = 0
+      // Typed Turn Contract, Batch 1 — SHADOW ONLY, read by nothing this
+      // batch. `turnContractShadow` is compiled just before the primary
+      // `routeAI` call below (design doc §6 Batch 1); `turnDeliveryShadow`
+      // just after the tag parse, before the first `cleanText` rewrite. Both
+      // stay null on any turn that does not reach the model (lesson-complete,
+      // remediation, memory-served, gate-rendered) — this batch instruments
+      // only the LLM-calling path, the highest-complexity one the whole
+      // contract exists for.
+      let turnContractShadow: TurnContract | null = null
+      let turnDeliveryShadow: TurnDelivery | null = null
       // Phase 10 — mandatory-protocol compliance for this turn. Written by the
       // compliance check further down (which runs BEFORE the message create) and
       // persisted alongside the Phase 1/8 telemetry. Measurement only.
@@ -5727,6 +5755,109 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // verifier-clean-by-construction turn, banner-free ("learner not
         // told 'AI down'"). AIBudgetExceededError still propagates — budget
         // exhaustion is load management with a deliberate 429, not an outage.
+        // Typed Turn Contract, Batch 1 — build TurnContract HERE, immediately
+        // before the primary model call, per design doc §6 Batch 1: "every
+        // contract-class local has had its last pre-model write" by this
+        // point. Every field below is a direct copy of an already-computed
+        // Hoisted local (or, for the two probe/grade fields, a pure function
+        // of one) — see docs/architecture/TYPED_TURN_CONTRACT_DESIGN.md §7
+        // for the exact source line of each. SHADOW ONLY: nothing reads
+        // `turnContractShadow` this batch.
+        {
+          const { probeKeyIsAuthored } = await import('@/lib/teaching/mcq')
+          const identifyProbe = (mcq: typeof pendingMcqHoisted): IdentifiedProbe | null => {
+            if (mcq === null) return null
+            const keyProvenance = probeKeyIsAuthored(mcq) ? 'authored' : 'model-invented'
+            return { mcq, keyProvenance, assetId: keyProvenance === 'authored' ? (mcq.assetId ?? null) : null }
+          }
+          const gradeInput = mcqGradeHoisted
+          const grade: ServerGrade | null =
+            gradeInput === null || gradeInput.correct === null || gradeInput.chosenIndex === null
+              ? null
+              : {
+                  kind: 'graded', chosenIndex: gradeInput.chosenIndex, correct: gradeInput.correct,
+                  keyProvenance: probeKeyIsAuthored(pendingMcqHoisted) ? 'authored' : 'model-invented',
+                }
+          const contractInput: TurnContractInput = {
+            identity: {
+              sessionId, userId, subjectSlug: learnSession.subject.slug,
+              activeLessonSlug: activeLessonSlugHoisted, lessonKeyThisTurn: lessonKeyThisTurnHoisted,
+              conceptId: resolvedConceptId, libraryConceptNodeId: libraryConceptNodeIdHoisted,
+              turnReceivedAt, learnerAuthoredMessage,
+            },
+            authority: {
+              arbitration: turnArbitrationHoisted, recoveryKey: recoveryKeyHoisted,
+              firstLessonActive: firstLessonActiveHoisted,
+              excursion: {
+                active: excursionActiveHoisted, decision: excursionDecisionHoisted,
+                teachingTitle: excursionTeachingTitleHoisted,
+              },
+              knowledgeGap: knowledgeGapHoisted, learnerRequest: learnerRequestHoisted,
+              navigationRequest: navigationRequestHoisted, claimChallengeActive: claimChallengeActiveHoisted,
+            },
+            ladder: {
+              state: conversationStateHoisted,
+              phaseBeforeTurn: phaseBeforeTurnHoisted as TeachingPhase | null,
+              evidenceMove: evidenceMoveHoisted, objective: objectiveStateHoisted,
+              lessonCompletedBefore: lessonCompletedHoisted,
+              lessonCompletionRespectsNewIntent: lessonCompletionRespectsNewIntentHoisted,
+              conceptPreviouslyMastered: conceptPreviouslyMasteredHoisted,
+              teachingHistory: teachingHistoryHoisted, questionLedger: questionLedgerHoisted,
+            },
+            episode: {
+              current: sessionEpisodeHoisted, persisted: persistedEpisodeHoisted,
+              fresh: sessionEpisodeFreshHoisted,
+            },
+            inbound: {
+              isBareAck: isBareAckHoisted, lowSignalAck: lowSignalAckHoisted,
+              pendingProbe: identifyProbe(pendingMcqHoisted), grade,
+              priorTurnUnresolvedProseMcq: priorTurnUnresolvedProseMcqHoisted,
+            },
+            assessment: {
+              gateProbe: identifyProbe(gateMcqHoisted), gateLeadIn: gateLeadInHoisted,
+              authoredProbesExist: authoredProbesExistHoisted, declinedByPolicy: gateDeclinedByPolicyHoisted,
+              phaseAllowsProbe: phaseAllowsProbeHoisted, probeWouldCountThisPhase: probeWouldCountThisPhaseHoisted,
+              observeAskViolation: observeAskViolationHoisted, gateTerms: gateTermsHoisted,
+              legalityBlockedReason: legalityBlockedReasonHoisted, legalityBlock: legalityBlockHoisted,
+            },
+            figure: {
+              decision: visualDecisionHoisted, availableVisual: availableVisualHoisted,
+              allowedVisuals: allowedVisualsHoisted, forceRender: forceVisualRenderHoisted,
+              generationCountBefore: visualGenerationCountHoisted,
+            },
+            liveness: {
+              priorStagnantTurns: priorStagnantTurnsHoisted, priorProbeStarvedTurns: priorProbeStarvedTurnsHoisted,
+              probeStarvationRelieved: probeStarvationRelievedHoisted,
+              arbitrationWasSoleBlocker: arbitrationWasSoleBlockerHoisted,
+              consecutiveDontKnows: consecutiveDontKnowsHoisted, priorConfirmations: priorConfirmationsHoisted,
+            },
+            placement: {
+              level: placementLevelHoisted, askedProbe: placementAskedProbeHoisted,
+              previous: placementPrevHoisted, inherited: placementInheritedHoisted,
+            },
+            strategy: {
+              teachingStrategy: strategyHoisted, outputBias: outputBiasHoisted, hintBias: hintBiasHoisted,
+              strategyTopicSlug: strategyTopicSlugHoisted, selectedStrategy: selectedStrategyHoisted,
+              conversationDecision: conversationDecisionHoisted, cueDecision: cueDecisionHoisted,
+              dispatchPlan: dispatchPlanHoisted, retrievalCache: retrievalCacheHoisted,
+              outputLanguageBlock: outputLanguageBlockHoisted, kernelMaxQuestions: kernelMaxQuestionsHoisted,
+              routeMaxParagraphs: routeMaxParagraphsHoisted, kernelPolicyMove: kernelPolicyMoveHoisted,
+              evidenceStageCeiling: evidenceStageCeilingHoisted,
+              evidenceWorkedExampleFirst: evidenceWorkedExampleFirstHoisted,
+              evidenceAutonomy: evidenceAutonomyHoisted, libraryDueRevisionCount: libraryDueRevisionCountHoisted,
+              teachingStepUpdate: teachingStepUpdateHoisted,
+            },
+            capability: { stateBefore: capabilityStateHoisted, required: requiredCapabilitiesHoisted },
+            provenance: {
+              decisionConceptId: decisionConceptIdHoisted, decisionGranularity: decisionGranularityHoisted,
+              decisionProbeId: decisionProbeIdHoisted, kernelParityMetrics: kernelParityMetricsHoisted,
+              kernelParityTags: kernelParityTagsHoisted, enginePolicyParity: enginePolicyParityHoisted,
+              enginePolicyTags: enginePolicyTagsHoisted, signalRepairFired: signalRepairFiredHoisted,
+              isFirstLessonContext: isFirstLessonContextHoisted,
+            },
+          }
+          turnContractShadow = compileTurnContract(contractInput)
+        }
         let routed: { text: string; provider: string; finishReason: string | null }
         // ── PCD-002: THE CHAIN'S CLOCK IS NOT THE REQUEST'S CLOCK ──────────
         //
@@ -6434,6 +6565,94 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             conceptId: resolvedConceptId ?? null,
             asked: pendingMcqHoisted.question.slice(0, 70),
             correct: mcqGradedThisTurn.correct,
+          }))
+        }
+      }
+
+      // Typed Turn Contract, Batch 1 — build TurnDelivery HERE, immediately
+      // after the tag parse (signal + MCQ tags stripped, the gate-vs-model
+      // question precedence resolved, `signalVerificationStatusHoisted`
+      // settled) and BEFORE the first `cleanText` rewrite — design doc §6
+      // Batch 1. Only for turns that reached the model (`turnContractShadow`
+      // is null otherwise). SHADOW ONLY: nothing reads `turnDeliveryShadow`
+      // this batch except the assertion below, whose only effect is a log
+      // line. `after`/`completion` and the still-unset provenance fields
+      // hold their natural not-yet-computed defaults, matching this object's
+      // own "compiled BEFORE any repair pass" definition — none of A1-A8
+      // depend on them.
+      if (turnContractShadow !== null) {
+        const { probeKeyIsAuthored, mcqToServe: mcqToServeForContractShadow } =
+          await import('@/lib/teaching/mcq')
+        const { isDegradedProvider } = await import('@/lib/eos-runtime/degradedMode')
+        const identifyProbe = (mcq: typeof mcqHoisted): IdentifiedProbe | null => {
+          if (mcq === null) return null
+          const keyProvenance = probeKeyIsAuthored(mcq) ? 'authored' : 'model-invented'
+          return { mcq, keyProvenance, assetId: keyProvenance === 'authored' ? (mcq.assetId ?? null) : null }
+        }
+        const questionSource: 'gate-authored' | 'model-parsed' | 'none' =
+          mcqHoisted === null ? 'none' : (mcqHoisted === gateMcqHoisted ? 'gate-authored' : 'model-parsed')
+        const deliveryInput: TurnDeliveryInput = {
+          generation: {
+            provider, llmCallCount, finishReason, degraded: isDegradedProvider(provider),
+            consecutiveOutages: consecutiveOutagesHoisted,
+            memory: {
+              servingMode: memoryServingMode, confidence: memoryConfidence, assetId: memoryAssetId,
+              conceptId: memoryConceptId, exactGradeMatch: memoryExactGradeMatch,
+              fallbackUsed: memoryFallbackUsed, fallbackReasonCode: memoryFallbackReasonCode,
+            },
+          },
+          question: {
+            source: questionSource, attached: identifyProbe(mcqHoisted),
+            withheldModelProbe: withheldModelMcqHoisted, modelProbeVerdict: modelProbeVerdictHoisted,
+            // Not yet decided at this point — liveness release (rung 1) runs
+            // near the snapshot persist, well after this compile point. Their
+            // still-default false/null here is the honest "not yet" state,
+            // not a placeholder standing in for a real value.
+            released: probeReleasedThisTurnHoisted, releasedQuestionText: releasedProbeQuestionHoisted,
+            served: mcqToServeForContractShadow(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted),
+          },
+          // Not yet decided — the visual resolver's post-model derived locals
+          // (visualFired/figureOnScreen/figureIntroducedThisTurn) are computed
+          // ~2,000 lines further down. False here is accurate: nothing has
+          // been attached to the screen yet at this point in the turn.
+          figure: { attachedThisTurn: false, introducedThisTurn: false, onScreen: false },
+          verdict: {
+            grade: turnContractShadow.inbound.grade,
+            signalVerification: signalVerificationStatusHoisted,
+            // The EXISTING codebase's own rule (route.ts L8296/8449/10271,
+            // `evidence.serverGraded: gradedAgainstServerKeyHoisted`) — used
+            // here rather than `certifies(grade)` precisely so A3 checks the
+            // NEW pure derivation against the OLD one it is meant to replace,
+            // not against itself.
+            serverGraded: gradedAgainstServerKeyHoisted,
+            signalSuppressedReason: signalSuppressedReasonHoisted,
+            // Not yet declared at this point in the function (its `let` sits
+            // further down) — `false` is its own eventual default, i.e. the
+            // honest "not yet fallen through" state at this compile point.
+            teachingIntegrityFellThrough: false,
+          },
+          after: {
+            ladder: null, episode: null, capability: null, capabilityObservations: [],
+            narrative: null, frustration: null, frustrationBand: null,
+            turnHistoryUpdate: null, turnProgress: null,
+          },
+          completion: { payload: null, masteryGatePending: false, masteryCompletionSuppressed: false },
+          provenance: {
+            hint: hintHoisted, fillerDetected: fillerDetectedHoisted, stanceViolations: stanceViolationsHoisted,
+            // Not yet declared at this point in the function (their `let`s
+            // sit further down) — their own eventual defaults, null/[].
+            eosVerifierMetrics: null, eosVerifierTags: [],
+            progressionTags: progressionTagsHoisted, attemptVector: attemptVectorHoisted,
+            adaptationState: adaptationStateHoisted,
+          },
+        }
+        turnDeliveryShadow = compileTurnDelivery(turnContractShadow, deliveryInput)
+        const violations = assertDeliverySatisfiesContract(turnDeliveryShadow)
+        if (violations.length > 0) {
+          console.warn('[learn/chat] CONTRACT_ASSERT=' + JSON.stringify({
+            violations: violations.map((v) => v.code),
+            detail: violations.map((v) => `${v.code}:${v.detail}`),
+            sessionId, conceptId: resolvedConceptId ?? null,
           }))
         }
       }
@@ -9760,6 +9979,28 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // anything else would either strand a question the learner can see
             // (ungradeable next turn) or keep one the learner cannot.
             const served = mcqToServe(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted)
+            // Typed Turn Contract, Batch 1 — A6 (design doc §5.1): "the value
+            // persisted as pendingMcq is reference-equal to d.question.served
+            // (modulo the release rule)". `turnDeliveryShadow.question.served`
+            // was computed ~3,400 lines earlier, right after the tag parse;
+            // THIS is the actual persisted value. Nothing between the two
+            // writes `mcqHoisted`, `pendingMcqHoisted` or `mcqGradeHoisted`
+            // except the lesson-close override further below (route.ts
+            // L10040 in the design doc's line numbers) — which fires AFTER
+            // this persist, so it cannot explain a divergence measured here.
+            // SHADOW ONLY: this comparison decides nothing; it only logs.
+            if (turnDeliveryShadow !== null) {
+              const releasedOk = turnDeliveryShadow.question.released && served === null
+              const referenceMatch = served === turnDeliveryShadow.question.served
+              if (!referenceMatch && !releasedOk) {
+                console.warn('[learn/chat] CONTRACT_ASSERT=' + JSON.stringify({
+                  violations: ['A6'],
+                  detail: [`A6:persisted served (question=${served?.question?.slice(0, 60) ?? 'null'}) !== ` +
+                    `delivery.question.served (question=${turnDeliveryShadow.question.served?.question?.slice(0, 60) ?? 'null'})`],
+                  sessionId, conceptId: resolvedConceptId ?? null,
+                }))
+              }
+            }
             // ── RUNG 1: RELEASE A PROBE NOBODY IS ANSWERING ────────────────
             //
             // THE DEFECT THIS EXISTS FOR, measured end to end: a learner who
