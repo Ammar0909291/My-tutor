@@ -5713,6 +5713,65 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   multi-session campaign; continuation should verify state via
   `scripts/math/state.ts` fresh each time rather than trusting any
   number recorded here.
+- **Batch 88 — math.abst: field (the milestone concept, closes the
+  chain, reopens math.linalg), quotient groups, group homomorphisms,
+  ring homomorphisms** (2026-09-14, autonomous loop iteration):
+  re-computed the frontier fresh — `math.abst` had exactly the 8
+  candidates predicted at the end of Batch 87. Selected 4,
+  prioritizing `field` — the concept this campaign's entire
+  `ring-theory`→`ideal`→`prime-ideal` chain (Batches 85-87) was built
+  toward — alongside `quotient-group`, `group-homomorphism`,
+  `ring-homomorphism`. `field` (requires `ring-theory`+`prime-ideal`,
+  unlocks `field-extension`, cross-link `math.linalg.vector-space`):
+  the invertibility axiom motivated by concrete $\mathbb Z$-versus-
+  $\mathbb Q$ division failure, integral-domain-necessary-not-
+  sufficient, characteristic as additive order independent of
+  cardinality; 3 misconceptions independently classified — MC-1/MC-3
+  Type 4 notation-induced, MC-2 Type 1 overgeneralization; zero
+  discrepancy. `quotient-group` (requires `normal-subgroup`, unlocks
+  `first-isomorphism-theorem`): $G/N$'s elements are cosets not
+  elements of $G$, the division-not-subtraction counting formula,
+  normality as a hard requirement — reuses `normal-subgroup`'s own
+  $D_3$ example throughout; 3 misconceptions independently classified
+  — MC-1 Type 2 perceptual, MC-2/MC-3 Type 1; zero discrepancy.
+  `group-homomorphism` (requires `group-theory`, cross-link `math.
+  linalg.linear-map`): the defining property and its automatic
+  consequences, kernel-determines-injectivity; 3 misconceptions
+  independently classified — MC-1/MC-3 Type 1, MC-2 Type 5; zero
+  discrepancy. `ring-homomorphism` (requires `ring-theory`): the
+  two-condition (additive AND multiplicative) requirement, kernel as
+  a two-sided ideal not merely a subring, FIT; 3 misconceptions with
+  birth types EXPLICITLY given by the Blueprint, adopted directly —
+  MC-1/MC-3 Type 5, MC-2 Type 1; zero discrepancy. **Two genuine
+  Blueprint-staleness findings, both corrected to independence
+  mode**: `field`'s and `group-homomorphism`'s Blueprints each
+  declared a cross-link probe against a `math.linalg` concept,
+  reasoning from the Blueprint FILE's existence rather than the
+  Educational Brain ENTRY's — confirmed via `ls` that neither
+  `math.linalg.vector-space` nor `math.linalg.linear-map` has an EB
+  entry (the KG cross-link fields themselves are correct; only the
+  Blueprints' readiness claims were stale). `math.abst` **15/37 →
+  19/37**. Mathematics **557/908 → 561/908**, 347 remaining.
+  **MILESTONE: authoring `field` immediately REOPENED `math.linalg`**
+  (PARKED since Batch 80) — a fresh frontier check confirms `math.
+  linalg.vector-space` is now topologically ready, not yet authored.
+  `math.opt` remains PARKED — its own chain to `field` runs through
+  `math.linalg.positive-definite`, several concepts deep within the
+  now-reopened `math.linalg`. Fresh frontier: 20 candidates — 8
+  remain within `math.abst` (`cyclic-group`, `euclidean-domain`,
+  `field-extension`, `finite-field`, `first-isomorphism-theorem`,
+  `group-action`, `group-isomorphism`, `symmetric-group`),
+  `math.linalg` REOPENED (1 candidate, `vector-space`), plus the same
+  9 previously-unstarted domains' entry nodes from Batch 86 remain
+  ready and unauthored. Validated: KG validator PASS (908/908
+  reachable, file untouched), `scripts/math/state.ts` confirms
+  math.abst 19/37, mathematics 561/908 (10 EB-certified domains
+  unchanged), `tsc --noEmit` clean, targeted tests 479/479 passed,
+  all 4 heading structures diffed clean on the first pass. No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file
+  touched. This is a genuinely multi-session campaign; continuation
+  should verify state via `scripts/math/state.ts` fresh each time
+  rather than trusting any number recorded here.
 
 ## Topic/meaning loss — the extractor's default was YES (2026-09-13)
 
