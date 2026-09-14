@@ -13,11 +13,29 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **569** mathematics + 238 physics + 216 english + 186 chemistry + 0 biology + 0 computer_science = **1,209** |
-| Remaining | **566** |
-| Completion percentage | **68.11%** |
+| Concepts with an Educational Brain entry | **573** mathematics + 238 physics + 216 english + 186 chemistry + 0 biology + 0 computer_science = **1,213** |
+| Remaining | **562** |
+| Completion percentage | **68.34%** |
 
-*(Recomputed programmatically 2026-09-14, after Batch 90 (4 concepts: `math.abst.cyclic-group`/
+*(Recomputed programmatically 2026-09-14, after Batch 91 (4 concepts: `math.abst.group-action`/
+`math.abst.alternating-group`/`math.abst.euclidean-domain`/`math.abst.field-extension` — closed
+math.abst's ENTIRE topologically-ready frontier, all 4 candidates selected from the 20-candidate
+frontier opened by Batch 90 — no math.linalg concept authored this batch). `group-action`
+(requires `group-theory`+`math.found.function-set-theoretic`, unlocks `sylow-theorems`) states
+the two group-action axioms, orbit/stabilizer, and the Orbit-Stabilizer theorem. `alternating-group`
+(requires `symmetric-group`+`normal-subgroup`) states the parity rule, $|A_n|=n!/2$, normality via
+the parity homomorphism, and A_n simple for n>=5. `euclidean-domain` (requires `polynomial-ring`,
+unlocks `pid`, cross-link `math.nt.euclidean-algorithm`) generalizes Z and F[x] division into one
+abstract framework with a domain-specific norm. `field-extension` (requires `field`, unlocks
+`algebraic-extension`) states [K:F]=dim_F(K), the Tower Law (multiplicative), and the
+algebraic/transcendental distinction. All 4 zero Blueprint/KG metadata discrepancy. `math.abst`
+25/37 → 29/37 — only 8 concepts remain in the domain. Fresh frontier after Batch 91: 20 candidates
+ready — `math.abst` 4 (`burnside-lemma`, `sylow-theorems` — both newly unblocked by
+`group-action` — `pid` — newly unblocked by `euclidean-domain` — `algebraic-extension` — newly
+unblocked by `field-extension`), `math.linalg` 4 unchanged (`span`, `null-space`, `linear-map`,
+`inner-product`), plus the same 9 previously-unstarted domains from Batch 86 unchanged. Brought
+mathematics from 569 to 573.)*
+Prior update: after Batch 90 (4 concepts: `math.abst.cyclic-group`/
 `math.abst.symmetric-group`/`math.abst.second-isomorphism-theorem`/`math.linalg.subspace` —
 selected from the 21-candidate frontier opened by Batch 89. `cyclic-group` (requires
 `group-theory`) states the classification theorem (finite cyclic ≅ Z/nZ, infinite ≅ Z) and the
@@ -541,7 +559,14 @@ check). Fresh frontier after Batch 74: 9 candidates ready (`unit-vector`, `cross
 | `math.de` | 0/56 | not started |
 | `math.prob` | 0/49 | not started |
 | `math.stats` | 0/40 | not started |
-| `math.abst` | 25/37 | **Batch 90 (3, `cyclic-group`/`symmetric-group`/
+| `math.abst` | 29/37 | **Batch 91 (4, `group-action`/`alternating-group`/`euclidean-domain`/
+`field-extension`, closing the ENTIRE 4-candidate frontier available after Batch 90 with none
+deferred. `group-action` unlocks `sylow-theorems`; `euclidean-domain` unlocks `pid`;
+`field-extension` unlocks `algebraic-extension`. All 4 zero Blueprint/KG metadata discrepancy.
+Only 8 concepts remain in math.abst). Fresh frontier after Batch 91: 4 candidates ready
+(`burnside-lemma`, `sylow-theorems` — both newly unblocked by `group-action` — `pid` — newly
+unblocked by `euclidean-domain` — `algebraic-extension` — newly unblocked by `field-extension`).**
+**Batch 90 (3, `cyclic-group`/`symmetric-group`/
 `second-isomorphism-theorem`, selected from the 20-candidate frontier after Batch 89, alongside
 1 `math.linalg` concept — see that row. `cyclic-group` (requires `group-theory`) states the
 finite-cyclic-≅-Z/nZ / infinite-cyclic-≅-Z classification and the gcd generator criterion.

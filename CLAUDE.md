@@ -5902,6 +5902,96 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   touched. This is a genuinely multi-session campaign; continuation
   should verify state via `scripts/math/state.ts` fresh each time
   rather than trusting any number recorded here.
+- **Batch 91 — math.abst: group action, alternating group, Euclidean
+  domain, field extension — closes the domain's entire post-Batch-90
+  frontier** (2026-09-14, autonomous loop iteration): re-computed the
+  frontier fresh — `math.abst` had exactly the 4 candidates and
+  `math.linalg` exactly the 4 candidates predicted at the end of
+  Batch 90. Deliberately selected ALL 4 math.abst candidates
+  (`group-action`, `alternating-group`, `euclidean-domain`,
+  `field-extension`), closing the ENTIRE math.abst frontier available
+  at batch start with none deferred, and leaving all 4 math.linalg
+  candidates (`span`, `null-space`, `linear-map`, `inner-product`) for
+  a future batch. All 4 Blueprint-grounded, reused by reference.
+  `group-action` (requires `group-theory`+`math.found.function-
+  set-theoretic`, unlocks `sylow-theorems`): the two action axioms
+  (identity $e\cdot x=x$, compatibility $g\cdot(h\cdot x)=(gh)\cdot x$)
+  worked via $D_3$ acting on a triangle's vertices — reusing
+  `normal-subgroup`'s own $D_3$ setup directly — orbit
+  $Gx=\{gx:g\in G\}$ and stabilizer $G_x=\{g:gx=x\}$ with the
+  stabilizer proved to always be a genuine subgroup, and the
+  Orbit-Stabilizer theorem $|Gx|\cdot|G_x|=|G|$ verified numerically
+  as $3\times2=6=|D_3|$; 3 misconceptions independently classified,
+  all Type 1 (FOUNDATIONAL) — MC-1 ONLY-ONE-GROUP-ACTION-AXIOM-
+  VERIFIED, MC-2 STABILIZER-ASSUMED-ARBITRARY-SUBSET, MC-3
+  ORBIT-AND-STABILIZER-SIZES-ASSUMED-INDEPENDENT; zero discrepancy.
+  `alternating-group` (requires `symmetric-group`+`normal-subgroup`):
+  the parity rule ($k$-cycle = $k-1$ transpositions, summed mod 2),
+  $|A_n|=n!/2$, normality via the parity homomorphism
+  $\pi:S_n\to\mathbb Z/2\mathbb Z$ ($\ker(\pi)=A_n$), $A_3\cong
+  \mathbb Z/3\mathbb Z$ abelian versus $A_4$ genuinely non-abelian
+  (verified via $(1\,2\,3)\circ(1\,2\,4)\ne(1\,2\,4)\circ(1\,2\,3)$),
+  $A_4$'s famous no-subgroup-of-order-6 counterexample to the
+  Lagrange converse, and $A_n$ simple for $n\ge5$ named as the single
+  most important fact (Jordan-Hölder, quintic unsolvability); 3
+  misconceptions independently classified — MC-1
+  EVEN-PERMUTATION-IS-EVEN-LOOKING Type 2 perceptual (FOUNDATIONAL),
+  MC-2 A_N-ALWAYS-CYCLIC Type 1, MC-3 A_N-NOT-NORMAL Type 1; zero
+  discrepancy. `euclidean-domain` (requires `polynomial-ring`,
+  unlocks `pid`, cross-link `math.nt.euclidean-algorithm`): the
+  abstract division-with-remainder framework
+  ($a=bq+r$, $r=0$ or $N(r)<N(b)$) unifying $\mathbb Z$
+  ($N(a)=|a|$) and $F[x]$ ($N(p)=\deg(p)$) as two instances of ONE
+  structure — generalizing `polynomial-ring`'s own division
+  algorithm — the norm proved domain-specific never universal
+  (verified via the meaninglessness of dividing $x^2+1$ by $x^2-1$
+  using an integer-style norm), and the Euclidean Algorithm
+  generalized directly ($\gcd(x^3-1,x^2-1)=x-1$ in $\mathbb R[x]$ via
+  the identical replacement procedure); 3 misconceptions independently
+  classified, all Type 1 (FOUNDATIONAL) — MC-1
+  EUCLIDEAN-DOMAIN-ASSUMED-SPECIFIC-TO-INTEGERS, MC-2
+  NORM-ASSUMED-UNIVERSAL-ACROSS-DOMAINS, MC-3
+  EUCLIDEAN-ALGORITHM-ASSUMED-SPECIFIC-TO-INTEGERS; zero discrepancy —
+  and verified via `ls` that `math.nt.euclidean-algorithm.md`
+  genuinely exists as an EB entry, confirming the Blueprint's own
+  declared cross-link-probe mode was NOT stale, a positive-
+  confirmation case contrasted with the many prior batches' findings
+  of genuine staleness. `field-extension` (requires `field`, unlocks
+  `algebraic-extension`): $K/F$, degree $[K:F]=\dim_F(K)$ (worked via
+  $[\mathbb C:\mathbb R]=2$ and $[\mathbb Q(\sqrt2):\mathbb Q]=2$),
+  the Tower Law $[K:F]=[K:E][E:F]$ proved MULTIPLICATIVE not additive
+  via $\mathbb Q\subseteq\mathbb Q(\sqrt2)\subseteq\mathbb Q
+  (\sqrt2,\sqrt3)$ giving $2\times2=4$, and the simple/algebraic/
+  transcendental distinction ($\pi$ over $\mathbb Q$, Lindemann's 1882
+  theorem cited as the central corrective); 3 misconceptions
+  independently classified — MC-1
+  EVERY-REAL-NUMBER-ASSUMED-ALGEBRAIC Type 1 (FOUNDATIONAL), MC-2
+  TOWER-LAW-DEGREES-ADDED-RATHER-THAN-MULTIPLIED Type 6 analogy
+  overextension (FOUNDATIONAL), MC-3
+  SIMPLE-EXTENSION-CONFUSED-WITH-SMALL-DEGREE-EXTENSION Type 3
+  language contamination; zero discrepancy. **All 4 concepts
+  zero-discrepancy**, all 4 math.abst, all 4 zero KG/Blueprint
+  metadata discrepancy on every field. `math.abst` **25/37 → 29/37**
+  — only 8 concepts remain in the domain (`burnside-lemma`,
+  `sylow-theorems`, `pid`, `ufd`, `algebraic-extension`,
+  `galois-theory`, `galois-group`, `galois-correspondence`).
+  `math.linalg` unchanged at **30/61**. Mathematics **569/908 →
+  573/908**, 335 remaining. Full per-concept detail in `COVERAGE.md`
+  Batch 91. Validated: KG validator PASS (908/908 reachable, file
+  untouched), `scripts/math/state.ts` confirms math.abst 29/37,
+  mathematics 573/908 (10 EB-certified domains unchanged), `tsc
+  --noEmit` clean, targeted tests 479/479 passed, all 4 heading
+  structures diffed clean on the first pass. No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file
+  touched. Fresh frontier: 20 candidates — `math.abst` 4
+  (`burnside-lemma`, `sylow-theorems` — both newly unblocked by
+  `group-action` — `pid` — newly unblocked by `euclidean-domain` —
+  `algebraic-extension` — newly unblocked by `field-extension`),
+  `math.linalg` 4 unchanged (`span`, `null-space`, `linear-map`,
+  `inner-product`), plus the same 9 previously-unstarted domains from
+  Batch 86 unchanged. This is a genuinely multi-session campaign;
+  continuation should verify state via `scripts/math/state.ts` fresh
+  each time rather than trusting any number recorded here.
 
 ## Topic/meaning loss — the extractor's default was YES (2026-09-13)
 
