@@ -5842,6 +5842,66 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   touched. This is a genuinely multi-session campaign; continuation
   should verify state via `scripts/math/state.ts` fresh each time
   rather than trusting any number recorded here.
+- **Batch 90 — math.abst: cyclic groups, symmetric group, second
+  isomorphism theorem; math.linalg: subspace** (2026-09-14, autonomous
+  loop iteration): re-computed the frontier fresh — `math.abst` had
+  exactly the 6 candidates and `math.linalg` exactly the 3 candidates
+  predicted at the end of Batch 89. Selected 4: `cyclic-group` and
+  `symmetric-group` (both single-prereq `group-theory`, already
+  authored), `second-isomorphism-theorem` (single-prereq
+  `first-isomorphism-theorem`, authored Batch 89), `math.linalg.
+  subspace` (single-prereq `vector-space`, authored Batch 89, the
+  domain's own reopening entry point). `cyclic-group` states $G=
+  \langle g\rangle=\{g^n:n\in\mathbb Z\}$, the finite-cyclic-≅-Z/nZ /
+  infinite-cyclic-≅-Z classification theorem, the gcd generator
+  criterion, and cyclic $\Rightarrow$ abelian with $V_4$ as the
+  standard counterexample; 3 misconceptions independently classified —
+  MC-1 CYCLIC-MEANS-FINITE Type 1 (FOUNDATIONAL), MC-2
+  EVERY-ELEMENT-IS-A-GENERATOR Type 1, MC-3
+  CYCLIC-IMPLIES-NONABELIAN-POSSIBLE Type 1; zero discrepancy.
+  `symmetric-group` (unlocks `alternating-group`) verifies the group
+  axioms hold for $S_n$ directly, cycle notation, and the
+  cycle-structure conjugacy shortcut, with Cayley's theorem previewed
+  at orientation level; 3 misconceptions independently classified —
+  MC-1 GROUP-AXIOMS-ASSUMED-AUTOMATIC-FOR-SN Type 1 (Foundational),
+  MC-2 CONJUGACY-ASSUMED-TO-REQUIRE-EXPLICIT-SEARCH Type 5
+  instruction-induced, MC-3 CAYLEYS-THEOREM-MISREAD-AS-EQUALITY Type 4
+  notation-induced; zero discrepancy. `second-isomorphism-theorem`
+  states the Diamond Isomorphism Theorem as a direct consequence of
+  the FIT applied to the restriction map $h\mapsto hN$, with the $S_3$
+  counterexample establishing why $N$ must be normal in $G$; 3
+  misconceptions independently classified — MC-1 HN-NOT-A-SUBGROUP
+  Type 1 (FOUNDATIONAL), MC-2 WRONG-QUOTIENT-SIDES Type 4
+  notation-induced, MC-3 WELL-DEFINEDNESS-SKIPPED Type 5
+  instruction-induced; zero discrepancy. `subspace` deepens
+  `vector-space`'s own 3-condition-test preview into fluent
+  classification, the complete $\mathbb R^2$/$\mathbb R^3$ subspace
+  catalogue, and the homogeneous-vs-non-homogeneous distinction (which
+  anticipates the newly-unlocked `null-space`); 3 misconceptions
+  independently classified — MC-1 ANY-SUBSET-IS-SUBSPACE Type 1, MC-2
+  ZERO-CHECK-OMITTED Type 5 instruction-induced (Blueprint's own
+  declared FOUNDATIONAL misconception), MC-3
+  NONHOMOGENEOUS-AS-SUBSPACE Type 1 (the identical zero-check
+  mechanism as MC-2, cross-referenced); zero discrepancy. `math.abst`
+  **22/37 → 25/37**. `math.linalg` **29/61 → 30/61**. Mathematics
+  **565/908 → 569/908**, 339 remaining. `math.opt` remains PARKED —
+  its own chain to `field` still runs through `math.linalg.
+  positive-definite`, several concepts deeper within the reopened
+  `math.linalg`. Fresh frontier: 20 candidates — `math.abst` 4
+  (`group-action`, `alternating-group` — newly unblocked by
+  `symmetric-group` — `euclidean-domain`, `field-extension`),
+  `math.linalg` 4 (`span`, `null-space` — newly unblocked by
+  `subspace` — `linear-map`, `inner-product`), plus the same 9
+  previously-unstarted domains from Batch 86 unchanged. Validated: KG
+  validator PASS (908/908 reachable, file untouched),
+  `scripts/math/state.ts` confirms math.abst 25/37, math.linalg
+  30/61, mathematics 569/908 (10 EB-certified domains unchanged),
+  `tsc --noEmit` clean, targeted tests 479/479 passed, all 4 heading
+  structures diffed clean on the first pass. No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file
+  touched. This is a genuinely multi-session campaign; continuation
+  should verify state via `scripts/math/state.ts` fresh each time
+  rather than trusting any number recorded here.
 
 ## Topic/meaning loss — the extractor's default was YES (2026-09-13)
 
