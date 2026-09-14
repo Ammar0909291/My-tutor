@@ -168,7 +168,18 @@ describe('ENG-D11: route wiring', () => {
     const at = src.indexOf('stateCorrectionForWrongAnswer({')
     expect(at).toBeGreaterThan(0)
     const block = src.slice(at, at + 300)
-    expect(block).toContain('correct: mcqGradeHoisted?.correct ?? null')
+    // UPDATED 2026-09-14: was `correct: mcqGradeHoisted?.correct ?? null`.
+    // wrongAnswerCorrection.ts's own header claims "an authored, human-
+    // reviewed key" — that was never actually true of this call site until
+    // now: `mcqGradeHoisted?.correct` is `false` for a wrong grade against
+    // ANY key, authored or model-invented, and `phys.mech.friction`'s own
+    // documented incident shows an invented key can be mathematically wrong
+    // — in which case this function would have stated THAT wrong answer as
+    // fact to a learner who was actually right. `correctForConfirmation`
+    // (defined once, shared with confirmCorrectAnswer immediately above) is
+    // `null` whenever `unauthoredKeyGradeHoisted` is true, which is what
+    // makes the header's claim actually true of this function's real input.
+    expect(block).toContain('correct: correctForConfirmation')
     expect(block).toContain('probe: pendingMcqHoisted')
   })
 

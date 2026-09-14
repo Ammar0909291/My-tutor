@@ -161,7 +161,10 @@ describe('E. the route wires it with the gate\'s own derivation', () => {
     const route = readFileSync(join(process.cwd(), 'src/app/api/learn/chat/route.ts'), 'utf8')
     expect(route).toContain('repairMirrorWithVerdict({')
     const idx = route.indexOf('repairMirrorWithVerdict({')
-    const block = route.slice(idx, idx + 700)
+    // Widened 700 -> 1100 2026-09-14: a reasoning comment for the
+    // `!unauthoredKeyGradeHoisted` gate (unauthoredKeyConfidenceSoftened.test.ts)
+    // pushed this clause past the old window. Margin left for future comments.
+    const block = route.slice(idx, idx + 1100)
     expect(block).toContain('pendingMcqHoisted?.options?.[pendingMcqHoisted.correctIndex]')
   })
 })

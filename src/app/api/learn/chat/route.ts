@@ -6769,6 +6769,57 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         }
       } catch { /* non-fatal — a repair must never break a turn */ }
 
+      // AN UNAUTHORED KEY MUST NOT BE CELEBRATED OR CORRECTED WITH FULL
+      // CONFIDENCE — REAL-ACCOUNT FINDING, 2026-09-14.
+      //
+      // Both `confirmCorrectAnswer` (below) and `stateCorrectionForWrongAnswer`
+      // (ENG-D11, a few screens down) document themselves as firing "only on a
+      // server grade against an AUTHORED, human-reviewed key" — but neither call
+      // site actually enforced that: both passed `mcqGradeHoisted?.correct`
+      // directly, which is `true`/`false` whenever ANY probe was graded,
+      // authored or model-invented. `unauthoredKeyGradeHoisted` (set above, ~6430)
+      // is exactly the flag that already exists to know the difference — it is
+      // what drives `unverifiedReason: 'invented-key'` in the mastery payload —
+      // and nothing downstream of it consulted it.
+      //
+      // Reproduced live driving this account through phys.meas.units: the model
+      // asked its own unkeyed question, self-graded the answer, and the reply
+      // opened "🎉 Great job!" while the payload simultaneously carried
+      // `unverifiedReason: invented-key`, `completionSuppressed: true` — the
+      // learner is told they got it right; the system cannot confirm that. The
+      // sibling risk is worse: `phys.mech.friction`'s own documented incident
+      // (inventedProbeGuard.ts) shows a model-invented key can be
+      // mathematically WRONG, in which case `stateCorrectionForWrongAnswer`
+      // would confidently tell a CORRECT learner "Not quite — the answer is:
+      // <the model's own wrong answer>", stated as fact.
+      //
+      // This does not attempt to determine whether the invented key is
+      // actually right (that needs solving the underlying problem, explicitly
+      // out of scope — see wrongAnswerCorrection.ts's own "what this does not
+      // fix"). It only stops the reply from asserting a certainty the system
+      // itself has already flagged as unverifiable: `correctForConfirmation`
+      // below is `null` (a no-op input to both enforcers, per their own
+      // "correct !== true"/"correct !== false" early returns) whenever the key
+      // was unauthored, so NEITHER enforcer can inject new confident text.
+      //
+      // The model's own SPONTANEOUS celebratory claim (the "🎉 Great job!"
+      // case — never server-injected, so gating the enforcers above cannot
+      // touch it) is stripped the same way `stripLeadingFalseConfirmation`
+      // already strips one elsewhere in this file: opening sentence only, per
+      // its own header's reasoning, so ordinary teaching prose mentioning
+      // "correct"/"exactly" mid-reply is never touched.
+      const correctForConfirmation = unauthoredKeyGradeHoisted ? null : (mcqGradeHoisted?.correct ?? null)
+      if (unauthoredKeyGradeHoisted) {
+        try {
+          const { stripLeadingFalseConfirmation } = await import('@/lib/teaching/answerConfirmation')
+          const deClaimed = stripLeadingFalseConfirmation(cleanText)
+          if (deClaimed !== cleanText) {
+            console.log('[unauthored-key-confirmation-stripped] the model\'s own opening claim was removed — the grade came from an invented key')
+            cleanText = deClaimed
+          }
+        } catch { /* non-fatal — a repair must never break a turn */ }
+      }
+
       // CRITERION 5 — A CORRECT ANSWER IS TOLD IT WAS CORRECT.
       //
       // Measured 2026-08-30 by rubricScore.ts: only 39% of server-graded-correct
@@ -6781,7 +6832,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // `mcqGradeHoisted.correct === true`, which is gradeMcqAnswer's comparison
       // against an authored, human-reviewed key — not the model's self-report.
       // On a wrong answer, on an ungraded turn, or on a reply that already
-      // confirms, it does nothing. See answerConfirmation.ts.
+      // confirms, it does nothing. See answerConfirmation.ts. `correctForConfirmation`
+      // (immediately above) is what actually enforces "authored key" now — see
+      // that comment for why the two used to disagree.
       //
       // Placed after the other repairs so it decorates the text that actually
       // ships, and before the verifier so the verifier sees the final reply.
@@ -6789,7 +6842,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         const { confirmCorrectAnswer, CONFIRMS_CORRECT } = await import('@/lib/teaching/answerConfirmation')
         const confirmed = confirmCorrectAnswer({
           text: cleanText,
-          correct: mcqGradeHoisted?.correct ?? null,
+          correct: correctForConfirmation,
           priorConfirmations: priorConfirmationsHoisted,
         })
         cleanText = confirmed.text
@@ -6806,7 +6859,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // `buildLessonCloseText` replacement, later in the pipeline) is a
         // separate, already-understood confound and is deliberately not
         // represented here.
-        if (mcqGradeHoisted?.correct === true) {
+        //
+        // Reads `correctForConfirmation`, not `mcqGradeHoisted?.correct`, since
+        // 2026-09-14: an unauthored-key turn is now DELIBERATELY withheld (see
+        // the comment above this block), not missed, and counting it against
+        // this metric would make a correct decision look like the defect the
+        // metric exists to catch.
+        if (correctForConfirmation === true) {
           console.log('[c5] ' + JSON.stringify({
             event: 'servedGradedCorrect',
             confirmed: confirmed.added || CONFIRMS_CORRECT.test(confirmed.text),
@@ -6824,11 +6883,20 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // the answer.
       //
       // Same authority as its sibling and no more: it fires only on
-      // `mcqGradeHoisted.correct === false` (gradeMcqAnswer against an authored,
-      // human-reviewed key) and states `options[correctIndex]` off that same
-      // probe. Both halves are server ground truth; it cannot invent either.
-      // `pendingMcqHoisted` is the probe that was actually graded (assigned once,
-      // never reassigned), so the key it reads is the key the grade used.
+      // `correctForConfirmation === false` — gradeMcqAnswer's verdict, EXCEPT
+      // when the key was unauthored, in which case it is `null` (see the
+      // comment above `confirmCorrectAnswer`, ~6788) — and states
+      // `options[correctIndex]` off that same probe. `pendingMcqHoisted` is the
+      // probe that was actually graded (assigned once, never reassigned), so
+      // the key it reads is the key the grade used.
+      //
+      // Reads `correctForConfirmation`, not `mcqGradeHoisted?.correct`, as of
+      // 2026-09-14: this function's own header claims it fires only against "an
+      // authored, human-reviewed key" — that was never actually enforced here,
+      // so a model-invented (and possibly wrong) key could have this function
+      // confidently STATE its own wrong answer as fact ("Not quite — the answer
+      // is: <the model's own error>") to a learner who was right. See the
+      // comment above `confirmCorrectAnswer` for the full reasoning.
       //
       // Placed here so it decorates the text that ships, including the degraded
       // template (set far earlier, ~5551) — which is precisely where two of the
@@ -6837,7 +6905,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         const { stateCorrectionForWrongAnswer } = await import('@/lib/teaching/wrongAnswerCorrection')
         const corrected = stateCorrectionForWrongAnswer({
           text: cleanText,
-          correct: mcqGradeHoisted?.correct ?? null,
+          correct: correctForConfirmation,
           probe: pendingMcqHoisted,
         })
         if (corrected.added) {
@@ -7917,7 +7985,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // against, so the sentence cannot disagree with the evidence
               // row. Consulted only when the repair would otherwise leave the
               // placeholder alone on screen.
-              justGraded: mcqGradeHoisted && typeof mcqGradeHoisted.correct === 'boolean'
+              //
+              // `&& !unauthoredKeyGradeHoisted` added 2026-09-14 — same reasoning
+              // as `correctForConfirmation` a few thousand lines up: a
+              // model-invented key can be wrong (documented,
+              // inventedProbeGuard.ts), so stating `correctOptionText` off it
+              // with full confidence carries the same risk `confirmCorrectAnswer`/
+              // `stateCorrectionForWrongAnswer` were fixed for. Leaves the
+              // placeholder repair's fallback path untouched (see that repair's
+              // own module for what runs when `justGraded` is null).
+              justGraded: mcqGradeHoisted && typeof mcqGradeHoisted.correct === 'boolean' && !unauthoredKeyGradeHoisted
                 ? {
                     correct: mcqGradeHoisted.correct,
                     correctOptionText:
@@ -8664,7 +8741,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // above): the option text comes from the `pendingMcqHoisted` the
           // answer was graded against, so the two sentences cannot disagree
           // about the same item.
-          graded: mcqGradeHoisted && typeof mcqGradeHoisted.correct === 'boolean'
+          //
+          // `&& !unauthoredKeyGradeHoisted` added 2026-09-14 — same reasoning as
+          // `justGraded` above and as `correctForConfirmation` a few thousand
+          // lines up: this mirror confirms/corrects the learner's OWN restated
+          // answer with the verdict stated as fact, which carries the identical
+          // risk when the key behind it was model-invented and possibly wrong.
+          graded: mcqGradeHoisted && typeof mcqGradeHoisted.correct === 'boolean' && !unauthoredKeyGradeHoisted
             ? {
                 correct: mcqGradeHoisted.correct,
                 correctOptionText:

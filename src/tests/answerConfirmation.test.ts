@@ -131,7 +131,20 @@ describe('the route actually applies it', () => {
     // The one input that may produce a confirmation is gradeMcqAnswer's
     // verdict. If this ever reads a SIGNAL field instead, the guarantee in
     // answerConfirmation.ts's header is void.
-    expect(route).toMatch(/correct: mcqGradeHoisted\?\.correct \?\? null/)
+    //
+    // UPDATED 2026-09-14: the original literal here was
+    // `mcqGradeHoisted?.correct ?? null` — a real-account run found this
+    // guarantee incomplete, not wrong: `mcqGradeHoisted.correct` is `true`
+    // whenever ANY probe was graded correct, authored or model-invented, so
+    // a self-graded invented question ("🎉 Great job!") could still trigger
+    // a confident confirmation. `correctForConfirmation` is now the actual
+    // input — it equals the server grade EXCEPT it is forced to `null`
+    // whenever `unauthoredKeyGradeHoisted` is true, so the guarantee this
+    // test names ("never a model self-report") now also covers "never an
+    // unauthored-key server grade", which is the sharper version of the same
+    // claim, not a different one.
+    expect(route).toMatch(/correct: correctForConfirmation/)
+    expect(route).toMatch(/const correctForConfirmation = unauthoredKeyGradeHoisted \? null : \(mcqGradeHoisted\?\.correct \?\? null\)/)
     const call = route.slice(route.indexOf('confirmCorrectAnswer({'), route.indexOf('cleanText = confirmed.text'))
     expect(call).not.toMatch(/signal/i)
   })
@@ -148,11 +161,23 @@ describe('the route actually applies it', () => {
     // reads the enforcer's own denominator directly instead. Must fire only
     // when `correct === true` — the exact condition confirmCorrectAnswer
     // itself requires — never unconditionally.
+    //
+    // UPDATED 2026-09-14: the condition used to read `mcqGradeHoisted?.correct
+    // === true`, which drifted from the enforcer's own actual input the moment
+    // `correctForConfirmation` was introduced (immediately above) — an
+    // unauthored-key turn would then have logged `confirmed: false` as if the
+    // enforcer had failed to fire, when it was deliberately withheld. Reading
+    // `correctForConfirmation` keeps this test's own claim ("the SAME
+    // precondition the enforcer itself gates on") literally true.
     const callStart = route.indexOf('confirmCorrectAnswer({')
-    const block = route.slice(callStart, callStart + 1600)
+    // Widened 2026-09-14 (1600 -> 1900): the comment explaining
+    // `correctForConfirmation` pushed the telemetry block past the old
+    // window. Margin left for future comments rather than pinning the exact
+    // current distance again.
+    const block = route.slice(callStart, callStart + 1900)
     expect(block).toContain("console.log('[c5] '")
     expect(block).toContain("event: 'servedGradedCorrect'")
-    expect(block).toMatch(/if \(mcqGradeHoisted\?\.correct === true\)/)
+    expect(block).toMatch(/if \(correctForConfirmation === true\)/)
     expect(block).toContain('confirmed.added || CONFIRMS_CORRECT.test(confirmed.text)')
   })
 })

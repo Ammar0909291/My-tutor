@@ -25,6 +25,18 @@
  * has no branch that can produce a correction from anything else, and it never
  * says a learner was wrong on a turn the server did not grade.
  *
+ * CORRECTION, 2026-09-14: "authored key" above described the INTENT, not the
+ * enforcement — the route.ts call site passed `mcqGradeHoisted?.correct`
+ * directly, which is `false` for a WRONG grade regardless of whether the key
+ * behind it was authored or model-invented. Reproduced live: `phys.mech.
+ * friction`'s own documented incident (inventedProbeGuard.ts) shows an
+ * invented key can be mathematically wrong, in which case this function would
+ * confidently state THAT wrong answer as fact to a learner who was actually
+ * right. The call site now passes `null` instead of the raw grade whenever
+ * `unauthoredKeyGradeHoisted` is true, which is what makes "authored key"
+ * true of every input this function actually receives, rather than an
+ * assumption about its caller.
+ *
  * Revealing a spent key is established practice here, not a new liberty:
  * `dontKnowCeiling.ts` already reveals `options[correctIndex]` verbatim, for the
  * same reason (a learner stuck in front of a question the server holds the key
