@@ -13,11 +13,21 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **544** mathematics + 238 physics + 216 english + 186 chemistry + 0 biology + 0 computer_science = **1,184** |
-| Remaining | **591** |
-| Completion percentage | **66.70%** |
+| Concepts with an Educational Brain entry | **545** mathematics + 238 physics + 216 english + 186 chemistry + 0 biology + 0 computer_science = **1,185** |
+| Remaining | **590** |
+| Completion percentage | **66.76%** |
 
-*(Recomputed programmatically 2026-09-14, after Batch 83 (4 concepts:
+*(Recomputed programmatically 2026-09-14, after Batch 84 (1 concept:
+`math.abst.group-theory` — the sole topologically-ready math.abst candidate after Batch 83,
+requires `math.abst.binary-operation`; cross-link `math.linalg.vector-addition` confirmed
+genuinely authored via `ls`, zero discrepancy). `math.abst` 2/37 → 3/37. Fresh frontier after
+Batch 84 EXPANDED dramatically: 9 candidates ready
+(`cyclic-group`/`group-action`/`group-homomorphism`/`group-inverse`/`group-operation`/
+`group-order`/`ring-theory`/`subgroup`/`symmetric-group`) — notably including
+`math.abst.ring-theory`, one of the TWO prerequisites (`ring-theory`+`prime-ideal`) for
+`math.abst.field`, the shared blocker parking both `math.linalg` and `math.opt`; brought
+mathematics from 544 to 545).
+Prior update: after Batch 83 (4 concepts:
 `math.opt.integer-programming`/`math.opt.kkt`/`math.abst.algebraic-structure`/`math.abst.binary-
 operation` — the first 2 were the entire topologically-ready math.opt frontier after Batch 82
 (`integer-programming` requires `math.opt.linear-programming`, cross-link `math.disc.complexity-
@@ -349,7 +359,7 @@ that do not resolve to a live KG concept id, across all six subjects.)*
 
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
-| mathematics | 908 | 544 | 59.91% | `math.found.mathematical-thinking` | **Yes** |
+| mathematics | 908 | 545 | 60.02% | `math.found.mathematical-thinking` | **Yes** |
 
 **Mathematics per-domain state (recomputed 2026-09-13, programmatic):**
 
@@ -424,7 +434,13 @@ check). Fresh frontier after Batch 74: 9 candidates ready (`unit-vector`, `cross
 | `math.de` | 0/56 | not started |
 | `math.prob` | 0/49 | not started |
 | `math.stats` | 0/40 | not started |
-| `math.abst` | 2/37 | **OPENED (2026-09-14)** — Batch 83 (2, `algebraic-structure`/
+| `math.abst` | 3/37 | **Batch 84 (1, `group-theory`, the sole ready candidate after Batch 83,
+requires `binary-operation`; cross-link `math.linalg.vector-addition` confirmed genuinely
+authored via `ls`, zero discrepancy). Fresh frontier after Batch 84 EXPANDED to 9 candidates
+(`cyclic-group`/`group-action`/`group-homomorphism`/`group-inverse`/`group-operation`/
+`group-order`/`ring-theory`/`subgroup`/`symmetric-group`) — notably `ring-theory`, one of the
+two prerequisites for `math.abst.field`, the shared blocker parking both `math.linalg` and
+`math.opt`.** **OPENED (2026-09-14)** — Batch 83 (2, `algebraic-structure`/
 `binary-operation`, both topologically ready at batch start, closing the ENTIRE math.abst
 frontier available this batch with none deferred; selected after `math.opt` reached 0
 topologically-ready candidates, its remaining 4 concepts all blocked either on

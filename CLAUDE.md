@@ -5523,6 +5523,42 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   session campaign; continuation should verify state via
   `scripts/math/state.ts` fresh each time rather than trusting any
   number recorded here.
+- **Batch 84 — math.abst: group theory, and the frontier expands
+  toward ring theory** (2026-09-14, autonomous loop iteration):
+  re-computed the frontier fresh — `math.abst` had exactly the 1
+  candidate predicted at the end of Batch 83 (`group-theory`, requires
+  `binary-operation`). Authored it: the four group axioms (closure G1
+  reusing `binary-operation`'s own definition, associativity G2,
+  identity G3, inverses G4) as distinct from the optional fifth
+  commutativity property (G5, "abelian"); the "solve, don't assume"
+  discipline for finding identity/inverse elements by definition; and
+  the non-abelian-groups-are-still-groups distinction via $(GL_2(
+  \mathbb R),\times)$. 3 misconceptions independently attributed —
+  MC-1 GROUP-NEEDS-COMMUTATIVITY (Type 1, FOUNDATIONAL), MC-2
+  IDENTITY-MUST-BE-ZERO-OR-ONE (Type 1), MC-3 INVERSE-IS-NEGATIVE
+  (Type 1); zero discrepancy — cross-link `math.linalg.vector-
+  addition` confirmed genuinely authored via `ls`. `math.abst`
+  **2/37 → 3/37**. **Re-computing the frontier afterward found a
+  dramatic expansion** — 9 candidates ready (`cyclic-group`,
+  `group-action`, `group-homomorphism`, `group-inverse`,
+  `group-operation`, `group-order`, `ring-theory`, `subgroup`,
+  `symmetric-group`), all unblocked by the single `group-theory`
+  entry. Most notably, `math.abst.ring-theory` is now ready — ONE of
+  the TWO prerequisites (`ring-theory`+`prime-ideal`) for
+  `math.abst.field`, the shared blocker parking both `math.linalg`
+  (since Batch 80) and `math.opt` (since Batch 83) — genuine,
+  concrete progress toward eventually reopening both. Mathematics
+  **544/908 → 545/908**, 363 remaining. Fresh frontier: the 9
+  `math.abst` candidates above; `math.opt`/`math.linalg`/`math.graph`
+  unchanged at 0 ready (all three still PARKED). Validated: KG
+  validator PASS (908/908 reachable, file untouched), `scripts/math/
+  state.ts` confirms math.abst 3/37, mathematics 545/908 (10
+  EB-certified domains unchanged), `tsc --noEmit` clean, targeted
+  tests 479/479 passed, heading structure diffed clean on the first
+  pass. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime
+  file touched. This is a genuinely multi-session campaign;
+  continuation should verify state via `scripts/math/state.ts` fresh
+  each time rather than trusting any number recorded here.
 
 ## Topic/meaning loss — the extractor's default was YES (2026-09-13)
 
