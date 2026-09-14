@@ -6625,6 +6625,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // NEW pure derivation against the OLD one it is meant to replace,
             // not against itself.
             serverGraded: gradedAgainstServerKeyHoisted,
+            // Declared far above, but not yet WRITTEN at this point — its
+            // real write site (answerableTurn's suppression decision) sits
+            // ~50 lines further down, past this compile point. Reads as its
+            // own default (null) here, same as the explicitly-defaulted
+            // fields below; called out separately only because it is
+            // otherwise declared early enough to look settled.
             signalSuppressedReason: signalSuppressedReasonHoisted,
             // Not yet declared at this point in the function (its `let` sits
             // further down) — `false` is its own eventual default, i.e. the
