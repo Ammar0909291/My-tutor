@@ -13,11 +13,27 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **533** mathematics + 238 physics + 216 english + 186 chemistry + 0 biology + 0 computer_science = **1,173** |
-| Remaining | **602** |
-| Completion percentage | **66.08%** |
+| Concepts with an Educational Brain entry | **537** mathematics + 238 physics + 216 english + 186 chemistry + 0 biology + 0 computer_science = **1,177** |
+| Remaining | **598** |
+| Completion percentage | **66.31%** |
 
-*(Recomputed programmatically 2026-09-14, after Batch 80 (4 concepts:
+*(Recomputed programmatically 2026-09-14, after Batch 81 (4 concepts:
+`math.opt.dynamic-programming`/`math.opt.gradient-methods`/`math.opt.lagrange-multipliers`/
+`math.opt.convex-optimization` — all 4 candidates topologically ready after Batch 80, closing the
+ENTIRE batch-start math.opt frontier with none deferred: `dynamic-programming` requires
+`math.disc.recurrence-relation` (long-authored); `gradient-methods` requires `math.opt.
+unconstrained-optimization`+`math.calc.gradient` (both already authored); `lagrange-multipliers`
+requires `math.calc.partial-derivatives`+`math.opt.unconstrained-optimization` (both already
+authored); `convex-optimization` requires `math.opt.convex-function`+`math.opt.convex-set` (both
+authored Batch 80). `dynamic-programming`, `gradient-methods`, and `lagrange-multipliers` all zero
+Blueprint/KG metadata discrepancy — `gradient-methods`' Blueprint correctly pre-declared
+independence mode for its `math.num.newtons-method` cross-link, re-verified via `ls` rather than
+trusted. `convex-optimization` carries a genuine `unlocks` discrepancy (Blueprint names
+`math.opt.linear-programming`+`math.opt.semidefinite-programming`+`math.opt.duality`, KG lists
+only `math.opt.duality`), resolved toward the KG. `math.opt` 3/16 → 7/16. `math.linalg`/
+`math.graph` remain PARKED at 28/61 and 15/16 respectively (0 ready, unchanged); brought
+mathematics from 533 to 537).
+Prior update: after Batch 80 (4 concepts:
 `math.linalg.rank`/`math.opt.convex-set`/`math.opt.unconstrained-optimization`/
 `math.opt.convex-function` — `rank` was the sole topologically-ready `math.linalg` candidate after
 Batch 79 (requires `row-echelon`); authoring it revealed `math.linalg` had reached 0 ready
@@ -299,7 +315,7 @@ that do not resolve to a live KG concept id, across all six subjects.)*
 
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
-| mathematics | 908 | 533 | 58.70% | `math.found.mathematical-thinking` | **Yes** |
+| mathematics | 908 | 537 | 59.14% | `math.found.mathematical-thinking` | **Yes** |
 
 **Mathematics per-domain state (recomputed 2026-09-13, programmatic):**
 
@@ -382,7 +398,19 @@ check). Fresh frontier after Batch 74: 9 candidates ready (`unit-vector`, `cross
 | `math.top` | 0/23 | not started |
 | `math.fnal` | 0/18 | not started |
 | `math.num` | 0/16 | not started |
-| `math.opt` | 3/16 | **OPENED (2026-09-14)** — Batch 80 (3, `convex-set`/`unconstrained-
+| `math.opt` | 7/16 | **Batch 81 (4, `dynamic-programming`/`gradient-methods`/
+`lagrange-multipliers`/`convex-optimization`, closing the ENTIRE 4-candidate frontier available
+after Batch 80 with none deferred; `dynamic-programming` requires `math.disc.recurrence-relation`
+(long-authored, zero discrepancy); `gradient-methods` requires `math.opt.unconstrained-
+optimization`+`math.calc.gradient` (both authored, zero discrepancy — Blueprint correctly
+pre-declared independence mode for its `math.num.newtons-method` cross-link, re-verified via `ls`);
+`lagrange-multipliers` requires `math.calc.partial-derivatives`+`math.opt.unconstrained-
+optimization` (both authored, zero discrepancy); `convex-optimization` requires `math.opt.
+convex-function`+`math.opt.convex-set` (both authored Batch 80) and carries a genuine `unlocks`
+discrepancy — Blueprint names `math.opt.linear-programming`+`math.opt.semidefinite-programming`+
+`math.opt.duality`, KG lists only `math.opt.duality`, resolved toward the KG). Fresh frontier
+after Batch 81: `duality`, `linear-programming`, `newton-optimization` all ready.** **OPENED
+(2026-09-14)** — Batch 80 (3, `convex-set`/`unconstrained-
 optimization`/`convex-function`, selected from the 4-candidate frontier found when `math.linalg`
 reached 0 ready candidates; `convex-set` requires `math.linalg.vector` (already authored);
 `unconstrained-optimization` requires `math.calc.critical-points`+`math.calc.concavity` (both

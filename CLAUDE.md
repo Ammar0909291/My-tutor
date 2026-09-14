@@ -5376,6 +5376,57 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   touched. This is a genuinely multi-session campaign; continuation
   should verify state via `scripts/math/state.ts` fresh each time
   rather than trusting any number recorded here.
+- **Batch 81 — math.opt: dynamic programming, gradient descent,
+  Lagrange multipliers, convex optimization — closes the entire
+  Batch-80 frontier** (2026-09-14, autonomous loop iteration):
+  re-computed the frontier fresh — `math.opt` had exactly the 4
+  candidates predicted at the end of Batch 80 (`convex-optimization`,
+  `dynamic-programming`, `gradient-methods`, `lagrange-multipliers`).
+  Authored all 4, closing the ENTIRE frontier with none deferred.
+  `dynamic-programming` (requires `math.disc.recurrence-relation`):
+  Bellman recurrence, memoization vs. tabulation, greedy-vs-DP,
+  dependency-DAG fill order; 3 misconceptions with birth types
+  EXPLICITLY given by the Blueprint, adopted directly — MC-1
+  DP-IS-JUST-RECURSION (Type 5), MC-2 GREEDY-ALWAYS-WORKS (Type 1),
+  MC-3 SUBPROBLEM-ORDER-ARBITRARY (Type 2); zero discrepancy.
+  `gradient-methods` (requires `math.opt.unconstrained-optimization`+
+  `math.calc.gradient`): the descent update rule reusing
+  `math.calc.gradient`'s own steepest-ascent fact, step-size
+  divergence, sublinear-vs-linear convergence rate; 3 misconceptions
+  independently classified (Blueprint gives severity not birth type)
+  — MC-1 Type 4, MC-2 Type 1, MC-3 Type 1; zero discrepancy — the
+  Blueprint's own independence P76 mode (`math.num.newtons-method`
+  confirmed unauthored via `ls`) was CORRECTLY pre-declared, unlike
+  several prior batches' stale claims. `lagrange-multipliers`
+  (requires `math.calc.partial-derivatives`+`math.opt.unconstrained-
+  optimization`): the parallel-gradient condition as a direct
+  generalization of $\nabla f=0$, geometric tangency, $\lambda$'s
+  shadow-price interpretation; 3 misconceptions independently
+  attributed — MC-1 Type 1, MC-2 Type 5, MC-3 Type 5; zero
+  discrepancy. `convex-optimization` (requires `math.opt.convex-
+  function`+`math.opt.convex-set`): the fundamental theorem extending
+  `convex-function`'s own local-implies-global theorem to a
+  constrained feasible set via `convex-set`'s convexity, the
+  variational-inequality optimality condition, projected gradient
+  descent, LP/QP/SOCP/SDP problem classes; 3 misconceptions with
+  birth types EXPLICITLY given by the Blueprint, adopted directly —
+  MC-1 Type 5, MC-2 Type 1, MC-3 Type 1. **Genuine `unlocks`
+  discrepancy found**: Blueprint names `math.opt.linear-programming`+
+  `math.opt.semidefinite-programming`+`math.opt.duality`, KG lists
+  only `math.opt.duality` — resolved toward the KG. `math.opt`
+  **3/16 → 7/16**. Mathematics **533/908 → 537/908**, 371 remaining.
+  Fresh frontier: `math.opt.duality`, `math.opt.linear-programming`,
+  `math.opt.newton-optimization` all ready (9 concepts remain in
+  math.opt); `math.linalg`/`math.graph` unchanged at 0 ready (both
+  still PARKED). Validated: KG validator PASS (908/908 reachable,
+  file untouched), `scripts/math/state.ts` confirms math.opt 7/16,
+  mathematics 537/908 (10 EB-certified domains unchanged), `tsc
+  --noEmit` clean, targeted tests 479/479 passed, all 4 heading
+  structures diffed clean on the first pass. No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file
+  touched. This is a genuinely multi-session campaign; continuation
+  should verify state via `scripts/math/state.ts` fresh each time
+  rather than trusting any number recorded here.
 
 ## Topic/meaning loss — the extractor's default was YES (2026-09-13)
 

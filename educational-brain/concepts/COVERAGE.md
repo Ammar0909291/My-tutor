@@ -11,7 +11,7 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 533 | **Ten domains CERTIFIED (math.calc joined 2026-09-13, the tenth), math.graph 15/16 (PARKED again — only `random-graph` remains, blocked on unauthored `math.prob.probability-axioms`), math.linalg 28/61 (PARKED as of Batch 80 — `rank` authored, then the domain's remaining chain found blocked on unauthored `math.abst.field`), math.opt 3/16 (OPENED Batch 80 — `convex-set`/`unconstrained-optimization`/`convex-function` authored; `dynamic-programming` deferred; `convex-optimization` newly ready).** 82 `math.found.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 69 `math.geom.*` (**COMPLETE, DOMAIN CERTIFIED** — the final 13 entries were restored by commit `0d2c76dd`'s Wave 0 recovery, which this row previously did not reflect) + 36 `math.nt.*` (**COMPLETE, DOMAIN CERTIFIED 2026-08-12** — the domain's final 8 concepts, `prime-distribution`, `continued-fractions`, `analytic-number-theory`, `prime-number-theorem`, `riemann-hypothesis`, `algebraic-number-theory`, `algebraic-integers`, `number-fields`, were authored this session, ending the PARKED status this row previously recorded) + 59 `math.alg.*` (**COMPLETE, DOMAIN CERTIFIED 2026-09-11** — Wave 1 (2026-08-12, 11 concepts): `expression`, `equation`, `term`, `coefficient`, `exponent-rules`, `polynomial`, `degree`, `zero-exponent`, `negative-exponent`, `solution-set`, `inequality`; Wave 2 (2026-08-12, 1 concept): `like-terms`; Wave 3 (2026-09-11, 3 concepts): `simplification`, `polynomial-operations`, `radicals`; Wave 4 (2026-09-11, 5 concepts): `linear-equation-1var`, `polynomial-division`, `fractional-exponent`, `simplifying-radicals`, `radical-equations`; Wave 5 (2026-09-11, 5 concepts): `inequality-1var`, `absolute-value-equations`, `linear-equation-2var`, `remainder-theorem`, `rationalizing-denominators`; Wave 6 (2026-09-11, 3 concepts): `inequality-2var`, `system-linear-equations`, `factor-theorem`; Wave 7 (2026-09-11, 4 concepts): `substitution-method`, `elimination-method`, `system-3var`, `factoring`; Wave 8 (2026-09-11, 3 concepts): `factoring-gcf`, `factoring-special`, `rational-expressions`; Wave 9 (2026-09-11, 4 concepts): `factoring-trinomials`, `rational-expressions-addition`, `rational-expressions-multiplication`, `rational-equations`; Wave 10 (2026-09-11, 1 concept): `quadratic-equation`; Wave 11 (2026-09-11, 2 concepts): `completing-the-square`, `polynomial-roots`; Wave 12 part 1 (2026-09-11, 1 concept): `quadratic-formula`; Wave 12 part 2 (2026-09-11, 2 concepts): `discriminant`, `rational-root-theorem`; Wave 12 part 3 (2026-09-11, 3 concepts): `fundamental-theorem-algebra`, `polynomial-inequality`, `vietas-formulas`; Wave 13 (2026-09-11, 2 concepts): `complex-polynomial-roots`, `rational-inequality`; Batch 15 (2026-09-11, 1 concept): `exponential-function`; Batch 16 (2026-09-11, 2 concepts): `logarithm`, `exponential-equations`; Batch 17 (2026-09-11, 3 concepts): `binomial-theorem`, `logarithm-properties`, `natural-logarithm`; Batch 18 (2026-09-11, 3 concepts, FINAL): `change-of-base`, `logarithmic-equations`, `pascals-triangle`; all Blueprint-grounded, reused by reference). 20 `math.disc.*` entries (**IN PROGRESS, standalone campaign since math.alg's certification** —
+| mathematics | 908 | 537 | **Ten domains CERTIFIED (math.calc joined 2026-09-13, the tenth), math.graph 15/16 (PARKED again — only `random-graph` remains, blocked on unauthored `math.prob.probability-axioms`), math.linalg 28/61 (PARKED as of Batch 80 — `rank` authored, then the domain's remaining chain found blocked on unauthored `math.abst.field`), math.opt 7/16 (Batch 81 authored `dynamic-programming`/`gradient-methods`/`lagrange-multipliers`/`convex-optimization`, closing the entire Batch-80 frontier; fresh frontier: `duality`/`linear-programming`/`newton-optimization` all ready).** 82 `math.found.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 69 `math.geom.*` (**COMPLETE, DOMAIN CERTIFIED** — the final 13 entries were restored by commit `0d2c76dd`'s Wave 0 recovery, which this row previously did not reflect) + 36 `math.nt.*` (**COMPLETE, DOMAIN CERTIFIED 2026-08-12** — the domain's final 8 concepts, `prime-distribution`, `continued-fractions`, `analytic-number-theory`, `prime-number-theorem`, `riemann-hypothesis`, `algebraic-number-theory`, `algebraic-integers`, `number-fields`, were authored this session, ending the PARKED status this row previously recorded) + 59 `math.alg.*` (**COMPLETE, DOMAIN CERTIFIED 2026-09-11** — Wave 1 (2026-08-12, 11 concepts): `expression`, `equation`, `term`, `coefficient`, `exponent-rules`, `polynomial`, `degree`, `zero-exponent`, `negative-exponent`, `solution-set`, `inequality`; Wave 2 (2026-08-12, 1 concept): `like-terms`; Wave 3 (2026-09-11, 3 concepts): `simplification`, `polynomial-operations`, `radicals`; Wave 4 (2026-09-11, 5 concepts): `linear-equation-1var`, `polynomial-division`, `fractional-exponent`, `simplifying-radicals`, `radical-equations`; Wave 5 (2026-09-11, 5 concepts): `inequality-1var`, `absolute-value-equations`, `linear-equation-2var`, `remainder-theorem`, `rationalizing-denominators`; Wave 6 (2026-09-11, 3 concepts): `inequality-2var`, `system-linear-equations`, `factor-theorem`; Wave 7 (2026-09-11, 4 concepts): `substitution-method`, `elimination-method`, `system-3var`, `factoring`; Wave 8 (2026-09-11, 3 concepts): `factoring-gcf`, `factoring-special`, `rational-expressions`; Wave 9 (2026-09-11, 4 concepts): `factoring-trinomials`, `rational-expressions-addition`, `rational-expressions-multiplication`, `rational-equations`; Wave 10 (2026-09-11, 1 concept): `quadratic-equation`; Wave 11 (2026-09-11, 2 concepts): `completing-the-square`, `polynomial-roots`; Wave 12 part 1 (2026-09-11, 1 concept): `quadratic-formula`; Wave 12 part 2 (2026-09-11, 2 concepts): `discriminant`, `rational-root-theorem`; Wave 12 part 3 (2026-09-11, 3 concepts): `fundamental-theorem-algebra`, `polynomial-inequality`, `vietas-formulas`; Wave 13 (2026-09-11, 2 concepts): `complex-polynomial-roots`, `rational-inequality`; Batch 15 (2026-09-11, 1 concept): `exponential-function`; Batch 16 (2026-09-11, 2 concepts): `logarithm`, `exponential-equations`; Batch 17 (2026-09-11, 3 concepts): `binomial-theorem`, `logarithm-properties`, `natural-logarithm`; Batch 18 (2026-09-11, 3 concepts, FINAL): `change-of-base`, `logarithmic-equations`, `pascals-triangle`; all Blueprint-grounded, reused by reference). 20 `math.disc.*` entries (**IN PROGRESS, standalone campaign since math.alg's certification** —
 Batch 14 (2026-09-11, 1 concept): `counting-principles`; Batch 15 (2026-09-11, 1 concept):
 `permutations`; Batch 16 (2026-09-11, 1 concept): `combinations`; Batch 19 (2026-09-11, 5
 concepts): `combinatorics`, `pigeonhole`, `stars-bars`, `inclusion-exclusion`,
@@ -11720,6 +11720,70 @@ PARKED). Validated: KG validator PASS (908/908 reachable, file untouched), `scri
 confirms math.linalg 28/61, math.opt 3/16, mathematics 533/908 (10 EB-certified domains
 unchanged), `tsc --noEmit` clean, targeted tests 479/479 passed, all 4 heading structures diffed
 clean against `math.alg.like-terms.md` on the first pass (0 diffs each). No
+Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. This is a genuinely
+multi-session campaign; continuation should verify state via `scripts/math/state.ts` fresh each
+time rather than trusting any number recorded here.
+
+**Batch 81 — math.opt: dynamic programming, gradient descent, Lagrange multipliers, convex
+optimization — closes the entire Batch-80 frontier** (2026-09-14, autonomous loop iteration):
+re-fetched `main` (0 divergence, clean). Re-ran `scripts/math/state.ts` fresh: confirmed
+mathematics 533/908, math.opt 3/16, math.linalg 28/61 (PARKED), math.graph 15/16 (PARKED), 10
+EB-certified domains — matched Batch 80's predicted end-state exactly. Computed the frontier
+programmatically: `math.opt` had exactly the 4 candidates predicted at the end of Batch 80
+(`convex-optimization`, `dynamic-programming`, `gradient-methods`, `lagrange-multipliers`);
+`math.linalg`/`math.graph` confirmed unchanged at 0 ready (both still PARKED). Verified all 4
+Blueprints exist, read each in full, and authored all 4 — closing the ENTIRE batch-start math.opt
+frontier with none deferred.
+
+`dynamic-programming` (requires `math.disc.recurrence-relation`, unlocks none, cross_links none):
+Bellman recurrence formulation, memoization (top-down) vs. tabulation (bottom-up), the greedy-vs-
+DP distinction, and the dependency-DAG fill-order requirement. 3 misconceptions with birth types
+EXPLICITLY given by the Blueprint (adopted directly): MC-1 DP-IS-JUST-RECURSION (Type 5), MC-2
+GREEDY-ALWAYS-WORKS (Type 1), MC-3 SUBPROBLEM-ORDER-ARBITRARY (Type 2). Zero Blueprint/KG
+metadata discrepancy.
+
+`gradient-methods` (requires `math.opt.unconstrained-optimization`+`math.calc.gradient`, unlocks
+`math.opt.stochastic-gradient`+`math.opt.newton-optimization`, cross_links
+`math.num.newtons-method`): the gradient descent update rule reusing `math.calc.gradient`'s own
+steepest-ascent fact, the step-size divergence caution, and the sublinear-vs-linear convergence-
+rate distinction reusing `math.opt.unconstrained-optimization`'s own Hessian idea. Blueprint gives
+Description+Severity but not birth type; independently classified: MC-1
+GRADIENT-DESCENT-DIRECTION-SIGN-ERROR (Type 4), MC-2
+ANY-POSITIVE-STEP-SIZE-ASSUMED-SUFFICIENT (Type 1), MC-3
+CONVERGENCE-RATE-ASSUMED-UNIFORM-ACROSS-ALL-CONVEX-FUNCTIONS (Type 1). Zero Blueprint/KG metadata
+discrepancy — the Blueprint's own P76 mode (independence, since `math.num.newtons-method` is
+confirmed unauthored via `ls`, `math.num` entirely unstarted) was CORRECTLY pre-declared, unlike
+several prior batches' stale claims, and required no correction.
+
+`lagrange-multipliers` (requires `math.calc.partial-derivatives`+`math.opt.unconstrained-
+optimization`, unlocks `math.opt.kkt`, cross_links none): the parallel-gradient condition
+$\nabla f=\lambda\nabla g$ as a direct generalization of `math.opt.unconstrained-optimization`'s
+own $\nabla f=0$, its geometric tangency derivation, and $\lambda$'s shadow-price interpretation.
+Blueprint gives Description+Severity but not a formal Type label; independently attributed: MC-1
+LAGRANGE-CONDITION-ASSUMED-UNRELATED-TO-UNCONSTRAINED (Type 1), MC-2
+PARALLEL-GRADIENT-CONDITION-ASSUMED-ARBITRARY (Type 5), MC-3 LAMBDA-ASSUMED-DISPOSABLE (Type 5).
+Zero Blueprint/KG metadata discrepancy — the Blueprint's own correctly-declared independence P76
+mode (no cross-link target listed in the KG) required no correction.
+
+`convex-optimization` (requires `math.opt.convex-function`+`math.opt.convex-set`, unlocks
+`math.opt.duality`, cross_links none): the fundamental theorem (local implies global, extending
+`math.opt.convex-function`'s own theorem to a constrained feasible set via `math.opt.convex-set`'s
+convexity), the variational-inequality optimality condition, projected gradient descent, and the
+LP/QP/SOCP/SDP problem-class gallery. 3 misconceptions with birth types EXPLICITLY given by the
+Blueprint (adopted directly): MC-1 LOCAL-IS-NOT-GLOBAL-FOR-CONVEX (Type 5), MC-2
+GRADIENT-ZERO-SUFFICIENT-CONSTRAINED (Type 1), MC-3 CONVEXITY-OF-FEASIBLE-SET-ENOUGH (Type 1).
+**Genuine Blueprint/KG `unlocks` discrepancy found**: the Blueprint's Component 0 states "unlocks:
+math.opt.linear-programming, math.opt.semidefinite-programming, math.opt.duality" — but the live
+KG lists only `unlocks: ['math.opt.duality']`. Resolved toward the KG per standing policy, not
+fixed in the KG or Blueprint file.
+
+`math.opt` 3/16 → **7/16**. Mathematics **533/908 → 537/908**, 371 remaining. Fresh frontier after
+this batch: `math.opt.duality`, `math.opt.linear-programming`, `math.opt.newton-optimization` all
+ready (9 concepts remain in math.opt); `math.linalg`/`math.graph` unchanged at 0 ready (both still
+PARKED). Validated: KG validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts`
+confirms math.opt 7/16, mathematics 537/908 (10 EB-certified domains unchanged), `tsc --noEmit`
+clean, targeted tests 479/479 passed, all 4 heading structures diffed clean against
+`math.alg.like-terms.md` on the first pass (0 diffs each). No
 Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. This is a genuinely
 multi-session campaign; continuation should verify state via `scripts/math/state.ts` fresh each
 time rather than trusting any number recorded here.
