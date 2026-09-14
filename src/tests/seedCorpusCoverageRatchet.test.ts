@@ -15,15 +15,18 @@ import path from 'path'
  * KG-validated — while never reaching a learner, because the ONLY writer
  * that runs automatically in production never imports it.
  *
- * MEASURED 2026-09-14: the seeder's corpus has 63 content modules; the
- * bootstrap's has 30. 33 modules — all of mathematics's dedicated batch
- * files, plus biology and computer_science entirely — are in the seeder but
+ * MEASURED 2026-09-14: the seeder's corpus had 63 content modules; the
+ * bootstrap's had 30. 33 modules — all of mathematics's dedicated batch
+ * files, plus biology and computer_science entirely — were in the seeder but
  * absent from the bootstrap. See CLAUDE.md's "Physics + Chemistry ceiling
  * broken" and "AssetIdentity Completion Program" entries for the identical
  * defect already fixed once for chemistry (2026-08-19) and physics
- * (2026-08-25/30) band-gap/depth probes — this is the same class of gap,
+ * (2026-08-25/30) band-gap/depth probes — this was the same class of gap,
  * recurring because there was no mechanism to prevent it, only manual fixes
- * after each incident.
+ * after each incident. Closed the same day this test was added: the 33
+ * modules were wired into instrumentation.ts's bootstrapAssets(), so both
+ * baselines below are now empty. The ratchet's job going forward is purely
+ * regression prevention.
  *
  * A "content module" is defined by its EXPORTED TYPE, not by name or by
  * whichever writer already imports it: any file under assets/ that exports
@@ -83,48 +86,17 @@ function importedBy(source: string, moduleName: string): boolean {
   return new RegExp(`assets/${moduleName}'`).test(source)
 }
 
-// The exact 33 modules known-missing from the bootstrap as of 2026-09-14.
-// Update this list (never widen it silently) as entries are closed.
-const KNOWN_MISSING_FROM_BOOTSTRAP = [
-  'biologySeedAssets',
-  'csSeedAssets',
-  'mathematicsAlgebraVocabAssets',
-  'mathematicsAlgorithmsPrecisionAssets',
-  'mathematicsAnalyticAlgebraicAssets',
-  'mathematicsArithCloseAssets',
-  'mathematicsArithmeticFoundations',
-  'mathematicsBandGapAssets',
-  'mathematicsBatch3Assets',
-  'mathematicsCirclesTransformAssets',
-  'mathematicsCoordinateAssets',
-  'mathematicsCryptoNumberAssets',
-  'mathematicsDiffGeomAssets',
-  'mathematicsDivisibilityModularAssets',
-  'mathematicsFoundationAssets',
-  'mathematicsFoundationsCloseAssets',
-  'mathematicsFractionDecimalAssets',
-  'mathematicsGeometryFoundations',
-  'mathematicsLanguageStrategyAssets',
-  'mathematicsMeasurementAssets',
-  'mathematicsNumberSystemsCloseAssets',
-  'mathematicsNumberTheoryAssets',
-  'mathematicsOrdersProofsAssets',
-  'mathematicsPowersVariationAssets',
-  'mathematicsProofMachineryAssets',
-  'mathematicsProportionProofAssets',
-  'mathematicsQuantifierCraftAssets',
-  'mathematicsRelationsNumbersAssets',
-  'mathematicsSeedAssets',
-  'mathematicsSetOperationsAssets',
-  'mathematicsSolidsPolygonsAssets',
-  'mathematicsTriangleTransformAssets',
-  'mathematicsVectorsConicsAssets',
-].sort()
+// Closed 2026-09-14 (same day as the previous 33-entry baseline was
+// recorded) — all 33 were wired into instrumentation.ts's bootstrapAssets().
+// Empty on purpose: if this ever grows, that means a new content module was
+// added to the seed script and not the bootstrap, reproducing the exact
+// defect this ratchet exists to catch.
+const KNOWN_MISSING_FROM_BOOTSTRAP: string[] = []
 
-// Empty on purpose: as of 2026-09-14 the seed script imports everything the
-// bootstrap does not, plus the 33 above. If this ever grows, that means a
-// module was added to the bootstrap and forgotten in the standalone seeder —
-// the same defect in the other direction.
+// Empty on purpose: the seed script imports everything the bootstrap does.
+// If this ever grows, that means a module was added to the bootstrap and
+// forgotten in the standalone seeder — the same defect in the other
+// direction.
 const KNOWN_MISSING_FROM_SCRIPT: string[] = []
 
 describe('seed corpus coverage ratchet — instrumentation.ts vs seed-knowledge-assets.ts', () => {

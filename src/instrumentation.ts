@@ -387,13 +387,105 @@ async function bootstrapAssets() {
       // englishAdultBandBatch12.ts's own header for detail.
       const { ENGLISH_ADULT_BAND_BATCH_12 } =
         await import('./lib/teaching/assets/englishAdultBandBatch12')
+      // Corpus/writer unification, 2026-09-14 (§10.1). The 33 modules below
+      // were authored, in git, KG-validated, and imported by the standalone
+      // seed script (scripts/brain/seed-knowledge-assets.ts) — but never by
+      // this bootstrap, because nothing tied the two writers' import lists
+      // together. See src/tests/seedCorpusCoverageRatchet.test.ts for the
+      // regression guard this fix closes: 31 mathematics modules plus all of
+      // biology and computer_science, unreachable in production despite
+      // being fully authored. Same pattern as chemistry (2026-08-19) and
+      // physics band-gap/depth (2026-08-25/30) before it — this closes the
+      // whole class at once instead of the next incident-by-incident fix.
+      const { BIOLOGY_EXPLANATIONS, BIOLOGY_PROBES } =
+        await import('./lib/teaching/assets/biologySeedAssets')
+      const { CS_EXPLANATIONS, CS_PROBES } =
+        await import('./lib/teaching/assets/csSeedAssets')
+      const { MATHEMATICS_EXPLANATIONS, MATHEMATICS_PROBES } =
+        await import('./lib/teaching/assets/mathematicsSeedAssets')
+      const { MATHEMATICS_FOUNDATION_EXPLANATIONS, MATHEMATICS_FOUNDATION_PROBES } =
+        await import('./lib/teaching/assets/mathematicsFoundationAssets')
+      const { MATHEMATICS_ARITHMETIC_EXPLANATIONS, MATHEMATICS_ARITHMETIC_PROBES } =
+        await import('./lib/teaching/assets/mathematicsArithmeticFoundations')
+      const { MATHEMATICS_BATCH3_EXPLANATIONS, MATHEMATICS_BATCH3_PROBES } =
+        await import('./lib/teaching/assets/mathematicsBatch3Assets')
+      const { MATHEMATICS_GEOMETRY_EXPLANATIONS, MATHEMATICS_GEOMETRY_PROBES } =
+        await import('./lib/teaching/assets/mathematicsGeometryFoundations')
+      const { MATHEMATICS_FRACTION_EXPLANATIONS, MATHEMATICS_FRACTION_PROBES } =
+        await import('./lib/teaching/assets/mathematicsFractionDecimalAssets')
+      const { MATHEMATICS_PROPORTION_EXPLANATIONS, MATHEMATICS_PROPORTION_PROBES } =
+        await import('./lib/teaching/assets/mathematicsProportionProofAssets')
+      const { MATHEMATICS_ALGEBRA_VOCAB_EXPLANATIONS, MATHEMATICS_ALGEBRA_VOCAB_PROBES } =
+        await import('./lib/teaching/assets/mathematicsAlgebraVocabAssets')
+      const { MATHEMATICS_POWERS_VARIATION_EXPLANATIONS, MATHEMATICS_POWERS_VARIATION_PROBES } =
+        await import('./lib/teaching/assets/mathematicsPowersVariationAssets')
+      const { MATHEMATICS_SET_OPERATIONS_EXPLANATIONS, MATHEMATICS_SET_OPERATIONS_PROBES } =
+        await import('./lib/teaching/assets/mathematicsSetOperationsAssets')
+      const { MATHEMATICS_RELATIONS_NUMBERS_EXPLANATIONS, MATHEMATICS_RELATIONS_NUMBERS_PROBES } =
+        await import('./lib/teaching/assets/mathematicsRelationsNumbersAssets')
+      const { MATHEMATICS_ORDERS_PROOFS_EXPLANATIONS, MATHEMATICS_ORDERS_PROOFS_PROBES } =
+        await import('./lib/teaching/assets/mathematicsOrdersProofsAssets')
+      const { MATHEMATICS_LANGUAGE_STRATEGY_EXPLANATIONS, MATHEMATICS_LANGUAGE_STRATEGY_PROBES } =
+        await import('./lib/teaching/assets/mathematicsLanguageStrategyAssets')
+      const { MATHEMATICS_PROOF_MACHINERY_EXPLANATIONS, MATHEMATICS_PROOF_MACHINERY_PROBES } =
+        await import('./lib/teaching/assets/mathematicsProofMachineryAssets')
+      const { MATHEMATICS_QUANTIFIER_CRAFT_EXPLANATIONS, MATHEMATICS_QUANTIFIER_CRAFT_PROBES } =
+        await import('./lib/teaching/assets/mathematicsQuantifierCraftAssets')
+      const { MATHEMATICS_FOUNDATIONS_CLOSE_EXPLANATIONS, MATHEMATICS_FOUNDATIONS_CLOSE_PROBES } =
+        await import('./lib/teaching/assets/mathematicsFoundationsCloseAssets')
+      const { MATHEMATICS_NUMBER_SYSTEMS_EXPLANATIONS, MATHEMATICS_NUMBER_SYSTEMS_PROBES } =
+        await import('./lib/teaching/assets/mathematicsNumberSystemsCloseAssets')
+      const { MATHEMATICS_ALGORITHMS_PRECISION_EXPLANATIONS, MATHEMATICS_ALGORITHMS_PRECISION_PROBES } =
+        await import('./lib/teaching/assets/mathematicsAlgorithmsPrecisionAssets')
+      const { MATHEMATICS_ARITH_CLOSE_EXPLANATIONS, MATHEMATICS_ARITH_CLOSE_PROBES } =
+        await import('./lib/teaching/assets/mathematicsArithCloseAssets')
+      const { MATHEMATICS_MEASUREMENT_EXPLANATIONS, MATHEMATICS_MEASUREMENT_PROBES } =
+        await import('./lib/teaching/assets/mathematicsMeasurementAssets')
+      const { MATHEMATICS_COORDINATE_EXPLANATIONS, MATHEMATICS_COORDINATE_PROBES } =
+        await import('./lib/teaching/assets/mathematicsCoordinateAssets')
+      const { MATHEMATICS_NUMBER_THEORY_EXPLANATIONS, MATHEMATICS_NUMBER_THEORY_PROBES } =
+        await import('./lib/teaching/assets/mathematicsNumberTheoryAssets')
+      const { MATHEMATICS_TRIANGLE_TRANSFORM_EXPLANATIONS, MATHEMATICS_TRIANGLE_TRANSFORM_PROBES } =
+        await import('./lib/teaching/assets/mathematicsTriangleTransformAssets')
+      const { MATHEMATICS_DIVISIBILITY_MODULAR_EXPLANATIONS, MATHEMATICS_DIVISIBILITY_MODULAR_PROBES } =
+        await import('./lib/teaching/assets/mathematicsDivisibilityModularAssets')
+      const { MATHEMATICS_CRYPTO_NUMBER_EXPLANATIONS, MATHEMATICS_CRYPTO_NUMBER_PROBES } =
+        await import('./lib/teaching/assets/mathematicsCryptoNumberAssets')
+      const { MATHEMATICS_ANALYTIC_ALGEBRAIC_EXPLANATIONS, MATHEMATICS_ANALYTIC_ALGEBRAIC_PROBES } =
+        await import('./lib/teaching/assets/mathematicsAnalyticAlgebraicAssets')
+      const { MATHEMATICS_SOLIDS_POLYGONS_EXPLANATIONS, MATHEMATICS_SOLIDS_POLYGONS_PROBES } =
+        await import('./lib/teaching/assets/mathematicsSolidsPolygonsAssets')
+      const { MATHEMATICS_CIRCLES_TRANSFORM_EXPLANATIONS, MATHEMATICS_CIRCLES_TRANSFORM_PROBES } =
+        await import('./lib/teaching/assets/mathematicsCirclesTransformAssets')
+      const { MATHEMATICS_VECTORS_CONICS_EXPLANATIONS, MATHEMATICS_VECTORS_CONICS_PROBES } =
+        await import('./lib/teaching/assets/mathematicsVectorsConicsAssets')
+      const { MATHEMATICS_DIFF_GEOM_EXPLANATIONS, MATHEMATICS_DIFF_GEOM_PROBES } =
+        await import('./lib/teaching/assets/mathematicsDiffGeomAssets')
+      const { MATHEMATICS_BAND_GAP_EXPLANATIONS, MATHEMATICS_BAND_GAP_PROBES } =
+        await import('./lib/teaching/assets/mathematicsBandGapAssets')
       const { hashContent } = await import('./lib/teaching/assets/similarity')
       const { AssetFamily, AssetStatus, AuthorKind, ExplanationStyle, ProbeDifficulty } = await import('@prisma/client')
       // The ladder rungs a slug may carry, from the enum itself rather than a
       // hand-written list, so a new rung cannot silently escape the check.
       const PROBE_DIFFICULTIES = Object.values(ProbeDifficulty) as string[]
 
-      const ALL_EXPLANATIONS = [...SEED_EXPLANATIONS, ...AUTHORED_EXPLANATIONS, ...CHEMISTRY_EXPLANATIONS]
+      const ALL_EXPLANATIONS = [...SEED_EXPLANATIONS, ...AUTHORED_EXPLANATIONS, ...CHEMISTRY_EXPLANATIONS,
+        ...BIOLOGY_EXPLANATIONS, ...CS_EXPLANATIONS, ...MATHEMATICS_EXPLANATIONS,
+        ...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_ARITHMETIC_EXPLANATIONS,
+        ...MATHEMATICS_BATCH3_EXPLANATIONS, ...MATHEMATICS_GEOMETRY_EXPLANATIONS,
+        ...MATHEMATICS_FRACTION_EXPLANATIONS, ...MATHEMATICS_PROPORTION_EXPLANATIONS,
+        ...MATHEMATICS_ALGEBRA_VOCAB_EXPLANATIONS, ...MATHEMATICS_POWERS_VARIATION_EXPLANATIONS,
+        ...MATHEMATICS_SET_OPERATIONS_EXPLANATIONS, ...MATHEMATICS_RELATIONS_NUMBERS_EXPLANATIONS,
+        ...MATHEMATICS_ORDERS_PROOFS_EXPLANATIONS, ...MATHEMATICS_LANGUAGE_STRATEGY_EXPLANATIONS,
+        ...MATHEMATICS_PROOF_MACHINERY_EXPLANATIONS, ...MATHEMATICS_QUANTIFIER_CRAFT_EXPLANATIONS,
+        ...MATHEMATICS_FOUNDATIONS_CLOSE_EXPLANATIONS, ...MATHEMATICS_NUMBER_SYSTEMS_EXPLANATIONS,
+        ...MATHEMATICS_ALGORITHMS_PRECISION_EXPLANATIONS, ...MATHEMATICS_ARITH_CLOSE_EXPLANATIONS,
+        ...MATHEMATICS_MEASUREMENT_EXPLANATIONS, ...MATHEMATICS_COORDINATE_EXPLANATIONS,
+        ...MATHEMATICS_NUMBER_THEORY_EXPLANATIONS, ...MATHEMATICS_TRIANGLE_TRANSFORM_EXPLANATIONS,
+        ...MATHEMATICS_DIVISIBILITY_MODULAR_EXPLANATIONS, ...MATHEMATICS_CRYPTO_NUMBER_EXPLANATIONS,
+        ...MATHEMATICS_ANALYTIC_ALGEBRAIC_EXPLANATIONS, ...MATHEMATICS_SOLIDS_POLYGONS_EXPLANATIONS,
+        ...MATHEMATICS_CIRCLES_TRANSFORM_EXPLANATIONS, ...MATHEMATICS_VECTORS_CONICS_EXPLANATIONS,
+        ...MATHEMATICS_DIFF_GEOM_EXPLANATIONS, ...MATHEMATICS_BAND_GAP_EXPLANATIONS]
       const ALL_PROBES = [...SEED_PROBES, ...AUTHORED_PROBES, ...CHEMISTRY_PROBES, ...PHYSICS_BAND_GAP_PROBES,
         ...PHYSICS_DEPTH_PROBES, ...CHEMISTRY_DEPTH_PROBES, ...ENGLISH_BAND_GAP_PROBES,
         ...ENGLISH_PROBE_BATCH_1, ...ENGLISH_BATCH_1_DEPTH_4, ...ENGLISH_PROBE_BATCH_2,
@@ -404,7 +496,21 @@ async function bootstrapAssets() {
         ...ENGLISH_ADULT_BAND_BATCH_6, ...ENGLISH_ADULT_BAND_BATCH_7,
         ...ENGLISH_ADULT_BAND_BATCH_8, ...ENGLISH_ADULT_BAND_BATCH_9,
         ...ENGLISH_ADULT_BAND_BATCH_10, ...ENGLISH_ADULT_BAND_BATCH_11,
-        ...ENGLISH_ADULT_BAND_BATCH_12]
+        ...ENGLISH_ADULT_BAND_BATCH_12,
+        ...BIOLOGY_PROBES, ...CS_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES,
+        ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES,
+        ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES,
+        ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES,
+        ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES,
+        ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES,
+        ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES,
+        ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES,
+        ...MATHEMATICS_ARITH_CLOSE_PROBES, ...MATHEMATICS_MEASUREMENT_PROBES, ...MATHEMATICS_COORDINATE_PROBES,
+        ...MATHEMATICS_NUMBER_THEORY_PROBES, ...MATHEMATICS_TRIANGLE_TRANSFORM_PROBES,
+        ...MATHEMATICS_DIVISIBILITY_MODULAR_PROBES, ...MATHEMATICS_CRYPTO_NUMBER_PROBES,
+        ...MATHEMATICS_ANALYTIC_ALGEBRAIC_PROBES, ...MATHEMATICS_SOLIDS_POLYGONS_PROBES,
+        ...MATHEMATICS_CIRCLES_TRANSFORM_PROBES, ...MATHEMATICS_VECTORS_CONICS_PROBES,
+        ...MATHEMATICS_DIFF_GEOM_PROBES, ...MATHEMATICS_BAND_GAP_PROBES]
       // ADR 14 §13 (Item 6): ladder rungs get a difficulty segment; singleton
       // slots keep the identity they already have. One resolver drives BOTH
       // the pre-flight check and the write loop so they cannot disagree.
