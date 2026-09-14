@@ -56,38 +56,44 @@ by a person noticing.
 
 ## 2. The plan
 
-### 2.0 The adopted order — and why it is not the one I first proposed
+### 2.0 The adopted order — topic-agnostic architecture, not subject repair
 
-This document originally ranked **observability first**. §9 argues, correctly,
-that this optimised for the engineer rather than the learner, and that with
-**zero organic traffic** an instrumentation-first plan measures an empty
-stadium. The owner adopted the steel man's ordering on 2026-09-14:
+**Revised 2026-09-14 by the owner, superseding the order this section previously
+carried.** The instruction: *"We are not fixing subjects. We are fixing
+architecture which can work on any topic without defects."*
 
-| # | Step | From | Sessions |
+That is correct, and §10 measures why. Both prior orderings were wrong in the
+same way — one put the ENGINEER first (observability), the other put a SUBJECT
+first (maths wiring). Neither fixes the thing that keeps producing defects:
+**an invariant the engine requires of a topic, enforced nowhere central, and so
+rediscovered once per subject, by a person noticing.**
+
+| # | Step | Defect class it closes | Sessions |
 |---|---|---|---|
-| **1** | **Mathematics seeding wiring** | Item 3, first half | **1–2** |
-| **2** | **Minimal outcome instrumentation** — lesson closed y/n, and which decision stopped it. Nothing else. | Item 1, narrowed | **1–2** |
-| **3** | **Real learners** — put it in front of ~20, add one satisfaction question | Item 2, unblocked by step 3 itself | owner-led |
-| **4** | **Evidence-driven remediation** — real failures choose what comes next | — | as evidence dictates |
-| **—** | **DEFERRED: the four primitives (Item 4)** | Item 4 | 12–16, **not scheduled** |
+| **1** | **One corpus, one writer** | Authored content unreachable in production. Measured: **32 modules stranded** (§10.1) | **1–2** |
+| **2** | **Topic Readiness Contract** | Mastery unreachable / band gap / stale binding — **4 recorded recurrences** (§10.2) | **2–3** |
+| **3** | **Default-NO classifier discipline** | Detector false positives — one blocklist extended **12 times** (§10.3) | **2–3** |
+| **4** | **Minimal outcome instrumentation + real learners** | unmeasured behaviour | 1–2 + owner-led |
+| **—** | **DEFERRED: the four primitives (Item 4)** | turn-level architecture | 12–16, **not scheduled** |
 
-**Why maths wiring is now first:** it is the only step that changes what a
-learner experiences today. Maths lessons cannot close — 47 seeded (concept,
-band) pairs against 908 KG concepts — and the cause is a wiring defect, not
-missing content. See Item 3.
+**Every step is subject-agnostic by construction**, and each carries a
+structural guard that FAILS if a subject name appears in it — that guard is what
+stops the fix decaying back into per-subject files, which is how the current
+state was reached (five per-subject contract test files, a two-subject hardcoded
+`DEPTH_MODULES` list).
 
-**Why the migration is deferred:** §9 objection 5. Those 63 predicates and 60
-regexes each encode a real production failure. A clean interpreter does not
-inherit that knowledge; it re-learns it, on learners. Deferred until real
-traffic shows the guards are actually failing people.
+**Maths wiring does not disappear — it stops being a task.** It becomes the
+first OUTPUT of step 1: one corpus, both writers consume it, a module on disk
+that no corpus declares fails the build. Maths is then data, proven by a test,
+and biology and computer science are fixed by the same change rather than by two
+more campaigns.
 
-**What the two plans agree on:** a narrow outcome instrument, and harness
-discipline. That agreement is why step 2 survives at a reduced scope — enough
-to answer "did the lesson close and what stopped it", and no more.
+**Why the four primitives stay deferred:** §9.5, unchanged. They are turn-level
+architecture and they are real, but the defect class that has actually recurred
+is topic ADMISSION, not turn handling.
 
-The items below are the ANALYSIS and are preserved as written. Their original
-numbering is kept so existing references stay valid; the table above overrides
-their original priority.
+The items below are the earlier ANALYSIS, preserved with their original numbering
+so existing references stay valid. The table above overrides their priority.
 
 ### Item 1 — One turn record *(1–2 sessions)* — **ADOPTED AT REDUCED SCOPE, step 2**
 
@@ -396,3 +402,105 @@ The plan in §§1–8 is defensible engineering. §9's ordering is better produc
 judgement. The real reason the former was ranked first is that it is the one the
 author is confident he can execute — which is a fact about the author, not about
 the product.
+
+---
+
+## 10. The architectural defect class
+
+Added 2026-09-14, on the instruction *"We are not fixing subjects. We are fixing
+architecture which can work on any topic without defects."* Everything in this
+section was measured against `main` and production while writing it.
+
+**The class, stated once:** the teaching engine has requirements of a topic —
+that its content is reachable, that mastery is arithmetically attainable, that a
+learner's utterance is classified correctly. **Not one of them is enforced in a
+single place.** Each is enforced per-subject, by hand, AFTER a person notices a
+learner stalling. So every new subject silently arrives broken, and the same
+defect is discovered again under a new name.
+
+Three instances, each proven by recurrence rather than argued.
+
+### 10.1 Two writers, one corpus, no detector — *32 modules stranded*
+
+There are two paths that can write authored content to the database:
+
+| writer | content modules | can it run in production? |
+|---|---|---|
+| `scripts/brain/seed-knowledge-assets.ts` | **41** | **No.** Needs `DATABASE_URL`; no session has ever had it, and the Supabase MCP is a read-only transaction (`25006`) |
+| `src/instrumentation.ts` cold-start bootstrap | **7** | Yes — this is the only writer production has |
+
+Both lists are hand-maintained. Nothing compares them. Diffing them:
+
+**32 authored content modules can only be written by the writer that has never
+run.** All of `biologySeedAssets`, all of `csSeedAssets`, and 30 mathematics
+modules. The content is authored, committed, tested, and unreachable.
+
+This is why mathematics shows 47 seeded (concept, band) pairs against 908 KG
+concepts while a 6,030-asset corpus sits in git. **It is not a mathematics
+defect.** Mathematics is simply the largest victim of a missing invariant, and
+subject #7 will reproduce it exactly.
+
+**The fix is not "add the modules to the second list."** It is: ONE corpus
+declaration, consumed by both writers, plus a build failure for any asset module
+on disk that no corpus declares. Then the list cannot silently diverge again,
+and maths/biology/CS are fixed as a side effect rather than as three campaigns.
+
+### 10.2 Topic admission is unchecked — *4 recorded recurrences*
+
+`masteryReachability.ts` records, in its own header, that the identical defect
+was found four separate times:
+
+```
+2026-08-19  chemistry    0 of 186 concepts at contract
+2026-08-19  mathematics  5 (concept, band) pairs taught but never quizzable
+2026-08-30  physics      every pair at exactly 3 — one wrong answer ends mastery
+2026-08-31  english      214 of 216 pairs at exactly 2 gradeable probes
+```
+
+Its header also names the cause correctly: *"Four recurrences is not bad luck,
+it is a missing instrument."* The instrument it then built REPORTS at runtime,
+per lesson, per learner. It does not stop an inadmissible topic entering the
+serving path.
+
+What the repository grew instead is the per-subject shape this section exists to
+end — five contract test files (`chemistryAssetContract`, `englishAssetContractP1`,
+`mathematicsAssetContract`, `mathematicsBandContract`, `physicsBandContract`) and
+a corpus-depth test whose module list is the hardcoded literal
+`['physicsDepthSeedAssets.ts', 'chemistryDepthSeedAssets.ts']`. **A new subject
+is invisible to all six.**
+
+**The fix:** one total, subject-agnostic `assessTopicReadiness(topic)` that
+enumerates from the KG registry and either admits a topic or names which
+invariant it fails — gradeable pool ≥ contract per served band; an explanation at
+each served band; content reachable by the writer (10.1); grounding above the
+floor; identity resolvable. Enforced in CI over the whole corpus, and at runtime
+through the SAME function so the two cannot drift. Plus the structural guard: a
+test that fails if any readiness check names a subject.
+
+### 10.3 Default-YES classifiers — *one blocklist extended 12 times*
+
+`DISCOURSE_NOUNS` in `requestedTopic.ts` was extended **twelve times, once per
+production incident** — its own comments are a run of post-mortems. The same
+shape produced `genuineUnmappedAttempt` (one positive term, six negatives) and
+its successor incidents I1 → I4 → ENG-D02.
+
+The cause is structural, not carelessness: these classifiers answer YES by
+default and carry a finite exclusion list against an infinite space of ordinary
+prose. CLAUDE.md already named this "the exclusion-list trap" — twice — and the
+repo has already proven the fix works exactly once (`engagesPendingOptions`
+requires positive evidence and has produced no follow-on incident).
+
+**The fix:** apply the inversion the repo has already validated, to the
+classifiers whose incident history proves they need it, and add the guard that
+prevents a new blocklist being the answer next time.
+
+### 10.4 What this section deliberately does NOT claim
+
+- It does not claim these are the only architectural defects. §9.5's four
+  primitives are real; they are turn-level, and deferred on evidence, not denied.
+- It does not claim the fixes make teaching GOOD. They make *content missing* and
+  *utterance misread* into build failures instead of learner experiences. §5's
+  ~40% stands unchanged.
+- Steps 1–3 are ~5–8 sessions total. That is the cost of making the platform
+  topic-agnostic — materially less than the 12–16 deferred migration, and it is
+  the part that pays off on every subject added afterwards.
