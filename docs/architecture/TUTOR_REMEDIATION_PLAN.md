@@ -504,3 +504,112 @@ prevents a new blocklist being the answer next time.
 - Steps 1–3 are ~5–8 sessions total. That is the cost of making the platform
   topic-agnostic — materially less than the 12–16 deferred migration, and it is
   the part that pays off on every subject added afterwards.
+
+---
+
+## 11. The case against §10 — the steel man of the steel man
+
+Written 2026-09-14 on request, immediately after §10 was committed. §9 was the
+counter-case to §§1–8; this is the counter-case to §10. **Read §11.10 before
+acting on any of it** — a document that keeps arguing with itself has its own
+failure mode.
+
+### 11.1 Three reversals in one session, each confident
+`observability-first` → `maths-first` → `architecture-first`. Every reversal
+followed ONE sentence from the owner, and each time this document produced fresh
+measured evidence supporting the new frame. §10.1's 32-module finding is real —
+but it was found BECAUSE of the reframing, not before it. It was equally
+findable an hour earlier and nobody looked. **A plan's measurements are only as
+good as the question its author happens to be asked.** Treat every priority
+ordering in this file as lower-confidence than the measurements inside it.
+
+### 11.2 Generality for a subject #7 that does not exist
+Six subjects, approximately zero organic learners. "Works on any topic without
+defects" is a property with no customer today; all three §10 fixes pay off when
+subjects are ADDED, and none is scheduled. The cheaper route to "any topic
+works" may be to make ONE topic work for ONE real learner and let that expose
+which invariants actually matter.
+
+### 11.3 One corpus / one writer has a real cost — measured, and smaller than it looks
+The bootstrap already evaluates **5.60 MB** of seed source on every cold start,
+AWAITED, before its guard can return. The 32 stranded modules add **1.72 MB** —
+**+31%**, not the multiple that would be implied by "32 modules". Reported at
+measured size rather than rhetorical size. Edge-bundle risk is already mitigated
+(`instrumentation.edge.ts`); the pool-exhaustion incident was concurrency, not
+corpus size. **The real indictment is procedural:** §10 proposed changing the one
+production writer without first checking its documented budget, deadline and
+incident history — the exact failure §10 claims to fix.
+
+### 11.4 The readiness GATE is what `masteryReachability` deliberately refused to build
+§10.2 cites that module's header ("four recurrences is not bad luck, it is a
+missing instrument") while ignoring what the same header says three paragraphs
+earlier:
+
+> It REPORTS. It does not refuse to open the lesson… Refusing to teach a concept
+> because it cannot be certified would withhold real teaching from a learner over
+> a content-inventory problem, which is worse than the defect.
+
+That is a considered decision made with the evidence in hand, and §10.2 overturns
+it without engaging it. **Admission gates fail closed:** the failure mode is a
+learner who gets NO lesson instead of an uncertifiable one.
+
+### 11.5 Corpus-wide CI turns `main` red until content exists
+English 333/335, mathematics 0/47. Switching the contract on corpus-wide leaves
+the build red until 58 probes are authored. Permanently-red gates get disabled,
+and a disabled gate is worse than five green per-subject files. Those five files
+may not be sprawl — they may be correct incremental staging, each subject
+gaining its contract test when it becomes ready.
+
+### 11.6 "Twelve extensions" may be a system that works
+Twelve incidents, twelve cheap shipped fixes, is a functioning maintenance loop,
+not a pathology. The evidence that inversion is better is `engagesPendingOptions`
+— **one** instance, weeks old, with no follow-on incident YET. §10.3 generalises
+from n=1 against a pattern with n=12.
+
+### 11.7 The plan chose the defects it could count
+Stranded modules, blocklist extensions and contract recurrences are countable —
+the last only because someone wrote them down. "Lessons that taught something
+confusing" leaves no trace and is therefore absent from the plan entirely. The
+plan optimises for what shows up in git.
+
+### 11.8 It fixes guard-sprawl with more guards
+§1's own diagnosis is 63 detector-shaped predicates and 60 regexes,
+"individually right, collectively unanalysable." §10's three fixes are a corpus
+guard, an admission guard and a classifier guard, plus three META-guards that
+fail on a subject name. That is the same move one level up — and the level above
+that is where the next session will stand.
+
+### 11.9 The cost is understated for the third time
+30–40 → 18–24 → 5–8 sessions, in one session. Step 1 must resolve the cold-start
+budget (11.3). Step 2 needs an OWNER POLICY decision — what happens to a blocked
+topic — which is not an engineering question. Step 3 touches the hot path.
+
+### 11.10 What survives, and the instruction to stop arguing
+
+- **§10.1 survives outright**, and is the one item defensible under any framing:
+  32 modules of authored, committed, tested content that no writer reachable
+  from production can write. Indefensible whatever the priority order, whatever
+  the traffic, whoever is right about subject #7. It is also the cheapest item
+  and the only one that changes what a learner can be taught **today**.
+- **§10.2 survives only as a REPORT, never a gate** — which is what
+  `masteryReachability` already decided, correctly. The genuine gap is that its
+  report fires per-learner at lesson time instead of once, corpus-wide, where
+  someone can act on it. Build a dashboard, not an admission gate.
+- **§10.3 does not survive at priority** on this evidence.
+- **The meta-guards survive** as the cheapest part of all three, and are the
+  only answer to 11.8.
+
+**REVISED SCOPE IF THESE OBJECTIONS ARE TAKEN SERIOUSLY:**
+
+> one corpus / one writer (measured, bounded, +31% cold start)
+> → corpus-wide readiness REPORT, not gate
+> → **stop.** Get a learner. Let them choose what comes next.
+
+**Roughly two sessions, not five to eight.** The remainder was a preference for
+generality wearing the costume of evidence.
+
+**And the standing instruction this section ends on:** §9 argued with §§1–8,
+§11 argues with §10. A document that produces a new counter-case on every
+request is no longer reducing uncertainty — it is consuming the budget that
+should be building. **Do not add a §12.** Build §10.1, publish the §10.2 report,
+and let a real learner adjudicate the rest.
