@@ -2142,6 +2142,22 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     let evidenceWorkedExampleFirstHoisted = false
     let evidenceAutonomyHoisted = false
     let navigationRequestHoisted = false
+    // ADVERSARIAL-STUDY FIX (phys.mech.conservation-of-momentum, 2026-09-13
+    // real-account study): the prior turn asked a prose-only MCQ (no tag, so
+    // no server answer key). `buildProseMcqReplyDirective` below tells the
+    // model to restate it WITH the tag — but that instruction can only reach
+    // an LLM call. Explanation Memory (`assembleLesson`, ~line 4139) can
+    // answer the WHOLE turn from a stored asset with `llmCallCount: 0`, and
+    // when it does, it serves a DIFFERENT explanation and a brand-new MCQ,
+    // never engaging with the answer the learner just gave. No false credit
+    // is written (there is no SIGNAL to suppress — memory-served text has
+    // none), but the learner's attempt is silently abandoned rather than
+    // resolved. Set alongside `priorProse` below; consumed at the
+    // Explanation Memory gate to force the LLM path for exactly this one
+    // turn, matching the existing `firstLessonActiveHoisted`/
+    // `recoveryKeyHoisted` exclusions that already skip memory serving when
+    // a stored asset would be the wrong thing to serve this turn.
+    let priorTurnUnresolvedProseMcqHoisted = false
     // The learner's turn was a bare acknowledgement — a receipt ("got it") or
     // a forward request ("go", "continue", "ready"). Computed ONCE from
     // isLowSignalAcknowledgement() and reused by the turn directive and by
@@ -2236,7 +2252,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           const priorProse = !pendingMcqPresent
             && !!priorAsstForProseCheck
             && hasProseMultipleChoice((priorAsstForProseCheck as { content?: string }).content ?? '')
-          if (priorProse) systemPrompt += buildProseMcqReplyDirective(true)
+          if (priorProse) {
+            systemPrompt += buildProseMcqReplyDirective(true)
+            priorTurnUnresolvedProseMcqHoisted = true
+          }
         } catch { /* non-fatal — falls through with no directive appended */ }
 
         // THE MIRROR: the tutor handed the learner their own sentence back and
@@ -4111,6 +4130,34 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         memoryFallbackReason = 'First lesson'
       } else if (recoveryKeyHoisted) {
         memoryFallbackReason = 'Recovery mode'
+      } else if (priorTurnUnresolvedProseMcqHoisted) {
+        // See `priorTurnUnresolvedProseMcqHoisted` above: a stored asset would
+        // silently abandon the learner's attempt at the prior turn's untagged
+        // prose MCQ. Force the LLM path so `buildProseMcqReplyDirective`
+        // (already in the prompt this turn) has a generation to act on.
+        //
+        // `memoryState` is STILL computed here, unlike the first-lesson/
+        // recovery exclusions above: it feeds the deterministic mastery GATE
+        // (`gateEligible && memoryState` below selects an authored probe
+        // independently of Explanation Memory), and that gate is exactly the
+        // mechanism that can turn this turn into a real, gradeable, tagged
+        // MCQ instead of another ungradeable prose one. Only `assembleLesson`
+        // — the canned-explanation-plus-MCQ substitute for the whole turn —
+        // is skipped.
+        memoryFallbackReason = 'Prior turn asked an unresolved prose MCQ'
+        try {
+          memoryState = buildStudentState({
+            conceptId: resolvedConceptId,
+            subjectSlug: learnSession.subject.slug,
+            teachingLanguage: teachingLang,
+            grade: profile?.grade,
+            currentLevel: profile?.currentLevel,
+            targetLevel: profile?.targetLevel,
+            userMessage: message,
+          })
+        } catch (err) {
+          console.warn('[learn/chat] buildStudentState failed (prose-MCQ exclusion path):', err)
+        }
       } else {
         try {
           memoryState = buildStudentState({
@@ -5666,6 +5713,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           : memoryFallbackReason === 'No concept' ? 'no_concept'
           : memoryFallbackReason === 'First lesson' ? 'first_lesson'
           : memoryFallbackReason === 'Recovery mode' ? 'recovery_mode'
+          : memoryFallbackReason === 'Prior turn asked an unresolved prose MCQ' ? 'unresolved_prose_mcq'
           : memoryFallbackReason === 'No asset' ? 'no_asset'
           : memoryFallbackReason === 'Already served this concept' ? 'already_served'
           : memoryFallbackReason === 'Confidence failed' ? 'confidence_failed'
@@ -7729,7 +7777,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // Fail-closed: a null state never authorizes.
       if (conversationStateHoisted) {
         try {
-          const { advanceConversationState, repliesWithQuestion, isPriorKnowledgeProbe } = await import('@/lib/teaching/conversationState')
+          const { advanceConversationState, readConversationState: readConversationStateForLadder, repliesWithQuestion, isPriorKnowledgeProbe } = await import('@/lib/teaching/conversationState')
           const { isDontKnowSignal } = await import('@/lib/teaching/recoveryGuard')
           const { enforceStance, claimsCompletionInProse } = await import('@/lib/teaching/stanceEnforcement')
           const { isDegradedProvider } = await import('@/lib/eos-runtime/degradedMode')
@@ -7980,51 +8028,95 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // conversationStateAfterTurnHoisted is null, so skipping would have
           // been silently undone there. Paused means paused — no phase
           // advance, no mastery credit, no counters moved.
-          conversationStateAfterTurnHoisted = excursionActiveHoisted
+          //
+          // ISS-13 — THE LADDER ITSELF HAD NO REDERIVER.
+          //
+          // Every other accumulative snapshot field folded in this route
+          // (teachingHistory, capabilities, progressionMetrics, ...) has a
+          // `snapshotRederivers.push` entry that re-applies THIS turn's
+          // contribution onto the fresh row when `writeSnapshotDelta` hits an
+          // optimistic-concurrency conflict and retries once (see the ISS-13
+          // comment at the write site below). `conversationState` — the
+          // field holding `phase`, `correctAtCheck`/`correctAtPractice`, and
+          // the STRICT `verifiedCorrectAtCheck`/`verifiedCorrectAtPractice`
+          // counters `masteryVerifiedStrict` certifies mastery from — had
+          // none. On a conflict the retry discarded this turn's fold
+          // entirely and kept whatever the fresh row already held, while the
+          // CLIENT still received this turn's in-memory (un-persisted)
+          // counters in its response payload, showing progress that the
+          // database never recorded. A learner could answer every graded
+          // check/practice item correctly for an entire lesson and still
+          // have the final close read the DB's stale, lower counters and
+          // report "wasn't able to confirm it with one of our reviewed
+          // check questions" — the exact shape measured in a real-account
+          // adversarial study (2 of 5 physics lessons, both with a
+          // 100%-correct answer record). Same root cause and same fix
+          // pattern as the already-fixed C7 teachingHistory rederiver
+          // (2026-09-02) — this field was simply missed in every ISS-13 pass
+          // since, because a version conflict on the PIVOTAL turn (the one
+          // that pushes a verified counter past its threshold) is required
+          // to observe it, and that is intermittent by nature.
+          //
+          // The evidence object is named so the rederiver below can replay
+          // the identical fold — `advanceConversationState` is pure, so
+          // re-running it against the fresh row with the same evidence
+          // reproduces exactly what this turn was always supposed to record,
+          // never inventing or duplicating a credit.
+          const turnEvidenceForLadder: import('@/lib/teaching/conversationState').TurnEvidence = {
+            askedQuestion: askedQuestionThisTurn,
+            // PHASE 7N-1(ii): only the engine's OWN asks spend the
+            // anti-interrogation budget. `evidenceMoveHoisted` is the move
+            // the rest of the turn was built from — this reads it, never
+            // sets it. When the model volunteers a question on a 'teach'
+            // turn, the budget holds instead of being spent on output the
+            // engine did not choose. See advanceConversationState's fold.
+            questionSanctioned: evidenceMoveHoisted === 'ask',
+            diagnosticStalled: diagnosticStalledThisTurn(priorStagnantTurnsHoisted),
+            signalCorrect: teachingSignal?.correctness ?? null,
+            recoveryFired: recoveryKeyHoisted !== null,
+            learnerRequest: learnerRequestHoisted,
+            misconceptionDetected: teachingSignal?.phrase !== undefined,
+            isPriorKnowledgeProbe: isPriorKnowledgeProbe(cleanText),
+            strategyUsed: selectedStrategyHoisted ?? undefined,
+            signalConfidence: teachingSignal?.confidence as 'high' | 'medium' | 'low' | undefined,
+            dontKnowSignal: isDontKnowSignal(recoveryKeyHoisted),
+            learnerIssuedDirective: recoveryKeyHoisted === 'too_many_questions',
+            signalVerificationStatus: signalVerificationStatusHoisted,
+            // Thread 1: positive server-grade provenance — the ONLY thing that
+            // lets this turn bank a VERIFIED mastery credit. False on every
+            // ungraded prose turn, so a self-report cannot certify mastery.
+            serverGraded: gradedAgainstServerKeyHoisted,
+            // Counted, never credited — see the downgrade above.
+            unauthoredKey: unauthoredKeyGradeHoisted,
+            parityViolation: parityViolationThisTurn,
+            // RS P-3: an outage template taught nothing, so it must not be
+            // folded as a give. See TurnEvidence.degradedTurn.
+            degradedTurn: isDegradedProvider(provider),
+            // The server's own decided move, not a guess from prose. A turn
+            // that taught AND ended on a question is still a give; treating
+            // it as "taught nothing" is what froze the ladder at DEMONSTRATE.
+            deliveredTeaching: evidenceMoveHoisted === 'teach' || evidenceMoveHoisted === 'show',
+            // Advances the delivery phases only (OBSERVE→DEMONSTRATE→GUIDE→
+            // CHECK); the mastery gates still require a real answer.
+            acknowledgement: lowSignalAckHoisted,
+            // PHASE 5 (Case D): folds into fillerRepairStreak.
+            fillerTurnDetected: fillerDetectedHoisted,
+            // FACTUAL CONTENT INTEGRITY: see V-CHALLENGE above and
+            // masteryGate.ts's teachingIntegrityUncertain.
+            teachingClaimUnresolved: teachingIntegrityFellThroughHoisted,
+          }
+          const excursionFrozeLadderThisTurn = excursionActiveHoisted
+          const ladderConceptIdForRederive = conversationStateHoisted.conceptId
+          conversationStateAfterTurnHoisted = excursionFrozeLadderThisTurn
             ? conversationStateHoisted
-            : advanceConversationState(conversationStateHoisted, {
-              askedQuestion: askedQuestionThisTurn,
-              // PHASE 7N-1(ii): only the engine's OWN asks spend the
-              // anti-interrogation budget. `evidenceMoveHoisted` is the move
-              // the rest of the turn was built from — this reads it, never
-              // sets it. When the model volunteers a question on a 'teach'
-              // turn, the budget holds instead of being spent on output the
-              // engine did not choose. See advanceConversationState's fold.
-              questionSanctioned: evidenceMoveHoisted === 'ask',
-              diagnosticStalled: diagnosticStalledThisTurn(priorStagnantTurnsHoisted),
-              signalCorrect: teachingSignal?.correctness ?? null,
-              recoveryFired: recoveryKeyHoisted !== null,
-              learnerRequest: learnerRequestHoisted,
-              misconceptionDetected: teachingSignal?.phrase !== undefined,
-              isPriorKnowledgeProbe: isPriorKnowledgeProbe(cleanText),
-              strategyUsed: selectedStrategyHoisted ?? undefined,
-              signalConfidence: teachingSignal?.confidence as 'high' | 'medium' | 'low' | undefined,
-              dontKnowSignal: isDontKnowSignal(recoveryKeyHoisted),
-              learnerIssuedDirective: recoveryKeyHoisted === 'too_many_questions',
-              signalVerificationStatus: signalVerificationStatusHoisted,
-              // Thread 1: positive server-grade provenance — the ONLY thing that
-              // lets this turn bank a VERIFIED mastery credit. False on every
-              // ungraded prose turn, so a self-report cannot certify mastery.
-              serverGraded: gradedAgainstServerKeyHoisted,
-              // Counted, never credited — see the downgrade above.
-              unauthoredKey: unauthoredKeyGradeHoisted,
-              parityViolation: parityViolationThisTurn,
-              // RS P-3: an outage template taught nothing, so it must not be
-              // folded as a give. See TurnEvidence.degradedTurn.
-              degradedTurn: isDegradedProvider(provider),
-              // The server's own decided move, not a guess from prose. A turn
-              // that taught AND ended on a question is still a give; treating
-              // it as "taught nothing" is what froze the ladder at DEMONSTRATE.
-              deliveredTeaching: evidenceMoveHoisted === 'teach' || evidenceMoveHoisted === 'show',
-              // Advances the delivery phases only (OBSERVE→DEMONSTRATE→GUIDE→
-              // CHECK); the mastery gates still require a real answer.
-              acknowledgement: lowSignalAckHoisted,
-              // PHASE 5 (Case D): folds into fillerRepairStreak.
-              fillerTurnDetected: fillerDetectedHoisted,
-              // FACTUAL CONTENT INTEGRITY: see V-CHALLENGE above and
-              // masteryGate.ts's teachingIntegrityUncertain.
-              teachingClaimUnresolved: teachingIntegrityFellThroughHoisted,
-            })
+            : advanceConversationState(conversationStateHoisted, turnEvidenceForLadder)
+          snapshotRederivers.push((fresh) => {
+            const freshLadderBase = readConversationStateForLadder(fresh.conversationState, ladderConceptIdForRederive)
+            const rederivedLadder = excursionFrozeLadderThisTurn
+              ? freshLadderBase
+              : advanceConversationState(freshLadderBase, turnEvidenceForLadder)
+            return { conversationState: rederivedLadder }
+          })
 
           // Loop 2: advance narrative state with this turn's evidence
           if (narrativeStateHoisted) {
@@ -9629,10 +9721,28 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 assetId: pendingMcqHoisted?.assetId ?? null,
               }))
             }
-            conversationStateUpdate.pendingMcq = writePendingQuestion(
+            const pendingMcqValueThisTurn = writePendingQuestion(
               releasePending ? null : served,
               lessonKeyThisTurnHoisted,
             )
+            conversationStateUpdate.pendingMcq = pendingMcqValueThisTurn
+            // ISS-13 — `pendingMcq` had no rederiver either, and unlike
+            // `conversationState` this field does not even need a re-fold
+            // against the fresh row: `served` was already fully decided from
+            // THIS turn's own facts (what the gate/model attached, whether
+            // THIS turn's answer graded the prior pending question) — none
+            // of which changes if a concurrent write is discovered. Without
+            // this, a version conflict on the exact turn that GRADES a
+            // pending probe correctly (clearing it, served=null) reverted
+            // the persisted pendingMcq to its pre-turn value — the same,
+            // already-answered question — so the NEXT turn read it back as
+            // still pending and re-attached it. MEASURED (real-account
+            // adversarial study, phys.mech.conservation-of-momentum): the
+            // identical "Two cars of equal mass 1200 kg..." probe was
+            // correctly graded once, then re-served twice more with no new
+            // grading occurring, before an unrelated learner utterance
+            // finally moved the gate to a fresh probe.
+            snapshotRederivers.push(() => ({ pendingMcq: pendingMcqValueThisTurn }))
           }
           // P6.5: fold a CLOSED concept into the lesson attempt — the single
           // owner of lesson-scoped outcomes. A concept closes exactly two ways
@@ -9876,37 +9986,50 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           if (conversationStateAfterTurnHoisted) {
             conversationStateUpdate.conversationState = conversationStateAfterTurnHoisted
           } else if (conversationStateHoisted) {
-            const { advanceConversationState, repliesWithQuestion, isPriorKnowledgeProbe } = await import('@/lib/teaching/conversationState')
+            const { advanceConversationState, readConversationState: readConversationStateForLadderFallback, repliesWithQuestion, isPriorKnowledgeProbe } = await import('@/lib/teaching/conversationState')
             const { isDontKnowSignal } = await import('@/lib/teaching/recoveryGuard')
             const { isDegradedProvider } = await import('@/lib/eos-runtime/degradedMode')
             const fallbackAskedQ = repliesWithQuestion(cleanText)
+            // Same ISS-13 gap as the primary fold above, same fix: this branch
+            // only runs when the primary fold's own try/catch swallowed an
+            // error, but it writes the identical accumulative field
+            // (conversationState) and was equally unprotected against a
+            // concurrent-write retry silently dropping it.
+            const fallbackTurnEvidence: import('@/lib/teaching/conversationState').TurnEvidence = {
+              askedQuestion: fallbackAskedQ,
+              signalCorrect: teachingSignal?.correctness ?? null,
+              recoveryFired: recoveryKeyHoisted !== null,
+              learnerRequest: learnerRequestHoisted,
+              isPriorKnowledgeProbe: isPriorKnowledgeProbe(cleanText),
+              strategyUsed: selectedStrategyHoisted ?? undefined,
+              signalConfidence: teachingSignal?.confidence as 'high' | 'medium' | 'low' | undefined,
+              dontKnowSignal: isDontKnowSignal(recoveryKeyHoisted),
+              learnerIssuedDirective: recoveryKeyHoisted === 'too_many_questions',
+              signalVerificationStatus: signalVerificationStatusHoisted,
+              // Thread 1: positive server-grade provenance (see the primary
+              // fold above). Same source, so both folds agree on whether this
+              // turn may bank a verified mastery credit.
+              serverGraded: gradedAgainstServerKeyHoisted,
+              parityViolation: !!(evidenceMoveHoisted === 'ask' && !fallbackAskedQ),
+              // Same guard as the upstream fold — the two must not disagree
+              // about whether an outage template taught anything.
+              degradedTurn: isDegradedProvider(provider),
+              deliveredTeaching: evidenceMoveHoisted === 'teach' || evidenceMoveHoisted === 'show',
+              acknowledgement: lowSignalAckHoisted,
+              fillerTurnDetected: fillerDetectedHoisted,
+              // Same source as the upstream fold — see V-CHALLENGE above.
+              teachingClaimUnresolved: teachingIntegrityFellThroughHoisted,
+            }
+            const fallbackLadderConceptId = conversationStateHoisted.conceptId
             Object.assign(conversationStateUpdate, {
-              conversationState: advanceConversationState(conversationStateHoisted, {
-                askedQuestion: fallbackAskedQ,
-                signalCorrect: teachingSignal?.correctness ?? null,
-                recoveryFired: recoveryKeyHoisted !== null,
-                learnerRequest: learnerRequestHoisted,
-                isPriorKnowledgeProbe: isPriorKnowledgeProbe(cleanText),
-                strategyUsed: selectedStrategyHoisted ?? undefined,
-                signalConfidence: teachingSignal?.confidence as 'high' | 'medium' | 'low' | undefined,
-                dontKnowSignal: isDontKnowSignal(recoveryKeyHoisted),
-                learnerIssuedDirective: recoveryKeyHoisted === 'too_many_questions',
-                signalVerificationStatus: signalVerificationStatusHoisted,
-                // Thread 1: positive server-grade provenance (see the primary
-                // fold above). Same source, so both folds agree on whether this
-                // turn may bank a verified mastery credit.
-                serverGraded: gradedAgainstServerKeyHoisted,
-                parityViolation: !!(evidenceMoveHoisted === 'ask' && !fallbackAskedQ),
-                // Same guard as the upstream fold — the two must not disagree
-                // about whether an outage template taught anything.
-                degradedTurn: isDegradedProvider(provider),
-                deliveredTeaching: evidenceMoveHoisted === 'teach' || evidenceMoveHoisted === 'show',
-                acknowledgement: lowSignalAckHoisted,
-                fillerTurnDetected: fillerDetectedHoisted,
-                // Same source as the upstream fold — see V-CHALLENGE above.
-                teachingClaimUnresolved: teachingIntegrityFellThroughHoisted,
-              }),
+              conversationState: advanceConversationState(conversationStateHoisted, fallbackTurnEvidence),
             })
+            snapshotRederivers.push((fresh) => ({
+              conversationState: advanceConversationState(
+                readConversationStateForLadderFallback(fresh.conversationState, fallbackLadderConceptId),
+                fallbackTurnEvidence,
+              ),
+            }))
           }
 
           // S2 — fold this turn's evidence into the objective ledger, using

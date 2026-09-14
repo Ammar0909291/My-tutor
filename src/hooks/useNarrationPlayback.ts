@@ -86,7 +86,7 @@ export function useNarrationPlayback(opts: UseNarrationPlaybackOptions): UseNarr
   // without this, that highlight would stay lit forever after narration
   // finishes, since nothing else would ever tell the manager playback ended.
   const buildEngine = useCallback((fromIndex: number, notify: { onEnded: () => void; onError: () => void }): NarrationEngine => {
-    const onWordStart = (segmentIndex: number, wordIndex: number) => setState((s) => playing(s, segmentIndex, wordIndex))
+    const onWordStart = (segmentIndex: number, wordIndex: number | null) => setState((s) => playing(s, segmentIndex, wordIndex))
     const onEnded = () => { setState(completed(segments.length)); notify.onEnded() }
     const onError = () => { setState(errored()); notify.onError() }
     if (SERVER_TTS_LANGS.includes(lang)) {

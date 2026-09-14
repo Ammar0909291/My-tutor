@@ -31,13 +31,38 @@ describe('LessonScreen.tsx is wired to the platform-wide narration layer', () =>
     expect(LESSON_SCREEN).toContain("import { NarratedPlaybackControls } from '@/components/narration/NarratedPlaybackControls'")
   })
 
-  it('wraps each tutor message in TutorNarratedMessage, passing the message id, its real rendered text, and the live teaching language/voice/speed/country — not hardcoded or subject-specific values', () => {
+  it('wraps each tutor message in TutorNarratedMessage, passing the message id, the COMPLETE-message narration text (not the Read More-collapsed display text), and the live teaching language/voice/speed/country — not hardcoded or subject-specific values', () => {
+    // 2026-09-13: `text` is `narrationSourceText`, NOT `displayText` —
+    // VISUAL COLLAPSE STATE ≠ NARRATION CONTENT SOURCE (narratedMessageText.ts).
+    // `displayText` respects the Read More collapse and is what MessageContent
+    // renders while IDLE (still asserted below); narration must always speak
+    // the whole message regardless of that collapse, so it gets its own,
+    // always-complete source string.
     const block = LESSON_SCREEN.slice(LESSON_SCREEN.indexOf('<TutorNarratedMessage'), LESSON_SCREEN.indexOf('</TutorNarratedMessage>'))
-    expect(block).toContain('id={msg.id}')
-    expect(block).toContain('text={displayText}')
-    expect(block).toContain('lang={teachingLanguage}')
-    expect(block).toContain('voiceType={voiceType}')
-    expect(block).toContain('country={country}')
+    // Scoped to the OPENING TAG's own props only — the child render-prop
+    // below legitimately still passes `displayText` to `MessageContent` for
+    // the IDLE visual branch (asserted separately below); this checks that
+    // TutorNarratedMessage's own `text` prop specifically is not it.
+    const openingTag = block.slice(0, block.indexOf('>') + 1)
+    expect(openingTag).toContain('id={msg.id}')
+    expect(openingTag).toContain('text={narrationSourceText}')
+    expect(openingTag).not.toContain('text={displayText}')
+    expect(openingTag).toContain('lang={teachingLanguage}')
+    expect(openingTag).toContain('voiceType={voiceType}')
+    expect(openingTag).toContain('country={country}')
+  })
+
+  it('narrationSourceText is derived from the narratedMessageText module\'s narrationText(), always from the COMPLETE cached message — never truncated to the Read More preview', () => {
+    expect(LESSON_SCREEN).toContain("import { displayText as deriveDisplayText, narrationText as deriveNarrationText } from '@/lib/learn/narratedMessageText'")
+    expect(LESSON_SCREEN).toContain('const narrationSourceText = cached')
+    expect(LESSON_SCREEN).toContain('? deriveNarrationText(cached, familiarityLine)')
+    // The bug this closes: narration text must never be built from
+    // `cached.preview` (the truncated Read More preview) — only `full`.
+    const narrationBlock = LESSON_SCREEN.slice(
+      LESSON_SCREEN.indexOf('const narrationSourceText = cached'),
+      LESSON_SCREEN.indexOf('const narrationSourceText = cached') + 200,
+    )
+    expect(narrationBlock).not.toContain('cached.preview')
   })
 
   it('renders plain MessageContent — completely unchanged from before this feature — while narration status is IDLE (never played)', () => {
@@ -197,21 +222,38 @@ describe('word-level highlighting is wired end to end through the hook and both 
   })
 
   it('both engines report through the shared onWordStart(segmentIndex, wordIndex) callback — no onSegmentStart left anywhere', () => {
-    expect(BROWSER_ENGINE).toContain('onWordStart: (segmentIndex: number, wordIndex: number) => void')
+    expect(BROWSER_ENGINE).toContain('onWordStart: (segmentIndex: number, wordIndex: number | null) => void')
     expect(BROWSER_ENGINE).not.toContain('onSegmentStart')
     expect(SERVER_ENGINE).not.toContain('onSegmentStart')
   })
 
-  it('the browser engine wires a real onboundary handler (not a guessed timer) to drive word advancement', () => {
-    expect(BROWSER_ENGINE).toContain('utter.onboundary')
-    expect(BROWSER_ENGINE).toContain('spokenCharIndexToWordIndex')
-    expect(BROWSER_ENGINE).not.toMatch(/setInterval\([^)]*\/\/\s*word/i)
+  it('the browser engine does NOT consult onboundary for display — onstart/onend are the only real, unconditional events it trusts (2026-09-13 architecture)', () => {
+    // "onboundary" itself still appears in this file's own doc comments,
+    // explaining WHY it is no longer used — that is intentional honest
+    // documentation, not live code. What must be genuinely absent is the
+    // ACTIVE wiring: an assignment to `utter.onboundary`.
+    expect(BROWSER_ENGINE).not.toMatch(/utter\.onboundary\s*=/)
+    expect(BROWSER_ENGINE).not.toContain('spokenCharIndexToWordIndex')
+    expect(BROWSER_ENGINE).not.toContain('pacingGuard')
+    expect(BROWSER_ENGINE).toContain('utter.onstart = () => { if (!disposed) callbacks.onWordStart(index, null) }')
   })
 
-  it('the server engine derives word position from buildWordTimeWindows over the real audio.currentTime, not a fixed ms-per-word guess', () => {
+  it('the browser engine no longer imports or invents any timing correction (no clock, no held-back delay)', () => {
+    expect(BROWSER_ENGINE).not.toMatch(/setInterval\([^)]*\/\/\s*word/i)
+    expect(BROWSER_ENGINE).not.toContain('now?: () => number')
+    // The concrete pacing-guard API surface (not merely the word "median" —
+    // the file's own header legitimately documents, as history, that a
+    // median-gap heuristic was tried and reverted; banning the word itself
+    // would penalize that honest documentation rather than checking for
+    // live code).
+    expect(BROWSER_ENGINE).not.toMatch(/remainingHoldMs|recentGapsMs|PACING_FRACTION|recordDisplayedAdvance/)
+  })
+
+  it('the server engine derives word position from buildWordTimeWindows over the real audio.currentTime, not a fixed ms-per-word guess, and no longer holds it back', () => {
     expect(SERVER_ENGINE).toContain('buildWordTimeWindows')
     expect(SERVER_ENGINE).toContain('audio.currentTime')
     expect(SERVER_ENGINE).not.toMatch(/msPerWord|millisecondsPerWord/i)
+    expect(SERVER_ENGINE).not.toContain('pacingGuard')
   })
 })
 

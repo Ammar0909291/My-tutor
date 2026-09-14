@@ -167,7 +167,12 @@ describe('5/6 — MCQ renders only as a floating Quick Check, never an ordinary 
     // against the new shape rather than dropped.
     expect(SRC).toMatch(/\{activeMcq && !isStreaming && !lessonCompletion && panelIsVisible\(quickCheckMode\) && \(/)
     const idx = SRC.indexOf('{activeMcq && !isStreaming && !lessonCompletion && panelIsVisible(quickCheckMode) && (')
-    const block = SRC.slice(idx, idx + 1200)
+    // 2026-09-13: the panel gained a drag handle (header row + pointer
+    // handlers + a doc comment explaining it) before the label — a fixed
+    // 1200-char window no longer reaches it. Widened; the window still ends
+    // well before the answer options, so this stays a check on the PANEL's
+    // own opening region, not a tautology over the whole component.
+    const block = SRC.slice(idx, idx + 3000)
     // The class is now conditionally combined with the minimized modifier;
     // the floating class itself is still what positions the panel.
     expect(block).toContain('styles.quickCheckFloating')

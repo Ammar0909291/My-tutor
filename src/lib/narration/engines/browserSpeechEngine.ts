@@ -6,52 +6,59 @@
  * per-message Play button does). It reuses the same building blocks
  * `speakText` (tts.ts) already uses — `rateForSegment`, `pauseBeforeSegment`,
  * `LANG_LOCALE`, `VOICE_SETTINGS` — so cadence and voice selection match the
- * platform's existing speech exactly. What it adds, that `speakText` does
- * not expose, is WORD-LEVEL position: a per-segment `onstart` boundary
- * (real, authoritative — the browser only fires it when that utterance
- * actually begins speaking, never a fake timer) for word 0, refined by the
- * browser's own `onboundary` event for every word after that, plus genuine
- * pause/resume via the Web Speech API's own `pause()`/`resume()`, which
- * preserve position — segment AND word — natively (resuming a paused
- * utterance continues firing its own boundary events for the remainder,
- * so nothing here has to re-derive where a resumed utterance is).
+ * platform's existing speech exactly.
  *
- * WORD BOUNDARY MAPPING: `onboundary`'s `charIndex` is a position in the
- * SPOKEN text (`utter.text` — post cleanTextForTTS), not the rendered text
- * on screen. `spokenCharIndexToWordIndex` (words.ts) converts that into a
- * spoken-text word index, then `mapProportionalIndex` maps it onto the
- * corresponding RENDERED word index — exact when the two word counts match
- * (the common case), a labeled estimate otherwise. Not every browser/voice
- * fires 'word'-granularity boundary events (some only fire 'sentence',
- * some fire none at all) — this engine does not special-case `event.name`;
- * it derives the word index generically from `charIndex` either way, so a
- * coarser boundary signal just means fewer word advances within that
- * segment (never worse than the old sentence-level highlighting, since
- * `onstart` already guarantees word 0 highlights the moment the segment
- * begins).
+ * ARCHITECTURE, AND WHY (2026-09-13 redesign — supersedes two prior attempts
+ * at this same problem, both of which tried to CORRECT `onboundary`'s timing
+ * with an invented delay: first a proportional time-window estimate, then a
+ * self-calibrating median-gap "pacing guard"). Both were reverted because
+ * they treated `onboundary`'s timing as slightly-wrong-but-fixable. It is
+ * not fixable from here, for a structural reason: `SpeechSynthesisUtterance`
+ * exposes exactly two timing-adjacent fields on a boundary event —
+ * `charIndex` and `elapsedTime` — and BOTH are produced by the same
+ * synthesis-engine implementation that also decides when to fire the event
+ * in the first place. There is no second, independent oracle (no equivalent
+ * of `<audio>.currentTime` for `speechSynthesis`) to measure that engine's
+ * own timing against, so any JS-side "hold this word back a little" scheme
+ * can, at best, smooth arrival JITTER (events bunching up because the JS
+ * thread was busy) — it cannot detect or correct a systematic BIAS in the
+ * underlying engine's self-reported boundary timing, because there is
+ * nothing to compare it to. Public documentation and browser-vendor
+ * discussion confirm boundary-event reliability is explicitly NOT
+ * guaranteed by spec ("SHOULD" language, not "MUST"), varies by browser,
+ * OS voice vs. network voice, and is not Baseline-supported — i.e. this is
+ * a known, unsolved-in-general limitation of the API itself, not a bug
+ * unique to this codebase's prior attempts.
  *
- * CONSERVATIVE DISPLAY, NOT BLIND TRUST: `onboundary` remains the SOLE
- * authoritative source of word advancement — nothing here ever displays a
- * word `onboundary` hasn't already reported. But `onboundary`'s own timing
- * is not guaranteed to be phase-locked to actual audio output (see
- * `pacingGuard.ts`'s doc comment for why), so every reported word is
- * passed through that module before being shown: it may hold a word back
- * a little if it is arriving faster, in real time, than this SAME
- * utterance has recently been advancing — never invents progress, never
- * shows anything ahead of what `onboundary` said, only ever biases toward
- * showing the PREVIOUS word a moment longer.
+ * Given that ceiling, inventing a THIRD delay heuristic would only add
+ * another layer of unverifiable guessing on top of two that already failed
+ * the same way. The honest fix is a change of PROMISE, not a smarter
+ * correction: this engine now makes only claims that `onstart` and `onend`
+ * can prove outright. Both are unconditionally real per spec — `onstart`
+ * fires exactly when an utterance begins, `onend` exactly when it
+ * completes, with no "SHOULD"-qualified wording — so "this SEGMENT is
+ * currently being read" is a claim this engine can back with certainty.
+ * "This WORD, specifically, is being spoken at this exact moment" is not,
+ * and is no longer made here: `onboundary` is not consulted at all for
+ * display purposes (word-level position for the SERVER-TTS engine is a
+ * categorically different claim — see serverAudioEngine.ts's own header —
+ * because that engine samples a REAL, hardware-backed audio clock,
+ * `<audio>.currentTime`, which speechSynthesis has no equivalent of).
  *
- * PAUSE DURING THE INTER-SEGMENT GAP: `speechSynthesis.pause()` only pauses
- * an utterance that is actively speaking — it does nothing during the
- * short breathing pause this engine schedules between sentences. Without
- * extra care, pausing during that gap would let the already-scheduled
- * "start next segment" timer fire anyway, ignoring the pause. `scheduleNext`
- * is the one place a next segment is ever started, and it always checks
- * `paused` first; `pause()` also cancels any pending scheduled start and
- * remembers which segment it was, so `resume()` can start exactly that
- * segment instead of relying on a timer that may never have been allowed to
- * fire. This is the mechanism that makes "pause mid-sentence" and "pause
- * between sentences" both correctly resumable.
+ * `onWordStart(segmentIndex, wordIndex)` is called with `wordIndex: null`
+ * once per segment, from `onstart` — the caller (NarratedText) renders a
+ * `null` word index as "highlight the whole segment," which is exactly the
+ * true, provable claim being made. This also closes the "first word isn't
+ * protected" gap the pacing-guard design admitted: there is no first-word
+ * special case anymore, because there is no per-word timing decision left
+ * to get wrong for word 0 or any other word — the ENTIRE segment is marked
+ * active atomically, the instant (and only the instant) real speech for it
+ * begins.
+ *
+ * Pause/resume/replay all still work exactly as before, and are in fact
+ * SIMPLER than the pacing-guard version: with no held-back word timer to
+ * cancel, pause() only has to stop the underlying speech and clear any
+ * pending inter-segment gap timer.
  *
  * Dependency-injectable (`speechSynthesisImpl`/`UtteranceCtor`) so this can
  * be exercised in tests with a fake Web Speech API — no real browser or
@@ -60,8 +67,6 @@
  */
 import { LANG_LOCALE, VOICE_SETTINGS, pauseBeforeSegment, rateForSegment, type TeachingLang, type VoiceType } from '../../tts'
 import type { NarrationSegment } from '../types'
-import { mapProportionalIndex, spokenCharIndexToWordIndex } from '../words'
-import { INITIAL_PACING_STATE, recordDisplayedAdvance, remainingHoldMs, type PacingGuardState } from '../pacingGuard'
 
 export interface NarrationEngine {
   /** Begin speaking from `fromIndex` (0 for a fresh start, or wherever a
@@ -77,13 +82,17 @@ export interface NarrationEngine {
 }
 
 export interface NarrationEngineCallbacks {
-  /** Fires whenever the spoken position advances to a new RENDERED word —
-   *  never coarser than word granularity. `segmentIndex` identifies which
-   *  segment; `wordIndex` is 0-based within that segment's `renderedWords`
-   *  (word-kind tokens only). Always fires at least once per segment (word
-   *  0, from the engine's own `onstart`/first tick), even on a
-   *  browser/voice that never fires a boundary event at all. */
-  onWordStart: (segmentIndex: number, wordIndex: number) => void
+  /** Fires whenever the spoken position advances. `segmentIndex` identifies
+   *  which segment. `wordIndex` is a specific 0-based index into that
+   *  segment's `renderedWords` (word-kind tokens only) when the engine can
+   *  back that precise a claim with a real audio-position measurement — the
+   *  server-audio engine always supplies one. `wordIndex: null` means "the
+   *  whole segment is active, no single word is claimed" — what the
+   *  browser-speech engine reports, since it has no audio clock to justify
+   *  anything finer. Always fires at least once per segment (from the
+   *  engine's own `onstart`/first tick), even on a browser/voice that never
+   *  fires a boundary event at all. */
+  onWordStart: (segmentIndex: number, wordIndex: number | null) => void
   onEnded: () => void
   onError: () => void
 }
@@ -95,8 +104,6 @@ export interface BrowserSpeechEngineOptions {
   /** Injectable for tests; defaults to the real Web Speech API. */
   speechSynthesisImpl?: SpeechSynthesis
   UtteranceCtor?: typeof SpeechSynthesisUtterance
-  /** Injectable wall clock for the pacing guard; defaults to Date.now. */
-  now?: () => number
 }
 
 export function createBrowserSpeechEngine(
@@ -119,14 +126,6 @@ export function createBrowserSpeechEngine(
   const locale = LANG_LOCALE[opts.lang]
   const voiceSettings = VOICE_SETTINGS[opts.voiceType]
   const safeSpeed = Math.min(Math.max(opts.speed || 1, 0.5), 2)
-  const now = opts.now ?? (() => Date.now())
-  /** Cancels any word transition the CURRENTLY speaking segment's pacing
-   *  guard is holding back — set fresh inside speakFrom() for whichever
-   *  segment is live, read by pause()/dispose() below. Dropping (not
-   *  flushing) a held transition on pause is deliberate: the highlight
-   *  must freeze exactly where it is at the moment of pausing, never jump
-   *  forward a beat later just because a hold timer happened to fire. */
-  let currentCancelHold: (() => void) | null = null
 
   function resolveVoice(): SpeechSynthesisVoice | undefined {
     if (!synth) return undefined
@@ -140,11 +139,8 @@ export function createBrowserSpeechEngine(
     const segment = segments[index]
     // Same trailing-period strip as speakText — some voices read a bare "."
     // as "full stop"; the breathing pause between segments already supplies
-    // the rhythm cue the period would have. Stripping one trailing character
-    // never removes a whole word, so segment.spokenWordCount (computed from
-    // the untouched spokenText) still matches this string's own word count.
+    // the rhythm cue the period would have.
     const segmentText = segment.spokenText.replace(/\.\s*$/, '')
-    const renderedWordCount = segment.renderedWords.reduce((n, t) => n + (t.kind === 'word' ? 1 : 0), 0)
     const utter = new Utterance(segmentText)
     utter.lang = locale
     utter.pitch = voiceSettings.pitch
@@ -153,60 +149,12 @@ export function createBrowserSpeechEngine(
     const voice = resolveVoice()
     if (voice) utter.voice = voice
 
-    // Per-segment pacing state (see pacingGuard.ts) — reset fresh for every
-    // utterance, since word/prosody pace genuinely can differ segment to
-    // segment (rateForSegment slows a question down, for example).
-    let pacingState: PacingGuardState = INITIAL_PACING_STATE
-    let pendingWordIndex: number | null = null
-    let holdHandle: ReturnType<typeof setTimeout> | null = null
-
-    function applyWord(wordIndex: number) {
-      pacingState = recordDisplayedAdvance(pacingState, now())
-      pendingWordIndex = null
-      callbacks.onWordStart(index, wordIndex)
-    }
-
-    // Never displays anything `onboundary` hasn't already reported — only
-    // decides WHEN an already-reported word is safe to show, biasing
-    // toward keeping the PREVIOUS word visible a little longer over
-    // showing a new one too soon.
-    function considerAdvance(wordIndex: number) {
-      pendingWordIndex = wordIndex
-      const remaining = remainingHoldMs(pacingState, now())
-      if (remaining <= 0) {
-        if (holdHandle !== null) { clearTimeout(holdHandle); holdHandle = null }
-        applyWord(wordIndex)
-        return
-      }
-      if (holdHandle !== null) return // already waiting — the timer below will pick up whatever is latest
-      holdHandle = setTimeout(() => {
-        holdHandle = null
-        if (pendingWordIndex !== null) applyWord(pendingWordIndex)
-      }, remaining)
-    }
-
-    function cancelHold() {
-      if (holdHandle !== null) { clearTimeout(holdHandle); holdHandle = null }
-      pendingWordIndex = null
-    }
-    currentCancelHold = cancelHold
-
-    utter.onstart = () => { if (!disposed) considerAdvance(0) }
-    utter.onboundary = (event: SpeechSynthesisEvent) => {
-      if (disposed || renderedWordCount === 0) return
-      const charIndex = event?.charIndex
-      if (typeof charIndex !== 'number') return
-      const spokenWordIndex = spokenCharIndexToWordIndex(segmentText, charIndex)
-      const renderedWordIndex = mapProportionalIndex(spokenWordIndex, Math.max(segment.spokenWordCount, 1), renderedWordCount)
-      considerAdvance(renderedWordIndex)
-    }
+    // The ONLY two claims this engine makes: the segment starts (real,
+    // unconditional per spec) and the segment ends (same). Nothing
+    // in between is displayed — see this file's header for why.
+    utter.onstart = () => { if (!disposed) callbacks.onWordStart(index, null) }
     utter.onend = () => {
       if (disposed) return
-      // The segment has genuinely finished playing, so real time HAS
-      // passed — any word transition still being held back is now safe to
-      // show and would otherwise be silently lost (the last word or two
-      // of a segment never displayed). Flush it before moving on.
-      if (pendingWordIndex !== null) { const w = pendingWordIndex; cancelHold(); applyWord(w) }
       const next = index + 1
       if (next >= segments.length) { callbacks.onEnded(); return }
       scheduleNext(next, pauseBeforeSegment(segments[next].spokenText))
@@ -244,11 +192,6 @@ export function createBrowserSpeechEngine(
         pendingResumeIndex = scheduledIndex
         scheduledIndex = null
       }
-      // Drop (never flush) a word transition the pacing guard was holding
-      // back — the highlight must freeze exactly where it is right now,
-      // not jump forward a moment later just because a hold timer was
-      // still pending.
-      currentCancelHold?.()
       synth?.pause()
     },
     resume() {
@@ -266,7 +209,6 @@ export function createBrowserSpeechEngine(
       if (disposed) return
       disposed = true
       if (timeoutHandle !== null) { clearTimeout(timeoutHandle); timeoutHandle = null }
-      currentCancelHold?.()
       synth?.cancel()
     },
   }

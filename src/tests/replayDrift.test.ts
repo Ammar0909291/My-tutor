@@ -203,9 +203,28 @@ describe('drift class 4 — the move/legality layer must be observable', () => {
  * genuinely cannot carry.
  */
 function evidenceKeys(source: string, receiver: string): Set<string> {
-  const start = source.indexOf(`advanceConversationState(${receiver}, {`)
-  if (start < 0) throw new Error(`no advanceConversationState(${receiver}, {...}) found`)
-  const open = source.indexOf('{', start)
+  // The route's primary fold site (mastery-rederiver fix, 2026-09-13)
+  // extracted the inline evidence literal into a named local
+  // (`turnEvidenceForLadder`) so the same object could be re-applied by the
+  // ISS-13 snapshotRederiver on a concurrent-write retry, without a second,
+  // driftable copy of the field list. When the call passes an identifier
+  // instead of an inline `{`, resolve it to that identifier's own object
+  // literal — the invariant this guard checks (every route evidence key is
+  // covered) is unchanged; only where the literal lives moved.
+  const inlineStart = source.indexOf(`advanceConversationState(${receiver}, {`)
+  let open: number
+  if (inlineStart >= 0) {
+    open = source.indexOf('{', inlineStart)
+  } else {
+    const namedCallMatch = new RegExp(
+      `advanceConversationState\\(${receiver},\\s*([A-Za-z_$][\\w$]*)\\)`,
+    ).exec(source)
+    if (!namedCallMatch) throw new Error(`no advanceConversationState(${receiver}, ...) found`)
+    const varName = namedCallMatch[1]
+    const declMatch = new RegExp(`\\b(?:const|let)\\s+${varName}\\b[^=]*=\\s*\\{`).exec(source)
+    if (!declMatch) throw new Error(`no declaration of ${varName} with an object literal found`)
+    open = declMatch.index + declMatch[0].length - 1
+  }
   let depth = 0
   let end = open
   for (let i = open; i < source.length; i++) {

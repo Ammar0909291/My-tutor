@@ -9,15 +9,19 @@
  * prominent than the rest — no subject, no lesson type, no content-format
  * assumption anywhere in this file.
  *
- * WORD-LEVEL, NOT SENTENCE-LEVEL: each segment is rendered from its own
- * `renderedWords` token list (words.ts) — an ordered mix of 'word' and
- * 'space' tokens whose concatenation reproduces the segment's rendered text
- * exactly, so highlighting individual words never mangles whitespace or
- * punctuation. Only ONE word is ever marked active at a time (the segment
- * index + word index the caller supplies); every other word — spoken
- * already or not yet reached — renders in the same plain "normal" style,
- * matching this design's existing binary active/inactive scheme (there is
- * no separate "already spoken" visual state to preserve).
+ * WORD-LEVEL WHEN THE ENGINE CAN BACK IT, SEGMENT-LEVEL OTHERWISE: each
+ * segment is rendered from its own `renderedWords` token list (words.ts) —
+ * an ordered mix of 'word' and 'space' tokens whose concatenation
+ * reproduces the segment's rendered text exactly, so highlighting never
+ * mangles whitespace or punctuation. `activeWordIndex` is a specific index
+ * when the engine driving playback has a real basis for that precise a
+ * claim (the server-audio engine, sampling a genuine audio clock); it is
+ * `null` when the engine only knows which SEGMENT is being read, not which
+ * word within it (the browser-speechSynthesis engine — see its own header
+ * for why `onboundary` cannot honestly support a per-word claim). In that
+ * case every word of the active segment renders in the active style
+ * together, never a single word singled out ahead of what the engine can
+ * actually prove — there is no in-between "half-known" word state.
  *
  * AUTO-SCROLL: keeps the active WORD comfortably inside its own scrollable
  * container, without fighting a learner who is deliberately scrolling.
@@ -63,7 +67,10 @@ export interface NarratedTextProps {
   segments: NarrationSegment[]
   activeSegmentIndex: number | null
   /** Index into `segments[activeSegmentIndex].renderedWords` (word-kind
-   *  tokens only) — the single word to highlight. */
+   *  tokens only) — the single word to highlight. `null` while a segment IS
+   *  active means "highlight every word of that segment" (see this file's
+   *  header) rather than "nothing is active" — that state is instead
+   *  represented by `activeSegmentIndex` itself being `null`. */
   activeWordIndex: number | null
   /** Custom per-segment renderer (e.g. to reuse a caller's own markdown/math
    *  inline formatter). When supplied, that segment opts OUT of automatic
@@ -134,20 +141,25 @@ export function NarratedText({
               ? renderSegment(segment)
               : segment.renderedWords.map((token, tokenIdx) => {
                   if (token.kind === 'space') return token.text
-                  const isActiveWord = isActiveSegment && token.wordIndex === activeWordIndex
+                  // A specific word claim when the engine supplies one;
+                  // otherwise (activeWordIndex === null) every word of the
+                  // active segment is active together — see this file's
+                  // header for why that is the honest claim in that case.
+                  const isActive = isActiveSegment && (activeWordIndex === null || token.wordIndex === activeWordIndex)
+                  const isRefTarget = isActive && (activeWordIndex === null ? token.wordIndex === 0 : token.wordIndex === activeWordIndex)
                   return (
                     <span
                       key={tokenIdx}
-                      ref={isActiveWord ? activeRef : undefined}
+                      ref={isRefTarget ? activeRef : undefined}
                       data-word-index={token.wordIndex}
-                      data-narration-active={isActiveWord || undefined}
+                      data-narration-active={isActive || undefined}
                       style={{
-                        color: isActiveWord ? (activeColor ?? 'var(--text-primary)') : (inactiveColor ?? 'var(--text-secondary)'),
-                        fontWeight: isActiveWord ? 700 : 400,
+                        color: isActive ? (activeColor ?? 'var(--text-primary)') : (inactiveColor ?? 'var(--text-secondary)'),
+                        fontWeight: isActive ? 700 : 400,
                         transition: 'color 150ms ease, font-weight 150ms ease',
                         borderRadius: 3,
-                        padding: isActiveWord ? '0 2px' : undefined,
-                        background: isActiveWord ? 'var(--coral-muted)' : 'transparent',
+                        padding: isActive ? '0 2px' : undefined,
+                        background: isActive ? 'var(--coral-muted)' : 'transparent',
                       }}
                     >
                       {token.text}
