@@ -10,6 +10,11 @@ const CHEM_FOUND_MATTER = 'Below is a simple text diagram that shows the decisio
 
 const CHEM_EQUIL_WEAK_ACID = 'I can describe a simple diagram in text for you:\n\n```\n HA(aq) ⇌ H⁺(aq) + A⁻(aq)\n ^ ^\n | |\n reactants products\n```\n\n* On the left is the weak acid (HA) that hasn’t fully split. \n* On the right are the hydrogen ions (H⁺) and the conjugate base (A⁻) that result from some of the acid molecules breaking apart. \n* The double arrow indicates that the reaction can go forward (dissociation) and backward (recombination) at the same time, reaching a balance called an equilibrium.'
 
+// Byte-for-byte the THIRD real reply captured live re-verifying the fix for
+// the two above (chem.found.matter, second question in the same session,
+// deployed app, real account) — no code fence at all, plain ASCII.
+const CHEM_GLASS_OF_WATER = 'Below is a simple, text‑based “diagram” of a glass of water and its key features. \n\n+-------------------+ ← Glass\n\n- The dots represent water molecules moving around.\n- The space inside the glass is the *volume* the water occupies.\n- The glass holds the water in a liquid state; if you heat it, the dots would spread out and turn into steam.'
+
 describe('the two real reproduced cases', () => {
   it('chem.found.matter: box-drawing decision tree is removed whole, the lead-in dropped, the Guidance paragraph survives', () => {
     const result = stripUnbackedAsciiDiagram(CHEM_FOUND_MATTER, false)
@@ -40,16 +45,56 @@ describe('the two real reproduced cases', () => {
     expect(result.text).toContain('On the right are the hydrogen ions')
     expect(result.text).toContain('reaching a balance called an equilibrium')
   })
+
+  it('chem.found.matter (glass of water): the unfenced "text diagram" is removed, the prose survives', () => {
+    const result = stripUnbackedAsciiDiagram(CHEM_GLASS_OF_WATER, false)
+    expect(result.stripped).toBe(true)
+    expect(result.removedBlocks).toBe(1)
+    expect(result.text).not.toMatch(/text[‑-]?based/i)
+    expect(result.text).not.toContain('diagram')
+    expect(result.text).not.toMatch(/\+-+\+/)
+    expect(result.text).toContain('The dots represent water molecules moving around.')
+    expect(result.text).toContain('volume')
+    expect(result.text).toContain('turn into steam.')
+  })
 })
 
 describe('never fires while a real figure is on screen', () => {
-  it('leaves both reproduced cases byte-identical when figureOnScreen is true', () => {
+  it('leaves all three reproduced cases byte-identical when figureOnScreen is true', () => {
     expect(stripUnbackedAsciiDiagram(CHEM_FOUND_MATTER, true)).toEqual({
       text: CHEM_FOUND_MATTER, stripped: false, removedBlocks: 0,
     })
     expect(stripUnbackedAsciiDiagram(CHEM_EQUIL_WEAK_ACID, true)).toEqual({
       text: CHEM_EQUIL_WEAK_ACID, stripped: false, removedBlocks: 0,
     })
+    expect(stripUnbackedAsciiDiagram(CHEM_GLASS_OF_WATER, true)).toEqual({
+      text: CHEM_GLASS_OF_WATER, stripped: false, removedBlocks: 0,
+    })
+  })
+})
+
+describe('Pass 3 (unfenced "text diagram") false-positive checks', () => {
+  it('a markdown table is never touched', () => {
+    const text = 'Here is a table:\n\n| Concept | Definition |\n| --- | --- |\n| Mass | Amount of matter |\n\nMakes sense?'
+    expect(stripUnbackedAsciiDiagram(text, false)).toEqual({ text, stripped: false, removedBlocks: 0 })
+  })
+
+  it('a short arithmetic line is never touched (no 3-symbol run, no "text diagram" wording)', () => {
+    const text = 'Solve this: 3 - 2 = 1. Simple subtraction.'
+    expect(stripUnbackedAsciiDiagram(text, false)).toEqual({ text, stripped: false, removedBlocks: 0 })
+  })
+
+  it('naming both "text" and "diagram" is not enough on its own — the following paragraph must actually be art-shaped', () => {
+    const text = 'This is a text diagram of the water cycle.\n\nEvaporation happens when the sun heats water and it rises as vapor.\n\nThen it condenses into clouds.'
+    expect(stripUnbackedAsciiDiagram(text, false)).toEqual({ text, stripped: false, removedBlocks: 0 })
+  })
+
+  it('"diagram" alone, with no "text" nearby, is never touched even beside art-shaped text', () => {
+    const text = 'Here is a diagram of the setup.\n\n+-------------------+\n\nThat represents the container.'
+    // No word "text" anywhere near "diagram" — the co-occurrence requirement
+    // is what makes this guard narrow; "diagram" alone is far too common a
+    // word to key off by itself.
+    expect(stripUnbackedAsciiDiagram(text, false)).toEqual({ text, stripped: false, removedBlocks: 0 })
   })
 })
 

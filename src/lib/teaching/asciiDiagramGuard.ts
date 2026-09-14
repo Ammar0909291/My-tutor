@@ -126,14 +126,72 @@ export interface AsciiDiagramStripResult {
 const FENCE_WITH_LEADIN_RE = /(?:^|\n)([^\n]{0,140}:)[ \t]*\n+```[^\n]*\n([\s\S]*?)```\n?/g
 const BARE_FENCE_RE = /```[^\n]*\n([\s\S]*?)```\n?/g
 
+/**
+ * PASS 3 — THE MODEL DOES NOT ALWAYS USE A CODE FENCE.
+ *
+ * Live re-verification after Passes 1-2 shipped (2026-09-14, real account,
+ * chem.found.matter, deployed app): the SAME behaviour in a THIRD shape
+ * neither pass catches —
+ *
+ *   Below is a simple, text-based "diagram" of a glass of water and its key
+ *   features.
+ *
+ *   +-------------------+ ← Glass
+ *
+ *   - The dots represent water molecules moving around.
+ *   ...
+ *
+ * Plain `+`/`-` ASCII, no Unicode box-drawing, no code fence — so neither
+ * `BOX_DRAWING_RE` nor the fence-scoped passes above can see it. The model's
+ * own words are the reliable signal instead: all three reproduced cases
+ * (this one and the two in the module header) have the model EXPLICITLY
+ * SELF-LABEL what follows as a "text diagram" — the two words co-occurring
+ * is rare in ordinary teaching prose and does not depend on drawing style.
+ *
+ * Scoped narrowly to avoid the false-positive risk a looser pattern-match on
+ * the art itself would carry (a markdown table row, a short arithmetic line
+ * like "3 - 2 = 1", a horizontal rule): BOTH conditions must hold — (a) the
+ * lead-in names "text" and "diagram" together, and (b) the very next
+ * paragraph is genuinely line-drawn (a run of 3+ consecutive symbol
+ * characters AND at least 30% of its non-whitespace content is symbols, not
+ * letters). A markdown table (`| Concept | Definition |`) is ~15% symbols by
+ * that measure and is never touched; "3 - 2 = 1" has no 3-symbol run. Both
+ * were checked, not assumed.
+ */
+// `[^\n]{0,60}?` is LAZY, not greedy — a greedy quantifier here swallows the
+// trailing period/colon itself (it matches `[^\n]` too), leaving nothing for
+// `[.:]` to match and silently failing the whole pattern. Caught by the
+// verification script against the real reproduced text before this shipped:
+// the greedy version matched zero times against the exact defect it exists
+// to catch.
+const TEXT_DIAGRAM_LEADIN_RE =
+  /(?:^|\n)([^\n]{0,160}\btext\b[^\n]{0,25}\bdiagram\b[^\n]{0,60}?|[^\n]{0,160}\bdiagram\b[^\n]{0,25}\btext\b[^\n]{0,60}?)[.:]\s*\n+([^\n]+(?:\n[^\n]+)*)\n+/gi
+
+const SYMBOL_CHAR_RE = /[+\-|=_<>^~*/\\]/g
+const SYMBOL_RUN_RE = /[+\-|=_~]{3,}/
+
+function isArtShapedParagraph(block: string): boolean {
+  const compact = block.replace(/\s/g, '')
+  if (compact.length === 0) return false
+  if (!SYMBOL_RUN_RE.test(compact)) return false
+  const symbolCount = (compact.match(SYMBOL_CHAR_RE) ?? []).length
+  return symbolCount / compact.length >= 0.3
+}
+
 export function stripUnbackedAsciiDiagram(
   text: string,
   figureOnScreen: boolean,
 ): AsciiDiagramStripResult {
   if (figureOnScreen) return { text, stripped: false, removedBlocks: 0 }
-  if (typeof text !== 'string' || !text.includes('```')) {
+  if (typeof text !== 'string' || text.length === 0) {
     return { text, stripped: false, removedBlocks: 0 }
   }
+  // NOT a `text.includes('\`\`\`')` early-exit — Pass 3 below matches an
+  // unfenced self-labeled "text diagram" (the live-verified defect that
+  // motivated it carried no fence at all), so requiring one here would skip
+  // Pass 3 on every turn it needs to run. Caught by re-running the
+  // verification script against the real reproduced text after adding Pass
+  // 3: it silently matched zero times until this line was corrected.
 
   let removedBlocks = 0
 
@@ -157,6 +215,14 @@ export function stripUnbackedAsciiDiagram(
     if (!processed.removed) return whole
     removedBlocks += 1
     return processed.text.length > 0 ? `${processed.text}\n` : ''
+  })
+
+  // Pass 3: a self-labeled "text diagram" with no fence at all. See the
+  // constant's own header for the reproduction and the false-positive checks.
+  result = result.replace(TEXT_DIAGRAM_LEADIN_RE, (whole, _leadin: string, paragraph: string) => {
+    if (!isArtShapedParagraph(paragraph)) return whole
+    removedBlocks += 1
+    return ''
   })
 
   if (removedBlocks === 0) return { text, stripped: false, removedBlocks: 0 }
