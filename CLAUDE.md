@@ -5319,6 +5319,63 @@ tutor repeating ONE sentence forever reported `stagnantTurns 0`. Now wired to
   Blueprint/runtime file touched. This is a genuinely multi-session
   campaign; continuation should verify state via `scripts/math/state.ts`
   fresh each time rather than trusting any number recorded here.
+- **Batch 80 — math.linalg's `rank` closes the domain to PARKED;
+  opens math.opt** (2026-09-14, autonomous loop iteration): re-computed
+  the frontier fresh — `math.linalg` had exactly the 1 candidate
+  predicted at the end of Batch 79 (`rank`, requires `row-echelon`).
+  Authored it: genuine `unlocks` discrepancy (Blueprint "none in KG"
+  vs. KG's `rank-nullity`), resolved toward the KG. 3 misconceptions
+  independently classified (Blueprint gives severity not birth type):
+  MC-1 EXISTENCE-CHECKED-VIA-RANK-A-ALONE (Type 1), MC-2
+  CONSISTENCY-ASSUMED-TO-IMPLY-UNIQUENESS (Type 1, tied with MC-1 as
+  the same structural error), MC-3
+  PIVOT-COUNT-MISCOMPUTED-DURING-ROW-REDUCTION (Type 2).
+  **Re-computing the frontier immediately after revealed 0 ready
+  candidates** — traced via direct KG queries:
+  `rank-nullity`→`null-space`→`subspace`→`vector-space`→
+  `math.abst.field` (requires `math.abst.ring-theory`+
+  `math.abst.prime-ideal`, `math.abst` entirely unstarted) — a deep
+  multi-level cross-domain block, not a small bounded excursion
+  (Batch 27/44 precedent). `math.linalg` PARKED at 28/61. Computed
+  the frontier across ALL domains and pivoted to open `math.opt` (16
+  concepts, 4 ready), partly to resolve genuine Blueprint-staleness
+  findings already flagged by Batch 48's `optimization`/
+  `multivariable-extrema`. Authored 3 of the 4 ready candidates:
+  `convex-set` (requires `math.linalg.vector`; birth types EXPLICITLY
+  given by its Blueprint, adopted directly — MC-1 CONVEX-MEANS-SMOOTH
+  Type 2, MC-2 CONVEX-UNION-CLOSED Type 1, MC-3 MIDPOINT-SUFFICIENT
+  Type 3; zero discrepancy), `unconstrained-optimization` (requires
+  `math.calc.critical-points`+`math.calc.concavity`; generalizes the
+  1D critical-point condition to $\nabla f(x^*)=0$ and the 1D
+  second-derivative test to the Hessian discriminant
+  $D=f_{xx}f_{yy}-f_{xy}^2$; 3 misconceptions independently classified,
+  all Type 1; zero discrepancy), `convex-function` (requires
+  `math.calc.concavity`; the chord inequality including the
+  linear-function equality case, every-local-min-is-global via
+  proof by contradiction, Jensen's Inequality, chord/Hessian
+  equivalence; 3 misconceptions independently classified — MC-1
+  Type 2, MC-2 Type 1, MC-3 Type 4 — **genuine Blueprint-staleness
+  finding on its P76 cross-link mode, corrected**: declared
+  "cross-link probe, authored" against `math.linalg.positive-definite`
+  via a Blueprint-file-existence check, but confirmed via `ls` to have
+  no Educational Brain entry — corrected to independence mode per the
+  established Batch 24/25/48/53/63/64/68 precedent). Deferred:
+  `dynamic-programming` (a distinct expert-level topic not directly
+  connected to the convex-optimization chain). `math.linalg`
+  **27/61 → 28/61 (PARKED)**. `math.opt` **0/16 → 3/16 (OPENED)**.
+  Mathematics **529/908 → 533/908**, 375 remaining. Fresh frontier:
+  `math.opt` 1 ready (`dynamic-programming`) plus `convex-optimization`
+  newly unblocked by both `convex-set` and `convex-function`;
+  `math.linalg`/`math.graph` unchanged at 0 ready (both PARKED).
+  Validated: KG validator PASS (908/908 reachable, file untouched),
+  `scripts/math/state.ts` confirms math.linalg 28/61, math.opt 3/16,
+  mathematics 533/908 (10 EB-certified domains unchanged), `tsc
+  --noEmit` clean, targeted tests 479/479 passed, all 4 heading
+  structures diffed clean on the first pass. No
+  Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file
+  touched. This is a genuinely multi-session campaign; continuation
+  should verify state via `scripts/math/state.ts` fresh each time
+  rather than trusting any number recorded here.
 
 ## Topic/meaning loss — the extractor's default was YES (2026-09-13)
 

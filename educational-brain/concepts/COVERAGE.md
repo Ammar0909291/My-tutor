@@ -11,7 +11,7 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 529 | **Ten domains CERTIFIED (math.calc joined 2026-09-13, the tenth), math.graph 15/16 (PARKED again — only `random-graph` remains, blocked on unauthored `math.prob.probability-axioms`), math.linalg 27/61 (Batch 79 authored `row-echelon`/`lu-factorization`; 1 ready next: `rank`).** 82 `math.found.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 69 `math.geom.*` (**COMPLETE, DOMAIN CERTIFIED** — the final 13 entries were restored by commit `0d2c76dd`'s Wave 0 recovery, which this row previously did not reflect) + 36 `math.nt.*` (**COMPLETE, DOMAIN CERTIFIED 2026-08-12** — the domain's final 8 concepts, `prime-distribution`, `continued-fractions`, `analytic-number-theory`, `prime-number-theorem`, `riemann-hypothesis`, `algebraic-number-theory`, `algebraic-integers`, `number-fields`, were authored this session, ending the PARKED status this row previously recorded) + 59 `math.alg.*` (**COMPLETE, DOMAIN CERTIFIED 2026-09-11** — Wave 1 (2026-08-12, 11 concepts): `expression`, `equation`, `term`, `coefficient`, `exponent-rules`, `polynomial`, `degree`, `zero-exponent`, `negative-exponent`, `solution-set`, `inequality`; Wave 2 (2026-08-12, 1 concept): `like-terms`; Wave 3 (2026-09-11, 3 concepts): `simplification`, `polynomial-operations`, `radicals`; Wave 4 (2026-09-11, 5 concepts): `linear-equation-1var`, `polynomial-division`, `fractional-exponent`, `simplifying-radicals`, `radical-equations`; Wave 5 (2026-09-11, 5 concepts): `inequality-1var`, `absolute-value-equations`, `linear-equation-2var`, `remainder-theorem`, `rationalizing-denominators`; Wave 6 (2026-09-11, 3 concepts): `inequality-2var`, `system-linear-equations`, `factor-theorem`; Wave 7 (2026-09-11, 4 concepts): `substitution-method`, `elimination-method`, `system-3var`, `factoring`; Wave 8 (2026-09-11, 3 concepts): `factoring-gcf`, `factoring-special`, `rational-expressions`; Wave 9 (2026-09-11, 4 concepts): `factoring-trinomials`, `rational-expressions-addition`, `rational-expressions-multiplication`, `rational-equations`; Wave 10 (2026-09-11, 1 concept): `quadratic-equation`; Wave 11 (2026-09-11, 2 concepts): `completing-the-square`, `polynomial-roots`; Wave 12 part 1 (2026-09-11, 1 concept): `quadratic-formula`; Wave 12 part 2 (2026-09-11, 2 concepts): `discriminant`, `rational-root-theorem`; Wave 12 part 3 (2026-09-11, 3 concepts): `fundamental-theorem-algebra`, `polynomial-inequality`, `vietas-formulas`; Wave 13 (2026-09-11, 2 concepts): `complex-polynomial-roots`, `rational-inequality`; Batch 15 (2026-09-11, 1 concept): `exponential-function`; Batch 16 (2026-09-11, 2 concepts): `logarithm`, `exponential-equations`; Batch 17 (2026-09-11, 3 concepts): `binomial-theorem`, `logarithm-properties`, `natural-logarithm`; Batch 18 (2026-09-11, 3 concepts, FINAL): `change-of-base`, `logarithmic-equations`, `pascals-triangle`; all Blueprint-grounded, reused by reference). 20 `math.disc.*` entries (**IN PROGRESS, standalone campaign since math.alg's certification** —
+| mathematics | 908 | 533 | **Ten domains CERTIFIED (math.calc joined 2026-09-13, the tenth), math.graph 15/16 (PARKED again — only `random-graph` remains, blocked on unauthored `math.prob.probability-axioms`), math.linalg 28/61 (PARKED as of Batch 80 — `rank` authored, then the domain's remaining chain found blocked on unauthored `math.abst.field`), math.opt 3/16 (OPENED Batch 80 — `convex-set`/`unconstrained-optimization`/`convex-function` authored; `dynamic-programming` deferred; `convex-optimization` newly ready).** 82 `math.found.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 69 `math.geom.*` (**COMPLETE, DOMAIN CERTIFIED** — the final 13 entries were restored by commit `0d2c76dd`'s Wave 0 recovery, which this row previously did not reflect) + 36 `math.nt.*` (**COMPLETE, DOMAIN CERTIFIED 2026-08-12** — the domain's final 8 concepts, `prime-distribution`, `continued-fractions`, `analytic-number-theory`, `prime-number-theorem`, `riemann-hypothesis`, `algebraic-number-theory`, `algebraic-integers`, `number-fields`, were authored this session, ending the PARKED status this row previously recorded) + 59 `math.alg.*` (**COMPLETE, DOMAIN CERTIFIED 2026-09-11** — Wave 1 (2026-08-12, 11 concepts): `expression`, `equation`, `term`, `coefficient`, `exponent-rules`, `polynomial`, `degree`, `zero-exponent`, `negative-exponent`, `solution-set`, `inequality`; Wave 2 (2026-08-12, 1 concept): `like-terms`; Wave 3 (2026-09-11, 3 concepts): `simplification`, `polynomial-operations`, `radicals`; Wave 4 (2026-09-11, 5 concepts): `linear-equation-1var`, `polynomial-division`, `fractional-exponent`, `simplifying-radicals`, `radical-equations`; Wave 5 (2026-09-11, 5 concepts): `inequality-1var`, `absolute-value-equations`, `linear-equation-2var`, `remainder-theorem`, `rationalizing-denominators`; Wave 6 (2026-09-11, 3 concepts): `inequality-2var`, `system-linear-equations`, `factor-theorem`; Wave 7 (2026-09-11, 4 concepts): `substitution-method`, `elimination-method`, `system-3var`, `factoring`; Wave 8 (2026-09-11, 3 concepts): `factoring-gcf`, `factoring-special`, `rational-expressions`; Wave 9 (2026-09-11, 4 concepts): `factoring-trinomials`, `rational-expressions-addition`, `rational-expressions-multiplication`, `rational-equations`; Wave 10 (2026-09-11, 1 concept): `quadratic-equation`; Wave 11 (2026-09-11, 2 concepts): `completing-the-square`, `polynomial-roots`; Wave 12 part 1 (2026-09-11, 1 concept): `quadratic-formula`; Wave 12 part 2 (2026-09-11, 2 concepts): `discriminant`, `rational-root-theorem`; Wave 12 part 3 (2026-09-11, 3 concepts): `fundamental-theorem-algebra`, `polynomial-inequality`, `vietas-formulas`; Wave 13 (2026-09-11, 2 concepts): `complex-polynomial-roots`, `rational-inequality`; Batch 15 (2026-09-11, 1 concept): `exponential-function`; Batch 16 (2026-09-11, 2 concepts): `logarithm`, `exponential-equations`; Batch 17 (2026-09-11, 3 concepts): `binomial-theorem`, `logarithm-properties`, `natural-logarithm`; Batch 18 (2026-09-11, 3 concepts, FINAL): `change-of-base`, `logarithmic-equations`, `pascals-triangle`; all Blueprint-grounded, reused by reference). 20 `math.disc.*` entries (**IN PROGRESS, standalone campaign since math.alg's certification** —
 Batch 14 (2026-09-11, 1 concept): `counting-principles`; Batch 15 (2026-09-11, 1 concept):
 `permutations`; Batch 16 (2026-09-11, 1 concept): `combinations`; Batch 19 (2026-09-11, 5
 concepts): `combinatorics`, `pigeonhole`, `stars-bars`, `inclusion-exclusion`,
@@ -11639,3 +11639,87 @@ passed, both heading structures diffed clean against `math.alg.like-terms.md` on
 (0 diffs each). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. This is
 a genuinely multi-session campaign; continuation should verify state via `scripts/math/state.ts`
 fresh each time rather than trusting any number recorded here.
+
+**Batch 80 — math.linalg's rank closes the domain to PARKED; opens math.opt** (2026-09-14,
+autonomous loop iteration): re-fetched `main` (0 divergence, clean). Re-ran `scripts/math/state.ts`
+fresh: confirmed mathematics 529/908, math.linalg 27/61, math.graph 15/16 (PARKED), 10
+EB-certified domains — matched Batch 79's predicted end-state exactly. Computed the frontier
+programmatically: `math.linalg` had exactly 1 ready candidate (`rank`, requires `row-echelon`),
+`math.graph` unchanged 0 ready. Authored `rank` — closing math.linalg's frontier entirely. Its
+Blueprint gives Description+Severity but not birth type; independently classified: MC-1
+EXISTENCE-CHECKED-VIA-RANK-A-ALONE (Type 1, Foundational), MC-2
+CONSISTENCY-ASSUMED-TO-IMPLY-UNIQUENESS (Type 1, Foundational — tied with MC-1 as the same
+structural error, collapsing a two-part diagnostic into one incomplete check, applied to two
+distinct questions), MC-3 PIVOT-COUNT-MISCOMPUTED-DURING-ROW-REDUCTION (Type 2, Moderate). Genuine
+Blueprint/KG `unlocks` discrepancy found: Blueprint states "none in KG", live KG lists
+`rank-nullity`, resolved toward the KG; confirmed via `ls` that `rank-nullity` has no EB entry yet.
+
+**Re-computing the frontier immediately after revealed math.linalg had reached 0 ready
+candidates** — an UNPREDICTED full-park event (Batch 79's own forward note had correctly predicted
+`rank` as the sole next candidate, but authoring it exposed a genuinely deeper block than
+expected). Traced the chain via direct KG queries rather than guessing:
+`rank-nullity`→(`rank`+`null-space`+`column-space`+`dimension`)→`null-space` requires
+`subspace`+`row-echelon`→`subspace` requires `vector-space`→`vector-space` requires
+`vector-addition`+`scalar-multiplication`(both authored)+`math.abst.field`(NOT authored,
+`math.abst` entirely unstarted)→`math.abst.field` requires `math.abst.ring-theory`+
+`math.abst.prime-ideal`. Confirmed this is a deep, multi-level cross-domain dependency, not a
+small bounded excursion (matching the Batch 27/44 precedent of parking rather than chasing long
+chains) — `math.linalg` PARKED at 28/61.
+
+Computed the frontier across ALL mathematics domains to select a pivot: `math.abst` 2 ready,
+`math.cx` 1, `math.de` 1, `math.meas` 1, `math.num` 2, `math.opt` 4, `math.prob` 1, `math.real` 2,
+`math.stats` 1, `math.top` 1. Selected `math.opt` (16 total concepts, 4 ready) — chosen partly
+because already-authored `math.calc` entries (Batch 48's `optimization`/`multivariable-extrema`)
+had flagged genuine Blueprint-staleness findings on `math.opt.*` cross-links, which authoring
+math.opt would resolve.
+
+Selected 3 of the 4 ready math.opt candidates (`convex-set`, `unconstrained-optimization`,
+`convex-function`), deferring `dynamic-programming` (a distinct expert-level topic not directly
+connected to the convex-optimization chain the other three share). All 3 Blueprint-grounded,
+reused by reference.
+
+`convex-set` (requires `math.linalg.vector`, unlocks `convex-optimization`, cross_links none):
+line-segment criterion for classifying convexity, convexity-preserving operations
+(intersection/affine-image preserve, union does not), the full-$t\in[0,1]$ requirement versus a
+midpoint-only check. 3 misconceptions with birth types EXPLICITLY given by the Blueprint (adopted
+directly): MC-1 CONVEX-MEANS-SMOOTH (Type 2), MC-2 CONVEX-UNION-CLOSED (Type 1), MC-3
+MIDPOINT-SUFFICIENT (Type 3). Zero Blueprint/KG metadata discrepancy.
+
+`unconstrained-optimization` (requires `math.calc.critical-points`+`math.calc.concavity`, unlocks
+`gradient-methods`+`convex-optimization`, cross_links none): generalizes the 1D critical-point
+condition $f'(c)=0$ to the multivariable stationary-point system $\nabla f(x^*)=0$; generalizes
+the 1D second-derivative sign test to the Hessian discriminant test
+$D=f_{xx}f_{yy}-f_{xy}^2$; distinguishes local from global optima. Blueprint gives
+Description+Severity but not birth type; independently classified, all Type 1 overgeneralization:
+MC-1 STATIONARY-POINT-ASSUMED-TO-BE-EXTREMUM, MC-2 SINGLE-PARTIAL-DERIVATIVE-CHECKED-ALONE, MC-3
+HESSIAN-TEST-REDUCED-TO-INDIVIDUAL-SECOND-PARTIALS. Zero Blueprint/KG metadata discrepancy —
+including the Blueprint's own correctly-declared independence P76 mode (cross_links empty in KG),
+re-verified rather than trusted.
+
+`convex-function` (requires `math.calc.concavity`, unlocks `convex-optimization`, cross_links
+`math.linalg.positive-definite`): the chord inequality (non-strict $\le$, including the
+linear-function equality case), the every-local-min-is-global theorem via proof by contradiction,
+Jensen's Inequality, and the chord-inequality/Hessian-positive-semidefinite equivalence. Blueprint
+gives Description+Severity but not birth type; independently classified: MC-1
+CONVEXITY-REQUIRES-VISIBLE-CURVATURE (Type 2), MC-2
+CONVEX-LOCAL-MIN-ASSUMED-NOT-NECESSARILY-GLOBAL (Type 1), MC-3
+CHORD-INEQUALITY-AND-HESSIAN-TEST-TREATED-AS-SEPARATE (Type 4). **Genuine Blueprint-staleness
+finding on the P76 cross-link mode, corrected**: the Blueprint's Component 7 declares its
+`math.linalg.positive-definite` cross-link "authored" and sets P76_mode to "cross-link probe" —
+checked via `ls docs/curriculum/blueprints/` (Blueprint-FILE existence) rather than `ls
+educational-brain/concepts/mathematics/` (Educational-Brain-ENTRY existence). Confirmed via `ls`
+that `math.linalg.positive-definite.md` does NOT exist in the EB concepts directory — corrected to
+independence mode per the established Batch 24/25/48/53/63/64/68 precedent, resolved toward the
+confirmed-absent reality.
+
+`math.linalg` 27/61 → **28/61 (PARKED, 0 ready)**. `math.opt` 0/16 → **3/16 (OPENED)**.
+Mathematics **529/908 → 533/908**, 375 remaining. Fresh frontier after this batch: `math.opt` has
+`dynamic-programming` (deferred this batch) ready, plus `convex-optimization` newly unblocked by
+BOTH `convex-set` and `convex-function`; `math.linalg`/`math.graph` unchanged at 0 ready (both
+PARKED). Validated: KG validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts`
+confirms math.linalg 28/61, math.opt 3/16, mathematics 533/908 (10 EB-certified domains
+unchanged), `tsc --noEmit` clean, targeted tests 479/479 passed, all 4 heading structures diffed
+clean against `math.alg.like-terms.md` on the first pass (0 diffs each). No
+Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. This is a genuinely
+multi-session campaign; continuation should verify state via `scripts/math/state.ts` fresh each
+time rather than trusting any number recorded here.
