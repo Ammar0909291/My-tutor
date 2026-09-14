@@ -6663,6 +6663,45 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         }
       }
 
+      // Typed Turn Contract, Batch 2 — "provenance cluster" (design doc §6
+      // Batch 2). Resolved ONCE here, right after the shadow objects exist,
+      // and reused by every downstream logging site below instead of each
+      // reading its own `Hoisted` local directly. Each is provably
+      // equivalent to its `Hoisted` twin for every remaining read of it in
+      // this file: all 14 are either CONTRACT-classified (no write after
+      // the contract's own compile point, L5859-ish above) or a
+      // RESULT-classified local whose one real write happens BEFORE this
+      // delivery-compile point (L6655) — verified individually, not
+      // assumed, by tracing every write site. `?? xHoisted` covers turns
+      // that never reached the model (turnContractShadow/turnDeliveryShadow
+      // stay null there), so the value is unchanged on every turn shape.
+      //
+      // The remaining fields named in design doc §6 Batch 2 (`hint`,
+      // `fillerDetected`, `progressionTags`, `stanceViolations`,
+      // `eosVerifierMetrics`, `eosVerifierTags`, `signalSuppressedReason`)
+      // are deliberately NOT resolved here: each has a real write that
+      // happens AFTER this compile point, so the shadow snapshot is stale
+      // relative to their downstream readers — migrating those would swap
+      // a live value for a frozen earlier one, a real behavior change this
+      // batch is not supposed to make. Their consumers keep reading the
+      // `Hoisted` local directly, unchanged. `isFirstLessonContext` has no
+      // downstream consumer left to migrate — its only two readers
+      // (L2955/L3083 in this file) both run before the contract exists.
+      const resolvedDecisionConceptId = turnContractShadow?.provenance.decisionConceptId ?? decisionConceptIdHoisted
+      const resolvedDecisionGranularity = turnContractShadow?.provenance.decisionGranularity ?? decisionGranularityHoisted
+      const resolvedDecisionProbeId = turnContractShadow?.provenance.decisionProbeId ?? decisionProbeIdHoisted
+      const resolvedKernelParityMetrics = turnContractShadow?.provenance.kernelParityMetrics ?? kernelParityMetricsHoisted
+      const resolvedKernelParityTags = turnContractShadow?.provenance.kernelParityTags ?? kernelParityTagsHoisted
+      const resolvedEnginePolicyParity = turnContractShadow?.provenance.enginePolicyParity ?? enginePolicyParityHoisted
+      const resolvedEnginePolicyTags = turnContractShadow?.provenance.enginePolicyTags ?? enginePolicyTagsHoisted
+      const resolvedGateTerms = turnContractShadow?.assessment.gateTerms ?? gateTermsHoisted
+      const resolvedPhaseBeforeTurn = turnContractShadow?.ladder.phaseBeforeTurn ?? phaseBeforeTurnHoisted
+      const resolvedLegalityBlock = turnContractShadow?.assessment.legalityBlock ?? legalityBlockHoisted
+      const resolvedSignalRepairFired = turnContractShadow?.provenance.signalRepairFired ?? signalRepairFiredHoisted
+      const resolvedModelProbeVerdict = turnDeliveryShadow?.question.modelProbeVerdict ?? modelProbeVerdictHoisted
+      const resolvedAttemptVector = turnDeliveryShadow?.provenance.attemptVector ?? attemptVectorHoisted
+      const resolvedAdaptationState = turnDeliveryShadow?.provenance.adaptationState ?? adaptationStateHoisted
+
       // ANSWERABLE-TURN EVIDENCE GUARD (see answerableTurn.ts).
       //
       // Two live defects, one precondition. A SIGNAL correctness value is
@@ -6939,11 +6978,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // every other lesson and for text it does not govern.
       try {
         const { repairFieldLineSign } = await import('@/lib/teaching/fieldLineSignGuard')
-        const sign = repairFieldLineSign(cleanText, decisionConceptIdHoisted)
+        const sign = repairFieldLineSign(cleanText, resolvedDecisionConceptId)
         if (sign.repaired.length > 0) {
           console.warn('[learn/chat] ' + JSON.stringify({
             event: 'field-line-sign-repaired',
-            conceptId: decisionConceptIdHoisted,
+            conceptId: resolvedDecisionConceptId,
             repaired: sign.repaired,
           }))
           cleanText = sign.text
@@ -6966,7 +7005,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         if (stripped !== cleanText) {
           console.warn('[learn/chat] ' + JSON.stringify({
             event: 'dangling-mcq-option-stripped',
-            conceptId: decisionConceptIdHoisted,
+            conceptId: resolvedDecisionConceptId,
           }))
           cleanText = stripped
         }
@@ -6983,11 +7022,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // every other lesson and for text it does not govern.
       try {
         const { repairVisionDirection } = await import('@/lib/teaching/visionDirectionGuard')
-        const vision = repairVisionDirection(cleanText, decisionConceptIdHoisted)
+        const vision = repairVisionDirection(cleanText, resolvedDecisionConceptId)
         if (vision.repaired.length > 0) {
           console.warn('[learn/chat] ' + JSON.stringify({
             event: 'vision-direction-repaired',
-            conceptId: decisionConceptIdHoisted,
+            conceptId: resolvedDecisionConceptId,
             repaired: vision.repaired,
           }))
           cleanText = vision.text
@@ -10058,7 +10097,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 action: 'unservable',
                 stagnantTurns: turnProgressHoisted?.stagnantTurns ?? 0,
                 conceptId: resolvedConceptId ?? null,
-                phase: phaseBeforeTurnHoisted,
+                phase: resolvedPhaseBeforeTurn,
                 servedFromMemory,
               }))
             }
@@ -10315,12 +10354,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           if (eosVerifierMetricsHoisted) {
             conversationStateUpdate.verifierMetrics = eosVerifierMetricsHoisted
           }
-          if (kernelParityMetricsHoisted) {
-            conversationStateUpdate.kernelParity = kernelParityMetricsHoisted
+          if (resolvedKernelParityMetrics) {
+            conversationStateUpdate.kernelParity = resolvedKernelParityMetrics
           }
           // K4: engine-vs-route parity rides the same snapshot persist.
-          if (enginePolicyParityHoisted) {
-            conversationStateUpdate.enginePolicyParity = enginePolicyParityHoisted
+          if (resolvedEnginePolicyParity) {
+            conversationStateUpdate.enginePolicyParity = resolvedEnginePolicyParity
           }
           // K7: the Frustration machine's state rides the same persist.
           if (frustrationAfterTurnHoisted) {
@@ -10675,19 +10714,22 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // No second writer, no new event, no new capture path. Omitted
               // when nothing was declared, so the payload is byte-identical to
               // before on those turns.
-              ...(attemptVectorHoisted !== null && { attemptVector: attemptVectorHoisted }),
+              ...(resolvedAttemptVector !== null && { attemptVector: resolvedAttemptVector }),
               // WP-8 — rides WP-3's existing v2 field on the same existing
               // call. No second writer, no second capture path.
-              ...(adaptationStateHoisted !== null && { adaptationState: adaptationStateHoisted }),
+              ...(resolvedAdaptationState !== null && { adaptationState: resolvedAdaptationState }),
               provenance: [
                 ...(recoveryKeyHoisted ? [`recovery:${recoveryKeyHoisted}`] : []),
                 ...(evidenceAutonomyHoisted ? ['autonomy'] : []),
                 ...(evidenceMoveHoisted ? ['turn-directive'] : []),
                 ...(firstLessonActiveHoisted ? ['first-lesson'] : []),
-                // K6 — record EOS verifier outcomes as provenance atoms
+                // K6 — record EOS verifier outcomes as provenance atoms.
+                // NOT migrated: eosVerifierTagsHoisted is declared after the
+                // delivery-compile point, so the shadow snapshot carries no
+                // value for it at all (design doc §6 Batch 2 finding).
                 ...eosVerifierTagsHoisted,
-                ...kernelParityTagsHoisted,
-                ...enginePolicyTagsHoisted,
+                ...resolvedKernelParityTags,
+                ...resolvedEnginePolicyTags,
                 ...(eosVerifierEvents.some((e) => e.kind === 'OutputRejected') ? ['verifier:rejected'] : []),
                 ...(eosVerifierUsedTemplate ? ['verifier:template-fallback'] : []),
                 ...(eosVerifierAttempts === 2 && !eosVerifierUsedTemplate ? ['verifier:rerendered'] : []),
@@ -10697,10 +10739,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 // Stance Enforcement (Claude Recommendation #6) — every
                 // violation this turn, for observability only (never
                 // rewrites prose beyond the completion-tag strip above).
+                // NOT migrated: stanceViolationsHoisted's real write happens
+                // after the delivery-compile point (design doc §6 Batch 2).
                 ...stanceViolationsHoisted.map((code) => `stance:${code}`),
-                // STEP 2 — progression anomalies (missing signal, concept flap)
+                // STEP 2 — progression anomalies (missing signal, concept flap).
+                // NOT migrated: progressionTagsHoisted's real write happens
+                // AFTER this read site too (further down, in the progression-
+                // telemetry block) — this spread is always empty either way,
+                // a pre-existing ordering quirk found while tracing this
+                // field for Batch 2, left exactly as-is (not this batch's to
+                // fix; see the commit message).
                 ...progressionTagsHoisted,
-                ...(signalRepairFiredHoisted ? ['progression:signal-repair'] : []),
+                ...(resolvedSignalRepairFired ? ['progression:signal-repair'] : []),
               ],
               freshSessionBoundary: sessionEpisodeFreshHoisted,
               boundaryGapMs: null,
@@ -11195,13 +11245,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           detectDecisionDivergence, formatTurnDecisionLog,
         } = await import('@/lib/teaching/turnDecision')
         const turnDecision = {
-          conceptId: decisionConceptIdHoisted ?? resolvedConceptId,
+          conceptId: resolvedDecisionConceptId ?? resolvedConceptId,
           teachingAct: evidenceMoveHoisted,
           representation: visualDecisionHoisted?.representation ?? null,
-          probeId: decisionProbeIdHoisted,
+          probeId: resolvedDecisionProbeId,
           figureId: visualDecisionHoisted?.asset?.assetId ?? null,
           lifecycle: sessionEpisodeHoisted?.phase ?? null,
-          granularity: decisionGranularityHoisted,
+          granularity: resolvedDecisionGranularity,
           reason: visualDecisionHoisted?.provenance ?? null,
         }
         const observed = {
@@ -11271,15 +11321,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           turnKey: `${sessionId}:${turnReceivedAt}`,
           conceptId: resolvedConceptId ?? null,
           subjectSlug: learnSession.subject?.slug ?? null,
-          phaseBefore: phaseBeforeTurnHoisted,
+          phaseBefore: resolvedPhaseBeforeTurn,
           phaseAfter: after?.phase ?? null,
           decidedMove,
-          legalityBlock: legalityBlockHoisted,
-          gateEligible: gateTermsHoisted ? Object.values(gateTermsHoisted).every(Boolean) : false,
-          blockedBy: gateTermsHoisted
-            ? Object.entries(gateTermsHoisted).filter(([, v]) => !v).map(([k]) => k)
+          legalityBlock: resolvedLegalityBlock,
+          gateEligible: resolvedGateTerms ? Object.values(resolvedGateTerms).every(Boolean) : false,
+          blockedBy: resolvedGateTerms
+            ? Object.entries(resolvedGateTerms).filter(([, v]) => !v).map(([k]) => k)
             : [],
-          selectedProbeId: decisionProbeIdHoisted,
+          selectedProbeId: resolvedDecisionProbeId,
           pendingProbeId: pendingMcqHoisted?.assetId ?? null,
           probeHeldTurns: turnProgressHoisted?.probeHeldTurns ?? 0,
           modelOfferedTaggedMcq: mcqParse.mcq !== null,
@@ -11291,7 +11341,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // field is about what the MODEL DID, which is the only thing that
           // makes the blind channel measurable.
           modelOfferedProseMcq: hasProseMultipleChoice(text),
-          modelProbeVerdict: modelProbeVerdictHoisted,
+          modelProbeVerdict: resolvedModelProbeVerdict,
           askViolation: (legality?.askViolations ?? 0) > 0,
           gradeSource: mcqGradeHoisted !== null ? 'server-key' : 'none',
           gradedCorrect: mcqGradeHoisted?.correct ?? null,

@@ -165,7 +165,19 @@ describe('both routes run the guard, and only this one guard exists', () => {
   })
 
   it('the chat route calls the SAME shared guard, on the teaching target', () => {
-    expect(CHAT_ROUTE).toMatch(/repairFieldLineSign\(cleanText, decisionConceptIdHoisted\)/)
+    // Pre-Typed-Turn-Contract-Batch-2 assertion (kept verbatim, no longer
+    // matches source — the read site now goes through
+    // `resolvedDecisionConceptId`, design doc §6 Batch 2's "provenance
+    // cluster"):
+    //   expect(CHAT_ROUTE).toMatch(/repairFieldLineSign\(cleanText, decisionConceptIdHoisted\)/)
+    // `resolvedDecisionConceptId` is `turnContractShadow?.provenance
+    // .decisionConceptId ?? decisionConceptIdHoisted` — provably the same
+    // value as `decisionConceptIdHoisted` alone (that field is CONTRACT-
+    // classified: no write anywhere after the contract's own compile
+    // point), so this is a representation change, not a behavior change.
+    // Same invariant, new source.
+    expect(CHAT_ROUTE).toMatch(/repairFieldLineSign\(cleanText, resolvedDecisionConceptId\)/)
+    expect(CHAT_ROUTE).toContain('const resolvedDecisionConceptId = turnContractShadow?.provenance.decisionConceptId ?? decisionConceptIdHoisted')
     expect(CHAT_ROUTE).toContain("await import('@/lib/teaching/fieldLineSignGuard')")
   })
 
