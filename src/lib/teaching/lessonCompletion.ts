@@ -92,6 +92,20 @@ export interface LessonCompletionPayload {
   nextLessonOrder: number | null
   /** True when every concept was mastered (nothing left for review). */
   fullyMastered: boolean
+  /**
+   * The `needsReview` concepts whose PLAIN evidence reached the mastery bar
+   * while the VERIFIED evidence did not — `ConceptOutcome.answeredButUnverified`,
+   * the authoritative honest-reason field that already exists on the outcome
+   * (lessonSummary.ts). Surfaced here so the completion payload can no longer
+   * report `mastered: []` / `needsReview: [x]` with nothing that distinguishes
+   * "answered everything correctly, never server-graded" from "did not answer".
+   *
+   * Always a SUBSET of `needsReview`; empty when the summary was reconstructed
+   * from persisted ids alone (a resumed/already-finished render has no live
+   * ConversationState to derive the fact from — the pre-existing P1 limitation,
+   * unchanged).
+   */
+  answeredButUnverified: string[]
 }
 
 /**
@@ -127,6 +141,11 @@ export function buildCompletionPayload(
         ? currentLessonOrder + 1
         : null,
     fullyMastered: summary.complete,
+    // Derived from the SAME summary every other field here is derived from —
+    // no second source, no recomputation, no model input.
+    answeredButUnverified: summary.needsReview
+      .filter((o) => o.answeredButUnverified)
+      .map((o) => o.conceptId),
   }
 }
 

@@ -1101,6 +1101,47 @@ export function launderedEvidence(state: ConversationState): boolean {
 
 // ── Client-facing mastery summary (Bug 9/11 — one source of truth) ──────────
 
+/**
+ * WHY THE VERDICT CAN BE FALSE WITH THE PLAIN COUNTERS AT THE BAR.
+ *
+ * Derived ONLY from authoritative state that already exists — never from
+ * model output, never from prose, never from anything the model can
+ * influence. It EXPLAINS the verdict; it can never change it.
+ *
+ * Precedence mirrors `conceptMasteryVerdict`'s own evaluation order, so the
+ * reason names the condition that ACTUALLY decided the verdict rather than
+ * the first one that happens to be true:
+ *
+ *   teaching-integrity              the verdict's own first test
+ *   invented-key                    a graded item's key was model-written
+ *   contradicted                    a signal was overruled by the text
+ *   answered-but-not-server-graded  correct answers exist that no authored
+ *                                   key ever graded (the free-response case)
+ *   null                            verified, OR nothing to explain yet
+ */
+export type UnverifiedReason =
+  | 'answered-but-not-server-graded'
+  | 'invented-key'
+  | 'contradicted'
+  | 'teaching-integrity'
+
+export function unverifiedReasonFor(state: ConversationState | null): UnverifiedReason | null {
+  if (!state) return null
+  // A certified concept has nothing to explain.
+  if (conceptMasteryVerdict(state)) return null
+  if (state.teachingIntegrityUncertain === true) return 'teaching-integrity'
+  if ((state.unauthoredKeyGrades ?? 0) > 0) return 'invented-key'
+  if ((state.signalContradictions ?? 0) > 0) return 'contradicted'
+  // The free-response case: plain correctness the verified counters never
+  // received. NOT reported when the learner simply has not answered yet —
+  // an unanswered lesson is not an unexplained verdict, and claiming a
+  // reason there would be a fabricated explanation.
+  const plainBeyondVerified =
+    state.correctAtCheck > (state.verifiedCorrectAtCheck ?? 0) ||
+    state.correctAtPractice > (state.verifiedCorrectAtPractice ?? 0)
+  return plainBeyondVerified ? 'answered-but-not-server-graded' : null
+}
+
 export interface MasterySummary {
   verified: boolean
   phase: string
@@ -1108,6 +1149,23 @@ export interface MasterySummary {
   practiceCorrect: number
   checkRequired: number
   practiceRequired: number
+  /**
+   * THE COUNTERS THE VERDICT ACTUALLY READS.
+   *
+   * `checkCorrect`/`practiceCorrect` above are the PLAIN counters, which
+   * advance on any accepted correct answer INCLUDING a model self-report on
+   * an ungraded prose turn. `verified` is computed from THESE. Reported
+   * separately (never instead) so a payload can no longer show requirements
+   * met beside `verified: false` with nothing that explains the gap — the
+   * real-account P0 pinned by masteryCounterDisplayDivergence.test.ts.
+   *
+   * Additive: the plain counters keep their exact meaning and still drive
+   * the learner-visible ladder and the client's own answer attribution.
+   */
+  verifiedCheckCorrect: number
+  verifiedPracticeCorrect: number
+  /** Why `verified` is false, or null. See UnverifiedReason. */
+  unverifiedReason: UnverifiedReason | null
   /** This turn's [LESSON_COMPLETE] was stripped for lack of evidence. */
   completionSuppressed: boolean
   /** The learner asked to advance before mastery — client shows the
@@ -1131,6 +1189,11 @@ export function buildMasterySummary(
     practiceCorrect: state.correctAtPractice,
     checkRequired: MASTERY_CHECK_REQUIRED,
     practiceRequired: MASTERY_PRACTICE_REQUIRED,
+    // The evidence the verdict is computed from, surfaced beside the
+    // evidence the ladder is computed from. Same state, no new source.
+    verifiedCheckCorrect: state.verifiedCorrectAtCheck ?? 0,
+    verifiedPracticeCorrect: state.verifiedCorrectAtPractice ?? 0,
+    unverifiedReason: unverifiedReasonFor(state),
     completionSuppressed: opts.completionSuppressed,
     gatePending: opts.gatePending,
   }

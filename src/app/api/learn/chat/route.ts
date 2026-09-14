@@ -8225,6 +8225,20 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             phaseAfter: conversationStateAfterTurnHoisted?.phase ?? null,
             check: conversationStateAfterTurnHoisted?.correctAtCheck ?? null,
             practice: conversationStateAfterTurnHoisted?.correctAtPractice ?? null,
+            // ── THE EVIDENCE THE MASTERY VERDICT ACTUALLY READS ─────────────
+            //
+            // `check`/`practice` above are the PLAIN counters, which advance on
+            // any accepted correct answer including a model self-report on an
+            // ungraded prose turn. The verdict is computed from the VERIFIED
+            // counters, and those advance only on `serverGraded === true`.
+            // Logging only the plain pair reproduced the payload's own blind
+            // spot: the real-account P0 (counters at the bar, verified false)
+            // was unattributable from logs, because the governing numbers and
+            // the fact that decides them were both absent. Read from the same
+            // already-hoisted values the fold used — no second calculation.
+            verifiedCheck: conversationStateAfterTurnHoisted?.verifiedCorrectAtCheck ?? null,
+            verifiedPractice: conversationStateAfterTurnHoisted?.verifiedCorrectAtPractice ?? null,
+            serverGraded: gradedAgainstServerKeyHoisted,
             // ── PHASE 7N-2: WHY `move` WAS WHAT IT WAS ──────────────────────
             //
             // Phase 7M-B proved, in production, that a learner can ask to be
@@ -9850,8 +9864,38 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                   if (shouldFinalizeLesson(required, folded)) {
                     const { outcome: finalOutcome, summary } =
                       await store.finalizeLessonAttempt(prisma, id, folded)
+                    // P1 FIX: `summary` is RECONSTRUCTED from the persisted
+                    // attempt's plain id lists (summaryFromAttempt), which
+                    // cannot carry the live `answeredButUnverified` fact —
+                    // that requires the actual ConversationState, not an id.
+                    // Patch it in for THIS turn's concept from the state we
+                    // already have in hand (`stateForOutcome`, defined above).
+                    // No schema change: nothing here is persisted, and a later
+                    // resumed/already-finished render (which has no live state)
+                    // falls back to the generic wording exactly as before.
+                    //
+                    // COMPUTED ONCE, BEFORE BOTH CONSUMERS. It used to be
+                    // derived after the completion payload was already built,
+                    // so the close text carried the honest fact and the PAYLOAD
+                    // did not — the client was handed `mastered: []` /
+                    // `needsReview: [x]` with no way to tell "answered
+                    // everything correctly, never server-graded" from "never
+                    // answered". One value, one owner, both readers.
+                    const summaryForClose = stateForOutcome
+                      ? {
+                          ...summary,
+                          needsReview: await Promise.all(summary.needsReview.map(async (o) => {
+                            if (o.conceptId !== stateForOutcome.conceptId) return o
+                            const { conceptOutcome: liveConceptOutcome } = await import('@/lib/teaching/lessonSummary')
+                            return {
+                              ...o,
+                              answeredButUnverified: liveConceptOutcome(stateForOutcome, lessonCtx?.lessonTitle ?? null).answeredButUnverified,
+                            }
+                          })),
+                        }
+                      : summary
                     lessonCompletionHoisted = buildCompletionPayload(
-                      finalOutcome, summary, lessonCtx?.currentLesson ?? null,
+                      finalOutcome, summaryForClose, lessonCtx?.currentLesson ?? null,
                       { lang: teachingLang, conceptId: resolvedConceptId },
                     )
                     // ── THE COMPLETING TURN MUST NOT ALSO TEACH ────────────
@@ -9879,30 +9923,6 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                     // source — buildLessonCloseText is the one builder the
                     // already-complete serve path uses too.
                     const { buildLessonCloseText } = await import('@/lib/teaching/lessonCompletion')
-                    // P1 FIX: `summary` above is RECONSTRUCTED from the
-                    // persisted attempt's plain id lists (summaryFromAttempt),
-                    // which cannot carry the live `answeredButUnverified` fact
-                    // — that requires the actual ConversationState, not an id.
-                    // Patch it in for THIS turn's concept from the state we
-                    // already have in hand (`stateForOutcome`, defined above),
-                    // so the live close — the one place the reported defect
-                    // occurs — can choose the honest message. No schema
-                    // change: nothing here is persisted, and a later resumed/
-                    // already-finished render (which has no live state) falls
-                    // back to the generic wording exactly as before.
-                    const summaryForClose = stateForOutcome
-                      ? {
-                          ...summary,
-                          needsReview: await Promise.all(summary.needsReview.map(async (o) => {
-                            if (o.conceptId !== stateForOutcome.conceptId) return o
-                            const { conceptOutcome: liveConceptOutcome } = await import('@/lib/teaching/lessonSummary')
-                            return {
-                              ...o,
-                              answeredButUnverified: liveConceptOutcome(stateForOutcome, lessonCtx?.lessonTitle ?? null).answeredButUnverified,
-                            }
-                          })),
-                        }
-                      : summary
                     cleanText = buildLessonCloseText(finalOutcome.lessonTitle, summaryForClose, {
                       lang: teachingLang, conceptId: resolvedConceptId,
                     })
