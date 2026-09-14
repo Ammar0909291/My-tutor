@@ -9,6 +9,66 @@ and it changed the plan. The adopted order below is the steel man's, not the
 one this document originally argued for. §2 records both.
 **Baseline:** commit `2bcc573`, deployment `dpl_BnW8Za7erUYRiPKuKS2fv5FBtJ18` (READY).
 
+## 0. ACCEPTANCE CONTRACT — what "100% complete" means and how it is checked
+
+**Added 2026-09-14 on the owner's instruction: "I need 100% complete fix."**
+This section is the one the rest of the document serves. It is not an argument;
+it is a definition of done with countable denominators, so "100%" is a fact
+someone can verify rather than a claim someone makes.
+
+### 0.1 The five conditions. All five must read 100%.
+
+| # | Condition | Denominator | Today | Checked by |
+|---|---|---|---|---|
+| **C1** | Every authored asset module is reachable by the writer production actually runs | 41 modules | **9 of 41** | corpus/writer diff, offline |
+| **C2** | Every KG concept has serving content (≥1 explanation at the served band) | **1,866 concepts** | **687 (36.8%)** | SQL over `asset_identity` |
+| **C3** | Every (concept, band) pair meets the asset contract (≥3 gradeable probes; depth target 5) | 829 pairs today, ~2,000 at C2=100% | **780 at contract** | one subject-agnostic readiness function |
+| **C4** | Every concept drives to verified mastery in a real lesson | 1,866 | physics 53/56 sampled; rest unmeasured | certification sweep against the deployed app |
+| **C5** | Every defect class in the register has a guard that fails on regression | the register | partial | structural tests |
+
+**Per subject, C2 today** — physics 238/238 · chemistry 186/186 · english
+216/216 · mathematics **47/908** · biology **0/199** · computer science **0/119**.
+
+**A stale figure corrected while writing this:** CLAUDE.md records biology at 108
+concepts. The live KG returns **199**. Total corpus is **1,866**, not the 1,775
+quoted throughout this file and CLAUDE.md. Every denominator above is from the
+live KG, read this session.
+
+### 0.2 What 100% costs, from this repo's own measured rates
+
+- **1,179 concepts** have no serving content. A large share of the maths and all
+  of the biology/CS content is ALREADY AUTHORED and stranded (§10.1) — recovered
+  by wiring, not by writing.
+- Measured authoring rate, 2026-08-19 campaign: **185 concepts (185 explanations
+  + 555 probes) in one session.**
+- Estimate: **~15–25 sessions** to take C1–C3 to 100%, plus certification sweeps
+  for C4 — which are provider-capacity-bound, not effort-bound.
+
+**So 100% on C1–C5 is achievable.** It is large, finite, and countable, which is
+exactly why it can be promised.
+
+### 0.3 The one thing that is NOT in this contract, stated once
+
+**"The teaching is good"** is not a condition here, because it has no test. There
+is no oracle in this repository that can score pedagogical quality — an LLM judge
+is banned, correctly, and a transcript scorer measures assessment machinery, not
+teaching (see `rubricScore.ts`'s own header). C1–C5 guarantee that **every topic
+can be taught and can be closed without hitting a defect.** They do not guarantee
+a learner enjoyed it or learned deeply. That gap is closed by human spot-checks
+and real learners, never by a percentage.
+
+**This is the honest shape of the promise:** 100% of the defects, 100% of the
+coverage, 100% of the guards — and human judgement for the part no number covers.
+
+### 0.4 Order of work (from §2.0, unchanged by this section)
+
+C1 first (cheapest, unblocks the largest share of C2 for free), then the C3
+report, then authoring to close C2/C3, then C4 sweeps, with C5 guards added
+alongside each. **Progress is reported as the five numbers above and nothing
+else** — no session may claim advancement without moving one of them.
+
+---
+
 This is the answer to one question: *if the whole tutor were mine to fix, what
 would I do, in what order, and what would it cost?*
 
