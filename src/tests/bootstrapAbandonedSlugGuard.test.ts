@@ -251,20 +251,56 @@ describe('the guard is wired into src/instrumentation.ts, not merely simulated',
     expect(CODE).toMatch(/if \(liveAbandoned\.length > 0\) \{/)
   })
 
-  it('ADDS NO QUERY — the decision is collected inside the existing prefetch loop', () => {
+  it('the FULL prefetch loop still adds no SECOND full-table query of its own — the decision is collected inside the existing prefetch loop', () => {
     // The enabling change is one scalar column on a query that was already
-    // running. If a future edit gives the guard its own read, this fails.
+    // running. If a future edit gives the guard its own FULL-CORPUS read
+    // (beyond EGRESS-3's own bounded early check below), this fails.
+    //
+    // EGRESS-3 (2026-09-15): a bounded query was added BEFORE this region —
+    // see 'EGRESS-3 adds exactly one BOUNDED query, before the full prefetch'
+    // below for its own coverage — so this region now legitimately contains
+    // two `prisma.assetIdentity.` calls: the new bounded early check and the
+    // original full prefetch. Old assertion (kept verbatim, no longer
+    // matches source):
+    //   expect([...prefetch.matchAll(/prisma\.\w+\./g)].map((m) => m[0])).toEqual(['prisma.assetIdentity.'])
     const prefetch = CODE.slice(
       CODE.indexOf('const abandonedSlugs = abandonedLegacyProbeSlugs(ALL_PROBES)'),
       CODE.indexOf('if (liveAbandoned.length > 0) {'),
     )
     expect(prefetch.length).toBeGreaterThan(100)
-    // Exactly one database call in the whole region, and it is the prefetch.
-    expect([...prefetch.matchAll(/prisma\.\w+\./g)].map((m) => m[0])).toEqual(['prisma.assetIdentity.'])
+    expect([...prefetch.matchAll(/prisma\.\w+\./g)].map((m) => m[0])).toEqual(
+      ['prisma.assetIdentity.', 'prisma.assetIdentity.'],
+    )
     expect(prefetch).toMatch(/findMany\(\{\s*where: seedOwnershipWhere\(\)/)
     expect(prefetch).toMatch(/status: true,/)
     // and the collection happens in the same loop body that fills `existing`.
     expect(prefetch).toMatch(/existing\.set\(row\.canonicalSlug[\s\S]*liveAbandoned\.push\(/)
+  })
+
+  it('EGRESS-3 adds exactly one BOUNDED query, before the full prefetch, scoped to abandonedSlugs only', () => {
+    // Anchored on real code, never prose: `CODE` strips every comment (see
+    // its own definition above), so an anchor inside a comment — including
+    // the "EGRESS-3" label itself, which appears only in prose except for
+    // one unrelated mention inside a console.error string — would silently
+    // find the wrong position instead of failing.
+    const start = CODE.indexOf('const abandonedSlugs = abandonedLegacyProbeSlugs(ALL_PROBES)')
+    const earlyCheckAt = CODE.indexOf('if (abandonedSlugs.size > 0) {', start)
+    const fullPrefetchAt = CODE.indexOf('const liveAbandoned: Array<', start)
+    expect(earlyCheckAt).toBeGreaterThan(start)
+    expect(fullPrefetchAt).toBeGreaterThan(earlyCheckAt)
+    const earlyBlock = CODE.slice(earlyCheckAt, fullPrefetchAt)
+    // Bounded to abandonedSlugs — never the full seed-owned row count.
+    expect(earlyBlock).toMatch(/canonicalSlug: \{ in: \[\.\.\.abandonedSlugs\] \}/)
+    // Guarded so a corpus with no ladder promotions pays zero extra queries.
+    expect(earlyBlock).toMatch(/if \(abandonedSlugs\.size > 0\) \{/)
+    // Never reads content — only enough to name the blocker and abort.
+    expect(earlyBlock).not.toMatch(/probeAsset:/)
+    expect(earlyBlock).not.toMatch(/explanationAsset:/)
+    // Aborts the SAME way the full guard below does — same log shape, same
+    // "no rows created" invariant — and never falls through into the
+    // expensive prefetch when it fires.
+    expect(earlyBlock).toMatch(/ABORTED before any write/)
+    expect(earlyBlock).toMatch(/\breturn\b/)
   })
 
   it('leaves the cheap-probe fast path untouched — nothing added before it', () => {

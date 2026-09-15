@@ -798,6 +798,62 @@ async function bootstrapAssets() {
       // It is computed HERE rather than beside the resolver above so that a
       // cold start with nothing to do does not pay for it at all.
       const abandonedSlugs = abandonedLegacyProbeSlugs(ALL_PROBES)
+      // ── EGRESS-3: DON'T PAY FOR THE FULL PREFETCH TO LEARN WHAT A BOUNDED
+      //    QUERY ALREADY KNOWS ──────────────────────────────────────────────
+      //
+      // MEASURED (2026-09-15, production, via Supabase MCP against the live
+      // corpus + database): 45 abandoned base slugs are currently LIVE —
+      // stuck exactly where the P-10-FOLLOW-UP-B guard below always finds
+      // them, because resolving them needs authored replacement content this
+      // bootstrap cannot write on its own (each of the 45 concept+band slots
+      // already sits at only 1-2 ACTIVE gradeable probes — BELOW the 3-probe
+      // asset contract — so deprecating the blocker without a same-turn
+      // replacement would make coverage worse, not better; this is a content
+      // task, not a bootstrap fix). That means the guard below fires on
+      // EVERY cold start, forever, until that content lands — and until now
+      // it paid for the full ~7,500-row, two-relation prefetch first every
+      // single time to discover a fact this ~700-slug bounded query already
+      // knows for a fraction of the cost.
+      //
+      // So ask the bounded question FIRST. `abandonedSlugs` is already free
+      // (pure, in-memory, computed above from the corpus already loaded for
+      // this cold start) — only checking which of THOSE specific slugs are
+      // still live costs a query, and it is bounded by the corpus's own
+      // abandoned-slug count, never by the full seed-owned row count.
+      if (abandonedSlugs.size > 0) {
+        const earlyLiveAbandoned = await withRetry(() => prisma.assetIdentity.findMany({
+          where: {
+            ...(seedOwnershipWhere() as Record<string, unknown>),
+            canonicalSlug: { in: [...abandonedSlugs] },
+            status: { notIn: SEED_REVIVABLE_STATUSES as never },
+          } as never,
+          select: { assetId: true, canonicalSlug: true, status: true },
+        }))
+        if (earlyLiveAbandoned.length > 0) {
+          const shown = earlyLiveAbandoned.slice(0, 10)
+          console.error(
+            `[instrumentation] asset bootstrap ABORTED before any write — ${earlyLiveAbandoned.length} seed-owned ` +
+              'identity/identities are still live under a canonicalSlug this corpus no longer produces, ' +
+              'because that slot was promoted to a difficulty ladder. Seeding would create a SECOND ' +
+              'ACTIVE identity for the same question (the P-10 defect). No rows created; nothing ' +
+              'renamed or deleted; everything already stored continues to serve. (EGRESS-3: found via ' +
+              'the bounded check, before the full prefetch ran.)',
+          )
+          for (const r of shown) {
+            console.error(`  ${r.status} ${r.canonicalSlug} (assetId ${r.assetId})`)
+          }
+          if (earlyLiveAbandoned.length > shown.length) {
+            console.error(`  … and ${earlyLiveAbandoned.length - shown.length} more not shown.`)
+          }
+          console.error(
+            '  Resolve by deprecating these rows (docs/CLAUDE_HANDOVER.md §9r/§9s records the P-10 ' +
+              'precedent: a status change only, no delete, reversible) AFTER their difficulty-ladder ' +
+              'replacements are authored and ready to seed in the same run — see the coverage-risk ' +
+              'note above — after which this bootstrap resumes on the next cold start.',
+          )
+          return
+        }
+      }
       const liveAbandoned: Array<{ assetId: string; canonicalSlug: string; status: string }> = []
       // Every seed-owned slug that is currently SERVING, collected in the same
       // pass. `servedByLiveLadderSibling` (P-10-FOLLOW-UP-D) asks its four exact
