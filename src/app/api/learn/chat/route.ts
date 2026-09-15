@@ -6473,7 +6473,22 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // SUSPICIOUS signal still drives the teaching flow but is excluded
       // from strict mastery (completion authority).
       let signalVerificationStatusHoisted: 'CLEAN' | 'SUSPICIOUS' | 'CONTRADICTED' = 'CLEAN'
-      let unauthoredKeyGradeHoisted = false
+      // Typed Turn Contract Batch 8 Part 2 (2026-09-15): `unauthoredKeyGradeHoisted`
+      // (declared here as `let unauthoredKeyGradeHoisted = false`, written
+      // true a few lines below) was deleted — confirmed by exhaustive grep to
+      // have zero real reads left anywhere in this file (every remaining
+      // mention beyond its own declaration+write was a comment). Batch 3
+      // (see the comments still below referencing it, and turnContract.ts's
+      // own header) had already migrated every real consumer onto
+      // `gradeForVerdict`/`resolvedGrade`, which derive the identical fact
+      // from `gradedAgainstServerKeyHoisted` instead; this local's write was
+      // never wired into `contractInput`/`deliveryInput` by name, so nothing
+      // else in the compile-input architecture held it live either. Its
+      // sibling write, the CLEAN-to-SUSPICIOUS signal downgrade a few lines
+      // below, and the `console.warn` right after it are UNCHANGED — both
+      // are still real, read, CONTRACT-relevant work; only the one dead
+      // boolean assignment
+      // was removed.
       // Thread 1: the POSITIVE provenance the verified mastery counters require —
       // this turn's correctness came from `gradeMcqAnswer` against an AUTHORED
       // key. Hoisted so the fold evidence (below) can require it; a CLEAN
@@ -6580,7 +6595,6 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       if (mcqGradedThisTurn && pendingMcqHoisted) {
         const { probeKeyIsAuthored } = await import('@/lib/teaching/mcq')
         if (!probeKeyIsAuthored(pendingMcqHoisted)) {
-          unauthoredKeyGradeHoisted = true
           if (signalVerificationStatusHoisted === 'CLEAN') signalVerificationStatusHoisted = 'SUSPICIOUS'
           console.warn('[mcq-grade] ' + JSON.stringify({
             event: 'unauthored-key-not-certifying',

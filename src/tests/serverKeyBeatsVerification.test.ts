@@ -147,7 +147,21 @@ describe('C. the route skips verification only for a server-owned key', () => {
   it('the unauthored-key downgrade is still reached — it is a separate block', () => {
     // An invented key must still be recorded and still fail to certify; this
     // fix must not have removed that path.
+    //
+    // Typed Turn Contract Batch 8 Part 2 (2026-09-15): `unauthoredKeyGradeHoisted
+    // = true` was deleted from this block — it was a dead write (confirmed by
+    // exhaustive grep: zero real reads anywhere in route.ts; Batch 3 had
+    // already migrated every real consumer onto `gradeForVerdict`/
+    // `resolvedGrade`, which derive the same fact from
+    // `gradedAgainstServerKeyHoisted` instead). The signal downgrade this
+    // test actually cares about — `signalVerificationStatusHoisted` moving
+    // CLEAN -> SUSPICIOUS in the SAME block — is untouched; asserted here in
+    // its place. Old assertion (kept verbatim, no longer matches source):
+    //   expect(route).toContain('unauthoredKeyGradeHoisted = true')
     expect(route).toContain("event: 'unauthored-key-not-certifying'")
-    expect(route).toContain('unauthoredKeyGradeHoisted = true')
+    const downgradeAt = route.indexOf("event: 'unauthored-key-not-certifying'")
+    const downgradeBlock = route.slice(Math.max(0, downgradeAt - 300), downgradeAt)
+    expect(downgradeBlock).toContain("signalVerificationStatusHoisted === 'CLEAN'")
+    expect(downgradeBlock).toContain("signalVerificationStatusHoisted = 'SUSPICIOUS'")
   })
 })
