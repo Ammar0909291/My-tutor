@@ -224,7 +224,13 @@ describe('the guard is wired at the response boundary and reuses the shared lead
       + '          || isRestatementOfPending(mcqHoisted, pendingMcqHoisted)',
     )
     expect(ROUTE).toMatch(/mcqGradeHoisted === null/)
-    expect(ROUTE).toMatch(/!isBareAckHoisted/)
+    // Typed Turn Contract Batch 6 (2026-09-15): `isBareAckHoisted` is now
+    // read here via `resolvedIsBareAck`, the same value (Batch 0's actual
+    // TurnContract shape places it under `contract.inbound`, not
+    // `contract.authority` — the design doc's own grouping was stale). Old
+    // assertion (kept verbatim, no longer matches source):
+    //   expect(ROUTE).toMatch(/!isBareAckHoisted/)
+    expect(ROUTE).toMatch(/!resolvedIsBareAck/)
     expect(ROUTE).toMatch(/!turnIntent\.wantsPractice/)
     expect(ROUTE).toMatch(/!detectLearnerQuestion\(message\)/)
     // I4: distress and help requests are excluded too.

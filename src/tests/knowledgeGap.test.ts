@@ -152,7 +152,12 @@ describe('3. a gap does not spend the affect budget', () => {
     const route = readFileSync('src/app/api/learn/chat/route.ts', 'utf8')
     const at = route.indexOf('const syntheticSignal =')
     expect(at).toBeGreaterThan(0)
-    expect(route.slice(Math.max(0, at - 900), at)).toContain('!excursionActiveHoisted')
+    // Typed Turn Contract Batch 6 (2026-09-15, design doc §6 "authority
+    // cluster"): `excursionActiveHoisted` is single-epoch CONTRACT-classified
+    // and is now read here via `resolvedExcursionActive`, the same value. Old
+    // assertion (kept verbatim, no longer matches source):
+    //   expect(route.slice(Math.max(0, at - 900), at)).toContain('!excursionActiveHoisted')
+    expect(route.slice(Math.max(0, at - 900), at)).toContain('!resolvedExcursionActive')
   })
 
   it('DISTRESS STILL SPENDS IT — the protection is not removed', () => {
@@ -167,7 +172,11 @@ describe('3. a gap does not spend the affect budget', () => {
 
   it('no MistakeRecord is written against the lesson for a reported gap', () => {
     const route = readFileSync('src/app/api/learn/chat/route.ts', 'utf8')
-    expect(route).toContain('if (resolvedConceptId && !knowledgeGapHoisted) {')
+    // Typed Turn Contract Batch 6 (2026-09-15): `knowledgeGapHoisted` is now
+    // read here via `resolvedKnowledgeGap`, the same value. Old assertion
+    // (kept verbatim, no longer matches source):
+    //   expect(route).toContain('if (resolvedConceptId && !knowledgeGapHoisted) {')
+    expect(route).toContain('if (resolvedConceptId && !resolvedKnowledgeGap) {')
   })
 })
 

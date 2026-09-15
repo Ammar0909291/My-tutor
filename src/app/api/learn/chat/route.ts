@@ -6788,6 +6788,58 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // prevent. They stay their own named locals; only their internal reads
       // of `visualDecisionHoisted` migrate to `resolvedVisualDecision` below,
       // same as every other post-compile consumer in this file.
+      // Typed Turn Contract, Batch 6 — "authority cluster" (design doc §6
+      // Batch 6, `contract.authority` — feeds turnArbitration.ts's Phase 3
+      // precedence ladder, RECOVERY > LEARNER_REQUEST > CLOSE > COMPLETE >
+      // TEACH, per CLAUDE.md's "Architecture hardening — Series B" section;
+      // treated as safety-relevant, not just representation plumbing). All
+      // 12 locals traced by hand, both for the write-site pattern AND for a
+      // bare trailing `=` (Batch 5's own lesson — a multi-line assignment's
+      // RHS can sit on the next line): `turnArbitrationHoisted` writes at
+      // ~L2910, `recoveryKeyHoisted` at ~L2234 (its ONE write — the high
+      // reference count, 49 by the design doc's own count, is read volume,
+      // not multiple epochs; one comment at ~L1827 mentions the name 155
+      // lines before the declaration, which the design doc itself already
+      // flags as a stale-inflation artifact of whatever produced its
+      // table, not a real write), `excursionActiveHoisted` at ~L2774,
+      // `excursionDecisionHoisted` at ~L2717, `excursionTeachingTitleHoisted`
+      // at ~L2780, `knowledgeGapHoisted` at ~L2634, `firstLessonActiveHoisted`
+      // at ~L3091, `learnerRequestHoisted` at ~L3396, `navigationRequestHoisted`
+      // at ~L3221, `claimChallengeActiveHoisted` at ~L5496. Every one of the
+      // 12 has exactly ONE real write, all well before this block and before
+      // the contract compile point (~L5865) — single-epoch throughout,
+      // unlike Batch 4's `mcqHoisted`.
+      //
+      // A real design-doc/reality mismatch found by tracing (not assumed):
+      // `isBareAckHoisted` (write ~L2512) and `lowSignalAckHoisted` (write
+      // ~L3653) are named in the design doc's Batch 6 table row, but the
+      // ACTUAL TurnContract shape Batch 0 built (turnContract.ts) already
+      // placed both under `contract.inbound`, not `contract.authority` — the
+      // route's own contractInput construction (~L5817) confirms this:
+      // `inbound: { isBareAck: isBareAckHoisted, lowSignalAck:
+      // lowSignalAckHoisted, ... }`. Per this program's standing non-goal
+      // ("do not redesign the TurnContract/TurnDelivery shape"), resolved
+      // against the shape as it actually exists — `contract.inbound.X` —
+      // not moved into `contract.authority`.
+      //
+      // Two of the twelve have ZERO downstream consumers past this block —
+      // verified by grepping every occurrence, not the design doc's own
+      // per-local counts (which happen to agree here: both read "0" in its
+      // table): `excursionTeachingTitleHoisted`'s three real reads (~L3710,
+      // ~L3812, ~L3847) and `navigationRequestHoisted`'s two (~L3730,
+      // ~L3769) all run BEFORE this block. Per Batch 2's own rule ("only
+      // migrate where a genuine downstream reader exists"), neither gets a
+      // resolved const — there is nothing for one to serve.
+      const resolvedTurnArbitration = turnContractShadow?.authority.arbitration ?? turnArbitrationHoisted
+      const resolvedRecoveryKey = turnContractShadow?.authority.recoveryKey ?? recoveryKeyHoisted
+      const resolvedExcursionActive = turnContractShadow?.authority.excursion.active ?? excursionActiveHoisted
+      const resolvedExcursionDecision = turnContractShadow?.authority.excursion.decision ?? excursionDecisionHoisted
+      const resolvedKnowledgeGap = turnContractShadow?.authority.knowledgeGap ?? knowledgeGapHoisted
+      const resolvedFirstLessonActive = turnContractShadow?.authority.firstLessonActive ?? firstLessonActiveHoisted
+      const resolvedLearnerRequest = turnContractShadow?.authority.learnerRequest ?? learnerRequestHoisted
+      const resolvedClaimChallengeActive = turnContractShadow?.authority.claimChallengeActive ?? claimChallengeActiveHoisted
+      const resolvedIsBareAck = turnContractShadow?.inbound.isBareAck ?? isBareAckHoisted
+      const resolvedLowSignalAck = turnContractShadow?.inbound.lowSignalAck ?? lowSignalAckHoisted
 
       // Typed Turn Contract, Batch 3 — "answer-verdict cluster" (design doc §6
       // Batch 3). `resolvedGrade` collapses `mcqGradeHoisted` +
@@ -7044,7 +7096,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // authority added to the ladder protects this site automatically instead
       // of waiting for a fourth production incident to add a fourth boolean.
       if (!assembled && !mcqHoisted
-        && (turnArbitrationHoisted ?? arbitrationUnavailable()).allows('FILLER_REPAIR')
+        // Typed Turn Contract Batch 6: reuses `resolvedTurnArbitration`.
+        && (resolvedTurnArbitration ?? arbitrationUnavailable()).allows('FILLER_REPAIR')
         && (await import('@/lib/teaching/lessonCompletion')).shouldRepairFillerTurn({
         lessonCompleted: lessonCompletedHoisted,
         respectsNewIntent: lessonCompletionRespectsNewIntentHoisted,
@@ -7057,7 +7110,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // exact calming vocabulary the filler detector keys on. Without this,
         // a learner who said "I give up" could be answered with a quiz
         // question. See shouldRepairFillerTurn.
-        recoveryTurn: recoveryKeyHoisted !== null,
+        recoveryTurn: resolvedRecoveryKey !== null,
       })) {
         try {
           const { detectFillerTurn, shouldApplyFillerRepair } = await import('@/lib/teaching/conversationState')
@@ -7338,7 +7391,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         const { applyDontKnowCeiling } = await import('@/lib/teaching/dontKnowCeiling')
         const ceiling = applyDontKnowCeiling({
           text: cleanText,
-          recoveryKey: recoveryKeyHoisted,
+          recoveryKey: resolvedRecoveryKey,
           consecutiveDontKnows: resolvedConsecutiveDontKnows,
           pendingMcq: pendingMcqHoisted,
         })
@@ -7369,7 +7422,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         const { readFrustration, stepFrustration, affectBandOf } = await import('@/lib/kernel/frustration')
         const frustrationEvidence = {
           failed: teachingSignal ? teachingSignal.correctness === false : null,
-          recoveryFired: recoveryKeyHoisted !== null,
+          recoveryFired: resolvedRecoveryKey !== null,
           succeeded: teachingSignal?.correctness === true,
         }
         frustrationAfterTurnHoisted = stepFrustration(
@@ -7526,7 +7579,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // phys.meas.units` on those very turns, so it is the value that
             // was available all along.
             const teachingConceptIdForRepair =
-              excursionDecisionHoisted?.targetConceptId
+              resolvedExcursionDecision?.targetConceptId
               ?? libraryConceptNodeIdHoisted
               ?? snapshotCurrentConceptId
               ?? resolvedConceptId
@@ -7785,11 +7838,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // still are, two disconnected axes (see masteryGate.ts).
           try {
             const { vChallenge } = await import('@/lib/kernel/verifier/rules')
-            const challengeCtx = { challengeActive: claimChallengeActiveHoisted } as unknown as
+            const challengeCtx = { challengeActive: resolvedClaimChallengeActive } as unknown as
               import('@/lib/kernel/verifier').VerifierContext
             const challengeViolation = vChallenge(cleanText, challengeCtx)
             console.log('[challenge-guard-scope]', {
-              challengeActive: claimChallengeActiveHoisted,
+              challengeActive: resolvedClaimChallengeActive,
               violated: challengeViolation !== null,
             })
             if (challengeViolation) {
@@ -7862,7 +7915,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // it, mastery for this concept is withheld (masteryGate.ts's
             // `conceptMasteryVerdict`) until the learner reaches a fresh
             // attempt at it.
-            if (claimChallengeActiveHoisted) {
+            if (resolvedClaimChallengeActive) {
               const { CHALLENGE_ACKNOWLEDGED_RE } = await import('@/lib/teaching/claimChallengeGuard')
               teachingIntegrityFellThroughHoisted = !CHALLENGE_ACKNOWLEDGED_RE.test(cleanText)
               console.log('[challenge-guard-integrity]', {
@@ -7892,7 +7945,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // were unreachable in production, and V-CLOSE could never fire.
             const { toPolicyMove, maxQuestionsFor } = await import('@/lib/kernel/policyMove')
             const verifierMove = toPolicyMove({
-              recoveryKey: recoveryKeyHoisted,
+              recoveryKey: resolvedRecoveryKey,
               episodePhase: sessionEpisodeHoisted?.phase,
               ladderMove: evidenceMoveHoisted,
             })
@@ -7901,9 +7954,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               move: verifierMove,
               phase: conversationStateHoisted?.phase ?? null,
               stageCeiling: evidenceStageCeilingHoisted,
-              vocabularyUnlocked: !firstLessonActiveHoisted,
-              formulaUnlocked: !firstLessonActiveHoisted && contentRegister !== 'beginner',
-              recoveryActive: recoveryKeyHoisted !== null,
+              vocabularyUnlocked: !resolvedFirstLessonActive,
+              formulaUnlocked: !resolvedFirstLessonActive && contentRegister !== 'beginner',
+              recoveryActive: resolvedRecoveryKey !== null,
               affectBand: frustrationBandHoisted ?? undefined,
               maxQuestions: maxQuestionsFor(verifierMove),
               maxParagraphs: null,
@@ -7922,7 +7975,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // S1 — history-aware LOG rules (additive; no behavior change
               // until these are promoted to REJECT per the design report).
               turnHistory: snapshotTurnHistory,
-              recoveryKey: recoveryKeyHoisted,
+              recoveryKey: resolvedRecoveryKey,
               phaseAfter: conversationStateHoisted?.phase ?? null,
               // S2 — objective-model LOG rules (additive).
               objectiveCompleted: objectiveStateHoisted
@@ -8095,7 +8148,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // The concept whose authored material the repair may quote — the
             // same resolution order the affirmation floor uses.
             const conceptForFloor =
-              excursionDecisionHoisted?.targetConceptId
+              resolvedExcursionDecision?.targetConceptId
               ?? libraryConceptNodeIdHoisted
               ?? snapshotCurrentConceptId
               ?? resolvedConceptId
@@ -8225,7 +8278,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         const { repliesWithQuestion: repliesWithQuestionForHistory } = await import('@/lib/teaching/conversationState')
         const record = buildTurnRecord(cleanText, {
           askedQuestion: repliesWithQuestionForHistory(cleanText),
-          recoveryKey: recoveryKeyHoisted,
+          recoveryKey: resolvedRecoveryKey,
           phaseAfter: conversationStateHoisted?.phase ?? null,
         })
         turnHistoryUpdateHoisted = { turnHistory: serializeTurnHistory(appendTurn(snapshotTurnHistory, record)) }
@@ -8330,8 +8383,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             const guideFoldsToGateThisTurn =
               conversationStateHoisted?.phase === 'GUIDE' &&
               conversationStateHoisted?.demonstrated === true &&
-              recoveryKeyHoisted === null &&
-              (teachingSignal?.correctness === true || lowSignalAckHoisted === true)
+              resolvedRecoveryKey === null &&
+              (teachingSignal?.correctness === true || resolvedLowSignalAck === true)
             const { detectLearnerQuestion: detectLearnerQuestionForWithhold } =
               await import('@/lib/teaching/conversationState')
             const { isBareAcknowledgement: isBareAcknowledgementForWithhold } =
@@ -8373,7 +8426,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // here — never `gateRefusedOnPolicy`, which would also swallow
               // the closing-turn and arbitration refusals. See the field's
               // doc comment.
-              gateBlockedByExcursion: excursionActiveHoisted,
+              gateBlockedByExcursion: resolvedExcursionActive,
               // A completed lesson has no mastery gate left to guard — see
               // `UngradedGateQuestionInput.lessonCompleted`'s doc comment for
               // the production defect this closes ("got it" after
@@ -8565,14 +8618,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             questionSanctioned: evidenceMoveHoisted === 'ask',
             diagnosticStalled: diagnosticStalledThisTurn(priorStagnantTurnsHoisted),
             signalCorrect: teachingSignal?.correctness ?? null,
-            recoveryFired: recoveryKeyHoisted !== null,
-            learnerRequest: learnerRequestHoisted,
+            recoveryFired: resolvedRecoveryKey !== null,
+            learnerRequest: resolvedLearnerRequest,
             misconceptionDetected: teachingSignal?.phrase !== undefined,
             isPriorKnowledgeProbe: isPriorKnowledgeProbe(cleanText),
             strategyUsed: selectedStrategyHoisted ?? undefined,
             signalConfidence: teachingSignal?.confidence as 'high' | 'medium' | 'low' | undefined,
-            dontKnowSignal: isDontKnowSignal(recoveryKeyHoisted),
-            learnerIssuedDirective: recoveryKeyHoisted === 'too_many_questions',
+            dontKnowSignal: isDontKnowSignal(resolvedRecoveryKey),
+            learnerIssuedDirective: resolvedRecoveryKey === 'too_many_questions',
             signalVerificationStatus: resolvedSignalVerificationStatus,
             // Thread 1: positive server-grade provenance — the ONLY thing that
             // lets this turn bank a VERIFIED mastery credit. False on every
@@ -8596,14 +8649,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             deliveredTeaching: evidenceMoveHoisted === 'teach' || evidenceMoveHoisted === 'show',
             // Advances the delivery phases only (OBSERVE→DEMONSTRATE→GUIDE→
             // CHECK); the mastery gates still require a real answer.
-            acknowledgement: lowSignalAckHoisted,
+            acknowledgement: resolvedLowSignalAck,
             // PHASE 5 (Case D): folds into fillerRepairStreak.
             fillerTurnDetected: fillerDetectedHoisted,
             // FACTUAL CONTENT INTEGRITY: see V-CHALLENGE above and
             // masteryGate.ts's teachingIntegrityUncertain.
             teachingClaimUnresolved: teachingIntegrityFellThroughHoisted,
           }
-          const excursionFrozeLadderThisTurn = excursionActiveHoisted
+          const excursionFrozeLadderThisTurn = resolvedExcursionActive
           const ladderConceptIdForRederive = conversationStateHoisted.conceptId
           conversationStateAfterTurnHoisted = excursionFrozeLadderThisTurn
             ? conversationStateHoisted
@@ -8633,7 +8686,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // The answer to "why did completion fire while an excursion was
             // open?": the gate was never told. It is now an explicit input,
             // checked ahead of the evidence test.
-            excursionActive: excursionActiveHoisted,
+            excursionActive: resolvedExcursionActive,
             move: evidenceMoveHoisted === 'teach' ? 'teach' : evidenceMoveHoisted === 'show' ? 'show' : evidenceMoveHoisted === 'ask' ? 'ask' : null,
             misconceptionActive: conversationStateAfterTurnHoisted.misconceptionDetectedThisLesson,
           })
@@ -8668,8 +8721,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // so the stripped claim cannot become a real completion, and the
           // mastery gate is still pending on the next turn. Nothing is lost but
           // a sentence that should not have been said yet.
+          // Typed Turn Contract Batch 6: reuses `resolvedTurnArbitration`.
           if (claimedCompletionInProse
-              && (turnArbitrationHoisted ?? arbitrationUnavailable()).allows('NEW_QUESTION')) {
+              && (resolvedTurnArbitration ?? arbitrationUnavailable()).allows('NEW_QUESTION')) {
             const { MASTERY_PRACTICE_REQUIRED } = await import('@/lib/teaching/masteryGate')
             const need = Math.max(
               0,
@@ -8683,7 +8737,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // The lie is still stripped; only the follow-up is withheld.
             console.log('[completion-claim]', {
               stripped: true,
-              nudgeWithheld: (turnArbitrationHoisted ?? arbitrationUnavailable()).owner,
+              nudgeWithheld: (resolvedTurnArbitration ?? arbitrationUnavailable()).owner,
             })
           }
           stanceViolationsHoisted = stanceVerdict.violations.map((v) => v.code)
@@ -8716,8 +8770,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // this needs its own fix or is already rare enough to leave.
             move: evidenceMoveHoisted,
             mcqAsked: mcqHoisted !== null,
-            ack: lowSignalAckHoisted,
-            excursion: excursionActiveHoisted,
+            ack: resolvedLowSignalAck,
+            excursion: resolvedExcursionActive,
             askedQuestion: askedQuestionThisTurn,
             phaseBefore: conversationStateHoisted?.phase ?? null,
             phaseAfter: conversationStateAfterTurnHoisted?.phase ?? null,
@@ -8813,7 +8867,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // read by any branch. This block cannot change the move.
             gates: {
               // gate 1
-              recoveryTurn: recoveryKeyHoisted !== null,
+              recoveryTurn: resolvedRecoveryKey !== null,
               // gate 2 — the reason, if this is where production returned
               legalityBlocked: legalityBlockedReasonHoisted,
               taughtThisSession: conversationStateHoisted?.taughtThisSession ?? null,
@@ -8833,7 +8887,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               practiceRequested: turnIntent.wantsPractice,
               questionSanctioned: evidenceMoveHoisted === 'ask',
               diagnosticStalled: diagnosticStalledThisTurn(priorStagnantTurnsHoisted),
-              learnerRequest: learnerRequestHoisted,
+              learnerRequest: resolvedLearnerRequest,
               degradedTurn: isDegradedProvider(provider),
             },
           })
@@ -8951,7 +9005,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // already holds. No generation, no provider call, no session mutation, and
         // the held-session bookkeeping above is untouched.
         const reattachOnExplicitRequest =
-          !figureIntroducedThisTurn && learnerRequestHoisted === 'diagram'
+          !figureIntroducedThisTurn && resolvedLearnerRequest === 'diagram'
         if (figureIntroducedThisTurn || reattachOnExplicitRequest) {
           switch (decision?.payload?.renderer) {
             case 'card': {
@@ -9072,7 +9126,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           text: cleanText,
           recentMessages: historyMessages,
           currentMessage: message,
-          excursionActive: excursionActiveHoisted === true,
+          excursionActive: resolvedExcursionActive === true,
           learnerAskedDirectQuestion: detectLearnerQuestionForDrift(message),
         })
         if (drift.stripped) {
@@ -9388,9 +9442,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           llmUsed,
           provider,
           latencyMs: Date.now() - turnReceivedAt,
-          recoveryTriggered: recoveryKeyHoisted !== null,
-          recoveryKey: recoveryKeyHoisted,
-          frustrationDetected: recoveryKeyHoisted === 'frustrated',
+          recoveryTriggered: resolvedRecoveryKey !== null,
+          recoveryKey: resolvedRecoveryKey,
+          frustrationDetected: resolvedRecoveryKey === 'frustrated',
           questionLoopDetected: (conversationStateHoisted?.consecutivePriorKnowledgeProbes ?? 0) >= 2,
           directInstructionTriggered: cueDecisionHoisted?.decision === 'TEACH_DIRECTLY',
           brainLegacyDisagreement: explanationMemoryAvailable
@@ -9446,9 +9500,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         const session = resolvedVisualDecision?.session
         if (!session) return false
         if (session.turns !== 0) return false
-        const excursionOpen = excursionDecisionHoisted?.state.active === true
+        const excursionOpen = resolvedExcursionDecision?.state.active === true
         if (!excursionOpen) return true
-        const taught = excursionDecisionHoisted?.targetConceptId ?? null
+        const taught = resolvedExcursionDecision?.targetConceptId ?? null
         // An unresolved-topic excursion has no concept at all, so no figure can
         // depict it — nothing is recorded, which is the honest answer.
         if (!taught) return false
@@ -9690,7 +9744,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // RECOVERY evidence (validation/08 §2 RECOVERY contract, the L1
       // writer side: entering state × what was tried; what-followed arrives
       // as the next turn's signal, joinable by session ordering).
-      if (recoveryKeyHoisted) {
+      if (resolvedRecoveryKey) {
         appendEvidenceEvent({
           userId,
           sessionId,
@@ -9699,7 +9753,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           language:  teachingLang,
           gradeBand: memoryState?.gradeBand ?? GradeBand.ADULT,
           category:  EvidenceCategory.LEARNER_FEEDBACK,
-          outcome:   `recovery:${recoveryKeyHoisted}`,
+          outcome:   `recovery:${resolvedRecoveryKey}`,
           strength:  0.0,
         })
 
@@ -9713,19 +9767,19 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // (no keyed probe attaches under CLOSING) and produced the content-free
         // hold. See applySignalToEpisode's "distress is not a graded failure"
         // note for the measured [gate-eligibility] evidence.
-        // `!excursionActiveHoisted`: the same attribution boundary the ladder
+        // `!resolvedExcursionActive`: the same attribution boundary the ladder
         // and the completion gate use. A learner working through a concept
         // THEY asked for is not in a failure spiral on the lesson, and
         // spending the lesson session's affect budget on their side-question
         // doubts is what drove the episode to CLOSING and produced "let's
         // pause on that for today". The budget is not disabled — excursion
         // doubts simply do not pay into the paused lesson's arc.
-        if (sessionEpisodeHoisted && !excursionActiveHoisted) {
+        if (sessionEpisodeHoisted && !resolvedExcursionActive) {
           try {
             const { applySignalToEpisode } = await import('@/lib/teaching/sessionLifecycle')
             const syntheticSignal = { correctness: false as const, confidence: undefined, confusion: true }
             sessionEpisodeHoisted = applySignalToEpisode(sessionEpisodeHoisted, syntheticSignal, {
-              isFirstLesson: firstLessonActiveHoisted,
+              isFirstLesson: resolvedFirstLessonActive,
             })
           } catch { /* non-fatal */ }
         }
@@ -9745,7 +9799,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // would fabricate evidence of a mistake on a concept the learner has
         // not attempted. Reporting a missing foundation is not an error, so the
         // correct number of rows to write is zero.
-        if (resolvedConceptId && !knowledgeGapHoisted) {
+        if (resolvedConceptId && !resolvedKnowledgeGap) {
           prisma.mistakeRecord.create({
             data: {
               userId,
@@ -9796,12 +9850,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // must not certify mastery (assessment/05 §3: gates need delayed +
       // transfer components; those stay owned by the existing completion/
       // assessment flows).
-      // `!excursionActiveHoisted`: this checkpoint writes TopicProgress for the
+      // `!resolvedExcursionActive`: this checkpoint writes TopicProgress for the
       // LESSON concept from this turn's SIGNAL. During an excursion the signal
       // is about the side concept, so writing it here recorded progress on a
       // lesson the learner was not working on — the same mis-attribution as the
       // ladder fold above, in the database rather than the snapshot.
-      if (!excursionActiveHoisted && resolvedConceptId && teachingSignal && teachingSignal.correctness !== undefined) {
+      if (!resolvedExcursionActive && resolvedConceptId && teachingSignal && teachingSignal.correctness !== undefined) {
         const signalCorrect = teachingSignal.correctness
         const signalConfidence = teachingSignal.confidence
         topicProgressEvidenceWrite = (async () => {
@@ -9986,7 +10040,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // P1: accumulate session failure count — increments on recovery
           // utterances AND false SIGNAL outcomes so escalation has a real
           // count (decision-engine/05: per-failure ladders).
-          const failureThisTurn = recoveryKeyHoisted !== null || teachingSignal?.correctness === false
+          const failureThisTurn = resolvedRecoveryKey !== null || teachingSignal?.correctness === false
           const newSessionFailureCount = failureThisTurn ? snapshotSessionFailureCount + 1 : snapshotSessionFailureCount
           // Persist on a boundary turn even when nothing failed: snapshotSessionFailureCount
           // was reset to 0 for this episode at the read site, and a reset that is
@@ -10016,7 +10070,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // for recovery turns to avoid double-counting.
           let episodeUpdate: Record<string, unknown> = {}
           if (sessionEpisodeHoisted) {
-            if (recoveryKeyHoisted) {
+            if (resolvedRecoveryKey) {
               // P4: episode already advanced via synthetic signal above
               episodeUpdate = { sessionEpisode: sessionEpisodeHoisted }
             } else {
@@ -10024,10 +10078,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // Same boundary as the synthetic recovery failure above: a wrong
               // answer about the side concept is not a failure on the paused
               // lesson, so it does not spend that session's affect budget.
-              const nextEpisode = excursionActiveHoisted
+              const nextEpisode = resolvedExcursionActive
                 ? sessionEpisodeHoisted
                 : applySignalToEpisode(sessionEpisodeHoisted, teachingSignal, {
-                    isFirstLesson: firstLessonActiveHoisted,
+                    isFirstLesson: resolvedFirstLessonActive,
                   })
               // Compare against what is STORED, not against the in-request
               // value this turn has already mutated. The old baseline
@@ -10125,12 +10179,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                   cleanText,
                   mostRecentAssistantText(learnSession.messages, MessageRole.ASSISTANT),
                 ),
-              learnerRequestHonoured: learnerRequestHoisted !== null,
-              knowledgeGapOpened: knowledgeGapHoisted !== null,
+              learnerRequestHonoured: resolvedLearnerRequest !== null,
+              knowledgeGapOpened: resolvedKnowledgeGap !== null,
               degradedTurn: isDegradedForProgress(provider),
-              recoveryFired: recoveryKeyHoisted !== null,
-              excursionActive: excursionActiveHoisted,
-              firstLessonActive: firstLessonActiveHoisted,
+              recoveryFired: resolvedRecoveryKey !== null,
+              excursionActive: resolvedExcursionActive,
+              firstLessonActive: resolvedFirstLessonActive,
             })
             const prior = (snapshot as { turnProgress?: { stagnantTurns?: unknown } } | null)
               ?.turnProgress?.stagnantTurns
@@ -10581,13 +10635,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             const fallbackTurnEvidence: import('@/lib/teaching/conversationState').TurnEvidence = {
               askedQuestion: fallbackAskedQ,
               signalCorrect: teachingSignal?.correctness ?? null,
-              recoveryFired: recoveryKeyHoisted !== null,
-              learnerRequest: learnerRequestHoisted,
+              recoveryFired: resolvedRecoveryKey !== null,
+              learnerRequest: resolvedLearnerRequest,
               isPriorKnowledgeProbe: isPriorKnowledgeProbe(cleanText),
               strategyUsed: selectedStrategyHoisted ?? undefined,
               signalConfidence: teachingSignal?.confidence as 'high' | 'medium' | 'low' | undefined,
-              dontKnowSignal: isDontKnowSignal(recoveryKeyHoisted),
-              learnerIssuedDirective: recoveryKeyHoisted === 'too_many_questions',
+              dontKnowSignal: isDontKnowSignal(resolvedRecoveryKey),
+              learnerIssuedDirective: resolvedRecoveryKey === 'too_many_questions',
               signalVerificationStatus: resolvedSignalVerificationStatus,
               // Thread 1: positive server-grade provenance (see the primary
               // fold above). Same source, so both folds agree on whether this
@@ -10599,7 +10653,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // about whether an outage template taught anything.
               degradedTurn: isDegradedProvider(provider),
               deliveredTeaching: evidenceMoveHoisted === 'teach' || evidenceMoveHoisted === 'show',
-              acknowledgement: lowSignalAckHoisted,
+              acknowledgement: resolvedLowSignalAck,
               fillerTurnDetected: fillerDetectedHoisted,
               // Same source as the upstream fold — see V-CHALLENGE above.
               teachingClaimUnresolved: teachingIntegrityFellThroughHoisted,
@@ -10652,7 +10706,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           //
           // This persist used to require `selectedStrategyHoisted !== null`.
           // That variable is assigned in exactly ONE place — inside
-          // `if (learnerRequestHoisted === 'explain_differently')` — so the
+          // `if (resolvedLearnerRequest === 'explain_differently')` — so the
           // whole ledger (explanationCount, strategiesUsed, mcqAsked,
           // explanationsServed, confidence, frustration, mastery) was persisted
           // only on the rare turns where the learner explicitly asked for a
@@ -10871,7 +10925,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // provenance and the counter that moved can never disagree.
               answeredProbeAssetId: pendingMcqHoisted?.assetId ?? null,
               answerServerGraded: certifies(resolvedGrade),
-              recoveryKey: recoveryKeyHoisted,
+              recoveryKey: resolvedRecoveryKey,
               recoveryEscalationRung: snapshotSessionFailureCount >= 4 ? 2 : snapshotSessionFailureCount >= 2 ? 1 : 0,
               sessionFailureCount: snapshotSessionFailureCount,
               autonomyRequested: evidenceAutonomyHoisted,
@@ -10889,10 +10943,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // call. No second writer, no second capture path.
               ...(resolvedAdaptationState !== null && { adaptationState: resolvedAdaptationState }),
               provenance: [
-                ...(recoveryKeyHoisted ? [`recovery:${recoveryKeyHoisted}`] : []),
+                ...(resolvedRecoveryKey ? [`recovery:${resolvedRecoveryKey}`] : []),
                 ...(evidenceAutonomyHoisted ? ['autonomy'] : []),
                 ...(evidenceMoveHoisted ? ['turn-directive'] : []),
-                ...(firstLessonActiveHoisted ? ['first-lesson'] : []),
+                ...(resolvedFirstLessonActive ? ['first-lesson'] : []),
                 // K6 — record EOS verifier outcomes as provenance atoms.
                 // NOT migrated: eosVerifierTagsHoisted is declared after the
                 // delivery-compile point, so the shadow snapshot carries no
@@ -10905,7 +10959,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 ...(eosVerifierAttempts === 2 && !eosVerifierUsedTemplate ? ['verifier:rerendered'] : []),
                 // Mastery gate — an unauthorized [LESSON_COMPLETE] was stripped
                 ...(masteryCompletionSuppressedHoisted ? ['mastery-gate:suppressed'] : []),
-                ...(learnerRequestHoisted ? [`learner-request:${learnerRequestHoisted}`] : []),
+                ...(resolvedLearnerRequest ? [`learner-request:${resolvedLearnerRequest}`] : []),
                 // Stance Enforcement (Claude Recommendation #6) — every
                 // violation this turn, for observability only (never
                 // rewrites prose beyond the completion-tag strip above).
@@ -10954,8 +11008,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // closed excursion is actively cleared rather than left to expire.
           // Lesson state is NOT written here and never is: this key is the
           // whole of the excursion's footprint.
-          const excursionUpdate: Record<string, unknown> = excursionDecisionHoisted
-            ? { excursion: excursionDecisionHoisted.state }
+          const excursionUpdate: Record<string, unknown> = resolvedExcursionDecision
+            ? { excursion: resolvedExcursionDecision.state }
             : {}
 
           // STEP 2 (instrumentation) — progression telemetry. Measurement
@@ -10988,7 +11042,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                     && conversationStateHoisted?.taughtThisSession === true),
               learnerReplySubstantive: message.trim().length > 0
                 && !isBareAckForMetrics(message)
-                && recoveryKeyHoisted === null,
+                && resolvedRecoveryKey === null,
               signalPresent: teachingSignal !== null && teachingSignal !== undefined,
               phaseBefore: conversationStateHoisted?.phase ?? null,
               phaseAfter: stateAfterForMetrics?.phase ?? null,
@@ -10998,7 +11052,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 correctAtCheck: conversationStateHoisted?.correctAtCheck ?? 0,
                 correctAtPractice: conversationStateHoisted?.correctAtPractice ?? 0,
               },
-              recoveryFired: recoveryKeyHoisted !== null,
+              recoveryFired: resolvedRecoveryKey !== null,
               duplicateDetected: eosVerifierTagsHoisted.some((t) => t.includes('V-DUP')),
               masteryVerifiedNow: masteryVerifiedForMetrics(stateAfterForMetrics ?? null),
             }
@@ -11211,7 +11265,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           isReoffer
           && mcqGradeHoisted === null
           && message.trim() !== ''
-          && !isBareAckHoisted
+          && !resolvedIsBareAck
           && !turnIntent.wantsPractice
           && !detectLearnerQuestion(message)
           // I4 (2026-09-02, found by the GUIDE-stall stress test): a CONFUSION /
@@ -11563,8 +11617,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           escalationRung: escalationRung(stagnantTurns),
           provider,
           degraded: isDegraded(provider),
-          excursionActive: excursionActiveHoisted,
-          recoveryFired: recoveryKeyHoisted !== null,
+          excursionActive: resolvedExcursionActive,
+          recoveryFired: resolvedRecoveryKey !== null,
           // Typed Turn Contract Batch 5: reuses `resolvedVisualDecision`.
           visualServed: resolvedVisualDecision?.graphical === true,
         }))

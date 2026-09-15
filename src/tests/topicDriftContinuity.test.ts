@@ -178,6 +178,10 @@ describe('the route actually wires this repair', () => {
   it('imports and calls stripLearnerPhraseDrift with the real signals', () => {
     expect(ROUTE).toMatch(/stripLearnerPhraseDrift\(\{/)
     expect(ROUTE).toMatch(/recentMessages: historyMessages/)
-    expect(ROUTE).toMatch(/excursionActive: excursionActiveHoisted === true/)
+    // Typed Turn Contract Batch 6 (2026-09-15): `excursionActiveHoisted` is
+    // now read here via `resolvedExcursionActive`, the same value. Old
+    // assertion (kept verbatim, no longer matches source):
+    //   expect(ROUTE).toMatch(/excursionActive: excursionActiveHoisted === true/)
+    expect(ROUTE).toMatch(/excursionActive: resolvedExcursionActive === true/)
   })
 })

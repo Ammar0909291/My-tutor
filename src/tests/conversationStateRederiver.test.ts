@@ -161,9 +161,13 @@ describe('the route registers a conversationState rederiver at both fold sites',
   const ROUTE = readFileSync(join(process.cwd(), 'src/app/api/learn/chat/route.ts'), 'utf8')
 
   it('primary fold site: captures conceptId/evidence/excursion-freeze and re-folds against the fresh row', () => {
+    // Typed Turn Contract Batch 6 (2026-09-15): `excursionActiveHoisted` is
+    // now read here via `resolvedExcursionActive`, the same value. Old anchor
+    // (kept verbatim, no longer matches source):
+    //   ROUTE.indexOf('const excursionFrozeLadderThisTurn = excursionActiveHoisted')
     const block = ROUTE.slice(
-      ROUTE.indexOf('const excursionFrozeLadderThisTurn = excursionActiveHoisted'),
-      ROUTE.indexOf('const excursionFrozeLadderThisTurn = excursionActiveHoisted') + 900,
+      ROUTE.indexOf('const excursionFrozeLadderThisTurn = resolvedExcursionActive'),
+      ROUTE.indexOf('const excursionFrozeLadderThisTurn = resolvedExcursionActive') + 900,
     )
     expect(block).toMatch(/const ladderConceptIdForRederive = conversationStateHoisted\.conceptId/)
     expect(block).toMatch(/snapshotRederivers\.push\(\(fresh\) => \{/)

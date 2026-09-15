@@ -106,7 +106,11 @@ describe('the live render is gated on this-turn introduction', () => {
     // "look at the circuit on your screen" about a figure four turns above.
     // `detectLearnerRequest` is deterministic and pre-LLM, so the exception
     // cannot widen on its own.
-    expect(ROUTE).toContain("!figureIntroducedThisTurn && learnerRequestHoisted === 'diagram'")
+    // Typed Turn Contract Batch 6 (2026-09-15): `learnerRequestHoisted` is
+    // now read here via `resolvedLearnerRequest`, the same value. Old
+    // assertion (kept verbatim, no longer matches source):
+    //   expect(ROUTE).toContain("!figureIntroducedThisTurn && learnerRequestHoisted === 'diagram'")
+    expect(ROUTE).toContain("!figureIntroducedThisTurn && resolvedLearnerRequest === 'diagram'")
   })
 
   it('THE PERSISTED RECORD IS NOT WIDENED — history still shows one figure once', () => {
@@ -136,7 +140,11 @@ describe('the persisted record is gated on the same signal', () => {
     const fn = ROUTE.slice(fnStart, ROUTE.indexOf('})()', fnStart))
     const sessionGuardIdx = fn.indexOf('if (!session) return false')
     const turnsGuardIdx = fn.indexOf('if (session.turns !== 0) return false')
-    const excursionGuardIdx = fn.indexOf('excursionDecisionHoisted?.state.active')
+    // Typed Turn Contract Batch 6 (2026-09-15): `excursionDecisionHoisted` is
+    // now read here via `resolvedExcursionDecision`, the same value. Old
+    // anchor (kept verbatim, no longer matches source):
+    //   const excursionGuardIdx = fn.indexOf('excursionDecisionHoisted?.state.active')
+    const excursionGuardIdx = fn.indexOf('resolvedExcursionDecision?.state.active')
     expect(sessionGuardIdx).toBeGreaterThan(-1)
     expect(turnsGuardIdx).toBeGreaterThan(-1)
     expect(excursionGuardIdx).toBeGreaterThan(-1)

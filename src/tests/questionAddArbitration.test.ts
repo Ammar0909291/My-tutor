@@ -42,12 +42,19 @@ describe('the two post-model question-ADD sites are both arbitration-gated', () 
     const guard = preceding(
       "cleanText = `Let me ask you something concrete", 3000,
     )
-    expect(guard).toMatch(/turnArbitrationHoisted[^\n]*\)\.allows\('FILLER_REPAIR'\)/)
+    // Typed Turn Contract Batch 6 (2026-09-15): `turnArbitrationHoisted` is
+    // now read here via `resolvedTurnArbitration`, the same value. Old
+    // assertion (kept verbatim, no longer matches source):
+    //   expect(guard).toMatch(/turnArbitrationHoisted[^\n]*\)\.allows\('FILLER_REPAIR'\)/)
+    expect(guard).toMatch(/resolvedTurnArbitration[^\n]*\)\.allows\('FILLER_REPAIR'\)/)
   })
 
   it('the completion-nudge is inside an allows(NEW_QUESTION) block', () => {
     const guard = preceding("Before we call this lesson finished, let's do", 1200)
-    expect(guard).toMatch(/turnArbitrationHoisted[^\n]*\)\.allows\('NEW_QUESTION'\)/)
+    // Typed Turn Contract Batch 6 (2026-09-15): reuses `resolvedTurnArbitration`.
+    // Old assertion (kept verbatim, no longer matches source):
+    //   expect(guard).toMatch(/turnArbitrationHoisted[^\n]*\)\.allows\('NEW_QUESTION'\)/)
+    expect(guard).toMatch(/resolvedTurnArbitration[^\n]*\)\.allows\('NEW_QUESTION'\)/)
     // and it fires only after a completion claim was made in prose
     expect(guard).toContain('claimedCompletionInProse')
   })

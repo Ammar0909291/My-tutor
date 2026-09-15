@@ -156,8 +156,14 @@ describe('A2 - the excursion freeze is INTENDED behaviour, not the defect', () =
     // excursionActiveHoisted is still what decides the freeze — is
     // unchanged; only the indirection is new.
     const route = readFileSync('src/app/api/learn/chat/route.ts', 'utf8')
-    expect(route).toContain('const excursionFrozeLadderThisTurn = excursionActiveHoisted')
+    // Typed Turn Contract Batch 6 (2026-09-15): `excursionActiveHoisted` is
+    // now read here via `resolvedExcursionActive`, the same value. Old
+    // assertion (kept verbatim, no longer matches source):
+    //   expect(route).toContain('const excursionFrozeLadderThisTurn = excursionActiveHoisted')
+    expect(route).toContain('const excursionFrozeLadderThisTurn = resolvedExcursionActive')
     expect(route).toContain('conversationStateAfterTurnHoisted = excursionFrozeLadderThisTurn')
+    // `notExcursion:` (the gateTerms field, ~L4734) runs BEFORE the resolved-
+    // const block and correctly still reads the raw Hoisted local — unchanged.
     expect(route).toContain('notExcursion: !excursionActiveHoisted')
   })
 })

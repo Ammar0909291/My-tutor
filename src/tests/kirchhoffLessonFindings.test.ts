@@ -149,7 +149,11 @@ describe('C — "can you show me a diagram" answered with no diagram', () => {
   // nothing; on a phone that figure was several screens above.
   it('an explicit diagram request re-attaches the held figure', () => {
     expect(ROUTE).toContain('const reattachOnExplicitRequest =')
-    expect(ROUTE).toContain("!figureIntroducedThisTurn && learnerRequestHoisted === 'diagram'")
+    // Typed Turn Contract Batch 6 (2026-09-15): `learnerRequestHoisted` is
+    // now read here via `resolvedLearnerRequest`, the same value. Old
+    // assertion (kept verbatim, no longer matches source):
+    //   expect(ROUTE).toContain("!figureIntroducedThisTurn && learnerRequestHoisted === 'diagram'")
+    expect(ROUTE).toContain("!figureIntroducedThisTurn && resolvedLearnerRequest === 'diagram'")
     expect(ROUTE).toContain('if (figureIntroducedThisTurn || reattachOnExplicitRequest) {')
   })
 
