@@ -124,7 +124,14 @@ describe('route wiring — the recorded provenance cannot drift from the counter
   })
 
   it('passes the SAME flag the mastery fold reads as evidence.serverGraded', () => {
-    expect(src).toMatch(/answerServerGraded:\s*gradedAgainstServerKeyHoisted/)
+    // UPDATED 2026-09-15 (Typed Turn Contract Batch 3): was
+    // `gradedAgainstServerKeyHoisted` directly. `certifies(resolvedGrade)` is
+    // provably equivalent (see route.ts's `resolvedGrade` comment) and is the
+    // SAME expression the mastery fold's own `TurnEvidence.serverGraded` now
+    // reads — so this claim ("the SAME flag") is structurally guaranteed
+    // rather than merely two copies of one boolean expression agreeing by
+    // construction.
+    expect(src).toMatch(/answerServerGraded:\s*certifies\(resolvedGrade\)/)
     // The fold's own source of truth, unchanged by this work.
     const cs = readFileSync('src/lib/teaching/conversationState.ts', 'utf-8')
     expect(cs).toMatch(/const verified = evidence\.serverGraded === true/)

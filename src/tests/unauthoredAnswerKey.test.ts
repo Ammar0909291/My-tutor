@@ -314,6 +314,12 @@ describe('the chat route applies it', () => {
   })
 
   it('feeds the counter into the state fold', () => {
-    expect(ROUTE).toMatch(/unauthoredKey: unauthoredKeyGradeHoisted/)
+    // UPDATED 2026-09-15 (Typed Turn Contract Batch 3, "answer-verdict
+    // cluster"): the fold's `TurnEvidence.unauthoredKey` now reads
+    // `resolvedGrade !== null && !certifies(resolvedGrade)`, provably
+    // equivalent to `unauthoredKeyGradeHoisted` (a grade exists, and its key
+    // was not authored) — see route.ts's `resolvedGrade` comment and the
+    // batch's commit message for the case-by-case proof.
+    expect(ROUTE).toMatch(/unauthoredKey: resolvedGrade !== null && !certifies\(resolvedGrade\)/)
   })
 })

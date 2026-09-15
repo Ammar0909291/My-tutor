@@ -186,7 +186,18 @@ describe('the route actually passes the fact it holds', () => {
   const ROUTE = require('fs').readFileSync('src/app/api/learn/chat/route.ts', 'utf8') as string
 
   it('wires justGraded from the turn\'s own grade, not a re-derivation', () => {
-    expect(ROUTE).toMatch(/justGraded: mcqGradeHoisted && typeof mcqGradeHoisted\.correct === 'boolean'/)
+    // Pre-Typed-Turn-Contract-Batch-3 assertion (kept verbatim, no longer
+    // matches source — design doc §6 Batch 3 collapsed `mcqGradeHoisted &&
+    // typeof mcqGradeHoisted.correct === 'boolean' && !unauthoredKeyGradeHoisted`
+    // into one const, `gradeForVerdict`, reused here and by
+    // repairMirrorWithVerdict/correctForConfirmation — see route.ts's own
+    // comment beside its declaration):
+    //   expect(ROUTE).toMatch(/justGraded: mcqGradeHoisted && typeof mcqGradeHoisted\.correct === 'boolean'/)
+    // Same invariant ("the turn's own grade, not a re-derivation"), new
+    // source — `gradeForVerdict` is derived exactly once, from
+    // `mcqGradeHoisted`.
+    expect(ROUTE).toMatch(/justGraded: gradeForVerdict/)
+    expect(ROUTE).toMatch(/const gradeForVerdict: \{ readonly correct: boolean \} \| null =/)
   })
 
   it('takes the answer key from the same MCQ that was graded', () => {
@@ -194,7 +205,16 @@ describe('the route actually passes the fact it holds', () => {
   })
 
   it('passes null rather than a guess when nothing was graded', () => {
-    const i = ROUTE.indexOf('justGraded: mcqGradeHoisted')
+    // Pre-Typed-Turn-Contract-Batch-3 assertion (kept verbatim, no longer
+    // matches source — `mcqGradeHoisted` no longer appears directly beside
+    // `justGraded:`, `gradeForVerdict` does):
+    //   const i = ROUTE.indexOf('justGraded: mcqGradeHoisted')
+    //   expect(i).toBeGreaterThan(0)
+    //   expect(ROUTE.slice(i, i + 600)).toContain(': null')
+    // `gradeForVerdict` is null whenever `mcqGradeHoisted` is null (see its
+    // own declaration comment), so "nothing was graded" still yields `null`
+    // here — same invariant, new source.
+    const i = ROUTE.indexOf('justGraded: gradeForVerdict')
     expect(i).toBeGreaterThan(0)
     expect(ROUTE.slice(i, i + 600)).toContain(': null')
   })

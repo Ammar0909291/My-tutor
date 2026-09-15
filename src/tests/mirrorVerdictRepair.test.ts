@@ -164,7 +164,9 @@ describe('E. the route wires it with the gate\'s own derivation', () => {
     // Widened 700 -> 1100 2026-09-14: a reasoning comment for the
     // `!unauthoredKeyGradeHoisted` gate (unauthoredKeyConfidenceSoftened.test.ts)
     // pushed this clause past the old window. Margin left for future comments.
-    const block = route.slice(idx, idx + 1100)
+    // Widened 1100 -> 1300 2026-09-15 (Typed Turn Contract Batch 3): the
+    // `gradeForVerdict` collapse comment pushed it again.
+    const block = route.slice(idx, idx + 1300)
     expect(block).toContain('pendingMcqHoisted?.options?.[pendingMcqHoisted.correctIndex]')
   })
 })

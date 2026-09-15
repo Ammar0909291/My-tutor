@@ -129,7 +129,19 @@ describe('C. the route skips verification only for a server-owned key', () => {
     // The positive provenance must reach the fold, not only the verification
     // skip — this is what makes an ungraded prose answer unable to bank a
     // verified mastery credit.
-    expect(route).toContain('serverGraded: gradedAgainstServerKeyHoisted')
+    //
+    // UPDATED 2026-09-15 (Typed Turn Contract Batch 3): the fold's OWN
+    // `TurnEvidence.serverGraded` now reads `certifies(resolvedGrade)`
+    // (provably equivalent — see route.ts's `resolvedGrade` comment), not the
+    // raw `gradedAgainstServerKeyHoisted` literal, which still appears
+    // elsewhere in the file (the unrelated, deliberately-unchanged Batch 1
+    // TurnDelivery shadow input) — a plain substring search would pass on
+    // that unrelated site even if the fold itself regressed, so this checks
+    // the actual fold construction directly.
+    const foldAt = route.indexOf('const turnEvidenceForLadder:')
+    expect(foldAt).toBeGreaterThan(-1)
+    const foldBlock = route.slice(foldAt, foldAt + 2500)
+    expect(foldBlock).toContain('serverGraded: certifies(resolvedGrade)')
   })
 
   it('the unauthored-key downgrade is still reached — it is a separate block', () => {

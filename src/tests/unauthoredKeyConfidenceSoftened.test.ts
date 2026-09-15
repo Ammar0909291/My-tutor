@@ -102,10 +102,23 @@ describe('the model\'s own spontaneous celebration is stripped, reproduced verba
 describe('route.ts wiring — the shared derivation and both call sites', () => {
   const route = fs.readFileSync(path.join(process.cwd(), 'src/app/api/learn/chat/route.ts'), 'utf8')
 
-  it('correctForConfirmation is derived once, from unauthoredKeyGradeHoisted', () => {
-    expect(route).toMatch(
-      /const correctForConfirmation = unauthoredKeyGradeHoisted \? null : \(mcqGradeHoisted\?\.correct \?\? null\)/,
-    )
+  it('correctForConfirmation is derived once, from the collapsed ServerGrade', () => {
+    // Pre-Typed-Turn-Contract-Batch-3 assertion (kept verbatim, no longer
+    // matches source — design doc §6 Batch 3, "answer-verdict cluster",
+    // collapsed `mcqGradeHoisted`/`unauthoredKeyGradeHoisted`/
+    // `gradedAgainstServerKeyHoisted` into `ServerGrade` + `certifies`/
+    // `mayStateVerdict`):
+    //   expect(route).toMatch(
+    //     /const correctForConfirmation = unauthoredKeyGradeHoisted \? null : \(mcqGradeHoisted\?\.correct \?\? null\)/,
+    //   )
+    // `gradeForVerdict` is `resolvedGrade !== null && resolvedGrade.kind ===
+    // 'graded' && mayStateVerdict(resolvedGrade) ? resolvedGrade : null` —
+    // provably equivalent to the old expression: see `resolvedGrade`'s own
+    // comment in route.ts and this batch's commit message for the
+    // case-by-case proof. Same invariant, new source.
+    expect(route).toMatch(/const correctForConfirmation = gradeForVerdict\?\.correct \?\? null/)
+    expect(route).toMatch(/const gradeForVerdict: \{ readonly correct: boolean \} \| null =/)
+    expect(route).toMatch(/mayStateVerdict\(resolvedGrade\)/)
   })
 
   it('both enforcers read correctForConfirmation, never the raw server grade directly', () => {
@@ -127,9 +140,22 @@ describe('route.ts wiring — the shared derivation and both call sites', () => 
   })
 
   it('the model\'s own spontaneous claim is stripped only when the key was unauthored', () => {
-    const derivationAt = route.indexOf('const correctForConfirmation =')
-    const stripBlock = route.slice(derivationAt, derivationAt + 800)
-    expect(stripBlock).toContain('if (unauthoredKeyGradeHoisted)')
+    // Pre-Typed-Turn-Contract-Batch-3 assertion (kept verbatim, no longer
+    // matches source — Batch 3 moved `correctForConfirmation`'s declaration
+    // up to the D1 derivation block, ~1,000 lines before the strip that used
+    // to sit immediately after it; the strip's own gate condition changed
+    // from `unauthoredKeyGradeHoisted` to the provably-equivalent
+    // `resolvedGrade !== null && !certifies(resolvedGrade)`):
+    //   const derivationAt = route.indexOf('const correctForConfirmation =')
+    //   const stripBlock = route.slice(derivationAt, derivationAt + 800)
+    //   expect(stripBlock).toContain('if (unauthoredKeyGradeHoisted)')
+    //   expect(stripBlock).toContain('stripLeadingFalseConfirmation')
+    // Same invariant, new source: anchored on the gate itself, since
+    // `stripLeadingFalseConfirmation` also appears earlier (in a comment)
+    // and later (the re-offer guard's own, unrelated call).
+    const gateAt = route.indexOf('if (resolvedGrade !== null && !certifies(resolvedGrade))')
+    expect(gateAt).toBeGreaterThan(0)
+    const stripBlock = route.slice(gateAt, gateAt + 400)
     expect(stripBlock).toContain('stripLeadingFalseConfirmation')
   })
 

@@ -333,9 +333,18 @@ describe('FIX-2 — [ladder] telemetry', () => {
   it('reads the already-hoisted authoritative values — no second calculation path', () => {
     // The verified counters come off the SAME folded state object the plain
     // ones do, and serverGraded is the SAME variable the fold was given.
+    //
+    // UPDATED 2026-09-15 (Typed Turn Contract Batch 3): `serverGraded` here
+    // (and at both fold call sites below) now reads `certifies(resolvedGrade)`
+    // rather than the raw `gradedAgainstServerKeyHoisted` local directly —
+    // provably equivalent, see route.ts's `resolvedGrade` comment. This
+    // test's own claim ("no second calculation path") is unweakened: all
+    // three sites still share exactly one derivation, `resolvedGrade`, which
+    // is itself built from `gradedAgainstServerKeyHoisted` (still a single
+    // write site).
     expect(LADDER).toContain('verifiedCheck: conversationStateAfterTurnHoisted?.verifiedCorrectAtCheck ?? null')
     expect(LADDER).toContain('verifiedPractice: conversationStateAfterTurnHoisted?.verifiedCorrectAtPractice ?? null')
-    expect(LADDER).toContain('serverGraded: gradedAgainstServerKeyHoisted')
+    expect(LADDER).toContain('serverGraded: certifies(resolvedGrade)')
     // Nothing in the telemetry recomputes a verdict or derives correctness.
     expect(LADDER).not.toContain('masteryVerifiedStrict')
     expect(LADDER).not.toContain('conceptMasteryVerdict')
@@ -343,8 +352,16 @@ describe('FIX-2 — [ladder] telemetry', () => {
 
   it('the fold is still handed serverGraded from that same single variable', () => {
     const route = readFileSync('src/app/api/learn/chat/route.ts', 'utf8')
-    // Both fold call sites, unchanged by FIX-2.
-    expect(route.split('serverGraded: gradedAgainstServerKeyHoisted').length - 1).toBeGreaterThanOrEqual(3)
+    // UPDATED 2026-09-15 (Typed Turn Contract Batch 3): was
+    // `serverGraded: gradedAgainstServerKeyHoisted` (>= 3 occurrences: the
+    // [ladder] log and both fold call sites). All three migrated to
+    // `certifies(resolvedGrade)`; the trailing-comma form (real code, not the
+    // prose comment a few lines above it that also names the old local) now
+    // appears exactly once — the deliberately-unchanged Batch 1
+    // TurnDelivery shadow input, whose own comment explains why it stays on
+    // the old derivation.
+    expect((route.match(/serverGraded: gradedAgainstServerKeyHoisted,/g) ?? []).length).toBe(1)
+    expect(route.split('serverGraded: certifies(resolvedGrade)').length - 1).toBeGreaterThanOrEqual(3)
   })
 })
 

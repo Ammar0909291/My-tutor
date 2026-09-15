@@ -34,6 +34,16 @@
  * two divergent verdicts cannot co-render even in phrasing; that ordering is a
  * route-structure property and is asserted by the existing repair-order tests, not
  * re-litigated here. This test owns the narrower, load-bearing claim: one source.
+ *
+ * UPDATED 2026-09-15 (Typed Turn Contract Batch 3, design doc §6, "answer-verdict
+ * cluster"): the 2026-09-14 `!unauthoredKeyGradeHoisted` narrowing above is now
+ * named once, as `mayStateVerdict` (turnContract.ts), and reused by a single
+ * local, `gradeForVerdict`, instead of being reimplemented separately at each of
+ * the three renderers. `mcqGradeHoisted`/`gradedAgainstServerKeyHoisted` are
+ * still the sole underlying inputs (each still assigned exactly once); the "one
+ * source" claim this file pins is therefore stronger after this batch, not
+ * weaker — the three renderers now share the SAME derived const, not merely
+ * three independent copies of the same boolean expression.
  */
 import { describe, it, expect } from 'vitest'
 import { readFileSync } from 'node:fs'
@@ -67,25 +77,38 @@ describe('every verdict-stater reads that one source, never a self-report', () =
     // unauthoredKeyConfidenceSoftened.test.ts for the dedicated coverage of
     // that gating. This test's own narrower claim (one source, not a second
     // independent grade) is pinned by asserting the derivation itself below.
+    //
+    // UPDATED 2026-09-15 (Typed Turn Contract Batch 3, "answer-verdict
+    // cluster"): `unauthoredKeyGradeHoisted`/`mcqGradeHoisted?.correct` were
+    // collapsed into `ServerGrade` + `certifies`/`mayStateVerdict` — see
+    // `unauthoredKeyConfidenceSoftened.test.ts`'s own updated pin for the
+    // case-by-case equivalence proof (kept there, not duplicated here). This
+    // file's own narrower claim — ONE source, not two — is unchanged in kind:
+    // `correctForConfirmation` still derives from exactly one place
+    // (`gradeForVerdict`, itself built from `mcqGradeHoisted` +
+    // `gradedAgainstServerKeyHoisted`, both single-write-site locals).
     const block = around('confirmCorrectAnswer({', 0, 300)
     expect(block).toMatch(/correct:\s*correctForConfirmation/)
-    expect(ROUTE).toMatch(
-      /const correctForConfirmation = unauthoredKeyGradeHoisted \? null : \(mcqGradeHoisted\?\.correct \?\? null\)/,
-    )
+    expect(ROUTE).toMatch(/const correctForConfirmation = gradeForVerdict\?\.correct \?\? null/)
   })
 
   it('repairMirrorWithVerdict takes its verdict AND its option text from the graded item', () => {
     // Widened 700 -> 1100 2026-09-14: the added reasoning comment pushed the
     // `graded:` clause past the old window. Margin left for future comments.
-    const block = around('repairMirrorWithVerdict({', 0, 1100)
+    // Widened 1100 -> 1300 2026-09-15 (Typed Turn Contract Batch 3): the
+    // `gradeForVerdict` collapse comment pushed it again.
+    const block = around('repairMirrorWithVerdict({', 0, 1300)
     // UPDATED 2026-09-14: `&& !unauthoredKeyGradeHoisted` added to the same
     // condition, same reasoning as confirmCorrectAnswer above — a
     // model-invented key can be wrong, so this must not state its own
     // possibly-wrong verdict as fact either.
-    expect(block).toMatch(
-      /graded:\s*mcqGradeHoisted && typeof mcqGradeHoisted\.correct === 'boolean' && !unauthoredKeyGradeHoisted/,
-    )
-    expect(block).toMatch(/correct:\s*mcqGradeHoisted\.correct/)
+    //
+    // UPDATED 2026-09-15 (Typed Turn Contract Batch 3): the inline condition
+    // collapsed to `gradeForVerdict` — provably equivalent, per that const's
+    // own comment in route.ts (it IS `typeof correct === 'boolean' &&
+    // !unauthoredKeyGradeHoisted`, named once via `mayStateVerdict`).
+    expect(block).toMatch(/graded:\s*gradeForVerdict/)
+    expect(block).toMatch(/correct:\s*gradeForVerdict\.correct/)
     // The correct-option text comes from the SAME pending item the answer was
     // graded against, so the sentence cannot name a different option.
     expect(block).toMatch(/pendingMcqHoisted\?\.options\?\.\[pendingMcqHoisted\.correctIndex\]/)
@@ -94,10 +117,11 @@ describe('every verdict-stater reads that one source, never a self-report', () =
   it('the gate reveal (justGraded) reads the same source and shape', () => {
     const block = around('justGraded:', 0, 250)
     // UPDATED 2026-09-14: same `&& !unauthoredKeyGradeHoisted` addition.
-    expect(block).toMatch(
-      /mcqGradeHoisted && typeof mcqGradeHoisted\.correct === 'boolean' && !unauthoredKeyGradeHoisted/,
-    )
-    expect(block).toMatch(/correct:\s*mcqGradeHoisted\.correct/)
+    // UPDATED 2026-09-15 (Typed Turn Contract Batch 3): same `gradeForVerdict`
+    // collapse as repairMirrorWithVerdict above — the SAME const, so the two
+    // sites are now structurally guaranteed to agree, not merely coincidentally.
+    expect(block).toMatch(/justGraded:\s*gradeForVerdict/)
+    expect(block).toMatch(/correct:\s*gradeForVerdict\.correct/)
   })
 
   it('none of the three derives correctness from the model self-report', () => {

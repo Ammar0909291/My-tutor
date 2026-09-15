@@ -48,12 +48,18 @@ import { readTurnIntent } from '@/lib/teaching/turnIntent'
 // S7 rung 2. Pure, synchronous, no I/O — imported at the top rather than
 // dynamically because it is read inside the ladder fold, on the hot path.
 import { diagnosticStalledThisTurn, shouldRelieveProbeStarvation } from '@/lib/teaching/turnProgress'
-// Typed Turn Contract, Batch 1 (docs/architecture/TYPED_TURN_CONTRACT_DESIGN.md).
+// Typed Turn Contract, Batches 1-3 (docs/architecture/TYPED_TURN_CONTRACT_DESIGN.md).
 // Pure, synchronous, no I/O — imported at the top for the same reason as
-// turnProgress.ts above. SHADOW ONLY in Batch 1: nothing in this route reads
-// from either compiled object; they exist only to be asserted against
-// themselves and logged. See the CONTRACT_ASSERT shadow block below.
-import { compileTurnContract, certifies, type TurnContract, type TurnContractInput, type IdentifiedProbe, type ServerGrade } from '@/lib/teaching/turnContract'
+// turnProgress.ts above. Batch 1 was SHADOW ONLY (nothing read from either
+// compiled object; they existed only to be asserted against themselves and
+// logged — see the CONTRACT_ASSERT shadow block below). Batch 2 migrated
+// logging-only consumers. Batch 3 ("answer-verdict cluster") is the first to
+// migrate REAL consumer logic: `certifies`/`mayStateVerdict` are now read by
+// `resolvedGrade`'s downstream consumers (confirmation/correction text,
+// the don't-know ceiling, the attribution mirror, and the mastery fold's own
+// `TurnEvidence.serverGraded`) instead of each re-deriving
+// `typeof mcqGradeHoisted.correct === 'boolean' && !unauthoredKeyGradeHoisted`.
+import { compileTurnContract, certifies, mayStateVerdict, type TurnContract, type TurnContractInput, type IdentifiedProbe, type ServerGrade } from '@/lib/teaching/turnContract'
 import { compileTurnDelivery, assertDeliverySatisfiesContract, type TurnDelivery, type TurnDeliveryInput } from '@/lib/teaching/turnDelivery'
 import type { TeachingPhase } from '@/lib/teaching/conversationState'
 import { arbitrateTurn, arbitrationUnavailable } from '@/lib/teaching/turnArbitration'
@@ -6702,6 +6708,57 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       const resolvedAttemptVector = turnDeliveryShadow?.provenance.attemptVector ?? attemptVectorHoisted
       const resolvedAdaptationState = turnDeliveryShadow?.provenance.adaptationState ?? adaptationStateHoisted
 
+      // Typed Turn Contract, Batch 3 — "answer-verdict cluster" (design doc §6
+      // Batch 3). `resolvedGrade` collapses `mcqGradeHoisted` +
+      // `gradedAgainstServerKeyHoisted` into the exact `ServerGrade` value
+      // `turnContractShadow.inbound.grade` was already compiled from at
+      // L5773-5780 above — computed fresh here (not read off the shadow)
+      // because this D1 block, unlike the contract compile, runs on every
+      // turn shape, including the gate/memory-served branches where
+      // `turnContractShadow` stays null. Provably equivalent to the shadow's
+      // own field: both derive from the SAME two CONTRACT-stable locals
+      // (`mcqGradeHoisted` — single write, L2499; `pendingMcqHoisted` —
+      // single write, L2443) via the same `probeKeyIsAuthored` fact, and
+      // `mcqGradeHoisted !== null` here always implies `pendingMcqHoisted !==
+      // null` (the only write site is nested inside `if (pendingMcqHoisted)`)
+      // and `.correct`/`.chosenIndex` both non-null (gradeMcqAnswer's own
+      // return-shape invariant — `correct !== null` iff `chosenIndex !==
+      // null`) — so the `kind: 'graded'` branch is the only one this route
+      // ever constructs, matching the contract's own construction exactly.
+      //
+      // `gradeForVerdict` is the ONE check every downstream consumer below
+      // used to reimplement separately as `typeof mcqGradeHoisted.correct
+      // === 'boolean' && !unauthoredKeyGradeHoisted` (`justGraded` L8261-ish,
+      // `graded` L9039-ish, `correctForConfirmation`'s own predecessor) —
+      // named once, using `mayStateVerdict`, the function this design exists
+      // to make load-bearing.
+      const resolvedGrade: ServerGrade | null =
+        mcqGradeHoisted === null || mcqGradeHoisted.correct === null || mcqGradeHoisted.chosenIndex === null
+          ? null
+          : {
+              kind: 'graded', chosenIndex: mcqGradeHoisted.chosenIndex, correct: mcqGradeHoisted.correct,
+              keyProvenance: gradedAgainstServerKeyHoisted ? 'authored' : 'model-invented',
+            }
+      const gradeForVerdict: { readonly correct: boolean } | null =
+        resolvedGrade !== null && resolvedGrade.kind === 'graded' && mayStateVerdict(resolvedGrade)
+          ? resolvedGrade
+          : null
+      // `signalVerificationStatusHoisted` is RESULT-classified but both its
+      // writes (L6514/L6562-ish, both inside this same D1 block) happen
+      // BEFORE the delivery-compile point — the same "safe to migrate"
+      // shape Batch 2 established for `resolvedPhaseBeforeTurn` et al.
+      const resolvedSignalVerificationStatus =
+        turnDeliveryShadow?.verdict.signalVerification ?? signalVerificationStatusHoisted
+      // CONTRACT-classified (single write each, L4430/L4437-ish, both well
+      // before the contract's own compile point).
+      const resolvedPriorConfirmations = turnContractShadow?.liveness.priorConfirmations ?? priorConfirmationsHoisted
+      const resolvedConsecutiveDontKnows = turnContractShadow?.liveness.consecutiveDontKnows ?? consecutiveDontKnowsHoisted
+      // Provably equivalent to `unauthoredKeyGradeHoisted ? null :
+      // (mcqGradeHoisted?.correct ?? null)` — see design doc §6 Batch 3 and
+      // the commit message for the case-by-case proof. Reused below by both
+      // `confirmCorrectAnswer` and `stateCorrectionForWrongAnswer`.
+      const correctForConfirmation = gradeForVerdict?.correct ?? null
+
       // ANSWERABLE-TURN EVIDENCE GUARD (see answerableTurn.ts).
       //
       // Two live defects, one precondition. A SIGNAL correctness value is
@@ -6747,7 +6804,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             console.log(`[${decision.reason}]`, {
               claimed: teachingSignal.correctness,
               learnerMessage: message.slice(0, 40),
-              signalVerificationStatus: signalVerificationStatusHoisted,
+              signalVerificationStatus: resolvedSignalVerificationStatus,
             })
             // ONLY `correctness` is dropped. `confidence` / `confusion` /
             // `chosenPhrase` are the model's read of the learner's behaviour,
@@ -7062,7 +7119,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // out of scope — see wrongAnswerCorrection.ts's own "what this does not
       // fix"). It only stops the reply from asserting a certainty the system
       // itself has already flagged as unverifiable: `correctForConfirmation`
-      // below is `null` (a no-op input to both enforcers, per their own
+      // (Typed Turn Contract Batch 3, declared above as `gradeForVerdict?.correct
+      // ?? null`) is `null` (a no-op input to both enforcers, per their own
       // "correct !== true"/"correct !== false" early returns) whenever the key
       // was unauthored, so NEITHER enforcer can inject new confident text.
       //
@@ -7072,8 +7130,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // already strips one elsewhere in this file: opening sentence only, per
       // its own header's reasoning, so ordinary teaching prose mentioning
       // "correct"/"exactly" mid-reply is never touched.
-      const correctForConfirmation = unauthoredKeyGradeHoisted ? null : (mcqGradeHoisted?.correct ?? null)
-      if (unauthoredKeyGradeHoisted) {
+      //
+      // `resolvedGrade !== null && !certifies(resolvedGrade)` — provably
+      // equivalent to `unauthoredKeyGradeHoisted` (a grade exists, and its key
+      // was not authored); see the commit message for the case-by-case proof.
+      if (resolvedGrade !== null && !certifies(resolvedGrade)) {
         try {
           const { stripLeadingFalseConfirmation } = await import('@/lib/teaching/answerConfirmation')
           const deClaimed = stripLeadingFalseConfirmation(cleanText)
@@ -7107,7 +7168,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         const confirmed = confirmCorrectAnswer({
           text: cleanText,
           correct: correctForConfirmation,
-          priorConfirmations: priorConfirmationsHoisted,
+          priorConfirmations: resolvedPriorConfirmations,
         })
         cleanText = confirmed.text
         // PCD-029 — telemetry only, no behavior change. The 65% figure this
@@ -7195,12 +7256,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         const ceiling = applyDontKnowCeiling({
           text: cleanText,
           recoveryKey: recoveryKeyHoisted,
-          consecutiveDontKnows: consecutiveDontKnowsHoisted,
+          consecutiveDontKnows: resolvedConsecutiveDontKnows,
           pendingMcq: pendingMcqHoisted,
         })
         if (ceiling.withheld) {
           console.log('[dont-know-ceiling] ' + JSON.stringify({
-            reason: ceiling.reason, run: consecutiveDontKnowsHoisted,
+            reason: ceiling.reason, run: resolvedConsecutiveDontKnows,
           }))
         }
         cleanText = ceiling.text
@@ -8258,9 +8319,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // `stateCorrectionForWrongAnswer` were fixed for. Leaves the
               // placeholder repair's fallback path untouched (see that repair's
               // own module for what runs when `justGraded` is null).
-              justGraded: mcqGradeHoisted && typeof mcqGradeHoisted.correct === 'boolean' && !unauthoredKeyGradeHoisted
+              //
+              // Typed Turn Contract Batch 3: `mcqGradeHoisted && typeof
+              // mcqGradeHoisted.correct === 'boolean' && !unauthoredKeyGradeHoisted`
+              // is exactly `gradeForVerdict !== null` — see that const's own
+              // comment for the named rule (`mayStateVerdict`) this re-guard
+              // used to reimplement.
+              justGraded: gradeForVerdict
                 ? {
-                    correct: mcqGradeHoisted.correct,
+                    correct: gradeForVerdict.correct,
                     correctOptionText:
                       pendingMcqHoisted?.options?.[pendingMcqHoisted.correctIndex] ?? null,
                   }
@@ -8422,13 +8489,19 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             signalConfidence: teachingSignal?.confidence as 'high' | 'medium' | 'low' | undefined,
             dontKnowSignal: isDontKnowSignal(recoveryKeyHoisted),
             learnerIssuedDirective: recoveryKeyHoisted === 'too_many_questions',
-            signalVerificationStatus: signalVerificationStatusHoisted,
+            signalVerificationStatus: resolvedSignalVerificationStatus,
             // Thread 1: positive server-grade provenance — the ONLY thing that
             // lets this turn bank a VERIFIED mastery credit. False on every
             // ungraded prose turn, so a self-report cannot certify mastery.
-            serverGraded: gradedAgainstServerKeyHoisted,
+            // Typed Turn Contract Batch 3: `certifies(resolvedGrade)`,
+            // provably equivalent to `gradedAgainstServerKeyHoisted` — see the
+            // `resolvedGrade` declaration's comment and the commit message for
+            // the proof. `masteryCounterInvariant.test.ts` and A4 (design doc
+            // §5.1) both depend on this field; re-verified unchanged by this
+            // substitution, not just asserted.
+            serverGraded: certifies(resolvedGrade),
             // Counted, never credited — see the downgrade above.
-            unauthoredKey: unauthoredKeyGradeHoisted,
+            unauthoredKey: resolvedGrade !== null && !certifies(resolvedGrade),
             parityViolation: parityViolationThisTurn,
             // RS P-3: an outage template taught nothing, so it must not be
             // folded as a give. See TurnEvidence.degradedTurn.
@@ -8579,7 +8652,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // already-hoisted values the fold used — no second calculation.
             verifiedCheck: conversationStateAfterTurnHoisted?.verifiedCorrectAtCheck ?? null,
             verifiedPractice: conversationStateAfterTurnHoisted?.verifiedCorrectAtPractice ?? null,
-            serverGraded: gradedAgainstServerKeyHoisted,
+            serverGraded: certifies(resolvedGrade),
             // ── PHASE 7N-2: WHY `move` WAS WHAT IT WAS ──────────────────────
             //
             // Phase 7M-B proved, in production, that a learner can ask to be
@@ -9036,9 +9109,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // lines up: this mirror confirms/corrects the learner's OWN restated
           // answer with the verdict stated as fact, which carries the identical
           // risk when the key behind it was model-invented and possibly wrong.
-          graded: mcqGradeHoisted && typeof mcqGradeHoisted.correct === 'boolean' && !unauthoredKeyGradeHoisted
+          //
+          // Typed Turn Contract Batch 3: `gradeForVerdict !== null` — see that
+          // const's own comment.
+          graded: gradeForVerdict
             ? {
-                correct: mcqGradeHoisted.correct,
+                correct: gradeForVerdict.correct,
                 correctOptionText:
                   pendingMcqHoisted?.options?.[pendingMcqHoisted.correctIndex] ?? null,
               }
@@ -10419,11 +10495,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               signalConfidence: teachingSignal?.confidence as 'high' | 'medium' | 'low' | undefined,
               dontKnowSignal: isDontKnowSignal(recoveryKeyHoisted),
               learnerIssuedDirective: recoveryKeyHoisted === 'too_many_questions',
-              signalVerificationStatus: signalVerificationStatusHoisted,
+              signalVerificationStatus: resolvedSignalVerificationStatus,
               // Thread 1: positive server-grade provenance (see the primary
               // fold above). Same source, so both folds agree on whether this
-              // turn may bank a verified mastery credit.
-              serverGraded: gradedAgainstServerKeyHoisted,
+              // turn may bank a verified mastery credit. `certifies(resolvedGrade)`
+              // — see the primary fold's Batch 3 comment for the proof.
+              serverGraded: certifies(resolvedGrade),
               parityViolation: !!(evidenceMoveHoisted === 'ask' && !fallbackAskedQ),
               // Same guard as the upstream fold — the two must not disagree
               // about whether an outage template taught anything.
@@ -10700,7 +10777,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // fold reads as `evidence.serverGraded`, so the recorded
               // provenance and the counter that moved can never disagree.
               answeredProbeAssetId: pendingMcqHoisted?.assetId ?? null,
-              answerServerGraded: gradedAgainstServerKeyHoisted,
+              answerServerGraded: certifies(resolvedGrade),
               recoveryKey: recoveryKeyHoisted,
               recoveryEscalationRung: snapshotSessionFailureCount >= 4 ? 2 : snapshotSessionFailureCount >= 2 ? 1 : 0,
               sessionFailureCount: snapshotSessionFailureCount,
@@ -11173,12 +11250,22 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             && mcqToServeForEmptyGuard(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted) !== null) {
           console.log('[empty-post-strip-with-probe] text stripped to empty while a probe is on screen — introducing it')
           const introLine = 'Here is a question to check your understanding:'
+          // Typed Turn Contract Batch 3: this gate is `mcqGradeHoisted?.correct
+          // === true`, NOT `correctForConfirmation === true` — unlike its
+          // sibling call ~6452 lines up, it was never given the 2026-09-14
+          // unauthored-key check, so it is NOT provably equivalent to
+          // `mayStateVerdict(resolvedGrade) && resolvedGrade.correct`
+          // (migrating it would ALSO withhold this intro-line confirmation on
+          // an unauthored-key correct grade, a real behavior change, not a
+          // representation change). Left on the Hoisted local per the batch's
+          // own rule; flagged here rather than silently carried forward. Only
+          // `priorConfirmations`, independent of this gate, is migrated.
           if (mcqGradeHoisted?.correct === true) {
             const { confirmCorrectAnswer } = await import('@/lib/teaching/answerConfirmation')
             cleanText = confirmCorrectAnswer({
               text: introLine,
               correct: true,
-              priorConfirmations: priorConfirmationsHoisted,
+              priorConfirmations: resolvedPriorConfirmations,
             }).text
           } else {
             cleanText = introLine

@@ -143,14 +143,28 @@ describe('the route actually applies it', () => {
     // test names ("never a model self-report") now also covers "never an
     // unauthored-key server grade", which is the sharper version of the same
     // claim, not a different one.
+    //
+    // UPDATED 2026-09-15 (Typed Turn Contract Batch 3): the RHS collapsed to
+    // `gradeForVerdict?.correct ?? null` — see unauthoredKeyConfidenceSoftened
+    // .test.ts for the equivalence proof. Same claim, new source.
     expect(route).toMatch(/correct: correctForConfirmation/)
-    expect(route).toMatch(/const correctForConfirmation = unauthoredKeyGradeHoisted \? null : \(mcqGradeHoisted\?\.correct \?\? null\)/)
+    expect(route).toMatch(/const correctForConfirmation = gradeForVerdict\?\.correct \?\? null/)
     const call = route.slice(route.indexOf('confirmCorrectAnswer({'), route.indexOf('cleanText = confirmed.text'))
     expect(call).not.toMatch(/signal/i)
   })
 
   it('rotates on persisted pre-turn state, not on this turn', () => {
-    expect(route).toMatch(/priorConfirmations: priorConfirmationsHoisted/)
+    // UPDATED 2026-09-15 (Typed Turn Contract Batch 3): the call itself now
+    // reads `resolvedPriorConfirmations` (a Batch-3 "resolved" const,
+    // provably equal to `priorConfirmationsHoisted` — CONTRACT-classified,
+    // single write site, see route.ts's own comment beside it). The literal
+    // `priorConfirmations: priorConfirmationsHoisted` string this test used
+    // to pin still exists elsewhere in the file (the contract-input
+    // construction, Batch 1, an unrelated site) — asserted directly against
+    // the actual call site below so this test cannot pass by coincidence.
+    const call = route.slice(route.indexOf('confirmCorrectAnswer({'), route.indexOf('cleanText = confirmed.text'))
+    expect(call).toMatch(/priorConfirmations: resolvedPriorConfirmations/)
+    expect(route).toMatch(/const resolvedPriorConfirmations = turnContractShadow\?\.liveness\.priorConfirmations \?\? priorConfirmationsHoisted/)
     expect(route).toMatch(/priorConfirmationsHoisted = Number\.isFinite/)
   })
 
