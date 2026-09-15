@@ -7106,6 +7106,51 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // `confirmCorrectAnswer` and `stateCorrectionForWrongAnswer`.
       const correctForConfirmation = gradeForVerdict?.correct ?? null
 
+      // Learner-Move Interpreter, Batch 1 — SHADOW ONLY
+      // (docs/architecture/LEARNER_MOVE_INTERPRETER_DESIGN.md §8 Batch 1).
+      // Computed HERE because this is the first point in the turn where
+      // every input `readLearnerMove`/`refineLearnerMove` need is already
+      // resolved: `turnIntent` (read once at ~L377), `resolvedIsBareAck` /
+      // `resolvedLowSignalAck` (Batch 6's authority cluster, above),
+      // `resolvedLibraryConceptNodeId` (Batch 8's identity cluster, above),
+      // `pendingMcqHoisted` (single write ~L2449, stable well before here).
+      // No consumer of the reading exists until Batch 4 — this block reads
+      // nothing back and changes no teaching decision. No database write —
+      // the 2026-08-31 egress incident is the standing reason a shadow
+      // measurement is a log line, never a table.
+      try {
+        const { readLearnerMove, refineLearnerMove } = await import('@/lib/teaching/learnerMove')
+        const { buildLearnerMoveEvent, recordLearnerMoveEvent } = await import('@/lib/teaching/learnerMoveTelemetry')
+        const learnerMoveStageA = readLearnerMove(turnIntent, {
+          isBareAcknowledgement: resolvedIsBareAck,
+          isLowSignalAcknowledgement: resolvedLowSignalAck,
+        })
+        // A SIMPLER `taughtText` than excursion.ts's own (title + description
+        // only — no open-excursion topic folded in; that state is local to
+        // excursion.ts's own call site, ~L2664, and out of scope here).
+        // Sufficient for a shadow measurement; not claimed to be the
+        // identical string excursion.ts computes for its own purpose.
+        const { getKGNode: getKGNodeForLearnerMoveShadow } = await import('@/lib/curriculum/knowledgeGraph')
+        const learnerMoveShadowLessonNode = resolvedLibraryConceptNodeId
+          ? getKGNodeForLearnerMoveShadow(resolvedLibraryConceptNodeId)
+          : null
+        const learnerMoveShadowTaughtText = learnerMoveShadowLessonNode
+          ? [learnerMoveShadowLessonNode.title ?? '', learnerMoveShadowLessonNode.description ?? ''].join(' ')
+          : null
+        const learnerMoveStageB = refineLearnerMove(learnerMoveStageA, {
+          pendingProbe: pendingMcqHoisted,
+          taughtText: learnerMoveShadowTaughtText,
+          lessonConceptId: resolvedLibraryConceptNodeId,
+        })
+        recordLearnerMoveEvent(buildLearnerMoveEvent({
+          reading: learnerMoveStageB,
+          sessionId: learnSession.id,
+          subject: subjectCode,
+          lessonConceptId: resolvedLibraryConceptNodeId,
+          turnReceivedAt,
+        }))
+      } catch { /* observability never breaks a turn */ }
+
       // ANSWERABLE-TURN EVIDENCE GUARD (see answerableTurn.ts).
       //
       // Two live defects, one precondition. A SIGNAL correctness value is
