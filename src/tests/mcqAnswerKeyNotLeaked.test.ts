@@ -90,7 +90,11 @@ describe('the wiring is at the right boundary', () => {
     // verbatim, no longer matches source):
     //   expect(ROUTE).toMatch(/const served = mcqToServe\(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted\)/)
     expect(ROUTE).toMatch(/const served = resolvedQuestionServed$/m)
-    expect(ROUTE).toMatch(/releasePending \? null : served,\s*\n\s*lessonKeyThisTurnHoisted,/)
+    // Typed Turn Contract Batch 8 (2026-09-15): reads `resolvedLessonKeyThisTurn`
+    // now — see lessonStateIsolationWiring.test.ts for the equivalence proof.
+    // Old assertion (kept verbatim, no longer matches source):
+    //   expect(ROUTE).toMatch(/releasePending \? null : served,\s*\n\s*lessonKeyThisTurnHoisted,/)
+    expect(ROUTE).toMatch(/releasePending \? null : served,\s*\n\s*resolvedLessonKeyThisTurn,/)
   })
 
   it('the client no longer requires or stores correctIndex', () => {

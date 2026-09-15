@@ -204,8 +204,17 @@ describe('route.ts wiring — new-intent signal reaches every consumer', () => {
     expect(swapAt).toBeGreaterThan(-1)
     const guardWindow = ROUTE.slice(Math.max(0, swapAt - 1600), swapAt)
     expect(guardWindow).toContain('shouldRepairFillerTurn')
-    expect(guardWindow).toContain('lessonCompleted: lessonCompletedHoisted')
-    expect(guardWindow).toContain('respectsNewIntent: lessonCompletionRespectsNewIntentHoisted')
+    // Typed Turn Contract Batch 8 (2026-09-15): this call site sits after the
+    // shared resolved-const block, so it now reads `resolvedLessonCompleted`/
+    // `resolvedLessonCompletionRespectsNewIntent` — the same single-epoch,
+    // never-reassigned-after-compile values the raw `Hoisted` locals always
+    // held here (both writes, ~L2360/~L2842, sit well before the contract's
+    // L5865 compile point). Old assertions (kept verbatim, no longer match
+    // source):
+    //   expect(guardWindow).toContain('lessonCompleted: lessonCompletedHoisted')
+    //   expect(guardWindow).toContain('respectsNewIntent: lessonCompletionRespectsNewIntentHoisted')
+    expect(guardWindow).toContain('lessonCompleted: resolvedLessonCompleted')
+    expect(guardWindow).toContain('respectsNewIntent: resolvedLessonCompletionRespectsNewIntent')
   })
 
   it('the deterministic SERVE_LESSON_COMPLETE close still exists and is still driven by the decision engine, not deleted', () => {

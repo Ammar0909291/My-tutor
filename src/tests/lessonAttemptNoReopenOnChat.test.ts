@@ -230,7 +230,13 @@ describe('the route keeps the completion gate on the outcome writer', () => {
   const ROUTE = readFileSync('src/app/api/learn/chat/route.ts', 'utf8')
 
   it('gates the attempt writer on lessonCompletedHoisted', () => {
-    expect(ROUTE).toContain('isConceptClosed(stateForOutcome) && !lessonCompletedHoisted')
+    // Typed Turn Contract Batch 8 (2026-09-15): reads `resolvedLessonCompleted`
+    // now — the same single-epoch, never-reassigned-after-compile value
+    // `lessonCompletedHoisted` always was here (its one real write, ~L2360,
+    // sits well before the contract's L5865 compile point). Old assertion
+    // (kept verbatim, no longer matches source):
+    //   expect(ROUTE).toContain('isConceptClosed(stateForOutcome) && !lessonCompletedHoisted')
+    expect(ROUTE).toContain('isConceptClosed(stateForOutcome) && !resolvedLessonCompleted')
   })
 
   it('leaves lesson-init as the only path that re-opens a completed lesson', () => {

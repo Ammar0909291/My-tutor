@@ -7029,6 +7029,63 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // before the contract's own compile point).
       const resolvedPriorConfirmations = turnContractShadow?.liveness.priorConfirmations ?? priorConfirmationsHoisted
       const resolvedConsecutiveDontKnows = turnContractShadow?.liveness.consecutiveDontKnows ?? consecutiveDontKnowsHoisted
+      // Typed Turn Contract Batch 8 (2026-09-15): the residue sweep. Every
+      // const below is CONTRACT-classified, single-epoch (its only write(s)
+      // sit strictly before L5865's `compileTurnContract(` call — verified
+      // by anchored grep across the whole file, not assumed), so each is
+      // provably equivalent to its raw `Hoisted` twin for the rest of the
+      // turn. Seven CONTRACT locals from the same residue list are NOT here
+      // because they have ZERO consumers after this block (their only
+      // reference besides their own write is the `contractInput` line
+      // itself): `conceptPreviouslyMasteredHoisted`, `kernelMaxQuestionsHoisted`,
+      // `kernelPolicyMoveHoisted`, `libraryDueRevisionCountHoisted`,
+      // `priorTurnUnresolvedProseMcqHoisted`, `retrievalCacheHoisted`,
+      // `routeMaxParagraphsHoisted` — a resolved const with no reader would
+      // be dead code, so none was added for them.
+      const resolvedActiveLessonSlug = turnContractShadow?.identity.activeLessonSlug ?? activeLessonSlugHoisted
+      const resolvedLessonKeyThisTurn = turnContractShadow?.identity.lessonKeyThisTurn ?? lessonKeyThisTurnHoisted
+      const resolvedLibraryConceptNodeId = turnContractShadow?.identity.libraryConceptNodeId ?? libraryConceptNodeIdHoisted
+      const resolvedLessonCompleted = turnContractShadow?.ladder.lessonCompletedBefore ?? lessonCompletedHoisted
+      const resolvedLessonCompletionRespectsNewIntent =
+        turnContractShadow?.ladder.lessonCompletionRespectsNewIntent ?? lessonCompletionRespectsNewIntentHoisted
+      // `teachingHistoryHoisted` has two consumers (~L6072-ish) that run
+      // BEFORE this block — same "not worth a second declaration point for
+      // an earlier single read site" shape Batch 4 documented for
+      // `authoredProbesExistHoisted` et al. Those two stay on the raw local;
+      // every consumer from here down uses the resolved const.
+      const resolvedTeachingHistory = turnContractShadow?.ladder.teachingHistory ?? teachingHistoryHoisted
+      const resolvedQuestionLedger = turnContractShadow?.ladder.questionLedger ?? questionLedgerHoisted
+      const resolvedLegalityBlockedReason = turnContractShadow?.assessment.legalityBlockedReason ?? legalityBlockedReasonHoisted
+      const resolvedPriorStagnantTurns = turnContractShadow?.liveness.priorStagnantTurns ?? priorStagnantTurnsHoisted
+      const resolvedPriorProbeStarvedTurns = turnContractShadow?.liveness.priorProbeStarvedTurns ?? priorProbeStarvedTurnsHoisted
+      const resolvedProbeStarvationRelieved = turnContractShadow?.liveness.probeStarvationRelieved ?? probeStarvationRelievedHoisted
+      const resolvedArbitrationWasSoleBlocker =
+        turnContractShadow?.liveness.arbitrationWasSoleBlocker ?? arbitrationWasSoleBlockerHoisted
+      const resolvedPlacementLevel = turnContractShadow?.placement.level ?? placementLevelHoisted
+      const resolvedPlacementAskedProbe = turnContractShadow?.placement.askedProbe ?? placementAskedProbeHoisted
+      const resolvedPlacementPrev = turnContractShadow?.placement.previous ?? placementPrevHoisted
+      const resolvedPlacementInherited = turnContractShadow?.placement.inherited ?? placementInheritedHoisted
+      const resolvedStrategy = turnContractShadow?.strategy.teachingStrategy ?? strategyHoisted
+      const resolvedOutputBias = turnContractShadow?.strategy.outputBias ?? outputBiasHoisted
+      const resolvedHintBias = turnContractShadow?.strategy.hintBias ?? hintBiasHoisted
+      const resolvedStrategyTopicSlug = turnContractShadow?.strategy.strategyTopicSlug ?? strategyTopicSlugHoisted
+      const resolvedSelectedStrategy = turnContractShadow?.strategy.selectedStrategy ?? selectedStrategyHoisted
+      const resolvedConversationDecision = turnContractShadow?.strategy.conversationDecision ?? conversationDecisionHoisted
+      const resolvedCueDecision = turnContractShadow?.strategy.cueDecision ?? cueDecisionHoisted
+      const resolvedDispatchPlan = turnContractShadow?.strategy.dispatchPlan ?? dispatchPlanHoisted
+      const resolvedOutputLanguageBlock = turnContractShadow?.strategy.outputLanguageBlock ?? outputLanguageBlockHoisted
+      const resolvedEvidenceStageCeiling = turnContractShadow?.strategy.evidenceStageCeiling ?? evidenceStageCeilingHoisted
+      const resolvedEvidenceWorkedExampleFirst =
+        turnContractShadow?.strategy.evidenceWorkedExampleFirst ?? evidenceWorkedExampleFirstHoisted
+      const resolvedEvidenceAutonomy = turnContractShadow?.strategy.evidenceAutonomy ?? evidenceAutonomyHoisted
+      const resolvedRequiredCapabilities = turnContractShadow?.capability.required ?? requiredCapabilitiesHoisted
+      const resolvedTeachingStepUpdate = turnContractShadow?.strategy.teachingStepUpdate ?? teachingStepUpdateHoisted
+      // RESULT-classified (`deliveryInput.generation.consecutiveOutages`,
+      // ~L6618). Single write (~L5941) sits before the delivery-compile
+      // point (L6680) and is never reassigned again — the same
+      // "safe to migrate" shape as `resolvedSignalVerificationStatus` above,
+      // just read from `turnDeliveryShadow` instead of the contract.
+      const resolvedConsecutiveOutages = turnDeliveryShadow?.generation.consecutiveOutages ?? consecutiveOutagesHoisted
       // Provably equivalent to `unauthoredKeyGradeHoisted ? null :
       // (mcqGradeHoisted?.correct ?? null)` — see design doc §6 Batch 3 and
       // the commit message for the case-by-case proof. Reused below by both
@@ -7179,7 +7236,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         const { parseHintTag } = await import('@/lib/school/tutoring/hintTag')
         const parsedHint = parseHintTag(cleanText)
         cleanText = parsedHint.cleanText
-        hintHoisted = hintBiasHoisted === 'SUPPRESSED' ? null : parsedHint.hint
+        hintHoisted = resolvedHintBias === 'SUPPRESSED' ? null : parsedHint.hint
       } catch { /* non-fatal */ }
 
       // Beginner IPA/phonetic-notation safety net: buildTutorSystemPrompt's
@@ -7223,7 +7280,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // thermodynamics, radiation, periodic-table questions all got the
       // SAME static reflection text, because the model, still bound by the
       // (pre-override) completion block, produced terse filler regardless
-      // of what was asked. lessonCompletionRespectsNewIntentHoisted means
+      // of what was asked. resolvedLessonCompletionRespectsNewIntent means
       // the override addendum was injected and the model was told to
       // actually answer this specific request — never replace that answer
       // with the generic template.
@@ -7242,8 +7299,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // Typed Turn Contract Batch 6: reuses `resolvedTurnArbitration`.
         && (resolvedTurnArbitration ?? arbitrationUnavailable()).allows('FILLER_REPAIR')
         && (await import('@/lib/teaching/lessonCompletion')).shouldRepairFillerTurn({
-        lessonCompleted: lessonCompletedHoisted,
-        respectsNewIntent: lessonCompletionRespectsNewIntentHoisted,
+        lessonCompleted: resolvedLessonCompleted,
+        respectsNewIntent: resolvedLessonCompletionRespectsNewIntent,
         // A close is the third turn-shape that looks empty and is not — see
         // shouldRepairFillerTurn. Live: "I'm done for today." was honoured all
         // the way through forceClosing and the close directive, then overwritten
@@ -7723,7 +7780,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // was available all along.
             const teachingConceptIdForRepair =
               resolvedExcursionDecision?.targetConceptId
-              ?? libraryConceptNodeIdHoisted
+              ?? resolvedLibraryConceptNodeId
               ?? snapshotCurrentConceptId
               ?? resolvedConceptId
               ?? null
@@ -7863,7 +7920,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 llmCallCount++ // instrumentation only (definition-agreement repair)
                 const routed = await routeAI(
                   [...historyMessages, { role: 'user', content: message }],
-                  systemPrompt + appendix + outputLanguageBlockHoisted,
+                  systemPrompt + appendix + resolvedOutputLanguageBlock,
                   country, 2048, teachingLang,
                   { userId, subject: learnSession.subject.slug },
                   groqModelOverride,
@@ -8010,7 +8067,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 llmCallCount++ // instrumentation only (claim-challenge repair)
                 const routed = await routeAI(
                   [...historyMessages, { role: 'user', content: message }],
-                  systemPrompt + appendix + outputLanguageBlockHoisted,
+                  systemPrompt + appendix + resolvedOutputLanguageBlock,
                   country, 2048, teachingLang,
                   { userId, subject: learnSession.subject.slug },
                   groqModelOverride,
@@ -8096,7 +8153,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               contentRegister,
               move: verifierMove,
               phase: resolvedConversationState?.phase ?? null,
-              stageCeiling: evidenceStageCeilingHoisted,
+              stageCeiling: resolvedEvidenceStageCeiling,
               vocabularyUnlocked: !resolvedFirstLessonActive,
               formulaUnlocked: !resolvedFirstLessonActive && contentRegister !== 'beginner',
               recoveryActive: resolvedRecoveryKey !== null,
@@ -8146,7 +8203,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                   // higher-risk than ordinary ones: the model has already
                   // produced output the runtime rejected. '' for English, so
                   // English re-renders are unchanged.
-                  systemPrompt + violationAppendix + outputLanguageBlockHoisted,
+                  systemPrompt + violationAppendix + resolvedOutputLanguageBlock,
                   country,
                   2048, // see the primary routeAI() call above for why this was raised from 1024
                   teachingLang,
@@ -8166,10 +8223,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // updates operational skills. Attribution honesty lives in
           // observationsFromTurn — a compound-item FAILURE updates nothing,
           // because failure proves the conjunction failed, not which conjunct.
-          if (resolvedCapabilityStateBefore && requiredCapabilitiesHoisted.length > 0) {
+          if (resolvedCapabilityStateBefore && resolvedRequiredCapabilities.length > 0) {
             const capMod2 = await import('@/lib/teaching/capabilityModel')
             const obs = capMod2.observationsFromTurn({
-              requiredCapabilities: requiredCapabilitiesHoisted,
+              requiredCapabilities: resolvedRequiredCapabilities,
               correct: teachingSignal?.correctness ?? null,
             })
             if (obs.length > 0) {
@@ -8233,14 +8290,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // previous turn's question, groq returning 58 and 64 chars. Both carried
       // `legalityBlocked: QL1_NO_ANSWERABLE_SOURCE` — the kernel had already
       // ruled a question illegal this turn and the model asked one anyway.
-      if (!servedDeterministically && conversationDecisionHoisted) {
+      if (!servedDeterministically && resolvedConversationDecision) {
         try {
           const {
             isRemediationTurn, checkRemediationOutput,
             buildRemediationRepairAppendix,
             mostRecentAssistantText, selectRemediationFallback,
           } = await import('@/lib/teaching/remediationOutputContract')
-          const remediationTurn = isRemediationTurn(conversationDecisionHoisted.type)
+          const remediationTurn = isRemediationTurn(resolvedConversationDecision.type)
           // The learner voiced a failure-state utterance (recoveryGuard.ts)
           // rather than plain confusion — a DIFFERENT prompt path
           // (D0-RECOVERY-PREEMPT / the authored SCRIPTS in recoveryGuard.ts),
@@ -8251,7 +8308,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // this at all" — the script's own mandatory "then CHANGE
           // REPRESENTATION entirely" half never arrived, and this floor had
           // never run on a RECOVERY turn to catch it.
-          const recoveryTurn = conversationDecisionHoisted.type === 'RECOVERY'
+          const recoveryTurn = resolvedConversationDecision.type === 'RECOVERY'
           // THE PREVIOUS TURN — and the input both repeat rules below depend on.
           //
           // This read was `.filter(ASSISTANT).slice(-1)[0]`. The window above is
@@ -8279,12 +8336,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             remediationTurn,
             recoveryTurn,
             heldOnCard: remediationHoldCardText !== null,
-            decision: conversationDecisionHoisted.type,
+            decision: resolvedConversationDecision.type,
             // Recorded, not acted on: QL-1 was ALREADY right on both measured
             // failures ("nothing has been taught yet this session … the
             // learner has no source to answer from"). This line makes the
             // correlation visible in production without giving it authority.
-            legalityBlocked: legalityBlockedReasonHoisted,
+            legalityBlocked: resolvedLegalityBlockedReason,
             violation: verdict.violation,
           })
           if (verdict.violation) {
@@ -8292,7 +8349,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // same resolution order the affirmation floor uses.
             const conceptForFloor =
               resolvedExcursionDecision?.targetConceptId
-              ?? libraryConceptNodeIdHoisted
+              ?? resolvedLibraryConceptNodeId
               ?? snapshotCurrentConceptId
               ?? resolvedConceptId
               ?? null
@@ -8323,7 +8380,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 [...historyMessages, { role: 'user', content: message }],
                 systemPrompt
                   + buildRemediationRepairAppendix(verdict.violation, authored)
-                  + outputLanguageBlockHoisted,
+                  + resolvedOutputLanguageBlock,
                 country, 2048, teachingLang,
                 { userId, subject: learnSession.subject.slug },
                 groqModelOverride,
@@ -8574,7 +8631,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // `UngradedGateQuestionInput.lessonCompleted`'s doc comment for
               // the production defect this closes ("got it" after
               // completion). Same authority as the D-0a completion gate.
-              lessonCompleted: lessonCompletedHoisted,
+              lessonCompleted: resolvedLessonCompleted,
               // THE TURN ALREADY KNOWS HOW THE LEARNER DID; SAY SO.
               //
               // Measured (phys.mech.rotational-dynamics, 2026-08-26): the
@@ -8759,13 +8816,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // turn, the budget holds instead of being spent on output the
             // engine did not choose. See advanceConversationState's fold.
             questionSanctioned: resolvedEvidenceMove === 'ask',
-            diagnosticStalled: diagnosticStalledThisTurn(priorStagnantTurnsHoisted),
+            diagnosticStalled: diagnosticStalledThisTurn(resolvedPriorStagnantTurns),
             signalCorrect: teachingSignal?.correctness ?? null,
             recoveryFired: resolvedRecoveryKey !== null,
             learnerRequest: resolvedLearnerRequest,
             misconceptionDetected: teachingSignal?.phrase !== undefined,
             isPriorKnowledgeProbe: isPriorKnowledgeProbe(cleanText),
-            strategyUsed: selectedStrategyHoisted ?? undefined,
+            strategyUsed: resolvedSelectedStrategy ?? undefined,
             signalConfidence: teachingSignal?.confidence as 'high' | 'medium' | 'low' | undefined,
             dontKnowSignal: isDontKnowSignal(resolvedRecoveryKey),
             learnerIssuedDirective: resolvedRecoveryKey === 'too_many_questions',
@@ -9012,7 +9069,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // gate 1
               recoveryTurn: resolvedRecoveryKey !== null,
               // gate 2 — the reason, if this is where production returned
-              legalityBlocked: legalityBlockedReasonHoisted,
+              legalityBlocked: resolvedLegalityBlockedReason,
               taughtThisSession: resolvedConversationState?.taughtThisSession ?? null,
               // the shared conjunct of gates 3-6
               remedialPending: (resolvedConversationState?.teachSegmentsSinceQuestion ?? 0) === 0,
@@ -9025,11 +9082,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // gate 7 and the phase ladder beneath it
               consecutiveFailures: resolvedConversationState?.consecutiveFailures ?? null,
               demonstrated: resolvedConversationState?.demonstrated ?? null,
-              workedExampleFirst: evidenceWorkedExampleFirstHoisted,
+              workedExampleFirst: resolvedEvidenceWorkedExampleFirst,
               // context the decision was handed, and the turn's own shape
               practiceRequested: turnIntent.wantsPractice,
               questionSanctioned: resolvedEvidenceMove === 'ask',
-              diagnosticStalled: diagnosticStalledThisTurn(priorStagnantTurnsHoisted),
+              diagnosticStalled: diagnosticStalledThisTurn(resolvedPriorStagnantTurns),
               learnerRequest: resolvedLearnerRequest,
               degradedTurn: isDegradedProvider(provider),
             },
@@ -9474,7 +9531,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             sceneSpec: detectedSceneSpec,
             dynamicVisualizationCode,
             responseVisual,
-            matchedConcept: resolvedConceptId ?? snapshotCurrentConceptId ?? libraryConceptNodeIdHoisted ?? null,
+            matchedConcept: resolvedConceptId ?? snapshotCurrentConceptId ?? resolvedLibraryConceptNodeId ?? null,
             turnNumber: snapshotRRMLog.length + 1,
           })
         } catch { /* non-fatal — RRM is additive, absence = today's behavior */ }
@@ -9485,13 +9542,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // and whether a visual ultimately rendered this turn, for future
       // strategy-effectiveness analysis. Never awaited, never throws, so it
       // cannot add latency or fail the turn.
-      if (strategyHoisted && outputBiasHoisted && userId) {
+      if (resolvedStrategy && resolvedOutputBias && userId) {
         prisma.teachingStrategyEvent.create({
           data: {
             userId,
-            topicSlug: strategyTopicSlugHoisted ?? subjectCode,
-            strategy: strategyHoisted,
-            outputBias: outputBiasHoisted.kind,
+            topicSlug: resolvedStrategyTopicSlug ?? subjectCode,
+            strategy: resolvedStrategy,
+            outputBias: resolvedOutputBias.kind,
             visualFired,
             sessionId: sessionId ?? null,
           },
@@ -9501,7 +9558,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // P0 (Brain compliance validation) + P1 (production-validation
       // telemetry): after the response is finalized, verify it actually
       // followed the TeachingDecision the Brain computed this turn
-      // (cueDecisionHoisted/dispatchPlanHoisted — always computed, shadow
+      // (resolvedCueDecision/resolvedDispatchPlan — always computed, shadow
       // or active, see the CUE/dispatcher block above), and emit one
       // BrainEvent covering every field the milestone asks to measure.
       // Runs whether or not the flag is on, so shadow-mode data
@@ -9555,7 +9612,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // the close block forbids); `isFirstTurnOfEpisode` is the episode's
         // own freshness flag, reused rather than recomputed.
         const complianceResult = checkBrainCompliance(
-          cleanText, dispatchPlanHoisted, cueDecisionHoisted, visualFired,
+          cleanText, resolvedDispatchPlan, resolvedCueDecision, visualFired,
           { mcqAttached: mcqHoisted !== null, isFirstTurnOfEpisode: resolvedSessionEpisodeFresh },
         )
         protocolComplianceStatus = complianceResult.status ?? null
@@ -9575,10 +9632,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           userId,
           subjectSlug: learnSession.subject.slug,
           brainRuntimeActive,
-          brainDecision: cueDecisionHoisted?.decision ?? null,
-          brainRuleId: cueDecisionHoisted?.ruleId ?? null,
-          compliant: dispatchPlanHoisted && cueDecisionHoisted ? complianceResult.compliant : null,
-          complianceReason: dispatchPlanHoisted && cueDecisionHoisted ? complianceResult.reason : null,
+          brainDecision: resolvedCueDecision?.decision ?? null,
+          brainRuleId: resolvedCueDecision?.ruleId ?? null,
+          compliant: resolvedDispatchPlan && resolvedCueDecision ? complianceResult.compliant : null,
+          complianceReason: resolvedDispatchPlan && resolvedCueDecision ? complianceResult.reason : null,
           explanationMemoryAvailable,
           explanationMemoryHit: !llmUsed,
           fallbackReason: memoryFallbackReasonCode,
@@ -9589,9 +9646,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           recoveryKey: resolvedRecoveryKey,
           frustrationDetected: resolvedRecoveryKey === 'frustrated',
           questionLoopDetected: (resolvedConversationState?.consecutivePriorKnowledgeProbes ?? 0) >= 2,
-          directInstructionTriggered: cueDecisionHoisted?.decision === 'TEACH_DIRECTLY',
+          directInstructionTriggered: resolvedCueDecision?.decision === 'TEACH_DIRECTLY',
           brainLegacyDisagreement: explanationMemoryAvailable
-            && dispatchPlanHoisted !== null && dispatchPlanHoisted.executor !== 'EXPLANATION_MEMORY',
+            && resolvedDispatchPlan !== null && resolvedDispatchPlan.executor !== 'EXPLANATION_MEMORY',
           visualFired,
           responseLength: cleanText.length,
         })
@@ -9713,14 +9770,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // resolving it fresh from the same field keeps this write self-
       // contained without assuming anything about code between the two.
       const { lessonKeyFor } = await import('@/lib/teaching/lessonAttempt')
-      const assistantLessonKey = lessonKeyFor({ topicSlug: activeLessonSlugHoisted, lessonOrder: studentProgress?.currentLesson ?? null })
+      const assistantLessonKey = lessonKeyFor({ topicSlug: resolvedActiveLessonSlug, lessonOrder: studentProgress?.currentLesson ?? null })
 
       // Phase 1 instrumentation payload. Every value is already computed by
       // this turn — nothing here calls a model, reads the learner's content,
       // or influences what was taught. Written on the SAME row as `provider`
       // so the distribution query is a plain GROUP BY with no join.
       const dependencyInstrumentation = {
-        teachingDecision: dispatchPlanHoisted?.decision ?? null,
+        teachingDecision: resolvedDispatchPlan?.decision ?? null,
         // Phase 8. Sourced from the DECISION, not from the dispatch plan,
         // even though `planDispatch` copies it through and the two agree on
         // every healthy turn. They diverge in exactly one case: an internal
@@ -9733,12 +9790,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         //
         // Stored verbatim. No normalising, no remapping, no defaulting to a
         // sibling code — the whole point is that D4b and D8 stay separable.
-        teachingRuleId: cueDecisionHoisted?.ruleId ?? null,
+        teachingRuleId: resolvedCueDecision?.ruleId ?? null,
         // Phase 10. Stored verbatim from the checker — multiple violation
         // codes arrive '+'-joined and are NEVER collapsed into one label.
         teachingComplianceStatus: protocolComplianceStatus,
         teachingComplianceViolation: protocolComplianceViolation,
-        dispatchExecutor: dispatchPlanHoisted?.executor ?? null,
+        dispatchExecutor: resolvedDispatchPlan?.executor ?? null,
         // 'none' is the initialised value and means the memory path never
         // reported a reason; stored as NULL rather than the string 'none' so
         // "no reason recorded" and "a reason was recorded" stay distinguishable.
@@ -9961,7 +10018,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // source to compute from). Reuses the exact same LEARNER_FEEDBACK
       // pattern the RECOVERY/voice-signal writers above use. hintHoisted is
       // null both when no [HINT] tag was emitted AND when one was emitted
-      // but suppressed by hintBiasHoisted — this only fires when a hint was
+      // but suppressed by resolvedHintBias — this only fires when a hint was
       // genuinely surfaced to the learner this turn. The next turn's
       // PROBE_OUTCOME is the what-followed half of the L1 join (same
       // pattern as recoverySuccessRates in learningAnalytics.ts).
@@ -10080,10 +10137,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // deterministic snapshot state instead of re-inferring from history
       // (decision-engine/08 §3's update contract — "the ledger is the truth").
       // libraryLessonPlanHoisted.currentConcept.nodeId is a subjectCatalog slug (not a canonical
-      // KG ID) — use only libraryConceptNodeIdHoisted which Writer B seeds with the correct ID.
+      // KG ID) — use only resolvedLibraryConceptNodeId which Writer B seeds with the correct ID.
       if (process.env.ENABLE_LIBRARY_CONCEPT_TRACKING !== '0') {
         try {
-          const newLibConceptId = libraryConceptNodeIdHoisted
+          const newLibConceptId = resolvedLibraryConceptNodeId
           const conceptChanged = !!newLibConceptId && newLibConceptId !== snapshotCurrentConceptId
 
           // Placement verification fold (pure state machine — placementVerification.ts)
@@ -10096,7 +10153,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             const { emptyPlacementState, recordProbeResult, levelBelow } = await import('@/lib/teaching/placementVerification')
             // Red-team fix D3: fold onto the inherited/current state, not
             // only this session's snapshot.
-            const prev = placementPrevHoisted ?? emptyPlacementState()
+            const prev = resolvedPlacementPrev ?? emptyPlacementState()
             const nextState = recordProbeResult(prev, {
               probe: answeredProbe,
               correctness: teachingSignal.correctness,
@@ -10107,7 +10164,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // (placement/02 §4 — the learner never hears about it). Upward
             // never happens here. No fake completions are written — only the
             // default starting position moves (placement.ts constraint).
-            if (nextState.verified && nextState.outcome === 'adjusted_down' && placementLevelHoisted) {
+            if (nextState.verified && nextState.outcome === 'adjusted_down' && resolvedPlacementLevel) {
               const { getKnowledgeGraph } = await import('@/lib/curriculum/knowledgeGraph')
               const { computeCurriculumEntryOrder } = await import('@/lib/curriculum/placement')
               const { shouldApplyDownwardAdjustment } = await import('@/lib/teaching/placementVerification')
@@ -10125,13 +10182,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // computeCurriculumEntryOrder helper used everywhere else in
               // this file supplies the ORIGINAL (pre-adjustment) entry order.
               const originalEntryOrder = graph
-                ? (() => { try { return computeCurriculumEntryOrder(graph, placementLevelHoisted) } catch { return null } })()
+                ? (() => { try { return computeCurriculumEntryOrder(graph, resolvedPlacementLevel) } catch { return null } })()
                 : null
               const learnerStillAtEntry = shouldApplyDownwardAdjustment({
                 currentLesson: studentProgress?.currentLesson, originalEntryOrder,
               })
               if (graph && learnerStillAtEntry) {
-                const lowered = computeCurriculumEntryOrder(graph, levelBelow(placementLevelHoisted))
+                const lowered = computeCurriculumEntryOrder(graph, levelBelow(resolvedPlacementLevel))
                 prisma.studentProgress.update({
                   where: { userId_subjectCode: { userId, subjectCode: progressCode } },
                   // activeLessonSlug is cleared with it: this adjustment is
@@ -10168,14 +10225,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // memory-served (assembled) turn never delivered the probe question,
           // so persisting it would make the next turn's await-block assert a
           // question that was never asked.
-          if (placementAskedProbeHoisted && !assembled && Object.keys(placementUpdate).length === 0) {
-            placementUpdate = { pendingPlacementProbe: placementAskedProbeHoisted }
+          if (resolvedPlacementAskedProbe && !assembled && Object.keys(placementUpdate).length === 0) {
+            placementUpdate = { pendingPlacementProbe: resolvedPlacementAskedProbe }
           }
           // Red-team fix D3: a verification concluded in an earlier session is
           // copied into THIS session's snapshot once, so subsequent turns skip
           // the cross-session lookup (assessment/02 §1: placement runs once).
-          if (placementInheritedHoisted && placementPrevHoisted && Object.keys(placementUpdate).length === 0) {
-            placementUpdate = { placementVerification: placementPrevHoisted }
+          if (resolvedPlacementInherited && resolvedPlacementPrev && Object.keys(placementUpdate).length === 0) {
+            placementUpdate = { placementVerification: resolvedPlacementPrev }
           }
 
           const signalUpdate = teachingSignal ? { lastSignal: { ...teachingSignal, at: new Date().toISOString() } } : {}
@@ -10262,7 +10319,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // previous runtime counted questions but never remembered them.
           {
             const { recordQuestions, recordMcqOptions } = await import('@/lib/teaching/repetitionGuard')
-            let ledgerNow = recordQuestions(questionLedgerHoisted, cleanText)
+            let ledgerNow = recordQuestions(resolvedQuestionLedger, cleanText)
             // P2 FIX: also fold this turn's SERVED MCQ options (authored or
             // model-generated) into the ledger, so a later turn's templated
             // duplicate (same options, different stem example) can be named
@@ -10272,12 +10329,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             conversationStateUpdate.questionLedger = ledgerNow
           }
           // A healthy turn clears the outage streak; an outage turn carries it.
-          conversationStateUpdate.consecutiveOutages = consecutiveOutagesHoisted
+          conversationStateUpdate.consecutiveOutages = resolvedConsecutiveOutages
           // Persist THIS turn's question so the next turn can grade the reply
           // against its stored correctIndex; write null when the turn asked
           // nothing, so a stale MCQ can never grade an unrelated later message.
           // UNCONDITIONAL on purpose: the first draft of this sat inside
-          // `if (teachingHistoryHoisted)`, which is exactly the mistake that
+          // `if (resolvedTeachingHistory)`, which is exactly the mistake that
           // left the teaching ledger stale for months (see the note above it).
           // PHASE B: stamped with the lesson it was asked in, read back through
           // readPendingQuestion's identity guard next turn. Same value the
@@ -10367,9 +10424,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // is part of the condition rather than the counter being cleared
             // separately: relief that worked must not immediately re-arm.
             const { foldProbeStarvedTurns } = await import('@/lib/teaching/turnProgress')
-            const probeStarvedTurns = foldProbeStarvedTurns(priorProbeStarvedTurnsHoisted, {
+            const probeStarvedTurns = foldProbeStarvedTurns(resolvedPriorProbeStarvedTurns, {
               phaseAllowedProbe: resolvedPhaseAllowsProbe,
-              arbitrationWasSoleBlocker: arbitrationWasSoleBlockerHoisted && mcqHoisted === null,
+              arbitrationWasSoleBlocker: resolvedArbitrationWasSoleBlocker && mcqHoisted === null,
             })
             turnProgressHoisted = {
               outcome, stagnantTurns, rung: escalationRung(stagnantTurns), probeHeldTurns,
@@ -10380,10 +10437,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               probeStarvedTurns,
               heldProbeId: carriedForwardUngradedForCount ? (pendingMcqHoisted?.assetId ?? null) : null,
             }
-            if (probeStarvationRelievedHoisted) {
+            if (resolvedProbeStarvationRelieved) {
               console.log('[turn-progress] ' + JSON.stringify({
                 action: 'probe-starvation-relief',
-                starvedTurnsBefore: priorProbeStarvedTurnsHoisted,
+                starvedTurnsBefore: resolvedPriorProbeStarvedTurns,
                 probeAttached: mcqHoisted !== null,
               }))
             }
@@ -10504,7 +10561,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             }
             const pendingMcqValueThisTurn = writePendingQuestion(
               releasePending ? null : served,
-              lessonKeyThisTurnHoisted,
+              resolvedLessonKeyThisTurn,
             )
             conversationStateUpdate.pendingMcq = pendingMcqValueThisTurn
             // ISS-13 — `pendingMcq` had no rederiver either, and unlike
@@ -10557,14 +10614,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               //
               // Re-opening a completed lesson is lesson-init's job and is
               // scoped there to mode restart/review ("teach this to me again").
-              // A chat turn is not that act. lessonCompletedHoisted is computed
+              // A chat turn is not that act. resolvedLessonCompleted is computed
               // above from latestLessonAttempt().status for THIS SAME lessonKey
               // (identical lessonKeyFor call, same user + subject), so this is
               // the same authority the D-0a completion gate reads — not a
               // second source of truth. After a real restart, lesson-init has
               // opened an IN_PROGRESS attempt, this flag is false, and
               // recording resumes exactly as before.
-              if (isConceptClosed(stateForOutcome) && !lessonCompletedHoisted) {
+              if (isConceptClosed(stateForOutcome) && !resolvedLessonCompleted) {
                 // LessonContext addresses lessons by order within the
                 // subject's curriculum; lessonKeyFor renders that into the
                 // single key format so one lesson cannot be recorded twice
@@ -10666,7 +10723,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                       { lang: teachingLang, conceptId: resolvedConceptId },
                     )
                     // ── THE COMPLETING TURN MUST NOT ALSO TEACH ────────────
-                    // The completion GATE (lessonCompletedHoisted -> D-0a ->
+                    // The completion GATE (resolvedLessonCompleted -> D-0a ->
                     // SERVE_LESSON_COMPLETE) is read at the START of a turn
                     // from the previously-persisted attempt. The completion
                     // EVENT is decided HERE, at the end of the turn, from this
@@ -10788,7 +10845,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               recoveryFired: resolvedRecoveryKey !== null,
               learnerRequest: resolvedLearnerRequest,
               isPriorKnowledgeProbe: isPriorKnowledgeProbe(cleanText),
-              strategyUsed: selectedStrategyHoisted ?? undefined,
+              strategyUsed: resolvedSelectedStrategy ?? undefined,
               signalConfidence: teachingSignal?.confidence as 'high' | 'medium' | 'low' | undefined,
               dontKnowSignal: isDontKnowSignal(resolvedRecoveryKey),
               learnerIssuedDirective: resolvedRecoveryKey === 'too_many_questions',
@@ -10854,7 +10911,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
 
           // TEACHING MEMORY IS WRITTEN ON EVERY TAUGHT TURN.
           //
-          // This persist used to require `selectedStrategyHoisted !== null`.
+          // This persist used to require `resolvedSelectedStrategy !== null`.
           // That variable is assigned in exactly ONE place — inside
           // `if (resolvedLearnerRequest === 'explain_differently')` — so the
           // whole ledger (explanationCount, strategiesUsed, mcqAsked,
@@ -10877,13 +10934,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // other field is turn-general and now always folds. No new state, no
           // duplicated counter — the same single owner, written when it should
           // always have been.
-          if (teachingHistoryHoisted) {
+          if (resolvedTeachingHistory) {
             const { updateTeachingHistory, computeFrustration, computeMastery, readTeachingHistory } = await import('@/lib/teaching/teachingHistory')
-            const updatedHistory = updateTeachingHistory(teachingHistoryHoisted, {
-              strategiesUsed: selectedStrategyHoisted !== null
-                ? [...new Set([...teachingHistoryHoisted.strategiesUsed, selectedStrategyHoisted])]
-                : teachingHistoryHoisted.strategiesUsed,
-              explanationCount: teachingHistoryHoisted.explanationCount + 1,
+            const updatedHistory = updateTeachingHistory(resolvedTeachingHistory, {
+              strategiesUsed: resolvedSelectedStrategy !== null
+                ? [...new Set([...resolvedTeachingHistory.strategiesUsed, resolvedSelectedStrategy])]
+                : resolvedTeachingHistory.strategiesUsed,
+              explanationCount: resolvedTeachingHistory.explanationCount + 1,
               frustration: computeFrustration(
                 resolvedConversationState?.consecutiveFailures ?? 0,
                 resolvedConversationState?.remediationCount ?? 0,
@@ -10974,7 +11031,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // value. Re-fold this turn's contribution onto whatever is
             // actually there. Missed in the original ISS-13 pass, which
             // registered five of the seven accumulative fields.
-            const capturedStrategy = selectedStrategyHoisted
+            const capturedStrategy = resolvedSelectedStrategy
             // ── C7 ROOT CAUSE (2026-09-02): THE ACCUMULATIVE RECORDS THIS
             //    REDERIVER STILL DROPPED ──────────────────────────────────────
             //
@@ -11001,7 +11058,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // Fix: re-apply the SAME four records onto the concurrently-updated
             // base, under the SAME conditions as the primary fold — captured here
             // so the closure re-runs them rather than re-deriving them.
-            const historyConceptId = teachingHistoryHoisted.conceptId
+            const historyConceptId = resolvedTeachingHistory.conceptId
             const rederiveServedExplanation = provider === 'memory' && assembled?.explanationAssetId
               ? assembled.explanationAssetId : null
             const rederiveServedCard = remediationCardServedId ?? null
@@ -11078,12 +11135,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               recoveryKey: resolvedRecoveryKey,
               recoveryEscalationRung: snapshotSessionFailureCount >= 4 ? 2 : snapshotSessionFailureCount >= 2 ? 1 : 0,
               sessionFailureCount: snapshotSessionFailureCount,
-              autonomyRequested: evidenceAutonomyHoisted,
+              autonomyRequested: resolvedEvidenceAutonomy,
               decisionMove: resolvedEvidenceMove,
               decisionPhaseBefore: resolvedConversationState?.phase ?? null,
               decisionPhaseAfter: phaseAfter,
-              workedExampleFirst: evidenceWorkedExampleFirstHoisted,
-              stageCeiling: evidenceStageCeilingHoisted,
+              workedExampleFirst: resolvedEvidenceWorkedExampleFirst,
+              stageCeiling: resolvedEvidenceStageCeiling,
               // P1-1 — rides WP-3's existing v2 field on the existing call.
               // No second writer, no new event, no new capture path. Omitted
               // when nothing was declared, so the payload is byte-identical to
@@ -11094,7 +11151,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               ...(resolvedAdaptationState !== null && { adaptationState: resolvedAdaptationState }),
               provenance: [
                 ...(resolvedRecoveryKey ? [`recovery:${resolvedRecoveryKey}`] : []),
-                ...(evidenceAutonomyHoisted ? ['autonomy'] : []),
+                ...(resolvedEvidenceAutonomy ? ['autonomy'] : []),
                 ...(resolvedEvidenceMove ? ['turn-directive'] : []),
                 ...(resolvedFirstLessonActive ? ['first-lesson'] : []),
                 // K6 — record EOS verifier outcomes as provenance atoms.
@@ -11228,7 +11285,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             ).renderedRealityLog
           }
 
-          if (conceptChanged || teachingSignal || Object.keys(placementUpdate).length > 0 || Object.keys(episodeUpdate).length > 0 || Object.keys(failureCountUpdate).length > 0 || Object.keys(conversationStateUpdate).length > 0 || Object.keys(narrativeUpdate).length > 0 || teachingStepUpdateHoisted || turnHistoryUpdateHoisted || Object.keys(progressionUpdate).length > 0 || Object.keys(visualSessionUpdate).length > 0 || Object.keys(excursionUpdate).length > 0 || rrmEntryThisTurn) {
+          if (conceptChanged || teachingSignal || Object.keys(placementUpdate).length > 0 || Object.keys(episodeUpdate).length > 0 || Object.keys(failureCountUpdate).length > 0 || Object.keys(conversationStateUpdate).length > 0 || Object.keys(narrativeUpdate).length > 0 || resolvedTeachingStepUpdate || turnHistoryUpdateHoisted || Object.keys(progressionUpdate).length > 0 || Object.keys(visualSessionUpdate).length > 0 || Object.keys(excursionUpdate).length > 0 || rrmEntryThisTurn) {
             // Atomic JSONB merge (same pattern as the school snapshot above).
             const libSnapshotDelta = {
               ...(conceptChanged ? { currentConceptNodeId: newLibConceptId } : {}),
@@ -11245,7 +11302,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // Option B — Teaching Sequence Executor: persist the runtime-
               // selected step so the next turn (or a resumed session) reads
               // it back via readTeachingStepIndex() instead of restarting.
-              ...(teachingStepUpdateHoisted ?? {}),
+              ...(resolvedTeachingStepUpdate ?? {}),
               // ADR 15: RRM visual-state log
               ...rrmUpdate,
             }

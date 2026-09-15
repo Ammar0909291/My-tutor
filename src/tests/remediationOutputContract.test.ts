@@ -318,7 +318,13 @@ describe('H3 — the floor is actually on the turn path', () => {
     // untouched and still enclosing the floor. It now asserts the invariant
     // directly — the guard exists, and it opens before the floor it governs —
     // which is what this test was always for and cannot be moved by prose.
-    const guard = ROUTE.indexOf('if (!servedDeterministically && conversationDecisionHoisted)')
+    // Typed Turn Contract Batch 8 (2026-09-15): reads `resolvedConversationDecision`
+    // now — the same single-epoch, never-reassigned-after-compile value
+    // `conversationDecisionHoisted` always was here (its one write, ~L5083,
+    // sits well before the contract's L5865 compile point). Old anchor (kept
+    // verbatim, no longer matches source):
+    //   ROUTE.indexOf('if (!servedDeterministically && conversationDecisionHoisted)')
+    const guard = ROUTE.indexOf('if (!servedDeterministically && resolvedConversationDecision)')
     const floor = ROUTE.indexOf('[remediation-floor]')
     expect(guard).toBeGreaterThan(-1)
     expect(floor).toBeGreaterThan(guard)

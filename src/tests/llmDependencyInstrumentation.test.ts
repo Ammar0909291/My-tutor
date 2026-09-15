@@ -54,9 +54,15 @@ describe('Phase 1 instrumentation — the payload reaches the write', () => {
   })
 
   it('all four measured fields are populated from values the turn already has', () => {
+    // Typed Turn Contract Batch 8 (2026-09-15): these two read
+    // `resolvedDispatchPlan` now — see teachingRuleIdInstrumentation.test.ts
+    // for the equivalence proof. Old field strings (kept verbatim, no longer
+    // match source):
+    //   'teachingDecision: dispatchPlanHoisted?.decision'
+    //   'dispatchExecutor: dispatchPlanHoisted?.executor'
     for (const field of [
-      'teachingDecision: dispatchPlanHoisted?.decision',
-      'dispatchExecutor: dispatchPlanHoisted?.executor',
+      'teachingDecision: resolvedDispatchPlan?.decision',
+      'dispatchExecutor: resolvedDispatchPlan?.executor',
       'memoryFallbackReason: memoryFallbackReasonCode',
       'llmCallCount,',
     ]) {

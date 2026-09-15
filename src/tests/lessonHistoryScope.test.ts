@@ -240,10 +240,24 @@ describe('the key must match the WRITERS, or every turn gets an empty history', 
     // once per turn (session pointer -> StudentProgress.activeLessonSlug) into
     // a single variable, so the three sites share one VALUE rather than three
     // identical expressions that could drift apart independently.
+    // Typed Turn Contract Batch 8 (2026-09-15): one of the original three
+    // sites (the assistant-message stamp, ~L9773) sits after the shared
+    // resolved-const block and now reads `resolvedActiveLessonSlug` — the
+    // same single-epoch, never-reassigned-after-compile value
+    // `activeLessonSlugHoisted` always was there (its one write, ~L433, sits
+    // well before the contract's L5865 compile point). The other two
+    // (~L461, ~L3885) sit before the block and are unchanged. Old assertion
+    // (kept verbatim, no longer matches source):
+    //   const sites = CHAT.match(/lessonKeyFor\w*\(\{\s*\n?\s*topicSlug: activeLessonSlugHoisted,\s*\n?\s*lessonOrder: studentProgress\?\.currentLesson \?\? null,?\s*\n?\s*\}\)/g) ?? []
+    //   expect(sites.length).toBe(3)
     const sites = CHAT.match(
       /lessonKeyFor\w*\(\{\s*\n?\s*topicSlug: activeLessonSlugHoisted,\s*\n?\s*lessonOrder: studentProgress\?\.currentLesson \?\? null,?\s*\n?\s*\}\)/g,
     ) ?? []
-    expect(sites.length).toBe(3)
+    expect(sites.length).toBe(2)
+    const resolvedSites = CHAT.match(
+      /lessonKeyFor\w*\(\{\s*\n?\s*topicSlug: resolvedActiveLessonSlug,\s*\n?\s*lessonOrder: studentProgress\?\.currentLesson \?\? null,?\s*\n?\s*\}\)/g,
+    ) ?? []
+    expect(resolvedSites.length).toBe(1)
     // exactly one resolution per turn — not one per site
     expect((CHAT.match(/const activeLessonSlugHoisted = /g) ?? []).length).toBe(1)
   })

@@ -21,7 +21,13 @@ const ROUTE = readFileSync(
 
 describe('route.ts computes and threads recoveryTurn through both floor checks', () => {
   it('computes recoveryTurn from the same conversationDecisionHoisted the CONFUSION path already reads', () => {
-    expect(ROUTE).toMatch(/const recoveryTurn = conversationDecisionHoisted\.type === 'RECOVERY'/)
+    // Typed Turn Contract Batch 8 (2026-09-15): reads `resolvedConversationDecision`
+    // now — the same single-epoch, never-reassigned-after-compile value
+    // `conversationDecisionHoisted` always was here (its one write, ~L5083,
+    // sits well before the contract's L5865 compile point). Old assertion
+    // (kept verbatim, no longer matches source):
+    //   expect(ROUTE).toMatch(/const recoveryTurn = conversationDecisionHoisted\.type === 'RECOVERY'/)
+    expect(ROUTE).toMatch(/const recoveryTurn = resolvedConversationDecision\.type === 'RECOVERY'/)
   })
 
   it('passes it into the first verdict check', () => {

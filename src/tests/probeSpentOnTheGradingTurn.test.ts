@@ -158,7 +158,11 @@ describe('6 · pending-question lesson identity is untouched', () => {
     //   expect(ROUTE).toMatch(/const served = mcqToServe\(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted\)/)
     expect(ROUTE).toMatch(/const resolvedQuestionServed = mcqToServe\(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted\)/)
     expect(ROUTE).toMatch(/const served = resolvedQuestionServed/)
-    expect(ROUTE).toMatch(/writePendingQuestion\(\s*\n\s*releasePending \? null : served,\s*\n\s*lessonKeyThisTurnHoisted,\s*\n\s*\)/)
+    // Typed Turn Contract Batch 8 (2026-09-15): reads `resolvedLessonKeyThisTurn`
+    // now — see lessonStateIsolationWiring.test.ts for the equivalence proof.
+    // Old assertion (kept verbatim, no longer matches source):
+    //   expect(ROUTE).toMatch(/writePendingQuestion\(\s*\n\s*releasePending \? null : served,\s*\n\s*lessonKeyThisTurnHoisted,\s*\n\s*\)/)
+    expect(ROUTE).toMatch(/writePendingQuestion\(\s*\n\s*releasePending \? null : served,\s*\n\s*resolvedLessonKeyThisTurn,\s*\n\s*\)/)
   })
 })
 

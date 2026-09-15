@@ -152,7 +152,13 @@ describe('Phase E — the log block is inert', () => {
   })
 
   it('prints the blockedReason the decision already produced, not a re-derivation', () => {
-    expect(GATES).toContain('legalityBlocked: legalityBlockedReasonHoisted')
+    // Typed Turn Contract Batch 8 (2026-09-15): reads `resolvedLegalityBlockedReason`
+    // now — the same single-epoch, never-reassigned-after-compile value
+    // `legalityBlockedReasonHoisted` always was (verified: its one write,
+    // ~L3321, sits well before the contract's L5865 compile point). Old
+    // assertion (kept verbatim, no longer matches source):
+    //   expect(GATES).toContain('legalityBlocked: legalityBlockedReasonHoisted')
+    expect(GATES).toContain('legalityBlocked: resolvedLegalityBlockedReason')
     // It must NOT call questionLegality again — a second evaluation could
     // disagree with the one the move was actually made from.
     expect(GATES).not.toContain('questionLegality')

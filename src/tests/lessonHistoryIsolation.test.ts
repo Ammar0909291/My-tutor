@@ -154,10 +154,24 @@ describe('write side: /api/learn/chat stamps both turns with lessonKey', () => {
     // asserted here against the new shape — both stamps still use ONE
     // expression, still prefer the explicit slug over the counter, and still
     // read nothing from the request body.
+    // Typed Turn Contract Batch 8 (2026-09-15): one of the original two stamp
+    // sites (the assistant-message stamp, ~L9773) sits after the shared
+    // resolved-const block and now reads `resolvedActiveLessonSlug` — the
+    // same single-epoch, never-reassigned-after-compile value
+    // `activeLessonSlugHoisted` always was there (its one write, ~L433, sits
+    // well before the contract's L5865 compile point). The other (~L461)
+    // sits before the block and is unchanged. Old assertion (kept verbatim,
+    // no longer matches source):
+    //   const occurrences = [...SRC.matchAll(/lessonKeyFor\(\{ topicSlug: activeLessonSlugHoisted, lessonOrder: studentProgress\?\.currentLesson \?\? null \}\)/g)]
+    //   expect(occurrences).toHaveLength(2)
     const occurrences = [
       ...SRC.matchAll(/lessonKeyFor\(\{ topicSlug: activeLessonSlugHoisted, lessonOrder: studentProgress\?\.currentLesson \?\? null \}\)/g),
     ]
-    expect(occurrences).toHaveLength(2)
+    expect(occurrences).toHaveLength(1)
+    const resolvedOccurrences = [
+      ...SRC.matchAll(/lessonKeyFor\(\{ topicSlug: resolvedActiveLessonSlug, lessonOrder: studentProgress\?\.currentLesson \?\? null \}\)/g),
+    ]
+    expect(resolvedOccurrences).toHaveLength(1)
     // ...and that hoisted value is the resolver's output, not a new ad-hoc read.
     expect(SRC).toContain('const activeLessonSlugHoisted = lessonPointerHoisted.slug')
     expect(SRC).toContain('resolveSessionLessonSlug({')

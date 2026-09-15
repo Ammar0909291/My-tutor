@@ -72,8 +72,14 @@ describe('prompt assembly — the language contract is the final instruction', (
     // invisible to the check above — this is the gap that shipped in the
     // first version of this fix and was caught while writing this guard.
     // A verifier re-render must still end with the language contract.
+    // Typed Turn Contract Batch 8 (2026-09-15): reads `resolvedOutputLanguageBlock`
+    // now — the same single-epoch, never-reassigned-after-compile value
+    // `outputLanguageBlockHoisted` always was here (its writes, ~L5538/~L5541,
+    // sit well before the contract's L5865 compile point). Old assertion
+    // (kept verbatim, no longer matches source):
+    //   expect(routeSource).toMatch(/systemPrompt \+ violationAppendix \+ outputLanguageBlockHoisted/)
     expect(routeSource).toMatch(
-      /systemPrompt \+ violationAppendix \+ outputLanguageBlockHoisted/,
+      /systemPrompt \+ violationAppendix \+ resolvedOutputLanguageBlock/,
     )
   })
 

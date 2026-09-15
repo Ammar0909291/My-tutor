@@ -42,7 +42,14 @@ describe('the chat route reads and writes the pending question through its owner
     // driftable computation. The key-identity invariant is unchanged; only
     // the assignment now goes through the named local.
     expect(CHAT).toMatch(/const pendingMcqValueThisTurn = writePendingQuestion\(/)
-    expect(CHAT).toMatch(/releasePending \? null : served,\s*\n\s*lessonKeyThisTurnHoisted/)
+    // Typed Turn Contract Batch 8 (2026-09-15): this call site sits after the
+    // shared resolved-const block, so it now reads `resolvedLessonKeyThisTurn`
+    // — the same single-epoch, never-reassigned-after-compile value
+    // `lessonKeyThisTurnHoisted` always was here (its one write, ~L2445, sits
+    // well before the contract's L5865 compile point). Old assertion (kept
+    // verbatim, no longer matches source):
+    //   expect(CHAT).toMatch(/releasePending \? null : served,\s*\n\s*lessonKeyThisTurnHoisted/)
+    expect(CHAT).toMatch(/releasePending \? null : served,\s*\n\s*resolvedLessonKeyThisTurn/)
     expect(CHAT).toMatch(/conversationStateUpdate\.pendingMcq = pendingMcqValueThisTurn/)
   })
 

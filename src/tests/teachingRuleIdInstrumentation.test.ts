@@ -114,7 +114,13 @@ describe('2 — the plan preserves the rule (executed, not asserted)', () => {
 
 describe('3 — the exact rule reaches persistence, verbatim', () => {
   it('the route persists the DECISION engine value, not the plan copy', () => {
-    expect(ROUTE).toContain('teachingRuleId: cueDecisionHoisted?.ruleId ?? null,')
+    // Typed Turn Contract Batch 8 (2026-09-15): reads `resolvedCueDecision`
+    // now — the same single-epoch, never-reassigned-after-compile value
+    // `cueDecisionHoisted` always was here (its writes, ~L5057/~L5068, sit
+    // well before the contract's L5865 compile point). Old assertion (kept
+    // verbatim, no longer matches source):
+    //   expect(ROUTE).toContain('teachingRuleId: cueDecisionHoisted?.ruleId ?? null,')
+    expect(ROUTE).toContain('teachingRuleId: resolvedCueDecision?.ruleId ?? null,')
   })
 
   it('it rides the SAME instrumentation object as the Phase 1 columns', () => {
@@ -137,7 +143,10 @@ describe('3 — the exact rule reaches persistence, verbatim', () => {
     const line = ROUTE.split('\n').find((l) => l.includes('teachingRuleId:'))!
     expect(line).not.toMatch(/ \? .* : /)       // no ternary mapping
     expect(line).not.toMatch(/toUpperCase|toLowerCase|replace|slice|split|trim/)
-    expect(line.trim()).toBe('teachingRuleId: cueDecisionHoisted?.ruleId ?? null,')
+    // Typed Turn Contract Batch 8 (2026-09-15). Old assertion (kept verbatim,
+    // no longer matches source):
+    //   expect(line.trim()).toBe('teachingRuleId: cueDecisionHoisted?.ruleId ?? null,')
+    expect(line.trim()).toBe('teachingRuleId: resolvedCueDecision?.ruleId ?? null,')
   })
 
   it('no rule value is filtered out on the way to the write', () => {
@@ -201,8 +210,15 @@ describe('6 — nothing else moved', () => {
   })
 
   it('the Phase 1 and Phase 4 telemetry fields are untouched', () => {
-    expect(ROUTE).toContain('teachingDecision: dispatchPlanHoisted?.decision ?? null,')
-    expect(ROUTE).toContain('dispatchExecutor: dispatchPlanHoisted?.executor ?? null,')
+    // Typed Turn Contract Batch 8 (2026-09-15): reads `resolvedDispatchPlan`
+    // now — the same single-epoch, never-reassigned-after-compile value
+    // `dispatchPlanHoisted` always was here (its one write, ~L5166, sits
+    // well before the contract's L5865 compile point). Old assertions (kept
+    // verbatim, no longer match source):
+    //   expect(ROUTE).toContain('teachingDecision: dispatchPlanHoisted?.decision ?? null,')
+    //   expect(ROUTE).toContain('dispatchExecutor: dispatchPlanHoisted?.executor ?? null,')
+    expect(ROUTE).toContain('teachingDecision: resolvedDispatchPlan?.decision ?? null,')
+    expect(ROUTE).toContain('dispatchExecutor: resolvedDispatchPlan?.executor ?? null,')
     expect(ROUTE).toContain("memoryFallbackReason: memoryFallbackReasonCode === 'none' ? null : memoryFallbackReasonCode,")
     expect(ROUTE).toContain('servedFromMemory || servedByGateRenderer || servedByLessonComplete')
   })

@@ -37,7 +37,14 @@ const CONCEPT = 'chem.found.mole-concept'
 
 /** The persist block, isolated for structural assertions. */
 function persistBlock(): string {
-  const start = ROUTE.indexOf('if (teachingHistoryHoisted) {')
+  // Typed Turn Contract Batch 8 (2026-09-15): this persist-guard call site
+  // sits after the shared resolved-const block, so it now reads
+  // `resolvedTeachingHistory` — the same single-epoch, never-reassigned-
+  // after-compile value `teachingHistoryHoisted` always was here (its real
+  // write, ~L3740, sits well before the contract's L5865 compile point). Old
+  // anchor (kept verbatim, no longer matches source):
+  //   ROUTE.indexOf('if (teachingHistoryHoisted) {')
+  const start = ROUTE.indexOf('if (resolvedTeachingHistory) {')
   expect(start).toBeGreaterThan(-1)
   // Wide enough to contain the whole block. It was 3000 and the block
   // outgrew it when the probe-spend rule gained its rationale comment, which
@@ -48,8 +55,14 @@ function persistBlock(): string {
 describe('the ledger is written on EVERY taught turn', () => {
   it('the persist is no longer gated on an explain-differently-only variable', () => {
     // The defect: `selectedStrategyHoisted !== null` in the guard.
-    expect(ROUTE).not.toContain('if (teachingHistoryHoisted && selectedStrategyHoisted !== null) {')
-    expect(ROUTE).toContain('if (teachingHistoryHoisted) {')
+    // Typed Turn Contract Batch 8 (2026-09-15): the guard now reads
+    // `resolvedTeachingHistory`/`resolvedSelectedStrategy` — see persistBlock()'s
+    // own comment for why this is provably the same value. Old assertions
+    // (kept verbatim, no longer match source):
+    //   expect(ROUTE).not.toContain('if (teachingHistoryHoisted && selectedStrategyHoisted !== null) {')
+    //   expect(ROUTE).toContain('if (teachingHistoryHoisted) {')
+    expect(ROUTE).not.toContain('if (resolvedTeachingHistory && resolvedSelectedStrategy !== null) {')
+    expect(ROUTE).toContain('if (resolvedTeachingHistory) {')
   })
 
   it('selectedStrategyHoisted really is assigned only on that one branch', () => {
@@ -63,7 +76,10 @@ describe('the ledger is written on EVERY taught turn', () => {
   })
 
   it('explanationCount folds unconditionally', () => {
-    expect(persistBlock()).toContain('explanationCount: teachingHistoryHoisted.explanationCount + 1')
+    // Typed Turn Contract Batch 8 (2026-09-15). Old assertion (kept verbatim,
+    // no longer matches source):
+    //   expect(persistBlock()).toContain('explanationCount: teachingHistoryHoisted.explanationCount + 1')
+    expect(persistBlock()).toContain('explanationCount: resolvedTeachingHistory.explanationCount + 1')
   })
 
   it('mcqAsked and explanationsServed fold on ordinary turns too', () => {
@@ -89,7 +105,10 @@ describe('the ledger is written on EVERY taught turn', () => {
 
   it('only the strategy field stays strategy-scoped', () => {
     const b = persistBlock()
-    expect(b).toMatch(/strategiesUsed: selectedStrategyHoisted !== null\s*\n?\s*\?/)
+    // Typed Turn Contract Batch 8 (2026-09-15). Old assertion (kept verbatim,
+    // no longer matches source):
+    //   expect(b).toMatch(/strategiesUsed: selectedStrategyHoisted !== null\s*\n?\s*\?/)
+    expect(b).toMatch(/strategiesUsed: resolvedSelectedStrategy !== null\s*\n?\s*\?/)
   })
 
   it('the concurrent re-fold applies the same scoping', () => {

@@ -96,7 +96,17 @@ describe('T9 — the three consumers agree on one key', () => {
   it('Message.lessonKey and the prompt scope still share ONE resolution per turn', () => {
     // unchanged by this task — re-asserted so C cannot regress PCD-004
     expect((CHAT.match(/const activeLessonSlugHoisted = /g) ?? []).length).toBe(1)
-    expect((CHAT.match(/lessonKeyFor\w*\(\{\s*\n?\s*topicSlug: activeLessonSlugHoisted,/g) ?? []).length).toBe(3)
+    // Typed Turn Contract Batch 8 (2026-09-15): one of the original three call
+    // sites (the assistant-message `lessonKeyFor`, ~L9773) sits after the
+    // shared resolved-const block and now reads `resolvedActiveLessonSlug` —
+    // the same single-epoch, never-reassigned-after-compile value
+    // `activeLessonSlugHoisted` always was there (its one write, ~L433, sits
+    // well before the contract's L5865 compile point). The other two
+    // (~L461, ~L3885) sit before the block and are unchanged. Old assertion
+    // (kept verbatim, no longer matches source):
+    //   expect((CHAT.match(/lessonKeyFor\w*\(\{\s*\n?\s*topicSlug: activeLessonSlugHoisted,/g) ?? []).length).toBe(3)
+    expect((CHAT.match(/lessonKeyFor\w*\(\{\s*\n?\s*topicSlug: activeLessonSlugHoisted,/g) ?? []).length).toBe(2)
+    expect((CHAT.match(/lessonKeyFor\w*\(\{\s*\n?\s*topicSlug: resolvedActiveLessonSlug,/g) ?? []).length).toBe(1)
   })
 })
 

@@ -105,10 +105,17 @@ describe('the route wires the ladder-cluster resolved consts', () => {
     expect(ROUTE).toContain('...(turnHistoryUpdateHoisted ?? {})')
     expect(ROUTE).toContain('lessonComplete: lessonCompletionHoisted ?? undefined')
     // None of the four ever got a resolved const of their own.
+    // Typed Turn Contract Batch 8 (2026-09-15): the last check is now anchored
+    // to the exact declaration rather than a bare substring — Batch 8 added
+    // `resolvedLessonCompletionRespectsNewIntent` (a real const, for the
+    // DIFFERENT field `lessonCompletionRespectsNewIntentHoisted`), which
+    // legitimately contains "resolvedLessonCompletion" as a name prefix. The
+    // invariant this line protects — `lessonCompletionHoisted` itself never
+    // got a resolved const — is unchanged and still holds.
     expect(ROUTE).not.toContain('resolvedMasteryGatePending')
     expect(ROUTE).not.toContain('resolvedMasteryCompletionSuppressed')
     expect(ROUTE).not.toContain('resolvedTurnHistoryUpdate')
-    expect(ROUTE).not.toContain('resolvedLessonCompletion')
+    expect(ROUTE).not.toContain('const resolvedLessonCompletion =')
   })
 
   it('the pre-model-only reads before the block stay on the raw locals', () => {

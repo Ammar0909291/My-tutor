@@ -85,7 +85,12 @@ describe('the route wires the capability-cluster resolved const', () => {
   it('migrates every pre-model consumer past the block, and leaves the one post-model consumer on the raw local', () => {
     expect(ROUTE).toContain('noCapabilities: resolvedCapabilityStateBefore')
     expect(ROUTE).toContain(").noCapabilities(resolvedCapabilityStateBefore)")
-    expect(ROUTE).toContain('if (resolvedCapabilityStateBefore && requiredCapabilitiesHoisted.length > 0) {')
+    // Typed Turn Contract Batch 8 (2026-09-15): `requiredCapabilitiesHoisted`
+    // is now `resolvedRequiredCapabilities` here too (single write, ~L3299,
+    // well before the L5865 compile point). Old assertion (kept verbatim, no
+    // longer matches source):
+    //   expect(ROUTE).toContain('if (resolvedCapabilityStateBefore && requiredCapabilitiesHoisted.length > 0) {')
+    expect(ROUTE).toContain('if (resolvedCapabilityStateBefore && resolvedRequiredCapabilities.length > 0) {')
     expect(ROUTE).toContain('capabilityStateHoisted = capMod2.foldCapabilityState(resolvedCapabilityStateBefore, obs)')
     // The deliberately-unmigrated post-model half.
     expect(ROUTE).toContain('if (capabilityStateHoisted && Object.keys(capabilityStateHoisted).length > 0) {')
