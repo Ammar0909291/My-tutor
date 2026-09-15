@@ -7149,6 +7149,37 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           lessonConceptId: resolvedLibraryConceptNodeId,
           turnReceivedAt,
         }))
+
+        // Learner-Move Interpreter, Batch 2 — AGREEMENT ASSERTION, STILL
+        // SHADOW (design doc §8 Batch 2: "Log a violation when the reading
+        // and an existing layer disagree — the §4.4 shape. Hold here for a
+        // real observation window."). Reuses `learnerMoveStageB` (just
+        // built above — DISTRESS is a stage-A signal, unaffected by
+        // refinement, so no second `readLearnerMove` call) and
+        // `resolvedConversationDecision` (Batch 6's own resolved const,
+        // already in scope). Guarded: null on any turn that never reached
+        // `classifyConversation` (e.g. a gate-rendered or memory-served
+        // turn, where `understandStudentTurn`'s own try block at ~L4950
+        // never ran) — nothing to compare on those turns.
+        if (resolvedConversationDecision) {
+          const { detectLearnerMoveAgreementViolation, buildLearnerMoveAgreementEvent, recordLearnerMoveAgreementEvent } =
+            await import('@/lib/teaching/learnerMoveAgreement')
+          const agreementViolation = detectLearnerMoveAgreementViolation({
+            reading: learnerMoveStageB,
+            conversationDecisionType: resolvedConversationDecision.type,
+          })
+          if (agreementViolation) {
+            recordLearnerMoveAgreementEvent(buildLearnerMoveAgreementEvent({
+              reading: learnerMoveStageB,
+              conversationDecisionType: resolvedConversationDecision.type,
+              kind: agreementViolation,
+              sessionId: learnSession.id,
+              subject: subjectCode,
+              lessonConceptId: resolvedLibraryConceptNodeId,
+              turnReceivedAt,
+            }))
+          }
+        }
       } catch { /* observability never breaks a turn */ }
 
       // ANSWERABLE-TURN EVIDENCE GUARD (see answerableTurn.ts).
