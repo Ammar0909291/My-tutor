@@ -844,6 +844,15 @@ async function handleChatTurn(req: Request, deadline: RouteDeadline): Promise<Re
     let selectedStrategyHoisted: number | null = null
     let retrievalCacheHoisted: import('@/lib/teaching/retrievalCache').RetrievalCache | null = null
     let conversationDecisionHoisted: import('@/lib/teaching/conversationDecision').ConversationDecision | null = null
+    // Learner-Move Interpreter, Batch 4: the reading Batch 1's own try block
+    // computes (~L7121+) is a `const` scoped to THAT block, and Batch 4's
+    // TURN_EVENT consumer sits far below it (~L11879) — outside the block,
+    // so the raw local is not in scope there. Hoisted the same way every
+    // other cross-block value in this file is (e.g. `conversationDecisionHoisted`
+    // just above): declared here, assigned once inside Batch 1's try block,
+    // read at the TURN_EVENT call site. Never recomputed — same reading,
+    // carried forward.
+    let learnerMoveStageBHoisted: import('@/lib/teaching/learnerMove').LearnerMoveReading | null = null
     // H6 — REMEDIATION CARD. `remediationCardText` is the deterministic turn
     // when a PROMOTED card serves; `remediationCardServedId` is the synthetic
     // id folded into the EXISTING `explanationsServed` list (no new store, no
@@ -7142,6 +7151,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           taughtText: learnerMoveShadowTaughtText,
           lessonConceptId: resolvedLibraryConceptNodeId,
         })
+        // Batch 4: carry the reading out of this block for TURN_EVENT (see
+        // the hoisted declaration's own comment, ~L846). Assigned once,
+        // never recomputed.
+        learnerMoveStageBHoisted = learnerMoveStageB
         recordLearnerMoveEvent(buildLearnerMoveEvent({
           reading: learnerMoveStageB,
           sessionId: learnSession.id,
@@ -11881,6 +11894,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           turnKey: `${sessionId}:${turnReceivedAt}`,
           conceptId: resolvedConceptId ?? null,
           subjectSlug: learnSession.subject?.slug ?? null,
+          // Batch 4: the reading's own top-confidence signal, never
+          // recomputed — `learnerMoveStageBHoisted` is the SAME reading
+          // Batch 1's LEARNER_MOVE= line already logged this turn.
+          learnerMovePrimary: learnerMoveStageBHoisted?.signals[0]?.kind ?? null,
           phaseBefore: resolvedPhaseBeforeTurn,
           phaseAfter: after?.phase ?? null,
           decidedMove,

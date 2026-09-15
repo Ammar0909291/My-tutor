@@ -7,8 +7,13 @@
  * event changes nothing — the same lesson still reaches verified mastery.
  */
 import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { readFileSync } from 'fs'
 import { driveTurns, type TurnResult } from './support/turnHarness'
-import { TURN_EVENT_PREFIX } from '@/lib/teaching/turnTelemetry'
+import { TURN_EVENT_PREFIX, buildTurnEvent } from '@/lib/teaching/turnTelemetry'
+import { readTurnIntent } from '@/lib/teaching/turnIntent'
+import { readLearnerMove } from '@/lib/teaching/learnerMove'
+import { isBareAcknowledgement } from '@/lib/teaching/masteryGate'
+import { isLowSignalAcknowledgement } from '@/lib/teaching/conversationState'
 
 const h = await vi.hoisted(async () => (await import('./support/turnHarness')).createHarness())
 vi.mock('@/lib/auth', () => ({ auth: () => h.auth() }))
@@ -98,4 +103,95 @@ describe('S4 — the joined line exists', () => {
     const m = res.map((t) => (t.body as { mastery?: { verified?: boolean } }).mastery).find((x) => x?.verified)
     expect(m).toMatchObject({ verified: true, checkCorrect: 1, practiceCorrect: 2 })
   }, 60_000)
+
+  // Learner-Move Interpreter, Batch 4 — design doc §8 row 4. `learnerMovePrimary`
+  // is the reading's own top-confidence signal, a different axis from
+  // `decidedMove` (the kernel's next-action decision) — see turnTelemetry.ts's
+  // own field comment.
+  it('the REAL route reports ACKNOWLEDGEMENT on an "ok got it thanks" turn', async () => {
+    const [t] = await driveTurns(h, POST, [
+      { learnerSays: 'ok got it thanks', modelReplies: 'Great, moving on.' },
+    ], { probes: PROBES })
+    expect(event(t).learnerMovePrimary).toBe('ACKNOWLEDGEMENT')
+  }, 60_000)
+})
+
+describe('buildTurnEvent — learnerMovePrimary (pure, design doc §8 row 4)', () => {
+  it('defaults to null, per buildTurnEvent\'s own partial-input convention', () => {
+    const e = buildTurnEvent({ sessionId: 's1', turnKey: 's1:1' })
+    expect(e.learnerMovePrimary).toBeNull()
+  })
+
+  it('passes through a supplied value unchanged', () => {
+    const e = buildTurnEvent({ sessionId: 's1', turnKey: 's1:1', learnerMovePrimary: 'HELP_REQUEST' })
+    expect(e.learnerMovePrimary).toBe('HELP_REQUEST')
+  })
+})
+
+const NO_EXTRA = { isBareAcknowledgement: false, isLowSignalAcknowledgement: false }
+/** Same real-detector chain readLearnerMove's own consumers use — no re-implementation. */
+function primaryFor(message: string): string | null {
+  const intent = readTurnIntent(message, null)
+  const reading = readLearnerMove(intent, {
+    isBareAcknowledgement: isBareAcknowledgement(message),
+    isLowSignalAcknowledgement: isLowSignalAcknowledgement(message),
+  })
+  return reading.signals[0]?.kind ?? null
+}
+
+describe('the reading\'s own top signal (pure, design doc §8 row 4)', () => {
+  it('"ok got it thanks" — ACKNOWLEDGEMENT (0.85) outranks SATISFACTION (0.8), which also fires', () => {
+    const intent = readTurnIntent('ok got it thanks', null)
+    const reading = readLearnerMove(intent, {
+      isBareAcknowledgement: isBareAcknowledgement('ok got it thanks'),
+      isLowSignalAcknowledgement: isLowSignalAcknowledgement('ok got it thanks'),
+    })
+    // Verified directly: this message genuinely fires BOTH signals — the
+    // point of this test is that the ORDERING (by confidence, descending)
+    // picks the right one, not that only one fires.
+    expect(reading.signals.map((s) => s.kind)).toEqual(['ACKNOWLEDGEMENT', 'SATISFACTION'])
+    expect(reading.signals[0]?.kind).toBe('ACKNOWLEDGEMENT')
+  })
+
+  it('an unmapped message reports UNINTERPRETABLE as the (only, genuine) top signal', () => {
+    expect(primaryFor('asdf jkl')).toBe('UNINTERPRETABLE')
+  })
+
+  it('a message with no reading computed at all reports null, never UNINTERPRETABLE (buildTurnEvent alone)', () => {
+    // buildTurnEvent's own default for an omitted field IS this distinction
+    // — covered above; restated here as the two are deliberately not the
+    // same value and must not be conflated by a future edit.
+    expect(buildTurnEvent({ sessionId: 's1', turnKey: 's1:1' }).learnerMovePrimary).not.toBe('UNINTERPRETABLE')
+    expect(buildTurnEvent({ sessionId: 's1', turnKey: 's1:1' }).learnerMovePrimary).toBeNull()
+  })
+})
+
+describe('the route wires Batch 4 correctly, reusing the reading — source pin', () => {
+  const ROUTE = readFileSync('src/app/api/learn/chat/route.ts', 'utf-8')
+
+  it('exactly one learnerMovePrimary assignment at the buildTurnEvent call site', () => {
+    expect(ROUTE.split('learnerMovePrimary:').length - 1).toBe(1)
+  })
+
+  it('reads the hoisted reading, never a fresh readLearnerMove/refineLearnerMove call', () => {
+    const at = ROUTE.indexOf('learnerMovePrimary:')
+    expect(ROUTE.slice(at, at + 120)).toMatch(/learnerMoveStageBHoisted\?\.signals\[0\]\?\.kind/)
+    // Still exactly one readLearnerMove call in the whole file (Batch 1's) —
+    // Batch 4 does not add a second.
+    expect(ROUTE.split('readLearnerMove(').length - 1).toBe(1)
+  })
+
+  it('the hoisted local is assigned exactly once, inside Batch 1\'s own try block', () => {
+    expect(ROUTE.split('learnerMoveStageBHoisted = learnerMoveStageB').length - 1).toBe(1)
+    const assignAt = ROUTE.indexOf('learnerMoveStageBHoisted = learnerMoveStageB')
+    const batch1TryAt = ROUTE.lastIndexOf('try {', assignAt)
+    const batch1Header = ROUTE.lastIndexOf('Learner-Move Interpreter, Batch 1', assignAt)
+    expect(batch1Header).toBeGreaterThan(-1)
+    expect(batch1TryAt).toBeGreaterThan(batch1Header)
+    expect(assignAt).toBeGreaterThan(batch1TryAt)
+  })
+
+  it('decidedMove is untouched — a different axis, not replaced', () => {
+    expect(ROUTE).toMatch(/decidedMove,\s*\n\s*legalityBlock:/)
+  })
 })

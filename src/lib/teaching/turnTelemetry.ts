@@ -41,6 +41,19 @@ export interface TurnEvent {
   conceptId: string | null
   subjectSlug: string | null
 
+  // ── what the LEARNER did (Learner-Move Interpreter Batch 4) ──────────────
+  /**
+   * The top-confidence signal from this turn's `LearnerMoveReading`
+   * (`learnerMove.ts`'s `signals` is already sorted by confidence
+   * descending) — a DIFFERENT axis from `decidedMove` below, which is the
+   * kernel's own decision about what to do NEXT, not a report of what the
+   * learner just did. `null` only when the reading was never computed this
+   * turn at all (e.g. an early-return branch above the Batch 1 shadow
+   * block); `'UNINTERPRETABLE'` is a genuine computed value, never
+   * conflated with this null — design doc §6, §8 row 4.
+   */
+  learnerMovePrimary: import('./learnerMove').LearnerMoveKind | null
+
   // ── what the kernel decided ──────────────────────────────────────────────
   phaseBefore: string | null
   phaseAfter: string | null
@@ -105,6 +118,7 @@ export function buildTurnEvent(i: Partial<TurnEvent> & { sessionId: string; turn
     turnKey: i.turnKey,
     conceptId: i.conceptId ?? null,
     subjectSlug: i.subjectSlug ?? null,
+    learnerMovePrimary: i.learnerMovePrimary ?? null,
     phaseBefore: i.phaseBefore ?? null,
     phaseAfter: i.phaseAfter ?? null,
     decidedMove: i.decidedMove ?? null,
