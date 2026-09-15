@@ -20,26 +20,42 @@
  * create a second copy of `TURN_AUTHORITY_ORDER`, which is the defect Phase 3
  * removed (design doc §6.3).
  *
- * ── WHAT IS WIRED IN BATCH 0, AND WHAT IS NOT ───────────────────────────────
- * The design doc's migration table (§8) puts seven detectors —
- * `isSatisfactionSignal`, `isClaimChallenge`, `detectStatedInability`,
- * `detectNavigationRequest`, `detectAutonomyRequest`, `isExplicitCorrection`,
- * `isReturnRequest` — into Batch 3 ("wire the 7 orphan detectors … today in
- * no taxonomy layer"), explicitly AFTER Batch 0. Their `LearnerMoveKind`
- * members (`SATISFACTION`, `CLAIM_CHALLENGE`, `STATED_INABILITY`,
- * `NAVIGATION`, `AUTONOMY`, `CORRECTION`, `RETURN_TO_LESSON`) are declared
- * below — the taxonomy is closed and complete from Batch 0 onward — but no
- * signal of those seven kinds is ever produced until Batch 3 wires them.
- * Wiring them here would not be an error, but it would not match the
- * document's own stated batch boundaries, so it is deliberately deferred.
- *
- * Wired this batch: `DISTRESS`/`NOT_KNOWING` (`TurnIntent.failureState`),
+ * ── WHAT WAS WIRED IN BATCH 0, AND WHAT BATCH 3 ADDED ───────────────────────
+ * Batch 0 wired: `DISTRESS`/`NOT_KNOWING` (`TurnIntent.failureState`),
  * `QUESTION_ABOUT_TASK` (`TurnIntent.isQuestion`), `HELP_REQUEST`
  * (`TurnIntent.learnerRequest`), `PRACTICE_REQUEST`
  * (`TurnIntent.wantsPractice`), `STOP` (`TurnIntent.wantsToStop`),
  * `ACKNOWLEDGEMENT` (`isBareAcknowledgement`/`isLowSignalAcknowledgement`,
  * supplied via `extra` rather than re-called here — see below),
- * `ANSWER_ATTEMPT`/`QUESTION_ABOUT_TOPIC` (stage B, state-refined).
+ * `ANSWER_ATTEMPT`/`QUESTION_ABOUT_TOPIC` (stage B, state-refined). The
+ * design doc's migration table (§8) deliberately deferred seven detectors —
+ * `isSatisfactionSignal`, `isClaimChallenge`, `detectStatedInability`,
+ * `detectNavigationRequest`, `detectAutonomyRequest`, `isExplicitCorrection`,
+ * `isReturnRequest` — to Batch 3 ("wire the 7 orphan detectors … today in
+ * no taxonomy layer"). Their `LearnerMoveKind` members (`SATISFACTION`,
+ * `CLAIM_CHALLENGE`, `STATED_INABILITY`, `NAVIGATION`, `AUTONOMY`,
+ * `CORRECTION`, `RETURN_TO_LESSON`) were already declared by Batch 0 — the
+ * taxonomy has been closed and complete since Batch 0 — but produced no
+ * signal until now.
+ *
+ * BATCH 3 (this batch) wires all seven into stage A (`readLearnerMove`),
+ * reading `intent.message` directly — every one is pure and message-only,
+ * so none needed a new `MessageOnlyDetectorOutputs` field and
+ * `refineLearnerMove` (stage B) is untouched:
+ *   `isSatisfactionSignal`       (`./excursion`)             -> `SATISFACTION`
+ *   `isClaimChallenge`           (`./claimChallengeGuard`)   -> `CLAIM_CHALLENGE`
+ *   `detectStatedInability`      (`./capabilityModel`)       -> `STATED_INABILITY`
+ *   `detectNavigationRequest`    (`./conversationState`)     -> `NAVIGATION`
+ *   `detectAutonomyRequest`      (`./conversationState`)     -> `AUTONOMY`
+ *   `isExplicitCorrection`       (`./visual/session`)        -> `CORRECTION`
+ *   `isReturnRequest`            (`./visual/session`)        -> `RETURN_TO_LESSON`
+ * Six are plain booleans, pushed at `CONFIDENCE.NAMED_DETECTOR` with
+ * `detail: null` — there is nothing richer to keep. `detectStatedInability`
+ * is the one non-boolean (`CapabilityId[]`): pushed only when the array is
+ * non-empty, `detail` carrying the disclaimed capability ids joined with
+ * `,` (`LearnerMoveSignal.detail` is `string | null`, never an array).
+ * Still shadow — grep-verified zero new references in `route.ts`; nothing
+ * reads any of these seven kinds yet.
  *
  * ── A GENUINE GAP IN THE DESIGN DOC, FLAGGED RATHER THAN SILENTLY RESOLVED ──
  * §6.1's prose says `refineLearnerMove` calls `namedTopicUnknownTo`,
@@ -69,6 +85,11 @@ import type { TurnIntent, TurnIntentConflict } from './turnIntent'
 import { isDontKnowSignal } from './recoveryGuard'
 import { engagesPendingOptions, type TutorMCQ } from './mcq'
 import { namedTopicUnknownTo } from './visual/requestedTopic'
+import { isSatisfactionSignal } from './excursion'
+import { isClaimChallenge } from './claimChallengeGuard'
+import { detectStatedInability } from './capabilityModel'
+import { detectNavigationRequest, detectAutonomyRequest } from './conversationState'
+import { isExplicitCorrection, isReturnRequest } from './visual/session'
 
 /**
  * Closed. Adding a member requires a measured production case, not an
@@ -83,13 +104,13 @@ export type LearnerMoveKind =
   | 'DISTRESS'              // detectFailureState
   | 'NOT_KNOWING'           // isDontKnowSignal(detectFailureState(...))
   | 'ACKNOWLEDGEMENT'       // isBareAcknowledgement / isLowSignalAcknowledgement
-  | 'SATISFACTION'          // isSatisfactionSignal            (Batch 3 — wired into no taxonomy today)
-  | 'CLAIM_CHALLENGE'       // isClaimChallenge                (Batch 3 — wired into no taxonomy today)
-  | 'STATED_INABILITY'      // detectStatedInability           (Batch 3 — wired into no taxonomy today)
-  | 'NAVIGATION'            // detectNavigationRequest         (Batch 3 — wired into no taxonomy today)
-  | 'AUTONOMY'              // detectAutonomyRequest           (Batch 3 — wired into no taxonomy today)
-  | 'CORRECTION'            // isExplicitCorrection            (Batch 3 — wired into no taxonomy today)
-  | 'RETURN_TO_LESSON'      // isReturnRequest                 (Batch 3 — wired into no taxonomy today)
+  | 'SATISFACTION'          // isSatisfactionSignal (./excursion)
+  | 'CLAIM_CHALLENGE'       // isClaimChallenge (./claimChallengeGuard)
+  | 'STATED_INABILITY'      // detectStatedInability (./capabilityModel) — non-boolean; detail carries the joined capability ids
+  | 'NAVIGATION'            // detectNavigationRequest (./conversationState)
+  | 'AUTONOMY'              // detectAutonomyRequest (./conversationState)
+  | 'CORRECTION'            // isExplicitCorrection (./visual/session)
+  | 'RETURN_TO_LESSON'      // isReturnRequest (./visual/session)
   | 'STOP'                  // detectExplicitFinishRequest
   | 'UNINTERPRETABLE'       // see below — a CORRECT outcome, never a fallback
 
@@ -277,6 +298,75 @@ export function readLearnerMove(
       kind: 'ACKNOWLEDGEMENT',
       source: 'masteryGate',
       confidence: CONFIDENCE.ACKNOWLEDGEMENT,
+      detail: null,
+    })
+  }
+
+  // Batch 3 — the 7 previously-orphan detectors (module header). All seven
+  // are pure and message-only; none needed a new `extra` field.
+  if (isSatisfactionSignal(intent.message)) {
+    signals.push({
+      kind: 'SATISFACTION',
+      source: 'excursion',
+      confidence: CONFIDENCE.NAMED_DETECTOR,
+      detail: null,
+    })
+  }
+
+  if (isClaimChallenge(intent.message)) {
+    signals.push({
+      kind: 'CLAIM_CHALLENGE',
+      source: 'claimChallengeGuard',
+      confidence: CONFIDENCE.NAMED_DETECTOR,
+      detail: null,
+    })
+  }
+
+  // The one non-boolean detector: fires only when the learner disclaimed at
+  // least one capability. `detail` is `string | null`, never an array, so
+  // multiple disclaimed capabilities are joined rather than dropped.
+  const statedInability = detectStatedInability(intent.message)
+  if (statedInability.length > 0) {
+    signals.push({
+      kind: 'STATED_INABILITY',
+      source: 'capabilityModel',
+      confidence: CONFIDENCE.NAMED_DETECTOR,
+      detail: statedInability.join(','),
+    })
+  }
+
+  if (detectNavigationRequest(intent.message)) {
+    signals.push({
+      kind: 'NAVIGATION',
+      source: 'conversationState',
+      confidence: CONFIDENCE.NAMED_DETECTOR,
+      detail: null,
+    })
+  }
+
+  if (detectAutonomyRequest(intent.message)) {
+    signals.push({
+      kind: 'AUTONOMY',
+      source: 'conversationState',
+      confidence: CONFIDENCE.NAMED_DETECTOR,
+      detail: null,
+    })
+  }
+
+  if (isExplicitCorrection(intent.message)) {
+    signals.push({
+      kind: 'CORRECTION',
+      source: 'visual/session',
+      confidence: CONFIDENCE.NAMED_DETECTOR,
+      detail: null,
+    })
+  }
+
+  if (isReturnRequest(intent.message)) {
+    signals.push({
+      kind: 'RETURN_TO_LESSON',
+      source: 'visual/session',
+      confidence: CONFIDENCE.NAMED_DETECTOR,
       detail: null,
     })
   }

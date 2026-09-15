@@ -207,17 +207,121 @@ describe('readLearnerMove — stage A, message-only', () => {
     expect(reading.ambiguous).toBe(true)
   })
 
-  it('the 7 Batch-3 orphan kinds never fire in Batch 0 — deferred, not weakened', () => {
+  // Batch 0 (original assertion, kept verbatim): "the 7 Batch-3 orphan kinds
+  // never fire in Batch 0 — deferred, not weakened". Batch 3 now wires all
+  // seven, and this exact fixture turns out to genuinely contain a
+  // navigation-shaped request ("can we go back to fractions?") — the
+  // message never changed, only whether the detector was wired to read it.
+  // Superseded by the two tests below: one pinning the now-CORRECT positive
+  // reads (NAVIGATION, RETURN_TO_LESSON), one confirming the other 5 orphans
+  // still correctly do not fire on this same message.
+  //
+  //   it('the 7 Batch-3 orphan kinds never fire in Batch 0 — deferred, not weakened', () => {
+  //     const reading = readLearnerMove(
+  //       { ...BASE_INTENT, message: 'got it, thanks. can we go back to fractions? i was wrong about that' },
+  //       NO_EXTRA,
+  //     )
+  //     for (const orphan of [
+  //       'SATISFACTION', 'CLAIM_CHALLENGE', 'STATED_INABILITY',
+  //       'NAVIGATION', 'AUTONOMY', 'CORRECTION', 'RETURN_TO_LESSON',
+  //     ] as const) {
+  //       expect(reading.has(orphan)).toBe(false)
+  //     }
+  //   })
+
+  it('Batch 3: the SAME fixture now correctly fires NAVIGATION and RETURN_TO_LESSON', () => {
     const reading = readLearnerMove(
       { ...BASE_INTENT, message: 'got it, thanks. can we go back to fractions? i was wrong about that' },
       NO_EXTRA,
     )
-    for (const orphan of [
-      'SATISFACTION', 'CLAIM_CHALLENGE', 'STATED_INABILITY',
-      'NAVIGATION', 'AUTONOMY', 'CORRECTION', 'RETURN_TO_LESSON',
-    ] as const) {
+    // Verified directly against the real detectors: both genuinely match
+    // "can we go back to fractions?" — this is the detector now doing its
+    // job, not a false positive introduced by wiring it.
+    expect(reading.has('NAVIGATION')).toBe(true)
+    expect(reading.has('RETURN_TO_LESSON')).toBe(true)
+  })
+
+  it('Batch 3: the other 5 orphan kinds still do not fire on this same message', () => {
+    const reading = readLearnerMove(
+      { ...BASE_INTENT, message: 'got it, thanks. can we go back to fractions? i was wrong about that' },
+      NO_EXTRA,
+    )
+    for (const orphan of ['SATISFACTION', 'CLAIM_CHALLENGE', 'STATED_INABILITY', 'AUTONOMY', 'CORRECTION'] as const) {
       expect(reading.has(orphan)).toBe(false)
     }
+  })
+})
+
+describe('Batch 3 — the 7 previously-orphan detectors, now wired into stage A', () => {
+  it('SATISFACTION fires on a genuine sign-off, not on a doubt wearing its clothes', () => {
+    expect(readLearnerMove({ ...BASE_INTENT, message: 'got it, thanks' }, NO_EXTRA).has('SATISFACTION')).toBe(true)
+    expect(
+      readLearnerMove({ ...BASE_INTENT, message: 'got it, but why does the gradient matter?' }, NO_EXTRA).has('SATISFACTION'),
+    ).toBe(false)
+  })
+
+  it('CLAIM_CHALLENGE fires on a direct factual dispute, not on an ordinary question', () => {
+    expect(
+      readLearnerMove({ ...BASE_INTENT, message: 'wait, i thought oxygen has 6 valence electrons' }, NO_EXTRA).has('CLAIM_CHALLENGE'),
+    ).toBe(true)
+    expect(
+      readLearnerMove({ ...BASE_INTENT, message: 'why does oxygen have 6 valence electrons?' }, NO_EXTRA).has('CLAIM_CHALLENGE'),
+    ).toBe(false)
+  })
+
+  it('STATED_INABILITY fires on an explicit disclaimed capability, not on ordinary struggle', () => {
+    expect(
+      readLearnerMove({ ...BASE_INTENT, message: "i can't do multiplication" }, NO_EXTRA).has('STATED_INABILITY'),
+    ).toBe(true)
+    expect(
+      readLearnerMove({ ...BASE_INTENT, message: 'this is a bit tricky for me' }, NO_EXTRA).has('STATED_INABILITY'),
+    ).toBe(false)
+  })
+
+  it('STATED_INABILITY joins MULTIPLE disclaimed capabilities into one detail string', () => {
+    const reading = readLearnerMove(
+      { ...BASE_INTENT, message: "i can't do multiplication and i can't do division either" },
+      NO_EXTRA,
+    )
+    const signal = reading.signals.find((s) => s.kind === 'STATED_INABILITY')
+    expect(signal).toBeDefined()
+    expect(signal!.detail).toBe('multiply,divide')
+  })
+
+  it('NAVIGATION fires on a request to switch topic, not on an ordinary statement', () => {
+    expect(
+      readLearnerMove({ ...BASE_INTENT, message: 'can we switch to fractions instead' }, NO_EXTRA).has('NAVIGATION'),
+    ).toBe(true)
+    expect(
+      readLearnerMove({ ...BASE_INTENT, message: 'fractions are hard' }, NO_EXTRA).has('NAVIGATION'),
+    ).toBe(false)
+  })
+
+  it('AUTONOMY fires on an explicit request to advance, not on an unrelated message', () => {
+    expect(
+      readLearnerMove({ ...BASE_INTENT, message: "ok let's move on" }, NO_EXTRA).has('AUTONOMY'),
+    ).toBe(true)
+    expect(
+      readLearnerMove({ ...BASE_INTENT, message: "i'm not confused" }, NO_EXTRA).has('AUTONOMY'),
+    ).toBe(false)
+  })
+
+  it('CORRECTION fires on an explicit subject correction, not on ordinary confusion', () => {
+    expect(
+      readLearnerMove({ ...BASE_INTENT, message: "i'm not studying calculus, i'm studying physics" }, NO_EXTRA).has('CORRECTION'),
+    ).toBe(true)
+    expect(
+      readLearnerMove({ ...BASE_INTENT, message: 'i am studying this but i do not understand' }, NO_EXTRA).has('CORRECTION'),
+    ).toBe(false)
+  })
+
+  it('RETURN_TO_LESSON fires on an explicit ask to go back, not on an unrelated message', () => {
+    expect(
+      readLearnerMove({ ...BASE_INTENT, message: 'can we go back to what we were doing' }, NO_EXTRA).has('RETURN_TO_LESSON'),
+    ).toBe(true)
+    expect(
+      readLearnerMove({ ...BASE_INTENT, message: 'what happens next' }, NO_EXTRA).has('RETURN_TO_LESSON'),
+    ).toBe(false)
   })
 })
 
