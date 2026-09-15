@@ -6894,6 +6894,38 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       const resolvedPersistedEpisode = turnContractShadow?.episode.persisted ?? persistedEpisodeHoisted
       const resolvedSessionEpisodeFresh = turnContractShadow?.episode.fresh ?? sessionEpisodeFreshHoisted
 
+      // Typed Turn Contract, Batch 7b — "capability cluster" (design doc §6
+      // Batch 7, D3: `capabilityStateHoisted` is the second of the three
+      // genuinely double-duty fields). Traced every reference by hand:
+      // three pre-model writes (~L3234 read from the snapshot, ~L3280
+      // conditional hydrate-from-projection, ~L3297 an in-request fold with
+      // this turn's own stated observations — all three before the contract
+      // compiles, ~L5865) and exactly ONE post-model write (~L8089,
+      // `capMod2.foldCapabilityState(capabilityStateHoisted, obs)` inside
+      // the K5 output-verifier gate — itself entirely conditioned on
+      // `runFullVerifier` (`eosFlags.outputVerifier`, OFF in production; the
+      // one `if (runFullVerifier)` block runs from ~L7991 through this
+      // fold). Every reader between the contract's compile point and that
+      // one reassignment (~L8025-8026, ~L8079, and the reassignment's own
+      // first argument at ~L8089) is migrated below to
+      // `resolvedCapabilityStateBefore`. The one reader at or after it
+      // (~L10660-10661) is left on the raw local — same reasoning as
+      // `resolvedSessionEpisode`'s own block comment above: there is no
+      // live `delivery.after.capability` to route it through, whether or
+      // not the verifier flag happens to be on for a given request.
+      //
+      // `turnProgressHoisted` and the two `frustration*` locals (design
+      // doc's Batch 7 row includes them in this sub-commit) get ZERO
+      // resolved consts this batch: each is written exactly once, and every
+      // one of those writes is itself post-model (`turnProgressHoisted`
+      // ~L10224; `frustrationAfterTurnHoisted`/`frustrationBandHoisted`
+      // ~L7428/7431) — there is no pre-model half to migrate, and their
+      // only representation, `delivery.after.turnProgress`/`.frustration`/
+      // `.frustrationBand`, is exactly the permanently-unpopulated
+      // placeholder this same finding already names. Left entirely
+      // unmigrated, deliberately, not by oversight.
+      const resolvedCapabilityStateBefore = turnContractShadow?.capability.stateBefore ?? capabilityStateHoisted
+
       // Typed Turn Contract, Batch 3 — "answer-verdict cluster" (design doc §6
       // Batch 3). `resolvedGrade` collapses `mcqGradeHoisted` +
       // `gradedAgainstServerKeyHoisted` into the exact `ServerGrade` value
@@ -8022,8 +8054,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               reactMandated: true,
               legalTags: ['VISUAL', 'HINT', 'INLINE_PRACTICE', 'WE', 'LESSON'],
               bannedConceptTerms: [],
-              noCapabilities: capabilityStateHoisted
-                ? (await import('@/lib/teaching/capabilityModel')).noCapabilities(capabilityStateHoisted)
+              noCapabilities: resolvedCapabilityStateBefore
+                ? (await import('@/lib/teaching/capabilityModel')).noCapabilities(resolvedCapabilityStateBefore)
                 : [],
               // S1 — history-aware LOG rules (additive; no behavior change
               // until these are promoted to REJECT per the design report).
@@ -8076,7 +8108,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // updates operational skills. Attribution honesty lives in
           // observationsFromTurn — a compound-item FAILURE updates nothing,
           // because failure proves the conjunction failed, not which conjunct.
-          if (capabilityStateHoisted && requiredCapabilitiesHoisted.length > 0) {
+          if (resolvedCapabilityStateBefore && requiredCapabilitiesHoisted.length > 0) {
             const capMod2 = await import('@/lib/teaching/capabilityModel')
             const obs = capMod2.observationsFromTurn({
               requiredCapabilities: requiredCapabilitiesHoisted,
@@ -8086,7 +8118,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // Append: a single turn can carry BOTH a stated inability and an
               // answered outcome. Replacing would silently drop the former.
               capabilityObservationsHoisted = [...capabilityObservationsHoisted, ...obs]
-              capabilityStateHoisted = capMod2.foldCapabilityState(capabilityStateHoisted, obs)
+              capabilityStateHoisted = capMod2.foldCapabilityState(resolvedCapabilityStateBefore, obs)
             }
           }
           // K5 metrics: the rules and the loop already existed; nothing
