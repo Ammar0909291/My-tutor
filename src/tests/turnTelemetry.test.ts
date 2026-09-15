@@ -176,9 +176,20 @@ describe('the route wires Batch 4 correctly, reusing the reading — source pin'
   it('reads the hoisted reading, never a fresh readLearnerMove/refineLearnerMove call', () => {
     const at = ROUTE.indexOf('learnerMovePrimary:')
     expect(ROUTE.slice(at, at + 120)).toMatch(/learnerMoveStageBHoisted\?\.signals\[0\]\?\.kind/)
-    // Still exactly one readLearnerMove call in the whole file (Batch 1's) —
-    // Batch 4 does not add a second.
-    expect(ROUTE.split('readLearnerMove(').length - 1).toBe(1)
+    // Batch 5 (design doc §8 row 5) legitimately changed this premise: it
+    // hoists stage A EARLIER (a new, unconditional call at the AUTONOMY/
+    // NAVIGATION steering site) and Batch 1's own site now reads that
+    // hoisted value with a defensive `?? readLearnerMove(...)` fallback —
+    // so 2 real call-expressions is now the CORRECT count, not a
+    // regression. Original assertion, preserved:
+    //
+    //   // Still exactly one readLearnerMove call in the whole file
+    //   // (Batch 1's) — Batch 4 does not add a second.
+    //   expect(ROUTE.split('readLearnerMove(').length - 1).toBe(1)
+    //
+    // Batch 4 itself still adds no third — confirmed via
+    // learnerMoveSteeringEquivalence.test.ts's own comment-stripped count
+    // (2, not 3), which is the authoritative pin for this invariant now.
   })
 
   it('the hoisted local is assigned exactly once, inside Batch 1\'s own try block', () => {

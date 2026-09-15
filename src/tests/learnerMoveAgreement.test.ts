@@ -226,13 +226,21 @@ describe('the route wires Batch 2 exactly once, safely, beside Batch 1', () => {
     expect(ROUTE.slice(batch2Start, emitAt)).toMatch(/if \(resolvedConversationDecision\) \{/)
   })
 
-  it('reuses the SAME reading Batch 1 already built — no second readLearnerMove call', () => {
-    // Batch 0's own purity precedent and this batch's own header both state
-    // the reading is not recomputed: exactly one readLearnerMove call in the
-    // whole file (Batch 1's), reused by Batch 2 via `learnerMoveStageB`.
-    expect(ROUTE.split('readLearnerMove(').length - 1).toBe(1)
+  it('reuses the SAME reading Batch 1 already built — no second readLearnerMove call within Batch 2\'s own block', () => {
+    // Batch 5 (design doc §8 row 5) legitimately changed the file-wide
+    // premise: it hoists stage A earlier at the AUTONOMY/NAVIGATION
+    // steering site, and Batch 1's own site now carries a defensive
+    // `?? readLearnerMove(...)` fallback — 2 real call-expressions in the
+    // whole file is now correct (learnerMoveSteeringEquivalence.test.ts is
+    // the authoritative pin for that count). Original assertion, preserved:
+    //
+    //   expect(ROUTE.split('readLearnerMove(').length - 1).toBe(1)
+    //
+    // What THIS test actually protects — that Batch 2's own block adds no
+    // call of its own — still holds and is checked directly below.
     const batch2Start = ROUTE.indexOf('Learner-Move Interpreter, Batch 2')
     const emitAt = ROUTE.indexOf('recordLearnerMoveAgreementEvent(', batch2Start)
+    expect(ROUTE.slice(batch2Start, emitAt)).not.toMatch(/readLearnerMove\(/)
     expect(ROUTE.slice(batch2Start, emitAt)).toMatch(/reading: learnerMoveStageB/)
   })
 })

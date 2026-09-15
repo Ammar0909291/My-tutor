@@ -128,8 +128,18 @@ describe('the route wires the shadow exactly once, safely', () => {
     expect(ROUTE.split('recordLearnerMoveEvent(').length - 1).toBe(1)
   })
 
-  it('exactly one stage-A call and one stage-B call — one owner, one measurement', () => {
-    expect(ROUTE.split('readLearnerMove(').length - 1).toBe(1)
+  it('exactly one refineLearnerMove call; readLearnerMove now legitimately has 2 (hoist + fallback)', () => {
+    // Batch 5 (design doc §8 row 5) hoists stage A earlier (AUTONOMY/
+    // NAVIGATION steering site) and Batch 1's own site reuses it via a
+    // defensive `?? readLearnerMove(...)` fallback — 2 real call-
+    // expressions in the whole file is now correct, not a regression.
+    // Original assertion, preserved:
+    //
+    //   expect(ROUTE.split('readLearnerMove(').length - 1).toBe(1)
+    //
+    // learnerMoveSteeringEquivalence.test.ts is the authoritative,
+    // comment-stripped pin for that count (2). Stage B is untouched by
+    // Batch 5 — still exactly one `refineLearnerMove(` call.
     expect(ROUTE.split('refineLearnerMove(').length - 1).toBe(1)
   })
 
@@ -156,13 +166,19 @@ describe('the route wires the shadow exactly once, safely', () => {
   })
 
   it('reads `turnIntent`, the same instance readTurnIntent produced — never a re-derivation', () => {
-    const i = ROUTE.indexOf('readLearnerMove(')
-    expect(ROUTE.slice(i, i + 40)).toMatch(/readLearnerMove\(turnIntent,/)
+    // Batch 5 added TWO earlier mentions of `readLearnerMove(` inside
+    // COMMENTS (~L861 and within Batch 1's own header block, ~L7167), so a
+    // bare `indexOf` — file-wide OR scoped to Batch 1's header — no longer
+    // lands on the real call. Anchored on the actual assignment statement's
+    // own literal text instead, which cannot appear in prose by accident.
+    const i = ROUTE.indexOf('const learnerMoveStageA = learnerMoveStageAHoisted ?? readLearnerMove(')
+    expect(i).toBeGreaterThan(-1)
+    expect(ROUTE.slice(i, i + 90)).toMatch(/readLearnerMove\(turnIntent,/)
   })
 
   it('reads the resolved Batch-6 ack booleans, never re-detecting them', () => {
-    const i = ROUTE.indexOf('readLearnerMove(')
-    const block = ROUTE.slice(i, i + 300)
+    const i = ROUTE.indexOf('const learnerMoveStageA = learnerMoveStageAHoisted ?? readLearnerMove(')
+    const block = ROUTE.slice(i, i + 350)
     expect(block).toMatch(/resolvedIsBareAck/)
     expect(block).toMatch(/resolvedLowSignalAck/)
   })

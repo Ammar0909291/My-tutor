@@ -853,6 +853,15 @@ async function handleChatTurn(req: Request, deadline: RouteDeadline): Promise<Re
     // read at the TURN_EVENT call site. Never recomputed — same reading,
     // carried forward.
     let learnerMoveStageBHoisted: import('@/lib/teaching/learnerMove').LearnerMoveReading | null = null
+    // Learner-Move Interpreter, Batch 5 (design doc §8 row 5): the two
+    // in-scope steering sites (AUTONOMY/NAVIGATION, ~L3200-3226) run BEFORE
+    // Batch 1's own stage-A/B computation, so a Batch-4-style "compute once,
+    // read later" hoist does not apply here — this is the reverse: computed
+    // EARLIER than Batch 1's own site, then REUSED there via the fallback at
+    // that site (`learnerMoveStageAHoisted ?? readLearnerMove(...)`), never
+    // recomputed twice. See the assignment site's own comment for why this
+    // is provably the same reading Batch 1 would otherwise have built.
+    let learnerMoveStageAHoisted: import('@/lib/teaching/learnerMove').LearnerMoveReading | null = null
     // H6 — REMEDIATION CARD. `remediationCardText` is the deterministic turn
     // when a PROMOTED card serves; `remediationCardServedId` is the synthetic
     // id folded into the EXISTING `explanationsServed` list (no new store, no
@@ -3125,9 +3134,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           const {
             readConversationState, decideNextMove, responseBudget,
             buildTurnDirective, decideVisualFirst,
-            detectAutonomyRequest, buildAutonomyBlock,
+            buildAutonomyBlock,
             isLowSignalAcknowledgement,
-            detectNavigationRequest, buildNavigationAcknowledgementBlock,
+            buildNavigationAcknowledgementBlock,
             detectLearnerQuestion, classifyAcknowledgementContext,
           } = await import('@/lib/teaching/conversationState')
           const {
@@ -3192,12 +3201,30 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             narrativeStateHoisted = readNarrativeState(snapshotNarrativeState, convConceptId)
           }
 
+          // Learner-Move Interpreter, Batch 5 (design doc §8 row 5): stage
+          // A's only inputs are `turnIntent` (read once, ~L377) and
+          // `isBareAcknowledgement`/`isLowSignalAcknowledgement` (pure,
+          // message-only). `isBareAckHoisted` is already set (~L2521);
+          // `isLowSignalAcknowledgement` isn't hoisted to a local until
+          // ~L3670, so it's called fresh here — the SAME pure function
+          // (already imported into this scope, above) on the SAME
+          // unchanged `message`, guaranteed equal to the value later
+          // assigned to `lowSignalAckHoisted` (learnerMoveSteeringEquivalence
+          // test file, and Batch 1's own precedent for `namedTopicUnknownTo`:
+          // a second call to a pure function is not drift). Reused, not
+          // recomputed, at Batch 1's own stage-A site (~L7141+, below).
+          const { readLearnerMove } = await import('@/lib/teaching/learnerMove')
+          learnerMoveStageAHoisted = readLearnerMove(turnIntent, {
+            isBareAcknowledgement: isBareAckHoisted,
+            isLowSignalAcknowledgement: isLowSignalAcknowledgement(message),
+          })
+
           // P3 — Learner autonomy, now mastery-gated (Bug 4): "next topic"
           // with verified mastery is honored as before; before mastery it
           // becomes an explicit Continue Learning / Skip Anyway choice —
           // the model is FORBIDDEN from emitting [LESSON_COMPLETE] (and the
           // response-side gate strips it regardless). Never a silent skip.
-          if (detectAutonomyRequest(message)) {
+          if (learnerMoveStageAHoisted.has('AUTONOMY')) {
             evidenceAutonomyHoisted = true
             // An open excursion pauses the lesson, so "move on" cannot mean
             // "finish the lesson" this turn: both branches below invite
@@ -3223,7 +3250,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               systemPrompt += buildMasteryGateBlock()
               masteryGatePendingHoisted = true
             }
-          } else if (detectNavigationRequest(message) && !excursionActiveHoisted) {
+          } else if (learnerMoveStageAHoisted.has('NAVIGATION') && !excursionActiveHoisted) {
             // A.2: explicit navigation ("teach me about X", "go back to Y")
             // is acknowledged warmly; mastery-verified → auto-complete so
             // the system can navigate; otherwise note what's left.
@@ -7127,10 +7154,23 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // nothing back and changes no teaching decision. No database write —
       // the 2026-08-31 egress incident is the standing reason a shadow
       // measurement is a log line, never a table.
+      //
+      // Batch 5: stage A may already have been computed earlier this turn
+      // (~L3220, the AUTONOMY/NAVIGATION steering site) with the IDENTICAL
+      // inputs — `turnIntent` (single-write, never reassigned),
+      // `isBareAckHoisted` (single-write, so `resolvedIsBareAck` can only
+      // ever equal it), and a fresh call to `isLowSignalAcknowledgement`
+      // that is provably equal to what `resolvedLowSignalAck` resolves to
+      // once `lowSignalAckHoisted` is written (~L3670-ish, a pure function
+      // of the same unchanged `message`). Reusing it here is therefore NOT
+      // a behavior change — see learnerMoveSteeringEquivalence.test.ts —
+      // and it keeps this file at exactly one `readLearnerMove(` call
+      // rather than two. Falls back to a fresh call only if, for some
+      // reason, the earlier site did not run this turn.
       try {
         const { readLearnerMove, refineLearnerMove } = await import('@/lib/teaching/learnerMove')
         const { buildLearnerMoveEvent, recordLearnerMoveEvent } = await import('@/lib/teaching/learnerMoveTelemetry')
-        const learnerMoveStageA = readLearnerMove(turnIntent, {
+        const learnerMoveStageA = learnerMoveStageAHoisted ?? readLearnerMove(turnIntent, {
           isBareAcknowledgement: resolvedIsBareAck,
           isLowSignalAcknowledgement: resolvedLowSignalAck,
         })
