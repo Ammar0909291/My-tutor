@@ -71,8 +71,20 @@ describe('the response carries whatever the server believes is on screen', () =>
     // The response and the persisted snapshot serve the SAME probe (same
     // presence + question/options); the response additionally projects it for the
     // client via mcqForClient, which strips only the key.
-    expect(ROUTE).toContain('mcqToServe(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted)')
-    expect(ROUTE).toContain('mcqForClient(mcqToServeForResponse(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted))')
+    // Typed Turn Contract Batch 4 (2026-09-15, design doc §6 "question-artifact
+    // cluster"): the six per-site `mcqToServe` aliases collapsed into two
+    // resolved consts, one per stable epoch — `resolvedQuestionServed` (the
+    // persist site's epoch) and `resolvedQuestionServedFinal` (the response
+    // site's epoch, after the lesson-close override). Both are still computed
+    // from the identical raw call, `mcqToServe(mcqHoisted, pendingMcqHoisted,
+    // mcqGradeHoisted)` — the SAME probe this test's subject requires — just
+    // once each rather than once per call site. Old assertions (kept verbatim,
+    // no longer match source):
+    //   expect(ROUTE).toContain('mcqToServe(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted)')
+    //   expect(ROUTE).toContain('mcqForClient(mcqToServeForResponse(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted))')
+    expect(ROUTE).toContain('const resolvedQuestionServed = mcqToServe(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted)')
+    expect(ROUTE).toContain('const resolvedQuestionServedFinal = mcqToServeFinal(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted)')
+    expect(ROUTE).toContain('mcqForClient(resolvedQuestionServedFinal)')
   })
 
   it('the client still clears on absence — which is why the echo is required', () => {

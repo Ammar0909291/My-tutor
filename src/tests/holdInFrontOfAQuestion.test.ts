@@ -130,7 +130,13 @@ describe('D. the route asks the right question of the right helper', () => {
     expect(i).toBeGreaterThan(-1)
     const block = route.slice(i - 400, i + 1400)
     expect(block).toContain('questionOnScreen:')
-    expect(block).toContain('mcqToServeForWithhold(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted)')
+    // Typed Turn Contract Batch 4 (2026-09-15, design doc §6 "question-artifact
+    // cluster"): `mcqToServeForWithhold` was one of six per-site aliases of the
+    // same `mcqToServe` call, collapsed into `resolvedQuestionServed` — this
+    // site is in the early epoch (before the lesson-close override), same
+    // value as before. Old assertion (kept verbatim, no longer matches source):
+    //   expect(block).toContain('mcqToServeForWithhold(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted)')
+    expect(block).toContain('questionOnScreen: resolvedQuestionServed !== null')
     // and hasStructuredMcq still means what it meant
     expect(block).toContain('hasStructuredMcq: mcqHoisted !== null')
   })

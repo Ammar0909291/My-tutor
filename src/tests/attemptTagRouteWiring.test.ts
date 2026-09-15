@@ -215,7 +215,13 @@ describe('C-A · the empty guard runs after every content-removing step', () => 
     expect(mcqBranch).toHaveLength(1)
     expect(mcqBranch[0]).toBeLessThan(codeMatches(/empty response from model/)[0])
     // …and that the narrower branch reads what the response actually serves.
-    const servedFrom = codeMatches(/const servedProbeThisTurn = mcqToServeForEmptyGuardEarly\(/)
+    // Typed Turn Contract Batch 4 (2026-09-15): the per-site alias
+    // `mcqToServeForEmptyGuardEarly` was collapsed into `resolvedQuestionServed`
+    // (design doc §6, "question-artifact cluster") — `servedProbeThisTurn` is
+    // now that resolved const's own local alias, same value, new source. Old
+    // assertion (kept verbatim, no longer matches source):
+    //   const servedFrom = codeMatches(/const servedProbeThisTurn = mcqToServeForEmptyGuardEarly\(/)
+    const servedFrom = codeMatches(/const servedProbeThisTurn = resolvedQuestionServed$/)
     expect(servedFrom).toHaveLength(1)
     expect(servedFrom[0]).toBeLessThan(mcqBranch[0])
   })

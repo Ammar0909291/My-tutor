@@ -110,8 +110,18 @@ describe('the guard is wired at the response boundary and reuses the product lea
   const ROUTE = readFileSync(join(process.cwd(), 'src/app/api/learn/chat/route.ts'), 'utf8')
 
   it('fires only on empty text AND a served probe', () => {
+    // Typed Turn Contract Batch 4 (2026-09-15, design doc §6 "question-artifact
+    // cluster"): `mcqToServeForEmptyGuard` was one of six per-site aliases of
+    // the same `mcqToServe` call, collapsed into `resolvedQuestionServedFinal`
+    // (EPOCH B — this site runs after the lesson-close override, the same
+    // epoch as the re-offer detector and the response construction; see
+    // route.ts's own comment beside its declaration). Old assertion (kept
+    // verbatim, no longer matches source):
+    //   expect(ROUTE).toMatch(
+    //     /!cleanText\.trim\(\)\s*\n?\s*&& mcqToServeForEmptyGuard\(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted\) !== null/,
+    //   )
     expect(ROUTE).toMatch(
-      /!cleanText\.trim\(\)\s*\n?\s*&& mcqToServeForEmptyGuard\(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted\) !== null/,
+      /!cleanText\.trim\(\)\s*&&\s*resolvedQuestionServedFinal !== null/,
     )
   })
 

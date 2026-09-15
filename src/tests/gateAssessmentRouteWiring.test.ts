@@ -113,11 +113,26 @@ describe('the gate assessment is on the turn path', () => {
     // snapshotRederiver on a concurrent-write retry. The served-vs-persisted
     // agreement this test exists for is unchanged; only the assignment now
     // goes through the named local.
+    // Typed Turn Contract Batch 4 (2026-09-15, design doc §6 "question-artifact
+    // cluster", closing D4): the six independently-aliased `mcqToServe(...)`
+    // call sites collapsed into two resolved consts, one per stable "epoch"
+    // (nothing writes `mcqHoisted`/`pendingMcqHoisted`/`mcqGradeHoisted`
+    // between an epoch's declaration and its consumers — see route.ts's own
+    // comment beside each). The persist site (this assertion's subject) is in
+    // EPOCH A; the response site (the next assertion) is in EPOCH B, because
+    // the lesson-close override sits between them. Pre-Batch-4 assertions
+    // (kept verbatim, no longer match source):
+    //   expect(lineOf(/const served = mcqToServe\(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted\)$/)).toBeGreaterThan(0)
+    //   expect(lineOf(/mcqForClient\(mcqToServeForResponse\(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted\)\)/)).toBeGreaterThan(0)
+    // Same invariant this test has always asserted — served and persisted
+    // must agree — now guaranteed BY CONSTRUCTION (both read the identical
+    // resolved const) rather than by two independent re-derivations that
+    // could drift.
     expect(lineOf(/const pendingMcqValueThisTurn = writePendingQuestion\($/)).toBeGreaterThan(0)
     expect(lineOf(/conversationStateUpdate\.pendingMcq = pendingMcqValueThisTurn$/)).toBeGreaterThan(0)
-    expect(lineOf(/const served = mcqToServe\(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted\)$/)).toBeGreaterThan(0)
+    expect(lineOf(/const served = resolvedQuestionServed$/)).toBeGreaterThan(0)
     expect(lineOf(/releasePending \? null : served,$/)).toBeGreaterThan(0)
-    expect(lineOf(/mcqForClient\(mcqToServeForResponse\(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted\)\)/)).toBeGreaterThan(0)
+    expect(lineOf(/mcqForClient\(resolvedQuestionServedFinal\)/)).toBeGreaterThan(0)
     expect(lineOf(/probeReleasedThisTurnHoisted$/)).toBeGreaterThan(0)
   })
 })

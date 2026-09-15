@@ -270,7 +270,14 @@ describe('the chat route applies it', () => {
 
   it('a withheld question is stripped from the prose too', () => {
     // Otherwise the learner reads a question with nothing to answer it with.
-    expect(ROUTE).toMatch(/const mcqForProseStrip = mcqHoisted \?\? withheldModelMcqHoisted/)
+    // Typed Turn Contract Batch 4 (2026-09-15, design doc §6 "question-artifact
+    // cluster"): `withheldModelMcqHoisted` is RESULT-classified but both its
+    // writes happen before the delivery-compile point, so it is now read here
+    // via `resolvedWithheldModelProbe`
+    // (`turnDeliveryShadow?.question.withheldModelProbe ?? withheldModelMcqHoisted`),
+    // the same value. Old assertion (kept verbatim, no longer matches source):
+    //   expect(ROUTE).toMatch(/const mcqForProseStrip = mcqHoisted \?\? withheldModelMcqHoisted/)
+    expect(ROUTE).toMatch(/const mcqForProseStrip = mcqHoisted \?\? resolvedWithheldModelProbe/)
     expect(ROUTE).toMatch(/dropDuplicatedMcqProse\(cleanText, mcqForProseStrip\)/)
   })
 })

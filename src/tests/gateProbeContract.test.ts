@@ -282,7 +282,15 @@ describe('route wiring — the two runtime rules', () => {
   })
 
   it('the contract runs only with a canonical probe attached', () => {
-    expect(ROUTE).toContain('if (gateMcqHoisted && mcqHoisted) {')
+    // Typed Turn Contract Batch 4 (2026-09-15, design doc §6 "question-artifact
+    // cluster"): `gateMcqHoisted` is CONTRACT-classified (single write, well
+    // before this point) and is now read here via `resolvedGateMcq`
+    // (`turnContractShadow?.assessment.gateProbe?.mcq ?? gateMcqHoisted`),
+    // the same value. The raw `mcqHoisted` in the condition is deliberately
+    // untouched — it asks a different question ("was something attached THIS
+    // turn"). Old assertion (kept verbatim, no longer matches source):
+    //   expect(ROUTE).toContain('if (gateMcqHoisted && mcqHoisted) {')
+    expect(ROUTE).toContain('if (resolvedGateMcq && mcqHoisted) {')
     expect(ROUTE).toContain('enforceGateProbeContract')
   })
 

@@ -164,7 +164,14 @@ describe('CASE D — a real provider failure is still degraded', () => {
   it('the all-providers-failed catch still reaches degradedTurn, untouched by this fix', () => {
     expect(ROUTE).toContain('all providers down — serving degraded template (RS P-3)')
     const outage = ROUTE.indexOf('all providers down — serving degraded template')
-    const guard = ROUTE.indexOf('const servedProbeThisTurn = mcqToServeForEmptyGuardEarly(')
+    // Typed Turn Contract Batch 4 (2026-09-15, design doc §6 "question-artifact
+    // cluster"): `mcqToServeForEmptyGuardEarly` was one of six per-site aliases
+    // of the same `mcqToServe` call, collapsed into one resolved const,
+    // `resolvedQuestionServed`, declared once and reused (`servedProbeThisTurn`
+    // is now that resolved const's own local alias, same value). Old anchor
+    // (kept verbatim, no longer matches source):
+    //   const guard = ROUTE.indexOf('const servedProbeThisTurn = mcqToServeForEmptyGuardEarly(')
+    const guard = ROUTE.indexOf('const resolvedQuestionServed = mcqToServe(')
     expect(outage).toBeGreaterThan(0)
     expect(guard).toBeGreaterThan(outage) // the outage path is upstream and separate
   })
@@ -172,14 +179,17 @@ describe('CASE D — a real provider failure is still degraded', () => {
 
 describe('the route is wired to this decision, so the mirror above cannot drift', () => {
   it('the early guard reads mcqToServe, not the attached-only probe', () => {
-    expect(ROUTE).toContain('const servedProbeThisTurn = mcqToServeForEmptyGuardEarly(')
+    // Old assertion (kept verbatim, no longer matches source — see the batch
+    // comment above): expect(ROUTE).toContain('const servedProbeThisTurn = mcqToServeForEmptyGuardEarly(')
+    expect(ROUTE).toContain('const resolvedQuestionServed = mcqToServe(')
+    expect(ROUTE).toContain('const servedProbeThisTurn = resolvedQuestionServed')
     expect(ROUTE).toContain('if (!text.trim() && servedProbeThisTurn) {')
     expect(ROUTE).not.toContain('if (!text.trim() && mcqHoisted) {')
   })
 
   it('it is given exactly the three values mcqToServe takes', () => {
     const call = ROUTE.slice(
-      ROUTE.indexOf('const servedProbeThisTurn = mcqToServeForEmptyGuardEarly('),
+      ROUTE.indexOf('const resolvedQuestionServed = mcqToServe('),
     ).slice(0, 200)
     expect(call).toContain('mcqHoisted')
     expect(call).toContain('pendingMcqHoisted')
@@ -187,7 +197,7 @@ describe('the route is wired to this decision, so the mirror above cannot drift'
   })
 
   it('the guard does NOT consult the withheld model probe', () => {
-    const start = ROUTE.indexOf('const servedProbeThisTurn = mcqToServeForEmptyGuardEarly(')
+    const start = ROUTE.indexOf('const resolvedQuestionServed = mcqToServe(')
     const end = ROUTE.indexOf('provider = degraded.provider', start)
     expect(start).toBeGreaterThan(0)
     expect(end).toBeGreaterThan(start)

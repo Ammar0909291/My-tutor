@@ -326,7 +326,13 @@ describe('the chat route applies it', () => {
     // the question out above it — and dropping only the widget leaves the
     // learner reading a question with nothing to answer it with, keyed to an
     // answer the server has just decided it will not stand behind.
-    expect(ROUTE).toMatch(/const mcqForProseStrip = mcqHoisted \?\? withheldModelMcqHoisted/)
+    // Typed Turn Contract Batch 4 (2026-09-15, design doc §6 "question-artifact
+    // cluster"): `withheldModelMcqHoisted` is now read here via
+    // `resolvedWithheldModelProbe`, the same value (both of its writes happen
+    // before the delivery-compile point). Old assertion (kept verbatim, no
+    // longer matches source):
+    //   expect(ROUTE).toMatch(/const mcqForProseStrip = mcqHoisted \?\? withheldModelMcqHoisted/)
+    expect(ROUTE).toMatch(/const mcqForProseStrip = mcqHoisted \?\? resolvedWithheldModelProbe/)
   })
 
   it('runs BEFORE the message is persisted, so both copies agree', () => {

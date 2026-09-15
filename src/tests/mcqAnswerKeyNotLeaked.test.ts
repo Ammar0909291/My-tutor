@@ -67,7 +67,13 @@ describe('the wiring is at the right boundary', () => {
     // the response AND the snapshot together. The subject of this test — the
     // response serializes the CLIENT PROJECTION, never the raw probe — is
     // unchanged, and is what is asserted here.
-    expect(ROUTE).toContain('mcqForClient(mcqToServeForResponse(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted))')
+    // Typed Turn Contract Batch 4 (2026-09-15, design doc §6 "question-artifact
+    // cluster"): `mcqToServeForResponse` was one of six per-site aliases of the
+    // same `mcqToServe` call, collapsed into `resolvedQuestionServedFinal`
+    // (this site runs in EPOCH B, after the lesson-close override). Old
+    // assertion (kept verbatim, no longer matches source):
+    //   expect(ROUTE).toContain('mcqForClient(mcqToServeForResponse(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted))')
+    expect(ROUTE).toContain('mcqForClient(resolvedQuestionServedFinal)')
     expect(ROUTE).not.toMatch(/mcq: mcqToServeForResponse\(/)
   })
 
@@ -77,7 +83,13 @@ describe('the wiring is at the right boundary', () => {
     // local so rung 1 can withhold it. What this test protects is unchanged —
     // when a probe IS persisted it is the FULL probe, key included, because
     // gradeMcqAnswer reads correctIndex from the snapshot next turn.
-    expect(ROUTE).toMatch(/const served = mcqToServe\(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted\)/)
+    // Typed Turn Contract Batch 4 (2026-09-15): `served` is now assigned from
+    // `resolvedQuestionServed` (EPOCH A, the persist site's own epoch), the
+    // same value the raw `mcqToServe(mcqHoisted, pendingMcqHoisted,
+    // mcqGradeHoisted)` call would have produced. Old assertion (kept
+    // verbatim, no longer matches source):
+    //   expect(ROUTE).toMatch(/const served = mcqToServe\(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted\)/)
+    expect(ROUTE).toMatch(/const served = resolvedQuestionServed$/m)
     expect(ROUTE).toMatch(/releasePending \? null : served,\s*\n\s*lessonKeyThisTurnHoisted,/)
   })
 

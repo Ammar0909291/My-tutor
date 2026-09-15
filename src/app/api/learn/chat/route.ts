@@ -6255,10 +6255,26 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // NOT consulted. A probe the gate refused is not on screen, and treating
       // it as content would launder a policy decision this guard has no
       // business reopening.
-      const { mcqToServe: mcqToServeForEmptyGuardEarly } = await import('@/lib/teaching/mcq')
-      const servedProbeThisTurn = mcqToServeForEmptyGuardEarly(
-        mcqHoisted, pendingMcqHoisted, mcqGradeHoisted,
-      )
+      //
+      // Typed Turn Contract, Batch 4 — "question-artifact cluster" (design
+      // doc §6 Batch 4, closing D4). `resolvedQuestionServed` is
+      // `mcqToServe(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted)`,
+      // computed ONCE here and reused by every consumer below that runs
+      // before the lesson-close override far below (~L10400) — the TurnDelivery
+      // shadow's own `question.served` field, the ungraded-question withhold,
+      // and the snapshot persist. Provably safe to share across all of them:
+      // `pendingMcqHoisted`/`mcqGradeHoisted` are each single-write
+      // CONTRACT-stable locals (proved in Batch 3), and nothing writes
+      // `mcqHoisted` again between here and the lesson-close override — every
+      // one of those four sites reads the identical raw value `mcqToServe`
+      // would have returned had it been called fresh at each site (verified
+      // by write-site trace, not assumed; see the batch's commit message).
+      // A SECOND resolved value, `resolvedQuestionServedFinal`, exists further
+      // down for the three consumers that run AFTER the lesson-close override
+      // — see its own comment for why one shared value is not correct there.
+      const { mcqToServe } = await import('@/lib/teaching/mcq')
+      const resolvedQuestionServed = mcqToServe(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted)
+      const servedProbeThisTurn = resolvedQuestionServed
       if (!text.trim() && servedProbeThisTurn) {
         // Not degraded — introduce the question the learner can already see.
         // Deterministic, claims nothing, and leaves the MCQ to carry the turn.
@@ -6587,8 +6603,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // own "compiled BEFORE any repair pass" definition — none of A1-A8
       // depend on them.
       if (turnContractShadow !== null) {
-        const { probeKeyIsAuthored, mcqToServe: mcqToServeForContractShadow } =
-          await import('@/lib/teaching/mcq')
+        const { probeKeyIsAuthored } = await import('@/lib/teaching/mcq')
         const { isDegradedProvider } = await import('@/lib/eos-runtime/degradedMode')
         const identifyProbe = (mcq: typeof mcqHoisted): IdentifiedProbe | null => {
           if (mcq === null) return null
@@ -6615,7 +6630,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // still-default false/null here is the honest "not yet" state,
             // not a placeholder standing in for a real value.
             released: probeReleasedThisTurnHoisted, releasedQuestionText: releasedProbeQuestionHoisted,
-            served: mcqToServeForContractShadow(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted),
+            // Typed Turn Contract Batch 4: `resolvedQuestionServed`, declared
+            // once above (~L6259) — the exact value `mcqToServe` would return
+            // if called fresh right here, since nothing writes `mcqHoisted`/
+            // `pendingMcqHoisted`/`mcqGradeHoisted` between the two points.
+            served: resolvedQuestionServed,
           },
           // Not yet decided — the visual resolver's post-model derived locals
           // (visualFired/figureOnScreen/figureIntroducedThisTurn) are computed
@@ -6701,6 +6720,35 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       const resolvedEnginePolicyParity = turnContractShadow?.provenance.enginePolicyParity ?? enginePolicyParityHoisted
       const resolvedEnginePolicyTags = turnContractShadow?.provenance.enginePolicyTags ?? enginePolicyTagsHoisted
       const resolvedGateTerms = turnContractShadow?.assessment.gateTerms ?? gateTermsHoisted
+      // Typed Turn Contract, Batch 4 — three of the "question-artifact
+      // cluster"'s twelve locals (design doc §6 Batch 4) that ARE already
+      // correctly captured in `contract.assessment` (Batch 0/1, unchanged —
+      // all three are CONTRACT-classified, single write site each, well
+      // before the contract's own compile point) but whose LATE downstream
+      // readers (past this resolved-const block) still read the raw
+      // `Hoisted` local. `gateMcqHoisted` needs `.mcq` since
+      // `assessment.gateProbe` is the wrapped `IdentifiedProbe`, not the raw
+      // `TutorMCQ`. The other four locals this cluster names
+      // (`authoredProbesExistHoisted`, `gateDeclinedByPolicyHoisted`,
+      // `probeWouldCountThisPhaseHoisted`, `observeAskViolationHoisted`) are
+      // deliberately NOT resolved here: each has exactly ONE downstream
+      // consumer, immediately below (~L6070-6111, inside the
+      // `decideModelProbe` call), which runs BEFORE this block — resolving
+      // them would need a second, earlier declaration point for a single
+      // read site each, which the collapse this batch exists for does not
+      // justify. Left on the Hoisted local, as Batch 2's own rule requires.
+      const resolvedGateMcq = turnContractShadow?.assessment.gateProbe?.mcq ?? gateMcqHoisted
+      const resolvedGateLeadIn = turnContractShadow?.assessment.gateLeadIn ?? gateLeadInHoisted
+      const resolvedPhaseAllowsProbe = turnContractShadow?.assessment.phaseAllowsProbe ?? phaseAllowsProbeHoisted
+      // `withheldModelMcqHoisted` is RESULT-classified (writes at ~L6078/6113)
+      // but both writes happen BEFORE the delivery-compile point (~L6600) —
+      // the same "safe to migrate" shape as `resolvedModelProbeVerdict` above.
+      // `probeReleasedThisTurnHoisted`/`releasedProbeQuestionHoisted` are
+      // deliberately NOT resolved: both write AFTER the delivery-compile
+      // point (~L10241-10242), so the shadow's own fields are the honest
+      // "not yet decided" default at compile time — their consumers all run
+      // after the real write and correctly keep reading the Hoisted local.
+      const resolvedWithheldModelProbe = turnDeliveryShadow?.question.withheldModelProbe ?? withheldModelMcqHoisted
       const resolvedPhaseBeforeTurn = turnContractShadow?.ladder.phaseBeforeTurn ?? phaseBeforeTurnHoisted
       const resolvedLegalityBlock = turnContractShadow?.assessment.legalityBlock ?? legalityBlockHoisted
       const resolvedSignalRepairFired = turnContractShadow?.provenance.signalRepairFired ?? signalRepairFiredHoisted
@@ -8249,7 +8297,6 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               conversationStateHoisted?.demonstrated === true &&
               recoveryKeyHoisted === null &&
               (teachingSignal?.correctness === true || lowSignalAckHoisted === true)
-            const { mcqToServe: mcqToServeForWithhold } = await import('@/lib/teaching/mcq')
             const { detectLearnerQuestion: detectLearnerQuestionForWithhold } =
               await import('@/lib/teaching/conversationState')
             const { isBareAcknowledgement: isBareAcknowledgementForWithhold } =
@@ -8267,9 +8314,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // `mcqToServe` also serves a pending probe carried forward when
               // nothing was attached and nothing was graded — measured live
               // shipping "Let's stay with this idea for a moment." in front of
-              // a tappable question (phys.opt.mirrors, T6).
-              questionOnScreen:
-                mcqToServeForWithhold(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted) !== null,
+              // a tappable question (phys.opt.mirrors, T6). Typed Turn
+              // Contract Batch 4: reuses `resolvedQuestionServed`, not a
+              // fresh call — same value, this site is still in the early
+              // epoch (before the lesson-close override).
+              questionOnScreen: resolvedQuestionServed !== null,
               // The server-selected probe's own question, when the gate
               // actually attached one this turn — lets the guard tell a
               // model that quoted it back in prose (harmless) apart from a
@@ -8277,10 +8326,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // (the chemistry CHECK-phase defect this closes). Undefined
               // when no probe was attached (`gateMcqHoisted` null), which
               // reproduces the prior no-op behaviour for that case exactly.
-              attachedMcqQuestion: gateMcqHoisted?.question,
+              attachedMcqQuestion: resolvedGateMcq?.question,
               // GUIDE→CHECK's own success gate, not just CHECK/PRACTICE's —
               // see `phaseAllowsProbeHoisted`'s declaration.
-              gateSoughtThisTurn: phaseAllowsProbeHoisted,
+              gateSoughtThisTurn: resolvedPhaseAllowsProbe,
               // R4: `gateSoughtThisTurn` above says the PHASE allowed a probe;
               // it cannot say whether the gate actually ran. When an excursion
               // is open the gate is blocked before the selector is reached
@@ -8363,7 +8412,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 // Which delivery path failed, so a rising rate is attributable
                 // rather than merely visible.
                 hadStructuredMcq: mcqHoisted !== null,
-                gateSought: phaseAllowsProbeHoisted,
+                gateSought: resolvedPhaseAllowsProbe,
                 // A rising rate on 'no-gradeable-probe' means the CORPUS is
                 // below the asset contract, not that the runtime is misbehaving.
                 charsBefore: cleanText.length,
@@ -8684,7 +8733,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             questionsAskedSinceTeach: conversationStateHoisted?.questionsAskedSinceTeach ?? null,
             teachSegmentsSinceQuestion: conversationStateHoisted?.teachSegmentsSinceQuestion ?? null,
             wantsPractice: turnIntent.wantsPractice,
-            phaseAllowsProbe: phaseAllowsProbeHoisted,
+            phaseAllowsProbe: resolvedPhaseAllowsProbe,
             // The one line that names the loop when it happens: the learner
             // asked, GUIDE would have allowed it, and the budget said no.
             budgetDeniedRequestedAsk:
@@ -9157,7 +9206,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // whose key the server has just decided it will not stand behind. Same
       // function, same reasoning as the duplication case below; the only
       // difference is which copy is the survivor (here, neither).
-      const mcqForProseStrip = mcqHoisted ?? withheldModelMcqHoisted
+      const mcqForProseStrip = mcqHoisted ?? resolvedWithheldModelProbe
       if (mcqForProseStrip) {
         try {
           const { dropDuplicatedMcqProse } = await import('@/lib/teaching/mcq')
@@ -9240,12 +9289,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       //
       // The probe, its options, its correct index and the grade are untouched —
       // this decides which SENTENCE sits above a question the server chose.
-      if (gateMcqHoisted && mcqHoisted) {
+      if (resolvedGateMcq && mcqHoisted) {
         try {
           const { enforceGateProbeContract } = await import('@/lib/teaching/gateProbeContract')
           const contract = enforceGateProbeContract({
             text: cleanText,
-            leadIn: gateLeadInHoisted,
+            leadIn: resolvedGateLeadIn,
             canonicalQuestion: mcqHoisted.question,
           })
           if (contract.replaced) {
@@ -10073,7 +10122,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // separately: relief that worked must not immediately re-arm.
             const { foldProbeStarvedTurns } = await import('@/lib/teaching/turnProgress')
             const probeStarvedTurns = foldProbeStarvedTurns(priorProbeStarvedTurnsHoisted, {
-              phaseAllowedProbe: phaseAllowsProbeHoisted,
+              phaseAllowedProbe: resolvedPhaseAllowsProbe,
               arbitrationWasSoleBlocker: arbitrationWasSoleBlockerHoisted && mcqHoisted === null,
             })
             turnProgressHoisted = {
@@ -10095,20 +10144,22 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           }
           {
             const { writePendingQuestion } = await import('@/lib/teaching/pendingQuestion')
-            const { mcqToServe } = await import('@/lib/teaching/mcq')
             // Same value the response serves — see mcqToServe. Persisting
             // anything else would either strand a question the learner can see
             // (ungradeable next turn) or keep one the learner cannot.
-            const served = mcqToServe(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted)
-            // Typed Turn Contract, Batch 1 — A6 (design doc §5.1): "the value
-            // persisted as pendingMcq is reference-equal to d.question.served
-            // (modulo the release rule)". `turnDeliveryShadow.question.served`
-            // was computed ~3,400 lines earlier, right after the tag parse;
-            // THIS is the actual persisted value. Nothing between the two
-            // writes `mcqHoisted`, `pendingMcqHoisted` or `mcqGradeHoisted`
-            // except the lesson-close override further below (route.ts
-            // L10040 in the design doc's line numbers) — which fires AFTER
-            // this persist, so it cannot explain a divergence measured here.
+            //
+            // Typed Turn Contract, Batch 4 — this is now `resolvedQuestionServed`
+            // itself (declared once, ~L6259), not a fresh `mcqToServe(...)`
+            // call. A6 (design doc §5.1, "the value persisted as pendingMcq is
+            // reference-equal to d.question.served") is therefore guaranteed BY
+            // CONSTRUCTION at this site from Batch 4 onward: `served` and
+            // `turnDeliveryShadow.question.served` are the SAME expression,
+            // evaluated once, not two independent re-derivations that happen
+            // to agree. The check below is kept as a structural regression
+            // guard (it would catch a future edit that reintroduces a second
+            // derivation), not because agreement is still in doubt — Batch 1-3
+            // already measured it clean across 1,000+ real production turns.
+            const served = resolvedQuestionServed
             // SHADOW ONLY: this comparison decides nothing; it only logs.
             if (turnDeliveryShadow !== null) {
               const releasedOk = turnDeliveryShadow.question.released && served === null
@@ -11072,11 +11123,25 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // answered by the model and must NOT be told to "tap a choice". Placed
       // before the empty-with-probe backstop below so that when the model text is
       // empty this lead-in stands alone rather than stacking two lead-ins.
+      //
+      // Typed Turn Contract, Batch 4 — EPOCH B. `resolvedQuestionServed`
+      // (~L6259) cannot be reused here: `mcqHoisted` may have changed exactly
+      // once since then — the lesson-close override (~L10424), which fires
+      // AFTER the snapshot persist but BEFORE this block and the two
+      // remaining consumers below (the late empty-guard, the response). This
+      // is the LAST point in the turn `mcqHoisted`/`pendingMcqHoisted`/
+      // `mcqGradeHoisted` can change (verified: no write to any of the three
+      // appears anywhere in this file after the lesson-close override),
+      // computed once here and reused by all three, whether or not the close
+      // actually fired this turn — `mcqToServe` is total and pure over its
+      // three inputs regardless of which branch set them.
+      const { mcqToServe: mcqToServeFinal } = await import('@/lib/teaching/mcq')
+      const resolvedQuestionServedFinal = mcqToServeFinal(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted)
       {
-        const { mcqToServe: mcqToServeForReoffer, MCQ_REOFFER_DISAMBIGUATION, isRestatementOfPending, engagesPendingOptions } =
+        const { MCQ_REOFFER_DISAMBIGUATION, isRestatementOfPending, engagesPendingOptions } =
           await import('@/lib/teaching/mcq')
         const { detectLearnerQuestion } = await import('@/lib/teaching/conversationState')
-        const servedReoffer = mcqToServeForReoffer(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted)
+        const servedReoffer = resolvedQuestionServedFinal
         // `mcqToServe` returns the freshly-attached probe when one exists, so
         // `served !== null && mcqHoisted === null` is exactly "the pending probe
         // is being carried forward" — a re-offer, not a new question. And it only
@@ -11245,9 +11310,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // a no-op whenever `correct !== true`, so a wrong or ungraded answer is
       // unaffected.
       {
-        const { mcqToServe: mcqToServeForEmptyGuard } = await import('@/lib/teaching/mcq')
-        if (!cleanText.trim()
-            && mcqToServeForEmptyGuard(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted) !== null) {
+        // Typed Turn Contract Batch 4: reuses `resolvedQuestionServedFinal`
+        // (EPOCH B, ~L11090) — same epoch, nothing has changed since.
+        if (!cleanText.trim() && resolvedQuestionServedFinal !== null) {
           console.log('[empty-post-strip-with-probe] text stripped to empty while a probe is on screen — introducing it')
           const introLine = 'Here is a question to check your understanding:'
           // Typed Turn Contract Batch 3: this gate is `mcqGradeHoisted?.correct
@@ -11273,7 +11338,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         }
       }
 
-      const { mcqToServe: mcqToServeForResponse, mcqForClient } = await import('@/lib/teaching/mcq')
+      const { mcqForClient } = await import('@/lib/teaching/mcq')
       /**
        * THE QUESTION DELIVERY CONTRACT is enforced HERE — the last point at
        * which the turn may still change what the learner receives, and
@@ -11292,10 +11357,22 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
        * `mcq: null`, because the gate-level repair is inactive in that phase
        * and liveness rung 1 had spent the pending probe on the same turn. Two
        * correct mechanisms, one stranded learner.
+       *
+       * Typed Turn Contract Batch 4: `resolvedQuestionServedFinal` (EPOCH B,
+       * ~L11090) replaces the fresh `mcqToServe(...)` call — same value, same
+       * epoch. The `probeReleasedThisTurnHoisted` guard in front of it is
+       * UNCHANGED and deliberately not folded into the resolved value: rung 1
+       * release is a PERSIST-time/response-time decision applied on TOP of
+       * `mcqToServe`'s raw result (mirroring the identical
+       * `releasePending ? null : served` step at the snapshot persist,
+       * ~L10122) — `mcqToServe` itself has no knowledge of the release
+       * decision, so baking it into the shared resolved value would make it
+       * wrong for the OTHER two EPOCH-B consumers (the re-offer detector, the
+       * late empty-guard), neither of which apply this override.
        */
       const servedMcq = probeReleasedThisTurnHoisted
         ? undefined
-        : (mcqForClient(mcqToServeForResponse(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted)) ?? undefined)
+        : (mcqForClient(resolvedQuestionServedFinal) ?? undefined)
       if (!servedMcq) {
         const { enforceQuestionDeliveryContract, WITHHELD_QUESTION_CONTINUATION_TEXT } = await import('@/lib/teaching/gateAssessment')
         const repaired = enforceQuestionDeliveryContract(cleanText, WITHHELD_QUESTION_CONTINUATION_TEXT)

@@ -149,7 +149,15 @@ describe('6 · pending-question lesson identity is untouched', () => {
     // served, lessonKeyThisTurnHoisted)`. This test's actual subject, the
     // lesson key, is unchanged, and `mcqToServe(mcqHoisted, …)` is still what
     // computes the value, with mcqHoisted still its first and winning input.
-    expect(ROUTE).toMatch(/const served = mcqToServe\(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted\)/)
+    // Typed Turn Contract Batch 4 (2026-09-15, design doc §6 "question-artifact
+    // cluster"): `served` is now assigned from `resolvedQuestionServed`, the
+    // resolved const computed once from `mcqToServe(mcqHoisted,
+    // pendingMcqHoisted, mcqGradeHoisted)` — same value, mcqHoisted still its
+    // first and winning input. Old assertion (kept verbatim, no longer matches
+    // source):
+    //   expect(ROUTE).toMatch(/const served = mcqToServe\(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted\)/)
+    expect(ROUTE).toMatch(/const resolvedQuestionServed = mcqToServe\(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted\)/)
+    expect(ROUTE).toMatch(/const served = resolvedQuestionServed/)
     expect(ROUTE).toMatch(/writePendingQuestion\(\s*\n\s*releasePending \? null : served,\s*\n\s*lessonKeyThisTurnHoisted,\s*\n\s*\)/)
   })
 })
