@@ -6841,6 +6841,59 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       const resolvedIsBareAck = turnContractShadow?.inbound.isBareAck ?? isBareAckHoisted
       const resolvedLowSignalAck = turnContractShadow?.inbound.lowSignalAck ?? lowSignalAckHoisted
 
+      // Typed Turn Contract, Batch 7a — "episode cluster" (design doc §6
+      // Batch 7, D3: `sessionEpisodeHoisted` is one of the three fields the
+      // design doc calls out as genuinely double-duty — read pre-model AND
+      // overwritten post-model, so a read's meaning depends on its line
+      // number relative to the ONE post-model reassignment
+      // (`sessionEpisodeHoisted = applySignalToEpisode(...)`, ~L9781, inside
+      // the recovery-signal fold). Traced every reference by hand:
+      //
+      //   - `persistedEpisodeHoisted` (one real write, ~L2870, "the episode
+      //     AS STORED at turn start" per its own docblock) and
+      //     `sessionEpisodeFreshHoisted` (one real write, ~L2872) are each
+      //     single-epoch — every consumer, however late in the file, reads
+      //     the SAME pre-model value, because neither is ever reassigned.
+      //   - `sessionEpisodeHoisted` itself is reassigned exactly three times:
+      //     twice before the contract compiles (~L2871 derive, ~L2877
+      //     force-close — both part of the initial pre-model derivation) and
+      //     once after (~L9781). Every reader between the contract's compile
+      //     point (~L5865, above) and ~L9781 is reading the PRE-model value
+      //     and is migrated below. Every reader at or after ~L9781
+      //     (~L10072-10083, ~L11516) is reading the POST-model value and is
+      //     LEFT UNMIGRATED — see the finding below.
+      //
+      // THE FINDING THIS BATCH TURNS ON, stated once here rather than
+      // repeated in 7b/7c: `TurnDeliveryInput.after.episode` (and every
+      // other `after.*`/`completion.*` field) is compiled EXACTLY ONCE, at
+      // ~L6680 — immediately after tag-parse, deliberately BEFORE the fold
+      // that computes these very locals' post-model values (~L9781 for the
+      // episode, further still for ladder/capability/completion). Batch 1's
+      // own `deliveryInput` literal hardcodes `after: { ladder: null,
+      // episode: null, capability: null, ... }` and
+      // `completion: { payload: null, masteryGatePending: false,
+      // masteryCompletionSuppressed: false }` — "not yet decided at this
+      // point," by design, and nothing anywhere else in the file re-compiles
+      // or patches `turnDeliveryShadow` afterward (verified: exactly one
+      // `compileTurnDelivery(` call in the whole file). So
+      // `turnDeliveryShadow.after.episode` is a PERMANENT placeholder, not a
+      // live value — there is no principled way to route a post-model
+      // `sessionEpisodeHoisted` read through it. For a nullable field this
+      // would be a silent no-op (`null ?? x` always falls through to `x`),
+      // which is safe but misrepresents the read as "migrated" when it can
+      // never diverge from the raw local; for a boolean field defaulted
+      // `false` (Batch 7b/7c will hit this) it would be an active
+      // regression, since `false ?? x` is `false` regardless of `x`. Per
+      // this document's own rule 2 ("populate, then migrate consumers, then
+      // delete") a field must be POPULATED before consumers migrate to it —
+      // `after`/`completion` are not, so no consumer of any post-model half
+      // of a Batch 7 local is migrated this session. This is reported, not
+      // guessed around; see the final status report for the follow-up
+      // decision this leaves open.
+      const resolvedSessionEpisode = turnContractShadow?.episode.current ?? sessionEpisodeHoisted
+      const resolvedPersistedEpisode = turnContractShadow?.episode.persisted ?? persistedEpisodeHoisted
+      const resolvedSessionEpisodeFresh = turnContractShadow?.episode.fresh ?? sessionEpisodeFreshHoisted
+
       // Typed Turn Contract, Batch 3 — "answer-verdict cluster" (design doc §6
       // Batch 3). `resolvedGrade` collapses `mcqGradeHoisted` +
       // `gradedAgainstServerKeyHoisted` into the exact `ServerGrade` value
@@ -7105,7 +7158,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // shouldRepairFillerTurn. Live: "I'm done for today." was honoured all
         // the way through forceClosing and the close directive, then overwritten
         // here with "Let me ask you something concrete…".
-        closingTurn: sessionEpisodeHoisted?.phase === 'CLOSING',
+        closingTurn: resolvedSessionEpisode?.phase === 'CLOSING',
         // A recovery script is ordered to ask nothing, and is written in the
         // exact calming vocabulary the filler detector keys on. Without this,
         // a learner who said "I give up" could be answered with a quiz
@@ -7946,7 +7999,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             const { toPolicyMove, maxQuestionsFor } = await import('@/lib/kernel/policyMove')
             const verifierMove = toPolicyMove({
               recoveryKey: resolvedRecoveryKey,
-              episodePhase: sessionEpisodeHoisted?.phase,
+              episodePhase: resolvedSessionEpisode?.phase,
               ladderMove: evidenceMoveHoisted,
             })
             const ctx = buildVerifierContext({
@@ -8530,7 +8583,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             const { withholdClosingProseQuestion } = await import('@/lib/teaching/gateAssessment')
             const closingProse = withholdClosingProseQuestion({
               text: cleanText,
-              episodePhase: sessionEpisodeHoisted?.phase,
+              episodePhase: resolvedSessionEpisode?.phase,
               hasStructuredMcq: mcqHoisted !== null,
             })
             if (closingProse.withheld) {
@@ -9413,7 +9466,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // own freshness flag, reused rather than recomputed.
         const complianceResult = checkBrainCompliance(
           cleanText, dispatchPlanHoisted, cueDecisionHoisted, visualFired,
-          { mcqAttached: mcqHoisted !== null, isFirstTurnOfEpisode: sessionEpisodeFreshHoisted },
+          { mcqAttached: mcqHoisted !== null, isFirstTurnOfEpisode: resolvedSessionEpisodeFresh },
         )
         protocolComplianceStatus = complianceResult.status ?? null
         protocolComplianceViolation = complianceResult.violation ?? null
@@ -9774,11 +9827,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // doubts is what drove the episode to CLOSING and produced "let's
         // pause on that for today". The budget is not disabled — excursion
         // doubts simply do not pay into the paused lesson's arc.
-        if (sessionEpisodeHoisted && !resolvedExcursionActive) {
+        if (resolvedSessionEpisode && !resolvedExcursionActive) {
           try {
             const { applySignalToEpisode } = await import('@/lib/teaching/sessionLifecycle')
             const syntheticSignal = { correctness: false as const, confidence: undefined, confusion: true }
-            sessionEpisodeHoisted = applySignalToEpisode(sessionEpisodeHoisted, syntheticSignal, {
+            sessionEpisodeHoisted = applySignalToEpisode(resolvedSessionEpisode, syntheticSignal, {
               isFirstLesson: resolvedFirstLessonActive,
             })
           } catch { /* non-fatal */ }
@@ -10068,6 +10121,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // block above (synthetic signal), so we use the (possibly updated)
           // hoisted value directly and skip re-applying applySignalToEpisode
           // for recovery turns to avoid double-counting.
+          //
+          // Typed Turn Contract, Batch 7a: every read from here down is the
+          // POST-model value (past the one reassignment at ~L9834) — the
+          // half `delivery.after.episode` exists to name, but which the
+          // built `TurnDeliveryInput` cannot yet expose live (see the block
+          // comment above `resolvedSessionEpisode`, ~L6845). Left reading the
+          // raw `sessionEpisodeHoisted` local, deliberately unmigrated.
           let episodeUpdate: Record<string, unknown> = {}
           if (sessionEpisodeHoisted) {
             if (resolvedRecoveryKey) {
@@ -10090,9 +10150,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // immediately above it — and an explicit stop produces no graded
               // signal, so CLOSING was computed, used, and dropped.
               if (episodeNeedsPersist({
-                persisted: persistedEpisodeHoisted,
+                persisted: resolvedPersistedEpisode,
                 next: nextEpisode,
-                freshBoundary: sessionEpisodeFreshHoisted,
+                freshBoundary: resolvedSessionEpisodeFresh,
               })) {
                 episodeUpdate = { sessionEpisode: nextEpisode }
               }
@@ -10976,7 +11036,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 ...progressionTagsHoisted,
                 ...(resolvedSignalRepairFired ? ['progression:signal-repair'] : []),
               ],
-              freshSessionBoundary: sessionEpisodeFreshHoisted,
+              freshSessionBoundary: resolvedSessionEpisodeFresh,
               boundaryGapMs: null,
               lessonCompleted: cleanText.includes('[LESSON_COMPLETE]'),
             })

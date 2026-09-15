@@ -72,7 +72,12 @@ describe('an explicit stop is not overwritten by the filler repair', () => {
 
   it('the route passes the episode phase into the predicate', () => {
     const route = readFileSync('src/app/api/learn/chat/route.ts', 'utf8')
-    expect(route).toContain("closingTurn: sessionEpisodeHoisted?.phase === 'CLOSING'")
+    // Typed Turn Contract Batch 7a (2026-09-15): `sessionEpisodeHoisted` is
+    // now read here via `resolvedSessionEpisode`, the same pre-model value
+    // (this site sits before the local's one post-model reassignment). Old
+    // assertion (kept verbatim, no longer matches source):
+    //   expect(route).toContain("closingTurn: sessionEpisodeHoisted?.phase === 'CLOSING'")
+    expect(route).toContain("closingTurn: resolvedSessionEpisode?.phase === 'CLOSING'")
   })
 })
 
