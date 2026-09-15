@@ -136,12 +136,17 @@ describe('Phase E — the log block is inert', () => {
     // conversationStateHoisted is what route.ts passes to
     // decideNextMoveDetailed. Reading the POST-turn state instead would
     // describe a different moment and quietly mislead the investigation.
+    //
+    // Typed Turn Contract Batch 7c (2026-09-15): reads `resolvedConversationState`
+    // now — the same never-reassigned pre-turn value `conversationStateHoisted`
+    // always was. Old assertion (kept verbatim, no longer matches source):
+    //   expect(GATES, field).toContain(`conversationStateHoisted?.${field}`)
     for (const field of [
       'taughtThisSession', 'consecutiveDontKnows', 'totalKnowledgeProbes',
       'consecutivePriorKnowledgeProbes', 'observeFailures', 'consecutiveFailures',
       'demonstrated', 'teachSegmentsSinceQuestion',
     ]) {
-      expect(GATES, field).toContain(`conversationStateHoisted?.${field}`)
+      expect(GATES, field).toContain(`resolvedConversationState?.${field}`)
     }
     expect(GATES).not.toContain('conversationStateAfterTurnHoisted')
   })
@@ -179,6 +184,9 @@ describe('Phase E — the log block is inert', () => {
     // negation of exactly that expression over exactly that field.
     const SRC = readFileSync('src/lib/teaching/conversationState.ts', 'utf8')
     expect(SRC).toContain('return (state.teachSegmentsSinceQuestion ?? 0) > 0')
-    expect(GATES).toContain('(conversationStateHoisted?.teachSegmentsSinceQuestion ?? 0) === 0')
+    // Typed Turn Contract Batch 7c (2026-09-15): reuses `resolvedConversationState`.
+    // Old assertion (kept verbatim, no longer matches source):
+    //   expect(GATES).toContain('(conversationStateHoisted?.teachSegmentsSinceQuestion ?? 0) === 0')
+    expect(GATES).toContain('(resolvedConversationState?.teachSegmentsSinceQuestion ?? 0) === 0')
   })
 })

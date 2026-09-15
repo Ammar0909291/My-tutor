@@ -6926,6 +6926,64 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // unmigrated, deliberately, not by oversight.
       const resolvedCapabilityStateBefore = turnContractShadow?.capability.stateBefore ?? capabilityStateHoisted
 
+      // Typed Turn Contract, Batch 7c — "ladder cluster" (design doc §6
+      // Batch 7, the final and largest sub-commit). Traced all seven named
+      // locals by hand — `conversationStateHoisted` (86 references, the
+      // widest in the file) turned out NOT to be a D3 double-duty field
+      // itself: it has exactly ONE write, ~L3131, well before the contract
+      // compiles, and is NEVER reassigned again anywhere in the file — every
+      // one of its 85 remaining references reads that same pre-model value.
+      // The "before/after" split for the ladder is realised across TWO
+      // SEPARATE locals, not one field mutated in place:
+      // `conversationStateAfterTurnHoisted` (declared null ~L2203, written
+      // ~L8746/~L10654) is ALREADY the hand-made post-model twin — exactly
+      // what `persistedEpisodeHoisted` was for the episode cluster in 7a.
+      // Checked every one of its ~19 references: all read the POST-fold
+      // value, none read it before its own first write, so it needed no
+      // work this batch — it already IS what `delivery.after.ladder` would
+      // be if that field were live.
+      //
+      // `evidenceMoveHoisted` (~one write, ~L3349) and `objectiveStateHoisted`
+      // (one write, ~L3173) are each single-epoch exactly like
+      // `persistedEpisodeHoisted`/`sessionEpisodeFreshHoisted` turned out to
+      // be in 7a — every read, however late in the file, is the same
+      // pre-model value. Fully migrated below to `resolvedEvidenceMove` /
+      // `resolvedObjectiveState`.
+      //
+      // The remaining four get ZERO resolved consts, for the SAME reason
+      // `masteryGatePendingHoisted`'s sibling boolean got none in the block
+      // above, and `turnProgressHoisted`/`frustration*` got none in 7b — no
+      // corresponding CONTRACT field exists for any of them (verified
+      // against turnContract.ts's actual `ladder` group: it has no
+      // `masteryGatePending`, `masteryCompletionSuppressed`,
+      // `turnHistoryUpdate`, or `lessonCompletion` field at all — their only
+      // representation is `delivery.completion.*`/`delivery.after.*`, the
+      // same permanently-unpopulated placeholder this whole finding names):
+      //   - `masteryGatePendingHoisted`: one pre-model write (~L3215) and two
+      //     post-model writes (~L8787, ~L8991); its one read (~L11284) sits
+      //     after every write. A boolean defaulted `false` on the shadow —
+      //     routing it through `?? ` would be an active regression exactly
+      //     like `resolvedCapabilityStateBefore`'s own boolean warning above.
+      //   - `masteryCompletionSuppressedHoisted`: three post-model writes
+      //     (~L8786, ~L8984, ~L8990), both reads (~L11053, ~L11283) after
+      //     all three. Same boolean risk.
+      //   - `turnHistoryUpdateHoisted`: one post-model write (~L8369), both
+      //     reads (~L11173, ~L11183) after it. Nullable, so `?? ` would be
+      //     safe but a permanent no-op — left unmigrated rather than
+      //     misrepresented as wired.
+      //   - `lessonCompletionHoisted`: one write on the deterministic-serve
+      //     branch (~L5636, where `turnContractShadow` stays null — "only
+      //     for turns that reach the model," Batch 1's own rule, so this
+      //     write's turn never has a live shadow to route through anyway)
+      //     and one post-model write on the main path (~L10606); its one
+      //     read (~L11800) sits after both. Same nullable-no-op reasoning.
+      // All four left entirely on their raw locals, deliberately, not by
+      // oversight — reported in this session's status report rather than
+      // guessed around.
+      const resolvedConversationState = turnContractShadow?.ladder.state ?? conversationStateHoisted
+      const resolvedEvidenceMove = turnContractShadow?.ladder.evidenceMove ?? evidenceMoveHoisted
+      const resolvedObjectiveState = turnContractShadow?.ladder.objective ?? objectiveStateHoisted
+
       // Typed Turn Contract, Batch 3 — "answer-verdict cluster" (design doc §6
       // Batch 3). `resolvedGrade` collapses `mcqGradeHoisted` +
       // `gradedAgainstServerKeyHoisted` into the exact `ServerGrade` value
@@ -7201,7 +7259,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           const { detectFillerTurn, shouldApplyFillerRepair } = await import('@/lib/teaching/conversationState')
           // PHASE 5 (Case D): bound the repair — see shouldApplyFillerRepair's
           // doc comment (conversationState.ts) for why this cannot loop forever.
-          const priorFillerStreak = conversationStateHoisted?.fillerRepairStreak ?? 0
+          const priorFillerStreak = resolvedConversationState?.fillerRepairStreak ?? 0
           const isFillerThisTurn = detectFillerTurn(cleanText)
           fillerDetectedHoisted = isFillerThisTurn
           if (isFillerThisTurn && shouldApplyFillerRepair(priorFillerStreak)) {
@@ -8022,7 +8080,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           })
           if (runFullVerifier) {
             // Move mapping. RECOVER and CLOSE are checked FIRST and are not
-            // derivable from evidenceMoveHoisted: decideNextMove() returns
+            // derivable from resolvedEvidenceMove: decideNextMove() returns
             // 'teach' on a recovery turn, and the session layer owns CLOSING
             // entirely. Before this, every recovery turn reached the verifier
             // labelled TEACH and every closing turn as whatever the concept
@@ -8032,12 +8090,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             const verifierMove = toPolicyMove({
               recoveryKey: resolvedRecoveryKey,
               episodePhase: resolvedSessionEpisode?.phase,
-              ladderMove: evidenceMoveHoisted,
+              ladderMove: resolvedEvidenceMove,
             })
             const ctx = buildVerifierContext({
               contentRegister,
               move: verifierMove,
-              phase: conversationStateHoisted?.phase ?? null,
+              phase: resolvedConversationState?.phase ?? null,
               stageCeiling: evidenceStageCeilingHoisted,
               vocabularyUnlocked: !resolvedFirstLessonActive,
               formulaUnlocked: !resolvedFirstLessonActive && contentRegister !== 'beginner',
@@ -8061,13 +8119,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // until these are promoted to REJECT per the design report).
               turnHistory: snapshotTurnHistory,
               recoveryKey: resolvedRecoveryKey,
-              phaseAfter: conversationStateHoisted?.phase ?? null,
+              phaseAfter: resolvedConversationState?.phase ?? null,
               // S2 — objective-model LOG rules (additive).
-              objectiveCompleted: objectiveStateHoisted
-                ? (await import('@/lib/teaching/objectiveModel')).isObjectiveLockedFromAssessment(objectiveStateHoisted)
+              objectiveCompleted: resolvedObjectiveState
+                ? (await import('@/lib/teaching/objectiveModel')).isObjectiveLockedFromAssessment(resolvedObjectiveState)
                 : undefined,
-              objectiveStalled: objectiveStateHoisted
-                ? (await import('@/lib/teaching/objectiveModel')).hasStalled(objectiveStateHoisted)
+              objectiveStalled: resolvedObjectiveState
+                ? (await import('@/lib/teaching/objectiveModel')).hasStalled(resolvedObjectiveState)
                 : undefined,
             })
             const gate = await verifierGate({
@@ -8364,7 +8422,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         const record = buildTurnRecord(cleanText, {
           askedQuestion: repliesWithQuestionForHistory(cleanText),
           recoveryKey: resolvedRecoveryKey,
-          phaseAfter: conversationStateHoisted?.phase ?? null,
+          phaseAfter: resolvedConversationState?.phase ?? null,
         })
         turnHistoryUpdateHoisted = { turnHistory: serializeTurnHistory(appendTurn(snapshotTurnHistory, record)) }
         snapshotRederivers.push((fresh) => {
@@ -8389,7 +8447,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // with this turn's evidence; the persist block below reuses the
       // folded value (never folds twice). School Mode is untouched.
       // Fail-closed: a null state never authorizes.
-      if (conversationStateHoisted) {
+      if (resolvedConversationState) {
         try {
           const { advanceConversationState, readConversationState: readConversationStateForLadder, repliesWithQuestion, isPriorKnowledgeProbe } = await import('@/lib/teaching/conversationState')
           const { isDontKnowSignal } = await import('@/lib/teaching/recoveryGuard')
@@ -8466,8 +8524,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // branch only runs when `succeeded` is false), so this is a
             // straightforward union, not a new calculation.
             const guideFoldsToGateThisTurn =
-              conversationStateHoisted?.phase === 'GUIDE' &&
-              conversationStateHoisted?.demonstrated === true &&
+              resolvedConversationState?.phase === 'GUIDE' &&
+              resolvedConversationState?.demonstrated === true &&
               resolvedRecoveryKey === null &&
               (teachingSignal?.correctness === true || resolvedLowSignalAck === true)
             const { detectLearnerQuestion: detectLearnerQuestionForWithhold } =
@@ -8478,10 +8536,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               text: cleanText,
               // The phase the turn was BUILT at — the same pre-fold value the
               // gate itself read when it went looking for a probe.
-              phase: conversationStateHoisted?.phase ?? null,
+              phase: resolvedConversationState?.phase ?? null,
               // Only meaningful when phase === 'GUIDE' (see phaseAfter's own
               // docblock) — CHECK/PRACTICE never consult it.
-              phaseAfter: guideFoldsToGateThisTurn ? 'CHECK' : (conversationStateHoisted?.phase ?? null),
+              phaseAfter: guideFoldsToGateThisTurn ? 'CHECK' : (resolvedConversationState?.phase ?? null),
               hasStructuredMcq: mcqHoisted !== null,
               // What the LEARNER will see, which is not the same question.
               // `mcqToServe` also serves a pending probe carried forward when
@@ -8580,7 +8638,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                   ? 'question-announced-but-never-delivered'
                   : 'ungraded-mastery-question-withheld',
                 reason: ungraded.reason,
-                phase: conversationStateHoisted?.phase ?? null,
+                phase: resolvedConversationState?.phase ?? null,
                 conceptId: resolvedConceptId ?? null,
                 // Which delivery path failed, so a rising rate is attributable
                 // rather than merely visible.
@@ -8642,7 +8700,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // Turn Parity Observer: compare what the server decided against
           // what the LLM actually rendered. Measurement only — no blocking.
           const parityViolationThisTurn = !!(
-            evidenceMoveHoisted === 'ask' && !askedQuestionThisTurn
+            resolvedEvidenceMove === 'ask' && !askedQuestionThisTurn
           )
           // THE LESSON'S LADDER IS FROZEN WHILE THE LESSON IS PAUSED.
           //
@@ -8695,12 +8753,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           const turnEvidenceForLadder: import('@/lib/teaching/conversationState').TurnEvidence = {
             askedQuestion: askedQuestionThisTurn,
             // PHASE 7N-1(ii): only the engine's OWN asks spend the
-            // anti-interrogation budget. `evidenceMoveHoisted` is the move
+            // anti-interrogation budget. `resolvedEvidenceMove` is the move
             // the rest of the turn was built from — this reads it, never
             // sets it. When the model volunteers a question on a 'teach'
             // turn, the budget holds instead of being spent on output the
             // engine did not choose. See advanceConversationState's fold.
-            questionSanctioned: evidenceMoveHoisted === 'ask',
+            questionSanctioned: resolvedEvidenceMove === 'ask',
             diagnosticStalled: diagnosticStalledThisTurn(priorStagnantTurnsHoisted),
             signalCorrect: teachingSignal?.correctness ?? null,
             recoveryFired: resolvedRecoveryKey !== null,
@@ -8731,7 +8789,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // The server's own decided move, not a guess from prose. A turn
             // that taught AND ended on a question is still a give; treating
             // it as "taught nothing" is what froze the ladder at DEMONSTRATE.
-            deliveredTeaching: evidenceMoveHoisted === 'teach' || evidenceMoveHoisted === 'show',
+            deliveredTeaching: resolvedEvidenceMove === 'teach' || resolvedEvidenceMove === 'show',
             // Advances the delivery phases only (OBSERVE→DEMONSTRATE→GUIDE→
             // CHECK); the mastery gates still require a real answer.
             acknowledgement: resolvedLowSignalAck,
@@ -8742,10 +8800,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             teachingClaimUnresolved: teachingIntegrityFellThroughHoisted,
           }
           const excursionFrozeLadderThisTurn = resolvedExcursionActive
-          const ladderConceptIdForRederive = conversationStateHoisted.conceptId
+          const ladderConceptIdForRederive = resolvedConversationState.conceptId
           conversationStateAfterTurnHoisted = excursionFrozeLadderThisTurn
-            ? conversationStateHoisted
-            : advanceConversationState(conversationStateHoisted, turnEvidenceForLadder)
+            ? resolvedConversationState
+            : advanceConversationState(resolvedConversationState, turnEvidenceForLadder)
           snapshotRederivers.push((fresh) => {
             const freshLadderBase = readConversationStateForLadder(fresh.conversationState, ladderConceptIdForRederive)
             const rederivedLadder = excursionFrozeLadderThisTurn
@@ -8760,7 +8818,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             const evidence = deriveNarrativeEvidence(
               conversationStateAfterTurnHoisted.phase,
               conversationStateAfterTurnHoisted.demonstrated,
-              evidenceMoveHoisted ?? 'teach',
+              resolvedEvidenceMove ?? 'teach',
             )
             narrativeStateHoisted = advanceNarrativeState(narrativeStateHoisted, evidence)
           }
@@ -8772,7 +8830,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // open?": the gate was never told. It is now an explicit input,
             // checked ahead of the evidence test.
             excursionActive: resolvedExcursionActive,
-            move: evidenceMoveHoisted === 'teach' ? 'teach' : evidenceMoveHoisted === 'show' ? 'show' : evidenceMoveHoisted === 'ask' ? 'ask' : null,
+            move: resolvedEvidenceMove === 'teach' ? 'teach' : resolvedEvidenceMove === 'show' ? 'show' : resolvedEvidenceMove === 'ask' ? 'ask' : null,
             misconceptionActive: conversationStateAfterTurnHoisted.misconceptionDetectedThisLesson,
           })
           // "A prose completion claim was made and enforceStance removed it."
@@ -8853,12 +8911,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // default for anything gradeable, so how often that contract is
             // broken is an empirical question — and the answer decides whether
             // this needs its own fix or is already rare enough to leave.
-            move: evidenceMoveHoisted,
+            move: resolvedEvidenceMove,
             mcqAsked: mcqHoisted !== null,
             ack: resolvedLowSignalAck,
             excursion: resolvedExcursionActive,
             askedQuestion: askedQuestionThisTurn,
-            phaseBefore: conversationStateHoisted?.phase ?? null,
+            phaseBefore: resolvedConversationState?.phase ?? null,
             phaseAfter: conversationStateAfterTurnHoisted?.phase ?? null,
             check: conversationStateAfterTurnHoisted?.correctAtCheck ?? null,
             practice: conversationStateAfterTurnHoisted?.correctAtPractice ?? null,
@@ -8904,17 +8962,17 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             //
             // `questionsAskedSinceTeach` is read from the PRE-turn state
             // because that is the value the budget actually saw.
-            questionsAskedSinceTeach: conversationStateHoisted?.questionsAskedSinceTeach ?? null,
-            teachSegmentsSinceQuestion: conversationStateHoisted?.teachSegmentsSinceQuestion ?? null,
+            questionsAskedSinceTeach: resolvedConversationState?.questionsAskedSinceTeach ?? null,
+            teachSegmentsSinceQuestion: resolvedConversationState?.teachSegmentsSinceQuestion ?? null,
             wantsPractice: turnIntent.wantsPractice,
             phaseAllowsProbe: resolvedPhaseAllowsProbe,
             // The one line that names the loop when it happens: the learner
             // asked, GUIDE would have allowed it, and the budget said no.
             budgetDeniedRequestedAsk:
               turnIntent.wantsPractice
-              && conversationStateHoisted?.phase === 'GUIDE'
-              && (conversationStateHoisted?.questionsAskedSinceTeach ?? 0) >= 2
-              && evidenceMoveHoisted !== 'ask',
+              && resolvedConversationState?.phase === 'GUIDE'
+              && (resolvedConversationState?.questionsAskedSinceTeach ?? 0) >= 2
+              && resolvedEvidenceMove !== 'ask',
             // ── PHASE E · WHY THIS MOVE, AND NOTHING ELSE ───────────────────
             //
             // PRODUCTION AND THE OFFLINE REPLAY DISAGREE. The same learner
@@ -8945,7 +9003,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // means NONE of them can fire and the answer must be 2 or 7.
             //
             // STRICTLY OBSERVATIONAL. Every value below is read from
-            // `conversationStateHoisted` — the exact object passed to
+            // `resolvedConversationState` — the exact object passed to
             // `decideNextMoveDetailed` — or from a variable that decision
             // already produced. Nothing is recomputed, nothing is derived by a
             // formula that could drift from the real one, and nothing here is
@@ -8955,22 +9013,22 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               recoveryTurn: resolvedRecoveryKey !== null,
               // gate 2 — the reason, if this is where production returned
               legalityBlocked: legalityBlockedReasonHoisted,
-              taughtThisSession: conversationStateHoisted?.taughtThisSession ?? null,
+              taughtThisSession: resolvedConversationState?.taughtThisSession ?? null,
               // the shared conjunct of gates 3-6
-              remedialPending: (conversationStateHoisted?.teachSegmentsSinceQuestion ?? 0) === 0,
+              remedialPending: (resolvedConversationState?.teachSegmentsSinceQuestion ?? 0) === 0,
               // gates 3, 4, 5, 6 — their counters, as the decision saw them
-              consecutiveDontKnows: conversationStateHoisted?.consecutiveDontKnows ?? null,
-              totalKnowledgeProbes: conversationStateHoisted?.totalKnowledgeProbes ?? null,
+              consecutiveDontKnows: resolvedConversationState?.consecutiveDontKnows ?? null,
+              totalKnowledgeProbes: resolvedConversationState?.totalKnowledgeProbes ?? null,
               consecutivePriorKnowledgeProbes:
-                conversationStateHoisted?.consecutivePriorKnowledgeProbes ?? null,
-              observeFailures: conversationStateHoisted?.observeFailures ?? null,
+                resolvedConversationState?.consecutivePriorKnowledgeProbes ?? null,
+              observeFailures: resolvedConversationState?.observeFailures ?? null,
               // gate 7 and the phase ladder beneath it
-              consecutiveFailures: conversationStateHoisted?.consecutiveFailures ?? null,
-              demonstrated: conversationStateHoisted?.demonstrated ?? null,
+              consecutiveFailures: resolvedConversationState?.consecutiveFailures ?? null,
+              demonstrated: resolvedConversationState?.demonstrated ?? null,
               workedExampleFirst: evidenceWorkedExampleFirstHoisted,
               // context the decision was handed, and the turn's own shape
               practiceRequested: turnIntent.wantsPractice,
-              questionSanctioned: evidenceMoveHoisted === 'ask',
+              questionSanctioned: resolvedEvidenceMove === 'ask',
               diagnosticStalled: diagnosticStalledThisTurn(priorStagnantTurnsHoisted),
               learnerRequest: resolvedLearnerRequest,
               degradedTurn: isDegradedProvider(provider),
@@ -9530,7 +9588,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           recoveryTriggered: resolvedRecoveryKey !== null,
           recoveryKey: resolvedRecoveryKey,
           frustrationDetected: resolvedRecoveryKey === 'frustrated',
-          questionLoopDetected: (conversationStateHoisted?.consecutivePriorKnowledgeProbes ?? 0) >= 2,
+          questionLoopDetected: (resolvedConversationState?.consecutivePriorKnowledgeProbes ?? 0) >= 2,
           directInstructionTriggered: cueDecisionHoisted?.decision === 'TEACH_DIRECTLY',
           brainLegacyDisagreement: explanationMemoryAvailable
             && dispatchPlanHoisted !== null && dispatchPlanHoisted.executor !== 'EXPLANATION_MEMORY',
@@ -10241,7 +10299,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               await import('@/lib/teaching/remediationOutputContract')
             const { isDegradedProvider: isDegradedForProgress } =
               await import('@/lib/eos-runtime/degradedMode')
-            const before = conversationStateHoisted
+            const before = resolvedConversationState
             const after = conversationStateAfterTurnHoisted
             const outcome = classifyTurn({
               phaseChanged: (before?.phase ?? null) !== (after?.phase ?? null),
@@ -10714,7 +10772,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           }
           if (conversationStateAfterTurnHoisted) {
             conversationStateUpdate.conversationState = conversationStateAfterTurnHoisted
-          } else if (conversationStateHoisted) {
+          } else if (resolvedConversationState) {
             const { advanceConversationState, readConversationState: readConversationStateForLadderFallback, repliesWithQuestion, isPriorKnowledgeProbe } = await import('@/lib/teaching/conversationState')
             const { isDontKnowSignal } = await import('@/lib/teaching/recoveryGuard')
             const { isDegradedProvider } = await import('@/lib/eos-runtime/degradedMode')
@@ -10740,19 +10798,19 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // turn may bank a verified mastery credit. `certifies(resolvedGrade)`
               // — see the primary fold's Batch 3 comment for the proof.
               serverGraded: certifies(resolvedGrade),
-              parityViolation: !!(evidenceMoveHoisted === 'ask' && !fallbackAskedQ),
+              parityViolation: !!(resolvedEvidenceMove === 'ask' && !fallbackAskedQ),
               // Same guard as the upstream fold — the two must not disagree
               // about whether an outage template taught anything.
               degradedTurn: isDegradedProvider(provider),
-              deliveredTeaching: evidenceMoveHoisted === 'teach' || evidenceMoveHoisted === 'show',
+              deliveredTeaching: resolvedEvidenceMove === 'teach' || resolvedEvidenceMove === 'show',
               acknowledgement: resolvedLowSignalAck,
               fillerTurnDetected: fillerDetectedHoisted,
               // Same source as the upstream fold — see V-CHALLENGE above.
               teachingClaimUnresolved: teachingIntegrityFellThroughHoisted,
             }
-            const fallbackLadderConceptId = conversationStateHoisted.conceptId
+            const fallbackLadderConceptId = resolvedConversationState.conceptId
             Object.assign(conversationStateUpdate, {
-              conversationState: advanceConversationState(conversationStateHoisted, fallbackTurnEvidence),
+              conversationState: advanceConversationState(resolvedConversationState, fallbackTurnEvidence),
             })
             snapshotRederivers.push((fresh) => ({
               conversationState: advanceConversationState(
@@ -10767,18 +10825,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // produced (mastery-gate rework's own upstream fold takes
           // priority; the else-branch fold is the fallback, exactly the
           // same precedence conversationStateUpdate.conversationState uses).
-          if (objectiveStateHoisted) {
+          if (resolvedObjectiveState) {
             const { advanceObjectiveState } = await import('@/lib/teaching/objectiveModel')
             const stateAfterTurn = (conversationStateUpdate.conversationState as
               import('@/lib/teaching/conversationState').ConversationState | undefined)
               ?? conversationStateAfterTurnHoisted
-              ?? conversationStateHoisted
+              ?? resolvedConversationState
             const wasAttempt = teachingSignal?.correctness !== undefined && teachingSignal?.correctness !== null
-            const preFoldPhase = conversationStateHoisted?.phase ?? null
+            const preFoldPhase = resolvedConversationState?.phase ?? null
             const wasAssessmentAttempt = wasAttempt && (preFoldPhase === 'CHECK' || preFoldPhase === 'PRACTICE' || preFoldPhase === 'TRANSFER')
             const phaseAdvanced = preFoldPhase !== null && stateAfterTurn?.phase !== undefined && stateAfterTurn.phase !== preFoldPhase
             const objectiveNowIso = new Date(turnReceivedAt).toISOString()
-            const updatedObjectiveState = advanceObjectiveState(objectiveStateHoisted, {
+            const updatedObjectiveState = advanceObjectiveState(resolvedObjectiveState, {
               wasAttempt,
               wasAssessmentAttempt,
               stateAfterTurn: stateAfterTurn ?? null,
@@ -10786,7 +10844,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               nowIso: objectiveNowIso,
             })
             conversationStateUpdate.objectiveState = updatedObjectiveState
-            const capturedObjectiveId = objectiveStateHoisted.objectiveId
+            const capturedObjectiveId = resolvedObjectiveState.objectiveId
             const capturedEv = { wasAttempt, wasAssessmentAttempt, stateAfterTurn: stateAfterTurn ?? null, phaseAdvanced, nowIso: objectiveNowIso }
             snapshotRederivers.push((fresh) => {
               const { readObjectiveState: readFreshObj } = require('@/lib/teaching/objectiveModel') as typeof import('@/lib/teaching/objectiveModel')
@@ -10827,12 +10885,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 : teachingHistoryHoisted.strategiesUsed,
               explanationCount: teachingHistoryHoisted.explanationCount + 1,
               frustration: computeFrustration(
-                conversationStateHoisted?.consecutiveFailures ?? 0,
-                conversationStateHoisted?.remediationCount ?? 0,
+                resolvedConversationState?.consecutiveFailures ?? 0,
+                resolvedConversationState?.remediationCount ?? 0,
               ),
               mastery: computeMastery(
-                conversationStateHoisted?.correctAtCheck ?? 0,
-                conversationStateHoisted?.correctAtPractice ?? 0,
+                resolvedConversationState?.correctAtCheck ?? 0,
+                resolvedConversationState?.correctAtPractice ?? 0,
               ),
             })
             // P7: fold this turn's memory evidence into the SAME owner --
@@ -10962,12 +11020,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                   : base.strategiesUsed,
                 explanationCount: base.explanationCount + 1,
                 frustration: computeFrustration(
-                  conversationStateHoisted?.consecutiveFailures ?? 0,
-                  conversationStateHoisted?.remediationCount ?? 0,
+                  resolvedConversationState?.consecutiveFailures ?? 0,
+                  resolvedConversationState?.remediationCount ?? 0,
                 ),
                 mastery: computeMastery(
-                  conversationStateHoisted?.correctAtCheck ?? 0,
-                  conversationStateHoisted?.correctAtPractice ?? 0,
+                  resolvedConversationState?.correctAtCheck ?? 0,
+                  resolvedConversationState?.correctAtPractice ?? 0,
                 ),
               })
               // The four accumulative records the primary fold adds, now also
@@ -11021,8 +11079,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               recoveryEscalationRung: snapshotSessionFailureCount >= 4 ? 2 : snapshotSessionFailureCount >= 2 ? 1 : 0,
               sessionFailureCount: snapshotSessionFailureCount,
               autonomyRequested: evidenceAutonomyHoisted,
-              decisionMove: evidenceMoveHoisted,
-              decisionPhaseBefore: conversationStateHoisted?.phase ?? null,
+              decisionMove: resolvedEvidenceMove,
+              decisionPhaseBefore: resolvedConversationState?.phase ?? null,
               decisionPhaseAfter: phaseAfter,
               workedExampleFirst: evidenceWorkedExampleFirstHoisted,
               stageCeiling: evidenceStageCeilingHoisted,
@@ -11037,7 +11095,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               provenance: [
                 ...(resolvedRecoveryKey ? [`recovery:${resolvedRecoveryKey}`] : []),
                 ...(evidenceAutonomyHoisted ? ['autonomy'] : []),
-                ...(evidenceMoveHoisted ? ['turn-directive'] : []),
+                ...(resolvedEvidenceMove ? ['turn-directive'] : []),
                 ...(resolvedFirstLessonActive ? ['first-lesson'] : []),
                 // K6 — record EOS verifier outcomes as provenance atoms.
                 // NOT migrated: eosVerifierTagsHoisted is declared after the
@@ -11113,7 +11171,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           try {
             const stateAfterForMetrics = (conversationStateUpdate.conversationState as
               import('@/lib/teaching/conversationState').ConversationState | undefined)
-              ?? conversationStateAfterTurnHoisted ?? conversationStateHoisted
+              ?? conversationStateAfterTurnHoisted ?? resolvedConversationState
             const { isBareAcknowledgement: isBareAckForMetrics } = await import('@/lib/teaching/masteryGate')
             const { masteryVerified: masteryVerifiedForMetrics } = await import('@/lib/teaching/masteryGate')
             const facts = {
@@ -11129,20 +11187,20 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // 7N-1(ii): an answer is expected after ANY question, including
               // one the model volunteered — RC-D's dropped-observation counter
               // would go blind otherwise.
-              answerWasExpected: evidenceMoveHoisted === 'ask'
-                || ((conversationStateHoisted?.teachSegmentsSinceQuestion ?? 0) === 0
-                    && conversationStateHoisted?.taughtThisSession === true),
+              answerWasExpected: resolvedEvidenceMove === 'ask'
+                || ((resolvedConversationState?.teachSegmentsSinceQuestion ?? 0) === 0
+                    && resolvedConversationState?.taughtThisSession === true),
               learnerReplySubstantive: message.trim().length > 0
                 && !isBareAckForMetrics(message)
                 && resolvedRecoveryKey === null,
               signalPresent: teachingSignal !== null && teachingSignal !== undefined,
-              phaseBefore: conversationStateHoisted?.phase ?? null,
+              phaseBefore: resolvedConversationState?.phase ?? null,
               phaseAfter: stateAfterForMetrics?.phase ?? null,
-              conceptBefore: conversationStateHoisted?.conceptId ?? null,
+              conceptBefore: resolvedConversationState?.conceptId ?? null,
               conceptAfter: stateAfterForMetrics?.conceptId ?? null,
               evidenceBefore: {
-                correctAtCheck: conversationStateHoisted?.correctAtCheck ?? 0,
-                correctAtPractice: conversationStateHoisted?.correctAtPractice ?? 0,
+                correctAtCheck: resolvedConversationState?.correctAtCheck ?? 0,
+                correctAtPractice: resolvedConversationState?.correctAtPractice ?? 0,
               },
               recoveryFired: resolvedRecoveryKey !== null,
               duplicateDetected: eosVerifierTagsHoisted.some((t) => t.includes('V-DUP')),
@@ -11570,7 +11628,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           console.warn('[gate-contract] ' + JSON.stringify({
             event: 'question-announced-but-never-delivered',
             surface: 'final-response',
-            phase: conversationStateHoisted?.phase ?? null,
+            phase: resolvedConversationState?.phase ?? null,
             conceptId: resolvedConceptId ?? null,
             probeReleasedThisTurn: probeReleasedThisTurnHoisted === true,
             charsBefore: cleanText.length,
@@ -11601,7 +11659,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // Typed Turn Contract Batch 5: reuses `resolvedVisualDecision`.
         const turnDecision = {
           conceptId: resolvedDecisionConceptId ?? resolvedConceptId,
-          teachingAct: evidenceMoveHoisted,
+          teachingAct: resolvedEvidenceMove,
           representation: resolvedVisualDecision?.representation ?? null,
           probeId: resolvedDecisionProbeId,
           figureId: resolvedVisualDecision?.asset?.assetId ?? null,
@@ -11646,15 +11704,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         const { classifyTurn, foldStagnation, escalationRung } = await import('@/lib/teaching/turnProgress')
         const { isDegradedProvider: isDegraded } = await import('@/lib/eos-runtime/degradedMode')
 
-        const before = conversationStateHoisted
+        const before = resolvedConversationState
         const after = conversationStateAfterTurnHoisted
         const askedQuestionInReply = /\?/.test(cleanText)
-        // `evidenceMoveHoisted` is a widened string at its declaration; the
+        // `resolvedEvidenceMove` is a widened string at its declaration; the
         // legality fold and the event both want the closed set, so narrow once
         // here rather than casting at two call sites.
         const decidedMove: 'teach' | 'show' | 'ask' | null =
-          evidenceMoveHoisted === 'teach' || evidenceMoveHoisted === 'show' || evidenceMoveHoisted === 'ask'
-            ? evidenceMoveHoisted : null
+          resolvedEvidenceMove === 'teach' || resolvedEvidenceMove === 'show' || resolvedEvidenceMove === 'ask'
+            ? resolvedEvidenceMove : null
         // The one number this runtime named as most diagnostic and never computed.
         const legality = decidedMove
           ? foldLegalityMetrics(undefined, {

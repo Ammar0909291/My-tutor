@@ -287,7 +287,12 @@ describe('structural guard — the harness fold must cover the route fold', () =
   }
 
   it('every route evidence field is either replayed or explicitly excused', () => {
-    const routeKeys = evidenceKeys(readFileSync(ROUTE, 'utf8'), 'conversationStateHoisted')
+    // Typed Turn Contract Batch 7c (2026-09-15): the route's primary fold
+    // site now calls `advanceConversationState(resolvedConversationState,
+    // turnEvidenceForLadder)` — same never-reassigned value, new receiver
+    // name. Old receiver (kept verbatim, no longer matches source):
+    //   evidenceKeys(readFileSync(ROUTE, 'utf8'), 'conversationStateHoisted')
+    const routeKeys = evidenceKeys(readFileSync(ROUTE, 'utf8'), 'resolvedConversationState')
     const harnessKeys = evidenceKeys(readFileSync(HARNESS, 'utf8'), 'state')
 
     const missing = [...routeKeys].filter(
@@ -297,7 +302,10 @@ describe('structural guard — the harness fold must cover the route fold', () =
   })
 
   it('the excuse list stays honest — no stale entries', () => {
-    const routeKeys = evidenceKeys(readFileSync(ROUTE, 'utf8'), 'conversationStateHoisted')
+    // Typed Turn Contract Batch 7c (2026-09-15): same receiver-name update
+    // as the test above. Old receiver (kept verbatim, no longer matches
+    // source): evidenceKeys(readFileSync(ROUTE, 'utf8'), 'conversationStateHoisted')
+    const routeKeys = evidenceKeys(readFileSync(ROUTE, 'utf8'), 'resolvedConversationState')
     // An excuse for a field the route no longer passes is dead weight that
     // would silently absolve a future field of the same name.
     const stale = Object.keys(CANNOT_REPLAY).filter((k) => !routeKeys.has(k))

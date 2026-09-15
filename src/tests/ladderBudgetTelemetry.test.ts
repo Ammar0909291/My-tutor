@@ -103,8 +103,15 @@ describe('Phase 7N-2 — the ladder line carries the five fields', () => {
     // conversationStateAfterTurnHoisted would report the post-fold value, which
     // is not what decideNextMove read. Getting this backwards would make the
     // telemetry describe a decision that never happened.
-    expect(block).toContain('questionsAskedSinceTeach: conversationStateHoisted?.questionsAskedSinceTeach')
-    expect(block).toContain('teachSegmentsSinceQuestion: conversationStateHoisted?.teachSegmentsSinceQuestion')
+    //
+    // Typed Turn Contract Batch 7c (2026-09-15): `conversationStateHoisted`
+    // is now read here via `resolvedConversationState`, the same
+    // never-reassigned pre-turn value. Old assertions (kept verbatim, no
+    // longer match source):
+    //   expect(block).toContain('questionsAskedSinceTeach: conversationStateHoisted?.questionsAskedSinceTeach')
+    //   expect(block).toContain('teachSegmentsSinceQuestion: conversationStateHoisted?.teachSegmentsSinceQuestion')
+    expect(block).toContain('questionsAskedSinceTeach: resolvedConversationState?.questionsAskedSinceTeach')
+    expect(block).toContain('teachSegmentsSinceQuestion: resolvedConversationState?.teachSegmentsSinceQuestion')
   })
 
   it('the pre-existing fields are all still reported — nothing was displaced', () => {

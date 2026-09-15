@@ -169,7 +169,12 @@ describe('the route registers a conversationState rederiver at both fold sites',
       ROUTE.indexOf('const excursionFrozeLadderThisTurn = resolvedExcursionActive'),
       ROUTE.indexOf('const excursionFrozeLadderThisTurn = resolvedExcursionActive') + 900,
     )
-    expect(block).toMatch(/const ladderConceptIdForRederive = conversationStateHoisted\.conceptId/)
+    // Typed Turn Contract Batch 7c (2026-09-15): `conversationStateHoisted`
+    // is now read here via `resolvedConversationState`, the same
+    // never-reassigned value. Old assertion (kept verbatim, no longer
+    // matches source):
+    //   expect(block).toMatch(/const ladderConceptIdForRederive = conversationStateHoisted\.conceptId/)
+    expect(block).toMatch(/const ladderConceptIdForRederive = resolvedConversationState\.conceptId/)
     expect(block).toMatch(/snapshotRederivers\.push\(\(fresh\) => \{/)
     expect(block).toMatch(/readConversationStateForLadder\(fresh\.conversationState, ladderConceptIdForRederive\)/)
     expect(block).toMatch(/advanceConversationState\(freshLadderBase, turnEvidenceForLadder\)/)
@@ -183,9 +188,12 @@ describe('the route registers a conversationState rederiver at both fold sites',
   })
 
   it('fallback fold site: also registers a rederiver, not just the in-memory fold', () => {
+    // Typed Turn Contract Batch 7c (2026-09-15): reuses `resolvedConversationState`.
+    // Old anchor (kept verbatim, no longer matches source):
+    //   ROUTE.indexOf('const fallbackLadderConceptId = conversationStateHoisted.conceptId')
     const block = ROUTE.slice(
-      ROUTE.indexOf('const fallbackLadderConceptId = conversationStateHoisted.conceptId'),
-      ROUTE.indexOf('const fallbackLadderConceptId = conversationStateHoisted.conceptId') + 500,
+      ROUTE.indexOf('const fallbackLadderConceptId = resolvedConversationState.conceptId'),
+      ROUTE.indexOf('const fallbackLadderConceptId = resolvedConversationState.conceptId') + 500,
     )
     expect(block).toMatch(/snapshotRederivers\.push\(\(fresh\) => \(\{/)
     expect(block).toMatch(/readConversationStateForLadderFallback\(fresh\.conversationState, fallbackLadderConceptId\)/)
