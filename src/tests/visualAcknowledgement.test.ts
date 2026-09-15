@@ -196,6 +196,10 @@ describe('the route actually wires this in, scoped to a newly-introduced figure'
   const ROUTE = require('fs').readFileSync('src/app/api/learn/chat/route.ts', 'utf8') as string
 
   it('calls ensureVisualAcknowledged with figureIntroducedThisTurn && visualFired', () => {
-    expect(ROUTE).toMatch(/ensureVisualAcknowledged\(cleanText, visualDecisionHoisted, figureIntroducedThisTurn && visualFired\)/)
+    // Typed Turn Contract Batch 5 (2026-09-15): `visualDecisionHoisted` is now
+    // read here via `resolvedVisualDecision`, the same value. Old assertion
+    // (kept verbatim, no longer matches source):
+    //   expect(ROUTE).toMatch(/ensureVisualAcknowledged\(cleanText, visualDecisionHoisted, figureIntroducedThisTurn && visualFired\)/)
+    expect(ROUTE).toMatch(/ensureVisualAcknowledged\(cleanText, resolvedVisualDecision, figureIntroducedThisTurn && visualFired\)/)
   })
 })

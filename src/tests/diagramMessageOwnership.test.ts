@@ -47,7 +47,10 @@ import path from 'path'
  * Continuity itself — the session slot persisted for the NEXT turn's
  * resolution, and the system-prompt contract telling the model a figure is
  * on screen so its prose can refer to it — is untouched: both read
- * `visualDecisionHoisted.session`/`.graphical` directly, with no turns gate,
+ * `.session`/`.graphical` directly off the single-epoch resolved visual
+ * decision (Typed Turn Contract Batch 5, 2026-09-15, renamed
+ * `visualDecisionHoisted` to `resolvedVisualDecision` at every consumer past
+ * the contract compile point — same value, same identity, no turns gate),
  * exactly as before this fix.
  *
  * These are SOURCE assertions: route.ts is a large server route this repo's
@@ -67,13 +70,22 @@ const ROUTE = readFileSync(
 
 describe('the live render is gated on this-turn introduction', () => {
   it('figureIntroducedThisTurn reads session.turns === 0, defaulting true only when there is no session at all', () => {
+    // Typed Turn Contract Batch 5 (2026-09-15, design doc §6 "figure cluster"):
+    // `visualDecisionHoisted` is single-epoch CONTRACT-classified and is now
+    // read here via `resolvedVisualDecision`, the same value. Old assertion
+    // (kept verbatim, no longer matches source):
+    //   expect(ROUTE).toMatch(
+    //     /const figureIntroducedThisTurn =\s*\n\s*visualDecisionHoisted\?\.session \? visualDecisionHoisted\.session\.turns === 0 : true/,
+    //   )
     expect(ROUTE).toMatch(
-      /const figureIntroducedThisTurn =\s*\n\s*visualDecisionHoisted\?\.session \? visualDecisionHoisted\.session\.turns === 0 : true/,
+      /const figureIntroducedThisTurn =\s*\n\s*resolvedVisualDecision\?\.session \? resolvedVisualDecision\.session\.turns === 0 : true/,
     )
   })
 
   it('the authority clamp fills the visual channels only on introduction — or an explicit ask', () => {
-    const clampStart = ROUTE.indexOf('const decision = visualDecisionHoisted')
+    // Old anchor (kept verbatim, no longer matches source):
+    //   const clampStart = ROUTE.indexOf('const decision = visualDecisionHoisted')
+    const clampStart = ROUTE.indexOf('const decision = resolvedVisualDecision')
     expect(clampStart).toBeGreaterThan(-1)
     const clamp = ROUTE.slice(clampStart, clampStart + 2600)
     expect(clamp).toMatch(/if \(figureIntroducedThisTurn \|\| reattachOnExplicitRequest\) \{/)
@@ -136,8 +148,13 @@ describe('the persisted record is gated on the same signal', () => {
   })
 
   it('displayedVisualSession (what gets written to Message.visualSession) still requires figureBelongsToThisTurn', () => {
+    // Typed Turn Contract Batch 5 (2026-09-15): reuses `resolvedVisualDecision`,
+    // same value. Old assertion (kept verbatim, no longer matches source):
+    //   expect(ROUTE).toMatch(
+    //     /visualDecisionHoisted\?\.graphical && visualDecisionHoisted\.session && figureBelongsToThisTurn/,
+    //   )
     expect(ROUTE).toMatch(
-      /visualDecisionHoisted\?\.graphical && visualDecisionHoisted\.session && figureBelongsToThisTurn/,
+      /resolvedVisualDecision\?\.graphical && resolvedVisualDecision\.session && figureBelongsToThisTurn/,
     )
   })
 })
@@ -156,10 +173,14 @@ describe('continuity itself is untouched by this fix', () => {
   })
 
   it('the next-turn continuity slot (visualSessionUpdate) is written unconditionally, not gated on figureIntroducedThisTurn', () => {
-    const idx = ROUTE.indexOf('const visualSessionUpdate: Record<string, unknown> = visualDecisionHoisted')
+    // Typed Turn Contract Batch 5 (2026-09-15): reuses `resolvedVisualDecision`,
+    // same value. Old assertions (kept verbatim, no longer match source):
+    //   const idx = ROUTE.indexOf('const visualSessionUpdate: Record<string, unknown> = visualDecisionHoisted')
+    //   expect(block).toContain('visualSession: visualDecisionHoisted.session')
+    const idx = ROUTE.indexOf('const visualSessionUpdate: Record<string, unknown> = resolvedVisualDecision')
     expect(idx).toBeGreaterThan(-1)
     const block = ROUTE.slice(idx, idx + 400)
-    expect(block).toContain('visualSession: visualDecisionHoisted.session')
+    expect(block).toContain('visualSession: resolvedVisualDecision.session')
     expect(block).not.toContain('figureIntroducedThisTurn')
   })
 })

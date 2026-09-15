@@ -6755,6 +6755,39 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       const resolvedModelProbeVerdict = turnDeliveryShadow?.question.modelProbeVerdict ?? modelProbeVerdictHoisted
       const resolvedAttemptVector = turnDeliveryShadow?.provenance.attemptVector ?? attemptVectorHoisted
       const resolvedAdaptationState = turnDeliveryShadow?.provenance.adaptationState ?? adaptationStateHoisted
+      // Typed Turn Contract, Batch 5 — "figure cluster" (design doc §6 Batch 5,
+      // `contract.figure`). All 5 locals are single-epoch CONTRACT-classified —
+      // verified by tracing every write site by hand (not trusting the design
+      // doc's own line numbers, which Batch 4 found drift): `visualDecisionHoisted`
+      // writes at ~L3559/3601/3613, `availableVisualHoisted` at ~L3365/3572,
+      // `allowedVisualsHoisted` at ~L3357/3573, `forceVisualRenderHoisted` at
+      // ~L3409, `visualGenerationCountHoisted` at ~L3473 — all cluster well
+      // before this block and before the contract's own compile point
+      // (~L5829), and NONE has a second write anywhere later in the file.
+      // Unlike Batch 4's `mcqHoisted`/`pendingMcqHoisted`/`mcqGradeHoisted`,
+      // which needed two resolved consts for two genuinely separate epochs,
+      // there is only one epoch here for every one of these 5 — one resolved
+      // const each is correct and sufficient, not a shortcut.
+      const resolvedVisualDecision = turnContractShadow?.figure.decision ?? visualDecisionHoisted
+      const resolvedAvailableVisual = turnContractShadow?.figure.availableVisual ?? availableVisualHoisted
+      const resolvedAllowedVisuals = turnContractShadow?.figure.allowedVisuals ?? allowedVisualsHoisted
+      const resolvedForceVisualRender = turnContractShadow?.figure.forceRender ?? forceVisualRenderHoisted
+      const resolvedVisualGenerationCountBefore =
+        turnContractShadow?.figure.generationCountBefore ?? visualGenerationCountHoisted
+      // The three un-suffixed derived locals the design doc also names
+      // (`visualFired`, `figureOnScreen`, `figureIntroducedThisTurn`) are
+      // deliberately NOT given a resolved-shadow form here: each is declared
+      // exactly once, at ~L8880-8973 below — hundreds of lines AFTER both the
+      // contract compile point (~L5829) and the delivery compile point
+      // (~L6643, where `figure: { attachedThisTurn: false, introducedThisTurn:
+      // false, onScreen: false }` is a placeholder "not yet decided" default,
+      // same pattern as Batch 4's `probeReleasedThisTurnHoisted`). Resolving
+      // them against `turnDeliveryShadow?.figure.X` would silently swap each
+      // turn's REAL, freshly-computed value for that frozen false default —
+      // exactly the live behavior regression Batch 2's own rule exists to
+      // prevent. They stay their own named locals; only their internal reads
+      // of `visualDecisionHoisted` migrate to `resolvedVisualDecision` below,
+      // same as every other post-compile consumer in this file.
 
       // Typed Turn Contract, Batch 3 — "answer-verdict cluster" (design doc §6
       // Batch 3). `resolvedGrade` collapses `mcqGradeHoisted` +
@@ -6930,12 +6963,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // force-render trigger (student asked) missed this case entirely.
       {
         const { resolveResponseVisual, textPromisesUnfulfilledVisual } = await import('@/lib/teaching/visualRegistry')
-        const forceForPromise = !responseVisual && availableVisualHoisted !== null && textPromisesUnfulfilledVisual(cleanText)
+        // Typed Turn Contract Batch 5: reuses `resolvedAvailableVisual`/
+        // `resolvedForceVisualRender`/`resolvedAllowedVisuals` — same values.
+        const forceForPromise = !responseVisual && resolvedAvailableVisual !== null && textPromisesUnfulfilledVisual(cleanText)
         responseVisual = resolveResponseVisual(
           responseVisual as import('@/lib/school/visuals/visualTypes').VisualType | null,
-          forceVisualRenderHoisted || forceForPromise,
-          availableVisualHoisted as import('@/lib/school/visuals/visualTypes').VisualType | null,
-          allowedVisualsHoisted as readonly import('@/lib/school/visuals/visualTypes').VisualType[] | null,
+          resolvedForceVisualRender || forceForPromise,
+          resolvedAvailableVisual as import('@/lib/school/visuals/visualTypes').VisualType | null,
+          resolvedAllowedVisuals as readonly import('@/lib/school/visuals/visualTypes').VisualType[] | null,
         )
       }
 
@@ -8877,11 +8912,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // the held session for the next turn's resolution — only the
       // CLIENT-VISIBLE payload for this specific message is withheld when
       // this message did not introduce it.
+      // Typed Turn Contract Batch 5: reuses `resolvedVisualDecision` — same
+      // value, same single-epoch CONTRACT-classified local.
       const figureIntroducedThisTurn =
-        visualDecisionHoisted?.session ? visualDecisionHoisted.session.turns === 0 : true
+        resolvedVisualDecision?.session ? resolvedVisualDecision.session.turns === 0 : true
 
       {
-        const decision = visualDecisionHoisted
+        const decision = resolvedVisualDecision
         const llmTag = responseVisual as import('@/lib/school/visuals/visualTypes').VisualType | null
         responseVisual = null
         detectedVisualSpec = null
@@ -8969,14 +9006,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // message send one", and the answer errs toward leaving prose alone:
         // deleting a true reference is a worse failure than leaving one that
         // points slightly too far up the transcript.
+        // Typed Turn Contract Batch 5: `delivery.figure.onScreen`, named —
+        // reuses `resolvedVisualDecision`, same value.
         const figureOnScreen =
-          visualFired || (visualDecisionHoisted?.session?.turns ?? 0) > 0
+          visualFired || (resolvedVisualDecision?.session?.turns ?? 0) > 0
         const figures = stripUnbackedFigureReferences(cleanText, figureOnScreen)
         if (figures.stripped) {
           console.warn('[figure-reference] ' + JSON.stringify({
             event: 'unbacked-figure-reference-stripped',
             conceptId: resolvedConceptId ?? null,
-            heldTurns: visualDecisionHoisted?.session?.turns ?? null,
+            heldTurns: resolvedVisualDecision?.session?.turns ?? null,
             // The exact fragments, so the log says what was removed rather than
             // that something was.
             removed: figures.removed,
@@ -9059,7 +9098,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // turn that actually introduces the figure.
       try {
         const { ensureVisualAcknowledged } = await import('@/lib/teaching/visual/visualAcknowledgement')
-        const ack = ensureVisualAcknowledged(cleanText, visualDecisionHoisted, figureIntroducedThisTurn && visualFired)
+        // Typed Turn Contract Batch 5: reuses `resolvedVisualDecision`.
+        const ack = ensureVisualAcknowledged(cleanText, resolvedVisualDecision, figureIntroducedThisTurn && visualFired)
         if (ack.appended) {
           console.warn('[visual-acknowledgement] ' + JSON.stringify({
             event: 'unacknowledged-figure-introduced',
@@ -9402,7 +9442,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // very next page reload, since `applyRestoredVisuals` re-attaches
       // whatever `/api/sessions/history` returns as this message's visual.
       const figureBelongsToThisTurn = (() => {
-        const session = visualDecisionHoisted?.session
+        // Typed Turn Contract Batch 5: reuses `resolvedVisualDecision`.
+        const session = resolvedVisualDecision?.session
         if (!session) return false
         if (session.turns !== 0) return false
         const excursionOpen = excursionDecisionHoisted?.state.active === true
@@ -9414,9 +9455,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         return session.conceptId === taught
       })()
 
+      // Typed Turn Contract Batch 5: reuses `resolvedVisualDecision`.
       const displayedVisualSession =
-        visualDecisionHoisted?.graphical && visualDecisionHoisted.session && figureBelongsToThisTurn
-          ? (visualDecisionHoisted.session as unknown as Prisma.InputJsonValue)
+        resolvedVisualDecision?.graphical && resolvedVisualDecision.session && figureBelongsToThisTurn
+          ? (resolvedVisualDecision.session as unknown as Prisma.InputJsonValue)
           : undefined
 
       // THE QUESTION AND ITS CHOICES, MADE PART OF DURABLE HISTORY.
@@ -10891,15 +10933,17 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // Visual Resolver V2 — persist the active visualization surface so the
           // next turn can HOLD it. Cleared explicitly when nothing graphical is
           // on screen, so a stale figure can never be resurrected.
-          const visualSessionUpdate: Record<string, unknown> = visualDecisionHoisted
+          // Typed Turn Contract Batch 5: reuses `resolvedVisualDecision`/
+          // `resolvedVisualGenerationCountBefore` — same values.
+          const visualSessionUpdate: Record<string, unknown> = resolvedVisualDecision
             ? {
-                visualSession: visualDecisionHoisted.session,
+                visualSession: resolvedVisualDecision.session,
                 // The per-session generation budget's counter. Incremented only
                 // on a turn that actually spent a provider call — a cached, an
                 // approved and a declined figure all cost nothing and must not
                 // consume a bound that exists to limit cost.
-                ...(visualDecisionHoisted.generationSpent
-                  ? { visualGenerationCount: visualGenerationCountHoisted + 1 }
+                ...(resolvedVisualDecision.generationSpent
+                  ? { visualGenerationCount: resolvedVisualGenerationCountBefore + 1 }
                   : {}),
               }
             : {}
@@ -11408,20 +11452,21 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         const {
           detectDecisionDivergence, formatTurnDecisionLog,
         } = await import('@/lib/teaching/turnDecision')
+        // Typed Turn Contract Batch 5: reuses `resolvedVisualDecision`.
         const turnDecision = {
           conceptId: resolvedDecisionConceptId ?? resolvedConceptId,
           teachingAct: evidenceMoveHoisted,
-          representation: visualDecisionHoisted?.representation ?? null,
+          representation: resolvedVisualDecision?.representation ?? null,
           probeId: resolvedDecisionProbeId,
-          figureId: visualDecisionHoisted?.asset?.assetId ?? null,
+          figureId: resolvedVisualDecision?.asset?.assetId ?? null,
           lifecycle: sessionEpisodeHoisted?.phase ?? null,
           granularity: resolvedDecisionGranularity,
-          reason: visualDecisionHoisted?.provenance ?? null,
+          reason: resolvedVisualDecision?.provenance ?? null,
         }
         const observed = {
           mcqAttached: mcqHoisted !== null,
-          figureAttached: visualDecisionHoisted?.graphical === true,
-          figureConceptId: visualDecisionHoisted?.asset?.conceptId ?? null,
+          figureAttached: resolvedVisualDecision?.graphical === true,
+          figureConceptId: resolvedVisualDecision?.asset?.conceptId ?? null,
           textAsksAQuestion: /\?\s*$/.test(cleanText.trim()),
         }
         console.log(formatTurnDecisionLog(
@@ -11520,7 +11565,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           degraded: isDegraded(provider),
           excursionActive: excursionActiveHoisted,
           recoveryFired: recoveryKeyHoisted !== null,
-          visualServed: visualDecisionHoisted?.graphical === true,
+          // Typed Turn Contract Batch 5: reuses `resolvedVisualDecision`.
+          visualServed: resolvedVisualDecision?.graphical === true,
         }))
       } catch (err) {
         console.warn('[turn-event] line skipped:', err)

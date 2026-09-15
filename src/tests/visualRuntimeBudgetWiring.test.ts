@@ -38,7 +38,12 @@ describe('Per-session generation budget — wired end to end', () => {
   it('the count advances only when a provider call was actually spent', () => {
     // A cached figure, an approved figure and a declined turn cost nothing, so
     // they must not consume a bound whose whole purpose is to limit cost.
-    expect(ROUTE).toMatch(/generationSpent\s*\n?\s*\?\s*\{\s*visualGenerationCount:\s*visualGenerationCountHoisted \+ 1/)
+    // Typed Turn Contract Batch 5 (2026-09-15): `visualGenerationCountHoisted`
+    // is single-epoch CONTRACT-classified and is now read here via
+    // `resolvedVisualGenerationCountBefore`, the same value. Old assertion
+    // (kept verbatim, no longer matches source):
+    //   expect(ROUTE).toMatch(/generationSpent\s*\n?\s*\?\s*\{\s*visualGenerationCount:\s*visualGenerationCountHoisted \+ 1/)
+    expect(ROUTE).toMatch(/generationSpent\s*\n?\s*\?\s*\{\s*visualGenerationCount:\s*resolvedVisualGenerationCountBefore \+ 1/)
   })
 
   it('a corrupt or negative stored count cannot buy an unbounded budget', () => {

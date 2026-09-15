@@ -156,7 +156,11 @@ describe('C — "can you show me a diagram" answered with no diagram', () => {
   it('the held-session bookkeeping is NOT touched — only the client payload', () => {
     // figureIntroducedThisTurn still derives from the session's own turn count;
     // re-attaching must not redefine what "introduced" means.
-    expect(ROUTE).toMatch(/const figureIntroducedThisTurn =\s*\n\s*visualDecisionHoisted\?\.session \? visualDecisionHoisted\.session\.turns === 0 : true/)
+    // Typed Turn Contract Batch 5 (2026-09-15): `visualDecisionHoisted` is
+    // now read here via `resolvedVisualDecision`, the same value. Old
+    // assertion (kept verbatim, no longer matches source):
+    //   expect(ROUTE).toMatch(/const figureIntroducedThisTurn =\s*\n\s*visualDecisionHoisted\?\.session \? visualDecisionHoisted\.session\.turns === 0 : true/)
+    expect(ROUTE).toMatch(/const figureIntroducedThisTurn =\s*\n\s*resolvedVisualDecision\?\.session \? resolvedVisualDecision\.session\.turns === 0 : true/)
   })
 
   it('NO NEW PROVIDER CALL — the figure is re-derived, never regenerated', () => {

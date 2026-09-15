@@ -112,7 +112,12 @@ describe('a held figure is still a figure', () => {
     const route = fs.readFileSync('src/app/api/learn/chat/route.ts', 'utf-8')
     // The call site passes a computed on-screen flag, never the bare fired flag.
     expect(route).toMatch(/stripUnbackedFigureReferences\(cleanText,\s*figureOnScreen\)/)
-    expect(route).toMatch(/visualFired \|\| \(visualDecisionHoisted\?\.session\?\.turns \?\? 0\) > 0/)
+    // Typed Turn Contract Batch 5 (2026-09-15, design doc §6 "figure cluster"):
+    // `visualDecisionHoisted` is single-epoch CONTRACT-classified and is now
+    // read here via `resolvedVisualDecision`, the same value. Old assertion
+    // (kept verbatim, no longer matches source):
+    //   expect(route).toMatch(/visualFired \|\| \(visualDecisionHoisted\?\.session\?\.turns \?\? 0\) > 0/)
+    expect(route).toMatch(/visualFired \|\| \(resolvedVisualDecision\?\.session\?\.turns \?\? 0\) > 0/)
   })
 })
 

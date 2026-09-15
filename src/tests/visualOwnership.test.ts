@@ -132,8 +132,15 @@ describe('the resolver is the only runtime visual authority (M1)', () => {
     // The clamp used to be `if (visualDecisionHoisted)`, so a turn on which the
     // resolver never ran kept whatever the legacy pipelines had produced.
     expect(CODE).not.toMatch(/if \(visualDecisionHoisted\) \{/)
+    // Typed Turn Contract Batch 5 (2026-09-15): `visualDecisionHoisted` is
+    // single-epoch CONTRACT-classified and is now read here via
+    // `resolvedVisualDecision`, the same value. Old assertion (kept verbatim,
+    // no longer matches source):
+    //   expect(CODE).toMatch(
+    //     /const decision = visualDecisionHoisted\s*\n\s*const llmTag[^\n]*\n\s*responseVisual = null\s*\n\s*detectedVisualSpec = null\s*\n\s*detectedSceneSpec = null\s*\n\s*dynamicVisualizationCode = null/,
+    //   )
     expect(CODE).toMatch(
-      /const decision = visualDecisionHoisted\s*\n\s*const llmTag[^\n]*\n\s*responseVisual = null\s*\n\s*detectedVisualSpec = null\s*\n\s*detectedSceneSpec = null\s*\n\s*dynamicVisualizationCode = null/,
+      /const decision = resolvedVisualDecision\s*\n\s*const llmTag[^\n]*\n\s*responseVisual = null\s*\n\s*detectedVisualSpec = null\s*\n\s*detectedSceneSpec = null\s*\n\s*dynamicVisualizationCode = null/,
     )
   })
 
