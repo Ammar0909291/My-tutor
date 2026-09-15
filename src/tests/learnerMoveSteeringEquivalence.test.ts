@@ -201,7 +201,7 @@ describe('the route wires Batch 5 correctly — source pins', () => {
     expect(block).not.toMatch(/else if \(detectNavigationRequest\(message\)/)
   })
 
-  it('exactly one UNCONDITIONAL readLearnerMove( call, plus one defensive fallback — never two real computations', () => {
+  it('exactly 3 readLearnerMove( call-expressions post Batch 6 — one genuinely unconditional (the earliest, before arbitrateTurn), two defensive fallbacks that never actually recompute', () => {
     // Comments cite `readLearnerMove(` by name (that is the point of the
     // comments); the constraint is about CODE. Same discipline
     // learnerMovePurity.test.ts uses for learnerMove.ts's own source.
@@ -210,23 +210,74 @@ describe('the route wires Batch 5 correctly — source pins', () => {
       .split('\n')
       .map((l) => l.replace(/\/\/.*$/, ''))
       .join('\n')
-    // 2 real occurrences post Batch 5, correctly: the early, unconditional
-    // computation (~L3220), and Batch 1's own site's DEFENSIVE fallback
-    // (`learnerMoveStageAHoisted ?? readLearnerMove(...)`) — which only
-    // executes if the early site somehow did not run this turn, proven
-    // equal to the early result when it does (see the assignment site's
-    // own comment). Never three: that would mean a genuine third,
-    // unrelated recomputation crept in.
-    expect(code.split('readLearnerMove(').length - 1).toBe(2)
-    expect(code).toMatch(/learnerMoveStageAHoisted = readLearnerMove\(/)
-    expect(code).toMatch(/learnerMoveStageAHoisted \?\? readLearnerMove\(/)
+    // SUPERSEDED BY BATCH 6 (design doc §8 row 6): Batch 6 needs the reading
+    // even earlier than this batch's own AUTONOMY/NAVIGATION site (before
+    // `arbitrateTurn(`, for the RECOVERY rung), so it hoists a NEW earliest
+    // computation there and converts THIS site's own previously-unconditional
+    // assignment into a third `?? readLearnerMove(...)` fallback — never
+    // executing in practice (proven equal when it would, by construction:
+    // identical pure inputs), but present in source text, so the count
+    // legitimately grew from 2 to 3 rather than staying flat. Original
+    // assertion, preserved for history:
+    //
+    //   // 2 real occurrences post Batch 5, correctly: the early,
+    //   // unconditional computation (~L3220), and Batch 1's own site's
+    //   // DEFENSIVE fallback (`learnerMoveStageAHoisted ??
+    //   // readLearnerMove(...)`) — which only executes if the early site
+    //   // somehow did not run this turn, proven equal to the early result
+    //   // when it does (see the assignment site's own comment). Never
+    //   // three: that would mean a genuine third, unrelated recomputation
+    //   // crept in.
+    //   expect(code.split('readLearnerMove(').length - 1).toBe(2)
+    //   expect(code).toMatch(/learnerMoveStageAHoisted = readLearnerMove\(/)
+    //   expect(code).toMatch(/learnerMoveStageAHoisted \?\? readLearnerMove\(/)
+    //
+    // learnerMoveRecoveryEquivalence.test.ts is the authoritative pin for
+    // the Batch 6 hoist site itself; this test keeps pinning THIS batch's
+    // own site (now also a fallback, never unconditional any more).
+    expect(code.split('readLearnerMove(').length - 1).toBe(3)
+    expect(code).not.toMatch(/learnerMoveStageAHoisted = readLearnerMove\(/)
+    expect(code).toMatch(/learnerMoveStageAHoisted = learnerMoveStageAHoisted \?\? readLearnerMove\(/)
   })
 
-  it('the hoisted stage-A value is assigned exactly once, before the AUTONOMY/NAVIGATION check', () => {
-    expect(ROUTE.split('learnerMoveStageAHoisted =').length - 1).toBe(1)
-    const assignAt = ROUTE.indexOf('learnerMoveStageAHoisted =')
-    const useAt = ROUTE.indexOf("learnerMoveStageAHoisted.has('AUTONOMY')")
-    expect(assignAt).toBeLessThan(useAt)
+  it('the hoisted stage-A value is set before the AUTONOMY/NAVIGATION check — SUPERSEDED BY BATCH 6', () => {
+    // Batch 6 (design doc §8 row 6) hoists stage A even EARLIER than this
+    // batch's own site (before `arbitrateTurn(`, for the RECOVERY rung), and
+    // converts THIS batch's own previously-unconditional assignment into a
+    // second `?? readLearnerMove(...)` reassignment (a no-op once the
+    // earlier one has run — reassigning `learnerMoveStageAHoisted` to
+    // itself). So there are genuinely 2 CODE assignment sites now, not 1 —
+    // both provably before the AUTONOMY check, in the same relative order.
+    // Original assertion, preserved for history:
+    //
+    //   expect(ROUTE.split('learnerMoveStageAHoisted =').length - 1).toBe(1)
+    //   const assignAt = ROUTE.indexOf('learnerMoveStageAHoisted =')
+    //   const useAt = ROUTE.indexOf("learnerMoveStageAHoisted.has('AUTONOMY')")
+    //   expect(assignAt).toBeLessThan(useAt)
+    //
+    // Comment-stripped (Batch 6's own commit message preserves the original
+    // unconditional assignment as PROSE inside a comment, which a raw
+    // `ROUTE.split` would also — wrongly — count).
+    const code = ROUTE
+      .replace(/\/\*[\s\S]*?\*\//g, '')
+      .split('\n')
+      .map((l) => l.replace(/\/\/.*$/, ''))
+      .join('\n')
+    expect(code.split('learnerMoveStageAHoisted =').length - 1).toBe(2)
+    const firstAssignAt = code.indexOf('learnerMoveStageAHoisted =')
+    const secondAssignAt = code.indexOf('learnerMoveStageAHoisted =', firstAssignAt + 1)
+    const useAt = code.indexOf("learnerMoveStageAHoisted.has('AUTONOMY')")
+    expect(firstAssignAt).toBeGreaterThan(-1)
+    expect(secondAssignAt).toBeGreaterThan(firstAssignAt)
+    expect(secondAssignAt).toBeLessThan(useAt)
+  })
+
+  it('the FIRST (Batch 6) assignment site is genuinely before arbitrateTurn(', () => {
+    const arbitrateAt = ROUTE.indexOf('turnArbitrationHoisted = arbitrateTurn({')
+    const firstAssignAt = ROUTE.indexOf('learnerMoveStageAHoisted = learnerMoveStageAHoisted ?? readLearnerMove(')
+    expect(arbitrateAt).toBeGreaterThan(-1)
+    expect(firstAssignAt).toBeGreaterThan(-1)
+    expect(firstAssignAt).toBeLessThan(arbitrateAt)
   })
 
   it('Batch 1\'s own stage-A site reuses the hoisted value with a defensive fallback, not a bare recompute', () => {

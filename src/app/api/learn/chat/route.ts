@@ -2924,10 +2924,41 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // probe from a PRIOR turn is genuinely pending — that case is
             // already, and more specifically, governed by
             // `noUnansweredProbeOnScreen`.
-            const { detectLearnerQuestion } = await import('@/lib/teaching/conversationState')
+            const { detectLearnerQuestion, isLowSignalAcknowledgement } = await import('@/lib/teaching/conversationState')
+            // Learner-Move Interpreter, Batch 6 (design doc §8 row 6, RECOVERY
+            // rung ONLY — LEARNER_REQUEST is explicitly deferred to a future
+            // commit per the doc's own "one rung per commit" instruction).
+            // This is now the EARLIEST point in the turn that needs the
+            // reading — earlier than Batch 5's own AUTONOMY/NAVIGATION site
+            // (~L3227) — so stage A is hoisted here instead, and that later
+            // site (and Batch 1's own shadow site, ~L7160+) reuse it via the
+            // same `?? readLearnerMove(...)` fallback Batch 5 already
+            // established, never recomputing. Its two inputs are both
+            // already available: `isBareAckHoisted` is set at ~L2530 (well
+            // above this block), `isLowSignalAcknowledgement` is pure and
+            // message-only.
+            //
+            // DISTRESS fires iff `intent.failureState !== null`
+            // (learnerMove.ts ~L243) — `intent` here is the SAME `turnIntent`
+            // object `recoveryKeyHoisted = turnIntent.failureState` (~L2252)
+            // already read. So `learnerMoveStageAHoisted.has('DISTRESS')` and
+            // `recoveryKeyHoisted !== null` are the identical boolean by
+            // construction, not by corpus — both are the same field on the
+            // same object. This does NOT close design doc §4.4's gap
+            // (`detectFailureState` vs `classifyConversation`'s wider
+            // CONFUSION match) — DISTRESS is fed by the same
+            // `detectFailureState` call `recoveryKeyHoisted` already was, so
+            // whatever §4.4 misses, this still misses too. Widening that
+            // detector is explicitly out of scope this batch (design doc
+            // §8 row 6, "fixed separately").
+            const { readLearnerMove } = await import('@/lib/teaching/learnerMove')
+            learnerMoveStageAHoisted = learnerMoveStageAHoisted ?? readLearnerMove(turnIntent, {
+              isBareAcknowledgement: isBareAckHoisted,
+              isLowSignalAcknowledgement: isLowSignalAcknowledgement(message),
+            })
             turnArbitrationHoisted = arbitrateTurn({
               knowledgeGapResolved: knowledgeGapHoisted !== null,
-              recoveryActive: recoveryKeyHoisted !== null,
+              recoveryActive: learnerMoveStageAHoisted.has('DISTRESS'),
               // turnIntent is the ONE authoritative read of the message
               // (Phase 1). `ambiguous` is the stop-carrying-a-question case
               // Series A Phase 4 already defers the close for; including it
@@ -3204,17 +3235,27 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // Learner-Move Interpreter, Batch 5 (design doc §8 row 5): stage
           // A's only inputs are `turnIntent` (read once, ~L377) and
           // `isBareAcknowledgement`/`isLowSignalAcknowledgement` (pure,
-          // message-only). `isBareAckHoisted` is already set (~L2521);
-          // `isLowSignalAcknowledgement` isn't hoisted to a local until
-          // ~L3670, so it's called fresh here — the SAME pure function
-          // (already imported into this scope, above) on the SAME
-          // unchanged `message`, guaranteed equal to the value later
-          // assigned to `lowSignalAckHoisted` (learnerMoveSteeringEquivalence
-          // test file, and Batch 1's own precedent for `namedTopicUnknownTo`:
-          // a second call to a pure function is not drift). Reused, not
-          // recomputed, at Batch 1's own stage-A site (~L7141+, below).
+          // message-only). Reused, not recomputed, at Batch 1's own stage-A
+          // site (~L7141+, below).
+          //
+          // SUPERSEDED BY BATCH 6 (design doc §8 row 6): this site is no
+          // longer the EARLIEST consumer — `arbitrateTurn`'s RECOVERY rung
+          // (~L2954, well above this block) now needs the reading first, so
+          // stage A is computed there instead and this site reuses it via
+          // the same `?? readLearnerMove(...)` fallback Batch 1's own site
+          // already established, never recomputing. The fallback is purely
+          // defensive (identical pure inputs, so a genuine second computation
+          // here would equal the first) — kept in case a future edit ever
+          // separates these two sites' reachability. Original assignment,
+          // preserved for history:
+          //
+          //   const { readLearnerMove } = await import('@/lib/teaching/learnerMove')
+          //   learnerMoveStageAHoisted = readLearnerMove(turnIntent, {
+          //     isBareAcknowledgement: isBareAckHoisted,
+          //     isLowSignalAcknowledgement: isLowSignalAcknowledgement(message),
+          //   })
           const { readLearnerMove } = await import('@/lib/teaching/learnerMove')
-          learnerMoveStageAHoisted = readLearnerMove(turnIntent, {
+          learnerMoveStageAHoisted = learnerMoveStageAHoisted ?? readLearnerMove(turnIntent, {
             isBareAcknowledgement: isBareAckHoisted,
             isLowSignalAcknowledgement: isLowSignalAcknowledgement(message),
           })

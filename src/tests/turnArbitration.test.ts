@@ -300,13 +300,32 @@ describe('4. ownership is preserved — the arbiter decides WHO, never WHAT', ()
     // Every claim is a value some other owner produced — never a fresh call.
     const call = src.slice(src.indexOf('turnArbitrationHoisted = arbitrateTurn({'))
       .slice(0, 900)
-    expect(call).toContain('recoveryActive: recoveryKeyHoisted !== null')
+    // SUPERSEDED BY BATCH 6 (Learner-Move Interpreter design doc §8 row 6,
+    // RECOVERY rung): `recoveryActive` now reads
+    // `learnerMoveStageAHoisted.has('DISTRESS')` instead of the raw
+    // `recoveryKeyHoisted !== null` null-check — still a value an EXISTING
+    // owner produced (`readLearnerMove`'s DISTRESS signal is itself sourced
+    // from `intent.failureState`, the identical field `recoveryKeyHoisted`
+    // already was — learnerMoveRecoveryEquivalence.test.ts proves the two
+    // booleans never disagree), never a fresh detector call — so this test's
+    // own invariant ("every claim is a value some other owner produced")
+    // still holds, just through one more layer of composition.
+    // `learnerRequestActive` is UNCHANGED this batch (design doc's own
+    // "one rung per commit" — LEARNER_REQUEST is a compound condition with
+    // no reading-equivalent for `turnIntent.ambiguous`, deferred to its own
+    // future batch). Original assertion, preserved:
+    //
+    //   expect(call).toContain('recoveryActive: recoveryKeyHoisted !== null')
+    expect(call).toContain("recoveryActive: learnerMoveStageAHoisted.has('DISTRESS')")
     expect(call).toContain('turnIntent.learnerRequest')
     expect(call).toContain("sessionEpisodeHoisted.phase === 'CLOSING'")
     expect(call).toContain('completionReady: lessonCompletedHoisted')
     // No detector is invoked while building the claims.
     expect(call).not.toContain('detectFailureState(')
     expect(call).not.toContain('detectLearnerRequest(')
+    // And the OLD raw null-check is genuinely gone from this specific call
+    // — not merely coexisting alongside the new one.
+    expect(call).not.toContain('recoveryActive: recoveryKeyHoisted !== null')
   })
 
   it('the verdict is computed exactly ONCE — a second call site would be a second authority', () => {
@@ -606,7 +625,17 @@ describe('7. LEARNER_QUESTION — a genuine question denies a NEW authored probe
     // The call site imports the EXISTING detector rather than inventing one —
     // the same function `buildTurnDirective`'s A.4 "STUDENT QUESTION
     // DETECTED" line already relies on for the identical concern.
-    const near = src.slice(Math.max(0, at - 1500), at)
+    //
+    // SUPERSEDED BY BATCH 6 (Learner-Move Interpreter design doc §8 row 6):
+    // that import statement now also destructures `isLowSignalAcknowledgement`
+    // (reused for the new RECOVERY-rung hoist, same import call, no second
+    // import of the same module), and Batch 6's own hoist block sits between
+    // the import and this call site — pushing the distance from ~1500 chars
+    // to ~2900. Widened rather than re-anchored: it is still the SAME single
+    // import statement, just further back. Original assertion, preserved:
+    //
+    //   const near = src.slice(Math.max(0, at - 1500), at)
+    const near = src.slice(Math.max(0, at - 3200), at)
     expect(near).toContain("await import('@/lib/teaching/conversationState')")
     expect(near).toContain('detectLearnerQuestion')
     // No fresh regex is authored at the call site itself.
