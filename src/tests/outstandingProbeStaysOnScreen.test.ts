@@ -39,11 +39,16 @@ const OTHER = { question: 'A new one', options: ['c', 'd'], correctIndex: 1 }
 
 describe('the response carries whatever the server believes is on screen', () => {
   it('echoes a pending, ungraded probe — the deadlock case (question preserved, key stripped)', () => {
-    expect(responseMcq(null, PROBE, null)).toEqual({ question: PROBE.question, options: PROBE.options })
+    // I2 (render receipt), Batch 1 (2026-09-16): the projection now also
+    // carries `renderId` (non-secret content hash). Asserted via
+    // `toMatchObject` — question/options unchanged is still the subject
+    // this test protects — rather than an exact-shape `toEqual`, which
+    // would break on any future additive, non-secret field the same way.
+    expect(responseMcq(null, PROBE, null)).toMatchObject({ question: PROBE.question, options: PROBE.options })
   })
 
   it('a freshly attached probe still wins over the pending one', () => {
-    expect(responseMcq(OTHER, PROBE, null)).toEqual({ question: OTHER.question, options: OTHER.options })
+    expect(responseMcq(OTHER, PROBE, null)).toMatchObject({ question: OTHER.question, options: OTHER.options })
   })
 
   it('a probe graded THIS turn is not echoed — it is answered, not outstanding', () => {

@@ -22,6 +22,8 @@
  * library treats as a distractor-quality failure.
  */
 
+import { createHash } from 'node:crypto'
+
 export interface TutorMCQ {
   question: string
   /** 2-4 options, in presentation order. */
@@ -50,6 +52,27 @@ export interface TutorMCQ {
    * grade identically.
    */
   assetId?: string
+}
+
+/**
+ * Typed Turn Contract, I2 (render receipt) — Batch 1, shadow-only.
+ *
+ * A DETERMINISTIC content hash, not a random token: two independent
+ * computations of the same served question (`resolvedQuestionServed` and
+ * `resolvedQuestionServedFinal` in route.ts are separate objects, not the
+ * same reference) must derive the identical id without any handoff between
+ * them, and the SAME question carried forward across a turn boundary — read
+ * back from `pendingMcq` next turn — must derive the identical id again with
+ * no new stored field. A random id per serve cannot satisfy either
+ * constraint; a pure hash of the question's own content does, for free.
+ *
+ * Never a secret: it never encodes `correctIndex`, so handing it to the
+ * client (see `mcqForClient`) leaks nothing a learner could use to guess the
+ * answer. It is a receipt of WHICH question was shown, not of the key.
+ */
+export function deriveRenderId(mcq: TutorMCQ): string {
+  const basis = `${mcq.assetId ?? ''}::${mcq.question}::${JSON.stringify(mcq.options)}`
+  return createHash('sha256').update(basis).digest('hex').slice(0, 16)
 }
 
 const MCQ_RE = /<!--\s*MCQ\s+([\s\S]*?)(?:-->|\/>)/i
@@ -1574,7 +1597,12 @@ export const MCQ_REOFFER_DISAMBIGUATION =
  */
 export function mcqForClient(
   mcq: TutorMCQ | null | undefined,
-): { question: string; options: string[] } | null {
+): { question: string; options: string[]; renderId: string } | null {
   if (!mcq) return null
-  return { question: mcq.question, options: mcq.options }
+  // I2 render receipt (shadow-only, Batch 1): a non-secret content hash the
+  // client echoes back next turn as `renderedMcqId` so the server can tell a
+  // genuinely-rendered answer from a grade against a question the client
+  // never displayed. See `deriveRenderId`'s own header for why it is a hash,
+  // not a random token.
+  return { question: mcq.question, options: mcq.options, renderId: deriveRenderId(mcq) }
 }

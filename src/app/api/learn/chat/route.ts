@@ -114,6 +114,13 @@ const schema = z.object({
   // under a learner who is actively using it. It names no session, grants no
   // access, and is ignored entirely when absent.
   tabId: z.string().min(1).max(64).optional(),
+  // Typed Turn Contract, I2 (render receipt) — Batch 1, SHADOW ONLY. The
+  // client's claim of which question (by content hash, see
+  // `deriveRenderId`) it actually rendered before sending this turn — null
+  // when nothing was on screen, absent for an unupgraded/non-browser
+  // caller. Read ONLY by `checkRenderReceipt` for a log line; nothing here
+  // affects grading yet. See `src/lib/teaching/renderReceipt.ts`.
+  renderedMcqId: z.string().max(200).nullable().optional(),
 })
 
 /**
@@ -207,7 +214,7 @@ async function handleChatTurn(req: Request, deadline: RouteDeadline): Promise<Re
 
   try {
     const body = await req.json()
-    const { sessionId, message, lastExplanationRead, voiceSignal, ephemeral, tabId } = schema.parse(body)
+    const { sessionId, message, lastExplanationRead, voiceSignal, ephemeral, tabId, renderedMcqId } = schema.parse(body)
 
     // Wave 0 Step 2 (Evidence Architecture §2, ASSESSMENT contract):
     // learner response latency is measured server-side from message
@@ -2479,6 +2486,21 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // "did the learner just answer a question?" is needed BEFORE the
         // Explanation Memory serve decision, hundreds of lines earlier than
         // where the grade is folded into evidence.
+        // Typed Turn Contract, I2 (render receipt) — Batch 1, SHADOW ONLY.
+        // Logged once per turn with a pending probe, BEFORE grading runs, so
+        // the observation is independent of whatever `gradeMcqAnswer` decides.
+        // Nothing here reads the result — see `renderReceipt.ts`'s own header
+        // for why enforcement is deliberately not wired yet.
+        if (pendingMcqHoisted) {
+          const { checkRenderReceipt } = await import('@/lib/teaching/renderReceipt')
+          const receipt = checkRenderReceipt(pendingMcqHoisted, renderedMcqId)
+          if (!receipt.consistent) {
+            console.log('[learn/chat] RENDER_RECEIPT_EVENT=' + JSON.stringify({
+              reason: receipt.reason,
+              assetId: pendingMcqHoisted.assetId ?? null,
+            }))
+          }
+        }
         if (pendingMcqHoisted) {
           const { gradeMcqAnswer, isVerbatimPendingOption } = await import('@/lib/teaching/mcq')
           const { isBareAcknowledgement } = await import('@/lib/teaching/masteryGate')

@@ -25,8 +25,19 @@ const PROBE: TutorMCQ = { question: 'Which is velocity?', options: ['Speed', 'Di
 
 describe('mcqForClient strips the answer key and keeps only what renders', () => {
   it('drops correctIndex AND assetId, keeps question + options verbatim', () => {
+    // Typed Turn Contract, I2 (render receipt), Batch 1 (2026-09-16): the
+    // projection now ALSO carries `renderId` — a deterministic, non-secret
+    // content hash (never encodes correctIndex) the client echoes back next
+    // turn so the server can tell a genuinely-rendered answer from a grade
+    // against a question never shown. This test's own subject — the answer
+    // KEY must not leak — is unaffected; asserted directly below rather than
+    // via a `toEqual` on the whole object, which would break on any future
+    // additive, non-secret field the same way this one did.
     const c = mcqForClient(PROBE)!
-    expect(c).toEqual({ question: 'Which is velocity?', options: ['Speed', 'Displacement ÷ time'] })
+    expect(c.question).toBe('Which is velocity?')
+    expect(c.options).toEqual(['Speed', 'Displacement ÷ time'])
+    expect(typeof c.renderId).toBe('string')
+    expect(c.renderId.length).toBeGreaterThan(0)
     expect('correctIndex' in c).toBe(false)
     expect('assetId' in c).toBe(false)
   })

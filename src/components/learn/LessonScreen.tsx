@@ -1206,6 +1206,12 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     question: string
     options: string[]
     askedAt: number
+    // Typed Turn Contract, I2 (render receipt) — Batch 1, SHADOW ONLY. The
+    // server's non-secret content hash for THIS question, echoed back as
+    // `renderedMcqId` on the next send so the server can observe (not yet
+    // enforce) whether a grade corresponds to a question actually shown.
+    // Absent only for an older/unaffected response shape.
+    renderId: string | null
   } | null>(null)
   // QUICK CHECK WINDOW (UI ONLY). Minimize / maximize / close are a PURELY
   // VISUAL presentation mode for the Quick Check panel. They never touch
@@ -2054,7 +2060,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     const aid = `a-${Date.now()}`
     setMessages((p) => [...p, { id: aid, role: 'assistant', content: '', ts: Date.now(), streaming: true }])
     let res: Response | undefined
-    let data: { success?: boolean; text?: string; provider?: 'yandex'|'groq'|'fallback'; llmCallCount?: number; visual?: string; visualSpec?: unknown; sceneSpec?: unknown; learnerLevel?: string; dynamicVisualizationCode?: unknown; inlinePractice?: unknown; hint?: unknown; error?: any; lessonOrder?: number; completedLessons?: number[]; mastery?: { verified?: boolean; gatePending?: boolean; completionSuppressed?: boolean; phase?: string; checkCorrect?: number; practiceCorrect?: number }; mcq?: { question?: string; options?: string[] }; lessonComplete?: { complete?: boolean; lessonTitle?: string | null; durationSeconds?: number | null; mastered?: string[]; needsReview?: string[]; nextLessonOrder?: number | null; fullyMastered?: boolean } } = {}
+    let data: { success?: boolean; text?: string; provider?: 'yandex'|'groq'|'fallback'; llmCallCount?: number; visual?: string; visualSpec?: unknown; sceneSpec?: unknown; learnerLevel?: string; dynamicVisualizationCode?: unknown; inlinePractice?: unknown; hint?: unknown; error?: any; lessonOrder?: number; completedLessons?: number[]; mastery?: { verified?: boolean; gatePending?: boolean; completionSuppressed?: boolean; phase?: string; checkCorrect?: number; practiceCorrect?: number }; mcq?: { question?: string; options?: string[]; renderId?: string }; lessonComplete?: { complete?: boolean; lessonTitle?: string | null; durationSeconds?: number | null; mastered?: string[]; needsReview?: string[]; nextLessonOrder?: number | null; fullyMastered?: boolean } } = {}
     try {
       // P0 (duplicate AI responses — proven root cause): retry ONLY a thrown/
       // aborted fetch (a dropped connection, or fetchWithTimeout's own abort
@@ -2089,6 +2095,12 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
               // long collapsed explanation was ever expanded — unread text
               // must never be assumed read. undefined = nothing collapsed.
               lastExplanationRead: lastExplanationReadRef.current,
+              // Typed Turn Contract, I2 (render receipt) — Batch 1, SHADOW
+              // ONLY. What THIS component actually has on screen right now —
+              // null when nothing is pending. The server only logs whether
+              // this agrees with what it believes is pending; nothing here
+              // affects grading yet. See renderReceipt.ts's own header.
+              renderedMcqId: activeMcq?.renderId ?? null,
             }),
             // SEV-1 (2026-08-02). This was 30_000, BELOW the server's own
             // worst-case turn. When Gemini timed out, the server was still
@@ -2166,6 +2178,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
           question: rawMcq.question,
           options: rawMcq.options as string[],
           askedAt: Date.now(),
+          renderId: typeof rawMcq.renderId === 'string' ? rawMcq.renderId : null,
         })
       } else {
         setActiveMcq(null)
