@@ -47,8 +47,27 @@ function turn(message: string): { reading: LearnerMoveReading; decisionType: Con
   return { reading, decisionType: decision.type }
 }
 
-describe('§4.4, reproduced: 9 non-standard-English confusion phrasings the reading misses', () => {
-  const NON_STANDARD = [
+describe('§4.4: 8 of the original 9 non-standard-English phrasings — GAP CLOSED, reading now agrees', () => {
+  // SUPERSEDED — design doc §4.4 fix (recoveryGuardDontUnderstandGap.test.ts):
+  // recoveryGuard.ts's `dont_understand` patterns were widened to match
+  // conversationDecision.ts's own CONFUSION_RE (the fix this describe block's
+  // ORIGINAL title said was deferred — "does not fix the live cross-module
+  // finding"). 8 of the original 9 phrasings are fixed by the 3 widened
+  // patterns; the 9th ("i am very weak in this") belongs to a DIFFERENT
+  // CONFUSION_RE fragment (self-reported weakness) deliberately out of scope
+  // for that fix, and remains its own genuine, reported gap — see the second
+  // describe block below. Original assertion shape, preserved for history:
+  //
+  //   for (const message of NON_STANDARD) {  // all 9, including "i am very weak in this"
+  //     it(`"${message}" — detectFailureState misses it, classifyConversation catches it: flagged`, () => {
+  //       const { reading, decisionType } = turn(message)
+  //       expect(reading.has('DISTRESS')).toBe(false)
+  //       expect(decisionType).toBe('CONFUSION')
+  //       expect(detectLearnerMoveAgreementViolation({ reading, conversationDecisionType: decisionType }))
+  //         .toBe('confusion_without_distress')
+  //     })
+  //   }
+  const NOW_AGREE = [
     'sir i not understand this',
     'i not understand',
     'i cannot understand',
@@ -57,19 +76,14 @@ describe('§4.4, reproduced: 9 non-standard-English confusion phrasings the read
     'i am not getting it',
     "i'm not getting it",
     'not able to understand',
-    'i am very weak in this',
   ]
 
-  for (const message of NON_STANDARD) {
-    it(`"${message}" — detectFailureState misses it, classifyConversation catches it: flagged`, () => {
+  for (const message of NOW_AGREE) {
+    it(`"${message}" — both layers now agree (RECOVERY), no violation`, () => {
       const { reading, decisionType } = turn(message)
-      // Confirms the gap is STILL live (this batch does not fix it — §9,
-      // "does not fix the live cross-module finding"): the reading really
-      // does miss it, and classifyConversation really does catch it.
-      expect(reading.has('DISTRESS')).toBe(false)
-      expect(decisionType).toBe('CONFUSION')
-      expect(detectLearnerMoveAgreementViolation({ reading, conversationDecisionType: decisionType }))
-        .toBe('confusion_without_distress')
+      expect(reading.has('DISTRESS')).toBe(true)
+      expect(decisionType).toBe('RECOVERY')
+      expect(detectLearnerMoveAgreementViolation({ reading, conversationDecisionType: decisionType })).toBeNull()
     })
   }
 
@@ -85,6 +99,21 @@ describe('§4.4, reproduced: 9 non-standard-English confusion phrasings the read
     expect(reading.has('DISTRESS')).toBe(true)
     expect(decisionType).toBe('RECOVERY')
     expect(detectLearnerMoveAgreementViolation({ reading, conversationDecisionType: decisionType })).toBeNull()
+  })
+})
+
+describe('§4.4: the 9th phrasing — a DIFFERENT, DELIBERATELY UNFIXED residual gap', () => {
+  it('"i am very weak in this" — detectFailureState still misses it, classifyConversation still catches it: still flagged', () => {
+    // CONFUSION_RE's "weak in this" fragment (conversationDecision.ts ~L57)
+    // is a separate family (self-reported weakness) from the three forms
+    // the §4.4 fix closed (bare negated understand / can't-cannot-couldn't
+    // understand / not getting it) — explicitly out of scope for that fix.
+    // The gap is real and reported, not silently patched.
+    const { reading, decisionType } = turn('i am very weak in this')
+    expect(reading.has('DISTRESS')).toBe(false)
+    expect(decisionType).toBe('CONFUSION')
+    expect(detectLearnerMoveAgreementViolation({ reading, conversationDecisionType: decisionType }))
+      .toBe('confusion_without_distress')
   })
 })
 
@@ -139,7 +168,17 @@ describe('no learner text and no signal detail reach the event', () => {
   const SECRET = 'my name is Ammar and my email is learner@example.com'
 
   it('a violation event never carries the message, even when the message caused it', () => {
-    const { reading, decisionType } = turn(`sir i not understand this, ${SECRET}`)
+    // SUPERSEDED — design doc §4.4 fix: "sir i not understand this" no
+    // longer produces a violation (the gap it exercised is closed — see
+    // recoveryGuardDontUnderstandGap.test.ts). Switched to "i am very weak
+    // in this", the one phrasing from the original 9 that remains a
+    // genuine, deliberately-unfixed gap (a different CONFUSION_RE family —
+    // self-reported weakness — out of scope for that fix), so this test
+    // still exercises a REAL violation rather than a null one. Original
+    // assertion, preserved for history:
+    //
+    //   const { reading, decisionType } = turn(`sir i not understand this, ${SECRET}`)
+    const { reading, decisionType } = turn(`i am very weak in this, ${SECRET}`)
     const violation = detectLearnerMoveAgreementViolation({ reading, conversationDecisionType: decisionType })
     expect(violation).toBe('confusion_without_distress')
     const event = buildLearnerMoveAgreementEvent({
@@ -152,7 +191,13 @@ describe('no learner text and no signal detail reach the event', () => {
   })
 
   it('the event carries no userId, email, message or detail field at all', () => {
-    const { reading, decisionType } = turn('sir i not understand this')
+    // SUPERSEDED — design doc §4.4 fix: "sir i not understand this" no
+    // longer produces a violation (fixed — see
+    // recoveryGuardDontUnderstandGap.test.ts); switched to "i am very weak
+    // in this", still a genuine violation, so `violation` below is a real
+    // non-null kind rather than a `null` forced through the `!` assertion.
+    // Original message, preserved for history: 'sir i not understand this'
+    const { reading, decisionType } = turn('i am very weak in this')
     const violation = detectLearnerMoveAgreementViolation({ reading, conversationDecisionType: decisionType })!
     const event = buildLearnerMoveAgreementEvent({
       reading, conversationDecisionType: decisionType, kind: violation,
@@ -182,7 +227,10 @@ describe('no learner text and no signal detail reach the event', () => {
 
 describe('recordLearnerMoveAgreementEvent never breaks the caller', () => {
   it('is callable and returns void', () => {
-    const { reading, decisionType } = turn('sir i not understand this')
+    // SUPERSEDED — design doc §4.4 fix, same reason as above: switched to a
+    // message that still produces a genuine violation. Original message,
+    // preserved for history: 'sir i not understand this'
+    const { reading, decisionType } = turn('i am very weak in this')
     const violation = detectLearnerMoveAgreementViolation({ reading, conversationDecisionType: decisionType })!
     const event = buildLearnerMoveAgreementEvent({
       reading, conversationDecisionType: decisionType, kind: violation,

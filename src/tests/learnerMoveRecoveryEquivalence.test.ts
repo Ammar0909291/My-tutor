@@ -74,10 +74,20 @@ const NON_FIRING_MILD = [
   "I'm confused about why the author of this very long historical passage decided to introduce the treaty before the war ended, can we go through the timeline",
 ]
 
-// ── The §4.4 gap phrasings, verbatim from the design doc's own 9/9 table —
-// negative controls: BOTH sides must agree they do NOT fire, proving this
-// batch changes nothing about the pre-existing, deliberately-unfixed gap. ──
-const GAP_PHRASINGS_4_4 = [
+// ── SUPERSEDED — design doc §4.4 fix (recoveryGuardDontUnderstandGap.test.ts):
+// recoveryGuard.ts's `dont_understand` patterns were widened to match
+// conversationDecision.ts's own CONFUSION_RE, closing 8 of these 9 phrasings.
+// Split below into the 8 now-fixed (both sides now agree: FIRE) and the 1
+// genuine, deliberately-unfixed residual ("i am very weak in this" — a
+// DIFFERENT CONFUSION_RE family, self-reported weakness, out of scope for
+// that fix). Original array, preserved for history:
+//
+//   const GAP_PHRASINGS_4_4 = [
+//     'sir i not understand this', 'i not understand', 'i cannot understand',
+//     'i can not understand', "i couldn't understand", 'i am not getting it',
+//     "i'm not getting it", 'not able to understand', 'i am very weak in this',
+//   ]
+const GAP_PHRASINGS_4_4_NOW_FIXED = [
   'sir i not understand this',
   'i not understand',
   'i cannot understand',
@@ -86,6 +96,8 @@ const GAP_PHRASINGS_4_4 = [
   'i am not getting it',
   "i'm not getting it",
   'not able to understand',
+]
+const GAP_PHRASINGS_4_4_STILL_OPEN = [
   'i am very weak in this',
 ]
 
@@ -122,10 +134,16 @@ describe('RECOVERY equivalence: recoveryKeyHoisted !== null === reading.has(\'DI
     expect(recoveryKey).toBe(false) // sanity: this corpus really does not fire
   })
 
-  it.each(GAP_PHRASINGS_4_4)('§4.4 GAP (negative control — both sides agree: NO fire): %s', (msg) => {
+  it.each(GAP_PHRASINGS_4_4_NOW_FIXED)('§4.4 GAP CLOSED (both sides now agree: FIRE): %s', (msg) => {
     const { recoveryKey, reading } = distressFires(msg)
     expect(reading).toBe(recoveryKey)
-    expect(recoveryKey).toBe(false) // the gap itself — unchanged by this batch
+    expect(recoveryKey).toBe(true) // fixed — see recoveryGuardDontUnderstandGap.test.ts
+  })
+
+  it.each(GAP_PHRASINGS_4_4_STILL_OPEN)('§4.4 residual gap, DELIBERATELY UNFIXED (both sides agree: NO fire): %s', (msg) => {
+    const { recoveryKey, reading } = distressFires(msg)
+    expect(reading).toBe(recoveryKey)
+    expect(recoveryKey).toBe(false) // "weak in this" — a different, out-of-scope family
   })
 
   it.each(GAP_TABLE_CONTROLS_FIRE)('§4.4 table control (DOES fire on both): %s', (msg) => {
@@ -141,7 +159,10 @@ describe('RECOVERY equivalence: recoveryKeyHoisted !== null === reading.has(\'DI
   })
 
   it('summary: 0 disagreements across the full combined corpus', () => {
-    const all = [...FIRING, ...NON_FIRING_MILD, ...GAP_PHRASINGS_4_4, ...GAP_TABLE_CONTROLS_FIRE, ...ORDINARY]
+    const all = [
+      ...FIRING, ...NON_FIRING_MILD, ...GAP_PHRASINGS_4_4_NOW_FIXED, ...GAP_PHRASINGS_4_4_STILL_OPEN,
+      ...GAP_TABLE_CONTROLS_FIRE, ...ORDINARY,
+    ]
     const disagreements = all.filter((msg) => {
       const { recoveryKey, reading } = distressFires(msg)
       return recoveryKey !== reading
@@ -228,13 +249,22 @@ describe('the route wires Batch 6 correctly — source pins', () => {
     expect(block).toMatch(/learnerMoveStageAHoisted = learnerMoveStageAHoisted \?\? readLearnerMove\(/)
   })
 
-  it('recoveryGuard.ts / detectFailureState is untouched by this batch — no diff marker, no widened pattern list added here', () => {
-    // Structural proxy: this batch's own commit never touches that file —
-    // verified by the commit diff itself, not re-derivable from route.ts.
-    // This test instead pins the NEGATIVE-CONTROL behaviour recorded above:
-    // the §4.4 gap phrasings still fail to fire detectFailureState, which
-    // would break the moment someone widens it without updating this file.
-    for (const msg of GAP_PHRASINGS_4_4) {
+  it('recoveryGuard.ts / detectFailureState — SUPERSEDED, now correctly widened by the §4.4 fix', () => {
+    // SUPERSEDED — design doc §4.4 fix (recoveryGuardDontUnderstandGap.test.ts):
+    // this test's ORIGINAL title/body pinned that Batch 6 left
+    // recoveryGuard.ts untouched — true for Batch 6, no longer true for the
+    // repo as a whole, since a later, separate fix deliberately widened it.
+    // Re-pinned to the NEW correct state: 8 of the 9 §4.4 phrasings now DO
+    // fire, and the 1 genuine residual ("i am very weak in this") still
+    // does not. Original assertion, preserved for history:
+    //
+    //   for (const msg of GAP_PHRASINGS_4_4) {  // all 9
+    //     expect(detectFailureState(msg)).toBeNull()
+    //   }
+    for (const msg of GAP_PHRASINGS_4_4_NOW_FIXED) {
+      expect(detectFailureState(msg)).toBe('dont_understand')
+    }
+    for (const msg of GAP_PHRASINGS_4_4_STILL_OPEN) {
       expect(detectFailureState(msg)).toBeNull()
     }
   })

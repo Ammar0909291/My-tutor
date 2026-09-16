@@ -211,7 +211,17 @@ describe('ROOT CAUSE A — the recovery detector is NOT duplicated', () => {
     // `isDontKnowSignal` takes the KEY, not the message — it is the membership
     // test over `detectFailureState`'s result, not a second reader of the text.
     expect(isDontKnowSignal(detectFailureState("i don't know"))).toBe(true)
-    expect(isDontKnowSignal(detectFailureState('sir i not understand this'))).toBe(false)
+    // SUPERSEDED — design doc §4.4 fix (recoveryGuardDontUnderstandGap.test.ts):
+    // "sir i not understand this" was H1's own named example of the gap
+    // THIS test's own header describes ("H1 adds no pattern to recoveryGuard")
+    // — that gap has since been closed IN recoveryGuard.ts, deliberately, by a
+    // separate fix. `detectFailureState` now correctly returns
+    // 'dont_understand' for it, so `isDontKnowSignal` is now true. Original
+    // assertion, preserved for history:
+    //
+    //   expect(isDontKnowSignal(detectFailureState('sir i not understand this'))).toBe(false)
+    expect(detectFailureState('sir i not understand this')).toBe('dont_understand')
+    expect(isDontKnowSignal(detectFailureState('sir i not understand this'))).toBe(true)
   })
 
   it('KNOWN GAP, reported not patched: bare intensified difficulty stays invisible', () => {

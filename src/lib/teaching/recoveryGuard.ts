@@ -188,6 +188,22 @@ const MILD_PATTERNS: Array<[FailureStateKey, RegExp]> = [
   ['dont_understand', /\b(didn'?t|did\s+not)\s+(understand|get\s+(?:it|that|this|what|why|how)|follow)\b/i],
   ['dont_understand', /\bstill\s+(don'?t|do\s+not|didn'?t)\s+(understand|get\s+(?:it|that|this|what|why|how)|know\s+what\s+you|follow)\b/i],
   ['dont_understand', /\bnot\s+understanding\b/i],
+  // design doc §4.4 fix (LEARNER_MOVE_INTERPRETER_DESIGN.md): this file's
+  // own dont_understand patterns were never widened to match
+  // conversationDecision.ts's CONFUSION_RE after ITS header documented the
+  // exact gap — "recognised 'don't understand' but not 'i not understand',
+  // 'i cannot understand', 'i am not getting it'" — closing that same gap
+  // here, by the same discipline (extensions of alternatives already
+  // proven safe, nothing new in kind). The three regex literals below are
+  // REUSED VERBATIM from CONFUSION_RE (conversationDecision.ts ~L54-56),
+  // not re-derived, since the whole point is that these exact forms are
+  // already proven safe against that file's own corpus. Deliberately NOT
+  // widened to CONFUSION_RE's "weak in this" fragment (~L57) — that family
+  // is out of scope for this fix and remains a separate, reported gap
+  // (recoveryGuardDontUnderstandGap.test.ts).
+  ['dont_understand', /\bnot\s+(?:able\s+to\s+)?understand(?:ing)?\b/i],
+  ['dont_understand', /\b(?:can'?t|cannot|couldn'?t|could\s+not)\s+understand\b/i],
+  ['dont_understand', /\bnot\s+getting\s+(?:it|this|that)\b/i],
   ['confused',        /\bi(?:'?m|\s+am)\s+(so\s+|really\s+|totally\s+)?(confused|lost)\b/i],
   // "I'm nervous / anxious" — frequently replaces "scared" but shares the
   // same recovery script (name it, shrink stakes, slow down). Placed in MILD
