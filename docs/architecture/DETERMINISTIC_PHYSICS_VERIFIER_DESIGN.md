@@ -534,6 +534,89 @@ physics-correctness instrument it has ever had, a reusable corpus, and a measure
 "does this actually happen" — with **zero** behaviour change. That is a defensible resting state,
 and given §7 it may well be the right one.
 
+### 6.2 Batch 4 — the deliberate observation window, run for real, 2026-09-16
+
+§6.1's gap closed: this is the campaign it named as not yet run. A disposable QA account
+(`qa-physverif-b4-*@mytutor-qa.invalid`, created, driven, deleted, re-login confirmed blocked
+afterward — `scripts/qa/physicsDimBatch4Drive.ts`) was driven through **4** `phys.mech.*` lessons
+against the deployed app (`my-tutor-flame.vercel.app`), all four already in `dimensionBindings.ts`:
+`newtons-second-law`, `free-body-diagram`, `momentum`, `kinetic-energy`. Each lesson opened via
+`lesson-init` and then received **8** chat turns, every one phrased to explicitly invite an equation
+("what's the formula for net force?", "can you show me F=ma written out?", "walk me through a
+worked example with numbers", "what's the equation for momentum here?", "can you write the formula
+as an equation for me", "show me the equation, not just words", "ok so what does the formula
+actually look like", "what's the equation that connects these quantities?") — never a phrasing the
+model would answer with a question of its own, which Gate C's own question-mark override would
+exclude from assertion regardless.
+
+**36 `PHYSICS_DIM` lines**, read from Vercel production runtime logs and isolated to this run's
+session id (`cmu40us9v0001js04o7u7m52y`) — 4 `lesson-init` + 32 `chat`, exactly matching 4 lessons ×
+(1 init + 8 chats). Every line accounted for; none dropped or unexplained.
+
+**Gate distribution**: `no-binding` 12, `no-extraction` 14, `no-assertion-frame` 10,
+`parse-failure` 0, `unbound-symbol` 0, `consistent` 0, `violation` 0.
+
+**`violationFound:true` — 0 of 36.** With zero violations there is nothing to manually read for
+true/false positives — the question "does it fire correctly" cannot even be asked yet, because it
+never fires. **Zero lines reached `parse-failure`, `unbound-symbol`, or `consistent` either** — the
+dimension-checking core built in Batch 0-2 was still not exercised, this time despite every turn
+being deliberately equation-eliciting. This is the sharper finding §6.1 could not yet make: the
+prior sample's caveat was "we didn't try eliciting an equation, so we can't conclude the rule never
+fires on generated prose." This run tried, on 32 turns purpose-built for it, and the core still
+never ran.
+
+**Why, read from the actual served transcripts (not conjectured):**
+
+- **The `no-binding` third (12/36) is a genuine finding of its own, not noise.** It is not spread
+  across all four lessons — it is one recurring off-domain excursion: turns containing the word
+  "equation" repeatedly resolved `resolvedDecisionConceptId` to **`math.alg.equation`** (unbound by
+  construction — Batch 2 only bound `phys.mech.*`) rather than the lesson's own bound concept, even
+  mid-lesson, on turns like "show me the equation, not just words" and "what's the equation that
+  connects these quantities?". This is the same class of resolver/excursion behaviour
+  `545819a`/`624b469` (cited in §6.1) already touched for `math.alg.equation`'s sibling
+  `phys.mech.hamiltons-equations` — a live product interaction, not a verifier defect, and out of
+  this batch's scope to fix. It does mean roughly a third of a deliberately physics-domain campaign
+  never reached Gate B at all.
+- **`no-extraction` (14/36) is dominated by one phrasing pattern.** The model overwhelmingly writes
+  a formula either (a) immediately after a colon — "...acceleration: F = ma.", "In symbols: **ΣF =
+  m × a**" — which Gate A's own "no ':' immediately before it" rule excludes by design (the same
+  rule that keeps "Mirror: 1/v = ..." from firing), or (b) inside LaTeX display markup —
+  `\[ \sum \vec{F} = m\,\vec{a} \]`, `\(p = m\,v\)` — whose backslash-prefixed symbols
+  (`\vec{F}`, `\sum`) never satisfy `isPlausibleSymbol`'s letter-led shape, so Gate A's regex simply
+  does not extract them as candidates.
+- **`no-assertion-frame` (10/36) is the LaTeX equations and inline equations that DO extract, but
+  are not phrased as a standalone display line and don't use one of Gate C's three whitelisted
+  frames** ("so X = Y", "we write X = Y", "X = Y tells us") — e.g. "p = m × v" appearing mid-sentence
+  immediately followed by a comma-separated explanatory clause, or an equation sentence that runs on
+  into a following question with no separating punctuation (pulling the whole run into one sentence
+  the question-mark override then excludes).
+
+**Verdict, stated plainly rather than padded: the rule still does not fire, and this time it is not
+because the observation window was incidental.** The model reliably writes correct physics
+equations when asked (F = ma, p = mv, KE = ½mv² all appeared, unprompted content errors: none
+observed) — but it almost never writes them in the specific shape (colon-free, non-LaTeX,
+whitelisted-frame or standalone-line) Gate A+C were deliberately built conservative enough to
+require. That conservatism was a deliberate design choice (§5.3: "abstain-by-default... a WHITELIST,
+never a blacklist," citing the `DISCOURSE_NOUNS` exclusion-list trap directly) to keep the
+false-positive risk in §7.6 near zero — and it is working exactly as designed, at the cost of also
+suppressing nearly every true positive this run could have produced.
+
+**This changes the calculus for §6 row 5, not just extends §6.1's caveat.** Batch 5's own
+precondition is "Batch 4 shows a non-zero fire rate **and** zero false positives." Fire rate is 0/36
+across a campaign built specifically to elicit fire. Per this batch's own stop condition ("if the
+rule never fires on deliberately-elicited equation turns, say so plainly rather than padding the
+report"): **it does not fire, and Batch 5 (enforcement) is not warranted on this evidence.** Two
+honest paths forward, neither taken this batch: loosen Gate A/C's conservatism specifically to admit
+colon-prefixed and LaTeX-bracketed equations (raises §7.6's false-positive risk, needs its own
+corpus re-validation against Batch 1's MUST_NOT_FIRE_CONTROLS) — or accept §7's steel man as
+decisive and retire the shadow as a permanently-dormant-but-cheap instrument, per §6.1's own "that
+is a defensible resting state" line. Both remain open findings, reported not resolved.
+
+Full transcripts (36 turns across 4 lessons, provider mix `groq`/`memory`, zero errors, zero
+content-free holds observed) and the raw `PHYSICS_DIM` JSON lines were captured to this session's
+scratchpad and are not committed (matching every prior QA-run convention in this repo — transcripts
+are evidence for the turn that produced them, not durable repository content).
+
 ---
 
 ## 7. The steel man — and it is strong
