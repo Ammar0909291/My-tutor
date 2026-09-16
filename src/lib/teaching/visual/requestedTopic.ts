@@ -341,6 +341,23 @@ export function extractRequestedTopic(
  * in `resolveVisualTarget.ts` until the teaching layer needed the same
  * distinction — it belongs with the rest of "what did the learner name".
  * `contentWords` folds a trailing plural, so entries are compared folded.
+ *
+ * "equation" was tried here (2026-09-16) and REVERTED the same day: this
+ * function's word list is shared by a THIRD consumer neither of its two
+ * known callers is — `learnerAdmission.ts`'s `namedTopicWords` reuses it
+ * (deliberately, per that function's own docstring: "two vocabularies for
+ * one idea is how those paths would drift apart") to decide whether a
+ * served asset is RELEVANT to what the learner asked. There, "equation" is
+ * exactly the shared CONTENT word that must count: `isRelevantToLearnerQuestion(
+ * 'Balancing equations conserves atoms.', 'how do I balance this equation')`
+ * must stay `true`, and classifying "equation" as medium made it `false` —
+ * caught by `learnerAdmissionBoundary.test.ts`'s own "one shared topic word
+ * is enough" case. Context decides which sense of "equation" a message uses
+ * ("show me THE equation" vs "balancing equations"); a bare per-word
+ * classification, which is what every reader of this list gets, cannot make
+ * that distinction. The "show me the equation" case is instead handled
+ * locally inside `namedTopicUnknownTo`, the one caller that has the
+ * surrounding message text to judge governance from — see its own comment.
  */
 export function isMediumWord(word: string): boolean {
   for (const noun of VISUAL_MEDIUM_NOUNS) {
@@ -689,6 +706,29 @@ export const DISCOURSE_NOUNS = new Set([
   // 'answered'/'asked' are deliberately NOT added: no measurement demanded
   // them, and this list grows only on evidence.
   'ask', 'asking', 'answering',
+  // A QUANTIFIER NAMES NOTHING, and NOTATION-IN-FRONT-OF-YOU IS DEIXIS —
+  // both measured on the same live capture that motivated `isMediumWord`'s
+  // "equation" addition just above.
+  //
+  // "can you show me the equation and explain what each symbol means?" in a
+  // phys.mech.newtons-second-law lesson extracted the topic "equation and
+  // explain what each symbol means" — fixing "equation" alone left "each"
+  // and "symbol" surviving `namedTopicUnknownTo`'s `.every()` check, so the
+  // excursion still opened.
+  //
+  // 'each' is a pure quantifier ("each symbol", "each of", "each student")
+  // that never names a subject on its own — the same class of function word
+  // this list already holds for 'other'/'next'/'last'/'first'/'previous'.
+  //
+  // 'symbol' in "what each SYMBOL means" points at notation already on the
+  // learner's own screen (the equation just discussed), the identical
+  // deictic reading `line`'s own entry above documents for "what this line
+  // and numbers mean?". Checked against every concept title in all six
+  // subjects before adding: `math.found.mathematical-symbols` ("Mathematical
+  // Symbols") is the one real match, and it is unaffected — 'mathematical'
+  // is not discourse, so one surviving real word still keeps it teachable by
+  // name, the same guarantee 'point'/'line' already rely on.
+  'each', 'symbol',
 ])
 
 /**
@@ -794,12 +834,47 @@ export function isPureVisualRepeatRequest(topic: RequestedTopic): boolean {
  * No keyword table and no curriculum lookup: the learner's own words against
  * the taught topic's own words, so it behaves identically for a topic nobody
  * has ever authored.
+ *
+ * ── "SHOW ME THE EQUATION" — a fourth filter, local to this function ────────
+ * Found live, 2026-09-16: "can you show me the equation and explain what
+ * each symbol means?" extracted the unresolved topic "equation and explain
+ * what each symbol means" and opened a real excursion. "equation" cannot
+ * join `isMediumWord`'s shared list — that list is also read by
+ * `learnerAdmission.ts`'s asset-relevance check, where "equation" is exactly
+ * the correct shared CONTENT word between a learner's question and a stored
+ * asset (`isRelevantToLearnerQuestion('Balancing equations conserves atoms.',
+ * 'how do I balance this equation')` must stay `true` — adding "equation" to
+ * `isMediumWord` broke it, caught by `learnerAdmissionBoundary.test.ts`
+ * before this shipped). Context is what distinguishes the two readings, and
+ * this function is the one place with the surrounding message text to judge
+ * it from — the same reasoning `requestedConcept.ts`'s own `isMediumUsage`
+ * already applies for concept resolution, reimplemented independently here
+ * (not imported: this file is already a dependency OF `requestedConcept.ts`,
+ * so importing back would cycle). Narrow and evidence-scoped to "equation"
+ * only, not a general noun-suppression rule: a display verb ("show", "give
+ * me", "draw", "see") within 4 words before "equation", with no teaching
+ * verb in that same span, means "show me the lesson's own formula", not "I
+ * want to be taught a topic called Equation" — "teach me the equation" and
+ * "what is an equation" are untouched (pinned by
+ * `subjectLocalReadingScatter.test.ts`'s own overcorrection checks).
  */
+const DISPLAY_REQUEST_VERB = /\b(?:show|give|see|draw)\b/i
+const TEACHING_REQUEST_VERB = /\b(?:teach|explain|learn|understand|define|study|what)\b/i
+
+function equationNamesAPresentation(message: string): boolean {
+  const idx = (message ?? '').toLowerCase().search(/\bequations?\b/)
+  if (idx < 0) return false
+  const priorWords = (message ?? '').slice(0, idx).trim().split(/\s+/).slice(-4).join(' ')
+  return DISPLAY_REQUEST_VERB.test(priorWords) && !TEACHING_REQUEST_VERB.test(priorWords)
+}
+
 export function namedTopicUnknownTo(message: string, taughtText: string): RequestedTopic | null {
   const requested = extractRequestedTopic(message, 1, true)
   if (!requested) return null
 
-  const named = [...requested.words]
+  const equationIsPresentation = equationNamesAPresentation(message)
+  const named = [...requested.words].filter((w) => !(w === 'equation' && equationIsPresentation))
+  if (named.length === 0) return null
   // ONE surviving word is enough. A phrase made ENTIRELY of medium nouns and
   // lesson machinery has named no subject; a phrase with any real word in it
   // has, so "chemical formula" and "first law" are unaffected.

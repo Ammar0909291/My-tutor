@@ -54,6 +54,8 @@
 import { describe, it, expect } from 'vitest'
 import { resolveRequestedConceptId } from '@/lib/teaching/concept/requestedConcept'
 import { CONCEPT_DIMENSION_BINDINGS } from '@/lib/teaching/physics/dimensionBindings'
+import { namedTopicUnknownTo, isMediumWord, DISCOURSE_NOUNS } from '@/lib/teaching/visual/requestedTopic'
+import { getKGNode } from '@/lib/curriculum/knowledgeGraph'
 
 // The real, current registry — never hand-copied, so this suite tracks
 // dimensionBindings.ts automatically and can never silently drift from it.
@@ -203,5 +205,75 @@ describe('REGRESSION 6 — the scatter rule generalizes past "equation", measure
     // across 4 math domains.
     expect(resolveRequestedConceptId('teach me power', 'math.calc.limits', 'mathematics'))
       .toBe('phys.mech.power') // falls back to the genuine cross-subject topic
+  })
+})
+
+describe('REGRESSION 7 — the SECOND, independent mechanism: unresolved-topic excursion', () => {
+  // Live-verified against the deployed app (commit 545819a, the fix above):
+  // `resolveRequestedConceptId` correctly returned null for the repro
+  // string, but `[excursion]` still fired `transition:'started', active:true,
+  // unresolvedTopic:'equation and explain what each symbol means'` — a
+  // SEPARATE code path (`namedTopicUnknownTo`/`extractRequestedTopic` in
+  // requestedTopic.ts) that also inspects the message and, independently of
+  // the concept resolver, decides whether an unnamed topic was requested.
+  // Closed the same session, but NOT by adding "equation" to `isMediumWord`
+  // — a first attempt did exactly that (mirroring `requestedConcept.ts`'s
+  // `MEDIUM_NOUNS` addition) and the full suite caught a real regression:
+  // `isMediumWord` is also consumed by `learnerAdmission.ts`'s
+  // `namedTopicWords()`, where "equation" must stay real content (e.g.
+  // `isRelevantToLearnerQuestion('Balancing equations conserves atoms.', 'how
+  // do I balance this equation')` needs `true` — "equation" is the ONLY
+  // shared word). Reclassifying it as a medium noun broke that. Reverted;
+  // `isMediumWord` is unchanged from before this session (still no
+  // "equation"). Instead, `namedTopicUnknownTo` gained a LOCAL, message-
+  // context-sensitive filter, `equationNamesAPresentation()`: "equation" is
+  // dropped from the topic word-set only when a display verb ("show"/
+  // "give"/"see"/"draw") appears within 4 words before it with no teaching
+  // verb in between — so "show me THE equation" names no topic, while "teach
+  // me the equation"/"what is an equation" still do. This is scoped to the
+  // one function that has the surrounding message text to make that call;
+  // the shared `isMediumWord`/`DISCOURSE_NOUNS` lists, and therefore
+  // `learnerAdmission.ts`'s behaviour, are untouched. Separately,
+  // `DISCOURSE_NOUNS` gained "each" (a bare quantifier) and "symbol" (deixis
+  // toward on-screen notation, checked corpus-wide: the one real match,
+  // `math.found.mathematical-symbols`, survives via "mathematical") — that
+  // half of the original fix held and is unchanged.
+  it('the repro string names no unresolved topic against the real Newton\'s-Second-Law lesson text', () => {
+    const node = getKGNode('phys.mech.newtons-second-law')!
+    const taughtText = `${node.title} ${node.description ?? ''}`
+    expect(namedTopicUnknownTo(REPRO, taughtText)).toBeNull()
+  })
+
+  it('"equation" alone is NOT a medium word — the shared list stays untouched for learnerAdmission.ts\'s sake', () => {
+    expect(isMediumWord('equation')).toBe(false)
+  })
+
+  it.each([
+    ['teach me the equation', 'a teaching verb keeps "equation" as a named topic'],
+    ['what is an equation', 'a genuine question about the concept names it'],
+    ['explain the equation to me', 'explain is a teaching cue'],
+  ])('%s -> names a topic (%s)', (message) => {
+    const node = getKGNode('phys.mech.newtons-second-law')!
+    const taughtText = `${node.title} ${node.description ?? ''}`
+    expect(namedTopicUnknownTo(message, taughtText)).not.toBeNull()
+  })
+
+  it('"each" and "symbol" are classified as discourse vocabulary', () => {
+    expect(DISCOURSE_NOUNS.has('each')).toBe(true)
+    expect(DISCOURSE_NOUNS.has('symbol')).toBe(true)
+  })
+
+  it('overcorrection check: "Mathematical Symbols" is still reachable by name (one real word is enough)', () => {
+    expect(resolveRequestedConceptId('teach me mathematical symbols', 'phys.mech.newtons-second-law', 'physics'))
+      .toBe('math.found.mathematical-symbols')
+  })
+
+  it('a genuinely off-curriculum unresolved topic is still recognized (the mechanism itself is not disabled)', () => {
+    const node = getKGNode('phys.mech.newtons-second-law')!
+    const taughtText = `${node.title} ${node.description ?? ''}`
+    const kubernetes = namedTopicUnknownTo(
+      'can you explain Kubernetes pod scheduling please I really want to know', taughtText,
+    )
+    expect(kubernetes).not.toBeNull()
   })
 })
