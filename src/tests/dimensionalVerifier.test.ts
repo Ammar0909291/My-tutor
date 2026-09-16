@@ -414,21 +414,20 @@ describe('BATCH 6 — full pipeline against REAL captured production text', () =
     expect(diagnosis.gate).toBe('consistent')
   })
 
-  it('NEW FINDING, reported not fixed: the real Gemini T1 sentence\'s trailing parenthetical ("F = m a (force equals mass times acceleration)") still overcaptures into the RHS and fails to parse — a pre-existing Gate A limitation, NOT a LaTeX or colon-marker defect (the identical overcapture happens on plain text with no backslash at all, proven below)', () => {
+  it('FIXED in Batch 7 (§6.5): the real Gemini T1 sentence\'s trailing parenthetical ("F = m a (force equals mass times acceleration)") now trims the annotation and reaches "consistent" — Batch 6 recorded this as a pre-existing Gate A limitation, out of its own stated scope (LaTeX symbols, colon markers; not trailing-parenthetical RHS trimming); Batch 7 closes it narrowly, as an additive whitelist rule that trims a SPACE-separated, balanced, operator-free, word-bearing trailing parenthetical (see extractEquationCandidates\'s own comment for the full discriminator and why "N = m(g + a)" — no space before the paren — is untouched)', () => {
     const withLatex = diagnosePhysicsDim(
       'In equation form, this is written as:\n\\( F = m a \\) (force equals mass times acceleration)',
       CONCEPT_DIMENSION_BINDINGS['phys.mech.momentum'],
     )
-    expect(withLatex.gate).toBe('parse-failure')
+    expect(withLatex.gate).toBe('consistent')
     const plainText = diagnosePhysicsDim(
       'The formula is F = ma (force equals mass times acceleration).',
       CONCEPT_DIMENSION_BINDINGS['phys.mech.momentum'],
     )
-    // Same overcapture, zero LaTeX involved — confirms this is a pre-
-    // existing Gate A defect this batch did not introduce and is not
-    // scoped to fix (in scope: LaTeX symbols, colon markers; out of
-    // scope: trailing-parenthetical RHS trimming).
-    expect(plainText.gate).toBe('parse-failure')
+    // Same overcapture, zero LaTeX involved — confirms the underlying Gate
+    // A fix is the trailing-parenthetical trim itself, not anything LaTeX-
+    // or colon-marker-specific (those stay Batch 6's own, unmodified).
+    expect(plainText.gate).toBe('consistent')
   })
 
   it('§6.2\'s own quoted LaTeX momentum example reaches "consistent" against a binding that has p, m, v, once phrased through a whitelisted assertion frame', () => {
@@ -454,6 +453,124 @@ describe('BATCH 6 — full pipeline against REAL captured production text', () =
         if (dimensionalViolation(c.text, binding) !== null) falseFires += 1
       }
     }
+    expect(falseFires).toBe(0)
+  })
+})
+
+/**
+ * BATCH 7 — Gate A: trim a trailing, space-separated, balanced parenthetical
+ * annotation from the RHS capture.
+ *
+ * Design: §6.5, built directly from §6.3/§6.4's own named-but-not-fixed
+ * finding — a trailing balanced parenthetical clause ("F = ma (force equals
+ * mass times acceleration)") over-captures into the RHS and drives a
+ * genuinely consistent equation to parse-failure. The discriminator (see
+ * extractEquationCandidates's own comment): a SPACE before the "(" (genuine
+ * math grouping in the corpus always attaches directly, "m(g + a)"), the
+ * parenthetical's own content carrying NO arithmetic-operator character, and
+ * at least one true English word (three-plus plain letters) inside it.
+ */
+describe('BATCH 7 — Gate A trims a trailing space-separated balanced parenthetical annotation', () => {
+  it('trims a multi-word explanatory aside — the real Gemini shape', () => {
+    const candidates = extractEquationCandidates('F = ma (force equals mass times acceleration)')
+    expect(candidates.length).toBe(1)
+    expect(candidates[0].text).toBe('F = ma')
+  })
+
+  it('trims a single-word units label', () => {
+    expect(extractEquationCandidates('C = Q/V (farads)')[0]?.text).toBe('C = Q/V')
+  })
+
+  it('trims "(maximum)" / "(seconds)" / "(equilibrium)"-style single-word asides', () => {
+    expect(extractEquationCandidates('v = Aω (maximum)')[0]?.text).toBe('v = Aω')
+    expect(extractEquationCandidates('τ = RC (seconds)')[0]?.text).toBe('τ = RC')
+  })
+
+  it('does NOT trim units notation that carries an operator character — "(N/C)", "(W/m²)", "(N/kg)" are left untouched, exactly as before this batch', () => {
+    expect(extractEquationCandidates('E = F/q (N/C)')[0]?.text).toBe('E = F/q (N/C)')
+    expect(extractEquationCandidates('I = P/A (W/m²)')[0]?.text).toBe('I = P/A (W/m²)')
+    expect(extractEquationCandidates('g = F/m (N/kg)')[0]?.text).toBe('g = F/m (N/kg)')
+  })
+
+  it('does NOT trim genuine math grouping directly attached with no space — "N = m(g + a)", "F = q(E + v × B)"', () => {
+    expect(extractEquationCandidates('N = m(g + a)')[0]?.text).toBe('N = m(g + a)')
+    expect(extractEquationCandidates('F = q(E + v × B)')[0]?.text).toBe('F = q(E + v × B)')
+  })
+
+  it('does NOT trim a space-separated parenthetical that carries an arithmetic operator, even hypothetically (the operator guard, independent of the no-space guard above)', () => {
+    // A stress case not present in the corpus: if a real generated sentence
+    // ever DID write a genuine multiplicative factor with a stray space
+    // before it, the operator inside must still block the trim.
+    expect(extractEquationCandidates('F = k (x - x0)')[0]?.text).toBe('F = k (x - x0)')
+  })
+
+  it('does NOT trim a space-separated parenthetical whose content is a bare short symbol, not a word — "(x0)" has no arithmetic operator but also no 3+ letter word', () => {
+    expect(extractEquationCandidates('F = k (x0)')[0]?.text).toBe('F = k (x0)')
+  })
+
+  it('leaves the candidate empty (never crashes) when the trim would empty the RHS entirely — "x = (equilibrium)" style', () => {
+    expect(() => extractEquationCandidates('x = (equilibrium)')).not.toThrow()
+  })
+
+  it('the real captured production sentence now reaches "consistent" end to end, via diagnosePhysicsDim', () => {
+    const draft = 'In equation form, this is written as: \\( F = m a \\) (force equals mass times acceleration)'
+    const diagnosis = diagnosePhysicsDim(draft, CONCEPT_DIMENSION_BINDINGS['phys.mech.newtons-second-law'])
+    expect(diagnosis.gate).toBe('consistent')
+    expect(diagnosis.violation).toBeNull()
+  })
+
+  it('a genuinely WRONG equation with the identical trailing-annotation shape still REJECTS — the trim does not weaken violation detection', () => {
+    // F = m (drops the acceleration factor), wrapped in the same trailing
+    // annotation shape this batch trims.
+    const draft = 'The formula is F = m (this is the broken version).'
+    const diagnosis = diagnosePhysicsDim(draft, CONCEPT_DIMENSION_BINDINGS['phys.mech.momentum'])
+    expect(diagnosis.gate).toBe('violation')
+  })
+
+  it('FULL CORPUS: re-run CORRECT_CONTROLS/REJECTION_CASES/MUST_NOT_FIRE_CONTROLS after the Batch 7 trim — identical counts to the pre-Batch-7 baseline (912/25/240, 0 regressions)', () => {
+    let nullCount = 0
+    let nonNullCount = 0
+    const nonNull: string[] = []
+    for (const [conceptId, binding] of Object.entries(CONCEPT_DIMENSION_BINDINGS)) {
+      for (const c of binding.canonical) {
+        const v = dimensionalViolation(c.text, binding)
+        if (v === null) nullCount += 1
+        else { nonNullCount += 1; nonNull.push(`${conceptId}::${c.text}`) }
+      }
+    }
+    expect(nullCount).toBe(83)
+    expect(nonNullCount).toBe(1)
+    expect(nonNull).toEqual(['phys.mech.hookes-law::k_eq = 1/k₁ + 1/k₂'])
+
+    let nonNullWithNullBinding = 0
+    for (const eq of CORRECT_CONTROLS) {
+      if (dimensionalViolation(eq.text, null) !== null) nonNullWithNullBinding += 1
+    }
+    expect(nonNullWithNullBinding).toBe(0)
+
+    let rejected = 0
+    let abstained = 0
+    for (const rc of REJECTION_CASES) {
+      for (const binding of Object.values(CONCEPT_DIMENSION_BINDINGS)) {
+        const hasSource = binding.canonical.some((c) => c.text === rc.sourceEquation)
+        if (!hasSource) continue
+        const v = dimensionalViolation(rc.text, binding)
+        if (v !== null) rejected += 1
+        else abstained += 1
+      }
+    }
+    expect(rejected).toBe(5)
+    expect(abstained).toBe(2)
+
+    let falseFires = 0
+    let checks = 0
+    for (const c of MUST_NOT_FIRE_CONTROLS) {
+      for (const binding of Object.values(CONCEPT_DIMENSION_BINDINGS)) {
+        checks += 1
+        if (dimensionalViolation(c.text, binding) !== null) falseFires += 1
+      }
+    }
+    expect(checks).toBe(10 * Object.keys(CONCEPT_DIMENSION_BINDINGS).length)
     expect(falseFires).toBe(0)
   })
 })

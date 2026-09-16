@@ -252,6 +252,36 @@ export function extractEquationCandidates(rawSentence: string): EquationCandidat
     // kept simple here since this scans one generated sentence, not a
     // large mined corpus.
     rhs = rhs.replace(/\s*[—–]\s*.*$/, '').trim()
+
+    // Batch 7 (§6.5): trim a trailing, SPACE-separated, BALANCED
+    // parenthetical clause that is a natural-language annotation — a units
+    // label ("Q/V (farads)") or an explanatory aside ("m a (force equals
+    // mass times acceleration)") — never a continuation of the equation's
+    // own math. Real captured production text (§6.4's Gate-A limitation:
+    // "In equation form, this is written as: F = ma (force equals mass
+    // times acceleration)") bloats the RHS capture with exactly this
+    // shape, so a genuinely consistent equation lands at parse-failure
+    // instead of consistent.
+    //
+    // A SPACE before the "(" already distinguishes an annotation from
+    // genuine math grouping: every trailing-parenthetical CORRECT_CONTROLS
+    // entry that is part of the equation's own math attaches directly, no
+    // space ("N = m(g + a)", "F = q(E + v × B)") — never "N = m (g + a)".
+    // A second, independent guard protects against ever discarding a real
+    // multiplicative factor that happens to carry a stray space anyway:
+    // the parenthetical's own content must carry NO arithmetic-operator
+    // character AND at least one true English word (three-plus plain
+    // letters) — "(N/C)"/"(W/m²)" (units notation, an operator character
+    // present) and a bare symbol grouping like "(x₀)" (no word) both fail
+    // this and are left untouched, exactly as before this batch.
+    const trailingParenthetical = rhs.match(/^(.*\S)\s+\(([^()]*)\)\s*$/)
+    if (trailingParenthetical) {
+      const inner = trailingParenthetical[2]
+      const hasOperator = /[+\-−*×/^±√=]/.test(inner)
+      const hasWord = /(?:^|[^A-Za-z])[A-Za-z]{3,}(?:[^A-Za-z]|$)/.test(inner)
+      if (!hasOperator && hasWord) rhs = trailingParenthetical[1].trim()
+    }
+
     const opens = (rhs.match(/\(/g) ?? []).length
     const closes = (rhs.match(/\)/g) ?? []).length
     if (closes > opens) rhs = rhs.replace(/\)+$/, '').trim()
