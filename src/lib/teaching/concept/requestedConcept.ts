@@ -49,7 +49,25 @@ export const EXCURSION_CONFIDENCE_FLOOR = 0.6
 // is medium vocabulary counts as a concept ONLY when a teaching cue governs
 // it. Everything else — including every multi-word title such as "Graph
 // Coloring" or "Graph of a Function" — is untouched.
-const MEDIUM_NOUNS: ReadonlySet<string> = new Set(VISUAL_MEDIUM_NOUNS)
+//
+// "EQUATION" ADDED (2026-09-16) — the SAME shape of defect, found live: "can
+// you show me the equation" bare-word-matched `math.alg.equation` ("Equation",
+// a real foundational algebra concept) via EXACT_TITLE, exactly like "show me
+// a graph" bare-word-matched `math.disc.graph`. "Show me THE equation" names
+// a PRESENTATION FORMAT (display the lesson's own formula), not a request to
+// be taught the concept "Equation" — the identical reading isMediumUsage
+// already gives "graph"/"chart"/"diagram". Governed exactly the same way:
+// "teach me equations"/"what is an equation"/"explain equations" keep a
+// TEACHING_CUE nearby and are untouched (verified below); only the
+// medium-shaped "show me the equation" framing is affected. Deliberately
+// local to this file's own derived Set rather than added to
+// `VISUAL_MEDIUM_NOUNS` in masteryGate.ts — that list is consumed far more
+// broadly (gate eligibility, MCQ suppression) and this evidence is scoped to
+// concept resolution only. "formula" was checked against the same production
+// traffic and does not reproduce the defect (no bare single-word "Formula"
+// KG title exists to collide with), so it is deliberately not added without
+// its own evidence.
+const MEDIUM_NOUNS: ReadonlySet<string> = new Set([...VISUAL_MEDIUM_NOUNS, 'equation'])
 
 /** Words that mark the following noun as a TOPIC being taught, not a medium. */
 const TEACHING_CUE = new Set([
@@ -522,7 +540,70 @@ function lessonOwnsTheTerm(
  * means optical reflection. Deterministic, index-only, no LLM. Returns null
  * when the subject has no such concept, leaving the cross-subject excursion
  * intact — "explain photosynthesis" from a physics lesson still reaches biology.
+ *
+ * ── SCATTERED ACROSS THE SUBJECT — a second defect this closes, found as a
+ *    byproduct of the Deterministic Physics Verifier's Batch 4 observation
+ *    window (2026-09-16), unrelated to that programme ─────────────────────
+ *
+ * THE DEFECT, measured live: every one of 24 real phys.mech.* lessons driven
+ * against the deployed app, on the turn "can you show me the equation and
+ * explain what each symbol means?", opened an excursion to
+ * `phys.mech.hamiltons-equations` — "Hamilton's Equations of Motion", an
+ * expert-level classical-mechanics topic unrelated to whatever lesson was
+ * actually open (Newton's Second Law, friction, buoyancy, tension, ...).
+ * 24/24, 100% reproducible, regardless of which lesson was open.
+ *
+ * THE MECHANISM, traced with real instrumentation, not assumed: "the
+ * equation" resolves via bare-word EXACT_TITLE to `math.alg.equation`
+ * ("Equation", a foundational algebra concept) — exactly the same shape as
+ * "explain reflection" resolving to `math.geom.reflection` above. Because the
+ * winning match's subject (mathematics) differs from the lesson's (physics),
+ * this function runs, finds every physics title containing the whole word
+ * "equation" as a candidate, and — before this fix — returned the SHORTEST
+ * one unconditionally, with no check that it was actually a reading rather
+ * than a coin flip. Physics has SEVEN concepts whose titles contain
+ * "equation" (Hamilton's, the wave equation, Bernoulli's, Schrödinger's,
+ * Maxwell's, Hamilton-Jacobi, Euler-Lagrange), scattered across FOUR
+ * unrelated domains (phys.mech, phys.wave, phys.qm, phys.em) — none of them
+ * more "the equation" than any other.
+ *
+ * WHY "SHORTEST WINS" IS RIGHT FOR REFLECTION/VECTOR/FIELD/HYDROGEN AND WRONG
+ * FOR EQUATION, measured across the WHOLE corpus rather than assumed from a
+ * handful of words: "reflection" (1 physics domain: phys.opt), "vector" (1:
+ * phys.meas), "hydrogen" (2: phys.mod + phys.qm, both about the same atom),
+ * "field" (2: phys.em + phys.mech, every title sharing "Field Lines") each
+ * name ONE coherent physics idea refined at more than one title length — the
+ * case this function was built for. A full corpus sweep of every bare
+ * single-word title read from every OTHER subject (71 (word, target-subject)
+ * pairs with >=1 same-subject candidate) found exactly 8 pairs exceeding
+ * MAX_COHERENT_DOMAINS below, and every one is the SAME shape as "equation":
+ * "function"->mathematics (14 domains, from computer_science),
+ * "set"->mathematics (5), "equation"->physics (4, the reported defect),
+ * "algorithm"->mathematics (4), "equation"->chemistry (4 — the identical
+ * defect in the other direction, not itself reported but caught by the same
+ * evidence), "power"->mathematics (4), "function"->physics (3, from both
+ * `cs.func.functions` and `math.func.function-concept`). None of the
+ * R1/R6-protected cases (reflection, vector, hydrogen, field, resonance,
+ * "ray" -> nature-of-light) exceed 2 domains; all are unaffected, confirmed
+ * by the existing suite, not assumed.
+ *
+ * THE RULE: count the distinct KG DOMAINS (`phys.mech`, `phys.em`, ...) the
+ * same-subject candidates span. MAX_COHERENT_DOMAINS or fewer: the word names
+ * one coherent local idea, behaviour unchanged — shortest title wins, exactly
+ * as before. More: the word is scattered across the subject and does not
+ * reliably identify any one of them; the honest answer is null, leaving the
+ * lesson exactly where it is — the same "an honest 'I could not name it'
+ * rather than a guess" stance the rest of this module already takes.
  */
+const MAX_COHERENT_DOMAINS = 2
+
+/** The KG domain a concept belongs to: `phys.mech` from `phys.mech.torque`.
+ *  One level more specific than `idPrefix`'s subject-level split. */
+function conceptDomain(conceptId: string): string {
+  const parts = conceptId.split('.')
+  return parts.length >= 3 ? parts.slice(0, 2).join('.') : (parts[0] ?? '')
+}
+
 function subjectLocalReading(
   matchedText: string,
   lessonPrefix: string | null,
@@ -532,16 +613,29 @@ function subjectLocalReading(
   const word = normalizeTitle(matchedText)
   if (!word) return null
 
-  let best: { conceptId: string; length: number } | null = null
+  const re = new RegExp(`\\b${escapeRegex(word)}\\b`)
+  const candidates: { conceptId: string; length: number }[] = []
   for (const entry of index) {
     if (idPrefix(entry.conceptId) !== lessonPrefix) continue
     const title = normalizeTitle(entry.title)
     // Whole-word containment only: "Reflection and Laws of Reflection"
     // contains "reflection"; "Refraction" does not contain it at all.
-    if (!new RegExp(`\\b${escapeRegex(word)}\\b`).test(title)) continue
-    // The shortest qualifying title is the most on-topic one — a longer title
-    // mentions the word incidentally alongside other ideas.
-    if (!best || title.length < best.length) best = { conceptId: entry.conceptId, length: title.length }
+    if (!re.test(title)) continue
+    candidates.push({ conceptId: entry.conceptId, length: title.length })
+  }
+  if (candidates.length === 0) return null
+
+  // SCATTERED ACROSS THE SUBJECT — see the block comment above. A word used
+  // by more than MAX_COHERENT_DOMAINS unrelated domains in this subject does
+  // not reliably identify any one of them.
+  const domains = new Set(candidates.map((c) => conceptDomain(c.conceptId)))
+  if (domains.size > MAX_COHERENT_DOMAINS) return null
+
+  // The shortest qualifying title is the most on-topic one — a longer title
+  // mentions the word incidentally alongside other ideas.
+  let best: { conceptId: string; length: number } | null = null
+  for (const c of candidates) {
+    if (!best || c.length < best.length) best = c
   }
   return best?.conceptId ?? null
 }
