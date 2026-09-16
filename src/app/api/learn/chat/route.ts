@@ -12,7 +12,7 @@ import {
 import { AI_CHAIN_DEADLINE_MS } from '@/lib/ai/providers/failoverRouter'
 import { recordBudgetEvent } from '@/lib/teaching/budgetTelemetry'
 import { buildTutorSystemPrompt, type LessonContext } from '@/lib/ai/client'
-import { routeAI, isAllowedGroqCertModel } from '@/lib/ai/router'
+import { routeAI, isAllowedGroqCertModel, isAllowedCertProvider, type CertProviderOverride } from '@/lib/ai/router'
 import { AIBudgetExceededError } from '@/lib/ai/budget'
 import { checkRateLimit, rateLimitResponse } from '@/lib/rateLimit'
 import { captureError } from '@/lib/monitoring'
@@ -177,16 +177,21 @@ async function handleChatTurn(req: Request, deadline: RouteDeadline): Promise<Re
   const { allowed } = await checkRateLimit(`rl:learn-chat:${userId}`, 30, 60)
   if (!allowed) return rateLimitResponse()
 
-  // A/B provider-certification gate (2026-08-21). A request-supplied header
-  // NAMES a Groq model but does nothing on its own — it is only honoured if
-  // THIS authenticated user's own DB row (never anything the client sends)
-  // has `modelOverrideAllowed = true`. Every ordinary learner has that flag
-  // false by default, so this block is inert for them regardless of what
-  // headers they send. Only queried when the header is present, so ordinary
-  // requests pay no extra DB round trip.
+  // A/B provider-certification gate (2026-08-21, extended 2026-09-16 with a
+  // provider-forcing sibling). Request-supplied headers NAME a Groq model
+  // and/or a provider to pin the whole request to, but do nothing on their
+  // own — either is only honoured if THIS authenticated user's own DB row
+  // (never anything the client sends) has `modelOverrideAllowed = true`.
+  // Every ordinary learner has that flag false by default, so this block is
+  // inert for them regardless of what headers they send. Only queried when
+  // at least one header is present, and the two share one DB read (not two
+  // round trips) so ordinary requests pay no extra DB cost and a request
+  // using both headers together pays no more than one using either alone.
   let groqModelOverride: string | undefined
+  let forceProvider: CertProviderOverride | undefined
   const requestedCertModel = req.headers.get('x-cert-groq-model')
-  if (isAllowedGroqCertModel(requestedCertModel)) {
+  const requestedCertProvider = req.headers.get('x-cert-provider')
+  if (isAllowedGroqCertModel(requestedCertModel) || isAllowedCertProvider(requestedCertProvider)) {
     // Bounded like every other query on this path. A read, so it is safely
     // retryable; the budget decides whether a retry is affordable.
     const dbUser = await boundedDbCall(deadline, 'chat-cert-model-flag',
@@ -195,7 +200,8 @@ async function handleChatTurn(req: Request, deadline: RouteDeadline): Promise<Re
         select: { modelOverrideAllowed: true },
       }), { retries: 1 })
     if (dbUser?.modelOverrideAllowed) {
-      groqModelOverride = requestedCertModel
+      if (isAllowedGroqCertModel(requestedCertModel)) groqModelOverride = requestedCertModel
+      if (isAllowedCertProvider(requestedCertProvider)) forceProvider = requestedCertProvider
     }
   }
 
@@ -6005,6 +6011,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             { userId, subject: learnSession.subject.slug },
             groqModelOverride,
             aiBudgetMs,
+            forceProvider,
           )
         } catch (aiError) {
           if (aiError instanceof AIBudgetExceededError) throw aiError
@@ -8153,6 +8160,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                   country, 2048, teachingLang,
                   { userId, subject: learnSession.subject.slug },
                   groqModelOverride,
+                  undefined,
+                  forceProvider,
                 )
                 repaired = routed.text
                 if (contentRegister === 'beginner') repaired = stripIpaNotation(repaired)
@@ -8300,6 +8309,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                   country, 2048, teachingLang,
                   { userId, subject: learnSession.subject.slug },
                   groqModelOverride,
+                  undefined,
+                  forceProvider,
                 )
                 repaired = routed.text
                 if (contentRegister === 'beginner') repaired = stripIpaNotation(repaired)
@@ -8438,6 +8449,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                   teachingLang,
                   { userId, subject: learnSession.subject.slug },
                   groqModelOverride,
+                  undefined,
+                  forceProvider,
                 )
                 let t = routed.text
                 if (contentRegister === 'beginner') t = stripIpaNotation(t)
@@ -8613,6 +8626,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 country, 2048, teachingLang,
                 { userId, subject: learnSession.subject.slug },
                 groqModelOverride,
+                undefined,
+                forceProvider,
               )
               repaired = routed.text
               if (contentRegister === 'beginner') repaired = stripIpaNotation(repaired)

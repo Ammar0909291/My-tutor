@@ -16,12 +16,23 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
  * pass an override at all) is covered by asserting on the actual source, not
  * a live DB — this suite cannot spin up a database, and that half is a thin,
  * already-reviewed read-then-branch with no routing logic of its own.
+ *
+ * 2026-09-16: extended with the provider-FORCING sibling gate
+ * (`x-cert-provider`, `CertProviderOverride`), built for a real Groq-vs-Gemini
+ * teaching comparison on two accounts. Same contract, same two guards
+ * (closed allowlist + DB flag), one router-level difference: forcing a
+ * provider builds a single-provider router (no failover at all), where the
+ * groq-model override still lets Gemini/OpenRouter catch a Groq failure.
+ * Gemini is mocked here the same way groq already is — the createGeminiProvider
+ * constructor call is tracked so a test can assert it either fired or never
+ * did, matching this file's own existing groqModelsRequested convention.
  */
 
 const KEYS = ['GEMINI_API_KEY', 'OPENROUTER_API_KEY', 'GROQ_API_KEY', 'GROQ_MODEL', 'AI_PROVIDER_MODE'] as const
 const saved: Record<string, string | undefined> = {}
 
 let groqModelsRequested: string[] = []
+let geminiCallCount = 0
 
 vi.mock('@/lib/ai/providers/groq', () => ({
   createGroqProvider: (_key: string, model: string) => {
@@ -35,6 +46,17 @@ vi.mock('@/lib/ai/providers/groq', () => ({
   },
 }))
 
+vi.mock('@/lib/ai/providers/gemini', () => ({
+  createGeminiProvider: () => {
+    geminiCallCount++
+    return {
+      name: 'gemini',
+      complete: async () => ({ text: 'gemini ok', finishReason: 'stop', provider: 'gemini' }),
+      healthCheck: async () => true,
+    }
+  },
+}))
+
 beforeEach(() => {
   for (const k of KEYS) saved[k] = process.env[k]
   process.env.GEMINI_API_KEY = 'g-key'
@@ -43,6 +65,7 @@ beforeEach(() => {
   delete process.env.GROQ_MODEL
   delete process.env.AI_PROVIDER_MODE
   groqModelsRequested = []
+  geminiCallCount = 0
   vi.resetModules()
 })
 
@@ -121,19 +144,80 @@ describe('route.ts gate reads the flag from the DB, never the request (source as
     // added two comment lines and a wrapper frame ahead of it, pushing the query
     // past the old 900-char window. Superseded slice, kept verbatim for history:
     //   src.slice(at, at + 900)
+    // 2026-09-16: the gate's own comment was extended to describe the new
+    // sibling x-cert-provider header (see the router.ts CertProviderOverride
+    // addition), pushing `modelOverrideAllowed: true` to offset 1384 and
+    // `isAllowedGroqCertModel(requestedCertModel)` to 987 from the anchor.
+    // Superseded slice, kept verbatim for history:
+    //   src.slice(at, at + 1400)
     // The assertions below are UNCHANGED — the invariant they state (the flag is
     // read from the DB by the authenticated userId, never from the request) is
-    // exactly what still has to hold.
+    // exactly what still has to hold, now for both headers.
     const gateBlock = src.slice(
       src.indexOf('A/B provider-certification gate'),
-      src.indexOf('A/B provider-certification gate') + 1400,
+      src.indexOf('A/B provider-certification gate') + 1900,
     )
     expect(gateBlock).toMatch(/req\.headers\.get\('x-cert-groq-model'\)/)
+    expect(gateBlock).toMatch(/req\.headers\.get\('x-cert-provider'\)/)
     expect(gateBlock).toMatch(/prisma\.user\.findUnique/)
     expect(gateBlock).toMatch(/where:\s*{\s*id:\s*userId\s*}/)
     expect(gateBlock).toMatch(/modelOverrideAllowed:\s*true/)
     // The header is parsed via isAllowedGroqCertModel before it ever reaches
     // the DB-gated branch — a client cannot supply an arbitrary model string.
     expect(gateBlock).toMatch(/isAllowedGroqCertModel\(requestedCertModel\)/)
+    // Same closed-allowlist discipline for the new provider header.
+    expect(gateBlock).toMatch(/isAllowedCertProvider\(requestedCertProvider\)/)
+  })
+})
+
+describe('provider-forcing A/B certification override (2026-09-16)', () => {
+  it("isAllowedCertProvider accepts only 'groq'/'gemini' (spoof resistance)", async () => {
+    const { isAllowedCertProvider } = await import('@/lib/ai/router')
+    expect(isAllowedCertProvider('groq')).toBe(true)
+    expect(isAllowedCertProvider('gemini')).toBe(true)
+    expect(isAllowedCertProvider('openrouter')).toBe(false)
+    expect(isAllowedCertProvider('yandex')).toBe(false)
+    expect(isAllowedCertProvider(undefined)).toBe(false)
+    expect(isAllowedCertProvider(null)).toBe(false)
+    expect(isAllowedCertProvider('')).toBe(false)
+  })
+
+  it("forceProvider='gemini' pins the request to Gemini — the Groq provider constructor is never called", async () => {
+    const { routeAI } = await import('@/lib/ai/router')
+    const result = await routeAI(
+      [{ role: 'user', content: 'hi' }], 'sys', 'IN', 800, 'en', undefined,
+      undefined, undefined, 'gemini',
+    )
+    expect(result.provider).toBe('gemini')
+    expect(result.text).toBe('gemini ok')
+    expect(groqModelsRequested).toEqual([])
+    expect(geminiCallCount).toBe(1)
+  })
+
+  it("forceProvider='groq' pins the request to Groq even without a groqModelOverride, and never touches Gemini", async () => {
+    const { routeAI } = await import('@/lib/ai/router')
+    const result = await routeAI(
+      [{ role: 'user', content: 'hi' }], 'sys', 'IN', 800, 'en', undefined,
+      undefined, undefined, 'groq',
+    )
+    expect(result.provider).toBe('groq')
+    expect(groqModelsRequested).toEqual(['openai/gpt-oss-20b'])
+    expect(geminiCallCount).toBe(0)
+  })
+
+  it('a forced provider does not leak into a subsequent unrelated request (no shared-router pollution)', async () => {
+    // Not a constructor-call-count assertion: the default chain's candidates
+    // array constructs a Gemini provider object during Groq-primary routing
+    // too (it is a fallback tier, built whether or not it is ever invoked),
+    // so createGeminiProvider firing again on the second call is expected
+    // and does not by itself indicate pollution. What matters is the RESULT:
+    // the second, unforced call's provider.
+    const { routeAI } = await import('@/lib/ai/router')
+    const forced = await routeAI([{ role: 'user', content: 'hi' }], 'sys', 'IN', 800, 'en', undefined, undefined, undefined, 'gemini')
+    expect(forced.provider).toBe('gemini')
+    const after = await routeAI([{ role: 'user', content: 'hi' }], 'sys', 'IN', 800, 'en', undefined, undefined, undefined, undefined)
+    // The unforced follow-up call must still reach Groq (the real default
+    // chain), not be silently pinned to Gemini by a polluted shared router.
+    expect(after.provider).toBe('groq')
   })
 })

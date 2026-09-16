@@ -148,8 +148,49 @@ export function isAllowedGroqCertModel(model: string | null | undefined): model 
   return !!model && GROQ_CERT_MODEL_ALLOWLIST.includes(model)
 }
 
-function getRouter(lang?: TeachingLanguage, groqModelOverride?: string) {
+/**
+ * A/B PROVIDER-certification gate (2026-09-16, extends the model-only gate
+ * above). Same shape, same safety property: the header alone does nothing —
+ * the caller (route.ts) must independently verify the authenticated user's
+ * `modelOverrideAllowed` DB flag before this value is ever honoured, exactly
+ * like `isAllowedGroqCertModel`. A closed 2-value allowlist, never an
+ * arbitrary provider string from the client.
+ *
+ * Built for the single-account Groq-vs-Gemini teaching comparison this gate
+ * is named for: 'groq' or 'gemini' pins the WHOLE request to that one
+ * provider for THIS request only (no failover to the other tier), so a
+ * side-by-side comparison of the same concept taught to two accounts is
+ * actually comparing two different providers and not "whichever one the
+ * failover chain happened to pick."
+ */
+export type CertProviderOverride = 'groq' | 'gemini'
+export function isAllowedCertProvider(v: string | null | undefined): v is CertProviderOverride {
+  return v === 'groq' || v === 'gemini'
+}
+
+function getRouter(lang?: TeachingLanguage, groqModelOverride?: string, forceProvider?: CertProviderOverride) {
   const chain = chainKeyForLanguage(lang)
+
+  // A per-request override never uses (or pollutes) the shared cache — it is
+  // a one-off router built for this single certification-gated request only,
+  // and only the default (non-Russian) chain honours it. Checked before the
+  // groq-model-only override below, since forcing 'gemini' should win over a
+  // stray groqModelOverride value the caller might also have set.
+  if (forceProvider && chain === 'default' && isGeminiOnlyMode() === false) {
+    if (forceProvider === 'gemini') {
+      console.log('[ai/router] cert override active — provider=gemini, no failover (this request only)')
+      return createFailoverRouter({
+        providers: [createGeminiProvider(GEMINI_API_KEY, GEMINI_MODEL)],
+        disableSameProviderRetry: true,
+      })
+    }
+    const model = groqModelOverride ?? GROQ_MODEL
+    console.log(`[ai/router] cert override active — provider=groq model=${model}, no failover (this request only)`)
+    return createFailoverRouter({
+      providers: [createGroqProvider(GROQ_API_KEY, model)],
+      disableSameProviderRetry: true,
+    })
+  }
 
   // A per-request override never uses (or pollutes) the shared cache — it is
   // a one-off router built for this single certification-gated request only,
@@ -309,11 +350,18 @@ export async function routeAI(
   // can never be granted more than its constructed budget, and omitting this
   // leaves every existing caller unchanged.
   chainDeadlineMs?: number,
+  // A/B provider-certification gate (2026-09-16). Same verification contract
+  // as groqModelOverride above: set ONLY by the caller after it has
+  // independently verified the authenticated user's DB flag. Pins the whole
+  // request to one provider, no failover. Ignored for the Russian chain and
+  // in gemini-only diagnostic mode (same guard as groqModelOverride).
+  forceProvider?: CertProviderOverride,
 ): Promise<RouteAIResult> {
   console.log(
     `[ai/router] routing request, teaching_language=${lang} chain=${chainKeyForLanguage(lang)}` +
     ` country=${country} (country is not a routing signal)` +
-    (groqModelOverride ? ` groq_model_override=${groqModelOverride}` : ''),
+    (groqModelOverride ? ` groq_model_override=${groqModelOverride}` : '') +
+    (forceProvider ? ` force_provider=${forceProvider}` : ''),
   )
 
   await consumeAIBudget()
@@ -340,7 +388,7 @@ export async function routeAI(
   }
 
   try {
-    const result = await getRouter(lang, groqModelOverride).complete(req, chainDeadlineMs)
+    const result = await getRouter(lang, groqModelOverride, forceProvider).complete(req, chainDeadlineMs)
     console.log(
       `[ai/router] success provider=${result.provider} finish_reason=${result.finishReason}` +
       ` chars=${result.text.length}`,
