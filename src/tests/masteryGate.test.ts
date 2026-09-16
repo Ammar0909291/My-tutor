@@ -282,6 +282,43 @@ describe('explain-differently remediation', () => {
     expect(detectLearnerRequest("I'm confused by this visualisation")).toBe('explain_differently')
   })
 
+  // ── Literalism re-measurement (docs/qa/PHYSICS_CHEMISTRY_MASTER_DEFECT_
+  // BACKLOG.md PCD-015/016/017/021): Principle 13 (src/lib/ai/client.ts)
+  // names five trigger phrases verbatim, but this deterministic reader only
+  // recognized ONE of them before this fix — "explain it differently".
+  // "in other words", "explain simply" (bare, no "more"), "teach me from
+  // the start", and "teach me from the beginning" all returned null,
+  // verified by direct call before writing the fix — meaning the
+  // LEARNER_REQUEST arbitration rung's AUTHORED_PROBE suppression never
+  // applied to them, and a keyed probe could pre-empt the turn before any
+  // LLM call (and therefore before Principle 13's advisory instruction) ever
+  // ran. Live-verified on the deployed app: 5 of these 30 real trigger turns
+  // (6 concepts x 5 phrases) received a server-rendered gate/probe response
+  // ("Here's a question on...", "Pick the one you think is right") instead
+  // of a restated explanation, confined to exactly the two unrecognized
+  // phrases used in that run ("in other words?", "teach me from the
+  // beginning").
+  it.each(['in other words', 'in other words?', 'can you explain simply', 'explain simply', 'teach me from the start', 'teach me from the beginning', 'ok teach me from the start please'])(
+    'now detected as explain_differently (previously null): %j', (msg) => expect(detectLearnerRequest(msg)).toBe('explain_differently'),
+  )
+
+  it('does NOT capture a topic-naming "teach me from X" — the existing bare "teach me" pattern\'s own end-anchor discipline is preserved', () => {
+    // The file's own comment on the bare "teach me" pattern: "'teach me
+    // about relativity' NAMES A TOPIC and belongs to the excursion reader,
+    // left untouched." The new "from the start/beginning" addition is a
+    // closed, literal two-phrase match specifically so it cannot widen that
+    // same topic-naming door.
+    expect(detectLearnerRequest('teach me about relativity')).toBeNull()
+    expect(detectLearnerRequest('teach me from chapter 5')).toBeNull()
+    expect(detectLearnerRequest('teach me from your notes')).toBeNull()
+    expect(detectLearnerRequest('teach me from the textbook')).toBeNull()
+  })
+
+  it('"simply" only matches immediately after "explain" — an unrelated use of the word is not captured', () => {
+    expect(detectLearnerRequest('simply put, i think this is correct')).toBeNull()
+    expect(detectLearnerRequest('that is simply wrong')).toBeNull()
+  })
+
   it('each strategy produces structurally distinct directives (7-strategy system)', () => {
     const s0 = buildLearnerRequestBlock('explain_differently', null, 0, false, 0)
     expect(s0).toMatch(/CONCISE/i)

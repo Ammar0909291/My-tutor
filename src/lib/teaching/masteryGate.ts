@@ -720,10 +720,31 @@ const EXPLAIN_DIFF_RE = new RegExp([
 
   // ── "say it MORE SIMPLY" — the same request, in the register a weak
   //    learner actually writes. `more simply` / `simpler` were already here.
-  String.raw`\bexplain\s+(?:it\s+|this\s+|that\s+)?(?:to\s+me\s+)?(?:in\s+)?(?:an?\s+)?(?:more\s+|very\s+)?(?:easy|easier|simple|simpler)(?:\s+(?:way|words|language|terms|english))?\b`,
+  //    `simply` (bare adverb, no "more") is a Principle 13-named trigger
+  //    (buildTutorSystemPrompt, src/lib/ai/client.ts: "explain simply") that
+  //    this reader did not recognize — "explain simply"/"can you explain
+  //    simply" both returned null, verified by direct call before this fix.
+  String.raw`\bexplain\s+(?:it\s+|this\s+|that\s+)?(?:to\s+me\s+)?(?:in\s+)?(?:an?\s+)?(?:more\s+|very\s+)?(?:easy|easier|simple|simpler|simply)(?:\s+(?:way|words|language|terms|english))?\b`,
   String.raw`\b(?:in\s+)?(?:easy|simple)\s+(?:way|words|language|terms|english)\b`,
   String.raw`\b(?:more\s+)?(?:simple|simpler|easy|easier)\s+(?:please|sir|ma'?am|madam)\b`,
   String.raw`\bmake\s+it\s+(?:more\s+)?(?:simple|simpler|easy|easier)\b`,
+
+  // ── "IN OTHER WORDS" — a second Principle 13-named trigger with zero
+  //    deterministic coverage before this fix (verified: returned null).
+  //    Unambiguous: this phrase signals only "let me restate that", never a
+  //    topic name or an unrelated request.
+  String.raw`\bin\s+other\s+words\b`,
+
+  // ── "TEACH ME FROM THE START/BEGINNING" — the third and fourth Principle
+  //    13-named triggers, also zero coverage before this fix. Deliberately
+  //    NOT folded into the bare end-anchored "teach me" pattern below (whose
+  //    own comment explains why an open continuation word list is unsafe —
+  //    "teach me about relativity" names a topic and must stay with the
+  //    excursion reader). This is a closed, literal two-phrase match instead:
+  //    "from the start"/"from the beginning" never name a topic, they name
+  //    only a restart of THIS explanation — the exact reading Principle 13
+  //    itself states ("NOT an instruction to... abandon the concept").
+  String.raw`\bteach\s+me\s+from\s+the\s+(?:start|beginning)\b`,
 
   // ── "I do not understand" and its non-standard forms ──
   String.raw`\bi\s+(?:don'?t|do\s+not)\s+understand\b`,

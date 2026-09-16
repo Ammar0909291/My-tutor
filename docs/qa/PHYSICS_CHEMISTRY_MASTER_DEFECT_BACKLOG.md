@@ -291,6 +291,108 @@ Regression test: `src/tests/literalismInstructionGuard.test.ts` (pins the
 instruction is actually assembled into the prompt; cannot and does not
 claim the model always follows it).
 
+**RE-MEASUREMENT, 2026-09-16 — the MONITORING trigger above fired, and it
+found a DIFFERENT defect than the one it was watching for.**
+
+Ran the audit this entry itself calls for: a disposable QA account
+(`liveAccount.ts` convention) driven against the deployed app through all
+five Principle-13-named trigger phrases ("explain it differently", "in
+other words?", "can you explain simply", "teach me from the start",
+"teach me from the beginning"), on 2 physics concepts
+(`phys.mech.newtons-second-law`, `phys.mech.momentum`), 2 chemistry
+concepts (`chem.bond.resonance`, `chem.kinet.rate-law`), and 2 English
+concepts (`eng.grammar.verbs`, `eng.grammar.nouns`) — 30 trigger turns,
+full transcripts captured (`scripts/qa/literalismReobserve.ts`). Account
+deleted afterward, re-login confirmed blocked.
+
+**The THREE originally-audited failure modes (literalism, topic
+abandonment, prerequisite regression) measured 0/30 — genuinely fixed,
+holding under live re-measurement.** No turn explained what the phrase
+itself meant, abandoned the concept, or regressed into an unrelated
+deeper prerequisite. Two adjacent, genuine findings surfaced instead, one
+fixed and one reported:
+
+1. **FIXED — the deterministic LEARNER_REQUEST reader only recognized ONE
+   of Principle 13's five named phrases.** `detectLearnerRequest`
+   (`masteryGate.ts`)'s `EXPLAIN_DIFF_RE` is the deterministic,
+   pre-LLM classifier that feeds the LEARNER_REQUEST arbitration rung —
+   whose own documented job is to `suppress: ['NEXT_MOVE',
+   'AUTHORED_PROBE', 'SESSION_CLOSE']` so an explicit request is never
+   turned into a graded quiz (the exact defect class this file calls "D3
+   / Phase 2 C6"). Verified by direct call, before writing any fix, that
+   4 of the 5 phrases Principle 13 itself names verbatim in the SAME
+   prompt instruction returned `null` from this reader: "in other
+   words", "explain simply" (bare, no "more"), "teach me from the
+   start", "teach me from the beginning" — only "explain it differently"
+   matched. Because this reader runs BEFORE any LLM call, an unrecognized
+   phrase gets zero LEARNER_REQUEST protection, and the turn can be
+   pre-empted entirely by a server-rendered gate/probe response
+   (`provider: 'gate'`, "zero provider calls" per its own comment) —
+   bypassing the LLM, and therefore Principle 13, altogether. Live
+   evidence, consistent with this mechanism: 5 of the 30 trigger turns in
+   this session's own transcript received a probe/gate response ("Here's
+   a question on Resonance Structures — take your time with it.", "Pick
+   the one you think is right.") instead of a restated explanation, all
+   5 on the two unrecognized phrases used that turn ("in other words?",
+   "teach me from the beginning"); "teach me from the start" happened not
+   to land on a gate-eligible moment in this particular run, so the live
+   sample does not cleanly isolate the mechanism on its own — the
+   code-level gap is what is definitively proven, and the live data is
+   consistent with it, not a substitute for it.
+
+   **Fix:** `EXPLAIN_DIFF_RE` widened with three additive alternatives —
+   `simply` added to the existing easy/simple/simpler adverb group (so
+   "explain simply" matches without requiring "more"), a literal
+   `\bin\s+other\s+words\b`, and a literal, CLOSED
+   `\bteach\s+me\s+from\s+the\s+(?:start|beginning)\b` — deliberately
+   NOT folded into the existing end-anchored bare-"teach me" pattern,
+   whose own comment already explains why an open continuation-word list
+   is unsafe ("teach me about relativity" names a topic and belongs to
+   the excursion reader). All three phrases are Principle 13's own
+   already-authored vocabulary, not invented. Verified: all 5 canonical
+   phrases plus two real variants (with "?", with "ok … please") now
+   return `explain_differently`; 7 negative controls, including the
+   exact topic-naming shape the existing pattern already protects
+   against ("teach me about relativity", "teach me from chapter 5",
+   "teach me from your notes", "teach me from the textbook") and two
+   unrelated uses of the bare word "simply" ("simply put, i think this
+   is correct", "that is simply wrong"), all correctly still return
+   `null`. 9 new test cases in `src/tests/masteryGate.test.ts`. Full
+   suite 696 files / 14,426 passed / 9 skipped; `tsc --noEmit` clean;
+   `npm run build` clean.
+
+2. **REPORTED, NOT FIXED — off-domain generic-analogy substitution
+   persists, specifically on chemistry, specifically naming "recipe"
+   (one of Principle 13's own three forbidden examples,
+   "pendulum/recipe/bicycle").** `chem.kinet.rate-law` used a
+   sugar/baking "recipe" analogy on 2 of its 5 trigger responses ("Think
+   of a recipe that doubles the amount of sugar…", "Picture a simple
+   recipe. You're stirring a cup of coffee with sugar…") despite the
+   prompt explicitly naming "recipe" as a forbidden substitute when a
+   same-subject example is available (concentration/rate IS directly
+   demonstrable with chemistry-native language, e.g. reactant
+   concentration). `chem.bond.resonance` used cake/pizza analogies on 3
+   of 5 — not literally named as forbidden, but the same class.
+   Physics and English trigger responses did not show this pattern in
+   this sample. This is model-instruction-following, not a deterministic
+   classification a whitelist regex can repair — "did the model choose
+   a same-subject example when one was available" is not mechanically
+   checkable the same way "did this phrase match a known request" is,
+   matching this entry's own stated philosophy. Not fixed; flagged as a
+   MONITORING candidate for a future re-measurement, same discipline as
+   before.
+
+3. **NOTED, LIKELY THE SAME MECHANISM AS #2 — one incidental anomaly.**
+   `chem.kinet.rate-law`'s "can you explain simply" turn returned
+   grading-shaped text ("...So the correct choice is **A**.") instead of
+   a restated explanation, immediately after a turn that had attached an
+   MCQ (`mcq=yes`). Consistent with an ungraded pending probe
+   intercepting an unrelated turn — a known class of defect this
+   codebase has fixed before (`mcqReoffer.test.ts`'s own I1/I4
+   disambiguation guard) — but not independently traced to a specific
+   line this session; recorded as a single incidental observation, not
+   established as a reproducible defect.
+
 ### PCD-018 (diagram/text mismatch half)
 **Status: FIXED as a consequence of the above, not separately patched.**
 Confirmed via architecture read (`route.ts`'s visual authority clamp,
@@ -408,18 +510,51 @@ completely unaffected (`correct !== true` is a no-op branch, matching
 `src/tests/emptyTurnWithProbe.test.ts` (new `describe` block, 5 cases +
 2 route-wiring assertions).
 
-**Not fixed, flagged rather than guessed at:** `verifierGate`'s re-render/
-fallback path (`route.ts` ~L6960-6991, `cleanText = gate.finalText`) sits
-AFTER `confirmCorrectAnswer` and can also fully replace `cleanText`
-(fallback templates `SHOW_EASIEST_LEGAL`/`ECHO_MICROWIN`/`WARM_CLOSE`, or
-a re-rendered LLM turn). Whether this discards a prior confirmation on a
-graded-correct turn, and how often that combination actually occurs, was
-not established this session — `verifierGate` is a separate, complex K5/K6
-verification subsystem, and patching it speculatively without first
-measuring whether it is a real contributor risks exactly the kind of
-unverified fix this program's guardrails forbid. Recorded as the next
-place to look if a future live remeasurement of the confirmation rate
-still falls short of the 90% target after this fix.
+**`verifierGate`'s re-render/fallback path — INVESTIGATED 2026-09-16,
+NOT a real contributor under the current production flag configuration.**
+Previously flagged rather than guessed at: `verifierGate`'s re-render/
+fallback path (`route.ts`, the `if (runFullVerifier) { … cleanText =
+gate.finalText … }` block, ~L8373-8460 at the time of this note — line
+numbers drift as the file grows, search for `outputVerifierFlag` rather
+than trusting either number) sits AFTER `confirmCorrectAnswer` and, in
+`enforce` mode, can fully replace `cleanText` (fallback templates
+`SHOW_EASIEST_LEGAL`/`ECHO_MICROWIN`/`WARM_CLOSE`, or a re-rendered LLM
+turn) — discarding any confirmation `confirmCorrectAnswer` had already
+prepended earlier in the same turn.
+
+Resolved by direct evidence, not speculation, in two independent steps:
+(1) source trace of `verifierGate` (`src/lib/eos-runtime/verifierGate.ts`)
+shows a hard branch on `mode`: when `mode === 'log'`, the function returns
+`finalText: inputs.draftText` **verbatim** — no rerender call, no fallback
+template, "not even the STRIP auto-repair is applied" per the module's own
+comment — so `cleanText = gate.finalText` is a pure no-op in log mode,
+by construction, and cannot discard anything a prior pass wrote. The
+re-render/fallback behaviour PCD-029 was worried about exists ONLY in
+`enforce` mode. (2) live production telemetry: queried the deployed app's
+own `[affirm-guard-scope]` diagnostic log line (which the route already
+emits every turn this block runs, `{ outputVerifierFlag, verifierMode }`)
+across a 24-hour window via Vercel MCP — **30 of 30 samples read
+`verifierMode: 'log'`**, zero `'enforce'`. So in the CURRENT live
+configuration, this path runs (the flag is not fully off, contrary to
+this doc's own earlier "flags unset in production" comments elsewhere in
+the codebase, which are stale for `ENABLE_OUTPUT_VERIFIER` specifically),
+but it runs in the one mode that is structurally incapable of discarding
+`confirmCorrectAnswer`'s text.
+
+**Verdict: not fixed, because there is nothing to fix under the evidence
+— forcing a change here would be exactly the unverified-fix risk this
+program's guardrails exist to prevent.** This is a genuine but currently
+DORMANT risk, not a closed one: if `ENABLE_OUTPUT_VERIFIER` is ever
+changed to `enforce`/`1`/`true`/`on` in production (an owner-level
+config change, not a code change), this exact discard mechanism would
+become live again with no code change needed to reactivate it. Recorded
+here so a future flag flip is not the moment this residual is
+rediscovered from scratch — if the confirmation rate is remeasured after
+such a flip and falls short, `verifierGate`'s `runVerifierLoop` call is
+where to look first, and the fix already scoped by this entry (route the
+fallback/rerender text through `confirmCorrectAnswer` when
+`mcqGradeHoisted?.correct === true`, matching the empty-post-strip
+backstop's own already-shipped fix below) is still the right shape.
 
 The lesson-completion-turn exception (`buildLessonCloseText` replacing
 `cleanText` after the enforcer) remains intentional, per the source doc's
