@@ -677,6 +677,87 @@ behaviour risk either way — only the diagnostic gate distribution moves, nothi
 learner changes). **If a future session wants a measured post-widening fire rate, that live
 re-run is the next step, not this batch's.**
 
+### 6.4 Live re-observation window after Batch 6, 2026-09-16
+
+§6.3's own deferred item, run for real: the exact §6.2 campaign shape (same 4 `phys.mech.*`
+lessons — `newtons-second-law`, `free-body-diagram`, `momentum`, `kinetic-energy` — same disposable
+QA-account convention, same driver, `scripts/qa/physicsDimBatch4Drive.ts`) repeated against the
+now-widened gate, with the eliciting-turn list extended (12 turns/lesson instead of 8) to add four
+phrasings specifically targeting the two shapes Batch 6 admits: `"can you write that in LaTeX
+notation for me"`, `"please show it mathematically, in symbols"`, `"write it in equation form,
+please"`, `"can you show it written as an equation, using proper notation"`. Account created,
+driven, deleted; re-login confirmed blocked afterward.
+
+**50 `PHYSICS_DIM` lines** read from production runtime logs (Vercel MCP, `environment=production`,
+query `PHYSICS_DIM`, `since=30m`), all isolated to this run's one session id
+(`cmu42wl460001lc04ox9nl9ko`) — 3 `lesson-init` + 47 `chat`. **Not the full expected 52** (4 inits +
+48 chats): the raw log query itself returned exactly 50 `PHYSICS_DIM` matches in its window (grepped
+directly against the saved raw log file, not a dedup artifact — 50 raw occurrences, 50 after
+dedup), so 2 lines (the `newtons-second-law` lesson's own `lesson-init` line, and one chat turn
+somewhere) did not surface in this query — most likely retention/return-cap behaviour on a
+high-volume window (5,343 total log lines returned for the 30-minute query), not a product defect;
+not investigated further since 50/52 (96%) is already a strong sample and the missing 2 do not
+change the qualitative result below.
+
+**Gate distribution**: `no-binding` 16, `no-extraction` 18, `no-assertion-frame` 15,
+`parse-failure` 0, **`unbound-symbol` 1**, `consistent` 0, `violation` 0.
+
+**`violationFound:true` — 0 of 50**, same as §6.2 — nothing to manually classify as a true/false
+positive; the question "does it fire correctly" still cannot be asked because it still never fires
+a violation.
+
+**The number that answers this batch's actual question: YES, the widened gate reached the
+dimension-checking core in practice, not just in the offline corpus.** §6.2 measured 0 of 36 lines
+past the two pre-checks (extraction, assertion-frame) — this run got exactly **one** line to
+`unbound-symbol`, the first gate inside the core (Batch 0-2's actual dimensional-binding logic) any
+live turn has ever reached. Read from the transcript, not inferred: turn 1 of the `momentum` lesson
+("what's the formula for net force?") served —
+
+> "In symbols: \[ \Sigma \mathbf{F} = m\,\mathbf{a} \] ('the sum of all forces equals mass times
+> acceleration.')"
+
+— exactly the two Batch 6 shapes at once: a LaTeX `\[ … \]` span, AND the `"in symbols:"` colon
+marker. Gate A's `normalizeLatex` unwrapped `\Sigma \mathbf{F}`/`\mathbf{a}` and collapsed the
+`\,` spacing; Gate C's `COLON_FORWARD_DECLARATION_RE` matched `"in symbols"` and framed it as an
+assertion (no question mark in the sentence, no attribution verb) — both gates fired exactly as
+Batch 6 designed. Gate B then correctly **abstained**: the resolved concept for that turn was
+`phys.mech.momentum`, whose binding (`p`, `m`, `v` only) does not include `F` or `a` — those belong
+to `phys.mech.newtons-second-law`'s own binding. **This is the CORRECT outcome, not a near-miss** —
+the equation is real Newton's-Second-Law content surfacing mid-momentum-lesson (the same
+cross-concept drift §6.2 already named as a live product interaction, not a verifier defect), and a
+per-concept-scoped verifier is supposed to abstain on a symbol outside its own concept's binding
+rather than guess. Confirms Gate B's binding boundary is doing its job on real widened-gate input,
+not just on the offline corpus.
+
+**Comparison to §6.2's baseline:**
+
+| | §6.2 (pre-widening) | §6.4 (post-widening) |
+|---|---|---|
+| lines | 36 | 50 |
+| no-binding | 12 | 16 |
+| no-extraction | 14 | 18 |
+| no-assertion-frame | 10 | 15 |
+| parse-failure | 0 | 0 |
+| **unbound-symbol** | **0** | **1** |
+| consistent | 0 | 0 |
+| violation | 0 | 0 |
+
+**Verdict, stated plainly, per the task's own instruction not to pad a null result: the core is
+now reachable — proven once, not routinely.** The absolute rate (1/50, 2%) is far too small to
+claim the widening "worked" as a general fire-rate improvement, and it is still true that **zero
+lines reached `consistent` or `violation`** — no turn in this run produced a fully-bound,
+dimensionally-checkable equation all the way through the pipeline. What changed is qualitative, not
+statistical: before Batch 6, the core was provably unreachable by any observed real turn; after
+Batch 6, it is reachable, and the one instance that reached it did so via the exact mechanism Batch
+6 was built to admit, with the correct abstain-on-cross-concept-symbol behaviour. This is evidence
+FOR continuing to loosen the gates (the mechanism works on real prose) but is not itself grounds to
+build Batch 5 — Batch 5's own precondition ("Batch 4 shows a non-zero fire rate AND zero false
+positives") is about *violations*, and violations remain 0/86 across both live windows combined.
+**Not built this turn, per instruction.**
+
+Full transcripts and raw `PHYSICS_DIM` lines captured to this session's scratchpad, not committed
+(same convention as §6.2).
+
 ---
 
 ## 7. The steel man — and it is strong

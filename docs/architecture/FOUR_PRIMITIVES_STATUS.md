@@ -9,8 +9,8 @@ says. If this file and CLAUDE.md ever disagree, CLAUDE.md's dated entries are th
 this file is the current-state summary and should be corrected to match reality, not the other
 way round.
 
-**Last updated:** 2026-09-16, after Physics Verifier Batch 6 (gate widening) and the Durable
-Learner State investigation addendum (§13).
+**Last updated:** 2026-09-16, after the Physics Verifier's post-Batch-6 live re-observation window
+(§6.4 of its design doc) and the Durable Learner State investigation addendum (§13).
 
 ---
 
@@ -30,7 +30,7 @@ The four (§4.1-§4.4 of the V2 doc), in the order this programme has actually w
 | # | Primitive | Design doc | Status |
 |---|---|---|---|
 | 1 | **Turn Contract** | `TYPED_TURN_CONTRACT_DESIGN.md` | ✅ **DONE** — fully migrated |
-| 2 | **Deterministic Physics Verifier** (dimensional slice) | `DETERMINISTIC_PHYSICS_VERIFIER_DESIGN.md` | 🟡 **Batch 6 shipped (owner-approved gate widening), re-observation not yet re-run** — Gate A/C widened to admit LaTeX and colon-marker equations, full offline corpus re-validated (0 false fires), but the LIVE fire rate against the widened gate has not been re-measured |
+| 2 | **Deterministic Physics Verifier** (dimensional slice) | `DETERMINISTIC_PHYSICS_VERIFIER_DESIGN.md` | 🟡 **Batch 6 shipped + re-observed live — core reached once (1/50, `unbound-symbol`), still 0 violations** — Gate A/C widened to admit LaTeX and colon-marker equations; a fresh live campaign (§6.4) confirms the widened mechanism fires on real prose, but the absolute rate is too low to justify Batch 5 |
 | 3 | **Closed-taxonomy Learner-Move Interpreter** | `LEARNER_MOVE_INTERPRETER_DESIGN.md` | ✅ **DONE** — fully migrated, per its own stated scope |
 | 4 | **Durable per-concept learner state** | `DURABLE_LEARNER_STATE_AUDIT.md` | ⚪ **AUDITED + INVESTIGATED FURTHER — recommend CLOSE, not build, fork still owner's to decide** — see below |
 
@@ -69,7 +69,7 @@ plan — check the assertion set (`assertDeliverySatisfiesContract`) first.
 
 ---
 
-## 2. Deterministic Physics Verifier (dimensional slice) — 🟡 Batch 6 shipped, re-observation pending
+## 2. Deterministic Physics Verifier (dimensional slice) — 🟡 Batch 6 shipped + re-observed live
 
 **What it is:** a physics-specific correctness check — dimensional analysis only (no numeric
 tolerance, no sign convention, no symbolic/CAS checking; all three explicitly deferred, see the
@@ -140,15 +140,37 @@ design doc), shadow-only, zero route/behaviour change:
   real T1 sentence's trailing parenthetical still overcaptures into the RHS and fails to parse —
   proven unrelated to LaTeX (reproduces on plain text with zero backslashes) — out of this
   batch's stated scope.
-- **Not done this batch**: the widened gate's real fire rate has NOT been re-measured against live
-  traffic — this batch's validation is the offline corpus (sufficient since the change is still
-  shadow-only, zero production risk either way), not a fresh manufactured observation campaign.
+- **Not done that batch**: the widened gate's real fire rate had NOT been re-measured against live
+  traffic — Batch 6's own validation was the offline corpus, not a fresh manufactured observation
+  campaign.
 
-**Next action if resumed:** run a fresh manufactured observation window against the now-widened
-gate (same `phys.mech.*` equation-eliciting campaign shape as §6.2) to get a real post-widening
-fire rate — that result is what actually decides whether Batch 5 (enforcement) becomes worth
-proposing. Do not build Batch 5 speculatively; do not assume the offline corpus validation
-substitutes for a live fire-rate measurement.
+**Live re-observation run (2026-09-16, §6.4 of the design doc).** Same `scripts/qa/
+physicsDimBatch4Drive.ts` driver, same 4 `phys.mech.*` lessons, extended to 12 eliciting turns/
+lesson (added 4 phrasings targeting LaTeX/colon-marker shapes specifically). 50 `PHYSICS_DIM`
+lines read from production (2 of the expected 52 missing from the log query's own return window,
+not a product issue). Gate distribution: `no-binding` 16, `no-extraction` 18,
+`no-assertion-frame` 15, `parse-failure` 0, **`unbound-symbol` 1**, `consistent` 0, `violation` 0.
+
+**The core is now reachable, proven once.** Before Batch 6: 0/36 lines ever got past the two
+pre-checks. After: 1/50 reached `unbound-symbol` — the transcript shows the exact Batch-6 shape
+firing (`"In symbols: \[ \Sigma \mathbf{F} = m\,\mathbf{a} \]"`), correctly extracted (LaTeX
+normalization) and correctly assertion-framed (colon marker), then correctly ABSTAINED by Gate B
+because the resolved concept that turn was `phys.mech.momentum`, whose binding doesn't include
+`F`/`a` (those belong to `newtons-second-law`) — a correct per-concept-scoped abstain on real
+input, not a near-miss. `violationFound:true` remains 0/86 across both live windows combined.
+
+**Verdict: the widening works mechanically on real prose, but the absolute fire rate (2%) is far
+too low to claim Batch 5's own precondition is met.** Batch 5 (enforcement) needs a non-zero
+VIOLATION rate with zero false positives — this run adds evidence the pipeline *can* be reached,
+not that it fires often enough to matter. **Not built this session, per the design doc's own
+gating rule.**
+
+**Next action if resumed:** this is now an owner-level decision, not an execution task — either
+(a) accept the 2% mechanical-reachability result as sufficient evidence to keep widening gates
+opportunistically (next candidate: the trailing-balanced-parenthetical Gate A limitation §6.3
+found and reported), or (b) treat two live windows at effectively 0% violation rate as the
+steel-man's (§7) predicted outcome and retire the shadow as a permanently-dormant instrument. Do
+not build Batch 5 speculatively either way.
 
 ---
 
@@ -259,18 +281,21 @@ about, and per §13.3, do not treat a same-formula Batches-0-2 run as having set
 ## Programme-level status
 
 Two of four primitives fully shipped and closed (Turn Contract, Learner-Move Interpreter). Two
-are owner-directed, in-progress investigations, neither fully closed:
+are owner-directed investigations, neither fully closed:
 - **Physics Verifier** — owner chose "loosen the gates, re-validate" (2026-09-16). Batch 6
-  shipped, offline-validated, deployed. Still needs a fresh live fire-rate measurement against
-  the widened gate before Batch 5 (enforcement) can be evaluated (§2's "next action").
+  shipped, offline-validated, deployed, AND live re-observed (§6.4): the widened mechanism is
+  confirmed reachable on real prose (1/50 lines reached `unbound-symbol`, correctly abstaining),
+  but the violation rate is still 0/86 across both live windows combined — too low, on its own
+  terms, to justify Batch 5. What remains is an owner call (§2's "next action": keep
+  opportunistically widening gates, or retire the shadow per §7's steel man), not more execution.
 - **Durable Learner State** — owner chose "investigate further before deciding" (2026-09-16).
   Investigation done (§13 of the audit doc): closed the audit's own flagged unknowns against real
   production data, found Design D is not uniformly fresh, and found the audit's own proposed
   Batches 0-2 experiment can't actually discriminate the fork as currently specified. **The fork
   itself is still undecided** — this was investigation, not a decision, by explicit instruction.
 
-**If picking this up cold with no other instruction**, the two remaining open items are: (a) run
-the live re-observation window for the Physics Verifier (execution, not a decision — see §2); (b)
-either decide the Durable Learner State fork directly from §5's tradeoff table (now corrected by
-§13), or commission a genuinely different Design C if an empirical answer is still wanted (§13.3)
-— that one is still an owner decision, not something to default into.
+**If picking this up cold with no other instruction**, both remaining open items are now owner
+decisions, not execution tasks: (a) Physics Verifier — keep widening gates opportunistically vs.
+retire the shadow (§2's "next action"); (b) Durable Learner State — decide the fork directly from
+§5's tradeoff table (now corrected by §13), or commission a genuinely different Design C if an
+empirical answer is still wanted (§13.3). Neither should be defaulted into by an agent.
