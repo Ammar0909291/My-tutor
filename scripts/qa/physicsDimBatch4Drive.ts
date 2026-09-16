@@ -28,6 +28,13 @@ interface CurriculumLesson {
 // one of Gate C's whitelisted frames ("the formula is X = Y", "so X = Y",
 // "X = Y tells us") — never a question about the formula, which Gate C's own
 // question-mark override would exclude from assertion regardless.
+//
+// Batch 6 (2026-09-16, ec42ca3) widened Gate A/C to also admit LaTeX-wrapped
+// equations (\( \), \[ \]) and a colon-marker whitelist ("in symbols:", "this
+// is written as:", "in equation form:", "mathematically:"). The four turns
+// appended below are new for this re-observation window, phrased to invite
+// exactly those two shapes rather than the plain-text forms already covered
+// by the original eight.
 const ELICITING_TURNS = [
   "what's the formula for net force?",
   'can you show me F=ma written out?',
@@ -37,6 +44,10 @@ const ELICITING_TURNS = [
   'show me the equation, not just words',
   'ok so what does the formula actually look like',
   "what's the equation that connects these quantities?",
+  'can you write that in LaTeX notation for me',
+  'please show it mathematically, in symbols',
+  'write it in equation form, please',
+  'can you show it written as an equation, using proper notation',
 ]
 
 async function api(cookie: string, method: 'GET' | 'POST', path: string, body?: unknown) {
@@ -90,7 +101,7 @@ async function main() {
     const lesson = bySlug.get(t)
     if (!lesson) { console.error('MISSING curriculum lesson for', t); continue }
     try {
-      await runConcept(cookie, lesson, totalLessons, 8, log)
+      await runConcept(cookie, lesson, totalLessons, ELICITING_TURNS.length, log)
     } catch (e) {
       log.push(`ERROR on ${t}: ${(e as Error).message}`)
       console.error('ERROR on', t, e)
