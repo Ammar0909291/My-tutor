@@ -11641,6 +11641,24 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 readProgressionMetrics(fresh.progressionMetrics), facts,
               ),
             }))
+            // Durable Learner State, third design (V2 §4.4) — Batch 1,
+            // SHADOW-COMPUTE ONLY, per `DURABLE_LEARNER_STATE_AUDIT.md` §6's
+            // own Batch 1 spec ("Compute the record at the existing persist
+            // site; log it, write nothing"). Reuses `stateAfterForMetrics`
+            // above, computed once for this block's own telemetry purpose —
+            // no second fold, no new read. NO DB WRITE: the 2026-08-31
+            // egress incident is the standing reason a new per-turn table
+            // is never the answer to "measure this" first. Nothing here
+            // changes what is persisted, graded, or served —
+            // `computeConceptMasteryRecord` is pure and its only consumer
+            // is this log line.
+            if (stateAfterForMetrics?.conceptId) {
+              const { computeConceptMasteryRecord } = await import('@/lib/teaching/conceptMasteryRecord')
+              const record = computeConceptMasteryRecord(
+                stateAfterForMetrics, stateAfterForMetrics.conceptId, new Date(),
+              )
+              console.log('[learn/chat] LEARNER_STATE=' + JSON.stringify(record))
+            }
           } catch { /* telemetry never takes a turn down */ }
 
           // ADR 15: build the RRM snapshot delta (append new entry to log).

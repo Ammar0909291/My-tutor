@@ -151,20 +151,91 @@ then decide whether a `Message.idempotencyKey` column (unique per session) is wo
 this is the one item of the four where the "next step" genuinely is a schema change, gated on
 real evidence it's worth the migration cost, not on more shadow batches.
 
+**Batch 4 is COMMITTED AND PUSHED — commit `2f3898f3` on `main`.** Full suite 697/14,439/9 skipped;
+tsc clean; build clean. **This closes the observation phase for ALL FOUR Turn Contract
+invariants** (I2 shipped as a working, correct shadow check; I3/I8/I10 each investigated in full
+and either shipped as observation-only telemetry or found to need an explicit owner decision or a
+schema migration before any enforcement is attempted). Turn Contract work now WAITS on production
+log data + an owner decision for I3/I8/I10's enforcement question — do not start enforcing any of
+them without that. Moving to Physics Verifier next.
+
 ### Next steps, in order
 1. ~~Turn Contract I3~~ — see above; blocked on an owner decision + production prevalence data,
    not on more engineering. Do not attempt to "fix" this by restricting the model MCQ fallback
    without that decision.
 2. ~~Turn Contract I8~~ — see below; observation shipped, enforcement (if any) needs production
    data + a reproduced miss first, same posture as I3.
-3. ~~Turn Contract I10~~ — see below; observation shipped (client key + heuristic server log), a
+3. ~~Turn Contract I10~~ — see above; observation shipped (client key + heuristic server log), a
    REAL fix needs a schema migration and is deliberately not attempted here.
-4. **Physics Verifier, numeric check** (§4.2's second-cheapest: "values recomputed independently;
-   tolerance and significant figures... free"). `mathjs` is already a dependency, currently
-   unused (per V2's own audit) — this is the natural next check after dimensional.
-5. **Durable Learner State's third design** — needs an explicit read of whether
-   `DURABLE_LEARNER_STATE_AUDIT.md` evaluated V2's actual evidence-spine-projection proposal
-   before building anything; if it didn't, that evaluation is the first step, not code.
+4. **Physics Verifier, numeric check — INVESTIGATED, NOT SAFELY BUILDABLE AS A BATCH.** See
+   dedicated section below. Do not attempt to implement this without first doing what it needs:
+   a design pass + authored per-equation tolerances + a validation corpus.
+5. **Durable Learner State's third design** — evaluation done, see dedicated section below.
+
+### Batch 5 (Physics Verifier, numeric check) — investigated, deliberately NOT attempted
+
+`dimensions.ts`/`analyzeEquation` is a purely SYMBOLIC dimensional analyzer (symbol -> Dimension
+bindings, e.g. "F = m a" checked for unit consistency) — it has no concept of actual numeric
+values at all, so it cannot be extended into a numeric check; a numeric check is a genuinely
+separate extraction problem (numbers + units, not symbols + dimensions).
+
+**`DETERMINISTIC_PHYSICS_VERIFIER_DESIGN.md` §5.7 already names this explicitly out of scope**,
+with only one line of design: "a per-equation tolerance field on the binding... future." No
+extraction rule, no tolerance model, no corpus exists — and the design doc's own acceptance bar
+for the ALREADY-SHIPPED dimensional check ("zero false rejections across a 200-turn replay of
+real transcripts") is recorded as "currently unmeetable — the corpus does not exist" even for
+that simpler, already-built check.
+
+Building the numeric check responsibly needs, in order: (1) a design pass (what counts as a
+numeric physics assertion; what tolerance; sig-figs handling), (2) AUTHORED per-equation
+tolerance values added to `dimensionBindings.ts`-equivalent data (content work, not just code),
+(3) a validation corpus in the same style as `physicsVerifierCorpus.ts` (which itself took
+several dedicated batches — 0 through 6 — to build safely). Attempting this in one ad-hoc batch
+without those would repeat exactly the "guess a fix instead of measuring first" mistake this
+whole Turn Contract campaign has been correcting. **Deliberately not attempted here.** A future
+session with a full effort budget should start with the design pass, not code.
+
+### Batch 6 (Durable Learner State, third design) — Batches 0-1 of the audit's own plan, executed
+
+`DURABLE_LEARNER_STATE_AUDIT.md` §6 already designed Batches 0-6 for a direct-write "Design C"
+table, and Batches 0-1 (risk: NONE, no DB write at all) had never been executed. Confirmed by
+direct grep that the audit's own Design C/D comparison never mentions `capabilityModel.ts`, the
+evidence spine, or a projection anywhere — V2's actual §4.4 proposal genuinely was not evaluated.
+Separately confirmed `capabilityModel.ts` is a real, working spine->projection->hydrate instance
+(`@/lib/evidence-spine/fold.ts`, a closed but EXTENSIBLE `SpineEventType` union) — so V2's claim
+the pattern is "already proven" is accurate, not aspirational. Key insight: Batches 0-1 serve
+EITHER fork (a raw table or a spine event) equally, since neither writes anything yet — so
+executing them now does not prejudge the fork.
+
+**Shipped**: `src/lib/teaching/conceptMasteryRecord.ts` (`computeConceptMasteryRecord`) — a pure
+function per the audit's own Batch 0 spec ("a pure function of the live authority... do NOT
+import ADR 10's Bayesian update rule"). `verified` is never reimplemented — it calls
+`masteryVerifiedStrict` directly (the SAME authority every other mastery consumer uses), so it
+cannot independently diverge the way the plain-vs-verified counter split already did once
+(`masteryCounterDisplayDivergence.test.ts`). `masteryScore` is a continuous 0-1 read of progress
+toward the SAME two thresholds, capped below 1 whenever `verified` is false. `decayedScore` and
+`ActiveMisconception` are deliberately OUT of scope (decay only matters on READ, Batch 5, HIGH
+risk; `ActiveMisconception` needs the Evidence Engine's tables, which have 0 writers — audit's own
+final line).
+
+Wired at the EXISTING persist site (route.ts, inside the same try block the "STEP 2 progression
+telemetry" comment already documents, reusing its `stateAfterForMetrics` — no second fold, no new
+DB read): `[learn/chat] LEARNER_STATE={...}` logs the computed record. **No DB write** (the
+2026-08-31 egress incident is the standing reason). Nothing here changes what is persisted,
+graded, or served.
+
+**One genuine bug caught by the test suite before shipping, not after**: an early test asserted a
+"plain-vs-verified divergence" case using a raw state literal without `sawModernGrading: true` —
+`masteryVerifiedStrict`'s own legacy fallback legitimately certifies THAT shape (a genuine
+pre-feature row), so the test's own premise was wrong, not the code. Corrected to the actual
+divergence shape (`sawModernGrading: true` + zero verified counters) before shipping — the exact
+reproduce-first discipline this whole session has followed.
+
+**Next step for this item**: read production `LEARNER_STATE` logs alongside `capabilityModel.ts`'s
+own live projection reads. Per the audit's own Batch 2 spec ("Agreement assertion" — log a
+violation when the computed record disagrees with `studentIntelligence`'s derived profile; if the
+two never disagree, Design C/the spine variant adds nothing but a table/event type) — that
+agreement check is the next batch, and it is the fork's own evidence, not a guess.
 
 **Update this file's "CURRENT STATE" section at the end of every batch** — that is the entire
 point of this file existing. Keep the STANDING AUTHORIZATION section as-is (do not re-litigate
