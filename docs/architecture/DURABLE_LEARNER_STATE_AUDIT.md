@@ -1,6 +1,16 @@
 # Durable Per-Concept Learner State — staleness audit of ADR 10
 
-**Status:** AUDIT + CONDITIONAL PLAN. No code, no migration, no implementation. One new file.
+**Status:** CLOSED, 2026-09-16 — owner-authorized decision, direct chat instruction, adopting this
+audit's own §8 recommendation as final: Item 4 is closed as scoped, not built and not deferred.
+The fork (§5/§13) is decided — `studentIntelligence.ts`'s derived Design D is canonical for the
+mastery/decay concern; `ConceptMasteryRecord`/`ActiveMisconception` stay unwritten. ADR 10 marked
+PARTIALLY SUPERSEDED accordingly. See `FOUR_PRIMITIVES_STATUS.md` §4 for the live-status summary.
+This does not reopen if a future session finds a NEW reason to want cross-learner queryability —
+that is a fresh decision against §7.7/§8.2's own stated condition, not a reason to treat this
+closure as provisional.
+
+Everything below this line is the original audit + investigation record — kept verbatim as the
+evidence trail the closure decision above rests on.
 
 **Scope:** `docs/architecture/TUTOR_REMEDIATION_PLAN.md` "Item 4 — Four primitives", sub-item 4.
 Source design under audit: `docs/architecture/ADR_10_STUDENT_MEMORY_ARCHITECTURE.md` (Proposed,

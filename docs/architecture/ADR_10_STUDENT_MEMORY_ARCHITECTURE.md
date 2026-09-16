@@ -1,9 +1,26 @@
 # ADR 10 · Student Memory Architecture
 
-**Status:** Proposed (documentation only — implementation blocked on Canonical KG v1 freeze and explicit user approval)
+**Status:** PARTIALLY SUPERSEDED (2026-09-16, owner-authorized closure of the "Durable per-concept
+learner state" Four Primitives item — see `docs/architecture/DURABLE_LEARNER_STATE_AUDIT.md` §7-8
+and `FOUR_PRIMITIVES_STATUS.md` §4). The `ConceptMasteryRecord`/`ActiveMisconception` schema this
+ADR proposes already shipped, field-for-field, in migration `20260707120000_sync_untracked_schema_drift`
+(2026-07-02, five days after this ADR) — but has **zero writers** and its one reader
+(`route.ts:1754`) has always returned `null`. The Store 2 SEMANTICS this ADR asks for (durable,
+decayed, per-concept mastery) are independently delivered, live, in production, by
+`studentIntelligence.ts` ("Storage: NONE" — a derived model, not a stored one). The audit's own
+§8 recommendation, adopted here: do **not** build a writer for the `ConceptMasteryRecord`/
+`ActiveMisconception` tables — `studentIntelligence.ts`'s derived model is canonical for Store 2's
+concern. The tables stay in the schema (harmless, unused) rather than being dropped; a genuinely
+new need for cross-learner queryability (the one real gap the audit's §7.7/§8.2 leaves open) is
+the only condition under which building a writer for them should be reconsidered, and that
+reconsideration should re-read the audit's §6/§13.3 caution that a same-formula experiment cannot
+by itself validate the build. `ActiveMisconception` remains additionally blocked on this ADR's own
+§14 Evidence Engine sequencing, which is separately unmet.
 **Date:** 2026-07-02
 **Supersedes:** nothing — first ADR on memory architecture
-**Superseded by:** —
+**Superseded by:** `studentIntelligence.ts` (Store 2 concern only — mastery/decay semantics);
+everything else in this ADR (the 6-store map, `RetentionMetric`/`ReviewSchedule`/`BrainConfig`
+findings) is unaffected and still current.
 
 ---
 

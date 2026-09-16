@@ -9,8 +9,11 @@ says. If this file and CLAUDE.md ever disagree, CLAUDE.md's dated entries are th
 this file is the current-state summary and should be corrected to match reality, not the other
 way round.
 
-**Last updated:** 2026-09-16, after the Physics Verifier's Batch 7 fix + live re-observation window
-(§6.4 of its design doc) and the Durable Learner State investigation addendum (§13).
+**Last updated:** 2026-09-16, after DIRECT OWNER INSTRUCTION to decide and close out both
+remaining open items — the Physics Verifier shadow is retired as the primitive's terminal state
+(no Batch 5), and the Durable Learner State fork is decided (Design D canonical, ADR 10 partially
+superseded, Item 4 closed). **All four primitives are now DONE/CLOSED. No open items remain in
+this programme.**
 
 ---
 
@@ -30,9 +33,9 @@ The four (§4.1-§4.4 of the V2 doc), in the order this programme has actually w
 | # | Primitive | Design doc | Status |
 |---|---|---|---|
 | 1 | **Turn Contract** | `TYPED_TURN_CONTRACT_DESIGN.md` | ✅ **DONE** — fully migrated |
-| 2 | **Deterministic Physics Verifier** (dimensional slice) | `DETERMINISTIC_PHYSICS_VERIFIER_DESIGN.md` | 🟡 **Batch 7 shipped + re-observed live (twice, concurrently) — trailing-parenthetical Gate A defect fixed and proven (unit test), but 0 core-reached in either run** — four further, adjacent, unfixed Gate A/C gaps found and reported from real transcript text; still 0/169 violations across all four live windows combined |
+| 2 | **Deterministic Physics Verifier** (dimensional slice) | `DETERMINISTIC_PHYSICS_VERIFIER_DESIGN.md` | ✅ **DONE — shadow retired as terminal state (2026-09-16, owner decision).** Batches 0-3/6/7 shipped; Batch 5 (enforcement) explicitly NOT warranted — 0/169 violations across 4 live windows, matching the design's own §7 steel-man-predicted outcome exactly. Shadow code stays live (harmless, already deployed); no further gate-widening is planned. |
 | 3 | **Closed-taxonomy Learner-Move Interpreter** | `LEARNER_MOVE_INTERPRETER_DESIGN.md` | ✅ **DONE** — fully migrated, per its own stated scope |
-| 4 | **Durable per-concept learner state** | `DURABLE_LEARNER_STATE_AUDIT.md` | ⚪ **AUDITED + INVESTIGATED FURTHER — recommend CLOSE, not build, fork still owner's to decide** — see below |
+| 4 | **Durable per-concept learner state** | `DURABLE_LEARNER_STATE_AUDIT.md` | ✅ **DONE — closed as scoped (2026-09-16, owner decision).** Fork decided: `studentIntelligence.ts` (Design D, derived, live) is canonical; `ConceptMasteryRecord`/`ActiveMisconception` stay unwritten. ADR 10 marked partially superseded. |
 
 ---
 
@@ -69,7 +72,7 @@ plan — check the assertion set (`assertDeliverySatisfiesContract`) first.
 
 ---
 
-## 2. Deterministic Physics Verifier (dimensional slice) — 🟡 Batch 7 shipped + re-observed live
+## 2. Deterministic Physics Verifier (dimensional slice) — ✅ DONE, shadow retired as terminal state
 
 **What it is:** a physics-specific correctness check — dimensional analysis only (no numeric
 tolerance, no sign convention, no symbolic/CAS checking; all three explicitly deferred, see the
@@ -205,13 +208,35 @@ lines).** Batch 5 (enforcement) remains unwarranted on this evidence — unchang
 conservatism, only one (3) to Gate A — Gate C, not Gate A, now looks like the higher-leverage next
 target if the owner authorizes further widening.
 
-**Next action if resumed:** still an owner-level decision, not an execution task — either
-(a) keep widening gates opportunistically (four further named, evidenced candidates now queued:
-the "more prose after the parenthetical" gap, the colon-marker whitelist gap, the
-excluded-character-inside-parenthetical gap, and the core-assertion-whitelist gap — none
-attempted yet), or (b) treat four live windows at effectively 0% violation rate as the steel-man's
-(§7) predicted outcome and retire the shadow as a permanently-dormant instrument. Do not build
-Batch 5 speculatively either way.
+**DECIDED, 2026-09-16 (direct owner instruction to close out this primitive): retire the shadow as
+its terminal state — option (b) above.** Four live windows, 169 lines, 0 violations, and the
+dimension-checking core reached exactly once (1/169, a correct abstain). This is precisely the
+outcome the design doc's own §7 steel man names and pre-authorizes as a valid stop: *"If Batch 4
+shows the rule never fires on real generated prose, the correct outcome is to stop, keep the
+corpus, and write two more hand guards instead. That is a real possible outcome of this plan and
+the plan should not be run by anyone unwilling to accept it."* Every further gate-widening
+candidate found (four of them, across Batches 6/7) narrows the target rather than broadening it —
+each is a more specific, rarer prose shape than the last, with no evidence any of them would ever
+surface a genuine violation rather than another correct abstain. Continuing to chase them has no
+defined stopping point and trades against Gate A/C's own conservatism for a capability that, after
+four honest attempts, has never once found anything wrong.
+
+**What this means concretely:** Batch 5 (enforcement) is not merely deferred — it is DECLINED,
+absent a genuinely new trigger (a real dimensional error surfacing in production traffic, reported
+through the ordinary defect-finding channels this repo already uses, not through further
+manufactured gate-widening campaigns). The shadow code (`dimensionalVerifier.ts`,
+`physicsDimTelemetry.ts`, the `PHYSICS_DIM={…}` log line in both routes) is NOT removed — it is
+zero-cost, already deployed, fully tested (66 tests, full corpus 912/25/240), and costs nothing to
+leave running per §7's own "worst case, the rule never fires" framing. `dimensions.ts` and
+`dimensionBindings.ts` stay as a reusable corpus/algebra layer per §7's "keep the corpus" clause,
+available to a future hand-guard (`fieldLineSignGuard`/`visionDirectionGuard`-style) if a real
+defect is ever found. The four named-but-unfixed Gate A/C gaps stay recorded in §6.5 as historical
+evidence, not as a queue — no future session should pick one up as a "next batch" without a new,
+real trigger.
+
+**Next action if resumed:** none scheduled. This primitive is closed at its designed
+instrumentation-only terminal state (§8's Batch 0-3 definition of done, items 1-5, all met; Batch
+5's items 6-10 explicitly not attempted, per this decision).
 
 ---
 
@@ -252,7 +277,7 @@ nothing currently pending calls for it.
 
 ---
 
-## 4. Durable per-concept learner state — ⚪ AUDITED, recommend CLOSE (not built)
+## 4. Durable per-concept learner state — ✅ DONE, closed as scoped (not built)
 
 **What it is:** ADR 10's `ConceptMasteryRecord` / `ActiveMisconception` model — durable,
 per-concept mastery and misconception tracking, replacing `TopicProgress`'s 4 independent
@@ -311,40 +336,48 @@ partially superseded; run Batches 0-2 only if queryability is explicitly wanted,
 now that doing so needs a genuinely different Design C to be informative) still stands as the
 audit's position.
 
-**Next action if resumed:** read `DURABLE_LEARNER_STATE_AUDIT.md` §5, §7, and now §13 in full
-before doing anything else. This is a one-session audit-and-decide (which mechanism is
-canonical), not a build. Do not start writing `ConceptMasteryRecord` rows without resolving that
-fork first — doing so would create the second-source-of-truth risk the audit specifically warns
-about, and per §13.3, do not treat a same-formula Batches-0-2 run as having settled it.
+**DECIDED, 2026-09-16 (direct owner instruction to close out this primitive): adopt the audit's
+own §8 recommendation as final.** The fork is resolved — `studentIntelligence.ts` (Design D,
+derived, `Storage: NONE`, live in production via `/api/learner/review-queue`) is canonical for the
+mastery/decay concern ADR 10's Store 2 was proposed to address. `ConceptMasteryRecord` and
+`ActiveMisconception` stay unwritten — not deferred, not half-built, CLOSED. §7.1-7.2 of the audit
+are close to decisive on their own (the one recorded incident of this bug class is inside a single
+surface's counter split, not the cross-surface fragmentation this design targets, and would not
+have been caught by it; the read-consistency benefit is already delivered live, for free).
+ADR 10 marked PARTIALLY SUPERSEDED (its header updated directly) — the 6-store map and the
+`RetentionMetric`/`ReviewSchedule`/`BrainConfig` findings remain current and unaffected; only the
+Store 2 (`ConceptMasteryRecord`) proposal is superseded.
+
+**What would reopen this:** a genuinely NEW reason to want cross-learner queryability (the one gap
+the audit's §7.7/§8.2 leaves open and Design D cannot answer) — and even then, per §13.2, running
+the originally-proposed Batches 0-2 experiment would not by itself validate a build, because
+Batch 0's own spec computes Design C's score from the same inputs and decay law Design D already
+uses, so an "agreement experiment" between them would agree trivially by construction. A future
+build attempt needs either a genuinely different Design C or an explicit acceptance that
+queryability alone justifies the second-source-of-truth risk — not a rerun of the original plan.
+
+**Next action if resumed:** none scheduled. This primitive is closed.
 
 ---
 
 ## Programme-level status
 
-Two of four primitives fully shipped and closed (Turn Contract, Learner-Move Interpreter). Two
-are owner-directed investigations, neither fully closed:
-- **Physics Verifier** — owner chose "loosen the gates, re-validate" (2026-09-16). Batch 6
-  shipped, offline-validated, deployed, AND live re-observed (§6.4): the widened mechanism is
-  confirmed reachable on real prose (1/50 lines reached `unbound-symbol`, correctly abstaining).
-  Batch 7 (§6.5) closed the specific trailing-parenthetical Gate A defect §6.3/§6.4 had named but
-  not fixed — proven by unit test against the real captured sentence, zero corpus regressions —
-  then re-ran the live campaign against the deployed fix — twice, concurrently, by two independent
-  sessions that both picked up the same queued prompt — 0/50 and 0/33 core-reached in the two runs,
-  and four total further, adjacent, unfixed Gate A/C gaps were found and reported from the real
-  transcripts (trailing-paren-plus-more-prose, an uncovered colon-marker phrasing, an
-  excluded-character-inside-parenthetical truncation, and a colon-free bold-callout failing Gate
-  C's own core whitelist). Violation rate is still 0/169 across all four live windows combined —
-  too low, on its own terms, to justify Batch 5. What remains is an owner call (§2's "next action":
-  keep opportunistically widening gates against the four newly-queued candidates — three of which
-  point at Gate C, not Gate A — or retire the shadow per §7's steel man), not more execution.
-- **Durable Learner State** — owner chose "investigate further before deciding" (2026-09-16).
-  Investigation done (§13 of the audit doc): closed the audit's own flagged unknowns against real
-  production data, found Design D is not uniformly fresh, and found the audit's own proposed
-  Batches 0-2 experiment can't actually discriminate the fork as currently specified. **The fork
-  itself is still undecided** — this was investigation, not a decision, by explicit instruction.
+**All four primitives are DONE. This programme is closed.**
 
-**If picking this up cold with no other instruction**, both remaining open items are now owner
-decisions, not execution tasks: (a) Physics Verifier — keep widening gates opportunistically vs.
-retire the shadow (§2's "next action"); (b) Durable Learner State — decide the fork directly from
-§5's tradeoff table (now corrected by §13), or commission a genuinely different Design C if an
-empirical answer is still wanted (§13.3). Neither should be defaulted into by an agent.
+- **Turn Contract** and **Learner-Move Interpreter** — fully shipped and closed, no open items.
+- **Physics Verifier** — instrumentation (Batches 0-3, 6, 7) fully shipped, live-verified across
+  four manufactured observation windows (169 lines, 1 core-reach, 0 violations). **Closed at that
+  terminal state by direct owner instruction, 2026-09-16**: Batch 5 (enforcement) declined, not
+  deferred — the measured outcome is exactly what the design doc's own §7 steel man named as an
+  acceptable stop ("if the rule never fires... stop, keep the corpus, write hand guards instead").
+  Shadow code stays live and harmless; the four further-named Gate A/C gaps are recorded as
+  history, not a queue.
+- **Durable Learner State** — audited (§1-12) and investigated further (§13) against real
+  production data. **Closed by direct owner instruction, 2026-09-16**, adopting the audit's own
+  §8 recommendation: `studentIntelligence.ts` (Design D) is canonical, `ConceptMasteryRecord`/
+  `ActiveMisconception` stay unwritten, ADR 10 marked partially superseded.
+
+**If picking this up cold**: there is nothing to resume. A new build attempt on either item needs
+a genuinely NEW trigger (a real dimensional error found in production traffic for Item 2; a
+genuinely new Design C or an explicit queryability requirement for Item 4) — not a continuation of
+either programme's own prior campaign.

@@ -21,6 +21,14 @@
   referenced the adopted plan, so "pick it up cold" defaulted every session back into the
   deferred track. This note is the fix. Left in place as a standing incident record — do not
   remove it.
+- **UPDATE, 2026-09-16, later same day: the "other two" named above are now CLOSED, by direct
+  owner chat instruction, not by further cold pick-up.** See "Four Primitives — PROGRAMME CLOSED"
+  below for the full record. This does not weaken the deferral note above as a standing rule for
+  cold sessions — it records that the specific two items it names have since been resolved by an
+  explicit, in-conversation owner decision, the kind of authorization this note has always
+  required before either item could move. A cold session finding this note should read both
+  bullets: the deferral policy stands for anything NOT already closed; these two specific items
+  are simply finished, not an invitation to resume either campaign.
 - **The plan's own final, self-corrected verdict (§11.10)**, after arguing with itself across
   §§9–11, narrows the adopted work to exactly one thing: **§10.1 — "one corpus, one writer"**
   (fix the ~32 authored-but-unreachable content modules stranded across subjects so ONE production
@@ -6245,20 +6253,32 @@ ADR; everything in it that would become code stays G1/G2-gated.
   120/120 pass). Physics content layer measured complete: KG 238 / Blueprints 238/238 / Educational
   Brain 238/238, visual bindings exact 77 / none 161.
 
-## Four Primitives — live status doc (2026-09-16, standing pointer)
+## Four Primitives — PROGRAMME CLOSED (2026-09-16, direct owner instruction)
 - The four-primitive migration this V2 doc's verdict names (Turn Contract → Physics Verifier
-  (dimensional) → Learner-Move Interpreter → durable learner state) now has its own single
-  living status file: **`docs/architecture/FOUR_PRIMITIVES_STATUS.md`.** Read it FIRST — before
-  this section, before the individual design docs — to pick the programme up cold from any
-  session or account; it is a dashboard, not detail, and states current status/next action per
-  primitive with commit hashes. **Update it in the same commit as any change touching one of the
-  four primitives** — do not let it drift into a second, competing history against this file's
-  own sprawling entries. As of 2026-09-16: Turn Contract and Learner-Move Interpreter are DONE
-  (fully migrated, all batches landed); Physics Verifier is PAUSED at Batch 4 (shadow deployed,
-  the real manufactured-observation campaign not yet run — an incidental 14-line sample exists,
-  0/14 fired, not a substitute); Durable Learner State was AUDITED and the recommendation is to
-  CLOSE it as scoped rather than build it, pending an owner-level fork decision between two
-  already-existing mechanisms (see the audit doc, `DURABLE_LEARNER_STATE_AUDIT.md`).
+  (dimensional) → Learner-Move Interpreter → durable learner state) has its own single living
+  status file: **`docs/architecture/FOUR_PRIMITIVES_STATUS.md`.** Read it for the full record.
+  **All four are now DONE.** Turn Contract and Learner-Move Interpreter were fully migrated
+  earlier. On 2026-09-16 the owner gave direct, explicit chat instruction to decide and close out
+  the remaining two rather than leave them at their prior "owner decision pending" state:
+  - **Physics Verifier**: closed at its instrumentation-only terminal state. Four live
+    manufactured-observation windows (169 `PHYSICS_DIM` lines across Batches 3/6/7) found the
+    dimension-checking core reachable exactly once and **zero dimensional violations** — the
+    exact outcome the design doc's own §7 steel man names and pre-authorizes as a legitimate
+    stop ("if the rule never fires on real generated prose... stop, keep the corpus, write hand
+    guards instead"). Batch 5 (enforcement) is DECLINED, not deferred. The shadow stays deployed
+    (zero-cost, already tested — 66 tests, full 912/25/240 corpus) in case a real dimensional
+    defect is ever found by ordinary means; no further gate-widening campaign is planned.
+  - **Durable Learner State**: closed as scoped, adopting `DURABLE_LEARNER_STATE_AUDIT.md`'s own
+    §8 recommendation as final. The Design C/D fork is decided: `studentIntelligence.ts` (Design
+    D, derived, `Storage: NONE`, live) is canonical; `ConceptMasteryRecord`/`ActiveMisconception`
+    stay unwritten. `ADR_10_STUDENT_MEMORY_ARCHITECTURE.md` marked PARTIALLY SUPERSEDED (header
+    updated directly) — its 6-store map and other findings remain current; only the Store 2
+    proposal is superseded.
+  - `FOUR_PRIMITIVES_HANDOVER.md` (the queue file a prior session created) reduced to a closure
+    notice — nothing is queued. Reopening either item needs a genuinely NEW trigger (a real
+    production defect for Item 2; a genuinely different Design C or an explicit queryability
+    requirement for Item 4), not a continuation of the prior campaign, and should not be
+    defaulted into by a future session picking this up cold.
 
 ## Run locally
 ```
