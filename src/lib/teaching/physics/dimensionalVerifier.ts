@@ -1,5 +1,6 @@
 /**
- * DETERMINISTIC PHYSICS VERIFIER — the rule itself, Batch 3.
+ * DETERMINISTIC PHYSICS VERIFIER — the rule itself, Batch 3; extraction
+ * widened Batch 6.
  *
  * Design: `docs/architecture/DETERMINISTIC_PHYSICS_VERIFIER_DESIGN.md` §5.2-
  * §5.6, §6 row 3 ("Shadow in both routes... Consume nothing. Repair
@@ -11,7 +12,16 @@
  * where `dimensionalViolation` — the actual three-gate rule §5.3/§5.4
  * describe — is built for the first time, and where it is wired into both
  * routes as a SHADOW: it computes and logs, it repairs nothing, it
- * rejects no turn, and nothing downstream reads its output yet (Batch 4).
+ * rejects no turn, and nothing downstream reads its output yet.
+ *
+ * Batch 4's real observation window (§6.2) measured 0/36 fire even on
+ * turns built to elicit an equation, and traced two of its three named
+ * causes to Gate A conservatism, not the model failing to write physics:
+ * LaTeX-wrapped equations and an explicit forward-declaration colon
+ * ("...this is written as: F = ma"). Batch 6 (§6.3) admits exactly those
+ * two named shapes — see `normalizeLatex` and `COLON_FORWARD_DECLARATION_RE`
+ * below — and nothing else; Gate A/C's whitelist discipline (next section)
+ * is unchanged, only widened by two named, evidenced entries.
  *
  * ── §5.1: WHY THIS IS NOT K5 ──────────────────────────────────────────────
  * K5's own recorded failure (`route.ts` L7955-7962) was reject-by-default
@@ -24,9 +34,14 @@
  *
  * ── THE THREE GATES (§5.3), ALL INVERTED-DEFAULT ────────────────────────────
  * GATE A — EXTRACTION. A conservative equation shape, never inside a code
- * fence or backtick span, never immediately preceded by ":". The symbol-
- * plausibility check below mirrors `scripts/physics/extractEquationCorpus.ts`'s
- * own `isPlausibleSymbol`/`isGenuineEquation` — re-implemented here, not
+ * fence or backtick span, never immediately preceded by ":" — EXCEPT the
+ * Batch 6 colon-marker whitelist (`COLON_FORWARD_DECLARATION_RE`), a
+ * closed set of explicit forward-declaration phrases. LaTeX markup is
+ * normalized to plain text first (`normalizeLatex`, Batch 6) so `\(p =
+ * m\,v\)` reaches this same pipeline instead of failing the symbol shape
+ * on its backslash-prefixed macros. The symbol-plausibility check below
+ * mirrors `scripts/physics/extractEquationCorpus.ts`'s own
+ * `isPlausibleSymbol`/`isGenuineEquation` — re-implemented here, not
  * imported, because `src/lib` runtime code does not import from `scripts/`
  * (the reverse dependency direction this repo uses everywhere else). This
  * is the SAME conservatism, independently re-derived, not a shared module.
@@ -41,9 +56,13 @@
  * GATE C — ASSERTION FRAME. A WHITELIST, never a blacklist — this repo's
  * own documented exclusion-list trap (`DISCOURSE_NOUNS`, cited in the
  * design doc) is exactly what a blacklist here would repeat. An equation
- * is ASSERTED only if its sentence is a standalone display line, or the
- * equation is immediately preceded by "the formula is"/"we write"/"so", or
- * immediately followed by "tells us". Three explicit overrides pull an
+ * is ASSERTED only if its sentence is a standalone display line, the
+ * equation is immediately preceded by "the formula is"/"we write"/"so",
+ * immediately followed by "tells us", or (Batch 6) immediately preceded by
+ * a colon whose own leading clause ends in one of the same forward-
+ * declaration markers Gate A admits — "in symbols", "in equation form",
+ * "mathematically", "(this) is written as", etc. Three explicit overrides
+ * pull an
  * otherwise-matching sentence back to NOT ASSERTED regardless: a question
  * mark anywhere in the sentence, the equation sitting inside quotation
  * marks, or an attribution verb ("writes"/"says"/"thinks"/"claims" and
@@ -72,6 +91,92 @@
  */
 import { analyzeEquation, dimensionsEqual, type Dimension } from './dimensions'
 import type { ConceptDimensionBinding } from './dimensionBindings'
+
+// ── Batch 6: LaTeX normalization + colon-marker whitelist ────────────────
+//
+// Design: `docs/architecture/DETERMINISTIC_PHYSICS_VERIFIER_DESIGN.md` §6.3.
+// §6.2's real observation window found the rule fires 0/36 even on turns
+// built to elicit it, and named two of its three root causes as gate
+// conservatism rather than the model failing to write physics: equations
+// wrapped in LaTeX markup (`\( p = m\,v \)`) whose backslash-prefixed
+// symbols never satisfy Gate A's letter-led shape, and equations following
+// an explicit forward-declaration colon ("In equation form, this is
+// written as:\n\( F = m a \)") that Gate A's blanket "never immediately
+// preceded by ':'" rule excludes by construction. Both fixes stay additive
+// whitelists (§5.3's own discipline, restated in this file's own header) —
+// nothing that already abstained can newly fire from noise; only these two
+// named, evidenced shapes become reachable.
+
+/**
+ * Strips LaTeX delimiters and a closed set of decorator/spacing commands so
+ * an equation written in LaTeX markup reaches the SAME plain-text extraction
+ * pipeline below — never a second parser. Whitelist only: an unrecognized
+ * macro (anything not in `LATEX_NAMED_SYMBOLS` or `LATEX_DECORATOR_RE`) is
+ * left untouched and simply fails extraction exactly as it does today —
+ * this function never guesses at an unknown command.
+ *
+ * ── WHY THIS IS SPAN-AWARE, NOT A FLAT FIND/REPLACE ─────────────────────
+ * `dimensions.ts`'s own implicit-multiplication rule requires ZERO
+ * whitespace between two adjacent symbols ("ma", never "m a" — see that
+ * file's header, the same rule that rejects `min = 4 km in (1/30) h`).
+ * Real captured production text (this session's own Groq-vs-Gemini run,
+ * Gemini/phys.mech.newtons-second-law, verbatim) writes `\( F = m a \)`
+ * with a plain decorative SPACE between "m" and "a" — not a LaTeX spacing
+ * command. LaTeX math mode is whitespace-INSIGNIFICANT: "m a" and "ma"
+ * render identically inside `\( \)`/`\[ \]`, unlike plain prose where a
+ * space is a real word gap. So whitespace is only collapsed to nothing
+ * WITHIN a recognized math span — text outside any span keeps its
+ * whitespace exactly as significant as it always was.
+ */
+const LATEX_MATH_SPAN_RE = /\\\(([\s\S]*?)\\\)|\\\[([\s\S]*?)\\\]/g
+// Decorators wrap a bare symbol without changing what it names physically —
+// \vec{F} and F carry the same dimension. Keep the argument, drop the wrapper.
+const LATEX_DECORATOR_RE = /\\(?:vec|hat|dot|ddot|overline|bar|tilde|mathbf|boldsymbol)\{([^{}]+)\}/g
+// Named commands with no braces, mapped to their plain Unicode letter — the
+// same set `isPlausibleSymbol` already accepts unescaped (Greek range,
+// Σ/Δ). \sum is included: "\sum \vec{F} = m a" and "ΣF = ma" are the same
+// dimensional claim under the SAME tokenizer rule `dimensionBindings.ts`'s
+// own newtons-second-law binding already documents (Σ is bound
+// DIMENSIONLESS and multiplies implicitly with an adjacent F) — dropping
+// "\sum" to "Σ" reuses that existing, already-verified binding rather than
+// inventing a second way to represent net force.
+const LATEX_NAMED_SYMBOLS: Record<string, string> = {
+  alpha: 'α', beta: 'β', gamma: 'γ', delta: 'δ', Delta: 'Δ', epsilon: 'ε',
+  theta: 'θ', lambda: 'λ', mu: 'μ', pi: 'π', rho: 'ρ', sigma: 'σ', Sigma: 'Σ',
+  tau: 'τ', phi: 'φ', Phi: 'Φ', omega: 'ω', Omega: 'Ω', sum: 'Σ',
+}
+// TIGHT spacing — used between adjacent multiplicands ("m\,a" means "ma",
+// a decorative gap with no word-level meaning). Collapsed to NOTHING,
+// regardless of span-wrapping, since the command's own meaning does not
+// depend on whether it sits inside \( \).
+const LATEX_TIGHT_SPACING_RE = /\\[,;:!]|\\ /g
+// WIDE spacing — a genuine word/clause-level gap (e.g. before a trailing
+// \text{...} description). Collapsed to one real space, not nothing.
+const LATEX_WIDE_SPACING_RE = /\\(?:quad|qquad)/g
+
+function normalizeLatexCommands(text: string): string {
+  let out = text.replace(LATEX_DECORATOR_RE, '$1')
+  out = out.replace(/\\([A-Za-z]+)/g, (m, name: string) => LATEX_NAMED_SYMBOLS[name] ?? m)
+  out = out.replace(LATEX_TIGHT_SPACING_RE, '')
+  out = out.replace(LATEX_WIDE_SPACING_RE, ' ')
+  return out
+}
+
+/** Exported for the regression suite, matching this file's own precedent
+ *  of exporting Gate A/C internals individually. */
+export function normalizeLatex(sentence: string): string {
+  if (!sentence.includes('\\')) return sentence
+  // Inside a recognized \( \) / \[ \] span: normalize commands, THEN
+  // collapse all remaining whitespace (math mode ignores it).
+  let out = sentence.replace(LATEX_MATH_SPAN_RE, (_m, paren: string | undefined, bracket: string | undefined) => {
+    return normalizeLatexCommands(paren ?? bracket ?? '').replace(/\s+/g, '')
+  })
+  // A bare decorator/named/spacing command OUTSIDE any span (e.g. "the
+  // vector \vec{F}" in ordinary prose) still normalizes the same way, but
+  // WITHOUT the whitespace collapse — prose whitespace stays significant.
+  out = normalizeLatexCommands(out)
+  return out
+}
 
 // ── Gate A: extraction ──────────────────────────────────────────────────
 
@@ -123,10 +228,19 @@ export interface EquationCandidate {
  * suite (§4.1's two named false positives are pinned directly against
  * this function, not merely against the top-level rule).
  */
-export function extractEquationCandidates(sentence: string): EquationCandidate[] {
+export function extractEquationCandidates(rawSentence: string): EquationCandidate[] {
   // "no code fence, no backticks" — a sentence carrying either is excluded
-  // wholesale, never partially trusted.
-  if (sentence.includes('```') || sentence.includes('`')) return []
+  // wholesale, never partially trusted. Checked against the RAW text before
+  // LaTeX normalization, since a fenced/backtick-quoted LaTeX equation must
+  // stay excluded exactly like fenced plain text.
+  if (rawSentence.includes('```') || rawSentence.includes('`')) return []
+
+  // Batch 6: LaTeX markup reaches the same plain-text pipeline below.
+  // Idempotent — a caller that already normalized (the loop sites in
+  // extractAssertedEquations/diagnosePhysicsDim, so Gate C sees the exact
+  // same text Gate A matched against) pays a single cheap `includes('\\')`
+  // check and nothing more.
+  const sentence = normalizeLatex(rawSentence)
 
   const out: EquationCandidate[] = []
   for (const m of sentence.matchAll(CANDIDATE_RE)) {
@@ -149,8 +263,13 @@ export function extractEquationCandidates(sentence: string): EquationCandidate[]
     const matchStart = m.index ?? 0
     // "no ':' immediately before it" — skips whitespace, so "Mirror:
     // 1/v = ..." is excluded exactly as "label: value" shapes must be.
+    // Batch 6 exception: an explicit forward-declaration marker right
+    // before the colon ("In equation form, this is written as: F = ma")
+    // is a genuine assertion, not a bare label — see
+    // COLON_FORWARD_DECLARATION_RE's own comment. Everything else still
+    // excludes, unconditionally.
     const before = sentence.slice(0, matchStart).replace(/\s+$/, '')
-    if (before.endsWith(':')) continue
+    if (before.endsWith(':') && !COLON_FORWARD_DECLARATION_RE.test(before.slice(0, -1))) continue
 
     out.push({ text: `${lhs} = ${rhs}`, matchStart, matchEnd: matchStart + m[0].length })
   }
@@ -175,6 +294,17 @@ const ATTRIBUTION_VERB_RE =
 const ASSERTED_PREFIX_RE = /(?:^|[.!?]\s+)(?:so|we\s+write|the\s+formula\s+is)\s*$/i
 // Tested against the text immediately AFTER the candidate match.
 const TELLS_US_SUFFIX_RE = /^\s*tells\s+us\b/i
+// Batch 6 (§6.3): explicit forward-declaration markers, tested against the
+// tail of whatever clause leads into the colon — "In equation form, this
+// is written as: F = ma" (the real shape captured this session,
+// Gemini/newtons-second-law T1). Deliberately NOT anchored to the sentence
+// start the way ASSERTED_PREFIX_RE is — the marker phrase itself is the
+// signal, wherever the leading clause begins. Shared verbatim between Gate
+// A (decides whether to extract past the colon) and Gate C (decides
+// whether the extracted candidate counts as asserted) so the two gates can
+// never disagree about which colon-prefixed shapes this exception covers.
+const COLON_FORWARD_DECLARATION_RE =
+  /(?:in\s+symbols|in\s+equation\s+form|as\s+an\s+equation|in\s+formula\s+form|as\s+a\s+formula|mathematically|(?:is|this\s+is)\s+written\s+as)\s*$/i
 
 /** True when there is an odd number of quote characters before `pos` — i.e.
  *  `pos` sits inside an open quotation. */
@@ -205,6 +335,13 @@ export function isAssertedEquation(sentence: string, candidate: EquationCandidat
   const before = sentence.slice(0, candidate.matchStart)
   if (ASSERTED_PREFIX_RE.test(before)) return true
 
+  // Batch 6: mirrors Gate A's own colon-marker admission exactly — a
+  // candidate Gate A let through via this marker is always recognized as
+  // ASSERTED here too, and nothing that was NOT let through by Gate A's
+  // identical check can reach this branch as a colon-prefixed candidate.
+  const beforeSansColon = before.replace(/:\s*$/, '')
+  if (beforeSansColon !== before && COLON_FORWARD_DECLARATION_RE.test(beforeSansColon)) return true
+
   const after = sentence.slice(candidate.matchEnd)
   if (TELLS_US_SUFFIX_RE.test(after)) return true
 
@@ -233,7 +370,11 @@ export function extractAssertedEquations(draft: string): EquationCandidate[] {
   const sentences = sentencesWithGaps(draft)
   const out: EquationCandidate[] = []
   for (let i = 0; i < sentences.length; i += 2) {
-    const sentence = sentences[i]
+    // Normalized ONCE here so Gate A's returned offsets and Gate C's
+    // before/after slicing operate on the identical string — extraction
+    // normalizes internally too (idempotent), but Gate C must see the same
+    // text Gate A actually matched against, never the raw LaTeX original.
+    const sentence = normalizeLatex(sentences[i])
     for (const candidate of extractEquationCandidates(sentence)) {
       if (isAssertedEquation(sentence, candidate)) out.push(candidate)
     }
@@ -298,7 +439,10 @@ export function diagnosePhysicsDim(
     let sawBoundCandidate = false
 
     for (let i = 0; i < sentences.length; i += 2) {
-      const sentence = sentences[i]
+      // Same reasoning as extractAssertedEquations above: normalize once,
+      // share the identical string between Gate A's match and Gate C's
+      // before/after check.
+      const sentence = normalizeLatex(sentences[i])
       const candidates = extractEquationCandidates(sentence)
       if (candidates.length > 0) sawCandidate = true
 

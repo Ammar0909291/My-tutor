@@ -617,6 +617,66 @@ content-free holds observed) and the raw `PHYSICS_DIM` JSON lines were captured 
 scratchpad and are not committed (matching every prior QA-run convention in this repo — transcripts
 are evidence for the turn that produced them, not durable repository content).
 
+### 6.3 Batch 6 — Gate A/C widened to admit LaTeX and colon-marker equations, 2026-09-16
+
+Owner decision, following §6.2's own two-path fork: loosen the gates and re-validate. Implemented
+in `src/lib/teaching/physics/dimensionalVerifier.ts`, shadow-only, zero route/behaviour change —
+this only widens what the shadow log counts, never what a turn does.
+
+**Two additive whitelists, matching exactly the two named causes in §6.2, nothing broader:**
+
+1. **LaTeX normalization** (`normalizeLatex`). `\vec{F}`/`\hat{n}`/etc. decorators unwrap to their
+   bare argument; `\sum`/`\Delta`/Greek-letter commands map to the same Unicode letters
+   `isPlausibleSymbol` already accepts unescaped; `\,`/`\;` (tight, multiplicand spacing) collapse
+   to nothing, `\quad`/`\qquad` (wide, word-level spacing) collapse to one space. **Span-aware, not
+   a flat find/replace**: whitespace is only collapsed to nothing INSIDE a recognized `\( \)`/
+   `\[ \]` span (LaTeX math mode is whitespace-insignificant — "m a" and "ma" render identically),
+   never outside one, where a space is still a real prose word-gap. This was found necessary, not
+   assumed: the real captured Gemini transcript this batch validates against writes `\( F = m a
+   \)` with a plain decorative space (not a `\,` command) between "m" and "a", which
+   `dimensions.ts`'s own deliberate zero-whitespace implicit-multiplication rule would otherwise
+   reject as unparseable.
+2. **Colon-marker whitelist** (`COLON_FORWARD_DECLARATION_RE`, shared verbatim between Gate A's
+   admission check and Gate C's assertion check, so the two gates can never disagree about which
+   colon-prefixed shapes this exception covers). A closed set of explicit forward-declaration
+   phrases — "in symbols", "in equation form", "as an equation", "in formula form", "as a
+   formula", "mathematically", "(this) is written as" — admits "In equation form, this is written
+   as: F = ma" while still excluding a bare label like "Mirror: 1/v + 1/u = 1/f." (matches none of
+   the phrases). Unlike the pre-existing `ASSERTED_PREFIX_RE`, deliberately NOT anchored to the
+   sentence start — the marker itself is the signal, wherever the leading clause begins.
+
+**Validated against real captured production text, not invented examples.** Both fixes are proven
+against the EXACT strings this session's own Groq-vs-Gemini provider-comparison run captured live
+(`scripts/qa/groqVsGeminiExperiment.ts`, real account, `phys.mech.newtons-second-law`, Gemini
+turn T1) and against §6.2's own quoted LaTeX examples — not hand-invented test fixtures. 55 new
+test cases in `src/tests/dimensionalVerifier.test.ts`.
+
+**A third, unrelated pre-existing Gate A limitation was found and is reported, not fixed.** The
+real T1 sentence's trailing parenthetical — "F = m a (force equals mass times acceleration)" —
+still overcaptures into the RHS and fails to parse. Proven to be unrelated to LaTeX or the colon
+marker: the identical overcapture reproduces on plain text with zero backslashes
+("The formula is F = ma (force equals mass times acceleration)."), confirming this is Gate A's
+RHS-trimming logic (which already trims a trailing em-dash clause and an unmatched trailing paren,
+but not a BALANCED trailing parenthetical aside) — out of this batch's stated scope (LaTeX symbols
+and colon markers only) and not attempted.
+
+**Full re-validation, all held:**
+- `CORRECT_CONTROLS` (912 entries): unchanged, still 83 null / 1 non-null (the one pre-existing,
+  already-documented `hookes-law` corpus defect).
+- `REJECTION_CASES` (25 entries / 7 phys.mech.*-bound): unchanged, still 5 rejected / 2 abstained.
+- `MUST_NOT_FIRE_CONTROLS` (10 × 24 bindings = 240 checks): **still 0 false fires** — re-run
+  explicitly as its own test in this batch, not just trusted from the pre-existing describe block.
+- `npx tsc --noEmit` clean; targeted suite (6 physics-verifier files) 136/136 passed; full suite
+  run in the background, confirmed green before commit.
+
+**What this batch does NOT claim.** It does not re-run the real deliberate observation window
+(§6.2's own 36-line campaign) against the widened gate — that would need a fresh live QA campaign
+to measure the new real fire rate, and is meaningfully more expensive than the offline corpus
+re-validation above, which is sufficient because the change is still shadow-only (zero production
+behaviour risk either way — only the diagnostic gate distribution moves, nothing served to a
+learner changes). **If a future session wants a measured post-widening fire rate, that live
+re-run is the next step, not this batch's.**
+
 ---
 
 ## 7. The steel man — and it is strong

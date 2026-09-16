@@ -9,7 +9,8 @@ says. If this file and CLAUDE.md ever disagree, CLAUDE.md's dated entries are th
 this file is the current-state summary and should be corrected to match reality, not the other
 way round.
 
-**Last updated:** 2026-09-16, against `main` @ `9a60a80`.
+**Last updated:** 2026-09-16, after Physics Verifier Batch 6 (gate widening) and the Durable
+Learner State investigation addendum (§13).
 
 ---
 
@@ -29,9 +30,9 @@ The four (§4.1-§4.4 of the V2 doc), in the order this programme has actually w
 | # | Primitive | Design doc | Status |
 |---|---|---|---|
 | 1 | **Turn Contract** | `TYPED_TURN_CONTRACT_DESIGN.md` | ✅ **DONE** — fully migrated |
-| 2 | **Deterministic Physics Verifier** (dimensional slice) | `DETERMINISTIC_PHYSICS_VERIFIER_DESIGN.md` | ⚪ **Batch 4 COMPLETE, rule does not fire — Batch 5 NOT warranted** — shadow deployed, real deliberate observation campaign run (0/36 fired even on equation-eliciting turns), stopping recommended |
+| 2 | **Deterministic Physics Verifier** (dimensional slice) | `DETERMINISTIC_PHYSICS_VERIFIER_DESIGN.md` | 🟡 **Batch 6 shipped (owner-approved gate widening), re-observation not yet re-run** — Gate A/C widened to admit LaTeX and colon-marker equations, full offline corpus re-validated (0 false fires), but the LIVE fire rate against the widened gate has not been re-measured |
 | 3 | **Closed-taxonomy Learner-Move Interpreter** | `LEARNER_MOVE_INTERPRETER_DESIGN.md` | ✅ **DONE** — fully migrated, per its own stated scope |
-| 4 | **Durable per-concept learner state** | `DURABLE_LEARNER_STATE_AUDIT.md` | ⚪ **AUDITED — recommend CLOSE, not build** — see below |
+| 4 | **Durable per-concept learner state** | `DURABLE_LEARNER_STATE_AUDIT.md` | ⚪ **AUDITED + INVESTIGATED FURTHER — recommend CLOSE, not build, fork still owner's to decide** — see below |
 
 ---
 
@@ -68,7 +69,7 @@ plan — check the assertion set (`assertDeliverySatisfiesContract`) first.
 
 ---
 
-## 2. Deterministic Physics Verifier (dimensional slice) — ⚪ Batch 4 complete, rule does not fire
+## 2. Deterministic Physics Verifier (dimensional slice) — 🟡 Batch 6 shipped, re-observation pending
 
 **What it is:** a physics-specific correctness check — dimensional analysis only (no numeric
 tolerance, no sign convention, no symbolic/CAS checking; all three explicitly deferred, see the
@@ -119,10 +120,35 @@ loosen Gate A/C to admit colon-prefixed/LaTeX equations (raises the false-positi
 fresh corpus re-validation) — or accept this as the resting state and retire the shadow as a
 permanently-dormant-but-cheap instrument, matching §7's own steel-man recommendation.
 
-**Next action if resumed:** this is now a DECISION, not an execution task — read design doc §6.2
-in full, then either (a) scope and build the Gate A/C loosening as its own small, re-validated
-batch, or (b) declare this primitive done-as-shadow-only and stop. Do not build Batch 5 as
-originally scoped (bare "wire the repair") — its own precondition has been measured and failed.
+**Owner decision (2026-09-16): loosen the gates, re-validate.** Done — **Batch 6** (§6.3 of the
+design doc), shadow-only, zero route/behaviour change:
+- `normalizeLatex` — LaTeX markup (`\vec{F}`, `\sum`, `\,` spacing, `\(...\)`/`\[...\]` delimiters)
+  now reaches the same plain-text extraction pipeline, span-aware (whitespace collapses only
+  inside a recognized math span, since LaTeX math mode is whitespace-insignificant — found
+  necessary from the REAL captured Gemini T1 transcript, which writes `\( F = m a \)` with a plain
+  decorative space that `dimensions.ts`'s zero-whitespace implicit-multiplication rule would
+  otherwise reject).
+- `COLON_FORWARD_DECLARATION_RE` — a closed whitelist of explicit forward-declaration phrases
+  ("in symbols", "in equation form", "as an equation", "(this) is written as", etc., shared
+  verbatim between Gate A and Gate C) admits "In equation form, this is written as: F = ma" while
+  a bare label ("Mirror: 1/v + 1/u = 1/f.") still excludes — matches none of the phrases.
+- **Validated against real captured production text**, not invented fixtures — the exact strings
+  from this session's own Groq-vs-Gemini provider-comparison run (§1 above) and §6.2's own quoted
+  examples. 55 new tests, full corpus re-validated (912 `CORRECT_CONTROLS` / 25 `REJECTION_CASES`
+  / 10×24 `MUST_NOT_FIRE_CONTROLS` — still 0 false fires).
+- **A third, unrelated pre-existing Gate A limitation was found and reported, not fixed**: the
+  real T1 sentence's trailing parenthetical still overcaptures into the RHS and fails to parse —
+  proven unrelated to LaTeX (reproduces on plain text with zero backslashes) — out of this
+  batch's stated scope.
+- **Not done this batch**: the widened gate's real fire rate has NOT been re-measured against live
+  traffic — this batch's validation is the offline corpus (sufficient since the change is still
+  shadow-only, zero production risk either way), not a fresh manufactured observation campaign.
+
+**Next action if resumed:** run a fresh manufactured observation window against the now-widened
+gate (same `phys.mech.*` equation-eliciting campaign shape as §6.2) to get a real post-widening
+fire rate — that result is what actually decides whether Batch 5 (enforcement) becomes worth
+proposing. Do not build Batch 5 speculatively; do not assume the offline corpus validation
+substitutes for a live fire-rate measurement.
 
 ---
 
@@ -195,24 +221,56 @@ model) is canonical — not "should we build the tables." If that fork resolves 
 model (which the audit's §7 argues it should), this item should be marked **closed**, not
 deferred, and ADR 10 marked partially superseded.
 
-**Next action if resumed:** read `DURABLE_LEARNER_STATE_AUDIT.md` §5 and §7 in full before doing
-anything else. This is a one-session audit-and-decide (which mechanism is canonical), not a
-build. Do not start writing `ConceptMasteryRecord` rows without resolving that fork first — doing
-so would create the second-source-of-truth risk the audit specifically warns about.
+**Investigated further (2026-09-16, owner-requested, `DURABLE_LEARNER_STATE_AUDIT.md` §13).**
+Closed the audit's own flagged "not verified" gaps via direct production queries (Supabase MCP):
+confirmed `concept_mastery_records`/`active_misconceptions` genuinely 0 rows in production, and
+confirmed real evidence volume exists (43,144 `evidence_events`, 1,354 `topic_progress` rows / 25
+users, 3,340 `mistake_records`) — the decision isn't moot for lack of data. Two new findings:
+1. **Design D is not uniformly fresh.** `studentIntelligence.ConceptState.masteryPct` forwards
+   `TopicProgress` verbatim rather than recomputing it — and a real account's 12 highest-evidence
+   topics all show `TopicProgress` frozen (`status='COMPLETED'`, unchanged) for up to 10 days while
+   `evidence_events` activity continued. Design D's OTHER fields (`probePassRate`,
+   `forgettingRisk`) are genuinely fresh; `masteryPct`/`masteryStatus` are not — corrects §5's
+   comparison table, doesn't reverse its conclusion. A stored `ConceptMasteryRecord` would not
+   fix this either (checked: ADR 10's own schema is upsert-in-place, not an append-only ledger —
+   same staleness exposure either way).
+2. **§6 Batch 0's own spec pre-empts Batch 2's ability to decide the fork.** Batch 0 instructs
+   building Design C's score from the SAME inputs and decay law Design D already uses (correctly
+   rejecting ADR 10's original, unevidenced Bayesian model). But that means Batch 2's "agreement
+   experiment" would show near-zero disagreement BY CONSTRUCTION, not by genuine empirical
+   validation — two identical formulas over identical inputs agree trivially. Running Batches 0-2
+   as currently scoped cannot actually settle the fork; only §5's already-known tradeoff table
+   (queryability vs. no duplicate state) can, absent building a genuinely different Design C.
+
+**The fork itself is still NOT decided** — this was investigation, not a decision, per the
+owner's own framing of the request. §8's original recommendation (close as scoped; mark ADR 10
+partially superseded; run Batches 0-2 only if queryability is explicitly wanted, understanding
+now that doing so needs a genuinely different Design C to be informative) still stands as the
+audit's position.
+
+**Next action if resumed:** read `DURABLE_LEARNER_STATE_AUDIT.md` §5, §7, and now §13 in full
+before doing anything else. This is a one-session audit-and-decide (which mechanism is
+canonical), not a build. Do not start writing `ConceptMasteryRecord` rows without resolving that
+fork first — doing so would create the second-source-of-truth risk the audit specifically warns
+about, and per §13.3, do not treat a same-formula Batches-0-2 run as having settled it.
 
 ---
 
 ## Programme-level status
 
-Two of four primitives fully shipped and closed (Turn Contract, Learner-Move Interpreter). One
-measured and stopped on its own evidence (Physics Verifier — Batch 4 ran for real, the rule does
-not fire even on turns built to elicit it, and Batch 5 enforcement is not warranted). One audited
-and recommended for closure rather than a build (Durable Learner State — needs an owner-level
-fork decision, not more engineering).
+Two of four primitives fully shipped and closed (Turn Contract, Learner-Move Interpreter). Two
+are owner-directed, in-progress investigations, neither fully closed:
+- **Physics Verifier** — owner chose "loosen the gates, re-validate" (2026-09-16). Batch 6
+  shipped, offline-validated, deployed. Still needs a fresh live fire-rate measurement against
+  the widened gate before Batch 5 (enforcement) can be evaluated (§2's "next action").
+- **Durable Learner State** — owner chose "investigate further before deciding" (2026-09-16).
+  Investigation done (§13 of the audit doc): closed the audit's own flagged unknowns against real
+  production data, found Design D is not uniformly fresh, and found the audit's own proposed
+  Batches 0-2 experiment can't actually discriminate the fork as currently specified. **The fork
+  itself is still undecided** — this was investigation, not a decision, by explicit instruction.
 
-**If picking this up cold with no other instruction**, all four primitives are now at a decision
-point rather than an execution gap — none is "blocked on running something." The two open
-decisions, both requiring owner/human judgment rather than more engineering, are: (a) Physics
-Verifier — loosen Gates A/C and re-validate, or retire the shadow as permanently dormant (§2); (b)
-Durable Learner State — resolve the ConceptMasteryRecord-vs-studentIntelligence.ts fork (§4).
-Neither should be defaulted into without that decision being made first.
+**If picking this up cold with no other instruction**, the two remaining open items are: (a) run
+the live re-observation window for the Physics Verifier (execution, not a decision — see §2); (b)
+either decide the Durable Learner State fork directly from §5's tradeoff table (now corrected by
+§13), or commission a genuinely different Design C if an empirical answer is still wanted (§13.3)
+— that one is still an owner decision, not something to default into.

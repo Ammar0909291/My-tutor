@@ -488,3 +488,104 @@ reason.**
 
 **Not done, by design:** no code, no migration, no writer, no `ADR_10` edit. The supersession note
 of §8.1 is itself a separate, owner-approved change.
+
+---
+
+## 13. Investigation addendum, 2026-09-16 — closing §9's "not verified" items, and two new findings
+
+Owner decision: investigate further before deciding the fork (§5), rather than deciding it now.
+This addendum does exactly that — closes what §9 explicitly flagged as unmeasured, and surfaces
+two findings the original audit's static-analysis method could not have produced. Still no code,
+no writer, no schema change, no `ADR_10` edit — read-only, via Supabase MCP against production.
+
+### 13.1 §9's flagged gaps, now measured
+
+- **"No database was reached... a row could exist from a manual insert."** Queried directly:
+  `concept_mastery_records` **0 rows**, `active_misconceptions` **0 rows**, in production, today.
+  Confirmed empty by more than absence of a writer — genuinely empty.
+- **Real evidence volume, so the decision is not moot for lack of data**: `evidence_events`
+  **43,144** rows, `topic_progress` **1,354** rows across **25** distinct users, `mistake_records`
+  **3,340** rows. There is enough real per-concept history to make either design meaningful.
+
+### 13.2 NEW FINDING — Design D is not uniformly fresh; it inherits `TopicProgress`'s own staleness for two of its fields
+
+Queried one real, heavily-used account's 12 highest-evidence topics (`evidence_events` per
+topic 138–239). **All 12 show `TopicProgress.status = 'COMPLETED'`, `masteryPct = 65`, with the row
+itself last updated 2026-08-26 through 2026-09-07 — and `evidence_events` activity on the SAME
+concept continuing for up to 7 more days AFTER that.** `phys.particle.gauge-bosons`: row updated
+2026-08-30, latest evidence 2026-09-06. `phys.mech.friction`: row updated 2026-08-30, latest
+evidence 2026-09-09 — ten days of continued activity the stored row never reflects.
+
+This matters for the fork because `studentIntelligence.ConceptState`'s own interface comment
+states plainly what it does with this field: `masteryPct: number | null — "TopicProgress mastery
+at read time, when tracked"`. **Design D does not recompute this field from raw evidence — it
+forwards `TopicProgress`'s value verbatim.** So for `masteryPct`/`masteryStatus` specifically,
+Design D is exactly as stale as a hypothetical Design C would be if Design C also read
+`TopicProgress` (which the §6 Batch 0 spec's own inputs — "the live authority" — would have it
+do). §5's "Design D is winning... impossible [staleness] by construction" table row is **true only
+for the fields `studentIntelligence` genuinely recomputes** (`probePassRate`, `forgettingRisk`,
+confidence, velocity — all built from raw `LessonEvidence`, not from `TopicProgress`), **not for
+the two fields it passes through unchanged.** Recorded as a correction to §5's table, not a
+reversal of its conclusion — the majority of `ConceptState`'s value (the decay-scaled risk, the
+freshly-computed pass rate) is genuinely fresh; two of its eleven fields are not.
+
+Considered and ruled out as a Design-C advantage: a STORED `ConceptMasteryRecord` would not fix
+this either. ADR 10's own schema is a single row keyed `[userId, conceptId]`, upserted in place —
+the identical snapshot shape as `TopicProgress`, not an append-only ledger. Building it would still
+require its own writer to be triggered by the same evidence events `TopicProgress`'s writers
+already miss firing on; it does not solve staleness by existing, only by being written correctly,
+which is exactly as much work under either design.
+
+### 13.3 NEW FINDING — §6 Batch 0's own spec pre-empts Batch 2's ability to discriminate the fork
+
+§6 Batch 0 says: *"Define `masteryScore`/`decayedScore` as a pure function of the live authority —
+`ConversationState`'s verified counters + `studentIntelligence`'s existing
+`effectiveHalfLifeDays`. **Do not import ADR 10's Bayesian update rule**; it contradicts the
+counter model and has no evidence behind its constants."*
+
+Read literally, this instructs Batch 0 to compute Design C's score from **the same inputs and the
+same decay law `studentIntelligence` (Design D) already uses.** If Batch 0 is built exactly as
+specified, Batch 2's "agreement assertion" — *"log a violation when the computed record disagrees
+with `studentIntelligence`'s derived profile... this batch is the fork's own evidence"* — **cannot
+produce a disagreement, by construction, regardless of real learner data.** Two functions computing
+the identical formula from the identical inputs agree trivially; that is not evidence Design D
+"wins," it is evidence the plan defined them to be the same thing.
+
+This is not a flaw in the audit's reasoning — rejecting ADR 10's original Bayesian model was
+argued correctly (§3.1: it contradicts the live counter model; §7.4 quotes the constants as having
+"no evidence behind" them). But it has a consequence the audit did not state explicitly: **by the
+time Batch 0 rejects the Bayesian model, the fork is already decided in favor of Design D's own
+formula** — what §6 calls "Design C" at that point is Design D's computation with an extra
+persisted copy, not ADR 10's original proposal. Running Batches 0-2 as currently scoped would
+produce a confirmatory-looking result (near-zero disagreement) that cannot actually settle whether
+storing the value is worth its cost — only the already-named, undisputed queryability tradeoff
+(§5's own table) can.
+
+**What this changes for the fork, concretely:** if the fork is to be settled by a real experiment
+rather than by weighing the already-known tradeoffs directly, the experiment needs a Design C that
+is genuinely different from Design D's formula — e.g., an incremental Bayesian estimator with
+justified constants (the thing §3.1/§7.4 correctly declined to import unmodified) — not a
+same-formula restatement. Absent that, the honest path is to decide on §5's table as-is: the
+queryability gap is real and unaddressed by Design D; nothing else in this addendum found a case
+where a stored value would out-perform the derived one on correctness, since both inherit
+`TopicProgress`'s own staleness identically (§13.2) and neither provides point-in-time history
+(ADR 10's schema is upsert-in-place, not append-only — checked and ruled out, not assumed).
+
+### 13.4 Still not decided — this addendum reports, it does not choose
+
+Per the owner's own instruction for this investigation ("investigate further before deciding"),
+§13.2 and §13.3 are findings, not a recommendation supplanting §8's. §8's recommendation (close
+Item 4 as scoped; mark ADR 10 partially superseded; run Batches 0-2 only if queryability is
+explicitly wanted) still stands as the audit's own position. This addendum's contribution is
+narrowing what a Batches-0-2 experiment can actually prove (§13.3) and correcting one overstated
+claim in §5's comparison table (§13.2) — the fork itself remains an owner decision.
+
+**Verified this addendum, all re-runnable:** direct production queries via Supabase MCP
+(`concept_mastery_records`/`active_misconceptions` row counts; `evidence_events`/`topic_progress`/
+`mistake_records` volume; one real account's `TopicProgress` vs. `evidence_events` timestamp
+comparison across its 12 highest-evidence topics). **Not verified:** only one account was sampled
+for §13.2 (the highest-`topic_progress`-count real, non-test-harness account found); the pattern
+was not checked across all 25 users, so "all 12" describes that one account, not a claim about
+every learner. No code was run, no `studentIntelligence`/hypothetical-Design-C function was
+literally executed against live rows — §13.2's reasoning is from the interface's own documented
+field semantics plus the measured timestamps, not from running the derivation.
