@@ -9520,6 +9520,33 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
 
       const visualFired = Boolean(detectedVisualSpec || detectedSceneSpec || responseVisual)
 
+      // Typed Turn Contract, I8 — Batch 3, OBSERVATION ONLY.
+      //
+      // V2's own text: "an explicit learner REQUEST is satisfied or
+      // explicitly declined with a reason, never silently ignored." No
+      // deterministic check exists for this today — `helpRequestKind` only
+      // reaches the CUE/prompt layer (advisory), and
+      // `learnerRequestHonoured` a few hundred lines below this file is a
+      // DIFFERENTLY-SCOPED field: it feeds `turnProgress.ts`'s liveness
+      // evidence (I9, already closed) and means "a request occurred this
+      // turn," never "the request was satisfied" — do not confuse the two
+      // or reuse that field for this purpose.
+      //
+      // `visualFired` is the one case with a genuinely deterministic
+      // satisfaction signal already computed at this exact point: for a
+      // 'diagram' request, `reattachOnExplicitRequest` just above already
+      // makes a HELD figure re-deliver on an explicit ask, so `visualFired`
+      // is a real answer to "did this turn actually carry a figure." The
+      // other two request kinds (`explain_differently`, `real_life_example`)
+      // have no equivalent deterministic signal without content analysis —
+      // logged for denominator only, never claimed as verified.
+      if (resolvedLearnerRequest !== null) {
+        console.log('[learn/chat] LEARNER_REQUEST_EVENT=' + JSON.stringify({
+          kind: resolvedLearnerRequest,
+          ...(resolvedLearnerRequest === 'diagram' ? { figureDelivered: visualFired } : {}),
+        }))
+      }
+
       // ── A TUTOR MAY NOT POINT AT A FIGURE THAT IS NOT THERE ──────────────
       //
       // Placed here because `visualFired` is the first point at which the

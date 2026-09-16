@@ -88,7 +88,10 @@ would remove assessment outright for every concept below asset-contract coverage
 0%, parts of english/math) — a real behaviour change conflicting with an existing product
 decision, NOT a safe shadow batch.
 
-**Shipped instead: observation only.** `[learn/chat] MODEL_INVENTED_PROBE_EVENT` logs (route.ts,
+**Batch 2 is COMMITTED AND PUSHED — commit `56dae8b5` on `main`.** Full suite 697/14,439/9 skipped;
+tsc clean; build clean.
+
+**Shipped: observation only.** `[learn/chat] MODEL_INVENTED_PROBE_EVENT` logs (route.ts,
 right after `resolvedQuestionServed` is computed) whenever a served question has no `assetId` —
 i.e. came from the model's own tag, not the corpus. Nothing changes what is served or graded.
 **Next session: check production logs for this event's prevalence before deciding anything about
@@ -96,14 +99,40 @@ I3** — if it fires rarely, restricting it may cost little; if it fires on most
 concepts, restricting it removes assessment for a large share of biology/CS/math/english traffic,
 which needs an explicit owner call, not an engineering default.
 
+### Batch 3 (Turn Contract, I8) — observation-only, same reasoning as I3
+
+No deterministic "was this request satisfied" check exists today; `helpRequestKind` only reaches
+the CUE/prompt layer (advisory). `learnerRequestHonoured` (route.ts ~L10682) is a DIFFERENT,
+already-closed concern — it feeds `turnProgress.ts`'s I9 liveness evidence and means "a request
+occurred this turn," never "was satisfied." Do not confuse the two.
+
+**One kind (`diagram`) has a real deterministic signal, already computed: `visualFired`** (whether
+a figure was actually delivered this turn — `reattachOnExplicitRequest` already re-delivers a HELD
+figure on an explicit ask). The other two kinds (`explain_differently`, `real_life_example`) have
+no equivalent without content analysis. **Shipped**: `[learn/chat] LEARNER_REQUEST_EVENT`
+(route.ts, right after `visualFired` is computed) logs `kind`, and for `diagram` only,
+`figureDelivered: visualFired`. Denominator-only for the other two kinds — never claims
+verification it doesn't have.
+
+IN PROGRESS at time of writing this entry — check `git log` for a commit referencing I8/
+LEARNER_REQUEST_EVENT; if none exists, finish verifying (full suite + build) and commit before
+starting anything else. Do not redo this investigation.
+
+**Possible future direction, not attempted**: if production logs show `diagram` requests are
+reliably satisfied but `explain_differently`/`real_life_example` are not measurable at all, the
+next step for those two is probably a narrow POST-hoc verifier in the same family as
+`vChallenge`/`vAffirm` (`kernel/verifier/rules.ts`), checking the one decidable signal each kind
+plausibly has (`explain_differently`: the reply must not repeat the previous turn — reusing
+`wouldRepeatPreviousTurn`, already imported nearby for `distinctTeachingDelivered`). That is a
+real enforcement change, not shadow-only, and needs the same reproduce-first discipline the
+`vChallenge` work used — do not guess a regex, measure a real miss first.
+
 ### Next steps, in order
 1. ~~Turn Contract I3~~ — see above; blocked on an owner decision + production prevalence data,
    not on more engineering. Do not attempt to "fix" this by restricting the model MCQ fallback
    without that decision.
-2. **Turn Contract I8** (an explicit learner REQUEST is satisfied or explicitly declined with a
-   stated reason, never silently ignored). Needs tracing `turnIntent.learnerRequest`/
-   `turnArbitration`'s LEARNER_REQUEST rung to find where a request can currently fall through
-   with neither outcome.
+2. ~~Turn Contract I8~~ — see below; observation shipped, enforcement (if any) needs production
+   data + a reproduced miss first, same posture as I3.
 3. **Turn Contract I10** (idempotency key, closes double-grading on retry/second tab). Smallest
    of the four — likely a request-scoped key plus a dedup check before grading commits.
 4. **Physics Verifier, numeric check** (§4.2's second-cheapest: "values recomputed independently;
