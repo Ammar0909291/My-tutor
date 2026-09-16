@@ -7623,6 +7623,38 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         }
       } catch { /* non-fatal — a repair must never break a turn */ }
 
+      // DETERMINISTIC PHYSICS VERIFIER — SHADOW ONLY (Batch 3).
+      //
+      // Design: DETERMINISTIC_PHYSICS_VERIFIER_DESIGN.md §5.6/§6 row 3.
+      // Same family as the two repairs immediately above (runs after both,
+      // so it reads the text the learner will actually see), and — per
+      // §5.6's own explicit ordering reasoning — before vAffirm below, so a
+      // future regeneration there sees already-repaired text once Batch 5
+      // wires a repair here. This batch computes and logs only: it never
+      // repairs the sentence, never rejects the turn, never changes
+      // `cleanText`. Only `phys.mech.*` concepts are bound
+      // (dimensionBindings.ts, Batch 2) — every other concept's `binding`
+      // is `undefined`, which `dimensionalViolation` treats as a total
+      // no-op (Gate B's own first check).
+      try {
+        const { CONCEPT_DIMENSION_BINDINGS } = await import('@/lib/teaching/physics/dimensionBindings')
+        const { diagnosePhysicsDim } = await import('@/lib/teaching/physics/dimensionalVerifier')
+        const { buildPhysicsDimEvent, recordPhysicsDimEvent } = await import('@/lib/teaching/physicsDimTelemetry')
+        const physicsDimBinding = resolvedDecisionConceptId
+          ? CONCEPT_DIMENSION_BINDINGS[resolvedDecisionConceptId] ?? null
+          : null
+        const physicsDimDiagnosis = diagnosePhysicsDim(cleanText, physicsDimBinding)
+        recordPhysicsDimEvent(buildPhysicsDimEvent({
+          diagnosis: physicsDimDiagnosis,
+          sessionId: learnSession.id,
+          route: 'chat',
+          subject: subjectCode,
+          conceptId: resolvedDecisionConceptId,
+          hasBinding: physicsDimBinding !== null,
+          turnReceivedAt,
+        }))
+      } catch { /* observability never breaks a turn */ }
+
       // AN UNAUTHORED KEY MUST NOT BE CELEBRATED OR CORRECTED WITH FULL
       // CONFIDENCE — REAL-ACCOUNT FINDING, 2026-09-14.
       //

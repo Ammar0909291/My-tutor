@@ -626,6 +626,37 @@ export async function POST(req: Request) {
       console.warn('[lesson-init] vision direction check skipped:', err)
     }
 
+    // DETERMINISTIC PHYSICS VERIFIER — SHADOW ONLY (Batch 3).
+    //
+    // Design: DETERMINISTIC_PHYSICS_VERIFIER_DESIGN.md §5.6/§6 row 3. Same
+    // point as the equivalent chat-route wiring: immediately after the
+    // vision-direction repair (so it reads the text the learner will
+    // actually see) and, per §5.6, "same batch, both routes" — closing
+    // §2.1's own named asymmetry rather than adding to it. Computes and
+    // logs only: never repairs `routed.text`, never blocks the opening.
+    // Only `phys.mech.*` concepts are bound (dimensionBindings.ts,
+    // Batch 2); every other `topicSlug` resolves to `undefined`, which
+    // `dimensionalViolation` treats as a total no-op.
+    try {
+      const { CONCEPT_DIMENSION_BINDINGS } = await import('@/lib/teaching/physics/dimensionBindings')
+      const { diagnosePhysicsDim } = await import('@/lib/teaching/physics/dimensionalVerifier')
+      const { buildPhysicsDimEvent, recordPhysicsDimEvent } = await import('@/lib/teaching/physicsDimTelemetry')
+      const physicsDimBinding = topicSlug ? CONCEPT_DIMENSION_BINDINGS[topicSlug] ?? null : null
+      const physicsDimDiagnosis = diagnosePhysicsDim(routed.text, physicsDimBinding)
+      recordPhysicsDimEvent(buildPhysicsDimEvent({
+        diagnosis: physicsDimDiagnosis,
+        sessionId,
+        route: 'lesson-init',
+        subject: learnSession.subject.slug,
+        conceptId: topicSlug ?? null,
+        hasBinding: physicsDimBinding !== null,
+        turnReceivedAt: Date.now(),
+      }))
+    } catch (err) {
+      // Observability never blocks a lesson from opening.
+      console.warn('[lesson-init] physics dimensional check skipped:', err)
+    }
+
     try {
       const { stripScaffoldHeadings } = await import('@/lib/teaching/scaffoldHeadings')
       const scaffold = stripScaffoldHeadings(routed.text)
