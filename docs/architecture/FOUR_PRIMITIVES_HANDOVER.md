@@ -246,6 +246,28 @@ OFFLINE comparison script (not wired into the hot path) reading both that log an
 DB read cost. Neither exists yet. **Do not wire `buildStudentIntelligence` into route.ts to chase
 this without one of those two.**
 
+### Production-log check (2026-09-16, same session) — confirms the block is real, not theoretical
+
+Queried Vercel runtime logs directly (project `prj_FwjmRdthApGhwdQY7FyDYThD7WJD`, team
+`sh-oaib-s-projects`) for the shadow markers this campaign has been shipping — `RENDER_RECEIPT_EVENT`
+(I2), and the `/api/learn/chat` route generally — over the last 24h of production. **Zero log lines,
+either query.** This is not a query-scoping problem: it matches every other session's own repeated
+finding elsewhere in this repo ("this app has essentially no organic learner traffic"). So the block
+on I3/I8/I10 enforcement and on Batch 2 is not a "wait a few days" situation — there is no accruing
+signal to wait for under current traffic. Enforcement decisions for all three Turn Contract items,
+and Batch 2 of Durable Learner State, genuinely need EITHER real learner traffic to start flowing
+(outside this campaign's control) OR an explicit owner decision made without waiting for data.
+
+**Campaign status, honestly, as of this check:** every remaining increment across all four
+primitives is now blocked on one of those two external things, not on more engineering from this
+session. Physics Verifier's numeric check needs a design pass + authored corpus (content work).
+Turn Contract's I3/I8/I10 enforcement needs production prevalence data that is not accumulating, or
+an owner call. Durable Learner State's Batch 2 needs the same. There is no next batch that is both
+genuinely NEW work and safely scoped without one of those unblocks landing first. A future session
+(or this one, later) should check `list_projects`/`get_runtime_logs` again before assuming this is
+still true — traffic conditions could change — but manufacturing further shadow-only batches against
+zero traffic would not produce information, only busywork.
+
 **Update this file's "CURRENT STATE" section at the end of every batch** — that is the entire
 point of this file existing. Keep the STANDING AUTHORIZATION section as-is (do not re-litigate
 it); only CURRENT STATE and the next-steps list should change per batch.
