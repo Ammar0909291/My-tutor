@@ -35,8 +35,9 @@ Physics Verifier, etc.): land inert, verify, commit, push, update this file, rep
 
 ## CURRENT STATE — read this before picking anything
 
-**Batch 1 (Turn Contract, I2 — render receipt) is IN PROGRESS / awaiting final verification as
-of this entry.** What shipped, so a new session does not redo it:
+**Batch 1 (Turn Contract, I2 — render receipt) is COMMITTED AND PUSHED — commit `a401a12d` on
+`main`.** Full suite 697 files / 14,439 passed / 9 skipped; `tsc --noEmit` clean; `npm run build`
+clean (middleware 79.7 kB, unchanged). What shipped, so a new session does not redo it:
 
 - `src/lib/teaching/mcq.ts`: `TutorMCQ`-consuming `deriveRenderId(mcq)` — a deterministic,
   non-secret SHA-256 content hash (never encodes `correctIndex`) of
@@ -67,24 +68,38 @@ of this entry.** What shipped, so a new session does not redo it:
   ANY future additive, non-secret field, which is the same defect class this batch is fixing one
   level up; fixed properly rather than left broken.
 - `npx tsc --noEmit`: clean. Targeted test run (7 files, 111 tests): all passing.
-- **NOT YET DONE**: full suite run (`npx vitest run`) had not finished at the time this entry was
-  written — check `git log` for whether a commit landed after this note; if the working tree is
-  clean and a commit exists referencing I2/render-receipt, this batch is committed and pushed. If
-  the working tree has uncommitted changes matching the file list above, finish verifying (full
-  suite green, `npm run build` if touching anything build-sensitive) and commit/push before doing
-  anything else — do not start a new batch on top of uncommitted work.
 - **Live/production verification of the shadow log has NOT been done** — this is new code on a
   fresh commit; a future session should check Vercel runtime logs for `RENDER_RECEIPT_EVENT` after
   it's deployed and real traffic has flowed, to see whether the mismatch case the design predicts
   ("the seventh defect") still occurs at all under the fixes already shipped for it
   (`mcqToServe`'s unification, documented in CLAUDE.md's Physics Teachability Program entry).
 
-### Next steps, in order, once Batch 1 is confirmed committed/pushed and clean
-1. **Turn Contract I3** (every graded artifact comes from the corpus by id with a stored key;
-   prose may never introduce an option list or question). This is the residual generate-parse
-   fallback `mcqHoisted = gateMcqHoisted ?? mcqParse.mcq` in `route.ts` (~line 6184) —
-   `TYPED_TURN_CONTRACT_DESIGN.md`'s own §1.2/§2.1 name it as still open. Trace both branches
-   before changing anything; this is hot-path code with many downstream readers of `mcqHoisted`.
+### Batch 2 (Turn Contract, I3) — a genuine finding, not a safe code change
+
+**Investigated before writing anything, per this campaign's own discipline.** I3 as V2 states it
+("prose may never introduce an option list or question") would forbid the model's own
+`<!--MCQ-->` fallback entirely (`mcqHoisted = gateMcqHoisted ?? mcqParse.mcq`, route.ts ~L6206) —
+but that fallback is a DELIBERATE, already-shipped decision (`masteryReachability.ts`: "teaching
+without certification is a degraded outcome; teaching not at all is a failure"), and I3's
+mastery-SAFETY half is ALREADY closed independently: `unauthoredKeyGrades`
+(`conversationState.ts`) counts a model-invented-key grade without ever crediting it toward
+mastery, proved over 49,152 states (`masteryCounterInvariant.test.ts`). Enforcing I3 literally
+would remove assessment outright for every concept below asset-contract coverage (biology/CS at
+0%, parts of english/math) — a real behaviour change conflicting with an existing product
+decision, NOT a safe shadow batch.
+
+**Shipped instead: observation only.** `[learn/chat] MODEL_INVENTED_PROBE_EVENT` logs (route.ts,
+right after `resolvedQuestionServed` is computed) whenever a served question has no `assetId` —
+i.e. came from the model's own tag, not the corpus. Nothing changes what is served or graded.
+**Next session: check production logs for this event's prevalence before deciding anything about
+I3** — if it fires rarely, restricting it may cost little; if it fires on most below-contract
+concepts, restricting it removes assessment for a large share of biology/CS/math/english traffic,
+which needs an explicit owner call, not an engineering default.
+
+### Next steps, in order
+1. ~~Turn Contract I3~~ — see above; blocked on an owner decision + production prevalence data,
+   not on more engineering. Do not attempt to "fix" this by restricting the model MCQ fallback
+   without that decision.
 2. **Turn Contract I8** (an explicit learner REQUEST is satisfied or explicitly declined with a
    stated reason, never silently ignored). Needs tracing `turnIntent.learnerRequest`/
    `turnArbitration`'s LEARNER_REQUEST rung to find where a request can currently fall through

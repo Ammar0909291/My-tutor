@@ -6394,6 +6394,33 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       const { mcqToServe } = await import('@/lib/teaching/mcq')
       const resolvedQuestionServed = mcqToServe(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted)
       const servedProbeThisTurn = resolvedQuestionServed
+      // Typed Turn Contract, I3 — Batch 2, OBSERVATION ONLY.
+      //
+      // V2's own text: "every graded artifact comes from the corpus by id
+      // with a stored key; prose may never introduce an option list or
+      // question." Read literally this forbids the model's own `<!--MCQ-->`
+      // fallback (`mcqHoisted = gateMcqHoisted ?? mcqParse.mcq` above)
+      // entirely — but that fallback is a DELIBERATE, already-shipped product
+      // decision (`masteryReachability.ts`: "teaching without certification
+      // is a degraded outcome; teaching not at all is a failure"), and the
+      // mastery-SAFETY half of I3 is already closed independently —
+      // `unauthoredKeyGrades` (conversationState.ts) counts a model-invented
+      // key without ever crediting it toward mastery, proved over 49,152
+      // states (masteryCounterInvariant.test.ts).
+      //
+      // Enforcing I3 as written would remove assessment outright for every
+      // concept below asset-contract coverage (biology/CS at 0%, parts of
+      // english/math) — a real behaviour change that conflicts with an
+      // existing deliberate decision, not a safe shadow-batch change. This
+      // is therefore observation only: how often a served question actually
+      // has no authored identity, so a future session/owner can decide
+      // whether and how to narrow it, with real prevalence data rather than
+      // a guess. Nothing here changes what is served or graded.
+      if (servedProbeThisTurn && !servedProbeThisTurn.assetId) {
+        console.log('[learn/chat] MODEL_INVENTED_PROBE_EVENT=' + JSON.stringify({
+          conceptId: resolvedConceptId ?? null,
+        }))
+      }
       if (!text.trim() && servedProbeThisTurn) {
         // Not degraded — introduce the question the learner can already see.
         // Deterministic, claims nothing, and leaves the MCQ to carry the turn.
