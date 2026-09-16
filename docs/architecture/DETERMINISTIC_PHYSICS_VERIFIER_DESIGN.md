@@ -760,6 +760,117 @@ Full transcripts and raw `PHYSICS_DIM` lines captured to this session's scratchp
 
 ---
 
+### 6.5 Batch 7 — Gate A: trim a trailing balanced parenthetical annotation, 2026-09-16
+
+§6.3/§6.4's own named-but-not-fixed finding, closed: a trailing, space-separated, balanced
+parenthetical clause after an equation — the real captured T1 shape, `"In equation form, this is
+written as: \( F = m a \) (force equals mass times acceleration)"` — over-captures into the RHS
+match. Reproduced first, against that exact string, before writing any fix:
+`diagnosePhysicsDim` returned `parse-failure` (RHS candidate `"ma (force equals mass times
+acceleration)"`, unparseable) where a genuinely consistent `F = ma` should have reached
+`consistent`.
+
+**The fix** (`extractEquationCandidates`, `src/lib/teaching/physics/dimensionalVerifier.ts`): an
+additive whitelist trim, applied after the existing em-dash-clause trim and before the existing
+unmatched-trailing-paren trim. A trailing `" (...)"` clause is stripped from the RHS only when
+three conditions hold together — a space precedes the `"("` (every genuine-math trailing-paren
+entry in `CORRECT_CONTROLS` attaches directly, `"N = m(g + a)"`, never `"N = m (g + a)"`), the
+parenthetical's own content carries **no arithmetic-operator character**, and it carries **at
+least one true English word** (three-plus plain letters). All three additive and independent —
+units notation with an operator (`"(N/C)"`, `"(W/m²)"`) is left untouched exactly as before,
+directly-attached math grouping (`"m(g + a)"`, `"q(E + v × B)"`) is untouched, and a bare-symbol
+parenthetical with a stray space but no word (`"F = k (x0)"`) is untouched. The real T1 sentence
+now reaches `consistent`.
+
+**Full corpus re-validated, zero regressions**: `CORRECT_CONTROLS` 83 null / 1 non-null (the same
+pre-existing documented `hookes-law` defect, unchanged), all 912 entries still abstain with
+`binding=null`; `REJECTION_CASES` still 5 rejected / 2 correct-abstain of 7; `MUST_NOT_FIRE_CONTROLS`
+still 0 false fires across all 240 checks (10 controls × 24 bindings). 11 new Batch 7 tests added
+(positive trims, the operator/no-word negative guards, the real-sentence end-to-end case, a
+genuinely-wrong equation still rejecting through the identical trailing-annotation shape, and a
+full-corpus re-run in the same test file). The one Batch 6 test that had pinned this limitation as
+"reported not fixed" is updated in place to assert the fix, per this file's own convention of
+recording supersession rather than deleting history. 66/66 tests pass; full suite 696 files /
+14,417 passed / 9 skipped; `tsc --noEmit` clean; `npm run build` clean. Shadow-only — zero
+route/behaviour change, same discipline as every prior batch.
+
+**Live re-observation, same campaign shape, run against the deployed fix** (commit `b7f753d`,
+deployment `dpl_34JAhHyCDusNDz3D64VdrzAngrms`, READY before the drive started): same 4
+`phys.mech.*` lessons, same driver, disposable QA account created/driven/deleted, re-login
+confirmed blocked afterward.
+
+**50 `PHYSICS_DIM` lines** read from production runtime logs (Vercel MCP, deployment-scoped query),
+all isolated to this run's one session id (`cmu4a5gc60001l804k88y4lmx`) — again not the full
+expected 52 (4 inits + 48 chats); same retention/return-cap pattern §6.4 already recorded, not
+investigated further.
+
+**Gate distribution**: `no-binding` 16, `no-extraction` 16, `no-assertion-frame` 18,
+`parse-failure` 0, `unbound-symbol` 0, `consistent` 0, `violation` 0.
+
+**Stated plainly, per the task's own instruction: the core was NOT reached this run — 0 of 50
+lines reached `parse-failure`/`unbound-symbol`/`consistent`/`violation`.** This is not a sign the
+fix does not work — the fix is proven, unit-tested, against the exact real T1 sentence Batch 6
+captured. It means this particular live window's real model output did not happen to reproduce
+that *exact* shape (a clean, self-contained, punctuation-free trailing parenthetical with nothing
+following it in the same sentence). Traced against the real transcript text this run actually
+produced, not conjectured:
+
+| | §6.2 | §6.4 | §6.5 (this run) |
+|---|---|---|---|
+| lines | 36 | 50 | 50 |
+| no-binding | 12 | 16 | 16 |
+| no-extraction | 14 | 18 | 16 |
+| no-assertion-frame | 10 | 15 | 18 |
+| parse-failure | 0 | 0 | 0 |
+| unbound-symbol | 0 | 1 | 0 |
+| consistent | 0 | 0 | 0 |
+| violation | 0 | 0 | 0 |
+
+Three real, adjacent-but-distinct gaps found by running `diagnosePhysicsDim` directly against this
+run's own captured transcript text (not the offline corpus), each confirmed reproducible and each
+explicitly **not fixed this batch** — narrowing scope to exactly the trailing-parenthetical defect
+this batch was asked to close, per the task's own instruction:
+
+1. **Trailing parenthetical followed by more prose, same sentence.** `"The relationship is written
+   as F = m a (“force equals mass times acceleration”) Take a look at the motion graph…"` has no
+   sentence-ending punctuation between the closing paren and the continuation, so it is all one
+   sentence to `sentencesWithGaps`. The RHS's 60-char cap swallows straight through the paren into
+   the next clause (`"m a (“force equals mass times acceleration”) Take a look at"`), so Batch 7's
+   trim — which requires the parenthetical to sit at the very end of the RHS capture — never gets a
+   chance to fire. Lands at `no-assertion-frame` (the bloated candidate does extract, but matches no
+   Gate C frame). A second, compounding gap in the same sentence: `"is written as"` (no colon after
+   it) is not in `ASSERTED_PREFIX_RE`'s whitelist (`"so"|"we write"|"the formula is"`) either.
+2. **A real colon-marker phrasing outside Batch 6's whitelist.** `"…with the spoken form right
+   after: \( F = m a \) (…)"`, `"…acting on the body: \[ \Sigma \mathbf{F} = m a \] (…)"`,
+   `"…calculated as the product of the object's mass and its velocity: \[ p = m v \] (…)"` — real,
+   natural model phrasings, each excluded by Gate A's blanket "never immediately preceded by `:`"
+   rule because the leading clause doesn't match any of `COLON_FORWARD_DECLARATION_RE`'s six fixed
+   markers (`"in symbols"`, `"in equation form"`, `"as an equation"`, `"in formula form"`, `"as a
+   formula"`, `"mathematically"`, `"(this) is written as"`). Lands at `no-extraction`.
+3. **A parenthetical whose own interior contains an excluded character.** `"\[ p = m\,v \]
+   (momentum equals mass times velocity.) What does the symbol \(p\) stand for…"` — the period
+   sits *inside* the parenthetical, before its closing `)`. `CANDIDATE_RE`'s RHS charset already
+   excludes `.`, so the capture truncates at that internal period, leaving an **unbalanced**
+   fragment (`"mv (momentum equals mass times velocity"`, one open paren, zero close). Batch 7's
+   trim requires a *balanced*, closed parenthetical (`\(([^()]*)\)\s*$`) and correctly declines to
+   touch an unbalanced one — by design, not accident, since guessing at where an unclosed clause
+   was "meant" to end would be exactly the kind of blacklist-shaped guess this file's whole
+   discipline (§5.3) exists to avoid. Lands at `no-assertion-frame`.
+
+None of these three is the defect this batch was scoped to fix, and none is fixed here — recorded
+as open findings for a future batch, matching the exact discipline Batch 6 itself set for the
+defect this batch closed. **Verdict, unchanged from §6.2/§6.4: Batch 5 (enforcement) remains
+unwarranted on this evidence** — `violationFound` stays 0 across all three live windows combined
+(36 + 50 + 50 = 136 lines, 0 violations), and the dimension-checking core, while proven reachable
+once (§6.4), was not reached again this run. The three gaps above are further evidence for the
+"keep widening gates opportunistically" path named in §6.4's own verdict, not new evidence toward
+either the widen-vs-retire owner decision or Batch 5.
+
+Full transcripts and raw `PHYSICS_DIM` lines captured to this session's scratchpad, not committed
+(same convention as §6.2/§6.4).
+
+---
+
 ## 7. The steel man — and it is strong
 
 Matching `TUTOR_REMEDIATION_PLAN.md` §9-11's discipline. I am not going to talk myself out of it.

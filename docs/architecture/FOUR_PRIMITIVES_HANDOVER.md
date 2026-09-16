@@ -38,78 +38,34 @@ instead of widening further. Report the batch you did; do not promise or plan a 
 
 ## Current git state (re-verify with `git fetch origin main` before trusting this)
 
-- `origin/main` HEAD: `ea74929` — "docs: point CLAUDE.md at the owner-adopted remediation
-  plan, stop the Item-4 drift"
-- Working tree at last check: clean, 0 ahead / 0 behind.
-- A separate, unrelated live session (mobile app, title "Tutor app architecture approach") was
-  observed mid-edit on `FOUR_PRIMITIVES_STATUS.md` (+213 lines) and `CLAUDE.md` (+15 lines),
-  **not yet pushed** as of last check. If it has pushed by the time you read this: read that
-  diff BEFORE running anything below — it may already cover part or all of Batch 7, or it may
-  be repeating the deferred-Item-4 mistake again. Do not assume either way.
+- `origin/main` HEAD: `b7f753d` — "fix(physics-verifier): Batch 7 — trim trailing parenthetical
+  annotation from Gate A's RHS capture" (this file's own queued Batch 7 prompt below, DONE — see
+  `DETERMINISTIC_PHYSICS_VERIFIER_DESIGN.md` §6.5 and `FOUR_PRIMITIVES_STATUS.md` §2 for the real
+  result: fix proven by unit test, zero corpus regressions, but the live re-observation run against
+  the deployed fix reached 0/50 core, with three further adjacent Gate A/C gaps found and reported,
+  none fixed).
+- Working tree at last check: clean, 0 ahead / 0 behind, on `main` (no feature branch used).
+- The separate mobile-session edit mentioned in a prior refresh of this file landed as `a11bb4e` +
+  `a6a1730` (this very handover file's own creation/strengthening commits) — already reconciled,
+  nothing further to check there.
 
 ## Per-primitive status (summary only — full detail in `FOUR_PRIMITIVES_STATUS.md`)
 
 | # | Primitive | Status |
 |---|---|---|
 | 1 | Turn Contract | DONE — verify-only if touched |
-| 2 | Deterministic Physics Verifier | Batch 6 shipped + live-reobserved (1/50 reached core, 0 violations). **Batch 7 queued below.** |
+| 2 | Deterministic Physics Verifier | Batch 7 shipped + live-reobserved. Trailing-parenthetical Gate A defect fixed (unit-proven); live run reached 0/50 core, 0 violations across 136 lines total. **Owner decision pending — see "NOT queued" below; nothing to queue.** |
 | 3 | Learner-Move Interpreter | DONE — verify-only if touched |
 | 4 | Durable Learner State | Audited, NOT built. Fork undecided — see below, do not pick a side. |
 
 ## QUEUED — hand this to the next Claude account verbatim
 
-```
-PHYSICS VERIFIER — BATCH 7
-
-Read docs/architecture/DETERMINISTIC_PHYSICS_VERIFIER_DESIGN.md §6.3
-and §6.4 in full first. Batch 6 (shipped) widened Gate A/C to admit
-LaTeX-wrapped and colon-marker-prefixed equations, and found — but
-explicitly did NOT fix, as out of that batch's scope — a second,
-unrelated Gate A limitation: an equation followed by a trailing
-balanced parenthetical clause fails to extract (the exact real
-production example: the Gemini captured sentence from the
-Groq-vs-Gemini experiment, "In equation form, this is written as:
-\( F = m a \) (force equals mass times acceleration)" — extraction
-succeeds only when the trailing parenthetical is trimmed).
-
-TASK:
-1. Reproduce the defect first, against the real corpus and the real
-   captured production sentence above — don't fix from a guess.
-2. Fix it narrowly in extractEquationCandidates / the RHS-capture
-   logic — a whitelist addition (e.g. don't let a trailing
-   parenthetical clause get pulled into the RHS token match), never a
-   blacklist. Keep the fix additive; Gate A's existing conservatism is
-   deliberate (§5.3) and should not be loosened anywhere else.
-3. Re-validate against the FULL existing corpus with zero regressions:
-   912 CORRECT_CONTROLS / 25 REJECTION_CASES / 240
-   MUST_NOT_FIRE_CONTROLS (in src/tests/support/physicsVerifierCorpus.ts).
-4. Run ONE live observation window to measure the real fire rate with
-   both Batch 6 and Batch 7's fixes active — reuse
-   scripts/qa/physicsDimBatch4Drive.ts, same 4 phys.mech.* lessons,
-   same disposable-QA-account convention (create, drive, delete,
-   confirm re-login blocked). Report the gate distribution in the same
-   table format §6.4 used.
-5. Do NOT build Batch 5 (enforcement) — still not authorized on any
-   evidence this batch produces. Shadow-only, zero route/behavior
-   change, as every batch before it.
-
-Update DETERMINISTIC_PHYSICS_VERIFIER_DESIGN.md (new §6.5) and
-FOUR_PRIMITIVES_STATUS.md in the same commit. Commit and push to main.
-Report per CLAUDE.md's standing reporting rule.
-
-Before starting, read CLAUDE.md's "READ THIS FIRST" block at the top —
-it references a since-superseded deferral note about the four
-primitives; disregard that note, the owner has confirmed four
-primitives is the active priority.
-
-Work ONLY on main: fetch + fast-forward to origin/main, commit there,
-push there. Do not create a feature branch at any point, even
-temporarily.
-
-Model: Sonnet 5 (follows an already-proven method from Batches 4 and
-6 — reproduce, whitelist-only fix, full-corpus revalidation, live
-measurement; not a fresh architectural call).
-```
+**Nothing queued for Primitive 2 right now.** Batch 7 (the prompt this section used to hold) is
+DONE — see `DETERMINISTIC_PHYSICS_VERIFIER_DESIGN.md` §6.5. Its own live re-observation run found
+three further, adjacent Gate A/C gaps (listed under "NOT queued" below, as evidenced CANDIDATES,
+not authorized work) — per this program's own standing discipline, whether to spend a Batch 8 on
+one of them, or to stop widening entirely, is an owner-level call, not something to default into.
+Do not write a Batch 8 prompt here without that instruction.
 
 ## Verify-only prompts (queued but low priority — only if you have spare turns)
 
@@ -130,7 +86,18 @@ Model: Sonnet 5.
   keep opportunistically widening gates vs. retire the shadow as a
   permanently-dormant instrument. Batch 5 (enforcement) stays
   unauthorized regardless of Batch 7's result unless the owner says
-  otherwise.
+  otherwise. Three named, evidenced CANDIDATES for a further widening
+  batch, found by Batch 7's own live re-observation run and reported
+  in `DETERMINISTIC_PHYSICS_VERIFIER_DESIGN.md` §6.5 — none authorized,
+  none attempted: (a) a trailing parenthetical followed by MORE prose
+  in the same sentence (no sentence boundary between them, so the
+  RHS's 60-char cap swallows past the paren before Batch 7's trim can
+  fire); (b) real colon-marker phrasings the model actually used
+  ("right after:", "acting on the body:", "…velocity:") that are
+  outside Batch 6's six-phrase whitelist; (c) a parenthetical whose
+  own interior contains an excluded character (e.g. a period before
+  the closing paren), which truncates the RHS to an unbalanced
+  fragment Batch 7's trim correctly declines to touch by design.
 - **Durable Learner State**: the Design C (stored ConceptMasteryRecord,
   ADR 10) vs. Design D (derived, `studentIntelligence.ts`, already
   working) fork. The owner was asked directly (2026-09-16) and

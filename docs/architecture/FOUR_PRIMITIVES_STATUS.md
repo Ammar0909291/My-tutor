@@ -9,7 +9,7 @@ says. If this file and CLAUDE.md ever disagree, CLAUDE.md's dated entries are th
 this file is the current-state summary and should be corrected to match reality, not the other
 way round.
 
-**Last updated:** 2026-09-16, after the Physics Verifier's post-Batch-6 live re-observation window
+**Last updated:** 2026-09-16, after the Physics Verifier's Batch 7 fix + live re-observation window
 (§6.4 of its design doc) and the Durable Learner State investigation addendum (§13).
 
 ---
@@ -30,7 +30,7 @@ The four (§4.1-§4.4 of the V2 doc), in the order this programme has actually w
 | # | Primitive | Design doc | Status |
 |---|---|---|---|
 | 1 | **Turn Contract** | `TYPED_TURN_CONTRACT_DESIGN.md` | ✅ **DONE** — fully migrated |
-| 2 | **Deterministic Physics Verifier** (dimensional slice) | `DETERMINISTIC_PHYSICS_VERIFIER_DESIGN.md` | 🟡 **Batch 6 shipped + re-observed live — core reached once (1/50, `unbound-symbol`), still 0 violations** — Gate A/C widened to admit LaTeX and colon-marker equations; a fresh live campaign (§6.4) confirms the widened mechanism fires on real prose, but the absolute rate is too low to justify Batch 5 |
+| 2 | **Deterministic Physics Verifier** (dimensional slice) | `DETERMINISTIC_PHYSICS_VERIFIER_DESIGN.md` | 🟡 **Batch 7 shipped + re-observed live — trailing-parenthetical Gate A defect fixed and proven (unit test), but 0/50 core-reached this run** — three further, adjacent, unfixed Gate A/C gaps found and reported from real transcript text; still 0/136 violations across all three live windows combined |
 | 3 | **Closed-taxonomy Learner-Move Interpreter** | `LEARNER_MOVE_INTERPRETER_DESIGN.md` | ✅ **DONE** — fully migrated, per its own stated scope |
 | 4 | **Durable per-concept learner state** | `DURABLE_LEARNER_STATE_AUDIT.md` | ⚪ **AUDITED + INVESTIGATED FURTHER — recommend CLOSE, not build, fork still owner's to decide** — see below |
 
@@ -69,7 +69,7 @@ plan — check the assertion set (`assertDeliverySatisfiesContract`) first.
 
 ---
 
-## 2. Deterministic Physics Verifier (dimensional slice) — 🟡 Batch 6 shipped + re-observed live
+## 2. Deterministic Physics Verifier (dimensional slice) — 🟡 Batch 7 shipped + re-observed live
 
 **What it is:** a physics-specific correctness check — dimensional analysis only (no numeric
 tolerance, no sign convention, no symbolic/CAS checking; all three explicitly deferred, see the
@@ -165,12 +165,38 @@ VIOLATION rate with zero false positives — this run adds evidence the pipeline
 not that it fires often enough to matter. **Not built this session, per the design doc's own
 gating rule.**
 
-**Next action if resumed:** this is now an owner-level decision, not an execution task — either
-(a) accept the 2% mechanical-reachability result as sufficient evidence to keep widening gates
-opportunistically (next candidate: the trailing-balanced-parenthetical Gate A limitation §6.3
-found and reported), or (b) treat two live windows at effectively 0% violation rate as the
-steel-man's (§7) predicted outcome and retire the shadow as a permanently-dormant instrument. Do
-not build Batch 5 speculatively either way.
+**Batch 7 — the trailing-parenthetical Gate A defect is fixed (2026-09-16, §6.5 of the design
+doc).** Reproduced first against the exact real T1 sentence, then closed with an additive
+whitelist trim in `extractEquationCandidates`: a trailing `" (...)"` clause is stripped from the
+RHS only when a space precedes the `"("`, the content carries no arithmetic-operator character,
+and it carries at least one true English word — proven both by unit test (the real T1 sentence now
+reaches `consistent`) and by full corpus re-validation (912/25/240, zero regressions).
+
+**Live re-observation against the deployed fix: 0/50 core-reached, stated plainly, not padded.**
+Same campaign shape, run against commit `b7f753d` (deployment READY before the drive started).
+Gate distribution: `no-binding` 16, `no-extraction` 16, `no-assertion-frame` 18, rest 0. The fix is
+real and unit-proven, but this particular live window's model output did not happen to reproduce
+the *exact* fixed shape. Traced against the actual transcript (not conjectured), three further,
+adjacent Gate A/C gaps were found and reported, none fixed this batch (deliberately, to keep this
+batch's own scope narrow): (1) a trailing parenthetical followed by more prose in the same
+sentence — the RHS's 60-char cap swallows past it before Batch 7's trim gets a chance to fire;
+(2) real colon-marker phrasings ("right after:", "acting on the body:", "…velocity:") outside
+Batch 6's six-phrase whitelist; (3) a parenthetical whose own interior contains an excluded
+character (a period before the closing paren), which truncates the RHS capture to an *unbalanced*
+fragment Batch 7's trim correctly declines to touch (it requires a balanced, closed parenthetical
+by design — guessing at an unclosed clause's intended end would be exactly the blacklist-shaped
+guess §5.3 exists to avoid).
+
+**`violationFound:true` remains 0 across all three live windows combined (36 + 50 + 50 = 136
+lines).** Batch 5 (enforcement) remains unwarranted on this evidence — unchanged verdict from
+§6.2/§6.4.
+
+**Next action if resumed:** still an owner-level decision, not an execution task — either
+(a) keep widening gates opportunistically (three further named, evidenced candidates now queued:
+the "more prose after the parenthetical" gap, the colon-marker whitelist gap, the
+excluded-character-inside-parenthetical gap — none attempted yet), or (b) treat three live windows
+at effectively 0% violation rate as the steel-man's (§7) predicted outcome and retire the shadow as
+a permanently-dormant instrument. Do not build Batch 5 speculatively either way.
 
 ---
 
@@ -284,10 +310,16 @@ Two of four primitives fully shipped and closed (Turn Contract, Learner-Move Int
 are owner-directed investigations, neither fully closed:
 - **Physics Verifier** — owner chose "loosen the gates, re-validate" (2026-09-16). Batch 6
   shipped, offline-validated, deployed, AND live re-observed (§6.4): the widened mechanism is
-  confirmed reachable on real prose (1/50 lines reached `unbound-symbol`, correctly abstaining),
-  but the violation rate is still 0/86 across both live windows combined — too low, on its own
-  terms, to justify Batch 5. What remains is an owner call (§2's "next action": keep
-  opportunistically widening gates, or retire the shadow per §7's steel man), not more execution.
+  confirmed reachable on real prose (1/50 lines reached `unbound-symbol`, correctly abstaining).
+  Batch 7 (§6.5) closed the specific trailing-parenthetical Gate A defect §6.3/§6.4 had named but
+  not fixed — proven by unit test against the real captured sentence, zero corpus regressions —
+  then re-ran the live campaign against the deployed fix: 0/50 core-reached this time, and three
+  further, adjacent, unfixed Gate A/C gaps were found and reported from the real transcript
+  (trailing-paren-plus-more-prose, an uncovered colon-marker phrasing, an excluded-character-
+  inside-parenthetical truncation). Violation rate is still 0/136 across all three live windows
+  combined — too low, on its own terms, to justify Batch 5. What remains is an owner call (§2's
+  "next action": keep opportunistically widening gates against the three newly-queued candidates,
+  or retire the shadow per §7's steel man), not more execution.
 - **Durable Learner State** — owner chose "investigate further before deciding" (2026-09-16).
   Investigation done (§13 of the audit doc): closed the audit's own flagged unknowns against real
   production data, found Design D is not uniformly fresh, and found the audit's own proposed
