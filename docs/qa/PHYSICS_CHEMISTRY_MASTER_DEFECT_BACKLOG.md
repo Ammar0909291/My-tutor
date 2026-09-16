@@ -111,7 +111,9 @@ Nothing to fix without a reproducible trigger.
 ## B. Session, Progress & Concurrency Integrity
 
 ### PCD-004 — Concurrent same-account sessions cross-contaminate `activeLessonSlug`/`currentLesson`
-**Status: ARCHITECTURAL ESCALATION — not implemented.** See the escalation
+**Status: ARCHITECTURAL ESCALATION — owner decided the direction
+(2026-09-16, option 1: version-column guard), NOT YET IMPLEMENTED.** A
+ready-to-execute prompt for the next session is queued in the escalation
 section at the end of this document. Confirmed current schema
 (`prisma/schema.prisma` `StudentProgress`): `currentLesson` is written via
 `Math.max` (monotonic, so it cannot regress under a race, though it can
@@ -673,6 +675,61 @@ whichever write has the larger `currentLesson`) was considered and
 rejected: it would not actually fix `activeLessonSlug`'s race (a slug has
 no natural ordering to compare), and a partial, undocumented mitigation
 that looks like a fix but isn't is worse than reporting the gap plainly.
+
+**OWNER DECISION, 2026-09-16: option (1), the version-column guard.**
+Confirmed directly by the owner (not inferred, not defaulted to the
+"recommended" label above without asking) — decision-only turn, nothing
+implemented yet. The next session should build EXACTLY this:
+
+```
+PCD-004 — add an optimistic-concurrency guard to StudentProgress.activeLessonSlug
+
+Read docs/qa/PHYSICS_CHEMISTRY_MASTER_DEFECT_BACKLOG.md's PCD-004 entry
+and its "Architectural Escalation — PCD-004" section in full first —
+the owner has already decided the direction (option 1, version-column),
+this is now an ordinary implementation task, not a decision task.
+
+Root cause (already confirmed): StudentProgress.activeLessonSlug is a
+per-user, last-write-wins field with no concurrency guard, so two
+lessons opened concurrently on one account can silently overwrite each
+other's lesson pointer. currentLesson is already protected via Math.max
+(monotonic) and needs no change.
+
+TASK:
+1. Add a version/timestamp column to StudentProgress (a Prisma
+   migration), mirroring the existing optimistic-concurrency pattern
+   already used for contextSnapshot (see writeSnapshotDelta and its own
+   version-check write, per CLAUDE.md's ADR 10) — reuse that pattern's
+   shape, don't invent a new one.
+2. Every write site that sets activeLessonSlug (src/app/api/learn/
+   lesson-init/route.ts and any other writer — grep for
+   `activeLessonSlug:` assignments, don't assume the file list above is
+   complete) must read-check-write against the version column and
+   reject/retry a write that would overwrite a newer value, exactly like
+   writeSnapshotDelta's own conflict handling.
+3. Readers of activeLessonSlug (src/lib/curriculum/*, getDashboardV2Data.ts,
+   and any other reader — grep, don't assume) do NOT need to change; this
+   is a write-path guard only, the field's meaning and read contract are
+   unchanged.
+4. Add regression tests proving: (a) a genuine race (two concurrent
+   writes, one with a stale version) resolves to the newer write
+   surviving, never silently to whichever commits last; (b) the ordinary
+   single-writer case is completely unaffected (same behavior as today).
+5. Live-verify if possible (disposable QA account, two concurrent
+   lesson-init/chat calls against the SAME account) — if live
+   verification isn't reachable in your environment, say so plainly
+   rather than claiming it.
+
+Work only on main. Full suite + tsc clean before any commit. This is a
+real schema migration to a live production database (StudentProgress is
+not empty) — follow this repo's standing migration discipline (no ad-hoc
+`db push` against production, use a real Prisma migration file, verify
+it applies cleanly). Report using CLAUDE.md's standing single-fenced-block
+format with git info, including explicit migration-application status
+(applied to production / not yet applied and why).
+
+Model: Sonnet 5.
+```
 
 ---
 
