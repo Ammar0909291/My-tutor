@@ -6214,6 +6214,21 @@ ADR; everything in it that would become code stays G1/G2-gated.
   120/120 pass). Physics content layer measured complete: KG 238 / Blueprints 238/238 / Educational
   Brain 238/238, visual bindings exact 77 / none 161.
 
+## Four Primitives — live status doc (2026-09-16, standing pointer)
+- The four-primitive migration this V2 doc's verdict names (Turn Contract → Physics Verifier
+  (dimensional) → Learner-Move Interpreter → durable learner state) now has its own single
+  living status file: **`docs/architecture/FOUR_PRIMITIVES_STATUS.md`.** Read it FIRST — before
+  this section, before the individual design docs — to pick the programme up cold from any
+  session or account; it is a dashboard, not detail, and states current status/next action per
+  primitive with commit hashes. **Update it in the same commit as any change touching one of the
+  four primitives** — do not let it drift into a second, competing history against this file's
+  own sprawling entries. As of 2026-09-16: Turn Contract and Learner-Move Interpreter are DONE
+  (fully migrated, all batches landed); Physics Verifier is PAUSED at Batch 4 (shadow deployed,
+  the real manufactured-observation campaign not yet run — an incidental 14-line sample exists,
+  0/14 fired, not a substitute); Durable Learner State was AUDITED and the recommendation is to
+  CLOSE it as scoped rather than build it, pending an owner-level fork decision between two
+  already-existing mechanisms (see the audit doc, `DURABLE_LEARNER_STATE_AUDIT.md`).
+
 ## Run locally
 ```
 cp .env.example .env   # set DATABASE_URL, AUTH_SECRET (openssl rand -base64 32), GROQ_API_KEY
