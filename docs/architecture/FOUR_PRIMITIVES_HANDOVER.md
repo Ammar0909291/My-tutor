@@ -16,9 +16,12 @@ not re-defer on your own reading of that doc, and do not silently "fix" the cont
 the two documents — flag it, don't resolve it unilaterally, per the standing lesson from the
 2026-09-16 incident where multiple sessions drifted on exactly this kind of doc/reality mismatch.
 
-**Last refreshed:** 2026-09-16, by the `/loop` handover-maintenance job — this refresh is a
-deliberate handoff: the prior session was near its weekly usage limit, so this file is written
-to be picked up cold by a genuinely different account, not just a fresh session on the same one.
+**Last refreshed:** 2026-09-16, reconciling two independent accounts that picked up this file's
+own queued Batch 7 prompt concurrently (one landed as `b7f753d` code-only + `2b159ae` docs; the
+other ran its own live window and cross-check offline, then found `2b159ae` already on `origin/main`
+on push and merged its one non-redundant finding in rather than overwriting). See "Current git
+state" below for the reconciliation detail — this is the exact scenario "How to keep this file
+honest" (bottom of this file) exists to catch.
 
 **Git branch discipline — read before your first commit.** Standing repo policy (CLAUDE.md
 "Working branch"): work happens ONLY on `main`. Do not create a feature branch at all, even
@@ -38,12 +41,17 @@ instead of widening further. Report the batch you did; do not promise or plan a 
 
 ## Current git state (re-verify with `git fetch origin main` before trusting this)
 
-- `origin/main` HEAD: `b7f753d` — "fix(physics-verifier): Batch 7 — trim trailing parenthetical
-  annotation from Gate A's RHS capture" (this file's own queued Batch 7 prompt below, DONE — see
+- `origin/main` HEAD: `2b159ae` — "docs(physics): Batch 7 live re-observation — trailing-paren fix
+  proven, 0/50 core this run, 3 new gaps found" (this file's own queued Batch 7 prompt, DONE — see
   `DETERMINISTIC_PHYSICS_VERIFIER_DESIGN.md` §6.5 and `FOUR_PRIMITIVES_STATUS.md` §2 for the real
-  result: fix proven by unit test, zero corpus regressions, but the live re-observation run against
-  the deployed fix reached 0/50 core, with three further adjacent Gate A/C gaps found and reported,
-  none fixed).
+  result: fix proven by unit test, zero corpus regressions, but the live re-observation reached 0
+  core). **A second, independent live-re-observation window ran concurrently with the one that
+  produced `2b159ae`** — a different Claude account, same queued prompt, same time window — and was
+  reconciled into §6.5/status on top of it (no code change, docs-only): 33 more lines, 0 more core
+  reached, and a fourth Gate A/C gap distinct from the first three. This is the exact concurrent-
+  session collision this file's own "how to keep this file honest" section exists to catch — caught
+  here on reconciliation, not avoided, because both sessions independently re-fetched and found the
+  same queue entry. Four live windows total now; combined `violationFound` still 0/169.
 - Working tree at last check: clean, 0 ahead / 0 behind, on `main` (no feature branch used).
 - The separate mobile-session edit mentioned in a prior refresh of this file landed as `a11bb4e` +
   `a6a1730` (this very handover file's own creation/strengthening commits) — already reconciled,
@@ -54,18 +62,18 @@ instead of widening further. Report the batch you did; do not promise or plan a 
 | # | Primitive | Status |
 |---|---|---|
 | 1 | Turn Contract | DONE — verify-only if touched |
-| 2 | Deterministic Physics Verifier | Batch 7 shipped + live-reobserved. Trailing-parenthetical Gate A defect fixed (unit-proven); live run reached 0/50 core, 0 violations across 136 lines total. **Owner decision pending — see "NOT queued" below; nothing to queue.** |
+| 2 | Deterministic Physics Verifier | Batch 7 shipped + live-reobserved twice (concurrently). Trailing-parenthetical Gate A defect fixed (unit-proven); 0 core reached in either run, 0 violations across 169 lines total, 4 further gaps found. **Owner decision pending — see "NOT queued" below; nothing to queue.** |
 | 3 | Learner-Move Interpreter | DONE — verify-only if touched |
 | 4 | Durable Learner State | Audited, NOT built. Fork undecided — see below, do not pick a side. |
 
 ## QUEUED — hand this to the next Claude account verbatim
 
 **Nothing queued for Primitive 2 right now.** Batch 7 (the prompt this section used to hold) is
-DONE — see `DETERMINISTIC_PHYSICS_VERIFIER_DESIGN.md` §6.5. Its own live re-observation run found
-three further, adjacent Gate A/C gaps (listed under "NOT queued" below, as evidenced CANDIDATES,
-not authorized work) — per this program's own standing discipline, whether to spend a Batch 8 on
-one of them, or to stop widening entirely, is an owner-level call, not something to default into.
-Do not write a Batch 8 prompt here without that instruction.
+DONE — see `DETERMINISTIC_PHYSICS_VERIFIER_DESIGN.md` §6.5. Its two concurrent live re-observation
+runs found four further, adjacent Gate A/C gaps total (listed under "NOT queued" below, as
+evidenced CANDIDATES, not authorized work) — per this program's own standing discipline, whether to
+spend a Batch 8 on one of them, or to stop widening entirely, is an owner-level call, not something
+to default into. Do not write a Batch 8 prompt here without that instruction.
 
 ## Verify-only prompts (queued but low priority — only if you have spare turns)
 
@@ -86,18 +94,26 @@ Model: Sonnet 5.
   keep opportunistically widening gates vs. retire the shadow as a
   permanently-dormant instrument. Batch 5 (enforcement) stays
   unauthorized regardless of Batch 7's result unless the owner says
-  otherwise. Three named, evidenced CANDIDATES for a further widening
-  batch, found by Batch 7's own live re-observation run and reported
-  in `DETERMINISTIC_PHYSICS_VERIFIER_DESIGN.md` §6.5 — none authorized,
-  none attempted: (a) a trailing parenthetical followed by MORE prose
-  in the same sentence (no sentence boundary between them, so the
-  RHS's 60-char cap swallows past the paren before Batch 7's trim can
-  fire); (b) real colon-marker phrasings the model actually used
-  ("right after:", "acting on the body:", "…velocity:") that are
-  outside Batch 6's six-phrase whitelist; (c) a parenthetical whose
-  own interior contains an excluded character (e.g. a period before
-  the closing paren), which truncates the RHS to an unbalanced
-  fragment Batch 7's trim correctly declines to touch by design.
+  otherwise. Four named, evidenced CANDIDATES for a further widening
+  batch, found across Batch 7's two concurrent live re-observation
+  runs and reported in `DETERMINISTIC_PHYSICS_VERIFIER_DESIGN.md`
+  §6.5 — none authorized, none attempted: (a) a trailing parenthetical
+  followed by MORE prose in the same sentence (no sentence boundary
+  between them, so the RHS's 60-char cap swallows past the paren
+  before Batch 7's trim can fire); (b) real colon-marker phrasings the
+  model actually used ("right after:", "acting on the body:",
+  "…velocity:") that are outside Batch 6's six-phrase whitelist;
+  (c) a parenthetical whose own interior contains an excluded
+  character (e.g. a period before the closing paren), which truncates
+  the RHS to an unbalanced fragment Batch 7's trim correctly declines
+  to touch by design; (d) a bold callout naming the equation with NO
+  colon at all ("Here's the equation that ties … together: **F =
+  ma** (…)"), which clears extraction and the trim cleanly but fails
+  Gate C's own CORE five-phrase whitelist — distinct from (b), since
+  there is no colon-marker list to widen here at all. Three of the
+  four (a, b, d) trace back to Gate C, only one (c) to Gate A — if the
+  owner authorizes further widening, Gate C is the better-evidenced
+  target.
 - **Durable Learner State**: the Design C (stored ConceptMasteryRecord,
   ADR 10) vs. Design D (derived, `studentIntelligence.ts`, already
   working) fork. The owner was asked directly (2026-09-16) and

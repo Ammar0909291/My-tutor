@@ -859,15 +859,54 @@ this batch was asked to close, per the task's own instruction:
 
 None of these three is the defect this batch was scoped to fix, and none is fixed here — recorded
 as open findings for a future batch, matching the exact discipline Batch 6 itself set for the
-defect this batch closed. **Verdict, unchanged from §6.2/§6.4: Batch 5 (enforcement) remains
-unwarranted on this evidence** — `violationFound` stays 0 across all three live windows combined
-(36 + 50 + 50 = 136 lines, 0 violations), and the dimension-checking core, while proven reachable
-once (§6.4), was not reached again this run. The three gaps above are further evidence for the
-"keep widening gates opportunistically" path named in §6.4's own verdict, not new evidence toward
-either the widen-vs-retire owner decision or Batch 5.
+defect this batch closed.
 
-Full transcripts and raw `PHYSICS_DIM` lines captured to this session's scratchpad, not committed
-(same convention as §6.2/§6.4).
+**A concurrent, independent second live window** ran at effectively the same time as the one
+above (a second Claude account, also picking up this file's own queued Batch 7 prompt — the exact
+collision "How to keep this file honest" exists to catch, caught here on reconciliation rather
+than before it happened). Same driver, same 4 lessons, its own disposable QA account (created,
+driven, deleted, re-login confirmed blocked), against the identical deployed fix. **33 of the
+expected 52 `PHYSICS_DIM` lines retained** (worse than either window above — same retention/
+return-cap limitation, re-confirmed by re-querying with a narrower time window scoped exactly to
+this run: identical 33 lines). Gate distribution: `no-assertion-frame` 15, `no-binding` 10 (all
+`math.alg.equation`, the already-documented §6.2 cross-subject pattern), `no-extraction` 8 — again
+zero lines reaching the core.
+
+Because that window's shadow sample was incomplete, `diagnosePhysicsDim` was run directly against
+9 real sentences copied verbatim from ITS OWN transcript, sidestepping the log-retention gap
+entirely. 0/9 reached `consistent`. Six were blocked by Gate C, three by Gate A's colon-adjacency
+rule (§6.4's own original limitation) — overlapping causally with gaps 2 and 3 above, but one of
+the six Gate-C-blocked sentences surfaces a **fourth, genuinely distinct gap**, not covered by any
+of the three above:
+
+4. **A bold callout with no colon anywhere fails Gate C's own core whitelist, independent of the
+   colon-marker list gap 2 describes.** `"Here's the equation that ties the three quantities
+   together: **F = ma** (“Force equals mass times acceleration.”)"` and `"The key equation that
+   links the forces … is \[ \Sigma \mathbf{F}=m\,\mathbf{a} \] (…)"` — Gate A's extraction and
+   Batch 7's own trim both succeed cleanly here (no colon-adjacency issue, no interior-character
+   truncation, no trailing prose past the parenthetical). The block is purely Gate C's core
+   five-phrase `ASSERTED_PREFIX_RE`-style whitelist (`"the formula is"` / `"we write"` / `"X …
+   tells us"` / `"so X = …"` / a standalone display line): a descriptive lead-in naming the
+   equation ("the equation that ties … together", "the key equation that links …") is a completely
+   natural, common way a tutor asserts a formula, and matches none of the five. Lands at
+   `no-assertion-frame`. Distinct from gap 2 because there is no colon at all to widen a colon-
+   marker list against — this is the CORE assertion-frame whitelist itself that would need
+   widening, a different, arguably higher-leverage target than gap 2's narrower colon-marker list.
+
+**Verdict, unchanged from §6.2/§6.4: Batch 5 (enforcement) remains unwarranted on this evidence** —
+`violationFound` stays 0 across all four live windows combined (36 + 50 + 50 + 33 = 169 lines, 0
+violations), and the dimension-checking core, while proven reachable once (§6.4), was not reached
+again in either of this batch's two concurrent re-observation runs. The four gaps above are further
+evidence for the "keep widening gates opportunistically" path named in §6.4's own verdict, not new
+evidence toward either the widen-vs-retire owner decision or Batch 5. If a future batch is
+authorized: gap 4 (Gate C's core whitelist) and gap 2 (its colon-marker sub-list) both point at the
+same gate as the more promising next target — three of the four gaps found across both live
+windows this batch (1, 2, 4) trace back to Gate C's assertion-frame conservatism, only one (3) to
+Gate A. **None of the four is proposed as a batch here** — that stays an owner decision per this
+programme's own standing rule.
+
+Full transcripts and raw `PHYSICS_DIM` lines from both live windows captured to their respective
+sessions' scratchpads, not committed (same convention as §6.2/§6.4).
 
 ---
 

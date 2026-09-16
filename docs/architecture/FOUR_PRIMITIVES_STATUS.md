@@ -30,7 +30,7 @@ The four (§4.1-§4.4 of the V2 doc), in the order this programme has actually w
 | # | Primitive | Design doc | Status |
 |---|---|---|---|
 | 1 | **Turn Contract** | `TYPED_TURN_CONTRACT_DESIGN.md` | ✅ **DONE** — fully migrated |
-| 2 | **Deterministic Physics Verifier** (dimensional slice) | `DETERMINISTIC_PHYSICS_VERIFIER_DESIGN.md` | 🟡 **Batch 7 shipped + re-observed live — trailing-parenthetical Gate A defect fixed and proven (unit test), but 0/50 core-reached this run** — three further, adjacent, unfixed Gate A/C gaps found and reported from real transcript text; still 0/136 violations across all three live windows combined |
+| 2 | **Deterministic Physics Verifier** (dimensional slice) | `DETERMINISTIC_PHYSICS_VERIFIER_DESIGN.md` | 🟡 **Batch 7 shipped + re-observed live (twice, concurrently) — trailing-parenthetical Gate A defect fixed and proven (unit test), but 0 core-reached in either run** — four further, adjacent, unfixed Gate A/C gaps found and reported from real transcript text; still 0/169 violations across all four live windows combined |
 | 3 | **Closed-taxonomy Learner-Move Interpreter** | `LEARNER_MOVE_INTERPRETER_DESIGN.md` | ✅ **DONE** — fully migrated, per its own stated scope |
 | 4 | **Durable per-concept learner state** | `DURABLE_LEARNER_STATE_AUDIT.md` | ⚪ **AUDITED + INVESTIGATED FURTHER — recommend CLOSE, not build, fork still owner's to decide** — see below |
 
@@ -187,16 +187,31 @@ fragment Batch 7's trim correctly declines to touch (it requires a balanced, clo
 by design — guessing at an unclosed clause's intended end would be exactly the blacklist-shaped
 guess §5.3 exists to avoid).
 
-**`violationFound:true` remains 0 across all three live windows combined (36 + 50 + 50 = 136
+**A second, independent live window ran concurrently** (a different Claude account, picking up the
+same queued Batch 7 prompt at effectively the same time — exactly the collision this file's own
+"how to keep this file honest" check exists to catch, caught here on reconciliation). 33 of the
+expected 52 lines retained (worse than either window above, same retention limitation). Gate
+distribution: `no-assertion-frame` 15, `no-binding` 10, `no-extraction` 8 — again 0 core-reached.
+Its own offline cross-check against 9 real sentences from that window's transcript surfaced a
+**fourth gap**, distinct from the three above: (4) a bold callout naming the equation with no
+colon anywhere ("Here's the equation that ties the three quantities together: **F = ma** (…)")
+clears extraction and Batch 7's trim cleanly, but fails Gate C's own core five-phrase whitelist —
+not the colon-marker sub-list gap 2 describes, since there is no colon to widen a colon-marker list
+against; this is the base `ASSERTED_PREFIX_RE`-style whitelist itself.
+
+**`violationFound:true` remains 0 across all four live windows combined (36 + 50 + 50 + 33 = 169
 lines).** Batch 5 (enforcement) remains unwarranted on this evidence — unchanged verdict from
-§6.2/§6.4.
+§6.2/§6.4. Three of the four named gaps (1, 2, 4) trace back to Gate C's assertion-frame
+conservatism, only one (3) to Gate A — Gate C, not Gate A, now looks like the higher-leverage next
+target if the owner authorizes further widening.
 
 **Next action if resumed:** still an owner-level decision, not an execution task — either
-(a) keep widening gates opportunistically (three further named, evidenced candidates now queued:
+(a) keep widening gates opportunistically (four further named, evidenced candidates now queued:
 the "more prose after the parenthetical" gap, the colon-marker whitelist gap, the
-excluded-character-inside-parenthetical gap — none attempted yet), or (b) treat three live windows
-at effectively 0% violation rate as the steel-man's (§7) predicted outcome and retire the shadow as
-a permanently-dormant instrument. Do not build Batch 5 speculatively either way.
+excluded-character-inside-parenthetical gap, and the core-assertion-whitelist gap — none
+attempted yet), or (b) treat four live windows at effectively 0% violation rate as the steel-man's
+(§7) predicted outcome and retire the shadow as a permanently-dormant instrument. Do not build
+Batch 5 speculatively either way.
 
 ---
 
@@ -313,13 +328,15 @@ are owner-directed investigations, neither fully closed:
   confirmed reachable on real prose (1/50 lines reached `unbound-symbol`, correctly abstaining).
   Batch 7 (§6.5) closed the specific trailing-parenthetical Gate A defect §6.3/§6.4 had named but
   not fixed — proven by unit test against the real captured sentence, zero corpus regressions —
-  then re-ran the live campaign against the deployed fix: 0/50 core-reached this time, and three
-  further, adjacent, unfixed Gate A/C gaps were found and reported from the real transcript
-  (trailing-paren-plus-more-prose, an uncovered colon-marker phrasing, an excluded-character-
-  inside-parenthetical truncation). Violation rate is still 0/136 across all three live windows
-  combined — too low, on its own terms, to justify Batch 5. What remains is an owner call (§2's
-  "next action": keep opportunistically widening gates against the three newly-queued candidates,
-  or retire the shadow per §7's steel man), not more execution.
+  then re-ran the live campaign against the deployed fix — twice, concurrently, by two independent
+  sessions that both picked up the same queued prompt — 0/50 and 0/33 core-reached in the two runs,
+  and four total further, adjacent, unfixed Gate A/C gaps were found and reported from the real
+  transcripts (trailing-paren-plus-more-prose, an uncovered colon-marker phrasing, an
+  excluded-character-inside-parenthetical truncation, and a colon-free bold-callout failing Gate
+  C's own core whitelist). Violation rate is still 0/169 across all four live windows combined —
+  too low, on its own terms, to justify Batch 5. What remains is an owner call (§2's "next action":
+  keep opportunistically widening gates against the four newly-queued candidates — three of which
+  point at Gate C, not Gate A — or retire the shadow per §7's steel man), not more execution.
 - **Durable Learner State** — owner chose "investigate further before deciding" (2026-09-16).
   Investigation done (§13 of the audit doc): closed the audit's own flagged unknowns against real
   production data, found Design D is not uniformly fresh, and found the audit's own proposed
