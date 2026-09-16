@@ -231,11 +231,20 @@ pre-feature row), so the test's own premise was wrong, not the code. Corrected t
 divergence shape (`sawModernGrading: true` + zero verified counters) before shipping — the exact
 reproduce-first discipline this whole session has followed.
 
-**Next step for this item**: read production `LEARNER_STATE` logs alongside `capabilityModel.ts`'s
-own live projection reads. Per the audit's own Batch 2 spec ("Agreement assertion" — log a
-violation when the computed record disagrees with `studentIntelligence`'s derived profile; if the
-two never disagree, Design C/the spine variant adds nothing but a table/event type) — that
-agreement check is the next batch, and it is the fork's own evidence, not a guess.
+**Batch 6 is COMMITTED AND PUSHED — commit `c62f559a` on `main`.** Full suite 698/14,447/9 skipped;
+tsc clean; build clean.
+
+**Checked whether Batch 2 ("Agreement assertion") is ALSO safely reachable right now — it is
+NOT.** `buildStudentIntelligence` (the function whose output Batch 2 needs to compare against) has
+ZERO call sites in the chat route today — it runs only in dashboard/research contexts. Wiring it
+into the per-turn chat path to do the comparison would add a genuinely NEW, non-trivial DB read on
+every turn — exactly the class of change the 2026-08-31 egress incident's own standing rule warns
+against ("a new per-turn query/table is never the answer to 'measure this' first"). Batch 2 is
+therefore blocked on ONE of: (a) production `LEARNER_STATE` log volume accumulating first, then an
+OFFLINE comparison script (not wired into the hot path) reading both that log and a periodic
+`buildStudentIntelligence` snapshot; or (b) an explicit owner decision to accept the new per-turn
+DB read cost. Neither exists yet. **Do not wire `buildStudentIntelligence` into route.ts to chase
+this without one of those two.**
 
 **Update this file's "CURRENT STATE" section at the end of every batch** — that is the entire
 point of this file existing. Keep the STANDING AUTHORIZATION section as-is (do not re-litigate
