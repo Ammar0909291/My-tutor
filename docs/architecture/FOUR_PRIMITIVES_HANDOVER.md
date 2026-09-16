@@ -16,7 +16,23 @@ not re-defer on your own reading of that doc, and do not silently "fix" the cont
 the two documents — flag it, don't resolve it unilaterally, per the standing lesson from the
 2026-09-16 incident where multiple sessions drifted on exactly this kind of doc/reality mismatch.
 
-**Last refreshed:** 2026-09-16, by the `/loop` handover-maintenance job.
+**Last refreshed:** 2026-09-16, by the `/loop` handover-maintenance job — this refresh is a
+deliberate handoff: the prior session was near its weekly usage limit, so this file is written
+to be picked up cold by a genuinely different account, not just a fresh session on the same one.
+
+**Git branch discipline — read before your first commit.** Standing repo policy (CLAUDE.md
+"Working branch"): work happens ONLY on `main`. Do not create a feature branch at all, even
+temporarily "to merge later" — a prior batch in this same programme did that, then had to
+hard-reset and cherry-pick to reconcile once told to stop. Start on `main`
+(`git fetch origin main && git checkout main && git merge --ff-only origin/main`), commit on
+`main`, push to `main`, every batch, no exceptions.
+
+**"How many batches are left?" — there is no fixed count, and don't invent one.** The Physics
+Verifier programme (Primitive 2) is an evidence-gated loop, not a pre-planned pipeline: each
+batch tries one narrow, whitelist-only gate widening and measures the real live fire rate. It
+stops only when either (a) a live run shows a genuine violation with zero false positives — the
+stated precondition for Batch 5 (enforcement) — or (b) the owner decides to retire the shadow
+instead of widening further. Report the batch you did; do not promise or plan a batch count.
 
 ---
 
@@ -85,6 +101,10 @@ Before starting, read CLAUDE.md's "READ THIS FIRST" block at the top —
 it references a since-superseded deferral note about the four
 primitives; disregard that note, the owner has confirmed four
 primitives is the active priority.
+
+Work ONLY on main: fetch + fast-forward to origin/main, commit there,
+push there. Do not create a feature branch at any point, even
+temporarily.
 
 Model: Sonnet 5 (follows an already-proven method from Batches 4 and
 6 — reproduce, whitelist-only fix, full-corpus revalidation, live
