@@ -2959,12 +2959,25 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             turnArbitrationHoisted = arbitrateTurn({
               knowledgeGapResolved: knowledgeGapHoisted !== null,
               recoveryActive: learnerMoveStageAHoisted.has('DISTRESS'),
-              // turnIntent is the ONE authoritative read of the message
-              // (Phase 1). `ambiguous` is the stop-carrying-a-question case
-              // Series A Phase 4 already defers the close for; including it
-              // here is that same rule, stated once instead of inline.
+              // Learner-Move Interpreter, Batch 7 (design doc §8 row 6's
+              // second half, deferred by Batch 6 — that deferral's own stated
+              // reason, "needs a new reading field/kind for ambiguity," was
+              // WRONG: `LearnerMoveReading.ambiguous` already exists,
+              // top-level, next to `.has()`). HELP_REQUEST fires iff
+              // `intent.learnerRequest !== null` (learnerMove.ts) — the
+              // identical field `turnIntent.learnerRequest !== null` already
+              // read. `.ambiguous` is `intent.ambiguous` (= `turnIntent.
+              // ambiguous`) carried through UNMODIFIED by both
+              // `readLearnerMove` and `refineLearnerMove` — one assignment
+              // site in the whole module, always a pass-through
+              // (learnerMoveRequestEquivalence.test.ts proves both facts
+              // structurally, not just by argument). `ambiguous` is still
+              // the stop-carrying-a-question case Series A Phase 4 already
+              // defers the close for — that rule is unchanged, only its
+              // source moved from `turnIntent` to the reading that already
+              // carries `turnIntent`'s own value forward.
               learnerRequestActive:
-                turnIntent.learnerRequest !== null || turnIntent.ambiguous,
+                learnerMoveStageAHoisted.has('HELP_REQUEST') || learnerMoveStageAHoisted.ambiguous,
               closing: sessionEpisodeHoisted.phase === 'CLOSING',
               completionReady: lessonCompletedHoisted,
               genuineQuestionActive: detectLearnerQuestion(turnIntent.message) && pendingMcqHoisted === null,

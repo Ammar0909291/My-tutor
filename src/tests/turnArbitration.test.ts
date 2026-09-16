@@ -298,8 +298,6 @@ describe('4. ownership is preserved — the arbiter decides WHO, never WHAT', ()
   it('the existing owners still own their readings', () => {
     const src = readFileSync('src/app/api/learn/chat/route.ts', 'utf8')
     // Every claim is a value some other owner produced — never a fresh call.
-    const call = src.slice(src.indexOf('turnArbitrationHoisted = arbitrateTurn({'))
-      .slice(0, 900)
     // SUPERSEDED BY BATCH 6 (Learner-Move Interpreter design doc §8 row 6,
     // RECOVERY rung): `recoveryActive` now reads
     // `learnerMoveStageAHoisted.has('DISTRESS')` instead of the raw
@@ -310,22 +308,44 @@ describe('4. ownership is preserved — the arbiter decides WHO, never WHAT', ()
     // booleans never disagree), never a fresh detector call — so this test's
     // own invariant ("every claim is a value some other owner produced")
     // still holds, just through one more layer of composition.
-    // `learnerRequestActive` is UNCHANGED this batch (design doc's own
-    // "one rung per commit" — LEARNER_REQUEST is a compound condition with
-    // no reading-equivalent for `turnIntent.ambiguous`, deferred to its own
-    // future batch). Original assertion, preserved:
     //
+    // SUPERSEDED AGAIN BY BATCH 7 (design doc §8 row 6's second half):
+    // `learnerRequestActive` — left UNCHANGED by Batch 6 (deferred, "needs a
+    // new reading field/kind for ambiguity" — that reasoning was itself
+    // wrong, corrected in Batch 7's own commit) — now reads
+    // `learnerMoveStageAHoisted.has('HELP_REQUEST') ||
+    // learnerMoveStageAHoisted.ambiguous` instead of the raw
+    // `turnIntent.learnerRequest !== null || turnIntent.ambiguous`. Same
+    // structural-lock argument: HELP_REQUEST is sourced from
+    // `intent.learnerRequest !== null` (the identical field), `.ambiguous`
+    // is `intent.ambiguous` carried through unmodified — never a fresh
+    // detector call. learnerMoveRequestEquivalence.test.ts proves the two
+    // booleans never disagree, across `detectLearnerRequest`'s own corpus
+    // plus every real ambiguity fixture in
+    // `ambiguousTurnHold.test.ts`/`ambiguityReachesTeaching.test.ts`.
+    //
+    // The comment block Batch 6/7 each added at this call site pushed the
+    // fixed 900-char window past `closing:`/`completionReady:` — widened
+    // rather than re-anchored, since it is still the SAME call. Original
+    // assertions, preserved:
+    //
+    //   const call = src.slice(src.indexOf('turnArbitrationHoisted = arbitrateTurn({'))
+    //     .slice(0, 900)
     //   expect(call).toContain('recoveryActive: recoveryKeyHoisted !== null')
+    //   expect(call).toContain('turnIntent.learnerRequest')
+    const call = src.slice(src.indexOf('turnArbitrationHoisted = arbitrateTurn({'))
+      .slice(0, 2000)
     expect(call).toContain("recoveryActive: learnerMoveStageAHoisted.has('DISTRESS')")
-    expect(call).toContain('turnIntent.learnerRequest')
+    expect(call).toContain("learnerMoveStageAHoisted.has('HELP_REQUEST') || learnerMoveStageAHoisted.ambiguous")
     expect(call).toContain("sessionEpisodeHoisted.phase === 'CLOSING'")
     expect(call).toContain('completionReady: lessonCompletedHoisted')
     // No detector is invoked while building the claims.
     expect(call).not.toContain('detectFailureState(')
     expect(call).not.toContain('detectLearnerRequest(')
-    // And the OLD raw null-check is genuinely gone from this specific call
-    // — not merely coexisting alongside the new one.
+    // And the OLD raw conditions are genuinely gone from this specific call
+    // — not merely coexisting alongside the new ones.
     expect(call).not.toContain('recoveryActive: recoveryKeyHoisted !== null')
+    expect(call).not.toContain('turnIntent.learnerRequest !== null || turnIntent.ambiguous')
   })
 
   it('the verdict is computed exactly ONCE — a second call site would be a second authority', () => {
@@ -635,7 +655,13 @@ describe('7. LEARNER_QUESTION — a genuine question denies a NEW authored probe
     // import statement, just further back. Original assertion, preserved:
     //
     //   const near = src.slice(Math.max(0, at - 1500), at)
-    const near = src.slice(Math.max(0, at - 3200), at)
+    //
+    // SUPERSEDED AGAIN BY BATCH 7 (design doc §8 row 6's second half): the
+    // LEARNER_REQUEST rung's own explanatory comment (on `learnerRequestActive`,
+    // inside the same `arbitrateTurn({...})` call) sits between the import
+    // and `genuineQuestionActive:` too, pushing the distance to ~3900. Same
+    // import statement, further back again.
+    const near = src.slice(Math.max(0, at - 4200), at)
     expect(near).toContain("await import('@/lib/teaching/conversationState')")
     expect(near).toContain('detectLearnerQuestion')
     // No fresh regex is authored at the call site itself.

@@ -173,13 +173,23 @@ describe('the route wires Batch 6 correctly — source pins', () => {
     expect(block).not.toMatch(/recoveryActive:\s*recoveryKeyHoisted\s*!==\s*null/)
   })
 
-  it('learnerRequestActive is UNTOUCHED — still the compound turnIntent condition, not the reading', () => {
+  it('learnerRequestActive was UNTOUCHED by Batch 6 (this batch\'s own exclusion) — SUPERSEDED BY BATCH 7', () => {
+    // Batch 6 deliberately left this field as the raw compound
+    // `turnIntent.learnerRequest !== null || turnIntent.ambiguous` — the
+    // design doc's own "one rung per commit" applied to this same call
+    // site. Batch 7 (design doc §8 row 6's second half) converts it too,
+    // once `.ambiguous`'s pass-through was verified rather than assumed to
+    // need a new reading field. See
+    // learnerMoveRequestEquivalence.test.ts for that batch's own proof.
+    // Original assertion, preserved:
+    //
+    //   const block = ROUTE.slice(at, at + 600)
+    //   expect(block).toMatch(/learnerRequestActive:\s*\n\s*turnIntent\.learnerRequest !== null \|\| turnIntent\.ambiguous/)
+    //   expect(block).not.toMatch(/learnerRequestActive:\s*learnerMoveStageAHoisted/)
     const at = ROUTE.indexOf('turnArbitrationHoisted = arbitrateTurn({')
-    const block = ROUTE.slice(at, at + 600)
-    expect(block).toMatch(/learnerRequestActive:\s*\n\s*turnIntent\.learnerRequest !== null \|\| turnIntent\.ambiguous/)
-    // and it must NOT read HELP_REQUEST/the reading at all — this batch's
-    // explicit exclusion, per the design doc's own "one rung per commit"
-    expect(block).not.toMatch(/learnerRequestActive:\s*learnerMoveStageAHoisted/)
+    const block = ROUTE.slice(at, at + 2000)
+    expect(block).toMatch(/learnerRequestActive:\s*\n\s*learnerMoveStageAHoisted\.has\('HELP_REQUEST'\) \|\| learnerMoveStageAHoisted\.ambiguous/)
+    expect(block).not.toMatch(/learnerRequestActive:\s*\n\s*turnIntent\.learnerRequest !== null \|\| turnIntent\.ambiguous/)
   })
 
   it('exactly 3 readLearnerMove( call-EXPRESSIONS in the whole file — all three now fallback-shaped except the new earliest one, which is why the count grew rather than stayed flat', () => {
