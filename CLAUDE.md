@@ -1,5 +1,36 @@
 # My Tutor — Project Memory
 
+## READ THIS FIRST — current owner-adopted priority (added 2026-09-16, binding)
+- **`docs/architecture/TUTOR_REMEDIATION_PLAN.md` is the current, owner-adopted priority plan**
+  ("Status: ORDERING ADOPTED 2026-09-14 by the owner"). Read its §2.0 and §11.10 before starting
+  ANY work in this repo picked up "cold" (no explicit fresh instruction from the user this turn).
+- **The "four primitives" — Typed Turn Contract, Closed-taxonomy Learner-Move Interpreter,
+  Deterministic Physics Verifier, Durable per-concept learner state (tracked in
+  `docs/architecture/FOUR_PRIMITIVES_STATUS.md`, sourced from
+  `docs/architecture/PHYSICS_TEACHER_MIGRATION_ARCHITECTURE.md`) — are EXPLICITLY DEFERRED, NOT
+  SCHEDULED** by that plan's §2.0 table. Do NOT resume work on any of the four primitives on your
+  own initiative just because `FOUR_PRIMITIVES_STATUS.md`'s own closing line invites a cold
+  pick-up — that invitation is now superseded by this deferral. Two of the four (Turn Contract,
+  Learner-Move Interpreter) are already fully shipped and need no further work regardless; the
+  other two (Physics Verifier, Durable Learner State) are the ones this note exists to stop.
+- **Incident record, 2026-09-16**: at least two independent sessions (including one on a
+  different account) picked up `FOUR_PRIMITIVES_STATUS.md` cold after the 2026-09-14 deferral and
+  spent multiple batches on exactly the deferred work (Physics Verifier gate-widening + live
+  re-observation windows, a Durable Learner State audit addendum) — all shadow-only/docs-only, no
+  production risk, but wrong priority and wasted session budget. Root cause: this file never
+  referenced the adopted plan, so "pick it up cold" defaulted every session back into the
+  deferred track. This note is the fix. Left in place as a standing incident record — do not
+  remove it.
+- **The plan's own final, self-corrected verdict (§11.10)**, after arguing with itself across
+  §§9–11, narrows the adopted work to exactly one thing: **§10.1 — "one corpus, one writer"**
+  (fix the ~32 authored-but-unreachable content modules stranded across subjects so ONE production
+  writer can reach all of them, subject-agnostically), then **publish §10.2 as a corpus-wide
+  readiness REPORT, never an admission gate**, then **STOP** — get real learner traffic, let the
+  owner decide what comes next. Do not add a "§12" of further self-argument; do not invent new
+  scope beyond §10.1/§10.2 without the owner asking for it.
+- If genuinely unsure whether a task you're about to start is in-scope under this plan, ask before
+  proceeding rather than defaulting to "continue the last autonomous campaign."
+
 ## Reporting preference (ALWAYS follow — updated 2026-07-17)
 - After EVERY prompt/task — including non-coding tasks (audits, Q&A, memory updates) — ALWAYS
   produce a **detailed report** at the end of the turn.
