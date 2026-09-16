@@ -382,16 +382,30 @@ fixed and one reported:
    MONITORING candidate for a future re-measurement, same discipline as
    before.
 
-3. **NOTED, LIKELY THE SAME MECHANISM AS #2 — one incidental anomaly.**
-   `chem.kinet.rate-law`'s "can you explain simply" turn returned
-   grading-shaped text ("...So the correct choice is **A**.") instead of
-   a restated explanation, immediately after a turn that had attached an
-   MCQ (`mcq=yes`). Consistent with an ungraded pending probe
-   intercepting an unrelated turn — a known class of defect this
-   codebase has fixed before (`mcqReoffer.test.ts`'s own I1/I4
-   disambiguation guard) — but not independently traced to a specific
-   line this session; recorded as a single incidental observation, not
-   established as a reproducible defect.
+3. **CONFIRMED AND CLOSED, 2026-09-16 — was item #1's own mechanism,
+   already fixed by that same commit.** `chem.kinet.rate-law`'s "can you
+   explain simply" turn had returned grading-shaped text ("...So the
+   correct choice is **A**.") instead of a restated explanation,
+   immediately after a turn that had attached an MCQ (`mcq=yes`).
+   Hypothesis at the time: same mechanism as item #1 — "can you explain
+   simply" was not recognized by `detectLearnerRequest`
+   pre-fix, so it fell through the LEARNER_REQUEST arbitration
+   protection and could be intercepted while a probe was pending.
+
+   Tested directly, not assumed: replayed the exact original turn
+   sequence ("ok, go on" -> "explain it differently" -> "in other
+   words?" -> "can you explain simply") against `chem.kinet.rate-law` on
+   the now-deployed fix (`scripts/qa/mcqInterceptionReproduce.ts`), TWICE
+   in fresh sessions. Neither run reproduced the anomaly — both times
+   "can you explain simply" returned a genuine, on-topic restated
+   explanation (a traffic-jam / line-of-people analogy), including the
+   one run where an MCQ genuinely was attached alongside that same turn
+   (`mcq: {"question":"For 2NO₂ + F₂ → 2NO₂F, can you determine the rate
+   law directly..."}`, text still correctly a restatement, not a grading
+   verdict). This confirms the hypothesis rather than merely leaving it
+   plausible: fixing item #1's classification gap independently closed
+   this anomaly too, because it was the identical mechanism. No separate
+   fix needed or made.
 
 ### PCD-018 (diagram/text mismatch half)
 **Status: FIXED as a consequence of the above, not separately patched.**
