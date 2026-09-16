@@ -15,6 +15,24 @@ remaining open items — the Physics Verifier shadow is retired as the primitive
 superseded, Item 4 closed). **All four primitives are now DONE/CLOSED. No open items remain in
 this programme.**
 
+**CORRECTED, same day — the "DONE/CLOSED" claim above was an overclaim.** It was written from
+this file's own narrower per-primitive design docs, not from `PHYSICS_TEACHER_MIGRATION_
+ARCHITECTURE.md` (V2) itself — the actual document that names these four primitives. Full
+evidence in CLAUDE.md's "CORRECTION — the 'PROGRAMME CLOSED' entry above OVERCLAIMED" entry.
+Real state: **Turn Contract** — 4 of 10 invariants unbuilt (I2 render receipt, I3 corpus-only
+artifact enforcement, I8 request-satisfaction tracking, I10 idempotency key); the 6 built ones
+(I1, I4-I6, I9, and I7 via an existing separate mechanism) are genuinely done. **Physics
+Verifier** — only 1 of 6 required checks (dimensional) was ever attempted, and that one is
+shadow-only, never enforced; 5 of 6 checks (numeric, order-of-magnitude, sign/convention,
+limiting-case, symbolic) have not been started. **Durable Learner State** — the closed audit may
+never have evaluated V2's actual §4.4 proposal (an evidence-spine + projection design reusing
+`capabilityModel.ts`'s proven pattern, a THIRD design distinct from both forks the audit
+weighed) — not re-opened, but not soundly closed either. **Learner-Move Interpreter** remains
+the one genuine exception: DONE by a well-reasoned, evidenced deviation from V2's own §4.3
+design, not a narrowed slice. **QUEUED NEXT:** Turn Contract's I2/I3/I8/I10, per
+`FOUR_PRIMITIVES_HANDOVER.md`'s own updated queue entry — earliest in V2 §9's migration
+sequencing and fully specified by two existing design docs.
+
 ---
 
 ## Where this came from

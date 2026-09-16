@@ -6280,6 +6280,74 @@ ADR; everything in it that would become code stays G1/G2-gated.
     requirement for Item 4), not a continuation of the prior campaign, and should not be
     defaulted into by a future session picking this up cold.
 
+## CORRECTION — the "PROGRAMME CLOSED" entry above OVERCLAIMED, 2026-09-16, same day
+- **The entry above was wrong to say "all four are DONE."** It was written from
+  `FOUR_PRIMITIVES_STATUS.md` and two narrower sub-project design docs
+  (`DETERMINISTIC_PHYSICS_VERIFIER_DESIGN.md`, `DURABLE_LEARNER_STATE_AUDIT.md`) without going
+  back to read `PHYSICS_TEACHER_MIGRATION_ARCHITECTURE.md` (V2) — **the actual document that
+  proposed these four primitives** — in full. Every sub-project quietly narrowed V2's own scope,
+  and each says so explicitly in its own text; the status doc's "DONE" labels describe the
+  sub-project's narrower self-scoping, not V2's. Caught only because the owner pushed back
+  directly ("something is wrong... other claude account said it will take few weekly sessions").
+  That estimate was correct — it was describing V2's real scope, which this file's prior entry
+  had silently substituted a smaller one for. **Read V2 in full before trusting any "DONE" label
+  on these four items, including the ones below.**
+- **Physics Verifier (V2 §4.2) is SIX checks, not one.** Dimensional, numeric, order-of-magnitude,
+  sign/convention, limiting-case, symbolic — sequenced deliberately, dimensional first because
+  it's cheapest. Only dimensional was ever attempted (`DETERMINISTIC_PHYSICS_VERIFIER_DESIGN.md`'s
+  own header: "dimensional analysis only... all three [numeric tolerance, sign convention,
+  symbolic/CAS] explicitly deferred"), and even that one was declined for enforcement (shadow
+  only, per the "PROGRAMME CLOSED" entry above — that specific decision stands, but "Physics
+  Verifier is done" does not: 5 of 6 checks were never started at all.
+- **Turn Contract (V2 §4.1) defines 10 invariants, I1-I10.** Verified by reading
+  `TYPED_TURN_CONTRACT_DESIGN.md` directly (§11): *"§4.1's I2, I3, I7, I8 and I10 are the
+  'genuinely new' invariants; this design implements **none** of them, because each would change
+  behaviour. It implements the checkable form of I1, I4, I5, I6, I9."* I7 (a figure reference
+  must resolve to `figure.id`) is a legitimate exception — already enforced by a different,
+  existing mechanism (`figureReference.ts`), confirmed not a gap. The other four are real,
+  unbuilt capability: **I2** — a render receipt proving the learner actually saw a question
+  before a grade against it is admitted (closes "the seventh defect" — server believes a probe
+  is on screen, client renders none — a defect class this repo has hit before); **I3** — every
+  graded artifact must come from the corpus by id with a stored key, prose may never introduce an
+  option list or question (the residual generate-parse fallback `?? mcqParse.mcq` this document's
+  own §1.2/§2.1 names as still open); **I8** — an explicit learner REQUEST is satisfied or
+  explicitly declined with a stated reason, never silently ignored; **I10** — a per-turn
+  idempotency key, closing double-grading on a retry or a second tab.
+- **Durable Learner State (V2 §4.4) proposes a THIRD design**, not evaluated by the audit the
+  prior "PROGRAMME CLOSED" entry closed this item against. V2's own text: *"The proposal is not a
+  new subsystem. The pattern is already proven by the capability model: typed events → spine →
+  projection → hydrated per session. Apply the same pattern to concepts."* This is neither ADR
+  10's original direct-upsert design ("Design C" in the audit) nor `studentIntelligence.ts`'s
+  purely-derived-on-read model ("Design D") — it is a NEW writer for `ConceptMasteryRecord`/
+  `ActiveMisconception` built on the evidence spine + projection pattern that `capabilityModel.ts`
+  already proves works in this exact codebase. Whether `DURABLE_LEARNER_STATE_AUDIT.md` actually
+  considered and rejected this specific design, or simply never addressed it, is **not yet
+  established** — the decision recorded in "PROGRAMME CLOSED" above rests on an audit that may
+  not have evaluated the real proposal. Do not treat that closure as settling V2's actual §4.4.
+- **Learner-Move Interpreter is the one exception — genuinely complete, by a well-reasoned
+  deviation, not an oversight.** `LEARNER_MOVE_INTERPRETER_DESIGN.md` §0 explicitly rejects two
+  parts of V2 §4.3 on hard evidence: a second-model-call classifier violates
+  `EDUCATIONAL_BRAIN_BIBLE.md`'s Permanent Rule 9 ("any design that requires a second LLM call to
+  make a decision... is rejected on sight" — not a judgement call); and V2's single-label
+  taxonomy is measurably lossy (56% of a 62-message corpus fires more than one detector). It
+  substitutes a multi-label reconciliation layer over the *existing* detectors (zero model calls,
+  first-class `UNINTERPRETABLE` kept) — verdict: "PROCEED, with the scope inverted." This is a
+  reasoned, evidenced redesign that achieves V2's actual goal by a better mechanism, not a
+  narrowed slice — the one primitive where "DONE" was accurate.
+- **V2 §9's own migration plan (Steps 1-7, sequenced, each reversible) is the actual roadmap**,
+  not the four-line summary table. Steps 1-3 (Turn Contract, Physics Verifier dimensional,
+  Learner-Move Interpreter) are the only ones touched at all, and only Step 3 is genuinely
+  complete per V2's own bar. Steps 4-7 (durable concept/misconception writers, retention
+  scheduler, rung field + `ASCENDS` pilot, retiring the `?? mcqParse.mcq` fallback) have **never
+  been started**. This is the actual "few weekly sessions" scope the other account correctly
+  named.
+- **Corrected next-action pointer**: `FOUR_PRIMITIVES_STATUS.md` and `FOUR_PRIMITIVES_HANDOVER.md`
+  have NOT yet been rewritten to reflect this correction (this CLAUDE.md entry is the record of
+  the correction itself; those two files still read the overclaimed "all four DONE" state as of
+  this entry's own commit) — a future session should reconcile them before trusting their own
+  "DONE" labels, per this file's own standing rule that CLAUDE.md's dated entries are the raw
+  history and the dashboard files should be corrected to match.
+
 ## Run locally
 ```
 cp .env.example .env   # set DATABASE_URL, AUTH_SECRET (openssl rand -base64 32), GROQ_API_KEY
