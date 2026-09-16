@@ -2056,6 +2056,16 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     // call's view of "current lesson" is stale and must not overwrite the
     // authoritative one.
     const dispatchGeneration = progressGenerationRef.current
+    // Typed Turn Contract, I10 (idempotency key) — Batch 4, OBSERVATION ONLY.
+    // Generated ONCE per logical send and reused across every retry attempt
+    // of THIS call below, so the server can tell (once it acts on this —
+    // not yet, see route.ts's own note) that two HTTP requests are the SAME
+    // learner turn. A genuinely NEW call to sendMessage always gets its own
+    // key. Guarded the same way tabIdentity.ts is, since this runs in every
+    // browser this app supports without exception being the concern.
+    const idempotencyKey = typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function'
+      ? crypto.randomUUID()
+      : undefined
     if (showInUI) setMessages((p) => [...p, { id: `u-${Date.now()}`, role: 'user', content: text, ts: Date.now() }])
     const aid = `a-${Date.now()}`
     setMessages((p) => [...p, { id: aid, role: 'assistant', content: '', ts: Date.now(), streaming: true }])
@@ -2101,6 +2111,9 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
               // this agrees with what it believes is pending; nothing here
               // affects grading yet. See renderReceipt.ts's own header.
               renderedMcqId: activeMcq?.renderId ?? null,
+              // Typed Turn Contract, I10 — Batch 4, OBSERVATION ONLY. The
+              // SAME key on every retry attempt of this one logical send.
+              idempotencyKey,
             }),
             // SEV-1 (2026-08-02). This was 30_000, BELOW the server's own
             // worst-case turn. When Gemini timed out, the server was still

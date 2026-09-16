@@ -121,6 +121,14 @@ const schema = z.object({
   // caller. Read ONLY by `checkRenderReceipt` for a log line; nothing here
   // affects grading yet. See `src/lib/teaching/renderReceipt.ts`.
   renderedMcqId: z.string().max(200).nullable().optional(),
+  // Typed Turn Contract, I10 (idempotency key) — Batch 4, OBSERVATION ONLY.
+  // A stable id the client generates once per logical send and reuses across
+  // its own internal retries of a dropped/aborted request — so the SAME
+  // idempotencyKey means "the same learner turn," even across separate HTTP
+  // requests. Not yet used to prevent anything; see the ingress check below
+  // for why (no schema change yet, heuristic content-match observation
+  // only). Optional and additive — older clients simply never send it.
+  idempotencyKey: z.string().max(100).optional(),
 })
 
 /**
@@ -214,7 +222,7 @@ async function handleChatTurn(req: Request, deadline: RouteDeadline): Promise<Re
 
   try {
     const body = await req.json()
-    const { sessionId, message, lastExplanationRead, voiceSignal, ephemeral, tabId, renderedMcqId } = schema.parse(body)
+    const { sessionId, message, lastExplanationRead, voiceSignal, ephemeral, tabId, renderedMcqId, idempotencyKey } = schema.parse(body)
 
     // Wave 0 Step 2 (Evidence Architecture §2, ASSESSMENT contract):
     // learner response latency is measured server-side from message
@@ -242,6 +250,45 @@ async function handleChatTurn(req: Request, deadline: RouteDeadline): Promise<Re
 
     const profile = await boundedDbCall(deadline, 'chat-profile-load',
       () => prisma.profile.findUnique({ where: { userId } }), { retries: 1 })
+
+    // Typed Turn Contract, I10 (idempotency key) — Batch 4, OBSERVATION ONLY.
+    //
+    // V2's own text: "idempotent on `idempotency_key`... closes double-
+    // grading on retry or second tab." The genuine gap this closes: the
+    // user-message write above (and this whole handler) has NO idempotency
+    // key — its own comment already says so ("a timeout that actually
+    // committed would produce the learner's message twice"). A client retry
+    // of a request whose SERVER SIDE actually completed (dropped response,
+    // not a dropped connection) currently produces a second, independent
+    // full turn — a second Message row, and if a probe was pending, a
+    // second grade. This is the "proven cause of the observed duplicate-
+    // explanation bug" LessonScreen.tsx's own retry-loop comment names.
+    //
+    // A REAL fix needs the key PERSISTED (a schema column with a unique
+    // constraint) so it survives across the separate HTTP requests a retry
+    // produces — that is a schema migration, not a safe shadow-batch
+    // change, and is NOT attempted here. This is a HEURISTIC observation
+    // using data already loaded (`learnSession.messages`, no new query):
+    // does the RECENT history already contain the identical content from
+    // this same learner within a window a genuine retry would fall inside?
+    // Content-match is imperfect (a learner genuinely re-typing the same
+    // short reply, e.g. "yes", twice would false-positive) — that is
+    // exactly why the real fix needs a KEY, not content matching. Logged
+    // only; nothing here blocks the write or changes any behaviour.
+    if (!ephemeral) {
+      const DUPLICATE_OBSERVATION_WINDOW_MS = 30_000
+      const possibleDuplicate = learnSession.messages.find((m) =>
+        m.role === MessageRole.USER
+        && m.content === message
+        && turnReceivedAt - new Date(m.createdAt).getTime() < DUPLICATE_OBSERVATION_WINDOW_MS,
+      )
+      if (possibleDuplicate) {
+        console.log('[learn/chat] POSSIBLE_DUPLICATE_TURN_EVENT=' + JSON.stringify({
+          idempotencyKey: idempotencyKey ?? null,
+          deltaMs: turnReceivedAt - new Date(possibleDuplicate.createdAt).getTime(),
+        }))
+      }
+    }
 
     // Only a real learner utterance is persisted. An ephemeral instruction is
     // still sent to the model (it is what triggers the opening) but is never

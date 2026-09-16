@@ -114,9 +114,8 @@ no equivalent without content analysis. **Shipped**: `[learn/chat] LEARNER_REQUE
 `figureDelivered: visualFired`. Denominator-only for the other two kinds — never claims
 verification it doesn't have.
 
-IN PROGRESS at time of writing this entry — check `git log` for a commit referencing I8/
-LEARNER_REQUEST_EVENT; if none exists, finish verifying (full suite + build) and commit before
-starting anything else. Do not redo this investigation.
+**Batch 3 is COMMITTED AND PUSHED — commit `20b0578a` on `main`.** Full suite 697/14,439/9 skipped;
+tsc clean; build clean. Do not redo this investigation.
 
 **Possible future direction, not attempted**: if production logs show `diagram` requests are
 reliably satisfied but `explain_differently`/`real_life_example` are not measurable at all, the
@@ -127,14 +126,39 @@ plausibly has (`explain_differently`: the reply must not repeat the previous tur
 real enforcement change, not shadow-only, and needs the same reproduce-first discipline the
 `vChallenge` work used — do not guess a regex, measure a real miss first.
 
+### Batch 4 (Turn Contract, I10) — observation-only; the real fix needs a schema migration
+
+`Message.create` for the learner's turn has NO idempotency key at all (route.ts's own
+pre-existing comment already says so — "a timeout that actually committed would produce the
+learner's message twice"). This is the confirmed mechanism behind LessonScreen.tsx's own
+documented "duplicate-explanation bug": a client retry of a request whose SERVER side actually
+completed (response dropped, not the connection) currently produces a second, independent full
+turn — a second Message row and, if a probe was pending, a second grade.
+
+**A real fix needs the key PERSISTED with a unique constraint — a schema migration, genuinely
+out of scope for a shadow batch.** Shipped instead: the CLIENT now generates a stable
+`crypto.randomUUID()` once per logical send (`LessonScreen.tsx`, reused across all retry attempts
+of the SAME call) and sends it as `idempotencyKey`; the SERVER logs
+`[learn/chat] POSSIBLE_DUPLICATE_TURN_EVENT` using a HEURISTIC — does `learnSession.messages`
+(data already loaded, no new query) already contain the identical content from this learner
+within the last 30s. Content-match is imperfect (a learner genuinely re-typing "yes" twice would
+false-positive) — that imprecision is exactly why the real fix needs a key, not content matching.
+Nothing here blocks a write or changes any behaviour; the key is not yet used for anything but
+appearing in the log line.
+
+**Next step for I10 specifically**: read production `POSSIBLE_DUPLICATE_TURN_EVENT` prevalence,
+then decide whether a `Message.idempotencyKey` column (unique per session) is worth a migration —
+this is the one item of the four where the "next step" genuinely is a schema change, gated on
+real evidence it's worth the migration cost, not on more shadow batches.
+
 ### Next steps, in order
 1. ~~Turn Contract I3~~ — see above; blocked on an owner decision + production prevalence data,
    not on more engineering. Do not attempt to "fix" this by restricting the model MCQ fallback
    without that decision.
 2. ~~Turn Contract I8~~ — see below; observation shipped, enforcement (if any) needs production
    data + a reproduced miss first, same posture as I3.
-3. **Turn Contract I10** (idempotency key, closes double-grading on retry/second tab). Smallest
-   of the four — likely a request-scoped key plus a dedup check before grading commits.
+3. ~~Turn Contract I10~~ — see below; observation shipped (client key + heuristic server log), a
+   REAL fix needs a schema migration and is deliberately not attempted here.
 4. **Physics Verifier, numeric check** (§4.2's second-cheapest: "values recomputed independently;
    tolerance and significant figures... free"). `mathjs` is already a dependency, currently
    unused (per V2's own audit) — this is the natural next check after dimensional.
