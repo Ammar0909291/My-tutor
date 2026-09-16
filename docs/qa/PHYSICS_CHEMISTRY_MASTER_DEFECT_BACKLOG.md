@@ -111,19 +111,29 @@ Nothing to fix without a reproducible trigger.
 ## B. Session, Progress & Concurrency Integrity
 
 ### PCD-004 — Concurrent same-account sessions cross-contaminate `activeLessonSlug`/`currentLesson`
-**Status: ARCHITECTURAL ESCALATION — owner decided the direction
-(2026-09-16, option 1: version-column guard), NOT YET IMPLEMENTED.** A
-ready-to-execute prompt for the next session is queued in the escalation
-section at the end of this document. Confirmed current schema
-(`prisma/schema.prisma` `StudentProgress`): `currentLesson` is written via
-`Math.max` (monotonic, so it cannot regress under a race, though it can
-still race to the WRONG higher value if two different lessons are opened
-concurrently), and `activeLessonSlug` has **no** such protection — it is a
-last-write-wins per-user field with no version/timestamp check, exactly as
-the source doc describes. A correct fix is either (a) a new
-optimistic-concurrency column, or (b) moving the pointer to session-scoped
-storage — both are schema/data-flow decisions this task's guardrails
-correctly gate on escalation, not an ad-hoc patch.
+**Status: FIXED — the owner decision + queued implementation prompt below
+were both moot, corrected 2026-09-16.** Two independent things happened on
+this exact defect on the same day, minutes apart, before either checked the
+actual code: this doc's "Recommended option: (1)" line was used to ask the
+owner to pick a direction, the owner confirmed option (1), and a full
+version-column implementation prompt was queued — all while
+`src/lib/teaching/sessionLessonPointer.ts` had *already implemented option
+(2)* (session-scoped storage) days earlier, in commit `9d8f2f5`, the same
+commit that produced this doc's own 2026-09-11 compile. That module's own
+header explicitly considers and rejects option (1): "there is no lost
+update to detect... the grain is wrong, not the write protocol" — `currentLesson`
+stays per-user (correct, monotonic via `Math.max`); `activeLessonSlug`'s
+fix moves the pointer into `LearnSession.contextSnapshot` (key
+`lessonPointer`) via the existing versioned `writeSnapshotDelta` protocol,
+so two concurrent sessions each carry their own pointer instead of racing
+on one shared field. Verified wired (not dead code) into all 5 affected
+routes (`/api/curriculum/progress`, `/api/learn/chat`,
+`/api/learn/lesson-init`, `/api/sessions`, `/api/sessions/history`); the
+three covering test files (`sessionLessonPointer.test.ts`,
+`sessionTabIdentity.test.ts`, `completedLessonIsReEnterable.test.ts`) pass
+53/53. **The queued version-column prompt below must NOT be run** — see the
+escalation section for the full correction and why the owner's real
+decision here is moot rather than overridden.
 
 ### PCD-005 — Chemistry Defect-1 pattern (stale/duplicate `lessonComplete`)
 **Status: unchanged — NOT REPRODUCED**, per the source doc's own record
@@ -641,10 +651,34 @@ correctly NOT revived.
 
 ## Architectural Escalation — PCD-004
 
-**Exact ambiguity:** `StudentProgress.activeLessonSlug` (and, to a lesser
-extent, `currentLesson`) is a per-USER field written last-write-wins by
-whichever concurrent request's DB write commits last, with no
-optimistic-concurrency guard. Two options exist to fix it correctly:
+**RESOLVED, 2026-09-16 — DO NOT RUN THE QUEUED PROMPT BELOW.** This entire
+section, including the owner decision and implementation prompt that follow,
+was written and queued without checking whether the code already existed.
+It did: `src/lib/teaching/sessionLessonPointer.ts` implements option (2)
+below (session-scoped storage), shipped in commit `9d8f2f5`, the same commit
+that produced this doc's own 2026-09-11 compile — days before this section's
+"Recommended option: (1)" line was used to ask the owner to choose, and
+before the owner's real answer (option 1) was recorded as if actionable.
+
+The owner's decision is preserved below for an honest record, but it is
+**moot, not overridden** — it was made on stale information (this doc's own
+"Recommended option: (1)" framing, itself never checked against the actual
+module), not on a live choice between two real, currently-uninmplemented
+options. Building the queued version-column prompt now would add a second,
+redundant concurrency mechanism protecting a field
+(`StudentProgress.activeLessonSlug`) that `resolveSessionLessonSlug`'s own
+precedence already treats as a secondary fallback behind the session
+pointer — wasted schema migration against a live production database, for
+a race that's already closed. If the owner wants to revisit *why* — e.g. an
+explicit preference for the version-column shape over the shipped one for
+reasons beyond fixing this specific race — that's a fresh, informed
+decision to make now, not a queue item to execute blind.
+
+**Exact ambiguity (original framing, now historical):**
+`StudentProgress.activeLessonSlug` (and, to a lesser extent, `currentLesson`)
+was a per-USER field written last-write-wins by whichever concurrent
+request's DB write commits last, with no optimistic-concurrency guard. Two
+options were identified:
 
 1. **Add a version/timestamp column** to `StudentProgress` and reject a
    write that would overwrite a newer value (mirrors the existing
@@ -656,80 +690,20 @@ optimistic-concurrency guard. Two options exist to fix it correctly:
    `/api/curriculum`, `/api/learn/lesson-init`, `getDashboardV2Data.ts`,
    and every reader of `activeLessonSlug`.
 
-**Affected files/components:** `prisma/schema.prisma` (`StudentProgress`),
-`src/app/api/learn/lesson-init/route.ts`, `src/app/api/curriculum/
-progress/route.ts`, `src/lib/curriculum/*` readers of `activeLessonSlug`,
-`getDashboardV2Data.ts`.
+**What actually shipped:** option (2), `sessionLessonPointer.ts`. Its own
+header directly rejects option (1) with a reason this section's own
+"Recommended option: (1)" line never engaged with: "there is no lost update
+to detect... the grain is wrong, not the write protocol" — `activeLessonSlug`'s
+failure mode isn't two writes racing on one true value, it's one row being
+asked to hold two simultaneously-true, mutually exclusive answers. A version
+check would pass cleanly on both concurrent writes and fix nothing.
 
-**Recommended option:** (1), the version-column approach — smaller blast
-radius, reuses an already-proven pattern in this codebase, and does not
-change what `activeLessonSlug` means or who reads it, only how a
-conflicting write is resolved.
-
-**Why this is architectural, not an ordinary implementation choice:** it
-is a schema change (guardrail: "No ad-hoc DB edits, migrations..."), and
-it decides shared-runtime-state ownership/precedence between concurrent
-sessions on the same account — two of the explicit escalation triggers in
-this task's own instructions. A quick mitigation (e.g. silently favoring
-whichever write has the larger `currentLesson`) was considered and
-rejected: it would not actually fix `activeLessonSlug`'s race (a slug has
-no natural ordering to compare), and a partial, undocumented mitigation
-that looks like a fix but isn't is worse than reporting the gap plainly.
-
-**OWNER DECISION, 2026-09-16: option (1), the version-column guard.**
-Confirmed directly by the owner (not inferred, not defaulted to the
-"recommended" label above without asking) — decision-only turn, nothing
-implemented yet. The next session should build EXACTLY this:
-
-```
-PCD-004 — add an optimistic-concurrency guard to StudentProgress.activeLessonSlug
-
-Read docs/qa/PHYSICS_CHEMISTRY_MASTER_DEFECT_BACKLOG.md's PCD-004 entry
-and its "Architectural Escalation — PCD-004" section in full first —
-the owner has already decided the direction (option 1, version-column),
-this is now an ordinary implementation task, not a decision task.
-
-Root cause (already confirmed): StudentProgress.activeLessonSlug is a
-per-user, last-write-wins field with no concurrency guard, so two
-lessons opened concurrently on one account can silently overwrite each
-other's lesson pointer. currentLesson is already protected via Math.max
-(monotonic) and needs no change.
-
-TASK:
-1. Add a version/timestamp column to StudentProgress (a Prisma
-   migration), mirroring the existing optimistic-concurrency pattern
-   already used for contextSnapshot (see writeSnapshotDelta and its own
-   version-check write, per CLAUDE.md's ADR 10) — reuse that pattern's
-   shape, don't invent a new one.
-2. Every write site that sets activeLessonSlug (src/app/api/learn/
-   lesson-init/route.ts and any other writer — grep for
-   `activeLessonSlug:` assignments, don't assume the file list above is
-   complete) must read-check-write against the version column and
-   reject/retry a write that would overwrite a newer value, exactly like
-   writeSnapshotDelta's own conflict handling.
-3. Readers of activeLessonSlug (src/lib/curriculum/*, getDashboardV2Data.ts,
-   and any other reader — grep, don't assume) do NOT need to change; this
-   is a write-path guard only, the field's meaning and read contract are
-   unchanged.
-4. Add regression tests proving: (a) a genuine race (two concurrent
-   writes, one with a stale version) resolves to the newer write
-   surviving, never silently to whichever commits last; (b) the ordinary
-   single-writer case is completely unaffected (same behavior as today).
-5. Live-verify if possible (disposable QA account, two concurrent
-   lesson-init/chat calls against the SAME account) — if live
-   verification isn't reachable in your environment, say so plainly
-   rather than claiming it.
-
-Work only on main. Full suite + tsc clean before any commit. This is a
-real schema migration to a live production database (StudentProgress is
-not empty) — follow this repo's standing migration discipline (no ad-hoc
-`db push` against production, use a real Prisma migration file, verify
-it applies cleanly). Report using CLAUDE.md's standing single-fenced-block
-format with git info, including explicit migration-application status
-(applied to production / not yet applied and why).
-
-Model: Sonnet 5.
-```
+**OWNER DECISION, 2026-09-16 (historical record, moot — see above):** the
+owner confirmed option (1), the version-column guard, when asked. A full
+implementation prompt for it was queued at this point in the document and
+has been removed from here — it must not be executed. If a future session
+needs the original wording for any reason, it is preserved in this file's
+git history (commit `5dcec15`).
 
 ---
 
