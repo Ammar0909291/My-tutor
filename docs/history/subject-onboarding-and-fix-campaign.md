@@ -232,3 +232,32 @@ at invocation time. **Re-verify `topic_progress` completion state on whichever a
 before any fresh-teach QA run** — this file's own account-saturation finding above is the reason
 why.
 
+### Batch — English `eng.composition.*` ADULT-band gap, remaining 8 of 16, closes the subdomain (2026-09-17)
+
+Closed the 8 `eng.composition.*` concepts Batch 13 deliberately deferred (logical-fallacies,
+persuasive-techniques, plagiarism-and-citation-ethics, research-paper-writing, rhetorical-analysis,
+rhetorical-appeals, rhetorical-devices, style-voice-and-tone), using the identical established
+technique (`englishAdultBandBatch13.ts`'s `adultLadder` helper: `mcq`(FOUNDATIONAL) +
+`misconception_probe`(DEVELOPING) + `mcq`(PROFICIENT), each distractor's `misconceptionId` reusing
+one of the concept's own two already-registered Blueprint misconceptions — verified against each
+concept's own Component 1 Misconception Register before writing, every one of the 8 holds exactly
+MC-A/MC-B, no more, no fewer). New file: `englishAdultBandBatch14.ts` (24 new probes). Wired into
+both writers (`src/instrumentation.ts`'s bootstrap `ALL_PROBES` and
+`scripts/brain/seed-knowledge-assets.ts`'s `ALL_PROBES`) — `seedCorpusCoverageRatchet.test.ts`
+passes. All 8 concepts held zero prior ADULT probes, so this is a fresh singleton-to-ladder
+promotion with zero P-10 collision risk (`--dry-run`: created=7649, skipped=0, revived=0).
+
+`eng.composition.*` (16 concepts) is now fully closed at asset-contract. English:
+**321/412 → 329/412 at contract, 91 → 83 short.** Remaining 83: `eng.communication.*` (11),
+`eng.linguistics.*` (16), `eng.literature.*` (16 advanced), `eng.phonetics.*` (12 advanced),
+`eng.vocab.*` (9 advanced), `eng.writing.*` (9 advanced), `eng.reading.reading-across-genres`,
+`eng.speaking.debate-skills`/`presentation-skills`, and the 2 EARLY-band phonics pairs flagged in
+the Batch 13 entry above (deliberately excluded — voice-required, not closable the same way).
+
+Validated: `npx tsc --noEmit` clean; targeted tests (`englishAssetContractP1`,
+`contractAuditShapeDetection`, `contractAuditSubjectCoverage`, `seedCorpusCoverageRatchet`,
+`curriculumKgRegistration`, 41 tests) green; `contract-audit.ts --subject english` confirms
+329/412; `validate-knowledge-graph.ts docs/english/kg/graph.json` PASS (KG file untouched); full
+suite 700/700 test files, 14,461 passed / 9 skipped (no regression vs. pre-batch baseline);
+`npm run build` clean (middleware 79.7 kB, no regression).
+
