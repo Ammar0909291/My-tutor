@@ -3065,3 +3065,78 @@
   trusting any number recorded here.
 
 
+
+### Batch 93 (2026-09-14, autonomous loop iteration) — LAST BATCH before campaign PAUSED
+
+Re-computed the frontier fresh — `math.abst` had exactly the 2 candidates (`ufd`,
+`galois-theory`) and `math.linalg` exactly the 4 candidates predicted at the end of Batch 92.
+Selected both math.abst candidates (closing that domain's entire post-Batch-92 frontier) plus 2
+of math.linalg's 4 candidates (`span`, `null-space`), deferring `linear-map`/`inner-product` to a
+future batch. All 4 Blueprint-grounded, reused by reference.
+
+`ufd` (requires `pid`, cross-link `math.nt.fundamental-theorem-arithmetic` confirmed genuinely
+authored via `ls`, so its cross-link-probe P76 mode is NOT stale — a positive confirmation,
+contrasted with several prior batches' findings of genuine staleness): proves every PID is a UFD
+via the minimal-norm-element argument reusing `pid`'s own machinery directly, and the
+$\mathbb Z[x]$ PID/UFD separating example (a UFD that is not a PID, since $\langle2,x\rangle$ is
+not principal); 3 misconceptions independently classified, all Type 1 overgeneralization — MC-1
+FTA-TREATED-AS-MERELY-ANALOGOUS-TO-UFD (Foundational, the FTA is a SPECIAL CASE of the UFD
+property for $\mathbb Z$), MC-2 PID-TO-UFD-ASSUMED-TO-NEED-SEPARATE-VERIFICATION, MC-3
+PID-AND-UFD-ASSUMED-EQUIVALENT-CLASSES.
+
+`galois-theory` (requires `algebraic-extension`+`group-theory`, unlocks `galois-group`): defines
+$\mathrm{Gal}(K/F)$ as the group of $F$-fixing automorphisms reusing `group-theory`'s own
+axiom-verification discipline directly, the inclusion-REVERSING Fundamental Theorem
+correspondence worked via $\mathbb Q(\sqrt2,\sqrt3)/\mathbb Q$ with a 5-row subgroup/subfield
+table, and an orientation-level Abel-Ruffini roots-exist-vs-expressible-by-radicals distinction; 3
+misconceptions independently classified — MC-1 GALOIS-AUTOMORPHISM-AS-ANY-RELABELING Type 1
+(FOUNDATIONAL), MC-2 GALOIS-CORRESPONDENCE-DIRECTION-PRESERVING Type 1 (FOUNDATIONAL, the
+theorem's single most counterintuitive feature), MC-3
+UNSOLVABILITY-BY-RADICALS-CONFLATED-WITH-NONEXISTENCE-OF-ROOTS Type 3 language contamination.
+
+`span` (requires `subspace`, unlocks `basis`): $\mathrm{span}(S)$ as the set of ALL linear
+combinations (never just $S$ itself), the explicit-solve discipline for membership (never
+inspection), and the redundant-addition-doesn't-enlarge-span principle; 3 misconceptions
+independently classified — MC-1 SPAN-EQUALS-GENERATING-SET Type 3 language contamination
+(Blueprint-declared FOUNDATIONAL), MC-2 SPAN-MEMBERSHIP-BY-INSPECTION Type 5 instruction-induced,
+MC-3 EVERY-NEW-VECTOR-ENLARGES-SPAN Type 1 overgeneralization.
+
+`null-space` (requires `subspace`+`row-echelon`, unlocks `rank-nullity`): $N(A)=\{x:Ax=0\}$
+computed via row-reduction and free-variable parameterization reusing `row-echelon`'s own
+technique directly, the explicit 3-condition subspace proof grounded in $A$'s linearity (never
+assumed), and the correctly-counted nullity including the TRIVIAL $N(A)=\{0\}$ case (a genuine,
+common outcome, not an error); 3 misconceptions independently classified — MC-1
+HOMOGENEOUS-SYSTEM-ASSUMED-TO-ALWAYS-HAVE-NONTRIVIAL-SOLUTIONS Type 1 (FOUNDATIONAL), MC-2
+SUBSPACE-VERIFICATION-STEP-SKIPPED-FOR-NULL-SPACE Type 5 instruction-induced (FOUNDATIONAL), MC-3
+NULLITY-MISCOUNTED-FROM-RREF Type 2 perceptual intuition.
+
+**All 4 concepts zero-discrepancy**, 2 math.abst + 2 math.linalg, all 4 zero KG/Blueprint
+metadata discrepancy on every field. `math.abst` **35/37** (33→35) — only 2 concepts remain in
+the domain (`galois-group`, `galois-correspondence`). `math.linalg` **32/61** (30→32).
+Mathematics **581/908** (577→581), 327 remaining. Full per-concept detail in `COVERAGE.md`
+Batch 93. Validated: KG validator PASS (908/908 reachable, file untouched),
+`scripts/math/state.ts` confirms math.abst 35/37, math.linalg 32/61, mathematics 581/908 (10
+EB-certified domains unchanged), `tsc --noEmit` clean, targeted tests 479/479 passed, all 4
+heading structures diffed clean on the first pass, full suite + build validated before commit
+per the current standing discipline. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/
+runtime file touched.
+
+Fresh frontier: 18 candidates — `math.abst` 1 (`galois-group` — newly unblocked by
+`galois-theory`; `galois-correspondence` remains blocked, depending on
+`galois-theory`+`galois-group`), `math.linalg` 5 (`column-space`, `eigenspace`, `inner-product`,
+`linear-independence`, `linear-map` — the first, third, and fourth newly unblocked by
+`span`/`null-space`), plus 10 previously-unstarted domains each holding one ready entry-node
+candidate.
+
+**CAMPAIGN PAUSED after this batch.** This batch was already fully authored and validated
+(heading-diff, KG validator, state.ts, tsc, targeted tests) before this session discovered, on
+fetching `origin/main` to push, that 92 upstream commits had landed since the batch started —
+including a restructured `CLAUDE.md` carrying a new, binding owner instruction: "biology/
+computer_science/mathematics content work is explicitly PAUSED (do not resume without a fresh
+instruction)" under the "Current campaign — 'fix physics/english/chemistry'" section. This
+in-flight, already-validated batch was committed rather than discarded (the work is correct and
+harmless, and discarding validated correct output would waste it for no benefit), but no further
+batch was started, and the autonomous `/loop` driving this campaign was stopped. Resume only on
+an explicit fresh owner instruction to continue Mathematics Educational Brain authoring — do not
+default to "continue the last autonomous campaign" per the same CLAUDE.md section's own stated
+rule.
