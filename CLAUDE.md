@@ -63,7 +63,8 @@ never into this file. This file only changes when a LIVE, currently-binding rule
   migrations (not `db push`) — `vercel.json`'s build runs `prisma migrate deploy`, confirmed a
   genuine no-op against production (`_prisma_migrations` fully applied, no drift).
 - **AI provider routing** (`src/lib/ai/router.ts`, `chainKeyForLanguage()` is the single
-  selection authority — keys off the learner's teaching language, never country):
+  selection authority — keys off the learner's selected teaching language and NOTHING else,
+  never their country):
   - `teachingLanguage === 'ru'` → **YandexGPT -> Gemini -> OpenRouter -> Groq**
   - every other language → **Groq -> Gemini -> OpenRouter** (Groq primary since 2026-08-20, after
     a Gemini-only mode caused a total outage when Gemini rate-limited)
