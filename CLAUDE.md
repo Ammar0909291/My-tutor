@@ -7380,6 +7380,9 @@ curriculum/KG/Educational Brain content touched by this entry's own change — o
 
 ## HANDOVER — "fix physics/english/chemistry" campaign (2026-09-17, session in progress)
 
+**Full suite confirmed green after the `ebf88245` contract-audit fix**: 700 files / 14,461 passed
+/ 9 skipped, no regressions.
+
 **Read this section FIRST if picking this campaign up cold.** Owner-scoped, live in-chat
 instruction: "fix physics, english and chemistry, rest work will see later" — biology,
 computer_science, and mathematics content work (the asset-contract probe campaign a few sections
