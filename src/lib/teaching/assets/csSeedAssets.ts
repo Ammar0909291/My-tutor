@@ -1574,6 +1574,19 @@ const PYBASIC_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${PYBASIC}:M1`],
     source: PYBASIC_SRC,
   },
+  {
+    conceptId: PYBASIC, subjectSlug: 'computer_science', probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A beginner switching from a language where `if (x = 5)` is legal wonders why Python\'s `if x = 5:` immediately throws a SyntaxError before the program even runs, rather than silently assigning 5 to x and continuing. Does Python allow = and == interchangeably inside a condition?',
+    choices: [
+      { text: 'No — Python deliberately disallows assignment (=) inside a condition, forcing == for comparison; this was a specific design choice to catch the common =-for-== typo immediately as a syntax error rather than letting it run silently', isCorrect: true },
+      { text: 'Yes — Python allows both = and == interchangeably inside an if-condition, and either one performs a comparison without changing the variable', isCorrect: false, misconceptionId: `${PYBASIC}:M1` },
+    ],
+    correctValue: 'No — Python bans = inside conditions specifically to prevent the assignment/comparison typo',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PYBASIC}:M1`],
+    source: PYBASIC_SRC,
+  },
 ]
 
 // ─── cs.prog.data-types-variables ─────────────────────────────────────────────
@@ -1632,6 +1645,19 @@ const DTYPES_PROBES: SeedProbe[] = [
     ],
     correctValue: 'input() returns str; must use int() to convert before arithmetic',
     difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${DTYPES}:M1`],
+    source: DTYPES_SRC,
+  },
+  {
+    conceptId: DTYPES, subjectSlug: 'computer_science', probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A shopping-cart program computes a receipt line with `total = "Total: " + 49.99`, expecting it to print "Total: 49.99". Running it raises a TypeError instead. Should combining a string and a number with + just work automatically in Python?',
+    choices: [
+      { text: 'No — the + operator cannot combine a string and a float directly; Python does not automatically convert 49.99 to a string, so the fix is `"Total: " + str(49.99)`', isCorrect: true },
+      { text: 'Yes — it shouldn\'t raise an error, since Python automatically converts numbers to strings whenever they are combined with + and a string, the same way string+string concatenation works', isCorrect: false, misconceptionId: `${DTYPES}:M1` },
+    ],
+    correctValue: 'No — mixing str and float with + is a TypeError; convert the number with str() first',
+    difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${DTYPES}:M1`],
     source: DTYPES_SRC,
   },
@@ -1698,6 +1724,19 @@ const OPEXPR_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${OPEXPR}:M2`],
     source: OPEXPR_SRC,
   },
+  {
+    conceptId: OPEXPR, subjectSlug: 'computer_science', probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student evaluates `10 - 4 / 2` by hand as `(10 - 4) / 2 = 3.0`, subtracting first because it appears first when reading left to right. Is this the value Python would actually compute?',
+    choices: [
+      { text: 'No — Python evaluates / before - due to operator precedence (division binds tighter than subtraction), regardless of left-to-right reading order, so the real result is 10 - (4/2) = 8.0', isCorrect: true },
+      { text: 'Yes — Python evaluates expressions strictly left to right in the order they are written, so subtracting first before dividing gives the correct result of 3.0', isCorrect: false, misconceptionId: `${OPEXPR}:M1` },
+    ],
+    correctValue: 'No — division has higher precedence than subtraction; the answer is 8.0, not 3.0',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${OPEXPR}:M1`],
+    source: OPEXPR_SRC,
+  },
 ]
 
 // ─── cs.prog.type-conversion ──────────────────────────────────────────────────
@@ -1756,6 +1795,19 @@ const TYPECONV_PROBES: SeedProbe[] = [
     correctValue: '3.7 — conversion returns a new value; x is unchanged without reassignment',
     difficulty: ProbeDifficulty.DEVELOPING,
     targetedMisconceptions: [`${TYPECONV}:M2`],
+    source: TYPECONV_SRC,
+  },
+  {
+    conceptId: TYPECONV, subjectSlug: 'computer_science', probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A temperature-rounding function computes `int(98.6)`, and a student expects it to return 99, reasoning that 98.6 is "closer to 99 than to 98." What does `int(98.6)` actually return?',
+    choices: [
+      { text: '98 — int() truncates toward zero, simply discarding the decimal part, regardless of whether the fractional part is closer to the next whole number; rounding to the nearest integer requires round(), not int()', isCorrect: true },
+      { text: '99 — int() rounds to the nearest whole number, the same way round() does, so it correctly rounds 98.6 up to 99', isCorrect: false, misconceptionId: `${TYPECONV}:M1` },
+    ],
+    correctValue: '98 — int() truncates, it does not round',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${TYPECONV}:M1`],
     source: TYPECONV_SRC,
   },
 ]
@@ -1820,6 +1872,19 @@ const CSIO_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${CSIO}:M2`],
     source: CSIO_SRC,
   },
+  {
+    conceptId: CSIO, subjectSlug: 'computer_science', probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A program asks the user to type two test scores with `score1 = input("Score 1: ")` and `score2 = input("Score 2: ")`, then computes `average = (score1 + score2) / 2`. Running this on inputs "80" and "90" raises a TypeError instead of returning 85.0. Should this arithmetic just work automatically?',
+    choices: [
+      { text: 'No — input() always returns a string no matter what is typed, so score1 + score2 concatenates the strings ("8090"), and dividing a string by 2 is a type error; both need int(input(...)) before they can be added and divided as numbers', isCorrect: true },
+      { text: 'Yes — it shouldn\'t raise an error, since input() automatically detects that "80" and "90" look like numbers and returns them as int', isCorrect: false, misconceptionId: `${CSIO}:M1` },
+    ],
+    correctValue: 'No — both inputs are strings and must be converted with int() before adding/dividing',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CSIO}:M1`],
+    source: CSIO_SRC,
+  },
 ]
 
 // ─── cs.prog.exception-handling ───────────────────────────────────────────────
@@ -1878,6 +1943,19 @@ const EXCHAND_PROBES: SeedProbe[] = [
     ],
     correctValue: 'Bare except silences bugs — catch only specific, anticipated exceptions',
     difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${EXCHAND}:M1`],
+    source: EXCHAND_SRC,
+  },
+  {
+    conceptId: EXCHAND, subjectSlug: 'computer_science', probeKind: 'true_false',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'A developer, worried about their program crashing in front of users, wraps the ENTIRE main function in a single `try: ... except: pass`, catching every possible exception with no logging. Weeks later, a genuine bug (a typo causing a NameError) goes completely unnoticed because the program "just keeps running." Did the broad exception handling make the program more reliable?',
+    choices: [
+      { text: 'No — it made the program less reliable in a hidden way: it silenced a real bug that should have surfaced immediately during development, letting incorrect behaviour run undetected instead of failing loudly and getting fixed', isCorrect: true },
+      { text: 'Yes — catching every possible exception is the safest approach for production code, since it guarantees the program will never crash regardless of what errors occur inside it', isCorrect: false, misconceptionId: `${EXCHAND}:M1` },
+    ],
+    correctValue: 'No — a bare except that silences everything hides real bugs instead of preventing them',
+    difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [`${EXCHAND}:M1`],
     source: EXCHAND_SRC,
   },
@@ -1943,6 +2021,19 @@ const COND_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${COND}:M1`],
     source: COND_SRC,
   },
+  {
+    conceptId: COND, subjectSlug: 'computer_science', probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A grading script has `if score >= 90: grade = "A"` followed by a SEPARATE `if score >= 60: grade = "D"` (not elif) as two independent if-statements. For a score of 95, does the script correctly assign grade = "A"?',
+    choices: [
+      { text: 'No — since both are separate if-statements (not elif), BOTH conditions are checked and both are True for score=95, so the second statement overwrites grade with "D" after the first set it to "A", leaving the final grade wrongly as "D"', isCorrect: true },
+      { text: 'Yes — once the first if-condition (score >= 90) is satisfied, Python automatically skips checking any later if-statements, the same way elif would, so grade correctly ends up as "A"', isCorrect: false, misconceptionId: `${COND}:M1` },
+    ],
+    correctValue: 'No — separate ifs both run and evaluate independently; the second one overwrites the first',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${COND}:M1`],
+    source: COND_SRC,
+  },
 ]
 
 // ─── cs.control.loops ─────────────────────────────────────────────────────────
@@ -2004,6 +2095,19 @@ const LOOPS_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${LOOPS}:M2`],
     source: LOOPS_SRC,
   },
+  {
+    conceptId: LOOPS, subjectSlug: 'computer_science', probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student writes `for i in range(1, 6):` intending to process items numbered 1 through 6 inclusive, and is confused when item 6 never gets processed. Does range(1, 6) include the value 6?',
+    choices: [
+      { text: 'No — range\'s stop argument is EXCLUSIVE, so range(1, 6) produces 1, 2, 3, 4, 5 only, up to but not including 6; to include 6 the student needs range(1, 7)', isCorrect: true },
+      { text: 'Yes — range(start, stop) always includes both the start and stop values in the sequence it produces, so range(1, 6) produces 1 through 6', isCorrect: false, misconceptionId: `${LOOPS}:M1` },
+    ],
+    correctValue: 'No — the stop value in range() is exclusive; range(1,6) stops at 5',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${LOOPS}:M1`],
+    source: LOOPS_SRC,
+  },
 ]
 
 // ─── cs.control.nested-control-patterns ──────────────────────────────────────
@@ -2062,6 +2166,19 @@ const NESTED_PROBES: SeedProbe[] = [
     ],
     correctValue: 'break exits only the innermost loop',
     difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${NESTED}:M1`],
+    source: NESTED_SRC,
+  },
+  {
+    conceptId: NESTED, subjectSlug: 'computer_science', probeKind: 'true_false',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'A program searches a 5x5 grid for a target value using a nested loop (outer loop over rows, inner loop over columns), and calls break the moment the target is found in the inner loop. After that break fires, does the outer row loop also stop, or does it move on to check the next row?',
+    choices: [
+      { text: 'It moves on to its next row — break only exits the loop it is directly written inside (the inner column loop); to also stop the outer loop, a flag variable or a function with return is needed', isCorrect: true },
+      { text: 'The outer row loop also stops immediately — break exits every loop it is nested inside, all the way up, not just the innermost one', isCorrect: false, misconceptionId: `${NESTED}:M1` },
+    ],
+    correctValue: 'The outer loop continues; break exits only its own (innermost) loop',
+    difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [`${NESTED}:M1`],
     source: NESTED_SRC,
   },
@@ -2126,6 +2243,19 @@ const CSSTRS_PROBES: SeedProbe[] = [
     ],
     correctValue: '"hello" — strings are immutable; methods return new strings',
     difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${CSSTRS}:M1`],
+    source: CSSTRS_SRC,
+  },
+  {
+    conceptId: CSSTRS, subjectSlug: 'computer_science', probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student runs `name = "alice"; name.replace("a", "A")` expecting name to now be "Alice". They print name afterward and are surprised to see "alice" unchanged. Should .replace() have updated the variable directly?',
+    choices: [
+      { text: 'No — strings are immutable in Python, so .replace() returns a brand-new string with the replacement applied rather than modifying the original in place; to update name it must be reassigned: name = name.replace("a", "A")', isCorrect: true },
+      { text: 'Yes — .replace() should have updated name directly; string methods modify the string object in place the same way list methods like .append() do', isCorrect: false, misconceptionId: `${CSSTRS}:M1` },
+    ],
+    correctValue: 'No — .replace() returns a new string; the original is never mutated in place',
+    difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${CSSTRS}:M1`],
     source: CSSTRS_SRC,
   },
