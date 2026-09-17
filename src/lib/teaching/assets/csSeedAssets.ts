@@ -826,6 +826,19 @@ const ALGO_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${ALGO}:M1`],
     source: ALGO_SRC,
   },
+  {
+    conceptId: ALGO, subjectSlug: 'computer_science', probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A team designs a correct sorting algorithm on paper and proves it always produces sorted output. They conclude no further testing of the coded implementation is needed, since the algorithm itself is proven correct. Is this reasoning sound?',
+    choices: [
+      { text: 'No — a proven-correct algorithm can still be implemented incorrectly (an off-by-one error, a wrong comparison operator); the code must still be tested independently, since correctness of the algorithm does not transfer automatically to correctness of its implementation', isCorrect: true },
+      { text: 'Yes — once the algorithm itself is proven correct, any faithful implementation of it is guaranteed to behave correctly, so testing the code is redundant', isCorrect: false, misconceptionId: `${ALGO}:M1` },
+    ],
+    correctValue: 'No — a proven algorithm still needs its implementation tested separately',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ALGO}:M1`],
+    source: ALGO_SRC,
+  },
 ]
 
 // ─── cs.algo.flowcharts ───────────────────────────────────────────────────────
@@ -884,6 +897,19 @@ const FLOWCHRT_PROBES: SeedProbe[] = [
     correctValue: 'Flowchart review ≠ code correctness; implementation must be tested separately',
     difficulty: ProbeDifficulty.DEVELOPING,
     targetedMisconceptions: [`${FLOWCHRT}:M2`],
+    source: FLOWCHRT_SRC,
+  },
+  {
+    conceptId: FLOWCHRT, subjectSlug: 'computer_science', probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student draws a flowchart where a decision diamond ("Is the list empty?") has only ONE arrow leading out of it, continuing straight to the next step regardless of the answer. Is this a valid way to represent a decision in a flowchart?',
+    choices: [
+      { text: 'No — every decision diamond must have exactly two clearly labelled exit arrows (Yes/True and No/False); a diamond with a single exit does not represent a real branching decision and makes the flowchart ambiguous to trace', isCorrect: true },
+      { text: 'Yes — a decision diamond just marks a checkpoint in the flow; as long as the question is written inside it, one exit arrow is enough to continue the flowchart', isCorrect: false, misconceptionId: `${FLOWCHRT}:M1` },
+    ],
+    correctValue: 'No — a decision diamond needs two labelled exits, not one',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${FLOWCHRT}:M1`],
     source: FLOWCHRT_SRC,
   },
 ]
@@ -945,6 +971,19 @@ const ASYMP_PROBES: SeedProbe[] = [
     correctValue: 'A is faster here — asymptotic notation describes scaling, not absolute speed for small n',
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${ASYMP}:M2`],
+    source: ASYMP_SRC,
+  },
+  {
+    conceptId: ASYMP, subjectSlug: 'computer_science', probeKind: 'true_false',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'An algorithm has running time T(n) = 7n log n + 3n + 50. A student writes its Big-O complexity as O(7n log n + 3n + 50), arguing that dropping terms loses information. Is keeping the full expression the correct way to state Big-O?',
+    choices: [
+      { text: 'No — Big-O deliberately drops constant coefficients and lower-order terms because they do not affect how the algorithm scales as n grows large; the correct statement is O(n log n), since that term dominates', isCorrect: true },
+      { text: 'Yes — Big-O should keep the exact expression, since dropping terms like 3n and 50 changes the true running time', isCorrect: false, misconceptionId: `${ASYMP}:M1` },
+    ],
+    correctValue: 'No — Big-O = O(n log n); coefficients and lower-order terms are dropped by convention',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ASYMP}:M1`],
     source: ASYMP_SRC,
   },
 ]
@@ -1012,6 +1051,19 @@ const TIMECPLX_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${TIMECPLX}:M2`],
     source: TIMECPLX_SRC,
   },
+  {
+    conceptId: TIMECPLX, subjectSlug: 'computer_science', probeKind: 'true_false',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'A function has an outer loop that runs n times, and inside it, an inner loop that always runs exactly 5 times, regardless of n. A student says this nested-loop structure must be O(n²) because there are two loops, one inside the other. Is this correct?',
+    choices: [
+      { text: 'No — the inner loop\'s iteration count (5) does not depend on n, so total work is n × 5 = O(n), not O(n²); nested loops are only O(n²) when BOTH loops\' iteration counts scale with n', isCorrect: true },
+      { text: 'Yes — any time one loop is nested inside another, the resulting time complexity is automatically O(n²), regardless of how many times each loop actually runs', isCorrect: false, misconceptionId: `${TIMECPLX}:M1` },
+    ],
+    correctValue: 'No — this nested loop is O(n), since the inner loop\'s count is a fixed constant',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${TIMECPLX}:M1`],
+    source: TIMECPLX_SRC,
+  },
 ]
 
 // ─── cs.algo.divide-and-conquer ───────────────────────────────────────────────
@@ -1075,6 +1127,19 @@ const DIVCONQ_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${DIVCONQ}:M1`],
     source: DIVCONQ_SRC,
   },
+  {
+    conceptId: DIVCONQ, subjectSlug: 'computer_science', probeKind: 'true_false',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'A recursive function counts the ways to climb n stairs taking either 1 or 2 steps at a time, using ways(n) = ways(n-1) + ways(n-2), with no caching. For large n, do the two recursive calls at each level combine INDEPENDENT subproblems, the way merge sort\'s two halves are independent?',
+    choices: [
+      { text: 'No — the subproblems OVERLAP: ways(n-2) gets recomputed separately by both the ways(n-1) branch and the top-level call; this repeated recomputation is exactly why the naive version is exponential, and why adding memoisation (dynamic programming) fixes it', isCorrect: true },
+      { text: 'Yes — this recursion follows the divide-and-conquer pattern exactly like merge sort, splitting into two genuinely separate pieces of work each time', isCorrect: false, misconceptionId: `${DIVCONQ}:M1` },
+    ],
+    correctValue: 'No — the subproblems overlap; this is a DP shape, not a D&C shape',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${DIVCONQ}:M1`],
+    source: DIVCONQ_SRC,
+  },
 ]
 
 // ─── cs.algo.greedy-algorithms ────────────────────────────────────────────────
@@ -1135,6 +1200,19 @@ const GREEDY_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${GREEDY}:M1`],
     source: GREEDY_SRC,
   },
+  {
+    conceptId: GREEDY, subjectSlug: 'computer_science', probeKind: 'true_false',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'A country\'s coin denominations are {1, 3, 4}. To make change for 6, greedy always picks the largest coin that fits: 4, then 1, then 1 — three coins total. But 3+3 uses only two coins. Does this show greedy is not always optimal for the coin-change problem?',
+    choices: [
+      { text: 'Yes — this is a real counterexample: greedy\'s locally-best choice (take the biggest coin first) produces a worse total (3 coins) than the true optimum (2 coins), showing greedy is not universally correct for coin change with arbitrary denominations', isCorrect: true },
+      { text: 'No — greedy is provably optimal for any coin-change problem, so the 4+1+1 answer greedy finds must actually be the true minimum; the 3+3 alternative doesn\'t count because greedy doesn\'t consider it', isCorrect: false, misconceptionId: `${GREEDY}:M1` },
+    ],
+    correctValue: 'Yes — greedy fails on this coin system; it is only optimal for specially-structured ("canonical") ones',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${GREEDY}:M1`],
+    source: GREEDY_SRC,
+  },
 ]
 
 // ─── cs.algo.dynamic-programming ─────────────────────────────────────────────
@@ -1191,6 +1269,19 @@ const DYNPROG_PROBES: SeedProbe[] = [
       { text: 'Yes — memoisation IS dynamic programming; any memoised recursion qualifies as a DP algorithm', isCorrect: false, misconceptionId: `${DYNPROG}:M1` },
     ],
     correctValue: 'DP requires overlapping subproblems + optimal substructure; memoisation is the implementation mechanism',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${DYNPROG}:M1`],
+    source: DYNPROG_SRC,
+  },
+  {
+    conceptId: DYNPROG, subjectSlug: 'computer_science', probeKind: 'true_false',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'A student adds a dictionary cache to a recursive function that computes a maximum value at each step, purely to avoid recomputation, without checking whether the problem actually has optimal substructure. They call the result "a dynamic programming solution." Is adding a cache alone sufficient to guarantee this is a valid DP solution?',
+    choices: [
+      { text: 'No — caching only avoids recomputing overlapping subproblems; it does not verify that combining optimal subproblem solutions actually yields the optimal overall solution (optimal substructure), so the label is not automatically earned by memoisation alone', isCorrect: true },
+      { text: 'Yes — any recursive function with a memoisation cache added is, by definition, a correct dynamic programming solution, regardless of the problem\'s underlying structure', isCorrect: false, misconceptionId: `${DYNPROG}:M1` },
+    ],
+    correctValue: 'No — memoisation alone does not verify optimal substructure holds',
     difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [`${DYNPROG}:M1`],
     source: DYNPROG_SRC,
@@ -1256,6 +1347,19 @@ const BKTRACK_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${BKTRACK}:M1`],
     source: BKTRACK_SRC,
   },
+  {
+    conceptId: BKTRACK, subjectSlug: 'computer_science', probeKind: 'true_false',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'For the subset-sum problem (choose items summing exactly to a target), one implementation generates ALL 2ⁿ possible subsets first, then checks each one\'s sum. A second implementation builds subsets item-by-item and abandons a partial subset the MOMENT its running total exceeds the target, before adding any more items. Do both implementations do the same amount of work?',
+    choices: [
+      { text: 'No — the second implementation is genuine backtracking: it prunes a partial candidate as soon as it becomes invalid, skipping entire branches of the search tree; the first is brute force, generating every full candidate regardless of validity, which does strictly more work', isCorrect: true },
+      { text: 'Yes — both approaches eventually consider the same underlying search space, so backtracking with pruning explores exactly as many candidates as brute force; only the order differs', isCorrect: false, misconceptionId: `${BKTRACK}:M1` },
+    ],
+    correctValue: 'No — early pruning means backtracking explores strictly fewer candidates than brute force',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${BKTRACK}:M1`],
+    source: BKTRACK_SRC,
+  },
 ]
 
 // ─── cs.algo.np-completeness ──────────────────────────────────────────────────
@@ -1313,6 +1417,19 @@ const NPCOMP_PROBES: SeedProbe[] = [
       { text: 'Yes — NP-complete means provably no polynomial-time algorithm exists for ANY instance of the problem', isCorrect: false, misconceptionId: `${NPCOMP}:M1` },
     ],
     correctValue: 'NP-completeness = worst-case hardness; specific instances can still be easy',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${NPCOMP}:M1`],
+    source: NPCOMP_SRC,
+  },
+  {
+    conceptId: NPCOMP, subjectSlug: 'computer_science', probeKind: 'true_false',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'The Travelling Salesman decision problem is NP-complete. A city-planning team has a small instance with only 8 cities and needs a route under a given length. A team member claims it is pointless to even attempt solving it, because NP-completeness proves no algorithm can find the answer. Are they right to give up?',
+    choices: [
+      { text: 'No — NP-completeness is a statement about worst-case behaviour as problem size grows large; an 8-city instance is tiny and can easily be solved exactly (even by brute force) in a reasonable amount of time', isCorrect: true },
+      { text: 'Yes — NP-complete problems have no algorithm that can produce a correct answer for any instance, no matter how small, so attempting to solve even an 8-city case is pointless', isCorrect: false, misconceptionId: `${NPCOMP}:M1` },
+    ],
+    correctValue: 'No — NP-completeness is a worst-case, large-n statement; small instances remain easy',
     difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [`${NPCOMP}:M1`],
     source: NPCOMP_SRC,
@@ -1378,6 +1495,19 @@ const INTROPROG_PROBES: SeedProbe[] = [
     ],
     correctValue: 'All programmers make all error types; skill is in rapid diagnosis, not error-free writing',
     difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${INTROPROG}:M1`],
+    source: INTROPROG_SRC,
+  },
+  {
+    conceptId: INTROPROG, subjectSlug: 'computer_science', probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A first-week programming student fixes their fifth bug of the day and thinks, "An expert programmer would have written this code correctly the first time, with zero bugs." Is this an accurate picture of how experienced programmers actually work?',
+    choices: [
+      { text: 'No — experienced programmers routinely introduce and fix syntax, runtime, and logic errors as part of normal development; the difference from a beginner is how quickly they recognise and diagnose the error, not that they avoid making mistakes in the first place', isCorrect: true },
+      { text: 'Yes — once a programmer becomes sufficiently skilled, they can reliably write code that runs correctly on the first attempt, without needing to debug it afterward', isCorrect: false, misconceptionId: `${INTROPROG}:M1` },
+    ],
+    correctValue: 'No — experts also make and fix errors constantly; the skill is fast diagnosis, not avoidance',
+    difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${INTROPROG}:M1`],
     source: INTROPROG_SRC,
   },
