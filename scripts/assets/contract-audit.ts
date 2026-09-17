@@ -81,7 +81,7 @@ export function kgSubjects(): Map<string, number> {
   return out
 }
 
-interface Row { subjectSlug?: string; conceptId?: string; gradeBand?: unknown }
+interface Row { subjectSlug?: string; conceptId?: string; gradeBand?: unknown; familyKind?: string }
 interface Probe extends Row { choices?: unknown; probeKind?: string }
 
 /** A probe a mastery gate can grade: >= 2 authored choices. Open recall is real
@@ -89,16 +89,46 @@ interface Probe extends Row { choices?: unknown; probeKind?: string }
  *  correctness for free text has no deterministic source. */
 const isGradeable = (p: Probe) => Array.isArray(p.choices) && p.choices.length >= 2
 
-async function load() {
+/**
+ * A content module is classified by the SHAPE of its elements, not by the
+ * exported const's NAME.
+ *
+ * MEASURED, 2026-09-17: the previous version matched `name.endsWith('EXPLANATIONS')`
+ * / `name.endsWith('PROBES')` — the exact name-based trap
+ * seedCorpusCoverageRatchet.test.ts's own header already names as a known
+ * failure mode ("`ENGLISH_PROBE_BATCH_2` holds probes but its name doesn't
+ * contain 'PROBES'"), but that ratchet checks SOURCE TEXT for a TypeScript
+ * type annotation (`: SeedProbe[]`), which this script cannot do the same
+ * way — by the time `await import()` returns a value, the type annotation is
+ * long erased. This silently dropped every `ENGLISH_ADULT_BAND_BATCH_*` and
+ * `ENGLISH_PROBE_BATCH_*` export (12 + 10 files, real authored content) from
+ * every measurement this script has ever produced — the reported
+ * "english 2/412 at contract" state was an artefact of this bug, not a true
+ * reading of the corpus. `SeedExplanation` and `SeedProbe` (brainSeedAssets.ts)
+ * are structurally distinct at runtime: an explanation carries `familyKind`
+ * and never `probeKind`; a probe carries `probeKind` and never `familyKind`.
+ * Classifying by the first element's actual shape is a runtime-safe
+ * equivalent of the ratchet's compile-time type check, immune to naming.
+ */
+export function classify(value: unknown[]): 'explanations' | 'probes' | null {
+  const first = value[0] as Row | Probe | undefined
+  if (!first || typeof first !== 'object') return null
+  if (typeof (first as Probe).probeKind === 'string') return 'probes'
+  if (typeof (first as Row).familyKind === 'string') return 'explanations'
+  return null
+}
+
+export async function load() {
   const files = readdirSync(ASSET_DIR).filter((f) => f.endsWith('.ts') && !f.endsWith('.test.ts'))
   const explanations: Row[] = []
   const probes: Probe[] = []
   for (const f of files) {
     const mod = await import(path.join(ASSET_DIR, f))
-    for (const [name, value] of Object.entries(mod)) {
-      if (!Array.isArray(value)) continue
-      if (name.endsWith('EXPLANATIONS')) explanations.push(...(value as Row[]))
-      else if (name.endsWith('PROBES')) probes.push(...(value as Probe[]))
+    for (const value of Object.values(mod)) {
+      if (!Array.isArray(value) || value.length === 0) continue
+      const kind = classify(value)
+      if (kind === 'explanations') explanations.push(...(value as Row[]))
+      else if (kind === 'probes') probes.push(...(value as Probe[]))
     }
   }
   return { explanations, probes }
