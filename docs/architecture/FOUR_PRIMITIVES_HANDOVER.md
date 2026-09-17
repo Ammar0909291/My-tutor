@@ -272,6 +272,34 @@ zero traffic would not produce information, only busywork.
 point of this file existing. Keep the STANDING AUTHORIZATION section as-is (do not re-litigate
 it); only CURRENT STATE and the next-steps list should change per batch.
 
+### Batch 7 (Physics Verifier, numeric/arithmetic-consistency) — measurement pass, 2026-09-17
+
+The "needs a design pass + authored corpus" framing above was half right: the DESIGN needs
+content work (order-of-magnitude/sign/limiting-case tolerances), but a narrower slice —
+**arithmetic self-consistency** (does a stated identity like "50 km + 20 km = 70 km" actually
+compute correctly) — needs ZERO authored physics knowledge, only checking the model's own
+arithmetic. This is genuinely NEW, safely-scoped work that does not depend on production traffic
+or an owner decision, because it is pure measurement, not enforcement.
+
+Built `scripts/qa/physicsNumericProbe.ts` (disposable QA account, real deployed app) and ran it
+twice. First run used a wrong detector (looked for symbolic `letter = number`) and found nothing
+— but reading the raw text showed a real identity in prose digit form the regex could not see
+("3 m + 2 m = 5 m"), the same false-negative trap the dimensional check's own §6.1 already fell
+into once. Corrected regex, re-ran: **1 of 8 replies contained a checkable arithmetic identity**,
+only under the most explicit "step by step... check the arithmetic" prompt, and it was CORRECT
+(50+20=70, 70+30=100) — so there is a real, rare signal, but zero evidence yet that the model ever
+gets this wrong. Full detail and the exact regex history:
+`DETERMINISTIC_PHYSICS_VERIFIER_DESIGN.md` §6.6.
+
+**Verdict: too little evidence to design a checker from one correct example.** The honest next
+step is NOT to build a checker now — it is to re-run this measurement with a larger sample
+(more concepts, more aggressive "walk me through the math, check for mistakes" elicitation) to
+either find a real error to design against, or confirm the pattern stays too rare to be worth
+building. This is recorded as a genuine forward step for a future session, not busywork: it moved
+Physics Verifier from "5 of 6 checks never even measured" to "5 of 6 checks: one has a
+just-measured, still-thin evidence base; four remain completely unmeasured
+(order-of-magnitude/sign/limiting-case/symbolic)."
+
 ---
 
 ## CORRECTED, 2026-09-16 — "PROGRAMME CLOSED" below OVERCLAIMED (superseded by the authorization
