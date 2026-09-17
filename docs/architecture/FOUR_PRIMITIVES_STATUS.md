@@ -29,9 +29,28 @@ never have evaluated V2's actual §4.4 proposal (an evidence-spine + projection 
 `capabilityModel.ts`'s proven pattern, a THIRD design distinct from both forks the audit
 weighed) — not re-opened, but not soundly closed either. **Learner-Move Interpreter** remains
 the one genuine exception: DONE by a well-reasoned, evidenced deviation from V2's own §4.3
-design, not a narrowed slice. **QUEUED NEXT:** Turn Contract's I2/I3/I8/I10, per
-`FOUR_PRIMITIVES_HANDOVER.md`'s own updated queue entry — earliest in V2 §9's migration
-sequencing and fully specified by two existing design docs.
+design, not a narrowed slice.
+
+**UPDATED, 2026-09-17 — Turn Contract, I3 shadow measurement landed (A11); a second, deeper gap
+found in the same session and reported, not fixed.** Full detail in §1 below. Short version: (a)
+`assertDeliverySatisfiesContract` now measures I3 (the `?? mcqParse.mcq` fallback reaching a
+served question) via a new `A11` code — zero new runtime state, built entirely from fields the
+compiled `TurnDelivery` already carried; (b) re-verifying this file's own "fully migrated" claim
+before building on it found that `TurnDelivery.figure.*` is a **permanent placeholder** —
+`compileTurnDelivery` is called once (route.ts L6791, figure input at L6754), before the real
+figure resolution runs (`figureIntroducedThisTurn` at L9415 — 2,661 lines later)
+in `route.ts`, so `attachedThisTurn`/`introducedThisTurn`/`onScreen` are hardcoded `false` at
+every real turn today. This is not new information changing behaviour — it is the accurate
+reading of a design choice this file's Batch 5/8 entries already documented ("not yet decided...
+False here is accurate") but whose consequence (A8 is structurally unable to ever fire; an I8
+diagram-satisfaction check cannot be built on these fields) had not been stated plainly before.
+(c) A9/A10 were found to be **documented as implemented but are not** — zero occurrences of
+either code anywhere in the module, despite a docblock claiming "they are still checked and
+reported here." Not fixed this session (out of I2/I3/I8/I10 scope; flagged for whoever owns
+I1/I4 next). **QUEUED NEXT:** I8 needs either a structural (non-prose) satisfaction signal that
+does not yet exist, or an explicit decision to fix the `delivery.figure` timing gap first; I2 and
+I10 remain fully unstarted and both need new protocol-level state — see §1's "Next action" for
+the concrete, smallest-safe next step for each.
 
 ---
 
@@ -50,19 +69,42 @@ The four (§4.1-§4.4 of the V2 doc), in the order this programme has actually w
 
 | # | Primitive | Design doc | Status |
 |---|---|---|---|
-| 1 | **Turn Contract** | `TYPED_TURN_CONTRACT_DESIGN.md` | ✅ **DONE** — fully migrated |
+| 1 | **Turn Contract** | `TYPED_TURN_CONTRACT_DESIGN.md` | 🟡 **Representation migration (Batches 0-8) done; I2/I8/I10 unstarted, I3 shadow-measured only (A11, 2026-09-17)** |
 | 2 | **Deterministic Physics Verifier** (dimensional slice) | `DETERMINISTIC_PHYSICS_VERIFIER_DESIGN.md` | ✅ **DONE — shadow retired as terminal state (2026-09-16, owner decision).** Batches 0-3/6/7 shipped; Batch 5 (enforcement) explicitly NOT warranted — 0/169 violations across 4 live windows, matching the design's own §7 steel-man-predicted outcome exactly. Shadow code stays live (harmless, already deployed); no further gate-widening is planned. |
 | 3 | **Closed-taxonomy Learner-Move Interpreter** | `LEARNER_MOVE_INTERPRETER_DESIGN.md` | ✅ **DONE** — fully migrated, per its own stated scope |
 | 4 | **Durable per-concept learner state** | `DURABLE_LEARNER_STATE_AUDIT.md` | ✅ **DONE — closed as scoped (2026-09-16, owner decision).** Fork decided: `studentIntelligence.ts` (Design D, derived, live) is canonical; `ConceptMasteryRecord`/`ActiveMisconception` stay unwritten. ADR 10 marked partially superseded. |
 
 ---
 
-## 1. Turn Contract — ✅ DONE
+## 1. Turn Contract — 🟡 representation migration done; I2/I3/I8/I10 (the "genuinely new"
+## invariants) are the real remaining work
 
-**What it is:** replaces `route.ts`'s 116 `…Hoisted` local variables (the informal, scattered
-"what did this turn decide" state) with two typed objects — `TurnContract` (compiled once,
-pre-model) and `TurnDelivery` (compiled once, post-model) — plus an assertion function checking
-10 invariants (A1-A10) the old scattered-locals shape could not check at all.
+**What it is:** two typed objects — `TurnContract` (compiled once, pre-model) and `TurnDelivery`
+(compiled once, post-model) — plus a self-consistency assertion function
+(`assertDeliverySatisfiesContract`) that checks a turn's post-model delivery against its own
+pre-model contract. **Read this section before trusting "DONE" on this primitive again** — an
+earlier version of this file said "fully migrated" without qualification, which two independent
+audits (CLAUDE.md's "CORRECTION" entry, and this session's re-verification before building on it)
+both found to be an overclaim in different, specific ways.
+
+**What "fully migrated" actually means, verified this session by reading the code, not the
+commit messages.** All 9 batches landed and pass their own tests, but:
+- `route.ts`'s original 116 `…Hoisted` mutable locals are still **117** today (one net new since
+  the design doc's baseline) — Batch 8's own commit message says so: it deleted 1 of 116, and
+  reasons explicitly that the other 115 "can never become deletable... because the compile-input
+  construction remains a permanent reader." Route.ts's actual decision logic still reads and
+  writes those locals directly; the compiled objects are named `turnContractShadow` /
+  `turnDeliveryShadow` in the code, and genuinely are shadow-only — grepping for reads of either
+  finds 7 total, almost all inside the assertion/comparison logic itself. One confirmed real
+  consumer migration exists (Batch 4: `mcqToServe()` collapsed from 6 call sites to 1).
+- So the accurate claim is: **a frozen, type-checked, self-consistency-checking observer now runs
+  on every real turn and checks A1-A8 live (`CONTRACT_ASSERT` log line on any violation)** — which
+  is genuinely valuable and is what closed I1, I4, I5, I6, I9's *checkable* form — but the
+  contract is not yet the thing route.ts's branches actually read from.
+- **A9/A10 are documented as implemented but are not.** The module's own docblock says "A9 and A10
+  ... are still checked and reported here" — grepped for `'A9'`/`'A10'` across `src/`: zero
+  matches. Not fixed this session (I1/I4 territory, not I2/I3/I8/I10); flagged here so the next
+  session doesn't inherit the same false belief this one almost did.
 
 **All 9 batches landed**, in order, each its own commit:
 
@@ -81,12 +123,29 @@ pre-model) and `TurnDelivery` (compiled once, post-model) — plus an assertion 
 | 8 pt1 | `d2917fe` | Residue cluster (identity, placement, strategy, liveness counters, etc.) |
 | 8 pt2 | `f0e1acb` | Deletion sweep — every now-unreferenced `Hoisted` declaration removed |
 
-**Design doc's own definition of done is met.** No further batches are planned for this
-primitive under the current design. If a future session finds a real defect this contract should
-have caught but didn't, that's a new finding against A1-A10, not a reason to reopen the batch
-plan — check the assertion set (`assertDeliverySatisfiesContract`) first.
+**`TYPED_TURN_CONTRACT_DESIGN.md`'s own definition of done (§12) is met** — that document
+explicitly scoped itself to the representation migration and explicitly excluded I2/I7/I10 (§5.1),
+and never addressed I3/I8 at all (an omission the "CORRECTION" CLAUDE.md entry identified). No
+further *representation* batches are planned. **`PHYSICS_TEACHER_MIGRATION_ARCHITECTURE.md`
+§4.1's own definition of done (all 10 invariants) is NOT met** — that is the work below.
 
-**Next action if resumed:** none scheduled. This primitive is closed.
+### I2 / I3 / I8 / I10 — the four invariants the representation migration never covered
+
+Started 2026-09-17, following `FOUR_PRIMITIVES_HANDOVER.md`'s queued next step. Each invariant
+needs a different amount of new state, so each is its own decision:
+
+| Invariant | Status | Why |
+|---|---|---|
+| **I3** (corpus-only artifact) | ✅ **Shadow-measured, `A11`, landed 2026-09-17** | Zero new state — built from `TurnDelivery.question.{attached,served}` and `TurnContract.inbound.pendingProbe`, all already populated with real data at the existing compile point. Reports (does not block) whenever a served question's provenance, resolved by reference against the two identified sources the delivery already carries (not the `question.source` shortcut, which only describes THIS turn's fresh attempt and would miss a carried-forward model-invented probe — caught before shipping, see the commit), is `model-invented`. Firing is an *expected* measurement outcome today, not a bug — the `?? mcqParse.mcq` fallback (`route.ts`, `mcqHoisted = gateMcqHoisted ?? mcqParse.mcq`) is intentional until an owner decides whether to remove it; A11 is the prevalence data that decision needs. |
+| **I8** (request satisfied or declined) | ❌ **Not started — genuinely blocked, not merely deferred** | Two independent blockers found this session: (1) `TurnDelivery.figure.*` is a permanent placeholder (see above) — an I8/diagram check built on it would report a false violation on literally every `learnerRequest === 'diagram'` turn, since `attachedThisTurn`/`onScreen` can never be true at the current compile point. (2) "Satisfied vs. silently ignored" is fundamentally a prose-content question for the other two request kinds (`real_life_example`, `explain_differently`), and `assertDeliverySatisfiesContract`'s own rules forbid reading teaching prose ("no regex over teaching prose" — see the module header and its structural guard test). A pre-existing, differently-named field, `turnProgress.ts`'s `learnerRequestHonoured`, was checked and confirmed to mean "a request was *detected* this turn" (`resolvedLearnerRequest !== null`, route.ts), not "satisfied" — a real naming gap, reported here, not touched (turnProgress.ts's C1-C4 constraints are a separate, structurally-enforced module). **Smallest safe next step, not yet built:** fix the `delivery.figure` timing gap first (a second, later `compileTurnDelivery`-adjacent write, or moving the compile point — itself a real, separate design decision since the whole point of "compiled once" was avoiding the D3 line-number-dependent-meaning problem), which would make an I8/diagram check possible without ever touching prose. |
+| **I2** (render receipt) | ❌ **Not started** | Needs the CLIENT to prove it rendered a specific question — no existing signal approximates this honestly. This is a genuine client-protocol addition (a receipt field on the next turn's request), which is new user-visible state, not an invisible shadow measurement — needs an explicit owner decision before any code, per the G1/G2 rule this whole programme operates under. |
+| **I10** (idempotency key) | ❌ **Not started** | True idempotency needs a client-supplied key. **A zero-client-touching shadow proxy is possible and not yet built:** detect near-duplicate submissions from data already persisted (same `sessionId` + identical inbound message text arriving twice in close succession, read from `learnSession.messages`) — a measurement, not real idempotency, but it would tell the owner whether the problem is observed at all before any protocol change is considered. |
+
+**Next action if resumed:** I3 is done (A11, shadow). For I8, either (a) fix the `delivery.figure`
+timing gap as its own small batch, then build the diagram-only structural check, or (b) get an
+owner decision on a structural (non-prose) "request handled" tag the response-building code emits
+itself. For I10, the message-history duplicate-detection shadow proxy is the smallest safe next
+step. For I2, no safe next step exists without an owner decision on the client protocol first.
 
 ---
 
@@ -380,9 +439,16 @@ queryability alone justifies the second-source-of-truth risk — not a rerun of 
 
 ## Programme-level status
 
-**All four primitives are DONE. This programme is closed.**
+**Three of four primitives are genuinely closed. Turn Contract is partially open (I2/I8/I10).**
+The 2026-09-16 "all four DONE" claim was corrected the same day; this entry is the current,
+re-verified state as of 2026-09-17.
 
-- **Turn Contract** and **Learner-Move Interpreter** — fully shipped and closed, no open items.
+- **Learner-Move Interpreter** — fully shipped and closed, no open items.
+- **Turn Contract** — the representation migration (Batches 0-8) is done and genuinely valuable
+  (A1-A8 self-consistency checking runs live on every turn), but is a shadow layer, not a
+  consumer migration — route.ts's decisions still come from the original mutable locals. I3 now
+  has a shadow measurement (`A11`, 2026-09-17). **I2, I8, I10 remain open** — see §1 above for
+  exactly what blocks each and the smallest safe next step.
 - **Physics Verifier** — instrumentation (Batches 0-3, 6, 7) fully shipped, live-verified across
   four manufactured observation windows (169 lines, 1 core-reach, 0 violations). **Closed at that
   terminal state by direct owner instruction, 2026-09-16**: Batch 5 (enforcement) declined, not
@@ -395,7 +461,9 @@ queryability alone justifies the second-source-of-truth risk — not a rerun of 
   §8 recommendation: `studentIntelligence.ts` (Design D) is canonical, `ConceptMasteryRecord`/
   `ActiveMisconception` stay unwritten, ADR 10 marked partially superseded.
 
-**If picking this up cold**: there is nothing to resume. A new build attempt on either item needs
-a genuinely NEW trigger (a real dimensional error found in production traffic for Item 2; a
-genuinely new Design C or an explicit queryability requirement for Item 4) — not a continuation of
-either programme's own prior campaign.
+**If picking this up cold**: Physics Verifier and Durable Learner State need a genuinely NEW
+trigger to reopen (a real dimensional error found in production traffic; a genuinely new Design C
+or an explicit queryability requirement) — not a continuation of either programme's own prior
+campaign. Learner-Move Interpreter needs nothing. **Turn Contract's I2/I8/I10 are genuinely open
+and queued** — read §1's table before starting; I8 and I10 both have a stated smallest-safe-next-
+step, I2 needs an owner decision first.

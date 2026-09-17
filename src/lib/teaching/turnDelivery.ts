@@ -49,6 +49,7 @@ import {
   type TurnContract,
   type IdentifiedProbe,
   type ServerGrade,
+  type KeyProvenance,
   certifies,
 } from '@/lib/teaching/turnContract'
 
@@ -238,6 +239,18 @@ export interface ContractViolation {
  * they are shadow-only permanently, unless a later owner decision promotes
  * them. They are still checked and reported here because the point of shadow
  * mode is to measure whether they hold, not to assume it.
+ *
+ * A11 is the same kind of check for I3 (PHYSICS_TEACHER_MIGRATION_ARCHITECTURE
+ * §4.1: "every graded artifact comes from the corpus by id with a stored
+ * key; prose may never introduce an option list or question"). Unlike A1-A8,
+ * A11 is NOT believed already true — it exists specifically to measure the
+ * `?? mcqParse.mcq` fallback's real-world prevalence (route.ts,
+ * `mcqHoisted = gateMcqHoisted ?? mcqParse.mcq`), which TYPED_TURN_CONTRACT_
+ * DESIGN.md §11.1 names as still open and which neither that document's A1-A10
+ * table nor its explicit exclusion list (I2/I7/I10) ever addressed — I3 was
+ * simply never covered. A11 firing is an expected, informative outcome today,
+ * not a bug: the fallback is intentional until an owner decides whether to
+ * remove it, and this is the prevalence data that decision needs.
  */
 export function assertDeliverySatisfiesContract(d: TurnDelivery): ContractViolation[] {
   const violations: ContractViolation[] = []
@@ -312,6 +325,38 @@ export function assertDeliverySatisfiesContract(d: TurnDelivery): ContractViolat
       code: 'A8',
       detail: 'figure.introducedThisTurn=true but figure.attachedThisTurn is not true',
     })
+  }
+
+  // A11 — I3, measured not assumed (see module header). `question.source`
+  // describes only what THIS TURN attempted, not what is actually served —
+  // a carried-forward probe can be served on a turn whose own fresh attempt
+  // was 'none' or 'model-parsed'-and-superseded, so provenance is resolved by
+  // REFERENCE against the two identified sources this delivery already
+  // carries, the same discipline every other check here follows, rather than
+  // re-deriving it from `source`.
+  if (d.question.served !== null) {
+    const servedProvenance: KeyProvenance | null =
+      d.question.attached !== null && d.question.served === d.question.attached.mcq
+        ? d.question.attached.keyProvenance
+        : d.contract.inbound.pendingProbe !== null && d.question.served === d.contract.inbound.pendingProbe.mcq
+          ? d.contract.inbound.pendingProbe.keyProvenance
+          : null
+    if (servedProvenance === 'model-invented') {
+      violations.push({
+        code: 'A11',
+        detail: 'question.served has keyProvenance=model-invented (I3: not from the corpus by id)',
+      })
+    } else if (servedProvenance === null) {
+      // `served` matched neither the fresh nor the carried-forward identified
+      // probe. Not necessarily I3 — could be a D4-class divergence A6 would
+      // also catch at the route.ts call site — but provenance is genuinely
+      // unknown, which is itself worth knowing, so it is reported distinctly
+      // rather than silently treated as safe.
+      violations.push({
+        code: 'A11',
+        detail: 'question.served matched neither question.attached nor contract.inbound.pendingProbe (provenance unknown)',
+      })
+    }
   }
 
   return violations

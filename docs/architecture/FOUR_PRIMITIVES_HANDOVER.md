@@ -19,13 +19,33 @@ enforced). Durable Learner State's audit may never have evaluated V2's actual §
 (evidence-spine + projection reusing `capabilityModel.ts`, a third design distinct from both
 forks the audit weighed). The table immediately below is KEPT for history, not trusted.
 
-## QUEUED — Turn Contract invariants I2/I3/I8/I10 (V2 §9 Step 4/7 territory)
+## IN PROGRESS — Turn Contract invariants I2/I3/I8/I10 (V2 §9 Step 4/7 territory)
 
-**This is the next concrete step**, per the CLAUDE.md correction's own reasoning: earliest in V2
-§9's migration sequencing, already fully specified by two existing design docs (V2 §4.1 and
-`TYPED_TURN_CONTRACT_DESIGN.md`), and closes real, previously-incident-causing defect classes
-rather than opening new research. See the ready-to-execute prompt recorded in the CLAUDE.md
-correction entry / delivered to the owner on 2026-09-16 for the concrete task.
+**Started 2026-09-17.** Full detail and evidence: `FOUR_PRIMITIVES_STATUS.md` §1's "I2/I3/I8/I10"
+table — read that, not this file, for the current per-invariant state. Short version:
+
+- **I3 — DONE (shadow).** `A11` in `assertDeliverySatisfiesContract` (`turnDelivery.ts`), zero new
+  runtime state, built from data the compiled `TurnDelivery` already carried. Landed, tested,
+  `tsc`/full-suite/build clean.
+- **I8 — genuinely blocked, not just unstarted.** Re-verifying the "fully migrated" claim before
+  building on it found `TurnDelivery.figure.*` is a **permanent placeholder** — `compileTurnDelivery`
+  runs once (route.ts L6791), before the real figure resolution executes (`figureIntroducedThisTurn`
+  at L9415 — 2,661 lines later). A
+  diagram-satisfaction check built on those fields would false-positive on every diagram request.
+  Separately, satisfaction for the other two request kinds is a prose-content question the
+  assertion module's own rules forbid checking. Neither is fixed. See the STATUS table for the
+  smallest safe next step (fix the figure timing gap first, or get an owner decision on a
+  structural "request handled" tag).
+- **I2, I10 — still fully unstarted**, both need new protocol-level state. I10 has an identified
+  zero-client-touching shadow-proxy design (duplicate-message detection from persisted session
+  history) that has not been built. I2 has no safe proxy and needs an explicit owner decision on a
+  client-side receipt field before any code.
+
+**Do not re-attempt I8 on the `delivery.figure` fields without first reading why they are
+permanently `false` today** (see STATUS §1) — that is not a bug introduced this session, it is a
+consequence of where `compileTurnDelivery` is called, documented in the code itself since Batch
+1/5/8, whose downstream implication (A8 can never fire; I8/diagram cannot be built on it) simply
+had not been stated plainly until this session checked before building on it.
 
 ---
 
