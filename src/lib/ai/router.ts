@@ -141,8 +141,22 @@ export function isGeminiOnlyMode(): boolean {
  * this value is ever honoured. Kept as a closed list (not "any string the
  * client sends") so a spoofed header can at most select a real Groq model,
  * never arbitrary provider config.
+ *
+ * `openai/gpt-oss-120b` re-added 2026-09-17, PER-REQUEST ONLY, for a direct
+ * owner-requested Groq-vs-Gemini model comparison — this does NOT touch
+ * `GROQ_MODEL` above, so the live production default for every ordinary
+ * learner stays `openai/gpt-oss-20b`, exactly per the 2026-09-08 decision
+ * ("set groq gpt 20b as default to use always, remove gpt 120b"). That
+ * decision is about the DEFAULT every learner gets; this is the same
+ * request-scoped, DB-flag-gated testing lane `GROQ_MODEL_20B` has always
+ * used for A/B certification, now carrying a second option. Given the
+ * documented history of this exact toggle flip-flopping by direct owner
+ * instruction (20b -> 120b on 2026-09-06 -> 20b again on 2026-09-08), any
+ * future request to change the DEFAULT (not just this per-request lane)
+ * should be confirmed explicitly before editing `GROQ_MODEL` above.
  */
-const GROQ_CERT_MODEL_ALLOWLIST = [GROQ_MODEL_20B]
+const GROQ_MODEL_120B = 'openai/gpt-oss-120b'
+const GROQ_CERT_MODEL_ALLOWLIST = [GROQ_MODEL_20B, GROQ_MODEL_120B]
 
 export function isAllowedGroqCertModel(model: string | null | undefined): model is string {
   return !!model && GROQ_CERT_MODEL_ALLOWLIST.includes(model)
