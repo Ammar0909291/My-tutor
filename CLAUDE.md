@@ -7296,3 +7296,85 @@ prediction** (schrodinger 2464/1607, limits 2774/1719, spectroscopy 4462/1761).
 No mastery certified; disposable QA account deleted, re-login blocked.
 Suite 660 files / 13,719 passed / 9 skipped; tsc clean; build clean
 (middleware 79.7 kB, unchanged).
+
+## Subject-onboarding pipeline — audit, not a new build (2026-09-17)
+
+**Requested scope**: with only English/physics/chemistry EB-complete (mathematics 577/908,
+biology and computer_science with zero `educational-brain/concepts/{subject}/` entries — see the
+"CS asset-contract campaign" batches immediately above), the owner asked to stop adding more
+per-subject content patches and instead audit whether the underlying PIPELINE (KG → registration
+→ seed corpus → bootstrap wiring → asset contract) is generic enough that a future subject goes
+through it cleanly, rather than repeating the class of defect §10.1 of
+`TUTOR_REMEDIATION_PLAN.md` already found and fixed once (33 stranded seed modules, discovered
+2026-09-14).
+
+**Finding: two of the biggest historically-real defect classes are ALREADY hardened with
+dedicated regression tests, both confirmed to run in the CI hard gate (`npx vitest run` in
+`.github/workflows/validate.yml`), and both DYNAMIC — they discover subjects from disk rather
+than a hand-maintained list, so they catch a hypothetical future subject automatically, not just
+the current six:**
+- **`curriculumKgRegistration.test.ts`** — guards the exact English-registration-gap class of bug
+  (a KG existed on disk, was never wired into `SUBJECT_ADAPTERS`/`ID_PREFIX_TO_SUBJECT` in
+  `knowledgeGraph.ts`, so the app silently served a smaller legacy curriculum instead). Discovers
+  every `docs/{subject}/kg/graph.json` and asserts `getKnowledgeGraph()` returns the full,
+  correct node count for each.
+- **`seedCorpusCoverageRatchet.test.ts`** — guards the exact "two writers, one corpus" class of
+  bug (§10.1's 33 stranded modules: `scripts/brain/seed-knowledge-assets.ts` and
+  `src/instrumentation.ts`'s cold-start bootstrap each hand-maintain their own import list of
+  asset modules under `src/lib/teaching/assets/`, and nothing tied the two together). Discovers
+  every content module by its EXPORTED TYPE (`SeedExplanation[]`/`SeedProbe[]`), not by name or
+  by either writer's own import list, and asserts both writers import every one.
+
+**One real, if minor, blind spot found and fixed — `scripts/assets/contract-audit.ts`'s readiness
+report silently omitted any subject with zero seed content.** Its subject list was derived only
+from `subjectSlug` values already present in loaded explanations/probes — a subject whose KG
+exists and is correctly registered in `SUBJECT_ADAPTERS` but has no seed corpus AUTHORED yet
+(the exact state a brand-new subject starts in) simply never appeared in the report, rather than
+showing up as a visible "0 authored of N in the KG" line someone would notice. Fixed: a new
+`kgSubjects()` function (exported, reused by the new test rather than re-implemented) discovers
+every `docs/{subject}/kg/graph.json` on disk — same technique as `curriculumKgRegistration.test.ts`
+— and is unioned into the audit's subject list; the table gained a `kg concepts` column so the
+gap between "concepts in the KG" and "concepts with any authored seed content" is visible for
+every subject, not just the ones already being worked. Pinned by new
+`contractAuditSubjectCoverage.test.ts` (9 assertions: kgSubjects() matches an independent scan of
+`docs/`; every discovered subject's concept count is correct; every seed module's `subjectSlug`
+resolves to a registered KG subject — an orphan-slug check that would catch a typo or a subject
+removed from the registry while its seed content was left behind).
+`scripts/assets/contract-audit.ts`'s `main()` was guarded behind `require.main === module` so the
+new test can import `kgSubjects()` without triggering the CLI's console output as an import side
+effect — the script's behaviour when actually run (`npx tsx scripts/assets/contract-audit.ts`) is
+unchanged, verified by running it before and after.
+
+**Incidental finding surfaced by the new column, not itself investigated further this session**:
+mathematics's KG has 908 concepts but only 273 have ANY seed content in the runtime corpus — a
+materially bigger gap than the already-known 577 vs. 908 Educational Brain gap, since even fewer
+EB-authored concepts have been transcribed into `mathematicsSeedAssets.ts`'s siblings than
+previously tracked. Not this session's to fix (that's Curriculum Completion Program /
+content-authoring territory, same as the CS/biology asset-contract gaps above) — recorded because
+the column that surfaced it is new.
+
+**What this means for a future subject, concretely**: drop `docs/{subject}/kg/graph.json` in,
+register it (the one remaining genuinely manual step — `knowledgeGraph.ts`'s own header still
+says "add one entry to SUBJECT_ADAPTERS + one entry to ID_PREFIX_TO_SUBJECT... no new adapter
+code is required"), and from that point on: forgetting the registration step fails CI immediately
+via `curriculumKgRegistration.test.ts`; authoring a seed module and wiring it into only one of the
+two writers fails CI immediately via `seedCorpusCoverageRatchet.test.ts`; and the subject is
+visible in the asset-contract readiness report from the moment its KG exists, at 0% authored,
+rather than needing to be remembered.
+
+**Deliberately NOT done, and why**: did not add a CI GATE on asset-contract completion — the
+readiness report's own header already states this decision correctly (`masteryReachability.ts`'s
+reasoning, reaffirmed in `TUTOR_REMEDIATION_PLAN.md` §11.10: "§10.2 survives only as a REPORT,
+never a gate"), and this session found no new evidence to reopen that call. Did not touch the
+registration step's manual nature (adding automatic subject discovery there would be a real
+architecture change, not a hardening fix, and no defect currently motivates it beyond what the
+registration test already catches).
+
+Targeted validation before commit: `npx tsc --noEmit` clean; `npm run build` clean (middleware
+79.7 kB, unchanged); the two pre-existing generic-hardening tests plus the new
+`contractAuditSubjectCoverage.test.ts` plus every asset-contract test — 7 files / 557 tests, all
+passing (this file's own asset-contract commits above ran the same targeted set each time). The
+full suite was started separately and had not finished at commit time; this entry does not state
+a full-suite count it has not verified — a later entry will record it if the full run surfaces
+anything the targeted set did not. No curriculum/KG/Educational Brain content touched by this
+entry's own change — only `scripts/assets/contract-audit.ts` and the new test.
