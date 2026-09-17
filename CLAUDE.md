@@ -7431,28 +7431,87 @@ the picture:
   higher up in this file) was later found to NOT actually work at full sample (p=0.80, not the
   interim p=0.11 that looked promising) — a third, unidentified channel is producing repeats.
 
-**A fresh, bounded live-QA run was started this session, using `scripts/qa/strugglingLearnerHarness.ts`
-against the REAL deployed app on the real account (`suaibamr@gmail.com`, per explicit owner
-instruction earlier this session — credentials supplied live in chat, never written to any file;
-ask the owner again if you need them, do not search for them in this repo or in scrollback)**:
+### CRITICAL — `suaibamr@gmail.com` is now SATURATED for physics; do not use it for physics
+### mastery-reachability QA without filtering already-completed concepts (2026-09-17)
+
+A live-QA run (`strugglingLearnerHarness.ts`, 4 physics concepts, `--seed=42`) showed **0/4
+sessions reaching verified mastery** and, per-turn, **`checkCorrect`/`practiceCorrect` never
+incrementing across ~16 answered MCQ turns even on turns where the harness's sent text was a
+byte-verbatim match to what reads as the objectively correct option** (verified by reading
+`resolveMcqChoice`'s rule 0 — exact-string match, runs first, correctly handles this case; no
+grading-pipeline bug was found by code inspection). This looked, at first, like a serious new
+regression.
+
+**It was not. Root-caused via direct production DB query (Supabase MCP, project
+`ywakxiqbevfuxsiwewnw`), not guessed:**
+```sql
+select "subjectSlug", count(*) filter (where status='COMPLETED') as completed, count(*) as total
+from topic_progress where "userId" = '<suaibamr's id>' group by "subjectSlug";
+-- physics: 237 completed / 238 total. chemistry: 22/53. english: 13/38. mathematics: 1/2.
 ```
-QA_EMAIL=<ask the owner> QA_PASSWORD=<ask the owner> npx tsx scripts/qa/strugglingLearnerHarness.ts \
-  physics --difficulty=intermediate,advanced --count=4 --seed=42 \
-  --out=<some scratch dir>
-```
-**Status at the point this entry was written: STILL RUNNING, not yet examined.** A background
-task (this session's own) was mid-flight when this handover was written specifically so a
-follow-up session wouldn't be left with a stale "in progress, trust me" note. Whoever picks this
-up: check whether that specific background process is still yours to wait on (it almost certainly
-is not, if you're a different session/container) — just re-run the command above fresh with a
-small `--count` (4-6) rather than trying to recover someone else's background job. Read the
-resulting `summary.json` + a couple of full transcripts by hand (per the script's own header: "the
-subjective 'how good was this teaching experience' rating still needs a real read of the
-transcript, because no regex substitutes for that judgment") before deciding what to fix. Do the
-same for chemistry once physics is examined. Do NOT run a large sweep (`--count` in the dozens) —
-this project's own documented history is that a 60-concept sweep took ~7 hours and has previously
-hit provider-capacity rate limits; keep it small and bounded, same discipline as every other batch
-in this file.
+**Physics is 237 of 238 concepts COMPLETED on this account already** — from this project's own
+extensive multi-week Physics Teachability Program / ceiling-breaking / I1-I4 investigation
+history, all run on this same real account. Only `phys.meas.vector-products` (IN_PROGRESS) is not
+COMPLETED; **zero physics concepts are genuinely untouched.** All 4 concepts my run happened to
+sample were already COMPLETED weeks ago (2026-08-19 through 2026-09-07). Re-teaching an
+already-COMPLETED concept goes through review/revisit behavior this harness was never designed to
+measure (it assumes first-contact teaching), and the harness's own existing SESSION ISOLATION
+guard (see its header) only detects mid-run CONCEPT DRIFT — it has no guard against sampling an
+already-mastered concept in the first place. **The 0/4 result is a QA-methodology confound
+(saturated account), not a new grading or teaching defect.** Do not chase this as a product bug.
+
+**Chemistry (22/53 touched) and English (13/38 touched) are still mostly fresh** on this account —
+most concepts in both subjects have never been taught to it. Physics defect-hunting on this
+account is effectively a dead end now; chemistry/english defect-hunting can still proceed on it
+for a while, but will saturate too if runs keep accumulating COMPLETED rows.
+
+**For any future physics (or, eventually, chemistry/english) fresh-teach QA**, either:
+1. Query `topic_progress` for the account first (as above) and pick concepts NOT already
+   COMPLETED, or
+2. Use a disposable QA account instead (`scripts/qa/liveAccount.ts`'s established
+   register→drive→delete lifecycle, `qa-*@mytutor-qa.invalid`) — the mechanism this codebase
+   already built for exactly this purpose, used throughout the original Physics Teachability
+   Program and struggling-learner harness work before this session.
+Given physics has essentially 0 fresh concepts left on the real account, **option 2 is the only
+viable path for further physics mastery-reachability QA** unless the owner wants topic_progress
+rows reset (a destructive action on the owner's own account data — ask first, don't do it
+unprompted).
+
+### Batch — English `eng.composition.*` ADULT-band gap, first 8 of 16 (2026-09-17)
+
+Closed 8 of the 99 short (concept, ADULT-band) pairs using the established, proven technique
+(`englishAdultBandBatch1.ts`'s `adultLadder` helper: `mcq`(FOUNDATIONAL) +
+`misconception_probe`(DEVELOPING) + `mcq`(PROFICIENT), each distractor's `misconceptionId` reusing
+one of the concept's own two already-registered Blueprint misconceptions, fresh adult-register
+worked examples never duplicating the Blueprint's own Conflict-Evidence examples). New file:
+`englishAdultBandBatch13.ts` — `eng.composition.academic-writing-conventions`,
+`argumentation-basics`, `audience-and-purpose`, `claim-evidence-reasoning`,
+`comparative-essay-writing`, `counterargument-and-rebuttal`, `editing-for-style`,
+`figurative-language-in-composition` (24 new probes). Wired into BOTH writers
+(`src/instrumentation.ts`'s bootstrap `ALL_PROBES` and `scripts/brain/seed-knowledge-assets.ts`'s
+`ALL_PROBES`) — `seedCorpusCoverageRatchet.test.ts` passes, confirming neither writer is missing
+it. None of these 8 concepts held any prior ADULT probe, so this is a fresh singleton-to-ladder
+promotion with zero P-10 collision risk (confirmed: `--dry-run` shows 0 skipped/0 revived across
+the whole 7,625-item corpus).
+
+English: **313/412 → 321/412 at contract, 99 → 91 short.** Remaining 91: the other 8
+`eng.composition.*` concepts (logical-fallacies, persuasive-techniques,
+plagiarism-and-citation-ethics, research-paper-writing, rhetorical-analysis, rhetorical-appeals,
+rhetorical-devices, style-voice-and-tone) plus `eng.communication.*` (11),
+`eng.linguistics.*` (16), `eng.literature.*` (16 advanced), `eng.phonetics.*` (12 advanced),
+`eng.vocab.*` (9 advanced), `eng.writing.*` (9 advanced), `eng.reading.reading-across-genres`,
+`eng.speaking.debate-skills`/`presentation-skills`, and 2 EARLY-band phonics pairs
+(`letter-sound-correspondence`/`phonemic-awareness` — these already carry `openRecall=1`, i.e.
+some non-closed-choice content; per `englishAdultBandBatch1.ts`'s own established precedent these
+two are voice-required and deliberately excluded from closed-choice probing, so they may not be
+closable the same way — check `educational-brain/first-lesson/07-subject-adaptations.md` §1
+before touching them).
+
+Validated: `npx tsc --noEmit` clean; `contractAuditShapeDetection`/`contractAuditSubjectCoverage`/
+`seedCorpusCoverageRatchet`/`curriculumKgRegistration` (23 tests) green;
+`contract-audit.ts --subject english` confirms 321/412; `seed-knowledge-assets.ts --draft
+--dry-run` shows 7,625 would-create, 0 skipped, 0 revived (no duplicate canonicalSlugs anywhere in
+the corpus); full suite run separately, see commit message for the confirmed count.
 
 ### Discipline reminder for whoever continues this
 Same as every other campaign in this file: small bounded batches, `npx tsc --noEmit` clean +
@@ -7460,4 +7519,6 @@ targeted tests + full suite + `npm run build` clean before every commit, commit+
 separately, update THIS section (or a fresh dated one) rather than leaving stale status here.
 Never write the real account's password to any file — treat it exactly like the four-primitives
 campaign's OWNER OVERRIDE precedent: a live, in-chat credential, used only as an ephemeral env var
-at invocation time.
+at invocation time. **Re-verify `topic_progress` completion state on whichever account you use
+before any fresh-teach QA run** — this file's own account-saturation finding above is the reason
+why.
