@@ -351,6 +351,37 @@ one file update the user asked for. The continuation prompt handed to the owner 
 conversation required the next session to read this file's RECONCILED section and get a fresh,
 explicit go-ahead before treating "CURRENT STATE" below as a queue to keep draining.
 
+### Batch 7, follow-up run — 2026-09-17, same day, owner-confirmed via AskUserQuestion
+
+The owner was asked (in chat, not inferred) which item to work on next, given the RECONCILED
+finding above; chose **"A — larger physics numeric-probe run"** — Batch 7's own named next step.
+Widened `scripts/qa/physicsNumericProbe.ts` (commit `e01932f0`): 3 arithmetic-heavy domains
+instead of 1 (`phys.mech.*`/`phys.em.*`/`phys.therm.*`, 2 lessons each) and 5 eliciting turns
+instead of 3 (2 new ones explicitly asking the tutor to check/redo its own arithmetic) — 36
+replies, ~4.5x the first run's sample. Ran against the deployed app on a disposable QA account,
+deleted and deletion-verified afterward (`Deleted: true, re-login blocked: true` — nothing left in
+production from this run).
+
+**Result: 4/36 replies (11%) contained a checkable arithmetic identity — `mech 2/12`, `em 0/12`,
+`therm 2/12` — and every operation in all 4 was hand-verified correct.** Combined with the first
+run: 5/44 checkable replies, 0 incorrect identities, across two runs and two domains that produced
+signal at all (mech, therm) plus one (em) that produced none even under the most explicit
+elicitation. Full detail and the exact verified arithmetic:
+`DETERMINISTIC_PHYSICS_VERIFIER_DESIGN.md` §6.6, "Third run" paragraph.
+
+**Verdict unchanged, now better-supported: do not build a numeric-arithmetic checker.** This is
+the honest "still too rare to build against" outcome the prior Batch 7 entry named as a legitimate
+possible result — it is not a null result, it is the actual finding. The Physics Verifier's
+numeric check should stay unbuilt until a real learner-reported arithmetic error gives it
+something to design against (the same way `fieldLineSignGuard`/`visionDirectionGuard` were each
+built from one measured incident, never a corpus sweep). **Do not re-run this measurement again
+without a new reason** — a bigger sample of the same kind will very likely just confirm the same
+rate again, which is not new information.
+
+Zero product code touched by the run itself (the script is QA tooling, not shipped code). `tsc
+--noEmit` clean on the script change. No enforcement, no behavior change, no schema, no curriculum
+content touched.
+
 ---
 
 ## CORRECTED, 2026-09-16 — "PROGRAMME CLOSED" below OVERCLAIMED (superseded by the authorization

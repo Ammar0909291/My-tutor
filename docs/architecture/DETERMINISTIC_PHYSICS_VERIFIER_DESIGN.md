@@ -951,6 +951,39 @@ future session to re-run with a larger, harder-elicitation sample (more concepts
 "walk me through the math" turns, deliberately probing for an ERROR rather than accepting the
 first correct example) before any design work is justified.
 
+**Third run, 2026-09-17, same day, widened sample — the named follow-up above, executed.** Widened
+both axes: 3 arithmetic-heavy domains instead of 1 (`phys.mech.*`, `phys.em.*`, `phys.therm.*` — 2
+lessons each, 6 lessons total) and 5 eliciting turns instead of 3 (added two that explicitly ask
+the tutor to CHECK its own arithmetic — "walk me through every step... and check it carefully for
+any mistakes"; "please verify that arithmetic is correct — redo the calculation") — 36 replies
+total, ~4.5x the prior sample. Disposable QA account created, driven, deleted and deletion verified
+(`Deleted: true, re-login blocked: true`).
+
+**Result: 4/36 replies contained a checkable identity (11%, matching the first run's 12.5% rate),
+spread `phys.mech. 2/12`, `phys.em. 0/12`, `phys.therm. 2/12`.** Every individual arithmetic
+operation across all 4 replies was hand-verified against the logged text and is CORRECT:
+`0 m − 0 m = 0 m` (displacement); `70 + 273 = 343`, `10 + 273 = 283`, `343 + 283 = 626` (repeated
+identically across two turns of the same temperature-mixing example, once under the plain
+"calculate it" elicitation and once under the new explicit "verify... redo the calculation"
+elicitation — the more adversarial prompt did not surface an error, and did not even change the
+tutor's answer, it re-derived the identical correct numbers). `phys.em.*` produced zero checkable
+identities in either lesson at either elicitation strength — this domain's worked examples in the
+sampled lessons (charge, EMF) apparently didn't reach for a plug-in-numbers arithmetic identity
+even when explicitly asked, which is itself informative: the signal is not just rare, it is
+domain-uneven.
+
+**Combined across both runs: 5 checkable replies / 44 total probed replies, 0 incorrect
+identities found, across 2 domains that produced any signal at all (mech, therm) and one
+(em) that produced none.** This is the honest outcome Batch 7's own handover note predicted as a
+real, acceptable result — "still too rare to build against" — now on a meaningfully larger,
+harder-elicitation sample rather than one lucky/unlucky example. **Verdict unchanged and now
+better-supported: do not build a numeric-arithmetic checker.** There is no measured defect to
+design against, on either sample. A future session should not keep re-running this measurement
+expecting a different outcome without a new reason to believe the rate or domain spread would
+shift — e.g. a real learner report of an arithmetic mistake, which would immediately justify
+building a targeted check the way `fieldLineSignGuard`/`visionDirectionGuard` (S7.5) were each
+built from one measured incident, not from a corpus sweep.
+
 ---
 
 ## 7. The steel man — and it is strong
