@@ -1206,6 +1206,12 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     question: string
     options: string[]
     askedAt: number
+    // Typed Turn Contract, I2 (render receipt) — Batch 1, SHADOW ONLY. The
+    // server's non-secret content hash for THIS question, echoed back as
+    // `renderedMcqId` on the next send so the server can observe (not yet
+    // enforce) whether a grade corresponds to a question actually shown.
+    // Absent only for an older/unaffected response shape.
+    renderId: string | null
   } | null>(null)
   // QUICK CHECK WINDOW (UI ONLY). Minimize / maximize / close are a PURELY
   // VISUAL presentation mode for the Quick Check panel. They never touch
@@ -2050,11 +2056,21 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     // call's view of "current lesson" is stale and must not overwrite the
     // authoritative one.
     const dispatchGeneration = progressGenerationRef.current
+    // Typed Turn Contract, I10 (idempotency key) — Batch 4, OBSERVATION ONLY.
+    // Generated ONCE per logical send and reused across every retry attempt
+    // of THIS call below, so the server can tell (once it acts on this —
+    // not yet, see route.ts's own note) that two HTTP requests are the SAME
+    // learner turn. A genuinely NEW call to sendMessage always gets its own
+    // key. Guarded the same way tabIdentity.ts is, since this runs in every
+    // browser this app supports without exception being the concern.
+    const idempotencyKey = typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function'
+      ? crypto.randomUUID()
+      : undefined
     if (showInUI) setMessages((p) => [...p, { id: `u-${Date.now()}`, role: 'user', content: text, ts: Date.now() }])
     const aid = `a-${Date.now()}`
     setMessages((p) => [...p, { id: aid, role: 'assistant', content: '', ts: Date.now(), streaming: true }])
     let res: Response | undefined
-    let data: { success?: boolean; text?: string; provider?: 'yandex'|'groq'|'fallback'; llmCallCount?: number; visual?: string; visualSpec?: unknown; sceneSpec?: unknown; learnerLevel?: string; dynamicVisualizationCode?: unknown; inlinePractice?: unknown; hint?: unknown; error?: any; lessonOrder?: number; completedLessons?: number[]; mastery?: { verified?: boolean; gatePending?: boolean; completionSuppressed?: boolean; phase?: string; checkCorrect?: number; practiceCorrect?: number }; mcq?: { question?: string; options?: string[] }; lessonComplete?: { complete?: boolean; lessonTitle?: string | null; durationSeconds?: number | null; mastered?: string[]; needsReview?: string[]; nextLessonOrder?: number | null; fullyMastered?: boolean } } = {}
+    let data: { success?: boolean; text?: string; provider?: 'yandex'|'groq'|'fallback'; llmCallCount?: number; visual?: string; visualSpec?: unknown; sceneSpec?: unknown; learnerLevel?: string; dynamicVisualizationCode?: unknown; inlinePractice?: unknown; hint?: unknown; error?: any; lessonOrder?: number; completedLessons?: number[]; mastery?: { verified?: boolean; gatePending?: boolean; completionSuppressed?: boolean; phase?: string; checkCorrect?: number; practiceCorrect?: number }; mcq?: { question?: string; options?: string[]; renderId?: string }; lessonComplete?: { complete?: boolean; lessonTitle?: string | null; durationSeconds?: number | null; mastered?: string[]; needsReview?: string[]; nextLessonOrder?: number | null; fullyMastered?: boolean } } = {}
     try {
       // P0 (duplicate AI responses — proven root cause): retry ONLY a thrown/
       // aborted fetch (a dropped connection, or fetchWithTimeout's own abort
@@ -2089,6 +2105,15 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
               // long collapsed explanation was ever expanded — unread text
               // must never be assumed read. undefined = nothing collapsed.
               lastExplanationRead: lastExplanationReadRef.current,
+              // Typed Turn Contract, I2 (render receipt) — Batch 1, SHADOW
+              // ONLY. What THIS component actually has on screen right now —
+              // null when nothing is pending. The server only logs whether
+              // this agrees with what it believes is pending; nothing here
+              // affects grading yet. See renderReceipt.ts's own header.
+              renderedMcqId: activeMcq?.renderId ?? null,
+              // Typed Turn Contract, I10 — Batch 4, OBSERVATION ONLY. The
+              // SAME key on every retry attempt of this one logical send.
+              idempotencyKey,
             }),
             // SEV-1 (2026-08-02). This was 30_000, BELOW the server's own
             // worst-case turn. When Gemini timed out, the server was still
@@ -2166,6 +2191,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
           question: rawMcq.question,
           options: rawMcq.options as string[],
           askedAt: Date.now(),
+          renderId: typeof rawMcq.renderId === 'string' ? rawMcq.renderId : null,
         })
       } else {
         setActiveMcq(null)

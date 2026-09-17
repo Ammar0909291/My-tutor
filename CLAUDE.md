@@ -6280,6 +6280,46 @@ ADR; everything in it that would become code stays G1/G2-gated.
     requirement for Item 4), not a continuation of the prior campaign, and should not be
     defaulted into by a future session picking this up cold.
 
+## OWNER OVERRIDE — resume all four primitives (2026-09-16, direct chat instruction: "you have to
+## complete all 4 primitives")
+- This is the explicit, in-conversation owner authorization the "READ THIS FIRST" deferral note
+  and TUTOR_REMEDIATION_PLAN.md §11.10 both required before resuming this work. It supersedes the
+  deferral for these four items specifically — it does not reopen any other paused campaign.
+- Scope is V2's real spec (`PHYSICS_TEACHER_MIGRATION_ARCHITECTURE.md` §4), not the narrower
+  sub-project self-scoping the earlier "PROGRAMME CLOSED" entry mistakenly treated as done. Per
+  the correction below: Turn Contract has 4 of 10 invariants unbuilt (I2, I3, I8, I10); Physics
+  Verifier has attempted 1 of 6 checks (dimensional, shadow-only); Durable Learner State has a
+  third, unevaluated design (evidence-spine + projection via `capabilityModel.ts`'s pattern);
+  Learner-Move Interpreter is genuinely done.
+- Treated as a standing, multi-session campaign (same discipline as the Mathematics EB campaign
+  above): work in small, shadow-first, reversible batches; commit/push each batch; update this
+  section tersely per batch with what shipped and what's next; re-verify state fresh each session
+  rather than trusting a stale count. Full per-batch detail belongs in the per-primitive design
+  docs (`TYPED_TURN_CONTRACT_DESIGN.md`, `DETERMINISTIC_PHYSICS_VERIFIER_DESIGN.md`,
+  `DURABLE_LEARNER_STATE_AUDIT.md`, `LEARNER_MOVE_INTERPRETER_DESIGN.md`), not sprawled here.
+- **Batch 1 start**: Turn Contract, I2 (render receipt) — chosen first because it closes a
+  previously-incident-causing defect class ("the seventh defect": server credits a grade against
+  a question the client never actually rendered) and is the most fully specified of the four
+  remaining invariants.
+
+## SECOND CORRECTION — the handoff prompt this section produced was itself wrong (2026-09-16)
+- **The correction below is factually accurate (V2's real scope) but its "next step" framing was
+  used, later the same day, to hand another session a prompt to resume Turn Contract work
+  (I2/I3/I8/I10).** That directly violated this file's own "READ THIS FIRST" note at the top —
+  the four primitives are EXPLICITLY DEFERRED, and that note names a real 2026-09-16 incident of
+  sessions resuming exactly this work cold. The prompt was a live repeat of the incident.
+- **It was also moot.** `docs/architecture/TUTOR_REMEDIATION_PLAN.md` §11.10 — the actual
+  owner-adopted plan, read directly rather than assumed — narrows ALL adopted work to §10.1 (one
+  corpus, one writer) → §10.2 (a readiness report, never a gate) → **STOP, get a learner.** Both
+  are already merged to `main` (`8bcd8407` wires the stranded modules into the bootstrap,
+  `16be9ab8` adds the coverage ratchet, `d728b372` is the report) — the plan already reached its
+  own stop condition. **There is currently no queued next item under the adopted plan, and
+  inventing one (Turn Contract included) is itself out of scope per §11.10.**
+- Read this section, not just the one below, before ever handing off "what's next" from this
+  file's four-primitives history — the correction below explains what V2 actually scoped; it does
+  NOT authorize resuming that scope, which stays deferred until the owner asks for it or real
+  learner traffic surfaces a concrete need.
+
 ## CORRECTION — the "PROGRAMME CLOSED" entry above OVERCLAIMED, 2026-09-16, same day
 - **The entry above was wrong to say "all four are DONE."** It was written from
   `FOUR_PRIMITIVES_STATUS.md` and two narrower sub-project design docs

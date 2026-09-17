@@ -114,6 +114,21 @@ const schema = z.object({
   // under a learner who is actively using it. It names no session, grants no
   // access, and is ignored entirely when absent.
   tabId: z.string().min(1).max(64).optional(),
+  // Typed Turn Contract, I2 (render receipt) — Batch 1, SHADOW ONLY. The
+  // client's claim of which question (by content hash, see
+  // `deriveRenderId`) it actually rendered before sending this turn — null
+  // when nothing was on screen, absent for an unupgraded/non-browser
+  // caller. Read ONLY by `checkRenderReceipt` for a log line; nothing here
+  // affects grading yet. See `src/lib/teaching/renderReceipt.ts`.
+  renderedMcqId: z.string().max(200).nullable().optional(),
+  // Typed Turn Contract, I10 (idempotency key) — Batch 4, OBSERVATION ONLY.
+  // A stable id the client generates once per logical send and reuses across
+  // its own internal retries of a dropped/aborted request — so the SAME
+  // idempotencyKey means "the same learner turn," even across separate HTTP
+  // requests. Not yet used to prevent anything; see the ingress check below
+  // for why (no schema change yet, heuristic content-match observation
+  // only). Optional and additive — older clients simply never send it.
+  idempotencyKey: z.string().max(100).optional(),
 })
 
 /**
@@ -207,7 +222,7 @@ async function handleChatTurn(req: Request, deadline: RouteDeadline): Promise<Re
 
   try {
     const body = await req.json()
-    const { sessionId, message, lastExplanationRead, voiceSignal, ephemeral, tabId } = schema.parse(body)
+    const { sessionId, message, lastExplanationRead, voiceSignal, ephemeral, tabId, renderedMcqId, idempotencyKey } = schema.parse(body)
 
     // Wave 0 Step 2 (Evidence Architecture §2, ASSESSMENT contract):
     // learner response latency is measured server-side from message
@@ -235,6 +250,45 @@ async function handleChatTurn(req: Request, deadline: RouteDeadline): Promise<Re
 
     const profile = await boundedDbCall(deadline, 'chat-profile-load',
       () => prisma.profile.findUnique({ where: { userId } }), { retries: 1 })
+
+    // Typed Turn Contract, I10 (idempotency key) — Batch 4, OBSERVATION ONLY.
+    //
+    // V2's own text: "idempotent on `idempotency_key`... closes double-
+    // grading on retry or second tab." The genuine gap this closes: the
+    // user-message write above (and this whole handler) has NO idempotency
+    // key — its own comment already says so ("a timeout that actually
+    // committed would produce the learner's message twice"). A client retry
+    // of a request whose SERVER SIDE actually completed (dropped response,
+    // not a dropped connection) currently produces a second, independent
+    // full turn — a second Message row, and if a probe was pending, a
+    // second grade. This is the "proven cause of the observed duplicate-
+    // explanation bug" LessonScreen.tsx's own retry-loop comment names.
+    //
+    // A REAL fix needs the key PERSISTED (a schema column with a unique
+    // constraint) so it survives across the separate HTTP requests a retry
+    // produces — that is a schema migration, not a safe shadow-batch
+    // change, and is NOT attempted here. This is a HEURISTIC observation
+    // using data already loaded (`learnSession.messages`, no new query):
+    // does the RECENT history already contain the identical content from
+    // this same learner within a window a genuine retry would fall inside?
+    // Content-match is imperfect (a learner genuinely re-typing the same
+    // short reply, e.g. "yes", twice would false-positive) — that is
+    // exactly why the real fix needs a KEY, not content matching. Logged
+    // only; nothing here blocks the write or changes any behaviour.
+    if (!ephemeral) {
+      const DUPLICATE_OBSERVATION_WINDOW_MS = 30_000
+      const possibleDuplicate = learnSession.messages.find((m) =>
+        m.role === MessageRole.USER
+        && m.content === message
+        && turnReceivedAt - new Date(m.createdAt).getTime() < DUPLICATE_OBSERVATION_WINDOW_MS,
+      )
+      if (possibleDuplicate) {
+        console.log('[learn/chat] POSSIBLE_DUPLICATE_TURN_EVENT=' + JSON.stringify({
+          idempotencyKey: idempotencyKey ?? null,
+          deltaMs: turnReceivedAt - new Date(possibleDuplicate.createdAt).getTime(),
+        }))
+      }
+    }
 
     // Only a real learner utterance is persisted. An ephemeral instruction is
     // still sent to the model (it is what triggers the opening) but is never
@@ -2479,6 +2533,21 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // "did the learner just answer a question?" is needed BEFORE the
         // Explanation Memory serve decision, hundreds of lines earlier than
         // where the grade is folded into evidence.
+        // Typed Turn Contract, I2 (render receipt) — Batch 1, SHADOW ONLY.
+        // Logged once per turn with a pending probe, BEFORE grading runs, so
+        // the observation is independent of whatever `gradeMcqAnswer` decides.
+        // Nothing here reads the result — see `renderReceipt.ts`'s own header
+        // for why enforcement is deliberately not wired yet.
+        if (pendingMcqHoisted) {
+          const { checkRenderReceipt } = await import('@/lib/teaching/renderReceipt')
+          const receipt = checkRenderReceipt(pendingMcqHoisted, renderedMcqId)
+          if (!receipt.consistent) {
+            console.log('[learn/chat] RENDER_RECEIPT_EVENT=' + JSON.stringify({
+              reason: receipt.reason,
+              assetId: pendingMcqHoisted.assetId ?? null,
+            }))
+          }
+        }
         if (pendingMcqHoisted) {
           const { gradeMcqAnswer, isVerbatimPendingOption } = await import('@/lib/teaching/mcq')
           const { isBareAcknowledgement } = await import('@/lib/teaching/masteryGate')
@@ -6372,6 +6441,33 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       const { mcqToServe } = await import('@/lib/teaching/mcq')
       const resolvedQuestionServed = mcqToServe(mcqHoisted, pendingMcqHoisted, mcqGradeHoisted)
       const servedProbeThisTurn = resolvedQuestionServed
+      // Typed Turn Contract, I3 — Batch 2, OBSERVATION ONLY.
+      //
+      // V2's own text: "every graded artifact comes from the corpus by id
+      // with a stored key; prose may never introduce an option list or
+      // question." Read literally this forbids the model's own `<!--MCQ-->`
+      // fallback (`mcqHoisted = gateMcqHoisted ?? mcqParse.mcq` above)
+      // entirely — but that fallback is a DELIBERATE, already-shipped product
+      // decision (`masteryReachability.ts`: "teaching without certification
+      // is a degraded outcome; teaching not at all is a failure"), and the
+      // mastery-SAFETY half of I3 is already closed independently —
+      // `unauthoredKeyGrades` (conversationState.ts) counts a model-invented
+      // key without ever crediting it toward mastery, proved over 49,152
+      // states (masteryCounterInvariant.test.ts).
+      //
+      // Enforcing I3 as written would remove assessment outright for every
+      // concept below asset-contract coverage (biology/CS at 0%, parts of
+      // english/math) — a real behaviour change that conflicts with an
+      // existing deliberate decision, not a safe shadow-batch change. This
+      // is therefore observation only: how often a served question actually
+      // has no authored identity, so a future session/owner can decide
+      // whether and how to narrow it, with real prevalence data rather than
+      // a guess. Nothing here changes what is served or graded.
+      if (servedProbeThisTurn && !servedProbeThisTurn.assetId) {
+        console.log('[learn/chat] MODEL_INVENTED_PROBE_EVENT=' + JSON.stringify({
+          conceptId: resolvedConceptId ?? null,
+        }))
+      }
       if (!text.trim() && servedProbeThisTurn) {
         // Not degraded — introduce the question the learner can already see.
         // Deterministic, claims nothing, and leaves the MCQ to carry the turn.
@@ -9471,6 +9567,33 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
 
       const visualFired = Boolean(detectedVisualSpec || detectedSceneSpec || responseVisual)
 
+      // Typed Turn Contract, I8 — Batch 3, OBSERVATION ONLY.
+      //
+      // V2's own text: "an explicit learner REQUEST is satisfied or
+      // explicitly declined with a reason, never silently ignored." No
+      // deterministic check exists for this today — `helpRequestKind` only
+      // reaches the CUE/prompt layer (advisory), and
+      // `learnerRequestHonoured` a few hundred lines below this file is a
+      // DIFFERENTLY-SCOPED field: it feeds `turnProgress.ts`'s liveness
+      // evidence (I9, already closed) and means "a request occurred this
+      // turn," never "the request was satisfied" — do not confuse the two
+      // or reuse that field for this purpose.
+      //
+      // `visualFired` is the one case with a genuinely deterministic
+      // satisfaction signal already computed at this exact point: for a
+      // 'diagram' request, `reattachOnExplicitRequest` just above already
+      // makes a HELD figure re-deliver on an explicit ask, so `visualFired`
+      // is a real answer to "did this turn actually carry a figure." The
+      // other two request kinds (`explain_differently`, `real_life_example`)
+      // have no equivalent deterministic signal without content analysis —
+      // logged for denominator only, never claimed as verified.
+      if (resolvedLearnerRequest !== null) {
+        console.log('[learn/chat] LEARNER_REQUEST_EVENT=' + JSON.stringify({
+          kind: resolvedLearnerRequest,
+          ...(resolvedLearnerRequest === 'diagram' ? { figureDelivered: visualFired } : {}),
+        }))
+      }
+
       // ── A TUTOR MAY NOT POINT AT A FIGURE THAT IS NOT THERE ──────────────
       //
       // Placed here because `visualFired` is the first point at which the
@@ -11518,6 +11641,24 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 readProgressionMetrics(fresh.progressionMetrics), facts,
               ),
             }))
+            // Durable Learner State, third design (V2 §4.4) — Batch 1,
+            // SHADOW-COMPUTE ONLY, per `DURABLE_LEARNER_STATE_AUDIT.md` §6's
+            // own Batch 1 spec ("Compute the record at the existing persist
+            // site; log it, write nothing"). Reuses `stateAfterForMetrics`
+            // above, computed once for this block's own telemetry purpose —
+            // no second fold, no new read. NO DB WRITE: the 2026-08-31
+            // egress incident is the standing reason a new per-turn table
+            // is never the answer to "measure this" first. Nothing here
+            // changes what is persisted, graded, or served —
+            // `computeConceptMasteryRecord` is pure and its only consumer
+            // is this log line.
+            if (stateAfterForMetrics?.conceptId) {
+              const { computeConceptMasteryRecord } = await import('@/lib/teaching/conceptMasteryRecord')
+              const record = computeConceptMasteryRecord(
+                stateAfterForMetrics, stateAfterForMetrics.conceptId, new Date(),
+              )
+              console.log('[learn/chat] LEARNER_STATE=' + JSON.stringify(record))
+            }
           } catch { /* telemetry never takes a turn down */ }
 
           // ADR 15: build the RRM snapshot delta (append new entry to log).

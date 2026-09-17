@@ -908,6 +908,49 @@ programme's own standing rule.
 Full transcripts and raw `PHYSICS_DIM` lines from both live windows captured to their respective
 sessions' scratchpads, not committed (same convention as §6.2/§6.4).
 
+### 6.6 Numeric/arithmetic-consistency — MEASUREMENT PASS, before any design, 2026-09-17
+
+§5.7 defers "numeric/order-of-magnitude" as needing an authored per-equation tolerance field
+(content work — comparing a stated result against a KNOWN-correct physical value needs authored
+expected ranges, which this pass explicitly does not fabricate). But a narrower, tolerance-free
+check is possible: **arithmetic self-consistency** — when the tutor states a plain arithmetic
+identity in digits ("50 km + 20 km = 70 km"), does it actually compute correctly? This needs zero
+authored physics knowledge, only checking that the model's own numbers add up.
+
+Before designing this, asked the dimensional check's own question first: does this pattern ever
+occur in real generated prose? `scripts/qa/physicsNumericProbe.ts` (disposable QA account,
+`phys.mech.displacement` + `phys.mech.angular-kinematics`, 4 turns each including 3 turns
+explicitly eliciting a worked numeric example).
+
+**First run, WRONG regex, false negative**: looked for a symbolic `letter = number` assignment
+pattern (`F = 10 N`). 0/8 replies matched — but reading T0's raw text showed a genuine identity in
+prose form the regex could not see: `"3 m + 2 m = 5 m"`, no variable letters at all, just digits
+and units joined by an operator. **The null result was a detector artifact, not an absence of
+signal** — the same trap this document's own §6.1 already fell into once and corrected.
+
+**Second run, corrected regex** (`digit unit (+|-) digit unit = digit unit`, no letter-variable
+assumed): **1 of 8 replies contained a checkable identity**, and only on the most explicit turn
+("can you calculate it step by step with numbers so i can check the arithmetic"), not on milder
+requests or ordinary teaching text:
+
+> "Add to the previous distance: 50 km + 20 km = 70 km total distance... Add to the distance:
+> 70 km + 30 km = 100 km total distance."
+
+Both identities in this one sample are CORRECT (50+20=70, 70+30=100) — **zero evidence yet of the
+model ever getting this wrong**, so this measurement establishes only that the pattern exists and
+is rare, not that a checker would ever find anything worth catching.
+
+**Verdict, matching this design's own discipline exactly: a real signal exists (unlike the total
+absence a symbolic-assignment check would have found), but it is rare (1/8, and only under an
+explicit "step by step, check the arithmetic" prompt) and unobserved to ever be wrong.** Building a
+checker now would be building against one correct example, which is not evidence a checker would
+ever fire usefully. This is recorded as a genuine **Batch 0 finding** (the "does this occur at
+all" pre-check before even Batch 1's corpus-manufacturing step) — NOT a design, NOT code, NOT
+wired anywhere. `scripts/qa/physicsNumericProbe.ts` is kept as a reusable measurement tool for a
+future session to re-run with a larger, harder-elicitation sample (more concepts, more explicit
+"walk me through the math" turns, deliberately probing for an ERROR rather than accepting the
+first correct example) before any design work is justified.
+
 ---
 
 ## 7. The steel man — and it is strong
