@@ -7377,3 +7377,84 @@ passing. **Full suite confirmed green after commit**: 699 files / 14,457 passed 
 regressions from either this change or the three preceding CS asset-contract batches. No
 curriculum/KG/Educational Brain content touched by this entry's own change — only
 `scripts/assets/contract-audit.ts` and the new test.
+
+## HANDOVER — "fix physics/english/chemistry" campaign (2026-09-17, session in progress)
+
+**Read this section FIRST if picking this campaign up cold.** Owner-scoped, live in-chat
+instruction: "fix physics, english and chemistry, rest work will see later" — biology,
+computer_science, and mathematics content work (the asset-contract probe campaign a few sections
+above, batches `c0c95636`/`c7e40c25`/`d2aeea10`) is explicitly PAUSED, not abandoned. Do not
+resume it without a fresh instruction.
+
+### The one fact that changes everything about this campaign: `contract-audit.ts` was lying about English
+
+Commit `ebf88245` (immediately above, same session). English is at **313/412 (76%) asset-contract
+pairs**, not the 2/412 (0.5%) every prior session — including this one, until this fix — had been
+quoting. The prior number was a bug in the MEASURING TOOL (a name-based content-detection heuristic
+that silently dropped 22 real, authored English batch files), not a true reading of the corpus.
+**Regenerate the number yourself before trusting anything written before this commit**:
+```
+npx tsx scripts/assets/contract-audit.ts --subject english
+```
+The TRUE remaining English gap is 99 pairs (96 of them ADULT band, all zero-probe) — a much
+smaller, more tractable campaign than previously believed, same shape and same proven technique as
+the CS/biology batches above (add one `probeKind: 'true_false'` (or another fresh kind) probe per
+short pair, reusing an existing registered misconceptionId, avoiding the P-10 slot-collision class
+documented in `brainSeedAssets.ts`).
+
+### Current subject state (re-verify with `npx tsx scripts/assets/contract-audit.ts`, don't trust a stale number)
+
+| subject | asset-contract status | what "fix" means here |
+|---|---|---|
+| chemistry | 186/186 (100%) | defect-hunting only — content is complete |
+| physics | 261/261 (100%) | defect-hunting only — content is complete |
+| english | 313/412 (76%), 99 short | BOTH: close the remaining 99-pair gap (content work) AND defect-hunt on the 76% that's already servable |
+| biology, computer_science, mathematics | PAUSED | not this campaign's scope right now |
+
+### Defect-hunting: what's already known, and what's in flight
+
+CLAUDE.md's "Physics + Chemistry ceiling broken" section (2026-08-31, ~2.5 weeks before this
+entry) recorded two defects explicitly measured and **left unfixed at the time** — worth
+re-verifying fresh before assuming they're still accurate, since a few other things (probe depth,
+`answerConfirmation.ts`, `dontKnowCeiling.ts`) shipped in the same period and could have changed
+the picture:
+- **ASCII-art fallback figures**: 18% of physics sessions, 64% of chemistry sessions in that
+  measurement. Naive stripping was tested and found NOT to correlate cleanly with mastery
+  (opposite direction in each subject) — don't re-attempt that specific fix without new evidence.
+- **Content-free hold** (9 of 67 sessions, the whole turn) — flagged as "a content-generation
+  problem, not a text-repair one," i.e. needs the model to actually have something to say, not a
+  prompt patch.
+- **C7** (the "explanation repeats verbatim" criterion) — an earlier fix (`5c1d7c8`, referenced
+  higher up in this file) was later found to NOT actually work at full sample (p=0.80, not the
+  interim p=0.11 that looked promising) — a third, unidentified channel is producing repeats.
+
+**A fresh, bounded live-QA run was started this session, using `scripts/qa/strugglingLearnerHarness.ts`
+against the REAL deployed app on the real account (`suaibamr@gmail.com`, per explicit owner
+instruction earlier this session — credentials supplied live in chat, never written to any file;
+ask the owner again if you need them, do not search for them in this repo or in scrollback)**:
+```
+QA_EMAIL=<ask the owner> QA_PASSWORD=<ask the owner> npx tsx scripts/qa/strugglingLearnerHarness.ts \
+  physics --difficulty=intermediate,advanced --count=4 --seed=42 \
+  --out=<some scratch dir>
+```
+**Status at the point this entry was written: STILL RUNNING, not yet examined.** A background
+task (this session's own) was mid-flight when this handover was written specifically so a
+follow-up session wouldn't be left with a stale "in progress, trust me" note. Whoever picks this
+up: check whether that specific background process is still yours to wait on (it almost certainly
+is not, if you're a different session/container) — just re-run the command above fresh with a
+small `--count` (4-6) rather than trying to recover someone else's background job. Read the
+resulting `summary.json` + a couple of full transcripts by hand (per the script's own header: "the
+subjective 'how good was this teaching experience' rating still needs a real read of the
+transcript, because no regex substitutes for that judgment") before deciding what to fix. Do the
+same for chemistry once physics is examined. Do NOT run a large sweep (`--count` in the dozens) —
+this project's own documented history is that a 60-concept sweep took ~7 hours and has previously
+hit provider-capacity rate limits; keep it small and bounded, same discipline as every other batch
+in this file.
+
+### Discipline reminder for whoever continues this
+Same as every other campaign in this file: small bounded batches, `npx tsc --noEmit` clean +
+targeted tests + full suite + `npm run build` clean before every commit, commit+push each batch
+separately, update THIS section (or a fresh dated one) rather than leaving stale status here.
+Never write the real account's password to any file — treat it exactly like the four-primitives
+campaign's OWNER OVERRIDE precedent: a live, in-chat credential, used only as an ephemeral env var
+at invocation time.
