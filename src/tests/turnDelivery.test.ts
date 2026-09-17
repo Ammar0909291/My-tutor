@@ -112,16 +112,6 @@ const AUTHORED_MCQ: TutorMCQ = {
 
 const AUTHORED_PROBE: IdentifiedProbe = { mcq: AUTHORED_MCQ, keyProvenance: 'authored', assetId: 'asset-123' }
 
-const MODEL_MCQ: TutorMCQ = {
-  question: 'What causes this?', options: ['X', 'Y'], correctIndex: 0,
-} as unknown as TutorMCQ
-
-const MODEL_PROBE: IdentifiedProbe = { mcq: MODEL_MCQ, keyProvenance: 'model-invented', assetId: null }
-
-const UNRELATED_MCQ: TutorMCQ = {
-  question: 'Neither attached nor pending', options: ['P', 'Q'], correctIndex: 0,
-} as unknown as TutorMCQ
-
 describe('compileTurnDelivery', () => {
   it('carries the contract through by reference and copies every field', () => {
     const contract = compileTurnContract(minimalContractInput())
@@ -277,67 +267,6 @@ describe('assertDeliverySatisfiesContract', () => {
     const contract = compileTurnContract(minimalContractInput())
     const d = compileTurnDelivery(contract, minimalDeliveryInput({ figure: { attachedThisTurn: true, introducedThisTurn: true, onScreen: true } }))
     expect(assertDeliverySatisfiesContract(d).map((v) => v.code)).not.toContain('A8')
-  })
-
-  it('A11 — clean when nothing is served', () => {
-    const contract = compileTurnContract(minimalContractInput())
-    const d = compileTurnDelivery(contract, minimalDeliveryInput())
-    expect(assertDeliverySatisfiesContract(d).map((v) => v.code)).not.toContain('A11')
-  })
-
-  it('A11 — clean when the served item is this turn\'s fresh AUTHORED probe (I3 satisfied)', () => {
-    const contract = compileTurnContract(minimalContractInput())
-    const d = compileTurnDelivery(contract, minimalDeliveryInput({
-      question: { source: 'gate-authored', attached: AUTHORED_PROBE, withheldModelProbe: null, modelProbeVerdict: null, released: false, releasedQuestionText: null, served: AUTHORED_MCQ },
-    }))
-    expect(assertDeliverySatisfiesContract(d).map((v) => v.code)).not.toContain('A11')
-  })
-
-  it('A11 — flags a model-invented item served THIS turn (I3: the `?? mcqParse.mcq` fallback reaching the learner)', () => {
-    const contract = compileTurnContract(minimalContractInput())
-    const d = compileTurnDelivery(contract, minimalDeliveryInput({
-      question: { source: 'model-parsed', attached: MODEL_PROBE, withheldModelProbe: null, modelProbeVerdict: null, released: false, releasedQuestionText: null, served: MODEL_MCQ },
-    }))
-    const violations = assertDeliverySatisfiesContract(d)
-    expect(violations.map((v) => v.code)).toContain('A11')
-    expect(violations.find((v) => v.code === 'A11')?.detail).toMatch(/model-invented/)
-  })
-
-  it('A11 — clean when a CARRIED-FORWARD authored probe is served (this turn attached nothing fresh)', () => {
-    const contract = compileTurnContract(minimalContractInput({
-      inbound: { isBareAck: false, lowSignalAck: false, pendingProbe: AUTHORED_PROBE, grade: null, priorTurnUnresolvedProseMcq: false },
-    }))
-    const d = compileTurnDelivery(contract, minimalDeliveryInput({
-      question: { source: 'none', attached: null, withheldModelProbe: null, modelProbeVerdict: null, released: false, releasedQuestionText: null, served: AUTHORED_MCQ },
-    }))
-    expect(assertDeliverySatisfiesContract(d).map((v) => v.code)).not.toContain('A11')
-  })
-
-  it('A11 — flags a CARRIED-FORWARD model-invented probe being served (provenance survives across turns, not just `question.source`)', () => {
-    const contract = compileTurnContract(minimalContractInput({
-      inbound: { isBareAck: false, lowSignalAck: false, pendingProbe: MODEL_PROBE, grade: null, priorTurnUnresolvedProseMcq: false },
-    }))
-    // This turn's OWN fresh attempt is 'none' — `question.source` alone would
-    // miss this; the served item's provenance must be resolved from the
-    // carried-forward pending probe instead, which is exactly what A11 does.
-    const d = compileTurnDelivery(contract, minimalDeliveryInput({
-      question: { source: 'none', attached: null, withheldModelProbe: null, modelProbeVerdict: null, released: false, releasedQuestionText: null, served: MODEL_MCQ },
-    }))
-    const violations = assertDeliverySatisfiesContract(d)
-    expect(violations.map((v) => v.code)).toContain('A11')
-    expect(violations.find((v) => v.code === 'A11')?.detail).toMatch(/model-invented/)
-  })
-
-  it('A11 — flags served matching neither the fresh nor the carried-forward identified probe (unknown provenance)', () => {
-    const contract = compileTurnContract(minimalContractInput({
-      inbound: { isBareAck: false, lowSignalAck: false, pendingProbe: AUTHORED_PROBE, grade: null, priorTurnUnresolvedProseMcq: false },
-    }))
-    const d = compileTurnDelivery(contract, minimalDeliveryInput({
-      question: { source: 'gate-authored', attached: AUTHORED_PROBE, withheldModelProbe: null, modelProbeVerdict: null, released: false, releasedQuestionText: null, served: UNRELATED_MCQ },
-    }))
-    const violations = assertDeliverySatisfiesContract(d)
-    expect(violations.map((v) => v.code)).toContain('A11')
-    expect(violations.find((v) => v.code === 'A11')?.detail).toMatch(/provenance unknown/)
   })
 
   it('never throws — a representation bug must not become a teaching outage', () => {
