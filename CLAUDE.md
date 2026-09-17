@@ -7373,8 +7373,7 @@ registration test already catches).
 Targeted validation before commit: `npx tsc --noEmit` clean; `npm run build` clean (middleware
 79.7 kB, unchanged); the two pre-existing generic-hardening tests plus the new
 `contractAuditSubjectCoverage.test.ts` plus every asset-contract test — 7 files / 557 tests, all
-passing (this file's own asset-contract commits above ran the same targeted set each time). The
-full suite was started separately and had not finished at commit time; this entry does not state
-a full-suite count it has not verified — a later entry will record it if the full run surfaces
-anything the targeted set did not. No curriculum/KG/Educational Brain content touched by this
-entry's own change — only `scripts/assets/contract-audit.ts` and the new test.
+passing. **Full suite confirmed green after commit**: 699 files / 14,457 passed / 9 skipped, no
+regressions from either this change or the three preceding CS asset-contract batches. No
+curriculum/KG/Educational Brain content touched by this entry's own change — only
+`scripts/assets/contract-audit.ts` and the new test.
