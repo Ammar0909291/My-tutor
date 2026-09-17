@@ -65,6 +65,19 @@ const CSFOUND_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${CSFOUND}:M1`],
     source: CSFOUND_SRC,
   },
+  {
+    conceptId: CSFOUND, subjectSlug: 'computer_science', probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A user says "delete the old files" to a voice assistant, but it deletes the wrong ones because "old" was never clearly defined by a date. Did the assistant misunderstand the intent behind the vague instruction?',
+    choices: [
+      { text: 'No — the assistant executed literally whatever rule it was actually programmed to use for "old"; if that rule did not match the user\'s intent, the mismatch is in how "old" was defined in the program, not a failure to understand', isCorrect: true },
+      { text: 'Yes — the assistant partially understood the request and made its own judgment call about which files count as old, the way a human assistant would', isCorrect: false, misconceptionId: `${CSFOUND}:M1` },
+    ],
+    correctValue: 'No — literal execution of an under-specified rule, not a failure of understanding',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CSFOUND}:M1`],
+    source: CSFOUND_SRC,
+  },
 ]
 
 // ─── cs.found.computer-organisation ──────────────────────────────────────────
@@ -124,6 +137,19 @@ const COMPORG_PROBES: SeedProbe[] = [
     ],
     correctValue: 'Storage = persistent; RAM = volatile (lost on power-off)',
     difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${COMPORG}:M1`],
+    source: COMPORG_SRC,
+  },
+  {
+    conceptId: COMPORG, subjectSlug: 'computer_science', probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student says: "My computer has 32 GB of RAM, so I can install 32 GB worth of programs and files on it." Is RAM the same kind of capacity as install/storage space?',
+    choices: [
+      { text: 'No — RAM is the fast, volatile workspace for currently-running programs, not where installed programs and files are permanently kept; that is the separate SSD/HDD\'s job', isCorrect: true },
+      { text: 'Yes — RAM and storage are just two names for the same kind of capacity, so a 32 GB RAM computer can install and keep 32 GB of software', isCorrect: false, misconceptionId: `${COMPORG}:M1` },
+    ],
+    correctValue: 'RAM (workspace) and storage capacity (install space) are separate resources',
+    difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${COMPORG}:M1`],
     source: COMPORG_SRC,
   },
@@ -192,6 +218,19 @@ const NUMSYS_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${NUMSYS}:M2`],
     source: NUMSYS_SRC,
   },
+  {
+    conceptId: NUMSYS, subjectSlug: 'computer_science', probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Comparing 100₂ and 5₁₀ — since 100 has three digits and 5 has only one, is 100₂ definitely the larger quantity?',
+    choices: [
+      { text: 'No — 100₂ = 4 in decimal, which is smaller than 5₁₀; digit count alone does not indicate magnitude across different bases, you must convert to the same base first', isCorrect: true },
+      { text: 'Yes — more digits always means a larger number, regardless of which base each number is written in', isCorrect: false, misconceptionId: `${NUMSYS}:M1` },
+    ],
+    correctValue: '100₂ = 4₁₀ < 5₁₀ — always convert to the same base before comparing magnitude',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${NUMSYS}:M1`],
+    source: NUMSYS_SRC,
+  },
 ]
 
 // ─── cs.found.boolean-logic ───────────────────────────────────────────────────
@@ -252,6 +291,19 @@ const BOOLLOG_PROBES: SeedProbe[] = [
     ],
     correctValue: 'No — AND requires BOTH conditions true; no number can be < 40 AND > 90',
     difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${BOOLLOG}:M1`],
+    source: BOOLLOG_SRC,
+  },
+  {
+    conceptId: BOOLLOG, subjectSlug: 'computer_science', probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A discount applies if a purchase is under $10 OR the customer has a loyalty card. A student writes the condition as `price < 10 and has_card`. For a $50 purchase WITH a loyalty card, does this code correctly apply the discount?',
+    choices: [
+      { text: 'No — the requirement was OR, but the code uses AND; a $50 purchase with a card should qualify (the OR condition is satisfied), yet `price < 10 and has_card` evaluates to False since price is not under $10, so the code wrongly denies the discount', isCorrect: true },
+      { text: 'Yes — AND and OR behave the same when at least one condition is true, so the code correctly grants the discount', isCorrect: false, misconceptionId: `${BOOLLOG}:M1` },
+    ],
+    correctValue: 'No — using AND instead of OR wrongly denies the discount for this case',
+    difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${BOOLLOG}:M1`],
     source: BOOLLOG_SRC,
   },
@@ -321,6 +373,19 @@ const MEMSTG_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${MEMSTG}:M1`],
     source: MEMSTG_SRC,
   },
+  {
+    conceptId: MEMSTG, subjectSlug: 'computer_science', probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A user deletes several large video files from their SSD to free up storage space. Will this also make their currently open programs run faster, by freeing up RAM?',
+    choices: [
+      { text: 'No — deleting files frees SSD/storage space only; it has no effect on RAM, which is a separate resource already allocated to currently running programs', isCorrect: true },
+      { text: 'Yes — deleting files frees up general "memory," and since storage and RAM share the same pool, running programs immediately get more room and speed up', isCorrect: false, misconceptionId: `${MEMSTG}:M1` },
+    ],
+    correctValue: 'No — freeing storage space does not free RAM; they are separate resources',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${MEMSTG}:M1`],
+    source: MEMSTG_SRC,
+  },
 ]
 
 // ─── cs.found.cpu-architecture ────────────────────────────────────────────────
@@ -385,6 +450,19 @@ const CPUARCH_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${CPUARCH}:M1`],
     source: CPUARCH_SRC,
   },
+  {
+    conceptId: CPUARCH, subjectSlug: 'computer_science', probeKind: 'true_false',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'A gaming console is advertised as having a "5 GHz processor," and a customer assumes this single number is enough to predict how it will run games compared to a rival console at 4 GHz. Is clock speed alone a reliable performance predictor?',
+    choices: [
+      { text: 'No — actual performance also depends on instructions per clock (IPC), core count, cache size, and memory bandwidth; a 4 GHz chip with better IPC or more cores can outperform a 5 GHz chip on real workloads', isCorrect: true },
+      { text: 'Yes — clock speed in GHz directly and completely determines how fast a processor executes any given workload, so the 5 GHz console is guaranteed to be faster', isCorrect: false, misconceptionId: `${CPUARCH}:M1` },
+    ],
+    correctValue: 'No — GHz alone does not determine performance; IPC, cores, cache and memory bandwidth all matter',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CPUARCH}:M1`],
+    source: CPUARCH_SRC,
+  },
 ]
 
 // ─── cs.found.pipelining-cache ────────────────────────────────────────────────
@@ -442,6 +520,19 @@ const PIPELCACHE_PROBES: SeedProbe[] = [
       { text: 'Yes — pipelining allows each stage to work simultaneously, reducing the total cycles needed for each instruction', isCorrect: false, misconceptionId: `${PIPELCACHE}:M1` },
     ],
     correctValue: 'Pipelining improves throughput, not single-instruction latency',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PIPELCACHE}:M1`],
+    source: PIPELCACHE_SRC,
+  },
+  {
+    conceptId: PIPELCACHE, subjectSlug: 'computer_science', probeKind: 'true_false',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'A single, isolated instruction (not part of a longer sequence) is run through an 8-stage pipelined CPU. Does pipelining make THIS ONE instruction finish faster than it would on a non-pipelined CPU?',
+    choices: [
+      { text: 'No — that single instruction still passes through all 8 stages sequentially, taking 8 cycles either way; pipelining\'s speedup only shows up as throughput when many instructions overlap, not in how fast one instruction alone completes', isCorrect: true },
+      { text: 'Yes — because the 8 stages can work at the same time, a single instruction completes in a fraction of the cycles it would take without pipelining', isCorrect: false, misconceptionId: `${PIPELCACHE}:M1` },
+    ],
+    correctValue: 'No — a single instruction still needs all 8 stages; pipelining helps throughput, not one instruction\'s latency',
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${PIPELCACHE}:M1`],
     source: PIPELCACHE_SRC,
@@ -509,6 +600,19 @@ const SWCONCEPT_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${SWCONCEPT}:M1`],
     source: SWCONCEPT_SRC,
   },
+  {
+    conceptId: SWCONCEPT, subjectSlug: 'computer_science', probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A team benchmarks numeric data-processing code written in Python using numpy against an equivalent raw, unoptimised C implementation, and the Python version is just as fast. Does this contradict the rule that compiled languages are always faster than interpreted ones?',
+    choices: [
+      { text: 'No — it shows that rule is false as a blanket statement; numpy calls into pre-compiled C code for its inner loops, so a well-optimised interpreted-language program can match compiled performance for suitable workloads', isCorrect: true },
+      { text: 'Yes — this result must be a measurement error, since compiled languages are always faster than interpreted languages for any task, without exception', isCorrect: false, misconceptionId: `${SWCONCEPT}:M1` },
+    ],
+    correctValue: 'No — "compiled is always faster" is false; implementation and libraries determine real speed',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SWCONCEPT}:M1`],
+    source: SWCONCEPT_SRC,
+  },
 ]
 
 // ─── cs.found.os-concepts ─────────────────────────────────────────────────────
@@ -572,6 +676,19 @@ const OSCONCEPT_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${OSCONCEPT}:M2`],
     source: OSCONCEPT_SRC,
   },
+  {
+    conceptId: OSCONCEPT, subjectSlug: 'computer_science', probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A developer building a new text editor considers having it talk directly to the SSD hardware to save files, bypassing the operating system\'s file APIs entirely. Is this how well-behaved application software actually accesses storage hardware?',
+    choices: [
+      { text: 'No — user-mode applications do not get direct hardware access; the editor must make a system call so the OS kernel performs the actual disk write, which keeps disk access controlled and prevents programs from corrupting each other\'s data', isCorrect: true },
+      { text: 'Yes — well-written application software commonly bypasses the OS and talks to storage hardware directly for better performance', isCorrect: false, misconceptionId: `${OSCONCEPT}:M1` },
+    ],
+    correctValue: 'No — applications reach storage through a system call to the kernel, never direct hardware access',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${OSCONCEPT}:M1`],
+    source: OSCONCEPT_SRC,
+  },
 ]
 
 // ─── cs.algo.problem-solving ──────────────────────────────────────────────────
@@ -631,6 +748,19 @@ const PROBSOLV_PROBES: SeedProbe[] = [
     ],
     correctValue: 'Rushing to code without planning produces harder-to-fix bugs from incomplete understanding',
     difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${PROBSOLV}:M1`],
+    source: PROBSOLV_SRC,
+  },
+  {
+    conceptId: PROBSOLV, subjectSlug: 'computer_science', probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In a 30-minute coding challenge, one student spends the first 25 minutes writing test cases and sketching an approach on paper before typing any code, then finishes correctly with 5 minutes to spare. A classmate who started coding at minute 1 is still debugging when time runs out. Was the first student\'s approach inefficient because so little time was spent actually coding?',
+    choices: [
+      { text: 'No — the time spent understanding the problem and planning was not wasted; it prevented the kind of misunderstanding-driven bugs that cost the classmate all their remaining time, so the net result was faster, not slower', isCorrect: true },
+      { text: 'Yes — spending most of the time budget on planning instead of coding is inefficient; the classmate who started coding immediately used their time more productively', isCorrect: false, misconceptionId: `${PROBSOLV}:M1` },
+    ],
+    correctValue: 'No — planning time is recovered many times over by avoiding rework and hard-to-fix bugs',
+    difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${PROBSOLV}:M1`],
     source: PROBSOLV_SRC,
   },
