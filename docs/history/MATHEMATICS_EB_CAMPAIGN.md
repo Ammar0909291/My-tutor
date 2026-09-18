@@ -3238,3 +3238,24 @@ Fresh frontier: `math.prob` 1+ (`event`, `probability-measure` both newly unbloc
 (`math.prob` no longer counts as unstarted). Campaign continues under the same active `/loop`;
 re-derive the frontier fresh via `scripts/math/state.ts` each iteration rather than trusting any
 number recorded here.
+
+### Batch 98 (2026-09-18)
+
+Correction to Batch 97's frontier note: `probability-measure` actually requires `event` directly,
+not `sample-space` — only `event` was truly ready at batch start; `probability-measure` became
+ready once `event` was authored within this same batch. Authored `event` (subset-not-outcome,
+full complement, overlap-is-valid) then `probability-measure` ($P(A)\in[0,1]$ never a percentage,
+complement rule derived from $P(\Omega)=1$, general addition rule with mutually-exclusive sum as
+special case). Both Blueprint-grounded by reference, zero KG/Blueprint metadata discrepancy.
+`math.prob` **3/49** (1→3). Mathematics **591/908** (589→591), 317 remaining. Full per-concept
+detail in `COVERAGE.md` Batch 98. Validated: KG validator PASS (908/908 reachable, file
+untouched), `scripts/math/state.ts` confirms math.prob 3/49, mathematics 591/908 (11
+EB-certified domains unchanged), `tsc --noEmit` clean, targeted EB/curriculum tests 128/128
+passed, full suite 700 files / 14461 passed (9 pre-existing skips, 0 failures). No
+Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Commit `59f2742` on
+`main`, pushed directly.
+
+Fresh frontier: `math.prob` 1 (`probability-axioms`, newly unblocked), `math.linalg` still
+exhausted, plus the same 9 previously-unstarted domains unchanged. Campaign continues under the
+same active `/loop`; re-derive the frontier fresh via `scripts/math/state.ts` each iteration
+rather than trusting any number recorded here.

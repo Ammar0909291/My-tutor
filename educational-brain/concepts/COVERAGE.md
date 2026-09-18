@@ -12897,3 +12897,48 @@ longer unstarted) each still holding one ready entry-node candidate.
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `9da89a0` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 98 (2026-09-18)
+
+Re-derived the frontier fresh: `math.prob.probability-measure` actually requires
+`math.prob.event` directly (not `sample-space` — Batch 97's "both newly unblocked children"
+phrasing conflated the KG's `children` field with actual readiness), so only `event` was truly
+ready at batch start; `probability-measure` became ready only once `event` was authored within
+this same batch. Authored both, chained.
+
+`event` (requires `sample-space`, unlocks `probability-axioms`, cross_links
+`math.meas.sigma-algebra` confirmed unauthored via `ls` → independence mode): an event as ANY
+subset of $\Omega$ (never a single outcome — gathered by checking every outcome against a
+condition and collecting all that qualify); the full complement $A^c=\Omega\setminus A$ (every
+remaining outcome, never just the "one opposite" outcome — e.g. $A=\{HH\}$ in $\Omega=\{HH,HT,
+TH,TT\}$ gives $A^c=\{HT,TH,TT\}$, not $\{TT\}$ alone); and overlapping events as fully valid
+(mutual exclusivity is a special case to CHECK, never assumed). 3 misconceptions independently
+classified, all language-contamination or overgeneralization — MC-1 EVENT-IS-OUTCOME
+(Foundational), MC-2 EVENT-COMPLEMENT-ONE-OUTCOME, MC-3 EVENTS-MUST-PARTITION. Zero Blueprint/KG
+metadata discrepancy.
+
+`probability-measure` (requires `event`, unlocks `probability-axioms`, cross_links
+`math.meas.measure` confirmed unauthored via `ls` → independence mode): $P(A)\in[0,1]$ (a 70%
+chance converts to $P=0.70$, never the raw number 70); the complement rule $P(A^c)=1-P(A)$
+derived directly from $P(\Omega)=1$ and $A\cup A^c=\Omega$ (never "$1+P(A)$"); and the general
+addition rule $P(A\cup B)=P(A)+P(B)-P(A\cap B)$, with the mutually-exclusive plain-sum rule
+explicitly as a SPECIAL CASE, never the general one. 3 misconceptions independently classified —
+MC-1 PROBABILITY-AS-PERCENTAGE (language contamination, Foundational), MC-2 COMPLEMENT-ERROR
+(overgeneralization), MC-3 ADDITION-FORMULA-ALWAYS-SUM (overgeneralization). Zero Blueprint/KG
+metadata discrepancy.
+
+**Both concepts this batch are math.prob; both zero Blueprint/KG metadata discrepancy on every
+field.** `math.prob` **1/49 → 3/49**. Mathematics **589/908 → 591/908**, 317 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.prob` 3/49,
+mathematics 591/908, 11 EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0).
+Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 128 passed (128)". Full suite:
+"Test Files 700 passed (700), Tests 14461 passed | 9 skipped (14470)" — 0 failures.
+
+Computed fresh frontier post-batch: `math.prob` 1 (`probability-axioms`, newly unblocked by both
+`event` and `probability-measure`), `math.linalg` still exhausted, plus the same 9
+previously-unstarted domains unchanged.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `59f2742` on `main`, pushed directly, continuing under the same active `/loop`.
