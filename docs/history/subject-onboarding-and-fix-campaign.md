@@ -423,3 +423,34 @@ docs/english/kg/graph.json` PASS (KG file untouched); full suite 700/700 test fi
 passed / 9 skipped (no regression vs. pre-batch baseline); `npm run build` clean (middleware
 79.7 kB, no regression).
 
+### Batch — English `eng.phonetics.*` ADULT-band gap, all 12 short concepts, closes the subdomain (2026-09-18)
+
+Closed all 12 short `eng.phonetics.*` concepts: accents-and-dialects, connected-speech,
+consonant-sounds, intonation-patterns, ipa-basics, minimal-pairs, phonetic-transcription,
+prosody, rhythm-and-timing, sentence-stress, syllable-stress, vowel-sounds. Live regeneration
+matched the prior estimate exactly this time (12, not a stale number). Same established
+technique as Batches 13-18 (`adultLadder` helper: `mcq`(FOUNDATIONAL) +
+`misconception_probe`(DEVELOPING) + `mcq`(PROFICIENT), each distractor's `misconceptionId`
+reusing one of the concept's own two already-registered Blueprint misconceptions — verified
+against each concept's own Component 1 Misconception Register before writing; as with Batch 18,
+several of these Blueprints use bare `MC-...` headings rather than the `MC-A-.../MC-B-...`
+convention, carried through verbatim). New file: `englishAdultBandBatch19.ts` (36 new probes,
+adult/professional framing — a call-center training program, a presentation coach, a workplace
+rehearsal). Wired into both writers (`src/instrumentation.ts`'s bootstrap `ALL_PROBES` and
+`scripts/brain/seed-knowledge-assets.ts`'s `ALL_PROBES`) — `seedCorpusCoverageRatchet.test.ts`
+passes. All 12 concepts held zero prior ADULT probes, so this is a fresh singleton-to-ladder
+promotion with zero P-10 collision risk (`--dry-run`: created=7838, skipped=0, revived=0).
+
+English: **380/412 → 392/412 at contract, 32 → 20 short.** Remaining 20: `eng.vocab.*` (9
+advanced), `eng.writing.*` (9 advanced), `eng.reading.reading-across-genres`,
+`eng.speaking.debate-skills`/`presentation-skills`, and the 2 EARLY-band phonics pairs flagged in
+the Batch 13 entry above (deliberately excluded — voice-required, not closable the same way).
+
+Validated: `npx tsc --noEmit` clean; targeted tests (`englishAssetContractP1`,
+`contractAuditShapeDetection`, `contractAuditSubjectCoverage`, `seedCorpusCoverageRatchet`,
+`curriculumKgRegistration`, 41 tests) green, including the Batch 18 timeout fix holding at 12
+seed-asset files heavier than when it was applied; `contract-audit.ts --subject english`
+confirms 392/412; `validate-knowledge-graph.ts docs/english/kg/graph.json` PASS (KG file
+untouched); full suite 700/700 test files, 14,461 passed / 9 skipped (no regression vs.
+pre-batch baseline); `npm run build` clean (middleware 79.7 kB, no regression).
+
