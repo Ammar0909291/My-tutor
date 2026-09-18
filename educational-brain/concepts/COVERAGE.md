@@ -12992,3 +12992,51 @@ ready), `math.linalg` still exhausted, plus 8 remaining previously-unstarted dom
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `8079c51` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 100 (2026-09-18)
+
+Re-derived the frontier fresh, confirmed matching Batch 99's verified prediction — `math.prob` 1
+(`conditional-probability`), `math.de` 3 (`ode-order`, `ode-linearity`, `solution-types`).
+Selected `conditional-probability` and `ode-order`, deferring the other two `math.de` candidates.
+
+`conditional-probability` (requires `probability-axioms`, unlocks `independence`+
+`bayes-theorem`+`total-probability`): $P(A|B)=P(A\cap B)/P(B)$ as restricting the sample space to
+$B$ and rescaling (never just the joint probability with the division silently dropped — a card
+drawn "red" restricts 52 cards to 26, giving $P(\text{heart}|\text{red})=13/26$, not $13/52$);
+the asymmetry $P(A|B)\ne P(B|A)$ in general, with the denominator always the event AFTER the bar
+(a die's $P(6|\text{even})=1/3$ vs. $P(\text{even}|6)=1$, genuinely different); and the undefined
+case when $P(B)=0$, checked BEFORE computing, never divided through regardless. 3 misconceptions
+independently classified, all language-contamination or instruction-induced — MC-1
+CONDITIONAL-IS-JOINT (Foundational), MC-2 REVERSING-CONDITIONING, MC-3
+ZERO-DENOMINATOR-IGNORED. Zero Blueprint/KG metadata discrepancy.
+
+`ode-order` (requires `ode`, unlocks none): order (which derivative is highest, e.g. $y'$ in
+$(y')^3=x$, giving order 1) versus degree (that SAME derivative's own power, degree 3 here) as
+independent, easily-conflated numbers read off the same symbol; degree UNDEFINED for
+non-polynomial ODEs like $y''+\sin(y')=0$ (order 2, degree undefined) despite a perfectly
+well-defined order; and the order — never the degree — determining the general solution's number
+of arbitrary constants (confirmed via $y=C_1e^{2x}+C_2e^{-x}+3x$'s 2 constants implying
+second-order, regardless of the original equation's degree). 3 misconceptions independently
+classified, all language-contamination or instruction-induced — MC-1
+ORDER-IS-THE-POWER-OF-THE-DERIVATIVE, MC-2 DEGREE-ALWAYS-EXISTS, MC-3
+NUMBER-OF-CONSTANTS-EQUALS-DEGREE. Zero Blueprint/KG metadata discrepancy.
+
+**One of 2 concepts this batch is math.prob, one is math.de; both zero Blueprint/KG metadata
+discrepancy on every field.** `math.prob` **4/49 → 5/49**. `math.de` **1/56 → 2/56**. Mathematics
+**593/908 → 595/908**, 313 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.prob` 5/49,
+`math.de` 2/56, mathematics 595/908, 11 EB-certified domains unchanged. `npx tsc --noEmit` →
+clean (exit 0). Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 128 passed (128)".
+Full suite: "Test Files 700 passed (700), Tests 14461 passed | 9 skipped (14470)" — 0 failures.
+
+Computed fresh frontier post-batch (each candidate's actual `requires` re-verified, not the KG
+`children`/`unlocks` fields): `math.prob` 2 (`independence`, `total-probability` — both verified
+to require only `conditional-probability` directly; `bayes-theorem` requires BOTH
+`conditional-probability` AND `total-probability`, so it is NOT yet ready), `math.de` 2
+(`ode-linearity`, `solution-types`, unchanged, both verified to require only `ode`),
+`math.linalg` still exhausted, plus the same 8 previously-unstarted domains unchanged.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `34e00d0` on `main`, pushed directly, continuing under the same active `/loop`.

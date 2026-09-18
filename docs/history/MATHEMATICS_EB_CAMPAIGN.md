@@ -3284,3 +3284,27 @@ entry), `math.de` 3 (`ode-order`, `ode-linearity`, `solution-types`, all verifie
 `math.meas`). Campaign continues under the same active `/loop`; re-derive the frontier fresh via
 `scripts/math/state.ts` (and each candidate's actual `requires`) each iteration rather than
 trusting any number or `children`-field assumption recorded here.
+
+### Batch 100 (2026-09-18)
+
+Authored `conditional-probability` ($P(A|B)=P(A\cap B)/P(B)$ as restricting and rescaling, never
+just the joint probability; the $P(A|B)\ne P(B|A)$ asymmetry; the $P(B)=0$ undefined case) and
+`ode-order` (order vs. degree as independent numbers read off the same symbol; degree undefined
+for non-polynomial ODEs; order — not degree — governing the constant count). Both
+Blueprint-grounded by reference, zero KG/Blueprint metadata discrepancy. `math.prob` **5/49**
+(4→5). `math.de` **2/56** (1→2). Mathematics **595/908** (593→595), 313 remaining. Full
+per-concept detail in `COVERAGE.md` Batch 100. Validated: KG validator PASS (908/908 reachable,
+file untouched), `scripts/math/state.ts` confirms math.prob 5/49, math.de 2/56, mathematics
+595/908 (11 EB-certified domains unchanged), `tsc --noEmit` clean, targeted EB/curriculum tests
+128/128 passed, full suite 700 files / 14461 passed (9 pre-existing skips, 0 failures). No
+Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Commit `34e00d0` on
+`main`, pushed directly.
+
+Fresh frontier (each candidate's `requires` re-verified individually): `math.prob` 2
+(`independence`, `total-probability`, both requiring only `conditional-probability`;
+`bayes-theorem` requires BOTH `conditional-probability` AND `total-probability`, so it remains
+NOT ready), `math.de` 2 (`ode-linearity`, `solution-types`, unchanged), `math.linalg` still
+exhausted, plus the same 8 previously-unstarted domains unchanged. Campaign continues under the
+same active `/loop`; re-derive the frontier fresh via `scripts/math/state.ts` (and each
+candidate's actual `requires`) each iteration rather than trusting any number or
+`children`/`unlocks`-field assumption recorded here.
