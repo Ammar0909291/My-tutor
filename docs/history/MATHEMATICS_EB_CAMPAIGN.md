@@ -3308,3 +3308,28 @@ exhausted, plus the same 8 previously-unstarted domains unchanged. Campaign cont
 same active `/loop`; re-derive the frontier fresh via `scripts/math/state.ts` (and each
 candidate's actual `requires`) each iteration rather than trusting any number or
 `children`/`unlocks`-field assumption recorded here.
+
+### Batch 101 (2026-09-18) — genuine cross-link probe (math.linalg.linear-map)
+
+Authored `ode-linearity` (structural linearity test independent of coefficient complexity; the
+two disqualifying failures — a product of $y$-terms, or $y$ inside a nonlinear function; and a
+GENUINE cross-link probe against `math.linalg.linear-map`, confirmed authored via `ls`, verifying
+the linear-ODE operator satisfies additivity while a nonlinear operator fails it — the campaign's
+first non-independence P76 mode since Batches 92/93's abstract-algebra cross-links) and
+`solution-types` (singular solutions as structurally excluded from the general family, never
+merely hard to find; traced to a specific division-by-possibly-zero step). Both
+Blueprint-grounded by reference, zero KG/Blueprint metadata discrepancy. `math.de` **4/56**
+(2→4, closing that domain's entire frontier at batch start). Mathematics **597/908** (595→597),
+311 remaining. Full per-concept detail in `COVERAGE.md` Batch 101. Validated: KG validator PASS
+(908/908 reachable, file untouched), `scripts/math/state.ts` confirms math.de 4/56, mathematics
+597/908 (11 EB-certified domains unchanged), `tsc --noEmit` clean, targeted EB/curriculum tests
+128/128 passed, full suite 700 files / 14461 passed (9 pre-existing skips, 0 failures). No
+Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Commit `be3da72` on
+`main`, pushed directly.
+
+Fresh frontier: `math.de` 1 (`first-order-ode`, requires only `ode`+already-certified
+`math.calc`), `math.prob` 2 unchanged (`independence`, `total-probability`), `math.linalg` still
+exhausted, plus the same 8 previously-unstarted domains unchanged. Campaign continues under the
+same active `/loop`; re-derive the frontier fresh via `scripts/math/state.ts` (and each
+candidate's actual `requires`) each iteration rather than trusting any number or
+`children`/`unlocks`-field assumption recorded here.

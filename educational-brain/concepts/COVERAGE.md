@@ -13040,3 +13040,55 @@ to require only `conditional-probability` directly; `bayes-theorem` requires BOT
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `34e00d0` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 101 (2026-09-18) — genuine cross-link probe (math.linalg.linear-map)
+
+Re-derived the frontier fresh, confirmed matching Batch 100's prediction — `math.de` 2
+(`ode-linearity`, `solution-types`). Authored both, closing `math.de`'s entire frontier at
+batch start.
+
+`ode-linearity` (requires `ode`, unlocks `linear-first-order`+`second-order-linear`, cross_links
+`math.linalg.linear-map` — **confirmed AUTHORED via `ls`** (Batch 96), triggering a genuine
+cross-link probe rather than independence mode, this campaign's first use of that mode since
+Batch 92/93's abstract-algebra cross-links): linearity as a precise structural test independent
+of coefficient complexity ($x^3y''-2xy'+\sqrt x\,y=e^x$ is linear despite complicated
+coefficients; $y'+y^2=0$ is nonlinear despite looking simple); the two distinct disqualifying
+failures (a product of $y$-terms like $yy'$, or $y$ inside a nonlinear function like $\sin(y)$);
+and the genuine cross-link verification that the linear-ODE operator $L[y]=y''-3y'+2y$ satisfies
+`linear-map`'s own additivity property directly, while the nonlinear operator $N[y]=yy'$
+concretely fails it for specific functions — making "linear ODE" and "linear map" the same
+underlying concept, not a coincidental shared word. 3 misconceptions independently classified —
+MC-1 LINEARITY-JUDGED-BY-VISUAL-COMPLEXITY (language contamination, Foundational), MC-2
+PRODUCT-OF-Y-AND-DERIVATIVE-OVERLOOKED (perceptual intuition, Moderate), MC-3
+Y-INSIDE-NONLINEAR-FUNCTION-NOT-RECOGNIZED-AS-DISQUALIFYING (instruction-induced, Moderate).
+Zero Blueprint/KG metadata discrepancy.
+
+`solution-types` (requires `ode`, unlocks none): singular solutions as a genuinely third
+category, structurally EXCLUDED from the general-solution family for ANY constant (never merely
+hard to find) — $y'=3y^{2/3}$'s general solution $y=(x+C)^3$ never reaches the genuine solution
+$y\equiv0$ for any $C$, confirmed by direct substitution into the original equation; and singular
+solutions traced to a specific division-by-a-possibly-zero-quantity step (the $y^{2/3}$ division
+in separation of variables), never a mysterious phenomenon. 3 misconceptions independently
+classified, all instruction-induced or overgeneralization — MC-1
+GENERAL-SOLUTION-ASSUMED-EXHAUSTIVE (Foundational), MC-2 SINGULAR-SOLUTION-VERIFICATION-SKIPPED
+(Foundational), MC-3 DIVISION-STEP-CAUSING-SINGULAR-SOLUTION-NOT-IDENTIFIED (Moderate). Zero
+Blueprint/KG metadata discrepancy.
+
+**Both concepts this batch are math.de; both zero Blueprint/KG metadata discrepancy on every
+field.** `math.de` **2/56 → 4/56**. Mathematics **595/908 → 597/908**, 311 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.de` 4/56,
+mathematics 597/908, 11 EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0).
+Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 128 passed (128)". Full suite:
+"Test Files 700 passed (700), Tests 14461 passed | 9 skipped (14470)" — 0 failures.
+
+Computed fresh frontier post-batch (each candidate's `requires` individually re-verified):
+`math.de` 1 (`first-order-ode`, requires only `ode`+already-certified `math.calc`; its own
+unlock `second-order-ode` and `ode-linearity`'s unlocks `linear-first-order`/
+`second-order-linear` all remain blocked pending `first-order-ode`), `math.prob` 2
+(`independence`, `total-probability`, unchanged), `math.linalg` still exhausted, plus the same 8
+previously-unstarted domains unchanged.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `be3da72` on `main`, pushed directly, continuing under the same active `/loop`.
