@@ -3140,3 +3140,34 @@ batch was started, and the autonomous `/loop` driving this campaign was stopped.
 an explicit fresh owner instruction to continue Mathematics Educational Brain authoring — do not
 default to "continue the last autonomous campaign" per the same CLAUDE.md section's own stated
 rule.
+
+### Batch 94 (2026-09-18) — CAMPAIGN RESUMED on explicit fresh owner instruction
+
+A different session received an explicit, fresh owner instruction this turn ("keep working until
+u finish eb for mathematics", via `/loop`) — exactly the resumption trigger Batch 93's own closing
+note required. Re-derived the frontier fresh via `scripts/math/state.ts` (did not trust Batch 93's
+recorded prediction): confirmed exactly matching — `math.abst` 1 candidate (`galois-group`),
+`math.linalg` 5 candidates. Authored `math.abst.galois-group` (closes the domain's frontier bar
+`galois-correspondence`, newly unblocked by this batch) and one math.linalg candidate,
+`math.linalg.linear-map`, deferring `column-space`/`eigenspace`/`inner-product`/
+`linear-independence` to a future batch. Both Blueprint-grounded by reference, zero KG/Blueprint
+metadata discrepancy. `math.abst` **36/37** (35→36). `math.linalg` **33/61** (32→33). Mathematics
+**583/908** (581→583), 325 remaining. Full per-concept detail in `COVERAGE.md` Batch 94.
+Validated: KG validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts`
+confirms math.abst 36/37, math.linalg 33/61, mathematics 583/908 (10 EB-certified domains
+unchanged), `tsc --noEmit` clean, targeted EB/curriculum tests 128/128 passed, full suite 700
+files / 14461 passed (9 pre-existing skips, 0 failures). No Physics/Chemistry/English/Biology/
+CS/KG/Blueprint/runtime file touched.
+
+Also resolved this session: the container's local `main` branch held an unrelated, stale history
+(tip an old "Batch 29" commit, no merge-base with `origin/main`) — per an explicit owner
+instruction to "work only on main branch," local `main` was reset to `origin/main` (the real,
+current, far-more-advanced history) before committing; this batch landed as commit `957c7bb`
+pushed directly to `main`.
+
+Fresh frontier: `math.abst` 1 (`galois-correspondence` — newly unblocked by `galois-group`,
+closing the entire domain once authored), `math.linalg` 4 unchanged (`column-space`,
+`eigenspace`, `inner-product`, `linear-independence`), plus the same 10 previously-unstarted
+domains from Batch 93 unchanged. Campaign continues under an active `/loop`; re-derive the
+frontier fresh via `scripts/math/state.ts` each iteration rather than trusting any number
+recorded here.

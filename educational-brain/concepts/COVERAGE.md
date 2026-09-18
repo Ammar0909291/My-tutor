@@ -12674,3 +12674,72 @@ candidate.
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This is
 a genuinely multi-session campaign; continuation should verify state via `scripts/math/state.ts`
 fresh each time rather than trusting any number recorded here.
+
+### Batch 94 (2026-09-18) — campaign RESUMED on explicit fresh owner instruction
+
+CLAUDE.md's "biology/computer_science/mathematics content work is explicitly PAUSED" rule (added
+2026-09-16, in force since Batch 93) was overridden by an explicit fresh owner instruction this
+session ("keep working until u finish eb for mathematics" via `/loop`) — exactly the trigger
+condition that rule itself names as the only valid resumption path. Re-derived the frontier fresh
+via `scripts/math/state.ts` rather than trusting Batch 93's recorded prediction: `math.abst` had
+exactly 1 ready candidate (`galois-group`) and `math.linalg` had exactly 5 (`column-space`,
+`eigenspace`, `inner-product`, `linear-independence`, `linear-map`), matching Batch 93's own
+prediction exactly. Selected `galois-group` (closing `math.abst`'s entire post-Batch-93 frontier
+bar the still-blocked `galois-correspondence`) and one math.linalg candidate, `linear-map`,
+deferring the other four to a future batch. Both Blueprint-grounded, reused by reference.
+
+`galois-group` (requires `galois-theory`, unlocks none): the degree equality
+$|\mathrm{Gal}(K/F)|=[K:F]$ holding SPECIFICALLY for Galois extensions — proved conditional via
+the $\mathbb Q(\sqrt[3]2)/\mathbb Q$ counterexample (degree 3, Galois group order 1, since the
+other two roots of $x^3-2$ are complex and absent from this real field), directly reusing
+`algebraic-extension`'s own Eisenstein degree-3 computation; the Frobenius automorphism
+$\sigma(x)=x^p$ proved to GENERATE the entire finite-field Galois group via the explicit
+$\mathbb F_8/\mathbb F_2$ power computation ($\sigma,\sigma^2,\sigma^3=\mathrm{id}$), not merely
+sit as one example element; and the orientation-level $S_5$ non-abelian caution against
+overgeneralizing from the two small abelian examples studied. 3 misconceptions independently
+classified, all Type 1 overgeneralization — MC-1 GALOIS-DEGREE-EQUALITY-ASSUMED-UNIVERSAL
+(Foundational), MC-2 FROBENIUS-TREATED-AS-MERE-EXAMPLE (Foundational), MC-3
+GALOIS-GROUPS-ASSUMED-ALWAYS-SMALL-AND-ABELIAN (Moderate). Zero Blueprint/KG metadata
+discrepancy.
+
+`linear-map` (requires `vector-space`+`matrix`, unlocks `kernel-image`+`matrix-representation`,
+cross_links `group-homomorphism`+`bounded-operator` both confirmed unauthored via `ls` →
+independence mode): the two linearity properties (additivity, homogeneity) grounded directly in
+the already-studied rotation/reflection/dilation coordinate rules, with translation as the one
+geometric transformation that FAILS the necessary $T(0)=0$ consequence; the
+basis-determination fact proved via a forced-value contradiction (a claimed extra rule
+inconsistent with what the basis images already force); and the matrix-representation connection
+shown to be the identical calculation to basis-decomposition, merely differently notated. 3
+misconceptions independently classified — MC-1 ALL-TRANSFORMATIONS-ASSUMED-LINEAR (Type 1,
+Foundational), MC-2 BASIS-DETERMINATION-NOT-ENFORCED (Type 1, Foundational), MC-3
+HOMOGENEITY-CHECKED-WITH-UNIT-SCALAR-ONLY (Type 5, instruction-induced, Moderate — a $c=1$ or
+$c=0$ check is trivially true for every function, masking genuine failures at other scalars).
+Zero Blueprint/KG metadata discrepancy.
+
+**One of 2 concepts this batch is math.abst, one is math.linalg; both zero Blueprint/KG metadata
+discrepancy on every field.** `math.abst` **35/37 → 36/37** — only `galois-correspondence`
+remains in the domain (still blocked: requires `galois-theory`+`galois-group`, now both
+authored, so it is newly unblocked for a future batch). `math.linalg` **32/61 → 33/61**.
+Mathematics **581/908 → 583/908**, 325 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.abst` 36/37,
+`math.linalg` 33/61, mathematics 583/908 (10 EB-certified domains unchanged). `npx tsc --noEmit`
+→ clean (exit 0). `npx vitest run` targeted at the EB/curriculum test files (`brainCompiler`,
+`brainValidation`, `ebKnowledgeDelivery`, `ebMisconceptionRetrieval`,
+`ebMisconceptionFormatCompat`, `curriculumRoadmap`, `curriculumPlacement`) → "Test Files 7 passed
+(7), Tests 128 passed (128)". Full suite: "Test Files 700 passed (700), Tests 14461 passed | 9
+skipped (14470)" — 0 failures.
+
+Computed fresh frontier post-batch: `math.abst` 1 (`galois-correspondence` — newly unblocked by
+`galois-group`, closing the entire domain once authored), `math.linalg` 4 unchanged
+(`column-space`, `eigenspace`, `inner-product`, `linear-independence`), plus the same 10
+previously-unstarted domains from Batch 93 unchanged.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+remains a genuinely multi-session campaign; continuation should verify state via
+`scripts/math/state.ts` fresh each time rather than trusting any number recorded here. Also
+note: this session found the container's local `main` git branch held an entirely unrelated,
+stale history (last commit an old "Batch 29") with no merge-base against `origin/main` — resolved
+by resetting local `main` to `origin/main` before committing (per explicit owner instruction to
+"work only on main branch"); this batch is commit `957c7bb` on `main`, pushed directly.
