@@ -261,3 +261,32 @@ Validated: `npx tsc --noEmit` clean; targeted tests (`englishAssetContractP1`,
 suite 700/700 test files, 14,461 passed / 9 skipped (no regression vs. pre-batch baseline);
 `npm run build` clean (middleware 79.7 kB, no regression).
 
+### Batch — English `eng.communication.*` ADULT-band gap, all 11 short concepts, closes the subdomain (2026-09-18)
+
+Closed all 11 short `eng.communication.*` concepts (`digital-communication` was already at
+contract, so untouched): academic-writing-advanced, business-writing, cross-cultural-
+communication, discourse-markers-advanced, editing-for-publication, media-literacy, negotiation-
+language, presentation-design, professional-communication, research-methodology-writing,
+technical-writing. Same established technique as Batches 13-14 (`adultLadder` helper: `mcq`
+(FOUNDATIONAL) + `misconception_probe`(DEVELOPING) + `mcq`(PROFICIENT), each distractor's
+`misconceptionId` reusing one of the concept's own two already-registered Blueprint
+misconceptions — verified against each concept's own Component 1 Misconception Register before
+writing, every one of the 11 holds exactly MC-A/MC-B). New file: `englishAdultBandBatch15.ts` (33
+new probes). Wired into both writers (`src/instrumentation.ts`'s bootstrap `ALL_PROBES` and
+`scripts/brain/seed-knowledge-assets.ts`'s `ALL_PROBES`) — `seedCorpusCoverageRatchet.test.ts`
+passes. All 11 concepts held zero prior ADULT probes, so this is a fresh singleton-to-ladder
+promotion with zero P-10 collision risk (`--dry-run`: created=7682, skipped=0, revived=0).
+
+English: **329/412 → 340/412 at contract, 83 → 72 short.** Remaining 72:
+`eng.linguistics.*` (16), `eng.literature.*` (16 advanced), `eng.phonetics.*` (12 advanced),
+`eng.vocab.*` (9 advanced), `eng.writing.*` (9 advanced), `eng.reading.reading-across-genres`,
+`eng.speaking.debate-skills`/`presentation-skills`, and the 2 EARLY-band phonics pairs flagged in
+the Batch 13 entry above (deliberately excluded — voice-required, not closable the same way).
+
+Validated: `npx tsc --noEmit` clean; targeted tests (`englishAssetContractP1`,
+`contractAuditShapeDetection`, `contractAuditSubjectCoverage`, `seedCorpusCoverageRatchet`,
+`curriculumKgRegistration`, 41 tests) green; `contract-audit.ts --subject english` confirms
+340/412; `validate-knowledge-graph.ts docs/english/kg/graph.json` PASS (KG file untouched); full
+suite 700/700 test files, 14,461 passed / 9 skipped (no regression vs. pre-batch baseline);
+`npm run build` clean (middleware 79.7 kB, no regression).
+
