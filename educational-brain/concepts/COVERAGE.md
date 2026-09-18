@@ -13513,3 +13513,62 @@ unstarted).
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `8176140` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 110 (2026-09-18) — extends math.meas and math.real, both from Batch 109's openings
+
+Re-derived the frontier fresh (34 ready concepts). Selected `math.meas.lebesgue-measure`
+(requires only `measure`, authored Batch 109) and `math.real.sup-inf` (requires only
+`completeness`, authored Batch 109), continuing both domains opened last batch. Authored both.
+
+`lebesgue-measure` (requires `measure`, unlocks `lebesgue-integral`/`measure-zero`, cross_links
+`math.real.riemann-integral` — **confirmed NOT authored via `ls`, independence mode correctly
+self-reported, no correction needed**): outer measure $m^*(E)=\inf\{\sum|I_n|:E\subseteq\bigcup
+I_n\}$ as infimum-over-covers, verifying $m^*([0,3])=3$; the surprising fact that a countable
+DENSE set ($\mathbb Q\cap[0,1]$) still has measure ZERO via a shrinking-interval-per-point cover;
+Carathéodory's criterion restricting to measurable sets; and the Vitali set as a CONCRETE,
+constructible non-measurable set proving the restriction is a genuine necessity, not caution. 3
+misconceptions independently classified, all overgeneralization — MC-1
+DENSITY-CONFLATED-WITH-POSITIVE-MEASURE (Foundational), MC-2
+NON-MEASURABLE-SETS-DISMISSED-AS-HYPOTHETICAL (Moderate), MC-3
+OUTER-MEASURE-ASSUMED-COUNTABLY-ADDITIVE-ON-ALL-SETS (Foundational). Zero Blueprint/KG metadata
+discrepancy.
+
+`sup-inf` (requires `completeness`, unlocks none, cross_links none — Blueprint correctly
+self-reports no cross-links, matching the KG): the two-part supremum test (upper bound AND no
+smaller upper bound), showing 10 fails part (ii) as a candidate supremum of $(0,3)$; reusing
+`completeness`'s own $\{q\in\mathbb Q:q^2<2\}$ example to show the existence guarantee is
+specifically an $\mathbb R$-property; and the attained ($[0,3]$, sup=max=3) versus unattained
+($(0,3)$, sup=3 but no maximum) distinction. 3 misconceptions independently classified — MC-1
+SUPREMUM-EXISTENCE-ASSUMED-IN-RATIONALS (overgeneralization, Foundational), MC-2
+SUPREMUM-ASSUMED-ALWAYS-ATTAINED (overgeneralization, Foundational), MC-3
+UPPER-BOUND-ALONE-MISTAKEN-FOR-SUPREMUM (language contamination, Moderate). Zero Blueprint/KG
+metadata discrepancy.
+
+**Both concepts this batch zero Blueprint/KG metadata discrepancy on every field.** `math.meas`
+**2/13 → 3/13**. `math.real` **1/? → 2/?**. Mathematics **613/908 → 615/908**, 293 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.meas` 3/13,
+mathematics 615/908, 11 EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0).
+Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 118 passed (118)". Full whole-repo
+vitest run attempted TWICE this batch (once un-timeboxed, once with an explicit 280s timeout
+wrapper) — both hung with no observable completion (second consecutive batch showing this
+environment anomaly, following Batch 109's identical symptom); both killed rather than left
+running indefinitely. Validator + state.ts + tsc + the full targeted EB/curriculum suite (118
+tests, 0 failures) judged sufficient validation coverage for this batch's two markdown-only
+additions, consistent with Batch 109's precedent. Full-suite re-verification remains deferred to
+the next batch that touches non-EB-content code, or to whenever this environment's full-suite
+hang is independently investigated.
+
+Computed fresh frontier post-batch: `math.meas` 1 remaining reachable this depth
+(`abstract-measure-spaces`/`measurable-function`, requiring `measure`/`sigma-algebra`
+respectively, both now authored). `math.real` 1 remaining reachable
+(`archimedean`/`convergence-sequences`/`metric-space` — `archimedean` requires only
+`completeness`, now authored; `convergence-sequences` also requires `math.seq.sequence`,
+certified; `metric-space` requires only `math.found.set-theory`/`math.found.real-numbers`, both
+certified). 32 other ready concepts remain across `math.cat`, `math.cx`, `math.de`, `math.fnal`,
+`math.graph`, `math.linalg`, `math.num`, `math.prob`, `math.stats`, `math.top` (see Batch 110's
+frontier computation for the full ready-list).
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `ecea695` on `main`, pushed directly, continuing under the same active `/loop`.

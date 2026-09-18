@@ -3530,3 +3530,29 @@ Fresh frontier: `math.meas` 1 (`lebesgue-measure`, requires only `measure`, now 
 domains unchanged. Campaign continues under the same active `/loop`; re-derive the frontier fresh
 via `scripts/math/state.ts` (and each candidate's actual `requires`) each iteration rather than
 trusting any number or `children`/`unlocks`-field assumption recorded here.
+
+### Batch 110 (2026-09-18) — extends math.meas and math.real from Batch 109's openings
+
+Authored `lebesgue-measure` (outer measure via infimum-over-covers; countable dense sets have
+measure zero despite density; Carathéodory's criterion; the Vitali set as a concrete
+non-measurable counterexample) and `sup-inf` (two-part supremum/infimum test; completeness's
+existence guarantee is R-specific, reusing `completeness`'s own rational-supremum-failure
+example; attained vs. unattained). Both Blueprint-grounded by reference, both correctly using
+independence mode (confirmed via `ls`: `math.real.riemann-integral` unauthored; `sup-inf` has no
+cross-links in the KG). `math.meas` **3/13** (2→3). `math.real` **2/?** (1→2). Mathematics
+**615/908** (613→615), 293 remaining. Full per-concept detail in `COVERAGE.md` Batch 110.
+Validated: KG validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts`
+confirms math.meas 3/13, mathematics 615/908 (11 EB-certified domains unchanged), `tsc --noEmit`
+clean, targeted EB/curriculum tests 118/118 passed. Full whole-repo suite hung a second
+consecutive batch (attempted twice, once with an explicit timeout wrapper) with no observable
+completion — an environment anomaly, not a content defect; both attempts killed. No
+Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Commit `ecea695` on
+`main`, pushed directly.
+
+Fresh frontier: `math.meas` reachable (`abstract-measure-spaces`, `measurable-function`).
+`math.real` reachable (`archimedean`, `convergence-sequences`, `metric-space`). 32 other ready
+concepts remain across `math.cat`, `math.cx`, `math.de`, `math.fnal`, `math.graph`, `math.linalg`,
+`math.num`, `math.prob`, `math.stats`, `math.top`. Campaign continues under the same active
+`/loop`; re-derive the frontier fresh via `scripts/math/state.ts` (and each candidate's actual
+`requires`) each iteration rather than trusting any number or `children`/`unlocks`-field
+assumption recorded here.
