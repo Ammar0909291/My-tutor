@@ -290,3 +290,56 @@ Validated: `npx tsc --noEmit` clean; targeted tests (`englishAssetContractP1`,
 suite 700/700 test files, 14,461 passed / 9 skipped (no regression vs. pre-batch baseline);
 `npm run build` clean (middleware 79.7 kB, no regression).
 
+### Batch — English `eng.linguistics.*` ADULT-band gap, all 18 short concepts, closes the subdomain (2026-09-18)
+
+**Correction to the prior estimate**: this file's own "Remaining 72" line above quoted
+`eng.linguistics.*` as 16 concepts. Live regeneration (`contract-audit.ts --subject english
+--all`) found **18**, not 16 — the stale estimate is corrected here, per this campaign's own
+standing rule to never trust a count in a history file. The same `--all` regeneration also
+surfaced **3 previously-unknown short `eng.grammar.*` pairs** (`colons-semicolons-dashes`,
+`parallel-structure`, `sentence-combining`) that no prior entry in this file had recorded —
+flagged here for a future bounded batch; NOT touched by this batch (different subdomain, one-
+subdomain-per-batch discipline).
+
+Closed all 18 short `eng.linguistics.*` concepts: applied-linguistics-intro, bilingualism-and-
+multilingualism, computational-linguistics-intro, corpus-linguistics-intro, dialectology,
+discourse-analysis-intro, historical-linguistics-intro, language-acquisition-intro, language-
+families, morphology-intro, phonology-intro, pragmatics-intro, psycholinguistics-intro,
+semantics-intro, sociolinguistics-intro, syntax-theory-intro, translation-studies-intro, what-is-
+linguistics. Same established technique as Batches 13-15 (`adultLadder` helper: `mcq`
+(FOUNDATIONAL) + `misconception_probe`(DEVELOPING) + `mcq`(PROFICIENT), each distractor's
+`misconceptionId` reusing one of the concept's own two already-registered Blueprint
+misconceptions — verified against each concept's own Component 1 Misconception Register before
+writing, every one of the 18 holds exactly MC-A/MC-B). New file: `englishAdultBandBatch16.ts` (54
+new probes). Wired into both writers (`src/instrumentation.ts`'s bootstrap `ALL_PROBES` and
+`scripts/brain/seed-knowledge-assets.ts`'s `ALL_PROBES`) — `seedCorpusCoverageRatchet.test.ts`
+passes. All 18 concepts held zero prior ADULT probes, so this is a fresh singleton-to-ladder
+promotion with zero P-10 collision risk (`--dry-run`: created=7736, skipped=0, revived=0).
+
+English: **340/412 → 358/412 at contract, 72 → 54 short.** Remaining 54: `eng.literature.*` (16
+advanced), `eng.phonetics.*` (12 advanced), `eng.vocab.*` (9 advanced), `eng.writing.*` (9
+advanced), the 3 `eng.grammar.*` pairs flagged above, `eng.reading.reading-across-genres`,
+`eng.speaking.debate-skills`/`presentation-skills`, and the 2 EARLY-band phonics pairs flagged in
+the Batch 13 entry above (deliberately excluded — voice-required, not closable the same way).
+
+Validated: `npx tsc --noEmit` clean; targeted tests (`englishAssetContractP1`,
+`contractAuditShapeDetection`, `contractAuditSubjectCoverage`, `seedCorpusCoverageRatchet`,
+`curriculumKgRegistration`, 41 tests) green; `contract-audit.ts --subject english` confirms
+358/412; `validate-knowledge-graph.ts docs/english/kg/graph.json` PASS (KG file untouched); full
+suite 700/700 test files, 14,461 passed / 9 skipped (no regression vs. pre-batch baseline);
+`npm run build` clean (middleware 79.7 kB, no regression).
+
+**Egress check (owner-requested mid-batch, 2026-09-18)**: this batch's changes are pure static
+TypeScript (new seed-asset arrays + import/spread wiring in `instrumentation.ts` and
+`seed-knowledge-assets.ts`) — no DB writes performed this session (validation used `--dry-run`
+only), and the corpus-scoped completeness-probe query logic in `instrumentation.ts` (the two-COUNT
+cheap probe intersected against `expectedSlugs`, see its own long comment block) was not touched,
+only its `ALL_PROBES` array gained more entries via `...` spreads, the same pattern already used
+for batches 1-15. A live read-only Supabase check (`get_project`, `get_advisors` type=performance,
+`query_logs` last 24h on project `ywakxiqbevfuxsiwewnw`) found no active egress risk: no
+row-scanning query patterns, no anomalous log volume, no repeated high-row-count signatures. The
+advisor findings (32 unindexed FKs, 1 table without a PK, 43 unused indexes) are pre-existing
+hygiene items unrelated to the two previously-fixed leaks. Note: the Supabase Management
+API/MCP tools do not expose actual monthly GB egress-vs-quota numbers — that requires the
+Supabase dashboard's own Usage/Billing page, which only the owner can check directly.
+
