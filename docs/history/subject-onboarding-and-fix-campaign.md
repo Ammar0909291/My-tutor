@@ -543,3 +543,58 @@ docs/english/kg/graph.json` PASS (KG file untouched); full suite 700/700 test fi
 passed / 9 skipped (no regression vs. pre-batch baseline); `npm run build` clean (middleware
 79.7 kB, no regression).
 
+### Batch 22 (2026-09-18) — investigated and closed the last closeable eng.phonics.* gap; 2 confirmed permanently voice-required
+
+Investigated the 4 remaining short `eng.phonics.*` pairs directly against the primary sources
+(`educational-brain/first-lesson/07-subject-adaptations.md`,
+`educational-brain/concepts/english/eng.phonics.phonemic-awareness.md` full 425-line file,
+`educational-brain/concepts/english/eng.phonics.letter-sound-correspondence.md`) before authoring
+anything, rather than assuming all 4 are closeable via the same technique as the rest of this
+campaign:
+
+- **`eng.phonics.phonemic-awareness::EARLY` and `::ADULT` — CONFIRMED permanently voice-required,
+  NOT a deferral.** The concept file's own "Voice teaching" section calls it "the tree's flagship
+  voice-required territory — every success and every failure is audible and nothing is
+  writable"; its Mastery gate requires oral "production (isolate a fresh word's first sound with
+  no cueing)"; and it carries an explicit ANTI-ANALOGY warning that using written letters at this
+  node is a CATEGORY ERROR ("letters are a written-language convention that arrives LATER...
+  using letter-talk here installs exactly the letter-before-sound misconception"). This holds at
+  every grade band, not just EARLY — the skill being assessed (oral phoneme isolation) doesn't
+  change with age, only the vocabulary framing does. A closed-choice probe would have to either
+  present written word options (requiring the very letter-sound knowledge this node is
+  prerequisite TO) or not actually test phoneme isolation at all — neither is a valid probe. Both
+  bands are left as permanent, evidence-grounded exclusions, matching the existing `::EARLY`
+  precedent from Batch 13 rather than an oversight.
+- **`eng.phonics.letter-sound-correspondence::EARLY`** — already excluded per the same Batch 13
+  finding (has an existing `short_answer` openRecall probe; voice-required for the same reason).
+  Unchanged this batch.
+- **`eng.phonics.letter-sound-correspondence::ELEMENTARY` — CLOSED.** Unlike phonemic awareness,
+  letters are literally the content at this node, so recognition/decoding distinctions (letter
+  NAME vs. letter SOUND; decoding vs. guessing from a picture/first-letter) are describable and
+  gradeable in text without requiring live audio — the same pattern `englishBandGapAssets.ts`
+  already uses for this concept's sibling gap (`eng.phonics.blending-segmenting`). New file
+  `src/lib/teaching/assets/englishLetterSoundElementaryGap.ts` (`ENGLISH_LETTER_SOUND_ELEMENTARY_GAP`,
+  3 probes: mcq FOUNDATIONAL / misconception_probe DEVELOPING / mcq PROFICIENT, `adultLadder`-style
+  ladder) targets the misconception registry the existing live EARLY-band probe for this concept
+  already uses — `educational-brain/concepts/english/eng.phonics.letter-sound-correspondence.md`'s
+  own "Misconception library" (M1 "letters say their names", M5 "first-letter guessing") — rather
+  than the Blueprint's separate, unused "Misconception Engine" (MC-1..MC-4) registry, for
+  consistency. Register: 8-11 "returning older struggler, dignity-first," matching this concept's
+  own existing ELEMENTARY explanation's audience, not the adult-professional register the rest of
+  this campaign's ADULT-band batches use. Slot was a fresh singleton (core_explanation only, zero
+  probes) — zero P-10 collision risk, confirmed via dry-run `created=7889 skipped=0 revived=0`.
+  Wired into both `src/instrumentation.ts` and `scripts/brain/seed-knowledge-assets.ts`.
+
+English: **408/412 → 409/412 at contract, 4 → 3 short.** Remaining 3 are
+`letter-sound-correspondence::EARLY`, `phonemic-awareness::EARLY`, `phonemic-awareness::ADULT` —
+all permanently voice-required, not a to-do. This is the practical ceiling for this campaign's
+closed-choice technique on English's KG: **409/412 is as complete as this campaign can validly
+make English.**
+
+Validated: `npx tsc --noEmit` clean; `seed-knowledge-assets.ts --draft --dry-run` →
+`created=7889 revived=0 skipped=0`; `contract-audit.ts --subject english --all` confirms 409/412,
+3 short (all voice-required, listed above); targeted 5-file/41-test checklist green;
+`validate-knowledge-graph.ts docs/english/kg/graph.json` PASS, 216/216 reachable (KG file
+untouched); full suite 700/700 test files, 14,461 passed / 9 skipped (no regression); `npm run
+build` clean.
+

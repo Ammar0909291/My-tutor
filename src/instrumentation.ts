@@ -441,6 +441,13 @@ async function bootstrapAssets() {
       // englishAdultBandBatch21.ts's own header for detail.
       const { ENGLISH_ADULT_BAND_BATCH_21 } =
         await import('./lib/teaching/assets/englishAdultBandBatch21')
+      // English phonics gap closure, 2026-09-18: eng.phonics.letter-sound-
+      // correspondence @ ELEMENTARY (closed-choice, text-described scenario).
+      // phonemic-awareness::EARLY/ADULT and letter-sound-correspondence::EARLY
+      // are deliberately NOT closed here — voice-required, see this module's
+      // own header for the full investigation.
+      const { ENGLISH_LETTER_SOUND_ELEMENTARY_GAP } =
+        await import('./lib/teaching/assets/englishLetterSoundElementaryGap')
       // Corpus/writer unification, 2026-09-14 (§10.1). The 33 modules below
       // were authored, in git, KG-validated, and imported by the standalone
       // seed script (scripts/brain/seed-knowledge-assets.ts) — but never by
@@ -554,6 +561,7 @@ async function bootstrapAssets() {
         ...ENGLISH_ADULT_BAND_BATCH_15, ...ENGLISH_ADULT_BAND_BATCH_16, ...ENGLISH_ADULT_BAND_BATCH_17,
         ...ENGLISH_ADULT_BAND_BATCH_18, ...ENGLISH_ADULT_BAND_BATCH_19, ...ENGLISH_ADULT_BAND_BATCH_20,
         ...ENGLISH_ADULT_BAND_BATCH_21,
+        ...ENGLISH_LETTER_SOUND_ELEMENTARY_GAP,
         ...BIOLOGY_PROBES, ...CS_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES,
         ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES,
         ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES,
