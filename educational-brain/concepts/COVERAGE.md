@@ -13628,3 +13628,66 @@ across `math.cat`, `math.cx`, `math.de`, `math.fnal`, `math.graph`, `math.linalg
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `b9c95e7` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 112 (2026-09-18) — first REVERSE-direction discrepancy: a stale "not yet authored" claim
+
+Re-derived the frontier fresh (32 ready concepts). Selected `math.meas.abstract-measure-spaces`
+(requires only `measure`, authored Batch 109) and `math.real.convergence-sequences` (requires
+`completeness` + already-certified `math.seq.sequence`). Authored both.
+
+`abstract-measure-spaces` (requires `measure`, unlocks none, cross_links none): σ-finiteness as
+"covered by countably many finite-measure pieces," never "total itself finite" (Lebesgue measure
+on $\mathbb R$ is σ-finite via $\bigcup[-n,n]$ despite $\mu(\mathbb R)=\infty$); completeness as a
+genuinely CONSTRUCTED property, using the Cantor set to show the raw Borel σ-algebra is
+incomplete while the completed Lebesgue σ-algebra repairs it; and the Carathéodory extension
+theorem as the exact mechanism building Lebesgue measure from elementary interval length on a
+small ring. 3 misconceptions independently classified — MC-1
+SIGMA-FINITE-CONFLATED-WITH-FINITE-TOTAL-MEASURE (language contamination, Foundational), MC-2
+COMPLETENESS-ASSUMED-AUTOMATIC (overgeneralization, Foundational), MC-3
+PREMEASURE-DOMAIN-CONFUSED-WITH-EXTENDED-SIGMA-ALGEBRA (instruction-induced, Moderate). Zero
+Blueprint/KG metadata discrepancy.
+
+`convergence-sequences` (requires `completeness`/`math.seq.sequence`, unlocks `cauchy-sequence`/
+`series-rigorous`, cross_links `math.seq.series-convergence`): the full arbitrary-$\varepsilon$
+$\varepsilon$-$N$ proof discipline (a formula for $N$ in terms of $\varepsilon$, never a single
+numerical spot-check), reusing `completeness`'s own Archimedean-property machinery for the
+$1/n\to0$ proof; convergent $\Rightarrow$ bounded as a true one-directional theorem, with
+$(-1)^n$ as the standard bounded-but-divergent counterexample; and Bolzano-Weierstrass's actual
+guarantee (a convergent subsequence, never whole-sequence convergence), extracted concretely from
+$(-1)^n$'s two constant subsequences. 3 misconceptions independently classified — MC-1
+EPSILON-IS-A-SPECIFIC-NUMBER (instruction-induced, Foundational), MC-2
+BOUNDED-IMPLIES-CONVERGENT (overgeneralization), MC-3
+BOLZANO-WEIERSTRASS-MEANS-SEQUENCE-CONVERGES (language contamination).
+
+**Blueprint/P76-mode discrepancy found and corrected (SIXTH occurrence this campaign, FIRST in
+the reverse direction)**: `convergence-sequences`'s Blueprint states `math.seq.series-convergence`
+"has no authored blueprint yet," setting independence mode. Verified via `ls
+educational-brain/concepts/mathematics/` that `math.seq.series-convergence` IS actually authored
+(part of the `math.seq` domain, certified since before this campaign's measure-theory/real-
+analysis work began) — the Blueprint's claim was correct when written, but the corpus moved on
+since. Corrected to a GENUINE cross-link probe, directly connecting this concept's own
+$\varepsilon$-$N$ machinery to `series-convergence`'s partial-sum-sequence definition (which this
+Blueprint's own Component 7 had anticipated a "future revision" might do). All other fields on
+both concepts matched the live KG exactly.
+
+`math.meas` **4/13 → 5/13**. `math.real` **3/? → 4/?**. Mathematics **617/908 → 619/908**, 289
+remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.meas` 5/13,
+mathematics 619/908, 11 EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0).
+Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 118 passed (118)". Full whole-repo
+suite not re-attempted this batch, consistent with the established precedent from two consecutive
+prior hangs (Batches 109-110).
+
+Computed fresh frontier post-batch: `math.meas` has no further immediately-reachable concepts at
+this depth (`measure-zero` requires `lebesgue-measure`, now authored — reachable; `simple-function`
+requires `measurable-function`, now authored — reachable). `math.real` reachable (`metric-space`,
+requires `math.found.set-theory`/`math.found.real-numbers`, both certified). `math.prob.random-
+variable` is now ready (requires `probability-axioms`/`function-concept`, both already authored) —
+closing the loop `measurable-function`'s Batch 111 discrepancy noted. 29 other ready concepts
+remain across `math.cat`, `math.cx`, `math.de`, `math.fnal`, `math.graph`, `math.linalg`,
+`math.num`, `math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `589b211` on `main`, pushed directly, continuing under the same active `/loop`.

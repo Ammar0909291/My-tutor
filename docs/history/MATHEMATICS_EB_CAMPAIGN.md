@@ -3581,3 +3581,30 @@ Fresh frontier: `math.meas` reachable (`abstract-measure-spaces`). `math.real` r
 `math.stats`, `math.top`. Campaign continues under the same active `/loop`; re-derive the frontier
 fresh via `scripts/math/state.ts` (and each candidate's actual `requires`) each iteration rather
 than trusting any number or `children`/`unlocks`-field assumption recorded here.
+
+### Batch 112 (2026-09-18) — first REVERSE-direction discrepancy: a stale "not yet authored" claim
+
+Authored `abstract-measure-spaces` (σ-finiteness via countable finite-piece covers, never total
+size; completeness as constructed, not automatic, via the Cantor set Borel-vs-Lebesgue contrast;
+Carathéodory extension from a premeasure's small ring) and `convergence-sequences` (full
+arbitrary-ε ε-N proof discipline; convergent⟹bounded; Bolzano-Weierstrass's actual subsequence
+guarantee). `convergence-sequences`'s Blueprint claimed `math.seq.series-convergence` had "no
+authored blueprint yet" (independence mode) — but `ls` confirmed it IS now authored (in the
+already-certified `math.seq` domain) — the FIRST reverse-direction discrepancy this campaign
+(prior five were all Blueprints claiming FALSE authorship; this one's claim was true when written
+but went stale as the corpus grew). Corrected to a genuine cross-link probe. `math.meas` **5/13**
+(4→5). `math.real` **4/?** (3→4). Mathematics **619/908** (617→619), 289 remaining. Full
+per-concept detail in `COVERAGE.md` Batch 112. Validated: KG validator PASS (908/908 reachable,
+file untouched), `scripts/math/state.ts` confirms math.meas 5/13, mathematics 619/908 (11
+EB-certified domains unchanged), `tsc --noEmit` clean, targeted EB/curriculum tests 118/118
+passed. Full whole-repo suite not re-attempted, per the established Batch 109-110 hang precedent.
+No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Commit `589b211` on
+`main`, pushed directly.
+
+Fresh frontier: `math.meas` reachable (`measure-zero`, `simple-function`). `math.real` reachable
+(`metric-space`). `math.prob.random-variable` now ready (closing the loop Batch 111's
+`measurable-function` discrepancy noted). 29 other ready concepts remain across `math.cat`,
+`math.cx`, `math.de`, `math.fnal`, `math.graph`, `math.linalg`, `math.num`, `math.stats`,
+`math.top`. Campaign continues under the same active `/loop`; re-derive the frontier fresh via
+`scripts/math/state.ts` (and each candidate's actual `requires`) each iteration rather than
+trusting any number or `children`/`unlocks`-field assumption recorded here.
