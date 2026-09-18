@@ -60,7 +60,12 @@ describe('contract-audit.ts content detection — shape-based, not name-based', 
     // Before the fix this was 0 for every ENGLISH_ADULT_BAND_BATCH_* file —
     // a non-trivial floor here is exactly what would have caught the bug.
     expect(englishAdultProbes.length).toBeGreaterThan(50)
-  })
+    // Explicit timeout (default 5000ms), same as probeOptionQuality.test.ts's
+    // and mathPackageCorpus.test.ts's precedent for a full-corpus load() —
+    // load() dynamically imports every seed-asset module on disk, so its
+    // wall-clock cost scales with corpus size; it now exceeds 5s as the
+    // English asset-contract closure campaign keeps adding files.
+  }, 30000)
 
   it('english pairsAtContract is now the corrected, much higher reading — not the pre-fix 2/412', async () => {
     const { explanations, probes } = await load()

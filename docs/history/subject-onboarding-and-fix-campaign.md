@@ -371,3 +371,55 @@ Validated: `npx tsc --noEmit` clean; targeted tests (`englishAssetContractP1`,
 suite 700/700 test files, 14,461 passed / 9 skipped (no regression vs. pre-batch baseline);
 `npm run build` clean (middleware 79.7 kB, no regression).
 
+### Batch — English `eng.literature.*` ADULT-band gap, all 19 short concepts, closes the subdomain (2026-09-18)
+
+**Correction to the prior estimate**: this file's own "Remaining 51" line above quoted
+`eng.literature.*` as 16 concepts. Live regeneration (`contract-audit.ts --subject english
+--all`) found **19**, not 16 — corrected here, per this campaign's standing rule to never trust a
+count in a history file.
+
+Closed all 19 short `eng.literature.*` concepts: comparative-literature-intro, dramatic-structure,
+foreshadowing-and-suspense, imagery, irony, literary-criticism-intro, literary-devices-overview,
+literary-genres-overview, literary-periods-survey, metaphor-and-simile, meter-and-rhyme,
+novel-study, poetic-forms, poetry-basics, prose-fiction, prose-nonfiction, short-story-study,
+symbolism, theme-and-message. Same established technique as Batches 13-17 (`adultLadder` helper:
+`mcq`(FOUNDATIONAL) + `misconception_probe`(DEVELOPING) + `mcq`(PROFICIENT), each distractor's
+`misconceptionId` reusing one of the concept's own two already-registered Blueprint
+misconceptions — verified against each concept's own Component 1 Misconception Register before
+writing). **Naming-convention note**: several of these Blueprints label their two misconceptions
+with bare `MC-...` headings rather than the `MC-A-.../MC-B-...` convention used elsewhere (e.g.
+`literary-devices-overview`, `metaphor-and-simile`, `poetry-basics`, `prose-fiction`, `symbolism`,
+`theme-and-message`) — the batch file carries each concept's exact heading text verbatim as the
+misconceptionId regardless of which convention that Blueprint happens to use. New file:
+`englishAdultBandBatch18.ts` (57 new probes). Wired into both writers (`src/instrumentation.ts`'s
+bootstrap `ALL_PROBES` and `scripts/brain/seed-knowledge-assets.ts`'s `ALL_PROBES`) —
+`seedCorpusCoverageRatchet.test.ts` passes. All 19 concepts held zero prior ADULT probes, so this
+is a fresh singleton-to-ladder promotion with zero P-10 collision risk (`--dry-run`:
+created=7802, skipped=0, revived=0).
+
+English: **361/412 → 380/412 at contract, 51 → 32 short.** Remaining 32: `eng.phonetics.*` (12
+advanced), `eng.vocab.*` (9 advanced), `eng.writing.*` (9 advanced),
+`eng.reading.reading-across-genres`, `eng.speaking.debate-skills`/`presentation-skills`, and the 2
+EARLY-band phonics pairs flagged in the Batch 13 entry above (deliberately excluded —
+voice-required, not closable the same way).
+
+**Test-infrastructure fix, surfaced by this batch's own validation (not a content bug)**:
+`contractAuditShapeDetection.test.ts`'s `load() over the real corpus...` test calls
+`contract-audit.ts`'s `load()`, which dynamically imports every seed-asset module on disk — its
+wall-clock cost scales with total corpus size, and with ~90 seed-asset files now on disk it
+started exceeding vitest's default 5000ms test timeout (reproduced consistently, both in
+isolation and inside the full suite run, not a flake). Fixed by giving that one test an explicit
+30000ms timeout via `it()`'s third argument — the exact same fix pattern this codebase already
+uses for other full-corpus-load tests (`probeOptionQuality.test.ts` at 30000ms,
+`mathPackageCorpus.test.ts` at 60000ms). No assertion logic changed. Whoever adds the next batch
+of seed-asset files should expect this to need raising again eventually as the corpus keeps
+growing — check this test first if a batch's full-suite run times out here.
+
+Validated: `npx tsc --noEmit` clean; targeted tests (`englishAssetContractP1`,
+`contractAuditShapeDetection`, `contractAuditSubjectCoverage`, `seedCorpusCoverageRatchet`,
+`curriculumKgRegistration`, 41 tests) green (after the timeout fix above);
+`contract-audit.ts --subject english` confirms 380/412; `validate-knowledge-graph.ts
+docs/english/kg/graph.json` PASS (KG file untouched); full suite 700/700 test files, 14,461
+passed / 9 skipped (no regression vs. pre-batch baseline); `npm run build` clean (middleware
+79.7 kB, no regression).
+
