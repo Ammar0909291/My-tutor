@@ -3333,3 +3333,27 @@ exhausted, plus the same 8 previously-unstarted domains unchanged. Campaign cont
 same active `/loop`; re-derive the frontier fresh via `scripts/math/state.ts` (and each
 candidate's actual `requires`) each iteration rather than trusting any number or
 `children`/`unlocks`-field assumption recorded here.
+
+### Batch 102 (2026-09-18)
+
+Authored `first-order-ode` (separability as a factoring test; the constant surviving
+exponentiation as multiplicative A=e^C, never dropped; both sides gaining a combined constant)
+and `independence` (product-rule test, never causal judgment; disjoint = strongest dependence,
+not independence; mutual independence needs every subcollection, not just pairs — the classical
+two-coin pairwise-not-mutual counterexample). Both Blueprint-grounded by reference, zero other
+KG/Blueprint metadata discrepancy. A genuine discrepancy WAS found and documented on
+`independence`: its Blueprint's P74 routing claims it unlocks `lln`+`poisson-process`, but the
+live KG lists `unlocks: []`. `math.de` **5/56** (4→5). `math.prob` **6/49** (5→6). Mathematics
+**599/908** (597→599), 309 remaining. Full per-concept detail in `COVERAGE.md` Batch 102.
+Validated: KG validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts`
+confirms math.de 5/56, math.prob 6/49, mathematics 599/908 (11 EB-certified domains unchanged),
+`tsc --noEmit` clean, targeted EB/curriculum tests 128/128 passed, full suite 700 files / 14461
+passed (9 pre-existing skips, 0 failures). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/
+runtime file touched. Commit `c5873d5` on `main`, pushed directly.
+
+Fresh frontier: `math.de` 1 (`second-order-ode`, requires only `first-order-ode`), `math.prob` 1
+(`total-probability`, deferred, unchanged), `math.linalg` still exhausted, plus the same 8
+previously-unstarted domains unchanged. Campaign continues under the same active `/loop`;
+re-derive the frontier fresh via `scripts/math/state.ts` (and each candidate's actual `requires`)
+each iteration rather than trusting any number or `children`/`unlocks`-field assumption recorded
+here.

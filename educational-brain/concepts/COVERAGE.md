@@ -13092,3 +13092,52 @@ previously-unstarted domains unchanged.
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `be3da72` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 102 (2026-09-18)
+
+Re-derived the frontier fresh, confirmed matching Batch 101's prediction — `math.de` 1
+(`first-order-ode`), `math.prob` 2 (`independence`, `total-probability`). Selected
+`first-order-ode` and `independence`, deferring `total-probability`.
+
+`first-order-ode` (requires `ode`+`antiderivatives`+`u-substitution`, unlocks
+`second-order-ode`): separability as a factoring test on the RHS ($y'=xy$ separable, $y'=x+y$
+never separable however rearranged — the sum genuinely cannot factor); the arbitrary constant
+surviving exponentiation as a MULTIPLICATIVE $A=e^C$, never dropped ($\ln|y|=3x+C\to y=Ae^{3x}$,
+never $y=e^{3x}$ — dropping $A$ makes satisfying any IC but $y(0)=1$ impossible); and both sides
+of a separated equation gaining a constant, combined by convention into one. Covers both
+solution methods (separation, integrating factor) and the decision between them. 3
+misconceptions independently classified, all overgeneralization or instruction-induced — MC-1
+SEPARATION-ON-NON-SEPARABLE (Foundational), MC-2 CONSTANT-ABSORBED-PREMATURELY, MC-3
+SINGLE-SIDE-CONSTANT. Zero Blueprint/KG metadata discrepancy.
+
+`independence` (requires `conditional-probability`, unlocks none per KG): the product-rule
+definition $P(A\cap B)=P(A)P(B)$ as a purely numerical test, never a causal judgment; disjoint
+events with positive probability as the STRONGEST dependence, never independence (die-roll
+$A,D$: $P(A\cap D)=0\ne2/9=P(A)P(D)$, and $P(A|D)=0$ means $D$ makes $A$ IMPOSSIBLE); and mutual
+independence of 3+ events requiring every subcollection's product, not just pairs (the classical
+two-coin $A,B,X=$"same face" construction: every pair passes, the triple's $1/4\ne1/8$ fails). 3
+misconceptions independently classified, all language contamination or overgeneralization —
+MC-1 DISJOINT-MEANS-INDEPENDENT (Foundational), MC-2 PAIRWISE-IMPLIES-MUTUAL, MC-3
+INDEPENDENCE-IS-CAUSAL-UNRELATEDNESS.
+
+**Blueprint/KG metadata discrepancy found and documented on `independence`**: its own Blueprint
+P74 routing claims "unlock math.prob.lln and math.prob.poisson-process," but the live KG lists
+this concept's `unlocks` as an empty array — the authored entry states the KG's actual value
+(no unlocks), documenting rather than silently reproducing the Blueprint's routing claim.
+
+**One of 2 concepts this batch is math.de, one is math.prob.** `math.de` **4/56 → 5/56**.
+`math.prob` **5/49 → 6/49**. Mathematics **597/908 → 599/908**, 309 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.de` 5/56,
+`math.prob` 6/49, mathematics 599/908, 11 EB-certified domains unchanged. `npx tsc --noEmit` →
+clean (exit 0). Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 128 passed (128)".
+Full suite: "Test Files 700 passed (700), Tests 14461 passed | 9 skipped (14470)" — 0 failures.
+
+Computed fresh frontier post-batch (each candidate's `requires` individually re-verified):
+`math.de` 1 (`second-order-ode`, requires only `first-order-ode`), `math.prob` 1
+(`total-probability`, deferred from this batch, unchanged), `math.linalg` still exhausted, plus
+the same 8 previously-unstarted domains unchanged.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `c5873d5` on `main`, pushed directly, continuing under the same active `/loop`.
