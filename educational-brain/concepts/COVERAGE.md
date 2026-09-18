@@ -13459,3 +13459,57 @@ exhausted, plus 6 previously-unstarted domains unchanged (`math.meas` no longer 
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `c4a6cb7` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 109 (2026-09-18) — second genuine cross-link in math.meas; opens math.real domain
+
+Re-derived the frontier fresh, confirmed `math.meas.measure` ready (requires only `sigma-algebra`,
+authored Batch 108). Also opened a new previously-unstarted domain, `math.real`, via its true
+entry node `math.real.completeness` (requires only already-certified `math.found.real-numbers`
+and `math.found.total-order`). Authored both.
+
+`measure` (requires `sigma-algebra`, unlocks `lebesgue-measure`/`measurable-function`,
+cross_links `math.prob.probability-measure` — **confirmed AUTHORED via `ls`, a genuine cross-link
+probe**, this campaign's third such case after Batch 101's `linear-map` and Batch 108's
+`sigma-algebra`): the two measure axioms ($\mu(\emptyset)=0$, countable additivity over disjoint
+sets) directly generalizing `probability-measure`'s own axiom template by dropping the $\mu(X)=1$
+normalization constraint; disjointness required before additivity applies (naive addition on
+overlapping $[0,2]\cup[1,3]$ fails, needing inclusion-exclusion); and $\infty$ as a fully
+legitimate measure value (length measure on $\mathbb R$), never an error. 3 misconceptions
+independently classified — MC-1 ADDITIVITY-APPLIED-TO-OVERLAPPING-SETS (instruction-induced,
+Foundational), MC-2 MEASURE-ASSUMED-NORMALIZED (overgeneralization, Moderate), MC-3
+INFINITE-MEASURE-TREATED-AS-ERROR (perceptual, Minor). Zero Blueprint/KG metadata discrepancy.
+
+`completeness` (requires `math.found.real-numbers`/`math.found.total-order`, unlocks
+`sup-inf`/`archimedean`, cross_links `math.fnal.completeness` — **confirmed NOT authored via
+`ls`, independence mode correctly self-reported by the Blueprint, no correction needed**): the
+supremum need not be attained by any set member ($\sup(0,1)=1\notin(0,1)$, vs. $\sup(0,1]=1\in
+(0,1]$, attained); completeness as the property genuinely distinguishing $\mathbb R$ from
+$\mathbb Q$ ($\{x\in\mathbb Q:x^2<2\}$ has no rational supremum, but $\sup=\sqrt2$ in $\mathbb R$);
+and the Cauchy-sequence formulation as strictly stronger than mere boundedness ($a_n=(-1)^n$ is
+bounded but not Cauchy, hence not convergent). 3 misconceptions independently classified, all
+overgeneralization — MC-1 SUPREMUM-MUST-BE-ATTAINED (Foundational), MC-2
+COMPLETENESS-HOLDS-IN-RATIONALS (Foundational), MC-3 BOUNDED-SEQUENCE-CONVERGES (Moderate). Zero
+Blueprint/KG metadata discrepancy.
+
+**Both concepts this batch zero Blueprint/KG metadata discrepancy on every field.** `math.meas`
+**1/13 → 2/13**. `math.real` **0/? → 1/?**, newly opened. Mathematics **611/908 → 613/908**, 295
+remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.meas` 2/13,
+mathematics 613/908, 11 EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0).
+Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 118 passed (118)". Full
+whole-repo vitest run was started but killed after showing no CPU progress (idle/sleeping state,
+near-zero accumulated CPU time across repeated checks) — treated as an environment anomaly, not a
+content defect; validator + state.ts + tsc + the full targeted EB/curriculum suite (118 tests)
+provide sufficient validation coverage for this batch's two markdown-only additions. Full-suite
+re-verification deferred to the next batch that touches non-EB-content code.
+
+Computed fresh frontier post-batch: `math.meas` 1 remaining reachable (`lebesgue-measure`,
+requires only `measure`, now authored), `math.real` 2 reachable (`sup-inf`, `archimedean`, both
+requiring only `completeness`, now authored), `math.de`'s systems-ode branch and `math.linalg`
+both still exhausted, plus 5 previously-unstarted domains unchanged (`math.real` no longer
+unstarted).
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `8176140` on `main`, pushed directly, continuing under the same active `/loop`.
