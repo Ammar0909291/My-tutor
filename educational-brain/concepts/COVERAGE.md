@@ -13248,3 +13248,57 @@ previously-unstarted domains unchanged.
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `ca7692f` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 105 (2026-09-18) — opens math.stats domain; third P76-mode discrepancy
+
+Re-derived the frontier fresh, confirmed matching Batch 104's prediction — `math.prob` 1
+(`bayesian-inference`). Also opened a second previously-unstarted domain: traced `math.stats`'s
+dependency graph to its true entry node, `math.stats.population-sample` (requiring only
+already-certified `math.arith`). Authored both.
+
+`bayesian-inference` (requires `bayes-theorem`, unlocks none): conjugate priors updating
+pseudo-counts directly (Beta(α,β) prior + Binomial likelihood → Beta(α+k,β+n−k) posterior, mean a
+weighted average of prior mean and MLE, converging to the MLE as $n\to\infty$); a credible
+interval as a DIRECT probability statement about $\theta$, never the same claim as a frequentist
+confidence interval (a property of the repeated procedure, never the parameter itself); and
+conjugacy as a computational convenience, never a requirement — the posterior exists for any
+prior, MCMC/variational inference handle the non-conjugate case with identical underlying
+structure. 3 misconceptions independently classified — MC-1
+PRIOR-IS-ARBITRARY-SO-BAYES-IS-SUBJECTIVE (language contamination), MC-2
+CONJUGATE-PRIOR-IS-THE-ONLY-VALID-PRIOR (instruction-induced), MC-3
+CREDIBLE-INTERVAL-EQUALS-CONFIDENCE-INTERVAL (language contamination).
+
+**Third genuine Blueprint mode discrepancy this campaign** (after Batches 102 and 104):
+`bayesian-inference`'s own Blueprint also claims "Cross-link mode" against the SAME unauthored
+target, `math.stats.bayesian-inference` — confirmed via `ls` still absent, corrected to
+independence mode again.
+
+`population-sample` (requires `math.arith.fractions`, unlocks `descriptive-statistics`+
+`sampling`; opens `math.stats`): a sample statistic ESTIMATING, never equaling, a population
+parameter (25-classmate smartphone poll ≠ all-teenager fact); representativeness coming from
+sampling METHOD, never size alone (the 1936 Literary Digest's 2.4 MILLION biased responses called
+the election wrong; Gallup's 50,000 random responses called it right — method beat size 48:1);
+and a population as any well-defined collection, never restricted to people (a lab-mouse colony,
+a factory's daily bolt output). 3 misconceptions independently classified, all
+overgeneralization or language contamination — MC-1 SAMPLE-IS-POPULATION (Foundational), MC-2
+LARGER-IS-ALWAYS-BETTER, MC-3 POPULATION-IS-PEOPLE. Zero Blueprint/KG metadata discrepancy.
+
+**One of 2 concepts this batch is math.prob, one opens math.stats.** `math.prob` **8/49 → 9/49**.
+`math.stats` **0/40 → 1/40**, newly opened. Mathematics **603/908 → 605/908**, 303 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.prob` 9/49,
+`math.stats` 1/40, mathematics 605/908, 11 EB-certified domains unchanged. `npx tsc --noEmit` →
+clean (exit 0). Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 128 passed (128)".
+Full suite: "Test Files 700 passed (700), Tests 14461 passed | 9 skipped (14470)" — 0 failures.
+
+Computed fresh frontier post-batch: `math.prob`'s chain from `sample-space` is now fully
+exhausted (`bayesian-inference` has no unlocks) — a fresh scan of math.prob's other ~40 untouched
+concepts (mean, variance, distributions, etc.) is needed next iteration rather than assuming
+exhaustion of the whole domain. `math.stats` 2 (`descriptive-statistics`, `sampling`, both
+requiring only `population-sample`), `math.de`'s systems-ode branch still exhausted, `math.linalg`
+still exhausted, plus the same 7 previously-unstarted domains unchanged (`math.stats` no longer
+counts as unstarted).
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `97ea761` on `main`, pushed directly, continuing under the same active `/loop`.

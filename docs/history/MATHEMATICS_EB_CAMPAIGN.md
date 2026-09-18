@@ -3405,3 +3405,29 @@ exhausted, plus the same 8 previously-unstarted domains unchanged. Campaign cont
 same active `/loop`; re-derive the frontier fresh via `scripts/math/state.ts` (and each
 candidate's actual `requires`) each iteration rather than trusting any number or
 `children`/`unlocks`-field assumption recorded here.
+
+### Batch 105 (2026-09-18) — opens math.stats domain; third P76-mode discrepancy
+
+Authored `bayesian-inference` (conjugate priors updating pseudo-counts; credible interval as a
+direct probability about theta, never equal to a confidence interval; conjugacy as convenience
+not requirement) and opened `math.stats` via its true entry node, `population-sample` (sample
+estimates population, never equals it; method beats size — 1936 Literary Digest vs. Gallup;
+population as any well-defined collection, not just people). Both Blueprint-grounded by
+reference. A THIRD Blueprint mode discrepancy was caught: `bayesian-inference`'s Blueprint again
+claims cross-link mode against `math.stats.bayesian-inference`, still unauthored — corrected to
+independence. `math.prob` **9/49** (8→9). `math.stats` **1/40** (0→1, newly opened). Mathematics
+**605/908** (603→605), 303 remaining. Full per-concept detail in `COVERAGE.md` Batch 105.
+Validated: KG validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts`
+confirms math.prob 9/49, math.stats 1/40, mathematics 605/908 (11 EB-certified domains
+unchanged), `tsc --noEmit` clean, targeted EB/curriculum tests 128/128 passed, full suite 700
+files / 14461 passed (9 pre-existing skips, 0 failures). No Physics/Chemistry/English/Biology/
+CS/KG/Blueprint/runtime file touched. Commit `97ea761` on `main`, pushed directly.
+
+Fresh frontier: `math.prob`'s chain from `sample-space` is fully exhausted (`bayesian-inference`
+unlocks nothing) — math.prob has ~40 other untouched concepts (mean, variance, distributions,
+etc.) needing a fresh scan next iteration, not assumed exhausted as a whole domain. `math.stats`
+2 (`descriptive-statistics`, `sampling`, both requiring only `population-sample`). `math.de`'s
+systems-ode branch and `math.linalg` both still exhausted, plus 7 previously-unstarted domains
+unchanged. Campaign continues under the same active `/loop`; re-derive the frontier fresh via
+`scripts/math/state.ts` (and each candidate's actual `requires`) each iteration rather than
+trusting any number or `children`/`unlocks`-field assumption recorded here.
