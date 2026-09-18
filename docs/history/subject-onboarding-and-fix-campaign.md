@@ -343,3 +343,31 @@ hygiene items unrelated to the two previously-fixed leaks. Note: the Supabase Ma
 API/MCP tools do not expose actual monthly GB egress-vs-quota numbers — that requires the
 Supabase dashboard's own Usage/Billing page, which only the owner can check directly.
 
+### Batch — English `eng.grammar.*` gap, the 3 pairs Batch 16 surfaced, closes the subdomain (2026-09-18)
+
+Closed all 3 previously-unrecorded short `eng.grammar.*` pairs found by Batch 16's live
+regeneration: `colons-semicolons-dashes`, `parallel-structure`, `sentence-combining`. Same
+established technique as Batches 13-16 (`adultLadder` helper: `mcq`(FOUNDATIONAL) +
+`misconception_probe`(DEVELOPING) + `mcq`(PROFICIENT), each distractor's `misconceptionId` reusing
+one of the concept's own two already-registered Blueprint misconceptions — verified against each
+concept's own Component 1 Misconception Register before writing, all 3 hold exactly MC-A/MC-B).
+New file: `englishAdultBandBatch17.ts` (9 new probes, adult/workplace framing — a report, a
+review, an incident log). Wired into both writers (`src/instrumentation.ts`'s bootstrap
+`ALL_PROBES` and `scripts/brain/seed-knowledge-assets.ts`'s `ALL_PROBES`) —
+`seedCorpusCoverageRatchet.test.ts` passes. All 3 concepts held zero prior ADULT probes, so this
+is a fresh singleton-to-ladder promotion with zero P-10 collision risk (`--dry-run`:
+created=7745, skipped=0, revived=0).
+
+English: **358/412 → 361/412 at contract, 54 → 51 short.** Remaining 51: `eng.literature.*` (16
+advanced), `eng.phonetics.*` (12 advanced), `eng.vocab.*` (9 advanced), `eng.writing.*` (9
+advanced), `eng.reading.reading-across-genres`, `eng.speaking.debate-skills`/`presentation-skills`,
+and the 2 EARLY-band phonics pairs flagged in the Batch 13 entry above (deliberately excluded —
+voice-required, not closable the same way).
+
+Validated: `npx tsc --noEmit` clean; targeted tests (`englishAssetContractP1`,
+`contractAuditShapeDetection`, `contractAuditSubjectCoverage`, `seedCorpusCoverageRatchet`,
+`curriculumKgRegistration`, 41 tests) green; `contract-audit.ts --subject english` confirms
+361/412; `validate-knowledge-graph.ts docs/english/kg/graph.json` PASS (KG file untouched); full
+suite 700/700 test files, 14,461 passed / 9 skipped (no regression vs. pre-batch baseline);
+`npm run build` clean (middleware 79.7 kB, no regression).
+
