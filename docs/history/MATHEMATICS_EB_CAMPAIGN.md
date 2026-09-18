@@ -3357,3 +3357,26 @@ previously-unstarted domains unchanged. Campaign continues under the same active
 re-derive the frontier fresh via `scripts/math/state.ts` (and each candidate's actual `requires`)
 each iteration rather than trusting any number or `children`/`unlocks`-field assumption recorded
 here.
+
+### Batch 103 (2026-09-18)
+
+Authored `second-order-ode` (order 2 = two constants = two conditions always, discovered via
+trial solution y=e^{rx}; all three discriminant cases retain exactly two constants; repeated-root
+collapse fixed by the x*e^{rx} second solution) and `total-probability` (weighted-average law,
+never simple averaging; partition requiring BOTH mutual exclusivity and exhaustiveness; extension
+beyond two cases). Both Blueprint-grounded by reference, zero KG/Blueprint metadata discrepancy.
+`math.de` **6/56** (5→6). `math.prob` **7/49** (6→7). Mathematics **601/908** (599→601), 307
+remaining. Full per-concept detail in `COVERAGE.md` Batch 103. Validated: KG validator PASS
+(908/908 reachable, file untouched), `scripts/math/state.ts` confirms math.de 6/56, math.prob
+7/49, mathematics 601/908 (11 EB-certified domains unchanged), `tsc --noEmit` clean, targeted
+EB/curriculum tests 128/128 passed, full suite 700 files / 14461 passed (9 pre-existing skips, 0
+failures). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Commit
+`32a58ee` on `main`, pushed directly.
+
+Fresh frontier: `math.de` 1 (`systems-ode`, requires `second-order-ode`+already-authored
+`math.linalg.matrix`+`math.linalg.eigenvalues`; `higher-order-ode` requires
+`second-order-linear`, still unauthored, NOT yet ready), `math.prob` 1 (`bayes-theorem`, both its
+requirements now authored), `math.linalg` still exhausted, plus the same 8 previously-unstarted
+domains unchanged. Campaign continues under the same active `/loop`; re-derive the frontier fresh
+via `scripts/math/state.ts` (and each candidate's actual `requires`) each iteration rather than
+trusting any number or `children`/`unlocks`-field assumption recorded here.

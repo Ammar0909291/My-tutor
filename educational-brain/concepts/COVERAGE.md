@@ -13141,3 +13141,52 @@ the same 8 previously-unstarted domains unchanged.
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `c5873d5` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 103 (2026-09-18)
+
+Re-derived the frontier fresh, confirmed matching Batch 102's prediction — `math.de` 1
+(`second-order-ode`), `math.prob` 1 (`total-probability`). Authored both.
+
+`second-order-ode` (requires `first-order-ode`, unlocks `higher-order-ode`+`systems-ode`): order
+2 means two constants and two conditions, ALWAYS — discovered by trying $y=e^{rx}$ in
+$y''-5y'+6y=0$ and watching the ODE collapse to the quadratic $r^2-5r+6=0$; all three
+discriminant cases (distinct real, repeated real, complex $\alpha\pm\beta i$) retain exactly two
+constants, only the building blocks (exponentials, $x$-weighted exponentials, damped
+oscillations) change; and the repeated-root naive sum $C_1e^{rx}+C_2e^{rx}$ collapsing to one
+effective constant $(C_1+C_2)e^{rx}$, fixed by the genuine second solution $xe^{rx}$ (verified
+directly by substitution). 3 misconceptions independently classified — MC-1
+SINGLE-CONSTANT-SOLUTION (overgeneralization, Foundational), MC-2 REPEATED-ROOT-COLLAPSE
+(overgeneralization), MC-3 COMPLEX-ROOTS-MISREAD (notation-induced, $\alpha$/$\beta$ swapped or
+mis-signed). Zero Blueprint/KG metadata discrepancy.
+
+`total-probability` (requires `conditional-probability`, unlocks `bayes-theorem`):
+$P(A)=\sum_iP(A|B_i)P(B_i)$ as a WEIGHTED average by base rates $P(B_i)$, never a simple average
+(an extreme-weight example: $P(B_1)=0.001,P(B_2)=0.999$ with $P(A|B_1)=1,P(A|B_2)=0$ gives the
+correct answer $0.001$, not the naive $0.5$); a genuine partition requiring BOTH mutual
+exclusivity AND exhaustiveness, neither alone sufficient ($\{$heads, even$\}$ for a die fails
+both); and the law extending beyond two cases to $n$-element and continuous partitions
+(generalizing the classic two-case disease-test example directly). 3 misconceptions
+independently classified — MC-1 TOTAL-PROBABILITY-AVERAGES-PROBABILITIES (overgeneralization),
+MC-2 PARTITION-IS-OPTIONAL (language contamination), MC-3
+TOTAL-PROBABILITY-IS-ONLY-FOR-TWO-CASES (instruction-induced). Zero Blueprint/KG metadata
+discrepancy.
+
+**One of 2 concepts this batch is math.de, one is math.prob; both zero Blueprint/KG metadata
+discrepancy on every field.** `math.de` **5/56 → 6/56**. `math.prob` **6/49 → 7/49**. Mathematics
+**599/908 → 601/908**, 307 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.de` 6/56,
+`math.prob` 7/49, mathematics 601/908, 11 EB-certified domains unchanged. `npx tsc --noEmit` →
+clean (exit 0). Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 128 passed (128)".
+Full suite: "Test Files 700 passed (700), Tests 14461 passed | 9 skipped (14470)" — 0 failures.
+
+Computed fresh frontier post-batch (each candidate's `requires` individually re-verified):
+`math.de` 1 (`systems-ode`, requires `second-order-ode`+already-authored
+`math.linalg.matrix`+`math.linalg.eigenvalues`; `higher-order-ode` requires
+`second-order-linear`, still unauthored, so NOT yet ready), `math.prob` 1 (`bayes-theorem`,
+requires both `conditional-probability`+`total-probability`, both now authored), `math.linalg`
+still exhausted, plus the same 8 previously-unstarted domains unchanged.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `32a58ee` on `main`, pushed directly, continuing under the same active `/loop`.
