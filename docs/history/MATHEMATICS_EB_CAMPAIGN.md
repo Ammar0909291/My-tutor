@@ -3431,3 +3431,26 @@ systems-ode branch and `math.linalg` both still exhausted, plus 7 previously-uns
 unchanged. Campaign continues under the same active `/loop`; re-derive the frontier fresh via
 `scripts/math/state.ts` (and each candidate's actual `requires`) each iteration rather than
 trusting any number or `children`/`unlocks`-field assumption recorded here.
+
+### Batch 106 (2026-09-18)
+
+Authored `descriptive-statistics` (mean pulled by outliers, median resistant; each display built
+for a specific question; descriptive vs. inferential boundary) and `sampling` (stratified-within
+vs. cluster-of-whole-groups; size controls precision, never fixes a biased method's center —
+Literary Digest/Gallup 1936 again; random as a controlled procedure, never haphazard). Both
+Blueprint-grounded by reference, zero KG/Blueprint metadata discrepancy. `math.stats` **3/40**
+(1→3). Mathematics **607/908** (605→607), 301 remaining. Full per-concept detail in
+`COVERAGE.md` Batch 106. Validated: KG validator PASS (908/908 reachable, file untouched),
+`scripts/math/state.ts` confirms math.stats 3/40, mathematics 607/908 (11 EB-certified domains
+unchanged), `tsc --noEmit` clean, targeted EB/curriculum tests 128/128 passed, full suite 700
+files / 14461 passed (9 pre-existing skips, 0 failures). No Physics/Chemistry/English/Biology/
+CS/KG/Blueprint/runtime file touched. Commit `7279557` on `main`, pushed directly.
+
+Fresh frontier: `math.stats` 3 (`measures-of-center`, `measures-of-spread`,
+`data-visualization`, all verified to require only `descriptive-statistics`+already-certified
+`math.arith`; `sampling-distribution` requires unauthored `random-variable`+`clt`, NOT yet
+ready), `math.de`'s systems-ode branch and `math.linalg` both still exhausted, plus 7
+previously-unstarted domains unchanged. Campaign continues under the same active `/loop`;
+re-derive the frontier fresh via `scripts/math/state.ts` (and each candidate's actual `requires`)
+each iteration rather than trusting any number or `children`/`unlocks`-field assumption recorded
+here.

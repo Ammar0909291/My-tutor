@@ -13302,3 +13302,53 @@ counts as unstarted).
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `97ea761` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 106 (2026-09-18)
+
+Re-derived the frontier fresh, confirmed matching Batch 105's prediction — `math.stats` 2
+(`descriptive-statistics`, `sampling`, both independently requiring only already-authored
+concepts). Authored both.
+
+`descriptive-statistics` (requires `population-sample`, unlocks `sampling`): the mean pulled
+toward outliers while the median resists them (salaries 40,42,45,48,200k: mean 75k distorted by
+the single CEO outlier, median 45k representative); each graphical display built for a specific
+question, never interchangeable (histogram=shape, boxplot=spread/comparison across groups,
+scatterplot=two-variable relationship); and descriptive statistics making NO claim beyond the
+data collected, directly reusing `population-sample`'s own population/sample distinction (60% of
+a 50-voter sample supporting a proposal is a fact about that sample, never automatically a fact
+about all city voters). 3 misconceptions independently classified, all overgeneralization or
+perceptual — MC-1 MEAN-DEFAULTED-TO-WITHOUT-CHECKING-OUTLIERS (Foundational), MC-2
+DESCRIPTIVE-SAMPLE-STATISTIC-GENERALIZED-TO-POPULATION (Foundational), MC-3
+GRAPHICAL-DISPLAY-TYPE-MISMATCHED-TO-QUESTION (Moderate). Zero Blueprint/KG metadata discrepancy.
+
+`sampling` (requires `population-sample`+`probability-axioms`, unlocks `sampling-distribution`):
+stratified sampling WITHIN every group versus cluster sampling of WHOLE groups (opposite second
+steps after an identical "divide into groups" first step — a hospital drawing 3 patients from
+EACH of 8 wards is stratified; randomly picking 2 of 8 wards and surveying EVERY patient in them
+is cluster); sample size controlling only PRECISION, never fixing a biased method's center (the
+1936 Literary Digest's 2.4 MILLION biased responses called the election wrong, Gallup's 50,000
+random ones called it right — method beat size 48:1, reusing the identical historical case from
+Batch 105's `population-sample`); and "random" as a controlled procedure with KNOWN
+probabilities, never a synonym for haphazard or convenient. 3 misconceptions independently
+classified — MC-1 LARGER-SAMPLE-FIXES-BIAS (overgeneralization, Foundational), MC-2
+STRATIFIED-CLUSTER-CONFUSION (language contamination), MC-3 RANDOM-MEANS-HAPHAZARD (language
+contamination). Zero Blueprint/KG metadata discrepancy.
+
+**Both concepts this batch are math.stats; both zero Blueprint/KG metadata discrepancy on every
+field.** `math.stats` **1/40 → 3/40**. Mathematics **605/908 → 607/908**, 301 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.stats` 3/40,
+mathematics 607/908, 11 EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0).
+Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 128 passed (128)". Full suite:
+"Test Files 700 passed (700), Tests 14461 passed | 9 skipped (14470)" — 0 failures.
+
+Computed fresh frontier post-batch (each candidate's `requires` individually re-verified):
+`math.stats` 3 (`measures-of-center`, `measures-of-spread`, `data-visualization` — all verified
+to require only `descriptive-statistics`+already-certified `math.arith`; `sampling-distribution`
+requires unauthored `math.prob.random-variable`+`math.prob.clt`, NOT yet ready), `math.de`'s
+systems-ode branch and `math.linalg` both still exhausted, plus 7 previously-unstarted domains
+unchanged.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `7279557` on `main`, pushed directly, continuing under the same active `/loop`.
