@@ -435,6 +435,12 @@ async function bootstrapAssets() {
       // englishAdultBandBatch20.ts's own header for detail.
       const { ENGLISH_ADULT_BAND_BATCH_20 } =
         await import('./lib/teaching/assets/englishAdultBandBatch20')
+      // English ADULT-band probe-contract campaign, Batch 21 (2026-09-18):
+      // closes eng.reading.reading-across-genres, both eng.speaking.*
+      // concepts, and all 5 short eng.writing.* concepts. See
+      // englishAdultBandBatch21.ts's own header for detail.
+      const { ENGLISH_ADULT_BAND_BATCH_21 } =
+        await import('./lib/teaching/assets/englishAdultBandBatch21')
       // Corpus/writer unification, 2026-09-14 (§10.1). The 33 modules below
       // were authored, in git, KG-validated, and imported by the standalone
       // seed script (scripts/brain/seed-knowledge-assets.ts) — but never by
@@ -547,6 +553,7 @@ async function bootstrapAssets() {
         ...ENGLISH_ADULT_BAND_BATCH_12, ...ENGLISH_ADULT_BAND_BATCH_13, ...ENGLISH_ADULT_BAND_BATCH_14,
         ...ENGLISH_ADULT_BAND_BATCH_15, ...ENGLISH_ADULT_BAND_BATCH_16, ...ENGLISH_ADULT_BAND_BATCH_17,
         ...ENGLISH_ADULT_BAND_BATCH_18, ...ENGLISH_ADULT_BAND_BATCH_19, ...ENGLISH_ADULT_BAND_BATCH_20,
+        ...ENGLISH_ADULT_BAND_BATCH_21,
         ...BIOLOGY_PROBES, ...CS_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES,
         ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES,
         ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES,

@@ -495,3 +495,51 @@ Validated: `npx tsc --noEmit` clean; targeted tests (`englishAssetContractP1`,
 suite 700/700 test files, 14,461 passed / 9 skipped (no regression vs. pre-batch baseline);
 `npm run build` clean (middleware 79.7 kB, no regression).
 
+### Batch — English `eng.writing.*`/`eng.reading.*`/`eng.speaking.*` gap, closes every remaining non-phonics subdomain (2026-09-18)
+
+**Correction to the prior estimate**: this file's own "Remaining 12" line above quoted
+`eng.writing.*` as 9 advanced concepts. Live regeneration (`contract-audit.ts --subject english
+--all`) found only **5** short: citations-and-referencing, creative-writing-forms, essay-
+structure, revising-for-content, thesis-statements — corrected here, per this campaign's standing
+rule to never trust a count in a history file.
+
+Closed all 8 remaining closed-choice-eligible concepts: the 5 `eng.writing.*` concepts above,
+`eng.reading.reading-across-genres`, and both `eng.speaking.*` concepts (debate-skills,
+presentation-skills). Same established technique as Batches 13-20 (`adultLadder` helper: `mcq`
+(FOUNDATIONAL) + `misconception_probe`(DEVELOPING) + `mcq`(PROFICIENT), each distractor's
+`misconceptionId` reusing one of the concept's own two already-registered Blueprint
+misconceptions — verified against each concept's own Component 1 Misconception Register before
+writing; as with Batches 18-20, several of these Blueprints use bare `MC-...` headings rather
+than the `MC-A-.../MC-B-...` convention, carried through verbatim). New file:
+`englishAdultBandBatch21.ts` (24 new probes, adult/professional framing — a product-defect
+synthesis, a budget-proposal debate, a quarterly-results slide, a grant proposal). Wired into
+both writers (`src/instrumentation.ts`'s bootstrap `ALL_PROBES` and
+`scripts/brain/seed-knowledge-assets.ts`'s `ALL_PROBES`) — `seedCorpusCoverageRatchet.test.ts`
+passes. All 8 concepts held zero prior ADULT probes, so this is a fresh singleton-to-ladder
+promotion with zero P-10 collision risk (`--dry-run`: created=7886, skipped=0, revived=0).
+
+**New finding, deliberately NOT touched this batch**: the same `--all` regeneration surfaced 2
+previously-unknown short `eng.phonics.*` pairs — `letter-sound-correspondence::ELEMENTARY` and
+`phonemic-awareness::ADULT` — distinct from the already-excluded `::EARLY` band pairs for the
+same two concepts. These two are `gradeable=0, openRecall=0` (zero content of any kind, not even
+voice-required openRecall content, unlike the `::EARLY` pairs which have `openRecall=1`), so
+whether the closed-choice technique this campaign uses is even appropriate for them is an open
+question — phonemic awareness and letter-sound correspondence are inherently about sound
+production/recognition, and a text-based MCQ ("which word starts with the same sound as X?") may
+or may not adequately assess the skill at these two bands. This needs its own investigation
+(check `educational-brain/first-lesson/07-subject-adaptations.md` §1, the same reference Batch
+13 used for the `::EARLY` exclusion decision) before authoring, not a same-turn extension of a
+differently-scoped batch.
+
+English: **400/412 → 408/412 at contract, 12 → 4 short.** Remaining 4 (all `eng.phonics.*`,
+flagged above): `letter-sound-correspondence::EARLY`/`::ELEMENTARY`,
+`phonemic-awareness::EARLY`/`::ADULT`.
+
+Validated: `npx tsc --noEmit` clean; targeted tests (`englishAssetContractP1`,
+`contractAuditShapeDetection`, `contractAuditSubjectCoverage`, `seedCorpusCoverageRatchet`,
+`curriculumKgRegistration`, 41 tests) green; `contract-audit.ts --subject english --all` confirms
+408/412, 4 short (all eng.phonics.*, listed above); `validate-knowledge-graph.ts
+docs/english/kg/graph.json` PASS (KG file untouched); full suite 700/700 test files, 14,461
+passed / 9 skipped (no regression vs. pre-batch baseline); `npm run build` clean (middleware
+79.7 kB, no regression).
+
