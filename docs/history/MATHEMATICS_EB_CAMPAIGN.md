@@ -3259,3 +3259,28 @@ Fresh frontier: `math.prob` 1 (`probability-axioms`, newly unblocked), `math.lin
 exhausted, plus the same 9 previously-unstarted domains unchanged. Campaign continues under the
 same active `/loop`; re-derive the frontier fresh via `scripts/math/state.ts` each iteration
 rather than trusting any number recorded here.
+
+### Batch 99 (2026-09-18) — opens math.de domain
+
+Authored `probability-axioms` (the 3 Kolmogorov axioms as the only assumed truths; every other
+rule is a derived theorem requiring explicit axiom citations) and opened a second
+previously-unstarted domain, `math.de`, via its true entry node `math.de.ode` (solution is a
+function not a number; order vs. degree as independent numbers; general-vs-particular via
+constant counting). Both Blueprint-grounded by reference, zero KG/Blueprint metadata
+discrepancy. `math.prob` **4/49** (3→4). `math.de` **1/56** (0→1, newly opened). Mathematics
+**593/908** (591→593), 315 remaining. Full per-concept detail in `COVERAGE.md` Batch 99.
+Validated: KG validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts`
+confirms math.prob 4/49, math.de 1/56, mathematics 593/908 (11 EB-certified domains unchanged),
+`tsc --noEmit` clean, targeted EB/curriculum tests 128/128 passed, full suite 700 files / 14461
+passed (9 pre-existing skips, 0 failures). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/
+runtime file touched. Commit `8079c51` on `main`, pushed directly.
+
+Fresh frontier (verified via actual `requires`, not the KG `children` field — Batch 98's
+conflation lesson applied again): `math.prob` 1 (`conditional-probability`; `independence`
+requires `conditional-probability` directly, NOT yet ready despite being listed as a `children`
+entry), `math.de` 3 (`ode-order`, `ode-linearity`, `solution-types`, all verified to require only
+`ode`), `math.linalg` still exhausted, plus 8 remaining previously-unstarted domains
+(`math.stats`, `math.cx`, `math.real`, `math.top`, `math.fnal`, `math.num`, `math.cat`,
+`math.meas`). Campaign continues under the same active `/loop`; re-derive the frontier fresh via
+`scripts/math/state.ts` (and each candidate's actual `requires`) each iteration rather than
+trusting any number or `children`-field assumption recorded here.
