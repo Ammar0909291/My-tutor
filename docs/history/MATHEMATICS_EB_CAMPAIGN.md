@@ -3194,3 +3194,22 @@ Fresh frontier: `math.abst` fully closed (no candidates remain). `math.linalg` 3
 (`eigenspace`, `inner-product`, `linear-independence`), plus the same 10 previously-unstarted
 domains unchanged. Campaign continues under the same active `/loop`; re-derive the frontier fresh
 via `scripts/math/state.ts` each iteration rather than trusting any number recorded here.
+
+### Batch 96 (2026-09-18)
+
+Re-derived the frontier fresh, confirmed matching Batch 95's prediction exactly. Authored
+`math.linalg.eigenspace` (algebraic vs. geometric multiplicity, the diagonalizability
+equality-criterion) and `math.linalg.inner-product` (the three inner-product axioms generalizing
+the dot product, positive-definiteness as the most-skipped check, complex conjugate symmetry),
+deferring `linear-independence` to a future batch. Both Blueprint-grounded by reference, zero
+KG/Blueprint metadata discrepancy. `math.linalg` **36/61** (34→36). Mathematics **587/908**
+(585→587), 321 remaining. Full per-concept detail in `COVERAGE.md` Batch 96. Validated: KG
+validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts` confirms math.linalg
+36/61, mathematics 587/908 (11 EB-certified domains unchanged), `tsc --noEmit` clean, targeted
+EB/curriculum tests 128/128 passed, full suite 700 files / 14461 passed (9 pre-existing skips, 0
+failures). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Commit
+`77e2c00` on `main`, pushed directly.
+
+Fresh frontier: `math.linalg` 1 (`linear-independence`), plus the same 10 previously-unstarted
+domains unchanged. Campaign continues under the same active `/loop`; re-derive the frontier fresh
+via `scripts/math/state.ts` each iteration rather than trusting any number recorded here.

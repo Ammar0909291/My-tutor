@@ -12797,3 +12797,49 @@ Computed fresh frontier post-batch: `math.abst` domain fully closed (no further 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `cbc6fe1` on `main`, pushed directly, continuing under the same active `/loop`
 that resumed the campaign in Batch 94.
+
+### Batch 96 (2026-09-18)
+
+Re-derived the frontier fresh via `scripts/math/state.ts`: confirmed matching Batch 95's
+prediction — `math.linalg` 3 candidates (`eigenspace`, `inner-product`, `linear-independence`),
+`math.abst` fully closed. Selected `eigenspace` and `inner-product`, deferring
+`linear-independence`. Both Blueprint-grounded, reused by reference.
+
+`eigenspace` (requires `eigenvalues`+`null-space`, unlocks none): $E_\lambda=\ker(A-\lambda I)$
+computed by directly reusing `null-space`'s own row-reduction technique applied to $A-\lambda I$;
+algebraic multiplicity (root-count in the characteristic polynomial) versus geometric multiplicity
+($\dim(E_\lambda)$) as two genuinely different countings, demonstrated via the defective
+$\begin{pmatrix}3&1\\0&3\end{pmatrix}$ case (algebraic 2, geometric 1); and the
+equality-for-every-eigenvalue criterion for diagonalizability, confirmed on a diagonal
+counter-example where both multiplicities match. 2 misconceptions independently classified
+(Blueprint declares 2, not 3) — MC-1 ALGEBRAIC-AND-GEOMETRIC-MULTIPLICITY-ASSUMED-ALWAYS-EQUAL
+(Type 1, Foundational), MC-2 GEOMETRIC-MULTIPLICITY-COMPUTED-WITHOUT-ROW-REDUCTION (Type 5,
+instruction-induced, Foundational). Zero Blueprint/KG metadata discrepancy.
+
+`inner-product` (requires `vector-space`+`dot-product`, unlocks `inner-product-space`,
+cross_links `math.fnal.hilbert-space` confirmed unauthored via `ls` → independence mode): the
+three inner-product axioms verified first on `dot-product`'s own familiar formula, then on a
+genuinely component-free function-space integral pairing (no numeric components to "dot" at
+all); an indefinite symmetric bilinear form ($u_1v_1-u_2v_2$) that passes symmetry and
+bilinearity but fails positive-definiteness at $v=(0,1)$ (self-pairing $-1<0$); and the complex
+case's conjugate symmetry ($\langle u,v\rangle=\overline{\langle v,u\rangle}$) replacing plain
+symmetry, verified directly against a concrete example where plain symmetry genuinely fails. 3
+misconceptions independently classified — MC-1 INNER-PRODUCT-IS-JUST-DOT-PRODUCT (Type 1,
+Foundational), MC-2 ANY-SYMMETRIC-BILINEAR-FORM-QUALIFIES (Type 5, instruction-induced), MC-3
+COMPLEX-INNER-PRODUCT-IS-PLAIN-SYMMETRIC (Type 4, notation-induced). Zero Blueprint/KG metadata
+discrepancy.
+
+**Both concepts this batch are math.linalg; both zero Blueprint/KG metadata discrepancy on every
+field.** `math.linalg` **34/61 → 36/61**. Mathematics **585/908 → 587/908**, 321 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.linalg` 36/61,
+mathematics 587/908, 11 EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0).
+Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 128 passed (128)". Full suite:
+"Test Files 700 passed (700), Tests 14461 passed | 9 skipped (14470)" — 0 failures.
+
+Computed fresh frontier post-batch: `math.linalg` 1 (`linear-independence`), plus the same 10
+previously-unstarted domains unchanged.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `77e2c00` on `main`, pushed directly, continuing under the same active `/loop`.
