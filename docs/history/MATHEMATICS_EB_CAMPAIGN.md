@@ -3213,3 +3213,28 @@ failures). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file tou
 Fresh frontier: `math.linalg` 1 (`linear-independence`), plus the same 10 previously-unstarted
 domains unchanged. Campaign continues under the same active `/loop`; re-derive the frontier fresh
 via `scripts/math/state.ts` each iteration rather than trusting any number recorded here.
+
+### Batch 97 (2026-09-18) — opens math.prob domain
+
+Re-derived the frontier fresh. `math.graph` (15/16) turned out NOT to have a ready final
+concept — its last node, `random-graph`, requires `math.prob.probability-axioms`, and the entire
+`math.prob` domain was unstarted. Traced the prerequisite chain to `math.prob`'s true entry node,
+`sample-space` (requiring only the already-certified `math.found`), and authored it alongside
+`math.linalg.linear-independence`. `linear-independence`: trivial-solution-is-not-enough,
+multi-vector dependency with no pairwise-parallel relationship, more-than-n-vectors-forces-
+dependence. `sample-space`: Ω as a genuine set (not a list), the finite/countably-infinite/
+uncountable trichotomy, Ω depending on the question asked. Both Blueprint-grounded by reference,
+zero KG/Blueprint metadata discrepancy. `math.linalg` **37/61** (36→37, frontier temporarily
+exhausted). `math.prob` **1/49** (0→1, newly opened). Mathematics **589/908** (587→589), 319
+remaining. Full per-concept detail in `COVERAGE.md` Batch 97. Validated: KG validator PASS
+(908/908 reachable, file untouched), `scripts/math/state.ts` confirms math.linalg 37/61,
+math.prob 1/49, mathematics 589/908 (11 EB-certified domains unchanged), `tsc --noEmit` clean,
+targeted EB/curriculum tests 128/128 passed, full suite 700 files / 14461 passed (9 pre-existing
+skips, 0 failures). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched.
+Commit `9da89a0` on `main`, pushed directly.
+
+Fresh frontier: `math.prob` 1+ (`event`, `probability-measure` both newly unblocked children of
+`sample-space`), `math.linalg` exhausted for now, plus 9 remaining previously-unstarted domains
+(`math.prob` no longer counts as unstarted). Campaign continues under the same active `/loop`;
+re-derive the frontier fresh via `scripts/math/state.ts` each iteration rather than trusting any
+number recorded here.

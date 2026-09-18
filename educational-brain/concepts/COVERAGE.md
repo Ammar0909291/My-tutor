@@ -12843,3 +12843,57 @@ previously-unstarted domains unchanged.
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `77e2c00` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 97 (2026-09-18) — opens math.prob domain
+
+Re-derived the frontier fresh via `scripts/math/state.ts`: confirmed `math.linalg` 1 remaining
+ready candidate (`linear-independence`); `math.graph` showed 15/16 but its one remaining concept,
+`math.graph.random-graph`, was verified via its KG `requires` to depend on
+`math.prob.probability-axioms` — NOT actually ready, since the entire `math.prob` domain was
+unstarted (eb=0). Traced `probability-axioms`'s prerequisite chain back
+(`probability-axioms`→`probability-measure`→`event`→`sample-space`) to find the domain's true
+entry node: `math.prob.sample-space`, requiring only the already-certified `math.found`. Selected
+`linear-independence` and `sample-space` (opening the new domain) for this batch.
+
+`linear-independence` (requires `span`, unlocks `basis`, cross_links `math.de.wronskian`
+confirmed unauthored via `ls` → independence mode): the trivial-solution-is-not-enough
+discipline (the definition's "only solution" clause must be verified, not merely that
+$c_i=0$ satisfies it); a genuine 3-vector dependency with no pairwise-parallel relationship
+($v_3=2v_1+3v_2$ for $v_1=(1,0),v_2=(0,1),v_3=(2,3)$, none of which are individually parallel);
+and the more-than-$n$-vectors-forces-dependence shortcut in $\mathbb R^n$. 3 misconceptions
+independently classified, all Type 1 overgeneralization — MC-1
+DEPENDENCE-REQUIRES-PARALLEL-PAIR, MC-2 TRIVIAL-SOLUTION-PROVES-INDEPENDENCE (Foundational), MC-3
+ANY-VECTOR-COUNT-CAN-BE-INDEPENDENT. Zero Blueprint/KG metadata discrepancy.
+
+`sample-space` (requires `math.found.set-theory`, unlocks `probability-axioms`; opens
+`math.prob`): $\Omega$ as a genuine SET (never an informal list), making complements/unions/
+intersections well-defined via `math.found.set-theory`'s own machinery directly; the finite/
+countably-infinite/uncountable trichotomy (probability is fully defined for all three;
+individual-point-probability-zero on uncountable $\Omega$ is expected, not a paradox); and
+$\Omega$ depending on the QUESTION asked (a single die roll validly has $\Omega=\{1,\dots,6\}$ or
+$\Omega=\{\text{even},\text{odd}\}$ depending on what's being asked), never fixed uniquely by the
+physical experiment alone. 3 misconceptions independently classified, all Type 1
+overgeneralization — MC-1 SAMPLE-SPACE-OUTCOMES-LABELED (Foundational), MC-2
+SAMPLE-SPACE-MUST-BE-FINITE, MC-3 SAMPLE-SPACE-UNIQUE. Zero Blueprint/KG metadata discrepancy.
+
+**One of 2 concepts this batch is math.linalg, one opens math.prob; both zero Blueprint/KG
+metadata discrepancy on every field.** `math.linalg` **36/61 → 37/61** — this domain's frontier
+is temporarily exhausted (no further ready candidates until a currently-blocked concept is
+unblocked by a future domain entering the corpus). `math.prob` **0/49 → 1/49**, newly opened.
+Mathematics **587/908 → 589/908**, 319 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.linalg` 37/61,
+`math.prob` 1/49, mathematics 589/908, 11 EB-certified domains unchanged. `npx tsc --noEmit` →
+clean (exit 0). Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 128 passed (128)".
+Full suite: "Test Files 700 passed (700), Tests 14461 passed | 9 skipped (14470)" — 0 failures.
+
+Computed fresh frontier post-batch: `math.prob` 1 (`event` and `probability-measure` are both
+newly unblocked children of `sample-space` — one is the domain's next candidate; the other
+remains available in parallel), `math.linalg` exhausted of ready candidates for now, plus the
+remaining previously-unstarted domains (`math.de`, `math.stats`, `math.cx`, `math.real`,
+`math.top`, `math.fnal`, `math.num`, `math.cat`, `math.meas` — 9 now, since `math.prob` is no
+longer unstarted) each still holding one ready entry-node candidate.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `9da89a0` on `main`, pushed directly, continuing under the same active `/loop`.
