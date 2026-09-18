@@ -3479,3 +3479,27 @@ exhausted, plus 7 previously-unstarted domains unchanged. Campaign continues und
 active `/loop`; re-derive the frontier fresh via `scripts/math/state.ts` (and each candidate's
 actual `requires`) each iteration rather than trusting any number or `children`/`unlocks`-field
 assumption recorded here.
+
+### Batch 108 (2026-09-18) — genuine cross-link closes math.prob.event's own deferred question
+
+Authored `data-visualization` (chart type follows data type; boxplot outliers are a deliberate
+feature; histogram/bar-chart contiguity contrast) and opened `math.meas` via its entry node
+`sigma-algebra` (three closure axioms, countable-intersection as a theorem via De Morgan; the
+restriction forced only once X is uncountable; Borel σ-algebra). Both Blueprint-grounded by
+reference. `sigma-algebra`'s cross-link to `math.prob.event` is CONFIRMED authored (Batch 98) —
+this campaign's second genuine cross-link probe, and it directly closes `event`'s own
+explicitly-deferred σ-algebra question from that batch. `math.stats` **6/40** (5→6), closing the
+entire `descriptive-statistics` sub-branch. `math.meas` **1/13** (0→1, newly opened). Mathematics
+**611/908** (609→611), 297 remaining. Full per-concept detail in `COVERAGE.md` Batch 108.
+Validated: KG validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts`
+confirms math.stats 6/40, math.meas 1/13, mathematics 611/908 (11 EB-certified domains
+unchanged), `tsc --noEmit` clean, targeted EB/curriculum tests 128/128 passed, full suite 700
+files / 14461 passed (9 pre-existing skips, 0 failures). No Physics/Chemistry/English/Biology/
+CS/KG/Blueprint/runtime file touched. Commit `c4a6cb7` on `main`, pushed directly.
+
+Fresh frontier: `math.stats`'s `descriptive-statistics` sub-branch fully exhausted. `math.meas`
+1 (`measure`, requires only `sigma-algebra`, now authored). `math.de`'s systems-ode branch and
+`math.linalg` both still exhausted, plus 6 previously-unstarted domains unchanged. Campaign
+continues under the same active `/loop`; re-derive the frontier fresh via
+`scripts/math/state.ts` (and each candidate's actual `requires`) each iteration rather than
+trusting any number or `children`/`unlocks`-field assumption recorded here.

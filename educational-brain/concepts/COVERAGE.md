@@ -13405,3 +13405,57 @@ both still exhausted, plus 7 previously-unstarted domains unchanged.
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `138b43d` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 108 (2026-09-18) — genuine cross-link closes math.prob.event's own deferred question
+
+Re-derived the frontier fresh, confirmed matching Batch 107's prediction — `math.stats` 1
+(`data-visualization`). Also opened a second previously-unstarted domain: `math.meas`, via its
+entry node `math.meas.sigma-algebra` (requiring only already-certified `math.found`). Authored
+both.
+
+`data-visualization` (requires `descriptive-statistics`, unlocks none): chart type following
+data type, never visual preference (a histogram/scatterplot for numeric variables, a bar chart
+for categorical ones — plotting five-candidate vote counts as contiguous histogram bins would
+falsely imply a numeric ordering); boxplot outlier points as a DELIBERATE feature, never a
+plotting error (a point at 45 beyond a whisker reaching 30 is genuine flagged data); and why
+histogram bars touch (contiguous numeric bins) while bar chart bars don't (distinct, unordered
+categories), despite superficial visual similarity. 2 misconceptions independently classified —
+MC-1 HISTOGRAM-CONVENTION-USED-FOR-GENUINELY-CATEGORICAL-DATA (perceptual, Moderate), MC-2
+BOXPLOT-OUTLIER-POINTS-ASSUMED-TO-BE-DATA-ERRORS-RATHER-THAN-GENUINE-FLAGGED-VALUES
+(overgeneralization, Foundational). Zero Blueprint/KG metadata discrepancy. Closes
+`descriptive-statistics`'s entire sub-branch frontier (`measures-of-center`,
+`measures-of-spread`, `data-visualization` all now authored).
+
+`sigma-algebra` (requires `math.found.set-theory`, unlocks `math.meas.measure`, cross_links
+`math.prob.event` — **confirmed AUTHORED via `ls`, a genuine cross-link probe**, this campaign's
+second such case after Batch 101's `math.linalg.linear-map`): the three closure axioms ($X\in
+\mathcal F$, closed under complement, closed under COUNTABLE union) with countable-intersection
+closure proven a THEOREM via De Morgan's law, never a fourth axiom; the restriction as
+mathematically FORCED once $X$ is uncountable (the full power set works trivially for
+`math.prob.event`'s own finite die-roll but provably cannot support a consistent measure on
+$\mathbb R$); and the Borel $\sigma$-algebra as the standard resolution. The P76 transfer probe
+directly revisits `event`'s own die-roll example and its EXPLICITLY deferred σ-algebra question
+from Batch 98 ("for uncountable Ω, events form a σ-algebra... non-Tier-1; not assessed in this
+blueprint") — genuinely closing that loop, not merely referencing it. 3 misconceptions
+independently classified, all Foundational or Moderate — MC-1 PARTIAL-AXIOM-CHECK
+(instruction-induced), MC-2 SIGMA-ALGEBRA-SEEN-AS-UNNECESSARY-FORMALISM (overgeneralization),
+MC-3 COUNTABLE-UNION-MISTAKEN-FOR-ARBITRARY-UNION (language contamination). Zero Blueprint/KG
+metadata discrepancy.
+
+**One of 2 concepts this batch is math.stats, one opens math.meas; both zero Blueprint/KG
+metadata discrepancy on every field.** `math.stats` **5/40 → 6/40**. `math.meas` **0/13 →
+1/13**, newly opened. Mathematics **609/908 → 611/908**, 297 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.stats` 6/40,
+`math.meas` 1/13, mathematics 611/908, 11 EB-certified domains unchanged. `npx tsc --noEmit` →
+clean (exit 0). Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 128 passed (128)".
+Full suite: "Test Files 700 passed (700), Tests 14461 passed | 9 skipped (14470)" — 0 failures.
+
+Computed fresh frontier post-batch: `math.stats`'s `descriptive-statistics` sub-branch is now
+FULLY exhausted (all three children authored); `math.meas` 1 (`measure`, requires only
+`sigma-algebra`, now authored), `math.de`'s systems-ode branch and `math.linalg` both still
+exhausted, plus 6 previously-unstarted domains unchanged (`math.meas` no longer unstarted).
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `c4a6cb7` on `main`, pushed directly, continuing under the same active `/loop`.
