@@ -13572,3 +13572,59 @@ frontier computation for the full ready-list).
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `ecea695` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 111 (2026-09-18) — fifth Blueprint wrong-corpus discrepancy; extends math.meas/math.real
+
+Re-derived the frontier fresh (33 ready concepts). Selected `math.meas.measurable-function`
+(requires only `sigma-algebra`, authored Batch 108) and `math.real.archimedean` (requires only
+`completeness`, authored Batch 109), continuing both domains. Authored both.
+
+`measurable-function` (requires `sigma-algebra`, unlocks `lebesgue-integral`, cross_links
+`math.prob.random-variable`): preimage-based measurability definition
+($f^{-1}(E)\in\mathcal F$ for every $E\in\mathcal G$), directly generalizing continuity's
+"preimages of open sets are open"; the open-interval sufficiency test for the Borel case (checking
+generators suffices, never every individual Borel set); and the step function as a
+measurable-but-discontinuous counterexample, proving measurability strictly weaker than
+continuity. 3 misconceptions independently classified — MC-1
+MEASURABLE-ASSUMED-EQUIVALENT-TO-CONTINUOUS (overgeneralization, Foundational), MC-2
+ALL-BOREL-SETS-ASSUMED-TO-REQUIRE-INDIVIDUAL-CHECKING (instruction-induced, Moderate), MC-3
+MEASURABILITY-DEFINITION-DIRECTION-REVERSED (notation-induced, Moderate).
+
+`archimedean` (requires `completeness`, unlocks none, cross_links none): the full
+proof-by-contradiction deriving $\mathbb N$'s unboundedness from completeness's own supremum
+machinery; the arbitrarily-small-$1/n$ corollary justified via the property, never asserted as
+obvious; and density of $\mathbb Q$ in $\mathbb R$ shown to rely specifically on the Archimedean
+mechanism, never mere infinitude. 3 misconceptions independently classified — MC-1
+ARCHIMEDEAN-PROPERTY-TREATED-AS-INDEPENDENT-AXIOM (overgeneralization, Foundational), MC-2
+DENSITY-OF-RATIONALS-TREATED-AS-UNRELATED-FACT (overgeneralization, Moderate), MC-3
+ARBITRARILY-SMALL-1/N-ASSUMED-OBVIOUS-WITHOUT-JUSTIFICATION (perceptual, Moderate). Zero
+Blueprint/KG metadata discrepancy.
+
+**Blueprint/P76-mode discrepancy found and corrected (FIFTH occurrence this campaign)**:
+`measurable-function`'s Blueprint claimed `math.prob.random-variable` was "checked via `ls
+docs/curriculum/blueprints/` and confirmed already authored," setting cross-link-probe mode.
+Verified via `ls educational-brain/concepts/mathematics/` that `math.prob.random-variable` has NO
+authored EB entry — the same wrong-corpus pattern as Batch 107's `measures-of-spread` (checking
+the Blueprint corpus instead of the EB corpus). Corrected to independence mode. All other fields
+on both concepts matched the live KG exactly.
+
+`math.meas` **3/13 → 4/13**. `math.real` **2/? → 3/?**. Mathematics **615/908 → 617/908**, 291
+remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.meas` 4/13,
+mathematics 617/908, 11 EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0).
+Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 118 passed (118)". Full whole-repo
+vitest run NOT re-attempted this batch, given two consecutive prior hangs (Batches 109, 110)
+with no observable completion in this environment — deferred consistent with that established
+precedent rather than repeating a known-unproductive attempt a third time.
+
+Computed fresh frontier post-batch: `math.meas` reachable (`abstract-measure-spaces`, requires
+only `measure`, now authored). `math.real` reachable (`convergence-sequences` requires
+`completeness`+`math.seq.sequence`, both certified; `metric-space` requires
+`math.found.set-theory`+`math.found.real-numbers`, both certified). 31 other ready concepts remain
+across `math.cat`, `math.cx`, `math.de`, `math.fnal`, `math.graph`, `math.linalg`, `math.num`,
+`math.prob`, `math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `b9c95e7` on `main`, pushed directly, continuing under the same active `/loop`.

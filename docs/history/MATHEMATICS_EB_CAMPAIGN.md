@@ -3556,3 +3556,28 @@ concepts remain across `math.cat`, `math.cx`, `math.de`, `math.fnal`, `math.grap
 `/loop`; re-derive the frontier fresh via `scripts/math/state.ts` (and each candidate's actual
 `requires`) each iteration rather than trusting any number or `children`/`unlocks`-field
 assumption recorded here.
+
+### Batch 111 (2026-09-18) — fifth Blueprint wrong-corpus discrepancy; extends math.meas/math.real
+
+Authored `measurable-function` (preimage-based measurability generalizing continuity;
+open-interval sufficiency test; step function as measurable-but-discontinuous counterexample) and
+`archimedean` (contradiction proof from completeness; arbitrarily-small-1/n corollary; density of
+Q). `measurable-function`'s Blueprint claimed `math.prob.random-variable` as authored (cross-link
+probe mode), but `ls educational-brain/concepts/mathematics/` confirmed NO such EB entry exists —
+FIFTH occurrence this campaign of the Blueprint checking the wrong corpus (Blueprint corpus
+instead of EB corpus), corrected to independence mode. `archimedean` correctly self-reports no
+cross-links, matching the KG. `math.meas` **4/13** (3→4). `math.real` **3/?** (2→3). Mathematics
+**617/908** (615→617), 291 remaining. Full per-concept detail in `COVERAGE.md` Batch 111.
+Validated: KG validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts`
+confirms math.meas 4/13, mathematics 617/908 (11 EB-certified domains unchanged), `tsc --noEmit`
+clean, targeted EB/curriculum tests 118/118 passed. Full whole-repo suite NOT re-attempted this
+batch given two consecutive prior hangs (Batches 109-110); deferred per that precedent. No
+Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Commit `b9c95e7` on
+`main`, pushed directly.
+
+Fresh frontier: `math.meas` reachable (`abstract-measure-spaces`). `math.real` reachable
+(`convergence-sequences`, `metric-space`). 31 other ready concepts remain across `math.cat`,
+`math.cx`, `math.de`, `math.fnal`, `math.graph`, `math.linalg`, `math.num`, `math.prob`,
+`math.stats`, `math.top`. Campaign continues under the same active `/loop`; re-derive the frontier
+fresh via `scripts/math/state.ts` (and each candidate's actual `requires`) each iteration rather
+than trusting any number or `children`/`unlocks`-field assumption recorded here.
