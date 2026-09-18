@@ -454,3 +454,44 @@ confirms 392/412; `validate-knowledge-graph.ts docs/english/kg/graph.json` PASS 
 untouched); full suite 700/700 test files, 14,461 passed / 9 skipped (no regression vs.
 pre-batch baseline); `npm run build` clean (middleware 79.7 kB, no regression).
 
+**Egress re-check (owner-requested again, 2026-09-18, before this batch)**: same live, read-only
+Supabase checks as the prior check in this file (`get_project`, `get_advisors` type=performance,
+`query_logs` on `postgres_logs`/`supavisor_logs`/`postgrest_logs`, last 24h, project
+`ywakxiqbevfuxsiwewnw`) — status ACTIVE_HEALTHY, same pre-existing hygiene-only advisor findings
+(32 unindexed FKs, 1 table without a PK, 43 unused indexes, all unrelated to egress), and
+`postgres_logs` content is routine checkpoint/connection-reset/lock-timeout activity with no
+row-scanning or runaway-query signature. No active egress risk found. Same caveat as before: the
+Supabase Management API/MCP tools don't expose an actual monthly GB-used-vs-quota number — only
+the Supabase dashboard's own Usage/Billing page has that, and only the owner can check it
+directly.
+
+### Batch — English `eng.vocab.*` ADULT-band gap, all 8 short concepts, closes the subdomain (2026-09-18)
+
+Closed all 8 short `eng.vocab.*` concepts (live count was 8, not the prior estimate of 9 — per
+this campaign's standing rule, live regeneration always wins): academic-vocabulary, collocations,
+connotation-denotation, etymology, multiple-meaning-words, register-and-formality,
+roots-and-origins, semantic-fields. Same established technique as Batches 13-19 (`adultLadder`
+helper: `mcq`(FOUNDATIONAL) + `misconception_probe`(DEVELOPING) + `mcq`(PROFICIENT), each
+distractor's `misconceptionId` reusing one of the concept's own two already-registered Blueprint
+misconceptions — verified against each concept's own Component 1 Misconception Register before
+writing; as with Batches 18-19, several of these Blueprints use bare `MC-...` headings rather
+than the `MC-A-.../MC-B-...` convention, carried through verbatim). New file:
+`englishAdultBandBatch20.ts` (24 new probes, adult/professional framing — a performance review, a
+Slack message, a workplace text). Wired into both writers (`src/instrumentation.ts`'s bootstrap
+`ALL_PROBES` and `scripts/brain/seed-knowledge-assets.ts`'s `ALL_PROBES`) —
+`seedCorpusCoverageRatchet.test.ts` passes. All 8 concepts held zero prior ADULT probes, so this
+is a fresh singleton-to-ladder promotion with zero P-10 collision risk (`--dry-run`:
+created=7862, skipped=0, revived=0).
+
+English: **392/412 → 400/412 at contract, 20 → 12 short.** Remaining 12: `eng.writing.*` (9
+advanced), `eng.reading.reading-across-genres`, `eng.speaking.debate-skills`/`presentation-skills`,
+and the 2 EARLY-band phonics pairs flagged in the Batch 13 entry above (deliberately excluded —
+voice-required, not closable the same way).
+
+Validated: `npx tsc --noEmit` clean; targeted tests (`englishAssetContractP1`,
+`contractAuditShapeDetection`, `contractAuditSubjectCoverage`, `seedCorpusCoverageRatchet`,
+`curriculumKgRegistration`, 41 tests) green; `contract-audit.ts --subject english` confirms
+400/412; `validate-knowledge-graph.ts docs/english/kg/graph.json` PASS (KG file untouched); full
+suite 700/700 test files, 14,461 passed / 9 skipped (no regression vs. pre-batch baseline);
+`npm run build` clean (middleware 79.7 kB, no regression).
+
