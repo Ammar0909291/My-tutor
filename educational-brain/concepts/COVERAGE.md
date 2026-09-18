@@ -13352,3 +13352,56 @@ unchanged.
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `7279557` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 107 (2026-09-18) — fourth P76-mode discrepancy (a new variant)
+
+Re-derived the frontier fresh, confirmed matching Batch 106's prediction — `math.stats` 3
+(`measures-of-center`, `measures-of-spread`, `data-visualization`). Selected the first two,
+deferring `data-visualization`.
+
+`measures-of-center` (requires `descriptive-statistics`+`math.arith.fractions`, unlocks none):
+the mean sensitive to outliers, the median robust by rank position ($\{2,3,4,5,100\}$: mean
+$22.8$ distorted, median $4$ representative, unchanged by the outlier's magnitude); the median
+requiring sorting FIRST and averaging the two middle values for even $n$ ($\{7,2,9,4\}\to$
+sorted $\{2,4,7,9\}\to$ median $5.5$); and mode as the one measure of center that can be MISSING
+or MULTIPLE, unlike mean/median which always exist as single values. 2 misconceptions
+independently classified, both overgeneralization/instruction-induced and both Foundational —
+MC-1 MEAN-USED-UNCRITICALLY-AS-THE-MEASURE-OF-CENTER-DESPITE-OUTLIERS, MC-2
+MEDIAN-COMPUTED-WITHOUT-SORTING-OR-WITHOUT-AVERAGING-THE-TWO-MIDDLE-VALUES-FOR-EVEN-N. Zero
+Blueprint/KG metadata discrepancy.
+
+`measures-of-spread` (requires `descriptive-statistics`, unlocks none, cross_links
+`math.prob.variance` — **a new VARIANT of the recurring discrepancy**: this Blueprint explicitly
+claims it checked `ls docs/curriculum/blueprints/` and found `math.prob.variance` "ALREADY
+authored," setting cross-link-probe mode — but that check verified only the BLUEPRINT corpus
+(where `docs/curriculum/blueprints/math.prob.variance.md` genuinely does exist), never the EB
+corpus this campaign actually builds. Confirmed via `ls
+educational-brain/concepts/mathematics/` that no EB entry exists for `math.prob.variance` —
+corrected to independence mode, the fourth such discrepancy this campaign but the first where
+the Blueprint's own stated verification method itself was the wrong corpus): range collapsing
+under a single outlier ($\{2,3,4,5,6,7,100\}$: range $98$) while IQR resists it (IQR $4$, rank
+-based, immune to the outlier's actual magnitude); sample variance's $n-1$ divisor correcting a
+genuine, demonstrable downward bias from using $\bar x$ instead of the true mean ($\{4,6,8\}$:
+$n-1$ divisor gives $s^2=4$, $n$ divisor gives the smaller, biased $\approx2.67$); and standard
+deviation versus IQR selection mirroring the mean-versus-median choice for outlier-heavy salary
+data. 3 misconceptions independently classified, all overgeneralization — MC-1
+IQR-ASSUMED-EQUALLY-OUTLIER-SENSITIVE-AS-RANGE (Foundational), MC-2
+SAMPLE-VARIANCE-CONFLATED-WITH-POPULATION-VARIANCE (High), MC-3
+STANDARD-DEVIATION-ASSUMED-ALWAYS-PREFERRED (Moderate).
+
+**One of 2 concepts this batch is `measures-of-center`, one is `measures-of-spread`; both zero
+other Blueprint/KG metadata discrepancy.** `math.stats` **3/40 → 5/40**. Mathematics
+**607/908 → 609/908**, 299 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.stats` 5/40,
+mathematics 609/908, 11 EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0).
+Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 128 passed (128)". Full suite:
+"Test Files 700 passed (700), Tests 14461 passed | 9 skipped (14470)" — 0 failures.
+
+Computed fresh frontier post-batch: `math.stats` 1 (`data-visualization`, deferred from this
+batch, requires only `descriptive-statistics`), `math.de`'s systems-ode branch and `math.linalg`
+both still exhausted, plus 7 previously-unstarted domains unchanged.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `138b43d` on `main`, pushed directly, continuing under the same active `/loop`.

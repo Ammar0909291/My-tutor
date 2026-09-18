@@ -3454,3 +3454,28 @@ previously-unstarted domains unchanged. Campaign continues under the same active
 re-derive the frontier fresh via `scripts/math/state.ts` (and each candidate's actual `requires`)
 each iteration rather than trusting any number or `children`/`unlocks`-field assumption recorded
 here.
+
+### Batch 107 (2026-09-18) — fourth P76-mode discrepancy (a new variant)
+
+Authored `measures-of-center` (mean sensitive to outliers, median robust by rank position, sort
+-then-average for even n, mode as the one measure that can be missing or multiple) and
+`measures-of-spread` (range collapses under one outlier, IQR resists; sample variance's n-1
+divisor correcting a genuine bias; SD-vs-IQR mirroring mean-vs-median). Both Blueprint-grounded
+by reference. A new VARIANT of the recurring discrepancy: `measures-of-spread`'s Blueprint
+claims it verified `math.prob.variance` as "ALREADY authored" via `ls
+docs/curriculum/blueprints/` — true for the BLUEPRINT corpus, but that concept has no EB entry;
+corrected to independence mode (fourth occurrence this campaign, first where the Blueprint's own
+stated check used the wrong corpus). `math.stats` **5/40** (3→5). Mathematics **609/908**
+(607→609), 299 remaining. Full per-concept detail in `COVERAGE.md` Batch 107. Validated: KG
+validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts` confirms math.stats
+5/40, mathematics 609/908 (11 EB-certified domains unchanged), `tsc --noEmit` clean, targeted
+EB/curriculum tests 128/128 passed, full suite 700 files / 14461 passed (9 pre-existing skips, 0
+failures). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Commit
+`138b43d` on `main`, pushed directly.
+
+Fresh frontier: `math.stats` 1 (`data-visualization`, deferred, requires only
+`descriptive-statistics`), `math.de`'s systems-ode branch and `math.linalg` both still
+exhausted, plus 7 previously-unstarted domains unchanged. Campaign continues under the same
+active `/loop`; re-derive the frontier fresh via `scripts/math/state.ts` (and each candidate's
+actual `requires`) each iteration rather than trusting any number or `children`/`unlocks`-field
+assumption recorded here.
