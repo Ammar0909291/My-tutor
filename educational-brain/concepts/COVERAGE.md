@@ -13190,3 +13190,61 @@ still exhausted, plus the same 8 previously-unstarted domains unchanged.
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `32a58ee` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 104 (2026-09-18) — correcting a second P76-mode discrepancy
+
+Re-derived the frontier fresh, confirmed matching Batch 103's prediction — `math.de` 1
+(`systems-ode`), `math.prob` 1 (`bayes-theorem`). Authored both.
+
+`systems-ode` (requires `second-order-ode`+`matrix`+`eigenvalues`, unlocks none per KG,
+cross_links `math.linalg.diagonalization` confirmed unauthored via `ls` → independence mode):
+state-vector reduction turning a higher-order scalar ODE into a first-order system ($x_1'=x_2$ by
+DEFINITION, $x_2'$ derived from the original equation, never guessed); the eigenvalue equation
+from `eigenvalues` solving the system directly, with the system's characteristic polynomial
+proven IDENTICAL to the scalar ODE's own ($\det(A-\lambda I)=\lambda^2-5\lambda+6=0$ matching
+$r^2-5r+6=0$ term for term) — the same method viewed through two formalisms, never two unrelated
+facts; and a repeated eigenvalue supplying too few independent eigenvectors ($\lambda=2$ for
+$\begin{pmatrix}2&1\\0&2\end{pmatrix}$ gives only one direction), directly paralleling
+`second-order-ode`'s own repeated-root case. 3 misconceptions independently classified — MC-1
+EIGENVALUE-METHOD-ASSUMED-ALWAYS-SUFFICIENT (overgeneralization, Foundational), MC-2
+STATE-VECTOR-REDUCTION-VARIABLES-MISASSIGNED (instruction-induced, Foundational), MC-3
+SYSTEM-AND-SCALAR-CHARACTERISTIC-EQUATIONS-TREATED-AS-UNRELATED (instruction-induced, Moderate).
+Zero Blueprint/KG metadata discrepancy.
+
+`bayes-theorem` (requires `conditional-probability`+`total-probability`, unlocks
+`bayesian-inference`): the posterior never equal to the likelihood ($P(D|+)\approx8.8\%$ for a
+1%-prevalence disease with 95% sensitivity, genuinely NOT 95%); base-rate neglect demonstrated by
+varying only the prior (50% prevalence → posterior ≈64%; 0.1% prevalence → posterior ≈0.9%) while
+holding sensitivity/specificity fixed; and the generalized $n$-hypothesis form as the identical
+structure, never limited to two cases (a three-machine defect-rate example). 3 misconceptions
+independently classified — MC-1 POSTERIOR-EQUALS-LIKELIHOOD (instruction-induced), MC-2
+BASE-RATE-NEGLECT (language contamination), MC-3 BAYES-ONLY-WORKS-FOR-TWO-HYPOTHESES
+(instruction-induced).
+
+**Second genuine Blueprint/mode discrepancy caught this campaign** (after `independence`'s
+unlocks discrepancy in Batch 102): `bayes-theorem`'s own Blueprint Component 8 claims "Mode:
+Cross-link (cross_links = [math.stats.bayesian-inference])," but `math.stats.bayesian-inference`
+has NO authored Educational Brain entry — the entire `math.stats` domain remains unstarted.
+Confirmed via `ls`; corrected to independence mode in this entry's Curriculum Feedback per the
+established convention (cross-link mode requires the target confirmed authored, never merely
+declared in the KG or claimed by the Blueprint itself).
+
+**One of 2 concepts this batch is math.de, one is math.prob; both zero other Blueprint/KG
+metadata discrepancy.** `math.de` **6/56 → 7/56**. `math.prob` **7/49 → 8/49**. Mathematics
+**601/908 → 603/908**, 305 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.de` 7/56,
+`math.prob` 8/49, mathematics 603/908, 11 EB-certified domains unchanged. `npx tsc --noEmit` →
+clean (exit 0). Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 128 passed (128)".
+Full suite: "Test Files 700 passed (700), Tests 14461 passed | 9 skipped (14470)" — 0 failures.
+
+Computed fresh frontier post-batch (each candidate's `requires` individually re-verified):
+`math.de`'s two `systems-ode` children are BOTH blocked (`systems-matrix-method` requires
+`diagonalization`, unauthored; `phase-plane` requires `slope-field`, unauthored) — `math.de`'s
+frontier via this branch is exhausted for now, `math.prob` 1 (`bayesian-inference`, requires only
+`bayes-theorem`, now authored), `math.linalg` still exhausted, plus the same 8
+previously-unstarted domains unchanged.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `ca7692f` on `main`, pushed directly, continuing under the same active `/loop`.

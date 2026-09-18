@@ -3380,3 +3380,28 @@ requirements now authored), `math.linalg` still exhausted, plus the same 8 previ
 domains unchanged. Campaign continues under the same active `/loop`; re-derive the frontier fresh
 via `scripts/math/state.ts` (and each candidate's actual `requires`) each iteration rather than
 trusting any number or `children`/`unlocks`-field assumption recorded here.
+
+### Batch 104 (2026-09-18) — second Blueprint mode discrepancy caught (bayes-theorem)
+
+Authored `systems-ode` (state-vector reduction; the system's characteristic polynomial proven
+IDENTICAL to the scalar ODE's own; repeated eigenvalue with too few eigenvectors paralleling
+second-order-ode's repeated root) and `bayes-theorem` (posterior never equals likelihood; base
+-rate neglect via a varying-prior demonstration; the n-hypothesis generalization). Both
+Blueprint-grounded by reference. A second genuine discrepancy was caught: `bayes-theorem`'s
+Blueprint claims "Cross-link mode" against `math.stats.bayesian-inference`, but that concept has
+no authored EB entry (math.stats entirely unstarted) — corrected to independence mode per the
+established convention. `math.de` **7/56** (6→7). `math.prob` **8/49** (7→8). Mathematics
+**603/908** (601→603), 305 remaining. Full per-concept detail in `COVERAGE.md` Batch 104.
+Validated: KG validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts`
+confirms math.de 7/56, math.prob 8/49, mathematics 603/908 (11 EB-certified domains unchanged),
+`tsc --noEmit` clean, targeted EB/curriculum tests 128/128 passed, full suite 700 files / 14461
+passed (9 pre-existing skips, 0 failures). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/
+runtime file touched. Commit `ca7692f` on `main`, pushed directly.
+
+Fresh frontier: `math.de`'s systems-ode branch is exhausted for now (`systems-matrix-method`
+needs unauthored `diagonalization`; `phase-plane` needs unauthored `slope-field`), `math.prob` 1
+(`bayesian-inference`, requires only `bayes-theorem`, now authored), `math.linalg` still
+exhausted, plus the same 8 previously-unstarted domains unchanged. Campaign continues under the
+same active `/loop`; re-derive the frontier fresh via `scripts/math/state.ts` (and each
+candidate's actual `requires`) each iteration rather than trusting any number or
+`children`/`unlocks`-field assumption recorded here.
