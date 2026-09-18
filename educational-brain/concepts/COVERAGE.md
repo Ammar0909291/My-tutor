@@ -12743,3 +12743,57 @@ note: this session found the container's local `main` git branch held an entirel
 stale history (last commit an old "Batch 29") with no merge-base against `origin/main` — resolved
 by resetting local `main` to `origin/main` before committing (per explicit owner instruction to
 "work only on main branch"); this batch is commit `957c7bb` on `main`, pushed directly.
+
+### Batch 95 (2026-09-18) — closes math.abst entirely; DOMAIN NEWLY CERTIFIED
+
+Re-derived the frontier fresh via `scripts/math/state.ts`: confirmed exactly matching Batch 94's
+prediction — `math.abst` 1 candidate (`galois-correspondence`), `math.linalg` 4 candidates
+(`column-space`, `eigenspace`, `inner-product`, `linear-independence`). Selected
+`galois-correspondence` (closing `math.abst`'s entire frontier) and one math.linalg candidate,
+`column-space`, deferring the other three. Both Blueprint-grounded, reused by reference.
+
+`galois-correspondence` (requires `galois-group`, unlocks none): the Fundamental Theorem's
+bijection between intermediate fields of $K/F$ and subgroups of `galois-group`'s own
+$\mathrm{Gal}(K/F)$, verified EXHAUSTIVELY on the 5-subgroup/5-field
+$\mathbb Q(\sqrt2,\sqrt3)/\mathbb Q$ case (no field or subgroup left unmatched); the
+inclusion-reversing property (a field chain corresponds to a subgroup chain read in reverse); and
+the normality-Galois-subextension equivalence, settling all three intermediate fields of the same
+example simultaneously via one abelian-group observation rather than three separate direct
+verifications. 3 misconceptions independently classified — MC-1
+CORRESPONDENCE-BIJECTION-DOUBTED (Type 1, Foundational), MC-2
+INCLUSION-DIRECTION-ASSUMED-PRESERVED (Type 1, High), MC-3
+GALOIS-SUBEXTENSION-ASSUMED-TO-NEED-DIRECT-VERIFICATION (Type 5, instruction-induced, Moderate).
+Zero Blueprint/KG metadata discrepancy.
+
+`column-space` (requires `subspace`+`span`; KG unlocks `rank-nullity` — **a genuine Blueprint/KG
+discrepancy caught this batch**: the Blueprint's own Component 0 metadata table states "unlocks
+(none in KG)", but the live KG actually lists `math.linalg.rank-nullity`; the authored entry
+states the KG's true value and documents the correction rather than silently reproducing the
+Blueprint's stale claim): $C(A)$ as the span of $A$'s columns, with a dependent-column example
+($A$'s second column exactly $2\times$ its first) collapsing a 2-column matrix's column space to
+a 1-dimensional line; the full-system consistency check for $Ax=b$ (all components of the
+candidate combination must match $b$ simultaneously — a partial match proves nothing); and
+$\dim(C(A))=\mathrm{rank}(A)$, connecting directly to the already-mastered rank computation. 2
+misconceptions independently classified (Blueprint declares 2, not the usual 3) — MC-1
+COLUMN-SPACE-MEMBERSHIP-CHECKED-PARTIALLY (Type 5, instruction-induced, Foundational), MC-2
+COLUMN-SPACE-DIMENSION-ASSUMED-EQUAL-TO-COLUMN-COUNT (Type 1, overgeneralization, Foundational).
+
+**One of 2 concepts this batch is math.abst, one is math.linalg.** `math.abst` **36/37 → 37/37 —
+DOMAIN COMPLETE**, newly EB-CERTIFIED (11th certified domain, confirmed via
+`scripts/math/state.ts`'s own certified-domain list). `math.linalg` **33/61 → 34/61**.
+Mathematics **583/908 → 585/908**, 323 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.abst` 37/37
+(certified), `math.linalg` 34/61, mathematics 585/908, 11 EB-certified domains (10 prior +
+`math.abst` newly added). `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests:
+"Test Files 7 passed (7), Tests 128 passed (128)". Full suite: "Test Files 700 passed (700),
+Tests 14461 passed | 9 skipped (14470)" — 0 failures.
+
+Computed fresh frontier post-batch: `math.abst` domain fully closed (no further candidates).
+`math.linalg` 3 unchanged (`eigenspace`, `inner-product`, `linear-independence`), plus the same
+10 previously-unstarted domains from Batch 93/94 unchanged.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `cbc6fe1` on `main`, pushed directly, continuing under the same active `/loop`
+that resumed the campaign in Batch 94.

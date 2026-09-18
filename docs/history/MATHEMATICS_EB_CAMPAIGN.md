@@ -3171,3 +3171,26 @@ closing the entire domain once authored), `math.linalg` 4 unchanged (`column-spa
 domains from Batch 93 unchanged. Campaign continues under an active `/loop`; re-derive the
 frontier fresh via `scripts/math/state.ts` each iteration rather than trusting any number
 recorded here.
+
+### Batch 95 (2026-09-18) — math.abst DOMAIN COMPLETE, newly EB-CERTIFIED
+
+Re-derived the frontier fresh, confirmed matching Batch 94's prediction exactly. Authored
+`math.abst.galois-correspondence` (closes math.abst's entire frontier) and one math.linalg
+candidate, `math.linalg.column-space`, deferring `eigenspace`/`inner-product`/
+`linear-independence` to a future batch. Both Blueprint-grounded by reference. A genuine
+Blueprint/KG discrepancy was caught on `column-space`: its Blueprint claims "unlocks (none in
+KG)" but the live KG lists `math.linalg.rank-nullity` — corrected in the authored entry rather
+than silently reproduced. `math.abst` **37/37 — DOMAIN COMPLETE**, newly EB-CERTIFIED (11th
+certified domain: `math.found, math.calc, math.geom, math.alg, math.arith, math.abst, math.nt,
+math.disc, math.func, math.trig, math.seq`). `math.linalg` **34/61** (33→34). Mathematics
+**585/908** (583→585), 323 remaining. Full per-concept detail in `COVERAGE.md` Batch 95.
+Validated: KG validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts`
+confirms math.abst 37/37 certified, math.linalg 34/61, mathematics 585/908, `tsc --noEmit` clean,
+targeted EB/curriculum tests 128/128 passed, full suite 700 files / 14461 passed (9 pre-existing
+skips, 0 failures). No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched.
+Commit `cbc6fe1` on `main`, pushed directly.
+
+Fresh frontier: `math.abst` fully closed (no candidates remain). `math.linalg` 3 unchanged
+(`eigenspace`, `inner-product`, `linear-independence`), plus the same 10 previously-unstarted
+domains unchanged. Campaign continues under the same active `/loop`; re-derive the frontier fresh
+via `scripts/math/state.ts` each iteration rather than trusting any number recorded here.
