@@ -5022,3 +5022,28 @@ math.num.floating-point/interpolation/root-finding, math.opt.stochastic-gradient
 math.prob.characteristic-function/joint-distribution,
 math.stats.normal-distribution/percentile/sampling-distribution, math.top.topological-space.
 Campaign continues under the same active `/loop`.
+
+### Batch 171 (2026-09-19) — two consecutive stale-unlocks corrections
+
+Authored `dimension` (every basis of the same space has the identical size; orthogonal-complement
+dimensions sum to the total, never required equal) and `coordinates` (coordinates depend on the
+chosen basis, never a fixed "true" property; recovering v requires the actual basis vectors, never
+reading coordinate numbers as standard components). Both had stale `unlocks` metadata: dimension's
+Blueprint said "none", live KG lists math.linalg.rank-nullity; coordinates' Blueprint said "none",
+live KG lists math.linalg.change-of-basis (also its declared child) — both corrected to the live
+KG's values, apparently from authoring-time snapshots predating a later unlocks addition.
+Mathematics **737/908** (735→737), 171 remaining. Full per-concept detail in `COVERAGE.md` Batch
+171. Validated: KG validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts`
+confirms mathematics 737/908 (13 EB-certified domains unchanged), `tsc --noEmit` clean, targeted
+EB/curriculum tests (7 files) 561/561 passed. Full whole-repo suite not re-attempted, per the
+established Batch 109-110 hang precedent. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/
+runtime file touched. Commit `3fedf9c` on `main`, pushed directly.
+
+Fresh frontier recomputed for Batch 172 (24 concepts): math.linalg.change-of-basis,
+math.linalg.rank-nullity (newly reachable via dimension/coordinates's corrected unlocks), plus
+math.cat.category, math.cx.complex-numbers-analysis, math.fnal.convolution, math.fnal.normed-space,
+math.graph.random-graph, math.linalg.diagonalization/dual-space/inner-product-space/
+matrix-representation/orthogonal-basis/projection/tensor, math.num.floating-point/interpolation/
+root-finding, math.opt.stochastic-gradient, math.prob.characteristic-function/joint-distribution,
+math.stats.normal-distribution/percentile/sampling-distribution, math.top.topological-space.
+Campaign continues under the same active `/loop`.

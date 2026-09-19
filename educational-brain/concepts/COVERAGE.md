@@ -16561,3 +16561,49 @@ unlocking-adjacent progress), plus `math.cat.category`, `math.cx.complex-numbers
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `18c1bb9` on `main`, pushed directly.
+
+## Batch 171 (2026-09-19) — two consecutive stale-unlocks corrections
+
+`dimension`: every basis of the same space having the IDENTICAL size (never varying by which basis
+is chosen), demonstrated via the direct vector-count verification for two structurally different
+bases of $\mathbb R^2$; and orthogonal-complement dimensions SUMMING to the total (never required
+to be equal), demonstrated via the plane/line dimension check in $\mathbb R^3$
+($2+1=3$). 2 misconceptions independently classified by Blueprint-declared severity — MC-1
+DIFFERENT-BASES-ASSUMED-TO-HAVE-DIFFERENT-SIZES (Foundational), MC-2
+ORTHOGONAL-COMPLEMENT-DIMENSIONS-ASSUMED-EQUAL (Foundational). Stale-metadata discrepancy found:
+the Blueprint's own Component 0/7 both state `unlocks: none` — the live KG lists
+`math.linalg.rank-nullity` — the live KG's current value used as authoritative.
+
+`coordinates`: coordinates genuinely depending on the chosen basis (never a fixed "true" property
+of the vector alone), demonstrated via $v=(5,3)$'s differing coordinate vectors $(4,1)$ vs.
+$(5,3)$ across two bases; and recovering $v$ from $[v]_\beta$ requiring the ACTUAL basis vectors
+(never reading coordinate numbers directly as standard components), demonstrated via
+$[v]_\beta=(2,3)$ for $\beta=\{(2,0),(0,3)\}$ reconstructing to $(4,9)$, not $(2,3)$. 2
+misconceptions independently classified by Blueprint-declared severity — MC-1
+STANDARD-COORDINATES-TREATED-AS-THE-ONLY-TRUE-REPRESENTATION (Moderate), MC-2
+NON-STANDARD-COORDINATE-VECTOR-MISREAD-AS-STANDARD-COMPONENTS (Foundational). Stale-metadata
+discrepancy found: the Blueprint's own Component 0/7 both state `unlocks: none` — the live KG
+lists `math.linalg.change-of-basis` (also the concept's own declared child) — the live KG's
+current value used as authoritative. This is the SECOND consecutive `unlocks`-field stale-metadata
+discrepancy this batch, both apparently stemming from these two Blueprints' authoring-time KG
+snapshots predating a later `math.linalg` unlocks addition.
+
+Mathematics **735/908 → 737/908**, 171 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 737/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)".
+
+Fresh frontier recomputed for Batch 172 (24 concepts): `math.linalg.change-of-basis`,
+`math.linalg.rank-nullity` (both newly reachable via `dimension`/`coordinates`'s corrected
+unlocks), plus `math.cat.category`, `math.cx.complex-numbers-analysis`, `math.fnal.convolution`,
+`math.fnal.normed-space`, `math.graph.random-graph`,
+`math.linalg.diagonalization`/`dual-space`/`inner-product-space`/`matrix-representation`/
+`orthogonal-basis`/`projection`/`tensor`, `math.num.floating-point`/`interpolation`/`root-finding`,
+`math.opt.stochastic-gradient`, `math.prob.characteristic-function`/`joint-distribution`,
+`math.stats.normal-distribution`/`percentile`/`sampling-distribution`,
+`math.top.topological-space`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `3fedf9c` on `main`, pushed directly.
