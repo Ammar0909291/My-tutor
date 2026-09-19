@@ -18105,3 +18105,22 @@ math.fnal.convolution/normed-space, math.graph.random-graph,
 math.linalg.matrix-representation/tensor, math.num.euler-method/iterative-linear/
 lu-factorization/numerical-differentiation/numerical-integration/qr-algorithm/splines,
 math.opt.pca/semidefinite-programming, math.prob.martingale.
+
+## Batch 218 (2026-09-19) — zero discrepancy
+
+Authored `math.num.numerical-differentiation` (smaller h is never always better — roundoff grows
+as h→0, producing a U-shaped error curve; forward and central difference have genuinely
+different accuracy orders, never the same; Richardson extrapolation cancels the leading error
+term for a free two-order upgrade) and `math.num.lu-factorization` (forward substitution must
+come before back substitution, never reversed; pivoting is never optional — a near-zero pivot
+causes catastrophic cancellation; solving via LU is never equivalent in cost or stability to
+computing A⁻¹ explicitly). Both zero discrepancy. Mathematics **829/908 → 831/908**, 77
+remaining. Validated: KG PASS (908/908 reachable), state.ts confirms 831/908, tsc clean, tests
+561/561. Commit `71e235f`, pushed.
+
+Fresh frontier for Batch 219 (20 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.cholesky/euler-method/iterative-linear/
+numerical-integration/qr-algorithm/splines, math.opt.pca/semidefinite-programming,
+math.prob.martingale.

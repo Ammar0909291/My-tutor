@@ -6066,3 +6066,20 @@ math.linalg.matrix-representation/tensor, math.num.euler-method/iterative-linear
 lu-factorization/numerical-differentiation/numerical-integration/qr-algorithm/splines,
 math.opt.pca/semidefinite-programming, math.prob.martingale. Campaign continues under the same
 active `/loop`.
+
+## Batch 218 (2026-09-19)
+
+Authored `numerical-differentiation` (smaller h isn't always better — roundoff grows as h→0,
+U-shaped error curve; forward/central have different orders, never the same; Richardson
+extrapolation is a free two-order upgrade) and `lu-factorization` (forward before back
+substitution, never reversed; pivoting never optional; LU never equivalent to explicit A⁻¹).
+Both zero discrepancy. Mathematics **831/908** (829→831), 77 remaining. Full detail in
+`COVERAGE.md` Batch 218. Validated: KG PASS, state.ts 831/908, tsc clean, tests 561/561. Commit
+`71e235f`, pushed.
+
+Fresh frontier for Batch 219 (20 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.cholesky/euler-method/iterative-linear/
+numerical-integration/qr-algorithm/splines, math.opt.pca/semidefinite-programming,
+math.prob.martingale. Campaign continues under the same active `/loop`.
