@@ -5730,3 +5730,21 @@ math.linalg.matrix-representation/tensor, math.num.error-analysis/interpolation/
 qr-algorithm, math.opt.semidefinite-programming, math.prob.conditional-expectation/correlation/
 marginal-distribution, math.stats.confidence-interval/covariance-matrix/estimator/
 hypothesis-testing/standard-error. Campaign continues under the same active `/loop`.
+
+### Batch 200 (2026-09-19) — zero discrepancy — MILESTONE: 200 batches, 795/908
+
+Authored `standard-error` (SE divides by √n, never n; quadrupling n halves SE; SE is the sampling
+distribution's own spread) and `estimator` (estimator is a rule, estimate is its output;
+unbiasedness must be verified, never assumed; unbiasedness and consistency are independent). Both
+zero discrepancy. Mathematics **795/908** (793→795), 113 remaining. Full detail in `COVERAGE.md`
+Batch 200. Validated: KG PASS, state.ts 795/908, tsc clean, tests 561/561. Commit `34abbd5`,
+pushed.
+
+Fresh frontier for Batch 201 (27 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/interpolation/newtons-method/
+qr-algorithm, math.opt.semidefinite-programming, math.prob.conditional-expectation/correlation/
+marginal-distribution, math.stats.bias-variance/confidence-interval/consistency/
+covariance-matrix/hypothesis-testing/method-of-moments/mle/sufficient-statistic. Campaign
+continues under the same active `/loop`.

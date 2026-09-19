@@ -17732,3 +17732,21 @@ math.linalg.matrix-representation/tensor, math.num.error-analysis/interpolation/
 qr-algorithm, math.opt.semidefinite-programming, math.prob.conditional-expectation/correlation/
 marginal-distribution, math.stats.confidence-interval/covariance-matrix/estimator/
 hypothesis-testing/standard-error.
+
+## Batch 200 (2026-09-19) — zero discrepancy — MILESTONE: 200 batches, 795/908
+
+Authored `math.stats.standard-error` (SE divides by √n, never n itself; quadrupling n halves SE,
+never quarters it; SE is the sampling distribution's spread, never the raw data's spread) and
+`math.stats.estimator` (estimator is a fixed rule, estimate is its sample-specific output, never
+interchangeable; unbiasedness must be verified via linearity of expectation, never assumed;
+unbiasedness and consistency are independent properties, never one implying the other). Both zero
+discrepancy. Mathematics **793/908 → 795/908**, 113 remaining. Validated: KG PASS (908/908
+reachable), state.ts confirms 795/908, tsc clean, tests 561/561. Commit `34abbd5`, pushed.
+
+Fresh frontier for Batch 201 (27 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/interpolation/newtons-method/
+qr-algorithm, math.opt.semidefinite-programming, math.prob.conditional-expectation/correlation/
+marginal-distribution, math.stats.bias-variance/confidence-interval/consistency/
+covariance-matrix/hypothesis-testing/method-of-moments/mle/sufficient-statistic.
