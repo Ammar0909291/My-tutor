@@ -18041,3 +18041,22 @@ math.fnal.convolution/normed-space, math.graph.random-graph,
 math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
 qr-algorithm/splines, math.opt.pca/semidefinite-programming, math.prob.conditional-expectation/
 marginal-distribution, math.stats.bayesian-inference.
+
+## Batch 215 (2026-09-19) — zero discrepancy
+
+Authored `math.stats.bayesian-inference` (Bayesian and frequentist statistics are genuinely
+different philosophies, never merely different notation; the posterior requires multiplying prior
+and likelihood together, never either alone; credible intervals make direct probability
+statements, confidence intervals never do) and `math.prob.marginal-distribution` (the joint is
+recoverable from marginals only under independence, never in general; marginalization requires
+integrating over all values, never evaluating at one; marginal and conditional are different
+procedures, never the same computation). Both zero discrepancy. Mathematics **823/908 → 825/908**,
+83 remaining. Validated: KG PASS (908/908 reachable), state.ts confirms 825/908, tsc clean, tests
+561/561. Commit `c536875`, pushed.
+
+Fresh frontier for Batch 216 (20 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
+qr-algorithm/splines, math.opt.pca/semidefinite-programming, math.prob.conditional-expectation,
+math.stats.conjugate-prior/credible-interval.

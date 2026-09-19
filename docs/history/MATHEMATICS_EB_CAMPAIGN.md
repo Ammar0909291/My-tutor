@@ -6012,3 +6012,20 @@ math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-inte
 qr-algorithm/splines, math.opt.pca/semidefinite-programming, math.prob.conditional-expectation/
 marginal-distribution, math.stats.bayesian-inference. Campaign continues under the same active
 `/loop`.
+
+## Batch 215 (2026-09-19)
+
+Authored `bayesian-inference` (Bayesian vs frequentist are genuinely different philosophies,
+never same notation; posterior is prior times likelihood, never either alone; credible vs
+confidence intervals are direct vs indirect) and `marginal-distribution` (joint recoverable from
+marginals only under independence; marginalization integrates over all values, never one;
+marginal ≠ conditional). Both zero discrepancy. Mathematics **825/908** (823→825), 83 remaining.
+Full detail in `COVERAGE.md` Batch 215. Validated: KG PASS, state.ts 825/908, tsc clean, tests
+561/561. Commit `c536875`, pushed.
+
+Fresh frontier for Batch 216 (20 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
+qr-algorithm/splines, math.opt.pca/semidefinite-programming, math.prob.conditional-expectation,
+math.stats.conjugate-prior/credible-interval. Campaign continues under the same active `/loop`.
