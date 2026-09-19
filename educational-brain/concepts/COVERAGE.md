@@ -14450,3 +14450,51 @@ markov-inequality, moments, normal-distribution, poisson-process, quantile) — 
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `dcf629f` on `main`, pushed directly.
+
+### Batch 127 (2026-09-19)
+
+`math.prob.lln`: Law of Large Numbers as a LIMIT statement (never a finite-n exact-equality
+guarantee), demonstrated via a coin-flip dilution table (5-heads streak diluted by 95 more flips
+to 0.53); weak LLN (convergence in probability) versus strong LLN (almost sure convergence) stated
+side by side as genuinely different claims; gambler's fallacy corrected via the dilution-not-
+compensation mechanism; Chebyshev-based proof sketch using independence's variances-add property.
+3 misconceptions independently classified — MC-1 LLN-MEANS-EVENTUAL-EXACT-EQUALITY (Foundational,
+the causal root), MC-2 GAMBLERS-FALLACY (Foundational, directly caused by MC-1 per the Blueprint's
+own declared link), MC-3 WEAK-STRONG-LLN-IDENTICAL (language contamination). Zero Blueprint/KG
+metadata discrepancy.
+
+`math.real.connectedness`: connectedness via the precise closure-based SEPARATION definition
+(never a visual "gap" intuition), demonstrated via $[0,1]\cup[2,3]$'s explicit closure check;
+intervals as the only connected subsets of $\mathbb R$, demonstrated via $\mathbb Q$'s clean split
+at the irrational $\sqrt2$ (a point not even a member of $\mathbb Q$); the Intermediate Value
+Theorem derived directly from connectedness-preservation plus the intervals-only theorem, with no
+separate IVT-specific argument. 3 misconceptions independently classified — MC-1
+CONNECTEDNESS-AS-INFORMAL-VISUAL-NOTION (Foundational), MC-2
+DISCONNECTION-ASSUMED-TO-REQUIRE-A-MEMBER-GAP (Foundational), MC-3
+IVT-ASSUMED-TO-NEED-INDEPENDENT-PROOF (Moderate). Zero Blueprint/KG metadata discrepancy;
+`math.top.connectedness` cross-link confirmed still unauthored via `ls`, independence mode used
+per the Blueprint's own correct self-report.
+
+`math.prob` gains its fourteenth entry this campaign, closing Chebyshev's declared unlock.
+`math.real.connectedness` closes the second of `math.real.open-sets`'s two declared unlocks
+(compactness closed the first at Batch 126) — both direct consequences of the open-sets chain are
+now complete. Mathematics **647/908 → 649/908**, 259 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 649/908, 12
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Computed fresh frontier post-batch: `math.real.completeness-metric`/`math.real.continuity-
+rigorous` still reachable (require `metric-space`). `math.real.ivt` NOT yet reachable pending
+its full requires check. `math.fnal.convolution`/`math.opt.stochastic-gradient` still reachable.
+Numerous `math.prob` concepts (classical-probability, convergence-types, distribution,
+generating-function, law-of-unconscious, markov-chain, markov-inequality, moments, normal-
+distribution, poisson-process, quantile) appear reachable — re-verify each candidate's actual
+`requires` fresh next batch, do not trust this list or any prior batch's frontier snapshot. Other
+ready concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`,
+`math.num`, `math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `f02161e` on `main`, pushed directly.

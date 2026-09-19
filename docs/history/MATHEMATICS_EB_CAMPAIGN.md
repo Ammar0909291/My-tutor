@@ -3977,3 +3977,29 @@ appear reachable — re-verify each candidate's actual `requires` fresh next bat
 this list. Other ready concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph`,
 `math.linalg`, `math.num`, `math.stats`, `math.top`. Campaign continues under the same active
 `/loop`.
+
+### Batch 127 (2026-09-19)
+
+Authored `lln` (LLN as a limit statement, never finite-n exact equality; dilution-not-compensation
+resolves the gambler's fallacy; weak vs. strong LLN are genuinely different convergence modes;
+Chebyshev-based proof sketch using independence) and `connectedness` (separation is a precise
+closure-based condition, never a visual "gap"; intervals are the only connected subsets of ℝ,
+shown via ℚ splitting cleanly at the irrational √2; IVT derived directly from connectedness-
+preservation, no separate proof needed). Both zero Blueprint/KG discrepancy — `connectedness`'s
+independence-mode claim (`math.top.connectedness` unauthored) confirmed correct via `ls`.
+`connectedness` closes the second of `open-sets`'s two declared unlocks (compactness closed the
+first at Batch 126). Mathematics **649/908** (647→649), 259 remaining. Full per-concept detail in
+`COVERAGE.md` Batch 127. Validated: KG validator PASS (908/908 reachable, file untouched),
+`scripts/math/state.ts` confirms mathematics 649/908 (12 EB-certified domains unchanged), `tsc
+--noEmit` clean, targeted EB/curriculum tests (7 files) 561/561 passed. Full whole-repo suite not
+re-attempted, per the established Batch 109-110 hang precedent. No Physics/Chemistry/English/
+Biology/CS/KG/Blueprint/runtime file touched. Commit `f02161e` on `main`, pushed directly.
+
+Fresh frontier: `math.real.completeness-metric`, `math.real.continuity-rigorous` reachable.
+`math.fnal.convolution`, `math.opt.stochastic-gradient` still reachable. Numerous `math.prob`
+concepts (classical-probability, convergence-types, distribution, generating-function, law-of-
+unconscious, markov-chain, markov-inequality, moments, normal-distribution, poisson-process,
+quantile) appear reachable — re-verify each candidate's actual `requires` fresh next batch, do
+not trust this list. Other ready concepts remain across `math.cat`, `math.cx`, `math.de`,
+`math.graph`, `math.linalg`, `math.num`, `math.stats`, `math.top`. Campaign continues under the
+same active `/loop`.
