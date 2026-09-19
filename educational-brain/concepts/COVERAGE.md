@@ -17179,3 +17179,113 @@ unlocked), plus `math.cx.complex-numbers-analysis`, `math.de.systems-matrix-meth
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `a1fabb5` on `main`, pushed directly.
+
+## Batch 184 (2026-09-19) — zero discrepancy, both `math.top` concepts
+
+`compactness`: the general topological-space compactness definition shown IDENTICAL to
+`math.real.compactness`'s definition (never requiring new machinery), demonstrated via the direct
+reuse of that concept's own $(0,1)$ open-cover argument unchanged; Heine-Borel's "closed and
+bounded" shortcut shown to NOT transfer to general spaces, demonstrated via a metric-free discrete
+3-point space provably compact with no notion of boundedness at all; and only CLOSED subsets shown
+guaranteed to inherit compactness, demonstrated via the $(0,1)$-versus-$[0,1/2]$ contrast within
+$[0,1]$. 3 misconceptions independently classified by Blueprint-declared severity — MC-1
+HEINE-BOREL-ASSUMED-TO-EXTEND-GENERALLY (Foundational), MC-2
+GENERAL-DEFINITION-ASSUMED-TO-NEED-NEW-MACHINERY (Moderate), MC-3
+EVERY-SUBSET-OF-COMPACT-ASSUMED-COMPACT (Foundational). Zero Blueprint/KG discrepancy; all fields
+(requires `math.top.topological-space`, unlocks `math.top.tychonoff`, cross_links
+`math.real.compactness`, expert/understand, mastery_threshold 0.85, estimated_hours 5) verified
+exact matches; `math.real.compactness` independently re-confirmed authored.
+
+`homeomorphism`: bijective continuity shown NOT sufficient for a homeomorphism, demonstrated via
+the canonical $f:[0,1)\to S^1$ counterexample (inverse fails continuity at the gap left at $0$);
+topological invariants (never cardinality or visual similarity) shown as the only valid tool for
+proving non-homeomorphism, demonstrated via the compactness-invariant proof of
+$[0,1]\not\cong(0,1)$ and the connectedness-invariant point-removal proof of
+$S^1\not\cong\mathbb R$; and an explicit homeomorphism constructed via $\tan$, proving
+$(0,1)\cong\mathbb R$ despite boundedness differing between them. 3 misconceptions independently
+classified by Blueprint-declared severity — MC-1 HOMEOMORPHISM-MEANS-BIJECTIVE-CONTINUOUS
+(Critical), MC-2 SAME-CARDINALITY-IMPLIES-HOMEOMORPHIC (Moderate), MC-3
+VISUALLY-SIMILAR-MEANS-HOMEOMORPHIC (Moderate). Zero Blueprint/KG discrepancy; all fields
+(requires `math.top.continuity-top`, unlocks none, cross_links none, expert/understand,
+mastery_threshold 0.85, estimated_hours 3) verified exact matches.
+
+Mathematics **761/908 → 763/908**, 145 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 763/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)".
+
+Mid-batch, `origin/main` diverged with an unrelated commit (`ad9d634` /
+`visualAnswerEchoNotNewTopic.test.ts` guard fix, merged upstream as `1371e39`, no EB/KG/curriculum
+files touched) — merged cleanly into this batch's branch via a standard merge commit (never
+rebase/force-push, per repository branch policy), re-validated (`tsc` clean, KG validator PASS)
+after the merge, then pushed.
+
+Fresh frontier recomputed for Batch 185 (30 concepts): `math.cat.morphism-types`/
+`natural-transformation`, `math.top.homotopy`/`manifold`/`product-space`/`quotient-space`/
+`separation-axioms`/`simplicial-complex`/`tychonoff` (`tychonoff`/`manifold` newly unlocked), plus
+`math.cx.complex-numbers-analysis`, `math.de.systems-matrix-method`, `math.fnal.convolution`,
+`math.fnal.normed-space`, `math.graph.random-graph`,
+`math.linalg.jordan-form`/`matrix-exponential`/`matrix-representation`/`tensor`,
+`math.num.floating-point`/`interpolation`/`qr-algorithm`/`root-finding`,
+`math.opt.quadratic-programming`/`semidefinite-programming`/`stochastic-gradient`,
+`math.prob.characteristic-function`/`joint-distribution`,
+`math.stats.normal-distribution`/`percentile`/`sampling-distribution`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint file touched (this batch's own
+content). This batch is commit `d4eed53` (content) merged with upstream `1371e39` at merge commit
+`3c8dcb6` on `main`, pushed directly.
+
+## Batch 185 (2026-09-19) — one stale-metadata discrepancy (mastery_threshold/estimated_hours)
+
+`product-space`: a basis for the product topology shown NOT uniquely rectangular, demonstrated
+via the open-rectangles-versus-open-discs comparison on $\mathbb R^2$ (both generate the identical
+topology); projection continuity shown BUILT IN by construction (never coincidental), demonstrated
+via the direct $\pi_1^{-1}((2,5))=(2,5)\times\mathbb R$ verification, alongside the
+coarsest-topology characterization; and the universal property shown to replace a direct basis
+check with two simpler component checks, demonstrated via $f(t)=(t^2,\sin t)$. 3 misconceptions
+independently classified by Blueprint-declared severity — MC-1
+PRODUCT-TOPOLOGY-BASIS-ASSUMED-UNIQUELY-RECTANGULAR (Foundational), MC-2
+PROJECTION-CONTINUITY-ASSUMED-COINCIDENTAL (High), MC-3
+PRODUCT-CONTINUITY-ASSUMED-TO-REQUIRE-DIRECT-BASIS-CHECK (Moderate). Zero Blueprint/KG
+discrepancy; all fields (requires `math.top.topological-space`, unlocks `math.top.tychonoff`,
+cross_links none, expert/apply, mastery_threshold 0.85, estimated_hours 3) verified exact matches.
+
+`quotient-space`: the quotient topology shown PRECISELY determined by $f$'s preimages (never
+freely chosen), demonstrated via the openness test around the glued point of $S^1=[0,1]/\!\sim$;
+"gluing" shown to be a fully precise equivalence-relation construction (never merely informal),
+demonstrated via the explicit reflexive/symmetric/transitive verification for identifying $0$ and
+$1$; and quotient spaces/quotient groups shown to share a genuine organizing pattern (never a
+coincidental shared word), demonstrated via the $\mathbb Z/6\mathbb Z$-versus-circle structural
+parallel. 3 misconceptions independently classified by Blueprint-declared severity — MC-1
+QUOTIENT-TOPOLOGY-ASSUMED-FREELY-CHOSEN (Foundational), MC-2 GLUING-ASSUMED-MERELY-INFORMAL
+(High), MC-3 QUOTIENT-TERMINOLOGY-ASSUMED-COINCIDENTAL (Moderate). **Stale KG metadata
+discrepancy found**: the Blueprint's Component 0 states mastery_threshold `0.65` (MAMR 4/5) and
+estimated_hours `6`, but the LIVE KG has mastery_threshold `0.8` (MAMR = ⌈0.8×5⌉ = 4/5, unchanged)
+and estimated_hours `5` — live KG values adopted as authoritative, documented in the file's
+Curriculum Feedback section. All other fields (requires
+`math.top.topological-space`/`math.found.equivalence-relation`, unlocks none, cross_links
+`math.abst.quotient-group`, expert/apply) verified exact matches; `math.abst.quotient-group`
+independently re-confirmed authored.
+
+Mathematics **763/908 → 765/908**, 143 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 765/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)".
+
+Fresh frontier recomputed for Batch 186 (28 concepts): `math.cat.morphism-types`/
+`natural-transformation`, `math.top.homotopy`/`manifold`/`separation-axioms`/`simplicial-complex`/
+`tychonoff` (`product-space`/`quotient-space` now consumed from the frontier), plus
+`math.cx.complex-numbers-analysis`, `math.de.systems-matrix-method`, `math.fnal.convolution`,
+`math.fnal.normed-space`, `math.graph.random-graph`,
+`math.linalg.jordan-form`/`matrix-exponential`/`matrix-representation`/`tensor`,
+`math.num.floating-point`/`interpolation`/`qr-algorithm`/`root-finding`,
+`math.opt.quadratic-programming`/`semidefinite-programming`/`stochastic-gradient`,
+`math.prob.characteristic-function`/`joint-distribution`,
+`math.stats.normal-distribution`/`percentile`/`sampling-distribution`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `cf4a662` on `main`, pushed directly.
