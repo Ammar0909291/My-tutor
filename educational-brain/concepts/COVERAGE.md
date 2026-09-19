@@ -15457,3 +15457,49 @@ still reachable.
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `9d9fe67` on `main`, pushed directly.
+
+## Batch 147 (2026-09-19)
+
+Authored `math.de.existence-uniqueness` and `math.de.linear-first-order`, continuing the `math.de`
+domain opened at Batch 146.
+
+`existence-uniqueness`: Picard iteration recognized as a DIRECT INSTANCE (never merely inspired
+by) `math.real.fixed-point-theorem`'s contraction-mapping machinery, applied to the Picard operator
+$(T\phi)(x)=y_0+\int_{x_0}^xf(t,\phi(t))dt$, verified concretely for $y'=y,y(0)=1$ ($y=e^x$
+satisfies $y=Ty$ exactly); $\partial f/\partial y$'s continuity shown to directly supply the
+Lipschitz bound (reusing `math.real.lipschitz-continuity`'s own Mean Value Theorem mechanism) that
+makes the Picard operator contract, demonstrated via $f(x,y)=x^2+y^2$; and the theorem's LOCAL-only
+conclusion grounded in a genuine finite-time blow-up ($y'=y^2,y(0)=1$ solution $y=1/(1-x)$
+diverging at $x=1$), never treated as a proof-technique artifact. 3 misconceptions independently
+classified by Blueprint-declared severity — MC-1 PICARD-ITERATION-ASSUMED-MERELY-INSPIRED-BY-
+FIXED-POINTS (Foundational), MC-2 PARTIAL-DERIVATIVE-HYPOTHESIS-ASSUMED-UNRELATED (High), MC-3
+LOCAL-CONCLUSION-ASSUMED-PROOF-TECHNIQUE-LIMITATION (Moderate). Zero Blueprint/KG discrepancy; the
+Blueprint's declared cross-link `math.real.fixed-point-theorem` was confirmed already authored
+(Batch 134), enabling a genuine cross-link probe. Closes `math.de.ivp`'s declared unlock.
+
+`linear-first-order`: the integrating factor method $\mu(x)=e^{\int P(x)dx}$ for
+$dy/dx+P(x)y=Q(x)$, with the constant inside $\mu$'s exponent shown to always cancel (never
+carried as a separate arbitrary constant); the required final divide-by-$\mu$ step to isolate $y$
+from $\mu y$, demonstrated via $dy/dx+y/x=x,y(1)=2$; and the standard-form verification required
+before applying the method, contrasted against a Bernoulli equation genuinely requiring the
+$v=y^{1-n}$ conversion FIRST. 3 misconceptions independently classified — MC-1 INTEGRATING-
+FACTOR-MUST-INCLUDE-CONSTANT (instruction-induced), MC-2 FORGETTING-TO-DIVIDE-BY-MU-AT-THE-END
+(language contamination), MC-3 MISIDENTIFYING-THE-STANDARD-FORM (overgeneralization). Zero
+Blueprint/KG discrepancy.
+
+Mathematics **687/908 → 689/908**, 219 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 689/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Fresh frontier to be recomputed at the start of Batch 148 per established discipline; remaining
+`math.de` concepts (exact-ode, homogeneous-ode, slope-field, euler-method, second-order-linear,
+laplace-transform, bvp, pde) and other ready concepts across `math.linalg`,
+`math.prob.joint-distribution`, `math.stats`, `math.cx`, `math.top`, `math.fnal`, `math.num`,
+`math.opt`, `math.graph`, `math.cat` still reachable.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `a28d316` on `main`, pushed directly.

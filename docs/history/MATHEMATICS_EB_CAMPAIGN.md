@@ -4462,3 +4462,26 @@ math.de concepts (linear-first-order, exact-ode, slope-field, second-order-linea
 transform, bvp, pde) and other ready concepts across math.linalg, math.prob.joint-distribution,
 math.stats, math.cx, math.top, math.fnal, math.num, math.opt, math.graph, math.cat still reachable.
 Campaign continues under the same active `/loop`.
+
+### Batch 147 (2026-09-19)
+
+Authored `existence-uniqueness` (Picard iteration as a direct instance of the fixed-point
+theorem's contraction machinery, verified for y'=y,y(0)=1; ∂f/∂y's continuity directly supplying
+the Lipschitz bound; the local-only conclusion grounded in a genuine y'=y² finite-time blow-up)
+and `linear-first-order` (the integrating factor μ=e^{∫P dx}, its constant always cancelling; the
+required divide-by-μ step; standard-form verification before applying the method, contrasted with
+Bernoulli's required v=y^{1-n} conversion). Both zero Blueprint/KG discrepancy.
+`existence-uniqueness`'s declared cross-link `math.real.fixed-point-theorem` confirmed already
+authored (Batch 134), enabling a genuine cross-link probe; closes `math.de.ivp`'s declared unlock.
+Mathematics **689/908** (687→689), 219 remaining. Full per-concept detail in `COVERAGE.md` Batch
+147. Validated: KG validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts`
+confirms mathematics 689/908 (13 EB-certified domains unchanged), `tsc --noEmit` clean, targeted
+EB/curriculum tests (7 files) 561/561 passed. Full whole-repo suite not re-attempted, per the
+established Batch 109-110 hang precedent. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/
+runtime file touched. Commit `a28d316` on `main`, pushed directly.
+
+Fresh frontier to be recomputed at the start of Batch 148 per established discipline; remaining
+math.de concepts (exact-ode, homogeneous-ode, slope-field, euler-method, second-order-linear,
+laplace-transform, bvp, pde) and other ready concepts across math.linalg,
+math.prob.joint-distribution, math.stats, math.cx, math.top, math.fnal, math.num, math.opt,
+math.graph, math.cat still reachable. Campaign continues under the same active `/loop`.
