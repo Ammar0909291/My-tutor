@@ -11,7 +11,7 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 577 | **Ten domains CERTIFIED (math.calc joined 2026-09-13, the tenth), math.graph 15/16 (PARKED again — only `random-graph` remains, blocked on unauthored `math.prob.probability-axioms`), math.linalg 30/61 (REOPENED 2026-09-14 — Batch 88 authored `math.abst.field`, Batch 89 authored the entry point `vector-space`, Batch 90 authored `subspace`; 4 candidates now ready, unchanged since Batch 90), math.opt 12/16 (PARKED as of Batch 83, remains blocked — its own chain to `field` runs through `math.linalg.positive-definite`, several concepts deep in the now-reopened `math.linalg`, or on unstarted `math.prob`/`math.stats`), math.abst 33/37 (Batch 92 authored `burnside-lemma`/`sylow-theorems`/`pid`/`algebraic-extension`, closing the entire post-Batch-91 frontier; only 4 concepts remain in the domain — `ufd`, `galois-theory`, `galois-group`, `galois-correspondence`).** 82 `math.found.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 69 `math.geom.*` (**COMPLETE, DOMAIN CERTIFIED** — the final 13 entries were restored by commit `0d2c76dd`'s Wave 0 recovery, which this row previously did not reflect) + 36 `math.nt.*` (**COMPLETE, DOMAIN CERTIFIED 2026-08-12** — the domain's final 8 concepts, `prime-distribution`, `continued-fractions`, `analytic-number-theory`, `prime-number-theorem`, `riemann-hypothesis`, `algebraic-number-theory`, `algebraic-integers`, `number-fields`, were authored this session, ending the PARKED status this row previously recorded) + 59 `math.alg.*` (**COMPLETE, DOMAIN CERTIFIED 2026-09-11** — Wave 1 (2026-08-12, 11 concepts): `expression`, `equation`, `term`, `coefficient`, `exponent-rules`, `polynomial`, `degree`, `zero-exponent`, `negative-exponent`, `solution-set`, `inequality`; Wave 2 (2026-08-12, 1 concept): `like-terms`; Wave 3 (2026-09-11, 3 concepts): `simplification`, `polynomial-operations`, `radicals`; Wave 4 (2026-09-11, 5 concepts): `linear-equation-1var`, `polynomial-division`, `fractional-exponent`, `simplifying-radicals`, `radical-equations`; Wave 5 (2026-09-11, 5 concepts): `inequality-1var`, `absolute-value-equations`, `linear-equation-2var`, `remainder-theorem`, `rationalizing-denominators`; Wave 6 (2026-09-11, 3 concepts): `inequality-2var`, `system-linear-equations`, `factor-theorem`; Wave 7 (2026-09-11, 4 concepts): `substitution-method`, `elimination-method`, `system-3var`, `factoring`; Wave 8 (2026-09-11, 3 concepts): `factoring-gcf`, `factoring-special`, `rational-expressions`; Wave 9 (2026-09-11, 4 concepts): `factoring-trinomials`, `rational-expressions-addition`, `rational-expressions-multiplication`, `rational-equations`; Wave 10 (2026-09-11, 1 concept): `quadratic-equation`; Wave 11 (2026-09-11, 2 concepts): `completing-the-square`, `polynomial-roots`; Wave 12 part 1 (2026-09-11, 1 concept): `quadratic-formula`; Wave 12 part 2 (2026-09-11, 2 concepts): `discriminant`, `rational-root-theorem`; Wave 12 part 3 (2026-09-11, 3 concepts): `fundamental-theorem-algebra`, `polynomial-inequality`, `vietas-formulas`; Wave 13 (2026-09-11, 2 concepts): `complex-polynomial-roots`, `rational-inequality`; Batch 15 (2026-09-11, 1 concept): `exponential-function`; Batch 16 (2026-09-11, 2 concepts): `logarithm`, `exponential-equations`; Batch 17 (2026-09-11, 3 concepts): `binomial-theorem`, `logarithm-properties`, `natural-logarithm`; Batch 18 (2026-09-11, 3 concepts, FINAL): `change-of-base`, `logarithmic-equations`, `pascals-triangle`; all Blueprint-grounded, reused by reference). 20 `math.disc.*` entries (**IN PROGRESS, standalone campaign since math.alg's certification** —
+| mathematics | 908 | 581 | **Ten domains CERTIFIED (math.calc joined 2026-09-13, the tenth), math.graph 15/16 (PARKED again — only `random-graph` remains, blocked on unauthored `math.prob.probability-axioms`), math.linalg 32/61 (Batch 93 authored `span`/`null-space`, closing 2 of the 4-candidate post-Batch-92 frontier, deferring `linear-map`/`inner-product`; 5 candidates now ready), math.opt 12/16 (PARKED as of Batch 83, remains blocked — its own chain to `field` runs through `math.linalg.positive-definite`, several concepts deep in the now-reopened `math.linalg`, or on unstarted `math.prob`/`math.stats`), math.abst 35/37 (Batch 93 authored `ufd`/`galois-theory`, closing the entire 2-candidate post-Batch-92 frontier; only 2 concepts remain in the domain — `galois-group`, `galois-correspondence`).** 82 `math.found.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 69 `math.geom.*` (**COMPLETE, DOMAIN CERTIFIED** — the final 13 entries were restored by commit `0d2c76dd`'s Wave 0 recovery, which this row previously did not reflect) + 36 `math.nt.*` (**COMPLETE, DOMAIN CERTIFIED 2026-08-12** — the domain's final 8 concepts, `prime-distribution`, `continued-fractions`, `analytic-number-theory`, `prime-number-theorem`, `riemann-hypothesis`, `algebraic-number-theory`, `algebraic-integers`, `number-fields`, were authored this session, ending the PARKED status this row previously recorded) + 59 `math.alg.*` (**COMPLETE, DOMAIN CERTIFIED 2026-09-11** — Wave 1 (2026-08-12, 11 concepts): `expression`, `equation`, `term`, `coefficient`, `exponent-rules`, `polynomial`, `degree`, `zero-exponent`, `negative-exponent`, `solution-set`, `inequality`; Wave 2 (2026-08-12, 1 concept): `like-terms`; Wave 3 (2026-09-11, 3 concepts): `simplification`, `polynomial-operations`, `radicals`; Wave 4 (2026-09-11, 5 concepts): `linear-equation-1var`, `polynomial-division`, `fractional-exponent`, `simplifying-radicals`, `radical-equations`; Wave 5 (2026-09-11, 5 concepts): `inequality-1var`, `absolute-value-equations`, `linear-equation-2var`, `remainder-theorem`, `rationalizing-denominators`; Wave 6 (2026-09-11, 3 concepts): `inequality-2var`, `system-linear-equations`, `factor-theorem`; Wave 7 (2026-09-11, 4 concepts): `substitution-method`, `elimination-method`, `system-3var`, `factoring`; Wave 8 (2026-09-11, 3 concepts): `factoring-gcf`, `factoring-special`, `rational-expressions`; Wave 9 (2026-09-11, 4 concepts): `factoring-trinomials`, `rational-expressions-addition`, `rational-expressions-multiplication`, `rational-equations`; Wave 10 (2026-09-11, 1 concept): `quadratic-equation`; Wave 11 (2026-09-11, 2 concepts): `completing-the-square`, `polynomial-roots`; Wave 12 part 1 (2026-09-11, 1 concept): `quadratic-formula`; Wave 12 part 2 (2026-09-11, 2 concepts): `discriminant`, `rational-root-theorem`; Wave 12 part 3 (2026-09-11, 3 concepts): `fundamental-theorem-algebra`, `polynomial-inequality`, `vietas-formulas`; Wave 13 (2026-09-11, 2 concepts): `complex-polynomial-roots`, `rational-inequality`; Batch 15 (2026-09-11, 1 concept): `exponential-function`; Batch 16 (2026-09-11, 2 concepts): `logarithm`, `exponential-equations`; Batch 17 (2026-09-11, 3 concepts): `binomial-theorem`, `logarithm-properties`, `natural-logarithm`; Batch 18 (2026-09-11, 3 concepts, FINAL): `change-of-base`, `logarithmic-equations`, `pascals-triangle`; all Blueprint-grounded, reused by reference). 20 `math.disc.*` entries (**IN PROGRESS, standalone campaign since math.alg's certification** —
 Batch 14 (2026-09-11, 1 concept): `counting-principles`; Batch 15 (2026-09-11, 1 concept):
 `permutations`; Batch 16 (2026-09-11, 1 concept): `combinations`; Batch 19 (2026-09-11, 5
 concepts): `combinatorics`, `pigeonhole`, `stars-bars`, `inclusion-exclusion`,
@@ -12565,3 +12565,4617 @@ unchanged, plus the same 9 previously-unstarted domains from Batch 86 unchanged.
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This is
 a genuinely multi-session campaign; continuation should verify state via `scripts/math/state.ts`
 fresh each time rather than trusting any number recorded here.
+
+### Batch 93 (2026-09-14, autonomous loop iteration)
+
+Re-fetched `origin/main`: `0 0` divergence, clean. Re-ran `scripts/math/state.ts` fresh:
+confirmed mathematics 577/908, 10 EB-certified domains unchanged, matching Batch 92's predicted
+end-state exactly. Re-computed the topologically-ready frontier programmatically: 18 candidates
+total, exactly matching Batch 92's own prediction — `math.abst` 2 (`ufd`, `galois-theory`),
+`math.linalg` 4 unchanged (`span`, `null-space`, `linear-map`, `inner-product`), plus the same 9
+previously-unstarted domains from Batch 86 unchanged.
+
+Selected both math.abst candidates (closing that domain's entire post-Batch-92 frontier) plus 2 of
+math.linalg's 4 candidates (`span`, `null-space`), deferring `linear-map`/`inner-product` to a
+future batch — a cross-domain 4-concept batch, matching this program's flexible batch-composition
+precedent (e.g. Batch 89) when multiple domains hold small ready pools simultaneously. All 4
+Blueprints verified to exist via `ls docs/curriculum/blueprints/` and read in full before
+authoring; confirmed via `ls` that `math.nt.fundamental-theorem-arithmetic.md` genuinely has an EB
+entry, so `ufd`'s Blueprint-declared cross-link-probe P76 mode is NOT stale — a positive
+confirmation, contrasted with several prior batches' findings of genuine staleness.
+
+**`math.abst.ufd`** (requires `math.abst.pid`, unlocks none, cross_links
+`['math.nt.fundamental-theorem-arithmetic']`, expert/analyze, mastery_threshold 0.75,
+estimated_hours 4): states the Unique Factorization Domain definition and the theorem "every PID
+is a UFD," proved via the minimal-norm-element argument directly reusing `pid`'s own machinery
+(never independently re-verified from scratch); worked via $\mathbb Z[x]$, a UFD that is NOT a
+PID (the ideal $\langle2,x\rangle$ is not principal), establishing PID and UFD as genuinely
+distinct classes even though every PID is a UFD; cites `math.nt.fundamental-theorem-arithmetic`
+as the concrete $\mathbb Z$-level instance of the abstract UFD property. 3 misconceptions
+independently classified, all Type 1 overgeneralization — MC-1
+FTA-TREATED-AS-MERELY-ANALOGOUS-TO-UFD (Foundational, the FTA is a SPECIAL CASE of the UFD
+property for $\mathbb Z$, not a separate parallel fact), MC-2
+PID-TO-UFD-ASSUMED-TO-NEED-SEPARATE-VERIFICATION (the theorem is a guarantee, not a
+case-by-case check), MC-3 PID-AND-UFD-ASSUMED-EQUIVALENT-CLASSES ($\mathbb Z[x]$ as the
+separating counterexample). Zero Blueprint/KG metadata discrepancy.
+
+**`math.abst.galois-theory`** (requires `math.abst.algebraic-extension`+`math.abst.group-theory`,
+unlocks `math.abst.galois-group`, cross_links none, research/analyze, mastery_threshold 0.65,
+estimated_hours 12): defines the Galois group $\mathrm{Gal}(K/F)$ as the group of $F$-fixing
+automorphisms of $K$ under composition (reusing `group-theory`'s own axiom-verification
+discipline directly), and states the Fundamental Theorem of Galois Theory's
+INCLUSION-REVERSING correspondence between intermediate fields and subgroups, worked in full via
+$K=\mathbb Q(\sqrt2,\sqrt3)$ over $F=\mathbb Q$ with a 5-row subgroup/subfield table making the
+reversal concrete (the whole group corresponds to the base field, the trivial subgroup to the
+whole extension); previews Abel-Ruffini at orientation level, distinguishing "roots exist"
+(always true, Fundamental Theorem of Algebra) from "roots are expressible by radicals" (false in
+general for degree $\ge5$, a genuinely different and much stronger claim). 3 misconceptions
+independently classified — MC-1 GALOIS-AUTOMORPHISM-AS-ANY-RELABELING (Type 1, Foundational —
+overgeneralizes "automorphism" from the loose everyday sense to the strict $F$-fixing
+requirement), MC-2 GALOIS-CORRESPONDENCE-DIRECTION-PRESERVING (Type 1, Foundational — assumes the
+correspondence preserves inclusion order rather than reversing it, the theorem's single most
+counterintuitive feature), MC-3
+UNSOLVABILITY-BY-RADICALS-CONFLATED-WITH-NONEXISTENCE-OF-ROOTS (Type 3, language contamination —
+"unsolvable" colloquially suggests "has no solution," not the technical "no radical formula
+exists for an admittedly-existing solution"). Zero Blueprint/KG metadata discrepancy.
+
+**`math.linalg.span`** (requires `math.linalg.subspace`, unlocks `math.linalg.basis`, cross_links
+none, proficient/understand, mastery_threshold 0.9, estimated_hours 3): defines $\mathrm{span}(S)$
+as the set of ALL linear combinations of $S$ (reusing `subspace`'s own smallest-subspace
+characterization directly), establishes the explicit-solve discipline for span membership (never
+inspection), and the redundant-addition-doesn't-enlarge-span principle. 3 misconceptions
+independently classified since the Blueprint gives Trigger but not a formal Type label — MC-1
+SPAN-EQUALS-GENERATING-SET (Type 3, language contamination, Blueprint-declared FOUNDATIONAL — the
+everyday reading of "span of S" as "the things in S" collides with the technical
+all-combinations meaning), MC-2 SPAN-MEMBERSHIP-BY-INSPECTION (Type 5, instruction-induced —
+early examples use visually-obvious coefficients, so the explicit-solve discipline is never
+forced until a non-obvious target appears), MC-3 EVERY-NEW-VECTOR-ENLARGES-SPAN (Type 1,
+overgeneralization — a general "more inputs, more output" intuition over-applied to span, where a
+redundant addition contributes nothing new). Zero Blueprint/KG metadata discrepancy.
+
+**`math.linalg.null-space`** (requires `math.linalg.subspace`+`math.linalg.row-echelon`, unlocks
+`math.linalg.rank-nullity`, cross_links none, proficient/apply, mastery_threshold 0.9,
+estimated_hours 4): computes $N(A)=\{x:Ax=0\}$ by row-reducing to RREF and parameterizing the
+free variables (reusing `row-echelon`'s own pivot/free-variable identification directly), proves
+$N(A)$ is a genuine subspace via the 3-condition test grounded in $A$'s own linearity (never
+assumed), and correctly counts nullity as the number of free variables — including the TRIVIAL
+$N(A)=\{0\}$ case when the RREF has a pivot in every column, a genuine and common outcome, not an
+error. 3 misconceptions independently classified since the Blueprint gives Severity but not a
+formal Type label — MC-1 HOMOGENEOUS-SYSTEM-ASSUMED-TO-ALWAYS-HAVE-NONTRIVIAL-SOLUTIONS (Type 1,
+overgeneralization, Blueprint-declared FOUNDATIONAL — homogeneous-system examples are typically
+chosen to have nontrivial solutions, so the trivial-only case is unfamiliar), MC-2
+SUBSPACE-VERIFICATION-STEP-SKIPPED-FOR-NULL-SPACE (Type 5, instruction-induced, FOUNDATIONAL —
+once row-reduction is fluent, the underlying closure argument is easy to skip since it never
+changes the numerical answer), MC-3 NULLITY-MISCOUNTED-FROM-RREF (Type 2, perceptual intuition —
+a column merely CONTAINING a nonzero entry is visually mistaken for a pivot column). Zero
+Blueprint/KG metadata discrepancy.
+
+**Two of 4 concepts this batch are math.abst, two are math.linalg; all 4 zero Blueprint/KG
+metadata discrepancy on every field.** `math.abst` **33/37 → 35/37** — only 2 concepts remain in
+the domain: `galois-group`, `galois-correspondence`. `math.linalg` **30/61 → 32/61**. Mathematics
+**577/908 → 581/908**, 327 remaining.
+
+Validated: heading-diff against `math.alg.like-terms.md` returned 0 diffs for all 4 files (first
+pass). `npx tsx scripts/validate-knowledge-graph.ts docs/mathematics/kg/graph.json` → PASS,
+908/908 reachable, 0 failures, 0 warnings, KG file untouched. `npx tsx scripts/math/state.ts` →
+confirmed `math.abst` `{"kg": 37, "blueprints": 37, "eb": 35, "ebComplete": false}` and
+`math.linalg` `{"kg": 61, "blueprints": 61, "eb": 32, "ebComplete": false}`, mathematics 581/908
+(10 EB-certified domains unchanged). `npx tsc --noEmit` → clean (exit 0). `npx vitest run
+src/tests/mathPackageCorpus.test.ts src/tests/mathematicsAssetContract.test.ts` → "Test Files 2
+passed (2), Tests 479 passed (479)".
+
+Computed fresh frontier post-batch: 18 candidates — `math.abst` 1 (`galois-group` — newly
+unblocked by `galois-theory`; `galois-correspondence` remains blocked, depending on
+`galois-theory`+`galois-group`), `math.linalg` 5 (`column-space`, `eigenspace`, `inner-product`,
+`linear-independence`, `linear-map` — the first, third, and fourth newly unblocked by
+`span`/`null-space`), plus 10 previously-unstarted domains each holding one ready entry-node
+candidate.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This is
+a genuinely multi-session campaign; continuation should verify state via `scripts/math/state.ts`
+fresh each time rather than trusting any number recorded here.
+
+### Batch 94 (2026-09-18) — campaign RESUMED on explicit fresh owner instruction
+
+CLAUDE.md's "biology/computer_science/mathematics content work is explicitly PAUSED" rule (added
+2026-09-16, in force since Batch 93) was overridden by an explicit fresh owner instruction this
+session ("keep working until u finish eb for mathematics" via `/loop`) — exactly the trigger
+condition that rule itself names as the only valid resumption path. Re-derived the frontier fresh
+via `scripts/math/state.ts` rather than trusting Batch 93's recorded prediction: `math.abst` had
+exactly 1 ready candidate (`galois-group`) and `math.linalg` had exactly 5 (`column-space`,
+`eigenspace`, `inner-product`, `linear-independence`, `linear-map`), matching Batch 93's own
+prediction exactly. Selected `galois-group` (closing `math.abst`'s entire post-Batch-93 frontier
+bar the still-blocked `galois-correspondence`) and one math.linalg candidate, `linear-map`,
+deferring the other four to a future batch. Both Blueprint-grounded, reused by reference.
+
+`galois-group` (requires `galois-theory`, unlocks none): the degree equality
+$|\mathrm{Gal}(K/F)|=[K:F]$ holding SPECIFICALLY for Galois extensions — proved conditional via
+the $\mathbb Q(\sqrt[3]2)/\mathbb Q$ counterexample (degree 3, Galois group order 1, since the
+other two roots of $x^3-2$ are complex and absent from this real field), directly reusing
+`algebraic-extension`'s own Eisenstein degree-3 computation; the Frobenius automorphism
+$\sigma(x)=x^p$ proved to GENERATE the entire finite-field Galois group via the explicit
+$\mathbb F_8/\mathbb F_2$ power computation ($\sigma,\sigma^2,\sigma^3=\mathrm{id}$), not merely
+sit as one example element; and the orientation-level $S_5$ non-abelian caution against
+overgeneralizing from the two small abelian examples studied. 3 misconceptions independently
+classified, all Type 1 overgeneralization — MC-1 GALOIS-DEGREE-EQUALITY-ASSUMED-UNIVERSAL
+(Foundational), MC-2 FROBENIUS-TREATED-AS-MERE-EXAMPLE (Foundational), MC-3
+GALOIS-GROUPS-ASSUMED-ALWAYS-SMALL-AND-ABELIAN (Moderate). Zero Blueprint/KG metadata
+discrepancy.
+
+`linear-map` (requires `vector-space`+`matrix`, unlocks `kernel-image`+`matrix-representation`,
+cross_links `group-homomorphism`+`bounded-operator` both confirmed unauthored via `ls` →
+independence mode): the two linearity properties (additivity, homogeneity) grounded directly in
+the already-studied rotation/reflection/dilation coordinate rules, with translation as the one
+geometric transformation that FAILS the necessary $T(0)=0$ consequence; the
+basis-determination fact proved via a forced-value contradiction (a claimed extra rule
+inconsistent with what the basis images already force); and the matrix-representation connection
+shown to be the identical calculation to basis-decomposition, merely differently notated. 3
+misconceptions independently classified — MC-1 ALL-TRANSFORMATIONS-ASSUMED-LINEAR (Type 1,
+Foundational), MC-2 BASIS-DETERMINATION-NOT-ENFORCED (Type 1, Foundational), MC-3
+HOMOGENEITY-CHECKED-WITH-UNIT-SCALAR-ONLY (Type 5, instruction-induced, Moderate — a $c=1$ or
+$c=0$ check is trivially true for every function, masking genuine failures at other scalars).
+Zero Blueprint/KG metadata discrepancy.
+
+**One of 2 concepts this batch is math.abst, one is math.linalg; both zero Blueprint/KG metadata
+discrepancy on every field.** `math.abst` **35/37 → 36/37** — only `galois-correspondence`
+remains in the domain (still blocked: requires `galois-theory`+`galois-group`, now both
+authored, so it is newly unblocked for a future batch). `math.linalg` **32/61 → 33/61**.
+Mathematics **581/908 → 583/908**, 325 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.abst` 36/37,
+`math.linalg` 33/61, mathematics 583/908 (10 EB-certified domains unchanged). `npx tsc --noEmit`
+→ clean (exit 0). `npx vitest run` targeted at the EB/curriculum test files (`brainCompiler`,
+`brainValidation`, `ebKnowledgeDelivery`, `ebMisconceptionRetrieval`,
+`ebMisconceptionFormatCompat`, `curriculumRoadmap`, `curriculumPlacement`) → "Test Files 7 passed
+(7), Tests 128 passed (128)". Full suite: "Test Files 700 passed (700), Tests 14461 passed | 9
+skipped (14470)" — 0 failures.
+
+Computed fresh frontier post-batch: `math.abst` 1 (`galois-correspondence` — newly unblocked by
+`galois-group`, closing the entire domain once authored), `math.linalg` 4 unchanged
+(`column-space`, `eigenspace`, `inner-product`, `linear-independence`), plus the same 10
+previously-unstarted domains from Batch 93 unchanged.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+remains a genuinely multi-session campaign; continuation should verify state via
+`scripts/math/state.ts` fresh each time rather than trusting any number recorded here. Also
+note: this session found the container's local `main` git branch held an entirely unrelated,
+stale history (last commit an old "Batch 29") with no merge-base against `origin/main` — resolved
+by resetting local `main` to `origin/main` before committing (per explicit owner instruction to
+"work only on main branch"); this batch is commit `957c7bb` on `main`, pushed directly.
+
+### Batch 95 (2026-09-18) — closes math.abst entirely; DOMAIN NEWLY CERTIFIED
+
+Re-derived the frontier fresh via `scripts/math/state.ts`: confirmed exactly matching Batch 94's
+prediction — `math.abst` 1 candidate (`galois-correspondence`), `math.linalg` 4 candidates
+(`column-space`, `eigenspace`, `inner-product`, `linear-independence`). Selected
+`galois-correspondence` (closing `math.abst`'s entire frontier) and one math.linalg candidate,
+`column-space`, deferring the other three. Both Blueprint-grounded, reused by reference.
+
+`galois-correspondence` (requires `galois-group`, unlocks none): the Fundamental Theorem's
+bijection between intermediate fields of $K/F$ and subgroups of `galois-group`'s own
+$\mathrm{Gal}(K/F)$, verified EXHAUSTIVELY on the 5-subgroup/5-field
+$\mathbb Q(\sqrt2,\sqrt3)/\mathbb Q$ case (no field or subgroup left unmatched); the
+inclusion-reversing property (a field chain corresponds to a subgroup chain read in reverse); and
+the normality-Galois-subextension equivalence, settling all three intermediate fields of the same
+example simultaneously via one abelian-group observation rather than three separate direct
+verifications. 3 misconceptions independently classified — MC-1
+CORRESPONDENCE-BIJECTION-DOUBTED (Type 1, Foundational), MC-2
+INCLUSION-DIRECTION-ASSUMED-PRESERVED (Type 1, High), MC-3
+GALOIS-SUBEXTENSION-ASSUMED-TO-NEED-DIRECT-VERIFICATION (Type 5, instruction-induced, Moderate).
+Zero Blueprint/KG metadata discrepancy.
+
+`column-space` (requires `subspace`+`span`; KG unlocks `rank-nullity` — **a genuine Blueprint/KG
+discrepancy caught this batch**: the Blueprint's own Component 0 metadata table states "unlocks
+(none in KG)", but the live KG actually lists `math.linalg.rank-nullity`; the authored entry
+states the KG's true value and documents the correction rather than silently reproducing the
+Blueprint's stale claim): $C(A)$ as the span of $A$'s columns, with a dependent-column example
+($A$'s second column exactly $2\times$ its first) collapsing a 2-column matrix's column space to
+a 1-dimensional line; the full-system consistency check for $Ax=b$ (all components of the
+candidate combination must match $b$ simultaneously — a partial match proves nothing); and
+$\dim(C(A))=\mathrm{rank}(A)$, connecting directly to the already-mastered rank computation. 2
+misconceptions independently classified (Blueprint declares 2, not the usual 3) — MC-1
+COLUMN-SPACE-MEMBERSHIP-CHECKED-PARTIALLY (Type 5, instruction-induced, Foundational), MC-2
+COLUMN-SPACE-DIMENSION-ASSUMED-EQUAL-TO-COLUMN-COUNT (Type 1, overgeneralization, Foundational).
+
+**One of 2 concepts this batch is math.abst, one is math.linalg.** `math.abst` **36/37 → 37/37 —
+DOMAIN COMPLETE**, newly EB-CERTIFIED (11th certified domain, confirmed via
+`scripts/math/state.ts`'s own certified-domain list). `math.linalg` **33/61 → 34/61**.
+Mathematics **583/908 → 585/908**, 323 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.abst` 37/37
+(certified), `math.linalg` 34/61, mathematics 585/908, 11 EB-certified domains (10 prior +
+`math.abst` newly added). `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests:
+"Test Files 7 passed (7), Tests 128 passed (128)". Full suite: "Test Files 700 passed (700),
+Tests 14461 passed | 9 skipped (14470)" — 0 failures.
+
+Computed fresh frontier post-batch: `math.abst` domain fully closed (no further candidates).
+`math.linalg` 3 unchanged (`eigenspace`, `inner-product`, `linear-independence`), plus the same
+10 previously-unstarted domains from Batch 93/94 unchanged.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `cbc6fe1` on `main`, pushed directly, continuing under the same active `/loop`
+that resumed the campaign in Batch 94.
+
+### Batch 96 (2026-09-18)
+
+Re-derived the frontier fresh via `scripts/math/state.ts`: confirmed matching Batch 95's
+prediction — `math.linalg` 3 candidates (`eigenspace`, `inner-product`, `linear-independence`),
+`math.abst` fully closed. Selected `eigenspace` and `inner-product`, deferring
+`linear-independence`. Both Blueprint-grounded, reused by reference.
+
+`eigenspace` (requires `eigenvalues`+`null-space`, unlocks none): $E_\lambda=\ker(A-\lambda I)$
+computed by directly reusing `null-space`'s own row-reduction technique applied to $A-\lambda I$;
+algebraic multiplicity (root-count in the characteristic polynomial) versus geometric multiplicity
+($\dim(E_\lambda)$) as two genuinely different countings, demonstrated via the defective
+$\begin{pmatrix}3&1\\0&3\end{pmatrix}$ case (algebraic 2, geometric 1); and the
+equality-for-every-eigenvalue criterion for diagonalizability, confirmed on a diagonal
+counter-example where both multiplicities match. 2 misconceptions independently classified
+(Blueprint declares 2, not 3) — MC-1 ALGEBRAIC-AND-GEOMETRIC-MULTIPLICITY-ASSUMED-ALWAYS-EQUAL
+(Type 1, Foundational), MC-2 GEOMETRIC-MULTIPLICITY-COMPUTED-WITHOUT-ROW-REDUCTION (Type 5,
+instruction-induced, Foundational). Zero Blueprint/KG metadata discrepancy.
+
+`inner-product` (requires `vector-space`+`dot-product`, unlocks `inner-product-space`,
+cross_links `math.fnal.hilbert-space` confirmed unauthored via `ls` → independence mode): the
+three inner-product axioms verified first on `dot-product`'s own familiar formula, then on a
+genuinely component-free function-space integral pairing (no numeric components to "dot" at
+all); an indefinite symmetric bilinear form ($u_1v_1-u_2v_2$) that passes symmetry and
+bilinearity but fails positive-definiteness at $v=(0,1)$ (self-pairing $-1<0$); and the complex
+case's conjugate symmetry ($\langle u,v\rangle=\overline{\langle v,u\rangle}$) replacing plain
+symmetry, verified directly against a concrete example where plain symmetry genuinely fails. 3
+misconceptions independently classified — MC-1 INNER-PRODUCT-IS-JUST-DOT-PRODUCT (Type 1,
+Foundational), MC-2 ANY-SYMMETRIC-BILINEAR-FORM-QUALIFIES (Type 5, instruction-induced), MC-3
+COMPLEX-INNER-PRODUCT-IS-PLAIN-SYMMETRIC (Type 4, notation-induced). Zero Blueprint/KG metadata
+discrepancy.
+
+**Both concepts this batch are math.linalg; both zero Blueprint/KG metadata discrepancy on every
+field.** `math.linalg` **34/61 → 36/61**. Mathematics **585/908 → 587/908**, 321 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.linalg` 36/61,
+mathematics 587/908, 11 EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0).
+Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 128 passed (128)". Full suite:
+"Test Files 700 passed (700), Tests 14461 passed | 9 skipped (14470)" — 0 failures.
+
+Computed fresh frontier post-batch: `math.linalg` 1 (`linear-independence`), plus the same 10
+previously-unstarted domains unchanged.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `77e2c00` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 97 (2026-09-18) — opens math.prob domain
+
+Re-derived the frontier fresh via `scripts/math/state.ts`: confirmed `math.linalg` 1 remaining
+ready candidate (`linear-independence`); `math.graph` showed 15/16 but its one remaining concept,
+`math.graph.random-graph`, was verified via its KG `requires` to depend on
+`math.prob.probability-axioms` — NOT actually ready, since the entire `math.prob` domain was
+unstarted (eb=0). Traced `probability-axioms`'s prerequisite chain back
+(`probability-axioms`→`probability-measure`→`event`→`sample-space`) to find the domain's true
+entry node: `math.prob.sample-space`, requiring only the already-certified `math.found`. Selected
+`linear-independence` and `sample-space` (opening the new domain) for this batch.
+
+`linear-independence` (requires `span`, unlocks `basis`, cross_links `math.de.wronskian`
+confirmed unauthored via `ls` → independence mode): the trivial-solution-is-not-enough
+discipline (the definition's "only solution" clause must be verified, not merely that
+$c_i=0$ satisfies it); a genuine 3-vector dependency with no pairwise-parallel relationship
+($v_3=2v_1+3v_2$ for $v_1=(1,0),v_2=(0,1),v_3=(2,3)$, none of which are individually parallel);
+and the more-than-$n$-vectors-forces-dependence shortcut in $\mathbb R^n$. 3 misconceptions
+independently classified, all Type 1 overgeneralization — MC-1
+DEPENDENCE-REQUIRES-PARALLEL-PAIR, MC-2 TRIVIAL-SOLUTION-PROVES-INDEPENDENCE (Foundational), MC-3
+ANY-VECTOR-COUNT-CAN-BE-INDEPENDENT. Zero Blueprint/KG metadata discrepancy.
+
+`sample-space` (requires `math.found.set-theory`, unlocks `probability-axioms`; opens
+`math.prob`): $\Omega$ as a genuine SET (never an informal list), making complements/unions/
+intersections well-defined via `math.found.set-theory`'s own machinery directly; the finite/
+countably-infinite/uncountable trichotomy (probability is fully defined for all three;
+individual-point-probability-zero on uncountable $\Omega$ is expected, not a paradox); and
+$\Omega$ depending on the QUESTION asked (a single die roll validly has $\Omega=\{1,\dots,6\}$ or
+$\Omega=\{\text{even},\text{odd}\}$ depending on what's being asked), never fixed uniquely by the
+physical experiment alone. 3 misconceptions independently classified, all Type 1
+overgeneralization — MC-1 SAMPLE-SPACE-OUTCOMES-LABELED (Foundational), MC-2
+SAMPLE-SPACE-MUST-BE-FINITE, MC-3 SAMPLE-SPACE-UNIQUE. Zero Blueprint/KG metadata discrepancy.
+
+**One of 2 concepts this batch is math.linalg, one opens math.prob; both zero Blueprint/KG
+metadata discrepancy on every field.** `math.linalg` **36/61 → 37/61** — this domain's frontier
+is temporarily exhausted (no further ready candidates until a currently-blocked concept is
+unblocked by a future domain entering the corpus). `math.prob` **0/49 → 1/49**, newly opened.
+Mathematics **587/908 → 589/908**, 319 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.linalg` 37/61,
+`math.prob` 1/49, mathematics 589/908, 11 EB-certified domains unchanged. `npx tsc --noEmit` →
+clean (exit 0). Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 128 passed (128)".
+Full suite: "Test Files 700 passed (700), Tests 14461 passed | 9 skipped (14470)" — 0 failures.
+
+Computed fresh frontier post-batch: `math.prob` 1 (`event` and `probability-measure` are both
+newly unblocked children of `sample-space` — one is the domain's next candidate; the other
+remains available in parallel), `math.linalg` exhausted of ready candidates for now, plus the
+remaining previously-unstarted domains (`math.de`, `math.stats`, `math.cx`, `math.real`,
+`math.top`, `math.fnal`, `math.num`, `math.cat`, `math.meas` — 9 now, since `math.prob` is no
+longer unstarted) each still holding one ready entry-node candidate.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `9da89a0` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 98 (2026-09-18)
+
+Re-derived the frontier fresh: `math.prob.probability-measure` actually requires
+`math.prob.event` directly (not `sample-space` — Batch 97's "both newly unblocked children"
+phrasing conflated the KG's `children` field with actual readiness), so only `event` was truly
+ready at batch start; `probability-measure` became ready only once `event` was authored within
+this same batch. Authored both, chained.
+
+`event` (requires `sample-space`, unlocks `probability-axioms`, cross_links
+`math.meas.sigma-algebra` confirmed unauthored via `ls` → independence mode): an event as ANY
+subset of $\Omega$ (never a single outcome — gathered by checking every outcome against a
+condition and collecting all that qualify); the full complement $A^c=\Omega\setminus A$ (every
+remaining outcome, never just the "one opposite" outcome — e.g. $A=\{HH\}$ in $\Omega=\{HH,HT,
+TH,TT\}$ gives $A^c=\{HT,TH,TT\}$, not $\{TT\}$ alone); and overlapping events as fully valid
+(mutual exclusivity is a special case to CHECK, never assumed). 3 misconceptions independently
+classified, all language-contamination or overgeneralization — MC-1 EVENT-IS-OUTCOME
+(Foundational), MC-2 EVENT-COMPLEMENT-ONE-OUTCOME, MC-3 EVENTS-MUST-PARTITION. Zero Blueprint/KG
+metadata discrepancy.
+
+`probability-measure` (requires `event`, unlocks `probability-axioms`, cross_links
+`math.meas.measure` confirmed unauthored via `ls` → independence mode): $P(A)\in[0,1]$ (a 70%
+chance converts to $P=0.70$, never the raw number 70); the complement rule $P(A^c)=1-P(A)$
+derived directly from $P(\Omega)=1$ and $A\cup A^c=\Omega$ (never "$1+P(A)$"); and the general
+addition rule $P(A\cup B)=P(A)+P(B)-P(A\cap B)$, with the mutually-exclusive plain-sum rule
+explicitly as a SPECIAL CASE, never the general one. 3 misconceptions independently classified —
+MC-1 PROBABILITY-AS-PERCENTAGE (language contamination, Foundational), MC-2 COMPLEMENT-ERROR
+(overgeneralization), MC-3 ADDITION-FORMULA-ALWAYS-SUM (overgeneralization). Zero Blueprint/KG
+metadata discrepancy.
+
+**Both concepts this batch are math.prob; both zero Blueprint/KG metadata discrepancy on every
+field.** `math.prob` **1/49 → 3/49**. Mathematics **589/908 → 591/908**, 317 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.prob` 3/49,
+mathematics 591/908, 11 EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0).
+Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 128 passed (128)". Full suite:
+"Test Files 700 passed (700), Tests 14461 passed | 9 skipped (14470)" — 0 failures.
+
+Computed fresh frontier post-batch: `math.prob` 1 (`probability-axioms`, newly unblocked by both
+`event` and `probability-measure`), `math.linalg` still exhausted, plus the same 9
+previously-unstarted domains unchanged.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `59f2742` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 99 (2026-09-18) — opens math.de domain
+
+Re-derived the frontier fresh: `math.prob` 1 ready candidate (`probability-axioms`), matching
+Batch 98's prediction. Also opened a second previously-unstarted domain this batch: traced
+`math.de`'s dependency graph to find its true entry node, `math.de.ode` (requiring only the
+already-certified `math.calc`/`math.func`). Authored both.
+
+`probability-axioms` (requires `probability-measure`, unlocks `conditional-probability`+
+`independence`): the three Kolmogorov axioms (A1 non-negativity, A2 $P(\Omega)=1$, A3 disjoint
+additivity) as the ONLY assumed truths, with every other rule ($P(\emptyset)=0$, complement,
+general addition, monotonicity) a derived THEOREM requiring explicit axiom citations at each
+step — a proof step without a named axiom is an assertion, never a proof, however correct the
+conclusion. 3 misconceptions independently classified — MC-1 AXIOM-THEOREM-CONFUSION
+(overgeneralization, Foundational), MC-2 DERIVATION-GAP (instruction-induced), MC-3
+MONOTONICITY-UNKNOWN (overgeneralization). Zero Blueprint/KG metadata discrepancy.
+
+`ode` (requires `derivative-intro`+`antiderivatives`+`function-concept`; opens `math.de`; unlocks
+`first-order-ode`+`second-order-ode`; cross_links `math.phys.classical-mechanics`, cross-subject
+and unauthored via `ls` → independence mode): an ODE's solution is a FUNCTION, never a number,
+extending `antiderivatives`'s own $F'=f\Rightarrow F(x)+C$ machinery directly (the familiar
+$s'(t)=2t\to s(t)=t^2+C$ IS an ODE); order (the highest derivative's index) versus degree (that
+same derivative's own power) as two independent numbers read off the same symbol, easily
+conflated; and the general-solution's exactly-$n$-constants rule for an $n$-th order ODE,
+verified by direct substitution rather than by solving technique. 3 misconceptions independently
+classified — MC-1 SOLUTION-IS-A-NUMBER (overgeneralization, Foundational), MC-2
+ORDER-VERSUS-DEGREE (notation-induced), MC-3 GENERAL-PARTICULAR-CONFLATED
+(overgeneralization). Zero Blueprint/KG metadata discrepancy.
+
+**One of 2 concepts this batch is math.prob, one opens math.de; both zero Blueprint/KG metadata
+discrepancy on every field.** `math.prob` **3/49 → 4/49**. `math.de` **0/56 → 1/56**, newly
+opened. Mathematics **591/908 → 593/908**, 315 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.prob` 4/49,
+`math.de` 1/56, mathematics 593/908, 11 EB-certified domains unchanged. `npx tsc --noEmit` →
+clean (exit 0). Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 128 passed (128)".
+Full suite: "Test Files 700 passed (700), Tests 14461 passed | 9 skipped (14470)" — 0 failures.
+
+Computed fresh frontier post-batch (verified via each concept's actual `requires`, not the KG's
+`children` field, after Batch 98's conflation lesson): `math.prob` 1 (`conditional-probability`,
+newly unblocked by `probability-axioms`; `independence` requires `conditional-probability`
+directly, so it is NOT yet ready despite being a KG `children` entry), `math.de` 3 (`ode-order`,
+`ode-linearity`, `solution-types` — verified all three require only `ode` directly, genuinely
+ready), `math.linalg` still exhausted, plus 8 remaining previously-unstarted domains
+(`math.stats`, `math.cx`, `math.real`, `math.top`, `math.fnal`, `math.num`, `math.cat`,
+`math.meas`).
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `8079c51` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 100 (2026-09-18)
+
+Re-derived the frontier fresh, confirmed matching Batch 99's verified prediction — `math.prob` 1
+(`conditional-probability`), `math.de` 3 (`ode-order`, `ode-linearity`, `solution-types`).
+Selected `conditional-probability` and `ode-order`, deferring the other two `math.de` candidates.
+
+`conditional-probability` (requires `probability-axioms`, unlocks `independence`+
+`bayes-theorem`+`total-probability`): $P(A|B)=P(A\cap B)/P(B)$ as restricting the sample space to
+$B$ and rescaling (never just the joint probability with the division silently dropped — a card
+drawn "red" restricts 52 cards to 26, giving $P(\text{heart}|\text{red})=13/26$, not $13/52$);
+the asymmetry $P(A|B)\ne P(B|A)$ in general, with the denominator always the event AFTER the bar
+(a die's $P(6|\text{even})=1/3$ vs. $P(\text{even}|6)=1$, genuinely different); and the undefined
+case when $P(B)=0$, checked BEFORE computing, never divided through regardless. 3 misconceptions
+independently classified, all language-contamination or instruction-induced — MC-1
+CONDITIONAL-IS-JOINT (Foundational), MC-2 REVERSING-CONDITIONING, MC-3
+ZERO-DENOMINATOR-IGNORED. Zero Blueprint/KG metadata discrepancy.
+
+`ode-order` (requires `ode`, unlocks none): order (which derivative is highest, e.g. $y'$ in
+$(y')^3=x$, giving order 1) versus degree (that SAME derivative's own power, degree 3 here) as
+independent, easily-conflated numbers read off the same symbol; degree UNDEFINED for
+non-polynomial ODEs like $y''+\sin(y')=0$ (order 2, degree undefined) despite a perfectly
+well-defined order; and the order — never the degree — determining the general solution's number
+of arbitrary constants (confirmed via $y=C_1e^{2x}+C_2e^{-x}+3x$'s 2 constants implying
+second-order, regardless of the original equation's degree). 3 misconceptions independently
+classified, all language-contamination or instruction-induced — MC-1
+ORDER-IS-THE-POWER-OF-THE-DERIVATIVE, MC-2 DEGREE-ALWAYS-EXISTS, MC-3
+NUMBER-OF-CONSTANTS-EQUALS-DEGREE. Zero Blueprint/KG metadata discrepancy.
+
+**One of 2 concepts this batch is math.prob, one is math.de; both zero Blueprint/KG metadata
+discrepancy on every field.** `math.prob` **4/49 → 5/49**. `math.de` **1/56 → 2/56**. Mathematics
+**593/908 → 595/908**, 313 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.prob` 5/49,
+`math.de` 2/56, mathematics 595/908, 11 EB-certified domains unchanged. `npx tsc --noEmit` →
+clean (exit 0). Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 128 passed (128)".
+Full suite: "Test Files 700 passed (700), Tests 14461 passed | 9 skipped (14470)" — 0 failures.
+
+Computed fresh frontier post-batch (each candidate's actual `requires` re-verified, not the KG
+`children`/`unlocks` fields): `math.prob` 2 (`independence`, `total-probability` — both verified
+to require only `conditional-probability` directly; `bayes-theorem` requires BOTH
+`conditional-probability` AND `total-probability`, so it is NOT yet ready), `math.de` 2
+(`ode-linearity`, `solution-types`, unchanged, both verified to require only `ode`),
+`math.linalg` still exhausted, plus the same 8 previously-unstarted domains unchanged.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `34e00d0` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 101 (2026-09-18) — genuine cross-link probe (math.linalg.linear-map)
+
+Re-derived the frontier fresh, confirmed matching Batch 100's prediction — `math.de` 2
+(`ode-linearity`, `solution-types`). Authored both, closing `math.de`'s entire frontier at
+batch start.
+
+`ode-linearity` (requires `ode`, unlocks `linear-first-order`+`second-order-linear`, cross_links
+`math.linalg.linear-map` — **confirmed AUTHORED via `ls`** (Batch 96), triggering a genuine
+cross-link probe rather than independence mode, this campaign's first use of that mode since
+Batch 92/93's abstract-algebra cross-links): linearity as a precise structural test independent
+of coefficient complexity ($x^3y''-2xy'+\sqrt x\,y=e^x$ is linear despite complicated
+coefficients; $y'+y^2=0$ is nonlinear despite looking simple); the two distinct disqualifying
+failures (a product of $y$-terms like $yy'$, or $y$ inside a nonlinear function like $\sin(y)$);
+and the genuine cross-link verification that the linear-ODE operator $L[y]=y''-3y'+2y$ satisfies
+`linear-map`'s own additivity property directly, while the nonlinear operator $N[y]=yy'$
+concretely fails it for specific functions — making "linear ODE" and "linear map" the same
+underlying concept, not a coincidental shared word. 3 misconceptions independently classified —
+MC-1 LINEARITY-JUDGED-BY-VISUAL-COMPLEXITY (language contamination, Foundational), MC-2
+PRODUCT-OF-Y-AND-DERIVATIVE-OVERLOOKED (perceptual intuition, Moderate), MC-3
+Y-INSIDE-NONLINEAR-FUNCTION-NOT-RECOGNIZED-AS-DISQUALIFYING (instruction-induced, Moderate).
+Zero Blueprint/KG metadata discrepancy.
+
+`solution-types` (requires `ode`, unlocks none): singular solutions as a genuinely third
+category, structurally EXCLUDED from the general-solution family for ANY constant (never merely
+hard to find) — $y'=3y^{2/3}$'s general solution $y=(x+C)^3$ never reaches the genuine solution
+$y\equiv0$ for any $C$, confirmed by direct substitution into the original equation; and singular
+solutions traced to a specific division-by-a-possibly-zero-quantity step (the $y^{2/3}$ division
+in separation of variables), never a mysterious phenomenon. 3 misconceptions independently
+classified, all instruction-induced or overgeneralization — MC-1
+GENERAL-SOLUTION-ASSUMED-EXHAUSTIVE (Foundational), MC-2 SINGULAR-SOLUTION-VERIFICATION-SKIPPED
+(Foundational), MC-3 DIVISION-STEP-CAUSING-SINGULAR-SOLUTION-NOT-IDENTIFIED (Moderate). Zero
+Blueprint/KG metadata discrepancy.
+
+**Both concepts this batch are math.de; both zero Blueprint/KG metadata discrepancy on every
+field.** `math.de` **2/56 → 4/56**. Mathematics **595/908 → 597/908**, 311 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.de` 4/56,
+mathematics 597/908, 11 EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0).
+Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 128 passed (128)". Full suite:
+"Test Files 700 passed (700), Tests 14461 passed | 9 skipped (14470)" — 0 failures.
+
+Computed fresh frontier post-batch (each candidate's `requires` individually re-verified):
+`math.de` 1 (`first-order-ode`, requires only `ode`+already-certified `math.calc`; its own
+unlock `second-order-ode` and `ode-linearity`'s unlocks `linear-first-order`/
+`second-order-linear` all remain blocked pending `first-order-ode`), `math.prob` 2
+(`independence`, `total-probability`, unchanged), `math.linalg` still exhausted, plus the same 8
+previously-unstarted domains unchanged.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `be3da72` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 102 (2026-09-18)
+
+Re-derived the frontier fresh, confirmed matching Batch 101's prediction — `math.de` 1
+(`first-order-ode`), `math.prob` 2 (`independence`, `total-probability`). Selected
+`first-order-ode` and `independence`, deferring `total-probability`.
+
+`first-order-ode` (requires `ode`+`antiderivatives`+`u-substitution`, unlocks
+`second-order-ode`): separability as a factoring test on the RHS ($y'=xy$ separable, $y'=x+y$
+never separable however rearranged — the sum genuinely cannot factor); the arbitrary constant
+surviving exponentiation as a MULTIPLICATIVE $A=e^C$, never dropped ($\ln|y|=3x+C\to y=Ae^{3x}$,
+never $y=e^{3x}$ — dropping $A$ makes satisfying any IC but $y(0)=1$ impossible); and both sides
+of a separated equation gaining a constant, combined by convention into one. Covers both
+solution methods (separation, integrating factor) and the decision between them. 3
+misconceptions independently classified, all overgeneralization or instruction-induced — MC-1
+SEPARATION-ON-NON-SEPARABLE (Foundational), MC-2 CONSTANT-ABSORBED-PREMATURELY, MC-3
+SINGLE-SIDE-CONSTANT. Zero Blueprint/KG metadata discrepancy.
+
+`independence` (requires `conditional-probability`, unlocks none per KG): the product-rule
+definition $P(A\cap B)=P(A)P(B)$ as a purely numerical test, never a causal judgment; disjoint
+events with positive probability as the STRONGEST dependence, never independence (die-roll
+$A,D$: $P(A\cap D)=0\ne2/9=P(A)P(D)$, and $P(A|D)=0$ means $D$ makes $A$ IMPOSSIBLE); and mutual
+independence of 3+ events requiring every subcollection's product, not just pairs (the classical
+two-coin $A,B,X=$"same face" construction: every pair passes, the triple's $1/4\ne1/8$ fails). 3
+misconceptions independently classified, all language contamination or overgeneralization —
+MC-1 DISJOINT-MEANS-INDEPENDENT (Foundational), MC-2 PAIRWISE-IMPLIES-MUTUAL, MC-3
+INDEPENDENCE-IS-CAUSAL-UNRELATEDNESS.
+
+**Blueprint/KG metadata discrepancy found and documented on `independence`**: its own Blueprint
+P74 routing claims "unlock math.prob.lln and math.prob.poisson-process," but the live KG lists
+this concept's `unlocks` as an empty array — the authored entry states the KG's actual value
+(no unlocks), documenting rather than silently reproducing the Blueprint's routing claim.
+
+**One of 2 concepts this batch is math.de, one is math.prob.** `math.de` **4/56 → 5/56**.
+`math.prob` **5/49 → 6/49**. Mathematics **597/908 → 599/908**, 309 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.de` 5/56,
+`math.prob` 6/49, mathematics 599/908, 11 EB-certified domains unchanged. `npx tsc --noEmit` →
+clean (exit 0). Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 128 passed (128)".
+Full suite: "Test Files 700 passed (700), Tests 14461 passed | 9 skipped (14470)" — 0 failures.
+
+Computed fresh frontier post-batch (each candidate's `requires` individually re-verified):
+`math.de` 1 (`second-order-ode`, requires only `first-order-ode`), `math.prob` 1
+(`total-probability`, deferred from this batch, unchanged), `math.linalg` still exhausted, plus
+the same 8 previously-unstarted domains unchanged.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `c5873d5` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 103 (2026-09-18)
+
+Re-derived the frontier fresh, confirmed matching Batch 102's prediction — `math.de` 1
+(`second-order-ode`), `math.prob` 1 (`total-probability`). Authored both.
+
+`second-order-ode` (requires `first-order-ode`, unlocks `higher-order-ode`+`systems-ode`): order
+2 means two constants and two conditions, ALWAYS — discovered by trying $y=e^{rx}$ in
+$y''-5y'+6y=0$ and watching the ODE collapse to the quadratic $r^2-5r+6=0$; all three
+discriminant cases (distinct real, repeated real, complex $\alpha\pm\beta i$) retain exactly two
+constants, only the building blocks (exponentials, $x$-weighted exponentials, damped
+oscillations) change; and the repeated-root naive sum $C_1e^{rx}+C_2e^{rx}$ collapsing to one
+effective constant $(C_1+C_2)e^{rx}$, fixed by the genuine second solution $xe^{rx}$ (verified
+directly by substitution). 3 misconceptions independently classified — MC-1
+SINGLE-CONSTANT-SOLUTION (overgeneralization, Foundational), MC-2 REPEATED-ROOT-COLLAPSE
+(overgeneralization), MC-3 COMPLEX-ROOTS-MISREAD (notation-induced, $\alpha$/$\beta$ swapped or
+mis-signed). Zero Blueprint/KG metadata discrepancy.
+
+`total-probability` (requires `conditional-probability`, unlocks `bayes-theorem`):
+$P(A)=\sum_iP(A|B_i)P(B_i)$ as a WEIGHTED average by base rates $P(B_i)$, never a simple average
+(an extreme-weight example: $P(B_1)=0.001,P(B_2)=0.999$ with $P(A|B_1)=1,P(A|B_2)=0$ gives the
+correct answer $0.001$, not the naive $0.5$); a genuine partition requiring BOTH mutual
+exclusivity AND exhaustiveness, neither alone sufficient ($\{$heads, even$\}$ for a die fails
+both); and the law extending beyond two cases to $n$-element and continuous partitions
+(generalizing the classic two-case disease-test example directly). 3 misconceptions
+independently classified — MC-1 TOTAL-PROBABILITY-AVERAGES-PROBABILITIES (overgeneralization),
+MC-2 PARTITION-IS-OPTIONAL (language contamination), MC-3
+TOTAL-PROBABILITY-IS-ONLY-FOR-TWO-CASES (instruction-induced). Zero Blueprint/KG metadata
+discrepancy.
+
+**One of 2 concepts this batch is math.de, one is math.prob; both zero Blueprint/KG metadata
+discrepancy on every field.** `math.de` **5/56 → 6/56**. `math.prob` **6/49 → 7/49**. Mathematics
+**599/908 → 601/908**, 307 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.de` 6/56,
+`math.prob` 7/49, mathematics 601/908, 11 EB-certified domains unchanged. `npx tsc --noEmit` →
+clean (exit 0). Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 128 passed (128)".
+Full suite: "Test Files 700 passed (700), Tests 14461 passed | 9 skipped (14470)" — 0 failures.
+
+Computed fresh frontier post-batch (each candidate's `requires` individually re-verified):
+`math.de` 1 (`systems-ode`, requires `second-order-ode`+already-authored
+`math.linalg.matrix`+`math.linalg.eigenvalues`; `higher-order-ode` requires
+`second-order-linear`, still unauthored, so NOT yet ready), `math.prob` 1 (`bayes-theorem`,
+requires both `conditional-probability`+`total-probability`, both now authored), `math.linalg`
+still exhausted, plus the same 8 previously-unstarted domains unchanged.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `32a58ee` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 104 (2026-09-18) — correcting a second P76-mode discrepancy
+
+Re-derived the frontier fresh, confirmed matching Batch 103's prediction — `math.de` 1
+(`systems-ode`), `math.prob` 1 (`bayes-theorem`). Authored both.
+
+`systems-ode` (requires `second-order-ode`+`matrix`+`eigenvalues`, unlocks none per KG,
+cross_links `math.linalg.diagonalization` confirmed unauthored via `ls` → independence mode):
+state-vector reduction turning a higher-order scalar ODE into a first-order system ($x_1'=x_2$ by
+DEFINITION, $x_2'$ derived from the original equation, never guessed); the eigenvalue equation
+from `eigenvalues` solving the system directly, with the system's characteristic polynomial
+proven IDENTICAL to the scalar ODE's own ($\det(A-\lambda I)=\lambda^2-5\lambda+6=0$ matching
+$r^2-5r+6=0$ term for term) — the same method viewed through two formalisms, never two unrelated
+facts; and a repeated eigenvalue supplying too few independent eigenvectors ($\lambda=2$ for
+$\begin{pmatrix}2&1\\0&2\end{pmatrix}$ gives only one direction), directly paralleling
+`second-order-ode`'s own repeated-root case. 3 misconceptions independently classified — MC-1
+EIGENVALUE-METHOD-ASSUMED-ALWAYS-SUFFICIENT (overgeneralization, Foundational), MC-2
+STATE-VECTOR-REDUCTION-VARIABLES-MISASSIGNED (instruction-induced, Foundational), MC-3
+SYSTEM-AND-SCALAR-CHARACTERISTIC-EQUATIONS-TREATED-AS-UNRELATED (instruction-induced, Moderate).
+Zero Blueprint/KG metadata discrepancy.
+
+`bayes-theorem` (requires `conditional-probability`+`total-probability`, unlocks
+`bayesian-inference`): the posterior never equal to the likelihood ($P(D|+)\approx8.8\%$ for a
+1%-prevalence disease with 95% sensitivity, genuinely NOT 95%); base-rate neglect demonstrated by
+varying only the prior (50% prevalence → posterior ≈64%; 0.1% prevalence → posterior ≈0.9%) while
+holding sensitivity/specificity fixed; and the generalized $n$-hypothesis form as the identical
+structure, never limited to two cases (a three-machine defect-rate example). 3 misconceptions
+independently classified — MC-1 POSTERIOR-EQUALS-LIKELIHOOD (instruction-induced), MC-2
+BASE-RATE-NEGLECT (language contamination), MC-3 BAYES-ONLY-WORKS-FOR-TWO-HYPOTHESES
+(instruction-induced).
+
+**Second genuine Blueprint/mode discrepancy caught this campaign** (after `independence`'s
+unlocks discrepancy in Batch 102): `bayes-theorem`'s own Blueprint Component 8 claims "Mode:
+Cross-link (cross_links = [math.stats.bayesian-inference])," but `math.stats.bayesian-inference`
+has NO authored Educational Brain entry — the entire `math.stats` domain remains unstarted.
+Confirmed via `ls`; corrected to independence mode in this entry's Curriculum Feedback per the
+established convention (cross-link mode requires the target confirmed authored, never merely
+declared in the KG or claimed by the Blueprint itself).
+
+**One of 2 concepts this batch is math.de, one is math.prob; both zero other Blueprint/KG
+metadata discrepancy.** `math.de` **6/56 → 7/56**. `math.prob` **7/49 → 8/49**. Mathematics
+**601/908 → 603/908**, 305 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.de` 7/56,
+`math.prob` 8/49, mathematics 603/908, 11 EB-certified domains unchanged. `npx tsc --noEmit` →
+clean (exit 0). Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 128 passed (128)".
+Full suite: "Test Files 700 passed (700), Tests 14461 passed | 9 skipped (14470)" — 0 failures.
+
+Computed fresh frontier post-batch (each candidate's `requires` individually re-verified):
+`math.de`'s two `systems-ode` children are BOTH blocked (`systems-matrix-method` requires
+`diagonalization`, unauthored; `phase-plane` requires `slope-field`, unauthored) — `math.de`'s
+frontier via this branch is exhausted for now, `math.prob` 1 (`bayesian-inference`, requires only
+`bayes-theorem`, now authored), `math.linalg` still exhausted, plus the same 8
+previously-unstarted domains unchanged.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `ca7692f` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 105 (2026-09-18) — opens math.stats domain; third P76-mode discrepancy
+
+Re-derived the frontier fresh, confirmed matching Batch 104's prediction — `math.prob` 1
+(`bayesian-inference`). Also opened a second previously-unstarted domain: traced `math.stats`'s
+dependency graph to its true entry node, `math.stats.population-sample` (requiring only
+already-certified `math.arith`). Authored both.
+
+`bayesian-inference` (requires `bayes-theorem`, unlocks none): conjugate priors updating
+pseudo-counts directly (Beta(α,β) prior + Binomial likelihood → Beta(α+k,β+n−k) posterior, mean a
+weighted average of prior mean and MLE, converging to the MLE as $n\to\infty$); a credible
+interval as a DIRECT probability statement about $\theta$, never the same claim as a frequentist
+confidence interval (a property of the repeated procedure, never the parameter itself); and
+conjugacy as a computational convenience, never a requirement — the posterior exists for any
+prior, MCMC/variational inference handle the non-conjugate case with identical underlying
+structure. 3 misconceptions independently classified — MC-1
+PRIOR-IS-ARBITRARY-SO-BAYES-IS-SUBJECTIVE (language contamination), MC-2
+CONJUGATE-PRIOR-IS-THE-ONLY-VALID-PRIOR (instruction-induced), MC-3
+CREDIBLE-INTERVAL-EQUALS-CONFIDENCE-INTERVAL (language contamination).
+
+**Third genuine Blueprint mode discrepancy this campaign** (after Batches 102 and 104):
+`bayesian-inference`'s own Blueprint also claims "Cross-link mode" against the SAME unauthored
+target, `math.stats.bayesian-inference` — confirmed via `ls` still absent, corrected to
+independence mode again.
+
+`population-sample` (requires `math.arith.fractions`, unlocks `descriptive-statistics`+
+`sampling`; opens `math.stats`): a sample statistic ESTIMATING, never equaling, a population
+parameter (25-classmate smartphone poll ≠ all-teenager fact); representativeness coming from
+sampling METHOD, never size alone (the 1936 Literary Digest's 2.4 MILLION biased responses called
+the election wrong; Gallup's 50,000 random responses called it right — method beat size 48:1);
+and a population as any well-defined collection, never restricted to people (a lab-mouse colony,
+a factory's daily bolt output). 3 misconceptions independently classified, all
+overgeneralization or language contamination — MC-1 SAMPLE-IS-POPULATION (Foundational), MC-2
+LARGER-IS-ALWAYS-BETTER, MC-3 POPULATION-IS-PEOPLE. Zero Blueprint/KG metadata discrepancy.
+
+**One of 2 concepts this batch is math.prob, one opens math.stats.** `math.prob` **8/49 → 9/49**.
+`math.stats` **0/40 → 1/40**, newly opened. Mathematics **603/908 → 605/908**, 303 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.prob` 9/49,
+`math.stats` 1/40, mathematics 605/908, 11 EB-certified domains unchanged. `npx tsc --noEmit` →
+clean (exit 0). Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 128 passed (128)".
+Full suite: "Test Files 700 passed (700), Tests 14461 passed | 9 skipped (14470)" — 0 failures.
+
+Computed fresh frontier post-batch: `math.prob`'s chain from `sample-space` is now fully
+exhausted (`bayesian-inference` has no unlocks) — a fresh scan of math.prob's other ~40 untouched
+concepts (mean, variance, distributions, etc.) is needed next iteration rather than assuming
+exhaustion of the whole domain. `math.stats` 2 (`descriptive-statistics`, `sampling`, both
+requiring only `population-sample`), `math.de`'s systems-ode branch still exhausted, `math.linalg`
+still exhausted, plus the same 7 previously-unstarted domains unchanged (`math.stats` no longer
+counts as unstarted).
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `97ea761` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 106 (2026-09-18)
+
+Re-derived the frontier fresh, confirmed matching Batch 105's prediction — `math.stats` 2
+(`descriptive-statistics`, `sampling`, both independently requiring only already-authored
+concepts). Authored both.
+
+`descriptive-statistics` (requires `population-sample`, unlocks `sampling`): the mean pulled
+toward outliers while the median resists them (salaries 40,42,45,48,200k: mean 75k distorted by
+the single CEO outlier, median 45k representative); each graphical display built for a specific
+question, never interchangeable (histogram=shape, boxplot=spread/comparison across groups,
+scatterplot=two-variable relationship); and descriptive statistics making NO claim beyond the
+data collected, directly reusing `population-sample`'s own population/sample distinction (60% of
+a 50-voter sample supporting a proposal is a fact about that sample, never automatically a fact
+about all city voters). 3 misconceptions independently classified, all overgeneralization or
+perceptual — MC-1 MEAN-DEFAULTED-TO-WITHOUT-CHECKING-OUTLIERS (Foundational), MC-2
+DESCRIPTIVE-SAMPLE-STATISTIC-GENERALIZED-TO-POPULATION (Foundational), MC-3
+GRAPHICAL-DISPLAY-TYPE-MISMATCHED-TO-QUESTION (Moderate). Zero Blueprint/KG metadata discrepancy.
+
+`sampling` (requires `population-sample`+`probability-axioms`, unlocks `sampling-distribution`):
+stratified sampling WITHIN every group versus cluster sampling of WHOLE groups (opposite second
+steps after an identical "divide into groups" first step — a hospital drawing 3 patients from
+EACH of 8 wards is stratified; randomly picking 2 of 8 wards and surveying EVERY patient in them
+is cluster); sample size controlling only PRECISION, never fixing a biased method's center (the
+1936 Literary Digest's 2.4 MILLION biased responses called the election wrong, Gallup's 50,000
+random ones called it right — method beat size 48:1, reusing the identical historical case from
+Batch 105's `population-sample`); and "random" as a controlled procedure with KNOWN
+probabilities, never a synonym for haphazard or convenient. 3 misconceptions independently
+classified — MC-1 LARGER-SAMPLE-FIXES-BIAS (overgeneralization, Foundational), MC-2
+STRATIFIED-CLUSTER-CONFUSION (language contamination), MC-3 RANDOM-MEANS-HAPHAZARD (language
+contamination). Zero Blueprint/KG metadata discrepancy.
+
+**Both concepts this batch are math.stats; both zero Blueprint/KG metadata discrepancy on every
+field.** `math.stats` **1/40 → 3/40**. Mathematics **605/908 → 607/908**, 301 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.stats` 3/40,
+mathematics 607/908, 11 EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0).
+Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 128 passed (128)". Full suite:
+"Test Files 700 passed (700), Tests 14461 passed | 9 skipped (14470)" — 0 failures.
+
+Computed fresh frontier post-batch (each candidate's `requires` individually re-verified):
+`math.stats` 3 (`measures-of-center`, `measures-of-spread`, `data-visualization` — all verified
+to require only `descriptive-statistics`+already-certified `math.arith`; `sampling-distribution`
+requires unauthored `math.prob.random-variable`+`math.prob.clt`, NOT yet ready), `math.de`'s
+systems-ode branch and `math.linalg` both still exhausted, plus 7 previously-unstarted domains
+unchanged.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `7279557` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 107 (2026-09-18) — fourth P76-mode discrepancy (a new variant)
+
+Re-derived the frontier fresh, confirmed matching Batch 106's prediction — `math.stats` 3
+(`measures-of-center`, `measures-of-spread`, `data-visualization`). Selected the first two,
+deferring `data-visualization`.
+
+`measures-of-center` (requires `descriptive-statistics`+`math.arith.fractions`, unlocks none):
+the mean sensitive to outliers, the median robust by rank position ($\{2,3,4,5,100\}$: mean
+$22.8$ distorted, median $4$ representative, unchanged by the outlier's magnitude); the median
+requiring sorting FIRST and averaging the two middle values for even $n$ ($\{7,2,9,4\}\to$
+sorted $\{2,4,7,9\}\to$ median $5.5$); and mode as the one measure of center that can be MISSING
+or MULTIPLE, unlike mean/median which always exist as single values. 2 misconceptions
+independently classified, both overgeneralization/instruction-induced and both Foundational —
+MC-1 MEAN-USED-UNCRITICALLY-AS-THE-MEASURE-OF-CENTER-DESPITE-OUTLIERS, MC-2
+MEDIAN-COMPUTED-WITHOUT-SORTING-OR-WITHOUT-AVERAGING-THE-TWO-MIDDLE-VALUES-FOR-EVEN-N. Zero
+Blueprint/KG metadata discrepancy.
+
+`measures-of-spread` (requires `descriptive-statistics`, unlocks none, cross_links
+`math.prob.variance` — **a new VARIANT of the recurring discrepancy**: this Blueprint explicitly
+claims it checked `ls docs/curriculum/blueprints/` and found `math.prob.variance` "ALREADY
+authored," setting cross-link-probe mode — but that check verified only the BLUEPRINT corpus
+(where `docs/curriculum/blueprints/math.prob.variance.md` genuinely does exist), never the EB
+corpus this campaign actually builds. Confirmed via `ls
+educational-brain/concepts/mathematics/` that no EB entry exists for `math.prob.variance` —
+corrected to independence mode, the fourth such discrepancy this campaign but the first where
+the Blueprint's own stated verification method itself was the wrong corpus): range collapsing
+under a single outlier ($\{2,3,4,5,6,7,100\}$: range $98$) while IQR resists it (IQR $4$, rank
+-based, immune to the outlier's actual magnitude); sample variance's $n-1$ divisor correcting a
+genuine, demonstrable downward bias from using $\bar x$ instead of the true mean ($\{4,6,8\}$:
+$n-1$ divisor gives $s^2=4$, $n$ divisor gives the smaller, biased $\approx2.67$); and standard
+deviation versus IQR selection mirroring the mean-versus-median choice for outlier-heavy salary
+data. 3 misconceptions independently classified, all overgeneralization — MC-1
+IQR-ASSUMED-EQUALLY-OUTLIER-SENSITIVE-AS-RANGE (Foundational), MC-2
+SAMPLE-VARIANCE-CONFLATED-WITH-POPULATION-VARIANCE (High), MC-3
+STANDARD-DEVIATION-ASSUMED-ALWAYS-PREFERRED (Moderate).
+
+**One of 2 concepts this batch is `measures-of-center`, one is `measures-of-spread`; both zero
+other Blueprint/KG metadata discrepancy.** `math.stats` **3/40 → 5/40**. Mathematics
+**607/908 → 609/908**, 299 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.stats` 5/40,
+mathematics 609/908, 11 EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0).
+Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 128 passed (128)". Full suite:
+"Test Files 700 passed (700), Tests 14461 passed | 9 skipped (14470)" — 0 failures.
+
+Computed fresh frontier post-batch: `math.stats` 1 (`data-visualization`, deferred from this
+batch, requires only `descriptive-statistics`), `math.de`'s systems-ode branch and `math.linalg`
+both still exhausted, plus 7 previously-unstarted domains unchanged.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `138b43d` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 108 (2026-09-18) — genuine cross-link closes math.prob.event's own deferred question
+
+Re-derived the frontier fresh, confirmed matching Batch 107's prediction — `math.stats` 1
+(`data-visualization`). Also opened a second previously-unstarted domain: `math.meas`, via its
+entry node `math.meas.sigma-algebra` (requiring only already-certified `math.found`). Authored
+both.
+
+`data-visualization` (requires `descriptive-statistics`, unlocks none): chart type following
+data type, never visual preference (a histogram/scatterplot for numeric variables, a bar chart
+for categorical ones — plotting five-candidate vote counts as contiguous histogram bins would
+falsely imply a numeric ordering); boxplot outlier points as a DELIBERATE feature, never a
+plotting error (a point at 45 beyond a whisker reaching 30 is genuine flagged data); and why
+histogram bars touch (contiguous numeric bins) while bar chart bars don't (distinct, unordered
+categories), despite superficial visual similarity. 2 misconceptions independently classified —
+MC-1 HISTOGRAM-CONVENTION-USED-FOR-GENUINELY-CATEGORICAL-DATA (perceptual, Moderate), MC-2
+BOXPLOT-OUTLIER-POINTS-ASSUMED-TO-BE-DATA-ERRORS-RATHER-THAN-GENUINE-FLAGGED-VALUES
+(overgeneralization, Foundational). Zero Blueprint/KG metadata discrepancy. Closes
+`descriptive-statistics`'s entire sub-branch frontier (`measures-of-center`,
+`measures-of-spread`, `data-visualization` all now authored).
+
+`sigma-algebra` (requires `math.found.set-theory`, unlocks `math.meas.measure`, cross_links
+`math.prob.event` — **confirmed AUTHORED via `ls`, a genuine cross-link probe**, this campaign's
+second such case after Batch 101's `math.linalg.linear-map`): the three closure axioms ($X\in
+\mathcal F$, closed under complement, closed under COUNTABLE union) with countable-intersection
+closure proven a THEOREM via De Morgan's law, never a fourth axiom; the restriction as
+mathematically FORCED once $X$ is uncountable (the full power set works trivially for
+`math.prob.event`'s own finite die-roll but provably cannot support a consistent measure on
+$\mathbb R$); and the Borel $\sigma$-algebra as the standard resolution. The P76 transfer probe
+directly revisits `event`'s own die-roll example and its EXPLICITLY deferred σ-algebra question
+from Batch 98 ("for uncountable Ω, events form a σ-algebra... non-Tier-1; not assessed in this
+blueprint") — genuinely closing that loop, not merely referencing it. 3 misconceptions
+independently classified, all Foundational or Moderate — MC-1 PARTIAL-AXIOM-CHECK
+(instruction-induced), MC-2 SIGMA-ALGEBRA-SEEN-AS-UNNECESSARY-FORMALISM (overgeneralization),
+MC-3 COUNTABLE-UNION-MISTAKEN-FOR-ARBITRARY-UNION (language contamination). Zero Blueprint/KG
+metadata discrepancy.
+
+**One of 2 concepts this batch is math.stats, one opens math.meas; both zero Blueprint/KG
+metadata discrepancy on every field.** `math.stats` **5/40 → 6/40**. `math.meas` **0/13 →
+1/13**, newly opened. Mathematics **609/908 → 611/908**, 297 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.stats` 6/40,
+`math.meas` 1/13, mathematics 611/908, 11 EB-certified domains unchanged. `npx tsc --noEmit` →
+clean (exit 0). Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 128 passed (128)".
+Full suite: "Test Files 700 passed (700), Tests 14461 passed | 9 skipped (14470)" — 0 failures.
+
+Computed fresh frontier post-batch: `math.stats`'s `descriptive-statistics` sub-branch is now
+FULLY exhausted (all three children authored); `math.meas` 1 (`measure`, requires only
+`sigma-algebra`, now authored), `math.de`'s systems-ode branch and `math.linalg` both still
+exhausted, plus 6 previously-unstarted domains unchanged (`math.meas` no longer unstarted).
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `c4a6cb7` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 109 (2026-09-18) — second genuine cross-link in math.meas; opens math.real domain
+
+Re-derived the frontier fresh, confirmed `math.meas.measure` ready (requires only `sigma-algebra`,
+authored Batch 108). Also opened a new previously-unstarted domain, `math.real`, via its true
+entry node `math.real.completeness` (requires only already-certified `math.found.real-numbers`
+and `math.found.total-order`). Authored both.
+
+`measure` (requires `sigma-algebra`, unlocks `lebesgue-measure`/`measurable-function`,
+cross_links `math.prob.probability-measure` — **confirmed AUTHORED via `ls`, a genuine cross-link
+probe**, this campaign's third such case after Batch 101's `linear-map` and Batch 108's
+`sigma-algebra`): the two measure axioms ($\mu(\emptyset)=0$, countable additivity over disjoint
+sets) directly generalizing `probability-measure`'s own axiom template by dropping the $\mu(X)=1$
+normalization constraint; disjointness required before additivity applies (naive addition on
+overlapping $[0,2]\cup[1,3]$ fails, needing inclusion-exclusion); and $\infty$ as a fully
+legitimate measure value (length measure on $\mathbb R$), never an error. 3 misconceptions
+independently classified — MC-1 ADDITIVITY-APPLIED-TO-OVERLAPPING-SETS (instruction-induced,
+Foundational), MC-2 MEASURE-ASSUMED-NORMALIZED (overgeneralization, Moderate), MC-3
+INFINITE-MEASURE-TREATED-AS-ERROR (perceptual, Minor). Zero Blueprint/KG metadata discrepancy.
+
+`completeness` (requires `math.found.real-numbers`/`math.found.total-order`, unlocks
+`sup-inf`/`archimedean`, cross_links `math.fnal.completeness` — **confirmed NOT authored via
+`ls`, independence mode correctly self-reported by the Blueprint, no correction needed**): the
+supremum need not be attained by any set member ($\sup(0,1)=1\notin(0,1)$, vs. $\sup(0,1]=1\in
+(0,1]$, attained); completeness as the property genuinely distinguishing $\mathbb R$ from
+$\mathbb Q$ ($\{x\in\mathbb Q:x^2<2\}$ has no rational supremum, but $\sup=\sqrt2$ in $\mathbb R$);
+and the Cauchy-sequence formulation as strictly stronger than mere boundedness ($a_n=(-1)^n$ is
+bounded but not Cauchy, hence not convergent). 3 misconceptions independently classified, all
+overgeneralization — MC-1 SUPREMUM-MUST-BE-ATTAINED (Foundational), MC-2
+COMPLETENESS-HOLDS-IN-RATIONALS (Foundational), MC-3 BOUNDED-SEQUENCE-CONVERGES (Moderate). Zero
+Blueprint/KG metadata discrepancy.
+
+**Both concepts this batch zero Blueprint/KG metadata discrepancy on every field.** `math.meas`
+**1/13 → 2/13**. `math.real` **0/? → 1/?**, newly opened. Mathematics **611/908 → 613/908**, 295
+remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.meas` 2/13,
+mathematics 613/908, 11 EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0).
+Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 118 passed (118)". Full
+whole-repo vitest run was started but killed after showing no CPU progress (idle/sleeping state,
+near-zero accumulated CPU time across repeated checks) — treated as an environment anomaly, not a
+content defect; validator + state.ts + tsc + the full targeted EB/curriculum suite (118 tests)
+provide sufficient validation coverage for this batch's two markdown-only additions. Full-suite
+re-verification deferred to the next batch that touches non-EB-content code.
+
+Computed fresh frontier post-batch: `math.meas` 1 remaining reachable (`lebesgue-measure`,
+requires only `measure`, now authored), `math.real` 2 reachable (`sup-inf`, `archimedean`, both
+requiring only `completeness`, now authored), `math.de`'s systems-ode branch and `math.linalg`
+both still exhausted, plus 5 previously-unstarted domains unchanged (`math.real` no longer
+unstarted).
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `8176140` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 110 (2026-09-18) — extends math.meas and math.real, both from Batch 109's openings
+
+Re-derived the frontier fresh (34 ready concepts). Selected `math.meas.lebesgue-measure`
+(requires only `measure`, authored Batch 109) and `math.real.sup-inf` (requires only
+`completeness`, authored Batch 109), continuing both domains opened last batch. Authored both.
+
+`lebesgue-measure` (requires `measure`, unlocks `lebesgue-integral`/`measure-zero`, cross_links
+`math.real.riemann-integral` — **confirmed NOT authored via `ls`, independence mode correctly
+self-reported, no correction needed**): outer measure $m^*(E)=\inf\{\sum|I_n|:E\subseteq\bigcup
+I_n\}$ as infimum-over-covers, verifying $m^*([0,3])=3$; the surprising fact that a countable
+DENSE set ($\mathbb Q\cap[0,1]$) still has measure ZERO via a shrinking-interval-per-point cover;
+Carathéodory's criterion restricting to measurable sets; and the Vitali set as a CONCRETE,
+constructible non-measurable set proving the restriction is a genuine necessity, not caution. 3
+misconceptions independently classified, all overgeneralization — MC-1
+DENSITY-CONFLATED-WITH-POSITIVE-MEASURE (Foundational), MC-2
+NON-MEASURABLE-SETS-DISMISSED-AS-HYPOTHETICAL (Moderate), MC-3
+OUTER-MEASURE-ASSUMED-COUNTABLY-ADDITIVE-ON-ALL-SETS (Foundational). Zero Blueprint/KG metadata
+discrepancy.
+
+`sup-inf` (requires `completeness`, unlocks none, cross_links none — Blueprint correctly
+self-reports no cross-links, matching the KG): the two-part supremum test (upper bound AND no
+smaller upper bound), showing 10 fails part (ii) as a candidate supremum of $(0,3)$; reusing
+`completeness`'s own $\{q\in\mathbb Q:q^2<2\}$ example to show the existence guarantee is
+specifically an $\mathbb R$-property; and the attained ($[0,3]$, sup=max=3) versus unattained
+($(0,3)$, sup=3 but no maximum) distinction. 3 misconceptions independently classified — MC-1
+SUPREMUM-EXISTENCE-ASSUMED-IN-RATIONALS (overgeneralization, Foundational), MC-2
+SUPREMUM-ASSUMED-ALWAYS-ATTAINED (overgeneralization, Foundational), MC-3
+UPPER-BOUND-ALONE-MISTAKEN-FOR-SUPREMUM (language contamination, Moderate). Zero Blueprint/KG
+metadata discrepancy.
+
+**Both concepts this batch zero Blueprint/KG metadata discrepancy on every field.** `math.meas`
+**2/13 → 3/13**. `math.real` **1/? → 2/?**. Mathematics **613/908 → 615/908**, 293 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.meas` 3/13,
+mathematics 615/908, 11 EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0).
+Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 118 passed (118)". Full whole-repo
+vitest run attempted TWICE this batch (once un-timeboxed, once with an explicit 280s timeout
+wrapper) — both hung with no observable completion (second consecutive batch showing this
+environment anomaly, following Batch 109's identical symptom); both killed rather than left
+running indefinitely. Validator + state.ts + tsc + the full targeted EB/curriculum suite (118
+tests, 0 failures) judged sufficient validation coverage for this batch's two markdown-only
+additions, consistent with Batch 109's precedent. Full-suite re-verification remains deferred to
+the next batch that touches non-EB-content code, or to whenever this environment's full-suite
+hang is independently investigated.
+
+Computed fresh frontier post-batch: `math.meas` 1 remaining reachable this depth
+(`abstract-measure-spaces`/`measurable-function`, requiring `measure`/`sigma-algebra`
+respectively, both now authored). `math.real` 1 remaining reachable
+(`archimedean`/`convergence-sequences`/`metric-space` — `archimedean` requires only
+`completeness`, now authored; `convergence-sequences` also requires `math.seq.sequence`,
+certified; `metric-space` requires only `math.found.set-theory`/`math.found.real-numbers`, both
+certified). 32 other ready concepts remain across `math.cat`, `math.cx`, `math.de`, `math.fnal`,
+`math.graph`, `math.linalg`, `math.num`, `math.prob`, `math.stats`, `math.top` (see Batch 110's
+frontier computation for the full ready-list).
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `ecea695` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 111 (2026-09-18) — fifth Blueprint wrong-corpus discrepancy; extends math.meas/math.real
+
+Re-derived the frontier fresh (33 ready concepts). Selected `math.meas.measurable-function`
+(requires only `sigma-algebra`, authored Batch 108) and `math.real.archimedean` (requires only
+`completeness`, authored Batch 109), continuing both domains. Authored both.
+
+`measurable-function` (requires `sigma-algebra`, unlocks `lebesgue-integral`, cross_links
+`math.prob.random-variable`): preimage-based measurability definition
+($f^{-1}(E)\in\mathcal F$ for every $E\in\mathcal G$), directly generalizing continuity's
+"preimages of open sets are open"; the open-interval sufficiency test for the Borel case (checking
+generators suffices, never every individual Borel set); and the step function as a
+measurable-but-discontinuous counterexample, proving measurability strictly weaker than
+continuity. 3 misconceptions independently classified — MC-1
+MEASURABLE-ASSUMED-EQUIVALENT-TO-CONTINUOUS (overgeneralization, Foundational), MC-2
+ALL-BOREL-SETS-ASSUMED-TO-REQUIRE-INDIVIDUAL-CHECKING (instruction-induced, Moderate), MC-3
+MEASURABILITY-DEFINITION-DIRECTION-REVERSED (notation-induced, Moderate).
+
+`archimedean` (requires `completeness`, unlocks none, cross_links none): the full
+proof-by-contradiction deriving $\mathbb N$'s unboundedness from completeness's own supremum
+machinery; the arbitrarily-small-$1/n$ corollary justified via the property, never asserted as
+obvious; and density of $\mathbb Q$ in $\mathbb R$ shown to rely specifically on the Archimedean
+mechanism, never mere infinitude. 3 misconceptions independently classified — MC-1
+ARCHIMEDEAN-PROPERTY-TREATED-AS-INDEPENDENT-AXIOM (overgeneralization, Foundational), MC-2
+DENSITY-OF-RATIONALS-TREATED-AS-UNRELATED-FACT (overgeneralization, Moderate), MC-3
+ARBITRARILY-SMALL-1/N-ASSUMED-OBVIOUS-WITHOUT-JUSTIFICATION (perceptual, Moderate). Zero
+Blueprint/KG metadata discrepancy.
+
+**Blueprint/P76-mode discrepancy found and corrected (FIFTH occurrence this campaign)**:
+`measurable-function`'s Blueprint claimed `math.prob.random-variable` was "checked via `ls
+docs/curriculum/blueprints/` and confirmed already authored," setting cross-link-probe mode.
+Verified via `ls educational-brain/concepts/mathematics/` that `math.prob.random-variable` has NO
+authored EB entry — the same wrong-corpus pattern as Batch 107's `measures-of-spread` (checking
+the Blueprint corpus instead of the EB corpus). Corrected to independence mode. All other fields
+on both concepts matched the live KG exactly.
+
+`math.meas` **3/13 → 4/13**. `math.real` **2/? → 3/?**. Mathematics **615/908 → 617/908**, 291
+remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.meas` 4/13,
+mathematics 617/908, 11 EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0).
+Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 118 passed (118)". Full whole-repo
+vitest run NOT re-attempted this batch, given two consecutive prior hangs (Batches 109, 110)
+with no observable completion in this environment — deferred consistent with that established
+precedent rather than repeating a known-unproductive attempt a third time.
+
+Computed fresh frontier post-batch: `math.meas` reachable (`abstract-measure-spaces`, requires
+only `measure`, now authored). `math.real` reachable (`convergence-sequences` requires
+`completeness`+`math.seq.sequence`, both certified; `metric-space` requires
+`math.found.set-theory`+`math.found.real-numbers`, both certified). 31 other ready concepts remain
+across `math.cat`, `math.cx`, `math.de`, `math.fnal`, `math.graph`, `math.linalg`, `math.num`,
+`math.prob`, `math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `b9c95e7` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 112 (2026-09-18) — first REVERSE-direction discrepancy: a stale "not yet authored" claim
+
+Re-derived the frontier fresh (32 ready concepts). Selected `math.meas.abstract-measure-spaces`
+(requires only `measure`, authored Batch 109) and `math.real.convergence-sequences` (requires
+`completeness` + already-certified `math.seq.sequence`). Authored both.
+
+`abstract-measure-spaces` (requires `measure`, unlocks none, cross_links none): σ-finiteness as
+"covered by countably many finite-measure pieces," never "total itself finite" (Lebesgue measure
+on $\mathbb R$ is σ-finite via $\bigcup[-n,n]$ despite $\mu(\mathbb R)=\infty$); completeness as a
+genuinely CONSTRUCTED property, using the Cantor set to show the raw Borel σ-algebra is
+incomplete while the completed Lebesgue σ-algebra repairs it; and the Carathéodory extension
+theorem as the exact mechanism building Lebesgue measure from elementary interval length on a
+small ring. 3 misconceptions independently classified — MC-1
+SIGMA-FINITE-CONFLATED-WITH-FINITE-TOTAL-MEASURE (language contamination, Foundational), MC-2
+COMPLETENESS-ASSUMED-AUTOMATIC (overgeneralization, Foundational), MC-3
+PREMEASURE-DOMAIN-CONFUSED-WITH-EXTENDED-SIGMA-ALGEBRA (instruction-induced, Moderate). Zero
+Blueprint/KG metadata discrepancy.
+
+`convergence-sequences` (requires `completeness`/`math.seq.sequence`, unlocks `cauchy-sequence`/
+`series-rigorous`, cross_links `math.seq.series-convergence`): the full arbitrary-$\varepsilon$
+$\varepsilon$-$N$ proof discipline (a formula for $N$ in terms of $\varepsilon$, never a single
+numerical spot-check), reusing `completeness`'s own Archimedean-property machinery for the
+$1/n\to0$ proof; convergent $\Rightarrow$ bounded as a true one-directional theorem, with
+$(-1)^n$ as the standard bounded-but-divergent counterexample; and Bolzano-Weierstrass's actual
+guarantee (a convergent subsequence, never whole-sequence convergence), extracted concretely from
+$(-1)^n$'s two constant subsequences. 3 misconceptions independently classified — MC-1
+EPSILON-IS-A-SPECIFIC-NUMBER (instruction-induced, Foundational), MC-2
+BOUNDED-IMPLIES-CONVERGENT (overgeneralization), MC-3
+BOLZANO-WEIERSTRASS-MEANS-SEQUENCE-CONVERGES (language contamination).
+
+**Blueprint/P76-mode discrepancy found and corrected (SIXTH occurrence this campaign, FIRST in
+the reverse direction)**: `convergence-sequences`'s Blueprint states `math.seq.series-convergence`
+"has no authored blueprint yet," setting independence mode. Verified via `ls
+educational-brain/concepts/mathematics/` that `math.seq.series-convergence` IS actually authored
+(part of the `math.seq` domain, certified since before this campaign's measure-theory/real-
+analysis work began) — the Blueprint's claim was correct when written, but the corpus moved on
+since. Corrected to a GENUINE cross-link probe, directly connecting this concept's own
+$\varepsilon$-$N$ machinery to `series-convergence`'s partial-sum-sequence definition (which this
+Blueprint's own Component 7 had anticipated a "future revision" might do). All other fields on
+both concepts matched the live KG exactly.
+
+`math.meas` **4/13 → 5/13**. `math.real` **3/? → 4/?**. Mathematics **617/908 → 619/908**, 289
+remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.meas` 5/13,
+mathematics 619/908, 11 EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0).
+Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 118 passed (118)". Full whole-repo
+suite not re-attempted this batch, consistent with the established precedent from two consecutive
+prior hangs (Batches 109-110).
+
+Computed fresh frontier post-batch: `math.meas` has no further immediately-reachable concepts at
+this depth (`measure-zero` requires `lebesgue-measure`, now authored — reachable; `simple-function`
+requires `measurable-function`, now authored — reachable). `math.real` reachable (`metric-space`,
+requires `math.found.set-theory`/`math.found.real-numbers`, both certified). `math.prob.random-
+variable` is now ready (requires `probability-axioms`/`function-concept`, both already authored) —
+closing the loop `measurable-function`'s Batch 111 discrepancy noted. 29 other ready concepts
+remain across `math.cat`, `math.cx`, `math.de`, `math.fnal`, `math.graph`, `math.linalg`,
+`math.num`, `math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `589b211` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 113 (2026-09-19) — seventh discrepancy: a stale "not Tier 1" independence rationale
+
+Re-derived the frontier fresh (33 ready concepts). Selected `math.meas.measure-zero` (requires
+only `lebesgue-measure`, authored Batch 110) and `math.prob.random-variable` (requires
+`probability-axioms`/`function-concept`, both certified) — the latter closing the loop
+`math.meas.measurable-function`'s own Batch 111 entry explicitly anticipated. Authored both.
+
+`measure-zero` (requires `lebesgue-measure`, unlocks none, cross_links `math.real.riemann-
+integrability` — **confirmed NOT authored via `ls`, independence mode correctly self-reported, no
+correction needed**): countability as sufficient but never necessary for measure zero; the Cantor
+set as a concrete, dual-verified counterexample (measure zero via limiting length $(2/3)^n\to0$,
+uncountable via a ternary-to-binary bijection); and "almost everywhere" as a precise measure-zero
+exception-set condition, never an informal hand-wave (illustrated via $f=0$ a.e. on $[0,1]$
+despite $f\ne0$ on the rationals). 3 misconceptions independently classified — MC-1
+MEASURE-ZERO-ASSUMED-EQUIVALENT-TO-COUNTABLE (overgeneralization, Foundational), MC-2
+UNCOUNTABLE-AND-MEASURE-ZERO-ASSUMED-CONTRADICTORY (overgeneralization, High), MC-3
+ALMOST-EVERYWHERE-TREATED-AS-INFORMAL-HAND-WAVE (language contamination, Moderate). Zero
+Blueprint/KG metadata discrepancy.
+
+`random-variable` (requires `probability-axioms`/`function-concept`, unlocks `distribution`/
+`expected-value`, cross_links `math.meas.measurable-function`): a random variable as a FUNCTION
+$X:\Omega\to\mathbb R$, never a fixed value ("$X=4$" fails to define $X$ for other outcomes); the
+event $\{X=x\}$ as a preimage, with the distribution DERIVED from $X$, never identical to it; and
+discrete-versus-continuous decided by cardinality alone (a large countable set is discrete, a
+small uncountable interval is continuous). 3 misconceptions independently classified — MC-1
+RV-IS-FIXED-VALUE (language contamination, Foundational), MC-2 RV-IS-DISTRIBUTION
+(overgeneralization, Secondary), MC-3 DISCRETE-MEANS-SMALL (perceptual, Secondary).
+
+**Blueprint/P76-mode discrepancy found and corrected (SEVENTH occurrence this campaign)**:
+`random-variable`'s Blueprint set P76_MODE to Independence with the explicit rationale
+"`math.meas.measurable-function` is NOT a Tier 1 concept; treat cross_links as empty" — a design
+decision made when that concept was unauthored. Verified via `ls
+educational-brain/concepts/mathematics/` that `math.meas.measurable-function` IS now authored
+(Batch 111, this same campaign), and its own KG description was even updated to read "A
+measurable function X:Ω→ℝ..." Corrected to a GENUINE cross-link probe, directly closing the loop
+`measurable-function`'s own Batch 111 entry explicitly anticipated ("this campaign's... closing
+of that exact deferred loop"). All other fields on both concepts matched the live KG exactly.
+
+`math.meas` **5/13 → 6/13**. `math.prob` gains its first Batch-113 entry. Mathematics
+**619/908 → 621/908**, 287 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.meas` 6/13,
+mathematics 621/908, 11 EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0).
+Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 118 passed (118)". Full whole-repo
+suite not re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Computed fresh frontier post-batch: `math.meas.simple-function` reachable (requires
+`measurable-function`, now authored). `math.real.metric-space` reachable. `math.real.cauchy-
+sequence`/`math.real.pointwise-convergence`/`math.real.series-rigorous` all reachable (require
+`convergence-sequences`, now authored). 28 other ready concepts remain across `math.cat`,
+`math.cx`, `math.de`, `math.fnal`, `math.graph`, `math.linalg`, `math.num`, `math.stats`,
+`math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `15e7258` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 114 (2026-09-19) — completes math.meas's core integration-building-block chain
+
+Re-derived the frontier fresh (35 ready concepts). Selected `math.meas.simple-function` (requires
+only `measurable-function`, authored Batch 111) and `math.real.cauchy-sequence` (requires only
+`convergence-sequences`, authored Batch 112). Authored both.
+
+`simple-function` (requires `measurable-function`, unlocks `lebesgue-integral`, cross_links
+none): the indicator-sum definition $\varphi=\sum a_i\mathbb1_{E_i}$, verified directly on a
+3-value step function; the integral as an EXACT finite sum $\sum a_i\mu(E_i)=12$, no limiting
+process required, unlike the general Lebesgue integral it builds toward; and monotone
+approximation made CONSTRUCTIVE via an explicit partition-and-infimum sequence approximating
+$f(x)=x^2$. 3 misconceptions independently classified — MC-1
+SIMPLE-FUNCTION-INTEGRAL-ASSUMED-TO-NEED-A-LIMIT (overgeneralization, Foundational), MC-2
+SIMPLE-FUNCTION-VALUES-OR-LEVEL-SETS-MISIDENTIFIED (instruction-induced, Foundational), MC-3
+MONOTONE-APPROXIMATION-TREATED-AS-PURELY-ABSTRACT (perceptual, Moderate). Zero Blueprint/KG
+metadata discrepancy.
+
+`cauchy-sequence` (requires `convergence-sequences`, unlocks none, cross_links `math.fnal.
+completeness` — **confirmed NOT authored via `ls`, independence mode correctly self-reported, no
+correction needed**): the Cauchy condition as terms-relative-to-each-other, never requiring a
+known limit (verified directly for $1/n$, with the limit value never appearing in the proof);
+certifying convergence of a Newton's-method recursion toward $\sqrt2$ WITHOUT knowing $L$ in
+closed form; and Cauchy $\Leftrightarrow$ convergent as genuinely completeness-dependent, via the
+$\mathbb Q$-truncation-toward-$\sqrt2$ counterexample (Cauchy in $\mathbb Q$, not convergent
+there). 3 misconceptions independently classified — MC-1 LIMIT-REQUIRED-BEFORE-CAUCHY-CHECK
+(overgeneralization, Foundational), MC-2 CAUCHY-CONVERGENT-EQUIVALENCE-TREATED-AS-UNIVERSAL
+(overgeneralization, Foundational), MC-3 CAUCHY-CONFUSED-WITH-CONSECUTIVE-TERMS-SHRINKING
+(language contamination, Moderate). Zero Blueprint/KG metadata discrepancy.
+
+**Both concepts this batch zero Blueprint/KG metadata discrepancy on every field.** `math.meas`
+**6/13 → 7/13**. `math.real` gains its first `cauchy-sequence` entry. Mathematics
+**621/908 → 623/908**, 285 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.meas` 7/13,
+mathematics 623/908, 11 EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0).
+Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 118 passed (118)". Full whole-repo
+suite not re-attempted this batch, consistent with the established precedent from Batches
+109-110.
+
+Computed fresh frontier post-batch: `math.real.pointwise-convergence`/`math.real.series-rigorous`
+reachable (require `convergence-sequences`, now authored). `math.prob.cdf`/`math.prob.
+continuous-rv`/`math.prob.convergence-types`/`math.prob.discrete-rv` all reachable (require
+`random-variable`, now authored). 28 other ready concepts remain across `math.cat`, `math.cx`,
+`math.de`, `math.fnal`, `math.graph`, `math.linalg`, `math.num`, `math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `ae6c049` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 115 (2026-09-19) — eighth discrepancy; completes math.meas's integration chain
+
+Re-derived the frontier fresh (34 ready concepts). Selected `math.meas.lebesgue-integral`
+(requires only `simple-function`, authored Batch 114) and `math.prob.discrete-rv` (requires only
+`random-variable`, authored Batch 113). Authored both.
+
+`lebesgue-integral` (requires `simple-function`, unlocks `convergence-theorems`/`lp-space`,
+cross_links `math.real.riemann-integral`): the integral as $\sup\{\int\varphi\,d\mu:\varphi\text{
+simple},0\le\varphi\le f\}$, reusing `simple-function`'s own $x^2$ approximating sequence
+directly; the $f=f^+-f^-$ signed extension, both parts non-negative by construction; and the
+Dirichlet function as proof of GENUINE extension beyond Riemann (not Riemann integrable at all —
+upper/lower Darboux sums permanently disagree — yet trivially Lebesgue integrable as
+$\mathbb1_{\mathbb Q\cap[0,1]}$, integral 0 via measure-zero rationals). 3 misconceptions
+independently classified — MC-1 LEBESGUE-AND-RIEMANN-TREATED-AS-EQUIVALENT-THEORIES
+(overgeneralization, Foundational), MC-2 POSITIVE-NEGATIVE-PART-DECOMPOSITION-MISAPPLIED
+(notation-induced, Foundational), MC-3 SUPREMUM-CONSTRUCTION-CONFUSED-WITH-A-SINGLE-
+APPROXIMATING-SEQUENCE (instruction-induced, Moderate). This concept COMPLETES math.meas's
+foundational integration-building-block chain (sigma-algebra → measure → measurable-function →
+simple-function → lebesgue-integral), all five authored across Batches 108-115.
+
+`discrete-rv` (requires `random-variable`, unlocks `pmf`/`discrete-distributions`, cross_links
+none): the PMF's two validity conditions (non-negativity, exact normalization $\sum p(x)=1$,
+forced by the probability axioms, never optional); support ($\{x:p(x)>0\}$) distinguished from
+the PMF's full domain $\mathbb R$; and PMF ($p(x)=P(X=x)$) distinguished from CDF
+($F(x)=P(X\le x)$) via direct numeric contrast. 3 misconceptions independently classified — MC-1
+PMF-SUMS-NOT-ONE (instruction-induced, Foundational), MC-2 SUPPORT-IS-ALL-REALS (language
+contamination, Secondary), MC-3 PMF-IS-CDF (notation-induced, Secondary). Zero Blueprint/KG
+metadata discrepancy.
+
+**Blueprint/P76-mode discrepancy found and corrected (EIGHTH occurrence this campaign)**:
+`lebesgue-integral`'s Blueprint claimed `math.real.riemann-integral` was "verified authored via
+`ls docs/curriculum/blueprints/math.real.riemann-integral.md`," setting cross-link-probe mode.
+Verified via `ls educational-brain/concepts/mathematics/` that `math.real.riemann-integral` has
+NO authored EB entry — the same wrong-corpus pattern as Batches 107 and 111. Corrected to
+independence mode. All other fields on both concepts matched the live KG exactly.
+
+`math.meas` **7/13 → 8/13** (chain complete). `math.prob` gains its second entry this campaign.
+Mathematics **623/908 → 625/908**, 283 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.meas` 8/13,
+mathematics 625/908, 11 EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0).
+Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 118 passed (118)". Full whole-repo
+suite not re-attempted this batch, consistent with the established precedent from Batches
+109-110.
+
+Computed fresh frontier post-batch: `math.meas.convergence-theorems`/`math.meas.lp-space` both
+reachable (require `lebesgue-integral`, now authored). `math.prob.cdf`/`math.prob.continuous-rv`/
+`math.prob.convergence-types` reachable (require `random-variable`). `math.real.pointwise-
+convergence`/`math.real.series-rigorous` still reachable. 28 other ready concepts remain across
+`math.cat`, `math.cx`, `math.de`, `math.fnal`, `math.graph`, `math.linalg`, `math.num`,
+`math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `b3b2135` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 116 (2026-09-19) — ninth discrepancy, plus a separate stale-metadata mismatch
+
+Re-derived the frontier fresh (38 ready concepts). Selected `math.meas.convergence-theorems`
+(requires only `lebesgue-integral`, authored Batch 115) and `math.prob.cdf` (requires only
+`random-variable`, authored Batch 113). Authored both.
+
+`convergence-theorems` (requires `lebesgue-integral`, unlocks none, cross_links `math.real.
+uniform-convergence`): MCT as a specific sufficient condition for the $\lim$-$\int$ interchange
+(never automatic), verified on $f_n=\min(x,n)\uparrow x$; Fatou's Lemma as inequality-only,
+demonstrated STRICT via the classic escaping spike $n\cdot\mathbb1_{(0,1/n)}$ (integral 1 for
+every $n$, but $\int\liminf f_n=0$), which also fails DCT's domination; and MCT→Fatou→DCT as one
+dependency chain (Fatou derived from MCT via $g_k=\inf_{n\ge k}f_n$, DCT from Fatou via
+$g\pm f_n$), never three independent facts. 3 misconceptions independently classified — MC-1
+LIM-INT-INTERCHANGE-ASSUMED-AUTOMATIC (overgeneralization, Foundational), MC-2
+FATOU-ASSUMED-EQUALITY (overgeneralization, High), MC-3 THREE-THEOREMS-ASSUMED-INDEPENDENT
+(instruction-induced, Moderate).
+
+`cdf` (requires `random-variable`, unlocks `quantile`, cross_links none): the accumulation
+definition $F(x)=P(X\le x)$ forcing non-decrease and right-continuity; discrete summation versus
+continuous integration as the same formula with different machinery; and the strict-versus-
+non-strict endpoint subtlety, appearing only where $X$ carries an atom (coin-flip: $P(X<1)=1/2\ne
+F(1)=1$; continuous uniform: $P(X<1.5)=P(X\le1.5)$, equal). 3 misconceptions independently
+classified — MC-1 STRICT-AND-NONSTRICT-INEQUALITY-CONFLATED (language contamination,
+Foundational), MC-2 CDF-COMPUTATION-METHOD-MISMATCHED-TO-RV-TYPE (instruction-induced,
+Foundational), MC-3 CDF-ASSUMED-NON-DECREASING-VIOLATION-POSSIBLE (perceptual, Moderate). Zero
+Blueprint/KG metadata discrepancy.
+
+**Blueprint/P76-mode discrepancy found and corrected (NINTH occurrence this campaign)**:
+`convergence-theorems`'s Blueprint claimed `math.real.uniform-convergence` was "checked via `ls
+docs/curriculum/blueprints/` and confirmed ALREADY authored," setting cross-link-probe mode.
+Verified via `ls educational-brain/concepts/mathematics/` that `math.real.uniform-convergence` has
+NO authored EB entry — the same wrong-corpus pattern as Batches 107, 111, 115. Corrected to
+independence mode.
+
+**Separate Blueprint/KG metadata discrepancy found (stale metadata, distinct from the P76
+issue)**: the same Blueprint's Component 0 states `mastery_threshold=0.6` (MAMR 3/5) and
+`estimated_hours=8`, but the live KG states `mastery_threshold=0.85` (MAMR 5/5) and
+`estimated_hours=7`. Used the live KG's values throughout, per this campaign's standing
+KG-is-canonical-authority discipline.
+
+`math.meas` **8/13 → 9/13**. `math.prob` gains its third entry this campaign. Mathematics
+**625/908 → 627/908**, 281 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.meas` 9/13,
+mathematics 627/908, 11 EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0).
+Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 118 passed (118)". Full whole-repo
+suite not re-attempted this batch, consistent with the established precedent from Batches
+109-110.
+
+Computed fresh frontier post-batch: `math.meas.lp-space`/`math.meas.product-measure`/`math.meas.
+radon-nikodym` all reachable (require `lebesgue-integral`, now authored). `math.fnal.convolution`
+reachable (requires `lebesgue-integral`). `math.prob.continuous-rv`/`math.prob.convergence-types`/
+`math.prob.pmf` all reachable. `math.real.pointwise-convergence`/`math.real.series-rigorous` still
+reachable. 27 other ready concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph`,
+`math.linalg`, `math.num`, `math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `0e6e8a7` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 117 (2026-09-19) — tenth discrepancy: two simultaneously-false cross-link claims
+
+Re-derived the frontier fresh (38 ready concepts). Selected `math.meas.lp-space` (requires only
+`lebesgue-integral`, authored Batch 115) and `math.prob.pmf` (requires only `discrete-rv`,
+authored Batch 115). Authored both.
+
+`lp-space` (requires `lebesgue-integral`, unlocks `l2-space`, cross_links `math.fnal.hilbert-
+space`/`math.fnal.normed-space`): $L^p$ membership as a specific finite-integral condition, never
+mere boundedness (the SAME function $1/x$ on $[1,\infty)$ diverges in $L^1$ but is finite in
+$L^2$); the conjugate exponent $q$ genuinely DETERMINED by $1/p+1/q=1$ (for $p=3$, $q=3/2$, never
+$q=p=3$); and Riesz-Fischer completeness holding for EVERY $p$ while only $p=2$ carries an inner
+product (Hilbert), $L^1$ remaining Banach without being Hilbert. 3 misconceptions independently
+classified — MC-1 LP-MEMBERSHIP-CONFLATED-WITH-BOUNDEDNESS (overgeneralization, Foundational),
+MC-2 EVERY-LP-ASSUMED-HILBERT (overgeneralization, Foundational), MC-3
+CONJUGATE-EXPONENT-Q-ASSUMED-FREE-OR-EQUAL-TO-P (notation-induced, Foundational).
+
+`pmf` (requires `discrete-rv`, unlocks none, cross_links none): both PMF axioms
+(non-negativity, normalization) enforced SIMULTANEOUSLY — a table already summing beyond 1 is
+unfixable by ANY entry, negative or otherwise; unknown entries found by solving the normalization
+residual, never assumed via symmetry; and event probability as a sum over ONLY the event's own
+values, distinguished sharply from the CDF's cumulative sum. 3 misconceptions independently
+classified — MC-1 PMF-SUM-NOT-ONE (instruction-induced, Foundational), MC-2 PMF-IS-CDF
+(notation-induced), MC-3 PMF-NEGATIVE-ALLOWED (overgeneralization). Zero Blueprint/KG metadata
+discrepancy.
+
+**Blueprint/P76-mode discrepancy found and corrected (TENTH occurrence this campaign, FIRST
+involving TWO simultaneously-false cross-link claims in one Blueprint)**: `lp-space`'s Blueprint
+claimed BOTH `math.fnal.hilbert-space` AND `math.fnal.normed-space` were "already authored,"
+setting cross-link-probe mode against both. Verified via `ls
+educational-brain/concepts/mathematics/` that NEITHER has an authored EB entry — the same
+wrong-corpus pattern as Batches 107, 111, 115, 116, now doubled in a single Blueprint. Corrected
+to independence mode. All other fields on both concepts matched the live KG exactly.
+
+`math.meas` **9/13 → 10/13**. `math.prob` gains its fourth entry this campaign. Mathematics
+**627/908 → 629/908**, 279 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.meas` 10/13,
+mathematics 629/908, 11 EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0).
+Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 118 passed (118)". Full whole-repo
+suite not re-attempted this batch, consistent with the established precedent from Batches
+109-110.
+
+Computed fresh frontier post-batch: `math.meas.product-measure`/`math.meas.radon-nikodym` still
+reachable (require `lebesgue-integral`). `math.fnal.convolution` still reachable. `math.prob.
+continuous-rv`/`math.prob.convergence-types`/`math.prob.distribution`/`math.prob.quantile` all
+reachable. `math.real.pointwise-convergence`/`math.real.series-rigorous` still reachable. 27
+other ready concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`,
+`math.num`, `math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `9cffe2a` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 118 (2026-09-19) — a genuinely correct cross-link claim, plus a second stale-metadata case
+
+Re-derived the frontier fresh (39 ready concepts). Selected `math.meas.product-measure` (requires
+only `lebesgue-integral`, authored Batch 115) and `math.prob.continuous-rv` (requires
+`random-variable` + already-certified `math.calc.definite-integral`). Authored both.
+
+`product-measure` (requires `lebesgue-integral`, unlocks none, cross_links `math.calc.double-
+integrals` — **confirmed AUTHORED via `ls`, a genuine cross-link probe, this campaign's fourth
+such case after Batches 101, 108, 111**): the product measure as "multiply the pieces," exactly
+generalizing rectangle area ($\mu_1\otimes\mu_2([0,2]\times[0,3])=6$); Fubini's absolute-
+integrability hypothesis as essential work verified BEFORE concluding order-independence (spike
+example $xye^{-(x^2+y^2)}$, $\iint|f|=\frac14<\infty$); and the classic
+$(x^2-y^2)/(x^2+y^2)^2$ counterexample showing order can genuinely flip the answer's sign
+($+\pi/4$ vs $-\pi/4$) when absolute integrability fails, with Tonelli's non-negativity relaxation
+contrasted. 3 misconceptions independently classified — MC-1
+PRODUCT-MEASURE-ASSUMED-UNRELATED-TO-AREA (overgeneralization, Foundational), MC-2
+ORDER-SWITCHING-ASSUMED-ALWAYS-SAFE (overgeneralization, High), MC-3
+FAILED-ABSOLUTE-INTEGRABILITY-ASSUMED-HARMLESS (perceptual, Moderate).
+
+`continuous-rv` (requires `random-variable`/`math.calc.definite-integral`, unlocks `pdf`/
+`continuous-distributions`, cross_links none): probability as AREA under a density, never the
+density value itself ($P(X=1)=0$ via a zero-width integral, versus $P(0.5\le X\le1.5)=1/2$); the
+PDF's only constraints (non-negativity, total-integral-1) — $f(x)$ CAN exceed 1 (population-
+density analogy, $f(x)=3$ on $[0,1/3]$ is valid); and the CDF/PDF integrate/differentiate
+relationship, never interchangeable. 3 misconceptions independently classified — MC-1
+SINGLE-VALUE-HAS-PROBABILITY (overgeneralization, Foundational), MC-2 PDF-IS-PROBABILITY
+(language contamination), MC-3 CDF-PDF-CONFUSION (notation-induced). Zero Blueprint/KG metadata
+discrepancy.
+
+**Blueprint's cross-link claim CONFIRMED CORRECT this batch**: `product-measure`'s claim that
+`math.calc.double-integrals` is authored was VERIFIED TRUE via `ls` — a genuine, working
+cross-link, not a discrepancy. Its own prerequisite chain (Cartesian $dA=dx\,dy$ via Fubini,
+established in `math.calc.multiple-integrals`) directly instantiates this concept's own
+"multiply the pieces" idea at the concrete Riemann-integral level.
+
+**Separate Blueprint/KG metadata discrepancy found (stale metadata, second occurrence of this
+pattern after Batch 116)**: the same Blueprint's Component 0 states `mastery_threshold=0.6` (MAMR
+3/5) and `estimated_hours=8`, but the live KG states `mastery_threshold=0.8` (MAMR
+⌈0.8×5⌉=4/5) and `estimated_hours=6`. Used the live KG's values throughout.
+
+`math.meas` **10/13 → 11/13**. `math.prob` gains its fifth entry this campaign. Mathematics
+**629/908 → 631/908**, 277 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.meas` 11/13,
+mathematics 631/908, 11 EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0).
+Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 118 passed (118)". Full whole-repo
+suite not re-attempted this batch, consistent with the established precedent from Batches
+109-110.
+
+Computed fresh frontier post-batch: `math.meas.l2-space`/`math.meas.radon-nikodym` still
+reachable. `math.fnal.convolution` still reachable. `math.prob.convergence-types`/`math.prob.
+discrete-distributions`/`math.prob.distribution`/`math.prob.generating-function`/`math.prob.
+quantile` all reachable. `math.real.pointwise-convergence`/`math.real.series-rigorous` still
+reachable. 27 other ready concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph`,
+`math.linalg`, `math.num`, `math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `8c765ba` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 119 (2026-09-19) — eleventh discrepancy; math.meas moves to 12/13
+
+Re-derived the frontier fresh (38 ready concepts). Selected `math.meas.l2-space` (requires only
+`lp-space`, authored Batch 117) and `math.prob.pdf` (requires only `continuous-rv`, authored Batch
+118). Authored both.
+
+`l2-space` (requires `lp-space`, unlocks none, cross_links `math.fnal.hilbert-space`/`math.de.
+fourier-transform`): the parallelogram law as the litmus test proving $p=2$ is special (verified
+exactly for $f=1,g=x$ on $[0,1]$, both sides $=8/3$); Fourier series as genuine ORTHOGONAL
+PROJECTION using the orthonormal basis $e_n(x)=e^{inx}/\sqrt{2\pi}$, never a separate technique;
+and Parseval's theorem as the Pythagorean theorem generalized to infinite dimensions, a direct
+consequence of orthonormality and completeness. 3 misconceptions independently classified — MC-1
+ALL-LP-SPACES-ASSUMED-TO-HAVE-INNER-PRODUCTS (overgeneralization, Foundational), MC-2
+L2-FOURIER-SERIES-TREATED-AS-FORMAL-ANALOGY (overgeneralization, Foundational), MC-3
+PARSEVAL-TREATED-AS-INDEPENDENT-FACT (instruction-induced, Moderate).
+
+`pdf` (requires `continuous-rv`, unlocks none, cross_links none): normalization as an integral
+condition, never a point evaluation ($f(1)=1$ giving $k=1$ fails for $f=kx$ on $[0,2]$, since
+$\int_0^2x\,dx=2\ne1$); $E[X]$ as the probability-weighted MEAN, never the mode (the skewed
+$f(x)=3x^2$ peaks at 1 but $E[X]=3/4$); and variance requiring the SQUARED deviation, since
+$E[X-\mu]$ is always trivially zero. 3 misconceptions independently classified — MC-1
+EXPECTATION-AS-MODE (overgeneralization, Foundational), MC-2 VARIANCE-AS-EXPECTED-DEVIATION
+(notation-induced), MC-3 NORMALIZATION-BY-EVALUATION (language contamination).
+
+**Blueprint/P76-mode discrepancy found and corrected (ELEVENTH occurrence this campaign, SECOND
+involving two simultaneously-false cross-link claims in one Blueprint, after Batch 117)**:
+`l2-space`'s Blueprint claimed BOTH `math.fnal.hilbert-space` AND `math.de.fourier-transform`
+"checked via `ls docs/curriculum/blueprints/`" and confirmed authored, setting cross-link-probe
+mode against both. Verified via `ls educational-brain/concepts/mathematics/` that NEITHER has an
+authored EB entry. Corrected to independence mode.
+
+**Separate Blueprint/KG `unlocks`-field discrepancy found (a new discrepancy category, distinct
+from cross_links/P76 and from stale-metadata)**: `pdf`'s Blueprint Component 7 lists `math.prob.
+continuous-distributions` as an unlocked concept, but the live KG's `unlocks` field for this
+concept is empty. Used the KG's authoritative empty list.
+
+`math.meas` **11/13 → 12/13** (`radon-nikodym` remains). `math.prob` gains its sixth entry this
+campaign. Mathematics **631/908 → 633/908**, 275 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.meas` 12/13,
+mathematics 633/908, 11 EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0).
+Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 118 passed (118)". Full whole-repo
+suite not re-attempted this batch, consistent with the established precedent from Batches
+109-110.
+
+Computed fresh frontier post-batch: `math.meas.radon-nikodym`/`math.fnal.convolution` still
+reachable. `math.prob.convergence-types`/`math.prob.discrete-distributions`/`math.prob.
+distribution`/`math.prob.generating-function`/`math.prob.quantile` all reachable. `math.real.
+pointwise-convergence`/`math.real.series-rigorous` still reachable. 27 other ready concepts remain
+across `math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`, `math.num`, `math.stats`,
+`math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `48a7795` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 120 (2026-09-19) — MILESTONE: math.meas reaches EB certification (13/13)
+
+Re-derived the frontier fresh (38 ready concepts). Selected `math.meas.radon-nikodym` (requires
+only `lebesgue-integral`, authored Batch 115 — the last remaining `math.meas` concept) and
+`math.prob.discrete-distributions` (requires `discrete-rv`/`pmf`, both authored). Authored both.
+
+`radon-nikodym` (requires `lebesgue-integral`, unlocks none, cross_links `math.prob.conditional-
+probability` — **confirmed AUTHORED via `ls`, a genuine cross-link probe, this campaign's fifth
+such case after Batches 101, 108, 111, 118**): a density function AS a Radon-Nikodym derivative
+(the standard normal density identified directly as $d\nu/d\mu$), never a separate idea; absolute
+continuity as an essential, checkable hypothesis whose failure genuinely blocks existence (point
+mass at 0 against Lebesgue measure — no derivative can reproduce it, since integrals over null
+sets are always 0); and general conditional expectation built DIRECTLY on this theorem, with
+`math.prob.conditional-probability`'s elementary formula recovered as its simplest special case. 3
+misconceptions independently classified — MC-1 DENSITY-FUNCTION-ASSUMED-UNRELATED-TO-RN-DERIVATIVE
+(overgeneralization, Foundational), MC-2 RN-DERIVATIVE-ASSUMED-TO-ALWAYS-EXIST
+(overgeneralization, High), MC-3 CONDITIONAL-EXPECTATION-ASSUMED-UNRELATED-TO-RN-THEOREM
+(instruction-induced, Moderate). Zero Blueprint/KG metadata discrepancy — the Blueprint's own
+cross-link claim checked out correct on first verification.
+
+`discrete-distributions` (requires `discrete-rv`/`pmf`, unlocks none, cross_links none): the six
+named discrete families (Bernoulli, Binomial, Geometric, Negative Binomial, Poisson,
+Hypergeometric) with PMF/mean/variance and family relationships (Binomial as a sum of Bernoullis;
+Geometric as Negative Binomial's $r=1$ case; Poisson as a Binomial limit); the two genuinely
+different Geometric conventions (trials-until-success vs. failures-before-success, means $1/p$
+vs. $(1-p)/p$); Poisson as a PRIMARY rate-based model, never merely a Binomial-large-$n$-small-$p$
+approximation; and Hypergeometric's finite-population correction factor, genuinely shrinking the
+variance below Binomial's fixed-$p$ estimate. 3 misconceptions independently classified — MC-1
+GEOMETRIC-COUNTS-FAILURES-OR-TRIALS (instruction-induced), MC-2
+POISSON-REQUIRES-LARGE-N-SMALL-P (instruction-induced), MC-3
+HYPERGEOMETRIC-IS-BINOMIAL-WITHOUT-REPLACEMENT (overgeneralization). Zero Blueprint/KG metadata
+discrepancy.
+
+**`math.meas` reaches 13/13 — EB-CERTIFIED**, the 12th EB-certified domain this campaign (after
+math.found, math.calc, math.geom, math.alg, math.arith, math.abst, math.nt, math.disc, math.func,
+math.trig, math.seq). The full measure-theory chain (sigma-algebra → measure → measurable-
+function → simple-function → lebesgue-integral → lebesgue-measure → measure-zero → convergence-
+theorems → product-measure → lp-space → l2-space → abstract-measure-spaces → radon-nikodym) was
+authored across Batches 108-120, with 8 genuine Blueprint/KG discrepancies caught and corrected
+along the way (Batches 108-111, 115-117, 119).
+
+`math.prob` gains its seventh entry this campaign. Mathematics **633/908 → 635/908**, 273
+remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.meas` 13/13,
+mathematics 635/908, **12 EB-certified domains** (up from 11). `npx tsc --noEmit` → clean (exit
+0). Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 118 passed (118)". Full
+whole-repo suite not re-attempted this batch, consistent with the established precedent from
+Batches 109-110.
+
+Computed fresh frontier post-batch: `math.fnal.convolution` still reachable. `math.prob.
+continuous-distributions`/`math.prob.convergence-types`/`math.prob.distribution`/`math.prob.
+expected-value`/`math.prob.generating-function`/`math.prob.quantile` all reachable. `math.real.
+pointwise-convergence`/`math.real.series-rigorous` still reachable. 27 other ready concepts remain
+across `math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`, `math.num`, `math.stats`,
+`math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `252b100` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 121 (2026-09-19)
+
+Re-derived the frontier fresh (36 ready concepts). Selected `math.prob.continuous-distributions`
+(requires `continuous-rv`/`pdf`, both authored) and `math.real.pointwise-convergence` (requires
+only `convergence-sequences`, authored Batch 112). Authored both.
+
+`continuous-distributions` (requires `continuous-rv`/`pdf`, unlocks none, cross_links none):
+Uniform's density-times-width probability rule ($P(X=x)=0$ always; $P(c\le X\le d)=(d-c)/(b-a)$);
+Exponential's rate-versus-mean reciprocal relationship ($\lambda=3$ gives $E[X]=1/3$, never 3); and
+the memoryless property as Exponential's defining feature ($P(X>s+t\mid X>s)=P(X>t)$), genuinely
+ABSENT from Uniform (whose conditional probability depends on $s$, requiring direct computation).
+3 misconceptions independently classified — MC-1 DENSITY-AS-PROBABILITY (overgeneralization,
+Foundational), MC-2 LAMBDA-IS-MEAN (language contamination), MC-3 MEMORYLESS-IGNORED
+(instruction-induced).
+
+`pointwise-convergence` (requires `convergence-sequences`, unlocks `uniform-convergence`,
+cross_links none): pointwise convergence as the SAME $\varepsilon$-$N$ definition applied
+separately at each point (verified on $x^n$'s per-point limits); $N(x,\varepsilon)$ genuinely
+depending on $x$, unboundedly (explicit $N(1/2,0.01)=7$ vs $N(0.9,0.01)=44$); and continuity NOT
+preserved by pointwise limits ($x^n$'s jump discontinuity at $x=1$ despite every term being
+continuous), motivating Dini's theorem and `uniform-convergence`. 3 misconceptions independently
+classified — MC-1 POINTWISE-CONVERGENCE-ASSUMED-NEW-DEFINITION (overgeneralization,
+Foundational), MC-2 N-ASSUMED-INDEPENDENT-OF-X (overgeneralization, High), MC-3
+CONTINUITY-ASSUMED-PRESERVED-BY-POINTWISE-LIMIT (overgeneralization, High). Both concepts zero
+Blueprint/KG metadata discrepancy.
+
+`math.prob` gains its eighth entry this campaign. `math.real` gains its fifth entry. Mathematics
+**635/908 → 637/908**, 271 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 637/908, 12
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum
+tests: "Test Files 7 passed (7), Tests 118 passed (118)". Full whole-repo suite not re-attempted
+this batch, consistent with the established precedent from Batches 109-110.
+
+Computed fresh frontier post-batch: `math.fnal.convolution` still reachable. `math.prob.
+convergence-types`/`math.prob.distribution`/`math.prob.expected-value`/`math.prob.generating-
+function`/`math.prob.quantile` all reachable. `math.real.series-rigorous` still reachable. 27
+other ready concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`,
+`math.num`, `math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `93ba674` on `main`, pushed directly.
+
+### Batch 122 (2026-09-19) — second reverse-direction discrepancy: a stale independence claim
+
+Re-derived the frontier fresh (36 ready concepts). Selected `math.prob.expected-value` (requires
+`random-variable`/`pmf`/`pdf`, all authored) and `math.real.series-rigorous` (requires
+`convergence-sequences`/`math.seq.series`, both authored/certified). Authored both.
+
+`expected-value` (requires `random-variable`/`pmf`/`pdf`, unlocks `variance`/`moments`,
+cross_links none): $E[X]$ as a probability-weighted average (weighted-GPA analogy), never the
+unweighted mean ($P(X=2)=0.6,P(X=8)=0.4$ gives $E[X]=4.4$, pulled below the midpoint 5); discrete
+sum versus continuous integral as genuinely different, type-matched computations; and $E[X]$ as a
+long-run average that NEED NOT be an achievable single outcome (the -\$0.50 lottery expectation).
+3 misconceptions independently classified — MC-1 ARITHMETIC-AVERAGE-CONFUSION
+(overgeneralization, Foundational), MC-2 DISCRETE-FORMULA-FOR-CONTINUOUS (instruction-induced),
+MC-3 EXPECTED-MUST-BE-ACHIEVABLE (perceptual). Zero Blueprint/KG metadata discrepancy.
+
+`series-rigorous` (requires `convergence-sequences`/`math.seq.series`, unlocks
+`absolute-convergence`, cross_links `math.seq.comparison-test`): series convergence as Cauchy-
+sequence convergence of the partial sums, no new machinery ($\sum1/2^n$'s direct
+$\varepsilon$-$N$ verification); absolute convergence as SUFFICIENT but never necessary for
+convergence, via the alternating harmonic series (convergent to $\ln2$, yet its absolute-value
+series — the harmonic series — diverges); and rearrangement-invariance holding for absolute
+convergence but genuinely FAILING for conditional convergence, per the Riemann Rearrangement
+Theorem. 3 misconceptions independently classified — MC-1 SERIES-CONVERGENCE-AS-NEW-NOTION
+(overgeneralization, Foundational), MC-2 CONVERGENCE-ASSUMED-TO-IMPLY-ABSOLUTE-CONVERGENCE
+(overgeneralization, Foundational), MC-3 REARRANGEMENT-ASSUMED-UNIVERSALLY-INVARIANT
+(overgeneralization, Moderate).
+
+**Blueprint/P76-mode discrepancy found and corrected (reverse direction, SECOND occurrence after
+Batch 112's `convergence-sequences`)**: `series-rigorous`'s Blueprint states `math.seq.
+comparison-test` was checked and confirmed NOT yet authored — correct when the Blueprint was
+written. Verified via `ls educational-brain/concepts/mathematics/` that `math.seq.comparison-test`
+IS now authored (part of the certified `math.seq` domain). Corrected to a GENUINE cross-link
+probe, directly connecting this concept's triangle-inequality absolute-convergence argument to the
+comparison test's own bounding technique — a connection the Blueprint's own Component 7 had
+explicitly anticipated a "future revision" might add.
+
+`math.prob` gains its ninth entry this campaign. `math.real` gains its sixth entry. Mathematics
+**637/908 → 639/908**, 269 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 639/908, 12
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum
+tests: "Test Files 7 passed (7), Tests 118 passed (118)". Full whole-repo suite not re-attempted
+this batch, consistent with the established precedent from Batches 109-110.
+
+Computed fresh frontier post-batch: `math.fnal.convolution` still reachable. `math.prob.
+convergence-types`/`math.prob.distribution`/`math.prob.generating-function`/`math.prob.normal-
+distribution`/`math.prob.poisson-process`/`math.prob.quantile` all reachable. 27 other ready
+concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`, `math.num`,
+`math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `297e0a3` on `main`, pushed directly.
+
+### Batch 123 (2026-09-19) — third reverse-direction discrepancy
+
+Re-derived the frontier fresh (41 ready concepts). Selected `math.prob.variance` (requires only
+`expected-value`, authored Batch 122) and `math.real.absolute-convergence` (requires only
+`series-rigorous`, authored Batch 122). Authored both.
+
+`variance` (requires `expected-value`, unlocks `covariance`/`chebyshev`, cross_links none):
+$\text{Var}(X)=E[X^2]-(E[X])^2$, ALWAYS requiring the subtraction (a constant RV has
+$E[X^2]=25\ne0=\text{Var}(X)$, proving the two genuinely differ); variance versus standard
+deviation as distinct quantities ($\sigma^2$ vs $\sigma$); and shifts never changing variance
+while scaling squares it ($\text{Var}(2X-5)=4\cdot\text{Var}(X)$, the constant contributing
+nothing). 3 misconceptions independently classified — MC-1 VARIANCE-IS-E[X²]
+(instruction-induced, Foundational), MC-2 VARIANCE-IS-STANDARD-DEVIATION (notation-induced), MC-3
+SHIFT-CHANGES-VARIANCE (overgeneralization). Zero Blueprint/KG metadata discrepancy.
+
+`absolute-convergence` (requires `series-rigorous`, unlocks none, cross_links `math.seq.
+absolute-convergence`): absolute convergence as a separately-TESTED property, defined via
+$\sum|a_n|$ (verified directly for $\sum(-1)^n/n^2$ via the $p=2$ test); absolute convergence
+implying ordinary convergence but NEVER the converse (the alternating harmonic series again);
+and the rearrangement dichotomy — safe for absolute convergence ($\sum1/n^2$'s sum $\pi^2/6$
+unchanged by any reordering), dangerously order-dependent for conditional convergence (the
+alternating harmonic series rearrangeable to sum to 100, via the Riemann Rearrangement Theorem).
+3 misconceptions independently classified — MC-1
+CONVERGENCE-CONFLATED-WITH-ABSOLUTE-CONVERGENCE (overgeneralization, Foundational), MC-2
+REARRANGEMENT-ASSUMED-ALWAYS-SAFE (overgeneralization, Foundational), MC-3
+ABSOLUTE-VALUE-SERIES-TEST-SKIPPED-AS-REDUNDANT (instruction-induced, Moderate).
+
+**Blueprint/P76-mode discrepancy found and corrected (reverse direction, THIRD occurrence after
+Batches 112 and 122)**: `absolute-convergence`'s Blueprint correctly called `math.seq.absolute-
+convergence` unauthored when written. Verified via `ls educational-brain/concepts/mathematics/`
+that it IS now authored (certified `math.seq` domain). Corrected to a GENUINE cross-link probe,
+directly connecting this concept's classification procedure to that concept's own two-step
+pipeline (test $\sum|a_n|$ first, then $\sum a_n$ directly only if that fails).
+
+`math.prob` gains its tenth entry this campaign. `math.real` gains its seventh entry. Mathematics
+**639/908 → 641/908**, 267 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 641/908, 12
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum
+tests: "Test Files 7 passed (7), Tests 118 passed (118)". Full whole-repo suite not re-attempted
+this batch, consistent with the established precedent from Batches 109-110.
+
+Computed fresh frontier post-batch: `math.fnal.convolution` still reachable. `math.opt.
+stochastic-gradient` reachable (requires `gradient-methods`+`expected-value`, latter now
+authored). `math.prob.convergence-types`/`math.prob.distribution`/`math.prob.generating-
+function`/`math.prob.law-of-unconscious`/`math.prob.linearity-expectation`/`math.prob.markov-
+inequality`/`math.prob.moments`/`math.prob.normal-distribution`/`math.prob.poisson-process`/
+`math.prob.quantile` all reachable. 27 other ready concepts remain across `math.cat`, `math.cx`,
+`math.de`, `math.graph`, `math.linalg`, `math.num`, `math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `b434ff5` on `main`, pushed directly.
+
+### Batch 124 (2026-09-19) — twelfth discrepancy; opens math.real's metric-space entry point
+
+Re-derived the frontier fresh (41 ready concepts). Selected `math.prob.linearity-expectation`
+(requires only `expected-value`, authored Batch 122) and `math.real.metric-space` (requires
+`math.found.set-theory`/`math.found.real-numbers`, both certified). Authored both.
+
+`linearity-expectation` (requires `expected-value`, unlocks none, cross_links none):
+$E[aX+bY]=aE[X]+bE[Y]$ holding REGARDLESS of dependence — verified for a coin flip $X$ and its
+perfectly-dependent complement $Y=1-X$; the INDICATOR-VARIABLE technique sidestepping the joint
+distribution entirely (the hat-check problem's $E[X]=\sum E[X_i]=n\cdot\frac1n=1$, independent of
+whether the $X_i$ are themselves independent — they aren't); and $E[f(X)]=f(E[X])$ failing for
+nonlinear $f$ (Jensen's inequality, $E[X^2]\ne(E[X])^2$ in general). 3 misconceptions
+independently classified — MC-1 LINEARITY-REQUIRES-INDEPENDENCE (instruction-induced), MC-2
+E[XY]=E[X]E[Y]-ALWAYS (overgeneralization), MC-3 LINEARITY-APPLIES-TO-NONLINEAR-FUNCTIONS
+(overgeneralization). Zero Blueprint/KG metadata discrepancy.
+
+`metric-space` (requires `math.found.set-theory`/`math.found.real-numbers`, unlocks `open-sets`/
+`completeness-metric`/`compactness`, cross_links `math.top.topological-space`/`math.fnal.normed-
+space`): a metric as ANY function satisfying the three axioms, never restricted to the Euclidean
+formula (Euclidean/taxicab/max/discrete/sup metrics all verified on the same points); non-
+negativity derived as a THEOREM from the three axioms, never a fourth independent one; and the
+triangle inequality's direction (direct distance never exceeds a detour). 3 misconceptions
+independently classified — MC-1 METRIC-IS-EUCLIDEAN (overgeneralization, Foundational), MC-2
+NONNEGATIVITY-AS-AXIOM (instruction-induced), MC-3 TRIANGLE-DIRECTION-REVERSED
+(notation-induced). Opens `math.real`'s metric-space entry point, independent of the convergence-
+sequences chain already developed (Batches 112-123).
+
+**Blueprint/P76-mode discrepancy found and corrected (TWELFTH occurrence this campaign)**:
+`metric-space`'s Blueprint listed `math.top.topological-space` as an authored Tier-1 cross-link,
+setting cross-link-probe mode (with `math.fnal.normed-space` separately noted as documented but
+not probed). Verified via `ls educational-brain/concepts/mathematics/` that NEITHER target has an
+authored EB entry. Corrected to independence mode.
+
+`math.prob` gains its eleventh entry this campaign. `math.real` gains its eighth entry (a new
+sub-chain). Mathematics **641/908 → 643/908**, 265 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 643/908, 12
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum
+tests: "Test Files 7 passed (7), Tests 118 passed (118)". Full whole-repo suite not re-attempted
+this batch, consistent with the established precedent from Batches 109-110.
+
+Computed fresh frontier post-batch: `math.prob.chebyshev`/`math.prob.standard-deviation`
+reachable (require `variance`, now authored). `math.fnal.convolution`/`math.opt.stochastic-
+gradient` still reachable. `math.prob.convergence-types`/`math.prob.distribution`/`math.prob.
+generating-function`/`math.prob.law-of-unconscious`/`math.prob.markov-inequality`/`math.prob.
+moments`/`math.prob.normal-distribution`/`math.prob.poisson-process`/`math.prob.quantile` all
+still reachable. 27 other ready concepts remain across `math.cat`, `math.cx`, `math.de`,
+`math.graph`, `math.linalg`, `math.num`, `math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `5186e8c` on `main`, pushed directly.
+
+### Batch 125 (2026-09-19)
+
+Re-derived the frontier fresh (42 ready concepts). Selected `math.prob.chebyshev` (requires only
+`variance`, authored Batch 123) and `math.real.open-sets` (requires only `metric-space`, authored
+Batch 124). Authored both.
+
+`chebyshev` (requires `variance`, unlocks `lln`, cross_links none): $P(|X-\mu|\ge k\sigma)\le
+1/k^2$ as an upper bound, never the exact probability (Normal's actual tail at $k=2$ is
+$\approx0.0455$, over 5x smaller than the 0.25 ceiling); distribution-freeness as the theorem's
+entire point (bounding a factory's lifetime deviation using only $\mu,\sigma$, no shape needed);
+and standardization ($k$=deviation/$\sigma$, never a raw deviation substituted directly). 3
+misconceptions independently classified — MC-1 BOUND-IS-EXACT (instruction-induced,
+Foundational), MC-2 DISTRIBUTION-SPECIFIC-ASSUMPTION (overgeneralization), MC-3
+RAW-DEVIATION-NOT-STANDARDIZED (language contamination). Zero Blueprint/KG metadata discrepancy.
+
+`open-sets` (requires `metric-space`, unlocks `compactness`/`connectedness`, cross_links
+`math.top.open-sets` — **confirmed NOT authored via `ls`, independence mode correctly
+self-reported, no correction needed**): open sets via the interior-point/ball definition (radius
+allowed to shrink per point, verified on $(2,5)$); closed sets via complement-is-open or
+limit-point containment (verified on $[0,1]$); and open/closed as NOT complementary — $[0,1)$ is
+genuinely NEITHER, while $\emptyset$/$X$ are BOTH — with closure defined as the SMALLEST closed
+superset, never any closed superset. 3 misconceptions independently classified — MC-1
+OPEN-CLOSED-ASSUMED-EXHAUSTIVE-DICHOTOMY (language contamination, Foundational), MC-2
+CLOSURE-CONFUSED-WITH-ANY-CLOSED-SUPERSET (overgeneralization, Foundational), MC-3
+LIMIT-POINT-REQUIRES-SET-MEMBERSHIP (notation-induced, Moderate). Zero Blueprint/KG metadata
+discrepancy.
+
+`math.prob` gains its twelfth entry this campaign. `math.real`'s new metric-space sub-chain
+extends to a second concept. Mathematics **643/908 → 645/908**, 263 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 645/908, 12
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum
+tests: "Test Files 7 passed (7), Tests 118 passed (118)". Full whole-repo suite not re-attempted
+this batch, consistent with the established precedent from Batches 109-110.
+
+Computed fresh frontier post-batch: `math.prob.standard-deviation` still reachable (requires
+`variance`). `math.real.completeness-metric`/`math.real.continuity-rigorous` still reachable
+(require `metric-space`). `math.fnal.convolution`/`math.opt.stochastic-gradient` still reachable.
+Numerous `math.prob` concepts (convergence-types, distribution, generating-function, law-of-
+unconscious, markov-inequality, moments, normal-distribution, poisson-process, quantile) all still
+reachable. 27 other ready concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph`,
+`math.linalg`, `math.num`, `math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `efd5507` on `main`, pushed directly.
+
+### Batch 126 (2026-09-19) — resumed after a scope-conflict pause
+
+The prior turn halted before this batch over an apparent conflict between the standing `/loop`
+instruction and CLAUDE.md's "mathematics content work is explicitly PAUSED" line under the
+owner-scoped physics/english/chemistry campaign, plus a session-level tracking-only preference.
+The owner explicitly confirmed the pause does not apply to this campaign, so authoring resumed
+from the last confirmed state (645/908, commit `67dbfc6`, in sync with origin).
+
+`math.prob.standard-deviation`: $SD(X)=\sqrt{\text{Var}(X)}$, returning spread to the original
+units (never squared units, unlike variance). Worked the Uniform{1..5} example: $SD(X)=\sqrt2$,
+and $Y=2X-3$ giving $SD(Y)=2\sqrt2$ (scaling multiplies SD by $|a|$; the $-3$ shift leaves spread
+untouched). 3 misconceptions independently classified — MC-1 SD-AND-VARIANCE-ARE-INTERCHANGEABLE
+(language contamination), MC-2 ADDING-CONSTANT-CHANGES-SD (overgeneralization), MC-3
+SD-IS-THE-AVERAGE-DEVIATION (instruction-induced, confusing SD with mean absolute deviation).
+Zero Blueprint/KG metadata discrepancy.
+
+`math.real.compactness`: open cover/finite subcover definition of compactness as a universal
+claim over ALL covers (one failing cover, like $\{(1/n,1)\}$ covering $(0,1)$ with no finite
+subcover, is a complete disproof); Heine-Borel (closed AND bounded, both required, contrasting
+$(0,1)$ against $[0,1]$); sequential compactness requiring the limit to land back inside $K$
+itself (the identical sequence $1/n\to0$ fails for $(0,1)$ but succeeds for $[0,1]$). 3
+misconceptions independently classified, all Foundational severity per the Blueprint — MC-1
+SOME-COVER-REDUCIBLE-ASSUMED-SUFFICIENT-FOR-COMPACTNESS, MC-2
+BOUNDED-ALONE-ASSUMED-SUFFICIENT-FOR-COMPACTNESS, MC-3
+SEQUENCE-CONVERGENCE-TO-ANY-LIMIT-ASSUMED-SUFFICIENT-FOR-SEQUENTIAL-COMPACTNESS. Zero Blueprint/
+KG metadata discrepancy; `math.top.compactness` cross-link confirmed still unauthored via `ls`,
+independence mode used per the Blueprint's own correct self-report.
+
+`math.prob` gains its thirteenth entry this campaign, closing out the variance/SD sub-chain
+opened at Batch 123. `math.real`'s compactness entry directly extends the open-sets chain from
+Batch 125. Mathematics **645/908 → 647/908**, 261 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 647/908, 12
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum
+tests (curriculumKgRegistration, mathematicsAssetContract, mathPackageCorpus,
+masteryReachability, mathematicsBandContract, ebKnowledgeContract, ebKnowledgeDelivery): "Test
+Files 7 passed (7), Tests 561 passed (561)" — the corpus has grown since the "118 tests" figure
+recorded in earlier batch entries; this is the current accurate count for the same 7-file set,
+not a discrepancy. Full whole-repo suite not re-attempted this batch, consistent with the
+established precedent from Batches 109-110.
+
+Computed fresh frontier post-batch: `math.real.completeness-metric`/`math.real.connectedness`
+now reachable (require `open-sets`/`metric-space`, already authored). `math.fnal.convolution`/
+`math.opt.stochastic-gradient` still reachable. Numerous `math.prob` concepts (classical-
+probability, convergence-types, distribution, generating-function, law-of-unconscious, lln [now
+reachable — both `chebyshev` and `independence` prerequisites need checking], markov-chain,
+markov-inequality, moments, normal-distribution, poisson-process, quantile) — re-verify each
+`requires` fresh next batch, do not trust this list. Other ready concepts remain across
+`math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`, `math.num`, `math.stats`,
+`math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `dcf629f` on `main`, pushed directly.
+
+### Batch 127 (2026-09-19)
+
+`math.prob.lln`: Law of Large Numbers as a LIMIT statement (never a finite-n exact-equality
+guarantee), demonstrated via a coin-flip dilution table (5-heads streak diluted by 95 more flips
+to 0.53); weak LLN (convergence in probability) versus strong LLN (almost sure convergence) stated
+side by side as genuinely different claims; gambler's fallacy corrected via the dilution-not-
+compensation mechanism; Chebyshev-based proof sketch using independence's variances-add property.
+3 misconceptions independently classified — MC-1 LLN-MEANS-EVENTUAL-EXACT-EQUALITY (Foundational,
+the causal root), MC-2 GAMBLERS-FALLACY (Foundational, directly caused by MC-1 per the Blueprint's
+own declared link), MC-3 WEAK-STRONG-LLN-IDENTICAL (language contamination). Zero Blueprint/KG
+metadata discrepancy.
+
+`math.real.connectedness`: connectedness via the precise closure-based SEPARATION definition
+(never a visual "gap" intuition), demonstrated via $[0,1]\cup[2,3]$'s explicit closure check;
+intervals as the only connected subsets of $\mathbb R$, demonstrated via $\mathbb Q$'s clean split
+at the irrational $\sqrt2$ (a point not even a member of $\mathbb Q$); the Intermediate Value
+Theorem derived directly from connectedness-preservation plus the intervals-only theorem, with no
+separate IVT-specific argument. 3 misconceptions independently classified — MC-1
+CONNECTEDNESS-AS-INFORMAL-VISUAL-NOTION (Foundational), MC-2
+DISCONNECTION-ASSUMED-TO-REQUIRE-A-MEMBER-GAP (Foundational), MC-3
+IVT-ASSUMED-TO-NEED-INDEPENDENT-PROOF (Moderate). Zero Blueprint/KG metadata discrepancy;
+`math.top.connectedness` cross-link confirmed still unauthored via `ls`, independence mode used
+per the Blueprint's own correct self-report.
+
+`math.prob` gains its fourteenth entry this campaign, closing Chebyshev's declared unlock.
+`math.real.connectedness` closes the second of `math.real.open-sets`'s two declared unlocks
+(compactness closed the first at Batch 126) — both direct consequences of the open-sets chain are
+now complete. Mathematics **647/908 → 649/908**, 259 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 649/908, 12
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Computed fresh frontier post-batch: `math.real.completeness-metric`/`math.real.continuity-
+rigorous` still reachable (require `metric-space`). `math.real.ivt` NOT yet reachable pending
+its full requires check. `math.fnal.convolution`/`math.opt.stochastic-gradient` still reachable.
+Numerous `math.prob` concepts (classical-probability, convergence-types, distribution,
+generating-function, law-of-unconscious, markov-chain, markov-inequality, moments, normal-
+distribution, poisson-process, quantile) appear reachable — re-verify each candidate's actual
+`requires` fresh next batch, do not trust this list or any prior batch's frontier snapshot. Other
+ready concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`,
+`math.num`, `math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `f02161e` on `main`, pushed directly.
+
+### Batch 128 (2026-09-19) — thirteenth wrong-corpus discrepancy
+
+`math.prob.moments`: kth moment $E[X^k]$ versus kth central moment $E[(X-\mu)^k]$, with the first
+central moment ALWAYS exactly zero for every random variable (proven generally via linearity of
+expectation, demonstrated on a fair die roll); skewness as a tail-sensitive statistic (an income
+distribution's roughly-symmetric bulk can still carry substantial positive skewness from a thin
+extreme tail); MGF and kurtosis's "-3" convention (calibrated against the normal distribution's
+own fourth standardized central moment, exactly 3) at orientation level. 3 misconceptions
+independently classified — MC-1 FIRST-CENTRAL-MOMENT-ASSUMED-VARIABLE (Foundational), MC-2
+SKEWNESS-JUDGED-BY-BULK-APPEARANCE (High), MC-3 KURTOSIS-MINUS-3-ASSUMED-ARBITRARY (Moderate).
+Zero Blueprint/KG metadata discrepancy.
+
+`math.real.completeness-metric`: metric-space completeness (every Cauchy sequence converges to a
+limit IN the space), generalizing the already-known ℚ-vs-ℝ contrast; a genuinely new result that
+$(C([a,b]),\|\cdot\|_\infty)$ (sup metric) IS complete via a uniform-convergence argument,
+contrasted against `math.fnal.completeness`'s own $L^1$-norm incompleteness result on the
+identical function set; completion (ℚ embeds densely into ℝ) and the Baire Category Theorem's
+essential completeness hypothesis, both at orientation level. 3 misconceptions independently
+classified — MC-1 SUP-METRIC-COMPLETENESS-ASSUMED-TO-FAIL-LIKE-L1-NORM (Foundational), MC-2
+COMPLETION-CONFUSED-WITH-COMPLETENESS-ITSELF (Foundational), MC-3
+BAIRE-CATEGORY-THEOREM-ASSUMED-TO-HOLD-WITHOUT-COMPLETENESS (Moderate).
+
+**Thirteenth wrong-corpus discrepancy this campaign**: the Blueprint's own Component 7 states
+`math.fnal.completeness` was "verified authored via `ls docs/curriculum/blueprints/
+math.fnal.completeness.md`" and set P76_mode to cross-link probe on that basis — checking the
+Blueprint corpus rather than the Educational Brain corpus, the same wrong-corpus pattern noted
+repeatedly this campaign (Batches 112, 124, and others). Verified via `ls
+educational-brain/concepts/mathematics/` that `math.fnal.completeness` has NO authored EB entry.
+Corrected to INDEPENDENCE mode, restating the Blueprint's own sup-metric-versus-$L^1$-norm
+transfer-probe content as self-contained rather than assuming cross-linkability.
+
+`math.prob` gains its fifteenth entry this campaign, closing `expected-value`'s remaining
+declared unlock alongside `math.prob.markov-inequality`/`math.prob.law-of-unconscious` (still
+unauthored). `math.real.completeness-metric` closes out the metric-space chain's own declared
+unlock (it has none listed, so this concept itself is now a terminal leaf in that sub-chain).
+Mathematics **649/908 → 651/908**, 257 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 651/908, 12
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Computed fresh frontier post-batch: `math.real.continuity-rigorous` still reachable (requires
+`metric-space`, authored). `math.fnal.convolution`/`math.opt.stochastic-gradient` still
+reachable. Numerous `math.prob` concepts (classical-probability, convergence-types, distribution,
+generating-function, law-of-unconscious, markov-chain, markov-inequality, normal-distribution,
+poisson-process, quantile) appear reachable — re-verify each candidate's actual `requires` fresh
+next batch, do not trust this list. Other ready concepts remain across `math.cat`, `math.cx`,
+`math.de`, `math.graph`, `math.linalg`, `math.num`, `math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `c218514` on `main`, pushed directly.
+
+### Batch 129 (2026-09-19) — fourteenth wrong-corpus discrepancy; KG data-quality anomaly noted
+
+`math.prob.mgf`: full development of `math.prob.moments`'s own orientation-level MGF preview —
+explicit computation for Exponential($\lambda$) ($M_X(t)=\lambda/(\lambda-t)$, verified against
+$E[X]=1/\lambda$ via differentiation); the derivative-extraction rule derived from power-series
+coefficient matching (geometric-series expansion giving $E[X^k]=k!/\lambda^k$), never an isolated
+fact; uniqueness and the independent-sum product rule ($M_{X+Y}=M_X\cdot M_Y$) used to identify a
+sum of $n$ iid exponentials as Gamma($n,\lambda$) via MGF algebra alone, no convolution. 3
+misconceptions independently classified — MC-1 MGF-ASSUMED-NEW-DEFINITION (Foundational), MC-2
+DERIVATIVE-RULE-ASSUMED-INDEPENDENT-FACT (High), MC-3 CONVOLUTION-ASSUMED-ONLY-RELIABLE-METHOD
+(Moderate). Zero Blueprint/KG metadata discrepancy.
+
+`math.real.baire-category`: nowhere-dense defined precisely via empty-interior-of-closure (dense
+$\mathbb Q$ contrasted against the nowhere-dense point $\{0\}$); the Baire Category Theorem used
+as a completeness-DETECTION tool, proving $(\mathbb Q,|\cdot|)$ is not complete by exhibiting it
+as a countable union of nowhere-dense singletons (a decomposition that would be forbidden by the
+theorem if $\mathbb Q$ were complete); completeness established as the theorem's essential,
+non-automatic hypothesis. 3 misconceptions independently classified — MC-1
+NOWHERE-DENSE-CONFLATED-WITH-INFORMAL-SMALLNESS (Foundational), MC-2
+BAIRE-CATEGORY-ASSUMED-TO-APPLY-WITHOUT-COMPLETENESS (Foundational), MC-3
+BAIRE-CATEGORY-TREATED-AS-PURELY-ABSTRACT (Moderate).
+
+**Fourteenth wrong-corpus discrepancy this campaign**: the Blueprint's own Component 7 states
+`math.fnal.open-mapping-theorem` was "authored (checked via `ls docs/curriculum/blueprints/`...)"
+and set P76_mode to cross-link probe on that basis — again checking the Blueprint corpus rather
+than the Educational Brain corpus. Verified via `ls educational-brain/concepts/mathematics/` that
+NO `math.fnal.*` concept has any authored EB entry whatsoever. Corrected to INDEPENDENCE mode,
+restating the Blueprint's own bounded-inverse-corollary transfer-probe content as self-contained.
+
+**KG description data-quality anomaly noted (not corrected — KG is frozen)**: the live KG's
+`description` field for `math.real.baire-category` contains an apparent stray self-correction
+left in mid-sentence: "...cannot be continuous but nowhere differentiable (wait — no: Baire
+implies such functions exist and form a residual set)." This entry's Core Understanding uses the
+mathematically correct, standard consequence (continuous-but-nowhere-differentiable functions
+form a residual/generic set), matching the Blueprint's own cleaner phrasing, not the garbled KG
+text. This is flagged for the Curriculum Production Pipeline's awareness, not something this
+authoring layer is authorized to fix in the frozen KG file itself.
+
+`math.prob` gains its sixteenth entry this campaign, closing `moments`' declared unlock.
+`math.real.baire-category` closes out the completeness-metric chain's own declared unlock (it has
+none listed, so this concept is itself a terminal leaf). Mathematics **651/908 → 653/908**, 255
+remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 653/908, 12
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Computed fresh frontier post-batch: `math.real.continuity-rigorous` still reachable. `math.fnal.
+convolution`/`math.opt.stochastic-gradient` still reachable. Numerous `math.prob` concepts
+(classical-probability, convergence-types, distribution, generating-function, law-of-unconscious,
+markov-chain, markov-inequality, normal-distribution, poisson-process, quantile) appear
+reachable — re-verify each candidate's actual `requires` fresh next batch, do not trust this list.
+Other ready concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`,
+`math.num`, `math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `52a4f83` on `main`, pushed directly.
+
+### Batch 130 (2026-09-19) — clean cross-link verification, one live KG asymmetry noted
+
+`math.prob.markov-inequality`: $P(X\ge a)\le E[X]/a$ for non-negative $X$, proven in one line
+directly from the definition of expectation; distribution-free applicability (identical bound
+regardless of shape, given only mean and threshold); tightness holding ONLY at a specific
+two-point $\{0,a\}$ distribution, contrasted against the Poisson(4) case where the bound (0.2) is
+enormously looser than the true value ($\approx0.0000084$). 3 misconceptions independently
+classified — MC-1 MARKOV-REQUIRES-SPECIFIC-DISTRIBUTION (instruction-induced), MC-2
+MARKOV-REQUIRES-X-SYMMETRIC (language contamination via unrelated Markov chains), MC-3
+MARKOV-BOUND-IS-TIGHT-FOR-ALL-DISTRIBUTIONS (overgeneralization). Zero Blueprint/KG metadata
+discrepancy; noted (not a discrepancy) that `math.prob.chebyshev`'s own `requires` field lists
+only `math.prob.variance`, not this concept, despite this concept's KG-declared `unlocks:
+math.prob.chebyshev` — a live KG unlocks/requires asymmetry between two already-verified entries.
+
+`math.real.continuity-rigorous`: the $\varepsilon$-$\delta$ definition with $\delta$ strictly
+PRODUCED after an arbitrary $\varepsilon$ is given (never chosen first), demonstrated via the
+backward-derivation proof for $f(x)=2x+1$ giving $\delta=\varepsilon/2$; the sequential criterion
+requiring EVERY convergent sequence (a step function's $x_n=1/n\to0$ alone revealing
+discontinuity); "defined nearby" versus "continuous" as genuinely separate claims, demonstrated
+via a piecewise function fully defined everywhere yet discontinuous at a seam due to disagreeing
+one-sided limits. 3 misconceptions independently classified — MC-1
+DELTA-CHOSEN-BEFORE-EPSILON (Foundational, "the single most common logical-order error across all
+of real analysis"), MC-2 ONE-SEQUENCE-CONFIRMS-SEQUENTIAL-CONTINUITY, MC-3
+DEFINED-NEARBY-MEANS-CONTINUOUS. Zero Blueprint/KG metadata discrepancy — this batch's cross-link
+check (`math.calc.continuity`) was independently RE-VERIFIED as genuinely authored via `ls`
+(unlike several wrong-corpus cases this campaign), confirming the Blueprint's own cross-link-probe
+P76 mode was correct as declared.
+
+`math.prob` gains its seventeenth entry this campaign, closing `expected-value`'s
+`markov-inequality` unlock. `math.real.continuity-rigorous` opens a new branch off the
+metric-space chain, with two of its own unlocks (`extreme-value-theorem`, `ivt`) now newly
+reachable pending their other prerequisites. Mathematics **653/908 → 655/908**, 253 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 655/908, 12
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Computed fresh frontier post-batch (not yet re-derived this entry — will be recomputed fresh at
+the start of Batch 131 per established discipline): prior batch's remaining candidates
+(`math.fnal.convolution`, `math.opt.stochastic-gradient`, numerous `math.prob` concepts, and
+concepts across `math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`, `math.num`,
+`math.stats`, `math.top`) remain to be re-verified, plus `math.real.extreme-value-theorem`/
+`math.real.ivt` now potentially reachable pending their other prerequisites.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `5b81bfc` on `main`, pushed directly.
+
+### Batch 131 (2026-09-19) — clean cross-link verification plus a reverse-direction upgrade
+
+`math.real.extreme-value-theorem`: the theorem as the missing EXISTENCE guarantee
+`math.calc.optimization`'s critical-points-and-endpoints method silently presupposes, demonstrated
+via $f(x)=x^3-3x$ on $[-2,2]$; the two-step proof (continuous image of compact is compact; a
+compact subset of $\mathbb R$ is closed and bounded, hence contains its own sup/inf), demonstrated
+via $f(x)=x^2$ on $[-1,2]$ giving $f(K)=[0,4]$; both hypotheses (compactness, continuity)
+independently necessary, via two isolated counterexamples. 3 misconceptions independently
+classified — MC-1 OPTIMIZATION-METHOD-ASSUMED-SELF-GUARANTEEING (Foundational), MC-2
+BOUNDEDNESS-ASSUMED-SUFFICIENT-FOR-ATTAINMENT (High), MC-3
+COMPACTNESS-ASSUMED-TO-SUBSUME-CONTINUITY-REQUIREMENT (Moderate). Zero Blueprint/KG metadata
+discrepancy — the cross-link (`math.calc.optimization`) independently re-verified genuinely
+authored via `ls`, confirming the Blueprint's own cross-link-probe mode correct as declared.
+
+`math.real.ivt`: IVT stated formally and its proof cited directly as `math.real.connectedness`'s
+own corollary (never re-derived), demonstrated via $\cos x$ on $[0,\pi]$; existence proven purely
+via a sign change with zero computation, demonstrated via $x^3-x-1$'s root in $(1,2)$; the
+informal "curve can't jump" picture diagnosed as circular, not itself a proof. 3 misconceptions
+independently classified — MC-1 IVT-ASSUMED-TO-NEED-SEPARATE-PROOF (Foundational), MC-2
+IVT-ASSUMED-TO-REQUIRE-COMPUTATION (High), MC-3 INFORMAL-PICTURE-ASSUMED-TO-BE-A-PROOF
+(Moderate). **Reverse-direction discrepancy found and corrected (parallel to Batches 112/122/123's
+pattern)**: the Blueprint's own Component 7 states `math.calc.ivt` was checked via `ls
+docs/curriculum/blueprints/` and confirmed NOT YET authored at write-time — correct then, but
+verified via `ls educational-brain/concepts/mathematics/` that `math.calc.ivt` IS now authored.
+Upgraded from independence mode to a GENUINE CROSS-LINK PROBE, directly connecting this concept's
+existence-versus-computation framing to `math.calc.ivt`'s own parallel sign-change technique and
+its own deferral to `math.num.root-finding` for computation.
+
+Both concepts close out declared unlocks opened by `math.real.continuity-rigorous` (Batch 130) in
+combination with `math.real.compactness` (Batch 126) and `math.real.connectedness` (Batch 127)
+respectively — both `extreme-value-theorem` and `ivt` have no further unlocks of their own listed
+in the KG, making each a terminal leaf in its sub-chain. Mathematics **655/908 → 657/908**, 251
+remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 657/908, 12
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Computed fresh frontier post-batch: `math.real.differentiability-rigorous`, `math.real.riemann-
+integral`, `math.real.uniform-continuity`, `math.real.uniform-convergence` all reachable (all
+require `math.real.continuity-rigorous`, now authored). `math.fnal.convolution`, `math.opt.
+stochastic-gradient` still reachable. Numerous `math.prob` concepts remain reachable —
+re-verify each candidate's actual `requires` fresh next batch, do not trust this list. Other
+ready concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`,
+`math.num`, `math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `4f7a475` on `main`, pushed directly.
+
+### Batch 132 (2026-09-19) — clean cross-link verification, second occurrence of a "complete the deferred proof" cross-link relationship
+
+`math.real.differentiability-rigorous`: non-differentiability rigorously proven via disagreeing
+one-sided difference quotients (|x| at 0: right-hand quotient +1, left-hand -1); differentiability
+implies continuity proven as a genuine limit-law theorem (never cited as folklore), with the
+converse's failure demonstrated by the same |x| example; the multivariable total derivative as a
+linear map, with all-partials-exist shown necessary but NOT sufficient via
+$f(x,y)=xy/(x^2+y^2)$'s both-partials-exist-yet-not-even-continuous origin behavior. 3
+misconceptions independently classified — MC-1 NON-DIFFERENTIABILITY-IMPLIES-DISCONTINUITY
+(Foundational), MC-2 PARTIALS-EXIST-IMPLIES-TOTAL-DIFFERENTIABILITY (Foundational), MC-3
+IMPLICATION-CITED-WITHOUT-PROOF (Moderate). Zero Blueprint/KG metadata discrepancy — the
+cross-link (`math.calc.derivative-definition`) independently re-verified genuinely authored via
+`ls`, confirming this is the SECOND instance in this campaign's authored portion (after
+`math.real.ivt`'s relationship with `math.calc.ivt` at Batch 131, though that one required a
+reverse-direction upgrade) of a later rigorous-analysis concept specifically completing an
+earlier calculus concept's deliberately-deferred informal claims with an actual proof.
+
+`math.real.uniform-continuity`: the quantifier-order distinction between pointwise
+($\forall\varepsilon,\exists\delta(a,\varepsilon)$) and uniform
+($\forall\varepsilon,\exists\delta(\varepsilon),\forall x,y$) continuity; $f(x)=1/x$ on $(0,1)$
+proven continuous everywhere yet NOT uniformly continuous via a rigorous sequence-pair argument
+($x_n=1/n,y_n=1/(n+1)$ closing distance while the output gap stays fixed at 1); the Heine-Cantor
+theorem (compactness upgrades continuity to uniform continuity automatically) shown to EXPLAIN,
+never contradict, the counterexample, since $(0,1)$ is not compact. 3 misconceptions independently
+classified — MC-1 UNIFORM-CONTINUITY-ASSUMED-EQUIVALENT-TO-POINTWISE (Foundational), MC-2
+POINTWISE-CONTINUITY-ASSUMED-TO-IMPLY-UNIFORM (High), MC-3
+HEINE-CANTOR-ASSUMED-TO-CONFLICT-WITH-COUNTEREXAMPLES (Moderate). Zero Blueprint/KG metadata
+discrepancy.
+
+Both concepts continue directly off `math.real.continuity-rigorous` (Batch 130).
+`differentiability-rigorous` opens two further frontier concepts (`math.real.mvt`,
+`math.real.taylor-rigorous`, both requiring additional prerequisites still unauthored).
+`uniform-continuity` has no further unlocks, making it a terminal leaf. Mathematics
+**657/908 → 659/908**, 249 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 659/908, 12
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Computed fresh frontier post-batch: `math.real.riemann-integral`, `math.real.uniform-convergence`
+still reachable (require `continuity-rigorous`, authored). `math.fnal.convolution`, `math.opt.
+stochastic-gradient` still reachable. Numerous `math.prob` concepts remain reachable — re-verify
+each candidate's actual `requires` fresh next batch, do not trust this list. Other ready concepts
+remain across `math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`, `math.num`,
+`math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `148ca8d` on `main`, pushed directly.
+
+### Batch 133 (2026-09-19) — third clean "complete the deferred proof" cross-link relationship
+
+`math.real.mvt`: the Mean Value Theorem proven as Rolle's Theorem applied to one specific
+auxiliary function ($g(x)=f(x)-f(a)-\frac{f(b)-f(a)}{b-a}(x-a)$, vanishing at both endpoints by
+construction), reusing `math.calc.mean-value-theorem`'s own $f(x)=x^2$ on $[1,4]$ example to
+re-derive $c=2.5$ rigorously rather than by informal trust; $f'=0$ shown to force EXACT (never
+approximate) constancy via a direct MVT argument. 3 misconceptions independently classified —
+MC-1 MVT-PROVEN-INDEPENDENTLY-OF-ROLLE (Foundational), MC-2
+ZERO-DERIVATIVE-ASSUMED-ONLY-APPROXIMATE-CONSTANCY (Foundational), MC-3
+RIGOROUS-AND-APPLIED-MVT-TREATED-AS-DIFFERENT-FACTS (Moderate). Zero Blueprint/KG metadata
+discrepancy — the cross-link (`math.calc.mean-value-theorem`) independently re-verified genuinely
+authored via `ls`, confirming a THIRD instance this campaign (after `math.real.ivt`/`math.calc.ivt`
+at Batch 131 and `math.real.differentiability-rigorous`/`math.calc.derivative-definition` at Batch
+132) of a rigorous-analysis concept completing an earlier calculus concept's own anticipated
+cross-link.
+
+`math.real.lipschitz-continuity`: the Lipschitz condition ($|f(x)-f(y)|\le L|x-y|$) shown directly
+computable from a derivative bound via the Mean Value Theorem (e.g. $\sin x$'s $L=1$ from
+$|\cos x|\le1$); Lipschitz $\Rightarrow$ uniformly continuous proven CONSTRUCTIVELY with an
+explicit $\delta=\varepsilon/L$ formula, never an abstract existence claim; the strict separation
+from uniform continuity demonstrated via $\sqrt x$ on $[0,1]$ (uniformly continuous by
+Heine-Cantor, yet its difference-quotient ratio near 0 grows without bound, ruling out any finite
+Lipschitz constant). 3 misconceptions independently classified — MC-1
+LIPSCHITZ-CONSTANT-ASSUMED-ABSTRACT (Foundational), MC-2
+LIPSCHITZ-TO-UNIFORM-CONTINUITY-ASSUMED-NON-CONSTRUCTIVE (High), MC-3
+UNIFORM-CONTINUITY-ASSUMED-EQUIVALENT-TO-LIPSCHITZ (High). Zero Blueprint/KG metadata discrepancy
+— `math.de.existence-uniqueness` cross-link confirmed still unauthored via `ls`, independence mode
+correctly used per the Blueprint's own self-report.
+
+`math.real.mvt` closes `differentiability-rigorous`'s remaining declared unlock and opens
+`math.real.taylor-rigorous` as a new frontier concept once its other prerequisites resolve.
+`math.real.lipschitz-continuity` closes out the uniform-continuity chain's declared unlock,
+itself a terminal leaf with none of its own. Mathematics **659/908 → 661/908**, 247 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 661/908, 12
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Computed fresh frontier post-batch (not yet re-derived this entry — will be recomputed fresh at
+the start of Batch 134 per established discipline): `math.real.riemann-integral`, `math.real.
+uniform-convergence` still reachable from the continuity-rigorous chain. `math.fnal.convolution`,
+`math.opt.stochastic-gradient` still reachable. Numerous `math.prob` concepts remain reachable.
+Other ready concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`,
+`math.num`, `math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `f8c6a8d` on `main`, pushed directly.
+
+### Batch 134 (2026-09-19) — stale metadata discrepancy plus a fourth clean cross-link relationship
+
+`math.real.taylor-rigorous`: Taylor's theorem with Lagrange remainder making the informal
+"truncation error" from `math.calc.taylor-series` an EXACT quantity, demonstrated via $e^x$'s
+exact remainder accounting at $x=1,n=2$; the Lagrange remainder shown to literally CONTAIN
+`math.real.mvt`'s own conclusion as the $n=0$ special case via direct substitution, never merely
+analogous to it; the proof's reuse of Rolle's-Theorem machinery repeatedly (rather than a new
+technique per order) sketched at orientation level via the $n=1$ auxiliary-function construction.
+3 misconceptions independently classified — MC-1 REMAINDER-ASSUMED-APPROXIMATE-BOUND
+(Foundational), MC-2 LAGRANGE-REMAINDER-ASSUMED-MERELY-ANALOGOUS-TO-MVT (High), MC-3
+EACH-ORDER-ASSUMED-TO-NEED-NEW-PROOF-TECHNIQUE (Moderate). **Stale Blueprint/KG metadata
+discrepancy found and corrected**: the Blueprint's own Component 0 states bloom=analyze,
+mastery_threshold=0.75 (MAMR 4/5), estimated_hours=6 — the live KG shows bloom=apply,
+mastery_threshold=0.85 (MAMR ⌈0.85×5⌉=5/5), estimated_hours=5. Live KG values used throughout, per
+established campaign discipline (this stale-metadata category last occurred at Batch 111's
+`convergence-sequences`, per the campaign's ongoing four-discrepancy-category taxonomy). The
+cross-link (`math.calc.taylor-series`) independently re-verified genuinely authored via `ls`,
+confirming a FOURTH instance this campaign (after Batches 131/132/133) of a rigorous-analysis
+concept completing an earlier calculus concept's own anticipated cross-link.
+
+`math.real.fixed-point-theorem`: the Banach contraction condition ($d(Tx,Ty)\le k\cdot d(x,y)$,
+$k<1$ STRICTLY) shown as `math.real.lipschitz-continuity`'s own condition sharpened, contrasting
+$T(x)=x/2+1$ ($k=\frac12$, a genuine contraction) against $S(x)=2x+1$ ($L=2$, Lipschitz but not a
+contraction); the iterated-sequence-is-Cauchy-plus-completeness-secures-convergence proof,
+demonstrated numerically converging to $x^*=2$; completeness's necessity proven concretely via a
+contraction on $\mathbb Q\cap(0,2)$ whose true fixed point $\sqrt2$ is missing from that
+incomplete space. 3 misconceptions independently classified — MC-1
+LIPSCHITZ-ASSUMED-AUTOMATICALLY-CONTRACTION (Foundational), MC-2
+FIXED-POINT-ASSUMED-STARTING-POINT-DEPENDENT (High), MC-3
+COMPLETENESS-ASSUMED-UNNECESSARY-FOR-FIXED-POINT (High). Zero Blueprint/KG metadata discrepancy —
+`math.de.existence-uniqueness` cross-link confirmed still unauthored via `ls`, independence mode
+correctly used per the Blueprint's own self-report (shared cross-link target with
+`lipschitz-continuity` from Batch 133, still unauthored).
+
+`math.real.taylor-rigorous` closes `mvt`'s remaining declared unlock — a terminal leaf with no
+further unlocks of its own. `math.real.fixed-point-theorem` closes the shared declared unlock of
+both `lipschitz-continuity` (Batch 133) and `completeness-metric` (Batch 128), also a terminal
+leaf. Mathematics **661/908 → 663/908**, 245 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 663/908, 12
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Computed fresh frontier post-batch (not yet re-derived this entry — will be recomputed fresh at
+the start of Batch 135 per established discipline): `math.real.implicit-function-theorem`,
+`math.real.inverse-function-theorem` reachable from the differentiability-rigorous chain (both
+also require `math.linalg.matrix-inverse`, status to re-verify). `math.real.riemann-integral`,
+`math.real.uniform-convergence` remain reachable from the continuity-rigorous chain. Numerous
+`math.prob` concepts remain reachable. Other ready concepts remain across `math.cat`, `math.cx`,
+`math.de`, `math.graph`, `math.linalg`, `math.num`, `math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `e62a0e6` on `main`, pushed directly.
+
+### Batch 135 (2026-09-19) — fifth reverse-direction discrepancy
+
+`math.real.riemann-integral`: partitions and Darboux upper/lower sums, demonstrated via $x^2$ on
+$[0,2]$'s coarse-to-refined bound narrowing toward $8/3$; rigorous Riemann integrability
+($\inf_PU=\sup_PL$) as the precise version of `math.calc.definite-integral`'s informal Riemann-sum
+limit; boundedness proven necessary but NOT sufficient via the Dirichlet function, which is
+perfectly bounded yet has $U(f,P)=1$, $L(f,P)=0$ for EVERY partition, at every refinement level. 3
+misconceptions independently classified — MC-1
+BOUNDEDNESS-ASSUMED-SUFFICIENT-FOR-INTEGRABILITY (Foundational), MC-2
+UPPER-LOWER-SUMS-CONFUSED-WITH-SUP-INF-OVER-ALL-PARTITIONS (Moderate), MC-3
+FINER-PARTITION-ASSUMED-TO-ALWAYS-CLOSE-THE-GAP (Moderate). **Reverse-direction discrepancy found
+and corrected (fifth occurrence this campaign, after Batches 112/122/123/131)**: the Blueprint's
+own Component 7 states `math.meas.lebesgue-integral` was checked via `ls docs/curriculum/
+blueprints/` and confirmed NOT YET authored at write-time — correct then, but verified via `ls
+educational-brain/concepts/mathematics/` that it IS now authored. Upgraded from independence mode
+to a GENUINE CROSS-LINK PROBE, connecting this concept's Dirichlet-function non-integrability
+proof directly to that concept's own demonstration that Lebesgue integration handles the identical
+function trivially ($\int f\,d\mu=0$, since the rationals have measure zero) — a genuine extension,
+never mere equivalence.
+
+`math.real.uniform-convergence`: uniform versus pointwise convergence distinguished by quantifier
+order (one $N$ for every point at once versus a per-point $N$), demonstrated via $x^n$ on $[0,1)$'s
+persistent supremum distance of 1; the continuity-preservation theorem's genuine necessity of
+uniform (not merely pointwise) convergence, demonstrated via $x^n$'s discontinuous pointwise limit
+on $[0,1]$; termwise integration needing only uniform convergence of $f_n$ versus termwise
+differentiation needing the SEPARATE uniform convergence of $f_n'$, demonstrated via
+$\sin(nx)/\sqrt n\to0$ uniformly yet its derivatives diverging. 3 misconceptions independently
+classified — MC-1 POINTWISE-CONVERGENCE-CONFLATED-WITH-UNIFORM (Foundational), MC-2
+POINTWISE-LIMIT-OF-CONTINUOUS-ASSUMED-CONTINUOUS (Foundational), MC-3
+UNIFORM-CONVERGENCE-OF-FUNCTIONS-ASSUMED-SUFFICIENT-FOR-TERMWISE-DIFFERENTIATION (Moderate). Zero
+Blueprint/KG metadata discrepancy — `math.de.fourier-convergence` cross-link confirmed still
+unauthored via `ls`, independence mode correctly used per the Blueprint's own self-report.
+
+`math.real.riemann-integral` opens two further frontier concepts (`math.real.riemann-
+integrability`, `math.real.ftc-rigorous`, both terminal single-prerequisite unlocks now
+reachable). `math.real.uniform-convergence` opens `math.real.weierstrass-approximation` as a new
+frontier concept. Mathematics **663/908 → 665/908**, 243 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 665/908, 12
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Computed fresh frontier post-batch (not yet re-derived this entry — will be recomputed fresh at
+the start of Batch 136 per established discipline): `math.real.riemann-integrability`,
+`math.real.ftc-rigorous`, `math.real.weierstrass-approximation` newly reachable. `math.real.
+implicit-function-theorem`/`math.real.inverse-function-theorem` remain reachable from the
+differentiability-rigorous chain. Numerous `math.prob` concepts remain reachable. Other ready
+concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`, `math.num`,
+`math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `17be533` on `main`, pushed directly.
+
+### Batch 136 (2026-09-19) — two clean cross-link verifications, closing riemann-integral's unlocks
+
+`math.real.ftc-rigorous`: Part 1 shown to genuinely generalize `math.calc.ftc-part1` in two ways
+(Lipschitz continuity of $F$ from mere integrability; differentiability $F'(x_0)=f(x_0)$ at any
+individual continuity point, even amid other discontinuities), demonstrated via $f(t)=t$
+($t\ne0$), $f(0)=5$; the Lipschitz bound proven from boundedness ALONE while differentiability
+needs continuity AT the point, demonstrated via $\sin t$'s separate verifications; Part 2 proven
+via MVT's telescoping sum with $F$ given (not constructed), shown logically OPPOSITE to Part 1's
+direction. 3 misconceptions independently classified — MC-1
+RIGOROUS-FTC1-ASSUMED-MERE-RESTATEMENT (Foundational), MC-2
+LIPSCHITZ-CONCLUSION-CONFLATED-WITH-DIFFERENTIABILITY-HYPOTHESIS (High), MC-3
+PART-1-AND-PART-2-ASSUMED-SAME-DIRECTION (High). Zero Blueprint/KG metadata discrepancy —
+cross-link (`math.calc.ftc-part1`) independently re-verified genuinely authored.
+
+`math.real.riemann-integrability`: the Lebesgue criterion (bounded AND discontinuity-set-measure-
+zero) shown as the EXACT if-and-only-if dividing line resolving both of `math.real.riemann-
+integral`'s one-directional gaps at once, demonstrated via a three-function table including the
+step function $\lfloor x\rfloor$ (measure-zero discontinuity set, integrable despite not being
+continuous everywhere); the Dirichlet function re-diagnosed independently (discontinuity set = all
+of $[0,1]$, measure 1, positive) confirming, via a genuinely different mechanism, the same
+non-integrability already established via Darboux sums; a countably-discontinuous-yet-integrable
+function contrasted directly against the Dirichlet function, confirming measure (never
+cardinality) decides integrability. 3 misconceptions independently classified — MC-1
+LEBESGUE-CRITERION-ASSUMED-MERELY-SUFFICIENT (Foundational), MC-2
+LEBESGUE-CRITERION-DIRICHLET-PREDICTION-ASSUMED-COINCIDENTAL (High), MC-3
+INFINITE-DISCONTINUITIES-ASSUMED-TO-RULE-OUT-INTEGRABILITY (High). Zero Blueprint/KG metadata
+discrepancy — cross-link (`math.meas.measure-zero`) independently re-verified genuinely authored.
+
+Both concepts close out `math.real.riemann-integral`'s two declared unlocks (Batch 135), each a
+terminal leaf with no further unlocks of its own. Mathematics **665/908 → 667/908**, 241
+remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 667/908, 12
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Computed fresh frontier post-batch (not yet re-derived this entry — will be recomputed fresh at
+the start of Batch 137 per established discipline): `math.real.weierstrass-approximation`,
+`math.real.implicit-function-theorem`, `math.real.inverse-function-theorem` remain candidates.
+Numerous `math.prob` concepts remain reachable. Other ready concepts remain across `math.cat`,
+`math.cx`, `math.de`, `math.graph`, `math.linalg`, `math.num`, `math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `8e20367` on `main`, pushed directly.
+
+### Batch 137 (2026-09-19) — stale metadata plus an unverified older-Blueprint cross-link, first math.prob diversification since Batch 134
+
+`math.real.weierstrass-approximation`: uniform polynomial approximation of every continuous
+function on $[a,b]$, demonstrated via $|x|$'s guarantee holding even at its non-smooth corner;
+Bernstein polynomials as an EXPLICIT computable construction (not abstract existence), demonstrated
+via $B_2(x^2,x)=0.5x+0.5x^2$ computed by hand; Stone-Weierstrass's compactness/point-separation
+generalization at orientation level via $S^1$ and trigonometric polynomials. 3 misconceptions
+independently classified — MC-1 UNIFORM-APPROXIMATION-ASSUMED-SAME-AS-POINTWISE (Foundational),
+MC-2 WEIERSTRASS-PROOF-ASSUMED-PURELY-ABSTRACT (High), MC-3
+STONE-WEIERSTRASS-ASSUMED-UNCONDITIONAL (Moderate). **Stale Blueprint/KG metadata discrepancy
+found and corrected**: the Blueprint's own Component 0 states bloom=analyze,
+mastery_threshold=0.6 (MAMR 3/5), estimated_hours=8 — the live KG shows bloom=understand,
+mastery_threshold=0.8 (MAMR ⌈0.8×5⌉=4/5), estimated_hours=5. Live KG values used throughout (this
+category last occurred at Batch 134's `taylor-rigorous`). `math.fnal.dense-subspace` cross-link
+confirmed still unauthored via `ls`, independence mode correctly used.
+
+`math.prob.quantile`: the quantile function $Q(p)=\inf\{x:F(x)\ge p\}$ as $F$'s inverse-direction
+counterpart, demonstrated via Exponential's $Q(p)=-\ln(1-p)/\lambda$; median-equals-mean shown to
+hold only for symmetric distributions (Uniform), genuinely failing for skewed ones (Exponential's
+mean $1/\lambda$ exceeding its median $\ln2/\lambda$); the infimum definition's direct
+applicability to discrete distributions, demonstrated via Bernoulli(0.3)'s median computed without
+any continuity assumption. 3 misconceptions independently classified — MC-1
+QUANTILE-IS-THE-CDF (language contamination), MC-2 MEDIAN-ALWAYS-EQUALS-MEAN (instruction-
+induced, from the Normal distribution's special-case symmetry), MC-3
+QUANTILE-IS-ONLY-DEFINED-FOR-CONTINUOUS-DISTRIBUTIONS (instruction-induced). **Cross-link
+discrepancy found and corrected (an unverified claim from an older-style Blueprint predating the
+corpus's `ls`-verification discipline)**: the Blueprint's Component 8 declares "Cross-link mode"
+against `math.stats.percentile` without documenting any check of whether that target is actually
+authored. Verified via `ls educational-brain/concepts/mathematics/` that it has NO authored EB
+entry. Corrected to INDEPENDENCE mode, restating the Blueprint's own sample-quantile/Q-Q-plot/
+Value-at-Risk transfer content as self-contained.
+
+This batch marks the first diversification into `math.prob` since Batch 134 — the campaign has
+been heavily concentrated in `math.real`'s continuity-rigorous-derived chains for many
+consecutive batches (126-136), and `math.prob.quantile` closes `math.prob.cdf`'s remaining
+declared unlock. `math.real.weierstrass-approximation` closes `math.real.uniform-convergence`'s
+declared unlock, a terminal leaf. Mathematics **667/908 → 669/908**, 239 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 669/908, 12
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Computed fresh frontier post-batch (not yet re-derived this entry — will be recomputed fresh at
+the start of Batch 138 per established discipline): `math.real.implicit-function-theorem`,
+`math.real.inverse-function-theorem` remain the last two reachable `math.real` concepts. Numerous
+`math.prob` concepts remain reachable. Other ready concepts remain across `math.cat`, `math.cx`,
+`math.de`, `math.graph`, `math.linalg`, `math.num`, `math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `f894963` on `main`, pushed directly.
+
+### Batch 138 (2026-09-19) — third stale-metadata discrepancy this campaign
+
+`math.prob.law-of-unconscious`: LOTUS ($E[g(X)]=\sum g(x)f_X(x)$ or $\int g(x)f_X(x)\,dx$)
+demonstrated skipping the distribution of $Y=g(X)$ entirely via the die example's two-route
+comparison; $E[g(X)]\ne g(E[X])$ in general, demonstrated via Exponential's genuine
+$E[X^2]=2/\lambda^2$ versus $(E[X])^2=1/\lambda^2$ gap; LOTUS's applicability to any measurable
+$g$, never requiring monotonicity unlike the change-of-variable theorem for densities. 3
+misconceptions independently classified — MC-1 E[g(X)]=g(E[X]) (overgeneralization from
+linearity), MC-2 LOTUS-REQUIRES-KNOWING-DISTRIBUTION-OF-Y (instruction-induced), MC-3
+LOTUS-ONLY-WORKS-FOR-MONOTONE-g (instruction-induced, conflated with the change-of-variable
+theorem). Zero Blueprint/KG metadata discrepancy.
+
+`math.real.implicit-function-theorem`: invertibility of $\partial F/\partial y$ as the essential,
+non-automatic hypothesis certifying $y$ is genuinely a function of $x$, demonstrated via the unit
+circle's valid point $(0,1)$ versus its failing vertical-tangent point $(1,0)$; the theorem shown
+to supply the justification `math.calc.implicit-differentiation`'s procedure has always silently
+assumed, via the same algebra producing a meaningless formula at the failing point; the same
+invertibility condition shown to yield an explicit derivative formula
+$Dy=-[\partial F/\partial y]^{-1}[\partial F/\partial x]$, matching the ad hoc chain-rule result
+exactly. 3 misconceptions independently classified — MC-1 Y-ASSUMED-ALWAYS-A-FUNCTION-OF-X
+(Foundational), MC-2 IMPLICIT-DIFFERENTIATION-ASSUMED-ALWAYS-VALID (High), MC-3
+THEOREM-ASSUMED-EXISTENCE-ONLY (Moderate). **Third stale-metadata discrepancy this campaign**
+(after Batches 134's `taylor-rigorous` and 137's `weierstrass-approximation`): the Blueprint's own
+Component 0 states bloom=analyze, mastery_threshold=0.65 (MAMR 4/5), estimated_hours=8 — the live
+KG shows bloom=apply, mastery_threshold=0.75 (MAMR ⌈0.75×5⌉=4/5, numerically unchanged),
+estimated_hours=6. Live KG values used throughout. The cross-link
+(`math.calc.implicit-differentiation`) independently re-verified genuinely authored.
+
+`math.prob.law-of-unconscious` closes `expected-value`'s remaining declared unlock.
+`math.real.implicit-function-theorem` is a terminal leaf off the differentiability-rigorous chain,
+leaving only `math.real.inverse-function-theorem` as the last reachable `math.real` frontier
+concept. Mathematics **669/908 → 671/908**, 237 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 671/908, 12
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Computed fresh frontier post-batch (not yet re-derived this entry — will be recomputed fresh at
+the start of Batch 139 per established discipline): `math.real.inverse-function-theorem` remains
+the last `math.real` frontier concept. Numerous `math.prob` concepts remain reachable. Other
+ready concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`,
+`math.num`, `math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `be23c5f` on `main`, pushed directly.
+
+### Batch 139 (2026-09-19) — MILESTONE: math.real is now EB-certified (13th certified domain)
+
+`math.real.inverse-function-theorem`: the theorem stated as the direct multivariable
+generalization of the 1D inverse-derivative rule ("invertible" becomes "nonzero determinant,"
+"reciprocal" becomes "matrix inverse"), demonstrated via $f(x,y)=(x+y^2,y+x^2)$'s full Jacobian
+computation and inversion at $(1,1)$; local invertibility shown to NOT sum to global
+invertibility via $f(x,y)=(e^x\cos y,e^x\sin y)$'s everywhere-invertible-yet-$2\pi$-periodic
+counterexample. 3 misconceptions independently classified — MC-1
+LOCAL-INVERTIBILITY-EVERYWHERE-CONFLATED-WITH-GLOBAL (Foundational), MC-2
+JACOBIAN-INVERTIBILITY-CONFUSED-WITH-NONZERO-ENTRIES (Foundational), MC-3
+INVERSE-DERIVATIVE-FORMULA-MISAPPLIED-AS-ENTRYWISE-RECIPROCAL (Moderate). Zero Blueprint/KG
+metadata discrepancy.
+
+`math.prob.normal-distribution`: $N(\mu,\sigma^2)$'s second parameter as the VARIANCE (requiring a
+square root before use in the Z-formula), demonstrated via $N(10,4)$'s $\sigma=2$; standardization
+$Z=(X-\mu)/\sigma$ shown never reversible via a below-the-mean worked example; symmetry giving
+$P(X>\mu)=0.5$ for any Normal regardless of $\sigma$, and the 68-95-99.7 empirical rule for fast
+estimation. 3 misconceptions independently classified — MC-1 SIGMA-VS-SIGMA-SQUARED
+(Foundational, arising directly from the notation), MC-2 STANDARDIZATION-SIGN-ERROR, MC-3
+SYMMETRY-FORGOTTEN. Zero Blueprint/KG metadata discrepancy; `math.stats.normal-distribution`
+cross-link independently confirmed unauthored via `ls`, doubly justifying the Blueprint's own
+independence-mode declaration (made on "not Tier-1" grounds).
+
+**MILESTONE: `math.real` is now EB-certified** — `scripts/math/state.ts` reports 13 EB-certified
+domains (math.found, math.calc, math.geom, math.alg, math.arith, math.abst, math.nt, math.disc,
+**math.real**, math.func, math.trig, math.seq, math.meas), up from 12. This closes out the
+entire real-analysis rigor campaign launched at Batch 124 (`math.real.metric-space`, opening the
+domain's independent entry point) through Batch 139 — every concept in the KG's `math.real`
+domain (metric spaces, open/closed sets, compactness, connectedness, continuity, differentiability,
+completeness, Baire category, MVT, Taylor's theorem, fixed-point theorem, Riemann integration,
+uniform convergence, Weierstrass approximation, implicit/inverse function theorems) now has an
+authored Educational Brain entry.
+
+Mathematics **671/908 → 673/908**, 235 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 673/908, 13
+EB-certified domains (math.real newly certified). `npx tsc --noEmit` → clean (exit 0). Targeted
+EB/curriculum tests (7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo
+suite not re-attempted this batch, consistent with the established precedent from Batches
+109-110.
+
+Computed fresh frontier post-batch (not yet re-derived this entry — will be recomputed fresh at
+the start of Batch 140 per established discipline): no `math.real` concepts remain reachable —
+future batches will need to derive the frontier fresh across other domains (`math.prob`,
+`math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`, `math.num`, `math.stats`,
+`math.top`).
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `e96f697` on `main`, pushed directly.
+
+### Batch 140 (2026-09-19) — first batch entirely post-math.real certification
+
+`math.prob.clt`: the Central Limit Theorem's genuinely correct subject — the SAMPLING
+DISTRIBUTION of the sample mean, never the fixed population itself — demonstrated via a skewed
+insurance-claims population whose sample-mean histograms bell-shape with growing $n$ while the
+population never changes; the already-normal-population exception (exact normality at every $n$,
+including $n=1$, needing no CLT approximation); and the single-observation-versus-sample-mean
+distinction (CLT concerns aggregation, never a lone draw). 3 misconceptions independently
+classified — MC-1 CLT-MEANS-POPULATION-BECOMES-NORMAL (Foundational, the root confusion this
+concept exists to prevent), MC-2 LARGE-N-ALWAYS-REQUIRED, MC-3
+CLT-APPLIES-TO-SINGLE-OBSERVATION. Zero Blueprint/KG metadata discrepancy —
+`math.stats.normal-approximation` cross-link confirmed still unauthored via `ls`, independence
+mode correctly used per the Blueprint's own self-report.
+
+`math.prob.standard-normal`: standardization $Z=(X-\mu)/\sigma$ as the mandatory bridge from any
+Normal to the universal $\Phi$/Z-table, demonstrated via $N(70,100)$'s $P(X\le85)=\Phi(1.5)$;
+the CDF's genuine symmetry $\Phi(-z)=1-\Phi(z)$ (never $\Phi(-z)=\Phi(z)$, which only holds for
+the density $\varphi$), derived directly and verified against $P(Z<-1)\approx0.159$; independent
+normals summing with VARIANCES adding, never standard deviations. 3 misconceptions independently
+classified — MC-1 ALL-NORMAL-DISTRIBUTIONS-ARE-STANDARD (instruction-induced), MC-2
+SYMMETRY-MEANS-Φ(−z)=Φ(z) (overgeneralization from the density's genuine symmetry), MC-3
+STANDARD-DEVIATION-IS-THE-STANDARDISED-SCORE (language contamination). Zero Blueprint/KG metadata
+discrepancy.
+
+This is the first batch entirely conducted after the `math.real` EB-certification milestone
+(Batch 139) — both concepts continue the `math.prob.normal-distribution` chain opened at Batch
+139, with `clt` closing that concept's declared unlock. Mathematics **673/908 → 675/908**, 233
+remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 675/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Computed fresh frontier post-batch (not yet re-derived this entry — will be recomputed fresh at
+the start of Batch 141 per established discipline): numerous `math.prob` concepts remain
+reachable (classical-probability, convergence-types, distribution, generating-function, markov-
+chain, poisson-process). Other ready concepts remain across `math.cat`, `math.cx`, `math.de`,
+`math.graph`, `math.linalg`, `math.num`, `math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `710ea13` on `main`, pushed directly.
+
+### Batch 141 (2026-09-19)
+
+`math.prob.classical-probability`: $P(A)=|A|/|\Omega|$ with equally-likely-ness as a PRECONDITION
+to verify (never a consequence of listing outcomes), demonstrated via a biased coin's $P(H)=1/2$
+formula output directly contradicting its stated 70% bias; "favorable" defined as strict set
+membership, never personal preference, via the "at least 3" die-roll event; the sample space's
+mutual-exclusivity/exhaustiveness requirement, demonstrated via the two-dice sum-of-7 problem's
+wrong 11-outcome versus correct 36-outcome sample space. 3 misconceptions independently classified
+— MC-1 CLASSICAL-PROBABILITY-WORKS-FOR-ANY-EXPERIMENT, MC-2 FAVORABLE-MEANS-OUTCOMES-I-WANT,
+MC-3 MORE-OUTCOMES-LISTED-MEANS-MORE-ACCURATE. Zero Blueprint/KG metadata discrepancy (an
+older-format Blueprint, Section 0-15 structure rather than the Component 0-10 convention, but its
+declared fields matched the live KG exactly).
+
+`math.prob.markov-chain`: the Markov property as a sufficiency claim about the CURRENT state
+alone (never mere recency), demonstrated via a weather model (genuinely Markov) contrasted
+against an exam-score-average sequence (not Markov under a single-score state); multi-step
+transition probabilities requiring genuine matrix powers $P^n$, never linear scaling,
+demonstrated via a 2-state weather chain's correct two-step probability 0.28 versus the naive
+0.4; long-run stationary-distribution behavior previewed at orientation level, showing the same
+limit $(2/3,1/3)$ reached from either starting state. 3 misconceptions independently classified —
+MC-1 RECENCY-MISTAKEN-FOR-MARKOV (Foundational), MC-2 MULTI-STEP-PROBABILITY-LINEARLY-SCALED
+(High), MC-3 LONG-RUN-BEHAVIOR-ASSUMED-START-DEPENDENT (Moderate). Zero Blueprint/KG metadata
+discrepancy.
+
+Both concepts continue diversifying into `math.prob` following the `math.real` certification
+milestone. Mathematics **675/908 → 677/908**, 231 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 677/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Computed fresh frontier post-batch (not yet re-derived this entry — will be recomputed fresh at
+the start of Batch 142 per established discipline): numerous `math.prob` concepts remain
+reachable (convergence-types, distribution, generating-function, poisson-process). Other ready
+concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`, `math.num`,
+`math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `9f5d374` on `main`, pushed directly.
+
+### Batch 142 (2026-09-19) — two older-format Blueprint metadata corrections
+
+`math.prob.combinatorial-probability`: "does order matter?" as the first, decisive counting
+question, demonstrated via the committee ($C(5,3)=10$) versus officer-selection ($P(5,3)=60$)
+contrast on identical $n,r$; $|\Omega|$ and $|A|$ requiring the SAME counting model consistently,
+demonstrated via the all-hearts flush probability; complementary counting as often the CLEANER
+route (never merely "harder"), demonstrated via the birthday-matching problem's clean complement
+computation. 3 misconceptions independently classified — MC-1
+ORDER-ALWAYS-MATTERS-WHEN-PICKING-ITEMS, MC-2
+|Ω|-AND-|A|-COUNTED-SEPARATELY-WITHOUT-CONSISTENCY-CHECK, MC-3
+COMPLEMENTARY-COUNTING-IS-JUST-HARDER. **Cross-link mode established**: the Blueprint (an older,
+Section-based format) declared no cross_links field or P76 mechanism at all; the live KG lists
+`math.disc.combinatorics` as a formal cross-link, confirmed genuinely authored via `ls` — treated
+as a genuine cross-link probe here, connecting this concept's permutation/combination toolkit to
+that concept's bijective/recursive counting techniques.
+
+`math.prob.transition-matrix`: $P_{ij}$ as a strictly CONDITIONAL probability (transitioning FROM
+$i$ TO $j$, never a marginal "being in $j$"), demonstrated via the weather chain's row-sum-to-1
+verification; $n$-step probabilities requiring genuine matrix exponentiation via
+Chapman-Kolmogorov, demonstrated via the 2-state chain's correct $P^{(2)}_{12}=0.56$; irreducibility
+as EVENTUAL reachability (never requiring $P_{ij}>0$ in exactly one step), demonstrated via an
+alternating 2-state chain's irreducibility despite zero diagonal entries and a 3-state chain's
+2-step reachability despite a zero 1-step entry. 3 misconceptions independently classified — MC-1
+P-IJ-IS-THE-PROBABILITY-OF-BEING-IN-STATE-J (language contamination), MC-2
+N-STEP-PROBABILITY-IS-N-TIMES-ONE-STEP (overgeneralization), MC-3
+IRREDUCIBLE-MEANS-ALL-TRANSITION-PROBABILITIES-ARE-POSITIVE (overgeneralization). **Incomplete
+Blueprint metadata found and corrected**: the Blueprint's own "Prerequisites" field lists only
+`math.prob.markov-chain`, omitting `math.linalg.matrix` — the live KG's complete two-prerequisite
+`requires` list used as authoritative.
+
+Both concepts close their respective declared unlocks (`math.prob.classical-probability`'s and
+`math.prob.markov-chain`'s). Mathematics **677/908 → 679/908**, 229 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 679/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Computed fresh frontier post-batch (not yet re-derived this entry — will be recomputed fresh at
+the start of Batch 143 per established discipline): numerous `math.prob` concepts remain
+reachable (convergence-types, distribution, generating-function, poisson-process). Other ready
+concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`, `math.num`,
+`math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `74fb318` on `main`, pushed directly.
+
+### Batch 143 (2026-09-19) — second consecutive incomplete-Prerequisites Blueprint correction
+
+`math.prob.stationary-distribution`: $\pi$ as the LONG-RUN distribution a chain converges to
+(never its initial distribution), demonstrated via a weather chain converging from $[1,0,0]$
+toward $\pi$; detailed balance ($\pi_iP_{ij}=\pi_jP_{ji}$) proven SUFFICIENT but NOT necessary for
+stationarity, demonstrated via a 3-cycle chain's $\pi=[1/3,1/3,1/3]$ satisfying stationarity while
+violating detailed balance (a genuine one-way probability current); uniqueness requiring
+irreducibility and convergence additionally requiring ergodicity, each a separate hypothesis to
+verify. 3 misconceptions independently classified — MC-1
+STATIONARY-DISTRIBUTION-IS-THE-INITIAL-DISTRIBUTION (language contamination), MC-2
+DETAILED-BALANCE-IS-REQUIRED-FOR-STATIONARITY (instruction-induced), MC-3
+EVERY-CHAIN-HAS-A-UNIQUE-STATIONARY-DISTRIBUTION (instruction-induced). Zero Blueprint/KG
+metadata discrepancy.
+
+`math.prob.poisson-process`: interarrival times as genuinely RANDOM and exponential (never
+regularly spaced), demonstrated via the mental simulation of clustering/gapping
+$\text{Exp}(\lambda)$ draws; superposition working for ANY rates (never requiring
+$\lambda_1=\lambda_2$), verified via the MGF closure argument; thinning producing a genuinely NEW
+Poisson process with its OWN exponential interarrival times at the reduced rate $\lambda p$
+(never the original $\lambda$), demonstrated via the bus-route example. 3 misconceptions
+independently classified — MC-1 POISSON-PROCESS-REQUIRES-EQUALLY-SPACED-ARRIVALS (language
+contamination), MC-2 SUPERPOSITION-REQUIRES-SAME-RATE (instruction-induced), MC-3
+THINNING-CHANGES-THE-INTERARRIVAL-DISTRIBUTION (overgeneralization). **Second consecutive
+incomplete-Prerequisites Blueprint correction (after Batch 142's `transition-matrix`)**: the
+Blueprint's own "Prerequisites" field lists only `math.prob.discrete-distributions`, omitting
+`math.prob.continuous-distributions` and `math.prob.independence` — the live KG's complete
+three-prerequisite list used as authoritative.
+
+`stationary-distribution` closes `transition-matrix`'s declared unlock and opens
+`math.prob.ergodicity` as a new frontier concept. `poisson-process` is a terminal leaf with no
+unlocks of its own. Mathematics **679/908 → 681/908**, 227 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 681/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Computed fresh frontier post-batch (not yet re-derived this entry — will be recomputed fresh at
+the start of Batch 144 per established discipline): `math.prob.ergodicity` newly reachable.
+Numerous other `math.prob` concepts remain reachable (convergence-types, distribution,
+generating-function). Other ready concepts remain across `math.cat`, `math.cx`, `math.de`,
+`math.graph`, `math.linalg`, `math.num`, `math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `70d71c1` on `main`, pushed directly.
+
+## Batch 144 (2026-09-19)
+
+Authored `math.prob.distribution` and `math.prob.ergodicity`, both requiring only already-
+authored/certified prerequisites (`math.prob.random-variable`, `math.prob.cdf`; and
+`math.prob.stationary-distribution` respectively).
+
+`distribution`: the distribution of a random variable as its COMPLETE probabilistic description —
+CDF, PMF (discrete), and PDF (continuous) as equivalent, interchangeable full specifications,
+demonstrated via the die-roll PMF-table/CDF-step-graph equivalence; a shared summary statistic
+(mean) as NEVER implying a shared distribution, via the die-roll-versus-two-point-variable
+contrast (both $E=3.5$, but $P(3\le\cdot\le4)$ diverges: $2/6$ vs. $0$); named distributions
+(Binomial, Uniform, Normal) as reusable models valid only once their defining assumptions are
+verified, via the quality-control Binomial-verification example. 3 misconceptions independently
+classified by severity per the Blueprint's own declared scale — MC-1 SHARED-SUMMARY-STATISTIC-
+ASSUMED-TO-IMPLY-SHARED-DISTRIBUTION (Foundational), MC-2 NAMED-DISTRIBUTION-APPLIED-WITHOUT-
+VERIFYING-ASSUMPTIONS (Foundational), MC-3 CDF-PMF-PDF-TREATED-AS-DIFFERENT-INFORMATION
+(Moderate). Zero Blueprint/KG discrepancy.
+
+`ergodicity`: the ergodic theorem — time average $(1/n)\sum f(X_k)$ converging almost surely to
+the space average $\sum_i\pi_if(i)$ for irreducible+aperiodic+positive-recurrent chains;
+ergodicity meaning time averages track the SPECIFIC (often non-uniform) $\pi$, never equal
+visitation, via the $\pi=(0.75,0.25)$ 2-state example; ergodicity applying fully to FINITE chains,
+never requiring an infinite/continuous state space; and the ergodic theorem's almost-sure time-
+average convergence as DISTINCT from distributional convergence $P^n(x,\cdot)\to\pi$ (which
+additionally needs aperiodicity), via the 10-cycle's converging time-average-but-oscillating-
+distribution counterexample. 3 misconceptions independently classified by Blueprint-declared
+birth type — MC-1 ERGODIC-MEANS-THE-CHAIN-VISITS-ALL-STATES-EQUALLY (language contamination),
+MC-2 ERGODICITY-REQUIRES-AN-INFINITE-STATE-SPACE (instruction-induced), MC-3 TIME-AVERAGE-
+CONVERGENCE-MEANS-DISTRIBUTION-CONVERGENCE (overgeneralization). Zero Blueprint/KG discrepancy.
+`ergodicity` closes `stationary-distribution`'s declared unlock — no math.prob concepts remain
+newly opened by this batch beyond the general frontier below.
+
+Mathematics **681/908 → 683/908**, 225 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 683/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Fresh frontier to be recomputed at the start of Batch 145 per established discipline; remaining
+`math.prob` concepts (convergence-types, generating-function) and other ready concepts across
+`math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`, `math.num`, `math.stats`, `math.top`
+still reachable.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `22cfbfd` on `main`, pushed directly.
+
+## Batch 145 (2026-09-19)
+
+Authored `math.prob.convergence-types` and `math.prob.generating-function`, closing out the
+`math.prob` domain's remaining reachable concepts from this sub-campaign.
+
+`convergence-types`: the four modes of convergence — convergence IN PROBABILITY (the CHANCE of a
+large gap shrinking, never actual values converging), ALMOST SURE convergence (genuine pointwise
+$\varepsilon$–$N$ convergence for almost every outcome, strictly stronger), $L^p$, and
+DISTRIBUTIONAL convergence (CDFs matching in the limit, with zero value-closeness implied) —
+demonstrated via three canonical counterexamples: the moving-spike sequence (convergent in
+probability, pointwise convergent for ZERO outcomes), $X_n=-X$ for $X\sim N(0,1)$ (perfect
+distributional convergence, constant nonzero actual gap), and $Z/n\to0$ (strictly positive tail
+probability for every finite $n$, still vanishing in the limit). The one-directional hierarchy
+a.s. ⟹ in probability ⟹ in distribution stated with each reverse implication refuted. 3
+misconceptions independently classified by Blueprint-declared severity — MC-1 CONVERGENCE-IN-
+PROBABILITY-ASSUMED-EQUIVALENT-TO-ALMOST-SURE (Foundational), MC-2 CONVERGENCE-IN-DISTRIBUTION-
+ASSUMED-TO-IMPLY-VALUE-CLOSENESS (Foundational), MC-3 CONVERGENCE-IN-PROBABILITY-REQUIRES-EXACT-
+ZERO (Moderate). Zero Blueprint/KG discrepancy. Both KG-declared unlocks (`math.prob.lln`,
+`math.prob.clt`) were found ALREADY authored earlier in this campaign (Batches 127, 140) — a
+reverse-dependency case, this concept now supplying the precise convergence-mode vocabulary those
+entries had assumed informally.
+
+`generating-function`: the probability generating function (PGF) $G_X(z)=E[z^X]$, with
+derivatives at 1 giving FALLING FACTORIAL moments (never raw moments directly — $G''(1)=E[X^2]-
+E[X]$, requiring the $+G'(1)$ conversion for the raw second moment); the moment generating
+function (MGF) $M_X(t)=E[e^{tX}]$, recovering RAW moments via $M^{(r)}(0)$; the PRODUCT rule
+$G_{X+Y}=G_XG_Y$/$M_{X+Y}=M_XM_Y$ for independent sums (never a sum of generating functions —
+demonstrated failing to even integrate to 1); and the MGF's UNIQUENESS property (matching MGFs
+imply matching distributions, never merely matching moments), applied to identify a sum of
+independent normals exactly. 3 misconceptions independently classified — MC-1 MGF-IS-JUST-A-
+TRICK-NOT-A-DISTRIBUTION-TOOL (instruction-induced), MC-2 G-PRIME-AT-1-GIVES-E[X-SQUARED]
+(overgeneralization), MC-3 INDEPENDENCE-MEANS-PGFS-ADD (overgeneralization). **Incomplete
+Blueprint metadata correction**: the Blueprint's own Prerequisites field listed only
+`math.prob.pmf`, omitting `math.calc.power-series` — the live KG's complete two-prerequisite list
+used as authoritative (this pattern previously occurred at Batch 143's `poisson-process` and
+Batch 142's `transition-matrix`).
+
+Mathematics **683/908 → 685/908**, 223 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 685/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Fresh frontier to be recomputed at the start of Batch 146 per established discipline; with
+`math.prob`'s reachable frontier now exhausted (all previously-reachable concepts authored),
+remaining frontier concepts span `math.de` (differential equations), `math.linalg` (basis,
+kernel-image, diagonalization, inner-product-space, projection, tensor, dual-space),
+`math.prob.joint-distribution`, `math.stats` (percentile, sampling-distribution, normal-
+distribution), `math.cx.complex-numbers-analysis`, `math.top.topological-space`,
+`math.fnal.normed-space`, `math.fnal.convolution`, `math.num` (floating-point, root-finding,
+interpolation), `math.opt.stochastic-gradient`, `math.graph.random-graph`, and
+`math.cat.category`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `fec7323` on `main`, pushed directly.
+
+## Batch 146 (2026-09-19) — opening the math.de domain
+
+Authored `math.de.ivp` and `math.de.separable`, the first `math.de` (Differential Equations)
+concepts authored this campaign, following math.prob's frontier exhaustion at Batch 145.
+
+`ivp`: the Initial Value Problem defined as an ODE plus conditions on the solution AND its
+derivatives, ALL anchored at a SINGLE point $x_0$; solving a complete IVP by setting up and
+solving the FULL SYSTEM of $n$ equations from all $n$ conditions SIMULTANEOUSLY (never one
+constant at a time in isolation), demonstrated via $y''-5y'+6y=0$ with $y(0)=1,y'(0)=0$; and
+condition PLACEMENT — not count — as decisive for the solvability guarantee, demonstrated on the
+identical ODE $y''+y=0$ giving a unique IVP solution ($y=\sin x$) versus a contradictory,
+solution-free BVP when the same 2 conditions are split across two points. 3 misconceptions
+independently classified by Blueprint-declared severity — MC-1 CONDITION-COUNT-ASSUMED-TO-
+DETERMINE-OUTCOME-REGARDLESS-OF-PLACEMENT (Foundational), MC-2 INITIAL-CONDITIONS-SOLVED-
+SEQUENTIALLY-INSTEAD-OF-SIMULTANEOUSLY (Foundational), MC-3 DERIVATIVE-CONDITIONS-OMITTED-FOR-
+HIGHER-ORDER-IVPS (Moderate). Zero Blueprint/KG discrepancy (the Blueprint's `math.de.bvp`
+reference is the KG's declared "related" concept, not a `requires`/`cross_links` entry, and is not
+yet authored — this doesn't affect verification). Closes toward `math.de.existence-uniqueness`'s
+declared unlock.
+
+`separable`: the separation-of-variables technique $dy/dx=g(x)h(y)\to(1/h(y))dy=g(x)dx$,
+integrated to $H(y)=G(x)+C$ with EXACTLY ONE combined arbitrary constant (never two, from the two
+indefinite integrals); EQUILIBRIUM solutions where $h(y)=0$ checked BEFORE dividing, demonstrated
+via $dy/dx=y^2$ where $y=0$ is genuinely NOT captured by the general formula $y=-1/(x+C)$ for any
+finite $C$; and implicit solutions as legitimate final answers, demonstrated via $dy/dx=-x/y$'s
+circle family requiring a $\pm$ branch choice rather than one explicit $y=f(x)$. 3 misconceptions
+independently classified — MC-1 TWO-CONSTANTS-FROM-TWO-INTEGRALS (instruction-induced), MC-2
+FORGETTING-CONSTANT-SOLUTIONS (instruction-induced), MC-3 SEPARABLE-MEANS-ALWAYS-EXPLICITLY-
+SOLVABLE (overgeneralization). Zero Blueprint/KG discrepancy.
+
+Mathematics **685/908 → 687/908**, 221 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 687/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Fresh frontier to be recomputed at the start of Batch 147 per established discipline; remaining
+`math.de` concepts (linear-first-order, exact-ode, slope-field, second-order-linear, laplace-
+transform, bvp, pde) and other ready concepts across `math.linalg`, `math.prob.joint-distribution`,
+`math.stats`, `math.cx`, `math.top`, `math.fnal`, `math.num`, `math.opt`, `math.graph`, `math.cat`
+still reachable.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `9d9fe67` on `main`, pushed directly.
+
+## Batch 147 (2026-09-19)
+
+Authored `math.de.existence-uniqueness` and `math.de.linear-first-order`, continuing the `math.de`
+domain opened at Batch 146.
+
+`existence-uniqueness`: Picard iteration recognized as a DIRECT INSTANCE (never merely inspired
+by) `math.real.fixed-point-theorem`'s contraction-mapping machinery, applied to the Picard operator
+$(T\phi)(x)=y_0+\int_{x_0}^xf(t,\phi(t))dt$, verified concretely for $y'=y,y(0)=1$ ($y=e^x$
+satisfies $y=Ty$ exactly); $\partial f/\partial y$'s continuity shown to directly supply the
+Lipschitz bound (reusing `math.real.lipschitz-continuity`'s own Mean Value Theorem mechanism) that
+makes the Picard operator contract, demonstrated via $f(x,y)=x^2+y^2$; and the theorem's LOCAL-only
+conclusion grounded in a genuine finite-time blow-up ($y'=y^2,y(0)=1$ solution $y=1/(1-x)$
+diverging at $x=1$), never treated as a proof-technique artifact. 3 misconceptions independently
+classified by Blueprint-declared severity — MC-1 PICARD-ITERATION-ASSUMED-MERELY-INSPIRED-BY-
+FIXED-POINTS (Foundational), MC-2 PARTIAL-DERIVATIVE-HYPOTHESIS-ASSUMED-UNRELATED (High), MC-3
+LOCAL-CONCLUSION-ASSUMED-PROOF-TECHNIQUE-LIMITATION (Moderate). Zero Blueprint/KG discrepancy; the
+Blueprint's declared cross-link `math.real.fixed-point-theorem` was confirmed already authored
+(Batch 134), enabling a genuine cross-link probe. Closes `math.de.ivp`'s declared unlock.
+
+`linear-first-order`: the integrating factor method $\mu(x)=e^{\int P(x)dx}$ for
+$dy/dx+P(x)y=Q(x)$, with the constant inside $\mu$'s exponent shown to always cancel (never
+carried as a separate arbitrary constant); the required final divide-by-$\mu$ step to isolate $y$
+from $\mu y$, demonstrated via $dy/dx+y/x=x,y(1)=2$; and the standard-form verification required
+before applying the method, contrasted against a Bernoulli equation genuinely requiring the
+$v=y^{1-n}$ conversion FIRST. 3 misconceptions independently classified — MC-1 INTEGRATING-
+FACTOR-MUST-INCLUDE-CONSTANT (instruction-induced), MC-2 FORGETTING-TO-DIVIDE-BY-MU-AT-THE-END
+(language contamination), MC-3 MISIDENTIFYING-THE-STANDARD-FORM (overgeneralization). Zero
+Blueprint/KG discrepancy.
+
+Mathematics **687/908 → 689/908**, 219 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 689/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Fresh frontier to be recomputed at the start of Batch 148 per established discipline; remaining
+`math.de` concepts (exact-ode, homogeneous-ode, slope-field, euler-method, second-order-linear,
+laplace-transform, bvp, pde) and other ready concepts across `math.linalg`,
+`math.prob.joint-distribution`, `math.stats`, `math.cx`, `math.top`, `math.fnal`, `math.num`,
+`math.opt`, `math.graph`, `math.cat` still reachable.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `a28d316` on `main`, pushed directly.
+
+## Batch 148 (2026-09-19)
+
+Authored `math.de.exact-ode` and `math.de.homogeneous-ode`, continuing the `math.de` domain.
+
+`exact-ode`: exactness as an EQUALITY test $\partial M/\partial y=\partial N/\partial x$ (never
+both required to equal zero), demonstrated via $(2xy+y^2)dx+(x^2+2xy)dy=0$'s nonzero-but-equal
+partials; the potential function $F$ found by successive integration, with the "constant" from
+integrating $M$ in $x$ shown to be a genuine ARBITRARY FUNCTION $g(y)$ requiring determination
+from $\partial F/\partial y=N$ (demonstrated via a $g'(y)=e^y$ case); and integrating factors
+$\mu(x)$/$\mu(y)$ for non-exact equations, with an explicit caveat that this simple form is NOT
+always guaranteed (a general $\mu(x,y)$ may require solving a PDE). 3 misconceptions independently
+classified by Blueprint-declared birth type — MC-1 EXACT-MEANS-BOTH-PARTIALS-EQUAL-ZERO (language
+contamination), MC-2 FORGETTING-THE-FUNCTION-OF-Y-IN-INTEGRATION (instruction-induced), MC-3
+INTEGRATING-FACTOR-ALWAYS-EXISTS-EASILY (overgeneralization). Zero Blueprint/KG discrepancy.
+
+`homogeneous-ode`: the homogeneous first-order structure $dy/dx=f(y/x)$ carefully DISAMBIGUATED
+from "homogeneous linear ODE" (zero right side) — the same word describing two genuinely
+different concepts, via the $dy/dx=(x+y)/x$ contrast; the substitution $y=vx$ requiring the
+PRODUCT RULE ($dy/dx=v+x\,dv/dx$, never just $dv/dx$), derived explicitly; and the shared-degree
+homogeneity test (M and N sharing ANY degree $n$, never required to be degree zero specifically),
+demonstrated via the degree-2 $(x^2+y^2)/(2xy)$ example solved to $x^2-y^2=Kx$. 3 misconceptions
+independently classified — MC-1 HOMOGENEOUS-MEANS-ZERO-RIGHT-SIDE (language contamination), MC-2
+FORGETTING-PRODUCT-RULE-IN-DY-DX (instruction-induced), MC-3 M-AND-N-MUST-HAVE-DEGREE-ZERO
+(overgeneralization). Zero Blueprint/KG discrepancy.
+
+Mathematics **689/908 → 691/908**, 217 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 691/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Fresh frontier to be recomputed at the start of Batch 149 per established discipline; remaining
+`math.de` concepts (bernoulli, slope-field, euler-method, second-order-linear, laplace-transform,
+bvp, pde) and other ready concepts across `math.linalg`, `math.prob.joint-distribution`,
+`math.stats`, `math.cx`, `math.top`, `math.fnal`, `math.num`, `math.opt`, `math.graph`, `math.cat`
+still reachable.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `4dde41f` on `main`, pushed directly.
+
+## Batch 149 (2026-09-19)
+
+Authored `math.de.bernoulli` and `math.de.slope-field`, continuing the `math.de` domain.
+
+`bernoulli`: the Bernoulli ODE $dy/dx+P(x)y=Q(x)y^n$ ($n\ne0,1$), solved via the substitution
+$v=y^{1-n}$ (never $v=y^n$), demonstrated via $dy/dx-y=-y^2$ ($n=2$) reducing to the linear
+$dv/dx+v=1$ and yielding the logistic curve $y=1/(1+Ce^{-x})$; the mandatory $(1-n)$ coefficient
+in $dv/dx=(1-n)y^{-n}dy/dx$ (never omitted); and the $n=0,1$ exclusion cases, each already
+linear/separable and never needing the substitution. 3 misconceptions independently classified by
+Blueprint-declared birth type — MC-1 WRONG-EXPONENT-IN-SUBSTITUTION (overgeneralization), MC-2
+FORGETTING-THE-1-MINUS-N-FACTOR-IN-DV-DX (instruction-induced), MC-3 BERNOULLI-APPLIES-FOR-ALL-N
+(overgeneralization). Zero Blueprint/KG discrepancy.
+
+`slope-field`: the ODE's own right-hand side $f(x,y)$ shown to directly BE the slope formula,
+constructed purely computationally with zero solving, demonstrated via $y'=x-y$'s point-by-point
+evaluation; a sketched solution shown to require CONTINUOUS tangency to the field at every point
+along its path (never merely matching the initial slope), demonstrated via the tangent-following
+sketch through $(0,2)$; and qualitative long-run behavior read directly from the picture (solutions
+converging toward $y=x$), demonstrated without any algebraic solving, contrasted against the
+laborious explicit-solving route. 3 misconceptions independently classified by Blueprint-declared
+severity — MC-1 SLOPE-FIELD-ASSUMED-TO-REQUIRE-SOLVING-FIRST (Foundational), MC-2 SOLUTION-
+SKETCH-ASSUMED-ONLY-NEEDS-INITIAL-TANGENCY (High), MC-3 QUALITATIVE-BEHAVIOR-ASSUMED-TO-REQUIRE-
+EXPLICIT-SOLVING (Moderate). Zero Blueprint/KG discrepancy. Opens toward `math.de.phase-plane`'s
+declared unlock.
+
+Mathematics **691/908 → 693/908**, 215 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 693/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Fresh frontier to be recomputed at the start of Batch 150 per established discipline; remaining
+`math.de` concepts (euler-method, second-order-linear, laplace-transform, bvp, pde) and other
+ready concepts across `math.linalg`, `math.prob.joint-distribution`, `math.stats`, `math.cx`,
+`math.top`, `math.fnal`, `math.num`, `math.opt`, `math.graph`, `math.cat` still reachable.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `6a9b2fe` on `main`, pushed directly.
+
+## Batch 150 (2026-09-19) — 150 batches complete
+
+Authored `math.de.euler-method` and `math.de.second-order-linear`, continuing the `math.de`
+domain. Marks 150 consecutive batches of this campaign.
+
+`euler-method`: the update rule $y_{n+1}=y_n+h\,f(x_n,y_n)$ with MANDATORY per-step slope
+re-evaluation (never frozen at the initial point), demonstrated via a three-step table for
+$y'=x+y,y(0)=1,h=0.1$; the local-$O(h^2)$-to-global-$O(h)$ error derivation via the $N=(b-a)/h$
+step-count argument, verified numerically against exact $e$ (error ratio $\approx0.59$, roughly
+halved, never quartered); and Euler's output framed as a directed approximation (systematic
+undershoot for a convex solution), never the exact value. 3 misconceptions independently
+classified by Blueprint-declared severity — MC-1 EULER-OUTPUT-ASSUMED-EXACT (Foundational), MC-2
+SLOPE-ASSUMED-FROZEN-FROM-INITIAL-POINT (High), MC-3 LOCAL-ERROR-ORDER-ASSUMED-GLOBAL (Moderate).
+Zero Blueprint/KG discrepancy; the Blueprint's declared cross-link `math.num.euler-method`
+confirmed still unauthored, independence mode with deferral note correct.
+
+`second-order-linear`: the standard form $y''+P(x)y'+Q(x)y=G(x)$, with homogeneous/nonhomogeneous
+classification depending ENTIRELY on $G(x)$ (never on $P,Q$'s complexity), demonstrated via a
+complicated-coefficient-but-nonhomogeneous example; the superposition principle verified for the
+homogeneous case ($y''-y=0$'s solution set closed under linear combination, forming a vector
+space); and superposition's genuine FAILURE for the nonhomogeneous case ($y''-y=2$'s $2y_1=-4$
+failing, $4\ne2$), including the zero-function litmus test disqualifying vector-space status. 3
+misconceptions independently classified by Blueprint-declared severity — MC-1 SUPERPOSITION-
+APPLIED-TO-NONHOMOGENEOUS-CASE (Foundational), MC-2 HOMOGENEOUS-NONHOMOGENEOUS-DETERMINED-BY-
+COEFFICIENT-STRUCTURE (Moderate), MC-3 SOLUTION-SET-VECTOR-SPACE-STATUS-ASSUMED-FOR-
+NONHOMOGENEOUS (Moderate). Zero Blueprint/KG discrepancy. Opens toward
+`math.de.second-order-homogeneous`'s declared unlock.
+
+Mathematics **693/908 → 695/908**, 213 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 695/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Fresh frontier to be recomputed at the start of Batch 151 per established discipline; remaining
+`math.de` concepts (laplace-transform, phase-plane, bvp, pde, second-order-homogeneous) and other
+ready concepts across `math.linalg`, `math.prob.joint-distribution`, `math.stats`, `math.cx`,
+`math.top`, `math.fnal`, `math.num`, `math.opt`, `math.graph`, `math.cat` still reachable.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `82fb557` on `main`, pushed directly.
+
+## Batch 151 (2026-09-19)
+
+Authored `math.de.second-order-homogeneous` and `math.de.phase-plane`, continuing the `math.de`
+domain.
+
+`second-order-homogeneous`: the general solution $c_1y_1+c_2y_2$ requiring $y_1,y_2$ to be a
+genuine FUNDAMENTAL SET (linearly independent, never just any two valid solutions), demonstrated
+via $e^x,3e^x$'s collapsed one-parameter family versus $e^x,e^{-x}$'s genuine span; the WRONSKIAN
+$W=y_1y_2'-y_1'y_2$ as a one-point-sufficient independence test (for solutions of the same
+equation), demonstrated via $\cos x,\sin x$'s $W(0)=1\ne0$ confirming independence everywhere; and
+the precise term order, never swapped. 3 misconceptions independently classified by
+Blueprint-declared severity — MC-1 ANY-TWO-SOLUTIONS-ASSUMED-TO-FORM-FUNDAMENTAL-SET
+(Foundational), MC-2 WRONSKIAN-CHECKED-AT-ONLY-ONE-ARBITRARY-POINT-WITHOUT-JUSTIFICATION
+(Moderate), MC-3 WRONSKIAN-COMPUTED-WITH-SIGN-OR-TERM-ORDER-ERROR (Moderate). Zero Blueprint/KG
+discrepancy. Closes `math.de.second-order-linear`'s declared unlock.
+
+`phase-plane`: the phase portrait as `math.de.slope-field`'s own grid-evaluation construction
+GENERALIZED to a vector $(f,g)$ for 2D systems, demonstrated via $x'=y,y'=-x$'s rotational
+pattern; equilibrium classification read DIRECTLY from the linearization's Jacobian eigenvalues
+(node/saddle/spiral/center), demonstrated via $x'=x-y,y'=x+y$'s $\lambda=1\pm i$ outward-spiral
+classification with zero explicit solving; and phase-plane analysis revealing GLOBAL behavior
+invisible to either variable's slope field frozen separately, demonstrated via a predator-prey
+saddle-at-extinction/center-at-coexistence global structure. 3 misconceptions independently
+classified by Blueprint-declared severity — MC-1 PHASE-PORTRAIT-ASSUMED-GENUINELY-NEW-PROCEDURE
+(Foundational), MC-2 EQUILIBRIUM-CLASSIFICATION-ASSUMED-TO-REQUIRE-EXTENSIVE-PLOTTING (High),
+MC-3 SEPARATE-SLOPE-FIELDS-ASSUMED-EQUIVALENT-TO-PHASE-PORTRAIT (Moderate). Zero Blueprint/KG
+discrepancy. Closes `math.de.slope-field`'s declared unlock.
+
+Mathematics **695/908 → 697/908**, 211 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 697/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Fresh frontier to be recomputed at the start of Batch 152 per established discipline; remaining
+`math.de` concepts (char-equation, wronskian, stability-analysis, higher-order-ode, series-
+solution, laplace-transform, bvp, pde) and other ready concepts across `math.linalg`,
+`math.prob.joint-distribution`, `math.stats`, `math.cx`, `math.top`, `math.fnal`, `math.num`,
+`math.opt`, `math.graph`, `math.cat` still reachable.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `ff5984c` on `main`, pushed directly.
+
+## Batch 152 (2026-09-19) — one stale-metadata correction, one reverse-direction cross-link upgrade
+
+Authored `math.de.wronskian` and `math.de.char-equation`, continuing the `math.de` domain.
+
+`wronskian`: the Wronskian formula shown to be EXACTLY `math.linalg.determinant`'s own $2\times2$
+determinant applied to the function/derivative matrix (never a separate formula), demonstrated via
+$e^{2x},e^{-2x}$; its nonvanishing shown to DIRECTLY instantiate
+`math.linalg.linear-independence`'s general condition via the determinant invertibility criterion
+(never an ad hoc ODE-specific fact); and Abel's theorem's orientation-level preview computing
+$W(x)$ entirely from $P(x)$ alone, verified exactly against direct computation for
+$y''+3y'+2y=0$. 3 misconceptions independently classified by Blueprint-declared severity — MC-1
+WRONSKIAN-ASSUMED-INDEPENDENT-FORMULA (Foundational), MC-2 WRONSKIAN-TEST-ASSUMED-AD-HOC (High),
+MC-3 WRONSKIAN-FORM-ASSUMED-TO-REQUIRE-SOLVING-FIRST (Moderate). **Stale Blueprint metadata
+correction**: the Blueprint's own Component 0 stated bloom=analyze, mastery_threshold=0.75,
+estimated_hours=5 — the live KG's current values (apply, 0.85, 3) used as authoritative.
+
+`char-equation`: the exponential ansatz $y=e^{rx}$ converting the ODE into the algebraic
+$ar^2+br+c=0$ via the exponential's self-proportional derivative; distinct roots requiring
+Wronskian VERIFICATION (never assumed automatic), demonstrated via $e^{2x},e^{3x}$'s
+$W=e^{5x}\ne0$; and the three-case discriminant split (distinct real/repeated/complex), with
+repeated roots' collapse to one dimension fixed by the extra $x$ factor. 3 misconceptions
+independently classified by Blueprint-declared severity — MC-1 EXPONENTIAL-ANSATZ-ASSUMED-
+ARBITRARY (Foundational), MC-2 DISTINCT-ROOTS-ASSUMED-TO-AUTOMATICALLY-GIVE-FUNDAMENTAL-SET
+(High), MC-3 REPEATED-ROOT-ASSUMED-TO-GIVE-TWO-INDEPENDENT-SOLUTIONS (Moderate). **Reverse-
+direction cross-link correction**: the Blueprint's own Component 7 declared
+`math.linalg.characteristic-polynomial` not yet authored at its own write-time (correctly
+independence mode then); it HAS since been authored (Batch 78, well before this campaign reached
+this concept) — upgraded to a genuine cross-link probe here, consistent with the established
+reverse-direction-discrepancy correction pattern (last seen at Batch 131's `math.real.ivt`).
+
+Mathematics **697/908 → 699/908**, 209 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 699/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Fresh frontier to be recomputed at the start of Batch 153 per established discipline; remaining
+`math.de` concepts (stability-analysis, higher-order-ode, series-solution, laplace-transform, bvp,
+pde) and other ready concepts across `math.linalg`, `math.prob.joint-distribution`, `math.stats`,
+`math.cx`, `math.top`, `math.fnal`, `math.num`, `math.opt`, `math.graph`, `math.cat` still
+reachable.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `1ac9bd6` on `main`, pushed directly.
+
+## Batch 153 (2026-09-19)
+
+Authored `math.de.undetermined-coefficients` and `math.de.variation-of-parameters`, continuing
+the `math.de` domain.
+
+`undetermined-coefficients`: the trial-function table for polynomial/exponential/trig forcing
+terms, requiring the FULL polynomial (every degree down to constant, never just the lead term),
+demonstrated via $y''-3y'+2y=x^2$; the mandatory sine/cosine PAIRING in any trigonometric trial
+(never sine alone), demonstrated via the differentiation-produces-cosine argument; and the
+MODIFICATION RULE ($\times x$ or $\times x^2$) whenever the trial overlaps $y_h$, demonstrated via
+$y''-4y'+4y=e^{2x}$'s repeated-root resolution. 3 misconceptions independently classified by
+Blueprint-declared birth type — MC-1 ONLY-MATCHING-THE-LEAD-TERM (instruction-induced), MC-2
+FORGETTING-MODIFICATION-RULE (instruction-induced), MC-3 SINE-ONLY-TRIAL-FOR-SINE-FORCING
+(overgeneralization). Zero Blueprint/KG discrepancy.
+
+`variation-of-parameters`: the formula $y_p=u_1y_1+u_2y_2$ with $u_1'=-y_2f/W,u_2'=y_1f/W$ using
+$f=g/a$ (the leading coefficient DIVIDED OUT first, never the raw $g$), demonstrated via
+$y''+y=\tan x$; the mandatory $W\ne0$ verification BEFORE applying the formula (never assumed);
+and the decision rule preferring undetermined coefficients when applicable (VoP always valid but
+can produce non-elementary integrals, never automatically the "cleaner" choice). 3 misconceptions
+independently classified — MC-1 FORGETTING-THE-LEADING-COEFFICIENT (instruction-induced), MC-2
+WRONSKIAN-IN-DENOMINATOR-CAN-BE-ZERO (overgeneralization), MC-3 VARIATION-OF-PARAMETERS-ALWAYS-
+GIVES-A-CLEANER-ANSWER-THAN-UNDETERMINED-COEFFICIENTS (overgeneralization). Zero Blueprint/KG
+discrepancy.
+
+Mathematics **699/908 → 701/908**, 207 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 701/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Fresh frontier to be recomputed at the start of Batch 154 per established discipline; remaining
+`math.de` concepts (higher-order-ode, laplace-transform, stability-analysis, series-solution, bvp,
+pde) and other ready concepts across `math.linalg`, `math.prob.joint-distribution`, `math.stats`,
+`math.cx`, `math.top`, `math.fnal`, `math.num`, `math.opt`, `math.graph`, `math.cat` still
+reachable.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `04683f9` on `main`, pushed directly.
+
+## Batch 154 (2026-09-19)
+
+Authored `math.de.harmonic-oscillator` and `math.de.stability-analysis`, continuing the `math.de`
+domain.
+
+`harmonic-oscillator`: the three-regime discriminant classification (underdamped/critically
+damped/overdamped), with critical damping established as the BOUNDARY (never the maximum damping —
+overdamped has MORE damping and returns MORE slowly); the damped frequency
+$\omega_d=\sqrt{\omega_0^2-\gamma^2}$ always less than $\omega_0$ when damping is present (never
+equal except undamped); and true RESONANCE requiring exact frequency matching (never any periodic
+forcing), demonstrated via the finite-amplitude-for-all-$\omega$ (damped) versus unbounded-growth-
+only-at-$\omega_0$ (undamped) contrast. 3 misconceptions independently classified by
+Blueprint-declared birth type — MC-1 CRITICAL-DAMPING-IS-MAXIMUM-DAMPING (language contamination),
+MC-2 NATURAL-FREQUENCY-EQUALS-DAMPED-FREQUENCY (instruction-induced), MC-3 FORCING-AT-ANY-
+FREQUENCY-CAUSES-RESONANCE (overgeneralization). Zero Blueprint/KG discrepancy.
+
+`stability-analysis`: STABILITY sharpened from `math.de.phase-plane`'s TYPE classification —
+nodes/spirals can be either stable or unstable by eigenvalue sign, saddles ALWAYS unstable,
+demonstrated via the already-classified spiral ($\lambda=1\pm i$) shown unstable; the precise
+LYAPUNOV-versus-ASYMPTOTIC stability distinction, with the center case (purely imaginary
+eigenvalues) staying close FOREVER without ever converging; and LYAPUNOV FUNCTIONS resolving
+exactly the purely-imaginary-eigenvalue borderline case linearization cannot, demonstrated via
+$\dot V=-2x^4-2y^4<0$ certifying asymptotic stability for $x'=-y-x^3,y'=x-y^3$. 3 misconceptions
+independently classified by Blueprint-declared severity — MC-1 EQUILIBRIUM-TYPE-ASSUMED-TO-
+DETERMINE-STABILITY-ALONE (Foundational), MC-2 LYAPUNOV-STABILITY-ASSUMED-TO-IMPLY-ASYMPTOTIC-
+STABILITY (High), MC-3 LINEARIZATION-INCONCLUSIVE-CASE-ASSUMED-UNRESOLVABLE (Moderate). Zero
+Blueprint/KG discrepancy. Closes `math.de.phase-plane`'s declared unlock.
+
+Mathematics **701/908 → 703/908**, 205 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 703/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Fresh frontier to be recomputed at the start of Batch 155 per established discipline; remaining
+`math.de` concepts (higher-order-ode, laplace-transform, series-solution, bvp, pde) and other
+ready concepts across `math.linalg`, `math.prob.joint-distribution`, `math.stats`, `math.cx`,
+`math.top`, `math.fnal`, `math.num`, `math.opt`, `math.graph`, `math.cat` still reachable.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `f9e7868` on `main`, pushed directly.
+
+## Batch 155 (2026-09-19)
+
+Authored `math.de.resonance` and `math.de.higher-order-ode`, continuing the `math.de` domain.
+
+`resonance`: PURE resonance's genuinely UNBOUNDED secular growth ($t\sin(\omega_0t)$, never
+merely "large"), contrasted with PRACTICAL resonance's finite (though potentially large) peak at
+$\omega_{res}=\sqrt{\omega_0^2-2\gamma^2}<\omega_0$ (never equal to $\omega_0$ for $\gamma>0$),
+and BEATING's genuinely BOUNDED interference envelope (never a form of resonance despite involving
+close frequencies). 3 misconceptions independently classified by Blueprint-declared birth type —
+MC-1 RESONANCE-MEANS-INFINITE-AMPLITUDE (overgeneralization), MC-2 RESONANT-FREQUENCY-EQUALS-
+NATURAL-FREQUENCY (instruction-induced), MC-3 BEATING-IS-THE-SAME-AS-RESONANCE (language
+contamination). Zero Blueprint/KG discrepancy.
+
+`higher-order-ode`: the characteristic-polynomial method generalized to degree $n$, with the
+Fundamental Theorem of Algebra guaranteeing exactly $n$ roots (never potentially too few),
+demonstrated via a degree-3 distinct-roots factoring; multiplicity $k$ translating to $k$
+GENUINELY INDEPENDENT solutions $e^{rx},xe^{rx},\ldots,x^{k-1}e^{rx}$ (never $k$ literal copies),
+demonstrated via a verified triple-root example; and the "$n$-dimensional solution space" claim
+VERIFIED (never merely asserted) via `math.linalg.vector-space`'s own closure axioms, demonstrated
+via a direct linear-combination substitution check. 3 misconceptions independently classified by
+Blueprint-declared severity — MC-1 CHARACTERISTIC-POLYNOMIAL-ROOT-COUNT-DOUBTED (Foundational),
+MC-2 MULTIPLICITY-TREATED-AS-LITERAL-REPETITION (High), MC-3 SOLUTION-SPACE-DIMENSIONALITY-
+UNVERIFIED (Moderate). Zero Blueprint/KG discrepancy; the declared cross-link
+`math.linalg.vector-space` confirmed already authored, enabling a genuine cross-link probe.
+
+Mathematics **703/908 → 705/908**, 203 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 705/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Fresh frontier to be recomputed at the start of Batch 156 per established discipline; remaining
+`math.de` concepts (laplace-transform, series-solution, bvp, pde, nonlinear-ode) and other ready
+concepts across `math.linalg`, `math.prob.joint-distribution`, `math.stats`, `math.cx`,
+`math.top`, `math.fnal`, `math.num`, `math.opt`, `math.graph`, `math.cat` still reachable.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `9d87f95` on `main`, pushed directly.
+
+## Batch 156 (2026-09-19) — second reverse-direction cross-link upgrade this campaign
+
+Authored `math.de.laplace-transform` and `math.de.series-solution`, continuing the `math.de`
+domain.
+
+`laplace-transform`: $\mathcal{L}\{f\}(s)$ recognized as a Type I improper integral (nothing new
+in the definition), demonstrated via $\mathcal{L}\{e^{at}\}(s)=1/(s-a)$; the derivative rule
+$\mathcal{L}\{f'\}(s)=sF(s)-f(0)$ (the $-f(0)$ term NEVER omitted) derived via integration by
+parts and independently verified; and convergence NEVER universal, shown genuinely diverging for
+$s\le a$. 3 misconceptions independently classified by Blueprint-declared severity — MC-1
+LAPLACE-TRANSFORM-ASSUMED-UNIVERSALLY-DEFINED (Foundational), MC-2 DERIVATIVE-RULE-SIGN-OR-
+INITIAL-CONDITION-TERM-OMITTED (Foundational), MC-3 LAPLACE-TRANSFORM-COMPUTATION-ATTEMPTED-
+WITHOUT-VERIFYING-INTEGRATION-BY-PARTS-CHOICE (Moderate). Zero Blueprint/KG discrepancy; the
+declared cross-link `math.fnal.fourier-transform` confirmed still unauthored, independence mode
+correct.
+
+`series-solution`: the series ansatz $y=\sum a_nx^n$ requiring RE-INDEXING every sum to a common
+power BEFORE coefficient matching (never skipped), demonstrated via the full $y''-y=0$ recurrence
+derivation generating $\cosh x,\sinh x$ mechanically (never guessed); and the ORDINARY POINT
+condition ($P,Q$ analytic) required before applying the method, contrasted against a genuine
+singular-point case ($x^2y''+xy'-y=0$) requiring the Frobenius method instead. 3 misconceptions
+independently classified by Blueprint-declared severity — MC-1 ORDINARY-POINT-CONDITION-NOT-
+CHECKED (Foundational), MC-2 RE-INDEXING-STEP-SKIPPED-OR-MISALIGNED (Foundational), MC-3 SERIES-
+SOLUTION-COEFFICIENTS-GUESSED-RATHER-THAN-DERIVED (Moderate). **Reverse-direction cross-link
+correction**: the Blueprint's own Component 7 declared `math.calc.taylor-series` not yet authored
+at its own write-time (correctly independence mode then); it HAS since been authored (Batch 65,
+well before this campaign reached this concept) — upgraded to a genuine cross-link probe here,
+consistent with the established reverse-direction-discrepancy correction pattern (last seen at
+Batch 152's `math.de.char-equation`).
+
+Mathematics **705/908 → 707/908**, 201 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 707/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Fresh frontier to be recomputed at the start of Batch 157 per established discipline; remaining
+`math.de` concepts (bvp, pde, nonlinear-ode) and other ready concepts across `math.linalg`,
+`math.prob.joint-distribution`, `math.stats`, `math.cx`, `math.top`, `math.fnal`, `math.num`,
+`math.opt`, `math.graph`, `math.cat` still reachable.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `17a3c1e` on `main`, pushed directly.
+
+## Batch 157 (2026-09-19) — wrong-corpus cross-link correction
+
+Authored `math.de.laplace-properties` and `math.de.convolution-theorem`, continuing the `math.de`
+domain.
+
+`laplace-properties`: LINEARITY as ordinary integral linearity (never a special Laplace-specific
+rule), demonstrated via direct combination of known transforms; the FIRST shifting theorem's
+direct $s\to s-a$ SUBSTITUTION (never requiring a new integral), demonstrated via
+$\mathcal{L}\{e^{3t}\cos(2t)\}$; and the SECOND shifting theorem's MULTIPLICATIVE outcome, sharply
+contrasted with the first theorem's ARGUMENT-shift outcome (never conflated), demonstrated via
+$F(s-3)$ versus $e^{-2s}F(s)$. 3 misconceptions independently classified by Blueprint-declared
+severity — MC-1 LINEARITY-ASSUMED-TO-REQUIRE-RE-DERIVATION (Foundational), MC-2 FIRST-SHIFTING-
+THEOREM-ASSUMED-TO-NEED-NEW-INTEGRAL (High), MC-3 SHIFTING-THEOREMS-CONFLATED (High). Zero
+Blueprint/KG discrepancy.
+
+`convolution-theorem`: the Laplace convolution's $[0,t]$ limits shown to follow DIRECTLY from
+causality applied to the general convolution definition (never a separately-invented convention);
+the Convolution Theorem $\mathcal{L}\{f*g\}=FG$ VERIFIED (never merely cited) via independent
+both-sides computation for $f=e^t,g=e^{2t}$; and the theorem's primary practical use recognized as
+INVERSE (recovering $\mathcal{L}^{-1}$ of a product by recognizing known transforms and
+convolving, bypassing partial fractions — never treated as merely a forward-direction tool). 3
+misconceptions independently classified by Blueprint-declared severity — MC-1 LAPLACE-
+CONVOLUTION-ASSUMED-SEPARATELY-DEFINED (Foundational), MC-2 CONVOLUTION-THEOREM-UNVERIFIED (High),
+MC-3 CONVOLUTION-THEOREM-USE-DIRECTION-REVERSED (Moderate). **Wrong-corpus cross-link correction**:
+the Blueprint's own Component 7 claimed `math.fnal.convolution` "confirmed ALREADY authored,"
+checked via `ls docs/curriculum/blueprints/` — but that checks the BLUEPRINTS directory, where its
+Blueprint does exist, never the EDUCATIONAL-BRAIN corpus, where it does NOT yet exist — corrected
+to independence mode here, this campaign's first wrong-corpus discrepancy since Batches 128-129
+early in the `math.real` sub-campaign.
+
+Mathematics **707/908 → 709/908**, 199 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 709/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Fresh frontier to be recomputed at the start of Batch 158 per established discipline; remaining
+`math.de` concepts (frobenius-method, legendre-equation, bvp, pde, nonlinear-ode) and other ready
+concepts across `math.linalg`, `math.prob.joint-distribution`, `math.stats`, `math.cx`,
+`math.top`, `math.fnal`, `math.num`, `math.opt`, `math.graph`, `math.cat` still reachable.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `2072cc9` on `main`, pushed directly.
+
+## Batch 158 (2026-09-19)
+
+Authored `math.de.inverse-laplace` and `math.de.frobenius-method`, continuing the `math.de`
+domain.
+
+`inverse-laplace`: recognizing inversion as a DIRECT REUSE of partial-fraction decomposition
+(never a new technique), demonstrated via the cover-up decomposition of
+$\frac{3s+1}{(s-1)(s+2)}$; piece-wise inversion combined via LINEARITY with forward-transform
+verification (never needing unspecified extra justification); and the repeated-factor's DISTINCT
+$te^{at}$ pair (never the same $e^{at}$ pair as a simple factor), verified for $2/(s-3)^2$. 3
+misconceptions independently classified by Blueprint-declared severity — MC-1 INVERSE-LAPLACE-
+ASSUMED-NEW-DECOMPOSITION-TECHNIQUE (Foundational), MC-2 PIECE-WISE-INVERSION-SUM-ASSUMED-TO-
+NEED-EXTRA-JUSTIFICATION (High), MC-3 REPEATED-FACTOR-INVERSE-ASSUMED-SAME-AS-SIMPLE-FACTOR
+(Moderate). Zero Blueprint/KG discrepancy. Closes `math.de.laplace-properties`/`math.de.
+inverse-laplace`'s shared chain toward `math.de.laplace-ode`.
+
+`frobenius-method`: the ordinary series ansatz's genuine FAILURE at a regular singular point
+(verified via $y=x^{-1}$'s non-representability), motivating the Frobenius $x^r$ modification as
+a TARGETED fix (never an unrelated technique); the INDICIAL EQUATION derived FIRST (never an
+afterthought), demonstrated via $r^2-1=0\Rightarrow r=\pm1$ matching known solutions exactly; and
+the roots' DIFFERENCE (never individual size) determining the three-case classification. 3
+misconceptions independently classified by Blueprint-declared severity — MC-1 FROBENIUS-ASSUMED-
+UNRELATED-TECHNIQUE (Foundational), MC-2 INDICIAL-EQUATION-ASSUMED-AFTERTHOUGHT (High), MC-3
+LOG-TERM-NEED-ASSUMED-DETERMINED-BY-ROOT-SIZE (Moderate). **Stale Blueprint metadata correction**:
+the Blueprint's own Component 0 stated mastery_threshold=0.7, estimated_hours=8 — the live KG's
+current values (0.75, 7) used as authoritative.
+
+Mathematics **709/908 → 711/908**, 197 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 711/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Fresh frontier to be recomputed at the start of Batch 159 per established discipline; remaining
+`math.de` concepts (legendre-equation, bvp, pde, nonlinear-ode) and other ready concepts across
+`math.linalg`, `math.prob.joint-distribution`, `math.stats`, `math.cx`, `math.top`, `math.fnal`,
+`math.num`, `math.opt`, `math.graph`, `math.cat` still reachable.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `d7934be` on `main`, pushed directly.
+
+## Batch 159 (2026-09-19)
+
+Authored `math.de.laplace-ode` and `math.de.bessel-equation`, continuing the `math.de` domain.
+
+`laplace-ode`: initial conditions BAKED IN at the transform step (never applied as free constants
+afterward), demonstrated via $y''+4y=0,y(0)=2,y'(0)=0$'s direct pipeline solution; careful
+partial-fraction decomposition with correct repeated-root form, demonstrated via
+$Y(s)=1/[(s+1)^2(s+2)]+1/[(s+1)(s+2)]$; and the CONVOLUTION theorem never conflated with the
+pointwise product, verified via $\mathcal{L}^{-1}\{1/[s(s+1)]\}=1-e^{-t}$ against the wrong
+pointwise guess $e^{-t}$. 3 misconceptions independently classified by Blueprint-declared birth
+type — MC-1 INITIAL-CONDITIONS-IGNORED-UNTIL-END (instruction-induced), MC-2 PARTIAL-FRACTIONS-
+DEGREE-ERROR (instruction-induced), MC-3 CONVOLUTION-CONFUSED-WITH-PRODUCT (overgeneralization).
+Zero Blueprint/KG discrepancy.
+
+`bessel-equation`: Bessel's equation as a CONCRETE Frobenius application (never a new technique),
+demonstrated via the $\nu=0$ setup giving the repeated root $r=0$; $Y_\nu$'s singularity forcing
+its exclusion whenever the physical domain includes the origin (never kept unconditionally),
+demonstrated via the solid-versus-annular-drumhead contrast; and Bessel's equation arising
+INEVITABLY from cylindrical/circular symmetry (never an arbitrary example), demonstrated via the
+circular-drumhead wave-equation separation of variables. 3 misconceptions independently classified
+by Blueprint-declared severity — MC-1 BESSEL-ASSUMED-NEW-TECHNIQUE (Foundational), MC-2 GENERAL-
+SOLUTION-ASSUMED-ALWAYS-KEPT-IN-FULL (High), MC-3 BESSEL-EQUATION-ASSUMED-ARBITRARY-EXAMPLE
+(Moderate). **Stale Blueprint metadata correction**: the Blueprint's own Component 0 stated
+estimated_hours=7 — the live KG's current value (6) used as authoritative. Declared cross-link
+`math.fnal.special-functions` confirmed still unauthored, independence mode correct.
+
+Mathematics **711/908 → 713/908**, 195 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 713/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Fresh frontier to be recomputed at the start of Batch 160 per established discipline; remaining
+`math.de` concepts (legendre-equation, bvp, pde, nonlinear-ode) and other ready concepts across
+`math.linalg`, `math.prob.joint-distribution`, `math.stats`, `math.cx`, `math.top`, `math.fnal`,
+`math.num`, `math.opt`, `math.graph`, `math.cat` still reachable.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `39844c6` on `main`, pushed directly.
+
+## Batch 160 (2026-09-19) — third wrong-corpus + second stale-metadata correction
+
+Authored `math.de.legendre-equation` and `math.de.bvp`, continuing (and nearly closing) the
+`math.de` domain.
+
+`legendre-equation`: $x=0$ recognized as an ORDINARY point (UNLIKE Bessel's regular singular
+point), the standard series ansatz applying directly with no Frobenius modification, demonstrated
+via the $n=2$ setup; INTEGER $n$ terminating into the genuine polynomial $P_2(x)=\frac12(3x^2-1)$
+versus non-integer $n=2.5$'s never-terminating infinite series on the IDENTICAL equation; and the
+orthogonal-basis/spherical-symmetry connection (orientation level), paralleling Bessel's
+cylindrical-symmetry motivation. 3 misconceptions independently classified by Blueprint-declared
+severity — MC-1 LEGENDRE-ASSUMED-TO-NEED-FROBENIUS (Foundational), MC-2 LEGENDRE-SERIES-ASSUMED-
+ALWAYS-POLYNOMIAL (High), MC-3 LEGENDRE-EQUATION-ASSUMED-ARBITRARY-EXAMPLE (Moderate).
+**Wrong-corpus cross-link correction** (third this campaign, after Batches 128-129 and 157): the
+Blueprint's claimed "math.fnal.special-functions confirmed already authored" checked the
+Blueprints directory rather than the EB corpus — corrected to independence mode. **Stale-metadata
+correction** (second this campaign, after Batch 158's frobenius-method): Blueprint's
+estimated_hours=6 vs live KG's 5 — KG used as authoritative.
+
+`bvp`: the three-outcome framework (no solution / unique / infinitely many) demonstrated on the
+IDENTICAL ODE $y''+y=0$ with varying boundary conditions (never assuming IVP-style guaranteed
+uniqueness); both boundary conditions applied as a genuine SIMULTANEOUS system (never
+sequentially); and an automatically-satisfied condition correctly recognized as the infinitely-
+many-solutions signature (never a computational error). 3 misconceptions independently classified
+by Blueprint-declared severity — MC-1 BVP-ASSUMED-TO-ALWAYS-HAVE-UNIQUE-SOLUTION (Foundational),
+MC-2 BOTH-BOUNDARY-CONDITIONS-NOT-APPLIED-SIMULTANEOUSLY (Moderate), MC-3 INFINITELY-MANY-
+SOLUTIONS-CASE-MISTAKEN-FOR-AN-ERROR (Moderate). Zero Blueprint/KG discrepancy. Opens toward
+`math.de.sturm-liouville`'s declared unlock.
+
+Mathematics **713/908 → 715/908**, 193 remaining. `math.de` domain now has only `pde` and
+`nonlinear-ode` remaining before full exhaustion.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 715/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Fresh frontier to be recomputed at the start of Batch 161 per established discipline; remaining
+`math.de` concepts (pde, nonlinear-ode) and other ready concepts across `math.linalg`,
+`math.prob.joint-distribution`, `math.stats`, `math.cx`, `math.top`, `math.fnal`, `math.num`,
+`math.opt`, `math.graph`, `math.cat` still reachable.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `32d4704` on `main`, pushed directly.
+
+## Batch 161 (2026-09-19) — fourth wrong-corpus cross-link correction
+
+Authored `math.de.sturm-liouville` and `math.de.pde`, continuing (and nearly closing) the
+`math.de` domain.
+
+`sturm-liouville`: $\lambda$ as an UNKNOWN parameter (never fixed), with MOST values giving ONLY
+the trivial solution while special discrete eigenvalues admit genuine eigenfunctions, demonstrated
+via the $\lambda=2$ (trivial only) versus $\lambda=1$ (eigenfunction $\sin x$) contrast for
+$y''+\lambda y=0$; orthogonality using the WEIGHT $w(x)$ from the original equation (never the
+unweighted integral in general); and the eigenfunction-completeness result as a concrete instance
+of the general Spectral Theorem for self-adjoint operators (never isolated). 3 misconceptions
+independently classified by Blueprint-declared severity — MC-1 STURM-LIOUVILLE-BVP-ASSUMED-
+SOLVABLE-FOR-EVERY-LAMBDA (Foundational), MC-2 ORTHOGONALITY-ASSUMED-UNWEIGHTED (Foundational),
+MC-3 STURM-LIOUVILLE-TREATED-AS-ISOLATED-FROM-SPECTRAL-THEORY (Moderate). **Wrong-corpus cross-
+link correction** (fourth this campaign): the Blueprint's claimed "math.fnal.spectral-theory
+already authored" checked the Blueprints directory rather than the EB corpus — corrected to
+independence mode. Closes `math.de.bvp`'s declared unlock.
+
+`pde`: a PDE defined as ONE unknown function of multiple variables (never confused with a SYSTEM
+of several ODEs); the discriminant $B^2-4AC$ classifying linear second-order PDEs (elliptic/
+parabolic/hyperbolic), with careful term-by-term coefficient identification required for
+non-canonical forms; and classification tied to GENUINE physical behavior (heat-equation smoothing
+versus wave-equation propagation, never a purely formal label). 3 misconceptions independently
+classified by Blueprint-declared severity — MC-1 PDE-CLASSIFICATION-TREATED-AS-PURELY-FORMAL
+(Foundational), MC-2 PDE-CONFUSED-WITH-MULTIVARIABLE-ODE-SYSTEM (Foundational), MC-3
+DISCRIMINANT-COEFFICIENTS-MISIDENTIFIED (Moderate). Zero Blueprint/KG discrepancy.
+
+Mathematics **715/908 → 717/908**, 191 remaining. `math.de` domain now has only `nonlinear-ode`
+remaining before full exhaustion.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 717/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Fresh frontier to be recomputed at the start of Batch 162 per established discipline; remaining
+`math.de` concept (nonlinear-ode) and other ready concepts across `math.linalg`,
+`math.prob.joint-distribution`, `math.stats`, `math.cx`, `math.top`, `math.fnal`, `math.num`,
+`math.opt`, `math.graph`, `math.cat` still reachable.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `718e014` on `main`, pushed directly.
+
+## Batch 162 (2026-09-19) — fifth wrong-corpus + third stale-metadata correction
+
+Authored `math.de.eigenfunction-expansion` and `math.de.nonlinear-ode`, continuing the `math.de`
+domain (now at 41/56, with `fourier-series`, `pde-classification`, `bifurcation` newly reachable).
+
+`eigenfunction-expansion`: the coefficient formula $c_n=\langle f,\varphi_n\rangle/
+\langle\varphi_n,\varphi_n\rangle$ derived DIRECTLY from Sturm-Liouville orthogonality (never an
+independent formula), demonstrated via $f(x)=x$'s coefficient derivation matching the standard
+Fourier sine series exactly; Fourier series recognized as the SIMPLEST Sturm-Liouville case (never
+a separate technique); and convergence's reliance on Hilbert-space completeness as the SAME
+guarantee across every system (Fourier, Legendre, Bessel — never system-specific). 3
+misconceptions independently classified by Blueprint-declared severity — MC-1 COEFFICIENT-
+FORMULA-ASSUMED-INDEPENDENT-FACT (Foundational), MC-2 FOURIER-SERIES-ASSUMED-SEPARATE-TECHNIQUE
+(High), MC-3 CONVERGENCE-ASSUMED-SYSTEM-SPECIFIC (Moderate). **Wrong-corpus cross-link
+correction** (fifth this campaign): the Blueprint's claimed "math.fnal.hilbert-space already
+authored" checked the Blueprints directory rather than the EB corpus — corrected to independence
+mode. **Stale-metadata correction** (third this campaign): estimated_hours 7 vs live KG's 6 — KG
+used as authoritative. Closes `math.de.sturm-liouville`'s declared unlock.
+
+`nonlinear-ode`: ALL equilibria found via complete $f(x^*)=0$ solving (never stopping at
+$x^*=0$), demonstrated via the pendulum's infinitely-many-equilibria result; the linear CENTER
+case's genuine inconclusiveness (never treated as reliable like hyperbolic cases), demonstrated
+via two systems sharing an identical Jacobian yet exhibiting opposite (stable vs. unstable spiral)
+nonlinear behavior; and "nonlinear" never equated with "unsolvable," with exact-solution
+techniques and exhaustive phase-portrait analysis both remaining available. 3 misconceptions
+independently classified by Blueprint-declared birth type — MC-1 LINEARISATION-ALWAYS-DETERMINES-
+NONLINEAR-BEHAVIOUR (instruction-induced), MC-2 ALL-NONLINEAR-ODES-CANNOT-BE-SOLVED-EXACTLY
+(overgeneralization), MC-3 EQUILIBRIUM-AT-ZERO-ONLY (instruction-induced). Zero Blueprint/KG
+discrepancy.
+
+Mathematics **717/908 → 719/908**, 189 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 719/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Fresh frontier to be recomputed at the start of Batch 163 per established discipline; `math.de`
+now stands at 41/56 with `fourier-series`, `pde-classification`, `bifurcation` newly reachable,
+plus other ready concepts across `math.linalg`, `math.prob.joint-distribution`, `math.stats`,
+`math.cx`, `math.top`, `math.fnal`, `math.num`, `math.opt`, `math.graph`, `math.cat`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `1cc2359` on `main`, pushed directly.
+
+## Batch 163 (2026-09-19)
+
+Authored `math.de.fourier-series` and `math.de.pde-classification`, continuing the `math.de`
+domain.
+
+`fourier-series`: symmetry checked BEFORE any coefficient integral (even $\Rightarrow b_n=0$, odd
+$\Rightarrow a_n=0$, never computing everything regardless), demonstrated via $f(x)=x^2$'s instant
+$b_n=0$ conclusion; $a_0$ NEVER following the same vanishing rule (it relates to the average
+value, requiring genuine computation regardless of symmetry), demonstrated via $f(x)=x^2$'s
+nonzero $a_0=2\pi^2/3$; and orthogonality as the mechanism isolating each coefficient,
+demonstrated via $f(x)=x$'s full derivation. 3 misconceptions independently classified by
+Blueprint-declared severity — MC-1 SYMMETRY-SHORTCUT-NOT-CHECKED-FIRST (Foundational), MC-2
+A0-ASSUMED-TO-FOLLOW-SAME-VANISHING-RULE-AS-OTHER-EVEN-FUNCTION-COEFFICIENTS (Moderate), MC-3
+ORTHOGONALITY-INTEGRAL-LIMITS-OR-PERIOD-MISMATCHED (Moderate). Zero Blueprint/KG discrepancy;
+declared cross-link `math.fnal.fourier-transform` confirmed still unauthored, independence mode
+correct.
+
+`pde-classification`: $A,B,C$ identified SPECIFICALLY from the PDE's leading second-order terms
+(never any other polynomial in the problem), demonstrated via
+$3u_{xx}-4u_{xy}+5u_{yy}=0$'s direct classification; variable-coefficient classification as
+genuinely LOCAL (never globally fixed), demonstrated via the Tricomi equation
+$yu_{xx}+u_{yy}=0$ changing type across $y=0$; and "parabolic" as a technical $\Delta=0$
+classification (never describing a solution's actual geometric shape), demonstrated via the heat
+equation's bell-curve solution staying bell-shaped. 3 misconceptions independently classified by
+Blueprint-declared birth type — MC-1 DISCRIMINANT-APPLIED-TO-COEFFICIENTS-NOT-PDE (language
+contamination), MC-2 CLASSIFICATION-IS-GLOBAL-NOT-LOCAL (instruction-induced), MC-3 PARABOLIC-
+MEANS-PARABOLA-SHAPE (language contamination). Zero Blueprint/KG discrepancy.
+
+Mathematics **719/908 → 721/908**, 187 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 721/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Fresh frontier to be recomputed at the start of Batch 164 per established discipline; remaining
+`math.de` concepts (bifurcation, and others newly reachable via fourier-series' unlocks) and other
+ready concepts across `math.linalg`, `math.prob.joint-distribution`, `math.stats`, `math.cx`,
+`math.top`, `math.fnal`, `math.num`, `math.opt`, `math.graph`, `math.cat` still reachable.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `d6e710f` on `main`, pushed directly.
+
+## Batch 164 (2026-09-19)
+
+`fourier-convergence`: Fourier series convergence identified as the SAME partial-sum question
+`math.seq.series-convergence` already asks (never a new concept), demonstrated via the direct
+identification of $S_N(x)$ as an ordinary partial sum evaluated at a fixed $x$; Dirichlet's theorem
+stated precisely — convergence to the AVERAGE of the two one-sided limits at a jump (never either
+limit alone), demonstrated via the square wave's convergence to $0$ at $x=0$ (the average of $\pm1$);
+and the Gibbs phenomenon's ~9% overshoot as a PERMANENT signature of the jump (migrating in
+location, never shrinking in height as $N\to\infty$), demonstrated via the persistent overshoot
+across increasing $N$. 3 misconceptions independently classified by Blueprint-declared severity —
+MC-1 FOURIER-CONVERGENCE-ASSUMED-NEW-CONCEPT (Foundational), MC-2
+JUMP-VALUE-ASSUMED-TO-MATCH-ONE-SIDE (High), MC-3
+GIBBS-OVERSHOOT-ASSUMED-TO-SHRINK-WITH-MORE-TERMS (Moderate). Zero Blueprint/KG metadata
+discrepancy; the Blueprint's own Component 7 claim that `math.real.pointwise-convergence` was
+"confirmed authored earlier in this same batch" was independently re-checked against the EB CORPUS
+directory (`educational-brain/concepts/mathematics/`, never the blueprints directory) and confirmed
+genuinely authored — the claim holds up this time, unlike the five prior wrong-corpus discrepancies
+this campaign has caught (Batches 128-129, 157, 160, 161, 162).
+
+`fourier-sine-cosine`: the half-range coefficient factor identified as $2/L$ (never the full-range
+$1/L$, because integration happens over only half the interval), demonstrated via the direct
+coefficient-comparison table; the boundary-condition-to-series matching rule — sine's zero VALUE at
+endpoints matches Dirichlet BCs, cosine's zero DERIVATIVE at endpoints matches Neumann BCs, read
+from the PDE FIRST rather than guessed — demonstrated via the heat equation solved both ways
+(Dirichlet → FSS with $b_n(t)=b_n(0)e^{-k(n\pi/L)^2t}$; Neumann → FCS with $a_0$ conserved,
+representing total heat conservation under insulation); and $a_0$ recognized as capable of
+genuinely vanishing (never assumed automatically nonzero, since it is twice $f$'s average value),
+demonstrated via the direct $a_0=0$ computation for $f(x)=\cos(\pi x)$ on $[0,1]$. 3 misconceptions
+independently classified by Blueprint-declared birth type — MC-1
+FULL-FOURIER-FORMULA-USED-ON-HALF-INTERVAL (instruction-induced), MC-2
+SINE-SERIES-FOR-ZERO-DERIVATIVE-BC (language contamination), MC-3
+COSINE-SERIES-ALWAYS-HAS-NONZERO-AVERAGE (overgeneralization). Zero Blueprint/KG discrepancy.
+
+Mathematics **721/908 → 723/908**, 185 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 723/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)".
+
+Fresh frontier recomputed for Batch 165 (24 concepts): `math.de.bifurcation`,
+`math.de.fourier-transform`, `math.de.separation-of-variables-pde` (completing `math.de`'s
+currently-reachable set), plus `math.cat.category`, `math.cx.complex-numbers-analysis`,
+`math.fnal.convolution`, `math.fnal.normed-space`, `math.graph.random-graph`,
+`math.linalg.basis`/`diagonalization`/`dual-space`/`inner-product-space`/`kernel-image`/
+`projection`/`tensor`, `math.num.floating-point`/`interpolation`/`root-finding`,
+`math.opt.stochastic-gradient`, `math.prob.joint-distribution`,
+`math.stats.normal-distribution`/`percentile`/`sampling-distribution`,
+`math.top.topological-space`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `9bbc4d8` on `main`, pushed directly.
+
+## Batch 165 (2026-09-19)
+
+`fourier-transform`: the transform identified as the Fourier series' continuous-frequency
+$L\to\infty$ limit (never an unrelated tool), demonstrated via the discrete-spikes-merging-into-
+a-continuum argument; convergence requiring genuine decay (never automatic for every function),
+demonstrated via the $e^{-|t|}$-converges-versus-constant-function-diverges contrast; and the
+differentiation-becomes-multiplication-by-$i\omega$ property as the transform's central practical
+power (never a mere computational curiosity), demonstrated via the full integration-by-parts
+derivation and the $f''-f=g$ ODE-to-algebra transformation. 3 misconceptions independently
+classified by Blueprint-declared severity — MC-1 FOURIER-TRANSFORM-AS-UNRELATED-TOOL
+(Foundational), MC-2 TRANSFORM-CONVERGENCE-ASSUMED-UNIVERSAL (Foundational), MC-3
+DIFFERENTIATION-PROPERTY-TREATED-AS-CURIOSITY (Moderate). Reverse-direction cross-link
+discrepancy found: the Blueprint's own Component 7 correctly found `math.meas.l2-space`
+unauthored AT BLUEPRINT-WRITE-TIME, but the EDUCATIONAL-BRAIN corpus has SINCE authored it (the
+`math.meas` domain reached EB certification during this campaign) — upgraded to a genuine
+cross-link probe here, the third such reverse-direction discrepancy this campaign (after the
+pre-segment Batch 131, and this segment's Batch 152 `math.linalg.characteristic-polynomial` and
+Batch 156 `math.calc.taylor-series`). `math.fnal.fourier-transform` independently re-confirmed
+still unauthored, correctly remaining independence mode. All other KG fields matched exactly.
+
+`separation-of-variables-pde`: the shared-separation-constant step justified by the independence
+of $x$ and $t$ (never an arbitrary assumption), demonstrated via the full $u_t=u_{xx}$ algebraic
+derivation; the $X$-equation as a genuine `math.de.bvp` eigenvalue problem where MOST $\lambda$
+give only the trivial solution, demonstrated via the full case analysis deriving $\lambda_n=n^2$;
+and a single separated solution as rarely sufficient (never assumed to solve the full problem),
+demonstrated via the $3\sin(2x)-\sin(5x)$ initial-condition example where a single term
+demonstrably fails and the correct two-mode, differently-decaying superposition is required. 3
+misconceptions independently classified by Blueprint-declared severity — MC-1
+SINGLE-SEPARATED-SOLUTION-ASSUMED-SUFFICIENT (Foundational), MC-2
+SEPARATION-CONSTANT-SIGN-OR-VALUE-MISHANDLED (Foundational), MC-3
+DECAY-RATES-ASSUMED-EQUAL-ACROSS-MODES (Moderate). Zero Blueprint/KG discrepancy; this entry
+synthesizes all three of its prerequisites (`math.de.pde`, `math.de.bvp`,
+`math.de.fourier-series`) and closes `math.de`'s currently-reachable frontier alongside
+`math.de.bifurcation`.
+
+Mathematics **723/908 → 725/908**, 183 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 725/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)".
+
+Fresh frontier recomputed for Batch 166 (26 concepts): `math.de.bifurcation`,
+`math.de.heat-equation`, `math.de.laplace-equation`, `math.de.wave-equation` (the three canonical
+PDEs newly reachable via `separation-of-variables-pde`'s unlocking, completing `math.de`'s
+currently-reachable set), plus `math.cat.category`, `math.cx.complex-numbers-analysis`,
+`math.fnal.convolution`, `math.fnal.normed-space`, `math.graph.random-graph`,
+`math.linalg.basis`/`diagonalization`/`dual-space`/`inner-product-space`/`kernel-image`/
+`projection`/`tensor`, `math.num.floating-point`/`interpolation`/`root-finding`,
+`math.opt.stochastic-gradient`, `math.prob.characteristic-function`/`joint-distribution`,
+`math.stats.normal-distribution`/`percentile`/`sampling-distribution`,
+`math.top.topological-space`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `9bca692` on `main`, pushed directly.
+
+## Batch 166 (2026-09-19)
+
+`heat-equation`: the full solution as a SUPERPOSITION over all eigenvalues (never a single
+separated solution), demonstrated via the eigenvalue-problem-to-Fourier-series-matching
+derivation; instantaneous smoothing with infinite effective propagation speed (never wave-like
+propagation), demonstrated via the smoothing-versus-propagating contrast; and decay rate scaling
+as $n^2$ (never $n$), demonstrated via the direct $\lambda_n=(n\pi/L)^2$ eigenvalue derivation and
+the $4\times$/$100\times$ relative decay comparison. 3 misconceptions independently classified by
+Blueprint-declared birth type — MC-1 SEPARATION-GIVES-ONLY-ONE-SOLUTION (instruction-induced),
+MC-2 HEAT-EQUATION-SOLUTION-PROPAGATES (language contamination), MC-3
+DECAY-RATE-PROPORTIONAL-TO-N (instruction-induced). Zero Blueprint/KG discrepancy.
+
+`wave-equation`: two initial conditions required (never one) since the equation is second-order in
+$t$, demonstrated via the plucked-string worked example deriving $a_n$ from $f$ and $b_n$ from
+$g$ separately; the time-oscillation frequency $\omega_n=c\sqrt{\lambda_n}$ (never $\lambda_n$
+itself), demonstrated via the direct $T''+c^2\lambda_nT=0$ derivation; and d'Alembert's formula
+requiring the odd-periodic extension on a bounded domain (never applied directly), demonstrated
+via the odd-2L-periodic extension construction. 3 misconceptions independently classified by
+Blueprint-declared birth type — MC-1 ONE-INITIAL-CONDITION-FOR-WAVE (instruction-induced), MC-2
+TIME-OSCILLATION-FREQUENCY-EQUALS-EIGENVALUE (instruction-induced), MC-3
+DALEMBERT-APPLIES-INSIDE-BOUNDED-DOMAIN (overgeneralization). Zero Blueprint/KG discrepancy; this
+entry directly contrasts against `heat-equation` (finite speed/time-reversible/energy-conserving
+vs. infinite speed/irreversible/energy-decreasing), authored earlier this same batch.
+
+Mathematics **725/908 → 727/908**, 181 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 727/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)".
+
+Fresh frontier recomputed for Batch 167 (24 concepts): `math.de.bifurcation`,
+`math.de.laplace-equation` (the last remaining canonical PDE in `math.de`'s currently-reachable
+set), plus `math.cat.category`, `math.cx.complex-numbers-analysis`, `math.fnal.convolution`,
+`math.fnal.normed-space`, `math.graph.random-graph`, `math.linalg.basis`/`diagonalization`/
+`dual-space`/`inner-product-space`/`kernel-image`/`projection`/`tensor`,
+`math.num.floating-point`/`interpolation`/`root-finding`, `math.opt.stochastic-gradient`,
+`math.prob.characteristic-function`/`joint-distribution`,
+`math.stats.normal-distribution`/`percentile`/`sampling-distribution`,
+`math.top.topological-space`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `712a6cd` on `main`, pushed directly.
+
+## Batch 167 (2026-09-19)
+
+`bifurcation`: a bifurcation identified as a TOPOLOGICAL change in the phase portrait (never
+merely a stability sign-flip), demonstrated via the saddle-node normal form's equilibria created
+from nothing as $\mu$ crosses zero; the normal form as the EXACT local topology after a smooth
+coordinate change (never a Taylor approximation), demonstrated via the Guckenheimer-Holmes
+exact-coordinate-change theorem; and a subcritical Hopf bifurcation genuinely having an UNSTABLE
+limit cycle (never no cycle at all), demonstrated via the direct amplitude-equation derivation and
+the resulting hysteresis. 3 misconceptions independently classified by Blueprint-declared birth
+type — MC-1 BIFURCATION-IS-JUST-STABILITY-CHANGE (instruction-induced), MC-2
+NORMAL-FORM-IS-AN-APPROXIMATION (instruction-induced), MC-3 SUBCRITICAL-HOPF-HAS-NO-LIMIT-CYCLE
+(overgeneralization). Stale-metadata discrepancy found: the Blueprint's own Component 0 states
+`unlocks: math.de.chaos`, but the live KG lists `math.de.chaos` under `related` with `unlocks`
+empty — the live KG's current value used as authoritative.
+
+`laplace-equation`: recognized as `math.de.pde`'s canonical ELLIPTIC, time-free equilibrium
+example (never an evolving process), demonstrated via the steady-state-plate contrast with the
+heat equation; the same separation-of-variables technique reapplied with hyperbolic sine/cosine
+(never the heat equation's decaying exponential), demonstrated via the full rectangle
+boundary-value derivation reusing `math.de.separation-of-variables-pde`'s own eigenvalue problem;
+and the mean value property/maximum principle bounding interior values by the boundary's range
+(never unbounded inside), demonstrated via the plate-temperature bound. 3 misconceptions
+independently classified by Blueprint-declared severity — MC-1
+INTERIOR-HARMONIC-VALUE-ASSUMED-UNBOUNDED-BY-BOUNDARY (Foundational), MC-2
+LAPLACE-SEPARATION-CONFUSED-WITH-HEAT-EQUATION-SEPARATION (Foundational), MC-3
+HARMONIC-FUNCTION-ASSUMED-TO-REQUIRE-NO-BOUNDARY-DATA (Moderate). Zero Blueprint/KG discrepancy;
+`math.cx.harmonic-functions` independently re-confirmed still unauthored, correctly remaining
+independence mode. This entry, together with `bifurcation`, closes `math.de`'s ENTIRE
+currently-reachable frontier for this campaign.
+
+Mathematics **727/908 → 729/908**, 179 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 729/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)".
+
+Fresh frontier recomputed for Batch 168 (25 concepts): `math.de.chaos`, `math.de.harmonic-functions`,
+`math.de.poisson-equation` (all three newly reachable via `bifurcation`/`laplace-equation`'s
+unlocking, `math.de` domain no longer contributing any concept to the frontier's PDE-family
+concepts beyond these), plus `math.cat.category`, `math.cx.complex-numbers-analysis`,
+`math.fnal.convolution`, `math.fnal.normed-space`, `math.graph.random-graph`, `math.linalg.basis`/
+`diagonalization`/`dual-space`/`inner-product-space`/`kernel-image`/`projection`/`tensor`,
+`math.num.floating-point`/`interpolation`/`root-finding`, `math.opt.stochastic-gradient`,
+`math.prob.characteristic-function`/`joint-distribution`,
+`math.stats.normal-distribution`/`percentile`/`sampling-distribution`,
+`math.top.topological-space`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `0401548` on `main`, pushed directly.
+
+## Batch 168 (2026-09-19)
+
+`harmonic-functions`: the mean value property as an EXACT identity (never an approximation),
+demonstrated via the exact integral verification for $u=x^2-y^2$; boundary agreement alone
+forcing interior agreement (never requiring separate interior checks), demonstrated via the
+difference-function Dirichlet-uniqueness argument; and holomorphic functions as a free source of
+harmonic functions via Cauchy-Riemann (never an unrelated topic), demonstrated via the $f(z)=z^2$
+derivation certifying both $u=x^2-y^2$ and $v=2xy$. 3 misconceptions independently classified by
+Blueprint-declared severity — MC-1 MEAN-VALUE-PROPERTY-AS-APPROXIMATION (Foundational), MC-2
+INTERIOR-CHECK-ASSUMED-NECESSARY (High), MC-3 HARMONIC-AND-HOLOMORPHIC-UNRELATED (Moderate).
+Wrong-corpus cross-link discrepancy found: the Blueprint's own Component 7 claims BOTH
+`math.cx.analytic-functions` and `math.cx.cauchy-riemann` "authored" — checked against the
+BLUEPRINTS directory, where both exist, not the EDUCATIONAL-BRAIN corpus, where NEITHER exists —
+corrected to independence mode, the seventh such wrong-corpus discrepancy this campaign (after
+Batches 128-129, 157, 160, 161, and both instances at Batch 162).
+
+`poisson-equation`: Laplace's special properties genuinely FAILING for Poisson solutions (never
+assumed to extend automatically), demonstrated via the direct $u=x^2$ mean-value-property
+counterexample; Laplace's Equation as Poisson's exact special case $f\equiv0$ (never a separate,
+unrelated theory), demonstrated via the electrostatics charge-free-region reduction; and Green's
+functions as a genuine point-source-then-superpose STRATEGY (never mere notation), demonstrated
+via the explicit strategy framing contrasted with separation of variables. 3 misconceptions
+independently classified by Blueprint-declared severity — MC-1
+LAPLACE-PROPERTIES-ASSUMED-TO-EXTEND (Foundational), MC-2 POISSON-AND-LAPLACE-ASSUMED-UNRELATED
+(High), MC-3 GREENS-FUNCTIONS-ASSUMED-MERELY-NOTATIONAL (Moderate). Zero Blueprint/KG discrepancy;
+`math.de.greens-function` independently re-confirmed still unauthored, correctly remaining
+independence mode. This entry, together with `harmonic-functions`, closes `math.de`'s ENTIRE
+currently-reachable frontier for this campaign.
+
+Mathematics **729/908 → 731/908**, 177 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 731/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)".
+
+Fresh frontier recomputed for Batch 169 (24 concepts): `math.de.chaos`, `math.de.greens-function`
+(the last two remaining PDE-family concepts newly reachable), plus `math.cat.category`,
+`math.cx.complex-numbers-analysis`, `math.fnal.convolution`, `math.fnal.normed-space`,
+`math.graph.random-graph`, `math.linalg.basis`/`diagonalization`/`dual-space`/
+`inner-product-space`/`kernel-image`/`projection`/`tensor`,
+`math.num.floating-point`/`interpolation`/`root-finding`, `math.opt.stochastic-gradient`,
+`math.prob.characteristic-function`/`joint-distribution`,
+`math.stats.normal-distribution`/`percentile`/`sampling-distribution`,
+`math.top.topological-space`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `ce11e24` on `main`, pushed directly.
+
+## Batch 169 (2026-09-19)
+
+`chaos`: chaos as DETERMINISTIC sensitive dependence (never conflated with randomness),
+demonstrated via the reproducible-trajectory-versus-unpredictability distinction for two nearby
+Lorenz initial conditions; the Lyapunov exponent $\lambda_1$ as a TIME-AVERAGED asymptotic rate
+(never an instantaneous constant), demonstrated via the finite-time-versus-infinite-time-limit
+contrast; and chaos requiring neither large nor complex systems (never assumed to need high
+dimensionality), demonstrated via the Lorenz system's (3 variables) and logistic map's (1
+variable) minimal chaotic structure. 3 misconceptions independently classified by
+Blueprint-declared birth type — MC-1 CHAOS-MEANS-RANDOM (language contamination), MC-2
+LYAPUNOV-EXPONENT-MEASURES-DIVERGENCE-SPEED (instruction-induced), MC-3
+CHAOS-REQUIRES-LARGE-SYSTEMS (overgeneralization). Zero Blueprint/KG discrepancy.
+
+`greens-function`: $G$ requiring a piecewise construction with a derivative jump (never a single
+smooth formula), demonstrated via the full $[0,1]$ piecewise Green's-function derivation with
+continuity and jump conditions; $G$ alone never solving the general problem (the superposition
+integral is essential), demonstrated via the exact-match verification against the known
+closed-form solution to $-u''=1$; and $G$ encoding boundary conditions as well as the operator
+(never operator-only), demonstrated via the mixed-boundary-condition contrast. 3 misconceptions
+independently classified by Blueprint-declared severity — MC-1
+GREENS-FUNCTION-ASSUMED-SMOOTH-THROUGHOUT (Foundational), MC-2
+GREENS-FUNCTION-ALONE-ASSUMED-SUFFICIENT (High), MC-3 GREENS-FUNCTION-ASSUMED-OPERATOR-ONLY
+(Moderate). Zero Blueprint/KG discrepancy; `math.de.ivp` independently re-confirmed authored
+(satisfying the `requires` dependency), `math.fnal.distributions` independently re-confirmed still
+unauthored, correctly remaining independence mode. This entry, together with `chaos`, closes
+`math.de`'s ENTIRE currently-reachable frontier for this campaign — only 1 `math.de` concept
+remains unauthored in the whole domain, and it is not yet reachable (blocked by a cross-subject
+prerequisite still unauthored elsewhere).
+
+Mathematics **731/908 → 733/908**, 175 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 733/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)".
+
+Fresh frontier recomputed for Batch 170 (22 concepts, `math.de` now fully exhausted from the
+frontier — only 1 concept left in the whole domain, currently unreachable): `math.cat.category`,
+`math.cx.complex-numbers-analysis`, `math.fnal.convolution`, `math.fnal.normed-space`,
+`math.graph.random-graph`, `math.linalg.basis`/`diagonalization`/`dual-space`/
+`inner-product-space`/`kernel-image`/`projection`/`tensor`,
+`math.num.floating-point`/`interpolation`/`root-finding`, `math.opt.stochastic-gradient`,
+`math.prob.characteristic-function`/`joint-distribution`,
+`math.stats.normal-distribution`/`percentile`/`sampling-distribution`,
+`math.top.topological-space`. This batch will diversify away from `math.de` into other domains for
+the first time in an extended stretch of this campaign.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `37057f6` on `main`, pushed directly.
+
+## Batch 170 (2026-09-19) — first math.linalg concepts this campaign
+
+`basis`: a basis requiring BOTH spanning AND independence simultaneously (never just one),
+demonstrated via the $\{(1,0),(0,1),(1,1)\}$ spanning-but-dependent counterexample; a vector space
+having INFINITELY MANY valid bases (never a single unique one), demonstrated via three distinct
+verified bases for $\mathbb R^2$; and coordinates being basis-relative (never an absolute property
+of the vector), demonstrated via $v=(5,3)$'s differing coordinates $(5,3)$ vs. $(4,1)$ across two
+bases. 3 misconceptions independently classified by Blueprint-declared root-cause chain — MC-1
+SPANNING-SET-IS-AUTOMATICALLY-A-BASIS (Foundational/root), MC-2 ONLY-ONE-BASIS-EXISTS (downstream
+of MC-1), MC-3 COORDINATES-ARE-BASIS-INDEPENDENT (downstream of MC-1/MC-2). Zero Blueprint/KG
+discrepancy — this campaign's first `math.linalg` concept, diversifying away from the
+now-exhausted `math.de` frontier.
+
+`kernel-image`: the kernel able to contain many nonzero vectors (never automatically just
+$\{0\}$), demonstrated via $T(x,y)=(x+y,x+y)$'s full kernel line $\{(t,-t)\}$; injectivity tested
+EXACTLY via the kernel criterion (never by spot-checking input pairs), demonstrated via the same
+$T$'s definitive $\ker(T)\ne\{0\}\Rightarrow$ non-injective conclusion; and the image able to be a
+proper subspace (never automatically the entire codomain), demonstrated via the same $T$'s
+diagonal-line image missing $(1,2)$. 3 misconceptions independently classified by
+Blueprint-declared severity — MC-1 KERNEL-ASSUMED-TO-BE-ONLY-ZERO (Foundational), MC-2
+INJECTIVITY-CHECKED-BY-SPOT-CHECKING-RATHER-THAN-KERNEL (Foundational), MC-3
+IMAGE-ASSUMED-TO-BE-THE-ENTIRE-CODOMAIN (Moderate). Stale cross_links discrepancy found: the
+Blueprint's own Component 7 states "cross_links: (none)" — the live KG lists
+`math.abst.group-homomorphism`, which the Blueprint's own validation (V-5) never actually checked
+against this specific field — corrected here to a genuine cross-link probe, since
+`math.abst.group-homomorphism` IS authored (EB-certified `math.abst` domain), connecting the
+kernel/image structure to its exact group-homomorphism parallel (kernel-always-normal-subgroup,
+image-always-subgroup, trivial-kernel-iff-injective). This is a NEW discrepancy category (missed
+cross_links check, distinct from wrong-corpus/reverse-direction/stale-metadata) — first occurrence
+this campaign.
+
+Mathematics **733/908 → 735/908**, 173 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 735/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)".
+
+Fresh frontier recomputed for Batch 171 (24 concepts): `math.linalg.coordinates`,
+`math.linalg.dimension` (both newly reachable via `basis`'s unlocking), `math.linalg.
+matrix-representation`, `math.linalg.orthogonal-basis` (newly reachable via `kernel-image`'s
+unlocking-adjacent progress), plus `math.cat.category`, `math.cx.complex-numbers-analysis`,
+`math.fnal.convolution`, `math.fnal.normed-space`, `math.graph.random-graph`,
+`math.linalg.diagonalization`/`dual-space`/`inner-product-space`/`projection`/`tensor`,
+`math.num.floating-point`/`interpolation`/`root-finding`, `math.opt.stochastic-gradient`,
+`math.prob.characteristic-function`/`joint-distribution`,
+`math.stats.normal-distribution`/`percentile`/`sampling-distribution`,
+`math.top.topological-space`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `18c1bb9` on `main`, pushed directly.
+
+## Batch 171 (2026-09-19) — two consecutive stale-unlocks corrections
+
+`dimension`: every basis of the same space having the IDENTICAL size (never varying by which basis
+is chosen), demonstrated via the direct vector-count verification for two structurally different
+bases of $\mathbb R^2$; and orthogonal-complement dimensions SUMMING to the total (never required
+to be equal), demonstrated via the plane/line dimension check in $\mathbb R^3$
+($2+1=3$). 2 misconceptions independently classified by Blueprint-declared severity — MC-1
+DIFFERENT-BASES-ASSUMED-TO-HAVE-DIFFERENT-SIZES (Foundational), MC-2
+ORTHOGONAL-COMPLEMENT-DIMENSIONS-ASSUMED-EQUAL (Foundational). Stale-metadata discrepancy found:
+the Blueprint's own Component 0/7 both state `unlocks: none` — the live KG lists
+`math.linalg.rank-nullity` — the live KG's current value used as authoritative.
+
+`coordinates`: coordinates genuinely depending on the chosen basis (never a fixed "true" property
+of the vector alone), demonstrated via $v=(5,3)$'s differing coordinate vectors $(4,1)$ vs.
+$(5,3)$ across two bases; and recovering $v$ from $[v]_\beta$ requiring the ACTUAL basis vectors
+(never reading coordinate numbers directly as standard components), demonstrated via
+$[v]_\beta=(2,3)$ for $\beta=\{(2,0),(0,3)\}$ reconstructing to $(4,9)$, not $(2,3)$. 2
+misconceptions independently classified by Blueprint-declared severity — MC-1
+STANDARD-COORDINATES-TREATED-AS-THE-ONLY-TRUE-REPRESENTATION (Moderate), MC-2
+NON-STANDARD-COORDINATE-VECTOR-MISREAD-AS-STANDARD-COMPONENTS (Foundational). Stale-metadata
+discrepancy found: the Blueprint's own Component 0/7 both state `unlocks: none` — the live KG
+lists `math.linalg.change-of-basis` (also the concept's own declared child) — the live KG's
+current value used as authoritative. This is the SECOND consecutive `unlocks`-field stale-metadata
+discrepancy this batch, both apparently stemming from these two Blueprints' authoring-time KG
+snapshots predating a later `math.linalg` unlocks addition.
+
+Mathematics **735/908 → 737/908**, 171 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 737/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)".
+
+Fresh frontier recomputed for Batch 172 (24 concepts): `math.linalg.change-of-basis`,
+`math.linalg.rank-nullity` (both newly reachable via `dimension`/`coordinates`'s corrected
+unlocks), plus `math.cat.category`, `math.cx.complex-numbers-analysis`, `math.fnal.convolution`,
+`math.fnal.normed-space`, `math.graph.random-graph`,
+`math.linalg.diagonalization`/`dual-space`/`inner-product-space`/`matrix-representation`/
+`orthogonal-basis`/`projection`/`tensor`, `math.num.floating-point`/`interpolation`/`root-finding`,
+`math.opt.stochastic-gradient`, `math.prob.characteristic-function`/`joint-distribution`,
+`math.stats.normal-distribution`/`percentile`/`sampling-distribution`,
+`math.top.topological-space`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `3fedf9c` on `main`, pushed directly.
+
+## Batch 172 (2026-09-19)
+
+`rank-nullity`: $\dim(V)$ as the DOMAIN's dimension — for a matrix, always the column count, never
+the row count, demonstrated via the $3\times5$-matrix nullity computation contrasting correct
+column-based $\dim(V)=5$ against the incorrect row-based $3$; and injectivity requiring EXACT
+equality $\text{rank}(T)=\dim(V)$, never merely "high" or "close to full" rank, demonstrated via
+the $4\times4$-matrix rank-4-vs-rank-3 side-by-side comparison. 2 misconceptions independently
+classified by Blueprint-declared severity — MC-1 DIM-V-COMPUTED-FROM-ROWS-INSTEAD-OF-COLUMNS
+(Foundational), MC-2 INJECTIVITY-CHECKED-VIA-HIGH-RANK-RATHER-THAN-EXACT-EQUALITY (Foundational).
+Zero Blueprint/KG discrepancy — all four prerequisites (`math.linalg.rank`,
+`math.linalg.null-space`, `math.linalg.column-space`, `math.linalg.dimension`) independently
+re-confirmed authored.
+
+`change-of-basis`: $P$'s columns coming from the SOURCE basis in TARGET coordinates, never the
+reverse, demonstrated via the full $P_{\beta\to\gamma}$ construction for $\beta=\{(1,1),(1,-1)\}$;
+the reverse conversion requiring $P^{-1}$, never reapplying $P$ itself, demonstrated via the
+round-trip verification recovering the original $\beta$-coordinates exactly; and the similarity
+relation $B=P^{-1}AP$ as a direct extension of the coordinate-conversion machinery, never a new
+isolated formula. 2 misconceptions independently classified by Blueprint-declared severity — MC-1
+CHANGE-OF-BASIS-MATRIX-BUILT-FROM-WRONG-BASIS (Foundational), MC-2
+REVERSE-CONVERSION-USES-P-INSTEAD-OF-P-INVERSE (Foundational). Zero Blueprint/KG discrepancy;
+`math.linalg.matrix-inverse` independently re-confirmed authored.
+
+Mathematics **737/908 → 739/908**, 169 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 739/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)".
+
+Fresh frontier recomputed for Batch 173 (22 concepts, `math.linalg.rank-nullity` and
+`math.linalg.change-of-basis` both closed their own currently-reachable frontiers with no direct
+unlocks): `math.cat.category`, `math.cx.complex-numbers-analysis`, `math.fnal.convolution`,
+`math.fnal.normed-space`, `math.graph.random-graph`,
+`math.linalg.diagonalization`/`dual-space`/`inner-product-space`/`matrix-representation`/
+`orthogonal-basis`/`projection`/`tensor`, `math.num.floating-point`/`interpolation`/`root-finding`,
+`math.opt.stochastic-gradient`, `math.prob.characteristic-function`/`joint-distribution`,
+`math.stats.normal-distribution`/`percentile`/`sampling-distribution`,
+`math.top.topological-space`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `169bf8a` on `main`, pushed directly.
+
+## Batch 173 (2026-09-19)
+
+`inner-product-space`: the induced norm always existing and recovering the familiar Euclidean
+length, demonstrated via $v=(1,2,2)$'s $\|v\|=3$ computation; the structure hierarchy inner
+product space $\Rightarrow$ normed space $\Rightarrow$ metric space as a ONE-WAY chain (never
+assumed reversible), demonstrated via the sup-norm-on-$C([a,b])$ counterexample; and a Hilbert
+space requiring genuinely additional completeness (never conflated with an ordinary inner product
+space), demonstrated via the precise definition and the finite-vs-infinite-dimensional
+completeness distinction. 3 misconceptions independently classified by Blueprint-declared
+severity — MC-1 NORMED-SPACE-ASSUMED-TO-IMPLY-INNER-PRODUCT-SPACE (Foundational), MC-2
+HILBERT-SPACE-CONFLATED-WITH-INNER-PRODUCT-SPACE (Foundational), MC-3
+CAUCHY-SCHWARZ-DIRECTION-REVERSED (Moderate). Zero Blueprint/KG discrepancy;
+`math.fnal.hilbert-space` independently re-confirmed still unauthored, correctly remaining
+independence mode.
+
+`orthogonal-basis`: orthogonal and orthonormal as distinct conditions (orthonormal strictly
+stronger, never conflated), demonstrated via the $v_1=(3,4),v_2=(4,-3)$ orthogonal-but-not-
+orthonormal verification and normalization; the ONB coordinate shortcut $c_i=\langle v,e_i\rangle$
+working because orthogonality kills cross terms and unit length simplifies the rest (never
+requiring system-solving), demonstrated via the full numeric verification for $v=(1,7)$; and the
+shortcut FAILING SILENTLY for a non-orthonormal basis (never a universal basis trick), demonstrated
+via the $\{(1,0),(1,1)\}$ counterexample producing a demonstrably wrong reconstruction. 3
+misconceptions independently classified by Blueprint-declared severity — MC-1
+ONB-COORDINATE-SHORTCUT-OVERGENERALIZED (Foundational), MC-2
+ORTHOGONAL-CONFLATED-WITH-ORTHONORMAL (Foundational), MC-3
+ORTHOGONAL-VECTORS-ASSUMED-AUTOMATICALLY-SPANNING (Moderate). Zero Blueprint/KG discrepancy;
+`math.linalg.orthogonality` independently re-confirmed authored. Noted: the Blueprint's own
+flagged description-field anomaly (a stray matrix-transpose fragment) is no longer present in the
+live KG's current description — resolved independently of this campaign.
+
+Mathematics **739/908 → 741/908**, 167 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 741/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)".
+
+Fresh frontier recomputed for Batch 174 (21 concepts): `math.linalg.spectral-theorem` (newly
+reachable via `orthogonal-basis`'s unlocking chain), plus `math.cat.category`,
+`math.cx.complex-numbers-analysis`, `math.fnal.convolution`, `math.fnal.normed-space`,
+`math.graph.random-graph`, `math.linalg.diagonalization`/`dual-space`/`matrix-representation`/
+`projection`/`tensor`, `math.num.floating-point`/`interpolation`/`root-finding`,
+`math.opt.stochastic-gradient`, `math.prob.characteristic-function`/`joint-distribution`,
+`math.stats.normal-distribution`/`percentile`/`sampling-distribution`,
+`math.top.topological-space`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `7224ba6` on `main`, pushed directly.
+
+## Batch 174 (2026-09-19)
+
+`diagonalization`: $P$'s columns and $D$'s diagonal requiring matching eigenvector-eigenvalue order
+(never mismatched), demonstrated via the full $P$/$D$ construction and reconstruction check for
+$A=\begin{pmatrix}4&1\\2&3\end{pmatrix}$; diagonal powers computed ENTRYWISE as the central
+practical payoff, demonstrated via the $A^{10}$ computation; and a repeated eigenvalue as a WARNING
+to check multiplicities (never an automatic verdict either way), demonstrated via the
+non-diagonalizable $\begin{pmatrix}2&1\\0&2\end{pmatrix}$ contrasted with the trivially-
+diagonalizable $A=2I$. 2 misconceptions independently classified by Blueprint-declared severity —
+MC-1 EIGENVECTOR-EIGENVALUE-ORDER-MISMATCHED-BETWEEN-P-AND-D (Foundational), MC-2
+REPEATED-EIGENVALUE-DIAGONALIZABILITY-ASSUMED-WITHOUT-CHECKING-MULTIPLICITIES (Foundational). Zero
+Blueprint/KG discrepancy; `math.de.systems-matrix-method` independently re-confirmed still
+unauthored, correctly remaining independence mode.
+
+`projection`: the projection defined by its residual being ORTHOGONAL to $W$ (the entire
+characterization, never an incidental afterthought), demonstrated via the direct residual-
+orthogonality verification for $W=\text{span}((1,0,0))$; the single-vector projection landing
+along $u$'s direction (never $v$'s), demonstrated via the correct-versus-incorrect final-
+multiplication contrast; and the sum-of-projections formula requiring orthogonality (never valid
+for a general spanning set), demonstrated via the orthonormal-basis $xy$-plane computation with the
+non-orthogonal-basis caveat. 3 misconceptions independently classified by Blueprint-declared
+severity — MC-1 PROJECTION-FORMULA-FINAL-MULTIPLICATION-MISAPPLIED (Foundational), MC-2
+SUM-OF-PROJECTIONS-FORMULA-OVERGENERALIZED-TO-NON-ORTHOGONAL-BASES (Foundational), MC-3
+RESIDUAL-ORTHOGONALITY-CHECK-SKIPPED (Moderate). Zero Blueprint/KG discrepancy.
+
+Mathematics **741/908 → 743/908**, 165 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 743/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)".
+
+Fresh frontier recomputed for Batch 175 (24 concepts): `math.linalg.gram-schmidt`,
+`math.linalg.jordan-form`, `math.linalg.least-squares`, `math.linalg.matrix-exponential`,
+`math.linalg.spectral-theorem` (all five newly reachable via `diagonalization`/`projection`'s
+unlocking), plus `math.cat.category`, `math.cx.complex-numbers-analysis`,
+`math.de.systems-matrix-method`, `math.fnal.convolution`, `math.fnal.normed-space`,
+`math.graph.random-graph`, `math.linalg.dual-space`/`matrix-representation`/`tensor`,
+`math.num.floating-point`/`interpolation`/`root-finding`, `math.opt.stochastic-gradient`,
+`math.prob.characteristic-function`/`joint-distribution`,
+`math.stats.normal-distribution`/`percentile`/`sampling-distribution`,
+`math.top.topological-space`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `c21f91f` on `main`, pushed directly.
+
+## Batch 175 (2026-09-19) — third stale-unlocks correction
+
+`gram-schmidt`: each new vector required to subtract projections onto ALL previously constructed
+vectors (never just the most recent), demonstrated via the full three-vector case contrasting the
+correct two-projection subtraction against the flawed one-projection version; and
+normalization happening only AFTER all orthogonalization is complete (never mid-sequence),
+demonstrated via the explicit phase-separation example. 3 misconceptions independently classified
+by Blueprint-declared severity — MC-1
+GRAM-SCHMIDT-PROJECTION-SUBTRACTED-ONLY-FROM-IMMEDIATE-PREDECESSOR (Foundational), MC-2
+ORTHOGONALIZATION-AND-NORMALIZATION-STEPS-CONFLATED (Moderate), MC-3
+ORTHOGONALITY-RESULT-NOT-VERIFIED (Moderate). Stale-metadata discrepancy found: the Blueprint's own
+Component 0/7 both state `unlocks: none` — the live KG lists `math.linalg.qr-factorization` — the
+live KG's current value used as authoritative, the third such `unlocks`-field discrepancy this
+campaign (after `math.linalg.dimension` and `math.linalg.coordinates` at Batch 171).
+
+`spectral-theorem`: $Q$'s orthogonality giving $Q^{-1}=Q^T$ FOR FREE as the genuinely special
+feature (never conflated with ordinary diagonalization), demonstrated via the direct $Q^TQ=I$
+contrast against a general non-symmetric matrix's genuine matrix-inversion requirement; $Q$
+requiring NORMALIZED eigenvectors (never raw ones); and the orthogonality guarantee covering only
+DIFFERENT eigenvalues (never same-eigenvalue eigenvectors automatically). 3 misconceptions
+independently classified by Blueprint-declared severity — MC-1
+SPECTRAL-THEOREM-CONFLATED-WITH-ORDINARY-DIAGONALIZATION (Foundational), MC-2
+EIGENVECTOR-NORMALIZATION-STEP-OMITTED (Foundational), MC-3
+SAME-EIGENVALUE-EIGENVECTORS-ASSUMED-AUTOMATICALLY-ORTHOGONAL (Moderate). Zero Blueprint/KG
+discrepancy; `math.fnal.spectral-theory` independently re-confirmed still unauthored, correctly
+remaining independence mode.
+
+Mathematics **743/908 → 745/908**, 163 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 745/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)".
+
+Fresh frontier recomputed for Batch 176 (24 concepts): `math.linalg.positive-definite`,
+`math.linalg.qr-factorization` (both newly reachable via `spectral-theorem`/`gram-schmidt`'s
+corrected/declared unlocking), plus `math.cat.category`, `math.cx.complex-numbers-analysis`,
+`math.de.systems-matrix-method`, `math.fnal.convolution`, `math.fnal.normed-space`,
+`math.graph.random-graph`, `math.linalg.dual-space`/`jordan-form`/`least-squares`/
+`matrix-exponential`/`matrix-representation`/`tensor`,
+`math.num.floating-point`/`interpolation`/`root-finding`, `math.opt.stochastic-gradient`,
+`math.prob.characteristic-function`/`joint-distribution`,
+`math.stats.normal-distribution`/`percentile`/`sampling-distribution`,
+`math.top.topological-space`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `c9c570a` on `main`, pushed directly.
+
+## Batch 176 (2026-09-19) — fourth reverse-direction correction
+
+`positive-definite`: the eigenvalue test DERIVED from the Spectral Theorem (never an independently
+asserted fact), demonstrated via the live $v^TAv=\sum\lambda_iw_i^2$ substitution; and a zero
+eigenvalue as the EXACT boundary between PSD and positive definite (never interchangeable),
+demonstrated via $A=\begin{pmatrix}1&1\\1&1\end{pmatrix}$'s quadratic form vanishing exactly at a
+specific nonzero $v$. 3 misconceptions independently classified by Blueprint-declared severity —
+MC-1 POSITIVE-DEFINITE-AND-PSD-TREATED-AS-INTERCHANGEABLE (Foundational), MC-2
+POSITIVE-DEFINITENESS-CHECKED-ON-NON-SYMMETRIC-MATRIX (Foundational), MC-3
+ONE-EIGENVALUE-CHECKED-INSTEAD-OF-ALL (Moderate). Reverse-direction cross-link discrepancy found:
+the Blueprint's own Component 7 correctly found `math.opt.convex-function` unauthored AT
+BLUEPRINT-WRITE-TIME, but the EDUCATIONAL-BRAIN corpus has SINCE authored it, with its own EB entry
+reciprocally cross-linking back to THIS concept for its Hessian-PSD convexity criterion — upgraded
+to a genuine cross-link probe, the fourth such reverse-direction discrepancy this campaign (after
+the pre-segment Batch 131, Batch 152, Batch 156, and Batch 165).
+
+`qr-factorization`: $R$'s below-diagonal entries EXACTLY zero by Gram-Schmidt's sequential
+construction (never merely small or approximate), demonstrated via the full $Q,R$ construction
+connecting each $R$ entry to a Gram-Schmidt step; and back-substitution as the efficient solve for
+an upper-triangular system (never general Gaussian elimination, which works but wastes the
+structure), demonstrated via the least-squares $Rx=Q^Tb$ solve. 2 misconceptions independently
+classified by Blueprint-declared severity — MC-1
+R-BELOW-DIAGONAL-ENTRIES-NOT-RECOGNIZED-AS-EXACTLY-ZERO-BY-CONSTRUCTION (Foundational), MC-2
+GENERAL-ELIMINATION-USED-INSTEAD-OF-BACK-SUBSTITUTION-FOR-UPPER-TRIANGULAR-R (Moderate). Zero
+Blueprint/KG discrepancy; `math.num.qr-algorithm` independently re-confirmed still unauthored,
+correctly remaining independence mode.
+
+Mathematics **745/908 → 747/908**, 161 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 747/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)".
+
+Fresh frontier recomputed for Batch 177 (27 concepts, notably widening via cross-domain
+`math.opt`/`math.num` unlocks from `positive-definite`): `math.linalg.cholesky`, `math.linalg.svd`
+(newly reachable), `math.num.qr-algorithm`, `math.opt.quadratic-programming`,
+`math.opt.semidefinite-programming` (newly reachable via `positive-definite`/`qr-factorization`'s
+unlocking chains), plus `math.cat.category`, `math.cx.complex-numbers-analysis`,
+`math.de.systems-matrix-method`, `math.fnal.convolution`, `math.fnal.normed-space`,
+`math.graph.random-graph`, `math.linalg.dual-space`/`jordan-form`/`least-squares`/
+`matrix-exponential`/`matrix-representation`/`tensor`,
+`math.num.floating-point`/`interpolation`/`root-finding`, `math.opt.stochastic-gradient`,
+`math.prob.characteristic-function`/`joint-distribution`,
+`math.stats.normal-distribution`/`percentile`/`sampling-distribution`,
+`math.top.topological-space`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `9f064cb` on `main`, pushed directly.
+
+## Batch 177 (2026-09-19)
+
+`cholesky`: Cholesky as LU specialized by symmetry into $A=LL^T$ (never a separate factorization
+method), demonstrated via the direct $U=DL_0^T$ symmetrization derivation from ordinary LU output;
+$L$ computable DIRECTLY via recursive column formulas (never requiring general LU first),
+demonstrated via the matching direct-computation result for the same matrix; and Cholesky using
+roughly HALF the work of general LU (never the same cost), demonstrated via the 9-vs-6-number
+storage-count contrast. 3 misconceptions independently classified by Blueprint-declared severity
+— MC-1 CHOLESKY-ASSUMED-SEPARATE-METHOD (Foundational), MC-2
+CHOLESKY-ASSUMED-TO-REQUIRE-LU-FIRST (High), MC-3 CHOLESKY-ASSUMED-SAME-COST-AS-LU (Moderate).
+Zero Blueprint/KG discrepancy; `math.linalg.lu-factorization` independently re-confirmed authored,
+`math.num.cholesky` independently re-confirmed still unauthored.
+
+`svd`: $U$ and $V$ separately sized to $A$'s rows and columns (never assumed the same size like
+diagonalization's single $P$), demonstrated via the explicit size derivation for a non-square
+matrix; singular values as the SQUARE ROOTS of $A^TA$'s eigenvalues sorted descending (never the
+raw eigenvalues), demonstrated via the full $A^TA\to$eigenvalues$\to$square-roots derivation; and
+SVD's universal applicability contrasted with diagonalization's square-matrix limitation. 2
+misconceptions independently classified by Blueprint-declared severity — MC-1
+U-AND-V-ASSUMED-SAME-SIZE-LIKE-DIAGONALIZATIONS-SINGLE-P (Foundational), MC-2
+SINGULAR-VALUES-CONFUSED-WITH-A-TRANSPOSE-A-EIGENVALUES-DIRECTLY (Foundational). Zero Blueprint/KG
+discrepancy; both cross-link targets (`math.num.svd`, `math.opt.pca`) independently re-confirmed
+still unauthored.
+
+Mathematics **747/908 → 749/908**, 159 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 749/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)".
+
+Fresh frontier recomputed for Batch 178 (27 concepts): `math.linalg.pseudoinverse`,
+`math.linalg.singular-values` (both newly reachable via `svd`'s children), plus
+`math.cat.category`, `math.cx.complex-numbers-analysis`, `math.de.systems-matrix-method`,
+`math.fnal.convolution`, `math.fnal.normed-space`, `math.graph.random-graph`,
+`math.linalg.dual-space`/`jordan-form`/`least-squares`/`matrix-exponential`/
+`matrix-representation`/`tensor`, `math.num.floating-point`/`interpolation`/`qr-algorithm`/
+`root-finding`, `math.opt.quadratic-programming`/`semidefinite-programming`/`stochastic-gradient`,
+`math.prob.characteristic-function`/`joint-distribution`,
+`math.stats.normal-distribution`/`percentile`/`sampling-distribution`,
+`math.top.topological-space`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `a43084b` on `main`, pushed directly.
+
+## Batch 178 (2026-09-19)
+
+`singular-values`: singular values as the SQUARE ROOTS of $A^TA$'s eigenvalues (never the
+eigenvalues themselves), demonstrated via the direct $\sqrt9=3,\sqrt{16}=4$ derivation; singular
+values existing for EVERY matrix, generalizing eigenvalues beyond square matrices (never limited
+like eigenvalues), demonstrated via the non-square $3\times2$ existence example; and the operator
+2-norm as the SINGLE LARGEST singular value alone (never an average or sum), demonstrated via the
+$\sigma_1=4$-versus-averaging contrast. 2 misconceptions independently classified by
+Blueprint-declared severity — MC-1
+SINGULAR-VALUES-REPORTED-AS-A-TRANSPOSE-A-EIGENVALUES-WITHOUT-SQUARE-ROOT (Foundational), MC-2
+OPERATOR-NORM-COMPUTED-AS-AVERAGE-OR-SUM-OF-SINGULAR-VALUES-RATHER-THAN-THE-LARGEST
+(Foundational). Zero Blueprint/KG discrepancy.
+
+`pseudoinverse`: $\Sigma^+$ inverting NONZERO singular values while leaving ZERO ones as zero
+(never attempting to invert zero), demonstrated via the $\text{diag}(2,5,0)\to\text{diag}(1/2,
+1/5,0)$ construction; $\hat x=A^+b$ giving the MINIMUM-NORM solution among all valid solutions
+(never just any solution), demonstrated via the underdetermined-system illustration; and
+$A^+=A^{-1}$ EXACTLY when $A$ is invertible (never assumed to always differ), demonstrated via the
+direct $A^+A=I$ verification. 2 misconceptions independently classified by Blueprint-declared
+severity — MC-1 ZERO-SINGULAR-VALUES-INCORRECTLY-INVERTED-OR-TREATED-AS-UNDEFINED-IN-SIGMA-PLUS
+(Foundational), MC-2 PSEUDOINVERSE-ASSUMED-ALWAYS-DIFFERENT-FROM-ORDINARY-INVERSE (Moderate). Zero
+Blueprint/KG discrepancy.
+
+Mathematics **749/908 → 751/908**, 157 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 751/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)".
+
+Fresh frontier recomputed for Batch 179 (25 concepts, `math.linalg.svd`'s children fully
+exhausted): `math.cat.category`, `math.cx.complex-numbers-analysis`,
+`math.de.systems-matrix-method`, `math.fnal.convolution`, `math.fnal.normed-space`,
+`math.graph.random-graph`, `math.linalg.dual-space`/`jordan-form`/`least-squares`/
+`matrix-exponential`/`matrix-representation`/`tensor`,
+`math.num.floating-point`/`interpolation`/`qr-algorithm`/`root-finding`,
+`math.opt.quadratic-programming`/`semidefinite-programming`/`stochastic-gradient`,
+`math.prob.characteristic-function`/`joint-distribution`,
+`math.stats.normal-distribution`/`percentile`/`sampling-distribution`,
+`math.top.topological-space`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `01c7d64` on `main`, pushed directly.
+
+## Batch 179 (2026-09-19) — eighth wrong-corpus correction
+
+`least-squares`: least squares as EXACTLY `math.linalg.projection`'s own closest-point problem
+(never a genuinely new problem), demonstrated via the direct $W=\text{col}(A)$ identification for
+an inconsistent three-equation system; the normal equations $A^TA\hat x=A^Tb$ derived DIRECTLY
+from projection's orthogonality characterization (never an unmotivated formula), demonstrated via
+the full derivation and residual-orthogonality verification; and the best-fit line MINIMIZING
+total squared deviation while generally MISSING every point (never passing through all points
+exactly), demonstrated via the three-non-collinear-point data-fitting example. 3 misconceptions
+independently classified by Blueprint-declared severity — MC-1
+LEAST-SQUARES-ASSUMED-UNRELATED-NEW-PROBLEM (Foundational), MC-2
+NORMAL-EQUATIONS-ASSUMED-UNMOTIVATED-FORMULA (High), MC-3
+LEAST-SQUARES-LINE-ASSUMED-TO-PASS-THROUGH-ALL-POINTS (Moderate). Zero Blueprint/KG discrepancy;
+`math.linalg.matrix-transpose` independently re-confirmed authored, `math.stats.linear-regression`
+independently re-confirmed still unauthored.
+
+`dual-space`: $V^*$ requiring ONLY linearity (never geometric structure like an inner product or
+norm), demonstrated via the linearity-only verification on $\mathbb R^3$; the dual basis PROVING
+$\dim(V^*)=\dim(V)$ by explicit construction (never assumed), demonstrated via the
+$\{f^1,f^2,f^3\}$ spanning-and-independence proof, with $f^i$ genuinely living in a DIFFERENT
+space from $e_i$; and the algebraic and analytic duals COINCIDING in finite dimensions but
+DIVERGING in infinite ones (never assumed identical), demonstrated via the finite-support
+sequence-space example. 3 misconceptions independently classified by Blueprint-declared severity
+— MC-1 DUAL-SPACE-REQUIRES-GEOMETRIC-STRUCTURE (Foundational), MC-2
+DUAL-BASIS-CONFLATED-WITH-ORIGINAL-BASIS (High), MC-3
+ALGEBRAIC-AND-ANALYTIC-DUAL-ASSUMED-IDENTICAL (Moderate). Wrong-corpus cross-link discrepancy
+found: the Blueprint's own Component 7 claims `math.fnal.dual-space-functional` "authored" —
+checked against the BLUEPRINTS directory, where it exists, not the EDUCATIONAL-BRAIN corpus,
+where it does NOT — corrected to independence mode, the EIGHTH such wrong-corpus discrepancy this
+campaign (after Batches 128-129, 157, 160, 161, 162 (two instances), and 168).
+
+Mathematics **751/908 → 753/908**, 155 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 753/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)".
+
+Fresh frontier recomputed for Batch 180 (23 concepts): `math.linalg.tensor` (newly reachable via
+`dual-space`'s unlocking), plus `math.cat.category`, `math.cx.complex-numbers-analysis`,
+`math.de.systems-matrix-method`, `math.fnal.convolution`, `math.fnal.normed-space`,
+`math.graph.random-graph`, `math.linalg.jordan-form`/`matrix-exponential`/
+`matrix-representation`, `math.num.floating-point`/`interpolation`/`qr-algorithm`/`root-finding`,
+`math.opt.quadratic-programming`/`semidefinite-programming`/`stochastic-gradient`,
+`math.prob.characteristic-function`/`joint-distribution`,
+`math.stats.normal-distribution`/`percentile`/`sampling-distribution`,
+`math.top.topological-space`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `a9fa9c2` on `main`, pushed directly.
+
+## Batch 180 (2026-09-19) — first math.top and math.cat concepts this campaign
+
+`topological-space`: the union/intersection asymmetry as essential (arbitrary unions, only FINITE
+intersections, never symmetrized), demonstrated via the classic $\bigcap_n(-1/n,1/n)=\{0\}$
+counterexample in $\mathbb R$; openness as RELATIVE to a declared $\tau$ (never intrinsic),
+demonstrated via $\{a\}$'s differing verdicts across the discrete/$\tau_1$/indiscrete topologies
+on the same set; and topologies genuinely GENERALIZING metric spaces (never assumed to always
+arise from some metric), demonstrated via the indiscrete-topology non-metrizability proof. 3
+misconceptions independently classified — MC-1 ARBITRARY-INTERSECTIONS-ALLOWED, MC-2 OPEN-IS-
+ABSOLUTE (Blueprint's own declared FOUNDATIONAL misconception), MC-3 EVERY-TOPOLOGY-IS-METRIC.
+Zero Blueprint/KG discrepancy; `math.real.metric-space` independently re-confirmed authored — the
+campaign's first `math.top` concept.
+
+`category`: each category having its OWN structure-preservation requirement on morphisms (never
+$\mathbf{Set}$'s "any function counts" carrying over universally), demonstrated via the
+$\phi(n)=n\bmod6$-versus-$\psi(n)=n^2\bmod6$ contrast in $\mathbf{Grp}$; associativity as grouping
+of the SAME sequence (never confused with commutativity/reordering), demonstrated via the explicit
+triple-composition verification; and each object having its OWN distinct identity morphism (never
+one universal arrow). 3 misconceptions independently classified by Blueprint-declared severity —
+MC-1 ANY-FUNCTION-ASSUMED-VALID-MORPHISM (Foundational), MC-2 COMPOSITION-ASSUMED-COMMUTATIVE
+(Moderate), MC-3 IDENTITY-MORPHISM-ASSUMED-UNIQUE-ACROSS-OBJECTS (Moderate). Zero Blueprint/KG
+discrepancy; both prerequisites independently re-confirmed authored — the campaign's first
+`math.cat` concept.
+
+Mathematics **753/908 → 755/908**, 153 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 755/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)".
+
+Fresh frontier recomputed for Batch 181 (32 concepts, notably widening via `math.top`'s and
+`math.cat`'s own unlocking): `math.cat.functor`/`morphism-types`,
+`math.top.basis`/`compactness`/`connectedness`/`continuity-top`/`open-sets`/`product-space`/
+`quotient-space`/`separation-axioms`/`simplicial-complex` (all newly reachable), plus
+`math.cx.complex-numbers-analysis`, `math.de.systems-matrix-method`, `math.fnal.convolution`,
+`math.fnal.normed-space`, `math.graph.random-graph`,
+`math.linalg.jordan-form`/`matrix-exponential`/`matrix-representation`/`tensor`,
+`math.num.floating-point`/`interpolation`/`qr-algorithm`/`root-finding`,
+`math.opt.quadratic-programming`/`semidefinite-programming`/`stochastic-gradient`,
+`math.prob.characteristic-function`/`joint-distribution`,
+`math.stats.normal-distribution`/`percentile`/`sampling-distribution`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `2056063` on `main`, pushed directly.
+
+## Batch 181 (2026-09-19) — fifth reverse-direction correction
+
+`open-sets`: open and closed defined purely from $\tau$ (never requiring a metric), demonstrated
+via the fully metric-free open/closed-set computation on a three-point topology; a nonempty set
+able to have EMPTY interior (never assumed automatically nonempty), demonstrated via
+$\text{int}(\{b\})=\emptyset$; and the boundary able to swallow the ENTIRE space (never assumed
+always thin), demonstrated via $\partial\mathbb Q=\mathbb R$ contrasted with
+$\partial(2,5)=\{2,5\}$. 3 misconceptions independently classified by Blueprint-declared severity
+— MC-1 TOPOLOGICAL-CONCEPTS-ASSUMED-TO-NEED-A-METRIC, MC-2
+NONEMPTY-SET-ASSUMED-NONEMPTY-INTERIOR, MC-3 BOUNDARY-ASSUMED-ALWAYS-THIN (all three Foundational).
+Zero Blueprint/KG discrepancy; `math.real.open-sets` independently re-confirmed authored.
+
+`functor`: contravariant functors reversing BOTH arrow direction AND composition order TOGETHER
+(never one without the other), demonstrated via the dual-space functor's
+$(T\circ S)^*=S^*\circ T^*$ derivation; forgetful-then-free NEVER recovering the original object
+(never assumed an inverse round trip), demonstrated via $F(U(G))\ne G$ for
+$\mathbb Z/6\mathbb Z$; and functors ONLY guaranteed to preserve composition and identity (never
+every property automatically). 3 misconceptions independently classified by Blueprint-declared
+severity — MC-1 CONTRAVARIANT-COMPOSITION-ORDER-NOT-REVERSED (Foundational), MC-2
+FORGETFUL-THEN-FREE-ASSUMED-IDENTITY (Moderate), MC-3
+FUNCTOR-ASSUMED-TO-PRESERVE-ALL-PROPERTIES (Moderate). Reverse-direction cross-link discrepancy
+found: the Blueprint's own Component 7 correctly found `math.abst.group-homomorphism` unauthored
+AT BLUEPRINT-WRITE-TIME (while correctly cross-link-probing the already-authored
+`math.linalg.linear-map`), but the EDUCATIONAL-BRAIN corpus has SINCE authored
+`math.abst.group-homomorphism` — upgraded to a genuine cross-link probe here too, the fifth such
+reverse-direction discrepancy this campaign (after the pre-segment Batch 131, Batch 152, Batch
+156, Batch 165, and Batch 176).
+
+Mathematics **755/908 → 757/908**, 151 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 757/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)".
+
+Fresh frontier recomputed for Batch 182 (32 concepts): `math.cat.morphism-types`/
+`natural-transformation`, `math.top.basis`/`compactness`/`connectedness`/`continuity-top`/
+`interior-closure`/`product-space`/`quotient-space`/`separation-axioms`/`simplicial-complex` (both
+domains widening further), plus `math.cx.complex-numbers-analysis`,
+`math.de.systems-matrix-method`, `math.fnal.convolution`, `math.fnal.normed-space`,
+`math.graph.random-graph`, `math.linalg.jordan-form`/`matrix-exponential`/
+`matrix-representation`/`tensor`, `math.num.floating-point`/`interpolation`/`qr-algorithm`/
+`root-finding`, `math.opt.quadratic-programming`/`semidefinite-programming`/`stochastic-gradient`,
+`math.prob.characteristic-function`/`joint-distribution`,
+`math.stats.normal-distribution`/`percentile`/`sampling-distribution`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `87e1a81` on `main`, pushed directly.
+
+## Batch 182 (2026-09-19) — zero discrepancy, both `math.top` concepts
+
+`connectedness`: connectedness defined as the impossibility of an open, disjoint, nonempty split
+(never requiring a metric), demonstrated via the exhaustive open-set-split check on the
+three-point space $X=\{a,b,c\}$; the open-set definition shown to agree EXACTLY with
+`math.real.connectedness`'s separated-sets definition, demonstrated via the dual-route
+verification on $E=[0,1]\cup[2,3]$ (both routes reaching "disconnected"); and path-connected shown
+to imply but never be implied by connected, demonstrated via the topologist's sine curve
+counterexample. 3 misconceptions independently classified by Blueprint-declared severity — MC-1
+CONNECTEDNESS-ASSUMED-TO-NEED-METRIC (Foundational), MC-2
+OPEN-SET-AND-SEPARATED-SETS-DEFINITIONS-ASSUMED-DIFFERENT (High), MC-3
+CONNECTED-ASSUMED-EQUIVALENT-TO-PATH-CONNECTED (High). Zero Blueprint/KG discrepancy; all fields
+(requires `math.top.topological-space`, unlocks none, cross_links `math.real.connectedness`,
+expert/understand, mastery_threshold 0.85, estimated_hours 4) verified exact matches;
+`math.real.connectedness` independently re-confirmed authored.
+
+`interior-closure`: interior's existential neighborhood test ("some open set fits inside") shown
+distinct from closure's universal neighborhood test ("every open set meets"), demonstrated via the
+dual test at $x=0$ for $A=(0,1]$ (yielding $\text{int}(A)=(0,1)$, $\text{cl}(A)=[0,1]$,
+$\partial A=\{0,1\}$); density ($\text{cl}(A)=X$) shown to never imply $A=X$ itself, demonstrated
+via the $\mathbb Q$ triple contrast ($\text{int}(\mathbb Q)=\emptyset$,
+$\text{cl}(\mathbb Q)=\mathbb R$, $\mathbb Q\ne\mathbb R$); and boundary shown to range from a thin
+curve (the open unit disk's boundary circle) to the entire space
+($\partial\mathbb Q=\mathbb R$, reusing `math.top.open-sets`'s own example), never assumed always
+"nice." 3 misconceptions independently classified by Blueprint-declared severity — MC-1
+INTERIOR-REQUIRES-EVERY-NEIGHBORHOOD (Foundational), MC-2 DENSE-MEANS-EQUAL-TO-WHOLE-SPACE
+(Foundational), MC-3 BOUNDARY-SEPARATES-INSIDE-FROM-OUTSIDE (Moderate). Zero Blueprint/KG
+discrepancy; all fields (requires `math.top.open-sets`, unlocks none, cross_links none,
+expert/apply, mastery_threshold 0.85, estimated_hours 3) verified exact matches.
+
+Mathematics **757/908 → 759/908**, 149 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 759/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)".
+
+Fresh frontier recomputed for Batch 183 (30 concepts): `math.cat.morphism-types`/
+`natural-transformation`, `math.top.basis`/`compactness`/`continuity-top`/`product-space`/
+`quotient-space`/`separation-axioms`/`simplicial-complex` (both domains widening further, now
+without `connectedness`/`interior-closure`), plus `math.cx.complex-numbers-analysis`,
+`math.de.systems-matrix-method`, `math.fnal.convolution`, `math.fnal.normed-space`,
+`math.graph.random-graph`, `math.linalg.jordan-form`/`matrix-exponential`/
+`matrix-representation`/`tensor`, `math.num.floating-point`/`interpolation`/`qr-algorithm`/
+`root-finding`, `math.opt.quadratic-programming`/`semidefinite-programming`/`stochastic-gradient`,
+`math.prob.characteristic-function`/`joint-distribution`,
+`math.stats.normal-distribution`/`percentile`/`sampling-distribution`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `bd280bd` on `main`, pushed directly.
+
+## Batch 183 (2026-09-19) — zero discrepancy, both `math.top` concepts
+
+`basis`: condition B2 shown as a per-point refinement requirement, never closure under
+intersection, demonstrated via the open-ball coincidence contrasted against B2's precise wording;
+different bases shown able to generate the SAME topology, demonstrated via the rational-radius-
+versus-all-radius comparison on $\mathbb R$ (both directions of the criterion verified); and the
+lower-limit topology proven STRICTLY FINER than the standard topology, demonstrated via the
+one-directional failure at $[0,1)$, $x=0$. 3 misconceptions independently classified by
+Blueprint-declared severity — MC-1 BASIS-IS-CLOSED-UNDER-INTERSECTION (Foundational), MC-2
+DIFFERENT-BASES-MEANS-DIFFERENT-TOPOLOGIES (Moderate), MC-3 LOWER-LIMIT-SAME-AS-STANDARD
+(Moderate). Zero Blueprint/KG discrepancy; all fields (requires `math.top.topological-space`,
+unlocks none, cross_links none, expert/understand, mastery_threshold 0.85, estimated_hours 3)
+verified exact matches.
+
+`continuity-top`: continuity's preimage-based definition shown distinct from a forward-image
+requirement, demonstrated via the constant-function example (preimage test passes for every open
+$V$, yet the forward image of $(0,1)$ collapses to the non-open $\{5\}$); the open-set definition
+shown to genuinely GENERALIZE (never merely rephrase) ε-δ, demonstrated via the $f(x)=2x+1$
+side-by-side translation contrasted against the non-metrizable indiscrete topology from
+`math.top.topological-space`; and the composition rule shown to require no re-derivation,
+demonstrated via the $(g\circ f)^{-1}(W)=f^{-1}(g^{-1}(W))$ set-identity argument for
+$f(x)=x^2$, $g(x)=x+1$. 3 misconceptions independently classified by Blueprint-declared severity
+— MC-1 CONTINUITY-DEFINITION-DIRECTION-REVERSED (Foundational), MC-2
+OPEN-SET-DEFINITION-TREATED-AS-MERE-REPHRASING (Foundational), MC-3
+COMPOSITION-CONTINUITY-RE-DERIVED-FROM-SCRATCH (Moderate). Zero Blueprint/KG discrepancy; all
+fields (requires `math.top.topological-space`, unlocks `math.top.homeomorphism`, cross_links
+`math.real.continuity-rigorous`, expert/understand, mastery_threshold 0.9, estimated_hours 4)
+verified exact matches; `math.real.continuity-rigorous` independently re-confirmed authored.
+
+Mathematics **759/908 → 761/908**, 147 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 761/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)".
+
+Fresh frontier recomputed for Batch 184 (30 concepts): `math.cat.morphism-types`/
+`natural-transformation`, `math.top.compactness`/`homeomorphism`/`homotopy`/`product-space`/
+`quotient-space`/`separation-axioms`/`simplicial-complex` (`homeomorphism`/`homotopy` newly
+unlocked), plus `math.cx.complex-numbers-analysis`, `math.de.systems-matrix-method`,
+`math.fnal.convolution`, `math.fnal.normed-space`, `math.graph.random-graph`,
+`math.linalg.jordan-form`/`matrix-exponential`/`matrix-representation`/`tensor`,
+`math.num.floating-point`/`interpolation`/`qr-algorithm`/`root-finding`,
+`math.opt.quadratic-programming`/`semidefinite-programming`/`stochastic-gradient`,
+`math.prob.characteristic-function`/`joint-distribution`,
+`math.stats.normal-distribution`/`percentile`/`sampling-distribution`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `a1fabb5` on `main`, pushed directly.

@@ -1,0 +1,68 @@
+{
+  "_meta": {
+    "purpose": "System-layer curriculum tracking state. Computed from repository files, never from memory or assumption. Do not hand-edit numeric fields — regenerate them via the commands listed in each subject's `source` field.",
+    "generatedAt": "2026-09-18T20:05:00Z",
+    "generatedFromCommit": "fc772837841e56acf72fe840a3bae218a35f60e3",
+    "generatedFromBranch": "main",
+    "computedBy": [
+      "npx tsx scripts/math/state.ts",
+      "npx tsx scripts/physics/state.ts",
+      "npx tsx scripts/assets/contract-audit.ts --all"
+    ],
+    "scope": "SYSTEM LAYER ONLY — this file tracks progress. It never defines or contains curriculum/KG/teaching content itself.",
+    "note": "Serving-DB counts were UNAVAILABLE in this session (no DATABASE_URL). All numbers below are static (KG + blueprint + on-disk asset) counts only."
+  },
+  "subjects": {
+    "mathematics": {
+      "kgConcepts": 908,
+      "kgDomains": 24,
+      "blueprints": 908,
+      "educationalBrainEntries": 581,
+      "educationalBrainCertifiedDomains": [
+        "math.found", "math.calc", "math.geom", "math.alg", "math.arith",
+        "math.nt", "math.disc", "math.func", "math.trig", "math.seq"
+      ],
+      "educationalBrainCertifiedDomainCount": 10,
+      "educationalBrainTotalDomainCount": 24,
+      "assetContractAuthoredConcepts": 273,
+      "assetContractPairs": 282,
+      "assetContractPairsAtContract": 282,
+      "assetContractPairsShort": 0,
+      "campaignStatus": "PAUSED — do not resume without a fresh owner instruction (CLAUDE.md, 2026-09-16)",
+      "source": "npx tsx scripts/math/state.ts ; npx tsx scripts/assets/contract-audit.ts --subject mathematics"
+    },
+    "physics": {
+      "kgConcepts": 238,
+      "kgDomains": 12,
+      "blueprints": 238,
+      "educationalBrainEntries": 238,
+      "assetContractAuthoredConcepts": 238,
+      "assetContractPairs": 261,
+      "assetContractPairsAtContract": 261,
+      "assetContractPairsShort": 0,
+      "campaignStatus": "content-complete at asset-contract; defect-hunting only (active campaign)",
+      "source": "npx tsx scripts/physics/state.ts ; npx tsx scripts/assets/contract-audit.ts --subject physics"
+    },
+    "english": {
+      "kgConcepts": 216,
+      "kgDomains": 12,
+      "assetContractAuthoredConcepts": 216,
+      "assetContractPairs": 412,
+      "assetContractPairsAtContract": 409,
+      "assetContractPairsShort": 3,
+      "shortPairs": [
+        "eng.phonics.letter-sound-correspondence::EARLY",
+        "eng.phonics.phonemic-awareness::ADULT",
+        "eng.phonics.phonemic-awareness::EARLY"
+      ],
+      "campaignStatus": "open — active campaign, gap-closing + defect-hunting (CLAUDE.md)",
+      "source": "npx tsx scripts/assets/contract-audit.ts --subject english"
+    }
+  },
+  "otherSubjectsTrackedElsewhere": {
+    "note": "Out of this file's declared scope (Mathematics/Physics/English only, per operator instructions) but recorded here for completeness since contract-audit --all reported them in the same run.",
+    "chemistry": { "kgConcepts": 186, "assetContractPairs": 186, "assetContractPairsAtContract": 186, "assetContractPairsShort": 0, "campaignStatus": "content-complete; defect-hunting only" },
+    "biology": { "kgConcepts": 199, "assetContractPairs": 108, "assetContractPairsAtContract": 0, "assetContractPairsShort": 108, "campaignStatus": "PAUSED — do not resume without fresh owner instruction" },
+    "computer_science": { "kgConcepts": 119, "assetContractPairs": 119, "assetContractPairsAtContract": 30, "assetContractPairsShort": 89, "campaignStatus": "PAUSED — do not resume without fresh owner instruction" }
+  }
+}

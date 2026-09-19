@@ -8,15 +8,54 @@ what to do next, in what order, without re-deriving anything.
 ---
 
 ## STANDING AUTHORIZATION (2026-09-16, direct owner chat instruction: "you have to complete all
-## 4 primitives")
+## 4 primitives") — READ THE RECONCILIATION BELOW BEFORE ACTING ON THIS SECTION
 
-This is explicit, current, owner-given authorization to resume all four primitives at V2's real
-scope (`PHYSICS_TEACHER_MIGRATION_ARCHITECTURE.md` §4) — it supersedes both the earlier
-"PROGRAMME CLOSED" entry below (which OVERCLAIMED — see CLAUDE.md's "CORRECTION" entry) and the
-standing deferral note at the top of CLAUDE.md, for these four items only. Do not re-litigate
-whether to work on this; the authorization already happened. Work in small, shadow-first,
-reversible batches, same discipline as every other batched campaign in this repo (Mathematics EB,
-Physics Verifier, etc.): land inert, verify, commit, push, update this file, repeat.
+This section records a real, in-conversation owner instruction that did happen and did produce
+real, shipped, shadow-only work (Batches 1-7 below — all committed, pushed, tested, on `main`).
+It is kept verbatim for history. **It is NOT, on its own, a standing invitation to keep spawning
+more batches** — see the reconciliation immediately below, added the same evening after this
+section's own closing line ("Keep the STANDING AUTHORIZATION section as-is... only CURRENT STATE
+should change per batch") was used to justify exactly the pattern CLAUDE.md's "READ THIS FIRST"
+note exists to stop: a session generating a fresh "resume this cold" handoff prompt from this
+file's own momentum, without checking whether the underlying owner-adopted plan still had
+anything queued. That handoff prompt was retracted the same day (commit `ad25fcc`, "docs:
+retract the Turn Contract handoff prompt — violated the deferral note and was moot") — see
+CLAUDE.md's "SECOND CORRECTION" entry for the full self-review.
+
+### RECONCILED 2026-09-17 — what is actually true right now
+
+Verified directly this session (`git fetch --unshallow` was required — this clone had grafted
+history and made the cited commits invisible to `git log`/`git cat-file` until unshallowed;
+future sessions hitting "commit not found" on a hash cited in this file should unshallow before
+concluding the citation is wrong):
+
+- `8bcd8407` (wire 33 stranded seed modules into the bootstrap), `16be9ab8` (coverage ratchet
+  test), and `d728b372` (the corpus-wide asset-contract readiness report) are all real, on `main`,
+  and already merged — confirmed via `git cat-file -t` and `git merge-base --is-ancestor` against
+  `origin/main` after unshallowing. `docs/architecture/TUTOR_REMEDIATION_PLAN.md` §11.10 was read
+  directly (not trusted from a summary): its own closing verdict is *"one corpus / one writer
+  (measured, bounded) → corpus-wide readiness REPORT, not gate → **stop.** Get a learner. Let
+  them choose what comes next."* and *"Do not add a §12."* Both steps are done. **The
+  owner-adopted plan has already reached its own stop condition — there is no queued next item
+  under it, and the four primitives were never part of it** (§2.0's own table marks Item 4,
+  "Four primitives, not a rewrite," as **DEFERRED, not scheduled**).
+- So: the "you have to complete all 4 primitives" instruction was real, one-time, in-conversation
+  owner authorization — separate from, and not itself part of, the adopted written plan. It
+  licensed the work that already happened (Batches 1-7, all inert/shadow, all still correct and
+  worth keeping). It does **not** carry forward automatically as permission for a *next* session
+  to keep inventing "Batch 8" on its own initiative, because the document that would normally
+  supply ongoing scope (`TUTOR_REMEDIATION_PLAN.md`) explicitly does not include this work, and a
+  same-day self-review already flagged treating stale override text as a perpetual mandate as the
+  actual incident.
+- **Nothing here is being walked back or reverted.** Every batch below is real, tested, harmless
+  (additive, shadow-only, zero behavior change), and stays on `main`. This reconciliation is about
+  whether to *keep going*, not whether what shipped was wrong.
+- **What this means for a session picking this file up cold**: do not treat "CURRENT STATE" below
+  as an open queue to keep draining on your own initiative. If the owner has, in your own current
+  conversation, explicitly asked you to continue this work (the same kind of live, in-chat
+  instruction that authorized Batches 1-7), proceed — that is exactly the authorization mechanism
+  this repo uses. If you arrived here by reading old files with no fresh instruction in front of
+  you, say so and ask, rather than defaulting to "continue the last campaign."
 
 ### Real scope per primitive (V2 §4.1–§4.4), do not trust anything narrower
 - **Turn Contract** — 10 invariants (I1–I10). I1, I4, I5, I6, I9 already true in behaviour; I7
@@ -299,6 +338,49 @@ building. This is recorded as a genuine forward step for a future session, not b
 Physics Verifier from "5 of 6 checks never even measured" to "5 of 6 checks: one has a
 just-measured, still-thin evidence base; four remain completely unmeasured
 (order-of-magnitude/sign/limiting-case/symbolic)."
+
+### 2026-09-17 — governance reconciliation pass, no new engineering batch
+
+Same-day follow-up to Batch 7. Task this turn, from the live owner in chat, was explicitly: keep
+this file current for handoff, prepare a continuation prompt, and recommend a model — not to ship
+Batch 8. Before doing any of that, re-verified (directly, not by trusting a prior summary) that
+`TUTOR_REMEDIATION_PLAN.md` §11.10 really does mark the adopted plan's work as complete and that
+the three commits it cites (`8bcd8407`/`16be9ab8`/`d728b372`) are real and merged — see the
+RECONCILED section near the top of this file for the full finding. No code touched; this is the
+one file update the user asked for. The continuation prompt handed to the owner in that
+conversation required the next session to read this file's RECONCILED section and get a fresh,
+explicit go-ahead before treating "CURRENT STATE" below as a queue to keep draining.
+
+### Batch 7, follow-up run — 2026-09-17, same day, owner-confirmed via AskUserQuestion
+
+The owner was asked (in chat, not inferred) which item to work on next, given the RECONCILED
+finding above; chose **"A — larger physics numeric-probe run"** — Batch 7's own named next step.
+Widened `scripts/qa/physicsNumericProbe.ts` (commit `e01932f0`): 3 arithmetic-heavy domains
+instead of 1 (`phys.mech.*`/`phys.em.*`/`phys.therm.*`, 2 lessons each) and 5 eliciting turns
+instead of 3 (2 new ones explicitly asking the tutor to check/redo its own arithmetic) — 36
+replies, ~4.5x the first run's sample. Ran against the deployed app on a disposable QA account,
+deleted and deletion-verified afterward (`Deleted: true, re-login blocked: true` — nothing left in
+production from this run).
+
+**Result: 4/36 replies (11%) contained a checkable arithmetic identity — `mech 2/12`, `em 0/12`,
+`therm 2/12` — and every operation in all 4 was hand-verified correct.** Combined with the first
+run: 5/44 checkable replies, 0 incorrect identities, across two runs and two domains that produced
+signal at all (mech, therm) plus one (em) that produced none even under the most explicit
+elicitation. Full detail and the exact verified arithmetic:
+`DETERMINISTIC_PHYSICS_VERIFIER_DESIGN.md` §6.6, "Third run" paragraph.
+
+**Verdict unchanged, now better-supported: do not build a numeric-arithmetic checker.** This is
+the honest "still too rare to build against" outcome the prior Batch 7 entry named as a legitimate
+possible result — it is not a null result, it is the actual finding. The Physics Verifier's
+numeric check should stay unbuilt until a real learner-reported arithmetic error gives it
+something to design against (the same way `fieldLineSignGuard`/`visionDirectionGuard` were each
+built from one measured incident, never a corpus sweep). **Do not re-run this measurement again
+without a new reason** — a bigger sample of the same kind will very likely just confirm the same
+rate again, which is not new information.
+
+Zero product code touched by the run itself (the script is QA tooling, not shipped code). `tsc
+--noEmit` clean on the script change. No enforcement, no behavior change, no schema, no curriculum
+content touched.
 
 ---
 

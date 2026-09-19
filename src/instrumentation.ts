@@ -387,6 +387,67 @@ async function bootstrapAssets() {
       // englishAdultBandBatch12.ts's own header for detail.
       const { ENGLISH_ADULT_BAND_BATCH_12 } =
         await import('./lib/teaching/assets/englishAdultBandBatch12')
+      // English ADULT-band probe-contract campaign, Batch 13 (2026-09-17):
+      // scripts/assets/contract-audit.ts was fixed to classify seed content
+      // by shape instead of export name, revealing the TRUE remaining gap
+      // was 99 (concept, ADULT) pairs, not 2 — batches 1-12 never touched
+      // eng.composition/communication/linguistics/literature(advanced)/
+      // phonetics(advanced)/vocab(advanced)/writing(advanced). This batch
+      // closes the first 8 of 16 eng.composition.* concepts. See
+      // englishAdultBandBatch13.ts's own header for detail.
+      const { ENGLISH_ADULT_BAND_BATCH_13 } =
+        await import('./lib/teaching/assets/englishAdultBandBatch13')
+      // English ADULT-band probe-contract campaign, Batch 14 (2026-09-17):
+      // closes the remaining 8 of 16 eng.composition.* concepts (the ones
+      // Batch 13 deliberately deferred), completing eng.composition.*
+      // entirely. See englishAdultBandBatch14.ts's own header for detail.
+      const { ENGLISH_ADULT_BAND_BATCH_14 } =
+        await import('./lib/teaching/assets/englishAdultBandBatch14')
+      // English ADULT-band probe-contract campaign, Batch 15 (2026-09-18):
+      // closes all 11 short eng.communication.* concepts (digital-
+      // communication was already at contract). See
+      // englishAdultBandBatch15.ts's own header for detail.
+      const { ENGLISH_ADULT_BAND_BATCH_15 } =
+        await import('./lib/teaching/assets/englishAdultBandBatch15')
+      // English ADULT-band probe-contract campaign, Batch 16 (2026-09-18):
+      // closes all 18 short eng.linguistics.* concepts. See
+      // englishAdultBandBatch16.ts's own header for detail.
+      const { ENGLISH_ADULT_BAND_BATCH_16 } =
+        await import('./lib/teaching/assets/englishAdultBandBatch16')
+      // English ADULT-band probe-contract campaign, Batch 17 (2026-09-18):
+      // closes 3 previously-unrecorded short eng.grammar.* pairs surfaced
+      // by Batch 16's --all regeneration. See englishAdultBandBatch17.ts's
+      // own header for detail.
+      const { ENGLISH_ADULT_BAND_BATCH_17 } =
+        await import('./lib/teaching/assets/englishAdultBandBatch17')
+      // English ADULT-band probe-contract campaign, Batch 18 (2026-09-18):
+      // closes all 19 short eng.literature.* concepts. See
+      // englishAdultBandBatch18.ts's own header for detail.
+      const { ENGLISH_ADULT_BAND_BATCH_18 } =
+        await import('./lib/teaching/assets/englishAdultBandBatch18')
+      // English ADULT-band probe-contract campaign, Batch 19 (2026-09-18):
+      // closes all 12 short eng.phonetics.* concepts. See
+      // englishAdultBandBatch19.ts's own header for detail.
+      const { ENGLISH_ADULT_BAND_BATCH_19 } =
+        await import('./lib/teaching/assets/englishAdultBandBatch19')
+      // English ADULT-band probe-contract campaign, Batch 20 (2026-09-18):
+      // closes all 8 short eng.vocab.* concepts. See
+      // englishAdultBandBatch20.ts's own header for detail.
+      const { ENGLISH_ADULT_BAND_BATCH_20 } =
+        await import('./lib/teaching/assets/englishAdultBandBatch20')
+      // English ADULT-band probe-contract campaign, Batch 21 (2026-09-18):
+      // closes eng.reading.reading-across-genres, both eng.speaking.*
+      // concepts, and all 5 short eng.writing.* concepts. See
+      // englishAdultBandBatch21.ts's own header for detail.
+      const { ENGLISH_ADULT_BAND_BATCH_21 } =
+        await import('./lib/teaching/assets/englishAdultBandBatch21')
+      // English phonics gap closure, 2026-09-18: eng.phonics.letter-sound-
+      // correspondence @ ELEMENTARY (closed-choice, text-described scenario).
+      // phonemic-awareness::EARLY/ADULT and letter-sound-correspondence::EARLY
+      // are deliberately NOT closed here — voice-required, see this module's
+      // own header for the full investigation.
+      const { ENGLISH_LETTER_SOUND_ELEMENTARY_GAP } =
+        await import('./lib/teaching/assets/englishLetterSoundElementaryGap')
       // Corpus/writer unification, 2026-09-14 (§10.1). The 33 modules below
       // were authored, in git, KG-validated, and imported by the standalone
       // seed script (scripts/brain/seed-knowledge-assets.ts) — but never by
@@ -496,7 +557,11 @@ async function bootstrapAssets() {
         ...ENGLISH_ADULT_BAND_BATCH_6, ...ENGLISH_ADULT_BAND_BATCH_7,
         ...ENGLISH_ADULT_BAND_BATCH_8, ...ENGLISH_ADULT_BAND_BATCH_9,
         ...ENGLISH_ADULT_BAND_BATCH_10, ...ENGLISH_ADULT_BAND_BATCH_11,
-        ...ENGLISH_ADULT_BAND_BATCH_12,
+        ...ENGLISH_ADULT_BAND_BATCH_12, ...ENGLISH_ADULT_BAND_BATCH_13, ...ENGLISH_ADULT_BAND_BATCH_14,
+        ...ENGLISH_ADULT_BAND_BATCH_15, ...ENGLISH_ADULT_BAND_BATCH_16, ...ENGLISH_ADULT_BAND_BATCH_17,
+        ...ENGLISH_ADULT_BAND_BATCH_18, ...ENGLISH_ADULT_BAND_BATCH_19, ...ENGLISH_ADULT_BAND_BATCH_20,
+        ...ENGLISH_ADULT_BAND_BATCH_21,
+        ...ENGLISH_LETTER_SOUND_ELEMENTARY_GAP,
         ...BIOLOGY_PROBES, ...CS_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES,
         ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES,
         ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES,
