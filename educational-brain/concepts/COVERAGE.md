@@ -17575,3 +17575,29 @@ math.num.floating-point/interpolation/qr-algorithm/root-finding,
 math.opt.quadratic-programming/semidefinite-programming/stochastic-gradient,
 math.prob.characteristic-function/joint-distribution,
 math.stats.normal-distribution/percentile/sampling-distribution.
+
+## Batch 192 (2026-09-19) — one reverse-direction discrepancy
+
+Authored `math.top.euler-characteristic` (χ=2 holds only for S²-topology, not all polyhedra, via
+cube-vs-torus contrast; same χ never implies homeomorphic, via torus-vs-Klein-bottle
+orientability; classification reads off type from χ plus orientability) and
+`math.cat.natural-transformation` (an arbitrary per-object family isn't automatically natural,
+via the basis-dependent double-dual counterexample; naturality must hold for ALL morphisms, never
+just samples; the square's two paths must be matched correctly). `euler-characteristic` had a
+reverse-direction discrepancy: its Blueprint's cross-link math.disc.planar-graph was correctly
+unauthored at write-time but has since been authored (both blueprint and EB file) — upgraded to a
+genuine cross-link probe, the sixth such discrepancy this campaign. `natural-transformation` had
+zero discrepancy. Mathematics **777/908 → 779/908**, 129 remaining. **This completes the entire
+`math.top` domain except `math.top.cohomology`** (its final unauthored concept). Validated: KG
+PASS (908/908 reachable), state.ts confirms 779/908, tsc clean, tests 561/561. Commit `43f3ce1`,
+pushed.
+
+Fresh frontier for Batch 193 (25 concepts): math.cat.adjunction/functor-category/limits (newly
+unlocked), plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.jordan-form/matrix-exponential/matrix-representation/tensor,
+math.num.floating-point/interpolation/qr-algorithm/root-finding,
+math.opt.quadratic-programming/semidefinite-programming/stochastic-gradient,
+math.prob.characteristic-function/joint-distribution,
+math.stats.normal-distribution/percentile/sampling-distribution, math.top.cohomology (still
+requires further prerequisites).

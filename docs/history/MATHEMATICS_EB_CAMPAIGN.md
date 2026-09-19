@@ -5586,3 +5586,24 @@ math.opt.quadratic-programming/semidefinite-programming/stochastic-gradient,
 math.prob.characteristic-function/joint-distribution,
 math.stats.normal-distribution/percentile/sampling-distribution. Campaign continues under the
 same active `/loop`.
+
+### Batch 192 (2026-09-19) — one reverse-direction discrepancy
+
+Authored `euler-characteristic` (χ=2 only for S²-topology via cube-vs-torus; same χ never implies
+homeomorphic via torus-vs-Klein-bottle orientability) and `natural-transformation` (arbitrary
+families aren't automatically natural via the basis-dependent counterexample; naturality holds
+for ALL morphisms). `euler-characteristic` had a reverse-direction discrepancy: its cross-link
+math.disc.planar-graph, unauthored at write-time, is now authored — upgraded to a genuine
+cross-link probe (sixth such this campaign). `natural-transformation` zero discrepancy.
+Mathematics **779/908** (777→779), 129 remaining. This completes math.top except cohomology.
+Validated: KG PASS, state.ts 779/908, tsc clean, tests 561/561. Commit `43f3ce1`, pushed.
+
+Fresh frontier for Batch 193 (25 concepts): math.cat.adjunction/functor-category/limits (newly
+unlocked), plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.jordan-form/matrix-exponential/matrix-representation/tensor,
+math.num.floating-point/interpolation/qr-algorithm/root-finding,
+math.opt.quadratic-programming/semidefinite-programming/stochastic-gradient,
+math.prob.characteristic-function/joint-distribution,
+math.stats.normal-distribution/percentile/sampling-distribution, math.top.cohomology. Campaign
+continues under the same active `/loop`.
