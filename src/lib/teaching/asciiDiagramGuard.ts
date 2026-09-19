@@ -63,11 +63,22 @@
  * ordinary teaching prose that happens to end a sentence in a colon is never
  * touched.
  *
- * ── WHEN IT STAYS QUIET ──────────────────────────────────────────────────────
- * Never fires while a real figure is on the learner's screen (`figureOnScreen`
- * — the SAME condition `stripUnbackedFigureReferences` already uses, reused
- * rather than re-derived): a genuinely code-fenced worked example beside a
- * real visual is ordinary teaching and must not be touched.
+ * ── WHEN IT STAYS QUIET, AND THE ONE CASE THAT MUST NOT (2026-09-19) ────────
+ * Pointer-line decoration and Pass 3's unfenced "text diagram" substitute are
+ * gated on `figureOnScreen` (the SAME condition `stripUnbackedFigureReferences`
+ * already uses, reused rather than re-derived): a genuinely code-fenced worked
+ * example beside a real visual is ordinary teaching, and a text-diagram
+ * SUBSTITUTE cannot exist by definition once a real figure does.
+ *
+ * BOX-DRAWING IS NOT GATED THE SAME WAY. Reproduced live (disposable QA
+ * account, `chem.found.matter`, real figure genuinely attached and rendered)
+ * — asked to "draw it out in text", the model produced an 18-line box-drawing
+ * decision tree DUPLICATING the exact figure already on screen, and the old
+ * `figureOnScreen` early-exit let it straight through. That contradicts this
+ * file's own absolute claim two sections up: box-drawing is "never legitimate
+ * prose or notation in any subject this platform teaches," independent of
+ * whether a visual happens to also be present. So box-drawing removal now runs
+ * UNCONDITIONALLY, and only pointer-line/Pass-3 stay figure-gated.
  */
 
 /** Any Unicode box-drawing character — unambiguous hand-drawn ASCII art. */
@@ -87,9 +98,21 @@ function isPointerOnlyLine(line: string): boolean {
  *  reproduced lead-ins, kept short rather than guessed wider. */
 const DIAGRAM_WORD_RE = /\b(diagram|chart|sketch|picture|figure)\b/i
 
-function processFenceBody(body: string): { text: string; removed: boolean } {
+function processFenceBody(
+  body: string,
+  /** False while a real figure is already on screen — pointer-line removal
+   *  stays gated on that (see the module header), box-drawing removal below
+   *  does not. */
+  allowPointerRemoval: boolean,
+): { text: string; removed: boolean } {
+  // UNCONDITIONAL: box-drawing is never legitimate content, whether or not a
+  // real figure is also on screen (2026-09-19 — see the module header for the
+  // live reproduction this closes).
   if (BOX_DRAWING_RE.test(body)) {
     return { text: '', removed: true }
+  }
+  if (!allowPointerRemoval) {
+    return { text: body, removed: false }
   }
   const lines = body.split('\n')
   const firstPointerIdx = lines.findIndex(isPointerOnlyLine)
@@ -182,7 +205,6 @@ export function stripUnbackedAsciiDiagram(
   text: string,
   figureOnScreen: boolean,
 ): AsciiDiagramStripResult {
-  if (figureOnScreen) return { text, stripped: false, removedBlocks: 0 }
   if (typeof text !== 'string' || text.length === 0) {
     return { text, stripped: false, removedBlocks: 0 }
   }
@@ -192,15 +214,21 @@ export function stripUnbackedAsciiDiagram(
   // Pass 3 on every turn it needs to run. Caught by re-running the
   // verification script against the real reproduced text after adding Pass
   // 3: it silently matched zero times until this line was corrected.
+  //
+  // NOT a blanket `if (figureOnScreen) return` either, any more (2026-09-19)
+  // — see the module header. Box-drawing removal runs regardless; only
+  // pointer-line removal (within processFenceBody) and Pass 3 below stay
+  // gated on `!figureOnScreen`.
 
   let removedBlocks = 0
 
   // Pass 1: fences with an immediately-preceding colon-terminated lead-in.
   // The lead-in is removed ONLY if the fence itself turns out to need
-  // processing (box-drawing or pointer lines present) — a lead-in before an
-  // ordinary code block is left alone, because nothing about it was false.
+  // processing (box-drawing always; pointer lines only when no figure is on
+  // screen) — a lead-in before an ordinary code block is left alone, because
+  // nothing about it was false.
   let result = text.replace(FENCE_WITH_LEADIN_RE, (whole, leadin: string, body: string) => {
-    const processed = processFenceBody(body)
+    const processed = processFenceBody(body, !figureOnScreen)
     if (!processed.removed) return whole // untouched fence — keep the lead-in too
     removedBlocks += 1
     const dropLeadin = DIAGRAM_WORD_RE.test(leadin)
@@ -211,19 +239,25 @@ export function stripUnbackedAsciiDiagram(
   // Pass 2: any remaining bare fence (no colon-terminated lead-in, or one
   // that didn't match pass 1's shape).
   result = result.replace(BARE_FENCE_RE, (whole, body: string) => {
-    const processed = processFenceBody(body)
+    const processed = processFenceBody(body, !figureOnScreen)
     if (!processed.removed) return whole
     removedBlocks += 1
     return processed.text.length > 0 ? `${processed.text}\n` : ''
   })
 
-  // Pass 3: a self-labeled "text diagram" with no fence at all. See the
-  // constant's own header for the reproduction and the false-positive checks.
-  result = result.replace(TEXT_DIAGRAM_LEADIN_RE, (whole, _leadin: string, paragraph: string) => {
-    if (!isArtShapedParagraph(paragraph)) return whole
-    removedBlocks += 1
-    return ''
-  })
+  // Pass 3: a self-labeled "text diagram" with no fence at all — stays
+  // figure-gated. A text-diagram SUBSTITUTE cannot legitimately exist once a
+  // real figure is already on screen, but this pass has no box-drawing-style
+  // absolute claim backing an unconditional run, so it keeps the original
+  // scoping. See the constant's own header for the reproduction and the
+  // false-positive checks.
+  if (!figureOnScreen) {
+    result = result.replace(TEXT_DIAGRAM_LEADIN_RE, (whole, _leadin: string, paragraph: string) => {
+      if (!isArtShapedParagraph(paragraph)) return whole
+      removedBlocks += 1
+      return ''
+    })
+  }
 
   if (removedBlocks === 0) return { text, stripped: false, removedBlocks: 0 }
   // Collapse a run of blank lines a removal can leave behind, never touching

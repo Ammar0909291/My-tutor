@@ -59,17 +59,45 @@ describe('the two real reproduced cases', () => {
   })
 })
 
-describe('never fires while a real figure is on screen', () => {
-  it('leaves all three reproduced cases byte-identical when figureOnScreen is true', () => {
-    expect(stripUnbackedAsciiDiagram(CHEM_FOUND_MATTER, true)).toEqual({
-      text: CHEM_FOUND_MATTER, stripped: false, removedBlocks: 0,
-    })
+describe('pointer-line and Pass-3 removal still stay quiet while a real figure is on screen', () => {
+  it('the weak-acid pointer-line/label case is left byte-identical when figureOnScreen is true', () => {
     expect(stripUnbackedAsciiDiagram(CHEM_EQUIL_WEAK_ACID, true)).toEqual({
       text: CHEM_EQUIL_WEAK_ACID, stripped: false, removedBlocks: 0,
     })
+  })
+
+  it('the unfenced "text diagram" (Pass 3) case is left byte-identical when figureOnScreen is true', () => {
     expect(stripUnbackedAsciiDiagram(CHEM_GLASS_OF_WATER, true)).toEqual({
       text: CHEM_GLASS_OF_WATER, stripped: false, removedBlocks: 0,
     })
+  })
+})
+
+describe('box-drawing removal is UNCONDITIONAL (2026-09-19 widening — live reproduction)', () => {
+  // ORIGINAL assertion here (superseded, not deleted): this same
+  // CHEM_FOUND_MATTER fixture was expected byte-identical when
+  // figureOnScreen=true, alongside the other two cases above. Re-driven live
+  // on a disposable QA account (chem.found.matter, a real figure genuinely
+  // rendered) the model produced this EXACT shape of box-drawing tree
+  // DUPLICATING the figure already on screen, and the old blanket
+  // `figureOnScreen` early-exit let it straight through — contradicting this
+  // module's own absolute claim that box-drawing is never legitimate content
+  // in any subject, regardless of whether a visual also exists. Box-drawing
+  // removal is unconditional now; only pointer-line removal and Pass 3 (the
+  // two cases above) stay figure-gated.
+  it('the box-drawing decision tree is removed WHOLE even though a real figure is already on screen', () => {
+    const result = stripUnbackedAsciiDiagram(CHEM_FOUND_MATTER, true)
+    expect(result.stripped).toBe(true)
+    expect(result.removedBlocks).toBe(1)
+    expect(result.text).not.toMatch(/[─-╿]/)
+    expect(result.text).not.toContain('```')
+    expect(result.text).toContain('Use the first yes/no question')
+  })
+
+  it('is identical to the figureOnScreen=false result for pure box-drawing content — the flag no longer changes this outcome', () => {
+    const withFigure = stripUnbackedAsciiDiagram(CHEM_FOUND_MATTER, true)
+    const withoutFigure = stripUnbackedAsciiDiagram(CHEM_FOUND_MATTER, false)
+    expect(withFigure).toEqual(withoutFigure)
   })
 })
 
