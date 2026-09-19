@@ -5172,3 +5172,28 @@ math.num.floating-point/interpolation/root-finding, math.opt.stochastic-gradient
 math.prob.characteristic-function/joint-distribution,
 math.stats.normal-distribution/percentile/sampling-distribution, math.top.topological-space.
 Campaign continues under the same active `/loop`.
+
+### Batch 177 (2026-09-19)
+
+Authored `cholesky` (LU specialized by symmetry into A=LLᵀ, never separate; L computable directly
+via recursive formulas; roughly half the work of general LU) and `svd` (U,V separately sized to
+A's rows/columns, never same size like diagonalization; singular values as square roots of AᵀA's
+eigenvalues sorted descending, never raw eigenvalues; SVD's universal applicability). Both zero
+Blueprint/KG discrepancy; math.linalg.lu-factorization confirmed authored, math.num.cholesky/
+math.num.svd/math.opt.pca all confirmed still unauthored. Mathematics **749/908** (747→749), 159
+remaining. Full per-concept detail in `COVERAGE.md` Batch 177. Validated: KG validator PASS
+(908/908 reachable, file untouched), `scripts/math/state.ts` confirms mathematics 749/908 (13
+EB-certified domains unchanged), `tsc --noEmit` clean, targeted EB/curriculum tests (7 files)
+561/561 passed. Full whole-repo suite not re-attempted, per the established Batch 109-110 hang
+precedent. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Commit
+`a43084b` on `main`, pushed directly.
+
+Fresh frontier recomputed for Batch 178 (27 concepts): math.linalg.pseudoinverse,
+math.linalg.singular-values (newly reachable via svd's children), plus math.cat.category,
+math.cx.complex-numbers-analysis, math.de.systems-matrix-method, math.fnal.convolution,
+math.fnal.normed-space, math.graph.random-graph, math.linalg.dual-space/jordan-form/least-squares/
+matrix-exponential/matrix-representation/tensor, math.num.floating-point/interpolation/
+qr-algorithm/root-finding, math.opt.quadratic-programming/semidefinite-programming/
+stochastic-gradient, math.prob.characteristic-function/joint-distribution,
+math.stats.normal-distribution/percentile/sampling-distribution, math.top.topological-space.
+Campaign continues under the same active `/loop`.

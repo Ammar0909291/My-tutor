@@ -16843,3 +16843,48 @@ unlocking chains), plus `math.cat.category`, `math.cx.complex-numbers-analysis`,
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `9f064cb` on `main`, pushed directly.
+
+## Batch 177 (2026-09-19)
+
+`cholesky`: Cholesky as LU specialized by symmetry into $A=LL^T$ (never a separate factorization
+method), demonstrated via the direct $U=DL_0^T$ symmetrization derivation from ordinary LU output;
+$L$ computable DIRECTLY via recursive column formulas (never requiring general LU first),
+demonstrated via the matching direct-computation result for the same matrix; and Cholesky using
+roughly HALF the work of general LU (never the same cost), demonstrated via the 9-vs-6-number
+storage-count contrast. 3 misconceptions independently classified by Blueprint-declared severity
+— MC-1 CHOLESKY-ASSUMED-SEPARATE-METHOD (Foundational), MC-2
+CHOLESKY-ASSUMED-TO-REQUIRE-LU-FIRST (High), MC-3 CHOLESKY-ASSUMED-SAME-COST-AS-LU (Moderate).
+Zero Blueprint/KG discrepancy; `math.linalg.lu-factorization` independently re-confirmed authored,
+`math.num.cholesky` independently re-confirmed still unauthored.
+
+`svd`: $U$ and $V$ separately sized to $A$'s rows and columns (never assumed the same size like
+diagonalization's single $P$), demonstrated via the explicit size derivation for a non-square
+matrix; singular values as the SQUARE ROOTS of $A^TA$'s eigenvalues sorted descending (never the
+raw eigenvalues), demonstrated via the full $A^TA\to$eigenvalues$\to$square-roots derivation; and
+SVD's universal applicability contrasted with diagonalization's square-matrix limitation. 2
+misconceptions independently classified by Blueprint-declared severity — MC-1
+U-AND-V-ASSUMED-SAME-SIZE-LIKE-DIAGONALIZATIONS-SINGLE-P (Foundational), MC-2
+SINGULAR-VALUES-CONFUSED-WITH-A-TRANSPOSE-A-EIGENVALUES-DIRECTLY (Foundational). Zero Blueprint/KG
+discrepancy; both cross-link targets (`math.num.svd`, `math.opt.pca`) independently re-confirmed
+still unauthored.
+
+Mathematics **747/908 → 749/908**, 159 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 749/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)".
+
+Fresh frontier recomputed for Batch 178 (27 concepts): `math.linalg.pseudoinverse`,
+`math.linalg.singular-values` (both newly reachable via `svd`'s children), plus
+`math.cat.category`, `math.cx.complex-numbers-analysis`, `math.de.systems-matrix-method`,
+`math.fnal.convolution`, `math.fnal.normed-space`, `math.graph.random-graph`,
+`math.linalg.dual-space`/`jordan-form`/`least-squares`/`matrix-exponential`/
+`matrix-representation`/`tensor`, `math.num.floating-point`/`interpolation`/`qr-algorithm`/
+`root-finding`, `math.opt.quadratic-programming`/`semidefinite-programming`/`stochastic-gradient`,
+`math.prob.characteristic-function`/`joint-distribution`,
+`math.stats.normal-distribution`/`percentile`/`sampling-distribution`,
+`math.top.topological-space`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `a43084b` on `main`, pushed directly.
