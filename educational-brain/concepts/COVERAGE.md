@@ -15352,3 +15352,61 @@ still reachable.
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `22cfbfd` on `main`, pushed directly.
+
+## Batch 145 (2026-09-19)
+
+Authored `math.prob.convergence-types` and `math.prob.generating-function`, closing out the
+`math.prob` domain's remaining reachable concepts from this sub-campaign.
+
+`convergence-types`: the four modes of convergence — convergence IN PROBABILITY (the CHANCE of a
+large gap shrinking, never actual values converging), ALMOST SURE convergence (genuine pointwise
+$\varepsilon$–$N$ convergence for almost every outcome, strictly stronger), $L^p$, and
+DISTRIBUTIONAL convergence (CDFs matching in the limit, with zero value-closeness implied) —
+demonstrated via three canonical counterexamples: the moving-spike sequence (convergent in
+probability, pointwise convergent for ZERO outcomes), $X_n=-X$ for $X\sim N(0,1)$ (perfect
+distributional convergence, constant nonzero actual gap), and $Z/n\to0$ (strictly positive tail
+probability for every finite $n$, still vanishing in the limit). The one-directional hierarchy
+a.s. ⟹ in probability ⟹ in distribution stated with each reverse implication refuted. 3
+misconceptions independently classified by Blueprint-declared severity — MC-1 CONVERGENCE-IN-
+PROBABILITY-ASSUMED-EQUIVALENT-TO-ALMOST-SURE (Foundational), MC-2 CONVERGENCE-IN-DISTRIBUTION-
+ASSUMED-TO-IMPLY-VALUE-CLOSENESS (Foundational), MC-3 CONVERGENCE-IN-PROBABILITY-REQUIRES-EXACT-
+ZERO (Moderate). Zero Blueprint/KG discrepancy. Both KG-declared unlocks (`math.prob.lln`,
+`math.prob.clt`) were found ALREADY authored earlier in this campaign (Batches 127, 140) — a
+reverse-dependency case, this concept now supplying the precise convergence-mode vocabulary those
+entries had assumed informally.
+
+`generating-function`: the probability generating function (PGF) $G_X(z)=E[z^X]$, with
+derivatives at 1 giving FALLING FACTORIAL moments (never raw moments directly — $G''(1)=E[X^2]-
+E[X]$, requiring the $+G'(1)$ conversion for the raw second moment); the moment generating
+function (MGF) $M_X(t)=E[e^{tX}]$, recovering RAW moments via $M^{(r)}(0)$; the PRODUCT rule
+$G_{X+Y}=G_XG_Y$/$M_{X+Y}=M_XM_Y$ for independent sums (never a sum of generating functions —
+demonstrated failing to even integrate to 1); and the MGF's UNIQUENESS property (matching MGFs
+imply matching distributions, never merely matching moments), applied to identify a sum of
+independent normals exactly. 3 misconceptions independently classified — MC-1 MGF-IS-JUST-A-
+TRICK-NOT-A-DISTRIBUTION-TOOL (instruction-induced), MC-2 G-PRIME-AT-1-GIVES-E[X-SQUARED]
+(overgeneralization), MC-3 INDEPENDENCE-MEANS-PGFS-ADD (overgeneralization). **Incomplete
+Blueprint metadata correction**: the Blueprint's own Prerequisites field listed only
+`math.prob.pmf`, omitting `math.calc.power-series` — the live KG's complete two-prerequisite list
+used as authoritative (this pattern previously occurred at Batch 143's `poisson-process` and
+Batch 142's `transition-matrix`).
+
+Mathematics **683/908 → 685/908**, 223 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 685/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Fresh frontier to be recomputed at the start of Batch 146 per established discipline; with
+`math.prob`'s reachable frontier now exhausted (all previously-reachable concepts authored),
+remaining frontier concepts span `math.de` (differential equations), `math.linalg` (basis,
+kernel-image, diagonalization, inner-product-space, projection, tensor, dual-space),
+`math.prob.joint-distribution`, `math.stats` (percentile, sampling-distribution, normal-
+distribution), `math.cx.complex-numbers-analysis`, `math.top.topological-space`,
+`math.fnal.normed-space`, `math.fnal.convolution`, `math.num` (floating-point, root-finding,
+interpolation), `math.opt.stochastic-gradient`, `math.graph.random-graph`, and
+`math.cat.category`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `fec7323` on `main`, pushed directly.

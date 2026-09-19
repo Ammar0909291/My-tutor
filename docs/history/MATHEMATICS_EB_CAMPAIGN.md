@@ -4418,3 +4418,26 @@ Fresh frontier to be recomputed at the start of Batch 145 per established discip
 math.prob concepts (convergence-types, generating-function) and other ready concepts across
 math.cat, math.cx, math.de, math.graph, math.linalg, math.num, math.stats, math.top still
 reachable. Campaign continues under the same active `/loop`.
+
+### Batch 145 (2026-09-19) — math.prob domain frontier exhausted
+
+Authored `convergence-types` (the four modes of convergence — probability, almost sure, Lp,
+distribution — via the moving-spike, X_n=-X, and Z/n counterexamples; the one-directional
+hierarchy a.s. ⟹ in probability ⟹ in distribution) and `generating-function` (PGF/MGF definitions;
+falling-factorial-vs-raw-moment conversion; the independent-sum product rule; the MGF's uniqueness
+property). `convergence-types` had zero Blueprint/KG discrepancy, with both declared unlocks
+(`lln`, `clt`) found already authored earlier in the campaign (reverse-dependency case).
+`generating-function`'s Blueprint omitted `math.calc.power-series` from its Prerequisites field —
+corrected to the live KG's complete two-prerequisite list (third such incomplete-Prerequisites
+correction this campaign, after Batches 142 and 143). Mathematics **685/908** (683→685), 223
+remaining. Full per-concept detail in `COVERAGE.md` Batch 145. Validated: KG validator PASS
+(908/908 reachable, file untouched), `scripts/math/state.ts` confirms mathematics 685/908 (13
+EB-certified domains unchanged), `tsc --noEmit` clean, targeted EB/curriculum tests (7 files)
+561/561 passed. Full whole-repo suite not re-attempted, per the established Batch 109-110 hang
+precedent. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Commit
+`fec7323` on `main`, pushed directly.
+
+With math.prob's previously-reachable frontier now exhausted, fresh frontier to be recomputed at
+the start of Batch 146 spans math.de, math.linalg, math.prob.joint-distribution, math.stats,
+math.cx, math.top, math.fnal, math.num, math.opt, math.graph, and math.cat. Campaign continues
+under the same active `/loop`.
