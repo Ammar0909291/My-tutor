@@ -15545,3 +15545,44 @@ still reachable.
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `4dde41f` on `main`, pushed directly.
+
+## Batch 149 (2026-09-19)
+
+Authored `math.de.bernoulli` and `math.de.slope-field`, continuing the `math.de` domain.
+
+`bernoulli`: the Bernoulli ODE $dy/dx+P(x)y=Q(x)y^n$ ($n\ne0,1$), solved via the substitution
+$v=y^{1-n}$ (never $v=y^n$), demonstrated via $dy/dx-y=-y^2$ ($n=2$) reducing to the linear
+$dv/dx+v=1$ and yielding the logistic curve $y=1/(1+Ce^{-x})$; the mandatory $(1-n)$ coefficient
+in $dv/dx=(1-n)y^{-n}dy/dx$ (never omitted); and the $n=0,1$ exclusion cases, each already
+linear/separable and never needing the substitution. 3 misconceptions independently classified by
+Blueprint-declared birth type — MC-1 WRONG-EXPONENT-IN-SUBSTITUTION (overgeneralization), MC-2
+FORGETTING-THE-1-MINUS-N-FACTOR-IN-DV-DX (instruction-induced), MC-3 BERNOULLI-APPLIES-FOR-ALL-N
+(overgeneralization). Zero Blueprint/KG discrepancy.
+
+`slope-field`: the ODE's own right-hand side $f(x,y)$ shown to directly BE the slope formula,
+constructed purely computationally with zero solving, demonstrated via $y'=x-y$'s point-by-point
+evaluation; a sketched solution shown to require CONTINUOUS tangency to the field at every point
+along its path (never merely matching the initial slope), demonstrated via the tangent-following
+sketch through $(0,2)$; and qualitative long-run behavior read directly from the picture (solutions
+converging toward $y=x$), demonstrated without any algebraic solving, contrasted against the
+laborious explicit-solving route. 3 misconceptions independently classified by Blueprint-declared
+severity — MC-1 SLOPE-FIELD-ASSUMED-TO-REQUIRE-SOLVING-FIRST (Foundational), MC-2 SOLUTION-
+SKETCH-ASSUMED-ONLY-NEEDS-INITIAL-TANGENCY (High), MC-3 QUALITATIVE-BEHAVIOR-ASSUMED-TO-REQUIRE-
+EXPLICIT-SOLVING (Moderate). Zero Blueprint/KG discrepancy. Opens toward `math.de.phase-plane`'s
+declared unlock.
+
+Mathematics **691/908 → 693/908**, 215 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 693/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Fresh frontier to be recomputed at the start of Batch 150 per established discipline; remaining
+`math.de` concepts (euler-method, second-order-linear, laplace-transform, bvp, pde) and other
+ready concepts across `math.linalg`, `math.prob.joint-distribution`, `math.stats`, `math.cx`,
+`math.top`, `math.fnal`, `math.num`, `math.opt`, `math.graph`, `math.cat` still reachable.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `6a9b2fe` on `main`, pushed directly.
