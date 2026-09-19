@@ -18177,3 +18177,24 @@ math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matr
 math.fnal.convolution/normed-space, math.graph.random-graph,
 math.linalg.matrix-representation/tensor, math.num.iterative-linear/stiff-ode/svd,
 math.opt.pca/semidefinite-programming, math.prob.martingale.
+
+## Batch 222 (2026-09-19) — zero discrepancy
+
+Authored `math.num.svd` (SVD is never the same as eigendecomposition except for symmetric PSD
+matrices; truncated SVD is provably optimal via Eckart-Young, never a heuristic loss; numerical
+rank always needs a threshold, never counting exactly-zero floating-point singular values) and
+`math.num.iterative-linear` (iterative methods are never categorically slower — fill-in makes
+direct methods infeasible for large sparse systems; Jacobi/Gauss-Seidel never automatically
+converge — the spectral radius must be checked; CG requires SPD, never applied indiscriminately).
+Both zero discrepancy. Mathematics **837/908 → 839/908**, 69 remaining. Correction: the prior
+batch's commit message stated math.num was "complete (16/16 authored)" — this was inaccurate;
+`scripts/math/state.ts` confirms math.num is actually **15/16** (`math.num.stiff-ode` remains,
+still blocked on an unauthored prerequisite outside this batch's scope at time of writing).
+Validated: KG PASS (908/908 reachable), state.ts confirms 839/908, tsc clean, tests 561/561.
+Commit `2b60493`, pushed.
+
+Fresh frontier for Batch 223 (15 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.stiff-ode, math.opt.pca/
+semidefinite-programming, math.prob.martingale.

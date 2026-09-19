@@ -6133,3 +6133,22 @@ math.fnal.convolution/normed-space, math.graph.random-graph,
 math.linalg.matrix-representation/tensor, math.num.iterative-linear/stiff-ode/svd,
 math.opt.pca/semidefinite-programming, math.prob.martingale. Campaign continues under the same
 active `/loop`.
+
+## Batch 222 (2026-09-19)
+
+Authored `svd` (never the same as eigendecomposition except symmetric PSD; truncated SVD is
+provably optimal via Eckart-Young, never heuristic loss; numerical rank always needs a threshold)
+and `iterative-linear` (never categorically slower than direct — fill-in makes direct infeasible
+on large sparse systems; Jacobi/GS never automatically converge; CG requires SPD, never applied
+indiscriminately). Both zero discrepancy. Mathematics **839/908** (837→839), 69 remaining.
+Correction: prior batch's commit message inaccurately claimed math.num was "complete (16/16)" —
+`state.ts` confirms math.num is actually **15/16** (`math.num.stiff-ode` remains). Full detail in
+`COVERAGE.md` Batch 222. Validated: KG PASS, state.ts 839/908, tsc clean, tests 561/561. Commit
+`2b60493`, pushed.
+
+Fresh frontier for Batch 223 (15 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.stiff-ode, math.opt.pca/
+semidefinite-programming, math.prob.martingale. Campaign continues under the same active
+`/loop`.
