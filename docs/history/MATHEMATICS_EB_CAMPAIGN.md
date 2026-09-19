@@ -5828,3 +5828,22 @@ qr-algorithm/splines, math.opt.semidefinite-programming, math.prob.conditional-e
 correlation/marginal-distribution, math.stats.anova/bias-variance/chi-squared-test/ci-mean/
 ci-proportion/consistency/covariance-matrix/method-of-moments/mle/nonparametric/
 sufficient-statistic/t-test/z-test. Campaign continues under the same active `/loop`.
+
+## Batch 205 (2026-09-19)
+
+Authored `z-test` (requires σ genuinely known, never s substituted; one-tailed/two-tailed use
+different critical values, can flip the decision; known σ is rare) and `t-test` (unknown σ needs
+the t-distribution, never the normal's; paired data needs within-pair differences, never treated
+as independent groups; robustness to non-normality is a large-sample property). Both zero
+discrepancy. Mathematics **805/908** (803→805), 103 remaining. Full detail in `COVERAGE.md`
+Batch 205. Validated: KG PASS, state.ts 805/908, tsc clean, tests 561/561. Commit `7df4414`,
+pushed.
+
+Fresh frontier for Batch 206 (30 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
+qr-algorithm/splines, math.opt.semidefinite-programming, math.prob.conditional-expectation/
+correlation/marginal-distribution, math.stats.anova/bias-variance/chi-squared-test/ci-mean/
+ci-proportion/consistency/covariance-matrix/method-of-moments/mle/nonparametric/
+sufficient-statistic. Campaign continues under the same active `/loop`.

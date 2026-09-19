@@ -17838,3 +17838,23 @@ qr-algorithm/splines, math.opt.semidefinite-programming, math.prob.conditional-e
 correlation/marginal-distribution, math.stats.anova/bias-variance/chi-squared-test/ci-mean/
 ci-proportion/consistency/covariance-matrix/method-of-moments/mle/nonparametric/
 sufficient-statistic/t-test/z-test.
+
+## Batch 205 (2026-09-19) — zero discrepancy
+
+Authored `math.stats.z-test` (the z-test requires σ genuinely known, never s silently
+substituted; one-tailed and two-tailed tests use different critical values — the same Z can flip
+the decision; known σ is the rare case, never assumed) and `math.stats.t-test` (unknown σ requires
+the t-distribution's critical value, never the normal's; paired data requires the paired t-test —
+within-pair differences, never treated as two independent groups; robustness to non-normality is
+a large-sample property, never a universal guarantee). Both zero discrepancy. Mathematics
+**803/908 → 805/908**, 103 remaining. Validated: KG PASS (908/908 reachable), state.ts confirms
+805/908, tsc clean, tests 561/561. Commit `7df4414`, pushed.
+
+Fresh frontier for Batch 206 (30 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
+qr-algorithm/splines, math.opt.semidefinite-programming, math.prob.conditional-expectation/
+correlation/marginal-distribution, math.stats.anova/bias-variance/chi-squared-test/ci-mean/
+ci-proportion/consistency/covariance-matrix/method-of-moments/mle/nonparametric/
+sufficient-statistic.
