@@ -5975,3 +5975,21 @@ math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-inte
 qr-algorithm/splines, math.opt.pca/semidefinite-programming, math.prob.conditional-expectation/
 marginal-distribution, math.stats.bayesian-inference/experimental-design/linear-regression/
 nonparametric. Campaign continues under the same active `/loop`.
+
+## Batch 213 (2026-09-19)
+
+Authored `linear-regression` (slope before intercept, never reversed; non-significant slope
+never means no relationship, only no linear one; high R² never validates assumptions) and
+`experimental-design` (randomization enables causal claims, never substitutable by observational
+data; blocking on known noise improves precision, never skippable; factorial designs capture
+interactions separate experiments miss). Both zero discrepancy. Mathematics **821/908**
+(819→821), 87 remaining. Full detail in `COVERAGE.md` Batch 213. Validated: KG PASS, state.ts
+821/908, tsc clean, tests 561/561. Commit `c37af86`, pushed.
+
+Fresh frontier for Batch 214 (22 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
+qr-algorithm/splines, math.opt.pca/semidefinite-programming, math.prob.conditional-expectation/
+marginal-distribution, math.stats.bayesian-inference/multiple-regression/nonparametric. Campaign
+continues under the same active `/loop`.

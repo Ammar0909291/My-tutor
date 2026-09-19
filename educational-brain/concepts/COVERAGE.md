@@ -18001,3 +18001,22 @@ math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-inte
 qr-algorithm/splines, math.opt.pca/semidefinite-programming, math.prob.conditional-expectation/
 marginal-distribution, math.stats.bayesian-inference/experimental-design/linear-regression/
 nonparametric.
+
+## Batch 213 (2026-09-19) — zero discrepancy
+
+Authored `math.stats.linear-regression` (slope must be computed before the intercept, never the
+reverse; a non-significant slope test never means no relationship at all, only no significant
+linear one; a high R² never validates the model's assumptions — residual diagnostics must be
+checked separately) and `math.stats.experimental-design` (randomization is what enables causal
+claims, never something observational data can substitute for; blocking on a known noise source
+improves precision, never an opportunity to skip; factorial designs capture interactions separate
+experiments would miss). Both zero discrepancy. Mathematics **819/908 → 821/908**, 87 remaining.
+Validated: KG PASS (908/908 reachable), state.ts confirms 821/908, tsc clean, tests 561/561.
+Commit `c37af86`, pushed.
+
+Fresh frontier for Batch 214 (22 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
+qr-algorithm/splines, math.opt.pca/semidefinite-programming, math.prob.conditional-expectation/
+marginal-distribution, math.stats.bayesian-inference/multiple-regression/nonparametric.
