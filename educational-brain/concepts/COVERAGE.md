@@ -16509,3 +16509,55 @@ the first time in an extended stretch of this campaign.
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `37057f6` on `main`, pushed directly.
+
+## Batch 170 (2026-09-19) — first math.linalg concepts this campaign
+
+`basis`: a basis requiring BOTH spanning AND independence simultaneously (never just one),
+demonstrated via the $\{(1,0),(0,1),(1,1)\}$ spanning-but-dependent counterexample; a vector space
+having INFINITELY MANY valid bases (never a single unique one), demonstrated via three distinct
+verified bases for $\mathbb R^2$; and coordinates being basis-relative (never an absolute property
+of the vector), demonstrated via $v=(5,3)$'s differing coordinates $(5,3)$ vs. $(4,1)$ across two
+bases. 3 misconceptions independently classified by Blueprint-declared root-cause chain — MC-1
+SPANNING-SET-IS-AUTOMATICALLY-A-BASIS (Foundational/root), MC-2 ONLY-ONE-BASIS-EXISTS (downstream
+of MC-1), MC-3 COORDINATES-ARE-BASIS-INDEPENDENT (downstream of MC-1/MC-2). Zero Blueprint/KG
+discrepancy — this campaign's first `math.linalg` concept, diversifying away from the
+now-exhausted `math.de` frontier.
+
+`kernel-image`: the kernel able to contain many nonzero vectors (never automatically just
+$\{0\}$), demonstrated via $T(x,y)=(x+y,x+y)$'s full kernel line $\{(t,-t)\}$; injectivity tested
+EXACTLY via the kernel criterion (never by spot-checking input pairs), demonstrated via the same
+$T$'s definitive $\ker(T)\ne\{0\}\Rightarrow$ non-injective conclusion; and the image able to be a
+proper subspace (never automatically the entire codomain), demonstrated via the same $T$'s
+diagonal-line image missing $(1,2)$. 3 misconceptions independently classified by
+Blueprint-declared severity — MC-1 KERNEL-ASSUMED-TO-BE-ONLY-ZERO (Foundational), MC-2
+INJECTIVITY-CHECKED-BY-SPOT-CHECKING-RATHER-THAN-KERNEL (Foundational), MC-3
+IMAGE-ASSUMED-TO-BE-THE-ENTIRE-CODOMAIN (Moderate). Stale cross_links discrepancy found: the
+Blueprint's own Component 7 states "cross_links: (none)" — the live KG lists
+`math.abst.group-homomorphism`, which the Blueprint's own validation (V-5) never actually checked
+against this specific field — corrected here to a genuine cross-link probe, since
+`math.abst.group-homomorphism` IS authored (EB-certified `math.abst` domain), connecting the
+kernel/image structure to its exact group-homomorphism parallel (kernel-always-normal-subgroup,
+image-always-subgroup, trivial-kernel-iff-injective). This is a NEW discrepancy category (missed
+cross_links check, distinct from wrong-corpus/reverse-direction/stale-metadata) — first occurrence
+this campaign.
+
+Mathematics **733/908 → 735/908**, 173 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 735/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)".
+
+Fresh frontier recomputed for Batch 171 (24 concepts): `math.linalg.coordinates`,
+`math.linalg.dimension` (both newly reachable via `basis`'s unlocking), `math.linalg.
+matrix-representation`, `math.linalg.orthogonal-basis` (newly reachable via `kernel-image`'s
+unlocking-adjacent progress), plus `math.cat.category`, `math.cx.complex-numbers-analysis`,
+`math.fnal.convolution`, `math.fnal.normed-space`, `math.graph.random-graph`,
+`math.linalg.diagonalization`/`dual-space`/`inner-product-space`/`projection`/`tensor`,
+`math.num.floating-point`/`interpolation`/`root-finding`, `math.opt.stochastic-gradient`,
+`math.prob.characteristic-function`/`joint-distribution`,
+`math.stats.normal-distribution`/`percentile`/`sampling-distribution`,
+`math.top.topological-space`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `18c1bb9` on `main`, pushed directly.

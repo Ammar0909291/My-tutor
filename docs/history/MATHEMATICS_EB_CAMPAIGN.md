@@ -4994,3 +4994,31 @@ root-finding, math.opt.stochastic-gradient, math.prob.characteristic-function/jo
 math.stats.normal-distribution/percentile/sampling-distribution, math.top.topological-space. This
 batch diversifies away from math.de into other domains for the first time in an extended stretch
 of this campaign. Campaign continues under the same active `/loop`.
+
+### Batch 170 (2026-09-19) — first math.linalg concepts; new discrepancy category
+
+Authored `basis` (both spanning and independence required simultaneously; infinitely many valid
+bases; coordinates as basis-relative) and `kernel-image` (the kernel able to contain many nonzero
+vectors; injectivity tested exactly via the kernel, never spot-checking; the image able to be a
+proper subspace). `basis` had zero discrepancy — the campaign's first math.linalg concept.
+`kernel-image` had a NEW discrepancy category: the Blueprint's own Component 7 stated
+"cross_links: (none)" but never actually checked this against the live KG, which lists
+math.abst.group-homomorphism — corrected here to a genuine cross-link probe since that target is
+authored (EB-certified math.abst domain). This is distinct from the wrong-corpus/reverse-
+direction/stale-metadata categories seen so far — a missed cross_links check entirely. Mathematics
+**735/908** (733→735), 173 remaining. Full per-concept detail in `COVERAGE.md` Batch 170.
+Validated: KG validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts` confirms
+mathematics 735/908 (13 EB-certified domains unchanged), `tsc --noEmit` clean, targeted EB/
+curriculum tests (7 files) 561/561 passed. Full whole-repo suite not re-attempted, per the
+established Batch 109-110 hang precedent. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/
+runtime file touched. Commit `18c1bb9` on `main`, pushed directly.
+
+Fresh frontier recomputed for Batch 171 (24 concepts): math.linalg.coordinates,
+math.linalg.dimension (newly reachable via basis's unlocking), math.linalg.matrix-representation,
+math.linalg.orthogonal-basis, plus math.cat.category, math.cx.complex-numbers-analysis,
+math.fnal.convolution, math.fnal.normed-space, math.graph.random-graph,
+math.linalg.diagonalization/dual-space/inner-product-space/projection/tensor,
+math.num.floating-point/interpolation/root-finding, math.opt.stochastic-gradient,
+math.prob.characteristic-function/joint-distribution,
+math.stats.normal-distribution/percentile/sampling-distribution, math.top.topological-space.
+Campaign continues under the same active `/loop`.
