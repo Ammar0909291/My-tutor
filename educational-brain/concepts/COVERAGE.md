@@ -15072,3 +15072,54 @@ ready concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph`, `ma
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `be23c5f` on `main`, pushed directly.
+
+### Batch 139 (2026-09-19) — MILESTONE: math.real is now EB-certified (13th certified domain)
+
+`math.real.inverse-function-theorem`: the theorem stated as the direct multivariable
+generalization of the 1D inverse-derivative rule ("invertible" becomes "nonzero determinant,"
+"reciprocal" becomes "matrix inverse"), demonstrated via $f(x,y)=(x+y^2,y+x^2)$'s full Jacobian
+computation and inversion at $(1,1)$; local invertibility shown to NOT sum to global
+invertibility via $f(x,y)=(e^x\cos y,e^x\sin y)$'s everywhere-invertible-yet-$2\pi$-periodic
+counterexample. 3 misconceptions independently classified — MC-1
+LOCAL-INVERTIBILITY-EVERYWHERE-CONFLATED-WITH-GLOBAL (Foundational), MC-2
+JACOBIAN-INVERTIBILITY-CONFUSED-WITH-NONZERO-ENTRIES (Foundational), MC-3
+INVERSE-DERIVATIVE-FORMULA-MISAPPLIED-AS-ENTRYWISE-RECIPROCAL (Moderate). Zero Blueprint/KG
+metadata discrepancy.
+
+`math.prob.normal-distribution`: $N(\mu,\sigma^2)$'s second parameter as the VARIANCE (requiring a
+square root before use in the Z-formula), demonstrated via $N(10,4)$'s $\sigma=2$; standardization
+$Z=(X-\mu)/\sigma$ shown never reversible via a below-the-mean worked example; symmetry giving
+$P(X>\mu)=0.5$ for any Normal regardless of $\sigma$, and the 68-95-99.7 empirical rule for fast
+estimation. 3 misconceptions independently classified — MC-1 SIGMA-VS-SIGMA-SQUARED
+(Foundational, arising directly from the notation), MC-2 STANDARDIZATION-SIGN-ERROR, MC-3
+SYMMETRY-FORGOTTEN. Zero Blueprint/KG metadata discrepancy; `math.stats.normal-distribution`
+cross-link independently confirmed unauthored via `ls`, doubly justifying the Blueprint's own
+independence-mode declaration (made on "not Tier-1" grounds).
+
+**MILESTONE: `math.real` is now EB-certified** — `scripts/math/state.ts` reports 13 EB-certified
+domains (math.found, math.calc, math.geom, math.alg, math.arith, math.abst, math.nt, math.disc,
+**math.real**, math.func, math.trig, math.seq, math.meas), up from 12. This closes out the
+entire real-analysis rigor campaign launched at Batch 124 (`math.real.metric-space`, opening the
+domain's independent entry point) through Batch 139 — every concept in the KG's `math.real`
+domain (metric spaces, open/closed sets, compactness, connectedness, continuity, differentiability,
+completeness, Baire category, MVT, Taylor's theorem, fixed-point theorem, Riemann integration,
+uniform convergence, Weierstrass approximation, implicit/inverse function theorems) now has an
+authored Educational Brain entry.
+
+Mathematics **671/908 → 673/908**, 235 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 673/908, 13
+EB-certified domains (math.real newly certified). `npx tsc --noEmit` → clean (exit 0). Targeted
+EB/curriculum tests (7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo
+suite not re-attempted this batch, consistent with the established precedent from Batches
+109-110.
+
+Computed fresh frontier post-batch (not yet re-derived this entry — will be recomputed fresh at
+the start of Batch 140 per established discipline): no `math.real` concepts remain reachable —
+future batches will need to derive the frontier fresh across other domains (`math.prob`,
+`math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`, `math.num`, `math.stats`,
+`math.top`).
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `e96f697` on `main`, pushed directly.

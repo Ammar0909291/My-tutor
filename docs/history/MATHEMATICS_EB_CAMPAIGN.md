@@ -4278,3 +4278,33 @@ runtime file touched. Commit `be23c5f` on `main`, pushed directly.
 Fresh frontier to be recomputed at the start of Batch 139 per established discipline;
 `math.real.inverse-function-theorem` remains the last reachable math.real frontier concept.
 Numerous math.prob concepts remain reachable. Campaign continues under the same active `/loop`.
+
+### Batch 139 (2026-09-19) — MILESTONE: math.real is now EB-certified (13th certified domain)
+
+Authored `inverse-function-theorem` (the 1D inverse-derivative rule generalized via matrix
+invertibility and matrix inverse; local-not-global invertibility via the everywhere-invertible-
+yet-periodic e^x·cos(y)/sin(y) counterexample) and `normal-distribution` (N(μ,σ²)'s variance
+notation requiring a square root; standardization never reversible; symmetry giving P(X>μ)=0.5;
+the 68-95-99.7 rule). Both zero Blueprint/KG discrepancy.
+
+**MILESTONE**: `scripts/math/state.ts` now reports 13 EB-certified domains — `math.real` joins
+the certified list (math.found, math.calc, math.geom, math.alg, math.arith, math.abst, math.nt,
+math.disc, **math.real**, math.func, math.trig, math.seq, math.meas). This closes the entire
+real-analysis rigor campaign launched at Batch 124 (metric-space) through Batch 139
+(inverse-function-theorem) — every math.real KG concept now has an authored EB entry: metric
+spaces, open/closed sets, compactness, connectedness, continuity-rigorous, differentiability-
+rigorous, MVT, Taylor's theorem, completeness-metric, Baire category, fixed-point theorem,
+Riemann integral/integrability, FTC-rigorous, uniform continuity/convergence, Lipschitz
+continuity, Weierstrass approximation, and both implicit/inverse function theorems.
+
+Mathematics **673/908** (671→673), 235 remaining. Full per-concept detail in `COVERAGE.md` Batch
+139. Validated: KG validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts`
+confirms mathematics 673/908, 13 EB-certified domains (math.real newly certified), `tsc --noEmit`
+clean, targeted EB/curriculum tests (7 files) 561/561 passed. Full whole-repo suite not
+re-attempted, per the established Batch 109-110 hang precedent. No Physics/Chemistry/English/
+Biology/CS/KG/Blueprint/runtime file touched. Commit `e96f697` on `main`, pushed directly.
+
+Fresh frontier to be recomputed at the start of Batch 140 per established discipline — no
+math.real concepts remain reachable; future batches continue across math.prob and other domains
+(math.cat, math.cx, math.de, math.graph, math.linalg, math.num, math.stats, math.top). Campaign
+continues under the same active `/loop`.
