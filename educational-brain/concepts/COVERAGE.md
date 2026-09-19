@@ -17938,3 +17938,22 @@ math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-inte
 qr-algorithm/splines, math.opt.semidefinite-programming, math.prob.conditional-expectation/
 correlation/marginal-distribution, math.stats.anova/bayesian-inference/chi-squared-test/
 covariance-matrix/nonparametric.
+
+## Batch 210 (2026-09-19) — zero discrepancy
+
+Authored `math.stats.chi-squared-test` (square each term and divide by its own expected value,
+never a raw sum of differences; goodness-of-fit and independence are genuinely different tests,
+never interchangeable methods; k−1 for goodness-of-fit, (r−1)(c−1) for independence, never the
+same formula) and `math.stats.covariance-matrix` (the diagonal is the same covariance formula
+applied to a variable with itself, never a separate rule; symmetry is automatic from covariance's
+commutativity, never an imposed assumption; positive semidefiniteness is derived from variance's
+nonnegativity via v^TΣv, never a separate property to check). Both zero discrepancy. Mathematics
+**813/908 → 815/908**, 93 remaining. Validated: KG PASS (908/908 reachable), state.ts confirms
+815/908, tsc clean, tests 561/561. Commit `d6c7080`, pushed.
+
+Fresh frontier for Batch 211 (23 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
+qr-algorithm/splines, math.opt.pca/semidefinite-programming, math.prob.conditional-expectation/
+correlation/marginal-distribution, math.stats.anova/bayesian-inference/nonparametric.

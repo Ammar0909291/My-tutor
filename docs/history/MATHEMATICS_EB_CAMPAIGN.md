@@ -5920,3 +5920,21 @@ math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-inte
 qr-algorithm/splines, math.opt.semidefinite-programming, math.prob.conditional-expectation/
 correlation/marginal-distribution, math.stats.anova/bayesian-inference/chi-squared-test/
 covariance-matrix/nonparametric. Campaign continues under the same active `/loop`.
+
+## Batch 210 (2026-09-19)
+
+Authored `chi-squared-test` (square and divide each term, never a raw sum; goodness-of-fit and
+independence are different tests, never interchangeable; k−1 vs (r−1)(c−1), never swapped) and
+`covariance-matrix` (diagonal is the same covariance formula, never separate; symmetry is
+automatic, never imposed; PSD is derived from variance's nonnegativity, never separately
+checked). Both zero discrepancy. Mathematics **815/908** (813→815), 93 remaining. Full detail in
+`COVERAGE.md` Batch 210. Validated: KG PASS, state.ts 815/908, tsc clean, tests 561/561. Commit
+`d6c7080`, pushed.
+
+Fresh frontier for Batch 211 (23 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
+qr-algorithm/splines, math.opt.pca/semidefinite-programming, math.prob.conditional-expectation/
+correlation/marginal-distribution, math.stats.anova/bayesian-inference/nonparametric. Campaign
+continues under the same active `/loop`.
