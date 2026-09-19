@@ -5660,3 +5660,19 @@ qr-algorithm, math.opt.quadratic-programming/semidefinite-programming/stochastic
 math.prob.characteristic-function/joint-distribution,
 math.stats.normal-approximation/sampling-distribution. Campaign continues under the same active
 `/loop`.
+
+### Batch 196 (2026-09-19) — zero discrepancy
+
+Authored `quadratic-programming` (QP convex only if Q⪰0; KKT sufficient only when convex; LS is
+QP's unconstrained special case) and `stochastic-gradient` (SGD unbiased despite high variance;
+constant LR leaves permanent noise floor; batch size independent of N). Both zero discrepancy.
+Mathematics **787/908** (785→787), 121 remaining. Full detail in `COVERAGE.md` Batch 196.
+Validated: KG PASS, state.ts 787/908, tsc clean, tests 561/561. Commit `0d635c4`, pushed.
+
+Fresh frontier for Batch 197 (20 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/interpolation/newtons-method/
+qr-algorithm, math.opt.semidefinite-programming, math.prob.characteristic-function/
+joint-distribution, math.stats.normal-approximation/sampling-distribution. Campaign continues
+under the same active `/loop`.

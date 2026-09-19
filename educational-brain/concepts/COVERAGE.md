@@ -17657,3 +17657,20 @@ math.linalg.matrix-representation/tensor, math.num.error-analysis/interpolation/
 qr-algorithm, math.opt.quadratic-programming/semidefinite-programming/stochastic-gradient,
 math.prob.characteristic-function/joint-distribution,
 math.stats.normal-approximation/sampling-distribution.
+
+## Batch 196 (2026-09-19) — zero discrepancy
+
+Authored `math.opt.quadratic-programming` (QP convex only if Q⪰0, never assumed by default; KKT
+sufficient only when convex; least squares is QP's unconstrained special case, never confused
+with the general constrained problem) and `math.opt.stochastic-gradient` (SGD is unbiased, never
+biased, despite high variance; constant learning rate leaves a permanent noise floor; mini-batch
+size is a fixed hyperparameter, never scaled with N). Both zero discrepancy. Mathematics
+**785/908 → 787/908**, 121 remaining. Validated: KG PASS (908/908 reachable), state.ts confirms
+787/908, tsc clean, tests 561/561. Commit `0d635c4`, pushed.
+
+Fresh frontier for Batch 197 (20 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/interpolation/newtons-method/
+qr-algorithm, math.opt.semidefinite-programming, math.prob.characteristic-function/
+joint-distribution, math.stats.normal-approximation/sampling-distribution.
