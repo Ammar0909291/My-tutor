@@ -18294,3 +18294,28 @@ Fresh frontier for Batch 227 (9 concepts): math.cat.adjunction/functor-category/
 math.top.cohomology, plus math.cx.complex-numbers-analysis, math.fnal.banach-space,
 math.graph.random-graph, math.opt.semidefinite-programming, math.prob.martingale. Campaign
 continues under the same active `/loop`.
+
+## Batch 227 (2026-09-19) — 1 discrepancy (reverse-direction) — MILESTONE: math.prob fully
+EB-certified (18th domain)
+
+Authored `math.fnal.banach-space` ("Banach space" adds nothing beyond combining normed-space and
+completeness, never a new independent idea; not every normed space is Banach, never assume
+normed automatically implies Banach; completeness is load-bearing for functional-analysis
+theorems, never a minor footnote) and `math.prob.martingale` (the martingale condition is
+conditional expectation's own machinery conditioning on the whole past, never a new tool;
+sub-/supermartingale classification is precisely determined by the inequality's direction, never
+a qualitative judgment; the optional stopping theorem requires genuine hypotheses, never holds
+unconditionally). Reverse-direction discrepancy on `banach-space`: Blueprint's cross-link
+`math.meas.lp-space` was "not yet authored" at write time but is now authored — noted for the
+record (17th discrepancy this campaign), independence-mode probe retained as authored.
+`martingale` zero discrepancy (no cross-links declared in KG). Mathematics **847/908 → 849/908**,
+59 remaining. **math.prob is now the 18th fully EB-certified domain** (`scripts/math/state.ts`
+confirms: math.found, math.calc, math.geom, math.linalg, math.alg, math.arith, math.de,
+math.prob, math.stats, math.abst, math.nt, math.disc, math.real, math.func, math.trig, math.seq,
+math.num, math.meas). Validated: KG PASS (908/908 reachable), state.ts confirms 849/908 and the
+new certified-domain count, tsc clean, tests 561/561. Commit `fba7930`, pushed.
+
+Fresh frontier for Batch 228 (10 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.fnal.bounded-operator/
+dense-subspace/hilbert-space, math.graph.random-graph, math.opt.semidefinite-programming.
+Campaign continues under the same active `/loop`.

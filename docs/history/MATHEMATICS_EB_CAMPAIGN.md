@@ -6227,3 +6227,20 @@ Fresh frontier for Batch 227 (9 concepts): math.cat.adjunction/functor-category/
 math.top.cohomology, plus math.cx.complex-numbers-analysis, math.fnal.banach-space,
 math.graph.random-graph, math.opt.semidefinite-programming, math.prob.martingale. Campaign
 continues under the same active `/loop`.
+
+## Batch 227 (2026-09-19) — MILESTONE: math.prob fully EB-certified (18th domain)
+
+Authored `banach-space` (Banach = normed + complete, never a new independent idea; not every
+normed space is Banach; completeness is load-bearing, never a footnote) and `martingale` (the
+martingale condition is conditional expectation on the whole past, never a new tool; sub-/
+supermartingale is a precise sign-sensitive inequality check, never qualitative; optional stopping
+needs real hypotheses, never unconditional). One reverse-direction discrepancy: `banach-space`'s
+cross-link `math.meas.lp-space` is now authored though the Blueprint said unauthored at write
+time — noted, probe unchanged. Mathematics **849/908** (847→849), 59 remaining. **math.prob is
+now the 18th fully EB-certified domain**. Full detail in `COVERAGE.md` Batch 227. Validated: KG
+PASS, state.ts 849/908, tsc clean, tests 561/561. Commit `fba7930`, pushed.
+
+Fresh frontier for Batch 228 (10 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.fnal.bounded-operator/
+dense-subspace/hilbert-space, math.graph.random-graph, math.opt.semidefinite-programming.
+Campaign continues under the same active `/loop`.
