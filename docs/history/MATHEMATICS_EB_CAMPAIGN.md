@@ -5713,3 +5713,20 @@ math.linalg.matrix-representation/tensor, math.num.error-analysis/interpolation/
 qr-algorithm, math.opt.semidefinite-programming, math.prob.conditional-expectation/correlation/
 marginal-distribution, math.stats.covariance-matrix/normal-approximation/sampling-distribution.
 Campaign continues under the same active `/loop`.
+
+### Batch 199 (2026-09-19) — zero discrepancy
+
+Authored `sampling-distribution` (population/sample-data/sampling-distribution are three distinct
+objects; SE scales as σ/√n; halving SE requires quadrupling n) and `normal-approximation`
+(binomial uses full np/np(1-p); Poisson uses same λ for both parameters; continuity correction
+genuinely matters). Both zero discrepancy. Mathematics **793/908** (791→793), 115 remaining. Full
+detail in `COVERAGE.md` Batch 199. Validated: KG PASS, state.ts 793/908, tsc clean, tests
+561/561. Commit `2cd2750`, pushed.
+
+Fresh frontier for Batch 200 (24 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/interpolation/newtons-method/
+qr-algorithm, math.opt.semidefinite-programming, math.prob.conditional-expectation/correlation/
+marginal-distribution, math.stats.confidence-interval/covariance-matrix/estimator/
+hypothesis-testing/standard-error. Campaign continues under the same active `/loop`.

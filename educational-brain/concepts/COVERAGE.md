@@ -17714,3 +17714,21 @@ math.fnal.convolution/normed-space, math.graph.random-graph,
 math.linalg.matrix-representation/tensor, math.num.error-analysis/interpolation/newtons-method/
 qr-algorithm, math.opt.semidefinite-programming, math.prob.conditional-expectation/correlation/
 marginal-distribution, math.stats.covariance-matrix/normal-approximation/sampling-distribution.
+
+## Batch 199 (2026-09-19) — zero discrepancy
+
+Authored `math.stats.sampling-distribution` (population/one-sample-data/sampling-distribution
+are three genuinely different objects despite sharing a mean; SE scales as σ/√n, never σ/n;
+halving SE requires quadrupling n, never doubling) and `math.stats.normal-approximation` (binomial
+approximation uses full np/np(1-p), never simplified; Poisson uses the same λ for mean and
+variance; the continuity correction genuinely improves accuracy, never safely skipped). Both zero
+discrepancy. Mathematics **791/908 → 793/908**, 115 remaining. Validated: KG PASS (908/908
+reachable), state.ts confirms 793/908, tsc clean, tests 561/561. Commit `2cd2750`, pushed.
+
+Fresh frontier for Batch 200 (24 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/interpolation/newtons-method/
+qr-algorithm, math.opt.semidefinite-programming, math.prob.conditional-expectation/correlation/
+marginal-distribution, math.stats.confidence-interval/covariance-matrix/estimator/
+hypothesis-testing/standard-error.
