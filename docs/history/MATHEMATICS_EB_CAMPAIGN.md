@@ -4231,3 +4231,28 @@ runtime file touched. Commit `8e20367` on `main`, pushed directly.
 Fresh frontier to be recomputed at the start of Batch 137 per established discipline;
 `math.real.weierstrass-approximation`, `math.real.implicit-function-theorem`, `math.real.
 inverse-function-theorem` remain candidates. Campaign continues under the same active `/loop`.
+
+### Batch 137 (2026-09-19) — stale metadata plus an unverified older-Blueprint cross-link, first math.prob diversification since Batch 134
+
+Authored `weierstrass-approximation` (uniform polynomial approximation via Bernstein polynomials,
+an explicit computable construction; Stone-Weierstrass's compactness/point-separation
+generalization at orientation level) and `quantile` (Q(p)=inf{x:F(x)≥p} as F's inverse; median
+equals mean only for symmetric distributions; the infimum definition handling discrete
+distributions directly). `weierstrass-approximation`'s Blueprint metadata was stale (bloom
+analyze→understand, mastery_threshold 0.6→0.8, hours 8→5) — corrected to live KG values; its
+cross-link (`math.fnal.dense-subspace`) confirmed still unauthored, independence mode correct.
+`quantile`'s Blueprint claimed cross-link mode against `math.stats.percentile` without an
+ls-verification (an older-style Blueprint predating that discipline) — verified via `ls` that the
+target is unauthored; corrected to independence mode. First diversification into `math.prob`
+since Batch 134, after many consecutive `math.real` batches. Mathematics **669/908** (667→669),
+239 remaining. Full per-concept detail in `COVERAGE.md` Batch 137. Validated: KG validator PASS
+(908/908 reachable, file untouched), `scripts/math/state.ts` confirms mathematics 669/908 (12
+EB-certified domains unchanged), `tsc --noEmit` clean, targeted EB/curriculum tests (7 files)
+561/561 passed. Full whole-repo suite not re-attempted, per the established Batch 109-110 hang
+precedent. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Commit
+`f894963` on `main`, pushed directly.
+
+Fresh frontier to be recomputed at the start of Batch 138 per established discipline;
+`math.real.implicit-function-theorem`/`inverse-function-theorem` remain the last two reachable
+math.real concepts; numerous math.prob concepts remain reachable. Campaign continues under the
+same active `/loop`.

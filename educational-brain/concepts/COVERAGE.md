@@ -14971,3 +14971,56 @@ Numerous `math.prob` concepts remain reachable. Other ready concepts remain acro
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `8e20367` on `main`, pushed directly.
+
+### Batch 137 (2026-09-19) — stale metadata plus an unverified older-Blueprint cross-link, first math.prob diversification since Batch 134
+
+`math.real.weierstrass-approximation`: uniform polynomial approximation of every continuous
+function on $[a,b]$, demonstrated via $|x|$'s guarantee holding even at its non-smooth corner;
+Bernstein polynomials as an EXPLICIT computable construction (not abstract existence), demonstrated
+via $B_2(x^2,x)=0.5x+0.5x^2$ computed by hand; Stone-Weierstrass's compactness/point-separation
+generalization at orientation level via $S^1$ and trigonometric polynomials. 3 misconceptions
+independently classified — MC-1 UNIFORM-APPROXIMATION-ASSUMED-SAME-AS-POINTWISE (Foundational),
+MC-2 WEIERSTRASS-PROOF-ASSUMED-PURELY-ABSTRACT (High), MC-3
+STONE-WEIERSTRASS-ASSUMED-UNCONDITIONAL (Moderate). **Stale Blueprint/KG metadata discrepancy
+found and corrected**: the Blueprint's own Component 0 states bloom=analyze,
+mastery_threshold=0.6 (MAMR 3/5), estimated_hours=8 — the live KG shows bloom=understand,
+mastery_threshold=0.8 (MAMR ⌈0.8×5⌉=4/5), estimated_hours=5. Live KG values used throughout (this
+category last occurred at Batch 134's `taylor-rigorous`). `math.fnal.dense-subspace` cross-link
+confirmed still unauthored via `ls`, independence mode correctly used.
+
+`math.prob.quantile`: the quantile function $Q(p)=\inf\{x:F(x)\ge p\}$ as $F$'s inverse-direction
+counterpart, demonstrated via Exponential's $Q(p)=-\ln(1-p)/\lambda$; median-equals-mean shown to
+hold only for symmetric distributions (Uniform), genuinely failing for skewed ones (Exponential's
+mean $1/\lambda$ exceeding its median $\ln2/\lambda$); the infimum definition's direct
+applicability to discrete distributions, demonstrated via Bernoulli(0.3)'s median computed without
+any continuity assumption. 3 misconceptions independently classified — MC-1
+QUANTILE-IS-THE-CDF (language contamination), MC-2 MEDIAN-ALWAYS-EQUALS-MEAN (instruction-
+induced, from the Normal distribution's special-case symmetry), MC-3
+QUANTILE-IS-ONLY-DEFINED-FOR-CONTINUOUS-DISTRIBUTIONS (instruction-induced). **Cross-link
+discrepancy found and corrected (an unverified claim from an older-style Blueprint predating the
+corpus's `ls`-verification discipline)**: the Blueprint's Component 8 declares "Cross-link mode"
+against `math.stats.percentile` without documenting any check of whether that target is actually
+authored. Verified via `ls educational-brain/concepts/mathematics/` that it has NO authored EB
+entry. Corrected to INDEPENDENCE mode, restating the Blueprint's own sample-quantile/Q-Q-plot/
+Value-at-Risk transfer content as self-contained.
+
+This batch marks the first diversification into `math.prob` since Batch 134 — the campaign has
+been heavily concentrated in `math.real`'s continuity-rigorous-derived chains for many
+consecutive batches (126-136), and `math.prob.quantile` closes `math.prob.cdf`'s remaining
+declared unlock. `math.real.weierstrass-approximation` closes `math.real.uniform-convergence`'s
+declared unlock, a terminal leaf. Mathematics **667/908 → 669/908**, 239 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 669/908, 12
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Computed fresh frontier post-batch (not yet re-derived this entry — will be recomputed fresh at
+the start of Batch 138 per established discipline): `math.real.implicit-function-theorem`,
+`math.real.inverse-function-theorem` remain the last two reachable `math.real` concepts. Numerous
+`math.prob` concepts remain reachable. Other ready concepts remain across `math.cat`, `math.cx`,
+`math.de`, `math.graph`, `math.linalg`, `math.num`, `math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `f894963` on `main`, pushed directly.
