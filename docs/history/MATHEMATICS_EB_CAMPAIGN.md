@@ -4657,3 +4657,26 @@ math.de concepts (laplace-transform, series-solution, bvp, pde, nonlinear-ode) a
 concepts across math.linalg, math.prob.joint-distribution, math.stats, math.cx, math.top,
 math.fnal, math.num, math.opt, math.graph, math.cat still reachable. Campaign continues under the
 same active `/loop`.
+
+### Batch 156 (2026-09-19) — second reverse-direction cross-link upgrade
+
+Authored `laplace-transform` (the transform as a Type I improper integral; the derivative rule
+sF(s)−f(0) never omitting the initial-condition term; convergence never universal) and
+`series-solution` (the series ansatz requiring re-indexing before coefficient matching; the
+ordinary-point condition required before applying the method). Both zero Blueprint/KG
+discrepancy. `laplace-transform`'s declared cross-link `math.fnal.fourier-transform` confirmed
+still unauthored, independence mode correct. `series-solution`'s declared cross-link
+`math.calc.taylor-series` was unauthored at Blueprint write-time but has since been authored
+(Batch 65) — upgraded to a genuine cross-link probe, the second such reverse-direction correction
+this campaign (after Batch 152's char-equation). Mathematics **707/908** (705→707), 201
+remaining. Full per-concept detail in `COVERAGE.md` Batch 156. Validated: KG validator PASS
+(908/908 reachable, file untouched), `scripts/math/state.ts` confirms mathematics 707/908 (13
+EB-certified domains unchanged), `tsc --noEmit` clean, targeted EB/curriculum tests (7 files)
+561/561 passed. Full whole-repo suite not re-attempted, per the established Batch 109-110 hang
+precedent. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Commit
+`17a3c1e` on `main`, pushed directly.
+
+Fresh frontier to be recomputed at the start of Batch 157 per established discipline; remaining
+math.de concepts (bvp, pde, nonlinear-ode) and other ready concepts across math.linalg,
+math.prob.joint-distribution, math.stats, math.cx, math.top, math.fnal, math.num, math.opt,
+math.graph, math.cat still reachable. Campaign continues under the same active `/loop`.

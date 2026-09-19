@@ -15849,3 +15849,49 @@ concepts across `math.linalg`, `math.prob.joint-distribution`, `math.stats`, `ma
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `9d87f95` on `main`, pushed directly.
+
+## Batch 156 (2026-09-19) — second reverse-direction cross-link upgrade this campaign
+
+Authored `math.de.laplace-transform` and `math.de.series-solution`, continuing the `math.de`
+domain.
+
+`laplace-transform`: $\mathcal{L}\{f\}(s)$ recognized as a Type I improper integral (nothing new
+in the definition), demonstrated via $\mathcal{L}\{e^{at}\}(s)=1/(s-a)$; the derivative rule
+$\mathcal{L}\{f'\}(s)=sF(s)-f(0)$ (the $-f(0)$ term NEVER omitted) derived via integration by
+parts and independently verified; and convergence NEVER universal, shown genuinely diverging for
+$s\le a$. 3 misconceptions independently classified by Blueprint-declared severity — MC-1
+LAPLACE-TRANSFORM-ASSUMED-UNIVERSALLY-DEFINED (Foundational), MC-2 DERIVATIVE-RULE-SIGN-OR-
+INITIAL-CONDITION-TERM-OMITTED (Foundational), MC-3 LAPLACE-TRANSFORM-COMPUTATION-ATTEMPTED-
+WITHOUT-VERIFYING-INTEGRATION-BY-PARTS-CHOICE (Moderate). Zero Blueprint/KG discrepancy; the
+declared cross-link `math.fnal.fourier-transform` confirmed still unauthored, independence mode
+correct.
+
+`series-solution`: the series ansatz $y=\sum a_nx^n$ requiring RE-INDEXING every sum to a common
+power BEFORE coefficient matching (never skipped), demonstrated via the full $y''-y=0$ recurrence
+derivation generating $\cosh x,\sinh x$ mechanically (never guessed); and the ORDINARY POINT
+condition ($P,Q$ analytic) required before applying the method, contrasted against a genuine
+singular-point case ($x^2y''+xy'-y=0$) requiring the Frobenius method instead. 3 misconceptions
+independently classified by Blueprint-declared severity — MC-1 ORDINARY-POINT-CONDITION-NOT-
+CHECKED (Foundational), MC-2 RE-INDEXING-STEP-SKIPPED-OR-MISALIGNED (Foundational), MC-3 SERIES-
+SOLUTION-COEFFICIENTS-GUESSED-RATHER-THAN-DERIVED (Moderate). **Reverse-direction cross-link
+correction**: the Blueprint's own Component 7 declared `math.calc.taylor-series` not yet authored
+at its own write-time (correctly independence mode then); it HAS since been authored (Batch 65,
+well before this campaign reached this concept) — upgraded to a genuine cross-link probe here,
+consistent with the established reverse-direction-discrepancy correction pattern (last seen at
+Batch 152's `math.de.char-equation`).
+
+Mathematics **705/908 → 707/908**, 201 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 707/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Fresh frontier to be recomputed at the start of Batch 157 per established discipline; remaining
+`math.de` concepts (bvp, pde, nonlinear-ode) and other ready concepts across `math.linalg`,
+`math.prob.joint-distribution`, `math.stats`, `math.cx`, `math.top`, `math.fnal`, `math.num`,
+`math.opt`, `math.graph`, `math.cat` still reachable.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `17a3c1e` on `main`, pushed directly.
