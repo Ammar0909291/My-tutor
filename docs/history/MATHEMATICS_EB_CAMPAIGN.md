@@ -5220,3 +5220,30 @@ math.opt.quadratic-programming/semidefinite-programming/stochastic-gradient,
 math.prob.characteristic-function/joint-distribution,
 math.stats.normal-distribution/percentile/sampling-distribution, math.top.topological-space.
 Campaign continues under the same active `/loop`.
+
+### Batch 179 (2026-09-19) — eighth wrong-corpus correction
+
+Authored `least-squares` (least squares as exactly projection's closest-point problem; the normal
+equations derived from orthogonality, never unmotivated; the best-fit line minimizing squared
+deviation, never passing through all points) and `dual-space` (V* requiring only linearity, never
+geometric structure; the dual basis proving dim(V*)=dim(V) by explicit construction; the algebraic
+and analytic duals coinciding in finite dimensions but diverging in infinite ones). `least-squares`
+had zero discrepancy. `dual-space` had a wrong-corpus cross-link correction
+(math.fnal.dual-space-functional — eighth such discrepancy this campaign, after Batches 128-129,
+157, 160, 161, 162 (two instances), and 168). Mathematics **753/908** (751→753), 155 remaining.
+Full per-concept detail in `COVERAGE.md` Batch 179. Validated: KG validator PASS (908/908
+reachable, file untouched), `scripts/math/state.ts` confirms mathematics 753/908 (13 EB-certified
+domains unchanged), `tsc --noEmit` clean, targeted EB/curriculum tests (7 files) 561/561 passed.
+Full whole-repo suite not re-attempted, per the established Batch 109-110 hang precedent. No
+Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Commit `a9fa9c2` on
+`main`, pushed directly.
+
+Fresh frontier recomputed for Batch 180 (23 concepts): math.linalg.tensor (newly reachable via
+dual-space's unlocking), plus math.cat.category, math.cx.complex-numbers-analysis,
+math.de.systems-matrix-method, math.fnal.convolution, math.fnal.normed-space,
+math.graph.random-graph, math.linalg.jordan-form/matrix-exponential/matrix-representation,
+math.num.floating-point/interpolation/qr-algorithm/root-finding,
+math.opt.quadratic-programming/semidefinite-programming/stochastic-gradient,
+math.prob.characteristic-function/joint-distribution,
+math.stats.normal-distribution/percentile/sampling-distribution, math.top.topological-space.
+Campaign continues under the same active `/loop`.

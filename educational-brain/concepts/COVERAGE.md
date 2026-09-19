@@ -16932,3 +16932,54 @@ exhausted): `math.cat.category`, `math.cx.complex-numbers-analysis`,
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `01c7d64` on `main`, pushed directly.
+
+## Batch 179 (2026-09-19) — eighth wrong-corpus correction
+
+`least-squares`: least squares as EXACTLY `math.linalg.projection`'s own closest-point problem
+(never a genuinely new problem), demonstrated via the direct $W=\text{col}(A)$ identification for
+an inconsistent three-equation system; the normal equations $A^TA\hat x=A^Tb$ derived DIRECTLY
+from projection's orthogonality characterization (never an unmotivated formula), demonstrated via
+the full derivation and residual-orthogonality verification; and the best-fit line MINIMIZING
+total squared deviation while generally MISSING every point (never passing through all points
+exactly), demonstrated via the three-non-collinear-point data-fitting example. 3 misconceptions
+independently classified by Blueprint-declared severity — MC-1
+LEAST-SQUARES-ASSUMED-UNRELATED-NEW-PROBLEM (Foundational), MC-2
+NORMAL-EQUATIONS-ASSUMED-UNMOTIVATED-FORMULA (High), MC-3
+LEAST-SQUARES-LINE-ASSUMED-TO-PASS-THROUGH-ALL-POINTS (Moderate). Zero Blueprint/KG discrepancy;
+`math.linalg.matrix-transpose` independently re-confirmed authored, `math.stats.linear-regression`
+independently re-confirmed still unauthored.
+
+`dual-space`: $V^*$ requiring ONLY linearity (never geometric structure like an inner product or
+norm), demonstrated via the linearity-only verification on $\mathbb R^3$; the dual basis PROVING
+$\dim(V^*)=\dim(V)$ by explicit construction (never assumed), demonstrated via the
+$\{f^1,f^2,f^3\}$ spanning-and-independence proof, with $f^i$ genuinely living in a DIFFERENT
+space from $e_i$; and the algebraic and analytic duals COINCIDING in finite dimensions but
+DIVERGING in infinite ones (never assumed identical), demonstrated via the finite-support
+sequence-space example. 3 misconceptions independently classified by Blueprint-declared severity
+— MC-1 DUAL-SPACE-REQUIRES-GEOMETRIC-STRUCTURE (Foundational), MC-2
+DUAL-BASIS-CONFLATED-WITH-ORIGINAL-BASIS (High), MC-3
+ALGEBRAIC-AND-ANALYTIC-DUAL-ASSUMED-IDENTICAL (Moderate). Wrong-corpus cross-link discrepancy
+found: the Blueprint's own Component 7 claims `math.fnal.dual-space-functional` "authored" —
+checked against the BLUEPRINTS directory, where it exists, not the EDUCATIONAL-BRAIN corpus,
+where it does NOT — corrected to independence mode, the EIGHTH such wrong-corpus discrepancy this
+campaign (after Batches 128-129, 157, 160, 161, 162 (two instances), and 168).
+
+Mathematics **751/908 → 753/908**, 155 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 753/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)".
+
+Fresh frontier recomputed for Batch 180 (23 concepts): `math.linalg.tensor` (newly reachable via
+`dual-space`'s unlocking), plus `math.cat.category`, `math.cx.complex-numbers-analysis`,
+`math.de.systems-matrix-method`, `math.fnal.convolution`, `math.fnal.normed-space`,
+`math.graph.random-graph`, `math.linalg.jordan-form`/`matrix-exponential`/
+`matrix-representation`, `math.num.floating-point`/`interpolation`/`qr-algorithm`/`root-finding`,
+`math.opt.quadratic-programming`/`semidefinite-programming`/`stochastic-gradient`,
+`math.prob.characteristic-function`/`joint-distribution`,
+`math.stats.normal-distribution`/`percentile`/`sampling-distribution`,
+`math.top.topological-space`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `a9fa9c2` on `main`, pushed directly.
