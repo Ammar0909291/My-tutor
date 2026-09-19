@@ -5450,3 +5450,30 @@ math.opt.quadratic-programming/semidefinite-programming/stochastic-gradient,
 math.prob.characteristic-function/joint-distribution,
 math.stats.normal-distribution/percentile/sampling-distribution. Campaign continues under the
 same active `/loop`.
+
+### Batch 187 (2026-09-19) — zero discrepancy, both `math.top` concepts
+
+Authored `homotopy` (endpoint matching shown necessary but never sufficient via a
+discontinuous-at-$t=1/2$ candidate; equivalence-relation properties shown backed by explicit
+constructions via the reflexive/symmetric/transitive homotopies; homotopy existence shown to
+depend on the space via the $\mathbb R^2$-versus-$S^1$ contraction contrast) and `manifold` (a
+manifold shown defined intrinsically, never as a Euclidean subset, via $S^2$'s atlas; local
+homeomorphism alone shown insufficient via the line-with-two-origins Hausdorff failure; manifold
+boundary shown genuinely distinct from topological boundary via $S^1\subset\mathbb R^2$). Both had
+zero Blueprint/KG discrepancy. Mathematics **769/908** (767→769), 139 remaining. Full per-concept
+detail in `COVERAGE.md` Batch 187. Validated: KG validator PASS (908/908 reachable, file
+untouched), `scripts/math/state.ts` confirms mathematics 769/908 (13 EB-certified domains
+unchanged), `tsc --noEmit` clean, targeted EB/curriculum tests (7 files) 561/561 passed. No
+Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Commit `975978d` on
+`main`, pushed directly (no upstream divergence this batch).
+
+Fresh frontier recomputed for Batch 188 (27 concepts): math.cat.morphism-types/
+natural-transformation, math.top.fundamental-group/homotopy-equivalence/simplicial-complex/
+smooth-manifold (fundamental-group/homotopy-equivalence/smooth-manifold newly unlocked), plus
+math.cx.complex-numbers-analysis, math.de.systems-matrix-method, math.fnal.convolution,
+math.fnal.normed-space, math.graph.random-graph, math.linalg.jordan-form/matrix-exponential/
+matrix-representation/tensor, math.num.floating-point/interpolation/qr-algorithm/root-finding,
+math.opt.quadratic-programming/semidefinite-programming/stochastic-gradient,
+math.prob.characteristic-function/joint-distribution,
+math.stats.normal-distribution/percentile/sampling-distribution. Campaign continues under the
+same active `/loop`.

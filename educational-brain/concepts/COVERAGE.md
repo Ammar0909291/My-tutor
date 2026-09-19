@@ -17345,3 +17345,55 @@ Fresh frontier recomputed for Batch 187 (26 concepts): `math.cat.morphism-types`
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint file touched (this batch's own
 content). This batch is commit `ef37d27` (content) merged with upstream `a8e2f02` at merge commit
 `3fc89aa` on `main`, pushed directly.
+
+## Batch 187 (2026-09-19) — zero discrepancy, both `math.top` concepts
+
+`homotopy`: endpoint matching shown necessary but never sufficient for a valid homotopy,
+demonstrated via a piecewise-constant candidate satisfying both endpoints yet jumping
+discontinuously at $t=1/2$; homotopy's equivalence-relation properties (reflexive, symmetric,
+transitive) shown backed by explicit constructions, never asserted abstractly, demonstrated via
+the constant-in-$t$, time-reversed, and concatenated homotopies; and whether two maps are
+homotopic shown to genuinely depend on the space, demonstrated via the $\mathbb R^2$
+straight-line contraction contrasted with $S^1$'s provable non-contractibility. 3 misconceptions
+independently classified by Blueprint-declared severity — MC-1
+HOMOTOPY-ENDPOINTS-CHECKED-WITHOUT-VERIFYING-JOINT-CONTINUITY (Foundational), MC-2
+ALL-CONTINUOUS-MAPS-BETWEEN-SAME-SPACES-ASSUMED-HOMOTOPIC (Foundational), MC-3
+HOMOTOPY-EQUIVALENCE-RELATION-PROPERTIES-ASSUMED-WITHOUT-CONSTRUCTION (Moderate). Zero
+Blueprint/KG discrepancy; all fields (requires `math.top.continuity-top`, unlocks
+`math.top.fundamental-group`/`math.top.homotopy-equivalence`, cross_links none,
+expert/understand, mastery_threshold 0.8, estimated_hours 5) verified exact matches.
+
+`manifold`: a manifold shown defined INTRINSICALLY, never as a subset of Euclidean space,
+demonstrated via $S^2$'s two-chart stereographic atlas contrasted with the embedding-as-definition
+temptation; local homeomorphism to $\mathbb R^n$ alone shown insufficient, demonstrated via the
+line-with-two-origins (locally $\mathbb R$ but failing Hausdorff); and manifold boundary shown
+genuinely distinct from topological boundary, demonstrated via $S^1\subset\mathbb R^2$'s empty
+manifold boundary versus its nonempty topological boundary as a subspace. 3 misconceptions
+independently classified by Blueprint-declared severity — MC-1
+MANIFOLD-MUST-BE-EMBEDDED-IN-EUCLIDEAN-SPACE (Foundational), MC-2
+LOCALLY-EUCLIDEAN-IS-SUFFICIENT-FOR-MANIFOLD (Foundational), MC-3
+MANIFOLD-BOUNDARY-EQUALS-TOPOLOGICAL-BOUNDARY (Moderate). Zero Blueprint/KG discrepancy; all
+fields (requires `math.top.topological-space`/`math.top.homeomorphism`, unlocks
+`math.top.smooth-manifold`, cross_links none, expert/understand, mastery_threshold 0.75,
+estimated_hours 6) verified exact matches.
+
+Mathematics **767/908 → 769/908**, 139 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 769/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)".
+
+Fresh frontier recomputed for Batch 188 (27 concepts): `math.cat.morphism-types`/
+`natural-transformation`, `math.top.fundamental-group`/`homotopy-equivalence`/
+`simplicial-complex`/`smooth-manifold` (`fundamental-group`/`homotopy-equivalence`/
+`smooth-manifold` newly unlocked), plus `math.cx.complex-numbers-analysis`,
+`math.de.systems-matrix-method`, `math.fnal.convolution`, `math.fnal.normed-space`,
+`math.graph.random-graph`, `math.linalg.jordan-form`/`matrix-exponential`/
+`matrix-representation`/`tensor`, `math.num.floating-point`/`interpolation`/`qr-algorithm`/
+`root-finding`, `math.opt.quadratic-programming`/`semidefinite-programming`/`stochastic-gradient`,
+`math.prob.characteristic-function`/`joint-distribution`,
+`math.stats.normal-distribution`/`percentile`/`sampling-distribution`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `975978d` on `main`, pushed directly.
