@@ -3657,3 +3657,30 @@ all reachable. 28 other ready concepts remain across `math.cat`, `math.cx`, `mat
 under the same active `/loop`; re-derive the frontier fresh via `scripts/math/state.ts` (and each
 candidate's actual `requires`) each iteration rather than trusting any number or
 `children`/`unlocks`-field assumption recorded here.
+
+### Batch 115 (2026-09-19) — eighth discrepancy; completes math.meas's integration chain
+
+Authored `lebesgue-integral` (supremum-over-simple-functions construction reusing
+`simple-function`'s own approximating sequence; f-plus/f-minus signed extension; Dirichlet
+function proving genuine extension beyond Riemann) and `discrete-rv` (PMF validity —
+non-negativity + exact normalization forced by the axioms; support vs. domain; PMF vs. CDF).
+`lebesgue-integral`'s Blueprint claimed `math.real.riemann-integral` verified authored via a
+Blueprint-corpus `ls` check, but the EB corpus has no such entry — EIGHTH discrepancy this
+campaign (same wrong-corpus pattern as Batches 107, 111), corrected to independence mode. This
+concept completes math.meas's foundational integration chain (sigma-algebra → measure →
+measurable-function → simple-function → lebesgue-integral, all five authored Batches 108-115).
+`math.meas` **8/13** (7→8). Mathematics **625/908** (623→625), 283 remaining. Full per-concept
+detail in `COVERAGE.md` Batch 115. Validated: KG validator PASS (908/908 reachable, file
+untouched), `scripts/math/state.ts` confirms math.meas 8/13, mathematics 625/908 (11
+EB-certified domains unchanged), `tsc --noEmit` clean, targeted EB/curriculum tests 118/118
+passed. Full whole-repo suite not re-attempted, per the established Batch 109-110 hang precedent.
+No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Commit `b3b2135` on
+`main`, pushed directly.
+
+Fresh frontier: `math.meas.convergence-theorems`, `math.meas.lp-space` reachable. `math.prob.cdf`,
+`math.prob.continuous-rv`, `math.prob.convergence-types` reachable. `math.real.pointwise-
+convergence`, `math.real.series-rigorous` still reachable. 28 other ready concepts remain across
+`math.cat`, `math.cx`, `math.de`, `math.fnal`, `math.graph`, `math.linalg`, `math.num`,
+`math.stats`, `math.top`. Campaign continues under the same active `/loop`; re-derive the frontier
+fresh via `scripts/math/state.ts` (and each candidate's actual `requires`) each iteration rather
+than trusting any number or `children`/`unlocks`-field assumption recorded here.

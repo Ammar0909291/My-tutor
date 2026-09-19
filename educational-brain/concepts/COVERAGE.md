@@ -13797,3 +13797,59 @@ continuous-rv`/`math.prob.convergence-types`/`math.prob.discrete-rv` all reachab
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `ae6c049` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 115 (2026-09-19) — eighth discrepancy; completes math.meas's integration chain
+
+Re-derived the frontier fresh (34 ready concepts). Selected `math.meas.lebesgue-integral`
+(requires only `simple-function`, authored Batch 114) and `math.prob.discrete-rv` (requires only
+`random-variable`, authored Batch 113). Authored both.
+
+`lebesgue-integral` (requires `simple-function`, unlocks `convergence-theorems`/`lp-space`,
+cross_links `math.real.riemann-integral`): the integral as $\sup\{\int\varphi\,d\mu:\varphi\text{
+simple},0\le\varphi\le f\}$, reusing `simple-function`'s own $x^2$ approximating sequence
+directly; the $f=f^+-f^-$ signed extension, both parts non-negative by construction; and the
+Dirichlet function as proof of GENUINE extension beyond Riemann (not Riemann integrable at all —
+upper/lower Darboux sums permanently disagree — yet trivially Lebesgue integrable as
+$\mathbb1_{\mathbb Q\cap[0,1]}$, integral 0 via measure-zero rationals). 3 misconceptions
+independently classified — MC-1 LEBESGUE-AND-RIEMANN-TREATED-AS-EQUIVALENT-THEORIES
+(overgeneralization, Foundational), MC-2 POSITIVE-NEGATIVE-PART-DECOMPOSITION-MISAPPLIED
+(notation-induced, Foundational), MC-3 SUPREMUM-CONSTRUCTION-CONFUSED-WITH-A-SINGLE-
+APPROXIMATING-SEQUENCE (instruction-induced, Moderate). This concept COMPLETES math.meas's
+foundational integration-building-block chain (sigma-algebra → measure → measurable-function →
+simple-function → lebesgue-integral), all five authored across Batches 108-115.
+
+`discrete-rv` (requires `random-variable`, unlocks `pmf`/`discrete-distributions`, cross_links
+none): the PMF's two validity conditions (non-negativity, exact normalization $\sum p(x)=1$,
+forced by the probability axioms, never optional); support ($\{x:p(x)>0\}$) distinguished from
+the PMF's full domain $\mathbb R$; and PMF ($p(x)=P(X=x)$) distinguished from CDF
+($F(x)=P(X\le x)$) via direct numeric contrast. 3 misconceptions independently classified — MC-1
+PMF-SUMS-NOT-ONE (instruction-induced, Foundational), MC-2 SUPPORT-IS-ALL-REALS (language
+contamination, Secondary), MC-3 PMF-IS-CDF (notation-induced, Secondary). Zero Blueprint/KG
+metadata discrepancy.
+
+**Blueprint/P76-mode discrepancy found and corrected (EIGHTH occurrence this campaign)**:
+`lebesgue-integral`'s Blueprint claimed `math.real.riemann-integral` was "verified authored via
+`ls docs/curriculum/blueprints/math.real.riemann-integral.md`," setting cross-link-probe mode.
+Verified via `ls educational-brain/concepts/mathematics/` that `math.real.riemann-integral` has
+NO authored EB entry — the same wrong-corpus pattern as Batches 107 and 111. Corrected to
+independence mode. All other fields on both concepts matched the live KG exactly.
+
+`math.meas` **7/13 → 8/13** (chain complete). `math.prob` gains its second entry this campaign.
+Mathematics **623/908 → 625/908**, 283 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.meas` 8/13,
+mathematics 625/908, 11 EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0).
+Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 118 passed (118)". Full whole-repo
+suite not re-attempted this batch, consistent with the established precedent from Batches
+109-110.
+
+Computed fresh frontier post-batch: `math.meas.convergence-theorems`/`math.meas.lp-space` both
+reachable (require `lebesgue-integral`, now authored). `math.prob.cdf`/`math.prob.continuous-rv`/
+`math.prob.convergence-types` reachable (require `random-variable`). `math.real.pointwise-
+convergence`/`math.real.series-rigorous` still reachable. 28 other ready concepts remain across
+`math.cat`, `math.cx`, `math.de`, `math.fnal`, `math.graph`, `math.linalg`, `math.num`,
+`math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `b3b2135` on `main`, pushed directly, continuing under the same active `/loop`.
