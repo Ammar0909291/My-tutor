@@ -4614,3 +4614,24 @@ math.de concepts (higher-order-ode, laplace-transform, stability-analysis, serie
 pde) and other ready concepts across math.linalg, math.prob.joint-distribution, math.stats,
 math.cx, math.top, math.fnal, math.num, math.opt, math.graph, math.cat still reachable. Campaign
 continues under the same active `/loop`.
+
+### Batch 154 (2026-09-19)
+
+Authored `harmonic-oscillator` (the three-regime discriminant classification with critical damping
+as the boundary, never the maximum; ω_d < ω₀ discipline; true resonance requiring exact frequency
+matching) and `stability-analysis` (stability sharpened from equilibrium type; the Lyapunov-versus-
+asymptotic distinction via the center case; Lyapunov functions resolving linearization's
+purely-imaginary-eigenvalue borderline case). Both zero Blueprint/KG discrepancy.
+`stability-analysis` closes `math.de.phase-plane`'s declared unlock. Mathematics **703/908**
+(701→703), 205 remaining. Full per-concept detail in `COVERAGE.md` Batch 154. Validated: KG
+validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts` confirms mathematics
+703/908 (13 EB-certified domains unchanged), `tsc --noEmit` clean, targeted EB/curriculum tests
+(7 files) 561/561 passed. Full whole-repo suite not re-attempted, per the established Batch
+109-110 hang precedent. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched.
+Commit `f9e7868` on `main`, pushed directly.
+
+Fresh frontier to be recomputed at the start of Batch 155 per established discipline; remaining
+math.de concepts (higher-order-ode, laplace-transform, series-solution, bvp, pde) and other ready
+concepts across math.linalg, math.prob.joint-distribution, math.stats, math.cx, math.top,
+math.fnal, math.num, math.opt, math.graph, math.cat still reachable. Campaign continues under the
+same active `/loop`.

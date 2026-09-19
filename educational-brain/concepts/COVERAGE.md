@@ -15764,3 +15764,47 @@ reachable.
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `04683f9` on `main`, pushed directly.
+
+## Batch 154 (2026-09-19)
+
+Authored `math.de.harmonic-oscillator` and `math.de.stability-analysis`, continuing the `math.de`
+domain.
+
+`harmonic-oscillator`: the three-regime discriminant classification (underdamped/critically
+damped/overdamped), with critical damping established as the BOUNDARY (never the maximum damping —
+overdamped has MORE damping and returns MORE slowly); the damped frequency
+$\omega_d=\sqrt{\omega_0^2-\gamma^2}$ always less than $\omega_0$ when damping is present (never
+equal except undamped); and true RESONANCE requiring exact frequency matching (never any periodic
+forcing), demonstrated via the finite-amplitude-for-all-$\omega$ (damped) versus unbounded-growth-
+only-at-$\omega_0$ (undamped) contrast. 3 misconceptions independently classified by
+Blueprint-declared birth type — MC-1 CRITICAL-DAMPING-IS-MAXIMUM-DAMPING (language contamination),
+MC-2 NATURAL-FREQUENCY-EQUALS-DAMPED-FREQUENCY (instruction-induced), MC-3 FORCING-AT-ANY-
+FREQUENCY-CAUSES-RESONANCE (overgeneralization). Zero Blueprint/KG discrepancy.
+
+`stability-analysis`: STABILITY sharpened from `math.de.phase-plane`'s TYPE classification —
+nodes/spirals can be either stable or unstable by eigenvalue sign, saddles ALWAYS unstable,
+demonstrated via the already-classified spiral ($\lambda=1\pm i$) shown unstable; the precise
+LYAPUNOV-versus-ASYMPTOTIC stability distinction, with the center case (purely imaginary
+eigenvalues) staying close FOREVER without ever converging; and LYAPUNOV FUNCTIONS resolving
+exactly the purely-imaginary-eigenvalue borderline case linearization cannot, demonstrated via
+$\dot V=-2x^4-2y^4<0$ certifying asymptotic stability for $x'=-y-x^3,y'=x-y^3$. 3 misconceptions
+independently classified by Blueprint-declared severity — MC-1 EQUILIBRIUM-TYPE-ASSUMED-TO-
+DETERMINE-STABILITY-ALONE (Foundational), MC-2 LYAPUNOV-STABILITY-ASSUMED-TO-IMPLY-ASYMPTOTIC-
+STABILITY (High), MC-3 LINEARIZATION-INCONCLUSIVE-CASE-ASSUMED-UNRESOLVABLE (Moderate). Zero
+Blueprint/KG discrepancy. Closes `math.de.phase-plane`'s declared unlock.
+
+Mathematics **701/908 → 703/908**, 205 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 703/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Fresh frontier to be recomputed at the start of Batch 155 per established discipline; remaining
+`math.de` concepts (higher-order-ode, laplace-transform, series-solution, bvp, pde) and other
+ready concepts across `math.linalg`, `math.prob.joint-distribution`, `math.stats`, `math.cx`,
+`math.top`, `math.fnal`, `math.num`, `math.opt`, `math.graph`, `math.cat` still reachable.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `f9e7868` on `main`, pushed directly.
