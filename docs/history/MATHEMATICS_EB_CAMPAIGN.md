@@ -3608,3 +3608,28 @@ Fresh frontier: `math.meas` reachable (`measure-zero`, `simple-function`). `math
 `math.top`. Campaign continues under the same active `/loop`; re-derive the frontier fresh via
 `scripts/math/state.ts` (and each candidate's actual `requires`) each iteration rather than
 trusting any number or `children`/`unlocks`-field assumption recorded here.
+
+### Batch 113 (2026-09-19) — seventh discrepancy: a stale "not Tier 1" independence rationale
+
+Authored `measure-zero` (countability sufficient but not necessary for measure zero; Cantor set as
+dual-verified uncountable-yet-measure-zero counterexample; "almost everywhere" as precise, never
+informal) and `random-variable` (RV as function, never fixed value; event as preimage; discrete/
+continuous by cardinality). `random-variable`'s Blueprint set Independence mode with rationale
+"math.meas.measurable-function is NOT Tier 1" — but `ls` confirmed that concept IS now authored
+(Batch 111), so corrected to a genuine cross-link probe, directly closing the loop
+`measurable-function`'s own Batch 111 entry anticipated. SEVENTH discrepancy this campaign.
+`math.meas` **6/13** (5→6). Mathematics **621/908** (619→621), 287 remaining. Full per-concept
+detail in `COVERAGE.md` Batch 113. Validated: KG validator PASS (908/908 reachable, file
+untouched), `scripts/math/state.ts` confirms math.meas 6/13, mathematics 621/908 (11 EB-certified
+domains unchanged), `tsc --noEmit` clean, targeted EB/curriculum tests 118/118 passed. Full
+whole-repo suite not re-attempted, per the established Batch 109-110 hang precedent. No
+Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Commit `15e7258` on
+`main`, pushed directly.
+
+Fresh frontier: `math.meas.simple-function` reachable. `math.real.metric-space`,
+`math.real.cauchy-sequence`, `math.real.pointwise-convergence`, `math.real.series-rigorous` all
+reachable. 28 other ready concepts remain across `math.cat`, `math.cx`, `math.de`, `math.fnal`,
+`math.graph`, `math.linalg`, `math.num`, `math.stats`, `math.top`. Campaign continues under the
+same active `/loop`; re-derive the frontier fresh via `scripts/math/state.ts` (and each
+candidate's actual `requires`) each iteration rather than trusting any number or
+`children`/`unlocks`-field assumption recorded here.

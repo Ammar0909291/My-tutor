@@ -13691,3 +13691,60 @@ remain across `math.cat`, `math.cx`, `math.de`, `math.fnal`, `math.graph`, `math
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `589b211` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 113 (2026-09-19) — seventh discrepancy: a stale "not Tier 1" independence rationale
+
+Re-derived the frontier fresh (33 ready concepts). Selected `math.meas.measure-zero` (requires
+only `lebesgue-measure`, authored Batch 110) and `math.prob.random-variable` (requires
+`probability-axioms`/`function-concept`, both certified) — the latter closing the loop
+`math.meas.measurable-function`'s own Batch 111 entry explicitly anticipated. Authored both.
+
+`measure-zero` (requires `lebesgue-measure`, unlocks none, cross_links `math.real.riemann-
+integrability` — **confirmed NOT authored via `ls`, independence mode correctly self-reported, no
+correction needed**): countability as sufficient but never necessary for measure zero; the Cantor
+set as a concrete, dual-verified counterexample (measure zero via limiting length $(2/3)^n\to0$,
+uncountable via a ternary-to-binary bijection); and "almost everywhere" as a precise measure-zero
+exception-set condition, never an informal hand-wave (illustrated via $f=0$ a.e. on $[0,1]$
+despite $f\ne0$ on the rationals). 3 misconceptions independently classified — MC-1
+MEASURE-ZERO-ASSUMED-EQUIVALENT-TO-COUNTABLE (overgeneralization, Foundational), MC-2
+UNCOUNTABLE-AND-MEASURE-ZERO-ASSUMED-CONTRADICTORY (overgeneralization, High), MC-3
+ALMOST-EVERYWHERE-TREATED-AS-INFORMAL-HAND-WAVE (language contamination, Moderate). Zero
+Blueprint/KG metadata discrepancy.
+
+`random-variable` (requires `probability-axioms`/`function-concept`, unlocks `distribution`/
+`expected-value`, cross_links `math.meas.measurable-function`): a random variable as a FUNCTION
+$X:\Omega\to\mathbb R$, never a fixed value ("$X=4$" fails to define $X$ for other outcomes); the
+event $\{X=x\}$ as a preimage, with the distribution DERIVED from $X$, never identical to it; and
+discrete-versus-continuous decided by cardinality alone (a large countable set is discrete, a
+small uncountable interval is continuous). 3 misconceptions independently classified — MC-1
+RV-IS-FIXED-VALUE (language contamination, Foundational), MC-2 RV-IS-DISTRIBUTION
+(overgeneralization, Secondary), MC-3 DISCRETE-MEANS-SMALL (perceptual, Secondary).
+
+**Blueprint/P76-mode discrepancy found and corrected (SEVENTH occurrence this campaign)**:
+`random-variable`'s Blueprint set P76_MODE to Independence with the explicit rationale
+"`math.meas.measurable-function` is NOT a Tier 1 concept; treat cross_links as empty" — a design
+decision made when that concept was unauthored. Verified via `ls
+educational-brain/concepts/mathematics/` that `math.meas.measurable-function` IS now authored
+(Batch 111, this same campaign), and its own KG description was even updated to read "A
+measurable function X:Ω→ℝ..." Corrected to a GENUINE cross-link probe, directly closing the loop
+`measurable-function`'s own Batch 111 entry explicitly anticipated ("this campaign's... closing
+of that exact deferred loop"). All other fields on both concepts matched the live KG exactly.
+
+`math.meas` **5/13 → 6/13**. `math.prob` gains its first Batch-113 entry. Mathematics
+**619/908 → 621/908**, 287 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.meas` 6/13,
+mathematics 621/908, 11 EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0).
+Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 118 passed (118)". Full whole-repo
+suite not re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Computed fresh frontier post-batch: `math.meas.simple-function` reachable (requires
+`measurable-function`, now authored). `math.real.metric-space` reachable. `math.real.cauchy-
+sequence`/`math.real.pointwise-convergence`/`math.real.series-rigorous` all reachable (require
+`convergence-sequences`, now authored). 28 other ready concepts remain across `math.cat`,
+`math.cx`, `math.de`, `math.fnal`, `math.graph`, `math.linalg`, `math.num`, `math.stats`,
+`math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `15e7258` on `main`, pushed directly, continuing under the same active `/loop`.
