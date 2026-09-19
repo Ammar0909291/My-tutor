@@ -14661,3 +14661,54 @@ concepts across `math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`, `
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `5b81bfc` on `main`, pushed directly.
+
+### Batch 131 (2026-09-19) — clean cross-link verification plus a reverse-direction upgrade
+
+`math.real.extreme-value-theorem`: the theorem as the missing EXISTENCE guarantee
+`math.calc.optimization`'s critical-points-and-endpoints method silently presupposes, demonstrated
+via $f(x)=x^3-3x$ on $[-2,2]$; the two-step proof (continuous image of compact is compact; a
+compact subset of $\mathbb R$ is closed and bounded, hence contains its own sup/inf), demonstrated
+via $f(x)=x^2$ on $[-1,2]$ giving $f(K)=[0,4]$; both hypotheses (compactness, continuity)
+independently necessary, via two isolated counterexamples. 3 misconceptions independently
+classified — MC-1 OPTIMIZATION-METHOD-ASSUMED-SELF-GUARANTEEING (Foundational), MC-2
+BOUNDEDNESS-ASSUMED-SUFFICIENT-FOR-ATTAINMENT (High), MC-3
+COMPACTNESS-ASSUMED-TO-SUBSUME-CONTINUITY-REQUIREMENT (Moderate). Zero Blueprint/KG metadata
+discrepancy — the cross-link (`math.calc.optimization`) independently re-verified genuinely
+authored via `ls`, confirming the Blueprint's own cross-link-probe mode correct as declared.
+
+`math.real.ivt`: IVT stated formally and its proof cited directly as `math.real.connectedness`'s
+own corollary (never re-derived), demonstrated via $\cos x$ on $[0,\pi]$; existence proven purely
+via a sign change with zero computation, demonstrated via $x^3-x-1$'s root in $(1,2)$; the
+informal "curve can't jump" picture diagnosed as circular, not itself a proof. 3 misconceptions
+independently classified — MC-1 IVT-ASSUMED-TO-NEED-SEPARATE-PROOF (Foundational), MC-2
+IVT-ASSUMED-TO-REQUIRE-COMPUTATION (High), MC-3 INFORMAL-PICTURE-ASSUMED-TO-BE-A-PROOF
+(Moderate). **Reverse-direction discrepancy found and corrected (parallel to Batches 112/122/123's
+pattern)**: the Blueprint's own Component 7 states `math.calc.ivt` was checked via `ls
+docs/curriculum/blueprints/` and confirmed NOT YET authored at write-time — correct then, but
+verified via `ls educational-brain/concepts/mathematics/` that `math.calc.ivt` IS now authored.
+Upgraded from independence mode to a GENUINE CROSS-LINK PROBE, directly connecting this concept's
+existence-versus-computation framing to `math.calc.ivt`'s own parallel sign-change technique and
+its own deferral to `math.num.root-finding` for computation.
+
+Both concepts close out declared unlocks opened by `math.real.continuity-rigorous` (Batch 130) in
+combination with `math.real.compactness` (Batch 126) and `math.real.connectedness` (Batch 127)
+respectively — both `extreme-value-theorem` and `ivt` have no further unlocks of their own listed
+in the KG, making each a terminal leaf in its sub-chain. Mathematics **655/908 → 657/908**, 251
+remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 657/908, 12
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Computed fresh frontier post-batch: `math.real.differentiability-rigorous`, `math.real.riemann-
+integral`, `math.real.uniform-continuity`, `math.real.uniform-convergence` all reachable (all
+require `math.real.continuity-rigorous`, now authored). `math.fnal.convolution`, `math.opt.
+stochastic-gradient` still reachable. Numerous `math.prob` concepts remain reachable —
+re-verify each candidate's actual `requires` fresh next batch, do not trust this list. Other
+ready concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`,
+`math.num`, `math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `4f7a475` on `main`, pushed directly.

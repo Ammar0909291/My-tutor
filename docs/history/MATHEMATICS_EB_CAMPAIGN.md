@@ -4083,3 +4083,30 @@ precedent. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file tou
 Fresh frontier to be recomputed at the start of Batch 131 per established discipline;
 `math.real.extreme-value-theorem`/`math.real.ivt` now potentially reachable pending their other
 prerequisites. Campaign continues under the same active `/loop`.
+
+### Batch 131 (2026-09-19) — clean cross-link verification plus a reverse-direction upgrade
+
+Authored `extreme-value-theorem` (the missing existence guarantee behind calc.optimization's
+critical-points-and-endpoints method; two-step proof via compact-image-is-compact plus
+closed-and-bounded attainment; both hypotheses independently necessary) and `ivt` (IVT cited
+directly as connectedness's own corollary; existence proven via sign change with zero
+computation; the informal "can't jump" picture diagnosed as circular). `extreme-value-theorem`
+zero discrepancy — cross-link (`math.calc.optimization`) independently re-verified authored.
+`ivt`'s Blueprint claimed `math.calc.ivt` "not yet authored" — correct when written, stale now;
+verified via `ls` that it IS authored; upgraded from independence to a genuine cross-link probe
+(reverse-direction pattern, parallel to Batches 112/122/123). Both close out declared unlocks
+from `continuity-rigorous` (Batch 130) combined with `compactness`/`connectedness` (Batches
+126/127) respectively. Mathematics **657/908** (655→657), 251 remaining. Full per-concept detail
+in `COVERAGE.md` Batch 131. Validated: KG validator PASS (908/908 reachable, file untouched),
+`scripts/math/state.ts` confirms mathematics 657/908 (12 EB-certified domains unchanged), `tsc
+--noEmit` clean, targeted EB/curriculum tests (7 files) 561/561 passed. Full whole-repo suite not
+re-attempted, per the established Batch 109-110 hang precedent. No Physics/Chemistry/English/
+Biology/CS/KG/Blueprint/runtime file touched. Commit `4f7a475` on `main`, pushed directly.
+
+Fresh frontier: `math.real.differentiability-rigorous`, `math.real.riemann-integral`,
+`math.real.uniform-continuity`, `math.real.uniform-convergence` all newly reachable (require
+`continuity-rigorous`, now authored). `math.fnal.convolution`, `math.opt.stochastic-gradient`
+still reachable. Numerous `math.prob` concepts remain reachable — re-verify each candidate's
+actual `requires` fresh next batch, do not trust this list. Other ready concepts remain across
+`math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`, `math.num`, `math.stats`,
+`math.top`. Campaign continues under the same active `/loop`.
