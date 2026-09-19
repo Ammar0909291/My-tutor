@@ -17880,3 +17880,22 @@ qr-algorithm/splines, math.opt.semidefinite-programming, math.prob.conditional-e
 correlation/marginal-distribution, math.stats.anova/bayesian-inference/bias-variance/
 chi-squared-test/ci-mean/ci-proportion/consistency/covariance-matrix/method-of-moments/
 nonparametric.
+
+## Batch 207 (2026-09-19) — zero discrepancy
+
+Authored `math.stats.consistency` (consistency is a large-sample limit property, never a fixed-n
+accuracy guarantee; the sufficient condition requires both bias and variance to vanish, never
+just one; the sample mean's consistency is the LLN restated, never a separate fact) and
+`math.stats.bias-variance` (bias and variance answer genuinely different questions, never
+conflated; MSE requires squaring the bias before adding variance, never a plain sum; an unbiased
+estimator can have worse MSE than a biased one, never assume unbiased means best). Both zero
+discrepancy. Mathematics **807/908 → 809/908**, 99 remaining. Validated: KG PASS (908/908
+reachable), state.ts confirms 809/908, tsc clean, tests 561/561. Commit `ca23588`, pushed.
+
+Fresh frontier for Batch 208 (28 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
+qr-algorithm/splines, math.opt.semidefinite-programming, math.prob.conditional-expectation/
+correlation/marginal-distribution, math.stats.anova/bayesian-inference/chi-squared-test/ci-mean/
+ci-proportion/covariance-matrix/method-of-moments/nonparametric/rao-blackwell.

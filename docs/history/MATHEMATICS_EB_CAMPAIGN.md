@@ -5866,3 +5866,22 @@ qr-algorithm/splines, math.opt.semidefinite-programming, math.prob.conditional-e
 correlation/marginal-distribution, math.stats.anova/bayesian-inference/bias-variance/
 chi-squared-test/ci-mean/ci-proportion/consistency/covariance-matrix/method-of-moments/
 nonparametric. Campaign continues under the same active `/loop`.
+
+## Batch 207 (2026-09-19)
+
+Authored `consistency` (large-sample limit property, never fixed-n accuracy; sufficient
+condition needs both bias and variance to vanish, never one; sample mean's consistency IS the
+LLN) and `bias-variance` (bias and variance answer different questions, never conflated; MSE
+squares the bias, never a plain sum; unbiased is never automatically best). Both zero
+discrepancy. Mathematics **809/908** (807→809), 99 remaining. Full detail in `COVERAGE.md`
+Batch 207. Validated: KG PASS, state.ts 809/908, tsc clean, tests 561/561. Commit `ca23588`,
+pushed.
+
+Fresh frontier for Batch 208 (28 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
+qr-algorithm/splines, math.opt.semidefinite-programming, math.prob.conditional-expectation/
+correlation/marginal-distribution, math.stats.anova/bayesian-inference/chi-squared-test/ci-mean/
+ci-proportion/covariance-matrix/method-of-moments/nonparametric/rao-blackwell. Campaign
+continues under the same active `/loop`.
