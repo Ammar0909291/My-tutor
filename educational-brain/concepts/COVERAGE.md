@@ -15123,3 +15123,47 @@ future batches will need to derive the frontier fresh across other domains (`mat
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `e96f697` on `main`, pushed directly.
+
+### Batch 140 (2026-09-19) — first batch entirely post-math.real certification
+
+`math.prob.clt`: the Central Limit Theorem's genuinely correct subject — the SAMPLING
+DISTRIBUTION of the sample mean, never the fixed population itself — demonstrated via a skewed
+insurance-claims population whose sample-mean histograms bell-shape with growing $n$ while the
+population never changes; the already-normal-population exception (exact normality at every $n$,
+including $n=1$, needing no CLT approximation); and the single-observation-versus-sample-mean
+distinction (CLT concerns aggregation, never a lone draw). 3 misconceptions independently
+classified — MC-1 CLT-MEANS-POPULATION-BECOMES-NORMAL (Foundational, the root confusion this
+concept exists to prevent), MC-2 LARGE-N-ALWAYS-REQUIRED, MC-3
+CLT-APPLIES-TO-SINGLE-OBSERVATION. Zero Blueprint/KG metadata discrepancy —
+`math.stats.normal-approximation` cross-link confirmed still unauthored via `ls`, independence
+mode correctly used per the Blueprint's own self-report.
+
+`math.prob.standard-normal`: standardization $Z=(X-\mu)/\sigma$ as the mandatory bridge from any
+Normal to the universal $\Phi$/Z-table, demonstrated via $N(70,100)$'s $P(X\le85)=\Phi(1.5)$;
+the CDF's genuine symmetry $\Phi(-z)=1-\Phi(z)$ (never $\Phi(-z)=\Phi(z)$, which only holds for
+the density $\varphi$), derived directly and verified against $P(Z<-1)\approx0.159$; independent
+normals summing with VARIANCES adding, never standard deviations. 3 misconceptions independently
+classified — MC-1 ALL-NORMAL-DISTRIBUTIONS-ARE-STANDARD (instruction-induced), MC-2
+SYMMETRY-MEANS-Φ(−z)=Φ(z) (overgeneralization from the density's genuine symmetry), MC-3
+STANDARD-DEVIATION-IS-THE-STANDARDISED-SCORE (language contamination). Zero Blueprint/KG metadata
+discrepancy.
+
+This is the first batch entirely conducted after the `math.real` EB-certification milestone
+(Batch 139) — both concepts continue the `math.prob.normal-distribution` chain opened at Batch
+139, with `clt` closing that concept's declared unlock. Mathematics **673/908 → 675/908**, 233
+remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 675/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Computed fresh frontier post-batch (not yet re-derived this entry — will be recomputed fresh at
+the start of Batch 141 per established discipline): numerous `math.prob` concepts remain
+reachable (classical-probability, convergence-types, distribution, generating-function, markov-
+chain, poisson-process). Other ready concepts remain across `math.cat`, `math.cx`, `math.de`,
+`math.graph`, `math.linalg`, `math.num`, `math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `710ea13` on `main`, pushed directly.

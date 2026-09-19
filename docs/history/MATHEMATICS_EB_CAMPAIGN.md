@@ -4308,3 +4308,24 @@ Fresh frontier to be recomputed at the start of Batch 140 per established discip
 math.real concepts remain reachable; future batches continue across math.prob and other domains
 (math.cat, math.cx, math.de, math.graph, math.linalg, math.num, math.stats, math.top). Campaign
 continues under the same active `/loop`.
+
+### Batch 140 (2026-09-19) — first batch entirely post-math.real certification
+
+Authored `clt` (the sampling distribution of the mean, never the population, converges to
+normal; the already-normal-population exception; single-observation-vs-sample-mean discipline)
+and `standard-normal` (standardization as the mandatory bridge to Φ; the genuine CDF symmetry
+Φ(−z)=1−Φ(z); independent normals' variances adding). Both zero Blueprint/KG discrepancy. `clt`'s
+cross-link (`math.stats.normal-approximation`) confirmed still unauthored, independence mode
+correct. First batch entirely conducted after Batch 139's math.real certification milestone; both
+concepts continue the normal-distribution chain, with `clt` closing its declared unlock.
+Mathematics **675/908** (673→675), 233 remaining. Full per-concept detail in `COVERAGE.md` Batch
+140. Validated: KG validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts`
+confirms mathematics 675/908 (13 EB-certified domains unchanged), `tsc --noEmit` clean, targeted
+EB/curriculum tests (7 files) 561/561 passed. Full whole-repo suite not re-attempted, per the
+established Batch 109-110 hang precedent. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/
+runtime file touched. Commit `710ea13` on `main`, pushed directly.
+
+Fresh frontier to be recomputed at the start of Batch 141 per established discipline; numerous
+math.prob concepts remain reachable (classical-probability, convergence-types, distribution,
+generating-function, markov-chain, poisson-process). Campaign continues under the same active
+`/loop`.
