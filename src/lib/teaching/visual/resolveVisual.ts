@@ -36,6 +36,7 @@ import { getKGNode } from '@/lib/curriculum/knowledgeGraph'
 import type { VisualType } from '@/lib/school/visuals/visualTypes'
 import { ARCHETYPES, type ArchetypeContext } from './archetypes'
 import { resolveVisualTarget, requestTargetsSomethingElse, requestLeavesActiveFigure } from './resolveVisualTarget'
+import { engagesPendingOptions } from '@/lib/teaching/mcq'
 import { decideContinuity, parseVisualSession, tickSession, type VisualSession } from './session'
 import { noFigureDecision, type EducationalPurpose, type Representation, type VisualDecision } from './types'
 import { generateConceptFigure, generateConceptScene, validateGeneratedFigure, figureCacheKey, type GeneratedFigure } from './visualEngine'
@@ -362,7 +363,29 @@ export function resolveVisual(input: ResolveVisualInput): VisualDecision {
   const lastAsked = input.lastAssistantAskedQuestion ?? false
 
   // ── 1. What did the learner name this turn (if anything)? ─────────────────
-  const target = resolveVisualTarget(input.message, input.lessonConceptId, input.subject)
+  const rawTarget = resolveVisualTarget(input.message, input.lessonConceptId, input.subject)
+  // `resolveVisualTarget`'s step 2 (a `'learner-request'` match) is guarded by
+  // `requestTargetsSomethingElse` only on the FALLBACK path — a direct KG-title
+  // match from the learner's raw text has no protection at all. A learner's
+  // ANSWER can echo just-served MCQ-option vocabulary (e.g. an option reading
+  // "the electric field" for a question about a dipole), which is a real,
+  // resolvable KG concept title in its own right — so step 2 would fire and
+  // introduce that concept's figure as if it had been newly requested, even
+  // though nothing about the turn asked for a new topic. Reuses the same
+  // discriminating-vocabulary detector the MCQ-answer disambiguation guard
+  // already uses (mcq.ts's `engagesPendingOptions`) rather than inventing a
+  // second one; erring toward "this was an answer" is the safe direction,
+  // matching that guard's own asymmetric-risk stance.
+  const answeringPendingProbe =
+    rawTarget?.origin === 'learner-request' &&
+    input.offeredMcqOptions != null &&
+    input.offeredMcqOptions.length > 0 &&
+    engagesPendingOptions(input.message, {
+      question: '',
+      options: [...input.offeredMcqOptions],
+      correctIndex: 0,
+    })
+  const target = answeringPendingProbe ? null : rawTarget
   const requestedConceptId = target?.origin === 'learner-request' ? target.conceptId : null
 
   /**
