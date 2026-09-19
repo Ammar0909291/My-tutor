@@ -5145,3 +5145,30 @@ math.num.floating-point/interpolation/root-finding, math.opt.stochastic-gradient
 math.prob.characteristic-function/joint-distribution,
 math.stats.normal-distribution/percentile/sampling-distribution, math.top.topological-space.
 Campaign continues under the same active `/loop`.
+
+### Batch 176 (2026-09-19) — fourth reverse-direction correction
+
+Authored `positive-definite` (the eigenvalue test derived from the Spectral Theorem, never
+independently asserted; a zero eigenvalue as the exact PSD/positive-definite boundary) and
+`qr-factorization` (R's below-diagonal entries exactly zero by construction; back-substitution as
+the efficient triangular-system solve). `positive-definite` had a reverse-direction cross-link
+correction (math.opt.convex-function, correctly unauthored at the Blueprint's own write-time but
+since authored with a reciprocal cross-link back — fourth such discrepancy this campaign).
+`qr-factorization` had zero discrepancy; math.num.qr-algorithm confirmed still unauthored.
+Mathematics **747/908** (745→747), 161 remaining. Full per-concept detail in `COVERAGE.md` Batch
+176. Validated: KG validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts`
+confirms mathematics 747/908 (13 EB-certified domains unchanged), `tsc --noEmit` clean, targeted
+EB/curriculum tests (7 files) 561/561 passed. Full whole-repo suite not re-attempted, per the
+established Batch 109-110 hang precedent. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/
+runtime file touched. Commit `9f064cb` on `main`, pushed directly.
+
+Fresh frontier recomputed for Batch 177 (27 concepts, notably widening into math.opt/math.num via
+positive-definite's unlocking): math.linalg.cholesky, math.linalg.svd, math.num.qr-algorithm,
+math.opt.quadratic-programming, math.opt.semidefinite-programming (newly reachable), plus
+math.cat.category, math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution, math.fnal.normed-space, math.graph.random-graph, math.linalg.dual-space/
+jordan-form/least-squares/matrix-exponential/matrix-representation/tensor,
+math.num.floating-point/interpolation/root-finding, math.opt.stochastic-gradient,
+math.prob.characteristic-function/joint-distribution,
+math.stats.normal-distribution/percentile/sampling-distribution, math.top.topological-space.
+Campaign continues under the same active `/loop`.

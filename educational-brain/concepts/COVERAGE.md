@@ -16793,3 +16793,53 @@ corrected/declared unlocking), plus `math.cat.category`, `math.cx.complex-number
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `c9c570a` on `main`, pushed directly.
+
+## Batch 176 (2026-09-19) — fourth reverse-direction correction
+
+`positive-definite`: the eigenvalue test DERIVED from the Spectral Theorem (never an independently
+asserted fact), demonstrated via the live $v^TAv=\sum\lambda_iw_i^2$ substitution; and a zero
+eigenvalue as the EXACT boundary between PSD and positive definite (never interchangeable),
+demonstrated via $A=\begin{pmatrix}1&1\\1&1\end{pmatrix}$'s quadratic form vanishing exactly at a
+specific nonzero $v$. 3 misconceptions independently classified by Blueprint-declared severity —
+MC-1 POSITIVE-DEFINITE-AND-PSD-TREATED-AS-INTERCHANGEABLE (Foundational), MC-2
+POSITIVE-DEFINITENESS-CHECKED-ON-NON-SYMMETRIC-MATRIX (Foundational), MC-3
+ONE-EIGENVALUE-CHECKED-INSTEAD-OF-ALL (Moderate). Reverse-direction cross-link discrepancy found:
+the Blueprint's own Component 7 correctly found `math.opt.convex-function` unauthored AT
+BLUEPRINT-WRITE-TIME, but the EDUCATIONAL-BRAIN corpus has SINCE authored it, with its own EB entry
+reciprocally cross-linking back to THIS concept for its Hessian-PSD convexity criterion — upgraded
+to a genuine cross-link probe, the fourth such reverse-direction discrepancy this campaign (after
+the pre-segment Batch 131, Batch 152, Batch 156, and Batch 165).
+
+`qr-factorization`: $R$'s below-diagonal entries EXACTLY zero by Gram-Schmidt's sequential
+construction (never merely small or approximate), demonstrated via the full $Q,R$ construction
+connecting each $R$ entry to a Gram-Schmidt step; and back-substitution as the efficient solve for
+an upper-triangular system (never general Gaussian elimination, which works but wastes the
+structure), demonstrated via the least-squares $Rx=Q^Tb$ solve. 2 misconceptions independently
+classified by Blueprint-declared severity — MC-1
+R-BELOW-DIAGONAL-ENTRIES-NOT-RECOGNIZED-AS-EXACTLY-ZERO-BY-CONSTRUCTION (Foundational), MC-2
+GENERAL-ELIMINATION-USED-INSTEAD-OF-BACK-SUBSTITUTION-FOR-UPPER-TRIANGULAR-R (Moderate). Zero
+Blueprint/KG discrepancy; `math.num.qr-algorithm` independently re-confirmed still unauthored,
+correctly remaining independence mode.
+
+Mathematics **745/908 → 747/908**, 161 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 747/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)".
+
+Fresh frontier recomputed for Batch 177 (27 concepts, notably widening via cross-domain
+`math.opt`/`math.num` unlocks from `positive-definite`): `math.linalg.cholesky`, `math.linalg.svd`
+(newly reachable), `math.num.qr-algorithm`, `math.opt.quadratic-programming`,
+`math.opt.semidefinite-programming` (newly reachable via `positive-definite`/`qr-factorization`'s
+unlocking chains), plus `math.cat.category`, `math.cx.complex-numbers-analysis`,
+`math.de.systems-matrix-method`, `math.fnal.convolution`, `math.fnal.normed-space`,
+`math.graph.random-graph`, `math.linalg.dual-space`/`jordan-form`/`least-squares`/
+`matrix-exponential`/`matrix-representation`/`tensor`,
+`math.num.floating-point`/`interpolation`/`root-finding`, `math.opt.stochastic-gradient`,
+`math.prob.characteristic-function`/`joint-distribution`,
+`math.stats.normal-distribution`/`percentile`/`sampling-distribution`,
+`math.top.topological-space`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `9f064cb` on `main`, pushed directly.
