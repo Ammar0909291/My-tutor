@@ -17899,3 +17899,23 @@ math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-inte
 qr-algorithm/splines, math.opt.semidefinite-programming, math.prob.conditional-expectation/
 correlation/marginal-distribution, math.stats.anova/bayesian-inference/chi-squared-test/ci-mean/
 ci-proportion/covariance-matrix/method-of-moments/nonparametric/rao-blackwell.
+
+## Batch 208 (2026-09-19) — zero discrepancy
+
+Authored `math.stats.method-of-moments` (the k-th theoretical moment must match the k-th sample
+moment, never a mismatched statistic; multiple unknown parameters require multiple simultaneous
+moment equations, never one equation for several unknowns; simpler but less efficient than MLE —
+a fallback, never a general replacement) and `math.stats.rao-blackwell` (the theorem's
+unbiasedness conclusion requires an already-unbiased starting estimator, never rescuing a biased
+one; "no greater than" includes exact equality, never a guarantee of strict improvement;
+Rao-Blackwellization is a systematic mechanical recipe, never requiring ad hoc cleverness). Both
+zero discrepancy. Mathematics **809/908 → 811/908**, 97 remaining. Validated: KG PASS (908/908
+reachable), state.ts confirms 811/908, tsc clean, tests 561/561. Commit `43f7413`, pushed.
+
+Fresh frontier for Batch 209 (26 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
+qr-algorithm/splines, math.opt.semidefinite-programming, math.prob.conditional-expectation/
+correlation/marginal-distribution, math.stats.anova/bayesian-inference/chi-squared-test/ci-mean/
+ci-proportion/covariance-matrix/nonparametric.

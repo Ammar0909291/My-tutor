@@ -5885,3 +5885,21 @@ qr-algorithm/splines, math.opt.semidefinite-programming, math.prob.conditional-e
 correlation/marginal-distribution, math.stats.anova/bayesian-inference/chi-squared-test/ci-mean/
 ci-proportion/covariance-matrix/method-of-moments/nonparametric/rao-blackwell. Campaign
 continues under the same active `/loop`.
+
+## Batch 208 (2026-09-19)
+
+Authored `method-of-moments` (match order-k theoretical to order-k sample moment, never a
+mismatch; one equation per unknown, never fewer; simpler but less efficient than MLE — a
+fallback) and `rao-blackwell` (unbiased in, unbiased out — never fixes bias; no greater than
+includes equal, never guaranteed strict; Rao-Blackwellization is mechanical, never requiring fresh
+cleverness). Both zero discrepancy. Mathematics **811/908** (809→811), 97 remaining. Full detail
+in `COVERAGE.md` Batch 208. Validated: KG PASS, state.ts 811/908, tsc clean, tests 561/561.
+Commit `43f7413`, pushed.
+
+Fresh frontier for Batch 209 (26 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
+qr-algorithm/splines, math.opt.semidefinite-programming, math.prob.conditional-expectation/
+correlation/marginal-distribution, math.stats.anova/bayesian-inference/chi-squared-test/ci-mean/
+ci-proportion/covariance-matrix/nonparametric. Campaign continues under the same active `/loop`.
