@@ -17397,3 +17397,55 @@ Fresh frontier recomputed for Batch 188 (27 concepts): `math.cat.morphism-types`
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `975978d` on `main`, pushed directly.
+
+## Batch 188 (2026-09-19) — zero discrepancy, both `math.top` concepts
+
+`fundamental-group`: loop homotopy shown to require the basepoint fixed at EVERY intermediate
+stage (never just at the two endpoints), demonstrated via the "rotate the whole loop" candidate on
+$S^1$ satisfying plain endpoints yet sweeping $H(0,t)$ around the entire circle; concatenation
+associativity shown to hold only UP TO based homotopy (never as literal function equality),
+demonstrated via the differing breakpoint schedules of $(\gamma_1\ast\gamma_2)\ast\gamma_3$ versus
+$\gamma_1\ast(\gamma_2\ast\gamma_3)$ reconciled by a reparametrization homotopy; and "simply
+connected" shown to rule out only loop-detectable 1D holes (never all interesting topology),
+demonstrated via the $\pi_1(S^1)\cong\mathbb Z$-versus-$\pi_1(S^2)=0$ contrast. 3 misconceptions
+independently classified by Blueprint-declared severity — MC-1
+BASEPOINT-DRIFT-IN-LOOP-HOMOTOPY-OVERLOOKED (Foundational), MC-2
+CONCATENATION-ASSOCIATIVITY-TREATED-AS-LITERAL-EQUALITY (Foundational), MC-3
+SIMPLY-CONNECTED-OVERGENERALIZED-TO-NO-TOPOLOGY-AT-ALL (Moderate). Zero Blueprint/KG discrepancy;
+all fields (requires `math.top.homotopy`/`math.abst.group-theory`, unlocks
+`math.top.covering-space`/`math.top.van-kampen`, cross_links none, expert/apply,
+mastery_threshold 0.75, estimated_hours 7) verified exact matches; `math.abst.group-theory`
+independently re-confirmed authored.
+
+`homotopy-equivalence`: homotopy equivalence shown STRICTLY WEAKER than homeomorphism (never
+equivalent to it), demonstrated via $[0,1]\simeq\{0\}$ despite $[0,1]\not\cong\{0\}$; a
+deformation retract shown to require checking BOTH directions (never just the retraction),
+demonstrated via $\mathbb R^2\setminus\{0\}\simeq S^1$ with both $r\circ i=\mathrm{id}_A$ and
+$i\circ r\simeq\mathrm{id}_X$ verified; and contractibility shown logically INDEPENDENT of
+compactness (never conflated), demonstrated via the $\mathbb R^n$/$S^n$/$D^2$ four-combination
+table. 3 misconceptions independently classified by Blueprint-declared severity — MC-1
+HOMOTOPY-EQUIVALENT-MEANS-HOMEOMORPHIC (Critical), MC-2 DEFORMATION-RETRACT-DIRECTION-CONFUSED
+(Foundational), MC-3 CONTRACTIBLE-MEANS-COMPACT (Moderate). Zero Blueprint/KG discrepancy; all
+fields (requires `math.top.homotopy`, unlocks none, cross_links none, expert/understand,
+mastery_threshold 0.8, estimated_hours 4) verified exact matches.
+
+Mathematics **769/908 → 771/908**, 137 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 771/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)".
+
+Fresh frontier recomputed for Batch 189 (27 concepts): `math.cat.morphism-types`/
+`natural-transformation`, `math.top.covering-space`/`simplicial-complex`/`smooth-manifold`/
+`van-kampen` (`covering-space`/`van-kampen` newly unlocked), plus
+`math.cx.complex-numbers-analysis`, `math.de.systems-matrix-method`, `math.fnal.convolution`,
+`math.fnal.normed-space`, `math.graph.random-graph`,
+`math.linalg.jordan-form`/`matrix-exponential`/`matrix-representation`/`tensor`,
+`math.num.floating-point`/`interpolation`/`qr-algorithm`/`root-finding`,
+`math.opt.quadratic-programming`/`semidefinite-programming`/`stochastic-gradient`,
+`math.prob.characteristic-function`/`joint-distribution`,
+`math.stats.normal-distribution`/`percentile`/`sampling-distribution`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `bf95b0b` on `main`, pushed directly.
