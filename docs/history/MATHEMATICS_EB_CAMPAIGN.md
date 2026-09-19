@@ -5273,3 +5273,31 @@ math.opt.quadratic-programming/semidefinite-programming/stochastic-gradient,
 math.prob.characteristic-function/joint-distribution,
 math.stats.normal-distribution/percentile/sampling-distribution. Campaign continues under the
 same active `/loop`.
+
+### Batch 181 (2026-09-19) — fifth reverse-direction correction
+
+Authored `open-sets` (open/closed defined purely from τ, never a metric; a nonempty set can have
+empty interior; the boundary can swallow the entire space) and `functor` (contravariant functors
+reverse both arrow direction and composition order together; forgetful-then-free never recovers
+the original object; functors only guarantee composition and identity preservation). `open-sets`
+had zero discrepancy; math.real.open-sets confirmed authored. `functor` had a reverse-direction
+cross-link correction (math.abst.group-homomorphism, correctly unauthored at the Blueprint's own
+write-time but since authored — fifth such discrepancy this campaign, after the pre-segment Batch
+131, and Batches 152, 156, 165, 176). Mathematics **757/908** (755→757), 151 remaining. Full
+per-concept detail in `COVERAGE.md` Batch 181. Validated: KG validator PASS (908/908 reachable,
+file untouched), `scripts/math/state.ts` confirms mathematics 757/908 (13 EB-certified domains
+unchanged), `tsc --noEmit` clean, targeted EB/curriculum tests (7 files) 561/561 passed. Full
+whole-repo suite not re-attempted, per the established Batch 109-110 hang precedent. No Physics/
+Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Commit `87e1a81` on `main`, pushed
+directly.
+
+Fresh frontier recomputed for Batch 182 (32 concepts): math.cat.morphism-types/
+natural-transformation, math.top.basis/compactness/connectedness/continuity-top/
+interior-closure/product-space/quotient-space/separation-axioms/simplicial-complex, plus
+math.cx.complex-numbers-analysis, math.de.systems-matrix-method, math.fnal.convolution,
+math.fnal.normed-space, math.graph.random-graph, math.linalg.jordan-form/matrix-exponential/
+matrix-representation/tensor, math.num.floating-point/interpolation/qr-algorithm/root-finding,
+math.opt.quadratic-programming/semidefinite-programming/stochastic-gradient,
+math.prob.characteristic-function/joint-distribution,
+math.stats.normal-distribution/percentile/sampling-distribution. Campaign continues under the
+same active `/loop`.

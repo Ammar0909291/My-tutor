@@ -17029,3 +17029,52 @@ Fresh frontier recomputed for Batch 181 (32 concepts, notably widening via `math
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `2056063` on `main`, pushed directly.
+
+## Batch 181 (2026-09-19) — fifth reverse-direction correction
+
+`open-sets`: open and closed defined purely from $\tau$ (never requiring a metric), demonstrated
+via the fully metric-free open/closed-set computation on a three-point topology; a nonempty set
+able to have EMPTY interior (never assumed automatically nonempty), demonstrated via
+$\text{int}(\{b\})=\emptyset$; and the boundary able to swallow the ENTIRE space (never assumed
+always thin), demonstrated via $\partial\mathbb Q=\mathbb R$ contrasted with
+$\partial(2,5)=\{2,5\}$. 3 misconceptions independently classified by Blueprint-declared severity
+— MC-1 TOPOLOGICAL-CONCEPTS-ASSUMED-TO-NEED-A-METRIC, MC-2
+NONEMPTY-SET-ASSUMED-NONEMPTY-INTERIOR, MC-3 BOUNDARY-ASSUMED-ALWAYS-THIN (all three Foundational).
+Zero Blueprint/KG discrepancy; `math.real.open-sets` independently re-confirmed authored.
+
+`functor`: contravariant functors reversing BOTH arrow direction AND composition order TOGETHER
+(never one without the other), demonstrated via the dual-space functor's
+$(T\circ S)^*=S^*\circ T^*$ derivation; forgetful-then-free NEVER recovering the original object
+(never assumed an inverse round trip), demonstrated via $F(U(G))\ne G$ for
+$\mathbb Z/6\mathbb Z$; and functors ONLY guaranteed to preserve composition and identity (never
+every property automatically). 3 misconceptions independently classified by Blueprint-declared
+severity — MC-1 CONTRAVARIANT-COMPOSITION-ORDER-NOT-REVERSED (Foundational), MC-2
+FORGETFUL-THEN-FREE-ASSUMED-IDENTITY (Moderate), MC-3
+FUNCTOR-ASSUMED-TO-PRESERVE-ALL-PROPERTIES (Moderate). Reverse-direction cross-link discrepancy
+found: the Blueprint's own Component 7 correctly found `math.abst.group-homomorphism` unauthored
+AT BLUEPRINT-WRITE-TIME (while correctly cross-link-probing the already-authored
+`math.linalg.linear-map`), but the EDUCATIONAL-BRAIN corpus has SINCE authored
+`math.abst.group-homomorphism` — upgraded to a genuine cross-link probe here too, the fifth such
+reverse-direction discrepancy this campaign (after the pre-segment Batch 131, Batch 152, Batch
+156, Batch 165, and Batch 176).
+
+Mathematics **755/908 → 757/908**, 151 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 757/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)".
+
+Fresh frontier recomputed for Batch 182 (32 concepts): `math.cat.morphism-types`/
+`natural-transformation`, `math.top.basis`/`compactness`/`connectedness`/`continuity-top`/
+`interior-closure`/`product-space`/`quotient-space`/`separation-axioms`/`simplicial-complex` (both
+domains widening further), plus `math.cx.complex-numbers-analysis`,
+`math.de.systems-matrix-method`, `math.fnal.convolution`, `math.fnal.normed-space`,
+`math.graph.random-graph`, `math.linalg.jordan-form`/`matrix-exponential`/
+`matrix-representation`/`tensor`, `math.num.floating-point`/`interpolation`/`qr-algorithm`/
+`root-finding`, `math.opt.quadratic-programming`/`semidefinite-programming`/`stochastic-gradient`,
+`math.prob.characteristic-function`/`joint-distribution`,
+`math.stats.normal-distribution`/`percentile`/`sampling-distribution`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `87e1a81` on `main`, pushed directly.
