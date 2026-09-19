@@ -16699,3 +16699,49 @@ reachable via `orthogonal-basis`'s unlocking chain), plus `math.cat.category`,
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `7224ba6` on `main`, pushed directly.
+
+## Batch 174 (2026-09-19)
+
+`diagonalization`: $P$'s columns and $D$'s diagonal requiring matching eigenvector-eigenvalue order
+(never mismatched), demonstrated via the full $P$/$D$ construction and reconstruction check for
+$A=\begin{pmatrix}4&1\\2&3\end{pmatrix}$; diagonal powers computed ENTRYWISE as the central
+practical payoff, demonstrated via the $A^{10}$ computation; and a repeated eigenvalue as a WARNING
+to check multiplicities (never an automatic verdict either way), demonstrated via the
+non-diagonalizable $\begin{pmatrix}2&1\\0&2\end{pmatrix}$ contrasted with the trivially-
+diagonalizable $A=2I$. 2 misconceptions independently classified by Blueprint-declared severity —
+MC-1 EIGENVECTOR-EIGENVALUE-ORDER-MISMATCHED-BETWEEN-P-AND-D (Foundational), MC-2
+REPEATED-EIGENVALUE-DIAGONALIZABILITY-ASSUMED-WITHOUT-CHECKING-MULTIPLICITIES (Foundational). Zero
+Blueprint/KG discrepancy; `math.de.systems-matrix-method` independently re-confirmed still
+unauthored, correctly remaining independence mode.
+
+`projection`: the projection defined by its residual being ORTHOGONAL to $W$ (the entire
+characterization, never an incidental afterthought), demonstrated via the direct residual-
+orthogonality verification for $W=\text{span}((1,0,0))$; the single-vector projection landing
+along $u$'s direction (never $v$'s), demonstrated via the correct-versus-incorrect final-
+multiplication contrast; and the sum-of-projections formula requiring orthogonality (never valid
+for a general spanning set), demonstrated via the orthonormal-basis $xy$-plane computation with the
+non-orthogonal-basis caveat. 3 misconceptions independently classified by Blueprint-declared
+severity — MC-1 PROJECTION-FORMULA-FINAL-MULTIPLICATION-MISAPPLIED (Foundational), MC-2
+SUM-OF-PROJECTIONS-FORMULA-OVERGENERALIZED-TO-NON-ORTHOGONAL-BASES (Foundational), MC-3
+RESIDUAL-ORTHOGONALITY-CHECK-SKIPPED (Moderate). Zero Blueprint/KG discrepancy.
+
+Mathematics **741/908 → 743/908**, 165 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 743/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)".
+
+Fresh frontier recomputed for Batch 175 (24 concepts): `math.linalg.gram-schmidt`,
+`math.linalg.jordan-form`, `math.linalg.least-squares`, `math.linalg.matrix-exponential`,
+`math.linalg.spectral-theorem` (all five newly reachable via `diagonalization`/`projection`'s
+unlocking), plus `math.cat.category`, `math.cx.complex-numbers-analysis`,
+`math.de.systems-matrix-method`, `math.fnal.convolution`, `math.fnal.normed-space`,
+`math.graph.random-graph`, `math.linalg.dual-space`/`matrix-representation`/`tensor`,
+`math.num.floating-point`/`interpolation`/`root-finding`, `math.opt.stochastic-gradient`,
+`math.prob.characteristic-function`/`joint-distribution`,
+`math.stats.normal-distribution`/`percentile`/`sampling-distribution`,
+`math.top.topological-space`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `c21f91f` on `main`, pushed directly.

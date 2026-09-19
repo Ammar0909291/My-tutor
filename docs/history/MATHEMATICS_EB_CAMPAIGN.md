@@ -5095,3 +5095,27 @@ tensor, math.num.floating-point/interpolation/root-finding, math.opt.stochastic-
 math.prob.characteristic-function/joint-distribution,
 math.stats.normal-distribution/percentile/sampling-distribution, math.top.topological-space.
 Campaign continues under the same active `/loop`.
+
+### Batch 174 (2026-09-19)
+
+Authored `diagonalization` (P/D matching order required; diagonal powers computed entrywise; a
+repeated eigenvalue as a warning to check multiplicities, never an automatic verdict) and
+`projection` (the residual-orthogonal characterization; the single-vector projection landing
+along u, never v; the sum-of-projections formula requiring orthogonality). Both zero Blueprint/KG
+discrepancy; math.de.systems-matrix-method confirmed still unauthored. Mathematics **743/908**
+(741→743), 165 remaining. Full per-concept detail in `COVERAGE.md` Batch 174. Validated: KG
+validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts` confirms mathematics
+743/908 (13 EB-certified domains unchanged), `tsc --noEmit` clean, targeted EB/curriculum tests (7
+files) 561/561 passed. Full whole-repo suite not re-attempted, per the established Batch 109-110
+hang precedent. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Commit
+`c21f91f` on `main`, pushed directly.
+
+Fresh frontier recomputed for Batch 175 (24 concepts): math.linalg.gram-schmidt,
+math.linalg.jordan-form, math.linalg.least-squares, math.linalg.matrix-exponential,
+math.linalg.spectral-theorem (newly reachable via diagonalization/projection's unlocking), plus
+math.cat.category, math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution, math.fnal.normed-space, math.graph.random-graph, math.linalg.dual-space/
+matrix-representation/tensor, math.num.floating-point/interpolation/root-finding,
+math.opt.stochastic-gradient, math.prob.characteristic-function/joint-distribution,
+math.stats.normal-distribution/percentile/sampling-distribution, math.top.topological-space.
+Campaign continues under the same active `/loop`.
