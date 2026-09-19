@@ -15722,3 +15722,45 @@ reachable.
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `1ac9bd6` on `main`, pushed directly.
+
+## Batch 153 (2026-09-19)
+
+Authored `math.de.undetermined-coefficients` and `math.de.variation-of-parameters`, continuing
+the `math.de` domain.
+
+`undetermined-coefficients`: the trial-function table for polynomial/exponential/trig forcing
+terms, requiring the FULL polynomial (every degree down to constant, never just the lead term),
+demonstrated via $y''-3y'+2y=x^2$; the mandatory sine/cosine PAIRING in any trigonometric trial
+(never sine alone), demonstrated via the differentiation-produces-cosine argument; and the
+MODIFICATION RULE ($\times x$ or $\times x^2$) whenever the trial overlaps $y_h$, demonstrated via
+$y''-4y'+4y=e^{2x}$'s repeated-root resolution. 3 misconceptions independently classified by
+Blueprint-declared birth type — MC-1 ONLY-MATCHING-THE-LEAD-TERM (instruction-induced), MC-2
+FORGETTING-MODIFICATION-RULE (instruction-induced), MC-3 SINE-ONLY-TRIAL-FOR-SINE-FORCING
+(overgeneralization). Zero Blueprint/KG discrepancy.
+
+`variation-of-parameters`: the formula $y_p=u_1y_1+u_2y_2$ with $u_1'=-y_2f/W,u_2'=y_1f/W$ using
+$f=g/a$ (the leading coefficient DIVIDED OUT first, never the raw $g$), demonstrated via
+$y''+y=\tan x$; the mandatory $W\ne0$ verification BEFORE applying the formula (never assumed);
+and the decision rule preferring undetermined coefficients when applicable (VoP always valid but
+can produce non-elementary integrals, never automatically the "cleaner" choice). 3 misconceptions
+independently classified — MC-1 FORGETTING-THE-LEADING-COEFFICIENT (instruction-induced), MC-2
+WRONSKIAN-IN-DENOMINATOR-CAN-BE-ZERO (overgeneralization), MC-3 VARIATION-OF-PARAMETERS-ALWAYS-
+GIVES-A-CLEANER-ANSWER-THAN-UNDETERMINED-COEFFICIENTS (overgeneralization). Zero Blueprint/KG
+discrepancy.
+
+Mathematics **699/908 → 701/908**, 207 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 701/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Fresh frontier to be recomputed at the start of Batch 154 per established discipline; remaining
+`math.de` concepts (higher-order-ode, laplace-transform, stability-analysis, series-solution, bvp,
+pde) and other ready concepts across `math.linalg`, `math.prob.joint-distribution`, `math.stats`,
+`math.cx`, `math.top`, `math.fnal`, `math.num`, `math.opt`, `math.graph`, `math.cat` still
+reachable.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `04683f9` on `main`, pushed directly.

@@ -4595,3 +4595,22 @@ math.de concepts (stability-analysis, higher-order-ode, series-solution, laplace
 pde) and other ready concepts across math.linalg, math.prob.joint-distribution, math.stats,
 math.cx, math.top, math.fnal, math.num, math.opt, math.graph, math.cat still reachable. Campaign
 continues under the same active `/loop`.
+
+### Batch 153 (2026-09-19)
+
+Authored `undetermined-coefficients` (full-polynomial trial discipline; mandatory sine/cosine
+pairing; the modification rule for trial/yₕ overlap) and `variation-of-parameters` (the formula
+using f=g/a, never raw g; mandatory W≠0 verification; the decision rule favoring undetermined
+coefficients when applicable). Both zero Blueprint/KG discrepancy. Mathematics **701/908**
+(699→701), 207 remaining. Full per-concept detail in `COVERAGE.md` Batch 153. Validated: KG
+validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts` confirms mathematics
+701/908 (13 EB-certified domains unchanged), `tsc --noEmit` clean, targeted EB/curriculum tests
+(7 files) 561/561 passed. Full whole-repo suite not re-attempted, per the established Batch
+109-110 hang precedent. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched.
+Commit `04683f9` on `main`, pushed directly.
+
+Fresh frontier to be recomputed at the start of Batch 154 per established discipline; remaining
+math.de concepts (higher-order-ode, laplace-transform, stability-analysis, series-solution, bvp,
+pde) and other ready concepts across math.linalg, math.prob.joint-distribution, math.stats,
+math.cx, math.top, math.fnal, math.num, math.opt, math.graph, math.cat still reachable. Campaign
+continues under the same active `/loop`.
