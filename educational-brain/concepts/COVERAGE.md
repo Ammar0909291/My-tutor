@@ -17750,3 +17750,26 @@ math.linalg.matrix-representation/tensor, math.num.error-analysis/interpolation/
 qr-algorithm, math.opt.semidefinite-programming, math.prob.conditional-expectation/correlation/
 marginal-distribution, math.stats.bias-variance/confidence-interval/consistency/
 covariance-matrix/hypothesis-testing/method-of-moments/mle/sufficient-statistic.
+
+## Batch 201 (2026-09-19) — zero discrepancy
+
+Authored `math.stats.confidence-interval` (CI formula assembles two already-known pieces — the
+standard normal's 1.96 z-value and the sampling distribution's own standard error, never new
+independent constants; "95% confidence" describes the construction procedure's long-run success
+rate, never a probability about this one fixed interval; unknown σ requires a genuinely wider
+t-distribution-based interval, never the same z=1.96 formula with s silently substituted) and
+`math.stats.hypothesis-testing` (the p-value is P(data | H0), never P(H0 | data) — the same
+reversed-conditional error conditional-probability already warns generalizes; failing to reject
+H0 means insufficient evidence, never proof; Type I and Type II errors trade off against each
+other, never both reduced by adjusting α alone). Both zero discrepancy. Mathematics
+**795/908 → 797/908**, 111 remaining. Validated: KG PASS (908/908 reachable), state.ts confirms
+797/908, tsc clean, tests 561/561. Commit `d0330a6`, pushed.
+
+Fresh frontier for Batch 202 (34 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/interpolation/newtons-method/
+qr-algorithm, math.opt.semidefinite-programming, math.prob.conditional-expectation/correlation/
+marginal-distribution, math.stats.anova/bias-variance/chi-squared-test/ci-mean/ci-proportion/
+consistency/covariance-matrix/method-of-moments/mle/nonparametric/sufficient-statistic/
+test-statistic/type-errors/t-test/z-test.

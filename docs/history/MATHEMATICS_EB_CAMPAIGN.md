@@ -5748,3 +5748,23 @@ qr-algorithm, math.opt.semidefinite-programming, math.prob.conditional-expectati
 marginal-distribution, math.stats.bias-variance/confidence-interval/consistency/
 covariance-matrix/hypothesis-testing/method-of-moments/mle/sufficient-statistic. Campaign
 continues under the same active `/loop`.
+
+## Batch 201 (2026-09-19)
+
+Authored `confidence-interval` (CI assembles two known facts — the normal's z=1.96, the sampling
+distribution's standard error; 95% confidence describes the construction procedure, never this
+one fixed interval; unknown σ needs a wider t-based interval, never the same z-formula with s
+substituted) and `hypothesis-testing` (p-value is P(data|H0), never P(H0|data) — a specific
+instance of the general P(A|B)≠P(B|A) warning; fail-to-reject means insufficient evidence, never
+proof; Type I/Type II errors trade off, never both reduced by α alone). Both zero discrepancy.
+Mathematics **797/908** (795→797), 111 remaining. Full detail in `COVERAGE.md` Batch 201.
+Validated: KG PASS, state.ts 797/908, tsc clean, tests 561/561. Commit `d0330a6`, pushed.
+
+Fresh frontier for Batch 202 (34 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/interpolation/newtons-method/
+qr-algorithm, math.opt.semidefinite-programming, math.prob.conditional-expectation/correlation/
+marginal-distribution, math.stats.anova/bias-variance/chi-squared-test/ci-mean/ci-proportion/
+consistency/covariance-matrix/method-of-moments/mle/nonparametric/sufficient-statistic/
+test-statistic/type-errors/t-test/z-test. Campaign continues under the same active `/loop`.
