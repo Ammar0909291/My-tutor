@@ -5903,3 +5903,20 @@ math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-inte
 qr-algorithm/splines, math.opt.semidefinite-programming, math.prob.conditional-expectation/
 correlation/marginal-distribution, math.stats.anova/bayesian-inference/chi-squared-test/ci-mean/
 ci-proportion/covariance-matrix/nonparametric. Campaign continues under the same active `/loop`.
+
+## Batch 209 (2026-09-19)
+
+Authored `ci-mean` (z only when σ genuinely known, never a reflex to t; t with n−1 df when σ
+estimated, never z which understates uncertainty; width shrinks with n, grows with confidence —
+two separate effects) and `ci-proportion` (p̂(1−p̂)/n exactly, never p̂² or a missing n; both
+large-sample conditions checked together, never just one). Both zero discrepancy. Mathematics
+**813/908** (811→813), 95 remaining. Full detail in `COVERAGE.md` Batch 209. Validated: KG PASS,
+state.ts 813/908, tsc clean, tests 561/561. Commit `1fccd07`, pushed.
+
+Fresh frontier for Batch 210 (24 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
+qr-algorithm/splines, math.opt.semidefinite-programming, math.prob.conditional-expectation/
+correlation/marginal-distribution, math.stats.anova/bayesian-inference/chi-squared-test/
+covariance-matrix/nonparametric. Campaign continues under the same active `/loop`.

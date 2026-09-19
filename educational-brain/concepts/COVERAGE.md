@@ -17919,3 +17919,22 @@ math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-inte
 qr-algorithm/splines, math.opt.semidefinite-programming, math.prob.conditional-expectation/
 correlation/marginal-distribution, math.stats.anova/bayesian-inference/chi-squared-test/ci-mean/
 ci-proportion/covariance-matrix/nonparametric.
+
+## Batch 209 (2026-09-19) — zero discrepancy
+
+Authored `math.stats.ci-mean` (use z only when σ is genuinely known, never t as a reflex; use t
+with n−1 df when σ is estimated, never z's critical value which understates uncertainty; width
+shrinks with larger n but grows with higher confidence — two separate effects, never conflated)
+and `math.stats.ci-proportion` (the standard error formula's structure must be reproduced
+exactly — p̂(1−p̂)/n, never p̂² or a missing n; both large-sample conditions must be checked
+together, never just one, since a skewed p̂ can pass one and fail the other). Both zero
+discrepancy. Mathematics **811/908 → 813/908**, 95 remaining. Validated: KG PASS (908/908
+reachable), state.ts confirms 813/908, tsc clean, tests 561/561. Commit `1fccd07`, pushed.
+
+Fresh frontier for Batch 210 (24 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
+qr-algorithm/splines, math.opt.semidefinite-programming, math.prob.conditional-expectation/
+correlation/marginal-distribution, math.stats.anova/bayesian-inference/chi-squared-test/
+covariance-matrix/nonparametric.
