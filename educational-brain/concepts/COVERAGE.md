@@ -17982,3 +17982,22 @@ math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-inte
 qr-algorithm/splines, math.opt.pca/semidefinite-programming, math.prob.conditional-expectation/
 marginal-distribution, math.stats.bayesian-inference/correlation/experimental-design/
 nonparametric/two-way-anova.
+
+## Batch 212 (2026-09-19) — zero discrepancy
+
+Authored `math.stats.correlation` (r outside [−1,1] is an arithmetic error, never a valid
+"stronger than perfect" result; r measures linear association only — a perfect curve can produce
+r≈0, never interpreted as "no relationship" without checking a scatterplot; correlation never
+implies causation) and `math.stats.two-way-anova` (two-way ANOVA tests three separate hypotheses,
+never one combined test; a significant interaction can mask a null-looking main effect, never
+safely ignored; blocking controls noise, never the research question itself). Both zero
+discrepancy. Mathematics **817/908 → 819/908**, 89 remaining. Validated: KG PASS (908/908
+reachable), state.ts confirms 819/908, tsc clean, tests 561/561. Commit `655c3cd`, pushed.
+
+Fresh frontier for Batch 213 (23 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
+qr-algorithm/splines, math.opt.pca/semidefinite-programming, math.prob.conditional-expectation/
+marginal-distribution, math.stats.bayesian-inference/experimental-design/linear-regression/
+nonparametric.

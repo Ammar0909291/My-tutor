@@ -5957,3 +5957,21 @@ math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-inte
 qr-algorithm/splines, math.opt.pca/semidefinite-programming, math.prob.conditional-expectation/
 marginal-distribution, math.stats.bayesian-inference/correlation/experimental-design/
 nonparametric/two-way-anova. Campaign continues under the same active `/loop`.
+
+## Batch 212 (2026-09-19)
+
+Authored `correlation` (r outside [−1,1] is an error, never valid; r sees only lines, never
+"no relationship" without a scatterplot check; correlation never implies causation) and
+`two-way-anova` (three separate hypotheses, never one combined test; interaction can mask a
+main effect, never safely ignored; blocking controls noise, never the research question). Both
+zero discrepancy. Mathematics **819/908** (817→819), 89 remaining. Full detail in `COVERAGE.md`
+Batch 212. Validated: KG PASS, state.ts 819/908, tsc clean, tests 561/561. Commit `655c3cd`,
+pushed.
+
+Fresh frontier for Batch 213 (23 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
+qr-algorithm/splines, math.opt.pca/semidefinite-programming, math.prob.conditional-expectation/
+marginal-distribution, math.stats.bayesian-inference/experimental-design/linear-regression/
+nonparametric. Campaign continues under the same active `/loop`.
