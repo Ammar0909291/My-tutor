@@ -18081,3 +18081,27 @@ math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matr
 math.fnal.convolution/normed-space, math.graph.random-graph,
 math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
 qr-algorithm/splines, math.opt.pca/semidefinite-programming, math.prob.conditional-expectation.
+
+## Batch 217 (2026-09-19) — 1 discrepancy (stale unlocks)
+
+Authored `math.prob.conditional-expectation` (E[X|Y] is a random variable/function of Y, never a
+single number; the tower property is an exact identity, never an approximation; the law of total
+variance reveals where variance comes from, never just a value-check) and `math.num.error-analysis`
+(roundoff and truncation are independent error sources, never conflated; a small residual under a
+large condition number is still a large forward error, never proof of accuracy; backward error
+analysis is often a simple residual computation, never requiring inversion of the algorithm).
+`math.num.error-analysis`'s Blueprint claimed 6 downstream unlocks; live KG shows `unlocks: []` —
+corrected using the live KG value (13th discrepancy this campaign, 4th stale-KG-metadata case,
+alongside Batch 185's `math.top.quotient-space`, Batch 194's `math.num.root-finding`, and Batch
+202's `math.num.interpolation`). `math.prob.conditional-expectation` zero discrepancy (its own
+unauthored cross-link to `math.prob.martingale` was already correctly flagged as independence
+mode by the Blueprint itself). Mathematics **827/908 → 829/908**, 79 remaining. Validated: KG PASS
+(908/908 reachable), state.ts confirms 829/908, tsc clean, tests 561/561. Commit `35b5b91`,
+pushed.
+
+Fresh frontier for Batch 218 (21 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.euler-method/iterative-linear/
+lu-factorization/numerical-differentiation/numerical-integration/qr-algorithm/splines,
+math.opt.pca/semidefinite-programming, math.prob.martingale.

@@ -6046,3 +6046,23 @@ math.fnal.convolution/normed-space, math.graph.random-graph,
 math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
 qr-algorithm/splines, math.opt.pca/semidefinite-programming, math.prob.conditional-expectation.
 Campaign continues under the same active `/loop`.
+
+## Batch 217 (2026-09-19)
+
+Authored `conditional-expectation` (E[X|Y] is a function of Y, never a single number; tower
+property is exact, never approximate; law of total variance reveals variance sources, never just
+a check) and `error-analysis` (roundoff/truncation are independent, never conflated; a tiny
+residual under a large κ is still a large forward error; backward error is often a simple
+residual, never requiring inversion). `error-analysis`'s Blueprint claimed 6 unlocks; live KG has
+none — corrected (13th discrepancy, 4th stale-KG-metadata case). `conditional-expectation` zero
+discrepancy. Mathematics **829/908** (827→829), 79 remaining. Full detail in `COVERAGE.md`
+Batch 217. Validated: KG PASS, state.ts 829/908, tsc clean, tests 561/561. Commit `35b5b91`,
+pushed.
+
+Fresh frontier for Batch 218 (21 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.euler-method/iterative-linear/
+lu-factorization/numerical-differentiation/numerical-integration/qr-algorithm/splines,
+math.opt.pca/semidefinite-programming, math.prob.martingale. Campaign continues under the same
+active `/loop`.
