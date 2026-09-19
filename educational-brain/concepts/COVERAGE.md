@@ -14395,3 +14395,58 @@ reachable. 27 other ready concepts remain across `math.cat`, `math.cx`, `math.de
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `efd5507` on `main`, pushed directly.
+
+### Batch 126 (2026-09-19) — resumed after a scope-conflict pause
+
+The prior turn halted before this batch over an apparent conflict between the standing `/loop`
+instruction and CLAUDE.md's "mathematics content work is explicitly PAUSED" line under the
+owner-scoped physics/english/chemistry campaign, plus a session-level tracking-only preference.
+The owner explicitly confirmed the pause does not apply to this campaign, so authoring resumed
+from the last confirmed state (645/908, commit `67dbfc6`, in sync with origin).
+
+`math.prob.standard-deviation`: $SD(X)=\sqrt{\text{Var}(X)}$, returning spread to the original
+units (never squared units, unlike variance). Worked the Uniform{1..5} example: $SD(X)=\sqrt2$,
+and $Y=2X-3$ giving $SD(Y)=2\sqrt2$ (scaling multiplies SD by $|a|$; the $-3$ shift leaves spread
+untouched). 3 misconceptions independently classified — MC-1 SD-AND-VARIANCE-ARE-INTERCHANGEABLE
+(language contamination), MC-2 ADDING-CONSTANT-CHANGES-SD (overgeneralization), MC-3
+SD-IS-THE-AVERAGE-DEVIATION (instruction-induced, confusing SD with mean absolute deviation).
+Zero Blueprint/KG metadata discrepancy.
+
+`math.real.compactness`: open cover/finite subcover definition of compactness as a universal
+claim over ALL covers (one failing cover, like $\{(1/n,1)\}$ covering $(0,1)$ with no finite
+subcover, is a complete disproof); Heine-Borel (closed AND bounded, both required, contrasting
+$(0,1)$ against $[0,1]$); sequential compactness requiring the limit to land back inside $K$
+itself (the identical sequence $1/n\to0$ fails for $(0,1)$ but succeeds for $[0,1]$). 3
+misconceptions independently classified, all Foundational severity per the Blueprint — MC-1
+SOME-COVER-REDUCIBLE-ASSUMED-SUFFICIENT-FOR-COMPACTNESS, MC-2
+BOUNDED-ALONE-ASSUMED-SUFFICIENT-FOR-COMPACTNESS, MC-3
+SEQUENCE-CONVERGENCE-TO-ANY-LIMIT-ASSUMED-SUFFICIENT-FOR-SEQUENTIAL-COMPACTNESS. Zero Blueprint/
+KG metadata discrepancy; `math.top.compactness` cross-link confirmed still unauthored via `ls`,
+independence mode used per the Blueprint's own correct self-report.
+
+`math.prob` gains its thirteenth entry this campaign, closing out the variance/SD sub-chain
+opened at Batch 123. `math.real`'s compactness entry directly extends the open-sets chain from
+Batch 125. Mathematics **645/908 → 647/908**, 261 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 647/908, 12
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum
+tests (curriculumKgRegistration, mathematicsAssetContract, mathPackageCorpus,
+masteryReachability, mathematicsBandContract, ebKnowledgeContract, ebKnowledgeDelivery): "Test
+Files 7 passed (7), Tests 561 passed (561)" — the corpus has grown since the "118 tests" figure
+recorded in earlier batch entries; this is the current accurate count for the same 7-file set,
+not a discrepancy. Full whole-repo suite not re-attempted this batch, consistent with the
+established precedent from Batches 109-110.
+
+Computed fresh frontier post-batch: `math.real.completeness-metric`/`math.real.connectedness`
+now reachable (require `open-sets`/`metric-space`, already authored). `math.fnal.convolution`/
+`math.opt.stochastic-gradient` still reachable. Numerous `math.prob` concepts (classical-
+probability, convergence-types, distribution, generating-function, law-of-unconscious, lln [now
+reachable — both `chebyshev` and `independence` prerequisites need checking], markov-chain,
+markov-inequality, moments, normal-distribution, poisson-process, quantile) — re-verify each
+`requires` fresh next batch, do not trust this list. Other ready concepts remain across
+`math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`, `math.num`, `math.stats`,
+`math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `dcf629f` on `main`, pushed directly.

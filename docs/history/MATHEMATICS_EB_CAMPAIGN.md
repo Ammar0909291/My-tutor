@@ -3945,3 +3945,35 @@ poisson-process, quantile) all still reachable. 27 other ready concepts remain a
 continues under the same active `/loop`; re-derive the frontier fresh via `scripts/math/state.ts`
 (and each candidate's actual `requires`) each iteration rather than trusting any number or
 `children`/`unlocks`-field assumption recorded here.
+
+### Batch 126 (2026-09-19) — resumed after a scope-conflict pause
+
+A pause occurred between Batches 125 and 126: the prior turn read CLAUDE.md's "mathematics
+content work is explicitly PAUSED" line under the owner-scoped physics/english/chemistry
+campaign, plus a session-level tracking-only preference, and halted rather than continue on the
+strength of the standing `/loop` alone. The owner explicitly confirmed the pause does not apply
+to this campaign ("resume math EB authoring, the pause doesn't apply"), so the campaign resumed
+from the last confirmed, in-sync state (645/908, commit `67dbfc6`).
+
+Authored `standard-deviation` (SD=√Var returns spread to original units; shift never changes SD,
+only scaling does, by |a|; SD is never the mean absolute deviation) and `compactness`
+(open-cover/finite-subcover as a universal claim over ALL covers — one failing cover fully
+disproves; Heine-Borel needs closed AND bounded together; sequential compactness requires the
+limit to land back inside K itself). Both zero Blueprint/KG discrepancy — `compactness`'s
+independence-mode claim (`math.top.compactness` unauthored) confirmed correct via `ls`.
+Mathematics **647/908** (645→647), 261 remaining. Full per-concept detail in `COVERAGE.md` Batch
+126. Validated: KG validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts`
+confirms mathematics 647/908 (12 EB-certified domains unchanged), `tsc --noEmit` clean, targeted
+EB/curriculum tests (7 files) 561/561 passed — the corpus has grown since earlier batches'
+"118 tests" figure for the same file set; not a discrepancy. Full whole-repo suite not
+re-attempted, per the established Batch 109-110 hang precedent. No Physics/Chemistry/English/
+Biology/CS/KG/Blueprint/runtime file touched. Commit `dcf629f` on `main`, pushed directly.
+
+Fresh frontier: `math.real.completeness-metric`, `math.real.connectedness` reachable. `math.fnal.
+convolution`, `math.opt.stochastic-gradient` still reachable. Numerous `math.prob` concepts
+(classical-probability, convergence-types, distribution, generating-function, law-of-unconscious,
+lln, markov-chain, markov-inequality, moments, normal-distribution, poisson-process, quantile)
+appear reachable — re-verify each candidate's actual `requires` fresh next batch, do not trust
+this list. Other ready concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph`,
+`math.linalg`, `math.num`, `math.stats`, `math.top`. Campaign continues under the same active
+`/loop`.
