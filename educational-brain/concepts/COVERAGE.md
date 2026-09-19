@@ -15503,3 +15503,45 @@ laplace-transform, bvp, pde) and other ready concepts across `math.linalg`,
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `a28d316` on `main`, pushed directly.
+
+## Batch 148 (2026-09-19)
+
+Authored `math.de.exact-ode` and `math.de.homogeneous-ode`, continuing the `math.de` domain.
+
+`exact-ode`: exactness as an EQUALITY test $\partial M/\partial y=\partial N/\partial x$ (never
+both required to equal zero), demonstrated via $(2xy+y^2)dx+(x^2+2xy)dy=0$'s nonzero-but-equal
+partials; the potential function $F$ found by successive integration, with the "constant" from
+integrating $M$ in $x$ shown to be a genuine ARBITRARY FUNCTION $g(y)$ requiring determination
+from $\partial F/\partial y=N$ (demonstrated via a $g'(y)=e^y$ case); and integrating factors
+$\mu(x)$/$\mu(y)$ for non-exact equations, with an explicit caveat that this simple form is NOT
+always guaranteed (a general $\mu(x,y)$ may require solving a PDE). 3 misconceptions independently
+classified by Blueprint-declared birth type — MC-1 EXACT-MEANS-BOTH-PARTIALS-EQUAL-ZERO (language
+contamination), MC-2 FORGETTING-THE-FUNCTION-OF-Y-IN-INTEGRATION (instruction-induced), MC-3
+INTEGRATING-FACTOR-ALWAYS-EXISTS-EASILY (overgeneralization). Zero Blueprint/KG discrepancy.
+
+`homogeneous-ode`: the homogeneous first-order structure $dy/dx=f(y/x)$ carefully DISAMBIGUATED
+from "homogeneous linear ODE" (zero right side) — the same word describing two genuinely
+different concepts, via the $dy/dx=(x+y)/x$ contrast; the substitution $y=vx$ requiring the
+PRODUCT RULE ($dy/dx=v+x\,dv/dx$, never just $dv/dx$), derived explicitly; and the shared-degree
+homogeneity test (M and N sharing ANY degree $n$, never required to be degree zero specifically),
+demonstrated via the degree-2 $(x^2+y^2)/(2xy)$ example solved to $x^2-y^2=Kx$. 3 misconceptions
+independently classified — MC-1 HOMOGENEOUS-MEANS-ZERO-RIGHT-SIDE (language contamination), MC-2
+FORGETTING-PRODUCT-RULE-IN-DY-DX (instruction-induced), MC-3 M-AND-N-MUST-HAVE-DEGREE-ZERO
+(overgeneralization). Zero Blueprint/KG discrepancy.
+
+Mathematics **689/908 → 691/908**, 217 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 691/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Fresh frontier to be recomputed at the start of Batch 149 per established discipline; remaining
+`math.de` concepts (bernoulli, slope-field, euler-method, second-order-linear, laplace-transform,
+bvp, pde) and other ready concepts across `math.linalg`, `math.prob.joint-distribution`,
+`math.stats`, `math.cx`, `math.top`, `math.fnal`, `math.num`, `math.opt`, `math.graph`, `math.cat`
+still reachable.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `4dde41f` on `main`, pushed directly.
