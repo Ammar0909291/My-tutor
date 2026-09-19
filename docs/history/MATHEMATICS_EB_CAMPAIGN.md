@@ -4059,3 +4059,27 @@ chain, markov-inequality, normal-distribution, poisson-process, quantile) appear
 re-verify each candidate's actual `requires` fresh next batch, do not trust this list. Other
 ready concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`,
 `math.num`, `math.stats`, `math.top`. Campaign continues under the same active `/loop`.
+
+### Batch 130 (2026-09-19) — clean cross-link verification, one live KG asymmetry noted
+
+Authored `markov-inequality` (P(X≥a)≤E[X]/a via a one-line proof from the definition of
+expectation; distribution-free; tight only at a two-point {0,a} distribution, contrasted against
+Poisson's much looser bound) and `continuity-rigorous` (ε-δ with δ produced after an arbitrary ε,
+never chosen first; the sequential criterion requiring every convergent sequence; "defined
+nearby" vs. "continuous" as separate claims via a seam-point counterexample). Both zero
+Blueprint/KG discrepancy. Noted (not a discrepancy): chebyshev's own `requires` doesn't list
+markov-inequality despite markov-inequality's KG-declared `unlocks: chebyshev` — a live KG
+asymmetry between two already-verified entries. `continuity-rigorous`'s cross-link
+(`math.calc.continuity`) was independently re-verified genuinely authored via `ls`, confirming
+the Blueprint's cross-link-probe mode correct as declared — a clean check after several
+wrong-corpus corrections in recent batches. Mathematics **655/908** (653→655), 253 remaining.
+Full per-concept detail in `COVERAGE.md` Batch 130. Validated: KG validator PASS (908/908
+reachable, file untouched), `scripts/math/state.ts` confirms mathematics 655/908 (12
+EB-certified domains unchanged), `tsc --noEmit` clean, targeted EB/curriculum tests (7 files)
+561/561 passed. Full whole-repo suite not re-attempted, per the established Batch 109-110 hang
+precedent. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Commit
+`5b81bfc` on `main`, pushed directly.
+
+Fresh frontier to be recomputed at the start of Batch 131 per established discipline;
+`math.real.extreme-value-theorem`/`math.real.ivt` now potentially reachable pending their other
+prerequisites. Campaign continues under the same active `/loop`.

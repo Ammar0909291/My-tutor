@@ -14612,3 +14612,52 @@ Other ready concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `52a4f83` on `main`, pushed directly.
+
+### Batch 130 (2026-09-19) — clean cross-link verification, one live KG asymmetry noted
+
+`math.prob.markov-inequality`: $P(X\ge a)\le E[X]/a$ for non-negative $X$, proven in one line
+directly from the definition of expectation; distribution-free applicability (identical bound
+regardless of shape, given only mean and threshold); tightness holding ONLY at a specific
+two-point $\{0,a\}$ distribution, contrasted against the Poisson(4) case where the bound (0.2) is
+enormously looser than the true value ($\approx0.0000084$). 3 misconceptions independently
+classified — MC-1 MARKOV-REQUIRES-SPECIFIC-DISTRIBUTION (instruction-induced), MC-2
+MARKOV-REQUIRES-X-SYMMETRIC (language contamination via unrelated Markov chains), MC-3
+MARKOV-BOUND-IS-TIGHT-FOR-ALL-DISTRIBUTIONS (overgeneralization). Zero Blueprint/KG metadata
+discrepancy; noted (not a discrepancy) that `math.prob.chebyshev`'s own `requires` field lists
+only `math.prob.variance`, not this concept, despite this concept's KG-declared `unlocks:
+math.prob.chebyshev` — a live KG unlocks/requires asymmetry between two already-verified entries.
+
+`math.real.continuity-rigorous`: the $\varepsilon$-$\delta$ definition with $\delta$ strictly
+PRODUCED after an arbitrary $\varepsilon$ is given (never chosen first), demonstrated via the
+backward-derivation proof for $f(x)=2x+1$ giving $\delta=\varepsilon/2$; the sequential criterion
+requiring EVERY convergent sequence (a step function's $x_n=1/n\to0$ alone revealing
+discontinuity); "defined nearby" versus "continuous" as genuinely separate claims, demonstrated
+via a piecewise function fully defined everywhere yet discontinuous at a seam due to disagreeing
+one-sided limits. 3 misconceptions independently classified — MC-1
+DELTA-CHOSEN-BEFORE-EPSILON (Foundational, "the single most common logical-order error across all
+of real analysis"), MC-2 ONE-SEQUENCE-CONFIRMS-SEQUENTIAL-CONTINUITY, MC-3
+DEFINED-NEARBY-MEANS-CONTINUOUS. Zero Blueprint/KG metadata discrepancy — this batch's cross-link
+check (`math.calc.continuity`) was independently RE-VERIFIED as genuinely authored via `ls`
+(unlike several wrong-corpus cases this campaign), confirming the Blueprint's own cross-link-probe
+P76 mode was correct as declared.
+
+`math.prob` gains its seventeenth entry this campaign, closing `expected-value`'s
+`markov-inequality` unlock. `math.real.continuity-rigorous` opens a new branch off the
+metric-space chain, with two of its own unlocks (`extreme-value-theorem`, `ivt`) now newly
+reachable pending their other prerequisites. Mathematics **653/908 → 655/908**, 253 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 655/908, 12
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Computed fresh frontier post-batch (not yet re-derived this entry — will be recomputed fresh at
+the start of Batch 131 per established discipline): prior batch's remaining candidates
+(`math.fnal.convolution`, `math.opt.stochastic-gradient`, numerous `math.prob` concepts, and
+concepts across `math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`, `math.num`,
+`math.stats`, `math.top`) remain to be re-verified, plus `math.real.extreme-value-theorem`/
+`math.real.ivt` now potentially reachable pending their other prerequisites.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `5b81bfc` on `main`, pushed directly.
