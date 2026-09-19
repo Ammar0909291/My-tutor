@@ -14082,3 +14082,64 @@ across `math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`, `math.num`
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `48a7795` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 120 (2026-09-19) — MILESTONE: math.meas reaches EB certification (13/13)
+
+Re-derived the frontier fresh (38 ready concepts). Selected `math.meas.radon-nikodym` (requires
+only `lebesgue-integral`, authored Batch 115 — the last remaining `math.meas` concept) and
+`math.prob.discrete-distributions` (requires `discrete-rv`/`pmf`, both authored). Authored both.
+
+`radon-nikodym` (requires `lebesgue-integral`, unlocks none, cross_links `math.prob.conditional-
+probability` — **confirmed AUTHORED via `ls`, a genuine cross-link probe, this campaign's fifth
+such case after Batches 101, 108, 111, 118**): a density function AS a Radon-Nikodym derivative
+(the standard normal density identified directly as $d\nu/d\mu$), never a separate idea; absolute
+continuity as an essential, checkable hypothesis whose failure genuinely blocks existence (point
+mass at 0 against Lebesgue measure — no derivative can reproduce it, since integrals over null
+sets are always 0); and general conditional expectation built DIRECTLY on this theorem, with
+`math.prob.conditional-probability`'s elementary formula recovered as its simplest special case. 3
+misconceptions independently classified — MC-1 DENSITY-FUNCTION-ASSUMED-UNRELATED-TO-RN-DERIVATIVE
+(overgeneralization, Foundational), MC-2 RN-DERIVATIVE-ASSUMED-TO-ALWAYS-EXIST
+(overgeneralization, High), MC-3 CONDITIONAL-EXPECTATION-ASSUMED-UNRELATED-TO-RN-THEOREM
+(instruction-induced, Moderate). Zero Blueprint/KG metadata discrepancy — the Blueprint's own
+cross-link claim checked out correct on first verification.
+
+`discrete-distributions` (requires `discrete-rv`/`pmf`, unlocks none, cross_links none): the six
+named discrete families (Bernoulli, Binomial, Geometric, Negative Binomial, Poisson,
+Hypergeometric) with PMF/mean/variance and family relationships (Binomial as a sum of Bernoullis;
+Geometric as Negative Binomial's $r=1$ case; Poisson as a Binomial limit); the two genuinely
+different Geometric conventions (trials-until-success vs. failures-before-success, means $1/p$
+vs. $(1-p)/p$); Poisson as a PRIMARY rate-based model, never merely a Binomial-large-$n$-small-$p$
+approximation; and Hypergeometric's finite-population correction factor, genuinely shrinking the
+variance below Binomial's fixed-$p$ estimate. 3 misconceptions independently classified — MC-1
+GEOMETRIC-COUNTS-FAILURES-OR-TRIALS (instruction-induced), MC-2
+POISSON-REQUIRES-LARGE-N-SMALL-P (instruction-induced), MC-3
+HYPERGEOMETRIC-IS-BINOMIAL-WITHOUT-REPLACEMENT (overgeneralization). Zero Blueprint/KG metadata
+discrepancy.
+
+**`math.meas` reaches 13/13 — EB-CERTIFIED**, the 12th EB-certified domain this campaign (after
+math.found, math.calc, math.geom, math.alg, math.arith, math.abst, math.nt, math.disc, math.func,
+math.trig, math.seq). The full measure-theory chain (sigma-algebra → measure → measurable-
+function → simple-function → lebesgue-integral → lebesgue-measure → measure-zero → convergence-
+theorems → product-measure → lp-space → l2-space → abstract-measure-spaces → radon-nikodym) was
+authored across Batches 108-120, with 8 genuine Blueprint/KG discrepancies caught and corrected
+along the way (Batches 108-111, 115-117, 119).
+
+`math.prob` gains its seventh entry this campaign. Mathematics **633/908 → 635/908**, 273
+remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.meas` 13/13,
+mathematics 635/908, **12 EB-certified domains** (up from 11). `npx tsc --noEmit` → clean (exit
+0). Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 118 passed (118)". Full
+whole-repo suite not re-attempted this batch, consistent with the established precedent from
+Batches 109-110.
+
+Computed fresh frontier post-batch: `math.fnal.convolution` still reachable. `math.prob.
+continuous-distributions`/`math.prob.convergence-types`/`math.prob.distribution`/`math.prob.
+expected-value`/`math.prob.generating-function`/`math.prob.quantile` all reachable. `math.real.
+pointwise-convergence`/`math.real.series-rigorous` still reachable. 27 other ready concepts remain
+across `math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`, `math.num`, `math.stats`,
+`math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `252b100` on `main`, pushed directly, continuing under the same active `/loop`.

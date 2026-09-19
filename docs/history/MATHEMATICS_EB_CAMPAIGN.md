@@ -3791,3 +3791,33 @@ generating-function`, `math.prob.quantile` all reachable. `math.real.pointwise-c
 continues under the same active `/loop`; re-derive the frontier fresh via `scripts/math/state.ts`
 (and each candidate's actual `requires`) each iteration rather than trusting any number or
 `children`/`unlocks`-field assumption recorded here.
+
+### Batch 120 (2026-09-19) — MILESTONE: math.meas reaches EB certification (13/13)
+
+Authored `radon-nikodym` (density functions ARE Radon-Nikodym derivatives; absolute continuity as
+an essential, checkable hypothesis; general conditional expectation built on this theorem, with
+the elementary formula as its special case) and `discrete-distributions` (the six named discrete
+families with PMF/mean/variance and relationships; the two Geometric conventions; Poisson as
+primary, never merely a Binomial approximation; Hypergeometric's finite-population correction).
+`radon-nikodym`'s cross-link to `math.prob.conditional-probability` was VERIFIED TRUE via `ls` —
+correctly claimed, this campaign's fifth genuine cross-link (after Batches 101, 108, 111, 118).
+**`math.meas` reaches 13/13 — EB-CERTIFIED**, the 12th certified domain this campaign. The full
+measure-theory chain (sigma-algebra → measure → measurable-function → simple-function →
+lebesgue-integral → lebesgue-measure → measure-zero → convergence-theorems → product-measure →
+lp-space → l2-space → abstract-measure-spaces → radon-nikodym) was authored across Batches
+108-120, with 8 genuine Blueprint/KG discrepancies caught along the way. Mathematics **635/908**
+(633→635), 273 remaining. Full per-concept detail in `COVERAGE.md` Batch 120. Validated: KG
+validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts` confirms math.meas
+13/13, mathematics 635/908, 12 EB-certified domains (up from 11), `tsc --noEmit` clean, targeted
+EB/curriculum tests 118/118 passed. Full whole-repo suite not re-attempted, per the established
+Batch 109-110 hang precedent. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file
+touched. Commit `252b100` on `main`, pushed directly.
+
+Fresh frontier: `math.fnal.convolution` still reachable. `math.prob.continuous-distributions`,
+`math.prob.convergence-types`, `math.prob.distribution`, `math.prob.expected-value`, `math.prob.
+generating-function`, `math.prob.quantile` all reachable. `math.real.pointwise-convergence`,
+`math.real.series-rigorous` still reachable. 27 other ready concepts remain across `math.cat`,
+`math.cx`, `math.de`, `math.graph`, `math.linalg`, `math.num`, `math.stats`, `math.top`. Campaign
+continues under the same active `/loop`; re-derive the frontier fresh via `scripts/math/state.ts`
+(and each candidate's actual `requires`) each iteration rather than trusting any number or
+`children`/`unlocks`-field assumption recorded here.
