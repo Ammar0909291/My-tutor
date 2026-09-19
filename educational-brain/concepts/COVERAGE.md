@@ -16259,3 +16259,59 @@ currently-reachable set), plus `math.cat.category`, `math.cx.complex-numbers-ana
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `9bbc4d8` on `main`, pushed directly.
+
+## Batch 165 (2026-09-19)
+
+`fourier-transform`: the transform identified as the Fourier series' continuous-frequency
+$L\to\infty$ limit (never an unrelated tool), demonstrated via the discrete-spikes-merging-into-
+a-continuum argument; convergence requiring genuine decay (never automatic for every function),
+demonstrated via the $e^{-|t|}$-converges-versus-constant-function-diverges contrast; and the
+differentiation-becomes-multiplication-by-$i\omega$ property as the transform's central practical
+power (never a mere computational curiosity), demonstrated via the full integration-by-parts
+derivation and the $f''-f=g$ ODE-to-algebra transformation. 3 misconceptions independently
+classified by Blueprint-declared severity — MC-1 FOURIER-TRANSFORM-AS-UNRELATED-TOOL
+(Foundational), MC-2 TRANSFORM-CONVERGENCE-ASSUMED-UNIVERSAL (Foundational), MC-3
+DIFFERENTIATION-PROPERTY-TREATED-AS-CURIOSITY (Moderate). Reverse-direction cross-link
+discrepancy found: the Blueprint's own Component 7 correctly found `math.meas.l2-space`
+unauthored AT BLUEPRINT-WRITE-TIME, but the EDUCATIONAL-BRAIN corpus has SINCE authored it (the
+`math.meas` domain reached EB certification during this campaign) — upgraded to a genuine
+cross-link probe here, the third such reverse-direction discrepancy this campaign (after the
+pre-segment Batch 131, and this segment's Batch 152 `math.linalg.characteristic-polynomial` and
+Batch 156 `math.calc.taylor-series`). `math.fnal.fourier-transform` independently re-confirmed
+still unauthored, correctly remaining independence mode. All other KG fields matched exactly.
+
+`separation-of-variables-pde`: the shared-separation-constant step justified by the independence
+of $x$ and $t$ (never an arbitrary assumption), demonstrated via the full $u_t=u_{xx}$ algebraic
+derivation; the $X$-equation as a genuine `math.de.bvp` eigenvalue problem where MOST $\lambda$
+give only the trivial solution, demonstrated via the full case analysis deriving $\lambda_n=n^2$;
+and a single separated solution as rarely sufficient (never assumed to solve the full problem),
+demonstrated via the $3\sin(2x)-\sin(5x)$ initial-condition example where a single term
+demonstrably fails and the correct two-mode, differently-decaying superposition is required. 3
+misconceptions independently classified by Blueprint-declared severity — MC-1
+SINGLE-SEPARATED-SOLUTION-ASSUMED-SUFFICIENT (Foundational), MC-2
+SEPARATION-CONSTANT-SIGN-OR-VALUE-MISHANDLED (Foundational), MC-3
+DECAY-RATES-ASSUMED-EQUAL-ACROSS-MODES (Moderate). Zero Blueprint/KG discrepancy; this entry
+synthesizes all three of its prerequisites (`math.de.pde`, `math.de.bvp`,
+`math.de.fourier-series`) and closes `math.de`'s currently-reachable frontier alongside
+`math.de.bifurcation`.
+
+Mathematics **723/908 → 725/908**, 183 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 725/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)".
+
+Fresh frontier recomputed for Batch 166 (26 concepts): `math.de.bifurcation`,
+`math.de.heat-equation`, `math.de.laplace-equation`, `math.de.wave-equation` (the three canonical
+PDEs newly reachable via `separation-of-variables-pde`'s unlocking, completing `math.de`'s
+currently-reachable set), plus `math.cat.category`, `math.cx.complex-numbers-analysis`,
+`math.fnal.convolution`, `math.fnal.normed-space`, `math.graph.random-graph`,
+`math.linalg.basis`/`diagonalization`/`dual-space`/`inner-product-space`/`kernel-image`/
+`projection`/`tensor`, `math.num.floating-point`/`interpolation`/`root-finding`,
+`math.opt.stochastic-gradient`, `math.prob.characteristic-function`/`joint-distribution`,
+`math.stats.normal-distribution`/`percentile`/`sampling-distribution`,
+`math.top.topological-space`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `9bca692` on `main`, pushed directly.

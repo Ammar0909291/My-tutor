@@ -4857,3 +4857,34 @@ diagonalization/dual-space/inner-product-space/kernel-image/projection/tensor,
 math.num.floating-point/interpolation/root-finding, math.opt.stochastic-gradient,
 math.prob.joint-distribution, math.stats.normal-distribution/percentile/sampling-distribution,
 math.top.topological-space. Campaign continues under the same active `/loop`.
+
+### Batch 165 (2026-09-19) — third reverse-direction correction
+
+Authored `fourier-transform` (the transform as the Fourier series' continuous-frequency limit;
+convergence requiring genuine decay; differentiation-becomes-multiplication as the central
+practical power) and `separation-of-variables-pde` (the shared-separation-constant logic from
+independence of x,t; the X-equation as a genuine bvp eigenvalue problem; a single separated
+solution rarely sufficient, requiring the full Fourier-series superposition).
+`fourier-transform` had a reverse-direction cross-link correction (math.meas.l2-space, correctly
+unauthored at the Blueprint's own write-time but since authored — third this campaign, after the
+pre-segment Batch 131 and this segment's Batches 152/156); `math.fnal.fourier-transform`
+confirmed still unauthored, correctly independence mode. `separation-of-variables-pde` had zero
+discrepancy and synthesizes all three of its prerequisites, closing math.de's previously-reachable
+frontier alongside math.de.bifurcation. Mathematics **725/908** (723→725), 183 remaining. Full
+per-concept detail in `COVERAGE.md` Batch 165. Validated: KG validator PASS (908/908 reachable,
+file untouched), `scripts/math/state.ts` confirms mathematics 725/908 (13 EB-certified domains
+unchanged), `tsc --noEmit` clean, targeted EB/curriculum tests (7 files) 561/561 passed. Full
+whole-repo suite not re-attempted, per the established Batch 109-110 hang precedent. No Physics/
+Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Commit `9bca692` on `main`, pushed
+directly.
+
+Fresh frontier recomputed for Batch 166 (26 concepts): math.de.bifurcation,
+math.de.heat-equation, math.de.laplace-equation, math.de.wave-equation (the three canonical PDEs
+newly reachable via separation-of-variables-pde's unlocking, completing math.de's
+currently-reachable set), plus math.cat.category, math.cx.complex-numbers-analysis,
+math.fnal.convolution, math.fnal.normed-space, math.graph.random-graph, math.linalg.basis/
+diagonalization/dual-space/inner-product-space/kernel-image/projection/tensor,
+math.num.floating-point/interpolation/root-finding, math.opt.stochastic-gradient,
+math.prob.characteristic-function/joint-distribution,
+math.stats.normal-distribution/percentile/sampling-distribution, math.top.topological-space.
+Campaign continues under the same active `/loop`.
