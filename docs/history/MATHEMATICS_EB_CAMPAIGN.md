@@ -5847,3 +5847,22 @@ qr-algorithm/splines, math.opt.semidefinite-programming, math.prob.conditional-e
 correlation/marginal-distribution, math.stats.anova/bias-variance/chi-squared-test/ci-mean/
 ci-proportion/consistency/covariance-matrix/method-of-moments/mle/nonparametric/
 sufficient-statistic. Campaign continues under the same active `/loop`.
+
+## Batch 206 (2026-09-19)
+
+Authored `mle` (log first, never the raw product; setting score to zero and solving is the
+finish line, never the derivative alone; consistent, asymptotically normal, asymptotically
+efficient) and `sufficient-statistic` (θ drops out of the leftover conditional distribution,
+never about estimator accuracy; factorization is a shortcut, never the only test; sufficiency
+enables genuine estimator improvement, never just a label). Both zero discrepancy. Mathematics
+**807/908** (805→807), 101 remaining. Full detail in `COVERAGE.md` Batch 206. Validated: KG PASS,
+state.ts 807/908, tsc clean, tests 561/561. Commit `17ca302`, pushed.
+
+Fresh frontier for Batch 207 (29 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
+qr-algorithm/splines, math.opt.semidefinite-programming, math.prob.conditional-expectation/
+correlation/marginal-distribution, math.stats.anova/bayesian-inference/bias-variance/
+chi-squared-test/ci-mean/ci-proportion/consistency/covariance-matrix/method-of-moments/
+nonparametric. Campaign continues under the same active `/loop`.

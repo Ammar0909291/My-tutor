@@ -17858,3 +17858,25 @@ qr-algorithm/splines, math.opt.semidefinite-programming, math.prob.conditional-e
 correlation/marginal-distribution, math.stats.anova/bias-variance/chi-squared-test/ci-mean/
 ci-proportion/consistency/covariance-matrix/method-of-moments/mle/nonparametric/
 sufficient-statistic.
+
+## Batch 206 (2026-09-19) — zero discrepancy
+
+Authored `math.stats.mle` (take the log first, never differentiate the raw product-form
+likelihood directly; finding the MLE requires setting the score to zero and solving, never
+stopping at the derivative expression; MLE carries consistency, asymptotic normality, and
+asymptotic efficiency) and `math.stats.sufficient-statistic` (sufficiency means θ drops out of
+the leftover conditional distribution, never a claim about estimator accuracy; the factorization
+criterion verifies sufficiency without computing the conditional distribution, never the only
+test; sufficiency has genuine practical consequence — estimator improvement — never merely a
+theoretical label). Both zero discrepancy. Mathematics **805/908 → 807/908**, 101 remaining.
+Validated: KG PASS (908/908 reachable), state.ts confirms 807/908, tsc clean, tests 561/561.
+Commit `17ca302`, pushed.
+
+Fresh frontier for Batch 207 (29 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
+qr-algorithm/splines, math.opt.semidefinite-programming, math.prob.conditional-expectation/
+correlation/marginal-distribution, math.stats.anova/bayesian-inference/bias-variance/
+chi-squared-test/ci-mean/ci-proportion/consistency/covariance-matrix/method-of-moments/
+nonparametric.
