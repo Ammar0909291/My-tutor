@@ -4680,3 +4680,26 @@ Fresh frontier to be recomputed at the start of Batch 157 per established discip
 math.de concepts (bvp, pde, nonlinear-ode) and other ready concepts across math.linalg,
 math.prob.joint-distribution, math.stats, math.cx, math.top, math.fnal, math.num, math.opt,
 math.graph, math.cat still reachable. Campaign continues under the same active `/loop`.
+
+### Batch 157 (2026-09-19) — wrong-corpus cross-link correction
+
+Authored `laplace-properties` (linearity as ordinary integral linearity; the first shifting
+theorem's direct s→s−a substitution; the second shifting theorem's multiplicative outcome
+distinguished from the first's argument shift) and `convolution-theorem` (Laplace convolution's
+[0,t] limits from causality; the Convolution Theorem verified independently; its primary practical
+use as inverse-transform recovery). Both zero Blueprint/KG discrepancy on requires/unlocks/
+metadata. `convolution-theorem`'s declared cross-link `math.fnal.convolution` was claimed
+"confirmed already authored" by checking the wrong corpus (blueprints dir instead of the EB
+corpus) — corrected to independence mode; the first wrong-corpus discrepancy since Batches 128-129.
+Mathematics **709/908** (707→709), 199 remaining. Full per-concept detail in `COVERAGE.md` Batch
+157. Validated: KG validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts`
+confirms mathematics 709/908 (13 EB-certified domains unchanged), `tsc --noEmit` clean, targeted
+EB/curriculum tests (7 files) 561/561 passed. Full whole-repo suite not re-attempted, per the
+established Batch 109-110 hang precedent. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/
+runtime file touched. Commit `2072cc9` on `main`, pushed directly.
+
+Fresh frontier to be recomputed at the start of Batch 158 per established discipline; remaining
+math.de concepts (frobenius-method, legendre-equation, bvp, pde, nonlinear-ode) and other ready
+concepts across math.linalg, math.prob.joint-distribution, math.stats, math.cx, math.top,
+math.fnal, math.num, math.opt, math.graph, math.cat still reachable. Campaign continues under the
+same active `/loop`.

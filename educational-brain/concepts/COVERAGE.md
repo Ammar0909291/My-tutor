@@ -15895,3 +15895,49 @@ Fresh frontier to be recomputed at the start of Batch 157 per established discip
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `17a3c1e` on `main`, pushed directly.
+
+## Batch 157 (2026-09-19) — wrong-corpus cross-link correction
+
+Authored `math.de.laplace-properties` and `math.de.convolution-theorem`, continuing the `math.de`
+domain.
+
+`laplace-properties`: LINEARITY as ordinary integral linearity (never a special Laplace-specific
+rule), demonstrated via direct combination of known transforms; the FIRST shifting theorem's
+direct $s\to s-a$ SUBSTITUTION (never requiring a new integral), demonstrated via
+$\mathcal{L}\{e^{3t}\cos(2t)\}$; and the SECOND shifting theorem's MULTIPLICATIVE outcome, sharply
+contrasted with the first theorem's ARGUMENT-shift outcome (never conflated), demonstrated via
+$F(s-3)$ versus $e^{-2s}F(s)$. 3 misconceptions independently classified by Blueprint-declared
+severity — MC-1 LINEARITY-ASSUMED-TO-REQUIRE-RE-DERIVATION (Foundational), MC-2 FIRST-SHIFTING-
+THEOREM-ASSUMED-TO-NEED-NEW-INTEGRAL (High), MC-3 SHIFTING-THEOREMS-CONFLATED (High). Zero
+Blueprint/KG discrepancy.
+
+`convolution-theorem`: the Laplace convolution's $[0,t]$ limits shown to follow DIRECTLY from
+causality applied to the general convolution definition (never a separately-invented convention);
+the Convolution Theorem $\mathcal{L}\{f*g\}=FG$ VERIFIED (never merely cited) via independent
+both-sides computation for $f=e^t,g=e^{2t}$; and the theorem's primary practical use recognized as
+INVERSE (recovering $\mathcal{L}^{-1}$ of a product by recognizing known transforms and
+convolving, bypassing partial fractions — never treated as merely a forward-direction tool). 3
+misconceptions independently classified by Blueprint-declared severity — MC-1 LAPLACE-
+CONVOLUTION-ASSUMED-SEPARATELY-DEFINED (Foundational), MC-2 CONVOLUTION-THEOREM-UNVERIFIED (High),
+MC-3 CONVOLUTION-THEOREM-USE-DIRECTION-REVERSED (Moderate). **Wrong-corpus cross-link correction**:
+the Blueprint's own Component 7 claimed `math.fnal.convolution` "confirmed ALREADY authored,"
+checked via `ls docs/curriculum/blueprints/` — but that checks the BLUEPRINTS directory, where its
+Blueprint does exist, never the EDUCATIONAL-BRAIN corpus, where it does NOT yet exist — corrected
+to independence mode here, this campaign's first wrong-corpus discrepancy since Batches 128-129
+early in the `math.real` sub-campaign.
+
+Mathematics **707/908 → 709/908**, 199 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 709/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Fresh frontier to be recomputed at the start of Batch 158 per established discipline; remaining
+`math.de` concepts (frobenius-method, legendre-equation, bvp, pde, nonlinear-ode) and other ready
+concepts across `math.linalg`, `math.prob.joint-distribution`, `math.stats`, `math.cx`,
+`math.top`, `math.fnal`, `math.num`, `math.opt`, `math.graph`, `math.cat` still reachable.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `2072cc9` on `main`, pushed directly.
