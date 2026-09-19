@@ -16206,3 +16206,56 @@ ready concepts across `math.linalg`, `math.prob.joint-distribution`, `math.stats
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `d6e710f` on `main`, pushed directly.
+
+## Batch 164 (2026-09-19)
+
+`fourier-convergence`: Fourier series convergence identified as the SAME partial-sum question
+`math.seq.series-convergence` already asks (never a new concept), demonstrated via the direct
+identification of $S_N(x)$ as an ordinary partial sum evaluated at a fixed $x$; Dirichlet's theorem
+stated precisely — convergence to the AVERAGE of the two one-sided limits at a jump (never either
+limit alone), demonstrated via the square wave's convergence to $0$ at $x=0$ (the average of $\pm1$);
+and the Gibbs phenomenon's ~9% overshoot as a PERMANENT signature of the jump (migrating in
+location, never shrinking in height as $N\to\infty$), demonstrated via the persistent overshoot
+across increasing $N$. 3 misconceptions independently classified by Blueprint-declared severity —
+MC-1 FOURIER-CONVERGENCE-ASSUMED-NEW-CONCEPT (Foundational), MC-2
+JUMP-VALUE-ASSUMED-TO-MATCH-ONE-SIDE (High), MC-3
+GIBBS-OVERSHOOT-ASSUMED-TO-SHRINK-WITH-MORE-TERMS (Moderate). Zero Blueprint/KG metadata
+discrepancy; the Blueprint's own Component 7 claim that `math.real.pointwise-convergence` was
+"confirmed authored earlier in this same batch" was independently re-checked against the EB CORPUS
+directory (`educational-brain/concepts/mathematics/`, never the blueprints directory) and confirmed
+genuinely authored — the claim holds up this time, unlike the five prior wrong-corpus discrepancies
+this campaign has caught (Batches 128-129, 157, 160, 161, 162).
+
+`fourier-sine-cosine`: the half-range coefficient factor identified as $2/L$ (never the full-range
+$1/L$, because integration happens over only half the interval), demonstrated via the direct
+coefficient-comparison table; the boundary-condition-to-series matching rule — sine's zero VALUE at
+endpoints matches Dirichlet BCs, cosine's zero DERIVATIVE at endpoints matches Neumann BCs, read
+from the PDE FIRST rather than guessed — demonstrated via the heat equation solved both ways
+(Dirichlet → FSS with $b_n(t)=b_n(0)e^{-k(n\pi/L)^2t}$; Neumann → FCS with $a_0$ conserved,
+representing total heat conservation under insulation); and $a_0$ recognized as capable of
+genuinely vanishing (never assumed automatically nonzero, since it is twice $f$'s average value),
+demonstrated via the direct $a_0=0$ computation for $f(x)=\cos(\pi x)$ on $[0,1]$. 3 misconceptions
+independently classified by Blueprint-declared birth type — MC-1
+FULL-FOURIER-FORMULA-USED-ON-HALF-INTERVAL (instruction-induced), MC-2
+SINE-SERIES-FOR-ZERO-DERIVATIVE-BC (language contamination), MC-3
+COSINE-SERIES-ALWAYS-HAS-NONZERO-AVERAGE (overgeneralization). Zero Blueprint/KG discrepancy.
+
+Mathematics **721/908 → 723/908**, 185 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 723/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)".
+
+Fresh frontier recomputed for Batch 165 (24 concepts): `math.de.bifurcation`,
+`math.de.fourier-transform`, `math.de.separation-of-variables-pde` (completing `math.de`'s
+currently-reachable set), plus `math.cat.category`, `math.cx.complex-numbers-analysis`,
+`math.fnal.convolution`, `math.fnal.normed-space`, `math.graph.random-graph`,
+`math.linalg.basis`/`diagonalization`/`dual-space`/`inner-product-space`/`kernel-image`/
+`projection`/`tensor`, `math.num.floating-point`/`interpolation`/`root-finding`,
+`math.opt.stochastic-gradient`, `math.prob.joint-distribution`,
+`math.stats.normal-distribution`/`percentile`/`sampling-distribution`,
+`math.top.topological-space`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `9bbc4d8` on `main`, pushed directly.

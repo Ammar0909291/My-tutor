@@ -4830,3 +4830,30 @@ math.de concepts (bifurcation, and others newly reachable via fourier-series' un
 ready concepts across math.linalg, math.prob.joint-distribution, math.stats, math.cx, math.top,
 math.fnal, math.num, math.opt, math.graph, math.cat still reachable. Campaign continues under the
 same active `/loop`.
+
+### Batch 164 (2026-09-19)
+
+Authored `fourier-convergence` (Fourier convergence as the same partial-sum question already
+asked for any series; Dirichlet's theorem's jump-average rule; the Gibbs phenomenon's permanent
+~9% overshoot, migrating but never shrinking) and `fourier-sine-cosine` (the half-range 2/L
+factor vs. the full-range 1/L; the BC-to-series matching rule — sine↔Dirichlet, cosine↔Neumann;
+a₀'s genuine capacity to vanish). `fourier-convergence`'s Blueprint claimed
+`math.real.pointwise-convergence` was already authored; this was independently re-checked against
+the EB corpus (not the blueprints directory, per the established discipline that has caught five
+wrong-corpus discrepancies so far) and confirmed genuinely authored this time — no discrepancy.
+Both concepts zero Blueprint/KG metadata discrepancy. Mathematics **723/908** (721→723), 185
+remaining. Full per-concept detail in `COVERAGE.md` Batch 164. Validated: KG validator PASS
+(908/908 reachable, file untouched), `scripts/math/state.ts` confirms mathematics 723/908 (13
+EB-certified domains unchanged), `tsc --noEmit` clean, targeted EB/curriculum tests (7 files)
+561/561 passed. Full whole-repo suite not re-attempted, per the established Batch 109-110 hang
+precedent. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Commit
+`9bbc4d8` on `main`, pushed directly.
+
+Fresh frontier recomputed for Batch 165 (24 concepts): math.de.bifurcation,
+math.de.fourier-transform, math.de.separation-of-variables-pde (completing math.de's
+currently-reachable set), plus math.cat.category, math.cx.complex-numbers-analysis,
+math.fnal.convolution, math.fnal.normed-space, math.graph.random-graph, math.linalg.basis/
+diagonalization/dual-space/inner-product-space/kernel-image/projection/tensor,
+math.num.floating-point/interpolation/root-finding, math.opt.stochastic-gradient,
+math.prob.joint-distribution, math.stats.normal-distribution/percentile/sampling-distribution,
+math.top.topological-space. Campaign continues under the same active `/loop`.
