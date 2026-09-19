@@ -3684,3 +3684,30 @@ convergence`, `math.real.series-rigorous` still reachable. 28 other ready concep
 `math.stats`, `math.top`. Campaign continues under the same active `/loop`; re-derive the frontier
 fresh via `scripts/math/state.ts` (and each candidate's actual `requires`) each iteration rather
 than trusting any number or `children`/`unlocks`-field assumption recorded here.
+
+### Batch 116 (2026-09-19) — ninth discrepancy, plus a separate stale-metadata mismatch
+
+Authored `convergence-theorems` (MCT as a specific sufficient condition, never automatic; Fatou's
+Lemma inequality-only, shown strict via the escaping spike sequence; DCT's domination fixing the
+leak; MCT→Fatou→DCT as one dependency chain) and `cdf` (accumulation definition forcing
+non-decrease; discrete-sum vs. continuous-integral, same formula; strict-vs-non-strict endpoint
+subtlety, atom-dependent). `convergence-theorems`'s Blueprint claimed `math.real.uniform-
+convergence` verified authored, but `ls` found no such EB entry — NINTH discrepancy this campaign
+(same wrong-corpus pattern as Batches 107, 111, 115), corrected to independence mode. The SAME
+Blueprint also carried stale metadata (0.6/8h vs. the KG's 0.85/7h) — a distinct discrepancy type,
+resolved by using the live KG's values. `math.meas` **9/13** (8→9). Mathematics **627/908**
+(625→627), 281 remaining. Full per-concept detail in `COVERAGE.md` Batch 116. Validated: KG
+validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts` confirms math.meas
+9/13, mathematics 627/908 (11 EB-certified domains unchanged), `tsc --noEmit` clean, targeted
+EB/curriculum tests 118/118 passed. Full whole-repo suite not re-attempted, per the established
+Batch 109-110 hang precedent. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file
+touched. Commit `0e6e8a7` on `main`, pushed directly.
+
+Fresh frontier: `math.meas.lp-space`, `math.meas.product-measure`, `math.meas.radon-nikodym`,
+`math.fnal.convolution` all reachable. `math.prob.continuous-rv`, `math.prob.convergence-types`,
+`math.prob.pmf` reachable. `math.real.pointwise-convergence`, `math.real.series-rigorous` still
+reachable. 27 other ready concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph`,
+`math.linalg`, `math.num`, `math.stats`, `math.top`. Campaign continues under the same active
+`/loop`; re-derive the frontier fresh via `scripts/math/state.ts` (and each candidate's actual
+`requires`) each iteration rather than trusting any number or `children`/`unlocks`-field
+assumption recorded here.

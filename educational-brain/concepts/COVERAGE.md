@@ -13853,3 +13853,63 @@ convergence`/`math.real.series-rigorous` still reachable. 28 other ready concept
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `b3b2135` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 116 (2026-09-19) — ninth discrepancy, plus a separate stale-metadata mismatch
+
+Re-derived the frontier fresh (38 ready concepts). Selected `math.meas.convergence-theorems`
+(requires only `lebesgue-integral`, authored Batch 115) and `math.prob.cdf` (requires only
+`random-variable`, authored Batch 113). Authored both.
+
+`convergence-theorems` (requires `lebesgue-integral`, unlocks none, cross_links `math.real.
+uniform-convergence`): MCT as a specific sufficient condition for the $\lim$-$\int$ interchange
+(never automatic), verified on $f_n=\min(x,n)\uparrow x$; Fatou's Lemma as inequality-only,
+demonstrated STRICT via the classic escaping spike $n\cdot\mathbb1_{(0,1/n)}$ (integral 1 for
+every $n$, but $\int\liminf f_n=0$), which also fails DCT's domination; and MCT→Fatou→DCT as one
+dependency chain (Fatou derived from MCT via $g_k=\inf_{n\ge k}f_n$, DCT from Fatou via
+$g\pm f_n$), never three independent facts. 3 misconceptions independently classified — MC-1
+LIM-INT-INTERCHANGE-ASSUMED-AUTOMATIC (overgeneralization, Foundational), MC-2
+FATOU-ASSUMED-EQUALITY (overgeneralization, High), MC-3 THREE-THEOREMS-ASSUMED-INDEPENDENT
+(instruction-induced, Moderate).
+
+`cdf` (requires `random-variable`, unlocks `quantile`, cross_links none): the accumulation
+definition $F(x)=P(X\le x)$ forcing non-decrease and right-continuity; discrete summation versus
+continuous integration as the same formula with different machinery; and the strict-versus-
+non-strict endpoint subtlety, appearing only where $X$ carries an atom (coin-flip: $P(X<1)=1/2\ne
+F(1)=1$; continuous uniform: $P(X<1.5)=P(X\le1.5)$, equal). 3 misconceptions independently
+classified — MC-1 STRICT-AND-NONSTRICT-INEQUALITY-CONFLATED (language contamination,
+Foundational), MC-2 CDF-COMPUTATION-METHOD-MISMATCHED-TO-RV-TYPE (instruction-induced,
+Foundational), MC-3 CDF-ASSUMED-NON-DECREASING-VIOLATION-POSSIBLE (perceptual, Moderate). Zero
+Blueprint/KG metadata discrepancy.
+
+**Blueprint/P76-mode discrepancy found and corrected (NINTH occurrence this campaign)**:
+`convergence-theorems`'s Blueprint claimed `math.real.uniform-convergence` was "checked via `ls
+docs/curriculum/blueprints/` and confirmed ALREADY authored," setting cross-link-probe mode.
+Verified via `ls educational-brain/concepts/mathematics/` that `math.real.uniform-convergence` has
+NO authored EB entry — the same wrong-corpus pattern as Batches 107, 111, 115. Corrected to
+independence mode.
+
+**Separate Blueprint/KG metadata discrepancy found (stale metadata, distinct from the P76
+issue)**: the same Blueprint's Component 0 states `mastery_threshold=0.6` (MAMR 3/5) and
+`estimated_hours=8`, but the live KG states `mastery_threshold=0.85` (MAMR 5/5) and
+`estimated_hours=7`. Used the live KG's values throughout, per this campaign's standing
+KG-is-canonical-authority discipline.
+
+`math.meas` **8/13 → 9/13**. `math.prob` gains its third entry this campaign. Mathematics
+**625/908 → 627/908**, 281 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.meas` 9/13,
+mathematics 627/908, 11 EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0).
+Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 118 passed (118)". Full whole-repo
+suite not re-attempted this batch, consistent with the established precedent from Batches
+109-110.
+
+Computed fresh frontier post-batch: `math.meas.lp-space`/`math.meas.product-measure`/`math.meas.
+radon-nikodym` all reachable (require `lebesgue-integral`, now authored). `math.fnal.convolution`
+reachable (requires `lebesgue-integral`). `math.prob.continuous-rv`/`math.prob.convergence-types`/
+`math.prob.pmf` all reachable. `math.real.pointwise-convergence`/`math.real.series-rigorous` still
+reachable. 27 other ready concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph`,
+`math.linalg`, `math.num`, `math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `0e6e8a7` on `main`, pushed directly, continuing under the same active `/loop`.
