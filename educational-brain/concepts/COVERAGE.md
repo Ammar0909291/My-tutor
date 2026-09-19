@@ -14348,3 +14348,50 @@ still reachable. 27 other ready concepts remain across `math.cat`, `math.cx`, `m
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `5186e8c` on `main`, pushed directly.
+
+### Batch 125 (2026-09-19)
+
+Re-derived the frontier fresh (42 ready concepts). Selected `math.prob.chebyshev` (requires only
+`variance`, authored Batch 123) and `math.real.open-sets` (requires only `metric-space`, authored
+Batch 124). Authored both.
+
+`chebyshev` (requires `variance`, unlocks `lln`, cross_links none): $P(|X-\mu|\ge k\sigma)\le
+1/k^2$ as an upper bound, never the exact probability (Normal's actual tail at $k=2$ is
+$\approx0.0455$, over 5x smaller than the 0.25 ceiling); distribution-freeness as the theorem's
+entire point (bounding a factory's lifetime deviation using only $\mu,\sigma$, no shape needed);
+and standardization ($k$=deviation/$\sigma$, never a raw deviation substituted directly). 3
+misconceptions independently classified — MC-1 BOUND-IS-EXACT (instruction-induced,
+Foundational), MC-2 DISTRIBUTION-SPECIFIC-ASSUMPTION (overgeneralization), MC-3
+RAW-DEVIATION-NOT-STANDARDIZED (language contamination). Zero Blueprint/KG metadata discrepancy.
+
+`open-sets` (requires `metric-space`, unlocks `compactness`/`connectedness`, cross_links
+`math.top.open-sets` — **confirmed NOT authored via `ls`, independence mode correctly
+self-reported, no correction needed**): open sets via the interior-point/ball definition (radius
+allowed to shrink per point, verified on $(2,5)$); closed sets via complement-is-open or
+limit-point containment (verified on $[0,1]$); and open/closed as NOT complementary — $[0,1)$ is
+genuinely NEITHER, while $\emptyset$/$X$ are BOTH — with closure defined as the SMALLEST closed
+superset, never any closed superset. 3 misconceptions independently classified — MC-1
+OPEN-CLOSED-ASSUMED-EXHAUSTIVE-DICHOTOMY (language contamination, Foundational), MC-2
+CLOSURE-CONFUSED-WITH-ANY-CLOSED-SUPERSET (overgeneralization, Foundational), MC-3
+LIMIT-POINT-REQUIRES-SET-MEMBERSHIP (notation-induced, Moderate). Zero Blueprint/KG metadata
+discrepancy.
+
+`math.prob` gains its twelfth entry this campaign. `math.real`'s new metric-space sub-chain
+extends to a second concept. Mathematics **643/908 → 645/908**, 263 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 645/908, 12
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum
+tests: "Test Files 7 passed (7), Tests 118 passed (118)". Full whole-repo suite not re-attempted
+this batch, consistent with the established precedent from Batches 109-110.
+
+Computed fresh frontier post-batch: `math.prob.standard-deviation` still reachable (requires
+`variance`). `math.real.completeness-metric`/`math.real.continuity-rigorous` still reachable
+(require `metric-space`). `math.fnal.convolution`/`math.opt.stochastic-gradient` still reachable.
+Numerous `math.prob` concepts (convergence-types, distribution, generating-function, law-of-
+unconscious, markov-inequality, moments, normal-distribution, poisson-process, quantile) all still
+reachable. 27 other ready concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph`,
+`math.linalg`, `math.num`, `math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `efd5507` on `main`, pushed directly.

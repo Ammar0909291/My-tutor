@@ -3921,3 +3921,27 @@ poisson-process`, `math.prob.quantile` all still reachable. 27 other ready conce
 `math.top`. Campaign continues under the same active `/loop`; re-derive the frontier fresh via
 `scripts/math/state.ts` (and each candidate's actual `requires`) each iteration rather than
 trusting any number or `children`/`unlocks`-field assumption recorded here.
+
+### Batch 125 (2026-09-19)
+
+Authored `chebyshev` (P(|X-μ|≥kσ)≤1/k² as an upper bound, never exact; distribution-freeness as
+the entire point; k must be standardized) and `open-sets` (open via interior-point/ball
+definition; closed via complement or limit points; open/closed are not complementary — [0,1) is
+neither, ∅/X are both; closure as the smallest closed superset). Both zero Blueprint/KG
+discrepancy — `open-sets`'s independence-mode claim (math.top.open-sets unauthored) confirmed
+correct via `ls`. Mathematics **645/908** (643→645), 263 remaining. Full per-concept detail in
+`COVERAGE.md` Batch 125. Validated: KG validator PASS (908/908 reachable, file untouched),
+`scripts/math/state.ts` confirms mathematics 645/908 (12 EB-certified domains unchanged), `tsc
+--noEmit` clean, targeted EB/curriculum tests 118/118 passed. Full whole-repo suite not
+re-attempted, per the established Batch 109-110 hang precedent. No Physics/Chemistry/English/
+Biology/CS/KG/Blueprint/runtime file touched. Commit `efd5507` on `main`, pushed directly.
+
+Fresh frontier: `math.prob.standard-deviation` still reachable. `math.real.completeness-metric`,
+`math.real.continuity-rigorous` reachable. `math.fnal.convolution`, `math.opt.stochastic-
+gradient` still reachable. Numerous `math.prob` concepts (convergence-types, distribution,
+generating-function, law-of-unconscious, markov-inequality, moments, normal-distribution,
+poisson-process, quantile) all still reachable. 27 other ready concepts remain across `math.cat`,
+`math.cx`, `math.de`, `math.graph`, `math.linalg`, `math.num`, `math.stats`, `math.top`. Campaign
+continues under the same active `/loop`; re-derive the frontier fresh via `scripts/math/state.ts`
+(and each candidate's actual `requires`) each iteration rather than trusting any number or
+`children`/`unlocks`-field assumption recorded here.
