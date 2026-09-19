@@ -17449,3 +17449,59 @@ Fresh frontier recomputed for Batch 189 (27 concepts): `math.cat.morphism-types`
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `bf95b0b` on `main`, pushed directly.
+
+## Batch 189 (2026-09-19) — one wrong-corpus cross-link discrepancy
+
+`covering-space`: "evenly covered" shown to require disjoint homeomorphic copies (never merely a
+connected or surjective preimage), demonstrated via the precise unpacking of a covering map's
+neighborhood condition and the exclusion of branch points; the universal cover shown as a SPECIAL
+covering space with trivial $\pi_1$ (never assumed automatic for every covering space),
+demonstrated via a finite-sheeted covering with a genuine nontrivial closed loop; and the Galois
+correspondence shown as a PRECISE bijection (never a loose analogy), demonstrated via a specific
+subgroup-to-covering-space pairing. 3 misconceptions independently classified by
+Blueprint-declared severity — MC-1 EVENLY-COVERED-UNDERSPECIFIED (Foundational), MC-2
+ALL-COVERING-SPACES-ASSUMED-SIMPLY-CONNECTED (High), MC-3
+GALOIS-CORRESPONDENCE-ASSUMED-LOOSE-ANALOGY (Moderate). **Wrong-corpus cross-link discrepancy
+found**: the Blueprint's Component 7 claims its cross-link `math.cx.riemann-surface` was
+"verified via `ls`" and "authored," but the citation pointed at
+`docs/curriculum/blueprints/`, not the EB corpus — independently re-verified `math.cx.riemann-
+surface` is NOT yet authored in `educational-brain/concepts/mathematics/`. Transfer probe
+downgraded to independence mode; this is the ninth such wrong-corpus discrepancy this campaign
+(after the pre-segment occurrences and Batches 157, 160, 161, 162×2, 168, 179). All other fields
+(requires `math.top.fundamental-group`, unlocks none, research/apply, mastery_threshold 0.65,
+estimated_hours 7) verified exact matches.
+
+`smooth-manifold`: a smooth atlas shown to require smooth TRANSITION MAPS (never smooth charts
+themselves, since chart smoothness isn't even defined), demonstrated via $S^n$'s stereographic
+transition-map verification; tangent vectors shown as intrinsic DERIVATIONS (never arrows in an
+ambient space), demonstrated via the derivation-based construction at $p=0\in\mathbb R^n$; and
+smooth structures shown NOT always unique, demonstrated via $\mathbb R^4$'s uncountably many
+exotic structures and $S^7$'s 28 exotic spheres. 3 misconceptions independently classified by
+Blueprint-declared severity — MC-1 SMOOTH-ATLAS-MEANS-SMOOTH-CHARTS (Critical), MC-2
+TANGENT-VECTOR-IS-AN-ARROW-IN-AMBIENT-SPACE (Foundational), MC-3 SMOOTH-STRUCTURE-IS-UNIQUE
+(Moderate). Zero Blueprint/KG discrepancy; all fields (requires
+`math.top.manifold`/`math.real.differentiability-rigorous`, unlocks none, cross_links
+`math.geom.differential-geometry-curves`, research/understand, mastery_threshold 0.65,
+estimated_hours 8) verified exact matches; `math.geom.differential-geometry-curves` and
+`math.real.differentiability-rigorous` independently re-confirmed authored (this concept's own
+cross-link check correctly targeted the EB corpus, unlike its batch companion).
+
+Mathematics **771/908 → 773/908**, 135 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 773/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)".
+
+Fresh frontier recomputed for Batch 190 (25 concepts): `math.cat.morphism-types`/
+`natural-transformation`, `math.top.simplicial-complex`/`van-kampen` (`math.top` narrowed to its
+final two unauthored concepts), plus `math.cx.complex-numbers-analysis`,
+`math.de.systems-matrix-method`, `math.fnal.convolution`, `math.fnal.normed-space`,
+`math.graph.random-graph`, `math.linalg.jordan-form`/`matrix-exponential`/
+`matrix-representation`/`tensor`, `math.num.floating-point`/`interpolation`/`qr-algorithm`/
+`root-finding`, `math.opt.quadratic-programming`/`semidefinite-programming`/`stochastic-gradient`,
+`math.prob.characteristic-function`/`joint-distribution`,
+`math.stats.normal-distribution`/`percentile`/`sampling-distribution`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `002cda1` on `main`, pushed directly.

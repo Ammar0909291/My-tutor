@@ -5506,3 +5506,35 @@ math.opt.quadratic-programming/semidefinite-programming/stochastic-gradient,
 math.prob.characteristic-function/joint-distribution,
 math.stats.normal-distribution/percentile/sampling-distribution. Campaign continues under the
 same active `/loop`.
+
+### Batch 189 (2026-09-19) — one wrong-corpus cross-link discrepancy
+
+Authored `covering-space` ("evenly covered" shown to require disjoint homeomorphic copies via the
+precise covering-map unpacking; the universal cover shown special via a finite-sheeted-covering
+nontrivial-loop contrast; the Galois correspondence shown a precise bijection via a specific
+subgroup-to-covering pairing) and `smooth-manifold` (a smooth atlas shown to require smooth
+transition maps, never smooth charts, via $S^n$'s stereographic verification; tangent vectors
+shown as intrinsic derivations via the $p=0\in\mathbb R^n$ construction; smooth structures shown
+not always unique via exotic $\mathbb R^4$/$S^7$). `covering-space` had a wrong-corpus cross-link
+discrepancy: its Blueprint's `math.cx.riemann-surface` authorship check pointed at the blueprints
+directory rather than the EB corpus; independently re-verified NOT yet authored in the EB corpus —
+transfer probe downgraded to independence mode, the ninth such wrong-corpus discrepancy this
+campaign. `smooth-manifold` had zero discrepancy; both
+`math.geom.differential-geometry-curves`/`math.real.differentiability-rigorous` independently
+re-confirmed authored. Mathematics **773/908** (771→773), 135 remaining. Full per-concept detail
+in `COVERAGE.md` Batch 189. Validated: KG validator PASS (908/908 reachable, file untouched),
+`scripts/math/state.ts` confirms mathematics 773/908 (13 EB-certified domains unchanged), `tsc
+--noEmit` clean, targeted EB/curriculum tests (7 files) 561/561 passed. No Physics/Chemistry/
+English/Biology/CS/KG/Blueprint/runtime file touched. Commit `002cda1` on `main`, pushed directly
+(no upstream divergence this batch).
+
+Fresh frontier recomputed for Batch 190 (25 concepts): math.cat.morphism-types/
+natural-transformation, math.top.simplicial-complex/van-kampen (math.top narrowed to its final two
+unauthored concepts), plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution, math.fnal.normed-space, math.graph.random-graph,
+math.linalg.jordan-form/matrix-exponential/matrix-representation/tensor,
+math.num.floating-point/interpolation/qr-algorithm/root-finding,
+math.opt.quadratic-programming/semidefinite-programming/stochastic-gradient,
+math.prob.characteristic-function/joint-distribution,
+math.stats.normal-distribution/percentile/sampling-distribution. Campaign continues under the
+same active `/loop`.
