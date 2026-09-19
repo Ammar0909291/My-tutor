@@ -5538,3 +5538,31 @@ math.opt.quadratic-programming/semidefinite-programming/stochastic-gradient,
 math.prob.characteristic-function/joint-distribution,
 math.stats.normal-distribution/percentile/sampling-distribution. Campaign continues under the
 same active `/loop`.
+
+### Batch 190 (2026-09-19) — zero discrepancy, completes math.top domain's reachable frontier
+
+Authored `simplicial-complex` (face-closure shown to require explicit listing via the 7-simplex
+face-closed collection; triangulation shown a chosen model via two different valid triangulations
+of the same square; the compact-manifold guarantee shown scoped via the $S^2$-versus-half-plane
+contrast) and `van-kampen` (hypotheses shown to require verification via the wedge-of-circles
+open-neighborhood enlargement; simply connected intersection shown to collapse to a free product
+via $\pi_1(S^1\vee S^1)\cong\mathbb Z*\mathbb Z$; nontrivial intersection shown to genuinely
+change the computation via the two-tori amalgamation). Both had zero Blueprint/KG discrepancy.
+Mathematics **775/908** (773→775), 133 remaining. This batch completes `math.top`'s entire
+currently-reachable frontier — only `math.top.homology` (now reachable) and its downstream
+`math.top.euler-characteristic`/`math.top.cohomology` remain unauthored in the domain. Full
+per-concept detail in `COVERAGE.md` Batch 190. Validated: KG validator PASS (908/908 reachable,
+file untouched), `scripts/math/state.ts` confirms mathematics 775/908 (13 EB-certified domains
+unchanged), `tsc --noEmit` clean, targeted EB/curriculum tests (7 files) 561/561 passed. No
+Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Commit `6155c44` on
+`main`, pushed directly (no upstream divergence this batch).
+
+Fresh frontier recomputed for Batch 191 (24 concepts): math.cat.morphism-types/
+natural-transformation, math.top.homology (newly unlocked), plus
+math.cx.complex-numbers-analysis, math.de.systems-matrix-method, math.fnal.convolution,
+math.fnal.normed-space, math.graph.random-graph, math.linalg.jordan-form/matrix-exponential/
+matrix-representation/tensor, math.num.floating-point/interpolation/qr-algorithm/root-finding,
+math.opt.quadratic-programming/semidefinite-programming/stochastic-gradient,
+math.prob.characteristic-function/joint-distribution,
+math.stats.normal-distribution/percentile/sampling-distribution. Campaign continues under the
+same active `/loop`.

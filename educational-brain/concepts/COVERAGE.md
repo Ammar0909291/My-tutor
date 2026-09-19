@@ -17505,3 +17505,54 @@ final two unauthored concepts), plus `math.cx.complex-numbers-analysis`,
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `002cda1` on `main`, pushed directly.
+
+## Batch 190 (2026-09-19) — zero discrepancy, both `math.top` concepts
+
+`simplicial-complex`: face-closure shown to require EXPLICIT listing (never automatic inclusion),
+demonstrated via the 7-simplex face-closed collection for a filled triangle contrasted with an
+invalid triangle-only collection; a triangulation shown as a CHOSEN combinatorial model (never the
+space's unique intrinsic structure), demonstrated via two genuinely different valid triangulations
+of the same square; and the compact-manifold triangulation guarantee shown SCOPED (never
+overgeneralized), demonstrated via the triangulable $S^2$ contrasted with the non-compact
+half-plane outside the theorem's scope. 3 misconceptions independently classified by
+Blueprint-declared severity — MC-1 SIMPLEX-FACES-ASSUMED-AUTOMATICALLY-INCLUDED (Foundational),
+MC-2 SIMPLICIAL-COMPLEX-AS-UNIQUE-INTRINSIC-STRUCTURE (Moderate), MC-3
+COMPACT-MANIFOLD-TRIANGULATION-OVERGENERALIZED (Foundational). Zero Blueprint/KG discrepancy; all
+fields (requires `math.top.topological-space`, unlocks `math.top.homology`, cross_links none,
+expert/understand, mastery_threshold 0.75, estimated_hours 5) verified exact matches.
+
+`van-kampen`: the theorem's hypotheses (open $U,V$; path-connected $U\cap V$) shown to require
+VERIFICATION (never assumed automatic), demonstrated via the wedge-of-circles decomposition's
+necessary open-neighborhood enlargement; a simply connected intersection shown to COLLAPSE
+amalgamation to an ordinary free product (never imposing extra relations), demonstrated via the
+direct $\pi_1(S^1\vee S^1)\cong\mathbb Z*\mathbb Z$ computation; and a nontrivial intersection
+shown to genuinely CHANGE the computation via real amalgamation (never leaving it unaffected),
+demonstrated via the two-tori-glued-along-a-circle example. 3 misconceptions independently
+classified by Blueprint-declared severity — MC-1 VAN-KAMPEN-HYPOTHESES-ASSUMED-AUTOMATIC
+(Foundational), MC-2 SIMPLY-CONNECTED-INTERSECTION-ASSUMED-TO-STILL-IMPOSE-RELATIONS (High), MC-3
+NONTRIVIAL-INTERSECTION-ASSUMED-NOT-TO-CHANGE-COMPUTATION (Moderate). Zero Blueprint/KG
+discrepancy; all fields (requires `math.top.fundamental-group`, unlocks none, cross_links none,
+research/apply, mastery_threshold 0.65, estimated_hours 7) verified exact matches.
+
+Mathematics **773/908 → 775/908**, 133 remaining. **This batch completes the entire `math.top`
+domain's currently-reachable frontier** — all `math.top` concepts are authored except
+`math.top.homology` (now reachable) and its own downstream `math.top.euler-characteristic`/
+`math.top.cohomology`.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 775/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)".
+
+Fresh frontier recomputed for Batch 191 (24 concepts): `math.cat.morphism-types`/
+`natural-transformation`, `math.top.homology` (newly unlocked), plus
+`math.cx.complex-numbers-analysis`, `math.de.systems-matrix-method`, `math.fnal.convolution`,
+`math.fnal.normed-space`, `math.graph.random-graph`,
+`math.linalg.jordan-form`/`matrix-exponential`/`matrix-representation`/`tensor`,
+`math.num.floating-point`/`interpolation`/`qr-algorithm`/`root-finding`,
+`math.opt.quadratic-programming`/`semidefinite-programming`/`stochastic-gradient`,
+`math.prob.characteristic-function`/`joint-distribution`,
+`math.stats.normal-distribution`/`percentile`/`sampling-distribution`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `6155c44` on `main`, pushed directly.
