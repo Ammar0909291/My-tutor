@@ -17129,3 +17129,53 @@ without `connectedness`/`interior-closure`), plus `math.cx.complex-numbers-analy
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `bd280bd` on `main`, pushed directly.
+
+## Batch 183 (2026-09-19) — zero discrepancy, both `math.top` concepts
+
+`basis`: condition B2 shown as a per-point refinement requirement, never closure under
+intersection, demonstrated via the open-ball coincidence contrasted against B2's precise wording;
+different bases shown able to generate the SAME topology, demonstrated via the rational-radius-
+versus-all-radius comparison on $\mathbb R$ (both directions of the criterion verified); and the
+lower-limit topology proven STRICTLY FINER than the standard topology, demonstrated via the
+one-directional failure at $[0,1)$, $x=0$. 3 misconceptions independently classified by
+Blueprint-declared severity — MC-1 BASIS-IS-CLOSED-UNDER-INTERSECTION (Foundational), MC-2
+DIFFERENT-BASES-MEANS-DIFFERENT-TOPOLOGIES (Moderate), MC-3 LOWER-LIMIT-SAME-AS-STANDARD
+(Moderate). Zero Blueprint/KG discrepancy; all fields (requires `math.top.topological-space`,
+unlocks none, cross_links none, expert/understand, mastery_threshold 0.85, estimated_hours 3)
+verified exact matches.
+
+`continuity-top`: continuity's preimage-based definition shown distinct from a forward-image
+requirement, demonstrated via the constant-function example (preimage test passes for every open
+$V$, yet the forward image of $(0,1)$ collapses to the non-open $\{5\}$); the open-set definition
+shown to genuinely GENERALIZE (never merely rephrase) ε-δ, demonstrated via the $f(x)=2x+1$
+side-by-side translation contrasted against the non-metrizable indiscrete topology from
+`math.top.topological-space`; and the composition rule shown to require no re-derivation,
+demonstrated via the $(g\circ f)^{-1}(W)=f^{-1}(g^{-1}(W))$ set-identity argument for
+$f(x)=x^2$, $g(x)=x+1$. 3 misconceptions independently classified by Blueprint-declared severity
+— MC-1 CONTINUITY-DEFINITION-DIRECTION-REVERSED (Foundational), MC-2
+OPEN-SET-DEFINITION-TREATED-AS-MERE-REPHRASING (Foundational), MC-3
+COMPOSITION-CONTINUITY-RE-DERIVED-FROM-SCRATCH (Moderate). Zero Blueprint/KG discrepancy; all
+fields (requires `math.top.topological-space`, unlocks `math.top.homeomorphism`, cross_links
+`math.real.continuity-rigorous`, expert/understand, mastery_threshold 0.9, estimated_hours 4)
+verified exact matches; `math.real.continuity-rigorous` independently re-confirmed authored.
+
+Mathematics **759/908 → 761/908**, 147 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 761/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)".
+
+Fresh frontier recomputed for Batch 184 (30 concepts): `math.cat.morphism-types`/
+`natural-transformation`, `math.top.compactness`/`homeomorphism`/`homotopy`/`product-space`/
+`quotient-space`/`separation-axioms`/`simplicial-complex` (`homeomorphism`/`homotopy` newly
+unlocked), plus `math.cx.complex-numbers-analysis`, `math.de.systems-matrix-method`,
+`math.fnal.convolution`, `math.fnal.normed-space`, `math.graph.random-graph`,
+`math.linalg.jordan-form`/`matrix-exponential`/`matrix-representation`/`tensor`,
+`math.num.floating-point`/`interpolation`/`qr-algorithm`/`root-finding`,
+`math.opt.quadratic-programming`/`semidefinite-programming`/`stochastic-gradient`,
+`math.prob.characteristic-function`/`joint-distribution`,
+`math.stats.normal-distribution`/`percentile`/`sampling-distribution`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `a1fabb5` on `main`, pushed directly.
