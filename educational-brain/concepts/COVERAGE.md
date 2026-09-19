@@ -18244,3 +18244,27 @@ math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matr
 math.fnal.convolution/normed-space, math.graph.random-graph,
 math.opt.semidefinite-programming, math.prob.martingale. Campaign continues under the same
 active `/loop`.
+
+## Batch 225 (2026-09-19) — 1 discrepancy (reverse-direction, cross-link since authored)
+
+Authored `math.fnal.normed-space` (a normed space is always the PAIR vector space + specific norm,
+never a space-independent unique quantity; the induced metric's axioms follow directly from the
+norm's own axioms, never assumed for free; homogeneity must be checked with a negative scalar,
+never only positive ones) and `math.fnal.convolution` (convolution is genuinely commutative
+despite the asymmetric flip-and-slide picture, never assumed non-commutative; Young's inequality's
+exponent relationship is a genuine integrability trade-off, never arbitrary; the convolution
+theorem is a real, often dramatic simplification, never a mere curiosity). Zero discrepancy on
+`normed-space` (both cross-link targets `math.linalg.norm`/`math.real.metric-space` reconfirmed
+authored, dual cross-link probe engaged per Blueprint). Reverse-direction discrepancy on
+`convolution`: Blueprint's Component 0/7 stated `math.de.convolution-theorem` was "not yet
+authored" at write time, but the live EB corpus now shows it IS authored — noted for the record
+(15th discrepancy this campaign); no correction needed to the P76 probe since the Blueprint's
+actual engaged cross-link target, `math.de.fourier-transform`, remains independently confirmed
+authored. Mathematics **843/908 → 845/908**, 63 remaining. math.fnal now partially authored (no
+domain-completion milestone this batch). Validated: KG PASS (908/908 reachable), state.ts confirms
+845/908, tsc clean, tests 561/561. Commit `6a9edd5`, pushed.
+
+Fresh frontier for Batch 226 (10 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.completeness, math.graph.random-graph, math.opt.semidefinite-programming,
+math.prob.martingale. Campaign continues under the same active `/loop`.

@@ -6190,3 +6190,22 @@ math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matr
 math.fnal.convolution/normed-space, math.graph.random-graph,
 math.opt.semidefinite-programming, math.prob.martingale. Campaign continues under the same
 active `/loop`.
+
+## Batch 225 (2026-09-19)
+
+Authored `normed-space` (a normed space is always a pair — vector space plus a specific norm,
+never a space-independent unique quantity; the induced metric's axioms follow directly from the
+norm's own axioms, never assumed for free; homogeneity needs a negative-scalar check too) and
+`convolution` (genuinely commutative despite the asymmetric flip-and-slide picture; Young's
+inequality's exponents are a genuine trade-off, never arbitrary; the convolution theorem is a
+real simplification, never a curiosity). One reverse-direction discrepancy: convolution's
+Blueprint said its cross-link `math.de.convolution-theorem` was unauthored at write time, but it
+is now authored — noted, no probe change needed (engaged target `math.de.fourier-transform`
+still holds). Mathematics **845/908** (843→845), 63 remaining. Full detail in `COVERAGE.md`
+Batch 225. Validated: KG PASS, state.ts 845/908, tsc clean, tests 561/561. Commit `6a9edd5`,
+pushed.
+
+Fresh frontier for Batch 226 (10 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.completeness, math.graph.random-graph, math.opt.semidefinite-programming,
+math.prob.martingale. Campaign continues under the same active `/loop`.
