@@ -18140,3 +18140,22 @@ math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matr
 math.fnal.convolution/normed-space, math.graph.random-graph,
 math.linalg.matrix-representation/tensor, math.num.iterative-linear/numerical-integration/
 qr-algorithm/runge-kutta/splines, math.opt.pca/semidefinite-programming, math.prob.martingale.
+
+## Batch 220 (2026-09-19) — zero discrepancy
+
+Authored `math.num.numerical-integration` (more points isn't always better — diminishing returns
+and rounding accumulation set in, never unlimited improvement; Trapezoid and Simpson's have
+genuinely different accuracy orders, never the same just because both use endpoints; the midpoint
+rectangle rule is O(h²), never lumped in with the inaccurate left/right rules) and
+`math.num.splines` (higher smoothness is never always better — match it to the data, never
+default to maximum; splines avoid Runge's phenomenon via piecewise low-degree fitting, never a
+global high-degree fit; B-spline control points attract the curve, never interpolation points).
+Both zero discrepancy. Mathematics **833/908 → 835/908**, 73 remaining. Validated: KG PASS
+(908/908 reachable), state.ts confirms 835/908, tsc clean, tests 561/561. Commit `70e3af2`,
+pushed.
+
+Fresh frontier for Batch 221 (17 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.iterative-linear/qr-algorithm/runge-kutta,
+math.opt.pca/semidefinite-programming, math.prob.martingale.

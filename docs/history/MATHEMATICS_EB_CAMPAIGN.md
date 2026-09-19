@@ -6099,3 +6099,20 @@ math.fnal.convolution/normed-space, math.graph.random-graph,
 math.linalg.matrix-representation/tensor, math.num.iterative-linear/numerical-integration/
 qr-algorithm/runge-kutta/splines, math.opt.pca/semidefinite-programming, math.prob.martingale.
 Campaign continues under the same active `/loop`.
+
+## Batch 220 (2026-09-19)
+
+Authored `numerical-integration` (more points isn't always better, never unlimited improvement;
+Trapezoid/Simpson's differ genuinely in order, never the same; midpoint rectangle is O(h²), never
+lumped with left/right) and `splines` (higher smoothness isn't always better, never default to
+max; splines avoid Runge's phenomenon via piecewise low degree; control points attract, never
+interpolate). Both zero discrepancy. Mathematics **835/908** (833→835), 73 remaining. Full detail
+in `COVERAGE.md` Batch 220. Validated: KG PASS, state.ts 835/908, tsc clean, tests 561/561.
+Commit `70e3af2`, pushed.
+
+Fresh frontier for Batch 221 (17 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.iterative-linear/qr-algorithm/runge-kutta,
+math.opt.pca/semidefinite-programming, math.prob.martingale. Campaign continues under the same
+active `/loop`.
