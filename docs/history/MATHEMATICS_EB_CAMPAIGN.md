@@ -5301,3 +5301,30 @@ math.opt.quadratic-programming/semidefinite-programming/stochastic-gradient,
 math.prob.characteristic-function/joint-distribution,
 math.stats.normal-distribution/percentile/sampling-distribution. Campaign continues under the
 same active `/loop`.
+
+### Batch 182 (2026-09-19) — zero discrepancy, both `math.top` concepts
+
+Authored `connectedness` (the impossibility of an open, disjoint, nonempty split, never requiring
+a metric; shown to agree exactly with `math.real.connectedness`'s separated-sets definition via a
+dual-route verification on $E=[0,1]\cup[2,3]$; path-connected shown to imply but never be implied
+by connected via the topologist's sine curve) and `interior-closure` (interior's existential
+neighborhood test distinguished from closure's universal test via the $A=(0,1]$ dual test at
+$x=0$; density shown never to imply equality to the whole space via the $\mathbb Q$ triple
+contrast; boundary shown to range from a thin curve to the entire space). Both had zero
+Blueprint/KG discrepancy; `math.real.connectedness` independently re-confirmed authored.
+Mathematics **759/908** (757→759), 149 remaining. Full per-concept detail in `COVERAGE.md` Batch
+182. Validated: KG validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts`
+confirms mathematics 759/908 (13 EB-certified domains unchanged), `tsc --noEmit` clean, targeted
+EB/curriculum tests (7 files) 561/561 passed. No Physics/Chemistry/English/Biology/CS/KG/
+Blueprint/runtime file touched. Commit `bd280bd` on `main`, pushed directly.
+
+Fresh frontier recomputed for Batch 183 (30 concepts): math.cat.morphism-types/
+natural-transformation, math.top.basis/compactness/continuity-top/product-space/quotient-space/
+separation-axioms/simplicial-complex, plus math.cx.complex-numbers-analysis,
+math.de.systems-matrix-method, math.fnal.convolution, math.fnal.normed-space,
+math.graph.random-graph, math.linalg.jordan-form/matrix-exponential/matrix-representation/tensor,
+math.num.floating-point/interpolation/qr-algorithm/root-finding,
+math.opt.quadratic-programming/semidefinite-programming/stochastic-gradient,
+math.prob.characteristic-function/joint-distribution,
+math.stats.normal-distribution/percentile/sampling-distribution. Campaign continues under the
+same active `/loop`.

@@ -17078,3 +17078,54 @@ domains widening further), plus `math.cx.complex-numbers-analysis`,
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `87e1a81` on `main`, pushed directly.
+
+## Batch 182 (2026-09-19) — zero discrepancy, both `math.top` concepts
+
+`connectedness`: connectedness defined as the impossibility of an open, disjoint, nonempty split
+(never requiring a metric), demonstrated via the exhaustive open-set-split check on the
+three-point space $X=\{a,b,c\}$; the open-set definition shown to agree EXACTLY with
+`math.real.connectedness`'s separated-sets definition, demonstrated via the dual-route
+verification on $E=[0,1]\cup[2,3]$ (both routes reaching "disconnected"); and path-connected shown
+to imply but never be implied by connected, demonstrated via the topologist's sine curve
+counterexample. 3 misconceptions independently classified by Blueprint-declared severity — MC-1
+CONNECTEDNESS-ASSUMED-TO-NEED-METRIC (Foundational), MC-2
+OPEN-SET-AND-SEPARATED-SETS-DEFINITIONS-ASSUMED-DIFFERENT (High), MC-3
+CONNECTED-ASSUMED-EQUIVALENT-TO-PATH-CONNECTED (High). Zero Blueprint/KG discrepancy; all fields
+(requires `math.top.topological-space`, unlocks none, cross_links `math.real.connectedness`,
+expert/understand, mastery_threshold 0.85, estimated_hours 4) verified exact matches;
+`math.real.connectedness` independently re-confirmed authored.
+
+`interior-closure`: interior's existential neighborhood test ("some open set fits inside") shown
+distinct from closure's universal neighborhood test ("every open set meets"), demonstrated via the
+dual test at $x=0$ for $A=(0,1]$ (yielding $\text{int}(A)=(0,1)$, $\text{cl}(A)=[0,1]$,
+$\partial A=\{0,1\}$); density ($\text{cl}(A)=X$) shown to never imply $A=X$ itself, demonstrated
+via the $\mathbb Q$ triple contrast ($\text{int}(\mathbb Q)=\emptyset$,
+$\text{cl}(\mathbb Q)=\mathbb R$, $\mathbb Q\ne\mathbb R$); and boundary shown to range from a thin
+curve (the open unit disk's boundary circle) to the entire space
+($\partial\mathbb Q=\mathbb R$, reusing `math.top.open-sets`'s own example), never assumed always
+"nice." 3 misconceptions independently classified by Blueprint-declared severity — MC-1
+INTERIOR-REQUIRES-EVERY-NEIGHBORHOOD (Foundational), MC-2 DENSE-MEANS-EQUAL-TO-WHOLE-SPACE
+(Foundational), MC-3 BOUNDARY-SEPARATES-INSIDE-FROM-OUTSIDE (Moderate). Zero Blueprint/KG
+discrepancy; all fields (requires `math.top.open-sets`, unlocks none, cross_links none,
+expert/apply, mastery_threshold 0.85, estimated_hours 3) verified exact matches.
+
+Mathematics **757/908 → 759/908**, 149 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 759/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)".
+
+Fresh frontier recomputed for Batch 183 (30 concepts): `math.cat.morphism-types`/
+`natural-transformation`, `math.top.basis`/`compactness`/`continuity-top`/`product-space`/
+`quotient-space`/`separation-axioms`/`simplicial-complex` (both domains widening further, now
+without `connectedness`/`interior-closure`), plus `math.cx.complex-numbers-analysis`,
+`math.de.systems-matrix-method`, `math.fnal.convolution`, `math.fnal.normed-space`,
+`math.graph.random-graph`, `math.linalg.jordan-form`/`matrix-exponential`/
+`matrix-representation`/`tensor`, `math.num.floating-point`/`interpolation`/`qr-algorithm`/
+`root-finding`, `math.opt.quadratic-programming`/`semidefinite-programming`/`stochastic-gradient`,
+`math.prob.characteristic-function`/`joint-distribution`,
+`math.stats.normal-distribution`/`percentile`/`sampling-distribution`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `bd280bd` on `main`, pushed directly.
