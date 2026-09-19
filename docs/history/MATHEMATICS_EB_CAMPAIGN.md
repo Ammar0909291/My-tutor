@@ -6116,3 +6116,20 @@ math.fnal.convolution/normed-space, math.graph.random-graph,
 math.linalg.matrix-representation/tensor, math.num.iterative-linear/qr-algorithm/runge-kutta,
 math.opt.pca/semidefinite-programming, math.prob.martingale. Campaign continues under the same
 active `/loop`.
+
+## Batch 221 (2026-09-19)
+
+Authored `qr-algorithm` (iterates QR factorization, never the same one-shot operation; individual
+Qₖ never the eigenvectors, only the accumulated product; shift never permanently changes
+eigenvalues) and `runge-kutta` (RK4 never exact, small O(h⁵) error still accumulates; more stages
+never always better — Butcher barrier; adaptive control never changes the method, only h). Both
+zero discrepancy. Mathematics **837/908** (835→837), 71 remaining. math.num now 13/16. Full
+detail in `COVERAGE.md` Batch 221. Validated: KG PASS, state.ts 837/908, tsc clean, tests
+561/561. Commit `3864726`, pushed.
+
+Fresh frontier for Batch 222 (17 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.iterative-linear/stiff-ode/svd,
+math.opt.pca/semidefinite-programming, math.prob.martingale. Campaign continues under the same
+active `/loop`.

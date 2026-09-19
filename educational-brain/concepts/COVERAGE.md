@@ -18159,3 +18159,21 @@ math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matr
 math.fnal.convolution/normed-space, math.graph.random-graph,
 math.linalg.matrix-representation/tensor, math.num.iterative-linear/qr-algorithm/runge-kutta,
 math.opt.pca/semidefinite-programming, math.prob.martingale.
+
+## Batch 221 (2026-09-19) — zero discrepancy
+
+Authored `math.num.qr-algorithm` (the QR algorithm iterates QR factorization, never the same
+one-shot operation; individual Qₖ factors are never the eigenvectors directly — only the fully
+accumulated product is; a shift never permanently changes the eigenvalues, it's subtracted then
+restored) and `math.num.runge-kutta` (RK4 is never exact — its small O(h⁵) error still
+accumulates; more stages is never always better — the Butcher barrier caps order gains; adaptive
+step control never changes the method, only h). Both zero discrepancy. Mathematics
+**835/908 → 837/908**, 71 remaining. math.num is now 13/16 authored (3 remaining: iterative-linear,
+stiff-ode, svd). Validated: KG PASS (908/908 reachable), state.ts confirms 837/908, tsc clean,
+tests 561/561. Commit `3864726`, pushed.
+
+Fresh frontier for Batch 222 (17 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.iterative-linear/stiff-ode/svd,
+math.opt.pca/semidefinite-programming, math.prob.martingale.
