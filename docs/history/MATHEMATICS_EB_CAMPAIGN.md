@@ -4371,3 +4371,28 @@ precedent. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file tou
 Fresh frontier to be recomputed at the start of Batch 143 per established discipline; numerous
 math.prob concepts remain reachable (convergence-types, distribution, generating-function,
 poisson-process). Campaign continues under the same active `/loop`.
+
+### Batch 143 (2026-09-19) — second consecutive incomplete-Prerequisites correction
+
+Authored `stationary-distribution` (π as the long-run distribution the chain converges to, never
+the initial distribution; detailed balance as sufficient but never necessary for stationarity, via
+a one-way 3-cycle counterexample; uniqueness needing irreducibility and convergence needing
+ergodicity as separate hypotheses) and `poisson-process` (interarrival times as genuinely random
+Exponential, never regularly spaced; superposition holding for any rates via the MGF argument;
+thinning producing a new process with its own Exp(λp) interarrival times, never the original rate).
+`stationary-distribution` had zero Blueprint/KG discrepancy. `poisson-process`'s Blueprint omitted
+`math.prob.continuous-distributions` and `math.prob.independence` from its Prerequisites field,
+listing only `math.prob.discrete-distributions` — corrected to the live KG's complete
+three-prerequisite list (second consecutive incomplete-Prerequisites correction after Batch 142's
+`transition-matrix`). `stationary-distribution` closes its declared unlock reachability for
+`math.prob.ergodicity`. Mathematics **681/908** (679→681), 227 remaining. Full per-concept detail
+in `COVERAGE.md` Batch 143. Validated: KG validator PASS (908/908 reachable, file untouched),
+`scripts/math/state.ts` confirms mathematics 681/908 (13 EB-certified domains unchanged), `tsc
+--noEmit` clean, targeted EB/curriculum tests (7 files) 561/561 passed. Full whole-repo suite not
+re-attempted, per the established Batch 109-110 hang precedent. No Physics/Chemistry/English/
+Biology/CS/KG/Blueprint/runtime file touched. Commit `70d71c1` on `main`, pushed directly.
+
+Fresh frontier to be recomputed at the start of Batch 144 per established discipline; `math.prob.
+ergodicity` newly reachable (stationary-distribution now authored); other math.prob concepts
+remain reachable (convergence-types, distribution, generating-function). Campaign continues under
+the same active `/loop`.

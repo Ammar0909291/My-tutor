@@ -15257,3 +15257,50 @@ concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph`, `math.lin
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `74fb318` on `main`, pushed directly.
+
+### Batch 143 (2026-09-19) — second consecutive incomplete-Prerequisites Blueprint correction
+
+`math.prob.stationary-distribution`: $\pi$ as the LONG-RUN distribution a chain converges to
+(never its initial distribution), demonstrated via a weather chain converging from $[1,0,0]$
+toward $\pi$; detailed balance ($\pi_iP_{ij}=\pi_jP_{ji}$) proven SUFFICIENT but NOT necessary for
+stationarity, demonstrated via a 3-cycle chain's $\pi=[1/3,1/3,1/3]$ satisfying stationarity while
+violating detailed balance (a genuine one-way probability current); uniqueness requiring
+irreducibility and convergence additionally requiring ergodicity, each a separate hypothesis to
+verify. 3 misconceptions independently classified — MC-1
+STATIONARY-DISTRIBUTION-IS-THE-INITIAL-DISTRIBUTION (language contamination), MC-2
+DETAILED-BALANCE-IS-REQUIRED-FOR-STATIONARITY (instruction-induced), MC-3
+EVERY-CHAIN-HAS-A-UNIQUE-STATIONARY-DISTRIBUTION (instruction-induced). Zero Blueprint/KG
+metadata discrepancy.
+
+`math.prob.poisson-process`: interarrival times as genuinely RANDOM and exponential (never
+regularly spaced), demonstrated via the mental simulation of clustering/gapping
+$\text{Exp}(\lambda)$ draws; superposition working for ANY rates (never requiring
+$\lambda_1=\lambda_2$), verified via the MGF closure argument; thinning producing a genuinely NEW
+Poisson process with its OWN exponential interarrival times at the reduced rate $\lambda p$
+(never the original $\lambda$), demonstrated via the bus-route example. 3 misconceptions
+independently classified — MC-1 POISSON-PROCESS-REQUIRES-EQUALLY-SPACED-ARRIVALS (language
+contamination), MC-2 SUPERPOSITION-REQUIRES-SAME-RATE (instruction-induced), MC-3
+THINNING-CHANGES-THE-INTERARRIVAL-DISTRIBUTION (overgeneralization). **Second consecutive
+incomplete-Prerequisites Blueprint correction (after Batch 142's `transition-matrix`)**: the
+Blueprint's own "Prerequisites" field lists only `math.prob.discrete-distributions`, omitting
+`math.prob.continuous-distributions` and `math.prob.independence` — the live KG's complete
+three-prerequisite list used as authoritative.
+
+`stationary-distribution` closes `transition-matrix`'s declared unlock and opens
+`math.prob.ergodicity` as a new frontier concept. `poisson-process` is a terminal leaf with no
+unlocks of its own. Mathematics **679/908 → 681/908**, 227 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 681/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Computed fresh frontier post-batch (not yet re-derived this entry — will be recomputed fresh at
+the start of Batch 144 per established discipline): `math.prob.ergodicity` newly reachable.
+Numerous other `math.prob` concepts remain reachable (convergence-types, distribution,
+generating-function). Other ready concepts remain across `math.cat`, `math.cx`, `math.de`,
+`math.graph`, `math.linalg`, `math.num`, `math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `70d71c1` on `main`, pushed directly.
