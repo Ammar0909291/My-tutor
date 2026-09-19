@@ -17601,3 +17601,21 @@ math.opt.quadratic-programming/semidefinite-programming/stochastic-gradient,
 math.prob.characteristic-function/joint-distribution,
 math.stats.normal-distribution/percentile/sampling-distribution, math.top.cohomology (still
 requires further prerequisites).
+
+## Batch 193 (2026-09-19) — zero discrepancy
+
+Authored `math.linalg.jordan-form` (Jordan blocks have 1's on the superdiagonal, never
+subdiagonal; geometric multiplicity gives block count, algebraic gives total size, never
+reversed; Jordan form generalizes diagonalization, collapsing to it when applicable) and
+`math.linalg.matrix-exponential` (e^D's entries are e^λᵢ, never λᵢ^e or unchanged; e^{At} is
+genuinely t-dependent, never t times the fixed e^A). Both zero discrepancy. Mathematics
+**779/908 → 781/908**, 127 remaining. Validated: KG PASS (908/908 reachable), state.ts confirms
+781/908, tsc clean, tests 561/561. Commit `0f3b275`, pushed.
+
+Fresh frontier for Batch 194 (23 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.floating-point/interpolation/qr-algorithm/
+root-finding, math.opt.quadratic-programming/semidefinite-programming/stochastic-gradient,
+math.prob.characteristic-function/joint-distribution,
+math.stats.normal-distribution/percentile/sampling-distribution.

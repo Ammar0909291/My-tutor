@@ -5607,3 +5607,20 @@ math.opt.quadratic-programming/semidefinite-programming/stochastic-gradient,
 math.prob.characteristic-function/joint-distribution,
 math.stats.normal-distribution/percentile/sampling-distribution, math.top.cohomology. Campaign
 continues under the same active `/loop`.
+
+### Batch 193 (2026-09-19) — zero discrepancy
+
+Authored `jordan-form` (superdiagonal 1's, never subdiagonal; geometric multiplicity=block count,
+algebraic=total size) and `matrix-exponential` (e^D entries are e^λᵢ; e^{At} is genuinely
+t-dependent, never t·e^A). Both zero discrepancy. Mathematics **781/908** (779→781), 127
+remaining. Full detail in `COVERAGE.md` Batch 193. Validated: KG PASS, state.ts 781/908, tsc
+clean, tests 561/561. Commit `0f3b275`, pushed.
+
+Fresh frontier for Batch 194 (23 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.floating-point/interpolation/qr-algorithm/
+root-finding, math.opt.quadratic-programming/semidefinite-programming/stochastic-gradient,
+math.prob.characteristic-function/joint-distribution,
+math.stats.normal-distribution/percentile/sampling-distribution. Campaign continues under the
+same active `/loop`.
