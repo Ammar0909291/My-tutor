@@ -15024,3 +15024,51 @@ the start of Batch 138 per established discipline): `math.real.implicit-function
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `f894963` on `main`, pushed directly.
+
+### Batch 138 (2026-09-19) — third stale-metadata discrepancy this campaign
+
+`math.prob.law-of-unconscious`: LOTUS ($E[g(X)]=\sum g(x)f_X(x)$ or $\int g(x)f_X(x)\,dx$)
+demonstrated skipping the distribution of $Y=g(X)$ entirely via the die example's two-route
+comparison; $E[g(X)]\ne g(E[X])$ in general, demonstrated via Exponential's genuine
+$E[X^2]=2/\lambda^2$ versus $(E[X])^2=1/\lambda^2$ gap; LOTUS's applicability to any measurable
+$g$, never requiring monotonicity unlike the change-of-variable theorem for densities. 3
+misconceptions independently classified — MC-1 E[g(X)]=g(E[X]) (overgeneralization from
+linearity), MC-2 LOTUS-REQUIRES-KNOWING-DISTRIBUTION-OF-Y (instruction-induced), MC-3
+LOTUS-ONLY-WORKS-FOR-MONOTONE-g (instruction-induced, conflated with the change-of-variable
+theorem). Zero Blueprint/KG metadata discrepancy.
+
+`math.real.implicit-function-theorem`: invertibility of $\partial F/\partial y$ as the essential,
+non-automatic hypothesis certifying $y$ is genuinely a function of $x$, demonstrated via the unit
+circle's valid point $(0,1)$ versus its failing vertical-tangent point $(1,0)$; the theorem shown
+to supply the justification `math.calc.implicit-differentiation`'s procedure has always silently
+assumed, via the same algebra producing a meaningless formula at the failing point; the same
+invertibility condition shown to yield an explicit derivative formula
+$Dy=-[\partial F/\partial y]^{-1}[\partial F/\partial x]$, matching the ad hoc chain-rule result
+exactly. 3 misconceptions independently classified — MC-1 Y-ASSUMED-ALWAYS-A-FUNCTION-OF-X
+(Foundational), MC-2 IMPLICIT-DIFFERENTIATION-ASSUMED-ALWAYS-VALID (High), MC-3
+THEOREM-ASSUMED-EXISTENCE-ONLY (Moderate). **Third stale-metadata discrepancy this campaign**
+(after Batches 134's `taylor-rigorous` and 137's `weierstrass-approximation`): the Blueprint's own
+Component 0 states bloom=analyze, mastery_threshold=0.65 (MAMR 4/5), estimated_hours=8 — the live
+KG shows bloom=apply, mastery_threshold=0.75 (MAMR ⌈0.75×5⌉=4/5, numerically unchanged),
+estimated_hours=6. Live KG values used throughout. The cross-link
+(`math.calc.implicit-differentiation`) independently re-verified genuinely authored.
+
+`math.prob.law-of-unconscious` closes `expected-value`'s remaining declared unlock.
+`math.real.implicit-function-theorem` is a terminal leaf off the differentiability-rigorous chain,
+leaving only `math.real.inverse-function-theorem` as the last reachable `math.real` frontier
+concept. Mathematics **669/908 → 671/908**, 237 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 671/908, 12
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Computed fresh frontier post-batch (not yet re-derived this entry — will be recomputed fresh at
+the start of Batch 139 per established discipline): `math.real.inverse-function-theorem` remains
+the last `math.real` frontier concept. Numerous `math.prob` concepts remain reachable. Other
+ready concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`,
+`math.num`, `math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `be23c5f` on `main`, pushed directly.

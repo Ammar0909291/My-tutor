@@ -4256,3 +4256,25 @@ Fresh frontier to be recomputed at the start of Batch 138 per established discip
 `math.real.implicit-function-theorem`/`inverse-function-theorem` remain the last two reachable
 math.real concepts; numerous math.prob concepts remain reachable. Campaign continues under the
 same active `/loop`.
+
+### Batch 138 (2026-09-19) — third stale-metadata discrepancy this campaign
+
+Authored `law-of-unconscious` (LOTUS skipping g(X)'s distribution entirely; E[g(X)]≠g(E[X]) in
+general via Exponential's variance gap; LOTUS working for any measurable g, no monotonicity
+needed) and `implicit-function-theorem` (∂F/∂y invertibility as the essential hypothesis for y
+being a function of x, via the unit circle's valid-vs-failing points; the theorem justifying
+implicit differentiation's silent assumption; the same invertibility yielding an explicit
+derivative formula). `law-of-unconscious` zero discrepancy. `implicit-function-theorem`'s
+Blueprint metadata was stale (bloom analyze→apply, mastery_threshold 0.65→0.75, hours 8→6) —
+corrected to live KG values (third such occurrence, after Batches 134 and 137); its cross-link
+(`math.calc.implicit-differentiation`) independently re-verified authored. Mathematics
+**671/908** (669→671), 237 remaining. Full per-concept detail in `COVERAGE.md` Batch 138.
+Validated: KG validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts`
+confirms mathematics 671/908 (12 EB-certified domains unchanged), `tsc --noEmit` clean, targeted
+EB/curriculum tests (7 files) 561/561 passed. Full whole-repo suite not re-attempted, per the
+established Batch 109-110 hang precedent. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/
+runtime file touched. Commit `be23c5f` on `main`, pushed directly.
+
+Fresh frontier to be recomputed at the start of Batch 139 per established discipline;
+`math.real.inverse-function-theorem` remains the last reachable math.real frontier concept.
+Numerous math.prob concepts remain reachable. Campaign continues under the same active `/loop`.
