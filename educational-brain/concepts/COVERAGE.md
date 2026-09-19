@@ -16745,3 +16745,51 @@ unlocking), plus `math.cat.category`, `math.cx.complex-numbers-analysis`,
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `c21f91f` on `main`, pushed directly.
+
+## Batch 175 (2026-09-19) — third stale-unlocks correction
+
+`gram-schmidt`: each new vector required to subtract projections onto ALL previously constructed
+vectors (never just the most recent), demonstrated via the full three-vector case contrasting the
+correct two-projection subtraction against the flawed one-projection version; and
+normalization happening only AFTER all orthogonalization is complete (never mid-sequence),
+demonstrated via the explicit phase-separation example. 3 misconceptions independently classified
+by Blueprint-declared severity — MC-1
+GRAM-SCHMIDT-PROJECTION-SUBTRACTED-ONLY-FROM-IMMEDIATE-PREDECESSOR (Foundational), MC-2
+ORTHOGONALIZATION-AND-NORMALIZATION-STEPS-CONFLATED (Moderate), MC-3
+ORTHOGONALITY-RESULT-NOT-VERIFIED (Moderate). Stale-metadata discrepancy found: the Blueprint's own
+Component 0/7 both state `unlocks: none` — the live KG lists `math.linalg.qr-factorization` — the
+live KG's current value used as authoritative, the third such `unlocks`-field discrepancy this
+campaign (after `math.linalg.dimension` and `math.linalg.coordinates` at Batch 171).
+
+`spectral-theorem`: $Q$'s orthogonality giving $Q^{-1}=Q^T$ FOR FREE as the genuinely special
+feature (never conflated with ordinary diagonalization), demonstrated via the direct $Q^TQ=I$
+contrast against a general non-symmetric matrix's genuine matrix-inversion requirement; $Q$
+requiring NORMALIZED eigenvectors (never raw ones); and the orthogonality guarantee covering only
+DIFFERENT eigenvalues (never same-eigenvalue eigenvectors automatically). 3 misconceptions
+independently classified by Blueprint-declared severity — MC-1
+SPECTRAL-THEOREM-CONFLATED-WITH-ORDINARY-DIAGONALIZATION (Foundational), MC-2
+EIGENVECTOR-NORMALIZATION-STEP-OMITTED (Foundational), MC-3
+SAME-EIGENVALUE-EIGENVECTORS-ASSUMED-AUTOMATICALLY-ORTHOGONAL (Moderate). Zero Blueprint/KG
+discrepancy; `math.fnal.spectral-theory` independently re-confirmed still unauthored, correctly
+remaining independence mode.
+
+Mathematics **743/908 → 745/908**, 163 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 745/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)".
+
+Fresh frontier recomputed for Batch 176 (24 concepts): `math.linalg.positive-definite`,
+`math.linalg.qr-factorization` (both newly reachable via `spectral-theorem`/`gram-schmidt`'s
+corrected/declared unlocking), plus `math.cat.category`, `math.cx.complex-numbers-analysis`,
+`math.de.systems-matrix-method`, `math.fnal.convolution`, `math.fnal.normed-space`,
+`math.graph.random-graph`, `math.linalg.dual-space`/`jordan-form`/`least-squares`/
+`matrix-exponential`/`matrix-representation`/`tensor`,
+`math.num.floating-point`/`interpolation`/`root-finding`, `math.opt.stochastic-gradient`,
+`math.prob.characteristic-function`/`joint-distribution`,
+`math.stats.normal-distribution`/`percentile`/`sampling-distribution`,
+`math.top.topological-space`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `c9c570a` on `main`, pushed directly.

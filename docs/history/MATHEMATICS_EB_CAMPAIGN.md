@@ -5119,3 +5119,29 @@ matrix-representation/tensor, math.num.floating-point/interpolation/root-finding
 math.opt.stochastic-gradient, math.prob.characteristic-function/joint-distribution,
 math.stats.normal-distribution/percentile/sampling-distribution, math.top.topological-space.
 Campaign continues under the same active `/loop`.
+
+### Batch 175 (2026-09-19) — third stale-unlocks correction
+
+Authored `gram-schmidt` (each new vector subtracts projections onto ALL previously constructed
+vectors; normalization only after orthogonalization is complete) and `spectral-theorem` (Q's
+orthogonality giving Q⁻¹=Qᵀ for free as the special feature; Q requires normalized eigenvectors;
+the orthogonality guarantee covers only different eigenvalues). `gram-schmidt` had a stale
+`unlocks` correction (Blueprint said "none"; live KG lists math.linalg.qr-factorization — third
+such discrepancy this campaign). `spectral-theorem` had zero discrepancy; math.fnal.spectral-theory
+confirmed still unauthored. Mathematics **745/908** (743→745), 163 remaining. Full per-concept
+detail in `COVERAGE.md` Batch 175. Validated: KG validator PASS (908/908 reachable, file
+untouched), `scripts/math/state.ts` confirms mathematics 745/908 (13 EB-certified domains
+unchanged), `tsc --noEmit` clean, targeted EB/curriculum tests (7 files) 561/561 passed. Full
+whole-repo suite not re-attempted, per the established Batch 109-110 hang precedent. No Physics/
+Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Commit `c9c570a` on `main`, pushed
+directly.
+
+Fresh frontier recomputed for Batch 176 (24 concepts): math.linalg.positive-definite,
+math.linalg.qr-factorization (newly reachable via spectral-theorem/gram-schmidt's unlocking), plus
+math.cat.category, math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution, math.fnal.normed-space, math.graph.random-graph, math.linalg.dual-space/
+jordan-form/least-squares/matrix-exponential/matrix-representation/tensor,
+math.num.floating-point/interpolation/root-finding, math.opt.stochastic-gradient,
+math.prob.characteristic-function/joint-distribution,
+math.stats.normal-distribution/percentile/sampling-distribution, math.top.topological-space.
+Campaign continues under the same active `/loop`.
