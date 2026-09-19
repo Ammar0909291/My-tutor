@@ -3843,3 +3843,28 @@ concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph`, `math.lin
 `math.stats`, `math.top`. Campaign continues under the same active `/loop`; re-derive the
 frontier fresh via `scripts/math/state.ts` (and each candidate's actual `requires`) each
 iteration rather than trusting any number or `children`/`unlocks`-field assumption recorded here.
+
+### Batch 122 (2026-09-19) — second reverse-direction discrepancy: a stale independence claim
+
+Authored `expected-value` (E[X] as probability-weighted average, never unweighted mean; discrete
+sum vs. continuous integral matched to type; E[X] as a long-run average, not necessarily
+achievable) and `series-rigorous` (series convergence is Cauchy-sequence convergence of partial
+sums; absolute convergence sufficient but never necessary, via the alternating harmonic series;
+rearrangement invariant for absolute, sensitive for conditional convergence). `series-rigorous`'s
+Blueprint correctly called `math.seq.comparison-test` unauthored when written, but `ls` confirmed
+it's now authored — SECOND reverse-direction discrepancy this campaign (after Batch 112).
+Corrected to a genuine cross-link probe. Both concepts zero Blueprint/KG metadata discrepancy on
+every other field. Mathematics **639/908** (637→639), 269 remaining. Full per-concept detail in
+`COVERAGE.md` Batch 122. Validated: KG validator PASS (908/908 reachable, file untouched),
+`scripts/math/state.ts` confirms mathematics 639/908 (12 EB-certified domains unchanged), `tsc
+--noEmit` clean, targeted EB/curriculum tests 118/118 passed. Full whole-repo suite not
+re-attempted, per the established Batch 109-110 hang precedent. No Physics/Chemistry/English/
+Biology/CS/KG/Blueprint/runtime file touched. Commit `297e0a3` on `main`, pushed directly.
+
+Fresh frontier: `math.fnal.convolution` still reachable. `math.prob.convergence-types`, `math.
+prob.distribution`, `math.prob.generating-function`, `math.prob.normal-distribution`, `math.prob.
+poisson-process`, `math.prob.quantile` all reachable. 27 other ready concepts remain across
+`math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`, `math.num`, `math.stats`,
+`math.top`. Campaign continues under the same active `/loop`; re-derive the frontier fresh via
+`scripts/math/state.ts` (and each candidate's actual `requires`) each iteration rather than
+trusting any number or `children`/`unlocks`-field assumption recorded here.

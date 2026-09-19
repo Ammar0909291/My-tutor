@@ -14187,3 +14187,57 @@ other ready concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `93ba674` on `main`, pushed directly.
+
+### Batch 122 (2026-09-19) — second reverse-direction discrepancy: a stale independence claim
+
+Re-derived the frontier fresh (36 ready concepts). Selected `math.prob.expected-value` (requires
+`random-variable`/`pmf`/`pdf`, all authored) and `math.real.series-rigorous` (requires
+`convergence-sequences`/`math.seq.series`, both authored/certified). Authored both.
+
+`expected-value` (requires `random-variable`/`pmf`/`pdf`, unlocks `variance`/`moments`,
+cross_links none): $E[X]$ as a probability-weighted average (weighted-GPA analogy), never the
+unweighted mean ($P(X=2)=0.6,P(X=8)=0.4$ gives $E[X]=4.4$, pulled below the midpoint 5); discrete
+sum versus continuous integral as genuinely different, type-matched computations; and $E[X]$ as a
+long-run average that NEED NOT be an achievable single outcome (the -\$0.50 lottery expectation).
+3 misconceptions independently classified — MC-1 ARITHMETIC-AVERAGE-CONFUSION
+(overgeneralization, Foundational), MC-2 DISCRETE-FORMULA-FOR-CONTINUOUS (instruction-induced),
+MC-3 EXPECTED-MUST-BE-ACHIEVABLE (perceptual). Zero Blueprint/KG metadata discrepancy.
+
+`series-rigorous` (requires `convergence-sequences`/`math.seq.series`, unlocks
+`absolute-convergence`, cross_links `math.seq.comparison-test`): series convergence as Cauchy-
+sequence convergence of the partial sums, no new machinery ($\sum1/2^n$'s direct
+$\varepsilon$-$N$ verification); absolute convergence as SUFFICIENT but never necessary for
+convergence, via the alternating harmonic series (convergent to $\ln2$, yet its absolute-value
+series — the harmonic series — diverges); and rearrangement-invariance holding for absolute
+convergence but genuinely FAILING for conditional convergence, per the Riemann Rearrangement
+Theorem. 3 misconceptions independently classified — MC-1 SERIES-CONVERGENCE-AS-NEW-NOTION
+(overgeneralization, Foundational), MC-2 CONVERGENCE-ASSUMED-TO-IMPLY-ABSOLUTE-CONVERGENCE
+(overgeneralization, Foundational), MC-3 REARRANGEMENT-ASSUMED-UNIVERSALLY-INVARIANT
+(overgeneralization, Moderate).
+
+**Blueprint/P76-mode discrepancy found and corrected (reverse direction, SECOND occurrence after
+Batch 112's `convergence-sequences`)**: `series-rigorous`'s Blueprint states `math.seq.
+comparison-test` was checked and confirmed NOT yet authored — correct when the Blueprint was
+written. Verified via `ls educational-brain/concepts/mathematics/` that `math.seq.comparison-test`
+IS now authored (part of the certified `math.seq` domain). Corrected to a GENUINE cross-link
+probe, directly connecting this concept's triangle-inequality absolute-convergence argument to the
+comparison test's own bounding technique — a connection the Blueprint's own Component 7 had
+explicitly anticipated a "future revision" might add.
+
+`math.prob` gains its ninth entry this campaign. `math.real` gains its sixth entry. Mathematics
+**637/908 → 639/908**, 269 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 639/908, 12
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum
+tests: "Test Files 7 passed (7), Tests 118 passed (118)". Full whole-repo suite not re-attempted
+this batch, consistent with the established precedent from Batches 109-110.
+
+Computed fresh frontier post-batch: `math.fnal.convolution` still reachable. `math.prob.
+convergence-types`/`math.prob.distribution`/`math.prob.generating-function`/`math.prob.normal-
+distribution`/`math.prob.poisson-process`/`math.prob.quantile` all reachable. 27 other ready
+concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`, `math.num`,
+`math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `297e0a3` on `main`, pushed directly.
