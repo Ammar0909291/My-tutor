@@ -17674,3 +17674,25 @@ math.fnal.convolution/normed-space, math.graph.random-graph,
 math.linalg.matrix-representation/tensor, math.num.error-analysis/interpolation/newtons-method/
 qr-algorithm, math.opt.semidefinite-programming, math.prob.characteristic-function/
 joint-distribution, math.stats.normal-approximation/sampling-distribution.
+
+## Batch 197 (2026-09-19) — one wrong-corpus cross-link discrepancy
+
+Authored `math.prob.characteristic-function` (t→it guarantees always-existence via Euler's
+formula, unlike the MGF; φ_X IS the Fourier transform applied to a density, never a separate
+inversion theory; the always-exists guarantee makes uniqueness usable for heavy-tailed
+distributions) and `math.prob.joint-distribution` (marginals require genuine summing/integrating,
+never read from a single joint-table entry; integration bounds must match the actual support
+shape; marginals alone never determine the joint). `characteristic-function` had a wrong-corpus
+cross-link discrepancy: its Blueprint's math.fnal.fourier-transform authorship check pointed at
+the blueprints directory rather than the EB corpus — independently re-verified NOT yet authored;
+transfer probe downgraded to independence mode (tenth such discrepancy this campaign).
+`joint-distribution` zero discrepancy. Mathematics **787/908 → 789/908**, 119 remaining.
+Validated: KG PASS (908/908 reachable), state.ts confirms 789/908, tsc clean, tests 561/561.
+Commit `6a8d0f1`, pushed.
+
+Fresh frontier for Batch 198 (21 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/interpolation/newtons-method/
+qr-algorithm, math.opt.semidefinite-programming, math.prob.conditional-distribution/covariance/
+marginal-distribution, math.stats.normal-approximation/sampling-distribution.

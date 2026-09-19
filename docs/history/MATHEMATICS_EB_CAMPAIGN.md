@@ -5676,3 +5676,23 @@ math.linalg.matrix-representation/tensor, math.num.error-analysis/interpolation/
 qr-algorithm, math.opt.semidefinite-programming, math.prob.characteristic-function/
 joint-distribution, math.stats.normal-approximation/sampling-distribution. Campaign continues
 under the same active `/loop`.
+
+### Batch 197 (2026-09-19) — one wrong-corpus cross-link discrepancy
+
+Authored `characteristic-function` (t→it guarantees always-existence via Euler's formula; φ_X IS
+the Fourier transform applied to a density; always-exists makes uniqueness usable for heavy tails)
+and `joint-distribution` (marginals require genuine sum/integral, never a single cell; bounds must
+match actual support; marginals alone never determine the joint). `characteristic-function` had a
+wrong-corpus cross-link discrepancy: math.fnal.fourier-transform check pointed at blueprints dir,
+not EB corpus — downgraded to independence mode (tenth such this campaign). `joint-distribution`
+zero discrepancy. Mathematics **789/908** (787→789), 119 remaining. Full detail in `COVERAGE.md`
+Batch 197. Validated: KG PASS, state.ts 789/908, tsc clean, tests 561/561. Commit `6a8d0f1`,
+pushed.
+
+Fresh frontier for Batch 198 (21 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/interpolation/newtons-method/
+qr-algorithm, math.opt.semidefinite-programming, math.prob.conditional-distribution/covariance/
+marginal-distribution, math.stats.normal-approximation/sampling-distribution. Campaign continues
+under the same active `/loop`.
