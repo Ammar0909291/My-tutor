@@ -4550,3 +4550,25 @@ math.de concepts (laplace-transform, phase-plane, bvp, pde, second-order-homogen
 ready concepts across math.linalg, math.prob.joint-distribution, math.stats, math.cx, math.top,
 math.fnal, math.num, math.opt, math.graph, math.cat still reachable. Campaign continues under the
 same active `/loop`.
+
+### Batch 151 (2026-09-19)
+
+Authored `second-order-homogeneous` (fundamental sets requiring genuine linear independence, not
+just any two solutions; the Wronskian's one-point-sufficiency theorem; correct term order) and
+`phase-plane` (the phase portrait as slope-field construction generalized to a vector; equilibrium
+classification via linearization eigenvalues, never extensive plotting; global behavior invisible
+to either variable's slope field alone). Both zero Blueprint/KG discrepancy.
+`second-order-homogeneous` closes `math.de.second-order-linear`'s declared unlock; `phase-plane`
+closes `math.de.slope-field`'s declared unlock. Mathematics **697/908** (695→697), 211 remaining.
+Full per-concept detail in `COVERAGE.md` Batch 151. Validated: KG validator PASS (908/908
+reachable, file untouched), `scripts/math/state.ts` confirms mathematics 697/908 (13 EB-certified
+domains unchanged), `tsc --noEmit` clean, targeted EB/curriculum tests (7 files) 561/561 passed.
+Full whole-repo suite not re-attempted, per the established Batch 109-110 hang precedent. No
+Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Commit `ff5984c` on
+`main`, pushed directly.
+
+Fresh frontier to be recomputed at the start of Batch 152 per established discipline; remaining
+math.de concepts (char-equation, wronskian, stability-analysis, higher-order-ode, series-
+solution, laplace-transform, bvp, pde) and other ready concepts across math.linalg,
+math.prob.joint-distribution, math.stats, math.cx, math.top, math.fnal, math.num, math.opt,
+math.graph, math.cat still reachable. Campaign continues under the same active `/loop`.

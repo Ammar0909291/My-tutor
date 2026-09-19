@@ -15630,3 +15630,48 @@ ready concepts across `math.linalg`, `math.prob.joint-distribution`, `math.stats
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `82fb557` on `main`, pushed directly.
+
+## Batch 151 (2026-09-19)
+
+Authored `math.de.second-order-homogeneous` and `math.de.phase-plane`, continuing the `math.de`
+domain.
+
+`second-order-homogeneous`: the general solution $c_1y_1+c_2y_2$ requiring $y_1,y_2$ to be a
+genuine FUNDAMENTAL SET (linearly independent, never just any two valid solutions), demonstrated
+via $e^x,3e^x$'s collapsed one-parameter family versus $e^x,e^{-x}$'s genuine span; the WRONSKIAN
+$W=y_1y_2'-y_1'y_2$ as a one-point-sufficient independence test (for solutions of the same
+equation), demonstrated via $\cos x,\sin x$'s $W(0)=1\ne0$ confirming independence everywhere; and
+the precise term order, never swapped. 3 misconceptions independently classified by
+Blueprint-declared severity — MC-1 ANY-TWO-SOLUTIONS-ASSUMED-TO-FORM-FUNDAMENTAL-SET
+(Foundational), MC-2 WRONSKIAN-CHECKED-AT-ONLY-ONE-ARBITRARY-POINT-WITHOUT-JUSTIFICATION
+(Moderate), MC-3 WRONSKIAN-COMPUTED-WITH-SIGN-OR-TERM-ORDER-ERROR (Moderate). Zero Blueprint/KG
+discrepancy. Closes `math.de.second-order-linear`'s declared unlock.
+
+`phase-plane`: the phase portrait as `math.de.slope-field`'s own grid-evaluation construction
+GENERALIZED to a vector $(f,g)$ for 2D systems, demonstrated via $x'=y,y'=-x$'s rotational
+pattern; equilibrium classification read DIRECTLY from the linearization's Jacobian eigenvalues
+(node/saddle/spiral/center), demonstrated via $x'=x-y,y'=x+y$'s $\lambda=1\pm i$ outward-spiral
+classification with zero explicit solving; and phase-plane analysis revealing GLOBAL behavior
+invisible to either variable's slope field frozen separately, demonstrated via a predator-prey
+saddle-at-extinction/center-at-coexistence global structure. 3 misconceptions independently
+classified by Blueprint-declared severity — MC-1 PHASE-PORTRAIT-ASSUMED-GENUINELY-NEW-PROCEDURE
+(Foundational), MC-2 EQUILIBRIUM-CLASSIFICATION-ASSUMED-TO-REQUIRE-EXTENSIVE-PLOTTING (High),
+MC-3 SEPARATE-SLOPE-FIELDS-ASSUMED-EQUIVALENT-TO-PHASE-PORTRAIT (Moderate). Zero Blueprint/KG
+discrepancy. Closes `math.de.slope-field`'s declared unlock.
+
+Mathematics **695/908 → 697/908**, 211 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 697/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Fresh frontier to be recomputed at the start of Batch 152 per established discipline; remaining
+`math.de` concepts (char-equation, wronskian, stability-analysis, higher-order-ode, series-
+solution, laplace-transform, bvp, pde) and other ready concepts across `math.linalg`,
+`math.prob.joint-distribution`, `math.stats`, `math.cx`, `math.top`, `math.fnal`, `math.num`,
+`math.opt`, `math.graph`, `math.cat` still reachable.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `ff5984c` on `main`, pushed directly.
