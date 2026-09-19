@@ -14869,3 +14869,58 @@ also require `math.linalg.matrix-inverse`, status to re-verify). `math.real.riem
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `e62a0e6` on `main`, pushed directly.
+
+### Batch 135 (2026-09-19) — fifth reverse-direction discrepancy
+
+`math.real.riemann-integral`: partitions and Darboux upper/lower sums, demonstrated via $x^2$ on
+$[0,2]$'s coarse-to-refined bound narrowing toward $8/3$; rigorous Riemann integrability
+($\inf_PU=\sup_PL$) as the precise version of `math.calc.definite-integral`'s informal Riemann-sum
+limit; boundedness proven necessary but NOT sufficient via the Dirichlet function, which is
+perfectly bounded yet has $U(f,P)=1$, $L(f,P)=0$ for EVERY partition, at every refinement level. 3
+misconceptions independently classified — MC-1
+BOUNDEDNESS-ASSUMED-SUFFICIENT-FOR-INTEGRABILITY (Foundational), MC-2
+UPPER-LOWER-SUMS-CONFUSED-WITH-SUP-INF-OVER-ALL-PARTITIONS (Moderate), MC-3
+FINER-PARTITION-ASSUMED-TO-ALWAYS-CLOSE-THE-GAP (Moderate). **Reverse-direction discrepancy found
+and corrected (fifth occurrence this campaign, after Batches 112/122/123/131)**: the Blueprint's
+own Component 7 states `math.meas.lebesgue-integral` was checked via `ls docs/curriculum/
+blueprints/` and confirmed NOT YET authored at write-time — correct then, but verified via `ls
+educational-brain/concepts/mathematics/` that it IS now authored. Upgraded from independence mode
+to a GENUINE CROSS-LINK PROBE, connecting this concept's Dirichlet-function non-integrability
+proof directly to that concept's own demonstration that Lebesgue integration handles the identical
+function trivially ($\int f\,d\mu=0$, since the rationals have measure zero) — a genuine extension,
+never mere equivalence.
+
+`math.real.uniform-convergence`: uniform versus pointwise convergence distinguished by quantifier
+order (one $N$ for every point at once versus a per-point $N$), demonstrated via $x^n$ on $[0,1)$'s
+persistent supremum distance of 1; the continuity-preservation theorem's genuine necessity of
+uniform (not merely pointwise) convergence, demonstrated via $x^n$'s discontinuous pointwise limit
+on $[0,1]$; termwise integration needing only uniform convergence of $f_n$ versus termwise
+differentiation needing the SEPARATE uniform convergence of $f_n'$, demonstrated via
+$\sin(nx)/\sqrt n\to0$ uniformly yet its derivatives diverging. 3 misconceptions independently
+classified — MC-1 POINTWISE-CONVERGENCE-CONFLATED-WITH-UNIFORM (Foundational), MC-2
+POINTWISE-LIMIT-OF-CONTINUOUS-ASSUMED-CONTINUOUS (Foundational), MC-3
+UNIFORM-CONVERGENCE-OF-FUNCTIONS-ASSUMED-SUFFICIENT-FOR-TERMWISE-DIFFERENTIATION (Moderate). Zero
+Blueprint/KG metadata discrepancy — `math.de.fourier-convergence` cross-link confirmed still
+unauthored via `ls`, independence mode correctly used per the Blueprint's own self-report.
+
+`math.real.riemann-integral` opens two further frontier concepts (`math.real.riemann-
+integrability`, `math.real.ftc-rigorous`, both terminal single-prerequisite unlocks now
+reachable). `math.real.uniform-convergence` opens `math.real.weierstrass-approximation` as a new
+frontier concept. Mathematics **663/908 → 665/908**, 243 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 665/908, 12
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Computed fresh frontier post-batch (not yet re-derived this entry — will be recomputed fresh at
+the start of Batch 136 per established discipline): `math.real.riemann-integrability`,
+`math.real.ftc-rigorous`, `math.real.weierstrass-approximation` newly reachable. `math.real.
+implicit-function-theorem`/`math.real.inverse-function-theorem` remain reachable from the
+differentiability-rigorous chain. Numerous `math.prob` concepts remain reachable. Other ready
+concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`, `math.num`,
+`math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `17be533` on `main`, pushed directly.

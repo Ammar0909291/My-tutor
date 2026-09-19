@@ -4187,3 +4187,27 @@ Fresh frontier to be recomputed at the start of Batch 135 per established discip
 `math.real.implicit-function-theorem`/`math.real.inverse-function-theorem` (also requiring
 `math.linalg.matrix-inverse`), and `math.real.riemann-integral`/`math.real.uniform-convergence`
 remain candidates. Campaign continues under the same active `/loop`.
+
+### Batch 135 (2026-09-19) — fifth reverse-direction discrepancy
+
+Authored `riemann-integral` (Darboux upper/lower sums squeezing the true area; rigorous
+integrability as inf U = sup L; boundedness necessary-not-sufficient via the Dirichlet function's
+persistent U=1,L=0 gap) and `uniform-convergence` (uniform vs. pointwise via quantifier order,
+x^n's persistent sup-distance of 1; continuity-preservation genuinely needing uniform convergence,
+x^n's discontinuous pointwise limit; termwise integration vs. differentiation's separate
+hypotheses, sin(nx)/√n). `riemann-integral`'s Blueprint claimed `math.meas.lebesgue-integral` "not
+yet authored" — correct when written, stale now; verified via `ls` that it IS authored; upgraded
+to a genuine cross-link probe using the shared Dirichlet-function example (fifth reverse-direction
+occurrence this campaign, after Batches 112/122/123/131). `uniform-convergence` zero discrepancy;
+`math.de.fourier-convergence` confirmed still unauthored, independence mode correct. Mathematics
+**665/908** (663→665), 243 remaining. Full per-concept detail in `COVERAGE.md` Batch 135.
+Validated: KG validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts`
+confirms mathematics 665/908 (12 EB-certified domains unchanged), `tsc --noEmit` clean, targeted
+EB/curriculum tests (7 files) 561/561 passed. Full whole-repo suite not re-attempted, per the
+established Batch 109-110 hang precedent. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/
+runtime file touched. Commit `17be533` on `main`, pushed directly.
+
+Fresh frontier to be recomputed at the start of Batch 136 per established discipline;
+`math.real.riemann-integrability`, `math.real.ftc-rigorous`, `math.real.weierstrass-
+approximation` newly reachable; `math.real.implicit-function-theorem`/`inverse-function-theorem`
+remain candidates. Campaign continues under the same active `/loop`.
