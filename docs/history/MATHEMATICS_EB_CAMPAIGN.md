@@ -3764,3 +3764,30 @@ remain across `math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`, `ma
 `math.stats`, `math.top`. Campaign continues under the same active `/loop`; re-derive the
 frontier fresh via `scripts/math/state.ts` (and each candidate's actual `requires`) each
 iteration rather than trusting any number or `children`/`unlocks`-field assumption recorded here.
+
+### Batch 119 (2026-09-19) — eleventh discrepancy; math.meas moves to 12/13
+
+Authored `l2-space` (parallelogram law as p=2's litmus test; Fourier series as genuine orthogonal
+projection; Parseval as Pythagoras generalized) and `pdf` (normalization as an integral condition;
+E[X] as the mean, never the mode; variance requires squaring the deviation). `l2-space`'s
+Blueprint claimed BOTH `math.fnal.hilbert-space` AND `math.de.fourier-transform` authored, but
+`ls` found neither in the EB corpus — ELEVENTH discrepancy this campaign, second with two false
+claims in one Blueprint (after Batch 117). Corrected to independence mode. `pdf`'s Blueprint
+separately claimed an unlock (`math.prob.continuous-distributions`) the live KG doesn't list — a
+new discrepancy category (unlocks mismatch); used the KG's empty list. `math.meas` **12/13**
+(11→12, `radon-nikodym` remains). Mathematics **633/908** (631→633), 275 remaining. Full
+per-concept detail in `COVERAGE.md` Batch 119. Validated: KG validator PASS (908/908 reachable,
+file untouched), `scripts/math/state.ts` confirms math.meas 12/13, mathematics 633/908 (11
+EB-certified domains unchanged), `tsc --noEmit` clean, targeted EB/curriculum tests 118/118
+passed. Full whole-repo suite not re-attempted, per the established Batch 109-110 hang precedent.
+No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Commit `48a7795` on
+`main`, pushed directly.
+
+Fresh frontier: `math.meas.radon-nikodym`, `math.fnal.convolution` still reachable. `math.prob.
+convergence-types`, `math.prob.discrete-distributions`, `math.prob.distribution`, `math.prob.
+generating-function`, `math.prob.quantile` all reachable. `math.real.pointwise-convergence`,
+`math.real.series-rigorous` still reachable. 27 other ready concepts remain across `math.cat`,
+`math.cx`, `math.de`, `math.graph`, `math.linalg`, `math.num`, `math.stats`, `math.top`. Campaign
+continues under the same active `/loop`; re-derive the frontier fresh via `scripts/math/state.ts`
+(and each candidate's actual `requires`) each iteration rather than trusting any number or
+`children`/`unlocks`-field assumption recorded here.

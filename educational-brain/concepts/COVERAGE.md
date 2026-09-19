@@ -14026,3 +14026,59 @@ reachable. 27 other ready concepts remain across `math.cat`, `math.cx`, `math.de
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `8c765ba` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 119 (2026-09-19) — eleventh discrepancy; math.meas moves to 12/13
+
+Re-derived the frontier fresh (38 ready concepts). Selected `math.meas.l2-space` (requires only
+`lp-space`, authored Batch 117) and `math.prob.pdf` (requires only `continuous-rv`, authored Batch
+118). Authored both.
+
+`l2-space` (requires `lp-space`, unlocks none, cross_links `math.fnal.hilbert-space`/`math.de.
+fourier-transform`): the parallelogram law as the litmus test proving $p=2$ is special (verified
+exactly for $f=1,g=x$ on $[0,1]$, both sides $=8/3$); Fourier series as genuine ORTHOGONAL
+PROJECTION using the orthonormal basis $e_n(x)=e^{inx}/\sqrt{2\pi}$, never a separate technique;
+and Parseval's theorem as the Pythagorean theorem generalized to infinite dimensions, a direct
+consequence of orthonormality and completeness. 3 misconceptions independently classified — MC-1
+ALL-LP-SPACES-ASSUMED-TO-HAVE-INNER-PRODUCTS (overgeneralization, Foundational), MC-2
+L2-FOURIER-SERIES-TREATED-AS-FORMAL-ANALOGY (overgeneralization, Foundational), MC-3
+PARSEVAL-TREATED-AS-INDEPENDENT-FACT (instruction-induced, Moderate).
+
+`pdf` (requires `continuous-rv`, unlocks none, cross_links none): normalization as an integral
+condition, never a point evaluation ($f(1)=1$ giving $k=1$ fails for $f=kx$ on $[0,2]$, since
+$\int_0^2x\,dx=2\ne1$); $E[X]$ as the probability-weighted MEAN, never the mode (the skewed
+$f(x)=3x^2$ peaks at 1 but $E[X]=3/4$); and variance requiring the SQUARED deviation, since
+$E[X-\mu]$ is always trivially zero. 3 misconceptions independently classified — MC-1
+EXPECTATION-AS-MODE (overgeneralization, Foundational), MC-2 VARIANCE-AS-EXPECTED-DEVIATION
+(notation-induced), MC-3 NORMALIZATION-BY-EVALUATION (language contamination).
+
+**Blueprint/P76-mode discrepancy found and corrected (ELEVENTH occurrence this campaign, SECOND
+involving two simultaneously-false cross-link claims in one Blueprint, after Batch 117)**:
+`l2-space`'s Blueprint claimed BOTH `math.fnal.hilbert-space` AND `math.de.fourier-transform`
+"checked via `ls docs/curriculum/blueprints/`" and confirmed authored, setting cross-link-probe
+mode against both. Verified via `ls educational-brain/concepts/mathematics/` that NEITHER has an
+authored EB entry. Corrected to independence mode.
+
+**Separate Blueprint/KG `unlocks`-field discrepancy found (a new discrepancy category, distinct
+from cross_links/P76 and from stale-metadata)**: `pdf`'s Blueprint Component 7 lists `math.prob.
+continuous-distributions` as an unlocked concept, but the live KG's `unlocks` field for this
+concept is empty. Used the KG's authoritative empty list.
+
+`math.meas` **11/13 → 12/13** (`radon-nikodym` remains). `math.prob` gains its sixth entry this
+campaign. Mathematics **631/908 → 633/908**, 275 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.meas` 12/13,
+mathematics 633/908, 11 EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0).
+Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 118 passed (118)". Full whole-repo
+suite not re-attempted this batch, consistent with the established precedent from Batches
+109-110.
+
+Computed fresh frontier post-batch: `math.meas.radon-nikodym`/`math.fnal.convolution` still
+reachable. `math.prob.convergence-types`/`math.prob.discrete-distributions`/`math.prob.
+distribution`/`math.prob.generating-function`/`math.prob.quantile` all reachable. `math.real.
+pointwise-convergence`/`math.real.series-rigorous` still reachable. 27 other ready concepts remain
+across `math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`, `math.num`, `math.stats`,
+`math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `48a7795` on `main`, pushed directly, continuing under the same active `/loop`.
