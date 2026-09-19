@@ -14924,3 +14924,50 @@ concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph`, `math.lin
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `17be533` on `main`, pushed directly.
+
+### Batch 136 (2026-09-19) — two clean cross-link verifications, closing riemann-integral's unlocks
+
+`math.real.ftc-rigorous`: Part 1 shown to genuinely generalize `math.calc.ftc-part1` in two ways
+(Lipschitz continuity of $F$ from mere integrability; differentiability $F'(x_0)=f(x_0)$ at any
+individual continuity point, even amid other discontinuities), demonstrated via $f(t)=t$
+($t\ne0$), $f(0)=5$; the Lipschitz bound proven from boundedness ALONE while differentiability
+needs continuity AT the point, demonstrated via $\sin t$'s separate verifications; Part 2 proven
+via MVT's telescoping sum with $F$ given (not constructed), shown logically OPPOSITE to Part 1's
+direction. 3 misconceptions independently classified — MC-1
+RIGOROUS-FTC1-ASSUMED-MERE-RESTATEMENT (Foundational), MC-2
+LIPSCHITZ-CONCLUSION-CONFLATED-WITH-DIFFERENTIABILITY-HYPOTHESIS (High), MC-3
+PART-1-AND-PART-2-ASSUMED-SAME-DIRECTION (High). Zero Blueprint/KG metadata discrepancy —
+cross-link (`math.calc.ftc-part1`) independently re-verified genuinely authored.
+
+`math.real.riemann-integrability`: the Lebesgue criterion (bounded AND discontinuity-set-measure-
+zero) shown as the EXACT if-and-only-if dividing line resolving both of `math.real.riemann-
+integral`'s one-directional gaps at once, demonstrated via a three-function table including the
+step function $\lfloor x\rfloor$ (measure-zero discontinuity set, integrable despite not being
+continuous everywhere); the Dirichlet function re-diagnosed independently (discontinuity set = all
+of $[0,1]$, measure 1, positive) confirming, via a genuinely different mechanism, the same
+non-integrability already established via Darboux sums; a countably-discontinuous-yet-integrable
+function contrasted directly against the Dirichlet function, confirming measure (never
+cardinality) decides integrability. 3 misconceptions independently classified — MC-1
+LEBESGUE-CRITERION-ASSUMED-MERELY-SUFFICIENT (Foundational), MC-2
+LEBESGUE-CRITERION-DIRICHLET-PREDICTION-ASSUMED-COINCIDENTAL (High), MC-3
+INFINITE-DISCONTINUITIES-ASSUMED-TO-RULE-OUT-INTEGRABILITY (High). Zero Blueprint/KG metadata
+discrepancy — cross-link (`math.meas.measure-zero`) independently re-verified genuinely authored.
+
+Both concepts close out `math.real.riemann-integral`'s two declared unlocks (Batch 135), each a
+terminal leaf with no further unlocks of its own. Mathematics **665/908 → 667/908**, 241
+remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 667/908, 12
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Computed fresh frontier post-batch (not yet re-derived this entry — will be recomputed fresh at
+the start of Batch 137 per established discipline): `math.real.weierstrass-approximation`,
+`math.real.implicit-function-theorem`, `math.real.inverse-function-theorem` remain candidates.
+Numerous `math.prob` concepts remain reachable. Other ready concepts remain across `math.cat`,
+`math.cx`, `math.de`, `math.graph`, `math.linalg`, `math.num`, `math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `8e20367` on `main`, pushed directly.

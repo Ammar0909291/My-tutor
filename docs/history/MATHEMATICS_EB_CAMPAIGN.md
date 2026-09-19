@@ -4211,3 +4211,23 @@ Fresh frontier to be recomputed at the start of Batch 136 per established discip
 `math.real.riemann-integrability`, `math.real.ftc-rigorous`, `math.real.weierstrass-
 approximation` newly reachable; `math.real.implicit-function-theorem`/`inverse-function-theorem`
 remain candidates. Campaign continues under the same active `/loop`.
+
+### Batch 136 (2026-09-19) — two clean cross-link verifications, closing riemann-integral's unlocks
+
+Authored `ftc-rigorous` (Part 1 generalizing calc.ftc-part1 via Lipschitz-from-boundedness and
+pointwise-continuity differentiability; Part 2's MVT-telescoping proof, logically opposite to
+Part 1) and `riemann-integrability` (the Lebesgue criterion as the exact dividing line;
+independent re-diagnosis of the Dirichlet function via measure; a countably-discontinuous-yet-
+integrable function proving measure, not cardinality, decides integrability). Both zero Blueprint/
+KG discrepancy — cross-links (`math.calc.ftc-part1`, `math.meas.measure-zero`) both independently
+re-verified genuinely authored. Both close riemann-integral's two declared unlocks. Mathematics
+**667/908** (665→667), 241 remaining. Full per-concept detail in `COVERAGE.md` Batch 136.
+Validated: KG validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts`
+confirms mathematics 667/908 (12 EB-certified domains unchanged), `tsc --noEmit` clean, targeted
+EB/curriculum tests (7 files) 561/561 passed. Full whole-repo suite not re-attempted, per the
+established Batch 109-110 hang precedent. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/
+runtime file touched. Commit `8e20367` on `main`, pushed directly.
+
+Fresh frontier to be recomputed at the start of Batch 137 per established discipline;
+`math.real.weierstrass-approximation`, `math.real.implicit-function-theorem`, `math.real.
+inverse-function-theorem` remain candidates. Campaign continues under the same active `/loop`.
