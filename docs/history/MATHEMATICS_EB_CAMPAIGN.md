@@ -6209,3 +6209,21 @@ Fresh frontier for Batch 226 (10 concepts): math.cat.adjunction/functor-category
 math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
 math.fnal.completeness, math.graph.random-graph, math.opt.semidefinite-programming,
 math.prob.martingale. Campaign continues under the same active `/loop`.
+
+## Batch 226 (2026-09-19) — MILESTONE: math.de fully EB-certified (17th domain)
+
+Authored `completeness` ("Cauchy" and "complete" are never synonyms — completeness is
+space-dependent; can depend on the specific norm, never assumed inherited; incomplete spaces still
+have some convergent sequences) and `systems-matrix-method` (solution is v·eλt, never the scalar
+alone; complex eigenvalues need Re/Im extraction, never left complex; matrix exponential is the
+power series/diagonalization construction, never entrywise). One reverse-direction discrepancy:
+`completeness`'s cross-link `math.real.completeness-metric` is now authored though the Blueprint
+said unauthored at write time — noted, probe unchanged. Mathematics **847/908** (845→847), 61
+remaining. **math.de is now the 17th fully EB-certified domain**. Full detail in `COVERAGE.md`
+Batch 226. Validated: KG PASS, state.ts 847/908, tsc clean, tests 561/561. Commit `b0d8e72`,
+pushed.
+
+Fresh frontier for Batch 227 (9 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.fnal.banach-space,
+math.graph.random-graph, math.opt.semidefinite-programming, math.prob.martingale. Campaign
+continues under the same active `/loop`.

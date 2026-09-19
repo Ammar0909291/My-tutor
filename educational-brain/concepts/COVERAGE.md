@@ -18268,3 +18268,29 @@ Fresh frontier for Batch 226 (10 concepts): math.cat.adjunction/functor-category
 math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
 math.fnal.completeness, math.graph.random-graph, math.opt.semidefinite-programming,
 math.prob.martingale. Campaign continues under the same active `/loop`.
+
+## Batch 226 (2026-09-19) — 1 discrepancy (reverse-direction) — MILESTONE: math.de fully
+EB-certified (17th domain)
+
+Authored `math.fnal.completeness` ("Cauchy" and "convergent/complete" are never synonyms —
+completeness is a separate, space-dependent property; completeness can depend on the specific
+norm chosen, never assumed inherited across norms; an incomplete space still has some convergent
+Cauchy sequences, never assume none converge) and `math.de.systems-matrix-method` (the solution
+is $v\cdot e^{\lambda t}$, never the scalar $e^{\lambda t}$ alone; complex conjugate eigenvalues
+must be converted to a real solution pair via Re/Im, never left complex; the matrix exponential is
+the power series/diagonalization construction, never entrywise exponentials). Reverse-direction
+discrepancy on `completeness`: Blueprint's cross-link `math.real.completeness-metric` was
+"not yet authored" at write time but is now authored — noted for the record (16th discrepancy
+this campaign), independence-mode probe retained as authored. `systems-matrix-method` zero
+discrepancy (cross-link `math.linalg.matrix-exponential` confirmed authored, cross-link-mode
+probe engaged per Blueprint). Mathematics **845/908 → 847/908**, 61 remaining. **math.de is now
+the 17th fully EB-certified domain** (`scripts/math/state.ts` confirms: math.found, math.calc,
+math.geom, math.linalg, math.alg, math.arith, math.de, math.stats, math.abst, math.nt, math.disc,
+math.real, math.func, math.trig, math.seq, math.num, math.meas). Validated: KG PASS (908/908
+reachable), state.ts confirms 847/908 and the new certified-domain count, tsc clean, tests
+561/561. Commit `b0d8e72`, pushed.
+
+Fresh frontier for Batch 227 (9 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.fnal.banach-space,
+math.graph.random-graph, math.opt.semidefinite-programming, math.prob.martingale. Campaign
+continues under the same active `/loop`.
