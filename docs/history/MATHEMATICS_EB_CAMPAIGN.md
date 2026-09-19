@@ -5071,3 +5071,27 @@ matrix-representation/orthogonal-basis/projection/tensor, math.num.floating-poin
 root-finding, math.opt.stochastic-gradient, math.prob.characteristic-function/joint-distribution,
 math.stats.normal-distribution/percentile/sampling-distribution, math.top.topological-space.
 Campaign continues under the same active `/loop`.
+
+### Batch 173 (2026-09-19)
+
+Authored `inner-product-space` (the induced norm recovering familiar length; the structure
+hierarchy inner product⇒normed⇒metric as one-way, never reversible; Hilbert space requiring
+genuinely additional completeness) and `orthogonal-basis` (orthogonal vs. orthonormal as distinct,
+orthonormal strictly stronger; the ONB coordinate shortcut working via vanishing cross terms; the
+shortcut failing silently for a non-orthonormal basis). Both zero Blueprint/KG discrepancy;
+math.fnal.hilbert-space confirmed still unauthored, math.linalg.orthogonality confirmed authored.
+Mathematics **741/908** (739→741), 167 remaining. Full per-concept detail in `COVERAGE.md` Batch
+173. Validated: KG validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts`
+confirms mathematics 741/908 (13 EB-certified domains unchanged), `tsc --noEmit` clean, targeted
+EB/curriculum tests (7 files) 561/561 passed. Full whole-repo suite not re-attempted, per the
+established Batch 109-110 hang precedent. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/
+runtime file touched. Commit `7224ba6` on `main`, pushed directly.
+
+Fresh frontier recomputed for Batch 174 (21 concepts): math.linalg.spectral-theorem (newly
+reachable via orthogonal-basis's unlocking chain), plus math.cat.category,
+math.cx.complex-numbers-analysis, math.fnal.convolution, math.fnal.normed-space,
+math.graph.random-graph, math.linalg.diagonalization/dual-space/matrix-representation/projection/
+tensor, math.num.floating-point/interpolation/root-finding, math.opt.stochastic-gradient,
+math.prob.characteristic-function/joint-distribution,
+math.stats.normal-distribution/percentile/sampling-distribution, math.top.topological-space.
+Campaign continues under the same active `/loop`.

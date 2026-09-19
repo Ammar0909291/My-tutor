@@ -16650,3 +16650,52 @@ unlocks): `math.cat.category`, `math.cx.complex-numbers-analysis`, `math.fnal.co
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `169bf8a` on `main`, pushed directly.
+
+## Batch 173 (2026-09-19)
+
+`inner-product-space`: the induced norm always existing and recovering the familiar Euclidean
+length, demonstrated via $v=(1,2,2)$'s $\|v\|=3$ computation; the structure hierarchy inner
+product space $\Rightarrow$ normed space $\Rightarrow$ metric space as a ONE-WAY chain (never
+assumed reversible), demonstrated via the sup-norm-on-$C([a,b])$ counterexample; and a Hilbert
+space requiring genuinely additional completeness (never conflated with an ordinary inner product
+space), demonstrated via the precise definition and the finite-vs-infinite-dimensional
+completeness distinction. 3 misconceptions independently classified by Blueprint-declared
+severity — MC-1 NORMED-SPACE-ASSUMED-TO-IMPLY-INNER-PRODUCT-SPACE (Foundational), MC-2
+HILBERT-SPACE-CONFLATED-WITH-INNER-PRODUCT-SPACE (Foundational), MC-3
+CAUCHY-SCHWARZ-DIRECTION-REVERSED (Moderate). Zero Blueprint/KG discrepancy;
+`math.fnal.hilbert-space` independently re-confirmed still unauthored, correctly remaining
+independence mode.
+
+`orthogonal-basis`: orthogonal and orthonormal as distinct conditions (orthonormal strictly
+stronger, never conflated), demonstrated via the $v_1=(3,4),v_2=(4,-3)$ orthogonal-but-not-
+orthonormal verification and normalization; the ONB coordinate shortcut $c_i=\langle v,e_i\rangle$
+working because orthogonality kills cross terms and unit length simplifies the rest (never
+requiring system-solving), demonstrated via the full numeric verification for $v=(1,7)$; and the
+shortcut FAILING SILENTLY for a non-orthonormal basis (never a universal basis trick), demonstrated
+via the $\{(1,0),(1,1)\}$ counterexample producing a demonstrably wrong reconstruction. 3
+misconceptions independently classified by Blueprint-declared severity — MC-1
+ONB-COORDINATE-SHORTCUT-OVERGENERALIZED (Foundational), MC-2
+ORTHOGONAL-CONFLATED-WITH-ORTHONORMAL (Foundational), MC-3
+ORTHOGONAL-VECTORS-ASSUMED-AUTOMATICALLY-SPANNING (Moderate). Zero Blueprint/KG discrepancy;
+`math.linalg.orthogonality` independently re-confirmed authored. Noted: the Blueprint's own
+flagged description-field anomaly (a stray matrix-transpose fragment) is no longer present in the
+live KG's current description — resolved independently of this campaign.
+
+Mathematics **739/908 → 741/908**, 167 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 741/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)".
+
+Fresh frontier recomputed for Batch 174 (21 concepts): `math.linalg.spectral-theorem` (newly
+reachable via `orthogonal-basis`'s unlocking chain), plus `math.cat.category`,
+`math.cx.complex-numbers-analysis`, `math.fnal.convolution`, `math.fnal.normed-space`,
+`math.graph.random-graph`, `math.linalg.diagonalization`/`dual-space`/`matrix-representation`/
+`projection`/`tensor`, `math.num.floating-point`/`interpolation`/`root-finding`,
+`math.opt.stochastic-gradient`, `math.prob.characteristic-function`/`joint-distribution`,
+`math.stats.normal-distribution`/`percentile`/`sampling-distribution`,
+`math.top.topological-space`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `7224ba6` on `main`, pushed directly.
