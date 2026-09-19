@@ -15586,3 +15586,47 @@ ready concepts across `math.linalg`, `math.prob.joint-distribution`, `math.stats
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `6a9b2fe` on `main`, pushed directly.
+
+## Batch 150 (2026-09-19) — 150 batches complete
+
+Authored `math.de.euler-method` and `math.de.second-order-linear`, continuing the `math.de`
+domain. Marks 150 consecutive batches of this campaign.
+
+`euler-method`: the update rule $y_{n+1}=y_n+h\,f(x_n,y_n)$ with MANDATORY per-step slope
+re-evaluation (never frozen at the initial point), demonstrated via a three-step table for
+$y'=x+y,y(0)=1,h=0.1$; the local-$O(h^2)$-to-global-$O(h)$ error derivation via the $N=(b-a)/h$
+step-count argument, verified numerically against exact $e$ (error ratio $\approx0.59$, roughly
+halved, never quartered); and Euler's output framed as a directed approximation (systematic
+undershoot for a convex solution), never the exact value. 3 misconceptions independently
+classified by Blueprint-declared severity — MC-1 EULER-OUTPUT-ASSUMED-EXACT (Foundational), MC-2
+SLOPE-ASSUMED-FROZEN-FROM-INITIAL-POINT (High), MC-3 LOCAL-ERROR-ORDER-ASSUMED-GLOBAL (Moderate).
+Zero Blueprint/KG discrepancy; the Blueprint's declared cross-link `math.num.euler-method`
+confirmed still unauthored, independence mode with deferral note correct.
+
+`second-order-linear`: the standard form $y''+P(x)y'+Q(x)y=G(x)$, with homogeneous/nonhomogeneous
+classification depending ENTIRELY on $G(x)$ (never on $P,Q$'s complexity), demonstrated via a
+complicated-coefficient-but-nonhomogeneous example; the superposition principle verified for the
+homogeneous case ($y''-y=0$'s solution set closed under linear combination, forming a vector
+space); and superposition's genuine FAILURE for the nonhomogeneous case ($y''-y=2$'s $2y_1=-4$
+failing, $4\ne2$), including the zero-function litmus test disqualifying vector-space status. 3
+misconceptions independently classified by Blueprint-declared severity — MC-1 SUPERPOSITION-
+APPLIED-TO-NONHOMOGENEOUS-CASE (Foundational), MC-2 HOMOGENEOUS-NONHOMOGENEOUS-DETERMINED-BY-
+COEFFICIENT-STRUCTURE (Moderate), MC-3 SOLUTION-SET-VECTOR-SPACE-STATUS-ASSUMED-FOR-
+NONHOMOGENEOUS (Moderate). Zero Blueprint/KG discrepancy. Opens toward
+`math.de.second-order-homogeneous`'s declared unlock.
+
+Mathematics **693/908 → 695/908**, 213 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 695/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Fresh frontier to be recomputed at the start of Batch 151 per established discipline; remaining
+`math.de` concepts (laplace-transform, phase-plane, bvp, pde, second-order-homogeneous) and other
+ready concepts across `math.linalg`, `math.prob.joint-distribution`, `math.stats`, `math.cx`,
+`math.top`, `math.fnal`, `math.num`, `math.opt`, `math.graph`, `math.cat` still reachable.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `82fb557` on `main`, pushed directly.

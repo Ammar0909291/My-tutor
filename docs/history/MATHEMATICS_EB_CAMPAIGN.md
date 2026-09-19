@@ -4526,3 +4526,27 @@ math.de concepts (euler-method, second-order-linear, laplace-transform, bvp, pde
 concepts across math.linalg, math.prob.joint-distribution, math.stats, math.cx, math.top,
 math.fnal, math.num, math.opt, math.graph, math.cat still reachable. Campaign continues under the
 same active `/loop`.
+
+### Batch 150 (2026-09-19) — 150 batches complete
+
+Authored `euler-method` (the update rule with mandatory per-step slope re-evaluation; the
+local-O(h²)-to-global-O(h) error derivation, verified numerically as roughly-halved not
+quartered; Euler's output as a directed approximation, never exact) and `second-order-linear`
+(homogeneous/nonhomogeneous classification depending entirely on G(x); superposition verified for
+the homogeneous case; superposition's genuine failure for the nonhomogeneous case, including the
+zero-function vector-space litmus test). Both zero Blueprint/KG discrepancy.
+`euler-method`'s declared cross-link `math.num.euler-method` confirmed still unauthored,
+independence mode with deferral note correct. `second-order-linear` opens toward
+`math.de.second-order-homogeneous`'s declared unlock. Mathematics **695/908** (693→695), 213
+remaining. Full per-concept detail in `COVERAGE.md` Batch 150. Validated: KG validator PASS
+(908/908 reachable, file untouched), `scripts/math/state.ts` confirms mathematics 695/908 (13
+EB-certified domains unchanged), `tsc --noEmit` clean, targeted EB/curriculum tests (7 files)
+561/561 passed. Full whole-repo suite not re-attempted, per the established Batch 109-110 hang
+precedent. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Commit
+`82fb557` on `main`, pushed directly.
+
+Fresh frontier to be recomputed at the start of Batch 151 per established discipline; remaining
+math.de concepts (laplace-transform, phase-plane, bvp, pde, second-order-homogeneous) and other
+ready concepts across math.linalg, math.prob.joint-distribution, math.stats, math.cx, math.top,
+math.fnal, math.num, math.opt, math.graph, math.cat still reachable. Campaign continues under the
+same active `/loop`.
