@@ -14552,3 +14552,63 @@ next batch, do not trust this list. Other ready concepts remain across `math.cat
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `c218514` on `main`, pushed directly.
+
+### Batch 129 (2026-09-19) — fourteenth wrong-corpus discrepancy; KG data-quality anomaly noted
+
+`math.prob.mgf`: full development of `math.prob.moments`'s own orientation-level MGF preview —
+explicit computation for Exponential($\lambda$) ($M_X(t)=\lambda/(\lambda-t)$, verified against
+$E[X]=1/\lambda$ via differentiation); the derivative-extraction rule derived from power-series
+coefficient matching (geometric-series expansion giving $E[X^k]=k!/\lambda^k$), never an isolated
+fact; uniqueness and the independent-sum product rule ($M_{X+Y}=M_X\cdot M_Y$) used to identify a
+sum of $n$ iid exponentials as Gamma($n,\lambda$) via MGF algebra alone, no convolution. 3
+misconceptions independently classified — MC-1 MGF-ASSUMED-NEW-DEFINITION (Foundational), MC-2
+DERIVATIVE-RULE-ASSUMED-INDEPENDENT-FACT (High), MC-3 CONVOLUTION-ASSUMED-ONLY-RELIABLE-METHOD
+(Moderate). Zero Blueprint/KG metadata discrepancy.
+
+`math.real.baire-category`: nowhere-dense defined precisely via empty-interior-of-closure (dense
+$\mathbb Q$ contrasted against the nowhere-dense point $\{0\}$); the Baire Category Theorem used
+as a completeness-DETECTION tool, proving $(\mathbb Q,|\cdot|)$ is not complete by exhibiting it
+as a countable union of nowhere-dense singletons (a decomposition that would be forbidden by the
+theorem if $\mathbb Q$ were complete); completeness established as the theorem's essential,
+non-automatic hypothesis. 3 misconceptions independently classified — MC-1
+NOWHERE-DENSE-CONFLATED-WITH-INFORMAL-SMALLNESS (Foundational), MC-2
+BAIRE-CATEGORY-ASSUMED-TO-APPLY-WITHOUT-COMPLETENESS (Foundational), MC-3
+BAIRE-CATEGORY-TREATED-AS-PURELY-ABSTRACT (Moderate).
+
+**Fourteenth wrong-corpus discrepancy this campaign**: the Blueprint's own Component 7 states
+`math.fnal.open-mapping-theorem` was "authored (checked via `ls docs/curriculum/blueprints/`...)"
+and set P76_mode to cross-link probe on that basis — again checking the Blueprint corpus rather
+than the Educational Brain corpus. Verified via `ls educational-brain/concepts/mathematics/` that
+NO `math.fnal.*` concept has any authored EB entry whatsoever. Corrected to INDEPENDENCE mode,
+restating the Blueprint's own bounded-inverse-corollary transfer-probe content as self-contained.
+
+**KG description data-quality anomaly noted (not corrected — KG is frozen)**: the live KG's
+`description` field for `math.real.baire-category` contains an apparent stray self-correction
+left in mid-sentence: "...cannot be continuous but nowhere differentiable (wait — no: Baire
+implies such functions exist and form a residual set)." This entry's Core Understanding uses the
+mathematically correct, standard consequence (continuous-but-nowhere-differentiable functions
+form a residual/generic set), matching the Blueprint's own cleaner phrasing, not the garbled KG
+text. This is flagged for the Curriculum Production Pipeline's awareness, not something this
+authoring layer is authorized to fix in the frozen KG file itself.
+
+`math.prob` gains its sixteenth entry this campaign, closing `moments`' declared unlock.
+`math.real.baire-category` closes out the completeness-metric chain's own declared unlock (it has
+none listed, so this concept is itself a terminal leaf). Mathematics **651/908 → 653/908**, 255
+remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 653/908, 12
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Computed fresh frontier post-batch: `math.real.continuity-rigorous` still reachable. `math.fnal.
+convolution`/`math.opt.stochastic-gradient` still reachable. Numerous `math.prob` concepts
+(classical-probability, convergence-types, distribution, generating-function, law-of-unconscious,
+markov-chain, markov-inequality, normal-distribution, poisson-process, quantile) appear
+reachable — re-verify each candidate's actual `requires` fresh next batch, do not trust this list.
+Other ready concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`,
+`math.num`, `math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `52a4f83` on `main`, pushed directly.

@@ -4029,3 +4029,33 @@ chain, markov-inequality, normal-distribution, poisson-process, quantile) appear
 re-verify each candidate's actual `requires` fresh next batch, do not trust this list. Other
 ready concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`,
 `math.num`, `math.stats`, `math.top`. Campaign continues under the same active `/loop`.
+
+### Batch 129 (2026-09-19) — fourteenth wrong-corpus discrepancy; KG data-quality anomaly noted
+
+Authored `mgf` (full development of moments' own MGF preview; Exponential(λ)'s MGF computed and
+verified against E[X]=1/λ; derivative-extraction rule derived from power-series coefficient
+matching; uniqueness + product rule identify an n-fold exponential sum as Gamma(n,λ) without
+convolution) and `baire-category` (nowhere-dense via empty-interior-of-closure, contrasted
+against dense ℚ; the theorem used as a completeness-detection tool, proving ℚ incomplete via its
+own nowhere-dense-singleton decomposition; completeness as the theorem's essential hypothesis).
+`mgf` zero Blueprint/KG discrepancy. `baire-category`'s Blueprint claimed `math.fnal.open-mapping-
+theorem` "authored," checked via `ls docs/curriculum/blueprints/` — the wrong corpus, fourteenth
+such occurrence this campaign. Verified via `ls educational-brain/concepts/mathematics/` that no
+`math.fnal.*` concept has any EB entry at all; corrected to independence mode. Also noted (without
+altering the frozen KG) a data-quality anomaly in the KG's own description field for
+`baire-category` — a stray self-correction fragment left in mid-sentence; the EB entry uses the
+mathematically correct standard content instead. Mathematics **653/908** (651→653), 255
+remaining. Full per-concept detail in `COVERAGE.md` Batch 129. Validated: KG validator PASS
+(908/908 reachable, file untouched), `scripts/math/state.ts` confirms mathematics 653/908 (12
+EB-certified domains unchanged), `tsc --noEmit` clean, targeted EB/curriculum tests (7 files)
+561/561 passed. Full whole-repo suite not re-attempted, per the established Batch 109-110 hang
+precedent. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Commit
+`52a4f83` on `main`, pushed directly.
+
+Fresh frontier: `math.real.continuity-rigorous` still reachable. `math.fnal.convolution`,
+`math.opt.stochastic-gradient` still reachable. Numerous `math.prob` concepts (classical-
+probability, convergence-types, distribution, generating-function, law-of-unconscious, markov-
+chain, markov-inequality, normal-distribution, poisson-process, quantile) appear reachable —
+re-verify each candidate's actual `requires` fresh next batch, do not trust this list. Other
+ready concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`,
+`math.num`, `math.stats`, `math.top`. Campaign continues under the same active `/loop`.
