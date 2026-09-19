@@ -14295,3 +14295,56 @@ inequality`/`math.prob.moments`/`math.prob.normal-distribution`/`math.prob.poiss
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `b434ff5` on `main`, pushed directly.
+
+### Batch 124 (2026-09-19) — twelfth discrepancy; opens math.real's metric-space entry point
+
+Re-derived the frontier fresh (41 ready concepts). Selected `math.prob.linearity-expectation`
+(requires only `expected-value`, authored Batch 122) and `math.real.metric-space` (requires
+`math.found.set-theory`/`math.found.real-numbers`, both certified). Authored both.
+
+`linearity-expectation` (requires `expected-value`, unlocks none, cross_links none):
+$E[aX+bY]=aE[X]+bE[Y]$ holding REGARDLESS of dependence — verified for a coin flip $X$ and its
+perfectly-dependent complement $Y=1-X$; the INDICATOR-VARIABLE technique sidestepping the joint
+distribution entirely (the hat-check problem's $E[X]=\sum E[X_i]=n\cdot\frac1n=1$, independent of
+whether the $X_i$ are themselves independent — they aren't); and $E[f(X)]=f(E[X])$ failing for
+nonlinear $f$ (Jensen's inequality, $E[X^2]\ne(E[X])^2$ in general). 3 misconceptions
+independently classified — MC-1 LINEARITY-REQUIRES-INDEPENDENCE (instruction-induced), MC-2
+E[XY]=E[X]E[Y]-ALWAYS (overgeneralization), MC-3 LINEARITY-APPLIES-TO-NONLINEAR-FUNCTIONS
+(overgeneralization). Zero Blueprint/KG metadata discrepancy.
+
+`metric-space` (requires `math.found.set-theory`/`math.found.real-numbers`, unlocks `open-sets`/
+`completeness-metric`/`compactness`, cross_links `math.top.topological-space`/`math.fnal.normed-
+space`): a metric as ANY function satisfying the three axioms, never restricted to the Euclidean
+formula (Euclidean/taxicab/max/discrete/sup metrics all verified on the same points); non-
+negativity derived as a THEOREM from the three axioms, never a fourth independent one; and the
+triangle inequality's direction (direct distance never exceeds a detour). 3 misconceptions
+independently classified — MC-1 METRIC-IS-EUCLIDEAN (overgeneralization, Foundational), MC-2
+NONNEGATIVITY-AS-AXIOM (instruction-induced), MC-3 TRIANGLE-DIRECTION-REVERSED
+(notation-induced). Opens `math.real`'s metric-space entry point, independent of the convergence-
+sequences chain already developed (Batches 112-123).
+
+**Blueprint/P76-mode discrepancy found and corrected (TWELFTH occurrence this campaign)**:
+`metric-space`'s Blueprint listed `math.top.topological-space` as an authored Tier-1 cross-link,
+setting cross-link-probe mode (with `math.fnal.normed-space` separately noted as documented but
+not probed). Verified via `ls educational-brain/concepts/mathematics/` that NEITHER target has an
+authored EB entry. Corrected to independence mode.
+
+`math.prob` gains its eleventh entry this campaign. `math.real` gains its eighth entry (a new
+sub-chain). Mathematics **641/908 → 643/908**, 265 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 643/908, 12
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum
+tests: "Test Files 7 passed (7), Tests 118 passed (118)". Full whole-repo suite not re-attempted
+this batch, consistent with the established precedent from Batches 109-110.
+
+Computed fresh frontier post-batch: `math.prob.chebyshev`/`math.prob.standard-deviation`
+reachable (require `variance`, now authored). `math.fnal.convolution`/`math.opt.stochastic-
+gradient` still reachable. `math.prob.convergence-types`/`math.prob.distribution`/`math.prob.
+generating-function`/`math.prob.law-of-unconscious`/`math.prob.markov-inequality`/`math.prob.
+moments`/`math.prob.normal-distribution`/`math.prob.poisson-process`/`math.prob.quantile` all
+still reachable. 27 other ready concepts remain across `math.cat`, `math.cx`, `math.de`,
+`math.graph`, `math.linalg`, `math.num`, `math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `5186e8c` on `main`, pushed directly.

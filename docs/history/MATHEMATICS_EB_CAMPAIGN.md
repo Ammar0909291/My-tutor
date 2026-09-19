@@ -3894,3 +3894,30 @@ reachable. 27 other ready concepts remain across `math.cat`, `math.cx`, `math.de
 `/loop`; re-derive the frontier fresh via `scripts/math/state.ts` (and each candidate's actual
 `requires`) each iteration rather than trusting any number or `children`/`unlocks`-field
 assumption recorded here.
+
+### Batch 124 (2026-09-19) — twelfth discrepancy; opens math.real's metric-space entry point
+
+Authored `linearity-expectation` (E[aX+bY]=aE[X]+bE[Y] regardless of dependence; indicator-
+variable technique sidesteps the joint distribution; E[f(X)]≠f(E[X]) for nonlinear f) and
+`metric-space` (a metric is any function satisfying the three axioms, never restricted to
+Euclidean; non-negativity as a derived theorem; the triangle inequality's direction).
+`metric-space`'s Blueprint listed `math.top.topological-space` as an authored cross-link, but `ls`
+found neither it nor `math.fnal.normed-space` in the EB corpus — TWELFTH discrepancy this
+campaign. Corrected to independence mode. Both concepts zero Blueprint/KG discrepancy on every
+other field. `math.real` gains a new sub-chain, independent of the convergence-sequences work
+(Batches 112-123). Mathematics **643/908** (641→643), 265 remaining. Full per-concept detail in
+`COVERAGE.md` Batch 124. Validated: KG validator PASS (908/908 reachable, file untouched),
+`scripts/math/state.ts` confirms mathematics 643/908 (12 EB-certified domains unchanged), `tsc
+--noEmit` clean, targeted EB/curriculum tests 118/118 passed. Full whole-repo suite not
+re-attempted, per the established Batch 109-110 hang precedent. No Physics/Chemistry/English/
+Biology/CS/KG/Blueprint/runtime file touched. Commit `5186e8c` on `main`, pushed directly.
+
+Fresh frontier: `math.prob.chebyshev`, `math.prob.standard-deviation` reachable. `math.fnal.
+convolution`, `math.opt.stochastic-gradient` still reachable. `math.prob.convergence-types`,
+`math.prob.distribution`, `math.prob.generating-function`, `math.prob.law-of-unconscious`,
+`math.prob.markov-inequality`, `math.prob.moments`, `math.prob.normal-distribution`, `math.prob.
+poisson-process`, `math.prob.quantile` all still reachable. 27 other ready concepts remain across
+`math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`, `math.num`, `math.stats`,
+`math.top`. Campaign continues under the same active `/loop`; re-derive the frontier fresh via
+`scripts/math/state.ts` (and each candidate's actual `requires`) each iteration rather than
+trusting any number or `children`/`unlocks`-field assumption recorded here.
