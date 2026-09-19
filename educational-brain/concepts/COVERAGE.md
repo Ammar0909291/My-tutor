@@ -14712,3 +14712,54 @@ ready concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph`, `ma
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `4f7a475` on `main`, pushed directly.
+
+### Batch 132 (2026-09-19) — clean cross-link verification, second occurrence of a "complete the deferred proof" cross-link relationship
+
+`math.real.differentiability-rigorous`: non-differentiability rigorously proven via disagreeing
+one-sided difference quotients (|x| at 0: right-hand quotient +1, left-hand -1); differentiability
+implies continuity proven as a genuine limit-law theorem (never cited as folklore), with the
+converse's failure demonstrated by the same |x| example; the multivariable total derivative as a
+linear map, with all-partials-exist shown necessary but NOT sufficient via
+$f(x,y)=xy/(x^2+y^2)$'s both-partials-exist-yet-not-even-continuous origin behavior. 3
+misconceptions independently classified — MC-1 NON-DIFFERENTIABILITY-IMPLIES-DISCONTINUITY
+(Foundational), MC-2 PARTIALS-EXIST-IMPLIES-TOTAL-DIFFERENTIABILITY (Foundational), MC-3
+IMPLICATION-CITED-WITHOUT-PROOF (Moderate). Zero Blueprint/KG metadata discrepancy — the
+cross-link (`math.calc.derivative-definition`) independently re-verified genuinely authored via
+`ls`, confirming this is the SECOND instance in this campaign's authored portion (after
+`math.real.ivt`'s relationship with `math.calc.ivt` at Batch 131, though that one required a
+reverse-direction upgrade) of a later rigorous-analysis concept specifically completing an
+earlier calculus concept's deliberately-deferred informal claims with an actual proof.
+
+`math.real.uniform-continuity`: the quantifier-order distinction between pointwise
+($\forall\varepsilon,\exists\delta(a,\varepsilon)$) and uniform
+($\forall\varepsilon,\exists\delta(\varepsilon),\forall x,y$) continuity; $f(x)=1/x$ on $(0,1)$
+proven continuous everywhere yet NOT uniformly continuous via a rigorous sequence-pair argument
+($x_n=1/n,y_n=1/(n+1)$ closing distance while the output gap stays fixed at 1); the Heine-Cantor
+theorem (compactness upgrades continuity to uniform continuity automatically) shown to EXPLAIN,
+never contradict, the counterexample, since $(0,1)$ is not compact. 3 misconceptions independently
+classified — MC-1 UNIFORM-CONTINUITY-ASSUMED-EQUIVALENT-TO-POINTWISE (Foundational), MC-2
+POINTWISE-CONTINUITY-ASSUMED-TO-IMPLY-UNIFORM (High), MC-3
+HEINE-CANTOR-ASSUMED-TO-CONFLICT-WITH-COUNTEREXAMPLES (Moderate). Zero Blueprint/KG metadata
+discrepancy.
+
+Both concepts continue directly off `math.real.continuity-rigorous` (Batch 130).
+`differentiability-rigorous` opens two further frontier concepts (`math.real.mvt`,
+`math.real.taylor-rigorous`, both requiring additional prerequisites still unauthored).
+`uniform-continuity` has no further unlocks, making it a terminal leaf. Mathematics
+**657/908 → 659/908**, 249 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 659/908, 12
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Computed fresh frontier post-batch: `math.real.riemann-integral`, `math.real.uniform-convergence`
+still reachable (require `continuity-rigorous`, authored). `math.fnal.convolution`, `math.opt.
+stochastic-gradient` still reachable. Numerous `math.prob` concepts remain reachable — re-verify
+each candidate's actual `requires` fresh next batch, do not trust this list. Other ready concepts
+remain across `math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`, `math.num`,
+`math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `148ca8d` on `main`, pushed directly.

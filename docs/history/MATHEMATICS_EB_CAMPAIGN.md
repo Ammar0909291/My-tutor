@@ -4110,3 +4110,29 @@ still reachable. Numerous `math.prob` concepts remain reachable — re-verify ea
 actual `requires` fresh next batch, do not trust this list. Other ready concepts remain across
 `math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`, `math.num`, `math.stats`,
 `math.top`. Campaign continues under the same active `/loop`.
+
+### Batch 132 (2026-09-19) — clean cross-link verification, second "complete the deferred proof" relationship
+
+Authored `differentiability-rigorous` (non-differentiability via disagreeing one-sided difference
+quotients; differentiability-implies-continuity proven via limit laws, converse's failure via |x|
+at 0; multivariable partials-necessary-not-sufficient via a both-partials-exist-yet-not-even-
+continuous counterexample) and `uniform-continuity` (quantifier-order distinction from pointwise
+continuity; 1/x on (0,1) rigorously proven continuous-yet-not-uniformly-continuous via a
+sequence-pair argument; Heine-Cantor's compact-domain guarantee shown to explain, not contradict,
+the counterexample). Both zero Blueprint/KG discrepancy. `differentiability-rigorous`'s
+cross-link (`math.calc.derivative-definition`) independently re-verified genuinely authored,
+confirming a second instance (after Batch 131's ivt/calc.ivt relationship) of a rigorous-analysis
+concept completing an earlier calculus concept's deliberately-deferred informal claims with an
+actual proof. Mathematics **659/908** (657→659), 249 remaining. Full per-concept detail in
+`COVERAGE.md` Batch 132. Validated: KG validator PASS (908/908 reachable, file untouched),
+`scripts/math/state.ts` confirms mathematics 659/908 (12 EB-certified domains unchanged), `tsc
+--noEmit` clean, targeted EB/curriculum tests (7 files) 561/561 passed. Full whole-repo suite not
+re-attempted, per the established Batch 109-110 hang precedent. No Physics/Chemistry/English/
+Biology/CS/KG/Blueprint/runtime file touched. Commit `148ca8d` on `main`, pushed directly.
+
+Fresh frontier: `math.real.riemann-integral`, `math.real.uniform-convergence` still reachable.
+`math.fnal.convolution`, `math.opt.stochastic-gradient` still reachable. Numerous `math.prob`
+concepts remain reachable — re-verify each candidate's actual `requires` fresh next batch, do not
+trust this list. Other ready concepts remain across `math.cat`, `math.cx`, `math.de`,
+`math.graph`, `math.linalg`, `math.num`, `math.stats`, `math.top`. Campaign continues under the
+same active `/loop`.
