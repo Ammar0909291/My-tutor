@@ -5938,3 +5938,22 @@ math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-inte
 qr-algorithm/splines, math.opt.pca/semidefinite-programming, math.prob.conditional-expectation/
 correlation/marginal-distribution, math.stats.anova/bayesian-inference/nonparametric. Campaign
 continues under the same active `/loop`.
+
+## Batch 211 (2026-09-19)
+
+Authored `anova` (one combined test, never equivalent to pairwise t-tests; variance partition is
+guaranteed algebra, never coincidental; significant F proves something differs, never which pair)
+and `correlation` (ρ is scale-invariant, never a rescaled covariance; ρ=0 means uncorrelated,
+never independent; Var(X+Y) needs the covariance cross-term). `correlation`'s Blueprint declared
+a cross-link to `math.stats.correlation`, not yet authored — corrected to independence mode
+(12th discrepancy, new wrong-corpus-status variant). `anova` zero discrepancy. Mathematics
+**817/908** (815→817), 91 remaining. Full detail in `COVERAGE.md` Batch 211. Validated: KG PASS,
+state.ts 817/908, tsc clean, tests 561/561. Commit `54cd65a`, pushed.
+
+Fresh frontier for Batch 212 (24 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
+qr-algorithm/splines, math.opt.pca/semidefinite-programming, math.prob.conditional-expectation/
+marginal-distribution, math.stats.bayesian-inference/correlation/experimental-design/
+nonparametric/two-way-anova. Campaign continues under the same active `/loop`.

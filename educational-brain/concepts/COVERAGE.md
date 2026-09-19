@@ -17957,3 +17957,28 @@ math.fnal.convolution/normed-space, math.graph.random-graph,
 math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
 qr-algorithm/splines, math.opt.pca/semidefinite-programming, math.prob.conditional-expectation/
 correlation/marginal-distribution, math.stats.anova/bayesian-inference/nonparametric.
+
+## Batch 211 (2026-09-19) — 1 discrepancy (wrong-corpus cross-link status)
+
+Authored `math.stats.anova` (ANOVA is one combined test controlling the overall error rate, never
+equivalent to repeated pairwise t-tests; the variance partition is a guaranteed algebraic
+identity, never coincidental; a significant F proves only that some difference exists, never
+which specific pair) and `math.prob.correlation` (normalizing by SD(X)·SD(Y) makes ρ
+scale-invariant, never just a rescaled covariance; ρ=0 means uncorrelated, never independent —
+Y=X² proves it; Var(X+Y) needs the covariance cross-term, never just adding variances).
+`math.prob.correlation`'s Blueprint declared cross-link mode targeting `math.stats.correlation`,
+which is NOT authored in the EB corpus — corrected to independence mode, reusing the Blueprint's
+own P75 portfolio-variance mastery assessment as the transfer probe (12th discrepancy this
+campaign, a new wrong-corpus-STATUS variant distinct from the prior 10 wrong-corpus-CHECK cases:
+here the Blueprint correctly named the right corpus but the target simply isn't authored yet).
+`math.stats.anova` zero discrepancy. Mathematics **815/908 → 817/908**, 91 remaining. Validated:
+KG PASS (908/908 reachable), state.ts confirms 817/908, tsc clean, tests 561/561. Commit
+`54cd65a`, pushed.
+
+Fresh frontier for Batch 212 (24 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
+qr-algorithm/splines, math.opt.pca/semidefinite-programming, math.prob.conditional-expectation/
+marginal-distribution, math.stats.bayesian-inference/correlation/experimental-design/
+nonparametric/two-way-anova.
