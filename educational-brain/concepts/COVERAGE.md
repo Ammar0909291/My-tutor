@@ -17639,3 +17639,21 @@ math.linalg.matrix-representation/tensor, math.num.error-analysis/interpolation/
 qr-algorithm, math.opt.quadratic-programming/semidefinite-programming/stochastic-gradient,
 math.prob.characteristic-function/joint-distribution,
 math.stats.normal-distribution/percentile/sampling-distribution.
+
+## Batch 195 (2026-09-19) — zero discrepancy
+
+Authored `math.stats.normal-distribution` (68-95-99.7 pairing never interchanged; failing to
+reject normality is never proof of normality; CLT rescues the sample mean's normality regardless
+of population shape) and `math.stats.percentile` (percentile rank is proportion below, never a
+raw score percentage; Q2 IS the median, never a separate computation; IQR is robust to outliers,
+unlike the full range). Both zero discrepancy. Mathematics **783/908 → 785/908**, 123 remaining.
+Validated: KG PASS (908/908 reachable), state.ts confirms 785/908, tsc clean, tests 561/561.
+Commit `cdf4f0e`, pushed.
+
+Fresh frontier for Batch 196 (22 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/interpolation/newtons-method/
+qr-algorithm, math.opt.quadratic-programming/semidefinite-programming/stochastic-gradient,
+math.prob.characteristic-function/joint-distribution,
+math.stats.normal-approximation/sampling-distribution.

@@ -5643,3 +5643,20 @@ qr-algorithm, math.opt.quadratic-programming/semidefinite-programming/stochastic
 math.prob.characteristic-function/joint-distribution,
 math.stats.normal-distribution/percentile/sampling-distribution. Campaign continues under the
 same active `/loop`.
+
+### Batch 195 (2026-09-19) — zero discrepancy
+
+Authored `normal-distribution` (68-95-99.7 pairing fixed; failing-to-reject ≠ proof; CLT rescues
+sample mean regardless of population shape) and `percentile` (percentile rank ≠ raw score; Q2 IS
+median; IQR robust to outliers). Both zero discrepancy. Mathematics **785/908** (783→785), 123
+remaining. Full detail in `COVERAGE.md` Batch 195. Validated: KG PASS, state.ts 785/908, tsc
+clean, tests 561/561. Commit `cdf4f0e`, pushed.
+
+Fresh frontier for Batch 196 (22 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/interpolation/newtons-method/
+qr-algorithm, math.opt.quadratic-programming/semidefinite-programming/stochastic-gradient,
+math.prob.characteristic-function/joint-distribution,
+math.stats.normal-approximation/sampling-distribution. Campaign continues under the same active
+`/loop`.
