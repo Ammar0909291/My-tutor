@@ -15984,3 +15984,45 @@ Fresh frontier to be recomputed at the start of Batch 159 per established discip
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `d7934be` on `main`, pushed directly.
+
+## Batch 159 (2026-09-19)
+
+Authored `math.de.laplace-ode` and `math.de.bessel-equation`, continuing the `math.de` domain.
+
+`laplace-ode`: initial conditions BAKED IN at the transform step (never applied as free constants
+afterward), demonstrated via $y''+4y=0,y(0)=2,y'(0)=0$'s direct pipeline solution; careful
+partial-fraction decomposition with correct repeated-root form, demonstrated via
+$Y(s)=1/[(s+1)^2(s+2)]+1/[(s+1)(s+2)]$; and the CONVOLUTION theorem never conflated with the
+pointwise product, verified via $\mathcal{L}^{-1}\{1/[s(s+1)]\}=1-e^{-t}$ against the wrong
+pointwise guess $e^{-t}$. 3 misconceptions independently classified by Blueprint-declared birth
+type — MC-1 INITIAL-CONDITIONS-IGNORED-UNTIL-END (instruction-induced), MC-2 PARTIAL-FRACTIONS-
+DEGREE-ERROR (instruction-induced), MC-3 CONVOLUTION-CONFUSED-WITH-PRODUCT (overgeneralization).
+Zero Blueprint/KG discrepancy.
+
+`bessel-equation`: Bessel's equation as a CONCRETE Frobenius application (never a new technique),
+demonstrated via the $\nu=0$ setup giving the repeated root $r=0$; $Y_\nu$'s singularity forcing
+its exclusion whenever the physical domain includes the origin (never kept unconditionally),
+demonstrated via the solid-versus-annular-drumhead contrast; and Bessel's equation arising
+INEVITABLY from cylindrical/circular symmetry (never an arbitrary example), demonstrated via the
+circular-drumhead wave-equation separation of variables. 3 misconceptions independently classified
+by Blueprint-declared severity — MC-1 BESSEL-ASSUMED-NEW-TECHNIQUE (Foundational), MC-2 GENERAL-
+SOLUTION-ASSUMED-ALWAYS-KEPT-IN-FULL (High), MC-3 BESSEL-EQUATION-ASSUMED-ARBITRARY-EXAMPLE
+(Moderate). **Stale Blueprint metadata correction**: the Blueprint's own Component 0 stated
+estimated_hours=7 — the live KG's current value (6) used as authoritative. Declared cross-link
+`math.fnal.special-functions` confirmed still unauthored, independence mode correct.
+
+Mathematics **711/908 → 713/908**, 195 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 713/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Fresh frontier to be recomputed at the start of Batch 160 per established discipline; remaining
+`math.de` concepts (legendre-equation, bvp, pde, nonlinear-ode) and other ready concepts across
+`math.linalg`, `math.prob.joint-distribution`, `math.stats`, `math.cx`, `math.top`, `math.fnal`,
+`math.num`, `math.opt`, `math.graph`, `math.cat` still reachable.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `39844c6` on `main`, pushed directly.

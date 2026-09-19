@@ -4724,3 +4724,22 @@ Fresh frontier to be recomputed at the start of Batch 159 per established discip
 math.de concepts (legendre-equation, bvp, pde, nonlinear-ode) and other ready concepts across
 math.linalg, math.prob.joint-distribution, math.stats, math.cx, math.top, math.fnal, math.num,
 math.opt, math.graph, math.cat still reachable. Campaign continues under the same active `/loop`.
+
+### Batch 159 (2026-09-19)
+
+Authored `laplace-ode` (ICs baked into the transform step, never applied afterward; careful
+partial-fraction discipline; convolution never conflated with the pointwise product) and
+`bessel-equation` (a concrete Frobenius application, never a new technique; Yν's domain-dependent
+exclusion; the equation's inevitable origin in cylindrical symmetry). Both zero Blueprint/KG
+discrepancy on requires/unlocks. `bessel-equation` had a stale-metadata correction (estimated_hours
+7 vs live KG's 6). Mathematics **713/908** (711→713), 195 remaining. Full per-concept detail in
+`COVERAGE.md` Batch 159. Validated: KG validator PASS (908/908 reachable, file untouched),
+`scripts/math/state.ts` confirms mathematics 713/908 (13 EB-certified domains unchanged), `tsc
+--noEmit` clean, targeted EB/curriculum tests (7 files) 561/561 passed. Full whole-repo suite not
+re-attempted, per the established Batch 109-110 hang precedent. No Physics/Chemistry/English/
+Biology/CS/KG/Blueprint/runtime file touched. Commit `39844c6` on `main`, pushed directly.
+
+Fresh frontier to be recomputed at the start of Batch 160 per established discipline; remaining
+math.de concepts (legendre-equation, bvp, pde, nonlinear-ode) and other ready concepts across
+math.linalg, math.prob.joint-distribution, math.stats, math.cx, math.top, math.fnal, math.num,
+math.opt, math.graph, math.cat still reachable. Campaign continues under the same active `/loop`.
