@@ -17619,3 +17619,23 @@ math.linalg.matrix-representation/tensor, math.num.floating-point/interpolation/
 root-finding, math.opt.quadratic-programming/semidefinite-programming/stochastic-gradient,
 math.prob.characteristic-function/joint-distribution,
 math.stats.normal-distribution/percentile/sampling-distribution.
+
+## Batch 194 (2026-09-19) — one stale-metadata discrepancy (unlocks)
+
+Authored `math.num.floating-point` (floating-point is never exact; a small addend can be
+completely absorbed into a large accumulator; subtracting nearly equal accurate numbers destroys
+relative accuracy) and `math.num.root-finding` (bisection is IVT made algorithmic; Newton's speed
+has real failure modes, not just theoretical caveats; secant is superlinear, never matching
+Newton's quadratic rate). `root-finding` had a stale-metadata discrepancy: Blueprint claims no
+unlocks, live KG shows `math.num.newtons-method` — live KG value adopted as authoritative,
+math.num.newtons-method confirmed unauthored. `floating-point` zero discrepancy. Mathematics
+**781/908 → 783/908**, 125 remaining. Validated: KG PASS (908/908 reachable), state.ts confirms
+783/908, tsc clean, tests 561/561. Commit `b2c63ad`, pushed.
+
+Fresh frontier for Batch 195 (23 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/interpolation/newtons-method/
+qr-algorithm, math.opt.quadratic-programming/semidefinite-programming/stochastic-gradient,
+math.prob.characteristic-function/joint-distribution,
+math.stats.normal-distribution/percentile/sampling-distribution.

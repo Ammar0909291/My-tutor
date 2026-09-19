@@ -5624,3 +5624,22 @@ root-finding, math.opt.quadratic-programming/semidefinite-programming/stochastic
 math.prob.characteristic-function/joint-distribution,
 math.stats.normal-distribution/percentile/sampling-distribution. Campaign continues under the
 same active `/loop`.
+
+### Batch 194 (2026-09-19) — one stale-metadata discrepancy (unlocks)
+
+Authored `floating-point` (never exact; small-into-large absorption; cancellation destroys
+relative accuracy) and `root-finding` (bisection is IVT made algorithmic; Newton has real failure
+modes; secant is superlinear, not quadratic). `root-finding` had a stale-metadata discrepancy:
+Blueprint claims no unlocks, live KG shows math.num.newtons-method — live KG adopted, confirmed
+unauthored. `floating-point` zero discrepancy. Mathematics **783/908** (781→783), 125 remaining.
+Full detail in `COVERAGE.md` Batch 194. Validated: KG PASS, state.ts 783/908, tsc clean, tests
+561/561. Commit `b2c63ad`, pushed.
+
+Fresh frontier for Batch 195 (23 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/interpolation/newtons-method/
+qr-algorithm, math.opt.quadratic-programming/semidefinite-programming/stochastic-gradient,
+math.prob.characteristic-function/joint-distribution,
+math.stats.normal-distribution/percentile/sampling-distribution. Campaign continues under the
+same active `/loop`.
