@@ -15941,3 +15941,46 @@ concepts across `math.linalg`, `math.prob.joint-distribution`, `math.stats`, `ma
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `2072cc9` on `main`, pushed directly.
+
+## Batch 158 (2026-09-19)
+
+Authored `math.de.inverse-laplace` and `math.de.frobenius-method`, continuing the `math.de`
+domain.
+
+`inverse-laplace`: recognizing inversion as a DIRECT REUSE of partial-fraction decomposition
+(never a new technique), demonstrated via the cover-up decomposition of
+$\frac{3s+1}{(s-1)(s+2)}$; piece-wise inversion combined via LINEARITY with forward-transform
+verification (never needing unspecified extra justification); and the repeated-factor's DISTINCT
+$te^{at}$ pair (never the same $e^{at}$ pair as a simple factor), verified for $2/(s-3)^2$. 3
+misconceptions independently classified by Blueprint-declared severity — MC-1 INVERSE-LAPLACE-
+ASSUMED-NEW-DECOMPOSITION-TECHNIQUE (Foundational), MC-2 PIECE-WISE-INVERSION-SUM-ASSUMED-TO-
+NEED-EXTRA-JUSTIFICATION (High), MC-3 REPEATED-FACTOR-INVERSE-ASSUMED-SAME-AS-SIMPLE-FACTOR
+(Moderate). Zero Blueprint/KG discrepancy. Closes `math.de.laplace-properties`/`math.de.
+inverse-laplace`'s shared chain toward `math.de.laplace-ode`.
+
+`frobenius-method`: the ordinary series ansatz's genuine FAILURE at a regular singular point
+(verified via $y=x^{-1}$'s non-representability), motivating the Frobenius $x^r$ modification as
+a TARGETED fix (never an unrelated technique); the INDICIAL EQUATION derived FIRST (never an
+afterthought), demonstrated via $r^2-1=0\Rightarrow r=\pm1$ matching known solutions exactly; and
+the roots' DIFFERENCE (never individual size) determining the three-case classification. 3
+misconceptions independently classified by Blueprint-declared severity — MC-1 FROBENIUS-ASSUMED-
+UNRELATED-TECHNIQUE (Foundational), MC-2 INDICIAL-EQUATION-ASSUMED-AFTERTHOUGHT (High), MC-3
+LOG-TERM-NEED-ASSUMED-DETERMINED-BY-ROOT-SIZE (Moderate). **Stale Blueprint metadata correction**:
+the Blueprint's own Component 0 stated mastery_threshold=0.7, estimated_hours=8 — the live KG's
+current values (0.75, 7) used as authoritative.
+
+Mathematics **709/908 → 711/908**, 197 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 711/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Fresh frontier to be recomputed at the start of Batch 159 per established discipline; remaining
+`math.de` concepts (legendre-equation, bvp, pde, nonlinear-ode) and other ready concepts across
+`math.linalg`, `math.prob.joint-distribution`, `math.stats`, `math.cx`, `math.top`, `math.fnal`,
+`math.num`, `math.opt`, `math.graph`, `math.cat` still reachable.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `d7934be` on `main`, pushed directly.

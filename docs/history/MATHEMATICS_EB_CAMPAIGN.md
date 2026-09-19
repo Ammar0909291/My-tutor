@@ -4703,3 +4703,24 @@ math.de concepts (frobenius-method, legendre-equation, bvp, pde, nonlinear-ode) 
 concepts across math.linalg, math.prob.joint-distribution, math.stats, math.cx, math.top,
 math.fnal, math.num, math.opt, math.graph, math.cat still reachable. Campaign continues under the
 same active `/loop`.
+
+### Batch 158 (2026-09-19)
+
+Authored `inverse-laplace` (recovery via direct reuse of partial-fraction decomposition;
+piece-wise inversion combined via linearity with forward-transform verification; the repeated-
+factor's distinct te^(at) pair) and `frobenius-method` (the ordinary ansatz's genuine failure at a
+singular point motivating the x^r fix; the indicial equation derived first, never an afterthought;
+the roots' difference, never their size, determining the case). Both zero Blueprint/KG
+discrepancy on requires/unlocks. `frobenius-method` had a stale-metadata correction (Blueprint
+stated 0.7/8hrs, live KG has 0.75/7hrs — KG used as authoritative). Mathematics **711/908**
+(709→711), 197 remaining. Full per-concept detail in `COVERAGE.md` Batch 158. Validated: KG
+validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts` confirms mathematics
+711/908 (13 EB-certified domains unchanged), `tsc --noEmit` clean, targeted EB/curriculum tests
+(7 files) 561/561 passed. Full whole-repo suite not re-attempted, per the established Batch
+109-110 hang precedent. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched.
+Commit `d7934be` on `main`, pushed directly.
+
+Fresh frontier to be recomputed at the start of Batch 159 per established discipline; remaining
+math.de concepts (legendre-equation, bvp, pde, nonlinear-ode) and other ready concepts across
+math.linalg, math.prob.joint-distribution, math.stats, math.cx, math.top, math.fnal, math.num,
+math.opt, math.graph, math.cat still reachable. Campaign continues under the same active `/loop`.
