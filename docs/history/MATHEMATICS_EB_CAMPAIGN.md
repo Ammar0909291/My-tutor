@@ -5418,3 +5418,35 @@ math.opt.quadratic-programming/semidefinite-programming/stochastic-gradient,
 math.prob.characteristic-function/joint-distribution,
 math.stats.normal-distribution/percentile/sampling-distribution. Campaign continues under the
 same active `/loop`.
+
+### Batch 186 (2026-09-19) — zero discrepancy, both `math.top` concepts
+
+Authored `separation-axioms` (T₂'s neighborhoods shown never required to partition $X$ via the
+$\mathbb R$ $0,2$-separation example; T₄ shown strictly stronger than T₃ despite misleading
+connotations via the point-versus-closed-set-separation comparison and the Sierpiński/cofinite gap
+examples; normality shown never to imply metrizability alone via the long-line counterexample) and
+`tychonoff` (finite-product compactness shown to extend by induction while infinite products
+structurally cannot, via the 3-factor-versus-infinite-family contrast; the theorem shown
+equivalent to, never merely implied by, the Axiom of Choice via the traced $\prod\{0,1\}$
+selection; the theorem shown as the specific engine behind Banach-Alaoglu via the dual-ball
+interval-product embedding). Both had zero Blueprint/KG discrepancy; both of tychonoff's
+prerequisites (`math.top.compactness`, `math.found.set-theory-axiomatic`) independently
+re-confirmed authored. Mathematics **767/908** (765→767), 141 remaining. Full per-concept detail
+in `COVERAGE.md` Batch 186. Validated: KG validator PASS (908/908 reachable, file untouched),
+`scripts/math/state.ts` confirms mathematics 767/908 (13 EB-certified domains unchanged), `tsc
+--noEmit` clean, targeted EB/curriculum tests (7 files) 561/561 passed. Mid-batch, `origin/main`
+diverged with unrelated commits (`a5e58e8`/`6cdf5e9`, teaching-engine ASCII-diagram-guard and
+history-compaction fixes, no EB/KG/curriculum files touched) — merged cleanly via a standard merge
+commit (never rebase/force-push), re-validated post-merge, then pushed. No Physics/Chemistry/
+English/Biology/CS/KG/Blueprint file touched by this batch's own content. Commit `ef37d27` merged
+with upstream `a8e2f02` at merge commit `3fc89aa` on `main`, pushed directly.
+
+Fresh frontier recomputed for Batch 187 (26 concepts): math.cat.morphism-types/
+natural-transformation, math.top.homotopy/manifold/simplicial-complex, plus
+math.cx.complex-numbers-analysis, math.de.systems-matrix-method, math.fnal.convolution,
+math.fnal.normed-space, math.graph.random-graph, math.linalg.jordan-form/matrix-exponential/
+matrix-representation/tensor, math.num.floating-point/interpolation/qr-algorithm/root-finding,
+math.opt.quadratic-programming/semidefinite-programming/stochastic-gradient,
+math.prob.characteristic-function/joint-distribution,
+math.stats.normal-distribution/percentile/sampling-distribution. Campaign continues under the
+same active `/loop`.

@@ -17289,3 +17289,59 @@ Fresh frontier recomputed for Batch 186 (28 concepts): `math.cat.morphism-types`
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `cf4a662` on `main`, pushed directly.
+
+## Batch 186 (2026-09-19) — zero discrepancy, both `math.top` concepts
+
+`separation-axioms`: T₂'s separating neighborhoods shown never required to cover or partition
+$X$, demonstrated via the $\mathbb R$ example separating $0,2$ with the point $1$ left in neither
+neighborhood; T₄ (normal) shown STRICTLY STRONGER than T₃ (regular) despite the informally
+misleading connotations of the words, demonstrated via the direct point-versus-closed-set-
+separation comparison and the Sierpiński/cofinite gap examples; and normality shown to NEVER
+imply metrizability alone, demonstrated via the metric-space T₄ proof contrasted with the long
+line's non-metrizable counterexample. 3 misconceptions independently classified by
+Blueprint-declared severity — MC-1 HAUSDORFF-NEIGHBORHOODS-PARTITION-X (Moderate), MC-2
+NORMAL-DOES-NOT-IMPLY-REGULAR (Foundational), MC-3 NORMAL-IMPLIES-METRIZABLE (Moderate). Zero
+Blueprint/KG discrepancy; all fields (requires `math.top.topological-space`, unlocks none,
+cross_links none, expert/analyze, mastery_threshold 0.8, estimated_hours 5) verified exact
+matches.
+
+`tychonoff`: finite-product compactness shown to extend by induction while infinite products
+STRUCTURALLY cannot (no "last" pairing step), demonstrated via the 3-factor induction contrasted
+against the infinite-family breakdown; the theorem shown EQUIVALENT to (never merely implied by)
+the Axiom of Choice, demonstrated via the traced simultaneous-selection requirement in
+$\prod_{n=1}^\infty\{0,1\}$; and the theorem shown as the SPECIFIC engine behind Banach-Alaoglu
+(never a purely abstract generalization), demonstrated via the dual-ball embedding into
+$\prod_{v\in V}[-\|v\|,\|v\|]$. 3 misconceptions independently classified by Blueprint-declared
+severity — MC-1 INFINITE-PRODUCT-CASE-ASSUMED-EXTENDED-BY-INDUCTION (Foundational), MC-2
+CHOICE-ASSUMED-MERELY-CONVENIENT-NOT-EQUIVALENT (High), MC-3
+TYCHONOFF-ASSUMED-PURELY-ABSTRACT-WITH-NO-APPLICATION (Moderate). Zero Blueprint/KG discrepancy;
+all fields (requires `math.top.compactness`/`math.found.set-theory-axiomatic`, unlocks none,
+cross_links none, research/understand, mastery_threshold 0.7, estimated_hours 6) verified exact
+matches; both prerequisites independently re-confirmed authored.
+
+Mathematics **765/908 → 767/908**, 141 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 767/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)".
+
+Mid-batch, `origin/main` diverged with unrelated commits (`a5e58e8`/`6cdf5e9`, teaching-engine
+ASCII-diagram-guard and history-compaction fixes, merged upstream as `a8e2f02`, no EB/KG/
+curriculum files touched) — merged cleanly into this batch's branch via a standard merge commit
+(never rebase/force-push, per repository branch policy), re-validated (`tsc` clean, KG validator
+PASS, targeted tests 561/561) after the merge, then pushed.
+
+Fresh frontier recomputed for Batch 187 (26 concepts): `math.cat.morphism-types`/
+`natural-transformation`, `math.top.homotopy`/`manifold`/`simplicial-complex` (`separation-axioms`/
+`tychonoff` now consumed from the frontier), plus `math.cx.complex-numbers-analysis`,
+`math.de.systems-matrix-method`, `math.fnal.convolution`, `math.fnal.normed-space`,
+`math.graph.random-graph`, `math.linalg.jordan-form`/`matrix-exponential`/
+`matrix-representation`/`tensor`, `math.num.floating-point`/`interpolation`/`qr-algorithm`/
+`root-finding`, `math.opt.quadratic-programming`/`semidefinite-programming`/`stochastic-gradient`,
+`math.prob.characteristic-function`/`joint-distribution`,
+`math.stats.normal-distribution`/`percentile`/`sampling-distribution`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint file touched (this batch's own
+content). This batch is commit `ef37d27` (content) merged with upstream `a8e2f02` at merge commit
+`3fc89aa` on `main`, pushed directly.
