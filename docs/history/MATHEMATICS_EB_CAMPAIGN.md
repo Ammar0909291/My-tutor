@@ -4003,3 +4003,29 @@ quantile) appear reachable — re-verify each candidate's actual `requires` fres
 not trust this list. Other ready concepts remain across `math.cat`, `math.cx`, `math.de`,
 `math.graph`, `math.linalg`, `math.num`, `math.stats`, `math.top`. Campaign continues under the
 same active `/loop`.
+
+### Batch 128 (2026-09-19) — thirteenth wrong-corpus discrepancy
+
+Authored `moments` (kth moment vs. kth central moment, the latter always exactly zero by
+linearity of expectation; skewness as tail-sensitive, not bulk-appearance-driven; MGF and
+kurtosis's "-3" convention at orientation level) and `completeness-metric` (metric-space
+completeness generalizing the known ℚ-vs-ℝ contrast; C([a,b]) with the sup metric IS complete via
+uniform convergence, complementing fnal.completeness's own L¹-norm incompleteness result;
+completion and Baire Category at orientation level). `moments` zero Blueprint/KG discrepancy.
+`completeness-metric`'s Blueprint claimed `math.fnal.completeness` "authored," checked via `ls
+docs/curriculum/blueprints/` — the wrong corpus, same pattern as Batches 112/124 and others.
+Verified via `ls educational-brain/concepts/mathematics/` that it has no EB entry; corrected to
+independence mode. Mathematics **651/908** (649→651), 257 remaining. Full per-concept detail in
+`COVERAGE.md` Batch 128. Validated: KG validator PASS (908/908 reachable, file untouched),
+`scripts/math/state.ts` confirms mathematics 651/908 (12 EB-certified domains unchanged), `tsc
+--noEmit` clean, targeted EB/curriculum tests (7 files) 561/561 passed. Full whole-repo suite not
+re-attempted, per the established Batch 109-110 hang precedent. No Physics/Chemistry/English/
+Biology/CS/KG/Blueprint/runtime file touched. Commit `c218514` on `main`, pushed directly.
+
+Fresh frontier: `math.real.continuity-rigorous` still reachable. `math.fnal.convolution`,
+`math.opt.stochastic-gradient` still reachable. Numerous `math.prob` concepts (classical-
+probability, convergence-types, distribution, generating-function, law-of-unconscious, markov-
+chain, markov-inequality, normal-distribution, poisson-process, quantile) appear reachable —
+re-verify each candidate's actual `requires` fresh next batch, do not trust this list. Other
+ready concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`,
+`math.num`, `math.stats`, `math.top`. Campaign continues under the same active `/loop`.

@@ -14498,3 +14498,57 @@ ready concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph`, `ma
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `f02161e` on `main`, pushed directly.
+
+### Batch 128 (2026-09-19) — thirteenth wrong-corpus discrepancy
+
+`math.prob.moments`: kth moment $E[X^k]$ versus kth central moment $E[(X-\mu)^k]$, with the first
+central moment ALWAYS exactly zero for every random variable (proven generally via linearity of
+expectation, demonstrated on a fair die roll); skewness as a tail-sensitive statistic (an income
+distribution's roughly-symmetric bulk can still carry substantial positive skewness from a thin
+extreme tail); MGF and kurtosis's "-3" convention (calibrated against the normal distribution's
+own fourth standardized central moment, exactly 3) at orientation level. 3 misconceptions
+independently classified — MC-1 FIRST-CENTRAL-MOMENT-ASSUMED-VARIABLE (Foundational), MC-2
+SKEWNESS-JUDGED-BY-BULK-APPEARANCE (High), MC-3 KURTOSIS-MINUS-3-ASSUMED-ARBITRARY (Moderate).
+Zero Blueprint/KG metadata discrepancy.
+
+`math.real.completeness-metric`: metric-space completeness (every Cauchy sequence converges to a
+limit IN the space), generalizing the already-known ℚ-vs-ℝ contrast; a genuinely new result that
+$(C([a,b]),\|\cdot\|_\infty)$ (sup metric) IS complete via a uniform-convergence argument,
+contrasted against `math.fnal.completeness`'s own $L^1$-norm incompleteness result on the
+identical function set; completion (ℚ embeds densely into ℝ) and the Baire Category Theorem's
+essential completeness hypothesis, both at orientation level. 3 misconceptions independently
+classified — MC-1 SUP-METRIC-COMPLETENESS-ASSUMED-TO-FAIL-LIKE-L1-NORM (Foundational), MC-2
+COMPLETION-CONFUSED-WITH-COMPLETENESS-ITSELF (Foundational), MC-3
+BAIRE-CATEGORY-THEOREM-ASSUMED-TO-HOLD-WITHOUT-COMPLETENESS (Moderate).
+
+**Thirteenth wrong-corpus discrepancy this campaign**: the Blueprint's own Component 7 states
+`math.fnal.completeness` was "verified authored via `ls docs/curriculum/blueprints/
+math.fnal.completeness.md`" and set P76_mode to cross-link probe on that basis — checking the
+Blueprint corpus rather than the Educational Brain corpus, the same wrong-corpus pattern noted
+repeatedly this campaign (Batches 112, 124, and others). Verified via `ls
+educational-brain/concepts/mathematics/` that `math.fnal.completeness` has NO authored EB entry.
+Corrected to INDEPENDENCE mode, restating the Blueprint's own sup-metric-versus-$L^1$-norm
+transfer-probe content as self-contained rather than assuming cross-linkability.
+
+`math.prob` gains its fifteenth entry this campaign, closing `expected-value`'s remaining
+declared unlock alongside `math.prob.markov-inequality`/`math.prob.law-of-unconscious` (still
+unauthored). `math.real.completeness-metric` closes out the metric-space chain's own declared
+unlock (it has none listed, so this concept itself is now a terminal leaf in that sub-chain).
+Mathematics **649/908 → 651/908**, 257 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 651/908, 12
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Computed fresh frontier post-batch: `math.real.continuity-rigorous` still reachable (requires
+`metric-space`, authored). `math.fnal.convolution`/`math.opt.stochastic-gradient` still
+reachable. Numerous `math.prob` concepts (classical-probability, convergence-types, distribution,
+generating-function, law-of-unconscious, markov-chain, markov-inequality, normal-distribution,
+poisson-process, quantile) appear reachable — re-verify each candidate's actual `requires` fresh
+next batch, do not trust this list. Other ready concepts remain across `math.cat`, `math.cx`,
+`math.de`, `math.graph`, `math.linalg`, `math.num`, `math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `c218514` on `main`, pushed directly.
