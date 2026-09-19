@@ -4888,3 +4888,28 @@ math.num.floating-point/interpolation/root-finding, math.opt.stochastic-gradient
 math.prob.characteristic-function/joint-distribution,
 math.stats.normal-distribution/percentile/sampling-distribution, math.top.topological-space.
 Campaign continues under the same active `/loop`.
+
+### Batch 166 (2026-09-19)
+
+Authored `heat-equation` (full superposition over all eigenvalues, never a single separated
+solution; instantaneous smoothing with infinite effective speed, never wave-like propagation;
+n²-scaled decay rate) and `wave-equation` (two initial conditions required, never one, since
+second-order in t; frequency ωₙ=c√λₙ, never λₙ itself; d'Alembert's formula requiring the
+odd-periodic extension on a bounded domain). Both zero Blueprint/KG discrepancy; the pair is
+directly contrasted (finite speed/time-reversible/energy-conserving vs. infinite speed/
+irreversible/energy-decreasing). Mathematics **727/908** (725→727), 181 remaining. Full
+per-concept detail in `COVERAGE.md` Batch 166. Validated: KG validator PASS (908/908 reachable,
+file untouched), `scripts/math/state.ts` confirms mathematics 727/908 (13 EB-certified domains
+unchanged), `tsc --noEmit` clean, targeted EB/curriculum tests (7 files) 561/561 passed. Full
+whole-repo suite not re-attempted, per the established Batch 109-110 hang precedent. No Physics/
+Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Commit `712a6cd` on `main`, pushed
+directly.
+
+Fresh frontier recomputed for Batch 167 (24 concepts): math.de.bifurcation,
+math.de.laplace-equation (the last remaining canonical PDE in math.de's currently-reachable set),
+plus math.cat.category, math.cx.complex-numbers-analysis, math.fnal.convolution,
+math.fnal.normed-space, math.graph.random-graph, math.linalg.basis/diagonalization/dual-space/
+inner-product-space/kernel-image/projection/tensor, math.num.floating-point/interpolation/
+root-finding, math.opt.stochastic-gradient, math.prob.characteristic-function/joint-distribution,
+math.stats.normal-distribution/percentile/sampling-distribution, math.top.topological-space.
+Campaign continues under the same active `/loop`.

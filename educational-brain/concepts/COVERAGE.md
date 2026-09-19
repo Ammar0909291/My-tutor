@@ -16315,3 +16315,47 @@ currently-reachable set), plus `math.cat.category`, `math.cx.complex-numbers-ana
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `9bca692` on `main`, pushed directly.
+
+## Batch 166 (2026-09-19)
+
+`heat-equation`: the full solution as a SUPERPOSITION over all eigenvalues (never a single
+separated solution), demonstrated via the eigenvalue-problem-to-Fourier-series-matching
+derivation; instantaneous smoothing with infinite effective propagation speed (never wave-like
+propagation), demonstrated via the smoothing-versus-propagating contrast; and decay rate scaling
+as $n^2$ (never $n$), demonstrated via the direct $\lambda_n=(n\pi/L)^2$ eigenvalue derivation and
+the $4\times$/$100\times$ relative decay comparison. 3 misconceptions independently classified by
+Blueprint-declared birth type — MC-1 SEPARATION-GIVES-ONLY-ONE-SOLUTION (instruction-induced),
+MC-2 HEAT-EQUATION-SOLUTION-PROPAGATES (language contamination), MC-3
+DECAY-RATE-PROPORTIONAL-TO-N (instruction-induced). Zero Blueprint/KG discrepancy.
+
+`wave-equation`: two initial conditions required (never one) since the equation is second-order in
+$t$, demonstrated via the plucked-string worked example deriving $a_n$ from $f$ and $b_n$ from
+$g$ separately; the time-oscillation frequency $\omega_n=c\sqrt{\lambda_n}$ (never $\lambda_n$
+itself), demonstrated via the direct $T''+c^2\lambda_nT=0$ derivation; and d'Alembert's formula
+requiring the odd-periodic extension on a bounded domain (never applied directly), demonstrated
+via the odd-2L-periodic extension construction. 3 misconceptions independently classified by
+Blueprint-declared birth type — MC-1 ONE-INITIAL-CONDITION-FOR-WAVE (instruction-induced), MC-2
+TIME-OSCILLATION-FREQUENCY-EQUALS-EIGENVALUE (instruction-induced), MC-3
+DALEMBERT-APPLIES-INSIDE-BOUNDED-DOMAIN (overgeneralization). Zero Blueprint/KG discrepancy; this
+entry directly contrasts against `heat-equation` (finite speed/time-reversible/energy-conserving
+vs. infinite speed/irreversible/energy-decreasing), authored earlier this same batch.
+
+Mathematics **725/908 → 727/908**, 181 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 727/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)".
+
+Fresh frontier recomputed for Batch 167 (24 concepts): `math.de.bifurcation`,
+`math.de.laplace-equation` (the last remaining canonical PDE in `math.de`'s currently-reachable
+set), plus `math.cat.category`, `math.cx.complex-numbers-analysis`, `math.fnal.convolution`,
+`math.fnal.normed-space`, `math.graph.random-graph`, `math.linalg.basis`/`diagonalization`/
+`dual-space`/`inner-product-space`/`kernel-image`/`projection`/`tensor`,
+`math.num.floating-point`/`interpolation`/`root-finding`, `math.opt.stochastic-gradient`,
+`math.prob.characteristic-function`/`joint-distribution`,
+`math.stats.normal-distribution`/`percentile`/`sampling-distribution`,
+`math.top.topological-space`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `712a6cd` on `main`, pushed directly.
