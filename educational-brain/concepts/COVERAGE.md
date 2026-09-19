@@ -16983,3 +16983,49 @@ Fresh frontier recomputed for Batch 180 (23 concepts): `math.linalg.tensor` (new
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `a9fa9c2` on `main`, pushed directly.
+
+## Batch 180 (2026-09-19) — first math.top and math.cat concepts this campaign
+
+`topological-space`: the union/intersection asymmetry as essential (arbitrary unions, only FINITE
+intersections, never symmetrized), demonstrated via the classic $\bigcap_n(-1/n,1/n)=\{0\}$
+counterexample in $\mathbb R$; openness as RELATIVE to a declared $\tau$ (never intrinsic),
+demonstrated via $\{a\}$'s differing verdicts across the discrete/$\tau_1$/indiscrete topologies
+on the same set; and topologies genuinely GENERALIZING metric spaces (never assumed to always
+arise from some metric), demonstrated via the indiscrete-topology non-metrizability proof. 3
+misconceptions independently classified — MC-1 ARBITRARY-INTERSECTIONS-ALLOWED, MC-2 OPEN-IS-
+ABSOLUTE (Blueprint's own declared FOUNDATIONAL misconception), MC-3 EVERY-TOPOLOGY-IS-METRIC.
+Zero Blueprint/KG discrepancy; `math.real.metric-space` independently re-confirmed authored — the
+campaign's first `math.top` concept.
+
+`category`: each category having its OWN structure-preservation requirement on morphisms (never
+$\mathbf{Set}$'s "any function counts" carrying over universally), demonstrated via the
+$\phi(n)=n\bmod6$-versus-$\psi(n)=n^2\bmod6$ contrast in $\mathbf{Grp}$; associativity as grouping
+of the SAME sequence (never confused with commutativity/reordering), demonstrated via the explicit
+triple-composition verification; and each object having its OWN distinct identity morphism (never
+one universal arrow). 3 misconceptions independently classified by Blueprint-declared severity —
+MC-1 ANY-FUNCTION-ASSUMED-VALID-MORPHISM (Foundational), MC-2 COMPOSITION-ASSUMED-COMMUTATIVE
+(Moderate), MC-3 IDENTITY-MORPHISM-ASSUMED-UNIQUE-ACROSS-OBJECTS (Moderate). Zero Blueprint/KG
+discrepancy; both prerequisites independently re-confirmed authored — the campaign's first
+`math.cat` concept.
+
+Mathematics **753/908 → 755/908**, 153 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 755/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)".
+
+Fresh frontier recomputed for Batch 181 (32 concepts, notably widening via `math.top`'s and
+`math.cat`'s own unlocking): `math.cat.functor`/`morphism-types`,
+`math.top.basis`/`compactness`/`connectedness`/`continuity-top`/`open-sets`/`product-space`/
+`quotient-space`/`separation-axioms`/`simplicial-complex` (all newly reachable), plus
+`math.cx.complex-numbers-analysis`, `math.de.systems-matrix-method`, `math.fnal.convolution`,
+`math.fnal.normed-space`, `math.graph.random-graph`,
+`math.linalg.jordan-form`/`matrix-exponential`/`matrix-representation`/`tensor`,
+`math.num.floating-point`/`interpolation`/`qr-algorithm`/`root-finding`,
+`math.opt.quadratic-programming`/`semidefinite-programming`/`stochastic-gradient`,
+`math.prob.characteristic-function`/`joint-distribution`,
+`math.stats.normal-distribution`/`percentile`/`sampling-distribution`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `2056063` on `main`, pushed directly.

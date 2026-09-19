@@ -5247,3 +5247,29 @@ math.opt.quadratic-programming/semidefinite-programming/stochastic-gradient,
 math.prob.characteristic-function/joint-distribution,
 math.stats.normal-distribution/percentile/sampling-distribution, math.top.topological-space.
 Campaign continues under the same active `/loop`.
+
+### Batch 180 (2026-09-19) — first math.top and math.cat concepts this campaign
+
+Authored `topological-space` (union/intersection asymmetry as essential; openness as relative to
+a declared τ; topologies genuinely generalizing metric spaces) and `category` (each category has
+its own structure-preservation requirement; associativity means grouping, never commutativity;
+each object has its own identity morphism). Both zero Blueprint/KG discrepancy — the campaign's
+first math.top and math.cat concepts respectively, diversifying into two new domains. Mathematics
+**755/908** (753→755), 153 remaining. Full per-concept detail in `COVERAGE.md` Batch 180.
+Validated: KG validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts` confirms
+mathematics 755/908 (13 EB-certified domains unchanged), `tsc --noEmit` clean, targeted EB/
+curriculum tests (7 files) 561/561 passed. Full whole-repo suite not re-attempted, per the
+established Batch 109-110 hang precedent. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/
+runtime file touched. Commit `2056063` on `main`, pushed directly.
+
+Fresh frontier recomputed for Batch 181 (32 concepts, notably widening via math.top's and
+math.cat's own unlocking): math.cat.functor/morphism-types, math.top.basis/compactness/
+connectedness/continuity-top/open-sets/product-space/quotient-space/separation-axioms/
+simplicial-complex (newly reachable), plus math.cx.complex-numbers-analysis,
+math.de.systems-matrix-method, math.fnal.convolution, math.fnal.normed-space,
+math.graph.random-graph, math.linalg.jordan-form/matrix-exponential/matrix-representation/tensor,
+math.num.floating-point/interpolation/qr-algorithm/root-finding,
+math.opt.quadratic-programming/semidefinite-programming/stochastic-gradient,
+math.prob.characteristic-function/joint-distribution,
+math.stats.normal-distribution/percentile/sampling-distribution. Campaign continues under the
+same active `/loop`.
