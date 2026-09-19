@@ -16359,3 +16359,54 @@ set), plus `math.cat.category`, `math.cx.complex-numbers-analysis`, `math.fnal.c
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `712a6cd` on `main`, pushed directly.
+
+## Batch 167 (2026-09-19)
+
+`bifurcation`: a bifurcation identified as a TOPOLOGICAL change in the phase portrait (never
+merely a stability sign-flip), demonstrated via the saddle-node normal form's equilibria created
+from nothing as $\mu$ crosses zero; the normal form as the EXACT local topology after a smooth
+coordinate change (never a Taylor approximation), demonstrated via the Guckenheimer-Holmes
+exact-coordinate-change theorem; and a subcritical Hopf bifurcation genuinely having an UNSTABLE
+limit cycle (never no cycle at all), demonstrated via the direct amplitude-equation derivation and
+the resulting hysteresis. 3 misconceptions independently classified by Blueprint-declared birth
+type — MC-1 BIFURCATION-IS-JUST-STABILITY-CHANGE (instruction-induced), MC-2
+NORMAL-FORM-IS-AN-APPROXIMATION (instruction-induced), MC-3 SUBCRITICAL-HOPF-HAS-NO-LIMIT-CYCLE
+(overgeneralization). Stale-metadata discrepancy found: the Blueprint's own Component 0 states
+`unlocks: math.de.chaos`, but the live KG lists `math.de.chaos` under `related` with `unlocks`
+empty — the live KG's current value used as authoritative.
+
+`laplace-equation`: recognized as `math.de.pde`'s canonical ELLIPTIC, time-free equilibrium
+example (never an evolving process), demonstrated via the steady-state-plate contrast with the
+heat equation; the same separation-of-variables technique reapplied with hyperbolic sine/cosine
+(never the heat equation's decaying exponential), demonstrated via the full rectangle
+boundary-value derivation reusing `math.de.separation-of-variables-pde`'s own eigenvalue problem;
+and the mean value property/maximum principle bounding interior values by the boundary's range
+(never unbounded inside), demonstrated via the plate-temperature bound. 3 misconceptions
+independently classified by Blueprint-declared severity — MC-1
+INTERIOR-HARMONIC-VALUE-ASSUMED-UNBOUNDED-BY-BOUNDARY (Foundational), MC-2
+LAPLACE-SEPARATION-CONFUSED-WITH-HEAT-EQUATION-SEPARATION (Foundational), MC-3
+HARMONIC-FUNCTION-ASSUMED-TO-REQUIRE-NO-BOUNDARY-DATA (Moderate). Zero Blueprint/KG discrepancy;
+`math.cx.harmonic-functions` independently re-confirmed still unauthored, correctly remaining
+independence mode. This entry, together with `bifurcation`, closes `math.de`'s ENTIRE
+currently-reachable frontier for this campaign.
+
+Mathematics **727/908 → 729/908**, 179 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 729/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)".
+
+Fresh frontier recomputed for Batch 168 (25 concepts): `math.de.chaos`, `math.de.harmonic-functions`,
+`math.de.poisson-equation` (all three newly reachable via `bifurcation`/`laplace-equation`'s
+unlocking, `math.de` domain no longer contributing any concept to the frontier's PDE-family
+concepts beyond these), plus `math.cat.category`, `math.cx.complex-numbers-analysis`,
+`math.fnal.convolution`, `math.fnal.normed-space`, `math.graph.random-graph`, `math.linalg.basis`/
+`diagonalization`/`dual-space`/`inner-product-space`/`kernel-image`/`projection`/`tensor`,
+`math.num.floating-point`/`interpolation`/`root-finding`, `math.opt.stochastic-gradient`,
+`math.prob.characteristic-function`/`joint-distribution`,
+`math.stats.normal-distribution`/`percentile`/`sampling-distribution`,
+`math.top.topological-space`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `0401548` on `main`, pushed directly.

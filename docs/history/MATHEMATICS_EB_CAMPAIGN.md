@@ -4913,3 +4913,30 @@ inner-product-space/kernel-image/projection/tensor, math.num.floating-point/inte
 root-finding, math.opt.stochastic-gradient, math.prob.characteristic-function/joint-distribution,
 math.stats.normal-distribution/percentile/sampling-distribution, math.top.topological-space.
 Campaign continues under the same active `/loop`.
+
+### Batch 167 (2026-09-19) — sixth stale-metadata correction
+
+Authored `bifurcation` (a bifurcation as a topological change, never a mere stability sign-flip;
+the normal form as the exact local topology, never an approximation; subcritical Hopf's genuinely
+unstable limit cycle) and `laplace-equation` (the elliptic, time-free equilibrium framing; the
+same separation-of-variables technique reapplied with hyperbolic sine/cosine; the maximum
+principle bounding interior values by the boundary). `bifurcation` had a stale-metadata correction
+(Blueprint claimed `unlocks: math.de.chaos`, live KG has it under `related` with unlocks empty —
+sixth such correction this campaign). `laplace-equation` had zero discrepancy, with
+`math.cx.harmonic-functions` independently re-confirmed still unauthored. Together these two close
+math.de's entire currently-reachable frontier for this campaign. Mathematics **729/908**
+(727→729), 179 remaining. Full per-concept detail in `COVERAGE.md` Batch 167. Validated: KG
+validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts` confirms mathematics
+729/908 (13 EB-certified domains unchanged), `tsc --noEmit` clean, targeted EB/curriculum tests (7
+files) 561/561 passed. Full whole-repo suite not re-attempted, per the established Batch 109-110
+hang precedent. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Commit
+`0401548` on `main`, pushed directly.
+
+Fresh frontier recomputed for Batch 168 (25 concepts): math.de.chaos, math.de.harmonic-functions,
+math.de.poisson-equation (newly reachable via bifurcation/laplace-equation's unlocking), plus
+math.cat.category, math.cx.complex-numbers-analysis, math.fnal.convolution, math.fnal.normed-space,
+math.graph.random-graph, math.linalg.basis/diagonalization/dual-space/inner-product-space/
+kernel-image/projection/tensor, math.num.floating-point/interpolation/root-finding,
+math.opt.stochastic-gradient, math.prob.characteristic-function/joint-distribution,
+math.stats.normal-distribution/percentile/sampling-distribution, math.top.topological-space.
+Campaign continues under the same active `/loop`.
