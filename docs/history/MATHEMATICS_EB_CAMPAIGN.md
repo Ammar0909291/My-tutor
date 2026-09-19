@@ -6277,3 +6277,21 @@ math.top.cohomology, plus math.cx.complex-numbers-analysis, math.fnal.dual-space
 fourier-transform/open-mapping-theorem/special-functions/spectral-theory/uniform-boundedness,
 math.graph.random-graph, math.opt.semidefinite-programming. Campaign continues under the same
 active `/loop`.
+
+## Batch 230 (2026-09-19)
+
+Authored `dual-space-functional` (a functional is just a scalar-valued bounded operator, never
+different; X* is always Banach regardless of X, never requiring X complete; reflexivity is
+special, never automatic) and `open-mapping-theorem` ("open" is about images, never conflated with
+continuity's preimages; bounded-inverse needs both spaces complete, never assumed for merely
+normed; surjectivity is required for openness, never automatic). Two reverse-direction
+discrepancies (both cross-links now authored though Blueprints said unauthored at write time) —
+noted, probes unchanged. Mathematics **855/908** (853→855), 53 remaining. Full detail in
+`COVERAGE.md` Batch 230. Validated: KG PASS, state.ts 855/908, tsc clean, tests 561/561. Commit
+`90e94f3`, pushed.
+
+Fresh frontier for Batch 231 (14 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.fnal.closed-graph-theorem/
+distributions/fourier-transform/hahn-banach/special-functions/spectral-theory/
+uniform-boundedness, math.graph.random-graph, math.opt.semidefinite-programming. Campaign
+continues under the same active `/loop`.

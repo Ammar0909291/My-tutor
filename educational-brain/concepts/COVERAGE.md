@@ -18361,3 +18361,25 @@ math.top.cohomology, plus math.cx.complex-numbers-analysis, math.fnal.dual-space
 fourier-transform/open-mapping-theorem/special-functions/spectral-theory/uniform-boundedness,
 math.graph.random-graph, math.opt.semidefinite-programming. Campaign continues under the same
 active `/loop`.
+
+## Batch 230 (2026-09-19) — 2 discrepancies (both reverse-direction)
+
+Authored `math.fnal.dual-space-functional` (a functional is just a bounded operator with scalar
+target, never fundamentally different; X* is always Banach regardless of X's completeness, never
+requiring X complete; reflexivity is special, never automatic for every space) and
+`math.fnal.open-mapping-theorem` ("open" concerns images, never conflated with continuity's
+preimages; completeness of both spaces is essential to the bounded-inverse corollary, never
+assumed for merely normed spaces; surjectivity is a necessary hypothesis for openness, never
+automatic). Two reverse-direction discrepancies: `dual-space-functional`'s cross-link
+`math.linalg.dual-space` and `open-mapping-theorem`'s cross-link `math.real.baire-category` were
+both "not yet authored" at their respective write times but are now both authored — noted for the
+record (19th and 20th discrepancies this campaign), both independence-mode probes retained as
+authored. Mathematics **853/908 → 855/908**, 53 remaining. math.fnal now 11/18 authored (no
+domain-completion milestone this batch). Validated: KG PASS (908/908 reachable), state.ts confirms
+855/908, tsc clean, tests 561/561. Commit `90e94f3`, pushed.
+
+Fresh frontier for Batch 231 (14 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.fnal.closed-graph-theorem/
+distributions/fourier-transform/hahn-banach/special-functions/spectral-theory/
+uniform-boundedness, math.graph.random-graph, math.opt.semidefinite-programming. Campaign
+continues under the same active `/loop`.
