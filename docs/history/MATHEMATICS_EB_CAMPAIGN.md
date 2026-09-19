@@ -5809,3 +5809,22 @@ qr-algorithm/splines, math.opt.semidefinite-programming, math.prob.conditional-e
 correlation/marginal-distribution, math.stats.anova/bias-variance/chi-squared-test/ci-mean/
 ci-proportion/consistency/covariance-matrix/method-of-moments/mle/nonparametric/p-value/power/
 sufficient-statistic/t-test/z-test. Campaign continues under the same active `/loop`.
+
+## Batch 204 (2026-09-19)
+
+Authored `p-value` (conditions on H0, computing a probability about the data, never the reverse;
+large p-value means insufficient evidence, never proof; never P(H0 true), a Bayesian quantity)
+and `power` (power is directly 1−β, never separate; every power-increasing factor has a genuine
+tradeoff, never cost-free; power analysis is pre-study planning, never post-hoc). Both zero
+discrepancy. Mathematics **803/908** (801→803), 105 remaining. Full detail in `COVERAGE.md`
+Batch 204. Validated: KG PASS, state.ts 803/908, tsc clean, tests 561/561. Commit `0fdb560`,
+pushed.
+
+Fresh frontier for Batch 205 (32 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
+qr-algorithm/splines, math.opt.semidefinite-programming, math.prob.conditional-expectation/
+correlation/marginal-distribution, math.stats.anova/bias-variance/chi-squared-test/ci-mean/
+ci-proportion/consistency/covariance-matrix/method-of-moments/mle/nonparametric/
+sufficient-statistic/t-test/z-test. Campaign continues under the same active `/loop`.

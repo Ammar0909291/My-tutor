@@ -17818,3 +17818,23 @@ qr-algorithm/splines, math.opt.semidefinite-programming, math.prob.conditional-e
 correlation/marginal-distribution, math.stats.anova/bias-variance/chi-squared-test/ci-mean/
 ci-proportion/consistency/covariance-matrix/method-of-moments/mle/nonparametric/p-value/power/
 sufficient-statistic/t-test/z-test.
+
+## Batch 204 (2026-09-19) — zero discrepancy
+
+Authored `math.stats.p-value` (the p-value conditions on H0, computing a probability about the
+data, never the reverse; a large p-value means insufficient evidence, never proof H0 is true; the
+p-value is never P(H0 true) — a fundamentally different Bayesian quantity) and `math.stats.power`
+(power is directly 1−β, never a separately computed unrelated quantity; every power-increasing
+factor — sample size, effect size, α — carries its own genuine tradeoff, never a cost-free
+improvement; power analysis is a pre-study planning tool, never a post-hoc justification). Both
+zero discrepancy. Mathematics **801/908 → 803/908**, 105 remaining. Validated: KG PASS (908/908
+reachable), state.ts confirms 803/908, tsc clean, tests 561/561. Commit `0fdb560`, pushed.
+
+Fresh frontier for Batch 205 (32 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
+qr-algorithm/splines, math.opt.semidefinite-programming, math.prob.conditional-expectation/
+correlation/marginal-distribution, math.stats.anova/bias-variance/chi-squared-test/ci-mean/
+ci-proportion/consistency/covariance-matrix/method-of-moments/mle/nonparametric/
+sufficient-statistic/t-test/z-test.
