@@ -16162,3 +16162,47 @@ plus other ready concepts across `math.linalg`, `math.prob.joint-distribution`, 
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `1cc2359` on `main`, pushed directly.
+
+## Batch 163 (2026-09-19)
+
+Authored `math.de.fourier-series` and `math.de.pde-classification`, continuing the `math.de`
+domain.
+
+`fourier-series`: symmetry checked BEFORE any coefficient integral (even $\Rightarrow b_n=0$, odd
+$\Rightarrow a_n=0$, never computing everything regardless), demonstrated via $f(x)=x^2$'s instant
+$b_n=0$ conclusion; $a_0$ NEVER following the same vanishing rule (it relates to the average
+value, requiring genuine computation regardless of symmetry), demonstrated via $f(x)=x^2$'s
+nonzero $a_0=2\pi^2/3$; and orthogonality as the mechanism isolating each coefficient,
+demonstrated via $f(x)=x$'s full derivation. 3 misconceptions independently classified by
+Blueprint-declared severity — MC-1 SYMMETRY-SHORTCUT-NOT-CHECKED-FIRST (Foundational), MC-2
+A0-ASSUMED-TO-FOLLOW-SAME-VANISHING-RULE-AS-OTHER-EVEN-FUNCTION-COEFFICIENTS (Moderate), MC-3
+ORTHOGONALITY-INTEGRAL-LIMITS-OR-PERIOD-MISMATCHED (Moderate). Zero Blueprint/KG discrepancy;
+declared cross-link `math.fnal.fourier-transform` confirmed still unauthored, independence mode
+correct.
+
+`pde-classification`: $A,B,C$ identified SPECIFICALLY from the PDE's leading second-order terms
+(never any other polynomial in the problem), demonstrated via
+$3u_{xx}-4u_{xy}+5u_{yy}=0$'s direct classification; variable-coefficient classification as
+genuinely LOCAL (never globally fixed), demonstrated via the Tricomi equation
+$yu_{xx}+u_{yy}=0$ changing type across $y=0$; and "parabolic" as a technical $\Delta=0$
+classification (never describing a solution's actual geometric shape), demonstrated via the heat
+equation's bell-curve solution staying bell-shaped. 3 misconceptions independently classified by
+Blueprint-declared birth type — MC-1 DISCRIMINANT-APPLIED-TO-COEFFICIENTS-NOT-PDE (language
+contamination), MC-2 CLASSIFICATION-IS-GLOBAL-NOT-LOCAL (instruction-induced), MC-3 PARABOLIC-
+MEANS-PARABOLA-SHAPE (language contamination). Zero Blueprint/KG discrepancy.
+
+Mathematics **719/908 → 721/908**, 187 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 721/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Fresh frontier to be recomputed at the start of Batch 164 per established discipline; remaining
+`math.de` concepts (bifurcation, and others newly reachable via fourier-series' unlocks) and other
+ready concepts across `math.linalg`, `math.prob.joint-distribution`, `math.stats`, `math.cx`,
+`math.top`, `math.fnal`, `math.num`, `math.opt`, `math.graph`, `math.cat` still reachable.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `d6e710f` on `main`, pushed directly.

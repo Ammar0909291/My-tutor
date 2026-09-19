@@ -4811,3 +4811,22 @@ Fresh frontier to be recomputed at the start of Batch 163 per established discip
 concepts across math.linalg, math.prob.joint-distribution, math.stats, math.cx, math.top,
 math.fnal, math.num, math.opt, math.graph, math.cat. Campaign continues under the same active
 `/loop`.
+
+### Batch 163 (2026-09-19)
+
+Authored `fourier-series` (symmetry checked before any coefficient integral; a₀'s different
+vanishing rule; orthogonality as the coefficient-isolation mechanism) and `pde-classification`
+(A,B,C from the PDE's leading second-order terms only; local classification for variable
+coefficients; "parabolic" as a technical term, never a solution shape). Both zero Blueprint/KG
+discrepancy. Mathematics **721/908** (719→721), 187 remaining. Full per-concept detail in
+`COVERAGE.md` Batch 163. Validated: KG validator PASS (908/908 reachable, file untouched),
+`scripts/math/state.ts` confirms mathematics 721/908 (13 EB-certified domains unchanged), `tsc
+--noEmit` clean, targeted EB/curriculum tests (7 files) 561/561 passed. Full whole-repo suite not
+re-attempted, per the established Batch 109-110 hang precedent. No Physics/Chemistry/English/
+Biology/CS/KG/Blueprint/runtime file touched. Commit `d6e710f` on `main`, pushed directly.
+
+Fresh frontier to be recomputed at the start of Batch 164 per established discipline; remaining
+math.de concepts (bifurcation, and others newly reachable via fourier-series' unlocks) and other
+ready concepts across math.linalg, math.prob.joint-distribution, math.stats, math.cx, math.top,
+math.fnal, math.num, math.opt, math.graph, math.cat still reachable. Campaign continues under the
+same active `/loop`.
