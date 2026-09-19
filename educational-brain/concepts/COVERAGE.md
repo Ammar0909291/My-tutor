@@ -17556,3 +17556,22 @@ Fresh frontier recomputed for Batch 191 (24 concepts): `math.cat.morphism-types`
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `6155c44` on `main`, pushed directly.
+
+## Batch 191 (2026-09-19) — zero discrepancy
+
+Authored `math.top.homology` (H₀ counts components not simplex tallies; H₁'s class depends on
+whether a 2-simplex fills the loop; homology is one-directional — different proves difference,
+same proves nothing) and `math.cat.morphism-types` (mono/epi defined via cancellation, never
+elements; "mono=injective" in Set is a proven theorem, not definitional; mono+epi doesn't always
+imply isomorphism, per the ℤ↪ℚ ring counterexample). Both zero discrepancy. Mathematics
+**775/908 → 777/908**, 131 remaining. Validated: KG validator PASS (908/908 reachable), state.ts
+confirms 777/908, tsc clean, targeted tests 561/561 passed. Commit `e7b84c5` on `main`, pushed.
+
+Fresh frontier for Batch 192 (24 concepts): math.cat.natural-transformation,
+math.top.cohomology/euler-characteristic, plus math.cx.complex-numbers-analysis,
+math.de.systems-matrix-method, math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.jordan-form/matrix-exponential/matrix-representation/tensor,
+math.num.floating-point/interpolation/qr-algorithm/root-finding,
+math.opt.quadratic-programming/semidefinite-programming/stochastic-gradient,
+math.prob.characteristic-function/joint-distribution,
+math.stats.normal-distribution/percentile/sampling-distribution.

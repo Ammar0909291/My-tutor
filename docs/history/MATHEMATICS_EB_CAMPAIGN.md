@@ -5566,3 +5566,23 @@ math.opt.quadratic-programming/semidefinite-programming/stochastic-gradient,
 math.prob.characteristic-function/joint-distribution,
 math.stats.normal-distribution/percentile/sampling-distribution. Campaign continues under the
 same active `/loop`.
+
+### Batch 191 (2026-09-19) — zero discrepancy
+
+Authored `homology` (H₀ counts components not simplex tallies via two-disjoint-triangles; H₁'s
+class depends on 2-simplex presence via filled-vs-hollow-triangle; homology is one-directional
+via point-vs-disc) and `morphism-types` (mono/epi via cancellation, never elements; mono=injective
+in Set proven via one-point-set trick, not definitional; mono+epi doesn't always imply iso, via
+ℤ↪ℚ). Both zero discrepancy. Mathematics **777/908** (775→777), 131 remaining. Full detail in
+`COVERAGE.md` Batch 191. Validated: KG PASS, state.ts 777/908, tsc clean, tests 561/561. Commit
+`e7b84c5`, pushed.
+
+Fresh frontier for Batch 192 (24 concepts): math.cat.natural-transformation,
+math.top.cohomology/euler-characteristic, plus math.cx.complex-numbers-analysis,
+math.de.systems-matrix-method, math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.jordan-form/matrix-exponential/matrix-representation/tensor,
+math.num.floating-point/interpolation/qr-algorithm/root-finding,
+math.opt.quadratic-programming/semidefinite-programming/stochastic-gradient,
+math.prob.characteristic-function/joint-distribution,
+math.stats.normal-distribution/percentile/sampling-distribution. Campaign continues under the
+same active `/loop`.
