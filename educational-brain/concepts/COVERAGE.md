@@ -16026,3 +16026,49 @@ Fresh frontier to be recomputed at the start of Batch 160 per established discip
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `39844c6` on `main`, pushed directly.
+
+## Batch 160 (2026-09-19) — third wrong-corpus + second stale-metadata correction
+
+Authored `math.de.legendre-equation` and `math.de.bvp`, continuing (and nearly closing) the
+`math.de` domain.
+
+`legendre-equation`: $x=0$ recognized as an ORDINARY point (UNLIKE Bessel's regular singular
+point), the standard series ansatz applying directly with no Frobenius modification, demonstrated
+via the $n=2$ setup; INTEGER $n$ terminating into the genuine polynomial $P_2(x)=\frac12(3x^2-1)$
+versus non-integer $n=2.5$'s never-terminating infinite series on the IDENTICAL equation; and the
+orthogonal-basis/spherical-symmetry connection (orientation level), paralleling Bessel's
+cylindrical-symmetry motivation. 3 misconceptions independently classified by Blueprint-declared
+severity — MC-1 LEGENDRE-ASSUMED-TO-NEED-FROBENIUS (Foundational), MC-2 LEGENDRE-SERIES-ASSUMED-
+ALWAYS-POLYNOMIAL (High), MC-3 LEGENDRE-EQUATION-ASSUMED-ARBITRARY-EXAMPLE (Moderate).
+**Wrong-corpus cross-link correction** (third this campaign, after Batches 128-129 and 157): the
+Blueprint's claimed "math.fnal.special-functions confirmed already authored" checked the
+Blueprints directory rather than the EB corpus — corrected to independence mode. **Stale-metadata
+correction** (second this campaign, after Batch 158's frobenius-method): Blueprint's
+estimated_hours=6 vs live KG's 5 — KG used as authoritative.
+
+`bvp`: the three-outcome framework (no solution / unique / infinitely many) demonstrated on the
+IDENTICAL ODE $y''+y=0$ with varying boundary conditions (never assuming IVP-style guaranteed
+uniqueness); both boundary conditions applied as a genuine SIMULTANEOUS system (never
+sequentially); and an automatically-satisfied condition correctly recognized as the infinitely-
+many-solutions signature (never a computational error). 3 misconceptions independently classified
+by Blueprint-declared severity — MC-1 BVP-ASSUMED-TO-ALWAYS-HAVE-UNIQUE-SOLUTION (Foundational),
+MC-2 BOTH-BOUNDARY-CONDITIONS-NOT-APPLIED-SIMULTANEOUSLY (Moderate), MC-3 INFINITELY-MANY-
+SOLUTIONS-CASE-MISTAKEN-FOR-AN-ERROR (Moderate). Zero Blueprint/KG discrepancy. Opens toward
+`math.de.sturm-liouville`'s declared unlock.
+
+Mathematics **713/908 → 715/908**, 193 remaining. `math.de` domain now has only `pde` and
+`nonlinear-ode` remaining before full exhaustion.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 715/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Fresh frontier to be recomputed at the start of Batch 161 per established discipline; remaining
+`math.de` concepts (pde, nonlinear-ode) and other ready concepts across `math.linalg`,
+`math.prob.joint-distribution`, `math.stats`, `math.cx`, `math.top`, `math.fnal`, `math.num`,
+`math.opt`, `math.graph`, `math.cat` still reachable.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `32d4704` on `main`, pushed directly.

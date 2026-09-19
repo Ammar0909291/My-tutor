@@ -4743,3 +4743,26 @@ Fresh frontier to be recomputed at the start of Batch 160 per established discip
 math.de concepts (legendre-equation, bvp, pde, nonlinear-ode) and other ready concepts across
 math.linalg, math.prob.joint-distribution, math.stats, math.cx, math.top, math.fnal, math.num,
 math.opt, math.graph, math.cat still reachable. Campaign continues under the same active `/loop`.
+
+### Batch 160 (2026-09-19) — third wrong-corpus + second stale-metadata correction
+
+Authored `legendre-equation` (x=0 as an ordinary point, no Frobenius needed unlike Bessel;
+integer n terminating into a genuine polynomial vs. non-integer n's infinite series; orthogonal
+basis from spherical symmetry) and `bvp` (the no-solution/unique/infinitely-many three-outcome
+framework on the identical ODE; simultaneous boundary-condition application; the automatically-
+satisfied-condition signature). `legendre-equation` had a wrong-corpus cross-link correction
+(math.fnal.special-functions claimed authored via the blueprints dir, not the EB corpus — third
+such correction this campaign) and a stale-metadata correction (6hrs vs live KG's 5hrs). `bvp` had
+zero Blueprint/KG discrepancy and opens toward math.de.sturm-liouville. Mathematics **715/908**
+(713→715), 193 remaining — math.de now has only pde and nonlinear-ode left. Full per-concept
+detail in `COVERAGE.md` Batch 160. Validated: KG validator PASS (908/908 reachable, file
+untouched), `scripts/math/state.ts` confirms mathematics 715/908 (13 EB-certified domains
+unchanged), `tsc --noEmit` clean, targeted EB/curriculum tests (7 files) 561/561 passed. Full
+whole-repo suite not re-attempted, per the established Batch 109-110 hang precedent. No
+Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Commit `32d4704` on
+`main`, pushed directly.
+
+Fresh frontier to be recomputed at the start of Batch 161 per established discipline; remaining
+math.de concepts (pde, nonlinear-ode) and other ready concepts across math.linalg,
+math.prob.joint-distribution, math.stats, math.cx, math.top, math.fnal, math.num, math.opt,
+math.graph, math.cat still reachable. Campaign continues under the same active `/loop`.
