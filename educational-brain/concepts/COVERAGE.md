@@ -15167,3 +15167,45 @@ chain, poisson-process). Other ready concepts remain across `math.cat`, `math.cx
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `710ea13` on `main`, pushed directly.
+
+### Batch 141 (2026-09-19)
+
+`math.prob.classical-probability`: $P(A)=|A|/|\Omega|$ with equally-likely-ness as a PRECONDITION
+to verify (never a consequence of listing outcomes), demonstrated via a biased coin's $P(H)=1/2$
+formula output directly contradicting its stated 70% bias; "favorable" defined as strict set
+membership, never personal preference, via the "at least 3" die-roll event; the sample space's
+mutual-exclusivity/exhaustiveness requirement, demonstrated via the two-dice sum-of-7 problem's
+wrong 11-outcome versus correct 36-outcome sample space. 3 misconceptions independently classified
+— MC-1 CLASSICAL-PROBABILITY-WORKS-FOR-ANY-EXPERIMENT, MC-2 FAVORABLE-MEANS-OUTCOMES-I-WANT,
+MC-3 MORE-OUTCOMES-LISTED-MEANS-MORE-ACCURATE. Zero Blueprint/KG metadata discrepancy (an
+older-format Blueprint, Section 0-15 structure rather than the Component 0-10 convention, but its
+declared fields matched the live KG exactly).
+
+`math.prob.markov-chain`: the Markov property as a sufficiency claim about the CURRENT state
+alone (never mere recency), demonstrated via a weather model (genuinely Markov) contrasted
+against an exam-score-average sequence (not Markov under a single-score state); multi-step
+transition probabilities requiring genuine matrix powers $P^n$, never linear scaling,
+demonstrated via a 2-state weather chain's correct two-step probability 0.28 versus the naive
+0.4; long-run stationary-distribution behavior previewed at orientation level, showing the same
+limit $(2/3,1/3)$ reached from either starting state. 3 misconceptions independently classified —
+MC-1 RECENCY-MISTAKEN-FOR-MARKOV (Foundational), MC-2 MULTI-STEP-PROBABILITY-LINEARLY-SCALED
+(High), MC-3 LONG-RUN-BEHAVIOR-ASSUMED-START-DEPENDENT (Moderate). Zero Blueprint/KG metadata
+discrepancy.
+
+Both concepts continue diversifying into `math.prob` following the `math.real` certification
+milestone. Mathematics **675/908 → 677/908**, 231 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 677/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Computed fresh frontier post-batch (not yet re-derived this entry — will be recomputed fresh at
+the start of Batch 142 per established discipline): numerous `math.prob` concepts remain
+reachable (convergence-types, distribution, generating-function, poisson-process). Other ready
+concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`, `math.num`,
+`math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `9f5d374` on `main`, pushed directly.

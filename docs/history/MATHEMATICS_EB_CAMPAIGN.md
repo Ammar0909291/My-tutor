@@ -4329,3 +4329,23 @@ Fresh frontier to be recomputed at the start of Batch 141 per established discip
 math.prob concepts remain reachable (classical-probability, convergence-types, distribution,
 generating-function, markov-chain, poisson-process). Campaign continues under the same active
 `/loop`.
+
+### Batch 141 (2026-09-19)
+
+Authored `classical-probability` (equally-likely-ness as a precondition, not a consequence of
+listing outcomes, via a biased-coin counterexample; "favorable" as strict set membership; proper
+sample-space partitioning via the two-dice sum-of-7 correction) and `markov-chain` (the Markov
+property as full-sufficiency of the current state; multi-step transitions requiring genuine
+matrix powers, not linear scaling; long-run stationary-distribution behavior previewed). Both
+zero Blueprint/KG discrepancy (classical-probability used an older Section-based Blueprint format
+that still matched the live KG exactly). Mathematics **677/908** (675→677), 231 remaining. Full
+per-concept detail in `COVERAGE.md` Batch 141. Validated: KG validator PASS (908/908 reachable,
+file untouched), `scripts/math/state.ts` confirms mathematics 677/908 (13 EB-certified domains
+unchanged), `tsc --noEmit` clean, targeted EB/curriculum tests (7 files) 561/561 passed. Full
+whole-repo suite not re-attempted, per the established Batch 109-110 hang precedent. No Physics/
+Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Commit `9f5d374` on `main`,
+pushed directly.
+
+Fresh frontier to be recomputed at the start of Batch 142 per established discipline; numerous
+math.prob concepts remain reachable (convergence-types, distribution, generating-function,
+poisson-process). Campaign continues under the same active `/loop`.
