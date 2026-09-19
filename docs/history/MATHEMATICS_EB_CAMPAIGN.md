@@ -6152,3 +6152,22 @@ math.fnal.convolution/normed-space, math.graph.random-graph,
 math.linalg.matrix-representation/tensor, math.num.stiff-ode, math.opt.pca/
 semidefinite-programming, math.prob.martingale. Campaign continues under the same active
 `/loop`.
+
+## Batch 223 (2026-09-19) — MILESTONE: math.num fully EB-certified (15th domain)
+
+Authored `stiff-ode` (stiff means a specific eigenvalue-spread ratio, never a general synonym for
+"hard"; implicit methods win on stability, never accuracy; stiffness evolves along the trajectory,
+never a fixed global label) and `pca` (centering is required, never a minor detail; principal
+components are linear combinations of all features, never selected original features; explained
+variance divides by the sum of all eigenvalues, never the largest alone). Both zero discrepancy.
+Mathematics **841/908** (839→841), 67 remaining. **math.num is now the 15th fully EB-certified
+domain** (math.found, math.calc, math.geom, math.alg, math.arith, math.stats, math.abst, math.nt,
+math.disc, math.real, math.func, math.trig, math.seq, math.num, math.meas). Full detail in
+`COVERAGE.md` Batch 223. Validated: KG PASS, state.ts 841/908, tsc clean, tests 561/561. Commit
+`86d7535`, pushed.
+
+Fresh frontier for Batch 224 (13 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.opt.semidefinite-programming,
+math.prob.martingale. Campaign continues under the same active `/loop`.
