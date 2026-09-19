@@ -16888,3 +16888,47 @@ Fresh frontier recomputed for Batch 178 (27 concepts): `math.linalg.pseudoinvers
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `a43084b` on `main`, pushed directly.
+
+## Batch 178 (2026-09-19)
+
+`singular-values`: singular values as the SQUARE ROOTS of $A^TA$'s eigenvalues (never the
+eigenvalues themselves), demonstrated via the direct $\sqrt9=3,\sqrt{16}=4$ derivation; singular
+values existing for EVERY matrix, generalizing eigenvalues beyond square matrices (never limited
+like eigenvalues), demonstrated via the non-square $3\times2$ existence example; and the operator
+2-norm as the SINGLE LARGEST singular value alone (never an average or sum), demonstrated via the
+$\sigma_1=4$-versus-averaging contrast. 2 misconceptions independently classified by
+Blueprint-declared severity — MC-1
+SINGULAR-VALUES-REPORTED-AS-A-TRANSPOSE-A-EIGENVALUES-WITHOUT-SQUARE-ROOT (Foundational), MC-2
+OPERATOR-NORM-COMPUTED-AS-AVERAGE-OR-SUM-OF-SINGULAR-VALUES-RATHER-THAN-THE-LARGEST
+(Foundational). Zero Blueprint/KG discrepancy.
+
+`pseudoinverse`: $\Sigma^+$ inverting NONZERO singular values while leaving ZERO ones as zero
+(never attempting to invert zero), demonstrated via the $\text{diag}(2,5,0)\to\text{diag}(1/2,
+1/5,0)$ construction; $\hat x=A^+b$ giving the MINIMUM-NORM solution among all valid solutions
+(never just any solution), demonstrated via the underdetermined-system illustration; and
+$A^+=A^{-1}$ EXACTLY when $A$ is invertible (never assumed to always differ), demonstrated via the
+direct $A^+A=I$ verification. 2 misconceptions independently classified by Blueprint-declared
+severity — MC-1 ZERO-SINGULAR-VALUES-INCORRECTLY-INVERTED-OR-TREATED-AS-UNDEFINED-IN-SIGMA-PLUS
+(Foundational), MC-2 PSEUDOINVERSE-ASSUMED-ALWAYS-DIFFERENT-FROM-ORDINARY-INVERSE (Moderate). Zero
+Blueprint/KG discrepancy.
+
+Mathematics **749/908 → 751/908**, 157 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 751/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)".
+
+Fresh frontier recomputed for Batch 179 (25 concepts, `math.linalg.svd`'s children fully
+exhausted): `math.cat.category`, `math.cx.complex-numbers-analysis`,
+`math.de.systems-matrix-method`, `math.fnal.convolution`, `math.fnal.normed-space`,
+`math.graph.random-graph`, `math.linalg.dual-space`/`jordan-form`/`least-squares`/
+`matrix-exponential`/`matrix-representation`/`tensor`,
+`math.num.floating-point`/`interpolation`/`qr-algorithm`/`root-finding`,
+`math.opt.quadratic-programming`/`semidefinite-programming`/`stochastic-gradient`,
+`math.prob.characteristic-function`/`joint-distribution`,
+`math.stats.normal-distribution`/`percentile`/`sampling-distribution`,
+`math.top.topological-space`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `01c7d64` on `main`, pushed directly.

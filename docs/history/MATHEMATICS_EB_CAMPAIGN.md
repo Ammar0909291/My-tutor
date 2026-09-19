@@ -5197,3 +5197,26 @@ qr-algorithm/root-finding, math.opt.quadratic-programming/semidefinite-programmi
 stochastic-gradient, math.prob.characteristic-function/joint-distribution,
 math.stats.normal-distribution/percentile/sampling-distribution, math.top.topological-space.
 Campaign continues under the same active `/loop`.
+
+### Batch 178 (2026-09-19)
+
+Authored `singular-values` (square roots of AᵀA's eigenvalues, never the eigenvalues directly;
+generalize eigenvalues to non-square matrices; the operator norm as the largest singular value
+alone) and `pseudoinverse` (Σ⁺ inverts nonzero, leaves zero as zero; the minimum-norm solution
+among all valid solutions; A⁺=A⁻¹ exactly when A is invertible). Both zero Blueprint/KG
+discrepancy. Mathematics **751/908** (749→751), 157 remaining. Full per-concept detail in
+`COVERAGE.md` Batch 178. Validated: KG validator PASS (908/908 reachable, file untouched),
+`scripts/math/state.ts` confirms mathematics 751/908 (13 EB-certified domains unchanged), `tsc
+--noEmit` clean, targeted EB/curriculum tests (7 files) 561/561 passed. Full whole-repo suite not
+re-attempted, per the established Batch 109-110 hang precedent. No Physics/Chemistry/English/
+Biology/CS/KG/Blueprint/runtime file touched. Commit `01c7d64` on `main`, pushed directly.
+
+Fresh frontier recomputed for Batch 179 (25 concepts, math.linalg.svd's children now fully
+exhausted): math.cat.category, math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution, math.fnal.normed-space, math.graph.random-graph, math.linalg.dual-space/
+jordan-form/least-squares/matrix-exponential/matrix-representation/tensor,
+math.num.floating-point/interpolation/qr-algorithm/root-finding,
+math.opt.quadratic-programming/semidefinite-programming/stochastic-gradient,
+math.prob.characteristic-function/joint-distribution,
+math.stats.normal-distribution/percentile/sampling-distribution, math.top.topological-space.
+Campaign continues under the same active `/loop`.
