@@ -4940,3 +4940,31 @@ kernel-image/projection/tensor, math.num.floating-point/interpolation/root-findi
 math.opt.stochastic-gradient, math.prob.characteristic-function/joint-distribution,
 math.stats.normal-distribution/percentile/sampling-distribution, math.top.topological-space.
 Campaign continues under the same active `/loop`.
+
+### Batch 168 (2026-09-19) — seventh wrong-corpus correction
+
+Authored `harmonic-functions` (the mean value property as an exact identity, never
+approximation; boundary agreement alone forcing interior agreement via the maximum principle;
+holomorphic functions as a free source of harmonic functions via Cauchy-Riemann) and
+`poisson-equation` (Laplace's special properties genuinely failing for Poisson solutions;
+Laplace's Equation as Poisson's exact special case f≡0; Green's functions as a genuine
+point-source-then-superpose strategy). `harmonic-functions` had a wrong-corpus cross-link
+correction (both math.cx.analytic-functions and math.cx.cauchy-riemann — seventh such
+discrepancy this campaign, after Batches 128-129, 157, 160, 161, and both instances at Batch
+162). `poisson-equation` had zero discrepancy, with math.de.greens-function confirmed still
+unauthored. Together these close math.de's entire currently-reachable frontier for this
+campaign. Mathematics **731/908** (729→731), 177 remaining. Full per-concept detail in
+`COVERAGE.md` Batch 168. Validated: KG validator PASS (908/908 reachable, file untouched),
+`scripts/math/state.ts` confirms mathematics 731/908 (13 EB-certified domains unchanged), `tsc
+--noEmit` clean, targeted EB/curriculum tests (7 files) 561/561 passed. Full whole-repo suite not
+re-attempted, per the established Batch 109-110 hang precedent. No Physics/Chemistry/English/
+Biology/CS/KG/Blueprint/runtime file touched. Commit `ce11e24` on `main`, pushed directly.
+
+Fresh frontier recomputed for Batch 169 (24 concepts): math.de.chaos, math.de.greens-function
+(the last two remaining PDE-family concepts), plus math.cat.category,
+math.cx.complex-numbers-analysis, math.fnal.convolution, math.fnal.normed-space,
+math.graph.random-graph, math.linalg.basis/diagonalization/dual-space/inner-product-space/
+kernel-image/projection/tensor, math.num.floating-point/interpolation/root-finding,
+math.opt.stochastic-gradient, math.prob.characteristic-function/joint-distribution,
+math.stats.normal-distribution/percentile/sampling-distribution, math.top.topological-space.
+Campaign continues under the same active `/loop`.

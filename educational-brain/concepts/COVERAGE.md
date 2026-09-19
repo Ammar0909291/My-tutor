@@ -16410,3 +16410,52 @@ concepts beyond these), plus `math.cat.category`, `math.cx.complex-numbers-analy
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `0401548` on `main`, pushed directly.
+
+## Batch 168 (2026-09-19)
+
+`harmonic-functions`: the mean value property as an EXACT identity (never an approximation),
+demonstrated via the exact integral verification for $u=x^2-y^2$; boundary agreement alone
+forcing interior agreement (never requiring separate interior checks), demonstrated via the
+difference-function Dirichlet-uniqueness argument; and holomorphic functions as a free source of
+harmonic functions via Cauchy-Riemann (never an unrelated topic), demonstrated via the $f(z)=z^2$
+derivation certifying both $u=x^2-y^2$ and $v=2xy$. 3 misconceptions independently classified by
+Blueprint-declared severity — MC-1 MEAN-VALUE-PROPERTY-AS-APPROXIMATION (Foundational), MC-2
+INTERIOR-CHECK-ASSUMED-NECESSARY (High), MC-3 HARMONIC-AND-HOLOMORPHIC-UNRELATED (Moderate).
+Wrong-corpus cross-link discrepancy found: the Blueprint's own Component 7 claims BOTH
+`math.cx.analytic-functions` and `math.cx.cauchy-riemann` "authored" — checked against the
+BLUEPRINTS directory, where both exist, not the EDUCATIONAL-BRAIN corpus, where NEITHER exists —
+corrected to independence mode, the seventh such wrong-corpus discrepancy this campaign (after
+Batches 128-129, 157, 160, 161, and both instances at Batch 162).
+
+`poisson-equation`: Laplace's special properties genuinely FAILING for Poisson solutions (never
+assumed to extend automatically), demonstrated via the direct $u=x^2$ mean-value-property
+counterexample; Laplace's Equation as Poisson's exact special case $f\equiv0$ (never a separate,
+unrelated theory), demonstrated via the electrostatics charge-free-region reduction; and Green's
+functions as a genuine point-source-then-superpose STRATEGY (never mere notation), demonstrated
+via the explicit strategy framing contrasted with separation of variables. 3 misconceptions
+independently classified by Blueprint-declared severity — MC-1
+LAPLACE-PROPERTIES-ASSUMED-TO-EXTEND (Foundational), MC-2 POISSON-AND-LAPLACE-ASSUMED-UNRELATED
+(High), MC-3 GREENS-FUNCTIONS-ASSUMED-MERELY-NOTATIONAL (Moderate). Zero Blueprint/KG discrepancy;
+`math.de.greens-function` independently re-confirmed still unauthored, correctly remaining
+independence mode. This entry, together with `harmonic-functions`, closes `math.de`'s ENTIRE
+currently-reachable frontier for this campaign.
+
+Mathematics **729/908 → 731/908**, 177 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 731/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)".
+
+Fresh frontier recomputed for Batch 169 (24 concepts): `math.de.chaos`, `math.de.greens-function`
+(the last two remaining PDE-family concepts newly reachable), plus `math.cat.category`,
+`math.cx.complex-numbers-analysis`, `math.fnal.convolution`, `math.fnal.normed-space`,
+`math.graph.random-graph`, `math.linalg.basis`/`diagonalization`/`dual-space`/
+`inner-product-space`/`kernel-image`/`projection`/`tensor`,
+`math.num.floating-point`/`interpolation`/`root-finding`, `math.opt.stochastic-gradient`,
+`math.prob.characteristic-function`/`joint-distribution`,
+`math.stats.normal-distribution`/`percentile`/`sampling-distribution`,
+`math.top.topological-space`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `ce11e24` on `main`, pushed directly.
