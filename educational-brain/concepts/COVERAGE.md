@@ -15675,3 +15675,50 @@ solution, laplace-transform, bvp, pde) and other ready concepts across `math.lin
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `ff5984c` on `main`, pushed directly.
+
+## Batch 152 (2026-09-19) — one stale-metadata correction, one reverse-direction cross-link upgrade
+
+Authored `math.de.wronskian` and `math.de.char-equation`, continuing the `math.de` domain.
+
+`wronskian`: the Wronskian formula shown to be EXACTLY `math.linalg.determinant`'s own $2\times2$
+determinant applied to the function/derivative matrix (never a separate formula), demonstrated via
+$e^{2x},e^{-2x}$; its nonvanishing shown to DIRECTLY instantiate
+`math.linalg.linear-independence`'s general condition via the determinant invertibility criterion
+(never an ad hoc ODE-specific fact); and Abel's theorem's orientation-level preview computing
+$W(x)$ entirely from $P(x)$ alone, verified exactly against direct computation for
+$y''+3y'+2y=0$. 3 misconceptions independently classified by Blueprint-declared severity — MC-1
+WRONSKIAN-ASSUMED-INDEPENDENT-FORMULA (Foundational), MC-2 WRONSKIAN-TEST-ASSUMED-AD-HOC (High),
+MC-3 WRONSKIAN-FORM-ASSUMED-TO-REQUIRE-SOLVING-FIRST (Moderate). **Stale Blueprint metadata
+correction**: the Blueprint's own Component 0 stated bloom=analyze, mastery_threshold=0.75,
+estimated_hours=5 — the live KG's current values (apply, 0.85, 3) used as authoritative.
+
+`char-equation`: the exponential ansatz $y=e^{rx}$ converting the ODE into the algebraic
+$ar^2+br+c=0$ via the exponential's self-proportional derivative; distinct roots requiring
+Wronskian VERIFICATION (never assumed automatic), demonstrated via $e^{2x},e^{3x}$'s
+$W=e^{5x}\ne0$; and the three-case discriminant split (distinct real/repeated/complex), with
+repeated roots' collapse to one dimension fixed by the extra $x$ factor. 3 misconceptions
+independently classified by Blueprint-declared severity — MC-1 EXPONENTIAL-ANSATZ-ASSUMED-
+ARBITRARY (Foundational), MC-2 DISTINCT-ROOTS-ASSUMED-TO-AUTOMATICALLY-GIVE-FUNDAMENTAL-SET
+(High), MC-3 REPEATED-ROOT-ASSUMED-TO-GIVE-TWO-INDEPENDENT-SOLUTIONS (Moderate). **Reverse-
+direction cross-link correction**: the Blueprint's own Component 7 declared
+`math.linalg.characteristic-polynomial` not yet authored at its own write-time (correctly
+independence mode then); it HAS since been authored (Batch 78, well before this campaign reached
+this concept) — upgraded to a genuine cross-link probe here, consistent with the established
+reverse-direction-discrepancy correction pattern (last seen at Batch 131's `math.real.ivt`).
+
+Mathematics **697/908 → 699/908**, 209 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 699/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Fresh frontier to be recomputed at the start of Batch 153 per established discipline; remaining
+`math.de` concepts (stability-analysis, higher-order-ode, series-solution, laplace-transform, bvp,
+pde) and other ready concepts across `math.linalg`, `math.prob.joint-distribution`, `math.stats`,
+`math.cx`, `math.top`, `math.fnal`, `math.num`, `math.opt`, `math.graph`, `math.cat` still
+reachable.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `1ac9bd6` on `main`, pushed directly.

@@ -4572,3 +4572,26 @@ math.de concepts (char-equation, wronskian, stability-analysis, higher-order-ode
 solution, laplace-transform, bvp, pde) and other ready concepts across math.linalg,
 math.prob.joint-distribution, math.stats, math.cx, math.top, math.fnal, math.num, math.opt,
 math.graph, math.cat still reachable. Campaign continues under the same active `/loop`.
+
+### Batch 152 (2026-09-19) — stale-metadata + reverse-direction cross-link corrections
+
+Authored `wronskian` (the Wronskian as exactly the linear-algebra determinant, its nonvanishing as
+literally the linear-independence condition, Abel's theorem previewed) and `char-equation` (the
+exponential ansatz converting ODEs to algebra; distinct roots still needing Wronskian
+verification; the three-case discriminant split). `wronskian` had a stale-metadata correction
+(Blueprint stated analyze/0.75/5hrs, live KG has apply/0.85/3hrs — KG used as authoritative).
+`char-equation` had a reverse-direction cross-link correction: its declared cross-link
+`math.linalg.characteristic-polynomial` was unauthored at Blueprint write-time but has since been
+authored (Batch 78) — upgraded to a genuine cross-link probe. Mathematics **699/908** (697→699),
+209 remaining. Full per-concept detail in `COVERAGE.md` Batch 152. Validated: KG validator PASS
+(908/908 reachable, file untouched), `scripts/math/state.ts` confirms mathematics 699/908 (13
+EB-certified domains unchanged), `tsc --noEmit` clean, targeted EB/curriculum tests (7 files)
+561/561 passed. Full whole-repo suite not re-attempted, per the established Batch 109-110 hang
+precedent. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Commit
+`1ac9bd6` on `main`, pushed directly.
+
+Fresh frontier to be recomputed at the start of Batch 153 per established discipline; remaining
+math.de concepts (stability-analysis, higher-order-ode, series-solution, laplace-transform, bvp,
+pde) and other ready concepts across math.linalg, math.prob.joint-distribution, math.stats,
+math.cx, math.top, math.fnal, math.num, math.opt, math.graph, math.cat still reachable. Campaign
+continues under the same active `/loop`.
