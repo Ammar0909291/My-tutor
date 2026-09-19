@@ -16459,3 +16459,53 @@ Fresh frontier recomputed for Batch 169 (24 concepts): `math.de.chaos`, `math.de
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `ce11e24` on `main`, pushed directly.
+
+## Batch 169 (2026-09-19)
+
+`chaos`: chaos as DETERMINISTIC sensitive dependence (never conflated with randomness),
+demonstrated via the reproducible-trajectory-versus-unpredictability distinction for two nearby
+Lorenz initial conditions; the Lyapunov exponent $\lambda_1$ as a TIME-AVERAGED asymptotic rate
+(never an instantaneous constant), demonstrated via the finite-time-versus-infinite-time-limit
+contrast; and chaos requiring neither large nor complex systems (never assumed to need high
+dimensionality), demonstrated via the Lorenz system's (3 variables) and logistic map's (1
+variable) minimal chaotic structure. 3 misconceptions independently classified by
+Blueprint-declared birth type — MC-1 CHAOS-MEANS-RANDOM (language contamination), MC-2
+LYAPUNOV-EXPONENT-MEASURES-DIVERGENCE-SPEED (instruction-induced), MC-3
+CHAOS-REQUIRES-LARGE-SYSTEMS (overgeneralization). Zero Blueprint/KG discrepancy.
+
+`greens-function`: $G$ requiring a piecewise construction with a derivative jump (never a single
+smooth formula), demonstrated via the full $[0,1]$ piecewise Green's-function derivation with
+continuity and jump conditions; $G$ alone never solving the general problem (the superposition
+integral is essential), demonstrated via the exact-match verification against the known
+closed-form solution to $-u''=1$; and $G$ encoding boundary conditions as well as the operator
+(never operator-only), demonstrated via the mixed-boundary-condition contrast. 3 misconceptions
+independently classified by Blueprint-declared severity — MC-1
+GREENS-FUNCTION-ASSUMED-SMOOTH-THROUGHOUT (Foundational), MC-2
+GREENS-FUNCTION-ALONE-ASSUMED-SUFFICIENT (High), MC-3 GREENS-FUNCTION-ASSUMED-OPERATOR-ONLY
+(Moderate). Zero Blueprint/KG discrepancy; `math.de.ivp` independently re-confirmed authored
+(satisfying the `requires` dependency), `math.fnal.distributions` independently re-confirmed still
+unauthored, correctly remaining independence mode. This entry, together with `chaos`, closes
+`math.de`'s ENTIRE currently-reachable frontier for this campaign — only 1 `math.de` concept
+remains unauthored in the whole domain, and it is not yet reachable (blocked by a cross-subject
+prerequisite still unauthored elsewhere).
+
+Mathematics **731/908 → 733/908**, 175 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 733/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)".
+
+Fresh frontier recomputed for Batch 170 (22 concepts, `math.de` now fully exhausted from the
+frontier — only 1 concept left in the whole domain, currently unreachable): `math.cat.category`,
+`math.cx.complex-numbers-analysis`, `math.fnal.convolution`, `math.fnal.normed-space`,
+`math.graph.random-graph`, `math.linalg.basis`/`diagonalization`/`dual-space`/
+`inner-product-space`/`kernel-image`/`projection`/`tensor`,
+`math.num.floating-point`/`interpolation`/`root-finding`, `math.opt.stochastic-gradient`,
+`math.prob.characteristic-function`/`joint-distribution`,
+`math.stats.normal-distribution`/`percentile`/`sampling-distribution`,
+`math.top.topological-space`. This batch will diversify away from `math.de` into other domains for
+the first time in an extended stretch of this campaign.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `37057f6` on `main`, pushed directly.

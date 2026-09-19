@@ -4968,3 +4968,29 @@ kernel-image/projection/tensor, math.num.floating-point/interpolation/root-findi
 math.opt.stochastic-gradient, math.prob.characteristic-function/joint-distribution,
 math.stats.normal-distribution/percentile/sampling-distribution, math.top.topological-space.
 Campaign continues under the same active `/loop`.
+
+### Batch 169 (2026-09-19) — math.de frontier exhausted
+
+Authored `chaos` (deterministic sensitive dependence, never randomness; the Lyapunov exponent as
+a time-averaged asymptotic rate, never instantaneous; chaos requiring neither large nor complex
+systems) and `greens-function` (the piecewise construction with a derivative jump, never smooth
+throughout; the superposition integral as the essential step beyond G alone; G encoding boundary
+conditions as well as the operator). Both zero Blueprint/KG discrepancy; math.de.ivp confirmed
+authored, math.fnal.distributions confirmed still unauthored. Together these close math.de's
+entire currently-reachable frontier — only 1 math.de concept remains unauthored in the whole
+domain, and it is not yet reachable (blocked by a cross-subject prerequisite elsewhere).
+Mathematics **733/908** (731→733), 175 remaining. Full per-concept detail in `COVERAGE.md` Batch
+169. Validated: KG validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts`
+confirms mathematics 733/908 (13 EB-certified domains unchanged), `tsc --noEmit` clean, targeted
+EB/curriculum tests (7 files) 561/561 passed. Full whole-repo suite not re-attempted, per the
+established Batch 109-110 hang precedent. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/
+runtime file touched. Commit `37057f6` on `main`, pushed directly.
+
+Fresh frontier recomputed for Batch 170 (22 concepts, math.de now fully exhausted from the
+frontier): math.cat.category, math.cx.complex-numbers-analysis, math.fnal.convolution,
+math.fnal.normed-space, math.graph.random-graph, math.linalg.basis/diagonalization/dual-space/
+inner-product-space/kernel-image/projection/tensor, math.num.floating-point/interpolation/
+root-finding, math.opt.stochastic-gradient, math.prob.characteristic-function/joint-distribution,
+math.stats.normal-distribution/percentile/sampling-distribution, math.top.topological-space. This
+batch diversifies away from math.de into other domains for the first time in an extended stretch
+of this campaign. Campaign continues under the same active `/loop`.
