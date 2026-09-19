@@ -15304,3 +15304,51 @@ generating-function). Other ready concepts remain across `math.cat`, `math.cx`, 
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `70d71c1` on `main`, pushed directly.
+
+## Batch 144 (2026-09-19)
+
+Authored `math.prob.distribution` and `math.prob.ergodicity`, both requiring only already-
+authored/certified prerequisites (`math.prob.random-variable`, `math.prob.cdf`; and
+`math.prob.stationary-distribution` respectively).
+
+`distribution`: the distribution of a random variable as its COMPLETE probabilistic description —
+CDF, PMF (discrete), and PDF (continuous) as equivalent, interchangeable full specifications,
+demonstrated via the die-roll PMF-table/CDF-step-graph equivalence; a shared summary statistic
+(mean) as NEVER implying a shared distribution, via the die-roll-versus-two-point-variable
+contrast (both $E=3.5$, but $P(3\le\cdot\le4)$ diverges: $2/6$ vs. $0$); named distributions
+(Binomial, Uniform, Normal) as reusable models valid only once their defining assumptions are
+verified, via the quality-control Binomial-verification example. 3 misconceptions independently
+classified by severity per the Blueprint's own declared scale — MC-1 SHARED-SUMMARY-STATISTIC-
+ASSUMED-TO-IMPLY-SHARED-DISTRIBUTION (Foundational), MC-2 NAMED-DISTRIBUTION-APPLIED-WITHOUT-
+VERIFYING-ASSUMPTIONS (Foundational), MC-3 CDF-PMF-PDF-TREATED-AS-DIFFERENT-INFORMATION
+(Moderate). Zero Blueprint/KG discrepancy.
+
+`ergodicity`: the ergodic theorem — time average $(1/n)\sum f(X_k)$ converging almost surely to
+the space average $\sum_i\pi_if(i)$ for irreducible+aperiodic+positive-recurrent chains;
+ergodicity meaning time averages track the SPECIFIC (often non-uniform) $\pi$, never equal
+visitation, via the $\pi=(0.75,0.25)$ 2-state example; ergodicity applying fully to FINITE chains,
+never requiring an infinite/continuous state space; and the ergodic theorem's almost-sure time-
+average convergence as DISTINCT from distributional convergence $P^n(x,\cdot)\to\pi$ (which
+additionally needs aperiodicity), via the 10-cycle's converging time-average-but-oscillating-
+distribution counterexample. 3 misconceptions independently classified by Blueprint-declared
+birth type — MC-1 ERGODIC-MEANS-THE-CHAIN-VISITS-ALL-STATES-EQUALLY (language contamination),
+MC-2 ERGODICITY-REQUIRES-AN-INFINITE-STATE-SPACE (instruction-induced), MC-3 TIME-AVERAGE-
+CONVERGENCE-MEANS-DISTRIBUTION-CONVERGENCE (overgeneralization). Zero Blueprint/KG discrepancy.
+`ergodicity` closes `stationary-distribution`'s declared unlock — no math.prob concepts remain
+newly opened by this batch beyond the general frontier below.
+
+Mathematics **681/908 → 683/908**, 225 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 683/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Fresh frontier to be recomputed at the start of Batch 145 per established discipline; remaining
+`math.prob` concepts (convergence-types, generating-function) and other ready concepts across
+`math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`, `math.num`, `math.stats`, `math.top`
+still reachable.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `22cfbfd` on `main`, pushed directly.

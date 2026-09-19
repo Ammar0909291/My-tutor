@@ -4396,3 +4396,25 @@ Fresh frontier to be recomputed at the start of Batch 144 per established discip
 ergodicity` newly reachable (stationary-distribution now authored); other math.prob concepts
 remain reachable (convergence-types, distribution, generating-function). Campaign continues under
 the same active `/loop`.
+
+### Batch 144 (2026-09-19)
+
+Authored `distribution` (the CDF/PMF/PDF as equivalent, interchangeable full descriptions, never
+different information; a shared summary statistic never implying a shared distribution, via the
+die-roll-versus-two-point-variable contrast; named distributions as reusable models valid only
+after their assumptions are verified) and `ergodicity` (the ergodic theorem's time-average-to-
+space-average convergence; ergodicity meaning time averages track the specific, often non-uniform
+π, never equal visitation; full applicability to finite chains; and the distinctness of time-
+average convergence from distributional convergence, which additionally needs aperiodicity). Both
+zero Blueprint/KG discrepancy. `ergodicity` closes `stationary-distribution`'s declared unlock.
+Mathematics **683/908** (681→683), 225 remaining. Full per-concept detail in `COVERAGE.md` Batch
+144. Validated: KG validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts`
+confirms mathematics 683/908 (13 EB-certified domains unchanged), `tsc --noEmit` clean, targeted
+EB/curriculum tests (7 files) 561/561 passed. Full whole-repo suite not re-attempted, per the
+established Batch 109-110 hang precedent. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/
+runtime file touched. Commit `22cfbfd` on `main`, pushed directly.
+
+Fresh frontier to be recomputed at the start of Batch 145 per established discipline; remaining
+math.prob concepts (convergence-types, generating-function) and other ready concepts across
+math.cat, math.cx, math.de, math.graph, math.linalg, math.num, math.stats, math.top still
+reachable. Campaign continues under the same active `/loop`.
