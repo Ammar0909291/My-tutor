@@ -3868,3 +3868,29 @@ poisson-process`, `math.prob.quantile` all reachable. 27 other ready concepts re
 `math.top`. Campaign continues under the same active `/loop`; re-derive the frontier fresh via
 `scripts/math/state.ts` (and each candidate's actual `requires`) each iteration rather than
 trusting any number or `children`/`unlocks`-field assumption recorded here.
+
+### Batch 123 (2026-09-19) — third reverse-direction discrepancy
+
+Authored `variance` (Var(X)=E[X²]-(E[X])², always requiring the subtraction; variance vs. standard
+deviation; shifts never change variance, scaling squares it) and `absolute-convergence` (absolute
+convergence as a separately-tested property; implies convergence but never the converse; the
+rearrangement dichotomy via the Riemann Rearrangement Theorem). `absolute-convergence`'s Blueprint
+correctly called `math.seq.absolute-convergence` unauthored when written, but `ls` confirmed it's
+now authored — THIRD reverse-direction discrepancy this campaign (after Batches 112, 122).
+Corrected to a genuine cross-link probe. Both concepts zero Blueprint/KG discrepancy on every
+other field. Mathematics **641/908** (639→641), 267 remaining. Full per-concept detail in
+`COVERAGE.md` Batch 123. Validated: KG validator PASS (908/908 reachable, file untouched),
+`scripts/math/state.ts` confirms mathematics 641/908 (12 EB-certified domains unchanged), `tsc
+--noEmit` clean, targeted EB/curriculum tests 118/118 passed. Full whole-repo suite not
+re-attempted, per the established Batch 109-110 hang precedent. No Physics/Chemistry/English/
+Biology/CS/KG/Blueprint/runtime file touched. Commit `b434ff5` on `main`, pushed directly.
+
+Fresh frontier: `math.fnal.convolution`, `math.opt.stochastic-gradient` reachable. `math.prob.
+convergence-types`, `math.prob.distribution`, `math.prob.generating-function`, `math.prob.law-of-
+unconscious`, `math.prob.linearity-expectation`, `math.prob.markov-inequality`, `math.prob.
+moments`, `math.prob.normal-distribution`, `math.prob.poisson-process`, `math.prob.quantile` all
+reachable. 27 other ready concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph`,
+`math.linalg`, `math.num`, `math.stats`, `math.top`. Campaign continues under the same active
+`/loop`; re-derive the frontier fresh via `scripts/math/state.ts` (and each candidate's actual
+`requires`) each iteration rather than trusting any number or `children`/`unlocks`-field
+assumption recorded here.
