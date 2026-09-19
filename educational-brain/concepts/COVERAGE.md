@@ -13913,3 +13913,56 @@ reachable. 27 other ready concepts remain across `math.cat`, `math.cx`, `math.de
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `0e6e8a7` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 117 (2026-09-19) — tenth discrepancy: two simultaneously-false cross-link claims
+
+Re-derived the frontier fresh (38 ready concepts). Selected `math.meas.lp-space` (requires only
+`lebesgue-integral`, authored Batch 115) and `math.prob.pmf` (requires only `discrete-rv`,
+authored Batch 115). Authored both.
+
+`lp-space` (requires `lebesgue-integral`, unlocks `l2-space`, cross_links `math.fnal.hilbert-
+space`/`math.fnal.normed-space`): $L^p$ membership as a specific finite-integral condition, never
+mere boundedness (the SAME function $1/x$ on $[1,\infty)$ diverges in $L^1$ but is finite in
+$L^2$); the conjugate exponent $q$ genuinely DETERMINED by $1/p+1/q=1$ (for $p=3$, $q=3/2$, never
+$q=p=3$); and Riesz-Fischer completeness holding for EVERY $p$ while only $p=2$ carries an inner
+product (Hilbert), $L^1$ remaining Banach without being Hilbert. 3 misconceptions independently
+classified — MC-1 LP-MEMBERSHIP-CONFLATED-WITH-BOUNDEDNESS (overgeneralization, Foundational),
+MC-2 EVERY-LP-ASSUMED-HILBERT (overgeneralization, Foundational), MC-3
+CONJUGATE-EXPONENT-Q-ASSUMED-FREE-OR-EQUAL-TO-P (notation-induced, Foundational).
+
+`pmf` (requires `discrete-rv`, unlocks none, cross_links none): both PMF axioms
+(non-negativity, normalization) enforced SIMULTANEOUSLY — a table already summing beyond 1 is
+unfixable by ANY entry, negative or otherwise; unknown entries found by solving the normalization
+residual, never assumed via symmetry; and event probability as a sum over ONLY the event's own
+values, distinguished sharply from the CDF's cumulative sum. 3 misconceptions independently
+classified — MC-1 PMF-SUM-NOT-ONE (instruction-induced, Foundational), MC-2 PMF-IS-CDF
+(notation-induced), MC-3 PMF-NEGATIVE-ALLOWED (overgeneralization). Zero Blueprint/KG metadata
+discrepancy.
+
+**Blueprint/P76-mode discrepancy found and corrected (TENTH occurrence this campaign, FIRST
+involving TWO simultaneously-false cross-link claims in one Blueprint)**: `lp-space`'s Blueprint
+claimed BOTH `math.fnal.hilbert-space` AND `math.fnal.normed-space` were "already authored,"
+setting cross-link-probe mode against both. Verified via `ls
+educational-brain/concepts/mathematics/` that NEITHER has an authored EB entry — the same
+wrong-corpus pattern as Batches 107, 111, 115, 116, now doubled in a single Blueprint. Corrected
+to independence mode. All other fields on both concepts matched the live KG exactly.
+
+`math.meas` **9/13 → 10/13**. `math.prob` gains its fourth entry this campaign. Mathematics
+**627/908 → 629/908**, 279 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.meas` 10/13,
+mathematics 629/908, 11 EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0).
+Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 118 passed (118)". Full whole-repo
+suite not re-attempted this batch, consistent with the established precedent from Batches
+109-110.
+
+Computed fresh frontier post-batch: `math.meas.product-measure`/`math.meas.radon-nikodym` still
+reachable (require `lebesgue-integral`). `math.fnal.convolution` still reachable. `math.prob.
+continuous-rv`/`math.prob.convergence-types`/`math.prob.distribution`/`math.prob.quantile` all
+reachable. `math.real.pointwise-convergence`/`math.real.series-rigorous` still reachable. 27
+other ready concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`,
+`math.num`, `math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `9cffe2a` on `main`, pushed directly, continuing under the same active `/loop`.
