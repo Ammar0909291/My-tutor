@@ -3821,3 +3821,25 @@ generating-function`, `math.prob.quantile` all reachable. `math.real.pointwise-c
 continues under the same active `/loop`; re-derive the frontier fresh via `scripts/math/state.ts`
 (and each candidate's actual `requires`) each iteration rather than trusting any number or
 `children`/`unlocks`-field assumption recorded here.
+
+### Batch 121 (2026-09-19)
+
+Authored `continuous-distributions` (Uniform's density-times-width rule; Exponential's
+rate-vs-mean reciprocal; the memoryless property as Exponential's defining feature, genuinely
+absent from Uniform) and `pointwise-convergence` (the same ε-N definition applied per point;
+N(x,ε) genuinely depending on x; continuity not preserved by pointwise limits, via x^n's jump
+discontinuity). Both zero Blueprint/KG discrepancy. Mathematics **637/908** (635→637), 271
+remaining. Full per-concept detail in `COVERAGE.md` Batch 121. Validated: KG validator PASS
+(908/908 reachable, file untouched), `scripts/math/state.ts` confirms mathematics 637/908 (12
+EB-certified domains unchanged), `tsc --noEmit` clean, targeted EB/curriculum tests 118/118
+passed. Full whole-repo suite not re-attempted, per the established Batch 109-110 hang precedent.
+No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Commit `93ba674` on
+`main`, pushed directly.
+
+Fresh frontier: `math.fnal.convolution` still reachable. `math.prob.convergence-types`,
+`math.prob.distribution`, `math.prob.expected-value`, `math.prob.generating-function`, `math.
+prob.quantile` all reachable. `math.real.series-rigorous` still reachable. 27 other ready
+concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`, `math.num`,
+`math.stats`, `math.top`. Campaign continues under the same active `/loop`; re-derive the
+frontier fresh via `scripts/math/state.ts` (and each candidate's actual `requires`) each
+iteration rather than trusting any number or `children`/`unlocks`-field assumption recorded here.

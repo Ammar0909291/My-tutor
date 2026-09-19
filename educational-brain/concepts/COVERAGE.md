@@ -14143,3 +14143,47 @@ across `math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`, `math.num`
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `252b100` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 121 (2026-09-19)
+
+Re-derived the frontier fresh (36 ready concepts). Selected `math.prob.continuous-distributions`
+(requires `continuous-rv`/`pdf`, both authored) and `math.real.pointwise-convergence` (requires
+only `convergence-sequences`, authored Batch 112). Authored both.
+
+`continuous-distributions` (requires `continuous-rv`/`pdf`, unlocks none, cross_links none):
+Uniform's density-times-width probability rule ($P(X=x)=0$ always; $P(c\le X\le d)=(d-c)/(b-a)$);
+Exponential's rate-versus-mean reciprocal relationship ($\lambda=3$ gives $E[X]=1/3$, never 3); and
+the memoryless property as Exponential's defining feature ($P(X>s+t\mid X>s)=P(X>t)$), genuinely
+ABSENT from Uniform (whose conditional probability depends on $s$, requiring direct computation).
+3 misconceptions independently classified — MC-1 DENSITY-AS-PROBABILITY (overgeneralization,
+Foundational), MC-2 LAMBDA-IS-MEAN (language contamination), MC-3 MEMORYLESS-IGNORED
+(instruction-induced).
+
+`pointwise-convergence` (requires `convergence-sequences`, unlocks `uniform-convergence`,
+cross_links none): pointwise convergence as the SAME $\varepsilon$-$N$ definition applied
+separately at each point (verified on $x^n$'s per-point limits); $N(x,\varepsilon)$ genuinely
+depending on $x$, unboundedly (explicit $N(1/2,0.01)=7$ vs $N(0.9,0.01)=44$); and continuity NOT
+preserved by pointwise limits ($x^n$'s jump discontinuity at $x=1$ despite every term being
+continuous), motivating Dini's theorem and `uniform-convergence`. 3 misconceptions independently
+classified — MC-1 POINTWISE-CONVERGENCE-ASSUMED-NEW-DEFINITION (overgeneralization,
+Foundational), MC-2 N-ASSUMED-INDEPENDENT-OF-X (overgeneralization, High), MC-3
+CONTINUITY-ASSUMED-PRESERVED-BY-POINTWISE-LIMIT (overgeneralization, High). Both concepts zero
+Blueprint/KG metadata discrepancy.
+
+`math.prob` gains its eighth entry this campaign. `math.real` gains its fifth entry. Mathematics
+**635/908 → 637/908**, 271 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 637/908, 12
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum
+tests: "Test Files 7 passed (7), Tests 118 passed (118)". Full whole-repo suite not re-attempted
+this batch, consistent with the established precedent from Batches 109-110.
+
+Computed fresh frontier post-batch: `math.fnal.convolution` still reachable. `math.prob.
+convergence-types`/`math.prob.distribution`/`math.prob.expected-value`/`math.prob.generating-
+function`/`math.prob.quantile` all reachable. `math.real.series-rigorous` still reachable. 27
+other ready concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`,
+`math.num`, `math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `93ba674` on `main`, pushed directly.
