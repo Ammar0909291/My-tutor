@@ -3633,3 +3633,27 @@ reachable. 28 other ready concepts remain across `math.cat`, `math.cx`, `math.de
 same active `/loop`; re-derive the frontier fresh via `scripts/math/state.ts` (and each
 candidate's actual `requires`) each iteration rather than trusting any number or
 `children`/`unlocks`-field assumption recorded here.
+
+### Batch 114 (2026-09-19) — completes math.meas's core integration-building-block chain
+
+Authored `simple-function` (indicator-sum definition; exact finite-sum integral, no limit needed;
+monotone approximation built constructively via partition-and-infimum) and `cauchy-sequence`
+(terms-relative-to-each-other vs. known-limit convergence; certifying convergence of a
+Newton's-method recursion without knowing L; Cauchy-implies-convergent as completeness-dependent
+via the Q-truncation-toward-√2 counterexample). Both Blueprint-grounded by reference, both
+correctly using independence mode (`math.fnal.completeness` confirmed unauthored via `ls`;
+`simple-function` has no cross-links in the KG). `math.meas` **7/13** (6→7). Mathematics
+**623/908** (621→623), 285 remaining. Full per-concept detail in `COVERAGE.md` Batch 114.
+Validated: KG validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts`
+confirms math.meas 7/13, mathematics 623/908 (11 EB-certified domains unchanged), `tsc --noEmit`
+clean, targeted EB/curriculum tests 118/118 passed. Full whole-repo suite not re-attempted, per
+the established Batch 109-110 hang precedent. No Physics/Chemistry/English/Biology/CS/KG/
+Blueprint/runtime file touched. Commit `ae6c049` on `main`, pushed directly.
+
+Fresh frontier: `math.real.pointwise-convergence`, `math.real.series-rigorous` reachable.
+`math.prob.cdf`, `math.prob.continuous-rv`, `math.prob.convergence-types`, `math.prob.discrete-rv`
+all reachable. 28 other ready concepts remain across `math.cat`, `math.cx`, `math.de`,
+`math.fnal`, `math.graph`, `math.linalg`, `math.num`, `math.stats`, `math.top`. Campaign continues
+under the same active `/loop`; re-derive the frontier fresh via `scripts/math/state.ts` (and each
+candidate's actual `requires`) each iteration rather than trusting any number or
+`children`/`unlocks`-field assumption recorded here.

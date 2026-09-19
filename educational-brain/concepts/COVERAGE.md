@@ -13748,3 +13748,52 @@ sequence`/`math.real.pointwise-convergence`/`math.real.series-rigorous` all reac
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `15e7258` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 114 (2026-09-19) — completes math.meas's core integration-building-block chain
+
+Re-derived the frontier fresh (35 ready concepts). Selected `math.meas.simple-function` (requires
+only `measurable-function`, authored Batch 111) and `math.real.cauchy-sequence` (requires only
+`convergence-sequences`, authored Batch 112). Authored both.
+
+`simple-function` (requires `measurable-function`, unlocks `lebesgue-integral`, cross_links
+none): the indicator-sum definition $\varphi=\sum a_i\mathbb1_{E_i}$, verified directly on a
+3-value step function; the integral as an EXACT finite sum $\sum a_i\mu(E_i)=12$, no limiting
+process required, unlike the general Lebesgue integral it builds toward; and monotone
+approximation made CONSTRUCTIVE via an explicit partition-and-infimum sequence approximating
+$f(x)=x^2$. 3 misconceptions independently classified — MC-1
+SIMPLE-FUNCTION-INTEGRAL-ASSUMED-TO-NEED-A-LIMIT (overgeneralization, Foundational), MC-2
+SIMPLE-FUNCTION-VALUES-OR-LEVEL-SETS-MISIDENTIFIED (instruction-induced, Foundational), MC-3
+MONOTONE-APPROXIMATION-TREATED-AS-PURELY-ABSTRACT (perceptual, Moderate). Zero Blueprint/KG
+metadata discrepancy.
+
+`cauchy-sequence` (requires `convergence-sequences`, unlocks none, cross_links `math.fnal.
+completeness` — **confirmed NOT authored via `ls`, independence mode correctly self-reported, no
+correction needed**): the Cauchy condition as terms-relative-to-each-other, never requiring a
+known limit (verified directly for $1/n$, with the limit value never appearing in the proof);
+certifying convergence of a Newton's-method recursion toward $\sqrt2$ WITHOUT knowing $L$ in
+closed form; and Cauchy $\Leftrightarrow$ convergent as genuinely completeness-dependent, via the
+$\mathbb Q$-truncation-toward-$\sqrt2$ counterexample (Cauchy in $\mathbb Q$, not convergent
+there). 3 misconceptions independently classified — MC-1 LIMIT-REQUIRED-BEFORE-CAUCHY-CHECK
+(overgeneralization, Foundational), MC-2 CAUCHY-CONVERGENT-EQUIVALENCE-TREATED-AS-UNIVERSAL
+(overgeneralization, Foundational), MC-3 CAUCHY-CONFUSED-WITH-CONSECUTIVE-TERMS-SHRINKING
+(language contamination, Moderate). Zero Blueprint/KG metadata discrepancy.
+
+**Both concepts this batch zero Blueprint/KG metadata discrepancy on every field.** `math.meas`
+**6/13 → 7/13**. `math.real` gains its first `cauchy-sequence` entry. Mathematics
+**621/908 → 623/908**, 285 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.meas` 7/13,
+mathematics 623/908, 11 EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0).
+Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 118 passed (118)". Full whole-repo
+suite not re-attempted this batch, consistent with the established precedent from Batches
+109-110.
+
+Computed fresh frontier post-batch: `math.real.pointwise-convergence`/`math.real.series-rigorous`
+reachable (require `convergence-sequences`, now authored). `math.prob.cdf`/`math.prob.
+continuous-rv`/`math.prob.convergence-types`/`math.prob.discrete-rv` all reachable (require
+`random-variable`, now authored). 28 other ready concepts remain across `math.cat`, `math.cx`,
+`math.de`, `math.fnal`, `math.graph`, `math.linalg`, `math.num`, `math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `ae6c049` on `main`, pushed directly, continuing under the same active `/loop`.
