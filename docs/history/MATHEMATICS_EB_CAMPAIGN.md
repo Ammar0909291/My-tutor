@@ -4787,3 +4787,27 @@ Fresh frontier to be recomputed at the start of Batch 162 per established discip
 math.de concept (nonlinear-ode) and other ready concepts across math.linalg, math.prob.joint-
 distribution, math.stats, math.cx, math.top, math.fnal, math.num, math.opt, math.graph, math.cat
 still reachable. Campaign continues under the same active `/loop`.
+
+### Batch 162 (2026-09-19) — fifth wrong-corpus + third stale-metadata correction
+
+Authored `eigenfunction-expansion` (the coefficient formula as direct orthogonal projection;
+Fourier series as the simplest Sturm-Liouville case; convergence's shared Hilbert-space-
+completeness guarantee) and `nonlinear-ode` (complete equilibrium-finding; the linear center's
+genuine inconclusiveness demonstrated via identical-Jacobian, opposite-behavior systems;
+nonlinear never meaning unsolvable). `eigenfunction-expansion` had a wrong-corpus cross-link
+correction (math.fnal.hilbert-space — fifth this campaign) and a stale-metadata correction
+(third this campaign, 7hrs vs live KG's 6hrs); closes math.de.sturm-liouville's declared unlock.
+`nonlinear-ode` had zero Blueprint/KG discrepancy and closes math.de's previously-reachable
+frontier (now at 41/56, with fourier-series/pde-classification/bifurcation newly reachable).
+Mathematics **719/908** (717→719), 189 remaining. Full per-concept detail in `COVERAGE.md` Batch
+162. Validated: KG validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts`
+confirms mathematics 719/908 (13 EB-certified domains unchanged), `tsc --noEmit` clean, targeted
+EB/curriculum tests (7 files) 561/561 passed. Full whole-repo suite not re-attempted, per the
+established Batch 109-110 hang precedent. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/
+runtime file touched. Commit `1cc2359` on `main`, pushed directly.
+
+Fresh frontier to be recomputed at the start of Batch 163 per established discipline; math.de now
+41/56 with fourier-series, pde-classification, bifurcation newly reachable, plus other ready
+concepts across math.linalg, math.prob.joint-distribution, math.stats, math.cx, math.top,
+math.fnal, math.num, math.opt, math.graph, math.cat. Campaign continues under the same active
+`/loop`.

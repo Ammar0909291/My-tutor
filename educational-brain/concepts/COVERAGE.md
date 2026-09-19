@@ -16116,3 +16116,49 @@ Fresh frontier to be recomputed at the start of Batch 162 per established discip
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `718e014` on `main`, pushed directly.
+
+## Batch 162 (2026-09-19) — fifth wrong-corpus + third stale-metadata correction
+
+Authored `math.de.eigenfunction-expansion` and `math.de.nonlinear-ode`, continuing the `math.de`
+domain (now at 41/56, with `fourier-series`, `pde-classification`, `bifurcation` newly reachable).
+
+`eigenfunction-expansion`: the coefficient formula $c_n=\langle f,\varphi_n\rangle/
+\langle\varphi_n,\varphi_n\rangle$ derived DIRECTLY from Sturm-Liouville orthogonality (never an
+independent formula), demonstrated via $f(x)=x$'s coefficient derivation matching the standard
+Fourier sine series exactly; Fourier series recognized as the SIMPLEST Sturm-Liouville case (never
+a separate technique); and convergence's reliance on Hilbert-space completeness as the SAME
+guarantee across every system (Fourier, Legendre, Bessel — never system-specific). 3
+misconceptions independently classified by Blueprint-declared severity — MC-1 COEFFICIENT-
+FORMULA-ASSUMED-INDEPENDENT-FACT (Foundational), MC-2 FOURIER-SERIES-ASSUMED-SEPARATE-TECHNIQUE
+(High), MC-3 CONVERGENCE-ASSUMED-SYSTEM-SPECIFIC (Moderate). **Wrong-corpus cross-link
+correction** (fifth this campaign): the Blueprint's claimed "math.fnal.hilbert-space already
+authored" checked the Blueprints directory rather than the EB corpus — corrected to independence
+mode. **Stale-metadata correction** (third this campaign): estimated_hours 7 vs live KG's 6 — KG
+used as authoritative. Closes `math.de.sturm-liouville`'s declared unlock.
+
+`nonlinear-ode`: ALL equilibria found via complete $f(x^*)=0$ solving (never stopping at
+$x^*=0$), demonstrated via the pendulum's infinitely-many-equilibria result; the linear CENTER
+case's genuine inconclusiveness (never treated as reliable like hyperbolic cases), demonstrated
+via two systems sharing an identical Jacobian yet exhibiting opposite (stable vs. unstable spiral)
+nonlinear behavior; and "nonlinear" never equated with "unsolvable," with exact-solution
+techniques and exhaustive phase-portrait analysis both remaining available. 3 misconceptions
+independently classified by Blueprint-declared birth type — MC-1 LINEARISATION-ALWAYS-DETERMINES-
+NONLINEAR-BEHAVIOUR (instruction-induced), MC-2 ALL-NONLINEAR-ODES-CANNOT-BE-SOLVED-EXACTLY
+(overgeneralization), MC-3 EQUILIBRIUM-AT-ZERO-ONLY (instruction-induced). Zero Blueprint/KG
+discrepancy.
+
+Mathematics **717/908 → 719/908**, 189 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 719/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Fresh frontier to be recomputed at the start of Batch 163 per established discipline; `math.de`
+now stands at 41/56 with `fourier-series`, `pde-classification`, `bifurcation` newly reachable,
+plus other ready concepts across `math.linalg`, `math.prob.joint-distribution`, `math.stats`,
+`math.cx`, `math.top`, `math.fnal`, `math.num`, `math.opt`, `math.graph`, `math.cat`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `1cc2359` on `main`, pushed directly.
