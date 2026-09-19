@@ -18217,3 +18217,30 @@ Fresh frontier for Batch 224 (13 concepts): math.cat.adjunction/functor-category
 math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
 math.fnal.convolution/normed-space, math.graph.random-graph,
 math.linalg.matrix-representation/tensor, math.opt.semidefinite-programming, math.prob.martingale.
+
+## Batch 224 (2026-09-19) — 1 discrepancy (stale unlocks) — MILESTONE: math.linalg fully
+EB-certified (16th domain)
+
+Authored `math.linalg.matrix-representation` (matrix built column-by-column from T applied to
+β's own basis vectors, never arbitrary vectors; matrix-vector product uses coordinates relative
+to β, never raw standard components for a non-standard basis; composition matches multiplication
+order exactly, $[T\circ S]=[T][S]$, never reversed) and `math.linalg.tensor` (vectors/covectors/
+matrices are special cases of one multilinear-map framework, never three separate kinds of
+objects; tensor product must be verified genuinely multilinear, never treated as merely symbolic;
+tensors have real physics/categorical significance, never an obscure abstraction). Stale-KG-
+metadata discrepancy on `matrix-representation`: Blueprint claimed "unlocks: none in KG" but the
+live KG shows `unlocks: ["math.linalg.change-of-basis"]` — corrected to the live KG value (14th
+discrepancy this campaign, 5th stale-KG-metadata case). `tensor`'s cross-link to
+`math.cat.tensor-product` reconfirmed still unauthored, independence mode holds, matching the
+Blueprint. Mathematics **841/908 → 843/908**, 65 remaining. **math.linalg is now the 16th fully
+EB-certified domain** (`scripts/math/state.ts` confirms: math.found, math.calc, math.geom,
+math.linalg, math.alg, math.arith, math.stats, math.abst, math.nt, math.disc, math.real,
+math.func, math.trig, math.seq, math.num, math.meas). Validated: KG PASS (908/908 reachable),
+state.ts confirms 843/908 and the new certified-domain count, tsc clean, tests 561/561. Commit
+`fb1d786`, pushed.
+
+Fresh frontier for Batch 225 (11 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.opt.semidefinite-programming, math.prob.martingale. Campaign continues under the same
+active `/loop`.

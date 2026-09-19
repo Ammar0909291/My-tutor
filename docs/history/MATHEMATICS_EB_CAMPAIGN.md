@@ -6171,3 +6171,22 @@ math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matr
 math.fnal.convolution/normed-space, math.graph.random-graph,
 math.linalg.matrix-representation/tensor, math.opt.semidefinite-programming,
 math.prob.martingale. Campaign continues under the same active `/loop`.
+
+## Batch 224 (2026-09-19) — MILESTONE: math.linalg fully EB-certified (16th domain)
+
+Authored `matrix-representation` (matrix built column-by-column from T applied to β's own basis
+vectors, never arbitrary vectors; matrix-vector product uses coordinates relative to β, never raw
+standard components for non-standard bases; composition matches multiplication order exactly,
+never reversed) and `tensor` (vectors/covectors/matrices are special cases of one multilinear-map
+framework, never separate objects; tensor product must be verified multilinear, never merely
+symbolic; tensors have real physics/categorical significance, never obscure). One stale-KG
+discrepancy: `matrix-representation`'s Blueprint claimed no `unlocks` but live KG shows
+`math.linalg.change-of-basis` — corrected. Mathematics **843/908** (841→843), 65 remaining.
+**math.linalg is now the 16th fully EB-certified domain**. Full detail in `COVERAGE.md` Batch 224.
+Validated: KG PASS, state.ts 843/908, tsc clean, tests 561/561. Commit `fb1d786`, pushed.
+
+Fresh frontier for Batch 225 (11 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.opt.semidefinite-programming, math.prob.martingale. Campaign continues under the same
+active `/loop`.
