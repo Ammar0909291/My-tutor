@@ -17696,3 +17696,21 @@ math.fnal.convolution/normed-space, math.graph.random-graph,
 math.linalg.matrix-representation/tensor, math.num.error-analysis/interpolation/newtons-method/
 qr-algorithm, math.opt.semidefinite-programming, math.prob.conditional-distribution/covariance/
 marginal-distribution, math.stats.normal-approximation/sampling-distribution.
+
+## Batch 198 (2026-09-19) — zero discrepancy
+
+Authored `math.prob.covariance` (sign never reversed — positive/negative pairing flips
+predictably; zero covariance never implies independence, only linear co-movement absent; shortcut
+requires genuine marginals) and `math.prob.conditional-distribution` (conditional distribution IS
+conditional probability applied to a whole distribution, never a new concept; normalization is
+guaranteed, never coincidental; conditional expectation can genuinely differ from marginal
+expectation). Both zero discrepancy. Mathematics **789/908 → 791/908**, 117 remaining. Validated:
+KG PASS (908/908 reachable), state.ts confirms 791/908, tsc clean, tests 561/561. Commit
+`c578e74`, pushed.
+
+Fresh frontier for Batch 199 (22 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/interpolation/newtons-method/
+qr-algorithm, math.opt.semidefinite-programming, math.prob.conditional-expectation/correlation/
+marginal-distribution, math.stats.covariance-matrix/normal-approximation/sampling-distribution.

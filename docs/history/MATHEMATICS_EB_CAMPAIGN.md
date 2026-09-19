@@ -5696,3 +5696,20 @@ math.linalg.matrix-representation/tensor, math.num.error-analysis/interpolation/
 qr-algorithm, math.opt.semidefinite-programming, math.prob.conditional-distribution/covariance/
 marginal-distribution, math.stats.normal-approximation/sampling-distribution. Campaign continues
 under the same active `/loop`.
+
+### Batch 198 (2026-09-19) — zero discrepancy
+
+Authored `covariance` (sign flips predictably with pairing; zero covariance never implies
+independence; shortcut needs genuine marginals) and `conditional-distribution` (conditional
+distribution IS conditional probability applied to a distribution; normalization guaranteed;
+conditional expectation can differ from marginal). Both zero discrepancy. Mathematics **791/908**
+(789→791), 117 remaining. Full detail in `COVERAGE.md` Batch 198. Validated: KG PASS, state.ts
+791/908, tsc clean, tests 561/561. Commit `c578e74`, pushed.
+
+Fresh frontier for Batch 199 (22 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/interpolation/newtons-method/
+qr-algorithm, math.opt.semidefinite-programming, math.prob.conditional-expectation/correlation/
+marginal-distribution, math.stats.covariance-matrix/normal-approximation/sampling-distribution.
+Campaign continues under the same active `/loop`.
