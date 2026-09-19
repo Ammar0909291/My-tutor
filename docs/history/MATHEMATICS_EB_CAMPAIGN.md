@@ -5356,3 +5356,35 @@ math.opt.quadratic-programming/semidefinite-programming/stochastic-gradient,
 math.prob.characteristic-function/joint-distribution,
 math.stats.normal-distribution/percentile/sampling-distribution. Campaign continues under the
 same active `/loop`.
+
+### Batch 184 (2026-09-19) — zero discrepancy, both `math.top` concepts
+
+Authored `compactness` (the general definition shown identical to `math.real.compactness`'s via
+direct reuse of its $(0,1)$ cover argument; Heine-Borel's shortcut shown not to transfer via a
+metric-free discrete 3-point compact space; only closed subsets shown to inherit compactness via
+the $(0,1)$-versus-$[0,1/2]$ contrast) and `homeomorphism` (bijective continuity shown insufficient
+via the canonical $[0,1)\to S^1$ counterexample; topological invariants, never cardinality or
+visual similarity, shown as the valid non-homeomorphism proof tool via the compactness- and
+connectedness-invariant proofs for $[0,1]\not\cong(0,1)$ and $S^1\not\cong\mathbb R$; an explicit
+$(0,1)\cong\mathbb R$ homeomorphism constructed via $\tan$). Both had zero Blueprint/KG
+discrepancy; `math.real.compactness` independently re-confirmed authored. Mathematics **763/908**
+(761→763), 145 remaining. Full per-concept detail in `COVERAGE.md` Batch 184. Validated: KG
+validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts` confirms mathematics
+763/908 (13 EB-certified domains unchanged), `tsc --noEmit` clean, targeted EB/curriculum tests
+(7 files) 561/561 passed. Mid-batch, `origin/main` diverged with an unrelated commit (`ad9d634`,
+a visual-target answer-echo guard fix, no EB/KG/curriculum files touched) — merged cleanly via a
+standard merge commit (never rebase/force-push), re-validated post-merge, then pushed. No
+Physics/Chemistry/English/Biology/CS/KG/Blueprint file touched by this batch's own content.
+Commit `d4eed53` merged with upstream `1371e39` at merge commit `3c8dcb6` on `main`, pushed
+directly.
+
+Fresh frontier recomputed for Batch 185 (30 concepts): math.cat.morphism-types/
+natural-transformation, math.top.homotopy/manifold/product-space/quotient-space/
+separation-axioms/simplicial-complex/tychonoff (tychonoff/manifold newly unlocked), plus
+math.cx.complex-numbers-analysis, math.de.systems-matrix-method, math.fnal.convolution,
+math.fnal.normed-space, math.graph.random-graph, math.linalg.jordan-form/matrix-exponential/
+matrix-representation/tensor, math.num.floating-point/interpolation/qr-algorithm/root-finding,
+math.opt.quadratic-programming/semidefinite-programming/stochastic-gradient,
+math.prob.characteristic-function/joint-distribution,
+math.stats.normal-distribution/percentile/sampling-distribution. Campaign continues under the
+same active `/loop`.
