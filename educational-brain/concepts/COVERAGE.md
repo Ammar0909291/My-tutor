@@ -14813,3 +14813,59 @@ Other ready concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `f8c6a8d` on `main`, pushed directly.
+
+### Batch 134 (2026-09-19) — stale metadata discrepancy plus a fourth clean cross-link relationship
+
+`math.real.taylor-rigorous`: Taylor's theorem with Lagrange remainder making the informal
+"truncation error" from `math.calc.taylor-series` an EXACT quantity, demonstrated via $e^x$'s
+exact remainder accounting at $x=1,n=2$; the Lagrange remainder shown to literally CONTAIN
+`math.real.mvt`'s own conclusion as the $n=0$ special case via direct substitution, never merely
+analogous to it; the proof's reuse of Rolle's-Theorem machinery repeatedly (rather than a new
+technique per order) sketched at orientation level via the $n=1$ auxiliary-function construction.
+3 misconceptions independently classified — MC-1 REMAINDER-ASSUMED-APPROXIMATE-BOUND
+(Foundational), MC-2 LAGRANGE-REMAINDER-ASSUMED-MERELY-ANALOGOUS-TO-MVT (High), MC-3
+EACH-ORDER-ASSUMED-TO-NEED-NEW-PROOF-TECHNIQUE (Moderate). **Stale Blueprint/KG metadata
+discrepancy found and corrected**: the Blueprint's own Component 0 states bloom=analyze,
+mastery_threshold=0.75 (MAMR 4/5), estimated_hours=6 — the live KG shows bloom=apply,
+mastery_threshold=0.85 (MAMR ⌈0.85×5⌉=5/5), estimated_hours=5. Live KG values used throughout, per
+established campaign discipline (this stale-metadata category last occurred at Batch 111's
+`convergence-sequences`, per the campaign's ongoing four-discrepancy-category taxonomy). The
+cross-link (`math.calc.taylor-series`) independently re-verified genuinely authored via `ls`,
+confirming a FOURTH instance this campaign (after Batches 131/132/133) of a rigorous-analysis
+concept completing an earlier calculus concept's own anticipated cross-link.
+
+`math.real.fixed-point-theorem`: the Banach contraction condition ($d(Tx,Ty)\le k\cdot d(x,y)$,
+$k<1$ STRICTLY) shown as `math.real.lipschitz-continuity`'s own condition sharpened, contrasting
+$T(x)=x/2+1$ ($k=\frac12$, a genuine contraction) against $S(x)=2x+1$ ($L=2$, Lipschitz but not a
+contraction); the iterated-sequence-is-Cauchy-plus-completeness-secures-convergence proof,
+demonstrated numerically converging to $x^*=2$; completeness's necessity proven concretely via a
+contraction on $\mathbb Q\cap(0,2)$ whose true fixed point $\sqrt2$ is missing from that
+incomplete space. 3 misconceptions independently classified — MC-1
+LIPSCHITZ-ASSUMED-AUTOMATICALLY-CONTRACTION (Foundational), MC-2
+FIXED-POINT-ASSUMED-STARTING-POINT-DEPENDENT (High), MC-3
+COMPLETENESS-ASSUMED-UNNECESSARY-FOR-FIXED-POINT (High). Zero Blueprint/KG metadata discrepancy —
+`math.de.existence-uniqueness` cross-link confirmed still unauthored via `ls`, independence mode
+correctly used per the Blueprint's own self-report (shared cross-link target with
+`lipschitz-continuity` from Batch 133, still unauthored).
+
+`math.real.taylor-rigorous` closes `mvt`'s remaining declared unlock — a terminal leaf with no
+further unlocks of its own. `math.real.fixed-point-theorem` closes the shared declared unlock of
+both `lipschitz-continuity` (Batch 133) and `completeness-metric` (Batch 128), also a terminal
+leaf. Mathematics **661/908 → 663/908**, 245 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 663/908, 12
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Computed fresh frontier post-batch (not yet re-derived this entry — will be recomputed fresh at
+the start of Batch 135 per established discipline): `math.real.implicit-function-theorem`,
+`math.real.inverse-function-theorem` reachable from the differentiability-rigorous chain (both
+also require `math.linalg.matrix-inverse`, status to re-verify). `math.real.riemann-integral`,
+`math.real.uniform-convergence` remain reachable from the continuity-rigorous chain. Numerous
+`math.prob` concepts remain reachable. Other ready concepts remain across `math.cat`, `math.cx`,
+`math.de`, `math.graph`, `math.linalg`, `math.num`, `math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `e62a0e6` on `main`, pushed directly.

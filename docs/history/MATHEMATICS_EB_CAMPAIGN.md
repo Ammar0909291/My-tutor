@@ -4160,3 +4160,30 @@ runtime file touched. Commit `f8c6a8d` on `main`, pushed directly.
 Fresh frontier to be recomputed at the start of Batch 134 per established discipline;
 `math.real.riemann-integral`/`math.real.uniform-convergence` remain reachable from the
 continuity-rigorous chain. Campaign continues under the same active `/loop`.
+
+### Batch 134 (2026-09-19) — stale metadata discrepancy plus a fourth clean cross-link relationship
+
+Authored `taylor-rigorous` (Lagrange remainder making truncation error exact via e^x's exact
+accounting; n=0 substitution literally recovering MVT, not merely analogous; the proof's reuse
+of Rolle's Theorem repeatedly rather than a new technique per order) and `fixed-point-theorem`
+(the strict k<1 contraction condition sharpening Lipschitz continuity; iterated-sequence-is-
+Cauchy-plus-completeness-secures-convergence, verified numerically; completeness's necessity via
+a Q∩(0,2) counterexample missing its true fixed point √2). `taylor-rigorous`'s Blueprint metadata
+was stale (bloom analyze→apply, mastery_threshold 0.75→0.85, hours 6→5) — corrected to live KG
+values; its cross-link (`math.calc.taylor-series`) independently re-verified authored, a fourth
+instance this campaign (after Batches 131/132/133) of a rigorous-analysis concept completing an
+earlier calculus concept's anticipated cross-link. `fixed-point-theorem` zero discrepancy;
+`math.de.existence-uniqueness` cross-link confirmed still unauthored, independence mode correct.
+Both close their respective chains' shared declared unlocks (mvt; lipschitz-continuity +
+completeness-metric), each a terminal leaf. Mathematics **663/908** (661→663), 245 remaining.
+Full per-concept detail in `COVERAGE.md` Batch 134. Validated: KG validator PASS (908/908
+reachable, file untouched), `scripts/math/state.ts` confirms mathematics 663/908 (12 EB-certified
+domains unchanged), `tsc --noEmit` clean, targeted EB/curriculum tests (7 files) 561/561 passed.
+Full whole-repo suite not re-attempted, per the established Batch 109-110 hang precedent. No
+Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Commit `e62a0e6` on
+`main`, pushed directly.
+
+Fresh frontier to be recomputed at the start of Batch 135 per established discipline;
+`math.real.implicit-function-theorem`/`math.real.inverse-function-theorem` (also requiring
+`math.linalg.matrix-inverse`), and `math.real.riemann-integral`/`math.real.uniform-convergence`
+remain candidates. Campaign continues under the same active `/loop`.
