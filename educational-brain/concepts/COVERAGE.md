@@ -15808,3 +15808,44 @@ ready concepts across `math.linalg`, `math.prob.joint-distribution`, `math.stats
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `f9e7868` on `main`, pushed directly.
+
+## Batch 155 (2026-09-19)
+
+Authored `math.de.resonance` and `math.de.higher-order-ode`, continuing the `math.de` domain.
+
+`resonance`: PURE resonance's genuinely UNBOUNDED secular growth ($t\sin(\omega_0t)$, never
+merely "large"), contrasted with PRACTICAL resonance's finite (though potentially large) peak at
+$\omega_{res}=\sqrt{\omega_0^2-2\gamma^2}<\omega_0$ (never equal to $\omega_0$ for $\gamma>0$),
+and BEATING's genuinely BOUNDED interference envelope (never a form of resonance despite involving
+close frequencies). 3 misconceptions independently classified by Blueprint-declared birth type —
+MC-1 RESONANCE-MEANS-INFINITE-AMPLITUDE (overgeneralization), MC-2 RESONANT-FREQUENCY-EQUALS-
+NATURAL-FREQUENCY (instruction-induced), MC-3 BEATING-IS-THE-SAME-AS-RESONANCE (language
+contamination). Zero Blueprint/KG discrepancy.
+
+`higher-order-ode`: the characteristic-polynomial method generalized to degree $n$, with the
+Fundamental Theorem of Algebra guaranteeing exactly $n$ roots (never potentially too few),
+demonstrated via a degree-3 distinct-roots factoring; multiplicity $k$ translating to $k$
+GENUINELY INDEPENDENT solutions $e^{rx},xe^{rx},\ldots,x^{k-1}e^{rx}$ (never $k$ literal copies),
+demonstrated via a verified triple-root example; and the "$n$-dimensional solution space" claim
+VERIFIED (never merely asserted) via `math.linalg.vector-space`'s own closure axioms, demonstrated
+via a direct linear-combination substitution check. 3 misconceptions independently classified by
+Blueprint-declared severity — MC-1 CHARACTERISTIC-POLYNOMIAL-ROOT-COUNT-DOUBTED (Foundational),
+MC-2 MULTIPLICITY-TREATED-AS-LITERAL-REPETITION (High), MC-3 SOLUTION-SPACE-DIMENSIONALITY-
+UNVERIFIED (Moderate). Zero Blueprint/KG discrepancy; the declared cross-link
+`math.linalg.vector-space` confirmed already authored, enabling a genuine cross-link probe.
+
+Mathematics **703/908 → 705/908**, 203 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 705/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Fresh frontier to be recomputed at the start of Batch 156 per established discipline; remaining
+`math.de` concepts (laplace-transform, series-solution, bvp, pde, nonlinear-ode) and other ready
+concepts across `math.linalg`, `math.prob.joint-distribution`, `math.stats`, `math.cx`,
+`math.top`, `math.fnal`, `math.num`, `math.opt`, `math.graph`, `math.cat` still reachable.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `9d87f95` on `main`, pushed directly.

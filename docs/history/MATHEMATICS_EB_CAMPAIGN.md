@@ -4635,3 +4635,25 @@ math.de concepts (higher-order-ode, laplace-transform, series-solution, bvp, pde
 concepts across math.linalg, math.prob.joint-distribution, math.stats, math.cx, math.top,
 math.fnal, math.num, math.opt, math.graph, math.cat still reachable. Campaign continues under the
 same active `/loop`.
+
+### Batch 155 (2026-09-19)
+
+Authored `resonance` (pure resonance's unbounded secular growth versus practical resonance's
+finite peak versus beating's bounded envelope) and `higher-order-ode` (the characteristic
+polynomial generalized to degree n via the Fundamental Theorem of Algebra; multiplicity k meaning
+k genuinely independent solutions, never k copies; the n-dimensional solution-space claim verified
+via vector-space closure axioms, not merely asserted). Both zero Blueprint/KG discrepancy.
+`higher-order-ode`'s declared cross-link `math.linalg.vector-space` confirmed already authored,
+enabling a genuine cross-link probe. Mathematics **705/908** (703→705), 203 remaining. Full
+per-concept detail in `COVERAGE.md` Batch 155. Validated: KG validator PASS (908/908 reachable,
+file untouched), `scripts/math/state.ts` confirms mathematics 705/908 (13 EB-certified domains
+unchanged), `tsc --noEmit` clean, targeted EB/curriculum tests (7 files) 561/561 passed. Full
+whole-repo suite not re-attempted, per the established Batch 109-110 hang precedent. No
+Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Commit `9d87f95` on
+`main`, pushed directly.
+
+Fresh frontier to be recomputed at the start of Batch 156 per established discipline; remaining
+math.de concepts (laplace-transform, series-solution, bvp, pde, nonlinear-ode) and other ready
+concepts across math.linalg, math.prob.joint-distribution, math.stats, math.cx, math.top,
+math.fnal, math.num, math.opt, math.graph, math.cat still reachable. Campaign continues under the
+same active `/loop`.
