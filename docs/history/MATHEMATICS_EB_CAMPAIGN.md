@@ -4136,3 +4136,27 @@ concepts remain reachable — re-verify each candidate's actual `requires` fresh
 trust this list. Other ready concepts remain across `math.cat`, `math.cx`, `math.de`,
 `math.graph`, `math.linalg`, `math.num`, `math.stats`, `math.top`. Campaign continues under the
 same active `/loop`.
+
+### Batch 133 (2026-09-19) — third clean "complete the deferred proof" cross-link relationship
+
+Authored `mvt` (Rolle's-Theorem-via-auxiliary-function proof, reusing calc.mean-value-theorem's
+own x² example to re-derive c=2.5 rigorously; f'=0 forcing exact, not approximate, constancy) and
+`lipschitz-continuity` (the condition computable directly from a derivative bound; Lipschitz
+implies uniform continuity via an explicit δ=ε/L; strict separation from uniform continuity via
+√x on [0,1]). Both zero Blueprint/KG discrepancy. `mvt`'s cross-link
+(`math.calc.mean-value-theorem`) independently re-verified authored — a third instance this
+campaign (after Batches 131 and 132) of a rigorous-analysis concept completing an earlier
+calculus concept's own anticipated cross-link. `lipschitz-continuity`'s cross-link
+(`math.de.existence-uniqueness`) confirmed still unauthored, independence mode correctly used.
+`mvt` closes differentiability-rigorous's remaining unlock and opens taylor-rigorous as a future
+frontier concept; `lipschitz-continuity` closes uniform-continuity's declared unlock. Mathematics
+**661/908** (659→661), 247 remaining. Full per-concept detail in `COVERAGE.md` Batch 133.
+Validated: KG validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts`
+confirms mathematics 661/908 (12 EB-certified domains unchanged), `tsc --noEmit` clean, targeted
+EB/curriculum tests (7 files) 561/561 passed. Full whole-repo suite not re-attempted, per the
+established Batch 109-110 hang precedent. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/
+runtime file touched. Commit `f8c6a8d` on `main`, pushed directly.
+
+Fresh frontier to be recomputed at the start of Batch 134 per established discipline;
+`math.real.riemann-integral`/`math.real.uniform-convergence` remain reachable from the
+continuity-rigorous chain. Campaign continues under the same active `/loop`.

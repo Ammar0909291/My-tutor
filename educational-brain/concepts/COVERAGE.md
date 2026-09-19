@@ -14763,3 +14763,53 @@ remain across `math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`, `ma
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `148ca8d` on `main`, pushed directly.
+
+### Batch 133 (2026-09-19) — third clean "complete the deferred proof" cross-link relationship
+
+`math.real.mvt`: the Mean Value Theorem proven as Rolle's Theorem applied to one specific
+auxiliary function ($g(x)=f(x)-f(a)-\frac{f(b)-f(a)}{b-a}(x-a)$, vanishing at both endpoints by
+construction), reusing `math.calc.mean-value-theorem`'s own $f(x)=x^2$ on $[1,4]$ example to
+re-derive $c=2.5$ rigorously rather than by informal trust; $f'=0$ shown to force EXACT (never
+approximate) constancy via a direct MVT argument. 3 misconceptions independently classified —
+MC-1 MVT-PROVEN-INDEPENDENTLY-OF-ROLLE (Foundational), MC-2
+ZERO-DERIVATIVE-ASSUMED-ONLY-APPROXIMATE-CONSTANCY (Foundational), MC-3
+RIGOROUS-AND-APPLIED-MVT-TREATED-AS-DIFFERENT-FACTS (Moderate). Zero Blueprint/KG metadata
+discrepancy — the cross-link (`math.calc.mean-value-theorem`) independently re-verified genuinely
+authored via `ls`, confirming a THIRD instance this campaign (after `math.real.ivt`/`math.calc.ivt`
+at Batch 131 and `math.real.differentiability-rigorous`/`math.calc.derivative-definition` at Batch
+132) of a rigorous-analysis concept completing an earlier calculus concept's own anticipated
+cross-link.
+
+`math.real.lipschitz-continuity`: the Lipschitz condition ($|f(x)-f(y)|\le L|x-y|$) shown directly
+computable from a derivative bound via the Mean Value Theorem (e.g. $\sin x$'s $L=1$ from
+$|\cos x|\le1$); Lipschitz $\Rightarrow$ uniformly continuous proven CONSTRUCTIVELY with an
+explicit $\delta=\varepsilon/L$ formula, never an abstract existence claim; the strict separation
+from uniform continuity demonstrated via $\sqrt x$ on $[0,1]$ (uniformly continuous by
+Heine-Cantor, yet its difference-quotient ratio near 0 grows without bound, ruling out any finite
+Lipschitz constant). 3 misconceptions independently classified — MC-1
+LIPSCHITZ-CONSTANT-ASSUMED-ABSTRACT (Foundational), MC-2
+LIPSCHITZ-TO-UNIFORM-CONTINUITY-ASSUMED-NON-CONSTRUCTIVE (High), MC-3
+UNIFORM-CONTINUITY-ASSUMED-EQUIVALENT-TO-LIPSCHITZ (High). Zero Blueprint/KG metadata discrepancy
+— `math.de.existence-uniqueness` cross-link confirmed still unauthored via `ls`, independence mode
+correctly used per the Blueprint's own self-report.
+
+`math.real.mvt` closes `differentiability-rigorous`'s remaining declared unlock and opens
+`math.real.taylor-rigorous` as a new frontier concept once its other prerequisites resolve.
+`math.real.lipschitz-continuity` closes out the uniform-continuity chain's declared unlock,
+itself a terminal leaf with none of its own. Mathematics **659/908 → 661/908**, 247 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 661/908, 12
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Computed fresh frontier post-batch (not yet re-derived this entry — will be recomputed fresh at
+the start of Batch 134 per established discipline): `math.real.riemann-integral`, `math.real.
+uniform-convergence` still reachable from the continuity-rigorous chain. `math.fnal.convolution`,
+`math.opt.stochastic-gradient` still reachable. Numerous `math.prob` concepts remain reachable.
+Other ready concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`,
+`math.num`, `math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `f8c6a8d` on `main`, pushed directly.
