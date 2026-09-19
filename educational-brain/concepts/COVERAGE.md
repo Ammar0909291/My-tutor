@@ -13966,3 +13966,63 @@ other ready concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `9cffe2a` on `main`, pushed directly, continuing under the same active `/loop`.
+
+### Batch 118 (2026-09-19) — a genuinely correct cross-link claim, plus a second stale-metadata case
+
+Re-derived the frontier fresh (39 ready concepts). Selected `math.meas.product-measure` (requires
+only `lebesgue-integral`, authored Batch 115) and `math.prob.continuous-rv` (requires
+`random-variable` + already-certified `math.calc.definite-integral`). Authored both.
+
+`product-measure` (requires `lebesgue-integral`, unlocks none, cross_links `math.calc.double-
+integrals` — **confirmed AUTHORED via `ls`, a genuine cross-link probe, this campaign's fourth
+such case after Batches 101, 108, 111**): the product measure as "multiply the pieces," exactly
+generalizing rectangle area ($\mu_1\otimes\mu_2([0,2]\times[0,3])=6$); Fubini's absolute-
+integrability hypothesis as essential work verified BEFORE concluding order-independence (spike
+example $xye^{-(x^2+y^2)}$, $\iint|f|=\frac14<\infty$); and the classic
+$(x^2-y^2)/(x^2+y^2)^2$ counterexample showing order can genuinely flip the answer's sign
+($+\pi/4$ vs $-\pi/4$) when absolute integrability fails, with Tonelli's non-negativity relaxation
+contrasted. 3 misconceptions independently classified — MC-1
+PRODUCT-MEASURE-ASSUMED-UNRELATED-TO-AREA (overgeneralization, Foundational), MC-2
+ORDER-SWITCHING-ASSUMED-ALWAYS-SAFE (overgeneralization, High), MC-3
+FAILED-ABSOLUTE-INTEGRABILITY-ASSUMED-HARMLESS (perceptual, Moderate).
+
+`continuous-rv` (requires `random-variable`/`math.calc.definite-integral`, unlocks `pdf`/
+`continuous-distributions`, cross_links none): probability as AREA under a density, never the
+density value itself ($P(X=1)=0$ via a zero-width integral, versus $P(0.5\le X\le1.5)=1/2$); the
+PDF's only constraints (non-negativity, total-integral-1) — $f(x)$ CAN exceed 1 (population-
+density analogy, $f(x)=3$ on $[0,1/3]$ is valid); and the CDF/PDF integrate/differentiate
+relationship, never interchangeable. 3 misconceptions independently classified — MC-1
+SINGLE-VALUE-HAS-PROBABILITY (overgeneralization, Foundational), MC-2 PDF-IS-PROBABILITY
+(language contamination), MC-3 CDF-PDF-CONFUSION (notation-induced). Zero Blueprint/KG metadata
+discrepancy.
+
+**Blueprint's cross-link claim CONFIRMED CORRECT this batch**: `product-measure`'s claim that
+`math.calc.double-integrals` is authored was VERIFIED TRUE via `ls` — a genuine, working
+cross-link, not a discrepancy. Its own prerequisite chain (Cartesian $dA=dx\,dy$ via Fubini,
+established in `math.calc.multiple-integrals`) directly instantiates this concept's own
+"multiply the pieces" idea at the concrete Riemann-integral level.
+
+**Separate Blueprint/KG metadata discrepancy found (stale metadata, second occurrence of this
+pattern after Batch 116)**: the same Blueprint's Component 0 states `mastery_threshold=0.6` (MAMR
+3/5) and `estimated_hours=8`, but the live KG states `mastery_threshold=0.8` (MAMR
+⌈0.8×5⌉=4/5) and `estimated_hours=6`. Used the live KG's values throughout.
+
+`math.meas` **10/13 → 11/13**. `math.prob` gains its fifth entry this campaign. Mathematics
+**629/908 → 631/908**, 277 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed `math.meas` 11/13,
+mathematics 631/908, 11 EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0).
+Targeted EB/curriculum tests: "Test Files 7 passed (7), Tests 118 passed (118)". Full whole-repo
+suite not re-attempted this batch, consistent with the established precedent from Batches
+109-110.
+
+Computed fresh frontier post-batch: `math.meas.l2-space`/`math.meas.radon-nikodym` still
+reachable. `math.fnal.convolution` still reachable. `math.prob.convergence-types`/`math.prob.
+discrete-distributions`/`math.prob.distribution`/`math.prob.generating-function`/`math.prob.
+quantile` all reachable. `math.real.pointwise-convergence`/`math.real.series-rigorous` still
+reachable. 27 other ready concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph`,
+`math.linalg`, `math.num`, `math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `8c765ba` on `main`, pushed directly, continuing under the same active `/loop`.

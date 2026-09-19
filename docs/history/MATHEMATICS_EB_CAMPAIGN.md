@@ -3737,3 +3737,30 @@ series-rigorous` still reachable. 27 other ready concepts remain across `math.ca
 under the same active `/loop`; re-derive the frontier fresh via `scripts/math/state.ts` (and each
 candidate's actual `requires`) each iteration rather than trusting any number or
 `children`/`unlocks`-field assumption recorded here.
+
+### Batch 118 (2026-09-19) — a genuinely correct cross-link claim, plus a second stale-metadata case
+
+Authored `product-measure` (product measure generalizing rectangle area; Fubini's absolute-
+integrability as essential, verified via the spike example; the classic sign-flipping
+counterexample when it fails; Tonelli's non-negativity relaxation) and `continuous-rv`
+(probability as area, never density height; PDF can exceed 1; CDF/PDF integrate/differentiate
+relationship). `product-measure`'s cross-link to `math.calc.double-integrals` was VERIFIED TRUE
+via `ls` — a genuine, correctly-claimed cross-link (this campaign's fourth, after Batches 101,
+108, 111). The SAME Blueprint also carried stale metadata (0.6/8h vs. the KG's 0.8/6h) — the
+SECOND such case after Batch 116, resolved using the live KG's values. `math.meas` **11/13**
+(10→11). Mathematics **631/908** (629→631), 277 remaining. Full per-concept detail in
+`COVERAGE.md` Batch 118. Validated: KG validator PASS (908/908 reachable, file untouched),
+`scripts/math/state.ts` confirms math.meas 11/13, mathematics 631/908 (11 EB-certified domains
+unchanged), `tsc --noEmit` clean, targeted EB/curriculum tests 118/118 passed. Full whole-repo
+suite not re-attempted, per the established Batch 109-110 hang precedent. No Physics/Chemistry/
+English/Biology/CS/KG/Blueprint/runtime file touched. Commit `8c765ba` on `main`, pushed
+directly.
+
+Fresh frontier: `math.meas.l2-space`, `math.meas.radon-nikodym`, `math.fnal.convolution` still
+reachable. `math.prob.convergence-types`, `math.prob.discrete-distributions`, `math.prob.
+distribution`, `math.prob.generating-function`, `math.prob.quantile` all reachable. `math.real.
+pointwise-convergence`, `math.real.series-rigorous` still reachable. 27 other ready concepts
+remain across `math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`, `math.num`,
+`math.stats`, `math.top`. Campaign continues under the same active `/loop`; re-derive the
+frontier fresh via `scripts/math/state.ts` (and each candidate's actual `requires`) each
+iteration rather than trusting any number or `children`/`unlocks`-field assumption recorded here.
