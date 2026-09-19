@@ -6261,3 +6261,19 @@ Fresh frontier for Batch 229 (11 concepts): math.cat.adjunction/functor-category
 math.top.cohomology, plus math.cx.complex-numbers-analysis, math.fnal.bounded-operator/
 fourier-transform/riesz-representation/special-functions, math.graph.random-graph,
 math.opt.semidefinite-programming. Campaign continues under the same active `/loop`.
+
+## Batch 229 (2026-09-19)
+
+Authored `bounded-operator` (bounded and continuous are one fact for linear maps, never
+independent; B(X,Y) is Banach whenever Y is, never depends on X; ‖T‖ is a supremum over the whole
+unit ball, never just basis vectors) and `riesz-representation` (the representing vector y is
+unique, never non-unique; the theorem is a complete characterization, never leaves gaps;
+self-duality is Hilbert-specific, never general Banach). Both zero discrepancy. Mathematics
+**853/908** (851→853), 55 remaining. Full detail in `COVERAGE.md` Batch 229. Validated: KG PASS,
+state.ts 853/908, tsc clean, tests 561/561. Commit `fe595bc`, pushed.
+
+Fresh frontier for Batch 230 (13 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.fnal.dual-space-functional/
+fourier-transform/open-mapping-theorem/special-functions/spectral-theory/uniform-boundedness,
+math.graph.random-graph, math.opt.semidefinite-programming. Campaign continues under the same
+active `/loop`.

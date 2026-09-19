@@ -18341,3 +18341,23 @@ Fresh frontier for Batch 229 (11 concepts): math.cat.adjunction/functor-category
 math.top.cohomology, plus math.cx.complex-numbers-analysis, math.fnal.bounded-operator/
 fourier-transform/riesz-representation/special-functions, math.graph.random-graph,
 math.opt.semidefinite-programming. Campaign continues under the same active `/loop`.
+
+## Batch 229 (2026-09-19) — zero discrepancy
+
+Authored `math.fnal.bounded-operator` (bounded and continuous are the same fact for linear maps,
+never two independent properties; B(X,Y)'s completeness depends only on Y, never both X and Y; the
+operator norm is a supremum over the whole unit ball, never just basis-vector images) and
+`math.fnal.riesz-representation` (the representing vector y is unique, never possibly non-unique;
+the theorem is a complete characterization, never leaves some bounded functionals unrepresented;
+self-duality is a specifically Hilbert-structure consequence, never a general Banach property).
+Both zero discrepancy (bounded-operator's cross-link `math.linalg.linear-map` confirmed authored,
+cross-link-mode probe engaged; riesz-representation has no cross-links per KG). Mathematics
+**851/908 → 853/908**, 55 remaining. math.fnal now 9/18 authored (no domain-completion milestone
+this batch). Validated: KG PASS (908/908 reachable), state.ts confirms 853/908, tsc clean, tests
+561/561. Commit `fe595bc`, pushed.
+
+Fresh frontier for Batch 230 (13 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.fnal.dual-space-functional/
+fourier-transform/open-mapping-theorem/special-functions/spectral-theory/uniform-boundedness,
+math.graph.random-graph, math.opt.semidefinite-programming. Campaign continues under the same
+active `/loop`.
