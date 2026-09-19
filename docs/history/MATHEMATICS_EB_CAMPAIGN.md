@@ -5993,3 +5993,22 @@ math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-inte
 qr-algorithm/splines, math.opt.pca/semidefinite-programming, math.prob.conditional-expectation/
 marginal-distribution, math.stats.bayesian-inference/multiple-regression/nonparametric. Campaign
 continues under the same active `/loop`.
+
+## Batch 214 (2026-09-19) — MILESTONE: math.stats 37/40
+
+Authored `multiple-regression` ((XᵀX)⁻¹Xᵀy is a fixed sequence, never a shortcut; overall F and
+individual t answer different questions, never guaranteed to agree; multicollinearity breaks
+individual coefficients, never necessarily overall fit) and `nonparametric` (small/skewed favors
+nonparametric, never a reflexive t-test; test must match paired-vs-independent structure; ranks
+trade magnitude for robustness). Both zero discrepancy. Mathematics **823/908** (821→823), 85
+remaining. Only `bayesian-inference` remains reachable in math.stats (37/40 authored). Full
+detail in `COVERAGE.md` Batch 214. Validated: KG PASS, state.ts 823/908, tsc clean, tests
+561/561. Commit `4fd96e7`, pushed.
+
+Fresh frontier for Batch 215 (20 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
+qr-algorithm/splines, math.opt.pca/semidefinite-programming, math.prob.conditional-expectation/
+marginal-distribution, math.stats.bayesian-inference. Campaign continues under the same active
+`/loop`.

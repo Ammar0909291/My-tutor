@@ -18020,3 +18020,24 @@ math.fnal.convolution/normed-space, math.graph.random-graph,
 math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
 qr-algorithm/splines, math.opt.pca/semidefinite-programming, math.prob.conditional-expectation/
 marginal-distribution, math.stats.bayesian-inference/multiple-regression/nonparametric.
+
+## Batch 214 (2026-09-19) — zero discrepancy — MILESTONE: math.stats domain 37/40
+
+Authored `math.stats.multiple-regression` (the matrix OLS solution requires the correct
+(XᵀX)⁻¹Xᵀy sequence with compatible dimensions, never a shortcut like Xy or X⁻¹y; the overall
+F-test and individual t-tests answer different questions, never guaranteed to agree;
+multicollinearity corrupts individual coefficients, never necessarily the model's overall fit)
+and `math.stats.nonparametric` (small, non-normal samples favor nonparametric tests, never a
+reflexive t-test; the correct nonparametric test must match paired-vs-independent structure,
+never a default two-sample choice; ranks trade magnitude for outlier robustness). Both zero
+discrepancy. Mathematics **821/908 → 823/908**, 85 remaining. Only `math.stats.bayesian-inference`
+remains reachable in math.stats (37/40 authored; 3 concepts elsewhere in the domain remain
+blocked on unauthored prerequisites outside math.stats). Validated: KG PASS (908/908 reachable),
+state.ts confirms 823/908, tsc clean, tests 561/561. Commit `4fd96e7`, pushed.
+
+Fresh frontier for Batch 215 (20 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
+qr-algorithm/splines, math.opt.pca/semidefinite-programming, math.prob.conditional-expectation/
+marginal-distribution, math.stats.bayesian-inference.
