@@ -5047,3 +5047,27 @@ matrix-representation/orthogonal-basis/projection/tensor, math.num.floating-poin
 root-finding, math.opt.stochastic-gradient, math.prob.characteristic-function/joint-distribution,
 math.stats.normal-distribution/percentile/sampling-distribution, math.top.topological-space.
 Campaign continues under the same active `/loop`.
+
+### Batch 172 (2026-09-19)
+
+Authored `rank-nullity` (dim(V) as the domain's dimension, always columns for a matrix, never
+rows; injectivity requiring exact equality rank=dim(V), never merely high rank) and
+`change-of-basis` (P's columns from the source basis in target coordinates; the reverse
+conversion requiring P⁻¹, never reapplying P; similarity as a direct extension of the
+coordinate-conversion machinery). Both zero Blueprint/KG discrepancy; all prerequisites
+(math.linalg.rank, null-space, column-space, dimension, matrix-inverse) independently
+re-confirmed authored. Mathematics **739/908** (737→739), 169 remaining. Full per-concept detail
+in `COVERAGE.md` Batch 172. Validated: KG validator PASS (908/908 reachable, file untouched),
+`scripts/math/state.ts` confirms mathematics 739/908 (13 EB-certified domains unchanged), `tsc
+--noEmit` clean, targeted EB/curriculum tests (7 files) 561/561 passed. Full whole-repo suite not
+re-attempted, per the established Batch 109-110 hang precedent. No Physics/Chemistry/English/
+Biology/CS/KG/Blueprint/runtime file touched. Commit `169bf8a` on `main`, pushed directly.
+
+Fresh frontier recomputed for Batch 173 (22 concepts, rank-nullity and change-of-basis both
+closed their own frontiers with no direct unlocks): math.cat.category,
+math.cx.complex-numbers-analysis, math.fnal.convolution, math.fnal.normed-space,
+math.graph.random-graph, math.linalg.diagonalization/dual-space/inner-product-space/
+matrix-representation/orthogonal-basis/projection/tensor, math.num.floating-point/interpolation/
+root-finding, math.opt.stochastic-gradient, math.prob.characteristic-function/joint-distribution,
+math.stats.normal-distribution/percentile/sampling-distribution, math.top.topological-space.
+Campaign continues under the same active `/loop`.

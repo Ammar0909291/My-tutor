@@ -16607,3 +16607,46 @@ unlocks), plus `math.cat.category`, `math.cx.complex-numbers-analysis`, `math.fn
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `3fedf9c` on `main`, pushed directly.
+
+## Batch 172 (2026-09-19)
+
+`rank-nullity`: $\dim(V)$ as the DOMAIN's dimension — for a matrix, always the column count, never
+the row count, demonstrated via the $3\times5$-matrix nullity computation contrasting correct
+column-based $\dim(V)=5$ against the incorrect row-based $3$; and injectivity requiring EXACT
+equality $\text{rank}(T)=\dim(V)$, never merely "high" or "close to full" rank, demonstrated via
+the $4\times4$-matrix rank-4-vs-rank-3 side-by-side comparison. 2 misconceptions independently
+classified by Blueprint-declared severity — MC-1 DIM-V-COMPUTED-FROM-ROWS-INSTEAD-OF-COLUMNS
+(Foundational), MC-2 INJECTIVITY-CHECKED-VIA-HIGH-RANK-RATHER-THAN-EXACT-EQUALITY (Foundational).
+Zero Blueprint/KG discrepancy — all four prerequisites (`math.linalg.rank`,
+`math.linalg.null-space`, `math.linalg.column-space`, `math.linalg.dimension`) independently
+re-confirmed authored.
+
+`change-of-basis`: $P$'s columns coming from the SOURCE basis in TARGET coordinates, never the
+reverse, demonstrated via the full $P_{\beta\to\gamma}$ construction for $\beta=\{(1,1),(1,-1)\}$;
+the reverse conversion requiring $P^{-1}$, never reapplying $P$ itself, demonstrated via the
+round-trip verification recovering the original $\beta$-coordinates exactly; and the similarity
+relation $B=P^{-1}AP$ as a direct extension of the coordinate-conversion machinery, never a new
+isolated formula. 2 misconceptions independently classified by Blueprint-declared severity — MC-1
+CHANGE-OF-BASIS-MATRIX-BUILT-FROM-WRONG-BASIS (Foundational), MC-2
+REVERSE-CONVERSION-USES-P-INSTEAD-OF-P-INVERSE (Foundational). Zero Blueprint/KG discrepancy;
+`math.linalg.matrix-inverse` independently re-confirmed authored.
+
+Mathematics **737/908 → 739/908**, 169 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 739/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)".
+
+Fresh frontier recomputed for Batch 173 (22 concepts, `math.linalg.rank-nullity` and
+`math.linalg.change-of-basis` both closed their own currently-reachable frontiers with no direct
+unlocks): `math.cat.category`, `math.cx.complex-numbers-analysis`, `math.fnal.convolution`,
+`math.fnal.normed-space`, `math.graph.random-graph`,
+`math.linalg.diagonalization`/`dual-space`/`inner-product-space`/`matrix-representation`/
+`orthogonal-basis`/`projection`/`tensor`, `math.num.floating-point`/`interpolation`/`root-finding`,
+`math.opt.stochastic-gradient`, `math.prob.characteristic-function`/`joint-distribution`,
+`math.stats.normal-distribution`/`percentile`/`sampling-distribution`,
+`math.top.topological-space`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `169bf8a` on `main`, pushed directly.
