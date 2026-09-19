@@ -18060,3 +18060,24 @@ math.fnal.convolution/normed-space, math.graph.random-graph,
 math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
 qr-algorithm/splines, math.opt.pca/semidefinite-programming, math.prob.conditional-expectation,
 math.stats.conjugate-prior/credible-interval.
+
+## Batch 216 (2026-09-19) — zero discrepancy — MILESTONE: math.stats fully EB-certified (14th domain)
+
+Authored `math.stats.conjugate-prior` (Beta-Binomial update adds successes to α and failures —
+never total trials — to β; conjugate means same family updated parameters, never a different
+distributional shape; convenience-based conjugate selection is legitimate, never cheating) and
+`math.stats.credible-interval` (a credible interval is a direct probability statement, never
+frequentist procedural language; credible and confidence intervals are genuinely different
+claims, never interchangeable; HPD is the narrowest interval, coinciding with equal-tailed only
+for symmetric posteriors). Both zero discrepancy. Mathematics **825/908 → 827/908**, 81
+remaining. **math.stats is now the 14th fully EB-certified domain** (`scripts/math/state.ts`
+confirms: math.found, math.calc, math.geom, math.alg, math.arith, math.stats, math.abst, math.nt,
+math.disc, math.real, math.func, math.trig, math.seq, math.meas). Validated: KG PASS (908/908
+reachable), state.ts confirms 827/908 and the new certified-domain count, tsc clean, tests
+561/561. Commit `6f61553`, pushed.
+
+Fresh frontier for Batch 217 (18 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
+qr-algorithm/splines, math.opt.pca/semidefinite-programming, math.prob.conditional-expectation.
