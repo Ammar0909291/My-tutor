@@ -18319,3 +18319,25 @@ Fresh frontier for Batch 228 (10 concepts): math.cat.adjunction/functor-category
 math.top.cohomology, plus math.cx.complex-numbers-analysis, math.fnal.bounded-operator/
 dense-subspace/hilbert-space, math.graph.random-graph, math.opt.semidefinite-programming.
 Campaign continues under the same active `/loop`.
+
+## Batch 228 (2026-09-19) — 1 discrepancy (reverse-direction)
+
+Authored `math.fnal.hilbert-space` ("Hilbert space" adds nothing beyond combining inner-product-
+space and completeness, never a new independent idea; the Projection Theorem guarantees existence
+AND uniqueness, never existence alone; every Hilbert space is Banach but not conversely, never
+interchangeable labels) and `math.fnal.dense-subspace` (density is one unified definition applying
+in any Banach space, never redefined per example; Weierstrass's theorem is literally a density
+statement with an explicit witness, never merely analogous; Weierstrass/C∞-in-Lp/trig-in-L2 are
+the same pattern, never unrelated facts). Reverse-direction discrepancy on `hilbert-space`:
+Blueprint's mixed-status cross-link `math.meas.l2-space` was "not yet authored" at write time but
+is now authored — noted for the record (18th discrepancy this campaign), single-cross-link probe
+(against `math.linalg.inner-product`) retained as authored. `dense-subspace` zero discrepancy
+(cross-link `math.real.weierstrass-approximation` confirmed authored, cross-link-mode probe
+engaged per Blueprint). Mathematics **849/908 → 851/908**, 57 remaining. math.fnal now 7/18
+authored (no domain-completion milestone this batch). Validated: KG PASS (908/908 reachable),
+state.ts confirms 851/908, tsc clean, tests 561/561. Commit `e171a01`, pushed.
+
+Fresh frontier for Batch 229 (11 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.fnal.bounded-operator/
+fourier-transform/riesz-representation/special-functions, math.graph.random-graph,
+math.opt.semidefinite-programming. Campaign continues under the same active `/loop`.

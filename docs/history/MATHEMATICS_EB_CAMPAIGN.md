@@ -6244,3 +6244,20 @@ Fresh frontier for Batch 228 (10 concepts): math.cat.adjunction/functor-category
 math.top.cohomology, plus math.cx.complex-numbers-analysis, math.fnal.bounded-operator/
 dense-subspace/hilbert-space, math.graph.random-graph, math.opt.semidefinite-programming.
 Campaign continues under the same active `/loop`.
+
+## Batch 228 (2026-09-19)
+
+Authored `hilbert-space` (Hilbert = inner product space + complete, never a new idea; Projection
+Theorem gives existence AND uniqueness, never existence alone; Hilbert implies Banach, never the
+reverse) and `dense-subspace` (density is one unified definition, never per-space; Weierstrass IS
+a density statement with a witness in hand, never merely analogous; Weierstrass/smoothing/Fourier
+density are one pattern, never unrelated facts). One reverse-direction discrepancy:
+`hilbert-space`'s cross-link `math.meas.l2-space` is now authored though the Blueprint said
+unauthored at write time — noted, probe unchanged. Mathematics **851/908** (849→851), 57
+remaining. Full detail in `COVERAGE.md` Batch 228. Validated: KG PASS, state.ts 851/908, tsc
+clean, tests 561/561. Commit `e171a01`, pushed.
+
+Fresh frontier for Batch 229 (11 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.fnal.bounded-operator/
+fourier-transform/riesz-representation/special-functions, math.graph.random-graph,
+math.opt.semidefinite-programming. Campaign continues under the same active `/loop`.
