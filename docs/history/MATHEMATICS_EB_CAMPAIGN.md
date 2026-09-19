@@ -4766,3 +4766,24 @@ Fresh frontier to be recomputed at the start of Batch 161 per established discip
 math.de concepts (pde, nonlinear-ode) and other ready concepts across math.linalg,
 math.prob.joint-distribution, math.stats, math.cx, math.top, math.fnal, math.num, math.opt,
 math.graph, math.cat still reachable. Campaign continues under the same active `/loop`.
+
+### Batch 161 (2026-09-19) — fourth wrong-corpus cross-link correction
+
+Authored `sturm-liouville` (λ as an unknown parameter; most λ giving only the trivial solution;
+weighted orthogonality; the connection to the general Spectral Theorem) and `pde` (a PDE as one
+function of multiple variables, never confused with an ODE system; the discriminant
+classification; classification tied to genuine physical behavior). `sturm-liouville` had a
+wrong-corpus cross-link correction (math.fnal.spectral-theory claimed authored via the blueprints
+dir — fourth such correction this campaign) and closes math.de.bvp's declared unlock. `pde` had
+zero Blueprint/KG discrepancy. Mathematics **717/908** (715→717), 191 remaining — math.de now has
+only nonlinear-ode left. Full per-concept detail in `COVERAGE.md` Batch 161. Validated: KG
+validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts` confirms mathematics
+717/908 (13 EB-certified domains unchanged), `tsc --noEmit` clean, targeted EB/curriculum tests
+(7 files) 561/561 passed. Full whole-repo suite not re-attempted, per the established Batch
+109-110 hang precedent. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched.
+Commit `718e014` on `main`, pushed directly.
+
+Fresh frontier to be recomputed at the start of Batch 162 per established discipline; remaining
+math.de concept (nonlinear-ode) and other ready concepts across math.linalg, math.prob.joint-
+distribution, math.stats, math.cx, math.top, math.fnal, math.num, math.opt, math.graph, math.cat
+still reachable. Campaign continues under the same active `/loop`.

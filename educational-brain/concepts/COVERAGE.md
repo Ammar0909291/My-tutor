@@ -16072,3 +16072,47 @@ Fresh frontier to be recomputed at the start of Batch 161 per established discip
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `32d4704` on `main`, pushed directly.
+
+## Batch 161 (2026-09-19) — fourth wrong-corpus cross-link correction
+
+Authored `math.de.sturm-liouville` and `math.de.pde`, continuing (and nearly closing) the
+`math.de` domain.
+
+`sturm-liouville`: $\lambda$ as an UNKNOWN parameter (never fixed), with MOST values giving ONLY
+the trivial solution while special discrete eigenvalues admit genuine eigenfunctions, demonstrated
+via the $\lambda=2$ (trivial only) versus $\lambda=1$ (eigenfunction $\sin x$) contrast for
+$y''+\lambda y=0$; orthogonality using the WEIGHT $w(x)$ from the original equation (never the
+unweighted integral in general); and the eigenfunction-completeness result as a concrete instance
+of the general Spectral Theorem for self-adjoint operators (never isolated). 3 misconceptions
+independently classified by Blueprint-declared severity — MC-1 STURM-LIOUVILLE-BVP-ASSUMED-
+SOLVABLE-FOR-EVERY-LAMBDA (Foundational), MC-2 ORTHOGONALITY-ASSUMED-UNWEIGHTED (Foundational),
+MC-3 STURM-LIOUVILLE-TREATED-AS-ISOLATED-FROM-SPECTRAL-THEORY (Moderate). **Wrong-corpus cross-
+link correction** (fourth this campaign): the Blueprint's claimed "math.fnal.spectral-theory
+already authored" checked the Blueprints directory rather than the EB corpus — corrected to
+independence mode. Closes `math.de.bvp`'s declared unlock.
+
+`pde`: a PDE defined as ONE unknown function of multiple variables (never confused with a SYSTEM
+of several ODEs); the discriminant $B^2-4AC$ classifying linear second-order PDEs (elliptic/
+parabolic/hyperbolic), with careful term-by-term coefficient identification required for
+non-canonical forms; and classification tied to GENUINE physical behavior (heat-equation smoothing
+versus wave-equation propagation, never a purely formal label). 3 misconceptions independently
+classified by Blueprint-declared severity — MC-1 PDE-CLASSIFICATION-TREATED-AS-PURELY-FORMAL
+(Foundational), MC-2 PDE-CONFUSED-WITH-MULTIVARIABLE-ODE-SYSTEM (Foundational), MC-3
+DISCRIMINANT-COEFFICIENTS-MISIDENTIFIED (Moderate). Zero Blueprint/KG discrepancy.
+
+Mathematics **715/908 → 717/908**, 191 remaining. `math.de` domain now has only `nonlinear-ode`
+remaining before full exhaustion.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 717/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Fresh frontier to be recomputed at the start of Batch 162 per established discipline; remaining
+`math.de` concept (nonlinear-ode) and other ready concepts across `math.linalg`,
+`math.prob.joint-distribution`, `math.stats`, `math.cx`, `math.top`, `math.fnal`, `math.num`,
+`math.opt`, `math.graph`, `math.cat` still reachable.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `718e014` on `main`, pushed directly.
