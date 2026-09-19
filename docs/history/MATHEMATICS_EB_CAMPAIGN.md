@@ -5790,3 +5790,22 @@ correlation/marginal-distribution, math.stats.anova/bias-variance/chi-squared-te
 ci-proportion/consistency/covariance-matrix/method-of-moments/mle/nonparametric/
 sufficient-statistic/test-statistic/type-errors/t-test/z-test. Campaign continues under the same
 active `/loop`.
+
+## Batch 203 (2026-09-19)
+
+Authored `test-statistic` (evidential meaning comes from position relative to the null
+distribution, never a bare number; different tests use different reference distributions; more
+extreme statistic means smaller p-value, never larger) and `type-errors` (Type I/Type II occupy
+specific, non-interchangeable truth/decision cells, never swapped; decreasing α increases β for
+fixed n, never cost-free). Both zero discrepancy. Mathematics **801/908** (799→801), 107
+remaining. Full detail in `COVERAGE.md` Batch 203. Validated: KG PASS, state.ts 801/908, tsc
+clean, tests 561/561. Commit `e3797e0`, pushed.
+
+Fresh frontier for Batch 204 (34 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
+qr-algorithm/splines, math.opt.semidefinite-programming, math.prob.conditional-expectation/
+correlation/marginal-distribution, math.stats.anova/bias-variance/chi-squared-test/ci-mean/
+ci-proportion/consistency/covariance-matrix/method-of-moments/mle/nonparametric/p-value/power/
+sufficient-statistic/t-test/z-test. Campaign continues under the same active `/loop`.
