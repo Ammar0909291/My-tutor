@@ -15209,3 +15209,51 @@ concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph`, `math.lin
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `9f5d374` on `main`, pushed directly.
+
+### Batch 142 (2026-09-19) — two older-format Blueprint metadata corrections
+
+`math.prob.combinatorial-probability`: "does order matter?" as the first, decisive counting
+question, demonstrated via the committee ($C(5,3)=10$) versus officer-selection ($P(5,3)=60$)
+contrast on identical $n,r$; $|\Omega|$ and $|A|$ requiring the SAME counting model consistently,
+demonstrated via the all-hearts flush probability; complementary counting as often the CLEANER
+route (never merely "harder"), demonstrated via the birthday-matching problem's clean complement
+computation. 3 misconceptions independently classified — MC-1
+ORDER-ALWAYS-MATTERS-WHEN-PICKING-ITEMS, MC-2
+|Ω|-AND-|A|-COUNTED-SEPARATELY-WITHOUT-CONSISTENCY-CHECK, MC-3
+COMPLEMENTARY-COUNTING-IS-JUST-HARDER. **Cross-link mode established**: the Blueprint (an older,
+Section-based format) declared no cross_links field or P76 mechanism at all; the live KG lists
+`math.disc.combinatorics` as a formal cross-link, confirmed genuinely authored via `ls` — treated
+as a genuine cross-link probe here, connecting this concept's permutation/combination toolkit to
+that concept's bijective/recursive counting techniques.
+
+`math.prob.transition-matrix`: $P_{ij}$ as a strictly CONDITIONAL probability (transitioning FROM
+$i$ TO $j$, never a marginal "being in $j$"), demonstrated via the weather chain's row-sum-to-1
+verification; $n$-step probabilities requiring genuine matrix exponentiation via
+Chapman-Kolmogorov, demonstrated via the 2-state chain's correct $P^{(2)}_{12}=0.56$; irreducibility
+as EVENTUAL reachability (never requiring $P_{ij}>0$ in exactly one step), demonstrated via an
+alternating 2-state chain's irreducibility despite zero diagonal entries and a 3-state chain's
+2-step reachability despite a zero 1-step entry. 3 misconceptions independently classified — MC-1
+P-IJ-IS-THE-PROBABILITY-OF-BEING-IN-STATE-J (language contamination), MC-2
+N-STEP-PROBABILITY-IS-N-TIMES-ONE-STEP (overgeneralization), MC-3
+IRREDUCIBLE-MEANS-ALL-TRANSITION-PROBABILITIES-ARE-POSITIVE (overgeneralization). **Incomplete
+Blueprint metadata found and corrected**: the Blueprint's own "Prerequisites" field lists only
+`math.prob.markov-chain`, omitting `math.linalg.matrix` — the live KG's complete two-prerequisite
+`requires` list used as authoritative.
+
+Both concepts close their respective declared unlocks (`math.prob.classical-probability`'s and
+`math.prob.markov-chain`'s). Mathematics **677/908 → 679/908**, 229 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 679/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Computed fresh frontier post-batch (not yet re-derived this entry — will be recomputed fresh at
+the start of Batch 143 per established discipline): numerous `math.prob` concepts remain
+reachable (convergence-types, distribution, generating-function, poisson-process). Other ready
+concepts remain across `math.cat`, `math.cx`, `math.de`, `math.graph`, `math.linalg`, `math.num`,
+`math.stats`, `math.top`.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `74fb318` on `main`, pushed directly.
