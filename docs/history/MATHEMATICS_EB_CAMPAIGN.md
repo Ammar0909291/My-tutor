@@ -4441,3 +4441,24 @@ With math.prob's previously-reachable frontier now exhausted, fresh frontier to 
 the start of Batch 146 spans math.de, math.linalg, math.prob.joint-distribution, math.stats,
 math.cx, math.top, math.fnal, math.num, math.opt, math.graph, and math.cat. Campaign continues
 under the same active `/loop`.
+
+### Batch 146 (2026-09-19) — opening math.de
+
+Authored `ivp` (IVP conditions all anchored at one point, solved via a simultaneous system, never
+sequentially; condition placement — not count — determines the solvability guarantee, via the
+y''+y=0 IVP-vs-BVP contrast) and `separable` (separation of variables; two integration constants
+combining into one; equilibrium solutions from h(y)=0 checked before dividing; implicit solutions
+as legitimate final answers). Both zero Blueprint/KG discrepancy. First `math.de` domain concepts
+authored this campaign, following math.prob's frontier exhaustion at Batch 145. Mathematics
+**687/908** (685→687), 221 remaining. Full per-concept detail in `COVERAGE.md` Batch 146.
+Validated: KG validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts` confirms
+mathematics 687/908 (13 EB-certified domains unchanged), `tsc --noEmit` clean, targeted
+EB/curriculum tests (7 files) 561/561 passed. Full whole-repo suite not re-attempted, per the
+established Batch 109-110 hang precedent. No Physics/Chemistry/English/Biology/CS/KG/Blueprint/
+runtime file touched. Commit `9d9fe67` on `main`, pushed directly.
+
+Fresh frontier to be recomputed at the start of Batch 147 per established discipline; remaining
+math.de concepts (linear-first-order, exact-ode, slope-field, second-order-linear, laplace-
+transform, bvp, pde) and other ready concepts across math.linalg, math.prob.joint-distribution,
+math.stats, math.cx, math.top, math.fnal, math.num, math.opt, math.graph, math.cat still reachable.
+Campaign continues under the same active `/loop`.

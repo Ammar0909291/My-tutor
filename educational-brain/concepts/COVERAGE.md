@@ -15410,3 +15410,50 @@ interpolation), `math.opt.stochastic-gradient`, `math.graph.random-graph`, and
 
 No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
 batch is commit `fec7323` on `main`, pushed directly.
+
+## Batch 146 (2026-09-19) — opening the math.de domain
+
+Authored `math.de.ivp` and `math.de.separable`, the first `math.de` (Differential Equations)
+concepts authored this campaign, following math.prob's frontier exhaustion at Batch 145.
+
+`ivp`: the Initial Value Problem defined as an ODE plus conditions on the solution AND its
+derivatives, ALL anchored at a SINGLE point $x_0$; solving a complete IVP by setting up and
+solving the FULL SYSTEM of $n$ equations from all $n$ conditions SIMULTANEOUSLY (never one
+constant at a time in isolation), demonstrated via $y''-5y'+6y=0$ with $y(0)=1,y'(0)=0$; and
+condition PLACEMENT — not count — as decisive for the solvability guarantee, demonstrated on the
+identical ODE $y''+y=0$ giving a unique IVP solution ($y=\sin x$) versus a contradictory,
+solution-free BVP when the same 2 conditions are split across two points. 3 misconceptions
+independently classified by Blueprint-declared severity — MC-1 CONDITION-COUNT-ASSUMED-TO-
+DETERMINE-OUTCOME-REGARDLESS-OF-PLACEMENT (Foundational), MC-2 INITIAL-CONDITIONS-SOLVED-
+SEQUENTIALLY-INSTEAD-OF-SIMULTANEOUSLY (Foundational), MC-3 DERIVATIVE-CONDITIONS-OMITTED-FOR-
+HIGHER-ORDER-IVPS (Moderate). Zero Blueprint/KG discrepancy (the Blueprint's `math.de.bvp`
+reference is the KG's declared "related" concept, not a `requires`/`cross_links` entry, and is not
+yet authored — this doesn't affect verification). Closes toward `math.de.existence-uniqueness`'s
+declared unlock.
+
+`separable`: the separation-of-variables technique $dy/dx=g(x)h(y)\to(1/h(y))dy=g(x)dx$,
+integrated to $H(y)=G(x)+C$ with EXACTLY ONE combined arbitrary constant (never two, from the two
+indefinite integrals); EQUILIBRIUM solutions where $h(y)=0$ checked BEFORE dividing, demonstrated
+via $dy/dx=y^2$ where $y=0$ is genuinely NOT captured by the general formula $y=-1/(x+C)$ for any
+finite $C$; and implicit solutions as legitimate final answers, demonstrated via $dy/dx=-x/y$'s
+circle family requiring a $\pm$ branch choice rather than one explicit $y=f(x)$. 3 misconceptions
+independently classified — MC-1 TWO-CONSTANTS-FROM-TWO-INTEGRALS (instruction-induced), MC-2
+FORGETTING-CONSTANT-SOLUTIONS (instruction-induced), MC-3 SEPARABLE-MEANS-ALWAYS-EXPLICITLY-
+SOLVABLE (overgeneralization). Zero Blueprint/KG discrepancy.
+
+Mathematics **685/908 → 687/908**, 221 remaining.
+
+Validated: `npx tsx scripts/validate-knowledge-graph.ts` → PASS, 908/908 reachable, 0 failures, 0
+warnings, KG file untouched. `npx tsx scripts/math/state.ts` → confirmed mathematics 687/908, 13
+EB-certified domains unchanged. `npx tsc --noEmit` → clean (exit 0). Targeted EB/curriculum tests
+(7 files): "Test Files 7 passed (7), Tests 561 passed (561)". Full whole-repo suite not
+re-attempted this batch, consistent with the established precedent from Batches 109-110.
+
+Fresh frontier to be recomputed at the start of Batch 147 per established discipline; remaining
+`math.de` concepts (linear-first-order, exact-ode, slope-field, second-order-linear, laplace-
+transform, bvp, pde) and other ready concepts across `math.linalg`, `math.prob.joint-distribution`,
+`math.stats`, `math.cx`, `math.top`, `math.fnal`, `math.num`, `math.opt`, `math.graph`, `math.cat`
+still reachable.
+
+No Physics/Chemistry/English/Biology/Computer Science/KG/Blueprint/runtime file touched. This
+batch is commit `9d9fe67` on `main`, pushed directly.
