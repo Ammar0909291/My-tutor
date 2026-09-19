@@ -5768,3 +5768,25 @@ qr-algorithm, math.opt.semidefinite-programming, math.prob.conditional-expectati
 marginal-distribution, math.stats.anova/bias-variance/chi-squared-test/ci-mean/ci-proportion/
 consistency/covariance-matrix/method-of-moments/mle/nonparametric/sufficient-statistic/
 test-statistic/type-errors/t-test/z-test. Campaign continues under the same active `/loop`.
+
+## Batch 202 (2026-09-19)
+
+Authored `newtons-method` (iteration is the tangent line's x-intercept; convergence never
+unconditional — zero derivative, bad start, or multiple root each break it; linear convergence is
+slower, never useless) and `interpolation` (Lagrange basis terms are engineered indicators, never
+arbitrary; interpolation IS a Vandermonde linear system; Runge's phenomenon — more points can
+worsen the edge fit). `interpolation`'s Blueprint claimed unlocks:none; live KG has
+unlocks:[math.num.splines] — corrected (11th discrepancy, 3rd stale-KG-metadata case).
+`newtons-method` zero discrepancy. Mathematics **799/908** (797→799), 109 remaining. Full detail
+in `COVERAGE.md` Batch 202. Validated: KG PASS, state.ts 799/908, tsc clean, tests 561/561.
+Commit `07ee8f4`, pushed.
+
+Fresh frontier for Batch 203 (34 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
+qr-algorithm/splines, math.opt.semidefinite-programming, math.prob.conditional-expectation/
+correlation/marginal-distribution, math.stats.anova/bias-variance/chi-squared-test/ci-mean/
+ci-proportion/consistency/covariance-matrix/method-of-moments/mle/nonparametric/
+sufficient-statistic/test-statistic/type-errors/t-test/z-test. Campaign continues under the same
+active `/loop`.
