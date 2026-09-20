@@ -6440,3 +6440,18 @@ Full detail in `COVERAGE.md` Batch 239. Validated: KG PASS, state.ts 873/908, ts
 Fresh frontier for Batch 240 (7 concepts): math.cat.adjunction/functor-category/limits,
 math.cx.cauchy-theorem/conformal-mapping/identity-theorem/singularities. Campaign continues under
 the same active `/loop`.
+
+## Batch 240 (2026-09-20)
+
+Authored `cauchy-theorem` (both hypotheses always checked together, never holomorphy alone; a
+singularity elsewhere never disqualifies a function on a domain avoiding it; path-independence
+never extends across an encircled singularity) and `identity-theorem` (a limit point is required,
+never merely infinitely many points; connectedness is essential, never assumed on disconnected
+domains; two valid continuations to a connected domain must coincide). Both zero discrepancy.
+Mathematics **875/908** (873→875), 33 remaining. math.cx now 11/31 authored. Full detail in
+`COVERAGE.md` Batch 240. Validated: KG PASS, state.ts 875/908, tsc clean, tests 561/561. Commit
+`30c0e79`, pushed.
+
+Fresh frontier for Batch 241 (8 concepts): math.cat.adjunction/functor-category/limits,
+math.cx.analytic-continuation/cauchy-goursat/cauchy-integral-formula/conformal-mapping/
+singularities. Campaign continues under the same active `/loop`.
