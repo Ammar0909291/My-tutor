@@ -18498,3 +18498,23 @@ and the new certified-domain count, tsc clean, tests 561/561. Commit `a6690d0`, 
 Fresh frontier for Batch 236 (6 concepts): math.cat.adjunction/functor-category/limits,
 math.top.cohomology, math.cx.complex-function, math.opt.semidefinite-programming. Campaign
 continues under the same active `/loop`.
+
+## Batch 236 (2026-09-20) — zero discrepancy — MILESTONE: math.opt fully EB-certified (21st
+domain, 16/16 verified before claiming)
+
+Authored `math.cx.complex-function` (u,v depend jointly on both x and y, never as separate
+single-variable tracks; a complex limit requires agreement along every path, never just the two
+axes; joint continuity of u,v is required, never separate axis-continuity alone) and
+`math.opt.semidefinite-programming` (SDP's matrix variable is structurally different from QP's
+vector variable, never "just a QP"; the PSD cone is convex despite its eigenvalue-based
+definition, never assumed non-convex from appearance; an SDP relaxation's optimal solution can
+have any rank, never assumed rank-1). Both zero discrepancy (neither concept has cross-links per
+the KG). Mathematics **865/908 → 867/908**, 41 remaining. **math.opt is now the 21st fully
+EB-certified domain** — explicitly verified 16/16 via direct KG-prefix count BEFORE claiming it,
+continuing the verify-before-claim discipline. `scripts/math/state.ts` independently confirms
+math.opt in its own EB-certified-domains list. Validated: KG PASS (908/908 reachable), state.ts
+confirms 867/908 and the new certified-domain count, tsc clean, tests 561/561. Commit `1eae8dc`,
+pushed.
+
+Fresh frontier for Batch 237 (5 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, math.cx.cauchy-riemann. Campaign continues under the same active `/loop`.

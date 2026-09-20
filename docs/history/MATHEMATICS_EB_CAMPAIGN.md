@@ -6378,3 +6378,18 @@ detail in `COVERAGE.md` Batch 235. Validated: KG PASS, state.ts 865/908, tsc cle
 Fresh frontier for Batch 236 (6 concepts): math.cat.adjunction/functor-category/limits,
 math.top.cohomology, math.cx.complex-function, math.opt.semidefinite-programming. Campaign
 continues under the same active `/loop`.
+
+## Batch 236 (2026-09-20) — MILESTONE: math.opt fully EB-certified (21st domain)
+
+Authored `complex-function` (u,v depend jointly on x and y, never separate tracks; a complex
+limit needs every path, never just two axes; joint continuity is required, never separate
+axis-continuity) and `semidefinite-programming` (SDP's matrix variable is structurally different
+from QP's vector, never "just a QP"; the PSD cone is convex despite looking nonlinear, never
+assumed otherwise; SDP relaxation solutions can have any rank, never assumed rank-1). Both zero
+discrepancy. Mathematics **867/908** (865→867), 41 remaining. **math.opt is now the 21st fully
+EB-certified domain** — explicitly verified 16/16 before claiming it. Full detail in `COVERAGE.md`
+Batch 236. Validated: KG PASS, state.ts 867/908, tsc clean, tests 561/561. Commit `1eae8dc`,
+pushed.
+
+Fresh frontier for Batch 237 (5 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, math.cx.cauchy-riemann. Campaign continues under the same active `/loop`.
