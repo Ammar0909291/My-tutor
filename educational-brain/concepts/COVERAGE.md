@@ -18383,3 +18383,21 @@ math.top.cohomology, plus math.cx.complex-numbers-analysis, math.fnal.closed-gra
 distributions/fourier-transform/hahn-banach/special-functions/spectral-theory/
 uniform-boundedness, math.graph.random-graph, math.opt.semidefinite-programming. Campaign
 continues under the same active `/loop`.
+
+## Batch 231 (2026-09-19/20) — zero discrepancy
+
+Authored `math.fnal.closed-graph-theorem` (the full-domain hypothesis is required, never assume
+a closed graph on a proper subspace implies boundedness; completeness of both spaces is required,
+never assumed for any normed spaces; closed graph is a joint condition on pairs, never simply
+identical to continuity's one-sided definition) and `math.fnal.hahn-banach` (the extension
+preserves the exact norm, never merely "some extension exists"; geometric separation in infinite
+dimensions genuinely requires Hahn-Banach, never automatic; the dual separates every nonzero
+point, never assume some element escapes all bounded functionals). Both zero discrepancy (neither
+has cross-links per the KG). Mathematics **855/908 → 857/908**, 51 remaining. math.fnal now 13/18
+authored (no domain-completion milestone this batch). Validated: KG PASS (908/908 reachable),
+state.ts confirms 857/908, tsc clean, tests 561/561. Commit `ebe029a`, pushed.
+
+Fresh frontier for Batch 232 (12 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.fnal.distributions/
+fourier-transform/special-functions/spectral-theory/uniform-boundedness, math.graph.random-graph,
+math.opt.semidefinite-programming. Campaign continues under the same active `/loop`.
