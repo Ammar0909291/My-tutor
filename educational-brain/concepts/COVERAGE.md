@@ -18518,3 +18518,23 @@ pushed.
 
 Fresh frontier for Batch 237 (5 concepts): math.cat.adjunction/functor-category/limits,
 math.top.cohomology, math.cx.cauchy-riemann. Campaign continues under the same active `/loop`.
+
+## Batch 237 (2026-09-20) — zero discrepancy — MILESTONE: math.top fully EB-certified (22nd
+domain, 23/23 verified before claiming)
+
+Authored `math.cx.cauchy-riemann` (z̄ satisfies CR nowhere despite being smooth, never assume
+smoothness implies analyticity; CR at an isolated point never implies holomorphicity, which needs
+CR throughout a neighborhood; u,v smooth as real functions is never sufficient for complex
+differentiability) and `math.top.cohomology` (H^n(X) is the dual group Hom(H_n(X),ℤ), never just
+another name for H_n(X); the cup product is genuinely new ring structure, never the same
+information as the bare groups; de Rham and singular cohomology are isomorphic via de Rham's
+theorem, never unrelated invariants). Both zero discrepancy (neither concept has cross-links per
+the KG). Mathematics **867/908 → 869/908**, 39 remaining. **math.top is now the 22nd fully
+EB-certified domain** — explicitly verified 23/23 via direct KG-prefix count BEFORE claiming it,
+continuing the verify-before-claim discipline. `scripts/math/state.ts` independently confirms
+math.top in its own EB-certified-domains list. Validated: KG PASS (908/908 reachable), state.ts
+confirms 869/908 and the new certified-domain count, tsc clean, tests 561/561. Commit `437fcd6`,
+pushed.
+
+Fresh frontier for Batch 238 (5 concepts): math.cat.adjunction/functor-category/limits,
+math.cx.analytic-functions/harmonic-functions. Campaign continues under the same active `/loop`.
