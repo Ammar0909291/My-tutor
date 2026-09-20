@@ -78,11 +78,12 @@
  * domain closed, same mechanism, same contract. Batch 9 (bio.div, 6
  * concepts, 2026-09-20): the ninth domain closed, same mechanism, same
  * contract. Batch 10 (bio.plant, 5 concepts, 2026-09-20): the tenth
- * domain closed, same mechanism, same contract. Combined: 83/108
- * originally-authored concepts now at the 3-probe floor. The remaining
- * 25 of the 108 (`bio.repro`/`bio.immuno`/`bio.sys`/`bio.biotech`/
- * `bio.bioinfo`/`bio.dev`) are NOT covered by this file and remain at
- * 2/3 gradeable probes — a bounded, honestly
+ * domain closed, same mechanism, same contract. Batch 11 (bio.repro, 5
+ * concepts, 2026-09-20): the eleventh domain closed, same mechanism,
+ * same contract. Combined: 88/108 originally-authored concepts now at
+ * the 3-probe floor. The remaining 20 of the 108 (`bio.immuno`/
+ * `bio.sys`/`bio.biotech`/`bio.bioinfo`/`bio.dev`) are NOT covered by
+ * this file and remain at 2/3 gradeable probes — a bounded, honestly
  * reported partial closure, not a claim of full biology probe-depth
  * closure. The 91 concepts added by
  * the 2026-09-14 KG extension
@@ -113,6 +114,7 @@ const srcD7 = (concept: string, what: string) => src('batch 7, bio.evo, 2026-09-
 const srcD8 = (concept: string, what: string) => src('batch 8, bio.micro, 2026-09-20', concept, what)
 const srcD9 = (concept: string, what: string) => src('batch 9, bio.div, 2026-09-20', concept, what)
 const srcD10 = (concept: string, what: string) => src('batch 10, bio.plant, 2026-09-20', concept, what)
+const srcD11 = (concept: string, what: string) => src('batch 11, bio.repro, 2026-09-20', concept, what)
 
 // ═══════════════════════════════════════════════════════════════════════════
 // BATCH BIO-D1 — bio.found (all 8 concepts) @ HIGH, PROFICIENT, short_answer
@@ -1464,6 +1466,89 @@ const BIO_D10: SeedProbe[] = [
   },
 ]
 
+// ═══════════════════════════════════════════════════════════════════════════
+// BATCH BIO-D11 — bio.repro (all 5 concepts) @ HIGH, PROFICIENT,
+// short_answer.
+// ═══════════════════════════════════════════════════════════════════════════
+
+const BIO_D11: SeedProbe[] = [
+  {
+    conceptId: 'bio.repro.asexual-reproduction', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A potato grows new potato plants from small buds ("eyes") on its tuber, with no seeds and no fertilisation involved at all. Which specific method of asexual reproduction is this?',
+    choices: [
+      { text: 'Vegetative propagation — new plants forming from a stem structure (the tuber)', isCorrect: true },
+      { text: 'Budding — a new individual forming as an outgrowth directly from a parent’s body', isCorrect: false },
+      { text: 'Sporulation — spores germinating into new individuals', isCorrect: false },
+      { text: 'Fragmentation — the body breaking into pieces that each regenerate', isCorrect: false },
+    ],
+    correctValue: 'Vegetative propagation (via tubers)',
+    targetedMisconceptions: [],
+    source: srcD11('bio.repro.asexual-reproduction', 'applies the explanation’s own stated vegetative-propagation example (potato tubers) as an identification task among the several named asexual methods, distinct from the genetic-variation-disadvantage mcq and the clones-not-identical misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.repro.sexual-reproduction-plants', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A dandelion seed has a fluffy, feather-like structure that lets it be carried long distances on air currents before landing. Which seed dispersal mechanism does this represent?',
+    choices: [
+      { text: 'Wind dispersal', isCorrect: true },
+      { text: 'Animal-attachment dispersal (burs)', isCorrect: false },
+      { text: 'Water dispersal', isCorrect: false },
+      { text: 'Explosive mechanical dispersal', isCorrect: false },
+    ],
+    correctValue: 'Wind dispersal',
+    targetedMisconceptions: [],
+    source: srcD11('bio.repro.sexual-reproduction-plants', 'applies the explanation’s own stated wind-dispersal category (maple, dandelion) as an identification task, distinct from the double-fertilisation/endosperm mcq and the pollination-is-not-fertilisation misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.repro.human-reproductive-system', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A woman has a 35-day menstrual cycle (longer than the 28-day average) and assumes she ovulates on day 14, matching the textbook average. Is this a reliable assumption for tracking her own ovulation?',
+    choices: [
+      { text: 'No — ovulation timing tracks the LH surge, not a fixed calendar day; a longer cycle very likely means ovulation occurs later than day 14', isCorrect: true },
+      { text: 'Yes — day 14 ovulation is biologically fixed and occurs at the same point regardless of total cycle length', isCorrect: false },
+      { text: 'No — ovulation cannot be predicted or tracked by any method, calendar-based or otherwise', isCorrect: false },
+      { text: 'Yes — cycle length only affects the luteal phase, never the timing of ovulation itself', isCorrect: false },
+    ],
+    correctValue: 'No — ovulation timing is not fixed to day 14; it tracks the LH surge, later in longer cycles',
+    targetedMisconceptions: [],
+    source: srcD11('bio.repro.human-reproductive-system', 'applies the explanation’s own stated correction ("day 14 is the average... ovulation timing tracks the LH surge, not a calendar day") to a cycle-length-variation scenario, distinct from the LH-surge-mechanism mcq and the fertilisation-location misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.repro.fertilisation-development', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A fertilised egg has divided repeatedly by mitosis without increasing in overall size, forming a solid ball of cells. What is this early developmental stage called?',
+    choices: [
+      { text: 'Morula', isCorrect: true },
+      { text: 'Blastocyst', isCorrect: false },
+      { text: 'Gastrula', isCorrect: false },
+      { text: 'Zygote', isCorrect: false },
+    ],
+    correctValue: 'Morula',
+    targetedMisconceptions: [],
+    source: srcD11('bio.repro.fertilisation-development', 'applies the explanation’s own stated cleavage-stage sequence ("cleavage: the zygote divides mitotically without growing, producing a morula") as an identification task, distinct from the ectoderm-derivatives mcq and the placenta-blood-mixing misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.repro.reproductive-health', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A couple has been trying to conceive for 8 months without success. Based on the clinical definition of infertility, should they already be concerned that something is wrong?',
+    choices: [
+      { text: 'Not necessarily — infertility is defined as failure to conceive after 12 months of trying, so 8 months alone is within the expected range for many couples', isCorrect: true },
+      { text: 'Yes — any couple failing to conceive within 3 months is clinically classified as infertile', isCorrect: false },
+      { text: 'Yes — successful conception should always occur within the first cycle of trying for a healthy couple', isCorrect: false },
+      { text: 'This cannot be assessed at all without first ruling out sexually transmitted infections', isCorrect: false },
+    ],
+    correctValue: 'Not necessarily — the 12-month threshold has not yet been reached',
+    targetedMisconceptions: [],
+    source: srcD11('bio.repro.reproductive-health', 'applies the explanation’s own stated clinical definition ("infertility: defined as failure to conceive after 12 months of unprotected intercourse") to a specific-duration scenario, distinct from the condoms-STI-protection mcq and the pill-mechanism misconception probe already on file'),
+  },
+]
+
 /**
  * Every biology probe-depth probe. One array, so `seed-knowledge-assets.ts`,
  * the cold-start bootstrap and the contract tests — all of which scan for a
@@ -1480,4 +1565,5 @@ export const BIOLOGY_DEPTH_PROBES: SeedProbe[] = [
   ...BIO_D8,
   ...BIO_D9,
   ...BIO_D10,
+  ...BIO_D11,
 ]
