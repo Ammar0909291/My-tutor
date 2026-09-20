@@ -84,7 +84,8 @@ never into this file. This file only changes when a LIVE, currently-binding rule
   - physics → `docs/physics/kg/graph.json` (238 concepts, 12 domains, prefix `phys.`)
   - chemistry → `docs/chemistry/kg/graph.json` (186 concepts, prefix `chem.`)
   - computer_science → `docs/computer-science/kg/graph.json` (119 concepts, prefix `cs.`)
-  - biology → `docs/biology/kg/graph.json` (108 concepts, 16 domains, prefix `bio.`)
+  - biology → `docs/biology/kg/graph.json` (199 concepts, 18 domains, prefix `bio.` — grew from
+    108/16 via the 2026-09-14 KG extension)
   - english → `docs/english/kg/graph.json` (216 concepts, 12 domains, prefix `eng.`) — registered
     and live.
   - Canonical 10-field schema only: `id, name, requires, unlocks, cross_links, difficulty, bloom,
@@ -208,10 +209,11 @@ Probe-depth Batch 1+2 (`biologyDepthSeedAssets.ts`, `bio.found` then `bio.cell`,
 close the same zero-slack defect physics/chemistry already had: every one of biology's 108
 authored concepts was stuck at 2/3 gradeable probes, so no biology lesson could ever reach
 verified mastery — now **22/108 at contract** (86 remain, 2/3 gradeable each). Formal EB
-authoring started 2026-09-20 at the KG root, `bio.found.what-is-biology`, then its sole
-child `bio.found.characteristics-of-life` (`educational-brain/concepts/biology/`, no Blueprint
-exists for biology as a subject) — **EB is 2/199**. These two counters are tracked and
-reported SEPARATELY, never conflated — see `COVERAGE.md`'s biology row. The 91 concepts from the 2026-09-14 KG extension still have zero
+authoring started 2026-09-20 at the KG root, `bio.found.what-is-biology`, then
+`bio.found.characteristics-of-life`, then its full 3-of-4 unlock wave (`classification-need`,
+`microscopy-basics`, `biomes-levels-of-organisation`) (`educational-brain/concepts/biology/`,
+no Blueprint exists for biology as a subject) — **EB is 5/199**. These two counters are
+tracked and reported SEPARATELY, never conflated — see `COVERAGE.md`'s biology row. The 91 concepts from the 2026-09-14 KG extension still have zero
 seed content of any kind. Continue via the audit doc's own §11 priority order for probe-depth,
 and strict KG-prerequisite order (not alphabetical) for EB authoring.
 

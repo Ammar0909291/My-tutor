@@ -13,9 +13,9 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,866** (corrected 2026-09-20: biology's KG count was stale at 108; the live KG has 199 concepts since the 2026-09-14 extension — see the Biology End-User Readiness Program entry below) |
-| Concepts with an Educational Brain entry | **581** mathematics + 238 physics + 216 english + 186 chemistry + 2 biology + 0 computer_science = **1,223** |
-| Remaining | **643** |
-| Completion percentage | **65.54%** |
+| Concepts with an Educational Brain entry | **581** mathematics + 238 physics + 216 english + 186 chemistry + 5 biology + 0 computer_science = **1,226** |
+| Remaining | **640** |
+| Completion percentage | **65.70%** |
 
 *(Recomputed programmatically 2026-09-14, after Batch 93 (4 concepts: `math.abst.ufd`/
 `math.abst.galois-theory`/`math.linalg.span`/`math.linalg.null-space` — closed math.abst's ENTIRE
@@ -910,7 +910,7 @@ unblocked by `u-substitution` — `lhopitals-rule`, `line-integrals`,
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
 | english | 216 | 216 | **100.00% COMPLETE (2026-08-11)** | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) — every English KG concept now has a full Educational Brain entry |
 | chemistry | 186 | 186 | **100.00% COMPLETE** | `chem.found.matter` | No — chemistry is fully covered (Completion Loop 2026-07-25/26); mathematics/english/biology/computer_science remain the priority subjects |
-| biology | 199 | 2 | **1.01% (IN PROGRESS, Biology End-User Readiness Program started 2026-09-20)** | `bio.found.what-is-biology`, `bio.found.characteristics-of-life` (both authored, strict KG-prerequisite order) | Yes (both) — KG count corrected 108→199 (2026-09-14 extension, previously unreflected here); see `CLAUDE.md`'s Biology program section for authoritative status |
+| biology | 199 | 5 | **2.51% (IN PROGRESS, Biology End-User Readiness Program started 2026-09-20)** | `bio.found.what-is-biology` → `bio.found.characteristics-of-life` → its full 3-concept unlock wave (`classification-need`, `microscopy-basics`, `biomes-levels-of-organisation`; the fourth unlock, `unifying-themes-in-biology`, deferred — blocked on the still-zero-content `scientific-method-in-biology`) | Yes (all 5) — KG count corrected 108→199 (2026-09-14 extension, previously unreflected here); see `CLAUDE.md`'s Biology program section for authoritative status |
 | computer_science | 119 | 0 | 0.00% | `cs.found.intro-computers` | No |
 
 Physics's KG count reflects the 2026-07-22 Particle Physics + Semiconductor
