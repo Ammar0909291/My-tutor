@@ -196,6 +196,19 @@ gap AND defect-hunt the servable 321. Full running log, known-open defects (ASCI
 figures, the content-free hold, the still-unresolved C7 repeat channel), and the saturated-account
 finding above: `docs/history/subject-onboarding-and-fix-campaign.md`.
 
+## Mathematics asset-contract campaign (PAPPU account, owner-scoped, in progress — un-paused by
+## explicit fresh instruction naming Mathematics; CS remains paused above; do not touch Biology,
+## owned by the Mohd account on this same shared `main`)
+**Full handover, pickup instructions, exact registration mechanics, and current frontier:
+`docs/architecture/MATHEMATICS_ASSET_CAMPAIGN_HANDOVER.md` — read it in full before continuing.**
+Headline: Mathematics EB is COMPLETE (908/908, do not re-author) but EB completion never meant
+servable content — at last measurement 334/908 concepts had actual seed assets (343
+concept/gradeBand pairs, all 343 at contract, 0 short, 0 never-quizzable). Three domains taken to
+100% this campaign (`math.cat` 15/15, `math.abst` 37/37); `math.alg` opened and advanced to
+24/59, the active frontier. Re-measure everything with `npx tsx scripts/assets/contract-audit.ts
+--subject mathematics` before trusting any number here — this line will go stale the moment
+either campaign pushes again.
+
 ## Biology end-user readiness program (2026-09-20, owner-scoped, in progress — un-paused by
 ## explicit fresh instruction naming Biology; math/CS remain paused above)
 Full Wave 0 audit, findings, and next-wave plan: `docs/architecture/BIOLOGY_READINESS_AUDIT.md`
