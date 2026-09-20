@@ -77,10 +77,12 @@
  * contract. Batch 8 (bio.micro, 6 concepts, 2026-09-20): the eighth
  * domain closed, same mechanism, same contract. Batch 9 (bio.div, 6
  * concepts, 2026-09-20): the ninth domain closed, same mechanism, same
- * contract. Combined: 78/108 originally-authored concepts now at the
- * 3-probe floor. The remaining 30 of the 108 (`bio.plant`/`bio.repro`/
- * `bio.immuno`/`bio.sys`/`bio.biotech`/`bio.bioinfo`/`bio.dev`) are NOT
- * covered by this file and remain at 2/3 gradeable probes — a bounded, honestly
+ * contract. Batch 10 (bio.plant, 5 concepts, 2026-09-20): the tenth
+ * domain closed, same mechanism, same contract. Combined: 83/108
+ * originally-authored concepts now at the 3-probe floor. The remaining
+ * 25 of the 108 (`bio.repro`/`bio.immuno`/`bio.sys`/`bio.biotech`/
+ * `bio.bioinfo`/`bio.dev`) are NOT covered by this file and remain at
+ * 2/3 gradeable probes — a bounded, honestly
  * reported partial closure, not a claim of full biology probe-depth
  * closure. The 91 concepts added by
  * the 2026-09-14 KG extension
@@ -110,6 +112,7 @@ const srcD6 = (concept: string, what: string) => src('batch 6, bio.eco, 2026-09-
 const srcD7 = (concept: string, what: string) => src('batch 7, bio.evo, 2026-09-20', concept, what)
 const srcD8 = (concept: string, what: string) => src('batch 8, bio.micro, 2026-09-20', concept, what)
 const srcD9 = (concept: string, what: string) => src('batch 9, bio.div, 2026-09-20', concept, what)
+const srcD10 = (concept: string, what: string) => src('batch 10, bio.plant, 2026-09-20', concept, what)
 
 // ═══════════════════════════════════════════════════════════════════════════
 // BATCH BIO-D1 — bio.found (all 8 concepts) @ HIGH, PROFICIENT, short_answer
@@ -1378,6 +1381,89 @@ const BIO_D9: SeedProbe[] = [
   },
 ]
 
+// ═══════════════════════════════════════════════════════════════════════════
+// BATCH BIO-D10 — bio.plant (all 5 concepts) @ HIGH, PROFICIENT,
+// short_answer.
+// ═══════════════════════════════════════════════════════════════════════════
+
+const BIO_D10: SeedProbe[] = [
+  {
+    conceptId: 'bio.plant.plant-water-relations', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A plant is placed in soil with a very high salt concentration, giving the soil a much lower (more negative) water potential than the root hair cells. Based on how water normally enters roots by osmosis, what would happen to water movement?',
+    choices: [
+      { text: 'Water would move OUT of the root hair cells into the soil, since water moves from higher to lower water potential — the plant could wilt even in wet soil', isCorrect: true },
+      { text: 'Water would move into the roots faster than normal, since salty soil holds more water available for uptake', isCorrect: false },
+      { text: 'Water movement would be unaffected, since osmosis only depends on transpiration pull, not soil salt content', isCorrect: false },
+      { text: 'The root hair cells would actively pump water in against the gradient using ATP', isCorrect: false },
+    ],
+    correctValue: 'Water moves out of root cells into the salty soil, potentially wilting the plant',
+    targetedMisconceptions: [],
+    source: srcD10('bio.plant.plant-water-relations', 'applies the explanation’s own stated water-potential-gradient osmosis mechanism to a reversed-gradient (saline soil) scenario, distinct from the transpiration-tension mcq and the stomata-closure-cost misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.plant.photosynthesis', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'If a plant cell were artificially supplied with ATP and NADPH directly (without any light at all), could its Calvin cycle continue running, at least temporarily?',
+    choices: [
+      { text: 'Yes, temporarily — the Calvin cycle itself does not directly require light; it only requires the ATP and NADPH that light-dependent reactions normally supply', isCorrect: true },
+      { text: 'No — the Calvin cycle can only run while light is actively being absorbed by chlorophyll at the same moment', isCorrect: false },
+      { text: 'No — without light, RuBisCO becomes permanently deactivated regardless of ATP/NADPH availability', isCorrect: false },
+      { text: 'Yes, indefinitely — the Calvin cycle does not depend on the light-dependent reactions at all', isCorrect: false },
+    ],
+    correctValue: 'Yes, temporarily — the Calvin cycle needs ATP/NADPH, not light itself, directly',
+    targetedMisconceptions: [],
+    source: srcD10('bio.plant.photosynthesis', 'applies the explanation’s own stated two-stage separation (light-dependent reactions produce ATP/NADPH; the Calvin cycle consumes them) to a hypothetical-supply reasoning task, distinct from the oxygen-source mcq and the plants-respire-continuously misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.plant.mineral-nutrition', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A plant shows yellowing specifically in its newest, youngest leaves, while its older leaves remain green. Is this pattern more consistent with nitrogen deficiency or magnesium deficiency, and why?',
+    choices: [
+      { text: 'Magnesium deficiency — magnesium is not relocated from older leaves the way mobile nitrogen is, so its deficiency shows up in younger leaves first', isCorrect: true },
+      { text: 'Nitrogen deficiency — nitrogen deficiency always shows in younger leaves first, identically to magnesium', isCorrect: false },
+      { text: 'Neither — chlorosis pattern never depends on which specific mineral is deficient', isCorrect: false },
+      { text: 'Nitrogen deficiency — nitrogen is immobile and cannot be relocated within the plant at all', isCorrect: false },
+    ],
+    correctValue: 'Magnesium deficiency — it affects younger leaves, unlike mobile nitrogen',
+    targetedMisconceptions: [],
+    source: srcD10('bio.plant.mineral-nutrition', 'applies the explanation’s own stated mobile-nitrogen (older-leaf chlorosis) vs immobile-magnesium (younger-leaf chlorosis) contrast to a discrimination task, distinct from the nitrogen-specific mcq and the excess-fertiliser-osmotic-stress misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.plant.plant-growth-hormones', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A florist wants to keep cut flowers fresh for longer by delaying leaf yellowing and cell breakdown. Which hormone could help achieve this goal, and which hormone would actively work against it by promoting the opposite effect?',
+    choices: [
+      { text: 'Cytokinins would help (they delay senescence); ethylene would work against it (it promotes ripening and abscission/breakdown)', isCorrect: true },
+      { text: 'Auxins would help (they promote elongation); gibberellins would work against it (they promote dormancy)', isCorrect: false },
+      { text: 'Abscisic acid would help (it promotes growth); cytokinins would work against it (they promote stress responses)', isCorrect: false },
+      { text: 'Ethylene would help (it delays ripening); cytokinins would work against it (they promote fruit drop)', isCorrect: false },
+    ],
+    correctValue: 'Cytokinins delay senescence; ethylene promotes it',
+    targetedMisconceptions: [],
+    source: srcD10('bio.plant.plant-growth-hormones', 'applies the explanation’s own stated cytokinin (delays senescence, keeps cut flowers fresh) and ethylene (promotes ripening/abscission) functions to a florist scenario, distinct from the auxin-phototropism mcq and the auxin-root-sensitivity misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.plant.plant-respiration', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'Waterlogged plant roots become short of oxygen and switch to anaerobic respiration. What product would the root cells produce, and how does this differ from what human muscle cells produce under oxygen shortage?',
+    choices: [
+      { text: 'The plant root cells produce ethanol and CO2; human muscle cells instead produce lactic acid', isCorrect: true },
+      { text: 'Both plant root cells and human muscle cells produce lactic acid under anaerobic conditions', isCorrect: false },
+      { text: 'The plant root cells produce lactic acid; human muscle cells produce ethanol and CO2', isCorrect: false },
+      { text: 'Neither produces any distinct product — anaerobic respiration in both simply stops ATP production entirely', isCorrect: false },
+    ],
+    correctValue: 'Plants produce ethanol + CO2; animals produce lactic acid',
+    targetedMisconceptions: [],
+    source: srcD10('bio.plant.plant-respiration', 'applies the explanation’s own stated plant-vs-animal anaerobic-product distinction (ethanol+CO2 vs lactic acid) to a waterlogged-root scenario, distinct from the compensation-point mcq and the night-respiration misconception probe already on file'),
+  },
+]
+
 /**
  * Every biology probe-depth probe. One array, so `seed-knowledge-assets.ts`,
  * the cold-start bootstrap and the contract tests — all of which scan for a
@@ -1393,4 +1479,5 @@ export const BIOLOGY_DEPTH_PROBES: SeedProbe[] = [
   ...BIO_D7,
   ...BIO_D8,
   ...BIO_D9,
+  ...BIO_D10,
 ]

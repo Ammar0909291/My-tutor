@@ -240,8 +240,9 @@ async function bootstrapAssets() {
       // zero-slack shape as physics/chemistry above. Batch 1 (bio.found, 8
       // concepts) + Batch 2 (bio.cell, 14) + Batch 3 (bio.mol, 14) + Batch 4
       // (bio.physio, 8) + Batch 5 (bio.gen, 8) + Batch 6 (bio.eco, 7) + Batch 7
-      // (bio.evo, 7) + Batch 8 (bio.micro, 6) + Batch 9 (bio.div, 6) closed
-      // here — 78/108; the remaining 30 of the 108 are later batches.
+      // (bio.evo, 7) + Batch 8 (bio.micro, 6) + Batch 9 (bio.div, 6) + Batch 10
+      // (bio.plant, 5) closed here — 83/108; the remaining 25 of the 108 are
+      // later batches.
       const { BIOLOGY_DEPTH_PROBES } =
         await import('./lib/teaching/assets/biologyDepthSeedAssets')
       // English band-gap probes joined 2026-09-08. A direct production query
