@@ -81,10 +81,12 @@
  * domain closed, same mechanism, same contract. Batch 11 (bio.repro, 5
  * concepts, 2026-09-20): the eleventh domain closed, same mechanism,
  * same contract. Batch 12 (bio.immuno, 5 concepts, 2026-09-20): the
- * twelfth domain closed, same mechanism, same contract. Combined:
- * 93/108 originally-authored concepts now at the 3-probe floor. The
- * remaining 15 of the 108 (`bio.sys`/`bio.biotech`/`bio.bioinfo`/
- * `bio.dev`) are NOT covered by this file and remain at 2/3 gradeable
+ * twelfth domain closed, same mechanism, same contract. Batch 13
+ * (bio.sys, 4 concepts, 2026-09-20): the thirteenth domain closed, same
+ * mechanism, same contract. Combined: 97/108 originally-authored
+ * concepts now at the 3-probe floor. The remaining 11 of the 108
+ * (`bio.biotech`/`bio.bioinfo`/`bio.dev`) are NOT covered by this file
+ * and remain at 2/3 gradeable
  * probes — a bounded, honestly
  * reported partial closure, not a claim of full biology probe-depth
  * closure. The 91 concepts added by
@@ -118,6 +120,7 @@ const srcD9 = (concept: string, what: string) => src('batch 9, bio.div, 2026-09-
 const srcD10 = (concept: string, what: string) => src('batch 10, bio.plant, 2026-09-20', concept, what)
 const srcD11 = (concept: string, what: string) => src('batch 11, bio.repro, 2026-09-20', concept, what)
 const srcD12 = (concept: string, what: string) => src('batch 12, bio.immuno, 2026-09-20', concept, what)
+const srcD13 = (concept: string, what: string) => src('batch 13, bio.sys, 2026-09-20', concept, what)
 
 // ═══════════════════════════════════════════════════════════════════════════
 // BATCH BIO-D1 — bio.found (all 8 concepts) @ HIGH, PROFICIENT, short_answer
@@ -1639,6 +1642,74 @@ const BIO_D12: SeedProbe[] = [
   },
 ]
 
+// ═══════════════════════════════════════════════════════════════════════════
+// BATCH BIO-D13 — bio.sys (all 4 concepts) @ UNDERGRADUATE, PROFICIENT,
+// short_answer.
+// ═══════════════════════════════════════════════════════════════════════════
+
+const BIO_D13: SeedProbe[] = [
+  {
+    conceptId: 'bio.sys.systems-biology-intro', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A metabolic network has a "bow-tie" topology: many different input reactions converge onto a few central hub reactions, which then diverge again into many different output pathways. Systems biology predicts this structure is BOTH robust AND fragile. Explain both properties for this same topology.',
+    choices: [
+      { text: 'Robust to loss of peripheral (input/output) reactions, since alternative routes exist there; fragile at the central hub reactions themselves, since everything funnels through them with no alternative', isCorrect: true },
+      { text: 'Robust everywhere in the network, since bow-tie topology has no weak points by definition', isCorrect: false },
+      { text: 'Fragile everywhere in the network, since convergence always creates system-wide vulnerability', isCorrect: false },
+      { text: 'Robust only at the hub reactions, and fragile only at the peripheral input/output reactions', isCorrect: false },
+    ],
+    correctValue: 'Robust at the periphery (redundant routes); fragile at the hub (no redundancy)',
+    targetedMisconceptions: [],
+    source: srcD13('bio.sys.systems-biology-intro', 'applies the explanation’s own stated bow-tie robustness/fragility principle ("the same topology that makes metabolism efficient makes it vulnerable to hub-enzyme loss") to a two-part reasoning task, distinct from the feedback-loop-oscillation mcq and the multi-omics-data-is-not-systems-biology misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.sys.gene-regulatory-networks', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'Two genetically identical cells in the same tissue, exposed to the exact same signal, end up committing to two different, stable cell fates. If a bistable toggle-switch motif (two mutually repressing transcription factors) underlies this decision, what most likely explains the different outcomes?',
+    choices: [
+      { text: 'Stochastic fluctuations gave one transcription factor a slight head start in each cell, and the mutually-repressing toggle switch then locked each cell into whichever stable state that head start favoured', isCorrect: true },
+      { text: 'The two cells must actually have different genomes, despite appearing genetically identical', isCorrect: false },
+      { text: 'The toggle switch always settles into the same state regardless of any fluctuations, so an external signal difference must be responsible', isCorrect: false },
+      { text: 'This outcome is impossible — identical genomes and identical signals always guarantee an identical cell fate', isCorrect: false },
+    ],
+    correctValue: 'Stochastic fluctuations determine which stable state the bistable switch settles into',
+    targetedMisconceptions: [],
+    source: srcD13('bio.sys.gene-regulatory-networks', 'applies the explanation’s own stated stochastic-fluctuation/bistable-toggle-switch mechanism ("which state a particular cell adopts depends on stochastic fluctuations... identical genomes produce different phenotypes") to a cell-fate-divergence scenario, distinct from the transient-pulse mcq and the wiring-diagram-is-not-predictive misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.sys.metabolic-network-modelling', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'Standard Flux Balance Analysis (FBA) predicts that a particular reaction CAN carry flux based on stoichiometry alone, but in the actual cell that reaction never occurs under the tested condition because the enzyme catalysing it is never expressed. What limitation of standard FBA does this reveal?',
+    choices: [
+      { text: 'FBA does not incorporate regulatory constraints — it evaluates stoichiometric feasibility only, without knowing whether the corresponding gene/enzyme is actually expressed under the modelled condition', isCorrect: true },
+      { text: 'FBA always requires kinetic parameters, and this reaction simply has incorrect kinetic data entered', isCorrect: false },
+      { text: 'This reveals a coding error in the model, not a general limitation of the FBA method itself', isCorrect: false },
+      { text: 'FBA cannot model any reaction that involves an enzyme at all, only spontaneous reactions', isCorrect: false },
+    ],
+    correctValue: 'FBA ignores regulatory (gene-expression) constraints, only checking stoichiometric feasibility',
+    targetedMisconceptions: [],
+    source: srcD13('bio.sys.metabolic-network-modelling', 'applies the explanation’s own stated regulatory-constraint limitation ("regulatory constraints... the model carries reactions without knowing if they are expressed") to a specific unexpressed-enzyme scenario, distinct from the gene-essentiality-knockout mcq and the dynamic-time-course misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.sys.synthetic-biology', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A student inserts a single fluorescent-protein gene into E. coli, making the bacteria glow, and calls this "synthetic biology." Using the explanation\'s own distinguishing criteria, is this an accurate label?',
+    choices: [
+      { text: 'No — this is closer to basic genetic engineering (a one-off gene transfer); true synthetic biology requires systems-level design of multi-component circuits with defined logical behaviour, built using engineering methodology (standardised parts, predictive modelling)', isCorrect: true },
+      { text: 'Yes — inserting any new gene into an organism, regardless of complexity, is by definition synthetic biology', isCorrect: false },
+      { text: 'No — this cannot be either genetic engineering or synthetic biology, since no new species was created', isCorrect: false },
+      { text: 'Yes — because the fluorescent protein gene did not originate in E. coli naturally, its insertion counts as designing a system from scratch', isCorrect: false },
+    ],
+    correctValue: 'No — a single gene transfer is genetic engineering, not systems-level synthetic biology',
+    targetedMisconceptions: [],
+    source: srcD13('bio.sys.synthetic-biology', 'applies the explanation’s own stated distinguishing criteria (systems-level circuit design plus engineering methodology, vs. one-off gene transfer) to a single-gene-insertion scenario, distinct from the toggle-switch-bistability mcq and the genome-synthesis-is-not-creating-life misconception probe already on file'),
+  },
+]
+
 /**
  * Every biology probe-depth probe. One array, so `seed-knowledge-assets.ts`,
  * the cold-start bootstrap and the contract tests — all of which scan for a
@@ -1657,4 +1728,5 @@ export const BIOLOGY_DEPTH_PROBES: SeedProbe[] = [
   ...BIO_D10,
   ...BIO_D11,
   ...BIO_D12,
+  ...BIO_D13,
 ]
