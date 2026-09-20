@@ -228,19 +228,15 @@ probe-depth campaign is now COMPLETE: 108/108 at the 3-probe contract floor.** T
 2026-09-14-KG-extension concepts remain a SEPARATE, larger, not-yet-started task (see below).
 Formal EB
 authoring started 2026-09-20 at the KG root, `bio.found.what-is-biology`, then continued in
-strict KG-prerequisite order through 38 concepts total (`educational-brain/concepts/biology/`,
+strict KG-prerequisite order through 41 concepts total (`educational-brain/concepts/biology/`,
 no Blueprint exists for biology as a subject; 2 entries, `scientific-method-in-biology` and
-`unifying-themes-in-biology`, are for ZERO-seed-content concepts; a third recomputed frontier
-added `bio.evo.origin-of-life`, `bio.eco.nutrient-cycling`, `bio.mol.proteins-structure`
-(`nutrient-cycling` records a genuine KG-description-vs-seed-content gap as Curriculum
-Feedback rather than fabricating content); a fourth recomputed frontier added
-`bio.evo.evidence-for-evolution`, `bio.mol.enzymes`, `bio.cell.mitosis`; a fifth recomputed
-frontier added `bio.cell.meiosis`, `bio.evo.natural-selection`,
-`bio.repro.asexual-reproduction`; a sixth recomputed frontier added
-`bio.gen.mendelian-genetics`, `bio.mol.bioenergetics`, `bio.eco.biodiversity-conservation`;
-the latest 3 — `bio.gen.gene-interactions`, `bio.micro.microbial-diversity`,
-`bio.eco.environmental-issues` — are a seventh recomputed topological frontier after the
-35-concept baseline) — **EB is 38/199**. These two
+`unifying-themes-in-biology`, are for ZERO-seed-content concepts; one entry,
+`bio.eco.nutrient-cycling`, records a genuine KG-description-vs-seed-content gap as Curriculum
+Feedback rather than fabricating content). Authored via 8 successive batches of 3, each
+recomputing the fresh topologically-ready frontier from the prior baseline — see COVERAGE.md's
+biology row for the full per-batch concept list; the latest batch (from the 38-concept baseline)
+added `bio.micro.pathogenic-microbes`, `bio.div.cladistics-phylogenetic-thinking`,
+`bio.gen.chromosomal-theory-linkage` — **EB is 41/199**. These two
 counters are tracked and reported SEPARATELY, never conflated — see `COVERAGE.md`'s biology row. The 91 concepts from the 2026-09-14 KG extension still have zero
 seed content of any kind. Continue via the audit doc's own §11 priority order for probe-depth,
 and strict KG-prerequisite order (not alphabetical) for EB authoring.
