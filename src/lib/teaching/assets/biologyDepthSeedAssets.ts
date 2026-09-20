@@ -69,9 +69,10 @@
  * 2026-09-20): the third domain closed, same mechanism, same contract —
  * the subject's largest domain by concept count (tied with bio.cell).
  * Batch 4 (bio.physio, 8 concepts, 2026-09-20): the fourth domain
- * closed, same mechanism, same contract. Combined: 44/108
- * originally-authored concepts now at the 3-probe floor. The remaining
- * 64 of the 108 (`bio.eco`/`bio.gen`/`bio.evo`/`bio.micro`/`bio.plant`/
+ * closed, same mechanism, same contract. Batch 5 (bio.gen, 8 concepts,
+ * 2026-09-20): the fifth domain closed, same mechanism, same contract.
+ * Combined: 52/108 originally-authored concepts now at the 3-probe floor.
+ * The remaining 56 of the 108 (`bio.eco`/`bio.evo`/`bio.micro`/`bio.plant`/
  * `bio.repro`/`bio.immuno`/`bio.sys`/`bio.biotech`/`bio.bioinfo`/
  * `bio.dev`/`bio.div`) are NOT covered by this file and remain at 2/3
  * gradeable probes — a bounded, honestly reported partial closure, not a
@@ -98,6 +99,7 @@ const srcD1 = (concept: string, what: string) => src('batch 1, bio.found, 2026-0
 const srcD2 = (concept: string, what: string) => src('batch 2, bio.cell, 2026-09-20', concept, what)
 const srcD3 = (concept: string, what: string) => src('batch 3, bio.mol, 2026-09-20', concept, what)
 const srcD4 = (concept: string, what: string) => src('batch 4, bio.physio, 2026-09-20', concept, what)
+const srcD5 = (concept: string, what: string) => src('batch 5, bio.gen, 2026-09-20', concept, what)
 
 // ═══════════════════════════════════════════════════════════════════════════
 // BATCH BIO-D1 — bio.found (all 8 concepts) @ HIGH, PROFICIENT, short_answer
@@ -798,6 +800,139 @@ const BIO_D4: SeedProbe[] = [
   },
 ]
 
+// ═══════════════════════════════════════════════════════════════════════════
+// BATCH BIO-D5 — bio.gen (all 8 concepts) @ PROFICIENT, short_answer.
+// 5 of 8 at gradeBand HIGH (mendelian-genetics, gene-interactions,
+// chromosomal-theory-linkage, pedigree-human-genetics, mutations); 3 at
+// UNDERGRADUATE (population-genetics, genetic-engineering,
+// transposable-elements) — matching each concept's own existing pair
+// exactly, per the same per-(concept, gradeBand) rule established in
+// Batch 2.
+// ═══════════════════════════════════════════════════════════════════════════
+
+const BIO_D5: SeedProbe[] = [
+  {
+    conceptId: 'bio.gen.mendelian-genetics', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A pea plant heterozygous for both seed shape (Rr, round dominant) and seed colour (Yy, yellow dominant) is self-pollinated (RrYy × RrYy). Assuming independent assortment, what fraction of the offspring are expected to be round AND yellow?',
+    choices: [
+      { text: '9/16 — the dihybrid ratio 9:3:3:1 gives 9/16 showing both dominant phenotypes together', isCorrect: true },
+      { text: '3/4 — the same fraction as a single Rr × Rr cross, since colour does not affect shape', isCorrect: false },
+      { text: '1/2 — half of all offspring inherit at least one dominant allele of each gene', isCorrect: false },
+      { text: '1/16 — only the doubly homozygous dominant genotype counts as round and yellow', isCorrect: false },
+    ],
+    correctValue: '9/16',
+    targetedMisconceptions: [],
+    source: srcD5('bio.gen.mendelian-genetics', 'extends the explanation’s own stated Law of Independent Assortment from the single-trait 3:1 monohybrid ratio already tested to a two-trait dihybrid cross, distinct from the Tt×Tt monohybrid-ratio mcq and the dominant-means-common misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.gen.gene-interactions', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'In Labrador retrievers, coat colour depends on two genes: the B locus (B=black, b=brown) and the E locus (E=pigment deposited, e=no pigment deposited, giving yellow regardless of the B genotype). A dog has the genotype bbee. What colour will it be, and why does its B-locus genotype not determine the outcome?',
+    choices: [
+      { text: 'Yellow — being ee at the epistatic E locus blocks pigment deposition entirely, masking whatever the B locus would otherwise produce', isCorrect: true },
+      { text: 'Brown — the bb genotype always determines coat colour regardless of the E locus', isCorrect: false },
+      { text: 'Black — E and B loci combine their effects additively, so ee cancels out to the dominant colour', isCorrect: false },
+      { text: 'This genotype is impossible, since a dog cannot be homozygous recessive at two loci at once', isCorrect: false },
+    ],
+    correctValue: 'Yellow, because ee at the epistatic locus masks the B locus',
+    targetedMisconceptions: [],
+    source: srcD5('bio.gen.gene-interactions', 'applies the explanation’s own stated epistasis example (Labrador coat colour, E locus masking B locus) as a genotype-to-phenotype inference task, distinct from the AB-blood-type/codominance mcq and the identical-twins-differ/reaction-norm misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.gen.chromosomal-theory-linkage', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'Two genes are mapped 12 centimorgans apart on the same chromosome. Based on how genetic map distance relates to crossing-over frequency, what percentage of offspring would be expected to show a recombinant (non-parental) combination of these two genes?',
+    choices: [
+      { text: '12% — one centimorgan is defined as a 1% recombination frequency, so 12 map units apart predicts about 12% recombinants', isCorrect: true },
+      { text: '0% — genes on the same chromosome are always inherited together with no exceptions', isCorrect: false },
+      { text: '50% — any two linked genes recombine exactly as often as unlinked genes', isCorrect: false },
+      { text: '88% — map distance is inversely proportional to recombination frequency', isCorrect: false },
+    ],
+    correctValue: '12%',
+    targetedMisconceptions: [],
+    source: srcD5('bio.gen.chromosomal-theory-linkage', 'applies the explanation’s own stated centimorgan/recombination-frequency relationship (from Morgan’s crossing-over work) as a quantitative reasoning task, distinct from the X-linked-recessive-haemophilia mcq and this concept’s existing misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.gen.pedigree-human-genetics', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'In a pedigree, two unaffected parents (each a carrier) have one child affected by an autosomal recessive disorder. What is the probability that their next child will also be affected?',
+    choices: [
+      { text: '1/4 — both parents are Aa carriers, so a Punnett square gives a 1/4 chance of aa regardless of the previous child’s outcome', isCorrect: true },
+      { text: '0 — since one child is already affected, the recessive allele has been "used up" and cannot appear again', isCorrect: false },
+      { text: '1/2 — having one affected child makes each subsequent child equally likely to be affected or a carrier', isCorrect: false },
+      { text: '3/4 — most children of two carriers are expected to be affected', isCorrect: false },
+    ],
+    correctValue: '1/4',
+    targetedMisconceptions: [],
+    source: srcD5('bio.gen.pedigree-human-genetics', 'applies the explanation’s own stated carrier-cross probability rules to a fresh autosomal-recessive probability calculation independent of any earlier birth, distinct from the X-linked-recessive-father/daughters-carriers mcq and the autosomal-dominant-every-generation misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.gen.mutations', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A karyotype shows an individual with three copies of chromosome 21 instead of the usual two. Which category of mutation does this fall under, and what is this specific condition called?',
+    choices: [
+      { text: 'A chromosomal mutation — specifically aneuploidy (trisomy 21), causing Down syndrome', isCorrect: true },
+      { text: 'A gene (point) mutation — specifically a substitution affecting chromosome 21', isCorrect: false },
+      { text: 'A frameshift mutation caused by insertion of extra genetic material', isCorrect: false },
+      { text: 'This is not a mutation at all, since no DNA sequence has changed', isCorrect: false },
+    ],
+    correctValue: 'A chromosomal mutation (aneuploidy) — trisomy 21, Down syndrome',
+    targetedMisconceptions: [],
+    source: srcD5('bio.gen.mutations', 'applies the explanation’s own stated aneuploidy/trisomy examples (Down, Turner, Klinefelter syndromes) as a classification task distinguishing chromosomal from gene-level mutations, distinct from the single-nucleotide-insertion-frameshift mcq and the most-mutations-are-neutral misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.gen.population-genetics', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A population of 20 individuals is nearly wiped out by a natural disaster, leaving only 2 survivors whose allele frequencies happen to differ greatly, purely by chance, from the original population. Which evolutionary force does this scenario illustrate?',
+    choices: [
+      { text: 'Genetic drift (a bottleneck effect) — a random, chance-driven shift in allele frequencies, most powerful in small populations', isCorrect: true },
+      { text: 'Natural selection — the survivors must have been better adapted than those who died', isCorrect: false },
+      { text: 'Gene flow — new alleles have migrated into the population from elsewhere', isCorrect: false },
+      { text: 'Mutation — the disaster directly caused new mutations in the two survivors', isCorrect: false },
+    ],
+    correctValue: 'Genetic drift (bottleneck effect)',
+    targetedMisconceptions: [],
+    source: srcD5('bio.gen.population-genetics', 'applies the explanation’s own stated bottleneck-effect/genetic-drift fact ("most powerful in small populations") to a disaster scenario, distinct from the cystic-fibrosis carrier-frequency Hardy-Weinberg mcq and the dominant-alleles-always-increase misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.gen.genetic-engineering', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'Before a gene of interest can be inserted into a plasmid vector, it is first amplified by PCR. Where must the primers used in this PCR reaction bind?',
+    choices: [
+      { text: 'To short complementary sequences flanking each side of the gene of interest, one primer per strand, defining the region to be amplified', isCorrect: true },
+      { text: 'Directly to the restriction enzyme recognition site inside the plasmid vector, not the gene itself', isCorrect: false },
+      { text: 'Anywhere on the template, since Taq polymerase can begin synthesis without a primer', isCorrect: false },
+      { text: 'Only to the antibiotic-resistance marker gene, to confirm successful uptake before amplifying the gene of interest', isCorrect: false },
+    ],
+    correctValue: 'To sequences flanking the gene of interest, one primer per strand',
+    targetedMisconceptions: [],
+    source: srcD5('bio.gen.genetic-engineering', 'applies the explanation’s own stated PCR mechanism (primers, thermostable polymerase, thermal cycling) to a primer-design application task, distinct from the sticky-ends-facilitate-ligation mcq and the E.-coli-insulin-identity misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.gen.transposable-elements', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A Class II DNA transposon moves using a "cut-and-paste" mechanism via the enzyme transposase, unlike a Class I retrotransposon\'s "copy-and-paste" mechanism. Does the DNA transposon\'s movement increase its own copy number in the genome the way retrotransposition does?',
+    choices: [
+      { text: 'No — cut-and-paste excises the element from its original site and reinserts it elsewhere, so it relocates rather than reliably increasing in copy number, unlike retrotransposition’s copy-and-paste mechanism', isCorrect: true },
+      { text: 'Yes — both mechanisms are functionally identical and always increase copy number equally', isCorrect: false },
+      { text: 'Yes — cut-and-paste always duplicates the element before removing the original copy', isCorrect: false },
+      { text: 'No — DNA transposons cannot actually move at all, only retrotransposons can', isCorrect: false },
+    ],
+    correctValue: 'No — cut-and-paste relocates the element; only copy-and-paste (retrotransposition) reliably increases copy number',
+    targetedMisconceptions: [],
+    source: srcD5('bio.gen.transposable-elements', 'applies the explanation’s own stated Class I (copy-and-paste, increases copy number) vs Class II (cut-and-paste) distinction to a copy-number reasoning task, distinct from the retrotransposon-mechanism mcq and the jumping-genes-randomly-destroy-genome misconception probe already on file'),
+  },
+]
+
 /**
  * Every biology probe-depth probe. One array, so `seed-knowledge-assets.ts`,
  * the cold-start bootstrap and the contract tests — all of which scan for a
@@ -808,4 +943,5 @@ export const BIOLOGY_DEPTH_PROBES: SeedProbe[] = [
   ...BIO_D2,
   ...BIO_D3,
   ...BIO_D4,
+  ...BIO_D5,
 ]

@@ -239,8 +239,8 @@ async function bootstrapAssets() {
       // 2 gradeable probes against the 3-probe contract — the identical
       // zero-slack shape as physics/chemistry above. Batch 1 (bio.found, 8
       // concepts) + Batch 2 (bio.cell, 14) + Batch 3 (bio.mol, 14) + Batch 4
-      // (bio.physio, 8) closed here — 44/108; the remaining 64 of the 108
-      // are later batches.
+      // (bio.physio, 8) + Batch 5 (bio.gen, 8) closed here — 52/108; the
+      // remaining 56 of the 108 are later batches.
       const { BIOLOGY_DEPTH_PROBES } =
         await import('./lib/teaching/assets/biologyDepthSeedAssets')
       // English band-gap probes joined 2026-09-08. A direct production query
