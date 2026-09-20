@@ -6614,3 +6614,22 @@ detail in `COVERAGE.md` Batch 250. Validated: KG PASS, state.ts 895/908, tsc cle
 
 Fresh frontier for Batch 251 (5 concepts): math.cat.adjunction/functor-category/limits,
 math.cx.riemann-surface/riemann-zeta. Campaign continues under the same active `/loop`.
+
+## Batch 251 (2026-09-20)
+
+Authored `riemann-surface` (multivaluedness signals the wrong domain, never a patchable quirk;
+the Riemann surface is a genuine new geometric domain, never mere notation; branch points produce
+genuinely finite structures, never assuming every function needs log z's infinite helix) and
+`riemann-zeta` (the pole at s=1 is an honest report of genuine divergence, never a mysterious
+introduced gap; the Euler product is a genuine analytic bridge relying on unique factorization,
+never a cosmetic rewrite; the Riemann Hypothesis is open, never proven however overwhelming its
+numerical support). Both flagged a reverse-direction discrepancy: each Blueprint's Component 7
+recorded its cross-link target (`math.top.covering-space`, `math.nt.riemann-hypothesis`
+respectively) as not-yet-authored at blueprint-writing time; direct verification confirms both are
+now authored — documented in each file's Curriculum Feedback section, same class of discrepancy as
+prior batches. Mathematics **897/908** (895→897), 11 remaining. **math.cx now 31/31 authored —
+CERTIFIED, the 23rd EB-certified domain.** Full detail in `COVERAGE.md` Batch 251. Validated: KG
+PASS, state.ts 897/908, tsc clean, tests 561/561. Commit `8f7bd38`, pushed.
+
+Fresh frontier for Batch 252 (3 concepts, all math.cat): math.cat.adjunction/functor-category/
+limits. Campaign continues under the same active `/loop`.

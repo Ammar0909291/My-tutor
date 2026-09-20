@@ -18805,3 +18805,28 @@ reachable), state.ts confirms 895/908 (still 22 certified domains, unchanged), t
 
 Fresh frontier for Batch 251 (5 concepts): math.cat.adjunction/functor-category/limits,
 math.cx.riemann-surface/riemann-zeta. Campaign continues under the same active `/loop`.
+
+## Batch 251 (2026-09-20) — 2 reverse-direction discrepancies (documented, non-blocking)
+
+Authored `math.cx.riemann-surface` (multivaluedness signals the wrong domain, never a patchable
+quirk fixable by a principal-branch convention; the Riemann surface is a genuine new geometric
+domain built by gluing sheets, never mere notational bookkeeping; branch points like √z's produce
+genuinely finite structures that close up after finitely many loops, never assuming every
+multivalued function needs log z's infinite never-closing helix) and `math.cx.riemann-zeta` (the
+simple pole at s=1 is an honest report of the harmonic series's genuine divergence there, never a
+mysterious gap the continuation introduces; the Euler product is a genuine analytic bridge relying
+specifically on unique factorization, never a cosmetic rewrite of the same sum; the Riemann
+Hypothesis remains a genuinely open conjecture, never a proven theorem however overwhelming its
+numerical support). Both Blueprints' Component 7 recorded their cross-link targets
+(`math.top.covering-space`, `math.nt.riemann-hypothesis`) as not-yet-authored at blueprint-writing
+time and set independence mode accordingly; direct verification against the live EB corpus
+confirms both targets are now authored — a reverse-direction discrepancy (same class as
+repeatedly documented earlier in this campaign), noted in each file's Curriculum Feedback section;
+the EB content itself remains fully accurate to each Blueprint's worked examples and misconception
+registry. Mathematics **895/908 → 897/908**, 11 remaining. **math.cx now 31/31 authored —
+CERTIFIED, the 23rd EB-certified domain.** Validated: KG PASS (908/908 reachable), state.ts
+confirms 897/908 and 23 certified domains (up from 22). tsc clean, tests 561/561. Commit
+`8f7bd38`, pushed.
+
+Fresh frontier for Batch 252 (3 concepts, all math.cat): math.cat.adjunction/functor-category/
+limits. Campaign continues under the same active `/loop`.
