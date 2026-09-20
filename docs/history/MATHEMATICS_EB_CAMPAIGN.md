@@ -6487,3 +6487,21 @@ Fresh frontier for Batch 243 (11 concepts): math.cat.adjunction/functor-category
 math.cx.analytic-continuation/cauchy-goursat/conformal-mapping/essential-singularity/
 laurent-series/liouville-theorem/maximum-modulus/morera-theorem. Campaign continues under the
 same active `/loop`.
+
+## Batch 243 (2026-09-20)
+
+Authored `liouville-theorem` (the proof is a single decisive application of Cauchy's inequality
+at n=1 letting R→∞, never a new technique; the contrapositive certifies unboundedness
+immediately, never requiring direct growth analysis; sin(z)/cos(z) are genuinely unbounded on ℂ,
+never a contradiction) and `morera-theorem` (the theorem requires only every triangle, never
+every closed contour; uniform limits of holomorphic functions are holomorphic, a genuine payoff
+never obvious by real-analysis analogy; the proof mechanism is a path-independent antiderivative
+construction, never direct derivative computation). Both zero discrepancy. Mathematics
+**881/908** (879→881), 27 remaining. math.cx now 15/31 authored (still far from certified).
+Full detail in `COVERAGE.md` Batch 243. Validated: KG PASS, state.ts 881/908, tsc clean, tests
+561/561. Commit `9eb415b`, pushed.
+
+Fresh frontier for Batch 244 (10 concepts): math.cat.adjunction/functor-category/limits,
+math.cx.analytic-continuation/cauchy-goursat/conformal-mapping/essential-singularity/
+fundamental-theorem-algebra/laurent-series/maximum-modulus. Campaign continues under the same
+active `/loop`.
