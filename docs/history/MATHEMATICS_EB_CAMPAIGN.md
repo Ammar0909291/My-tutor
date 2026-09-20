@@ -6633,3 +6633,17 @@ PASS, state.ts 897/908, tsc clean, tests 561/561. Commit `8f7bd38`, pushed.
 
 Fresh frontier for Batch 252 (3 concepts, all math.cat): math.cat.adjunction/functor-category/
 limits. Campaign continues under the same active `/loop`.
+
+## Batch 252 (2026-09-20)
+
+Authored `functor-category` (functors are objects, natural transformations are morphisms, never
+the reverse; composition is built pointwise, never a single opaque whole-transformation
+operation; the category axioms are inherited pointwise from D's own, never automatic from naming)
+and `limits` (limit-preservation is a genuine non-automatic property of a functor, never assumed
+free; universality requires a unique factoring map, never merely some map; discrete diagrams are
+one shape among many, never assuming every limit is a product). Both zero discrepancy. Mathematics
+**899/908** (897→899), 9 remaining. Full detail in `COVERAGE.md` Batch 252. Validated: KG PASS,
+state.ts 899/908, tsc clean, tests 561/561. Commit `6ec6495`, pushed.
+
+Fresh frontier for Batch 253 (5 concepts, all math.cat): math.cat.adjunction/equalizer/pullback/
+tensor-product/yoneda-lemma. Campaign continues under the same active `/loop`.

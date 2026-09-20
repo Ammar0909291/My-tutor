@@ -18830,3 +18830,22 @@ confirms 897/908 and 23 certified domains (up from 22). tsc clean, tests 561/561
 
 Fresh frontier for Batch 252 (3 concepts, all math.cat): math.cat.adjunction/functor-category/
 limits. Campaign continues under the same active `/loop`.
+
+## Batch 252 (2026-09-20) — zero discrepancy
+
+Authored `math.cat.functor-category` (functors are objects and natural transformations are
+morphisms in [C,D], never the reverse; composition is built pointwise, one component at a time
+using D's own composition, never a single opaque whole-transformation operation; the category
+axioms are inherited pointwise from D's own already-established axioms, never automatic just from
+naming objects and morphisms) and `math.cat.limits` (limit-preservation is a genuine, separate
+property of a functor requiring its own verification, never automatic from being a well-defined
+functor; universality specifically requires a UNIQUE factoring map for every other cone, never
+merely the existence of some map; discrete diagrams (giving products) are one diagram shape among
+many — equalizers, pullbacks, and pushouts come from genuinely different non-discrete shapes,
+never assuming every limit is a product). Both zero discrepancy (neither concept has cross-links
+per the KG). Mathematics **897/908 → 899/908**, 9 remaining. Validated: KG PASS (908/908
+reachable), state.ts confirms 899/908 (still 23 certified domains, unchanged), tsc clean, tests
+561/561. Commit `6ec6495`, pushed.
+
+Fresh frontier for Batch 253 (5 concepts, all math.cat): math.cat.adjunction/equalizer/pullback/
+tensor-product/yoneda-lemma. Campaign continues under the same active `/loop`.
