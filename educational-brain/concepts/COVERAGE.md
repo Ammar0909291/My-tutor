@@ -18785,3 +18785,23 @@ domains, unchanged), tsc clean, tests 561/561. Commit `0847789`, pushed.
 Fresh frontier for Batch 250 (7 concepts): math.cat.adjunction/functor-category/limits,
 math.cx.mobius-transformation/riemann-mapping/riemann-surface/riemann-zeta. Campaign continues
 under the same active `/loop`.
+
+## Batch 250 (2026-09-20) — zero discrepancy
+
+Authored `math.cx.mobius-transformation` (composition of Möbius transformations is direct 2x2
+matrix multiplication, never lacking a systematic formula; exactly three prescribed points
+uniquely determine the transformation via its three complex degrees of freedom, never two
+underdetermined or four overdetermined; circle-and-line preservation covers both circles and
+lines as generalized circles on the Riemann sphere, never circles only) and
+`math.cx.riemann-mapping` (the theorem's hypotheses — simply connected and proper — are genuine
+restrictions, never satisfied by every open subset of ℂ; uniqueness of the guaranteed
+biholomorphism requires exactly three real normalizing conditions spent against a genuine
+3-real-parameter family, never automatic; both hypotheses are load-bearing, proven via concrete
+Liouville-based and topological counterexamples, never minor technical fine print). Both zero
+discrepancy (neither concept has cross-links per the KG). Mathematics **893/908 → 895/908**, 13
+remaining. math.cx now 29/31 authored (still far from certified). Validated: KG PASS (908/908
+reachable), state.ts confirms 895/908 (still 22 certified domains, unchanged), tsc clean, tests
+561/561. Commit `8135945`, pushed.
+
+Fresh frontier for Batch 251 (5 concepts): math.cat.adjunction/functor-category/limits,
+math.cx.riemann-surface/riemann-zeta. Campaign continues under the same active `/loop`.

@@ -6599,3 +6599,18 @@ clean, tests 561/561. Commit `0847789`, pushed.
 Fresh frontier for Batch 250 (7 concepts): math.cat.adjunction/functor-category/limits,
 math.cx.mobius-transformation/riemann-mapping/riemann-surface/riemann-zeta. Campaign continues
 under the same active `/loop`.
+
+## Batch 250 (2026-09-20)
+
+Authored `mobius-transformation` (composition is direct matrix multiplication, never lacking a
+systematic formula; exactly three prescribed points determine the transformation, never two or
+four; circle-and-line preservation covers both as generalized circles, never circles only) and
+`riemann-mapping` (the hypotheses simply-connected and proper are genuine restrictions, never
+satisfied by every open subset; uniqueness requires exactly three real normalizing conditions,
+never automatic; both hypotheses are load-bearing, never minor technical fine print). Both zero
+discrepancy. Mathematics **895/908** (893→895), 13 remaining. math.cx now 29/31 authored. Full
+detail in `COVERAGE.md` Batch 250. Validated: KG PASS, state.ts 895/908, tsc clean, tests
+561/561. Commit `8135945`, pushed.
+
+Fresh frontier for Batch 251 (5 concepts): math.cat.adjunction/functor-category/limits,
+math.cx.riemann-surface/riemann-zeta. Campaign continues under the same active `/loop`.
