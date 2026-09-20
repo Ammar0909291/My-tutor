@@ -80,10 +80,12 @@
  * contract. Batch 10 (bio.plant, 5 concepts, 2026-09-20): the tenth
  * domain closed, same mechanism, same contract. Batch 11 (bio.repro, 5
  * concepts, 2026-09-20): the eleventh domain closed, same mechanism,
- * same contract. Combined: 88/108 originally-authored concepts now at
- * the 3-probe floor. The remaining 20 of the 108 (`bio.immuno`/
- * `bio.sys`/`bio.biotech`/`bio.bioinfo`/`bio.dev`) are NOT covered by
- * this file and remain at 2/3 gradeable probes — a bounded, honestly
+ * same contract. Batch 12 (bio.immuno, 5 concepts, 2026-09-20): the
+ * twelfth domain closed, same mechanism, same contract. Combined:
+ * 93/108 originally-authored concepts now at the 3-probe floor. The
+ * remaining 15 of the 108 (`bio.sys`/`bio.biotech`/`bio.bioinfo`/
+ * `bio.dev`) are NOT covered by this file and remain at 2/3 gradeable
+ * probes — a bounded, honestly
  * reported partial closure, not a claim of full biology probe-depth
  * closure. The 91 concepts added by
  * the 2026-09-14 KG extension
@@ -115,6 +117,7 @@ const srcD8 = (concept: string, what: string) => src('batch 8, bio.micro, 2026-0
 const srcD9 = (concept: string, what: string) => src('batch 9, bio.div, 2026-09-20', concept, what)
 const srcD10 = (concept: string, what: string) => src('batch 10, bio.plant, 2026-09-20', concept, what)
 const srcD11 = (concept: string, what: string) => src('batch 11, bio.repro, 2026-09-20', concept, what)
+const srcD12 = (concept: string, what: string) => src('batch 12, bio.immuno, 2026-09-20', concept, what)
 
 // ═══════════════════════════════════════════════════════════════════════════
 // BATCH BIO-D1 — bio.found (all 8 concepts) @ HIGH, PROFICIENT, short_answer
@@ -1549,6 +1552,93 @@ const BIO_D11: SeedProbe[] = [
   },
 ]
 
+// ═══════════════════════════════════════════════════════════════════════════
+// BATCH BIO-D12 — bio.immuno (all 5 concepts) @ PROFICIENT, short_answer.
+// 3 of 5 at gradeBand HIGH (innate-adaptive-immunity, antibody-
+// structure-function, vaccination-immunisation); 2 at UNDERGRADUATE
+// (immune-disorders, mhc-antigen-presentation) — matching each
+// concept's own existing pair exactly, per the same per-(concept,
+// gradeBand) rule established in Batch 2.
+// ═══════════════════════════════════════════════════════════════════════════
+
+const BIO_D12: SeedProbe[] = [
+  {
+    conceptId: 'bio.immuno.innate-adaptive-immunity', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'Innate immune cells detect pathogens using Pattern Recognition Receptors (PRRs) that bind Pathogen-Associated Molecular Patterns (PAMPs). Why don\'t these receptors mistakenly trigger an immune attack against the body\'s own healthy cells?',
+    choices: [
+      { text: 'PAMPs are conserved molecular features specific to pathogens (such as bacterial cell wall components) that are simply absent from human cells, so PRRs have nothing to bind on healthy self-tissue', isCorrect: true },
+      { text: 'PRRs are only activated by antibodies, which never bind self-tissue under any circumstances', isCorrect: false },
+      { text: 'Human cells actively produce PAMPs to suppress their own PRRs from activating', isCorrect: false },
+      { text: 'PRRs only exist on cells outside the body, such as on the skin surface, so they never encounter internal healthy cells', isCorrect: false },
+    ],
+    correctValue: 'PAMPs are pathogen-specific features absent from human cells',
+    targetedMisconceptions: [],
+    source: srcD12('bio.immuno.innate-adaptive-immunity', 'applies the explanation’s own stated PRR/PAMP mechanism ("PRRs... detect conserved pathogen features... absent from human cells") to a self-vs-nonself reasoning task, distinct from the dendritic-cell-bridging mcq and the innate-doesn’t-stop misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.immuno.antibody-structure-function', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'The human immune system can produce roughly a million to ten million different antibodies, each recognising a different epitope, despite the human genome containing far fewer genes than that. How is this enormous diversity generated?',
+    choices: [
+      { text: 'VDJ recombination — genetic rearrangement of a limited set of antibody gene segments during B cell development, generating combinatorial diversity far exceeding the number of genes involved', isCorrect: true },
+      { text: 'Each antibody is encoded by its own separate, dedicated gene, one gene per antibody type', isCorrect: false },
+      { text: 'Antibody diversity comes entirely from random mutations acquired after birth, unrelated to any genetic mechanism', isCorrect: false },
+      { text: 'All antibodies share an identical variable region; diversity exists only in the constant region', isCorrect: false },
+    ],
+    correctValue: 'VDJ recombination generates combinatorial diversity from limited gene segments',
+    targetedMisconceptions: [],
+    source: srcD12('bio.immuno.antibody-structure-function', 'applies the explanation’s own stated diversity-generation mechanism ("diversity created by VDJ recombination") to a quantitative-puzzle reasoning task, distinct from the IgG-placenta-crossing mcq and the antibodies-directly-kill misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.immuno.vaccination-immunisation', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A tetanus vaccine protects against the toxin produced by Clostridium tetani bacteria, not against the bacteria itself. Which type of vaccine is this, and why does it make sense to target the toxin rather than the bacterium?',
+    choices: [
+      { text: 'A toxoid vaccine — tetanus disease symptoms are caused by the bacterial toxin, so neutralising the toxin with antibodies protects the patient regardless of the bacteria\'s presence', isCorrect: true },
+      { text: 'A live-attenuated vaccine — weakened Clostridium tetani bacteria are used to stimulate a strong, long-lasting immune response', isCorrect: false },
+      { text: 'An mRNA vaccine — cells are instructed to produce the toxin protein internally for immune recognition', isCorrect: false },
+      { text: 'An inactivated vaccine — killed whole bacteria are used to trigger antibody production against the bacterial cell wall', isCorrect: false },
+    ],
+    correctValue: 'A toxoid vaccine, targeting the toxin that actually causes disease symptoms',
+    targetedMisconceptions: [],
+    source: srcD12('bio.immuno.vaccination-immunisation', 'applies the explanation’s own stated toxoid-vaccine category ("Toxoid... tetanus, diphtheria: protects against toxins not the bacteria themselves") to a mechanism-reasoning task, distinct from the mRNA-nucleus mcq and the herd-immunity misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.immuno.immune-disorders', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A patient\'s own immune system attacks and destroys their pancreatic beta cells, eliminating the body\'s ability to produce insulin. Which broad category of immune disorder does this represent, and how does it differ mechanistically from an allergic reaction?',
+    choices: [
+      { text: 'An autoimmune disease (Type 1 diabetes) — caused by a failure of immune tolerance leading the system to attack the body\'s own tissue, mechanistically distinct from allergy, which is an IgE-mediated overreaction to a normally harmless foreign substance', isCorrect: true },
+      { text: 'An allergic reaction — the pancreas is simply being treated as an allergen by mast cells and IgE antibodies', isCorrect: false },
+      { text: 'An immunodeficiency — the immune system is too weak to protect the pancreatic cells from ordinary cellular wear', isCorrect: false },
+      { text: 'There is no meaningful distinction — all immune disorders share the exact same underlying mechanism', isCorrect: false },
+    ],
+    correctValue: 'Autoimmune disease — a tolerance failure, mechanistically distinct from allergy',
+    targetedMisconceptions: [],
+    source: srcD12('bio.immuno.immune-disorders', 'applies the explanation’s own stated autoimmune-disease category (Type 1 diabetes, tolerance failure) contrasted against its own allergy category (IgE-mediated hypersensitivity) as a discrimination task, distinct from the IgE/mast-cell mcq and the HIV-CD4-destruction misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.immuno.mhc-antigen-presentation', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A kidney transplant recipient\'s immune system begins attacking the transplanted organ, even though the donor kidney is healthy and functioning normally. Based on how MHC restriction works, why does this happen?',
+    choices: [
+      { text: 'The recipient\'s T cells recognise the donor\'s MHC molecules, which differ from the recipient\'s own (allogeneic MHC), as foreign, triggering an immune attack against the transplanted tissue', isCorrect: true },
+      { text: 'The donor kidney lacks MHC molecules entirely, making it automatically appear foreign to the recipient\'s T cells', isCorrect: false },
+      { text: 'The recipient\'s T cells only attack the kidney because it physically resembles a bacterial infection site', isCorrect: false },
+      { text: 'Transplant rejection is unrelated to MHC and is caused instead by a mismatch in blood type alone', isCorrect: false },
+    ],
+    correctValue: 'T cells recognise the donor’s differing (allogeneic) MHC as foreign',
+    targetedMisconceptions: [],
+    source: srcD12('bio.immuno.mhc-antigen-presentation', 'applies the explanation’s own stated MHC-restriction/transplant-rejection mechanism ("this is why transplant rejection occurs — the recipient’s T cells see donor MHC as foreign") to a kidney-transplant scenario, distinct from the liver-cell-viral-infection mcq and the free-bacterium-detection misconception probe already on file'),
+  },
+]
+
 /**
  * Every biology probe-depth probe. One array, so `seed-knowledge-assets.ts`,
  * the cold-start bootstrap and the contract tests — all of which scan for a
@@ -1566,4 +1656,5 @@ export const BIOLOGY_DEPTH_PROBES: SeedProbe[] = [
   ...BIO_D9,
   ...BIO_D10,
   ...BIO_D11,
+  ...BIO_D12,
 ]
