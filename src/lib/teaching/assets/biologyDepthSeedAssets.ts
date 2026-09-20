@@ -74,9 +74,10 @@
  * Batch 6 (bio.eco, 7 concepts, 2026-09-20): the sixth domain closed,
  * same mechanism, same contract. Batch 7 (bio.evo, 7 concepts,
  * 2026-09-20): the seventh domain closed, same mechanism, same
- * contract. Combined: 66/108 originally-authored concepts now at the
- * 3-probe floor. The remaining 42 of the 108
- * (`bio.micro`/`bio.plant`/`bio.repro`/`bio.immuno`/`bio.sys`/
+ * contract. Batch 8 (bio.micro, 6 concepts, 2026-09-20): the eighth
+ * domain closed, same mechanism, same contract. Combined: 72/108
+ * originally-authored concepts now at the 3-probe floor. The remaining
+ * 36 of the 108 (`bio.plant`/`bio.repro`/`bio.immuno`/`bio.sys`/
  * `bio.biotech`/`bio.bioinfo`/`bio.dev`/`bio.div`) are NOT covered by
  * this file and remain at 2/3 gradeable probes — a bounded, honestly
  * reported partial closure, not a claim of full biology probe-depth
@@ -106,6 +107,7 @@ const srcD4 = (concept: string, what: string) => src('batch 4, bio.physio, 2026-
 const srcD5 = (concept: string, what: string) => src('batch 5, bio.gen, 2026-09-20', concept, what)
 const srcD6 = (concept: string, what: string) => src('batch 6, bio.eco, 2026-09-20', concept, what)
 const srcD7 = (concept: string, what: string) => src('batch 7, bio.evo, 2026-09-20', concept, what)
+const srcD8 = (concept: string, what: string) => src('batch 8, bio.micro, 2026-09-20', concept, what)
 
 // ═══════════════════════════════════════════════════════════════════════════
 // BATCH BIO-D1 — bio.found (all 8 concepts) @ HIGH, PROFICIENT, short_answer
@@ -1173,6 +1175,108 @@ const BIO_D7: SeedProbe[] = [
   },
 ]
 
+// ═══════════════════════════════════════════════════════════════════════════
+// BATCH BIO-D8 — bio.micro (all 6 concepts) @ PROFICIENT, short_answer.
+// 4 of 6 at gradeBand HIGH (microbial-diversity, microbial-growth-
+// culture, pathogenic-microbes, microbes-in-human-welfare); 2 at
+// UNDERGRADUATE (viral-replication, horizontal-gene-transfer) —
+// matching each concept's own existing pair exactly, per the same
+// per-(concept, gradeBand) rule established in Batch 2.
+// ═══════════════════════════════════════════════════════════════════════════
+
+const BIO_D8: SeedProbe[] = [
+  {
+    conceptId: 'bio.micro.microbial-diversity', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'Two bacterial species look nearly identical under a microscope — same shape, same Gram stain result — but are later found to be genetically very different when their genomes are compared. Which identification method would have revealed this difference that morphology and staining missed?',
+    choices: [
+      { text: 'Molecular methods, such as 16S rRNA gene sequencing, which compare genetic sequence directly rather than visible physical traits', isCorrect: true },
+      { text: 'A more powerful light microscope, since higher magnification always resolves genetic differences', isCorrect: false },
+      { text: 'A second Gram stain test, repeated for confirmation', isCorrect: false },
+      { text: 'Culture characteristics alone, since colony appearance always reflects genetic identity precisely', isCorrect: false },
+    ],
+    correctValue: 'Molecular methods (16S rRNA sequencing)',
+    targetedMisconceptions: [],
+    source: srcD8('bio.micro.microbial-diversity', 'applies the explanation’s own stated identification-method hierarchy (morphology/culture/biochemical/molecular) to a case where morphology fails and molecular methods succeed, distinct from the prokaryote-identification mcq and the most-bacteria-are-harmless misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.micro.microbial-growth-culture', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A bacterial culture starts with 100 cells in exponential (log) phase and doubles every 20 minutes. Approximately how many cells will be present after 1 hour (3 doublings), assuming growth stays exponential the whole time?',
+    choices: [
+      { text: '800 cells — 100 → 200 → 400 → 800, doubling three times in 60 minutes', isCorrect: true },
+      { text: '300 cells — the population simply adds 100 cells per doubling period', isCorrect: false },
+      { text: '400 cells — the population doubles only once per hour regardless of the stated doubling time', isCorrect: false },
+      { text: '100 cells — the population size only changes once stationary phase is reached', isCorrect: false },
+    ],
+    correctValue: '800 cells',
+    targetedMisconceptions: [],
+    source: srcD8('bio.micro.microbial-growth-culture', 'applies the explanation’s own stated doubling-time/geometric-growth mechanism (illustrated there with E. coli’s 20-minute doubling time) as a worked quantitative task, distinct from the exponential-phase-identification mcq and the stationary-phase-division-continues misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.micro.pathogenic-microbes', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A patient has a fungal infection (candidiasis). Why can\'t the same antibiotics that treat bacterial infections also effectively and safely treat this fungal infection?',
+    choices: [
+      { text: 'Fungi are eukaryotes, like human cells — they lack the specific prokaryotic features (cell wall type, 70S ribosomes) that antibiotics are designed to target, so a different drug class (antifungals) is needed', isCorrect: true },
+      { text: 'Fungal infections are always less serious than bacterial ones, so antibiotics are simply not prescribed for them', isCorrect: false },
+      { text: 'Antibiotics only work on infections located in the bloodstream, not on the skin or mucous membranes', isCorrect: false },
+      { text: 'Fungi are actually a type of virus, and antibiotics are known to have no effect on any virus', isCorrect: false },
+    ],
+    correctValue: 'Fungi are eukaryotic, lacking the prokaryotic targets antibiotics exploit',
+    targetedMisconceptions: [],
+    source: srcD8('bio.micro.pathogenic-microbes', 'applies the explanation’s own stated reasoning for prokaryote-targeted antibiotic selectivity to a fungal (eukaryotic) pathogen, extending the concept’s bacteria-vs-human-cell contrast to a THIRD pathogen category, distinct from the bacteria-focused mcq and the influenza-antibiotics misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.micro.microbes-in-human-welfare', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'Pseudomonas bacteria are used to break down hydrocarbon pollutants after an oil spill. Which application of microbes in human welfare does this best illustrate?',
+    choices: [
+      { text: 'Bioremediation — using microbes to metabolise and clean up environmental pollutants', isCorrect: true },
+      { text: 'Agriculture — improving soil fertility for crop growth', isCorrect: false },
+      { text: 'Food production — fermenting raw materials into edible products', isCorrect: false },
+      { text: 'Medicine — genetically engineering microbes to produce therapeutic proteins', isCorrect: false },
+    ],
+    correctValue: 'Bioremediation',
+    targetedMisconceptions: [],
+    source: srcD8('bio.micro.microbes-in-human-welfare', 'applies the explanation’s own stated bioremediation example (Pseudomonas breaking down oil-spill hydrocarbons) as an application-category identification task, distinct from the Rhizobium-agriculture mcq and the eliminate-all-bacteria misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.micro.viral-replication', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'HIV is an RNA virus that must convert its RNA genome into DNA before that DNA can integrate into the host cell\'s chromosome. Which enzyme carries out this conversion, and why is this direction of information flow unusual compared to the typical DNA→RNA→protein pattern?',
+    choices: [
+      { text: 'Reverse transcriptase — it runs the usual DNA-to-RNA information flow in reverse (RNA to DNA), which is why it is called "reverse" transcriptase', isCorrect: true },
+      { text: 'DNA polymerase — the same enzyme that copies DNA during ordinary host-cell replication, with no reversal of information flow involved', isCorrect: false },
+      { text: 'RNA polymerase — it directly reads host DNA to produce more viral RNA copies, following the standard direction of information flow', isCorrect: false },
+      { text: 'Ribosomal RNA — it physically converts RNA into DNA during translation', isCorrect: false },
+    ],
+    correctValue: 'Reverse transcriptase — reverses the typical DNA-to-RNA information flow',
+    targetedMisconceptions: [],
+    source: srcD8('bio.micro.viral-replication', 'applies the explanation’s own stated fact ("RNA viruses (e.g. HIV) require reverse transcriptase to convert RNA→DNA before integration") to a naming-plus-significance reasoning task, distinct from the lysogenic-cycle-integration mcq and the antibiotics-no-viral-metabolism misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.micro.horizontal-gene-transfer', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A bacterium takes up naked DNA fragments directly from its surrounding environment — for example, DNA released by a nearby lysed cell — with no direct cell-to-cell contact and no bacteriophage involved. Which horizontal gene transfer mechanism is this?',
+    choices: [
+      { text: 'Transformation — uptake of naked environmental DNA', isCorrect: true },
+      { text: 'Transduction — DNA transfer requires a bacteriophage vector, which is absent here', isCorrect: false },
+      { text: 'Conjugation — direct cell-to-cell transfer via a pilus, which is absent here', isCorrect: false },
+      { text: 'Binary fission — this is a form of asexual reproduction, not gene transfer between organisms', isCorrect: false },
+    ],
+    correctValue: 'Transformation',
+    targetedMisconceptions: [],
+    source: srcD8('bio.micro.horizontal-gene-transfer', 'applies the explanation’s own stated three-mechanism typology (transformation/transduction/conjugation) to a no-vector, no-contact scenario identifying transformation specifically, distinct from the transduction-bacteriophage-vector mcq and the adaptive-mutation misconception probe already on file'),
+  },
+]
+
 /**
  * Every biology probe-depth probe. One array, so `seed-knowledge-assets.ts`,
  * the cold-start bootstrap and the contract tests — all of which scan for a
@@ -1186,4 +1290,5 @@ export const BIOLOGY_DEPTH_PROBES: SeedProbe[] = [
   ...BIO_D5,
   ...BIO_D6,
   ...BIO_D7,
+  ...BIO_D8,
 ]
