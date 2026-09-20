@@ -11,7 +11,7 @@
  *   physics      →  docs/physics/kg/graph.json           (216 concepts)
  *   chemistry    →  docs/chemistry/kg/graph.json         (186 concepts)
  *   computer_science → docs/computer-science/kg/graph.json (119 concepts)
- *   biology      →  docs/biology/kg/graph.json            (89 concepts)
+ *   biology      →  docs/biology/kg/graph.json           (199 concepts, 18 domains)
  *   english      →  docs/english/kg/graph.json           (216 concepts)
  *
  * Adding a new subject: drop a graph.json under docs/{subject}/kg/ and add
@@ -245,6 +245,8 @@ function domainLabel(domain: string): string {
     'bio.bioinfo': 'Bioinformatics',
     'bio.sys':     'Systems Biology',
     'bio.div':     'Biodiversity',
+    'bio.neuro':   'Neuroscience',
+    'bio.behav':   'Behavioral Biology',
     // ── 54-node KG domain keys (legacy / other subjects) ─────────────────────
     arithmetic:          'Arithmetic',
     number_systems:      'Number Systems',
@@ -393,6 +395,8 @@ const DOMAIN_LABEL_I18N: Record<string, { ru: string; hi: string }> = {
   'Bioinformatics':                  { ru: 'Биоинформатика',                      hi: 'जैव सूचना विज्ञान' },
   'Systems Biology':                 { ru: 'Системная биология',                  hi: 'तंत्र जीव विज्ञान' },
   'Biodiversity':                    { ru: 'Биоразнообразие',                     hi: 'जैव विविधता' },
+  'Neuroscience':                    { ru: 'Нейробиология',                       hi: 'तंत्रिका विज्ञान' },
+  'Behavioral Biology':              { ru: 'Биология поведения',                  hi: 'व्यवहार जीव विज्ञान' },
   // ── Legacy / other subjects ───────────────────────────────────────────────
   'Number Systems':            { ru: 'Системы счисления',              hi: 'संख्या प्रणाली' },
   'Integers':                  { ru: 'Целые числа',                    hi: 'पूर्णांक' },

@@ -234,6 +234,13 @@ async function bootstrapAssets() {
       // when not — so the zero-slack pool is not subject-specific.
       const { CHEMISTRY_DEPTH_PROBES } =
         await import('./lib/teaching/assets/chemistryDepthSeedAssets')
+      // Biology probe-depth probes joined 2026-09-20. `contract-audit.ts`
+      // found all 108 originally-authored biology concepts stuck at exactly
+      // 2 gradeable probes against the 3-probe contract — the identical
+      // zero-slack shape as physics/chemistry above. Batch 1 (bio.found, 8
+      // concepts) closed here; the remaining 100 of the 108 are a later batch.
+      const { BIOLOGY_DEPTH_PROBES } =
+        await import('./lib/teaching/assets/biologyDepthSeedAssets')
       // English band-gap probes joined 2026-09-08. A direct production query
       // found ALL 214 of 216 English (concept, band) pairs holding exactly 2
       // ACTIVE closed-choice probes against the 3-probe contract — the same
@@ -548,7 +555,7 @@ async function bootstrapAssets() {
         ...MATHEMATICS_CIRCLES_TRANSFORM_EXPLANATIONS, ...MATHEMATICS_VECTORS_CONICS_EXPLANATIONS,
         ...MATHEMATICS_DIFF_GEOM_EXPLANATIONS, ...MATHEMATICS_BAND_GAP_EXPLANATIONS]
       const ALL_PROBES = [...SEED_PROBES, ...AUTHORED_PROBES, ...CHEMISTRY_PROBES, ...PHYSICS_BAND_GAP_PROBES,
-        ...PHYSICS_DEPTH_PROBES, ...CHEMISTRY_DEPTH_PROBES, ...ENGLISH_BAND_GAP_PROBES,
+        ...PHYSICS_DEPTH_PROBES, ...CHEMISTRY_DEPTH_PROBES, ...BIOLOGY_DEPTH_PROBES, ...ENGLISH_BAND_GAP_PROBES,
         ...ENGLISH_PROBE_BATCH_1, ...ENGLISH_BATCH_1_DEPTH_4, ...ENGLISH_PROBE_BATCH_2,
         ...ENGLISH_PROBE_BATCH_3, ...ENGLISH_PROBE_BATCH_4, ...ENGLISH_PROBE_BATCH_5,
         ...ENGLISH_PROBE_BATCH_6, ...ENGLISH_PROBE_BATCH_7, ...ENGLISH_PROBE_BATCH_8, ...ENGLISH_PROBE_BATCH_9,

@@ -186,14 +186,29 @@ npx tsc --noEmit       # pre-existing stripe/subscription errors are expected on
   `npx tsx scripts/brain/seed-knowledge-assets.ts --draft --dry-run`
 
 ## Current campaign — "fix physics/english/chemistry" (owner-scoped, in progress)
-Owner instruction: fix physics, english, chemistry; biology/computer_science/mathematics content
-work is explicitly PAUSED (do not resume without a fresh instruction). Chemistry and physics are
+Owner instruction: fix physics, english, chemistry; computer_science/mathematics content work
+remains explicitly PAUSED (do not resume without a fresh instruction). Chemistry and physics are
 content-complete at asset-contract (186/186, 261/261) — remaining work there is defect-hunting
 only. English is at 321/412 asset-contract pairs (91 short, mostly ADULT-band `eng.composition/
 communication/linguistics/literature/phonetics/vocab/writing` advanced tiers) — both close the
 gap AND defect-hunt the servable 321. Full running log, known-open defects (ASCII-art fallback
 figures, the content-free hold, the still-unresolved C7 repeat channel), and the saturated-account
 finding above: `docs/history/subject-onboarding-and-fix-campaign.md`.
+
+## Biology end-user readiness program (2026-09-20, owner-scoped, in progress — un-paused by
+## explicit fresh instruction naming Biology; math/CS remain paused above)
+Full Wave 0 audit, findings, and next-wave plan: `docs/architecture/BIOLOGY_READINESS_AUDIT.md`
+(read this before continuing). Headline: production held 0 EXPLANATION/PROBE rows for biology
+despite 108 concepts being authored, because a P-10 abandoned-legacy-slug guard in
+`src/instrumentation.ts` had been aborting the ENTIRE cross-subject asset bootstrap (all
+subjects, not just biology) on every cold start since >=2026-09-15 — 45 live Mathematics rows,
+fixed via the exact reversible status-only precedent in `docs/CLAUDE_HANDOVER.md` §9r/§9s, then
+verified via two forced redeploys (bootstrap now runs its real write path instead of aborting).
+Probe-depth Batch 1 (`biologyDepthSeedAssets.ts`, the 8 `bio.found` concepts) closes the same
+zero-slack defect physics/chemistry already had: every one of biology's 108 authored concepts
+was stuck at 2/3 gradeable probes, so no biology lesson could ever reach verified mastery — now
+8/108 at contract. EB is 0/199; the 91 concepts from the prior session's KG extension have zero
+seed content at all. Continue via the audit doc's own §11 priority order.
 
 ## Full history index
 Every dated campaign, incident, and defect investigation this project has ever recorded is
