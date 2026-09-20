@@ -65,12 +65,15 @@
  * domain, authored first for the same reason every other subject's
  * depth-fix and Educational Brain campaigns close one domain at a time.
  * Batch 2 (bio.cell, 14 concepts, 2026-09-20): the second domain closed,
- * same mechanism, same contract. Combined: 22/108 originally-authored
- * concepts now at the 3-probe floor. The remaining 86 of the 108
- * (`bio.eco`/`bio.mol`/`bio.micro`/... through `bio.div`) are NOT covered
- * by this file and remain at 2/3 gradeable probes — a bounded, honestly
- * reported partial closure, not a claim of full biology probe-depth
- * closure. The 91 concepts added by the 2026-09-14 KG extension
+ * same mechanism, same contract. Batch 3 (bio.mol, 14 concepts,
+ * 2026-09-20): the third domain closed, same mechanism, same contract —
+ * the subject's largest domain by concept count (tied with bio.cell).
+ * Combined: 36/108 originally-authored concepts now at the 3-probe
+ * floor. The remaining 72 of the 108 (`bio.eco`/`bio.physio`/`bio.gen`/
+ * ... through `bio.div`) are NOT covered by this file and remain at 2/3
+ * gradeable probes — a bounded, honestly reported partial closure, not a
+ * claim of full biology probe-depth closure. The 91 concepts added by
+ * the 2026-09-14 KG extension
  * (`bio.neuro`, `bio.behav`, and the expansions to the 16 pre-existing
  * domains) have ZERO seed content of any kind (0 explanations, 0 probes)
  * and are a separate, larger authoring task, not a depth-fix on existing
@@ -90,6 +93,7 @@ const src = (batch: string, concept: string, what: string) =>
   `docs/biology/kg/graph.json — ${concept} (probe-depth ${batch}); ${what}`
 const srcD1 = (concept: string, what: string) => src('batch 1, bio.found, 2026-09-20', concept, what)
 const srcD2 = (concept: string, what: string) => src('batch 2, bio.cell, 2026-09-20', concept, what)
+const srcD3 = (concept: string, what: string) => src('batch 3, bio.mol, 2026-09-20', concept, what)
 
 // ═══════════════════════════════════════════════════════════════════════════
 // BATCH BIO-D1 — bio.found (all 8 concepts) @ HIGH, PROFICIENT, short_answer
@@ -439,6 +443,230 @@ const BIO_D2: SeedProbe[] = [
   },
 ]
 
+// ═══════════════════════════════════════════════════════════════════════════
+// BATCH BIO-D3 — bio.mol (all 14 concepts) @ PROFICIENT, short_answer.
+// 8 of 14 at gradeBand HIGH (biomolecule-types, carbohydrates-lipids,
+// proteins-structure, nucleic-acid-structure, enzymes, dna-replication,
+// transcription, translation-genetic-code); 6 at UNDERGRADUATE
+// (gene-regulation, epigenetics, noncoding-rna, signal-transduction-
+// pathways, dna-damage-repair, bioenergetics) — matching each concept's
+// own existing pair exactly, per the same per-(concept, gradeBand) rule
+// established in Batch 2.
+// ═══════════════════════════════════════════════════════════════════════════
+
+const BIO_D3: SeedProbe[] = [
+  {
+    conceptId: 'bio.mol.biomolecule-types', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A biochemist finds an unknown biomolecule containing carbon, hydrogen, oxygen, nitrogen, and phosphorus, but no sulfur. Based on elemental composition alone, which class of biomolecule is this most likely to be?',
+    choices: [
+      { text: 'Nucleic acid — nitrogen and phosphorus together are characteristic of nucleotides’ bases and phosphate groups', isCorrect: true },
+      { text: 'Protein — proteins are defined by containing nitrogen and phosphorus together', isCorrect: false },
+      { text: 'Carbohydrate — carbohydrates always include nitrogen from their monomer bonds', isCorrect: false },
+      { text: 'Lipid — lipids are identified by phosphorus content alone', isCorrect: false },
+    ],
+    correctValue: 'Nucleic acid',
+    targetedMisconceptions: [],
+    source: srcD3('bio.mol.biomolecule-types', 'applies the explanation’s own elemental-composition distinctions (proteins add N and S; nucleic acids add N and P) as an inference task, distinct from the nucleic-acid-function mcq and the lipids-are-just-energy-storage misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.mol.carbohydrates-lipids', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'Cholesterol (a four-ring steroid) and a triglyceride (three fatty acids plus glycerol) look structurally nothing alike, yet both are classified as lipids. What is the actual basis for grouping them together?',
+    choices: [
+      { text: 'Both are hydrophobic — lipids are defined by insolubility in water, not by sharing one chemical structure', isCorrect: true },
+      { text: 'Both are polymers built from repeating glucose monomers', isCorrect: false },
+      { text: 'Both contain nitrogen and phosphorus in their core structure', isCorrect: false },
+      { text: 'Both are found only in plant cell membranes', isCorrect: false },
+    ],
+    correctValue: 'Both are hydrophobic',
+    targetedMisconceptions: [],
+    source: srcD3('bio.mol.carbohydrates-lipids', 'applies the explanation’s own stated defining criterion for lipids ("defined by being hydrophobic, not by having a common chemical structure") to a cholesterol-vs-triglyceride contrast, distinct from the cellulose-identification mcq and the starch-vs-cellulose-digestibility misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.mol.proteins-structure', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'Haemoglobin is fully functional only when four separate polypeptide chains associate together; a single isolated chain cannot carry oxygen the same way. Which level of protein structure does this describe?',
+    choices: [
+      { text: 'Quaternary structure — two or more polypeptide chains assembling together', isCorrect: true },
+      { text: 'Primary structure — the amino acid sequence of each individual chain', isCorrect: false },
+      { text: 'Secondary structure — the alpha-helix and beta-sheet folding within one chain', isCorrect: false },
+      { text: 'Tertiary structure — the 3D fold of a single polypeptide chain alone', isCorrect: false },
+    ],
+    correctValue: 'Quaternary structure',
+    targetedMisconceptions: [],
+    source: srcD3('bio.mol.proteins-structure', 'applies the explanation’s own haemoglobin example of quaternary structure as an identification task, distinct from the primary-structure-definition mcq and the denaturation-destroys-sequence misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.mol.nucleic-acid-structure', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A sample of double-stranded DNA is found to be 22% adenine. Using Chargaff’s rules, what percentage of the DNA is guanine?',
+    choices: [
+      { text: '28% — %A = %T = 22% each, so %G + %C = 56%, split equally between G and C', isCorrect: true },
+      { text: '22% — all four bases must be present in equal amounts', isCorrect: false },
+      { text: '44% — guanine is simply the complement of adenine’s percentage', isCorrect: false },
+      { text: 'Cannot be determined from adenine’s percentage alone', isCorrect: false },
+    ],
+    correctValue: '28%',
+    targetedMisconceptions: [],
+    source: srcD3('bio.mol.nucleic-acid-structure', 'applies the explanation’s own stated Chargaff’s rules (%A=%T, %G=%C) as a quantitative reasoning task, distinct from the base-pairing mcq and the antiparallel-strands misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.mol.enzymes', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'Pepsin (a stomach enzyme) works well at pH 2, but pepsin-like activity nearly stops at pH 7, even though the enzyme molecule itself is still intact and not denatured at pH 7. What best explains this?',
+    choices: [
+      { text: 'Each enzyme has an optimum pH shaped by its active site chemistry; away from that optimum, catalytic efficiency drops even without denaturation', isCorrect: true },
+      { text: 'All enzymes require exactly pH 7 to function, and pepsin is a rare exception', isCorrect: false },
+      { text: 'pH cannot affect enzyme activity unless it causes permanent denaturation', isCorrect: false },
+      { text: 'Pepsin requires pH 2 because that is when it is manufactured, not because of its active site', isCorrect: false },
+    ],
+    correctValue: 'Each enzyme has its own pH optimum, independent of denaturation',
+    targetedMisconceptions: [],
+    source: srcD3('bio.mol.enzymes', 'applies the explanation’s own stated pH-optimum fact (pepsin at pH 2, trypsin at pH 8) to a non-denaturation activity-loss scenario, distinct from the competitive-vs-non-competitive-inhibition mcq and the enzymes-are-consumed misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.mol.dna-replication', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'DNA polymerase can only synthesise new DNA in the 5′→3′ direction, but the double helix has two antiparallel template strands. What is the direct consequence of this for how the two new strands are made at a replication fork?',
+    choices: [
+      { text: 'One new strand (leading) is synthesised continuously, while the other (lagging) is made in short Okazaki fragments later joined by ligase', isCorrect: true },
+      { text: 'Both new strands are synthesised continuously in the same direction, since polymerase reads both templates identically', isCorrect: false },
+      { text: 'One strand is made entirely by DNA polymerase and the other entirely by RNA primase', isCorrect: false },
+      { text: 'The lagging strand is simply not synthesised until after cell division', isCorrect: false },
+    ],
+    correctValue: 'Leading strand continuous; lagging strand in Okazaki fragments',
+    targetedMisconceptions: [],
+    source: srcD3('bio.mol.dna-replication', 'applies the explanation’s own stated leading/lagging-strand mechanism as a causal-reasoning task, distinct from the RNA-primer-necessity mcq and the semi-conservative-replication misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.mol.transcription', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A coding (sense) DNA strand reads 5′-ATG CGA TTC-3′. What is the sequence of the mRNA transcribed from the template strand paired with it, written 5′→3′?',
+    choices: [
+      { text: '5′-AUG CGA UUC-3′ — the mRNA matches the coding strand’s sequence, with U replacing T', isCorrect: true },
+      { text: '5′-TAC GCT AAG-3′ — the mRNA is the exact complement of the coding strand, keeping thymine', isCorrect: false },
+      { text: '5′-CUU AGC GUA-3′ — the mRNA is the coding strand read backward', isCorrect: false },
+      { text: '5′-ATG CGA TTC-3′ — the mRNA is identical to the coding DNA strand, including thymine', isCorrect: false },
+    ],
+    correctValue: '5′-AUG CGA UUC-3′',
+    targetedMisconceptions: [],
+    source: srcD3('bio.mol.transcription', 'applies the explanation’s own stated coding-strand/mRNA sequence-identity fact to a worked sequence example, distinct from the mRNA-processing mcq and the which-strand-is-read misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.mol.translation-genetic-code', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A single extra nucleotide is accidentally inserted near the start of an mRNA’s coding sequence, and no stop codon is created immediately. Given that the genetic code is read as non-overlapping triplets, what is the most likely consequence for the resulting protein?',
+    choices: [
+      { text: 'Every codon downstream of the insertion is shifted into a new reading frame, almost certainly producing a completely different, likely non-functional amino acid sequence', isCorrect: true },
+      { text: 'Only the single inserted nucleotide’s codon is affected; every codon downstream still reads normally', isCorrect: false },
+      { text: 'The ribosome automatically skips the extra nucleotide and reads the original frame correctly', isCorrect: false },
+      { text: 'Because the code is degenerate, the extra nucleotide has no effect on the protein produced', isCorrect: false },
+    ],
+    correctValue: 'A frameshift, disrupting every downstream codon',
+    targetedMisconceptions: [],
+    source: srcD3('bio.mol.translation-genetic-code', 'applies the explanation’s own stated non-overlapping-triplet-reading property to a frameshift-insertion scenario, distinct from the stop-codon/termination mcq and the degenerate-code misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.mol.gene-regulation', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A regulatory DNA sequence that increases transcription of a target gene is found 50,000 base pairs away from that gene, on the same chromosome. What kind of regulatory element does this best describe, and how can it act at such a distance?',
+    choices: [
+      { text: 'An enhancer — it can act at a distance because the DNA loops so the enhancer physically contacts the gene’s promoter region despite the large linear distance', isCorrect: true },
+      { text: 'A promoter — promoters are commonly found tens of thousands of base pairs from their gene', isCorrect: false },
+      { text: 'This cannot be a real regulatory element, since regulation only works on immediately adjacent DNA', isCorrect: false },
+      { text: 'An intron located far from a gene, regulating its transcription level', isCorrect: false },
+    ],
+    correctValue: 'An enhancer, acting via chromatin looping',
+    targetedMisconceptions: [],
+    source: srcD3('bio.mol.gene-regulation', 'applies the explanation’s own stated long-range-enhancer fact ("enhancers can be thousands of base pairs away... looping physically close") to an identification task, distinct from the lac-operon mcq and the epigenetics-changes-DNA-sequence misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.mol.epigenetics', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A researcher claims that a mother’s high-stress diet during pregnancy will permanently and reliably reprogram her grandchildren’s gene expression, based on epigenetic inheritance. Is this claim well supported by current evidence in mammals?',
+    choices: [
+      { text: 'No — most epigenetic marks are erased during gametogenesis and embryogenesis, so reliable multi-generational epigenetic inheritance in mammals is limited, not a permanent guarantee', isCorrect: true },
+      { text: 'Yes — epigenetic marks are never removed once established, so environmental effects reliably pass to every future generation', isCorrect: false },
+      { text: 'No — epigenetic marks have no effect on gene expression at all, in any generation', isCorrect: false },
+      { text: 'Yes — this is the well-established, universally accepted mechanism for all inherited traits in mammals', isCorrect: false },
+    ],
+    correctValue: 'No — transgenerational epigenetic inheritance is real but limited in mammals',
+    targetedMisconceptions: [],
+    source: srcD3('bio.mol.epigenetics', 'applies the explanation’s own stated limit on transgenerational inheritance ("most marks are erased during gametogenesis and embryogenesis") to a claim-evaluation task, distinct from the methylation-silencing mcq and the liver-vs-neuron misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.mol.noncoding-rna', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'In female mammals, one of the two X chromosomes in each cell is transcriptionally silenced by a long non-coding RNA that coats the chromosome. Which class of ncRNA is responsible for this X-chromosome inactivation, and does this fit the outdated "junk DNA" framing?',
+    choices: [
+      { text: 'lncRNA (e.g. Xist) — this is a clear functional role for non-coding RNA, directly contradicting the "junk DNA" framing', isCorrect: true },
+      { text: 'tRNA — transfer RNAs are responsible for silencing entire chromosomes', isCorrect: false },
+      { text: 'rRNA — ribosomal RNA physically binds and silences the X chromosome', isCorrect: false },
+      { text: 'This confirms non-coding RNA is functionless "junk," since no protein is produced', isCorrect: false },
+    ],
+    correctValue: 'lncRNA (Xist), contradicting the junk-DNA framing',
+    targetedMisconceptions: [],
+    source: srcD3('bio.mol.noncoding-rna', 'applies the explanation’s own named example (lncRNAs, "including X-chromosome inactivation via Xist") to an identification-plus-interpretation task, distinct from the miRNA-mechanism mcq and the junk-DNA misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.mol.signal-transduction-pathways', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A single extracellular growth factor molecule binds one receptor tyrosine kinase on a cell surface, yet within minutes thousands of intracellular protein molecules become activated in response. What property of signal transduction explains this large numerical mismatch?',
+    choices: [
+      { text: 'Signal amplification — each step of the intracellular relay (e.g. the Ras/MAP kinase cascade) can activate many downstream molecules, multiplying the effect of one initial binding event', isCorrect: true },
+      { text: 'The growth factor itself physically splits into thousands of copies once inside the cell', isCorrect: false },
+      { text: 'Thousands of receptors must have been activated simultaneously for this response to occur', isCorrect: false },
+      { text: 'This is not possible; signal transduction produces a strictly one-to-one response ratio', isCorrect: false },
+    ],
+    correctValue: 'Signal amplification through the relay cascade',
+    targetedMisconceptions: [],
+    source: srcD3('bio.mol.signal-transduction-pathways', 'applies the explanation’s own stated amplification fact ("one receptor can activate thousands of downstream molecules") as a quantitative-reasoning task, distinct from the first-messenger-identification mcq and the insulin-crosses-membrane misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.mol.dna-damage-repair', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A patient with Lynch syndrome has an inherited mutation in MLH1, a gene involved in correcting errors introduced during DNA replication, rather than in genes that repair double-strand breaks. Which DNA repair pathway is most directly disrupted?',
+    choices: [
+      { text: 'Mismatch repair (MMR) — MLH1 corrects replication errors, distinct from the double-strand break pathways (HR/NHEJ) disrupted in BRCA1/2 carriers', isCorrect: true },
+      { text: 'Homologous recombination (HR) — the same pathway disrupted in BRCA1/2 carriers', isCorrect: false },
+      { text: 'Nucleotide excision repair (NER) — the pathway for UV-induced thymine dimers', isCorrect: false },
+      { text: 'Non-homologous end joining (NHEJ) — the pathway for double-strand breaks', isCorrect: false },
+    ],
+    correctValue: 'Mismatch repair (MMR)',
+    targetedMisconceptions: [],
+    source: srcD3('bio.mol.dna-damage-repair', 'applies the explanation’s own stated MLH1/MSH2-mismatch-repair/Lynch-syndrome fact to a pathway-discrimination task distinguishing it from BRCA1/2’s own HR pathway, distinct from the thymine-dimer-repair mcq and the BRCA-without-exposure misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.mol.bioenergetics', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A cell needs to run a reaction with ΔG = +20 kJ/mol (non-spontaneous on its own) to build a large molecule. The cell couples this reaction to ATP hydrolysis (ΔG = −30.5 kJ/mol) in the same pathway. What is the outcome, and why?',
+    choices: [
+      { text: 'The combined reaction becomes spontaneous overall, since the net ΔG (+20 + (−30.5) = −10.5 kJ/mol) is negative — this is coupling, not a violation of thermodynamics', isCorrect: true },
+      { text: 'The reaction remains non-spontaneous, since ATP hydrolysis cannot influence an unrelated reaction’s spontaneity', isCorrect: false },
+      { text: 'Coupling makes the endergonic reaction’s own ΔG become negative on its own, independent of ATP', isCorrect: false },
+      { text: 'This combination violates the first law of thermodynamics by creating energy', isCorrect: false },
+    ],
+    correctValue: 'The coupled reaction is spontaneous overall (net ΔG < 0)',
+    targetedMisconceptions: [],
+    source: srcD3('bio.mol.bioenergetics', 'applies the explanation’s own stated coupled-reaction mechanism to a worked ΔG arithmetic example, distinct from the spontaneity-condition mcq and the life-violates-entropy misconception probe already on file'),
+  },
+]
+
 /**
  * Every biology probe-depth probe. One array, so `seed-knowledge-assets.ts`,
  * the cold-start bootstrap and the contract tests — all of which scan for a
@@ -447,4 +675,5 @@ const BIO_D2: SeedProbe[] = [
 export const BIOLOGY_DEPTH_PROBES: SeedProbe[] = [
   ...BIO_D1,
   ...BIO_D2,
+  ...BIO_D3,
 ]
