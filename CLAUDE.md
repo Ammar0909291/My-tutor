@@ -228,15 +228,15 @@ probe-depth campaign is now COMPLETE: 108/108 at the 3-probe contract floor.** T
 2026-09-14-KG-extension concepts remain a SEPARATE, larger, not-yet-started task (see below).
 Formal EB
 authoring started 2026-09-20 at the KG root, `bio.found.what-is-biology`, then continued in
-strict KG-prerequisite order through 32 concepts total (`educational-brain/concepts/biology/`,
+strict KG-prerequisite order through 80 concepts total (`educational-brain/concepts/biology/`,
 no Blueprint exists for biology as a subject; 2 entries, `scientific-method-in-biology` and
-`unifying-themes-in-biology`, are for ZERO-seed-content concepts; a third recomputed frontier
-added `bio.evo.origin-of-life`, `bio.eco.nutrient-cycling`, `bio.mol.proteins-structure`
-(`nutrient-cycling` records a genuine KG-description-vs-seed-content gap as Curriculum
-Feedback rather than fabricating content); a fourth recomputed frontier added
-`bio.evo.evidence-for-evolution`, `bio.mol.enzymes`, `bio.cell.mitosis`; the latest 3 —
-`bio.cell.meiosis`, `bio.evo.natural-selection`, `bio.repro.asexual-reproduction` — are a fifth
-recomputed topological frontier after the 29-concept baseline) — **EB is 32/199**. These two
+`unifying-themes-in-biology`, are for ZERO-seed-content concepts; eighteen entries — see
+COVERAGE.md's biology row for the full list — record genuine KG-description-vs-seed-content
+gaps as Curriculum Feedback rather than fabricating content). Authored via 21 successive batches
+of 3, each recomputing the fresh topologically-ready frontier from the prior baseline — see
+COVERAGE.md's biology row for the full per-batch concept list; the latest batch (from the
+77-concept baseline) added `bio.physio.endocrine-system`, `bio.physio.musculoskeletal-system`,
+`bio.cell.cytoskeleton` — **EB is 80/199**. These two
 counters are tracked and reported SEPARATELY, never conflated — see `COVERAGE.md`'s biology row. The 91 concepts from the 2026-09-14 KG extension still have zero
 seed content of any kind. Continue via the audit doc's own §11 priority order for probe-depth,
 and strict KG-prerequisite order (not alphabetical) for EB authoring.
