@@ -18450,3 +18450,29 @@ Fresh frontier for Batch 234 (9 concepts): math.cat.adjunction/functor-category/
 math.top.cohomology, plus math.cx.complex-numbers-analysis, math.fnal.distributions/
 special-functions, math.graph.random-graph, math.opt.semidefinite-programming. Campaign continues
 under the same active `/loop`.
+
+## Batch 234 (2026-09-20) — 1 discrepancy (reverse-direction) — MILESTONE: math.fnal fully
+EB-certified (19th domain, 18/18 verified before claiming)
+
+Authored `math.fnal.distributions` (the Dirac delta is a rigorous linear functional, never an
+ordinary function that's just hard to describe; every locally integrable function embeds as a
+distribution, never a disconnected framework; the weak derivative makes differentiation always
+possible, never assume a jump has no derivative at all) and `math.fnal.special-functions` (Γ(n+1)
+=n! via the same recursive relation as factorial, never a coincidental match; Bessel functions and
+orthogonal polynomials are one unified Sturm-Liouville-eigenfunction class, never unrelated;
+different domain/weight choices are one construction pattern, never independently invented
+families). Reverse-direction discrepancy on `special-functions`: Blueprint's cross-link
+`math.de.legendre-equation` was "not yet authored" at write time but is now authored — noted for
+the record (21st discrepancy this campaign), single-cross-link probe (against
+`math.de.bessel-equation`) retained as authored. `distributions` zero discrepancy (cross-link
+`math.de.greens-function` confirmed authored, cross-link-mode probe engaged per Blueprint).
+Mathematics **861/908 → 863/908**, 45 remaining. **math.fnal is now the 19th fully EB-certified
+domain** — this time explicitly verified 18/18 via direct KG-prefix count BEFORE claiming it in
+the commit message, per the correction discipline established in Batch 233's self-caught error.
+`scripts/math/state.ts` independently confirms math.fnal in its own EB-certified-domains list.
+Validated: KG PASS (908/908 reachable), state.ts confirms 863/908 and the new certified-domain
+count, tsc clean, tests 561/561. Commit `25f255b`, pushed.
+
+Fresh frontier for Batch 235 (7 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, math.cx.complex-numbers-analysis, math.graph.random-graph,
+math.opt.semidefinite-programming. Campaign continues under the same active `/loop`.

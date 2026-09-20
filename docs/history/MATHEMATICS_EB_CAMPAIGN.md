@@ -6346,3 +6346,20 @@ Fresh frontier for Batch 234 (9 concepts): math.cat.adjunction/functor-category/
 math.top.cohomology, plus math.cx.complex-numbers-analysis, math.fnal.distributions/
 special-functions, math.graph.random-graph, math.opt.semidefinite-programming. Campaign continues
 under the same active `/loop`.
+
+## Batch 234 (2026-09-20) — MILESTONE: math.fnal fully EB-certified (19th domain)
+
+Authored `distributions` (δ is a rigorous linear functional, never an ordinary function; every
+locally integrable function embeds as a distribution, never disconnected; the weak derivative
+always exists, never assume a jump has no derivative) and `special-functions` (Γ(n+1)=n! by the
+same recursion, never coincidental; Bessel functions and orthogonal polynomials are one unified
+class, never unrelated; domain/weight choices are one construction, never independently invented).
+One reverse-direction discrepancy on `special-functions` (cross-link now authored though Blueprint
+said unauthored). Mathematics **863/908** (861→863), 45 remaining. **math.fnal is now the 19th
+fully EB-certified domain** — explicitly verified 18/18 via direct count before claiming it, per
+the correction discipline from Batch 233's self-caught error. Full detail in `COVERAGE.md` Batch
+234. Validated: KG PASS, state.ts 863/908, tsc clean, tests 561/561. Commit `25f255b`, pushed.
+
+Fresh frontier for Batch 235 (7 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, math.cx.complex-numbers-analysis, math.graph.random-graph,
+math.opt.semidefinite-programming. Campaign continues under the same active `/loop`.
