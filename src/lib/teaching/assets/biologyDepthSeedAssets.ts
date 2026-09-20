@@ -72,9 +72,12 @@
  * closed, same mechanism, same contract. Batch 5 (bio.gen, 8 concepts,
  * 2026-09-20): the fifth domain closed, same mechanism, same contract.
  * Batch 6 (bio.eco, 7 concepts, 2026-09-20): the sixth domain closed,
- * same mechanism, same contract. Combined: 59/108 originally-authored
- * concepts now at the 3-probe floor. The remaining 49 of the 108
- * (`bio.evo`/`bio.micro`/`bio.plant`/`bio.repro`/`bio.immuno`/`bio.sys`/
+ * same mechanism, same contract. Batch 7 (bio.evo, 7 concepts,
+ * 2026-09-20): the seventh domain closed, same mechanism, same
+ * contract. Batch 8 (bio.micro, 6 concepts, 2026-09-20): the eighth
+ * domain closed, same mechanism, same contract. Combined: 72/108
+ * originally-authored concepts now at the 3-probe floor. The remaining
+ * 36 of the 108 (`bio.plant`/`bio.repro`/`bio.immuno`/`bio.sys`/
  * `bio.biotech`/`bio.bioinfo`/`bio.dev`/`bio.div`) are NOT covered by
  * this file and remain at 2/3 gradeable probes — a bounded, honestly
  * reported partial closure, not a claim of full biology probe-depth
@@ -103,6 +106,8 @@ const srcD3 = (concept: string, what: string) => src('batch 3, bio.mol, 2026-09-
 const srcD4 = (concept: string, what: string) => src('batch 4, bio.physio, 2026-09-20', concept, what)
 const srcD5 = (concept: string, what: string) => src('batch 5, bio.gen, 2026-09-20', concept, what)
 const srcD6 = (concept: string, what: string) => src('batch 6, bio.eco, 2026-09-20', concept, what)
+const srcD7 = (concept: string, what: string) => src('batch 7, bio.evo, 2026-09-20', concept, what)
+const srcD8 = (concept: string, what: string) => src('batch 8, bio.micro, 2026-09-20', concept, what)
 
 // ═══════════════════════════════════════════════════════════════════════════
 // BATCH BIO-D1 — bio.found (all 8 concepts) @ HIGH, PROFICIENT, short_answer
@@ -1053,6 +1058,225 @@ const BIO_D6: SeedProbe[] = [
   },
 ]
 
+// ═══════════════════════════════════════════════════════════════════════════
+// BATCH BIO-D7 — bio.evo (all 7 concepts) @ PROFICIENT, short_answer.
+// 5 of 7 at gradeBand HIGH (origin-of-life, evidence-for-evolution,
+// natural-selection, modern-synthesis-speciation, human-evolution); 2 at
+// UNDERGRADUATE (molecular-evolution, evo-devo) — matching each
+// concept's own existing pair exactly, per the same per-(concept,
+// gradeBand) rule established in Batch 2.
+// ═══════════════════════════════════════════════════════════════════════════
+
+const BIO_D7: SeedProbe[] = [
+  {
+    conceptId: 'bio.evo.origin-of-life', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A student says "evolution explains why life first appeared on Earth about 3.8 billion years ago." Is this an accurate description of what the theory of evolution explains?',
+    choices: [
+      { text: 'No — evolution explains how life CHANGED after it already existed; the origin of life (chemical evolution, the RNA World hypothesis) is a separate question about how life started', isCorrect: true },
+      { text: 'Yes — evolution and the origin of life are the same theory describing the same process', isCorrect: false },
+      { text: 'No — neither evolution nor any scientific theory addresses how life could have started', isCorrect: false },
+      { text: 'Yes — natural selection is what caused the first self-replicating molecules to form', isCorrect: false },
+    ],
+    correctValue: 'No — evolution explains change after life existed; origin of life is a separate question',
+    targetedMisconceptions: [],
+    source: srcD7('bio.evo.origin-of-life', 'applies the explanation’s own stated distinction ("origin of life is not the same as evolution") to a claim-evaluation task, distinct from the Miller-Urey-evidence mcq and the RNA-World-hypothesis misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.evo.evidence-for-evolution', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'Island species consistently resemble nearby mainland species more than they resemble other islands\' species living under similar climates far away. Which of the five lines of evidence for evolution does this pattern illustrate?',
+    choices: [
+      { text: 'Biogeography — geographic distribution of species matches ancestry (nearby relatedness) rather than matching climate similarity alone', isCorrect: true },
+      { text: 'Comparative anatomy — homologous structures reveal shared ancestry between the species being compared', isCorrect: false },
+      { text: 'Comparative embryology — similarity during early development reflects shared ancestry', isCorrect: false },
+      { text: 'The fossil record — layered rock strata show progressively simpler organisms over time', isCorrect: false },
+    ],
+    correctValue: 'Biogeography',
+    targetedMisconceptions: [],
+    source: srcD7('bio.evo.evidence-for-evolution', 'applies the explanation’s own stated biogeography line of evidence ("island species resemble nearby mainland species, not geographically distant ones") to an identification task, distinct from the homologous-structures mcq and the theory-word misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.evo.natural-selection', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'One cheetah is unusually fast but dies young from a hunting injury before raising any cubs. A slower cheetah in the same population avoids risky chases and successfully raises several litters over its lifetime. Which cheetah has the greater biological fitness?',
+    choices: [
+      { text: 'The slower cheetah — biological fitness means reproductive success in the current environment, not raw physical strength or speed', isCorrect: true },
+      { text: 'The faster cheetah — fitness in biology always means being physically the strongest or fastest individual', isCorrect: false },
+      { text: 'Neither — fitness can only be measured across an entire population, never for one individual', isCorrect: false },
+      { text: 'Both equally — fitness is unrelated to how many offspring an individual actually raises', isCorrect: false },
+    ],
+    correctValue: 'The slower cheetah — fitness means reproductive success, not strength or speed',
+    targetedMisconceptions: [],
+    source: srcD7('bio.evo.natural-selection', 'applies the explanation’s own stated correction ("fitness means reproductive success... a slower cheetah that avoids injury and lives to breed is fitter than a fast one that dies young") as a worked scenario, distinct from the beetle-camouflage mcq and the giraffe-neck-Lamarck misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.evo.modern-synthesis-speciation', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A horse and a donkey can mate and produce offspring (a mule), but the mule itself is sterile and cannot reproduce. Which category of reproductive isolating mechanism does this illustrate?',
+    choices: [
+      { text: 'Post-zygotic isolation — hybrid sterility, where fertilisation succeeds but the resulting hybrid cannot itself reproduce', isCorrect: true },
+      { text: 'Pre-zygotic isolation — the two species are prevented from mating at all by behavioural or mechanical barriers', isCorrect: false },
+      { text: 'Allopatric isolation — the horse and donkey are geographically separated and cannot physically meet', isCorrect: false },
+      { text: 'This is not a case of reproductive isolation, since fertilisation and offspring production both succeeded', isCorrect: false },
+    ],
+    correctValue: 'Post-zygotic isolation (hybrid sterility)',
+    targetedMisconceptions: [],
+    source: srcD7('bio.evo.modern-synthesis-speciation', 'applies the explanation’s own stated post-zygotic isolating mechanism example ("hybrid sterility — mule") as an identification task, distinct from the allopatric-speciation-mountain mcq and the rapid-evolution-counterexample misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.evo.human-evolution', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'Modern non-African humans carry 2-4% Neanderthal DNA in their genomes. What does this genetic evidence indicate about the relationship between early modern humans and Neanderthals during the "Out of Africa" migration?',
+    choices: [
+      { text: 'The two groups interbred at least occasionally when their populations overlapped, rather than remaining completely reproductively separate', isCorrect: true },
+      { text: 'Modern humans are directly descended from Neanderthals, who are simply an earlier stage of the same lineage', isCorrect: false },
+      { text: 'This percentage is contamination in genetic samples and reflects no real ancestral relationship', isCorrect: false },
+      { text: 'Neanderthals and modern humans never coexisted in the same geographic regions at any point', isCorrect: false },
+    ],
+    correctValue: 'They interbred at least occasionally when populations overlapped',
+    targetedMisconceptions: [],
+    source: srcD7('bio.evo.human-evolution', 'applies the explanation’s own stated Neanderthal-interbreeding evidence ("2-4% of non-African human genome is Neanderthal") as an inference task, distinct from the bipedalism-timing mcq and the humans-evolved-from-chimpanzees misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.evo.molecular-evolution', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'At a neutral genetic locus, species A and species B differ at twice the rate that species A and species C differ. Assuming the molecular clock hypothesis (neutral mutations accumulate at a roughly constant rate), which pair shares the more recent common ancestor?',
+    choices: [
+      { text: 'A and C — less sequence divergence at a neutral locus corresponds to less time since the pair last shared a common ancestor', isCorrect: true },
+      { text: 'A and B — more sequence divergence indicates a more recent common ancestor, since more time allows more changes to be observed at once', isCorrect: false },
+      { text: 'Both pairs share the same common ancestor age — divergence rate at neutral loci is unrelated to time since common ancestry', isCorrect: false },
+      { text: 'This cannot be determined without knowing which specific mutations occurred', isCorrect: false },
+    ],
+    correctValue: 'A and C — less divergence means a more recent common ancestor',
+    targetedMisconceptions: [],
+    source: srcD7('bio.evo.molecular-evolution', 'applies the explanation’s own stated molecular clock hypothesis ("sequence divergence is proportional to time since common ancestry") to a comparative divergence-rate reasoning task, distinct from the neutral-theory-driver mcq and the histone-H4-purifying-selection misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.evo.evo-devo', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A mutation changes WHEN and WHERE a particular Hox gene is expressed during development — not its protein-coding sequence — causing a fly to grow legs on its head instead of antennae. What does this demonstrate about how major morphological changes typically arise in evolution?',
+    choices: [
+      { text: 'They often result from changes in regulatory regions controlling gene expression pattern, not from changes to the protein-coding sequence of the gene itself', isCorrect: true },
+      { text: 'They require the evolution of an entirely new gene not previously present in the genome', isCorrect: false },
+      { text: 'They can only occur through changes to the protein sequence a gene encodes', isCorrect: false },
+      { text: 'This kind of dramatic morphological change cannot result from a single mutation of any kind', isCorrect: false },
+    ],
+    correctValue: 'Changes in regulatory regions controlling gene expression, not protein-coding sequence',
+    targetedMisconceptions: [],
+    source: srcD7('bio.evo.evo-devo', 'applies the explanation’s own stated regulatory-region mechanism ("major morphological changes... often result from changes in regulatory regions... not in the protein-coding sequences themselves") to the classic Hox-gene homeotic-mutation scenario, distinct from the Hox-conservation-implication mcq and the Pax6-cross-species-signal misconception probe already on file'),
+  },
+]
+
+// ═══════════════════════════════════════════════════════════════════════════
+// BATCH BIO-D8 — bio.micro (all 6 concepts) @ PROFICIENT, short_answer.
+// 4 of 6 at gradeBand HIGH (microbial-diversity, microbial-growth-
+// culture, pathogenic-microbes, microbes-in-human-welfare); 2 at
+// UNDERGRADUATE (viral-replication, horizontal-gene-transfer) —
+// matching each concept's own existing pair exactly, per the same
+// per-(concept, gradeBand) rule established in Batch 2.
+// ═══════════════════════════════════════════════════════════════════════════
+
+const BIO_D8: SeedProbe[] = [
+  {
+    conceptId: 'bio.micro.microbial-diversity', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'Two bacterial species look nearly identical under a microscope — same shape, same Gram stain result — but are later found to be genetically very different when their genomes are compared. Which identification method would have revealed this difference that morphology and staining missed?',
+    choices: [
+      { text: 'Molecular methods, such as 16S rRNA gene sequencing, which compare genetic sequence directly rather than visible physical traits', isCorrect: true },
+      { text: 'A more powerful light microscope, since higher magnification always resolves genetic differences', isCorrect: false },
+      { text: 'A second Gram stain test, repeated for confirmation', isCorrect: false },
+      { text: 'Culture characteristics alone, since colony appearance always reflects genetic identity precisely', isCorrect: false },
+    ],
+    correctValue: 'Molecular methods (16S rRNA sequencing)',
+    targetedMisconceptions: [],
+    source: srcD8('bio.micro.microbial-diversity', 'applies the explanation’s own stated identification-method hierarchy (morphology/culture/biochemical/molecular) to a case where morphology fails and molecular methods succeed, distinct from the prokaryote-identification mcq and the most-bacteria-are-harmless misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.micro.microbial-growth-culture', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A bacterial culture starts with 100 cells in exponential (log) phase and doubles every 20 minutes. Approximately how many cells will be present after 1 hour (3 doublings), assuming growth stays exponential the whole time?',
+    choices: [
+      { text: '800 cells — 100 → 200 → 400 → 800, doubling three times in 60 minutes', isCorrect: true },
+      { text: '300 cells — the population simply adds 100 cells per doubling period', isCorrect: false },
+      { text: '400 cells — the population doubles only once per hour regardless of the stated doubling time', isCorrect: false },
+      { text: '100 cells — the population size only changes once stationary phase is reached', isCorrect: false },
+    ],
+    correctValue: '800 cells',
+    targetedMisconceptions: [],
+    source: srcD8('bio.micro.microbial-growth-culture', 'applies the explanation’s own stated doubling-time/geometric-growth mechanism (illustrated there with E. coli’s 20-minute doubling time) as a worked quantitative task, distinct from the exponential-phase-identification mcq and the stationary-phase-division-continues misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.micro.pathogenic-microbes', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A patient has a fungal infection (candidiasis). Why can\'t the same antibiotics that treat bacterial infections also effectively and safely treat this fungal infection?',
+    choices: [
+      { text: 'Fungi are eukaryotes, like human cells — they lack the specific prokaryotic features (cell wall type, 70S ribosomes) that antibiotics are designed to target, so a different drug class (antifungals) is needed', isCorrect: true },
+      { text: 'Fungal infections are always less serious than bacterial ones, so antibiotics are simply not prescribed for them', isCorrect: false },
+      { text: 'Antibiotics only work on infections located in the bloodstream, not on the skin or mucous membranes', isCorrect: false },
+      { text: 'Fungi are actually a type of virus, and antibiotics are known to have no effect on any virus', isCorrect: false },
+    ],
+    correctValue: 'Fungi are eukaryotic, lacking the prokaryotic targets antibiotics exploit',
+    targetedMisconceptions: [],
+    source: srcD8('bio.micro.pathogenic-microbes', 'applies the explanation’s own stated reasoning for prokaryote-targeted antibiotic selectivity to a fungal (eukaryotic) pathogen, extending the concept’s bacteria-vs-human-cell contrast to a THIRD pathogen category, distinct from the bacteria-focused mcq and the influenza-antibiotics misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.micro.microbes-in-human-welfare', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'Pseudomonas bacteria are used to break down hydrocarbon pollutants after an oil spill. Which application of microbes in human welfare does this best illustrate?',
+    choices: [
+      { text: 'Bioremediation — using microbes to metabolise and clean up environmental pollutants', isCorrect: true },
+      { text: 'Agriculture — improving soil fertility for crop growth', isCorrect: false },
+      { text: 'Food production — fermenting raw materials into edible products', isCorrect: false },
+      { text: 'Medicine — genetically engineering microbes to produce therapeutic proteins', isCorrect: false },
+    ],
+    correctValue: 'Bioremediation',
+    targetedMisconceptions: [],
+    source: srcD8('bio.micro.microbes-in-human-welfare', 'applies the explanation’s own stated bioremediation example (Pseudomonas breaking down oil-spill hydrocarbons) as an application-category identification task, distinct from the Rhizobium-agriculture mcq and the eliminate-all-bacteria misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.micro.viral-replication', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'HIV is an RNA virus that must convert its RNA genome into DNA before that DNA can integrate into the host cell\'s chromosome. Which enzyme carries out this conversion, and why is this direction of information flow unusual compared to the typical DNA→RNA→protein pattern?',
+    choices: [
+      { text: 'Reverse transcriptase — it runs the usual DNA-to-RNA information flow in reverse (RNA to DNA), which is why it is called "reverse" transcriptase', isCorrect: true },
+      { text: 'DNA polymerase — the same enzyme that copies DNA during ordinary host-cell replication, with no reversal of information flow involved', isCorrect: false },
+      { text: 'RNA polymerase — it directly reads host DNA to produce more viral RNA copies, following the standard direction of information flow', isCorrect: false },
+      { text: 'Ribosomal RNA — it physically converts RNA into DNA during translation', isCorrect: false },
+    ],
+    correctValue: 'Reverse transcriptase — reverses the typical DNA-to-RNA information flow',
+    targetedMisconceptions: [],
+    source: srcD8('bio.micro.viral-replication', 'applies the explanation’s own stated fact ("RNA viruses (e.g. HIV) require reverse transcriptase to convert RNA→DNA before integration") to a naming-plus-significance reasoning task, distinct from the lysogenic-cycle-integration mcq and the antibiotics-no-viral-metabolism misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.micro.horizontal-gene-transfer', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A bacterium takes up naked DNA fragments directly from its surrounding environment — for example, DNA released by a nearby lysed cell — with no direct cell-to-cell contact and no bacteriophage involved. Which horizontal gene transfer mechanism is this?',
+    choices: [
+      { text: 'Transformation — uptake of naked environmental DNA', isCorrect: true },
+      { text: 'Transduction — DNA transfer requires a bacteriophage vector, which is absent here', isCorrect: false },
+      { text: 'Conjugation — direct cell-to-cell transfer via a pilus, which is absent here', isCorrect: false },
+      { text: 'Binary fission — this is a form of asexual reproduction, not gene transfer between organisms', isCorrect: false },
+    ],
+    correctValue: 'Transformation',
+    targetedMisconceptions: [],
+    source: srcD8('bio.micro.horizontal-gene-transfer', 'applies the explanation’s own stated three-mechanism typology (transformation/transduction/conjugation) to a no-vector, no-contact scenario identifying transformation specifically, distinct from the transduction-bacteriophage-vector mcq and the adaptive-mutation misconception probe already on file'),
+  },
+]
+
 /**
  * Every biology probe-depth probe. One array, so `seed-knowledge-assets.ts`,
  * the cold-start bootstrap and the contract tests — all of which scan for a
@@ -1065,4 +1289,6 @@ export const BIOLOGY_DEPTH_PROBES: SeedProbe[] = [
   ...BIO_D4,
   ...BIO_D5,
   ...BIO_D6,
+  ...BIO_D7,
+  ...BIO_D8,
 ]
