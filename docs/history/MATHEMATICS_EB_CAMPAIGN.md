@@ -6363,3 +6363,18 @@ the correction discipline from Batch 233's self-caught error. Full detail in `CO
 Fresh frontier for Batch 235 (7 concepts): math.cat.adjunction/functor-category/limits,
 math.top.cohomology, math.cx.complex-numbers-analysis, math.graph.random-graph,
 math.opt.semidefinite-programming. Campaign continues under the same active `/loop`.
+
+## Batch 235 (2026-09-20) — MILESTONE: math.graph fully EB-certified (20th domain)
+
+Authored `complex-numbers-analysis` (modulus is Pythagorean, never taxicab sum; conjugation
+negates only the imaginary part; z·z̄=|z|² always real, never confused with z²) and
+`random-graph` (expected edge count is an average, never a guarantee; a.a.s. is a limiting
+probability, never universal; the connectivity threshold is a sharp phase transition, never
+gradual). Both zero discrepancy. Mathematics **865/908** (863→865), 43 remaining. **math.graph is
+now the 20th fully EB-certified domain** — explicitly verified 16/16 before claiming it. Full
+detail in `COVERAGE.md` Batch 235. Validated: KG PASS, state.ts 865/908, tsc clean, tests
+561/561. Commit `a6690d0`, pushed.
+
+Fresh frontier for Batch 236 (6 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, math.cx.complex-function, math.opt.semidefinite-programming. Campaign
+continues under the same active `/loop`.

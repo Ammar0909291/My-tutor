@@ -18476,3 +18476,25 @@ count, tsc clean, tests 561/561. Commit `25f255b`, pushed.
 Fresh frontier for Batch 235 (7 concepts): math.cat.adjunction/functor-category/limits,
 math.top.cohomology, math.cx.complex-numbers-analysis, math.graph.random-graph,
 math.opt.semidefinite-programming. Campaign continues under the same active `/loop`.
+
+## Batch 235 (2026-09-20) — zero discrepancy — MILESTONE: math.graph fully EB-certified (20th
+domain, 16/16 verified before claiming)
+
+Authored `math.cx.complex-numbers-analysis` (the modulus is the Pythagorean distance, never the
+taxicab sum; conjugation negates only the imaginary part, never both; z·z̄=|z|² is always real,
+never confused with z², which is complex in general) and `math.graph.random-graph` (expected edge
+count is an average, never a per-graph guarantee; "asymptotically almost surely" is a limiting
+probability, never a universal claim about every finite n; the connectivity threshold is a sharp
+phase transition, never gradual). Both zero discrepancy (complex-numbers-analysis's cross-link
+`math.trig.eulers-formula` uses independence mode per its declared non-Tier-1 status, unaffected
+by authored status; random-graph's cross-link `math.prob.random-variable` confirmed authored,
+cross-link-mode probe engaged per Blueprint). Mathematics **863/908 → 865/908**, 43 remaining.
+**math.graph is now the 20th fully EB-certified domain** — explicitly verified 16/16 via direct
+KG-prefix count BEFORE claiming it in the commit message, continuing the verify-before-claim
+discipline from Batches 233-234. `scripts/math/state.ts` independently confirms math.graph in its
+own EB-certified-domains list. Validated: KG PASS (908/908 reachable), state.ts confirms 865/908
+and the new certified-domain count, tsc clean, tests 561/561. Commit `a6690d0`, pushed.
+
+Fresh frontier for Batch 236 (6 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, math.cx.complex-function, math.opt.semidefinite-programming. Campaign
+continues under the same active `/loop`.
