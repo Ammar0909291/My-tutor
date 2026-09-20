@@ -211,9 +211,12 @@ already had: every one of biology's 108 authored concepts was stuck at 2/3 grade
 no biology lesson could ever reach verified mastery — now **52/108 at contract** (56 remain, 2/3
 gradeable each). Formal EB
 authoring started 2026-09-20 at the KG root, `bio.found.what-is-biology`, then continued in
-strict KG-prerequisite order through 17 concepts total (`educational-brain/concepts/biology/`,
+strict KG-prerequisite order through 20 concepts total (`educational-brain/concepts/biology/`,
 no Blueprint exists for biology as a subject; 2 entries, `scientific-method-in-biology` and
-`unifying-themes-in-biology`, are for ZERO-seed-content concepts) — **EB is 17/199**. These two
+`unifying-themes-in-biology`, are for ZERO-seed-content concepts; the latest 3 —
+`bio.mol.biomolecule-types`, `bio.cell.nucleus-chromosomes`, `bio.cell.mitochondria-energy` —
+are the freshly recomputed topological frontier after the 17-concept baseline) —
+**EB is 20/199**. These two
 counters are tracked and reported SEPARATELY, never conflated — see `COVERAGE.md`'s biology row. The 91 concepts from the 2026-09-14 KG extension still have zero
 seed content of any kind. Continue via the audit doc's own §11 priority order for probe-depth,
 and strict KG-prerequisite order (not alphabetical) for EB authoring.
