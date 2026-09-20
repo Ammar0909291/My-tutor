@@ -71,12 +71,14 @@
  * Batch 4 (bio.physio, 8 concepts, 2026-09-20): the fourth domain
  * closed, same mechanism, same contract. Batch 5 (bio.gen, 8 concepts,
  * 2026-09-20): the fifth domain closed, same mechanism, same contract.
- * Combined: 52/108 originally-authored concepts now at the 3-probe floor.
- * The remaining 56 of the 108 (`bio.eco`/`bio.evo`/`bio.micro`/`bio.plant`/
- * `bio.repro`/`bio.immuno`/`bio.sys`/`bio.biotech`/`bio.bioinfo`/
- * `bio.dev`/`bio.div`) are NOT covered by this file and remain at 2/3
- * gradeable probes — a bounded, honestly reported partial closure, not a
- * claim of full biology probe-depth closure. The 91 concepts added by
+ * Batch 6 (bio.eco, 7 concepts, 2026-09-20): the sixth domain closed,
+ * same mechanism, same contract. Combined: 59/108 originally-authored
+ * concepts now at the 3-probe floor. The remaining 49 of the 108
+ * (`bio.evo`/`bio.micro`/`bio.plant`/`bio.repro`/`bio.immuno`/`bio.sys`/
+ * `bio.biotech`/`bio.bioinfo`/`bio.dev`/`bio.div`) are NOT covered by
+ * this file and remain at 2/3 gradeable probes — a bounded, honestly
+ * reported partial closure, not a claim of full biology probe-depth
+ * closure. The 91 concepts added by
  * the 2026-09-14 KG extension
  * (`bio.neuro`, `bio.behav`, and the expansions to the 16 pre-existing
  * domains) have ZERO seed content of any kind (0 explanations, 0 probes)
@@ -100,6 +102,7 @@ const srcD2 = (concept: string, what: string) => src('batch 2, bio.cell, 2026-09
 const srcD3 = (concept: string, what: string) => src('batch 3, bio.mol, 2026-09-20', concept, what)
 const srcD4 = (concept: string, what: string) => src('batch 4, bio.physio, 2026-09-20', concept, what)
 const srcD5 = (concept: string, what: string) => src('batch 5, bio.gen, 2026-09-20', concept, what)
+const srcD6 = (concept: string, what: string) => src('batch 6, bio.eco, 2026-09-20', concept, what)
 
 // ═══════════════════════════════════════════════════════════════════════════
 // BATCH BIO-D1 — bio.found (all 8 concepts) @ HIGH, PROFICIENT, short_answer
@@ -933,6 +936,123 @@ const BIO_D5: SeedProbe[] = [
   },
 ]
 
+// ═══════════════════════════════════════════════════════════════════════════
+// BATCH BIO-D6 — bio.eco (all 7 concepts) @ PROFICIENT, short_answer.
+// 6 of 7 at gradeBand HIGH (organism-environment, population-ecology,
+// ecosystem-structure-function, nutrient-cycling, biodiversity-
+// conservation, environmental-issues); 1 at UNDERGRADUATE (community-
+// ecology) — matching each concept's own existing pair exactly, per the
+// same per-(concept, gradeBand) rule established in Batch 2.
+// ═══════════════════════════════════════════════════════════════════════════
+
+const BIO_D6: SeedProbe[] = [
+  {
+    conceptId: 'bio.eco.organism-environment', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A person moving to high altitude develops more red blood cells within a few weeks to cope with lower oxygen levels, then loses this increase within weeks of returning to sea level. Is this an example of adaptation or acclimatisation?',
+    choices: [
+      { text: 'Acclimatisation — a short-term, reversible physiological adjustment within one lifetime, not a genetic change', isCorrect: true },
+      { text: 'Adaptation — any change that helps an organism cope with its environment counts as an adaptation', isCorrect: false },
+      { text: 'Neither — the change is too temporary to be biologically significant', isCorrect: false },
+      { text: 'Adaptation — because it directly increases the person’s chance of survival at altitude', isCorrect: false },
+    ],
+    correctValue: 'Acclimatisation — reversible, non-genetic, within one lifetime',
+    targetedMisconceptions: [],
+    source: srcD6('bio.eco.organism-environment', 'applies the explanation’s own stated adaptation-vs-acclimatisation distinction ("acclimatisation is short-term physiological adjustment within one lifetime, not genetic") to a red-blood-cell scenario, distinct from the habitat-vs-niche mcq and the competitive-exclusion misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.eco.population-ecology', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'Clownfish live among the stinging tentacles of a sea anemone, gaining protection from predators, while the anemone’s own growth and survival are not measurably affected either way. Which population interaction does this best describe?',
+    choices: [
+      { text: 'Commensalism — one species benefits (the clownfish) while the other is unaffected (the anemone)', isCorrect: true },
+      { text: 'Mutualism — both species must benefit for this to count as a real ecological interaction', isCorrect: false },
+      { text: 'Parasitism — the clownfish is harming the anemone by living on it', isCorrect: false },
+      { text: 'Competition — both species are competing for the same resource', isCorrect: false },
+    ],
+    correctValue: 'Commensalism',
+    targetedMisconceptions: [],
+    source: srcD6('bio.eco.population-ecology', 'applies the explanation’s own stated interaction typology (competition/predation/parasitism/mutualism/commensalism) to a clownfish-anemone classification task, distinct from the resource-limited-growth-curve mcq and the exponential-growth misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.eco.ecosystem-structure-function', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'Producers in a grassland ecosystem hold 10,000 units of energy. Applying the 10% law at each trophic transfer, approximately how much energy is available to a tertiary consumer (three transfers up: primary consumer, secondary consumer, tertiary consumer)?',
+    choices: [
+      { text: '10 units — 10,000 → 1,000 (primary) → 100 (secondary) → 10 (tertiary), losing about 90% at each transfer', isCorrect: true },
+      { text: '1,000 units — only one 10% loss applies regardless of how many trophic levels are crossed', isCorrect: false },
+      { text: '7,000 units — energy loss is linear (10% of the original total per level), not compounding', isCorrect: false },
+      { text: '10,000 units — energy is fully conserved as it passes up a food chain', isCorrect: false },
+    ],
+    correctValue: '10 units',
+    targetedMisconceptions: [],
+    source: srcD6('bio.eco.ecosystem-structure-function', 'applies the explanation’s own stated 10% law across three successive trophic transfers as a compounding-loss quantitative task, distinct from the single-transfer-percentage mcq and the energy-vs-matter-cycling misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.eco.nutrient-cycling', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'After nitrifying bacteria have converted ammonia into nitrites and then nitrates, which process returns nitrogen to the atmosphere as N2 gas, completing the nitrogen cycle?',
+    choices: [
+      { text: 'Denitrification, carried out by denitrifying bacteria', isCorrect: true },
+      { text: 'Nitrogen fixation, carried out by nitrogen-fixing bacteria', isCorrect: false },
+      { text: 'Decomposition, carried out by fungi breaking down dead matter', isCorrect: false },
+      { text: 'Photosynthesis, which releases nitrogen gas as a byproduct', isCorrect: false },
+    ],
+    correctValue: 'Denitrification',
+    targetedMisconceptions: [],
+    source: srcD6('bio.eco.nutrient-cycling', 'applies the explanation’s own stated full nitrogen-cycle sequence (fixation → nitrification → assimilation → decomposition → denitrification) to a completion-of-the-cycle identification task, distinct from the nitrogen-fixing-bacteria-function mcq and the energy-vs-matter-cycling misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.eco.biodiversity-conservation', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A farmer grows ten different traditional varieties of the same wheat species, each carrying different drought-tolerance genes. Which of the three levels of biodiversity does this best illustrate?',
+    choices: [
+      { text: 'Genetic diversity — variation within a single species', isCorrect: true },
+      { text: 'Species diversity — the number and evenness of different species present', isCorrect: false },
+      { text: 'Ecosystem diversity — the variety of habitats across a landscape', isCorrect: false },
+      { text: 'This does not count as biodiversity, since only one species is involved', isCorrect: false },
+    ],
+    correctValue: 'Genetic diversity',
+    targetedMisconceptions: [],
+    source: srcD6('bio.eco.biodiversity-conservation', 'applies the explanation’s own stated three-level biodiversity framework (genetic/species/ecosystem) to a within-species crop-variety scenario, distinct from the in-situ-vs-ex-situ-conservation mcq and the extinction-rate misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.eco.environmental-issues', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A large tract of forest is cleared for agriculture. Why does this single event contribute to BOTH biodiversity loss and increased atmospheric CO2, rather than being two unrelated problems?',
+    choices: [
+      { text: 'The forest was both a habitat supporting many species AND a carbon sink; clearing it destroys the habitat while also removing carbon-absorbing capacity and releasing stored carbon, driving both effects from one cause', isCorrect: true },
+      { text: 'The two effects are actually unrelated — deforestation only affects habitat, and any CO2 increase must come from a separate cause', isCorrect: false },
+      { text: 'CO2 increase directly causes biodiversity loss, so deforestation’s only real effect is on climate', isCorrect: false },
+      { text: 'Both effects only occur if the cleared land is then burned, not from clearing alone', isCorrect: false },
+    ],
+    correctValue: 'Deforestation removes both habitat and carbon-sink capacity simultaneously',
+    targetedMisconceptions: [],
+    source: srcD6('bio.eco.environmental-issues', 'applies the explanation’s own stated deforestation consequences (habitat destruction, biodiversity loss, carbon-sink removal) as a causal-mechanism task connecting two of the concept’s named issues, distinct from the eutrophication-sequence mcq and the ozone-vs-climate-change misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.eco.community-ecology', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A forest patch with occasional, moderate tree-fall disturbances has higher species diversity than either an undisturbed old-growth patch or a heavily disturbed clear-cut patch nearby. Which ecological principle does this best illustrate?',
+    choices: [
+      { text: 'The intermediate disturbance hypothesis — moderate disturbance maximises diversity by preventing competitive exclusion without eliminating species outright', isCorrect: true },
+      { text: 'The keystone species concept — one particular species must be responsible for the diversity difference', isCorrect: false },
+      { text: 'Primary succession — the patch must be recovering from bare rock with no prior soil', isCorrect: false },
+      { text: 'This pattern is coincidental and does not reflect any general ecological principle', isCorrect: false },
+    ],
+    correctValue: 'The intermediate disturbance hypothesis',
+    targetedMisconceptions: [],
+    source: srcD6('bio.eco.community-ecology', 'applies the explanation’s own stated intermediate disturbance hypothesis to a three-way disturbance-level comparison, distinct from the keystone-species-definition mcq and the wolf-reintroduction-trophic-cascade misconception probe already on file'),
+  },
+]
+
 /**
  * Every biology probe-depth probe. One array, so `seed-knowledge-assets.ts`,
  * the cold-start bootstrap and the contract tests — all of which scan for a
@@ -944,4 +1064,5 @@ export const BIOLOGY_DEPTH_PROBES: SeedProbe[] = [
   ...BIO_D3,
   ...BIO_D4,
   ...BIO_D5,
+  ...BIO_D6,
 ]
