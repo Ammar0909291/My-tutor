@@ -228,14 +228,15 @@ probe-depth campaign is now COMPLETE: 108/108 at the 3-probe contract floor.** T
 2026-09-14-KG-extension concepts remain a SEPARATE, larger, not-yet-started task (see below).
 Formal EB
 authoring started 2026-09-20 at the KG root, `bio.found.what-is-biology`, then continued in
-strict KG-prerequisite order through 29 concepts total (`educational-brain/concepts/biology/`,
+strict KG-prerequisite order through 32 concepts total (`educational-brain/concepts/biology/`,
 no Blueprint exists for biology as a subject; 2 entries, `scientific-method-in-biology` and
 `unifying-themes-in-biology`, are for ZERO-seed-content concepts; a third recomputed frontier
 added `bio.evo.origin-of-life`, `bio.eco.nutrient-cycling`, `bio.mol.proteins-structure`
 (`nutrient-cycling` records a genuine KG-description-vs-seed-content gap as Curriculum
-Feedback rather than fabricating content); the latest 3 — `bio.evo.evidence-for-evolution`,
-`bio.mol.enzymes`, `bio.cell.mitosis` — are a fourth recomputed topological frontier after the
-26-concept baseline) — **EB is 29/199**. These two
+Feedback rather than fabricating content); a fourth recomputed frontier added
+`bio.evo.evidence-for-evolution`, `bio.mol.enzymes`, `bio.cell.mitosis`; the latest 3 —
+`bio.cell.meiosis`, `bio.evo.natural-selection`, `bio.repro.asexual-reproduction` — are a fifth
+recomputed topological frontier after the 29-concept baseline) — **EB is 32/199**. These two
 counters are tracked and reported SEPARATELY, never conflated — see `COVERAGE.md`'s biology row. The 91 concepts from the 2026-09-14 KG extension still have zero
 seed content of any kind. Continue via the audit doc's own §11 priority order for probe-depth,
 and strict KG-prerequisite order (not alphabetical) for EB authoring.
