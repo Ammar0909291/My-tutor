@@ -6407,3 +6407,21 @@ Validated: KG PASS, state.ts 869/908, tsc clean, tests 561/561. Commit `437fcd6`
 
 Fresh frontier for Batch 238 (5 concepts): math.cat.adjunction/functor-category/limits,
 math.cx.analytic-functions/harmonic-functions. Campaign continues under the same active `/loop`.
+
+## Batch 238 (2026-09-20)
+
+Authored `analytic-functions` (holomorphic is an open-set property, never a single point;
+holomorphic⟺analytic exactly in ℂ, never ℝ's gap; entire means the whole plane, never a smaller
+domain) and `harmonic-functions` (forward direction already proven, never re-derive; the
+CR-recipe's success is guaranteed by u's harmonicity, never coincidental; "locally" is a genuine
+obstruction on domains with holes, never routine). Both zero discrepancy. Mathematics **871/908**
+(869→871), 37 remaining. **Self-caught correction**: an early draft of this batch's version-history
+line inaccurately claimed math.cx was complete at "12/12" — a direct count shows math.cx actually
+has 31 concepts, 7 now authored, 26 remaining. The error was caught and edited out before the
+content commit was made (no false claim reached git history), but is logged here anyway per
+standing transparency discipline. Full detail in `COVERAGE.md` Batch 238. Validated: KG PASS,
+state.ts 871/908, tsc clean, tests 561/561. Commit `4109211`, pushed.
+
+Fresh frontier for Batch 239 (7 concepts): math.cat.adjunction/functor-category/limits,
+math.cx.complex-integration/conformal-mapping/power-series-cx/singularities. Campaign continues
+under the same active `/loop`.

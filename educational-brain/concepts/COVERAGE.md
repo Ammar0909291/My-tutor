@@ -18538,3 +18538,35 @@ pushed.
 
 Fresh frontier for Batch 238 (5 concepts): math.cat.adjunction/functor-category/limits,
 math.cx.analytic-functions/harmonic-functions. Campaign continues under the same active `/loop`.
+
+## Batch 238 (2026-09-20) — zero discrepancy
+
+Authored `math.cx.analytic-functions` ("holomorphic" is an open-set property, never satisfied by
+differentiability at a single point; holomorphic⟺analytic is an exact equivalence in ℂ, never the
+same gap as ℝ's smooth-but-not-analytic functions; "entire" means holomorphic on ALL of ℂ, never
+the same as "analytic" on a smaller domain) and `math.cx.harmonic-functions` (the forward
+direction is already proven elsewhere, never re-derive it; the CR-integration recipe's success is
+guaranteed by u's own harmonicity, never coincidental; the "locally" qualifier reflects a genuine
+obstruction on domains with holes, never routine caution). Both zero discrepancy
+(analytic-functions has no cross-links per KG; harmonic-functions' cross-link
+`math.de.harmonic-functions` confirmed authored, cross-link-mode probe engaged per Blueprint).
+Mathematics **869/908 → 871/908**, 37 remaining. **Correction**: this batch's content commit
+initially included a version-history line claiming "Completes the math.cx domain (12/12
+authored)" — this was inaccurate and caught during the batch's own routine post-write check
+(before the log commit, not after, unlike Batches 222/233): a direct KG-prefix count shows
+math.cx has **31 concepts total, only 7 now authored** (26 remaining: power-series-cx,
+complex-integration, cauchy-theorem, cauchy-goursat, cauchy-integral-formula, higher-derivatives,
+morera-theorem, liouville-theorem, fundamental-theorem-algebra, identity-theorem,
+analytic-continuation, singularities, poles, essential-singularity, laurent-series, residue,
+residue-theorem, real-integral-residues, maximum-modulus, conformal-mapping,
+mobius-transformation, riemann-mapping, argument-principle, rouche-theorem, riemann-surface,
+riemann-zeta). The erroneous line was edited out of the content file BEFORE it was committed, so
+no false claim reached git history this time — flagged here anyway for full transparency per the
+campaign's standing discipline of surfacing every miscount, caught or not. math.cx is far from
+certified; the campaign will need many more batches on this domain. Validated: KG PASS (908/908
+reachable), state.ts confirms 871/908 (still 22 certified domains, unchanged), tsc clean, tests
+561/561. Commit `4109211`, pushed.
+
+Fresh frontier for Batch 239 (7 concepts): math.cat.adjunction/functor-category/limits,
+math.cx.complex-integration/conformal-mapping/power-series-cx/singularities. Campaign continues
+under the same active `/loop`.
