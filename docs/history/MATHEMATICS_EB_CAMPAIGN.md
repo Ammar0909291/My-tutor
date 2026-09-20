@@ -6537,3 +6537,19 @@ pushed.
 Fresh frontier for Batch 246 (8 concepts): math.cat.adjunction/functor-category/limits,
 math.cx.analytic-continuation/conformal-mapping/essential-singularity/maximum-modulus/
 residue-theorem. Campaign continues under the same active `/loop`.
+
+## Batch 246 (2026-09-20)
+
+Authored `residue-theorem` (the theorem collapses to Cauchy's theorem at zero enclosed poles,
+never an unrelated tool; multiple enclosed poles need each residue summed individually, never one
+combined computation; only enclosed poles count, never every pole of the function regardless of
+the contour) and `essential-singularity` (an essential singularity has no limit at all, never
+|f|→∞ like a pole; Casorati-Weierstrass guarantees only a dense image, never surjectivity; Great
+Picard is dramatically stronger, never the same result renamed). Both zero discrepancy.
+Mathematics **887/908** (885→887), 21 remaining. math.cx now 21/31 authored. Full detail in
+`COVERAGE.md` Batch 246. Validated: KG PASS, state.ts 887/908, tsc clean, tests 561/561. Commit
+`8fabfa0`, pushed.
+
+Fresh frontier for Batch 247 (8 concepts): math.cat.adjunction/functor-category/limits,
+math.cx.analytic-continuation/argument-principle/conformal-mapping/maximum-modulus/
+real-integral-residues. Campaign continues under the same active `/loop`.

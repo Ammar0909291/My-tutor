@@ -18706,3 +18706,22 @@ reachable), state.ts confirms 885/908 (still 22 certified domains, unchanged), t
 Fresh frontier for Batch 246 (8 concepts): math.cat.adjunction/functor-category/limits,
 math.cx.analytic-continuation/conformal-mapping/essential-singularity/maximum-modulus/
 residue-theorem. Campaign continues under the same active `/loop`.
+
+## Batch 246 (2026-09-20) — zero discrepancy
+
+Authored `math.cx.residue-theorem` (the theorem collapses to Cauchy's theorem exactly at zero
+enclosed poles, never an unrelated tool; multiple enclosed poles require summing each residue
+individually, never a single combined computation; only poles actually enclosed by the given
+contour count, never every pole of the function regardless of the contour) and
+`math.cx.essential-singularity` (an essential singularity has no limit at all, never |f|→∞ like a
+pole; Casorati-Weierstrass guarantees only a dense image, never surjectivity — w=0 can be in the
+closure of e^{1/z}'s image without ever being achieved; Great Picard is dramatically stronger,
+guaranteeing infinite exact preimages for all but one value, never the same result renamed as
+Casorati-Weierstrass). Both zero discrepancy (neither concept has cross-links per the KG).
+Mathematics **885/908 → 887/908**, 21 remaining. math.cx now 21/31 authored (still far from
+certified). Validated: KG PASS (908/908 reachable), state.ts confirms 887/908 (still 22 certified
+domains, unchanged), tsc clean, tests 561/561. Commit `8fabfa0`, pushed.
+
+Fresh frontier for Batch 247 (8 concepts): math.cat.adjunction/functor-category/limits,
+math.cx.analytic-continuation/argument-principle/conformal-mapping/maximum-modulus/
+real-integral-residues. Campaign continues under the same active `/loop`.
