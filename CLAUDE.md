@@ -228,30 +228,30 @@ probe-depth campaign is now COMPLETE: 108/108 at the 3-probe contract floor.** T
 2026-09-14-KG-extension concepts remain a SEPARATE, larger, not-yet-started task (see below).
 Formal EB
 authoring started 2026-09-20 at the KG root, `bio.found.what-is-biology`, then continued in
-strict KG-prerequisite order through 146 concepts total (`educational-brain/concepts/biology/`,
-no Blueprint exists for biology as a subject; 38 entries — see COVERAGE.md's biology row
+strict KG-prerequisite order through 149 concepts total (`educational-brain/concepts/biology/`,
+no Blueprint exists for biology as a subject; 41 entries — see COVERAGE.md's biology row
 for the full list of ZERO-seed-content concepts authored from first principles — and
 thirty-nine entries record genuine KG-description-vs-seed-content gaps as Curriculum
 Feedback rather than fabricating content).
-Authored via 43 successive batches of 3, each recomputing the fresh topologically-ready
+Authored via 44 successive batches of 3, each recomputing the fresh topologically-ready
 frontier from the prior baseline — see COVERAGE.md's biology row for the full per-batch
-concept list; the latest batch (from the 143-concept baseline) added
-`bio.dev.regeneration-biology`, `bio.physio.lymphatic-system-detail`, and
-`bio.neuro.brain-regional-organization` (all 3 first-principles-authored — 0 of 24
-frontier candidates had seed content, the NINTH consecutive fully zero-content batch)
-— **EB is 146/199**.
+concept list; the latest batch (from the 146-concept baseline) added
+`bio.behav.innate-behavior-instinct`, `bio.plant.phytochrome-photoperiodic-flowering`,
+and `bio.neuro.sleep-circadian-biology` (all 3 first-principles-authored — 0 of 25
+frontier candidates had seed content, the TENTH consecutive fully zero-content batch)
+— **EB is 149/199**.
 **First-principles authoring remains the settled default mode** for continuing this
-campaign from the current 199-concept KG frontier (nine consecutive zero-content
-batches: 0 of 45, 42, 40, 38, 36, 33, 30, 27, 24) — continuation should still re-check
-each fresh frontier for any remaining seed-content-backed concepts (a handful may still
-surface, as batch 30's 2-of-46 showed), but should not expect them as the norm. The
-91-concept 2026-09-14 KG-extension pool remains a SEPARATE, larger, not-yet-started
-task; no unilateral decision to switch to it has been made, and this determination
-(continuing first-principles authoring of the current frontier rather than switching
-tasks) has now been applied consistently across fifteen batches (28 through 43)
-without a stop-and-ask, per the Workflow preference's authorization for ordinary scope
-continuations — a future session may still revisit this call, particularly once the
-current frontier is fully exhausted of authorable concepts.
+campaign from the current 199-concept KG frontier (ten consecutive zero-content
+batches: 0 of 45, 42, 40, 38, 36, 33, 30, 27, 24, 25) — continuation should still
+re-check each fresh frontier for any remaining seed-content-backed concepts (a handful
+may still surface, as batch 30's 2-of-46 showed), but should not expect them as the
+norm. The 91-concept 2026-09-14 KG-extension pool remains a SEPARATE, larger,
+not-yet-started task; no unilateral decision to switch to it has been made, and this
+determination (continuing first-principles authoring of the current frontier rather
+than switching tasks) has now been applied consistently across sixteen batches (28
+through 44) without a stop-and-ask, per the Workflow preference's authorization for
+ordinary scope continuations — a future session may still revisit this call,
+particularly once the current frontier is fully exhausted of authorable concepts.
 These
 two
 counters are tracked and reported SEPARATELY, never conflated — see `COVERAGE.md`'s biology row. The 91 concepts from the 2026-09-14 KG extension still have zero
