@@ -9886,6 +9886,27 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         }
       }
 
+      // AN OPTION'S OWN TEXT REPEATING ITS LETTER LABEL. Measured live
+      // (2026-09-20, chem.* Pericyclic Reactions, real account): every option
+      // in a model-authored MCQ read "A) A [2+2] cycloaddition...", "B) B
+      // Diels-Alder...", etc. — the lettering applied once by the model's own
+      // prose, but each option's VALUE already carried a redundant leading
+      // letter token. See duplicatedOptionLetterGuard.ts for the full
+      // reproduction and why it only fires when EVERY option agrees.
+      try {
+        const { stripDuplicatedOptionLetter } = await import('@/lib/teaching/duplicatedOptionLetterGuard')
+        const delettered = stripDuplicatedOptionLetter(cleanText)
+        if (delettered.stripped) {
+          console.warn('[mcq] ' + JSON.stringify({
+            event: 'duplicated-option-letter-stripped',
+            conceptId: resolvedConceptId ?? null,
+          }))
+          cleanText = delettered.text
+        }
+      } catch (err) {
+        console.warn('[mcq] duplicated-option-letter check skipped:', err)
+      }
+
       // ADR 15: create RRM entry after visual pipeline resolution.
       // Single-writer: this is the ONLY path that writes RRM entries.
       let rrmEntryThisTurn: import('@/lib/teaching/renderedRealityModel').RRMEntry | null = null
