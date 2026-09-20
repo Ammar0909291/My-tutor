@@ -205,10 +205,11 @@ despite 108 concepts being authored, because a P-10 abandoned-legacy-slug guard 
 subjects, not just biology) on every cold start since >=2026-09-15 — 45 live Mathematics rows,
 fixed via the exact reversible status-only precedent in `docs/CLAUDE_HANDOVER.md` §9r/§9s, then
 verified via two forced redeploys (bootstrap now runs its real write path instead of aborting).
-Probe-depth Batch 1-3 (`biologyDepthSeedAssets.ts`, `bio.found` then `bio.cell` then `bio.mol`,
-36 concepts) close the same zero-slack defect physics/chemistry already had: every one of
-biology's 108 authored concepts was stuck at 2/3 gradeable probes, so no biology lesson could
-ever reach verified mastery — now **36/108 at contract** (72 remain, 2/3 gradeable each). Formal EB
+Probe-depth Batch 1-4 (`biologyDepthSeedAssets.ts`, `bio.found` then `bio.cell` then `bio.mol`
+then `bio.physio`, 44 concepts) close the same zero-slack defect physics/chemistry already had:
+every one of biology's 108 authored concepts was stuck at 2/3 gradeable probes, so no biology
+lesson could ever reach verified mastery — now **44/108 at contract** (64 remain, 2/3 gradeable
+each). Formal EB
 authoring started 2026-09-20 at the KG root, `bio.found.what-is-biology`, then continued in
 strict KG-prerequisite order through 17 concepts total (`educational-brain/concepts/biology/`,
 no Blueprint exists for biology as a subject; 2 entries, `scientific-method-in-biology` and

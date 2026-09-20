@@ -68,9 +68,12 @@
  * same mechanism, same contract. Batch 3 (bio.mol, 14 concepts,
  * 2026-09-20): the third domain closed, same mechanism, same contract —
  * the subject's largest domain by concept count (tied with bio.cell).
- * Combined: 36/108 originally-authored concepts now at the 3-probe
- * floor. The remaining 72 of the 108 (`bio.eco`/`bio.physio`/`bio.gen`/
- * ... through `bio.div`) are NOT covered by this file and remain at 2/3
+ * Batch 4 (bio.physio, 8 concepts, 2026-09-20): the fourth domain
+ * closed, same mechanism, same contract. Combined: 44/108
+ * originally-authored concepts now at the 3-probe floor. The remaining
+ * 64 of the 108 (`bio.eco`/`bio.gen`/`bio.evo`/`bio.micro`/`bio.plant`/
+ * `bio.repro`/`bio.immuno`/`bio.sys`/`bio.biotech`/`bio.bioinfo`/
+ * `bio.dev`/`bio.div`) are NOT covered by this file and remain at 2/3
  * gradeable probes — a bounded, honestly reported partial closure, not a
  * claim of full biology probe-depth closure. The 91 concepts added by
  * the 2026-09-14 KG extension
@@ -94,6 +97,7 @@ const src = (batch: string, concept: string, what: string) =>
 const srcD1 = (concept: string, what: string) => src('batch 1, bio.found, 2026-09-20', concept, what)
 const srcD2 = (concept: string, what: string) => src('batch 2, bio.cell, 2026-09-20', concept, what)
 const srcD3 = (concept: string, what: string) => src('batch 3, bio.mol, 2026-09-20', concept, what)
+const srcD4 = (concept: string, what: string) => src('batch 4, bio.physio, 2026-09-20', concept, what)
 
 // ═══════════════════════════════════════════════════════════════════════════
 // BATCH BIO-D1 — bio.found (all 8 concepts) @ HIGH, PROFICIENT, short_answer
@@ -667,6 +671,133 @@ const BIO_D3: SeedProbe[] = [
   },
 ]
 
+// ═══════════════════════════════════════════════════════════════════════════
+// BATCH BIO-D4 — bio.physio (all 8 concepts) @ HIGH, PROFICIENT, short_answer
+// ═══════════════════════════════════════════════════════════════════════════
+
+const BIO_D4: SeedProbe[] = [
+  {
+    conceptId: 'bio.physio.respiratory-system', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A person exhales air containing 16% oxygen, while the air they inhaled contained 21% oxygen. Does this mean their body used up nearly all the inhaled oxygen?',
+    choices: [
+      { text: 'No — the drop from 21% to 16% shows only some oxygen was absorbed by the blood; most of the inhaled oxygen is still present in exhaled air', isCorrect: true },
+      { text: 'Yes — a 5 percentage-point drop means the body consumed almost all available oxygen', isCorrect: false },
+      { text: 'No — the oxygen percentage doesn’t actually change during breathing; the measurement must be an error', isCorrect: false },
+      { text: 'Yes — healthy exhaled air normally contains 0% oxygen', isCorrect: false },
+    ],
+    correctValue: 'No, most of the inhaled oxygen remains in exhaled air',
+    targetedMisconceptions: [],
+    source: srcD4('bio.physio.respiratory-system', 'applies the explanation’s own stated exhaled/inhaled oxygen percentages (21% vs 16%) as a quantitative reasoning check, distinct from the alveoli-structure mcq and the diaphragm/pressure misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.physio.circulatory-system', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'Blood in the renal vein is oxygenated (having already passed through systemic circulation) and flows toward the heart. Is "renal vein" classified as a vein because of its oxygen content, or something else?',
+    choices: [
+      { text: 'Because it carries blood TOWARD the heart — vein classification depends on direction of flow, not oxygen content', isCorrect: true },
+      { text: 'Because it carries oxygenated blood — veins are defined by carrying oxygenated blood', isCorrect: false },
+      { text: 'Because it has thick muscular walls — vein classification depends on wall thickness', isCorrect: false },
+      { text: 'Because it lacks valves — arteries have valves and veins do not', isCorrect: false },
+    ],
+    correctValue: 'Direction of flow (toward the heart), not oxygen content',
+    targetedMisconceptions: [],
+    source: srcD4('bio.physio.circulatory-system', 'applies the explanation’s own stated direction-not-oxygen-content classification rule to a vessel example (renal vein) beyond the pulmonary-artery case already tested, distinct from the pulmonary-artery mcq and the four-chambers misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.physio.immune-system-intro', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A person cuts their finger. Within minutes, the area becomes red, warm, and swollen as phagocytes are recruited to the site — well before any pathogen-specific antibodies could be produced. Which type of immune response is this, and is it a sign something has gone wrong?',
+    choices: [
+      { text: 'Innate immunity (acute inflammation) — a fast, non-specific, protective first response, not a sign of a problem', isCorrect: true },
+      { text: 'Adaptive immunity — a slow, pathogen-specific antibody response that can occur within minutes', isCorrect: false },
+      { text: 'This is chronic inflammation, an unhealthy response that should be treated with antibiotics', isCorrect: false },
+      { text: 'This means the innate immune system has failed and adaptive immunity must now compensate', isCorrect: false },
+    ],
+    correctValue: 'Innate immunity, acute inflammation — a normal protective response',
+    targetedMisconceptions: [],
+    source: srcD4('bio.physio.immune-system-intro', 'applies the explanation’s own innate-vs-adaptive speed distinction and the misconception_repair’s own acute-vs-chronic-inflammation clarification jointly, distinct from the memory-cells/vaccine mcq and the antibiotics-for-viruses misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.physio.digestive-system', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'Bacteria in the large intestine produce vitamin K and some B vitamins. Does this mean the large intestine performs chemical digestion of food?',
+    choices: [
+      { text: 'No — vitamin production by gut bacteria is a separate process from digestion; the large intestine’s main roles are water and mineral reabsorption, and no significant food digestion occurs there', isCorrect: true },
+      { text: 'Yes — vitamin production is itself a form of chemical digestion of food molecules', isCorrect: false },
+      { text: 'No — the large intestine performs no biological processes at all, only stores waste', isCorrect: false },
+      { text: 'Yes — bacteria digest the vitamins found in food, which is why they are located there', isCorrect: false },
+    ],
+    correctValue: 'No, vitamin production is separate from digestion',
+    targetedMisconceptions: [],
+    source: srcD4('bio.physio.digestive-system', 'applies the explanation’s own stated large-intestine role (water/mineral reabsorption, vitamin production by bacteria, no significant digestion) to a discrimination task, distinct from the bile-emulsification mcq and the absorption-location misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.physio.nervous-system', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A nerve impulse travels rapidly down an axon as an electrochemical wave. When it reaches a synapse, how does the signal cross the gap to the next neuron?',
+    choices: [
+      { text: 'The electrical signal triggers release of a chemical neurotransmitter, which crosses the gap and triggers a new electrical signal in the next neuron', isCorrect: true },
+      { text: 'Electrons jump directly across the synaptic gap, continuing the same electrical current', isCorrect: false },
+      { text: 'The action potential itself physically passes through the gap unchanged', isCorrect: false },
+      { text: 'Na⁺ ions flow directly from one neuron’s axon into the next neuron’s dendrite across the gap', isCorrect: false },
+    ],
+    correctValue: 'Electrical signal converts to chemical neurotransmitter, then back to electrical',
+    targetedMisconceptions: [],
+    source: srcD4('bio.physio.nervous-system', 'applies the explanation’s own stated synaptic electrical-to-chemical-to-electrical conversion to an identification task, distinct from the depolarisation-cause mcq and the stimulus-strength/impulse-size misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.physio.endocrine-system', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'The hypothalamus, a region of the brain, produces hormones (such as ADH and oxytocin) and controls the pituitary gland via releasing hormones. What does this demonstrate about the relationship between the nervous and endocrine systems?',
+    choices: [
+      { text: 'The two systems are interlinked, not independent — the hypothalamus is nervous tissue that directly produces and controls hormones, forming a neuroendocrine system', isCorrect: true },
+      { text: 'The nervous system and endocrine system operate on completely separate organs with no interaction', isCorrect: false },
+      { text: 'The pituitary gland is actually part of the nervous system, not the endocrine system', isCorrect: false },
+      { text: 'Hormones are a type of electrical signal identical to nerve impulses', isCorrect: false },
+    ],
+    correctValue: 'They form one interlinked neuroendocrine system',
+    targetedMisconceptions: [],
+    source: srcD4('bio.physio.endocrine-system', 'applies the explanation’s own stated hypothalamus-as-bridge fact ("the nervous and endocrine systems are... complementary and interlinked") to an inference task, distinct from the insulin-release mcq and the insulin-destroys-glucose misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.physio.excretory-system', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A person with poorly controlled diabetes has glucose in their urine, even though their kidneys’ filtration and reabsorption machinery is functioning normally. What does this reveal about kidney filtration?',
+    choices: [
+      { text: 'Filtration itself is non-selective for small molecules — glucose is always filtered along with urea; when blood glucose is very high, it exceeds the tubule’s maximum reabsorption capacity, so some glucose is not reabsorbed and appears in urine', isCorrect: true },
+      { text: 'High blood glucose causes the glomerulus to become more selective, filtering only excess glucose', isCorrect: false },
+      { text: 'Diabetes causes the kidney to intentionally filter glucose into urine as a protective mechanism', isCorrect: false },
+      { text: 'Glucose in urine means the kidneys have stopped functioning entirely', isCorrect: false },
+    ],
+    correctValue: 'Filtration is non-selective; reabsorption capacity is exceeded',
+    targetedMisconceptions: [],
+    source: srcD4('bio.physio.excretory-system', 'applies the explanation’s own stated ultrafiltration-non-selectivity/reabsorption-maximum fact ("in diabetes, blood glucose exceeds the reabsorption maximum, so glucose spills into urine") to a diagnostic-reasoning task, distinct from the glucose-absence-in-healthy-urine mcq and the sweating-as-excretion misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.physio.musculoskeletal-system', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'Astronauts in microgravity experience significant bone density loss over months in space, despite eating a calcium-rich diet. Based on how bone remodelling works, what is the most likely explanation?',
+    choices: [
+      { text: 'Reduced mechanical stress on bones in microgravity shifts the balance toward osteoclast (breakdown) activity over osteoblast (building) activity, so bone is broken down faster than it is rebuilt', isCorrect: true },
+      { text: 'Bone is a non-living, inert structural material, so it cannot lose density regardless of environment', isCorrect: false },
+      { text: 'Microgravity directly dissolves calcium phosphate out of bone through a chemical reaction', isCorrect: false },
+      { text: 'A calcium-rich diet has no effect on bone density under any circumstances', isCorrect: false },
+    ],
+    correctValue: 'Reduced mechanical stress shifts remodelling toward net bone loss',
+    targetedMisconceptions: [],
+    source: srcD4('bio.physio.musculoskeletal-system', 'applies the explanation’s own stated bone-remodelling/Wolff’s-law fact ("stress stimulates bone deposition") in reverse, to a microgravity scenario, distinct from the sliding-filament mcq and the single-muscle-flex-and-extend misconception probe already on file'),
+  },
+]
+
 /**
  * Every biology probe-depth probe. One array, so `seed-knowledge-assets.ts`,
  * the cold-start bootstrap and the contract tests — all of which scan for a
@@ -676,4 +807,5 @@ export const BIOLOGY_DEPTH_PROBES: SeedProbe[] = [
   ...BIO_D1,
   ...BIO_D2,
   ...BIO_D3,
+  ...BIO_D4,
 ]
