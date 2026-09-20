@@ -6553,3 +6553,19 @@ Mathematics **887/908** (885→887), 21 remaining. math.cx now 21/31 authored. F
 Fresh frontier for Batch 247 (8 concepts): math.cat.adjunction/functor-category/limits,
 math.cx.analytic-continuation/argument-principle/conformal-mapping/maximum-modulus/
 real-integral-residues. Campaign continues under the same active `/loop`.
+
+## Batch 247 (2026-09-20)
+
+Authored `argument-principle` (directly derived from the Residue Theorem applied to f′/f, never
+independent; Z and P count with multiplicity, never distinct location; Z−P is the geometric
+winding number, never purely abstract) and `maximum-modulus` (transported from
+`math.de.harmonic-functions`'s already-proven maximum principle via log|f|'s harmonicity, never an
+independent proof; boundary values alone bound |f| everywhere, never requiring an interior check;
+any interior maximum forces constancy, never merely permitted for a non-constant function). Both
+zero discrepancy. Mathematics **889/908** (887→889), 19 remaining. math.cx now 23/31 authored.
+Full detail in `COVERAGE.md` Batch 247. Validated: KG PASS, state.ts 889/908, tsc clean, tests
+561/561. Commit `0151c1c`, pushed.
+
+Fresh frontier for Batch 248 (7 concepts): math.cat.adjunction/functor-category/limits,
+math.cx.analytic-continuation/conformal-mapping/real-integral-residues/rouche-theorem. Campaign
+continues under the same active `/loop`.

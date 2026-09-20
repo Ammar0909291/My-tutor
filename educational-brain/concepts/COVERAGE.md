@@ -18725,3 +18725,22 @@ domains, unchanged), tsc clean, tests 561/561. Commit `8fabfa0`, pushed.
 Fresh frontier for Batch 247 (8 concepts): math.cat.adjunction/functor-category/limits,
 math.cx.analytic-continuation/argument-principle/conformal-mapping/maximum-modulus/
 real-integral-residues. Campaign continues under the same active `/loop`.
+
+## Batch 247 (2026-09-20) — zero discrepancy
+
+Authored `math.cx.argument-principle` (directly derived from the Residue Theorem applied to the
+specific function f′/f, never an independently-proven theorem; Z and P count zeros/poles with
+multiplicity, never by distinct location; Z−P is the geometric winding number of f(z) around 0,
+never a purely abstract algebraic quantity) and `math.cx.maximum-modulus` (transported directly
+from `math.de.harmonic-functions`'s already-proven real maximum principle via log|f|'s
+harmonicity, never an independent complex-analysis-specific proof; boundary values alone bound |f|
+everywhere in D, never requiring an interior scan; any interior maximum of |f|, strict or not,
+forces f constant, never merely permitted for a non-constant function). Both zero discrepancy
+(cross-link `math.de.harmonic-functions` confirmed authored on disk before setting the cross-link
+probe mode). Mathematics **887/908 → 889/908**, 19 remaining. math.cx now 23/31 authored (still
+far from certified). Validated: KG PASS (908/908 reachable), state.ts confirms 889/908 (still 22
+certified domains, unchanged), tsc clean, tests 561/561. Commit `0151c1c`, pushed.
+
+Fresh frontier for Batch 248 (7 concepts): math.cat.adjunction/functor-category/limits,
+math.cx.analytic-continuation/conformal-mapping/real-integral-residues/rouche-theorem. Campaign
+continues under the same active `/loop`.
