@@ -72,9 +72,11 @@
  * closed, same mechanism, same contract. Batch 5 (bio.gen, 8 concepts,
  * 2026-09-20): the fifth domain closed, same mechanism, same contract.
  * Batch 6 (bio.eco, 7 concepts, 2026-09-20): the sixth domain closed,
- * same mechanism, same contract. Combined: 59/108 originally-authored
- * concepts now at the 3-probe floor. The remaining 49 of the 108
- * (`bio.evo`/`bio.micro`/`bio.plant`/`bio.repro`/`bio.immuno`/`bio.sys`/
+ * same mechanism, same contract. Batch 7 (bio.evo, 7 concepts,
+ * 2026-09-20): the seventh domain closed, same mechanism, same
+ * contract. Combined: 66/108 originally-authored concepts now at the
+ * 3-probe floor. The remaining 42 of the 108
+ * (`bio.micro`/`bio.plant`/`bio.repro`/`bio.immuno`/`bio.sys`/
  * `bio.biotech`/`bio.bioinfo`/`bio.dev`/`bio.div`) are NOT covered by
  * this file and remain at 2/3 gradeable probes — a bounded, honestly
  * reported partial closure, not a claim of full biology probe-depth
@@ -103,6 +105,7 @@ const srcD3 = (concept: string, what: string) => src('batch 3, bio.mol, 2026-09-
 const srcD4 = (concept: string, what: string) => src('batch 4, bio.physio, 2026-09-20', concept, what)
 const srcD5 = (concept: string, what: string) => src('batch 5, bio.gen, 2026-09-20', concept, what)
 const srcD6 = (concept: string, what: string) => src('batch 6, bio.eco, 2026-09-20', concept, what)
+const srcD7 = (concept: string, what: string) => src('batch 7, bio.evo, 2026-09-20', concept, what)
 
 // ═══════════════════════════════════════════════════════════════════════════
 // BATCH BIO-D1 — bio.found (all 8 concepts) @ HIGH, PROFICIENT, short_answer
@@ -1053,6 +1056,123 @@ const BIO_D6: SeedProbe[] = [
   },
 ]
 
+// ═══════════════════════════════════════════════════════════════════════════
+// BATCH BIO-D7 — bio.evo (all 7 concepts) @ PROFICIENT, short_answer.
+// 5 of 7 at gradeBand HIGH (origin-of-life, evidence-for-evolution,
+// natural-selection, modern-synthesis-speciation, human-evolution); 2 at
+// UNDERGRADUATE (molecular-evolution, evo-devo) — matching each
+// concept's own existing pair exactly, per the same per-(concept,
+// gradeBand) rule established in Batch 2.
+// ═══════════════════════════════════════════════════════════════════════════
+
+const BIO_D7: SeedProbe[] = [
+  {
+    conceptId: 'bio.evo.origin-of-life', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A student says "evolution explains why life first appeared on Earth about 3.8 billion years ago." Is this an accurate description of what the theory of evolution explains?',
+    choices: [
+      { text: 'No — evolution explains how life CHANGED after it already existed; the origin of life (chemical evolution, the RNA World hypothesis) is a separate question about how life started', isCorrect: true },
+      { text: 'Yes — evolution and the origin of life are the same theory describing the same process', isCorrect: false },
+      { text: 'No — neither evolution nor any scientific theory addresses how life could have started', isCorrect: false },
+      { text: 'Yes — natural selection is what caused the first self-replicating molecules to form', isCorrect: false },
+    ],
+    correctValue: 'No — evolution explains change after life existed; origin of life is a separate question',
+    targetedMisconceptions: [],
+    source: srcD7('bio.evo.origin-of-life', 'applies the explanation’s own stated distinction ("origin of life is not the same as evolution") to a claim-evaluation task, distinct from the Miller-Urey-evidence mcq and the RNA-World-hypothesis misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.evo.evidence-for-evolution', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'Island species consistently resemble nearby mainland species more than they resemble other islands\' species living under similar climates far away. Which of the five lines of evidence for evolution does this pattern illustrate?',
+    choices: [
+      { text: 'Biogeography — geographic distribution of species matches ancestry (nearby relatedness) rather than matching climate similarity alone', isCorrect: true },
+      { text: 'Comparative anatomy — homologous structures reveal shared ancestry between the species being compared', isCorrect: false },
+      { text: 'Comparative embryology — similarity during early development reflects shared ancestry', isCorrect: false },
+      { text: 'The fossil record — layered rock strata show progressively simpler organisms over time', isCorrect: false },
+    ],
+    correctValue: 'Biogeography',
+    targetedMisconceptions: [],
+    source: srcD7('bio.evo.evidence-for-evolution', 'applies the explanation’s own stated biogeography line of evidence ("island species resemble nearby mainland species, not geographically distant ones") to an identification task, distinct from the homologous-structures mcq and the theory-word misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.evo.natural-selection', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'One cheetah is unusually fast but dies young from a hunting injury before raising any cubs. A slower cheetah in the same population avoids risky chases and successfully raises several litters over its lifetime. Which cheetah has the greater biological fitness?',
+    choices: [
+      { text: 'The slower cheetah — biological fitness means reproductive success in the current environment, not raw physical strength or speed', isCorrect: true },
+      { text: 'The faster cheetah — fitness in biology always means being physically the strongest or fastest individual', isCorrect: false },
+      { text: 'Neither — fitness can only be measured across an entire population, never for one individual', isCorrect: false },
+      { text: 'Both equally — fitness is unrelated to how many offspring an individual actually raises', isCorrect: false },
+    ],
+    correctValue: 'The slower cheetah — fitness means reproductive success, not strength or speed',
+    targetedMisconceptions: [],
+    source: srcD7('bio.evo.natural-selection', 'applies the explanation’s own stated correction ("fitness means reproductive success... a slower cheetah that avoids injury and lives to breed is fitter than a fast one that dies young") as a worked scenario, distinct from the beetle-camouflage mcq and the giraffe-neck-Lamarck misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.evo.modern-synthesis-speciation', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A horse and a donkey can mate and produce offspring (a mule), but the mule itself is sterile and cannot reproduce. Which category of reproductive isolating mechanism does this illustrate?',
+    choices: [
+      { text: 'Post-zygotic isolation — hybrid sterility, where fertilisation succeeds but the resulting hybrid cannot itself reproduce', isCorrect: true },
+      { text: 'Pre-zygotic isolation — the two species are prevented from mating at all by behavioural or mechanical barriers', isCorrect: false },
+      { text: 'Allopatric isolation — the horse and donkey are geographically separated and cannot physically meet', isCorrect: false },
+      { text: 'This is not a case of reproductive isolation, since fertilisation and offspring production both succeeded', isCorrect: false },
+    ],
+    correctValue: 'Post-zygotic isolation (hybrid sterility)',
+    targetedMisconceptions: [],
+    source: srcD7('bio.evo.modern-synthesis-speciation', 'applies the explanation’s own stated post-zygotic isolating mechanism example ("hybrid sterility — mule") as an identification task, distinct from the allopatric-speciation-mountain mcq and the rapid-evolution-counterexample misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.evo.human-evolution', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'Modern non-African humans carry 2-4% Neanderthal DNA in their genomes. What does this genetic evidence indicate about the relationship between early modern humans and Neanderthals during the "Out of Africa" migration?',
+    choices: [
+      { text: 'The two groups interbred at least occasionally when their populations overlapped, rather than remaining completely reproductively separate', isCorrect: true },
+      { text: 'Modern humans are directly descended from Neanderthals, who are simply an earlier stage of the same lineage', isCorrect: false },
+      { text: 'This percentage is contamination in genetic samples and reflects no real ancestral relationship', isCorrect: false },
+      { text: 'Neanderthals and modern humans never coexisted in the same geographic regions at any point', isCorrect: false },
+    ],
+    correctValue: 'They interbred at least occasionally when populations overlapped',
+    targetedMisconceptions: [],
+    source: srcD7('bio.evo.human-evolution', 'applies the explanation’s own stated Neanderthal-interbreeding evidence ("2-4% of non-African human genome is Neanderthal") as an inference task, distinct from the bipedalism-timing mcq and the humans-evolved-from-chimpanzees misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.evo.molecular-evolution', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'At a neutral genetic locus, species A and species B differ at twice the rate that species A and species C differ. Assuming the molecular clock hypothesis (neutral mutations accumulate at a roughly constant rate), which pair shares the more recent common ancestor?',
+    choices: [
+      { text: 'A and C — less sequence divergence at a neutral locus corresponds to less time since the pair last shared a common ancestor', isCorrect: true },
+      { text: 'A and B — more sequence divergence indicates a more recent common ancestor, since more time allows more changes to be observed at once', isCorrect: false },
+      { text: 'Both pairs share the same common ancestor age — divergence rate at neutral loci is unrelated to time since common ancestry', isCorrect: false },
+      { text: 'This cannot be determined without knowing which specific mutations occurred', isCorrect: false },
+    ],
+    correctValue: 'A and C — less divergence means a more recent common ancestor',
+    targetedMisconceptions: [],
+    source: srcD7('bio.evo.molecular-evolution', 'applies the explanation’s own stated molecular clock hypothesis ("sequence divergence is proportional to time since common ancestry") to a comparative divergence-rate reasoning task, distinct from the neutral-theory-driver mcq and the histone-H4-purifying-selection misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.evo.evo-devo', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A mutation changes WHEN and WHERE a particular Hox gene is expressed during development — not its protein-coding sequence — causing a fly to grow legs on its head instead of antennae. What does this demonstrate about how major morphological changes typically arise in evolution?',
+    choices: [
+      { text: 'They often result from changes in regulatory regions controlling gene expression pattern, not from changes to the protein-coding sequence of the gene itself', isCorrect: true },
+      { text: 'They require the evolution of an entirely new gene not previously present in the genome', isCorrect: false },
+      { text: 'They can only occur through changes to the protein sequence a gene encodes', isCorrect: false },
+      { text: 'This kind of dramatic morphological change cannot result from a single mutation of any kind', isCorrect: false },
+    ],
+    correctValue: 'Changes in regulatory regions controlling gene expression, not protein-coding sequence',
+    targetedMisconceptions: [],
+    source: srcD7('bio.evo.evo-devo', 'applies the explanation’s own stated regulatory-region mechanism ("major morphological changes... often result from changes in regulatory regions... not in the protein-coding sequences themselves") to the classic Hox-gene homeotic-mutation scenario, distinct from the Hox-conservation-implication mcq and the Pax6-cross-species-signal misconception probe already on file'),
+  },
+]
+
 /**
  * Every biology probe-depth probe. One array, so `seed-knowledge-assets.ts`,
  * the cold-start bootstrap and the contract tests — all of which scan for a
@@ -1065,4 +1185,5 @@ export const BIOLOGY_DEPTH_PROBES: SeedProbe[] = [
   ...BIO_D4,
   ...BIO_D5,
   ...BIO_D6,
+  ...BIO_D7,
 ]
