@@ -537,6 +537,8 @@ async function bootstrapAssets() {
         await import('./lib/teaching/assets/mathematicsCategoryFoundationsAssets')
       const { MATHEMATICS_CATEGORY_MORPHISM_EXPLANATIONS, MATHEMATICS_CATEGORY_MORPHISM_PROBES } =
         await import('./lib/teaching/assets/mathematicsCategoryMorphismAssets')
+      const { MATHEMATICS_CATEGORY_STRUCTURE_EXPLANATIONS, MATHEMATICS_CATEGORY_STRUCTURE_PROBES } =
+        await import('./lib/teaching/assets/mathematicsCategoryStructureAssets')
       const { hashContent } = await import('./lib/teaching/assets/similarity')
       const { AssetFamily, AssetStatus, AuthorKind, ExplanationStyle, ProbeDifficulty } = await import('@prisma/client')
       // The ladder rungs a slug may carry, from the enum itself rather than a
@@ -560,7 +562,7 @@ async function bootstrapAssets() {
         ...MATHEMATICS_ANALYTIC_ALGEBRAIC_EXPLANATIONS, ...MATHEMATICS_SOLIDS_POLYGONS_EXPLANATIONS,
         ...MATHEMATICS_CIRCLES_TRANSFORM_EXPLANATIONS, ...MATHEMATICS_VECTORS_CONICS_EXPLANATIONS,
         ...MATHEMATICS_DIFF_GEOM_EXPLANATIONS, ...MATHEMATICS_BAND_GAP_EXPLANATIONS,
-        ...MATHEMATICS_CATEGORY_FOUNDATIONS_EXPLANATIONS, ...MATHEMATICS_CATEGORY_MORPHISM_EXPLANATIONS]
+        ...MATHEMATICS_CATEGORY_FOUNDATIONS_EXPLANATIONS, ...MATHEMATICS_CATEGORY_MORPHISM_EXPLANATIONS, ...MATHEMATICS_CATEGORY_STRUCTURE_EXPLANATIONS]
       const ALL_PROBES = [...SEED_PROBES, ...AUTHORED_PROBES, ...CHEMISTRY_PROBES, ...PHYSICS_BAND_GAP_PROBES,
         ...PHYSICS_DEPTH_PROBES, ...CHEMISTRY_DEPTH_PROBES, ...BIOLOGY_DEPTH_PROBES, ...ENGLISH_BAND_GAP_PROBES,
         ...ENGLISH_PROBE_BATCH_1, ...ENGLISH_BATCH_1_DEPTH_4, ...ENGLISH_PROBE_BATCH_2,
@@ -590,7 +592,7 @@ async function bootstrapAssets() {
         ...MATHEMATICS_ANALYTIC_ALGEBRAIC_PROBES, ...MATHEMATICS_SOLIDS_POLYGONS_PROBES,
         ...MATHEMATICS_CIRCLES_TRANSFORM_PROBES, ...MATHEMATICS_VECTORS_CONICS_PROBES,
         ...MATHEMATICS_DIFF_GEOM_PROBES, ...MATHEMATICS_BAND_GAP_PROBES,
-        ...MATHEMATICS_CATEGORY_FOUNDATIONS_PROBES, ...MATHEMATICS_CATEGORY_MORPHISM_PROBES]
+        ...MATHEMATICS_CATEGORY_FOUNDATIONS_PROBES, ...MATHEMATICS_CATEGORY_MORPHISM_PROBES, ...MATHEMATICS_CATEGORY_STRUCTURE_PROBES]
       // ADR 14 §13 (Item 6): ladder rungs get a difficulty segment; singleton
       // slots keep the identity they already have. One resolver drives BOTH
       // the pre-flight check and the write loop so they cannot disagree.
