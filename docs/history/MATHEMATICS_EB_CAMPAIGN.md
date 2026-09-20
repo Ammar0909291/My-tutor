@@ -6692,3 +6692,19 @@ tsc clean, tests 561/561. Commit `f974d8d`, pushed.
 
 Fresh frontier for Batch 256 (2 concepts, all math.cat): math.cat.monad/topos. Campaign continues
 under the same active `/loop`.
+
+## Batch 256 (2026-09-20)
+
+Authored `monad` (a monad's structure arises directly from any adjunction, never arbitrarily
+imposed; the multiplication mu is built directly from the adjunction's counit, never an unrelated
+construction; functional-programming monads are genuine instances, never coincidental name-
+sharing) and `topos` (all three topos conditions — limits, exponentials, subobject classifier —
+are independently required, never just finite limits with add-ons; the subobject classifier Omega
+is defined by its universal subset-classifying property, never an arbitrary conventional choice;
+a topos's internal logic is generally intuitionistic, never automatically classical). Both zero
+discrepancy. Mathematics **907/908** (905→907), **1 remaining: math.cat.higher-category** — the
+final concept of the entire 908-concept Mathematics EB campaign. Full detail in `COVERAGE.md`
+Batch 256. Validated: KG PASS, state.ts 907/908, tsc clean, tests 561/561. Commit `2d04cb1`,
+pushed.
+
+Fresh frontier for Batch 257 (1 concept): math.cat.higher-category. Final batch of the campaign.
