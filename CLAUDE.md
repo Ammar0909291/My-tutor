@@ -228,19 +228,19 @@ probe-depth campaign is now COMPLETE: 108/108 at the 3-probe contract floor.** T
 2026-09-14-KG-extension concepts remain a SEPARATE, larger, not-yet-started task (see below).
 Formal EB
 authoring started 2026-09-20 at the KG root, `bio.found.what-is-biology`, then continued in
-strict KG-prerequisite order through 86 concepts total (`educational-brain/concepts/biology/`,
+strict KG-prerequisite order through 89 concepts total (`educational-brain/concepts/biology/`,
 no Blueprint exists for biology as a subject; 2 entries, `scientific-method-in-biology` and
-`unifying-themes-in-biology`, are for ZERO-seed-content concepts; twenty-two entries — see
+`unifying-themes-in-biology`, are for ZERO-seed-content concepts; twenty-four entries — see
 COVERAGE.md's biology row for the full list — record genuine KG-description-vs-seed-content
-gaps as Curriculum Feedback rather than fabricating content). Authored via 23 successive batches
+gaps as Curriculum Feedback rather than fabricating content). Authored via 24 successive batches
 of 3, each recomputing the fresh topologically-ready frontier from the prior baseline — see
 COVERAGE.md's biology row for the full per-batch concept list; the latest batch (from the
-83-concept baseline) added `bio.plant.mineral-nutrition`, `bio.mol.signal-transduction-pathways`,
-`bio.div.protist-diversity` — **EB is 86/199**. **Seed-content coverage for the remaining
-unauthored frontier is now noticeably thinner** (most of the current ~46-concept frontier has
-zero seed content) — future batches will draw from a shrinking pool of originally-authored
-concepts, or shift to the 91 zero-content KG-extension concepts as a separate task per priority
-order. These two
+86-concept baseline) added `bio.repro.fertilisation-development`, `bio.plant.plant-growth-hormones`,
+`bio.micro.microbes-in-human-welfare` — **EB is 89/199**. **Seed-content coverage for the remaining
+unauthored frontier remains thin** (most of the current ~44-concept frontier has zero seed
+content) — future batches will draw from a shrinking pool of originally-authored concepts, or
+shift to the 91 zero-content KG-extension concepts as a separate task per priority order. These
+two
 counters are tracked and reported SEPARATELY, never conflated — see `COVERAGE.md`'s biology row. The 91 concepts from the 2026-09-14 KG extension still have zero
 seed content of any kind. Continue via the audit doc's own §11 priority order for probe-depth,
 and strict KG-prerequisite order (not alphabetical) for EB authoring.
