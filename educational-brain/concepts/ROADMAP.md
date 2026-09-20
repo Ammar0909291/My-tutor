@@ -13,9 +13,9 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,866** (corrected 2026-09-20: biology's KG count was stale at 108; the live KG has 199 concepts since the 2026-09-14 extension — see the Biology End-User Readiness Program entry below) |
-| Concepts with an Educational Brain entry | **581** mathematics + 238 physics + 216 english + 186 chemistry + 10 biology + 0 computer_science = **1,231** |
-| Remaining | **635** |
-| Completion percentage | **65.97%** |
+| Concepts with an Educational Brain entry | **581** mathematics + 238 physics + 216 english + 186 chemistry + 17 biology + 0 computer_science = **1,238** |
+| Remaining | **628** |
+| Completion percentage | **66.35%** |
 
 *(Recomputed programmatically 2026-09-14, after Batch 93 (4 concepts: `math.abst.ufd`/
 `math.abst.galois-theory`/`math.linalg.span`/`math.linalg.null-space` — closed math.abst's ENTIRE
@@ -910,7 +910,7 @@ unblocked by `u-substitution` — `lhopitals-rule`, `line-integrals`,
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
 | english | 216 | 216 | **100.00% COMPLETE (2026-08-11)** | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) — every English KG concept now has a full Educational Brain entry |
 | chemistry | 186 | 186 | **100.00% COMPLETE** | `chem.found.matter` | No — chemistry is fully covered (Completion Loop 2026-07-25/26); mathematics/english/biology/computer_science remain the priority subjects |
-| biology | 199 | 10 | **5.03% (IN PROGRESS, Biology End-User Readiness Program started 2026-09-20)** | `bio.found.what-is-biology` → `characteristics-of-life` → the 3-concept unlock wave (`classification-need`, `microscopy-basics`, `biomes-levels-of-organisation`) → their own fresh frontier (`five-kingdom`, `binomial-nomenclature`, `bio.cell.cell-theory`, `bio.eco.organism-environment`, `scientific-method-in-biology` — the last a zero-seed-content concept, misconceptions authored from first principles) | Yes (all 10) — KG count corrected 108→199 (2026-09-14 extension, previously unreflected here); see `CLAUDE.md`'s Biology program section for authoritative status |
+| biology | 199 | 17 | **8.54% (IN PROGRESS, Biology End-User Readiness Program started 2026-09-20)** | 10 concepts through `scientific-method-in-biology`, then a 7-concept fresh frontier: `bio.cell.prokaryotic-cell`/`eukaryotic-cell`, `bio.found.viruses-viroids-lichens`, `bio.eco.population-ecology`, `bio.div.three-domain-system`/`fungal-biology` (first 2 `bio.div` entries), `bio.found.unifying-themes-in-biology` (second zero-seed-content entry, closes the `bio.found` domain's authored coverage) | Yes (all 17) — KG count corrected 108→199 (2026-09-14 extension, previously unreflected here); see `CLAUDE.md`'s Biology program section for authoritative status |
 | computer_science | 119 | 0 | 0.00% | `cs.found.intro-computers` | No |
 
 Physics's KG count reflects the 2026-07-22 Particle Physics + Semiconductor
