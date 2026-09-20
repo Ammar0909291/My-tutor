@@ -524,6 +524,8 @@ async function bootstrapAssets() {
         await import('./lib/teaching/assets/mathematicsDiffGeomAssets')
       const { MATHEMATICS_BAND_GAP_EXPLANATIONS, MATHEMATICS_BAND_GAP_PROBES } =
         await import('./lib/teaching/assets/mathematicsBandGapAssets')
+      const { MATHEMATICS_CATEGORY_FOUNDATIONS_EXPLANATIONS, MATHEMATICS_CATEGORY_FOUNDATIONS_PROBES } =
+        await import('./lib/teaching/assets/mathematicsCategoryFoundationsAssets')
       const { hashContent } = await import('./lib/teaching/assets/similarity')
       const { AssetFamily, AssetStatus, AuthorKind, ExplanationStyle, ProbeDifficulty } = await import('@prisma/client')
       // The ladder rungs a slug may carry, from the enum itself rather than a
@@ -546,7 +548,8 @@ async function bootstrapAssets() {
         ...MATHEMATICS_DIVISIBILITY_MODULAR_EXPLANATIONS, ...MATHEMATICS_CRYPTO_NUMBER_EXPLANATIONS,
         ...MATHEMATICS_ANALYTIC_ALGEBRAIC_EXPLANATIONS, ...MATHEMATICS_SOLIDS_POLYGONS_EXPLANATIONS,
         ...MATHEMATICS_CIRCLES_TRANSFORM_EXPLANATIONS, ...MATHEMATICS_VECTORS_CONICS_EXPLANATIONS,
-        ...MATHEMATICS_DIFF_GEOM_EXPLANATIONS, ...MATHEMATICS_BAND_GAP_EXPLANATIONS]
+        ...MATHEMATICS_DIFF_GEOM_EXPLANATIONS, ...MATHEMATICS_BAND_GAP_EXPLANATIONS,
+        ...MATHEMATICS_CATEGORY_FOUNDATIONS_EXPLANATIONS]
       const ALL_PROBES = [...SEED_PROBES, ...AUTHORED_PROBES, ...CHEMISTRY_PROBES, ...PHYSICS_BAND_GAP_PROBES,
         ...PHYSICS_DEPTH_PROBES, ...CHEMISTRY_DEPTH_PROBES, ...ENGLISH_BAND_GAP_PROBES,
         ...ENGLISH_PROBE_BATCH_1, ...ENGLISH_BATCH_1_DEPTH_4, ...ENGLISH_PROBE_BATCH_2,
