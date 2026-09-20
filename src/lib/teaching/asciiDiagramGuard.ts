@@ -63,7 +63,47 @@
  * ordinary teaching prose that happens to end a sentence in a colon is never
  * touched.
  *
- * ── WHEN IT STAYS QUIET, AND THE ONE CASE THAT MUST NOT (2026-09-19) ────────
+ * ── PASS 4 — THE MODEL SELF-LABELS AS "ASCII", NOT "TEXT DIAGRAM" (2026-09-20) ──
+ *
+ * Live reproduction on a real account, `phys.*` gravitational-waves lesson, no
+ * figure attached, learner asked twice for a diagram ("can you show me a
+ * diagram of this stretching and squeezing", then "i still didnt get a
+ * picture, can you actually show me one?"):
+ *
+ *   Here's a simple ASCII sketch to visualise the stretching-and-squeezing
+ *   effect that a passing gravitational wave would produce on two
+ *   perpendicular arms (think of the two arms of an interferometer):
+ *
+ *   |<-- 4 km arm 1 -->|
+ *
+ *   When a wave travels across the detector: ...
+ *
+ * Pass 3 requires the co-occurring words "text" AND "diagram" — this lead-in
+ * has neither; it says "ASCII sketch". And the single line that follows
+ * (`|<-- 4 km arm 1 -->|`) fails `isArtShapedParagraph`'s 3-symbol-run test:
+ * its dashes only ever run 2 deep (`--`), and the run regex does not count
+ * `<`/`>` at all, so nothing here would have been recognised as "art-shaped"
+ * even if the lead-in had matched. Unlike "text diagram" (a phrase that could
+ * in principle occur in ordinary discussion ABOUT diagrams), the model
+ * explicitly naming its own output "ASCII" is the same unambiguous signal
+ * that already justifies box-drawing's unconditional removal above — no
+ * separate shape heuristic is needed once the model has self-labeled this
+ * precisely. Scoped the same way as Pass 3 otherwise (co-occurrence with a
+ * diagram-shaped noun, colon-terminated lead-in, single paragraph consumed),
+ * and stays figure-gated for the same reason Pass 3 does: it is a text
+ * substitute for a missing figure, not something that can coexist with a
+ * real one.
+ */
+// The trailing `{0,200}?` (not the `{0,60}?` Pass 3 uses) is deliberately
+// wider: the live-reproduced lead-in continues for a full clause AFTER the
+// "ASCII sketch" phrase itself ("...to visualise the stretching-and-squeezing
+// effect... (think of the two arms of an interferometer):") before its
+// terminating colon — over 150 characters of ordinary sentence, not
+// decoration. Checked against the exact reproduced text, not assumed.
+const ASCII_LEADIN_RE =
+  /(?:^|\n)([^\n]{0,160}\bascii\b[^\n]{0,40}\b(?:sketch|diagram|art|drawing|figure|picture)\b[^\n]{0,200}?|[^\n]{0,160}\b(?:sketch|diagram|art|drawing|figure|picture)\b[^\n]{0,40}\bascii\b[^\n]{0,200}?)[.:]\s*\n+([^\n]+(?:\n[^\n]+)*)\n+/gi
+
+/** ── WHEN IT STAYS QUIET, AND THE ONE CASE THAT MUST NOT (2026-09-19) ────────
  * Pointer-line decoration and Pass 3's unfenced "text diagram" substitute are
  * gated on `figureOnScreen` (the SAME condition `stripUnbackedFigureReferences`
  * already uses, reused rather than re-derived): a genuinely code-fenced worked
@@ -254,6 +294,19 @@ export function stripUnbackedAsciiDiagram(
   if (!figureOnScreen) {
     result = result.replace(TEXT_DIAGRAM_LEADIN_RE, (whole, _leadin: string, paragraph: string) => {
       if (!isArtShapedParagraph(paragraph)) return whole
+      removedBlocks += 1
+      return ''
+    })
+  }
+
+  // Pass 4: a self-labeled "ASCII sketch/diagram/art/drawing" with no fence —
+  // see the constant's own header for the live reproduction. No shape check
+  // (unlike Pass 3): the model naming its own output "ASCII" is already the
+  // same unambiguous signal that makes box-drawing removal unconditional
+  // above, so nothing further needs verifying once it has self-labeled this
+  // precisely. Still figure-gated, for the same reason Pass 3 is.
+  if (!figureOnScreen) {
+    result = result.replace(ASCII_LEADIN_RE, () => {
       removedBlocks += 1
       return ''
     })
