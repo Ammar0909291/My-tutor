@@ -228,33 +228,39 @@ probe-depth campaign is now COMPLETE: 108/108 at the 3-probe contract floor.** T
 2026-09-14-KG-extension concepts remain a SEPARATE, larger, not-yet-started task (see below).
 Formal EB
 authoring started 2026-09-20 at the KG root, `bio.found.what-is-biology`, then continued in
-strict KG-prerequisite order through 122 concepts total (`educational-brain/concepts/biology/`,
-no Blueprint exists for biology as a subject; 14 entries, `scientific-method-in-biology`,
+strict KG-prerequisite order through 125 concepts total (`educational-brain/concepts/biology/`,
+no Blueprint exists for biology as a subject; 17 entries, `scientific-method-in-biology`,
 `unifying-themes-in-biology`, `bio.dev.organogenesis`, `bio.evo.convergent-evolution-
 homoplasy`, `bio.cell.membrane-transport-energetics`, `bio.physio.homeostasis-
 thermoregulation`, `bio.neuro.neurotransmitter-systems`, `bio.micro.antimicrobial-
 resistance`, `bio.evo.macroevolution-extinction`, `bio.neuro.sensory-transduction`,
 `bio.cell.cytoskeleton-motility`, `bio.cell.anaerobic-respiration-fermentation`,
-`bio.mol.alternative-splicing-rna-diversity`, and `bio.physio.blood-physiology-
-hemostasis`, are for ZERO-seed-content concepts authored from first principles;
-thirty-nine entries — see COVERAGE.md's biology row for the full list — record genuine
-KG-description-vs-seed-content gaps as Curriculum Feedback rather than fabricating
-content).
-Authored via 35 successive batches of 3, each recomputing the fresh topologically-ready
+`bio.mol.alternative-splicing-rna-diversity`, `bio.physio.blood-physiology-hemostasis`,
+`bio.cell.cell-junctions-extracellular-matrix`, `bio.gen.conservation-genetics`, and
+`bio.mol.protein-quality-control-autophagy`, are for ZERO-seed-content concepts authored
+from first principles; thirty-nine entries — see COVERAGE.md's biology row for the full
+list — record genuine KG-description-vs-seed-content gaps as Curriculum Feedback rather
+than fabricating content).
+Authored via 36 successive batches of 3, each recomputing the fresh topologically-ready
 frontier from the prior baseline — see COVERAGE.md's biology row for the full per-batch
-concept list; the latest batch (from the 119-concept baseline) added
-`bio.cell.anaerobic-respiration-fermentation`, `bio.mol.alternative-splicing-rna-
-diversity`, and `bio.physio.blood-physiology-hemostasis` (all 3 first-principles-
-authored — 0 of 45 frontier candidates had seed content this batch, the first fully
-zero-content batch of this campaign) — **EB is 122/199**.
-**The seed-content pool has now hit zero for a full batch at least once, but continues
-to fluctuate overall rather than settling permanently at zero**: 0 of 45 this batch,
-vs. 1 of 46, 2 of 48, 4 of 47, 2 of 45/46 in the five batches before that — continue
-re-checking fresh each batch rather than assuming either zero or any other fixed count.
+concept list; the latest batch (from the 122-concept baseline) added
+`bio.cell.cell-junctions-extracellular-matrix`, `bio.gen.conservation-genetics`, and
+`bio.mol.protein-quality-control-autophagy` (all 3 first-principles-authored — 0 of 42
+frontier candidates had seed content, the SECOND consecutive fully zero-content batch)
+— **EB is 125/199**.
+**Two consecutive zero-seed-content batches (0 of 45, then 0 of 42) suggest the
+originally-authored 108-concept seed-content pool may now be genuinely close to
+exhausted, not merely fluctuating low** — this is a stronger signal than any single
+prior batch and is the clearest point yet to consider whether to keep authoring
+first-principles from the current 199-concept KG frontier, or shift explicitly to the
+91-concept 2026-09-14 KG-extension pool as its own task. No unilateral decision to
+switch has been made; continuation should re-check the fresh frontier's seed-content
+count before choosing, and flag explicitly if a third consecutive zero-content batch
+occurs.
 Future batches will continue to mix seed-content-backed and first-principles authoring as the
 frontier composition dictates, or shift to the 91 zero-content KG-extension concepts as a
-separate, larger task per priority order — this determination has now been applied seven times
-(batches 28 through 35, favouring continuation of the same campaign) without a stop-and-ask,
+separate, larger task per priority order — this determination has now been applied eight times
+(batches 28 through 36, favouring continuation of the same campaign) without a stop-and-ask,
 per the Workflow preference's authorization for ordinary scope continuations; a future session
 may still revisit this call.
 These
