@@ -228,29 +228,33 @@ probe-depth campaign is now COMPLETE: 108/108 at the 3-probe contract floor.** T
 2026-09-14-KG-extension concepts remain a SEPARATE, larger, not-yet-started task (see below).
 Formal EB
 authoring started 2026-09-20 at the KG root, `bio.found.what-is-biology`, then continued in
-strict KG-prerequisite order through 119 concepts total (`educational-brain/concepts/biology/`,
-no Blueprint exists for biology as a subject; 11 entries, `scientific-method-in-biology`,
+strict KG-prerequisite order through 122 concepts total (`educational-brain/concepts/biology/`,
+no Blueprint exists for biology as a subject; 14 entries, `scientific-method-in-biology`,
 `unifying-themes-in-biology`, `bio.dev.organogenesis`, `bio.evo.convergent-evolution-
 homoplasy`, `bio.cell.membrane-transport-energetics`, `bio.physio.homeostasis-
 thermoregulation`, `bio.neuro.neurotransmitter-systems`, `bio.micro.antimicrobial-
-resistance`, `bio.evo.macroevolution-extinction`, `bio.neuro.sensory-transduction`, and
-`bio.cell.cytoskeleton-motility`, are for ZERO-seed-content concepts authored from first
-principles; thirty-nine entries — see COVERAGE.md's biology row for the full list —
-record genuine KG-description-vs-seed-content gaps as Curriculum Feedback rather than
-fabricating content).
-Authored via 34 successive batches of 3, each recomputing the fresh topologically-ready
+resistance`, `bio.evo.macroevolution-extinction`, `bio.neuro.sensory-transduction`,
+`bio.cell.cytoskeleton-motility`, `bio.cell.anaerobic-respiration-fermentation`,
+`bio.mol.alternative-splicing-rna-diversity`, and `bio.physio.blood-physiology-
+hemostasis`, are for ZERO-seed-content concepts authored from first principles;
+thirty-nine entries — see COVERAGE.md's biology row for the full list — record genuine
+KG-description-vs-seed-content gaps as Curriculum Feedback rather than fabricating
+content).
+Authored via 35 successive batches of 3, each recomputing the fresh topologically-ready
 frontier from the prior baseline — see COVERAGE.md's biology row for the full per-batch
-concept list; the latest batch (from the 116-concept baseline) added
-`bio.sys.synthetic-biology` (seed-content-backed) and `bio.neuro.sensory-transduction`/
-`bio.cell.cytoskeleton-motility` (both first-principles-authored) — **EB is 119/199**.
-**The seed-content pool continues to fluctuate batch to batch rather than trending
-toward zero or a fixed count**: 1 of 46 frontier candidates had seed content this batch
-(vs. 2 of 48, then 4 of 47, then 2 of 45/46 before that) — continue re-checking fresh
-each batch rather than assuming any trend.
+concept list; the latest batch (from the 119-concept baseline) added
+`bio.cell.anaerobic-respiration-fermentation`, `bio.mol.alternative-splicing-rna-
+diversity`, and `bio.physio.blood-physiology-hemostasis` (all 3 first-principles-
+authored — 0 of 45 frontier candidates had seed content this batch, the first fully
+zero-content batch of this campaign) — **EB is 122/199**.
+**The seed-content pool has now hit zero for a full batch at least once, but continues
+to fluctuate overall rather than settling permanently at zero**: 0 of 45 this batch,
+vs. 1 of 46, 2 of 48, 4 of 47, 2 of 45/46 in the five batches before that — continue
+re-checking fresh each batch rather than assuming either zero or any other fixed count.
 Future batches will continue to mix seed-content-backed and first-principles authoring as the
 frontier composition dictates, or shift to the 91 zero-content KG-extension concepts as a
-separate, larger task per priority order — this determination has now been applied six times
-(batches 28 through 34, favouring continuation of the same campaign) without a stop-and-ask,
+separate, larger task per priority order — this determination has now been applied seven times
+(batches 28 through 35, favouring continuation of the same campaign) without a stop-and-ask,
 per the Workflow preference's authorization for ordinary scope continuations; a future session
 may still revisit this call.
 These
