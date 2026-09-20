@@ -18570,3 +18570,22 @@ reachable), state.ts confirms 871/908 (still 22 certified domains, unchanged), t
 Fresh frontier for Batch 239 (7 concepts): math.cat.adjunction/functor-category/limits,
 math.cx.complex-integration/conformal-mapping/power-series-cx/singularities. Campaign continues
 under the same active `/loop`.
+
+## Batch 239 (2026-09-20) — zero discrepancy
+
+Authored `math.cx.power-series-cx` (the ratio test transfers identically to ℂ, never a new
+technique; the boundary is a circle with infinitely many points, never uniform behavior from one
+checked point; holomorphic⟺Taylor-series is automatic in ℂ, never parallels ℝ's smooth-but-not-
+analytic gap) and `math.cx.complex-integration` (the complex line integral follows the identical
+parametrize-substitute-reduce recipe as the real vector line integral; reversal-of-path is a
+proven shortcut, never needing re-verification each time; the Estimation Lemma gives only an upper
+bound, never the integral's actual value). Both zero discrepancy (both cross-links,
+`math.calc.power-series` and `math.calc.line-integrals`, confirmed authored, cross-link-mode
+probes engaged per their Blueprints). Mathematics **871/908 → 873/908**, 35 remaining. math.cx now
+9/31 authored (far from certified — no domain-completion claim made this batch, per the Batch 238
+correction discipline). Validated: KG PASS (908/908 reachable), state.ts confirms 873/908 (still
+22 certified domains, unchanged), tsc clean, tests 561/561. Commit `5ccc0cd`, pushed.
+
+Fresh frontier for Batch 240 (7 concepts): math.cat.adjunction/functor-category/limits,
+math.cx.cauchy-theorem/conformal-mapping/identity-theorem/singularities. Campaign continues under
+the same active `/loop`.
