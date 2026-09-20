@@ -13,9 +13,9 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,866** (corrected 2026-09-20: biology's KG count was stale at 108; the live KG has 199 concepts since the 2026-09-14 extension — see the Biology End-User Readiness Program entry below) |
-| Concepts with an Educational Brain entry | **581** mathematics + 238 physics + 216 english + 186 chemistry + 20 biology + 0 computer_science = **1,241** (biology-only update this batch; mathematics/physics/english/chemistry figures not independently re-verified this batch and may have drifted from concurrent authoring in other sessions) |
-| Remaining | **625** |
-| Completion percentage | **66.51%** |
+| Concepts with an Educational Brain entry | **581** mathematics + 238 physics + 216 english + 186 chemistry + 23 biology + 0 computer_science = **1,244** (biology-only update this batch; mathematics/physics/english/chemistry figures not independently re-verified this batch and may have drifted from concurrent authoring in other sessions) |
+| Remaining | **622** |
+| Completion percentage | **66.67%** |
 
 *(Recomputed programmatically 2026-09-14, after Batch 93 (4 concepts: `math.abst.ufd`/
 `math.abst.galois-theory`/`math.linalg.span`/`math.linalg.null-space` — closed math.abst's ENTIRE
@@ -910,7 +910,7 @@ unblocked by `u-substitution` — `lhopitals-rule`, `line-integrals`,
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
 | english | 216 | 216 | **100.00% COMPLETE (2026-08-11)** | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) — every English KG concept now has a full Educational Brain entry |
 | chemistry | 186 | 186 | **100.00% COMPLETE** | `chem.found.matter` | No — chemistry is fully covered (Completion Loop 2026-07-25/26); mathematics/english/biology/computer_science remain the priority subjects |
-| biology | 199 | 20 | **10.05% (IN PROGRESS, Biology End-User Readiness Program started 2026-09-20)** | 10 concepts through `scientific-method-in-biology`, then a 7-concept frontier (`bio.cell.prokaryotic-cell`/`eukaryotic-cell`, `bio.found.viruses-viroids-lichens`, `bio.eco.population-ecology`, `bio.div.three-domain-system`/`fungal-biology`, `bio.found.unifying-themes-in-biology`), then a freshly-recomputed 3-concept frontier: `bio.mol.biomolecule-types`, `bio.cell.nucleus-chromosomes`, `bio.cell.mitochondria-energy` | Yes (all 20) — KG count corrected 108→199 (2026-09-14 extension, previously unreflected here); see `CLAUDE.md`'s Biology program section for authoritative status |
+| biology | 199 | 23 | **11.56% (IN PROGRESS, Biology End-User Readiness Program started 2026-09-20)** | 10 concepts through `scientific-method-in-biology`, then a 7-concept frontier (`bio.cell.prokaryotic-cell`/`eukaryotic-cell`, `bio.found.viruses-viroids-lichens`, `bio.eco.population-ecology`, `bio.div.three-domain-system`/`fungal-biology`, `bio.found.unifying-themes-in-biology`), then a 3-concept frontier (`bio.mol.biomolecule-types`, `bio.cell.nucleus-chromosomes`, `bio.cell.mitochondria-energy`), then a second recomputed 3-concept frontier: `bio.cell.cell-cycle`, `bio.eco.ecosystem-structure-function`, `bio.mol.carbohydrates-lipids` | Yes (all 23) — KG count corrected 108→199 (2026-09-14 extension, previously unreflected here); see `CLAUDE.md`'s Biology program section for authoritative status |
 | computer_science | 119 | 0 | 0.00% | `cs.found.intro-computers` | No |
 
 Physics's KG count reflects the 2026-07-22 Particle Physics + Semiconductor
