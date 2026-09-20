@@ -218,12 +218,14 @@ despite 108 concepts being authored, because a P-10 abandoned-legacy-slug guard 
 subjects, not just biology) on every cold start since >=2026-09-15 — 45 live Mathematics rows,
 fixed via the exact reversible status-only precedent in `docs/CLAUDE_HANDOVER.md` §9r/§9s, then
 verified via two forced redeploys (bootstrap now runs its real write path instead of aborting).
-Probe-depth Batch 1-14 (`biologyDepthSeedAssets.ts`, `bio.found` then `bio.cell` then `bio.mol`
+Probe-depth Batch 1-15 (`biologyDepthSeedAssets.ts`, `bio.found` then `bio.cell` then `bio.mol`
 then `bio.physio` then `bio.gen` then `bio.eco` then `bio.evo` then `bio.micro` then `bio.div`
-then `bio.plant` then `bio.repro` then `bio.immuno` then `bio.sys` then `bio.biotech`, 101
-concepts) close the same zero-slack defect physics/chemistry already had: every one of
-biology's 108 authored concepts was stuck at 2/3 gradeable probes, so no biology lesson could
-ever reach verified mastery — now **101/108 at contract** (7 remain, 2/3 gradeable each).
+then `bio.plant` then `bio.repro` then `bio.immuno` then `bio.sys` then `bio.biotech` then
+`bio.bioinfo`+`bio.dev`) closed the same zero-slack defect physics/chemistry already had:
+every one of biology's 108 originally-authored concepts was stuck at 2/3 gradeable probes, so
+no biology lesson could ever reach verified mastery — **the entire original 108-concept
+probe-depth campaign is now COMPLETE: 108/108 at the 3-probe contract floor.** The 91
+2026-09-14-KG-extension concepts remain a SEPARATE, larger, not-yet-started task (see below).
 Formal EB
 authoring started 2026-09-20 at the KG root, `bio.found.what-is-biology`, then continued in
 strict KG-prerequisite order through 29 concepts total (`educational-brain/concepts/biology/`,

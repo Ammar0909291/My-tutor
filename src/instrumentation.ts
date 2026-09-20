@@ -242,8 +242,10 @@ async function bootstrapAssets() {
       // (bio.physio, 8) + Batch 5 (bio.gen, 8) + Batch 6 (bio.eco, 7) + Batch 7
       // (bio.evo, 7) + Batch 8 (bio.micro, 6) + Batch 9 (bio.div, 6) + Batch 10
       // (bio.plant, 5) + Batch 11 (bio.repro, 5) + Batch 12 (bio.immuno, 5) +
-      // Batch 13 (bio.sys, 4) + Batch 14 (bio.biotech, 4) closed here —
-      // 101/108; the remaining 7 of the 108 are later batches.
+      // Batch 13 (bio.sys, 4) + Batch 14 (bio.biotech, 4) + Batch 15
+      // (bio.bioinfo, 4 + bio.dev, 3) closed here — the ENTIRE
+      // originally-authored 108-concept probe-depth campaign is now
+      // complete: 108/108.
       const { BIOLOGY_DEPTH_PROBES } =
         await import('./lib/teaching/assets/biologyDepthSeedAssets')
       // English band-gap probes joined 2026-09-08. A direct production query

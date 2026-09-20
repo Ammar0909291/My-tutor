@@ -85,12 +85,12 @@
  * (bio.sys, 4 concepts, 2026-09-20): the thirteenth domain closed, same
  * mechanism, same contract. Batch 14 (bio.biotech, 4 concepts,
  * 2026-09-20): the fourteenth domain closed, same mechanism, same
- * contract. Combined: 101/108 originally-authored concepts now at the
- * 3-probe floor. The remaining 7 of the 108 (`bio.bioinfo`/`bio.dev`)
- * are NOT covered by this file and remain at 2/3 gradeable
- * probes — a bounded, honestly
- * reported partial closure, not a claim of full biology probe-depth
- * closure. The 91 concepts added by
+ * contract. Batch 15 (bio.bioinfo, 4 concepts + bio.dev, 3 concepts,
+ * 2026-09-20): the fifteenth and FINAL batch, closing the last two
+ * domains together — this completes the entire originally-authored
+ * 108-concept probe-depth campaign: **108/108 now at the 3-probe
+ * floor.** No concept from the original 108 remains below contract.
+ * The 91 concepts added by
  * the 2026-09-14 KG extension
  * (`bio.neuro`, `bio.behav`, and the expansions to the 16 pre-existing
  * domains) have ZERO seed content of any kind (0 explanations, 0 probes)
@@ -123,6 +123,7 @@ const srcD11 = (concept: string, what: string) => src('batch 11, bio.repro, 2026
 const srcD12 = (concept: string, what: string) => src('batch 12, bio.immuno, 2026-09-20', concept, what)
 const srcD13 = (concept: string, what: string) => src('batch 13, bio.sys, 2026-09-20', concept, what)
 const srcD14 = (concept: string, what: string) => src('batch 14, bio.biotech, 2026-09-20', concept, what)
+const srcD15 = (concept: string, what: string) => src('batch 15, bio.bioinfo + bio.dev, 2026-09-20', concept, what)
 
 // ═══════════════════════════════════════════════════════════════════════════
 // BATCH BIO-D1 — bio.found (all 8 concepts) @ HIGH, PROFICIENT, short_answer
@@ -1783,6 +1784,125 @@ const BIO_D14: SeedProbe[] = [
   },
 ]
 
+// ═══════════════════════════════════════════════════════════════════════════
+// BATCH BIO-D15 — bio.bioinfo (4 concepts) + bio.dev (3 concepts) @
+// PROFICIENT, short_answer. FINAL batch — closes the entire
+// originally-authored 108-concept probe-depth campaign to 108/108.
+// bio.bioinfo: all 4 at gradeBand UNDERGRADUATE. bio.dev:
+// gametogenesis-fertilisation-dev at HIGH; morphogenesis-
+// differentiation and stem-cells-regeneration at UNDERGRADUATE —
+// matching each concept's own existing pair exactly, per the same
+// per-(concept, gradeBand) rule established in Batch 2.
+// ═══════════════════════════════════════════════════════════════════════════
+
+const BIO_D15: SeedProbe[] = [
+  {
+    conceptId: 'bio.bioinfo.bioinformatics-intro', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'Two bioinformaticians analyse the exact same raw sequencing dataset, but one chooses a different reference genome version and a different significance threshold than the other. Should we expect their final results to be identical?',
+    choices: [
+      { text: 'Not necessarily — every analysis step encodes assumptions (aligner choice, thresholds, reference genome version) that shape the results, so different parameter choices on identical raw data can produce different outputs', isCorrect: true },
+      { text: 'Yes — bioinformatics analyses are purely objective calculations that always produce the same result regardless of parameter choices', isCorrect: false },
+      { text: 'Yes, as long as both used the same sequencing machine to generate the raw data', isCorrect: false },
+      { text: 'Not necessarily, but only because one of the two must have made a calculation error', isCorrect: false },
+    ],
+    correctValue: 'Not necessarily — parameter/reference choices shape results even on identical data',
+    targetedMisconceptions: [],
+    source: srcD15('bio.bioinfo.bioinformatics-intro', 'applies the explanation’s own stated point that "every analysis step makes biological assumptions encoded in algorithm parameters" to a two-analyst comparison scenario, distinct from the E-value-meaning mcq and the AlphaFold-is-not-experimental misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.bioinfo.sequence-alignment', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'An alignment program inserts a gap in one sequence to align it against another. A student interprets this gap as meaning "that portion of the sequencing data was missing or low quality." Is this interpretation correct?',
+    choices: [
+      { text: 'No — a gap represents a hypothesised evolutionary insertion or deletion event, not missing or low-quality data; treating gaps as a data-quality issue leads to incorrect evolutionary inference', isCorrect: true },
+      { text: 'Yes — gaps in an alignment always indicate a sequencing failure at that specific position', isCorrect: false },
+      { text: 'Yes — a gap means the aligner could not determine a base at that position with any confidence', isCorrect: false },
+      { text: 'No — gaps only ever appear due to software bugs in the alignment algorithm', isCorrect: false },
+    ],
+    correctValue: 'No — a gap represents a hypothesised insertion/deletion event, not missing data',
+    targetedMisconceptions: [],
+    source: srcD15('bio.bioinfo.sequence-alignment', 'applies the explanation’s own stated point that "a gap in an alignment represents a hypothetical insertion or deletion event, not \'missing data\'" to a direct claim-evaluation task, distinct from the gap-penalty-asymmetry mcq and the twilight-zone-22%-identity misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.bioinfo.phylogenetics-computational', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A gene tree built from one specific gene\'s sequences shows a different branching pattern than the accepted species tree for the same organisms. What biological phenomena could explain this discrepancy?',
+    choices: [
+      { text: 'Gene duplication, gene loss, lateral gene transfer, or incomplete lineage sorting can all make a single gene\'s history diverge from the actual speciation history', isCorrect: true },
+      { text: 'This discrepancy is always a computational error and never reflects real biological processes', isCorrect: false },
+      { text: 'Gene trees and species trees are mathematically guaranteed to always match exactly for any correctly sequenced gene', isCorrect: false },
+      { text: 'Only sequencing errors in the gene of interest could ever cause this kind of mismatch', isCorrect: false },
+    ],
+    correctValue: 'Gene duplication/loss, lateral transfer, or incomplete lineage sorting',
+    targetedMisconceptions: [],
+    source: srcD15('bio.bioinfo.phylogenetics-computational', 'applies the explanation’s own stated point that "a gene tree is not the same as a species tree; gene duplication, loss, lateral gene transfer, and incomplete lineage sorting can make gene histories diverge" to a discrepancy-explanation task, distinct from the bootstrap-value-meaning mcq and the basal-branching-is-not-primitive misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.bioinfo.structural-bioinformatics', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A researcher runs AlphaFold2 on a signalling protein known to have a long intrinsically disordered region that only folds upon binding a partner protein. Should they expect AlphaFold2 to confidently predict one well-defined structure for that disordered region?',
+    choices: [
+      { text: 'No — AlphaFold2 predicts a single lowest-energy conformation and does not reliably capture intrinsically disordered regions, which have no single defined structure on their own; confidence in that region\'s prediction should be low', isCorrect: true },
+      { text: 'Yes — AlphaFold2 always produces a single, high-confidence structure for every region of every protein, disordered or not', isCorrect: false },
+      { text: 'Yes, because intrinsically disordered regions are simply regions AlphaFold2 has not yet been trained on and will be added in a future version with full confidence', isCorrect: false },
+      { text: 'No, because AlphaFold2 cannot predict any part of a protein that contains a disordered region anywhere in the sequence', isCorrect: false },
+    ],
+    correctValue: 'No — intrinsically disordered regions are a known AlphaFold2 limitation',
+    targetedMisconceptions: [],
+    source: srcD15('bio.bioinfo.structural-bioinformatics', 'applies the explanation’s own stated limitation ("it does not capture... intrinsically disordered regions that have no defined structure") to a signalling-protein scenario, distinct from the resolution-value mcq and the AlphaFold-doesn’t-replace-crystallography misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.dev.gametogenesis-fertilisation-dev', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'After fertilisation, the zygote undergoes rapid cell divisions called cleavage. Is cleavage a continuation of the meiosis that produced the egg and sperm, or a different kind of cell division entirely?',
+    choices: [
+      { text: 'A different kind of division — cleavage is mitotic division of the diploid zygote, distinct from the meiosis that earlier produced the haploid gametes', isCorrect: true },
+      { text: 'A continuation of meiosis — the zygote resumes the same meiotic division that produced the egg and sperm', isCorrect: false },
+      { text: 'Cleavage is a third, entirely separate process unrelated to either mitosis or meiosis', isCorrect: false },
+      { text: 'Cleavage alternates between mitotic and meiotic divisions with each cell cycle', isCorrect: false },
+    ],
+    correctValue: 'Cleavage is mitotic, not a continuation of meiosis',
+    targetedMisconceptions: [],
+    source: srcD15('bio.dev.gametogenesis-fertilisation-dev', 'applies the explanation’s own stated distinction ("meiosis is not cleavage... cleavage after fertilisation is mitotic division of the diploid zygote") to a direct classification task, distinct from the oogenesis-vs-spermatogenesis-cell-count mcq and the metaphase-II-arrest misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.dev.morphogenesis-differentiation', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A cell has just received positional signals instructing it to become a muscle cell, and transcription factors have begun silencing all alternative gene programs — a state called determination. If this cell is now experimentally transplanted to a completely different part of the embryo, will it still become a muscle cell?',
+    choices: [
+      { text: 'Yes — once determination has occurred, the cell\'s fate is locked in by the silencing of alternative programs, regardless of new positional signals it receives at its new location', isCorrect: true },
+      { text: 'No — the cell will immediately adopt whatever fate is specified by the positional signals at its new location, since positional signals always override any prior state', isCorrect: false },
+      { text: 'No — transplantation always triggers apoptosis in a determined cell, since it can no longer respond to any signal at all', isCorrect: false },
+      { text: 'It is impossible to predict, since determination has no real biological consequence for a cell\'s future fate', isCorrect: false },
+    ],
+    correctValue: 'Yes — determination locks in cell fate independent of subsequent positional signals',
+    targetedMisconceptions: [],
+    source: srcD15('bio.dev.morphogenesis-differentiation', 'applies the explanation’s own stated determination mechanism ("transcription factors lock in each cell’s identity by closing off alternative gene programs") to a transplantation-experiment reasoning task, distinct from the Shh-gradient-positional-information mcq and the liver-neuron-same-DNA misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.dev.stem-cells-regeneration', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A researcher takes an adult skin cell (a differentiated somatic cell) and wants to convert it into a pluripotent stem cell without using an embryo at all. Which specific set of introduced factors accomplishes this reprogramming?',
+    choices: [
+      { text: 'The four Yamanaka factors — Oct4, Sox2, Klf4, and c-Myc — reprogramming the cell into an induced pluripotent stem cell (iPSC)', isCorrect: true },
+      { text: 'A single factor, telomerase, which alone is sufficient to reverse any somatic cell to full pluripotency', isCorrect: false },
+      { text: 'Haematopoietic growth factors, the same factors used to expand adult blood stem cells', isCorrect: false },
+      { text: 'No combination of factors can reprogram a differentiated adult cell without using embryonic material', isCorrect: false },
+    ],
+    correctValue: 'The four Yamanaka factors (Oct4, Sox2, Klf4, c-Myc), producing an iPSC',
+    targetedMisconceptions: [],
+    source: srcD15('bio.dev.stem-cells-regeneration', 'applies the explanation’s own stated Yamanaka-factor iPSC reprogramming mechanism ("adult somatic cells reprogrammed to pluripotency by introducing four transcription factors") to a naming/mechanism-recall task, distinct from the HSC-multipotency mcq and the clinic-overclaim misconception probe already on file'),
+  },
+]
+
 /**
  * Every biology probe-depth probe. One array, so `seed-knowledge-assets.ts`,
  * the cold-start bootstrap and the contract tests — all of which scan for a
@@ -1803,4 +1923,5 @@ export const BIOLOGY_DEPTH_PROBES: SeedProbe[] = [
   ...BIO_D12,
   ...BIO_D13,
   ...BIO_D14,
+  ...BIO_D15,
 ]
