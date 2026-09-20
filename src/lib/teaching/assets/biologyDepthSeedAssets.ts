@@ -83,10 +83,11 @@
  * same contract. Batch 12 (bio.immuno, 5 concepts, 2026-09-20): the
  * twelfth domain closed, same mechanism, same contract. Batch 13
  * (bio.sys, 4 concepts, 2026-09-20): the thirteenth domain closed, same
- * mechanism, same contract. Combined: 97/108 originally-authored
- * concepts now at the 3-probe floor. The remaining 11 of the 108
- * (`bio.biotech`/`bio.bioinfo`/`bio.dev`) are NOT covered by this file
- * and remain at 2/3 gradeable
+ * mechanism, same contract. Batch 14 (bio.biotech, 4 concepts,
+ * 2026-09-20): the fourteenth domain closed, same mechanism, same
+ * contract. Combined: 101/108 originally-authored concepts now at the
+ * 3-probe floor. The remaining 7 of the 108 (`bio.bioinfo`/`bio.dev`)
+ * are NOT covered by this file and remain at 2/3 gradeable
  * probes — a bounded, honestly
  * reported partial closure, not a claim of full biology probe-depth
  * closure. The 91 concepts added by
@@ -121,6 +122,7 @@ const srcD10 = (concept: string, what: string) => src('batch 10, bio.plant, 2026
 const srcD11 = (concept: string, what: string) => src('batch 11, bio.repro, 2026-09-20', concept, what)
 const srcD12 = (concept: string, what: string) => src('batch 12, bio.immuno, 2026-09-20', concept, what)
 const srcD13 = (concept: string, what: string) => src('batch 13, bio.sys, 2026-09-20', concept, what)
+const srcD14 = (concept: string, what: string) => src('batch 14, bio.biotech, 2026-09-20', concept, what)
 
 // ═══════════════════════════════════════════════════════════════════════════
 // BATCH BIO-D1 — bio.found (all 8 concepts) @ HIGH, PROFICIENT, short_answer
@@ -1710,6 +1712,77 @@ const BIO_D13: SeedProbe[] = [
   },
 ]
 
+// ═══════════════════════════════════════════════════════════════════════════
+// BATCH BIO-D14 — bio.biotech (all 4 concepts) @ PROFICIENT, short_answer.
+// 1 of 4 at gradeBand HIGH (biotech-principles); 3 at UNDERGRADUATE
+// (biotech-process-applications, genomics-proteomics, crispr-genome-
+// editing) — matching each concept's own existing pair exactly, per the
+// same per-(concept, gradeBand) rule established in Batch 2.
+// ═══════════════════════════════════════════════════════════════════════════
+
+const BIO_D14: SeedProbe[] = [
+  {
+    conceptId: 'bio.biotech.biotech-principles', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A pharmaceutical company needs to mass-produce a therapeutic protein cheaply and quickly. Based on the "living factories" principle, why would bacteria or yeast typically be chosen as the production system over, say, extracting the protein from farmed animals?',
+    choices: [
+      { text: 'Microorganisms grow rapidly, are cheap to culture at large scale, and can be genetically engineered to overproduce a specific desired protein', isCorrect: true },
+      { text: 'Bacteria and yeast naturally already produce every human protein without needing any genetic engineering', isCorrect: false },
+      { text: 'Farmed animals cannot be used to produce any therapeutic proteins under any circumstances', isCorrect: false },
+      { text: 'Bacteria and yeast are chosen purely because they are eukaryotic, like human cells', isCorrect: false },
+    ],
+    correctValue: 'Microorganisms are fast-growing, cheap, and engineerable "living factories"',
+    targetedMisconceptions: [],
+    source: srcD14('bio.biotech.biotech-principles', 'applies the explanation’s own stated "living factories" principle (fast growth, cheap culturing, engineerable for overproduction) to a production-system-choice reasoning task, distinct from the universal-genetic-code/insulin mcq and the biotechnology-is-ancient misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.biotech.biotech-process-applications', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'Some gene-therapy platforms using certain viral vectors CAN integrate corrective DNA into the host genome, while mRNA COVID vaccines cannot integrate anything into DNA at all. What key biological difference between these two platforms explains this?',
+    choices: [
+      { text: 'The integrating viral vectors carry the specific machinery (such as reverse transcriptase and integrase) needed to convert and insert genetic material into the host genome; mRNA vaccines carry no such integration machinery at all', isCorrect: true },
+      { text: 'mRNA vaccines are actually more likely to integrate into DNA than viral vectors, because RNA is more chemically reactive with DNA', isCorrect: false },
+      { text: 'Both platforms integrate DNA equally; the only difference is which specific gene gets inserted', isCorrect: false },
+      { text: 'Viral vectors never enter human cells at all, so this comparison does not apply', isCorrect: false },
+    ],
+    correctValue: 'Integrating viral vectors carry reverse transcriptase/integrase machinery; mRNA vaccines carry none',
+    targetedMisconceptions: [],
+    source: srcD14('bio.biotech.biotech-process-applications', 'applies the explanation’s own stated gene-therapy-via-viral-vector platform, contrasted against its own mRNA-vaccine-cannot-integrate explanation, as a platform-comparison reasoning task, distinct from the restriction-enzyme-cloning mcq and the mRNA-cannot-integrate-alone misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.biotech.genomics-proteomics', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'The human genome contains roughly 20,000 protein-coding genes, but the human proteome (the full set of distinct protein forms) is estimated to include several hundred thousand distinct variants. What explains this large discrepancy?',
+    choices: [
+      { text: 'Alternative splicing lets one gene produce multiple different mRNA transcripts, and post-translational modifications (phosphorylation, glycosylation, cleavage) further diversify each resulting protein, multiplying the total far beyond the gene count', isCorrect: true },
+      { text: 'The estimate of ~20,000 genes must be incorrect, since every protein requires its own dedicated gene', isCorrect: false },
+      { text: 'Proteomics counts every individual protein molecule in the cell, not every distinct protein type, which explains the much larger number', isCorrect: false },
+      { text: 'Most of the extra proteins come from bacterial contamination during genome sequencing', isCorrect: false },
+    ],
+    correctValue: 'Alternative splicing plus post-translational modification multiply protein diversity',
+    targetedMisconceptions: [],
+    source: srcD14('bio.biotech.genomics-proteomics', 'applies the explanation’s own stated proteome-vs-genome complexity fact ("one gene can produce multiple spliced mRNAs and a protein can be phosphorylated, glycosylated, or cleaved dozens of ways") to a quantitative-discrepancy reasoning task, distinct from the RNA-seq-output mcq and the sequencing-is-not-full-understanding misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.biotech.crispr-genome-editing', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A researcher wants to correct a single disease-causing point mutation in a patient\'s cells while avoiding a double-strand break (DSB) entirely, to minimise safety risk. Which CRISPR-derived tool should they use instead of standard Cas9-based editing?',
+    choices: [
+      { text: 'A base editor (or prime editor) — these tools change single nucleotides directly without creating a double-strand break, improving safety for therapeutic use', isCorrect: true },
+      { text: 'Standard Cas9 with NHEJ repair — NHEJ is specifically designed to make precise single-nucleotide corrections without any break', isCorrect: false },
+      { text: 'Standard Cas9 with HDR — HDR never requires a double-strand break to introduce an edit', isCorrect: false },
+      { text: 'There is no CRISPR-derived tool capable of editing DNA without creating a double-strand break', isCorrect: false },
+    ],
+    correctValue: 'A base editor or prime editor',
+    targetedMisconceptions: [],
+    source: srcD14('bio.biotech.crispr-genome-editing', 'applies the explanation’s own stated base-editor/prime-editor toolkit extension ("extend the toolkit to change single nucleotides without a DSB, improving safety") to a tool-selection reasoning task, distinct from the NHEJ-knockout-without-template mcq and the cut-and-paste-misleading misconception probe already on file'),
+  },
+]
+
 /**
  * Every biology probe-depth probe. One array, so `seed-knowledge-assets.ts`,
  * the cold-start bootstrap and the contract tests — all of which scan for a
@@ -1729,4 +1802,5 @@ export const BIOLOGY_DEPTH_PROBES: SeedProbe[] = [
   ...BIO_D11,
   ...BIO_D12,
   ...BIO_D13,
+  ...BIO_D14,
 ]
