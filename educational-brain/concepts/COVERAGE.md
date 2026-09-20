@@ -18424,3 +18424,29 @@ Fresh frontier for Batch 233 (11 concepts): math.cat.adjunction/functor-category
 math.top.cohomology, plus math.cx.complex-numbers-analysis, math.fnal.compact-operator-spectrum/
 distributions/fourier-transform/special-functions, math.graph.random-graph,
 math.opt.semidefinite-programming. Campaign continues under the same active `/loop`.
+
+## Batch 233 (2026-09-20) — zero discrepancy
+
+Authored `math.fnal.compact-operator-spectrum` (bounded never implies compact in infinite
+dimensions; a compact operator's nonzero spectrum accumulates only at 0, never at any nonzero
+point; the Fredholm alternative's dichotomy requires compactness, never applies to a general
+bounded operator) and `math.fnal.fourier-transform` (the L² Fourier transform requires extension
+by density, never the same direct integral formula as the L¹-based classical transform; "unitary"
+means exact norm preservation, never conflated with mere bijectivity; "diagonalizes
+differentiation" is a precise basis-change fact, never a loose metaphor). Both zero discrepancy
+(compact-operator-spectrum has no cross-links per KG; fourier-transform's two cross-links
+`math.de.fourier-transform`/`math.de.fourier-series` both confirmed authored, dual
+cross-link-probe engaged per Blueprint). Mathematics **859/908 → 861/908**, 47 remaining. **math.fnal
+is now 16/18 authored — NOT fully certified.** Correction: the content commit `b6d77a8`'s own
+message inaccurately stated "math.fnal certified" — `scripts/math/state.ts`'s EB-certified-domains
+list, checked immediately after, confirms math.fnal is NOT among the 18 certified domains (still
+missing `math.fnal.distributions` and `math.fnal.special-functions`). This is the same class of
+premature-completion-claim error as Batch 222's miscount, self-caught this time before any further
+batch relied on the false claim, and corrected transparently here per established campaign
+discipline. Validated: KG PASS (908/908 reachable), state.ts confirms 861/908 (18 EB-certified
+domains, unchanged from Batch 232), tsc clean, tests 561/561. Commit `b6d77a8`, pushed.
+
+Fresh frontier for Batch 234 (9 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.fnal.distributions/
+special-functions, math.graph.random-graph, math.opt.semidefinite-programming. Campaign continues
+under the same active `/loop`.

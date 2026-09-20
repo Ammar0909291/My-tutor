@@ -6328,3 +6328,21 @@ Fresh frontier for Batch 233 (11 concepts): math.cat.adjunction/functor-category
 math.top.cohomology, plus math.cx.complex-numbers-analysis, math.fnal.compact-operator-spectrum/
 distributions/fourier-transform/special-functions, math.graph.random-graph,
 math.opt.semidefinite-programming. Campaign continues under the same active `/loop`.
+
+## Batch 233 (2026-09-20)
+
+Authored `compact-operator-spectrum` (bounded never implies compact in infinite dimensions;
+nonzero spectrum accumulates only at 0; Fredholm alternative needs compactness) and
+`fourier-transform` (L² transform needs density extension, never the L¹ formula directly;
+unitary means exact norm preservation, never mere bijectivity; diagonalizing differentiation is
+precise, never a metaphor). Both zero discrepancy. Mathematics **861/908** (859→861), 47
+remaining. **Correction**: the prior content commit's message inaccurately claimed "math.fnal
+certified" — `state.ts` confirms math.fnal is actually **16/18** (`distributions` and
+`special-functions` remain unauthored), same error class as Batch 222's miscount, self-caught and
+corrected here. Full detail in `COVERAGE.md` Batch 233. Validated: KG PASS, state.ts 861/908, tsc
+clean, tests 561/561. Commit `b6d77a8`, pushed.
+
+Fresh frontier for Batch 234 (9 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.fnal.distributions/
+special-functions, math.graph.random-graph, math.opt.semidefinite-programming. Campaign continues
+under the same active `/loop`.
