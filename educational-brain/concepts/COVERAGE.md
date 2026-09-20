@@ -18665,3 +18665,24 @@ Fresh frontier for Batch 244 (10 concepts): math.cat.adjunction/functor-category
 math.cx.analytic-continuation/cauchy-goursat/conformal-mapping/essential-singularity/
 fundamental-theorem-algebra/laurent-series/maximum-modulus. Campaign continues under the same
 active `/loop`.
+
+## Batch 244 (2026-09-20) — zero discrepancy
+
+Authored `math.cx.fundamental-theorem-algebra` (FTA asserts at least one root, never directly n
+roots without iteration; the Liouville proof needs both the growth argument and Liouville itself,
+never Liouville alone, and fails over the reals since sin(x) is bounded C∞ but non-constant; the
+Liouville proof and the winding-number proof are genuinely different routes via independent
+foundational tools, never the same argument renamed) and `math.cx.laurent-series` (the principal
+part is the only genuinely new ingredient beyond an ordinary power series, never an unrelated new
+object; Laurent coefficients come from algebraic substitution of known series, never always the
+contour-integral formula; a finite principal part of any length always means a pole, never
+essential — only a genuinely infinite principal part means essential). Both zero discrepancy
+(cross-link `math.alg.fundamental-theorem-algebra` confirmed authored on disk before setting the
+cross-link probe mode). Mathematics **881/908 → 883/908**, 25 remaining. math.cx now 17/31
+authored (still far from certified). Validated: KG PASS (908/908 reachable), state.ts confirms
+883/908 (still 22 certified domains, unchanged), tsc clean, tests 561/561. Commit `0343116`,
+pushed.
+
+Fresh frontier for Batch 245 (9 concepts): math.cat.adjunction/functor-category/limits,
+math.cx.analytic-continuation/cauchy-goursat/conformal-mapping/essential-singularity/
+maximum-modulus/residue. Campaign continues under the same active `/loop`.
