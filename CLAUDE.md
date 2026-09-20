@@ -84,7 +84,8 @@ never into this file. This file only changes when a LIVE, currently-binding rule
   - physics → `docs/physics/kg/graph.json` (238 concepts, 12 domains, prefix `phys.`)
   - chemistry → `docs/chemistry/kg/graph.json` (186 concepts, prefix `chem.`)
   - computer_science → `docs/computer-science/kg/graph.json` (119 concepts, prefix `cs.`)
-  - biology → `docs/biology/kg/graph.json` (108 concepts, 16 domains, prefix `bio.`)
+  - biology → `docs/biology/kg/graph.json` (199 concepts, 18 domains, prefix `bio.` — grew from
+    108/16 via the 2026-09-14 KG extension)
   - english → `docs/english/kg/graph.json` (216 concepts, 12 domains, prefix `eng.`) — registered
     and live.
   - Canonical 10-field schema only: `id, name, requires, unlocks, cross_links, difficulty, bloom,
@@ -186,14 +187,36 @@ npx tsc --noEmit       # pre-existing stripe/subscription errors are expected on
   `npx tsx scripts/brain/seed-knowledge-assets.ts --draft --dry-run`
 
 ## Current campaign — "fix physics/english/chemistry" (owner-scoped, in progress)
-Owner instruction: fix physics, english, chemistry; biology/computer_science/mathematics content
-work is explicitly PAUSED (do not resume without a fresh instruction). Chemistry and physics are
+Owner instruction: fix physics, english, chemistry; computer_science/mathematics content work
+remains explicitly PAUSED (do not resume without a fresh instruction). Chemistry and physics are
 content-complete at asset-contract (186/186, 261/261) — remaining work there is defect-hunting
 only. English is at 321/412 asset-contract pairs (91 short, mostly ADULT-band `eng.composition/
 communication/linguistics/literature/phonetics/vocab/writing` advanced tiers) — both close the
 gap AND defect-hunt the servable 321. Full running log, known-open defects (ASCII-art fallback
 figures, the content-free hold, the still-unresolved C7 repeat channel), and the saturated-account
 finding above: `docs/history/subject-onboarding-and-fix-campaign.md`.
+
+## Biology end-user readiness program (2026-09-20, owner-scoped, in progress — un-paused by
+## explicit fresh instruction naming Biology; math/CS remain paused above)
+Full Wave 0 audit, findings, and next-wave plan: `docs/architecture/BIOLOGY_READINESS_AUDIT.md`
+(read this before continuing). Headline: production held 0 EXPLANATION/PROBE rows for biology
+despite 108 concepts being authored, because a P-10 abandoned-legacy-slug guard in
+`src/instrumentation.ts` had been aborting the ENTIRE cross-subject asset bootstrap (all
+subjects, not just biology) on every cold start since >=2026-09-15 — 45 live Mathematics rows,
+fixed via the exact reversible status-only precedent in `docs/CLAUDE_HANDOVER.md` §9r/§9s, then
+verified via two forced redeploys (bootstrap now runs its real write path instead of aborting).
+Probe-depth Batch 1-4 (`biologyDepthSeedAssets.ts`, `bio.found` then `bio.cell` then `bio.mol`
+then `bio.physio`, 44 concepts) close the same zero-slack defect physics/chemistry already had:
+every one of biology's 108 authored concepts was stuck at 2/3 gradeable probes, so no biology
+lesson could ever reach verified mastery — now **44/108 at contract** (64 remain, 2/3 gradeable
+each). Formal EB
+authoring started 2026-09-20 at the KG root, `bio.found.what-is-biology`, then continued in
+strict KG-prerequisite order through 17 concepts total (`educational-brain/concepts/biology/`,
+no Blueprint exists for biology as a subject; 2 entries, `scientific-method-in-biology` and
+`unifying-themes-in-biology`, are for ZERO-seed-content concepts) — **EB is 17/199**. These two
+counters are tracked and reported SEPARATELY, never conflated — see `COVERAGE.md`'s biology row. The 91 concepts from the 2026-09-14 KG extension still have zero
+seed content of any kind. Continue via the audit doc's own §11 priority order for probe-depth,
+and strict KG-prerequisite order (not alphabetical) for EB authoring.
 
 ## Full history index
 Every dated campaign, incident, and defect investigation this project has ever recorded is
