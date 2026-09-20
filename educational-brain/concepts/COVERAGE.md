@@ -18626,3 +18626,22 @@ Fresh frontier for Batch 242 (12 concepts): math.cat.adjunction/functor-category
 math.cx.analytic-continuation/cauchy-goursat/conformal-mapping/essential-singularity/
 higher-derivatives/laurent-series/maximum-modulus/morera-theorem/poles. Campaign continues under
 the same active `/loop`.
+
+## Batch 242 (2026-09-20) — zero discrepancy
+
+Authored `math.cx.higher-derivatives` (f⁽ⁿ⁾'s formula is a direct generalization of the Cauchy
+Integral Formula's n=0 case, never independent; holomorphic once means C∞ forever, never a
+real-variable-style derivative gap; Cauchy's inequality bounds a derivative from a bound on f
+alone, never requiring the explicit formula) and `math.cx.poles` (pole order is the unique n
+threading between too-small and too-large, never multiple valid n values; meromorphicity requires
+explicitly checking every singularity, never assumed from general good behavior; the rational-
+function classification is a nontrivial structural theorem, never an obvious restatement). Both
+zero discrepancy (neither concept has cross-links per the KG). Mathematics **877/908 → 879/908**,
+29 remaining. math.cx now 15/31 authored (still far from certified). Validated: KG PASS (908/908
+reachable), state.ts confirms 879/908 (still 22 certified domains, unchanged), tsc clean, tests
+561/561. Commit `d5e5bac`, pushed.
+
+Fresh frontier for Batch 243 (11 concepts): math.cat.adjunction/functor-category/limits,
+math.cx.analytic-continuation/cauchy-goursat/conformal-mapping/essential-singularity/
+laurent-series/liouville-theorem/maximum-modulus/morera-theorem. Campaign continues under the
+same active `/loop`.

@@ -6471,3 +6471,19 @@ Fresh frontier for Batch 242 (12 concepts): math.cat.adjunction/functor-category
 math.cx.analytic-continuation/cauchy-goursat/conformal-mapping/essential-singularity/
 higher-derivatives/laurent-series/maximum-modulus/morera-theorem/poles. Campaign continues under
 the same active `/loop`.
+
+## Batch 242 (2026-09-20)
+
+Authored `higher-derivatives` (f⁽ⁿ⁾'s formula generalizes the Cauchy Integral Formula's n=0 case,
+never independent; holomorphic once means C∞ forever, never a real-variable-style gap; Cauchy's
+inequality bounds from f alone, never requiring the explicit formula) and `poles` (pole order is
+the unique n threading between too-small and too-large; meromorphicity requires checking every
+singularity, never assumed; the rational-function classification is nontrivial, never obvious).
+Both zero discrepancy. Mathematics **879/908** (877→879), 29 remaining. math.cx now 15/31
+authored. Full detail in `COVERAGE.md` Batch 242. Validated: KG PASS, state.ts 879/908, tsc
+clean, tests 561/561. Commit `d5e5bac`, pushed.
+
+Fresh frontier for Batch 243 (11 concepts): math.cat.adjunction/functor-category/limits,
+math.cx.analytic-continuation/cauchy-goursat/conformal-mapping/essential-singularity/
+laurent-series/liouville-theorem/maximum-modulus/morera-theorem. Campaign continues under the
+same active `/loop`.
