@@ -6569,3 +6569,18 @@ Full detail in `COVERAGE.md` Batch 247. Validated: KG PASS, state.ts 889/908, ts
 Fresh frontier for Batch 248 (7 concepts): math.cat.adjunction/functor-category/limits,
 math.cx.analytic-continuation/conformal-mapping/real-integral-residues/rouche-theorem. Campaign
 continues under the same active `/loop`.
+
+## Batch 248 (2026-09-20)
+
+Authored `rouche-theorem` (the domination condition holds only on the contour, never inside it;
+FTA via Rouché needs R large enough for the leading term to dominate, never any radius; the
+conclusion is equal zero counts, never equal zero locations) and `real-integral-residues` (closing
+the contour with an arc is the essential setup step, never assuming the residue theorem applies to
+an open integral directly; the arc's vanishing is a separate step needing explicit justification,
+never automatic; oscillatory integrands need Jordan's lemma, never the same simple bound). Both
+zero discrepancy. Mathematics **891/908** (889→891), 17 remaining. math.cx now 25/31 authored.
+Full detail in `COVERAGE.md` Batch 248. Validated: KG PASS, state.ts 891/908, tsc clean, tests
+561/561. Commit `dcb68d0`, pushed.
+
+Fresh frontier for Batch 249 (5 concepts): math.cat.adjunction/functor-category/limits,
+math.cx.analytic-continuation/conformal-mapping. Campaign continues under the same active `/loop`.

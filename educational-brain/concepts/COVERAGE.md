@@ -18744,3 +18744,24 @@ certified domains, unchanged), tsc clean, tests 561/561. Commit `0151c1c`, pushe
 Fresh frontier for Batch 248 (7 concepts): math.cat.adjunction/functor-category/limits,
 math.cx.analytic-continuation/conformal-mapping/real-integral-residues/rouche-theorem. Campaign
 continues under the same active `/loop`.
+
+## Batch 248 (2026-09-20) — zero discrepancy
+
+Authored `math.cx.rouche-theorem` (the domination condition |f−g|<|g| holds only on the contour,
+never required inside it; the FTA-via-Rouché derivation needs R large enough for the leading term
+to dominate the lower-order terms, never any radius; Rouché's conclusion is equal zero counts,
+never equal zero locations — f and g can have their zeros scattered completely differently and
+still tie in count) and `math.cx.real-integral-residues` (closing the real-axis segment into a
+genuine closed contour with a semicircular arc is the essential setup step, never assuming the
+residue theorem applies directly to the open real-axis integral; the arc's vanishing must be
+separately justified via an explicit ML-bound, never assumed automatic once the residue theorem
+gives a value; oscillatory integrands with a factor like e^{iax} need Jordan's lemma's specifically
+different, tailored estimate, never the same simple polynomial-decay bound). Both zero discrepancy
+(cross-link `math.calc.improper-integrals` confirmed authored on disk before setting the
+cross-link probe mode). Mathematics **889/908 → 891/908**, 17 remaining. math.cx now 25/31
+authored (still far from certified). Validated: KG PASS (908/908 reachable), state.ts confirms
+891/908 (still 22 certified domains, unchanged), tsc clean, tests 561/561. Commit `dcb68d0`,
+pushed.
+
+Fresh frontier for Batch 249 (5 concepts): math.cat.adjunction/functor-category/limits,
+math.cx.analytic-continuation/conformal-mapping. Campaign continues under the same active `/loop`.
