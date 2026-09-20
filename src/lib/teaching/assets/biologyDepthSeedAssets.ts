@@ -75,11 +75,12 @@
  * same mechanism, same contract. Batch 7 (bio.evo, 7 concepts,
  * 2026-09-20): the seventh domain closed, same mechanism, same
  * contract. Batch 8 (bio.micro, 6 concepts, 2026-09-20): the eighth
- * domain closed, same mechanism, same contract. Combined: 72/108
- * originally-authored concepts now at the 3-probe floor. The remaining
- * 36 of the 108 (`bio.plant`/`bio.repro`/`bio.immuno`/`bio.sys`/
- * `bio.biotech`/`bio.bioinfo`/`bio.dev`/`bio.div`) are NOT covered by
- * this file and remain at 2/3 gradeable probes — a bounded, honestly
+ * domain closed, same mechanism, same contract. Batch 9 (bio.div, 6
+ * concepts, 2026-09-20): the ninth domain closed, same mechanism, same
+ * contract. Combined: 78/108 originally-authored concepts now at the
+ * 3-probe floor. The remaining 30 of the 108 (`bio.plant`/`bio.repro`/
+ * `bio.immuno`/`bio.sys`/`bio.biotech`/`bio.bioinfo`/`bio.dev`) are NOT
+ * covered by this file and remain at 2/3 gradeable probes — a bounded, honestly
  * reported partial closure, not a claim of full biology probe-depth
  * closure. The 91 concepts added by
  * the 2026-09-14 KG extension
@@ -108,6 +109,7 @@ const srcD5 = (concept: string, what: string) => src('batch 5, bio.gen, 2026-09-
 const srcD6 = (concept: string, what: string) => src('batch 6, bio.eco, 2026-09-20', concept, what)
 const srcD7 = (concept: string, what: string) => src('batch 7, bio.evo, 2026-09-20', concept, what)
 const srcD8 = (concept: string, what: string) => src('batch 8, bio.micro, 2026-09-20', concept, what)
+const srcD9 = (concept: string, what: string) => src('batch 9, bio.div, 2026-09-20', concept, what)
 
 // ═══════════════════════════════════════════════════════════════════════════
 // BATCH BIO-D1 — bio.found (all 8 concepts) @ HIGH, PROFICIENT, short_answer
@@ -1277,6 +1279,105 @@ const BIO_D8: SeedProbe[] = [
   },
 ]
 
+// ═══════════════════════════════════════════════════════════════════════════
+// BATCH BIO-D9 — bio.div (all 6 concepts) @ PROFICIENT, short_answer.
+// All 6 at gradeBand UNDERGRADUATE, matching each concept's own
+// existing pair exactly.
+// ═══════════════════════════════════════════════════════════════════════════
+
+const BIO_D9: SeedProbe[] = [
+  {
+    conceptId: 'bio.div.three-domain-system', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A newly discovered unicellular microorganism has no membrane-bound nucleus, but its ribosomal RNA sequence and RNA polymerase structure closely resemble those of eukaryotes rather than typical bacteria. Which domain does it most likely belong to?',
+    choices: [
+      { text: 'Archaea — despite lacking a nucleus like Bacteria, molecular features (RNA polymerase, ribosomal similarities) place Archaea closer to Eukarya', isCorrect: true },
+      { text: 'Bacteria — the absence of a nucleus is decisive regardless of any molecular similarity to eukaryotes', isCorrect: false },
+      { text: 'Eukarya — any organism with eukaryote-like molecular machinery must itself be classified as a eukaryote', isCorrect: false },
+      { text: 'This organism cannot be classified into any of the three domains', isCorrect: false },
+    ],
+    correctValue: 'Archaea',
+    targetedMisconceptions: [],
+    source: srcD9('bio.div.three-domain-system', 'applies the explanation’s own stated molecular evidence (similar RNA polymerases, features shared with Eukarya despite lacking a nucleus) to a novel-organism classification task, distinct from the domain-relatedness mcq and the archaea-are-just-bacteria misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.div.endosymbiotic-theory', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'Mitochondria and chloroplasts are both believed to have bacterial origins, but from different ancestral lineages. Which type of ancestral bacterium gave rise to chloroplasts specifically, and what modern capability does this ancestry explain?',
+    choices: [
+      { text: 'A cyanobacterium — an ancestrally photosynthetic bacterium, explaining why chloroplasts (unlike mitochondria) can carry out photosynthesis', isCorrect: true },
+      { text: 'An alpha-proteobacterium — the same ancestral lineage that gave rise to mitochondria', isCorrect: false },
+      { text: 'A denitrifying soil bacterium, explaining chloroplasts’ role in nitrogen metabolism', isCorrect: false },
+      { text: 'Chloroplasts have no bacterial ancestry at all, unlike mitochondria', isCorrect: false },
+    ],
+    correctValue: 'A cyanobacterium — explaining chloroplasts’ photosynthetic capability',
+    targetedMisconceptions: [],
+    source: srcD9('bio.div.endosymbiotic-theory', 'applies the explanation’s own stated distinction ("chloroplasts from a cyanobacterium") to an ancestry-to-capability reasoning task, distinct from the mitochondria-focused strongest-evidence mcq and the own-ribosomes misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.div.protist-diversity', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'Euglena, a protist, photosynthesises when light is available but switches to absorbing organic nutrients from its surroundings in the dark. What does this nutritional flexibility demonstrate about "Protista" as a biological category?',
+    choices: [
+      { text: 'It reinforces that protists do not fit the clean producer-vs-consumer division that works for plants and animals — the category is a diverse, catch-all grouping rather than a group unified by one shared trait', isCorrect: true },
+      { text: 'It proves that Euglena is misclassified and should actually be considered a plant', isCorrect: false },
+      { text: 'It shows that all protists can switch between photosynthesis and heterotrophy on demand', isCorrect: false },
+      { text: 'It has no bearing on how protists should be classified as a group', isCorrect: false },
+    ],
+    correctValue: 'Reinforces that Protista is a diverse, non-uniform catch-all category',
+    targetedMisconceptions: [],
+    source: srcD9('bio.div.protist-diversity', 'applies the explanation’s own stated nutritional diversity ("some photosynthetic, some heterotrophic, and some switch between modes") to a Euglena-specific reasoning task about category coherence, distinct from the polyphyletic-definition mcq and the simple-life-cycle-counterexample misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.div.fungal-biology', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'A fungus growing on a piece of bread cannot ingest solid bread particles the way an animal swallows food. How does it actually obtain nutrients from the bread?',
+    choices: [
+      { text: 'It secretes digestive enzymes onto/into the bread, breaking it down externally, then absorbs the resulting smaller soluble molecules through its hyphae', isCorrect: true },
+      { text: 'It engulfs small bread particles whole through phagocytosis, digesting them internally afterward', isCorrect: false },
+      { text: 'It photosynthesises using chlorophyll, using the bread only as physical support', isCorrect: false },
+      { text: 'It absorbs the bread’s mass directly through its chitin cell wall without any enzymatic breakdown', isCorrect: false },
+    ],
+    correctValue: 'External enzymatic digestion, then absorption of the products',
+    targetedMisconceptions: [],
+    source: srcD9('bio.div.fungal-biology', 'applies the explanation’s own stated external-digestion mechanism ("secreting enzymes into their substrate and absorbing the products — rather than ingesting food") to a concrete bread-mould scenario, distinct from the chitin-vs-cellulose-wall mcq and the fungi-closer-to-animals misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.div.plant-diversity-alternation-of-generations', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'In ferns, which generation is the large, familiar, photosynthetic plant most people simply call "the fern," and how does its dominant generation compare to the moss pattern?',
+    choices: [
+      { text: 'The sporophyte (diploid) is the large, dominant, visible fern plant — the reverse of mosses, where the gametophyte is dominant and visible instead', isCorrect: true },
+      { text: 'The gametophyte (haploid) is the large, dominant, visible fern plant, exactly as in mosses', isCorrect: false },
+      { text: 'Ferns have no gametophyte generation at all, unlike mosses', isCorrect: false },
+      { text: 'Both generations are equally large and visible in ferns, unlike in mosses', isCorrect: false },
+    ],
+    correctValue: 'The sporophyte — dominance has reversed compared to mosses',
+    targetedMisconceptions: [],
+    source: srcD9('bio.div.plant-diversity-alternation-of-generations', 'applies the explanation’s own stated fern-specific detail ("in ferns the sporophyte dominates and the gametophyte is a tiny heart-shaped structure") to a moss-vs-fern comparison task, distinct from the moss-specific green-cushion mcq and the evolutionary-trend misconception probe already on file'),
+  },
+  {
+    conceptId: 'bio.div.cladistics-phylogenetic-thinking', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem:
+      'Two candidate phylogenetic trees both fit the same DNA sequence data, but Tree A requires only 3 evolutionary changes to explain the data while Tree B requires 7. Which tree would a cladist favour by the principle of parsimony, and why?',
+    choices: [
+      { text: 'Tree A — parsimony favours the tree requiring the fewest evolutionary changes to explain the observed data', isCorrect: true },
+      { text: 'Tree B — a tree requiring more evolutionary changes reflects a more thoroughly documented evolutionary history', isCorrect: false },
+      { text: 'Neither can be preferred — cladistics never uses a criterion to choose between competing trees', isCorrect: false },
+      { text: 'Both are equally valid, since phylogenetic trees are never comparable by number of changes', isCorrect: false },
+    ],
+    correctValue: 'Tree A — fewer required changes is the parsimony criterion',
+    targetedMisconceptions: [],
+    source: srcD9('bio.div.cladistics-phylogenetic-thinking', 'applies the explanation’s own stated parsimony principle ("finding the most parsimonious tree (fewest evolutionary changes)") to a worked tree-comparison task, distinct from the clade-definition mcq and the dolphin-fish-convergent-evolution misconception probe already on file'),
+  },
+]
+
 /**
  * Every biology probe-depth probe. One array, so `seed-knowledge-assets.ts`,
  * the cold-start bootstrap and the contract tests — all of which scan for a
@@ -1291,4 +1392,5 @@ export const BIOLOGY_DEPTH_PROBES: SeedProbe[] = [
   ...BIO_D6,
   ...BIO_D7,
   ...BIO_D8,
+  ...BIO_D9,
 ]
