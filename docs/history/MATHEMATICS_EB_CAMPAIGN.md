@@ -6521,3 +6521,19 @@ Validated: KG PASS, state.ts 883/908, tsc clean, tests 561/561. Commit `0343116`
 Fresh frontier for Batch 245 (9 concepts): math.cat.adjunction/functor-category/limits,
 math.cx.analytic-continuation/cauchy-goursat/conformal-mapping/essential-singularity/
 maximum-modulus/residue. Campaign continues under the same active `/loop`.
+
+## Batch 245 (2026-09-20)
+
+Authored `cauchy-goursat` (Cauchy-Goursat genuinely weakens the classical hypothesis, never
+already covered; Goursat's proof is a nested-triangle compactness argument, never algebraic; the
+holomorphic-equals-analytic collapse is genuine, never separate requirements) and `residue` (the
+residue is exactly a₋₁, never the whole principal part; a simple pole's residue comes from a limit
+shortcut, never requiring full expansion; a higher-order pole needs full-factor removal then
+differentiation, never the simple-pole shortcut directly). Both zero discrepancy. Mathematics
+**885/908** (883→885), 23 remaining. math.cx now 19/31 authored. Full detail in `COVERAGE.md`
+Batch 245. Validated: KG PASS, state.ts 885/908, tsc clean, tests 561/561. Commit `f926d45`,
+pushed.
+
+Fresh frontier for Batch 246 (8 concepts): math.cat.adjunction/functor-category/limits,
+math.cx.analytic-continuation/conformal-mapping/essential-singularity/maximum-modulus/
+residue-theorem. Campaign continues under the same active `/loop`.

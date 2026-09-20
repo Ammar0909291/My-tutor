@@ -18686,3 +18686,23 @@ pushed.
 Fresh frontier for Batch 245 (9 concepts): math.cat.adjunction/functor-category/limits,
 math.cx.analytic-continuation/cauchy-goursat/conformal-mapping/essential-singularity/
 maximum-modulus/residue. Campaign continues under the same active `/loop`.
+
+## Batch 245 (2026-09-20) — zero discrepancy
+
+Authored `math.cx.cauchy-goursat` (Cauchy-Goursat genuinely weakens the classical Cauchy
+theorem's hypothesis, dropping continuity of f′, never already covered by the classical version;
+Goursat's proof is a nested-triangle compactness/estimation argument, never an algebraic
+Green's-theorem-style calculation; the resulting holomorphic-equals-analytic equivalence is a
+genuine collapse unique to complex analysis, never two separately-required properties) and
+`math.cx.residue` (the residue is defined as exactly the a₋₁ Laurent coefficient, never the whole
+principal part or any other negative coefficient; a simple pole's residue comes from the limit
+shortcut, never requiring full series expansion; a higher-order pole needs the full-factor-
+removal-then-differentiate formula, never the simple-pole shortcut misapplied directly). Both
+zero discrepancy (neither concept has cross-links per the KG). Mathematics **883/908 → 885/908**,
+23 remaining. math.cx now 19/31 authored (still far from certified). Validated: KG PASS (908/908
+reachable), state.ts confirms 885/908 (still 22 certified domains, unchanged), tsc clean, tests
+561/561. Commit `f926d45`, pushed.
+
+Fresh frontier for Batch 246 (8 concepts): math.cat.adjunction/functor-category/limits,
+math.cx.analytic-continuation/conformal-mapping/essential-singularity/maximum-modulus/
+residue-theorem. Campaign continues under the same active `/loop`.
