@@ -6647,3 +6647,17 @@ state.ts 899/908, tsc clean, tests 561/561. Commit `6ec6495`, pushed.
 
 Fresh frontier for Batch 253 (5 concepts, all math.cat): math.cat.adjunction/equalizer/pullback/
 tensor-product/yoneda-lemma. Campaign continues under the same active `/loop`.
+
+## Batch 253 (2026-09-20)
+
+Authored `equalizer` (the equalizer is exactly the limit of the two-parallel-arrows diagram, never
+an unrelated new definition; universality picks out one canonical subset, never any arbitrary
+agreeing subset; the coequalizer is a genuinely different quotient construction, never the
+equalizer mirrored) and `pullback` (cospan and span point opposite directions, never
+interchangeable; the pullback equals the product only in the degenerate one-point-C case, never
+always; the pushout's element count is reduced by identification, never a plain sum). Both zero
+discrepancy. Mathematics **901/908** (899→901), 7 remaining. Full detail in `COVERAGE.md` Batch
+253. Validated: KG PASS, state.ts 901/908, tsc clean, tests 561/561. Commit `93c9c7e`, pushed.
+
+Fresh frontier for Batch 254 (3 concepts, all math.cat): math.cat.adjunction/tensor-product/
+yoneda-lemma. Campaign continues under the same active `/loop`.

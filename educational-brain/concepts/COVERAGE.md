@@ -18849,3 +18849,21 @@ reachable), state.ts confirms 899/908 (still 23 certified domains, unchanged), t
 
 Fresh frontier for Batch 253 (5 concepts, all math.cat): math.cat.adjunction/equalizer/pullback/
 tensor-product/yoneda-lemma. Campaign continues under the same active `/loop`.
+
+## Batch 253 (2026-09-20) — zero discrepancy
+
+Authored `math.cat.equalizer` (the equalizer is exactly the limit of the two-parallel-arrows
+diagram shape, never an unrelated new definition — cone data over that shape reduces exactly to
+equalizer data; universality picks out one canonical, maximal agreeing subset, never any arbitrary
+subset where f and g happen to agree; the coequalizer is a genuinely different quotient
+construction that collapses B, never the equalizer's subset-of-A logic mirrored) and
+`math.cat.pullback` (cospan into C and span out of C point genuinely opposite directions, never
+interchangeable diagram shapes for pullback versus pushout; the pullback equals the ordinary
+product only in the degenerate information-free one-point-C case, never generally; the pushout's
+element count is reduced below |A|+|B| by whatever identifications f,g force, never a plain sum).
+Both zero discrepancy (neither concept has cross-links per the KG). Mathematics **899/908 →
+901/908**, 7 remaining. Validated: KG PASS (908/908 reachable), state.ts confirms 901/908 (still
+23 certified domains, unchanged), tsc clean, tests 561/561. Commit `93c9c7e`, pushed.
+
+Fresh frontier for Batch 254 (3 concepts, all math.cat): math.cat.adjunction/tensor-product/
+yoneda-lemma. Campaign continues under the same active `/loop`.
