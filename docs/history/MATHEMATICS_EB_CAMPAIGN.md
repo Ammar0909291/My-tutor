@@ -6311,3 +6311,20 @@ Fresh frontier for Batch 232 (12 concepts): math.cat.adjunction/functor-category
 math.top.cohomology, plus math.cx.complex-numbers-analysis, math.fnal.distributions/
 fourier-transform/special-functions/spectral-theory/uniform-boundedness, math.graph.random-graph,
 math.opt.semidefinite-programming. Campaign continues under the same active `/loop`.
+
+## Batch 232 (2026-09-20)
+
+Authored `uniform-boundedness` (pointwise boundedness never trivially gives uniform boundedness;
+completeness via Baire Category is the essential mechanism, never assumed for any normed space; a
+pointwise-convergent operator sequence's norms are automatically uniformly bounded) and
+`spectral-theory` (spectrum defined via invertibility never a determinant, a spectral point need
+not be an eigenvalue; self-adjoint real spectrum verified operator-theoretically, never via a
+polynomial; the spectral measure is a genuinely different object, never an extended finite sum).
+Both zero discrepancy. One transient vitest flake self-resolved on re-run (561/561 confirmed).
+Mathematics **859/908** (857→859), 49 remaining. Full detail in `COVERAGE.md` Batch 232.
+Validated: KG PASS, state.ts 859/908, tsc clean, tests 561/561. Commit `0cce628`, pushed.
+
+Fresh frontier for Batch 233 (11 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.fnal.compact-operator-spectrum/
+distributions/fourier-transform/special-functions, math.graph.random-graph,
+math.opt.semidefinite-programming. Campaign continues under the same active `/loop`.

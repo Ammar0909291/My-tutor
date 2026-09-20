@@ -18401,3 +18401,26 @@ Fresh frontier for Batch 232 (12 concepts): math.cat.adjunction/functor-category
 math.top.cohomology, plus math.cx.complex-numbers-analysis, math.fnal.distributions/
 fourier-transform/special-functions/spectral-theory/uniform-boundedness, math.graph.random-graph,
 math.opt.semidefinite-programming. Campaign continues under the same active `/loop`.
+
+## Batch 232 (2026-09-20) — zero discrepancy
+
+Authored `math.fnal.uniform-boundedness` (pointwise boundedness never trivially gives uniform
+boundedness, UBP is a genuinely deep theorem; completeness via Baire Category is the essential
+mechanism, never assumed to hold for any normed space; a pointwise-convergent operator sequence
+has automatically uniformly bounded norms, never assumed possibly unbounded) and
+`math.fnal.spectral-theory` (the spectrum is defined via invertibility never a determinant, and a
+spectral point need not be an eigenvalue; self-adjoint operators have real spectrum verified via
+operator-theoretic arguments, never a characteristic polynomial; the spectral measure is a
+qualitatively different object, never merely an extended finite sum). Both zero discrepancy
+(uniform-boundedness has no cross-links per KG; spectral-theory's two cross-links
+`math.linalg.eigenvalues`/`math.linalg.spectral-theorem` both confirmed authored, dual
+cross-link-probe engaged per Blueprint). One transient vitest flake self-resolved on immediate
+re-run (561/561 passed on re-run, matching the isolated file result — not a real regression).
+Mathematics **857/908 → 859/908**, 49 remaining. math.fnal now 15/18 authored (no
+domain-completion milestone this batch). Validated: KG PASS (908/908 reachable), state.ts confirms
+859/908, tsc clean, tests 561/561 (after flake re-run). Commit `0cce628`, pushed.
+
+Fresh frontier for Batch 233 (11 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.fnal.compact-operator-spectrum/
+distributions/fourier-transform/special-functions, math.graph.random-graph,
+math.opt.semidefinite-programming. Campaign continues under the same active `/loop`.
