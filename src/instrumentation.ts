@@ -238,7 +238,8 @@ async function bootstrapAssets() {
       // found all 108 originally-authored biology concepts stuck at exactly
       // 2 gradeable probes against the 3-probe contract — the identical
       // zero-slack shape as physics/chemistry above. Batch 1 (bio.found, 8
-      // concepts) closed here; the remaining 100 of the 108 are a later batch.
+      // concepts) + Batch 2 (bio.cell, 14 concepts) closed here — 22/108;
+      // the remaining 86 of the 108 are later batches.
       const { BIOLOGY_DEPTH_PROBES } =
         await import('./lib/teaching/assets/biologyDepthSeedAssets')
       // English band-gap probes joined 2026-09-08. A direct production query
