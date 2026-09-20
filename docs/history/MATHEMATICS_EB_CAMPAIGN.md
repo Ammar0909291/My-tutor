@@ -6584,3 +6584,18 @@ Full detail in `COVERAGE.md` Batch 248. Validated: KG PASS, state.ts 891/908, ts
 
 Fresh frontier for Batch 249 (5 concepts): math.cat.adjunction/functor-category/limits,
 math.cx.analytic-continuation/conformal-mapping. Campaign continues under the same active `/loop`.
+
+## Batch 249 (2026-09-20)
+
+Authored `conformal-mapping` (conformality fails exactly where f′=0, never guaranteed everywhere
+holomorphic; the Jacobian is forced into a rotation-dilation form, never arbitrary; conformal maps
+preserve only angles, never distances or areas) and `analytic-continuation` (continuation is
+re-centering the Taylor series, never guaranteed to reach all of ℂ; uniqueness guarantees the
+result, never the construction; monodromy is a genuine subtlety, never "same point means same
+value"). Both zero discrepancy. Mathematics **893/908** (891→893), 15 remaining. math.cx now
+27/31 authored. Full detail in `COVERAGE.md` Batch 249. Validated: KG PASS, state.ts 893/908, tsc
+clean, tests 561/561. Commit `0847789`, pushed.
+
+Fresh frontier for Batch 250 (7 concepts): math.cat.adjunction/functor-category/limits,
+math.cx.mobius-transformation/riemann-mapping/riemann-surface/riemann-zeta. Campaign continues
+under the same active `/loop`.

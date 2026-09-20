@@ -18765,3 +18765,23 @@ pushed.
 
 Fresh frontier for Batch 249 (5 concepts): math.cat.adjunction/functor-category/limits,
 math.cx.analytic-continuation/conformal-mapping. Campaign continues under the same active `/loop`.
+
+## Batch 249 (2026-09-20) — zero discrepancy
+
+Authored `math.cx.conformal-mapping` (conformality fails exactly where f′(z₀)=0, never guaranteed
+everywhere a function is holomorphic; the real Jacobian is forced into a rotation-dilation form
+by the Cauchy-Riemann equations, never an arbitrary 2x2 real matrix; conformal maps preserve only
+angles, never distances or areas — both are generally distorted by |f′| and |f′|² respectively)
+and `math.cx.analytic-continuation` (continuation is achieved by re-centering the Taylor series,
+never guaranteed to reach all of ℂ since genuine obstructions like singularities block it in some
+directions; uniqueness from the identity theorem guarantees only the result, never the
+construction — re-centering is genuine computation; monodromy is a genuine subtlety, never "same
+point means same value," since encircling a singularity like log z's branch point at 0 changes
+the continued value). Both zero discrepancy (neither concept has cross-links per the KG).
+Mathematics **891/908 → 893/908**, 15 remaining. math.cx now 27/31 authored (still far from
+certified). Validated: KG PASS (908/908 reachable), state.ts confirms 893/908 (still 22 certified
+domains, unchanged), tsc clean, tests 561/561. Commit `0847789`, pushed.
+
+Fresh frontier for Batch 250 (7 concepts): math.cat.adjunction/functor-category/limits,
+math.cx.mobius-transformation/riemann-mapping/riemann-surface/riemann-zeta. Campaign continues
+under the same active `/loop`.
