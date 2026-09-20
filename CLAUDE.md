@@ -228,18 +228,25 @@ probe-depth campaign is now COMPLETE: 108/108 at the 3-probe contract floor.** T
 2026-09-14-KG-extension concepts remain a SEPARATE, larger, not-yet-started task (see below).
 Formal EB
 authoring started 2026-09-20 at the KG root, `bio.found.what-is-biology`, then continued in
-strict KG-prerequisite order through 98 concepts total (`educational-brain/concepts/biology/`,
-no Blueprint exists for biology as a subject; 2 entries, `scientific-method-in-biology` and
-`unifying-themes-in-biology`, are for ZERO-seed-content concepts; thirty-three entries — see
-COVERAGE.md's biology row for the full list — record genuine KG-description-vs-seed-content
-gaps as Curriculum Feedback rather than fabricating content). Authored via 27 successive batches
-of 3, each recomputing the fresh topologically-ready frontier from the prior baseline — see
-COVERAGE.md's biology row for the full per-batch concept list; the latest batch (from the
-95-concept baseline) added `bio.biotech.biotech-principles`, `bio.dev.stem-cells-regeneration`,
-`bio.evo.evo-devo` — **EB is 98/199**. **Seed-content coverage for the remaining
-unauthored frontier remains thin** (most of the current ~45-concept frontier has zero seed
-content) — future batches will draw from a shrinking pool of originally-authored concepts, or
-shift to the 91 zero-content KG-extension concepts as a separate task per priority order. These
+strict KG-prerequisite order through 101 concepts total (`educational-brain/concepts/biology/`,
+no Blueprint exists for biology as a subject; 4 entries, `scientific-method-in-biology`,
+`unifying-themes-in-biology`, `bio.dev.organogenesis`, and `bio.evo.convergent-evolution-
+homoplasy`, are for ZERO-seed-content concepts authored from first principles; thirty-four
+entries — see COVERAGE.md's biology row for the full list — record genuine
+KG-description-vs-seed-content gaps as Curriculum Feedback rather than fabricating content).
+Authored via 28 successive batches of 3, each recomputing the fresh topologically-ready
+frontier from the prior baseline — see COVERAGE.md's biology row for the full per-batch
+concept list; the latest batch (from the 98-concept baseline) added
+`bio.biotech.biotech-process-applications` (seed-content-backed), `bio.dev.organogenesis`, and
+`bio.evo.convergent-evolution-homoplasy` (the latter 2 first-principles-authored) —
+**EB is 101/199**. **The seed-content-scarcity trend flagged since batch 22 has now reached
+its endpoint**: only 1 of 46 frontier candidates had seed content at the start of this batch.
+Future batches will need to author entirely from first principles going forward (following the
+precedent above), or shift to the 91 zero-content KG-extension concepts as a separate,
+larger task per priority order — this determination was applied once (this batch, favouring
+first-principles continuation of the same campaign) without a stop-and-ask, per the Workflow
+preference's authorization for ordinary scope continuations; a future session may revisit this
+call. These
 two
 counters are tracked and reported SEPARATELY, never conflated — see `COVERAGE.md`'s biology row. The 91 concepts from the 2026-09-14 KG extension still have zero
 seed content of any kind. Continue via the audit doc's own §11 priority order for probe-depth,
