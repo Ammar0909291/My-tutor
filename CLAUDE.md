@@ -208,10 +208,10 @@ Probe-depth Batch 1+2 (`biologyDepthSeedAssets.ts`, `bio.found` then `bio.cell`,
 close the same zero-slack defect physics/chemistry already had: every one of biology's 108
 authored concepts was stuck at 2/3 gradeable probes, so no biology lesson could ever reach
 verified mastery — now **22/108 at contract** (86 remain, 2/3 gradeable each). Formal EB
-authoring started 2026-09-20 at the KG root, `bio.found.what-is-biology`
-(`educational-brain/concepts/biology/`, no Blueprint exists for biology as a subject) — **EB is
-1/199**. These two counters are tracked and reported SEPARATELY, never conflated — see
-`COVERAGE.md`'s biology row. The 91 concepts from the 2026-09-14 KG extension still have zero
+authoring started 2026-09-20 at the KG root, `bio.found.what-is-biology`, then its sole
+child `bio.found.characteristics-of-life` (`educational-brain/concepts/biology/`, no Blueprint
+exists for biology as a subject) — **EB is 2/199**. These two counters are tracked and
+reported SEPARATELY, never conflated — see `COVERAGE.md`'s biology row. The 91 concepts from the 2026-09-14 KG extension still have zero
 seed content of any kind. Continue via the audit doc's own §11 priority order for probe-depth,
 and strict KG-prerequisite order (not alphabetical) for EB authoring.
 
