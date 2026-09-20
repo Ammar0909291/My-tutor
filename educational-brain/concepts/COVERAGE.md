@@ -18891,3 +18891,26 @@ pushed.
 
 Fresh frontier for Batch 255 (2 concepts, all math.cat): math.cat.adjunction/representable-functor.
 Campaign continues under the same active `/loop`.
+
+## Batch 255 (2026-09-20) — zero discrepancy
+
+Authored `math.cat.adjunction` (the adjunction's hom-set bijection Hom_D(FA,B)≅Hom_C(A,GB) is the
+correct relationship between F and G, never an expectation that F and U should invert each other
+like ordinary inverse functions — resolving math.cat.functor's own F(U(G))≠G puzzle via the
+counit; left and right adjoint directions are specific — the left adjoint's maps out correspond
+to simpler underlying data, never interchangeable with the right adjoint; adjunctions are a
+pervasive cross-mathematics pattern per Mac Lane's "adjoint functors arise everywhere," never an
+isolated exotic construction specific to groups) and `math.cat.representable-functor`
+(representability requires a genuine natural isomorphism F≅Hom(A,-) verified at every object plus
+naturality, never a loose resemblance to Hom-sets; the universal element is the specific
+eta_A(id_A), never any convenient element of F(A); the representing object is unique only up to a
+unique isomorphism, never absolutely unique, matching math.cat.limits's own universal-cone
+uniqueness caveat). Both zero discrepancy (neither concept has cross_links per the KG — the
+Blueprint's own note that representable-functor's `related` field, not `cross_links`, lists
+math.cat.adjunction was not treated as a formal cross-link per corpus convention). Mathematics
+**903/908 → 905/908**, 3 remaining: math.cat.monad, topos, higher-category. Validated: KG PASS
+(908/908 reachable), state.ts confirms 905/908 (still 23 certified domains, unchanged), tsc
+clean, tests 561/561. Commit `f974d8d`, pushed.
+
+Fresh frontier for Batch 256 (2 concepts, all math.cat): math.cat.monad/topos. Campaign continues
+under the same active `/loop`.

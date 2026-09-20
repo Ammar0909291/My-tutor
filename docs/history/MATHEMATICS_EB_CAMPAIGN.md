@@ -6677,3 +6677,18 @@ representable-functor. Full detail in `COVERAGE.md` Batch 254. Validated: KG PAS
 
 Fresh frontier for Batch 255 (2 concepts, all math.cat): math.cat.adjunction/representable-functor.
 Campaign continues under the same active `/loop`.
+
+## Batch 255 (2026-09-20)
+
+Authored `adjunction` (the hom-set bijection is the correct relationship between F and G, never an
+inverse expectation; left and right adjoint directions are specific, never interchangeable;
+adjunctions are a pervasive cross-mathematics pattern, never an isolated exotic construction) and
+`representable-functor` (representability requires a genuine natural isomorphism verified at every
+object, never a loose resemblance; the universal element is the specific eta_A(id_A), never any
+convenient element; the representing object is unique up to isomorphism, never absolutely unique).
+Both zero discrepancy. Mathematics **905/908** (903→905), 3 remaining: math.cat.monad, topos,
+higher-category. Full detail in `COVERAGE.md` Batch 255. Validated: KG PASS, state.ts 905/908,
+tsc clean, tests 561/561. Commit `f974d8d`, pushed.
+
+Fresh frontier for Batch 256 (2 concepts, all math.cat): math.cat.monad/topos. Campaign continues
+under the same active `/loop`.
