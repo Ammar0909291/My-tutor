@@ -228,16 +228,16 @@ probe-depth campaign is now COMPLETE: 108/108 at the 3-probe contract floor.** T
 2026-09-14-KG-extension concepts remain a SEPARATE, larger, not-yet-started task (see below).
 Formal EB
 authoring started 2026-09-20 at the KG root, `bio.found.what-is-biology`, then continued in
-strict KG-prerequisite order through 89 concepts total (`educational-brain/concepts/biology/`,
+strict KG-prerequisite order through 92 concepts total (`educational-brain/concepts/biology/`,
 no Blueprint exists for biology as a subject; 2 entries, `scientific-method-in-biology` and
-`unifying-themes-in-biology`, are for ZERO-seed-content concepts; twenty-four entries — see
+`unifying-themes-in-biology`, are for ZERO-seed-content concepts; twenty-seven entries — see
 COVERAGE.md's biology row for the full list — record genuine KG-description-vs-seed-content
-gaps as Curriculum Feedback rather than fabricating content). Authored via 24 successive batches
+gaps as Curriculum Feedback rather than fabricating content). Authored via 25 successive batches
 of 3, each recomputing the fresh topologically-ready frontier from the prior baseline — see
 COVERAGE.md's biology row for the full per-batch concept list; the latest batch (from the
-86-concept baseline) added `bio.repro.fertilisation-development`, `bio.plant.plant-growth-hormones`,
-`bio.micro.microbes-in-human-welfare` — **EB is 89/199**. **Seed-content coverage for the remaining
-unauthored frontier remains thin** (most of the current ~44-concept frontier has zero seed
+89-concept baseline) added `bio.dev.gametogenesis-fertilisation-dev`, `bio.repro.reproductive-health`,
+`bio.repro.sexual-reproduction-plants` — **EB is 92/199**. **Seed-content coverage for the remaining
+unauthored frontier remains thin** (most of the current ~45-concept frontier has zero seed
 content) — future batches will draw from a shrinking pool of originally-authored concepts, or
 shift to the 91 zero-content KG-extension concepts as a separate task per priority order. These
 two
