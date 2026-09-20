@@ -6661,3 +6661,19 @@ discrepancy. Mathematics **901/908** (899→901), 7 remaining. Full detail in `C
 
 Fresh frontier for Batch 254 (3 concepts, all math.cat): math.cat.adjunction/tensor-product/
 yoneda-lemma. Campaign continues under the same active `/loop`.
+
+## Batch 254 (2026-09-20)
+
+Authored `yoneda-lemma` (the bijection is a genuine constructive two-way correspondence, never a
+cardinality coincidence; the extraction recipe evaluates specifically at A using the identity,
+never at an arbitrary object or morphism; the embedding consequence is determination up to
+isomorphism, never literal identity) and `tensor-product` (categorical) (Vect,⊗,k is the concrete
+instance the abstract definition generalizes, never unrelated; monoidal laws hold up to coherent
+natural isomorphism, never literal equality; symmetric monoidal structure is additional
+separately-verified data, never automatic). Both zero discrepancy. Mathematics **903/908**
+(901→903), 5 remaining — all math.cat: adjunction, monad, topos, higher-category,
+representable-functor. Full detail in `COVERAGE.md` Batch 254. Validated: KG PASS, state.ts
+903/908, tsc clean, tests 561/561. Commit `f684846`, pushed.
+
+Fresh frontier for Batch 255 (2 concepts, all math.cat): math.cat.adjunction/representable-functor.
+Campaign continues under the same active `/loop`.

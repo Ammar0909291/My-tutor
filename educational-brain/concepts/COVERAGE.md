@@ -18867,3 +18867,27 @@ Both zero discrepancy (neither concept has cross-links per the KG). Mathematics 
 
 Fresh frontier for Batch 254 (3 concepts, all math.cat): math.cat.adjunction/tensor-product/
 yoneda-lemma. Campaign continues under the same active `/loop`.
+
+## Batch 254 (2026-09-20) — zero discrepancy
+
+Authored `math.cat.yoneda-lemma` (the bijection Nat(Hom(A,-),F) ≅ F(A) is a genuine, explicit
+constructive two-way correspondence, never a mere cardinality coincidence; the extraction recipe
+evaluates specifically at A using the identity morphism id_A, never at an arbitrary object or
+morphism which lands in the wrong set entirely; the Yoneda embedding's "A is determined by
+Hom(A,-)" consequence is determination up to isomorphism between genuinely different kinds of
+mathematical entities, never a claim of literal identity) and `math.cat.tensor-product`
+(categorical) ((Vect,⊗,k) is the concrete instance the abstract monoidal-category definition
+directly generalizes, using math.linalg.tensor's own already-verified multilinearity as the
+bifunctoriality witness, never an unrelated abstract structure; the associativity and unit laws
+hold up to coherent natural isomorphism, never literal equality — (A×B)×C and A×(B×C) are
+genuinely different sets connected by a canonical isomorphism; symmetric monoidal structure
+(A⊗B≅B⊗A) is additional, separately-verified data requiring its own coherence condition, never an
+automatic consequence of being monoidal). Both zero discrepancy (cross-link `math.linalg.tensor`
+confirmed authored on disk before setting the cross-link probe mode for tensor-product). 
+Mathematics **901/908 → 903/908**, 5 remaining — all math.cat: adjunction, monad, topos,
+higher-category, representable-functor. Validated: KG PASS (908/908 reachable), state.ts confirms
+903/908 (still 23 certified domains, unchanged), tsc clean, tests 561/561. Commit `f684846`,
+pushed.
+
+Fresh frontier for Batch 255 (2 concepts, all math.cat): math.cat.adjunction/representable-functor.
+Campaign continues under the same active `/loop`.
