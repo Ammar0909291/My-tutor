@@ -228,15 +228,19 @@ probe-depth campaign is now COMPLETE: 108/108 at the 3-probe contract floor.** T
 2026-09-14-KG-extension concepts remain a SEPARATE, larger, not-yet-started task (see below).
 Formal EB
 authoring started 2026-09-20 at the KG root, `bio.found.what-is-biology`, then continued in
-strict KG-prerequisite order through 80 concepts total (`educational-brain/concepts/biology/`,
+strict KG-prerequisite order through 86 concepts total (`educational-brain/concepts/biology/`,
 no Blueprint exists for biology as a subject; 2 entries, `scientific-method-in-biology` and
-`unifying-themes-in-biology`, are for ZERO-seed-content concepts; eighteen entries — see
+`unifying-themes-in-biology`, are for ZERO-seed-content concepts; twenty-two entries — see
 COVERAGE.md's biology row for the full list — record genuine KG-description-vs-seed-content
-gaps as Curriculum Feedback rather than fabricating content). Authored via 21 successive batches
+gaps as Curriculum Feedback rather than fabricating content). Authored via 23 successive batches
 of 3, each recomputing the fresh topologically-ready frontier from the prior baseline — see
 COVERAGE.md's biology row for the full per-batch concept list; the latest batch (from the
-77-concept baseline) added `bio.physio.endocrine-system`, `bio.physio.musculoskeletal-system`,
-`bio.cell.cytoskeleton` — **EB is 80/199**. These two
+83-concept baseline) added `bio.plant.mineral-nutrition`, `bio.mol.signal-transduction-pathways`,
+`bio.div.protist-diversity` — **EB is 86/199**. **Seed-content coverage for the remaining
+unauthored frontier is now noticeably thinner** (most of the current ~46-concept frontier has
+zero seed content) — future batches will draw from a shrinking pool of originally-authored
+concepts, or shift to the 91 zero-content KG-extension concepts as a separate task per priority
+order. These two
 counters are tracked and reported SEPARATELY, never conflated — see `COVERAGE.md`'s biology row. The 91 concepts from the 2026-09-14 KG extension still have zero
 seed content of any kind. Continue via the audit doc's own §11 priority order for probe-depth,
 and strict KG-prerequisite order (not alphabetical) for EB authoring.
