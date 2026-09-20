@@ -6455,3 +6455,19 @@ Mathematics **875/908** (873→875), 33 remaining. math.cx now 11/31 authored. F
 Fresh frontier for Batch 241 (8 concepts): math.cat.adjunction/functor-category/limits,
 math.cx.analytic-continuation/cauchy-goursat/cauchy-integral-formula/conformal-mapping/
 singularities. Campaign continues under the same active `/loop`.
+
+## Batch 241 (2026-09-20)
+
+Authored `cauchy-integral-formula` (verify z₀ inside C before applying, never regardless of
+position; the formula reveals rigidity, never a mere trick; the integrand's own singularity at z₀
+is why a separate formula is needed) and `singularities` (classify by actual limiting behavior,
+never algebraic form; a pole needs |f|→∞ uniformly, never conflated with essential singularities;
+Riemann's theorem certifies via boundedness alone, never requiring the patch value). Both zero
+discrepancy. Mathematics **877/908** (875→877), 31 remaining. math.cx now 13/31 authored. Full
+detail in `COVERAGE.md` Batch 241. Validated: KG PASS, state.ts 877/908, tsc clean, tests
+561/561. Commit `fc46edf`, pushed.
+
+Fresh frontier for Batch 242 (12 concepts): math.cat.adjunction/functor-category/limits,
+math.cx.analytic-continuation/cauchy-goursat/conformal-mapping/essential-singularity/
+higher-derivatives/laurent-series/maximum-modulus/morera-theorem/poles. Campaign continues under
+the same active `/loop`.

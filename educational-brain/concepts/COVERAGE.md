@@ -18607,3 +18607,22 @@ reachable), state.ts confirms 875/908 (still 22 certified domains, unchanged), t
 Fresh frontier for Batch 241 (8 concepts): math.cat.adjunction/functor-category/limits,
 math.cx.analytic-continuation/cauchy-goursat/cauchy-integral-formula/conformal-mapping/
 singularities. Campaign continues under the same active `/loop`.
+
+## Batch 241 (2026-09-20) — zero discrepancy
+
+Authored `math.cx.cauchy-integral-formula` (always verify z₀ is strictly inside C before applying,
+never regardless of position — exterior uses Cauchy's Theorem instead, giving zero; the formula
+reveals profound rigidity, never merely a computational shortcut; the integrand f(z)/(z−z₀) has
+its own genuine singularity at z₀, never assume Cauchy's Theorem alone applies there) and
+`math.cx.singularities` (singularity type is determined by actual limiting behavior, never
+superficial algebraic form; a pole requires |f|→∞ uniformly along every path, never conflated with
+any "blows up" behavior; Riemann's theorem certifies removability via boundedness alone, never
+requiring the explicit patch value first). Both zero discrepancy (neither concept has cross-links
+per the KG). Mathematics **875/908 → 877/908**, 31 remaining. math.cx now 13/31 authored (still
+far from certified). Validated: KG PASS (908/908 reachable), state.ts confirms 877/908 (still 22
+certified domains, unchanged), tsc clean, tests 561/561. Commit `fc46edf`, pushed.
+
+Fresh frontier for Batch 242 (12 concepts): math.cat.adjunction/functor-category/limits,
+math.cx.analytic-continuation/cauchy-goursat/conformal-mapping/essential-singularity/
+higher-derivatives/laurent-series/maximum-modulus/morera-theorem/poles. Campaign continues under
+the same active `/loop`.
