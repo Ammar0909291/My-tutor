@@ -556,20 +556,43 @@ prerequisites already-served `bio.evo.evidence-for-evolution` and
 `bio.evo.modern-synthesis-speciation`) validated clean: `tsc --noEmit` 0
 errors, dry-run 0 duplicate identities across 8,676 items, contract audit
 195/199 authored, 195/195 at contract, 0 short, 0 never-quizzable, 40/40
-targeted vitest suites passing.
-**Extended
-91: 87/91.** Production convergence (seed
-corpus → cold-start bootstrap → live
-AssetIdentity rows) is UNVERIFIED against the real database this campaign so
-far — no Supabase/DB access has been used;
-treat as PENDING until explicitly checked. Re-measure with `npx tsx
-scripts/assets/contract-audit.ts --subject biology` before trusting any number
-here.
-These
-two
-counters are tracked and reported SEPARATELY, never conflated — see `COVERAGE.md`'s biology row. The 91 concepts from the 2026-09-14 KG extension still have zero
-seed content of any kind. Continue via the audit doc's own §11 priority order for probe-depth,
-and strict KG-prerequisite order (not alphabetical) for EB authoring.
+targeted vitest suites passing. Batch 30 — the FINAL batch of this
+campaign (2026-09-21, 4 concepts, all 4 remaining were simultaneously
+ready): `bio.evo.phylogeography-biogeography` — prerequisites already-
+served `bio.evo.evidence-for-evolution` and `bio.bioinfo.phylogenetics-
+computational` — `bio.gen.genetic-testing-counseling` — sole prerequisite
+already-served `bio.gen.pedigree-human-genetics` — `bio.neuro.
+neurodevelopment` — prerequisites already-served `bio.neuro.brain-
+regional-organization` and `bio.dev.morphogenesis-differentiation` — and
+`bio.sys.evolutionary-systems-biology` — prerequisites already-served
+`bio.sys.gene-regulatory-networks` and `bio.evo.molecular-evolution` —
+validated clean: `tsc --noEmit` 0 errors, dry-run 0 duplicate identities
+across 8,696 items, contract audit **199/199 authored, 199/199 at
+contract, 0 short, 0 never-quizzable**, 40/40 targeted vitest suites
+passing.
+
+**CAMPAIGN COMPLETE: Extended 91: 91/91.** All 91 2026-09-14-KG-extension
+concepts now have production-ready seed content (2 explanations + full
+3-probe contract each), closing the gap this campaign was scoped to close.
+Combined with the original 108-concept probe-depth campaign (also
+complete, 108/108 at the 3-probe contract floor), the ENTIRE 199-concept
+biology KG is now at asset-contract completion: 199/199 authored, 199/199
+at contract, 0 short, 0 never-quizzable — re-verify with `npx tsx
+scripts/assets/contract-audit.ts --subject biology` before trusting this
+number in future sessions. 30 batches total, every one committed and
+pushed individually to `main` (batch 1 through this final batch 30) with
+clean `tsc --noEmit`, 0 duplicate seed-corpus identities, and 40/40
+targeted vitest suites passing at every checkpoint.
+
+**Production convergence (seed corpus → cold-start bootstrap → live
+AssetIdentity rows) remains UNVERIFIED against the real database — no
+Supabase/DB access was used at any point in this campaign.** Runtime QA
+(does a lesson actually reach verified mastery end-to-end for these 91
+concepts) and real-learner QA are NOT STARTED. These are the explicit next
+steps for whichever future session/initiative picks this up, per the
+standing "never claim production verification without querying/verifying
+production" rule — do not treat asset-contract completion as equivalent to
+confirmed production readiness.
 
 ## Full history index
 Every dated campaign, incident, and defect investigation this project has ever recorded is

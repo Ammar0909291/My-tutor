@@ -8374,6 +8374,382 @@ const MACROEXT_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── bio.evo.phylogeography-biogeography ─────────────────────────────────────
+const PHYLOGEO = 'bio.evo.phylogeography-biogeography'
+const PHYLOGEO_SRC = 'educational-brain/concepts/biology/bio.evo.phylogeography-biogeography.md'
+const PHYLOGEO_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PHYLOGEO, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Vicariance and dispersal are two ALTERNATIVE explanations for a disjunct species ' +
+      'distribution. Vicariance: a formerly continuous population was already present across ' +
+      'the range BEFORE a new barrier (e.g. continental drift) arose and split it. Dispersal: ' +
+      'an already-existing barrier was actively CROSSED by colonisers reaching a previously- ' +
+      'unoccupied region. Continental drift generates a TESTABLE prediction: under vicariance, ' +
+      'lineages\' molecular-dated divergence time should MATCH the geological timing of the ' +
+      'continental separation — a mismatch argues for dispersal instead. Molecular ' +
+      'phylogeography is the specific method: analysing gene-tree data across geographic ' +
+      'samples to reconstruct how and when populations became separated.',
+    targetedMisconceptions: [],
+    source: PHYLOGEO_SRC,
+  },
+  {
+    conceptId: PHYLOGEO, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students treat vicariance and dispersal as ' +
+      'interchangeable labels, missing that they imply different SEQUENCES of events (already- ' +
+      'there-then-split vs. barrier-there-then-crossed) with different predicted divergence ' +
+      'timings that molecular dating can test. Second, students treat continental drift\'s link ' +
+      'to biogeography as merely descriptive, missing that it generates a SPECIFIC, testable ' +
+      'prediction (divergence time matching separation date) subject to falsification.',
+    targetedMisconceptions: [`${PHYLOGEO}:M1`, `${PHYLOGEO}:M2`],
+    source: PHYLOGEO_SRC,
+  },
+]
+const PHYLOGEO_PROBES: SeedProbe[] = [
+  {
+    conceptId: PHYLOGEO, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Molecular dating shows two populations diverged LONG AFTER their separating ocean ' +
+      'barrier already existed. Which explanation is more consistent with this evidence?',
+    choices: [
+      { text: 'Dispersal — colonisers crossed the already-existing barrier', isCorrect: true },
+      { text: 'Vicariance and dispersal are the same explanation, so either applies equally', isCorrect: false, misconceptionId: `${PHYLOGEO}:M1` },
+      { text: 'Vicariance, since a barrier is always involved', isCorrect: false },
+      { text: 'Neither mechanism can explain this pattern', isCorrect: false },
+    ],
+    correctValue: 'Dispersal — colonisers crossed the already-existing barrier',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${PHYLOGEO}:M1`],
+    source: PHYLOGEO_SRC,
+  },
+  {
+    conceptId: PHYLOGEO, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A proposed vicariance explanation (via continental separation 50 million years ago) ' +
+      'predicts a matching divergence date, but molecular dating shows the species diverged ' +
+      'only 5 million years ago. A student says: "This is just a descriptive detail, not real ' +
+      'evidence against the hypothesis." Is this correct?',
+    choices: [
+      {
+        text: 'No — the continental-drift vicariance hypothesis makes a specific, testable ' +
+          'prediction, and this mismatch is evidence AGAINST it',
+        isCorrect: true,
+      },
+      {
+        text: 'Yes — continental drift\'s connection to biogeography is purely descriptive, with no testable prediction',
+        isCorrect: false,
+        misconceptionId: `${PHYLOGEO}:M2`,
+      },
+    ],
+    correctValue: 'No — the continental-drift vicariance hypothesis makes a specific, testable ' +
+      'prediction, and this mismatch is evidence AGAINST it',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${PHYLOGEO}:M2`],
+    source: PHYLOGEO_SRC,
+  },
+  {
+    conceptId: PHYLOGEO, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What term describes explaining a disjunct species distribution as the result of a ' +
+      'formerly continuous population being split by a newly-arising geographic barrier?',
+    choices: [
+      { text: 'Vicariance', isCorrect: true },
+      { text: 'Dispersal', isCorrect: false },
+      { text: 'Adaptive radiation', isCorrect: false },
+    ],
+    correctValue: 'Vicariance',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: PHYLOGEO_SRC,
+  },
+]
+
+// ─── bio.gen.genetic-testing-counseling ──────────────────────────────────────
+const GENTEST = 'bio.gen.genetic-testing-counseling'
+const GENTEST_SRC = 'educational-brain/concepts/biology/bio.gen.genetic-testing-counseling.md'
+const GENTEST_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: GENTEST, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Carrier screening tests prospective parents (before or independent of pregnancy) for ' +
+      'recessive disease alleles they carry asymptomatically. Prenatal diagnostic techniques ' +
+      'instead assess the FETUS during an established pregnancy: amniocentesis (15-20 weeks) ' +
+      'and CVS (10-13 weeks) both sample fetal material directly with small procedural risk, ' +
+      'while NIPT analyses cell-free fetal DNA from a maternal blood draw with no procedural ' +
+      'risk but is a SCREENING (probabilistic) test typically requiring diagnostic confirmation ' +
+      'for an elevated-risk result. Genetic counselling\'s defining ethical principle is NON- ' +
+      'DIRECTIVENESS: presenting risk information and options neutrally, without steering ' +
+      'toward any specific reproductive decision, alongside risk communication and informed ' +
+      'consent.',
+    targetedMisconceptions: [],
+    source: GENTEST_SRC,
+  },
+  {
+    conceptId: GENTEST, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students treat NIPT results as definitively ' +
+      'diagnostic, missing that NIPT is a SCREENING test requiring diagnostic confirmation ' +
+      '(amniocentesis or CVS) for an elevated-risk finding before any definitive conclusion. ' +
+      'Second, students assume genetic counsellors recommend a specific decision like other ' +
+      'medical professionals, missing that non-directiveness — presenting information neutrally ' +
+      'without steering toward a choice — is the field\'s deliberately different, defining ' +
+      'ethical stance.',
+    targetedMisconceptions: [`${GENTEST}:M1`, `${GENTEST}:M2`],
+    source: GENTEST_SRC,
+  },
+]
+const GENTEST_PROBES: SeedProbe[] = [
+  {
+    conceptId: GENTEST, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An NIPT result shows an elevated risk for a chromosomal condition. What is the ' +
+      'appropriate next step?',
+    choices: [
+      { text: 'Diagnostic confirmation via amniocentesis or CVS, since NIPT is a screening (probabilistic) test', isCorrect: true },
+      { text: 'Treat the result as a definitive diagnosis, since NIPT is highly accurate', isCorrect: false, misconceptionId: `${GENTEST}:M1` },
+      { text: 'No further action is needed, since NIPT requires no procedural risk', isCorrect: false },
+      { text: 'Repeat carrier screening on both parents', isCorrect: false },
+    ],
+    correctValue: 'Diagnostic confirmation via amniocentesis or CVS, since NIPT is a screening (probabilistic) test',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${GENTEST}:M1`],
+    source: GENTEST_SRC,
+  },
+  {
+    conceptId: GENTEST, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A client asks a genetic counsellor, "What would you do in my situation?" A student ' +
+      'says the counsellor should recommend a specific decision, since that\'s what medical ' +
+      'professionals normally do. Is this correct?',
+    choices: [
+      {
+        text: 'No — non-directiveness is genetic counselling\'s defining principle; the ' +
+          'counsellor presents information neutrally without recommending a specific choice',
+        isCorrect: true,
+      },
+      {
+        text: 'Yes — genetic counsellors should recommend a specific reproductive decision, like other medical professionals',
+        isCorrect: false,
+        misconceptionId: `${GENTEST}:M2`,
+      },
+    ],
+    correctValue: 'No — non-directiveness is genetic counselling\'s defining principle; the ' +
+      'counsellor presents information neutrally without recommending a specific choice',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${GENTEST}:M2`],
+    source: GENTEST_SRC,
+  },
+  {
+    conceptId: GENTEST, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Which prenatal diagnostic technique samples placental tissue and is typically ' +
+      'performed earlier in pregnancy (around 10-13 weeks) than amniocentesis?',
+    choices: [
+      { text: 'Chorionic villus sampling (CVS)', isCorrect: true },
+      { text: 'Amniocentesis', isCorrect: false },
+      { text: 'Non-invasive prenatal testing (NIPT)', isCorrect: false },
+    ],
+    correctValue: 'Chorionic villus sampling (CVS)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: GENTEST_SRC,
+  },
+]
+
+// ─── bio.neuro.neurodevelopment ──────────────────────────────────────────────
+const NEURODEV = 'bio.neuro.neurodevelopment'
+const NEURODEV_SRC = 'educational-brain/concepts/biology/bio.neuro.neurodevelopment.md'
+const NEURODEV_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: NEURODEV, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Neurulation forms the embryonic neural tube from the folding neural plate; neuronal ' +
+      'migration then guides new neurons to their final positions along radial glia, which act ' +
+      'as physical guide rails. Synaptogenesis initially overproduces connections, followed by ' +
+      'ACTIVITY-DEPENDENT synaptic pruning — a selective process where frequently/effectively ' +
+      'used synapses are strengthened and retained while weakly-used ones are eliminated ' +
+      '("cells that fire together, wire together"), not a random reduction. Critical periods ' +
+      'are windows of HEIGHTENED (not exclusive) plasticity: specific experience is required ' +
+      'during that window for normal development of a specific function, but the brain retains ' +
+      'some plasticity throughout life and other learning continues unaffected.',
+    targetedMisconceptions: [],
+    source: NEURODEV_SRC,
+  },
+  {
+    conceptId: NEURODEV, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students assume synaptic pruning is random or generically ' +
+      'destructive, missing that it is specifically activity-dependent — selectively eliminating ' +
+      'weakly-used connections while strengthening actively-used ones. Second, students interpret ' +
+      'critical periods as making learning impossible outside the window, missing that the brain ' +
+      'retains graded, reduced-but-real plasticity afterward, with only that specific function ' +
+      'affected — other learning continues throughout life.',
+    targetedMisconceptions: [`${NEURODEV}:M1`, `${NEURODEV}:M2`],
+    source: NEURODEV_SRC,
+  },
+]
+const NEURODEV_PROBES: SeedProbe[] = [
+  {
+    conceptId: NEURODEV, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Between two synaptic connections, one is frequently and effectively activated during ' +
+      'relevant experience, and the other is rarely activated. What does activity-dependent ' +
+      'pruning predict?',
+    choices: [
+      { text: 'The frequently-activated connection is retained/strengthened; the rarely-activated one is more likely pruned', isCorrect: true },
+      { text: 'Both connections are equally likely to be pruned, since pruning is random', isCorrect: false, misconceptionId: `${NEURODEV}:M1` },
+      { text: 'Both connections are retained regardless of activity level', isCorrect: false },
+      { text: 'Pruning cannot be predicted from activity level at all', isCorrect: false },
+    ],
+    correctValue: 'The frequently-activated connection is retained/strengthened; the rarely-activated one is more likely pruned',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${NEURODEV}:M1`],
+    source: NEURODEV_SRC,
+  },
+  {
+    conceptId: NEURODEV, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An individual missed the critical period for normal visual development due to a ' +
+      'delayed but treatable vision problem. A student says: "This means they can never learn ' +
+      'anything new visually again." Is this correct?',
+    choices: [
+      {
+        text: 'No — this would likely cause a specific, lasting limitation in that particular ' +
+          'visual function, while normal learning capacity continues in unrelated domains',
+        isCorrect: true,
+      },
+      {
+        text: 'Yes — missing a critical period makes all further learning in that domain completely impossible',
+        isCorrect: false,
+        misconceptionId: `${NEURODEV}:M2`,
+      },
+    ],
+    correctValue: 'No — this would likely cause a specific, lasting limitation in that ' +
+      'particular visual function, while normal learning capacity continues in unrelated domains',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${NEURODEV}:M2`],
+    source: NEURODEV_SRC,
+  },
+  {
+    conceptId: NEURODEV, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What specialised support cells extend long processes that function as physical ' +
+      '"guide rails" for migrating neurons during neurodevelopment?',
+    choices: [
+      { text: 'Radial glia', isCorrect: true },
+      { text: 'Astrocytes', isCorrect: false },
+      { text: 'Oligodendrocytes', isCorrect: false },
+    ],
+    correctValue: 'Radial glia',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: NEURODEV_SRC,
+  },
+]
+
+// ─── bio.sys.evolutionary-systems-biology ────────────────────────────────────
+const EVOSYS = 'bio.sys.evolutionary-systems-biology'
+const EVOSYS_SRC = 'educational-brain/concepts/biology/bio.sys.evolutionary-systems-biology.md'
+const EVOSYS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: EVOSYS, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Evolutionary systems biology recognises that gene-regulatory and metabolic NETWORKS ' +
+      'themselves can evolve as a unit — mutations can reshape network TOPOLOGY (which genes ' +
+      'regulate which others), not just individual gene sequences. Robustness (maintaining ' +
+      'stable function despite perturbations) and evolvability (generating new useful variation) ' +
+      'are RELATED but genuinely DISTINCT properties that CAN coexist: a network can buffer most ' +
+      'perturbations while still channeling a specific subset into potentially useful, selectable ' +
+      'variation. Evolutionary accessibility asks which network architectures are actually ' +
+      'REACHABLE via small, individually viable mutations — architectures requiring many ' +
+      'simultaneous coordinated mutations are far less accessible, even if theoretically superior ' +
+      'once assembled.',
+    targetedMisconceptions: [],
+    source: EVOSYS_SRC,
+  },
+  {
+    conceptId: EVOSYS, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students treat robustness and evolvability as simple ' +
+      'opposites, missing that a network can be robust to most perturbations while remaining ' +
+      'evolvable via a more restricted, specific channel of consequential mutations. Second, ' +
+      'students evaluate a network architecture\'s evolutionary likelihood purely by its final ' +
+      'functional quality, missing the separate systems-level question of whether that ' +
+      'architecture is actually reachable through a series of individually viable evolutionary ' +
+      'steps.',
+    targetedMisconceptions: [`${EVOSYS}:M1`, `${EVOSYS}:M2`],
+    source: EVOSYS_SRC,
+  },
+]
+const EVOSYS_PROBES: SeedProbe[] = [
+  {
+    conceptId: EVOSYS, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A gene-regulatory network maintains stable function under most mutations but shows a ' +
+      'specific, consequential phenotypic change under one particular class of mutations. How ' +
+      'should this network be classified?',
+    choices: [
+      { text: 'Both robust (to most changes) AND evolvable (via that specific mutation class)', isCorrect: true },
+      { text: 'Either robust or evolvable, but never both, since the two properties are opposites', isCorrect: false, misconceptionId: `${EVOSYS}:M1` },
+      { text: 'Neither robust nor evolvable, since it shows any sensitivity at all', isCorrect: false },
+      { text: 'This scenario is logically inconsistent and cannot occur', isCorrect: false },
+    ],
+    correctValue: 'Both robust (to most changes) AND evolvable (via that specific mutation class)',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${EVOSYS}:M1`],
+    source: EVOSYS_SRC,
+  },
+  {
+    conceptId: EVOSYS, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Architecture A would function better once fully assembled but requires many ' +
+      'simultaneous, coordinated mutations to reach. Architecture B is less optimal but reachable ' +
+      'through a series of small, individually viable steps. A student predicts evolution will ' +
+      'produce Architecture A more often, "since it\'s the better one." Is this correct?',
+    choices: [
+      {
+        text: 'No — Architecture B is more likely to be observed, since evolutionary ' +
+          'accessibility (a reachable stepwise path) matters, not just final functional quality',
+        isCorrect: true,
+      },
+      {
+        text: 'Yes — evolutionary likelihood depends only on final functional quality, not accessibility',
+        isCorrect: false,
+        misconceptionId: `${EVOSYS}:M2`,
+      },
+    ],
+    correctValue: 'No — Architecture B is more likely to be observed, since evolutionary ' +
+      'accessibility (a reachable stepwise path) matters, not just final functional quality',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${EVOSYS}:M2`],
+    source: EVOSYS_SRC,
+  },
+  {
+    conceptId: EVOSYS, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What term describes a network\'s capacity to generate new, potentially useful ' +
+      'functional variation upon which selection can act?',
+    choices: [
+      { text: 'Evolvability', isCorrect: true },
+      { text: 'Robustness', isCorrect: false },
+      { text: 'Homeostasis', isCorrect: false },
+    ],
+    correctValue: 'Evolvability',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: EVOSYS_SRC,
+  },
+]
+
 export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...SCIMETH_EXPLANATIONS,
   ...UNITHEMES_EXPLANATIONS,
@@ -8462,6 +8838,10 @@ export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...COEVOL_EXPLANATIONS,
   ...CONVEVO_EXPLANATIONS,
   ...MACROEXT_EXPLANATIONS,
+  ...PHYLOGEO_EXPLANATIONS,
+  ...GENTEST_EXPLANATIONS,
+  ...NEURODEV_EXPLANATIONS,
+  ...EVOSYS_EXPLANATIONS,
 ]
 
 export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
@@ -8552,4 +8932,8 @@ export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
   ...COEVOL_PROBES,
   ...CONVEVO_PROBES,
   ...MACROEXT_PROBES,
+  ...PHYLOGEO_PROBES,
+  ...GENTEST_PROBES,
+  ...NEURODEV_PROBES,
+  ...EVOSYS_PROBES,
 ]
