@@ -8,10 +8,13 @@ Mathematics and directing work to `main` (2026-09-21 session). Not paused. **Thi
 complete pickup point for the next session/account.** Read this file in full before touching any
 Mathematics asset code.
 
-**Last commit touching this campaign**: `498a4e23` (Batch 33 content, math.alg.factoring +
-math.alg.polynomial-roots). **Verify this is still current** — another PAPPU/Mathematics session
-may have continued after this handover was written; always re-run the measurement commands in
-Phase 0 below before trusting any number in this file.
+**Last commit touching this campaign**: `efc3b3f9` (Batch 47 content, math.alg.inequality-2var +
+math.alg.natural-logarithm + math.alg.system-3var — **math.alg is now 59/59, DOMAIN CERTIFIED**,
+the sixth mathematics domain to reach completion). **Verify this is still current** — another
+PAPPU/Mathematics session may have continued after this handover was written; always re-run the
+measurement commands in Phase 0 below before trusting any number in this file. With math.alg
+closed, the active frontier moves to whichever domain the next session opens — see §5 below for
+the size-order candidates (`math.calc`, `math.linalg`, `math.prob`) already partially started.
 
 **Note on repo state at the start of this 2026-09-21 session**: the local `main` branch in that
 session's container was a stale shallow-clone artifact, 502 commits behind `origin/main` with zero
@@ -63,7 +66,7 @@ database — it has zero DB/egress footprint and is safe to run constantly. It i
 of truth for "how many concepts are servable," never a hand-maintained count in a markdown file.
 
 **Per-domain breakdown** (recompute, don't trust this table — it was accurate at the time this
-file was written, immediately after Batch 33):
+file was written, immediately after Batch 47):
 
 ```
 domain       done / total   remaining
@@ -73,8 +76,8 @@ math.arith     58 / 58      COMPLETE
 math.abst      37 / 37      COMPLETE
 math.nt        36 / 36      COMPLETE
 math.cat       15 / 15      COMPLETE
-math.alg       30 / 59      29 remaining   <-- ACTIVE FRONTIER (half done)
-math.calc       4 / 76      72 remaining
+math.alg       59 / 59      COMPLETE   <-- newly certified, Batch 47
+math.calc       4 / 76      72 remaining   <-- next-largest already-started domain
 math.linalg     2 / 61      59 remaining
 math.prob       3 / 49      46 remaining
 math.func       1 / 29      28 remaining
@@ -92,7 +95,7 @@ math.opt        0 / 16      16 remaining
 math.graph      0 / 16      16 remaining
 math.meas       0 / 13      13 remaining
 
-TOTAL: 340/908 authored, 349 (concept, gradeBand) pairs, all 349 at contract, 0 short, 0 never-quizzable.
+TOTAL: 369/908 authored, 378 (concept, gradeBand) pairs, all 378 at contract, 0 short, 0 never-quizzable.
 ```
 
 To regenerate this table yourself (it is NOT a KG/DB query — it's a static scan of what's actually
@@ -400,16 +403,17 @@ for m in alg_missing:
     print(m, reqs, "READY" if ready else "blocked")
 ```
 
-**Priority order recommendation**: `remainder-theorem` → `factor-theorem` → `polynomial-roots` →
-`factoring`/`factoring-gcf`/`factoring-trinomials`/`factoring-special` unblocks the largest
+**math.alg priority order (HISTORICAL — kept for reference only; the domain reached 59/59,
+DOMAIN CERTIFIED, as of Batch 47)**: `remainder-theorem` → `factor-theorem` → `polynomial-roots` →
+`factoring`/`factoring-gcf`/`factoring-trinomials`/`factoring-special` unblocked the largest
 downstream chain (rational expressions, rational inequalities, the Vieta's/rational-root/complex-
-roots cluster). `quadratic-formula` → `discriminant` is a short, high-value chain. The
+roots cluster). `quadratic-formula` → `discriminant` was a short, high-value chain. The
 logarithm-family (`logarithm-properties`, `natural-logarithm`, `change-of-base`,
-`logarithmic-equations`) is another self-contained cluster now that `math.alg.logarithm` itself is
-done. Pick whichever cluster makes sense; there's no single mandated order, just "resolve
-dependencies before their dependents."
+`logarithmic-equations`) was another self-contained cluster. The final batch (47) closed the
+domain's last three concepts (`inequality-2var`, `natural-logarithm`, `system-3var`), all
+simultaneously ready.
 
-**Once math.alg is exhausted**, the next domains in size order are `math.calc` (72 remaining),
+**Now that math.alg is closed**, the next domains in size order are `math.calc` (72 remaining),
 `math.linalg` (59 remaining), `math.prob` (46 remaining) — each already has a handful of concepts
 authored from an earlier pre-pause era of this campaign (`math.calc` 4/76, `math.linalg` 2/61,
 `math.prob` 3/49, `math.func` 1/29, `math.trig` 3/25) — check what's already there with
@@ -417,7 +421,16 @@ authored from an earlier pre-pause era of this campaign (`math.calc` 4/76, `math
 untouched. Everything else (`math.de`, `math.stats`, `math.disc`, `math.cx`, `math.real`,
 `math.top`, `math.seq`, `math.fnal`, `math.num`, `math.opt`, `math.graph`, `math.meas`) is at a
 clean 0 — pick based on prerequisite readiness (most of these only require `math.found`,
-already 100% complete, so most are immediately startable).
+already 100% complete, so most are immediately startable). To compute the frontier for whichever
+domain is opened next, reuse the `alg_missing`-style script above with the new domain's prefix
+substituted for `math.alg.`.
+
+**Recommended next step for the following session**: open `math.calc` (the largest
+already-started domain). First run
+`grep -l "math\.calc\." src/lib/teaching/assets/*.ts` to find which 4 concepts already have seed
+assets, then read `docs/mathematics/kg/graph.json` for the full `math.calc.*` concept list and
+adapt the frontier script above (prefix `math.calc.`) to find the topologically-ready set among
+the other 72.
 
 ---
 
