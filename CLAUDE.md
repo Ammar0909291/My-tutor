@@ -533,9 +533,21 @@ conservation` (applied-ecology and landscape-conservation) and
 `bio.eco` domain gap) validated clean: `tsc --noEmit` 0 errors, dry-run 0
 duplicate identities across 8,646 items, contract audit 189/199 authored,
 189/189 at contract, 0 short, 0 never-quizzable, 40/40 targeted vitest
-suites passing.
+suites passing. Batch 28 (2026-09-21, 3 concepts — all 10 remaining
+extension concepts were simultaneously ready again; selection closed
+another domain outright: `bio.plant.mycorrhizae-plant-symbioses`,
+`bio.plant.plant-defense-mechanisms`, and `bio.plant.plant-stress-
+physiology` — prerequisites already-served `bio.plant.plant-tissue-
+systems` (all three), `bio.plant.mineral-nutrition` and `bio.div.fungal-
+biology` (mycorrhizae), `bio.mol.signal-transduction-pathways` (plant-
+defense, preserving the KG's `chem.org.aromaticity` cross-subject link),
+and `bio.plant.plant-water-relations` (plant-stress) — CLOSING the entire
+remaining `bio.plant` domain gap) validated clean: `tsc --noEmit` 0
+errors, dry-run 0 duplicate identities across 8,661 items, contract audit
+192/199 authored, 192/192 at contract, 0 short, 0 never-quizzable, 40/40
+targeted vitest suites passing.
 **Extended
-91: 81/91.** Production convergence (seed
+91: 84/91.** Production convergence (seed
 corpus → cold-start bootstrap → live
 AssetIdentity rows) is UNVERIFIED against the real database this campaign so
 far — no Supabase/DB access has been used;

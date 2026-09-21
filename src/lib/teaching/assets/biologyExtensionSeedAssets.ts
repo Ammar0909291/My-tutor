@@ -7808,6 +7808,288 @@ const LANDCONS_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── bio.plant.mycorrhizae-plant-symbioses ───────────────────────────────────
+const MYCORRHIZA = 'bio.plant.mycorrhizae-plant-symbioses'
+const MYCORRHIZA_SRC = 'educational-brain/concepts/biology/bio.plant.mycorrhizae-plant-symbioses.md'
+const MYCORRHIZA_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: MYCORRHIZA, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Arbuscular mycorrhizae have fungal hyphae that penetrate INTO root cells (forming ' +
+      'branching arbuscules, intracellular but extra-cytoplasmic); ectomycorrhizal associations ' +
+      'have hyphae that remain OUTSIDE root cells, forming a mantle around and a Hartig net ' +
+      'between cells — both extend absorptive surface area but through different specific ' +
+      'structural arrangements. The rhizobium-legume symbiosis triggers nodule formation, where ' +
+      'nitrogenase converts atmospheric N2 into usable ammonia (nitrogen fixation) — but ' +
+      'nitrogenase is IRREVERSIBLY INACTIVATED by oxygen, so leghaemoglobin solves this specific ' +
+      'problem by binding free oxygen tightly, keeping free-oxygen concentration low enough to ' +
+      'protect nitrogenase while still supplying bound oxygen for bacterial respiration. Both ' +
+      'systems illustrate mutualistic coevolution producing specialised, interdependent ' +
+      'structures in both partners.',
+    targetedMisconceptions: [],
+    source: MYCORRHIZA_SRC,
+  },
+  {
+    conceptId: MYCORRHIZA, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students conflate arbuscular and ectomycorrhizal ' +
+      'associations, missing the specific structural distinction: hyphae penetrating INTO cells ' +
+      'versus remaining OUTSIDE them. Second, students treat leghaemoglobin\'s oxygen-binding as ' +
+      'an unrelated biochemical detail, missing that it is the SPECIFIC solution to ' +
+      'nitrogenase\'s oxygen-sensitivity — without it, nitrogenase would be inactivated by ' +
+      'oxygen exposure.',
+    targetedMisconceptions: [`${MYCORRHIZA}:M1`, `${MYCORRHIZA}:M2`],
+    source: MYCORRHIZA_SRC,
+  },
+]
+const MYCORRHIZA_PROBES: SeedProbe[] = [
+  {
+    conceptId: MYCORRHIZA, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Fungal hyphae are observed BETWEEN root cells but never penetrating any individual ' +
+      'cell\'s interior. What type of mycorrhizal association is this?',
+    choices: [
+      { text: 'Ectomycorrhizal — hyphae remain outside root cells', isCorrect: true },
+      { text: 'Arbuscular — since it is still a fungus-root mutualism', isCorrect: false, misconceptionId: `${MYCORRHIZA}:M1` },
+      { text: 'Rhizobium-legume symbiosis', isCorrect: false },
+      { text: 'This cannot be classified as any known mycorrhizal type', isCorrect: false },
+    ],
+    correctValue: 'Ectomycorrhizal — hyphae remain outside root cells',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${MYCORRHIZA}:M1`],
+    source: MYCORRHIZA_SRC,
+  },
+  {
+    conceptId: MYCORRHIZA, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student says: "Leghaemoglobin is just an interesting biochemical fact about ' +
+      'nodules, unrelated to whether nitrogen fixation actually works." What would happen to ' +
+      'nitrogen fixation if leghaemoglobin were absent from a nodule?',
+    choices: [
+      {
+        text: 'Nitrogenase would be inactivated by oxygen exposure, since leghaemoglobin is the ' +
+          'specific mechanism keeping free-oxygen levels low enough to protect it',
+        isCorrect: true,
+      },
+      {
+        text: 'Nothing would change, since leghaemoglobin has no functional connection to nitrogenase',
+        isCorrect: false,
+        misconceptionId: `${MYCORRHIZA}:M2`,
+      },
+    ],
+    correctValue: 'Nitrogenase would be inactivated by oxygen exposure, since leghaemoglobin is ' +
+      'the specific mechanism keeping free-oxygen levels low enough to protect it',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${MYCORRHIZA}:M2`],
+    source: MYCORRHIZA_SRC,
+  },
+  {
+    conceptId: MYCORRHIZA, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What is the name of the enzyme, expressed within legume root nodules, that converts ' +
+      'atmospheric nitrogen gas into a biologically usable form?',
+    choices: [
+      { text: 'Nitrogenase', isCorrect: true },
+      { text: 'Leghaemoglobin', isCorrect: false },
+      { text: 'Rubisco', isCorrect: false },
+    ],
+    correctValue: 'Nitrogenase',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: MYCORRHIZA_SRC,
+  },
+]
+
+// ─── bio.plant.plant-defense-mechanisms ──────────────────────────────────────
+const PLANTDEF = 'bio.plant.plant-defense-mechanisms'
+const PLANTDEF_SRC = 'educational-brain/concepts/biology/bio.plant.plant-defense-mechanisms.md'
+const PLANTDEF_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PLANTDEF, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Plants deploy structural defences (physical barriers — thorns, trichomes, thickened ' +
+      'cuticle) and chemical defences (bioactive secondary metabolites — alkaloids, terpenoids, ' +
+      'phenolics) as two mechanism categories, typically BOTH simultaneously. Constitutive ' +
+      'defences are always present regardless of attack; induced defences are specifically ' +
+      'triggered by detected attack — this timing/trigger axis is INDEPENDENT of the structural/ ' +
+      'chemical mechanism axis, so any of the four combinations (constitutive-structural, ' +
+      'induced-chemical, etc.) is possible. Plant-herbivore/pathogen interactions form an ' +
+      'evolutionary arms race: as plants evolve defences, attackers evolve counter-adaptations, ' +
+      'driving further defensive refinement — distinct from animal immune defence (no ' +
+      'antibodies or mobile immune cells) but sharing the underlying recognition-then-response ' +
+      'principle and reciprocal-escalation logic.',
+    targetedMisconceptions: [],
+    source: PLANTDEF_SRC,
+  },
+  {
+    conceptId: PLANTDEF, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students conflate the constitutive/induced axis with ' +
+      'the structural/chemical axis, missing that these are two INDEPENDENT classification ' +
+      'dimensions that can combine in any pairing. Second, students treat plant and animal ' +
+      'immune defence as either identical or completely unrelated, missing the nuanced middle ' +
+      'ground: distinct specific molecular mechanisms, but shared underlying recognition-and- ' +
+      'response principles and evolutionary arms-race dynamics.',
+    targetedMisconceptions: [`${PLANTDEF}:M1`, `${PLANTDEF}:M2`],
+    source: PLANTDEF_SRC,
+  },
+]
+const PLANTDEF_PROBES: SeedProbe[] = [
+  {
+    conceptId: PLANTDEF, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A plant produces a toxic chemical compound specifically in response to detected ' +
+      'herbivore attack. How should this defence be classified along both axes?',
+    choices: [
+      { text: 'Chemical AND induced — the two axes (mechanism and timing) are classified independently', isCorrect: true },
+      { text: 'Chemical, which automatically means it must also be constitutive', isCorrect: false, misconceptionId: `${PLANTDEF}:M1` },
+      { text: 'Structural, since all triggered responses are structural', isCorrect: false },
+      { text: 'The two classification axes cannot both be determined from this description', isCorrect: false },
+    ],
+    correctValue: 'Chemical AND induced — the two axes (mechanism and timing) are classified independently',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${PLANTDEF}:M1`],
+    source: PLANTDEF_SRC,
+  },
+  {
+    conceptId: PLANTDEF, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student asks whether plants have antibodies like animals, then concludes: "Since ' +
+      'they don\'t, plant defence has nothing at all in common with animal immune defence." Is ' +
+      'this correct?',
+    choices: [
+      {
+        text: 'No — plants lack antibodies and mobile immune cells (a real difference), but ' +
+          'both systems share the underlying recognition-then-response principle and ' +
+          'evolutionary arms-race logic',
+        isCorrect: true,
+      },
+      {
+        text: 'Yes — lacking antibodies means plant defence shares absolutely nothing with animal immune defence',
+        isCorrect: false,
+        misconceptionId: `${PLANTDEF}:M2`,
+      },
+    ],
+    correctValue: 'No — plants lack antibodies and mobile immune cells (a real difference), but ' +
+      'both systems share the underlying recognition-then-response principle and evolutionary ' +
+      'arms-race logic',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${PLANTDEF}:M2`],
+    source: PLANTDEF_SRC,
+  },
+  {
+    conceptId: PLANTDEF, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What term describes a plant defence that is always present, maintained continuously ' +
+      'regardless of whether an actual attack is occurring?',
+    choices: [
+      { text: 'Constitutive defence', isCorrect: true },
+      { text: 'Induced defence', isCorrect: false },
+      { text: 'Secondary metabolite', isCorrect: false },
+    ],
+    correctValue: 'Constitutive defence',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: PLANTDEF_SRC,
+  },
+]
+
+// ─── bio.plant.plant-stress-physiology ───────────────────────────────────────
+const PLANTSTRESS = 'bio.plant.plant-stress-physiology'
+const PLANTSTRESS_SRC = 'educational-brain/concepts/biology/bio.plant.plant-stress-physiology.md'
+const PLANTSTRESS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PLANTSTRESS, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Under drought, stomatal closure is an IMMEDIATE response reducing water loss (at the ' +
+      'cost of restricted CO2 uptake), while osmotic adjustment is a SLOWER cellular response ' +
+      'accumulating solutes to keep drawing in remaining water — two separate mechanisms on ' +
+      'different timescales. Salinity stress harms plants through TWO SEPARATE mechanisms: an ' +
+      'osmotic component (lowered soil water potential, harder water uptake) and an ' +
+      'INDEPENDENT ion toxicity component (excess salt ions inside tissue disrupting enzyme ' +
+      'function). Stress generally produces reactive oxygen species (ROS), countered by an ' +
+      'antioxidant defence system. Abscisic acid (ABA) is a CENTRAL, integrating stress hormone: ' +
+      'its levels rise under BOTH drought AND salinity (among others), coordinating a response ' +
+      'across multiple distinct stress pathways rather than being drought-specific.',
+    targetedMisconceptions: [],
+    source: PLANTSTRESS_SRC,
+  },
+  {
+    conceptId: PLANTSTRESS, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students treat salinity stress as a single unified ' +
+      'harm mechanism, missing that the osmotic component and the ion toxicity component are ' +
+      'SEPARATE, independently-occurring problems. Second, students assume ABA is specific to ' +
+      'drought alone, missing its broader role as a central hub whose levels also rise under ' +
+      'other stress types like salinity, coordinating a response across multiple pathways.',
+    targetedMisconceptions: [`${PLANTSTRESS}:M1`, `${PLANTSTRESS}:M2`],
+    source: PLANTSTRESS_SRC,
+  },
+]
+const PLANTSTRESS_PROBES: SeedProbe[] = [
+  {
+    conceptId: PLANTSTRESS, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A plant in saline soil shows reduced water uptake but minimal salt ion accumulation ' +
+      'inside its tissues. Which salinity stress component is primarily at work here?',
+    choices: [
+      { text: 'The osmotic component — reduced soil water potential making water uptake harder', isCorrect: true },
+      { text: 'Ion toxicity, since all salinity harm is a single unified mechanism', isCorrect: false, misconceptionId: `${PLANTSTRESS}:M1` },
+      { text: 'Neither component, since salinity always requires both to occur together', isCorrect: false },
+      { text: 'This scenario is inconsistent with any known salinity stress mechanism', isCorrect: false },
+    ],
+    correctValue: 'The osmotic component — reduced soil water potential making water uptake harder',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${PLANTSTRESS}:M1`],
+    source: PLANTSTRESS_SRC,
+  },
+  {
+    conceptId: PLANTSTRESS, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A plant experiences salinity stress (not drought). A student says: "ABA levels ' +
+      'won\'t change, since ABA only responds to drought." Is this correct?',
+    choices: [
+      {
+        text: 'No — ABA functions as a central stress-signalling hub; its levels rise under ' +
+          'salinity stress too, not just drought',
+        isCorrect: true,
+      },
+      {
+        text: 'Yes — ABA is a drought-specific hormone irrelevant to other stress types',
+        isCorrect: false,
+        misconceptionId: `${PLANTSTRESS}:M2`,
+      },
+    ],
+    correctValue: 'No — ABA functions as a central stress-signalling hub; its levels rise under ' +
+      'salinity stress too, not just drought',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${PLANTSTRESS}:M2`],
+    source: PLANTSTRESS_SRC,
+  },
+  {
+    conceptId: PLANTSTRESS, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What term describes the highly reactive molecules generated under stress conditions ' +
+      'that can damage proteins, lipids, and DNA if not neutralised by the antioxidant defence ' +
+      'system?',
+    choices: [
+      { text: 'Reactive oxygen species (ROS)', isCorrect: true },
+      { text: 'Osmolytes', isCorrect: false },
+      { text: 'Secondary metabolites', isCorrect: false },
+    ],
+    correctValue: 'Reactive oxygen species (ROS)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: PLANTSTRESS_SRC,
+  },
+]
+
 export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...SCIMETH_EXPLANATIONS,
   ...UNITHEMES_EXPLANATIONS,
@@ -7890,6 +8172,9 @@ export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...APPLIEDECO_EXPLANATIONS,
   ...BIOGEOADV_EXPLANATIONS,
   ...LANDCONS_EXPLANATIONS,
+  ...MYCORRHIZA_EXPLANATIONS,
+  ...PLANTDEF_EXPLANATIONS,
+  ...PLANTSTRESS_EXPLANATIONS,
 ]
 
 export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
@@ -7974,4 +8259,7 @@ export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
   ...APPLIEDECO_PROBES,
   ...BIOGEOADV_PROBES,
   ...LANDCONS_PROBES,
+  ...MYCORRHIZA_PROBES,
+  ...PLANTDEF_PROBES,
+  ...PLANTSTRESS_PROBES,
 ]
