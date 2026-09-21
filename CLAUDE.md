@@ -228,28 +228,27 @@ probe-depth campaign is now COMPLETE: 108/108 at the 3-probe contract floor.** T
 2026-09-14-KG-extension concepts remain a SEPARATE, larger, not-yet-started task (see below).
 Formal EB
 authoring started 2026-09-20 at the KG root, `bio.found.what-is-biology`, then continued in
-strict KG-prerequisite order through 182 concepts total (`educational-brain/concepts/biology/`,
-no Blueprint exists for biology as a subject; 72 entries — see COVERAGE.md's biology row
+strict KG-prerequisite order through 185 concepts total (`educational-brain/concepts/biology/`,
+no Blueprint exists for biology as a subject; 75 entries — see COVERAGE.md's biology row
 for the full list of ZERO-seed-content concepts authored from first principles — and
 thirty-nine entries record genuine KG-description-vs-seed-content gaps as Curriculum
 Feedback rather than fabricating content).
-Authored via 55 successive batches of 3, each recomputing the fresh topologically-ready
+Authored via 56 successive batches of 3, each recomputing the fresh topologically-ready
 frontier from the prior baseline — see COVERAGE.md's biology row for the full per-batch
-concept list; the latest batch (from the 179-concept baseline) added
-`bio.div.fish-amphibian-diversity`, `bio.div.reptile-bird-diversity`, and
-`bio.div.mammalian-diversity` (all 3 first-principles-authored — 0 of 17 frontier
-candidates had seed content, the TWENTY-FIRST consecutive fully zero-content batch; this
-batch completes the vertebrate-diversity trio unlocked by chordate-vertebrate-diversity) —
-**EB is 182/199** (only 17 concepts remain).
+concept list; the latest batch (from the 182-concept baseline) added
+`bio.eco.biogeochemistry-advanced`, `bio.eco.landscape-conservation-ecology`, and
+`bio.evo.phylogeography-biogeography` (all 3 first-principles-authored — 0 of 14 frontier
+candidates had seed content, the TWENTY-SECOND consecutive fully zero-content batch) —
+**EB is 185/199** (only 14 concepts remain).
 **First-principles authoring remains the settled default mode** for continuing this
-campaign from the current 199-concept KG frontier (twenty-one consecutive zero-content
+campaign from the current 199-concept KG frontier (twenty-two consecutive zero-content
 batches since batch 35) — continuation should still re-check each fresh frontier for
 any remaining seed-content-backed concepts (a handful may still surface, as batch 30's
 2-of-46 showed), but should not expect them as the norm. The 91-concept 2026-09-14
 KG-extension pool remains a SEPARATE, larger, not-yet-started task; no unilateral
 decision to switch to it has been made, and this determination (continuing
 first-principles authoring of the current frontier rather than switching tasks) has
-now been applied consistently across twenty-seven batches (28 through 55) without a
+now been applied consistently across twenty-eight batches (28 through 56) without a
 stop-and-ask, per the Workflow preference's authorization for ordinary scope
 continuations — a future session may still revisit this call, particularly once the
 current frontier is fully exhausted of authorable concepts.
