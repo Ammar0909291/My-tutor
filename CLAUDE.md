@@ -377,8 +377,17 @@ prerequisite `bio.repro.sexual-reproduction-plants`, already served — and
 hormones`, both already served) validated clean: `tsc --noEmit` 0 errors,
 dry-run 0 duplicate identities across 8,436 items, contract audit 147/199
 authored, 147/147 at contract, 0 short, 0 never-quizzable, 40/40 targeted
-vitest suites passing. **Extended 91: 39/91.** Production convergence (seed
-corpus → cold-start bootstrap → live
+vitest suites passing. Batch 14 (2026-09-21, 3 concepts:
+`bio.plant.phytochrome-photoperiodic-flowering` — its sole prerequisite
+`bio.plant.plant-growth-hormones`, already served — `bio.cell.cytoskeleton-
+motility` — its sole prerequisite `bio.cell.cytoskeleton`, already served —
+and `bio.cell.membrane-transport-energetics` — prerequisites
+`bio.cell.cell-membrane-transport` and `bio.mol.bioenergetics`, both already
+served; preserves the KG's `chem.thermo.gibbs` cross-subject link) validated
+clean: `tsc --noEmit` 0 errors, dry-run 0 duplicate identities across 8,451
+items, contract audit 150/199 authored, 150/150 at contract, 0 short, 0
+never-quizzable, 40/40 targeted vitest suites passing. **Extended 91: 42/91.**
+Production convergence (seed corpus → cold-start bootstrap → live
 AssetIdentity rows) is UNVERIFIED against the real database this campaign so
 far — no Supabase/DB access has been used;
 treat as PENDING until explicitly checked. Re-measure with `npx tsx

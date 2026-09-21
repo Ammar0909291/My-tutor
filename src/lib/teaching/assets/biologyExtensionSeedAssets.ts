@@ -3847,6 +3847,290 @@ const PLANTBIOTECH_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── bio.plant.phytochrome-photoperiodic-flowering ───────────────────────────
+const PHYTOCHROME = 'bio.plant.phytochrome-photoperiodic-flowering'
+const PHYTOCHROME_SRC = 'educational-brain/concepts/biology/bio.plant.phytochrome-photoperiodic-flowering.md'
+const PHYTOCHROME_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PHYTOCHROME, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Phytochrome exists in two photo-interconvertible forms: Pr (converts to Pfr on red ' +
+      'light) and Pfr (converts back to Pr on far-red light, or slowly during darkness). ' +
+      'Because Pfr reverts to Pr during darkness, the Pr/Pfr ratio serves as an internal ' +
+      'molecular measure of UNINTERRUPTED DARKNESS duration. This underlies the critical-night- ' +
+      'length model: plants do NOT directly measure day length despite "short-day"/"long-day" ' +
+      'terminology — a "short-day" plant is more precisely a "long-night" plant, flowering when ' +
+      'continuous darkness exceeds a threshold. A brief light pulse during a long night resets ' +
+      'the Pr/Pfr dynamics and PREVENTS flowering, proving night length (not day length) is ' +
+      'measured. The actual flowering signal, florigen (FT protein), is a MOBILE signal ' +
+      'produced in the LEAF but transported via vascular tissue to act at the SHOOT APEX — a ' +
+      'different location entirely — further modulated by circadian gating.',
+    targetedMisconceptions: [],
+    source: PHYTOCHROME_SRC,
+  },
+  {
+    conceptId: PHYTOCHROME, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students assume plants directly measure DAY length, ' +
+      'consistent with "short-day"/"long-day" terminology, missing that plants specifically ' +
+      'measure the length of continuous, uninterrupted DARKNESS — a brief light interruption ' +
+      'during a long night would prevent flowering in a short-day plant, which day-length ' +
+      'measurement alone could not explain. Second, students assume florigen acts in the LEAF ' +
+      'where it is produced, missing that it is transported via vascular tissue to act at the ' +
+      'SHOOT APEX, a physically different location.',
+    targetedMisconceptions: [`${PHYTOCHROME}:M1`, `${PHYTOCHROME}:M2`],
+    source: PHYTOCHROME_SRC,
+  },
+]
+const PHYTOCHROME_PROBES: SeedProbe[] = [
+  {
+    conceptId: PHYTOCHROME, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A short-day plant is given a long night, briefly interrupted partway through by a ' +
+      'flash of light. What is the most likely outcome?',
+    choices: [
+      { text: 'Flowering is prevented, since the light pulse resets the Pr/Pfr dynamics and breaks the continuous dark period', isCorrect: true },
+      { text: 'Flowering proceeds normally, since total daylight exposure is what matters', isCorrect: false, misconceptionId: `${PHYTOCHROME}:M1` },
+      { text: 'Flowering is accelerated, since more light always promotes flowering', isCorrect: false, misconceptionId: `${PHYTOCHROME}:M1` },
+      { text: 'The light pulse has no effect on flowering timing at all', isCorrect: false },
+    ],
+    correctValue: 'Flowering is prevented, since the light pulse resets the Pr/Pfr dynamics and breaks the continuous dark period',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${PHYTOCHROME}:M1`],
+    source: PHYTOCHROME_SRC,
+  },
+  {
+    conceptId: PHYTOCHROME, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student says florigen must act directly in the leaf, since that is where it is ' +
+      'produced. What is the best response?',
+    choices: [
+      {
+        text: 'Wrong — florigen is transported via vascular tissue to act at the shoot apex, a ' +
+          'different location entirely',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — florigen exerts its flowering effect right where it is produced',
+        isCorrect: false,
+        misconceptionId: `${PHYTOCHROME}:M2`,
+      },
+    ],
+    correctValue: 'Wrong — florigen is transported via vascular tissue to act at the shoot apex, a ' +
+      'different location entirely',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${PHYTOCHROME}:M2`],
+    source: PHYTOCHROME_SRC,
+  },
+  {
+    conceptId: PHYTOCHROME, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Which phytochrome form is generally considered the biologically active form for many ' +
+      'phytochrome-mediated responses?',
+    choices: [
+      { text: 'Pfr', isCorrect: true },
+      { text: 'Pr', isCorrect: false },
+      { text: 'Neither form is more active than the other', isCorrect: false },
+    ],
+    correctValue: 'Pfr',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: PHYTOCHROME_SRC,
+  },
+]
+
+// ─── bio.cell.cytoskeleton-motility ───────────────────────────────────────────
+const CYTOMOTILITY = 'bio.cell.cytoskeleton-motility'
+const CYTOMOTILITY_SRC = 'educational-brain/concepts/biology/bio.cell.cytoskeleton-motility.md'
+const CYTOMOTILITY_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CYTOMOTILITY, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Actin-myosin-based cell crawling uses the SAME proteins as muscle contraction but ' +
+      'organises them differently: rather than sarcomere-based synchronised shortening, a ' +
+      'crawling cell extends leading-edge protrusions via localised actin polymerisation, forms ' +
+      'new adhesions, and uses trailing-edge myosin contraction to pull the cell body forward — a ' +
+      'directional process, not uniform contraction. Microtubule motors move cargo in OPPOSITE ' +
+      'default directions along the same polar tracks: kinesin generally toward the plus-end, ' +
+      'dynein toward the minus-end. The 9+2 axoneme\'s beating arises from dynein motors SLIDING ' +
+      'adjacent microtubule doublets past each other; structural cross-links prevent free ' +
+      'separation, converting the sliding into BENDING — the microtubules themselves never ' +
+      'shorten. Cytoskeletal remodelling is continuously active during division, migration, and ' +
+      'shape change.',
+    targetedMisconceptions: [],
+    source: CYTOMOTILITY_SRC,
+  },
+  {
+    conceptId: CYTOMOTILITY, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students assume cell crawling works via the SAME ' +
+      'sarcomere-based contraction mechanism as muscle, missing that crawling uses a spatially ' +
+      'organised, directional process (leading-edge protrusion, trailing-edge contraction) ' +
+      'rather than synchronised whole-structure shortening. Second, students attribute ciliary/ ' +
+      'flagellar beating to the microtubules themselves contracting, missing that the mechanism ' +
+      'is motor-driven SLIDING between adjacent doublets, converted into bending by structural ' +
+      'constraints — the microtubules never change length.',
+    targetedMisconceptions: [`${CYTOMOTILITY}:M1`, `${CYTOMOTILITY}:M2`],
+    source: CYTOMOTILITY_SRC,
+  },
+]
+const CYTOMOTILITY_PROBES: SeedProbe[] = [
+  {
+    conceptId: CYTOMOTILITY, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A migrating cell and a muscle fibre both use actin and myosin. Do they work through ' +
+      'the same mechanism?',
+    choices: [
+      { text: 'No — crawling uses a directional protrusion-and-contraction process, while muscle uses synchronised sarcomere shortening', isCorrect: true },
+      { text: 'Yes — shared proteins mean the underlying mechanism is identical', isCorrect: false, misconceptionId: `${CYTOMOTILITY}:M1` },
+      { text: 'Yes, since both processes always shorten the whole cell uniformly', isCorrect: false, misconceptionId: `${CYTOMOTILITY}:M1` },
+      { text: 'Neither process actually involves actin or myosin', isCorrect: false },
+    ],
+    correctValue: 'No — crawling uses a directional protrusion-and-contraction process, while muscle uses synchronised sarcomere shortening',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${CYTOMOTILITY}:M1`],
+    source: CYTOMOTILITY_SRC,
+  },
+  {
+    conceptId: CYTOMOTILITY, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student says a beating flagellum bends because its microtubules are actively ' +
+      'contracting, like a muscle fibre. What is the best response?',
+    choices: [
+      {
+        text: 'Wrong — the bending comes from dynein-driven sliding between adjacent doublets, ' +
+          'constrained by cross-links; the microtubules themselves never shorten',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — the microtubules shorten just like a muscle fibre contracting',
+        isCorrect: false,
+        misconceptionId: `${CYTOMOTILITY}:M2`,
+      },
+    ],
+    correctValue: 'Wrong — the bending comes from dynein-driven sliding between adjacent doublets, ' +
+      'constrained by cross-links; the microtubules themselves never shorten',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${CYTOMOTILITY}:M2`],
+    source: CYTOMOTILITY_SRC,
+  },
+  {
+    conceptId: CYTOMOTILITY, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Which microtubule motor protein generally moves cargo toward the microtubule\'s ' +
+      'minus-end?',
+    choices: [
+      { text: 'Dynein', isCorrect: true },
+      { text: 'Kinesin', isCorrect: false },
+      { text: 'Myosin', isCorrect: false },
+    ],
+    correctValue: 'Dynein',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: CYTOMOTILITY_SRC,
+  },
+]
+
+// ─── bio.cell.membrane-transport-energetics ──────────────────────────────────
+const MEMBTRANSPORT = 'bio.cell.membrane-transport-energetics'
+const MEMBTRANSPORT_SRC = 'educational-brain/concepts/biology/bio.cell.membrane-transport-energetics.md'
+const MEMBTRANSPORT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: MEMBTRANSPORT, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Membrane transport is classified by free energy relative to the electrochemical ' +
+      'gradient, not by whether a protein is involved. Passive transport (simple or facilitated ' +
+      'diffusion) moves a substance DOWN its gradient — thermodynamically favourable, requiring ' +
+      'no direct energy input, even when a specific channel or carrier protein is needed. Active ' +
+      'transport moves a substance AGAINST its gradient — thermodynamically unfavourable, ' +
+      'requiring energy. Primary active transport (e.g., the sodium-potassium pump) uses ATP ' +
+      'DIRECTLY. Secondary active transport uses the free energy already stored in an EXISTING ' +
+      'gradient (established earlier by primary active transport) to move a different substance ' +
+      'against its own gradient — via symport (same direction) or antiport (opposite ' +
+      'directions). This connects directly to the Gibbs free-energy framework from chemistry ' +
+      '(cross-linked to `chem.thermo.gibbs`): spontaneous processes release free energy, ' +
+      'non-spontaneous ones require it — passive transport is spontaneous, active transport is ' +
+      'not.',
+    targetedMisconceptions: [],
+    source: MEMBTRANSPORT_SRC,
+  },
+  {
+    conceptId: MEMBTRANSPORT, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students classify any protein-requiring transport as ' +
+      'active, missing that facilitated diffusion requires a channel/carrier protein but is ' +
+      'still PASSIVE because the substance still moves down its gradient — the direction- ' +
+      'relative-to-gradient test, not protein involvement, determines classification. Second, ' +
+      'students treat secondary active transport as energy-free since it does not use ATP ' +
+      'directly, missing that its energy traces back to ATP spent by the primary active ' +
+      'transport pump that originally established the gradient being borrowed from.',
+    targetedMisconceptions: [`${MEMBTRANSPORT}:M1`, `${MEMBTRANSPORT}:M2`],
+    source: MEMBTRANSPORT_SRC,
+  },
+]
+const MEMBTRANSPORT_PROBES: SeedProbe[] = [
+  {
+    conceptId: MEMBTRANSPORT, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A GLUT transporter protein moves glucose into a cell where intracellular glucose ' +
+      'concentration is already lower than outside. Is this active or passive transport?',
+    choices: [
+      { text: 'Passive — glucose moves down its concentration gradient, despite requiring a transporter protein', isCorrect: true },
+      { text: 'Active — any transport requiring a specific protein is active transport', isCorrect: false, misconceptionId: `${MEMBTRANSPORT}:M1` },
+      { text: 'Active, since GLUT transporters always require ATP', isCorrect: false, misconceptionId: `${MEMBTRANSPORT}:M1` },
+      { text: 'This cannot be classified without knowing the cell type', isCorrect: false },
+    ],
+    correctValue: 'Passive — glucose moves down its concentration gradient, despite requiring a transporter protein',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${MEMBTRANSPORT}:M1`],
+    source: MEMBTRANSPORT_SRC,
+  },
+  {
+    conceptId: MEMBTRANSPORT, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student says the sodium-glucose symporter (secondary active transport) doesn\'t ' +
+      'really require energy, since it doesn\'t use ATP directly. What is the best response?',
+    choices: [
+      {
+        text: 'Wrong — it moves glucose against its gradient using energy borrowed from the ' +
+          'sodium gradient, which was itself established earlier by an ATP-driven pump',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — since no ATP is used directly, no energy is required at all',
+        isCorrect: false,
+        misconceptionId: `${MEMBTRANSPORT}:M2`,
+      },
+    ],
+    correctValue: 'Wrong — it moves glucose against its gradient using energy borrowed from the ' +
+      'sodium gradient, which was itself established earlier by an ATP-driven pump',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${MEMBTRANSPORT}:M2`],
+    source: MEMBTRANSPORT_SRC,
+  },
+  {
+    conceptId: MEMBTRANSPORT, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In antiport, in what directions do the two transported substances move relative to ' +
+      'each other?',
+    choices: [
+      { text: 'Opposite directions across the membrane', isCorrect: true },
+      { text: 'The same direction across the membrane', isCorrect: false },
+      { text: 'Antiport only transports one substance at a time', isCorrect: false },
+    ],
+    correctValue: 'Opposite directions across the membrane',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: MEMBTRANSPORT_SRC,
+  },
+]
+
 export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...SCIMETH_EXPLANATIONS,
   ...UNITHEMES_EXPLANATIONS,
@@ -3887,6 +4171,9 @@ export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...STRESSPHYS_EXPLANATIONS,
   ...SEEDGERM_EXPLANATIONS,
   ...PLANTBIOTECH_EXPLANATIONS,
+  ...PHYTOCHROME_EXPLANATIONS,
+  ...CYTOMOTILITY_EXPLANATIONS,
+  ...MEMBTRANSPORT_EXPLANATIONS,
 ]
 
 export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
@@ -3929,4 +4216,7 @@ export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
   ...STRESSPHYS_PROBES,
   ...SEEDGERM_PROBES,
   ...PLANTBIOTECH_PROBES,
+  ...PHYTOCHROME_PROBES,
+  ...CYTOMOTILITY_PROBES,
+  ...MEMBTRANSPORT_PROBES,
 ]
