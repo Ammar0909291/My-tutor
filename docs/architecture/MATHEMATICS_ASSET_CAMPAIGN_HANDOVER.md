@@ -3,14 +3,25 @@
 **Account**: PAPPU. **Subject**: Mathematics ONLY. Do not touch Biology (owned by the Mohd
 account, actively progressing on shared `main` — see "Shared-repo discipline" below).
 
-**Status as of this handover**: paused mid-campaign at explicit owner request ("stop after this
-batch"), not because the work is finished. **This file is the complete pickup point for the next
-session/account.** Read this file in full before touching any Mathematics asset code.
+**Status as of this handover**: in progress, continuing per an explicit fresh instruction naming
+Mathematics and directing work to `main` (2026-09-21 session). Not paused. **This file is the
+complete pickup point for the next session/account.** Read this file in full before touching any
+Mathematics asset code.
 
-**Last commit touching this campaign**: `c73fe19` (Batch 30 content), merged as `889b051`.
-**Verify this is still current** — another PAPPU/Mathematics session may have continued after
-this handover was written; always re-run the measurement commands in Phase 0 below before
-trusting any number in this file.
+**Last commit touching this campaign**: `498a4e23` (Batch 33 content, math.alg.factoring +
+math.alg.polynomial-roots). **Verify this is still current** — another PAPPU/Mathematics session
+may have continued after this handover was written; always re-run the measurement commands in
+Phase 0 below before trusting any number in this file.
+
+**Note on repo state at the start of this 2026-09-21 session**: the local `main` branch in that
+session's container was a stale shallow-clone artifact, 502 commits behind `origin/main` with zero
+commits of its own ahead (a pure fast-forward, not a real divergence — confirmed via
+`git fetch --unshallow` before touching anything). If a future session's local `main` similarly
+fails `git merge-base` against `origin/main` with "refusing to merge unrelated histories," run
+`git fetch --unshallow origin` first — this is very likely the same shallow-clone artifact, not
+real diverged work — and verify with `git log --oneline main..origin/main` /
+`git log --oneline origin/main..main` before assuming either side has unique commits worth
+preserving.
 
 ---
 
@@ -52,7 +63,7 @@ database — it has zero DB/egress footprint and is safe to run constantly. It i
 of truth for "how many concepts are servable," never a hand-maintained count in a markdown file.
 
 **Per-domain breakdown** (recompute, don't trust this table — it was accurate at the time this
-file was written, immediately after Batch 30):
+file was written, immediately after Batch 33):
 
 ```
 domain       done / total   remaining
@@ -62,7 +73,7 @@ math.arith     58 / 58      COMPLETE
 math.abst      37 / 37      COMPLETE
 math.nt        36 / 36      COMPLETE
 math.cat       15 / 15      COMPLETE
-math.alg       24 / 59      35 remaining   <-- ACTIVE FRONTIER
+math.alg       30 / 59      29 remaining   <-- ACTIVE FRONTIER (half done)
 math.calc       4 / 76      72 remaining
 math.linalg     2 / 61      59 remaining
 math.prob       3 / 49      46 remaining
@@ -81,7 +92,7 @@ math.opt        0 / 16      16 remaining
 math.graph      0 / 16      16 remaining
 math.meas       0 / 13      13 remaining
 
-TOTAL: 334/908 authored, 343 (concept, gradeBand) pairs, all 343 at contract, 0 short, 0 never-quizzable.
+TOTAL: 340/908 authored, 349 (concept, gradeBand) pairs, all 349 at contract, 0 short, 0 never-quizzable.
 ```
 
 To regenerate this table yourself (it is NOT a KG/DB query — it's a static scan of what's actually
@@ -327,9 +338,11 @@ forward from a stale mental count.
 
 ## 5. Domain progression strategy
 
-**Current frontier: `math.alg`, 24/59, 35 remaining.** Continue there next unless a fresh owner
-instruction redirects. The exact ready-to-author (dependency-satisfied) concepts as of this
-handover:
+**Current frontier: `math.alg`, 30/59, 29 remaining (half done).** Continue there next unless a
+fresh owner instruction redirects. The exact ready-to-author (dependency-satisfied) concepts as of
+this handover (recomputed fresh after Batch 33 — `math.alg.remainder-theorem`,
+`math.alg.quadratic-formula`, `math.alg.factor-theorem`, `math.alg.discriminant`,
+`math.alg.factoring`, and `math.alg.polynomial-roots` are now DONE, unblocking a large new wave):
 
 ```
 READY NOW (no missing prerequisite within math.alg's own remaining set):
@@ -337,40 +350,41 @@ READY NOW (no missing prerequisite within math.alg's own remaining set):
   math.alg.binomial-theorem
   math.alg.elimination-method
   math.alg.exponential-equations
+  math.alg.factoring-gcf
+  math.alg.factoring-special
   math.alg.fractional-exponent
+  math.alg.fundamental-theorem-algebra
   math.alg.inequality-2var
   math.alg.logarithm-properties
   math.alg.natural-logarithm
-  math.alg.quadratic-formula
+  math.alg.polynomial-inequality
   math.alg.radical-equations
-  math.alg.remainder-theorem
+  math.alg.rational-expressions
+  math.alg.rational-root-theorem
   math.alg.simplifying-radicals
   math.alg.substitution-method
   math.alg.system-3var
+  math.alg.vietas-formulas
 
 BLOCKED (waiting on a sibling above to be authored first):
   math.alg.change-of-base            <- needs logarithm-properties
   math.alg.complex-polynomial-roots  <- needs fundamental-theorem-algebra
-  math.alg.discriminant              <- needs quadratic-formula
-  math.alg.factor-theorem            <- needs remainder-theorem
-  math.alg.factoring                 <- needs factor-theorem
-  math.alg.factoring-gcf             <- needs factoring
-  math.alg.factoring-special         <- needs factoring
   math.alg.factoring-trinomials      <- needs factoring-gcf
-  math.alg.fundamental-theorem-algebra <- needs polynomial-roots
   math.alg.logarithmic-equations     <- needs logarithm-properties + exponential-equations
   math.alg.pascals-triangle          <- needs binomial-theorem
-  math.alg.polynomial-inequality     <- needs polynomial-roots
-  math.alg.polynomial-roots          <- needs factor-theorem
   math.alg.rational-equations        <- needs rational-expressions
-  math.alg.rational-expressions      <- needs factoring
   math.alg.rational-expressions-addition       <- needs rational-expressions
   math.alg.rational-expressions-multiplication <- needs rational-expressions
   math.alg.rational-inequality       <- needs rational-expressions + polynomial-inequality
-  math.alg.rational-root-theorem     <- needs polynomial-roots
   math.alg.rationalizing-denominators <- needs simplifying-radicals
-  math.alg.vietas-formulas           <- needs polynomial-roots
 ```
+
+Priority recommendation for the next batches: `rational-expressions` unblocks the largest
+remaining cluster (rational-equations, both rational-expressions-arithmetic concepts,
+rational-inequality alongside polynomial-inequality) — open it early. `factoring-gcf` unblocks
+`factoring-trinomials`. `fundamental-theorem-algebra` unblocks `complex-polynomial-roots`.
+`logarithm-properties` unblocks both `change-of-base` and (with `exponential-equations`)
+`logarithmic-equations`. `binomial-theorem` unblocks `pascals-triangle`.
 
 Recompute this list yourself (don't trust it blindly) with:
 
@@ -515,9 +529,9 @@ start a new session's work without checking.
 
 ## 9. File index (what this campaign has touched so far)
 
-30 batches, 60 concepts authored, spanning 3 domains to completion (`math.cat` 15/15, `math.abst`
-36/36 -> 37/37 corrected count, both fully complete) plus `math.alg` opened to 24/59. Every asset
-file:
+33 batches, 66 concepts authored, spanning 3 domains to completion (`math.cat` 15/15, `math.abst`
+36/36 -> 37/37 corrected count, both fully complete) plus `math.alg` advanced to 30/59 (half done).
+Every asset file:
 
 ```
 src/lib/teaching/assets/mathematicsCategoryFoundationsAssets.ts       (math.cat, Batch 1)
@@ -549,7 +563,10 @@ src/lib/teaching/assets/mathematicsAlgebraSimplifyLinearAssets.ts      (math.alg
 src/lib/teaching/assets/mathematicsAlgebraInequalityRadicalsAssets.ts  (math.alg, Batch 27)
 src/lib/teaching/assets/mathematicsAlgebraPolyOpsExpFuncAssets.ts      (math.alg, Batch 28)
 src/lib/teaching/assets/mathematicsAlgebraCompleteSquarePolyDivAssets.ts (math.alg, Batch 29)
-src/lib/teaching/assets/mathematicsAlgebraSystemsLogarithmAssets.ts    (math.alg, Batch 30 — MOST RECENT, HEAD OF CAMPAIGN)
+src/lib/teaching/assets/mathematicsAlgebraSystemsLogarithmAssets.ts    (math.alg, Batch 30)
+src/lib/teaching/assets/mathematicsAlgebraRemainderQuadraticAssets.ts  (math.alg, Batch 31 — remainder-theorem, quadratic-formula)
+src/lib/teaching/assets/mathematicsAlgebraFactorDiscriminantAssets.ts  (math.alg, Batch 32 — factor-theorem, discriminant)
+src/lib/teaching/assets/mathematicsAlgebraFactoringRootsAssets.ts      (math.alg, Batch 33 — factoring, polynomial-roots — MOST RECENT, HEAD OF CAMPAIGN)
 ```
 
 Plus one pre-existing file from an earlier era of the overall Mathematics campaign,
@@ -562,6 +579,9 @@ baseline before this specific session's 4 new batches).
 
 Batches 1-25 (math.cat + math.abst): commits between the campaign's opening and `8c0c944`
 (math.abst domain-completing commit). Batches 26-30 (math.alg): `680a795`, `d4d0802`, `1ebf835`,
-`43f59b5`/`ff2ca69` (merge), `c73fe19`/`889b051` (merge). Every commit message states exact
-before/after authored and pairs counts — `git log --oneline --grep="Batch" -- 'src/lib/teaching/
-assets/mathematics*'` will list the full campaign trail if needed.
+`43f59b5`/`ff2ca69` (merge), `c73fe19`/`889b051` (merge). Batches 31-33 (math.alg, 2026-09-21
+session): `ff02c989` (Batch 31, remainder-theorem + quadratic-formula), `9c6d007a` (Batch 32,
+factor-theorem + discriminant), `498a4e23` (Batch 33, factoring + polynomial-roots — half of
+math.alg now done). Every commit message states exact before/after authored and pairs counts —
+`git log --oneline --grep="Batch" -- 'src/lib/teaching/assets/mathematics*'` will list the full
+campaign trail if needed.
