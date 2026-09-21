@@ -358,9 +358,18 @@ served; opens 4 further concepts (`secondary-growth-anatomy`,
 `mycorrhizae-plant-symbioses`)) validated clean: `tsc --noEmit` 0 errors,
 dry-run 0 duplicate identities across 8,406 items, contract audit 141/199
 authored, 141/141 at contract, 0 short, 0 never-quizzable, 40/40 targeted
-vitest suites passing. **Extended 91: 33/91.** Production convergence (seed
-corpus → cold-start bootstrap → live AssetIdentity rows) is UNVERIFIED against
-the real database this campaign so
+vitest suites passing. Batch 12 (2026-09-21, 3 concepts:
+`bio.plant.secondary-growth-anatomy` — its sole prerequisite batch 11's
+`bio.plant.plant-tissue-systems`, now served — `bio.repro.animal-
+reproductive-strategies` — its sole prerequisite `bio.repro.human-
+reproductive-system`, already served — and `bio.repro.hormonal-regulation-
+reproduction-detail` — prerequisites `bio.repro.human-reproductive-system`
+and `bio.physio.endocrine-system`, both already served) validated clean:
+`tsc --noEmit` 0 errors, dry-run 0 duplicate identities across 8,421 items,
+contract audit 144/199 authored, 144/144 at contract, 0 short, 0
+never-quizzable, 40/40 targeted vitest suites passing. **Extended 91: 36/91.**
+Production convergence (seed corpus → cold-start bootstrap → live
+AssetIdentity rows) is UNVERIFIED against the real database this campaign so
 far — no Supabase/DB access has been used;
 treat as PENDING until explicitly checked. Re-measure with `npx tsx
 scripts/assets/contract-audit.ts --subject biology` before trusting any number

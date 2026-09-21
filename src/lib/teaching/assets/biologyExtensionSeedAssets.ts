@@ -3284,6 +3284,285 @@ const PLANTTISSUE_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── bio.plant.secondary-growth-anatomy ──────────────────────────────────────
+const SECGROWTH = 'bio.plant.secondary-growth-anatomy'
+const SECGROWTH_SRC = 'educational-brain/concepts/biology/bio.plant.secondary-growth-anatomy.md'
+const SECGROWTH_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SECGROWTH, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Secondary growth (growth in girth) is driven by two SEPARATE lateral meristems producing ' +
+      'different tissue. The vascular cambium produces secondary XYLEM inward and secondary ' +
+      'PHLOEM outward. The cork cambium, further outward, produces periderm (cork cells) that ' +
+      'replaces the epidermis as the stem thickens. Wood is accumulated secondary xylem; bark is ' +
+      'a LOCATION-based term (everything outside the vascular cambium), a composite of current ' +
+      'secondary phloem plus periderm — not a single uniform material. Annual growth rings record ' +
+      'SEASONAL variation in cambial activity rate: favourable conditions (spring) produce larger, ' +
+      'thinner-walled xylem cells; less favourable conditions (later in the season) produce ' +
+      'smaller, thicker-walled cells — the contrast at the transition creates the visible ring.',
+    targetedMisconceptions: [],
+    source: SECGROWTH_SRC,
+  },
+  {
+    conceptId: SECGROWTH, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students treat bark as a single uniform tissue type, ' +
+      'missing that it is defined by LOCATION (everything outside the vascular cambium) and ' +
+      'includes multiple genuinely different tissues — current secondary phloem plus periderm. ' +
+      'Second, students treat growth rings as an arbitrary, generic age marker, missing the ' +
+      'specific mechanism: seasonal variation in cambial activity rate producing a cell-size/ ' +
+      'wall-thickness contrast, meaning ring WIDTH itself reflects how favourable a given year\'s ' +
+      'growing conditions were.',
+    targetedMisconceptions: [`${SECGROWTH}:M1`, `${SECGROWTH}:M2`],
+    source: SECGROWTH_SRC,
+  },
+]
+const SECGROWTH_PROBES: SeedProbe[] = [
+  {
+    conceptId: SECGROWTH, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A cross-section shows two distinct tissue layers, both located outside the vascular ' +
+      'cambium. Are both considered part of "bark"?',
+    choices: [
+      { text: 'Yes — bark is defined by location (outside the vascular cambium), not by being one uniform tissue', isCorrect: true },
+      { text: 'No — only one of the two layers can be "bark" since bark is a single tissue type', isCorrect: false, misconceptionId: `${SECGROWTH}:M1` },
+      { text: 'No — bark refers only to secondary xylem', isCorrect: false, misconceptionId: `${SECGROWTH}:M1` },
+      { text: 'This cannot be determined without knowing the tree\'s age', isCorrect: false },
+    ],
+    correctValue: 'Yes — bark is defined by location (outside the vascular cambium), not by being one uniform tissue',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${SECGROWTH}:M1`],
+    source: SECGROWTH_SRC,
+  },
+  {
+    conceptId: SECGROWTH, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student says growth rings are "just an arbitrary marker, like tally marks, unrelated ' +
+      'to actual growing conditions." What is the best response?',
+    choices: [
+      {
+        text: 'Wrong — ring width reflects the cambium\'s actual activity rate; a dry year would ' +
+          'produce a narrower ring than a wet year',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — growth rings are simply arbitrary, generic age markers',
+        isCorrect: false,
+        misconceptionId: `${SECGROWTH}:M2`,
+      },
+    ],
+    correctValue: 'Wrong — ring width reflects the cambium\'s actual activity rate; a dry year would ' +
+      'produce a narrower ring than a wet year',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${SECGROWTH}:M2`],
+    source: SECGROWTH_SRC,
+  },
+  {
+    conceptId: SECGROWTH, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Which lateral meristem produces the periderm (cork) that replaces the epidermis as a ' +
+      'stem thickens?',
+    choices: [
+      { text: 'The cork cambium', isCorrect: true },
+      { text: 'The vascular cambium', isCorrect: false },
+      { text: 'The apical meristem', isCorrect: false },
+    ],
+    correctValue: 'The cork cambium',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: SECGROWTH_SRC,
+  },
+]
+
+// ─── bio.repro.animal-reproductive-strategies ────────────────────────────────
+const REPROSTRAT = 'bio.repro.animal-reproductive-strategies'
+const REPROSTRAT_SRC = 'educational-brain/concepts/biology/bio.repro.animal-reproductive-strategies.md'
+const REPROSTRAT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: REPROSTRAT, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Oviparity, viviparity, and ovoviviparity require checking TWO criteria independently: ' +
+      'WHERE development occurs (internal or external) and WHAT nutrient source is used (egg ' +
+      'reserves or direct maternal transfer). Oviparity: external development, egg-based ' +
+      'nutrition. Viviparity: internal development, direct maternal nutrient transfer (via ' +
+      'placenta). Ovoviviparity is the combination often missed: internal development (like ' +
+      'viviparity) but egg-based nutrition (like oviparity) — some sharks and reptiles. Parental ' +
+      'investment theory predicts a trade-off following directly from finite resources: more ' +
+      'investment per offspring means fewer total offspring, and vice versa. r-selected and ' +
+      'K-selected strategies are the two ENDS of a life-history CONTINUUM, not a strict binary — ' +
+      'r-selected clusters toward high offspring number and minimal per-offspring investment; ' +
+      'K-selected clusters toward low offspring number and substantial investment; most species ' +
+      'fall somewhere between.',
+    targetedMisconceptions: [],
+    source: REPROSTRAT_SRC,
+  },
+  {
+    conceptId: REPROSTRAT, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students classify ovoviviparity using only ONE criterion ' +
+      '(usually just "internal development," conflating it with viviparity), missing that its ' +
+      'defining feature is the specific COMBINATION of internal development with egg-based ' +
+      'nutrition. Second, students treat r-selected and K-selected as a strict either/or binary, ' +
+      'missing that they describe two ends of a continuum — a species with a moderate mix of ' +
+      'traits falls somewhere between the extremes, not forced into one box.',
+    targetedMisconceptions: [`${REPROSTRAT}:M1`, `${REPROSTRAT}:M2`],
+    source: REPROSTRAT_SRC,
+  },
+]
+const REPROSTRAT_PROBES: SeedProbe[] = [
+  {
+    conceptId: REPROSTRAT, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An organism\'s embryos develop INSIDE the mother but rely primarily on nutrients ' +
+      'stored WITHIN the egg, not direct maternal transfer. What reproductive mode is this?',
+    choices: [
+      { text: 'Ovoviviparity — internal development with egg-based nutrition', isCorrect: true },
+      { text: 'Viviparity, since development occurs internally', isCorrect: false, misconceptionId: `${REPROSTRAT}:M1` },
+      { text: 'Oviparity, since nutrition comes from the egg', isCorrect: false, misconceptionId: `${REPROSTRAT}:M1` },
+      { text: 'This combination cannot occur in any real organism', isCorrect: false },
+    ],
+    correctValue: 'Ovoviviparity — internal development with egg-based nutrition',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${REPROSTRAT}:M1`],
+    source: REPROSTRAT_SRC,
+  },
+  {
+    conceptId: REPROSTRAT, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A species produces a moderate number of offspring with moderate parental care. A ' +
+      'student insists it must be classified as strictly r-selected or strictly K-selected. ' +
+      'What is the best response?',
+    choices: [
+      {
+        text: 'Not necessarily — r/K selection is a continuum, so this species may simply fall ' +
+          'somewhere between the two extremes',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — every species must be classified as either purely r-selected or purely K-selected',
+        isCorrect: false,
+        misconceptionId: `${REPROSTRAT}:M2`,
+      },
+    ],
+    correctValue: 'Not necessarily — r/K selection is a continuum, so this species may simply fall ' +
+      'somewhere between the two extremes',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${REPROSTRAT}:M2`],
+    source: REPROSTRAT_SRC,
+  },
+  {
+    conceptId: REPROSTRAT, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why does investing more resources per offspring predict fewer total offspring, given ' +
+      'parental investment theory?',
+    choices: [
+      { text: 'Because total reproductive resources are finite and must be divided among fewer, more heavily-invested offspring', isCorrect: true },
+      { text: 'Because more-invested offspring are biologically incapable of having siblings', isCorrect: false },
+      { text: 'There is no real relationship between investment per offspring and total offspring number', isCorrect: false },
+    ],
+    correctValue: 'Because total reproductive resources are finite and must be divided among fewer, more heavily-invested offspring',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: REPROSTRAT_SRC,
+  },
+]
+
+// ─── bio.repro.hormonal-regulation-reproduction-detail ───────────────────────
+const HPGAXIS = 'bio.repro.hormonal-regulation-reproduction-detail'
+const HPGAXIS_SRC = 'educational-brain/concepts/biology/bio.repro.hormonal-regulation-reproduction-detail.md'
+const HPGAXIS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: HPGAXIS, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The hypothalamic-pituitary-gonadal (HPG) axis regulates reproduction: the hypothalamus ' +
+      'secretes GnRH, stimulating the pituitary to release LH and FSH, which act on the gonads. ' +
+      'Critically, GnRH must be secreted in a PULSATILE pattern (discrete bursts) for the axis to ' +
+      'function normally — this pulsatile pattern drives the menstrual cycle\'s hormonal pattern. ' +
+      'CONTINUOUS (non-pulsatile) GnRH exposure does NOT sustain normal function — it causes ' +
+      'pituitary receptor desensitisation, actually SUPPRESSING LH/FSH release, the OPPOSITE ' +
+      'effect from pulsatile stimulation. This directly explains hormonal contraception\'s ' +
+      'mechanism: maintaining steady, continuous hormone levels suppresses the normal pulsatile ' +
+      'pattern needed to trigger ovulation — the contraceptive prevents ovulation UPSTREAM, it ' +
+      'does not mechanically block sperm or fertilisation.',
+    targetedMisconceptions: [],
+    source: HPGAXIS_SRC,
+  },
+  {
+    conceptId: HPGAXIS, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students assume continuous GnRH exposure provides MORE ' +
+      'stimulation than pulsatile exposure ("more constant signal = more effect"), missing that ' +
+      'continuous exposure actually SUPPRESSES the axis via receptor desensitisation — the ' +
+      'opposite of pulsatile stimulation\'s effect. Second, students describe hormonal ' +
+      'contraception as directly, mechanically blocking sperm or fertilisation, missing that its ' +
+      'actual mechanism suppresses the HPG axis to prevent OVULATION entirely, far upstream of ' +
+      'fertilisation.',
+    targetedMisconceptions: [`${HPGAXIS}:M1`, `${HPGAXIS}:M2`],
+    source: HPGAXIS_SRC,
+  },
+]
+const HPGAXIS_PROBES: SeedProbe[] = [
+  {
+    conceptId: HPGAXIS, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Compared to pulsatile GnRH administration, what effect does CONTINUOUS GnRH exposure ' +
+      'have on LH/FSH release?',
+    choices: [
+      { text: 'It suppresses LH/FSH release via pituitary receptor desensitisation', isCorrect: true },
+      { text: 'It stimulates even greater LH/FSH release than pulsatile exposure', isCorrect: false, misconceptionId: `${HPGAXIS}:M1` },
+      { text: 'It has exactly the same effect as pulsatile exposure', isCorrect: false, misconceptionId: `${HPGAXIS}:M1` },
+      { text: 'It has no effect on the HPG axis at all', isCorrect: false },
+    ],
+    correctValue: 'It suppresses LH/FSH release via pituitary receptor desensitisation',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${HPGAXIS}:M1`],
+    source: HPGAXIS_SRC,
+  },
+  {
+    conceptId: HPGAXIS, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student says "hormonal contraceptive pills physically block sperm from reaching an ' +
+      'egg." What is the best response?',
+    choices: [
+      {
+        text: 'Wrong — they suppress the HPG axis to prevent ovulation entirely; if there is no ' +
+          'egg, fertilisation cannot occur regardless of sperm',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — hormonal contraceptives work by mechanically blocking sperm',
+        isCorrect: false,
+        misconceptionId: `${HPGAXIS}:M2`,
+      },
+    ],
+    correctValue: 'Wrong — they suppress the HPG axis to prevent ovulation entirely; if there is no ' +
+      'egg, fertilisation cannot occur regardless of sperm',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${HPGAXIS}:M2`],
+    source: HPGAXIS_SRC,
+  },
+  {
+    conceptId: HPGAXIS, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What hormone does the hypothalamus secrete to initiate the HPG axis cascade?',
+    choices: [
+      { text: 'GnRH (gonadotropin-releasing hormone)', isCorrect: true },
+      { text: 'LH (luteinising hormone)', isCorrect: false },
+      { text: 'Oestrogen', isCorrect: false },
+    ],
+    correctValue: 'GnRH (gonadotropin-releasing hormone)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: HPGAXIS_SRC,
+  },
+]
+
 export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...SCIMETH_EXPLANATIONS,
   ...UNITHEMES_EXPLANATIONS,
@@ -3318,6 +3597,9 @@ export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...EXERCISE_EXPLANATIONS,
   ...COMPPHYS_EXPLANATIONS,
   ...PLANTTISSUE_EXPLANATIONS,
+  ...SECGROWTH_EXPLANATIONS,
+  ...REPROSTRAT_EXPLANATIONS,
+  ...HPGAXIS_EXPLANATIONS,
 ]
 
 export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
@@ -3354,4 +3636,7 @@ export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
   ...EXERCISE_PROBES,
   ...COMPPHYS_PROBES,
   ...PLANTTISSUE_PROBES,
+  ...SECGROWTH_PROBES,
+  ...REPROSTRAT_PROBES,
+  ...HPGAXIS_PROBES,
 ]
