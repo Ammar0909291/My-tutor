@@ -430,7 +430,16 @@ now served — and `bio.micro.human-microbiome-detail` — prerequisites
 already served) validated clean: `tsc --noEmit` 0 errors, dry-run 0 duplicate
 identities across 8,511 items, contract audit 162/199 authored, 162/162 at
 contract, 0 short, 0 never-quizzable, 40/40 targeted vitest suites passing.
-**Extended 91: 54/91.** Production convergence (seed
+Batch 19 (2026-09-21, 3 concepts: `bio.eco.microbial-ecology` — prerequisites
+`bio.micro.microbial-diversity` and `bio.eco.ecosystem-structure-function`,
+both already served — `bio.immuno.cytokines-immune-signaling` — its sole
+prerequisite `bio.immuno.innate-adaptive-immunity`, already served — and
+`bio.micro.antimicrobial-resistance` — prerequisites
+`bio.micro.pathogenic-microbes` and `bio.micro.horizontal-gene-transfer`,
+both already served) validated clean: `tsc --noEmit` 0 errors, dry-run 0
+duplicate identities across 8,526 items, contract audit 165/199 authored,
+165/165 at contract, 0 short, 0 never-quizzable, 40/40 targeted vitest suites
+passing. **Extended 91: 57/91.** Production convergence (seed
 corpus → cold-start bootstrap → live
 AssetIdentity rows) is UNVERIFIED against the real database this campaign so
 far — no Supabase/DB access has been used;

@@ -5254,6 +5254,286 @@ const MICROBIOME_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── bio.eco.microbial-ecology ────────────────────────────────────────────────
+const MICROECO = 'bio.eco.microbial-ecology'
+const MICROECO_SRC = 'educational-brain/concepts/biology/bio.eco.microbial-ecology.md'
+const MICROECO_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: MICROECO, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Microbes are the PRINCIPAL drivers of biogeochemical nutrient cycling (nitrogen fixation, ' +
+      'nitrification, denitrification, decomposition, sulfur cycling) — transformations larger ' +
+      'organisms are largely incapable of performing themselves. A biofilm is a structurally ' +
+      'organised, COOPERATIVE microbial community — cells embedded in a self-produced ' +
+      'extracellular matrix, often coordinating via quorum sensing — not simply many independent ' +
+      'cells sharing a location; this organisation produces emergent properties like dramatically ' +
+      'increased antimicrobial resistance that free-living cells of the same species lack. ' +
+      'Extremophile survival reflects SPECIFIC molecular adaptations targeted to a PARTICULAR ' +
+      'extreme condition (thermophiles: heat-stable proteins; halophiles: compatible solutes for ' +
+      'osmotic balance) — not one generic "toughness." Soil and gut microbiome ecology are ' +
+      'applied case studies of these same principles.',
+    targetedMisconceptions: [],
+    source: MICROECO_SRC,
+  },
+  {
+    conceptId: MICROECO, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students treat a biofilm as simply many independent cells ' +
+      'occupying the same location, missing the structural organisation (self-produced matrix, ' +
+      'quorum sensing) that produces genuinely emergent properties like increased resistance. ' +
+      'Second, students assume different extremophile categories share one generic "toughness," ' +
+      'missing that a thermophile\'s heat-stable proteins would NOT protect it against a ' +
+      'completely different stress like extreme salinity — each category relies on mechanistically ' +
+      'different, targeted adaptations.',
+    targetedMisconceptions: [`${MICROECO}:M1`, `${MICROECO}:M2`],
+    source: MICROECO_SRC,
+  },
+]
+const MICROECO_PROBES: SeedProbe[] = [
+  {
+    conceptId: MICROECO, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Free-living cells and biofilm-embedded cells of the same species are both exposed to ' +
+      'the same antimicrobial agent. What would you expect?',
+    choices: [
+      { text: 'The biofilm-embedded population would show greater resistance, an emergent property of the organised community', isCorrect: true },
+      { text: 'Both populations would show identical resistance, since biofilms are just crowded cells', isCorrect: false, misconceptionId: `${MICROECO}:M1` },
+      { text: 'The free-living cells would show greater resistance', isCorrect: false, misconceptionId: `${MICROECO}:M1` },
+      { text: 'Neither population would show any resistance at all', isCorrect: false },
+    ],
+    correctValue: 'The biofilm-embedded population would show greater resistance, an emergent property of the organised community',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${MICROECO}:M1`],
+    source: MICROECO_SRC,
+  },
+  {
+    conceptId: MICROECO, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student asks whether a thermophile\'s specific heat-adaptation mechanism would also ' +
+      'protect it against extreme salinity, since "extremophiles are just generally tough." What ' +
+      'is the best response?',
+    choices: [
+      {
+        text: 'No — heat-stable proteins and compatible solutes for osmotic balance are ' +
+          'mechanistically different, targeted solutions to different specific problems',
+        isCorrect: true,
+      },
+      {
+        text: 'Yes — extremophiles share one generic toughness that protects against any extreme condition',
+        isCorrect: false,
+        misconceptionId: `${MICROECO}:M2`,
+      },
+    ],
+    correctValue: 'No — heat-stable proteins and compatible solutes for osmotic balance are ' +
+      'mechanistically different, targeted solutions to different specific problems',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${MICROECO}:M2`],
+    source: MICROECO_SRC,
+  },
+  {
+    conceptId: MICROECO, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What would happen to ecosystem nutrient cycling if microbes disappeared entirely, but ' +
+      'plants and animals remained?',
+    choices: [
+      { text: 'Nutrient cycling would grind to a halt, since microbes perform transformations larger organisms cannot', isCorrect: true },
+      { text: 'Nutrient cycling would continue normally through plants and animals alone', isCorrect: false },
+      { text: 'Nutrient cycling would actually improve without microbial competition', isCorrect: false },
+    ],
+    correctValue: 'Nutrient cycling would grind to a halt, since microbes perform transformations larger organisms cannot',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: MICROECO_SRC,
+  },
+]
+
+// ─── bio.immuno.cytokines-immune-signaling ────────────────────────────────────
+const CYTOKINES = 'bio.immuno.cytokines-immune-signaling'
+const CYTOKINES_SRC = 'educational-brain/concepts/biology/bio.immuno.cytokines-immune-signaling.md'
+const CYTOKINES_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CYTOKINES, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Cytokines are the molecular language of immune cell communication, with distinct classes ' +
+      'serving different roles: interleukins coordinate BETWEEN leukocytes; interferons signal ' +
+      'NEIGHBOURING, still-uninfected cells to pre-emptively activate antiviral defences BEFORE ' +
+      'infection spreads to them (not a direct attack on the virus in the secreting cell); tumour ' +
+      'necrosis factor (TNF) promotes inflammation and can induce apoptosis. Cytokine signalling ' +
+      'coordinates innate and adaptive immunity together as one integrated system. Cytokine storm ' +
+      'is NOT an exotic, different mechanism — it is the SAME normal cytokine-signalling ' +
+      'machinery operating in a severely dysregulated, self-amplifying, runaway manner, with the ' +
+      'severe damage resulting specifically from this quantitative excess.',
+    targetedMisconceptions: [],
+    source: CYTOKINES_SRC,
+  },
+  {
+    conceptId: CYTOKINES, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students assume interferons directly attack the virus ' +
+      'inside the secreting, already-infected cell, missing that interferon\'s key mechanism is ' +
+      'warning NEIGHBOURING, still-uninfected cells to activate defences pre-emptively. Second, ' +
+      'students treat cytokine storm as a fundamentally different, exotic immune mechanism, ' +
+      'missing that it involves the SAME cytokine classes and receptors as normal immune ' +
+      'responses, simply in dysregulated, excessive quantities.',
+    targetedMisconceptions: [`${CYTOKINES}:M1`, `${CYTOKINES}:M2`],
+    source: CYTOKINES_SRC,
+  },
+]
+const CYTOKINES_PROBES: SeedProbe[] = [
+  {
+    conceptId: CYTOKINES, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A virus-infected cell secretes interferon. Which cells specifically benefit from this ' +
+      'signal?',
+    choices: [
+      { text: 'Neighbouring, still-uninfected cells, which are warned to activate antiviral defences pre-emptively', isCorrect: true },
+      { text: 'The infected cell itself, since interferon directly attacks the virus within it', isCorrect: false, misconceptionId: `${CYTOKINES}:M1` },
+      { text: 'No cells benefit, since interferon has no protective function', isCorrect: false, misconceptionId: `${CYTOKINES}:M1` },
+      { text: 'Only distant cells in unrelated tissues', isCorrect: false },
+    ],
+    correctValue: 'Neighbouring, still-uninfected cells, which are warned to activate antiviral defences pre-emptively',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${CYTOKINES}:M1`],
+    source: CYTOKINES_SRC,
+  },
+  {
+    conceptId: CYTOKINES, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student says cytokine storm "must involve some entirely new, exotic signalling ' +
+      'molecules not otherwise present in the body." What is the best response?',
+    choices: [
+      {
+        text: 'Wrong — cytokine storm involves the SAME cytokine classes active in ordinary ' +
+          'immune responses, simply overproduced in a dysregulated, runaway manner',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — cytokine storm requires entirely new cytokine molecules to occur',
+        isCorrect: false,
+        misconceptionId: `${CYTOKINES}:M2`,
+      },
+    ],
+    correctValue: 'Wrong — cytokine storm involves the SAME cytokine classes active in ordinary ' +
+      'immune responses, simply overproduced in a dysregulated, runaway manner',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${CYTOKINES}:M2`],
+    source: CYTOKINES_SRC,
+  },
+  {
+    conceptId: CYTOKINES, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Which cytokine is named for its originally-observed ability to cause tumour tissue ' +
+      'necrosis, and also promotes inflammation and can induce apoptosis?',
+    choices: [
+      { text: 'Tumour necrosis factor (TNF)', isCorrect: true },
+      { text: 'Interferon', isCorrect: false },
+      { text: 'Interleukin', isCorrect: false },
+    ],
+    correctValue: 'Tumour necrosis factor (TNF)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: CYTOKINES_SRC,
+  },
+]
+
+// ─── bio.micro.antimicrobial-resistance ───────────────────────────────────────
+const AMR = 'bio.micro.antimicrobial-resistance'
+const AMR_SRC = 'educational-brain/concepts/biology/bio.micro.antimicrobial-resistance.md'
+const AMR_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: AMR, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Three major resistance mechanisms account for most clinically important antimicrobial ' +
+      'resistance: efflux pumps (actively pump the antibiotic back out of the cell), enzymatic ' +
+      'drug inactivation (e.g., beta-lactamases destroying penicillin-family antibiotics), and ' +
+      'target-site modification (altering the molecule the antibiotic is designed to bind). ' +
+      'Critically, an antibiotic does NOT cause resistance mutations — resistance-conferring ' +
+      'genetic variation arises independently through ordinary mutation, and the antibiotic acts ' +
+      'as a SELECTIVE PRESSURE, killing susceptible bacteria and leaving already-resistant ' +
+      'individuals to survive and reproduce. Horizontal gene transfer (via plasmids or ' +
+      'transposons, through conjugation, transformation, or transduction) is the PRIMARY route ' +
+      'for resistance genes to spread rapidly BETWEEN and ACROSS different bacterial species — ' +
+      'far faster than ordinary vertical inheritance alone.',
+    targetedMisconceptions: [],
+    source: AMR_SRC,
+  },
+  {
+    conceptId: AMR, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students believe antibiotic exposure CAUSES resistance ' +
+      'mutations to arise in direct response to the drug, missing that resistance variation ' +
+      'exists or arises independently, and the antibiotic merely SELECTS for it rather than ' +
+      'inducing it. Second, students assume resistance spreads mainly through ordinary ' +
+      'reproduction (vertical inheritance), missing that horizontal gene transfer is the PRIMARY ' +
+      'route for rapid spread between and across bacterial species — explaining why resistance ' +
+      'can appear suddenly in multiple, only distantly related species.',
+    targetedMisconceptions: [`${AMR}:M1`, `${AMR}:M2`],
+    source: AMR_SRC,
+  },
+]
+const AMR_PROBES: SeedProbe[] = [
+  {
+    conceptId: AMR, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A population of bacteria is exposed to an antibiotic, and some survive as resistant. ' +
+      'Did the antibiotic CREATE the resistance in those survivors?',
+    choices: [
+      { text: 'No — the survivors must have already carried (or randomly acquired) the resistance trait before exposure; the antibiotic selected for it', isCorrect: true },
+      { text: 'Yes — the antibiotic caused resistance mutations to arise in direct response to exposure', isCorrect: false, misconceptionId: `${AMR}:M1` },
+      { text: 'Yes, since bacteria always adapt in direct response to any drug they encounter', isCorrect: false, misconceptionId: `${AMR}:M1` },
+      { text: 'This cannot be determined from the scenario', isCorrect: false },
+    ],
+    correctValue: 'No — the survivors must have already carried (or randomly acquired) the resistance trait before exposure; the antibiotic selected for it',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${AMR}:M1`],
+    source: AMR_SRC,
+  },
+  {
+    conceptId: AMR, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The same resistance gene appears nearly simultaneously in two only distantly related ' +
+      'bacterial species. A student says this must be due to ordinary parent-to-offspring ' +
+      'reproduction in each species independently. What is the best response?',
+    choices: [
+      {
+        text: 'Unlikely — horizontal gene transfer (via plasmids/transposons) is the primary ' +
+          'route explaining rapid resistance spread across distantly related species',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — resistance genes spread exclusively through ordinary vertical inheritance',
+        isCorrect: false,
+        misconceptionId: `${AMR}:M2`,
+      },
+    ],
+    correctValue: 'Unlikely — horizontal gene transfer (via plasmids/transposons) is the primary ' +
+      'route explaining rapid resistance spread across distantly related species',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${AMR}:M2`],
+    source: AMR_SRC,
+  },
+  {
+    conceptId: AMR, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Beta-lactamases are the classic example of which resistance mechanism category?',
+    choices: [
+      { text: 'Enzymatic drug inactivation', isCorrect: true },
+      { text: 'Efflux pumps', isCorrect: false },
+      { text: 'Target-site modification', isCorrect: false },
+    ],
+    correctValue: 'Enzymatic drug inactivation',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: AMR_SRC,
+  },
+]
+
 export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...SCIMETH_EXPLANATIONS,
   ...UNITHEMES_EXPLANATIONS,
@@ -5309,6 +5589,9 @@ export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...CANCERHALL_EXPLANATIONS,
   ...ARCHAEA_EXPLANATIONS,
   ...MICROBIOME_EXPLANATIONS,
+  ...MICROECO_EXPLANATIONS,
+  ...CYTOKINES_EXPLANATIONS,
+  ...AMR_EXPLANATIONS,
 ]
 
 export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
@@ -5366,4 +5649,7 @@ export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
   ...CANCERHALL_PROBES,
   ...ARCHAEA_PROBES,
   ...MICROBIOME_PROBES,
+  ...MICROECO_PROBES,
+  ...CYTOKINES_PROBES,
+  ...AMR_PROBES,
 ]
