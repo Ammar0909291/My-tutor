@@ -386,8 +386,20 @@ and `bio.cell.membrane-transport-energetics` — prerequisites
 served; preserves the KG's `chem.thermo.gibbs` cross-subject link) validated
 clean: `tsc --noEmit` 0 errors, dry-run 0 duplicate identities across 8,451
 items, contract audit 150/199 authored, 150/150 at contract, 0 short, 0
-never-quizzable, 40/40 targeted vitest suites passing. **Extended 91: 42/91.**
-Production convergence (seed corpus → cold-start bootstrap → live
+never-quizzable, 40/40 targeted vitest suites passing. Batch 15 (2026-09-21, 3
+concepts: `bio.cell.anaerobic-respiration-fermentation` — its sole
+prerequisite `bio.plant.plant-respiration`, already served; preserves the
+KG's `chem.redox.oxidation-state` cross-subject link — `bio.mol.metabolic-
+regulation-integration` — prerequisites `bio.mol.enzymes` and
+`bio.mol.bioenergetics`, both already served; preserves the KG's
+`chem.bio.enzyme-kinetics` and `chem.kinet.catalysis` cross-subject links —
+and `bio.mol.protein-quality-control-autophagy` — prerequisites
+`bio.mol.proteins-structure` and `bio.cell.endomembrane-system`, both already
+served) validated clean: `tsc --noEmit` 0 errors, dry-run 0 duplicate
+identities across 8,466 items, contract audit 153/199 authored, 153/153 at
+contract, 0 short, 0 never-quizzable, 40/40 targeted vitest suites passing.
+**Extended 91: 45/91.** Production convergence (seed corpus → cold-start
+bootstrap → live
 AssetIdentity rows) is UNVERIFIED against the real database this campaign so
 far — no Supabase/DB access has been used;
 treat as PENDING until explicitly checked. Re-measure with `npx tsx

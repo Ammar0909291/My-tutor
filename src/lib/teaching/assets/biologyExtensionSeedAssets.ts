@@ -4131,6 +4131,290 @@ const MEMBTRANSPORT_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── bio.cell.anaerobic-respiration-fermentation ─────────────────────────────
+const FERMENT = 'bio.cell.anaerobic-respiration-fermentation'
+const FERMENT_SRC = 'educational-brain/concepts/biology/bio.cell.anaerobic-respiration-fermentation.md'
+const FERMENT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: FERMENT, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'When oxygen is limiting, oxidative phosphorylation cannot run, but glycolysis can — ' +
+      'producing a net 2 ATP per glucose and converting NAD+ to NADH. Without oxygen to accept ' +
+      'electrons at the end of the electron transport chain, NADH cannot be reoxidised, and ' +
+      'glycolysis would stall. Fermentation solves EXACTLY this problem: its essential function ' +
+      'is REGENERATING NAD+ by transferring electrons to an organic molecule, not generating ' +
+      'significant additional ATP. Lactic acid fermentation (muscle, bacteria) reduces pyruvate ' +
+      'directly to lactate; alcoholic fermentation (yeast) converts pyruvate to ethanol and CO2 ' +
+      '— two different specific end-products solving the SAME NAD+-regeneration problem. This is ' +
+      'why aerobic respiration yields ~30-32 ATP per glucose while anaerobic glycolysis-plus- ' +
+      'fermentation yields only 2 — the entire oxidative-phosphorylation stage is absent.',
+    targetedMisconceptions: [],
+    source: FERMENT_SRC,
+  },
+  {
+    conceptId: FERMENT, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students assume fermentation\'s purpose is generating ' +
+      'additional ATP, missing that its essential function is regenerating NAD+ so glycolysis ' +
+      'can continue — fermentation itself contributes little or no extra ATP beyond glycolysis\'s ' +
+      'own yield. Second, students treat lactic acid and alcoholic fermentation as unrelated ' +
+      'processes because they occur in different organisms with different end-products, missing ' +
+      'that both solve the identical underlying NAD+-regeneration problem via different specific ' +
+      'chemical routes.',
+    targetedMisconceptions: [`${FERMENT}:M1`, `${FERMENT}:M2`],
+    source: FERMENT_SRC,
+  },
+]
+const FERMENT_PROBES: SeedProbe[] = [
+  {
+    conceptId: FERMENT, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What is fermentation\'s ESSENTIAL biological function?',
+    choices: [
+      { text: 'Regenerating NAD+ from NADH so glycolysis can continue running', isCorrect: true },
+      { text: 'Generating substantial additional ATP beyond glycolysis', isCorrect: false, misconceptionId: `${FERMENT}:M1` },
+      { text: 'Directly producing oxygen for the electron transport chain', isCorrect: false, misconceptionId: `${FERMENT}:M1` },
+      { text: 'Breaking down glucose into pyruvate', isCorrect: false },
+    ],
+    correctValue: 'Regenerating NAD+ from NADH so glycolysis can continue running',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${FERMENT}:M1`],
+    source: FERMENT_SRC,
+  },
+  {
+    conceptId: FERMENT, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student says lactic acid fermentation and alcoholic fermentation are completely ' +
+      'unrelated processes since they occur in different organisms and produce different ' +
+      'products. What is the best response?',
+    choices: [
+      {
+        text: 'Wrong — both solve the same underlying problem, regenerating NAD+ from NADH, via ' +
+          'different specific chemical routes',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — different end-products mean genuinely unrelated underlying purposes',
+        isCorrect: false,
+        misconceptionId: `${FERMENT}:M2`,
+      },
+    ],
+    correctValue: 'Wrong — both solve the same underlying problem, regenerating NAD+ from NADH, via ' +
+      'different specific chemical routes',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${FERMENT}:M2`],
+    source: FERMENT_SRC,
+  },
+  {
+    conceptId: FERMENT, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Which specific pathway step, absent under anaerobic conditions, accounts for most of ' +
+      'the ATP-yield gap between aerobic and anaerobic metabolism?',
+    choices: [
+      { text: 'Oxidative phosphorylation', isCorrect: true },
+      { text: 'Glycolysis', isCorrect: false },
+      { text: 'Substrate-level phosphorylation', isCorrect: false },
+    ],
+    correctValue: 'Oxidative phosphorylation',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: FERMENT_SRC,
+  },
+]
+
+// ─── bio.mol.metabolic-regulation-integration ────────────────────────────────
+const METABREG = 'bio.mol.metabolic-regulation-integration'
+const METABREG_SRC = 'educational-brain/concepts/biology/bio.mol.metabolic-regulation-integration.md'
+const METABREG_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: METABREG, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Feedback inhibition is a specific form of allosteric regulation: a pathway\'s own END ' +
+      'PRODUCT inhibits an EARLY (typically rate-limiting) enzyme in that SAME pathway, ' +
+      'automatically slowing production once enough product has accumulated — a precise, ' +
+      'self-referential mechanism, not any product inhibiting any enzyme anywhere. Opposing ' +
+      'pathways are coordinated hormonally: insulin (fed state) promotes glycolysis and glycogen ' +
+      'synthesis while suppressing gluconeogenesis and glycogen breakdown; glucagon (fasted ' +
+      'state) does the OPPOSITE. This RECIPROCAL coordination means the body shifts between two ' +
+      'distinct, coherent operating modes rather than running both directions simultaneously. ' +
+      'Rate-limiting enzymes are effective pharmacological targets because controlling the ' +
+      'slowest, pathway-determining step efficiently controls the entire pathway\'s output.',
+    targetedMisconceptions: [],
+    source: METABREG_SRC,
+  },
+  {
+    conceptId: METABREG, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students treat feedback inhibition as any product ' +
+      'inhibiting any enzyme generically, missing the specific requirement that the inhibiting ' +
+      'molecule must be the pathway\'s OWN end product acting on an EARLY enzyme in that SAME ' +
+      'pathway. Second, students assume opposing pathways like glycolysis and gluconeogenesis run ' +
+      'simultaneously at similar rates, missing that insulin and glucagon RECIPROCALLY coordinate ' +
+      'them so one set dominates while the other is suppressed, depending on fed or fasted state.',
+    targetedMisconceptions: [`${METABREG}:M1`, `${METABREG}:M2`],
+    source: METABREG_SRC,
+  },
+]
+const METABREG_PROBES: SeedProbe[] = [
+  {
+    conceptId: METABREG, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Pathway X\'s end product inhibits an enzyme belonging to a completely different, ' +
+      'unrelated pathway Y. Does this qualify as feedback inhibition?',
+    choices: [
+      { text: 'No — feedback inhibition specifically requires the end product to inhibit an early enzyme in its OWN pathway', isCorrect: true },
+      { text: 'Yes — any product inhibiting any enzyme counts as feedback inhibition', isCorrect: false, misconceptionId: `${METABREG}:M1` },
+      { text: 'Yes, as long as the inhibited enzyme is rate-limiting for some pathway', isCorrect: false, misconceptionId: `${METABREG}:M1` },
+      { text: 'This cannot be determined without more information', isCorrect: false },
+    ],
+    correctValue: 'No — feedback inhibition specifically requires the end product to inhibit an early enzyme in its OWN pathway',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${METABREG}:M1`],
+    source: METABREG_SRC,
+  },
+  {
+    conceptId: METABREG, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Shortly after eating a large meal, a student predicts the body runs glycogen synthesis ' +
+      'AND glycogen breakdown simultaneously at full speed. What is the best response?',
+    choices: [
+      {
+        text: 'Wrong — insulin release favours glycogen synthesis while suppressing glycogen ' +
+          'breakdown; the two do not run simultaneously at full throttle',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — opposing metabolic pathways always run simultaneously at similar rates',
+        isCorrect: false,
+        misconceptionId: `${METABREG}:M2`,
+      },
+    ],
+    correctValue: 'Wrong — insulin release favours glycogen synthesis while suppressing glycogen ' +
+      'breakdown; the two do not run simultaneously at full throttle',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${METABREG}:M2`],
+    source: METABREG_SRC,
+  },
+  {
+    conceptId: METABREG, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why do drugs targeting a pathway\'s rate-limiting enzyme efficiently control that ' +
+      'pathway\'s entire output?',
+    choices: [
+      { text: 'The rate-limiting enzyme is the slowest, pathway-controlling step, so controlling it controls the whole pathway\'s throughput', isCorrect: true },
+      { text: 'Rate-limiting enzymes are always located at the very end of a pathway', isCorrect: false },
+      { text: 'Targeting any single enzyme in a pathway has an identical effect on overall output', isCorrect: false },
+    ],
+    correctValue: 'The rate-limiting enzyme is the slowest, pathway-controlling step, so controlling it controls the whole pathway\'s throughput',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: METABREG_SRC,
+  },
+]
+
+// ─── bio.mol.protein-quality-control-autophagy ───────────────────────────────
+const PROTEOSTASIS = 'bio.mol.protein-quality-control-autophagy'
+const PROTEOSTASIS_SRC = 'educational-brain/concepts/biology/bio.mol.protein-quality-control-autophagy.md'
+const PROTEOSTASIS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PROTEOSTASIS, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Molecular chaperones (including heat-shock proteins) ASSIST protein folding by binding ' +
+      'exposed hydrophobic regions on partially-folded proteins, preventing aggregation and ' +
+      'giving the protein repeated opportunities to fold correctly on its own — they do NOT ' +
+      'directly template or sculpt the final structure, which is determined by the protein\'s own ' +
+      'sequence. When ER misfolding exceeds normal capacity, the unfolded protein response ' +
+      'reduces protein synthesis, increases chaperone production, and can trigger apoptosis if ' +
+      'unresolved. Beyond folding assistance, cells maintain FOUR mechanistically distinct ' +
+      'degradation routes: macroautophagy (vesicle engulfment, fuses with lysosome), ' +
+      'microautophagy (direct lysosomal membrane engulfment), chaperone-mediated autophagy ' +
+      '(selective, motif-based delivery of individual proteins), and the ubiquitin-proteasome ' +
+      'system (ubiquitin tagging, degraded by the proteasome — entirely separate from ' +
+      'lysosomes). Proteostasis collapse in neurodegenerative disease reflects a failure of the ' +
+      'cell\'s OVERALL quality-control CAPACITY, not simply more misfolding events occurring by ' +
+      'chance.',
+    targetedMisconceptions: [],
+    source: PROTEOSTASIS_SRC,
+  },
+  {
+    conceptId: PROTEOSTASIS, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students describe molecular chaperones as directly ' +
+      'templating or sculpting a protein\'s correct shape, missing that chaperones only ASSIST by ' +
+      'preventing aggregation — removing a chaperone increases aggregation risk, but does not ' +
+      'necessarily cause complete folding failure, since the protein\'s own sequence still ' +
+      'determines its structure. Second, students treat all four degradation routes ' +
+      '(macroautophagy, microautophagy, chaperone-mediated autophagy, ubiquitin-proteasome) as ' +
+      'one undifferentiated "cellular cleanup" process, missing that each uses genuinely distinct ' +
+      'structural machinery.',
+    targetedMisconceptions: [`${PROTEOSTASIS}:M1`, `${PROTEOSTASIS}:M2`],
+    source: PROTEOSTASIS_SRC,
+  },
+]
+const PROTEOSTASIS_PROBES: SeedProbe[] = [
+  {
+    conceptId: PROTEOSTASIS, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A molecular chaperone is removed from a protein-folding reaction. What is the most ' +
+      'likely consequence?',
+    choices: [
+      { text: 'Increased aggregation/misfolding risk, though the protein may still sometimes fold correctly on its own', isCorrect: true },
+      { text: 'Complete, guaranteed folding failure, since the chaperone was templating the structure', isCorrect: false, misconceptionId: `${PROTEOSTASIS}:M1` },
+      { text: 'No change at all, since chaperones play no real role in folding', isCorrect: false, misconceptionId: `${PROTEOSTASIS}:M1` },
+      { text: 'The protein would fold into a completely different but still functional structure', isCorrect: false },
+    ],
+    correctValue: 'Increased aggregation/misfolding risk, though the protein may still sometimes fold correctly on its own',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${PROTEOSTASIS}:M1`],
+    source: PROTEOSTASIS_SRC,
+  },
+  {
+    conceptId: PROTEOSTASIS, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A specific, individual misfolded protein bearing a particular recognition motif is ' +
+      'delivered directly across the lysosomal membrane without any vesicle forming. A student ' +
+      'labels this generically as "autophagy." What is the best response?',
+    choices: [
+      {
+        text: 'More specifically — this describes chaperone-mediated autophagy, a mechanistically ' +
+          'distinct route from macroautophagy or microautophagy',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — all degradation routes are interchangeable versions of the same generic autophagy process',
+        isCorrect: false,
+        misconceptionId: `${PROTEOSTASIS}:M2`,
+      },
+    ],
+    correctValue: 'More specifically — this describes chaperone-mediated autophagy, a mechanistically ' +
+      'distinct route from macroautophagy or microautophagy',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${PROTEOSTASIS}:M2`],
+    source: PROTEOSTASIS_SRC,
+  },
+  {
+    conceptId: PROTEOSTASIS, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Which degradation system tags proteins with ubiquitin and uses an entirely separate ' +
+      'machine (not the lysosome) for degradation?',
+    choices: [
+      { text: 'The ubiquitin-proteasome system', isCorrect: true },
+      { text: 'Macroautophagy', isCorrect: false },
+      { text: 'Microautophagy', isCorrect: false },
+    ],
+    correctValue: 'The ubiquitin-proteasome system',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: PROTEOSTASIS_SRC,
+  },
+]
+
 export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...SCIMETH_EXPLANATIONS,
   ...UNITHEMES_EXPLANATIONS,
@@ -4174,6 +4458,9 @@ export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...PHYTOCHROME_EXPLANATIONS,
   ...CYTOMOTILITY_EXPLANATIONS,
   ...MEMBTRANSPORT_EXPLANATIONS,
+  ...FERMENT_EXPLANATIONS,
+  ...METABREG_EXPLANATIONS,
+  ...PROTEOSTASIS_EXPLANATIONS,
 ]
 
 export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
@@ -4219,4 +4506,7 @@ export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
   ...PHYTOCHROME_PROBES,
   ...CYTOMOTILITY_PROBES,
   ...MEMBTRANSPORT_PROBES,
+  ...FERMENT_PROBES,
+  ...METABREG_PROBES,
+  ...PROTEOSTASIS_PROBES,
 ]
