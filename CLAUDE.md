@@ -473,8 +473,22 @@ served, opens `bio.behav.kin-selection-altruism` —
 KG's `math.de.ode` and `math.de.nonlinear-ode` cross-subject links)
 validated clean: `tsc --noEmit` 0 errors, dry-run 0 duplicate identities
 across 8,571 items, contract audit 174/199 authored, 174/174 at contract, 0
-short, 0 never-quizzable, 40/40 targeted vitest suites passing. **Extended
-91: 66/91.** Production convergence (seed
+short, 0 never-quizzable, 40/40 targeted vitest suites passing. Batch 23
+(2026-09-21, 3 concepts: `bio.behav.kin-selection-altruism` — prerequisites
+batch 22's `bio.behav.social-behavior-eusociality` and already-served
+`bio.gen.population-genetics`, opens
+`bio.behav.human-behavioral-ecology-evolutionary-psych` —
+`bio.immuno.cancer-immunology-immunotherapy` — prerequisites
+already-served `bio.immuno.immune-disorders` and batch 20's
+`bio.immuno.t-cell-development-tolerance` — and
+`bio.eco.global-change-biology` — prerequisites already-served
+`bio.eco.environmental-issues` and batch 21's
+`bio.eco.population-growth-models-quantitative`, closing the second branch
+that batch 21 opened) validated clean: `tsc --noEmit` 0 errors, dry-run 0
+duplicate identities across 8,586 items, contract audit 177/199 authored,
+177/177 at contract, 0 short, 0 never-quizzable, 40/40 targeted vitest
+suites passing. **Extended
+91: 69/91.** Production convergence (seed
 corpus → cold-start bootstrap → live
 AssetIdentity rows) is UNVERIFIED against the real database this campaign so
 far — no Supabase/DB access has been used;

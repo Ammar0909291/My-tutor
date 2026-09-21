@@ -6386,6 +6386,291 @@ const PREDPREY_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── bio.behav.kin-selection-altruism ─────────────────────────────────────────
+const KINSEL = 'bio.behav.kin-selection-altruism'
+const KINSEL_SRC = 'educational-brain/concepts/biology/bio.behav.kin-selection-altruism.md'
+const KINSEL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: KINSEL, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Hamilton\'s rule, rB > C, is the quantitative condition for an altruistic act to be ' +
+      'favoured by selection: r is the coefficient of relatedness between actor and recipient ' +
+      '(e.g. 0.5 for full siblings), B is the reproductive benefit to the recipient, and C is ' +
+      'the cost to the actor — altruism is favoured when the relatedness-WEIGHTED benefit (rB) ' +
+      'exceeds the cost. Inclusive fitness measures an individual\'s total genetic contribution ' +
+      'through BOTH direct reproduction AND its effect on relatives\' reproduction weighted by ' +
+      'relatedness — resolving why a costly act can still be favoured overall. Reciprocal ' +
+      'altruism is a SEPARATE mechanism explaining cooperation between non-relatives via ' +
+      'expected future repayment, requiring repeated interactions and individual recognition, ' +
+      'not shared genes.',
+    targetedMisconceptions: [],
+    source: KINSEL_SRC,
+  },
+  {
+    conceptId: KINSEL, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students compare raw benefit B to cost C without ' +
+      'weighting the benefit by relatedness r, missing that Hamilton\'s rule specifically ' +
+      'requires rB (not B alone) to exceed C — the same act can be favoured for a close ' +
+      'relative but not for a stranger. Second, students conflate kin selection and reciprocal ' +
+      'altruism as the same mechanism, missing that kin selection relies on shared genes ' +
+      '(no memory required) while reciprocal altruism relies on expected future repayment ' +
+      '(requiring repeated interactions and memory).',
+    targetedMisconceptions: [`${KINSEL}:M1`, `${KINSEL}:M2`],
+    source: KINSEL_SRC,
+  },
+]
+const KINSEL_PROBES: SeedProbe[] = [
+  {
+    conceptId: KINSEL, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The same benefit B and cost C apply to an altruistic act, but the relatedness is ' +
+      'r = 0.5 in one case and r = 0.125 in another. What does Hamilton\'s rule predict?',
+    choices: [
+      { text: 'The act may be favoured at r = 0.5 but not at r = 0.125, since rB must exceed C', isCorrect: true },
+      { text: 'The act is favoured or not favoured identically in both cases, since B and C are unchanged', isCorrect: false, misconceptionId: `${KINSEL}:M1` },
+      { text: 'Relatedness has no bearing on whether an altruistic act is favoured', isCorrect: false },
+      { text: 'The act is never favoured unless r = 1', isCorrect: false },
+    ],
+    correctValue: 'The act may be favoured at r = 0.5 but not at r = 0.125, since rB must exceed C',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${KINSEL}:M1`],
+    source: KINSEL_SRC,
+  },
+  {
+    conceptId: KINSEL, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two UNRELATED individuals with a long history of repeated interactions cooperate ' +
+      'with each other. A student calls this "kin selection." Is this correct?',
+    choices: [
+      {
+        text: 'No — with zero relatedness, this is reciprocal altruism, which relies on ' +
+          'expected future repayment and memory of past interactions, not shared genes',
+        isCorrect: true,
+      },
+      {
+        text: 'Yes — kin selection and reciprocal altruism are the same mechanism',
+        isCorrect: false,
+        misconceptionId: `${KINSEL}:M2`,
+      },
+    ],
+    correctValue: 'No — with zero relatedness, this is reciprocal altruism, which relies on ' +
+      'expected future repayment and memory of past interactions, not shared genes',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${KINSEL}:M2`],
+    source: KINSEL_SRC,
+  },
+  {
+    conceptId: KINSEL, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What term describes an individual\'s total genetic contribution to future ' +
+      'generations, measured through both direct reproduction and the reproductive success of ' +
+      'relatives weighted by relatedness?',
+    choices: [
+      { text: 'Inclusive fitness', isCorrect: true },
+      { text: 'Direct fitness', isCorrect: false },
+      { text: 'Reproductive value', isCorrect: false },
+    ],
+    correctValue: 'Inclusive fitness',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: KINSEL_SRC,
+  },
+]
+
+// ─── bio.immuno.cancer-immunology-immunotherapy ──────────────────────────────
+const CANCERIMMUNO = 'bio.immuno.cancer-immunology-immunotherapy'
+const CANCERIMMUNO_SRC = 'educational-brain/concepts/biology/bio.immuno.cancer-immunology-immunotherapy.md'
+const CANCERIMMUNO_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CANCERIMMUNO, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Immune checkpoint proteins (PD-1/PD-L1, CTLA-4) are NORMAL brakes on T-cell activity ' +
+      'that prevent excessive immune responses and help maintain peripheral tolerance. Tumours ' +
+      'specifically HIJACK this pre-existing mechanism by overexpressing PD-L1, suppressing ' +
+      'nearby T cells rather than deploying a novel weapon. Checkpoint-inhibitor drugs (e.g. ' +
+      'anti-PD-1) BLOCK this interaction, REMOVING the inhibitory signal and RESTORING the ' +
+      'patient\'s own T cells\' pre-existing ability to attack the tumour — the drug does not ' +
+      'directly attack the tumour itself. CAR-T cell therapy is mechanistically DIFFERENT: it ' +
+      'extracts a patient\'s T cells, genetically engineers them with an artificial chimeric ' +
+      'antigen receptor targeting a specific tumour antigen, and reinfuses them — creating a ' +
+      'NEW recognition capability rather than restoring an existing one.',
+    targetedMisconceptions: [],
+    source: CANCERIMMUNO_SRC,
+  },
+  {
+    conceptId: CANCERIMMUNO, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students assume checkpoint-inhibitor drugs directly ' +
+      'attack tumour cells like chemotherapy, missing that their mechanism is REMOVING an ' +
+      'inhibitory signal from the patient\'s OWN T cells — the drug requires functional T ' +
+      'cells to work at all. Second, students conflate checkpoint inhibition and CAR-T therapy ' +
+      'as the same general immunotherapy, missing that one restores suppressed EXISTING T-cell ' +
+      'function while the other engineers an entirely NEW recognition capability via a ' +
+      'genetically modified receptor.',
+    targetedMisconceptions: [`${CANCERIMMUNO}:M1`, `${CANCERIMMUNO}:M2`],
+    source: CANCERIMMUNO_SRC,
+  },
+]
+const CANCERIMMUNO_PROBES: SeedProbe[] = [
+  {
+    conceptId: CANCERIMMUNO, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A checkpoint-inhibitor drug is given to a patient whose T cells have been almost ' +
+      'entirely depleted. What does the drug\'s mechanism predict about its efficacy?',
+    choices: [
+      { text: 'Limited efficacy, since the drug restores T-cell function and requires functional T cells to work', isCorrect: true },
+      { text: 'Normal efficacy, since the drug directly attacks tumour cells regardless of T-cell status', isCorrect: false, misconceptionId: `${CANCERIMMUNO}:M1` },
+      { text: 'Increased efficacy, since fewer T cells means less immune suppression', isCorrect: false },
+      { text: 'The drug\'s mechanism is unrelated to T cells entirely', isCorrect: false },
+    ],
+    correctValue: 'Limited efficacy, since the drug restores T-cell function and requires functional T cells to work',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${CANCERIMMUNO}:M1`],
+    source: CANCERIMMUNO_SRC,
+  },
+  {
+    conceptId: CANCERIMMUNO, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A patient\'s T cells are extracted, genetically modified in a lab to express an ' +
+      'artificial receptor, and reinfused. A student calls this "checkpoint inhibition." Is ' +
+      'this correct?',
+    choices: [
+      {
+        text: 'No — this is CAR-T cell therapy, which engineers a NEW recognition capability, ' +
+          'mechanistically distinct from checkpoint inhibition (which restores existing function)',
+        isCorrect: true,
+      },
+      {
+        text: 'Yes — checkpoint inhibition and CAR-T therapy are the same mechanism',
+        isCorrect: false,
+        misconceptionId: `${CANCERIMMUNO}:M2`,
+      },
+    ],
+    correctValue: 'No — this is CAR-T cell therapy, which engineers a NEW recognition ' +
+      'capability, mechanistically distinct from checkpoint inhibition (which restores existing ' +
+      'function)',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${CANCERIMMUNO}:M2`],
+    source: CANCERIMMUNO_SRC,
+  },
+  {
+    conceptId: CANCERIMMUNO, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What is the name of the artificial receptor engineered onto a patient\'s T cells in ' +
+      'CAR-T cell therapy, designed to recognise a specific tumour antigen?',
+    choices: [
+      { text: 'Chimeric antigen receptor (CAR)', isCorrect: true },
+      { text: 'PD-1', isCorrect: false },
+      { text: 'MHC class I', isCorrect: false },
+    ],
+    correctValue: 'Chimeric antigen receptor (CAR)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: CANCERIMMUNO_SRC,
+  },
+]
+
+// ─── bio.eco.global-change-biology ────────────────────────────────────────────
+const GLOBALCHANGE = 'bio.eco.global-change-biology'
+const GLOBALCHANGE_SRC = 'educational-brain/concepts/biology/bio.eco.global-change-biology.md'
+const GLOBALCHANGE_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: GLOBALCHANGE, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Climate change drives two distinct response categories: phenological shifts (changes ' +
+      'in the TIMING of life-cycle events like flowering or migration, same location) and ' +
+      'range shifts (changes in GEOGRAPHIC distribution, potentially same timing) — these can ' +
+      'occur independently or together. Ocean acidification harms calcifying organisms through ' +
+      'a specific chemical mechanism: increased atmospheric CO2 dissolves into seawater, ' +
+      'forming carbonic acid, which lowers pH and REDUCES carbonate ion availability — since ' +
+      'calcifying organisms need carbonate ions to build calcium carbonate shells, this makes ' +
+      'shell-building harder and costlier, and can even dissolve existing structures. Biotic ' +
+      'homogenisation is a loss of diversity BETWEEN regional communities (as native species ' +
+      'are replaced by the same generalist/invasive species everywhere), which can occur even ' +
+      'without any decline in local species count.',
+    targetedMisconceptions: [],
+    source: GLOBALCHANGE_SRC,
+  },
+  {
+    conceptId: GLOBALCHANGE, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students treat ocean acidification\'s harm to ' +
+      'calcifying organisms as generic pollution toxicity ("acid is bad"), missing the ' +
+      'specific carbonate-ion-availability mechanism that directly impairs calcium carbonate ' +
+      'shell chemistry. Second, students assume biotic homogenisation must show up as a ' +
+      'decline in LOCAL species counts, missing that it specifically concerns diversity ' +
+      'BETWEEN regions — a local community can retain a similar species count while becoming ' +
+      'less regionally distinctive as it converges with other regions.',
+    targetedMisconceptions: [`${GLOBALCHANGE}:M1`, `${GLOBALCHANGE}:M2`],
+    source: GLOBALCHANGE_SRC,
+  },
+]
+const GLOBALCHANGE_PROBES: SeedProbe[] = [
+  {
+    conceptId: GLOBALCHANGE, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why are calcifying marine organisms (corals, molluscs) most directly affected by ' +
+      'ocean acidification, more so than fish without shells?',
+    choices: [
+      { text: 'Reduced carbonate ion availability specifically impairs their calcium carbonate shell/skeleton formation chemistry', isCorrect: true },
+      { text: 'Acid is generically harmful to all marine life, with calcifying organisms simply being more sensitive overall', isCorrect: false, misconceptionId: `${GLOBALCHANGE}:M1` },
+      { text: 'Calcifying organisms cannot tolerate any change in water temperature', isCorrect: false },
+      { text: 'Ocean acidification has no specific effect on calcifying organisms', isCorrect: false },
+    ],
+    correctValue: 'Reduced carbonate ion availability specifically impairs their calcium carbonate shell/skeleton formation chemistry',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${GLOBALCHANGE}:M1`],
+    source: GLOBALCHANGE_SRC,
+  },
+  {
+    conceptId: GLOBALCHANGE, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two previously very different regional communities both come to be dominated by the ' +
+      'same set of generalist/invasive species over time, while each region\'s local species ' +
+      'count stays roughly stable. A student says: "This can\'t be biotic homogenisation, since ' +
+      'local species counts haven\'t declined." Is this correct?',
+    choices: [
+      {
+        text: 'No — biotic homogenisation is about communities becoming more similar to EACH ' +
+          'OTHER, which can occur without a local species-count decline',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — biotic homogenisation requires a decline in local species counts',
+        isCorrect: false,
+        misconceptionId: `${GLOBALCHANGE}:M2`,
+      },
+    ],
+    correctValue: 'No — biotic homogenisation is about communities becoming more similar to ' +
+      'EACH OTHER, which can occur without a local species-count decline',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${GLOBALCHANGE}:M2`],
+    source: GLOBALCHANGE_SRC,
+  },
+  {
+    conceptId: GLOBALCHANGE, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What term describes a climate-driven change in the TIMING of a recurring life-cycle ' +
+      'event, such as an earlier flowering date, without a change in geographic location?',
+    choices: [
+      { text: 'Phenological shift', isCorrect: true },
+      { text: 'Range shift', isCorrect: false },
+      { text: 'Biotic homogenisation', isCorrect: false },
+    ],
+    correctValue: 'Phenological shift',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: GLOBALCHANGE_SRC,
+  },
+]
+
 export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...SCIMETH_EXPLANATIONS,
   ...UNITHEMES_EXPLANATIONS,
@@ -6453,6 +6738,9 @@ export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...EUSOCIAL_EXPLANATIONS,
   ...COMPGENOM_EXPLANATIONS,
   ...PREDPREY_EXPLANATIONS,
+  ...KINSEL_EXPLANATIONS,
+  ...CANCERIMMUNO_EXPLANATIONS,
+  ...GLOBALCHANGE_EXPLANATIONS,
 ]
 
 export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
@@ -6522,4 +6810,7 @@ export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
   ...EUSOCIAL_PROBES,
   ...COMPGENOM_PROBES,
   ...PREDPREY_PROBES,
+  ...KINSEL_PROBES,
+  ...CANCERIMMUNO_PROBES,
+  ...GLOBALCHANGE_PROBES,
 ]
