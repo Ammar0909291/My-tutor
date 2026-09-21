@@ -284,12 +284,21 @@ transduction` — both further `bio.neuro` roots — and `bio.div.invertebrate-
 diversity-major-phyla` — now ready, opens `bio.div.arthropod-diversity` and
 `bio.div.echinoderm-deuterostome-diversity`) validated clean: `tsc --noEmit`
 0 errors, dry-run 0 duplicate identities across 8,286 items, contract audit
-117/199 authored, 117/117 at contract, 0 short, 0 never-quizzable. **Extended
-91: 9/91.** Production convergence (seed corpus → cold-start bootstrap → live
-AssetIdentity rows) is UNVERIFIED against the real database this campaign so
-far — no Supabase/DB access has been used; treat as PENDING until explicitly
-checked. Re-measure with `npx tsx scripts/assets/contract-audit.ts --subject
-biology` before trusting any number here.
+117/199 authored, 117/117 at contract, 0 short, 0 never-quizzable. Batch 4
+(2026-09-21, 3 concepts: `bio.neuro.neural-circuits-computation` — both
+prerequisites, batch 3's `bio.neuro.neurotransmitter-systems` and batch 2's
+`bio.neuro.brain-regional-organization`, now served — `bio.neuro.vision-
+visual-system` — its sole prerequisite, batch 3's `bio.neuro.sensory-
+transduction`, now served — and `bio.div.arthropod-diversity` — its sole
+prerequisite, batch 3's `bio.div.invertebrate-diversity-major-phyla`, now
+served) validated clean: `tsc --noEmit` 0 errors, dry-run 0 duplicate
+identities across 8,301 items, contract audit 120/199 authored, 120/120 at
+contract, 0 short, 0 never-quizzable, 40/40 targeted vitest suites passing.
+**Extended 91: 12/91.** Production convergence (seed corpus → cold-start
+bootstrap → live AssetIdentity rows) is UNVERIFIED against the real database
+this campaign so far — no Supabase/DB access has been used; treat as PENDING
+until explicitly checked. Re-measure with `npx tsx scripts/assets/contract-
+audit.ts --subject biology` before trusting any number here.
 These
 two
 counters are tracked and reported SEPARATELY, never conflated — see `COVERAGE.md`'s biology row. The 91 concepts from the 2026-09-14 KG extension still have zero

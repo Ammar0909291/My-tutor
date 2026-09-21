@@ -68,6 +68,14 @@
  * prerequisite, batch 2's `bio.div.animal-body-plans-symmetry`, is served;
  * opens `bio.div.arthropod-diversity` and
  * `bio.div.echinoderm-deuterostome-diversity`).
+ * Batch 4 (2026-09-21, 3 concepts): `bio.neuro.neural-circuits-computation`
+ * (now ready — both prerequisites, batch 3's `bio.neuro.neurotransmitter-
+ * systems` and batch 2's `bio.neuro.brain-regional-organization`, are
+ * served; opens `bio.neuro.learning-memory-neurobiology`),
+ * `bio.neuro.vision-visual-system` (now ready — its sole prerequisite,
+ * batch 3's `bio.neuro.sensory-transduction`, is served), and
+ * `bio.div.arthropod-diversity` (now ready — its sole prerequisite,
+ * batch 3's `bio.div.invertebrate-diversity-major-phyla`, is served).
  */
 import { GradeBand, ProbeDifficulty } from '@prisma/client'
 import type { SeedExplanation, SeedProbe } from './brainSeedAssets'
@@ -997,6 +1005,296 @@ const INVERTDIV_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── bio.neuro.neural-circuits-computation ──────────────────────────────────
+const NEURCIRC = 'bio.neuro.neural-circuits-computation'
+const NEURCIRC_SRC = 'educational-brain/concepts/biology/bio.neuro.neural-circuits-computation.md'
+const NEURCIRC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: NEURCIRC, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Neural circuits combine excitatory and inhibitory connections into recurring structural ' +
+      'motifs that perform specific computations — inhibition is an ACTIVE, shaping element, ' +
+      'not merely a brake. In feedforward inhibition, excitatory input activates a target ' +
+      'neuron directly AND activates an inhibitory interneuron that also synapses onto that ' +
+      'target; because the inhibitory path involves an extra relay, inhibition arrives slightly ' +
+      'AFTER excitation, sharpening the TIMING precision of the response. In lateral ' +
+      'inhibition, an active neuron inhibits its NEIGHBOURS, sharpening spatial CONTRAST — the ' +
+      'mechanism behind sensory edge-enhancement. Neurons can represent information via two ' +
+      'strategies: rate coding (information carried in overall FIRING RATE) and temporal ' +
+      'coding (information carried in the precise TIMING or pattern of spikes) — two spike ' +
+      'trains with identical average rate can carry different information under temporal ' +
+      'coding. Central pattern generators (CPGs) produce rhythmic output (like walking) from ' +
+      'the circuit\'s OWN internal connectivity, without requiring rhythmic input signals — the ' +
+      'rhythm is an emergent property of the circuit, continuing even when isolated from ' +
+      'sensory feedback.',
+    targetedMisconceptions: [],
+    source: NEURCIRC_SRC,
+  },
+  {
+    conceptId: NEURCIRC, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students treat inhibition as simply "turning a neuron ' +
+      'off," missing that feedforward inhibition sharpens response TIMING and lateral ' +
+      'inhibition sharpens spatial CONTRAST — inhibition actively shapes computation rather ' +
+      'than just silencing signals. Second, students assume firing rate is the ONLY way ' +
+      'neurons represent information — but temporal coding means two spike trains with the ' +
+      'SAME average rate can carry DIFFERENT information if their precise timing differs, ' +
+      'which rate coding alone would discard.',
+    targetedMisconceptions: [`${NEURCIRC}:M1`, `${NEURCIRC}:M2`],
+    source: NEURCIRC_SRC,
+  },
+]
+const NEURCIRC_PROBES: SeedProbe[] = [
+  {
+    conceptId: NEURCIRC, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What SPECIFIC computation does lateral inhibition perform?',
+    choices: [
+      { text: 'It sharpens spatial contrast between an active signal and its neighbours', isCorrect: true },
+      { text: 'It simply reduces overall firing everywhere equally', isCorrect: false, misconceptionId: `${NEURCIRC}:M1` },
+      { text: 'It sharpens the timing precision of a single response', isCorrect: false },
+      { text: 'It has no measurable computational effect', isCorrect: false, misconceptionId: `${NEURCIRC}:M1` },
+    ],
+    correctValue: 'It sharpens spatial contrast between an active signal and its neighbours',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${NEURCIRC}:M1`],
+    source: NEURCIRC_SRC,
+  },
+  {
+    conceptId: NEURCIRC, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student says "two spike trains with the exact same average firing rate must carry ' +
+      'the same information." What is the best response?',
+    choices: [
+      {
+        text: 'Wrong — under temporal coding, the same average rate with different spike ' +
+          'timing patterns can carry different information',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — firing rate alone fully determines the information carried',
+        isCorrect: false,
+        misconceptionId: `${NEURCIRC}:M2`,
+      },
+    ],
+    correctValue: 'Wrong — under temporal coding, the same average rate with different spike ' +
+      'timing patterns can carry different information',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${NEURCIRC}:M2`],
+    source: NEURCIRC_SRC,
+  },
+  {
+    conceptId: NEURCIRC, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A central pattern generator circuit controlling walking is surgically isolated from ' +
+      'all its normal sensory feedback. What would you predict happens to its rhythmic output?',
+    choices: [
+      {
+        text: 'The rhythmic pattern can continue, since it is an emergent property of the circuit\'s own connectivity',
+        isCorrect: true,
+      },
+      { text: 'The rhythm stops immediately, since it requires continuous sensory feedback to function', isCorrect: false },
+      { text: 'The rhythm becomes random and loses all pattern', isCorrect: false },
+    ],
+    correctValue: 'The rhythmic pattern can continue, since it is an emergent property of the circuit\'s own connectivity',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: NEURCIRC_SRC,
+  },
+]
+
+// ─── bio.neuro.vision-visual-system ──────────────────────────────────────────
+const VISION = 'bio.neuro.vision-visual-system'
+const VISION_SRC = 'educational-brain/concepts/biology/bio.neuro.vision-visual-system.md'
+const VISION_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: VISION, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The cornea (fixed, providing most focusing power) and lens (adjustable, fine-tuning ' +
+      'focus) together focus light onto the retina, where photoreceptors detect it. Rods are ' +
+      'highly sensitive to low light but not colour-sensitive; cones require brighter light but ' +
+      'provide colour vision and high acuity. The phototransduction cascade works in a specific, ' +
+      'REVERSED way compared to most other sensory receptors: in darkness, photoreceptors are ' +
+      'DEPOLARISED and continuously releasing neurotransmitter; when light is absorbed, a ' +
+      'cascade CLOSES ion channels, causing HYPERPOLARISATION and DECREASED neurotransmitter ' +
+      'release — the presence of the stimulus (light) REDUCES signalling, opposite to most other ' +
+      'receptor types. Bipolar cells receive input from photoreceptors, and ganglion cells ' +
+      'receive input from bipolar cells, performing further processing (contrast enhancement, ' +
+      'spatial integration) before the signal leaves the eye. Ganglion cell axons form the optic ' +
+      'nerve, carrying the signal to further brain relay stages and ultimately the visual ' +
+      'cortex, where conscious visual perception is actually constructed — "seeing" is a BRAIN ' +
+      'function occurring at the end of this pathway, not something completed at the eye itself.',
+    targetedMisconceptions: [],
+    source: VISION_SRC,
+  },
+  {
+    conceptId: VISION, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students assume photoreceptors work like other sensory ' +
+      'receptors — stimulus causes depolarisation and increased signalling — but phototransduction ' +
+      'is a specific EXCEPTION: light absorption causes hyperpolarisation and DECREASED ' +
+      'neurotransmitter release, the opposite pattern. Second, students think "seeing" happens ' +
+      'directly at the eye or retina — but the retina only captures and does initial processing; ' +
+      'the actual conscious visual experience is constructed later, specifically at the visual ' +
+      'cortex, after signals pass through the optic nerve and further relay stages.',
+    targetedMisconceptions: [`${VISION}:M1`, `${VISION}:M2`],
+    source: VISION_SRC,
+  },
+]
+const VISION_PROBES: SeedProbe[] = [
+  {
+    conceptId: VISION, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What happens to a photoreceptor when light intensity increases?',
+    choices: [
+      { text: 'It hyperpolarises and releases LESS neurotransmitter', isCorrect: true },
+      { text: 'It depolarises and releases MORE neurotransmitter, like most sensory receptors', isCorrect: false, misconceptionId: `${VISION}:M1` },
+      { text: 'Its neurotransmitter release stays completely unchanged', isCorrect: false },
+      { text: 'It stops functioning entirely', isCorrect: false },
+    ],
+    correctValue: 'It hyperpolarises and releases LESS neurotransmitter',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${VISION}:M1`],
+    source: VISION_SRC,
+  },
+  {
+    conceptId: VISION, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student says "seeing happens directly at the retina, once light is detected." What ' +
+      'is the best response?',
+    choices: [
+      {
+        text: 'Wrong — the retina only captures and does initial processing; conscious visual ' +
+          'perception is constructed later, at the visual cortex',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — the retina alone fully constructs the visual experience before signals leave the eye',
+        isCorrect: false,
+        misconceptionId: `${VISION}:M2`,
+      },
+    ],
+    correctValue: 'Wrong — the retina only captures and does initial processing; conscious visual ' +
+      'perception is constructed later, at the visual cortex',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${VISION}:M2`],
+    source: VISION_SRC,
+  },
+  {
+    conceptId: VISION, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Put the visual signal pathway in the correct order, from light detection to conscious perception.',
+    choices: [
+      { text: 'Photoreceptors → bipolar cells → ganglion cells → optic nerve → visual cortex', isCorrect: true },
+      { text: 'Photoreceptors → optic nerve → visual cortex → bipolar cells → ganglion cells', isCorrect: false },
+      { text: 'Visual cortex → optic nerve → ganglion cells → bipolar cells → photoreceptors', isCorrect: false },
+    ],
+    correctValue: 'Photoreceptors → bipolar cells → ganglion cells → optic nerve → visual cortex',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: VISION_SRC,
+  },
+]
+
+// ─── bio.div.arthropod-diversity ─────────────────────────────────────────────
+const ARTHROPOD = 'bio.div.arthropod-diversity'
+const ARTHROPOD_SRC = 'educational-brain/concepts/biology/bio.div.arthropod-diversity.md'
+const ARTHROPOD_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ARTHROPOD, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The chitinous exoskeleton is arthropods\' defining feature, but it creates a specific ' +
+      'growth constraint: a rigid exoskeleton cannot expand once formed. Moulting (ecdysis) is ' +
+      'the DIRECT solution to this constraint — periodically shedding the old exoskeleton and ' +
+      'forming a new, larger one before it hardens, allowing growth in discrete steps. The four ' +
+      'major arthropod classes are distinguished by specific anatomical features: Insecta ' +
+      '(three body parts, typically three leg pairs), Arachnida (two body parts, four leg ' +
+      'pairs), Crustacea (typically two pairs of antennae, a feature the others lack), and ' +
+      'Myriapoda (many segments, one or two leg pairs per segment) — classification requires ' +
+      'checking these specific features, not habitat or size. Segmentation and jointed ' +
+      'appendages provide a modular body plan letting evolution independently specialise ' +
+      'individual segments (into mouthparts, wings, walking legs) without redesigning the whole ' +
+      'body plan — this modular architecture is the specific mechanism behind arthropods\' ' +
+      'unmatched species diversity.',
+    targetedMisconceptions: [],
+    source: ARTHROPOD_SRC,
+  },
+  {
+    conceptId: ARTHROPOD, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students learn the exoskeleton and moulting as two ' +
+      'separate facts rather than tracing the causal link: moulting exists SPECIFICALLY ' +
+      'because the rigid exoskeleton cannot expand, so periodic shedding is the necessary ' +
+      'solution to that exact constraint. Second, students classify arthropods by size or ' +
+      'habitat rather than checking the specific anatomical checklist (body-part count, ' +
+      'leg-pair count, antennae count) — this checklist, not appearance, determines whether an ' +
+      'arthropod is an insect, arachnid, crustacean, or myriapod.',
+    targetedMisconceptions: [`${ARTHROPOD}:M1`, `${ARTHROPOD}:M2`],
+    source: ARTHROPOD_SRC,
+  },
+]
+const ARTHROPOD_PROBES: SeedProbe[] = [
+  {
+    conceptId: ARTHROPOD, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why is moulting (ecdysis) necessary for arthropods specifically?',
+    choices: [
+      { text: 'Because their rigid exoskeleton cannot expand, so growth requires periodically shedding it', isCorrect: true },
+      { text: 'It is an unrelated behaviour with no connection to their exoskeleton', isCorrect: false, misconceptionId: `${ARTHROPOD}:M1` },
+      { text: 'It only occurs in aquatic arthropods', isCorrect: false },
+      { text: 'It replaces the need for a nervous system', isCorrect: false },
+    ],
+    correctValue: 'Because their rigid exoskeleton cannot expand, so growth requires periodically shedding it',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${ARTHROPOD}:M1`],
+    source: ARTHROPOD_SRC,
+  },
+  {
+    conceptId: ARTHROPOD, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student classifies an arthropod as an insect purely because it is small and lives on ' +
+      'land. What is the best response?',
+    choices: [
+      {
+        text: 'Wrong — classification requires checking specific features like body-part count, ' +
+          'leg-pair count, and antennae count, not size or habitat',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — size and habitat are sufficient to classify any arthropod',
+        isCorrect: false,
+        misconceptionId: `${ARTHROPOD}:M2`,
+      },
+    ],
+    correctValue: 'Wrong — classification requires checking specific features like body-part count, ' +
+      'leg-pair count, and antennae count, not size or habitat',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${ARTHROPOD}:M2`],
+    source: ARTHROPOD_SRC,
+  },
+  {
+    conceptId: ARTHROPOD, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An arthropod has two body parts and four pairs of legs. Which class does it most likely belong to?',
+    choices: [
+      { text: 'Arachnida', isCorrect: true },
+      { text: 'Insecta', isCorrect: false },
+      { text: 'Crustacea', isCorrect: false },
+      { text: 'Myriapoda', isCorrect: false },
+    ],
+    correctValue: 'Arachnida',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ARTHROPOD}:M2`],
+    source: ARTHROPOD_SRC,
+  },
+]
+
 export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...SCIMETH_EXPLANATIONS,
   ...UNITHEMES_EXPLANATIONS,
@@ -1007,6 +1305,9 @@ export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...NEUROTRANS_EXPLANATIONS,
   ...SENSTRANS_EXPLANATIONS,
   ...INVERTDIV_EXPLANATIONS,
+  ...NEURCIRC_EXPLANATIONS,
+  ...VISION_EXPLANATIONS,
+  ...ARTHROPOD_EXPLANATIONS,
 ]
 
 export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
@@ -1019,4 +1320,7 @@ export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
   ...NEUROTRANS_PROBES,
   ...SENSTRANS_PROBES,
   ...INVERTDIV_PROBES,
+  ...NEURCIRC_PROBES,
+  ...VISION_PROBES,
+  ...ARTHROPOD_PROBES,
 ]
