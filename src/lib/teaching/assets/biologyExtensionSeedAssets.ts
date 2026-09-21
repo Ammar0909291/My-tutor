@@ -2997,6 +2997,293 @@ const MUSCLEPHYS_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── bio.physio.exercise-physiology ──────────────────────────────────────────
+const EXERCISE = 'bio.physio.exercise-physiology'
+const EXERCISE_SRC = 'educational-brain/concepts/biology/bio.physio.exercise-physiology.md'
+const EXERCISE_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: EXERCISE, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Exercise triggers responses at two different timescales. Acute responses occur ' +
+      'immediately during a single bout of exercise and are largely reversible (heart rate, ' +
+      'breathing rate, and blood-flow redistribution to active muscles). Chronic training ' +
+      'adaptations, by contrast, are durable structural/functional changes accumulating over ' +
+      'weeks to months of repeated training and persist beyond any single session. Training type ' +
+      'produces specific, DIFFERENT chronic adaptations: aerobic training chronically increases ' +
+      'mitochondrial density and shifts fibre composition somewhat toward oxidative; anaerobic ' +
+      '(resistance) training produces hypertrophy and rapid-force capacity with less ' +
+      'mitochondrial change. VO2 max is an INTEGRATIVE measure jointly limited by BOTH oxygen ' +
+      'delivery (cardiovascular capacity) AND oxygen use (mitochondrial density) — a limitation ' +
+      'in either alone constrains it, so genuine improvement typically requires adaptations in ' +
+      'both systems together.',
+    targetedMisconceptions: [],
+    source: EXERCISE_SRC,
+  },
+  {
+    conceptId: EXERCISE, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students conflate acute exercise responses with chronic ' +
+      'training adaptations, treating chronic adaptations as simply a bigger version of the acute ' +
+      'response, missing that acute responses reverse quickly while chronic adaptations persist ' +
+      'as durable structural remodelling built over weeks to months. Second, students attribute ' +
+      'VO2 max to cardiovascular capacity alone, missing that it is jointly limited by BOTH ' +
+      'delivery and use capacity — excellent cardiovascular fitness paired with low ' +
+      'mitochondrial density still yields a constrained VO2 max.',
+    targetedMisconceptions: [`${EXERCISE}:M1`, `${EXERCISE}:M2`],
+    source: EXERCISE_SRC,
+  },
+]
+const EXERCISE_PROBES: SeedProbe[] = [
+  {
+    conceptId: EXERCISE, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A person\'s resting heart rate is measured immediately after a single workout, versus ' +
+      'again after three months of consistent training. What distinguishes these two ' +
+      'measurements?',
+    choices: [
+      { text: 'The first reflects an acute, reversible response; the second reflects a durable chronic adaptation', isCorrect: true },
+      { text: 'Both reflect the exact same underlying process, just at different intensities', isCorrect: false, misconceptionId: `${EXERCISE}:M1` },
+      { text: 'Both are acute responses that will fully reverse within hours', isCorrect: false, misconceptionId: `${EXERCISE}:M1` },
+      { text: 'Neither measurement reflects anything meaningful about training', isCorrect: false },
+    ],
+    correctValue: 'The first reflects an acute, reversible response; the second reflects a durable chronic adaptation',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${EXERCISE}:M1`],
+    source: EXERCISE_SRC,
+  },
+  {
+    conceptId: EXERCISE, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An individual has excellent cardiovascular capacity but very low muscle mitochondrial ' +
+      'density. A student predicts their VO2 max will be maximally high. What is the best ' +
+      'response?',
+    choices: [
+      {
+        text: 'No — VO2 max is jointly limited by both delivery and use capacity, so low ' +
+          'mitochondrial density would constrain it despite good cardiovascular fitness',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — cardiovascular capacity alone determines VO2 max',
+        isCorrect: false,
+        misconceptionId: `${EXERCISE}:M2`,
+      },
+    ],
+    correctValue: 'No — VO2 max is jointly limited by both delivery and use capacity, so low ' +
+      'mitochondrial density would constrain it despite good cardiovascular fitness',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${EXERCISE}:M2`],
+    source: EXERCISE_SRC,
+  },
+  {
+    conceptId: EXERCISE, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Which chronic adaptation is specific to anaerobic (resistance) training rather than ' +
+      'aerobic training?',
+    choices: [
+      { text: 'Increased muscle fibre cross-sectional area (hypertrophy)', isCorrect: true },
+      { text: 'Increased mitochondrial density', isCorrect: false },
+      { text: 'Increased capillary density around muscle fibres', isCorrect: false },
+    ],
+    correctValue: 'Increased muscle fibre cross-sectional area (hypertrophy)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: EXERCISE_SRC,
+  },
+]
+
+// ─── bio.physio.comparative-animal-physiology ────────────────────────────────
+const COMPPHYS = 'bio.physio.comparative-animal-physiology'
+const COMPPHYS_SRC = 'educational-brain/concepts/biology/bio.physio.comparative-animal-physiology.md'
+const COMPPHYS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: COMPPHYS, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'All four gas-exchange strategies — gills, tracheal systems, book lungs, alveolar lungs — ' +
+      'solve the SAME surface-area-to-volume constraint: as body size increases, oxygen-hungry ' +
+      'volume grows faster than external surface area, so each strategy increases effective ' +
+      'surface area through a different specific structure. Open and closed circulatory systems ' +
+      'differ by a specific structural criterion: closed systems keep fluid continuously within ' +
+      'vessels; open systems (many insects, molluscs) let hemolymph directly bathe tissues in an ' +
+      'open hemocoel before returning to circulation — both are genuinely viable, successful ' +
+      'strategies, not a "better vs. worse" ranking. Osmoregulatory strategies differ by habitat ' +
+      'because each presents a different specific osmotic challenge: marine animals fight water ' +
+      'LOSS (drinking seawater, excreting excess salt), freshwater animals fight water GAIN ' +
+      '(dilute urine, retaining salt), and terrestrial animals fight DESICCATION (water-' +
+      'conserving adaptations).',
+    targetedMisconceptions: [],
+    source: COMPPHYS_SRC,
+  },
+  {
+    conceptId: COMPPHYS, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students treat open circulatory systems as an inferior, ' +
+      '"less evolved" version of closed systems, missing that both are genuinely different, ' +
+      'functionally successful strategies used by vast numbers of thriving animal groups. Second, ' +
+      'students treat osmoregulation as one generic "manage water balance" strategy applied ' +
+      'everywhere, missing that marine, freshwater, and terrestrial habitats present different, ' +
+      'often OPPOSITE specific osmotic challenges requiring correspondingly different specific ' +
+      'counter-strategies.',
+    targetedMisconceptions: [`${COMPPHYS}:M1`, `${COMPPHYS}:M2`],
+    source: COMPPHYS_SRC,
+  },
+]
+const COMPPHYS_PROBES: SeedProbe[] = [
+  {
+    conceptId: COMPPHYS, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is an open circulatory system (used by many insects and molluscs) a failed attempt at ' +
+      'a closed system?',
+    choices: [
+      { text: 'No — it is a genuinely different, functionally successful structural solution', isCorrect: true },
+      { text: 'Yes — it is an inferior, less-evolved version of closed circulation', isCorrect: false, misconceptionId: `${COMPPHYS}:M1` },
+      { text: 'Yes, since fluid is never contained within any vessels at all', isCorrect: false, misconceptionId: `${COMPPHYS}:M1` },
+      { text: 'Open circulatory systems do not actually exist in any living animal', isCorrect: false },
+    ],
+    correctValue: 'No — it is a genuinely different, functionally successful structural solution',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${COMPPHYS}:M1`],
+    source: COMPPHYS_SRC,
+  },
+  {
+    conceptId: COMPPHYS, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student says a freshwater fish and a marine fish "both just manage water balance the ' +
+      'same generic way." What is the best response?',
+    choices: [
+      {
+        text: 'Wrong — they face opposite osmotic challenges: the freshwater fish fights water ' +
+          'gain (dilute urine, retains salt), the marine fish fights water loss (drinks ' +
+          'seawater, excretes salt)',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — both fish use the identical osmoregulatory strategy',
+        isCorrect: false,
+        misconceptionId: `${COMPPHYS}:M2`,
+      },
+    ],
+    correctValue: 'Wrong — they face opposite osmotic challenges: the freshwater fish fights water ' +
+      'gain (dilute urine, retains salt), the marine fish fights water loss (drinks ' +
+      'seawater, excretes salt)',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${COMPPHYS}:M2`],
+    source: COMPPHYS_SRC,
+  },
+  {
+    conceptId: COMPPHYS, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What underlying physical constraint do gills, tracheal systems, book lungs, and ' +
+      'alveolar lungs all specifically solve?',
+    choices: [
+      { text: 'The surface-area-to-volume constraint (volume grows faster than surface area as size increases)', isCorrect: true },
+      { text: 'The need to circulate blood in a closed loop', isCorrect: false },
+      { text: 'The need to conserve water in a terrestrial environment', isCorrect: false },
+    ],
+    correctValue: 'The surface-area-to-volume constraint (volume grows faster than surface area as size increases)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: COMPPHYS_SRC,
+  },
+]
+
+// ─── bio.plant.plant-tissue-systems ──────────────────────────────────────────
+const PLANTTISSUE = 'bio.plant.plant-tissue-systems'
+const PLANTTISSUE_SRC = 'educational-brain/concepts/biology/bio.plant.plant-tissue-systems.md'
+const PLANTTISSUE_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PLANTTISSUE, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Meristematic tissue consists of actively-dividing, undifferentiated cells driving growth ' +
+      '(apical meristems at tips for length; lateral meristems along sides for width), while ' +
+      'permanent tissue has already differentiated into specialised, generally non-dividing ' +
+      'form. Permanent tissue organises into three systems classified by FUNCTIONAL role: dermal ' +
+      '(outer covering, protection), ground (bulk of the plant body — photosynthesis, storage, ' +
+      'structural support), and vascular (long-distance transport). Within vascular tissue, xylem ' +
+      'transports water/minerals in ONE FIXED direction — upward from roots, driven by ' +
+      'transpiration pull — while phloem transports photosynthate from a "source" (currently ' +
+      'producing/releasing sugar) to a "sink" (currently consuming/storing sugar), meaning its ' +
+      'direction is NOT fixed but depends on which structures are currently sources versus sinks.',
+    targetedMisconceptions: [],
+    source: PLANTTISSUE_SRC,
+  },
+  {
+    conceptId: PLANTTISSUE, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students assume phloem transports in the same fixed ' +
+      'upward direction as xylem, missing that phloem\'s direction depends on the current ' +
+      'source-to-sink relationship and can vary (e.g., a storage root can be a sink while growing, ' +
+      'then a source when its reserves are mobilised). Second, students classify tissue systems by ' +
+      'anatomical LOCATION alone ("outer layer," "middle," "veins"), missing that the correct ' +
+      'classification criterion is FUNCTIONAL role — protection, photosynthesis/storage/support, ' +
+      'or transport.',
+    targetedMisconceptions: [`${PLANTTISSUE}:M1`, `${PLANTTISSUE}:M2`],
+    source: PLANTTISSUE_SRC,
+  },
+]
+const PLANTTISSUE_PROBES: SeedProbe[] = [
+  {
+    conceptId: PLANTTISSUE, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A storage root releases its sugar reserves to support new shoot growth. In which ' +
+      'direction does phloem transport flow in this scenario?',
+    choices: [
+      { text: 'From the root (source) to the growing shoot (sink)', isCorrect: true },
+      { text: 'Always upward, from roots to shoot, just like xylem', isCorrect: false, misconceptionId: `${PLANTTISSUE}:M1` },
+      { text: 'Phloem cannot transport sugar in this scenario at all', isCorrect: false, misconceptionId: `${PLANTTISSUE}:M1` },
+      { text: 'Downward only, regardless of source-sink relationships', isCorrect: false },
+    ],
+    correctValue: 'From the root (source) to the growing shoot (sink)',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${PLANTTISSUE}:M1`],
+    source: PLANTTISSUE_SRC,
+  },
+  {
+    conceptId: PLANTTISSUE, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A tissue is described only by its function — it stores starch reserves. A student ' +
+      'says they cannot classify it without first knowing its location in the plant. What is the ' +
+      'best response?',
+    choices: [
+      {
+        text: 'Not needed — storage is a ground-tissue functional role, so this can be ' +
+          'classified as ground tissue by function alone',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — tissue systems can only be classified by their anatomical location',
+        isCorrect: false,
+        misconceptionId: `${PLANTTISSUE}:M2`,
+      },
+    ],
+    correctValue: 'Not needed — storage is a ground-tissue functional role, so this can be ' +
+      'classified as ground tissue by function alone',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${PLANTTISSUE}:M2`],
+    source: PLANTTISSUE_SRC,
+  },
+  {
+    conceptId: PLANTTISSUE, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What is the key functional difference between meristematic tissue and permanent tissue?',
+    choices: [
+      { text: 'Meristematic cells retain the capacity to divide; permanent tissue cells have differentiated and generally do not divide', isCorrect: true },
+      { text: 'Meristematic tissue is always found underground; permanent tissue is always above ground', isCorrect: false },
+      { text: 'Meristematic tissue only transports water; permanent tissue only transports sugar', isCorrect: false },
+    ],
+    correctValue: 'Meristematic cells retain the capacity to divide; permanent tissue cells have differentiated and generally do not divide',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: PLANTTISSUE_SRC,
+  },
+]
+
 export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...SCIMETH_EXPLANATIONS,
   ...UNITHEMES_EXPLANATIONS,
@@ -3028,6 +3315,9 @@ export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...THERMOREG_EXPLANATIONS,
   ...LYMPH_EXPLANATIONS,
   ...MUSCLEPHYS_EXPLANATIONS,
+  ...EXERCISE_EXPLANATIONS,
+  ...COMPPHYS_EXPLANATIONS,
+  ...PLANTTISSUE_EXPLANATIONS,
 ]
 
 export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
@@ -3061,4 +3351,7 @@ export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
   ...THERMOREG_PROBES,
   ...LYMPH_PROBES,
   ...MUSCLEPHYS_PROBES,
+  ...EXERCISE_PROBES,
+  ...COMPPHYS_PROBES,
+  ...PLANTTISSUE_PROBES,
 ]
