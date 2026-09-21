@@ -367,8 +367,18 @@ reproduction-detail` — prerequisites `bio.repro.human-reproductive-system`
 and `bio.physio.endocrine-system`, both already served) validated clean:
 `tsc --noEmit` 0 errors, dry-run 0 duplicate identities across 8,421 items,
 contract audit 144/199 authored, 144/144 at contract, 0 short, 0
-never-quizzable, 40/40 targeted vitest suites passing. **Extended 91: 36/91.**
-Production convergence (seed corpus → cold-start bootstrap → live
+never-quizzable, 40/40 targeted vitest suites passing. Batch 13 (2026-09-21, 3
+concepts: `bio.neuro.autonomic-stress-physiology` — prerequisites
+`bio.neuro.brain-regional-organization` and `bio.physio.endocrine-system`,
+both already served — `bio.plant.seed-germination-dormancy` — its sole
+prerequisite `bio.repro.sexual-reproduction-plants`, already served — and
+`bio.plant.plant-biotechnology-applications` — prerequisites
+`bio.biotech.biotech-process-applications` and `bio.plant.plant-growth-
+hormones`, both already served) validated clean: `tsc --noEmit` 0 errors,
+dry-run 0 duplicate identities across 8,436 items, contract audit 147/199
+authored, 147/147 at contract, 0 short, 0 never-quizzable, 40/40 targeted
+vitest suites passing. **Extended 91: 39/91.** Production convergence (seed
+corpus → cold-start bootstrap → live
 AssetIdentity rows) is UNVERIFIED against the real database this campaign so
 far — no Supabase/DB access has been used;
 treat as PENDING until explicitly checked. Re-measure with `npx tsx

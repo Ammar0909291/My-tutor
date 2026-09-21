@@ -3563,6 +3563,290 @@ const HPGAXIS_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── bio.neuro.autonomic-stress-physiology ───────────────────────────────────
+const STRESSPHYS = 'bio.neuro.autonomic-stress-physiology'
+const STRESSPHYS_SRC = 'educational-brain/concepts/biology/bio.neuro.autonomic-stress-physiology.md'
+const STRESSPHYS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: STRESSPHYS, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The body\'s stress response runs through two systems on DIFFERENT timescales. The ' +
+      'autonomic nervous system is FAST (seconds): sympathetic dominance triggers fight-or-flight ' +
+      '(increased heart rate, blood diverted to muscle), parasympathetic dominance triggers ' +
+      'rest-and-digest — these are not an on/off switch but a continuous dynamic balance. The ' +
+      'HPA axis is SLOWER (minutes to hours): hypothalamus -> pituitary -> adrenal glands -> ' +
+      'cortisol. Cortisol\'s effects (mobilising energy, suppressing non-urgent processes like ' +
+      'immunity and digestion, sharpening attention) are ADAPTIVE in the short term. The SAME ' +
+      'response becomes damaging under CHRONIC activation — allostatic load — because a system ' +
+      'evolved for brief, resolving activation is instead run continuously, with the very ' +
+      'mechanisms that make it adaptive acutely (energy mobilisation, reprioritisation) becoming ' +
+      'costly when never switched off.',
+    targetedMisconceptions: [],
+    source: STRESSPHYS_SRC,
+  },
+  {
+    conceptId: STRESSPHYS, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students treat cortisol and the stress response as simply ' +
+      'harmful, missing that they are ADAPTIVE in the acute, short-term case and only become ' +
+      'damaging under chronic, unresolved activation. Second, students conflate the fast neural ' +
+      '(autonomic) and slow hormonal (HPA axis) stress pathways into one undifferentiated ' +
+      '"stress response," missing their genuinely different mechanisms and timescales — a heart ' +
+      'rate spike (seconds) would appear before a cortisol elevation (minutes) after a sudden ' +
+      'threat.',
+    targetedMisconceptions: [`${STRESSPHYS}:M1`, `${STRESSPHYS}:M2`],
+    source: STRESSPHYS_SRC,
+  },
+]
+const STRESSPHYS_PROBES: SeedProbe[] = [
+  {
+    conceptId: STRESSPHYS, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A single brief stressful event triggers a cortisol spike that resolves shortly after. ' +
+      'Is this cortisol response harmful?',
+    choices: [
+      { text: 'No — this brief, resolving activation is adaptive; harm arises specifically from chronic, unresolved activation', isCorrect: true },
+      { text: 'Yes — cortisol is inherently toxic to the body', isCorrect: false, misconceptionId: `${STRESSPHYS}:M1` },
+      { text: 'Yes, since any cortisol release indicates the stress response has failed', isCorrect: false, misconceptionId: `${STRESSPHYS}:M1` },
+      { text: 'This cannot be determined without further information', isCorrect: false },
+    ],
+    correctValue: 'No — this brief, resolving activation is adaptive; harm arises specifically from chronic, unresolved activation',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${STRESSPHYS}:M1`],
+    source: STRESSPHYS_SRC,
+  },
+  {
+    conceptId: STRESSPHYS, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'After a sudden fright, which physiological change would you expect to occur FIRST — a ' +
+      'heart rate spike or a rise in blood cortisol?',
+    choices: [
+      {
+        text: 'The heart rate spike — the autonomic (neural) pathway acts in seconds, while the ' +
+          'HPA axis (hormonal) pathway takes minutes',
+        isCorrect: true,
+      },
+      {
+        text: 'Both occur at exactly the same instant, since they are the same underlying system',
+        isCorrect: false,
+        misconceptionId: `${STRESSPHYS}:M2`,
+      },
+    ],
+    correctValue: 'The heart rate spike — the autonomic (neural) pathway acts in seconds, while the ' +
+      'HPA axis (hormonal) pathway takes minutes',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${STRESSPHYS}:M2`],
+    source: STRESSPHYS_SRC,
+  },
+  {
+    conceptId: STRESSPHYS, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What is the term for the cumulative physiological cost of a stress response system ' +
+      'that keeps being invoked when it should be resting?',
+    choices: [
+      { text: 'Allostatic load', isCorrect: true },
+      { text: 'Homeostasis', isCorrect: false },
+      { text: 'Sympathetic dominance', isCorrect: false },
+    ],
+    correctValue: 'Allostatic load',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: STRESSPHYS_SRC,
+  },
+]
+
+// ─── bio.plant.seed-germination-dormancy ─────────────────────────────────────
+const SEEDGERM = 'bio.plant.seed-germination-dormancy'
+const SEEDGERM_SRC = 'educational-brain/concepts/biology/bio.plant.seed-germination-dormancy.md'
+const SEEDGERM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SEEDGERM, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A seed contains a protective seed coat, an embryo, and endosperm/cotyledons storing food ' +
+      'reserves. Many seeds do not germinate immediately due to DORMANCY, which comes in two ' +
+      'mechanistically different types. Physiological dormancy is an INTERNAL hormonal block ' +
+      '(e.g., abscisic acid relative to gibberellin) preventing germination regardless of ' +
+      'external conditions until internal changes occur. Physical dormancy is a STRUCTURAL ' +
+      'barrier — an impermeable seed coat — preventing germination until physically breached ' +
+      '(abrasion, fire, digestive passage), regardless of the embryo\'s own readiness. These are ' +
+      'independent mechanisms: a seed with resolved physiological dormancy would still not ' +
+      'germinate if physical dormancy remains intact. Dormancy has genuine ADAPTIVE ' +
+      'significance — preventing germination at an inappropriate time or place increases ' +
+      'seedling survival odds. Environmental triggers (water, temperature, light) then signal ' +
+      'suitable conditions once dormancy resolves; germination patterns are hypogeal ' +
+      '(cotyledons stay underground) or epigeal (cotyledons lifted above ground).',
+    targetedMisconceptions: [],
+    source: SEEDGERM_SRC,
+  },
+  {
+    conceptId: SEEDGERM, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students treat physiological and physical dormancy as the ' +
+      'same phenomenon, missing that they require genuinely DIFFERENT triggers to overcome — ' +
+      'internal hormonal change versus physical breach of the seed coat, and each can block ' +
+      'germination independently of the other. Second, students interpret a seed\'s failure to ' +
+      'germinate under seemingly adequate conditions as a defect or failure, missing dormancy\'s ' +
+      'genuine adaptive function: preventing germination at a time or place likely to prove ' +
+      'unfavourable soon after, increasing eventual seedling survival.',
+    targetedMisconceptions: [`${SEEDGERM}:M1`, `${SEEDGERM}:M2`],
+    source: SEEDGERM_SRC,
+  },
+]
+const SEEDGERM_PROBES: SeedProbe[] = [
+  {
+    conceptId: SEEDGERM, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A seed has an intact, impermeable seed coat but is internally hormone-ready to ' +
+      'germinate. Will it germinate?',
+    choices: [
+      { text: 'No — physical dormancy (the intact coat) still blocks germination independently of hormonal readiness', isCorrect: true },
+      { text: 'Yes — internal hormonal readiness alone is sufficient for germination', isCorrect: false, misconceptionId: `${SEEDGERM}:M1` },
+      { text: 'Yes, since physiological and physical dormancy are the same mechanism', isCorrect: false, misconceptionId: `${SEEDGERM}:M1` },
+      { text: 'This scenario is biologically impossible', isCorrect: false },
+    ],
+    correctValue: 'No — physical dormancy (the intact coat) still blocks germination independently of hormonal readiness',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${SEEDGERM}:M1`],
+    source: SEEDGERM_SRC,
+  },
+  {
+    conceptId: SEEDGERM, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A seed does not germinate immediately after a brief rain in an otherwise dry region. A ' +
+      'student calls this a defect in the seed. What is the best response?',
+    choices: [
+      {
+        text: 'Not a defect — remaining dormant until a more reliable trigger is likely to ' +
+          'produce a surviving seedling, which is dormancy\'s adaptive function',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — a seed that does not germinate under seemingly adequate conditions is malfunctioning',
+        isCorrect: false,
+        misconceptionId: `${SEEDGERM}:M2`,
+      },
+    ],
+    correctValue: 'Not a defect — remaining dormant until a more reliable trigger is likely to ' +
+      'produce a surviving seedling, which is dormancy\'s adaptive function',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${SEEDGERM}:M2`],
+    source: SEEDGERM_SRC,
+  },
+  {
+    conceptId: SEEDGERM, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In which germination pattern do the cotyledons remain below ground as the shoot emerges?',
+    choices: [
+      { text: 'Hypogeal germination', isCorrect: true },
+      { text: 'Epigeal germination', isCorrect: false },
+      { text: 'Neither pattern involves the cotyledons at all', isCorrect: false },
+    ],
+    correctValue: 'Hypogeal germination',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: SEEDGERM_SRC,
+  },
+]
+
+// ─── bio.plant.plant-biotechnology-applications ──────────────────────────────
+const PLANTBIOTECH = 'bio.plant.plant-biotechnology-applications'
+const PLANTBIOTECH_SRC = 'educational-brain/concepts/biology/bio.plant.plant-biotechnology-applications.md'
+const PLANTBIOTECH_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PLANTBIOTECH, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Plant tissue culture and micropropagation specifically exploit TOTIPOTENCY — a single ' +
+      'plant somatic cell\'s retained capacity to develop into a complete new organism, unlike ' +
+      'most differentiated animal cells. Agrobacterium-mediated transformation is the principal ' +
+      'plant genetic engineering method: the soil bacterium Agrobacterium tumefaciens NATURALLY ' +
+      'transfers its own T-DNA into plant genomes as part of its infection process; engineers ' +
+      'replace the bacterium\'s own tumour-inducing genes with a desired gene, letting the ' +
+      'bacterium\'s existing natural machinery deliver it — hijacking an existing mechanism, not ' +
+      'inventing one from scratch. Transgenic traits extend beyond pest resistance to herbicide ' +
+      'tolerance and biofortification (e.g., Golden Rice\'s beta-carotene). Marker-assisted ' +
+      'breeding is a NON-TRANSGENIC alternative: it uses DNA markers to select desirable ' +
+      'offspring of CONVENTIONAL cross-breeding, introducing no foreign DNA at all.',
+    targetedMisconceptions: [],
+    source: PLANTBIOTECH_SRC,
+  },
+  {
+    conceptId: PLANTBIOTECH, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students treat Agrobacterium-mediated transformation as an ' +
+      'entirely artificial technology, missing that it specifically exploits Agrobacterium\'s own ' +
+      'NATURAL T-DNA transfer mechanism, repurposed rather than invented from scratch. Second, ' +
+      'students classify marker-assisted breeding as a form of transgenic genetic engineering, ' +
+      'missing that it introduces NO foreign DNA — it merely selects among offspring of ' +
+      'conventional cross-breeding using genetic markers, a fundamentally different, ' +
+      'non-transgenic approach.',
+    targetedMisconceptions: [`${PLANTBIOTECH}:M1`, `${PLANTBIOTECH}:M2`],
+    source: PLANTBIOTECH_SRC,
+  },
+]
+const PLANTBIOTECH_PROBES: SeedProbe[] = [
+  {
+    conceptId: PLANTBIOTECH, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Was the DNA-transfer process used in Agrobacterium-mediated transformation invented ' +
+      'entirely from scratch by genetic engineers?',
+    choices: [
+      { text: 'No — it exploits Agrobacterium\'s own naturally-evolved T-DNA transfer mechanism', isCorrect: true },
+      { text: 'Yes — it is a wholly artificial, human-engineered DNA-delivery technology', isCorrect: false, misconceptionId: `${PLANTBIOTECH}:M1` },
+      { text: 'Yes, since bacteria cannot naturally transfer DNA into plant cells', isCorrect: false, misconceptionId: `${PLANTBIOTECH}:M1` },
+      { text: 'The mechanism\'s origin is unknown', isCorrect: false },
+    ],
+    correctValue: 'No — it exploits Agrobacterium\'s own naturally-evolved T-DNA transfer mechanism',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${PLANTBIOTECH}:M1`],
+    source: PLANTBIOTECH_SRC,
+  },
+  {
+    conceptId: PLANTBIOTECH, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student classifies marker-assisted breeding as a form of transgenic genetic ' +
+      'engineering. What is the best response?',
+    choices: [
+      {
+        text: 'Wrong — marker-assisted breeding introduces no foreign DNA; it selects among ' +
+          'offspring of conventional cross-breeding using genetic markers',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — marker-assisted breeding directly inserts foreign genes like other ' +
+          'transgenic methods',
+        isCorrect: false,
+        misconceptionId: `${PLANTBIOTECH}:M2`,
+      },
+    ],
+    correctValue: 'Wrong — marker-assisted breeding introduces no foreign DNA; it selects among ' +
+      'offspring of conventional cross-breeding using genetic markers',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${PLANTBIOTECH}:M2`],
+    source: PLANTBIOTECH_SRC,
+  },
+  {
+    conceptId: PLANTBIOTECH, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What specific cellular property allows plant tissue culture and micropropagation to ' +
+      'grow an entire new plant from a single somatic cell?',
+    choices: [
+      { text: 'Totipotency', isCorrect: true },
+      { text: 'Herbicide tolerance', isCorrect: false },
+      { text: 'Biofortification', isCorrect: false },
+    ],
+    correctValue: 'Totipotency',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: PLANTBIOTECH_SRC,
+  },
+]
+
 export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...SCIMETH_EXPLANATIONS,
   ...UNITHEMES_EXPLANATIONS,
@@ -3600,6 +3884,9 @@ export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...SECGROWTH_EXPLANATIONS,
   ...REPROSTRAT_EXPLANATIONS,
   ...HPGAXIS_EXPLANATIONS,
+  ...STRESSPHYS_EXPLANATIONS,
+  ...SEEDGERM_EXPLANATIONS,
+  ...PLANTBIOTECH_EXPLANATIONS,
 ]
 
 export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
@@ -3639,4 +3926,7 @@ export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
   ...SECGROWTH_PROBES,
   ...REPROSTRAT_PROBES,
   ...HPGAXIS_PROBES,
+  ...STRESSPHYS_PROBES,
+  ...SEEDGERM_PROBES,
+  ...PLANTBIOTECH_PROBES,
 ]
