@@ -6671,6 +6671,290 @@ const GLOBALCHANGE_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── bio.bioinfo.multiomics-statistical-genomics ─────────────────────────────
+const MULTIOMICS = 'bio.bioinfo.multiomics-statistical-genomics'
+const MULTIOMICS_SRC = 'educational-brain/concepts/biology/bio.bioinfo.multiomics-statistical-genomics.md'
+const MULTIOMICS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: MULTIOMICS, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Transcriptomics (RNA-seq), proteomics, and metabolomics are COMPLEMENTARY omics ' +
+      'layers, each capturing a different molecular level: transcriptomics measures which ' +
+      'genes are transcribed, proteomics measures actual protein presence (which can differ ' +
+      'from transcript levels due to translational and post-translational regulation), and ' +
+      'metabolomics measures the resulting metabolic state. Integrating multiple omics layers ' +
+      'gives a more complete systems-level picture because it lets researchers LOCATE where in ' +
+      'the transcription-translation-metabolism chain a regulatory event occurred. The ' +
+      'multiple-testing problem arises because performing thousands of simultaneous ' +
+      'statistical tests will, by pure chance, produce a substantial number of "significant" ' +
+      'results even with zero real effects (e.g., ~500 false positives from 10,000 tests at a ' +
+      '5% false-positive rate) — raw uncorrected p-values are therefore statistically ' +
+      'misleading in high-throughput settings.',
+    targetedMisconceptions: [],
+    source: MULTIOMICS_SRC,
+  },
+  {
+    conceptId: MULTIOMICS, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students treat the three omics layers as redundant ' +
+      'measurements of "the same thing," missing that regulation occurs at EACH transition ' +
+      '(transcription to translation to metabolism), so transcript, protein, and metabolite ' +
+      'levels are only partially correlated. Second, students interpret a p < 0.05 result from ' +
+      'a high-throughput screen the same way as a single hypothesis test, missing that testing ' +
+      'thousands of items simultaneously inflates the expected number of chance false ' +
+      'positives, requiring statistical correction before interpretation.',
+    targetedMisconceptions: [`${MULTIOMICS}:M1`, `${MULTIOMICS}:M2`],
+    source: MULTIOMICS_SRC,
+  },
+]
+const MULTIOMICS_PROBES: SeedProbe[] = [
+  {
+    conceptId: MULTIOMICS, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A gene\'s transcript level rises substantially, but its corresponding protein level ' +
+      'does NOT rise correspondingly. What is the best interpretation?',
+    choices: [
+      { text: 'Evidence of post-transcriptional regulation, since transcript and protein levels are only partially correlated', isCorrect: true },
+      { text: 'A measurement error, since transcript and protein levels should always rise together', isCorrect: false, misconceptionId: `${MULTIOMICS}:M1` },
+      { text: 'Evidence that transcriptomics is an unreliable technique', isCorrect: false },
+      { text: 'Evidence that the gene is not actually being expressed', isCorrect: false },
+    ],
+    correctValue: 'Evidence of post-transcriptional regulation, since transcript and protein levels are only partially correlated',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${MULTIOMICS}:M1`],
+    source: MULTIOMICS_SRC,
+  },
+  {
+    conceptId: MULTIOMICS, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A high-throughput screen tests 10,000 genes and finds 200 with p < 0.05, with no ' +
+      'correction applied. A student says: "All 200 must reflect genuine biological effects, ' +
+      'since each one passed the p < 0.05 threshold." Is this correct?',
+    choices: [
+      {
+        text: 'No — with 10,000 simultaneous tests at a 5% false-positive rate, roughly 500 ' +
+          'false positives would be expected by chance alone, so uncorrected p-values are ' +
+          'misleading here',
+        isCorrect: true,
+      },
+      {
+        text: 'Yes — a p < 0.05 result means the same thing regardless of how many tests were performed',
+        isCorrect: false,
+        misconceptionId: `${MULTIOMICS}:M2`,
+      },
+    ],
+    correctValue: 'No — with 10,000 simultaneous tests at a 5% false-positive rate, roughly ' +
+      '500 false positives would be expected by chance alone, so uncorrected p-values are ' +
+      'misleading here',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${MULTIOMICS}:M2`],
+    source: MULTIOMICS_SRC,
+  },
+  {
+    conceptId: MULTIOMICS, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Which omics layer measures the complete set of small-molecule products resulting ' +
+      'from the combined activity of the proteins present in a cell?',
+    choices: [
+      { text: 'Metabolomics', isCorrect: true },
+      { text: 'Transcriptomics', isCorrect: false },
+      { text: 'Proteomics', isCorrect: false },
+    ],
+    correctValue: 'Metabolomics',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: MULTIOMICS_SRC,
+  },
+]
+
+// ─── bio.behav.foraging-behavior ──────────────────────────────────────────────
+const FORAGE = 'bio.behav.foraging-behavior'
+const FORAGE_SRC = 'educational-brain/concepts/biology/bio.behav.foraging-behavior.md'
+const FORAGE_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: FORAGE, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Optimal foraging theory applies a cost-benefit framework, analogous to mathematical ' +
+      'optimisation, to predict diet and patch-use decisions. The marginal value theorem ' +
+      'predicts an animal should LEAVE a depleting food patch when that patch\'s CURRENT ' +
+      'intake rate declines to match the AVERAGE intake rate across the whole habitat ' +
+      '(accounting for travel time) — NOT when the patch is fully depleted; this typically ' +
+      'means leaving while some food still remains. Risk-sensitive foraging shows that an ' +
+      'animal\'s optimal risk strategy SHIFTS with its current energy state: a secure animal ' +
+      'can afford to be risk-averse (predictable payoff), while a desperate animal becomes ' +
+      'risk-prone (only a high-variance gamble offers a realistic chance of meeting urgent ' +
+      'needs).',
+    targetedMisconceptions: [],
+    source: FORAGE_SRC,
+  },
+  {
+    conceptId: FORAGE, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students assume an animal should stay in a patch until ' +
+      'it is completely depleted, missing the marginal value theorem\'s actual rule: leave when ' +
+      'the current patch rate matches the HABITAT AVERAGE, not zero. Second, students treat ' +
+      'risk sensitivity as a fixed, universal trait, missing that the SAME individual shifts ' +
+      'between risk-averse and risk-prone strategies as its own energy state changes.',
+    targetedMisconceptions: [`${FORAGE}:M1`, `${FORAGE}:M2`],
+    source: FORAGE_SRC,
+  },
+]
+const FORAGE_PROBES: SeedProbe[] = [
+  {
+    conceptId: FORAGE, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A food patch\'s current intake rate has declined to match the habitat\'s average ' +
+      'intake rate, but some food still remains in the patch. What does the marginal value ' +
+      'theorem predict an optimal forager should do?',
+    choices: [
+      { text: 'Leave the patch now, since continuing would yield less than the habitat average', isCorrect: true },
+      { text: 'Stay until the patch is completely depleted, to avoid wasting remaining food', isCorrect: false, misconceptionId: `${FORAGE}:M1` },
+      { text: 'The forager\'s decision cannot be predicted from intake rates alone', isCorrect: false },
+      { text: 'Stay indefinitely, since some food remaining means the patch is still worthwhile', isCorrect: false },
+    ],
+    correctValue: 'Leave the patch now, since continuing would yield less than the habitat average',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${FORAGE}:M1`],
+    source: FORAGE_SRC,
+  },
+  {
+    conceptId: FORAGE, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An animal observed foraging risk-averse in a secure energy state later becomes ' +
+      'risk-prone once its energy reserves become desperately low. A student says: "That\'s ' +
+      'inconsistent — risk preference should be a fixed trait of the species." Is this correct?',
+    choices: [
+      {
+        text: 'No — risk sensitivity is state-dependent; the same individual optimally shifts ' +
+          'strategy as its own energy state changes',
+        isCorrect: true,
+      },
+      {
+        text: 'Yes — an animal\'s risk preference in foraging should never change',
+        isCorrect: false,
+        misconceptionId: `${FORAGE}:M2`,
+      },
+    ],
+    correctValue: 'No — risk sensitivity is state-dependent; the same individual optimally ' +
+      'shifts strategy as its own energy state changes',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${FORAGE}:M2`],
+    source: FORAGE_SRC,
+  },
+  {
+    conceptId: FORAGE, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What theorem predicts the optimal point at which a forager should leave a depleting ' +
+      'food patch, based on comparing the patch\'s current intake rate to the habitat average?',
+    choices: [
+      { text: 'The marginal value theorem', isCorrect: true },
+      { text: 'Hamilton\'s rule', isCorrect: false },
+      { text: 'The handicap principle', isCorrect: false },
+    ],
+    correctValue: 'The marginal value theorem',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: FORAGE_SRC,
+  },
+]
+
+// ─── bio.behav.human-behavioral-ecology-evolutionary-psych ───────────────────
+const HUMBEHECO = 'bio.behav.human-behavioral-ecology-evolutionary-psych'
+const HUMBEHECO_SRC = 'educational-brain/concepts/biology/bio.behav.human-behavioral-ecology-evolutionary-psych.md'
+const HUMBEHECO_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: HUMBEHECO, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Applying behavioural-ecology principles (kin selection, reciprocal altruism, parental ' +
+      'investment) to human behaviour generates HYPOTHESES that must be tested against ' +
+      'evidence, not automatically-true conclusions — human behaviour is also shaped by ' +
+      'individual learning and culture. Proposed human behavioural universals are an active ' +
+      'area of genuine evidence-gathering and controversy, requiring case-by-case evaluation ' +
+      'rather than blanket acceptance or rejection. Cultural evolution is a SECOND inheritance ' +
+      'system operating ALONGSIDE genetic evolution: ideas and behaviours spread via teaching ' +
+      'and imitation, potentially within a SINGLE generation, far faster than genetic evolution ' +
+      'requires multiple generations of differential reproduction.',
+    targetedMisconceptions: [],
+    source: HUMBEHECO_SRC,
+  },
+  {
+    conceptId: HUMBEHECO, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students accept an evolutionary explanation for a human ' +
+      'behaviour as automatically correct once the underlying principle is understood, missing ' +
+      'that each specific claim needs its own supporting evidence given humans\' additional ' +
+      'complexity. Second, students treat cultural evolution as a byproduct or slower extension ' +
+      'of genetic evolution, missing that it is a distinct, much faster inheritance system that ' +
+      'can drive rapid behavioural change with no corresponding genetic change.',
+    targetedMisconceptions: [`${HUMBEHECO}:M1`, `${HUMBEHECO}:M2`],
+    source: HUMBEHECO_SRC,
+  },
+]
+const HUMBEHECO_PROBES: SeedProbe[] = [
+  {
+    conceptId: HUMBEHECO, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two competing explanations are proposed for the same human behaviour — one ' +
+      'evolutionary, one purely cultural. What determines which explanation is correct?',
+    choices: [
+      { text: 'Evidence specific to that claim — logical coherence of the evolutionary story alone is not sufficient', isCorrect: true },
+      { text: 'The evolutionary explanation wins by default, since the underlying principle is well-supported in biology generally', isCorrect: false, misconceptionId: `${HUMBEHECO}:M1` },
+      { text: 'The cultural explanation always wins, since humans have culture', isCorrect: false },
+      { text: 'Neither explanation can ever be evaluated', isCorrect: false },
+    ],
+    correctValue: 'Evidence specific to that claim — logical coherence of the evolutionary story alone is not sufficient',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${HUMBEHECO}:M1`],
+    source: HUMBEHECO_SRC,
+  },
+  {
+    conceptId: HUMBEHECO, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A behaviour spreads through an entire population within a single generation. A ' +
+      'student says: "This must be genetic evolution, since evolution explains behavioural ' +
+      'change." Is this correct?',
+    choices: [
+      {
+        text: 'No — genetic evolution requires multiple generations of differential ' +
+          'reproduction; a single-generation spread indicates cultural evolution instead',
+        isCorrect: true,
+      },
+      {
+        text: 'Yes — cultural evolution is just a byproduct of genetic evolution',
+        isCorrect: false,
+        misconceptionId: `${HUMBEHECO}:M2`,
+      },
+    ],
+    correctValue: 'No — genetic evolution requires multiple generations of differential ' +
+      'reproduction; a single-generation spread indicates cultural evolution instead',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${HUMBEHECO}:M2`],
+    source: HUMBEHECO_SRC,
+  },
+  {
+    conceptId: HUMBEHECO, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What term describes the transmission of ideas and behaviours between individuals ' +
+      'via teaching and imitation, operating as an inheritance system alongside genetic ' +
+      'evolution?',
+    choices: [
+      { text: 'Cultural evolution', isCorrect: true },
+      { text: 'Kin selection', isCorrect: false },
+      { text: 'Reciprocal altruism', isCorrect: false },
+    ],
+    correctValue: 'Cultural evolution',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: HUMBEHECO_SRC,
+  },
+]
+
 export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...SCIMETH_EXPLANATIONS,
   ...UNITHEMES_EXPLANATIONS,
@@ -6741,6 +7025,9 @@ export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...KINSEL_EXPLANATIONS,
   ...CANCERIMMUNO_EXPLANATIONS,
   ...GLOBALCHANGE_EXPLANATIONS,
+  ...MULTIOMICS_EXPLANATIONS,
+  ...FORAGE_EXPLANATIONS,
+  ...HUMBEHECO_EXPLANATIONS,
 ]
 
 export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
@@ -6813,4 +7100,7 @@ export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
   ...KINSEL_PROBES,
   ...CANCERIMMUNO_PROBES,
   ...GLOBALCHANGE_PROBES,
+  ...MULTIOMICS_PROBES,
+  ...FORAGE_PROBES,
+  ...HUMBEHECO_PROBES,
 ]

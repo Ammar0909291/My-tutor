@@ -487,8 +487,25 @@ already-served `bio.immuno.immune-disorders` and batch 20's
 that batch 21 opened) validated clean: `tsc --noEmit` 0 errors, dry-run 0
 duplicate identities across 8,586 items, contract audit 177/199 authored,
 177/177 at contract, 0 short, 0 never-quizzable, 40/40 targeted vitest
-suites passing. **Extended
-91: 69/91.** Production convergence (seed
+suites passing. Batch 24 (2026-09-21, 3 concepts — the KG-prerequisite
+frontier reached ALL 22 remaining extension concepts simultaneously ready
+this batch, so selection prioritised closing entire domains outright:
+`bio.bioinfo.multiomics-statistical-genomics` — prerequisites already-
+served `bio.bioinfo.structural-bioinformatics` and batch 22's
+`bio.bioinfo.comparative-genomics`, CLOSING the entire `bio.bioinfo` domain
+gap; preserves the KG's `math.stats.hypothesis-testing` and
+`math.stats.chi-squared-test` cross-subject links — `bio.behav.foraging-
+behavior` — prerequisites already-served `bio.behav.innate-behavior-
+instinct` and `bio.eco.population-ecology`; preserves the KG's
+`math.calc.optimization` cross-subject link — and `bio.behav.human-
+behavioral-ecology-evolutionary-psych` — prerequisites batch 23's
+`bio.behav.kin-selection-altruism` and already-served `bio.evo.human-
+evolution`; together with foraging-behavior, CLOSING the entire `bio.behav`
+domain gap) validated clean: `tsc --noEmit` 0 errors, dry-run 0 duplicate
+identities across 8,601 items, contract audit 180/199 authored, 180/180 at
+contract, 0 short, 0 never-quizzable, 40/40 targeted vitest suites passing.
+**Extended
+91: 72/91.** Production convergence (seed
 corpus → cold-start bootstrap → live
 AssetIdentity rows) is UNVERIFIED against the real database this campaign so
 far — no Supabase/DB access has been used;
