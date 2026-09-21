@@ -398,8 +398,18 @@ and `bio.mol.protein-quality-control-autophagy` — prerequisites
 served) validated clean: `tsc --noEmit` 0 errors, dry-run 0 duplicate
 identities across 8,466 items, contract audit 153/199 authored, 153/153 at
 contract, 0 short, 0 never-quizzable, 40/40 targeted vitest suites passing.
-**Extended 91: 45/91.** Production convergence (seed corpus → cold-start
-bootstrap → live
+Batch 16 (2026-09-21, 3 concepts: `bio.cell.cell-junctions-extracellular-
+matrix` — its sole prerequisite `bio.cell.cell-membrane-transport`, already
+served; opens `bio.cell.cell-adhesion-tissue-organization` — `bio.mol.
+alternative-splicing-rna-diversity` — its sole prerequisite
+`bio.mol.transcription`, already served — and `bio.sys.quantitative-systems-
+modeling` — its sole prerequisite `bio.sys.gene-regulatory-networks`,
+already served; preserves the KG's `math.de.ode` and `math.calc.partial-
+derivatives` cross-subject links) validated clean: `tsc --noEmit` 0 errors,
+dry-run 0 duplicate identities across 8,481 items, contract audit 156/199
+authored, 156/156 at contract, 0 short, 0 never-quizzable, 40/40 targeted
+vitest suites passing. **Extended 91: 48/91.** Production convergence (seed
+corpus → cold-start bootstrap → live
 AssetIdentity rows) is UNVERIFIED against the real database this campaign so
 far — no Supabase/DB access has been used;
 treat as PENDING until explicitly checked. Re-measure with `npx tsx

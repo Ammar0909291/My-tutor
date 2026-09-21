@@ -4415,6 +4415,283 @@ const PROTEOSTASIS_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── bio.cell.cell-junctions-extracellular-matrix ────────────────────────────
+const JUNCTIONS = 'bio.cell.cell-junctions-extracellular-matrix'
+const JUNCTIONS_SRC = 'educational-brain/concepts/biology/bio.cell.cell-junctions-extracellular-matrix.md'
+const JUNCTIONS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: JUNCTIONS, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Three cell junction types each perform a specific, non-interchangeable function. Tight ' +
+      'junctions SEAL adjacent cells, blocking substances from leaking between them (e.g., the ' +
+      'gut lining). Desmosomes ANCHOR cells mechanically, resisting stress (abundant in skin and ' +
+      'heart muscle). Gap junctions COMMUNICATE, forming direct channels for molecules/ions to ' +
+      'pass between adjacent cells\' cytoplasm (e.g., synchronised heart muscle contraction). The ' +
+      'extracellular matrix (collagen, proteoglycans, fibronectin) surrounds cells, and integrin ' +
+      'receptors connect matrix components outside the cell to the cytoskeleton inside — the ECM ' +
+      'is an ACTIVE structural AND signalling scaffold, transmitting signals that influence cell ' +
+      'survival, proliferation, and differentiation, not passive filler.',
+    targetedMisconceptions: [],
+    source: JUNCTIONS_SRC,
+  },
+  {
+    conceptId: JUNCTIONS, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students treat tight junctions and desmosomes as serving ' +
+      'the same "holding cells together" purpose, missing the specific functional distinction: ' +
+      'sealing against leakage (tight junctions) versus mechanical anchoring against stress ' +
+      '(desmosomes). Second, students treat the ECM as passive structural filler with no ' +
+      'signalling role, missing that integrin receptors actively transmit signals into the cell ' +
+      'that influence its behaviour — disrupting ECM contact can affect cell survival, not just ' +
+      'physical support.',
+    targetedMisconceptions: [`${JUNCTIONS}:M1`, `${JUNCTIONS}:M2`],
+    source: JUNCTIONS_SRC,
+  },
+]
+const JUNCTIONS_PROBES: SeedProbe[] = [
+  {
+    conceptId: JUNCTIONS, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A tissue like the intestinal lining must prevent substances from leaking between ' +
+      'adjacent cells. Which junction type is most directly responsible?',
+    choices: [
+      { text: 'Tight junctions', isCorrect: true },
+      { text: 'Desmosomes, since they also hold cells together', isCorrect: false, misconceptionId: `${JUNCTIONS}:M1` },
+      { text: 'Either tight junctions or desmosomes equally well', isCorrect: false, misconceptionId: `${JUNCTIONS}:M1` },
+      { text: 'Gap junctions', isCorrect: false },
+    ],
+    correctValue: 'Tight junctions',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${JUNCTIONS}:M1`],
+    source: JUNCTIONS_SRC,
+  },
+  {
+    conceptId: JUNCTIONS, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A cell\'s contact with the extracellular matrix is experimentally disrupted. A student ' +
+      'says this could only affect the cell\'s physical support, nothing else. What is the best ' +
+      'response?',
+    choices: [
+      {
+        text: 'Wrong — disrupting integrin-ECM contact can also affect the cell\'s survival, ' +
+          'proliferation, or differentiation via lost signalling',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — the ECM is purely structural and has no signalling role',
+        isCorrect: false,
+        misconceptionId: `${JUNCTIONS}:M2`,
+      },
+    ],
+    correctValue: 'Wrong — disrupting integrin-ECM contact can also affect the cell\'s survival, ' +
+      'proliferation, or differentiation via lost signalling',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${JUNCTIONS}:M2`],
+    source: JUNCTIONS_SRC,
+  },
+  {
+    conceptId: JUNCTIONS, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Which junction type enables rapid, direct chemical or electrical communication between ' +
+      'adjacent cells, such as synchronising heart muscle contraction?',
+    choices: [
+      { text: 'Gap junctions', isCorrect: true },
+      { text: 'Tight junctions', isCorrect: false },
+      { text: 'Desmosomes', isCorrect: false },
+    ],
+    correctValue: 'Gap junctions',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: JUNCTIONS_SRC,
+  },
+]
+
+// ─── bio.mol.alternative-splicing-rna-diversity ──────────────────────────────
+const SPLICING = 'bio.mol.alternative-splicing-rna-diversity'
+const SPLICING_SRC = 'educational-brain/concepts/biology/bio.mol.alternative-splicing-rna-diversity.md'
+const SPLICING_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SPLICING, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Pre-mRNA contains exons (RETAINED, translated into protein) and introns (REMOVED before ' +
+      'the mRNA matures) — splicing, performed by the spliceosome (built from snRNPs), cuts out ' +
+      'introns and joins exons. Alternative splicing describes several distinct mechanisms by ' +
+      'which a single pre-mRNA produces multiple mature mRNAs: exon skipping (an exon excluded ' +
+      'in some versions), intron retention (an intron kept in the final sequence), alternative ' +
+      '5\'/3\' splice sites (the exact cut boundary shifts), and mutually exclusive exons (only ' +
+      'one of two alternative exons is ever included). This directly resolves the "gene-count ' +
+      'paradox": the human genome has only ~20,000 protein-coding genes, but alternative ' +
+      'splicing lets a single gene generate multiple distinct protein isoforms, producing far ' +
+      'more distinct proteins than the raw gene count would suggest.',
+    targetedMisconceptions: [],
+    source: SPLICING_SRC,
+  },
+  {
+    conceptId: SPLICING, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students invert exon/intron fates, assuming introns are ' +
+      'retained and exons removed, missing that EXons are EXpressed (retained) while INtrons ' +
+      'stay INside and are removed. Second, students assume the gene-count paradox (fewer genes ' +
+      'than expected relative to complexity) means gene-counting methods must be flawed, missing ' +
+      'that alternative splicing genuinely resolves it: complexity arises from processing ' +
+      'sophistication applied to a modest number of genes, not from having more genes.',
+    targetedMisconceptions: [`${SPLICING}:M1`, `${SPLICING}:M2`],
+    source: SPLICING_SRC,
+  },
+]
+const SPLICING_PROBES: SeedProbe[] = [
+  {
+    conceptId: SPLICING, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'On a labelled pre-mRNA diagram, which segments will appear in the final mature mRNA?',
+    choices: [
+      { text: 'Exons — they are retained; introns are removed', isCorrect: true },
+      { text: 'Introns — they are retained; exons are removed', isCorrect: false, misconceptionId: `${SPLICING}:M1` },
+      { text: 'Both exons and introns are retained equally', isCorrect: false, misconceptionId: `${SPLICING}:M1` },
+      { text: 'Neither segment type is retained', isCorrect: false },
+    ],
+    correctValue: 'Exons — they are retained; introns are removed',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${SPLICING}:M1`],
+    source: SPLICING_SRC,
+  },
+  {
+    conceptId: SPLICING, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The human genome has only ~20,000 protein-coding genes, yet humans have far more than ' +
+      '20,000 distinct proteins. A student concludes the gene-counting method must be wrong. What ' +
+      'is the best response?',
+    choices: [
+      {
+        text: 'Wrong — alternative splicing lets a single gene generate multiple distinct protein ' +
+          'isoforms, genuinely resolving the apparent paradox',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — the discrepancy can only be explained by a flaw in gene-counting methodology',
+        isCorrect: false,
+        misconceptionId: `${SPLICING}:M2`,
+      },
+    ],
+    correctValue: 'Wrong — alternative splicing lets a single gene generate multiple distinct protein ' +
+      'isoforms, genuinely resolving the apparent paradox',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${SPLICING}:M2`],
+    source: SPLICING_SRC,
+  },
+  {
+    conceptId: SPLICING, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In mutually exclusive exon splicing, how many of the two alternative exons are ever ' +
+      'included in a single mature mRNA?',
+    choices: [
+      { text: 'Exactly one', isCorrect: true },
+      { text: 'Both', isCorrect: false },
+      { text: 'Neither', isCorrect: false },
+    ],
+    correctValue: 'Exactly one',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: SPLICING_SRC,
+  },
+]
+
+// ─── bio.sys.quantitative-systems-modeling ───────────────────────────────────
+const QUANTSYS = 'bio.sys.quantitative-systems-modeling'
+const QUANTSYS_SRC = 'educational-brain/concepts/biology/bio.sys.quantitative-systems-modeling.md'
+const QUANTSYS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: QUANTSYS, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'ODE models of gene/protein concentration dynamics are a QUANTITATIVE extension of the ' +
+      'SAME qualitative network-motif relationships already covered (feedback loops, feedforward ' +
+      'loops) — not a new, unrelated topic. Where a qualitative description says a motif produces ' +
+      '"oscillation," an ODE model writes a precise equation for the rate of change of each ' +
+      'concentration, enabling exact numerical predictions. Parameter estimation is the specific ' +
+      'process of fitting a model\'s unknown numerical parameters (rate constants, binding ' +
+      'affinities) to match experimental time-course data — distinct from the model\'s STRUCTURE, ' +
+      'which comes from prior biological knowledge. Sensitivity analysis systematically varies ' +
+      'each parameter and measures how much model output changes, identifying WHICH SPECIFIC ' +
+      'parameters most strongly determine behaviour (requiring precise measurement) — a ' +
+      'prioritisation exercise, not merely listing parameters.',
+    targetedMisconceptions: [],
+    source: QUANTSYS_SRC,
+  },
+  {
+    conceptId: QUANTSYS, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students treat ODE models as an entirely separate, ' +
+      'unrelated mathematical topic from the qualitative network-motif descriptions already ' +
+      'covered, missing that the equations are the SAME regulatory relationships made precise and ' +
+      'quantitative. Second, students treat sensitivity analysis as simply listing all of a ' +
+      'model\'s parameters, missing that its actual purpose is identifying WHICH SPECIFIC ' +
+      'parameters most strongly determine model behaviour, to prioritise measurement precision.',
+    targetedMisconceptions: [`${QUANTSYS}:M1`, `${QUANTSYS}:M2`],
+    source: QUANTSYS_SRC,
+  },
+]
+const QUANTSYS_PROBES: SeedProbe[] = [
+  {
+    conceptId: QUANTSYS, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A qualitative description states a network motif produces oscillating behaviour. What ' +
+      'does writing an ODE model of this motif add?',
+    choices: [
+      { text: 'Precise, quantitative predictions (exact concentration values, oscillation period) using the same regulatory relationships', isCorrect: true },
+      { text: 'An entirely new set of biological relationships unrelated to the original qualitative description', isCorrect: false, misconceptionId: `${QUANTSYS}:M1` },
+      { text: 'Nothing — ODE models and qualitative descriptions are unrelated topics', isCorrect: false, misconceptionId: `${QUANTSYS}:M1` },
+      { text: 'A replacement for the biological relationships already described', isCorrect: false },
+    ],
+    correctValue: 'Precise, quantitative predictions (exact concentration values, oscillation period) using the same regulatory relationships',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${QUANTSYS}:M1`],
+    source: QUANTSYS_SRC,
+  },
+  {
+    conceptId: QUANTSYS, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student says sensitivity analysis is just listing all the parameters a model ' +
+      'contains. What is the best response?',
+    choices: [
+      {
+        text: 'Wrong — sensitivity analysis systematically varies each parameter and measures ' +
+          'how much output changes, identifying which parameters matter most',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — sensitivity analysis is equivalent to enumerating a model\'s parameters',
+        isCorrect: false,
+        misconceptionId: `${QUANTSYS}:M2`,
+      },
+    ],
+    correctValue: 'Wrong — sensitivity analysis systematically varies each parameter and measures ' +
+      'how much output changes, identifying which parameters matter most',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${QUANTSYS}:M2`],
+    source: QUANTSYS_SRC,
+  },
+  {
+    conceptId: QUANTSYS, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What is parameter estimation specifically the process of doing?',
+    choices: [
+      { text: 'Fitting a model\'s unknown numerical parameter values to match experimental time-course data', isCorrect: true },
+      { text: 'Determining which biological components interact with which others', isCorrect: false },
+      { text: 'Listing every parameter a model could theoretically contain', isCorrect: false },
+    ],
+    correctValue: 'Fitting a model\'s unknown numerical parameter values to match experimental time-course data',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: QUANTSYS_SRC,
+  },
+]
+
 export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...SCIMETH_EXPLANATIONS,
   ...UNITHEMES_EXPLANATIONS,
@@ -4461,6 +4738,9 @@ export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...FERMENT_EXPLANATIONS,
   ...METABREG_EXPLANATIONS,
   ...PROTEOSTASIS_EXPLANATIONS,
+  ...JUNCTIONS_EXPLANATIONS,
+  ...SPLICING_EXPLANATIONS,
+  ...QUANTSYS_EXPLANATIONS,
 ]
 
 export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
@@ -4509,4 +4789,7 @@ export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
   ...FERMENT_PROBES,
   ...METABREG_PROBES,
   ...PROTEOSTASIS_PROBES,
+  ...JUNCTIONS_PROBES,
+  ...SPLICING_PROBES,
+  ...QUANTSYS_PROBES,
 ]
