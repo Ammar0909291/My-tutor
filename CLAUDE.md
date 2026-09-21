@@ -513,9 +513,19 @@ domain outright: `bio.biotech.agricultural-forensic-biotechnology`,
 respectively — CLOSING the entire remaining `bio.biotech` domain gap)
 validated clean: `tsc --noEmit` 0 errors, dry-run 0 duplicate identities
 across 8,616 items, contract audit 183/199 authored, 183/183 at contract, 0
-short, 0 never-quizzable, 40/40 targeted vitest suites passing.
+short, 0 never-quizzable, 40/40 targeted vitest suites passing. Batch 26
+(2026-09-21, 3 concepts — all 16 remaining extension concepts were
+simultaneously ready again; selection closed another domain outright:
+`bio.dev.aging-senescence-biology`, `bio.dev.organogenesis`, and
+`bio.dev.regeneration-biology` — prerequisites already-served
+`bio.dev.stem-cells-regeneration` (aging and regeneration) and
+`bio.dev.morphogenesis-differentiation` (organogenesis) — CLOSING the
+entire remaining `bio.dev` domain gap) validated clean: `tsc --noEmit` 0
+errors, dry-run 0 duplicate identities across 8,631 items, contract audit
+186/199 authored, 186/186 at contract, 0 short, 0 never-quizzable, 40/40
+targeted vitest suites passing.
 **Extended
-91: 75/91.** Production convergence (seed
+91: 78/91.** Production convergence (seed
 corpus → cold-start bootstrap → live
 AssetIdentity rows) is UNVERIFIED against the real database this campaign so
 far — no Supabase/DB access has been used;

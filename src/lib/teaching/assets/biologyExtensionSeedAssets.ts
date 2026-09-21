@@ -7236,6 +7236,293 @@ const GENETHERAPY_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── bio.dev.aging-senescence-biology ─────────────────────────────────────────
+const AGING = 'bio.dev.aging-senescence-biology'
+const AGING_SRC = 'educational-brain/concepts/biology/bio.dev.aging-senescence-biology.md'
+const AGING_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: AGING, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Cellular senescence is a PERMANENT, irreversible proliferative arrest — the cell stops ' +
+      'dividing but remains ALIVE and metabolically active, often secreting inflammatory ' +
+      'signals — mechanistically DISTINCT from apoptosis (programmed cell death, where the ' +
+      'cell is actively dismantled and eliminated). Telomere shortening acts as a replicative ' +
+      'clock, triggering senescence once a critical threshold is reached. The hallmarks-of- ' +
+      'ageing framework identifies MULTIPLE interacting processes (genomic instability, ' +
+      'mitochondrial dysfunction, altered intercellular communication) — ageing is not ' +
+      'attributable to one single cause. Antagonistic pleiotropy explains why ageing persists ' +
+      'despite selection: a gene benefiting early life (pre-reproductive) can be favoured even ' +
+      'if it causes harm only later, since selection acts most strongly on reproductive ' +
+      'success. Disposable soma theory similarly frames ageing as an accepted consequence of a ' +
+      'resource-allocation trade-off favouring reproduction over unlimited maintenance.',
+    targetedMisconceptions: [],
+    source: AGING_SRC,
+  },
+  {
+    conceptId: AGING, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students conflate senescence with apoptosis, missing ' +
+      'that senescent cells remain ALIVE and active while apoptotic cells are eliminated ' +
+      'entirely. Second, students assume ageing exists because evolution simply "failed" to ' +
+      'prevent it, missing that antagonistic pleiotropy and disposable soma theory both provide ' +
+      'SPECIFIC mechanisms by which ageing-related traits are actively favoured or accepted by ' +
+      'selection, not merely overlooked.',
+    targetedMisconceptions: [`${AGING}:M1`, `${AGING}:M2`],
+    source: AGING_SRC,
+  },
+]
+const AGING_PROBES: SeedProbe[] = [
+  {
+    conceptId: AGING, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A cell has permanently stopped dividing but continues secreting inflammatory ' +
+      'signalling molecules for an extended period. What is this cell\'s state?',
+    choices: [
+      { text: 'Senescent — permanently arrested but alive and metabolically active', isCorrect: true },
+      { text: 'Apoptotic — undergoing programmed cell death', isCorrect: false, misconceptionId: `${AGING}:M1` },
+      { text: 'Actively dividing', isCorrect: false },
+      { text: 'Dedifferentiated into a stem-cell-like state', isCorrect: false },
+    ],
+    correctValue: 'Senescent — permanently arrested but alive and metabolically active',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${AGING}:M1`],
+    source: AGING_SRC,
+  },
+  {
+    conceptId: AGING, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A gene boosts fertility in young adulthood but increases disease risk decades later. ' +
+      'A student says: "Natural selection should have eliminated this gene, so ageing must just ' +
+      'be an evolutionary oversight." Is this correct?',
+    choices: [
+      {
+        text: 'No — antagonistic pleiotropy explains this gene could still be favoured, since ' +
+          'selection acts most strongly on reproductive success, which occurs before the later cost',
+        isCorrect: true,
+      },
+      {
+        text: 'Yes — ageing exists purely because evolution failed to prevent it',
+        isCorrect: false,
+        misconceptionId: `${AGING}:M2`,
+      },
+    ],
+    correctValue: 'No — antagonistic pleiotropy explains this gene could still be favoured, ' +
+      'since selection acts most strongly on reproductive success, which occurs before the ' +
+      'later cost',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${AGING}:M2`],
+    source: AGING_SRC,
+  },
+  {
+    conceptId: AGING, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What term describes the progressive shortening of protective DNA sequences capping ' +
+      'chromosome ends with each cell division, functioning as a "replicative clock"?',
+    choices: [
+      { text: 'Telomere shortening', isCorrect: true },
+      { text: 'Genomic instability', isCorrect: false },
+      { text: 'Mitochondrial dysfunction', isCorrect: false },
+    ],
+    correctValue: 'Telomere shortening',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: AGING_SRC,
+  },
+]
+
+// ─── bio.dev.organogenesis ─────────────────────────────────────────────────────
+const ORGANOGEN = 'bio.dev.organogenesis'
+const ORGANOGEN_SRC = 'educational-brain/concepts/biology/bio.dev.organogenesis.md'
+const ORGANOGEN_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ORGANOGEN, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Organogenesis deploys the general morphogenesis toolkit (differentiation, positional ' +
+      'signalling, determination) at the scale of a specific organ — it is not a separate, ' +
+      'organ-specific mechanism. The recurring driver across nearly every organ system is ' +
+      'reciprocal induction: two adjacent tissue layers (typically epithelium and mesenchyme) ' +
+      'signal to EACH OTHER in sequence, with each signal changing the other tissue\'s ' +
+      'subsequent behaviour — neither layer alone could produce the correct structure. In ' +
+      'limb-bud outgrowth, the apical ectodermal ridge signals the mesenchyme to keep ' +
+      'proliferating, while the mesenchyme signals BACK to maintain the ridge\'s own activity; ' +
+      'removing either signal halts outgrowth. Neural-tube closure is a second worked example, ' +
+      'where incomplete closure produces specific defects like spina bifida.',
+    targetedMisconceptions: [],
+    source: ORGANOGEN_SRC,
+  },
+  {
+    conceptId: ORGANOGEN, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students treat each organ\'s formation as governed by ' +
+      'a separate, organ-specific mechanism, missing that organogenesis is the same general ' +
+      'morphogenesis concepts (differentiation, positional signals, determination) applied at ' +
+      'organ scale. Second, students interpret induction as a ONE-WAY instruction from one ' +
+      'tissue layer to another, missing that reciprocal induction requires signalling back and ' +
+      'forth in BOTH directions — removing either direction\'s signal halts development.',
+    targetedMisconceptions: [`${ORGANOGEN}:M1`, `${ORGANOGEN}:M2`],
+    source: ORGANOGEN_SRC,
+  },
+]
+const ORGANOGEN_PROBES: SeedProbe[] = [
+  {
+    conceptId: ORGANOGEN, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A novel organ-formation scenario describes a specific step involving differential ' +
+      'gene expression in response to a positional signal. What does this indicate about the ' +
+      'mechanism at work?',
+    choices: [
+      { text: 'The same general morphogenesis concepts already covered are operating, applied at this organ\'s scale', isCorrect: true },
+      { text: 'This must be a completely new, organ-specific mechanism unrelated to general morphogenesis', isCorrect: false, misconceptionId: `${ORGANOGEN}:M1` },
+      { text: 'Organ formation cannot be analysed using general developmental concepts', isCorrect: false },
+      { text: 'Each organ requires its own unique vocabulary and mechanism to understand', isCorrect: false },
+    ],
+    correctValue: 'The same general morphogenesis concepts already covered are operating, applied at this organ\'s scale',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${ORGANOGEN}:M1`],
+    source: ORGANOGEN_SRC,
+  },
+  {
+    conceptId: ORGANOGEN, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In limb-bud outgrowth, the mesenchyme\'s signal back to the apical ectodermal ridge ' +
+      'is experimentally removed, while the ridge\'s forward signal to the mesenchyme remains ' +
+      'intact. A student predicts outgrowth will continue normally. Is this correct?',
+    choices: [
+      {
+        text: 'No — outgrowth halts, since reciprocal induction requires BOTH directions of ' +
+          'signalling; removing either one is sufficient to stop the process',
+        isCorrect: true,
+      },
+      {
+        text: 'Yes — as long as the initiating (forward) signal is present, outgrowth continues regardless of any return signal',
+        isCorrect: false,
+        misconceptionId: `${ORGANOGEN}:M2`,
+      },
+    ],
+    correctValue: 'No — outgrowth halts, since reciprocal induction requires BOTH directions ' +
+      'of signalling; removing either one is sufficient to stop the process',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${ORGANOGEN}:M2`],
+    source: ORGANOGEN_SRC,
+  },
+  {
+    conceptId: ORGANOGEN, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What specific birth defect results from the posterior neural tube failing to ' +
+      'complete its folding-and-fusing closure process?',
+    choices: [
+      { text: 'Spina bifida', isCorrect: true },
+      { text: 'Cleft palate', isCorrect: false },
+      { text: 'Polydactyly', isCorrect: false },
+    ],
+    correctValue: 'Spina bifida',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: ORGANOGEN_SRC,
+  },
+]
+
+// ─── bio.dev.regeneration-biology ─────────────────────────────────────────────
+const REGEN = 'bio.dev.regeneration-biology'
+const REGEN_SRC = 'educational-brain/concepts/biology/bio.dev.regeneration-biology.md'
+const REGEN_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: REGEN, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Regenerative capacity varies dramatically across taxa — planarians show whole-body ' +
+      'regeneration, axolotls regenerate entire limbs, and zebrafish regenerate fin and heart ' +
+      'tissue — but a SHARED cellular mechanism, blastema formation, underlies all of them: ' +
+      'cells near the injury dedifferentiate into a proliferative, stem-cell-like blastema, ' +
+      'which then re-differentiates to rebuild the missing structure following positional ' +
+      'cues. Mammals\' comparatively limited regenerative capacity does NOT reflect missing ' +
+      'biological machinery — mammals retain stem cells and show some regenerative processes ' +
+      '(e.g. liver regeneration). Instead, it reflects a specific evolutionary trade-off ' +
+      'favouring RAPID wound closure via scarring over the slower, more extensive blastema- ' +
+      'based regrowth used by axolotls.',
+    targetedMisconceptions: [],
+    source: REGEN_SRC,
+  },
+  {
+    conceptId: REGEN, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students assume planarians, axolotls, and zebrafish ' +
+      'use entirely different, unrelated regeneration mechanisms, missing that blastema ' +
+      'formation is the SHARED underlying cellular strategy connecting all three despite very ' +
+      'different specific outcomes. Second, students assume mammals lack the biological ' +
+      'machinery for regeneration entirely, missing that mammals retain functional stem cells ' +
+      'and demonstrate some regenerative capacity (liver regeneration) — the limitation is a ' +
+      'trade-off favouring scarring speed, not an absence of capability.',
+    targetedMisconceptions: [`${REGEN}:M1`, `${REGEN}:M2`],
+    source: REGEN_SRC,
+  },
+]
+const REGEN_PROBES: SeedProbe[] = [
+  {
+    conceptId: REGEN, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A newly-discovered organism\'s injury site forms a mass of dedifferentiated, ' +
+      'proliferative cells before regrowing the missing structure. How does this relate to ' +
+      'planarian, axolotl, and zebrafish regeneration?',
+    choices: [
+      { text: 'It is consistent with the same shared blastema-formation mechanism already seen across those organisms', isCorrect: true },
+      { text: 'It must be an entirely different, unrelated mechanism, since the regrown structure differs', isCorrect: false, misconceptionId: `${REGEN}:M1` },
+      { text: 'Regeneration mechanisms cannot be compared across different species', isCorrect: false },
+      { text: 'This indicates the organism cannot actually regenerate', isCorrect: false },
+    ],
+    correctValue: 'It is consistent with the same shared blastema-formation mechanism already seen across those organisms',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${REGEN}:M1`],
+    source: REGEN_SRC,
+  },
+  {
+    conceptId: REGEN, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student says: "Mammals can\'t regenerate limbs like axolotls, so mammals must ' +
+      'completely lack the biological machinery needed for any regeneration at all." Is this ' +
+      'correct?',
+    choices: [
+      {
+        text: 'No — mammals retain stem cells and show some regeneration (e.g. liver ' +
+          'regeneration); the limitation reflects a trade-off favouring rapid scarring, not ' +
+          'missing machinery',
+        isCorrect: true,
+      },
+      {
+        text: 'Yes — mammals entirely lack the biological machinery for any form of regeneration',
+        isCorrect: false,
+        misconceptionId: `${REGEN}:M2`,
+      },
+    ],
+    correctValue: 'No — mammals retain stem cells and show some regeneration (e.g. liver ' +
+      'regeneration); the limitation reflects a trade-off favouring rapid scarring, not missing ' +
+      'machinery',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${REGEN}:M2`],
+    source: REGEN_SRC,
+  },
+  {
+    conceptId: REGEN, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What term describes the mass of dedifferentiated, proliferative cells that forms at ' +
+      'an injury site and then re-differentiates to rebuild a missing structure?',
+    choices: [
+      { text: 'Blastema', isCorrect: true },
+      { text: 'Scar tissue', isCorrect: false },
+      { text: 'Senescent cell mass', isCorrect: false },
+    ],
+    correctValue: 'Blastema',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: REGEN_SRC,
+  },
+]
+
 export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...SCIMETH_EXPLANATIONS,
   ...UNITHEMES_EXPLANATIONS,
@@ -7312,6 +7599,9 @@ export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...AGFORENSIC_EXPLANATIONS,
   ...BIOPROCESS_EXPLANATIONS,
   ...GENETHERAPY_EXPLANATIONS,
+  ...AGING_EXPLANATIONS,
+  ...ORGANOGEN_EXPLANATIONS,
+  ...REGEN_EXPLANATIONS,
 ]
 
 export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
@@ -7390,4 +7680,7 @@ export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
   ...AGFORENSIC_PROBES,
   ...BIOPROCESS_PROBES,
   ...GENETHERAPY_PROBES,
+  ...AGING_PROBES,
+  ...ORGANOGEN_PROBES,
+  ...REGEN_PROBES,
 ]
