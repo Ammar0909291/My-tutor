@@ -4692,6 +4692,287 @@ const QUANTSYS_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── bio.cell.cell-adhesion-tissue-organization ──────────────────────────────
+const ADHESION = 'bio.cell.cell-adhesion-tissue-organization'
+const ADHESION_SRC = 'educational-brain/concepts/biology/bio.cell.cell-adhesion-tissue-organization.md'
+const ADHESION_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ADHESION, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Cadherins, selectins, and integrins each have a distinct binding logic. Cadherins bind ' +
+      'HOMOPHILICALLY to identical cadherins on an adjacent cell — the basis for stable tissue ' +
+      'cohesion. Selectins bind specific CARBOHYDRATE structures — the basis for transient ' +
+      '"catch-and-roll" adhesion (white blood cells rolling along vessel walls). Integrins bind ' +
+      'EXTRACELLULAR MATRIX proteins — the basis for cell-to-matrix anchoring. Epithelial- ' +
+      'mesenchymal transition (EMT) is a REVERSIBLE loss of cell-cell adhesion and polarity, ' +
+      'letting epithelial cells become migratory; mesenchymal-epithelial transition (MET) ' +
+      'reverses it. This SAME adhesion-loss mechanism underlies both normal processes ' +
+      '(gastrulation, wound healing, tightly regulated) and cancer invasion (the same ' +
+      'mechanism, pathologically dysregulated and not reversed).',
+    targetedMisconceptions: [],
+    source: ADHESION_SRC,
+  },
+  {
+    conceptId: ADHESION, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students treat cadherins, selectins, and integrins as ' +
+      'interchangeable "adhesion molecules," missing their specific binding partners — identical ' +
+      'cadherins, carbohydrates, or matrix proteins respectively. Second, students treat EMT as a ' +
+      'permanent, one-way cell-fate change, missing that MET reverses it, which is exactly what ' +
+      'makes EMT/MET a controllable developmental and repair tool rather than a terminal ' +
+      'commitment.',
+    targetedMisconceptions: [`${ADHESION}:M1`, `${ADHESION}:M2`],
+    source: ADHESION_SRC,
+  },
+]
+const ADHESION_PROBES: SeedProbe[] = [
+  {
+    conceptId: ADHESION, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A circulating white blood cell begins to stick transiently and roll along a blood ' +
+      'vessel wall during inflammation. Which adhesion molecule family is most likely responsible?',
+    choices: [
+      { text: 'Selectins — transient binding to specific carbohydrate structures', isCorrect: true },
+      { text: 'Cadherins, since all adhesion molecules work identically', isCorrect: false, misconceptionId: `${ADHESION}:M1` },
+      { text: 'Integrins, since they mediate all cell-to-cell adhesion', isCorrect: false, misconceptionId: `${ADHESION}:M1` },
+      { text: 'None of these molecule families are involved in this process', isCorrect: false },
+    ],
+    correctValue: 'Selectins — transient binding to specific carbohydrate structures',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${ADHESION}:M1`],
+    source: ADHESION_SRC,
+  },
+  {
+    conceptId: ADHESION, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A cell that migrated during wound healing later settles down and rejoins an organised ' +
+      'epithelial sheet. A student says the cell must have "stayed mesenchymal forever" since EMT ' +
+      'is permanent. What is the best response?',
+    choices: [
+      {
+        text: 'Wrong — EMT is reversible; the cell underwent MET (mesenchymal-epithelial ' +
+          'transition) to regain adhesion and polarity',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — once a cell undergoes EMT, it can never return to an epithelial state',
+        isCorrect: false,
+        misconceptionId: `${ADHESION}:M2`,
+      },
+    ],
+    correctValue: 'Wrong — EMT is reversible; the cell underwent MET (mesenchymal-epithelial ' +
+      'transition) to regain adhesion and polarity',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${ADHESION}:M2`],
+    source: ADHESION_SRC,
+  },
+  {
+    conceptId: ADHESION, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What is the essential difference between adhesion loss in normal wound healing versus ' +
+      'in cancer invasion?',
+    choices: [
+      { text: 'The same underlying mechanism is tightly regulated and reversed in wound healing, but pathologically dysregulated in cancer', isCorrect: true },
+      { text: 'Wound healing and cancer invasion use completely unrelated molecular mechanisms', isCorrect: false },
+      { text: 'Cancer invasion does not actually involve any loss of cell adhesion', isCorrect: false },
+    ],
+    correctValue: 'The same underlying mechanism is tightly regulated and reversed in wound healing, but pathologically dysregulated in cancer',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: ADHESION_SRC,
+  },
+]
+
+// ─── bio.mol.chromatin-structure-genome-organization ─────────────────────────
+const CHROMATIN = 'bio.mol.chromatin-structure-genome-organization'
+const CHROMATIN_SRC = 'educational-brain/concepts/biology/bio.mol.chromatin-structure-genome-organization.md'
+const CHROMATIN_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CHROMATIN, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The nucleosome (a histone octamer with DNA wound around it, connected by linker DNA) is ' +
+      'the FIRST, most basic level of DNA packaging — "beads on a string" — with further ' +
+      'higher-order folding into 30 nm fibres and loops beyond it. The genome is further ' +
+      'organised into topologically associating domains (TADs): regions where DNA interacts ' +
+      'frequently within the domain but rarely across a boundary, maintained by chromatin loop ' +
+      'anchors (CTCF, cohesin). Critically, an enhancer\'s ability to regulate a gene depends on ' +
+      'PHYSICAL PROXIMITY in 3D space (via chromatin looping, constrained by TAD boundaries), NOT ' +
+      'linear DNA distance — two regions far apart linearly can be looped into close physical ' +
+      'contact, while two regions close linearly can be kept apart by a TAD boundary. This 3D ' +
+      'architecture is a SEPARATE, structural layer of regulation, distinct from the chemical ' +
+      'marks (DNA methylation, histone modifications) covered in epigenetics.',
+    targetedMisconceptions: [],
+    source: CHROMATIN_SRC,
+  },
+  {
+    conceptId: CHROMATIN, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students assume enhancer-gene regulation depends on linear ' +
+      'DNA distance, missing that DNA is extensively folded in 3D, so physical proximity (via ' +
+      'chromatin looping and TAD membership) — not linear distance — determines whether contact ' +
+      'is even possible. Second, students conflate 3D genome architecture (TADs, loops) with ' +
+      'epigenetic chemical marks, missing that these are genuinely distinct, complementary layers ' +
+      '— a gene with "open" epigenetic marks can still be blocked from activation if a TAD ' +
+      'boundary keeps it apart from its enhancer.',
+    targetedMisconceptions: [`${CHROMATIN}:M1`, `${CHROMATIN}:M2`],
+    source: CHROMATIN_SRC,
+  },
+]
+const CHROMATIN_PROBES: SeedProbe[] = [
+  {
+    conceptId: CHROMATIN, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Enhancer A is far from its target gene in linear DNA distance but within the SAME TAD; ' +
+      'enhancer B is close in linear distance but separated by a TAD boundary. Which enhancer is ' +
+      'more likely to actually regulate the gene?',
+    choices: [
+      { text: 'Enhancer A — physical 3D proximity within the same TAD, not linear distance, determines regulatory contact', isCorrect: true },
+      { text: 'Enhancer B, since linear distance is what determines regulatory contact', isCorrect: false, misconceptionId: `${CHROMATIN}:M1` },
+      { text: 'Both enhancers are equally likely to regulate the gene', isCorrect: false, misconceptionId: `${CHROMATIN}:M1` },
+      { text: 'Neither enhancer can regulate the gene under any circumstances', isCorrect: false },
+    ],
+    correctValue: 'Enhancer A — physical 3D proximity within the same TAD, not linear distance, determines regulatory contact',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${CHROMATIN}:M1`],
+    source: CHROMATIN_SRC,
+  },
+  {
+    conceptId: CHROMATIN, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A gene has "open," permissive epigenetic marks but is separated from a potential ' +
+      'enhancer by a TAD boundary. A student says this guarantees the gene will be activated. What ' +
+      'is the best response?',
+    choices: [
+      {
+        text: 'Not guaranteed — TADs and epigenetic marks are separate regulatory layers; the ' +
+          'TAD boundary can still block enhancer contact regardless of epigenetic state',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — TADs and epigenetic marks are the same mechanism, so open marks guarantee activation',
+        isCorrect: false,
+        misconceptionId: `${CHROMATIN}:M2`,
+      },
+    ],
+    correctValue: 'Not guaranteed — TADs and epigenetic marks are separate regulatory layers; the ' +
+      'TAD boundary can still block enhancer contact regardless of epigenetic state',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${CHROMATIN}:M2`],
+    source: CHROMATIN_SRC,
+  },
+  {
+    conceptId: CHROMATIN, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What is the FIRST, most basic level of DNA packaging in the nucleus?',
+    choices: [
+      { text: 'The nucleosome (histone octamer plus wrapped DNA)', isCorrect: true },
+      { text: 'The topologically associating domain (TAD)', isCorrect: false },
+      { text: 'The 30 nm fibre', isCorrect: false },
+    ],
+    correctValue: 'The nucleosome (histone octamer plus wrapped DNA)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: CHROMATIN_SRC,
+  },
+]
+
+// ─── bio.micro.microbial-metabolism-diversity ────────────────────────────────
+const MICROMETAB = 'bio.micro.microbial-metabolism-diversity'
+const MICROMETAB_SRC = 'educational-brain/concepts/biology/bio.micro.microbial-metabolism-diversity.md'
+const MICROMETAB_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: MICROMETAB, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Chemoautotrophy and photoautotrophy are both forms of autotrophy but differ in energy ' +
+      'SOURCE: chemoautotrophy derives energy from oxidising inorganic chemicals (hydrogen ' +
+      'sulfide, ammonia, iron compounds); photoautotrophy derives energy from light. Bacterial ' +
+      'photoautotrophy extends beyond plant-style oxygenic photosynthesis — purple and green ' +
+      'sulfur bacteria perform ANOXYGENIC photosynthesis using electron donors other than water ' +
+      '(e.g., hydrogen sulfide), releasing NO oxygen, a genuinely different biochemical pathway. ' +
+      'Anaerobic respiration uses the SAME general electron-transport-chain mechanism as aerobic ' +
+      'respiration but substitutes an ALTERNATIVE terminal electron acceptor (nitrate, sulfate, ' +
+      'or CO2) for oxygen. This overall metabolic versatility is the CAUSAL basis of extremophile ' +
+      'survival: alternative pathways provide viable energy generation in environments lacking ' +
+      'light, oxygen, or organic carbon.',
+    targetedMisconceptions: [],
+    source: MICROMETAB_SRC,
+  },
+  {
+    conceptId: MICROMETAB, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students assume all photosynthesis follows the plant-style ' +
+      'oxygenic pathway, missing that purple and green sulfur bacteria perform anoxygenic ' +
+      'photosynthesis using different electron donors and release no oxygen — a genuinely ' +
+      'different biochemical pathway, still photosynthesis. Second, students treat anaerobic ' +
+      'respiration as an entirely different process from aerobic respiration, missing that the ' +
+      'key difference is specifically WHICH molecule serves as the terminal electron acceptor, not ' +
+      'a wholesale different mechanism.',
+    targetedMisconceptions: [`${MICROMETAB}:M1`, `${MICROMETAB}:M2`],
+    source: MICROMETAB_SRC,
+  },
+]
+const MICROMETAB_PROBES: SeedProbe[] = [
+  {
+    conceptId: MICROMETAB, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A bacterium captures light energy but releases no oxygen as a byproduct. Does this ' +
+      'qualify as photosynthesis?',
+    choices: [
+      { text: 'Yes — this describes anoxygenic photosynthesis, a genuinely different biochemical pathway from plant-style photosynthesis', isCorrect: true },
+      { text: 'No — photosynthesis by definition always releases oxygen', isCorrect: false, misconceptionId: `${MICROMETAB}:M1` },
+      { text: 'No, since only plants can perform photosynthesis', isCorrect: false, misconceptionId: `${MICROMETAB}:M1` },
+      { text: 'This can only be chemoautotrophy, never photosynthesis', isCorrect: false },
+    ],
+    correctValue: 'Yes — this describes anoxygenic photosynthesis, a genuinely different biochemical pathway from plant-style photosynthesis',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${MICROMETAB}:M1`],
+    source: MICROMETAB_SRC,
+  },
+  {
+    conceptId: MICROMETAB, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student says anaerobic respiration (using sulfate as a terminal electron acceptor) is ' +
+      '"a totally different process from aerobic respiration." What is the best response?',
+    choices: [
+      {
+        text: 'Wrong — both use the same general electron-transport-chain mechanism; the key ' +
+          'difference is specifically which molecule serves as the terminal electron acceptor',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — anaerobic and aerobic respiration share no underlying mechanism at all',
+        isCorrect: false,
+        misconceptionId: `${MICROMETAB}:M2`,
+      },
+    ],
+    correctValue: 'Wrong — both use the same general electron-transport-chain mechanism; the key ' +
+      'difference is specifically which molecule serves as the terminal electron acceptor',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${MICROMETAB}:M2`],
+    source: MICROMETAB_SRC,
+  },
+  {
+    conceptId: MICROMETAB, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What specific energy source distinguishes chemoautotrophy from photoautotrophy?',
+    choices: [
+      { text: 'Oxidation of inorganic chemicals (chemoautotrophy) versus light (photoautotrophy)', isCorrect: true },
+      { text: 'Organic carbon consumption versus inorganic chemical oxidation', isCorrect: false },
+      { text: 'There is no real difference between the two strategies', isCorrect: false },
+    ],
+    correctValue: 'Oxidation of inorganic chemicals (chemoautotrophy) versus light (photoautotrophy)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: MICROMETAB_SRC,
+  },
+]
+
 export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...SCIMETH_EXPLANATIONS,
   ...UNITHEMES_EXPLANATIONS,
@@ -4741,6 +5022,9 @@ export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...JUNCTIONS_EXPLANATIONS,
   ...SPLICING_EXPLANATIONS,
   ...QUANTSYS_EXPLANATIONS,
+  ...ADHESION_EXPLANATIONS,
+  ...CHROMATIN_EXPLANATIONS,
+  ...MICROMETAB_EXPLANATIONS,
 ]
 
 export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
@@ -4792,4 +5076,7 @@ export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
   ...JUNCTIONS_PROBES,
   ...SPLICING_PROBES,
   ...QUANTSYS_PROBES,
+  ...ADHESION_PROBES,
+  ...CHROMATIN_PROBES,
+  ...MICROMETAB_PROBES,
 ]

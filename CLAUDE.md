@@ -408,7 +408,18 @@ already served; preserves the KG's `math.de.ode` and `math.calc.partial-
 derivatives` cross-subject links) validated clean: `tsc --noEmit` 0 errors,
 dry-run 0 duplicate identities across 8,481 items, contract audit 156/199
 authored, 156/156 at contract, 0 short, 0 never-quizzable, 40/40 targeted
-vitest suites passing. **Extended 91: 48/91.** Production convergence (seed
+vitest suites passing. Batch 17 (2026-09-21, 3 concepts:
+`bio.cell.cell-adhesion-tissue-organization` — its sole prerequisite batch
+16's `bio.cell.cell-junctions-extracellular-matrix`, now served; opens
+`bio.cell.cancer-biology-hallmarks` — `bio.mol.chromatin-structure-genome-
+organization` — prerequisites `bio.mol.epigenetics` and
+`bio.cell.nucleus-chromosomes`, both already served — and
+`bio.micro.microbial-metabolism-diversity` — its sole prerequisite
+`bio.micro.microbial-diversity`, already served; opens
+`bio.micro.archaea-extremophiles`) validated clean: `tsc --noEmit` 0 errors,
+dry-run 0 duplicate identities across 8,496 items, contract audit 159/199
+authored, 159/159 at contract, 0 short, 0 never-quizzable, 40/40 targeted
+vitest suites passing. **Extended 91: 51/91.** Production convergence (seed
 corpus → cold-start bootstrap → live
 AssetIdentity rows) is UNVERIFIED against the real database this campaign so
 far — no Supabase/DB access has been used;
