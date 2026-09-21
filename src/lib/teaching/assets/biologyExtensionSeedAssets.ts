@@ -2160,6 +2160,287 @@ const FISHAMPH_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── bio.div.reptile-bird-diversity ───────────────────────────────────────────
+const REPTBIRD = 'bio.div.reptile-bird-diversity'
+const REPTBIRD_SRC = 'educational-brain/concepts/biology/bio.div.reptile-bird-diversity.md'
+const REPTBIRD_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: REPTBIRD, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The amniotic egg is the specific innovation that solved amphibians\' remaining aquatic- ' +
+      'reproduction limitation: internal protective membranes (including the amnion, a ' +
+      'fluid-filled internal environment) enclosed within a desiccation-resistant shell let the ' +
+      'embryo develop without the egg being laid in water. Reptile diversity spans squamates ' +
+      '(lizards, snakes), turtles, and crocodilians, all unified by this innovation. Critically, ' +
+      'birds are NOT a separate lineage merely related to dinosaurs — birds are NESTED WITHIN ' +
+      'Reptilia, specifically within theropod dinosaurs, meaning birds are technically a ' +
+      'surviving dinosaur (and reptile) lineage, a precise phylogenetic claim supported by ' +
+      'fossil and molecular evidence. Birds\' skeletal (lightweight, pneumatic bones), ' +
+      'respiratory (efficient unidirectional airflow via air sacs), and metabolic (high ' +
+      'metabolic rate) adaptations each trace to a specific functional demand of powered ' +
+      'flight: reduced mass, efficient oxygen delivery, and sustained energy output.',
+    targetedMisconceptions: [],
+    source: REPTBIRD_SRC,
+  },
+  {
+    conceptId: REPTBIRD, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students treat birds as a separate lineage that merely ' +
+      'shares an ancestor with dinosaurs/reptiles, missing the precise nested claim: birds ARE a ' +
+      'surviving theropod dinosaur lineage, not just a related "cousin" group. Second, students ' +
+      'memorise bird flight adaptations (light bones, efficient airflow, high metabolism) as an ' +
+      'unconnected list of facts, missing that each adaptation traces to a specific functional ' +
+      'demand of powered flight — reduced mass, efficient oxygen delivery, or sustained energy ' +
+      'output.',
+    targetedMisconceptions: [`${REPTBIRD}:M1`, `${REPTBIRD}:M2`],
+    source: REPTBIRD_SRC,
+  },
+]
+const REPTBIRD_PROBES: SeedProbe[] = [
+  {
+    conceptId: REPTBIRD, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is it more phylogenetically accurate to say birds are "related to" dinosaurs, or that ' +
+      'birds "are" a type of dinosaur?',
+    choices: [
+      { text: 'Birds ARE a surviving lineage of theropod dinosaurs — a nested relationship', isCorrect: true },
+      { text: 'Birds are merely related to dinosaurs, having split from a shared ancestor', isCorrect: false, misconceptionId: `${REPTBIRD}:M1` },
+      { text: 'Birds and dinosaurs are unrelated groups that evolved flight independently', isCorrect: false, misconceptionId: `${REPTBIRD}:M1` },
+      { text: 'The phylogenetic relationship between birds and dinosaurs is unknown', isCorrect: false },
+    ],
+    correctValue: 'Birds ARE a surviving lineage of theropod dinosaurs — a nested relationship',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${REPTBIRD}:M1`],
+    source: REPTBIRD_SRC,
+  },
+  {
+    conceptId: REPTBIRD, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student lists "hollow bones, efficient breathing, high metabolism" as just random ' +
+      'facts about birds. What is the best response?',
+    choices: [
+      {
+        text: 'Each adaptation solves a specific flight demand: hollow bones reduce mass, ' +
+          'efficient airflow delivers oxygen, high metabolism supplies sustained energy',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — these are simply unconnected facts about birds',
+        isCorrect: false,
+        misconceptionId: `${REPTBIRD}:M2`,
+      },
+    ],
+    correctValue: 'Each adaptation solves a specific flight demand: hollow bones reduce mass, ' +
+      'efficient airflow delivers oxygen, high metabolism supplies sustained energy',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${REPTBIRD}:M2`],
+    source: REPTBIRD_SRC,
+  },
+  {
+    conceptId: REPTBIRD, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What specific problem does the amniotic egg solve that amphibian eggs could not?',
+    choices: [
+      { text: 'It lets the embryo develop without the egg being laid in water', isCorrect: true },
+      { text: 'It makes the embryo grow faster', isCorrect: false },
+      { text: 'It allows the embryo to breathe underwater indefinitely', isCorrect: false },
+    ],
+    correctValue: 'It lets the embryo develop without the egg being laid in water',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: REPTBIRD_SRC,
+  },
+]
+
+// ─── bio.div.mammalian-diversity ─────────────────────────────────────────────
+const MAMMAL = 'bio.div.mammalian-diversity'
+const MAMMAL_SRC = 'educational-brain/concepts/biology/bio.div.mammalian-diversity.md'
+const MAMMAL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: MAMMAL, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Mammalia is defined by four features: hair, mammary glands (producing milk), endothermy, ' +
+      'and a single lower jawbone paired with three middle-ear bones (malleus, incus, stapes) — ' +
+      'some reptilian jaw bones were evolutionarily repurposed into these ear ossicles. ' +
+      'Mammalian reproduction shows three genuinely different, currently-viable solutions within ' +
+      'the SAME clade, not a primitive-to-advanced ladder: monotremes (platypus, echidna) lay ' +
+      'eggs yet still nurse young with milk; marsupials (kangaroos) give birth to live but very ' +
+      'immature young that complete development in a pouch; placental mammals give birth after ' +
+      'a much longer period of internal development via the placenta. Placental mammals\' ' +
+      'subsequent ecological radiation followed a SPECIFIC historical opportunity — ecological ' +
+      'niches opening after the mass extinction that eliminated non-avian dinosaurs — a ' +
+      'contingent historical pattern, not an inevitable outcome.',
+    targetedMisconceptions: [],
+    source: MAMMAL_SRC,
+  },
+  {
+    conceptId: MAMMAL, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students treat monotreme-marsupial-placental as a linear ' +
+      'evolutionary progression from primitive to advanced, missing that all three are currently ' +
+      'viable, fully mammalian solutions coexisting within the same clade — a living platypus is ' +
+      'not "stuck at an earlier stage." Second, students treat placental mammals\' ecological ' +
+      'dominance as inevitable, missing that it reflects a contingent historical opportunity (the ' +
+      'post-extinction ecological space opening up), not a predetermined destiny.',
+    targetedMisconceptions: [`${MAMMAL}:M1`, `${MAMMAL}:M2`],
+    source: MAMMAL_SRC,
+  },
+]
+const MAMMAL_PROBES: SeedProbe[] = [
+  {
+    conceptId: MAMMAL, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is a living platypus (a monotreme) an "earlier stage" of mammalian evolution still ' +
+      'present today?',
+    choices: [
+      { text: 'No — monotremes are a fully modern, currently-viable lineage using a different reproductive strategy', isCorrect: true },
+      { text: 'Yes — monotremes represent a primitive stage that placental mammals evolved past', isCorrect: false, misconceptionId: `${MAMMAL}:M1` },
+      { text: 'Yes, since egg-laying is a reptilian trait retained by less-evolved mammals', isCorrect: false, misconceptionId: `${MAMMAL}:M1` },
+      { text: 'Monotremes are not actually mammals', isCorrect: false },
+    ],
+    correctValue: 'No — monotremes are a fully modern, currently-viable lineage using a different reproductive strategy',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${MAMMAL}:M1`],
+    source: MAMMAL_SRC,
+  },
+  {
+    conceptId: MAMMAL, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student says "placental mammals were always going to become ecologically dominant." ' +
+      'What is the best response?',
+    choices: [
+      {
+        text: 'Wrong — their radiation followed the specific, contingent opportunity of ' +
+          'post-dinosaur-extinction ecological space opening up',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — placental dominance was a predetermined evolutionary destiny',
+        isCorrect: false,
+        misconceptionId: `${MAMMAL}:M2`,
+      },
+    ],
+    correctValue: 'Wrong — their radiation followed the specific, contingent opportunity of ' +
+      'post-dinosaur-extinction ecological space opening up',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${MAMMAL}:M2`],
+    source: MAMMAL_SRC,
+  },
+  {
+    conceptId: MAMMAL, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Beyond hair and endothermy, what specific skeletal feature genuinely defines Mammalia?',
+    choices: [
+      { text: 'A single lower jawbone paired with three middle-ear bones', isCorrect: true },
+      { text: 'A four-chambered heart', isCorrect: false },
+      { text: 'An amniotic egg', isCorrect: false },
+    ],
+    correctValue: 'A single lower jawbone paired with three middle-ear bones',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: MAMMAL_SRC,
+  },
+]
+
+// ─── bio.neuro.sleep-circadian-biology ───────────────────────────────────────
+const SLEEP = 'bio.neuro.sleep-circadian-biology'
+const SLEEP_SRC = 'educational-brain/concepts/biology/bio.neuro.sleep-circadian-biology.md'
+const SLEEP_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SLEEP, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'NREM sleep progresses through stages of increasingly slow, reduced brain-wave activity. ' +
+      'REM sleep, by contrast, is "paradoxical" — its brain activity resembles WAKEFULNESS ' +
+      'despite the person being clearly asleep, and is associated with vivid dreaming and ' +
+      'muscle ATONIA (near-total loss of voluntary muscle tone), which specifically prevents the ' +
+      'body from physically acting out the dream. Separately, the suprachiasmatic nucleus (SCN) ' +
+      'in the hypothalamus is the master circadian pacemaker, receiving light input to entrain ' +
+      'the body\'s roughly-24-hour rhythms. At the molecular level, this ~24-hour period is ' +
+      'GENERATED internally by a negative-feedback loop: CLOCK and BMAL1 proteins activate PER ' +
+      'and CRY gene transcription; accumulated PER/CRY proteins then INHIBIT their own further ' +
+      'production; as PER/CRY levels decline, inhibition lifts and a new cycle begins — the time ' +
+      'delays in this cycle produce the ~24-hour period, a self-sustaining internal oscillator ' +
+      'that external light entrains but does not create.',
+    targetedMisconceptions: [],
+    source: SLEEP_SRC,
+  },
+  {
+    conceptId: SLEEP, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students assume all sleep involves uniformly reduced ' +
+      'brain activity, missing that REM sleep specifically shows wake-like brain activity — ' +
+      'exactly why it is called paradoxical sleep. Second, students assume the ~24-hour ' +
+      'circadian rhythm is created entirely by external light, missing that the CLOCK/BMAL1-PER/ ' +
+      'CRY molecular feedback loop generates the rhythm INTERNALLY; an organism in constant ' +
+      'darkness would still show a roughly 24-hour rhythm (possibly drifting slightly), since ' +
+      'light entrains rather than creates the internal oscillator.',
+    targetedMisconceptions: [`${SLEEP}:M1`, `${SLEEP}:M2`],
+    source: SLEEP_SRC,
+  },
+]
+const SLEEP_PROBES: SeedProbe[] = [
+  {
+    conceptId: SLEEP, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A brain-activity recording from a person confirmed to be asleep looks similar to ' +
+      'wakefulness. What does this most likely indicate?',
+    choices: [
+      { text: 'REM sleep — its paradoxical, wake-like brain activity is a normal signature', isCorrect: true },
+      { text: 'The person must actually be awake', isCorrect: false, misconceptionId: `${SLEEP}:M1` },
+      { text: 'Deep NREM sleep, which always shows the most active brain patterns', isCorrect: false, misconceptionId: `${SLEEP}:M1` },
+      { text: 'A recording error, since all sleep stages show reduced activity', isCorrect: false },
+    ],
+    correctValue: 'REM sleep — its paradoxical, wake-like brain activity is a normal signature',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${SLEEP}:M1`],
+    source: SLEEP_SRC,
+  },
+  {
+    conceptId: SLEEP, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An organism is kept in constant darkness for several weeks, with no light cues at ' +
+      'all. A student predicts its circadian rhythm will disappear entirely. What is the best ' +
+      'response?',
+    choices: [
+      {
+        text: 'Wrong — the molecular clock generates the ~24-hour rhythm internally, so it ' +
+          'would persist (though possibly drifting) even without light',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — without external light, there is no internal mechanism to sustain the rhythm',
+        isCorrect: false,
+        misconceptionId: `${SLEEP}:M2`,
+      },
+    ],
+    correctValue: 'Wrong — the molecular clock generates the ~24-hour rhythm internally, so it ' +
+      'would persist (though possibly drifting) even without light',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${SLEEP}:M2`],
+    source: SLEEP_SRC,
+  },
+  {
+    conceptId: SLEEP, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What specific functional purpose does muscle atonia serve during REM sleep?',
+    choices: [
+      { text: 'It prevents the body from physically acting out vivid dream content', isCorrect: true },
+      { text: 'It conserves energy during the deepest stage of NREM sleep', isCorrect: false },
+      { text: 'It synchronises the suprachiasmatic nucleus to light cues', isCorrect: false },
+    ],
+    correctValue: 'It prevents the body from physically acting out vivid dream content',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: SLEEP_SRC,
+  },
+]
+
 export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...SCIMETH_EXPLANATIONS,
   ...UNITHEMES_EXPLANATIONS,
@@ -2182,6 +2463,9 @@ export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...ANIMCOG_EXPLANATIONS,
   ...NEURODEG_EXPLANATIONS,
   ...FISHAMPH_EXPLANATIONS,
+  ...REPTBIRD_EXPLANATIONS,
+  ...MAMMAL_EXPLANATIONS,
+  ...SLEEP_EXPLANATIONS,
 ]
 
 export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
@@ -2206,4 +2490,7 @@ export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
   ...ANIMCOG_PROBES,
   ...NEURODEG_PROBES,
   ...FISHAMPH_PROBES,
+  ...REPTBIRD_PROBES,
+  ...MAMMAL_PROBES,
+  ...SLEEP_PROBES,
 ]
