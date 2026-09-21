@@ -53,6 +53,12 @@
  * original 108), and `bio.behav.innate-behavior-instinct` (the root of the
  * `bio.behav` domain gap — its sole prerequisite, `bio.physio.nervous-
  * system`, is one of the original 108).
+ * Batch 2 (2026-09-21, 3 concepts): `bio.behav.animal-communication` (now
+ * ready — its sole prerequisite, batch 1's `bio.behav.innate-behavior-
+ * instinct`, is served), `bio.neuro.brain-regional-organization` (the root
+ * of the `bio.neuro` domain gap — opens five further concepts), and
+ * `bio.div.animal-body-plans-symmetry` (the root of the `bio.div` domain
+ * gap — opens `bio.div.invertebrate-diversity-major-phyla`).
  */
 import { GradeBand, ProbeDifficulty } from '@prisma/client'
 import type { SeedExplanation, SeedProbe } from './brainSeedAssets'
@@ -377,14 +383,328 @@ const INNATEBEH_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── bio.behav.animal-communication ─────────────────────────────────────────
+const ANIMCOMM = 'bio.behav.animal-communication'
+const ANIMCOMM_SRC = 'educational-brain/concepts/biology/bio.behav.animal-communication.md'
+const ANIMCOMM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ANIMCOMM, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Animal communication uses several signal modalities, each with different transmission ' +
+      'properties. Visual signals (displays, coloration, posture) transmit rapidly and can be ' +
+      'highly detailed, but require a direct line of sight and only work over short distances. ' +
+      'Auditory signals (calls, songs) travel farther, around obstacles, and work in the dark ' +
+      'or dense vegetation where visual signals fail. Chemical (pheromone) signals persist over ' +
+      'time and travel via air or water currents over long distances, but transmit information ' +
+      'more slowly and with less precision. A signal\'s evolutionary stability as an honest ' +
+      'indicator of quality is explained by the handicap principle: a signal\'s reliability ' +
+      'comes specifically FROM its being costly to produce, not despite that cost. A genuinely ' +
+      'high-quality individual can afford a substantial signalling cost while remaining in good ' +
+      'condition; a lower-quality individual attempting the same costly signal would suffer ' +
+      'real detriment — this differential cost-bearing capacity is precisely what keeps the ' +
+      'signal honest, since cheating is simply not affordable for a low-quality individual. ' +
+      'Communication serves varied functions across territorial (occupancy, deterring ' +
+      'intrusion), social (coordinating group behaviour), and mating (communicating quality) ' +
+      'contexts.',
+    targetedMisconceptions: [],
+    source: ANIMCOMM_SRC,
+  },
+  {
+    conceptId: ANIMCOMM, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students often think a costly signal (like a peacock\'s ' +
+      'tail) persists DESPITE its cost, as an unfortunate side effect — but the handicap ' +
+      'principle says the cost IS the mechanism that keeps the signal honest: only a genuinely ' +
+      'high-quality individual can afford to pay it without real detriment, so the cost itself ' +
+      'prevents low-quality individuals from faking it. Second, students often treat visual, ' +
+      'auditory, and chemical signals as interchangeable — but each has distinct transmission ' +
+      'properties suited to different needs: visual is fast and detailed but needs a clear line ' +
+      'of sight; auditory travels farther and works in darkness; chemical persists and travels ' +
+      'far but is slower to interpret. Checking the specific trade-off a species needs explains ' +
+      'why one modality is favoured over another.',
+    targetedMisconceptions: [`${ANIMCOMM}:M1`, `${ANIMCOMM}:M2`],
+    source: ANIMCOMM_SRC,
+  },
+]
+const ANIMCOMM_PROBES: SeedProbe[] = [
+  {
+    conceptId: ANIMCOMM, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Which signal modality is best suited for a nocturnal animal living in dense vegetation?',
+    choices: [
+      { text: 'Auditory or chemical signals, since they do not require a direct line of sight', isCorrect: true },
+      { text: 'Visual signals, since they transmit information the fastest', isCorrect: false, misconceptionId: `${ANIMCOMM}:M2` },
+      { text: 'All three modalities work equally well in any habitat', isCorrect: false, misconceptionId: `${ANIMCOMM}:M2` },
+      { text: 'None of the modalities would function in this habitat', isCorrect: false },
+    ],
+    correctValue: 'Auditory or chemical signals, since they do not require a direct line of sight',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${ANIMCOMM}:M2`],
+    source: ANIMCOMM_SRC,
+  },
+  {
+    conceptId: ANIMCOMM, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student says "a peacock\'s costly tail persists in evolution despite its high cost, ' +
+      'as a tolerated inefficiency." What is the best response?',
+    choices: [
+      {
+        text: 'Wrong — the cost itself is what makes the signal honest, since only high-quality ' +
+          'males can afford it without real detriment',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — the cost is an unfortunate side effect natural selection has not yet removed',
+        isCorrect: false,
+        misconceptionId: `${ANIMCOMM}:M1`,
+      },
+    ],
+    correctValue: 'Wrong — the cost itself is what makes the signal honest, since only high-quality ' +
+      'males can afford it without real detriment',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${ANIMCOMM}:M1`],
+    source: ANIMCOMM_SRC,
+  },
+  {
+    conceptId: ANIMCOMM, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A costly signal suddenly becomes cheap for every individual in a population to ' +
+      'produce. What happens to its reliability as an honest indicator of quality?',
+    choices: [
+      {
+        text: 'It loses reliability, since low-quality individuals can now also afford to produce it',
+        isCorrect: true,
+      },
+      { text: 'It stays equally reliable, since the signal itself has not changed', isCorrect: false, misconceptionId: `${ANIMCOMM}:M1` },
+      { text: 'It becomes MORE reliable, since more individuals can now display it', isCorrect: false, misconceptionId: `${ANIMCOMM}:M1` },
+    ],
+    correctValue: 'It loses reliability, since low-quality individuals can now also afford to produce it',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ANIMCOMM}:M1`],
+    source: ANIMCOMM_SRC,
+  },
+]
+
+// ─── bio.neuro.brain-regional-organization ──────────────────────────────────
+const BRAINREG = 'bio.neuro.brain-regional-organization'
+const BRAINREG_SRC = 'educational-brain/concepts/biology/bio.neuro.brain-regional-organization.md'
+const BRAINREG_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: BRAINREG, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The brain can be organised by a broad developmental scheme into three major divisions. ' +
+      'The forebrain includes the cerebral cortex, limbic system, and structures for higher ' +
+      'cognition, sensory processing, and emotional regulation. The midbrain relays and ' +
+      'processes visual/auditory reflexes and some movement coordination. The hindbrain ' +
+      '(medulla, pons, cerebellum) governs vital autonomic functions (breathing, heart rate via ' +
+      'the medulla) and movement coordination (via the cerebellum). Operating at a DIFFERENT ' +
+      'structural scale, the cerebral cortex (part of the forebrain) is itself divided into ' +
+      'four lobes: the frontal lobe (planning, decision-making, voluntary movement initiation), ' +
+      'the parietal lobe (sensory integration, spatial processing), the temporal lobe (auditory ' +
+      'processing, memory, language), and the occipital lobe (visual processing). The lobes are ' +
+      'a further subdivision WITHIN the forebrain, not a competing classification. The limbic ' +
+      'system (emotion and memory) is not one discrete structure — it is a functionally-defined ' +
+      'set of interconnected structures (including the hippocampus and amygdala) spanning ' +
+      'multiple brain regions, grouped by their shared functional role. The cerebellum ' +
+      'specifically contributes to the fine coordination and timing of movement already ' +
+      'initiated elsewhere (not initiation itself, a frontal-lobe function); the brainstem ' +
+      'governs vital, largely automatic functions like breathing and heart rate.',
+    targetedMisconceptions: [],
+    source: BRAINREG_SRC,
+  },
+  {
+    conceptId: BRAINREG, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common here. First, students often treat the forebrain/midbrain/' +
+      'hindbrain scheme and the cortex\'s four lobes as competing classifications of the same ' +
+      'structures — but the four lobes are a FURTHER subdivision specifically WITHIN the ' +
+      'forebrain, at a finer scale, not a fourth parallel division. The frontal lobe belongs to ' +
+      'BOTH schemes at once, at different zoom levels. Second, students often picture the ' +
+      'limbic system as one single, compact structure like the cerebellum — but "limbic system" ' +
+      'is a FUNCTIONAL grouping of interconnected structures (hippocampus, amygdala, and ' +
+      'others) located in different brain regions, grouped because of their shared role in ' +
+      'emotion and memory, not because they form one continuous anatomical unit.',
+    targetedMisconceptions: [`${BRAINREG}:M1`, `${BRAINREG}:M2`],
+    source: BRAINREG_SRC,
+  },
+]
+const BRAINREG_PROBES: SeedProbe[] = [
+  {
+    conceptId: BRAINREG, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is the frontal lobe part of the forebrain, or a separate division from it?',
+    choices: [
+      { text: 'Part of the forebrain — the four lobes are a finer subdivision within it', isCorrect: true },
+      { text: 'A separate, fourth division alongside forebrain, midbrain, and hindbrain', isCorrect: false, misconceptionId: `${BRAINREG}:M1` },
+      { text: 'Part of the hindbrain', isCorrect: false },
+      { text: 'Part of the midbrain', isCorrect: false },
+    ],
+    correctValue: 'Part of the forebrain — the four lobes are a finer subdivision within it',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${BRAINREG}:M1`],
+    source: BRAINREG_SRC,
+  },
+  {
+    conceptId: BRAINREG, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student says "the limbic system is one single, compact brain structure, just like ' +
+      'the cerebellum." What is the best response?',
+    choices: [
+      {
+        text: 'Wrong — the limbic system is a functionally-defined set of interconnected ' +
+          'structures spanning multiple brain regions, not one compact structure',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — the limbic system is a single, self-contained anatomical structure',
+        isCorrect: false,
+        misconceptionId: `${BRAINREG}:M2`,
+      },
+    ],
+    correctValue: 'Wrong — the limbic system is a functionally-defined set of interconnected ' +
+      'structures spanning multiple brain regions, not one compact structure',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${BRAINREG}:M2`],
+    source: BRAINREG_SRC,
+  },
+  {
+    conceptId: BRAINREG, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A patient has damage limited to the cerebellum but not the frontal lobe. Which is the ' +
+      'more likely outcome?',
+    choices: [
+      {
+        text: 'The patient can still initiate voluntary movements but has poor fine coordination and timing',
+        isCorrect: true,
+      },
+      { text: 'The patient can no longer initiate any voluntary movement at all', isCorrect: false },
+      { text: 'The patient loses the ability to breathe or regulate heart rate automatically', isCorrect: false },
+    ],
+    correctValue: 'The patient can still initiate voluntary movements but has poor fine coordination and timing',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: BRAINREG_SRC,
+  },
+]
+
+// ─── bio.div.animal-body-plans-symmetry ─────────────────────────────────────
+const BODYPLAN = 'bio.div.animal-body-plans-symmetry'
+const BODYPLAN_SRC = 'educational-brain/concepts/biology/bio.div.animal-body-plans-symmetry.md'
+const BODYPLAN_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: BODYPLAN, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Radial symmetry (body parts arranged around a central axis) and bilateral symmetry (one ' +
+      'plane divides the body into mirror-image halves) are organisational strategies with ' +
+      'different functional implications, not arbitrary shapes. Radial symmetry suits sessile ' +
+      'or slow-moving organisms encountering their environment from any direction equally ' +
+      '(many cnidarians). Bilateral symmetry is strongly associated with cephalisation ' +
+      '(concentrating sensory organs and a nervous-system control centre at one end, forming a ' +
+      'head) and directional movement — a leading end benefits from concentrated sensory ' +
+      'detection. Diploblastic organisms develop from two germ layers (ectoderm, endoderm); ' +
+      'triploblastic organisms develop from three (adding mesoderm), which enables more complex ' +
+      'internal structures (muscles, circulatory systems, body cavities). Among triploblastic ' +
+      'animals: acoelomates have no significant body cavity; pseudocoelomates have a cavity ' +
+      'only partially lined by mesoderm; coelomates have a true coelom fully lined by mesoderm, ' +
+      'giving organs more room to develop and move independently. Protostome versus ' +
+      'deuterostome development marks a deep phylogenetic split defined by the fate of the ' +
+      'blastopore (the first opening formed in gastrulation): in protostomes it becomes the ' +
+      'mouth; in deuterostomes it becomes the anus, with the mouth forming separately.',
+    targetedMisconceptions: [],
+    source: BODYPLAN_SRC,
+  },
+  {
+    conceptId: BODYPLAN, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students treat radial and bilateral symmetry as arbitrary ' +
+      'shape labels rather than connecting each to its functional consequence: bilateral ' +
+      'symmetry correlates with cephalisation and directional movement; radial symmetry suits ' +
+      'organisms with no functional "front." Second, students treat protostome/deuterostome as ' +
+      'an arbitrary classification label rather than a specific, observable embryonic event — ' +
+      'the fate of the blastopore. Tracing that specific developmental fact (does the first ' +
+      'opening become the mouth or the anus?) is what actually determines the classification, ' +
+      'not a vague impression.',
+    targetedMisconceptions: [`${BODYPLAN}:M1`, `${BODYPLAN}:M2`],
+    source: BODYPLAN_SRC,
+  },
+]
+const BODYPLAN_PROBES: SeedProbe[] = [
+  {
+    conceptId: BODYPLAN, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Which body-cavity type describes an animal whose body cavity is completely lined by mesoderm?',
+    choices: [
+      { text: 'Coelomate', isCorrect: true },
+      { text: 'Pseudocoelomate', isCorrect: false },
+      { text: 'Acoelomate', isCorrect: false },
+      { text: 'Diploblastic', isCorrect: false },
+    ],
+    correctValue: 'Coelomate',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [],
+    source: BODYPLAN_SRC,
+  },
+  {
+    conceptId: BODYPLAN, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student says "protostome and deuterostome are just arbitrary labels — there\'s no ' +
+      'specific fact behind the classification." What is the best response?',
+    choices: [
+      {
+        text: 'Wrong — the classification is based on a specific embryonic event: the fate of ' +
+          'the blastopore (mouth in protostomes, anus in deuterostomes)',
+        isCorrect: true,
+      },
+      { text: 'Correct — the labels are assigned without a specific defining criterion', isCorrect: false, misconceptionId: `${BODYPLAN}:M2` },
+    ],
+    correctValue: 'Wrong — the classification is based on a specific embryonic event: the fate of ' +
+      'the blastopore (mouth in protostomes, anus in deuterostomes)',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${BODYPLAN}:M2`],
+    source: BODYPLAN_SRC,
+  },
+  {
+    conceptId: BODYPLAN, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A sessile marine animal encounters food and threats equally from every direction. ' +
+      'Which symmetry type would be functionally favoured, and why?',
+    choices: [
+      {
+        text: 'Radial symmetry — there is no functional advantage to a "front" end when threats ' +
+          'and food come from every direction equally',
+        isCorrect: true,
+      },
+      { text: 'Bilateral symmetry — cephalisation always improves survival regardless of lifestyle', isCorrect: false, misconceptionId: `${BODYPLAN}:M1` },
+      { text: 'Neither symmetry type has any functional consequence', isCorrect: false, misconceptionId: `${BODYPLAN}:M1` },
+    ],
+    correctValue: 'Radial symmetry — there is no functional advantage to a "front" end when threats ' +
+      'and food come from every direction equally',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${BODYPLAN}:M1`],
+    source: BODYPLAN_SRC,
+  },
+]
+
 export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...SCIMETH_EXPLANATIONS,
   ...UNITHEMES_EXPLANATIONS,
   ...INNATEBEH_EXPLANATIONS,
+  ...ANIMCOMM_EXPLANATIONS,
+  ...BRAINREG_EXPLANATIONS,
+  ...BODYPLAN_EXPLANATIONS,
 ]
 
 export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
   ...SCIMETH_PROBES,
   ...UNITHEMES_PROBES,
   ...INNATEBEH_PROBES,
+  ...ANIMCOMM_PROBES,
+  ...BRAINREG_PROBES,
+  ...BODYPLAN_PROBES,
 ]

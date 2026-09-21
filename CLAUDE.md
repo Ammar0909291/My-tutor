@@ -272,9 +272,18 @@ method-in-biology`, `bio.found.unifying-themes-in-biology` — closing the entir
 `bio.found` domain gap — and `bio.behav.innate-behavior-instinct`, the root of
 the `bio.behav` domain gap) validated clean: `tsc --noEmit` 0 new errors, dry-run
 seed script 0 duplicate identities across the full 8,256-item corpus, contract
-audit 111/199 authored, 111/111 at contract, 0 short, 0 never-quizzable. **Extended
-91: 3/91.** Re-measure with `npx tsx scripts/assets/contract-audit.ts --subject
-biology` before trusting any number here.
+audit 111/199 authored, 111/111 at contract, 0 short, 0 never-quizzable. Batch 2
+(2026-09-21, 3 concepts: `bio.behav.animal-communication`, `bio.neuro.brain-
+regional-organization` — root of the `bio.neuro` domain gap, opening 5 further
+concepts — and `bio.div.animal-body-plans-symmetry` — root of the `bio.div`
+domain gap) validated clean the same way: `tsc --noEmit` 0 errors, dry-run 0
+duplicate identities across 8,271 items, contract audit 114/199 authored,
+114/114 at contract, 0 short, 0 never-quizzable. **Extended 91: 6/91.**
+Production convergence (seed corpus → cold-start bootstrap → live AssetIdentity
+rows) is UNVERIFIED against the real database this campaign so far — no
+Supabase/DB access has been used; treat as PENDING until explicitly checked.
+Re-measure with `npx tsx scripts/assets/contract-audit.ts --subject biology`
+before trusting any number here.
 These
 two
 counters are tracked and reported SEPARATELY, never conflated — see `COVERAGE.md`'s biology row. The 91 concepts from the 2026-09-14 KG extension still have zero
