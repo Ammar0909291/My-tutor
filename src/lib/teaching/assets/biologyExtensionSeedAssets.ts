@@ -59,6 +59,15 @@
  * of the `bio.neuro` domain gap — opens five further concepts), and
  * `bio.div.animal-body-plans-symmetry` (the root of the `bio.div` domain
  * gap — opens `bio.div.invertebrate-diversity-major-phyla`).
+ * Batch 3 (2026-09-21, 3 concepts): `bio.neuro.neurotransmitter-systems` and
+ * `bio.neuro.sensory-transduction` (both further roots within `bio.neuro`,
+ * requiring only `bio.physio.nervous-system` from the original 108; the
+ * latter opens `bio.neuro.vision-visual-system` and
+ * `bio.neuro.audition-vestibular-system`), and
+ * `bio.div.invertebrate-diversity-major-phyla` (now ready — its sole
+ * prerequisite, batch 2's `bio.div.animal-body-plans-symmetry`, is served;
+ * opens `bio.div.arthropod-diversity` and
+ * `bio.div.echinoderm-deuterostome-diversity`).
  */
 import { GradeBand, ProbeDifficulty } from '@prisma/client'
 import type { SeedExplanation, SeedProbe } from './brainSeedAssets'
@@ -691,6 +700,303 @@ const BODYPLAN_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── bio.neuro.neurotransmitter-systems ─────────────────────────────────────
+const NEUROTRANS = 'bio.neuro.neurotransmitter-systems'
+const NEUROTRANS_SRC = 'educational-brain/concepts/biology/bio.neuro.neurotransmitter-systems.md'
+const NEUROTRANS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: NEUROTRANS, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Neurotransmitters are chemical messengers released at a synapse. Glutamate and GABA are ' +
+      'the principal excitatory/inhibitory pair in the central nervous system: glutamate ' +
+      'typically depolarises the postsynaptic neuron (excitatory), while GABA typically ' +
+      'hyperpolarises or stabilises it (inhibitory). Dopamine (reward, movement), serotonin ' +
+      '(mood, appetite, sleep), acetylcholine (neuromuscular signalling, attention, memory), ' +
+      'and norepinephrine (arousal, fight-or-flight) play specialised roles. A critical point: ' +
+      'whether a neurotransmitter\'s effect is excitatory or inhibitory is determined ' +
+      'SPECIFICALLY by the RECEPTOR it binds on the postsynaptic neuron, not by a fixed ' +
+      'property of the molecule itself. Ionotropic receptors are themselves ligand-gated ion ' +
+      'channels — binding directly and immediately opens the channel, producing a FAST ' +
+      'electrical response. Metabotropic receptors are not ion channels — binding activates a ' +
+      'G-protein triggering an intracellular second-messenger cascade, which is SLOWER but can ' +
+      'produce more prolonged, widespread effects. Synaptic signalling must be actively ' +
+      'terminated — via reuptake (the presynaptic neuron transports the neurotransmitter back ' +
+      'into itself) or enzymatic degradation (an enzyme breaks the molecule down) — it does not ' +
+      'simply fade away passively.',
+    targetedMisconceptions: [],
+    source: NEUROTRANS_SRC,
+  },
+  {
+    conceptId: NEUROTRANS, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students treat a neurotransmitter like glutamate or GABA ' +
+      'as INTRINSICALLY excitatory or inhibitory, as a fixed chemical property — but the effect ' +
+      'is determined by which RECEPTOR it binds; glutamate is only "typically" excitatory ' +
+      'because of its most common receptor partners, not because excitation is built into the ' +
+      'molecule itself. Second, students assume a synaptic signal fades away passively over ' +
+      'time, like a scent dissipating — but synapses require an ACTIVE "off switch" (reuptake ' +
+      'or enzymatic degradation); without one of these active processes, the neurotransmitter ' +
+      'would keep acting on its receptor indefinitely. An SSRI, for example, blocks serotonin ' +
+      'reuptake specifically, which PROLONGS serotonin\'s effect rather than leaving it unchanged.',
+    targetedMisconceptions: [`${NEUROTRANS}:M1`, `${NEUROTRANS}:M2`],
+    source: NEUROTRANS_SRC,
+  },
+]
+const NEUROTRANS_PROBES: SeedProbe[] = [
+  {
+    conceptId: NEUROTRANS, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Which receptor mechanism directly and immediately opens an ion channel upon neurotransmitter binding?',
+    choices: [
+      { text: 'Ionotropic receptors', isCorrect: true },
+      { text: 'Metabotropic receptors', isCorrect: false },
+      { text: 'Both mechanisms open channels equally fast', isCorrect: false },
+      { text: 'Neither mechanism involves ion channels', isCorrect: false },
+    ],
+    correctValue: 'Ionotropic receptors',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [],
+    source: NEUROTRANS_SRC,
+  },
+  {
+    conceptId: NEUROTRANS, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student says "glutamate is always excitatory — that\'s just a fixed property of the ' +
+      'molecule." What is the best response?',
+    choices: [
+      {
+        text: 'Wrong — the excitatory or inhibitory effect depends on which receptor the ' +
+          'neurotransmitter binds, not a fixed molecular property',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — every neurotransmitter has one fixed effect regardless of receptor',
+        isCorrect: false,
+        misconceptionId: `${NEUROTRANS}:M1`,
+      },
+    ],
+    correctValue: 'Wrong — the excitatory or inhibitory effect depends on which receptor the ' +
+      'neurotransmitter binds, not a fixed molecular property',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${NEUROTRANS}:M1`],
+    source: NEUROTRANS_SRC,
+  },
+  {
+    conceptId: NEUROTRANS, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An SSRI drug specifically blocks serotonin reuptake at the synapse. What effect would ' +
+      'you predict on serotonin\'s activity in the synapse?',
+    choices: [
+      { text: 'Serotonin\'s effect would be prolonged, since normal clearance is blocked', isCorrect: true },
+      { text: 'No change, since clearance happens passively regardless of reuptake', isCorrect: false, misconceptionId: `${NEUROTRANS}:M2` },
+      { text: 'Serotonin\'s effect would end sooner than normal', isCorrect: false },
+    ],
+    correctValue: 'Serotonin\'s effect would be prolonged, since normal clearance is blocked',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${NEUROTRANS}:M2`],
+    source: NEUROTRANS_SRC,
+  },
+]
+
+// ─── bio.neuro.sensory-transduction ──────────────────────────────────────────
+const SENSTRANS = 'bio.neuro.sensory-transduction'
+const SENSTRANS_SRC = 'educational-brain/concepts/biology/bio.neuro.sensory-transduction.md'
+const SENSTRANS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SENSTRANS, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Sensory transduction is the process by which a receptor cell converts a physical or ' +
+      'chemical stimulus into an electrical signal — specifically a GRADED receptor potential ' +
+      '(a local voltage change whose SIZE varies continuously with stimulus strength), rather ' +
+      'than directly producing an all-or-nothing action potential. Four major receptor ' +
+      'categories cover most sensory transduction: photoreceptors (light), mechanoreceptors ' +
+      '(pressure, stretch, vibration), chemoreceptors (specific chemicals), and thermoreceptors ' +
+      '(temperature) — despite different physical stimuli, all convert their input into a graded ' +
+      'membrane-potential change. Sensory adaptation is a genuine, functional REDUCTION in a ' +
+      'receptor\'s responsiveness to a CONSTANT stimulus over time — not a malfunction, but a ' +
+      'useful feature that prioritises detecting CHANGES over continuously signalling an ' +
+      'unchanging background. Stimulus intensity is coded specifically by action-potential ' +
+      'FREQUENCY (more spikes per second for a stronger stimulus) — NOT by the size of any ' +
+      'individual action potential, since action potentials are fixed-size, all-or-nothing ' +
+      'events once triggered.',
+    targetedMisconceptions: [],
+    source: SENSTRANS_SRC,
+  },
+  {
+    conceptId: SENSTRANS, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students think sensory adaptation means the receptor is ' +
+      'wearing out or failing under sustained stimulation — but it is a genuinely USEFUL, ' +
+      'adaptive feature (like no longer feeling clothing against your skin after putting it on) ' +
+      'that shifts sensory priority toward detecting CHANGE rather than restating an unchanging ' +
+      'condition. Second, students assume a stronger stimulus produces a LARGER individual ' +
+      'action potential — but action potentials are fixed-size, all-or-nothing events; a ' +
+      'stronger stimulus instead produces a HIGHER FREQUENCY of firing (more spikes per second), ' +
+      'which is how intensity is actually coded.',
+    targetedMisconceptions: [`${SENSTRANS}:M2`, `${SENSTRANS}:M1`],
+    source: SENSTRANS_SRC,
+  },
+]
+const SENSTRANS_PROBES: SeedProbe[] = [
+  {
+    conceptId: SENSTRANS, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What specifically codes for a stronger sensory stimulus in a sensory neuron?',
+    choices: [
+      { text: 'A higher frequency of action potentials (more spikes per second)', isCorrect: true },
+      { text: 'A larger individual action potential', isCorrect: false, misconceptionId: `${SENSTRANS}:M1` },
+      { text: 'A longer-duration single action potential', isCorrect: false, misconceptionId: `${SENSTRANS}:M1` },
+      { text: 'A change in the resting membrane potential only', isCorrect: false },
+    ],
+    correctValue: 'A higher frequency of action potentials (more spikes per second)',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${SENSTRANS}:M1`],
+    source: SENSTRANS_SRC,
+  },
+  {
+    conceptId: SENSTRANS, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student says "sensory adaptation means the receptor is wearing out or failing under ' +
+      'constant stimulation." What is the best response?',
+    choices: [
+      {
+        text: 'Wrong — adaptation is a genuine, useful feature that prioritises detecting ' +
+          'changes over restating an unchanging condition, not a malfunction',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — sustained stimulation genuinely damages or exhausts the receptor',
+        isCorrect: false,
+        misconceptionId: `${SENSTRANS}:M2`,
+      },
+    ],
+    correctValue: 'Wrong — adaptation is a genuine, useful feature that prioritises detecting ' +
+      'changes over restating an unchanging condition, not a malfunction',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${SENSTRANS}:M2`],
+    source: SENSTRANS_SRC,
+  },
+  {
+    conceptId: SENSTRANS, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A stimulus is converted into a receptor potential whose size varies continuously with ' +
+      'stimulus strength. Is this receptor potential itself an action potential?',
+    choices: [
+      {
+        text: 'No — it is a graded signal that must separately reach threshold to trigger actual action potentials',
+        isCorrect: true,
+      },
+      { text: 'Yes — a receptor potential and an action potential are the same thing', isCorrect: false },
+      { text: 'No — receptor potentials never lead to action potentials at all', isCorrect: false },
+    ],
+    correctValue: 'No — it is a graded signal that must separately reach threshold to trigger actual action potentials',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: SENSTRANS_SRC,
+  },
+]
+
+// ─── bio.div.invertebrate-diversity-major-phyla ─────────────────────────────
+const INVERTDIV = 'bio.div.invertebrate-diversity-major-phyla'
+const INVERTDIV_SRC = 'educational-brain/concepts/biology/bio.div.invertebrate-diversity-major-phyla.md'
+const INVERTDIV_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: INVERTDIV, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Each major invertebrate phylum is defined by a specific combination of body-plan ' +
+      'features, applying the symmetry/germ-layer/body-cavity criteria already covered. ' +
+      'Porifera (sponges) show cellular-grade organisation — their cells show some ' +
+      'specialisation but are NOT organised into true tissues, the single most distinguishing ' +
+      'feature separating them from every other phylum here. Cnidaria (jellyfish, corals, sea ' +
+      'anemones) show radial symmetry and a distinctive stinging cell structure, the nematocyst, ' +
+      'used for prey capture and defense. Platyhelminthes (flatworms) are triploblastic and ' +
+      'acoelomate — their flattened shape is a functional consequence of having no circulatory ' +
+      'system, so nutrients/gases must diffuse across the body. Nematoda (roundworms) are ' +
+      'pseudocoelomate. Annelida (segmented worms) show true body segmentation combined with a ' +
+      'full coelom. Mollusca (snails, bivalves, cephalopods) shows the widest body-plan diversity ' +
+      'of any phylum here, but most molluscs share a common underlying architecture — a muscular ' +
+      'foot, a visceral mass, and a mantle — despite dramatically different external appearance.',
+    targetedMisconceptions: [],
+    source: INVERTDIV_SRC,
+  },
+  {
+    conceptId: INVERTDIV, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students memorise phylum names as an unconnected list ' +
+      'rather than systematically checking symmetry, germ layers, body cavity type, and the ' +
+      'phylum\'s own unique defining feature (nematocysts for Cnidaria, segmentation for ' +
+      'Annelida, cellular-grade organisation for Porifera) — this checklist, not memorised ' +
+      'examples, is what lets you classify an unfamiliar organism. Second, students assume ' +
+      'Mollusca\'s extreme external diversity (a snail versus an octopus) means the phylum has ' +
+      'no real unifying feature — but most molluscs share the same underlying foot/visceral-' +
+      'mass/mantle architecture beneath the superficially different external forms.',
+    targetedMisconceptions: [`${INVERTDIV}:M1`, `${INVERTDIV}:M2`],
+    source: INVERTDIV_SRC,
+  },
+]
+const INVERTDIV_PROBES: SeedProbe[] = [
+  {
+    conceptId: INVERTDIV, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Which specific feature distinguishes Porifera (sponges) from every other invertebrate phylum here?',
+    choices: [
+      { text: 'Cellular-grade organisation — cells are specialised but not organised into true tissues', isCorrect: true },
+      { text: 'Radial symmetry and nematocysts', isCorrect: false },
+      { text: 'True body segmentation', isCorrect: false },
+      { text: 'A pseudocoelom', isCorrect: false },
+    ],
+    correctValue: 'Cellular-grade organisation — cells are specialised but not organised into true tissues',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [],
+    source: INVERTDIV_SRC,
+  },
+  {
+    conceptId: INVERTDIV, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student says "molluscs are too different from each other (snails versus octopuses) ' +
+      'to share any real unifying feature." What is the best response?',
+    choices: [
+      {
+        text: 'Wrong — most molluscs share the same underlying foot/visceral-mass/mantle ' +
+          'architecture beneath very different external forms',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — Mollusca is classified purely by superficial similarity with no real shared feature',
+        isCorrect: false,
+        misconceptionId: `${INVERTDIV}:M2`,
+      },
+    ],
+    correctValue: 'Wrong — most molluscs share the same underlying foot/visceral-mass/mantle ' +
+      'architecture beneath very different external forms',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${INVERTDIV}:M2`],
+    source: INVERTDIV_SRC,
+  },
+  {
+    conceptId: INVERTDIV, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An unfamiliar marine animal shows radial symmetry and has specialised stinging cells ' +
+      'used to capture prey. Which phylum does it most likely belong to?',
+    choices: [
+      { text: 'Cnidaria', isCorrect: true },
+      { text: 'Porifera', isCorrect: false },
+      { text: 'Platyhelminthes', isCorrect: false },
+      { text: 'Annelida', isCorrect: false },
+    ],
+    correctValue: 'Cnidaria',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${INVERTDIV}:M1`],
+    source: INVERTDIV_SRC,
+  },
+]
+
 export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...SCIMETH_EXPLANATIONS,
   ...UNITHEMES_EXPLANATIONS,
@@ -698,6 +1004,9 @@ export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...ANIMCOMM_EXPLANATIONS,
   ...BRAINREG_EXPLANATIONS,
   ...BODYPLAN_EXPLANATIONS,
+  ...NEUROTRANS_EXPLANATIONS,
+  ...SENSTRANS_EXPLANATIONS,
+  ...INVERTDIV_EXPLANATIONS,
 ]
 
 export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
@@ -707,4 +1016,7 @@ export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
   ...ANIMCOMM_PROBES,
   ...BRAINREG_PROBES,
   ...BODYPLAN_PROBES,
+  ...NEUROTRANS_PROBES,
+  ...SENSTRANS_PROBES,
+  ...INVERTDIV_PROBES,
 ]
