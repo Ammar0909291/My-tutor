@@ -545,9 +545,20 @@ and `bio.plant.plant-water-relations` (plant-stress) — CLOSING the entire
 remaining `bio.plant` domain gap) validated clean: `tsc --noEmit` 0
 errors, dry-run 0 duplicate identities across 8,661 items, contract audit
 192/199 authored, 192/192 at contract, 0 short, 0 never-quizzable, 40/40
+targeted vitest suites passing. Batch 29 (2026-09-21, 3 concepts — all 7
+remaining extension concepts were simultaneously ready; selected the first
+3 of `bio.evo`'s 4 remaining): `bio.evo.coevolution-species-interactions`
+— prerequisites already-served `bio.evo.natural-selection` and
+`bio.eco.population-ecology` — `bio.evo.convergent-evolution-homoplasy` —
+prerequisites already-served `bio.evo.evidence-for-evolution` and
+`bio.div.cladistics-phylogenetic-thinking` — and
+`bio.evo.macroevolution-extinction` — sole prerequisite already-served
+`bio.evo.modern-synthesis-speciation`) validated clean: `tsc --noEmit` 0
+errors, dry-run 0 duplicate identities across 8,676 items, contract audit
+195/199 authored, 195/195 at contract, 0 short, 0 never-quizzable, 40/40
 targeted vitest suites passing.
 **Extended
-91: 84/91.** Production convergence (seed
+91: 87/91.** Production convergence (seed
 corpus → cold-start bootstrap → live
 AssetIdentity rows) is UNVERIFIED against the real database this campaign so
 far — no Supabase/DB access has been used;

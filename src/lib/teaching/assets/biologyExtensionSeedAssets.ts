@@ -8090,6 +8090,290 @@ const PLANTSTRESS_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── bio.evo.coevolution-species-interactions ────────────────────────────────
+const COEVOL = 'bio.evo.coevolution-species-interactions'
+const COEVOL_SRC = 'educational-brain/concepts/biology/bio.evo.coevolution-species-interactions.md'
+const COEVOL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: COEVOL, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Coevolution is RECIPROCAL evolutionary change: species A\'s evolution influences the ' +
+      'selective pressures on species B, and B\'s response influences pressures BACK on A — an ' +
+      'ongoing dialogue between lineages, not independent adaptation. Predator-prey and ' +
+      'host-parasite relationships illustrate this via evolutionary arms races; the Red Queen ' +
+      'hypothesis captures the key implication — continuous evolution is required merely to ' +
+      'MAINTAIN relative fitness, since neither species achieves a permanent advantage (any ' +
+      'advance is met by a corresponding response). Mutualistic coevolution (pollinator ' +
+      'specialisation) shows coevolution is not limited to conflict. Coevolution must be ' +
+      'distinguished from parallel adaptation to a shared environment — two species ' +
+      'independently evolving similar traits from a common external pressure, with NO ' +
+      'reciprocal influence between them.',
+    targetedMisconceptions: [],
+    source: COEVOL_SRC,
+  },
+  {
+    conceptId: COEVOL, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students classify two species independently evolving ' +
+      'similar traits from a shared environmental pressure as coevolution, missing that genuine ' +
+      'coevolution requires each species\' change to be a response TO THE OTHER SPECIES ' +
+      'specifically, not a shared external factor. Second, students interpret the Red Queen ' +
+      'hypothesis as describing an eventual permanent winner, missing that its actual claim is ' +
+      'ongoing evolution is required merely to maintain RELATIVE fitness — neither side ever ' +
+      'wins permanently.',
+    targetedMisconceptions: [`${COEVOL}:M1`, `${COEVOL}:M2`],
+    source: COEVOL_SRC,
+  },
+]
+const COEVOL_PROBES: SeedProbe[] = [
+  {
+    conceptId: COEVOL, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two unrelated species both independently evolve thicker fur because they both live ' +
+      'in the same cold climate, with no evidence that either species\' evolution was driven by ' +
+      'the other. Is this coevolution?',
+    choices: [
+      { text: 'No — this is parallel adaptation to a shared environment, since neither species\' evolution is a response to the other', isCorrect: true },
+      { text: 'Yes — both species are evolving in response to something, which is sufficient for coevolution', isCorrect: false, misconceptionId: `${COEVOL}:M1` },
+      { text: 'Yes, since coevolution requires only that species share an environment', isCorrect: false },
+      { text: 'This cannot be classified without knowing the species\' full evolutionary history', isCorrect: false },
+    ],
+    correctValue: 'No — this is parallel adaptation to a shared environment, since neither species\' evolution is a response to the other',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${COEVOL}:M1`],
+    source: COEVOL_SRC,
+  },
+  {
+    conceptId: COEVOL, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An ongoing predator-prey evolutionary arms race continues over many generations. A ' +
+      'student predicts: "Eventually one species will win permanently, gaining a lasting ' +
+      'advantage." Is this what the Red Queen hypothesis predicts?',
+    choices: [
+      {
+        text: 'No — the Red Queen hypothesis predicts neither species achieves a lasting ' +
+          'advantage, since continuous evolution is needed merely to maintain relative fitness',
+        isCorrect: true,
+      },
+      {
+        text: 'Yes — the Red Queen hypothesis predicts an eventual permanent winner',
+        isCorrect: false,
+        misconceptionId: `${COEVOL}:M2`,
+      },
+    ],
+    correctValue: 'No — the Red Queen hypothesis predicts neither species achieves a lasting ' +
+      'advantage, since continuous evolution is needed merely to maintain relative fitness',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${COEVOL}:M2`],
+    source: COEVOL_SRC,
+  },
+  {
+    conceptId: COEVOL, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What type of coevolution is illustrated by a flower species and its pollinator ' +
+      'species evolving increasingly specialised, mutually beneficial adaptations to each ' +
+      'other?',
+    choices: [
+      { text: 'Mutualistic coevolution', isCorrect: true },
+      { text: 'Antagonistic coevolution', isCorrect: false },
+      { text: 'Parallel adaptation', isCorrect: false },
+    ],
+    correctValue: 'Mutualistic coevolution',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: COEVOL_SRC,
+  },
+]
+
+// ─── bio.evo.convergent-evolution-homoplasy ──────────────────────────────────
+const CONVEVO = 'bio.evo.convergent-evolution-homoplasy'
+const CONVEVO_SRC = 'educational-brain/concepts/biology/bio.evo.convergent-evolution-homoplasy.md'
+const CONVEVO_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CONVEVO, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Homoplasy is any similarity between species NOT due to shared ancestry, a genuine ' +
+      'problem for phylogenetics because it produces a misleading signal that looks like ' +
+      'evidence of relationship but is not. Convergent evolution is the INDEPENDENT origin of ' +
+      'a similar trait in lineages whose shared ancestor did NOT already have a similar version ' +
+      'of that trait (e.g. camera eyes in vertebrates and cephalopods). Parallel evolution ' +
+      'differs specifically in that the shared ancestor DID already have a similar starting ' +
+      'condition, which both descendant lineages then modified separately after diverging. The ' +
+      'distinguishing question is never "how similar do these look?" but "did the shared ' +
+      'ancestor already have this trait, or did each lineage evolve it separately?" — the ' +
+      'marsupial/placental body-form case study (thylacine vs. wolf) illustrates convergence.',
+    targetedMisconceptions: [],
+    source: CONVEVO_SRC,
+  },
+  {
+    conceptId: CONVEVO, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students treat strong structural similarity as always ' +
+      'indicating close relationship, missing that convergent and parallel evolution can both ' +
+      'produce striking similarity without shared ancestry of that specific trait — independent ' +
+      'phylogenetic evidence is needed before concluding shared ancestry. Second, students ' +
+      'conflate convergent and parallel evolution, missing the specific distinguishing question: ' +
+      'did the shared ancestor already have a similar starting condition for the trait, or did ' +
+      'the lineages start from genuinely different conditions?',
+    targetedMisconceptions: [`${CONVEVO}:M1`, `${CONVEVO}:M2`],
+    source: CONVEVO_SRC,
+  },
+]
+const CONVEVO_PROBES: SeedProbe[] = [
+  {
+    conceptId: CONVEVO, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A vertebrate eye and a cephalopod eye show striking structural similarity (both ' +
+      'camera-type eyes with a lens and retina). What is the best conclusion?',
+    choices: [
+      { text: 'The similarity requires independent phylogenetic evidence before concluding shared ancestry, since convergent evolution can produce striking similarity without it', isCorrect: true },
+      { text: 'The similarity alone proves vertebrates and cephalopods are closely related', isCorrect: false, misconceptionId: `${CONVEVO}:M1` },
+      { text: 'The similarity is meaningless and provides no information at all', isCorrect: false },
+      { text: 'Structural similarity always overrides molecular evidence for relatedness', isCorrect: false },
+    ],
+    correctValue: 'The similarity requires independent phylogenetic evidence before concluding shared ancestry, since convergent evolution can produce striking similarity without it',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${CONVEVO}:M1`],
+    source: CONVEVO_SRC,
+  },
+  {
+    conceptId: CONVEVO, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student says: "Convergent evolution and parallel evolution are the same thing — ' +
+      'both just mean similar traits evolved independently." Is this correct?',
+    choices: [
+      {
+        text: 'No — the distinguishing question is whether the shared ancestor already had a ' +
+          'similar starting condition (parallel) or not (convergent)',
+        isCorrect: true,
+      },
+      {
+        text: 'Yes — both terms describe exactly the same evolutionary process',
+        isCorrect: false,
+        misconceptionId: `${CONVEVO}:M2`,
+      },
+    ],
+    correctValue: 'No — the distinguishing question is whether the shared ancestor already had ' +
+      'a similar starting condition (parallel) or not (convergent)',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${CONVEVO}:M2`],
+    source: CONVEVO_SRC,
+  },
+  {
+    conceptId: CONVEVO, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What is the umbrella term for any similarity between species that is NOT due to ' +
+      'shared ancestry?',
+    choices: [
+      { text: 'Homoplasy', isCorrect: true },
+      { text: 'Synapomorphy', isCorrect: false },
+      { text: 'Homology', isCorrect: false },
+    ],
+    correctValue: 'Homoplasy',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: CONVEVO_SRC,
+  },
+]
+
+// ─── bio.evo.macroevolution-extinction ───────────────────────────────────────
+const MACROEXT = 'bio.evo.macroevolution-extinction'
+const MACROEXT_SRC = 'educational-brain/concepts/biology/bio.evo.macroevolution-extinction.md'
+const MACROEXT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: MACROEXT, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Phyletic gradualism proposes slow, continuous morphological change; punctuated ' +
+      'equilibrium proposes long stasis punctuated by RELATIVELY rapid (still gradual, still ' +
+      'multi-generational, never instantaneous) bursts of change around speciation — both ' +
+      'models describe the SAME underlying mechanisms (mutation, selection, drift), differing ' +
+      'only in claimed pace and pattern, not mechanism. The background extinction rate is the ' +
+      'ordinary ongoing rate; the "Big Five" mass extinction events are geologically brief (but ' +
+      'still extended, not instant) spikes eliminating a large fraction of species. Adaptive ' +
+      'radiation following mass extinction is driven by ECOLOGICAL RELEASE — newly available ' +
+      'niches from eliminated competitors/predators — not by any change in the underlying ' +
+      'mutation rate.',
+    targetedMisconceptions: [],
+    source: MACROEXT_SRC,
+  },
+  {
+    conceptId: MACROEXT, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students interpret punctuated equilibrium\'s "rapid" ' +
+      'bursts as instantaneous or as requiring a different evolutionary mechanism, missing that ' +
+      'both tempo models rely on the same mutation/selection/drift mechanisms and differ only in ' +
+      'relative pace. Second, students explain adaptive radiation as resulting from an increased ' +
+      'mutation rate, missing that the actual driving mechanism is ecological release — newly ' +
+      'available niches, with the underlying mutation rate unchanged.',
+    targetedMisconceptions: [`${MACROEXT}:M1`, `${MACROEXT}:M2`],
+    source: MACROEXT_SRC,
+  },
+]
+const MACROEXT_PROBES: SeedProbe[] = [
+  {
+    conceptId: MACROEXT, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The fossil record shows a species in long morphological stasis, followed by a burst ' +
+      'of change spanning many generations around a speciation event (punctuated equilibrium). ' +
+      'Does this pattern require a different evolutionary mechanism than gradualism?',
+    choices: [
+      { text: 'No — both models rely on the same mutation/selection/drift mechanisms, differing only in pace and pattern over time', isCorrect: true },
+      { text: 'Yes — punctuated equilibrium requires an instantaneous, mechanistically distinct process', isCorrect: false, misconceptionId: `${MACROEXT}:M1` },
+      { text: 'Yes, since rapid change can only occur through a completely different genetic process', isCorrect: false },
+      { text: 'The pattern cannot be explained by any known evolutionary mechanism', isCorrect: false },
+    ],
+    correctValue: 'No — both models rely on the same mutation/selection/drift mechanisms, differing only in pace and pattern over time',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${MACROEXT}:M1`],
+    source: MACROEXT_SRC,
+  },
+  {
+    conceptId: MACROEXT, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'After the mass extinction that eliminated non-avian dinosaurs, mammals diversified ' +
+      'relatively rapidly into many new ecological roles. A student says: "This must mean ' +
+      'mammalian mutation rates increased after the extinction." Is this correct?',
+    choices: [
+      {
+        text: 'No — the driving mechanism is ecological release (newly available niches with ' +
+          'reduced competition/predation), not an increased mutation rate',
+        isCorrect: true,
+      },
+      {
+        text: 'Yes — adaptive radiation requires an increased rate of mutation to occur',
+        isCorrect: false,
+        misconceptionId: `${MACROEXT}:M2`,
+      },
+    ],
+    correctValue: 'No — the driving mechanism is ecological release (newly available niches ' +
+      'with reduced competition/predation), not an increased mutation rate',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${MACROEXT}:M2`],
+    source: MACROEXT_SRC,
+  },
+  {
+    conceptId: MACROEXT, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Which mass extinction event, roughly 252 million years ago, is considered the most ' +
+      'severe of the "Big Five," eliminating an estimated ~90% of marine species?',
+    choices: [
+      { text: 'The end-Permian extinction', isCorrect: true },
+      { text: 'The end-Cretaceous extinction', isCorrect: false },
+      { text: 'The end-Ordovician extinction', isCorrect: false },
+    ],
+    correctValue: 'The end-Permian extinction',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: MACROEXT_SRC,
+  },
+]
+
 export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...SCIMETH_EXPLANATIONS,
   ...UNITHEMES_EXPLANATIONS,
@@ -8175,6 +8459,9 @@ export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...MYCORRHIZA_EXPLANATIONS,
   ...PLANTDEF_EXPLANATIONS,
   ...PLANTSTRESS_EXPLANATIONS,
+  ...COEVOL_EXPLANATIONS,
+  ...CONVEVO_EXPLANATIONS,
+  ...MACROEXT_EXPLANATIONS,
 ]
 
 export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
@@ -8262,4 +8549,7 @@ export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
   ...MYCORRHIZA_PROBES,
   ...PLANTDEF_PROBES,
   ...PLANTSTRESS_PROBES,
+  ...COEVOL_PROBES,
+  ...CONVEVO_PROBES,
+  ...MACROEXT_PROBES,
 ]
