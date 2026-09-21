@@ -303,12 +303,23 @@ phyla`, now served; opens `bio.div.chordate-vertebrate-diversity` — and
 `bio.neuro.sensory-transduction`, now served) validated clean: `tsc --noEmit`
 0 errors, dry-run 0 duplicate identities across 8,316 items, contract audit
 123/199 authored, 123/123 at contract, 0 short, 0 never-quizzable, 40/40
-targeted vitest suites passing. **Extended 91: 15/91.** Production convergence
-(seed corpus → cold-start bootstrap → live AssetIdentity rows) is UNVERIFIED
-against the real database this campaign so far — no Supabase/DB access has
-been used; treat as PENDING until explicitly checked. Re-measure with `npx tsx
-scripts/assets/contract-audit.ts --subject biology` before trusting any number
-here.
+targeted vitest suites passing. Batch 6 (2026-09-21, 3 concepts:
+`bio.div.chordate-vertebrate-diversity` — its sole prerequisite, batch 5's
+`bio.div.echinoderm-deuterostome-diversity`, now served; opens 3 further
+concepts (`bio.div.fish-amphibian-diversity`, `bio.div.reptile-bird-diversity`,
+`bio.div.mammalian-diversity`) — `bio.neuro.cognitive-neuroscience-
+consciousness` — both prerequisites, batch 5's `bio.neuro.learning-memory-
+neurobiology` and batch 2's `bio.neuro.brain-regional-organization`, now
+served — and `bio.behav.learning-and-behavior` — both prerequisites, batch 1's
+`bio.behav.innate-behavior-instinct` and batch 5's `bio.neuro.learning-memory-
+neurobiology`, now served) validated clean: `tsc --noEmit` 0 errors, dry-run 0
+duplicate identities across 8,331 items, contract audit 126/199 authored,
+126/126 at contract, 0 short, 0 never-quizzable, 40/40 targeted vitest suites
+passing. **Extended 91: 18/91.** Production convergence (seed corpus →
+cold-start bootstrap → live AssetIdentity rows) is UNVERIFIED against the real
+database this campaign so far — no Supabase/DB access has been used; treat as
+PENDING until explicitly checked. Re-measure with `npx tsx scripts/assets/
+contract-audit.ts --subject biology` before trusting any number here.
 These
 two
 counters are tracked and reported SEPARATELY, never conflated — see `COVERAGE.md`'s biology row. The 91 concepts from the 2026-09-14 KG extension still have zero

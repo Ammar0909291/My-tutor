@@ -1588,6 +1588,291 @@ const AUDITION_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── bio.div.chordate-vertebrate-diversity ───────────────────────────────────
+const CHORDATE = 'bio.div.chordate-vertebrate-diversity'
+const CHORDATE_SRC = 'educational-brain/concepts/biology/bio.div.chordate-vertebrate-diversity.md'
+const CHORDATE_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CHORDATE, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Phylum Chordata is defined by four features: the notochord (a flexible rod-like ' +
+      'support structure), the dorsal hollow nerve cord (running along the back, unlike many ' +
+      'invertebrates\' ventral cord), pharyngeal slits (used for filter-feeding or respiration ' +
+      'in some chordates), and a post-anal tail (extending beyond the anus). Critically, these ' +
+      'features are chordate-defining because they appear during EMBRYONIC development — in ' +
+      'many vertebrates some are later modified or lost in the adult. The notochord, for ' +
+      'example, is present in vertebrate embryos (including human embryos) but is largely ' +
+      'REPLACED by the developing vertebral column as the organism matures, so an adult human ' +
+      'shows no obvious notochord despite genuinely having one earlier in development. The five ' +
+      'vertebrate classes (fish, amphibians, reptiles, birds, mammals) are introduced here as an ' +
+      'ORGANISING FRAMEWORK for the detailed diversity concepts that follow, not as the complete ' +
+      'picture of vertebrate diversity itself.',
+    targetedMisconceptions: [],
+    source: CHORDATE_SRC,
+  },
+  {
+    conceptId: CHORDATE, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students check for chordate features only in the adult\'s ' +
+      'visible anatomy and conclude an adult without a visible notochord cannot be a chordate, ' +
+      'missing that the criterion is EMBRYONIC — the notochord was genuinely present in the ' +
+      'embryo even though later replaced by the vertebral column. Second, students treat the ' +
+      'five-vertebrate-class overview as the complete, detailed picture of vertebrate diversity, ' +
+      'missing that each class\'s specific defining features are deliberately deferred to the ' +
+      'dedicated concepts this overview unlocks.',
+    targetedMisconceptions: [`${CHORDATE}:M1`, `${CHORDATE}:M2`],
+    source: CHORDATE_SRC,
+  },
+]
+const CHORDATE_PROBES: SeedProbe[] = [
+  {
+    conceptId: CHORDATE, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An adult vertebrate shows no visible notochord. Can it still be classified as a chordate?',
+    choices: [
+      { text: 'Yes — the notochord was present during embryonic development, which is the defining criterion', isCorrect: true },
+      { text: 'No — chordate classification requires a visible notochord in the adult', isCorrect: false, misconceptionId: `${CHORDATE}:M1` },
+      { text: 'No — only fish and amphibians retain chordate status as adults', isCorrect: false, misconceptionId: `${CHORDATE}:M1` },
+      { text: 'It cannot be determined without checking its pharyngeal slits', isCorrect: false },
+    ],
+    correctValue: 'Yes — the notochord was present during embryonic development, which is the defining criterion',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${CHORDATE}:M1`],
+    source: CHORDATE_SRC,
+  },
+  {
+    conceptId: CHORDATE, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student asks what specifically distinguishes a reptile from an amphibian, after ' +
+      'learning the five vertebrate class names. What is the best response?',
+    choices: [
+      {
+        text: 'This overview is an organising framework — the specific distinguishing features ' +
+          'are covered in dedicated concepts this one unlocks',
+        isCorrect: true,
+      },
+      {
+        text: 'The five class names given here are the complete answer already',
+        isCorrect: false,
+        misconceptionId: `${CHORDATE}:M2`,
+      },
+    ],
+    correctValue: 'This overview is an organising framework — the specific distinguishing features ' +
+      'are covered in dedicated concepts this one unlocks',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${CHORDATE}:M2`],
+    source: CHORDATE_SRC,
+  },
+  {
+    conceptId: CHORDATE, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Which chordate feature typically develops into the vertebrate spinal cord and brain?',
+    choices: [
+      { text: 'The dorsal hollow nerve cord', isCorrect: true },
+      { text: 'The notochord', isCorrect: false },
+      { text: 'The pharyngeal slits', isCorrect: false },
+    ],
+    correctValue: 'The dorsal hollow nerve cord',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: CHORDATE_SRC,
+  },
+]
+
+// ─── bio.neuro.cognitive-neuroscience-consciousness ──────────────────────────
+const COGNEURO = 'bio.neuro.cognitive-neuroscience-consciousness'
+const COGNEURO_SRC = 'educational-brain/concepts/biology/bio.neuro.cognitive-neuroscience-consciousness.md'
+const COGNEURO_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: COGNEURO, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Attention and executive function are TOP-DOWN cognitive control mechanisms: higher-level ' +
+      'goals actively direct which information gets processed further, as opposed to purely ' +
+      'BOTTOM-UP, stimulus-driven capture (a sudden loud noise grabbing attention regardless of ' +
+      'current goals). The search for neural correlates of consciousness (NCCs) aims to identify ' +
+      'brain-activity patterns that reliably CO-OCCUR with a conscious experience — but ' +
+      'identifying a correlate is NOT the same as fully EXPLAINING why that activity produces ' +
+      'subjective experience; NCC research establishes correlation, not causal/mechanistic ' +
+      'explanation. Split-brain studies (corpus callosum surgically severed) show that when ' +
+      'information is presented to only one hemisphere, that hemisphere can act on it while the ' +
+      'other hemisphere (and verbal report, typically left-hemisphere-dominant) has no access to ' +
+      'it — demonstrating that unified conscious experience can be behaviourally DISSOCIATED ' +
+      'under specific controlled conditions, not that the patient has two separate ' +
+      'consciousnesses at all times.',
+    targetedMisconceptions: [],
+    source: COGNEURO_SRC,
+  },
+  {
+    conceptId: COGNEURO, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students treat finding a neural correlate of a conscious ' +
+      'experience as a complete EXPLANATION of that experience, missing that a correlate is a ' +
+      'reliable co-occurrence, not a causal/mechanistic account of how brain activity produces ' +
+      'subjective experience. Second, students overgeneralize split-brain findings into "two ' +
+      'fully separate consciousnesses at all times," missing that the dissociation is ' +
+      'demonstrated under SPECIFIC experimental conditions (isolated visual-field presentation) ' +
+      '— in ordinary life with both eyes open, both hemispheres receive largely overlapping ' +
+      'information, so split-brain patients function coherently day-to-day.',
+    targetedMisconceptions: [`${COGNEURO}:M1`, `${COGNEURO}:M2`],
+    source: COGNEURO_SRC,
+  },
+]
+const COGNEURO_PROBES: SeedProbe[] = [
+  {
+    conceptId: COGNEURO, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Scientists find a brain-activity pattern that reliably occurs whenever a person sees ' +
+      'red. Does this explain WHY seeing red feels like something?',
+    choices: [
+      { text: 'No — it establishes a correlation, not a causal/mechanistic explanation', isCorrect: true },
+      { text: 'Yes — finding the correlate is equivalent to a full explanation', isCorrect: false, misconceptionId: `${COGNEURO}:M1` },
+      { text: 'Yes, but only for colors, not other conscious experiences', isCorrect: false, misconceptionId: `${COGNEURO}:M1` },
+      { text: 'The question cannot be studied scientifically at all', isCorrect: false },
+    ],
+    correctValue: 'No — it establishes a correlation, not a causal/mechanistic explanation',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${COGNEURO}:M1`],
+    source: COGNEURO_SRC,
+  },
+  {
+    conceptId: COGNEURO, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student says "split-brain patients have two fully separate consciousnesses ' +
+      'operating independently all the time." What is the best response?',
+    choices: [
+      {
+        text: 'Wrong — the dissociation is shown under specific isolated-visual-field ' +
+          'conditions; in ordinary life both hemispheres get overlapping information',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — this is their permanent everyday experience',
+        isCorrect: false,
+        misconceptionId: `${COGNEURO}:M2`,
+      },
+    ],
+    correctValue: 'Wrong — the dissociation is shown under specific isolated-visual-field ' +
+      'conditions; in ordinary life both hemispheres get overlapping information',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${COGNEURO}:M2`],
+    source: COGNEURO_SRC,
+  },
+  {
+    conceptId: COGNEURO, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A person is following one voice in a noisy room based on the goal of tracking that ' +
+      'conversation. Is this top-down or bottom-up processing?',
+    choices: [
+      { text: 'Top-down — goal-directed attention selecting what to process', isCorrect: true },
+      { text: 'Bottom-up — the loudest voice automatically wins attention', isCorrect: false },
+      { text: 'Neither — attention is not involved in this scenario', isCorrect: false },
+    ],
+    correctValue: 'Top-down — goal-directed attention selecting what to process',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: COGNEURO_SRC,
+  },
+]
+
+// ─── bio.behav.learning-and-behavior ─────────────────────────────────────────
+const LEARNBEH = 'bio.behav.learning-and-behavior'
+const LEARNBEH_SRC = 'educational-brain/concepts/biology/bio.behav.learning-and-behavior.md'
+const LEARNBEH_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: LEARNBEH, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Habituation is the simplest form of learning: a DECREASE in response to a REPEATED, ' +
+      'harmless stimulus, with NO association formed between two separate things (non-associative ' +
+      'learning). Classical conditioning and operant conditioning are both ASSOCIATIVE but link ' +
+      'different things: classical conditioning associates two STIMULI (a previously neutral ' +
+      'stimulus comes to trigger a response that another stimulus already naturally triggers, as ' +
+      'in Pavlov\'s bell-and-food dogs); operant conditioning associates an organism\'s own ' +
+      'BEHAVIOUR with its CONSEQUENCE (a behaviour followed by a favourable outcome becomes MORE ' +
+      'likely to recur). Imprinting is a distinctive, TIME-LIMITED form of learning occurring ' +
+      'only during a specific developmental CRITICAL PERIOD — the same learning typically cannot ' +
+      'be acquired later if that window has passed. Observational (social) learning lets an ' +
+      'individual acquire a behaviour by OBSERVING another perform it, without personally bearing ' +
+      'the cost of direct trial and error.',
+    targetedMisconceptions: [],
+    source: LEARNBEH_SRC,
+  },
+  {
+    conceptId: LEARNBEH, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students treat classical and operant conditioning as the ' +
+      'same kind of learning with different examples, missing that classical conditioning links ' +
+      'STIMULUS-to-STIMULUS while operant conditioning links BEHAVIOUR-to-CONSEQUENCE — ' +
+      'categorically different associations. Second, students describe imprinting as simply ' +
+      '"learning that happens early," missing its DEFINING feature — a specific critical period ' +
+      'outside of which the same learning typically cannot be readily acquired, even if the same ' +
+      'stimulus is presented later.',
+    targetedMisconceptions: [`${LEARNBEH}:M1`, `${LEARNBEH}:M2`],
+    source: LEARNBEH_SRC,
+  },
+]
+const LEARNBEH_PROBES: SeedProbe[] = [
+  {
+    conceptId: LEARNBEH, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A rat learns that pressing a lever produces a food reward, so it presses the lever ' +
+      'more often. What TYPE of learning is this?',
+    choices: [
+      { text: 'Operant conditioning — a behaviour is linked to its consequence', isCorrect: true },
+      { text: 'Classical conditioning — two stimuli are linked together', isCorrect: false, misconceptionId: `${LEARNBEH}:M1` },
+      { text: 'Habituation — the rat is simply getting used to the lever', isCorrect: false },
+      { text: 'Imprinting — this must occur within a critical period', isCorrect: false },
+    ],
+    correctValue: 'Operant conditioning — a behaviour is linked to its consequence',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${LEARNBEH}:M1`],
+    source: LEARNBEH_SRC,
+  },
+  {
+    conceptId: LEARNBEH, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student says "imprinting is just learning that happens early in life." What is the ' +
+      'best response?',
+    choices: [
+      {
+        text: 'Wrong — imprinting\'s defining feature is a critical period; the same learning ' +
+          'typically cannot occur normally once that window has passed',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — any early learning counts as imprinting',
+        isCorrect: false,
+        misconceptionId: `${LEARNBEH}:M2`,
+      },
+    ],
+    correctValue: 'Wrong — imprinting\'s defining feature is a critical period; the same learning ' +
+      'typically cannot occur normally once that window has passed',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${LEARNBEH}:M2`],
+    source: LEARNBEH_SRC,
+  },
+  {
+    conceptId: LEARNBEH, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A young bird learns a predator alarm call by watching an experienced adult react to a ' +
+      'predator, without ever encountering the predator itself. What kind of learning is this?',
+    choices: [
+      { text: 'Observational (social) learning', isCorrect: true },
+      { text: 'Classical conditioning', isCorrect: false },
+      { text: 'Habituation', isCorrect: false },
+    ],
+    correctValue: 'Observational (social) learning',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: LEARNBEH_SRC,
+  },
+]
+
 export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...SCIMETH_EXPLANATIONS,
   ...UNITHEMES_EXPLANATIONS,
@@ -1604,6 +1889,9 @@ export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...LEARNMEM_EXPLANATIONS,
   ...ECHINODERM_EXPLANATIONS,
   ...AUDITION_EXPLANATIONS,
+  ...CHORDATE_EXPLANATIONS,
+  ...COGNEURO_EXPLANATIONS,
+  ...LEARNBEH_EXPLANATIONS,
 ]
 
 export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
@@ -1622,4 +1910,7 @@ export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
   ...LEARNMEM_PROBES,
   ...ECHINODERM_PROBES,
   ...AUDITION_PROBES,
+  ...CHORDATE_PROBES,
+  ...COGNEURO_PROBES,
+  ...LEARNBEH_PROBES,
 ]
