@@ -525,7 +525,7 @@ function LessonDocument({ text }: { text: string }) {
 // (Brain-served turns pass provider='memory' and never mount this component).
 function AiBadge({ provider }: { provider: string }) {
   const model =
-    provider === 'groq' ? 'Groq (GPT-OSS-20B)'
+    provider === 'groq' ? 'Groq (GPT-OSS-120B)'
     : provider === 'yandex' ? 'YandexGPT'
     : provider === 'fallback' ? 'Fallback model'
     : 'Unknown'
