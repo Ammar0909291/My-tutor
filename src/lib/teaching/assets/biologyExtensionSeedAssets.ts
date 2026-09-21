@@ -2441,6 +2441,285 @@ const SLEEP_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── bio.physio.blood-physiology-hemostasis ──────────────────────────────────
+const HEMOSTASIS = 'bio.physio.blood-physiology-hemostasis'
+const HEMOSTASIS_SRC = 'educational-brain/concepts/biology/bio.physio.blood-physiology-hemostasis.md'
+const HEMOSTASIS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: HEMOSTASIS, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Haemostasis is a SEQUENCE of three progressively more durable responses to vessel injury, ' +
+      'not one simultaneous event. Vascular spasm (fastest, temporary) constricts the injured ' +
+      'vessel. Platelet plug formation follows: platelets adhere to exposed collagen and ' +
+      'aggregate into a temporary seal. The coagulation cascade comes last and slowest, ' +
+      'converting fibrinogen into fibrin threads that REINFORCE (not replace) the platelet plug ' +
+      'into a durable clot. Separately, ABO/Rh genetics determine transfusion compatibility ' +
+      'through a specific ANTIBODY mechanism: in the ABO system, a person\'s plasma already ' +
+      'contains antibodies against whichever ABO antigen(s) their own cells lack (Type A carries ' +
+      'anti-B), so incompatible transfusion triggers an immediate attack; in the Rh system, an ' +
+      'Rh-negative person has no anti-Rh antibodies until sensitised by a first Rh-positive ' +
+      'exposure, with danger arising on subsequent exposure.',
+    targetedMisconceptions: [],
+    source: HEMOSTASIS_SRC,
+  },
+  {
+    conceptId: HEMOSTASIS, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students treat haemostasis\'s three stages as happening ' +
+      'simultaneously, or think the coagulation cascade REPLACES the platelet plug, missing the ' +
+      'ordered sequence where the fibrin mesh reinforces (not replaces) the existing plug. ' +
+      'Second, students describe transfusion incompatibility as a vague "blood mismatch," ' +
+      'missing the specific antibody-antigen mechanism — pre-existing (ABO) or newly-sensitised ' +
+      '(Rh) recipient antibodies attacking donor red blood cell surface antigens.',
+    targetedMisconceptions: [`${HEMOSTASIS}:M1`, `${HEMOSTASIS}:M2`],
+    source: HEMOSTASIS_SRC,
+  },
+]
+const HEMOSTASIS_PROBES: SeedProbe[] = [
+  {
+    conceptId: HEMOSTASIS, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Once the coagulation cascade forms a fibrin mesh, what happens to the platelet plug?',
+    choices: [
+      { text: 'It remains and is reinforced by the fibrin mesh into a stable clot', isCorrect: true },
+      { text: 'It is dissolved and completely replaced by the fibrin mesh', isCorrect: false, misconceptionId: `${HEMOSTASIS}:M1` },
+      { text: 'It forms before and independently of the other two stages', isCorrect: false, misconceptionId: `${HEMOSTASIS}:M1` },
+      { text: 'It has no relationship to the coagulation cascade', isCorrect: false },
+    ],
+    correctValue: 'It remains and is reinforced by the fibrin mesh into a stable clot',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${HEMOSTASIS}:M1`],
+    source: HEMOSTASIS_SRC,
+  },
+  {
+    conceptId: HEMOSTASIS, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student describes a Type A patient reacting badly to a Type B transfusion as "the ' +
+      'blood types just don\'t match." What is the best response?',
+    choices: [
+      {
+        text: 'More specifically — the Type A patient\'s plasma already contains anti-B ' +
+          'antibodies that attack the donor cells\' B antigens',
+        isCorrect: true,
+      },
+      {
+        text: 'That description is already fully sufficient and specific',
+        isCorrect: false,
+        misconceptionId: `${HEMOSTASIS}:M2`,
+      },
+    ],
+    correctValue: 'More specifically — the Type A patient\'s plasma already contains anti-B ' +
+      'antibodies that attack the donor cells\' B antigens',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${HEMOSTASIS}:M2`],
+    source: HEMOSTASIS_SRC,
+  },
+  {
+    conceptId: HEMOSTASIS, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Which haemostasis stage is the fastest but only a temporary, partial measure?',
+    choices: [
+      { text: 'Vascular spasm', isCorrect: true },
+      { text: 'Platelet plug formation', isCorrect: false },
+      { text: 'The coagulation cascade', isCorrect: false },
+    ],
+    correctValue: 'Vascular spasm',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: HEMOSTASIS_SRC,
+  },
+]
+
+// ─── bio.physio.endocrine-disorders-feedback ─────────────────────────────────
+const ENDODISORD = 'bio.physio.endocrine-disorders-feedback'
+const ENDODISORD_SRC = 'educational-brain/concepts/biology/bio.physio.endocrine-disorders-feedback.md'
+const ENDODISORD_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ENDODISORD, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Most hormone axes use negative feedback, where a hormone\'s downstream effect suppresses ' +
+      'further release once an adequate level is reached. Endocrine disorders are failures at a ' +
+      'SPECIFIC point in this loop: hyper- or hypo-secretion can arise at the hormone-producing ' +
+      'gland itself (primary) or at an upstream regulator controlling that gland (secondary) — ' +
+      'locating WHICH link failed matters diagnostically. Oxytocin release during childbirth is ' +
+      'a deliberate EXCEPTION using POSITIVE feedback: cervical stretching triggers oxytocin, ' +
+      'which intensifies contractions, causing more stretching and more oxytocin — an ' +
+      'escalating cycle that naturally ends at delivery, not a malfunctioning negative-feedback ' +
+      'system. Separately, a hormone-RECEPTOR mutation is mechanistically distinct from an ' +
+      'abnormal hormone LEVEL: in a receptor mutation, hormone levels are NORMAL but the target ' +
+      'cell cannot respond, so supplying more hormone would not help.',
+    targetedMisconceptions: [],
+    source: ENDODISORD_SRC,
+  },
+  {
+    conceptId: ENDODISORD, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students interpret oxytocin\'s escalating positive ' +
+      'feedback during childbirth as evidence a negative-feedback system has malfunctioned, ' +
+      'missing that it is a deliberate, functionally different mechanism suited to labour\'s need ' +
+      'for escalation toward a defined endpoint. Second, students conflate a hormone-receptor ' +
+      'mutation with an abnormal hormone level, missing that a receptor mutation involves NORMAL ' +
+      'hormone levels with a defective response — so more hormone would not fix it, unlike a true ' +
+      'deficiency.',
+    targetedMisconceptions: [`${ENDODISORD}:M1`, `${ENDODISORD}:M2`],
+    source: ENDODISORD_SRC,
+  },
+]
+const ENDODISORD_PROBES: SeedProbe[] = [
+  {
+    conceptId: ENDODISORD, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'During childbirth, oxytocin release increases contractions, which triggers even more ' +
+      'oxytocin release. What does this escalating pattern indicate?',
+    choices: [
+      { text: 'A deliberate positive-feedback mechanism suited to labour\'s need for escalation toward delivery', isCorrect: true },
+      { text: 'A malfunctioning negative-feedback system', isCorrect: false, misconceptionId: `${ENDODISORD}:M1` },
+      { text: 'A dangerous hormonal imbalance requiring immediate correction', isCorrect: false, misconceptionId: `${ENDODISORD}:M1` },
+      { text: 'An unrelated, coincidental hormone spike', isCorrect: false },
+    ],
+    correctValue: 'A deliberate positive-feedback mechanism suited to labour\'s need for escalation toward delivery',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${ENDODISORD}:M1`],
+    source: ENDODISORD_SRC,
+  },
+  {
+    conceptId: ENDODISORD, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A patient has completely normal hormone levels but shows symptoms of hormone ' +
+      'deficiency. A student suggests giving more of that hormone will fix it. What is the best ' +
+      'response?',
+    choices: [
+      {
+        text: 'Not necessarily — if the receptor is defective, more hormone will not help; ' +
+          'levels and receptor function are mechanistically distinct issues',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — any deficiency-like symptom is fixed by supplying more hormone',
+        isCorrect: false,
+        misconceptionId: `${ENDODISORD}:M2`,
+      },
+    ],
+    correctValue: 'Not necessarily — if the receptor is defective, more hormone will not help; ' +
+      'levels and receptor function are mechanistically distinct issues',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${ENDODISORD}:M2`],
+    source: ENDODISORD_SRC,
+  },
+  {
+    conceptId: ENDODISORD, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A hormone disorder could result from a problem at the hormone-producing gland itself, ' +
+      'or from a problem elsewhere. Where else?',
+    choices: [
+      { text: 'An upstream regulator controlling that gland', isCorrect: true },
+      { text: 'The target cell\'s cytoskeleton', isCorrect: false },
+      { text: 'The circulatory system\'s blood volume', isCorrect: false },
+    ],
+    correctValue: 'An upstream regulator controlling that gland',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: ENDODISORD_SRC,
+  },
+]
+
+// ─── bio.physio.integumentary-system ─────────────────────────────────────────
+const SKIN = 'bio.physio.integumentary-system'
+const SKIN_SRC = 'educational-brain/concepts/biology/bio.physio.integumentary-system.md'
+const SKIN_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SKIN, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Skin has three layers: the epidermis (outer, physical barrier, continuously renewing), ' +
+      'the dermis (connective tissue, blood vessels, nerve endings, glands), and the hypodermis ' +
+      '(fat and connective tissue for insulation and cushioning). Skin\'s function extends far ' +
+      'beyond covering: protection (barrier against pathogens, injury, UV), thermoregulation ' +
+      '(vasodilation/constriction, sweating), sensation (dermal mechanoreceptors, ' +
+      'thermoreceptors, nociceptors), and vitamin D synthesis (UV-triggered precursor synthesis, ' +
+      'further processed by liver and kidneys) — four DISTINCT physiological roles. Wound ' +
+      'healing proceeds through four ordered, overlapping stages: haemostasis (immediate), ' +
+      'inflammation (immune cells clear debris, causing redness/swelling), proliferation (new ' +
+      'tissue, collagen, blood vessels built), and remodelling — the FINAL and LONGEST stage, ' +
+      'during which collagen is reorganised and strengthened over weeks to months.',
+    targetedMisconceptions: [],
+    source: SKIN_SRC,
+  },
+  {
+    conceptId: SKIN, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students treat skin\'s function as essentially just ' +
+      'covering/protecting, missing that thermoregulation, sensation, and vitamin D synthesis ' +
+      'are separate, specific physiological functions. Second, students treat wound healing as a ' +
+      'single undifferentiated event, missing the ordered four-stage sequence — and specifically ' +
+      'missing that remodelling, the least visually dramatic stage, is actually the LONGEST, ' +
+      'during which most of the wound\'s eventual tensile strength develops.',
+    targetedMisconceptions: [`${SKIN}:M1`, `${SKIN}:M2`],
+    source: SKIN_SRC,
+  },
+]
+const SKIN_PROBES: SeedProbe[] = [
+  {
+    conceptId: SKIN, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A condition impairs ONLY skin\'s vitamin-D-synthesis capacity, leaving its barrier ' +
+      'function intact. What specific consequence would you predict?',
+    choices: [
+      { text: 'Increased risk of vitamin D deficiency', isCorrect: true },
+      { text: 'No consequence, since skin\'s only real job is covering the body', isCorrect: false, misconceptionId: `${SKIN}:M1` },
+      { text: 'Increased risk of infection from loss of the physical barrier', isCorrect: false, misconceptionId: `${SKIN}:M1` },
+      { text: 'Impaired wound healing specifically', isCorrect: false },
+    ],
+    correctValue: 'Increased risk of vitamin D deficiency',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${SKIN}:M1`],
+    source: SKIN_SRC,
+  },
+  {
+    conceptId: SKIN, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A wound looks visually closed after two weeks. A student says healing is now ' +
+      'essentially complete. What is the best response?',
+    choices: [
+      {
+        text: 'Not quite — remodelling, the longest stage, continues for weeks to months after ' +
+          'visual closure, still strengthening the tissue',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — visual closure means the healing process has fully finished',
+        isCorrect: false,
+        misconceptionId: `${SKIN}:M2`,
+      },
+    ],
+    correctValue: 'Not quite — remodelling, the longest stage, continues for weeks to months after ' +
+      'visual closure, still strengthening the tissue',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${SKIN}:M2`],
+    source: SKIN_SRC,
+  },
+  {
+    conceptId: SKIN, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Which wound-healing stage produces the visible redness, heat, and swelling as immune ' +
+      'cells clear debris and pathogens?',
+    choices: [
+      { text: 'Inflammation', isCorrect: true },
+      { text: 'Haemostasis', isCorrect: false },
+      { text: 'Remodelling', isCorrect: false },
+    ],
+    correctValue: 'Inflammation',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: SKIN_SRC,
+  },
+]
+
 export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...SCIMETH_EXPLANATIONS,
   ...UNITHEMES_EXPLANATIONS,
@@ -2466,6 +2745,9 @@ export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...REPTBIRD_EXPLANATIONS,
   ...MAMMAL_EXPLANATIONS,
   ...SLEEP_EXPLANATIONS,
+  ...HEMOSTASIS_EXPLANATIONS,
+  ...ENDODISORD_EXPLANATIONS,
+  ...SKIN_EXPLANATIONS,
 ]
 
 export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
@@ -2493,4 +2775,7 @@ export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
   ...REPTBIRD_PROBES,
   ...MAMMAL_PROBES,
   ...SLEEP_PROBES,
+  ...HEMOSTASIS_PROBES,
+  ...ENDODISORD_PROBES,
+  ...SKIN_PROBES,
 ]

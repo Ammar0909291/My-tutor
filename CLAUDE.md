@@ -333,7 +333,14 @@ circadian-biology` — its sole prerequisite, batch 2's `bio.neuro.brain-
 regional-organization`, now served) validated clean: `tsc --noEmit` 0 errors,
 dry-run 0 duplicate identities across 8,361 items, contract audit 132/199
 authored, 132/132 at contract, 0 short, 0 never-quizzable, 40/40 targeted
-vitest suites passing. **Extended 91: 24/91.** Production convergence (seed
+vitest suites passing. Batch 9 (2026-09-21, 3 concepts:
+`bio.physio.blood-physiology-hemostasis`, `bio.physio.endocrine-disorders-
+feedback`, and `bio.physio.integumentary-system` — all three sole-
+prerequisite on already-served `bio.physio.circulatory-system` or
+`bio.physio.endocrine-system`) validated clean: `tsc --noEmit` 0 errors,
+dry-run 0 duplicate identities across 8,376 items, contract audit 135/199
+authored, 135/135 at contract, 0 short, 0 never-quizzable, 40/40 targeted
+vitest suites passing. **Extended 91: 27/91.** Production convergence (seed
 corpus → cold-start bootstrap → live AssetIdentity rows) is UNVERIFIED against
 the real database this campaign so far — no Supabase/DB access has been used;
 treat as PENDING until explicitly checked. Re-measure with `npx tsx
