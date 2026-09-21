@@ -226,34 +226,35 @@ every one of biology's 108 originally-authored concepts was stuck at 2/3 gradeab
 no biology lesson could ever reach verified mastery — **the entire original 108-concept
 probe-depth campaign is now COMPLETE: 108/108 at the 3-probe contract floor.** The 91
 2026-09-14-KG-extension concepts remain a SEPARATE, larger, not-yet-started task (see below).
-Formal EB
-authoring started 2026-09-20 at the KG root, `bio.found.what-is-biology`, then continued in
-strict KG-prerequisite order through 197 concepts total (`educational-brain/concepts/biology/`,
-no Blueprint exists for biology as a subject; 87 entries — see COVERAGE.md's biology row
-for the full list of ZERO-seed-content concepts authored from first principles — and
-thirty-nine entries record genuine KG-description-vs-seed-content gaps as Curriculum
-Feedback rather than fabricating content).
-Authored via 60 successive batches of 3, each recomputing the fresh topologically-ready
-frontier from the prior baseline — see COVERAGE.md's biology row for the full per-batch
-concept list; the latest batch (from the 194-concept baseline) added
-`bio.bioinfo.comparative-genomics`, `bio.biotech.agricultural-forensic-biotechnology`, and
-`bio.biotech.bioprocess-engineering` (all 3 first-principles-authored — 0 of 4 frontier
-candidates had seed content, the TWENTY-SIXTH consecutive fully zero-content batch) —
-**EB is 197/199** (only 2 concepts remain:
-`bio.bioinfo.multiomics-statistical-genomics` and `bio.sys.quantitative-systems-modeling`
-— the campaign's final batch).
-**First-principles authoring remains the settled default mode** for continuing this
-campaign from the current 199-concept KG frontier (twenty-six consecutive zero-content
-batches since batch 35) — continuation should still re-check each fresh frontier for
-any remaining seed-content-backed concepts (a handful may still surface, as batch 30's
-2-of-46 showed), but should not expect them as the norm. The 91-concept 2026-09-14
-KG-extension pool remains a SEPARATE, larger, not-yet-started task; no unilateral
-decision to switch to it has been made, and this determination (continuing
-first-principles authoring of the current frontier rather than switching tasks) has
-now been applied consistently across thirty-two batches (28 through 60) without a
-stop-and-ask, per the Workflow preference's authorization for ordinary scope
-continuations — a future session may still revisit this call, particularly once the
-current frontier is fully exhausted of authorable concepts.
+**FORMAL EDUCATIONAL BRAIN AUTHORING IS COMPLETE: 199/199 (2026-09-21).**
+Authoring started 2026-09-20 at the KG root, `bio.found.what-is-biology`, and
+proceeded in strict KG-prerequisite order across 61 successive batches (each
+recomputing the fresh topologically-ready frontier from the prior baseline — see
+COVERAGE.md's biology row for the full per-batch concept list and the exhaustive
+per-batch authoring history) through all 199 concepts in
+`educational-brain/concepts/biology/` (no Blueprint exists for biology as a subject).
+89 entries were authored entirely from first principles (see COVERAGE.md's biology
+row for the full list); thirty-nine entries record genuine KG-description-vs-seed-
+content gaps as Curriculum Feedback rather than fabricating content. The final batch
+(from the 197-concept baseline) added `bio.bioinfo.multiomics-statistical-genomics`
+and `bio.sys.quantitative-systems-modeling`, both first-principles-authored — the
+twenty-seventh consecutive fully zero-seed-content batch, closing out a run that
+began at batch 35.
+**This formal-EB completion does NOT mean production-servable content.** Two
+separate counters exist for this program and must never be conflated: (1) the
+ORIGINAL 108-concept probe-depth campaign is COMPLETE (108/108 at the 3-probe
+contract floor, tracked in `biologyDepthSeedAssets.ts`'s own header); (2) the
+91-concept 2026-09-14 KG-extension pool (`bio.behav`/`bio.neuro` and most concepts
+authored from roughly batch 28 onward) has ZERO seed content of any kind in
+`biologySeedAssets.ts`/`biologyDepthSeedAssets.ts` — none of these 91 concepts can
+currently be served as a gradeable lesson in production, despite now having full
+formal EB coverage. Seeding actual `core_explanation`/`misconception_repair`/`mcq`/
+`misconception_probe` content (and reaching the 3-probe contract floor) for this
+91-concept pool is a SEPARATE, substantial, NOT-YET-STARTED follow-on task — resume
+only on an explicit fresh owner instruction naming this specific follow-on work,
+per the Workflow preference's G1/G2-adjacent caution around new Educational Brain
+runtime capability work; simply continuing "the Biology program" without a fresh
+instruction should NOT be read as authorization to begin this seeding task.
 These
 two
 counters are tracked and reported SEPARATELY, never conflated — see `COVERAGE.md`'s biology row. The 91 concepts from the 2026-09-14 KG extension still have zero
