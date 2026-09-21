@@ -5534,6 +5534,291 @@ const AMR_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── bio.gen.quantitative-genetics-heritability ──────────────────────────────
+const HERIT = 'bio.gen.quantitative-genetics-heritability'
+const HERIT_SRC = 'educational-brain/concepts/biology/bio.gen.quantitative-genetics-heritability.md'
+const HERIT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: HERIT, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Quantitative genetics studies continuous, polygenic traits (many genes, small effects ' +
+      'each, plus environment), unlike discrete Mendelian single-locus traits. Heritability ' +
+      'quantifies what PROPORTION of total phenotypic VARIANCE in a population is attributable ' +
+      'to genetic variance. Broad-sense heritability (H²) captures ALL genetic variance ' +
+      '(additive, dominance, epistatic); narrow-sense heritability (h²) captures only the ' +
+      'ADDITIVE component, most relevant for predicting response to selection. Critically, ' +
+      'heritability is a POPULATION-SPECIFIC statistic, NOT a fixed trait property and NOT a ' +
+      'measure of how much of an individual\'s own trait value is "caused by" genes — the SAME ' +
+      'trait can have a completely different heritability in a different population or under ' +
+      'different environmental conditions, since heritability depends on the relative amounts of ' +
+      'genetic AND environmental variance present.',
+    targetedMisconceptions: [],
+    source: HERIT_SRC,
+  },
+  {
+    conceptId: HERIT, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students interpret a heritability percentage (e.g., "80% ' +
+      'heritable") as describing how much of an INDIVIDUAL\'S own trait value is caused by genes, ' +
+      'missing that heritability is a population-level VARIANCE statistic that says nothing about ' +
+      'any single individual. Second, students treat heritability as a fixed, universal property ' +
+      'of a trait, missing that it is specific to a given population under given environmental ' +
+      'conditions — if environmental variance increases, heritability can DECREASE even without ' +
+      'any change in the underlying genetics.',
+    targetedMisconceptions: [`${HERIT}:M1`, `${HERIT}:M2`],
+    source: HERIT_SRC,
+  },
+]
+const HERIT_PROBES: SeedProbe[] = [
+  {
+    conceptId: HERIT, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A trait is reported as "80% heritable" in a population. What does this tell you about ' +
+      'one specific individual\'s own trait value?',
+    choices: [
+      { text: 'Nothing directly — heritability describes population-level variance patterns, not individual causation', isCorrect: true },
+      { text: '80% of that individual\'s trait value is caused by their genes', isCorrect: false, misconceptionId: `${HERIT}:M1` },
+      { text: '20% of that individual\'s trait value is caused by their environment specifically', isCorrect: false, misconceptionId: `${HERIT}:M1` },
+      { text: 'The individual\'s trait value is entirely determined by genetics', isCorrect: false },
+    ],
+    correctValue: 'Nothing directly — heritability describes population-level variance patterns, not individual causation',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${HERIT}:M1`],
+    source: HERIT_SRC,
+  },
+  {
+    conceptId: HERIT, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The same trait is measured in two populations: one with uniform living conditions, one ' +
+      'with highly varied living conditions. A student says heritability must be identical in both ' +
+      'since it\'s "a fixed property of the trait." What is the best response?',
+    choices: [
+      {
+        text: 'Wrong — heritability can differ between populations since it depends on the ' +
+          'relative amounts of genetic and environmental variance present in each',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — heritability is a universal constant for any given trait',
+        isCorrect: false,
+        misconceptionId: `${HERIT}:M2`,
+      },
+    ],
+    correctValue: 'Wrong — heritability can differ between populations since it depends on the ' +
+      'relative amounts of genetic and environmental variance present in each',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${HERIT}:M2`],
+    source: HERIT_SRC,
+  },
+  {
+    conceptId: HERIT, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Which heritability measure captures only the additive genetic variance component, most ' +
+      'relevant to predicting a population\'s response to selection?',
+    choices: [
+      { text: 'Narrow-sense heritability (h²)', isCorrect: true },
+      { text: 'Broad-sense heritability (H²)', isCorrect: false },
+      { text: 'Neither measure captures additive variance specifically', isCorrect: false },
+    ],
+    correctValue: 'Narrow-sense heritability (h²)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: HERIT_SRC,
+  },
+]
+
+// ─── bio.gen.conservation-genetics ────────────────────────────────────────────
+const CONSGEN = 'bio.gen.conservation-genetics'
+const CONSGEN_SRC = 'educational-brain/concepts/biology/bio.gen.conservation-genetics.md'
+const CONSGEN_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CONSGEN, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Genetic diversity is a genuine component of population viability; small populations are ' +
+      'vulnerable to inbreeding depression (reduced fitness from mating between relatives, ' +
+      'exposing deleterious recessive alleles). Effective population size (Ne) — the size of a ' +
+      'theoretical "ideal" population experiencing the same rate of genetic drift — is typically ' +
+      'MUCH SMALLER than census size (N), due to unequal sex ratios, variance in reproductive ' +
+      'success, and past population fluctuations; a numerically large population can still be ' +
+      'genetically vulnerable. Genetic rescue addresses inbreeding depression by deliberately ' +
+      'introducing NEW genetic variation via managed gene flow (translocating individuals from a ' +
+      'genetically DISTINCT population) — adding more individuals from the SAME depleted ' +
+      'population would not help, since no new alleles would be introduced.',
+    targetedMisconceptions: [],
+    source: CONSGEN_SRC,
+  },
+  {
+    conceptId: CONSGEN, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students treat effective population size (Ne) and census ' +
+      'population size (N) as roughly equivalent, missing that Ne is typically much smaller due to ' +
+      'skewed breeding participation, reproductive variance, and past bottlenecks. Second, ' +
+      'students assume genetic rescue works by simply increasing population numbers, missing that ' +
+      'its mechanism specifically requires introducing NEW genetic variation from a genetically ' +
+      'distinct source — more individuals from the same depleted gene pool would not address ' +
+      'inbreeding depression.',
+    targetedMisconceptions: [`${CONSGEN}:M1`, `${CONSGEN}:M2`],
+    source: CONSGEN_SRC,
+  },
+]
+const CONSGEN_PROBES: SeedProbe[] = [
+  {
+    conceptId: CONSGEN, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A population has 1,000 counted individuals, but only 50 males and 50 females actually ' +
+      'breed each generation. Is this population\'s genetic vulnerability better predicted by its ' +
+      'census count (1,000) or by something smaller?',
+    choices: [
+      { text: 'Something smaller — the effective population size, reflecting only the genetically active breeders', isCorrect: true },
+      { text: 'The census count of 1,000, since Ne and N are essentially the same', isCorrect: false, misconceptionId: `${CONSGEN}:M1` },
+      { text: 'Census count is always the best predictor of genetic vulnerability', isCorrect: false, misconceptionId: `${CONSGEN}:M1` },
+      { text: 'Genetic vulnerability cannot be estimated from this information', isCorrect: false },
+    ],
+    correctValue: 'Something smaller — the effective population size, reflecting only the genetically active breeders',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${CONSGEN}:M1`],
+    source: CONSGEN_SRC,
+  },
+  {
+    conceptId: CONSGEN, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A population suffering from inbreeding depression receives MORE individuals — but from ' +
+      'the SAME genetically depleted population. A student calls this successful "genetic rescue." ' +
+      'What is the best response?',
+    choices: [
+      {
+        text: 'Not genetic rescue — no new alleles were introduced, so the underlying lack of ' +
+          'genetic variation remains unaddressed',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — genetic rescue works by simply adding more individuals, regardless of source',
+        isCorrect: false,
+        misconceptionId: `${CONSGEN}:M2`,
+      },
+    ],
+    correctValue: 'Not genetic rescue — no new alleles were introduced, so the underlying lack of ' +
+      'genetic variation remains unaddressed',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${CONSGEN}:M2`],
+    source: CONSGEN_SRC,
+  },
+  {
+    conceptId: CONSGEN, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What genetic phenomenon results from mating between close relatives, increasing the ' +
+      'frequency of homozygous deleterious recessive alleles?',
+    choices: [
+      { text: 'Inbreeding depression', isCorrect: true },
+      { text: 'Genetic rescue', isCorrect: false },
+      { text: 'Outbreeding depression', isCorrect: false },
+    ],
+    correctValue: 'Inbreeding depression',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: CONSGEN_SRC,
+  },
+]
+
+// ─── bio.immuno.t-cell-development-tolerance ─────────────────────────────────
+const TCELLTOL = 'bio.immuno.t-cell-development-tolerance'
+const TCELLTOL_SRC = 'educational-brain/concepts/biology/bio.immuno.t-cell-development-tolerance.md'
+const TCELLTOL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: TCELLTOL, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Thymic T-cell selection involves two sequential steps testing OPPOSITE extremes of binding ' +
+      'strength. Positive selection rescues T cells binding self-MHC with at least weak-to- ' +
+      'moderate affinity (too weak or none = death by neglect). Negative selection then ' +
+      'eliminates surviving T cells that bind self-ANTIGEN too STRONGLY (dangerously ' +
+      'autoreactive). This thymic process is central tolerance — but it is incomplete: some ' +
+      'weakly self-reactive T cells escape. Peripheral tolerance provides a SEPARATE, ' +
+      'complementary safeguard outside the thymus, via regulatory T cells (actively suppressing ' +
+      'other autoreactive T cells) and anergy (functional inactivation without elimination). ' +
+      'Autoimmunity results from a breakdown of ONE OR MORE specific tolerance checkpoints ' +
+      '(central or peripheral, via a specific mechanism), not one undifferentiated immune ' +
+      'failure.',
+    targetedMisconceptions: [],
+    source: TCELLTOL_SRC,
+  },
+  {
+    conceptId: TCELLTOL, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students conflate positive and negative selection as ' +
+      'testing the same basic property (binds self-MHC/antigen or not), missing that they test ' +
+      'OPPOSITE extremes of binding strength — too weak versus too strong. Second, students treat ' +
+      'central and peripheral tolerance as the same mechanism in different places, missing that ' +
+      'central tolerance ELIMINATES cells during thymic development while peripheral tolerance ' +
+      'SUPPRESSES or FUNCTIONALLY INACTIVATES already-mature, circulating T cells — genuinely ' +
+      'different mechanisms at different stages.',
+    targetedMisconceptions: [`${TCELLTOL}:M1`, `${TCELLTOL}:M2`],
+    source: TCELLTOL_SRC,
+  },
+]
+const TCELLTOL_PROBES: SeedProbe[] = [
+  {
+    conceptId: TCELLTOL, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A developing T cell binds self-antigen with very STRONG affinity. What is its most ' +
+      'likely fate?',
+    choices: [
+      { text: 'Death by negative selection, since strong self-antigen binding indicates dangerous autoreactivity', isCorrect: true },
+      { text: 'Death by neglect, since positive and negative selection test the same property', isCorrect: false, misconceptionId: `${TCELLTOL}:M1` },
+      { text: 'Automatic survival, since any self-MHC binding is sufficient', isCorrect: false, misconceptionId: `${TCELLTOL}:M1` },
+      { text: 'Its fate cannot be predicted from binding strength alone', isCorrect: false },
+    ],
+    correctValue: 'Death by negative selection, since strong self-antigen binding indicates dangerous autoreactivity',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${TCELLTOL}:M1`],
+    source: TCELLTOL_SRC,
+  },
+  {
+    conceptId: TCELLTOL, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A mature, already-circulating autoreactive T cell is actively suppressed by a ' +
+      'regulatory T cell in a peripheral tissue. A student calls this "central tolerance happening ' +
+      'in a different location." What is the best response?',
+    choices: [
+      {
+        text: 'This is peripheral tolerance specifically — a genuinely different mechanism ' +
+          '(Treg suppression) acting on already-mature, circulating cells, not thymic elimination',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — central and peripheral tolerance are the same mechanism, just in different places',
+        isCorrect: false,
+        misconceptionId: `${TCELLTOL}:M2`,
+      },
+    ],
+    correctValue: 'This is peripheral tolerance specifically — a genuinely different mechanism ' +
+      '(Treg suppression) acting on already-mature, circulating cells, not thymic elimination',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${TCELLTOL}:M2`],
+    source: TCELLTOL_SRC,
+  },
+  {
+    conceptId: TCELLTOL, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What is the term for a T cell becoming functionally unresponsive after encountering its ' +
+      'target antigen without the necessary co-stimulatory signal?',
+    choices: [
+      { text: 'Anergy', isCorrect: true },
+      { text: 'Negative selection', isCorrect: false },
+      { text: 'Positive selection', isCorrect: false },
+    ],
+    correctValue: 'Anergy',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: TCELLTOL_SRC,
+  },
+]
+
 export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...SCIMETH_EXPLANATIONS,
   ...UNITHEMES_EXPLANATIONS,
@@ -5592,6 +5877,9 @@ export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...MICROECO_EXPLANATIONS,
   ...CYTOKINES_EXPLANATIONS,
   ...AMR_EXPLANATIONS,
+  ...HERIT_EXPLANATIONS,
+  ...CONSGEN_EXPLANATIONS,
+  ...TCELLTOL_EXPLANATIONS,
 ]
 
 export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
@@ -5652,4 +5940,7 @@ export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
   ...MICROECO_PROBES,
   ...CYTOKINES_PROBES,
   ...AMR_PROBES,
+  ...HERIT_PROBES,
+  ...CONSGEN_PROBES,
+  ...TCELLTOL_PROBES,
 ]

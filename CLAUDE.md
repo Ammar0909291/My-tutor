@@ -439,7 +439,16 @@ prerequisite `bio.immuno.innate-adaptive-immunity`, already served — and
 both already served) validated clean: `tsc --noEmit` 0 errors, dry-run 0
 duplicate identities across 8,526 items, contract audit 165/199 authored,
 165/165 at contract, 0 short, 0 never-quizzable, 40/40 targeted vitest suites
-passing. **Extended 91: 57/91.** Production convergence (seed
+passing. Batch 20 (2026-09-21, 3 concepts: `bio.gen.quantitative-genetics-
+heritability` — sole prerequisite `bio.gen.population-genetics`, already
+served — `bio.gen.conservation-genetics` — prerequisites
+`bio.gen.population-genetics` and `bio.eco.biodiversity-conservation`, both
+already served — and `bio.immuno.t-cell-development-tolerance` — sole
+prerequisite `bio.immuno.mhc-antigen-presentation`, already served, opens
+`bio.immuno.cancer-immunology-immunotherapy`) validated clean: `tsc --noEmit`
+0 errors, dry-run 0 duplicate identities across 8,541 items, contract audit
+168/199 authored, 168/168 at contract, 0 short, 0 never-quizzable, 40/40
+targeted vitest suites passing. **Extended 91: 60/91.** Production convergence (seed
 corpus → cold-start bootstrap → live
 AssetIdentity rows) is UNVERIFIED against the real database this campaign so
 far — no Supabase/DB access has been used;
