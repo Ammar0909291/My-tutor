@@ -7523,6 +7523,291 @@ const REGEN_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── bio.eco.applied-ecology-ecosystem-services ──────────────────────────────
+const APPLIEDECO = 'bio.eco.applied-ecology-ecosystem-services'
+const APPLIEDECO_SRC = 'educational-brain/concepts/biology/bio.eco.applied-ecology-ecosystem-services.md'
+const APPLIEDECO_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: APPLIEDECO, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Ecosystem services classify into four categories by SPECIFIC functional role: ' +
+      'provisioning (direct tangible products — food, timber, water), regulating (benefits ' +
+      'from regulating natural processes — climate regulation, flood control, pollination), ' +
+      'supporting (underlying processes that ENABLE the other categories rather than directly ' +
+      'benefiting humans — nutrient cycling, soil formation), and cultural (non-material ' +
+      'recreational/aesthetic/spiritual value). Many services have no market price, which ' +
+      'creates a specific economic problem — markets systematically UNDERVALUE them — which is ' +
+      'why non-market valuation approaches (replacement-cost estimation, willingness-to-pay ' +
+      'surveys) exist to make their real economic value visible. Environmental impact ' +
+      'assessment (EIA) is the APPLIED framework connecting existing ecological science to ' +
+      'actual policy decisions — it is not itself a scientific discovery process.',
+    targetedMisconceptions: [],
+    source: APPLIEDECO_SRC,
+  },
+  {
+    conceptId: APPLIEDECO, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students classify supporting services as ' +
+      'provisioning or regulating, missing that supporting services specifically ENABLE the ' +
+      'other three categories (e.g. nutrient cycling underlies food provisioning) rather than ' +
+      'providing a directly-experienced benefit themselves. Second, students assume a service ' +
+      'with no market price has no real economic value, missing that non-market valuation ' +
+      'approaches exist precisely because such services CAN have substantial real economic ' +
+      'value that markets simply fail to price.',
+    targetedMisconceptions: [`${APPLIEDECO}:M1`, `${APPLIEDECO}:M2`],
+    source: APPLIEDECO_SRC,
+  },
+]
+const APPLIEDECO_PROBES: SeedProbe[] = [
+  {
+    conceptId: APPLIEDECO, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Nitrogen fixation by soil microorganisms underlies the soil fertility that later ' +
+      'enables food production, but does not directly benefit humans itself. Which ecosystem ' +
+      'service category does it belong to?',
+    choices: [
+      { text: 'Supporting — it enables other service categories rather than being directly experienced', isCorrect: true },
+      { text: 'Provisioning — since it eventually contributes to producing food', isCorrect: false, misconceptionId: `${APPLIEDECO}:M1` },
+      { text: 'Regulating — since it involves a natural process', isCorrect: false },
+      { text: 'Cultural — since it has ecological significance', isCorrect: false },
+    ],
+    correctValue: 'Supporting — it enables other service categories rather than being directly experienced',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${APPLIEDECO}:M1`],
+    source: APPLIEDECO_SRC,
+  },
+  {
+    conceptId: APPLIEDECO, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Natural pollination of a crop has no market price — nobody buys or sells it ' +
+      'directly. A student says: "Since it has no price, it has no real economic value." Is ' +
+      'this correct?',
+    choices: [
+      {
+        text: 'No — non-market valuation methods (e.g. the cost of artificial pollination as a ' +
+          'replacement) can estimate its substantial real economic value',
+        isCorrect: true,
+      },
+      {
+        text: 'Yes — a service with no market price is economically worthless',
+        isCorrect: false,
+        misconceptionId: `${APPLIEDECO}:M2`,
+      },
+    ],
+    correctValue: 'No — non-market valuation methods (e.g. the cost of artificial pollination ' +
+      'as a replacement) can estimate its substantial real economic value',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${APPLIEDECO}:M2`],
+    source: APPLIEDECO_SRC,
+  },
+  {
+    conceptId: APPLIEDECO, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What is the name of the formal, structured process by which the likely ecological ' +
+      'consequences of a proposed development are systematically evaluated before a policy ' +
+      'decision is made?',
+    choices: [
+      { text: 'Environmental impact assessment', isCorrect: true },
+      { text: 'Ecosystem service valuation', isCorrect: false },
+      { text: 'Biodiversity conservation planning', isCorrect: false },
+    ],
+    correctValue: 'Environmental impact assessment',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: APPLIEDECO_SRC,
+  },
+]
+
+// ─── bio.eco.biogeochemistry-advanced ────────────────────────────────────────
+const BIOGEOADV = 'bio.eco.biogeochemistry-advanced'
+const BIOGEOADV_SRC = 'educational-brain/concepts/biology/bio.eco.biogeochemistry-advanced.md'
+const BIOGEOADV_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: BIOGEOADV, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The sulfur cycle is a fourth major biogeochemical cycle alongside carbon, nitrogen, ' +
+      'and phosphorus, following the same general logic (movement between abiotic reservoirs ' +
+      'and biological pools, mediated by microorganisms). Fertiliser-driven nitrogen and ' +
+      'phosphorus loading disrupts natural cycling RATE and QUANTITY — it does not introduce a ' +
+      'foreign substance, since these nutrients already cycle naturally; the problem is ' +
+      'dramatically accelerating and increasing the quantity entering aquatic systems beyond ' +
+      'what natural processes can absorb. Eutrophication is a SEQUENTIAL causal chain: excess ' +
+      'nutrient input fuels algal bloom, the bloom\'s algae eventually die, decomposer ' +
+      'microorganisms consume the dead material and DEPLETE DISSOLVED OXYGEN in the process, ' +
+      'and this oxygen depletion produces hypoxia/dead zones — nutrients are not directly toxic ' +
+      'to fish.',
+    targetedMisconceptions: [],
+    source: BIOGEOADV_SRC,
+  },
+  {
+    conceptId: BIOGEOADV, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students believe excess nutrients directly kill fish, ' +
+      'missing the specific sequential mechanism (algal bloom → decomposition → oxygen ' +
+      'depletion → hypoxia) connecting cause to effect. Second, students treat fertiliser ' +
+      'runoff as introducing an entirely new, foreign substance, missing that nitrogen and ' +
+      'phosphorus already cycle naturally — the problem is one of disrupted rate and quantity, ' +
+      'not a foreign substance.',
+    targetedMisconceptions: [`${BIOGEOADV}:M1`, `${BIOGEOADV}:M2`],
+    source: BIOGEOADV_SRC,
+  },
+]
+const BIOGEOADV_PROBES: SeedProbe[] = [
+  {
+    conceptId: BIOGEOADV, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why do fish die during a eutrophication event, given that nitrogen and phosphorus ' +
+      'are not directly toxic to fish?',
+    choices: [
+      { text: 'Excess nutrients fuel algal bloom, whose subsequent decomposition depletes dissolved oxygen, causing hypoxia', isCorrect: true },
+      { text: 'The nutrients themselves are directly toxic and poison the fish', isCorrect: false, misconceptionId: `${BIOGEOADV}:M1` },
+      { text: 'Fish die from overcrowding caused by increased algae providing more food', isCorrect: false },
+      { text: 'Nutrient pollution has no established connection to fish deaths', isCorrect: false },
+    ],
+    correctValue: 'Excess nutrients fuel algal bloom, whose subsequent decomposition depletes dissolved oxygen, causing hypoxia',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${BIOGEOADV}:M1`],
+    source: BIOGEOADV_SRC,
+  },
+  {
+    conceptId: BIOGEOADV, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student says: "Fertiliser runoff introduces a brand-new, foreign substance into ' +
+      'aquatic ecosystems that wasn\'t there before." Is this correct?',
+    choices: [
+      {
+        text: 'No — nitrogen and phosphorus already cycle naturally; the problem is fertiliser ' +
+          'dramatically increasing the RATE and QUANTITY entering the water beyond natural ' +
+          'processing capacity',
+        isCorrect: true,
+      },
+      {
+        text: 'Yes — fertiliser introduces entirely foreign substances that ecosystems have never encountered',
+        isCorrect: false,
+        misconceptionId: `${BIOGEOADV}:M2`,
+      },
+    ],
+    correctValue: 'No — nitrogen and phosphorus already cycle naturally; the problem is ' +
+      'fertiliser dramatically increasing the RATE and QUANTITY entering the water beyond ' +
+      'natural processing capacity',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${BIOGEOADV}:M2`],
+    source: BIOGEOADV_SRC,
+  },
+  {
+    conceptId: BIOGEOADV, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Alongside the carbon, nitrogen, and phosphorus cycles, what is the fourth major ' +
+      'biogeochemical cycle?',
+    choices: [
+      { text: 'The sulfur cycle', isCorrect: true },
+      { text: 'The oxygen cycle', isCorrect: false },
+      { text: 'The hydrogen cycle', isCorrect: false },
+    ],
+    correctValue: 'The sulfur cycle',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: BIOGEOADV_SRC,
+  },
+]
+
+// ─── bio.eco.landscape-conservation-ecology ──────────────────────────────────
+const LANDCONS = 'bio.eco.landscape-conservation-ecology'
+const LANDCONS_SRC = 'educational-brain/concepts/biology/bio.eco.landscape-conservation-ecology.md'
+const LANDCONS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: LANDCONS, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Habitat fragmentation harms populations significantly through reduced CONNECTIVITY ' +
+      'between patches, a mechanism DISTINCT from simple habitat-area loss — even with equal ' +
+      'total remaining area, fragmenting it into isolated patches impairs dispersal, ' +
+      'mate-finding, and recolonisation. Corridors and stepping-stone habitats are specific ' +
+      'mitigation strategies that restore movement PATHWAYS (not additional habitat area), ' +
+      'directly targeting the connectivity mechanism. Metapopulation dynamics frames long-term ' +
+      'persistence via the patch occupancy/extinction-colonisation balance: individual patches ' +
+      'can experience local extinction as a NORMAL event, and the metapopulation as a whole ' +
+      'persists provided colonisation from other patches keeps pace with the overall extinction ' +
+      'rate.',
+    targetedMisconceptions: [],
+    source: LANDCONS_SRC,
+  },
+  {
+    conceptId: LANDCONS, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students attribute fragmentation\'s harm solely to ' +
+      'reduced total area, missing the separate, significant connectivity-loss mechanism that ' +
+      'operates even when total area stays constant. Second, students treat a single patch\'s ' +
+      'local extinction as proof the overall conservation effort failed, missing that local ' +
+      'extinctions are a normal part of metapopulation dynamics as long as colonisation from ' +
+      'other patches keeps pace with the overall extinction rate.',
+    targetedMisconceptions: [`${LANDCONS}:M1`, `${LANDCONS}:M2`],
+    source: LANDCONS_SRC,
+  },
+]
+const LANDCONS_PROBES: SeedProbe[] = [
+  {
+    conceptId: LANDCONS, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two landscapes have EQUAL total remaining habitat area, but one is more fragmented ' +
+      '(more isolated patches) than the other. What does the connectivity mechanism predict?',
+    choices: [
+      { text: 'The more fragmented landscape shows worse population outcomes, due to impaired dispersal and recolonisation', isCorrect: true },
+      { text: 'Both landscapes show identical population outcomes, since total area is equal', isCorrect: false, misconceptionId: `${LANDCONS}:M1` },
+      { text: 'The more fragmented landscape shows better outcomes, since patches receive more individual protection', isCorrect: false },
+      { text: 'Fragmentation level has no bearing on population outcomes if area is equal', isCorrect: false },
+    ],
+    correctValue: 'The more fragmented landscape shows worse population outcomes, due to impaired dispersal and recolonisation',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${LANDCONS}:M1`],
+    source: LANDCONS_SRC,
+  },
+  {
+    conceptId: LANDCONS, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'One patch within an otherwise healthy, well-connected metapopulation network ' +
+      'experiences local extinction. A student says: "This proves the conservation effort has ' +
+      'failed." Is this correct?',
+    choices: [
+      {
+        text: 'No — local extinctions are a normal part of metapopulation dynamics; the network ' +
+          'can still persist if colonisation from other patches keeps pace with extinction',
+        isCorrect: true,
+      },
+      {
+        text: 'Yes — any single patch\'s local extinction means the entire metapopulation has failed',
+        isCorrect: false,
+        misconceptionId: `${LANDCONS}:M2`,
+      },
+    ],
+    correctValue: 'No — local extinctions are a normal part of metapopulation dynamics; the ' +
+      'network can still persist if colonisation from other patches keeps pace with extinction',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${LANDCONS}:M2`],
+    source: LANDCONS_SRC,
+  },
+  {
+    conceptId: LANDCONS, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What term describes a set of spatially-separated local populations occupying ' +
+      'different habitat patches, connected by occasional migration between patches?',
+    choices: [
+      { text: 'Metapopulation', isCorrect: true },
+      { text: 'Ecosystem', isCorrect: false },
+      { text: 'Biome', isCorrect: false },
+    ],
+    correctValue: 'Metapopulation',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: LANDCONS_SRC,
+  },
+]
+
 export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...SCIMETH_EXPLANATIONS,
   ...UNITHEMES_EXPLANATIONS,
@@ -7602,6 +7887,9 @@ export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...AGING_EXPLANATIONS,
   ...ORGANOGEN_EXPLANATIONS,
   ...REGEN_EXPLANATIONS,
+  ...APPLIEDECO_EXPLANATIONS,
+  ...BIOGEOADV_EXPLANATIONS,
+  ...LANDCONS_EXPLANATIONS,
 ]
 
 export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
@@ -7683,4 +7971,7 @@ export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
   ...AGING_PROBES,
   ...ORGANOGEN_PROBES,
   ...REGEN_PROBES,
+  ...APPLIEDECO_PROBES,
+  ...BIOGEOADV_PROBES,
+  ...LANDCONS_PROBES,
 ]

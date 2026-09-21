@@ -523,9 +523,19 @@ simultaneously ready again; selection closed another domain outright:
 entire remaining `bio.dev` domain gap) validated clean: `tsc --noEmit` 0
 errors, dry-run 0 duplicate identities across 8,631 items, contract audit
 186/199 authored, 186/186 at contract, 0 short, 0 never-quizzable, 40/40
-targeted vitest suites passing.
+targeted vitest suites passing. Batch 27 (2026-09-21, 3 concepts — all 13
+remaining extension concepts were simultaneously ready again; selection
+closed another domain outright: `bio.eco.applied-ecology-ecosystem-
+services`, `bio.eco.biogeochemistry-advanced`, and `bio.eco.landscape-
+conservation-ecology` — prerequisites already-served `bio.eco.biodiversity-
+conservation` (applied-ecology and landscape-conservation) and
+`bio.eco.nutrient-cycling` (biogeochemistry) — CLOSING the entire remaining
+`bio.eco` domain gap) validated clean: `tsc --noEmit` 0 errors, dry-run 0
+duplicate identities across 8,646 items, contract audit 189/199 authored,
+189/189 at contract, 0 short, 0 never-quizzable, 40/40 targeted vitest
+suites passing.
 **Extended
-91: 78/91.** Production convergence (seed
+91: 81/91.** Production convergence (seed
 corpus → cold-start bootstrap → live
 AssetIdentity rows) is UNVERIFIED against the real database this campaign so
 far — no Supabase/DB access has been used;
