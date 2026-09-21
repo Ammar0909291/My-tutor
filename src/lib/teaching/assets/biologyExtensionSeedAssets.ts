@@ -2720,6 +2720,283 @@ const SKIN_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── bio.physio.homeostasis-thermoregulation ─────────────────────────────────
+const THERMOREG = 'bio.physio.homeostasis-thermoregulation'
+const THERMOREG_SRC = 'educational-brain/concepts/biology/bio.physio.homeostasis-thermoregulation.md'
+const THERMOREG_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: THERMOREG, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Negative feedback is the general control-loop logic behind homeostasis: a deviation from ' +
+      'a set point is detected, triggering a response that OPPOSES the deviation, pushing the ' +
+      'variable back toward the set point. Thermoregulation is the clearest worked example: the ' +
+      'hypothalamus monitors blood temperature against a set point, triggering heat-loss ' +
+      'responses (vasodilation AND sweating, together) when temperature rises above it, and ' +
+      'heat-generation responses (vasoconstriction AND shivering, together) when it falls below ' +
+      'it — each pair is a COORDINATED output of one feedback loop, not independent reflexes. ' +
+      'Osmoregulation (already covered via ADH in the excretory system) is a second worked ' +
+      'example of the SAME general structure — set point, deviation detector, counteracting ' +
+      'response — simply applied to blood osmolarity instead of temperature.',
+    targetedMisconceptions: [],
+    source: THERMOREG_SRC,
+  },
+  {
+    conceptId: THERMOREG, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students interpret "negative feedback" using its ' +
+      'everyday sense (bad, critical), missing that "negative" here describes only the ' +
+      'response\'s DIRECTION — opposing the deviation — a normal, healthy, constantly-running ' +
+      'process, not a sign of malfunction. Second, students treat sweating, shivering, and ' +
+      'vasodilation/constriction as independent, disconnected reflexes, missing that ' +
+      'vasodilation+sweating (heat loss) and vasoconstriction+shivering (heat generation) are ' +
+      'each COORDINATED pairs triggered together by the same hypothalamic signal.',
+    targetedMisconceptions: [`${THERMOREG}:M1`, `${THERMOREG}:M2`],
+    source: THERMOREG_SRC,
+  },
+]
+const THERMOREG_PROBES: SeedProbe[] = [
+  {
+    conceptId: THERMOREG, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A physiological process is described as using "negative feedback." What does this tell you?',
+    choices: [
+      { text: 'The response opposes the deviation, restoring the set point — a normal, healthy process', isCorrect: true },
+      { text: 'Something is going wrong in the body', isCorrect: false, misconceptionId: `${THERMOREG}:M1` },
+      { text: 'The feedback is harmful and should be corrected medically', isCorrect: false, misconceptionId: `${THERMOREG}:M1` },
+      { text: 'The process amplifies the original deviation', isCorrect: false },
+    ],
+    correctValue: 'The response opposes the deviation, restoring the set point — a normal, healthy process',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${THERMOREG}:M1`],
+    source: THERMOREG_SRC,
+  },
+  {
+    conceptId: THERMOREG, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student observes vasodilation occurring and treats it as an isolated reflex ' +
+      'unrelated to anything else happening. What is the best response?',
+    choices: [
+      {
+        text: 'Vasodilation is coordinated with sweating as part of the same heat-loss response ' +
+          'triggered by the hypothalamus',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — each thermoregulatory response occurs independently of the others',
+        isCorrect: false,
+        misconceptionId: `${THERMOREG}:M2`,
+      },
+    ],
+    correctValue: 'Vasodilation is coordinated with sweating as part of the same heat-loss response ' +
+      'triggered by the hypothalamus',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${THERMOREG}:M2`],
+    source: THERMOREG_SRC,
+  },
+  {
+    conceptId: THERMOREG, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What general structure do thermoregulation and osmoregulation share, despite ' +
+      'monitoring different variables?',
+    choices: [
+      { text: 'A set point, a deviation detector, and a counteracting negative-feedback response', isCorrect: true },
+      { text: 'Both are controlled exclusively by the kidneys', isCorrect: false },
+      { text: 'Both use positive feedback loops', isCorrect: false },
+    ],
+    correctValue: 'A set point, a deviation detector, and a counteracting negative-feedback response',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: THERMOREG_SRC,
+  },
+]
+
+// ─── bio.physio.lymphatic-system-detail ──────────────────────────────────────
+const LYMPH = 'bio.physio.lymphatic-system-detail'
+const LYMPH_SRC = 'educational-brain/concepts/biology/bio.physio.lymphatic-system-detail.md'
+const LYMPH_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: LYMPH, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The lymphatic system forms a ONE-WAY drainage network, structurally distinct from blood\'s ' +
+      'closed loop: fluid that leaks from blood capillaries into tissue is collected as lymph and ' +
+      'flows in one direction toward the central venous circulation. Along the way, lymph passes ' +
+      'through lymph nodes, which perform two distinct immune functions — filtering pathogens ' +
+      'and debris, and hosting antigen presentation to T and B lymphocytes. This gives the ' +
+      'lymphatic system a genuine DUAL role: fluid balance (returning leaked fluid to the ' +
+      'bloodstream) and immune surveillance — two SEPARATE functions in the same system, ' +
+      'demonstrated by the fact that a drainage disruption does not necessarily disrupt immune ' +
+      'function. Lymphedema results SPECIFICALLY from impaired LYMPHATIC drainage (e.g., after ' +
+      'lymph node removal), mechanistically distinct from swelling caused by general circulatory ' +
+      '(blood-vessel) problems.',
+    targetedMisconceptions: [],
+    source: LYMPH_SRC,
+  },
+  {
+    conceptId: LYMPH, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students treat the lymphatic system as having one ' +
+      'undifferentiated function (usually just immune defence), missing that fluid balance and ' +
+      'immune surveillance are two genuinely SEPARATE functions performed by the same system. ' +
+      'Second, students conflate lymphedema with general circulatory swelling, missing that ' +
+      'lymphedema specifically results from impaired LYMPHATIC drainage, a mechanistically ' +
+      'distinct cause from a blood-vessel problem like venous insufficiency.',
+    targetedMisconceptions: [`${LYMPH}:M1`, `${LYMPH}:M2`],
+    source: LYMPH_SRC,
+  },
+]
+const LYMPH_PROBES: SeedProbe[] = [
+  {
+    conceptId: LYMPH, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A patient has damaged lymphatic vessels causing localised swelling, but no accompanying ' +
+      'immune deficiency. What does this demonstrate?',
+    choices: [
+      { text: 'The lymphatic system\'s fluid-balance and immune-surveillance roles are separable', isCorrect: true },
+      { text: 'The lymphatic system has only one undifferentiated function', isCorrect: false, misconceptionId: `${LYMPH}:M1` },
+      { text: 'This scenario is impossible, since both roles must fail together', isCorrect: false, misconceptionId: `${LYMPH}:M1` },
+      { text: 'The lymphatic system has no immune function at all', isCorrect: false },
+    ],
+    correctValue: 'The lymphatic system\'s fluid-balance and immune-surveillance roles are separable',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${LYMPH}:M1`],
+    source: LYMPH_SRC,
+  },
+  {
+    conceptId: LYMPH, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A patient develops swelling after lymph node removal during cancer surgery. A student ' +
+      'attributes this to a general circulatory (blood-vessel) problem. What is the best response?',
+    choices: [
+      {
+        text: 'Wrong — this is lymphedema, caused specifically by impaired lymphatic drainage, ' +
+          'not a blood-vessel problem',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — lymphedema and circulatory swelling are the same underlying condition',
+        isCorrect: false,
+        misconceptionId: `${LYMPH}:M2`,
+      },
+    ],
+    correctValue: 'Wrong — this is lymphedema, caused specifically by impaired lymphatic drainage, ' +
+      'not a blood-vessel problem',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${LYMPH}:M2`],
+    source: LYMPH_SRC,
+  },
+  {
+    conceptId: LYMPH, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In which direction does lymph flow through the lymphatic vessels?',
+    choices: [
+      { text: 'One-way, from peripheral tissues toward the central venous circulation', isCorrect: true },
+      { text: 'In a closed loop, circulating continuously like blood', isCorrect: false },
+      { text: 'Bidirectionally, depending on local pressure', isCorrect: false },
+    ],
+    correctValue: 'One-way, from peripheral tissues toward the central venous circulation',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: LYMPH_SRC,
+  },
+]
+
+// ─── bio.physio.muscle-physiology-energetics ─────────────────────────────────
+const MUSCLEPHYS = 'bio.physio.muscle-physiology-energetics'
+const MUSCLEPHYS_SRC = 'educational-brain/concepts/biology/bio.physio.muscle-physiology-energetics.md'
+const MUSCLEPHYS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: MUSCLEPHYS, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A motor unit is one motor neuron plus all the fibres it innervates. Increasing muscle ' +
+      'force does not mean existing motor units fire "harder" — instead, ADDITIONAL motor units ' +
+      'are recruited by the size principle: small, fatigue-resistant units first, larger, more ' +
+      'powerful (but faster-fatiguing) units only as more force is needed. Slow-twitch ' +
+      '(oxidative) fibres are fatigue-resistant, suited to endurance activity; fast-twitch ' +
+      '(glycolytic) fibres contract rapidly and forcefully but fatigue quickly, suited to ' +
+      'short, intense activity. Muscle contraction draws on three ATP sources that each become ' +
+      'DOMINANT over a different timescale, not simultaneously from the start: creatine ' +
+      'phosphate (fastest, first few seconds), anaerobic glycolysis (dominant over the next ~30 ' +
+      'seconds to 2 minutes), and oxidative phosphorylation (dominant for sustained activity ' +
+      'beyond that window, slower to ramp up but far higher total yield).',
+    targetedMisconceptions: [],
+    source: MUSCLEPHYS_SRC,
+  },
+  {
+    conceptId: MUSCLEPHYS, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students assume increasing force means the same motor ' +
+      'units simply work harder, missing that graded force comes from RECRUITING additional, ' +
+      'progressively larger motor units per the size principle. Second, students assume all ' +
+      'three ATP sources (creatine phosphate, anaerobic glycolysis, oxidative phosphorylation) ' +
+      'contribute equally from the very start of activity, missing that each becomes dominant ' +
+      'over a specific, different, sequential timescale.',
+    targetedMisconceptions: [`${MUSCLEPHYS}:M1`, `${MUSCLEPHYS}:M2`],
+    source: MUSCLEPHYS_SRC,
+  },
+]
+const MUSCLEPHYS_PROBES: SeedProbe[] = [
+  {
+    conceptId: MUSCLEPHYS, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A person lifts a progressively heavier object. According to the size principle, what ' +
+      'happens as more force is needed?',
+    choices: [
+      { text: 'Additional, progressively larger motor units are recruited', isCorrect: true },
+      { text: 'The same motor units already active simply fire more intensely', isCorrect: false, misconceptionId: `${MUSCLEPHYS}:M1` },
+      { text: 'Only fast-twitch fibres become active, replacing slow-twitch fibres entirely', isCorrect: false, misconceptionId: `${MUSCLEPHYS}:M1` },
+      { text: 'Force output cannot be increased beyond the initially recruited units', isCorrect: false },
+    ],
+    correctValue: 'Additional, progressively larger motor units are recruited',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${MUSCLEPHYS}:M1`],
+    source: MUSCLEPHYS_SRC,
+  },
+  {
+    conceptId: MUSCLEPHYS, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student says "creatine phosphate, anaerobic glycolysis, and oxidative ' +
+      'phosphorylation all contribute equally from the very first second of a sprint." What is ' +
+      'the best response?',
+    choices: [
+      {
+        text: 'Wrong — creatine phosphate dominates the first few seconds, glycolysis dominates ' +
+          'next, and oxidative phosphorylation dominates sustained activity',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — all three sources contribute equally throughout any activity',
+        isCorrect: false,
+        misconceptionId: `${MUSCLEPHYS}:M2`,
+      },
+    ],
+    correctValue: 'Wrong — creatine phosphate dominates the first few seconds, glycolysis dominates ' +
+      'next, and oxidative phosphorylation dominates sustained activity',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${MUSCLEPHYS}:M2`],
+    source: MUSCLEPHYS_SRC,
+  },
+  {
+    conceptId: MUSCLEPHYS, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A marathon runner\'s muscles rely heavily on which fibre type, and why?',
+    choices: [
+      { text: 'Slow-twitch (oxidative) fibres, because they are highly fatigue-resistant', isCorrect: true },
+      { text: 'Fast-twitch (glycolytic) fibres, because they contract most rapidly', isCorrect: false },
+      { text: 'Neither type matters for endurance activity', isCorrect: false },
+    ],
+    correctValue: 'Slow-twitch (oxidative) fibres, because they are highly fatigue-resistant',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: MUSCLEPHYS_SRC,
+  },
+]
+
 export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...SCIMETH_EXPLANATIONS,
   ...UNITHEMES_EXPLANATIONS,
@@ -2748,6 +3025,9 @@ export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...HEMOSTASIS_EXPLANATIONS,
   ...ENDODISORD_EXPLANATIONS,
   ...SKIN_EXPLANATIONS,
+  ...THERMOREG_EXPLANATIONS,
+  ...LYMPH_EXPLANATIONS,
+  ...MUSCLEPHYS_EXPLANATIONS,
 ]
 
 export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
@@ -2778,4 +3058,7 @@ export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
   ...HEMOSTASIS_PROBES,
   ...ENDODISORD_PROBES,
   ...SKIN_PROBES,
+  ...THERMOREG_PROBES,
+  ...LYMPH_PROBES,
+  ...MUSCLEPHYS_PROBES,
 ]
