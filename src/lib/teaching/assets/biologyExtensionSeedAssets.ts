@@ -1295,6 +1295,299 @@ const ARTHROPOD_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── bio.neuro.learning-memory-neurobiology ──────────────────────────────────
+const LEARNMEM = 'bio.neuro.learning-memory-neurobiology'
+const LEARNMEM_SRC = 'educational-brain/concepts/biology/bio.neuro.learning-memory-neurobiology.md'
+const LEARNMEM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: LEARNMEM, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Synaptic plasticity is the cellular-level mechanism believed to underlie learning: the ' +
+      'STRENGTH of an individual synapse can change based on its own activity history. ' +
+      'Long-term potentiation (LTP) is a persistent STRENGTHENING of a specific synapse ' +
+      'following strong, repeated activation; long-term depression (LTD) is a persistent ' +
+      'WEAKENING following weak or poorly-correlated activation. Crucially, LTP/LTD are ' +
+      'SYNAPSE-SPECIFIC changes, not whole-neuron changes — a single neuron can have some ' +
+      'synapses strengthened and others weakened at the same time. The Hebbian rule ("cells ' +
+      'that fire together, wire together") states that a synapse is strengthened when its ' +
+      'presynaptic neuron\'s activity CONSISTENTLY, CAUSALLY contributes to the postsynaptic ' +
+      'neuron firing — a rule about one particular connection, not any two coincidentally ' +
+      'active cells anywhere in the brain. Memory itself is not one undifferentiated function: ' +
+      'the hippocampus is critical for FORMING declarative memory (facts and events that can be ' +
+      'consciously recalled), while procedural memory (skills and habits) relies on largely ' +
+      'separate systems including the basal ganglia and cerebellum — patients with hippocampal ' +
+      'damage can still learn new motor skills despite being unable to form new declarative ' +
+      'memories.',
+    targetedMisconceptions: [],
+    source: LEARNMEM_SRC,
+  },
+  {
+    conceptId: LEARNMEM, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students think LTP/LTD make a whole neuron generically ' +
+      '"more" or "less" excitable, missing that plasticity is SYNAPSE-SPECIFIC — one synapse on ' +
+      'a neuron can undergo LTP while a different synapse on the SAME neuron simultaneously ' +
+      'undergoes LTD. Second, students treat the hippocampus as THE memory centre for all memory, ' +
+      'missing that declarative memory (hippocampus-dependent) and procedural memory (relying on ' +
+      'largely separate systems) are functionally and anatomically distinct — a patient with ' +
+      'hippocampal damage learning a new motor skill despite not remembering practising it is ' +
+      'evidence for separate systems, not a contradiction.',
+    targetedMisconceptions: [`${LEARNMEM}:M1`, `${LEARNMEM}:M2`],
+    source: LEARNMEM_SRC,
+  },
+]
+const LEARNMEM_PROBES: SeedProbe[] = [
+  {
+    conceptId: LEARNMEM, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A single neuron receives input from two different presynaptic neurons with very ' +
+      'different activity histories. What is the BEST prediction for what happens to the two ' +
+      'corresponding synapses?',
+    choices: [
+      { text: 'The two synapses can change independently — one strengthened (LTP), one weakened (LTD)', isCorrect: true },
+      { text: 'Both synapses must change in the same direction, since it is the same neuron', isCorrect: false, misconceptionId: `${LEARNMEM}:M1` },
+      { text: 'Neither synapse can change unless the whole neuron becomes more excitable first', isCorrect: false, misconceptionId: `${LEARNMEM}:M1` },
+      { text: 'The synapses cannot be affected by activity history at all', isCorrect: false },
+    ],
+    correctValue: 'The two synapses can change independently — one strengthened (LTP), one weakened (LTD)',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${LEARNMEM}:M1`],
+    source: LEARNMEM_SRC,
+  },
+  {
+    conceptId: LEARNMEM, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A patient with hippocampal damage cannot remember practising a new motor skill, yet ' +
+      'performs it well. A student calls this a contradiction. What is the best response?',
+    choices: [
+      {
+        text: 'Not a contradiction — it shows declarative memory (hippocampus-dependent) and ' +
+          'procedural memory (largely separate systems) are functionally distinct',
+        isCorrect: true,
+      },
+      {
+        text: 'It is a contradiction, since the hippocampus is the memory centre for all memory',
+        isCorrect: false,
+        misconceptionId: `${LEARNMEM}:M2`,
+      },
+    ],
+    correctValue: 'Not a contradiction — it shows declarative memory (hippocampus-dependent) and ' +
+      'procedural memory (largely separate systems) are functionally distinct',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${LEARNMEM}:M2`],
+    source: LEARNMEM_SRC,
+  },
+  {
+    conceptId: LEARNMEM, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Under the Hebbian rule, which specific synapse gets strengthened?',
+    choices: [
+      {
+        text: 'The synapse where presynaptic activity consistently and causally contributes to postsynaptic firing',
+        isCorrect: true,
+      },
+      { text: 'Any synapse anywhere in the brain that happens to be active at the same time as any other', isCorrect: false },
+      { text: 'Every synapse on a neuron that has recently fired at all', isCorrect: false },
+    ],
+    correctValue: 'The synapse where presynaptic activity consistently and causally contributes to postsynaptic firing',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: LEARNMEM_SRC,
+  },
+]
+
+// ─── bio.div.echinoderm-deuterostome-diversity ───────────────────────────────
+const ECHINODERM = 'bio.div.echinoderm-deuterostome-diversity'
+const ECHINODERM_SRC = 'educational-brain/concepts/biology/bio.div.echinoderm-deuterostome-diversity.md'
+const ECHINODERM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ECHINODERM, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Deuterostome development — in which the blastopore (the first opening formed during ' +
+      'gastrulation) becomes the ANUS, with the mouth forming separately — is the shared ' +
+      'developmental signature that phylogenetically LINKS echinoderms to chordates, despite ' +
+      'their dramatically different adult body forms. Phylogenetic relationship is established ' +
+      'by shared developmental evidence, not by adult appearance. Echinoderms\' most visible ' +
+      'feature, pentaradial (five-part) symmetry, is SECONDARILY DERIVED: echinoderms evolved ' +
+      'from a bilaterally symmetric ancestor and independently RE-EVOLVED radial symmetry ' +
+      'later — confirmed by echinoderm larvae, which display bilateral symmetry, only becoming ' +
+      'radially symmetric through metamorphosis into the adult form. Echinodermata is further ' +
+      'defined by the water vascular system (a unique hydraulic network of fluid-filled canals ' +
+      'used for locomotion via tube feet, feeding, and gas exchange) and an internal ' +
+      'endoskeleton (calcium-carbonate ossicles embedded in the body wall, unlike arthropods\' ' +
+      'external exoskeleton).',
+    targetedMisconceptions: [],
+    source: ECHINODERM_SRC,
+  },
+  {
+    conceptId: ECHINODERM, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students assume echinoderms and chordates cannot be ' +
+      'closely related because adult sea stars and adult fish look nothing alike, missing that ' +
+      'the two groups are grouped as deuterostomes based on shared developmental evidence ' +
+      '(blastopore becomes the anus), not adult resemblance. Second, students assume echinoderm ' +
+      'radial symmetry is an ancestral, primitive condition like Cnidaria\'s, missing that it is ' +
+      'SECONDARILY DERIVED from a bilateral ancestor — directly evidenced by the bilaterally ' +
+      'symmetric larval stage that only becomes radial through metamorphosis.',
+    targetedMisconceptions: [`${ECHINODERM}:M1`, `${ECHINODERM}:M2`],
+    source: ECHINODERM_SRC,
+  },
+]
+const ECHINODERM_PROBES: SeedProbe[] = [
+  {
+    conceptId: ECHINODERM, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A sea star and a fish look nothing alike as adults. Why are they still classified ' +
+      'together as deuterostomes?',
+    choices: [
+      { text: 'They share a specific developmental signature — the blastopore becomes the anus', isCorrect: true },
+      { text: 'They are not actually classified together, since their adult forms differ too much', isCorrect: false, misconceptionId: `${ECHINODERM}:M1` },
+      { text: 'They share the same adult body symmetry', isCorrect: false, misconceptionId: `${ECHINODERM}:M1` },
+      { text: 'They live in the same habitat', isCorrect: false },
+    ],
+    correctValue: 'They share a specific developmental signature — the blastopore becomes the anus',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${ECHINODERM}:M1`],
+    source: ECHINODERM_SRC,
+  },
+  {
+    conceptId: ECHINODERM, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student says "echinoderms have radial symmetry, so they must be primitively radial ' +
+      'like Cnidaria." What is the best response?',
+    choices: [
+      {
+        text: 'Wrong — echinoderm radial symmetry is secondarily derived from a bilateral ' +
+          'ancestor, as shown by the bilaterally symmetric larval stage',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — any radially symmetric animal shares the same ancestral radial origin',
+        isCorrect: false,
+        misconceptionId: `${ECHINODERM}:M2`,
+      },
+    ],
+    correctValue: 'Wrong — echinoderm radial symmetry is secondarily derived from a bilateral ' +
+      'ancestor, as shown by the bilaterally symmetric larval stage',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${ECHINODERM}:M2`],
+    source: ECHINODERM_SRC,
+  },
+  {
+    conceptId: ECHINODERM, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What specific structure allows a sea star to extend and retract its tube feet for locomotion?',
+    choices: [
+      { text: 'The water vascular system', isCorrect: true },
+      { text: 'The exoskeleton', isCorrect: false },
+      { text: 'The notochord', isCorrect: false },
+    ],
+    correctValue: 'The water vascular system',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: ECHINODERM_SRC,
+  },
+]
+
+// ─── bio.neuro.audition-vestibular-system ────────────────────────────────────
+const AUDITION = 'bio.neuro.audition-vestibular-system'
+const AUDITION_SRC = 'educational-brain/concepts/biology/bio.neuro.audition-vestibular-system.md'
+const AUDITION_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: AUDITION, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The ear has three regions: the outer ear collects sound, the middle ear (malleus, incus, ' +
+      'stapes) mechanically amplifies and transmits vibrations, and the inner ear contains the ' +
+      'cochlea (hearing) and vestibular apparatus (balance), both relying on the SAME ' +
+      'mechanism — hair-cell mechanotransduction, where deflected stereocilia open ' +
+      'mechanically-gated ion channels. Within the cochlea, the basilar membrane\'s stiffness ' +
+      'and width vary systematically along its length, producing TONOTOPIC CODING: a SPECIFIC ' +
+      'LOCATION vibrates maximally for a SPECIFIC frequency (high frequencies near the base, low ' +
+      'frequencies near the apex) — a spatial map of PITCH, entirely separate from how ' +
+      'LOUDNESS is coded (via firing rate). The vestibular system detects balance and head ' +
+      'movement/position, NOT sound, using the same hair-cell mechanism but organised into ' +
+      'different structures: the semicircular canals detect ROTATIONAL movement via fluid ' +
+      'deflecting hair cells, while the otolith organs (utricle, saccule) detect LINEAR ' +
+      'acceleration and static head position via gravity-sensitive otolith crystals.',
+    targetedMisconceptions: [],
+    source: AUDITION_SRC,
+  },
+  {
+    conceptId: AUDITION, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students assume sound frequency is coded the same way as ' +
+      'intensity — by firing rate alone — missing that frequency is coded SPATIALLY (tonotopy: ' +
+      'which basilar-membrane location is maximally activated), while intensity is coded ' +
+      'separately by firing rate. Second, students assume the vestibular system detects sound ' +
+      'because it sits right next to the cochlea in the inner ear, missing that it detects head ' +
+      'MOVEMENT and POSITION using the same hair-cell mechanism but organised into functionally ' +
+      'distinct structures serving a completely different purpose.',
+    targetedMisconceptions: [`${AUDITION}:M1`, `${AUDITION}:M2`],
+    source: AUDITION_SRC,
+  },
+]
+const AUDITION_PROBES: SeedProbe[] = [
+  {
+    conceptId: AUDITION, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A sound gets LOUDER but stays the SAME pitch. What changes?',
+    choices: [
+      { text: 'The firing rate at the same basilar-membrane location increases', isCorrect: true },
+      { text: 'The location of maximum basilar-membrane activation shifts', isCorrect: false, misconceptionId: `${AUDITION}:M1` },
+      { text: 'Both the location and the firing rate change together', isCorrect: false, misconceptionId: `${AUDITION}:M1` },
+      { text: 'Nothing measurable changes in the cochlea', isCorrect: false },
+    ],
+    correctValue: 'The firing rate at the same basilar-membrane location increases',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${AUDITION}:M1`],
+    source: AUDITION_SRC,
+  },
+  {
+    conceptId: AUDITION, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student says "the vestibular system must detect sound too, since it is right next ' +
+      'to the cochlea in the inner ear." What is the best response?',
+    choices: [
+      {
+        text: 'Wrong — the vestibular system detects head movement and position (balance), not ' +
+          'sound, despite sharing the same hair-cell mechanism and location',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — anatomical proximity in the inner ear means shared function',
+        isCorrect: false,
+        misconceptionId: `${AUDITION}:M2`,
+      },
+    ],
+    correctValue: 'Wrong — the vestibular system detects head movement and position (balance), not ' +
+      'sound, despite sharing the same hair-cell mechanism and location',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${AUDITION}:M2`],
+    source: AUDITION_SRC,
+  },
+  {
+    conceptId: AUDITION, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A person spins in place with their eyes closed and senses the rotation. Which specific ' +
+      'structure is responsible?',
+    choices: [
+      { text: 'The semicircular canals', isCorrect: true },
+      { text: 'The cochlea', isCorrect: false },
+      { text: 'The otolith organs', isCorrect: false },
+    ],
+    correctValue: 'The semicircular canals',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: AUDITION_SRC,
+  },
+]
+
 export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...SCIMETH_EXPLANATIONS,
   ...UNITHEMES_EXPLANATIONS,
@@ -1308,6 +1601,9 @@ export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...NEURCIRC_EXPLANATIONS,
   ...VISION_EXPLANATIONS,
   ...ARTHROPOD_EXPLANATIONS,
+  ...LEARNMEM_EXPLANATIONS,
+  ...ECHINODERM_EXPLANATIONS,
+  ...AUDITION_EXPLANATIONS,
 ]
 
 export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
@@ -1323,4 +1619,7 @@ export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
   ...NEURCIRC_PROBES,
   ...VISION_PROBES,
   ...ARTHROPOD_PROBES,
+  ...LEARNMEM_PROBES,
+  ...ECHINODERM_PROBES,
+  ...AUDITION_PROBES,
 ]
