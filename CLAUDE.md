@@ -245,16 +245,36 @@ separate counters exist for this program and must never be conflated: (1) the
 ORIGINAL 108-concept probe-depth campaign is COMPLETE (108/108 at the 3-probe
 contract floor, tracked in `biologyDepthSeedAssets.ts`'s own header); (2) the
 91-concept 2026-09-14 KG-extension pool (`bio.behav`/`bio.neuro` and most concepts
-authored from roughly batch 28 onward) has ZERO seed content of any kind in
-`biologySeedAssets.ts`/`biologyDepthSeedAssets.ts` — none of these 91 concepts can
-currently be served as a gradeable lesson in production, despite now having full
-formal EB coverage. Seeding actual `core_explanation`/`misconception_repair`/`mcq`/
-`misconception_probe` content (and reaching the 3-probe contract floor) for this
-91-concept pool is a SEPARATE, substantial, NOT-YET-STARTED follow-on task — resume
-only on an explicit fresh owner instruction naming this specific follow-on work,
-per the Workflow preference's G1/G2-adjacent caution around new Educational Brain
-runtime capability work; simply continuing "the Biology program" without a fresh
-instruction should NOT be read as authorization to begin this seeding task.
+authored from roughly batch 28 onward) had ZERO seed content of any kind — now
+un-paused by an explicit fresh owner instruction ("MOHD — BIOLOGY NEXT PHASE",
+2026-09-21) naming this exact follow-on work; see the campaign entry immediately
+below.
+
+## Biology 91-concept extension asset-seeding campaign (2026-09-21, owner-scoped,
+## in progress — un-paused by the explicit "MOHD — BIOLOGY NEXT PHASE" instruction)
+Full Phase-1 audit (exact 91-concept enumeration, domain/difficulty/bloom
+breakdown, cross-subject-link inventory, architecture decision):
+`docs/architecture/BIOLOGY_91_EXTENSION_ASSET_INVENTORY.md`. Headline: the 91
+KG-extension concepts all have completed EB entries but zero production content
+(`scripts/assets/contract-audit.ts --subject biology` measured 108/199 authored
+before this campaign). New file `src/lib/teaching/assets/
+biologyExtensionSeedAssets.ts` (wired into `src/instrumentation.ts` and
+`scripts/brain/seed-knowledge-assets.ts` exactly where `BIOLOGY_EXPLANATIONS`/
+`BIOLOGY_PROBES`/`BIOLOGY_DEPTH_PROBES` already are) holds all 91 concepts'
+content, grown batch by batch like `biologyDepthSeedAssets.ts` itself was —
+content transcribed directly from each concept's own completed EB entry, in
+strict KG-prerequisite order. Every concept ships >= 1 explanation and the full
+3-probe contract (mcq + misconception_probe + a genuinely different third
+capability, via the unused `short_answer` closed-choice kind) from its FIRST
+commit, avoiding the exact 2-probe defect the original 108 needed a later
+depth-campaign to fix. Batch 1 (2026-09-21, 3 concepts: `bio.found.scientific-
+method-in-biology`, `bio.found.unifying-themes-in-biology` — closing the entire
+`bio.found` domain gap — and `bio.behav.innate-behavior-instinct`, the root of
+the `bio.behav` domain gap) validated clean: `tsc --noEmit` 0 new errors, dry-run
+seed script 0 duplicate identities across the full 8,256-item corpus, contract
+audit 111/199 authored, 111/111 at contract, 0 short, 0 never-quizzable. **Extended
+91: 3/91.** Re-measure with `npx tsx scripts/assets/contract-audit.ts --subject
+biology` before trusting any number here.
 These
 two
 counters are tracked and reported SEPARATELY, never conflated — see `COVERAGE.md`'s biology row. The 91 concepts from the 2026-09-14 KG extension still have zero
