@@ -844,10 +844,82 @@ export function shouldForceVisualRender(
 // force-render path in resolveResponseVisual() also covers "the model
 // promised, the registry has something to show" — not just "the student
 // asked, the registry has something to show".
-const VISUAL_PROMISE_RE = /\b(here'?s|here is|below is|see the|look at the|take a look at|check out the)\b[^.!?\n]{0,40}\b(visual|diagram|graph|chart|illustration|image|figure|plot)\b/i
+// [’']? rather than '? — real model output consistently uses the
+// typographic apostrophe (’, U+2019), not the ASCII one, and a straight-
+// quote-only pattern silently fails to match "Here’s a diagram…" or "the
+// picture you’re looking at" in production text. Measured: this exact gap
+// let genuine hallucinated-visual sentences through even after the fixes
+// below were added, caught only by re-testing against real transcripts
+// rather than hand-written fixtures.
+const APOS = '[’\']?'
+const VISUAL_PROMISE_RE = new RegExp(
+  `\\b(here${APOS}s|here is|below is|see the|look at the|take a look at|check out the)\\b[^.!?\\n]{0,40}\\b(visual|diagram|graph|chart|illustration|image|figure|plot|picture|flowchart|flow chart|sketch)\\b`,
+  'i',
+)
 
 export function textPromisesUnfulfilledVisual(text: string): boolean {
   return VISUAL_PROMISE_RE.test(text)
+}
+
+// Grounding-contract defense-in-depth (real-learner QA, 2026-09-21). The
+// VISUAL CONTRACT's NO-FIGURE prompt block (visualContract.ts) already tells
+// the model, in as many words, never to say "look at the diagram/picture/
+// figure", "as you can see", or "on your screen" when nothing is attached —
+// but a prompt instruction is not an invariant, and real production
+// transcripts across Chemistry and English concepts (concepts with no
+// curated SceneSpec and no legacy registry entry) showed the model ignoring
+// it repeatedly: "look at the picture on your screen", "the diagram is a
+// simple flow chart", "the image is a process flow diagram" — none of it
+// backed by an actual visual payload. `VISUAL_PROMISE_RE` above already
+// catches the FUTURE/imperative form ("here's a diagram") for the force-
+// render path; it does not catch the PRESENT-TENSE claim that something is
+// already visible, which is what the observed hallucinations actually were.
+//
+// This is caught, never fixed, by generating more visuals — most of these
+// concepts simply have none authored, and that is a content decision, not a
+// bug this function should paper over. The only thing that IS this
+// function's job is making sure the LEARNER never reads a false claim about
+// their own screen. Scoped to the sentence, not the whole turn, so the rest
+// of the (usually correct) explanation survives.
+const SCREEN_CLAIM_RE = new RegExp(
+  `\\b(diagram|figure|picture|image|graph|chart|illustration|flowchart|flow chart|sketch|drawing)\\b[^.!?\\n]{0,60}\\b(on (your|the) screen|in front of you|you${APOS}re looking at|you have (on|in front of))\\b`,
+  'i',
+)
+const LOOK_AT_CLAIM_RE =
+  /\b(look at|take a look at|glance at)\b[^.!?\n]{0,40}\b(diagram|figure|picture|image|graph|chart|illustration|flowchart|flow chart|sketch)\b[^.!?\n]{0,60}\b(on (your|the) screen|already|attached|beside)?/i
+// "The diagram IS a flow chart", "the image IS a process flow diagram" —
+// measured (Chemistry/English, both with no visual field returned at all):
+// a bare definite-article description with no screen-reference and no
+// look-at verb, so neither pattern above catches it. Scoped to "the"/"this"
+// + noun + copula/description-verb so it does not fire on a hypothetical
+// ("a diagram would show...") or the legitimate imperative-invitation form
+// already covered by VISUAL_PROMISE_RE.
+const DEFINITE_DESCRIPTION_RE =
+  /\b(the|this)\s+(diagram|figure|picture|image|graph|chart|illustration|flowchart|flow chart|sketch|drawing)\b[^.!?\n]{0,10}\b(is|shows|depicts|illustrates|represents|split)\b/i
+
+/** Splits on sentence-ending punctuation, keeping the punctuation with the
+ *  sentence it ends — deliberately naive (no NLP dependency) since it only
+ *  needs to isolate the one offending clause, not parse the passage. */
+function splitIntoSentences(text: string): string[] {
+  return text.split(/(?<=[.!?])\s+(?=\S)/)
+}
+
+/**
+ * Removes sentences that claim a visual is CURRENTLY present ("the diagram
+ * on your screen shows...") or promise one that never arrives ("here's a
+ * diagram..."), for use ONLY once the caller has already established that no
+ * visual — neither the legacy visual-registry attachment nor the V2
+ * SceneSpec authority — was actually attached this turn. Never strips down
+ * to an empty response: if every sentence would be removed (the whole turn
+ * was about a visual that doesn't exist), the original text is returned
+ * unchanged rather than silencing the tutor entirely.
+ */
+export function stripPhantomVisualClaims(text: string): string {
+  const sentences = splitIntoSentences(text)
+  const kept = sentences.filter((s) =>
+    !SCREEN_CLAIM_RE.test(s) && !LOOK_AT_CLAIM_RE.test(s) && !VISUAL_PROMISE_RE.test(s) && !DEFINITE_DESCRIPTION_RE.test(s))
+  if (kept.length === 0) return text
+  return kept.join(' ').trim()
 }
 
 /**
