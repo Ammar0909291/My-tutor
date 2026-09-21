@@ -1873,6 +1873,293 @@ const LEARNBEH_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── bio.behav.animal-cognition ──────────────────────────────────────────────
+const ANIMCOG = 'bio.behav.animal-cognition'
+const ANIMCOG_SRC = 'educational-brain/concepts/biology/bio.behav.animal-cognition.md'
+const ANIMCOG_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ANIMCOG, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Problem-solving and tool use count as evidence of FLEXIBLE, non-instinctive behaviour ' +
+      'specifically when they involve a NOVEL solution to a NOVEL problem — a fixed instinct is ' +
+      'a stereotyped response to a specific sign stimulus and cannot by itself explain a ' +
+      'genuinely new, situationally-appropriate solution. Comparative cognition (studying ' +
+      'cognition across species) is governed by Morgan\'s Canon: a behaviour should NOT be ' +
+      'explained by a higher, more complex cognitive process if a LOWER, simpler process (e.g. ' +
+      'trial-and-error learning) can adequately explain it — this guards against ' +
+      'anthropomorphic over-interpretation. Evidence for theory of mind (attributing mental ' +
+      'states to others) in non-human animals is GENUINELY CONTESTED because behaviour that ' +
+      'looks like understanding another\'s mental state can often be explained more simply — by ' +
+      'learned associations with observable cues like gaze direction — without any real mental- ' +
+      'state representation.',
+    targetedMisconceptions: [],
+    source: ANIMCOG_SRC,
+  },
+  {
+    conceptId: ANIMCOG, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students treat any successful tool use as automatic ' +
+      'evidence of sophisticated cognition, missing that flexible-cognition evidence specifically ' +
+      'requires the situation to be genuinely NOVEL to the animal — a well-practiced routine does ' +
+      'not distinguish flexible cognition from a refined learned/instinctive behaviour. Second, ' +
+      'students accept theory-of-mind-like behaviour as proof the animal understands another\'s ' +
+      'mental state, missing that Morgan\'s Canon requires first ruling out simpler explanations ' +
+      '(learned association with observable cues) before accepting the mentalistic ' +
+      'interpretation.',
+    targetedMisconceptions: [`${ANIMCOG}:M1`, `${ANIMCOG}:M2`],
+    source: ANIMCOG_SRC,
+  },
+]
+const ANIMCOG_PROBES: SeedProbe[] = [
+  {
+    conceptId: ANIMCOG, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An animal solves a problem it has practiced hundreds of times before. Does this alone ' +
+      'demonstrate flexible, non-instinctive cognition?',
+    choices: [
+      { text: 'No — flexibility requires a genuinely novel situation, not a well-practiced routine', isCorrect: true },
+      { text: 'Yes — any successful problem-solving proves sophisticated cognition', isCorrect: false, misconceptionId: `${ANIMCOG}:M1` },
+      { text: 'Yes, but only if a tool was involved', isCorrect: false, misconceptionId: `${ANIMCOG}:M1` },
+      { text: 'This cannot be evaluated without knowing the animal\'s species', isCorrect: false },
+    ],
+    correctValue: 'No — flexibility requires a genuinely novel situation, not a well-practiced routine',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${ANIMCOG}:M1`],
+    source: ANIMCOG_SRC,
+  },
+  {
+    conceptId: ANIMCOG, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A dog appears to check whether its owner is watching before taking food off the table. ' +
+      'A student says this proves the dog understands what the owner can and cannot see. What is ' +
+      'the best response?',
+    choices: [
+      {
+        text: 'Not yet — first rule out a simpler explanation, such as a learned association ' +
+          'between the owner\'s gaze/posture and punishment, per Morgan\'s Canon',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — this behaviour is sufficient proof of theory of mind',
+        isCorrect: false,
+        misconceptionId: `${ANIMCOG}:M2`,
+      },
+    ],
+    correctValue: 'Not yet — first rule out a simpler explanation, such as a learned association ' +
+      'between the owner\'s gaze/posture and punishment, per Morgan\'s Canon',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${ANIMCOG}:M2`],
+    source: ANIMCOG_SRC,
+  },
+  {
+    conceptId: ANIMCOG, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What principle states that a behaviour should not be explained by a more complex ' +
+      'cognitive process if a simpler process can adequately explain it?',
+    choices: [
+      { text: 'Morgan\'s Canon', isCorrect: true },
+      { text: 'The Hebbian rule', isCorrect: false },
+      { text: 'Habituation', isCorrect: false },
+    ],
+    correctValue: 'Morgan\'s Canon',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: ANIMCOG_SRC,
+  },
+]
+
+// ─── bio.neuro.neurodegenerative-disease ─────────────────────────────────────
+const NEURODEG = 'bio.neuro.neurodegenerative-disease'
+const NEURODEG_SRC = 'educational-brain/concepts/biology/bio.neuro.neurodegenerative-disease.md'
+const NEURODEG_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: NEURODEG, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Alzheimer\'s disease has two DISTINCT pathological hallmarks: amyloid-beta plaques, ' +
+      'EXTRACELLULAR deposits of misfolded amyloid-beta protein accumulating between neurons; ' +
+      'and tau neurofibrillary tangles, INTRACELLULAR structures of misfolded, ' +
+      'hyperphosphorylated tau protein accumulating within neurons and disrupting internal ' +
+      'transport structures — different proteins, different cellular locations. Parkinson\'s ' +
+      'disease results from the SELECTIVE, progressive loss of dopaminergic neurons ' +
+      'concentrated specifically in the substantia nigra, not generalised brain-wide neuron ' +
+      'loss — this selectivity is why Parkinson\'s produces specifically MOTOR symptoms (tremor, ' +
+      'rigidity, slowed movement) tied to disrupted dopamine signalling. The deeper shared theme ' +
+      'connecting these otherwise distinct diseases is protein misfolding and aggregation: each ' +
+      'disease involves a DIFFERENT specific protein (amyloid-beta and tau in Alzheimer\'s, ' +
+      'alpha-synuclein in Parkinson\'s) failing to fold correctly and aggregating — a shared ' +
+      'mechanism category, not a shared disease identity.',
+    targetedMisconceptions: [],
+    source: NEURODEG_SRC,
+  },
+  {
+    conceptId: NEURODEG, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students conflate amyloid plaques and tau tangles as the ' +
+      'same structure, missing that plaques are EXTRACELLULAR (amyloid-beta, between neurons) ' +
+      'while tangles are INTRACELLULAR (tau, within neurons) — different proteins in different ' +
+      'locations. Second, students assume Parkinson\'s reflects generalised brain-wide neuron ' +
+      'loss, missing that it specifically and disproportionately targets dopaminergic neurons in ' +
+      'the substantia nigra, which is exactly why the symptoms are specifically motor-related ' +
+      'rather than broadly diffuse.',
+    targetedMisconceptions: [`${NEURODEG}:M1`, `${NEURODEG}:M2`],
+    source: NEURODEG_SRC,
+  },
+]
+const NEURODEG_PROBES: SeedProbe[] = [
+  {
+    conceptId: NEURODEG, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A protein deposit is found accumulating OUTSIDE neurons, in the spaces between them. ' +
+      'Which Alzheimer\'s hallmark does this describe?',
+    choices: [
+      { text: 'Amyloid-beta plaques', isCorrect: true },
+      { text: 'Tau neurofibrillary tangles', isCorrect: false, misconceptionId: `${NEURODEG}:M1` },
+      { text: 'Both — they are the same structure', isCorrect: false, misconceptionId: `${NEURODEG}:M1` },
+      { text: 'Neither — this describes a Parkinson\'s hallmark', isCorrect: false },
+    ],
+    correctValue: 'Amyloid-beta plaques',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${NEURODEG}:M1`],
+    source: NEURODEG_SRC,
+  },
+  {
+    conceptId: NEURODEG, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student says "Parkinson\'s disease is just generalised neuron loss across the whole ' +
+      'brain." What is the best response?',
+    choices: [
+      {
+        text: 'Wrong — Parkinson\'s selectively kills dopaminergic neurons in the substantia ' +
+          'nigra, which is why symptoms are specifically motor-related',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — all neurodegenerative diseases involve uniform brain-wide neuron loss',
+        isCorrect: false,
+        misconceptionId: `${NEURODEG}:M2`,
+      },
+    ],
+    correctValue: 'Wrong — Parkinson\'s selectively kills dopaminergic neurons in the substantia ' +
+      'nigra, which is why symptoms are specifically motor-related',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${NEURODEG}:M2`],
+    source: NEURODEG_SRC,
+  },
+  {
+    conceptId: NEURODEG, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What shared mechanistic theme connects Alzheimer\'s and Parkinson\'s disease despite ' +
+      'their different specific proteins and affected brain regions?',
+    choices: [
+      { text: 'Protein misfolding and aggregation', isCorrect: true },
+      { text: 'Loss of the same specific neuron type in both diseases', isCorrect: false },
+      { text: 'Both diseases are caused by the same single protein', isCorrect: false },
+    ],
+    correctValue: 'Protein misfolding and aggregation',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: NEURODEG_SRC,
+  },
+]
+
+// ─── bio.div.fish-amphibian-diversity ────────────────────────────────────────
+const FISHAMPH = 'bio.div.fish-amphibian-diversity'
+const FISHAMPH_SRC = 'educational-brain/concepts/biology/bio.div.fish-amphibian-diversity.md'
+const FISHAMPH_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: FISHAMPH, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Fish diversity spans three groups distinguished by a specific jaw-and-skeleton checklist: ' +
+      'jawless fish (lampreys, hagfish) lack true jaws entirely, the most ancestral living ' +
+      'vertebrate condition; cartilaginous fish (sharks, rays) have true jaws with a cartilage ' +
+      'skeleton; bony fish have true jaws AND a true bone skeleton. The amphibian water-to-land ' +
+      'transition required two specific anatomical prerequisites: limbs (replacing fins) to ' +
+      'support body weight against gravity without water\'s buoyancy, and lungs (supplementing ' +
+      'gills) to extract oxygen from air. Amphibian metamorphosis is a discrete developmental ' +
+      'transformation — a gill-breathing, aquatic larva (tadpole) becomes a lung-breathing, ' +
+      'limbed, partly terrestrial adult. Critically, despite these adult land adaptations, ' +
+      'amphibians remain fundamentally dependent on water for REPRODUCTION — their eggs lack a ' +
+      'protective, desiccation-resistant covering, so the water-to-land transition is PARTIAL, ' +
+      'not complete.',
+    targetedMisconceptions: [],
+    source: FISHAMPH_SRC,
+  },
+  {
+    conceptId: FISHAMPH, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students assume amphibians completed a FULL water-to-land ' +
+      'transition because adults can live on land, missing that reproduction remains water- ' +
+      'dependent (unprotected eggs, often aquatic larvae) — the transition is only partial. ' +
+      'Second, students classify fish by habitat or size rather than the specific jaw-presence ' +
+      'and skeletal-composition checklist, missing that a shark and a trout are distinguished by ' +
+      'cartilage-versus-bone, not by size or "typical fish" appearance.',
+    targetedMisconceptions: [`${FISHAMPH}:M1`, `${FISHAMPH}:M2`],
+    source: FISHAMPH_SRC,
+  },
+]
+const FISHAMPH_PROBES: SeedProbe[] = [
+  {
+    conceptId: FISHAMPH, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Could a typical amphibian complete its entire life cycle on dry land with no access ' +
+      'to water?',
+    choices: [
+      { text: 'No — its reproductive stage (eggs, often larvae) remains water-dependent', isCorrect: true },
+      { text: 'Yes — amphibians have fully transitioned away from water dependence', isCorrect: false, misconceptionId: `${FISHAMPH}:M1` },
+      { text: 'Yes, as long as it has lungs', isCorrect: false, misconceptionId: `${FISHAMPH}:M1` },
+      { text: 'This cannot be determined without knowing the species', isCorrect: false },
+    ],
+    correctValue: 'No — its reproductive stage (eggs, often larvae) remains water-dependent',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${FISHAMPH}:M1`],
+    source: FISHAMPH_SRC,
+  },
+  {
+    conceptId: FISHAMPH, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student classifies an unfamiliar fish as "cartilaginous" simply because it is large ' +
+      'and predatory-looking. What is the best response?',
+    choices: [
+      {
+        text: 'Wrong — classification requires checking jaw presence and then skeletal ' +
+          'composition (cartilage vs. bone), not size or appearance',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — size and predatory appearance are sufficient to classify any fish',
+        isCorrect: false,
+        misconceptionId: `${FISHAMPH}:M2`,
+      },
+    ],
+    correctValue: 'Wrong — classification requires checking jaw presence and then skeletal ' +
+      'composition (cartilage vs. bone), not size or appearance',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${FISHAMPH}:M2`],
+    source: FISHAMPH_SRC,
+  },
+  {
+    conceptId: FISHAMPH, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What specific anatomical feature allows a land vertebrate to extract oxygen directly ' +
+      'from air rather than relying on water-dissolved oxygen?',
+    choices: [
+      { text: 'Lungs', isCorrect: true },
+      { text: 'Limbs', isCorrect: false },
+      { text: 'A cartilage skeleton', isCorrect: false },
+    ],
+    correctValue: 'Lungs',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: FISHAMPH_SRC,
+  },
+]
+
 export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...SCIMETH_EXPLANATIONS,
   ...UNITHEMES_EXPLANATIONS,
@@ -1892,6 +2179,9 @@ export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...CHORDATE_EXPLANATIONS,
   ...COGNEURO_EXPLANATIONS,
   ...LEARNBEH_EXPLANATIONS,
+  ...ANIMCOG_EXPLANATIONS,
+  ...NEURODEG_EXPLANATIONS,
+  ...FISHAMPH_EXPLANATIONS,
 ]
 
 export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
@@ -1913,4 +2203,7 @@ export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
   ...CHORDATE_PROBES,
   ...COGNEURO_PROBES,
   ...LEARNBEH_PROBES,
+  ...ANIMCOG_PROBES,
+  ...NEURODEG_PROBES,
+  ...FISHAMPH_PROBES,
 ]

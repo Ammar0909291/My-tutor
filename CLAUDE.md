@@ -315,11 +315,21 @@ served — and `bio.behav.learning-and-behavior` — both prerequisites, batch 1
 neurobiology`, now served) validated clean: `tsc --noEmit` 0 errors, dry-run 0
 duplicate identities across 8,331 items, contract audit 126/199 authored,
 126/126 at contract, 0 short, 0 never-quizzable, 40/40 targeted vitest suites
-passing. **Extended 91: 18/91.** Production convergence (seed corpus →
-cold-start bootstrap → live AssetIdentity rows) is UNVERIFIED against the real
-database this campaign so far — no Supabase/DB access has been used; treat as
-PENDING until explicitly checked. Re-measure with `npx tsx scripts/assets/
-contract-audit.ts --subject biology` before trusting any number here.
+passing. Batch 7 (2026-09-21, 3 concepts: `bio.behav.animal-cognition` — both
+prerequisites, batch 6's `bio.behav.learning-and-behavior` and
+`bio.neuro.cognitive-neuroscience-consciousness`, now served — closing the
+`bio.behav` domain entirely — `bio.neuro.neurodegenerative-disease` — its sole
+prerequisite, batch 5's `bio.neuro.learning-memory-neurobiology`, now served —
+and `bio.div.fish-amphibian-diversity` — its sole prerequisite, batch 6's
+`bio.div.chordate-vertebrate-diversity`, now served) validated clean:
+`tsc --noEmit` 0 errors, dry-run 0 duplicate identities across 8,346 items,
+contract audit 129/199 authored, 129/129 at contract, 0 short, 0
+never-quizzable, 40/40 targeted vitest suites passing. **Extended 91: 21/91.**
+Production convergence (seed corpus → cold-start bootstrap → live
+AssetIdentity rows) is UNVERIFIED against the real database this campaign so
+far — no Supabase/DB access has been used; treat as PENDING until explicitly
+checked. Re-measure with `npx tsx scripts/assets/contract-audit.ts --subject
+biology` before trusting any number here.
 These
 two
 counters are tracked and reported SEPARATELY, never conflated — see `COVERAGE.md`'s biology row. The 91 concepts from the 2026-09-14 KG extension still have zero
