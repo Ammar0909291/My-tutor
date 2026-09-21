@@ -228,28 +228,29 @@ probe-depth campaign is now COMPLETE: 108/108 at the 3-probe contract floor.** T
 2026-09-14-KG-extension concepts remain a SEPARATE, larger, not-yet-started task (see below).
 Formal EB
 authoring started 2026-09-20 at the KG root, `bio.found.what-is-biology`, then continued in
-strict KG-prerequisite order through 161 concepts total (`educational-brain/concepts/biology/`,
-no Blueprint exists for biology as a subject; 51 entries — see COVERAGE.md's biology row
+strict KG-prerequisite order through 164 concepts total (`educational-brain/concepts/biology/`,
+no Blueprint exists for biology as a subject; 54 entries — see COVERAGE.md's biology row
 for the full list of ZERO-seed-content concepts authored from first principles — and
 thirty-nine entries record genuine KG-description-vs-seed-content gaps as Curriculum
 Feedback rather than fabricating content).
-Authored via 48 successive batches of 3, each recomputing the fresh topologically-ready
+Authored via 49 successive batches of 3, each recomputing the fresh topologically-ready
 frontier from the prior baseline — see COVERAGE.md's biology row for the full per-batch
-concept list; the latest batch (from the 158-concept baseline) added
-`bio.behav.kin-selection-altruism`, `bio.behav.learning-and-behavior`, and
-`bio.eco.predator-prey-dynamics` (all 3 first-principles-authored — 0 of 24 frontier
-candidates had seed content, the FOURTEENTH consecutive fully zero-content batch; the
-latter also cross-links to `math.de.ode`/`math.de.nonlinear-ode`) —
-**EB is 161/199** (only 38 concepts remain).
+concept list; the latest batch (from the 161-concept baseline) added
+`bio.behav.human-behavioral-ecology-evolutionary-psych`,
+`bio.neuro.cognitive-neuroscience-consciousness`, and `bio.neuro.neurodegenerative-disease`
+(all 3 first-principles-authored — 0 of 22 frontier candidates had seed content, the
+FIFTEENTH consecutive fully zero-content batch; this batch closes out `bio.neuro` entirely,
+leaving only `bio.behav.animal-cognition` remaining in `bio.behav`) —
+**EB is 164/199** (only 35 concepts remain).
 **First-principles authoring remains the settled default mode** for continuing this
-campaign from the current 199-concept KG frontier (fourteen consecutive zero-content
+campaign from the current 199-concept KG frontier (fifteen consecutive zero-content
 batches since batch 35) — continuation should still re-check each fresh frontier for
 any remaining seed-content-backed concepts (a handful may still surface, as batch 30's
 2-of-46 showed), but should not expect them as the norm. The 91-concept 2026-09-14
 KG-extension pool remains a SEPARATE, larger, not-yet-started task; no unilateral
 decision to switch to it has been made, and this determination (continuing
 first-principles authoring of the current frontier rather than switching tasks) has
-now been applied consistently across twenty batches (28 through 48) without a
+now been applied consistently across twenty-one batches (28 through 49) without a
 stop-and-ask, per the Workflow preference's authorization for ordinary scope
 continuations — a future session may still revisit this call, particularly once the
 current frontier is fully exhausted of authorable concepts.
