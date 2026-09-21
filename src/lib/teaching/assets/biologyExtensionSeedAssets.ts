@@ -6102,6 +6102,290 @@ const GENOMESEQ_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── bio.behav.social-behavior-eusociality ───────────────────────────────────
+const EUSOCIAL = 'bio.behav.social-behavior-eusociality'
+const EUSOCIAL_SRC = 'educational-brain/concepts/biology/bio.behav.social-behavior-eusociality.md'
+const EUSOCIAL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: EUSOCIAL, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Group living carries both costs (resource competition among more individuals; ' +
+      'increased predation risk from conspicuousness) and benefits (cooperative defence; ' +
+      'information sharing) — a species\' group size reflects where this trade-off balances ' +
+      'for its ecology, not a one-directional "more is better" logic. Dominance hierarchies ' +
+      'reduce the CUMULATIVE cost of repeated resource conflict: once rank is established, ' +
+      'lower-ranked individuals defer rather than re-fighting every time. Eusociality is ' +
+      'defined by THREE features that must ALL be present together: reproductive division of ' +
+      'labour (only a few individuals reproduce), overlapping generations (offspring remain ' +
+      'with parents), and cooperative brood care (non-parents help raise young) — seen in ants, ' +
+      'many bees, and termites.',
+    targetedMisconceptions: [],
+    source: EUSOCIAL_SRC,
+  },
+  {
+    conceptId: EUSOCIAL, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students treat group living as straightforwardly ' +
+      'beneficial ("safety in numbers") without weighing the specific costs (resource ' +
+      'competition, predation conspicuousness) it also imposes. Second, students assume any ' +
+      'group-living species with overlapping generations is eusocial, missing that ' +
+      'reproductive division of labour and cooperative brood care by non-parents must ALSO be ' +
+      'present — a species missing even one of the three features does not qualify, however ' +
+      'social it otherwise appears.',
+    targetedMisconceptions: [`${EUSOCIAL}:M1`, `${EUSOCIAL}:M2`],
+    source: EUSOCIAL_SRC,
+  },
+]
+const EUSOCIAL_PROBES: SeedProbe[] = [
+  {
+    conceptId: EUSOCIAL, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A species lives in a resource-scarce environment with very few predators. What does ' +
+      'the cost-benefit framework for group living predict?',
+    choices: [
+      { text: 'Group living is less favoured here, since predation defence offers little benefit while resource competition remains a cost', isCorrect: true },
+      { text: 'Group living is always favoured, since grouping is generally beneficial (safety in numbers)', isCorrect: false, misconceptionId: `${EUSOCIAL}:M1` },
+      { text: 'Group living has no costs in this scenario', isCorrect: false },
+      { text: 'The scenario cannot be evaluated without knowing the species\' diet', isCorrect: false },
+    ],
+    correctValue: 'Group living is less favoured here, since predation defence offers little benefit while resource competition remains a cost',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${EUSOCIAL}:M1`],
+    source: EUSOCIAL_SRC,
+  },
+  {
+    conceptId: EUSOCIAL, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A primate troop lives in family groups across overlapping generations, but almost ' +
+      'every adult reproduces directly. A student calls this "eusocial." Is this correct?',
+    choices: [
+      {
+        text: 'No — eusociality requires reproductive division of labour AND cooperative brood ' +
+          'care by non-parents too; overlapping generations alone is not sufficient',
+        isCorrect: true,
+      },
+      {
+        text: 'Yes — overlapping generations alone is enough to qualify a species as eusocial',
+        isCorrect: false,
+        misconceptionId: `${EUSOCIAL}:M2`,
+      },
+    ],
+    correctValue: 'No — eusociality requires reproductive division of labour AND cooperative ' +
+      'brood care by non-parents too; overlapping generations alone is not sufficient',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${EUSOCIAL}:M2`],
+    source: EUSOCIAL_SRC,
+  },
+  {
+    conceptId: EUSOCIAL, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What behavioural mechanism resolves repeated resource conflicts within a group by ' +
+      'establishing a rank order, so lower-ranked individuals defer rather than re-fighting?',
+    choices: [
+      { text: 'Dominance hierarchy', isCorrect: true },
+      { text: 'Kin selection', isCorrect: false },
+      { text: 'Territoriality', isCorrect: false },
+    ],
+    correctValue: 'Dominance hierarchy',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: EUSOCIAL_SRC,
+  },
+]
+
+// ─── bio.bioinfo.comparative-genomics ─────────────────────────────────────────
+const COMPGENOM = 'bio.bioinfo.comparative-genomics'
+const COMPGENOM_SRC = 'educational-brain/concepts/biology/bio.bioinfo.comparative-genomics.md'
+const COMPGENOM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: COMPGENOM, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Synteny (conserved gene order across related genomes) is evidence for shared ancestry ' +
+      'because random chance is a poor explanation for two independently-evolved genomes ' +
+      'maintaining the SAME specific gene arrangement — the most parsimonious explanation is ' +
+      'inheritance from a common ancestor. Orthologs are genes in DIFFERENT species tracing ' +
+      'back to the same ancestral gene via a SPECIATION event, typically retaining similar ' +
+      'function. Paralogs are genes WITHIN the SAME genome tracing back to a GENE DUPLICATION ' +
+      'event, which can diverge toward different functions. The pan-genome is the core genome ' +
+      '(shared by nearly all individuals) plus the accessory genome (present in only some ' +
+      'individuals) — capturing within-species diversity no single reference genome can show.',
+    targetedMisconceptions: [],
+    source: COMPGENOM_SRC,
+  },
+  {
+    conceptId: COMPGENOM, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students classify related genes as orthologs or ' +
+      'paralogs by sequence similarity alone, missing that the real criterion is the ' +
+      'PRODUCING MECHANISM: check whether the genes occur in different genomes (speciation — ' +
+      'orthologs) or within the same genome (duplication — paralogs), since both categories ' +
+      'typically show substantial sequence similarity. Second, students assume a single ' +
+      'reference genome fully represents a species, missing that accessory genes present in ' +
+      'only some individuals are captured only by the pan-genome concept, not by any one ' +
+      'reference.',
+    targetedMisconceptions: [`${COMPGENOM}:M1`, `${COMPGENOM}:M2`],
+    source: COMPGENOM_SRC,
+  },
+]
+const COMPGENOM_PROBES: SeedProbe[] = [
+  {
+    conceptId: COMPGENOM, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two related genes with substantial sequence similarity are found WITHIN the SAME ' +
+      'genome. What is the correct classification?',
+    choices: [
+      { text: 'Paralogs, since they arose via a duplication event within one genome', isCorrect: true },
+      { text: 'Orthologs, since orthologs and paralogs are classified purely by sequence similarity', isCorrect: false, misconceptionId: `${COMPGENOM}:M1` },
+      { text: 'Neither classification applies within a single genome', isCorrect: false },
+      { text: 'The classification cannot be determined without functional data', isCorrect: false },
+    ],
+    correctValue: 'Paralogs, since they arose via a duplication event within one genome',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${COMPGENOM}:M1`],
+    source: COMPGENOM_SRC,
+  },
+  {
+    conceptId: COMPGENOM, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A gene is found in some but not all individuals of a bacterial species, sampled ' +
+      'beyond the original reference genome. A student says: "That\'s impossible — the reference ' +
+      'genome already represents the species fully." What is the best response?',
+    choices: [
+      {
+        text: 'No — this is an accessory genome gene under the pan-genome concept; a single ' +
+          'reference genome cannot capture genes present in only some individuals',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — a single reference genome fully captures a species\' genomic content',
+        isCorrect: false,
+        misconceptionId: `${COMPGENOM}:M2`,
+      },
+    ],
+    correctValue: 'No — this is an accessory genome gene under the pan-genome concept; a single ' +
+      'reference genome cannot capture genes present in only some individuals',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${COMPGENOM}:M2`],
+    source: COMPGENOM_SRC,
+  },
+  {
+    conceptId: COMPGENOM, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What term describes the conservation of gene order along a chromosome across related ' +
+      'species, used as evidence of shared ancestry?',
+    choices: [
+      { text: 'Synteny', isCorrect: true },
+      { text: 'Homology', isCorrect: false },
+      { text: 'Orthology', isCorrect: false },
+    ],
+    correctValue: 'Synteny',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: COMPGENOM_SRC,
+  },
+]
+
+// ─── bio.eco.predator-prey-dynamics ───────────────────────────────────────────
+const PREDPREY = 'bio.eco.predator-prey-dynamics'
+const PREDPREY_SRC = 'educational-brain/concepts/biology/bio.eco.predator-prey-dynamics.md'
+const PREDPREY_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PREDPREY, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The Lotka-Volterra predator-prey equations extend the single-species logistic model ' +
+      'into a COUPLED system of two differential equations, where each population\'s growth ' +
+      'rate depends on BOTH populations\' current sizes, not on either alone. Predation rate ' +
+      'decomposes into two distinct components: the functional response (a single predator\'s ' +
+      'per-capita predation rate as PREY DENSITY changes — an individual behavioural property, ' +
+      'often limited by handling time) and the numerical response (the PREDATOR POPULATION\'s ' +
+      'size responding to prey availability via reproduction/migration — a demographic property ' +
+      'over a longer timescale). Boom-bust cycles are an EMERGENT property of the coupling ' +
+      'itself: abundant prey grows the predator population, which depletes prey, which then ' +
+      'cannot support the larger predator population, so predators decline, allowing prey to ' +
+      'recover — no external disturbance is needed to explain the oscillation.',
+    targetedMisconceptions: [],
+    source: PREDPREY_SRC,
+  },
+  {
+    conceptId: PREDPREY, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students assume boom-bust cycles must be caused by an ' +
+      'external disturbance (disease, weather), missing that the oscillation is an emergent, ' +
+      'self-sustaining property arising mathematically from the coupled system itself, tracing ' +
+      'purely from the internal causal loop. Second, students conflate functional response and ' +
+      'numerical response as the same thing, missing that one operates at the level of ' +
+      'individual predator behaviour (short timescale) and the other at the level of predator ' +
+      'population demography (longer timescale).',
+    targetedMisconceptions: [`${PREDPREY}:M1`, `${PREDPREY}:M2`],
+    source: PREDPREY_SRC,
+  },
+]
+const PREDPREY_PROBES: SeedProbe[] = [
+  {
+    conceptId: PREDPREY, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A predator-prey system exists in a constant, undisturbed environment with no external ' +
+      'perturbations. Could the populations still show boom-bust cycling?',
+    choices: [
+      { text: 'Yes — cycling is an emergent property of the coupled equations themselves, requiring no external disturbance', isCorrect: true },
+      { text: 'No — cycling requires an external disturbance such as disease or weather', isCorrect: false, misconceptionId: `${PREDPREY}:M1` },
+      { text: 'No — both populations would simply remain constant forever', isCorrect: false },
+      { text: 'Only the prey population could cycle, never the predator population', isCorrect: false },
+    ],
+    correctValue: 'Yes — cycling is an emergent property of the coupled equations themselves, requiring no external disturbance',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${PREDPREY}:M1`],
+    source: PREDPREY_SRC,
+  },
+  {
+    conceptId: PREDPREY, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Prey abundance rises sharply. A student says: "An individual predator\'s kill rate ' +
+      'rising immediately and the predator population growing over the next breeding season are ' +
+      'the same response." Is this correct?',
+    choices: [
+      {
+        text: 'No — the immediate kill-rate rise is the functional response (individual); the ' +
+          'population growth over the breeding season is the numerical response (demographic) — ' +
+          'different mechanisms, different timescales',
+        isCorrect: true,
+      },
+      {
+        text: 'Yes — functional and numerical response are the same phenomenon',
+        isCorrect: false,
+        misconceptionId: `${PREDPREY}:M2`,
+      },
+    ],
+    correctValue: 'No — the immediate kill-rate rise is the functional response (individual); ' +
+      'the population growth over the breeding season is the numerical response (demographic) — ' +
+      'different mechanisms, different timescales',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${PREDPREY}:M2`],
+    source: PREDPREY_SRC,
+  },
+  {
+    conceptId: PREDPREY, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In predator-prey population cycles, which population\'s peak typically LAGS slightly ' +
+      'behind the other\'s peak?',
+    choices: [
+      { text: 'The predator population lags behind the prey population', isCorrect: true },
+      { text: 'The prey population lags behind the predator population', isCorrect: false },
+      { text: 'Neither population lags — both peak simultaneously', isCorrect: false },
+    ],
+    correctValue: 'The predator population lags behind the prey population',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: PREDPREY_SRC,
+  },
+]
+
 export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...SCIMETH_EXPLANATIONS,
   ...UNITHEMES_EXPLANATIONS,
@@ -6166,6 +6450,9 @@ export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...POPGROWTH_EXPLANATIONS,
   ...MATESEX_EXPLANATIONS,
   ...GENOMESEQ_EXPLANATIONS,
+  ...EUSOCIAL_EXPLANATIONS,
+  ...COMPGENOM_EXPLANATIONS,
+  ...PREDPREY_EXPLANATIONS,
 ]
 
 export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
@@ -6232,4 +6519,7 @@ export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
   ...POPGROWTH_PROBES,
   ...MATESEX_PROBES,
   ...GENOMESEQ_PROBES,
+  ...EUSOCIAL_PROBES,
+  ...COMPGENOM_PROBES,
+  ...PREDPREY_PROBES,
 ]

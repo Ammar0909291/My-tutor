@@ -460,8 +460,21 @@ already served, opens `bio.behav.social-behavior-eusociality` — and
 both already served, opens `bio.bioinfo.comparative-genomics`) validated
 clean: `tsc --noEmit` 0 errors, dry-run 0 duplicate identities across 8,556
 items, contract audit 171/199 authored, 171/171 at contract, 0 short, 0
-never-quizzable, 40/40 targeted vitest suites passing. **Extended 91:
-63/91.** Production convergence (seed
+never-quizzable, 40/40 targeted vitest suites passing. Batch 22
+(2026-09-21, 3 concepts: `bio.behav.social-behavior-eusociality` — sole
+prerequisite batch 21's `bio.behav.mating-systems-sexual-selection`, now
+served, opens `bio.behav.kin-selection-altruism` —
+`bio.bioinfo.comparative-genomics` — prerequisites batch 21's
+`bio.bioinfo.genome-sequencing-technologies` and already-served
+`bio.bioinfo.sequence-alignment`, opens
+`bio.bioinfo.multiomics-statistical-genomics` — and
+`bio.eco.predator-prey-dynamics` — sole prerequisite batch 21's
+`bio.eco.population-growth-models-quantitative`, now served; preserves the
+KG's `math.de.ode` and `math.de.nonlinear-ode` cross-subject links)
+validated clean: `tsc --noEmit` 0 errors, dry-run 0 duplicate identities
+across 8,571 items, contract audit 174/199 authored, 174/174 at contract, 0
+short, 0 never-quizzable, 40/40 targeted vitest suites passing. **Extended
+91: 66/91.** Production convergence (seed
 corpus → cold-start bootstrap → live
 AssetIdentity rows) is UNVERIFIED against the real database this campaign so
 far — no Supabase/DB access has been used;
