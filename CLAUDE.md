@@ -448,7 +448,20 @@ prerequisite `bio.immuno.mhc-antigen-presentation`, already served, opens
 `bio.immuno.cancer-immunology-immunotherapy`) validated clean: `tsc --noEmit`
 0 errors, dry-run 0 duplicate identities across 8,541 items, contract audit
 168/199 authored, 168/168 at contract, 0 short, 0 never-quizzable, 40/40
-targeted vitest suites passing. **Extended 91: 60/91.** Production convergence (seed
+targeted vitest suites passing. Batch 21 (2026-09-21, 3 concepts:
+`bio.eco.population-growth-models-quantitative` — sole prerequisite
+`bio.eco.population-ecology`, already served, opens
+`bio.eco.predator-prey-dynamics` and `bio.eco.global-change-biology` —
+`bio.behav.mating-systems-sexual-selection` — prerequisites
+`bio.behav.animal-communication` and `bio.evo.natural-selection`, both
+already served, opens `bio.behav.social-behavior-eusociality` — and
+`bio.bioinfo.genome-sequencing-technologies` — prerequisites
+`bio.bioinfo.bioinformatics-intro` and `bio.biotech.genomics-proteomics`,
+both already served, opens `bio.bioinfo.comparative-genomics`) validated
+clean: `tsc --noEmit` 0 errors, dry-run 0 duplicate identities across 8,556
+items, contract audit 171/199 authored, 171/171 at contract, 0 short, 0
+never-quizzable, 40/40 targeted vitest suites passing. **Extended 91:
+63/91.** Production convergence (seed
 corpus → cold-start bootstrap → live
 AssetIdentity rows) is UNVERIFIED against the real database this campaign so
 far — no Supabase/DB access has been used;

@@ -5819,6 +5819,289 @@ const TCELLTOL_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── bio.eco.population-growth-models-quantitative ───────────────────────────
+const POPGROWTH = 'bio.eco.population-growth-models-quantitative'
+const POPGROWTH_SRC = 'educational-brain/concepts/biology/bio.eco.population-growth-models-quantitative.md'
+const POPGROWTH_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: POPGROWTH, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Population growth can be formalised as a differential equation describing the ' +
+      'INSTANTANEOUS RATE of change dN/dt. Exponential growth, dN/dt = rN, has growth rate ' +
+      'proportional to current size N with no upper limit. Logistic growth, ' +
+      'dN/dt = rN(1 - N/K), adds the term (1 - N/K): when N is small relative to carrying ' +
+      'capacity K, this term is close to 1 (near-exponential growth); as N approaches K, the ' +
+      'term approaches ZERO, mathematically FORCING dN/dt toward zero — not a vague ' +
+      '"slowdown," but a specific, calculable consequence of the term. r-selected species ' +
+      '(unstable environments, high reproduction, little parental investment) exploit the ' +
+      'exponential-like regime; K-selected species (stable, resource-limited environments, ' +
+      'lower reproduction, greater investment) are adapted to compete under strong ' +
+      'density-dependence near K.',
+    targetedMisconceptions: [],
+    source: POPGROWTH_SRC,
+  },
+  {
+    conceptId: POPGROWTH, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students describe logistic growth\'s levelling-off ' +
+      'vaguely instead of tracing the specific mechanism: evaluate (1 - N/K) at a given N — ' +
+      'close to 1 when N is small, close to 0 when N nears K — and this term alone drives ' +
+      'dN/dt toward zero. Second, students treat dN/dt = rN(1 - N/K) as directly giving the ' +
+      'population size at a given time, missing that it gives only the RATE of change; ' +
+      'obtaining the actual trajectory N(t) requires INTEGRATING the rate equation over time.',
+    targetedMisconceptions: [`${POPGROWTH}:M1`, `${POPGROWTH}:M2`],
+    source: POPGROWTH_SRC,
+  },
+]
+const POPGROWTH_PROBES: SeedProbe[] = [
+  {
+    conceptId: POPGROWTH, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In the logistic model dN/dt = rN(1 - N/K), a population has N = 0.9K. What does this ' +
+      'predict about its current growth rate?',
+    choices: [
+      { text: 'Much lower than at low N, since (1 - N/K) is close to 0 at N = 0.9K', isCorrect: true },
+      { text: 'It just slows down near carrying capacity, for reasons not tied to a specific term', isCorrect: false, misconceptionId: `${POPGROWTH}:M1` },
+      { text: 'The same as at low N, since r has not changed', isCorrect: false },
+      { text: 'It cannot be determined without knowing the actual population size N(t)', isCorrect: false },
+    ],
+    correctValue: 'Much lower than at low N, since (1 - N/K) is close to 0 at N = 0.9K',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${POPGROWTH}:M1`],
+    source: POPGROWTH_SRC,
+  },
+  {
+    conceptId: POPGROWTH, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student says: "dN/dt = rN(1 - N/K) tells you exactly how big the population will be ' +
+      'at a given time." Is this correct?',
+    choices: [
+      {
+        text: 'No — dN/dt is the instantaneous RATE of change; obtaining N(t) requires integrating ' +
+          'this rate equation over time',
+        isCorrect: true,
+      },
+      {
+        text: 'Yes — plugging in a time value into the equation gives the population size directly',
+        isCorrect: false,
+        misconceptionId: `${POPGROWTH}:M2`,
+      },
+    ],
+    correctValue: 'No — dN/dt is the instantaneous RATE of change; obtaining N(t) requires ' +
+      'integrating this rate equation over time',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${POPGROWTH}:M2`],
+    source: POPGROWTH_SRC,
+  },
+  {
+    conceptId: POPGROWTH, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Which life-history strategy is adapted to unstable, unpredictable environments, ' +
+      'favouring high reproductive rate and little parental investment per offspring?',
+    choices: [
+      { text: 'r-selected', isCorrect: true },
+      { text: 'K-selected', isCorrect: false },
+      { text: 'Density-independent', isCorrect: false },
+    ],
+    correctValue: 'r-selected',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: POPGROWTH_SRC,
+  },
+]
+
+// ─── bio.behav.mating-systems-sexual-selection ───────────────────────────────
+const MATESEX = 'bio.behav.mating-systems-sexual-selection'
+const MATESEX_SRC = 'educational-brain/concepts/biology/bio.behav.mating-systems-sexual-selection.md'
+const MATESEX_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: MATESEX, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Sexual selection is a selective force acting on traits affecting MATING success, ' +
+      'distinct from natural selection acting on SURVIVAL — and the two can pull in opposite ' +
+      'directions: a trait can be favoured overall even while reducing survival, if its ' +
+      'mating-success benefit outweighs the survival cost (a peacock\'s tail persists this way). ' +
+      'Intrasexual selection is competition BETWEEN members of the same sex for mates, favouring ' +
+      'fighting traits (size, weapons, aggression). Intersexual selection is mate CHOICE by one ' +
+      'sex, favouring attractive/quality-signalling traits (ornaments, courtship displays). ' +
+      'Mating systems (monogamy, polygyny, polyandry) causally determine sexual dimorphism: heavy ' +
+      'polygyny drives intense male-male competition and strong dimorphism; monogamy, with more ' +
+      'symmetric selection on both sexes, predicts weak dimorphism.',
+    targetedMisconceptions: [],
+    source: MATESEX_SRC,
+  },
+  {
+    conceptId: MATESEX, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students assume any survival-reducing trait must be ' +
+      'maladaptive, missing that reproductive success has TWO components — survival AND mating ' +
+      'success — and a trait can lower one while raising the other enough for a net positive ' +
+      'effect. Second, students conflate intrasexual competition and intersexual choice as one ' +
+      'undifferentiated mechanism, missing that they favour DIFFERENT trait types: fighting ' +
+      'traits (competition) versus attractive/signalling traits (being chosen).',
+    targetedMisconceptions: [`${MATESEX}:M1`, `${MATESEX}:M2`],
+    source: MATESEX_SRC,
+  },
+]
+const MATESEX_PROBES: SeedProbe[] = [
+  {
+    conceptId: MATESEX, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A trait lowers an animal\'s survival slightly but substantially increases its mating ' +
+      'success. What does evolutionary theory predict?',
+    choices: [
+      { text: 'The trait can still be favoured overall, since net reproductive success (survival + mating success) is what matters', isCorrect: true },
+      { text: 'The trait must be maladaptive, since it reduces survival', isCorrect: false, misconceptionId: `${MATESEX}:M1` },
+      { text: 'The trait has no effect on evolution, since survival and mating are unrelated', isCorrect: false },
+      { text: 'The trait will always be eliminated within one generation', isCorrect: false },
+    ],
+    correctValue: 'The trait can still be favoured overall, since net reproductive success (survival + mating success) is what matters',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${MATESEX}:M1`],
+    source: MATESEX_SRC,
+  },
+  {
+    conceptId: MATESEX, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student says: "Male-male competition for mates and female mate choice are basically ' +
+      'the same thing — both are just sexual selection." What is the best response?',
+    choices: [
+      {
+        text: 'No — intrasexual competition favours fighting traits (size, weapons); intersexual ' +
+          'choice favours attractive/signalling traits (ornaments, displays) — different mechanisms, ' +
+          'different trait types',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — both mechanisms favour identical traits since both increase mating success',
+        isCorrect: false,
+        misconceptionId: `${MATESEX}:M2`,
+      },
+    ],
+    correctValue: 'No — intrasexual competition favours fighting traits (size, weapons); ' +
+      'intersexual choice favours attractive/signalling traits (ornaments, displays) — different ' +
+      'mechanisms, different trait types',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${MATESEX}:M2`],
+    source: MATESEX_SRC,
+  },
+  {
+    conceptId: MATESEX, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Which mating system involves one male mating with multiple females, and is the most ' +
+      'common vertebrate mating system?',
+    choices: [
+      { text: 'Polygyny', isCorrect: true },
+      { text: 'Monogamy', isCorrect: false },
+      { text: 'Polyandry', isCorrect: false },
+    ],
+    correctValue: 'Polygyny',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: MATESEX_SRC,
+  },
+]
+
+// ─── bio.bioinfo.genome-sequencing-technologies ──────────────────────────────
+const GENOMESEQ = 'bio.bioinfo.genome-sequencing-technologies'
+const GENOMESEQ_SRC = 'educational-brain/concepts/biology/bio.bioinfo.genome-sequencing-technologies.md'
+const GENOMESEQ_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: GENOMESEQ, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Sanger sequencing synthesises DNA strands that randomly terminate at each position, ' +
+      'producing accurate but short reads, one fragment at a time. Next-generation sequencing ' +
+      '(NGS) sequences millions of fragments SIMULTANEOUSLY: short-read platforms give many ' +
+      'accurate short fragments (struggling with long repetitive regions); long-read platforms ' +
+      'give fewer, much longer reads (spanning repeats, at some cost to per-base accuracy). ' +
+      'Genome assembly splits into de novo assembly (reconstructing a sequence from fragments\' ' +
+      'own internal overlaps, with NO reference genome) versus reference-guided mapping (aligning ' +
+      'fragments against an ALREADY-EXISTING, sufficiently similar reference as a scaffold). ' +
+      'Sequencing depth/coverage determines assembly quality through a specific statistical ' +
+      'mechanism: multiple independent reads covering the same position let random sequencing ' +
+      'errors in any one read be identified and corrected by consensus across the others.',
+    targetedMisconceptions: [],
+    source: GENOMESEQ_SRC,
+  },
+  {
+    conceptId: GENOMESEQ, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students treat de novo assembly and reference-guided ' +
+      'mapping as interchangeable, missing that reference-guided mapping SPECIFICALLY requires ' +
+      'an existing, sufficiently similar reference genome, while de novo assembly is the only ' +
+      'option when no such reference exists. Second, students treat "more sequencing coverage is ' +
+      'better" as an unexplained rule of thumb rather than the specific statistical mechanism: ' +
+      'many independent reads covering one position let a random error in any single read be ' +
+      'outvoted by consensus across the others.',
+    targetedMisconceptions: [`${GENOMESEQ}:M1`, `${GENOMESEQ}:M2`],
+    source: GENOMESEQ_SRC,
+  },
+]
+const GENOMESEQ_PROBES: SeedProbe[] = [
+  {
+    conceptId: GENOMESEQ, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A newly-discovered species has no closely related, previously-sequenced relative. ' +
+      'Which genome assembly approach is viable?',
+    choices: [
+      { text: 'De novo assembly, since no reference genome exists to guide mapping', isCorrect: true },
+      { text: 'Reference-guided mapping, since the two methods are interchangeable', isCorrect: false, misconceptionId: `${GENOMESEQ}:M1` },
+      { text: 'Neither approach can be used without a reference genome', isCorrect: false },
+      { text: 'Sanger sequencing alone, without any assembly step', isCorrect: false },
+    ],
+    correctValue: 'De novo assembly, since no reference genome exists to guide mapping',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${GENOMESEQ}:M1`],
+    source: GENOMESEQ_SRC,
+  },
+  {
+    conceptId: GENOMESEQ, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student says: "A genomic position covered by 30 independent reads is more reliable ' +
+      'than one covered by 2 reads, just because more data is generally better." Is this ' +
+      'explanation adequate?',
+    choices: [
+      {
+        text: 'No — the specific mechanism is that random errors in any one read can be identified ' +
+          'and corrected by consensus across the other independent reads covering the same position',
+        isCorrect: true,
+      },
+      {
+        text: 'Yes — "more data is better" is a complete explanation on its own',
+        isCorrect: false,
+        misconceptionId: `${GENOMESEQ}:M2`,
+      },
+    ],
+    correctValue: 'No — the specific mechanism is that random errors in any one read can be ' +
+      'identified and corrected by consensus across the other independent reads covering the ' +
+      'same position',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${GENOMESEQ}:M2`],
+    source: GENOMESEQ_SRC,
+  },
+  {
+    conceptId: GENOMESEQ, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Which sequencing platform type produces fewer, much longer reads, better able to span ' +
+      'repetitive genomic regions, at some cost to per-base accuracy?',
+    choices: [
+      { text: 'Long-read', isCorrect: true },
+      { text: 'Short-read', isCorrect: false },
+      { text: 'Sanger', isCorrect: false },
+    ],
+    correctValue: 'Long-read',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: GENOMESEQ_SRC,
+  },
+]
+
 export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...SCIMETH_EXPLANATIONS,
   ...UNITHEMES_EXPLANATIONS,
@@ -5880,6 +6163,9 @@ export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...HERIT_EXPLANATIONS,
   ...CONSGEN_EXPLANATIONS,
   ...TCELLTOL_EXPLANATIONS,
+  ...POPGROWTH_EXPLANATIONS,
+  ...MATESEX_EXPLANATIONS,
+  ...GENOMESEQ_EXPLANATIONS,
 ]
 
 export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
@@ -5943,4 +6229,7 @@ export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
   ...HERIT_PROBES,
   ...CONSGEN_PROBES,
   ...TCELLTOL_PROBES,
+  ...POPGROWTH_PROBES,
+  ...MATESEX_PROBES,
+  ...GENOMESEQ_PROBES,
 ]
