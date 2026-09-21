@@ -6955,6 +6955,287 @@ const HUMBEHECO_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── bio.biotech.agricultural-forensic-biotechnology ─────────────────────────
+const AGFORENSIC = 'bio.biotech.agricultural-forensic-biotechnology'
+const AGFORENSIC_SRC = 'educational-brain/concepts/biology/bio.biotech.agricultural-forensic-biotechnology.md'
+const AGFORENSIC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: AGFORENSIC, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Marker-assisted selective breeding is a NON-TRANSGENIC application of molecular ' +
+      'genetics: it uses known DNA sequence markers to more efficiently SELECT which offspring ' +
+      'of a CONVENTIONAL cross carry a desired trait, introducing no foreign genetic material. ' +
+      'DNA fingerprinting relies on short tandem repeat (STR) profiling: specific genomic ' +
+      'locations where a short sequence repeats a variable NUMBER of times between ' +
+      'individuals — comparing repeat-count patterns across several STR locations identifies ' +
+      'individuals (forensics) or parent-offspring relationships (paternity testing). Chain-of- ' +
+      'custody (documenting sample handling) and statistical interpretation (calculating the ' +
+      'chance of a coincidental match) address two SEPARATE sources of error — even a perfect ' +
+      'match with perfect handling still needs statistical interpretation to state its actual ' +
+      'evidentiary strength.',
+    targetedMisconceptions: [],
+    source: AGFORENSIC_SRC,
+  },
+  {
+    conceptId: AGFORENSIC, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students classify marker-assisted breeding as genetic ' +
+      'engineering, missing that it introduces NO foreign DNA — it only uses markers to select ' +
+      'among offspring of conventional crosses. Second, students treat a DNA match alone as ' +
+      'conclusive evidence, missing that statistical interpretation (population-frequency data ' +
+      'converting a match into a quantified evidentiary strength) is a SEPARATE, necessary step ' +
+      'distinct from chain-of-custody.',
+    targetedMisconceptions: [`${AGFORENSIC}:M1`, `${AGFORENSIC}:M2`],
+    source: AGFORENSIC_SRC,
+  },
+]
+const AGFORENSIC_PROBES: SeedProbe[] = [
+  {
+    conceptId: AGFORENSIC, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Does marker-assisted selective breeding introduce any foreign genetic material into ' +
+      'a crop?',
+    choices: [
+      { text: 'No — it uses DNA markers to select offspring of conventional crosses, introducing no foreign DNA', isCorrect: true },
+      { text: 'Yes — it is a form of direct genetic engineering that inserts foreign genes', isCorrect: false, misconceptionId: `${AGFORENSIC}:M1` },
+      { text: 'Only sometimes, depending on the crop species', isCorrect: false },
+      { text: 'The technique does not involve DNA at all', isCorrect: false },
+    ],
+    correctValue: 'No — it uses DNA markers to select offspring of conventional crosses, introducing no foreign DNA',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${AGFORENSIC}:M1`],
+    source: AGFORENSIC_SRC,
+  },
+  {
+    conceptId: AGFORENSIC, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A suspect\'s DNA matches a crime-scene sample at several STR locations. A student ' +
+      'says: "That match alone proves the DNA came from the suspect." Is this correct?',
+    choices: [
+      {
+        text: 'No — statistical interpretation (how likely this match pattern is by chance in ' +
+          'the population) is a separate, necessary step to state the evidence\'s actual strength',
+        isCorrect: true,
+      },
+      {
+        text: 'Yes — a DNA match alone is sufficient evidence without further statistical context',
+        isCorrect: false,
+        misconceptionId: `${AGFORENSIC}:M2`,
+      },
+    ],
+    correctValue: 'No — statistical interpretation (how likely this match pattern is by chance ' +
+      'in the population) is a separate, necessary step to state the evidence\'s actual strength',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${AGFORENSIC}:M2`],
+    source: AGFORENSIC_SRC,
+  },
+  {
+    conceptId: AGFORENSIC, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What term describes documenting who handled a DNA sample and when, from collection ' +
+      'through analysis, to guard against contamination or tampering?',
+    choices: [
+      { text: 'Chain of custody', isCorrect: true },
+      { text: 'Statistical interpretation', isCorrect: false },
+      { text: 'Marker-assisted selection', isCorrect: false },
+    ],
+    correctValue: 'Chain of custody',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: AGFORENSIC_SRC,
+  },
+]
+
+// ─── bio.biotech.bioprocess-engineering ──────────────────────────────────────
+const BIOPROCESS = 'bio.biotech.bioprocess-engineering'
+const BIOPROCESS_SRC = 'educational-brain/concepts/biology/bio.biotech.bioprocess-engineering.md'
+const BIOPROCESS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: BIOPROCESS, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Bioreactor design parameters each require active control for a specific biological ' +
+      'reason: aeration meets increasing oxygen demand as culture density rises; agitation ' +
+      'prevents localised nutrient/oxygen gradients; temperature and pH must be actively ' +
+      'corrected because metabolic activity constantly pushes them away from the narrow ' +
+      'optimal range. Fermentation scale-up is NOT simply the same process at bigger size: as ' +
+      'vessel volume increases, the surface-area-to-volume ratio DECREASES, making heat removal ' +
+      'and gas transfer proportionally HARDER, requiring new engineering solutions unnecessary ' +
+      'at lab scale. Downstream processing has three functionally DISTINCT sequential steps: ' +
+      'cell separation (removing cells from medium), purification (removing other unwanted ' +
+      'components for purity), and formulation (preparing the final stable, usable form).',
+    targetedMisconceptions: [],
+    source: BIOPROCESS_SRC,
+  },
+  {
+    conceptId: BIOPROCESS, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students assume fermentation scale-up is simply doing ' +
+      'the same process at a bigger size, missing that the decreasing surface-area-to-volume ' +
+      'ratio makes heat removal and gas transfer specifically harder at larger scale. Second, ' +
+      'students treat cell separation, purification, and formulation as one generic ' +
+      '"processing" step, missing that each addresses a DIFFERENT specific purpose (which ' +
+      'fraction to process, purity, and final usable form respectively) in a required sequence.',
+    targetedMisconceptions: [`${BIOPROCESS}:M1`, `${BIOPROCESS}:M2`],
+    source: BIOPROCESS_SRC,
+  },
+]
+const BIOPROCESS_PROBES: SeedProbe[] = [
+  {
+    conceptId: BIOPROCESS, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A fermentation process maintains perfectly uniform temperature at 1-litre laboratory ' +
+      'scale. Will it automatically maintain the same uniformity at 1000-times-larger industrial ' +
+      'scale?',
+    choices: [
+      { text: 'No — the decreased surface-area-to-volume ratio at larger scale makes heat removal proportionally harder', isCorrect: true },
+      { text: 'Yes — scale-up is simply the same process performed at a bigger size', isCorrect: false, misconceptionId: `${BIOPROCESS}:M1` },
+      { text: 'Yes, as long as the same organism is used', isCorrect: false },
+      { text: 'Temperature control is unrelated to vessel size', isCorrect: false },
+    ],
+    correctValue: 'No — the decreased surface-area-to-volume ratio at larger scale makes heat removal proportionally harder',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${BIOPROCESS}:M1`],
+    source: BIOPROCESS_SRC,
+  },
+  {
+    conceptId: BIOPROCESS, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A product has been separated from the cultured cells but still contains other ' +
+      'unwanted proteins. A student says: "The next step is formulation." Is this correct?',
+    choices: [
+      {
+        text: 'No — the next step is purification, which removes other unwanted components; ' +
+          'formulation comes only after purification',
+        isCorrect: true,
+      },
+      {
+        text: 'Yes — cell separation, purification, and formulation are interchangeable steps',
+        isCorrect: false,
+        misconceptionId: `${BIOPROCESS}:M2`,
+      },
+    ],
+    correctValue: 'No — the next step is purification, which removes other unwanted ' +
+      'components; formulation comes only after purification',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${BIOPROCESS}:M2`],
+    source: BIOPROCESS_SRC,
+  },
+  {
+    conceptId: BIOPROCESS, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Which bioreactor design parameter specifically ensures uniform distribution of ' +
+      'nutrients, oxygen, and temperature throughout the culture vessel?',
+    choices: [
+      { text: 'Agitation', isCorrect: true },
+      { text: 'Aeration', isCorrect: false },
+      { text: 'pH control', isCorrect: false },
+    ],
+    correctValue: 'Agitation',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: BIOPROCESS_SRC,
+  },
+]
+
+// ─── bio.biotech.gene-therapy-detail ──────────────────────────────────────────
+const GENETHERAPY = 'bio.biotech.gene-therapy-detail'
+const GENETHERAPY_SRC = 'educational-brain/concepts/biology/bio.biotech.gene-therapy-detail.md'
+const GENETHERAPY_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: GENETHERAPY, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Viral gene-delivery vectors generally achieve HIGHER efficiency but carry specific ' +
+      'safety risks (immune response, insertional mutagenesis); non-viral vectors (lipid ' +
+      'nanoparticles, plasmid injection) generally carry LOWER safety risk but typically ' +
+      'achieve LOWER efficiency — a genuine trade-off requiring case-by-case evaluation, not an ' +
+      'absolute ranking. Ex vivo gene therapy removes cells, modifies them outside the body ' +
+      'with quality-control verification, then reintroduces them; in vivo gene therapy delivers ' +
+      'the vector directly into the body, necessary when target tissue cannot be removed but ' +
+      'sacrificing pre-delivery verification. Gene therapy\'s clinical history includes both ' +
+      'early setbacks (SCID trial insertional mutagenesis, adenoviral toxicity) and approved ' +
+      'therapies — the setbacks provided SPECIFIC evidence that directly informed the vector ' +
+      'redesigns underlying current approved therapies.',
+    targetedMisconceptions: [],
+    source: GENETHERAPY_SRC,
+  },
+  {
+    conceptId: GENETHERAPY, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students rank viral vectors as simply "better" or ' +
+      'non-viral vectors as simply "safer" as absolute statements, missing the two-dimensional ' +
+      'trade-off (efficiency vs. safety) that requires weighing against the specific ' +
+      'therapeutic context. Second, students treat gene therapy\'s early clinical setbacks as ' +
+      'meaning the field simply failed, missing that the setbacks provided specific evidence ' +
+      '(e.g. the insertional mutagenesis mechanism) that directly informed the safer vector ' +
+      'designs used in currently approved therapies.',
+    targetedMisconceptions: [`${GENETHERAPY}:M1`, `${GENETHERAPY}:M2`],
+    source: GENETHERAPY_SRC,
+  },
+]
+const GENETHERAPY_PROBES: SeedProbe[] = [
+  {
+    conceptId: GENETHERAPY, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A gene therapy application prioritises very high delivery efficiency, and the ' +
+      'specific safety risks can be carefully managed. Which vector type does this context ' +
+      'favour?',
+    choices: [
+      { text: 'A viral vector may be favoured for this specific context, since it generally achieves higher efficiency', isCorrect: true },
+      { text: 'A non-viral vector is always favoured, since viral vectors are universally worse', isCorrect: false, misconceptionId: `${GENETHERAPY}:M1` },
+      { text: 'Neither vector type can ever be used for gene therapy', isCorrect: false },
+      { text: 'Vector choice has no bearing on delivery efficiency', isCorrect: false },
+    ],
+    correctValue: 'A viral vector may be favoured for this specific context, since it generally achieves higher efficiency',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${GENETHERAPY}:M1`],
+    source: GENETHERAPY_SRC,
+  },
+  {
+    conceptId: GENETHERAPY, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student says: "The SCID trial insertional mutagenesis cases simply proved gene ' +
+      'therapy doesn\'t work and had no lasting impact on the field." Is this correct?',
+    choices: [
+      {
+        text: 'No — the SCID setbacks provided specific evidence about a real vector-design ' +
+          'risk that directly informed the safer vector systems used in currently approved therapies',
+        isCorrect: true,
+      },
+      {
+        text: 'Yes — the setbacks were simply a failure disconnected from current gene therapy practice',
+        isCorrect: false,
+        misconceptionId: `${GENETHERAPY}:M2`,
+      },
+    ],
+    correctValue: 'No — the SCID setbacks provided specific evidence about a real vector-design ' +
+      'risk that directly informed the safer vector systems used in currently approved therapies',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${GENETHERAPY}:M2`],
+    source: GENETHERAPY_SRC,
+  },
+  {
+    conceptId: GENETHERAPY, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In which gene therapy strategy are cells removed from the patient, genetically ' +
+      'modified outside the body, and then reintroduced?',
+    choices: [
+      { text: 'Ex vivo', isCorrect: true },
+      { text: 'In vivo', isCorrect: false },
+      { text: 'In vitro fertilisation', isCorrect: false },
+    ],
+    correctValue: 'Ex vivo',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: GENETHERAPY_SRC,
+  },
+]
+
 export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...SCIMETH_EXPLANATIONS,
   ...UNITHEMES_EXPLANATIONS,
@@ -7028,6 +7309,9 @@ export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...MULTIOMICS_EXPLANATIONS,
   ...FORAGE_EXPLANATIONS,
   ...HUMBEHECO_EXPLANATIONS,
+  ...AGFORENSIC_EXPLANATIONS,
+  ...BIOPROCESS_EXPLANATIONS,
+  ...GENETHERAPY_EXPLANATIONS,
 ]
 
 export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
@@ -7103,4 +7387,7 @@ export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
   ...MULTIOMICS_PROBES,
   ...FORAGE_PROBES,
   ...HUMBEHECO_PROBES,
+  ...AGFORENSIC_PROBES,
+  ...BIOPROCESS_PROBES,
+  ...GENETHERAPY_PROBES,
 ]

@@ -504,8 +504,18 @@ evolution`; together with foraging-behavior, CLOSING the entire `bio.behav`
 domain gap) validated clean: `tsc --noEmit` 0 errors, dry-run 0 duplicate
 identities across 8,601 items, contract audit 180/199 authored, 180/180 at
 contract, 0 short, 0 never-quizzable, 40/40 targeted vitest suites passing.
+Batch 25 (2026-09-21, 3 concepts — all 19 remaining extension concepts were
+simultaneously ready this batch too; selection again prioritised closing a
+domain outright: `bio.biotech.agricultural-forensic-biotechnology`,
+`bio.biotech.bioprocess-engineering`, and `bio.biotech.gene-therapy-detail`
+— prerequisites already-served `bio.biotech.biotech-process-applications`,
+`bio.biotech.biotech-principles`, and `bio.biotech.crispr-genome-editing`
+respectively — CLOSING the entire remaining `bio.biotech` domain gap)
+validated clean: `tsc --noEmit` 0 errors, dry-run 0 duplicate identities
+across 8,616 items, contract audit 183/199 authored, 183/183 at contract, 0
+short, 0 never-quizzable, 40/40 targeted vitest suites passing.
 **Extended
-91: 72/91.** Production convergence (seed
+91: 75/91.** Production convergence (seed
 corpus → cold-start bootstrap → live
 AssetIdentity rows) is UNVERIFIED against the real database this campaign so
 far — no Supabase/DB access has been used;
