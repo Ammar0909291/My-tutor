@@ -419,7 +419,18 @@ organization` — prerequisites `bio.mol.epigenetics` and
 `bio.micro.archaea-extremophiles`) validated clean: `tsc --noEmit` 0 errors,
 dry-run 0 duplicate identities across 8,496 items, contract audit 159/199
 authored, 159/159 at contract, 0 short, 0 never-quizzable, 40/40 targeted
-vitest suites passing. **Extended 91: 51/91.** Production convergence (seed
+vitest suites passing. Batch 18 (2026-09-21, 3 concepts:
+`bio.cell.cancer-biology-hallmarks` — prerequisites `bio.cell.cell-cycle`,
+`bio.cell.apoptosis` (both already served) and batch 17's
+`bio.cell.cell-adhesion-tissue-organization`, now served — `bio.micro.
+archaea-extremophiles` — prerequisites `bio.div.three-domain-system`
+(already served) and batch 17's `bio.micro.microbial-metabolism-diversity`,
+now served — and `bio.micro.human-microbiome-detail` — prerequisites
+`bio.micro.microbial-diversity` and `bio.physio.digestive-system`, both
+already served) validated clean: `tsc --noEmit` 0 errors, dry-run 0 duplicate
+identities across 8,511 items, contract audit 162/199 authored, 162/162 at
+contract, 0 short, 0 never-quizzable, 40/40 targeted vitest suites passing.
+**Extended 91: 54/91.** Production convergence (seed
 corpus → cold-start bootstrap → live
 AssetIdentity rows) is UNVERIFIED against the real database this campaign so
 far — no Supabase/DB access has been used;

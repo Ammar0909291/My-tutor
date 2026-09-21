@@ -4973,6 +4973,287 @@ const MICROMETAB_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── bio.cell.cancer-biology-hallmarks ───────────────────────────────────────
+const CANCERHALL = 'bio.cell.cancer-biology-hallmarks'
+const CANCERHALL_SRC = 'educational-brain/concepts/biology/bio.cell.cancer-biology-hallmarks.md'
+const CANCERHALL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CANCERHALL, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The Hanahan-Weinberg hallmarks of cancer identify recurring categories of regulatory ' +
+      'breakdown, each tracing to a SPECIFIC normal process that failed: sustained proliferative ' +
+      'signalling (independence from external growth signals), evasion of growth suppressors ' +
+      '(disabled internal "stop" genes like p53/Rb), resistance to apoptosis (survival despite ' +
+      'signals that should trigger programmed death), replicative immortality (telomerase ' +
+      'reactivation removing the division limit), angiogenesis induction, invasion/metastasis ' +
+      '(adhesion-loss breakdown, connecting to EMT), and metabolic reprogramming (the Warburg ' +
+      'effect). Critically, cancer is NOT one unified defect — a cell typically must accumulate ' +
+      'SEVERAL hallmarks together to overwhelm the body\'s multiple, redundant regulatory ' +
+      'safeguards and become fully malignant, which is why cancer development is a multi-step ' +
+      'process.',
+    targetedMisconceptions: [],
+    source: CANCERHALL_SRC,
+  },
+  {
+    conceptId: CANCERHALL, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students assume a single hallmark (usually uncontrolled ' +
+      'division) is sufficient on its own for full malignancy, missing that the body\'s multiple ' +
+      'redundant safeguards (tumour suppressors, apoptosis, replicative limits, adhesion) ' +
+      'typically require SEVERAL hallmarks to accumulate together. Second, students conflate ' +
+      '"evasion of growth suppressors" with "resistance to apoptosis," missing that these ' +
+      'represent breakdowns in functionally different systems — halting division versus triggering ' +
+      'death.',
+    targetedMisconceptions: [`${CANCERHALL}:M1`, `${CANCERHALL}:M2`],
+    source: CANCERHALL_SRC,
+  },
+]
+const CANCERHALL_PROBES: SeedProbe[] = [
+  {
+    conceptId: CANCERHALL, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A cell has acquired sustained proliferative signalling but still has fully functioning ' +
+      'tumour suppressors, apoptosis, and adhesion. Is this cell likely to become fully malignant?',
+    choices: [
+      { text: 'Not by itself — the remaining intact safeguards would still typically constrain it', isCorrect: true },
+      { text: 'Yes — one hallmark alone is always sufficient for full malignancy', isCorrect: false, misconceptionId: `${CANCERHALL}:M1` },
+      { text: 'Yes, since proliferative signalling overrides all other safeguards immediately', isCorrect: false, misconceptionId: `${CANCERHALL}:M1` },
+      { text: 'This cannot be evaluated without genetic testing', isCorrect: false },
+    ],
+    correctValue: 'Not by itself — the remaining intact safeguards would still typically constrain it',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${CANCERHALL}:M1`],
+    source: CANCERHALL_SRC,
+  },
+  {
+    conceptId: CANCERHALL, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A cell continues dividing despite DNA damage signals that should trigger programmed ' +
+      'cell death. A student labels this "evasion of growth suppressors." What is the best ' +
+      'response?',
+    choices: [
+      {
+        text: 'More precisely, this is resistance to apoptosis — a different, specific ' +
+          'regulatory system (triggering death) from growth-suppressor evasion (halting division)',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — evasion of growth suppressors and resistance to apoptosis are the same hallmark',
+        isCorrect: false,
+        misconceptionId: `${CANCERHALL}:M2`,
+      },
+    ],
+    correctValue: 'More precisely, this is resistance to apoptosis — a different, specific ' +
+      'regulatory system (triggering death) from growth-suppressor evasion (halting division)',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${CANCERHALL}:M2`],
+    source: CANCERHALL_SRC,
+  },
+  {
+    conceptId: CANCERHALL, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Which hallmark specifically involves cancer cells reactivating telomerase to remove ' +
+      'the normal limit on how many times a cell can divide?',
+    choices: [
+      { text: 'Replicative immortality', isCorrect: true },
+      { text: 'Angiogenesis induction', isCorrect: false },
+      { text: 'Metabolic reprogramming', isCorrect: false },
+    ],
+    correctValue: 'Replicative immortality',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: CANCERHALL_SRC,
+  },
+]
+
+// ─── bio.micro.archaea-extremophiles ──────────────────────────────────────────
+const ARCHAEA = 'bio.micro.archaea-extremophiles'
+const ARCHAEA_SRC = 'educational-brain/concepts/biology/bio.micro.archaea-extremophiles.md'
+const ARCHAEA_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ARCHAEA, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Archaea constitute a separate domain of life justified by specific MOLECULAR features, not ' +
+      'habitat: ether-linked membrane lipids (unlike bacteria\'s and eukaryotes\' ester-linked ' +
+      'lipids), an RNA polymerase structurally more similar to eukaryotes\' than to bacteria\'s, ' +
+      'and histone-like DNA-packaging proteins absent in bacteria. Extremophile categories are ' +
+      'matched to specific stressors: thermophiles (high temperature), halophiles (high salt), ' +
+      'acidophiles (low pH), and piezophiles (high pressure) — each with adaptations tailored to ' +
+      'its specific stress. Extremophile enzymes\' biotechnological value traces DIRECTLY to the ' +
+      'same molecular property enabling survival: Taq polymerase\'s heat stability (from ' +
+      'Thermus aquaticus surviving hot springs) is precisely what lets it survive PCR\'s repeated ' +
+      'high-temperature steps.',
+    targetedMisconceptions: [],
+    source: ARCHAEA_SRC,
+  },
+  {
+    conceptId: ARCHAEA, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students treat Archaea as simply "bacteria that live in ' +
+      'extreme places," missing that their domain status is justified by specific molecular ' +
+      'differences (membrane chemistry, RNA polymerase, histone-like proteins) — some archaea in ' +
+      'fact live in non-extreme environments. Second, students treat extremophile enzymes\' ' +
+      'biotechnological usefulness as a lucky coincidence, missing that it traces directly to the ' +
+      'SAME specific molecular adaptation that enables the source organism\'s extremophile ' +
+      'survival.',
+    targetedMisconceptions: [`${ARCHAEA}:M1`, `${ARCHAEA}:M2`],
+    source: ARCHAEA_SRC,
+  },
+]
+const ARCHAEA_PROBES: SeedProbe[] = [
+  {
+    conceptId: ARCHAEA, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What SPECIFICALLY justifies Archaea\'s status as a separate domain of life?',
+    choices: [
+      { text: 'Specific molecular features — ether-linked membrane lipids, a eukaryote-like RNA polymerase, and histone-like proteins', isCorrect: true },
+      { text: 'Their preference for living in extreme environments', isCorrect: false, misconceptionId: `${ARCHAEA}:M1` },
+      { text: 'Their small size compared to eukaryotic cells', isCorrect: false, misconceptionId: `${ARCHAEA}:M1` },
+      { text: 'Their inability to survive outside extreme conditions', isCorrect: false },
+    ],
+    correctValue: 'Specific molecular features — ether-linked membrane lipids, a eukaryote-like RNA polymerase, and histone-like proteins',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${ARCHAEA}:M1`],
+    source: ARCHAEA_SRC,
+  },
+  {
+    conceptId: ARCHAEA, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student says Taq polymerase being useful for PCR is "just a lucky coincidence" ' +
+      'unrelated to its source organism\'s natural habitat. What is the best response?',
+    choices: [
+      {
+        text: 'Wrong — Taq polymerase\'s heat stability is the SAME property that lets Thermus ' +
+          'aquaticus survive hot springs, directly explaining its usefulness in PCR',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — the enzyme\'s usefulness has no connection to its source organism\'s adaptations',
+        isCorrect: false,
+        misconceptionId: `${ARCHAEA}:M2`,
+      },
+    ],
+    correctValue: 'Wrong — Taq polymerase\'s heat stability is the SAME property that lets Thermus ' +
+      'aquaticus survive hot springs, directly explaining its usefulness in PCR',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${ARCHAEA}:M2`],
+    source: ARCHAEA_SRC,
+  },
+  {
+    conceptId: ARCHAEA, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Which extremophile category is specifically adapted to tolerate high salt concentration ' +
+      'environments?',
+    choices: [
+      { text: 'Halophiles', isCorrect: true },
+      { text: 'Thermophiles', isCorrect: false },
+      { text: 'Piezophiles', isCorrect: false },
+    ],
+    correctValue: 'Halophiles',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: ARCHAEA_SRC,
+  },
+]
+
+// ─── bio.micro.human-microbiome-detail ────────────────────────────────────────
+const MICROBIOME = 'bio.micro.human-microbiome-detail'
+const MICROBIOME_SRC = 'educational-brain/concepts/biology/bio.micro.human-microbiome-detail.md'
+const MICROBIOME_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: MICROBIOME, subjectSlug: 'biology', familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Gut microbiome composition VARIES across individuals, causally shaped by diet (which ' +
+      'selects for bacteria able to use the available nutrients) and individual factors (genetics, ' +
+      'early colonisation, medication). Microbiome-host interactions operate through three ' +
+      'DISTINCT functional categories: nutrient synthesis (bacteria producing vitamins/short-chain ' +
+      'fatty acids the host cannot make alone), immune system training (microbial exposure ' +
+      'calibrating immune development), and gut-brain signalling (microbial metabolites/vagus ' +
+      'nerve influencing the nervous system) — three genuinely different mechanisms, not one ' +
+      'blended benefit. Dysbiosis is a disruption of NORMAL RELATIVE PROPORTIONS of microbial ' +
+      'species (often the SAME species present in a healthy gut, just at abnormal abundances), ' +
+      'linked to metabolic/inflammatory disease through these same three disrupted functional ' +
+      'pathways.',
+    targetedMisconceptions: [],
+    source: MICROBIOME_SRC,
+  },
+  {
+    conceptId: MICROBIOME, subjectSlug: 'biology', familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two mistakes are common. First, students conflate the three microbiome-host interaction ' +
+      'categories into one undifferentiated "gut bacteria help you" relationship, missing that ' +
+      'nutrient synthesis, immune training, and gut-brain signalling are functionally distinct ' +
+      'mechanisms. Second, students describe dysbiosis as "bad bacteria invading," missing that it ' +
+      'is fundamentally a shift in RELATIVE PROPORTIONS — often among the same species already ' +
+      'present in a healthy gut, not an invasion by new organisms.',
+    targetedMisconceptions: [`${MICROBIOME}:M1`, `${MICROBIOME}:M2`],
+    source: MICROBIOME_SRC,
+  },
+]
+const MICROBIOME_PROBES: SeedProbe[] = [
+  {
+    conceptId: MICROBIOME, subjectSlug: 'biology', probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A gut bacterium produces a short-chain fatty acid from dietary fibre that the human host ' +
+      'cannot digest itself. Which microbiome-host interaction category does this describe?',
+    choices: [
+      { text: 'Nutrient synthesis', isCorrect: true },
+      { text: 'Immune system training, since all microbiome benefits are the same', isCorrect: false, misconceptionId: `${MICROBIOME}:M1` },
+      { text: 'Gut-brain signalling, since all microbiome benefits are the same', isCorrect: false, misconceptionId: `${MICROBIOME}:M1` },
+      { text: 'This does not fit any of the three interaction categories', isCorrect: false },
+    ],
+    correctValue: 'Nutrient synthesis',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${MICROBIOME}:M1`],
+    source: MICROBIOME_SRC,
+  },
+  {
+    conceptId: MICROBIOME, subjectSlug: 'biology', probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A patient develops dysbiosis where species already present in their healthy gut ' +
+      'microbiome shift to abnormal relative proportions. A student says this means "bad bacteria ' +
+      'invaded." What is the best response?',
+    choices: [
+      {
+        text: 'Wrong — dysbiosis is fundamentally a proportional shift among existing species, ' +
+          'not necessarily an invasion by new organisms',
+        isCorrect: true,
+      },
+      {
+        text: 'Correct — dysbiosis always means entirely new, previously-absent bacteria have taken over',
+        isCorrect: false,
+        misconceptionId: `${MICROBIOME}:M2`,
+      },
+    ],
+    correctValue: 'Wrong — dysbiosis is fundamentally a proportional shift among existing species, ' +
+      'not necessarily an invasion by new organisms',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${MICROBIOME}:M2`],
+    source: MICROBIOME_SRC,
+  },
+  {
+    conceptId: MICROBIOME, subjectSlug: 'biology', probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What causally shapes an individual\'s specific gut microbiome composition, according to ' +
+      'the selective-process explanation?',
+    choices: [
+      { text: 'Diet, which selects for bacteria able to use the available nutrient substrates', isCorrect: true },
+      { text: 'Microbiome composition is fixed at birth and never changes', isCorrect: false },
+      { text: 'Random chance with no identifiable causal factors', isCorrect: false },
+    ],
+    correctValue: 'Diet, which selects for bacteria able to use the available nutrient substrates',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: MICROBIOME_SRC,
+  },
+]
+
 export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...SCIMETH_EXPLANATIONS,
   ...UNITHEMES_EXPLANATIONS,
@@ -5025,6 +5306,9 @@ export const BIOLOGY_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...ADHESION_EXPLANATIONS,
   ...CHROMATIN_EXPLANATIONS,
   ...MICROMETAB_EXPLANATIONS,
+  ...CANCERHALL_EXPLANATIONS,
+  ...ARCHAEA_EXPLANATIONS,
+  ...MICROBIOME_EXPLANATIONS,
 ]
 
 export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
@@ -5079,4 +5363,7 @@ export const BIOLOGY_EXTENSION_PROBES: SeedProbe[] = [
   ...ADHESION_PROBES,
   ...CHROMATIN_PROBES,
   ...MICROMETAB_PROBES,
+  ...CANCERHALL_PROBES,
+  ...ARCHAEA_PROBES,
+  ...MICROBIOME_PROBES,
 ]
