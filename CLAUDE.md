@@ -594,6 +594,33 @@ standing "never claim production verification without querying/verifying
 production" rule — do not treat asset-contract completion as equivalent to
 confirmed production readiness.
 
+**2026-09-22 update — production convergence verified, 3 batch-split defects found and repaired,
+and a CRITICAL runtime-blocking gap discovered.** An owner-authorized SQL-equivalent write (via
+`mcp__Supabase__execute_sql` against production project `ywakxiqbevfuxsiwewnw`, generated
+verbatim from the same canonical source files, no invented content) applied every
+`asset_identity`/`explanation_assets`/`probe_assets` row this campaign and the original 108-concept
+campaign had produced. Fresh read-only verification found 3 defects, all traced to one batch
+transaction (`b092.sql`) that aborted partway through when concatenated with `b091.sql`: a hollow
+`PROBE` identity (`bio.physio.homeostasis-thermoregulation:short_answer:en:high`, identity row
+with no `probe_assets` child) and two concepts with ZERO probes at all
+(`bio.physio.lymphatic-system-detail`, `bio.physio.muscle-physiology-energetics`). Repaired by
+re-running the exact original INSERT statements (idempotent `WHERE NOT EXISTS`/`WHERE EXISTS AND
+NOT EXISTS` guards, same canonical text, nothing invented). Re-verification after repair:
+**199/199 explanation coverage, 199/199 probe coverage, 0 hollow asset identities, 0 duplicate
+canonicalSlugs, 0 cross-subject contamination** — all five required criteria pass.
+Phase-2 real-learner runtime QA (`scripts/qa/biologyProductionRuntimeQa.ts`, a disposable-account
+harness driving the actual deployed app) then found a **blocking production defect that asset-
+contract completion cannot see**: `POST /api/sessions` 404s with `"Subject not found"` for
+`subjectSlug=biology`, because the global `subjects` catalog table has rows only for
+`english`/`mathematics`/`physics`/`chemistry` — **no `biology` row exists at all**. This is a
+different table from the one `GET /api/curriculum?subject=biology` reads (that one serves all 199
+lessons fine), so curriculum/KG completeness gave no signal of this. **No real learner can open a
+Biology lesson session in production today, regardless of asset-contract completeness.** This was
+NOT fixed in this session (inserting into the global `subjects` catalog is a schema/catalog change
+outside the 3 named-defect repair scope and needs an explicit owner decision, not a unilateral
+session call) — it is the actual next blocker for whichever session picks this up next, ahead of
+any further content work on biology.
+
 ## Full history index
 Every dated campaign, incident, and defect investigation this project has ever recorded is
 preserved verbatim (nothing summarized away) under `docs/history/` — see
