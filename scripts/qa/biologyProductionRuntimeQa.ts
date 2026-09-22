@@ -284,21 +284,41 @@ async function main() {
     } else {
       log(`\n=== bio.plant.photosynthesis — visual grounding check ===`)
       const sessionId = await startSession(acct.cookie, 'biology')
-      const init = await initLesson(acct.cookie, sessionId, photo, lessons.length)
-      const figure = carriesFigure(init)
-      const claimed = claimsVisual(init.text)
-      log(`  [open] figure=${figure} claimsVisualInText=${claimed}`)
-      log(`  [open] visualSpec=${JSON.stringify(init.visualSpec).slice(0, 200)}`)
-      log(`  [open] ${short(init.text, 400)}`)
-      if (!figure) {
-        finding('bio.plant.photosynthesis: concept has an ACTIVE visual asset in production, but the opening lesson turn returned NO visual/visualSpec/sceneSpec field.')
+      let turn: ChatTurn = await initLesson(acct.cookie, sessionId, photo, lessons.length)
+      let sawFigure = carriesFigure(turn)
+      let claimed = claimsVisual(turn.text)
+      log(`  [open] figure=${sawFigure} claimsVisualInText=${claimed}`)
+      log(`  [open] visualSpec=${JSON.stringify(turn.visualSpec ?? null).slice(0, 200)}`)
+      log(`  [open] ${short(turn.text, 400)}`)
+      if (claimed && !sawFigure) finding('bio.plant.photosynthesis T(open): opening text claims a visual but none was returned.')
+
+      // A visual need not appear on turn 1 — give the lesson several more
+      // turns (same nudge pattern driveConcept uses) before concluding the
+      // ACTIVE visual asset never surfaces at all.
+      const photoNudgeIdx = { n: 0 }
+      let sawFigureAnyTurn = sawFigure
+      let lastVisualSpec: unknown = turn.visualSpec ?? turn.visual ?? turn.sceneSpec ?? null
+      for (let i = 0; i < 8 && !sawFigureAnyTurn; i++) {
+        const msg = pickReply(turn, photoNudgeIdx)
+        turn = await chat(acct.cookie, sessionId, msg)
+        const fig = carriesFigure(turn)
+        const cl = claimsVisual(turn.text)
+        log(`  [T${i + 1}] learner: "${short(msg, 90)}"`)
+        log(`  [T${i + 1}] figure=${fig} claimsVisualInText=${cl} tutor: ${short(turn.text)}`)
+        if (cl && !fig) finding(`bio.plant.photosynthesis T${i + 1}: text claims a visual but none was returned.`)
+        if (fig) { sawFigureAnyTurn = true; lastVisualSpec = turn.visualSpec ?? turn.visual ?? turn.sceneSpec ?? null }
+      }
+
+      if (!sawFigureAnyTurn) {
+        finding('bio.plant.photosynthesis: concept has an ACTIVE visual asset in production, but NO turn across the opening + 8 follow-up turns returned a visual/visualSpec/sceneSpec field.')
       } else {
-        const vsText = JSON.stringify(init.visualSpec ?? init.visual ?? init.sceneSpec).toLowerCase()
+        const vsText = JSON.stringify(lastVisualSpec).toLowerCase()
         if (!/photosynth/.test(vsText) && !/chloroplast|thylakoid|light.?dependent|calvin/.test(vsText)) {
           finding(`bio.plant.photosynthesis: a visual was returned but nothing in it (title/type/conceptId) identifies it as photosynthesis-specific: ${vsText.slice(0, 200)}`)
+        } else {
+          log(`  visual identified as photosynthesis-specific: ${vsText.slice(0, 200)}`)
         }
       }
-      if (claimed && !figure) finding('bio.plant.photosynthesis: opening text claims a visual but none was returned.')
     }
 
     log(`\n${'='.repeat(70)}\nSUMMARY\n${'='.repeat(70)}`)
