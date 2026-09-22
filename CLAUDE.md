@@ -621,6 +621,50 @@ outside the 3 named-defect repair scope and needs an explicit owner decision, no
 session call) — it is the actual next blocker for whichever session picks this up next, ahead of
 any further content work on biology.
 
+**2026-09-22 update #2 — dependency audit, `subjects` row unblocked via the app's own upsert (no
+SQL/migration), and real Phase-2 runtime QA executed.** A read-only audit traced every dependent
+of `subjects.slug` (full trace: session transcript; not written to a separate doc) and found: (a)
+`SubjectType.BIOLOGY` and a correct `biology` entry in `src/lib/curriculum/subjectCatalog.ts`
+already existed; (b) `/api/subjects/enroll` and `/api/onboarding` already contain a self-healing
+`prisma.subject.upsert({where:{slug}, create:{...}})` keyed off `findLibrarySubject(slug)`, which
+searches ALL catalog subjects regardless of rollout status — this is the same mechanism that
+created the current 4 production rows (`prisma/seed.ts` is stale and unused for this purpose); (c)
+the ONLY reason biology had no row is `src/lib/curriculum/subjectRollout.ts`'s
+`EDUCATIONAL_BRAIN_SUBJECTS` allowlist excluding it, which hides it from onboarding/enroll/library
+UI so the self-healing upsert was never triggered by a real user; (d) that allowlist does NOT
+gate the core asset-identity memory-serving pipeline (confirmed zero references to it under
+`src/lib/teaching/`) — only 4 supplementary ADR-14-era prompt-injection blocks in
+`chat/route.ts`; (e) no billing/entitlement logic keys off which subjects exist. Per owner
+instruction, the row was created via the **application endpoint itself** (`POST
+/api/subjects/enroll` with `{"subjectSlug":"biology"}`, called from a disposable QA account after
+completing onboarding under the already-existing `english` subject) — no raw SQL, no migration,
+no source change, `EDUCATIONAL_BRAIN_SUBJECTS` and onboarding/library rollout untouched. Verified
+before/after: `subjects` went from 4 rows to 5, the 4 pre-existing rows byte-identical
+(same ids/names/types), new row `{slug:"biology", type:"BIOLOGY", name:"Biology"}`.
+`scripts/qa/biologyProductionRuntimeQa.ts` then ran successfully end-to-end for the first time
+(previously blocked): real sessions, real lesson-init, real multi-turn grading through
+`bio.physio.homeostasis-thermoregulation` and `bio.physio.lymphatic-system-detail` (the two
+concepts repaired in update #1) plus a visual-grounding check on `bio.plant.photosynthesis`. DB
+cross-check (`topic_progress`, `evidence_events`, `lesson_attempts`) confirmed the serving pipeline
+is real and honest: `ASSET_SHOWN`/`MISCONCEPTION_DETECTED`/`PROBE_OUTCOME` evidence events fired
+correctly (including on the deliberately-wrong answer fed to the harness), `TopicProgress` landed
+at `status:REVISION, masteryPct:25` for both concepts (attempts 3 and 7) — **verified MASTERY was
+NOT reached in this run**, and critically the tutor's own closing text ("I wasn't able to confirm
+it... I'll mark it for a quick follow-up rather than call it fully mastered") matched the DB
+exactly — no prose-vs-evidence mismatch found. `bio.plant.photosynthesis` has an ACTIVE visual
+asset in the DB but **no turn across 11 turns ever returned a visual/visualSpec/sceneSpec field**;
+the tutor correctly never claimed one existed when directly asked ("I don't have a picture I can
+display here") — safe behavior, but a real visual-delivery gap distinct from the asset existing.
+Two occurrences of `MISCONCEPTION_DETECTED` fired on plain conversational nudges ("I think I
+follow so far", "can you give me a practice question") rather than substantive wrong answers —
+noted as a possible over-triggering artifact, not investigated further (out of this task's scope).
+One harness bug (a null-guard crash in the photosynthesis check) was found and fixed in
+`scripts/qa/biologyProductionRuntimeQa.ts` and pushed. Biology is **still not called
+production-ready**: the row exists and the pipeline demonstrably works and grades honestly, but
+mastery was not observed to complete in this run and the photosynthesis visual gap is unresolved.
+`EDUCATIONAL_BRAIN_SUBJECTS` was NOT touched — biology remains excluded from public
+onboarding/library/enroll discovery; that rollout decision is still explicitly the owner's to make.
+
 ## Full history index
 Every dated campaign, incident, and defect investigation this project has ever recorded is
 preserved verbatim (nothing summarized away) under `docs/history/` — see
