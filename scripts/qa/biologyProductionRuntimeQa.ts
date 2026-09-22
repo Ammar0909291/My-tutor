@@ -55,8 +55,8 @@ interface ChatTurn {
   mastery?: {
     phase?: string
     verified?: boolean
-    correctAtCheck?: number
-    correctAtPractice?: number
+    checkCorrect?: number
+    practiceCorrect?: number
   } | null
   lessonComplete?: { complete?: boolean } | null
   [k: string]: unknown
@@ -217,7 +217,7 @@ async function driveConcept(
     result.turns.push({ n: turnCount, sent: msg, received: short(p.text), mastery: p.mastery, figure, claimedVisual: claimed })
     log(`  [T${turnCount}] learner: "${short(msg, 90)}"`)
     log(`  [T${turnCount}] tutor: ${short(p.text)}`)
-    log(`  [T${turnCount}] mastery: phase=${p.mastery?.phase} verified=${p.mastery?.verified} check=${p.mastery?.correctAtCheck} practice=${p.mastery?.correctAtPractice}`)
+    log(`  [T${turnCount}] mastery: phase=${p.mastery?.phase} verified=${p.mastery?.verified} check=${p.mastery?.checkCorrect} practice=${p.mastery?.practiceCorrect}`)
     if (claimed && !figure) finding(`${topicSlug} T${turnCount}: text claims a visual but none was returned.`)
     if (p.mastery?.verified === true || p.lessonComplete?.complete === true) break
   }
@@ -233,7 +233,7 @@ async function driveConcept(
   // mastery signal doesn't regress or vanish on renewed interaction.
   const repeat = await chat(cookie, sessionId, 'can you remind me what we just covered?')
   result.repeatAttemptMastery = repeat.mastery
-  log(`  [repeat] mastery: phase=${repeat.mastery?.phase} verified=${repeat.mastery?.verified} check=${repeat.mastery?.correctAtCheck} practice=${repeat.mastery?.correctAtPractice}`)
+  log(`  [repeat] mastery: phase=${repeat.mastery?.phase} verified=${repeat.mastery?.verified} check=${repeat.mastery?.checkCorrect} practice=${repeat.mastery?.practiceCorrect}`)
   if (result.finalMastery?.verified === true && repeat.mastery?.verified !== true) {
     finding(`${topicSlug}: mastery was verified=true, but a later turn in the SAME session reports verified=${repeat.mastery?.verified} — mastery signal regressed.`)
   }
