@@ -1945,9 +1945,19 @@ export function isLowSignalAcknowledgement(message: string): boolean {
  * the length/no-question criteria AND an explicit filler phrase — a very short
  * but concrete statement ("An orbital is a region where electrons can be found.")
  * will not fire because it contains no filler phrase.
+ *
+ * "let's stay with this idea for a moment" added (real-learner QA,
+ * 2026-09-22): measured live, verbatim, on eng.communication.business-
+ * writing — the whole visible turn, twice, after a correctly-graded check
+ * cycle while the model stalled transitioning to the next practice
+ * activity. Intermittent (a second attempt at the identical scripted
+ * conversation did not reproduce it — non-deterministic model output, not
+ * a deterministic code path), but a real content-free turn shape this list
+ * did not yet cover: none of the existing phrases anchor on "stay with"
+ * as the stalling verb, only "take a step"/"take a moment"/"move forward".
  */
 const FILLER_PHRASE_RE =
-  /\b(?:whenever you'?re ready|when(?:ever)? you'?re ready|take your time|in your own time|we can continue|let'?s take (?:a|one) (?:small )?step|feel free to|we'?ll continue|take a moment|no rush|we can go|let'?s move forward whenever|at your own pace)\b/i
+  /\b(?:whenever you'?re ready|when(?:ever)? you'?re ready|take your time|in your own time|we can continue|let'?s take (?:a|one) (?:small )?step|feel free to|we'?ll continue|take a moment|no rush|we can go|let'?s move forward whenever|at your own pace|let'?s stay (?:with|on) (?:this|that|it) (?:idea|topic|point)? ?for a moment)\b/i
 
 export function detectFillerTurn(text: string): boolean {
   const wordCount = text.trim().split(/\s+/).length
