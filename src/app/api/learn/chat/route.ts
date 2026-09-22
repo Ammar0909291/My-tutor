@@ -7514,7 +7514,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // see textPromisesUnfulfilledVisual()'s comment for why the prior
       // force-render trigger (student asked) missed this case entirely.
       {
-        const { resolveResponseVisual, textPromisesUnfulfilledVisual } = await import('@/lib/teaching/visualRegistry')
+        const { resolveResponseVisual, textPromisesUnfulfilledVisual, stripPhantomVisualClaims } = await import('@/lib/teaching/visualRegistry')
         // Typed Turn Contract Batch 5: reuses `resolvedAvailableVisual`/
         // `resolvedForceVisualRender`/`resolvedAllowedVisuals` — same values.
         const forceForPromise = !responseVisual && resolvedAvailableVisual !== null && textPromisesUnfulfilledVisual(cleanText)
@@ -7524,6 +7524,25 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           resolvedAvailableVisual as import('@/lib/school/visuals/visualTypes').VisualType | null,
           resolvedAllowedVisuals as readonly import('@/lib/school/visuals/visualTypes').VisualType[] | null,
         )
+        // GROUNDING CONTRACT, defense-in-depth (real-learner QA, 2026-09-21).
+        // Everything above either attached a real visual or determined none
+        // is coming this turn. If nothing is attached — neither this legacy
+        // registry path NOR the V2 SceneSpec authority (`visualDecisionHoisted`
+        // was set, if at all, back when resolveVisualForTurn ran) — the model
+        // is not entitled to tell the learner a diagram/picture/figure is on
+        // their screen. The VISUAL CONTRACT prompt block already instructs it
+        // not to; this is the measured fact that the instruction alone is not
+        // an invariant (see stripPhantomVisualClaims's own doc for the real
+        // production transcripts this closes). Sentence-scoped, so an
+        // otherwise-correct explanation is not discarded over one bad clause.
+        const anyVisualAttachedThisTurn = !!responseVisual || visualDecisionHoisted?.graphical === true
+        if (!anyVisualAttachedThisTurn) {
+          const beforeStrip = cleanText
+          cleanText = stripPhantomVisualClaims(cleanText)
+          if (cleanText !== beforeStrip) {
+            console.warn('[visual-v2] stripped a phantom visual claim — no figure was attached this turn')
+          }
+        }
       }
 
       // Sprint W gap A: extract the [HINT] tag's text (if the model emitted

@@ -2,7 +2,7 @@
  * aiTutorFallback.test.ts
  *
  * Tests for AI tutor error handling.
- * The AI client (src/lib/ai/client.ts) uses Groq/openai/gpt-oss-20b.
+ * The AI client (src/lib/ai/client.ts) uses Groq/openai/gpt-oss-120b.
  *
  * We test:
  * - When AI returns null/undefined → caller receives empty string
