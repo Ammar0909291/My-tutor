@@ -22,6 +22,25 @@ per-domain table below was accordingly extremely stale (it still showed `math.ca
 not trust ANY number in this file without re-running Phase 0's measurement commands first** — this
 file has now been caught stale twice.
 
+**2026-09-23 update #3 — `math.graph` opened and taken to 16/16, DOMAIN CERTIFIED (the 11th).** A
+same-day continuation (6 batches, commits `cf6cb87e`..`3ee7c233`) opened `math.graph` from the 2/16
+left by the prior session's opening batch (`graph`, `connectivity`) and closed it fully: `tree`/
+`shortest-path`/`graph-coloring` -> 5/16; `minimum-spanning-tree`/`maximum-flow`/`graph-invariants`
+-> 8/16; `graph-operations`/`eulerian-circuit`/`hamiltonian-cycle` -> 11/16; `matching`/
+`ramsey-theory`/`algebraic-graph-theory` -> 14/16; `extremal-graph-theory`/`random-graph` -> 16/16
+COMPLETE. All concepts stayed GradeBand.HIGH except `shortest-path` (bumped UNDERGRADUATE via its
+`math.disc.asymptotic-notation` prerequisite) and `algebraic-graph-theory` (bumped UNDERGRADUATE via
+its `math.linalg.eigenvalues` prerequisite) — every other concept's prerequisites stayed within the
+domain's own HIGH baseline regardless of "expert"/"research" EB difficulty labels, confirming the
+established convention (grade band follows the prerequisite chain, never the difficulty label
+alone) held for the domain's hardest content too. TOTAL after `3ee7c233`: 663/908 authored,
+672/672 at contract, 0 short, 0 never-quizzable, 472/472 targeted vitest passing, 0 duplicate seed
+identities across 10013 items — re-verify before trusting. **Recommended next step**: `math.prob`
+remains the only other partially-started domain (46/49, 2 genuinely blocked as noted below;
+`combinatorial-probability` was already closed in the prior session) — re-run Phase 0 to find the
+current frontier, since math.opt (4/16 ready) and math.num (3/16 ready) are the next-best clean-0
+candidates by readiness if math.prob has nothing left to open.
+
 **Current frontier (2026-09-23): `math.prob`, 21/49, 28 remaining** — the only other
 already-partially-started domain besides the now-complete ones above. Continue there next unless a
 fresh owner instruction redirects. Domains at a clean 0 (`math.de` 56, `math.stats` 40, `math.disc`
@@ -134,7 +153,8 @@ math.trig      25 / 25      COMPLETE   <-- completed by an untracked parallel se
 math.seq       21 / 21      COMPLETE   <-- completed by an untracked parallel session
 math.cat       15 / 15      COMPLETE
 math.disc      32 / 32      COMPLETE   <-- newly certified 2026-09-23 (same day), opened AND closed this session
-math.prob      46 / 49      3 remaining   <-- CURRENT FRONTIER; 1 of the 3 (combinatorial-probability) now READY (unblocked by math.disc); the other 2 genuinely blocked on math.de/math.real
+math.graph     16 / 16      COMPLETE   <-- newly certified 2026-09-23 (same day), 11th domain, opened AND closed this session's continuation
+math.prob      47 / 49      2 remaining   <-- CURRENT FRONTIER; combinatorial-probability closed; the remaining 2 (characteristic-function, convergence-types) genuinely blocked on math.de/math.real
 math.de         0 / 56      56 remaining   <-- 1 ready (math.de.ode)
 math.stats      0 / 40      40 remaining   <-- 2 ready
 math.cx         0 / 31      31 remaining   <-- 1 ready
@@ -143,13 +163,12 @@ math.top        0 / 23      23 remaining   <-- 1 ready
 math.fnal       0 / 18      18 remaining   <-- 1 ready
 math.num        0 / 16      16 remaining   <-- 3 ready
 math.opt        0 / 16      16 remaining   <-- 4 ready
-math.graph      0 / 16      16 remaining   <-- 7 ready, directly downstream of math.disc's completion; best next-domain candidate
 math.meas       0 / 13      13 remaining   <-- 1 ready
 
-TOTAL (2026-09-23, after math.disc's closing batch, commit 843d88f0): 646/908 authored, 655
-(concept, gradeBand) pairs, all 655 at contract, 0 short, 0 never-quizzable. Re-run
-`npx tsx scripts/assets/contract-audit.ts --subject mathematics` before trusting this — it is
-already the third time this file's own table has gone stale within one calendar day.
+TOTAL (2026-09-23, after math.graph's closing batch, commit 3ee7c233): 663/908 authored, 672
+(concept, gradeBand) pairs, all 672 at contract, 0 short, 0 never-quizzable. Re-run
+`npx tsx scripts/assets/contract-audit.ts --subject mathematics` before trusting this — it has
+already gone stale multiple times within one calendar day.
 ```
 
 To regenerate this table yourself (it is NOT a KG/DB query — it's a static scan of what's actually
