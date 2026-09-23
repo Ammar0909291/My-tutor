@@ -701,6 +701,16 @@ D. process_flow   an ordered sequence of named steps    {"type":"process_flow","
                   mixtures) are NOT processes. Drawing either as a flow asserts
                   a sequence the concept does not have, which is worse than
                   drawing nothing.
+                  A FEEDBACK LOOP THAT BRANCHES BY CONDITION (thermoregulation's
+                  hot-response vs. cold-response, blood-sugar's insulin vs.
+                  glucagon response, any homeostatic mechanism with an "if too
+                  high" reaction AND a separate "if too low" reaction) must
+                  never list both branches as bare unconditional steps in one
+                  flow — that asserts they fire together, which they do not.
+                  Name the TRIGGERING CONDITION inside the step itself ("If
+                  temperature rises: vasodilation and sweating", "If
+                  temperature falls: vasoconstriction and shivering"), or
+                  choose "none" if the branching cannot be made honest this way.
 E. scene          a labelled 3D diagram, when none of A-D fits
 F. none           {"type":"none"} — no honest figure of this concept exists in
                   any form above. THIS IS A CORRECT ANSWER and is expected
