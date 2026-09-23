@@ -49,6 +49,7 @@ import { checkBudgetsLive, type BudgetReader } from './generationBudget'
 import { readVerdict, writeVerdict, readDecline, writeDecline, figureFingerprint, verdictKey } from './verdictCache'
 import { getCachedVisualization, replaceVisualization } from '@/lib/teaching/visuals/visualizationCache'
 import { startDeadline, NO_DEADLINE, type Deadline } from './turnDeadline'
+import { recordGenerationOutcome, type GenerationOutcomeSink } from './generationOutcome'
 import type { SceneSpec } from '@/lib/teaching/sceneSpec'
 
 export type LearnerVisualRequest = 'diagram' | 'real_life_example' | 'explain_differently' | null
@@ -143,6 +144,84 @@ function resolvePurpose(
   if (input.learnerRequest === 'explain_differently') return 'explain'
   if ((input.remediationTier ?? 0) >= 3) return 'demonstrate'
   return archetypeDefault
+}
+
+/**
+ * Same placeholder `generateConceptFigure`'s own outcome writer uses for a
+ * spec-kind figure — `GenerationOutcome.result.ok:true.scene` requires a
+ * SceneSpec even when the actual figure is a VisualSpec; `figure` below
+ * carries the real payload, this is never read as content.
+ */
+const EMPTY_SCENE_FOR_OUTCOME: SceneSpec = { id: 'spec', title: '', sceneType: 'diagram', steps: [] }
+
+/**
+ * CORRECT THE OUTCOME LEDGER WHEN GENERATION SUCCEEDED BUT THE FIGURE WILL
+ * NOT REACH THE LEARNER.
+ *
+ * `generateConceptFigure()`'s own `finish()` writes
+ * `served: servesImmediately(policy)` the instant structural generation
+ * succeeds — a POLICY prediction ("nothing holds this for review"), not a
+ * promise the critic will promote the figure or that this turn will end up
+ * attaching it. `generationPolicy.ts`'s own doc comment says so directly:
+ * `servesImmediately` "answers only 'is holding for review required here',
+ * never 'has this figure earned a learner's screen'."
+ *
+ * Measured in production, 2026-09-23 (bio.plant.photosynthesis): a cached
+ * critic REJECT triggered this file's explicit-request retry path, the
+ * retry's own fresh generation succeeded (so `finish()` had already written
+ * `served: true`), and the retry was then discarded — critic-rejected again
+ * — with nothing correcting that row. `visual_generation_outcome` read
+ * `served: true` for an attempt the learner's actual HTTP response never
+ * carried a figure for.
+ *
+ * This is not specific to photosynthesis or to the retry path: every exit
+ * below that discards an already-`ok:true` figure (the cached-reject
+ * immediate return, which fires on every ordinary turn of a concept with a
+ * stale rejected verdict and needs no learner action; first-attempt deadline
+ * expiry; first-attempt critic reject; retry identical-figure discard; retry
+ * deadline expiry; retry critic reject) shares the identical gap. Each one
+ * now writes ONE additional, best-effort `served: false` row for
+ * the same concept/figure, so a reader who takes the LATEST outcome row per
+ * attempt sees what the learner actually received. The original row is
+ * never edited or removed — this is a correction appended to the trail, not
+ * a rewrite of history — and nothing about the critic's decision, the
+ * verdict cache, or admission is touched by it.
+ *
+ * Never awaited by any caller (matches the sibling `void writeVerdict(...)`
+ * calls beside every call site): an audit correction must never cost a
+ * learner their turn, and `recordGenerationOutcome` already swallows every
+ * error on its own.
+ *
+ * Always writes `cached: true`, regardless of whether the figure it is
+ * correcting came from a fresh generation or a cache hit.
+ * `prismaBudgetReader.countToday()` (generationOutcomeStore.ts) counts rows
+ * where `cached: false` toward the daily generation budget — that field's
+ * operational meaning there is "cost a fresh provider call today", not
+ * "came from the verdict cache". The provider call this row is correcting
+ * was already counted by the original `finish()`-written row moments
+ * earlier; this row adds no new cost, so it must never count a second time.
+ */
+async function recordNotServed(
+  ctx: ArchetypeContext,
+  figure: GeneratedFigure,
+  sink: GenerationOutcomeSink | undefined,
+): Promise<void> {
+  await recordGenerationOutcome(
+    {
+      conceptId: ctx.conceptId,
+      conceptTitle: ctx.title,
+      policy: resolveServicePolicy(ctx.conceptId),
+      elapsedMs: 0,
+      cached: true,
+      result: {
+        ok: true,
+        scene: figure.kind === 'scene' ? figure.scene : EMPTY_SCENE_FOR_OUTCOME,
+        served: false,
+        figure,
+      },
+    },
+    sink,
+  )
 }
 
 function contextFor(conceptId: string): ArchetypeContext | null {
@@ -982,6 +1061,12 @@ export async function resolveVisualForTurn(
      */
     const askedForIt = input.learnerRequest === 'diagram'
     if (!askedForIt || deadline.expired()) {
+      // The figure THIS TURN's own generateConceptFigure call already
+      // reported (cache-hit or fresh, `result.figure`) is abandoned here on
+      // EVERY such turn, not only an explicit request — the same gap as the
+      // retry-path exits below, firing far more often since it needs no
+      // learner action to trigger.
+      void recordNotServed(ctx, result.figure, deps.outcomeSink)
       return { ...decision, provenance: 'no-figure:critic-reject-cached' }
     }
     const retry = await generateConceptFigure(ctx, {
@@ -995,9 +1080,13 @@ export async function resolveVisualForTurn(
     if (figureFingerprint(retryPayload) === figureFingerprint(figurePayload)) {
       // The generator produced the same figure again. Judging it would ask an
       // identical question of identical input; the cached answer stands.
+      void recordNotServed(ctx, retry.figure, deps.outcomeSink)
       return { ...decision, provenance: 'no-figure:retry-identical-figure' }
     }
-    if (deadline.expired()) return { ...decision, provenance: 'no-figure:retry-deadline-before-critic' }
+    if (deadline.expired()) {
+      void recordNotServed(ctx, retry.figure, deps.outcomeSink)
+      return { ...decision, provenance: 'no-figure:retry-deadline-before-critic' }
+    }
     const retryCritic = deps.critic ?? ((f, c, budgetMs) => criticiseFigure(f, c, { budgetMs }))
     const retryVerdict = await retryCritic(retry.figure, ctx, deadline.remaining())
     // Diagnostic only — mirrors writeVerdict's [visual-critic] log below, for
@@ -1015,6 +1104,7 @@ export async function resolveVisualForTurn(
     })
     if (retryVerdict.decision !== 'promote') {
       // The stale reject already stands for this concept; nothing to update.
+      void recordNotServed(ctx, retry.figure, deps.outcomeSink)
       return { ...decision, provenance: `no-figure:retry-critic-${retryVerdict.decision}` }
     }
     /**
@@ -1042,6 +1132,7 @@ export async function resolveVisualForTurn(
       // Out of time before the judge could answer. The figure is ABANDONED,
       // never served half-checked — the generation still populated the cache,
       // so the next learner will not wait for it.
+      void recordNotServed(ctx, result.figure, deps.outcomeSink)
       return { ...decision, provenance: 'no-figure:deadline-before-critic' }
     }
     const critic = deps.critic ?? ((f, c, budgetMs) => criticiseFigure(f, c, { budgetMs }))
@@ -1050,6 +1141,7 @@ export async function resolveVisualForTurn(
       // A settled REJECT is stored so the next learner does not pay for it; a
       // HOLD deliberately is not, because it is usually about the moment.
       void writeVerdict(ctx, figurePayload, critique, deps.cacheClient)
+      void recordNotServed(ctx, result.figure, deps.outcomeSink)
       return { ...decision, provenance: `no-figure:critic-${critique.decision}` }
     }
     // Best-effort and not awaited: this learner already has their figure.
