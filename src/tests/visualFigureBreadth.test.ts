@@ -241,6 +241,98 @@ describe('the same guarantees as the scene path', () => {
   })
 })
 
+/**
+ * A BRANCHING FEEDBACK LOOP IS NOT A SIMULTANEOUS SEQUENCE.
+ *
+ * MEASURED IN PRODUCTION (2026-09-23, bio.physio.homeostasis-thermoregulation):
+ * a generated process_flow listed "Activates vasodilation and sweating" and
+ * "Activates shivering and behavioral responses" as two unconditional,
+ * un-branched steps in one linear flow — asserting the hot-response and the
+ * cold-response fire together, which the critic correctly rejected on
+ * `correctness` (confidence 5/6; every other dimension passed). That reject
+ * was the critic working as designed, not a defect — see the same style of
+ * finding already pinned by "A LIST IS NOT A PROCESS" above. The fix is prompt
+ * guidance only: process_flow's own rules now name this exact failure mode and
+ * require the triggering condition to be stated in the step itself. Nothing
+ * about the schema, the critic, or any other renderer changes.
+ */
+const HOMEOSTASIS = {
+  conceptId: 'bio.physio.homeostasis-thermoregulation',
+  title: 'Homeostasis and Thermoregulation',
+  description: 'Negative feedback as the general principle underlying homeostatic control loops, illustrated by thermoregulation — vasodilation and vasoconstriction, sweating, shivering and behavioural responses to a hypothalamic set point; osmoregulation (already detailed mechanistically in the excretory system) framed here as a second worked example of the same feedback logic.',
+  prerequisites: [],
+}
+
+describe('a branching feedback loop is not a simultaneous sequence', () => {
+  it('the prompt names this exact failure mode and requires the triggering condition in the step', () => {
+    const prompt = buildConceptFigurePrompt(ctx)
+    expect(prompt).toMatch(/BRANCHES BY CONDITION/)
+    expect(prompt).toMatch(/TRIGGERING CONDITION/)
+    expect(prompt).toContain('thermoregulation')
+  })
+
+  it('a conditionally-labelled process flow for homeostasis validates and is anchored', () => {
+    const r = validateGeneratedFigure({
+      type: 'process_flow',
+      title: 'Thermoregulation negative feedback',
+      steps: [
+        { title: 'Hypothalamus compares body temperature to its set point' },
+        { title: 'If temperature rises: vasodilation and sweating' },
+        { title: 'If temperature falls: vasoconstriction and shivering' },
+        { title: 'Response continues until temperature returns to set point' },
+      ],
+    }, HOMEOSTASIS)
+    expect(r.ok).toBe(true)
+  })
+
+  it('THE SCHEMA ALONE CANNOT CATCH THE FLATTENED VERSION — the critic remains the backstop', () => {
+    // The exact production content that was rejected: same two responses, but
+    // as bare unconditional steps with no triggering condition named. This is
+    // still structurally valid (process_flow has no branching field to
+    // violate), which is precisely why this fix is a prompt change plus the
+    // existing critic, never a new schema/regex detector in this engine.
+    const r = validateGeneratedFigure({
+      type: 'process_flow',
+      title: 'Negative feedback loop for thermoregulation',
+      steps: [
+        { title: 'Temperature deviates from hypothalamic set point' },
+        { title: 'Thermoreceptors send signal to hypothalamus' },
+        { title: 'Hypothalamus compares to set point' },
+        { title: 'Activates vasodilation and sweating' },
+        { title: 'Activates shivering and behavioral responses' },
+        { title: 'Body responses adjust temperature toward set point' },
+        { title: 'Sensors detect new temperature, loop repeats' },
+      ],
+    }, HOMEOSTASIS)
+    expect(r.ok).toBe(true)
+  })
+
+  it('generation reaches the learner with the conditional framing intact, via the same admission gate as any other spec', async () => {
+    const d = await resolveVisualForTurn(
+      { message: 'show me a diagram', lessonConceptId: HOMEOSTASIS.conceptId, subject: 'biology', learnerRequest: 'diagram' },
+      {
+        enabled: () => true,
+        policy: 'auto',
+        cacheClient: emptyCache(),
+        critic: passingCritic,
+        budgetReader: openBudget,
+        generate: async () => ({
+          type: 'process_flow',
+          title: 'Thermoregulation negative feedback',
+          steps: [
+            { title: 'Hypothalamus compares body temperature to its set point' },
+            { title: 'If temperature rises: vasodilation and sweating' },
+            { title: 'If temperature falls: vasoconstriction and shivering' },
+          ],
+        }),
+      },
+    )
+    expect(d.graphical).toBe(true)
+    expect(d.source).toBe('generated')
+    expect(d.payload?.renderer).toBe('spec')
+  })
+})
+
 describe('declining is an answer', () => {
   it('THE MODEL MAY SAY NO, and it is recorded as declining rather than failing', () => {
     const r = validateGeneratedFigure({ type: 'none' }, ctx)
