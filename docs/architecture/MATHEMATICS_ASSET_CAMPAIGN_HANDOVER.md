@@ -8,13 +8,33 @@ Mathematics and directing work to `main` (2026-09-21 session). Not paused. **Thi
 complete pickup point for the next session/account.** Read this file in full before touching any
 Mathematics asset code.
 
-**Last commit touching this campaign**: `efc3b3f9` (Batch 47 content, math.alg.inequality-2var +
-math.alg.natural-logarithm + math.alg.system-3var — **math.alg is now 59/59, DOMAIN CERTIFIED**,
-the sixth mathematics domain to reach completion). **Verify this is still current** — another
-PAPPU/Mathematics session may have continued after this handover was written; always re-run the
-measurement commands in Phase 0 below before trusting any number in this file. With math.alg
-closed, the active frontier moves to whichever domain the next session opens — see §5 below for
-the size-order candidates (`math.calc`, `math.linalg`, `math.prob`) already partially started.
+**2026-09-23 update — math.linalg now 61/61, DOMAIN CERTIFIED.** A separate session-chain (Batches
+103-122, commits `fadb27ae`..`6037b72e`) closed out `math.linalg` from 23/61 through full
+completion, working the topological frontier in ~3-concept batches with the exact 4-file
+registration pattern this doc describes, plus one refinement: when an EB entry lists only 2
+misconceptions instead of 3 (a recurring but not universal pattern), the established fix is a 3rd
+PROFICIENT-difficulty probe that RE-TARGETS one of the two existing misconceptions via a fresh
+worked example — never inventing a fake third misconception. That same session-chain also found
+that `math.calc` (76/76), `math.geom` (69/69), `math.func` (29/29), `math.trig` (25/25), and
+`math.seq` (21/21) had ALL independently reached full completion via other, untracked
+sessions/campaigns between this file's original writing and 2026-09-23 — this file's old
+per-domain table below was accordingly extremely stale (it still showed `math.calc 4/76`). **Do
+not trust ANY number in this file without re-running Phase 0's measurement commands first** — this
+file has now been caught stale twice.
+
+**Current frontier (2026-09-23): `math.prob`, 21/49, 28 remaining** — the only other
+already-partially-started domain besides the now-complete ones above. Continue there next unless a
+fresh owner instruction redirects. Domains at a clean 0 (`math.de` 56, `math.stats` 40, `math.disc`
+32, `math.cx` 31, `math.real` 30, `math.top` 23, `math.fnal` 18, `math.num` 16, `math.opt` 16,
+`math.graph` 16, `math.meas` 13) remain available to open next once math.prob closes, per the same
+"continue whichever domain is already partially started, else pick by prerequisite readiness"
+strategy §5 already describes.
+
+**Last commit touching this campaign**: `6037b72e` (math.linalg's closing batch —
+math.linalg.jordan-form + math.linalg.matrix-exponential — **math.linalg is now 61/61, DOMAIN
+CERTIFIED**). **Verify this is still current** — another Mathematics session may have continued
+after this handover was written; always re-run the measurement commands in Phase 0 below before
+trusting any number in this file.
 
 **Note on repo state at the start of this 2026-09-21 session**: the local `main` branch in that
 session's container was a stale shallow-clone artifact, 502 commits behind `origin/main` with zero
@@ -65,37 +85,37 @@ npx tsx scripts/assets/contract-audit.ts --all   # also see Biology's own counte
 database — it has zero DB/egress footprint and is safe to run constantly. It is the single source
 of truth for "how many concepts are servable," never a hand-maintained count in a markdown file.
 
-**Per-domain breakdown** (recompute, don't trust this table — it was accurate at the time this
-file was written, immediately after Batch 47):
+**Per-domain breakdown** (recompute, don't trust this table — it was accurate as of 2026-09-23,
+immediately after math.linalg's closing batch, commit `6037b72e`):
 
 ```
 domain       done / total   remaining
 math.found     82 / 82      COMPLETE
-math.geom      69 / 69      COMPLETE
+math.calc      76 / 76      COMPLETE   <-- completed by an untracked parallel session, not this file's own trail
+math.geom      69 / 69      COMPLETE   <-- completed by an untracked parallel session
+math.linalg    61 / 61      COMPLETE   <-- newly certified 2026-09-23, this file's own Batches 103-122
+math.alg       59 / 59      COMPLETE
 math.arith     58 / 58      COMPLETE
 math.abst      37 / 37      COMPLETE
 math.nt        36 / 36      COMPLETE
+math.func      29 / 29      COMPLETE   <-- completed by an untracked parallel session
+math.trig      25 / 25      COMPLETE   <-- completed by an untracked parallel session
+math.seq       21 / 21      COMPLETE   <-- completed by an untracked parallel session
 math.cat       15 / 15      COMPLETE
-math.alg       59 / 59      COMPLETE   <-- newly certified, Batch 47
-math.calc       4 / 76      72 remaining   <-- next-largest already-started domain
-math.linalg     2 / 61      59 remaining
-math.prob       3 / 49      46 remaining
-math.func       1 / 29      28 remaining
-math.trig       3 / 25      22 remaining
+math.prob      21 / 49      28 remaining   <-- CURRENT FRONTIER, only other partially-started domain
 math.de         0 / 56      56 remaining
 math.stats      0 / 40      40 remaining
 math.disc       0 / 32      32 remaining
 math.cx         0 / 31      31 remaining
 math.real       0 / 30      30 remaining
 math.top        0 / 23      23 remaining
-math.seq        0 / 21      21 remaining
 math.fnal       0 / 18      18 remaining
 math.num        0 / 16      16 remaining
 math.opt        0 / 16      16 remaining
 math.graph      0 / 16      16 remaining
 math.meas       0 / 13      13 remaining
 
-TOTAL: 369/908 authored, 378 (concept, gradeBand) pairs, all 378 at contract, 0 short, 0 never-quizzable.
+TOTAL: 589/908 authored, 598 (concept, gradeBand) pairs, all 598 at contract, 0 short, 0 never-quizzable.
 ```
 
 To regenerate this table yourself (it is NOT a KG/DB query — it's a static scan of what's actually
