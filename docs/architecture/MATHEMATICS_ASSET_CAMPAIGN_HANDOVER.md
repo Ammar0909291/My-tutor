@@ -30,11 +30,42 @@ fresh owner instruction redirects. Domains at a clean 0 (`math.de` 56, `math.sta
 "continue whichever domain is already partially started, else pick by prerequisite readiness"
 strategy §5 already describes.
 
-**Last commit touching this campaign**: `6037b72e` (math.linalg's closing batch —
-math.linalg.jordan-form + math.linalg.matrix-exponential — **math.linalg is now 61/61, DOMAIN
-CERTIFIED**). **Verify this is still current** — another Mathematics session may have continued
-after this handover was written; always re-run the measurement commands in Phase 0 below before
-trusting any number in this file.
+**2026-09-23 update #2 — `math.disc` opened and taken to 32/32, DOMAIN CERTIFIED.** A same-day
+continuation (a `/loop`-driven session, 10 batches, commits `f03d1ada`..`843d88f0`) opened
+`math.disc` from 0/32 and closed it fully, working the topological frontier in 2-3-concept batches
+with the exact 4-file registration pattern this doc describes (no deviations needed). `math.prob`
+was ALSO advanced in the same session, from 21/49 to 46/49 (9 batches, commits `0891c7b3`..
+`4967c6f6`), before this pivot to `math.disc` — math.prob's remaining 3 concepts
+(`combinatorial-probability`, `characteristic-function`, `convergence-types`) were genuinely
+blocked on unauthored external domains (`math.disc.permutations`/`combinations`,
+`math.de.fourier-transform`, `math.real.convergence-sequences` respectively) at the time, which is
+exactly why `math.disc` was opened — to close that first blocker. **That worked**:
+`math.disc.combinatorics-probability`'s prerequisites are now ALL satisfied
+(`math.disc.permutations`+`math.disc.combinations`, both authored this session's math.disc work) —
+it is ready to author next, the moment math.disc's own campaign closes. Grade-band refinement
+established this session: an EB "expert"/"proficient" concept whose direct prerequisite chain
+specifically pulls into undergraduate-level content (math.seq/math.calc/math.disc.recurrence-
+relation, all GradeBand.UNDERGRADUATE) gets GradeBand.UNDERGRADUATE even mid-domain, while
+siblings whose prerequisites stay at the domain's own baseline keep that baseline (GradeBand.HIGH
+throughout math.disc, since it has no calculus/undergraduate-tagged concepts of its own) — recorded
+explicitly in each affected batch file's own header comment, never left implicit.
+
+**math.disc's completion also opened `math.graph` (0/16) significantly**: 7 of its 16 concepts
+(`graph`, `connectivity`, `tree`, `minimum-spanning-tree`, `eulerian-circuit`, and others) now have
+ALL prerequisites satisfied, directly downstream of math.disc's graph-theory subtree. `math.opt`
+(4/16 ready), `math.num` (3/16 ready), `math.stats`/`math.real`/`math.de`/`math.cx`/`math.top`/
+`math.fnal`/`math.meas` (1-2/each ready, mostly through `math.found.set-theory`) are also newly
+touchable. **Recommended next step**: author `math.prob.combinatorial-probability` (closes
+math.prob to 47/49, its final 2 concepts staying genuinely blocked on math.de/math.real), then open
+`math.graph` (the domain with the most immediate readiness, and the most natural continuation of
+math.disc's own graph-theory work) — but re-run Phase 0's frontier computation fresh before trusting
+this exact recommendation, since another session may continue in the meantime.
+
+**Last commit touching this campaign**: `843d88f0` (math.disc's closing batch — math.disc.catalan-
+numbers + math.disc.stirling-numbers — **math.disc is now 32/32, DOMAIN CERTIFIED**, the tenth
+mathematics domain to reach completion in this campaign). **Verify this is still current** —
+another Mathematics session may have continued after this handover was written; always re-run the
+measurement commands in Phase 0 below before trusting any number in this file.
 
 **Note on repo state at the start of this 2026-09-21 session**: the local `main` branch in that
 session's container was a stale shallow-clone artifact, 502 commits behind `origin/main` with zero
@@ -102,20 +133,23 @@ math.func      29 / 29      COMPLETE   <-- completed by an untracked parallel se
 math.trig      25 / 25      COMPLETE   <-- completed by an untracked parallel session
 math.seq       21 / 21      COMPLETE   <-- completed by an untracked parallel session
 math.cat       15 / 15      COMPLETE
-math.prob      21 / 49      28 remaining   <-- CURRENT FRONTIER, only other partially-started domain
-math.de         0 / 56      56 remaining
-math.stats      0 / 40      40 remaining
-math.disc       0 / 32      32 remaining
-math.cx         0 / 31      31 remaining
-math.real       0 / 30      30 remaining
-math.top        0 / 23      23 remaining
-math.fnal       0 / 18      18 remaining
-math.num        0 / 16      16 remaining
-math.opt        0 / 16      16 remaining
-math.graph      0 / 16      16 remaining
-math.meas       0 / 13      13 remaining
+math.disc      32 / 32      COMPLETE   <-- newly certified 2026-09-23 (same day), opened AND closed this session
+math.prob      46 / 49      3 remaining   <-- CURRENT FRONTIER; 1 of the 3 (combinatorial-probability) now READY (unblocked by math.disc); the other 2 genuinely blocked on math.de/math.real
+math.de         0 / 56      56 remaining   <-- 1 ready (math.de.ode)
+math.stats      0 / 40      40 remaining   <-- 2 ready
+math.cx         0 / 31      31 remaining   <-- 1 ready
+math.real       0 / 30      30 remaining   <-- 2 ready
+math.top        0 / 23      23 remaining   <-- 1 ready
+math.fnal       0 / 18      18 remaining   <-- 1 ready
+math.num        0 / 16      16 remaining   <-- 3 ready
+math.opt        0 / 16      16 remaining   <-- 4 ready
+math.graph      0 / 16      16 remaining   <-- 7 ready, directly downstream of math.disc's completion; best next-domain candidate
+math.meas       0 / 13      13 remaining   <-- 1 ready
 
-TOTAL: 589/908 authored, 598 (concept, gradeBand) pairs, all 598 at contract, 0 short, 0 never-quizzable.
+TOTAL (2026-09-23, after math.disc's closing batch, commit 843d88f0): 646/908 authored, 655
+(concept, gradeBand) pairs, all 655 at contract, 0 short, 0 never-quizzable. Re-run
+`npx tsx scripts/assets/contract-audit.ts --subject mathematics` before trusting this — it is
+already the third time this file's own table has gone stale within one calendar day.
 ```
 
 To regenerate this table yourself (it is NOT a KG/DB query — it's a static scan of what's actually
