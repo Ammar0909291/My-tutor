@@ -1000,6 +1000,19 @@ export async function resolveVisualForTurn(
     if (deadline.expired()) return { ...decision, provenance: 'no-figure:retry-deadline-before-critic' }
     const retryCritic = deps.critic ?? ((f, c, budgetMs) => criticiseFigure(f, c, { budgetMs }))
     const retryVerdict = await retryCritic(retry.figure, ctx, deadline.remaining())
+    // Diagnostic only — mirrors writeVerdict's [visual-critic] log below, for
+    // the one path (the explicit-request retry) that never calls writeVerdict
+    // at all, so its full per-dimension report would otherwise be discarded
+    // on both outcomes. Never read by any code path.
+    console.log('[visual-critic-retry]', {
+      conceptId: ctx.conceptId,
+      figure: figureFingerprint(retryPayload),
+      grounding: groundingHash(ctx),
+      decision: retryVerdict.decision,
+      confidence: retryVerdict.confidence,
+      judged: retryVerdict.judged,
+      dimensions: retryVerdict.dimensions,
+    })
     if (retryVerdict.decision !== 'promote') {
       // The stale reject already stands for this concept; nothing to update.
       return { ...decision, provenance: `no-figure:retry-critic-${retryVerdict.decision}` }

@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { detectLearnerRequest } from '@/lib/teaching/masteryGate'
 import { decideVisualNeed } from '@/lib/teaching/visual/visualNeed'
 import { resolveVisualForTurn } from '@/lib/teaching/visual/resolveVisual'
@@ -191,6 +191,85 @@ describe('a rejected candidate is not a permanent verdict on the concept', () =>
     await resolve(cache, d, 'ok')
     await resolve(cache, d, 'that makes sense')
     expect(calls.generate).toBe(genBefore)
+  })
+})
+
+/**
+ * OBSERVABILITY ONLY — [visual-critic-retry].
+ *
+ * The explicit-request retry path (above) never calls writeVerdict at all —
+ * its promote branch hand-writes a stripped verdict, and its reject branch
+ * just returns — so the retry's own CriticReport.dimensions was discarded on
+ * BOTH outcomes, with no [visual-critic] equivalent. These pin that a log now
+ * fires exactly once per retry judgment, with the full report, on both
+ * outcomes, and that a plain (non-diagram) turn — which never reaches the
+ * retry critic at all — never fabricates one.
+ */
+describe('[visual-critic-retry] preserves the full report for an explicit-request retry', () => {
+  const dims = (explanatoryVerdict: 'pass' | 'fail') => ({
+    relevance: { verdict: 'pass' as const, reason: 'is a figure of this concept' },
+    correctness: { verdict: 'pass' as const, reason: 'the arrows assert a real order' },
+    explanatoryValue: {
+      verdict: explanatoryVerdict,
+      reason: explanatoryVerdict === 'fail' ? 'only restates the title in boxes' : 'clarifies the sequence',
+    },
+    grounding: { verdict: 'pass' as const, reason: '3 text elements the tutor can speak from' },
+    rendering: { verdict: 'pass' as const, reason: 'schema-constrained renderer' },
+    claimSupport: { verdict: 'pass' as const, reason: 'no unsupported multiplicity claim in the title' },
+  })
+  const promoteFull = (): CriticReport =>
+    ({ decision: 'promote', confidence: 1, judged: true, dimensions: dims('pass') } as never)
+  const rejectFull = (): CriticReport =>
+    ({ decision: 'reject', confidence: 5 / 6, judged: true, dimensions: dims('fail') } as never)
+
+  let spy: ReturnType<typeof vi.spyOn>
+  beforeEach(() => { spy = vi.spyOn(console, 'log').mockImplementation(() => {}) })
+  afterEach(() => spy.mockRestore())
+  const retryLines = () => spy.mock.calls.filter((c) => c[0] === '[visual-critic-retry]')
+
+  it('RETRY REJECT — emits exactly one [visual-critic-retry] event with the complete dimensions', async () => {
+    const calls = { generate: 0, critic: 0 }
+    const cache = await seedRejectedCandidate({ generate: 0, critic: 0 })
+    const d = deps(cache, { generate: () => FRESH, critic: rejectFull, calls })
+    const asked = await resolve(cache, d, 'Show me a diagram')
+    expect(asked.payload).toBeNull()
+    const lines = retryLines()
+    expect(lines).toHaveLength(1)
+    const [, payload] = lines[0] as [string, Record<string, unknown>]
+    expect(payload.conceptId).toBe(CONCEPT)
+    expect(payload.decision).toBe('reject')
+    expect(payload.dimensions).toEqual(dims('fail'))
+  })
+
+  it('RETRY PROMOTE — emits exactly one [visual-critic-retry] event with the complete dimensions', async () => {
+    const calls = { generate: 0, critic: 0 }
+    const cache = await seedRejectedCandidate({ generate: 0, critic: 0 })
+    const d = deps(cache, { generate: () => FRESH, critic: promoteFull, calls })
+    const asked = await resolve(cache, d, 'Show me a diagram')
+    expect(asked.payload).not.toBeNull()
+    const lines = retryLines()
+    expect(lines).toHaveLength(1)
+    const [, payload] = lines[0] as [string, Record<string, unknown>]
+    expect(payload.decision).toBe('promote')
+    expect(payload.dimensions).toEqual(dims('pass'))
+  })
+
+  it('NON-INTERFERENCE — logging changes nothing about the returned VisualDecision', async () => {
+    const calls = { generate: 0, critic: 0 }
+    const cache = await seedRejectedCandidate({ generate: 0, critic: 0 })
+    const d = deps(cache, { generate: () => FRESH, critic: promoteFull, calls })
+    const asked = await resolve(cache, d, 'Show me a diagram')
+    expect(asked.payload).not.toBeNull()
+    expect(asked.provenance).toContain('generated-retry')
+    expect(asked.conceptId).toBe(CONCEPT)
+  })
+
+  it('STATIC/NO-RETRY SHORT-CIRCUIT — an ordinary turn never reaches the retry critic, so no fake event is emitted', async () => {
+    const calls = { generate: 0, critic: 0 }
+    const cache = await seedRejectedCandidate({ generate: 0, critic: 0 })
+    const d = deps(cache, { generate: () => FRESH, critic: rejectFull, calls })
+    await resolve(cache, d, 'ok')
+    expect(retryLines()).toHaveLength(0)
   })
 })
 
