@@ -41,13 +41,49 @@ remains the only other partially-started domain (46/49, 2 genuinely blocked as n
 current frontier, since math.opt (4/16 ready) and math.num (3/16 ready) are the next-best clean-0
 candidates by readiness if math.prob has nothing left to open.
 
-**Current frontier (2026-09-23): `math.prob`, 21/49, 28 remaining** — the only other
-already-partially-started domain besides the now-complete ones above. Continue there next unless a
-fresh owner instruction redirects. Domains at a clean 0 (`math.de` 56, `math.stats` 40, `math.disc`
-32, `math.cx` 31, `math.real` 30, `math.top` 23, `math.fnal` 18, `math.num` 16, `math.opt` 16,
-`math.graph` 16, `math.meas` 13) remain available to open next once math.prob closes, per the same
-"continue whichever domain is already partially started, else pick by prerequisite readiness"
-strategy §5 already describes.
+**2026-09-23 update #4 — `math.opt` opened and taken to 16/16, DOMAIN CERTIFIED (the 12th).** A
+same-day continuation (5 batches, commits `b7def857`..`211075f2`) opened `math.opt` from 0/16 and
+closed it fully: `convex-function`/`convex-set`/`unconstrained-optimization` -> 3/16;
+`convex-optimization`/`gradient-methods`/`lagrange-multipliers` -> 6/16; `duality`/`linear-
+programming`/`semidefinite-programming` -> 9/16; `kkt`/`dynamic-programming`/`newton-optimization`
+-> 12/16 (`dynamic-programming` finally picked up after being deferred across three prior batches
+as a disconnected expert-level topic with no unlocks); `integer-programming`/`quadratic-
+programming`/`stochastic-gradient` -> 16/16 COMPLETE. Every concept adopted GradeBand.UNDERGRADUATE
+as the domain's baseline from its very first concepts (never HIGH, unlike math.disc/math.graph/
+math.prob) — math.opt's core machinery (chord inequalities, Hessians, gradient vectors, KKT
+systems) is inseparable from undergraduate calculus/linear-algebra content throughout, so
+UNDERGRADUATE applied uniformly rather than as a per-concept override.
+
+**A real CI defect was found and fixed mid-campaign, not a content-authoring issue**: commit
+`3ee7c233` onward (5 pushes) silently broke the `validate` GitHub Actions workflow's
+`mathematicsBandContract.test.ts` (D6-latex check) — a check this campaign had never run locally
+because only the *targeted* `mathematicsAssetContract.test.ts` was run per batch, never the full
+`npx vitest run` the CI job actually executes. Root cause: `scripts/math/certify.ts`'s
+`hasMalformedLatex` strips a `$` immediately followed by a digit as currency (to avoid failing
+shopping-example lessons like "$5"), so any GENUINE LaTeX span opened with `$` directly before a
+digit (`$1=\lambda_1^*$`, `$3\times3=9$`, `$2x_1+2x_2\le3$`, `$2^n$`) has its opening delimiter
+silently eaten, leaving an odd, unbalanced dollar count. Fixed in commit `817ac732` (7 pre-existing
+occurrences across 4 batches) by parenthesizing the digit-led expression inside the delimiters
+(`$(3\times3=9)$`) or reordering to open with a symbol (`$1=\lambda_1^*$` -> `$\lambda_1^*=1$`).
+**Standing rule from here forward, binding on every future batch**: (1) run the FULL `npx vitest
+run` before every commit, never only a targeted test file — the targeted file cannot catch a
+cross-cutting content-format gate like this one; (2) before every commit, grep new batch content
+for `\$[0-9]` and, if any hit, run it through the exact `hasMalformedLatex` logic (a disposable
+tsx script importing `scripts/math/certify.ts`'s own function) rather than eyeballing parity —
+even after the first fix, the very next batch introduced 3 MORE instances via multi-term
+expressions (`$2x_1+2x_2\le3$`, `$2^n$`) that single-token checks missed, confirming manual
+review is not reliable here. TOTAL after `211075f2`: 678/908 authored, 687/687 at contract, 0
+short, 0 never-quizzable, 704/704 vitest files passing (14500 tests, 9 skipped — the full-suite
+baseline, not just the targeted file), 0 malformed-LaTeX items anywhere in mathematics, 10073/10073
+distinct seed identities with 0 duplicates.
+
+**Current frontier (2026-09-23): `math.prob`, 47/49, 2 remaining, both genuinely blocked**
+(`characteristic-function` on unauthored `math.de.fourier-transform`, `convergence-types` on
+unauthored `math.real.convergence-sequences`) — not a usable next step. Domains at a clean 0
+(`math.de` 56, `math.stats` 40, `math.cx` 31, `math.real` 30, `math.top` 23, `math.fnal` 18,
+`math.num` 16, `math.meas` 13) are the only remaining candidates;
+re-run Phase 0's frontier computation fresh to find the best next domain to open by prerequisite
+readiness, per strategy §5.
 
 **2026-09-23 update #2 — `math.disc` opened and taken to 32/32, DOMAIN CERTIFIED.** A same-day
 continuation (a `/loop`-driven session, 10 batches, commits `f03d1ada`..`843d88f0`) opened
@@ -154,6 +190,7 @@ math.seq       21 / 21      COMPLETE   <-- completed by an untracked parallel se
 math.cat       15 / 15      COMPLETE
 math.disc      32 / 32      COMPLETE   <-- newly certified 2026-09-23 (same day), opened AND closed this session
 math.graph     16 / 16      COMPLETE   <-- newly certified 2026-09-23 (same day), 11th domain, opened AND closed this session's continuation
+math.opt       16 / 16      COMPLETE   <-- newly certified 2026-09-23 (same day), 12th domain, opened AND closed this session's continuation
 math.prob      47 / 49      2 remaining   <-- CURRENT FRONTIER; combinatorial-probability closed; the remaining 2 (characteristic-function, convergence-types) genuinely blocked on math.de/math.real
 math.de         0 / 56      56 remaining   <-- 1 ready (math.de.ode)
 math.stats      0 / 40      40 remaining   <-- 2 ready
@@ -162,11 +199,10 @@ math.real       0 / 30      30 remaining   <-- 2 ready
 math.top        0 / 23      23 remaining   <-- 1 ready
 math.fnal       0 / 18      18 remaining   <-- 1 ready
 math.num        0 / 16      16 remaining   <-- 3 ready
-math.opt        0 / 16      16 remaining   <-- 4 ready
 math.meas       0 / 13      13 remaining   <-- 1 ready
 
-TOTAL (2026-09-23, after math.graph's closing batch, commit 3ee7c233): 663/908 authored, 672
-(concept, gradeBand) pairs, all 672 at contract, 0 short, 0 never-quizzable. Re-run
+TOTAL (2026-09-23, after math.opt's closing batch, commit 211075f2): 678/908 authored, 687
+(concept, gradeBand) pairs, all 687 at contract, 0 short, 0 never-quizzable. Re-run
 `npx tsx scripts/assets/contract-audit.ts --subject mathematics` before trusting this — it has
 already gone stale multiple times within one calendar day.
 ```
@@ -374,6 +410,32 @@ npx vitest run src/tests/curriculumKgRegistration.test.ts src/tests/mathematicsA
 # expect: 7 files, 561/561 passing (this count may have grown if math or another subject added
 # more parameterized cases since this handover — don't be alarmed if it's now >561, only if it's
 # LOWER or any file fails)
+#
+# 2026-09-23 INCIDENT — this 7-file list was already documented above, but 5 consecutive
+# batches (commits 3ee7c233..51a06b0a) skipped it and ran ONLY mathematicsAssetContract.test.ts,
+# silently breaking mathematicsBandContract.test.ts's D6-latex check on live `main` for ~40
+# minutes of wall-clock campaign time before a stray push-notification screenshot surfaced the
+# CI failure. Root cause: scripts/math/certify.ts's hasMalformedLatex() strips a `$` immediately
+# followed by a digit as currency (so shopping examples like "$5" don't false-positive), so any
+# GENUINE LaTeX span opening with `$` directly before a digit ($1=\lambda^*$, $3\times3=9$,
+# $2x_1+2x_2\le3$, $2^n$) has its opening delimiter silently eaten, leaving an odd dollar count.
+# Fixed in commit 817ac732 (7 occurrences) — and a SECOND round of 3 more slipped through the
+# very next batch anyway, on multi-term expressions manual review missed. THE BINDING FIX,
+# NON-NEGOTIABLE FROM HERE FORWARD: run this exact command before EVERY commit, never skip it,
+# and treat "I already ran the targeted test" as NOT sufficient:
+npx vitest run
+# expect: 704/704 test files passing (or more, if other campaigns/subjects added files since —
+# never fewer), ~14500+ tests passing, ~9 skipped. This is slower (~7 minutes) than the targeted
+# 7-file list, which is exactly why it was skipped — do not skip it again; a failure this check
+# alone catches is not optional to find.
+#
+# Also grep new batch content for the digit-after-dollar pattern before committing, and if
+# anything matches, verify with the real function rather than eyeballing parity:
+grep -noE '\$[0-9]' src/lib/teaching/assets/<your-new-file>.ts
+# if any hits: write a disposable tsx script that imports hasMalformedLatex from
+# scripts/math/certify.ts and runs it against every SeedExplanation/SeedProbe text field in the
+# new file (see git history around commit 211075f2 for the exact pattern) — never assume a
+# hit is safe just because it "looks paired."
 npx tsx scripts/assets/contract-audit.ts --subject mathematics
 # expect: authored count +N (N = concepts in this batch), pairs count increased correspondingly,
 # "at contract" == total pairs, "short" == 0, "never quizzable" == 0
