@@ -74,6 +74,18 @@ export async function getCachedVisualization(
  * duplicate-key race (another request cached the same concept first) and
  * any other DB error — caching is a best-effort optimization, never a
  * requirement for the turn to succeed.
+ *
+ * A genuine P2002 race here is EXPECTED and silent by design: two learners
+ * generating the same concept concurrently both reach this call, one commits
+ * first, the loser's write correctly loses. That is not a bug to fix.
+ *
+ * What was previously indistinguishable from it: `.catch(() => {})` also
+ * swallowed every OTHER kind of write failure — a real connection error, a
+ * schema mismatch, anything — with zero trace. A masked non-race failure
+ * would look identical to normal operation forever. Narrowed to log only the
+ * unexpected case, same `console.warn` convention as the sibling
+ * `[visual-outcome]` writer (`generationOutcomeStore.ts`) — never throws,
+ * never blocks the turn, purely diagnostic.
  */
 export async function saveVisualization(
   conceptKey: string,
@@ -82,9 +94,14 @@ export async function saveVisualization(
 ): Promise<void> {
   if (!conceptKey || !code) return
 
-  await client.visualizationCache
-    .create({ data: { conceptKey, code } })
-    .catch(() => {})
+  try {
+    await client.visualizationCache.create({ data: { conceptKey, code } })
+  } catch (err) {
+    const errCode = (err as { code?: string } | null)?.code
+    if (errCode !== 'P2002') {
+      console.warn('[visualization-cache] save failed (non-race):', err)
+    }
+  }
 }
 
 /**
