@@ -66,7 +66,7 @@ export const MATHEMATICS_GRAPH_EXTREMAL_GRAPH_THEORY_RANDOM_GRAPH_EXPLANATIONS: 
       + "THE THEOREM'S BOUND IS NEVER MERELY AN ABSTRACT CEILING — THE TURÁN GRAPH $T(n,r)$ "
       + 'EXPLICITLY, VERIFIABLY ACHIEVES IT: $T(n,r)$ partitions $n$ vertices into $r$ nearly-equal '
       + 'groups, connecting every cross-group pair while leaving every within-group pair unconnected. '
-      + 'For $n=6,r=2$: two groups of 3, giving $K_{3,3}$ with exactly $3\\times3=9$ edges — precisely '
+      + 'For $n=6,r=2$: two groups of 3, giving $K_{3,3}$ with exactly $(3\\times3=9)$ edges — precisely '
       + "matching the theorem's claimed maximum. $K_{r+1}$-FREENESS is verified directly by "
       + 'pigeonhole: any $r+1$ vertices must include two from the SAME group (only $r$ groups exist), '
       + 'and those two are non-adjacent by construction, so no $(r+1)$-clique can ever form — the '
@@ -88,7 +88,7 @@ export const MATHEMATICS_GRAPH_EXTREMAL_GRAPH_THEORY_RANDOM_GRAPH_EXPLANATIONS: 
     content:
       '$E[\\#\\text{EDGES}]=\\binom{n}{2}p$ IS AN AVERAGE ACROSS MANY DRAWS, NEVER A '
       + 'PER-REALIZATION GUARANTEE: for $G(5,0.3)$, total possible edges $\\binom{5}{2}=10$, each '
-      + 'independently present with probability $0.3$, gives $E[\\#\\text{edges}]=10\\times0.3=3$ via '
+      + 'independently present with probability $(0.3)$, gives $E[\\#\\text{edges}]=10\\times0.3=3$ via '
       + 'linearity of expectation. The ACTUAL realized graph on any single draw could have anywhere '
       + 'from 0 to 10 edges — 3 is only the MEAN over many independent draws, never a promise that '
       + 'this specific realization will have exactly 3 edges.\n\n'

@@ -84,7 +84,7 @@ export const MATHEMATICS_OPT_DUALITY_LINEAR_PROGRAMMING_SEMIDEFINITE_PROGRAMMING
       + 'CARRY A GENUINE SHADOW-PRICE INTERPRETATION: at strong duality, '
       + '$\\partial p^*/\\partial b_i=-\\lambda_i^*$. For $\\min x_1+2x_2$ s.t. $x_1+x_2\\ge3$, the '
       + 'primal optimum $(3,0)$ has $\\lambda_1^*=1$; relaxing to $x_1+x_2\\ge2$ moves the optimum to '
-      + '$(2,0)$ — a decrease of EXACTLY $1=\\lambda_1^*$. Treating $\\lambda_i^*$ as disposable once '
+      + '$(2,0)$ — a decrease of EXACTLY $\\lambda_1^*=1$. Treating $\\lambda_i^*$ as disposable once '
       + '$x$ is found discards this genuinely useful sensitivity information; complementary slackness '
       + '($\\lambda_i^*g_i(x^*)=0$) further ties this to constraint activity — an inactive constraint '
       + 'forces $\\lambda_i^*=0$, while an active one can carry a genuinely positive shadow price.\n\n'
@@ -180,7 +180,7 @@ export const MATHEMATICS_OPT_DUALITY_LINEAR_PROGRAMMING_SEMIDEFINITE_PROGRAMMING
     difficulty: ProbeDifficulty.DEVELOPING,
     stem: 'Once you\'ve solved for the dual variable $\\lambda_i^*$, does its numerical value carry any further meaning about the original problem?',
     choices: [
-      { text: 'Yes — $\\lambda_i^*$ is the constraint\'s shadow price; for $\\min x_1+2x_2$ s.t. $x_1+x_2\\ge3$, relaxing to $x_1+x_2\\ge2$ decreases the optimum by exactly $1=\\lambda_1^*$, matching the predicted sensitivity', isCorrect: true },
+      { text: 'Yes — $\\lambda_i^*$ is the constraint\'s shadow price; for $\\min x_1+2x_2$ s.t. $x_1+x_2\\ge3$, relaxing to $x_1+x_2\\ge2$ decreases the optimum by exactly $\\lambda_1^*=1$, matching the predicted sensitivity', isCorrect: true },
       { text: 'No — $\\lambda_i^*$ is purely a computational device used to solve for the primal variables, with no further meaning once $x$ is found', isCorrect: false, misconceptionId: `${DUALITY}:MC-2` },
       { text: "No, since Lagrange multipliers are only useful during the solving process itself", isCorrect: false, misconceptionId: `${DUALITY}:MC-2` },
     ],

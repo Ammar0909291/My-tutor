@@ -151,7 +151,7 @@ export const MATHEMATICS_GRAPH_MINIMUM_SPANNING_TREE_MAXIMUM_FLOW_GRAPH_INVARIAN
       + 'ISOMORPHISM IS A STRUCTURE-PRESERVING BIJECTION, NEVER LITERAL VERTEX/EDGE-SET EQUALITY: '
       + '$G_1\\cong G_2$ requires a bijection $f:V_1\\to V_2$ preserving adjacency in both directions '
       + '— it says nothing about the vertex SETS themselves being equal or even overlapping. The path '
-      + '$a\\text{-}b\\text{-}c$ on $\\{a,b,c\\}$ and the path $1\\text{-}2\\text{-}3$ on $\\{1,2,3\\}$ '
+      + '$a\\text{-}b\\text{-}c$ on $\\{a,b,c\\}$ and the path $(1\\text{-}2\\text{-}3)$ on $\\{1,2,3\\}$ '
       + 'are isomorphic via $f(a)=1,f(b)=2,f(c)=3$ despite having ENTIRELY DISJOINT vertex sets — '
       + 'isomorphism is about preserved STRUCTURE, and completely different labels never disqualify '
       + 'two graphs from being the identical abstract shape.',
@@ -260,7 +260,7 @@ export const MATHEMATICS_GRAPH_MINIMUM_SPANNING_TREE_MAXIMUM_FLOW_GRAPH_INVARIAN
   {
     conceptId: GRAPH_INVARIANTS, subjectSlug: S, probeKind: 'mcq', gradeBand: GradeBand.HIGH,
     difficulty: ProbeDifficulty.PROFICIENT,
-    stem: 'Is the path $a\\text{-}b\\text{-}c$ (vertices $\\{a,b,c\\}$) isomorphic to the path $1\\text{-}2\\text{-}3$ (vertices $\\{1,2,3\\}$)?',
+    stem: 'Is the path $a\\text{-}b\\text{-}c$ (vertices $\\{a,b,c\\}$) isomorphic to the path $(1\\text{-}2\\text{-}3)$ (vertices $\\{1,2,3\\}$)?',
     choices: [
       { text: 'Yes — the bijection $f(a)=1, f(b)=2, f(c)=3$ preserves every adjacency; isomorphism is about structure, never about literal vertex labels, so entirely disjoint vertex sets never disqualify two graphs from being isomorphic', isCorrect: true },
       { text: 'No — the two graphs cannot be isomorphic because their vertex sets are literally different', isCorrect: false, misconceptionId: `${GRAPH_INVARIANTS}:MC-3` },

@@ -137,7 +137,7 @@ export const MATHEMATICS_GRAPH_OPERATIONS_EULERIAN_CIRCUIT_HAMILTONIAN_CYCLE_EXP
       + 'below $n/2=2$, so Dirac\'s condition FAILS — and $P_4$ genuinely has no Hamiltonian cycle, '
       + 'but that absence is established by DIRECT INSPECTION (a path literally contains no cycle), '
       + 'never by the failed Dirac test alone. Adding just ONE edge (connecting the two endpoints, '
-      + 'forming $C_4$) flips every vertex to degree $2\\ge n/2=2$ — Dirac\'s condition now HOLDS, '
+      + 'forming $C_4$) flips every vertex to degree $(2\\ge n/2=2)$ — Dirac\'s condition now HOLDS, '
       + 'correctly guaranteeing a Hamiltonian cycle — showing how sensitive the test\'s applicability '
       + 'is to structure the theorem itself says nothing about when it fails.\n\n'
       + 'PROVING EXISTENCE, EVEN EFFICIENTLY VIA DIRAC\'S THEOREM, NEVER ALSO SOLVES THE STRICTLY '
