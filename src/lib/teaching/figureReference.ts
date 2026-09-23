@@ -70,12 +70,20 @@ const ON_SCREEN =
  * real lesson: "Let's look at a complete worked example on your screen using the
  * expression (2 + 3)² ÷ 5 − 1" slipped through when the list was strong-only,
  * because "worked example" is not a diagram and the turn carried no figure.
+ *
+ * "layout" is WEAK, not STRONG, deliberately: "circuit layout", "page layout",
+ * "the layout of the periodic table", "sentence layout" are all ordinary
+ * non-visual vocabulary across several subjects this platform teaches, unlike
+ * "diagram"/"sketch"/"figure", which essentially never occur outside a real
+ * reference to a rendered artefact. See DIRECT_POINTER_RE below for the one
+ * shape where "layout" IS treated unconditionally — a live-reproduced defect
+ * that on-screen-gating alone cannot close.
  */
 const STRONG_FIGURE_NOUN =
   /\b(diagram|figure|graph|picture|image|chart|number ?line|animation|illustration|visual|simulation|plot|sketch)\b/i
 
 const WEAK_FIGURE_NOUN =
-  /\b(worked example|example|table|steps?|solution|board|canvas|panel|screen)\b/i
+  /\b(worked example|example|table|steps?|solution|board|canvas|panel|screen|layout)\b/i
 
 /** Does this fragment name something the learner is being told to look AT? */
 function namesAFigure(fragment: string): boolean {
@@ -140,9 +148,45 @@ function isPreposedLocatorClaim(fragment: string): boolean {
  * are not adjacent through a determiner here. Requiring VERB + (the/this/
  * that) + NOUN immediately adjacent is the shape that is always a pointer at
  * a specific, present thing, never a general statement about the noun.
+ *
+ * ── "USE THIS <NOUN> TO …" AND "LAYOUT" (bio.plant.photosynthesis, 2026-09-23) ──
+ * Reproduced live on the deployed app, no visual/visualSpec/sceneSpec attached:
+ *
+ *   "Use this sketch to see how light captured in the thylakoid membrane
+ *    produces ATP and NADPH, which then power the Calvin cycle…"
+ *   "Use this layout to see how light energy moves electrons from water to
+ *    NADPH while generating a proton gradient that powers ATP synthesis."
+ *
+ * Two independent misses in one shape. First, "sketch" is already a STRONG
+ * noun everywhere else in this file, but the sentence carries no ON_SCREEN
+ * locator, so `isPointer`'s locator-gated branch never fired; and the verb is
+ * "use", which was on no verb list anywhere, so DIRECT_POINTER_RE's own
+ * locator-free adjacency shape — the one path that needs no on-screen
+ * corroboration — never fired either. Second, "layout" named no figure noun
+ * at all before this change (see STRONG_FIGURE_NOUN/WEAK_FIGURE_NOUN above),
+ * so even a recognised verb would not have helped it.
+ *
+ * "use" joins this rule's own verb list, not the general POINTING_VERB list
+ * used elsewhere in this file: POINTING_VERB feeds branches that DON'T
+ * require on-screen corroboration on a dash boundary (`findPointerClauseHead`),
+ * and "use" is common with ordinary non-visual objects ("use the formula",
+ * "use this method") that would false-positive there. DIRECT_POINTER_RE's own
+ * VERB + (the/this/that) + NOUN adjacency is what makes it safe regardless —
+ * "use the formula" never matches this list's nouns, and "use this diagram"/
+ * "use this layout" already presuppose a specific, present artefact exactly
+ * as "look at this diagram" does.
+ *
+ * "layout" is added to THIS list specifically (not to STRONG_FIGURE_NOUN),
+ * so it is caught ONLY through the same rigid, low-risk adjacency this whole
+ * rule already relies on — never through the looser locator-optional paths
+ * that consult STRONG_FIGURE_NOUN directly. A declarative, non-pointing
+ * sentence like "The layout of the periodic table reflects electron
+ * configuration trends." has no verb from this list adjacent to a
+ * determiner + "layout", so it does not match and is left untouched — see
+ * figureReference.test.ts's negative controls for the checked cases.
  */
 const DIRECT_POINTER_RE =
-  /\b(?:look at|looking at|see|notice|observe|study|examine|consider)\s+(?:the|this|that)\s+(?:diagram|figure|graph|picture|image|chart|number ?line|animation|illustration|visual|simulation|plot|sketch)\b/i
+  /\b(?:look at|looking at|see|notice|observe|study|examine|consider|use)\s+(?:the|this|that)\s+(?:diagram|figure|graph|picture|image|chart|number ?line|animation|illustration|visual|simulation|plot|sketch|layout)\b/i
 
 /**
  * A single boundary character — em/en dash, a whitespace-bounded hyphen, or a

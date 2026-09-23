@@ -688,3 +688,129 @@ describe('Shape OFFER: an honest rewrite for a false "here\'s a diagram" offer',
     expect(twice.text).toBe(once.text)
   })
 })
+
+/**
+ * "USE THIS <NOUN> TO …" WITH "LAYOUT" / "SKETCH" — bio.plant.photosynthesis,
+ * reproduced live on the deployed app, 2026-09-23, no visual/visualSpec/
+ * sceneSpec attached. Two verbatim production sentences, each embedded in a
+ * multi-sentence turn (a lone one-sentence message trips the separately-
+ * tested "never return an empty turn" guard, which is not this shape's own
+ * behaviour to re-prove).
+ */
+describe('"use this <noun> to …" — layout and sketch (bio.plant.photosynthesis, 2026-09-23)', () => {
+  const wrap = (sentence: string) =>
+    `Photosynthesis turns sunlight, water, and carbon dioxide into glucose and oxygen.\n\n${sentence}\n\nWhat gas is released as a byproduct?`
+
+  const LAYOUT_SENTENCE =
+    'Use this layout to see how light energy moves electrons from water to NADPH while generating a proton gradient that powers ATP synthesis.'
+  const SKETCH_SENTENCE =
+    'Use this sketch to see how light captured in the thylakoid membrane produces ATP and NADPH, which then power the Calvin cycle in the stroma to turn CO2 into sugar.'
+
+  // A. No visual attached + prose says "this layout…" -> protection triggers.
+  it('A. strips the exact captured "layout" sentence when no figure is attached', () => {
+    const turn = wrap(LAYOUT_SENTENCE)
+    const r = stripUnbackedFigureReferences(turn, false)
+    expect(r.stripped).toBe(true)
+    expect(r.text).not.toMatch(/use this layout/i)
+    expect(r.text).toMatch(/photosynthesis turns sunlight/i)
+    expect(r.text).toMatch(/what gas is released as a byproduct\?/i)
+  })
+
+  // B. No visual attached + prose says "this sketch…" -> protection triggers.
+  it('B. strips the exact captured "sketch" sentence when no figure is attached', () => {
+    const turn = wrap(SKETCH_SENTENCE)
+    const r = stripUnbackedFigureReferences(turn, false)
+    expect(r.stripped).toBe(true)
+    expect(r.text).not.toMatch(/use this sketch/i)
+    expect(r.text).toMatch(/photosynthesis turns sunlight/i)
+    expect(r.text).toMatch(/what gas is released as a byproduct\?/i)
+  })
+
+  // C. A legitimate visual IS attached -> normal (unchanged) behaviour.
+  it('C. leaves both sentences byte-identical when a figure genuinely is attached', () => {
+    for (const sentence of [LAYOUT_SENTENCE, SKETCH_SENTENCE]) {
+      const turn = wrap(sentence)
+      const r = stripUnbackedFigureReferences(turn, true)
+      expect(r.stripped).toBe(false)
+      expect(r.text).toBe(turn)
+    }
+  })
+
+  it('never leaves a sentence starting mid-thought', () => {
+    for (const sentence of [LAYOUT_SENTENCE, SKETCH_SENTENCE]) {
+      const r = stripUnbackedFigureReferences(wrap(sentence), false)
+      for (const line of r.text.split('\n')) {
+        const t = line.trim()
+        if (t.length > 0) expect(t[0]).toMatch(/[A-Za-z*_]/)
+      }
+    }
+  })
+
+  it('is idempotent on the new shape', () => {
+    for (const sentence of [LAYOUT_SENTENCE, SKETCH_SENTENCE]) {
+      const once = stripUnbackedFigureReferences(wrap(sentence), false)
+      const twice = stripUnbackedFigureReferences(once.text, false)
+      expect(twice.text).toBe(once.text)
+      expect(twice.stripped).toBe(false)
+    }
+  })
+
+  // D. Ordinary educational uses of "layout" NOT referring to a figure must
+  // NOT be treated as figure references — "layout" is deliberately WEAK-tier
+  // (see figureReference.ts), never STRONG, precisely so these stay untouched.
+  it('D. NEGATIVE CONTROL: ordinary declarative uses of "layout" are untouched', () => {
+    for (const t of [
+      'The layout of the periodic table reflects electron configuration trends.',
+      'A well-organized page layout improves readability.',
+      'Circuit layout affects the resistance of the wiring.',
+      "Sentence layout can change a paragraph's readability.",
+      'The layout of an experiment determines which variables are controlled.',
+    ]) {
+      const r = stripUnbackedFigureReferences(t, false)
+      expect(r.stripped).toBe(false)
+      expect(r.text).toBe(t)
+    }
+  })
+
+  it('D. NEGATIVE CONTROL: "layout" with an indefinite article is not a pointer', () => {
+    // DIRECT_POINTER_RE requires a definite/demonstrative determiner
+    // (the/this/that) immediately before the noun — "a layout" never
+    // qualifies, matching how "a diagram" already does not either.
+    const t = 'A layout like this can help you organize your notes before an exam.'
+    const r = stripUnbackedFigureReferences(t, false)
+    expect(r.stripped).toBe(false)
+    expect(r.text).toBe(t)
+  })
+
+  it('D. NEGATIVE CONTROL: "use" with an ordinary non-figure noun is untouched', () => {
+    // Confirms adding "use" to DIRECT_POINTER_RE's verb list did not widen
+    // it beyond the figure-noun list it already gates on.
+    for (const t of [
+      'Use this formula to calculate the area of a circle.',
+      'Use this method to simplify the fraction.',
+      'Use the strategy of elimination to solve the system.',
+    ]) {
+      const r = stripUnbackedFigureReferences(t, false)
+      expect(r.stripped).toBe(false)
+      expect(r.text).toBe(t)
+    }
+  })
+
+  it('D. NEGATIVE CONTROL: a question about a layout is never removed', () => {
+    const t = 'Would knowing the layout of the atom help you predict its reactivity?'
+    const r = stripUnbackedFigureReferences(t, false)
+    expect(r.text).toContain('?')
+  })
+
+  it('catches a bare "use this layout"/"use this sketch" with no on-screen locator at all', () => {
+    // The core of the fix: DIRECT_POINTER_RE needs no ON_SCREEN evidence,
+    // unlike the general isPointer/findPointerClauseHead paths.
+    for (const t of [
+      'Use this layout to organize the atomic structure. Electrons fill the outer shell first.',
+      'Use this sketch to remember the steps. The first step is always the hardest.',
+    ]) {
+      const r = stripUnbackedFigureReferences(t, false)
+      expect(r.stripped).toBe(true)
+    }
+  })
+})
