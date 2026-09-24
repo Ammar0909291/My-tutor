@@ -30,7 +30,8 @@ reach verified mastery every time with zero critical defects (`scripts/qa/synthe
 | S6a | Root cause of "asked for a question, got none" (Vercel `[arbitration]` + `[gate-eligibility]` logs): a practice request with a "?" ("give me a question?", "can you check me with a question?") claims LEARNER_QUESTION, which denies AUTHORED_PROBE. Fix: `genuineQuestionActive … && !turnIntent.wantsPractice` in route.ts | **pushed** (full suite 723/14,915, tsc and build clean); next: after-run 2 |
 | S6b | After-run 2 on production `dc07f2d` (arbitration fix `ae9caf6`), same 2 topics × 5 students | **done**: 9/10 mastered (confused now masters both). Remaining: off-track velocity stuck at TRANSFER 1/1; 1 checker false positive |
 | S6c | Fixes from S6b: practice request never carries self-reported correctness; excursion `heldQuestion` (answering the lesson's held question closes the detour and counts); concept-name exemption in `dropAnswerLeaks` and the checker | **pushed** `49efe8f` |
-| S6d | TRANSFER-below-bar fix (owner-approved) | **pushed** (full suite 725/14,937, tsc and build clean); next: deploy, then after-run 3 (last run allowed today) |
+| S6d | TRANSFER-below-bar fix (owner-approved) | **pushed** `db78d8a` (full suite 725/14,937, tsc and build clean); production READY at `1e14df3` (21:0x UTC) |
+| S6e | After-run 3 on production `1e14df3` (fixes `49efe8f` + `db78d8a`), same 2 topics × 5 students; the last run allowed today by the egress guard | **running** (started ~21:03 UTC; run file in the session scratchpad — if lost, re-run it tomorrow) |
 | S7 | Fix the top remaining defect class from S6, validate, deploy, re-run. Known candidates: (a) the ladder stays frozen when the learner answers the lesson's own held question during an excursion (`route.ts` `excursionFrozeLadderThisTurn`). The closing turn also freezes by design (`excursionActiveHoisted = !turnCountsForLesson` counts justClosed as active), so the fix needs a deliberate exception: record the lesson question on screen at excursion open, and count an answer to exactly that question. It touches evidence, so do it only if S6 shows off-track still failing; (b) the KG-description fallback repeats verbatim turn after turn | pending |
 | S8 | Widen to more launch topics (`RUNNER_TOPICS=6`, then more) within the egress cap | pending |
 
@@ -96,6 +97,7 @@ It counts rows returned (cumulative since project creation, never reset).
 | E2 | 2026-09-24 19:40:08 | 10,383,880 | 189,022,806 | end of S6: +116,921 rows over ~120 turns, about 35 MB. Today so far: 2 runs, about 70 MB |
 | E3 | 2026-09-24 19:48:30 | 10,384,238 | 189,023,228 | start of after-run 2 (+422 idle) |
 | E4 | 2026-09-24 20:28:44 | 10,414,424 | 189,133,335 | end of after-run 2: +110,107 rows / 126 turns, about 33 MB. **Today: 3 runs, about 103 MB. One more run allowed today (cap about 150 MB/day)** |
+| E5 | 2026-09-24 20:58:16 | 10,414,791 | 189,134,610 | start of after-run 3 (+1,275 idle over 30 min) |
 
 ## Rules that bind this work
 
