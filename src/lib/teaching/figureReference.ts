@@ -242,6 +242,93 @@ const FIGURE_SUBJECT_CLAIM_RE =
   /^(?:the|this|that|here(?:'s| is))\s+(?:the\s+|a\s+|an\s+)?(?:diagram|figure|picture|image|illustration|sketch|drawing|animation)\b[^.!?]{0,60}?\b(?:shows?|shown|depicts?|depicted|illustrates?|illustrated|displays?|displayed|represents?|pictures?|presents?|highlights?|indicates?)\b/i
 
 /**
+ * A SHORT LEADING LABEL WITH NO TERMINAL PUNCTUATION AT ALL — "Light ↓ This
+ * diagram shows…", "Energy This figure illustrates…" — bio.plant.
+ * photosynthesis, reproduced live on the deployed app, 2026-09-23/24.
+ *
+ * `stripUnbackedFigureReferences` splits on `(?<=[.!?])\s+` — a sentence
+ * boundary REQUIRES a terminal punctuation mark before it. The model's own
+ * "diagram-caption" habit produces a bare, unpunctuated one- or two-word
+ * label ("Light", "Energy", "Sunlight" — never itself a claim, and never a
+ * complete sentence) immediately followed by a genuine `FIGURE_SUBJECT_
+ * CLAIM_RE`-shaped claim, with nothing but whitespace (and sometimes an
+ * arrow glyph the model used as an ad hoc separator) between them. The
+ * splitter sees no boundary at all, so the whole run — label AND claim —
+ * arrives at `FIGURE_SUBJECT_CLAIM_RE` as ONE "sentence" whose first
+ * characters are the label, not "the/this/that/here's" — so the `^` anchor
+ * never reaches the claim, and the false claim ships unstripped.
+ *
+ * ── WHY THIS IS NOT "REMOVE THE ANCHOR" ─────────────────────────────────
+ * The anchor stays exactly as strict as it always was: this constant finds
+ * a CANDIDATE cut point ahead of it, and `FIGURE_SUBJECT_CLAIM_RE` — wholly
+ * unmodified — is what decides, on the text AFTER that cut, whether a claim
+ * is actually there. A bad or overly eager cut can only ever produce a
+ * remainder `FIGURE_SUBJECT_CLAIM_RE` was already willing to accept as
+ * sentence-initial; it can never make the claim test itself more permissive
+ * for text that reaches it any other way (every other call site, and every
+ * pre-existing behaviour of this regex, is untouched).
+ *
+ * ── WHY A LABEL IS SAFE TO ASSUME, RATHER THAN ORDINARY PROSE ───────────
+ * Deliberately narrow, on both ends:
+ *   - Exactly ONE capitalised word (never two-plus): ordinary sentence-
+ *     initial text capitalises only its own first word ("Consider how
+ *     this diagram shows…" breaks at "how", lowercase) — a caption-style
+ *     label is the one shape that puts a bare capitalised word directly
+ *     before what reads like a fresh sentence, with nothing grammatical
+ *     joining them.
+ *   - The lookahead requires the very next token to be literally "the/
+ *     this/that/here's/here is" — not merely a figure noun, not merely
+ *     capitalised — so an ordinary label-like opener followed by anything
+ *     else ("Sunlight Follow the arrows…", captured on the same lesson)
+ *     never even reaches the cut, and `FIGURE_SUBJECT_CLAIM_RE` on the
+ *     remainder is the real, unrelaxed gate regardless.
+ * A three-word proper noun run ("New York City This diagram shows…") is
+ * therefore NOT treated as a label — checked, not assumed — because this
+ * repo's own tutoring prose has no evidenced case of one, and admitting it
+ * would widen the surface with no observed need.
+ *
+ * ── THE REGRESSION THE EXCLUSION LIST CLOSES ────────────────────────────
+ * The lookahead alone is not enough: "In the diagram shown above—gravity
+ * pulls down…" ALSO has exactly one capitalised word ("In") directly before
+ * literal "the" — but "In" is an ordinary sentence-initial PREPOSITION
+ * genuinely governing "the diagram shown above" as one grammatical phrase
+ * (already correctly handled, in full, by `PREPOSED_LOCATOR_RE`/
+ * `findPointerClauseHead`'s Shape 2 — which trims only the leading clause
+ * and KEEPS "gravity pulls down… these are action-reaction partners").
+ * Treating "In" as a label made `hasFigureSubjectClaim` match the ENTIRE
+ * run-on sentence via `FIGURE_SUBJECT_CLAIM_RE` on "the diagram shown
+ * above…", so Shape 0b dropped the whole sentence — including the real
+ * content Shape 2 already correctly preserves — a measured regression
+ * against this file's own existing `figureReference.test.ts` fixtures,
+ * caught before shipping by running the full suite, not assumed safe.
+ * `LEADING_LABEL_RE` therefore excludes the closed class of English
+ * function words (determiners, prepositions, conjunctions, pronouns,
+ * auxiliaries, wh-words) from ever counting as a label: every evidenced
+ * TRUE label ("Light", "Sunlight", "Energy") is a content noun with no
+ * grammatical tie to what follows, and every false positive found while
+ * building this fix was exactly one of these closed-class words instead.
+ */
+const LABEL_EXCLUSION_RE =
+  /^(?:In|On|At|For|With|To|Of|By|From|As|Into|Onto|Upon|The|This|That|These|Those|It|He|She|They|We|You|I|Is|Are|Was|Were|Be|Been|Being|And|Or|But|So|Because|Since|If|When|While|Although|Though|Unless|Until|After|Before|During|Once|Whenever|Whether|Why|How|What|Where|Who|Which|There|Here|Not|No|Yes|A|An)\b/
+
+const LEADING_LABEL_RE =
+  /^[A-Z][a-zA-Z]*\s*[↓↑→←⇒⇐⇓⇑↔]?\s+(?=[Tt]he\b|[Tt]his\b|[Tt]hat\b|[Hh]ere(?:'s| is))/
+
+/**
+ * `FIGURE_SUBJECT_CLAIM_RE`, tried first exactly as written (so every
+ * existing sentence-initial match is byte-for-byte unchanged), then — only
+ * on failure — tried again against whatever follows a `LEADING_LABEL_RE`
+ * cut, if one exists. See `LEADING_LABEL_RE`'s own comment for why this
+ * composition cannot make the underlying claim test any more permissive.
+ */
+function hasFigureSubjectClaim(sentence: string): boolean {
+  if (FIGURE_SUBJECT_CLAIM_RE.test(sentence)) return true
+  const label = LEADING_LABEL_RE.exec(sentence)
+  if (!label || LABEL_EXCLUSION_RE.test(label[0])) return false
+  return FIGURE_SUBJECT_CLAIM_RE.test(sentence.slice(label[0].length))
+}
+
+/**
  * AN EMBEDDED LOCATOR — "the histogram IN THE FIGURE".
  *
  * Owner-reported from a live second-law lesson, 2026-08-30. Two turns read:
@@ -475,10 +562,12 @@ export function stripUnbackedFigureReferences(
           }
 
           // Shape 0b: a figure noun in SUBJECT position asserting the figure is
-          // present ("The diagram shows nitrogen in the center…"). The whole
-          // sentence is a claim about a figure that is not there, so it goes —
-          // the surrounding paragraphs carry the teaching.
-          if (FIGURE_SUBJECT_CLAIM_RE.test(s)) {
+          // present ("The diagram shows nitrogen in the center…"), including
+          // one preceded by an unpunctuated leading label ("Light ↓ This
+          // diagram shows…" — see LEADING_LABEL_RE/hasFigureSubjectClaim).
+          // The whole sentence is a claim about a figure that is not there,
+          // so it goes — the surrounding paragraphs carry the teaching.
+          if (hasFigureSubjectClaim(s)) {
             removed.push(s)
             return ''
           }

@@ -814,3 +814,148 @@ describe('"use this <noun> to …" — layout and sketch (bio.plant.photosynthes
     }
   })
 })
+
+/**
+ * RUN-ON LABEL -> FIGURE-SUBJECT-CLAIM ANCHORING GAP —
+ * bio.plant.photosynthesis, reproduced live on the deployed app during
+ * production verification of the layout/sketch fix, 2026-09-23/24.
+ *
+ * `FIGURE_SUBJECT_CLAIM_RE` is anchored with `^` to the START of whatever
+ * `stripUnbackedFigureReferences`'s own sentence splitter
+ * (`(?<=[.!?])\s+`) decided was a sentence. A bare, unpunctuated
+ * "diagram-caption" label ("Light", "Energy") immediately before a real
+ * `FIGURE_SUBJECT_CLAIM_RE`-shaped claim leaves no terminal punctuation for
+ * the splitter to find, so label and claim arrive together as ONE sentence
+ * whose first word is the label — the anchor never reaches the claim, and
+ * the unbacked figure reference ships. `LEADING_LABEL_RE`/
+ * `hasFigureSubjectClaim` close this by finding the label boundary and
+ * re-trying the SAME, unmodified `FIGURE_SUBJECT_CLAIM_RE` on what follows.
+ */
+describe('run-on label -> figure-subject-claim anchoring gap (bio.plant.photosynthesis, 2026-09-23/24)', () => {
+  const wrap = (sentence: string) =>
+    `Photosynthesis turns sunlight, water, and carbon dioxide into glucose and oxygen.\n\n${sentence}\n\nWhat gas is released as a byproduct?`
+
+  // A. The exact captured production failure.
+  const LABEL_DIAGRAM =
+    'Light ↓ This diagram shows the light-dependent reactions (photosystems II and I, electron transport, ATP and NADPH formation) that supply the Calvin cycle for sugar synthesis.'
+
+  it('A. reproduces the failure directly against the raw regex before the fix (sanity check on the bug itself)', () => {
+    // FIGURE_SUBJECT_CLAIM_RE's own literal shape: the label "Light ↓ "
+    // sits before the "^" anchor's target, so a naive anchored test on the
+    // whole run-on sentence must fail — this is the mechanism, not a guess.
+    const FIGURE_SUBJECT_CLAIM_RE_ONLY =
+      /^(?:the|this|that|here(?:'s| is))\s+(?:the\s+|a\s+|an\s+)?(?:diagram|figure|picture|image|illustration|sketch|drawing|animation)\b[^.!?]{0,60}?\b(?:shows?|shown|depicts?|depicted|illustrates?|illustrated|displays?|displayed|represents?|pictures?|presents?|highlights?|indicates?)\b/i
+    expect(FIGURE_SUBJECT_CLAIM_RE_ONLY.test(LABEL_DIAGRAM)).toBe(false)
+  })
+
+  it('A. strips the exact captured "Light ↓ This diagram shows…" sentence when no figure is attached', () => {
+    const turn = wrap(LABEL_DIAGRAM)
+    const r = stripUnbackedFigureReferences(turn, false)
+    expect(r.stripped).toBe(true)
+    expect(r.text).not.toMatch(/this diagram shows/i)
+    expect(r.text).not.toMatch(/^light/i)
+    // No fragment of the false claim survives, labeled or not.
+    for (const line of r.text.split('\n')) {
+      const t = line.trim()
+      if (t.length > 0) expect(t).not.toMatch(/^light\b/i)
+    }
+  })
+
+  // B. The same shape with a DIFFERENT figure noun and label word — proves
+  // the fix is general, not a one-off pattern match on "Light"/"diagram".
+  const LABEL_FIGURE = 'Energy This figure illustrates the transfer of electrons between the two photosystems.'
+
+  it('B. strips an equivalent label + claim using a different label word and figure noun ("Energy" / "figure")', () => {
+    const turn = wrap(LABEL_FIGURE)
+    const r = stripUnbackedFigureReferences(turn, false)
+    expect(r.stripped).toBe(true)
+    expect(r.text).not.toMatch(/this figure illustrates/i)
+    expect(r.text).not.toMatch(/^energy/i)
+  })
+
+  // C. Normal (already-working) sentence-initial behaviour is unchanged.
+  it('C. a genuine sentence-initial claim (no label) is still caught exactly as before', () => {
+    const t = 'This diagram shows the water cycle from evaporation to rain. Notice the symmetry.'
+    const r = stripUnbackedFigureReferences(t, false)
+    expect(r.stripped).toBe(true)
+    expect(r.text).toBe('Notice the symmetry.')
+  })
+
+  // D. Ordinary prose with "this diagram"/"this figure" but NO label
+  // boundary must not be incorrectly stripped.
+  it('D. NEGATIVE CONTROL: ordinary prose using "this diagram"/"this figure" mid-sentence is untouched', () => {
+    for (const t of [
+      'Consider how this diagram shows relationships you have already learned.',
+      'The overall diagram, this figure shows a lot, is worth revisiting.',
+      'A diagram can help you see the structure. This figure is just an example type of visual aid people use.',
+    ]) {
+      const r = stripUnbackedFigureReferences(t, false)
+      expect(r.stripped).toBe(false)
+      expect(r.text).toBe(t)
+    }
+  })
+
+  it('D. NEGATIVE CONTROL: a capitalised opener followed by ordinary text (not a claim) is untouched', () => {
+    // "Sunlight" immediately precedes "Follow", not "the/this/that/here's" —
+    // LEADING_LABEL_RE's lookahead cannot even find a candidate cut here.
+    const t = 'Sunlight Follow the arrows from the sunlight on the left through the two photosystems to the Calvin cycle on the right to see how light energy becomes sugar.'
+    const r = stripUnbackedFigureReferences(t, false)
+    expect(r.stripped).toBe(false)
+    expect(r.text).toBe(t)
+  })
+
+  it('D. NEGATIVE CONTROL: a multi-word proper-noun run before a claim is not treated as a label', () => {
+    // LEADING_LABEL_RE requires exactly ONE capitalised word — deliberately
+    // narrower than the evidence needs, so an unevidenced shape is left to
+    // the existing (unchanged) behaviour rather than guessed at.
+    const t = 'New York City This diagram shows a map of the five boroughs. It is not to scale.'
+    const r = stripUnbackedFigureReferences(t, false)
+    expect(r.stripped).toBe(false)
+    expect(r.text).toBe(t)
+  })
+
+  it('D. NEGATIVE CONTROL: an ordinary short exclamation before a real sentence is untouched', () => {
+    const t = 'Great! This example shows how the strategy works in practice.'
+    const r = stripUnbackedFigureReferences(t, false)
+    expect(r.stripped).toBe(false)
+    expect(r.text).toBe(t)
+  })
+
+  // E. A genuinely attached figure is byte-identical.
+  it('E. leaves the labeled claim byte-identical when a figure genuinely is attached', () => {
+    for (const sentence of [LABEL_DIAGRAM, LABEL_FIGURE]) {
+      const turn = wrap(sentence)
+      const r = stripUnbackedFigureReferences(turn, true)
+      expect(r.stripped).toBe(false)
+      expect(r.text).toBe(turn)
+    }
+  })
+
+  // G. Questions and surrounding teaching survive.
+  it('G. keeps the question and the surrounding teaching text', () => {
+    const r = stripUnbackedFigureReferences(wrap(LABEL_DIAGRAM), false)
+    expect(r.text).toMatch(/photosynthesis turns sunlight, water, and carbon dioxide/i)
+    expect(r.text).toMatch(/what gas is released as a byproduct\?/i)
+    expect(r.text.trim().endsWith('?')).toBe(true)
+  })
+
+  it('G. never leaves a sentence starting mid-thought', () => {
+    for (const sentence of [LABEL_DIAGRAM, LABEL_FIGURE]) {
+      const r = stripUnbackedFigureReferences(wrap(sentence), false)
+      for (const line of r.text.split('\n')) {
+        const t = line.trim()
+        if (t.length > 0) expect(t[0]).toMatch(/[A-Za-z*_]/)
+      }
+    }
+  })
+
+  // H. Idempotence.
+  it('H. is idempotent on the new shape', () => {
+    for (const sentence of [LABEL_DIAGRAM, LABEL_FIGURE]) {
+      const once = stripUnbackedFigureReferences(wrap(sentence), false)
+      const twice = stripUnbackedFigureReferences(once.text, false)
+      expect(twice.text).toBe(once.text)
+      expect(twice.stripped).toBe(false)
+    }
+  })
+})
