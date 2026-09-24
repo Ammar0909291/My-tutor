@@ -101,6 +101,38 @@ near-zero false positives (needs a per-code enforce path in `verifierGate.ts`).
   ("Let's stay with this idea for a moment."); `MISCONCEPTION_DETECTED` firing on
   conversational nudges. Details: `docs/history/visualization-engine.md` (2026-09-24).
 
+## LIVE LOOP STATE — read this first (updated every loop step)
+
+The owner said: fix what was proposed WITHOUT asking for approval, work in a loop,
+keep this file current so another account can continue with no prompts from the owner.
+Stay inside the owner's "3 complete sessions" budget for this work (about 2 used by 2026-09-24).
+
+| Step | What | Status |
+|---|---|---|
+| L1 | Gate-internal withhold falls back to the concept, not "Let's stay with this idea" (`2935762`) | pushed; deploy + verify pending |
+| L2 | Re-run pilot: `chem.found.stoichiometry` on suaibamr4 with `PILOT_MAX_TURNS=20`, + `eng.grammar.pronouns` on suaibamr4 (fresh) | pending (needs L1 deployed) |
+| L3 | Record L2 results in `docs/history/visualization-engine.md` + this table | pending |
+| L4 | Stop the loop. Items #2-#4 of the plan need REAL learners and owner decisions — do not start them. | — |
+
+How to run a step with no owner input:
+1. Check the latest production deployment is READY and its commit is ≥ the step's commit
+   (Vercel MCP `list_deployments`, project `prj_FwjmRdthApGhwdQY7FyDYThD7WJD`, team
+   `team_ZHSoYXkAEang6oq1I9hAPn45`, target production).
+2. Pilot command (password: ask the owner, or — if the owner has already given it in the
+   current chat — pass it ONLY as `PILOT_PASSWORD` for the one invocation; never commit it):
+   ```
+   PILOT_MAX_TURNS=20 PILOT_PLAN='[{"email":"suaibamr4@gmail.com","lessons":[{"subject":"chemistry","conceptId":"chem.found.stoichiometry"},{"subject":"english","conceptId":"eng.grammar.pronouns"}]}]' \
+   PILOT_PASSWORD=… QA_OUT=<scratchpad>/pilot3.json npx tsx scripts/qa/learnerPilot.ts
+   ```
+   Pass criteria: `summary.mastered` true on stoichiometry, no `content-free-hold` defect,
+   no turn text equal to "Let's stay with this idea for a moment."
+3. If a new defect appears: reproduce it against the real module with the production text,
+   fix at the shared cause, add a test with that text, run `npx tsc --noEmit`, the full
+   `npx vitest run`, `npm run build`, then commit + push (`main` and the session's feature
+   pointer), update THIS table, and re-verify after deploy.
+4. Owner asked for a 60-second loop wake between steps (`send_later` delay 1 minute).
+   Don't poll faster than that; use background commands for long runs.
+
 ## Status at hand-off (after pilot run 2)
 
 - `d6750dc` fixes are live (`dpl_CopQvQGpR5S4HhuWikc9EjCBVndQ`); full suite 720 files /
