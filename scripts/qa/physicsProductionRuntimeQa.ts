@@ -32,7 +32,7 @@
  * Run: npx tsx scripts/qa/physicsProductionRuntimeQa.ts [--only=<conceptId>] [--delete]
  */
 import { writeFileSync } from 'node:fs'
-import { createQaAccount, deleteQaAccount, BASE } from './liveAccount'
+import { createQaAccount, deleteQaAccount, login, BASE } from './liveAccount'
 import type { SeedProbe } from '../../src/lib/teaching/assets/brainSeedAssets'
 import { SEED_PROBES } from '../../src/lib/teaching/assets/brainSeedAssets'
 import { AUTHORED_PROBES } from '../../src/lib/teaching/assets/authoredSeedAssets'
@@ -184,6 +184,31 @@ const PASS2_PLANS: Plan[] = [
     answers: ['misconception', 'wrong', 'lead-wrong', 'wrong', 'correct'],
     transfer: 'red light very very strong on zinc, electron come out? zinc work function is 4.3 eV',
     maxTurns: 18 },
+]
+
+// HARD PASS (--hard): five of the most difficult physics concepts, each with a
+// bound figure, driven with a visual request on every one.
+const HARD_PLANS: Plan[] = [
+  { conceptId: 'phys.qm.quantum-tunneling', question: 'how electron go through wall if it not have enough energy? it is magic?',
+    answers: ['misconception', 'numeric-bare', 'lead-wrong', 'correct'],
+    visualRequest: 'please show me picture of the wave going through the barrier',
+    transfer: 'if barrier become two times more thick, tunnelling become two times less? or more less?', maxTurns: 16 },
+  { conceptId: 'phys.qm.particle-in-box', question: 'why particle in box cannot have zero energy? i dont understand',
+    answers: ['misconception', 'numeric-bare', 'correct', 'lead-wrong'],
+    visualRequest: 'can you show picture of the waves inside the box',
+    transfer: 'if box become two times bigger, the energy of level 1 is how much? half?', maxTurns: 16 },
+  { conceptId: 'phys.mech.keplers-laws', question: 'planet go more fast when near sun? why? the sun pull more?',
+    answers: ['misconception', 'numeric-bare', 'correct', 'lead-wrong'],
+    visualRequest: 'show me picture of the orbit please',
+    transfer: 'a planet is 4 times far from sun than earth. its year is how many earth years? i think 8', maxTurns: 16 },
+  { conceptId: 'phys.em.lc-circuits', question: 'in LC circuit where the energy go? it disappear and come back?',
+    answers: ['misconception', 'numeric-bare', 'lead-wrong', 'correct'],
+    visualRequest: 'please draw the circuit for me',
+    transfer: 'if i make capacitor 4 times bigger, frequency become half? right?', maxTurns: 16 },
+  { conceptId: 'phys.therm.carnot-cycle', question: 'carnot engine can be 100% efficient if very good engine?',
+    answers: ['misconception', 'numeric-bare', 'lead-wrong', 'correct'],
+    visualRequest: 'can you show me the carnot cycle graph',
+    transfer: 'engine work between 600 K and 300 K. maximum efficiency is 50%?', maxTurns: 16 },
 ]
 
 // NUMERIC PASS (--numeric): every answer typed as a weak-English learner types a
@@ -357,11 +382,17 @@ async function main() {
   const doDelete = process.argv.includes('--delete')
   const out = process.env.QA_OUT ?? 'physics-qa-run.json'
   console.log(`Physics production runtime QA — BASE=${BASE}`)
-  const acct = await createQaAccount('phys-runtime')
+  // A REAL account may be driven instead of a disposable one: credentials come
+  // ONLY from the environment of this one invocation, are never written or
+  // logged, and such an account is never deleted by this script.
+  const realEmail = process.env.QA_EMAIL
+  const acct = realEmail
+    ? { email: realEmail, password: process.env.QA_PASSWORD ?? '', name: 'real', cookie: await login(realEmail, process.env.QA_PASSWORD ?? '') }
+    : await createQaAccount('phys-runtime')
   console.log(`account=${acct.email}`)
   // Disposable QA credentials only, written OUTSIDE the repo so the account can
   // be deleted after the DB cross-check (the evidence cascades on delete).
-  if (process.env.QA_CREDS) writeFileSync(process.env.QA_CREDS, JSON.stringify({ email: acct.email, password: acct.password }))
+  if (process.env.QA_CREDS && !realEmail) writeFileSync(process.env.QA_CREDS, JSON.stringify({ email: acct.email, password: acct.password }))
   const results: unknown[] = []
   try {
     const cur = await api(acct.cookie, '/api/curriculum?subject=physics')
@@ -369,7 +400,7 @@ async function main() {
     console.log(`curriculum: ${lessons.length} physics lessons`)
     const foreignLessons = lessons.filter((l) => !l.topicSlug.startsWith('phys.'))
     if (foreignLessons.length) finding(`physics curriculum contains ${foreignLessons.length} non-physics topicSlugs: ${foreignLessons.slice(0, 5).map((l) => l.topicSlug).join(', ')}`)
-    const plans = process.argv.includes('--pass2') ? PASS2_PLANS : process.argv.includes('--numeric') ? NUMERIC_PLANS : PLANS
+    const plans = process.argv.includes('--pass2') ? PASS2_PLANS : process.argv.includes('--numeric') ? NUMERIC_PLANS : process.argv.includes('--hard') ? HARD_PLANS : PLANS
     for (const plan of plans.filter((pl) => !only || pl.conceptId === only)) {
       try { results.push(await drive(acct.cookie, lessons, plan)) }
       catch (e) { finding(`${plan.conceptId}: run aborted — ${(e as Error).message}`) }
@@ -391,7 +422,7 @@ async function main() {
     console.log(`\nFINDINGS (${findings.length})`); findings.forEach((f, i) => console.log(`  ${i + 1}. ${f}`))
     console.log(`\nNOTES (${notes.length})`); notes.forEach((f, i) => console.log(`  ${i + 1}. ${f}`))
     console.log(`\nACCOUNT: ${acct.email}  transcript: ${out}`)
-    if (doDelete) console.log(`delete: ${JSON.stringify(await deleteQaAccount(acct))}`)
+    if (doDelete && !realEmail) console.log(`delete: ${JSON.stringify(await deleteQaAccount(acct))}`)
   }
 }
 
