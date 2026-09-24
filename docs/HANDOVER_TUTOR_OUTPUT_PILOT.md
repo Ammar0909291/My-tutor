@@ -109,8 +109,8 @@ Stay inside the owner's "3 complete sessions" budget for this work (about 2 used
 
 | Step | What | Status |
 |---|---|---|
-| L1 | Gate-internal withhold falls back to the concept, not "Let's stay with this idea" (`2935762`) | pushed; deploy + verify pending |
-| L2 | Re-run pilot: `chem.found.stoichiometry` on suaibamr4 with `PILOT_MAX_TURNS=20`, + `eng.grammar.pronouns` on suaibamr4 (fresh) | pending (needs L1 deployed) |
+| L1 | Gate-internal withhold falls back to the concept, not "Let's stay with this idea" (`2935762`) | **deployed READY** (`dpl_2AUZmqyp36KL8Ub9N2Z6sRL3vtCX`, 14:10 UTC) |
+| L2 | Re-run pilot: `chem.found.stoichiometry` on suaibamr4 with `PILOT_MAX_TURNS=20`, + `eng.grammar.pronouns` on suaibamr4 (fresh) | **running** (started 14:10 UTC) |
 | L3 | Record L2 results in `docs/history/visualization-engine.md` + this table | pending |
 | L4 | Stop the loop. Items #2-#4 of the plan need REAL learners and owner decisions — do not start them. | — |
 
