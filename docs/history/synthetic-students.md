@@ -188,3 +188,27 @@ Proposed fix, which changes the ladder and so needs review:
 - At TRANSFER, while verified CHECK < 1 or verified PRACTICE < 2, let the gate attach authored
   questions.
 - Let a server-graded correct answer top up the lowest unmet verified counter.
+
+## 2026-09-24 ~21:00-21:32 UTC — after-run 3 (production `1e14df3`: fixes `49efe8f` heldQuestion/practice-request + `db78d8a` TRANSFER below the verified bar)
+
+Same 2 topics (displacement, velocity) × 5 students.
+
+| Student | displacement | velocity |
+|---|---|---|
+| beginner | mastered (12 turns, v=1/2) | mastered (12, v=1/2) |
+| careless | mastered (11, v=2/2) | mastered (11, v=2/2) |
+| strong | mastered (9, v=1/2) | mastered (9, v=1/2) |
+| confused | mastered (15, v=2/2) | mastered (15, v=2/2) |
+| offtrack | mastered (11, v=1/2) | mastered (11, v=1/2) |
+
+**10/10 mastered, 0 critical, 0 major, 1 minor** (`ungradeable-question`: a model-written question at CHECK on the turn the learner answered the held question). Trend: baseline 4/10 (12 critical) -> after-run 1 8/10 (1) -> after-run 2 9/10 (1) -> after-run 3 10/10 (0).
+
+Off-track evidence that the fixes work: turn 11 ("5 km — the straight-line separation…", answered while the favourite-physics-fact detour was open) moved PRACTICE v=1/1 -> TRANSFER v=1/2, i.e. the answer to the held lesson question was credited and certified the lesson.
+
+Operational: a container restart killed the run after 8 lessons (the run JSON was not written; the per-turn log survived). The off-track student was re-run alone (`RUNNER_PERSONAS=offtrack RUNNER_MAX_TOTAL_TURNS=40`). The killed part's 4 disposable accounts were not deleted.
+
+Egress: E5->E6 +70,195 rows (~21 MB, 8 lessons), E6->E7 +7,577 rows (~2 MB, 2 lessons). Day total about 126 MB (< 150 MB/day cap).
+
+Checker fix (`1b576c2`): both after-run 2 `announced-not-asked` majors were false positives (a conditional offer; "Quick check:" followed by a question). The check now requires no question after the announcement and no offer lead-in.
+
+Next: readiness runs 2 and 3 after midnight UTC; then widen to `RUNNER_TOPICS=6`.

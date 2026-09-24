@@ -31,8 +31,9 @@ reach verified mastery every time with zero critical defects (`scripts/qa/synthe
 | S6b | After-run 2 on production `dc07f2d` (arbitration fix `ae9caf6`), same 2 topics × 5 students | **done**: 9/10 mastered (confused now masters both). Remaining: off-track velocity stuck at TRANSFER 1/1; 1 checker false positive |
 | S6c | Fixes from S6b: practice request never carries self-reported correctness; excursion `heldQuestion` (answering the lesson's held question closes the detour and counts); concept-name exemption in `dropAnswerLeaks` and the checker | **pushed** `49efe8f` |
 | S6d | TRANSFER-below-bar fix (owner-approved) | **pushed** `db78d8a` (full suite 725/14,937, tsc and build clean); production READY at `1e14df3` (21:0x UTC) |
-| S6e | After-run 3 on production `1e14df3` (fixes `49efe8f` + `db78d8a`), same 2 topics × 5 students; the last run allowed today by the egress guard | **running** (started ~21:03 UTC; run file in the session scratchpad — if lost, re-run it tomorrow) |
-| S7 | Fix the top remaining defect class from S6, validate, deploy, re-run. Known candidates: (a) the ladder stays frozen when the learner answers the lesson's own held question during an excursion (`route.ts` `excursionFrozeLadderThisTurn`). The closing turn also freezes by design (`excursionActiveHoisted = !turnCountsForLesson` counts justClosed as active), so the fix needs a deliberate exception: record the lesson question on screen at excursion open, and count an answer to exactly that question. It touches evidence, so do it only if S6 shows off-track still failing; (b) the KG-description fallback repeats verbatim turn after turn | pending |
+| S6e | After-run 3 on production `1e14df3` (fixes `49efe8f` + `db78d8a`), same 2 topics × 5 students | **done: 10/10 mastered, 0 critical, 0 major, 1 minor** (was 9/10, 1 critical). A container restart killed the run after 8 lessons (all mastered); the off-track student was re-run alone (`RUNNER_PERSONAS=offtrack`) and mastered both, including credit for the lesson question answered during a detour (heldQuestion fix confirmed). The 4 disposable accounts of the killed part (beginner, careless, strong, confused) were **not deleted** — harmless `qa-*@mytutor-qa.invalid` rows, clean up when convenient |
+| S6f | Checker: an offered check, or "Quick check:" followed by the model's own question, is not `announced-not-asked` (both after-run 2 majors were checker false positives) | **pushed** `1b576c2` |
+| S7 | Readiness runs 2 and 3 on displacement + velocity (after midnight UTC, egress guard). Run 1 = after-run 3 (10/10, 0 critical). If both pass, the 2 topics are **ready** | pending (next UTC day) |
 | S8 | Widen to more launch topics (`RUNNER_TOPICS=6`, then more) within the egress cap | pending |
 
 If S4's run file is lost (the session ended), **skip the before-baseline**. S2's smoke run already
@@ -98,6 +99,8 @@ It counts rows returned (cumulative since project creation, never reset).
 | E3 | 2026-09-24 19:48:30 | 10,384,238 | 189,023,228 | start of after-run 2 (+422 idle) |
 | E4 | 2026-09-24 20:28:44 | 10,414,424 | 189,133,335 | end of after-run 2: +110,107 rows / 126 turns, about 33 MB. **Today: 3 runs, about 103 MB. One more run allowed today (cap about 150 MB/day)** |
 | E5 | 2026-09-24 20:58:16 | 10,414,791 | 189,134,610 | start of after-run 3 (+1,275 idle over 30 min) |
+| E6 | 2026-09-24 21:26:12 | 10,437,240 | 189,204,805 | killed part of after-run 3: +70,195 rows / ~95 turns, about 21 MB |
+| E7 | 2026-09-24 21:32:06 | 10,442,535 | 189,212,382 | off-track re-run: +7,577 rows / 22 turns, about 2 MB. **Today: about 126 MB. No more runs today** |
 
 ## Rules that bind this work
 
