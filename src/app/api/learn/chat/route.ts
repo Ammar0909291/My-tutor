@@ -8833,6 +8833,33 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         }
       }
 
+      // THE CORRECTION MUST SURVIVE THE REMEDIATION FLOOR.
+      //
+      // `stateCorrectionForWrongAnswer` (ENG-D11, above) runs BEFORE the floor,
+      // and the floor REPLACES `cleanText` wholesale when it rejects a draft —
+      // with a regeneration or with the held-card / curriculum-sentence
+      // fallback — so the verdict it had just added was thrown away. MEASURED
+      // (production QA, 2026-09-24, phys.mech.projectile-motion): the learner
+      // picked "Both axes decelerate together since gravity acts on the whole
+      // object", the server graded it wrong against the authored key, and the
+      // reply that shipped was the bare fallback template ("Let me put it in the
+      // simplest words I have. … Tell me which part of that is the fuzzy one")
+      // — no verdict, no right answer. Re-applying is safe by construction: the
+      // function is idempotent (it skips when the reply already says both
+      // halves), takes the same authored-key-only input, and fabricates nothing.
+      try {
+        const { stateCorrectionForWrongAnswer } = await import('@/lib/teaching/wrongAnswerCorrection')
+        const corrected = stateCorrectionForWrongAnswer({
+          text: cleanText,
+          correct: correctForConfirmation,
+          probe: pendingMcqHoisted,
+        })
+        if (corrected.added) {
+          console.log('[eng-d11] ' + JSON.stringify({ event: 'wrongAnswerCorrected', reason: corrected.reason, afterRemediationFloor: true }))
+        }
+        cleanText = corrected.text
+      } catch { /* non-fatal — the teaching is still better than no answer */ }
+
       // S1 — append this turn to the history ring, unconditionally (not
       // gated on eosFlags.outputVerifier): the ring must accumulate whether
       // or not any consumer is currently enabled, matching this route's own
