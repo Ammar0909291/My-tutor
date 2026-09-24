@@ -53,7 +53,10 @@ export const INSUFFICIENT_FOR_CONCEPT: ReadonlySet<string> = new Set([
   'phys.wave.shm-energy',            // pendulum geometry; no KE/PE split
   'phys.em.electric-current',        // lumped circuit; no drift velocity or charge carriers
   'chem.period.modern-periodic-law', // two elements compared; not the table or the law
-  'bio.mol.dna-replication',         // static Watson-Crick pairing; no replication fork
+  // REMOVED: 'bio.mol.dna-replication' ("static Watson-Crick pairing; no
+  // replication fork"). It now owns an authored replication-fork figure in
+  // CONCEPT_SCENES (dnaReplication.pure.ts), so the verdict no longer
+  // describes what the concept renders — the intended exit from this set.
 
   // ── curated cards thinner than the concept they were bound to ────────────
   // phys.meas.vector-products was HERE ("one vector; dot/cross need two and

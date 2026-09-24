@@ -52,6 +52,7 @@ import { buildCellStructureScene } from '@/lib/teaching/sceneGenerators/cellStru
 import { buildCellPathwayScene } from '@/lib/teaching/sceneGenerators/cellPathway'
 import { buildCellHubScene } from '@/lib/teaching/sceneGenerators/cellHub'
 import { buildCellComparisonScene } from '@/lib/teaching/sceneGenerators/cellComparison'
+import { buildDNAReplicationScene } from '@/lib/teaching/sceneGenerators/dnaReplication'
 
 /**
  * A canonical figure from the variable registry.
@@ -580,6 +581,15 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
       { name: 'Intermediate filaments', description: 'rope-like fibres providing mechanical strength' },
     ],
   }),
+
+  // DNA replication was served the dna_structure KIND default — a static
+  // base-pairing ladder with no fork, no new strands and no enzymes, demoted in
+  // scope.ts for exactly that. This is its own authored figure: one replication
+  // fork drawn only from the KG description and the concept's EB entry (see
+  // dnaReplication.pure.ts). The registry row keeps `sceneGenerator:
+  // 'dna_structure'`, so that generator stays bound and reachable; this table
+  // is consulted before the kind, so the concept now draws its own case.
+  'bio.mol.dna-replication': buildDNAReplicationScene,
 
   // The cell cycle is a genuine CYCLE — the concept's own KG description
   // names the ordered phases and their checkpoints.

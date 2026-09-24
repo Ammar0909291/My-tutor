@@ -310,3 +310,22 @@ Closed the two ambiguities the hardening pass left open.
   request makes a provider call, but `generationSpent` was taken from the first (cached) result,
   so VISUAL_TURN logged `generationSpent=false` and the per-session generation budget never
   counted the retry (lc-circuits: `no-figure:retry-structurally-invalid`). Now counted.
+
+## 2026-09-24 — Biology: bio.mol.dna-replication gets a replication-fork figure
+
+The concept was served the `dna_structure` kind default (a static Watson-Crick ladder with a
+GC-content label; `scope.ts` had demoted it: "no replication fork"). It now owns an authored
+figure, `sceneGenerators/dnaReplication.pure.ts`, registered in `CONCEPT_SCENES` — the same
+mechanism as the 18 bio.cell scenes; no resolver, retirement or precedence change. Content is
+drawn only from the KG description and the concept's EB entry (which prescribes "a replication
+fork with both template strands' 5′/3′ ends labelled"): helicase at the fork, antiparallel
+templates with 3′/5′ ends, one primer + continuous leading strand growing toward the fork,
+Okazaki fragments built away from the fork each with a primer (oldest primer already replaced),
+DNA polymerase, primase, ligase at a nick, "semiconservative". Nothing outside the concept
+(no topoisomerase / SSB / clamp). Fitted to the tutor contract's caps (6 stages, 14 texts —
+`visualSemantics.ts`) so every text drawn is one the tutor is told about; passes the
+`layout.ts` authoring gate at desktop/tablet/mobile and a Chromium render with measured label
+boxes (390px, 1280px). Registry row untouched (`dna_structure` stays bound and its shared
+instance unchanged); the `INSUFFICIENT_FOR_CONCEPT` verdict and the B2 "requires authoring"
+entry were removed as their documented exit; two ledger counts updated with the reason (override
+table 56 → 57, authoring queue 48 → 47). Tests: `dnaReplicationVisual.test.ts`.
