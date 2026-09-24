@@ -183,6 +183,29 @@ describe('a rejected candidate is not a permanent verdict on the concept', () =>
     expect(calls.critic).toBe(criticBefore) // no wasted judge call
   })
 
+  it('THE RETRY IS COUNTED AS SPENT even though the first result was a free cache hit', async () => {
+    // Production, lc-circuits, 2026-09-24: `no-figure:retry-structurally-invalid`
+    // was logged with generationSpent=false, so the session budget never
+    // counted the provider call the retry made.
+    for (const generate of [() => ({ type: 'not-a-figure' }), () => FRESH]) {
+      const calls = { generate: 0, critic: 0 }
+      const cache = await seedRejectedCandidate({ generate: 0, critic: 0 })
+      const d = deps(cache, { generate, critic: reject, calls })
+      const asked = await resolve(cache, d, 'Show me a diagram')
+      expect(calls.generate).toBe(1)
+      expect(asked.payload).toBeNull()
+      expect(asked.generationSpent).toBe(true)
+    }
+  })
+
+  it('an ordinary turn on a cached reject spends nothing and says so', async () => {
+    const calls = { generate: 0, critic: 0 }
+    const cache = await seedRejectedCandidate({ generate: 0, critic: 0 })
+    const d = deps(cache, { generate: () => FRESH, critic: reject, calls })
+    const turn = await resolve(cache, d, 'ok')
+    expect(turn.generationSpent).toBe(false)
+  })
+
   it('the retry fires only on an explicit request — an ordinary turn never pays for it', async () => {
     const calls = { generate: 0, critic: 0 }
     const cache = await seedRejectedCandidate({ generate: 0, critic: 0 })

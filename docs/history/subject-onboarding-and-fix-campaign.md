@@ -598,3 +598,77 @@ Validated: `npx tsc --noEmit` clean; `seed-knowledge-assets.ts --draft --dry-run
 untouched); full suite 700/700 test files, 14,461 passed / 9 skipped (no regression); `npm run
 build` clean.
 
+
+## Physics master completion pass (2026-09-24)
+
+Owner instruction "PHYSICS MASTER COMPLETION": take physics from baseline through production
+verification, fixing only confirmed blocking defects. Re-measure before trusting any number here.
+
+**Baseline (all re-measured, none taken from this file):** KG 238 concepts, validator PASS, 238/238
+reachable from one root (`phys.meas.units`); Blueprints 238/238; EB 238/238; asset contract 261/261
+(concept, band) pairs at contract on disk AND in production (0 short, 0 never-quizzable, 0 hollow
+explanation/probe identities, 0 quizzed-not-taught); every pair holds 4-6 gradeable probes
+(65 at 4, 195 at 5, 1 at 6). 30-day isolation: 0 cross-subject `evidence_events`/`topic_progress`
+rows (1,005 physics-session `ASSET_SHOWN` rows carry the subject-slug fallback `conceptId='physics'`
+— telemetry only, strength 0, never a grade). Every number in the 60 served answer keys of the 7
+sampled concepts was independently re-derived: all correct.
+
+**Live QA** — new harness `scripts/qa/physicsProductionRuntimeQa.ts` (disposable accounts, weak-
+English learner, answer key read from the seed corpus, every answer scored against the mastery
+counters). 5 runs, ~170 turns, 8 concepts across mechanics, E&M, thermodynamics, optics, waves and
+modern physics. All 5 accounts deleted afterwards (`deleted:true, reloginBlocked:true`), each only
+after its `topic_progress` was cross-checked: verified sessions COMPLETED, unverified REVISION, no
+false mastery anywhere.
+
+**Confirmed defects fixed (each with a fail-before/pass-after regression test):**
+1. `e68e828` — pool exhaustion served a MODEL-INVENTED graded MCQ. photoelectric-effect: the model
+   keyed "What does the stopping potential directly measure?" to "number of photons per second";
+   the learner's wrong tap was graded correct (`gradeSource:server-key, gradedCorrect:true`), the
+   plain counter moved, the reply said "That's right". `findBestProbe` now reports exhaustion
+   (`onAllCandidatesSpent`, from rows already fetched — no new query) and `decideModelProbe`
+   withholds with `'authored-pool-exhausted'` at counting phases. Verified live: the verdict fired
+   3x in the pass-2 photoelectric session, 0 invented-key grades.
+2. `a5e798c` — typed physics values mis-graded. "2", "i think 2 m/s2", "a = 2 m/s^2" resolved to
+   "50 m/s²" (ordinal "2"); "c = 450" to option C. Plus rule 3b: the answer half of an authored
+   "<answer> — <why>" option ("Toward the normal", "The cyclist") now resolves; yes/no halves
+   deliberately excluded (a bare "no" may answer the tutor's check-in). Corpus-wide differential
+   over 3,292 probes / 30,387 typed forms in all subjects: 3,265 forms newly resolve as intended;
+   every no-longer-resolving form was an ordinal/letter coincidence, now refused not guessed; tap
+   behaviour identical.
+3. `b64925d` — the ENG-D11 wrong-answer correction was erased by the remediation floor's later
+   wholesale overwrite (projectile-motion served the bare fallback template). Re-applied after the
+   floor. Verified live: the same misconception answer now opens "Not quite — the answer is: …".
+
+**Remaining, evidence-backed, NOT blocking (not fixed — each is either a documented owner
+decision or needs new capability behind the G2 gate):**
+- Content-free hold, still open (see above): "Let's stay with this idea for a moment." answered a
+  real transfer question (photoelectric), and one Doppler turn shipped an EMPTY reply (no probe on
+  screen, so the late empty-guard does not fire). Withholding in fix 1 can also end in this hold
+  on an exhausted-pool turn — strictly safer than the mis-keyed grade it replaces.
+- `phys.opt.refraction` still renders a convex-lens figure (in `INSUFFICIENT_FOR_CONCEPT`; the tutor
+  correctly introduces it as a general illustration). An interface/Snell figure needs new authoring.
+- Diagnostic probes can precede teaching at DEMONSTRATE (photoelectric asked about the stopping
+  potential first); two graded wrong answers then close the episode by the documented
+  `sessionLifecycle` budget (projectile pass 2). Owner policy question, not a grading error.
+- Mirror check-ins sometimes paraphrase something the learner did not say ("So you're saying the
+  arrow labelled 'car'…"); a bare "Yes"/"No" to a yes/no probe stays ungraded by design.
+- `MISCONCEPTION_DETECTED` fires on plain nudges (model-emitted, analytics-only reader).
+- The deterministic physics verifier remains shadow-only (deferred primitive; not resumed).
+
+### Hard-concept QA follow-up (2026-09-24, owner's real account + disposable verification)
+Five expert/advanced concepts (quantum-tunneling, particle-in-box, keplers-laws, lc-circuits,
+carnot-cycle) driven on the owner's account (`scripts/qa/physicsProductionRuntimeQa.ts --hard`,
+real-account mode: credentials from the environment only). Physics correct throughout, 0 false
+accepts; particle-in-box verified, others REVISION/IN_PROGRESS honestly. Defects fixed:
+- D1 (`b4409bb`) — "pick the best answer / which of the following" with no options served.
+  Delivery contract now drops option-pointing sentences when no MCQ is served and no prose list
+  exists. Verified by tests on the production texts (model-dependent; did not recur live).
+- D3 (`b4409bb`, relocated `28c251c`) — picture request silently ignored where no figure exists
+  (keplers/LC figures are retired as wrong). Reply now opens "I don't have a picture for this one,
+  so I'll explain it in words." First placement missed memory-served turns; moved to the final
+  response step. Verified live on both concepts.
+- D4 (`b4409bb`) — carnot general-illustration grid called "the motion graph"; general
+  illustrations are now "the figure". Verified live.
+Not fixed (model-written prose or documented owner policy): wrong answers to model-invented
+questions below GUIDE go uncorrected (the guard's recorded "undo" decision); correct transfer
+answers not always confirmed; mirror mis-paraphrases; recap after a budget close.

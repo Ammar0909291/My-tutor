@@ -235,3 +235,181 @@
   real components on the dev harness plus offline runs of the real modules.
 
 
+
+## 2026-09-24 — Visual architecture hardening (commit 9a2e2da + QA harness)
+
+Forensic audit + fix of the visual decision path. Changes:
+- **Retirement lifecycle by asset, not by concept.** `retired.ts` keeps all 25
+  `RETIRED_VISUAL_BINDINGS` rows (evidence) and adds `RETIRED_ASSET_FINGERPRINTS`
+  (content fingerprints of every asset each tier offered at retirement). Tier −1 in
+  `resolveVisual` now refuses only a retired asset or a broad (domain-default /
+  generator-default) one; a concept-authored asset with new content is served with no
+  edit to `retired.ts`. `fingerprint.ts` is the single `figureFingerprint` definition.
+- **No wrong-domain fallback.** `DOMAIN_CARD_HOME` + `domainRuleIsFaithful`: a domain
+  rule whose card does not belong to that domain yields no figure (only one existed:
+  `bio.cell → food_chain`, row kept, now refused).
+- **Scene representation** falls back to the exact binding or the scene type, never an
+  unrelated domain card (18 `bio.cell` scenes were labelled `food_chain`).
+- **One source of "what can be shown".** route.ts derives `availableVisual`/`allowed`
+  only from the V2 decision; legacy keyword detection no longer feeds the prompt.
+- **Honest served state.** `turnRecord.ts` → one `[learn/chat] VISUAL_TURN=` log per turn
+  (tier, assetId, representation, scope, reason, generationSpent, served-from-response,
+  onScreen, heldTurns); TURN_EVENT `visualServed` now reads the response, not the decision.
+- Invariants: `visualArchitectureInvariants.test.ts` (50), `visualRetirementLifecycle.test.ts`.
+  Full suite 714/714 files, 14,761 passed; tsc 0; build OK. Census unchanged except the
+  18 representation labels (1866 concepts, 517 graphical, 25 retired no-figure).
+
+Production QA (`scripts/qa/visualArchitectureProductionQa.ts`, disposable account, deleted,
+deployment dpl_2vtJEr9vSsxtPAmdo4xr6PnyC1Ng): 21/21 chat turns — response fields,
+`VISUAL_TURN` and TURN_EVENT `visualServed` agree (10 served / 11 not). Tier 0 concept
+(apoptosis, process), Tier 0 kind (projectile), Tier 1 curated (particle-in-box), Tier 1
+domain (limits), Tier 2 approved (stoichiometry), Tier 3 cache hit ×2 with
+generationSpent=false (specific-heat), retired lc-circuits → no figure + "I don't have a
+picture", retired reflection → retired mirror scene not served (a Tier-3 generated graph was),
+replaced cell-cycle → replacement scene. English path skipped (wrong concept id in harness).
+Remaining, non-blocking: telemetry `representation` for a domain card still carries the
+inferred label (`motion_graph` for math.calc.limits; learner prose already says "figure");
+an approved Tier-2 figure is unreachable for a concept that has a domain default (fix needs a
+per-turn DB read — egress); legacy `detectVisual` still computed for telemetry only.
+
+## 2026-09-24 — Visual lifecycle finalization (commit e09200f)
+
+Closed the two ambiguities the hardening pass left open.
+- **Retirement = retire an ARTIFACT (Option 1), now enforced on every tier.** Evidence it
+  was always the meaning: the register was applied only inside `buildDecision()` (sync
+  tiers) and the async approved/generated tiers ran on its no-figure result from the start;
+  `qa-and-mastery-fixes.md` names "a human-reviewed promoted VISUAL asset or generation
+  enablement" as the remedy for a retired concept; PHASE6 P2 §5 gives generation its own
+  semantic gate (the critic). The gap closed: `serve()` (approved + generated) now refuses
+  a retired artifact by content fingerprint (`no-figure:retired-asset`), and any serve()
+  refusal of a generated figure now corrects the served ledger. No register row removed
+  (25 remain). Documented in `retired.ts` "WHAT RETIREMENT MEANS".
+- **Approved beats a subject-wide card (precedence by specificity).** Evidence: approved
+  figures are "reviewed content, in the same class as a curated binding" (this file,
+  2026-08-10); a domain-default card is a general illustration (scope 'domain'). Exact
+  curated cards and Tier 0 scenes still win; a subject-wide card is never replaced by a
+  generated figure. Measured before changing: 367 concepts resolve to a subject-wide card;
+  production has 10 ACTIVE visual assets, 0 of them on those 367 (latent defect, no
+  production concept changes behaviour today).
+- **No per-turn DB read added.** `hasActiveVisualFigure` is an in-process index (one
+  conceptId-only `findMany` of ACTIVE VISUAL rows per lambda per 10 min; unreadable → empty
+  for 60 s, card kept). `findActiveVisualFigure` is read only for a subject-wide concept the
+  index lists (0 today).
+- `VISUAL_TURN` gains `retirement` (none|suppressed|replacement) and `cacheHit`.
+- Tests: `visualLifecycleFinalization.test.ts` (23; 4 fail against the previous resolver).
+  Full suite 715/715 files, 14,784 passed, 9 skipped; tsc 0; build OK.
+- **Production QA (deployment dpl_B1ny6RQVYqBZizPJgfFmserdAGTk, disposable account, deleted).**
+  25 chat turns across 12 paths incl. two REAL English concepts (`eng.phonics.blending-segmenting`
+  → tier2-approved served; `eng.grammar.word-classes-overview` → honest "I don't have a picture",
+  `no-figure:deadline-before-generation` then `declined-cached`). Response fields, `VISUAL_TURN`
+  and TURN_EVENT `visualServed` agree on all 25 (11 served / 14 not). `retirement` observed live:
+  lc-circuits `suppressed` (reason from a later tier), reflection `replacement` (tier3 cached).
+  The approved-beats-subject-wide path has no production concept (measured 0) so it is proven by
+  tests only; math.calc.limits kept its card (index says none).
+- **Defect found by the QA and fixed (follow-up commit):** a critic-reject retry on an explicit
+  request makes a provider call, but `generationSpent` was taken from the first (cached) result,
+  so VISUAL_TURN logged `generationSpent=false` and the per-session generation budget never
+  counted the retry (lc-circuits: `no-figure:retry-structurally-invalid`). Now counted.
+
+## 2026-09-24 — Biology: bio.mol.dna-replication gets a replication-fork figure
+
+The concept was served the `dna_structure` kind default (a static Watson-Crick ladder with a
+GC-content label; `scope.ts` had demoted it: "no replication fork"). It now owns an authored
+figure, `sceneGenerators/dnaReplication.pure.ts`, registered in `CONCEPT_SCENES` — the same
+mechanism as the 18 bio.cell scenes; no resolver, retirement or precedence change. Content is
+drawn only from the KG description and the concept's EB entry (which prescribes "a replication
+fork with both template strands' 5′/3′ ends labelled"): helicase at the fork, antiparallel
+templates with 3′/5′ ends, one primer + continuous leading strand growing toward the fork,
+Okazaki fragments built away from the fork each with a primer (oldest primer already replaced),
+DNA polymerase, primase, ligase at a nick, "semiconservative". Nothing outside the concept
+(no topoisomerase / SSB / clamp). Fitted to the tutor contract's caps (6 stages, 14 texts —
+`visualSemantics.ts`) so every text drawn is one the tutor is told about; passes the
+`layout.ts` authoring gate at desktop/tablet/mobile and a Chromium render with measured label
+boxes (390px, 1280px). Registry row untouched (`dna_structure` stays bound and its shared
+instance unchanged); the `INSUFFICIENT_FOR_CONCEPT` verdict and the B2 "requires authoring"
+entry were removed as their documented exit; two ledger counts updated with the reason (override
+table 56 → 57, authoring queue 48 → 47). Tests: `dnaReplicationVisual.test.ts`.
+Production QA (`scripts/qa/dnaReplicationProductionQa.ts`, two disposable accounts, both deleted;
+deployments dpl_5noHraz3295k6ZW6jZVdENGc7Aad then dpl_J9YwkHWTVA2k8LUHPHNfp9vELPXy): the fork
+figure served on the normal turn, the explicit request and the diagram follow-up, held on the plain
+turn; no base-pairing ladder, no food chain; bio.mol.transcription afterwards got no figure (no
+leakage). VISUAL_TURN matched the response on all 10 turns of each run. Run 1 found the tutor
+saying Okazaki fragments are extended "toward the fork" with the next primer "further back" —
+stage 5's narration now states the direction and primer order outright (26f8e6a); run 2's
+follow-up and plain turns state it correctly. Open, model prose only: the tutor still embellishes
+the figure's appearance ("little motor", "orange block" for the helicase dot) despite the
+contract's rule against naming unlisted colours/shapes; ASCII-art remnants on no-figure turns
+(transcription, nucleic-acid-structure, photosynthesis) are the known-open defect.
+
+## 2026-09-24 — Tutor output fixes + learner pilot on four real owner accounts
+
+Commits `9260d77` (output fixes: no-figure remnants, scene colour fidelity, lesson-opening
+parity, `stripPhantomVisualClaims` paragraph-flattening bug, verifier evidence logging) and
+`d6750dc` (pilot findings). Harness: `scripts/qa/learnerPilot.ts` (credentials via env only).
+
+**Pilot run 1** (8 lessons, 4 accounts, deployment with `9260d77`): only **2/8 reached verified
+mastery** (eng.grammar.verbs, phys.wave.interference). Root cause of most failures, from
+TURN_EVENT logs: a willing learner's repeated "ok i get it, can you test me?" was classified
+DISTRESS (`recoveryGuard.isRepeatedAnswer` → 'frustrated'; "test me" was not a recognised
+next-item request), so arbitration refused the authored probe; the model's own MCQ was dropped
+and its lead-in ("Sure, let's check your understanding with a quick multiple-choice question.")
+shipped with no question, 4 turns running, until the lesson closed unmastered. Also: a fenced
+drawing made of arrow glyphs + "The arrow highlights…" on a no-figure turn; phoneme notation
+stripped from a phonics lesson ("three sounds —   .").
+
+**Fixes (`d6750dc`)**: "test/quiz/check me" is a next-item request (positive evidence);
+unkept check announcements are dropped when the reply asks nothing; the final-response
+fallback is the concept's KG description, not the content-free hold; arrow-glyph fences and
+arrow-subject pointers removed on no-figure turns (emptied reply → KG fallback, chat and
+lesson-init); beginner IPA strip skipped on eng.phonics/phonetics.
+
+**Pilot run 2** (the 4 failed lessons, same accounts, deployment `dpl_CopQvQGpR5S4HhuWikc9EjCBVndQ`):
+**3/4 now reach verified mastery** (nouns, blending-segmenting, nernst); stoichiometry reached
+PRACTICE 1/0 at the harness's 14-turn cap and was not closed early. Overall after fixes:
+5 of the 8 pilot lessons mastered.
+
+**Open** (next session): "Let's stay with this idea for a moment." still ships from the
+gate-internal strip of an ungradeable model question (`gateAssessment.ts`, the
+`WITHHELD_QUESTION_CONTINUATION` sites, ~L376–L600) — needs the concept's context threaded in
+so it can fall back to the KG description like the final-response site; the KG-description
+fallback reads robotically (syllabus phrasing); model-invented ("unkeyed") MCQs still appear
+in counting phases; the tutor still invents figure shapes ("little motor").
+**Pilot run 3** (loop step L2, `2935762` live as `dpl_2AUZmqyp36KL8Ub9N2Z6sRL3vtCX`, suaibamr4,
+20-turn cap): "Let's stay with this idea for a moment." appeared **0 times in 27 turns** (was 5 in
+run 2). eng.grammar.pronouns **mastered** (1/2 verified). chem.found.stoichiometry closed
+unmastered at turn 12 by the per-concept budget ("Let's pause…"), not the harness cap; most of its
+questions were model-invented (not in the seed corpus), which the harness answers blindly, so this
+lesson is not a clean product signal — needs a real learner. One new remnant, "This simple layout
+shows…", fixed in the follow-up commit (adjectives allowed before "layout"). Running tally over the
+pilot: 7 of 9 distinct lessons reached verified mastery at least once after the fixes.
+
+## 2026-09-24 — Acting as a real student (owner accounts, reasoning each answer, no answer key)
+
+Driven turn by turn with `scripts/qa/studentTurn.ts` (reads each reply before answering; no script,
+no key). Lessons: chem.found.stoichiometry (suaibamr4), phys.therm.calorimetry (suaibamr1).
+
+What a student actually experienced — good: clear analogies (mole = "chemistry's dozen"), the
+approved stoichiometry figure and the calorimetry scene served and described with labels that are
+really on them; a wrong limiting-reagent answer got a real correction.
+
+Defects found (★ = fixed this session):
+- ★ Typed numeric answers never graded: option "84 000 J" was read as leading value 84, so "84000 J"
+  and "0.5 x 4200 x 40 = 84000 J" resolved to nothing. `mcq.ts` now folds digit groups on both
+  sides (corpus sweep: 18,398 option taps, misattributed 0 -> 0, unresolved 4 -> 4).
+- ANSWER LEAK before the question (assessment integrity): the tutor solved "3.0 mol H₂ -> 3.0 mol
+  H₂O" and then served that exact MCQ; defined "limiting reactant" two sentences before a
+  fill-in-the-blank asking for that word. The gate probe is visible to the model when it writes.
+- AUTHORED POOL EXHAUSTED WITHIN ONE ATTEMPT: after one wrong answer at PRACTICE the learner dropped
+  to CHECK, spent the pool there, and at PRACTICE 2/0 no gradeable question existed
+  (`authored-pool-exhausted`); three explicit "give me a practice question" requests got a memory
+  summary / a paraphrase instead. Mastery unreachable after a single mistake when the pool is small.
+  Proposed fix (needs owner G1/G2 approval — changes probe selection): record missed probes in
+  TeachingHistory and, only once the pool is spent, re-serve a probe the learner got WRONG.
+- Feedback mismatches: "Correct — well done. I see you identified 'N₂'…" after the learner answered
+  "limiting"; a correct tap answered with "So you're saying … Is that correct?"; "Here is your next
+  question." with no word on the previous answer; the model's arithmetic slip "12 eggs ÷ 1 egg per
+  dozen = 12 dozens" (self-corrected when challenged, attributed to the learner).
+- Calorimetry: "Q_lost = −Q_gained" sign slip; a follow-up asked to "substitute the known mass and
+  specific heat of the block" when none was given; a model-invented MCQ whose correct option was the
+  learner's own previous sentence.
+- Authoring: a correct option that is a full paragraph beside a one-line distractor (length cue).

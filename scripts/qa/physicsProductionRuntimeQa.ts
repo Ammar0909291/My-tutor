@@ -32,7 +32,7 @@
  * Run: npx tsx scripts/qa/physicsProductionRuntimeQa.ts [--only=<conceptId>] [--delete]
  */
 import { writeFileSync } from 'node:fs'
-import { createQaAccount, deleteQaAccount, BASE } from './liveAccount'
+import { createQaAccount, deleteQaAccount, login, BASE } from './liveAccount'
 import type { SeedProbe } from '../../src/lib/teaching/assets/brainSeedAssets'
 import { SEED_PROBES } from '../../src/lib/teaching/assets/brainSeedAssets'
 import { AUTHORED_PROBES } from '../../src/lib/teaching/assets/authoredSeedAssets'
@@ -65,7 +65,7 @@ function lookup(question: string): SeedProbe[] {
   return CORPUS.filter((p) => { const s = norm(p.stem); return s.length > 30 && (q.includes(s) || s.includes(q)) })
 }
 
-type AnswerIntent = 'correct' | 'misconception' | 'wrong' | 'ambiguous' | 'partial' | 'numeric-typed'
+type AnswerIntent = 'correct' | 'misconception' | 'wrong' | 'ambiguous' | 'partial' | 'numeric-typed' | 'numeric-bare' | 'lead-wrong'
 
 function correctChoice(p: SeedProbe) { return p.choices?.find((c) => c.isCorrect)?.text }
 function wrongChoice(p: SeedProbe, preferMisconception: boolean) {
@@ -154,11 +154,72 @@ const PLANS: Plan[] = [
     answers: ['misconception', 'numeric-typed', 'correct'],
     transfer: 'bicycle dynamo spin more fast, the light is more bright? why?',
     maxTurns: 16 },
+  { conceptId: 'phys.wave.doppler-effect',
+    question: 'ambulance sound change when it pass me. the ambulance change its sound?',
+    answers: ['misconception', 'lead-wrong', 'correct'],
+    visualRequest: 'can you show me picture of the waves from the ambulance please',
+    transfer: 'if i run to the ambulance, i hear higher or lower sound? why',
+    maxTurns: 16 },
   { conceptId: 'phys.mod.photoelectric-effect',
     question: 'if light is more bright the electron come out more fast right?',
     answers: ['misconception', 'correct', 'wrong'],
     transfer: 'red light very very strong on zinc, electron come out? zinc work function is 4.3 eV',
     maxTurns: 16 },
+]
+
+// SECOND PASS (--pass2): aimed at the three defects fixed on 2026-09-24.
+const PASS2_PLANS: Plan[] = [
+  { conceptId: 'phys.mech.newtons-second-law',
+    question: 'i not good in physics. what is F in F = ma, only my push?',
+    answers: ['numeric-bare', 'lead-wrong', 'numeric-bare', 'numeric-bare', 'correct'],
+    transfer: 'box 10 kg, push 30 N, friction 10 N. acceleration is 2 m/s2 right?',
+    maxTurns: 16 },
+  { conceptId: 'phys.mech.projectile-motion',
+    question: 'why the ball go curve? i think gravity pull it also sideway no?',
+    answers: ['misconception', 'lead-wrong', 'numeric-bare'],
+    transfer: 'if i throw ball same speed but on the moon, it go more far or less far? why',
+    maxTurns: 16 },
+  { conceptId: 'phys.mod.photoelectric-effect',
+    question: 'if light is more bright the electron come out more fast right?',
+    answers: ['misconception', 'wrong', 'lead-wrong', 'wrong', 'correct'],
+    transfer: 'red light very very strong on zinc, electron come out? zinc work function is 4.3 eV',
+    maxTurns: 18 },
+]
+
+// HARD PASS (--hard): five of the most difficult physics concepts, each with a
+// bound figure, driven with a visual request on every one.
+const HARD_PLANS: Plan[] = [
+  { conceptId: 'phys.qm.quantum-tunneling', question: 'how electron go through wall if it not have enough energy? it is magic?',
+    answers: ['misconception', 'numeric-bare', 'lead-wrong', 'correct'],
+    visualRequest: 'please show me picture of the wave going through the barrier',
+    transfer: 'if barrier become two times more thick, tunnelling become two times less? or more less?', maxTurns: 16 },
+  { conceptId: 'phys.qm.particle-in-box', question: 'why particle in box cannot have zero energy? i dont understand',
+    answers: ['misconception', 'numeric-bare', 'correct', 'lead-wrong'],
+    visualRequest: 'can you show picture of the waves inside the box',
+    transfer: 'if box become two times bigger, the energy of level 1 is how much? half?', maxTurns: 16 },
+  { conceptId: 'phys.mech.keplers-laws', question: 'planet go more fast when near sun? why? the sun pull more?',
+    answers: ['misconception', 'numeric-bare', 'correct', 'lead-wrong'],
+    visualRequest: 'show me picture of the orbit please',
+    transfer: 'a planet is 4 times far from sun than earth. its year is how many earth years? i think 8', maxTurns: 16 },
+  { conceptId: 'phys.em.lc-circuits', question: 'in LC circuit where the energy go? it disappear and come back?',
+    answers: ['misconception', 'numeric-bare', 'lead-wrong', 'correct'],
+    visualRequest: 'please draw the circuit for me',
+    transfer: 'if i make capacitor 4 times bigger, frequency become half? right?', maxTurns: 16 },
+  { conceptId: 'phys.therm.carnot-cycle', question: 'carnot engine can be 100% efficient if very good engine?',
+    answers: ['misconception', 'numeric-bare', 'lead-wrong', 'correct'],
+    visualRequest: 'can you show me the carnot cycle graph',
+    transfer: 'engine work between 600 K and 300 K. maximum efficiency is 50%?', maxTurns: 16 },
+]
+
+// NUMERIC PASS (--numeric): every answer typed as a weak-English learner types a
+// value — bare number or "i think <number> <unit without superscripts>".
+const NUMERIC_PLANS: Plan[] = [
+  { conceptId: 'phys.therm.specific-heat', question: 'how i calculate the heat? which formula?',
+    answers: ['numeric-bare', 'numeric-bare', 'numeric-bare', 'numeric-bare', 'numeric-bare'],
+    transfer: '2 kg water, heat it 10 C more, how much joule? i think 83720 J', maxTurns: 14 },
+  { conceptId: 'phys.em.ohms-law', question: 'how i find resistance if i know volt and amp?',
+    answers: ['numeric-bare', 'numeric-bare', 'numeric-bare', 'numeric-bare', 'numeric-bare'],
+    transfer: 'lamp 230 V and 0.5 A, resistance is 460 ohm right?', maxTurns: 14 },
 ]
 
 const NUDGES = [
@@ -268,6 +329,17 @@ async function drive(cookie: string, lessons: CurriculumLesson[], plan: Plan) {
     } else if (intent === 'partial') {
       const c = correctChoice(probe) ?? ''
       msg = `because of the ${c.split(/[—,;(]/)[0].split(' ').slice(0, 3).join(' ')} ... i not know how to say rest`
+    } else if (intent === 'numeric-bare') {
+      // the value as a weak-English learner types it: no superscripts, no unit symbols
+      const q = leadingQuantity(correctChoice(probe))?.match(/^-?[\d.]+/)?.[0]
+      if (q) msg = Math.random() < 0.5 ? q : `i think ${q} ${(leadingQuantity(correctChoice(probe)) ?? '').replace(/^-?[\d.]+\s*/, '').replace(/²/g, '2').replace(/³/g, '3')}`.trim()
+      else { msg = correctChoice(probe) ?? opts[0]; effective = 'correct' }
+      if (q) effective = 'numeric-typed'
+    } else if (intent === 'lead-wrong') {
+      // only the answer half of a wrong option ("Toward the normal")
+      const w = (probe.choices ?? []).find((c) => !c.isCorrect && c.text.includes(' — '))
+      msg = w ? w.text.split(' — ')[0] : (wrongChoice(probe, false)?.text ?? 'i dont know')
+      effective = 'wrong'
     } else if (intent === 'numeric-typed') {
       const q = leadingQuantity(correctChoice(probe))
       if (q) msg = `answer is ${q} i think`
@@ -289,6 +361,10 @@ async function drive(cookie: string, lessons: CurriculumLesson[], plan: Plan) {
     if ((effective === 'correct' || effective === 'numeric-typed') && probe && rec.after <= rec.before) {
       note(`${plan.conceptId} T${turn}: correct (${effective}) answer did not move counters (${rec.before}->${rec.after}, phase ${rec.phaseBefore}->${rec.phaseAfter}) — "${short(msg, 60)}" — tutor: "${short(p.text, 140)}"`)
     }
+    if ((effective === 'wrong' || effective === 'misconception') && probe && rec.phaseBefore && ['GUIDE', 'CHECK', 'PRACTICE'].includes(rec.phaseBefore)
+      && !/^not quite/i.test((p.text ?? '').trim()) && !/\b(not quite|not right|incorrect|the answer is)\b/i.test(p.text ?? '')) {
+      note(`${plan.conceptId} T${turn}: wrong answer at ${rec.phaseBefore} got no stated verdict — "${short(p.text, 140)}"`)
+    }
     if (effective === 'misconception' && probe && /\b(correct|exactly right|well done|that'?s right)\b/i.test((p.text ?? '').slice(0, 80))) {
       finding(`${plan.conceptId} T${turn}: tutor PRAISED a misconception answer — "${short(p.text, 160)}"`)
     }
@@ -306,11 +382,17 @@ async function main() {
   const doDelete = process.argv.includes('--delete')
   const out = process.env.QA_OUT ?? 'physics-qa-run.json'
   console.log(`Physics production runtime QA — BASE=${BASE}`)
-  const acct = await createQaAccount('phys-runtime')
+  // A REAL account may be driven instead of a disposable one: credentials come
+  // ONLY from the environment of this one invocation, are never written or
+  // logged, and such an account is never deleted by this script.
+  const realEmail = process.env.QA_EMAIL
+  const acct = realEmail
+    ? { email: realEmail, password: process.env.QA_PASSWORD ?? '', name: 'real', cookie: await login(realEmail, process.env.QA_PASSWORD ?? '') }
+    : await createQaAccount('phys-runtime')
   console.log(`account=${acct.email}`)
   // Disposable QA credentials only, written OUTSIDE the repo so the account can
   // be deleted after the DB cross-check (the evidence cascades on delete).
-  if (process.env.QA_CREDS) writeFileSync(process.env.QA_CREDS, JSON.stringify({ email: acct.email, password: acct.password }))
+  if (process.env.QA_CREDS && !realEmail) writeFileSync(process.env.QA_CREDS, JSON.stringify({ email: acct.email, password: acct.password }))
   const results: unknown[] = []
   try {
     const cur = await api(acct.cookie, '/api/curriculum?subject=physics')
@@ -318,7 +400,8 @@ async function main() {
     console.log(`curriculum: ${lessons.length} physics lessons`)
     const foreignLessons = lessons.filter((l) => !l.topicSlug.startsWith('phys.'))
     if (foreignLessons.length) finding(`physics curriculum contains ${foreignLessons.length} non-physics topicSlugs: ${foreignLessons.slice(0, 5).map((l) => l.topicSlug).join(', ')}`)
-    for (const plan of PLANS.filter((pl) => !only || pl.conceptId === only)) {
+    const plans = process.argv.includes('--pass2') ? PASS2_PLANS : process.argv.includes('--numeric') ? NUMERIC_PLANS : process.argv.includes('--hard') ? HARD_PLANS : PLANS
+    for (const plan of plans.filter((pl) => !only || only.split(',').includes(pl.conceptId))) {
       try { results.push(await drive(acct.cookie, lessons, plan)) }
       catch (e) { finding(`${plan.conceptId}: run aborted — ${(e as Error).message}`) }
     }
@@ -339,7 +422,7 @@ async function main() {
     console.log(`\nFINDINGS (${findings.length})`); findings.forEach((f, i) => console.log(`  ${i + 1}. ${f}`))
     console.log(`\nNOTES (${notes.length})`); notes.forEach((f, i) => console.log(`  ${i + 1}. ${f}`))
     console.log(`\nACCOUNT: ${acct.email}  transcript: ${out}`)
-    if (doDelete) console.log(`delete: ${JSON.stringify(await deleteQaAccount(acct))}`)
+    if (doDelete && !realEmail) console.log(`delete: ${JSON.stringify(await deleteQaAccount(acct))}`)
   }
 }
 

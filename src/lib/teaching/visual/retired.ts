@@ -12,10 +12,27 @@
  * CONCEPT_VISUALS, DOMAIN_VISUALS or CONCEPT_SCENES: those tables stay intact
  * so the binding remains visible, reviewable and reversible, and so a later
  * milestone can replace an entry with a faithful figure rather than having to
- * rediscover that one was ever wanted. The register is consulted BEFORE any
- * tier in buildDecision(), so a retired concept cannot be picked up by a
+ * rediscover that one was ever wanted. buildDecision() judges every tier's
+ * asset against this register, so a retired concept cannot be picked up by a
  * curated row, a domain-prefix rule, a scene generator, or anything else — it
- * yields NO FIGURE, which M1 already established as a successful outcome.
+ * yields NO FIGURE, which M1 already established as a successful outcome —
+ * until a genuinely new, concept-authored figure exists, which is then served
+ * with no edit here (see "THE LIFECYCLE" below).
+ *
+ * WHAT RETIREMENT MEANS (settled 2026-09-24): an ARTIFACT is retired, not the
+ * concept. Every tier refuses a retired artifact — the synchronous tiers here
+ * and in buildDecision(), the APPROVED and GENERATED tiers in
+ * resolveVisualForTurn's serve() — and the broad rules (domain-prefix cards,
+ * shared generator defaults) are refused for a retired concept outright. A
+ * figure OF the concept with content the retirement never saw — an authored
+ * replacement, a human-approved figure, or a generated figure that passed
+ * structural validation and the critic — may serve. Evidence this was always
+ * the meaning: the register was applied only inside buildDecision() (the
+ * synchronous tiers), the async tiers ran on its no-figure result from the
+ * start, and the recorded remedy for a retired concept was "a human-reviewed
+ * promoted VISUAL asset or generation enablement" (docs/history/
+ * qa-and-mastery-fixes.md). No row here is ever removed because a
+ * replacement exists: the row is the evidence.
  *
  * The bar for entry is deliberately high: not "generic", not "thin", not
  * "could be better" — the asset must depict a DIFFERENT thing, such that a
@@ -73,46 +90,31 @@ export const RETIRED_VISUAL_BINDINGS: Readonly<Record<string, string>> = {
     'Rendered a perfect FCC lattice. Amorphous solids are defined by the ABSENCE of ' +
     'long-range order, so the figure asserts the opposite of the concept.',
 
-  // ── biology: the bio.cell domain rule ───────────────────────────────────
-  // Every concept under bio.cell inherited the FOOD CHAIN card — ecosystem-level
-  // energy flow — for subcellular topics. (bio.cell.mitosis and bio.cell.meiosis
-  // are NOT retired: both have their own faithful cell-division scenes.)
-  'bio.cell.cell-theory':             'Rendered a food chain (ecosystem energy flow) for a subcellular concept.',
-  'bio.cell.prokaryotic-cell':        'Rendered a food chain; no cell structure is depicted.',
-  'bio.cell.eukaryotic-cell':         'Rendered a food chain; no cell structure is depicted.',
-  'bio.cell.cell-membrane-transport': 'Rendered a food chain; no membrane or transport mechanism is depicted.',
-  'bio.cell.nucleus-chromosomes':     'Rendered a food chain; no nucleus or chromosome is depicted.',
-  'bio.cell.mitochondria-energy':     'Rendered a food chain. Cellular respiration and ecosystem energy flow are different scales entirely.',
-  'bio.cell.chloroplast-structure':   'Rendered a food chain; no chloroplast structure is depicted.',
-  'bio.cell.endomembrane-system':     'Rendered a food chain; no organelle system is depicted.',
-  'bio.cell.cytoskeleton':            'Rendered a food chain; no cytoskeletal filament is depicted.',
-  'bio.cell.cell-cycle':              'Rendered a food chain; the cycle phases are not depicted.',
-  'bio.cell.cell-signalling':         'Rendered a food chain; no receptor or signalling cascade is depicted.',
-  'bio.cell.apoptosis':               'Rendered a food chain; programmed cell death is not depicted.',
-
-  // ── biology: the bio.cell domain rule, six more found by the 2026-09-24
-  // Biology visual coverage inventory ─────────────────────────────────────
-  // These six concepts were authored after the sweep above and were never
-  // audited against it — the read-only inventory ran the real resolver
-  // (lookupConceptVisualBinding) over all 199 current Biology KG concepts and
-  // found each still inheriting the same 'bio.cell' -> food_chain domain
-  // default the twelve concepts above were already retired for. Same defect,
-  // same evidence shape, same remedy: the food chain card depicts trophic
-  // energy flow between organisms, never anything at the subcellular scale
-  // these six concepts teach.
-  'bio.cell.anaerobic-respiration-fermentation':
-    'Rendered a food chain; no fermentation pathway or anaerobic respiration process is depicted.',
-  'bio.cell.cancer-biology-hallmarks':
-    'Rendered a food chain; none of the hallmarks of cancer (uncontrolled division, evaded apoptosis, ' +
-    'invasion) are depicted.',
-  'bio.cell.cell-adhesion-tissue-organization':
-    'Rendered a food chain; no cell junction or tissue-level organisation is depicted.',
-  'bio.cell.cell-junctions-extracellular-matrix':
-    'Rendered a food chain; no junction structure or extracellular matrix is depicted.',
-  'bio.cell.cytoskeleton-motility':
-    'Rendered a food chain; no cytoskeletal filament or motility mechanism is depicted.',
-  'bio.cell.membrane-transport-energetics':
-    'Rendered a food chain; no membrane transport mechanism or its energetics is depicted.',
+  // ── biology: the bio.cell domain rule — RESOLVED (2026-09-24) ────────────
+  // The 18 bio.cell concepts formerly listed here (the original 12, plus 6
+  // more found by the 2026-09-24 Biology visual coverage inventory) all
+  // inherited the FOOD CHAIN card — ecosystem-level energy flow — for
+  // subcellular topics. Per this file's own documented lifecycle ("a later
+  // milestone can replace an entry with a faithful figure rather than having
+  // to rediscover that one was ever wanted"), each of the 18 now has its own
+  // concept-specific Tier 0 scene (src/lib/teaching/visual/conceptSceneParams.ts
+  // CONCEPT_SCENES — buildCellStructureScene / buildCellPathwayScene /
+  // buildCellHubScene / buildCellComparisonScene, plus buildTimelineScene for
+  // the one historical concept), so the entries were removed rather than left
+  // as unreachable dead suppressions: Tier 0 is checked BEFORE Tier 1's
+  // domain-default lookup in buildDecision(), so food_chain is now
+  // structurally unreachable for all 18 regardless of whether an entry exists
+  // here — verified by resolveVisual() itself before this removal (leaving the
+  // retirement in place made the new Tier 0 scene provably unreachable,
+  // producing 'no-figure:retired-binding' instead of the new figure). The
+  // mechanism itself — RETIRED_VISUAL_BINDINGS, isRetiredVisualBinding(),
+  // retirementReason(), and its priority over every tier — is unchanged;
+  // only the 18 data rows whose underlying defect is now fixed were removed.
+  // bio.cell.mitosis and bio.cell.meiosis were never listed here at all, for
+  // the identical reason: they already had faithful Tier 0 scenes. Full
+  // per-concept design rationale lives as the doc-comment directly above the
+  // eighteen new CONCEPT_SCENES entries in conceptSceneParams.ts, and in
+  // this commit's own message.
 
   // ══ VISUAL SEMANTIC MOAT SWEEP (physics + chemistry) ════════════════════
   //
@@ -224,8 +226,8 @@ export const RETIRED_VISUAL_BINDINGS: Readonly<Record<string, string>> = {
 /**
  * Is this concept's visual binding retired?
  *
- * Consulted before every tier, so retirement cannot be undone by falling
- * through to a broader rule.
+ * A retired concept refuses its retired assets and every broad rule; only a
+ * concept-authored replacement can serve (retiredAssetVerdict).
  */
 export function isRetiredVisualBinding(conceptId: string | null | undefined): boolean {
   if (!conceptId) return false
@@ -235,4 +237,91 @@ export function isRetiredVisualBinding(conceptId: string | null | undefined): bo
 /** The audit evidence for a retired binding, for provenance and logging. */
 export function retirementReason(conceptId: string): string | null {
   return RETIRED_VISUAL_BINDINGS[conceptId] ?? null
+}
+
+// ── THE LIFECYCLE: RETIRE THE ASSET, NOT THE CONCEPT ───────────────────────
+//
+// THE DEFECT THIS CLOSES. Retirement used to be keyed by concept alone and
+// checked before every tier, so it could not tell "the figure we found wrong"
+// from "the correct figure authored afterwards". Commit 1f829c0 authored 18
+// faithful bio.cell scenes and they were dead code until someone remembered to
+// delete the 18 matching rows above by hand (verified then: resolveVisual still
+// returned `no-figure:retired-binding` with the new scene already building).
+// Keying on concept alone cannot be fixed by "concept-authored beats
+// retirement" either: phys.opt.reflection's RETIRED figure is itself a
+// concept-authored scene.
+//
+// So retirement now names the retired ASSETS, by content fingerprint — every
+// asset a tier offered for the concept at the moment it was retired (captured
+// from the live resolver, 2026-09-24). A retired concept therefore has three
+// states, all derived, none remembered by a developer:
+//
+//   RETIRED            every asset on offer is a retired one        -> no figure
+//   REPLACED           a concept-authored asset with NEW content is
+//                      offered (a new CONCEPT_SCENES entry, a re-pointed
+//                      curated row)                                  -> served
+//   (never)            a broad rule — a domain-prefix card or a shared
+//                      generator kind's default instance — for a
+//                      retired concept                               -> refused
+//
+// The bad figure cannot come back under any id (its content is what is
+// recorded), a broad rule cannot re-pick the concept, and a real replacement
+// needs no edit here. `visualRetirementLifecycle.test.ts` keeps this table and
+// RETIRED_VISUAL_BINDINGS in lock-step and reports which rows are REPLACED.
+export const RETIRED_ASSET_FINGERPRINTS: Readonly<Record<string, readonly string[]>> = {
+  'phys.mech.rolling-motion': ['fdc3ee668'], // card:three_circular_motion
+  'phys.mech.keplers-laws': ['f3ccc74b7', 'f1f29e6b2'], // scene:gravitation-5.97e+24-7000000 + card:force_diagram
+  'phys.opt.reflection': ['fb50d48ca', 'f1f29e6b2'], // scene:ray-optics-concave_mirror-30-10 + card:force_diagram
+  'phys.em.wheatstone-bridge': ['fcd558030'], // card:circuit_diagram
+  'phys.em.potentiometer': ['fcd558030'], // card:circuit_diagram
+  'phys.em.rc-circuits': ['fcd558030'], // card:circuit_diagram
+  'phys.em.self-inductance': ['fcd558030'], // card:circuit_diagram
+  'phys.em.mutual-inductance': ['fcd558030'], // card:circuit_diagram
+  'phys.em.ac-basics': ['fcd558030'], // card:circuit_diagram
+  'phys.em.lc-circuits': ['fcd558030'], // card:circuit_diagram
+  'chem.found.states-of-matter': ['ffdc76ff'], // card:three_crystal_lattice
+  'chem.bond.ionic-bonding': ['f4a1f0cb9'], // card:three_bond_formation
+  'chem.bond.metallic-bonding': ['f4a1f0cb9'], // card:three_bond_formation
+  'chem.solid.amorphous': ['ffdc76ff'], // card:three_crystal_lattice
+  'chem.bond.mo-theory': ['f4a1f0cb9'], // card:three_bond_formation
+  'chem.bond.polar-molecules': ['f4a1f0cb9'], // card:three_bond_formation
+  'chem.bond.intermolecular': ['f4a1f0cb9'], // card:three_bond_formation
+  'chem.bond.resonance': ['f4a1f0cb9'], // card:three_bond_formation
+  'chem.bond.coordinate-bond': ['f4a1f0cb9'], // card:three_bond_formation
+  'chem.atomic.orbitals': ['ff29a2223'], // card:three_atomic_structure
+  'chem.atomic.quantum-mech-model': ['ff29a2223'], // card:three_atomic_structure
+  'chem.solid.defects': ['ffdc76ff'], // card:three_crystal_lattice
+  'cs.found.number-systems': ['fa1791b62'], // card:three_data_structure
+  'cs.algo.flowcharts': ['f5c9e4fe6'], // card:three_algorithm_visualization
+  'cs.algo.np-completeness': ['f5c9e4fe6'], // card:three_algorithm_visualization
+}
+
+/** Assets that are never concept-specific, so never a replacement. */
+const BROAD_PROVENANCE: ReadonlySet<string> = new Set(['domain-default', 'generator-default'])
+
+export type RetiredAssetVerdict =
+  /** The concept is not retired — nothing to decide. */
+  | 'not-retired'
+  /** The asset is (content-identical to) one that was retired. */
+  | 'retired-asset'
+  /** A domain-prefix or shared generator default: never a replacement. */
+  | 'broad-rule'
+  /** A concept-authored asset with content the retirement never saw. */
+  | 'replacement'
+
+/**
+ * May this asset be served for this concept, given its retirement record?
+ * Pure. `fingerprint` is the asset's payload fingerprint (fingerprint.ts).
+ */
+export function retiredAssetVerdict(
+  conceptId: string,
+  asset: { provenance: string; fingerprint: string },
+  table: Readonly<Record<string, readonly string[]>> = RETIRED_ASSET_FINGERPRINTS,
+): RetiredAssetVerdict {
+  if (!isRetiredVisualBinding(conceptId) && !Object.prototype.hasOwnProperty.call(table, conceptId)) {
+    return 'not-retired'
+  }
+  if ((table[conceptId] ?? []).includes(asset.fingerprint)) return 'retired-asset'
+  if (BROAD_PROVENANCE.has(asset.provenance)) return 'broad-rule'
+  return 'replacement'
 }

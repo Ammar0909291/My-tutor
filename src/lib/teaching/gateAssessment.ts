@@ -56,6 +56,7 @@
  */
 
 import { stripAuthoringLabel, containsOptionList } from './gateProbeContract'
+import { hasProseMultipleChoice } from './proseMcqGuard'
 import { askedAnswerableQuestion } from './answerableTurn'
 import type { TutorMCQ } from './mcq'
 
@@ -515,6 +516,12 @@ export interface UngradedGateQuestionInput {
    * keeps its exact prior behaviour.
    */
   learnerAcknowledged?: boolean
+  /**
+   * What to say instead of the content-free continuation when the withheld
+   * question leaves nothing (see conceptFallback.ts). Absent -> the original
+   * behaviour, byte-for-byte.
+   */
+  conceptFallback?: string
 }
 
 /** The route's own grade of the pending question, passed in, never derived. */
@@ -619,15 +626,22 @@ function withheldContinuation(
    *  branch below — a real grade already reports the outcome and must not
    *  have its wording second-guessed by what the ack detector also thinks. */
   learnerAcknowledged = false,
+  /** The concept's own words (conceptFallback.ts). When given, it replaces the
+   *  content-free continuation; after a real grade the grade stands alone. */
+  conceptFallback?: string,
 ): string {
+  const fallback = conceptFallback && conceptFallback.trim().length > 0 ? conceptFallback.trim() : null
   if (!justGraded || typeof justGraded.correct !== 'boolean') {
     if (questionFollows) return WITHHELD_QUESTION_HANDS_OFF_TO_MCQ
     if (learnerAcknowledged) return WITHHELD_QUESTION_ACK_CONTINUATION
-    return WITHHELD_QUESTION_CONTINUATION
+    return fallback ?? WITHHELD_QUESTION_CONTINUATION
   }
-  const tail = questionFollows ? WITHHELD_QUESTION_HANDS_OFF_TO_MCQ : WITHHELD_QUESTION_CONTINUATION
+  // Learner pilot, 2026-09-24: "That's right. Let's stay with this idea for a
+  // moment." — the grade is the content; the hollow tail is dropped when the
+  // caller supplied the concept (and kept otherwise, unchanged).
+  const tail = questionFollows ? WITHHELD_QUESTION_HANDS_OFF_TO_MCQ : (fallback ? '' : WITHHELD_QUESTION_CONTINUATION)
   if (justGraded.correct) {
-    return `That's right. ${tail}`
+    return tail ? `That's right. ${tail}` : "That's right."
   }
   const key = typeof justGraded.correctOptionText === 'string'
     ? justGraded.correctOptionText.trim()
@@ -647,9 +661,9 @@ function withheldContinuation(
   // already handled; terminal punctuation is the same class and was missed.
   // Authored option texts are written by hand across six subjects, so whether
   // one ends in a stop is not something this template can assume either way.
-  return key.length > 0 && !key.includes('?')
+  return (key.length > 0 && !key.includes('?')
     ? `Not quite — the answer was: ${endStopped(key)} ${tail}`
-    : `Not quite. ${tail}`
+    : `Not quite. ${tail}`).trim()
 }
 
 /** The key with exactly one terminal stop, never two and never none. */
@@ -778,7 +792,7 @@ export function withholdUngradedGateQuestion(
       return {
         // A tappable MCQ follows this text, so the fallback hands off to it
         // instead of stalling with the content-free hold sentence.
-        text: kept.length > 0 ? kept : withheldContinuation(input.justGraded, true),
+        text: kept.length > 0 ? kept : withheldContinuation(input.justGraded, true, false, input.conceptFallback),
         withheld: true,
         reason: 'stray-question-alongside-mcq',
       }
@@ -823,7 +837,7 @@ export function withholdUngradedGateQuestion(
         // teaching preceded the broken promise, and otherwise fall back to the
         // established continuation sentence. Never a second announcement, and
         // never a claim about how the learner did.
-        text: teaching.length > 0 ? teaching : withheldContinuation(input.justGraded, false),
+        text: teaching.length > 0 ? teaching : withheldContinuation(input.justGraded, false, false, input.conceptFallback),
         withheld: true,
         reason: 'announced-question-never-delivered',
       }
@@ -865,6 +879,7 @@ export function withholdUngradedGateQuestion(
         input.justGraded,
         input.questionOnScreen === true,
         input.learnerAcknowledged === true,
+        input.conceptFallback,
       ),
       withheld: true,
       reason: 'no-gradeable-probe',
@@ -1129,9 +1144,75 @@ export function withholdClosingProseQuestion(input: {
  * Call ONLY when no artifact will be served. Pure; never throws; returns a
  * non-empty turn or the caller's own fallback.
  */
+/**
+ * A SENTENCE THAT POINTS AT OPTIONS THE LEARNER CANNOT SEE.
+ *
+ * MEASURED (production, 2026-09-24, real account, no widget served on either
+ * turn):
+ *   phys.em.lc-circuits      "…pick the best answer: Let me know which option
+ *                             you choose when you're ready."
+ *   phys.qm.particle-in-box  "…which of the following statements is correct,
+ *                             and why? Take a look at the labelled figure…"
+ * Neither ends in a colon, so the structural check below never saw them, and
+ * the learner was asked to choose from a list that does not exist.
+ *
+ * Phrase-based ON PURPOSE and narrow: each phrase only makes sense when a list
+ * of options is on screen. Only consulted when no MCQ is served AND the text
+ * carries no lettered option list of its own (a prose list is a separate case,
+ * owned by proseMcqGuard).
+ */
+const POINTS_AT_MISSING_OPTIONS =
+  /\b(which of the following|of the (?:options|choices) (?:below|above|shown)|(?:pick|choose|select|tap) (?:the )?(?:best|correct|right) (?:answer|option|choice)|which (?:option|choice|answer) you (?:choose|pick|select)|from the (?:options|choices|list) (?:below|above)|the options below)\b/i
+
+export function dropSentencesPointingAtMissingOptions(text: string): string {
+  const t = typeof text === 'string' ? text : ''
+  if (!POINTS_AT_MISSING_OPTIONS.test(t) || containsOptionList(t) || hasProseMultipleChoice(t)) return t
+  // Split on sentence ends AND on a colon that introduces a new sentence, so
+  // "…behaves, pick the best answer: Let me know…" loses both halves of the
+  // promise but keeps the teaching before it.
+  const parts = t.split(/(?<=[.!?])\s+|(?<=:)\s+(?=[A-Z])/)
+  const kept: string[] = []
+  for (const part of parts) {
+    if (!POINTS_AT_MISSING_OPTIONS.test(part)) kept.push(part)
+  }
+  return kept.join(' ').replace(/\s+([.!?])/g, '$1').trim()
+}
+
+/**
+ * A sentence that ANNOUNCES a check ("Sure, let's check your understanding with
+ * a quick multiple-choice question.", "I hear you—let's do a quick check.",
+ * "Here's a quick check to see how well you can blend…") in a reply that then
+ * asks nothing. Pilot, 2026-09-24: four consecutive turns of exactly this while
+ * the question itself had been withheld. Judged only when the reply contains no
+ * question mark at all and no options list — the one condition under which the
+ * announcement is certainly unkept.
+ */
+const ANNOUNCES_A_CHECK =
+  /^(?:(?:sure|great|ok(?:ay)?|alright|i hear you|that(?:'|’)s great)[^.!?]{0,30}[,—–-]\s*)?(?:let(?:'|’)s|let me|here(?:'|’)s|here is)\b[^.!?]{0,80}\b(?:check|test|quiz|question)\b[^.!?:]{0,80}[.!]?$/i
+
+export function dropUndeliveredCheckAnnouncements(text: string): string {
+  const t = typeof text === 'string' ? text : ''
+  if (t.includes('?') || containsOptionList(t) || hasProseMultipleChoice(t)) return t
+  let dropped = false
+  const paragraphs = t.split(/\n{2,}/).map((p) => {
+    const sentences = p.split(/(?<=[.!])\s+/)
+    const kept = sentences.filter((s) => !ANNOUNCES_A_CHECK.test(s.trim()))
+    if (kept.length === sentences.length) return p
+    dropped = true
+    return kept.join(' ').trim()
+  })
+  // Untouched text is returned byte-identical — paragraph breaks included.
+  if (!dropped) return t
+  return paragraphs.filter((p) => p.trim().length > 0).join('\n\n').trim()
+}
+
 export function enforceQuestionDeliveryContract(text: string, fallback: string): string {
   try {
-    const t = typeof text === 'string' ? text : ''
+    const raw = typeof text === 'string' ? text : ''
+    const t0 = dropUndeliveredCheckAnnouncements(raw)
+    if (t0 !== raw) return t0.length > 0 ? t0 : fallback
+    const t = dropSentencesPointingAtMissingOptions(t0)
+    if (t !== t0 && !/:\s*$/.test(t.trimEnd())) return t.length > 0 ? t : fallback
     // A trailing colon is a promise of something that should follow. Nothing
     // does. Structural, so it needs no phrase list and catches a turn the
     // provider truncated at its own lead-in for free.

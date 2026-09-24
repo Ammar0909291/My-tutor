@@ -336,7 +336,13 @@ describe('the repair path is the general one, not a special case', () => {
     // for "Ecosystem Structure and Function", one frequency distribution for
     // "Data Visualization". Both are still a real upgrade on the generic
     // domain default they previously received.
-    expect(INSUFFICIENT_FOR_CONCEPT.size).toBe(48)
+    // 48 -> 47 (2026-09-24): a REPAIR, the direction this queue exists for.
+    // 'bio.mol.dna-replication' ("static Watson-Crick pairing; no replication
+    // fork") now owns an authored replication-fork figure in CONCEPT_SCENES, so
+    // its verdict no longer describes what it renders and was removed — see
+    // dnaReplicationVisual.test.ts.
+    expect(INSUFFICIENT_FOR_CONCEPT.size).toBe(47)
+    expect(INSUFFICIENT_FOR_CONCEPT.has('bio.mol.dna-replication')).toBe(false)
     expect([...INSUFFICIENT_FOR_CONCEPT].some((id) => id.startsWith('chem.'))).toBe(true)
     // The queue now tracks mathematics too, which it did not before.
     expect([...INSUFFICIENT_FOR_CONCEPT].some((id) => id.startsWith('math.'))).toBe(true)

@@ -52,6 +52,19 @@ export async function verifierGate(inputs: GateInputs): Promise<GateResult> {
     // observed during a log-mode canary is definitively NOT the verifier.
     if (mode === 'log') {
       const decision = verify(inputs.draftText, inputs.ctx, 1)
+      // PRECISION EVIDENCE (2026-09-24). Aggregate counts said 8,697 of 15,744
+      // verified turns would be rejected, and nothing recorded WHAT was
+      // flagged, so no rule's false-positive rate could be measured and none
+      // could be promoted to enforce on evidence. One line per rejected draft:
+      // the codes and the start of the TUTOR'S text (never the learner's), to
+      // the runtime log only — no database write, no added egress.
+      if (decision.verdict === 'REJECT') {
+        console.log('[verifier-log] ' + JSON.stringify({
+          codes: decision.violations.map((v) => v.code),
+          matched: decision.violations.map((v) => v.matched ?? null).slice(0, 3),
+          draft: inputs.draftText.slice(0, 200),
+        }))
+      }
       const events: OutputEvent[] =
         decision.verdict === 'REJECT'
           ? [{ kind: 'OutputRejected', attempt: 1, violations: decision.violations },

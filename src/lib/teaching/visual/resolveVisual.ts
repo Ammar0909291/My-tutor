@@ -31,7 +31,7 @@
 import { getConceptVisualType, lookupConceptVisualBinding, getConceptSceneGenerator } from '@/lib/teaching/visualRegistry'
 import { buildCanonicalScene, CONCEPT_SCENE_OVERRIDES } from './conceptSceneParams'
 import { admitVisualAsset, makeVisualAsset, type AssetProvenance, type VisualAsset, type VisualIntent } from './asset'
-import { isRetiredVisualBinding } from './retired'
+import { isRetiredVisualBinding, retiredAssetVerdict } from './retired'
 import { getKGNode } from '@/lib/curriculum/knowledgeGraph'
 import type { VisualType } from '@/lib/school/visuals/visualTypes'
 import { ARCHETYPES, type ArchetypeContext } from './archetypes'
@@ -311,19 +311,24 @@ function buildDecision(
     }
   }
 
-  // ── Tier −1: RETIRED BINDINGS ─────────────────────────────────────────────
-  // Checked before every tier, so a concept whose asset was found to depict
-  // something else cannot be picked up again by a broader rule — the curated
-  // row, the domain-prefix rule and the scene generator are all downstream of
-  // this line. Returning early is the whole mechanism; see retired.ts for the
-  // per-concept audit evidence.
-  if (isRetiredVisualBinding(ctx.conceptId)) {
-    return {
-      ...noFigureDecision('retired-binding', ctx.conceptId, ctx.title, intent.purpose, excursion),
-      continuityReason,
-      session: null,
-    }
-  }
+  // ── Tier −1: RETIRED ASSETS ───────────────────────────────────────────────
+  // A retired concept used to return here, before every tier — which also
+  // made any figure authored LATER unreachable (see retired.ts, "THE
+  // LIFECYCLE"). Now each tier's asset is judged individually: a retired
+  // asset (by content) and any broad rule are refused, and only a
+  // concept-authored asset with new content — a real replacement — is
+  // offered. If nothing survives, the answer is the same NO FIGURE as before.
+  const retired = isRetiredVisualBinding(ctx.conceptId)
+  const retiredNoFigure = (): VisualDecision => ({
+    ...noFigureDecision('retired-binding', ctx.conceptId, ctx.title, intent.purpose, excursion),
+    continuityReason,
+    session: null,
+  })
+  const refusedByRetirement = (asset: VisualAsset): boolean =>
+    retired && retiredAssetVerdict(ctx.conceptId, {
+      provenance: asset.provenance,
+      fingerprint: figureFingerprint(asset.payload),
+    }) !== 'replacement'
 
   // ── Tier 0: registry-named DETERMINISTIC SCENE GENERATOR ──────────────────
   // visualRegistry has recorded a concept→generator binding for 60 concepts
@@ -348,8 +353,7 @@ function buildDecision(
     // than declared — recorded, not hidden. See asset.ts's module doc.
     const conceptOwned = CONCEPT_SCENE_OVERRIDES.includes(ctx.conceptId)
     const provenance: AssetProvenance = conceptOwned ? 'generator' : 'generator-default'
-    return offer(
-      makeVisualAsset({
+    const tier0Asset = makeVisualAsset({
         // The `generator:` prefix is preserved for both so log format and the
         // existing provenance assertions are untouched; the honest distinction
         // lives in `provenance`/`identity`, which is what M3 will query, and is
@@ -375,18 +379,24 @@ function buildDecision(
           // agrees with their scene are unchanged.
           const fromKind = generatorKind ? SCENE_KIND_REPRESENTATION[generatorKind] : undefined
           if (fromKind) return fromKind
-          const registryVisual = getConceptVisualType(ctx.conceptId)
-          return registryVisual
-            ? representationForVisualType(registryVisual)
+          // Only a card a human bound to THIS concept may name the scene. A
+          // domain-prefix card describes the domain's stock illustration, not
+          // this scene: bio.cell.apoptosis was served its own cell-pathway
+          // scene while being introduced — to the tutor, to the learner's
+          // figure pointer, in the session and in telemetry — as a
+          // "food_chain", read off the 'bio.cell' domain row (2026-09-24).
+          // Otherwise the scene that was actually drawn decides.
+          const binding = lookupConceptVisualBinding(ctx.conceptId)
+          return binding?.tier === 'exact'
+            ? representationForVisualType(binding.entry.primary)
             : representationForSceneType(generatedScene.sceneType)
         })(),
         payload: { renderer: 'scene', sceneSpec: generatedScene },
         provenance,
-      }),
-      resolvePurpose(input, 'demonstrate'),
-      'registry',
-      null,
-    )
+      })
+    if (!refusedByRetirement(tier0Asset)) {
+      return offer(tier0Asset, resolvePurpose(input, 'demonstrate'), 'registry', null)
+    }
   }
 
   // ── Tier 1: curated registry binding ───────────────────────────────────────
@@ -396,8 +406,7 @@ function buildDecision(
     // 'exact' means a human wrote a row for THIS concept. 'domain' means a
     // prefix rule matched, so the binding names 'math.arith', not the concept.
     const declared = binding.tier === 'exact'
-    return offer(
-      makeVisualAsset({
+    const tier1Asset = makeVisualAsset({
         assetId: declared
           ? `registry:${ctx.conceptId}:${registryVisual}`
           : `registry:domain-default:${binding.scope}:${registryVisual}`,
@@ -406,12 +415,15 @@ function buildDecision(
         representation: representationForVisualType(registryVisual),
         payload: { renderer: 'card', visualType: registryVisual },
         provenance: declared ? 'curated' : 'domain-default',
-      }),
-      resolvePurpose(input, 'explain'),
-      'registry',
-      binding.entry.all ?? [registryVisual],
-    )
+      })
+    if (!refusedByRetirement(tier1Asset)) {
+      return offer(tier1Asset, resolvePurpose(input, 'explain'), 'registry', binding.entry.all ?? [registryVisual])
+    }
   }
+
+  // Every tier's asset for a retired concept was refused: NO FIGURE, with the
+  // retirement named as the reason exactly as before.
+  if (retired) return retiredNoFigure()
 
   // ── NO TIER 2 ─────────────────────────────────────────────────────────────
   // The Educational Archetype Engine used to sit here and guarantee a figure
@@ -762,6 +774,13 @@ export async function resolveVisualForTurn(
      */
     findApprovedFigure?: (conceptId: string) => Promise<GeneratedFigure | null>
     /**
+     * Does this concept have an approved figure at all? Answered from an
+     * in-process index (generationOutcomeStore.hasActiveVisualFigure), never
+     * a per-turn query. Consulted only when the synchronous tiers chose a
+     * SUBJECT-WIDE card: absent, or false, the card stands exactly as before.
+     */
+    hasApprovedFigure?: (conceptId: string) => Promise<boolean>
+    /**
      * Judges a freshly generated figure before it is served. Injected only so
      * tests can drive it; production always uses the real critic, because a
      * critic that a caller can omit is a gate that a caller can forget.
@@ -791,8 +810,30 @@ export async function resolveVisualForTurn(
 ): Promise<VisualDecision> {
   let decision = resolveVisual(input)
 
-  // 1. CURATED — already faithful, nothing to add.
-  if (decision.graphical) return decision
+  // 1. CURATED — already faithful, nothing to add. EXCEPT a subject-wide card.
+  //
+  // PRECEDENCE IS BY SPECIFICITY, NOT BY TIER NUMBER. A domain-prefix card is
+  // "a general illustration related to the topic" (scope 'domain'); an
+  // APPROVED figure is a figure of THIS concept that a human reviewed — "in
+  // the same class as a curated binding" (docs/history/visualization-engine.md).
+  // A generic card shadowing a reviewed concept figure inverted that, so for a
+  // subject-wide card only, an approved figure is looked for first. Exact
+  // curated cards and Tier 0 scenes are concept-specific and still stand. The
+  // question "is there one?" is answered in memory; only a concept that has
+  // one pays the read, and a card is never replaced by a GENERATED figure.
+  const subjectWideCard = decision.graphical && decision.asset?.provenance === 'domain-default'
+  const subjectWideDecision = decision
+  if (decision.graphical && !subjectWideCard) return decision
+  if (subjectWideCard) {
+    if (!decision.conceptId || !deps.findApprovedFigure || !deps.hasApprovedFigure) return decision
+    let known = false
+    try {
+      known = await deps.hasApprovedFigure(decision.conceptId)
+    } catch {
+      known = false
+    }
+    if (!known) return decision
+  }
 
   // ── TOPIC IDENTITY ────────────────────────────────────────────────────────
   // Curriculum first; a topic the KG has never heard of still gets a stable
@@ -864,7 +905,24 @@ export async function resolveVisualForTurn(
       },
       asset,
     )
-    if (!admission.ok) return { ...decision, provenance: `no-figure:rejected-${admission.reason}` }
+    // A GENERATED figure's `served` was predicted before this point; any
+    // refusal here must correct it, like every other discard exit.
+    const generated = assetId.startsWith('generated')
+    if (!admission.ok) {
+      if (generated) void recordNotServed(ctx, figure, deps.outcomeSink)
+      return { ...decision, provenance: `no-figure:rejected-${admission.reason}` }
+    }
+    // A RETIRED ARTIFACT STAYS RETIRED ON EVERY TIER. Retirement names
+    // artifacts by content (retired.ts); an approved or generated figure whose
+    // content IS a retired one is refused here exactly as the synchronous
+    // tiers refuse it. New content for a retired concept is a replacement.
+    if (retiredAssetVerdict(ctx.conceptId, {
+      provenance: asset.provenance,
+      fingerprint: figureFingerprint(asset.payload),
+    }) === 'retired-asset') {
+      if (generated) void recordNotServed(ctx, figure, deps.outcomeSink)
+      return { ...decision, provenance: 'no-figure:retired-asset' }
+    }
 
     // ── A SERVED FIGURE MUST BE HELD, NOT RE-INTRODUCED EVERY TURN ───────────
     //
@@ -941,12 +999,22 @@ export async function resolveVisualForTurn(
     if (approved) {
       const payload = approved.kind === 'scene' ? approved.scene : approved.spec
       const revalidated = validateGeneratedFigure(payload, ctx)
-      if (revalidated.ok) return serve(revalidated.figure, `approved:${ctx.conceptId}`)
-      // A figure that no longer matches its concept is NOT repaired and NOT
-      // substituted; the turn falls through to generation like any other.
-      decision = { ...decision, provenance: `no-figure:approved-${revalidated.reason}` }
+      if (revalidated.ok) {
+        const served = serve(revalidated.figure, `approved:${ctx.conceptId}`)
+        // Over a subject-wide card, only an approved figure actually admitted
+        // replaces it; any refusal keeps the card rather than showing nothing.
+        if (!subjectWideCard || served.provenance === `approved:${ctx.conceptId}`) return served
+      } else {
+        // A figure that no longer matches its concept is NOT repaired and NOT
+        // substituted; the turn falls through to generation like any other.
+        decision = { ...decision, provenance: `no-figure:approved-${revalidated.reason}` }
+      }
     }
   }
+
+  // No usable approved figure: the subject-wide card this turn already had
+  // is served unchanged. Generation is only ever for a turn with NO figure.
+  if (subjectWideCard) return subjectWideDecision
 
   // ── 3. GENERATED ──────────────────────────────────────────────────────────
   // Attempted only here, and only on a turn that would otherwise show nothing.
@@ -1072,6 +1140,12 @@ export async function resolveVisualForTurn(
     const retry = await generateConceptFigure(ctx, {
       purpose: decision.purpose, ...deps, budgetMs: deadline.remaining(), ignoreCachedFigure: true,
     })
+    // The retry bypasses the figure cache, so unless it too was served from a
+    // cache it spent a provider call — even when the first result was a free
+    // cache hit. Without this the session budget and VISUAL_TURN both reported
+    // `generationSpent: false` for a real call (production, lc-circuits,
+    // 2026-09-24: `no-figure:retry-structurally-invalid`, generationSpent=false).
+    if (!(retry.ok && retry.cached)) decision = { ...decision, generationSpent: true }
     if (!retry.ok) {
       void writeDecline(ctx, retry.reason, deps.cacheClient)
       return { ...decision, provenance: `no-figure:retry-${retry.reason}` }

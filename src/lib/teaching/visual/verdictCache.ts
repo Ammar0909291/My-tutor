@@ -42,6 +42,7 @@
 
 import { getCachedVisualization, saveVisualization, type VisualizationCacheClient } from '@/lib/teaching/visuals/visualizationCache'
 import { groundingHash } from './topicIdentity'
+import { figureFingerprint } from './fingerprint'
 import type { ArchetypeContext } from './archetypes'
 import type { CriticReport } from './figureCritic'
 
@@ -79,12 +80,7 @@ export function verdictKey(conceptId: string): string {
 }
 
 /** Cheap, stable fingerprint of a figure payload. Shape, not content quality. */
-export function figureFingerprint(payload: unknown): string {
-  const text = JSON.stringify(payload) ?? ''
-  let hash = 0
-  for (let i = 0; i < text.length; i++) hash = (hash * 31 + text.charCodeAt(i)) | 0
-  return `f${(hash >>> 0).toString(16)}`
-}
+export { figureFingerprint }
 
 /**
  * The stored pass for this topic, if one still applies.

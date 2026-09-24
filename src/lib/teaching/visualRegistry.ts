@@ -769,6 +769,55 @@ export function lookupConceptVisual(conceptId: string | null): VisualEntry | nul
  * Additive: DOMAIN_VISUALS and its 394 entries are untouched, and
  * lookupConceptVisual's behaviour is byte-for-byte what it was.
  */
+/**
+ * WHICH DOMAINS EACH DOMAIN-DEFAULT CARD FAITHFULLY ILLUSTRATES.
+ *
+ * A domain-prefix rule hands one stock card to every concept under the prefix
+ * that has nothing better, so the card must at least depict the DOMAIN. That
+ * was never checked: 'bio.cell' -> food_chain put an ecology diagram under
+ * cell biology, and every one of the 24 bio.cell concepts that reached it had
+ * to be retired or individually overridden (retired.ts, 1f829c0) — while the
+ * rule itself stayed live for the next bio.cell concept to fall into.
+ *
+ * The declaration sits with the CARD (what it depicts), not with the rule, so
+ * it is made once per card and a new rule is judged against it rather than
+ * against a reviewer's memory. A rule whose card does not declare its prefix
+ * is REFUSED by lookupConceptVisualBinding — the concept gets NO FIGURE,
+ * which is safer than the wrong one — and `visualDomainFallbackSafety.test.ts`
+ * names every refused rule so it cannot go unnoticed. Rules are left in
+ * DOMAIN_VISUALS (reviewable, reversible); only their serving is gated.
+ */
+export const DOMAIN_CARD_HOME: Readonly<Partial<Record<VisualType, readonly string[]>>> = {
+  three_bond_formation:          ['chem.bond'],
+  three_molecular_shapes:        ['chem.bond'],
+  three_atomic_structure:        ['chem.atomic'],
+  three_electron_shells:         ['chem.atomic', 'chem.period'],
+  three_crystal_lattice:         ['chem.solid'],
+  food_chain:                    ['bio.eco'],
+  water_cycle:                   ['bio.eco'],
+  geometry_shape:                ['math.geom', 'math.trig'],
+  number_line:                   ['math.arith'],
+  coordinate_plane:              ['math.alg', 'math.stat', 'math.calc', 'math.trig'],
+  three_vector_visualization:    ['math.vec'],
+  three_data_structure:          ['cs.ds'],
+  three_algorithm_visualization: ['cs.algo'],
+  three_network_packet_flow:     ['cs.net'],
+  three_computer_architecture:   ['cs.found'],
+}
+
+/** Does this domain rule's card illustrate the domain it is bound to? */
+export function domainRuleIsFaithful(rule: { prefix: string; primary: VisualType }): boolean {
+  return (DOMAIN_CARD_HOME[rule.primary] ?? []).includes(rule.prefix)
+}
+
+/** Every domain rule, with whether it may serve. For tests and audits. */
+export function listDomainRules(): Array<{ prefix: string; primary: VisualType; faithful: boolean }> {
+  return DOMAIN_VISUALS.map((r) => ({
+    prefix: r.prefix, primary: r.entry.primary,
+    faithful: domainRuleIsFaithful({ prefix: r.prefix, primary: r.entry.primary }),
+  }))
+}
+
 export function lookupConceptVisualBinding(
   conceptId: string | null,
 ): { entry: VisualEntry; scope: string; tier: 'exact' | 'domain' } | null {
@@ -780,7 +829,11 @@ export function lookupConceptVisualBinding(
 
   // Tier 2: domain prefix (longest match first)
   for (const rule of DOMAIN_VISUALS) {
-    if (conceptId.startsWith(rule.prefix)) return { entry: rule.entry, scope: rule.prefix, tier: 'domain' }
+    if (!conceptId.startsWith(rule.prefix)) continue
+    // The first matching rule decides, as before — but an unfaithful rule
+    // decides NO FIGURE rather than falling through to a broader one.
+    if (!domainRuleIsFaithful({ prefix: rule.prefix, primary: rule.entry.primary })) return null
+    return { entry: rule.entry, scope: rule.prefix, tier: 'domain' }
   }
 
   return null
@@ -915,11 +968,25 @@ function splitIntoSentences(text: string): string[] {
  * unchanged rather than silencing the tutor entirely.
  */
 export function stripPhantomVisualClaims(text: string): string {
-  const sentences = splitIntoSentences(text)
-  const kept = sentences.filter((s) =>
-    !SCREEN_CLAIM_RE.test(s) && !LOOK_AT_CLAIM_RE.test(s) && !VISUAL_PROMISE_RE.test(s) && !DEFINITE_DESCRIPTION_RE.test(s))
-  if (kept.length === 0) return text
-  return kept.join(' ').trim()
+  const isClaim = (s: string) =>
+    SCREEN_CLAIM_RE.test(s) || LOOK_AT_CLAIM_RE.test(s) || VISUAL_PROMISE_RE.test(s) || DEFINITE_DESCRIPTION_RE.test(s)
+  // PARAGRAPHS ARE KEPT, AND AN UNTOUCHED TEXT IS RETURNED AS-IS (2026-09-24).
+  // This used to re-join every sentence with a single space whether or not
+  // anything was removed, so every multi-paragraph reply on a no-figure turn
+  // reached the learner as one flattened block — measured on all 26 production
+  // lesson openings replayed through it. Sentences are now judged per
+  // paragraph and paragraphs re-joined with their blank line.
+  let removedAny = false
+  const paragraphs = text.split(/\n{2,}/).map((paragraph) => {
+    const sentences = splitIntoSentences(paragraph)
+    const kept = sentences.filter((s) => !isClaim(s))
+    if (kept.length === sentences.length) return paragraph
+    removedAny = true
+    return kept.join(' ').trim()
+  })
+  if (!removedAny) return text
+  const out = paragraphs.filter((p) => p.trim().length > 0).join('\n\n').trim()
+  return out.length === 0 ? text : out
 }
 
 /**

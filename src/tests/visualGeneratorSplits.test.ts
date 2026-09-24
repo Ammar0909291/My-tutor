@@ -141,7 +141,20 @@ describe('B2 changed nothing else', () => {
     // same trend in ONE session. A curated binding outranks generation, which
     // is why authoring one IS the fix. Counted here per this test's own
     // convention of recording each movement and why.
-    expect(CONCEPT_SCENE_OVERRIDES).toHaveLength(38)
+    //
+    // 38 -> 56 (2026-09-24, Biology cell visual replacement): 18 new
+    // concept-owned entries replacing the 18 bio.cell concepts formerly
+    // suppressed in retired.ts for inheriting the wrong 'bio.cell' ->
+    // food_chain domain default — see bioCellVisualReplacement.test.ts for
+    // full per-concept coverage.
+    //
+    // 56 -> 57 (2026-09-24, Biology DNA replication): bio.mol.dna-replication
+    // owns an authored replication-fork figure in place of the dna_structure
+    // kind default (a static base-pairing ladder, demoted in scope.ts as "no
+    // replication fork"). It leaves REQUIRES_AUTHORING below for the same
+    // reason — see dnaReplicationVisual.test.ts.
+    expect(CONCEPT_SCENE_OVERRIDES).toHaveLength(57)
+    expect(CONCEPT_SCENE_OVERRIDES).toContain('bio.mol.dna-replication')
     expect(CONCEPT_SCENE_OVERRIDES).toContain('chem.dblock.lanthanides')
     expect(CONCEPT_SCENE_OVERRIDES).toContain('math.calc.critical-points')
     expect(CONCEPT_SCENE_OVERRIDES).toContain('phys.em.kirchhoffs-laws')
@@ -190,7 +203,10 @@ describe('cases the audit found that B2 deliberately did NOT approximate', () =>
     'phys.em.electric-current',       // needs drift velocity / charge carriers
     'phys.mech.rotational-dynamics',  // needs moment of inertia and angular acceleration
     'chem.period.modern-periodic-law',// needs the periodic table itself
-    'bio.mol.dna-replication',        // needs a replication fork, not static base pairing
+    // AUTHORED, and so no longer here: 'bio.mol.dna-replication' ("needs a
+    // replication fork, not static base pairing") now owns a replication-fork
+    // figure in CONCEPT_SCENES — see dnaReplicationVisual.test.ts, which pins
+    // that it resolves to it at concept scope.
   ] as const
 
   it.each(REQUIRES_AUTHORING)('%s still resolves, unchanged and not faked', (conceptId) => {
@@ -208,8 +224,9 @@ describe('cases the audit found that B2 deliberately did NOT approximate', () =>
     expect(ask(conceptId).asset?.scope, conceptId).toBe('domain')
   })
 
-  it('none of the twelve was silently given another concept\'s override', () => {
-    // The original invariant, unchanged and still covering all twelve: B2
+  it('none of the remaining eleven was silently given another concept\'s override', () => {
+    // The original invariant, unchanged and still covering every entry (twelve,
+    // until bio.mol.dna-replication was authored its own figure): B2
     // must not have handed any of them a neighbour's authored parameters.
     for (const conceptId of REQUIRES_AUTHORING) {
       expect(CONCEPT_SCENE_OVERRIDES, conceptId).not.toContain(conceptId)

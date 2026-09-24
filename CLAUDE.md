@@ -195,6 +195,9 @@ communication/linguistics/literature/phonetics/vocab/writing` advanced tiers) â€
 gap AND defect-hunt the servable 321. Full running log, known-open defects (ASCII-art fallback
 figures, the content-free hold, the still-unresolved C7 repeat channel), and the saturated-account
 finding above: `docs/history/subject-onboarding-and-fix-campaign.md`.
+**Physics master completion pass (2026-09-24)**: 3 grading/assessment defects fixed and verified in
+production; remaining items are non-blocking. Details, evidence and the QA harness
+(`scripts/qa/physicsProductionRuntimeQa.ts`) are in the same history file's dated section.
 
 ## Mathematics asset-contract campaign (PAPPU account, owner-scoped, in progress â€” un-paused by
 ## explicit fresh instruction naming Mathematics; CS remains paused above; do not touch Biology,

@@ -48,6 +48,11 @@ import { buildElectrochemicalCellScene, type ElectrochemicalCellParams } from '@
 import { buildEnergyCycleScene } from '@/lib/teaching/sceneGenerators/energyCycle'
 import { buildCoordinationComplexScene, type CoordinationComplexDef } from '@/lib/teaching/sceneGenerators/coordinationComplex'
 import { buildSystemBoundaryScene, buildFirstLawScene as buildChemFirstLawScene } from '@/lib/teaching/sceneGenerators/chemistrySystemScenes'
+import { buildCellStructureScene } from '@/lib/teaching/sceneGenerators/cellStructure'
+import { buildCellPathwayScene } from '@/lib/teaching/sceneGenerators/cellPathway'
+import { buildCellHubScene } from '@/lib/teaching/sceneGenerators/cellHub'
+import { buildCellComparisonScene } from '@/lib/teaching/sceneGenerators/cellComparison'
+import { buildDNAReplicationScene } from '@/lib/teaching/sceneGenerators/dnaReplication'
 
 /**
  * A canonical figure from the variable registry.
@@ -437,6 +442,278 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   // Archetype C — the system-boundary/energy-balance diagram.
   'chem.thermo.system': () => buildSystemBoundaryScene('closed'),
   'chem.thermo.first-law': () => buildChemFirstLawScene(100, -40),
+
+  // ══ BIOLOGY CELL VISUAL REPLACEMENT (2026-09-24) ═════════════════════════
+  //
+  // Faithful, concept-specific replacements for the 18 bio.cell concepts
+  // retired.ts suppresses from the wrong 'bio.cell' -> food_chain domain
+  // default (the retired.ts entries and this campaign's own read-only design
+  // inventory name each concept's exact defect). Every scene below is built
+  // from ONE of four small, reusable, parameter-driven generators —
+  // buildCellStructureScene (a labelled organelle/cell diagram),
+  // buildCellPathwayScene (a real sequence or cycle, optionally branching),
+  // buildCellHubScene (independent coexisting categories under one heading),
+  // buildCellComparisonScene (two or more contrasted categories) — never 18
+  // bespoke renderers. Every name, part list, stage list, spoke list and
+  // group list below is transcribed directly from the concept's own
+  // canonical KG description (docs/biology/kg/graph.json); nothing is
+  // invented, extracted by keyword, or borrowed from a different concept.
+  //
+  // bio.cell.cell-theory is the one exception: it is HISTORICAL, not
+  // structural or procedural, so it reuses the existing buildTimelineScene
+  // generator (already imported above for the civics/history domain) rather
+  // than any of the four new ones — the concept's own description IS a
+  // timeline (Schleiden & Schwann, then Virchow).
+  'bio.cell.cell-theory': () => buildTimelineScene({
+    events: [
+      { year: 1838, event: 'Schleiden and Schwann: all living things are made of one or more cells' },
+      { year: 1855, event: 'Virchow: cells arise only from pre-existing cells' },
+    ],
+  }),
+
+  'bio.cell.prokaryotic-cell': () => buildCellStructureScene({
+    conceptId: 'bio.cell.prokaryotic-cell',
+    subject: 'Prokaryotic Cell Structure',
+    boundaryLabel: 'Cell wall',
+    teachingGoal: 'Name the structures of a prokaryotic cell and note the absence of membrane-bound organelles.',
+    parts: [
+      { name: 'Plasma membrane', description: 'encloses the cytoplasm just inside the cell wall' },
+      { name: 'Nucleoid', description: 'the region where the circular DNA sits, unbound by a nuclear membrane' },
+      { name: 'Ribosomes', description: 'carry out protein synthesis, scattered through the cytoplasm' },
+      { name: 'Plasmid', description: 'a small circular DNA molecule separate from the nucleoid' },
+      { name: 'Flagella', description: 'whip-like structures used for movement' },
+      { name: 'Pili', description: 'hair-like structures used for attachment and DNA transfer' },
+    ],
+  }),
+
+  // Compartmentalisation, not an exhaustive organelle catalogue — the
+  // concept's own emphasis, per its KG description ("compartmentalisation as
+  // an organisational principle"). Plant-only and animal-only organelles are
+  // named explicitly as the point of contrast; organelles common to both are
+  // grouped once rather than repeated per side.
+  'bio.cell.eukaryotic-cell': () => buildCellComparisonScene({
+    conceptId: 'bio.cell.eukaryotic-cell',
+    title: 'Eukaryotic Cell Structure',
+    teachingGoal: 'Contrast plant and animal cells while recognising the compartmentalised organelles they share.',
+    groups: [
+      { label: 'Shared by both', description: 'both cell types compartmentalise their functions into membrane-bound organelles', items: ['Plasma membrane', 'Membrane-bound nucleus', 'Cytoplasm with organelles'] },
+      { label: 'Plant cell only', description: 'plant cells add structures animal cells lack', items: ['Cell wall', 'Chloroplast', 'Large central vacuole'] },
+      { label: 'Animal cell only', description: 'animal cells lack a wall, chloroplast, or large vacuole', items: ['No cell wall', 'No chloroplast', 'Small/no vacuole'] },
+    ],
+  }),
+
+  'bio.cell.cell-membrane-transport': () => buildCellComparisonScene({
+    conceptId: 'bio.cell.cell-membrane-transport',
+    title: 'Cell Membrane and Transport',
+    teachingGoal: 'Distinguish passive transport, active transport and bulk transport across the fluid mosaic membrane.',
+    groups: [
+      { label: 'Passive transport', description: 'moves down the concentration gradient, no energy required', items: ['Diffusion', 'Osmosis', 'Facilitated diffusion'] },
+      { label: 'Active transport', description: 'moves against the gradient, requires ATP', items: ['Sodium-potassium pump'] },
+      { label: 'Bulk transport', description: 'moves material in bulk across the membrane in vesicles', items: ['Endocytosis', 'Exocytosis'] },
+    ],
+  }),
+
+  'bio.cell.nucleus-chromosomes': () => buildCellStructureScene({
+    conceptId: 'bio.cell.nucleus-chromosomes',
+    subject: 'Nucleus and Chromosomes',
+    boundaryLabel: 'Nuclear envelope',
+    teachingGoal: 'Locate the nucleolus and chromatin inside the nucleus, and name the parts of a chromosome.',
+    parts: [
+      { name: 'Nucleolus', description: 'a dense region inside the nucleus where ribosomes are assembled' },
+      { name: 'Chromatin', description: 'the loosely packed form of DNA and protein filling the nucleus' },
+      { name: 'Centromere', description: 'the constriction point joining sister chromatids of a condensed chromosome' },
+      { name: 'Telomere', description: 'the protective cap at each end of a chromosome' },
+      { name: 'Sister chromatids', description: 'the two identical copies of a replicated chromosome' },
+    ],
+  }),
+
+  'bio.cell.mitochondria-energy': () => buildCellStructureScene({
+    conceptId: 'bio.cell.mitochondria-energy',
+    subject: 'Mitochondria and Energy Organelles',
+    boundaryLabel: 'Outer membrane',
+    teachingGoal: 'Locate the cristae and matrix inside the mitochondrion as the site of aerobic respiration.',
+    parts: [
+      { name: 'Inner membrane', description: 'folds inward, separating the matrix from the intermembrane space' },
+      { name: 'Cristae', description: 'the folds of the inner membrane, increasing surface area for respiration' },
+      { name: 'Matrix', description: 'the innermost fluid space, site of the citric acid cycle' },
+    ],
+  }),
+
+  'bio.cell.chloroplast-structure': () => buildCellStructureScene({
+    conceptId: 'bio.cell.chloroplast-structure',
+    subject: 'Chloroplast Structure',
+    boundaryLabel: 'Outer membrane',
+    teachingGoal: 'Locate the thylakoids, grana and stroma inside the chloroplast as the site of photosynthesis.',
+    parts: [
+      { name: 'Inner membrane', description: 'encloses the stroma just inside the outer membrane' },
+      { name: 'Thylakoid', description: 'a flattened, membrane-bound sac where chlorophyll captures light' },
+      { name: 'Granum', description: 'a stack of thylakoids' },
+      { name: 'Stroma', description: 'the fluid space surrounding the grana, site of the light-independent reactions' },
+    ],
+  }),
+
+  // A REAL linear pathway (synthesis -> modification -> packaging ->
+  // destination), grounded exactly in the concept's own KG description.
+  'bio.cell.endomembrane-system': () => buildCellPathwayScene({
+    conceptId: 'bio.cell.endomembrane-system',
+    title: 'Endomembrane System',
+    teachingGoal: 'Trace a protein from synthesis through modification, packaging and secretion.',
+    stages: [
+      { name: 'Rough ER', description: 'ribosomes on the rough endoplasmic reticulum synthesise the protein' },
+      { name: 'Smooth ER', description: 'the smooth endoplasmic reticulum synthesises lipids and processes the protein further' },
+      { name: 'Golgi apparatus', description: 'modifies, sorts and packages the protein into vesicles' },
+      { name: 'Vesicle', description: 'buds off from the Golgi, carrying its cargo to its destination' },
+      { name: 'Lysosome / secretion', description: 'the vesicle becomes a lysosome or fuses with the plasma membrane to secrete its contents' },
+    ],
+  }),
+
+  // Three coexisting filament TYPES, not three steps — the same
+  // list-is-not-a-process rule that already governs this file's process_flow
+  // guidance for bio.physio.homeostasis-thermoregulation.
+  'bio.cell.cytoskeleton': () => buildCellHubScene({
+    conceptId: 'bio.cell.cytoskeleton',
+    hubLabel: 'Cytoskeleton',
+    title: 'Cytoskeleton and Cell Motility',
+    teachingGoal: 'Distinguish the three cytoskeletal filament types by their roles.',
+    spokes: [
+      { name: 'Microfilaments', description: 'actin filaments giving the cell shape and enabling movement' },
+      { name: 'Microtubules', description: 'hollow tubes directing intracellular transport and cell division' },
+      { name: 'Intermediate filaments', description: 'rope-like fibres providing mechanical strength' },
+    ],
+  }),
+
+  // DNA replication was served the dna_structure KIND default — a static
+  // base-pairing ladder with no fork, no new strands and no enzymes, demoted in
+  // scope.ts for exactly that. This is its own authored figure: one replication
+  // fork drawn only from the KG description and the concept's EB entry (see
+  // dnaReplication.pure.ts). The registry row keeps `sceneGenerator:
+  // 'dna_structure'`, so that generator stays bound and reachable; this table
+  // is consulted before the kind, so the concept now draws its own case.
+  'bio.mol.dna-replication': buildDNAReplicationScene,
+
+  // The cell cycle is a genuine CYCLE — the concept's own KG description
+  // names the ordered phases and their checkpoints.
+  'bio.cell.cell-cycle': () => buildCellPathwayScene({
+    conceptId: 'bio.cell.cell-cycle',
+    title: 'The Cell Cycle',
+    teachingGoal: 'Order the phases of the cell cycle and locate its regulatory checkpoints.',
+    cyclic: true,
+    stages: [
+      { name: 'G1', description: 'the cell grows and carries out its normal functions' },
+      { name: 'S', description: 'DNA is replicated' },
+      { name: 'G2', description: 'the cell prepares for division, checked by the G2 checkpoint' },
+      { name: 'M', description: 'mitosis and cytokinesis divide the cell in two' },
+    ],
+  }),
+
+  'bio.cell.cell-signalling': () => buildCellPathwayScene({
+    conceptId: 'bio.cell.cell-signalling',
+    title: 'Cell Signalling',
+    teachingGoal: 'Trace a signal from the signalling molecule to the cell’s response.',
+    stages: [
+      { name: 'Signal molecule', description: 'a signalling molecule is released by a signalling cell' },
+      { name: 'Receptor', description: 'the signal binds a specific receptor on the target cell' },
+      { name: 'Signal transduction', description: 'the bound receptor triggers a transduction pathway, often via second messengers' },
+      { name: 'Cellular response', description: 'the pathway produces the target cell’s response' },
+    ],
+  }),
+
+  // The intrinsic and extrinsic pathways are two INDEPENDENT triggers that
+  // converge on the same executioner-caspase continuation — a branching
+  // START, not a single flattened line (the same principle already applied
+  // to bio.physio.homeostasis-thermoregulation's hot/cold response fix).
+  'bio.cell.apoptosis': () => buildCellPathwayScene({
+    conceptId: 'bio.cell.apoptosis',
+    title: 'Apoptosis and Programmed Cell Death',
+    teachingGoal: 'Trace both the intrinsic and extrinsic triggers of apoptosis to the shared caspase cascade.',
+    branchStart: [
+      { name: 'Intrinsic pathway', description: 'cytochrome c release from mitochondria, regulated by the Bcl-2 family, forms the apoptosome.' },
+      { name: 'Extrinsic pathway', description: 'death receptors on the cell surface recruit FADD to activate initiator caspases.' },
+    ],
+    stages: [
+      { name: 'Caspase cascade', description: 'initiator caspases activate executioner caspases' },
+      { name: 'Cell death', description: 'executioner caspases produce the hallmark morphological changes of apoptosis' },
+    ],
+  }),
+
+  'bio.cell.anaerobic-respiration-fermentation': () => buildCellComparisonScene({
+    conceptId: 'bio.cell.anaerobic-respiration-fermentation',
+    title: 'Anaerobic Respiration and Fermentation',
+    teachingGoal: 'Contrast the ATP yield and products of aerobic and anaerobic pathways when oxygen is limiting.',
+    groups: [
+      { label: 'Aerobic respiration', description: 'oxygen present, high ATP yield', items: ['Full breakdown of glucose', 'High ATP yield'] },
+      { label: 'Lactic acid fermentation', description: 'oxygen limited, occurs in animal muscle and lactic acid bacteria', items: ['Glucose -> lactic acid', 'Low ATP yield'] },
+      { label: 'Alcoholic fermentation', description: 'oxygen absent, occurs in yeast', items: ['Glucose -> ethanol + CO2', 'Low ATP yield'] },
+    ],
+  }),
+
+  // The Hanahan-Weinberg hallmarks are seven independent, coexisting
+  // hallmarks of an integrative framework — a hub, not a sequence, matching
+  // the concept's own KG description exactly.
+  'bio.cell.cancer-biology-hallmarks': () => buildCellHubScene({
+    conceptId: 'bio.cell.cancer-biology-hallmarks',
+    hubLabel: 'Hallmarks of Cancer',
+    title: 'Hallmarks of Cancer',
+    teachingGoal: 'Name the Hanahan-Weinberg hallmarks as independent breakdowns of normally regulated cell behaviour.',
+    spokes: [
+      { name: 'Sustained proliferative signalling', description: 'the cell drives its own division continuously' },
+      { name: 'Evasion of growth suppressors', description: 'the cell ignores signals that would normally stop division' },
+      { name: 'Resistance to apoptosis', description: 'the cell evades programmed cell death' },
+      { name: 'Replicative immortality', description: 'the cell divides without the normal limit on cell divisions' },
+      { name: 'Angiogenesis induction', description: 'the tumour induces new blood vessels to supply itself' },
+      { name: 'Invasion and metastasis', description: 'cells invade nearby tissue and spread to distant sites' },
+      { name: 'Metabolic reprogramming', description: 'the cell rewires its metabolism to support rapid growth' },
+    ],
+  }),
+
+  // Loss of adhesion (EMT) is one shared event that leads to two different
+  // outcomes depending on context — a branching END, the mirror image of
+  // apoptosis's branching START above.
+  'bio.cell.cell-adhesion-tissue-organization': () => buildCellPathwayScene({
+    conceptId: 'bio.cell.cell-adhesion-tissue-organization',
+    title: 'Cell Adhesion and Tissue Organisation',
+    teachingGoal: 'Trace how the same loss of cell adhesion underlies both normal development and pathological invasion.',
+    stages: [
+      { name: 'Adhesion molecules', description: 'cadherins, selectins and integrins hold cells together and to the matrix' },
+      { name: 'Epithelial-mesenchymal transition', description: 'cells reversibly lose adhesion and polarity' },
+    ],
+    branchEnd: [
+      { name: 'Normal development', description: 'the same loss of adhesion drives gastrulation and wound healing.' },
+      { name: 'Pathological invasion', description: 'the same loss of adhesion underlies cancer cells invading nearby tissue.' },
+    ],
+  }),
+
+  'bio.cell.cell-junctions-extracellular-matrix': () => buildCellComparisonScene({
+    conceptId: 'bio.cell.cell-junctions-extracellular-matrix',
+    title: 'Cell Junctions and the Extracellular Matrix',
+    teachingGoal: 'Distinguish the junctions that connect cells from the matrix that surrounds them.',
+    groups: [
+      { label: 'Cell junctions', description: 'structures connecting adjacent cells', items: ['Tight junctions (seal)', 'Desmosomes (anchor)', 'Gap junctions (communicate)'] },
+      { label: 'Extracellular matrix', description: 'the structural and signalling scaffold outside the cell', items: ['Collagen', 'Proteoglycans', 'Fibronectin', 'Integrin receptors'] },
+    ],
+  }),
+
+  'bio.cell.cytoskeleton-motility': () => buildCellComparisonScene({
+    conceptId: 'bio.cell.cytoskeleton-motility',
+    title: 'Cytoskeletal Motility',
+    teachingGoal: 'Distinguish actin-based crawling from the two opposite-direction microtubule motor proteins.',
+    groups: [
+      { label: 'Actin-myosin crawling', description: 'drives cell crawling, distinct from muscle contraction', items: ['Cell migration'] },
+      { label: 'Kinesin', description: 'a microtubule motor protein carrying cargo outward', items: ['Cargo transport toward the cell periphery'] },
+      { label: 'Dynein', description: 'a microtubule motor protein carrying cargo inward, also driving the 9+2 axoneme beat', items: ['Cargo transport toward the cell centre', 'Cilia/flagella beating'] },
+    ],
+  }),
+
+  'bio.cell.membrane-transport-energetics': () => buildCellComparisonScene({
+    conceptId: 'bio.cell.membrane-transport-energetics',
+    title: 'Energetics of Membrane Transport',
+    teachingGoal: 'Reason about transport direction from its free-energy cost along the electrochemical gradient.',
+    groups: [
+      { label: 'Passive transport', description: 'moves down the electrochemical gradient, no free-energy cost', items: ['No ATP required'] },
+      { label: 'Primary active transport', description: 'ATP directly drives movement against the gradient', items: ['ATP-driven pumps'] },
+      { label: 'Secondary active transport', description: 'uses an existing gradient, set up by primary active transport, to move a second solute', items: ['Symport', 'Antiport'] },
+    ],
+  }),
 }
 
 const DANIELL_CELL: ElectrochemicalCellParams = {
