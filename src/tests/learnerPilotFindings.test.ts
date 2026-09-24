@@ -23,6 +23,16 @@ describe('P1 — "can you test me?" said twice is a willing learner, not a frust
       expect(detectFailureState(m, m), m).toBeNull()
     }
   })
+  it('synthetic-student smoke run: a request after a short lead-in, repeated, is still willing', () => {
+    for (const m of ['can we move faster? give me a question', 'got it. test me please', 'cool. ok test me', 'ok, next question please']) {
+      expect(detectFailureState(m, m), m).toBeNull()
+    }
+  })
+  it('a repeated answer that merely contains a comma is still frustration', () => {
+    for (const m of ['the force doubles, because the mass doubles', 'the heavier ball falls faster, one of them is heavier']) {
+      expect(detectFailureState(m, m), m).toBe('frustrated')
+    }
+  })
   it('a genuinely repeated ANSWER is still read as frustration (unchanged)', () => {
     const m = 'the voltage goes up because the concentration goes up'
     expect(detectFailureState(m, m)).toBe('frustrated')
