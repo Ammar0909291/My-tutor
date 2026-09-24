@@ -31,7 +31,7 @@
 import { getConceptVisualType, lookupConceptVisualBinding, getConceptSceneGenerator } from '@/lib/teaching/visualRegistry'
 import { buildCanonicalScene, CONCEPT_SCENE_OVERRIDES } from './conceptSceneParams'
 import { admitVisualAsset, makeVisualAsset, type AssetProvenance, type VisualAsset, type VisualIntent } from './asset'
-import { isRetiredVisualBinding } from './retired'
+import { isRetiredVisualBinding, retiredAssetVerdict } from './retired'
 import { getKGNode } from '@/lib/curriculum/knowledgeGraph'
 import type { VisualType } from '@/lib/school/visuals/visualTypes'
 import { ARCHETYPES, type ArchetypeContext } from './archetypes'
@@ -311,19 +311,24 @@ function buildDecision(
     }
   }
 
-  // ── Tier −1: RETIRED BINDINGS ─────────────────────────────────────────────
-  // Checked before every tier, so a concept whose asset was found to depict
-  // something else cannot be picked up again by a broader rule — the curated
-  // row, the domain-prefix rule and the scene generator are all downstream of
-  // this line. Returning early is the whole mechanism; see retired.ts for the
-  // per-concept audit evidence.
-  if (isRetiredVisualBinding(ctx.conceptId)) {
-    return {
-      ...noFigureDecision('retired-binding', ctx.conceptId, ctx.title, intent.purpose, excursion),
-      continuityReason,
-      session: null,
-    }
-  }
+  // ── Tier −1: RETIRED ASSETS ───────────────────────────────────────────────
+  // A retired concept used to return here, before every tier — which also
+  // made any figure authored LATER unreachable (see retired.ts, "THE
+  // LIFECYCLE"). Now each tier's asset is judged individually: a retired
+  // asset (by content) and any broad rule are refused, and only a
+  // concept-authored asset with new content — a real replacement — is
+  // offered. If nothing survives, the answer is the same NO FIGURE as before.
+  const retired = isRetiredVisualBinding(ctx.conceptId)
+  const retiredNoFigure = (): VisualDecision => ({
+    ...noFigureDecision('retired-binding', ctx.conceptId, ctx.title, intent.purpose, excursion),
+    continuityReason,
+    session: null,
+  })
+  const refusedByRetirement = (asset: VisualAsset): boolean =>
+    retired && retiredAssetVerdict(ctx.conceptId, {
+      provenance: asset.provenance,
+      fingerprint: figureFingerprint(asset.payload),
+    }) !== 'replacement'
 
   // ── Tier 0: registry-named DETERMINISTIC SCENE GENERATOR ──────────────────
   // visualRegistry has recorded a concept→generator binding for 60 concepts
@@ -348,8 +353,7 @@ function buildDecision(
     // than declared — recorded, not hidden. See asset.ts's module doc.
     const conceptOwned = CONCEPT_SCENE_OVERRIDES.includes(ctx.conceptId)
     const provenance: AssetProvenance = conceptOwned ? 'generator' : 'generator-default'
-    return offer(
-      makeVisualAsset({
+    const tier0Asset = makeVisualAsset({
         // The `generator:` prefix is preserved for both so log format and the
         // existing provenance assertions are untouched; the honest distinction
         // lives in `provenance`/`identity`, which is what M3 will query, and is
@@ -375,18 +379,24 @@ function buildDecision(
           // agrees with their scene are unchanged.
           const fromKind = generatorKind ? SCENE_KIND_REPRESENTATION[generatorKind] : undefined
           if (fromKind) return fromKind
-          const registryVisual = getConceptVisualType(ctx.conceptId)
-          return registryVisual
-            ? representationForVisualType(registryVisual)
+          // Only a card a human bound to THIS concept may name the scene. A
+          // domain-prefix card describes the domain's stock illustration, not
+          // this scene: bio.cell.apoptosis was served its own cell-pathway
+          // scene while being introduced — to the tutor, to the learner's
+          // figure pointer, in the session and in telemetry — as a
+          // "food_chain", read off the 'bio.cell' domain row (2026-09-24).
+          // Otherwise the scene that was actually drawn decides.
+          const binding = lookupConceptVisualBinding(ctx.conceptId)
+          return binding?.tier === 'exact'
+            ? representationForVisualType(binding.entry.primary)
             : representationForSceneType(generatedScene.sceneType)
         })(),
         payload: { renderer: 'scene', sceneSpec: generatedScene },
         provenance,
-      }),
-      resolvePurpose(input, 'demonstrate'),
-      'registry',
-      null,
-    )
+      })
+    if (!refusedByRetirement(tier0Asset)) {
+      return offer(tier0Asset, resolvePurpose(input, 'demonstrate'), 'registry', null)
+    }
   }
 
   // ── Tier 1: curated registry binding ───────────────────────────────────────
@@ -396,8 +406,7 @@ function buildDecision(
     // 'exact' means a human wrote a row for THIS concept. 'domain' means a
     // prefix rule matched, so the binding names 'math.arith', not the concept.
     const declared = binding.tier === 'exact'
-    return offer(
-      makeVisualAsset({
+    const tier1Asset = makeVisualAsset({
         assetId: declared
           ? `registry:${ctx.conceptId}:${registryVisual}`
           : `registry:domain-default:${binding.scope}:${registryVisual}`,
@@ -406,12 +415,15 @@ function buildDecision(
         representation: representationForVisualType(registryVisual),
         payload: { renderer: 'card', visualType: registryVisual },
         provenance: declared ? 'curated' : 'domain-default',
-      }),
-      resolvePurpose(input, 'explain'),
-      'registry',
-      binding.entry.all ?? [registryVisual],
-    )
+      })
+    if (!refusedByRetirement(tier1Asset)) {
+      return offer(tier1Asset, resolvePurpose(input, 'explain'), 'registry', binding.entry.all ?? [registryVisual])
+    }
   }
+
+  // Every tier's asset for a retired concept was refused: NO FIGURE, with the
+  // retirement named as the reason exactly as before.
+  if (retired) return retiredNoFigure()
 
   // ── NO TIER 2 ─────────────────────────────────────────────────────────────
   // The Educational Archetype Engine used to sit here and guarantee a figure

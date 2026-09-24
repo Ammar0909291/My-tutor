@@ -3785,6 +3785,25 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // made, and captureShadow() never throws. Gated on
           // BRAIN_RUNTIME_MODE, which defaults to off — with the flag unset
           // this block does nothing at all.
+          // ── V2 IS THE ONLY SOURCE OF "WHAT CAN BE SHOWN" ───────────────────
+          // `availableVisual` above is the LEGACY answer — the raw registry card
+          // or a chapter-title keyword guess — and it knows nothing of
+          // retirement, domain safety or scope. It was only overwritten when
+          // the V2 decision was a card, so on a NO-FIGURE decision it survived
+          // into the learner-request directive: phys.em.lc-circuits (retired —
+          // its card has neither an inductor nor a capacitor) told the model
+          // "Lead with the visual: emit the VISUAL:circuit_diagram tag first,
+          // then … pointing at what to look at", and the clamp then served no
+          // figure. Every downstream consumer now reads the decision's own
+          // card, or nothing: a scene/spec figure is reported through
+          // `visualAlreadyAttached`, and no decision means no figure — the same
+          // rule the authority clamp applies at assembly.
+          {
+            const d = visualDecisionHoisted
+            const card = d?.graphical === true && d.payload?.renderer === 'card' ? d.payload : null
+            availableVisualHoisted = card ? card.visualType : null
+            allowedVisualsHoisted = card ? (d?.allowed ?? [card.visualType]) : null
+          }
           const { currentBrainMode, BrainMode } = await import('@/lib/teaching/runtime/brainRuntimeEntry')
           if (currentBrainMode().mode !== BrainMode.OFF) {
             try {
@@ -3858,9 +3877,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // the same owner that carries the length budget.
             maxNewTerms: contentRegister === 'beginner' ? 1 : 2,
             workedExampleFirst,
+            // V2's card, never the legacy guess — see "V2 IS THE ONLY SOURCE OF
+            // WHAT CAN BE SHOWN" above. A "Visual-first: … lead with it (emit
+            // the VISUAL tag)" line for a figure the clamp will never serve is a
+            // phantom-figure claim written into the prompt.
             visualType: (learnerRequestHoisted === 'diagram' || explainDifferentlyNeedsVisual)
-              ? availableVisual
-              : decideVisualFirst(availableVisual, conversationStateHoisted, nextMove),
+              ? availableVisualHoisted
+              : decideVisualFirst(availableVisualHoisted, conversationStateHoisted, nextMove),
             firstLessonActive: firstLessonActiveHoisted,
             legalityRationale: moveDecision.rationale,
             directiveJustIssued: recoveryKeyHoisted === 'too_many_questions',
@@ -3910,14 +3933,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 if (selectedStrategyHoisted < 2) selectedStrategyHoisted = 4
               }
               systemPrompt += buildLearnerRequestBlock(
-                learnerRequestHoisted, availableVisual, remediationTier,
+                learnerRequestHoisted, availableVisualHoisted, remediationTier,
                 hasEstablishedExample, selectedStrategyHoisted,
                 teachingHistoryHoisted.prerequisiteAttempts.length > 0 ? null : (convConceptId ?? null),
                 visualDecisionHoisted?.graphical ?? false,
               )
             } else {
               systemPrompt += buildLearnerRequestBlock(
-                learnerRequestHoisted, availableVisual, remediationTier, hasEstablishedExample,
+                learnerRequestHoisted, availableVisualHoisted, remediationTier, hasEstablishedExample,
                 undefined, undefined, visualDecisionHoisted?.graphical ?? false,
               )
             }
@@ -7541,7 +7564,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // an invariant (see stripPhantomVisualClaims's own doc for the real
         // production transcripts this closes). Sentence-scoped, so an
         // otherwise-correct explanation is not discarded over one bad clause.
-        const anyVisualAttachedThisTurn = !!responseVisual || visualDecisionHoisted?.graphical === true
+        // The V2 decision alone — the same fact the authority clamp enforces at
+        // assembly. `responseVisual` here can still be the MODEL'S OWN
+        // `VISUAL:` tag, which the clamp discards when the decision has no
+        // figure; reading it let a model that claimed a figure switch off the
+        // very strip that catches the claim.
+        const anyVisualAttachedThisTurn = visualDecisionHoisted?.graphical === true
         if (!anyVisualAttachedThisTurn) {
           const beforeStrip = cleanText
           cleanText = stripPhantomVisualClaims(cleanText)
@@ -12136,6 +12164,22 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       const servedMcq = probeReleasedThisTurnHoisted
         ? undefined
         : (mcqForClient(resolvedQuestionServedFinal) ?? undefined)
+      // ONE RECORD OF THIS VISUAL TURN (visual/turnRecord.ts): decision, tier,
+      // reason and — read from the figure fields this response carries, and
+      // nothing else — whether the learner actually receives a figure. The
+      // turn event's `visualServed` reads the same value, so the two logs can
+      // never disagree about whether a figure was served.
+      let visualTurnServed = Boolean(responseVisual) || Boolean(detectedVisualSpec) || Boolean(detectedSceneSpec)
+      try {
+        const { describeVisualTurn } = await import('@/lib/teaching/visual/turnRecord')
+        const record = describeVisualTurn(
+          resolvedVisualDecision,
+          { visual: responseVisual, visualSpec: detectedVisualSpec, sceneSpec: detectedSceneSpec },
+          learnerRequestHoisted === 'diagram',
+        )
+        visualTurnServed = record.served
+        console.log('[learn/chat] VISUAL_TURN=' + JSON.stringify(record))
+      } catch { /* observability never breaks a turn */ }
       // AN UNMET PICTURE REQUEST IS SAID OUT LOUD (acknowledgeUnavailablePicture).
       // Here, at the final response, because EVERY serving path converges here:
       // the two production turns that exposed it were served from Explanation
@@ -12308,7 +12352,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           excursionActive: resolvedExcursionActive,
           recoveryFired: resolvedRecoveryKey !== null,
           // Typed Turn Contract Batch 5: reuses `resolvedVisualDecision`.
-          visualServed: resolvedVisualDecision?.graphical === true,
+          // What the RESPONSE carries (VISUAL_TURN above), not what was decided:
+          // a held figure is decided but deliberately not re-attached.
+          visualServed: visualTurnServed,
         }))
       } catch (err) {
         console.warn('[turn-event] line skipped:', err)

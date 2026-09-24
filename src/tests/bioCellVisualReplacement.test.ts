@@ -23,7 +23,7 @@
 import { describe, expect, it } from 'vitest'
 import { RETIRED_VISUAL_BINDINGS, isRetiredVisualBinding } from '@/lib/teaching/visual/retired'
 import { resolveVisual, resolveVisualForTurn } from '@/lib/teaching/visual/resolveVisual'
-import { lookupConceptVisualBinding } from '@/lib/teaching/visualRegistry'
+import { listDomainRules, lookupConceptVisualBinding } from '@/lib/teaching/visualRegistry'
 import { buildCanonicalScene } from '@/lib/teaching/visual/conceptSceneParams'
 import { buildCellStructureScene } from '@/lib/teaching/sceneGenerators/cellStructure'
 import { buildCellPathwayScene } from '@/lib/teaching/sceneGenerators/cellPathway'
@@ -108,11 +108,13 @@ describe.each(THE_18)('%s', (conceptId) => {
     expect(d.provenance, conceptId).toBe(`generator:${conceptId}:concept-authored`)
   })
 
-  it('the underlying bio.cell -> food_chain domain row is untouched, merely outranked', () => {
-    const binding = lookupConceptVisualBinding(conceptId)
-    expect(binding?.tier, conceptId).toBe('domain')
-    expect(binding?.scope, conceptId).toBe('bio.cell')
-    expect(binding?.entry.primary, conceptId).toBe('food_chain')
+  it('the underlying bio.cell -> food_chain domain row is untouched, but no longer serves', () => {
+    // Visual architecture hardening (2026-09-24): the row stays in
+    // DOMAIN_VISUALS (reviewable, reversible), but a domain card must
+    // illustrate the domain it is bound to (DOMAIN_CARD_HOME), and food_chain
+    // is an ecology card — so the rule is refused rather than merely outranked.
+    expect(listDomainRules()).toContainEqual({ prefix: 'bio.cell', primary: 'food_chain', faithful: false })
+    expect(lookupConceptVisualBinding(conceptId), conceptId).toBeNull()
   })
 })
 
