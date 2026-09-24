@@ -17,6 +17,7 @@ import { RETIRED_VISUAL_BINDINGS, isRetiredVisualBinding, retirementReason } fro
 import { resolveVisual, resolveVisualForTurn } from '@/lib/teaching/visual/resolveVisual'
 import { buildVisualContractBlock } from '@/lib/teaching/visual/visualContract'
 import { getKGNode } from '@/lib/curriculum/knowledgeGraph'
+import { lookupConceptVisualBinding } from '@/lib/teaching/visualRegistry'
 
 const RETIRED = Object.keys(RETIRED_VISUAL_BINDINGS)
 
@@ -24,7 +25,7 @@ const ask = (conceptId: string, message = 'explain with diagram') =>
   resolveVisual({ message, lessonConceptId: conceptId, learnerRequest: 'diagram' })
 
 describe('the register itself', () => {
-  it('covers exactly the 37 audited concepts', () => {
+  it('covers exactly the 43 audited concepts', () => {
     // 29 from the M3-A audit + 8 from the visual semantic moat sweep, which
     // ran the resolver over all 238 physics and 186 chemistry concepts and
     // read all 105 bindings that render.
@@ -35,7 +36,13 @@ describe('the register itself', () => {
     // 8 that remain depict the very position their concept exists to refute —
     // a perfect lattice for crystal DEFECTS, shell rings for ORBITALS, a
     // covalent bond for INTERmolecular forces — which no wording can fix.
-    expect(RETIRED).toHaveLength(37)
+    //
+    // +6 (2026-09-24, Biology visual coverage inventory): the inventory ran
+    // the real resolver over all 199 current Biology KG concepts and found six
+    // more bio.cell concepts, authored after the original 12-concept sweep
+    // above, silently inheriting the identical wrong 'bio.cell' -> food_chain
+    // domain default — the same defect class, found by the same method.
+    expect(RETIRED).toHaveLength(43)
   })
 
   it('every retired id is a real KG concept — a typo would silently retire nothing', () => {
@@ -133,6 +140,22 @@ describe('B1 changed only what it was meant to change', () => {
     expect(mitosis.payload?.renderer).toBe('scene')
   })
 
+  it('the twelve original bio.cell retirements behave exactly as before the six new ones were added', () => {
+    // Explicit, named check (not just the parameterized RETIRED loop above)
+    // that adding six new entries to the same Record did not disturb the
+    // twelve that were already there — same suppression, same evidence.
+    for (const id of [
+      'bio.cell.cell-theory', 'bio.cell.prokaryotic-cell', 'bio.cell.eukaryotic-cell',
+      'bio.cell.cell-membrane-transport', 'bio.cell.nucleus-chromosomes',
+      'bio.cell.mitochondria-energy', 'bio.cell.chloroplast-structure',
+      'bio.cell.endomembrane-system', 'bio.cell.cytoskeleton', 'bio.cell.cell-cycle',
+      'bio.cell.cell-signalling', 'bio.cell.apoptosis',
+    ]) {
+      expect(isRetiredVisualBinding(id), id).toBe(true)
+      expect(ask(id).graphical, id).toBe(false)
+    }
+  })
+
   it('the historic wrong-visual concepts are not served on an off-topic request', () => {
     // CORRECTED in visual round 2. This previously read "they had no asset
     // before and must not have acquired one", which is no longer true and had
@@ -154,6 +177,83 @@ describe('B1 changed only what it was meant to change', () => {
       const d = ask(id, 'explain with a ray diagram, like a mirror')
       expect(d.graphical, id).toBe(false)
       expect(d.asset, id).toBeNull()
+    }
+  })
+})
+
+/**
+ * The six bio.cell concepts found by the 2026-09-24 Biology visual coverage
+ * inventory — the SAME defect as the twelve concepts retired above (a food
+ * chain card, ecosystem-level energy flow, silently inherited via the
+ * 'bio.cell' -> food_chain DOMAIN_VISUALS default for subcellular topics that
+ * were authored after the original sweep and never checked against it).
+ *
+ * These tests name the six concepts explicitly, rather than relying only on
+ * the parameterized RETIRED loops above, so a future edit that accidentally
+ * drops one of the six ids from RETIRED_VISUAL_BINDINGS fails loudly here
+ * even if it never breaks the generic loop.
+ */
+describe('the six newly-retired bio.cell concepts (2026-09-24 inventory)', () => {
+  const NEW_RETIREMENTS = [
+    'bio.cell.anaerobic-respiration-fermentation',
+    'bio.cell.cancer-biology-hallmarks',
+    'bio.cell.cell-adhesion-tissue-organization',
+    'bio.cell.cell-junctions-extracellular-matrix',
+    'bio.cell.cytoskeleton-motility',
+    'bio.cell.membrane-transport-energetics',
+  ]
+
+  it.each(NEW_RETIREMENTS)('%s — A: isRetiredVisualBinding is true', (conceptId) => {
+    expect(isRetiredVisualBinding(conceptId)).toBe(true)
+  })
+
+  it.each(NEW_RETIREMENTS)('%s — B: no longer resolves to the food_chain fallback through the resolver', (conceptId) => {
+    // The underlying DOMAIN_VISUALS row is untouched by design (retired.ts's
+    // own contract: "Nothing is removed from CONCEPT_VISUALS, DOMAIN_VISUALS
+    // or CONCEPT_SCENES") — lookupConceptVisualBinding still finds it...
+    const binding = lookupConceptVisualBinding(conceptId)
+    expect(binding?.entry.primary, conceptId).toBe('food_chain')
+    // ...but the ACTUAL resolver, which checks retirement before any tier,
+    // never reaches that row and serves no figure at all.
+    const d = ask(conceptId)
+    expect(d.graphical, conceptId).toBe(false)
+    expect(d.payload, conceptId).toBeNull()
+    expect(d.provenance, conceptId).toBe('no-figure:retired-binding')
+  })
+
+  it('D: an unrelated Biology concept legitimately using ITS OWN domain fallback is unaffected', () => {
+    // After these six retirements, EVERY bio.cell concept is either retired
+    // (18 of 20) or served by its own exact Tier 0 generator (bio.cell.mitosis,
+    // bio.cell.meiosis) — none legitimately falls through to the bio.cell
+    // domain default any more, so there is no remaining bio.cell control to
+    // pick (confirmed by running lookupConceptVisualBinding over all 20
+    // bio.cell KG concepts). Per the task's own fallback instruction, the
+    // control is instead a concept from a DIFFERENT Biology domain that
+    // legitimately uses ITS OWN, separate domain-default row
+    // ('bio.eco' -> food_chain, a different DOMAIN_VISUALS entry entirely) —
+    // confirming that retiring six bio.cell ids left the bio.eco rule, and
+    // every concept resolved through it, completely untouched.
+    for (const id of ['bio.eco.population-ecology', 'bio.eco.community-ecology']) {
+      expect(isRetiredVisualBinding(id), id).toBe(false)
+      const binding = lookupConceptVisualBinding(id)
+      expect(binding?.tier, id).toBe('domain')
+      expect(binding?.scope, id).toBe('bio.eco')
+      expect(binding?.entry.primary, id).toBe('food_chain')
+      const d = ask(id)
+      expect(d.graphical, id).toBe(true)
+      expect(d.provenance, id).toBe(`registry:domain-default:bio.eco:food_chain`)
+    }
+  })
+
+  it('the two cell-division concepts still resolve through their own Tier 0 generator, untouched', () => {
+    // Regression guard specific to this change: bio.cell.mitosis/meiosis sit
+    // in the same domain as the six new retirements and must not have been
+    // affected by editing a Record that is keyed by concept id, not by domain.
+    for (const id of ['bio.cell.mitosis', 'bio.cell.meiosis']) {
+      expect(isRetiredVisualBinding(id), id).toBe(false)
+      const d = ask(id)
+      expect(d.graphical, id).toBe(true)
+      expect(d.payload?.renderer, id).toBe('scene')
     }
   })
 })
