@@ -56,6 +56,7 @@
  */
 
 import { stripAuthoringLabel, containsOptionList } from './gateProbeContract'
+import { hasProseMultipleChoice } from './proseMcqGuard'
 import { askedAnswerableQuestion } from './answerableTurn'
 import type { TutorMCQ } from './mcq'
 
@@ -1129,9 +1130,45 @@ export function withholdClosingProseQuestion(input: {
  * Call ONLY when no artifact will be served. Pure; never throws; returns a
  * non-empty turn or the caller's own fallback.
  */
+/**
+ * A SENTENCE THAT POINTS AT OPTIONS THE LEARNER CANNOT SEE.
+ *
+ * MEASURED (production, 2026-09-24, real account, no widget served on either
+ * turn):
+ *   phys.em.lc-circuits      "…pick the best answer: Let me know which option
+ *                             you choose when you're ready."
+ *   phys.qm.particle-in-box  "…which of the following statements is correct,
+ *                             and why? Take a look at the labelled figure…"
+ * Neither ends in a colon, so the structural check below never saw them, and
+ * the learner was asked to choose from a list that does not exist.
+ *
+ * Phrase-based ON PURPOSE and narrow: each phrase only makes sense when a list
+ * of options is on screen. Only consulted when no MCQ is served AND the text
+ * carries no lettered option list of its own (a prose list is a separate case,
+ * owned by proseMcqGuard).
+ */
+const POINTS_AT_MISSING_OPTIONS =
+  /\b(which of the following|of the (?:options|choices) (?:below|above|shown)|(?:pick|choose|select|tap) (?:the )?(?:best|correct|right) (?:answer|option|choice)|which (?:option|choice|answer) you (?:choose|pick|select)|from the (?:options|choices|list) (?:below|above)|the options below)\b/i
+
+export function dropSentencesPointingAtMissingOptions(text: string): string {
+  const t = typeof text === 'string' ? text : ''
+  if (!POINTS_AT_MISSING_OPTIONS.test(t) || containsOptionList(t) || hasProseMultipleChoice(t)) return t
+  // Split on sentence ends AND on a colon that introduces a new sentence, so
+  // "…behaves, pick the best answer: Let me know…" loses both halves of the
+  // promise but keeps the teaching before it.
+  const parts = t.split(/(?<=[.!?])\s+|(?<=:)\s+(?=[A-Z])/)
+  const kept: string[] = []
+  for (const part of parts) {
+    if (!POINTS_AT_MISSING_OPTIONS.test(part)) kept.push(part)
+  }
+  return kept.join(' ').replace(/\s+([.!?])/g, '$1').trim()
+}
+
 export function enforceQuestionDeliveryContract(text: string, fallback: string): string {
   try {
-    const t = typeof text === 'string' ? text : ''
+    const t0 = typeof text === 'string' ? text : ''
+    const t = dropSentencesPointingAtMissingOptions(t0)
+    if (t !== t0 && !/:\s*$/.test(t.trimEnd())) return t.length > 0 ? t : fallback
     // A trailing colon is a promise of something that should follow. Nothing
     // does. Structural, so it needs no phrase list and catches a turn the
     // provider truncated at its own lead-in for free.

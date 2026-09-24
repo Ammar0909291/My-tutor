@@ -7549,6 +7549,22 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             console.warn('[visual-v2] stripped a phantom visual claim — no figure was attached this turn')
           }
         }
+        // An explicit picture request with no figure to give: say so. See
+        // acknowledgeUnavailablePicture for the measured Kepler/LC turns.
+        try {
+          const { acknowledgeUnavailablePicture } = await import('@/lib/teaching/visual/visualAcknowledgement')
+          const ack = acknowledgeUnavailablePicture({
+            text: cleanText,
+            learnerAskedForPicture: learnerRequestHoisted === 'diagram',
+            figureAttachedThisTurn: anyVisualAttachedThisTurn,
+            figureShownEarlierForConcept: resolvedConceptId !== null && resolvedConceptId !== undefined
+              && snapshotRRMLog.some((e) => e.matchedConcept === resolvedConceptId),
+          })
+          if (ack.appended) {
+            console.log('[visual-v2] picture requested but none available — said so')
+            cleanText = ack.text
+          }
+        } catch { /* non-fatal — a repair must never break a turn */ }
       }
 
       // Sprint W gap A: extract the [HINT] tag's text (if the model emitted
