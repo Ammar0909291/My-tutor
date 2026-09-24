@@ -180,9 +180,8 @@ export function buildDNAReplicationScene(): SceneSpec {
       {
         intent: 'resolve',
         narration:
-          'On the bottom template 5′ to 3′ points away from the fork, so the lagging strand is made in ' +
-          'short Okazaki fragments, each begun by its own primer; once a primer is replaced with DNA, ' +
-          'ligase joins the pieces.',
+          'On the bottom template 5′→3′ points away from the fork, so each Okazaki fragment grows away ' +
+          'from it, from a new primer laid nearer the fork as it opens; ligase then joins the pieces.',
         objects: [...lagging, ...ligase],
       },
       {

@@ -142,6 +142,11 @@ describe('4. the geometry says what the concept says', () => {
     expect(n[2]).toMatch(/existing 3′ end/)
     expect(n[3]).toMatch(/leading strand/i)
     expect(n[4]).toMatch(/Okazaki/)
+    // The direction and the primer order, stated outright: production QA
+    // (2026-09-24) had the tutor say fragments are extended "toward the fork",
+    // with the next primer "further back" — both backwards.
+    expect(n[4]).toMatch(/grows away/)
+    expect(n[4]).toMatch(/primer laid nearer the fork/)
     expect(n[4]).toMatch(/ligase/)
     expect(n[5]).toMatch(/semiconservative/i)
   })
