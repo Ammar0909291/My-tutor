@@ -62,6 +62,33 @@ shows the defect; go straight to S5.
 6. **Record** the run's scorecard and findings as a dated section in
    `docs/history/synthetic-students.md`, then **update the LIVE STATE table above**.
 
+## Egress guard (owner: "keep egress size under free tier" — standing, checked every iteration)
+
+5 GB/month Supabase free tier. The Supabase usage meter is not queryable from a session, so each
+run is measured with the `pg_stat_statements` delta method from `docs/history/egress-incidents.md`.
+It counts rows returned (cumulative since project creation, never reset).
+
+1. **Before a run:** snapshot the totals and the top queries (read-only, tiny result):
+   ```sql
+   select now() as at, sum(calls)::bigint as calls, sum(rows)::bigint as rows,
+     (select json_agg(t) from (select left(regexp_replace(query,'\s+',' ','g'),90) as q, calls, rows
+        from pg_stat_statements order by rows desc limit 10) t) as top
+   from pg_stat_statements;
+   ```
+2. **After the run:** snapshot again. Rows per synthetic turn = Δrows / turns. Estimate bytes at
+   about 300 B/row; `spine_events` measured about 470 B/row.
+3. **Stop rule:**
+   - If a run's estimated egress exceeds **50 MB**, pause further runs.
+   - Also pause if the daily total trends above about **150 MB/day** (≈ 4.5 GB/month).
+   - Then find the query that grew in the top-10 delta before running again.
+   - Never add per-turn DB reads. The runner itself reads no DB.
+4. The Supabase dashboard also costs egress: every page load runs `pg_timezone_names`. Keep that
+   tab closed.
+
+| Snapshot | At (UTC) | calls | rows | Note |
+|---|---|---|---|---|
+| E0 | 2026-09-24 18:41:52 | 10,355,126 | 188,905,370 | before the S6 after-run (after the S4 baseline) |
+
 ## Rules that bind this work
 
 - **Egress:** 5 GB/month Supabase.
