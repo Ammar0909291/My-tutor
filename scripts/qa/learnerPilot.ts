@@ -103,7 +103,7 @@ async function main() {
           .filter((n) => !(figureOnScreen && n.endsWith('without-figure')))
         const m = r.mastery ?? {}
         turns.push({
-          label, sent: sent.slice(0, 160), provider: r.provider ?? null, llmCalls: r.llmCallCount ?? null,
+          label, at: new Date().toISOString(), sent: sent.slice(0, 160), provider: r.provider ?? null, llmCalls: r.llmCallCount ?? null,
           figure: kind, mcq: r.mcq ? { q: r.mcq.question, options: r.mcq.options } : null,
           phase: m.phase ?? null, check: m.checkCorrect ?? null, practice: m.practiceCorrect ?? null,
           vCheck: m.verifiedCheckCorrect ?? null, vPractice: m.verifiedPracticeCorrect ?? null,
@@ -149,7 +149,9 @@ async function main() {
           gateTurns: turns.filter((t) => t.provider === 'gate').length,
           mcqsServed: turns.filter((t) => t.mcq).length,
           figuresServed: turns.filter((t) => t.figure).length,
-          completed: turns.some((t) => t.complete),
+          // "Let's pause X here" also sets lessonComplete — a CLOSE, not mastery.
+          closed: turns.some((t) => t.complete),
+          mastered: turns.some((t) => (t.vCheck ?? 0) >= 1 && (t.vPractice ?? 0) >= 2),
           finalPhase: lastT?.phase ?? null,
           verified: `${lastT?.vCheck ?? '?'}/${lastT?.vPractice ?? '?'}`,
           unverified: `${lastT?.check ?? '?'}/${lastT?.practice ?? '?'}`,
