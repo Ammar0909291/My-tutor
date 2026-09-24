@@ -28,7 +28,8 @@ reach verified mastery every time with zero critical defects (`scripts/qa/synthe
 | S5 | Push S3 + baseline fixes (verdict after gate-contract replacement, "Got it" announcement, `asksForPractice` next-question/check-me) to `main`; confirm the deploy is READY | **done**: `f6281f8`; production READY at `1f438cd` (19:0x UTC) |
 | S6 | After-run: the same 2 topics × 5 students on the fixed build; compare with S4 | **done**: 8/10 mastered (was 4/10); critical 1 (was 12). Only confused fails |
 | S6a | Root cause of "asked for a question, got none" (Vercel `[arbitration]` + `[gate-eligibility]` logs): a practice request with a "?" ("give me a question?", "can you check me with a question?") claims LEARNER_QUESTION, which denies AUTHORED_PROBE. Fix: `genuineQuestionActive … && !turnIntent.wantsPractice` in route.ts | **pushed** (full suite 723/14,915, tsc and build clean); next: after-run 2 |
-| S6b | After-run 2 on production `dc07f2d` (arbitration fix `ae9caf6`), same 2 topics × 5 students | **running** (started 19:48 UTC); egress E3 taken |
+| S6b | After-run 2 on production `dc07f2d` (arbitration fix `ae9caf6`), same 2 topics × 5 students | **done**: 9/10 mastered (confused now masters both). Remaining: off-track velocity stuck at TRANSFER 1/1; 1 checker false positive |
+| S6c | Fixes from S6b: practice request never carries self-reported correctness; excursion `heldQuestion` (answering the lesson's held question closes the detour and counts); concept-name exemption in `dropAnswerLeaks` and the checker | **validating** (then push, deploy, after-run 3) |
 | S7 | Fix the top remaining defect class from S6, validate, deploy, re-run. Known candidates: (a) the ladder stays frozen when the learner answers the lesson's own held question during an excursion (`route.ts` `excursionFrozeLadderThisTurn`). The closing turn also freezes by design (`excursionActiveHoisted = !turnCountsForLesson` counts justClosed as active), so the fix needs a deliberate exception: record the lesson question on screen at excursion open, and count an answer to exactly that question. It touches evidence, so do it only if S6 shows off-track still failing; (b) the KG-description fallback repeats verbatim turn after turn | pending |
 | S8 | Widen to more launch topics (`RUNNER_TOPICS=6`, then more) within the egress cap | pending |
 
@@ -93,6 +94,7 @@ It counts rows returned (cumulative since project creation, never reset).
 | E1 | 2026-09-24 19:04:00 | 10,355,590 | 188,905,885 | start of the S6 after-run; +515 rows in 22 idle minutes, so background traffic is negligible |
 | E2 | 2026-09-24 19:40:08 | 10,383,880 | 189,022,806 | end of S6: +116,921 rows over ~120 turns, about 35 MB. Today so far: 2 runs, about 70 MB |
 | E3 | 2026-09-24 19:48:30 | 10,384,238 | 189,023,228 | start of after-run 2 (+422 idle) |
+| E4 | 2026-09-24 20:28:44 | 10,414,424 | 189,133,335 | end of after-run 2: +110,107 rows / 126 turns, about 33 MB. **Today: 3 runs, about 103 MB. One more run allowed today (cap about 150 MB/day)** |
 
 ## Rules that bind this work
 
@@ -110,6 +112,21 @@ It counts rows returned (cumulative since project creation, never reset).
 - **Reporting:** every turn ends with the CLAUDE.md report (one fenced block, git info).
 - **No AI key in the container.** Students are rule-based, and the model-based factual marker is
   not built. It needs a key added to the environment secrets by the owner.
+
+## OPEN — needs owner review before any code
+
+**TRANSFER below the verified bar.** Plain counters, which include model self-reports on prose
+answers, can move PRACTICE → TRANSFER while verified practice is below 2. TRANSFER moves no counter
+and gets no authored question, so mastery becomes unreachable.
+
+Proposed fix, in `conversationState.ts` and the gate's `phaseAllowsProbe`:
+
+- At TRANSFER, while verified is below the bar (CHECK < 1 or PRACTICE < 2), attach authored
+  questions.
+- Let a server-graded correct answer top up the lowest unmet verified counter.
+
+It changes the ladder, so it is not done without review. The full reasoning is in
+`docs/history/synthetic-students.md` (after-run 2).
 
 ## Known open defects (from the S2 smoke run; check whether S6 still shows them)
 

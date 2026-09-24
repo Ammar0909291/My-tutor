@@ -136,3 +136,55 @@ The same turn read `PRACTICE_REQUEST`. Fix: `genuineQuestionActive … && !turnI
 **Egress:** E1 → E2 = +116,921 rows over about 120 turns, about 975 rows/turn, so about 35 MB per
 run at about 300 B/row. That is under the 50 MB per-run cap; about 4 runs/day fit in the 150 MB/day
 guard.
+
+## 2026-09-24 — After-run 2 (production `dc07f2d`: arbitration fix `ae9caf6`)
+
+126 turns, 5 disposable accounts deleted, egress E3 → E4 = +110,107 rows (about 33 MB).
+
+| Student | displacement | velocity |
+|---|---|---|
+| beginner | mastered, 12 turns | mastered, 12 turns |
+| careless | mastered, 11 turns | mastered, 11 turns |
+| strong | mastered, 9 turns | mastered, 9 turns |
+| confused | **mastered, 15 turns** (was stuck) | **mastered, 15 turns** |
+| offtrack | mastered, 14 turns | not mastered, 18 turns, stuck at TRANSFER 1/1 |
+
+**9/10 mastered** (baseline 4/10, after-run 1 8/10).
+
+The one critical finding, `answer-leak`, was a checker false positive. The answer was the lesson's own
+concept name ("Displacement — a vector…", lesson "Displacement and Distance"), named by the authored
+explanation above the question. The server guard `dropAnswerLeaks` had the same weakness, so on
+another path it could have stripped every teaching sentence that names the concept.
+
+The off-track velocity failure had two causes, both from production `TURN_EVENT`s for that session:
+
+1. `ANSWER_ATTEMPT … server-key true … excursionActive true`: the lesson's own on-screen question,
+   answered correctly during a side-question excursion, got no credit (every excursion turn freezes
+   the ladder).
+2. `PRACTICE_REQUEST PRACTICE -> TRANSFER, gradeSource none, signalSuppressedReason null`: on "ok,
+   next question please" the model's own SIGNAL said correct, and the plain counter moved the
+   lesson to TRANSFER below the verified bar. TRANSFER adds no credit of any kind, so mastery
+   became unreachable.
+
+Fixes:
+
+- **Practice request.** A practice request never carries self-reported correctness
+  (`practice-request-not-an-answer`, before the ladder and before `PROBE_OUTCOME`).
+- **Excursion.** `ExcursionState.heldQuestion` records the lesson question on screen when an
+  excursion opens. Answering exactly that question closes it as `closed-answered-lesson`, and
+  `turnCountsForLesson` counts that turn for the lesson. It survives `parseExcursionState`.
+- **Concept name.** `dropAnswerLeaks(text, mcq, conceptTitle)` and the runner's check skip an
+  answer that is the lesson's own concept name.
+
+Not done, and flagged for the owner: **TRANSFER below the verified bar.** Plain counters (which
+include model self-reports on genuine prose answers) can carry a lesson PRACTICE → TRANSFER while
+verified practice is below 2. After that no counter moves and the gate attaches no authored
+question (TRANSFER is not a mastery-gate phase), so verified mastery is unreachable. Rule-based
+students cannot answer prose questions, so the runner under-samples this. Real learners who answer
+the tutor's prose questions would hit it.
+
+Proposed fix, which changes the ladder and so needs review:
+
+- At TRANSFER, while verified CHECK < 1 or verified PRACTICE < 2, let the gate attach authored
+  questions.
+- Let a server-graded correct answer top up the lowest unmet verified counter.
