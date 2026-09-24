@@ -907,6 +907,61 @@ const cannotFollowAnArticle = (next: string | undefined): boolean =>
  */
 const REASONING_CONNECTIVE = new Set(['because', 'but', 'so', 'since'])
 
+/**
+ * A QUANTITY SYMBOL IS NOT AN OPTION LETTER.
+ *
+ * Physics writes its answers as assignments — "a = 2 m/s^2", "c = 450",
+ * "d = 5 m" — and a, c and d are also option letters. Measured (production
+ * harness, 2026-09-24, phys.therm.specific-heat): "c = 450" against
+ * "450 J kg⁻¹ K⁻¹" | "900 …" | "180 …" | "720 000 …" resolved by rule 1 to
+ * option C, "180", so the correct value was graded wrong. A letter directly
+ * followed by "=" names a quantity, never a choice, so the letter rules read
+ * the message with such letters removed. The value itself is untouched and
+ * still reaches rule 5.
+ */
+const VARIABLE_LETTER = /(^|[^A-Za-z0-9_])[a-dA-D](?=\s*=)/g
+const withoutVariableLetters = (s: string): string => s.replace(VARIABLE_LETTER, '$1')
+
+/**
+ * The value an option LEADS with — "2 m/s²" -> "2", "About 19.5°" -> "19.5",
+ * "zero point five newton-metres" -> "0.5" — or null when the option does not
+ * open with a number. Canonical form matches `numbersIn`.
+ */
+function leadingValue(option: string): string | null {
+  const m = norm(option).match(/^(?:about |approximately |approx |around |roughly |nearly )?(\d+(?:\.\d+)?)(?![\d.])/)
+  return m ? String(Number(m[1])) : null
+}
+
+/**
+ * The leading VALUE EXPRESSION of a string, canonicalised: "2 m/s²" -> "2",
+ * "0.20 V" -> "0.2", "2/4" -> "2/4", "1:5 — …" -> "1:5", "−1 — …" -> "-1".
+ * Kept as an expression rather than split into numbers so a fraction, ratio
+ * or sign stays ONE value. `anywhere` finds the first expression in a
+ * learner's sentence ("i think 2 m/s2", "a = 2 m/s^2"); without it the string
+ * must open with one (an option). Word numbers are read through `norm`, so
+ * "five newton-metres" leads with "5".
+ */
+function valueExpression(text: string, anywhere: boolean): string | null {
+  const canon = (e: string) => {
+    const signed = e.replace(/\u2212/g, '-')
+    return /^[-+]?\d+(?:\.\d+)?$/.test(signed) ? String(Number(signed)) : signed.replace(/^\+/, '')
+  }
+  const raw = foldSuperscripts(text).toLowerCase()
+  const re = anywhere
+    ? /(?<![\w.])([-+\u2212]?\d+(?:[.:/]\d+)*)/
+    : /^\s*(?:about |approximately |approx |around |roughly |nearly )?([-+\u2212]?\d+(?:[.:/]\d+)*)/
+  const m = raw.match(re)
+  if (m) return canon(m[1])
+  const lead = anywhere ? (numbersIn(norm(text))[0] ?? null) : leadingValue(text)
+  return lead
+}
+
+/** Answer halves that are also what a learner says to a yes/no CHECK-IN
+ *  question, so rule 3b never reads them as a choice. */
+const LEAD_TOO_CONVERSATIONAL: ReadonlySet<string> = new Set([
+  'yes', 'no', 'ok', 'okay', 'sure', 'right', 'correct', 'wrong', 'not quite',
+])
+
 const looksLikeAQuestion = (s: string): boolean =>
   /\?\s*$/.test(s.trim()) || /^\s*(why|how|what|when|where|which|who|is|are|does|do|can|could|should)\b/i.test(s)
 
@@ -965,6 +1020,12 @@ export function resolveMcqChoice(message: string, mcq: TutorMCQ): number | null 
   // stating the order here keeps that guarantee explicit rather than lucky.
   if (!n) return NON_COMMITTAL.test(message) ? null : verbatimOption()
   const tokens = n.split(' ')
+  // The LETTER rules (0a, the precondition, 1) read the message with quantity
+  // symbols removed — see `withoutVariableLetters`. Every other rule, and
+  // every exact/containment match, still reads the message as typed.
+  const letterMessage = withoutVariableLetters(message)
+  const letterTokens = norm(letterMessage).split(' ')
+  const quantityOptions = mcq.options.length > 0 && mcq.options.every((o) => leadingValue(o) !== null)
   const limit = Math.min(mcq.options.length, OPTION_KEYS.length)
 
   // 0. EXACT MATCH — RUNS FIRST, AND THE ORDER IS THE POINT.
@@ -1092,7 +1153,7 @@ export function resolveMcqChoice(message: string, mcq: TutorMCQ): number | null 
   {
     const labelled = new Set<number>()
     const named = new Set<number>()
-    for (const m of message.matchAll(/(?:^|[\s(])([a-dA-D])(\s*[.)\],:;-])?(?=\s|$)/g)) {
+    for (const m of letterMessage.matchAll(/(?:^|[\s(])([a-dA-D])(\s*[.)\],:;-])?(?=\s|$)/g)) {
       const idx = OPTION_KEYS.indexOf(m[1].toLowerCase() as typeof OPTION_KEYS[number])
       if (idx < 0 || idx >= limit) continue
       // "a" is also the English indefinite article. An UNLABELLED "a" (no
@@ -1114,7 +1175,7 @@ export function resolveMcqChoice(message: string, mcq: TutorMCQ): number | null 
       // unlabelled "A" there is followed by "or", which cannot follow an
       // article, so it still counts).
       if (!m[2] && m[1].toLowerCase() === 'a') {
-        const rest = message.slice((m.index ?? 0) + m[0].length)
+        const rest = letterMessage.slice((m.index ?? 0) + m[0].length)
         const nextWord = rest.match(/^\s*([a-zA-Z']+)/)?.[1]?.toLowerCase()
         if (!cannotFollowAnArticle(nextWord)) continue
       }
@@ -1147,13 +1208,13 @@ export function resolveMcqChoice(message: string, mcq: TutorMCQ): number | null 
   const namedStandalone = new Set<number>()
   for (let i = 0; i < limit; i++) {
     const key = OPTION_KEYS[i]
-    const pos = tokens.indexOf(key)
+    const pos = letterTokens.indexOf(key)
     if (pos === -1) continue
     // Same article guard as rule 0a and rule 1 below: a bare "a" token is
     // this precondition's own article collision ("B because i had a car"
     // must not be treated as naming both A and B — see rule 0a's doc
     // comment for the measured production repro).
-    if (key === 'a' && !cannotFollowAnArticle(tokens[pos + 1])) continue
+    if (key === 'a' && !cannotFollowAnArticle(letterTokens[pos + 1])) continue
     namedStandalone.add(i)
   }
   if (namedStandalone.size > 1) return null
@@ -1212,15 +1273,15 @@ export function resolveMcqChoice(message: string, mcq: TutorMCQ): number | null 
   //    because…" is unaffected — it already resolves via `insideAStatedAnswer`.
   for (let i = 0; i < limit; i++) {
     const key = OPTION_KEYS[i]
-    const pos = tokens.indexOf(key)
+    const pos = letterTokens.indexOf(key)
     if (pos === -1) continue
-    const marked = pos > 0 && LETTER_MARKERS.has(tokens[pos - 1])
-    const alone = tokens.length === 1
-    const atEdge = pos === 0 || pos === tokens.length - 1
+    const marked = pos > 0 && LETTER_MARKERS.has(letterTokens[pos - 1])
+    const alone = letterTokens.length === 1
+    const atEdge = pos === 0 || pos === letterTokens.length - 1
     const insideAStatedAnswer = statesAnAnswer(message)
-      && (key !== 'a' || cannotFollowAnArticle(tokens[pos + 1]))
+      && (key !== 'a' || cannotFollowAnArticle(letterTokens[pos + 1]))
     const leadingLetterBeforeReasoning =
-      key === 'a' && pos === 0 && REASONING_CONNECTIVE.has(tokens[pos + 1])
+      key === 'a' && pos === 0 && REASONING_CONNECTIVE.has(letterTokens[pos + 1])
     if (key === 'a'
       ? (marked || alone || insideAStatedAnswer || leadingLetterBeforeReasoning)
       : (marked || alone || atEdge || insideAStatedAnswer)) {
@@ -1231,9 +1292,23 @@ export function resolveMcqChoice(message: string, mcq: TutorMCQ): number | null 
   // 2. An ordinal ("the second one", "number 2"). Bounded by the option count
   //    so "the third one" against a 2-option question resolves to nothing
   //    rather than to a question that was never asked.
-  for (const t of tokens) {
+  //
+  //    A BARE DIGIT AGAINST QUANTITY OPTIONS IS A VALUE, NOT A POSITION.
+  //    Measured (production, 2026-09-24, phys.mech.newtons-second-law): the
+  //    options were "2 m/s²" | "50 m/s²" | "0.5 m/s²" | "15 m/s²" and the
+  //    correct answer is 2. "2", "i think 2 m/s2" and "a = 2 m/s^2" all
+  //    resolved HERE to option index 1 — "50 m/s²", the multiply-F-by-m
+  //    misconception — so a learner typing the right number was graded wrong
+  //    and tagged with a misconception they do not hold. When EVERY option is
+  //    a quantity (`leadingValue`), an unmarked digit is left to rule 5, which
+  //    reads it as the value it is. "option 2", "number 2" and "2nd" still
+  //    name a position, and word options keep the digit-as-position reading
+  //    exactly as before.
+  for (let ti = 0; ti < tokens.length; ti++) {
+    const t = tokens[ti]
     const idx = ORDINALS[t]
     if (idx === undefined) continue
+    if (quantityOptions && /^\d$/.test(t) && !(ti > 0 && LETTER_MARKERS.has(tokens[ti - 1]))) continue
     // Out of range REFUSES rather than falling through to a weaker rule: the
     // learner named a position, and it is not one this question offered.
     // Continuing would let a text-similarity match answer a question they were
@@ -1247,6 +1322,37 @@ export function resolveMcqChoice(message: string, mcq: TutorMCQ): number | null 
     .map((o, i) => ({ i, hit: norm(o).length >= 6 && n.includes(norm(o)) }))
     .filter((x) => x.hit)
   if (contained.length === 1) return contained[0].i
+
+  // 3b. THE ANSWER HALF OF AN AUTHORED OPTION.
+  //
+  //    Authored options are written "<answer> — <why>": "Toward the normal —
+  //    light always bends toward the normal on leaving water". A learner types
+  //    the answer half. MEASURED (production QA, 2026-09-24): "Toward the
+  //    normal" (phys.opt.refraction), "The car" and "The cyclist"
+  //    (phys.mech.newtons-second-law) all graded as NOTHING — their words are
+  //    shared with sibling options, so rules 3-4 cannot see them — and a wrong
+  //    answer that is never graded is never corrected: the reply after
+  //    "Toward the normal" was "Here is a question to check your
+  //    understanding:". Exact equality with exactly ONE option's answer half,
+  //    after dropping a leading answer phrase ("i think", "answer is"), is as
+  //    unambiguous as a tap. A yes/no/ok answer half is deliberately NOT
+  //    matched: the tutor often closes a turn with a yes/no check-in ("have I
+  //    got that right?") while such a probe is still on screen, so a bare
+  //    "no" cannot be told apart from a reply to the check-in.
+  {
+    const said = n.replace(/^(?:(?:i think|i guess|i believe|i choose|i pick|my answer is|answer is|it is|its|it s|maybe|probably)\s+)+/, '').trim()
+    if (said) {
+      const hits = mcq.options
+        .map((o, i) => {
+          const parts = o.split(/\s+[\u2014\u2013]\s+/)
+          if (parts.length < 2) return null
+          const lead = norm(parts[0])
+          return lead && !LEAD_TOO_CONVERSATIONAL.has(lead) && lead === said ? i : null
+        })
+        .filter((x): x is number => x !== null)
+      if (hits.length === 1) return hits[0]
+    }
+  }
 
   // 4. DISTINCTIVE words only — the words that belong to exactly one option.
   //    Shared vocabulary is what every distractor has in common with the right
@@ -1301,12 +1407,27 @@ export function resolveMcqChoice(message: string, mcq: TutorMCQ): number | null 
   //    A worked-out reply ("5, because 10 times 0.5") names three numbers and
   //    is refused rather than guessed at — refusing costs a turn, guessing
   //    grades the wrong option.
+  //
+  //    QUANTITY OPTIONS (2026-09-24). When every option leads with a value and
+  //    the plain rule above is ambiguous — every "m/s²" option carries a 2
+  //    through its unit, and "0.5 m/s2" names two numbers — the learner's
+  //    leading VALUE EXPRESSION decides: it must equal exactly one option's
+  //    own leading expression, and every number the learner wrote must appear
+  //    in that option. A worked reply ("5, because 10 times 0.5") still
+  //    refuses, because 10 and 0.5 are not in the "5" option.
   const said = numbersIn(n)
   if (said.length === 1) {
     const carrying = mcq.options
       .map((o, i) => ({ i, hit: numbersIn(norm(o)).includes(said[0]) }))
       .filter((x) => x.hit)
     if (carrying.length === 1) return carrying[0].i
+  }
+  if (quantityOptions && said.length > 0) {
+    const stated = valueExpression(message, true)
+    const leading = stated === null ? [] : mcq.options
+      .map((o, i) => ({ i, hit: valueExpression(o, false) === stated && said.every((v) => numbersIn(norm(o)).includes(v)) }))
+      .filter((x) => x.hit)
+    if (leading.length === 1) return leading[0].i
   }
 
   return null
