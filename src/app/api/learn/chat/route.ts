@@ -3055,7 +3055,17 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 learnerMoveStageAHoisted.has('HELP_REQUEST') || learnerMoveStageAHoisted.ambiguous,
               closing: sessionEpisodeHoisted.phase === 'CLOSING',
               completionReady: lessonCompletedHoisted,
-              genuineQuestionActive: detectLearnerQuestion(turnIntent.message) && pendingMcqHoisted === null,
+              // A REQUEST TO BE ASKED IS NOT A QUESTION TO ANSWER FIRST.
+              // Synthetic-student after-run, 2026-09-24 (production 1f438cd,
+              // phys.mech.displacement): "can we move faster? give me a
+              // question" at CHECK and "can you check me with a question?" at
+              // GUIDE carry a '?', so LEARNER_QUESTION owned the turn and
+              // denied AUTHORED_PROBE ([arbitration] owner LEARNER_QUESTION,
+              // [gate-eligibility] blockedBy arbitrationAllowsProbe) while the
+              // same turn read PRACTICE_REQUEST. The learner asked for exactly
+              // what the rung refused; answering "first" meant never.
+              genuineQuestionActive: detectLearnerQuestion(turnIntent.message) && pendingMcqHoisted === null
+                && !turnIntent.wantsPractice,
             })
             const arb = turnArbitrationHoisted
             console.log('[arbitration]', {

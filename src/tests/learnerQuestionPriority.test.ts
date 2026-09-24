@@ -75,6 +75,21 @@ const NO_CLAIMS: TurnClaims = {
   genuineQuestionActive: false,
 }
 
+describe('synthetic-student after-run, 2026-09-24: a request to be asked is not a question to answer first', () => {
+  it('practice requests carrying a "?" do not deny the authored probe', () => {
+    for (const m of ['can we move faster? give me a question', 'ok I think I see it now. can you check me with a question?', 'can you quiz me?']) {
+      expect(deniesNewAssessment(m), m).toBe(false)
+    }
+  })
+  it('a genuine content question still owns the turn', () => {
+    expect(deniesNewAssessment('why does the displacement become negative?')).toBe(true)
+  })
+  it('route.ts adds the practice-request exclusion to the claim', () => {
+    const src = readFileSync('src/app/api/learn/chat/route.ts', 'utf8')
+    expect(src).toMatch(/genuineQuestionActive: detectLearnerQuestion\(turnIntent\.message\) && pendingMcqHoisted === null\s*&& !turnIntent\.wantsPractice,/)
+  })
+})
+
 /**
  * The exact end-to-end question this task asks: given only the learner's
  * raw message (and nothing else), would the deterministic gate be denied a
@@ -94,7 +109,8 @@ function deniesNewAssessment(
   const v = arbitrateTurn({
     ...NO_CLAIMS,
     learnerRequestActive: turnIntent.learnerRequest !== null || turnIntent.ambiguous,
-    genuineQuestionActive: detectLearnerQuestion(turnIntent.message) && !pendingProbe,
+    // Mirrors route.ts: a request to be asked (wantsPractice) never claims the rung.
+    genuineQuestionActive: detectLearnerQuestion(turnIntent.message) && !pendingProbe && !turnIntent.wantsPractice,
   })
   return !v.allows('AUTHORED_PROBE')
 }
