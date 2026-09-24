@@ -1271,9 +1271,15 @@ function occurrences(haystack: string, needle: string): number {
   return (haystack.match(new RegExp(`(?<![\\p{L}\\p{N}])${esc}(?![\\p{L}\\p{N}])`, 'gu')) ?? []).length
 }
 
-export function dropAnswerLeaks(text: string, mcq: TutorMCQ): { text: string; dropped: string[] } {
+export function dropAnswerLeaks(text: string, mcq: TutorMCQ, conceptTitle?: string | null): { text: string; dropped: string[] } {
   const correct = optionCore(mcq.options[mcq.correctIndex] ?? '')
   if (correct.replace(/[^\p{L}\p{N}]/gu, '').length < 3) return { text, dropped: [] }
+  // An answer that IS the lesson's own concept name ("Displacement" in
+  // "Displacement and Distance") is named by every teaching sentence; removing
+  // those would remove the lesson. Synthetic-student after-run 2, 2026-09-24:
+  // "…is the displacement: nowhere, zero." above "What type of quantity is
+  // this?" — teaching, not a leak.
+  if (conceptTitle && occurrences(leakNorm(conceptTitle), correct) > 0) return { text, dropped: [] }
   const others = mcq.options.filter((_, i) => i !== mcq.correctIndex).map(optionCore)
   if (others.some((o) => occurrences(o, correct) > 0)) return { text, dropped: [] }
   const inQuestion = occurrences(leakNorm(mcq.question), correct)

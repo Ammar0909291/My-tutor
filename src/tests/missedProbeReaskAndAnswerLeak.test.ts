@@ -171,8 +171,15 @@ describe('B — sentences that state the answer are removed (production text)', 
     expect(dropAnswerLeaks(u, { question: 'What is conserved?', options: ['energy', 'kinetic energy'], correctIndex: 0 }).dropped).toEqual([])
   })
 
+  it('an answer that is the lesson\'s own concept name never strips teaching (after-run 2)', () => {
+    const mcq = { question: 'Δx = −8 m. What type of quantity is this?', options: ['Displacement — a vector', 'Distance — a scalar'], correctIndex: 0 }
+    const t = 'Where you end up compared with your start is the displacement. Displacement also needs a direction.'
+    expect(dropAnswerLeaks(t, mcq, 'Displacement and Distance')).toEqual({ text: t, dropped: [] })
+    expect(dropAnswerLeaks(t, mcq, 'Stoichiometry').dropped.length).toBeGreaterThan(0)
+  })
   it('route: applied only to the server question attached this turn, logged as [answer-leak]', () => {
     expect(route).toMatch(/if \(mcqHoisted && mcqHoisted === gateMcqHoisted\) \{\s*const \{ dropAnswerLeaks \}/)
+    expect(route).toMatch(/dropAnswerLeaks\(text, mcqHoisted, resolvedConceptId \? \(kgNodeForLeak\(resolvedConceptId\)\?\.title \?\? null\) : null\)/)
     expect(route).toContain("console.warn('[answer-leak] '")
   })
 })

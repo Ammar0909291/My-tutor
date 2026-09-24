@@ -98,6 +98,12 @@ describe('defect checks, on production text', () => {
     const t = turn(3, reply({ text: 'So, from 3.0 mol of hydrogen you can produce **3.0 mol of water**.', mcq }), undefined, 0)
     expect(checkTurn(t, [turn(1, reply())]).find((f) => f.code === 'answer-leak')?.severity).toBe('critical')
   })
+  it('after-run 2: an answer that is the lesson\'s own concept name is teaching, not a leak', () => {
+    const mcq = { question: 'Δx = x_f − x_i = −8 m. What type of quantity is this, and what does the negative sign mean?', options: ['Displacement — a vector; the negative sign means the net motion is leftward (negative direction)', 'Distance — negative just means it was measured backward'] }
+    const t = turn(5, reply({ text: 'Where did you end up compared with your start is the displacement: nowhere, zero.', mcq }), undefined, 0)
+    expect(checkTurn(t, [turn(1, reply())], { conceptTitle: 'Displacement and Distance' }).map((f) => f.code)).not.toContain('answer-leak')
+    expect(checkTurn(t, [turn(1, reply())]).map((f) => f.code)).toContain('answer-leak') // without the concept, still flagged
+  })
   it('a right answer at CHECK that moves no verified counter is flagged', () => {
     const prev = turn(1, reply({ mastery: { phase: 'CHECK', verifiedCheckCorrect: 0, verifiedPracticeCorrect: 0 } }))
     const t = turn(2, reply({ mastery: { phase: 'CHECK', verifiedCheckCorrect: 0, verifiedPracticeCorrect: 0 } }), answer('84000 J', true))

@@ -22,7 +22,7 @@
  *
  *   npx tsx scripts/qa/synthetic/run.ts
  */
-import { writeFileSync } from 'node:fs'
+import { writeFileSync, readFileSync } from 'node:fs'
 import { execSync } from 'node:child_process'
 import { createQaAccount, deleteQaAccount, BASE, type QaAccount } from '../liveAccount'
 import { SEED_PROBES } from '../../../src/lib/teaching/assets/brainSeedAssets'
@@ -51,6 +51,12 @@ export function keyFor(question: string, options: readonly string[]): KeyedChoic
   const near = KEYED.filter((p) => p.stem.length > 30 && (q.includes(p.stem) || p.stem.includes(q)) && sameOptions(p.choices))
   return near.length ? near[0].choices : null
 }
+
+// Concept names from the live physics map: an answer that IS the lesson's own
+// concept name is teaching when a sentence names it, not a leak (checks.ts).
+const PHYSICS_KG = JSON.parse(readFileSync('docs/physics/kg/graph.json', 'utf8'))
+const KG_NODES: Array<{ id: string; name?: string }> = Array.isArray(PHYSICS_KG) ? PHYSICS_KG : (PHYSICS_KG.concepts ?? PHYSICS_KG.nodes ?? Object.values(PHYSICS_KG)[0])
+const conceptTitleOf = (id: string) => KG_NODES.find((n) => n.id === id)?.name ?? null
 
 // ─── api ─────────────────────────────────────────────────────────────────────
 async function api(cookie: string, path: string, body?: unknown): Promise<any> {
@@ -107,7 +113,8 @@ async function studyTopic(acct: QaAccount, persona: Persona, topic: string, curr
     }))
     const first: TurnRecord = { index: 0, act: { kind: 'open' }, reply: open, replyKeyCorrectIndex: correctIndexOf(open) }
     result.turns.push(first)
-    result.findings.push(...checkTurn(first, []))
+    const conceptTitle = conceptTitleOf(topic)
+    result.findings.push(...checkTurn(first, [], { conceptTitle }))
 
     let state = initialPersonaState()
     for (let i = 1; i <= maxTurns; i++) {
@@ -120,7 +127,7 @@ async function studyTopic(acct: QaAccount, persona: Persona, topic: string, curr
       const reply = toReply(await api(acct.cookie, '/api/learn/chat', { sessionId: result.sessionId, message: act.message }))
       budget.used++
       const rec: TurnRecord = { index: i, act, reply, replyKeyCorrectIndex: correctIndexOf(reply) }
-      const found = checkTurn(rec, result.turns)
+      const found = checkTurn(rec, result.turns, { conceptTitle })
       result.turns.push(rec)
       result.findings.push(...found)
       const m = reply.mastery

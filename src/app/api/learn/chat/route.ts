@@ -2799,6 +2799,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // equality. `pendingMcqHoisted` is the CURRENT question only — it comes
           // from readPendingQuestion, which returns null on a lesson mismatch.
           offeredMcqOptions: pendingMcqHoisted?.options,
+          // The lesson question on screen, and whether this message was graded
+          // against it. An excursion records the question at opening; answering
+          // exactly that question closes it as 'closed-answered-lesson' and the
+          // turn counts for the lesson (see ExcursionState.heldQuestion).
+          pendingQuestion: pendingMcqHoisted?.question ?? null,
+          answeredPendingQuestion: mcqGradeHoisted !== null,
           // Phase 2: the turn read itself two contradictory ways. Hold the
           // teaching context rather than let either reading change it. This is
           // the ONE place ambiguity is given authority — everything else on
@@ -6410,7 +6416,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // treats a question on screen as content, never as an outage.
       if (mcqHoisted && mcqHoisted === gateMcqHoisted) {
         const { dropAnswerLeaks } = await import('@/lib/teaching/gateAssessment')
-        const leak = dropAnswerLeaks(text, mcqHoisted)
+        const { getKGNode: kgNodeForLeak } = await import('@/lib/curriculum/knowledgeGraph')
+        const leak = dropAnswerLeaks(text, mcqHoisted, resolvedConceptId ? (kgNodeForLeak(resolvedConceptId)?.title ?? null) : null)
         if (leak.dropped.length > 0) {
           console.warn('[answer-leak] ' + JSON.stringify({
             conceptId: resolvedConceptId ?? null,
@@ -7495,6 +7502,19 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // counters still drive the ladder. Measured on the 2026-08-17 turn:
       // `correctAtCheck 1` with `verifiedCorrectAtCheck 0`. Detection without
       // suppression does not hold the gate, which is why this exists.
+      // A REQUEST IS NOT AN ANSWER. Synthetic-student after-run 2, 2026-09-24
+      // (production TURN_EVENT, phys.mech.velocity): on "ok, next question
+      // please" the model's own SIGNAL said correct, nothing suppressed it
+      // (`gradeSource: none`, `signalSuppressedReason: null`), and the plain
+      // practice counter carried the lesson PRACTICE -> TRANSFER below the
+      // verified bar, where it could never certify. The MCQ grader already
+      // refuses to grade a practice request (`&& !turnIntent.wantsPractice`);
+      // the self-report path now agrees.
+      if (teachingSignal && teachingSignal.correctness !== undefined && turnIntent.wantsPractice && !mcqGradeHoisted) {
+        signalSuppressedReasonHoisted = 'practice-request-not-an-answer'
+        console.log('[practice-request-not-an-answer]', { claimed: teachingSignal.correctness, learnerMessage: message.slice(0, 40) })
+        teachingSignal = { ...teachingSignal, correctness: undefined }
+      }
       if (teachingSignal && teachingSignal.correctness !== undefined) {
         try {
           const { shouldSuppressSignalCorrectness } = await import('@/lib/teaching/answerableTurn')

@@ -63,7 +63,7 @@ const TEXT_DEFECTS: Array<[string, RegExp, Severity]> = [
 ]
 
 /** Findings for one turn. `history` holds every earlier turn of the same lesson. */
-export function checkTurn(cur: TurnRecord, history: readonly TurnRecord[]): Finding[] {
+export function checkTurn(cur: TurnRecord, history: readonly TurnRecord[], opts: { conceptTitle?: string | null } = {}): Finding[] {
   const out: Finding[] = []
   const f = (code: string, severity: Severity, detail: string) => out.push({ code, severity, turn: cur.index, detail: detail.slice(0, 240) })
   const prev = history.length ? history[history.length - 1] : null
@@ -105,7 +105,7 @@ export function checkTurn(cur: TurnRecord, history: readonly TurnRecord[]): Find
   // ── the question served this turn ──────────────────────────────────────────
   const q = cur.reply.mcq
   if (q && cur.replyKeyCorrectIndex !== null) {
-    const leak = dropAnswerLeaks(text, { question: q.question, options: q.options, correctIndex: cur.replyKeyCorrectIndex })
+    const leak = dropAnswerLeaks(text, { question: q.question, options: q.options, correctIndex: cur.replyKeyCorrectIndex }, opts.conceptTitle ?? null)
     if (leak.dropped.length > 0) f('answer-leak', 'critical', `answer "${q.options[cur.replyKeyCorrectIndex]}" stated before the question: ${leak.dropped[0]}`)
   }
   if (q && cur.replyKeyCorrectIndex === null && phaseBefore && GATE_PHASES.has(phaseBefore)) {
