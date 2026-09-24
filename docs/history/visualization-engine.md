@@ -298,3 +298,15 @@ Closed the two ambiguities the hardening pass left open.
 - `VISUAL_TURN` gains `retirement` (none|suppressed|replacement) and `cacheHit`.
 - Tests: `visualLifecycleFinalization.test.ts` (23; 4 fail against the previous resolver).
   Full suite 715/715 files, 14,784 passed, 9 skipped; tsc 0; build OK.
+- **Production QA (deployment dpl_B1ny6RQVYqBZizPJgfFmserdAGTk, disposable account, deleted).**
+  25 chat turns across 12 paths incl. two REAL English concepts (`eng.phonics.blending-segmenting`
+  → tier2-approved served; `eng.grammar.word-classes-overview` → honest "I don't have a picture",
+  `no-figure:deadline-before-generation` then `declined-cached`). Response fields, `VISUAL_TURN`
+  and TURN_EVENT `visualServed` agree on all 25 (11 served / 14 not). `retirement` observed live:
+  lc-circuits `suppressed` (reason from a later tier), reflection `replacement` (tier3 cached).
+  The approved-beats-subject-wide path has no production concept (measured 0) so it is proven by
+  tests only; math.calc.limits kept its card (index says none).
+- **Defect found by the QA and fixed (follow-up commit):** a critic-reject retry on an explicit
+  request makes a provider call, but `generationSpent` was taken from the first (cached) result,
+  so VISUAL_TURN logged `generationSpent=false` and the per-session generation budget never
+  counted the retry (lc-circuits: `no-figure:retry-structurally-invalid`). Now counted.

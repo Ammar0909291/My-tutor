@@ -1140,6 +1140,12 @@ export async function resolveVisualForTurn(
     const retry = await generateConceptFigure(ctx, {
       purpose: decision.purpose, ...deps, budgetMs: deadline.remaining(), ignoreCachedFigure: true,
     })
+    // The retry bypasses the figure cache, so unless it too was served from a
+    // cache it spent a provider call — even when the first result was a free
+    // cache hit. Without this the session budget and VISUAL_TURN both reported
+    // `generationSpent: false` for a real call (production, lc-circuits,
+    // 2026-09-24: `no-figure:retry-structurally-invalid`, generationSpent=false).
+    if (!(retry.ok && retry.cached)) decision = { ...decision, generationSpent: true }
     if (!retry.ok) {
       void writeDecline(ctx, retry.reason, deps.cacheClient)
       return { ...decision, provenance: `no-figure:retry-${retry.reason}` }
