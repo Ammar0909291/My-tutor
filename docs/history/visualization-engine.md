@@ -271,3 +271,30 @@ Remaining, non-blocking: telemetry `representation` for a domain card still carr
 inferred label (`motion_graph` for math.calc.limits; learner prose already says "figure");
 an approved Tier-2 figure is unreachable for a concept that has a domain default (fix needs a
 per-turn DB read — egress); legacy `detectVisual` still computed for telemetry only.
+
+## 2026-09-24 — Visual lifecycle finalization (commit e09200f)
+
+Closed the two ambiguities the hardening pass left open.
+- **Retirement = retire an ARTIFACT (Option 1), now enforced on every tier.** Evidence it
+  was always the meaning: the register was applied only inside `buildDecision()` (sync
+  tiers) and the async approved/generated tiers ran on its no-figure result from the start;
+  `qa-and-mastery-fixes.md` names "a human-reviewed promoted VISUAL asset or generation
+  enablement" as the remedy for a retired concept; PHASE6 P2 §5 gives generation its own
+  semantic gate (the critic). The gap closed: `serve()` (approved + generated) now refuses
+  a retired artifact by content fingerprint (`no-figure:retired-asset`), and any serve()
+  refusal of a generated figure now corrects the served ledger. No register row removed
+  (25 remain). Documented in `retired.ts` "WHAT RETIREMENT MEANS".
+- **Approved beats a subject-wide card (precedence by specificity).** Evidence: approved
+  figures are "reviewed content, in the same class as a curated binding" (this file,
+  2026-08-10); a domain-default card is a general illustration (scope 'domain'). Exact
+  curated cards and Tier 0 scenes still win; a subject-wide card is never replaced by a
+  generated figure. Measured before changing: 367 concepts resolve to a subject-wide card;
+  production has 10 ACTIVE visual assets, 0 of them on those 367 (latent defect, no
+  production concept changes behaviour today).
+- **No per-turn DB read added.** `hasActiveVisualFigure` is an in-process index (one
+  conceptId-only `findMany` of ACTIVE VISUAL rows per lambda per 10 min; unreadable → empty
+  for 60 s, card kept). `findActiveVisualFigure` is read only for a subject-wide concept the
+  index lists (0 today).
+- `VISUAL_TURN` gains `retirement` (none|suppressed|replacement) and `cacheHit`.
+- Tests: `visualLifecycleFinalization.test.ts` (23; 4 fail against the previous resolver).
+  Full suite 715/715 files, 14,784 passed, 9 skipped; tsc 0; build OK.
