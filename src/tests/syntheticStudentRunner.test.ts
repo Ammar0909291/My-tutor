@@ -149,6 +149,13 @@ describe('defect checks, on production text', () => {
     const codes = checkTurn(turn(11, reply({ text: 'Got it—let’s jump right in with a quick check.' })), [turn(10, reply())]).map((f) => f.code)
     expect(codes).toEqual(expect.arrayContaining(['announced-not-asked', 'content-free-reply']))
   })
+  it('after-run 2: an offered check, or an announced one followed by a question, is not "announced-not-asked"', () => {
+    const offer = 'That’s exactly right.\n\nWhenever you’re ready, just let me know and we can try a quick check to see how comfortable you feel with these ideas.'
+    const asked = 'Displacement = final position − initial position.\n\n**Quick check:** If you walk 3 m east and then 4 m west, what do you notice about the total ground you covered?'
+    for (const text of [offer, asked]) {
+      expect(checkTurn(turn(8, reply({ text })), [turn(7, reply())]).map((f) => f.code)).not.toContain('announced-not-asked')
+    }
+  })
   it('smoke run: a bare "Here is your next question." after an answer', () => {
     const t = turn(3, reply({ text: 'Here is your next question.', mcq: Q }), answer('Displacement', true), 1)
     expect(checkTurn(t, [turn(2, reply())]).map((f) => f.code)).toContain('no-feedback-on-answer')

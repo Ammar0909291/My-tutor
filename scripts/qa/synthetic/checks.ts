@@ -47,6 +47,20 @@ const rank = (phase: string | null | undefined) => (phase ? PHASE_ORDER.indexOf(
 /** The learner asked to be given a question. */
 export const ASKS_FOR_QUESTION_RE = /\b(?:test|quiz|check) me\b|\b(?:give|ask) me (?:a |an |another |one |some )?(?:question|problem)|\bnext question\b|\bquestion please\b/i
 const ANNOUNCED_CHECK_RE = /\bquick check\b|\blet'?s (?:do a |jump right in with a |try a )?(?:quick )?(?:check|question)\b|\bhere(?: is|'s) (?:your next|a quick|a|the next) question\b/i
+// "Whenever you're ready, let me know and we can try a quick check" offers a
+// check; it does not announce one (after-run 2, beginner, velocity).
+const CHECK_OFFER_LEAD_RE = /\b(?:whenever|when|if) you(?:'|’)?re ready\b|\blet me know\b|\bif you(?:'d| would) like\b/i
+
+/** An announced check with no question after it — an offer, or an announcement
+ *  followed by a question the model wrote itself, is not this defect. */
+function announcedButNotAsked(text: string): string | null {
+  const m = ANNOUNCED_CHECK_RE.exec(text)
+  if (!m) return null
+  const sentenceStart = Math.max(text.lastIndexOf('\n', m.index), ...['.', '!', '?'].map((c) => text.lastIndexOf(c, m.index - 1)))
+  if (CHECK_OFFER_LEAD_RE.test(text.slice(sentenceStart + 1, m.index))) return null
+  if (/\?/.test(text.slice(m.index))) return null
+  return m[0]
+}
 const EMPTY_OPENER_RE = /^(?:i hear you|got it|okay|ok|sure|alright|let's keep)\b/i
 const normText = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim()
 const firstSentence = (s: string) => (s.trim().split(/(?<=[.!?])\s+|\n/)[0] ?? '').trim()
@@ -94,7 +108,8 @@ export function checkTurn(cur: TurnRecord, history: readonly TurnRecord[], opts:
   }
   // The first message is exempt: teaching before the first question is by design.
   if (askedForQuestion && !cur.reply.mcq && cur.index > 1) f('question-request-ignored', 'major', `"${cur.act.kind === 'say' ? cur.act.message : ''}" -> no question`)
-  if (!cur.reply.mcq && ANNOUNCED_CHECK_RE.test(text)) f('announced-not-asked', 'major', text.match(ANNOUNCED_CHECK_RE)?.[0] ?? '')
+  const announced = cur.reply.mcq ? null : announcedButNotAsked(text)
+  if (announced) f('announced-not-asked', 'major', announced)
   if (cur.act.kind === 'answer' && /^here(?: is|'s) your next question\.?$/i.test(firstSentence(text))) {
     f('no-feedback-on-answer', 'major', `answer "${cur.act.message}" met with: ${firstSentence(text)}`)
   }
