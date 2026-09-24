@@ -19,6 +19,21 @@
  * until a genuinely new, concept-authored figure exists, which is then served
  * with no edit here (see "THE LIFECYCLE" below).
  *
+ * WHAT RETIREMENT MEANS (settled 2026-09-24): an ARTIFACT is retired, not the
+ * concept. Every tier refuses a retired artifact — the synchronous tiers here
+ * and in buildDecision(), the APPROVED and GENERATED tiers in
+ * resolveVisualForTurn's serve() — and the broad rules (domain-prefix cards,
+ * shared generator defaults) are refused for a retired concept outright. A
+ * figure OF the concept with content the retirement never saw — an authored
+ * replacement, a human-approved figure, or a generated figure that passed
+ * structural validation and the critic — may serve. Evidence this was always
+ * the meaning: the register was applied only inside buildDecision() (the
+ * synchronous tiers), the async tiers ran on its no-figure result from the
+ * start, and the recorded remedy for a retired concept was "a human-reviewed
+ * promoted VISUAL asset or generation enablement" (docs/history/
+ * qa-and-mastery-fixes.md). No row here is ever removed because a
+ * replacement exists: the row is the evidence.
+ *
  * The bar for entry is deliberately high: not "generic", not "thin", not
  * "could be better" — the asset must depict a DIFFERENT thing, such that a
  * tutor teaching the concept against it would be saying something false.

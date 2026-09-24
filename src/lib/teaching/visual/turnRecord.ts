@@ -14,6 +14,7 @@
  * nothing else — never from a registry category, never from the decision.
  */
 import type { VisualDecision } from './types'
+import { isRetiredVisualBinding } from './retired'
 
 export type VisualTier =
   | 'none'
@@ -37,6 +38,15 @@ export interface VisualTurnRecord {
   reason: string | null
   /** A provider call was spent generating this turn. */
   generationSpent: boolean
+  /** A Tier-3 figure served from the figure cache (no provider call). */
+  cacheHit: boolean
+  /**
+   * The concept's retirement state this turn. `suppressed`: it is on the
+   * register and no figure was decided — kept even when a later tier's reason
+   * (e.g. a critic reject) is what `reason` names. `replacement`: on the
+   * register, and a figure with content the retirement never saw was decided.
+   */
+  retirement: 'none' | 'suppressed' | 'replacement'
   /** The response this learner receives carries a figure. */
   served: boolean
   /** A figure is on the learner's screen: served now, or held from earlier. */
@@ -83,6 +93,9 @@ export function describeVisualTurn(
     renderer: decision?.graphical ? (decision.payload?.renderer ?? null) : null,
     reason: decision && !decision.graphical ? decision.provenance : null,
     generationSpent: decision?.generationSpent === true,
+    cacheHit: tierOf(decision) === 'tier3-generated' && (asset?.assetId.endsWith(':cached') ?? false),
+    retirement: !isRetiredVisualBinding(decision?.conceptId) ? 'none'
+      : decision?.graphical ? 'replacement' : 'suppressed',
     served,
     onScreen: served || heldTurns > 0,
     heldTurns,

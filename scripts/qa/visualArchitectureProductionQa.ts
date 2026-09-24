@@ -20,13 +20,16 @@ const PATHS: Path[] = [
   { path: 'A deterministic Tier 0 (concept-authored scene)', subject: 'biology', conceptId: 'bio.cell.apoptosis', expect: 'scene served; representation not food_chain' },
   { path: 'A deterministic Tier 0 (generator kind)', subject: 'physics', conceptId: 'phys.mech.projectile-motion', expect: 'scene served' },
   { path: 'B curated Tier 1 (exact card)', subject: 'physics', conceptId: 'phys.qm.particle-in-box', expect: 'card potential_well served' },
-  { path: 'B domain Tier 1 (general illustration)', subject: 'mathematics', conceptId: 'math.calc.limits', expect: 'card coordinate_plane, introduced as general illustration' },
+  { path: 'B domain Tier 1 (general illustration; no approved figure, so the card stands)', subject: 'mathematics', conceptId: 'math.calc.limits', expect: 'card coordinate_plane, introduced as general illustration' },
   { path: 'Tier 2 approved stored figure', subject: 'chemistry', conceptId: 'chem.found.stoichiometry', expect: 'approved figure served (tier2-approved)' },
   { path: 'C generated Tier 3 (+ I cache hit on 2nd request)', subject: 'physics', conceptId: 'phys.therm.specific-heat', expect: 'generated figure or an honest no-figure reason; never a claim without a figure', requestTwice: true },
   { path: 'D retired (no replacement)', subject: 'physics', conceptId: 'phys.em.lc-circuits', expect: 'no figure; "I don\'t have a picture"; no figure claim' },
   { path: 'D retired (concept-authored retired scene)', subject: 'physics', conceptId: 'phys.opt.reflection', expect: 'no figure; retired concave-mirror scene NOT served' },
   { path: 'E replaced (formerly retired, replacement authored)', subject: 'biology', conceptId: 'bio.cell.cell-cycle', expect: 'replacement scene served, not food_chain' },
-  { path: 'G no-suitable-form candidate', subject: 'english', conceptId: 'eng.grammar.parts-of-speech', expect: 'figure or honest no-figure; no claim without a figure' },
+  // English: real KG ids (the curriculum is synthesised from the KG, so topicSlug === KG id).
+  // eng.grammar.parts-of-speech was never a real id. No English concept has a synchronous-tier figure.
+  { path: 'I English, approved Tier 2', subject: 'english', conceptId: 'eng.phonics.blending-segmenting', expect: 'approved figure served (tier2-approved)' },
+  { path: 'I English, no fixed-tier figure (Tier 3 or honest none)', subject: 'english', conceptId: 'eng.grammar.word-classes-overview', expect: 'generated figure or honest no-figure; no claim without a figure' },
   { path: 'H critic-reject cached candidate', subject: 'physics', conceptId: 'phys.em.energy-capacitor', expect: 'no rejected figure served; retry only on request' },
 ]
 

@@ -774,6 +774,13 @@ export async function resolveVisualForTurn(
      */
     findApprovedFigure?: (conceptId: string) => Promise<GeneratedFigure | null>
     /**
+     * Does this concept have an approved figure at all? Answered from an
+     * in-process index (generationOutcomeStore.hasActiveVisualFigure), never
+     * a per-turn query. Consulted only when the synchronous tiers chose a
+     * SUBJECT-WIDE card: absent, or false, the card stands exactly as before.
+     */
+    hasApprovedFigure?: (conceptId: string) => Promise<boolean>
+    /**
      * Judges a freshly generated figure before it is served. Injected only so
      * tests can drive it; production always uses the real critic, because a
      * critic that a caller can omit is a gate that a caller can forget.
@@ -803,8 +810,30 @@ export async function resolveVisualForTurn(
 ): Promise<VisualDecision> {
   let decision = resolveVisual(input)
 
-  // 1. CURATED — already faithful, nothing to add.
-  if (decision.graphical) return decision
+  // 1. CURATED — already faithful, nothing to add. EXCEPT a subject-wide card.
+  //
+  // PRECEDENCE IS BY SPECIFICITY, NOT BY TIER NUMBER. A domain-prefix card is
+  // "a general illustration related to the topic" (scope 'domain'); an
+  // APPROVED figure is a figure of THIS concept that a human reviewed — "in
+  // the same class as a curated binding" (docs/history/visualization-engine.md).
+  // A generic card shadowing a reviewed concept figure inverted that, so for a
+  // subject-wide card only, an approved figure is looked for first. Exact
+  // curated cards and Tier 0 scenes are concept-specific and still stand. The
+  // question "is there one?" is answered in memory; only a concept that has
+  // one pays the read, and a card is never replaced by a GENERATED figure.
+  const subjectWideCard = decision.graphical && decision.asset?.provenance === 'domain-default'
+  const subjectWideDecision = decision
+  if (decision.graphical && !subjectWideCard) return decision
+  if (subjectWideCard) {
+    if (!decision.conceptId || !deps.findApprovedFigure || !deps.hasApprovedFigure) return decision
+    let known = false
+    try {
+      known = await deps.hasApprovedFigure(decision.conceptId)
+    } catch {
+      known = false
+    }
+    if (!known) return decision
+  }
 
   // ── TOPIC IDENTITY ────────────────────────────────────────────────────────
   // Curriculum first; a topic the KG has never heard of still gets a stable
@@ -876,7 +905,24 @@ export async function resolveVisualForTurn(
       },
       asset,
     )
-    if (!admission.ok) return { ...decision, provenance: `no-figure:rejected-${admission.reason}` }
+    // A GENERATED figure's `served` was predicted before this point; any
+    // refusal here must correct it, like every other discard exit.
+    const generated = assetId.startsWith('generated')
+    if (!admission.ok) {
+      if (generated) void recordNotServed(ctx, figure, deps.outcomeSink)
+      return { ...decision, provenance: `no-figure:rejected-${admission.reason}` }
+    }
+    // A RETIRED ARTIFACT STAYS RETIRED ON EVERY TIER. Retirement names
+    // artifacts by content (retired.ts); an approved or generated figure whose
+    // content IS a retired one is refused here exactly as the synchronous
+    // tiers refuse it. New content for a retired concept is a replacement.
+    if (retiredAssetVerdict(ctx.conceptId, {
+      provenance: asset.provenance,
+      fingerprint: figureFingerprint(asset.payload),
+    }) === 'retired-asset') {
+      if (generated) void recordNotServed(ctx, figure, deps.outcomeSink)
+      return { ...decision, provenance: 'no-figure:retired-asset' }
+    }
 
     // ── A SERVED FIGURE MUST BE HELD, NOT RE-INTRODUCED EVERY TURN ───────────
     //
@@ -953,12 +999,22 @@ export async function resolveVisualForTurn(
     if (approved) {
       const payload = approved.kind === 'scene' ? approved.scene : approved.spec
       const revalidated = validateGeneratedFigure(payload, ctx)
-      if (revalidated.ok) return serve(revalidated.figure, `approved:${ctx.conceptId}`)
-      // A figure that no longer matches its concept is NOT repaired and NOT
-      // substituted; the turn falls through to generation like any other.
-      decision = { ...decision, provenance: `no-figure:approved-${revalidated.reason}` }
+      if (revalidated.ok) {
+        const served = serve(revalidated.figure, `approved:${ctx.conceptId}`)
+        // Over a subject-wide card, only an approved figure actually admitted
+        // replaces it; any refusal keeps the card rather than showing nothing.
+        if (!subjectWideCard || served.provenance === `approved:${ctx.conceptId}`) return served
+      } else {
+        // A figure that no longer matches its concept is NOT repaired and NOT
+        // substituted; the turn falls through to generation like any other.
+        decision = { ...decision, provenance: `no-figure:approved-${revalidated.reason}` }
+      }
     }
   }
+
+  // No usable approved figure: the subject-wide card this turn already had
+  // is served unchanged. Generation is only ever for a turn with NO figure.
+  if (subjectWideCard) return subjectWideDecision
 
   // ── 3. GENERATED ──────────────────────────────────────────────────────────
   // Attempted only here, and only on a turn that would otherwise show nothing.

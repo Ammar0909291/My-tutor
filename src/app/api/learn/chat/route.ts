@@ -3599,7 +3599,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // eligibility is a rule rather than a typed list of ids: an
               // unreadable count is treated as exhausted, so the bound fails
               // in the safe direction.
-              const { prismaGenerationOutcomeSink, findActiveVisualFigure, prismaBudgetReader } =
+              const { prismaGenerationOutcomeSink, findActiveVisualFigure, hasActiveVisualFigure, prismaBudgetReader } =
                 await import('@/lib/teaching/visual/generationOutcomeStore')
               const { buildVisualContractBlock } = await import('@/lib/teaching/visual/visualContract')
               // The SPECIFIC form the learner named, if any. Reported to the
@@ -3690,6 +3690,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               }, {
                 outcomeSink: prismaGenerationOutcomeSink,
                 findApprovedFigure: findActiveVisualFigure,
+                // In-memory "does it have one?" — lets an approved figure beat a
+                // subject-wide card without a per-turn read (resolveVisualForTurn step 1).
+                hasApprovedFigure: (id: string) => hasActiveVisualFigure(id),
                 budgetReader: prismaBudgetReader,
                 // Without this the resolver's session cap was accepted and
                 // never supplied, so `checkBudgets` skipped it entirely and one
