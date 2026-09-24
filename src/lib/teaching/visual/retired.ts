@@ -90,6 +90,30 @@ export const RETIRED_VISUAL_BINDINGS: Readonly<Record<string, string>> = {
   'bio.cell.cell-signalling':         'Rendered a food chain; no receptor or signalling cascade is depicted.',
   'bio.cell.apoptosis':               'Rendered a food chain; programmed cell death is not depicted.',
 
+  // ── biology: the bio.cell domain rule, six more found by the 2026-09-24
+  // Biology visual coverage inventory ─────────────────────────────────────
+  // These six concepts were authored after the sweep above and were never
+  // audited against it — the read-only inventory ran the real resolver
+  // (lookupConceptVisualBinding) over all 199 current Biology KG concepts and
+  // found each still inheriting the same 'bio.cell' -> food_chain domain
+  // default the twelve concepts above were already retired for. Same defect,
+  // same evidence shape, same remedy: the food chain card depicts trophic
+  // energy flow between organisms, never anything at the subcellular scale
+  // these six concepts teach.
+  'bio.cell.anaerobic-respiration-fermentation':
+    'Rendered a food chain; no fermentation pathway or anaerobic respiration process is depicted.',
+  'bio.cell.cancer-biology-hallmarks':
+    'Rendered a food chain; none of the hallmarks of cancer (uncontrolled division, evaded apoptosis, ' +
+    'invasion) are depicted.',
+  'bio.cell.cell-adhesion-tissue-organization':
+    'Rendered a food chain; no cell junction or tissue-level organisation is depicted.',
+  'bio.cell.cell-junctions-extracellular-matrix':
+    'Rendered a food chain; no junction structure or extracellular matrix is depicted.',
+  'bio.cell.cytoskeleton-motility':
+    'Rendered a food chain; no cytoskeletal filament or motility mechanism is depicted.',
+  'bio.cell.membrane-transport-energetics':
+    'Rendered a food chain; no membrane transport mechanism or its energetics is depicted.',
+
   // ══ VISUAL SEMANTIC MOAT SWEEP (physics + chemistry) ════════════════════
   //
   // The M3-A audit inspected concepts holding an EXACT curated row. This sweep
