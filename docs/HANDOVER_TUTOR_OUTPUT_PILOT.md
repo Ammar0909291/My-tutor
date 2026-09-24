@@ -1,0 +1,102 @@
+# Handover — tutor output fixes + learner pilot (2026-09-24)
+
+For the next Claude session (any account) continuing this work. Read this, then
+`CLAUDE.md`, then `docs/architecture/RUNTIME_ARCHITECTURE_MAP.md`.
+
+## What the owner asked for
+
+"Fix everything you suggested", within 3 working sessions, and study the product
+as a real learner on four owner accounts. The plan that was accepted (after a
+steel-man pass) and its status:
+
+| # | Item | Status |
+|---|---|---|
+| 1 | Figure fidelity — tutor's words vs. the figure on screen | **Done, deployed** (colour claims only; see limits) |
+| 2 | No-picture remnants (pointers/ASCII left after "I don't have a picture") | **Done, deployed** |
+| 3 | Output verifier: enforce only rules proven precise | **Measured; nothing enforced** (reason below); evidence logging added |
+| 4 | Lesson opening (`lesson-init`) gets the chat turn's output checks | **Done, deployed** |
+| 5 | Instrumented pilot on real accounts + per-lesson report | **Harness built; run pending/in progress** — see "Next" |
+| — | Structural changes (split route, delete dormant pipelines, new learner store) | **Not in scope** — owner decides from pilot data |
+
+## What changed (commits on `main`)
+
+- `9260d77` fix(tutor-output):
+  - `src/lib/teaching/figureReference.ts` — remnant shapes rewritten to keep the teaching:
+    "Follow/Trace the arrows…" → "Trace the steps…" (drops "on the left/right"),
+    "This layout shows…" → "Here is…", symbol-legend prefix removed, orphan label
+    paragraphs dropped only after a removal; new `onlyPointer` flag + `pointerOnlyFallback()`.
+  - `src/lib/teaching/asciiDiagramGuard.ts` — Pass 5: standalone one-line art
+    (`5'---[Promoter]---3'`) + its caption line; tables/rules/bare box edges excluded.
+  - `src/app/api/learn/chat/route.ts` — reference check re-runs AFTER the ASCII guard;
+    a pointer-only turn is replaced by the concept's KG title + description; new
+    colour-fidelity block for on-screen SCENE figures.
+  - `src/lib/teaching/visual/figureFidelity.ts` (new) — colour families from the
+    scene's own object colours; removes colour phrases about the figure that name an
+    absent colour. Cards/charts are not checked (colours not in payload). Shapes not checked.
+  - `src/app/api/learn/lesson-init/route.ts` — ASCII guard, remnant re-check,
+    pointer-only fallback, phantom-claim strip, missing-options drop, residual tags.
+  - `src/lib/teaching/visualRegistry.ts` — **existing bug fixed**: `stripPhantomVisualClaims`
+    flattened every paragraph break even when it removed nothing (all 26 replayed
+    production openings). Now returns untouched text as-is and keeps paragraphs.
+  - `src/lib/eos-runtime/verifierGate.ts` — in log mode, `[verifier-log]` line per
+    rejected draft (codes, matched excerpt, first 200 chars of TUTOR text).
+  - Tests: `diagramRemnantCleanup`, `figureFidelity`, `lessonOpeningOutputParity`;
+    one pinned control in `figureReference.test.ts` updated with the production evidence.
+- `def71c5` `scripts/qa/learnerPilot.ts` — the pilot harness.
+- Earlier today, same session: `116a737` runtime architecture map; `33415ef`/`26f8e6a`
+  DNA-replication figure; `e09200f`/`4e2a026` visual lifecycle finalization.
+
+Validation at `9260d77`: full suite 719 files / 14,828 passed / 9 skipped; `tsc` clean;
+`npm run build` clean. Deployment of `9260d77`: `dpl_Dm19SkDkMerA5AR7KyDaa7y51dvQ`
+(check it is READY before trusting production behaviour).
+
+## Verifier decision (item 3) — do not flip it without new evidence
+
+Aggregate over `learn_sessions.contextSnapshot.verifierMetrics` (1,754 sessions):
+15,744 turns verified, **8,697 (55%) would be rejected** in enforce mode. Top codes:
+V-Q1 6,725 · V-REACT 5,875 · V-Q2 4,023 · V-VOC-FORMULA 2,648 · V-TERMS 1,255 ·
+V-REC 803 · V-DUP-EXACT 93. No precision data existed (flagged text was never kept),
+so nothing was promoted. Next step: after some real traffic, read `[verifier-log]`
+lines from Vercel logs, adjudicate a sample per code, then enforce only codes with
+near-zero false positives (needs a per-code enforce path in `verifierGate.ts`).
+
+## Next — run the pilot and write the report
+
+1. Confirm the latest production deployment is READY (Vercel MCP, project
+   `prj_FwjmRdthApGhwdQY7FyDYThD7WJD`, team `team_ZHSoYXkAEang6oq1I9hAPn45`).
+2. Get the accounts' password **from the owner in chat**. Never write it to a file,
+   commit, log, or this document. Pass it only as an env var for one invocation.
+3. Run (plan used; all four accounts belong to the owner, concepts chosen fresh or
+   restartable after a narrow `topic_progress` check — `suaibamr@gmail.com` is
+   physics-saturated):
+   ```
+   PILOT_PLAN='[
+     {"email":"suaibamr@gmail.com","lessons":[{"subject":"english","conceptId":"eng.grammar.verbs"},{"subject":"chemistry","conceptId":"chem.elect.nernst"}]},
+     {"email":"suaibamr1@gmail.com","lessons":[{"subject":"physics","conceptId":"phys.therm.calorimetry"},{"subject":"english","conceptId":"eng.grammar.nouns"}]},
+     {"email":"suaibamr3@gmail.com","lessons":[{"subject":"english","conceptId":"eng.phonics.blending-segmenting"},{"subject":"physics","conceptId":"phys.wave.interference"}]},
+     {"email":"suaibamr4@gmail.com","lessons":[{"subject":"chemistry","conceptId":"chem.found.stoichiometry"},{"subject":"physics","conceptId":"phys.opt.total-internal-reflection"}]}
+   ]' PILOT_PASSWORD='<from owner>' QA_OUT=<scratchpad>/pilot.json \
+   npx tsx scripts/qa/learnerPilot.ts
+   ```
+   Long run (~30 min): run it in the background.
+4. Cross-check against Vercel runtime logs for the run window (query `VISUAL_TURN`,
+   `[figure-reference]`, `[figure-fidelity]`, `[verifier-log]`) — scope to the
+   deployment id or the query times out; output is large, grep the saved file.
+5. Write the per-lesson report: turns, model vs memory/gate turns, verified vs
+   unverified credit, completion, figures, defects found (`summary.defects` plus
+   reading the transcripts). Record it under `docs/history/` (new dated section).
+6. Close with the CLAUDE.md report format (one fenced block, git info).
+
+## Standing rules that bit this work
+
+- Egress: 5 GB/month Supabase. Use aggregate SQL only; read Vercel logs rather than
+  the database; no new per-turn DB reads.
+- `main` only; push `git push origin HEAD:main && git push origin HEAD:claude/physics-master-completion-u7wgrl`
+  (the feature pointer is the harness branch of the originating session — use your
+  own session's branch name if it differs). Fetch/ff before every push; GitHub
+  intermittently returns 503 — retry with backoff.
+- Don't `pkill -f` with a pattern that matches your own shell command (it kills the shell).
+- Known open, not fixed here: the tutor still invents shapes ("little motor") and can
+  misstate process direction on scene figures; the content-free hold
+  ("Let's stay with this idea for a moment."); `MISCONCEPTION_DETECTED` firing on
+  conversational nudges. Details: `docs/history/visualization-engine.md` (2026-09-24).
