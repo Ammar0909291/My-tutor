@@ -25,8 +25,8 @@ reach verified mastery every time with zero critical defects (`scripts/qa/synthe
 | S2 | Smoke run: 1 lesson, strong student, displacement | **done**. Critical defect found: "give me a question" read as frustration → demotion CHECK→DEMONSTRATE → unfair close |
 | S3 | Fix S2 (`recoveryGuard.isNextItemRequest`, clause-level) | **committed** `a029624`. Full suite 723/14,908, tsc and build clean |
 | S4 | Before-baseline: 2 topics × 5 students on production **without** the S3 fix | **done**: 4/10 mastered, 12 critical / 128 turns (details in `docs/history/synthetic-students.md`) |
-| S5 | Push S3 + baseline fixes (verdict after gate-contract replacement, "Got it" announcement, `asksForPractice` next-question/check-me) to `main`; confirm the deploy is READY | **in progress** |
-| S6 | After-run: the same 2 topics × 5 students on the fixed build; compare with S4 | pending |
+| S5 | Push S3 + baseline fixes (verdict after gate-contract replacement, "Got it" announcement, `asksForPractice` next-question/check-me) to `main`; confirm the deploy is READY | **done**: `f6281f8`; production READY at `1f438cd` (19:0x UTC) |
+| S6 | After-run: the same 2 topics × 5 students on the fixed build; compare with S4 | **running** (started 19:04 UTC) |
 | S7 | Fix the top remaining defect class from S6, validate, deploy, re-run. Known candidates: (a) the ladder stays frozen when the learner answers the lesson's own held question during an excursion (`route.ts` `excursionFrozeLadderThisTurn`; touches evidence, so needs care and tests); (b) the KG-description fallback repeats verbatim turn after turn | pending |
 | S8 | Widen to more launch topics (`RUNNER_TOPICS=6`, then more) within the egress cap | pending |
 
@@ -87,7 +87,8 @@ It counts rows returned (cumulative since project creation, never reset).
 
 | Snapshot | At (UTC) | calls | rows | Note |
 |---|---|---|---|---|
-| E0 | 2026-09-24 18:41:52 | 10,355,126 | 188,905,370 | before the S6 after-run (after the S4 baseline) |
+| E0 | 2026-09-24 18:41:52 | 10,355,126 | 188,905,370 | after the S4 baseline |
+| E1 | 2026-09-24 19:04:00 | 10,355,590 | 188,905,885 | start of the S6 after-run; +515 rows in 22 idle minutes, so background traffic is negligible |
 
 ## Rules that bind this work
 
