@@ -15,7 +15,7 @@ steel-man pass) and its status:
 | 2 | No-picture remnants (pointers/ASCII left after "I don't have a picture") | **Done, deployed** |
 | 3 | Output verifier: enforce only rules proven precise | **Measured; nothing enforced** (reason below); evidence logging added |
 | 4 | Lesson opening (`lesson-init`) gets the chat turn's output checks | **Done, deployed** |
-| 5 | Instrumented pilot on real accounts + per-lesson report | **Harness built; run pending/in progress** — see "Next" |
+| 5 | Instrumented pilot on real accounts + per-lesson report | **Done** — run 1: 2/8 mastered; root causes fixed in `d6750dc`; run 2 on the 4 failures: 3/4 mastered (see `docs/history/visualization-engine.md`, 2026-09-24 pilot section) |
 | — | Structural changes (split route, delete dormant pipelines, new learner store) | **Not in scope** — owner decides from pilot data |
 
 ## What changed (commits on `main`)
@@ -60,7 +60,7 @@ so nothing was promoted. Next step: after some real traffic, read `[verifier-log
 lines from Vercel logs, adjudicate a sample per code, then enforce only codes with
 near-zero false positives (needs a per-code enforce path in `verifierGate.ts`).
 
-## Next — run the pilot and write the report
+## Next — (pilot DONE; kept as the re-run recipe) run the pilot and write the report
 
 1. Confirm the latest production deployment is READY (Vercel MCP, project
    `prj_FwjmRdthApGhwdQY7FyDYThD7WJD`, team `team_ZHSoYXkAEang6oq1I9hAPn45`).
@@ -100,3 +100,14 @@ near-zero false positives (needs a per-code enforce path in `verifierGate.ts`).
   misstate process direction on scene figures; the content-free hold
   ("Let's stay with this idea for a moment."); `MISCONCEPTION_DETECTED` firing on
   conversational nudges. Details: `docs/history/visualization-engine.md` (2026-09-24).
+
+## Status at hand-off (after pilot run 2)
+
+- `d6750dc` fixes are live (`dpl_CopQvQGpR5S4HhuWikc9EjCBVndQ`); full suite 720 files /
+  14,842 passed; tsc clean; build clean.
+- **Next concrete item**: thread the concept (KG title/description) into the gate-internal
+  ungradeable-question strip in `src/lib/teaching/gateAssessment.ts` (the
+  `WITHHELD_QUESTION_CONTINUATION` sites) so it stops shipping "Let's stay with this idea for a
+  moment." — the final-response site in `route.ts` already does this (`finalFallback`).
+  Then re-run the pilot on `chem.found.stoichiometry` (suaibamr4) with a higher turn cap.
+- The 3-session budget the owner set is nearly spent: this work used ~2.

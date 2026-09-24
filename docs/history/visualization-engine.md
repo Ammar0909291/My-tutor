@@ -340,3 +340,37 @@ follow-up and plain turns state it correctly. Open, model prose only: the tutor 
 the figure's appearance ("little motor", "orange block" for the helicase dot) despite the
 contract's rule against naming unlisted colours/shapes; ASCII-art remnants on no-figure turns
 (transcription, nucleic-acid-structure, photosynthesis) are the known-open defect.
+
+## 2026-09-24 — Tutor output fixes + learner pilot on four real owner accounts
+
+Commits `9260d77` (output fixes: no-figure remnants, scene colour fidelity, lesson-opening
+parity, `stripPhantomVisualClaims` paragraph-flattening bug, verifier evidence logging) and
+`d6750dc` (pilot findings). Harness: `scripts/qa/learnerPilot.ts` (credentials via env only).
+
+**Pilot run 1** (8 lessons, 4 accounts, deployment with `9260d77`): only **2/8 reached verified
+mastery** (eng.grammar.verbs, phys.wave.interference). Root cause of most failures, from
+TURN_EVENT logs: a willing learner's repeated "ok i get it, can you test me?" was classified
+DISTRESS (`recoveryGuard.isRepeatedAnswer` → 'frustrated'; "test me" was not a recognised
+next-item request), so arbitration refused the authored probe; the model's own MCQ was dropped
+and its lead-in ("Sure, let's check your understanding with a quick multiple-choice question.")
+shipped with no question, 4 turns running, until the lesson closed unmastered. Also: a fenced
+drawing made of arrow glyphs + "The arrow highlights…" on a no-figure turn; phoneme notation
+stripped from a phonics lesson ("three sounds —   .").
+
+**Fixes (`d6750dc`)**: "test/quiz/check me" is a next-item request (positive evidence);
+unkept check announcements are dropped when the reply asks nothing; the final-response
+fallback is the concept's KG description, not the content-free hold; arrow-glyph fences and
+arrow-subject pointers removed on no-figure turns (emptied reply → KG fallback, chat and
+lesson-init); beginner IPA strip skipped on eng.phonics/phonetics.
+
+**Pilot run 2** (the 4 failed lessons, same accounts, deployment `dpl_CopQvQGpR5S4HhuWikc9EjCBVndQ`):
+**3/4 now reach verified mastery** (nouns, blending-segmenting, nernst); stoichiometry reached
+PRACTICE 1/0 at the harness's 14-turn cap and was not closed early. Overall after fixes:
+5 of the 8 pilot lessons mastered.
+
+**Open** (next session): "Let's stay with this idea for a moment." still ships from the
+gate-internal strip of an ungradeable model question (`gateAssessment.ts`, the
+`WITHHELD_QUESTION_CONTINUATION` sites, ~L376–L600) — needs the concept's context threaded in
+so it can fall back to the KG description like the final-response site; the KG-description
+fallback reads robotically (syllabus phrasing); model-invented ("unkeyed") MCQs still appear
+in counting phases; the tutor still invents figure shapes ("little motor").
