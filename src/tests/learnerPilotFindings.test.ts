@@ -39,6 +39,21 @@ describe('P1 — "can you test me?" said twice is a willing learner, not a frust
   })
 })
 
+describe('synthetic-student baseline — practice requests in learners\' words', () => {
+  it('"next question please" and "check me with a question" are practice requests', async () => {
+    const { asksForPractice } = await import('@/lib/teaching/masteryGate')
+    for (const m of ['ok, next question please', 'next question please', 'another question', 'can you check me with a question?', 'check my understanding']) {
+      expect(asksForPractice(m), m).toBe(true)
+    }
+  })
+  it('refusals and unrelated uses stay negative', async () => {
+    const { asksForPractice } = await import('@/lib/teaching/masteryGate')
+    for (const m of ["don't check me yet", 'please do not ask me another question', 'can you check my answer to the last one', 'I checked my notes']) {
+      expect(asksForPractice(m), m).toBe(false)
+    }
+  })
+})
+
 describe('P2 — a check that is announced and never asked is not shipped', () => {
   for (const t of [
     'Sure, let’s check your understanding with a quick multiple‑choice question.',
@@ -49,6 +64,17 @@ describe('P2 — a check that is announced and never asked is not shipped', () =
       expect(enforceQuestionDeliveryContract(t, 'FALLBACK')).toBe('FALLBACK')
     })
   }
+  it('synthetic-student smoke run: "Got it—let’s jump right in with a quick check." alone -> the fallback', () => {
+    expect(enforceQuestionDeliveryContract('Got it—let’s jump right in with a quick check.', 'FALLBACK')).toBe('FALLBACK')
+  })
+  it('the gate contract\'s replacement keeps the verdict on the answer just graded', () => {
+    const at = route.indexOf('cleanText = contract.text')
+    expect(at).toBeGreaterThan(0)
+    const after = route.slice(at, at + 1400)
+    expect(after).toMatch(/if \(correctForConfirmation !== null\)/)
+    expect(after).toMatch(/cleanText = reconfirm\(\{ text: cleanText, correct: correctForConfirmation/)
+    expect(after).toMatch(/cleanText = recorrect\(\{ text: cleanText, correct: correctForConfirmation, probe: pendingMcqHoisted \}\)/)
+  })
   it('an announcement followed by the real question is kept whole', () => {
     const t = 'Let’s check your understanding. Which word in the sentence is the verb?'
     expect(enforceQuestionDeliveryContract(t, 'FALLBACK')).toBe(t)

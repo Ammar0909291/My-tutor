@@ -10171,6 +10171,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               ` — prose replaced (reason=${contract.reason}, chars ${cleanText.length}->${contract.text.length})`,
             )
             cleanText = contract.text
+            // A reply replaced wholesale still owes the learner the verdict on
+            // the answer just graded. Synthetic-student smoke run, 2026-09-24:
+            // a right answer came back as the bare "Here is your next
+            // question." because the replacement dropped the confirmation
+            // added earlier in the turn. Both helpers no-op when the text
+            // already carries the verdict.
+            if (correctForConfirmation !== null) {
+              const { confirmCorrectAnswer: reconfirm } = await import('@/lib/teaching/answerConfirmation')
+              const { stateCorrectionForWrongAnswer: recorrect } = await import('@/lib/teaching/wrongAnswerCorrection')
+              cleanText = reconfirm({ text: cleanText, correct: correctForConfirmation, priorConfirmations: resolvedPriorConfirmations }).text
+              cleanText = recorrect({ text: cleanText, correct: correctForConfirmation, probe: pendingMcqHoisted }).text
+            }
           }
         } catch (err) {
           // A repair must never break a turn.

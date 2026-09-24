@@ -1193,7 +1193,7 @@ export function dropSentencesPointingAtMissingOptions(text: string): string {
  * announcement is certainly unkept.
  */
 const ANNOUNCES_A_CHECK =
-  /^(?:(?:sure|great|ok(?:ay)?|alright|i hear you|that(?:'|’)s great)[^.!?]{0,30}[,—–-]\s*)?(?:let(?:'|’)s|let me|here(?:'|’)s|here is)\b[^.!?]{0,80}\b(?:check|test|quiz|question)\b[^.!?:]{0,80}[.!]?$/i
+  /^(?:(?:sure|great|ok(?:ay)?|alright|got it|understood|no problem|absolutely|of course|i hear you|that(?:'|’)s great)[^.!?]{0,30}[,—–-]\s*)?(?:let(?:'|’)s|let me|here(?:'|’)s|here is)\b[^.!?]{0,80}\b(?:check|test|quiz|question)\b[^.!?:]{0,80}[.!]?$/i
 
 export function dropUndeliveredCheckAnnouncements(text: string): string {
   const t = typeof text === 'string' ? text : ''

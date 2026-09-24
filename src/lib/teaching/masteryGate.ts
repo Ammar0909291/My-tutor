@@ -893,6 +893,14 @@ const PRACTICE_REQUEST_RE: readonly RegExp[] = [
   // not requests for a question. A learner asking for the next item puts it
   // first.
   /^\s*(one|another)\s+more\b/i,
+  // Synthetic-student baseline, 2026-09-24 (production, phys.mech.*): "ok,
+  // next question please" and "can you check me with a question?" matched
+  // none of the patterns above. Unread, "next question please" could not
+  // close an open side-question detour (closed-wants-practice), and a learner
+  // asking five times got five more "favourite physics facts". Same intent as
+  // "quiz me" / "give me a question", in the words learners use.
+  /\b(?:next|another|new)\s+question\b/i,
+  /\bcheck\s+(?:me|my\s+understanding)\b/i,
 ]
 
 /**
@@ -913,7 +921,7 @@ const PRACTICE_REQUEST_NEGATED_RE =
   // 'practice|practise' added with the first-person pattern above: without it
   // "I don't want to practice" would match that new pattern and be read as a
   // REQUEST for practice — the exact inversion this guard exists to prevent.
-  /\b(don'?t|do\s+not|stop|quit|no\s+more|rather\s+than|instead\s+of)\s+(\w+\s+){0,2}(ask|quiz|test|question|practice|practise)/i
+  /\b(don'?t|do\s+not|stop|quit|no\s+more|rather\s+than|instead\s+of)\s+(\w+\s+){0,2}(ask|quiz|test|check|question|practice|practise)/i
 
 /** Did the learner explicitly ask to be given a question to answer?
  *
