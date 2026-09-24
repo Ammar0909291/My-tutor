@@ -4483,6 +4483,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // for the model-probe decision below. `null` means the selector never
       // ran, which is ignorance and must not be read as "none exist".
       let authoredProbesExistHoisted: boolean | null = null
+      // Set only by the selector's own callback, on a turn it RAN: the concept's
+      // authored probes exist but are all spent this lesson. See
+      // inventedProbeGuard.ts's `authoredPoolExhausted`.
+      let authoredPoolExhaustedHoisted = false
       let gateDeclinedByPolicyHoisted = false
       // R1 — THE TOPIC-PROGRESS EVIDENCE WRITE MUST FINISH BEFORE THE RESPONSE.
       //
@@ -5019,6 +5023,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // anyway. Scoped to this call site only: assembleLesson still
             // accepts non-MCQ probes and renders them as prose follow-ups.
             requireMcq: true,
+            onAllCandidatesSpent: () => { authoredPoolExhaustedHoisted = true },
           })
           // THE SURPLUS RULE. Spending a probe below the mastery gates is only
           // safe while three remain afterwards, because mastery needs three
@@ -6235,6 +6240,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           modelOfferedProbe: mcqParse.mcq !== null,
           authoredProbesExist: authoredProbesExistHoisted,
           gateDeclinedByPolicy: gateDeclinedByPolicyHoisted,
+          authoredPoolExhausted: authoredPoolExhaustedHoisted,
           modelProbeAlreadyAsked: mcqParse.mcq !== null && teachingHistoryHoisted !== null
             && hasAskedMcqForModelProbe(teachingHistoryHoisted, mcqParse.mcq.question),
         })
@@ -8826,6 +8832,33 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           console.warn('[remediation-floor] skipped:', err)
         }
       }
+
+      // THE CORRECTION MUST SURVIVE THE REMEDIATION FLOOR.
+      //
+      // `stateCorrectionForWrongAnswer` (ENG-D11, above) runs BEFORE the floor,
+      // and the floor REPLACES `cleanText` wholesale when it rejects a draft —
+      // with a regeneration or with the held-card / curriculum-sentence
+      // fallback — so the verdict it had just added was thrown away. MEASURED
+      // (production QA, 2026-09-24, phys.mech.projectile-motion): the learner
+      // picked "Both axes decelerate together since gravity acts on the whole
+      // object", the server graded it wrong against the authored key, and the
+      // reply that shipped was the bare fallback template ("Let me put it in the
+      // simplest words I have. … Tell me which part of that is the fuzzy one")
+      // — no verdict, no right answer. Re-applying is safe by construction: the
+      // function is idempotent (it skips when the reply already says both
+      // halves), takes the same authored-key-only input, and fabricates nothing.
+      try {
+        const { stateCorrectionForWrongAnswer } = await import('@/lib/teaching/wrongAnswerCorrection')
+        const corrected = stateCorrectionForWrongAnswer({
+          text: cleanText,
+          correct: correctForConfirmation,
+          probe: pendingMcqHoisted,
+        })
+        if (corrected.added) {
+          console.log('[eng-d11] ' + JSON.stringify({ event: 'wrongAnswerCorrected', reason: corrected.reason, afterRemediationFloor: true }))
+        }
+        cleanText = corrected.text
+      } catch { /* non-fatal — the teaching is still better than no answer */ }
 
       // S1 — append this turn to the history ring, unconditionally (not
       // gated on eosFlags.outputVerifier): the ring must accumulate whether
