@@ -28,6 +28,7 @@ reach verified mastery every time with zero critical defects (`scripts/qa/synthe
 | S5 | Push S3 + baseline fixes (verdict after gate-contract replacement, "Got it" announcement, `asksForPractice` next-question/check-me) to `main`; confirm the deploy is READY | **done**: `f6281f8`; production READY at `1f438cd` (19:0x UTC) |
 | S6 | After-run: the same 2 topics × 5 students on the fixed build; compare with S4 | **done**: 8/10 mastered (was 4/10); critical 1 (was 12). Only confused fails |
 | S6a | Root cause of "asked for a question, got none" (Vercel `[arbitration]` + `[gate-eligibility]` logs): a practice request with a "?" ("give me a question?", "can you check me with a question?") claims LEARNER_QUESTION, which denies AUTHORED_PROBE. Fix: `genuineQuestionActive … && !turnIntent.wantsPractice` in route.ts | **pushed** (full suite 723/14,915, tsc and build clean); next: after-run 2 |
+| S6b | After-run 2 on production `dc07f2d` (arbitration fix `ae9caf6`), same 2 topics × 5 students | **running** (started 19:48 UTC); egress E3 taken |
 | S7 | Fix the top remaining defect class from S6, validate, deploy, re-run. Known candidates: (a) the ladder stays frozen when the learner answers the lesson's own held question during an excursion (`route.ts` `excursionFrozeLadderThisTurn`). The closing turn also freezes by design (`excursionActiveHoisted = !turnCountsForLesson` counts justClosed as active), so the fix needs a deliberate exception: record the lesson question on screen at excursion open, and count an answer to exactly that question. It touches evidence, so do it only if S6 shows off-track still failing; (b) the KG-description fallback repeats verbatim turn after turn | pending |
 | S8 | Widen to more launch topics (`RUNNER_TOPICS=6`, then more) within the egress cap | pending |
 
@@ -91,6 +92,7 @@ It counts rows returned (cumulative since project creation, never reset).
 | E0 | 2026-09-24 18:41:52 | 10,355,126 | 188,905,370 | after the S4 baseline |
 | E1 | 2026-09-24 19:04:00 | 10,355,590 | 188,905,885 | start of the S6 after-run; +515 rows in 22 idle minutes, so background traffic is negligible |
 | E2 | 2026-09-24 19:40:08 | 10,383,880 | 189,022,806 | end of S6: +116,921 rows over ~120 turns, about 35 MB. Today so far: 2 runs, about 70 MB |
+| E3 | 2026-09-24 19:48:30 | 10,384,238 | 189,023,228 | start of after-run 2 (+422 idle) |
 
 ## Rules that bind this work
 
