@@ -73,46 +73,31 @@ export const RETIRED_VISUAL_BINDINGS: Readonly<Record<string, string>> = {
     'Rendered a perfect FCC lattice. Amorphous solids are defined by the ABSENCE of ' +
     'long-range order, so the figure asserts the opposite of the concept.',
 
-  // ── biology: the bio.cell domain rule ───────────────────────────────────
-  // Every concept under bio.cell inherited the FOOD CHAIN card — ecosystem-level
-  // energy flow — for subcellular topics. (bio.cell.mitosis and bio.cell.meiosis
-  // are NOT retired: both have their own faithful cell-division scenes.)
-  'bio.cell.cell-theory':             'Rendered a food chain (ecosystem energy flow) for a subcellular concept.',
-  'bio.cell.prokaryotic-cell':        'Rendered a food chain; no cell structure is depicted.',
-  'bio.cell.eukaryotic-cell':         'Rendered a food chain; no cell structure is depicted.',
-  'bio.cell.cell-membrane-transport': 'Rendered a food chain; no membrane or transport mechanism is depicted.',
-  'bio.cell.nucleus-chromosomes':     'Rendered a food chain; no nucleus or chromosome is depicted.',
-  'bio.cell.mitochondria-energy':     'Rendered a food chain. Cellular respiration and ecosystem energy flow are different scales entirely.',
-  'bio.cell.chloroplast-structure':   'Rendered a food chain; no chloroplast structure is depicted.',
-  'bio.cell.endomembrane-system':     'Rendered a food chain; no organelle system is depicted.',
-  'bio.cell.cytoskeleton':            'Rendered a food chain; no cytoskeletal filament is depicted.',
-  'bio.cell.cell-cycle':              'Rendered a food chain; the cycle phases are not depicted.',
-  'bio.cell.cell-signalling':         'Rendered a food chain; no receptor or signalling cascade is depicted.',
-  'bio.cell.apoptosis':               'Rendered a food chain; programmed cell death is not depicted.',
-
-  // ── biology: the bio.cell domain rule, six more found by the 2026-09-24
-  // Biology visual coverage inventory ─────────────────────────────────────
-  // These six concepts were authored after the sweep above and were never
-  // audited against it — the read-only inventory ran the real resolver
-  // (lookupConceptVisualBinding) over all 199 current Biology KG concepts and
-  // found each still inheriting the same 'bio.cell' -> food_chain domain
-  // default the twelve concepts above were already retired for. Same defect,
-  // same evidence shape, same remedy: the food chain card depicts trophic
-  // energy flow between organisms, never anything at the subcellular scale
-  // these six concepts teach.
-  'bio.cell.anaerobic-respiration-fermentation':
-    'Rendered a food chain; no fermentation pathway or anaerobic respiration process is depicted.',
-  'bio.cell.cancer-biology-hallmarks':
-    'Rendered a food chain; none of the hallmarks of cancer (uncontrolled division, evaded apoptosis, ' +
-    'invasion) are depicted.',
-  'bio.cell.cell-adhesion-tissue-organization':
-    'Rendered a food chain; no cell junction or tissue-level organisation is depicted.',
-  'bio.cell.cell-junctions-extracellular-matrix':
-    'Rendered a food chain; no junction structure or extracellular matrix is depicted.',
-  'bio.cell.cytoskeleton-motility':
-    'Rendered a food chain; no cytoskeletal filament or motility mechanism is depicted.',
-  'bio.cell.membrane-transport-energetics':
-    'Rendered a food chain; no membrane transport mechanism or its energetics is depicted.',
+  // ── biology: the bio.cell domain rule — RESOLVED (2026-09-24) ────────────
+  // The 18 bio.cell concepts formerly listed here (the original 12, plus 6
+  // more found by the 2026-09-24 Biology visual coverage inventory) all
+  // inherited the FOOD CHAIN card — ecosystem-level energy flow — for
+  // subcellular topics. Per this file's own documented lifecycle ("a later
+  // milestone can replace an entry with a faithful figure rather than having
+  // to rediscover that one was ever wanted"), each of the 18 now has its own
+  // concept-specific Tier 0 scene (src/lib/teaching/visual/conceptSceneParams.ts
+  // CONCEPT_SCENES — buildCellStructureScene / buildCellPathwayScene /
+  // buildCellHubScene / buildCellComparisonScene, plus buildTimelineScene for
+  // the one historical concept), so the entries were removed rather than left
+  // as unreachable dead suppressions: Tier 0 is checked BEFORE Tier 1's
+  // domain-default lookup in buildDecision(), so food_chain is now
+  // structurally unreachable for all 18 regardless of whether an entry exists
+  // here — verified by resolveVisual() itself before this removal (leaving the
+  // retirement in place made the new Tier 0 scene provably unreachable,
+  // producing 'no-figure:retired-binding' instead of the new figure). The
+  // mechanism itself — RETIRED_VISUAL_BINDINGS, isRetiredVisualBinding(),
+  // retirementReason(), and its priority over every tier — is unchanged;
+  // only the 18 data rows whose underlying defect is now fixed were removed.
+  // bio.cell.mitosis and bio.cell.meiosis were never listed here at all, for
+  // the identical reason: they already had faithful Tier 0 scenes. Full
+  // per-concept design rationale lives as the doc-comment directly above the
+  // eighteen new CONCEPT_SCENES entries in conceptSceneParams.ts, and in
+  // this commit's own message.
 
   // ══ VISUAL SEMANTIC MOAT SWEEP (physics + chemistry) ════════════════════
   //

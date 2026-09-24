@@ -141,7 +141,13 @@ describe('B2 changed nothing else', () => {
     // same trend in ONE session. A curated binding outranks generation, which
     // is why authoring one IS the fix. Counted here per this test's own
     // convention of recording each movement and why.
-    expect(CONCEPT_SCENE_OVERRIDES).toHaveLength(38)
+    //
+    // 38 -> 56 (2026-09-24, Biology cell visual replacement): 18 new
+    // concept-owned entries replacing the 18 bio.cell concepts formerly
+    // suppressed in retired.ts for inheriting the wrong 'bio.cell' ->
+    // food_chain domain default — see bioCellVisualReplacement.test.ts for
+    // full per-concept coverage.
+    expect(CONCEPT_SCENE_OVERRIDES).toHaveLength(56)
     expect(CONCEPT_SCENE_OVERRIDES).toContain('chem.dblock.lanthanides')
     expect(CONCEPT_SCENE_OVERRIDES).toContain('math.calc.critical-points')
     expect(CONCEPT_SCENE_OVERRIDES).toContain('phys.em.kirchhoffs-laws')
