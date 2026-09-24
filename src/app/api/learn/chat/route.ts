@@ -4822,11 +4822,21 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // refuses a second early spend at DEMONSTRATE — the same guarantee
         // that already protects DEMONSTRATE alone, extended by reusing the
         // identical arithmetic rather than a second threshold.
+        // TRANSFER below the verified bar (owner-approved, 2026-09-24): the
+        // ladder can reach TRANSFER on plain credit with verified evidence
+        // short of the bar, and TRANSFER is not a mastery-gate phase, so no
+        // authored question was ever attached there again and the lesson could
+        // never certify. Until the bar is met, TRANSFER keeps assessing with
+        // authored questions; a server-graded right answer then tops up the
+        // lowest unmet verified counter (conversationState's TRANSFER case).
+        const { transferBelowVerifiedBar } = await import('@/lib/teaching/conversationState')
+        const transferNeedsVerifiedCredit = transferBelowVerifiedBar(conversationStateHoisted)
         const phaseAllowsProbe =
           isMasteryGatePhase(phaseBeforeTurn) ||
           (phaseBeforeTurn === 'GUIDE' && evidenceMoveHoisted === 'ask') ||
           (phaseBeforeTurn === 'DEMONSTRATE') ||
-          (phaseBeforeTurn === 'OBSERVE' && evidenceMoveHoisted === 'ask')
+          (phaseBeforeTurn === 'OBSERVE' && evidenceMoveHoisted === 'ask') ||
+          transferNeedsVerifiedCredit
         phaseAllowsProbeHoisted = phaseAllowsProbe
         // R82: the mirror image of the OBSERVE disjunct just above. R81
         // measured 79/238 concepts failing certification because OBSERVE's
@@ -4938,7 +4948,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // caller this comment already protects is unaffected.
           probeAttachablePhase:
             isProbeAttachablePhase(phaseBeforeTurn) || phaseBeforeTurn === 'DEMONSTRATE' ||
-            (phaseBeforeTurn === 'OBSERVE' && evidenceMoveHoisted === 'ask'),
+            (phaseBeforeTurn === 'OBSERVE' && evidenceMoveHoisted === 'ask') ||
+            transferNeedsVerifiedCredit,
           hasMemoryState: memoryState !== null,
           noUnansweredProbeOnScreen: !unansweredProbeOnScreen,
           notFirstLesson: !firstLessonActiveHoisted,
@@ -4973,7 +4984,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         {
           const { gateRefusedOnPolicy } = await import('@/lib/teaching/inventedProbeGuard')
           gateDeclinedByPolicyHoisted = gateRefusedOnPolicy(gateTerms)
-          probeWouldCountThisPhaseHoisted = isProbeAttachablePhase(phaseBeforeTurn)
+          probeWouldCountThisPhaseHoisted = isProbeAttachablePhase(phaseBeforeTurn) || transferNeedsVerifiedCredit
         }
         console.log('[gate-eligibility] ' + JSON.stringify({
           phase: phaseBeforeTurn,
