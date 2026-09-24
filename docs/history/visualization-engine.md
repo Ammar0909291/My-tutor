@@ -235,3 +235,39 @@
   real components on the dev harness plus offline runs of the real modules.
 
 
+
+## 2026-09-24 — Visual architecture hardening (commit 9a2e2da + QA harness)
+
+Forensic audit + fix of the visual decision path. Changes:
+- **Retirement lifecycle by asset, not by concept.** `retired.ts` keeps all 25
+  `RETIRED_VISUAL_BINDINGS` rows (evidence) and adds `RETIRED_ASSET_FINGERPRINTS`
+  (content fingerprints of every asset each tier offered at retirement). Tier −1 in
+  `resolveVisual` now refuses only a retired asset or a broad (domain-default /
+  generator-default) one; a concept-authored asset with new content is served with no
+  edit to `retired.ts`. `fingerprint.ts` is the single `figureFingerprint` definition.
+- **No wrong-domain fallback.** `DOMAIN_CARD_HOME` + `domainRuleIsFaithful`: a domain
+  rule whose card does not belong to that domain yields no figure (only one existed:
+  `bio.cell → food_chain`, row kept, now refused).
+- **Scene representation** falls back to the exact binding or the scene type, never an
+  unrelated domain card (18 `bio.cell` scenes were labelled `food_chain`).
+- **One source of "what can be shown".** route.ts derives `availableVisual`/`allowed`
+  only from the V2 decision; legacy keyword detection no longer feeds the prompt.
+- **Honest served state.** `turnRecord.ts` → one `[learn/chat] VISUAL_TURN=` log per turn
+  (tier, assetId, representation, scope, reason, generationSpent, served-from-response,
+  onScreen, heldTurns); TURN_EVENT `visualServed` now reads the response, not the decision.
+- Invariants: `visualArchitectureInvariants.test.ts` (50), `visualRetirementLifecycle.test.ts`.
+  Full suite 714/714 files, 14,761 passed; tsc 0; build OK. Census unchanged except the
+  18 representation labels (1866 concepts, 517 graphical, 25 retired no-figure).
+
+Production QA (`scripts/qa/visualArchitectureProductionQa.ts`, disposable account, deleted,
+deployment dpl_2vtJEr9vSsxtPAmdo4xr6PnyC1Ng): 21/21 chat turns — response fields,
+`VISUAL_TURN` and TURN_EVENT `visualServed` agree (10 served / 11 not). Tier 0 concept
+(apoptosis, process), Tier 0 kind (projectile), Tier 1 curated (particle-in-box), Tier 1
+domain (limits), Tier 2 approved (stoichiometry), Tier 3 cache hit ×2 with
+generationSpent=false (specific-heat), retired lc-circuits → no figure + "I don't have a
+picture", retired reflection → retired mirror scene not served (a Tier-3 generated graph was),
+replaced cell-cycle → replacement scene. English path skipped (wrong concept id in harness).
+Remaining, non-blocking: telemetry `representation` for a domain card still carries the
+inferred label (`motion_graph` for math.calc.limits; learner prose already says "figure");
+an approved Tier-2 figure is unreachable for a concept that has a domain default (fix needs a
+per-turn DB read — egress); legacy `detectVisual` still computed for telemetry only.
