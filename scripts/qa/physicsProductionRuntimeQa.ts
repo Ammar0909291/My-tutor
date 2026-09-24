@@ -401,7 +401,7 @@ async function main() {
     const foreignLessons = lessons.filter((l) => !l.topicSlug.startsWith('phys.'))
     if (foreignLessons.length) finding(`physics curriculum contains ${foreignLessons.length} non-physics topicSlugs: ${foreignLessons.slice(0, 5).map((l) => l.topicSlug).join(', ')}`)
     const plans = process.argv.includes('--pass2') ? PASS2_PLANS : process.argv.includes('--numeric') ? NUMERIC_PLANS : process.argv.includes('--hard') ? HARD_PLANS : PLANS
-    for (const plan of plans.filter((pl) => !only || pl.conceptId === only)) {
+    for (const plan of plans.filter((pl) => !only || only.split(',').includes(pl.conceptId))) {
       try { results.push(await drive(acct.cookie, lessons, plan)) }
       catch (e) { finding(`${plan.conceptId}: run aborted — ${(e as Error).message}`) }
     }

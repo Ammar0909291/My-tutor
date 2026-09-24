@@ -78,14 +78,23 @@ describe('D3 — an unmet picture request is said out loud', () => {
     expect(acknowledgeUnavailablePicture({ ...base, text: '' }).appended).toBe(false)
   })
 
-  it('route.ts wires it after the phantom-claim strip, from the turn\'s own request and the rendered-figure log', () => {
+  it('route.ts applies it at the FINAL response step, which memory-served turns also reach', () => {
+    // The first placement (with the model-output repairs) never ran on the two
+    // production turns: both were served from Explanation Memory.
     const route = readFileSync(join(process.cwd(), 'src/app/api/learn/chat/route.ts'), 'utf8')
-    const strip = route.indexOf("stripped a phantom visual claim")
+    const memoryServe = route.indexOf("memoryFallbackReasonCode = assembled.explanationFallbackReason")
+    const finalMcq = route.indexOf('const servedMcq = probeReleasedThisTurnHoisted')
     const call = route.indexOf('acknowledgeUnavailablePicture({')
-    expect(strip).toBeGreaterThan(0)
-    expect(call).toBeGreaterThan(strip)
-    expect(route.slice(call, call + 600)).toMatch(/learnerAskedForPicture: learnerRequestHoisted === 'diagram'/)
-    expect(route.slice(call, call + 600)).toMatch(/snapshotRRMLog\.some\(\(e\) => e\.matchedConcept === resolvedConceptId\)/)
+    const response = route.lastIndexOf('return NextResponse.json({\n        success: true, text: cleanText')
+    expect(memoryServe).toBeGreaterThan(0)
+    expect(call).toBeGreaterThan(memoryServe)
+    expect(call).toBeGreaterThan(finalMcq)
+    expect(response).toBeGreaterThan(call)
+    expect([...route.matchAll(/acknowledgeUnavailablePicture\(\{/g)]).toHaveLength(1)
+    const body = route.slice(call, call + 700)
+    expect(body).toMatch(/learnerAskedForPicture: learnerRequestHoisted === 'diagram'/)
+    expect(body).toMatch(/Boolean\(responseVisual\) \|\| Boolean\(detectedVisualSpec\) \|\| Boolean\(detectedSceneSpec\)/)
+    expect(body).toMatch(/snapshotRRMLog\.some\(\(e\) => e\.matchedConcept === resolvedConceptId\)/)
   })
 })
 

@@ -7549,22 +7549,6 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             console.warn('[visual-v2] stripped a phantom visual claim — no figure was attached this turn')
           }
         }
-        // An explicit picture request with no figure to give: say so. See
-        // acknowledgeUnavailablePicture for the measured Kepler/LC turns.
-        try {
-          const { acknowledgeUnavailablePicture } = await import('@/lib/teaching/visual/visualAcknowledgement')
-          const ack = acknowledgeUnavailablePicture({
-            text: cleanText,
-            learnerAskedForPicture: learnerRequestHoisted === 'diagram',
-            figureAttachedThisTurn: anyVisualAttachedThisTurn,
-            figureShownEarlierForConcept: resolvedConceptId !== null && resolvedConceptId !== undefined
-              && snapshotRRMLog.some((e) => e.matchedConcept === resolvedConceptId),
-          })
-          if (ack.appended) {
-            console.log('[visual-v2] picture requested but none available — said so')
-            cleanText = ack.text
-          }
-        } catch { /* non-fatal — a repair must never break a turn */ }
       }
 
       // Sprint W gap A: extract the [HINT] tag's text (if the model emitted
@@ -12152,6 +12136,25 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       const servedMcq = probeReleasedThisTurnHoisted
         ? undefined
         : (mcqForClient(resolvedQuestionServedFinal) ?? undefined)
+      // AN UNMET PICTURE REQUEST IS SAID OUT LOUD (acknowledgeUnavailablePicture).
+      // Here, at the final response, because EVERY serving path converges here:
+      // the two production turns that exposed it were served from Explanation
+      // Memory, which skips the model-output repairs further up. "Attached" is
+      // read from the three figure fields this response actually carries.
+      try {
+        const { acknowledgeUnavailablePicture } = await import('@/lib/teaching/visual/visualAcknowledgement')
+        const ack = acknowledgeUnavailablePicture({
+          text: cleanText,
+          learnerAskedForPicture: learnerRequestHoisted === 'diagram',
+          figureAttachedThisTurn: Boolean(responseVisual) || Boolean(detectedVisualSpec) || Boolean(detectedSceneSpec),
+          figureShownEarlierForConcept: resolvedConceptId !== null && resolvedConceptId !== undefined
+            && snapshotRRMLog.some((e) => e.matchedConcept === resolvedConceptId),
+        })
+        if (ack.appended) {
+          console.log('[visual-v2] picture requested but none available — said so')
+          cleanText = ack.text
+        }
+      } catch { /* non-fatal — a repair must never break a turn */ }
       if (!servedMcq) {
         const { enforceQuestionDeliveryContract, WITHHELD_QUESTION_CONTINUATION_TEXT } = await import('@/lib/teaching/gateAssessment')
         const repaired = enforceQuestionDeliveryContract(cleanText, WITHHELD_QUESTION_CONTINUATION_TEXT)
