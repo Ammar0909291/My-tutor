@@ -9,7 +9,7 @@
  * after the run) — the three must agree.
  *
  * Disposable account only; deleted at the end unless --keep.
- * Run: npx tsx scripts/qa/visualArchitectureProductionQa.ts [--keep]
+ * Run: [QA_ONLY=conceptId,...] npx tsx scripts/qa/visualArchitectureProductionQa.ts [--keep]
  */
 import { writeFileSync } from 'node:fs'
 import { createQaAccount, deleteQaAccount, BASE } from './liveAccount'
@@ -61,7 +61,9 @@ async function main() {
   const results: unknown[] = []
   const curricula: Record<string, any[]> = {}
   try {
-    for (const p of PATHS) {
+    // QA_ONLY=id1,id2 re-runs just those paths (e.g. to verify one fix live).
+    const only = (process.env.QA_ONLY ?? '').split(',').map((x) => x.trim()).filter(Boolean)
+    for (const p of only.length ? PATHS.filter((x) => only.includes(x.conceptId)) : PATHS) {
       curricula[p.subject] ??= (await api(acct.cookie, `/api/curriculum?subject=${p.subject}`)).lessons ?? []
       const lesson = curricula[p.subject].find((l: any) => l.topicSlug === p.conceptId)
       if (!lesson) { console.log(`\n### ${p.path} — ${p.conceptId}: NOT IN ${p.subject} CURRICULUM`); results.push({ ...p, error: 'no lesson' }); continue }
