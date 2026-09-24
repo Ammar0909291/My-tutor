@@ -101,7 +101,17 @@ near-zero false positives (needs a per-code enforce path in `verifierGate.ts`).
   ("Let's stay with this idea for a moment."); `MISCONCEPTION_DETECTED` firing on
   conversational nudges. Details: `docs/history/visualization-engine.md` (2026-09-24).
 
-## LIVE LOOP STATE — read this first (updated every loop step)
+## LATEST (2026-09-24, acting as a real student) — read first
+
+Owner asked Claude to use the owner accounts "as real students". Tool: `scripts/qa/studentTurn.ts`
+(`open` / `say`, one turn per call, password via `STUDENT_PASSWORD` env only). Findings and the one
+fix shipped (typed grouped numbers now graded) are in `docs/history/visualization-engine.md`,
+section "Acting as a real student". **Two items need the OWNER's approval before any code** (they
+change assessment behaviour — CLAUDE.md G1/G2): (1) re-serve a MISSED authored probe once the
+pool is spent in an attempt; (2) stop the model seeing/solving the gate probe before it is asked
+(answer leak). Do not implement either without that approval.
+
+## LIVE LOOP STATE (updated every loop step)
 
 The owner said: fix what was proposed WITHOUT asking for approval, work in a loop,
 keep this file current so another account can continue with no prompts from the owner.

@@ -382,3 +382,34 @@ questions were model-invented (not in the seed corpus), which the harness answer
 lesson is not a clean product signal — needs a real learner. One new remnant, "This simple layout
 shows…", fixed in the follow-up commit (adjectives allowed before "layout"). Running tally over the
 pilot: 7 of 9 distinct lessons reached verified mastery at least once after the fixes.
+
+## 2026-09-24 — Acting as a real student (owner accounts, reasoning each answer, no answer key)
+
+Driven turn by turn with `scripts/qa/studentTurn.ts` (reads each reply before answering; no script,
+no key). Lessons: chem.found.stoichiometry (suaibamr4), phys.therm.calorimetry (suaibamr1).
+
+What a student actually experienced — good: clear analogies (mole = "chemistry's dozen"), the
+approved stoichiometry figure and the calorimetry scene served and described with labels that are
+really on them; a wrong limiting-reagent answer got a real correction.
+
+Defects found (★ = fixed this session):
+- ★ Typed numeric answers never graded: option "84 000 J" was read as leading value 84, so "84000 J"
+  and "0.5 x 4200 x 40 = 84000 J" resolved to nothing. `mcq.ts` now folds digit groups on both
+  sides (corpus sweep: 18,398 option taps, misattributed 0 -> 0, unresolved 4 -> 4).
+- ANSWER LEAK before the question (assessment integrity): the tutor solved "3.0 mol H₂ -> 3.0 mol
+  H₂O" and then served that exact MCQ; defined "limiting reactant" two sentences before a
+  fill-in-the-blank asking for that word. The gate probe is visible to the model when it writes.
+- AUTHORED POOL EXHAUSTED WITHIN ONE ATTEMPT: after one wrong answer at PRACTICE the learner dropped
+  to CHECK, spent the pool there, and at PRACTICE 2/0 no gradeable question existed
+  (`authored-pool-exhausted`); three explicit "give me a practice question" requests got a memory
+  summary / a paraphrase instead. Mastery unreachable after a single mistake when the pool is small.
+  Proposed fix (needs owner G1/G2 approval — changes probe selection): record missed probes in
+  TeachingHistory and, only once the pool is spent, re-serve a probe the learner got WRONG.
+- Feedback mismatches: "Correct — well done. I see you identified 'N₂'…" after the learner answered
+  "limiting"; a correct tap answered with "So you're saying … Is that correct?"; "Here is your next
+  question." with no word on the previous answer; the model's arithmetic slip "12 eggs ÷ 1 egg per
+  dozen = 12 dozens" (self-corrected when challenged, attributed to the learner).
+- Calorimetry: "Q_lost = −Q_gained" sign slip; a follow-up asked to "substitute the known mass and
+  specific heat of the block" when none was given; a model-invented MCQ whose correct option was the
+  learner's own previous sentence.
+- Authoring: a correct option that is a full paragraph beside a one-line distractor (length cue).
