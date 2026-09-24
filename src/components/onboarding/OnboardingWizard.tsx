@@ -23,6 +23,7 @@ const FALLBACK_SUBJECTS = [
   { id: 'mathematics', slug: 'mathematics', name: 'Mathematics', icon: '∑',   accent: '#56D364', subAccent: 'rgba(86,211,100,0.08)' },
   { id: 'physics',     slug: 'physics',     name: 'Physics',     icon: '⚛️',  accent: '#3178C6', subAccent: 'rgba(49,120,198,0.08)' },
   { id: 'chemistry',   slug: 'chemistry',   name: 'Chemistry',   icon: '🧪',  accent: '#A371F7', subAccent: 'rgba(163,113,247,0.08)' },
+  { id: 'biology',     slug: 'biology',     name: 'Biology',     icon: '🧬',  accent: '#2EA043', subAccent: 'rgba(46,160,67,0.08)' },
 ]
 
 const VOICES = [
