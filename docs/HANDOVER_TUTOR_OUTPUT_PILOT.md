@@ -110,9 +110,9 @@ Stay inside the owner's "3 complete sessions" budget for this work (about 2 used
 | Step | What | Status |
 |---|---|---|
 | L1 | Gate-internal withhold falls back to the concept, not "Let's stay with this idea" (`2935762`) | **deployed READY** (`dpl_2AUZmqyp36KL8Ub9N2Z6sRL3vtCX`, 14:10 UTC) |
-| L2 | Re-run pilot: `chem.found.stoichiometry` on suaibamr4 with `PILOT_MAX_TURNS=20`, + `eng.grammar.pronouns` on suaibamr4 (fresh) | **running** (started 14:10 UTC) |
-| L3 | Record L2 results in `docs/history/visualization-engine.md` + this table | pending |
-| L4 | Stop the loop. Items #2-#4 of the plan need REAL learners and owner decisions — do not start them. | — |
+| L2 | Re-run pilot: `chem.found.stoichiometry` on suaibamr4 with `PILOT_MAX_TURNS=20`, + `eng.grammar.pronouns` on suaibamr4 (fresh) | **done** 14:17 UTC — hold line 0/27 turns; pronouns mastered; stoichiometry closed by concept budget at t12 (model-invented questions, harness answers blindly — needs a real learner) |
+| L3 | Record L2 results in `docs/history/visualization-engine.md` + this table | **done** — recorded in `docs/history/visualization-engine.md` (pilot run 3); follow-up fix for \"This simple layout shows…\" |
+| L4 | Stop the loop. Items #2-#4 of the plan need REAL learners and owner decisions — do not start them. | **LOOP STOPPED** — all proposed fixes that need no real learners are shipped and verified |
 
 How to run a step with no owner input:
 1. Check the latest production deployment is READY and its commit is ≥ the step's commit

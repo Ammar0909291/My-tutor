@@ -495,11 +495,12 @@ function findPointerClauseHead(s: string): string | null {
  * legend is removed from the front of the sentence it prefixes.
  */
 const ARROW_FOLLOW_RE = /^(?:[A-Z][a-z]+\s+(?=[FfTt]))?(?:follow|trace)\s+(?:the|these|those)\s+arrows?\b\s*/i
-const LAYOUT_SUBJECT_RE = /^(?:this|the)\s+(?:layout|arrangement)\s+shows\s+/i
+// Up to two words before the noun: "This simple layout shows…" (pilot, eng.grammar.pronouns).
+const LAYOUT_SUBJECT_RE = /^(?:this|the)\s+(?:[a-z-]+\s+){0,2}(?:layout|arrangement)\s+shows\s+/i
 /** "The arrow highlights **barks**…" — a claim about a drawn arrow; dropped whole. */
 const ARROW_SUBJECT_RE = /^the\s+arrows?\s+(?:highlights?|shows?|points?|leads?|marks?|indicates?)\b/i
 const LEGEND_PREFIX_RE = /^\*?\s*(?:[A-Z][a-z]?\s*=\s*[^,;=\n]{2,40},\s*)+[A-Z][a-z]?\s*=\s*[^,;=\n]{2,40};\s*/
-const REMNANT_ANYWHERE_RE = /(?:^|[\n.!?]\s*)(?:(?:[A-Z][a-z]+\s+)?(?:follow|trace)\s+(?:the|these|those)\s+arrows?\b|(?:this|the)\s+(?:layout|arrangement)\s+shows\b|the\s+arrows?\s+(?:highlights?|shows?|points?|leads?|marks?|indicates?)\b|\*?\s*[A-Z][a-z]?\s*=\s*[^,;=\n]{2,40},)/i
+const REMNANT_ANYWHERE_RE = /(?:^|[\n.!?]\s*)(?:(?:[A-Z][a-z]+\s+)?(?:follow|trace)\s+(?:the|these|those)\s+arrows?\b|(?:this|the)\s+(?:[a-z-]+\s+){0,2}(?:layout|arrangement)\s+shows\b|the\s+arrows?\s+(?:highlights?|shows?|points?|leads?|marks?|indicates?)\b|\*?\s*[A-Z][a-z]?\s*=\s*[^,;=\n]{2,40},)/i
 
 /** Rewrite a remnant sentence, or null when it is not one. `''` means drop it. */
 function repairRemnant(s: string): string | null {

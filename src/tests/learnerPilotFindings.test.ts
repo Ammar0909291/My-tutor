@@ -110,3 +110,14 @@ describe('P5 — the gate-internal withhold says the concept, not "Let\'s stay w
     expect(route).toMatch(/const withholdConceptFallback = withholdNode\?\.title && withholdNode\.description\s*\? conceptFallbackText\(withholdNode\.title, withholdNode\.description\)/)
   })
 })
+
+describe('P6 — "This simple layout shows…" on a no-figure turn (pilot run 3, eng.grammar.pronouns)', () => {
+  it('is rewritten like the unadorned form', () => {
+    const t = 'This simple layout shows which pronoun replaces each noun in the sentences.'
+    expect(stripUnbackedFigureReferences(t, false).text).toBe('Here is which pronoun replaces each noun in the sentences.')
+  })
+  it('a declarative sentence about a layout is still untouched', () => {
+    const t = 'The layout of the periodic table reflects electron configuration trends.'
+    expect(stripUnbackedFigureReferences(t, false).text).toBe(t)
+  })
+})

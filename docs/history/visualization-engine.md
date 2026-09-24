@@ -374,3 +374,11 @@ gate-internal strip of an ungradeable model question (`gateAssessment.ts`, the
 so it can fall back to the KG description like the final-response site; the KG-description
 fallback reads robotically (syllabus phrasing); model-invented ("unkeyed") MCQs still appear
 in counting phases; the tutor still invents figure shapes ("little motor").
+**Pilot run 3** (loop step L2, `2935762` live as `dpl_2AUZmqyp36KL8Ub9N2Z6sRL3vtCX`, suaibamr4,
+20-turn cap): "Let's stay with this idea for a moment." appeared **0 times in 27 turns** (was 5 in
+run 2). eng.grammar.pronouns **mastered** (1/2 verified). chem.found.stoichiometry closed
+unmastered at turn 12 by the per-concept budget ("Let's pause…"), not the harness cap; most of its
+questions were model-invented (not in the seed corpus), which the harness answers blindly, so this
+lesson is not a clean product signal — needs a real learner. One new remnant, "This simple layout
+shows…", fixed in the follow-up commit (adjectives allowed before "layout"). Running tally over the
+pilot: 7 of 9 distinct lessons reached verified mastery at least once after the fixes.
