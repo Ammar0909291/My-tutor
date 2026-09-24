@@ -329,3 +329,14 @@ boxes (390px, 1280px). Registry row untouched (`dna_structure` stays bound and i
 instance unchanged); the `INSUFFICIENT_FOR_CONCEPT` verdict and the B2 "requires authoring"
 entry were removed as their documented exit; two ledger counts updated with the reason (override
 table 56 → 57, authoring queue 48 → 47). Tests: `dnaReplicationVisual.test.ts`.
+Production QA (`scripts/qa/dnaReplicationProductionQa.ts`, two disposable accounts, both deleted;
+deployments dpl_5noHraz3295k6ZW6jZVdENGc7Aad then dpl_J9YwkHWTVA2k8LUHPHNfp9vELPXy): the fork
+figure served on the normal turn, the explicit request and the diagram follow-up, held on the plain
+turn; no base-pairing ladder, no food chain; bio.mol.transcription afterwards got no figure (no
+leakage). VISUAL_TURN matched the response on all 10 turns of each run. Run 1 found the tutor
+saying Okazaki fragments are extended "toward the fork" with the next primer "further back" —
+stage 5's narration now states the direction and primer order outright (26f8e6a); run 2's
+follow-up and plain turns state it correctly. Open, model prose only: the tutor still embellishes
+the figure's appearance ("little motor", "orange block" for the helicase dot) despite the
+contract's rule against naming unlisted colours/shapes; ASCII-art remnants on no-figure turns
+(transcription, nucleic-acid-structure, photosynthesis) are the known-open defect.
