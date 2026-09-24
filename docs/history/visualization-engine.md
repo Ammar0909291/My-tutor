@@ -413,3 +413,41 @@ Defects found (★ = fixed this session):
   specific heat of the block" when none was given; a model-invented MCQ whose correct option was the
   learner's own previous sentence.
 - Authoring: a correct option that is a full paragraph beside a one-line distractor (length cue).
+
+## 2026-09-24 — Owner approved (G2) and shipped the two assessment changes from the real-student session
+
+Owner: "Approved, implement both items."
+
+1. **A missed question gets one more chance once the pool is spent.**
+   - `TeachingHistory` now has `mcqMissed` (authored questions answered wrong) and `mcqReasked`
+     (questions that have had their re-ask).
+   - `recordMcqOutcome` runs where a question is spent: in the primary fold and in the snapshot
+     rederiver.
+   - `findBestProbe` has a new `allowMissedStem` option. It is consulted only when every unasked
+     gate-compatible probe is spent. The match comes back with `reask: true` and its choices
+     rotated, so the right answer moves and each choice keeps its own `isCorrect`.
+   - The gate passes this option only at GUIDE and above, and never for the question graded that
+     same turn.
+   - Invariant, tested over every grade sequence: one authored question yields at most ONE correct
+     answer. This answers the earlier objection to re-asking ("one question answered three times
+     and called mastery").
+   - Logged as `[gate-assessment] {event:'missed-probe-reasked'}`.
+2. **The reply no longer answers the graded question it is about to ask.**
+   - `buildGateAssessmentBlock` no longer quotes the question to the model. It also tells the model
+     not to work a new example or give a new definition on that turn.
+   - Backstop: `dropAnswerLeaks(text, mcq)` in `gateAssessment.ts` runs on the server question
+     attached this turn. It removes a sentence that names the correct option more often than the
+     question itself does. On the two production turns it removed "= 3.0 mol H₂O" / "produce
+     **3.0 mol of water**" and the **limiting reactant** definition. It kept the setup "Start with
+     … 3.0 mol H₂" and the grade feedback.
+   - An answer shorter than 3 characters, or one also contained in a distractor, is never used.
+   - Logged as `[answer-leak]`.
+   - `gateAssessmentIsServerOwned.test.ts` pinned "quotes the question as context". That test was
+     changed on purpose, with the reason recorded in it.
+
+Tests: `src/tests/missedProbeReaskAndAnswerLeak.test.ts`. Full suite 722 files / 14,875 passed;
+tsc clean; build clean.
+Not live-verified yet: the account password is not available to this session.
+Verify after deploy by grepping Vercel logs for `missed-probe-reasked` and `[answer-leak]`.
+Not addressed: distractor options that carry their own "— dividing by the coefficient of 2"
+rationale, which gives away the correct option (authoring defect in the chemistry seed corpus).

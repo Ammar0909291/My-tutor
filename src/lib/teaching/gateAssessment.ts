@@ -192,19 +192,24 @@ export function probeToMcq(probe: ConvertibleProbe): TutorMCQ | null {
  * than a generic "here's a check" — but it is quoted as context, never as
  * something to reproduce, because the learner is already reading it.
  */
-export function buildGateAssessmentBlock(mcq: TutorMCQ): string {
+export function buildGateAssessmentBlock(_mcq: TutorMCQ): string {
+  // THE QUESTION IS NOT SHOWN TO THE MODEL (owner-approved, G2, 2026-09-24).
+  // It used to be quoted here "as context", and on a real account the model
+  // used it to work the exact problem first — "3.0 mol H₂ × (2/2) = 3.0 mol
+  // H₂O … you can produce 3.0 mol of water" — then the learner was asked
+  // "how many moles of water form from 3.0 mol of hydrogen?". A model that
+  // never sees the question cannot solve it for the learner. The lead-in is
+  // still about the concept just taught; `dropAnswerLeaks` backs this up.
   return (
     '\n\nASSESSMENT ALREADY SELECTED (do not write a question this turn). ' +
-    'The learner is about to see this question, rendered as tappable buttons ' +
-    'beneath your message:\n' +
-    `  "${mcq.question}"\n` +
-    'It was chosen by the teaching engine from reviewed course material, and ' +
-    'it is what their progress will be graded on. Your job this turn is the ' +
-    'LEAD-IN ONLY: one or two sentences that make the question worth ' +
-    'answering — a bridge from what you just taught, or the reason it matters. ' +
-    'Do NOT restate the question, do NOT list the options, do NOT ask any ' +
-    'other question, and do NOT emit an MCQ tag of your own. Never mention ' +
-    'that the question was selected for you.'
+    'A graded question on this concept will appear beneath your message as ' +
+    'tappable buttons. It was chosen by the teaching engine from reviewed ' +
+    'course material, and it is what their progress will be graded on. Your ' +
+    'job this turn is the LEAD-IN ONLY: one or two sentences that bridge from ' +
+    'what you just taught. Do NOT work a new example or give a new ' +
+    'definition this turn — the learner must answer from their own ' +
+    'understanding. Do NOT ask any other question, and do NOT emit an MCQ ' +
+    'tag of your own. Never mention that the question was selected for you.'
   )
 }
 
@@ -1223,4 +1228,72 @@ export function enforceQuestionDeliveryContract(text: string, fallback: string):
     // A repair must never break a turn.
     return typeof text === 'string' ? text : fallback
   }
+}
+
+// ── A GRADED QUESTION IS NOT ANSWERED IN THE SENTENCES ABOVE IT ─────────────
+//
+// Owner-approved (G2, 2026-09-24), from a real-account session on
+// chem.found.stoichiometry. Twice in one lesson the reply answered the graded
+// question it was about to ask:
+//
+//   "So, from 3.0 mol of hydrogen you can produce **3.0 mol of water** …"
+//     -> "how many moles of water form from 3.0 mol of hydrogen?"  [3.0 mol]
+//   "… is called the **limiting reactant** – it's the one that would be
+//    completely consumed first …"
+//     -> "The reactant that runs out first … is called the ______ reactant."
+//                                                               [limiting]
+//
+// The question is no longer shown to the model (`buildGateAssessmentBlock`),
+// which removes the first cause. The second is the model teaching the answer
+// on its own, so the served question is checked against the text: a sentence
+// that states the CORRECT option more often than the question itself does is
+// removed. "More often than the question" is what keeps the setup: "Start with
+// 3.0 mol H₂" repeats the question's own quantity (once, as the question
+// does) and stays; "3.0 mol H₂ × … = 3.0 mol H₂O" states it a second time and
+// goes. An option also named inside a distractor, or too short to be
+// distinctive ("H₂", "Yes"), is never used.
+//
+// Pure. Returns the text unchanged, paragraph for paragraph, when nothing
+// matches.
+
+const leakNorm = (s: string) =>
+  s.normalize('NFKC').toLowerCase()
+    .replace(/(\d)[ ,\u00a0\u202f](?=\d{3}\b)/g, '$1')
+    .replace(/[^\p{L}\p{N}.]+/gu, ' ')
+    .replace(/(?<!\d)\.|\.(?!\d)/g, ' ')
+    .replace(/\s+/g, ' ').trim()
+
+/** The option's answer, without an authored "— because …" annotation. */
+const optionCore = (o: string) => leakNorm(o.split(/\s[—–]\s|\s-\s/)[0] ?? '')
+
+function occurrences(haystack: string, needle: string): number {
+  const esc = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  return (haystack.match(new RegExp(`(?<![\\p{L}\\p{N}])${esc}(?![\\p{L}\\p{N}])`, 'gu')) ?? []).length
+}
+
+export function dropAnswerLeaks(text: string, mcq: TutorMCQ): { text: string; dropped: string[] } {
+  const correct = optionCore(mcq.options[mcq.correctIndex] ?? '')
+  if (correct.replace(/[^\p{L}\p{N}]/gu, '').length < 3) return { text, dropped: [] }
+  const others = mcq.options.filter((_, i) => i !== mcq.correctIndex).map(optionCore)
+  if (others.some((o) => occurrences(o, correct) > 0)) return { text, dropped: [] }
+  const inQuestion = occurrences(leakNorm(mcq.question), correct)
+  const dropped: string[] = []
+  const paragraphs = text.split(/\n{2,}/).map((para) => {
+    const lines = para.split('\n').map((line) => {
+      const sentences = line.split(/(?<=[.!?])\s+/)
+      const kept = sentences.filter((sentence) => {
+        const leaks = occurrences(leakNorm(sentence), correct) > inQuestion
+        if (leaks) dropped.push(sentence)
+        return !leaks
+      })
+      if (kept.length === sentences.length) return line
+      const rest = kept.join(' ').trim()
+      // A list marker left on its own ("3.") is not content.
+      return /^(?:\d+[.)]|[-*•])?$/.test(rest) ? '' : rest
+    })
+    const keptLines = lines.filter((l, i) => l.length > 0 || para.split('\n')[i].length === 0)
+    return keptLines.join('\n').trim()
+  })
+  if (dropped.length === 0) return { text, dropped }
+  return { text: paragraphs.filter((p) => p.length > 0).join('\n\n'), dropped }
 }

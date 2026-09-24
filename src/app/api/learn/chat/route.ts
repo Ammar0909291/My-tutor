@@ -4977,7 +4977,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         }))
         if (gateEligible && memoryState) {
           const { findBestProbe } = await import('@/lib/teaching/assets')
-          const { hasAskedMcq, recordMcqAsked: recordMcqAskedForGate } =
+          const { hasAskedMcq, recordMcqAsked: recordMcqAskedForGate, isMissedAndReaskable, memoryFingerprint } =
             await import('@/lib/teaching/teachingHistory')
           const { stripAuthoringLabel } = await import('@/lib/teaching/gateProbeContract')
           const history = teachingHistoryHoisted
@@ -5050,6 +5050,20 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // accepts non-MCQ probes and renders them as prose follow-ups.
             requireMcq: true,
             onAllCandidatesSpent: () => { authoredPoolExhaustedHoisted = true },
+            // Owner-approved (G2, 2026-09-24): once every unasked question is
+            // spent, a question the learner got WRONG may be asked once more.
+            // Read from the ledger as it stood BEFORE this turn, so a question
+            // missed on this very turn is never asked straight back. Below
+            // GUIDE the surplus rule already refuses a pool this small.
+            // The question graded THIS turn is never the one re-asked.
+            allowMissedStem: history && phaseBeforeTurn !== 'OBSERVE' && phaseBeforeTurn !== 'DEMONSTRATE'
+              ? (stem) => {
+                const q = stripAuthoringLabel(stem)
+                const gradedNow = mcqGradeHoisted && pendingMcqHoisted?.question
+                  ? memoryFingerprint(pendingMcqHoisted.question) === memoryFingerprint(q) : false
+                return !gradedNow && isMissedAndReaskable(history, q)
+              }
+              : undefined,
           })
           // THE SURPLUS RULE. Spending a probe below the mastery gates is only
           // safe while three remain afterwards, because mastery needs three
@@ -5075,6 +5089,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             }))
           }
           const converted = probe && !belowGuideBlocked ? probeToMcq(probe) : null
+          // A re-ask arrives from the selector with its options already rotated.
+          if (converted && probe?.reask) {
+            console.log('[gate-assessment] ' + JSON.stringify({ event: 'missed-probe-reasked', phase: phaseBeforeTurn, assetId: probe.assetId }))
+          }
           if (converted) {
             gateMcqHoisted = converted
             // The block still goes in: if the deterministic renderer refuses
@@ -6376,6 +6394,22 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       const attemptVectorParse = parseAttemptVectorTag(text)
       if (attemptCaptureOn) attemptVectorHoisted = attemptVectorParse.vector
       text = attemptVectorParse.cleanText
+      // The reply must not answer the graded question it is about to ask
+      // (owner-approved, G2, 2026-09-24). Only for the server's own question
+      // attached THIS turn. Emptying the text is safe: the guard just below
+      // treats a question on screen as content, never as an outage.
+      if (mcqHoisted && mcqHoisted === gateMcqHoisted) {
+        const { dropAnswerLeaks } = await import('@/lib/teaching/gateAssessment')
+        const leak = dropAnswerLeaks(text, mcqHoisted)
+        if (leak.dropped.length > 0) {
+          console.warn('[answer-leak] ' + JSON.stringify({
+            conceptId: resolvedConceptId ?? null,
+            assetId: mcqHoisted.assetId ?? null,
+            dropped: leak.dropped.map((d) => d.slice(0, 120)),
+          }))
+          text = leak.text
+        }
+      }
 
       // C-A — THE SINGLE DEFINITION OF "usable assistant response", and the
       // only degraded-response path. It sits HERE, after both tag strips,
@@ -11494,7 +11528,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // which assessment question was asked (so an identical MCQ is
             // never repeated) and the confidence reading (so the adaptation
             // engine has a trend, not just a current value).
-            const { recordMcqAsked, recordConfidence, recordExplanationServed } = await import('@/lib/teaching/teachingHistory')
+            const { recordMcqAsked, recordMcqOutcome, recordConfidence, recordExplanationServed } = await import('@/lib/teaching/teachingHistory')
             let memoryHistory = updatedHistory
             // A PROBE IS SPENT WHEN IT IS ANSWERED, NOT WHEN IT IS SHOWN.
             //
@@ -11542,8 +11576,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             const questionToSpend = (pendingMcqHoisted?.question && mcqGradeHoisted)
               ? pendingMcqHoisted.question
               : releasedProbeQuestionHoisted
+            // Same moment, same question: how it ended. A wrong answer makes an
+            // authored question eligible for ONE re-ask once the pool is spent;
+            // a re-ask, however it ends, is never asked again. A release (no
+            // grade) changes nothing unless it was the re-ask.
+            const spentQuestionGrade = questionToSpend && questionToSpend === pendingMcqHoisted?.question && mcqGradeHoisted
+              ? mcqGradeHoisted.correct : null
             if (questionToSpend) {
               memoryHistory = recordMcqAsked(memoryHistory, questionToSpend)
+              memoryHistory = recordMcqOutcome(memoryHistory, questionToSpend, spentQuestionGrade)
             }
             // The write half of the already-read guard above. Recorded only
             // when the asset was actually SERVED to the learner this turn —
@@ -11635,6 +11676,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               if (rederiveServedExplanation) rederived = recordExplanationServed(rederived, rederiveServedExplanation)
               if (rederiveServedCard) rederived = recordExplanationServed(rederived, rederiveServedCard)
               if (rederiveAskedMcq) rederived = recordMcqAsked(rederived, rederiveAskedMcq)
+              if (questionToSpend) rederived = recordMcqOutcome(rederived, questionToSpend, spentQuestionGrade)
               if (rederiveConfReading) rederived = recordConfidence(rederived, rederiveConfReading)
               return { teachingHistory: rederived }
             })

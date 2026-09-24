@@ -45,6 +45,9 @@ export interface ProbeMatch {
    * zero-slack pool is the defect that held physics at 79%.
    */
   poolSize: number
+  /** True when every unasked probe was spent and this is a question the
+   *  learner answered wrong earlier, asked once more (`allowMissedStem`). */
+  reask?: boolean
 }
 
 interface ProbeCandidateRow extends MatchableAsset {
@@ -124,18 +127,36 @@ export async function findBestProbe(state: StudentState, options: MatchOptions =
     // the surviving set is identical) so "the concept had usable probes and
     // every one is spent" is observable here rather than collapsing into the
     // same null as "the concept never had any".
-    const rows = convertible.filter((row) => !options.excludeProbeStem?.(row.probeAsset!.stem))
+    const unasked = convertible.filter((row) => !options.excludeProbeStem?.(row.probeAsset!.stem))
+    // SECOND CHANCE ON A MISSED QUESTION (MatchOptions.allowMissedStem). Only
+    // when nothing unasked is left, and only questions the learner got wrong
+    // and has not been re-asked — so each authored question still yields at
+    // most one correct answer. The pool is not "exhausted" while one remains.
+    const reaskable = unasked.length === 0 && options.allowMissedStem
+      ? convertible.filter((row) => options.allowMissedStem!(row.probeAsset!.stem))
+      : []
+    const reask = reaskable.length > 0
+    const rows = reask ? reaskable : unasked
     if (rows.length === 0 && convertible.length > 0) options.onAllCandidatesSpent?.()
+
+    // A re-ask shows its options in a new order, so it is answered from
+    // understanding rather than from where the right answer sat last time.
+    // Each choice carries its own isCorrect, so the key moves with it.
+    const choicesOf = (row: ProbeCandidateRow): ProbeChoice[] | null => {
+      const c = (row.probeAsset!.choices as ProbeChoice[] | null) ?? null
+      return reask && Array.isArray(c) && c.length > 1 ? [...c.slice(1), c[0]] : c
+    }
 
     const best = pickBest(state, rows, options)
     if (best) {
       return {
         assetId: best.asset.assetId,
         stem: best.asset.probeAsset!.stem,
-        choices: (best.asset.probeAsset!.choices as ProbeChoice[] | null) ?? null,
+        choices: choicesOf(best.asset),
         correctValue: best.asset.probeAsset!.correctValue,
         confidence: best.confidence,
         poolSize: rows.length,
+        ...(reask ? { reask: true } : {}),
       }
     }
 
@@ -147,10 +168,11 @@ export async function findBestProbe(state: StudentState, options: MatchOptions =
         return {
           assetId: fallback.asset.assetId,
           stem: fallback.asset.probeAsset!.stem,
-          choices: (fallback.asset.probeAsset!.choices as ProbeChoice[] | null) ?? null,
+          choices: choicesOf(fallback.asset),
           correctValue: fallback.asset.probeAsset!.correctValue,
           confidence: fallback.confidence,
           poolSize: rows.length,
+          ...(reask ? { reask: true } : {}),
         }
       }
     }
