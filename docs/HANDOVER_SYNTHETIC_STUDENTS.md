@@ -24,10 +24,10 @@ reach verified mastery every time with zero critical defects (`scripts/qa/synthe
 | S1 | Build runner (`scripts/qa/synthetic/*`, tests `src/tests/syntheticStudentRunner.test.ts`) | **done** `4685b2d` |
 | S2 | Smoke run: 1 lesson, strong student, displacement | **done**. Critical defect found: "give me a question" read as frustration → demotion CHECK→DEMONSTRATE → unfair close |
 | S3 | Fix S2 (`recoveryGuard.isNextItemRequest`, clause-level) | **committed** `a029624`. Full suite 723/14,908, tsc and build clean |
-| S4 | Before-baseline: 2 topics × 5 students on production **without** the S3 fix | **running** (started ~17:45 UTC; run file only in that session's scratchpad) |
-| S5 | Push S3 to `main`, confirm the Vercel production deployment is READY at that commit | pending |
+| S4 | Before-baseline: 2 topics × 5 students on production **without** the S3 fix | **done**: 4/10 mastered, 12 critical / 128 turns (details in `docs/history/synthetic-students.md`) |
+| S5 | Push S3 + baseline fixes (verdict after gate-contract replacement, "Got it" announcement, `asksForPractice` next-question/check-me) to `main`; confirm the deploy is READY | **in progress** |
 | S6 | After-run: the same 2 topics × 5 students on the fixed build; compare with S4 | pending |
-| S7 | Fix the top remaining defect class from S6, validate, deploy, re-run | pending |
+| S7 | Fix the top remaining defect class from S6, validate, deploy, re-run. Known candidates: (a) the ladder stays frozen when the learner answers the lesson's own held question during an excursion (`route.ts` `excursionFrozeLadderThisTurn`; touches evidence, so needs care and tests); (b) the KG-description fallback repeats verbatim turn after turn | pending |
 | S8 | Widen to more launch topics (`RUNNER_TOPICS=6`, then more) within the egress cap | pending |
 
 If S4's run file is lost (the session ended), **skip the before-baseline**. S2's smoke run already

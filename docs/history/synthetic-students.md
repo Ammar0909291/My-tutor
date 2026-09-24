@@ -59,3 +59,53 @@ large runs.
 - **Fix:** each clause after the first is also tested when it names what is asked for.
 - **Checks added from this run:** `demoted-without-wrong-answer`, `question-request-ignored`,
   `announced-not-asked`, `no-feedback-on-answer`, `content-free-reply`, `unfair-close`.
+
+## 2026-09-24 — Before-baseline: 2 topics × 5 students (production `aace297`, before any fix)
+
+`RUNNER_TOPICS=2 RUNNER_MAX_TURNS=18 RUNNER_MAX_TOTAL_TURNS=180`: 128 turns, about 32 minutes, 5
+disposable accounts, all deleted with re-login blocked.
+
+| Student | displacement | velocity |
+|---|---|---|
+| beginner | mastered, 12 turns | mastered, 16 turns |
+| careless | mastered, 11 turns | mastered, 11 turns |
+| strong | closed unmastered (demoted CHECK→DEMONSTRATE) | same |
+| confused | stuck at DEMONSTRATE, 0/0 | same |
+| offtrack | stuck at PRACTICE, 1/1 | same |
+
+4/10 lessons mastered. 12 critical findings in 128 turns: 6 `demoted-without-wrong-answer`, 4
+`stuck`, 2 `unfair-close`. Major: 45 `question-request-ignored`, 4 `content-free-reply`, 3
+`repeated-reply`, 2 `no-feedback-on-answer`, 2 `announced-not-asked`, 2 `correct-not-credited`,
+1 `degraded-turn`.
+
+Causes found by reading the transcripts:
+
+1. **Strong.** "can we move faster? give me a question", repeated, was read as frustration. The
+   smoke-run defect; fixed in `a029624`.
+2. **Confused.**
+   - The tutor asked in prose at GUIDE ("where does the point end up?"). A rule-based student
+     cannot answer that, so it kept asking for a question. That part is a runner limit.
+   - The tutor then never served a question in 7 requests.
+   - It repeated the KG-description fallback "Displacement is the vector change in position while
+     distance is the total scalar path length." four times. That is the `conceptFallbackText`
+     net: better than "Let's stay with this idea", but still content-free when repeated.
+   - "can you check me with a question?" was not a practice request (`asksForPractice`).
+3. **Off-track.**
+   - After "what's your favourite physics fact?" a side-question excursion opened.
+   - The learner then answered the lesson's own on-screen question right: "That's right.", but no
+     credit, because the ladder is frozen for every excursion turn (`route.ts`
+     `excursionFrozeLadderThisTurn`).
+   - "ok, next question please" ×5 got five different favourite physics facts. That message is
+     not a practice request, so the `closed-wants-practice` exit never fired.
+4. **Gate-contract replacement.** When the model wrote its own competing question, the reply was
+   replaced by the bare "Here is your next question.", dropping the verdict already added.
+5. **Announcement filter.** "Got it—let’s jump right in with a quick check." slipped through
+   because "Got it" was not an allowed lead-in.
+
+Fixed after this run: 1 (`a029624`), 2 and 3's request detection (`asksForPractice` +
+"next/another/new question", "check me / check my understanding"; "check" added to the negation
+guard), 4 (the verdict is re-applied after the gate-contract replacement), and 5 (lead-in list).
+
+Still open: the ladder stays frozen when the learner answers the lesson's own held question during
+an excursion. This touches what counts as evidence, so it is its own step. The same goes for the
+repeated KG-description fallback.
