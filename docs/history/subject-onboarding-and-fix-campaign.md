@@ -654,3 +654,21 @@ decision or needs new capability behind the G2 gate):**
   arrow labelled 'car'…"); a bare "Yes"/"No" to a yes/no probe stays ungraded by design.
 - `MISCONCEPTION_DETECTED` fires on plain nudges (model-emitted, analytics-only reader).
 - The deterministic physics verifier remains shadow-only (deferred primitive; not resumed).
+
+### Hard-concept QA follow-up (2026-09-24, owner's real account + disposable verification)
+Five expert/advanced concepts (quantum-tunneling, particle-in-box, keplers-laws, lc-circuits,
+carnot-cycle) driven on the owner's account (`scripts/qa/physicsProductionRuntimeQa.ts --hard`,
+real-account mode: credentials from the environment only). Physics correct throughout, 0 false
+accepts; particle-in-box verified, others REVISION/IN_PROGRESS honestly. Defects fixed:
+- D1 (`b4409bb`) — "pick the best answer / which of the following" with no options served.
+  Delivery contract now drops option-pointing sentences when no MCQ is served and no prose list
+  exists. Verified by tests on the production texts (model-dependent; did not recur live).
+- D3 (`b4409bb`, relocated `28c251c`) — picture request silently ignored where no figure exists
+  (keplers/LC figures are retired as wrong). Reply now opens "I don't have a picture for this one,
+  so I'll explain it in words." First placement missed memory-served turns; moved to the final
+  response step. Verified live on both concepts.
+- D4 (`b4409bb`) — carnot general-illustration grid called "the motion graph"; general
+  illustrations are now "the figure". Verified live.
+Not fixed (model-written prose or documented owner policy): wrong answers to model-invented
+questions below GUIDE go uncorrected (the guard's recorded "undo" decision); correct transfer
+answers not always confirmed; mirror mis-paraphrases; recap after a budget close.
