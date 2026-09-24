@@ -6,12 +6,42 @@ from a read-only authority-map audit and an architecture score of the live code.
 "four primitives" scope). The adopted plan's stop condition ("get real learner traffic") still
 stands; this roadmap runs alongside it, not instead of it.
 
-Published page (private to the owner until shared): https://claude.ai/artifact/7WkPcHFt4C5XUm2WLkcrsu
+Published page: https://claude.ai/artifact/7WkPcHFt4C5XUm2WLkcrsu
 
-Read in this order: §1 where we are → §2 what 10 means → **§5 the revised plan (the one to follow)**
-→ §4 why it was revised. §3 is the full, unrevised item list that §5 schedules.
+Read in this order: **§0 owner decisions** → §1 where we are → §2 what 10 means → **§5 the revised
+plan (the one to follow)** → §4 why it was revised. §3 is the full item list that §5 schedules.
 
 ---
+
+## 0. Owner decisions recorded since the first version (2026-09-24)
+
+- **No school boards.** The product is organised by subject and concept map only. Board mappings
+  (CBSE, UP Board, …) are out of scope, not deferred.
+  - The leftover board code joins item 6.5 (dormant systems): School Mode
+    (`SCHOOL_MODE_ENABLED = false`), `src/lib/education/cbse*Catalog.ts` and
+    `upSocialScienceCatalog.ts`, `Profile.educationBoard`, the board-keyed chapter caches, and the
+    out-of-date admin settings text.
+  - Those catalogs map chapters to 51 legacy topic IDs that do not exist in the live maths map, so
+    they could not be switched back on anyway.
+  - The Hindi/Sanskrit catalogs stay untouched (CLAUDE.md constraint).
+- **No real traffic yet.** The product is not yet good enough to put in front of learners.
+  - Until it is, "real traffic" in this plan means synthetic-student runs on a small launch set of
+    topics (new items 0.7 and 0.8).
+  - Real learners are invited only onto topics that pass the scorecard.
+- **Content today** (`scripts/assets/contract-audit.ts --all`, seed corpus):
+
+  | Subject | Topics with content | At contract |
+  |---|---|---|
+  | Physics | 238 / 238 | all |
+  | Chemistry | 186 / 186 | all |
+  | Biology | 199 / 199 | all |
+  | English | 216 / 216 | 409 of 412 topic–level pairs |
+  | Maths | 761 / 908 (147 have none) | all authored pairs |
+  | Computer science (not learner-visible) | 119 / 119 | 30 |
+
+  - Candidate launch set: a 20–30 topic path through physics mechanics (`phys.mech.*`, 60 topics,
+    foundational → expert). It has complete content and the most visuals and prior QA.
+  - The choice is the owner's (0.8).
 
 ## 1. Where we are: 4/10 for reliability and defect resistance
 
@@ -53,7 +83,7 @@ Already strong, and preserved by every step below:
 - `turnHarness.ts`, which runs the real route;
 - egress discipline.
 
-## 2. What "10" means (all must hold for 4 consecutive weeks on real traffic)
+## 2. What "10" means (all must hold for 4 consecutive weeks on real traffic; before launch, on synthetic-student runs over the launch set)
 
 | # | Criterion |
 |---|---|
@@ -116,6 +146,22 @@ Sizes are relative: S small, M medium, L large.
   Size S.
 - **0.6 Verifier precision table.** Adjudicate a sample per rule from `[verifier-log]` lines.
   Size M, recurring.
+- **0.7 Synthetic students and scorecard.**
+  - Model-driven personas: a beginner with the topic's known misconceptions, a careless student,
+    a strong student, a confused student who asks for examples and diagrams, and an off-track
+    student.
+  - They run on disposable accounts, extending `scripts/qa/learnerPilot.ts`, `studentTurn.ts` and
+    `liveAccount.ts`.
+  - Code checks every turn: does the verdict wording match the grade; was the answer leaked; did
+    anything repeat; did the lesson get stuck; was mastery reached.
+  - A model-based marker scores factual errors and whether feedback matches what the student said.
+    It is spot-checked for accuracy.
+  - Scorecard per topic: mastery reach rate, turns to mastery, defects per 100 turns.
+  - Egress and token budget: measure per turn on the first small run, then set a weekly cap.
+  - Size L.
+- **0.8 Launch set.** 20–30 topics along one prerequisite path in one subject. A topic is ready
+  when every persona can reach mastery and three runs show zero critical defects: false praise, a
+  wrong fact, a leaked answer, or a stuck lesson. Size S. **OWNER** (choice).
 
 ### Phase 1 — Close the trust boundary (C1)
 - **1.1 Practice panel: keys on the server.**
@@ -195,7 +241,8 @@ Sizes are relative: S small, M medium, L large.
 - **6.4** One composition function for the deciders, with written precedence and property tests.
   The deciders themselves are unchanged. Size M.
 - **6.5** Decide the dormant systems: kernel pipeline, `Eb*` tables, `educationalBrain`,
-  `teachingActionEngine`. Size M. **OWNER**.
+  `teachingActionEngine`, and the School Mode / board leftovers (§0; Hindi/Sanskrit untouched).
+  Size M. **OWNER**.
 
 ### Phase 7 — One pipeline for lesson openings (C7)
 - **7.1** `lesson-init` runs the same stages as a turn with no learner message. Size M.
@@ -208,9 +255,9 @@ Sizes are relative: S small, M medium, L large.
 - **8.3 Per-question statistics from `PROBE_OUTCOME`** (the `assetId` is now carried): solve rate
   and pick rate per distractor. Inverted discrimination is flagged, since it usually means a wrong
   key. Size M.
-- **8.4** Question templates with computed keys for the launch subject. Size L. **OWNER**.
-- **8.5** An answer-key audit of the launch subject. Size M.
-- **8.6** At least 5 gradeable questions per concept per level for the launch subject. Size M.
+- **8.4** Question templates with computed keys for the launch set. Size L. **OWNER**.
+- **8.5** An answer-key audit of the launch set. Size M.
+- **8.6** At least 5 gradeable questions per concept per level for the launch set. Size M.
 
 ### Phase 9 — Tests that protect behaviour (C6/C9)
 - **9.1** A replay gate in CI. Size M.
@@ -253,7 +300,7 @@ Sizes are relative: S small, M medium, L large.
 | O5 | Phase 6 reopens scope that has cost budget twice, and the period of reading facts two ways creates D1-class defects. | **Survives.** A long function is not itself a defect; implicit contracts are. | Phase 6 becomes defect-driven: migrate a contract cluster only when a replayed defect traces to it, with no campaign to finish every batch. C4 is reworded to cover migrated clusters only. |
 | O6 | Enforcing rules at 95% precision still harms, through latency and fallbacks. | **Partly survives.** | Enforce by expected net benefit: precision × severity against the cost of the fallback. Regenerate only for high-severity rules; measure p95 latency. |
 | O7 | Content defects are underweighted, and Phase 8 comes too late. | **Survives.** Wrong keys, answer-revealing options and thin pools block mastery and mislead directly, today. | 8.1–8.3 move into Tier A. They are cheap: lints and statistics. |
-| O8 | The launch subject is assumed. | **Survives.** The active CLAUDE.md campaigns are physics/english/chemistry and maths; the owner's own notes say CBSE 9–10 maths is the likely launch. | 3.6 and 8.4–8.6 target "the launch subject the owner names" and do not start until it is named. |
+| O8 | The launch subject is assumed. | **Resolved by owner decision.** There are no school boards. The launch set is a path of topics in one subject (0.8). | 3.6 and 8.4–8.6 target the launch set and wait until the owner picks it. |
 | O9 | The criteria for 10 need traffic that doesn't exist, and the thresholds are arbitrary. | **Partly survives.** | Thresholds are set from the Phase 0 baseline. Until real traffic exists, the 4-week window runs on the nightly QA set and is labelled synthetic. |
 | O10 | Cost: capture storage, nightly QA tokens, egress. | **Partly survives.** Capture writes are ingress; offline reads are egress. | Sample small, keep a fixed small QA set, and state a budget per item. |
 | O11 | Awaiting every learner-state write adds latency. | **Partly survives.** R1 shows awaiting is sometimes required for correctness anyway. | 5.3 awaits learner-state writes only; telemetry stays asynchronous; measure p95 before and after. |
@@ -264,19 +311,25 @@ Sizes are relative: S small, M medium, L large.
 ## 5. The revised plan (the one to follow)
 
 **Tier A — before or with the first real learners (expected ≈ 6/10)**
-- 1.1 Practice-panel keys on the server — **first** (normal-flow hole)
+- 0.7 – 0.8 synthetic students, scorecard and launch set — **first**: how quality is measured
+  without real learners
+- 8.1 – 8.3 content lints as gates, and per-question statistics
+- 3.2 / 3.3 server verdict line and answer-claim check (moved up: wrong feedback is one of the top
+  visible defects)
+- 1.1 Practice-panel keys on the server (the one trust hole the normal UI reaches; must close
+  before real learners arrive)
 - 1.2 the `/quiz` page
 - 1.3 retire the browser-scored evaluate write and the dead prompt protocol
 - 1.4 / 1.5 completion requires server evidence (defence in depth)
 - 1.7 learner-record gate + ratchet; 1.8 monotone
 - 2.1 `gradeSource`; 2.2 misconceptions from graded distractors
 - 3.1 one completion channel
-- 0.1 (v1, harness-scoped) + 0.2 replay capture and loader; 0.5 baseline dashboard
-- 8.1 – 8.3 content lints as gates, and per-question statistics
+- 0.1 (v1, test accounts only, so the synthetic runs become the replay corpus) + 0.2 replay
+  capture and loader; 0.5 baseline dashboard
 
 **Tier B — once the baseline shows where defects are (expected ≈ 8/10)**
 - 0.3 / 0.4 determinism and invariants; 0.6 verifier precision
-- 3.2 / 3.3 server verdict line and answer-claim check; 3.4 model-question policy
+- 3.4 model-question policy
 - 4.1 named clauses; 4.2 enforcement by net benefit; 4.3 regeneration budget + teaching fallback
 - 5.1 – 5.5 typed delta, generated re-folds, commit module
 - 7.1 lesson-opening parity
@@ -286,11 +339,12 @@ Sizes are relative: S small, M medium, L large.
 - 6.1 – 6.4 contract migration, cluster by cluster, driven by defects
 - 4.5 prompt builder
 - 3.5 figure facts
-- 3.6 + 8.4 – 8.6 computed items for the launch subject, once it is named
+- 3.6 + 8.4 – 8.6 computed items for the launch set, once it is picked
 - 6.5 decision on dormant systems
 - 10.5 authority map generated from code
 
-**10/10** = C1–C12 green for 4 consecutive weeks on real traffic.
+**10/10** = C1–C12 green for 4 consecutive weeks on real traffic, with real learners invited only
+onto topics that pass the 0.7 scorecard.
 
 **Hard dependencies**
 - 4.2 needs 0.6
@@ -308,7 +362,8 @@ Sizes are relative: S small, M medium, L large.
   claims.
 - Don't add a new learner store. Durable Learner State is closed, and `studentIntelligence.ts` is
   canonical.
-- Don't add subjects or 3D/SceneSpec scope before C1–C3 hold for the launch subject.
+- Don't add subjects or 3D/SceneSpec scope before C1–C3 hold for the launch set.
+- Don't rebuild school-board mappings: out of scope by owner decision.
 - Don't touch egress-sensitive code (the `instrumentation.ts` bootstrap, the hydration guard, spine
   replay) without reading `docs/history/egress-incidents.md`.
 
@@ -316,7 +371,8 @@ Sizes are relative: S small, M medium, L large.
 - **OWNER approval** (learner-facing assessment/progress behaviour): 1.1, 1.3, 2.2, 2.3, 3.2,
   3.4, 8.4.
 - **OWNER instruction** (reopens the closed primitives scope): 6.1.
-- **OWNER decision:** 0.1 storage, 6.5 dormant systems, the launch subject.
+- **OWNER decision:** 0.1 storage, 6.5 dormant systems (now including the board leftovers), and
+  the launch set (0.8).
 - Nothing in this document is approval. It is the proposal the owner approves item by item.
 
 ## 8. Evidence index
