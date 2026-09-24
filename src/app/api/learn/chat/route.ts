@@ -9751,9 +9751,60 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           }))
           cleanText = asciiDiagram.text
         }
+
+        // ── AND WHAT THE DRAWING LEAVES BEHIND ─────────────────────────────
+        // Removing a text diagram leaves its pointers and labels ("Light",
+        // "Follow the arrows from…", "*P = phosphate, …") in text the pass
+        // above already cleared — production, 2026-09-24, every one after
+        // "I don't have a picture". So the reference check runs once more on
+        // what the diagram guard left.
+        const leftovers = stripUnbackedFigureReferences(cleanText, figureOnScreen)
+        if (leftovers.stripped) {
+          console.warn('[figure-reference] ' + JSON.stringify({
+            event: 'diagram-remnant-stripped',
+            conceptId: resolvedConceptId ?? null,
+            removed: leftovers.removed,
+          }))
+          cleanText = leftovers.text
+        }
+        // A turn that was ONLY a pointer at nothing is replaced by the
+        // concept's own KG description rather than shipped as-is.
+        if (!figureOnScreen && (figures.onlyPointer || leftovers.onlyPointer) && resolvedConceptId) {
+          const { getKGNode } = await import('@/lib/curriculum/knowledgeGraph')
+          const { pointerOnlyFallback } = await import('@/lib/teaching/figureReference')
+          const node = getKGNode(resolvedConceptId)
+          if (node?.title && node.description) {
+            console.warn('[figure-reference] ' + JSON.stringify({
+              event: 'pointer-only-turn-replaced', conceptId: resolvedConceptId,
+            }))
+            cleanText = pointerOnlyFallback(node.title, node.description)
+          }
+        }
       } catch (err) {
         // A repair must never break a turn.
         console.warn('[figure-reference] check skipped:', err)
+      }
+
+      // ── A COLOUR IT NAMES MUST BE A COLOUR THE FIGURE HAS ──────────────
+      // The contract tells the model not to name colours that are not on
+      // screen; production showed it naming them anyway ("helicase (the orange
+      // block)" over a figure whose enzymes are violet — figureFidelity.ts).
+      // Only a SCENE states its colours, so only a scene is checked.
+      try {
+        const onScreen = visualFired || (resolvedVisualDecision?.session?.turns ?? 0) > 0
+        const payload = resolvedVisualDecision?.graphical ? resolvedVisualDecision.payload : null
+        if (onScreen && payload?.renderer === 'scene') {
+          const { enforceFigureColours, sceneColourFamilies } = await import('@/lib/teaching/visual/figureFidelity')
+          const fidelity = enforceFigureColours(cleanText, sceneColourFamilies(payload.sceneSpec))
+          if (fidelity.changed) {
+            console.warn('[figure-fidelity] ' + JSON.stringify({
+              event: 'absent-colour-removed', conceptId: resolvedConceptId ?? null, removed: fidelity.removed,
+            }))
+            cleanText = fidelity.text
+          }
+        }
+      } catch (err) {
+        console.warn('[figure-fidelity] check skipped:', err)
       }
 
       // A LEARNER'S OWN INCIDENTAL PHRASING MUST NEVER BECOME A NEW LESSON

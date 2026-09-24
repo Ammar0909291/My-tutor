@@ -312,8 +312,56 @@ export function stripUnbackedAsciiDiagram(
     })
   }
 
+  // Pass 5 — a STANDALONE ART LINE outside any fence (production, 2026-09-24,
+  // bio.mol.transcription, no figure attached):
+  //
+  //   DNA (double helix)
+  //   5'---[Promoter]------[Coding region]---[Poly-A signal]---3'
+  //
+  // One line, so no paragraph test sees enough symbols (0.27 < 0.3). What marks
+  // it is shape, not density: a connector run (---, ===, -->, <--) and almost no
+  // prose once bracketed labels are set aside. The short unpunctuated caption
+  // directly above it is part of the same drawing and goes with it.
+  if (!figureOnScreen) {
+    const lines = result.split('\n')
+    const drop = new Set<number>()
+    let inFence = false
+    lines.forEach((line, i) => {
+      if (/^\s*```/.test(line)) { inFence = !inFence; return }
+      if (inFence || !isStandaloneArtLine(line)) return
+      drop.add(i)
+      if (i > 0 && isCaptionLine(lines[i - 1])) drop.add(i - 1)
+    })
+    if (drop.size > 0) {
+      removedBlocks += 1
+      result = lines.filter((_, i) => !drop.has(i)).join('\n')
+    }
+  }
+
   if (removedBlocks === 0) return { text, stripped: false, removedBlocks: 0 }
   // Collapse a run of blank lines a removal can leave behind, never touching
   // a single blank line (ordinary paragraph spacing).
   return { text: result.replace(/\n{3,}/g, '\n\n').trim(), stripped: true, removedBlocks }
+}
+
+const CONNECTOR_RUN_RE = /-{3,}|={3,}|-{2,}>|<-{2,}|={2,}>/
+
+/** A line that draws rather than says: a connector run and at most two words of prose outside [labels]. */
+export function isStandaloneArtLine(line: string): boolean {
+  const t = line.trim()
+  if (t.length === 0 || !CONNECTOR_RUN_RE.test(t)) return false
+  if (/^[-=]{3,}$/.test(t)) return false // a markdown rule, not a drawing
+  if (/^\|.*\|$/.test(t)) return false // a markdown table row or separator
+  // A drawing of a process LABELS its parts; a bare box edge ("+-----+") is
+  // left to the paragraph passes and their narrower co-occurrence rules.
+  if (!/[A-Za-z0-9]/.test(t)) return false
+  const prose = t.replace(/\[[^\]]*\]/g, ' ').replace(/[^A-Za-z\s]/g, ' ').split(/\s+/).filter((w) => w.length > 1)
+  return prose.length <= 2
+}
+
+/** A short caption line with no sentence punctuation — a drawing's label, not prose. */
+function isCaptionLine(line: string): boolean {
+  const t = line.trim()
+  if (t.length === 0 || /[.!?:;]$/.test(t) || /^[#*>\-]/.test(t)) return false
+  return t.split(/\s+/).length <= 4
 }

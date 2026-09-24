@@ -895,13 +895,21 @@ describe('run-on label -> figure-subject-claim anchoring gap (bio.plant.photosyn
     }
   })
 
-  it('D. NEGATIVE CONTROL: a capitalised opener followed by ordinary text (not a claim) is untouched', () => {
+  it('D. NEGATIVE CONTROL: a capitalised opener before "Follow the arrows" is not a figure-SUBJECT claim, so the sentence is not deleted', () => {
     // "Sunlight" immediately precedes "Follow", not "the/this/that/here's" —
-    // LEADING_LABEL_RE's lookahead cannot even find a candidate cut here.
+    // LEADING_LABEL_RE's lookahead cannot even find a candidate cut here, and
+    // the sentence is NOT removed as a subject claim.
+    //
+    // Updated 2026-09-24: this control used to assert the text was returned
+    // untouched. Production then showed the same "Follow the arrows from…"
+    // shape reaching learners with no figure attached, straight after "I don't
+    // have a picture" (bio.plant.photosynthesis). The arrow pointer is now
+    // rewritten (ARROW_FOLLOW_RE) — the teaching it carries is kept, only the
+    // pointer and its left/right layout words go.
     const t = 'Sunlight Follow the arrows from the sunlight on the left through the two photosystems to the Calvin cycle on the right to see how light energy becomes sugar.'
     const r = stripUnbackedFigureReferences(t, false)
-    expect(r.stripped).toBe(false)
-    expect(r.text).toBe(t)
+    expect(r.text).toBe('Trace the steps from the sunlight through the two photosystems to the Calvin cycle to see how light energy becomes sugar.')
+    expect(r.text).not.toMatch(/arrow|on the (left|right)|Sunlight Follow/i)
   })
 
   it('D. NEGATIVE CONTROL: a multi-word proper-noun run before a claim is not treated as a label', () => {

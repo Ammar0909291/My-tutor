@@ -968,11 +968,25 @@ function splitIntoSentences(text: string): string[] {
  * unchanged rather than silencing the tutor entirely.
  */
 export function stripPhantomVisualClaims(text: string): string {
-  const sentences = splitIntoSentences(text)
-  const kept = sentences.filter((s) =>
-    !SCREEN_CLAIM_RE.test(s) && !LOOK_AT_CLAIM_RE.test(s) && !VISUAL_PROMISE_RE.test(s) && !DEFINITE_DESCRIPTION_RE.test(s))
-  if (kept.length === 0) return text
-  return kept.join(' ').trim()
+  const isClaim = (s: string) =>
+    SCREEN_CLAIM_RE.test(s) || LOOK_AT_CLAIM_RE.test(s) || VISUAL_PROMISE_RE.test(s) || DEFINITE_DESCRIPTION_RE.test(s)
+  // PARAGRAPHS ARE KEPT, AND AN UNTOUCHED TEXT IS RETURNED AS-IS (2026-09-24).
+  // This used to re-join every sentence with a single space whether or not
+  // anything was removed, so every multi-paragraph reply on a no-figure turn
+  // reached the learner as one flattened block — measured on all 26 production
+  // lesson openings replayed through it. Sentences are now judged per
+  // paragraph and paragraphs re-joined with their blank line.
+  let removedAny = false
+  const paragraphs = text.split(/\n{2,}/).map((paragraph) => {
+    const sentences = splitIntoSentences(paragraph)
+    const kept = sentences.filter((s) => !isClaim(s))
+    if (kept.length === sentences.length) return paragraph
+    removedAny = true
+    return kept.join(' ').trim()
+  })
+  if (!removedAny) return text
+  const out = paragraphs.filter((p) => p.trim().length > 0).join('\n\n').trim()
+  return out.length === 0 ? text : out
 }
 
 /**
