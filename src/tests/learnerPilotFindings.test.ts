@@ -54,7 +54,7 @@ describe('P2 — a check that is announced and never asked is not shipped', () =
   it('the final-response net falls back to the concept\'s KG description, not a content-free hold', () => {
     const at = route.indexOf('const repaired = enforceQuestionDeliveryContract(cleanText, finalFallback)')
     expect(at).toBeGreaterThan(0)
-    expect(route.slice(at - 900, at)).toMatch(/finalFallback = `\$\{node\.title\} — \$\{node\.description\}`/)
+    expect(route.slice(at - 900, at)).toMatch(/finalFallback = conceptFallbackText\(node\.title, node\.description\)/)
   })
 })
 
@@ -78,5 +78,35 @@ describe('P4 — phoneme notation is not stripped where it IS the lesson', () =>
   it('the beginner IPA strip skips phonics and phonetics concepts only', () => {
     expect(route).toMatch(/const notationIsTheLesson = \/\^eng\\\.\(\?:phonics\|phonetics\)\\\.\/\.test\(resolvedConceptId \?\? ''\)/)
     expect(route).toMatch(/if \(contentRegister === 'beginner' && !notationIsTheLesson\) \{\s*cleanText = stripIpaNotation\(cleanText\)/)
+  })
+})
+
+describe('P5 — the gate-internal withhold says the concept, not "Let\'s stay with this idea"', () => {
+  it('conceptFallbackText: a sentence stands as-is; a syllabus list is introduced as what the lesson covers', async () => {
+    const { conceptFallbackText } = await import('@/lib/teaching/conceptFallback')
+    expect(conceptFallbackText('LC Oscillations and Resonance', 'An LC circuit oscillates at resonant frequency f = 1/(2π√LC) as energy alternates between inductor and capacitor.'))
+      .toBe('An LC circuit oscillates at resonant frequency f = 1/(2π√LC) as energy alternates between inductor and capacitor.')
+    expect(conceptFallbackText('Stoichiometry', 'Balancing chemical equations; mole ratios; limiting reagent; theoretical and percent yield calculations.'))
+      .toBe('Stoichiometry covers: Balancing chemical equations; mole ratios; limiting reagent; theoretical and percent yield calculations.')
+  })
+  it('with the concept supplied: no grade -> the concept; a grade stands alone', async () => {
+    const { withholdUngradedGateQuestion } = await import('@/lib/teaching/gateAssessment')
+    const base = { text: 'What do you think happens to the yield?', phase: 'CHECK', phaseAfter: 'CHECK', hasStructuredMcq: false, questionOnScreen: false }
+    const fb = 'Stoichiometry covers: mole ratios.'
+    const none = withholdUngradedGateQuestion({ ...base, conceptFallback: fb } as never)
+    expect(none.withheld).toBe(true)
+    expect(none.text).toBe(fb)
+    const graded = withholdUngradedGateQuestion({ ...base, conceptFallback: fb, justGraded: { correct: true } } as never)
+    expect(graded.text).toBe("That's right.")
+  })
+  it('without the concept: byte-for-byte the previous behaviour', async () => {
+    const { withholdUngradedGateQuestion, WITHHELD_QUESTION_CONTINUATION_TEXT } = await import('@/lib/teaching/gateAssessment')
+    const base = { text: 'What do you think happens to the yield?', phase: 'CHECK', phaseAfter: 'CHECK', hasStructuredMcq: false, questionOnScreen: false }
+    expect(withholdUngradedGateQuestion(base as never).text).toBe(WITHHELD_QUESTION_CONTINUATION_TEXT)
+    expect(withholdUngradedGateQuestion({ ...base, justGraded: { correct: true } } as never).text).toBe(`That's right. ${WITHHELD_QUESTION_CONTINUATION_TEXT}`)
+  })
+  it('the route supplies the concept to the gate withhold', () => {
+    expect(route).toMatch(/const ungraded = withholdUngradedGateQuestion\(\{\s*conceptFallback: withholdConceptFallback,/)
+    expect(route).toMatch(/const withholdConceptFallback = withholdNode\?\.title && withholdNode\.description\s*\? conceptFallbackText\(withholdNode\.title, withholdNode\.description\)/)
   })
 })

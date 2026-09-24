@@ -9019,7 +9019,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               await import('@/lib/teaching/conversationState')
             const { isBareAcknowledgement: isBareAcknowledgementForWithhold } =
               await import('@/lib/teaching/masteryGate')
+            const { conceptFallbackText } = await import('@/lib/teaching/conceptFallback')
+            const { getKGNode: getKGNodeForWithhold } = await import('@/lib/curriculum/knowledgeGraph')
+            const withholdNode = resolvedConceptId ? getKGNodeForWithhold(resolvedConceptId) : null
+            // The concept's own words replace the content-free hold (learner
+            // pilot 2026-09-24) — see conceptFallback.ts.
+            const withholdConceptFallback = withholdNode?.title && withholdNode.description
+              ? conceptFallbackText(withholdNode.title, withholdNode.description)
+              : undefined
             const ungraded = withholdUngradedGateQuestion({
+              conceptFallback: withholdConceptFallback,
               text: cleanText,
               // The phase the turn was BUILT at — the same pre-fold value the
               // gate itself read when it went looking for a probe.
@@ -12271,7 +12280,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         try {
           const { getKGNode } = await import('@/lib/curriculum/knowledgeGraph')
           const node = resolvedConceptId ? getKGNode(resolvedConceptId) : null
-          if (node?.title && node.description) finalFallback = `${node.title} — ${node.description}`
+          if (node?.title && node.description) {
+            const { conceptFallbackText } = await import('@/lib/teaching/conceptFallback')
+            finalFallback = conceptFallbackText(node.title, node.description)
+          }
         } catch { /* keep the plain fallback */ }
         const repaired = enforceQuestionDeliveryContract(cleanText, finalFallback)
         if (repaired !== cleanText) {

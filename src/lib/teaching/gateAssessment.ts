@@ -516,6 +516,12 @@ export interface UngradedGateQuestionInput {
    * keeps its exact prior behaviour.
    */
   learnerAcknowledged?: boolean
+  /**
+   * What to say instead of the content-free continuation when the withheld
+   * question leaves nothing (see conceptFallback.ts). Absent -> the original
+   * behaviour, byte-for-byte.
+   */
+  conceptFallback?: string
 }
 
 /** The route's own grade of the pending question, passed in, never derived. */
@@ -620,15 +626,22 @@ function withheldContinuation(
    *  branch below — a real grade already reports the outcome and must not
    *  have its wording second-guessed by what the ack detector also thinks. */
   learnerAcknowledged = false,
+  /** The concept's own words (conceptFallback.ts). When given, it replaces the
+   *  content-free continuation; after a real grade the grade stands alone. */
+  conceptFallback?: string,
 ): string {
+  const fallback = conceptFallback && conceptFallback.trim().length > 0 ? conceptFallback.trim() : null
   if (!justGraded || typeof justGraded.correct !== 'boolean') {
     if (questionFollows) return WITHHELD_QUESTION_HANDS_OFF_TO_MCQ
     if (learnerAcknowledged) return WITHHELD_QUESTION_ACK_CONTINUATION
-    return WITHHELD_QUESTION_CONTINUATION
+    return fallback ?? WITHHELD_QUESTION_CONTINUATION
   }
-  const tail = questionFollows ? WITHHELD_QUESTION_HANDS_OFF_TO_MCQ : WITHHELD_QUESTION_CONTINUATION
+  // Learner pilot, 2026-09-24: "That's right. Let's stay with this idea for a
+  // moment." — the grade is the content; the hollow tail is dropped when the
+  // caller supplied the concept (and kept otherwise, unchanged).
+  const tail = questionFollows ? WITHHELD_QUESTION_HANDS_OFF_TO_MCQ : (fallback ? '' : WITHHELD_QUESTION_CONTINUATION)
   if (justGraded.correct) {
-    return `That's right. ${tail}`
+    return tail ? `That's right. ${tail}` : "That's right."
   }
   const key = typeof justGraded.correctOptionText === 'string'
     ? justGraded.correctOptionText.trim()
@@ -648,9 +661,9 @@ function withheldContinuation(
   // already handled; terminal punctuation is the same class and was missed.
   // Authored option texts are written by hand across six subjects, so whether
   // one ends in a stop is not something this template can assume either way.
-  return key.length > 0 && !key.includes('?')
+  return (key.length > 0 && !key.includes('?')
     ? `Not quite — the answer was: ${endStopped(key)} ${tail}`
-    : `Not quite. ${tail}`
+    : `Not quite. ${tail}`).trim()
 }
 
 /** The key with exactly one terminal stop, never two and never none. */
@@ -779,7 +792,7 @@ export function withholdUngradedGateQuestion(
       return {
         // A tappable MCQ follows this text, so the fallback hands off to it
         // instead of stalling with the content-free hold sentence.
-        text: kept.length > 0 ? kept : withheldContinuation(input.justGraded, true),
+        text: kept.length > 0 ? kept : withheldContinuation(input.justGraded, true, false, input.conceptFallback),
         withheld: true,
         reason: 'stray-question-alongside-mcq',
       }
@@ -824,7 +837,7 @@ export function withholdUngradedGateQuestion(
         // teaching preceded the broken promise, and otherwise fall back to the
         // established continuation sentence. Never a second announcement, and
         // never a claim about how the learner did.
-        text: teaching.length > 0 ? teaching : withheldContinuation(input.justGraded, false),
+        text: teaching.length > 0 ? teaching : withheldContinuation(input.justGraded, false, false, input.conceptFallback),
         withheld: true,
         reason: 'announced-question-never-delivered',
       }
@@ -866,6 +879,7 @@ export function withholdUngradedGateQuestion(
         input.justGraded,
         input.questionOnScreen === true,
         input.learnerAcknowledged === true,
+        input.conceptFallback,
       ),
       withheld: true,
       reason: 'no-gradeable-probe',

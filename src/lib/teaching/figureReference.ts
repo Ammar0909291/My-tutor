@@ -54,6 +54,7 @@
  * It fires ONLY when no figure is attached. With a figure present the reference
  * is true and is left exactly as written.
  */
+import { conceptFallbackText } from './conceptFallback'
 
 /** Words that place the thing on screen rather than in the prose. */
 const ON_SCREEN =
@@ -551,7 +552,7 @@ export interface FigureReferenceResult {
  * invention: the concept's own Knowledge Graph title and description.
  */
 export function pointerOnlyFallback(title: string, description: string): string {
-  return `${title.trim()} — ${description.trim()}`
+  return conceptFallbackText(title, description)
 }
 
 /**

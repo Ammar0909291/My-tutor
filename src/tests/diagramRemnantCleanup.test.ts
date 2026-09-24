@@ -56,7 +56,7 @@ describe('production remnants are removed, and the teaching after them is kept',
     const r = clean('Use this layout to picture where a word belongs based on what job it’s doing.')
     expect(r.onlyPointer).toBe(true)
     expect(pointerOnlyFallback('Overview of Word Classes', 'An introduction to the eight traditional parts of speech as functional categories of English words.'))
-      .toBe('Overview of Word Classes — An introduction to the eight traditional parts of speech as functional categories of English words.')
+      .toBe('An introduction to the eight traditional parts of speech as functional categories of English words.')
   })
 })
 

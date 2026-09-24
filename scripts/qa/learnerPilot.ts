@@ -25,7 +25,7 @@ import { login, BASE } from './liveAccount'
 interface Plan { email: string; lessons: Array<{ subject: string; conceptId: string }> }
 interface Probe { conceptId: string; stem: string; choices?: Array<{ text: string; isCorrect: boolean; misconceptionId?: string }> }
 
-const MAX_TURNS = 14
+const MAX_TURNS = Number(process.env.PILOT_MAX_TURNS ?? 14)
 const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim()
 
 /** Every authored probe in the seed corpus, collected by shape rather than by a hand-kept list. */
