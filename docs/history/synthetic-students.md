@@ -109,3 +109,30 @@ guard), 4 (the verdict is re-applied after the gate-contract replacement), and 5
 Still open: the ladder stays frozen when the learner answers the lesson's own held question during
 an excursion. This touches what counts as evidence, so it is its own step. The same goes for the
 repeated KG-description fallback.
+
+## 2026-09-24 — After-run 1 (production `1f438cd`: fixes `a029624` + `f6281f8`)
+
+Same set as the baseline: 120 turns, 5 disposable accounts, all deleted.
+
+| Student | displacement | velocity |
+|---|---|---|
+| beginner | mastered, 17 turns | mastered, 15 turns |
+| careless | mastered, 11 turns | mastered, 11 turns |
+| strong | **mastered, 11 turns** (was closed unmastered) | **mastered, 11 turns** |
+| confused | stuck at GUIDE | closed unmastered |
+| offtrack | **mastered, 14 turns** (was stuck) | **mastered, 9 turns** |
+
+**8/10 mastered (was 4/10). Critical findings: 1 (was 12).**
+
+Remaining cause, from the Vercel `[arbitration]` and `[gate-eligibility]` logs: a practice request
+that carries a "?" claims the LEARNER_QUESTION rung, which denies AUTHORED_PROBE (`blockedBy:
+["arbitrationAllowsProbe"]` at CHECK and GUIDE). Two measured examples:
+
+- "can we move faster? give me a question" — delayed the strong student by 2 turns
+- "can you check me with a question?" — kept the confused student stuck
+
+The same turn read `PRACTICE_REQUEST`. Fix: `genuineQuestionActive … && !turnIntent.wantsPractice`.
+
+**Egress:** E1 → E2 = +116,921 rows over about 120 turns, about 975 rows/turn, so about 35 MB per
+run at about 300 B/row. That is under the 50 MB per-run cap; about 4 runs/day fit in the 150 MB/day
+guard.
