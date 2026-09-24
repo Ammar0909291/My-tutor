@@ -154,6 +154,13 @@ function processFenceBody(
   if (!allowPointerRemoval) {
     return { text: body, removed: false }
   }
+  // A fence DRAWN with arrow glyphs (pilot, 2026-09-24, eng.grammar.verbs, no
+  // figure attached): "The dog → barks → loudly / (subject) (verb) (adverb)".
+  // Code does not use these glyphs (JavaScript's arrow is "=>"), so two or more
+  // of them in a fence is a drawing, and with no figure it goes.
+  if ((body.match(/[→←↑↓⇒⇐⇑⇓↔]/g) ?? []).length >= 2) {
+    return { text: '', removed: true }
+  }
   const lines = body.split('\n')
   const firstPointerIdx = lines.findIndex(isPointerOnlyLine)
   if (firstPointerIdx === -1) {

@@ -105,7 +105,7 @@ describe('the route runs the reference check again after the diagram guard, and 
     expect(again).toBeGreaterThan(guard)
   })
   it('a pointer-only turn is replaced from the KG, only when no figure is on screen', () => {
-    expect(route).toMatch(/!figureOnScreen && \(figures\.onlyPointer \|\| leftovers\.onlyPointer\) && resolvedConceptId/)
+    expect(route).toMatch(/!figureOnScreen && \(figures\.onlyPointer \|\| leftovers\.onlyPointer \|\| cleanText\.trim\(\)\.length === 0\) && resolvedConceptId/)
     expect(route).toMatch(/cleanText = pointerOnlyFallback\(node\.title, node\.description\)/)
   })
 })

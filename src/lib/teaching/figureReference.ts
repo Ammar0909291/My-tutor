@@ -495,8 +495,10 @@ function findPointerClauseHead(s: string): string | null {
  */
 const ARROW_FOLLOW_RE = /^(?:[A-Z][a-z]+\s+(?=[FfTt]))?(?:follow|trace)\s+(?:the|these|those)\s+arrows?\b\s*/i
 const LAYOUT_SUBJECT_RE = /^(?:this|the)\s+(?:layout|arrangement)\s+shows\s+/i
+/** "The arrow highlights **barks**…" — a claim about a drawn arrow; dropped whole. */
+const ARROW_SUBJECT_RE = /^the\s+arrows?\s+(?:highlights?|shows?|points?|leads?|marks?|indicates?)\b/i
 const LEGEND_PREFIX_RE = /^\*?\s*(?:[A-Z][a-z]?\s*=\s*[^,;=\n]{2,40},\s*)+[A-Z][a-z]?\s*=\s*[^,;=\n]{2,40};\s*/
-const REMNANT_ANYWHERE_RE = /(?:^|[\n.!?]\s*)(?:(?:[A-Z][a-z]+\s+)?(?:follow|trace)\s+(?:the|these|those)\s+arrows?\b|(?:this|the)\s+(?:layout|arrangement)\s+shows\b|\*?\s*[A-Z][a-z]?\s*=\s*[^,;=\n]{2,40},)/i
+const REMNANT_ANYWHERE_RE = /(?:^|[\n.!?]\s*)(?:(?:[A-Z][a-z]+\s+)?(?:follow|trace)\s+(?:the|these|those)\s+arrows?\b|(?:this|the)\s+(?:layout|arrangement)\s+shows\b|the\s+arrows?\s+(?:highlights?|shows?|points?|leads?|marks?|indicates?)\b|\*?\s*[A-Z][a-z]?\s*=\s*[^,;=\n]{2,40},)/i
 
 /** Rewrite a remnant sentence, or null when it is not one. `''` means drop it. */
 function repairRemnant(s: string): string | null {
@@ -508,6 +510,7 @@ function repairRemnant(s: string): string | null {
     const unplaced = rest.replace(/\s+(?:on|at)\s+the\s+(?:left|right|top|bottom)\b/gi, '')
     return /[A-Za-z]{3,}/.test(unplaced) ? `Trace the steps ${unplaced}` : ''
   }
+  if (ARROW_SUBJECT_RE.test(s)) return ''
   const layout = s.match(LAYOUT_SUBJECT_RE)
   if (layout) {
     const rest = s.slice(layout[0].length).trim()

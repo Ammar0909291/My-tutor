@@ -398,13 +398,24 @@ function isShoutingCaps(text: string): boolean {
 const NEXT_ITEM_REQUEST_RE =
   /^(?:ok(?:ay)?|right|sure|yes|yeah|alright)?[\s,.]*(?:can\s+you\s+|could\s+you\s+|please\s+|lets?\s+|i(?:'|’)?d\s+like\s+|i\s+want\s+)*(?:give\s+me|gimme|ask\s+me|show\s+me|do|try|have|get)?\s*(?:me\s+)?(?:the\s+|a\s+|an\s+|one\s+|another\s+|some\s+|more\s+|next\s+|other\s+)*(?:more\s+|next\s+|new\s+|practice\s+|practise\s+|another\s+)*(?:question|questions|problem|problems|example|examples|exercise|exercises|one)\b[\s\S]{0,40}$/i
 
+/**
+ * "Test me" — a request to BE ASKED, phrased as a verb on the learner.
+ * Pilot, 2026-09-24 (real accounts): "ok i get it, can you test me?" sent twice
+ * matched isRepeatedAnswer and returned 'frustrated'; arbitration then refused
+ * the authored probe and the lesson closed unmastered while the tutor kept
+ * promising a question it never asked. Positive evidence only — a verb that
+ * asks to be examined, aimed at the learner.
+ */
+const TEST_ME_RE =
+  /^(?:ok(?:ay)?|right|sure|yes|yeah|alright)?[\s,.]*(?:i\s+(?:get|got|understand)\s+it[\s,.]*)?(?:can\s+you\s+|could\s+you\s+|please\s+|now\s+)*(?:test|quiz|check)\s+(?:me|my\s+understanding)\b[\s\S]{0,40}$/i
+
 /** A bare "next" / "keep going" style nudge, with no content of its own. */
 const BARE_NEXT_RE = /^(?:ok(?:ay)?[\s,.]*)?(?:next|another|more|again|continue|carry\s+on|go\s+on|keep\s+going)\s*(?:please|one|question)?[\s.!?]*$/i
 
 function isNextItemRequest(text: string): boolean {
   const t = text.trim()
   if (t.length > MILD_MAX_LENGTH) return false
-  return NEXT_ITEM_REQUEST_RE.test(t) || BARE_NEXT_RE.test(t)
+  return NEXT_ITEM_REQUEST_RE.test(t) || BARE_NEXT_RE.test(t) || TEST_ME_RE.test(t)
 }
 
 function isRepeatedAnswer(message: string, priorUserMessage: string | null | undefined): boolean {

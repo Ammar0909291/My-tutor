@@ -268,7 +268,11 @@ describe('NON-VACUITY for the final-response contract', () => {
     // One decision, reused — so the payload and the check cannot disagree.
     expect(src).toContain('const servedMcq = probeReleasedThisTurnHoisted')
     expect(src).toContain('if (!servedMcq) {')
-    expect(src).toContain('enforceQuestionDeliveryContract(cleanText, WITHHELD_QUESTION_CONTINUATION_TEXT)')
+    // The fallback is the concept's KG description when one exists (learner
+    // pilot 2026-09-24: the plain continuation reached learners as three
+    // content-free turns in a row), WITHHELD_QUESTION_CONTINUATION_TEXT otherwise.
+    expect(src).toContain('let finalFallback = WITHHELD_QUESTION_CONTINUATION_TEXT')
+    expect(src).toContain('enforceQuestionDeliveryContract(cleanText, finalFallback)')
     expect(src).toContain('mcq: servedMcq,')
     // The disambiguation lead-in may not outlive the list it names.
     expect(src).toContain('&& probeReleasedThisTurnHoisted !== true')

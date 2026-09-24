@@ -1164,9 +1164,39 @@ export function dropSentencesPointingAtMissingOptions(text: string): string {
   return kept.join(' ').replace(/\s+([.!?])/g, '$1').trim()
 }
 
+/**
+ * A sentence that ANNOUNCES a check ("Sure, let's check your understanding with
+ * a quick multiple-choice question.", "I hear you—let's do a quick check.",
+ * "Here's a quick check to see how well you can blend…") in a reply that then
+ * asks nothing. Pilot, 2026-09-24: four consecutive turns of exactly this while
+ * the question itself had been withheld. Judged only when the reply contains no
+ * question mark at all and no options list — the one condition under which the
+ * announcement is certainly unkept.
+ */
+const ANNOUNCES_A_CHECK =
+  /^(?:(?:sure|great|ok(?:ay)?|alright|i hear you|that(?:'|’)s great)[^.!?]{0,30}[,—–-]\s*)?(?:let(?:'|’)s|let me|here(?:'|’)s|here is)\b[^.!?]{0,80}\b(?:check|test|quiz|question)\b[^.!?:]{0,80}[.!]?$/i
+
+export function dropUndeliveredCheckAnnouncements(text: string): string {
+  const t = typeof text === 'string' ? text : ''
+  if (t.includes('?') || containsOptionList(t) || hasProseMultipleChoice(t)) return t
+  let dropped = false
+  const paragraphs = t.split(/\n{2,}/).map((p) => {
+    const sentences = p.split(/(?<=[.!])\s+/)
+    const kept = sentences.filter((s) => !ANNOUNCES_A_CHECK.test(s.trim()))
+    if (kept.length === sentences.length) return p
+    dropped = true
+    return kept.join(' ').trim()
+  })
+  // Untouched text is returned byte-identical — paragraph breaks included.
+  if (!dropped) return t
+  return paragraphs.filter((p) => p.trim().length > 0).join('\n\n').trim()
+}
+
 export function enforceQuestionDeliveryContract(text: string, fallback: string): string {
   try {
-    const t0 = typeof text === 'string' ? text : ''
+    const raw = typeof text === 'string' ? text : ''
+    const t0 = dropUndeliveredCheckAnnouncements(raw)
+    if (t0 !== raw) return t0.length > 0 ? t0 : fallback
     const t = dropSentencesPointingAtMissingOptions(t0)
     if (t !== t0 && !/:\s*$/.test(t.trimEnd())) return t.length > 0 ? t : fallback
     // A trailing colon is a promise of something that should follow. Nothing

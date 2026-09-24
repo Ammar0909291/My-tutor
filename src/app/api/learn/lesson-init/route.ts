@@ -575,7 +575,7 @@ export async function POST(req: Request) {
       let text = stripUnbackedAsciiDiagram(before, false).text
       const leftovers = stripUnbackedFigureReferences(text, false)
       text = leftovers.text
-      if (leftovers.onlyPointer) {
+      if (leftovers.onlyPointer || text.trim().length === 0) {
         const node = topicSlug ? getKGNode(topicSlug) : null
         if (node?.title && node.description) text = pointerOnlyFallback(node.title, node.description)
       }

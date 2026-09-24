@@ -7600,7 +7600,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // fix — this catches the rare case where the model ignores it anyway,
       // for beginners only. Intermediate/expert responses are left untouched
       // since IPA is allowed (optionally/fully) at those registers.
-      if (contentRegister === 'beginner') {
+      //
+      // EXCEPT where the notation IS the lesson. Pilot, 2026-09-24,
+      // eng.phonics.blending-segmenting: "break it into its three sounds —
+      // /d/ /ɒ/ /g/" reached the learner as "…three sounds —   ." — the strip
+      // removed the only content of the sentence. Phonics and phonetics teach
+      // exactly these symbols, so the beginner strip does not run on them.
+      const notationIsTheLesson = /^eng\.(?:phonics|phonetics)\./.test(resolvedConceptId ?? '')
+      if (contentRegister === 'beginner' && !notationIsTheLesson) {
         cleanText = stripIpaNotation(cleanText)
       }
 
@@ -9769,7 +9776,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         }
         // A turn that was ONLY a pointer at nothing is replaced by the
         // concept's own KG description rather than shipped as-is.
-        if (!figureOnScreen && (figures.onlyPointer || leftovers.onlyPointer) && resolvedConceptId) {
+        // Also when the diagram guard left NOTHING (the reply was only a
+        // drawing — pilot 2026-09-24, eng.grammar.verbs).
+        if (!figureOnScreen && (figures.onlyPointer || leftovers.onlyPointer || cleanText.trim().length === 0) && resolvedConceptId) {
           const { getKGNode } = await import('@/lib/curriculum/knowledgeGraph')
           const { pointerOnlyFallback } = await import('@/lib/teaching/figureReference')
           const node = getKGNode(resolvedConceptId)
@@ -12255,7 +12264,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       } catch { /* non-fatal — a repair must never break a turn */ }
       if (!servedMcq) {
         const { enforceQuestionDeliveryContract, WITHHELD_QUESTION_CONTINUATION_TEXT } = await import('@/lib/teaching/gateAssessment')
-        const repaired = enforceQuestionDeliveryContract(cleanText, WITHHELD_QUESTION_CONTINUATION_TEXT)
+        // The fallback when NOTHING survives. "Let's stay with this idea for a
+        // moment." is content-free (pilot, 2026-09-24: three turns running);
+        // the concept's own KG description is retrieval, not invention.
+        let finalFallback = WITHHELD_QUESTION_CONTINUATION_TEXT
+        try {
+          const { getKGNode } = await import('@/lib/curriculum/knowledgeGraph')
+          const node = resolvedConceptId ? getKGNode(resolvedConceptId) : null
+          if (node?.title && node.description) finalFallback = `${node.title} — ${node.description}`
+        } catch { /* keep the plain fallback */ }
+        const repaired = enforceQuestionDeliveryContract(cleanText, finalFallback)
         if (repaired !== cleanText) {
           console.warn('[gate-contract] ' + JSON.stringify({
             event: 'question-announced-but-never-delivered',
