@@ -66,7 +66,7 @@ export async function findBestProbe(state: StudentState, options: MatchOptions =
       take: 50,
     })
 
-    const rows: ProbeCandidateRow[] = candidates
+    const convertible: ProbeCandidateRow[] = candidates
       .filter((c) => c.probeAsset)
       .map((c) => ({
         assetId: c.assetId, conceptId: c.conceptId, language: c.language, gradeBand: c.gradeBand,
@@ -92,11 +92,6 @@ export async function findBestProbe(state: StudentState, options: MatchOptions =
         console.warn(`[teachingActionRepository] refused probe ${row.assetId} for learner: ${scaffolding}`)
         return false
       })
-      // ALREADY-ASKED EXCLUSION (MatchOptions.excludeProbeStem). Applied here,
-      // before scoring, so an exhausted corpus returns null and the caller
-      // falls back rather than re-asking — never after, which would silently
-      // serve the same question with a lower confidence number attached.
-      .filter((row) => !options.excludeProbeStem?.(row.probeAsset!.stem))
       // GATE-COMPATIBILITY FILTER (MatchOptions.requireMcq).
       //
       // The selection layer must not return an asset that the next MANDATORY
@@ -120,6 +115,17 @@ export async function findBestProbe(state: StudentState, options: MatchOptions =
           choices: (probe.choices as Array<{ text: string; isCorrect: boolean }> | null) ?? null,
         }) !== null
       })
+
+    // ALREADY-ASKED EXCLUSION (MatchOptions.excludeProbeStem). Applied here,
+    // before scoring, so an exhausted corpus returns null and the caller
+    // falls back rather than re-asking — never after, which would silently
+    // serve the same question with a lower confidence number attached.
+    // Applied AFTER the gate-compatibility filter (both are pure filters, so
+    // the surviving set is identical) so "the concept had usable probes and
+    // every one is spent" is observable here rather than collapsing into the
+    // same null as "the concept never had any".
+    const rows = convertible.filter((row) => !options.excludeProbeStem?.(row.probeAsset!.stem))
+    if (rows.length === 0 && convertible.length > 0) options.onAllCandidatesSpent?.()
 
     const best = pickBest(state, rows, options)
     if (best) {

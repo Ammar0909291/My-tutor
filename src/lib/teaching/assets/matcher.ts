@@ -175,6 +175,15 @@ export interface MatchOptions {
    * handles by falling back to the model.
    */
   requireMcq?: boolean
+  /**
+   * PROBE RETRIEVAL ONLY. Called when the concept HAS gate-compatible authored
+   * probes but `excludeProbeStem` has spent every one of them — the pool is
+   * EXHAUSTED for this lesson, as opposed to never having existed. A null
+   * return cannot tell those apart, and inventedProbeGuard.ts must: see its
+   * 'authored-pool-exhausted' verdict. Derived from rows already fetched —
+   * no extra query.
+   */
+  onAllCandidatesSpent?: () => void
 }
 
 /**

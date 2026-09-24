@@ -4483,6 +4483,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // for the model-probe decision below. `null` means the selector never
       // ran, which is ignorance and must not be read as "none exist".
       let authoredProbesExistHoisted: boolean | null = null
+      // Set only by the selector's own callback, on a turn it RAN: the concept's
+      // authored probes exist but are all spent this lesson. See
+      // inventedProbeGuard.ts's `authoredPoolExhausted`.
+      let authoredPoolExhaustedHoisted = false
       let gateDeclinedByPolicyHoisted = false
       // R1 — THE TOPIC-PROGRESS EVIDENCE WRITE MUST FINISH BEFORE THE RESPONSE.
       //
@@ -5019,6 +5023,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // anyway. Scoped to this call site only: assembleLesson still
             // accepts non-MCQ probes and renders them as prose follow-ups.
             requireMcq: true,
+            onAllCandidatesSpent: () => { authoredPoolExhaustedHoisted = true },
           })
           // THE SURPLUS RULE. Spending a probe below the mastery gates is only
           // safe while three remain afterwards, because mastery needs three
@@ -6235,6 +6240,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           modelOfferedProbe: mcqParse.mcq !== null,
           authoredProbesExist: authoredProbesExistHoisted,
           gateDeclinedByPolicy: gateDeclinedByPolicyHoisted,
+          authoredPoolExhausted: authoredPoolExhaustedHoisted,
           modelProbeAlreadyAsked: mcqParse.mcq !== null && teachingHistoryHoisted !== null
             && hasAskedMcqForModelProbe(teachingHistoryHoisted, mcqParse.mcq.question),
         })
