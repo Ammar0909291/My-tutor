@@ -972,6 +972,8 @@ export function dropAnswerableContent(text: string): string {
  * paragraph is discarded exactly as before. Conservative by construction: this
  * can only ever keep MORE teaching than the previous behaviour, never less.
  */
+const SCENARIO_OPENER = /^(?:(?:now|so|okay|ok|next)[,\s]+)?(?:imagine|suppose|picture|pretend|let(?:'|’)s say|say that|consider this)\b/i
+
 function trimTrailingQuestions(paragraph: string): string {
   if (paragraph.length === 0 || !askedAnswerableQuestion(paragraph)) return paragraph
 
@@ -1010,6 +1012,22 @@ function trimTrailingQuestions(paragraph: string): string {
   // That is 1 of the 3 measured live turns still unfixed, and it is the
   // honest price of not regressing the lead-in case.
   if (kept.length < 2) return ''
+
+  // A SCENARIO LEFT WITHOUT ITS QUESTION. MEASURED (synthetic run 2026-09-25,
+  // phys.mech.newtons-third-law, `[gate-contract]` log): "…Let's look at
+  // another everyday situation. Imagine you are standing on a skateboard and
+  // you throw a heavy medicine ball forward. What happens to you on the
+  // skateboard?" lost only its question, and the learner was left with a
+  // set-up that led nowhere, above an unrelated authored question. A scenario
+  // opener that ENDS the paragraph (nothing explained after it) existed only
+  // to pose the removed question, so it goes too. A scenario followed by an
+  // explanation is teaching and is untouched.
+  const lastIsBareScenario = () => kept.length > 0 && SCENARIO_OPENER.test(kept[kept.length - 1].trim())
+  const beforeScenario = kept.length
+  while (lastIsBareScenario()) kept.pop()
+  // Same two-sentence floor as above: a lone lead-in ("Let's look at another
+  // everyday situation.") is not teaching once its scenario is gone.
+  if (kept.length !== beforeScenario && kept.length < 2) return ''
 
   const remainder = kept.join(' ').trim()
   // Anything answerable still in there means the question was not merely

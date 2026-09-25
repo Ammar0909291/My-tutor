@@ -27,3 +27,17 @@ describe('rhetorical why/how', () => {
     expect(askedAnswerableQuestion('What is the net force on the box? The diagram shows two forces.')).toBe(true)
   })
 })
+
+describe('a scenario left without its question (synthetic run 2026-09-25, [gate-contract] log)', () => {
+  it('the production paragraph loses the question AND its bare set-up; the teaching stays', () => {
+    const teach = "That wasn't quite right for that particular question, but let's break down why. When a book sits on a table, its weight is the Earth pulling it down. The table pushes back up with a contact force called the normal force."
+    const last = "Let's look at another everyday situation. Imagine you are standing on a skateboard and you throw a heavy medicine ball forward. What happens to you on the skateboard?"
+    const out = dropAnswerableContent(teach + '\n\n' + last)
+    expect(out).toContain('normal force')
+    expect(out).not.toMatch(/skateboard|medicine ball|another everyday situation/)
+  })
+  it('a scenario followed by an explanation is teaching and stays', () => {
+    const t = 'Imagine a car taking a sharp bend. Friction from the road provides the inward force that turns it. Which force keeps it on the curve?'
+    expect(dropAnswerableContent(t)).toBe('Imagine a car taking a sharp bend. Friction from the road provides the inward force that turns it.')
+  })
+})
