@@ -86,7 +86,10 @@ describe('synthetic-student after-run, 2026-09-24: a request to be asked is not 
   })
   it('route.ts adds the practice-request exclusion to the claim', () => {
     const src = readFileSync('src/app/api/learn/chat/route.ts', 'utf8')
-    expect(src).toMatch(/genuineQuestionActive: detectLearnerQuestion\(turnIntent\.message\) && pendingMcqHoisted === null\s*&& !turnIntent\.wantsPractice,/)
+    // 2026-09-25: the claim also admits an explicit request to the tutor
+    // (readsAsRequestToTutor — the grader's existing reading, owner-requested
+    // quiz-gate fix); the practice-request exclusion still applies to both halves.
+    expect(src).toMatch(/genuineQuestionActive: \(detectLearnerQuestion\(turnIntent\.message\) \|\| readsAsRequestToTutor\(turnIntent\.message\)\)\s*&& pendingMcqHoisted === null\s*&& !turnIntent\.wantsPractice,/)
   })
 })
 

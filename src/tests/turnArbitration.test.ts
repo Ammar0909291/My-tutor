@@ -639,8 +639,11 @@ describe('7. LEARNER_QUESTION — a genuine question denies a NEW authored probe
     const src = readFileSync('src/app/api/learn/chat/route.ts', 'utf8')
     const at = src.indexOf('genuineQuestionActive:')
     expect(at).toBeGreaterThan(0)
-    expect(src.slice(at, at + 100)).toContain(
-      'genuineQuestionActive: detectLearnerQuestion(turnIntent.message) && pendingMcqHoisted === null',
+    // 2026-09-25 (owner-requested quiz-gate fix): the claim ORs in
+    // readsAsRequestToTutor — an EXISTING export of mcq.ts, not a new regex —
+    // and still requires no pending probe.
+    expect(src.slice(at, at + 200)).toMatch(
+      /^genuineQuestionActive: \(detectLearnerQuestion\(turnIntent\.message\) \|\| readsAsRequestToTutor\(turnIntent\.message\)\)\s*&& pendingMcqHoisted === null/,
     )
     // The call site imports the EXISTING detector rather than inventing one —
     // the same function `buildTurnDirective`'s A.4 "STUDENT QUESTION

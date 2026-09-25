@@ -3046,6 +3046,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // whatever §4.4 misses, this still misses too. Widening that
             // detector is explicitly out of scope this batch (design doc
             // §8 row 6, "fixed separately").
+            const { readsAsRequestToTutor } = await import('@/lib/teaching/mcq')
             const { readLearnerMove } = await import('@/lib/teaching/learnerMove')
             learnerMoveStageAHoisted = learnerMoveStageAHoisted ?? readLearnerMove(turnIntent, {
               isBareAcknowledgement: isBareAckHoisted,
@@ -3084,7 +3085,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // [gate-eligibility] blockedBy arbitrationAllowsProbe) while the
               // same turn read PRACTICE_REQUEST. The learner asked for exactly
               // what the rung refused; answering "first" meant never.
-              genuineQuestionActive: detectLearnerQuestion(turnIntent.message) && pendingMcqHoisted === null
+              // + an explicit request to the tutor (2026-09-25, topos A/B: an
+              // imperative follow-up was pre-empted by the probe gate). Same
+              // reading the grader uses; see requestBeforeProbeGate.test.ts.
+              genuineQuestionActive: (detectLearnerQuestion(turnIntent.message) || readsAsRequestToTutor(turnIntent.message))
+                && pendingMcqHoisted === null
                 && !turnIntent.wantsPractice,
             })
             const arb = turnArbitrationHoisted
