@@ -704,6 +704,51 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
       { label: 'Secondary active transport', description: 'uses an existing gradient, set up by primary active transport, to move a second solute', items: ['Symport', 'Antiport'] },
     ],
   }),
+
+  // ══ BIOLOGY END-USER-READY VISUAL GAP FIX (2026-09-25) ══
+  //
+  // Two Biology concepts had NO static (Tier 0/1) visual binding at all
+  // (hasBinding:false) and relied entirely on Tier 3 live generation — which,
+  // measured live in production (real-learner QA, 2026-09-24, disposable-
+  // account-equivalent driving of the deployed app), got stuck rejecting the
+  // SAME regenerated candidate on every explicit "show me a diagram" request
+  // (`no-figure:critic-reject-cached`, then `no-figure:retry-identical-figure`
+  // on the explicit-request retry — see photosynthesisVisualServingLedger.
+  // test.ts's own 2026-09-23 finding for bio.plant.photosynthesis, and the
+  // 2026-09-24 QA transcript for bio.immuno.immune-disorders, which showed the
+  // identical symptom on a second, unrelated concept). A deterministic
+  // Tier-0 scene sidesteps this failure mode entirely — Tier 0 is checked
+  // before Tier 3 is ever consulted, so neither concept depends on the
+  // generator/critic loop converging any more.
+  //
+  // Both scenes reuse the existing generic pathway/comparison generators
+  // (no new generator authored) and are grounded strictly in what each
+  // concept's own Educational Brain entry says is ACTUALLY TAUGHT — not the
+  // raw KG description's fuller scope. Both EB entries explicitly flag extra
+  // KG-description detail (photosystems I/II and C4/CAM for photosynthesis;
+  // organ transplant rejection for immune disorders) as an untaught content
+  // gap ("Curriculum Feedback"), so neither is drawn here — showing it would
+  // depict something the lesson's own words never actually say.
+  'bio.plant.photosynthesis': () => buildCellPathwayScene({
+    conceptId: 'bio.plant.photosynthesis',
+    title: 'Photosynthesis: Two Coupled Stages',
+    teachingGoal: 'The Calvin cycle depends on the ATP/NADPH the light reactions produce, not on light directly.',
+    stages: [
+      { name: 'Light-Dependent Reactions', description: 'In the thylakoid membranes, chlorophyll absorbs light energy and splits water (photolysis), releasing O2 as a by-product and producing ATP and NADPH.' },
+      { name: 'Calvin Cycle', description: 'In the stroma, the ATP and NADPH from stage one drive CO2 fixation: CO2 combines with RuBP via the enzyme RuBisCO, is reduced to G3P used to build glucose, and RuBP is regenerated to keep the cycle running.' },
+    ],
+  }),
+
+  'bio.immuno.immune-disorders': () => buildCellComparisonScene({
+    conceptId: 'bio.immuno.immune-disorders',
+    title: 'Immune Disorders: Three Failure Modes',
+    teachingGoal: 'Autoimmune disease and allergy are BOTH overactivity problems (misdirected or overreacting); only immunodeficiency is underactivity — none of the three is a generic "weak immune system."',
+    groups: [
+      { label: 'Autoimmune disease', description: 'tolerance failure — T and B cells attack the body’s own tissue', items: ['Type 1 diabetes (pancreatic β-cells)', 'Rheumatoid arthritis (joints)', 'Multiple sclerosis (myelin)', 'Lupus (multiple organs)'] },
+      { label: 'Allergy', description: 'Type I hypersensitivity — an IgE-mediated overreaction to a harmless antigen', items: ['Sensitisation: IgE binds mast cells, no symptoms', 'Re-exposure: cross-linking triggers degranulation', 'Anaphylaxis: the severe, systemic form'] },
+      { label: 'Immunodeficiency', description: 'the immune system fails to defend against real pathogens', items: ['Primary: genetic (e.g. SCID)', 'Secondary: acquired (e.g. HIV destroys CD4⁺ T cells, causing AIDS)'] },
+    ],
+  }),
 }
 
 const DANIELL_CELL: ElectrochemicalCellParams = {

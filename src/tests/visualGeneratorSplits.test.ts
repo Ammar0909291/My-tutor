@@ -147,7 +147,14 @@ describe('B2 changed nothing else', () => {
     // suppressed in retired.ts for inheriting the wrong 'bio.cell' ->
     // food_chain domain default — see bioCellVisualReplacement.test.ts for
     // full per-concept coverage.
-    expect(CONCEPT_SCENE_OVERRIDES).toHaveLength(56)
+    //
+    // 56 -> 58 (2026-09-25, Biology end-user-ready visual gap fix):
+    // bio.plant.photosynthesis and bio.immuno.immune-disorders, both
+    // formerly Tier-3-only concepts stuck in a critic-reject-cache /
+    // retry-identical-figure loop that never served a diagram even on an
+    // explicit request (measured live in production, 2026-09-24 QA) — see
+    // bioVisualGapFix.test.ts for full coverage.
+    expect(CONCEPT_SCENE_OVERRIDES).toHaveLength(58)
     expect(CONCEPT_SCENE_OVERRIDES).toContain('chem.dblock.lanthanides')
     expect(CONCEPT_SCENE_OVERRIDES).toContain('math.calc.critical-points')
     expect(CONCEPT_SCENE_OVERRIDES).toContain('phys.em.kirchhoffs-laws')
