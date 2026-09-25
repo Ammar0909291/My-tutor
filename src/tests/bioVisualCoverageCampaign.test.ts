@@ -151,6 +151,33 @@ export const CAMPAIGN_FIXED_CONCEPTS = [
   'bio.div.fish-amphibian-diversity',
   'bio.div.invertebrate-diversity-major-phyla',
   'bio.div.mammalian-diversity',
+  // Batch 10 — bio.div (1), bio.evo (4), bio.found (2), bio.gen (3),
+  // bio.immuno (2)
+  'bio.div.reptile-bird-diversity',
+  'bio.evo.coevolution-species-interactions',
+  'bio.evo.convergent-evolution-homoplasy',
+  'bio.evo.macroevolution-extinction',
+  'bio.evo.phylogeography-biogeography',
+  'bio.found.scientific-method-in-biology',
+  'bio.found.unifying-themes-in-biology',
+  'bio.gen.conservation-genetics',
+  'bio.gen.genetic-testing-counseling',
+  'bio.gen.quantitative-genetics-heritability',
+  'bio.immuno.cancer-immunology-immunotherapy',
+  'bio.immuno.cytokines-immune-signaling',
+  // Batch 11 — bio.immuno (1), bio.micro (4), bio.mol (4), bio.neuro (3)
+  'bio.immuno.t-cell-development-tolerance',
+  'bio.micro.antimicrobial-resistance',
+  'bio.micro.archaea-extremophiles',
+  'bio.micro.human-microbiome-detail',
+  'bio.micro.microbial-metabolism-diversity',
+  'bio.mol.alternative-splicing-rna-diversity',
+  'bio.mol.chromatin-structure-genome-organization',
+  'bio.mol.metabolic-regulation-integration',
+  'bio.mol.protein-quality-control-autophagy',
+  'bio.neuro.audition-vestibular-system',
+  'bio.neuro.autonomic-stress-physiology',
+  'bio.neuro.brain-regional-organization',
 ] as const
 
 describe.each(CAMPAIGN_FIXED_CONCEPTS)('%s now resolves to a faithful Tier 0 scene', (conceptId) => {

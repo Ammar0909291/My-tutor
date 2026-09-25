@@ -2026,6 +2026,283 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
       { label: 'Placental mammals', description: 'longer internal development, nourished via a placenta', items: [] },
     ],
   }),
+
+  // Batch 10 (bio.div, 1 concept; bio.evo, 4 concepts; bio.found, 2
+  // concepts; bio.gen, 3 concepts; bio.immuno, 2 concepts):
+  'bio.div.reptile-bird-diversity': () => buildCellHubScene({
+    conceptId: 'bio.div.reptile-bird-diversity',
+    hubLabel: 'Powered flight demands three things',
+    title: "Bird Adaptations All Trace to Flight's Functional Demands",
+    teachingGoal: 'Each bird adaptation is not an unconnected feature — it traces to one of three specific functional demands of powered flight.',
+    spokes: [
+      { name: 'Low body mass', description: 'lightweight, often hollow (pneumatic) bones and a fused, reinforced skeleton' },
+      { name: 'Efficient oxygen delivery', description: 'unidirectional airflow with air sacs extracts oxygen more efficiently than tidal breathing' },
+      { name: 'High sustained energy output', description: 'a high metabolic rate powers the substantial energy flight demands' },
+    ],
+  }),
+
+  'bio.evo.coevolution-species-interactions': () => buildCellComparisonScene({
+    conceptId: 'bio.evo.coevolution-species-interactions',
+    title: 'Coevolution vs Parallel Adaptation',
+    teachingGoal: "Genuine coevolution requires each species' change to be a RESPONSE TO the other species' change — not merely two species independently adapting to a shared environment.",
+    groups: [
+      { label: 'Coevolution (reciprocal)', description: 'each species evolution influences, and responds to, the other', items: ['Predator-prey arms race', 'Host-parasite arms race', 'Mutualistic pollinator specialisation'] },
+      { label: 'Parallel adaptation (independent)', description: 'both species respond to the same external pressure, not to each other', items: ['Similar traits from a shared environment', 'No reciprocal influence between species'] },
+    ],
+  }),
+
+  'bio.evo.convergent-evolution-homoplasy': () => buildCellComparisonScene({
+    conceptId: 'bio.evo.convergent-evolution-homoplasy',
+    title: 'Homoplasy: Two Ways Similarity Can Mislead',
+    teachingGoal: 'Not every similarity reflects shared ancestry — homoplasy looks like evidence of close relationship but is not, and convergent and parallel evolution produce it two different ways.',
+    groups: [
+      { label: 'Convergent evolution', description: 'independent origin in lineages with no recent shared ancestor with that trait', items: ['Marsupial vs placental body forms', 'Camera eye in vertebrates and cephalopods'] },
+      { label: 'Parallel evolution', description: 'shared ancestor, but the trait evolved separately in each lineage after diverging', items: ['Similar ancestral starting condition', 'Independently pushed to a similar solution'] },
+    ],
+  }),
+
+  'bio.evo.macroevolution-extinction': () => buildCellComparisonScene({
+    conceptId: 'bio.evo.macroevolution-extinction',
+    title: 'Two Models of Evolutionary Tempo',
+    teachingGoal: 'Both models share the same underlying mechanisms (mutation, selection, drift) — they differ only in their claim about the pattern and pacing of change over time.',
+    groups: [
+      { label: 'Phyletic gradualism', description: 'morphological change accumulates slowly and continuously', items: ['Steady, gradual change', 'No distinct bursts'] },
+      { label: 'Punctuated equilibrium', description: 'long stasis, punctuated by rapid bursts of change around speciation', items: ['Long periods of stasis', 'Rapid change near speciation events'] },
+    ],
+  }),
+
+  'bio.evo.phylogeography-biogeography': () => buildCellComparisonScene({
+    conceptId: 'bio.evo.phylogeography-biogeography',
+    title: 'Vicariance vs Dispersal',
+    teachingGoal: 'The same disjunct distribution can arise from two alternative histories — telling them apart requires evidence, such as whether divergence timing matches a barrier forming.',
+    groups: [
+      { label: 'Vicariance', description: 'a formerly continuous range is later split by a new barrier', items: ['Population present before the barrier', 'Barrier arises and divides it'] },
+      { label: 'Dispersal', description: 'individuals cross an already-existing barrier to colonise new ground', items: ['Barrier already present', 'Individuals cross it to colonise'] },
+    ],
+  }),
+
+  'bio.found.scientific-method-in-biology': () => buildCellPathwayScene({
+    conceptId: 'bio.found.scientific-method-in-biology',
+    title: 'The Scientific Method: Testing Explanations Against Evidence',
+    teachingGoal: 'A falsified hypothesis is not a failed experiment — it is a genuine result that narrows the space of possible explanations, exactly as a confirmed hypothesis does.',
+    stages: [
+      { name: 'Observation', description: 'prompts a specific, testable hypothesis' },
+      { name: 'Controlled experiment', description: 'varies one independent variable, holds control variables constant, measures the dependent variable against a control group' },
+      { name: 'Statistical evaluation', description: 'checks sample size and whether the result could plausibly be due to chance' },
+      { name: 'Replication and peer review', description: 'independent researchers reproduce the result; experts scrutinise methods before publication' },
+    ],
+  }),
+
+  'bio.found.unifying-themes-in-biology': () => buildCellHubScene({
+    conceptId: 'bio.found.unifying-themes-in-biology',
+    hubLabel: 'Four themes recur across every branch of biology',
+    title: 'Four Unifying Themes in Biology',
+    teachingGoal: 'These are not independent trivia but a small, recurring set of lenses — the same organising patterns appear again and again across every biology topic.',
+    spokes: [
+      { name: 'Structure-function relationship', description: 'form is shaped by, and explains, function, at every scale' },
+      { name: 'Evolution as central theory', description: 'nothing in biology makes sense except in the light of evolution' },
+      { name: 'Homeostasis', description: 'organisms actively maintain a stable internal environment despite external change' },
+      { name: 'Energy flow and matter cycling', description: 'energy flows one-way and is lost as heat; matter cycles indefinitely' },
+    ],
+  }),
+
+  'bio.gen.conservation-genetics': () => buildCellHubScene({
+    conceptId: 'bio.gen.conservation-genetics',
+    hubLabel: 'Effective size (Ne) is smaller than census size (N) because:',
+    title: 'Why Effective Population Size Is Smaller Than Census Size',
+    teachingGoal: 'A population that looks numerically healthy by census count can still be genetically vulnerable if its effective population size is much smaller.',
+    spokes: [
+      { name: 'Unequal sex ratios', description: 'genetic contribution concentrates in fewer breeding individuals than the total count suggests' },
+      { name: 'Variance in reproductive success', description: 'a few individuals produce most offspring, narrowing diversity faster than headcount suggests' },
+      { name: 'Population fluctuations', description: 'a past bottleneck dominates genetic effects even after the population later recovers in count' },
+    ],
+  }),
+
+  'bio.gen.genetic-testing-counseling': () => buildCellComparisonScene({
+    conceptId: 'bio.gen.genetic-testing-counseling',
+    title: 'Carrier Screening vs Prenatal Diagnostic Testing',
+    teachingGoal: "These serve distinct purposes at distinct times: carrier screening assesses parental risk before or independent of a pregnancy; prenatal testing directly assesses the fetus once a pregnancy is established.",
+    groups: [
+      { label: 'Carrier screening', description: 'tests prospective parents before or early in pregnancy for recessive-allele risk', items: ['Assesses parental risk', 'Performed before/independent of pregnancy'] },
+      { label: 'Prenatal diagnostic testing', description: 'directly assesses the fetus during an established pregnancy', items: ['Amniocentesis (15-20 weeks)', 'Chorionic villus sampling (10-13 weeks)', 'Non-invasive prenatal testing (maternal blood, screening only)'] },
+    ],
+  }),
+
+  'bio.gen.quantitative-genetics-heritability': () => buildCellComparisonScene({
+    conceptId: 'bio.gen.quantitative-genetics-heritability',
+    title: 'Broad-Sense vs Narrow-Sense Heritability',
+    teachingGoal: 'Heritability is a population-specific statistic, not a fixed property of a trait — the same trait can have a different heritability value in a different population or environment.',
+    groups: [
+      { label: 'Broad-sense heritability (H2)', description: 'captures all genetic variance: additive, dominance and epistatic effects together', items: ['Additive effects', 'Dominance effects', 'Epistatic (gene-gene) effects'] },
+      { label: 'Narrow-sense heritability (h2)', description: 'captures only additive genetic variance — the part that predictably transmits to offspring', items: ['Additive effects only', 'Predicts response to selection'] },
+    ],
+  }),
+
+  'bio.immuno.cancer-immunology-immunotherapy': () => buildCellComparisonScene({
+    conceptId: 'bio.immuno.cancer-immunology-immunotherapy',
+    title: 'Two Mechanistically Different Cancer Immunotherapies',
+    teachingGoal: 'Checkpoint inhibitors restore an already-existing but suppressed T-cell capability; CAR-T therapy engineers a new recognition capability entirely — these are not variations of the same idea.',
+    groups: [
+      { label: 'Checkpoint inhibitors', description: 'block PD-1/PD-L1 or CTLA-4 to release the brake tumours exploit', items: ['Restores existing T-cell capability', 'Does not attack the tumour directly'] },
+      { label: 'CAR-T cell therapy', description: "engineers the patient's own T cells with a chimeric antigen receptor", items: ['Extract, engineer, reinfuse T cells', 'Creates a new recognition capability'] },
+    ],
+  }),
+
+  'bio.immuno.cytokines-immune-signaling': () => buildCellHubScene({
+    conceptId: 'bio.immuno.cytokines-immune-signaling',
+    hubLabel: 'Cytokines: the molecular language of immune signalling',
+    title: 'Three Cytokine Classes, Three Distinct Roles',
+    teachingGoal: 'Cytokine storm is not an exotic new mechanism — it is the same normal signalling machinery operating in a severely dysregulated, excessive way.',
+    spokes: [
+      { name: 'Interleukins', description: 'signal between leukocytes — activate T cells, promote inflammation, or suppress immune activity' },
+      { name: 'Interferons', description: 'signal neighbouring uninfected cells to activate antiviral defences before they too are infected' },
+      { name: 'Tumour necrosis factor (TNF)', description: 'a pro-inflammatory cytokine that can directly induce apoptosis in target cells' },
+    ],
+  }),
+
+  // Batch 11 (bio.immuno, 1 concept; bio.micro, 4 concepts; bio.mol, 4
+  // concepts; bio.neuro, 3 concepts):
+  'bio.immuno.t-cell-development-tolerance': () => buildCellPathwayScene({
+    conceptId: 'bio.immuno.t-cell-development-tolerance',
+    title: 'T Cell Selection in the Thymus: Two Sequential Tests',
+    teachingGoal: 'The distinguishing test between these stages is not simply binding self-MHC or not, but the STRENGTH of binding: too weak means death by neglect, appropriately moderate means survival, too strong to self-antigen means death by negative selection.',
+    stages: [
+      { name: 'Positive selection', description: 'rescues T cells whose receptor binds self-MHC with at least weak-to-moderate affinity' },
+      { name: 'Negative selection', description: 'eliminates surviving T cells whose receptor binds self-antigen too strongly' },
+      { name: 'Peripheral tolerance', description: 'regulatory T cells and anergy catch weakly self-reactive cells that escape the thymus' },
+    ],
+  }),
+
+  'bio.micro.antimicrobial-resistance': () => buildCellHubScene({
+    conceptId: 'bio.micro.antimicrobial-resistance',
+    hubLabel: 'How bacteria resist antibiotics: three molecular mechanisms',
+    title: 'Three Molecular Mechanisms of Antibiotic Resistance',
+    teachingGoal: 'Resistance is SELECTED, not induced, by the drug — the antibiotic kills susceptible bacteria and lets already-resistant individuals survive and spread, often via horizontal gene transfer.',
+    spokes: [
+      { name: 'Efflux pumps', description: 'actively pump the antibiotic back out of the cell before it reaches an effective concentration' },
+      { name: 'Enzymatic drug inactivation', description: 'bacterial enzymes like beta-lactamases chemically destroy the antibiotic molecule' },
+      { name: 'Target-site modification', description: 'alters the molecule the antibiotic binds, so it can no longer act even if it reaches the target' },
+    ],
+  }),
+
+  'bio.micro.archaea-extremophiles': () => buildCellHubScene({
+    conceptId: 'bio.micro.archaea-extremophiles',
+    hubLabel: 'Extremophile categories match a specific extreme condition',
+    title: 'Four Extremophile Categories, Four Distinct Stressors',
+    teachingGoal: 'Each category is tied to a distinct specific stressor, not an interchangeable label for organisms living in harsh places — each has molecular adaptations tailored to that specific stress.',
+    spokes: [
+      { name: 'Thermophiles', description: 'tolerate high-temperature environments' },
+      { name: 'Halophiles', description: 'tolerate high-salt environments' },
+      { name: 'Acidophiles', description: 'tolerate low pH, highly acidic environments' },
+      { name: 'Piezophiles', description: 'tolerate high-pressure environments, such as deep ocean trenches' },
+    ],
+  }),
+
+  'bio.micro.human-microbiome-detail': () => buildCellHubScene({
+    conceptId: 'bio.micro.human-microbiome-detail',
+    hubLabel: 'Microbiome-host interactions: three distinct mechanisms',
+    title: 'Three Distinct Microbiome-Host Interactions',
+    teachingGoal: 'These are genuinely different mechanisms, not three descriptions of the same underlying process — dysbiosis disrupts them and links the microbiome to metabolic and inflammatory disease.',
+    spokes: [
+      { name: 'Nutrient synthesis', description: 'gut bacteria synthesise compounds the host cannot produce, such as certain vitamins and short-chain fatty acids' },
+      { name: 'Immune system training', description: 'exposure to diverse microbes helps the immune system learn to distinguish harmless from harmful' },
+      { name: 'Gut-brain signalling', description: 'microbial metabolites and vagus-nerve signals can influence the nervous system' },
+    ],
+  }),
+
+  'bio.micro.microbial-metabolism-diversity': () => buildCellHubScene({
+    conceptId: 'bio.micro.microbial-metabolism-diversity',
+    hubLabel: 'Alternative metabolic strategies enable survival without light, oxygen, or organic carbon',
+    title: 'Metabolic Versatility: Three Strategies Behind Extremophile Survival',
+    teachingGoal: 'This metabolic versatility is the specific, causal basis of extremophile survival — each strategy avoids depending on a resource unavailable in that extreme environment.',
+    spokes: [
+      { name: 'Chemoautotrophy', description: 'derives energy from oxidising inorganic chemicals, such as hydrogen sulfide or ammonia, not light' },
+      { name: 'Anoxygenic photosynthesis', description: 'purple and green sulfur bacteria use light with a non-water electron donor and release no oxygen' },
+      { name: 'Anaerobic respiration', description: 'uses nitrate, sulfate, or carbon dioxide as the terminal electron acceptor in place of oxygen' },
+    ],
+  }),
+
+  'bio.mol.alternative-splicing-rna-diversity': () => buildCellHubScene({
+    conceptId: 'bio.mol.alternative-splicing-rna-diversity',
+    hubLabel: 'One pre-mRNA, multiple mature mRNAs',
+    title: 'Four Ways Alternative Splicing Creates Protein Diversity',
+    teachingGoal: 'Because a single gene can generate multiple distinct transcripts, the total number of proteins an organism produces is far larger than its raw gene count would suggest.',
+    spokes: [
+      { name: 'Exon skipping', description: 'a particular exon is excluded from some mature mRNA versions but included in others' },
+      { name: 'Intron retention', description: 'a particular intron is retained, becoming part of the final coding sequence' },
+      { name: 'Alternative splice sites', description: 'the exact boundary position used for a splicing cut shifts where an exon begins or ends' },
+      { name: 'Mutually exclusive exons', description: 'only one of two or more alternative exons is ever included in a single mature mRNA' },
+    ],
+  }),
+
+  'bio.mol.chromatin-structure-genome-organization': () => buildCellPathwayScene({
+    conceptId: 'bio.mol.chromatin-structure-genome-organization',
+    title: 'DNA Packaging: Increasingly Higher-Order Levels',
+    teachingGoal: 'Genome architecture is a genuine regulatory constraint, not passive packaging — an enhancer can influence a distant gene only if chromatin looping brings them into physical proximity in 3D space.',
+    stages: [
+      { name: 'Nucleosome', description: 'a histone octamer with DNA wound around it, linked by short stretches of linker DNA — "beads on a string"' },
+      { name: 'Higher-order folding', description: 'nucleosomes fold further into 30 nm fibres and additional loops' },
+      { name: 'Topologically associating domains', description: 'CTCF and cohesin anchor chromatin loops, bringing distant DNA points into close physical proximity' },
+    ],
+  }),
+
+  'bio.mol.metabolic-regulation-integration': () => buildCellComparisonScene({
+    conceptId: 'bio.mol.metabolic-regulation-integration',
+    title: 'Insulin vs Glucagon: Reciprocal Metabolic Control',
+    teachingGoal: 'Hormonal control ensures the body never runs opposing pathways at once — metabolism shifts between two distinct, coherent operating modes depending on blood glucose.',
+    groups: [
+      { label: 'Insulin (fed state)', description: 'released when blood glucose is high', items: ['Promotes glycolysis', 'Promotes glycogen synthesis', 'Suppresses gluconeogenesis and glycogen breakdown'] },
+      { label: 'Glucagon (fasted state)', description: 'released when blood glucose is low', items: ['Promotes gluconeogenesis', 'Promotes glycogen breakdown', 'Suppresses glycolysis and glycogen synthesis'] },
+    ],
+  }),
+
+  'bio.mol.protein-quality-control-autophagy': () => buildCellHubScene({
+    conceptId: 'bio.mol.protein-quality-control-autophagy',
+    hubLabel: 'Four distinct routes for degrading proteins that cannot be rescued',
+    title: 'Four Mechanistically Distinct Protein Degradation Routes',
+    teachingGoal: 'Proteostasis collapse in neurodegenerative disease reflects a failure of this overall quality-control capacity, not an isolated increase in misfolding events.',
+    spokes: [
+      { name: 'Macroautophagy', description: 'a double-membrane autophagosome engulfs damaged material and fuses with a lysosome' },
+      { name: 'Microautophagy', description: 'the lysosome membrane directly engulfs small portions of cytoplasm at its surface' },
+      { name: 'Chaperone-mediated autophagy', description: 'chaperones recognise a targeting sequence and deliver individual proteins across the lysosomal membrane' },
+      { name: 'Ubiquitin-proteasome system', description: 'ubiquitin tags mark unwanted proteins for degradation by the proteasome' },
+    ],
+  }),
+
+  'bio.neuro.audition-vestibular-system': () => buildCellPathwayScene({
+    conceptId: 'bio.neuro.audition-vestibular-system',
+    title: 'Sound Transmission Through the Ear',
+    teachingGoal: "The cochlea and vestibular apparatus rely on the same hair-cell mechanotransduction mechanism, but serve completely different functions: hearing versus balance.",
+    stages: [
+      { name: 'Outer ear', description: 'the pinna and ear canal collect and channel sound waves toward the eardrum' },
+      { name: 'Middle ear', description: 'three small bones mechanically amplify and transmit the vibrations inward' },
+      { name: 'Inner ear (cochlea)', description: 'hair-cell mechanotransduction converts mechanical vibration into an electrical signal, tonotopically coded by frequency' },
+    ],
+  }),
+
+  'bio.neuro.autonomic-stress-physiology': () => buildCellPathwayScene({
+    conceptId: 'bio.neuro.autonomic-stress-physiology',
+    title: 'The HPA Axis: The Slower Hormonal Stress Response',
+    teachingGoal: 'The same cortisol response that is adaptive when brief becomes damaging when activated chronically — this cumulative cost is called allostatic load.',
+    stages: [
+      { name: 'Hypothalamus', description: 'releases a releasing hormone signalling the pituitary gland' },
+      { name: 'Pituitary gland', description: 'releases a hormone signalling the adrenal glands' },
+      { name: 'Adrenal glands', description: 'release cortisol into the bloodstream, mobilising energy and reprioritising resources' },
+    ],
+  }),
+
+  'bio.neuro.brain-regional-organization': () => buildCellStructureScene({
+    conceptId: 'bio.neuro.brain-regional-organization',
+    subject: 'Cerebral Cortex',
+    boundaryLabel: 'Cortical surface',
+    teachingGoal: 'The four lobes are a further subdivision within the forebrain, operating at a different structural scale than the forebrain/midbrain/hindbrain scheme — not a competing classification of the same structures.',
+    parts: [
+      { name: 'Frontal lobe', description: 'planning, decision-making, and voluntary movement initiation' },
+      { name: 'Parietal lobe', description: 'sensory integration and spatial processing' },
+      { name: 'Temporal lobe', description: 'auditory processing and aspects of memory and language' },
+      { name: 'Occipital lobe', description: 'visual processing' },
+    ],
+  }),
 }
 
 const DANIELL_CELL: ElectrochemicalCellParams = {
