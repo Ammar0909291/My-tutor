@@ -24,6 +24,10 @@ Status checks (owner loop "keep updating handover file"): 2026-09-25 ~04:35 UTC 
 - **Phantom simulation claim** (`visualRegistry.ts`): "…the 3D Newton's Forces simulation on your screen." with nothing attached is now stripped; simulation/animation/visualization added to the present-tense claim patterns (not to `VISUAL_PROMISE_RE`, which drives force-rendering).
 - When the owner clears the stop, the guard makes the next run safe: if Groq is still blocked, the run ends after 2 turns instead of spending Gemini's quota.
 
+2026-09-25 ~06:30 UTC — two more notes:
+- **Vercel log queries now fail with `ExceedsBillingLimitError`** (runtime-logs API). Log-based diagnosis (TURN_EVENT, `[c5]`, `[dont-know-ceiling]`) is unavailable until that limit resets or the owner raises it. Do not retry in a loop.
+- **The runner's `figure` field is per-turn only.** Replaying all 1,317 recorded replies through `stripPhantomVisualClaims` flags 57 sentences on `figure:false` turns, but most say "diagram … on your screen" — which the OLD pattern already matched — and still reached the learner, so production had a graphical decision on those turns (a figure sent on an earlier turn, still visible). So `figure:false` ≠ nothing on screen, and the `phantom-figure` check (which requires no figure earlier in the lesson) remains the right checker rule. The new simulation/animation nouns only act when the server itself decided no visual this turn — the same rule the old nouns always followed. Whether the N1L t5 turn was graphical could not be confirmed (logs blocked).
+
 **Do not start another run until the owner has (1) decided on the Groq spend alert/billing and
 (2) set a token budget for synthetic runs.** Further runs would now spend the Gemini quota that
 real learners depend on. The runner has no provider budget of its own — adding one (e.g. a
