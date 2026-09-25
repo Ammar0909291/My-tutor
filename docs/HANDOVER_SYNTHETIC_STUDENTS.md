@@ -36,7 +36,9 @@ reach verified mastery every time with zero critical defects (`scripts/qa/synthe
 | S7 | Readiness runs 2 and 3 on displacement + velocity (production `dd31beb`) | **done — both topics READY**: run 2 10/10 mastered, 0 critical, 0 major; run 3 10/10, 0 critical, 1 major (`content-free-reply`, see below). With after-run 3 (run 1) that is 3 consecutive runs, all 5 students mastering both topics, 0 critical. (After-run 3's run file was lost to a container restart, so the scorecard CLI can only combine runs 2 and 3; runs 1 is recorded from its log.) |
 | S7a | Run 3's content-free reply: confused student, "I still don't get it" (2nd don't-know) -> only "I hear you—it's completely okay to feel stuck. Let's take a tiny step together." Production log: model wrote 377 chars, `[dont-know-ceiling] question-withheld run:2` cut the rest. Could not reproduce (the model's raw text is not logged; a reconstructed teaching+question paragraph is already kept by `trimTrailingQuestions`). **No speculative fix**: the ceiling log now records `before`/`beforeChars`/`afterChars` (model text only), so the next occurrence is diagnosable. Likely cause: the known cost in `trimTrailingQuestions` (a single teaching sentence before its question is dropped) | **pushed** (logging only) |
 | S8 | Widen: next launch topics two at a time (`RUNNER_TOPICS=phys.mech.acceleration,phys.mech.kinematics-1d`, then force + newtons-first-law, …), 3 runs each, within ~150 MB/day | **in progress**. acceleration + kinematics-1d run 1 (prod `651276f`): 10/10 mastered, 0 critical, 0 major, 2 minor |
-| S8a | The recurring minor `ungradeable-question` (off-track t5, every topic) is a real defect: a server-graded-CORRECT answer got "…3 m/s², right? Is that correct?" and no verdict, because `CONFIRMS_CORRECT` matched "correct" inside the question (`[c5] confirmed:true`). Fix: `statesCorrect()` tests only statements; regex unchanged (scorer parity) | **pushed** (full suite 725/14,941, tsc and build clean); next: runs 2-3 on acceleration + kinematics-1d |
+| S8a | The recurring minor `ungradeable-question` (off-track t5, every topic) is a real defect: a server-graded-CORRECT answer got "…3 m/s², right? Is that correct?" and no verdict, because `CONFIRMS_CORRECT` matched "correct" inside the question (`[c5] confirmed:true`). Fix: `statesCorrect()` tests only statements; regex unchanged (scorer parity) | **pushed** (full suite 725/14,941, tsc and build clean); deployed `dbd3b77`; run 2 confirms the verdict is now prepended ("That's right. …") |
+| S8b | Run 2 (prod `dbd3b77`): 10/10 mastered, **1 critical** `answer-leak` (acceleration, off-track t7): the authored question "Acceleration is defined as the rate of change of which quantity?" (key: velocity) stayed on screen from t6; learner asked "will this be on the exam?"; reply: "…understanding acceleration — how velocity changes with time — is definitely important." The leak guard (`dropAnswerLeaks`, route.ts ~L6425) runs only for a question attached THIS turn (owner-approved scope), not for a held question re-served by `mcqToServe`. **Needs owner decision** (see OWNER DECISION below) | open |
+| S8c | Run 3 on acceleration + kinematics-1d (prod `dbd3b77`) | running (started 02:46 UTC) |
 
 If S4's run file is lost (the session ended), **skip the before-baseline**. S2's smoke run already
 shows the defect; go straight to S5.
@@ -107,6 +109,7 @@ It counts rows returned (cumulative since project creation, never reset).
 | F1 | 2026-09-25 00:46:38 | 10,470,441 | 189,305,444 | readiness run 2: +92,284 rows / 116 turns, about 28 MB |
 | F2 | 2026-09-25 01:29:00 | 10,497,795 | 189,341,815 | readiness run 3: +36,371 rows / 116 turns, about 11 MB. **Today: about 39 MB** |
 | F3 | 2026-09-25 01:59:44 | 10,526,228 | 189,430,620 | acceleration + kinematics-1d run 1: +88,805 rows / 116 turns, about 27 MB. **Today: about 66 MB** |
+| F4 | 2026-09-25 02:46:24 | 10,554,623 | 189,498,627 | acceleration + kinematics-1d run 2: +68,007 rows / 116 turns, about 20 MB. **Today: about 86 MB** |
 
 ## Rules that bind this work
 
@@ -124,6 +127,25 @@ It counts rows returned (cumulative since project creation, never reset).
 - **Reporting:** every turn ends with the CLAUDE.md report (one fenced block, git info).
 - **No AI key in the container.** Students are rule-based, and the model-based factual marker is
   not built. It needs a key added to the environment secrets by the owner.
+
+## OWNER DECISION NEEDED (2026-09-25) — the held question's answer in the teaching
+
+The leak guard hides the answer only on the turn the server attaches a question. While the question
+stays on screen unanswered, the tutor's reply can state the answer (S8b: "acceleration — how velocity
+changes"). Extending the guard to every held turn is NOT safe as-is: on an acceleration lesson every
+explanation mentions velocity, so an "I'm lost, explain differently" turn would lose its teaching.
+Options:
+
+- **A (recommended):** extend the guard to held turns *except* when the learner asked for help
+  (lost / explain / example). Side questions, "will this be on the exam?", chit-chat: answer sentences
+  dropped. Help requests: the teaching stays — and then the held question is **released** (not
+  graded, the next authored question is used), so a question whose answer was just taught never
+  produces mastery evidence.
+- **B:** extend the guard to all held turns (strictest; costs teaching on help turns).
+- **C:** leave as is (the checker keeps reporting it as critical, so acceleration cannot pass
+  readiness while this path occurs).
+
+This changes what counts as evidence, so it is CLAUDE.md G2 — not implemented without approval.
 
 ## DONE — owner-approved 2026-09-24 ("Approved, implement the TRANSFER fix")
 
