@@ -261,3 +261,12 @@ Gemini-served turns produced more low-grade defects (a model-written readiness q
 Launch-set status after this session: READY = displacement, velocity, kinematics-1d. 2/3 runs clean = force, newtons-first-law. Blocked on owner decision = acceleration (held-question answer leak).
 
 Egress 2026-09-25: about 129 MB (cap about 150).
+
+## 2026-09-25 14:38-16:10 UTC — free-body diagram + normal force run 2 (production `d100b41`)
+
+Scorecard: free-body 4/5 mastered (confused missed), normal-force 4/5 (beginner missed); 125 turns,
+0 critical, 4 major. Run 1 was 5/10 with 1 critical — Batch 17 probes plus the spiral-close reopen
+(`34b8288`) account for the gain. Both misses closed at turn 12 with "Let's pause … Worth another
+look later" on the turn of a single wrong answer that followed a correct one; the one-time +6
+budget extension required `consecutiveFailures === 0`. Changed to refuse only at >= 2 consecutive
+misses (the confusion threshold). Egress F14→F15 about 57 MB.

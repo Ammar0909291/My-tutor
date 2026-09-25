@@ -52,8 +52,17 @@ describe('eligibility — exactly the three approved conditions', () => {
     )).toBe(false)
   })
 
-  it('3. consecutiveFailures > 0 → no extension', () => {
-    expect(qualifiesForBudgetExtension(progressing({ consecutiveFailures: 1 }))).toBe(false)
+  it('3. a spiralling learner (two consecutive misses) → no extension', () => {
+    expect(qualifiesForBudgetExtension(progressing({ consecutiveFailures: 2 }))).toBe(false)
+    expect(qualifiesForBudgetExtension(progressing({ consecutiveFailures: 3 }))).toBe(false)
+  })
+
+  it('3b. ONE miss after converting still qualifies (synthetic run, 2026-09-25)', () => {
+    // confused/free-body closed at t12 at CHECK with one check credit, on the
+    // single wrong answer given on the turn the budget ran out.
+    expect(qualifiesForBudgetExtension(
+      progressing({ phase: 'CHECK', correctAtCheck: 1, consecutiveFailures: 1 }),
+    )).toBe(true)
   })
 
   it('4. a phase below CHECK → no extension', () => {
@@ -92,11 +101,11 @@ describe('5. the extension is granted at most once', () => {
     expect(effectiveTurnBudget(s)).toBe(18)
   })
 
-  it('is not granted on the turn the learner fails', () => {
+  it('is not granted on the turn the learner fails a SECOND time in a row', () => {
     // consecutiveFailures is set inside the failure branch; the grant is
     // evaluated at every exit, so it must observe the post-fold value.
     const s = advanceConversationState(
-      progressing({ turnsOnConcept: CONCEPT_TURN_BUDGET - 1 }), WRONG,
+      progressing({ turnsOnConcept: CONCEPT_TURN_BUDGET - 1, consecutiveFailures: 1 }), WRONG,
     )
     expect(s.budgetExtensionGranted).toBe(false)
   })
