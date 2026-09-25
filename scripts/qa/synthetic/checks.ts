@@ -158,7 +158,10 @@ export function checkTurn(cur: TurnRecord, history: readonly TurnRecord[], opts:
   // wrong is a verdict the evidence does not support.
   if (cur.reply.lessonComplete?.complete && !verified) {
     const answers = [...history, cur].flatMap((t) => (t.act.kind === 'answer' ? [t.act] : []))
-    if (answers.some((a) => a.intendedCorrect === true) && !answers.some((a) => a.intendedCorrect === false)) {
+    // An unkeyed answer (the student guessed at a question the model wrote
+    // itself) may have been graded wrong by the model's own key, so "none
+    // wrong" cannot be claimed (tension/friction run, 2026-09-25).
+    if (answers.some((a) => a.intendedCorrect === true) && !answers.some((a) => a.intendedCorrect === false || a.intendedCorrect === null)) {
       f('unfair-close', 'critical', `closed unmastered after ${answers.length} answer(s), none wrong: ${firstSentence(text)}`)
     }
   }

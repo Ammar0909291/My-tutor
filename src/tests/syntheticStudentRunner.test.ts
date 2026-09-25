@@ -277,3 +277,11 @@ describe('ungradeable-question uses the production detector (2026-09-25)', () =>
     expect(at('A 2 kg cart feels a net force of 10 N. What is its acceleration?')).toContain('ungradeable-question')
   })
 })
+
+describe('unfair-close ignores lessons with unkeyed guesses (2026-09-25)', () => {
+  it('a guess at a model-invented question may have been graded wrong, so no unfair-close', () => {
+    const h = [turn(3, reply(), answer('a', true)), turn(4, reply(), { kind: 'answer', message: '40 N', typed: false, intent: 'unkeyed', intendedCorrect: null, question: 'q' } as never)]
+    const t = turn(12, reply({ text: "Let's pause Friction Forces here for now. Worth another look later: Friction Forces.", lessonComplete: { complete: true }, mastery: { phase: 'GUIDE', verified: false } }))
+    expect(checkTurn(t, h).map((f) => f.code)).not.toContain('unfair-close')
+  })
+})
