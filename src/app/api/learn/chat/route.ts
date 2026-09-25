@@ -3854,6 +3854,17 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // One detection, two consumers: the turn directive below and the
           // conversation-state fold after the LLM call.
           lowSignalAckHoisted = isLowSignalAcknowledgement(message)
+          // THIS turn's server grade, when it was against an authored key, is
+          // what the acknowledgement must answer — not the previous turn's
+          // SIGNAL. Synthetic run 2026-09-25 (phys.mech.force, beginner): a
+          // right answer after two misses was told "This is genuinely tricky —
+          // let me try a completely different angle". A model-invented key is
+          // left out, as everywhere else that states a verdict.
+          const { probeKeyIsAuthored: ackKeyIsAuthored } = await import('@/lib/teaching/mcq')
+          const ackThisTurnCorrect: boolean | null =
+            mcqGradeHoisted && typeof mcqGradeHoisted.correct === 'boolean' && ackKeyIsAuthored(pendingMcqHoisted)
+              ? mcqGradeHoisted.correct
+              : null
           systemPrompt += buildTurnDirective({
             state: conversationStateHoisted,
             nextMove,
@@ -3934,7 +3945,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 ? (snapshot.lastSignal as { correctness?: boolean }).correctness ?? null
                 : null
               return classifyAcknowledgementContext(
-                conversationStateHoisted, prevSig, recoveryKeyHoisted !== null, navigationRequestHoisted,
+                conversationStateHoisted, ackThisTurnCorrect ?? prevSig, recoveryKeyHoisted !== null, navigationRequestHoisted,
               )
             })(),
           })

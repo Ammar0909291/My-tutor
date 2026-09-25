@@ -35,6 +35,13 @@ Status checks (owner loop "keep updating handover file"): 2026-09-25 ~04:35 UTC 
 real learners depend on. The runner has no provider budget of its own — adding one (e.g. a
 `RUNNER_MAX_TOKENS` estimate and a pre-run provider health check) is a sensible next step.
 
+## Subject order (owner, 2026-09-25) — binding
+
+**Physics first, then chemistry, then English. Do NOT study biology or mathematics.** Finish the
+physics mechanics launch set (26 topics) before moving to chemistry; English after chemistry. The
+runner is physics-only today (`LAUNCH_SUBJECT='physics'`); chemistry needs its own launch set and
+answer-key wiring before it can run.
+
 ## What the owner asked for (2026-09-24)
 
 - **No school boards.** The product is subject + concept map only.
