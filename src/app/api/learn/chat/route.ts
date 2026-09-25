@@ -9236,6 +9236,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 // below the asset contract, not that the runtime is misbehaving.
                 charsBefore: cleanText.length,
                 charsAfter: ungraded.text.length,
+                // The model text that was cut, so a kept setup sentence whose
+                // question was withheld ("Imagine two people pushing a box … 10 N
+                // and 15 N." above an unrelated authored question — synthetic
+                // run 2026-09-25) can be diagnosed. Model text only, never the
+                // learner's; `[verifier-log]` already logs drafts the same way.
+                before: cleanText.slice(0, 600),
               }))
               cleanText = ungraded.text
             }
