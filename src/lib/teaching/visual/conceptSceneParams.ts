@@ -1489,6 +1489,274 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
       { label: 'Local alignment', description: 'Smith-Waterman — finds the best-matching sub-region only', items: ['BLAST/DIAMOND heuristically approximate this at scale'] },
     ],
   }),
+
+  // Batch 6 (bio.bioinfo, 2 concepts; bio.sys, 4 concepts; bio.div, 6
+  // concepts):
+  'bio.bioinfo.phylogenetics-computational': () => buildCellPathwayScene({
+    conceptId: 'bio.bioinfo.phylogenetics-computational',
+    title: 'The Phylogenetics Workflow',
+    teachingGoal: 'Every tip of a fully resolved tree has been evolving for EXACTLY the same time since the root — no tip is "more primitive" than another.',
+    stages: [
+      { name: 'Align sequences', description: 'the starting multiple sequence alignment' },
+      { name: 'Choose an evolutionary model', description: 'e.g. GTR for DNA — model selection picks the SIMPLEST model that fits' },
+      { name: 'Infer a tree', description: 'distance-based, parsimony, maximum likelihood, or Bayesian methods' },
+      { name: 'Assess confidence', description: 'bootstrap values (ML) or posterior probabilities (Bayesian)' },
+    ],
+  }),
+
+  'bio.bioinfo.structural-bioinformatics': () => buildCellComparisonScene({
+    conceptId: 'bio.bioinfo.structural-bioinformatics',
+    title: 'What AlphaFold2 Predicts — and What It Doesn’t',
+    teachingGoal: '"The protein-structure problem is solved" is incorrect — AlphaFold2 predicts one static conformation, not the full functional picture.',
+    groups: [
+      { label: 'What it predicts well', description: 'the single lowest-energy conformation of an isolated protein', items: ['Near-experimental accuracy for many protein families'] },
+      { label: 'What it does NOT capture', description: 'reliably', items: ['Conformational ensembles (multiple functional states)', 'Ligand-bound states (induced fit)', 'Intrinsically disordered regions', 'Protein complexes (fully)'] },
+    ],
+  }),
+
+  'bio.sys.systems-biology-intro': () => buildCellHubScene({
+    conceptId: 'bio.sys.systems-biology-intro',
+    hubLabel: 'Emergent Network Behaviour',
+    title: 'Four Key Concepts in Systems Biology',
+    teachingGoal: 'A phenomenon like the circadian clock is not located "in" any single gene — it exists in the feedback TOPOLOGY among interacting genes.',
+    spokes: [
+      { name: 'Feedback loops', description: 'negative feedback dampens perturbations; positive feedback amplifies them' },
+      { name: 'Modularity', description: 'networks organise into sub-networks that can be rewired somewhat independently' },
+      { name: 'Robustness vs. fragility', description: 'robust to many perturbations, but fragile at specific hub points ("bow-tie" topology)' },
+      { name: 'Emergence', description: 'system-level behaviour that cannot be predicted from any single component alone' },
+    ],
+  }),
+
+  'bio.sys.gene-regulatory-networks': () => buildCellComparisonScene({
+    conceptId: 'bio.sys.gene-regulatory-networks',
+    title: 'Three Recurring Network Motifs',
+    teachingGoal: 'A GRN is NOT a static wiring diagram — the same topology can produce different output depending on initial conditions and reaction rates.',
+    groups: [
+      { label: 'Feedforward loop', description: 'filters out transient signals, preventing brief noise from triggering a response', items: [] },
+      { label: 'Autoregulation', description: 'a transcription factor activates or represses its OWN gene, tuning response speed', items: [] },
+      { label: 'Bistable toggle switch', description: 'two transcription factors mutually repress each other', items: ['Underlies binary cell-fate decisions'] },
+    ],
+  }),
+
+  'bio.sys.metabolic-network-modelling': () => buildCellComparisonScene({
+    conceptId: 'bio.sys.metabolic-network-modelling',
+    title: 'Flux Balance Analysis vs. Kinetic Models',
+    teachingGoal: 'FBA is NOT a dynamic simulation — it finds a steady-state flux distribution; it does not track concentrations changing over time.',
+    groups: [
+      { label: 'Flux Balance Analysis (FBA)', description: 'linear programming; needs only stoichiometry, no enzyme kinetics', items: ['Predicts gene essentiality', 'Does NOT model dynamics, thermodynamics, or saturation'] },
+      { label: 'Kinetic models', description: 'ordinary differential equations with mechanistic rate laws', items: ['Used when temporal dynamics and saturation matter'] },
+    ],
+  }),
+
+  'bio.sys.synthetic-biology': () => buildCellPathwayScene({
+    conceptId: 'bio.sys.synthetic-biology',
+    title: 'Synthetic Biology: Three Levels of Design',
+    teachingGoal: '"Life created from scratch" conflates genome SYNTHESIS (transplanted into an existing cell) with generating a living cell from non-living chemistry — the latter has never been achieved.',
+    stages: [
+      { name: 'Parts', description: 'standardised BioBrick promoters, ribosome-binding sites, coding sequences, terminators' },
+      { name: 'Devices', description: 'genetic circuits — toggle switches, oscillators, logic gates — implementing computational functions' },
+      { name: 'Systems', description: 'engineered metabolic pathways (artemisinin), biosensors, cell-based therapies' },
+    ],
+  }),
+
+  'bio.div.three-domain-system': () => buildCellComparisonScene({
+    conceptId: 'bio.div.three-domain-system',
+    title: "Woese's Three Domains",
+    teachingGoal: 'Archaea are actually MORE closely related to Eukarya than to Bacteria, despite sharing the same basic prokaryotic cell structure as Bacteria.',
+    groups: [
+      { label: 'Bacteria', description: 'prokaryotic; deeply divergent from Archaea despite shared cell structure', items: [] },
+      { label: 'Archaea', description: 'prokaryotic in structure, but molecularly closer to Eukarya', items: ['Similar RNA polymerases, histone-like proteins'] },
+      { label: 'Eukarya', description: 'has a nucleus and membrane-bound organelles', items: [] },
+    ],
+  }),
+
+  'bio.div.endosymbiotic-theory': () => buildCellComparisonScene({
+    conceptId: 'bio.div.endosymbiotic-theory',
+    title: 'Endosymbiotic Theory: Two Independent Origins',
+    teachingGoal: 'Mitochondrial DNA is molecularly most similar to alpha-proteobacterial DNA, not to the eukaryotic nuclear genome — direct evidence of its bacterial origin.',
+    groups: [
+      { label: 'Mitochondria', description: 'descended from an alpha-proteobacterium', items: ['Circular DNA, 70S ribosomes, binary fission, double membrane'] },
+      { label: 'Chloroplasts', description: 'descended from a cyanobacterium — ancestrally photosynthetic', items: ['Circular DNA, 70S ribosomes, binary fission, double membrane'] },
+    ],
+  }),
+
+  'bio.div.protist-diversity': () => buildCellHubScene({
+    conceptId: 'bio.div.protist-diversity',
+    hubLabel: 'Protista (a catch-all, not a natural group)',
+    title: 'Protist Diversity: Polyphyletic by Definition',
+    teachingGoal: '"Protists are simple, primitive organisms" is false — "primitive" means ANCESTRAL, not simple, and protists are not ancestral to anything in particular.',
+    spokes: [
+      { name: 'Amoebae', description: 'heterotrophic, amoeboid movement' },
+      { name: 'Algae', description: 'photosynthetic' },
+      { name: 'Diatoms', description: 'photosynthetic, silica cell walls' },
+      { name: 'Foraminifera', description: 'shelled, mostly marine' },
+      { name: 'Plasmodium', description: 'the malaria parasite — a complex, multi-host life cycle' },
+    ],
+  }),
+
+  'bio.div.fungal-biology': () => buildCellComparisonScene({
+    conceptId: 'bio.div.fungal-biology',
+    title: 'Three Ecological Roles of Fungi',
+    teachingGoal: 'Fungi are the sister group to ANIMALS (Opisthokonta), not plants — despite their plant-like stationary growth habit.',
+    groups: [
+      { label: 'Decomposers', description: 'break down dead organic matter, recycling nutrients', items: [] },
+      { label: 'Pathogens', description: 'cause disease in plants, animals, or other fungi', items: [] },
+      { label: 'Mycorrhizal partners', description: 'symbiotic associations with plant roots, extending root surface area', items: [] },
+    ],
+  }),
+
+  'bio.div.plant-diversity-alternation-of-generations': () => buildCellPathwayScene({
+    conceptId: 'bio.div.plant-diversity-alternation-of-generations',
+    title: 'The Trend Toward Sporophyte Dominance',
+    teachingGoal: 'Reducing the gametophyte to a microscopic, protected structure removes the need for a water film for sperm to swim — freeing seed plants to colonise dry land.',
+    stages: [
+      { name: 'Mosses', description: 'the gametophyte is dominant (the visible green plant); the sporophyte is a small, dependent stalk' },
+      { name: 'Ferns', description: 'dominance reverses — the large fern IS the sporophyte; the gametophyte is a tiny, independent prothallus' },
+      { name: 'Seed plants', description: 'the gametophyte is microscopic and entirely dependent on the sporophyte (pollen grain, embryo sac)' },
+    ],
+  }),
+
+  'bio.div.cladistics-phylogenetic-thinking': () => buildCellComparisonScene({
+    conceptId: 'bio.div.cladistics-phylogenetic-thinking',
+    title: 'Monophyletic, Paraphyletic, and Polyphyletic Groups',
+    teachingGoal: 'Dolphins are more closely related to hippos than to fish — a fish-like body shape evolved convergently and does not reflect close common ancestry.',
+    groups: [
+      { label: 'Monophyletic (a true clade)', description: 'a common ancestor together with ALL of its descendants', items: [] },
+      { label: 'Paraphyletic', description: 'a common ancestor plus only SOME of its descendants', items: [] },
+      { label: 'Polyphyletic', description: 'unrelated lineages grouped by superficial similarity, no exclusive common ancestor', items: [] },
+    ],
+  }),
+
+  // Batch 7 (bio.micro, 2 concepts; bio.mol, 5 concepts; bio.gen, 1 concept;
+  // bio.evo, 2 concepts; bio.immuno, 1 concept; bio.behav, 1 concept):
+  'bio.micro.viral-replication': () => buildCellComparisonScene({
+    conceptId: 'bio.micro.viral-replication',
+    title: 'Lytic vs. Lysogenic Cycle',
+    teachingGoal: 'Viruses do not reproduce — they replicate by commandeering the host’s ribosomes, energy, and raw materials. Outside a host, a virus is genuinely inert.',
+    groups: [
+      { label: 'Lytic cycle', description: 'attach → inject → hijack host machinery → assemble → lyse the cell', items: ['Releases hundreds of progeny virions'] },
+      { label: 'Lysogenic cycle', description: 'the genome integrates as a prophage, replicating silently with the host', items: ['Bacteriophage λ — excises and turns lytic under cellular stress'] },
+    ],
+  }),
+
+  'bio.micro.horizontal-gene-transfer': () => buildCellComparisonScene({
+    conceptId: 'bio.micro.horizontal-gene-transfer',
+    title: 'Three Mechanisms of Horizontal Gene Transfer',
+    teachingGoal: 'Resistance mutations pre-exist at low frequency BEFORE antibiotic exposure — the antibiotic selects for them, it does not cause them.',
+    groups: [
+      { label: 'Transformation', description: 'a bacterium takes up naked DNA directly from its environment', items: [] },
+      { label: 'Transduction', description: 'DNA is carried between bacteria by a bacteriophage', items: [] },
+      { label: 'Conjugation', description: 'direct cell-to-cell transfer via a pilus', items: [] },
+    ],
+  }),
+
+  'bio.mol.epigenetics': () => buildCellHubScene({
+    conceptId: 'bio.mol.epigenetics',
+    hubLabel: 'Cell-Type-Specific Gene Expression',
+    title: 'Three Epigenetic Mechanisms',
+    teachingGoal: 'Transgenerational epigenetic inheritance is real but limited in mammals — most marks are erased during gametogenesis and embryogenesis.',
+    spokes: [
+      { name: 'DNA methylation', description: 'a methyl group on cytosine at CpG sites generally silences nearby genes' },
+      { name: 'Histone modification', description: 'acetylation loosens chromatin and activates genes; methylation condenses and silences' },
+      { name: 'Non-coding RNA regulation', description: 'ncRNAs contribute an additional regulatory layer' },
+    ],
+  }),
+
+  'bio.mol.noncoding-rna': () => buildCellComparisonScene({
+    conceptId: 'bio.mol.noncoding-rna',
+    title: 'Five Classes of Non-Coding RNA',
+    teachingGoal: '"Junk DNA" is a wrong, outdated label — ENCODE found over 80% of the human genome shows measurable biochemical activity.',
+    groups: [
+      { label: 'rRNA', description: 'forms ribosome structure and provides its catalytic activity', items: [] },
+      { label: 'tRNA', description: 'the amino acid adaptor molecule used in translation', items: [] },
+      { label: 'miRNA', description: 'binds mRNA, triggering degradation or translational repression', items: ['Each regulates hundreds of genes'] },
+      { label: 'siRNA', description: 'mechanistically similar to miRNA, typically exogenous (RNAi)', items: [] },
+      { label: 'lncRNA', description: 'diverse functions, including whole-chromosome regulation', items: ['Xist silences an entire X chromosome'] },
+    ],
+  }),
+
+  'bio.mol.signal-transduction-pathways': () => buildCellPathwayScene({
+    conceptId: 'bio.mol.signal-transduction-pathways',
+    title: 'Signal Transduction: Reception to Response',
+    teachingGoal: 'A single receptor-binding event can activate THOUSANDS of downstream molecules — the effect compounds at each step of the relay.',
+    stages: [
+      { name: 'Reception', description: 'the signal molecule (hormone, growth factor, neurotransmitter) binds a receptor' },
+      { name: 'Transduction', description: 'relay molecules amplify and route the message onward (e.g. cAMP → PKA, or Ras → MAP kinase)' },
+      { name: 'Response', description: 'a change in gene expression, enzyme activation, or cytoskeletal rearrangement' },
+    ],
+  }),
+
+  'bio.mol.dna-damage-repair': () => buildCellComparisonScene({
+    conceptId: 'bio.mol.dna-damage-repair',
+    title: 'Matching DNA Damage Type to Repair Pathway',
+    teachingGoal: 'The largest source of mutations is spontaneous chemistry (deamination, depurination, replication errors), not radiation or toxic chemicals.',
+    groups: [
+      { label: 'Base excision repair (BER)', description: 'fixes small base modifications', items: [] },
+      { label: 'Nucleotide excision repair (NER)', description: 'removes bulky lesions such as UV thymine dimers', items: [] },
+      { label: 'Mismatch repair (MMR)', description: 'corrects replication errors', items: ['MLH1/MSH2 mutations → Lynch syndrome'] },
+      { label: 'HR and NHEJ', description: 'repair double-strand breaks — the most severe damage type', items: ['BRCA1/2 mutations disable HR → breast/ovarian cancer risk'] },
+    ],
+  }),
+
+  'bio.mol.bioenergetics': () => buildCellComparisonScene({
+    conceptId: 'bio.mol.bioenergetics',
+    title: 'Reaction Coupling: Exergonic Drives Endergonic',
+    teachingGoal: 'Living systems are OPEN systems — building ordered structures locally does not violate the second law, since total entropy (cell + surroundings) still increases.',
+    groups: [
+      { label: 'Exergonic reaction', description: 'ΔG < 0 — energy-releasing, spontaneous', items: ['ATP hydrolysis: ΔG ≈ −30.5 kJ/mol'] },
+      { label: 'Endergonic reaction', description: 'ΔG > 0 — energy-requiring, non-spontaneous alone', items: ['Coupled to an exergonic reaction to proceed'] },
+    ],
+  }),
+
+  'bio.gen.transposable-elements': () => buildCellComparisonScene({
+    conceptId: 'bio.gen.transposable-elements',
+    title: 'Class I vs. Class II Transposable Elements',
+    teachingGoal: 'Most TEs are NOT actively transposing — they are silenced by DNA methylation and piRNA pathways, since unchecked transposition causes chromosome instability.',
+    groups: [
+      { label: 'Class I (retrotransposons)', description: 'copy-and-paste via an RNA intermediate', items: ['INCREASES copy number — original stays in place'] },
+      { label: 'Class II (DNA transposons)', description: 'cut-and-paste — the transposase excises and reinserts', items: ['Relocates — does NOT reliably increase copy number'] },
+    ],
+  }),
+
+  'bio.evo.molecular-evolution': () => buildCellComparisonScene({
+    conceptId: 'bio.evo.molecular-evolution',
+    title: 'Purifying Selection vs. Neutral Evolution',
+    teachingGoal: '"Evolution is always driven by natural selection" is wrong at the molecular level — most sequence changes are neutral, fixed by genetic drift.',
+    groups: [
+      { label: 'Strongly conserved sequences', description: 'under purifying (negative) selection — any change is deleterious and eliminated', items: ['Histone H4: nearly identical from yeast to humans'] },
+      { label: 'Highly variable regions', description: 'evolve neutrally — changes carry little fitness consequence', items: ['Fixed by genetic drift, not selection'] },
+    ],
+  }),
+
+  'bio.evo.evo-devo': () => buildCellComparisonScene({
+    conceptId: 'bio.evo.evo-devo',
+    title: 'What Drives Morphological Evolution?',
+    teachingGoal: 'Mouse Pax6 expressed in a fly produces a FLY eye, not a mouse eye — the conserved signal is received by the fly’s own downstream genes.',
+    groups: [
+      { label: 'Regulatory region changes', description: 'controlling WHERE and WHEN a conserved gene is expressed', items: ['The actual driver of most major morphological change', 'Limb loss in snakes, eye reduction in cave fish'] },
+      { label: 'Protein-coding sequence changes', description: 'changes to the gene itself', items: ['NOT the typical explanation for major morphological change'] },
+    ],
+  }),
+
+  'bio.immuno.mhc-antigen-presentation': () => buildCellComparisonScene({
+    conceptId: 'bio.immuno.mhc-antigen-presentation',
+    title: 'MHC Class I vs. Class II',
+    teachingGoal: 'Transplant rejection happens because T cells perceive the donor’s MHC as foreign (MHC restriction) — not because of a generic "overreaction."',
+    groups: [
+      { label: 'MHC class I', description: 'on ALL nucleated cells; presents INSIDE-the-cell peptides', items: ['Detected by cytotoxic T cells (CD8⁺)', 'Leads to destruction of the infected cell'] },
+      { label: 'MHC class II', description: 'only on professional antigen-presenting cells; presents EXTRACELLULAR antigens', items: ['Detected by helper T cells (CD4⁺)', 'Coordinates the broader adaptive response'] },
+    ],
+  }),
+
+  'bio.behav.animal-cognition': () => buildCellComparisonScene({
+    conceptId: 'bio.behav.animal-cognition',
+    title: "Morgan's Canon: Prefer the Simpler Explanation",
+    teachingGoal: 'A simpler explanation must be actively ruled out before concluding a more complex cognitive process (like theory of mind) is genuinely operating.',
+    groups: [
+      { label: 'Simpler explanation', description: 'learned behavioural rules, associative learning, instinct', items: ['Preferred by Morgan’s Canon when it suffices'] },
+      { label: 'Complex explanation', description: 'understanding, theory of mind, flexible problem-solving', items: ['Only concluded when simpler mechanisms cannot account for the behaviour'] },
+    ],
+  }),
 }
 
 const DANIELL_CELL: ElectrochemicalCellParams = {

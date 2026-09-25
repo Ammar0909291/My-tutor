@@ -98,6 +98,33 @@ export const CAMPAIGN_FIXED_CONCEPTS = [
   'bio.biotech.crispr-genome-editing',
   'bio.bioinfo.bioinformatics-intro',
   'bio.bioinfo.sequence-alignment',
+  // Batch 6 — bio.bioinfo (2), bio.sys (4), bio.div (6)
+  'bio.bioinfo.phylogenetics-computational',
+  'bio.bioinfo.structural-bioinformatics',
+  'bio.sys.systems-biology-intro',
+  'bio.sys.gene-regulatory-networks',
+  'bio.sys.metabolic-network-modelling',
+  'bio.sys.synthetic-biology',
+  'bio.div.three-domain-system',
+  'bio.div.endosymbiotic-theory',
+  'bio.div.protist-diversity',
+  'bio.div.fungal-biology',
+  'bio.div.plant-diversity-alternation-of-generations',
+  'bio.div.cladistics-phylogenetic-thinking',
+  // Batch 7 — bio.micro (2), bio.mol (5), bio.gen (1), bio.evo (2),
+  // bio.immuno (1), bio.behav (1)
+  'bio.micro.viral-replication',
+  'bio.micro.horizontal-gene-transfer',
+  'bio.mol.epigenetics',
+  'bio.mol.noncoding-rna',
+  'bio.mol.signal-transduction-pathways',
+  'bio.mol.dna-damage-repair',
+  'bio.mol.bioenergetics',
+  'bio.gen.transposable-elements',
+  'bio.evo.molecular-evolution',
+  'bio.evo.evo-devo',
+  'bio.immuno.mhc-antigen-presentation',
+  'bio.behav.animal-cognition',
 ] as const
 
 describe.each(CAMPAIGN_FIXED_CONCEPTS)('%s now resolves to a faithful Tier 0 scene', (conceptId) => {
