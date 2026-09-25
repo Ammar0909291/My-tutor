@@ -1885,6 +1885,147 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
       { label: 'DNA fingerprinting (STR profiling)', description: 'compares short-tandem-repeat counts across multiple loci', items: ['Requires chain-of-custody AND statistical interpretation'] },
     ],
   }),
+
+  // Batch 9 (bio.biotech, 2 concepts; bio.dev, 3 concepts; bio.div, 6
+  // concepts):
+  'bio.biotech.bioprocess-engineering': () => buildCellPathwayScene({
+    conceptId: 'bio.biotech.bioprocess-engineering',
+    title: 'Downstream Processing: Three Sequential Steps',
+    teachingGoal: 'Scale-up introduces genuinely NEW engineering challenges (surface-area-to-volume ratio drops) — it is not a proportional resizing of an already-solved problem.',
+    stages: [
+      { name: 'Cell separation', description: 'removes the cultured cells from the surrounding culture medium' },
+      { name: 'Purification', description: 'isolates the desired product from other unwanted components' },
+      { name: 'Formulation', description: 'prepares the purified product into its final, stable, usable form' },
+    ],
+  }),
+
+  'bio.biotech.gene-therapy-detail': () => buildCellComparisonScene({
+    conceptId: 'bio.biotech.gene-therapy-detail',
+    title: 'Viral vs. Non-Viral Gene Therapy Vectors',
+    teachingGoal: 'This is a genuine trade-off — not "viral is better" or "non-viral is safer" as absolute statements.',
+    groups: [
+      { label: 'Viral vectors', description: 'higher delivery efficiency', items: ['Risk: immune response, insertional mutagenesis'] },
+      { label: 'Non-viral vectors', description: 'lower safety risk (no viral components)', items: ['Typically lower delivery efficiency'] },
+    ],
+  }),
+
+  'bio.dev.aging-senescence-biology': () => buildCellComparisonScene({
+    conceptId: 'bio.dev.aging-senescence-biology',
+    title: 'Cellular Senescence vs. Apoptosis',
+    teachingGoal: 'A senescent cell stops dividing but remains ALIVE and metabolically active — genuinely different from apoptosis, where the cell is dismantled and eliminated.',
+    groups: [
+      { label: 'Senescence', description: 'permanent, irreversible proliferative arrest — the cell stays alive', items: ['Often secretes inflammatory signals (SASP)'] },
+      { label: 'Apoptosis', description: 'programmed cell death — the cell is actively dismantled and removed', items: [] },
+    ],
+  }),
+
+  'bio.dev.organogenesis': () => buildCellPathwayScene({
+    conceptId: 'bio.dev.organogenesis',
+    title: 'Reciprocal Induction: A Two-Way Signalling Loop',
+    teachingGoal: 'Neither tissue layer could produce the correct organ structure alone — the organ emerges from the back-and-forth exchange itself.',
+    cyclic: true,
+    stages: [
+      { name: 'Epithelium signals mesenchyme', description: 'instructing it to differentiate in a specific way' },
+      { name: 'Mesenchyme signals back to epithelium', description: 'refining or redirecting its further development' },
+    ],
+  }),
+
+  'bio.dev.regeneration-biology': () => buildCellComparisonScene({
+    conceptId: 'bio.dev.regeneration-biology',
+    title: 'Regenerative Capacity Varies — But Shares One Mechanism: Blastema Formation',
+    teachingGoal: 'Mammals are not LACKING the machinery — they evolved to favour rapid scarring over slower, more extensive blastema-based regrowth.',
+    groups: [
+      { label: 'Planarians', description: 'whole-body regeneration from a small fragment', items: [] },
+      { label: 'Axolotls', description: 'regenerate entire limbs (bone, muscle, nerve, skin)', items: [] },
+      { label: 'Zebrafish', description: 'regenerate fin AND heart tissue', items: [] },
+      { label: 'Mammals', description: 'favour rapid scarring over blastema-based regrowth', items: ['Trade-off: fast wound closure vs. full structural restoration'] },
+    ],
+  }),
+
+  'bio.div.animal-body-plans-symmetry': () => buildCellComparisonScene({
+    conceptId: 'bio.div.animal-body-plans-symmetry',
+    title: 'Three Body Cavity Types',
+    teachingGoal: 'A true coelom (completely lined by mesoderm) gives organs space to develop and move independently of the body wall.',
+    groups: [
+      { label: 'Acoelomate', description: 'no significant body cavity — solid mesodermal tissue fills the space', items: [] },
+      { label: 'Pseudocoelomate', description: 'a body cavity only PARTIALLY lined by mesoderm', items: [] },
+      { label: 'Coelomate', description: 'a TRUE coelom — completely lined by mesoderm', items: [] },
+    ],
+  }),
+
+  'bio.div.arthropod-diversity': () => buildCellComparisonScene({
+    conceptId: 'bio.div.arthropod-diversity',
+    title: 'Four Arthropod Classes',
+    teachingGoal: 'Moulting is the direct, necessary solution to the growth constraint the rigid exoskeleton itself creates — not an unrelated co-occurring trait.',
+    groups: [
+      { label: 'Insecta', description: 'three-part body (head, thorax, abdomen), 3 pairs of legs', items: [] },
+      { label: 'Arachnida', description: 'two-part body (cephalothorax, abdomen), 4 pairs of legs', items: [] },
+      { label: 'Crustacea', description: 'predominantly aquatic, 2 pairs of antennae', items: [] },
+      { label: 'Myriapoda', description: 'many segments, 1–2 pairs of legs per segment', items: [] },
+    ],
+  }),
+
+  'bio.div.chordate-vertebrate-diversity': () => buildCellStructureScene({
+    conceptId: 'bio.div.chordate-vertebrate-diversity',
+    subject: 'Phylum Chordata',
+    boundaryLabel: 'Chordate embryonic hallmarks',
+    teachingGoal: 'These four features are defining because they appear during EMBRYONIC development — many are later modified or lost in the adult (e.g. the notochord is replaced by the vertebral column).',
+    parts: [
+      { name: 'Notochord', description: 'a flexible, rod-like structure providing longitudinal support' },
+      { name: 'Dorsal hollow nerve cord', description: 'runs along the back — develops into the spinal cord and brain' },
+      { name: 'Pharyngeal slits', description: 'openings used for filter-feeding or respiration in some chordates' },
+      { name: 'Post-anal tail', description: 'extends beyond the anus' },
+    ],
+  }),
+
+  'bio.div.echinoderm-deuterostome-diversity': () => buildCellStructureScene({
+    conceptId: 'bio.div.echinoderm-deuterostome-diversity',
+    subject: 'Echinodermata',
+    boundaryLabel: 'Echinodermata (a deuterostome, despite its adult form)',
+    teachingGoal: 'Pentaradial symmetry is SECONDARILY DERIVED — echinoderms evolved from a bilateral ancestor and re-evolved radial symmetry; their larvae are bilateral.',
+    parts: [
+      { name: 'Deuterostome development', description: 'the blastopore becomes the anus — the shared signature linking echinoderms to chordates' },
+      { name: 'Pentaradial symmetry', description: 'secondarily derived, not ancestral — larvae are bilateral' },
+      { name: 'Water vascular system', description: 'a unique hydraulic system for locomotion, feeding, and gas exchange' },
+      { name: 'Endoskeleton', description: 'internal, calcium-carbonate ossicles — unlike an arthropod’s external exoskeleton' },
+    ],
+  }),
+
+  'bio.div.fish-amphibian-diversity': () => buildCellComparisonScene({
+    conceptId: 'bio.div.fish-amphibian-diversity',
+    title: 'Three Fish Groups by Jaw and Skeleton',
+    teachingGoal: 'Amphibians achieved a PARTIAL water-to-land transition — adults tolerate land, but reproduction remains tied to water (no amniotic egg).',
+    groups: [
+      { label: 'Jawless fish', description: 'lack true jaws — the most ancestral condition', items: ['Lampreys, hagfish'] },
+      { label: 'Cartilaginous fish', description: 'true jaws, skeleton made of cartilage', items: ['Sharks, rays'] },
+      { label: 'Bony fish', description: 'true jaws AND a bony skeleton', items: ['The most numerous and diverse group'] },
+    ],
+  }),
+
+  'bio.div.invertebrate-diversity-major-phyla': () => buildCellComparisonScene({
+    conceptId: 'bio.div.invertebrate-diversity-major-phyla',
+    title: 'Six Invertebrate Phyla by Defining Feature',
+    teachingGoal: 'Classifying a specimen requires checking the SPECIFIC combination of symmetry, germ layers, body cavity, and the phylum’s own unique feature — not rote name memorisation.',
+    groups: [
+      { label: 'Porifera', description: 'cellular-grade organisation — no true tissues', items: ['Sponges'] },
+      { label: 'Cnidaria', description: 'radial symmetry, nematocyst stinging cells', items: ['Jellyfish, corals'] },
+      { label: 'Platyhelminthes', description: 'triploblastic, acoelomate, flattened body', items: ['Flatworms'] },
+      { label: 'Nematoda', description: 'pseudocoelomate', items: ['Roundworms'] },
+      { label: 'Annelida', description: 'true segmentation, full coelom', items: ['Segmented worms'] },
+      { label: 'Mollusca', description: 'foot, visceral mass, mantle — widest body-plan diversity', items: ['Snails, cephalopods'] },
+    ],
+  }),
+
+  'bio.div.mammalian-diversity': () => buildCellComparisonScene({
+    conceptId: 'bio.div.mammalian-diversity',
+    title: 'Three Mammalian Reproductive Strategies',
+    teachingGoal: 'These are THREE different solutions within the SAME clade — not a linear progression from "primitive" to "advanced."',
+    groups: [
+      { label: 'Monotremes', description: 'lay eggs — still fully mammalian (hair, mammary glands, endothermy)', items: ['Platypus, echidna'] },
+      { label: 'Marsupials', description: 'live but developmentally immature young, finishing development in a pouch', items: ['Kangaroos, opossums'] },
+      { label: 'Placental mammals', description: 'longer internal development, nourished via a placenta', items: [] },
+    ],
+  }),
 }
 
 const DANIELL_CELL: ElectrochemicalCellParams = {
