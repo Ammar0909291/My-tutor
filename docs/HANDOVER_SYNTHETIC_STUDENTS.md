@@ -19,6 +19,11 @@ Status checks (owner loop "keep updating handover file"): 2026-09-25 ~04:35 UTC 
 
 2026-09-25 05:33 UTC — no AI calls in production in the last hour (no traffic), so Groq's state is unobserved; last seen blocked at ~04:27. Egress idle: rows 189,640,604 (+707 since F7). Runs still paused.
 
+2026-09-25 ~06:15 UTC — owner said "keep working" (no Groq/billing decision yet), so work continued WITHOUT runs:
+- **Runner provider guard** (`scripts/qa/synthetic/run.ts`): `RUNNER_ALLOWED_PROVIDERS` (default `groq,memory`) and `RUNNER_MAX_OFF_PROVIDER_TURNS` (default 2). Two consecutive turns served by any other provider stop the whole run; those lessons are left out of the scorecard. The run file is now written after every lesson (a container restart can no longer lose a run's results).
+- **Phantom simulation claim** (`visualRegistry.ts`): "…the 3D Newton's Forces simulation on your screen." with nothing attached is now stripped; simulation/animation/visualization added to the present-tense claim patterns (not to `VISUAL_PROMISE_RE`, which drives force-rendering).
+- When the owner clears the stop, the guard makes the next run safe: if Groq is still blocked, the run ends after 2 turns instead of spending Gemini's quota.
+
 **Do not start another run until the owner has (1) decided on the Groq spend alert/billing and
 (2) set a token budget for synthetic runs.** Further runs would now spend the Gemini quota that
 real learners depend on. The runner has no provider budget of its own — adding one (e.g. a

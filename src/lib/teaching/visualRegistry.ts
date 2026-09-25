@@ -934,12 +934,18 @@ export function textPromisesUnfulfilledVisual(text: string): boolean {
 // function's job is making sure the LEARNER never reads a false claim about
 // their own screen. Scoped to the sentence, not the whole turn, so the rest
 // of the (usually correct) explanation survives.
+// "simulation"/"animation"/"visualization" added 2026-09-25 (synthetic run,
+// phys.mech.newtons-first-law, Gemini-served, no figure attached): "Let's check
+// how this applies to a brand-new scenario with the 3D Newton's Forces
+// simulation on your screen." The product does ship 3D simulations, so the
+// model has a real word to borrow; the claim is only false when none is
+// attached, which is the only time this runs.
 const SCREEN_CLAIM_RE = new RegExp(
-  `\\b(diagram|figure|picture|image|graph|chart|illustration|flowchart|flow chart|sketch|drawing)\\b[^.!?\\n]{0,60}\\b(on (your|the) screen|in front of you|you${APOS}re looking at|you have (on|in front of))\\b`,
+  `\\b(diagram|figure|picture|image|graph|chart|illustration|flowchart|flow chart|sketch|drawing|simulation|animation|visuali[sz]ation)\\b[^.!?\\n]{0,60}\\b(on (your|the) screen|in front of you|you${APOS}re looking at|you have (on|in front of))\\b`,
   'i',
 )
 const LOOK_AT_CLAIM_RE =
-  /\b(look at|take a look at|glance at)\b[^.!?\n]{0,40}\b(diagram|figure|picture|image|graph|chart|illustration|flowchart|flow chart|sketch)\b[^.!?\n]{0,60}\b(on (your|the) screen|already|attached|beside)?/i
+  /\b(look at|take a look at|glance at)\b[^.!?\n]{0,40}\b(diagram|figure|picture|image|graph|chart|illustration|flowchart|flow chart|sketch|simulation|animation)\b[^.!?\n]{0,60}\b(on (your|the) screen|already|attached|beside)?/i
 // "The diagram IS a flow chart", "the image IS a process flow diagram" —
 // measured (Chemistry/English, both with no visual field returned at all):
 // a bare definite-article description with no screen-reference and no
@@ -948,7 +954,7 @@ const LOOK_AT_CLAIM_RE =
 // ("a diagram would show...") or the legitimate imperative-invitation form
 // already covered by VISUAL_PROMISE_RE.
 const DEFINITE_DESCRIPTION_RE =
-  /\b(the|this)\s+(diagram|figure|picture|image|graph|chart|illustration|flowchart|flow chart|sketch|drawing)\b[^.!?\n]{0,10}\b(is|shows|depicts|illustrates|represents|split)\b/i
+  /\b(the|this)\s+(diagram|figure|picture|image|graph|chart|illustration|flowchart|flow chart|sketch|drawing|simulation|animation)\b[^.!?\n]{0,10}\b(is|shows|depicts|illustrates|represents|split)\b/i
 
 /** Splits on sentence-ending punctuation, keeping the punctuation with the
  *  sentence it ends — deliberately naive (no NLP dependency) since it only

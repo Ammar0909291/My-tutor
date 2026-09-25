@@ -16,6 +16,11 @@
  *   RUNNER_MAX_TOTAL_TURNS=200           hard cap for the whole run
  *   RUNNER_PAUSE_MS=1200                 between turns (provider rate limits)
  *   RUNNER_KEEP_ACCOUNTS=1               do not delete the accounts afterwards
+ *   RUNNER_ALLOWED_PROVIDERS=groq,memory which providers may serve turns (default groq,memory)
+ *   RUNNER_MAX_OFF_PROVIDER_TURNS=2      stop the WHOLE run after this many consecutive turns
+ *                                        served by any other provider (a fallback provider's
+ *                                        quota belongs to real learners — 2026-09-25, Groq
+ *                                        spend limit: two runs went entirely to Gemini)
  *   QA_OUT=run.json                      run file (default ./synthetic-run-<time>.json)
  *   QA_SCORECARD=scorecard.md            also write the scorecard here
  *   QA_BASE_URL=…                        default: production
@@ -94,7 +99,34 @@ function correctIndexOf(reply: TutorReply): number | null {
 }
 
 // ─── one lesson ──────────────────────────────────────────────────────────────
-interface Budget { used: number; max: number }
+interface Budget {
+  used: number
+  max: number
+  /** Consecutive turns served by a provider outside the allowed set. */
+  offProvider?: number
+  /** Set once the provider guard trips; every later lesson is skipped. */
+  stopped?: string | null
+}
+
+export interface ProviderGuardOptions { allowed: string[]; maxOff: number }
+
+/** Count consecutive off-provider turns; trip when the count reaches `maxOff`.
+ *  A turn with no provider (e.g. a deterministic serve) neither counts nor resets. */
+export function providerGuard(budget: Budget, provider: string | null | undefined, opts: ProviderGuardOptions): string | null {
+  if (!provider) return null
+  if (opts.allowed.includes(provider)) { budget.offProvider = 0; return null }
+  budget.offProvider = (budget.offProvider ?? 0) + 1
+  if (opts.maxOff > 0 && budget.offProvider >= opts.maxOff) {
+    budget.stopped = `provider fallback: ${budget.offProvider} consecutive turns served by ${provider} (allowed: ${opts.allowed.join(',')})`
+    return budget.stopped
+  }
+  return null
+}
+
+function providerGuardOptions(): ProviderGuardOptions {
+  const allowed = (process.env.RUNNER_ALLOWED_PROVIDERS ?? 'groq,memory').split(',').map((x) => x.trim()).filter(Boolean)
+  return { allowed, maxOff: Number(process.env.RUNNER_MAX_OFF_PROVIDER_TURNS ?? 2) }
+}
 
 async function studyTopic(acct: QaAccount, persona: Persona, topic: string, curriculum: any[], maxTurns: number, pauseMs: number, budget: Budget): Promise<LessonResult> {
   const result: LessonResult = {
@@ -118,6 +150,7 @@ async function studyTopic(acct: QaAccount, persona: Persona, topic: string, curr
 
     let state = initialPersonaState()
     for (let i = 1; i <= maxTurns; i++) {
+      if (budget.stopped) { result.summary.stoppedBecause = budget.stopped; break }
       if (budget.used >= budget.max) { result.summary.stoppedBecause = 'run turn budget'; break }
       const onScreen = result.turns[result.turns.length - 1].reply.mcq
       const key = onScreen ? keyFor(onScreen.question, onScreen.options) : null
@@ -132,6 +165,8 @@ async function studyTopic(acct: QaAccount, persona: Persona, topic: string, curr
       result.findings.push(...found)
       const m = reply.mastery
       console.log(`  [${persona.id} ${topic.replace('phys.mech.', '')} t${i}] ${act.kind === 'answer' ? (act.intendedCorrect === null ? 'tap?' : act.intendedCorrect ? 'right' : 'wrong') : 'say'} "${act.message.slice(0, 40)}" -> ${reply.provider} ${m?.phase ?? '?'} v=${m?.verifiedCheckCorrect ?? 0}/${m?.verifiedPracticeCorrect ?? 0}${reply.mcq ? ' +mcq' : ''}${found.length ? ' !! ' + found.map((f) => f.code).join(',') : ''}`)
+      const tripped = providerGuard(budget, reply.provider, providerGuardOptions())
+      if (tripped) { console.log(`  STOP — ${tripped}`); result.summary.stoppedBecause = tripped; break }
       if (reachedMastery(m)) { result.summary.mastered = true; result.summary.turnsToMastery = i; result.summary.stoppedBecause = 'mastered'; break }
       if (reply.lessonComplete?.complete) { result.summary.closed = true; result.summary.stoppedBecause = 'lesson closed'; break }
       if (checkLesson(result.turns).some((f) => f.code === 'stuck')) { result.summary.stoppedBecause = 'stuck'; break }
@@ -172,15 +207,28 @@ async function main() {
 
   const lessons: LessonResult[] = []
   const accounts: RunFile['accounts'] = []
+  const out = process.env.QA_OUT ?? `synthetic-run-${startedAt.replace(/[:.]/g, '-')}.json`
+  // Written after every lesson, not only at the end: a container restart on
+  // 2026-09-24 killed a run after 8 lessons and its results were lost.
+  const writeRun = (): RunFile => {
+    const run: RunFile = {
+      version: 1, base: BASE, gitSha, startedAt, finishedAt: new Date().toISOString(),
+      launchSet: topics, personas: personas.map((p) => p.id), maxTurns, totalTurns: budget.used, lessons, accounts,
+      ...(budget.stopped ? { stoppedBecause: budget.stopped } : {}),
+    }
+    writeFileSync(out, JSON.stringify(run, null, 2))
+    return run
+  }
   for (const persona of personas) {
-    if (budget.used >= budget.max) break
+    if (budget.used >= budget.max || budget.stopped) break
     const acct = await createQaAccount(`syn-${persona.id}`)
     try {
       const curriculum = (await api(acct.cookie, `/api/curriculum?subject=${LAUNCH_SUBJECT}`)).lessons ?? []
       for (const topic of topics) {
-        if (budget.used >= budget.max) break
+        if (budget.used >= budget.max || budget.stopped) break
         console.log(`\n### ${persona.id} — ${topic}`)
         lessons.push(await studyTopic(acct, persona, topic, curriculum, maxTurns, pauseMs, budget))
+        writeRun()
       }
     } finally {
       if (process.env.RUNNER_KEEP_ACCOUNTS === '1') accounts.push({ persona: persona.id, deleted: false, reloginBlocked: false })
@@ -188,12 +236,7 @@ async function main() {
     }
   }
 
-  const run: RunFile = {
-    version: 1, base: BASE, gitSha, startedAt, finishedAt: new Date().toISOString(),
-    launchSet: topics, personas: personas.map((p) => p.id), maxTurns, totalTurns: budget.used, lessons, accounts,
-  }
-  const out = process.env.QA_OUT ?? `synthetic-run-${startedAt.replace(/[:.]/g, '-')}.json`
-  writeFileSync(out, JSON.stringify(run, null, 2))
+  const run = writeRun()
   // Readiness needs three runs; a single run's card says so rather than calling a topic ready.
   const card = renderScorecardMarkdown(buildScorecard([run]), run.personas)
   if (process.env.QA_SCORECARD) writeFileSync(process.env.QA_SCORECARD, card)

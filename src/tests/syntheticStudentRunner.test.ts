@@ -234,3 +234,37 @@ describe('readiness', () => {
     expect(card.critical).toHaveLength(1)
   })
 })
+
+describe('provider guard (2026-09-25: Groq spend limit, two runs served entirely by Gemini)', () => {
+  const opts = { allowed: ['groq', 'memory'], maxOff: 2 }
+  it('trips after two consecutive off-provider turns and stays tripped', async () => {
+    const { providerGuard } = await import('../../scripts/qa/synthetic/run')
+    const b = { used: 0, max: 100 } as { used: number; max: number; offProvider?: number; stopped?: string | null }
+    expect(providerGuard(b, 'groq', opts)).toBeNull()
+    expect(providerGuard(b, 'gemini', opts)).toBeNull()
+    expect(providerGuard(b, 'gemini', opts)).toMatch(/provider fallback: 2 consecutive turns served by gemini/)
+    expect(b.stopped).toMatch(/provider fallback/)
+  })
+  it('an allowed turn resets the count; a turn with no provider neither counts nor resets', async () => {
+    const { providerGuard } = await import('../../scripts/qa/synthetic/run')
+    const b = { used: 0, max: 100 } as { used: number; max: number; offProvider?: number; stopped?: string | null }
+    providerGuard(b, 'gemini', opts)
+    providerGuard(b, 'groq', opts)
+    expect(providerGuard(b, 'gemini', opts)).toBeNull()
+    expect(providerGuard(b, null, opts)).toBeNull()
+    expect(providerGuard(b, 'openrouter', opts)).toMatch(/provider fallback/)
+  })
+  it('a lesson cut short by the guard is left out of the scorecard', () => {
+    const lesson = (stoppedBecause: string, mastered: boolean) => ({
+      persona: 'beginner', topic: 'phys.mech.force', sessionId: null, turns: [], findings: [],
+      summary: { turns: 3, mastered, turnsToMastery: mastered ? 3 : null, closed: false, stoppedBecause, finalPhase: null, verified: '0/0' },
+    })
+    const run = (l: ReturnType<typeof lesson>, at: string) => ({
+      version: 1 as const, base: 'x', gitSha: null, startedAt: at, finishedAt: at, launchSet: ['phys.mech.force'],
+      personas: ['beginner'], maxTurns: 18, totalTurns: 3, lessons: [l], accounts: [],
+    })
+    const card = buildScorecard([run(lesson('mastered', true), 'a'), run(lesson('provider fallback: 2 consecutive turns served by gemini (allowed: groq)', false), 'b')], { requiredRuns: 1 })
+    expect(card.topics[0].personas.beginner.attempts).toBe(1)
+    expect(card.topics[0].personas.beginner.mastered).toBe(1)
+  })
+})

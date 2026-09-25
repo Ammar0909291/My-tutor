@@ -42,6 +42,8 @@ export interface RunFile {
   totalTurns: number
   lessons: LessonResult[]
   accounts: Array<{ persona: string; deleted: boolean; reloginBlocked: boolean }>
+  /** Set when the provider guard stopped the run early. */
+  stoppedBecause?: string
 }
 
 export interface PersonaScore { attempts: number; mastered: number; medianTurnsToMastery: number | null }
@@ -74,7 +76,11 @@ export function buildScorecard(
   const topics: TopicScore[] = []
 
   for (const topic of topicOrder) {
-    const lessons = runs.flatMap((r) => r.lessons.filter((l) => l.topic === topic).map((l) => ({ l, run: r.startedAt })))
+    // A lesson the provider guard cut short measured the provider, not the
+    // product: it is left out rather than scored as not-mastered.
+    const lessons = runs.flatMap((r) => r.lessons
+      .filter((l) => l.topic === topic && !l.summary.stoppedBecause.startsWith('provider fallback'))
+      .map((l) => ({ l, run: r.startedAt })))
     if (!lessons.length) continue
     const runsWithTopic = new Set(lessons.map((x) => x.run)).size
     const personaIds = opts.requiredPersonas ?? [...new Set(runs.flatMap((r) => r.personas))]

@@ -64,3 +64,17 @@ describe('stripPhantomVisualClaims', () => {
     expect(result).not.toMatch(/on your screen/i)
   })
 })
+
+describe('a simulation claimed with none attached (synthetic run, 2026-09-25, Gemini-served)', () => {
+  it('the production sentence is removed; the teaching around it stays', () => {
+    const text = 'Now, to bring us back to our main path on Newton\'s First Law — Inertia, remember that an object stays at rest or keeps moving at a constant velocity unless acted upon by a net external force.\n\n'
+      + 'Let\'s check how this applies to a brand-new scenario with the 3D Newton\'s Forces simulation on your screen.'
+    const out = stripPhantomVisualClaims(text)
+    expect(out).not.toMatch(/simulation on your screen/)
+    expect(out).toContain('net external force')
+  })
+  it('talking about simulations in general is untouched', () => {
+    const t = 'Engineers often run a computer simulation before building a bridge.'
+    expect(stripPhantomVisualClaims(t)).toBe(t)
+  })
+})
