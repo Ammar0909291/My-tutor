@@ -1757,6 +1757,134 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
       { label: 'Complex explanation', description: 'understanding, theory of mind, flexible problem-solving', items: ['Only concluded when simpler mechanisms cannot account for the behaviour'] },
     ],
   }),
+
+  // Batch 8 (bio.behav, 8 concepts; bio.bioinfo, 3 concepts; bio.biotech, 1
+  // concept):
+  'bio.behav.animal-communication': () => buildCellComparisonScene({
+    conceptId: 'bio.behav.animal-communication',
+    title: 'Three Signal Modalities',
+    teachingGoal: 'A signal’s honesty comes SPECIFICALLY from its being costly to produce (the handicap principle) — not despite that cost.',
+    groups: [
+      { label: 'Visual signals', description: 'rapid, detailed, but need line of sight and short range', items: [] },
+      { label: 'Auditory signals', description: 'travel far, around obstacles, work in the dark', items: [] },
+      { label: 'Chemical (pheromone) signals', description: 'persist over time, travel far, but transmit slowly', items: [] },
+    ],
+  }),
+
+  'bio.behav.foraging-behavior': () => buildCellComparisonScene({
+    conceptId: 'bio.behav.foraging-behavior',
+    title: 'Risk-Sensitive Foraging',
+    teachingGoal: 'The marginal value theorem predicts an animal should leave a patch while food STILL remains, once the current intake rate drops to the habitat average.',
+    groups: [
+      { label: 'Secure energy state', description: 'adequate reserves', items: ['Risk-AVERSE: prefers a predictable, lower-variance food source'] },
+      { label: 'Desperate energy state', description: 'insufficient reserves to survive on the "safe" option', items: ['Risk-PRONE: prefers the higher-variance "gamble"'] },
+    ],
+  }),
+
+  'bio.behav.human-behavioral-ecology-evolutionary-psych': () => buildCellComparisonScene({
+    conceptId: 'bio.behav.human-behavioral-ecology-evolutionary-psych',
+    title: 'Two Inheritance Systems, Different Speeds',
+    teachingGoal: 'An evolutionary explanation being logically coherent is NOT the same as it being the actual explanation — each claim needs its own evidence.',
+    groups: [
+      { label: 'Genetic evolution', description: 'requires MULTIPLE generations of differential reproduction to spread', items: [] },
+      { label: 'Cultural evolution', description: 'spreads via teaching, imitation, communication — can change within a single generation', items: ['Operates alongside, not instead of, genetic evolution'] },
+    ],
+  }),
+
+  'bio.behav.innate-behavior-instinct': () => buildCellComparisonScene({
+    conceptId: 'bio.behav.innate-behavior-instinct',
+    title: 'Reflex vs. Fixed Action Pattern',
+    teachingGoal: 'A fixed action pattern is not spontaneous — it requires a specific sign stimulus to release it, then runs to completion largely independent of feedback.',
+    groups: [
+      { label: 'Simple reflex', description: 'direct, single-muscle-group stimulus-response, minimal neural processing', items: ['E.g. the knee-jerk reflex'] },
+      { label: 'Fixed action pattern', description: 'complex, coordinated, multi-step sequence, triggered by a sign stimulus', items: ['E.g. courtship display, nest-building', 'Stereotyped and largely unmodifiable once triggered'] },
+    ],
+  }),
+
+  'bio.behav.kin-selection-altruism': () => buildCellComparisonScene({
+    conceptId: 'bio.behav.kin-selection-altruism',
+    title: 'Kin Selection vs. Reciprocal Altruism',
+    teachingGoal: "Hamilton's rule (rB > C): a costly act toward a close relative can be favoured even when the same act toward a stranger would not be.",
+    groups: [
+      { label: 'Kin selection', description: 'favoured when relatedness-weighted benefit (rB) exceeds cost (C)', items: ['Depends on shared genes (inclusive fitness)'] },
+      { label: 'Reciprocal altruism', description: 'cooperation between NON-relatives, expecting future reciprocation', items: ['Requires repeated interactions and individual recognition', 'Does NOT rely on shared genes'] },
+    ],
+  }),
+
+  'bio.behav.learning-and-behavior': () => buildCellComparisonScene({
+    conceptId: 'bio.behav.learning-and-behavior',
+    title: 'Four Forms of Learning',
+    teachingGoal: 'Classical conditioning links stimulus-TO-stimulus; operant conditioning links behaviour-TO-consequence — a qualitatively different association.',
+    groups: [
+      { label: 'Habituation', description: 'non-associative — decreased response to a repeated, inconsequential stimulus', items: [] },
+      { label: 'Classical conditioning', description: 'associates a neutral stimulus with one that already triggers a response', items: ["Pavlov's dogs"] },
+      { label: 'Operant conditioning', description: 'associates a behaviour with its consequence (reward/punishment)', items: [] },
+      { label: 'Imprinting', description: 'occurs ONLY during a narrow critical period', items: [] },
+    ],
+  }),
+
+  'bio.behav.mating-systems-sexual-selection': () => buildCellComparisonScene({
+    conceptId: 'bio.behav.mating-systems-sexual-selection',
+    title: 'Intrasexual vs. Intersexual Selection',
+    teachingGoal: 'A trait can be favoured by sexual selection even while reducing survival — the peacock’s tail persists because its mating benefit outweighs its survival cost.',
+    groups: [
+      { label: 'Intrasexual selection', description: 'competition BETWEEN members of the same sex for mates', items: ['Favours body size, weapons, aggression'] },
+      { label: 'Intersexual selection', description: 'mate choice exercised by one sex over the other', items: ['Favours ornamentation, courtship displays'] },
+    ],
+  }),
+
+  'bio.behav.social-behavior-eusociality': () => buildCellStructureScene({
+    conceptId: 'bio.behav.social-behavior-eusociality',
+    subject: 'Eusociality',
+    boundaryLabel: 'Eusociality (all three required together)',
+    teachingGoal: 'No single feature alone qualifies a species as eusocial — all three must be present together.',
+    parts: [
+      { name: 'Reproductive division of labour', description: 'only a small subset (queens) reproduce; workers do not' },
+      { name: 'Overlapping generations', description: 'offspring remain in the natal colony with their parents' },
+      { name: 'Cooperative brood care', description: 'individuals other than the parents care for offspring not their own' },
+    ],
+  }),
+
+  'bio.bioinfo.comparative-genomics': () => buildCellComparisonScene({
+    conceptId: 'bio.bioinfo.comparative-genomics',
+    title: 'Orthologs vs. Paralogs',
+    teachingGoal: 'The distinguishing criterion: was the divergence produced by SPECIATION (orthologs) or by DUPLICATION within one genome (paralogs)?',
+    groups: [
+      { label: 'Orthologs', description: 'genes in DIFFERENT species, diverged via a SPECIATION event', items: ['Typically retain the same function'] },
+      { label: 'Paralogs', description: 'genes WITHIN the same genome, diverged via a GENE DUPLICATION event', items: ['Can diverge toward different specialised functions'] },
+    ],
+  }),
+
+  'bio.bioinfo.genome-sequencing-technologies': () => buildCellComparisonScene({
+    conceptId: 'bio.bioinfo.genome-sequencing-technologies',
+    title: 'Short-Read vs. Long-Read Sequencing',
+    teachingGoal: 'Higher coverage means each position is confirmed by multiple independent reads, allowing random sequencing errors to be statistically identified and corrected.',
+    groups: [
+      { label: 'Short-read', description: 'many short fragments, highly accurate per base', items: ['Struggles with long repetitive regions'] },
+      { label: 'Long-read', description: 'fewer, much longer reads, can span repetitive regions', items: ['Lower per-base accuracy than short-read'] },
+    ],
+  }),
+
+  'bio.bioinfo.multiomics-statistical-genomics': () => buildCellPathwayScene({
+    conceptId: 'bio.bioinfo.multiomics-statistical-genomics',
+    title: 'From Transcript to Metabolite: Three Omics Layers',
+    teachingGoal: 'Testing 10,000 genes with NO real effects at p < 0.05 would still be expected to produce ≈ 500 false positives by pure chance — why correction is required.',
+    stages: [
+      { name: 'Transcriptomics (RNA-seq)', description: 'which genes are being transcribed, and at what level' },
+      { name: 'Proteomics', description: 'which proteins are actually present — can differ from transcript levels' },
+      { name: 'Metabolomics', description: 'the resulting small-molecule metabolic state' },
+    ],
+  }),
+
+  'bio.biotech.agricultural-forensic-biotechnology': () => buildCellComparisonScene({
+    conceptId: 'bio.biotech.agricultural-forensic-biotechnology',
+    title: 'Marker-Assisted Breeding vs. DNA Fingerprinting',
+    teachingGoal: 'Even a perfect STR match with perfect chain-of-custody still requires statistical interpretation to state its evidentiary strength correctly.',
+    groups: [
+      { label: 'Marker-assisted breeding', description: 'non-transgenic — uses genetic markers to select among conventionally cross-bred individuals', items: [] },
+      { label: 'DNA fingerprinting (STR profiling)', description: 'compares short-tandem-repeat counts across multiple loci', items: ['Requires chain-of-custody AND statistical interpretation'] },
+    ],
+  }),
 }
 
 const DANIELL_CELL: ElectrochemicalCellParams = {

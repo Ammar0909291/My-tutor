@@ -125,6 +125,19 @@ export const CAMPAIGN_FIXED_CONCEPTS = [
   'bio.evo.evo-devo',
   'bio.immuno.mhc-antigen-presentation',
   'bio.behav.animal-cognition',
+  // Batch 8 — bio.behav (8), bio.bioinfo (3), bio.biotech (1)
+  'bio.behav.animal-communication',
+  'bio.behav.foraging-behavior',
+  'bio.behav.human-behavioral-ecology-evolutionary-psych',
+  'bio.behav.innate-behavior-instinct',
+  'bio.behav.kin-selection-altruism',
+  'bio.behav.learning-and-behavior',
+  'bio.behav.mating-systems-sexual-selection',
+  'bio.behav.social-behavior-eusociality',
+  'bio.bioinfo.comparative-genomics',
+  'bio.bioinfo.genome-sequencing-technologies',
+  'bio.bioinfo.multiomics-statistical-genomics',
+  'bio.biotech.agricultural-forensic-biotechnology',
 ] as const
 
 describe.each(CAMPAIGN_FIXED_CONCEPTS)('%s now resolves to a faithful Tier 0 scene', (conceptId) => {
