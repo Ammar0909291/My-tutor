@@ -4042,9 +4042,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 visualDecisionHoisted?.graphical ?? false,
               )
             } else {
+              // The FORM of an example request (everyday vs a concrete instance
+              // in the subject's own terms) — prompt text only; the request
+              // kind every authority reads is unchanged. See requestedExampleForm.
+              const { requestedExampleForm } = await import('@/lib/teaching/masteryGate')
               systemPrompt += buildLearnerRequestBlock(
                 learnerRequestHoisted, availableVisualHoisted, remediationTier, hasEstablishedExample,
                 undefined, undefined, visualDecisionHoisted?.graphical ?? false,
+                requestedExampleForm(learnerAuthoredMessage),
               )
             }
           }

@@ -201,15 +201,22 @@ describe('route — the flag selects A vs B, and only B consults the interpreter
     expect((b.body as { intentExperiment?: { injected: boolean } }).intentExperiment?.injected).toBe(true)
   })
 
-  it('11. Topos: the REAL_LIFE_EXAMPLE misread is replaced by the named concrete-example direction in B only', async () => {
+  // Updated 2026-09-25 with the deterministic example-form fix
+  // (masteryGate.requestedExampleForm): Architecture A no longer answers this
+  // request with the everyday REAL_LIFE_EXAMPLE directive — it now carries the
+  // CONCRETE_EXAMPLE directive itself. B's behaviour is unchanged: it still
+  // withholds the example block text and carries the named target instead.
+  it('11. Topos: neither arm gets the everyday directive; A gets CONCRETE_EXAMPLE, B the named direction', async () => {
     const TOPOS = 'Give me a concrete non-Set example of a topos, like sheaves on a topological space.'
     const opts = { modelOverrideAllowed: true, subjectSlug: 'mathematics', conceptId: 'math.cat.topos', lessonTitle: 'Topos' }
     const [a] = await driveTurns(h, POST, [{ learnerSays: TOPOS, modelReplies: 'Sh(X)…' }], opts)
     reset()
     intent.reply = async () => FOLLOW_UP('sheaves on a topological space', 'CONCRETE_EXAMPLE')
     const [b] = await driveTurns(h, POST, [{ learnerSays: TOPOS, modelReplies: 'Sh(X)…', headers: B_HEADERS }], opts)
-    expect(a.systemPrompt).toContain('REAL_LIFE_EXAMPLE')
+    expect(a.systemPrompt).toContain('TEACHING ACTION: CONCRETE_EXAMPLE')
+    expect(a.systemPrompt).not.toContain('REAL_LIFE_EXAMPLE')
     expect(b.systemPrompt).not.toContain('REAL_LIFE_EXAMPLE')
+    expect(b.systemPrompt).not.toContain('TEACHING ACTION: CONCRETE_EXAMPLE')
     expect(b.systemPrompt).toContain('sheaves on a topological space')
     // The request itself is still the same learner request to every authority.
     expect(authorityView(b).conversationState).toEqual(authorityView(a).conversationState)

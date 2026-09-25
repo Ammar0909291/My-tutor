@@ -454,7 +454,12 @@ export function resolveVisual(input: ResolveVisualInput): VisualDecision {
   const lastAsked = input.lastAssistantAskedQuestion ?? false
 
   // ── 1. What did the learner name this turn (if anything)? ─────────────────
-  const rawTarget = resolveVisualTarget(input.message, input.lessonConceptId, input.subject)
+  // The paused lesson is passed as disambiguation CONTEXT only (E4 in
+  // requestedConcept.ts): on an unresolved-topic excursion `lessonConceptId`
+  // is null on purpose, and without context "every term" in a physics lesson
+  // resolved to algebra's Term and drew its coordinate-plane card (A/B
+  // experiment trace, 2026-09-25). It is never used as a fallback figure.
+  const rawTarget = resolveVisualTarget(input.message, input.lessonConceptId, input.subject, input.excursionReturnToConceptId ?? null)
   // `resolveVisualTarget`'s step 2 (a `'learner-request'` match) is guarded by
   // `requestTargetsSomethingElse` only on the FALLBACK path — a direct KG-title
   // match from the learner's raw text has no protection at all. A learner's

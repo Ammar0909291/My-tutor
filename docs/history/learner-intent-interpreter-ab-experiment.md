@@ -67,3 +67,29 @@ All 10 disposable accounts deleted via `/api/user/delete-account` (re-login bloc
 tombstones rows with `isDeleted=true`); `modelOverrideAllowed` reset to false on the 4 experiment
 tombstones. Production flag count back to its pre-experiment value (2, both pre-existing, untouched).
 No real learner record was read for writing or modified.
+
+## Follow-up — deterministic misread fixes (2026-09-25, NOT deployed; feature branch only)
+Owner-scoped follow-up: fix the confirmed deterministic misreads, verify offline, stop before
+production. Interpreter files unchanged.
+- **E4 (`requestedConcept.ts`)**: an off-domain one-word KG title immediately preceded by a
+  quantifier / interrogative determiner (`every, each, all, any, which, what, whichever,
+  whatever`; not the definitional "what X is") is an instance of the lesson's own material, not a
+  topic. Fixes "every term" → `math.alg.term` (physics) and "what distribution" →
+  `math.fnal.distributions`. The visual resolver now receives the paused lesson as
+  disambiguation context only (`resolveVisual.ts` → `resolveVisualTarget` → 4th param), so the
+  algebra coordinate-plane card is no longer drawn on the unresolved-topic path.
+  Corpus sweep (12 lessons × 209 one-word titles × 13 phrasings = 32,604 resolutions, pre-fix vs
+  post-fix tree): 0 of 22,572 "must-not-change" phrasings changed; 2,435 of 10,032 determiner-shape
+  phrasings changed, all to null.
+- **Example form (`masteryGate.ts`)**: `requestedExampleForm` → `CONCRETE_EXAMPLE` directive unless
+  real-life/everyday/application/analogy is asked; trigger and `real_life_example` kind unchanged.
+- **"show me how/why/that/the derivation…" (`masteryGate.ts`)**: no longer a diagram request;
+  medium nouns, visual verbs and "show me what it looks like" unchanged.
+- **Typed non-answers (`mcq.ts`)**: `readsAsRequestToTutor` (request frames + existing
+  `isClaimChallenge`) joins `looksLikeAQuestion` as a not-gradeable precondition in
+  `resolveMcqChoice` and `engagesPendingOptions`; verbatim taps and labelled letters resolve first.
+- Tests: `deterministicMisreadFixes.test.ts` (34, incl. route-level; two mutation checks confirm
+  they fail without the fixes). Full suite 732 files / 15,445 passed / 0 failed; tsc, lint, build 0.
+- Residuals (not changed): the unresolved-topic path now holds these follow-ups as a topic
+  excursion on the LESSON'S OWN concept (previously a foreign concept excursion); "the/this term"
+  still resolves cross-subject; "for example, …" inside an answer still reads as an example request.
