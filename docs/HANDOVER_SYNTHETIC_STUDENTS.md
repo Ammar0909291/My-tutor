@@ -15,6 +15,8 @@ single-provider position of the 2026-08-20 outage (CLAUDE.md), with OpenRouter a
 The synthetic runs are a likely contributor: each run is ~116 turns × ~10k prompt tokens (~1.2M
 tokens), and ~9 runs happened between 2026-09-24 18:00 and 2026-09-25 04:30 UTC.
 
+Status checks (owner loop "keep updating handover file"): 2026-09-25 ~04:35 UTC — Groq still `spend_limit_reached` (118 refusals in the last 30 min, all from run 2); Gemini serving.
+
 **Do not start another run until the owner has (1) decided on the Groq spend alert/billing and
 (2) set a token budget for synthetic runs.** Further runs would now spend the Gemini quota that
 real learners depend on. The runner has no provider budget of its own — adding one (e.g. a
