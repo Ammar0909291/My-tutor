@@ -8066,8 +8066,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           pendingMcq: pendingMcqHoisted,
         })
         if (ceiling.withheld) {
+          // `before`/`after` let a cut that leaves only a lead-in ("I hear you…
+          // let's take a tiny step together.", synthetic readiness run 3,
+          // 2026-09-25) be diagnosed from the log. Model text only, never the
+          // learner's; `[verifier-log]` already logs model drafts the same way.
           console.log('[dont-know-ceiling] ' + JSON.stringify({
             reason: ceiling.reason, run: resolvedConsecutiveDontKnows,
+            beforeChars: cleanText.length, afterChars: ceiling.text.length,
+            before: cleanText.slice(0, 600),
           }))
         }
         cleanText = ceiling.text

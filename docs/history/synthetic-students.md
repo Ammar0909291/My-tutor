@@ -212,3 +212,17 @@ Egress: E5->E6 +70,195 rows (~21 MB, 8 lessons), E6->E7 +7,577 rows (~2 MB, 2 le
 Checker fix (`1b576c2`): both after-run 2 `announced-not-asked` majors were false positives (a conditional offer; "Quick check:" followed by a question). The check now requires no question after the announcement and no offer lead-in.
 
 Next: readiness runs 2 and 3 after midnight UTC; then widen to `RUNNER_TOPICS=6`.
+
+## 2026-09-25 00:16-01:29 UTC — readiness runs 2 and 3 (production `dd31beb`)
+
+| Run | Mastered | Critical | Major | Minor |
+|---|---|---|---|---|
+| 1 (= after-run 3, 2026-09-24) | 10/10 | 0 | 0 | 1 |
+| 2 | 10/10 | 0 | 0 | 1 (`ungradeable-question`) |
+| 3 | 10/10 | 0 | 1 (`content-free-reply`) | 2 (`ungradeable-question`) |
+
+**phys.mech.displacement and phys.mech.velocity are READY** by the scorecard rule (3 runs, every student masters, 0 critical). Median turns to verified mastery: strong 9, careless 11, off-track 11, beginner 12, confused 15. Every disposable account deleted and re-login blocked in runs 2 and 3.
+
+Run 3's major, traced in the Vercel log (session `cmug9b3bj…`, 01:06:40): confused student's second "I don't know" -> recovery turn; the model returned 377 chars; `[dont-know-ceiling] {"reason":"question-withheld","run":2}` removed the question and everything sharing its paragraph, leaving "I hear you—it's completely okay to feel stuck. Let's take a tiny step together." A reconstruction with two teaching sentences before the question is already kept correctly, so the real text was likely a single teaching sentence + question (the documented known cost in `trimTrailingQuestions`) or a pure-question paragraph. Not fixed on a guess; the ceiling log now records the text it cut. Recurring minor: `ungradeable-question` on the turn the off-track student answers the held question (the model writes its own question at CHECK).
+
+Egress: run 2 ~28 MB, run 3 ~11 MB (F0-F2).

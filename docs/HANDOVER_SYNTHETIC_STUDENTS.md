@@ -33,8 +33,9 @@ reach verified mastery every time with zero critical defects (`scripts/qa/synthe
 | S6d | TRANSFER-below-bar fix (owner-approved) | **pushed** `db78d8a` (full suite 725/14,937, tsc and build clean); production READY at `1e14df3` (21:0x UTC) |
 | S6e | After-run 3 on production `1e14df3` (fixes `49efe8f` + `db78d8a`), same 2 topics × 5 students | **done: 10/10 mastered, 0 critical, 0 major, 1 minor** (was 9/10, 1 critical). A container restart killed the run after 8 lessons (all mastered); the off-track student was re-run alone (`RUNNER_PERSONAS=offtrack`) and mastered both, including credit for the lesson question answered during a detour (heldQuestion fix confirmed). The 4 disposable accounts of the killed part (beginner, careless, strong, confused) were **not deleted** — harmless `qa-*@mytutor-qa.invalid` rows, clean up when convenient |
 | S6f | Checker: an offered check, or "Quick check:" followed by the model's own question, is not `announced-not-asked` (both after-run 2 majors were checker false positives) | **pushed** `1b576c2` |
-| S7 | Readiness runs 2 and 3 on displacement + velocity (after midnight UTC, egress guard). Run 1 = after-run 3 (10/10, 0 critical). If both pass, the 2 topics are **ready** | pending (next UTC day) |
-| S8 | Widen to more launch topics (`RUNNER_TOPICS=6`, then more) within the egress cap | pending |
+| S7 | Readiness runs 2 and 3 on displacement + velocity (production `dd31beb`) | **done — both topics READY**: run 2 10/10 mastered, 0 critical, 0 major; run 3 10/10, 0 critical, 1 major (`content-free-reply`, see below). With after-run 3 (run 1) that is 3 consecutive runs, all 5 students mastering both topics, 0 critical. (After-run 3's run file was lost to a container restart, so the scorecard CLI can only combine runs 2 and 3; runs 1 is recorded from its log.) |
+| S7a | Run 3's content-free reply: confused student, "I still don't get it" (2nd don't-know) -> only "I hear you—it's completely okay to feel stuck. Let's take a tiny step together." Production log: model wrote 377 chars, `[dont-know-ceiling] question-withheld run:2` cut the rest. Could not reproduce (the model's raw text is not logged; a reconstructed teaching+question paragraph is already kept by `trimTrailingQuestions`). **No speculative fix**: the ceiling log now records `before`/`beforeChars`/`afterChars` (model text only), so the next occurrence is diagnosable. Likely cause: the known cost in `trimTrailingQuestions` (a single teaching sentence before its question is dropped) | **pushed** (logging only) |
+| S8 | Widen: next launch topics two at a time (`RUNNER_TOPICS=phys.mech.acceleration,phys.mech.kinematics-1d`, then force + newtons-first-law, …), 3 runs each, within ~150 MB/day | **in progress** (2026-09-25) |
 
 If S4's run file is lost (the session ended), **skip the before-baseline**. S2's smoke run already
 shows the defect; go straight to S5.
@@ -101,6 +102,9 @@ It counts rows returned (cumulative since project creation, never reset).
 | E5 | 2026-09-24 20:58:16 | 10,414,791 | 189,134,610 | start of after-run 3 (+1,275 idle over 30 min) |
 | E6 | 2026-09-24 21:26:12 | 10,437,240 | 189,204,805 | killed part of after-run 3: +70,195 rows / ~95 turns, about 21 MB |
 | E7 | 2026-09-24 21:32:06 | 10,442,535 | 189,212,382 | off-track re-run: +7,577 rows / 22 turns, about 2 MB. **Today: about 126 MB. No more runs today** |
+| F0 | 2026-09-25 00:16:47 | 10,442,945 | 189,213,160 | new UTC day; +778 rows overnight |
+| F1 | 2026-09-25 00:46:38 | 10,470,441 | 189,305,444 | readiness run 2: +92,284 rows / 116 turns, about 28 MB |
+| F2 | 2026-09-25 01:29:00 | 10,497,795 | 189,341,815 | readiness run 3: +36,371 rows / 116 turns, about 11 MB. **Today: about 39 MB** |
 
 ## Rules that bind this work
 
