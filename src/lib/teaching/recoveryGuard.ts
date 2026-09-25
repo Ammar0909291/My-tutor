@@ -398,13 +398,41 @@ function isShoutingCaps(text: string): boolean {
 const NEXT_ITEM_REQUEST_RE =
   /^(?:ok(?:ay)?|right|sure|yes|yeah|alright)?[\s,.]*(?:can\s+you\s+|could\s+you\s+|please\s+|lets?\s+|i(?:'|’)?d\s+like\s+|i\s+want\s+)*(?:give\s+me|gimme|ask\s+me|show\s+me|do|try|have|get)?\s*(?:me\s+)?(?:the\s+|a\s+|an\s+|one\s+|another\s+|some\s+|more\s+|next\s+|other\s+)*(?:more\s+|next\s+|new\s+|practice\s+|practise\s+|another\s+)*(?:question|questions|problem|problems|example|examples|exercise|exercises|one)\b[\s\S]{0,40}$/i
 
+/**
+ * "Test me" — a request to BE ASKED, phrased as a verb on the learner.
+ * Pilot, 2026-09-24 (real accounts): "ok i get it, can you test me?" sent twice
+ * matched isRepeatedAnswer and returned 'frustrated'; arbitration then refused
+ * the authored probe and the lesson closed unmastered while the tutor kept
+ * promising a question it never asked. Positive evidence only — a verb that
+ * asks to be examined, aimed at the learner.
+ */
+const TEST_ME_RE =
+  /^(?:ok(?:ay)?|right|sure|yes|yeah|alright)?[\s,.]*(?:i\s+(?:get|got|understand)\s+it[\s,.]*)?(?:can\s+you\s+|could\s+you\s+|please\s+|now\s+)*(?:test|quiz|check)\s+(?:me|my\s+understanding)\b[\s\S]{0,40}$/i
+
 /** A bare "next" / "keep going" style nudge, with no content of its own. */
 const BARE_NEXT_RE = /^(?:ok(?:ay)?[\s,.]*)?(?:next|another|more|again|continue|carry\s+on|go\s+on|keep\s+going)\s*(?:please|one|question)?[\s.!?]*$/i
+
+/**
+ * A request after a short lead-in is still a request. Synthetic-student smoke
+ * run, 2026-09-24 (phys.mech.displacement, production): a learner who had
+ * answered three questions right sent "can we move faster? give me a question"
+ * six times. Anchored at the start, none of the patterns above matched, so the
+ * repeat read as 'frustrated', recovery refused every question, and the ladder
+ * walked CHECK -> GUIDE -> DEMONSTRATE until the lesson closed "for another
+ * look later". The same held for "got it. test me please" and "cool. ok test
+ * me". Each clause after the first is tested on its own; the length cap and
+ * the patterns themselves are unchanged.
+ */
+const CLAUSE_SPLIT_RE = /(?<=[.?!;:])\s+|,\s+/
+/** A clause must name what is asked for — "one of them is heavier" is an answer, not a request. */
+const REQUEST_WORD_RE = /\b(?:questions?|problems?|exercises?|examples?|next|another|more|test|quiz|check)\b/i
 
 function isNextItemRequest(text: string): boolean {
   const t = text.trim()
   if (t.length > MILD_MAX_LENGTH) return false
-  return NEXT_ITEM_REQUEST_RE.test(t) || BARE_NEXT_RE.test(t)
+  const asks = (s: string) => NEXT_ITEM_REQUEST_RE.test(s) || BARE_NEXT_RE.test(s) || TEST_ME_RE.test(s)
+  if (asks(t)) return true
+  return t.split(CLAUSE_SPLIT_RE).slice(1).some((clause) => REQUEST_WORD_RE.test(clause) && asks(clause.trim()))
 }
 
 function isRepeatedAnswer(message: string, priorUserMessage: string | null | undefined): boolean {

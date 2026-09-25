@@ -2799,6 +2799,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // equality. `pendingMcqHoisted` is the CURRENT question only — it comes
           // from readPendingQuestion, which returns null on a lesson mismatch.
           offeredMcqOptions: pendingMcqHoisted?.options,
+          // The lesson question on screen, and whether this message was graded
+          // against it. An excursion records the question at opening; answering
+          // exactly that question closes it as 'closed-answered-lesson' and the
+          // turn counts for the lesson (see ExcursionState.heldQuestion).
+          pendingQuestion: pendingMcqHoisted?.question ?? null,
+          answeredPendingQuestion: mcqGradeHoisted !== null,
           // Phase 2: the turn read itself two contradictory ways. Hold the
           // teaching context rather than let either reading change it. This is
           // the ONE place ambiguity is given authority — everything else on
@@ -3055,7 +3061,17 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 learnerMoveStageAHoisted.has('HELP_REQUEST') || learnerMoveStageAHoisted.ambiguous,
               closing: sessionEpisodeHoisted.phase === 'CLOSING',
               completionReady: lessonCompletedHoisted,
-              genuineQuestionActive: detectLearnerQuestion(turnIntent.message) && pendingMcqHoisted === null,
+              // A REQUEST TO BE ASKED IS NOT A QUESTION TO ANSWER FIRST.
+              // Synthetic-student after-run, 2026-09-24 (production 1f438cd,
+              // phys.mech.displacement): "can we move faster? give me a
+              // question" at CHECK and "can you check me with a question?" at
+              // GUIDE carry a '?', so LEARNER_QUESTION owned the turn and
+              // denied AUTHORED_PROBE ([arbitration] owner LEARNER_QUESTION,
+              // [gate-eligibility] blockedBy arbitrationAllowsProbe) while the
+              // same turn read PRACTICE_REQUEST. The learner asked for exactly
+              // what the rung refused; answering "first" meant never.
+              genuineQuestionActive: detectLearnerQuestion(turnIntent.message) && pendingMcqHoisted === null
+                && !turnIntent.wantsPractice,
             })
             const arb = turnArbitrationHoisted
             console.log('[arbitration]', {
@@ -3599,7 +3615,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // eligibility is a rule rather than a typed list of ids: an
               // unreadable count is treated as exhausted, so the bound fails
               // in the safe direction.
-              const { prismaGenerationOutcomeSink, findActiveVisualFigure, prismaBudgetReader } =
+              const { prismaGenerationOutcomeSink, findActiveVisualFigure, hasActiveVisualFigure, prismaBudgetReader } =
                 await import('@/lib/teaching/visual/generationOutcomeStore')
               const { buildVisualContractBlock } = await import('@/lib/teaching/visual/visualContract')
               // The SPECIFIC form the learner named, if any. Reported to the
@@ -3690,6 +3706,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               }, {
                 outcomeSink: prismaGenerationOutcomeSink,
                 findApprovedFigure: findActiveVisualFigure,
+                // In-memory "does it have one?" — lets an approved figure beat a
+                // subject-wide card without a per-turn read (resolveVisualForTurn step 1).
+                hasApprovedFigure: (id: string) => hasActiveVisualFigure(id),
                 budgetReader: prismaBudgetReader,
                 // Without this the resolver's session cap was accepted and
                 // never supplied, so `checkBudgets` skipped it entirely and one
@@ -3785,6 +3804,25 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // made, and captureShadow() never throws. Gated on
           // BRAIN_RUNTIME_MODE, which defaults to off — with the flag unset
           // this block does nothing at all.
+          // ── V2 IS THE ONLY SOURCE OF "WHAT CAN BE SHOWN" ───────────────────
+          // `availableVisual` above is the LEGACY answer — the raw registry card
+          // or a chapter-title keyword guess — and it knows nothing of
+          // retirement, domain safety or scope. It was only overwritten when
+          // the V2 decision was a card, so on a NO-FIGURE decision it survived
+          // into the learner-request directive: phys.em.lc-circuits (retired —
+          // its card has neither an inductor nor a capacitor) told the model
+          // "Lead with the visual: emit the VISUAL:circuit_diagram tag first,
+          // then … pointing at what to look at", and the clamp then served no
+          // figure. Every downstream consumer now reads the decision's own
+          // card, or nothing: a scene/spec figure is reported through
+          // `visualAlreadyAttached`, and no decision means no figure — the same
+          // rule the authority clamp applies at assembly.
+          {
+            const d = visualDecisionHoisted
+            const card = d?.graphical === true && d.payload?.renderer === 'card' ? d.payload : null
+            availableVisualHoisted = card ? card.visualType : null
+            allowedVisualsHoisted = card ? (d?.allowed ?? [card.visualType]) : null
+          }
           const { currentBrainMode, BrainMode } = await import('@/lib/teaching/runtime/brainRuntimeEntry')
           if (currentBrainMode().mode !== BrainMode.OFF) {
             try {
@@ -3858,9 +3896,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // the same owner that carries the length budget.
             maxNewTerms: contentRegister === 'beginner' ? 1 : 2,
             workedExampleFirst,
+            // V2's card, never the legacy guess — see "V2 IS THE ONLY SOURCE OF
+            // WHAT CAN BE SHOWN" above. A "Visual-first: … lead with it (emit
+            // the VISUAL tag)" line for a figure the clamp will never serve is a
+            // phantom-figure claim written into the prompt.
             visualType: (learnerRequestHoisted === 'diagram' || explainDifferentlyNeedsVisual)
-              ? availableVisual
-              : decideVisualFirst(availableVisual, conversationStateHoisted, nextMove),
+              ? availableVisualHoisted
+              : decideVisualFirst(availableVisualHoisted, conversationStateHoisted, nextMove),
             firstLessonActive: firstLessonActiveHoisted,
             legalityRationale: moveDecision.rationale,
             directiveJustIssued: recoveryKeyHoisted === 'too_many_questions',
@@ -3910,14 +3952,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 if (selectedStrategyHoisted < 2) selectedStrategyHoisted = 4
               }
               systemPrompt += buildLearnerRequestBlock(
-                learnerRequestHoisted, availableVisual, remediationTier,
+                learnerRequestHoisted, availableVisualHoisted, remediationTier,
                 hasEstablishedExample, selectedStrategyHoisted,
                 teachingHistoryHoisted.prerequisiteAttempts.length > 0 ? null : (convConceptId ?? null),
                 visualDecisionHoisted?.graphical ?? false,
               )
             } else {
               systemPrompt += buildLearnerRequestBlock(
-                learnerRequestHoisted, availableVisual, remediationTier, hasEstablishedExample,
+                learnerRequestHoisted, availableVisualHoisted, remediationTier, hasEstablishedExample,
                 undefined, undefined, visualDecisionHoisted?.graphical ?? false,
               )
             }
@@ -4780,11 +4822,21 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // refuses a second early spend at DEMONSTRATE — the same guarantee
         // that already protects DEMONSTRATE alone, extended by reusing the
         // identical arithmetic rather than a second threshold.
+        // TRANSFER below the verified bar (owner-approved, 2026-09-24): the
+        // ladder can reach TRANSFER on plain credit with verified evidence
+        // short of the bar, and TRANSFER is not a mastery-gate phase, so no
+        // authored question was ever attached there again and the lesson could
+        // never certify. Until the bar is met, TRANSFER keeps assessing with
+        // authored questions; a server-graded right answer then tops up the
+        // lowest unmet verified counter (conversationState's TRANSFER case).
+        const { transferBelowVerifiedBar } = await import('@/lib/teaching/conversationState')
+        const transferNeedsVerifiedCredit = transferBelowVerifiedBar(conversationStateHoisted)
         const phaseAllowsProbe =
           isMasteryGatePhase(phaseBeforeTurn) ||
           (phaseBeforeTurn === 'GUIDE' && evidenceMoveHoisted === 'ask') ||
           (phaseBeforeTurn === 'DEMONSTRATE') ||
-          (phaseBeforeTurn === 'OBSERVE' && evidenceMoveHoisted === 'ask')
+          (phaseBeforeTurn === 'OBSERVE' && evidenceMoveHoisted === 'ask') ||
+          transferNeedsVerifiedCredit
         phaseAllowsProbeHoisted = phaseAllowsProbe
         // R82: the mirror image of the OBSERVE disjunct just above. R81
         // measured 79/238 concepts failing certification because OBSERVE's
@@ -4896,7 +4948,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // caller this comment already protects is unaffected.
           probeAttachablePhase:
             isProbeAttachablePhase(phaseBeforeTurn) || phaseBeforeTurn === 'DEMONSTRATE' ||
-            (phaseBeforeTurn === 'OBSERVE' && evidenceMoveHoisted === 'ask'),
+            (phaseBeforeTurn === 'OBSERVE' && evidenceMoveHoisted === 'ask') ||
+            transferNeedsVerifiedCredit,
           hasMemoryState: memoryState !== null,
           noUnansweredProbeOnScreen: !unansweredProbeOnScreen,
           notFirstLesson: !firstLessonActiveHoisted,
@@ -4931,7 +4984,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         {
           const { gateRefusedOnPolicy } = await import('@/lib/teaching/inventedProbeGuard')
           gateDeclinedByPolicyHoisted = gateRefusedOnPolicy(gateTerms)
-          probeWouldCountThisPhaseHoisted = isProbeAttachablePhase(phaseBeforeTurn)
+          probeWouldCountThisPhaseHoisted = isProbeAttachablePhase(phaseBeforeTurn) || transferNeedsVerifiedCredit
         }
         console.log('[gate-eligibility] ' + JSON.stringify({
           phase: phaseBeforeTurn,
@@ -4951,7 +5004,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         }))
         if (gateEligible && memoryState) {
           const { findBestProbe } = await import('@/lib/teaching/assets')
-          const { hasAskedMcq, recordMcqAsked: recordMcqAskedForGate } =
+          const { hasAskedMcq, recordMcqAsked: recordMcqAskedForGate, isMissedAndReaskable, memoryFingerprint } =
             await import('@/lib/teaching/teachingHistory')
           const { stripAuthoringLabel } = await import('@/lib/teaching/gateProbeContract')
           const history = teachingHistoryHoisted
@@ -5024,6 +5077,20 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // accepts non-MCQ probes and renders them as prose follow-ups.
             requireMcq: true,
             onAllCandidatesSpent: () => { authoredPoolExhaustedHoisted = true },
+            // Owner-approved (G2, 2026-09-24): once every unasked question is
+            // spent, a question the learner got WRONG may be asked once more.
+            // Read from the ledger as it stood BEFORE this turn, so a question
+            // missed on this very turn is never asked straight back. Below
+            // GUIDE the surplus rule already refuses a pool this small.
+            // The question graded THIS turn is never the one re-asked.
+            allowMissedStem: history && phaseBeforeTurn !== 'OBSERVE' && phaseBeforeTurn !== 'DEMONSTRATE'
+              ? (stem) => {
+                const q = stripAuthoringLabel(stem)
+                const gradedNow = mcqGradeHoisted && pendingMcqHoisted?.question
+                  ? memoryFingerprint(pendingMcqHoisted.question) === memoryFingerprint(q) : false
+                return !gradedNow && isMissedAndReaskable(history, q)
+              }
+              : undefined,
           })
           // THE SURPLUS RULE. Spending a probe below the mastery gates is only
           // safe while three remain afterwards, because mastery needs three
@@ -5049,6 +5116,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             }))
           }
           const converted = probe && !belowGuideBlocked ? probeToMcq(probe) : null
+          // A re-ask arrives from the selector with its options already rotated.
+          if (converted && probe?.reask) {
+            console.log('[gate-assessment] ' + JSON.stringify({ event: 'missed-probe-reasked', phase: phaseBeforeTurn, assetId: probe.assetId }))
+          }
           if (converted) {
             gateMcqHoisted = converted
             // The block still goes in: if the deterministic renderer refuses
@@ -6350,6 +6421,23 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       const attemptVectorParse = parseAttemptVectorTag(text)
       if (attemptCaptureOn) attemptVectorHoisted = attemptVectorParse.vector
       text = attemptVectorParse.cleanText
+      // The reply must not answer the graded question it is about to ask
+      // (owner-approved, G2, 2026-09-24). Only for the server's own question
+      // attached THIS turn. Emptying the text is safe: the guard just below
+      // treats a question on screen as content, never as an outage.
+      if (mcqHoisted && mcqHoisted === gateMcqHoisted) {
+        const { dropAnswerLeaks } = await import('@/lib/teaching/gateAssessment')
+        const { getKGNode: kgNodeForLeak } = await import('@/lib/curriculum/knowledgeGraph')
+        const leak = dropAnswerLeaks(text, mcqHoisted, resolvedConceptId ? (kgNodeForLeak(resolvedConceptId)?.title ?? null) : null)
+        if (leak.dropped.length > 0) {
+          console.warn('[answer-leak] ' + JSON.stringify({
+            conceptId: resolvedConceptId ?? null,
+            assetId: mcqHoisted.assetId ?? null,
+            dropped: leak.dropped.map((d) => d.slice(0, 120)),
+          }))
+          text = leak.text
+        }
+      }
 
       // C-A — THE SINGLE DEFINITION OF "usable assistant response", and the
       // only degraded-response path. It sits HERE, after both tag strips,
@@ -7425,6 +7513,19 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // counters still drive the ladder. Measured on the 2026-08-17 turn:
       // `correctAtCheck 1` with `verifiedCorrectAtCheck 0`. Detection without
       // suppression does not hold the gate, which is why this exists.
+      // A REQUEST IS NOT AN ANSWER. Synthetic-student after-run 2, 2026-09-24
+      // (production TURN_EVENT, phys.mech.velocity): on "ok, next question
+      // please" the model's own SIGNAL said correct, nothing suppressed it
+      // (`gradeSource: none`, `signalSuppressedReason: null`), and the plain
+      // practice counter carried the lesson PRACTICE -> TRANSFER below the
+      // verified bar, where it could never certify. The MCQ grader already
+      // refuses to grade a practice request (`&& !turnIntent.wantsPractice`);
+      // the self-report path now agrees.
+      if (teachingSignal && teachingSignal.correctness !== undefined && turnIntent.wantsPractice && !mcqGradeHoisted) {
+        signalSuppressedReasonHoisted = 'practice-request-not-an-answer'
+        console.log('[practice-request-not-an-answer]', { claimed: teachingSignal.correctness, learnerMessage: message.slice(0, 40) })
+        teachingSignal = { ...teachingSignal, correctness: undefined }
+      }
       if (teachingSignal && teachingSignal.correctness !== undefined) {
         try {
           const { shouldSuppressSignalCorrectness } = await import('@/lib/teaching/answerableTurn')
@@ -7541,7 +7642,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // an invariant (see stripPhantomVisualClaims's own doc for the real
         // production transcripts this closes). Sentence-scoped, so an
         // otherwise-correct explanation is not discarded over one bad clause.
-        const anyVisualAttachedThisTurn = !!responseVisual || visualDecisionHoisted?.graphical === true
+        // The V2 decision alone — the same fact the authority clamp enforces at
+        // assembly. `responseVisual` here can still be the MODEL'S OWN
+        // `VISUAL:` tag, which the clamp discards when the decision has no
+        // figure; reading it let a model that claimed a figure switch off the
+        // very strip that catches the claim.
+        const anyVisualAttachedThisTurn = visualDecisionHoisted?.graphical === true
         if (!anyVisualAttachedThisTurn) {
           const beforeStrip = cleanText
           cleanText = stripPhantomVisualClaims(cleanText)
@@ -7569,7 +7675,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // fix — this catches the rare case where the model ignores it anyway,
       // for beginners only. Intermediate/expert responses are left untouched
       // since IPA is allowed (optionally/fully) at those registers.
-      if (contentRegister === 'beginner') {
+      //
+      // EXCEPT where the notation IS the lesson. Pilot, 2026-09-24,
+      // eng.phonics.blending-segmenting: "break it into its three sounds —
+      // /d/ /ɒ/ /g/" reached the learner as "…three sounds —   ." — the strip
+      // removed the only content of the sentence. Phonics and phonetics teach
+      // exactly these symbols, so the beginner strip does not run on them.
+      const notationIsTheLesson = /^eng\.(?:phonics|phonetics)\./.test(resolvedConceptId ?? '')
+      if (contentRegister === 'beginner' && !notationIsTheLesson) {
         cleanText = stripIpaNotation(cleanText)
       }
 
@@ -7857,7 +7970,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // Placed after the other repairs so it decorates the text that actually
       // ships, and before the verifier so the verifier sees the final reply.
       try {
-        const { confirmCorrectAnswer, CONFIRMS_CORRECT } = await import('@/lib/teaching/answerConfirmation')
+        const { confirmCorrectAnswer, statesCorrect } = await import('@/lib/teaching/answerConfirmation')
         const confirmed = confirmCorrectAnswer({
           text: cleanText,
           correct: correctForConfirmation,
@@ -7886,7 +7999,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         if (correctForConfirmation === true) {
           console.log('[c5] ' + JSON.stringify({
             event: 'servedGradedCorrect',
-            confirmed: confirmed.added || CONFIRMS_CORRECT.test(confirmed.text),
+            confirmed: confirmed.added || statesCorrect(confirmed.text),
           }))
         }
       } catch { /* non-fatal — the teaching is still better than no answer */ }
@@ -7953,8 +8066,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           pendingMcq: pendingMcqHoisted,
         })
         if (ceiling.withheld) {
+          // `before`/`after` let a cut that leaves only a lead-in ("I hear you…
+          // let's take a tiny step together.", synthetic readiness run 3,
+          // 2026-09-25) be diagnosed from the log. Model text only, never the
+          // learner's; `[verifier-log]` already logs model drafts the same way.
           console.log('[dont-know-ceiling] ' + JSON.stringify({
             reason: ceiling.reason, run: resolvedConsecutiveDontKnows,
+            beforeChars: cleanText.length, afterChars: ceiling.text.length,
+            before: cleanText.slice(0, 600),
           }))
         }
         cleanText = ceiling.text
@@ -8981,7 +9100,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               await import('@/lib/teaching/conversationState')
             const { isBareAcknowledgement: isBareAcknowledgementForWithhold } =
               await import('@/lib/teaching/masteryGate')
+            const { conceptFallbackText } = await import('@/lib/teaching/conceptFallback')
+            const { getKGNode: getKGNodeForWithhold } = await import('@/lib/curriculum/knowledgeGraph')
+            const withholdNode = resolvedConceptId ? getKGNodeForWithhold(resolvedConceptId) : null
+            // The concept's own words replace the content-free hold (learner
+            // pilot 2026-09-24) — see conceptFallback.ts.
+            const withholdConceptFallback = withholdNode?.title && withholdNode.description
+              ? conceptFallbackText(withholdNode.title, withholdNode.description)
+              : undefined
             const ungraded = withholdUngradedGateQuestion({
+              conceptFallback: withholdConceptFallback,
               text: cleanText,
               // The phase the turn was BUILT at — the same pre-fold value the
               // gate itself read when it went looking for a probe.
@@ -9720,9 +9848,62 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           }))
           cleanText = asciiDiagram.text
         }
+
+        // ── AND WHAT THE DRAWING LEAVES BEHIND ─────────────────────────────
+        // Removing a text diagram leaves its pointers and labels ("Light",
+        // "Follow the arrows from…", "*P = phosphate, …") in text the pass
+        // above already cleared — production, 2026-09-24, every one after
+        // "I don't have a picture". So the reference check runs once more on
+        // what the diagram guard left.
+        const leftovers = stripUnbackedFigureReferences(cleanText, figureOnScreen)
+        if (leftovers.stripped) {
+          console.warn('[figure-reference] ' + JSON.stringify({
+            event: 'diagram-remnant-stripped',
+            conceptId: resolvedConceptId ?? null,
+            removed: leftovers.removed,
+          }))
+          cleanText = leftovers.text
+        }
+        // A turn that was ONLY a pointer at nothing is replaced by the
+        // concept's own KG description rather than shipped as-is.
+        // Also when the diagram guard left NOTHING (the reply was only a
+        // drawing — pilot 2026-09-24, eng.grammar.verbs).
+        if (!figureOnScreen && (figures.onlyPointer || leftovers.onlyPointer || cleanText.trim().length === 0) && resolvedConceptId) {
+          const { getKGNode } = await import('@/lib/curriculum/knowledgeGraph')
+          const { pointerOnlyFallback } = await import('@/lib/teaching/figureReference')
+          const node = getKGNode(resolvedConceptId)
+          if (node?.title && node.description) {
+            console.warn('[figure-reference] ' + JSON.stringify({
+              event: 'pointer-only-turn-replaced', conceptId: resolvedConceptId,
+            }))
+            cleanText = pointerOnlyFallback(node.title, node.description)
+          }
+        }
       } catch (err) {
         // A repair must never break a turn.
         console.warn('[figure-reference] check skipped:', err)
+      }
+
+      // ── A COLOUR IT NAMES MUST BE A COLOUR THE FIGURE HAS ──────────────
+      // The contract tells the model not to name colours that are not on
+      // screen; production showed it naming them anyway ("helicase (the orange
+      // block)" over a figure whose enzymes are violet — figureFidelity.ts).
+      // Only a SCENE states its colours, so only a scene is checked.
+      try {
+        const onScreen = visualFired || (resolvedVisualDecision?.session?.turns ?? 0) > 0
+        const payload = resolvedVisualDecision?.graphical ? resolvedVisualDecision.payload : null
+        if (onScreen && payload?.renderer === 'scene') {
+          const { enforceFigureColours, sceneColourFamilies } = await import('@/lib/teaching/visual/figureFidelity')
+          const fidelity = enforceFigureColours(cleanText, sceneColourFamilies(payload.sceneSpec))
+          if (fidelity.changed) {
+            console.warn('[figure-fidelity] ' + JSON.stringify({
+              event: 'absent-colour-removed', conceptId: resolvedConceptId ?? null, removed: fidelity.removed,
+            }))
+            cleanText = fidelity.text
+          }
+        }
+      } catch (err) {
+        console.warn('[figure-fidelity] check skipped:', err)
       }
 
       // A LEARNER'S OWN INCIDENTAL PHRASING MUST NEVER BECOME A NEW LESSON
@@ -10037,6 +10218,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               ` — prose replaced (reason=${contract.reason}, chars ${cleanText.length}->${contract.text.length})`,
             )
             cleanText = contract.text
+            // A reply replaced wholesale still owes the learner the verdict on
+            // the answer just graded. Synthetic-student smoke run, 2026-09-24:
+            // a right answer came back as the bare "Here is your next
+            // question." because the replacement dropped the confirmation
+            // added earlier in the turn. Both helpers no-op when the text
+            // already carries the verdict.
+            if (correctForConfirmation !== null) {
+              const { confirmCorrectAnswer: reconfirm } = await import('@/lib/teaching/answerConfirmation')
+              const { stateCorrectionForWrongAnswer: recorrect } = await import('@/lib/teaching/wrongAnswerCorrection')
+              cleanText = reconfirm({ text: cleanText, correct: correctForConfirmation, priorConfirmations: resolvedPriorConfirmations }).text
+              cleanText = recorrect({ text: cleanText, correct: correctForConfirmation, probe: pendingMcqHoisted }).text
+            }
           }
         } catch (err) {
           // A repair must never break a turn.
@@ -11394,7 +11587,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // which assessment question was asked (so an identical MCQ is
             // never repeated) and the confidence reading (so the adaptation
             // engine has a trend, not just a current value).
-            const { recordMcqAsked, recordConfidence, recordExplanationServed } = await import('@/lib/teaching/teachingHistory')
+            const { recordMcqAsked, recordMcqOutcome, recordConfidence, recordExplanationServed } = await import('@/lib/teaching/teachingHistory')
             let memoryHistory = updatedHistory
             // A PROBE IS SPENT WHEN IT IS ANSWERED, NOT WHEN IT IS SHOWN.
             //
@@ -11442,8 +11635,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             const questionToSpend = (pendingMcqHoisted?.question && mcqGradeHoisted)
               ? pendingMcqHoisted.question
               : releasedProbeQuestionHoisted
+            // Same moment, same question: how it ended. A wrong answer makes an
+            // authored question eligible for ONE re-ask once the pool is spent;
+            // a re-ask, however it ends, is never asked again. A release (no
+            // grade) changes nothing unless it was the re-ask.
+            const spentQuestionGrade = questionToSpend && questionToSpend === pendingMcqHoisted?.question && mcqGradeHoisted
+              ? mcqGradeHoisted.correct : null
             if (questionToSpend) {
               memoryHistory = recordMcqAsked(memoryHistory, questionToSpend)
+              memoryHistory = recordMcqOutcome(memoryHistory, questionToSpend, spentQuestionGrade)
             }
             // The write half of the already-read guard above. Recorded only
             // when the asset was actually SERVED to the learner this turn —
@@ -11535,6 +11735,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               if (rederiveServedExplanation) rederived = recordExplanationServed(rederived, rederiveServedExplanation)
               if (rederiveServedCard) rederived = recordExplanationServed(rederived, rederiveServedCard)
               if (rederiveAskedMcq) rederived = recordMcqAsked(rederived, rederiveAskedMcq)
+              if (questionToSpend) rederived = recordMcqOutcome(rederived, questionToSpend, spentQuestionGrade)
               if (rederiveConfReading) rederived = recordConfidence(rederived, rederiveConfReading)
               return { teachingHistory: rederived }
             })
@@ -12136,9 +12337,56 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       const servedMcq = probeReleasedThisTurnHoisted
         ? undefined
         : (mcqForClient(resolvedQuestionServedFinal) ?? undefined)
+      // ONE RECORD OF THIS VISUAL TURN (visual/turnRecord.ts): decision, tier,
+      // reason and — read from the figure fields this response carries, and
+      // nothing else — whether the learner actually receives a figure. The
+      // turn event's `visualServed` reads the same value, so the two logs can
+      // never disagree about whether a figure was served.
+      let visualTurnServed = Boolean(responseVisual) || Boolean(detectedVisualSpec) || Boolean(detectedSceneSpec)
+      try {
+        const { describeVisualTurn } = await import('@/lib/teaching/visual/turnRecord')
+        const record = describeVisualTurn(
+          resolvedVisualDecision,
+          { visual: responseVisual, visualSpec: detectedVisualSpec, sceneSpec: detectedSceneSpec },
+          learnerRequestHoisted === 'diagram',
+        )
+        visualTurnServed = record.served
+        console.log('[learn/chat] VISUAL_TURN=' + JSON.stringify(record))
+      } catch { /* observability never breaks a turn */ }
+      // AN UNMET PICTURE REQUEST IS SAID OUT LOUD (acknowledgeUnavailablePicture).
+      // Here, at the final response, because EVERY serving path converges here:
+      // the two production turns that exposed it were served from Explanation
+      // Memory, which skips the model-output repairs further up. "Attached" is
+      // read from the three figure fields this response actually carries.
+      try {
+        const { acknowledgeUnavailablePicture } = await import('@/lib/teaching/visual/visualAcknowledgement')
+        const ack = acknowledgeUnavailablePicture({
+          text: cleanText,
+          learnerAskedForPicture: learnerRequestHoisted === 'diagram',
+          figureAttachedThisTurn: Boolean(responseVisual) || Boolean(detectedVisualSpec) || Boolean(detectedSceneSpec),
+          figureShownEarlierForConcept: resolvedConceptId !== null && resolvedConceptId !== undefined
+            && snapshotRRMLog.some((e) => e.matchedConcept === resolvedConceptId),
+        })
+        if (ack.appended) {
+          console.log('[visual-v2] picture requested but none available — said so')
+          cleanText = ack.text
+        }
+      } catch { /* non-fatal — a repair must never break a turn */ }
       if (!servedMcq) {
         const { enforceQuestionDeliveryContract, WITHHELD_QUESTION_CONTINUATION_TEXT } = await import('@/lib/teaching/gateAssessment')
-        const repaired = enforceQuestionDeliveryContract(cleanText, WITHHELD_QUESTION_CONTINUATION_TEXT)
+        // The fallback when NOTHING survives. "Let's stay with this idea for a
+        // moment." is content-free (pilot, 2026-09-24: three turns running);
+        // the concept's own KG description is retrieval, not invention.
+        let finalFallback = WITHHELD_QUESTION_CONTINUATION_TEXT
+        try {
+          const { getKGNode } = await import('@/lib/curriculum/knowledgeGraph')
+          const node = resolvedConceptId ? getKGNode(resolvedConceptId) : null
+          if (node?.title && node.description) {
+            const { conceptFallbackText } = await import('@/lib/teaching/conceptFallback')
+            finalFallback = conceptFallbackText(node.title, node.description)
+          }
+        } catch { /* keep the plain fallback */ }
+        const repaired = enforceQuestionDeliveryContract(cleanText, finalFallback)
         if (repaired !== cleanText) {
           console.warn('[gate-contract] ' + JSON.stringify({
             event: 'question-announced-but-never-delivered',
@@ -12289,7 +12537,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           excursionActive: resolvedExcursionActive,
           recoveryFired: resolvedRecoveryKey !== null,
           // Typed Turn Contract Batch 5: reuses `resolvedVisualDecision`.
-          visualServed: resolvedVisualDecision?.graphical === true,
+          // What the RESPONSE carries (VISUAL_TURN above), not what was decided:
+          // a held figure is decided but deliberately not re-attached.
+          visualServed: visualTurnServed,
         }))
       } catch (err) {
         console.warn('[turn-event] line skipped:', err)

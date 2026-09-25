@@ -54,6 +54,7 @@
  * It fires ONLY when no figure is attached. With a figure present the reference
  * is true and is left exactly as written.
  */
+import { conceptFallbackText } from './conceptFallback'
 
 /** Words that place the thing on screen rather than in the prose. */
 const ON_SCREEN =
@@ -478,11 +479,81 @@ function findPointerClauseHead(s: string): string | null {
   return null
 }
 
+/**
+ * THREE REMNANT SHAPES that survive once a text diagram is taken out of a
+ * no-figure turn (production, 2026-09-24 — every one after the honest
+ * "I don't have a picture" line, so the learner was told there is no picture
+ * and then pointed at one):
+ *
+ *   "Follow the arrows from light energy to the production of glucose."
+ *   "This layout shows the sequence of events from the promoter region…"
+ *   "*P = phosphate, C = deoxyribose sugar; the two backbones run…"
+ *
+ * Each carries real teaching after the false pointer, so each is REWRITTEN to
+ * keep it (the honestifyFigureOffer precedent), never simply deleted:
+ * arrows -> "Trace the steps", "this layout shows" -> "Here is", and a symbol
+ * legend is removed from the front of the sentence it prefixes.
+ */
+const ARROW_FOLLOW_RE = /^(?:[A-Z][a-z]+\s+(?=[FfTt]))?(?:follow|trace)\s+(?:the|these|those)\s+arrows?\b\s*/i
+// Up to two words before the noun: "This simple layout shows…" (pilot, eng.grammar.pronouns).
+const LAYOUT_SUBJECT_RE = /^(?:this|the)\s+(?:[a-z-]+\s+){0,2}(?:layout|arrangement)\s+shows\s+/i
+/** "The arrow highlights **barks**…" — a claim about a drawn arrow; dropped whole. */
+const ARROW_SUBJECT_RE = /^the\s+arrows?\s+(?:highlights?|shows?|points?|leads?|marks?|indicates?)\b/i
+const LEGEND_PREFIX_RE = /^\*?\s*(?:[A-Z][a-z]?\s*=\s*[^,;=\n]{2,40},\s*)+[A-Z][a-z]?\s*=\s*[^,;=\n]{2,40};\s*/
+const REMNANT_ANYWHERE_RE = /(?:^|[\n.!?]\s*)(?:(?:[A-Z][a-z]+\s+)?(?:follow|trace)\s+(?:the|these|those)\s+arrows?\b|(?:this|the)\s+(?:[a-z-]+\s+){0,2}(?:layout|arrangement)\s+shows\b|the\s+arrows?\s+(?:highlights?|shows?|points?|leads?|marks?|indicates?)\b|\*?\s*[A-Z][a-z]?\s*=\s*[^,;=\n]{2,40},)/i
+
+/** Rewrite a remnant sentence, or null when it is not one. `''` means drop it. */
+function repairRemnant(s: string): string | null {
+  const cap = (x: string) => x.charAt(0).toUpperCase() + x.slice(1)
+  const arrow = s.match(ARROW_FOLLOW_RE)
+  if (arrow) {
+    const rest = s.slice(arrow[0].length).trim()
+    // The layout words that only mean something beside a drawing go with it.
+    const unplaced = rest.replace(/\s+(?:on|at)\s+the\s+(?:left|right|top|bottom)\b/gi, '')
+    return /[A-Za-z]{3,}/.test(unplaced) ? `Trace the steps ${unplaced}` : ''
+  }
+  if (ARROW_SUBJECT_RE.test(s)) return ''
+  const layout = s.match(LAYOUT_SUBJECT_RE)
+  if (layout) {
+    const rest = s.slice(layout[0].length).trim()
+    return /[A-Za-z]{3,}/.test(rest) ? `Here is ${rest}` : ''
+  }
+  const legend = s.match(LEGEND_PREFIX_RE)
+  if (legend) {
+    const rest = s.slice(legend[0].length).trim()
+    return /[A-Za-z]{3,}/.test(rest) ? cap(rest) : ''
+  }
+  return null
+}
+
+/** A leftover drawing label: one to three words, no sentence punctuation, no markdown. */
+function isOrphanLabelParagraph(p: string): boolean {
+  const t = p.trim()
+  if (t.length === 0 || /[.!?:;,)]$/.test(t) || /^[#*>\-|`\d]/.test(t) || /[*_`]/.test(t)) return false
+  return t.split(/\s+/).length <= 3
+}
+
 export interface FigureReferenceResult {
   text: string
   stripped: boolean
   /** The exact fragments removed, for the log — never guessed at after the fact. */
   removed: string[]
+  /**
+   * The turn was NOTHING but pointers at a figure that is not there, so it was
+   * handed back unchanged (an empty turn is never returned). The caller must
+   * replace it — see pointerOnlyFallback — or the pointer reaches the learner.
+   */
+  onlyPointer?: boolean
+}
+
+/**
+ * What a turn says when its whole text pointed at a figure that does not exist
+ * (production, eng.grammar.word-classes-overview, 2026-09-24: the entire reply
+ * was "Use this layout to picture where a word belongs…"). Retrieval, never
+ * invention: the concept's own Knowledge Graph title and description.
+ */
+export function pointerOnlyFallback(title: string, description: string): string {
+  return conceptFallbackText(title, description)
 }
 
 /**
@@ -524,7 +595,8 @@ export function stripUnbackedFigureReferences(
     // per sentence below.
     const hasVisibilityDeixis =
       /\b(?:here\s+(?:you|we)\s+(?:can\s+|will\s+|'ll\s+)?see|as\s+(?:you|we)\s+can\s+see|you\s+can\s+see\s+(?:here|above|below))\b/i.test(text)
-    if (!STRONG_FIGURE_NOUN.test(text) && !WEAK_FIGURE_NOUN.test(text) && !hasVisibilityDeixis) {
+    if (!STRONG_FIGURE_NOUN.test(text) && !WEAK_FIGURE_NOUN.test(text) && !hasVisibilityDeixis
+      && !REMNANT_ANYWHERE_RE.test(text)) {
       return { text, stripped: false, removed: [] }
     }
 
@@ -536,6 +608,15 @@ export function stripUnbackedFigureReferences(
       const kept = sentences.map((sentence) => {
         const s = sentence.trim()
         if (s.length === 0) return ''
+
+        // Remnants of a removed text diagram — see ARROW_FOLLOW_RE.
+        if (!s.includes('?')) {
+          const repaired = repairRemnant(s)
+          if (repaired !== null) {
+            removed.push(s)
+            return repaired
+          }
+        }
 
         // Shape 0: a leading VISIBILITY-DEIXIS opener ("Here you see …", "As
         // you can see, …"). It names no figure noun, so shape 1/2 below never
@@ -648,11 +729,21 @@ export function stripUnbackedFigureReferences(
       return kept.filter((x) => x.length > 0).join(' ')
     })
 
-    const out = cleanedParagraphs.filter((p) => p.trim().length > 0).join('\n\n').trim()
+    // A drawing's stray label ("Light") is only recognisable as one when the
+    // drawing around it was just found and removed; on its own a two-word
+    // paragraph is left alone.
+    const paragraphsOut = removed.length > 0
+      ? cleanedParagraphs.filter((p) => {
+          if (!isOrphanLabelParagraph(p)) return true
+          removed.push(p.trim())
+          return false
+        })
+      : cleanedParagraphs
+    const out = paragraphsOut.filter((p) => p.trim().length > 0).join('\n\n').trim()
     // Never hand back an empty turn. If the figure reference WAS the whole
     // message there is nothing safe to say, so the original stands and the
     // caller's log records that it could not be repaired.
-    if (out.length === 0) return { text, stripped: false, removed: [] }
+    if (out.length === 0) return { text, stripped: false, removed: [], onlyPointer: removed.length > 0 }
     if (removed.length === 0) return { text, stripped: false, removed: [] }
     return { text: out, stripped: true, removed }
   } catch {

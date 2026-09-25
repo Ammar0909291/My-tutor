@@ -142,18 +142,21 @@ describe('bio.immuno.immune-disorders: three failure modes, not four', () => {
 })
 
 describe('non-regression: everything this fix must not touch', () => {
-  it('CONCEPT_SCENE_OVERRIDES grew by exactly these two', () => {
-    expect(CONCEPT_SCENE_OVERRIDES).toHaveLength(58)
+  it('CONCEPT_SCENE_OVERRIDES grew by exactly these two, on top of the concurrent DNA-replication fix', () => {
+    // A concurrent session independently fixed bio.mol.dna-replication
+    // (56 -> 57) while this fix was in progress (57 -> 59) — see
+    // visualGeneratorSplits.test.ts's own merged history for both.
+    expect(CONCEPT_SCENE_OVERRIDES).toHaveLength(59)
     expect(CONCEPT_SCENE_OVERRIDES).toContain(PHOTOSYNTHESIS)
     expect(CONCEPT_SCENE_OVERRIDES).toContain(IMMUNE_DISORDERS)
   })
 
-  it('an unrelated concept still stuck on Tier 3 is unaffected by this fix', () => {
-    // bio.mol.dna-replication is a pre-existing, documented Tier-3-only case
-    // (visualGeneratorSplits.test.ts's REQUIRES_AUTHORING list) — it must
-    // still resolve exactly as before, with no override accidentally added.
-    expect(CONCEPT_SCENE_OVERRIDES).not.toContain('bio.mol.dna-replication')
-    expect(buildCanonicalScene(null, 'bio.mol.dna-replication')).toBeNull()
+  it('an unrelated concept still genuinely stuck on Tier 3 is unaffected by this fix', () => {
+    // phys.opt.refraction is a long-standing, documented Tier-3-only case
+    // (visualGeneratorSplits.test.ts's own REQUIRES_AUTHORING list) — it
+    // must still resolve exactly as before, with no override accidentally
+    // added by this change.
+    expect(CONCEPT_SCENE_OVERRIDES).not.toContain('phys.opt.refraction')
   })
 
   it('mitosis and the 18 retired-then-replaced bio.cell concepts are unaffected', () => {

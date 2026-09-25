@@ -972,7 +972,29 @@ const looksLikeAQuestion = (s: string): boolean =>
  * when two options match equally well, which is the case that would otherwise
  * quietly grade the wrong one.
  */
+/**
+ * Digit-group separators folded away: "84 000", "84,000", "84 000" -> "84000".
+ * Only a 1-3 digit group followed by exact 3-digit groups joined by ONE space,
+ * comma, no-break or narrow space — so "5, 100" (a list) and "0.5 x 4200" are
+ * untouched.
+ */
+export function foldDigitGroups(s: string): string {
+  return s.replace(/\b\d{1,3}(?:[ ,\u00a0\u202f]\d{3})+(?!\d)/g, (m) => m.replace(/[ ,\u00a0\u202f]/g, ''))
+}
+
 export function resolveMcqChoice(message: string, mcq: TutorMCQ): number | null {
+  // A GROUPED NUMBER IS ONE NUMBER (live, phys.therm.calorimetry, 2026-09-24):
+  // the option "84 000 J" was read as leading value 84, so a learner typing
+  // the right answer "84000 J" was never graded. Both sides are folded once.
+  const folded = foldDigitGroups(message)
+  const foldedOptions = mcq.options.map(foldDigitGroups)
+  if (folded !== message || foldedOptions.some((o, i) => o !== mcq.options[i])) {
+    return resolveMcqChoiceFolded(folded, { ...mcq, options: foldedOptions })
+  }
+  return resolveMcqChoiceFolded(message, mcq)
+}
+
+function resolveMcqChoiceFolded(message: string, mcq: TutorMCQ): number | null {
   const n = norm(message)
 
   /**

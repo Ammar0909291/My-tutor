@@ -157,11 +157,33 @@ export interface ConfirmationResult {
  * whitespace-only reply: there is no sensible place to attach a confirmation to
  * nothing, and inventing a whole turn is beyond what this is allowed to do.
  */
+/**
+ * Does the reply STATE that the answer was right? A question is not a
+ * statement: "Is that correct?" contains `\bcorrect\b` but confirms nothing.
+ *
+ * MEASURED (synthetic-student run, phys.mech.acceleration and
+ * phys.mech.kinematics-1d, 2026-09-25, production `[c5]` log
+ * `confirmed: true`): the server graded "3 m/s²" correct and the whole reply
+ * was "So you calculated the train's average acceleration as 3 metres per
+ * second squared, right? Is that correct?" — the learner was asked to grade
+ * their own right answer, and the enforcer added nothing because the regex
+ * found "correct" inside the question. `CONFIRMS_CORRECT` itself is unchanged
+ * (confirmationDetectorParity pins it to the scorer); only the text it is
+ * tested against drops the sentences that end in "?".
+ */
+export function statesCorrect(text: string): boolean {
+  const statements = flatten(text)
+    .split(/(?<=[.!?])\s+|\n+/)
+    .filter((sentence) => sentence.trim().length > 0 && !sentence.trim().endsWith('?'))
+    .join(' ')
+  return CONFIRMS_CORRECT.test(statements)
+}
+
 export function confirmCorrectAnswer(input: ConfirmationInput): ConfirmationResult {
   const { text, correct } = input
   if (correct !== true) return { text, added: false }
   if (typeof text !== 'string' || text.trim().length === 0) return { text, added: false }
-  if (CONFIRMS_CORRECT.test(flatten(text))) return { text, added: false }
+  if (statesCorrect(text)) return { text, added: false }
 
   const n = input.priorConfirmations
   const index = Number.isFinite(n) && (n as number) >= 0 ? Math.floor(n as number) % PHRASINGS.length : 0

@@ -79,6 +79,21 @@ export interface ExcursionState {
    * which is the previous behaviour exactly.
    */
   openedAsKnowledgeGap?: boolean
+  /**
+   * THE LESSON'S QUESTION THAT WAS ON SCREEN WHEN THIS EXCURSION OPENED.
+   *
+   * Synthetic-student after-run 2, 2026-09-24 (production, phys.mech.velocity,
+   * off-track student): with "Speed and velocity are defined with the same
+   * denominator…" on screen, the learner asked "what's your favourite physics
+   * fact?", then answered the lesson's question — graded right against the
+   * authored key (`gradeSource: server-key`), told "Yes, exactly right" — and
+   * received no credit, because every excursion turn freezes the ladder. The
+   * lesson then drifted to TRANSFER below the verified bar and could never
+   * certify. Answering THIS question is returning to the lesson; recorded
+   * once, at opening, so a question the side topic later puts up never counts.
+   * Optional so an older snapshot reads as "none recorded" (prior behaviour).
+   */
+  heldQuestion?: string | null
 }
 
 export const NO_EXCURSION: ExcursionState = {
@@ -101,6 +116,7 @@ export type ExcursionTransition =
   | 'closed-lesson-changed'  // the lesson moved underneath the excursion
   | 'closed-turn-limit'      // safety valve
   | 'closed-wants-practice'  // detoured learner asked to be assessed again
+  | 'closed-answered-lesson' // learner answered the lesson question held on screen
 
 export interface ExcursionDecision {
   /** The state to persist for the next turn. */
@@ -240,6 +256,10 @@ export interface ExcursionInput {
    * caller behaves exactly as before.
    */
   ambiguous?: boolean
+  /** The lesson question currently on screen (the pending MCQ), if any. */
+  pendingQuestion?: string | null
+  /** This turn's message was graded against `pendingQuestion`. */
+  answeredPendingQuestion?: boolean
 }
 
 /**
@@ -320,6 +340,15 @@ export function decideExcursion(input: ExcursionInput): ExcursionDecision {
 
   // Safety valve — a missed close can never strand a learner off-lesson.
   if (active && state.turns >= MAX_EXCURSION_TURNS) return closed('closed-turn-limit')
+
+  // The learner answered the lesson's own question that was on screen when the
+  // detour opened: they are back on the lesson, and this turn is the lesson's.
+  // See ExcursionState.heldQuestion. Exact match on the recorded question, so
+  // an answer to anything the side topic put up is still the side topic's.
+  if (active && input.answeredPendingQuestion === true && state.heldQuestion
+      && input.pendingQuestion === state.heldQuestion) {
+    return closed('closed-answered-lesson')
+  }
 
   // ── AMBIGUOUS TURN = HOLD (Phase 2) ────────────────────────────────────────
   //
@@ -522,6 +551,7 @@ export function decideExcursion(input: ExcursionInput): ExcursionDecision {
         // versus "explain X" is exactly the distinction wanted, and it has
         // already been made by the time this branch runs.
         openedAsKnowledgeGap: gapOpensThisConcept,
+        heldQuestion: active ? (state.heldQuestion ?? null) : (input.pendingQuestion ?? null),
       },
       targetConceptId: requestedConceptId,
       targetTopicTitle: null,
@@ -554,6 +584,7 @@ export function decideExcursion(input: ExcursionInput): ExcursionDecision {
         targetTopicTitle: requestedTopicTitle,
         returnToConceptId: lessonConceptId,
         turns: 0,
+        heldQuestion: active ? (state.heldQuestion ?? null) : (input.pendingQuestion ?? null),
       },
       // Null on purpose: there is no concept, and inventing one — the lesson's
       // most of all — is the exact failure this branch exists to end.
@@ -615,8 +646,11 @@ function none(lessonConceptId: string | null): ExcursionDecision {
  * newly create.
  */
 export function turnCountsForLesson(
-  decision: Pick<ExcursionDecision, 'state' | 'justClosed'>,
+  decision: Pick<ExcursionDecision, 'state' | 'justClosed'> & { transition?: ExcursionTransition },
 ): boolean {
+  // The one closing turn that IS the lesson's: the learner answered the
+  // lesson's own held question (see ExcursionState.heldQuestion).
+  if (decision.transition === 'closed-answered-lesson') return true
   // `justClosed` is included on purpose. The closing turn is the RETURN turn:
   // the learner said "got it, thanks" and the tutor walks back to the lesson.
   // A turn that resumes a lesson cannot also finish it — otherwise satisfaction
@@ -663,6 +697,9 @@ export function parseExcursionState(raw: unknown): ExcursionState {
     // behaviour and the conservative direction (the detour stays open rather
     // than closing on a signal it should not).
     openedAsKnowledgeGap: v.openedAsKnowledgeGap === true,
+    // Same rule: a field not named here is dropped on the next turn. Capped
+    // like the title; it is only ever compared for equality.
+    heldQuestion: typeof v.heldQuestion === 'string' && v.heldQuestion ? v.heldQuestion.slice(0, 2000) : null,
   }
 }
 

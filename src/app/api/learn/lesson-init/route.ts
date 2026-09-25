@@ -557,6 +557,39 @@ export async function POST(req: Request) {
       console.warn('[lesson-init] figure-reference check skipped:', err)
     }
 
+    // ── THE SAME OUTPUT CHECKS THE CHAT TURN RUNS ─────────────────────────
+    // Every lesson opens here, not through the chat route, and an opening
+    // never carries a figure or an options list. So the no-figure checks the
+    // chat turn applies (ASCII drawing, the remnants it leaves, a turn that is
+    // only a pointer, a claim that a visual is attached) and the promise of
+    // options that are not there apply to every opening. Each is a pure repair
+    // that returns its input unchanged when it does not match.
+    try {
+      const { stripUnbackedAsciiDiagram } = await import('@/lib/teaching/asciiDiagramGuard')
+      const { stripUnbackedFigureReferences, pointerOnlyFallback } = await import('@/lib/teaching/figureReference')
+      const { stripPhantomVisualClaims } = await import('@/lib/teaching/visualRegistry')
+      const { dropSentencesPointingAtMissingOptions } = await import('@/lib/teaching/gateAssessment')
+      const { stripResidualMachineTags } = await import('@/lib/teaching/residualTagSweep')
+      const { getKGNode } = await import('@/lib/curriculum/knowledgeGraph')
+      const before = routed.text
+      let text = stripUnbackedAsciiDiagram(before, false).text
+      const leftovers = stripUnbackedFigureReferences(text, false)
+      text = leftovers.text
+      if (leftovers.onlyPointer || text.trim().length === 0) {
+        const node = topicSlug ? getKGNode(topicSlug) : null
+        if (node?.title && node.description) text = pointerOnlyFallback(node.title, node.description)
+      }
+      text = stripPhantomVisualClaims(text)
+      text = dropSentencesPointingAtMissingOptions(text)
+      text = stripResidualMachineTags(text)
+      if (text.trim().length > 0 && text !== before) {
+        console.warn('[lesson-init] ' + JSON.stringify({ event: 'opening-output-repaired', topicSlug }))
+        routed = { ...routed, text }
+      }
+    } catch (err) {
+      console.warn('[lesson-init] output checks skipped:', err)
+    }
+
     // Same reasoning as the figure repair immediately above, and found the same
     // way: the opening turn lives behind its own endpoint, so a repair added to
     // the chat route does not reach it. The learner's FIRST contact with a

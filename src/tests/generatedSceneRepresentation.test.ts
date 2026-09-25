@@ -49,10 +49,13 @@ describe('every activated generator says what it builds', () => {
     expect(SRC).toContain('if (fromKind) return fromKind')
   })
 
-  it('the registry card is still the fallback — agreeing concepts are unchanged', () => {
+  it('only a card bound to THIS concept may name its scene; otherwise the drawn scene decides', () => {
+    // Hardening (2026-09-24): the fallback used to be any registry card,
+    // including a DOMAIN card — which named 18 bio.cell scenes "food_chain".
     const after = SRC.slice(SRC.indexOf('if (fromKind) return fromKind'))
-    expect(after).toContain('const registryVisual = getConceptVisualType(ctx.conceptId)')
-    expect(after).toContain('representationForVisualType(registryVisual)')
+    expect(after).toContain("return binding?.tier === 'exact'")
+    expect(after).toContain('representationForVisualType(binding.entry.primary)')
+    expect(after).toContain('representationForSceneType(generatedScene.sceneType)')
   })
 })
 

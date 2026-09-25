@@ -56,6 +56,7 @@
  */
 
 import { stripAuthoringLabel, containsOptionList } from './gateProbeContract'
+import { hasProseMultipleChoice } from './proseMcqGuard'
 import { askedAnswerableQuestion } from './answerableTurn'
 import type { TutorMCQ } from './mcq'
 
@@ -191,19 +192,24 @@ export function probeToMcq(probe: ConvertibleProbe): TutorMCQ | null {
  * than a generic "here's a check" — but it is quoted as context, never as
  * something to reproduce, because the learner is already reading it.
  */
-export function buildGateAssessmentBlock(mcq: TutorMCQ): string {
+export function buildGateAssessmentBlock(_mcq: TutorMCQ): string {
+  // THE QUESTION IS NOT SHOWN TO THE MODEL (owner-approved, G2, 2026-09-24).
+  // It used to be quoted here "as context", and on a real account the model
+  // used it to work the exact problem first — "3.0 mol H₂ × (2/2) = 3.0 mol
+  // H₂O … you can produce 3.0 mol of water" — then the learner was asked
+  // "how many moles of water form from 3.0 mol of hydrogen?". A model that
+  // never sees the question cannot solve it for the learner. The lead-in is
+  // still about the concept just taught; `dropAnswerLeaks` backs this up.
   return (
     '\n\nASSESSMENT ALREADY SELECTED (do not write a question this turn). ' +
-    'The learner is about to see this question, rendered as tappable buttons ' +
-    'beneath your message:\n' +
-    `  "${mcq.question}"\n` +
-    'It was chosen by the teaching engine from reviewed course material, and ' +
-    'it is what their progress will be graded on. Your job this turn is the ' +
-    'LEAD-IN ONLY: one or two sentences that make the question worth ' +
-    'answering — a bridge from what you just taught, or the reason it matters. ' +
-    'Do NOT restate the question, do NOT list the options, do NOT ask any ' +
-    'other question, and do NOT emit an MCQ tag of your own. Never mention ' +
-    'that the question was selected for you.'
+    'A graded question on this concept will appear beneath your message as ' +
+    'tappable buttons. It was chosen by the teaching engine from reviewed ' +
+    'course material, and it is what their progress will be graded on. Your ' +
+    'job this turn is the LEAD-IN ONLY: one or two sentences that bridge from ' +
+    'what you just taught. Do NOT work a new example or give a new ' +
+    'definition this turn — the learner must answer from their own ' +
+    'understanding. Do NOT ask any other question, and do NOT emit an MCQ ' +
+    'tag of your own. Never mention that the question was selected for you.'
   )
 }
 
@@ -515,6 +521,12 @@ export interface UngradedGateQuestionInput {
    * keeps its exact prior behaviour.
    */
   learnerAcknowledged?: boolean
+  /**
+   * What to say instead of the content-free continuation when the withheld
+   * question leaves nothing (see conceptFallback.ts). Absent -> the original
+   * behaviour, byte-for-byte.
+   */
+  conceptFallback?: string
 }
 
 /** The route's own grade of the pending question, passed in, never derived. */
@@ -619,15 +631,22 @@ function withheldContinuation(
    *  branch below — a real grade already reports the outcome and must not
    *  have its wording second-guessed by what the ack detector also thinks. */
   learnerAcknowledged = false,
+  /** The concept's own words (conceptFallback.ts). When given, it replaces the
+   *  content-free continuation; after a real grade the grade stands alone. */
+  conceptFallback?: string,
 ): string {
+  const fallback = conceptFallback && conceptFallback.trim().length > 0 ? conceptFallback.trim() : null
   if (!justGraded || typeof justGraded.correct !== 'boolean') {
     if (questionFollows) return WITHHELD_QUESTION_HANDS_OFF_TO_MCQ
     if (learnerAcknowledged) return WITHHELD_QUESTION_ACK_CONTINUATION
-    return WITHHELD_QUESTION_CONTINUATION
+    return fallback ?? WITHHELD_QUESTION_CONTINUATION
   }
-  const tail = questionFollows ? WITHHELD_QUESTION_HANDS_OFF_TO_MCQ : WITHHELD_QUESTION_CONTINUATION
+  // Learner pilot, 2026-09-24: "That's right. Let's stay with this idea for a
+  // moment." — the grade is the content; the hollow tail is dropped when the
+  // caller supplied the concept (and kept otherwise, unchanged).
+  const tail = questionFollows ? WITHHELD_QUESTION_HANDS_OFF_TO_MCQ : (fallback ? '' : WITHHELD_QUESTION_CONTINUATION)
   if (justGraded.correct) {
-    return `That's right. ${tail}`
+    return tail ? `That's right. ${tail}` : "That's right."
   }
   const key = typeof justGraded.correctOptionText === 'string'
     ? justGraded.correctOptionText.trim()
@@ -647,9 +666,9 @@ function withheldContinuation(
   // already handled; terminal punctuation is the same class and was missed.
   // Authored option texts are written by hand across six subjects, so whether
   // one ends in a stop is not something this template can assume either way.
-  return key.length > 0 && !key.includes('?')
+  return (key.length > 0 && !key.includes('?')
     ? `Not quite — the answer was: ${endStopped(key)} ${tail}`
-    : `Not quite. ${tail}`
+    : `Not quite. ${tail}`).trim()
 }
 
 /** The key with exactly one terminal stop, never two and never none. */
@@ -778,7 +797,7 @@ export function withholdUngradedGateQuestion(
       return {
         // A tappable MCQ follows this text, so the fallback hands off to it
         // instead of stalling with the content-free hold sentence.
-        text: kept.length > 0 ? kept : withheldContinuation(input.justGraded, true),
+        text: kept.length > 0 ? kept : withheldContinuation(input.justGraded, true, false, input.conceptFallback),
         withheld: true,
         reason: 'stray-question-alongside-mcq',
       }
@@ -823,7 +842,7 @@ export function withholdUngradedGateQuestion(
         // teaching preceded the broken promise, and otherwise fall back to the
         // established continuation sentence. Never a second announcement, and
         // never a claim about how the learner did.
-        text: teaching.length > 0 ? teaching : withheldContinuation(input.justGraded, false),
+        text: teaching.length > 0 ? teaching : withheldContinuation(input.justGraded, false, false, input.conceptFallback),
         withheld: true,
         reason: 'announced-question-never-delivered',
       }
@@ -865,6 +884,7 @@ export function withholdUngradedGateQuestion(
         input.justGraded,
         input.questionOnScreen === true,
         input.learnerAcknowledged === true,
+        input.conceptFallback,
       ),
       withheld: true,
       reason: 'no-gradeable-probe',
@@ -1129,9 +1149,90 @@ export function withholdClosingProseQuestion(input: {
  * Call ONLY when no artifact will be served. Pure; never throws; returns a
  * non-empty turn or the caller's own fallback.
  */
+/**
+ * A SENTENCE THAT POINTS AT OPTIONS THE LEARNER CANNOT SEE.
+ *
+ * MEASURED (production, 2026-09-24, real account, no widget served on either
+ * turn):
+ *   phys.em.lc-circuits      "…pick the best answer: Let me know which option
+ *                             you choose when you're ready."
+ *   phys.qm.particle-in-box  "…which of the following statements is correct,
+ *                             and why? Take a look at the labelled figure…"
+ * Neither ends in a colon, so the structural check below never saw them, and
+ * the learner was asked to choose from a list that does not exist.
+ *
+ * Phrase-based ON PURPOSE and narrow: each phrase only makes sense when a list
+ * of options is on screen. Only consulted when no MCQ is served AND the text
+ * carries no lettered option list of its own (a prose list is a separate case,
+ * owned by proseMcqGuard).
+ */
+const POINTS_AT_MISSING_OPTIONS =
+  /\b(which of the following|of the (?:options|choices) (?:below|above|shown)|(?:pick|choose|select|tap) (?:the )?(?:best|correct|right) (?:answer|option|choice)|which (?:option|choice|answer) you (?:choose|pick|select)|from the (?:options|choices|list) (?:below|above)|the options below)\b/i
+
+export function dropSentencesPointingAtMissingOptions(text: string): string {
+  const t = typeof text === 'string' ? text : ''
+  if (!POINTS_AT_MISSING_OPTIONS.test(t) || containsOptionList(t) || hasProseMultipleChoice(t)) return t
+  // Split on sentence ends AND on a colon that introduces a new sentence, so
+  // "…behaves, pick the best answer: Let me know…" loses both halves of the
+  // promise but keeps the teaching before it.
+  const parts = t.split(/(?<=[.!?])\s+|(?<=:)\s+(?=[A-Z])/)
+  const kept: string[] = []
+  for (const part of parts) {
+    if (!POINTS_AT_MISSING_OPTIONS.test(part)) kept.push(part)
+  }
+  return kept.join(' ').replace(/\s+([.!?])/g, '$1').trim()
+}
+
+/**
+ * A sentence that ANNOUNCES a check ("Sure, let's check your understanding with
+ * a quick multiple-choice question.", "I hear you—let's do a quick check.",
+ * "Here's a quick check to see how well you can blend…") in a reply that then
+ * asks nothing. Pilot, 2026-09-24: four consecutive turns of exactly this while
+ * the question itself had been withheld. Judged only when the reply contains no
+ * question mark at all and no options list — the one condition under which the
+ * announcement is certainly unkept.
+ */
+const ANNOUNCES_A_CHECK =
+  /^(?:(?:sure|great|ok(?:ay)?|alright|got it|understood|no problem|absolutely|of course|i hear you|that(?:'|’)s great)[^.!?]{0,30}[,—–-]\s*)?(?:let(?:'|’)s|let me|here(?:'|’)s|here is)\b[^.!?]{0,80}\b(?:check|test|quiz|question)\b[^.!?:]{0,80}[.!]?$/i
+
+// The same promise ending in a COLON. MEASURED (synthetic run, 2026-09-25,
+// phys.mech.acceleration, strong student "can you quiz me?"): "Sure! Here's a
+// quick check on acceleration:" shipped with no question after it. The
+// trailing-colon rule in `enforceQuestionDeliveryContract` would have caught
+// it, but the figure pointer (`ensureVisualAcknowledged`, appended earlier in
+// the route) followed the colon, so the colon was no longer trailing. Noun form
+// only ("here's a/your/another/the next … check/quiz/question/test:") so a verb
+// lead-in to content ("Let's check the formula:") is never touched; and the
+// function still returns early whenever the text asks anything.
+const ANNOUNCES_A_CHECK_COLON = /^(?:[^.!?]{0,30}[,—–-]\s*)?here(?:(?:'|’)s| is)\b/i
+const ANNOUNCED_CHECK_NOUN_COLON = /\b(?:a|your|another|the next)\b[^.!?:]{0,40}\b(?:check|quiz|question|test)\b[^.!?:]{0,60}:$/i
+const announcesACheck = (sentence: string): boolean =>
+  ANNOUNCES_A_CHECK.test(sentence)
+  || (ANNOUNCES_A_CHECK_COLON.test(sentence) && ANNOUNCED_CHECK_NOUN_COLON.test(sentence))
+
+export function dropUndeliveredCheckAnnouncements(text: string): string {
+  const t = typeof text === 'string' ? text : ''
+  if (t.includes('?') || containsOptionList(t) || hasProseMultipleChoice(t)) return t
+  let dropped = false
+  const paragraphs = t.split(/\n{2,}/).map((p) => {
+    const sentences = p.split(/(?<=[.!])\s+/)
+    const kept = sentences.filter((s) => !announcesACheck(s.trim()))
+    if (kept.length === sentences.length) return p
+    dropped = true
+    return kept.join(' ').trim()
+  })
+  // Untouched text is returned byte-identical — paragraph breaks included.
+  if (!dropped) return t
+  return paragraphs.filter((p) => p.trim().length > 0).join('\n\n').trim()
+}
+
 export function enforceQuestionDeliveryContract(text: string, fallback: string): string {
   try {
-    const t = typeof text === 'string' ? text : ''
+    const raw = typeof text === 'string' ? text : ''
+    const t0 = dropUndeliveredCheckAnnouncements(raw)
+    if (t0 !== raw) return t0.length > 0 ? t0 : fallback
+    const t = dropSentencesPointingAtMissingOptions(t0)
+    if (t !== t0 && !/:\s*$/.test(t.trimEnd())) return t.length > 0 ? t : fallback
     // A trailing colon is a promise of something that should follow. Nothing
     // does. Structural, so it needs no phrase list and catches a turn the
     // provider truncated at its own lead-in for free.
@@ -1142,4 +1243,78 @@ export function enforceQuestionDeliveryContract(text: string, fallback: string):
     // A repair must never break a turn.
     return typeof text === 'string' ? text : fallback
   }
+}
+
+// ── A GRADED QUESTION IS NOT ANSWERED IN THE SENTENCES ABOVE IT ─────────────
+//
+// Owner-approved (G2, 2026-09-24), from a real-account session on
+// chem.found.stoichiometry. Twice in one lesson the reply answered the graded
+// question it was about to ask:
+//
+//   "So, from 3.0 mol of hydrogen you can produce **3.0 mol of water** …"
+//     -> "how many moles of water form from 3.0 mol of hydrogen?"  [3.0 mol]
+//   "… is called the **limiting reactant** – it's the one that would be
+//    completely consumed first …"
+//     -> "The reactant that runs out first … is called the ______ reactant."
+//                                                               [limiting]
+//
+// The question is no longer shown to the model (`buildGateAssessmentBlock`),
+// which removes the first cause. The second is the model teaching the answer
+// on its own, so the served question is checked against the text: a sentence
+// that states the CORRECT option more often than the question itself does is
+// removed. "More often than the question" is what keeps the setup: "Start with
+// 3.0 mol H₂" repeats the question's own quantity (once, as the question
+// does) and stays; "3.0 mol H₂ × … = 3.0 mol H₂O" states it a second time and
+// goes. An option also named inside a distractor, or too short to be
+// distinctive ("H₂", "Yes"), is never used.
+//
+// Pure. Returns the text unchanged, paragraph for paragraph, when nothing
+// matches.
+
+const leakNorm = (s: string) =>
+  s.normalize('NFKC').toLowerCase()
+    .replace(/(\d)[ ,\u00a0\u202f](?=\d{3}\b)/g, '$1')
+    .replace(/[^\p{L}\p{N}.]+/gu, ' ')
+    .replace(/(?<!\d)\.|\.(?!\d)/g, ' ')
+    .replace(/\s+/g, ' ').trim()
+
+/** The option's answer, without an authored "— because …" annotation. */
+const optionCore = (o: string) => leakNorm(o.split(/\s[—–]\s|\s-\s/)[0] ?? '')
+
+function occurrences(haystack: string, needle: string): number {
+  const esc = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  return (haystack.match(new RegExp(`(?<![\\p{L}\\p{N}])${esc}(?![\\p{L}\\p{N}])`, 'gu')) ?? []).length
+}
+
+export function dropAnswerLeaks(text: string, mcq: TutorMCQ, conceptTitle?: string | null): { text: string; dropped: string[] } {
+  const correct = optionCore(mcq.options[mcq.correctIndex] ?? '')
+  if (correct.replace(/[^\p{L}\p{N}]/gu, '').length < 3) return { text, dropped: [] }
+  // An answer that IS the lesson's own concept name ("Displacement" in
+  // "Displacement and Distance") is named by every teaching sentence; removing
+  // those would remove the lesson. Synthetic-student after-run 2, 2026-09-24:
+  // "…is the displacement: nowhere, zero." above "What type of quantity is
+  // this?" — teaching, not a leak.
+  if (conceptTitle && occurrences(leakNorm(conceptTitle), correct) > 0) return { text, dropped: [] }
+  const others = mcq.options.filter((_, i) => i !== mcq.correctIndex).map(optionCore)
+  if (others.some((o) => occurrences(o, correct) > 0)) return { text, dropped: [] }
+  const inQuestion = occurrences(leakNorm(mcq.question), correct)
+  const dropped: string[] = []
+  const paragraphs = text.split(/\n{2,}/).map((para) => {
+    const lines = para.split('\n').map((line) => {
+      const sentences = line.split(/(?<=[.!?])\s+/)
+      const kept = sentences.filter((sentence) => {
+        const leaks = occurrences(leakNorm(sentence), correct) > inQuestion
+        if (leaks) dropped.push(sentence)
+        return !leaks
+      })
+      if (kept.length === sentences.length) return line
+      const rest = kept.join(' ').trim()
+      // A list marker left on its own ("3.") is not content.
+      return /^(?:\d+[.)]|[-*•])?$/.test(rest) ? '' : rest
+    })
+    const keptLines = lines.filter((l, i) => l.length > 0 || para.split('\n')[i].length === 0)
+    return keptLines.join('\n').trim()
+  })
+  if (dropped.length === 0) return { text, dropped }
+  return { text: paragraphs.filter((p) => p.length > 0).join('\n\n'), dropped }
 }

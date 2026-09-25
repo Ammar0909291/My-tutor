@@ -127,7 +127,15 @@ export function ensureVisualAcknowledged(
     if (referencesFigure(text)) return { text, appended: false }
 
     const asset = decision.asset
-    const kind = asset.representation ? asset.representation.replace(/_/g, ' ') : 'figure'
+    // A DOMAIN-scope asset is a general illustration, and its `representation`
+    // names what the CONCEPT would ideally be shown as, not what is drawn.
+    // MEASURED (production, 2026-09-24, phys.therm.carnot-cycle): a bare
+    // coordinate grid was introduced as "the motion graph beside this message"
+    // in a thermodynamics lesson. Only a concept-scope figure may be named by
+    // its representation; a general illustration is just "the figure".
+    const kind = asset.scope === 'domain' || !asset.representation
+      ? 'figure'
+      : asset.representation.replace(/_/g, ' ')
     const what = clamp(asset.conceptTitle, 60)
 
     const pointer =
@@ -138,5 +146,47 @@ export function ensureVisualAcknowledged(
     return { text: `${text.trim()}\n\n${pointer}`, appended: true }
   } catch {
     return { text, appended: false }
+  }
+}
+
+/**
+ * AN UNMET PICTURE REQUEST IS SAID OUT LOUD, NOT IGNORED.
+ *
+ * MEASURED (production, 2026-09-24, real account): "show me picture of the
+ * orbit please" (phys.mech.keplers-laws) and "please draw the circuit for me"
+ * (phys.em.lc-circuits) both got a words-only reply that never mentioned the
+ * request. Both concepts have NO figure on purpose — their old ones were
+ * retired as physically wrong (visual/retired.ts) — so showing nothing is
+ * correct; staying silent about it is not: the learner cannot tell "ignored"
+ * from "not available".
+ *
+ * Fires only when ALL hold: the learner asked for a picture this turn, no
+ * figure is attached this turn, none has been shown for this concept earlier
+ * (an earlier one is still on screen and the reply may point to it), and the
+ * reply does not already say a picture is unavailable. It claims nothing about
+ * any figure; it only states that there is none.
+ */
+export const NO_PICTURE_AVAILABLE_LINE =
+  "I don't have a picture for this one, so I'll explain it in words."
+
+const ALREADY_SAYS_NO_PICTURE =
+  /\b(?:don'?t|do not|can'?t|cannot|unable to)\b[^.!?]{0,40}\b(?:picture|diagram|figure|image|drawing|draw|show)\b|\bno (?:picture|diagram|figure|image)\b/i
+
+export function acknowledgeUnavailablePicture(input: {
+  text: string
+  learnerAskedForPicture: boolean
+  figureAttachedThisTurn: boolean
+  figureShownEarlierForConcept: boolean
+}): VisualAcknowledgementResult {
+  try {
+    const { text } = input
+    if (!input.learnerAskedForPicture || input.figureAttachedThisTurn || input.figureShownEarlierForConcept) {
+      return { text, appended: false }
+    }
+    if (typeof text !== 'string' || text.trim().length === 0) return { text, appended: false }
+    if (ALREADY_SAYS_NO_PICTURE.test(text)) return { text, appended: false }
+    return { text: `${NO_PICTURE_AVAILABLE_LINE}\n\n${text.trim()}`, appended: true }
+  } catch {
+    return { text: input.text, appended: false }
   }
 }

@@ -184,6 +184,14 @@ export interface MatchOptions {
    * no extra query.
    */
   onAllCandidatesSpent?: () => void
+  /**
+   * PROBE RETRIEVAL ONLY. Consulted only once `excludeProbeStem` has spent
+   * every candidate: return true for a spent stem the learner answered WRONG
+   * and may be asked once more (`teachingHistory.isMissedAndReaskable`). The
+   * returned match then carries `reask: true`. Undefined keeps the exact prior
+   * behaviour (an exhausted pool returns null).
+   */
+  allowMissedStem?: (stem: string) => boolean
 }
 
 /**

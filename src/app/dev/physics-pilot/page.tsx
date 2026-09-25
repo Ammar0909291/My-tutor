@@ -52,8 +52,12 @@ const PILOT = [
   'phys.em.electric-dipole',
 ] as const
 
-export default function PhysicsPilotPage() {
+export default function PhysicsPilotPage({ searchParams }: { searchParams?: { concept?: string } }) {
   if (process.env.NODE_ENV === 'production') notFound()
+  // ?concept=<id> renders just that concept (any subject) — for inspecting one
+  // newly authored figure in a real browser without editing the fixture list.
+  const only = searchParams?.concept?.trim()
+  const concepts: readonly string[] = only ? [only] : PILOT
 
   return (
     <main style={{ padding: 24, maxWidth: 1100, margin: '0 auto', fontFamily: 'system-ui, sans-serif' }}>
@@ -63,7 +67,7 @@ export default function PhysicsPilotPage() {
         authority and painted by the production renderer.
       </p>
 
-      {PILOT.map((conceptId) => {
+      {concepts.map((conceptId) => {
         const decision = resolveVisual({
           message: 'explain with diagram',
           lessonConceptId: conceptId,

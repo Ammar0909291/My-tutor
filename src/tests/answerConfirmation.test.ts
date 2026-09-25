@@ -11,7 +11,7 @@
  */
 import { readFileSync } from 'fs'
 import { describe, it, expect } from 'vitest'
-import { confirmCorrectAnswer, CONFIRMS_CORRECT, stripLeadingFalseConfirmation } from '@/lib/teaching/answerConfirmation'
+import { confirmCorrectAnswer, CONFIRMS_CORRECT, stripLeadingFalseConfirmation, statesCorrect } from '@/lib/teaching/answerConfirmation'
 
 const REAL_UNCONFIRMED = 'Here is a question to check your understanding:'
 const REAL_REMEDIATION =
@@ -192,7 +192,27 @@ describe('the route actually applies it', () => {
     expect(block).toContain("console.log('[c5] '")
     expect(block).toContain("event: 'servedGradedCorrect'")
     expect(block).toMatch(/if \(correctForConfirmation === true\)/)
-    expect(block).toContain('confirmed.added || CONFIRMS_CORRECT.test(confirmed.text)')
+    // 2026-09-25: telemetry reads `statesCorrect` (statements only) so "Is that
+    // correct?" no longer counts as a confirmation — same detector as the enforcer.
+    expect(block).toContain('confirmed.added || statesCorrect(confirmed.text)')
+  })
+})
+
+describe('a question is not a confirmation (synthetic run, 2026-09-25)', () => {
+  const PROD = 'So you calculated the train’s average acceleration as 3 metres per second squared, right? Is that correct?'
+  it('the production reply gets a verdict prepended', () => {
+    expect(statesCorrect(PROD)).toBe(false)
+    const r = confirmCorrectAnswer({ text: PROD, correct: true })
+    expect(r.added).toBe(true)
+    expect(statesCorrect(r.text)).toBe(true)
+  })
+  it('a stated confirmation is still recognised, with or without a question after it', () => {
+    expect(statesCorrect('That’s correct — 18 m/s over 6 s is 3 m/s².')).toBe(true)
+    expect(statesCorrect('Exactly. Can you try the next one?')).toBe(true)
+    expect(confirmCorrectAnswer({ text: 'Correct! Ready for another?', correct: true }).added).toBe(false)
+  })
+  it('the regex itself is unchanged (scorer parity)', () => {
+    expect(CONFIRMS_CORRECT.test('Is that correct?')).toBe(true)
   })
 })
 
