@@ -162,8 +162,10 @@ describe('P20 D2 — instrumentation.ts uses ownership-scoped queries', () => {
     // remaining read is the prefetch — and it must be scoped.
     const reads = src.match(/assetIdentity\.(count|groupBy|findMany|findFirst)\(/g) ?? []
     expect(reads.length).toBeGreaterThan(0)
+    // EGRESS-4 (2026-09-25): the prefetch is now slug-bounded (bootstrapPrefetchSlugs)
+    // and still ownership-scoped in BOTH branches; the regex accepts that form.
     expect(src).toMatch(
-      /assetIdentity\.findMany\(\s*\{[\s\S]{0,200}?where:\s*seedOwnershipWhere\(\)/,
+      /assetIdentity\.findMany\(\s*\{[\s\S]{0,200}?where:\s*(?:\(prefetchSlugs\s*\?\s*\{\s*\.\.\.\()?seedOwnershipWhere\(\)/,
     )
   })
 

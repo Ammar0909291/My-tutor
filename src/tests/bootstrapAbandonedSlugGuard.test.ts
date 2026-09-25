@@ -271,7 +271,9 @@ describe('the guard is wired into src/instrumentation.ts, not merely simulated',
     expect([...prefetch.matchAll(/prisma\.\w+\./g)].map((m) => m[0])).toEqual(
       ['prisma.assetIdentity.', 'prisma.assetIdentity.'],
     )
-    expect(prefetch).toMatch(/findMany\(\{\s*where: seedOwnershipWhere\(\)/)
+    // EGRESS-4 (2026-09-25): the prefetch is now slug-bounded (bootstrapPrefetchSlugs)
+    // and still ownership-scoped in BOTH branches; the regex accepts that form.
+    expect(prefetch).toMatch(/findMany\(\{\s*where: (?:\(prefetchSlugs\s*\?\s*\{\s*\.\.\.\()?seedOwnershipWhere\(\)/)
     expect(prefetch).toMatch(/status: true,/)
     // and the collection happens in the same loop body that fills `existing`.
     expect(prefetch).toMatch(/existing\.set\(row\.canonicalSlug[\s\S]*liveAbandoned\.push\(/)

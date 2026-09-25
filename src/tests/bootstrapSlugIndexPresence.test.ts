@@ -59,6 +59,8 @@ describe('the cold-start bootstrap counts presence the way the unique index does
     expect(block).not.toMatch(/liveAbandoned/)
     expect(block).not.toMatch(/AssetStatus\.ACTIVE/)
     // the ownership prefetch those guards read is unchanged
-    expect(src).toMatch(/prisma\.assetIdentity\.findMany\(\{\s*where: seedOwnershipWhere\(\) as never,/)
+    // EGRESS-4 (2026-09-25): the prefetch is now slug-bounded (bootstrapPrefetchSlugs)
+    // and still ownership-scoped in BOTH branches; the regex accepts that form.
+    expect(src).toMatch(/prisma\.assetIdentity\.findMany\(\{\s*where: \(prefetchSlugs\s*\?\s*\{\s*\.\.\.\(seedOwnershipWhere\(\) as Record<string, unknown>\), canonicalSlug: \{ in: prefetchSlugs \} \}\s*:\s*seedOwnershipWhere\(\)\) as never,/)
   })
 })

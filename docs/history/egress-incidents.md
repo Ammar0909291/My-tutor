@@ -135,3 +135,17 @@ reset — `stats_reset: 2026-07-05 15:50:54+00`), not re-derived from the prior 
   explicitly rule out. Nothing here contradicts or supersedes the 2026-08-31 entry above.
 
 
+
+## EGRESS-4 — full bootstrap prefetch bounded to what its guards read (2026-09-25)
+Another session's live `pg_stat_statements` delta check found no active growth in EGRESS-1/2/3,
+but showed the full cold-start prefetch (`instrumentation.ts`) running on most cold starts,
+because the corpus is rarely converged while campaigns ship many batches a day. The prefetch
+read EVERY seed-owned row plus two relation reads, so its cost grew with the table's history.
+- Rejected fix: bounding to `expectedSlugs` alone. It drops the manual seeder's 5-segment ladder
+  rows from `liveSeedSlugs`, which disarms P-10-FOLLOW-UP-D and re-creates the 45 duplicate
+  ACTIVE maths identities (proven by the negative control in `bootstrapPrefetchBound.test.ts`).
+- Shipped: `bootstrapPrefetchSlugs` = expected ∪ abandoned ∪ `{base:difficulty}` for singleton
+  slots, i.e. exactly what `existing`, `liveAbandoned` and `liveSeedSlugs` look up. Over 30,000
+  slugs (Postgres bind cap 65,535) it returns null and the unbounded read is kept. Mutation-checked.
+- Expected saving today is small (declared corpus ≈ stored rows). It stops future growth with
+  historical rows. Re-measure with the same two-snapshot delta method after deploy.

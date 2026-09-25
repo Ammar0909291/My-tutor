@@ -162,6 +162,56 @@ export function servedByLiveLadderSibling(
   return false
 }
 
+/**
+ * EGRESS-4 · THE FULL PREFETCH READS WHAT ITS GUARDS NEED, NOT THE WHOLE TABLE.
+ *
+ * ── WHY (2026-09-25) ────────────────────────────────────────────────────────
+ * With seed-asset campaigns landing many batches a day, the corpus is rarely
+ * fully converged, so the cheap completeness probe (EGRESS-1's two COUNTs)
+ * falls through to the full prefetch on most cold starts. That prefetch read
+ * EVERY seed-owned row (+ two relation reads), unbounded, so its cost grew with
+ * every historical row any writer had ever seeded — the same "scales with the
+ * table, not the corpus" shape this file's egress notes forbid.
+ *
+ * ── WHY THE OBVIOUS BOUND IS WRONG ─────────────────────────────────────────
+ * Bounding to the corpus's `expectedSlugs` alone was proposed and REJECTED: the
+ * prefetch also feeds `liveSeedSlugs`, which P-10-FOLLOW-UP-D
+ * (`servedByLiveLadderSibling`) reads for the manual seeder's 5-segment ladder
+ * rows — slugs this corpus does NOT produce. Dropping them disarms that guard
+ * and re-creates the 45 duplicate ACTIVE mathematics identities
+ * (bootstrapLadderSiblingGuard.test.ts, test I). And the P-10 abandoned-slug
+ * guard reads rows under slugs the corpus no longer produces at all.
+ *
+ * ── THE RULE ───────────────────────────────────────────────────────────────
+ * Read exactly the union of what the three consumers look up:
+ *   • `existing`       — this corpus's own slugs (expectedSlugs);
+ *   • liveAbandoned    — the corpus's abandoned legacy slugs;
+ *   • liveSeedSlugs    — `${base}:${difficulty}` for every SINGLETON slot (the
+ *                        only candidates `servedByLiveLadderSibling` can ever
+ *                        return true for: it bails unless candidate === base).
+ * Rows outside that union were never read by anything.
+ *
+ * Postgres caps a statement at 65,535 bind parameters. Above
+ * PREFETCH_SLUG_BUDGET this returns null and the caller keeps the unbounded
+ * read — never a new failure mode, at worst today's cost.
+ */
+export const PREFETCH_SLUG_BUDGET = 30_000
+
+export function bootstrapPrefetchSlugs(
+  expectedSlugs: Iterable<string>,
+  abandonedSlugs: Iterable<string>,
+  singletonBaseSlugs: Iterable<string>,
+  difficulties: readonly string[],
+  budget: number = PREFETCH_SLUG_BUDGET,
+): string[] | null {
+  const out = new Set<string>(expectedSlugs)
+  for (const s of abandonedSlugs) out.add(s)
+  for (const base of singletonBaseSlugs) {
+    for (const d of difficulties) out.add(`${base}:${String(d).toLowerCase()}`)
+  }
+  return out.size > budget ? null : [...out]
+}
+
 async function bootstrapAssets() {
   try {
     // ONE POOL PER PROCESS, NOT TWO.
@@ -1326,8 +1376,26 @@ async function bootstrapAssets() {
       // questions against this set, so that guard costs no query either — the
       // rows are the ones already being read on the line below.
       const liveSeedSlugs = new Set<string>()
+      // EGRESS-4 — see bootstrapPrefetchSlugs. Singleton slots are the only
+      // ones the ladder-sibling guard can fire for.
+      const prefetchSlugs = bootstrapPrefetchSlugs(
+        expectedSlugs,
+        abandonedSlugs,
+        ALL_PROBES
+          .map((p) => ({ resolved: probeSlug(p), base: seedCanonicalSlug(p.conceptId, p.probeKind, p.gradeBand) }))
+          .filter((x) => x.resolved === x.base)
+          .map((x) => x.base),
+        PROBE_DIFFICULTIES,
+      )
+      console.log(
+        prefetchSlugs
+          ? `[instrumentation] asset bootstrap: full prefetch bounded to ${prefetchSlugs.length} slugs (EGRESS-4)`
+          : `[instrumentation] asset bootstrap: prefetch slug set over budget (${PREFETCH_SLUG_BUDGET}) — unbounded read (EGRESS-4 fallback)`,
+      )
       for (const row of await withRetry(() => prisma.assetIdentity.findMany({
-        where: seedOwnershipWhere() as never,
+        where: (prefetchSlugs
+          ? { ...(seedOwnershipWhere() as Record<string, unknown>), canonicalSlug: { in: prefetchSlugs } }
+          : seedOwnershipWhere()) as never,
         select: {
           assetId: true,
           canonicalSlug: true,
