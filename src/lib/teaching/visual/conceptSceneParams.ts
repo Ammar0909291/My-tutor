@@ -2026,6 +2026,139 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
       { label: 'Placental mammals', description: 'longer internal development, nourished via a placenta', items: [] },
     ],
   }),
+
+  // Batch 10 (bio.div, 1 concept; bio.evo, 4 concepts; bio.found, 2
+  // concepts; bio.gen, 3 concepts; bio.immuno, 2 concepts):
+  'bio.div.reptile-bird-diversity': () => buildCellHubScene({
+    conceptId: 'bio.div.reptile-bird-diversity',
+    hubLabel: 'Powered flight demands three things',
+    title: "Bird Adaptations All Trace to Flight's Functional Demands",
+    teachingGoal: 'Each bird adaptation is not an unconnected feature — it traces to one of three specific functional demands of powered flight.',
+    spokes: [
+      { name: 'Low body mass', description: 'lightweight, often hollow (pneumatic) bones and a fused, reinforced skeleton' },
+      { name: 'Efficient oxygen delivery', description: 'unidirectional airflow with air sacs extracts oxygen more efficiently than tidal breathing' },
+      { name: 'High sustained energy output', description: 'a high metabolic rate powers the substantial energy flight demands' },
+    ],
+  }),
+
+  'bio.evo.coevolution-species-interactions': () => buildCellComparisonScene({
+    conceptId: 'bio.evo.coevolution-species-interactions',
+    title: 'Coevolution vs Parallel Adaptation',
+    teachingGoal: "Genuine coevolution requires each species' change to be a RESPONSE TO the other species' change — not merely two species independently adapting to a shared environment.",
+    groups: [
+      { label: 'Coevolution (reciprocal)', description: 'each species evolution influences, and responds to, the other', items: ['Predator-prey arms race', 'Host-parasite arms race', 'Mutualistic pollinator specialisation'] },
+      { label: 'Parallel adaptation (independent)', description: 'both species respond to the same external pressure, not to each other', items: ['Similar traits from a shared environment', 'No reciprocal influence between species'] },
+    ],
+  }),
+
+  'bio.evo.convergent-evolution-homoplasy': () => buildCellComparisonScene({
+    conceptId: 'bio.evo.convergent-evolution-homoplasy',
+    title: 'Homoplasy: Two Ways Similarity Can Mislead',
+    teachingGoal: 'Not every similarity reflects shared ancestry — homoplasy looks like evidence of close relationship but is not, and convergent and parallel evolution produce it two different ways.',
+    groups: [
+      { label: 'Convergent evolution', description: 'independent origin in lineages with no recent shared ancestor with that trait', items: ['Marsupial vs placental body forms', 'Camera eye in vertebrates and cephalopods'] },
+      { label: 'Parallel evolution', description: 'shared ancestor, but the trait evolved separately in each lineage after diverging', items: ['Similar ancestral starting condition', 'Independently pushed to a similar solution'] },
+    ],
+  }),
+
+  'bio.evo.macroevolution-extinction': () => buildCellComparisonScene({
+    conceptId: 'bio.evo.macroevolution-extinction',
+    title: 'Two Models of Evolutionary Tempo',
+    teachingGoal: 'Both models share the same underlying mechanisms (mutation, selection, drift) — they differ only in their claim about the pattern and pacing of change over time.',
+    groups: [
+      { label: 'Phyletic gradualism', description: 'morphological change accumulates slowly and continuously', items: ['Steady, gradual change', 'No distinct bursts'] },
+      { label: 'Punctuated equilibrium', description: 'long stasis, punctuated by rapid bursts of change around speciation', items: ['Long periods of stasis', 'Rapid change near speciation events'] },
+    ],
+  }),
+
+  'bio.evo.phylogeography-biogeography': () => buildCellComparisonScene({
+    conceptId: 'bio.evo.phylogeography-biogeography',
+    title: 'Vicariance vs Dispersal',
+    teachingGoal: 'The same disjunct distribution can arise from two alternative histories — telling them apart requires evidence, such as whether divergence timing matches a barrier forming.',
+    groups: [
+      { label: 'Vicariance', description: 'a formerly continuous range is later split by a new barrier', items: ['Population present before the barrier', 'Barrier arises and divides it'] },
+      { label: 'Dispersal', description: 'individuals cross an already-existing barrier to colonise new ground', items: ['Barrier already present', 'Individuals cross it to colonise'] },
+    ],
+  }),
+
+  'bio.found.scientific-method-in-biology': () => buildCellPathwayScene({
+    conceptId: 'bio.found.scientific-method-in-biology',
+    title: 'The Scientific Method: Testing Explanations Against Evidence',
+    teachingGoal: 'A falsified hypothesis is not a failed experiment — it is a genuine result that narrows the space of possible explanations, exactly as a confirmed hypothesis does.',
+    stages: [
+      { name: 'Observation', description: 'prompts a specific, testable hypothesis' },
+      { name: 'Controlled experiment', description: 'varies one independent variable, holds control variables constant, measures the dependent variable against a control group' },
+      { name: 'Statistical evaluation', description: 'checks sample size and whether the result could plausibly be due to chance' },
+      { name: 'Replication and peer review', description: 'independent researchers reproduce the result; experts scrutinise methods before publication' },
+    ],
+  }),
+
+  'bio.found.unifying-themes-in-biology': () => buildCellHubScene({
+    conceptId: 'bio.found.unifying-themes-in-biology',
+    hubLabel: 'Four themes recur across every branch of biology',
+    title: 'Four Unifying Themes in Biology',
+    teachingGoal: 'These are not independent trivia but a small, recurring set of lenses — the same organising patterns appear again and again across every biology topic.',
+    spokes: [
+      { name: 'Structure-function relationship', description: 'form is shaped by, and explains, function, at every scale' },
+      { name: 'Evolution as central theory', description: 'nothing in biology makes sense except in the light of evolution' },
+      { name: 'Homeostasis', description: 'organisms actively maintain a stable internal environment despite external change' },
+      { name: 'Energy flow and matter cycling', description: 'energy flows one-way and is lost as heat; matter cycles indefinitely' },
+    ],
+  }),
+
+  'bio.gen.conservation-genetics': () => buildCellHubScene({
+    conceptId: 'bio.gen.conservation-genetics',
+    hubLabel: 'Effective size (Ne) is smaller than census size (N) because:',
+    title: 'Why Effective Population Size Is Smaller Than Census Size',
+    teachingGoal: 'A population that looks numerically healthy by census count can still be genetically vulnerable if its effective population size is much smaller.',
+    spokes: [
+      { name: 'Unequal sex ratios', description: 'genetic contribution concentrates in fewer breeding individuals than the total count suggests' },
+      { name: 'Variance in reproductive success', description: 'a few individuals produce most offspring, narrowing diversity faster than headcount suggests' },
+      { name: 'Population fluctuations', description: 'a past bottleneck dominates genetic effects even after the population later recovers in count' },
+    ],
+  }),
+
+  'bio.gen.genetic-testing-counseling': () => buildCellComparisonScene({
+    conceptId: 'bio.gen.genetic-testing-counseling',
+    title: 'Carrier Screening vs Prenatal Diagnostic Testing',
+    teachingGoal: "These serve distinct purposes at distinct times: carrier screening assesses parental risk before or independent of a pregnancy; prenatal testing directly assesses the fetus once a pregnancy is established.",
+    groups: [
+      { label: 'Carrier screening', description: 'tests prospective parents before or early in pregnancy for recessive-allele risk', items: ['Assesses parental risk', 'Performed before/independent of pregnancy'] },
+      { label: 'Prenatal diagnostic testing', description: 'directly assesses the fetus during an established pregnancy', items: ['Amniocentesis (15-20 weeks)', 'Chorionic villus sampling (10-13 weeks)', 'Non-invasive prenatal testing (maternal blood, screening only)'] },
+    ],
+  }),
+
+  'bio.gen.quantitative-genetics-heritability': () => buildCellComparisonScene({
+    conceptId: 'bio.gen.quantitative-genetics-heritability',
+    title: 'Broad-Sense vs Narrow-Sense Heritability',
+    teachingGoal: 'Heritability is a population-specific statistic, not a fixed property of a trait — the same trait can have a different heritability value in a different population or environment.',
+    groups: [
+      { label: 'Broad-sense heritability (H2)', description: 'captures all genetic variance: additive, dominance and epistatic effects together', items: ['Additive effects', 'Dominance effects', 'Epistatic (gene-gene) effects'] },
+      { label: 'Narrow-sense heritability (h2)', description: 'captures only additive genetic variance — the part that predictably transmits to offspring', items: ['Additive effects only', 'Predicts response to selection'] },
+    ],
+  }),
+
+  'bio.immuno.cancer-immunology-immunotherapy': () => buildCellComparisonScene({
+    conceptId: 'bio.immuno.cancer-immunology-immunotherapy',
+    title: 'Two Mechanistically Different Cancer Immunotherapies',
+    teachingGoal: 'Checkpoint inhibitors restore an already-existing but suppressed T-cell capability; CAR-T therapy engineers a new recognition capability entirely — these are not variations of the same idea.',
+    groups: [
+      { label: 'Checkpoint inhibitors', description: 'block PD-1/PD-L1 or CTLA-4 to release the brake tumours exploit', items: ['Restores existing T-cell capability', 'Does not attack the tumour directly'] },
+      { label: 'CAR-T cell therapy', description: "engineers the patient's own T cells with a chimeric antigen receptor", items: ['Extract, engineer, reinfuse T cells', 'Creates a new recognition capability'] },
+    ],
+  }),
+
+  'bio.immuno.cytokines-immune-signaling': () => buildCellHubScene({
+    conceptId: 'bio.immuno.cytokines-immune-signaling',
+    hubLabel: 'Cytokines: the molecular language of immune signalling',
+    title: 'Three Cytokine Classes, Three Distinct Roles',
+    teachingGoal: 'Cytokine storm is not an exotic new mechanism — it is the same normal signalling machinery operating in a severely dysregulated, excessive way.',
+    spokes: [
+      { name: 'Interleukins', description: 'signal between leukocytes — activate T cells, promote inflammation, or suppress immune activity' },
+      { name: 'Interferons', description: 'signal neighbouring uninfected cells to activate antiviral defences before they too are infected' },
+      { name: 'Tumour necrosis factor (TNF)', description: 'a pro-inflammatory cytokine that can directly induce apoptosis in target cells' },
+    ],
+  }),
 }
 
 const DANIELL_CELL: ElectrochemicalCellParams = {
