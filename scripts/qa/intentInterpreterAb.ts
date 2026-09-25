@@ -222,7 +222,19 @@ async function runArm(a: Arm) {
     mastery: turns.map((t) => t.payload.mastery ?? null),
     lessonComplete: turns.some((t) => Boolean(t.payload.lessonComplete)),
     errors: turns.filter((t) => 'error' in t.payload).map((t) => t.payload.error),
-    turns: turns.map((t) => ({ sent: t.sent, ms: t.ms, text: t.payload.text, mcq: t.payload.mcq ?? null, mastery: t.payload.mastery ?? null, intentExperiment: t.payload.intentExperiment ?? null, provider: t.payload.provider })),
+    // ISOLATION, checked per turn from the server's own response: the
+    // B-only diagnostic field must be absent on every A turn and present on
+    // every B chat turn (turn 0 is lesson-init, a different route).
+    isolation: a.arm === 'A'
+      ? { ok: turns.every((t) => t.payload.intentExperiment === undefined), check: 'A: no intentExperiment on any turn' }
+      : { ok: turns.slice(1).every((t) => t.payload.intentExperiment != null), check: 'B: intentExperiment on every chat turn' },
+    turns: turns.map((t) => ({
+      sent: t.sent, ms: t.ms, text: t.payload.text, mcq: t.payload.mcq ?? null, mastery: t.payload.mastery ?? null,
+      intentExperiment: t.payload.intentExperiment ?? null, provider: t.payload.provider,
+      llmCallCount: t.payload.llmCallCount ?? null, lessonComplete: t.payload.lessonComplete ?? null,
+      hasVisual: Boolean(t.payload.visual || t.payload.visualSpec || t.payload.sceneSpec),
+      error: (t.payload as { error?: unknown }).error ?? null,
+    })),
   }
 }
 
