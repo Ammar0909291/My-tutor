@@ -40,7 +40,7 @@ reach verified mastery every time with zero critical defects (`scripts/qa/synthe
 | S8b | Run 2 (prod `dbd3b77`): 10/10 mastered, **1 critical** `answer-leak` (acceleration, off-track t7): the authored question "Acceleration is defined as the rate of change of which quantity?" (key: velocity) stayed on screen from t6; learner asked "will this be on the exam?"; reply: "…understanding acceleration — how velocity changes with time — is definitely important." The leak guard (`dropAnswerLeaks`, route.ts ~L6425) runs only for a question attached THIS turn (owner-approved scope), not for a held question re-served by `mcqToServe`. **Needs owner decision** (see OWNER DECISION below) | open |
 | S8c | Run 3 on acceleration + kinematics-1d (prod `dbd3b77`) | **done**: 10/10 mastered, 0 critical, 1 major (`announced-not-asked`, see S8d); the off-track t5 verdict flag is gone. **kinematics-1d READY** (3/3 runs, all master, 0 critical). acceleration NOT ready: run 2's critical waits on the OWNER DECISION below |
 | S8d | "can you quiz me?" at t1 -> "Sure! Here's a quick check on acceleration:" + figure pointer, no question. `ANNOUNCES_A_CHECK` rejects a colon ending, and the trailing-colon rule missed it because `ensureVisualAcknowledged` (route ~L9954) appends the figure pointer before the delivery contract (~L12389). Fix: noun-form colon announcements ("here's a/your/another/the next … check/quiz/question/test:") are dropped too; still only when the text asks nothing | **pushed** (full suite 725/14,944, tsc and build clean) |
-| S9 | Next pair: `phys.mech.force,phys.mech.newtons-first-law`, 3 runs (then newtons-second/third-law, …). Launch-set status: READY = displacement, velocity, kinematics-1d; blocked = acceleration (owner decision) | pending |
+| S9 | Next pair: `phys.mech.force,phys.mech.newtons-first-law`, 3 runs (then newtons-second/third-law, …). Launch-set status: READY = displacement, velocity, kinematics-1d; blocked = acceleration (owner decision) | run 1 (prod `b382d17`): **10/10 mastered, 0 critical, 0 major**, 1 minor. Run 2 started 04:01 UTC (last run allowed today) |
 
 If S4's run file is lost (the session ended), **skip the before-baseline**. S2's smoke run already
 shows the defect; go straight to S5.
@@ -113,6 +113,7 @@ It counts rows returned (cumulative since project creation, never reset).
 | F3 | 2026-09-25 01:59:44 | 10,526,228 | 189,430,620 | acceleration + kinematics-1d run 1: +88,805 rows / 116 turns, about 27 MB. **Today: about 66 MB** |
 | F4 | 2026-09-25 02:46:24 | 10,554,623 | 189,498,627 | acceleration + kinematics-1d run 2: +68,007 rows / 116 turns, about 20 MB. **Today: about 86 MB** |
 | F5 | 2026-09-25 03:27:24 | 10,582,795 | 189,522,853 | acceleration + kinematics-1d run 3 (+ idle): +24,226 rows, about 7 MB. **Today: about 93 MB** |
+| F6 | 2026-09-25 04:00:48 | 10,610,301 | 189,587,947 | force + newtons-first-law run 1: +65,094 rows / 116 turns, about 20 MB. **Today: about 113 MB; one more run allowed** |
 
 ## Rules that bind this work
 
