@@ -7057,6 +7057,218 @@ const LAUNCH_SLACK_C: SeedProbe[] = [
   },
 ]
 
+// ═══════════════════════════════════════════════════════════════════════════
+// BATCH 20 — launch-set depth: the last free ladder rungs on five topics.
+// ═══════════════════════════════════════════════════════════════════════════
+//
+// Projectile motion, work, momentum, free-body diagram and friction still had
+// free rungs in existing ladder slots. Filling them gives each 8-10 gradeable
+// HIGH probes, so repeat runs and re-teach loops draw fresh questions.
+const LAUNCH_DEPTH_E: SeedProbe[] = [
+  {
+    conceptId: 'phys.mech.projectile-motion', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: "Two balls are launched from level ground at the same speed, one at 30° and the other at 60° above the horizontal (no air resistance). Which one lands farther away?",
+    choices: [
+      { text: "They land the same distance away — 30° and 60° add to 90°, so their ranges are equal", isCorrect: true },
+      { text: "The 60° ball — a higher launch always goes farther", isCorrect: false, misconceptionId: "phys.mech.projectile-motion:MC-MAX-RANGE-90DEG" },
+      { text: "The 30° ball — a flatter launch always goes farther", isCorrect: false },
+      { text: "The 60° ball, because it stays in the air longer", isCorrect: false },
+    ],
+    correctValue: "the same distance",
+    targetedMisconceptions: ["phys.mech.projectile-motion:MC-MAX-RANGE-90DEG"],
+    source: src('phys.mech.projectile-motion', "range = v² sin 2θ / g, and sin 60° = sin 120°, so complementary angles give equal range; the 60° ball flies longer but moves forward more slowly (launch-set depth, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.projectile-motion', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: "At the very top of its flight, what is a thrown ball's acceleration? (no air resistance)",
+    choices: [
+      { text: "9.8 m/s² downward — gravity still acts at the top", isCorrect: true },
+      { text: "Zero — the ball stops for an instant at the top", isCorrect: false },
+      { text: "Zero vertically, but it is accelerating forward", isCorrect: false },
+    ],
+    correctValue: "9.8 m/s² downward",
+    targetedMisconceptions: [],
+    source: src('phys.mech.projectile-motion', "only the vertical VELOCITY is momentarily zero at the top; the acceleration is g downward throughout the flight (launch-set depth, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.projectile-motion', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: "Over level ground, one bullet is fired horizontally from a rifle while another is dropped from the same height at the same instant. Which hits the ground first? (no air resistance)",
+    choices: [
+      { text: "They land at the same time — the horizontal speed does not change the fall", isCorrect: true },
+      { text: "The dropped bullet — the fired bullet's speed keeps it up longer", isCorrect: false, misconceptionId: "phys.mech.projectile-motion:MC-AXES-NOT-INDEPENDENT" },
+      { text: "The fired bullet — it is moving much faster", isCorrect: false },
+    ],
+    correctValue: "the same time",
+    targetedMisconceptions: ["phys.mech.projectile-motion:MC-AXES-NOT-INDEPENDENT"],
+    source: src('phys.mech.projectile-motion', "vertical and horizontal motions are independent: both start with zero vertical velocity and fall the same height under g (launch-set depth, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.work', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: "A 2 kg ball is carried up a staircase that rises 3 m vertically while moving 5 m horizontally. How much work does GRAVITY do on the ball? (g = 9.8 m/s²)",
+    choices: [
+      { text: "−58.8 J — only the 3 m rise counts, and gravity opposes it", isCorrect: true },
+      { text: "+58.8 J — the ball gains height", isCorrect: false },
+      { text: "−98 J — using the 5 m horizontal distance", isCorrect: false },
+      { text: "0 J — the ball ends up moving sideways as well", isCorrect: false },
+    ],
+    correctValue: "−58.8 J",
+    targetedMisconceptions: [],
+    source: src('phys.mech.work', "gravity's work depends only on vertical displacement: W = −mgΔh = −2 × 9.8 × 3 = −58.8 J; the horizontal part is perpendicular to the weight (launch-set depth, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.work', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: "You hold a heavy bag perfectly still for two minutes. How much work, in the physics sense, do you do on the bag?",
+    choices: [
+      { text: "Zero — the bag does not move, so no work is done on it", isCorrect: true },
+      { text: "A lot — holding it makes your arms tired", isCorrect: false },
+      { text: "It depends on how heavy the bag is", isCorrect: false },
+    ],
+    correctValue: "zero",
+    targetedMisconceptions: [],
+    source: src('phys.mech.work', "W = Fd; with no displacement no work is done on the bag, although your muscles use energy internally (launch-set depth, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.work', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: "A satellite moves in a circular orbit at constant speed. How much work does gravity do on it over any part of the orbit?",
+    choices: [
+      { text: "Zero — gravity always points at right angles to the satellite's motion", isCorrect: true },
+      { text: "Positive — gravity is the force that keeps it moving", isCorrect: false },
+      { text: "Zero only over a full orbit, positive over part of one", isCorrect: false },
+    ],
+    correctValue: "zero",
+    targetedMisconceptions: [],
+    source: src('phys.mech.work', "gravity is centripetal, always perpendicular to the velocity, so it does no work and the speed stays constant (launch-set depth, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.momentum', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: "A 0.15 kg ball moving at 20 m/s is hit straight back along its path at 30 m/s. What is the size of its change in momentum?",
+    choices: [
+      { text: "7.5 kg·m/s — 0.15 × (30 + 20), because the direction reversed", isCorrect: true },
+      { text: "1.5 kg·m/s — 0.15 × (30 − 20)", isCorrect: false, misconceptionId: "phys.mech.momentum:MC-MOMENTUM-IS-SCALAR" },
+      { text: "4.5 kg·m/s — only the final momentum", isCorrect: false },
+      { text: "Zero — the speeds are almost the same", isCorrect: false },
+    ],
+    correctValue: "7.5 kg·m/s",
+    targetedMisconceptions: ["phys.mech.momentum:MC-MOMENTUM-IS-SCALAR"],
+    source: src('phys.mech.momentum', "taking the new direction as positive: Δp = 0.15 × 30 − 0.15 × (−20) = 7.5 kg·m/s; momentum is a vector, so a reversal adds the two magnitudes (launch-set depth, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.momentum', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: "A loaded truck and a bicycle travel along the same road at the same speed. Which has more momentum?",
+    choices: [
+      { text: "The truck — it has far more mass at the same speed", isCorrect: true },
+      { text: "They are equal — they have the same speed", isCorrect: false, misconceptionId: "phys.mech.momentum:MC-MOMENTUM-IS-SPEED" },
+      { text: "The bicycle — it is easier to stop", isCorrect: false },
+    ],
+    correctValue: "the truck",
+    targetedMisconceptions: ["phys.mech.momentum:MC-MOMENTUM-IS-SPEED"],
+    source: src('phys.mech.momentum', "p = mv; at equal speeds the larger mass has the larger momentum (launch-set depth, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.momentum', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: "A ball is thrown straight up and caught again at the same height, moving at the same speed. How does its momentum just before the catch compare with just after the throw?",
+    choices: [
+      { text: "Same size but opposite direction — so its momentum has changed", isCorrect: true },
+      { text: "Exactly the same — the speed is the same, so the momentum did not change", isCorrect: false, misconceptionId: "phys.mech.momentum:MC-MOMENTUM-IS-SCALAR" },
+      { text: "Zero both times — only horizontal motion has momentum", isCorrect: false },
+    ],
+    correctValue: "same size, opposite direction",
+    targetedMisconceptions: ["phys.mech.momentum:MC-MOMENTUM-IS-SCALAR"],
+    source: src('phys.mech.momentum', "momentum is a vector: the velocity reversed, so p went from +mv to −mv, a change of 2mv delivered by gravity (launch-set depth, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.free-body-diagram', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: "A box stands on the floor of a lift that is moving UPWARD at a constant speed. Which forces belong on the box's free-body diagram?",
+    choices: [
+      { text: "Its weight down and the floor's normal force up, equal in size", isCorrect: true },
+      { text: "Weight, normal force, and an upward 'force of motion' from the lift", isCorrect: false, misconceptionId: "phys.mech.free-body-diagram:MC-MOTION-FORCE" },
+      { text: "Only the normal force — the upward motion cancels the weight", isCorrect: false },
+    ],
+    correctValue: "weight and an equal normal force",
+    targetedMisconceptions: ["phys.mech.free-body-diagram:MC-MOTION-FORCE"],
+    source: src('phys.mech.free-body-diagram', "constant velocity means zero net force, so the normal force equals the weight; motion is not a force and does not appear on the diagram (launch-set depth, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.free-body-diagram', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: "A lamp hangs at rest from the ceiling by a single cord. How many forces act on the lamp, and what are they?",
+    choices: [
+      { text: "Two — its weight down and the cord's tension up", isCorrect: true },
+      { text: "One — only the tension in the cord", isCorrect: false },
+      { text: "Three — weight, tension, and the ceiling pulling on the lamp", isCorrect: false },
+      { text: "None — it is not moving", isCorrect: false },
+    ],
+    correctValue: "two: weight and tension",
+    targetedMisconceptions: [],
+    source: src('phys.mech.free-body-diagram', "only the Earth (weight) and the cord (tension) act on the lamp; the ceiling acts on the cord, not on the lamp (launch-set depth, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.free-body-diagram', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.DEVELOPING,
+    stem: "A block rests on a level floor. You pull it with a horizontal rope, but it does not move. How many forces act on the block?",
+    choices: [
+      { text: "Four — weight, normal force, the rope's pull, and static friction", isCorrect: true },
+      { text: "Three — weight, normal force and the rope; nothing is sliding, so no friction", isCorrect: false },
+      { text: "Two — weight and the normal force", isCorrect: false },
+      { text: "Five — including the block's push on the floor", isCorrect: false },
+    ],
+    correctValue: "four",
+    targetedMisconceptions: [],
+    source: src('phys.mech.free-body-diagram', "static friction balances the rope's pull (the block stays put); the block's push on the floor acts on the floor, so it is not on this diagram (launch-set depth, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.friction', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: "When you push off the ground to take a step forward, which way does the ground's friction act on your foot?",
+    choices: [
+      { text: "Forward — your foot pushes back on the ground, so friction on the foot points forward", isCorrect: true },
+      { text: "Backward — friction always opposes the direction you move", isCorrect: false },
+      { text: "There is no friction when you walk", isCorrect: false },
+    ],
+    correctValue: "forward",
+    targetedMisconceptions: [],
+    source: src('phys.mech.friction', "friction opposes the foot's tendency to slip backward, so it points forward and is the force that propels you (launch-set depth, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.friction', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: "A 10 kg crate slides across a level floor with a coefficient of kinetic friction of 0.3. What is the friction force on it? (g = 9.8 m/s²)",
+    choices: [
+      { text: "29.4 N — μk × N = 0.3 × 98 N", isCorrect: true },
+      { text: "3 N — μ times the mass", isCorrect: false },
+      { text: "98 N — the crate's weight", isCorrect: false },
+      { text: "About 33 N — the mass divided by μ", isCorrect: false },
+    ],
+    correctValue: "29.4 N",
+    targetedMisconceptions: [],
+    source: src('phys.mech.friction', "on a level floor N = mg = 98 N, so f_k = μk N = 0.3 × 98 = 29.4 N (launch-set depth, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.friction', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.DEVELOPING,
+    stem: "A 4 kg box on a level floor starts to slide only when a horizontal push exceeds 20 N. What is the coefficient of static friction? (g = 10 m/s²)",
+    choices: [
+      { text: "0.5 — 20 N divided by the 40 N normal force", isCorrect: true },
+      { text: "5 — 20 N divided by 4 kg", isCorrect: false },
+      { text: "0.2 — 4 divided by 20", isCorrect: false },
+      { text: "2 — 40 divided by 20", isCorrect: false },
+    ],
+    correctValue: "0.5",
+    targetedMisconceptions: [],
+    source: src('phys.mech.friction', "the largest static friction is μs N, so μs = 20/(4 × 10) = 0.5 (launch-set depth, 2026-09-25)"),
+  },
+]
+
 export const PHYSICS_DEPTH_PROBES: SeedProbe[] = [
   ...UNITS,
   ...SCALARS_VECTORS,
@@ -7110,4 +7322,6 @@ export const PHYSICS_DEPTH_PROBES: SeedProbe[] = [
   ...LAUNCH_SLACK_B,
   // Batch 19 — launch-set slack: the remaining phys.mech @ HIGH launch topics.
   ...LAUNCH_SLACK_C,
+  // Batch 20 — launch-set depth: the last free rungs on five topics.
+  ...LAUNCH_DEPTH_E,
 ]
