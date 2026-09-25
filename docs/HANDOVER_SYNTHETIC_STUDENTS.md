@@ -40,6 +40,10 @@ real learners depend on. The runner has no provider budget of its own — adding
 
 ## Egress budget (owner, 2026-09-25 12:30 UTC): "Go with physics. It's okay until egress 1gb" — synthetic runs may continue until the day's egress reaches ~1 GB (was ~150 MB/day). Keep measuring every run.
 
+## Owner rules, 2026-09-25 17:10 UTC — binding
+- **Groq first from now on.** Production already routes Groq -> Gemini -> OpenRouter. Runs use `RUNNER_ALLOWED_PROVIDERS=groq,gemini,memory` only while Groq is blocked; once logs show `provider=groq outcome=ok`, go back to the default `groq,memory`. As of 17:03 UTC Groq still returns `spend_limit_reached` (a Groq console / `GROQ_API_KEY` issue for the owner).
+- **No boards.** There is no CBSE or other board mapping yet. Work subject by subject (physics -> chemistry -> English), on the canonical KG concepts only.
+
 ## Subject order (owner, 2026-09-25) — binding
 
 **Physics first, then chemistry, then English. Do NOT study biology or mathematics.** Finish the
