@@ -61,7 +61,7 @@ export const BUDGET_EXTENSION_TURNS = 6
  *   1. at least one server-graded correct answer at an ASSESSED rung —
  *      `correctAtCheck`/`correctAtPractice` move only inside CHECK/PRACTICE, so
  *      this cannot be satisfied by chat, acknowledgement or a diagnostic exit;
- *   2. the learner is not currently failing;
+ *   2. the learner is not spiralling (fewer than two consecutive misses);
  *   3. the ladder is past the diagnostic rungs.
  *
  * Grantable at most once (`budgetExtensionGranted`), so the worst case is a
@@ -113,7 +113,15 @@ export function qualifiesForBudgetExtension(state: ConversationState): boolean {
     (state.correctAtCheck ?? 0) + (state.correctAtPractice ?? 0) >= 1 ||
     (state.correctAnswersTotal ?? 0) >= 1
   if (!answeredSomethingRight) return false
-  if ((state.consecutiveFailures ?? 0) !== 0) return false
+  // NOT SPIRALLING, rather than "no miss at all" (2026-09-25). Measured on the
+  // synthetic launch-set run for free-body diagram + normal force: both
+  // unmastered lessons closed at turn 12 on a SINGLE wrong answer that followed
+  // a correct one (confused/free-body at CHECK with 1 check credit; the budget
+  // expired on the very turn of the slip). One miss after converting is normal
+  // learning, not a stall; two in a row is the same threshold the confusion
+  // signal uses (conversationState: consecutiveFailures >= 2). The extension
+  // still buys only turns — mastery stays server-graded.
+  if ((state.consecutiveFailures ?? 0) >= 2) return false
   return state.phase === 'CHECK' || state.phase === 'PRACTICE' || state.phase === 'TRANSFER'
 }
 
