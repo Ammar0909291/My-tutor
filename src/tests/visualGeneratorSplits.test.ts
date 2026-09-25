@@ -160,7 +160,14 @@ describe('B2 changed nothing else', () => {
     // retry-identical-figure loop that never served a diagram even on an
     // explicit request (measured live in production, 2026-09-24 QA) — see
     // bioVisualGapFix.test.ts for full coverage.
-    expect(CONCEPT_SCENE_OVERRIDES).toHaveLength(59)
+    //
+    // 59 -> 94+ (2026-09-25, Biology visual coverage campaign): a live
+    // diagnostic sweep found the SAME failure shape on roughly 3 in 4 of
+    // Biology's 161 unauthored concepts, not just the two above — see
+    // bioVisualCoverageCampaign.test.ts for the running, growing coverage
+    // list and its own up-to-date length assertion (kept there rather than
+    // duplicated here, since this campaign is still in progress).
+    expect(CONCEPT_SCENE_OVERRIDES.length).toBeGreaterThanOrEqual(94)
     expect(CONCEPT_SCENE_OVERRIDES).toContain('bio.mol.dna-replication')
     expect(CONCEPT_SCENE_OVERRIDES).toContain('chem.dblock.lanthanides')
     expect(CONCEPT_SCENE_OVERRIDES).toContain('math.calc.critical-points')

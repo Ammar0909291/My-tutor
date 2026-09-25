@@ -167,9 +167,14 @@ describe('5-6. nothing else moved', () => {
     expect(buildCanonicalScene('dna_structure')?.id).toMatch(/^dna-structure-/)
   })
 
-  it('the other molecular-biology DNA concepts resolve exactly as before (no figure)', () => {
-    for (const id of ['bio.mol.nucleic-acid-structure', 'bio.mol.transcription', 'bio.mol.dna-damage-repair',
-      'bio.mol.chromatin-structure-genome-organization']) {
+  it('the other molecular-biology DNA concepts still without a fix resolve exactly as before (no figure)', () => {
+    // bio.mol.nucleic-acid-structure and bio.mol.transcription were given
+    // their own Tier 0 scenes by the concurrent Biology visual coverage
+    // campaign (2026-09-25) after the same live sweep that motivated this
+    // file found them stuck too — see bioVisualCoverageCampaign.test.ts.
+    // That is a real, intended change to their resolution, not a
+    // regression of this test's own DNA-replication fix.
+    for (const id of ['bio.mol.dna-damage-repair', 'bio.mol.chromatin-structure-genome-organization']) {
       expect(resolveVisual({ message: '', lessonConceptId: id }).provenance, id).toBe('no-figure:no-faithful-visual')
     }
   })
