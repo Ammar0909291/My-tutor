@@ -246,3 +246,18 @@ The recurring minor `ungradeable-question` (off-track, turn 5, on all four topic
 Run 3's major: "can you quiz me?" -> "Sure! Here's a quick check on acceleration:" + figure pointer, no question. Fixed in `gateAssessment.ts` (`announcesACheck`, noun-form colon announcements); cause: the figure pointer is appended before the delivery contract, so the trailing-colon rule no longer saw a trailing colon.
 
 Egress: run 2 ~20 MB, run 3 ~7 MB. Day total ~93 MB.
+
+## 2026-09-25 03:33-04:30 UTC — force + newtons-first-law runs 1-2; Groq spend limit; runs paused
+
+| Run | Build | Mastered | Critical | Major | Minor | Provider (groq/gemini/memory turns) |
+|---|---|---|---|---|---|---|
+| 1 | `b382d17` | 10/10 | 0 | 0 | 1 | 14 / 95 / 7 |
+| 2 | `b382d17` | 10/10 | 0 | 1 (`announced-not-asked`) | 3 | 0 / 105 / 7 |
+
+Groq began refusing about 14 turns into run 1 (~03:35 UTC) with `400 spend_limit_reached` ("Organization has blocked API access because a spend alert threshold was met"). Failover to Gemini (`gemini-3.5-flash-lite`) served every later turn, and every student still mastered. Earlier runs today were ~95% Groq. Synthetic runs are paused until the owner decides on Groq billing and a token budget for the runner (handover: STOP).
+
+Gemini-served turns produced more low-grade defects (a model-written readiness question "ready?" at CHECK; "Let's check how this applies … the 3D Newton's Forces simulation on your screen." with no question, ~85 chars, just past the 80-char tail cap in `ANNOUNCES_A_CHECK`). Not fixed: one sample, and the length cap is a deliberate precision guard.
+
+Launch-set status after this session: READY = displacement, velocity, kinematics-1d. 2/3 runs clean = force, newtons-first-law. Blocked on owner decision = acceleration (held-question answer leak).
+
+Egress 2026-09-25: about 129 MB (cap about 150).

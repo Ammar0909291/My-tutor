@@ -4,6 +4,22 @@ For any Claude session (any account) continuing this work with no prompt from th
 file, then `CLAUDE.md`, then `docs/history/synthetic-students.md` (the tool and every run's
 findings) and `docs/architecture/ARCHITECTURE_ROADMAP_TO_10.md` §0 (the owner decisions).
 
+## STOP — synthetic runs paused (2026-09-25 04:30 UTC): Groq spend limit reached
+
+Production log, every Groq attempt since ~04:00 UTC: `400 spend_limit_reached — "Organization has
+blocked API access because a spend alert threshold was met. Please visit
+https://console.groq.com/settings/billing to manage your spend alerts."` Failover works (Gemini
+serves every turn, `gemini-3.5-flash-lite`), so learners still get answers — but this is the
+single-provider position of the 2026-08-20 outage (CLAUDE.md), with OpenRouter as the only backstop.
+
+The synthetic runs are a likely contributor: each run is ~116 turns × ~10k prompt tokens (~1.2M
+tokens), and ~9 runs happened between 2026-09-24 18:00 and 2026-09-25 04:30 UTC.
+
+**Do not start another run until the owner has (1) decided on the Groq spend alert/billing and
+(2) set a token budget for synthetic runs.** Further runs would now spend the Gemini quota that
+real learners depend on. The runner has no provider budget of its own — adding one (e.g. a
+`RUNNER_MAX_TOKENS` estimate and a pre-run provider health check) is a sensible next step.
+
 ## What the owner asked for (2026-09-24)
 
 - **No school boards.** The product is subject + concept map only.
@@ -40,7 +56,7 @@ reach verified mastery every time with zero critical defects (`scripts/qa/synthe
 | S8b | Run 2 (prod `dbd3b77`): 10/10 mastered, **1 critical** `answer-leak` (acceleration, off-track t7): the authored question "Acceleration is defined as the rate of change of which quantity?" (key: velocity) stayed on screen from t6; learner asked "will this be on the exam?"; reply: "…understanding acceleration — how velocity changes with time — is definitely important." The leak guard (`dropAnswerLeaks`, route.ts ~L6425) runs only for a question attached THIS turn (owner-approved scope), not for a held question re-served by `mcqToServe`. **Needs owner decision** (see OWNER DECISION below) | open |
 | S8c | Run 3 on acceleration + kinematics-1d (prod `dbd3b77`) | **done**: 10/10 mastered, 0 critical, 1 major (`announced-not-asked`, see S8d); the off-track t5 verdict flag is gone. **kinematics-1d READY** (3/3 runs, all master, 0 critical). acceleration NOT ready: run 2's critical waits on the OWNER DECISION below |
 | S8d | "can you quiz me?" at t1 -> "Sure! Here's a quick check on acceleration:" + figure pointer, no question. `ANNOUNCES_A_CHECK` rejects a colon ending, and the trailing-colon rule missed it because `ensureVisualAcknowledged` (route ~L9954) appends the figure pointer before the delivery contract (~L12389). Fix: noun-form colon announcements ("here's a/your/another/the next … check/quiz/question/test:") are dropped too; still only when the text asks nothing | **pushed** (full suite 725/14,944, tsc and build clean) |
-| S9 | Next pair: `phys.mech.force,phys.mech.newtons-first-law`, 3 runs (then newtons-second/third-law, …). Launch-set status: READY = displacement, velocity, kinematics-1d; blocked = acceleration (owner decision) | run 1 (prod `b382d17`): **10/10 mastered, 0 critical, 0 major**, 1 minor. Run 2 started 04:01 UTC (last run allowed today) |
+| S9 | Next pair: `phys.mech.force,phys.mech.newtons-first-law`, 3 runs (then newtons-second/third-law, …). Launch-set status: READY = displacement, velocity, kinematics-1d; blocked = acceleration (owner decision) | run 1 (prod `b382d17`): **10/10 mastered, 0 critical, 0 major**, 1 minor. Run 2: **10/10 mastered, 0 critical**, 1 major (`announced-not-asked`: Gemini wrote "Let's check how this applies to a brand-new scenario with the 3D Newton's Forces simulation on your screen." — the `ANNOUNCES_A_CHECK` tail is capped at 80 chars; this one is ~85), 3 minor. **Every turn of run 2 was served by Gemini** — see STOP below |
 
 If S4's run file is lost (the session ended), **skip the before-baseline**. S2's smoke run already
 shows the defect; go straight to S5.
@@ -114,6 +130,7 @@ It counts rows returned (cumulative since project creation, never reset).
 | F4 | 2026-09-25 02:46:24 | 10,554,623 | 189,498,627 | acceleration + kinematics-1d run 2: +68,007 rows / 116 turns, about 20 MB. **Today: about 86 MB** |
 | F5 | 2026-09-25 03:27:24 | 10,582,795 | 189,522,853 | acceleration + kinematics-1d run 3 (+ idle): +24,226 rows, about 7 MB. **Today: about 93 MB** |
 | F6 | 2026-09-25 04:00:48 | 10,610,301 | 189,587,947 | force + newtons-first-law run 1: +65,094 rows / 116 turns, about 20 MB. **Today: about 113 MB; one more run allowed** |
+| F7 | 2026-09-25 04:28:39 | 10,636,738 | 189,639,897 | force + newtons-first-law run 2: +51,950 rows / 112 turns, about 16 MB. **Today: about 129 MB. Runs paused (Groq spend limit)** |
 
 ## Rules that bind this work
 
