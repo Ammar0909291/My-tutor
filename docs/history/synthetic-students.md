@@ -270,3 +270,9 @@ Scorecard: free-body 4/5 mastered (confused missed), normal-force 4/5 (beginner 
 look later" on the turn of a single wrong answer that followed a correct one; the one-time +6
 budget extension required `consecutiveFailures === 0`. Changed to refuse only at >= 2 consecutive
 misses (the confusion threshold). Egress F14→F15 about 57 MB.
+
+## 2026-09-25 16:40-17:10 UTC — free-body diagram + normal force run 3 (production `dfb870e`)
+
+10/10 mastered, 0 critical, 4 major, 125 turns. confused/free-body reached verified mastery at
+turn 18 through the one-slip budget extension (dfb870e). Trend across runs 1-3: 5/10, 8/10, 10/10.
+Served by Gemini (Groq blocked until the owner's key update at 17:10). Egress F15→F16 about 73 MB.
