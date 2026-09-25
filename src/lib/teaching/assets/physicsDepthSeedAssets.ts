@@ -6431,6 +6431,77 @@ const UG: SeedProbe[] = [
  * contract tests all scan for a `*_PROBES` export, so splitting them would
  * only make a partial import possible.
  */
+// ═══════════════════════════════════════════════════════════════════════════
+// BATCH 17 — launch-set slack: free-body diagram + normal force @ HIGH.
+// ═══════════════════════════════════════════════════════════════════════════
+//
+// MEASURED (synthetic students, production, 2026-09-25): on these two concepts
+// the careless and confused students reached verified CHECK 1 + PRACTICE 1 and
+// then every "test me" read `authored-pool-exhausted` — five gradeable probes
+// do not survive one wrong answer plus the early spends the surplus rule
+// allows. Each concept gets two more gradeable probes, only in slots that are
+// already ladders and only at difficulties those slots do not hold yet (see
+// the identity note at the top of this file): normal-force `short_answer`
+// FOUNDATIONAL/DEVELOPING (closed-choice, like biology's third capability),
+// free-body-diagram `mcq` ADVANCED and `misconception_probe` FOUNDATIONAL.
+const LAUNCH_SLACK: SeedProbe[] = [
+  {
+    conceptId: 'phys.mech.normal-force', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: 'A 2 kg book rests on a level table. You press straight down on the book with your hand, with a force of 10 N. What normal force does the table exert on the book? (g = 9.8 m/s²)',
+    choices: [
+      { text: 'About 29.6 N — the table must balance the book\'s weight (19.6 N) AND your 10 N push', isCorrect: true },
+      { text: '19.6 N — the normal force is always equal to the weight', isCorrect: false, misconceptionId: 'phys.mech.normal-force:MC-NORMAL-EQUALS-WEIGHT' },
+      { text: '9.6 N — your push takes some of the weight off the table', isCorrect: false },
+      { text: '10 N — only your push reaches the table', isCorrect: false },
+    ],
+    correctValue: '29.6 N',
+    targetedMisconceptions: ['phys.mech.normal-force:MC-NORMAL-EQUALS-WEIGHT'],
+    source: src('phys.mech.normal-force', 'MC-NORMAL-EQUALS-WEIGHT: vertical balance N = mg + F_hand = 19.6 + 10 = 29.6 N; the normal force is whatever the surface must supply, not the weight (launch-set slack, synthetic-student pool exhaustion 2026-09-25)'),
+  },
+  {
+    conceptId: 'phys.mech.normal-force', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.DEVELOPING,
+    stem: 'A 10 kg box sits on a level floor. A rope pulls it with a tension of 40 N at 30° ABOVE the horizontal, and the box stays in contact with the floor. What is the normal force from the floor? (g = 9.8 m/s², sin 30° = 0.5)',
+    choices: [
+      { text: '78 N — the rope\'s upward part (40 × sin 30° = 20 N) carries some of the 98 N weight', isCorrect: true },
+      { text: '98 N — the normal force equals the weight', isCorrect: false, misconceptionId: 'phys.mech.normal-force:MC-NORMAL-EQUALS-WEIGHT' },
+      { text: '118 N — the rope adds 20 N to the weight', isCorrect: false },
+      { text: '58 N — the whole 40 N tension is subtracted from the weight', isCorrect: false },
+    ],
+    correctValue: '78 N',
+    targetedMisconceptions: ['phys.mech.normal-force:MC-NORMAL-EQUALS-WEIGHT'],
+    source: src('phys.mech.normal-force', 'MC-NORMAL-EQUALS-WEIGHT with an angled pull: N + T sin θ = mg gives N = 98 − 20 = 78 N; only the vertical component of the tension changes N (launch-set slack, 2026-09-25)'),
+  },
+  {
+    conceptId: 'phys.mech.free-body-diagram', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'A block is pushed UP a rough ramp at constant speed by a force parallel to the ramp. What does a correct free-body diagram of the block show?',
+    choices: [
+      { text: 'Four forces: weight, normal force, the push up the slope, and friction pointing DOWN the slope', isCorrect: true },
+      { text: 'Three forces: weight, normal force and the push — at constant speed there is no friction', isCorrect: false },
+      { text: 'Four forces, with friction pointing UP the slope because friction holds the block on the ramp', isCorrect: false },
+      { text: 'Five forces: weight, normal force, push, friction, and a "force of motion" carrying the block up the slope', isCorrect: false, misconceptionId: 'phys.mech.free-body-diagram:MC-MOTION-FORCE' },
+    ],
+    correctValue: 'weight, normal, push, friction down the slope',
+    targetedMisconceptions: ['phys.mech.free-body-diagram:MC-MOTION-FORCE'],
+    source: src('phys.mech.free-body-diagram', 'MC-MOTION-FORCE: kinetic friction opposes the block\'s motion relative to the ramp, so it points down the slope; constant speed means the forces balance, not that one is missing, and motion itself is never a force on the diagram (launch-set slack, 2026-09-25)'),
+  },
+  {
+    conceptId: 'phys.mech.free-body-diagram', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: 'A ball has left a thrower\'s hand and is still rising through the air (ignore air resistance). Which forces belong on the ball\'s free-body diagram?',
+    choices: [
+      { text: 'Only its weight, pointing down — the hand\'s push ended the moment the ball left it', isCorrect: true },
+      { text: 'Its weight pointing down, and the force of the throw pointing up and carrying the ball', isCorrect: false, misconceptionId: 'phys.mech.free-body-diagram:MC-MOTION-FORCE' },
+      { text: 'Its weight, plus an upward force stored from the throw that runs out as the ball slows', isCorrect: false, misconceptionId: 'phys.mech.free-body-diagram:MC-MOTION-FORCE' },
+    ],
+    correctValue: 'only the weight',
+    targetedMisconceptions: ['phys.mech.free-body-diagram:MC-MOTION-FORCE'],
+    source: src('phys.mech.free-body-diagram', 'MC-MOTION-FORCE: a free-body diagram shows only forces from objects touching or acting on the body now; the upward motion is the ball\'s velocity, not a force (launch-set slack, 2026-09-25)'),
+  },
+]
+
 export const PHYSICS_DEPTH_PROBES: SeedProbe[] = [
   ...UNITS,
   ...SCALARS_VECTORS,
@@ -6478,4 +6549,6 @@ export const PHYSICS_DEPTH_PROBES: SeedProbe[] = [
   ...TAIL,
   // Batch 16 — the seven physics UNDERGRADUATE pairs. PHYSICS COMPLETE.
   ...UG,
+  // Batch 17 — launch-set slack: free-body diagram + normal force @ HIGH.
+  ...LAUNCH_SLACK,
 ]

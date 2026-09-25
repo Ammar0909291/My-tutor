@@ -83,7 +83,7 @@ reach verified mastery every time with zero critical defects (`scripts/qa/synthe
 | S8d | "can you quiz me?" at t1 -> "Sure! Here's a quick check on acceleration:" + figure pointer, no question. `ANNOUNCES_A_CHECK` rejects a colon ending, and the trailing-colon rule missed it because `ensureVisualAcknowledged` (route ~L9954) appends the figure pointer before the delivery contract (~L12389). Fix: noun-form colon announcements ("here's a/your/another/the next … check/quiz/question/test:") are dropped too; still only when the text asks nothing | **pushed** (full suite 725/14,944, tsc and build clean) |
 | S9 | Next pair: `phys.mech.force,phys.mech.newtons-first-law`, 3 runs (then newtons-second/third-law, …). Launch-set status: READY = displacement, velocity, kinematics-1d; blocked = acceleration (owner decision) | run 1 (prod `b382d17`): **10/10 mastered, 0 critical, 0 major**, 1 minor. Run 2: **10/10 mastered, 0 critical**, 1 major (`announced-not-asked`: Gemini wrote "Let's check how this applies to a brand-new scenario with the 3D Newton's Forces simulation on your screen." — the `ANNOUNCES_A_CHECK` tail is capped at 80 chars; this one is ~85), 3 minor. **Every turn of run 2 was served by Gemini** — see STOP below Run 3 (07:15-07:48 UTC, Gemini-served, `RUNNER_ALLOWED_PROVIDERS=groq,gemini,memory` by owner "Go"/"keep studying"): **10/10, 0 critical, 0 major, 0 minor → force + newtons-first-law READY** |
 | S10 | Newton's second + third law (owner: "Keep working using Gemini. Use vercel too") | run 1 (08:18-09:00 UTC, prod `9945db4`, Gemini): **10/10 mastered, 0 critical, 0 major**, 1 minor (`ungradeable-question`, strong N2L t5). Runs 2-3 after 00:00 UTC. `[gate-contract]` now logs the model text a withheld question cut (`2604147`) to diagnose the scenario/question mismatch Run 2 (09:49-10:17 UTC, prod `2604147`): **10/10, 0 critical, 0 major**, 2 minor — both checker false positives ("ready?", "have I got that right?"); the checker now uses the production `askedAnswerableQuestion`. The new `[gate-contract]` text logging found a real defect: a rhetorical "how does a rocket accelerate…? It carries its own…" made the stray-question withhold cut a teaching paragraph from 693 chars to 37 — fixed `e9903f0` Run 3 (10:25-10:58 UTC, prod `1a51db9`): **10/10, 0 critical → Newton's 2nd + 3rd law READY**; 2 majors, both fixed the same hour: (a) Gemini wrote `<!--MCq=… correct="A"-->` and it leaked with the answer key — residual sweep now takes mixed-case tag names (`1e9fc47`); (b) "…Imagine you are standing on a skateboard and you throw a heavy medicine ball forward. [question withheld]" left a bare set-up — a scenario opener that ends a paragraph after its question is removed now goes with it |
-| S11 | Next physics pair: `phys.mech.free-body-diagram,phys.mech.normal-force` | pending |
+| S11 | Free-body diagram + normal force, run 1 (prod `f343273`) | **5/10 mastered**, 1 critical, 18 major. Three causes (production TURN_EVENT/arbitration logs): (1) `authored-pool-exhausted` — careless/confused normal-force stuck at verified 2/1: five gradeable probes do not survive one wrong answer → **Batch 17** in `physicsDepthSeedAssets.ts` adds 2 gradeable probes to each concept (only free ladder slots; 0 duplicate identities across 10,409 items; physics contract 261/261); (2) **CLOSING trap** — beginner ×2: two consecutive graded wrongs spend the affect budget, the episode goes CLOSING, every question is blocked (`blockedBy: arbitrationAllowsProbe, notClosingTurn`), a later right answer does not reopen it (by design, pinned by `affectBudgetSpiral.test.ts §H1`) — **OWNER DECISION** below; (3) concept budget closed confused/free-body at t12 right after a wrong answer ("Let's pause … Worth another look later") | Batch 17 pushed; next: deploy, verify rows, run 2 |
 
 If S4's run file is lost (the session ended), **skip the before-baseline**. S2's smoke run already
 shows the defect; go straight to S5.
@@ -162,6 +162,7 @@ It counts rows returned (cumulative since project creation, never reset).
 | F9 | 2026-09-25 09:00:06 | 10,696,336 | 189,866,432 | N2L + N3L run 1: +123,652 rows since F8, about 37 MB. **Today ≈ 196 MB (over the 150 guideline, owner-approved) — no more runs until 00:00 UTC** |
 | F10 | 2026-09-25 10:17:08 | 10,724,437 | 189,943,031 | N2L + N3L run 2: +76,241 rows since 09:48, about 23 MB. **Today ≈ 219 MB (owner: keep going)** |
 | F11 | 2026-09-25 10:58:43 | 10,753,162 | 190,006,866 | N2L + N3L run 3: +63,835 rows, about 19 MB. **Today ≈ 238 MB** |
+| F12 | 2026-09-25 11:55 (approx) | — | see below | free-body + normal-force run 1 ≈ 25-30 MB. **Today ≈ 265 MB** |
 
 ## Rules that bind this work
 
@@ -198,6 +199,24 @@ Options:
   readiness while this path occurs).
 
 This changes what counts as evidence, so it is CLAUDE.md G2 — not implemented without approval.
+
+## OWNER DECISION NEEDED (2026-09-25) — the CLOSING trap
+
+After two consecutive graded wrong answers the session episode goes CLOSING ("affect budget spent",
+`sessionLifecycle.applySignalToEpisode`). CLOSING blocks every question (turnArbitration CLOSE +
+`closingTurnWithholdsQuestion`) and has no exit by design. Measured (synthetic run, free-body diagram
+and normal force, beginner): the learner then answered correctly and asked "can you test me with a
+question?" three times; each got re-teaching or "have I got that right?", and the lesson ended without
+mastery. The lesson itself never closes, so the learner is stranded rather than wound down.
+Options:
+- **A (recommended):** a GRADED-CORRECT answer while CLOSING, followed by an explicit practice request,
+  reopens the episode to CORE (the spiral is over; the learner asked). Explicit "I'm done" closes stay
+  absolute (`forceClosing` is untouched).
+- **B:** CLOSING actually closes: deliver the close + "come back later" and end the lesson, instead of
+  continuing to teach with questions blocked.
+- **C:** keep as is.
+
+This changes when the tutor stops assessing, so it is CLAUDE.md G2 — not implemented without approval.
 
 ## DONE — owner-approved 2026-09-24 ("Approved, implement the TRANSFER fix")
 
