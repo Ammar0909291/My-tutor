@@ -17,6 +17,8 @@ tokens), and ~9 runs happened between 2026-09-24 18:00 and 2026-09-25 04:30 UTC.
 
 Status checks (owner loop "keep updating handover file"): 2026-09-25 ~04:35 UTC — Groq still `spend_limit_reached` (118 refusals in the last 30 min, all from run 2); Gemini serving.
 
+2026-09-25 05:33 UTC — no AI calls in production in the last hour (no traffic), so Groq's state is unobserved; last seen blocked at ~04:27. Egress idle: rows 189,640,604 (+707 since F7). Runs still paused.
+
 **Do not start another run until the owner has (1) decided on the Groq spend alert/billing and
 (2) set a token budget for synthetic runs.** Further runs would now spend the Gemini quota that
 real learners depend on. The runner has no provider budget of its own — adding one (e.g. a
