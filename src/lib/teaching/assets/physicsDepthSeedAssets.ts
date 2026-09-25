@@ -6502,6 +6502,242 @@ const LAUNCH_SLACK: SeedProbe[] = [
   },
 ]
 
+// ═══════════════════════════════════════════════════════════════════════════
+// BATCH 18 — launch-set slack: the eight thinnest phys.mech @ HIGH topics.
+// ═══════════════════════════════════════════════════════════════════════════
+//
+// Production audit 2026-09-25: acceleration, kinematics-1d, Newton's second and
+// third laws, tension, friction, inclined-plane and impulse each had only FOUR
+// active gradeable HIGH probes, and synthetic students who made one mistake ran
+// the pool out before verified mastery. Two more each, in free ladder slots
+// only (closed-choice short_answer FOUNDATIONAL/DEVELOPING; friction mcq
+// ADVANCED + misconception_probe FOUNDATIONAL).
+const LAUNCH_SLACK_B: SeedProbe[] = [
+  {
+    conceptId: 'phys.mech.acceleration', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: "A car speeds up from 10 m/s to 25 m/s in 5 s along a straight road. What is its average acceleration?",
+    choices: [
+      { text: "3 m/s² — the velocity changes by 15 m/s over 5 s", isCorrect: true },
+      { text: "5 m/s² — the final speed divided by the time", isCorrect: false, misconceptionId: "phys.mech.acceleration:MC-ACCELERATION-IS-SPEED" },
+      { text: "7 m/s² — the two speeds added, then divided by the time", isCorrect: false },
+      { text: "15 m/s — the change in velocity", isCorrect: false },
+    ],
+    correctValue: "3 m/s²",
+    targetedMisconceptions: ["phys.mech.acceleration:MC-ACCELERATION-IS-SPEED"],
+    source: src('phys.mech.acceleration', "a = Δv/Δt = (25 − 10)/5 = 3 m/s²; dividing the final speed by the time reads acceleration as speed (launch-set slack, synthetic-student pool exhaustion 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.acceleration', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.DEVELOPING,
+    stem: "A cyclist moving at 8 m/s brakes steadily and stops in 4 s. Taking the direction of motion as positive, what is the acceleration?",
+    choices: [
+      { text: "−2 m/s² — the velocity drops by 8 m/s over 4 s", isCorrect: true },
+      { text: "+2 m/s² — acceleration is always a positive number", isCorrect: false },
+      { text: "Zero — the cyclist ends up at rest, so nothing is accelerating", isCorrect: false, misconceptionId: "phys.mech.acceleration:MC-ACCELERATION-IS-SPEED" },
+      { text: "−32 m/s² — the speed multiplied by the time", isCorrect: false },
+    ],
+    correctValue: "−2 m/s²",
+    targetedMisconceptions: ["phys.mech.acceleration:MC-ACCELERATION-IS-SPEED"],
+    source: src('phys.mech.acceleration', "a = (0 − 8)/4 = −2 m/s²; slowing down is an acceleration opposite to the motion, and ending at rest does not make it zero (launch-set slack, synthetic-student pool exhaustion 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.kinematics-1d', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: "A train starts from rest and accelerates uniformly at 0.5 m/s² for 20 s. How far does it travel in that time?",
+    choices: [
+      { text: "100 m — s = ½at² = ½ × 0.5 × 20²", isCorrect: true },
+      { text: "200 m — its final speed (10 m/s) multiplied by the time", isCorrect: false },
+      { text: "10 m — the final speed", isCorrect: false },
+      { text: "50 m", isCorrect: false },
+    ],
+    correctValue: "100 m",
+    targetedMisconceptions: [],
+    source: src('phys.mech.kinematics-1d', "s = ut + ½at² = 0 + ½ × 0.5 × 400 = 100 m; final speed × time (200 m) ignores that it started from rest (launch-set slack, synthetic-student pool exhaustion 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.kinematics-1d', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.DEVELOPING,
+    stem: "A ball is thrown straight up at 14.7 m/s. How long does it take to reach its highest point? (g = 9.8 m/s²)",
+    choices: [
+      { text: "1.5 s — it loses 9.8 m/s of upward speed every second", isCorrect: true },
+      { text: "3.0 s — the time to go up and come back down", isCorrect: false },
+      { text: "0.67 s — g divided by the launch speed", isCorrect: false },
+      { text: "14.7 s", isCorrect: false },
+    ],
+    correctValue: "1.5 s",
+    targetedMisconceptions: [],
+    source: src('phys.mech.kinematics-1d', "v = u − gt reaches 0 when t = 14.7/9.8 = 1.5 s; 3.0 s is the whole flight (launch-set slack, synthetic-student pool exhaustion 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.newtons-second-law', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: "A net force of 12 N acts on a 3 kg trolley. What is its acceleration?",
+    choices: [
+      { text: "4 m/s² — a = F/m = 12/3", isCorrect: true },
+      { text: "36 m/s² — force multiplied by mass", isCorrect: false },
+      { text: "0.25 m/s² — mass divided by force", isCorrect: false },
+      { text: "12 m/s² — the acceleration equals the force", isCorrect: false },
+    ],
+    correctValue: "4 m/s²",
+    targetedMisconceptions: [],
+    source: src('phys.mech.newtons-second-law', "a = ΣF/m = 12/3 = 4 m/s² (launch-set slack, synthetic-student pool exhaustion 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.newtons-second-law', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.DEVELOPING,
+    stem: "A 2 kg box is pushed across a floor with a 10 N horizontal force while friction on it is 4 N. What is its acceleration?",
+    choices: [
+      { text: "3 m/s² — the NET force is 10 − 4 = 6 N", isCorrect: true },
+      { text: "5 m/s² — the 10 N push divided by the mass", isCorrect: false },
+      { text: "7 m/s² — the push and friction added together", isCorrect: false },
+      { text: "2 m/s² — the friction divided by the mass", isCorrect: false },
+    ],
+    correctValue: "3 m/s²",
+    targetedMisconceptions: [],
+    source: src('phys.mech.newtons-second-law', "ΣF = 10 − 4 = 6 N, so a = 6/2 = 3 m/s²; the second law uses the NET force, not the applied one (launch-set slack, synthetic-student pool exhaustion 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.newtons-third-law', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: "You push on a wall with a force of 50 N. What force does the wall exert on you?",
+    choices: [
+      { text: "50 N, pushing back on you — the pair force is equal and opposite", isCorrect: true },
+      { text: "None — walls cannot push, they only stop things", isCorrect: false },
+      { text: "Less than 50 N, because the wall does not move", isCorrect: false },
+      { text: "More than 50 N, because the wall is heavier than you", isCorrect: false },
+    ],
+    correctValue: "50 N back on you",
+    targetedMisconceptions: [],
+    source: src('phys.mech.newtons-third-law', "every force is one half of an interaction pair: equal size, opposite direction, acting on the other object; whether the wall moves is decided by the forces ON the wall (launch-set slack, synthetic-student pool exhaustion 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.newtons-third-law', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.DEVELOPING,
+    stem: "A 60 kg skater and a 30 kg skater stand still on smooth ice and push off each other. The lighter skater moves away at 2 m/s. How does the heavier skater move?",
+    choices: [
+      { text: "1 m/s in the opposite direction — equal forces for the same time, but twice the mass", isCorrect: true },
+      { text: "2 m/s in the opposite direction — equal forces mean equal speeds", isCorrect: false },
+      { text: "4 m/s in the opposite direction", isCorrect: false },
+      { text: "The heavier skater stays still because the lighter one did the pushing", isCorrect: false },
+    ],
+    correctValue: "1 m/s opposite",
+    targetedMisconceptions: [],
+    source: src('phys.mech.newtons-third-law', "the pair forces are equal and act for the same time, so each skater gets the same impulse: 60v = 30 × 2 gives v = 1 m/s the other way (launch-set slack, synthetic-student pool exhaustion 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.tension', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: "A 5 kg lamp hangs at rest from a single vertical cord. What is the tension in the cord? (g = 9.8 m/s²)",
+    choices: [
+      { text: "49 N — it must balance the lamp’s weight", isCorrect: true },
+      { text: "5 N — the tension equals the mass", isCorrect: false },
+      { text: "0 N — nothing is moving, so there is no force", isCorrect: false },
+      { text: "98 N — twice the weight, one for each end of the cord", isCorrect: false },
+    ],
+    correctValue: "49 N",
+    targetedMisconceptions: [],
+    source: src('phys.mech.tension', "at rest the net force is zero, so T = mg = 5 × 9.8 = 49 N (launch-set slack, synthetic-student pool exhaustion 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.tension', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.DEVELOPING,
+    stem: "A rope pulls a 2 kg bucket UPWARDS with an acceleration of 1.2 m/s². What is the tension in the rope? (g = 9.8 m/s²)",
+    choices: [
+      { text: "22 N — T − mg = ma, so T = 2 × (9.8 + 1.2)", isCorrect: true },
+      { text: "19.6 N — the tension equals the weight", isCorrect: false },
+      { text: "17.2 N — the acceleration is subtracted from g", isCorrect: false },
+      { text: "2.4 N — only the mass times the acceleration", isCorrect: false },
+    ],
+    correctValue: "22 N",
+    targetedMisconceptions: [],
+    source: src('phys.mech.tension', "T − mg = ma gives T = m(g + a) = 2 × 11 = 22 N; an upward acceleration needs more than the weight (launch-set slack, synthetic-student pool exhaustion 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.friction', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: "A 10 kg box rests on a floor with μs = 0.5 and μk = 0.4. You push it horizontally with 30 N and it does not move. What is the friction force on it? (g = 9.8 m/s²)",
+    choices: [
+      { text: "30 N — static friction matches the push, up to its 49 N limit", isCorrect: true },
+      { text: "49 N — static friction is always μs × N", isCorrect: false },
+      { text: "39.2 N — kinetic friction, μk × N", isCorrect: false },
+      { text: "0 N — nothing is sliding, so there is no friction", isCorrect: false },
+    ],
+    correctValue: "30 N",
+    targetedMisconceptions: [],
+    source: src('phys.mech.friction', "static friction adjusts to whatever keeps the box still, up to μs N = 0.5 × 98 = 49 N; μs N is a maximum, not the value (launch-set slack, synthetic-student pool exhaustion 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.friction', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: "A block slides across a table. If it were sliding twice as fast (at everyday speeds), what would happen to the kinetic friction on it?",
+    choices: [
+      { text: "About the same — kinetic friction is roughly μk × N, whatever the speed", isCorrect: true },
+      { text: "It would double — faster sliding means more friction", isCorrect: false },
+      { text: "It would disappear — friction only acts on slow objects", isCorrect: false },
+    ],
+    correctValue: "about the same",
+    targetedMisconceptions: [],
+    source: src('phys.mech.friction', "the kinetic friction model f = μk N does not depend on speed at everyday speeds; speed-dependent drag is a different force (launch-set slack, synthetic-student pool exhaustion 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.inclined-plane', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: "A 4 kg block sits on a frictionless ramp inclined at 30°. What is the part of its weight that acts ALONG the slope? (g = 9.8 m/s², sin 30° = 0.5, cos 30° ≈ 0.87)",
+    choices: [
+      { text: "19.6 N — mg sin 30°", isCorrect: true },
+      { text: "39.2 N — the whole weight", isCorrect: false },
+      { text: "About 34 N — mg cos 30°, which presses into the ramp", isCorrect: false },
+      { text: "0 N — the ramp holds the block up", isCorrect: false },
+    ],
+    correctValue: "19.6 N",
+    targetedMisconceptions: [],
+    source: src('phys.mech.inclined-plane', "along the slope the weight component is mg sin θ = 4 × 9.8 × 0.5 = 19.6 N; mg cos θ is the component into the surface (launch-set slack, synthetic-student pool exhaustion 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.inclined-plane', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.DEVELOPING,
+    stem: "A block slides down a frictionless ramp inclined at 30°. What is its acceleration down the slope? (g = 9.8 m/s²)",
+    choices: [
+      { text: "4.9 m/s² — g sin 30°", isCorrect: true },
+      { text: "9.8 m/s² — everything falls at g", isCorrect: false },
+      { text: "About 8.5 m/s² — g cos 30°", isCorrect: false },
+      { text: "It depends on the block’s mass", isCorrect: false },
+    ],
+    correctValue: "4.9 m/s²",
+    targetedMisconceptions: [],
+    source: src('phys.mech.inclined-plane', "along the slope ΣF = mg sin θ, so a = g sin θ = 4.9 m/s², independent of mass (launch-set slack, synthetic-student pool exhaustion 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.impulse', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: "A 0.5 kg ball hits a wall at 4 m/s and bounces straight back at 6 m/s. What impulse does the wall give the ball?",
+    choices: [
+      { text: "5 N·s, directed away from the wall — the velocity changes by 10 m/s", isCorrect: true },
+      { text: "1 N·s — the speeds differ by only 2 m/s", isCorrect: false },
+      { text: "Zero — the ball leaves with about the same speed", isCorrect: false },
+      { text: "3 N·s — mass times the final speed", isCorrect: false },
+    ],
+    correctValue: "5 N·s away from the wall",
+    targetedMisconceptions: [],
+    source: src('phys.mech.impulse', "impulse = Δp = m(v_f − v_i) = 0.5 × (−6 − 4) = −5 N·s; reversing direction counts both speeds (launch-set slack, synthetic-student pool exhaustion 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.impulse', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.DEVELOPING,
+    stem: "A 1000 kg car moving at 20 m/s is brought to rest in 4 s. What average force stops it?",
+    choices: [
+      { text: "5000 N — the impulse (20 000 N·s) divided by the time", isCorrect: true },
+      { text: "20 000 N — the car’s momentum", isCorrect: false },
+      { text: "80 000 N — momentum multiplied by the time", isCorrect: false },
+      { text: "250 N", isCorrect: false },
+    ],
+    correctValue: "5000 N",
+    targetedMisconceptions: [],
+    source: src('phys.mech.impulse', "FΔt = Δp gives F = (1000 × 20)/4 = 5000 N; a longer stopping time would mean a smaller force (launch-set slack, synthetic-student pool exhaustion 2026-09-25)"),
+  },
+]
+
 export const PHYSICS_DEPTH_PROBES: SeedProbe[] = [
   ...UNITS,
   ...SCALARS_VECTORS,
@@ -6551,4 +6787,6 @@ export const PHYSICS_DEPTH_PROBES: SeedProbe[] = [
   ...UG,
   // Batch 17 — launch-set slack: free-body diagram + normal force @ HIGH.
   ...LAUNCH_SLACK,
+  // Batch 18 — launch-set slack: the eight thinnest phys.mech @ HIGH topics.
+  ...LAUNCH_SLACK_B,
 ]
