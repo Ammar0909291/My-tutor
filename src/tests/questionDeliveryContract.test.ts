@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import { withholdUngradedGateQuestion, cutBackToTeaching } from '@/lib/teaching/gateAssessment'
+import { withholdUngradedGateQuestion, cutBackToTeaching, dropUndeliveredCheckAnnouncements } from '@/lib/teaching/gateAssessment'
 import { driveTurns, readLog } from './support/turnHarness'
 
 /**
@@ -292,5 +292,23 @@ describe('NON-VACUITY for the final-response contract', () => {
     // No promise, no change — this is what proves the guard is not blanket.
     const plain = 'Torque is the turning effect of a force.'
     expect(enforceQuestionDeliveryContract(plain, 'FALLBACK')).toBe(plain)
+  })
+})
+
+describe('a colon-ended check announcement with a figure pointer after it (synthetic run, 2026-09-25)', () => {
+  const FIG = 'Take a look at the figure beside this message — it\'s a general illustration related to the topic.'
+  it('the production reply loses the undelivered announcement', () => {
+    const t = 'Sure! Here’s a quick check on acceleration:\n\n' + FIG
+    const out = dropUndeliveredCheckAnnouncements(t)
+    expect(out).not.toMatch(/quick check/i)
+    expect(out).toContain('beside this message')
+  })
+  it('a verb lead-in to content is untouched', () => {
+    const t = 'Let’s check the formula:\n\nv = u + at'
+    expect(dropUndeliveredCheckAnnouncements(t)).toBe(t)
+  })
+  it('an announcement followed by its question is untouched', () => {
+    const t = 'Here’s a quick check on acceleration:\n\nWhat is the unit of acceleration?'
+    expect(dropUndeliveredCheckAnnouncements(t)).toBe(t)
   })
 })

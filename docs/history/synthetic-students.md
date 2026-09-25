@@ -232,3 +232,17 @@ Egress: run 2 ~28 MB, run 3 ~11 MB (F0-F2).
 10/10 mastered (median turns: strong 9, careless 11, off-track 11, beginner 12, confused 15), 0 critical, 0 major, 2 minor. Egress ~27 MB (F2->F3).
 
 The recurring minor `ungradeable-question` (off-track, turn 5, on all four topics so far) turned out to be a real verdict defect. Production log (session `cmugb4zkl…`, 01:54): `gradeSource: server-key, gradedCorrect: true`, model reply in full: "So you calculated the train's average acceleration as 3 metres per second squared, right? Is that correct?", and `[c5] {"event":"servedGradedCorrect","confirmed":true}`. `confirmCorrectAnswer` skipped its prepend because `CONFIRMS_CORRECT` matched `\bcorrect\b` inside the question. The learner was asked to grade their own right answer; the verdict arrived a turn late. Fix: `statesCorrect()` in `answerConfirmation.ts` tests the same regex against statements only (sentences not ending in "?"); used by the enforcer and the `[c5]` telemetry. The regex itself is unchanged (`confirmationDetectorParity` pins it to `scripts/qa/rubricScore.ts`). Note: the QA scorer's C5 criterion still counts "Is that correct?" as confirmed.
+
+## 2026-09-25 02:10-03:30 UTC — acceleration + kinematics-1d runs 2 and 3
+
+| Run | Build | Mastered | Critical | Major | Minor |
+|---|---|---|---|---|---|
+| 1 | `651276f` | 10/10 | 0 | 0 | 2 (verdict defect, fixed in `dbd3b77`) |
+| 2 | `dbd3b77` | 10/10 | 1 (`answer-leak`, acceleration) | 0 | 1 |
+| 3 | `dbd3b77` | 10/10 | 0 | 1 (`announced-not-asked`) | 0 |
+
+**kinematics-1d READY.** Acceleration blocked by run 2's critical. The authored question "Acceleration is defined as the rate of change of which quantity?" (key: velocity) was held on screen, and the reply to "will this be on the exam?" said "understanding acceleration — how velocity changes with time". The leak guard covers only a question attached this turn. Extending it to held turns would strip real teaching on help requests, so it went to the owner as a decision (handover: OWNER DECISION NEEDED).
+
+Run 3's major: "can you quiz me?" -> "Sure! Here's a quick check on acceleration:" + figure pointer, no question. Fixed in `gateAssessment.ts` (`announcesACheck`, noun-form colon announcements); cause: the figure pointer is appended before the delivery contract, so the trailing-colon rule no longer saw a trailing colon.
+
+Egress: run 2 ~20 MB, run 3 ~7 MB. Day total ~93 MB.

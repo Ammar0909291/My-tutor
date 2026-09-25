@@ -1195,13 +1195,28 @@ export function dropSentencesPointingAtMissingOptions(text: string): string {
 const ANNOUNCES_A_CHECK =
   /^(?:(?:sure|great|ok(?:ay)?|alright|got it|understood|no problem|absolutely|of course|i hear you|that(?:'|’)s great)[^.!?]{0,30}[,—–-]\s*)?(?:let(?:'|’)s|let me|here(?:'|’)s|here is)\b[^.!?]{0,80}\b(?:check|test|quiz|question)\b[^.!?:]{0,80}[.!]?$/i
 
+// The same promise ending in a COLON. MEASURED (synthetic run, 2026-09-25,
+// phys.mech.acceleration, strong student "can you quiz me?"): "Sure! Here's a
+// quick check on acceleration:" shipped with no question after it. The
+// trailing-colon rule in `enforceQuestionDeliveryContract` would have caught
+// it, but the figure pointer (`ensureVisualAcknowledged`, appended earlier in
+// the route) followed the colon, so the colon was no longer trailing. Noun form
+// only ("here's a/your/another/the next … check/quiz/question/test:") so a verb
+// lead-in to content ("Let's check the formula:") is never touched; and the
+// function still returns early whenever the text asks anything.
+const ANNOUNCES_A_CHECK_COLON = /^(?:[^.!?]{0,30}[,—–-]\s*)?here(?:(?:'|’)s| is)\b/i
+const ANNOUNCED_CHECK_NOUN_COLON = /\b(?:a|your|another|the next)\b[^.!?:]{0,40}\b(?:check|quiz|question|test)\b[^.!?:]{0,60}:$/i
+const announcesACheck = (sentence: string): boolean =>
+  ANNOUNCES_A_CHECK.test(sentence)
+  || (ANNOUNCES_A_CHECK_COLON.test(sentence) && ANNOUNCED_CHECK_NOUN_COLON.test(sentence))
+
 export function dropUndeliveredCheckAnnouncements(text: string): string {
   const t = typeof text === 'string' ? text : ''
   if (t.includes('?') || containsOptionList(t) || hasProseMultipleChoice(t)) return t
   let dropped = false
   const paragraphs = t.split(/\n{2,}/).map((p) => {
     const sentences = p.split(/(?<=[.!])\s+/)
-    const kept = sentences.filter((s) => !ANNOUNCES_A_CHECK.test(s.trim()))
+    const kept = sentences.filter((s) => !announcesACheck(s.trim()))
     if (kept.length === sentences.length) return p
     dropped = true
     return kept.join(' ').trim()
