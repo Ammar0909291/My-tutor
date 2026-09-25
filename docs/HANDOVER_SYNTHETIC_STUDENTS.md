@@ -185,7 +185,9 @@ It counts rows returned (cumulative since project creation, never reset).
 - **No AI key in the container.** Students are rule-based, and the model-based factual marker is
   not built. It needs a key added to the environment secrets by the owner.
 
-## OWNER DECISION NEEDED (2026-09-25) — the held question's answer in the teaching
+## DECIDED (owner "Approved", 2026-09-25) — held-question answer leak: option A implemented (`[answer-leak]` guard also covers an authored held question, except help/recovery turns)
+
+### Original write-up
 
 The leak guard hides the answer only on the turn the server attaches a question. While the question
 stays on screen unanswered, the tutor's reply can state the answer (S8b: "acceleration — how velocity
@@ -234,7 +236,9 @@ Options (owner — production state / egress-sensitive code, not changed unilate
 Until this is fixed, content additions (including Batch 17) do not help learners, and the
 free-body/normal-force re-runs would measure the old pool.
 
-## OWNER DECISION NEEDED (2026-09-25) — the CLOSING trap
+## DECIDED (owner "Approved", 2026-09-25) — the CLOSING trap: option A implemented (`sessionLifecycle.closedBy`, spiral closes reopen on an authored right answer, explicit closes stay final, unauthored grades do not spend the budget)
+
+### Original write-up
 
 After two consecutive graded wrong answers the session episode goes CLOSING ("affect budget spent",
 `sessionLifecycle.applySignalToEpisode`). CLOSING blocks every question (turnArbitration CLOSE +

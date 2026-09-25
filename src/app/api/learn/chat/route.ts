@@ -6436,14 +6436,31 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // (owner-approved, G2, 2026-09-24). Only for the server's own question
       // attached THIS turn. Emptying the text is safe: the guard just below
       // treats a question on screen as content, never as an outage.
-      if (mcqHoisted && mcqHoisted === gateMcqHoisted) {
+      // HELD QUESTION TOO (owner-approved 2026-09-25, option A). Measured
+      // (synthetic run, phys.mech.acceleration): the authored question
+      // "Acceleration is defined as the rate of change of which quantity?"
+      // stayed on screen unanswered; the learner asked "will this be on the
+      // exam?" and the reply said "…acceleration — how velocity changes with
+      // time…". A question still on screen is being asked just as much as one
+      // attached this turn. Help and recovery turns are exempt: when the
+      // learner asks to be taught, the teaching stays even if it names the
+      // answer.
+      const { probeKeyIsAuthored: heldKeyIsAuthored } = await import('@/lib/teaching/mcq')
+      const heldQuestionOnScreen = !mcqHoisted && mcqGradeHoisted === null && pendingMcqHoisted !== null
+        && heldKeyIsAuthored(pendingMcqHoisted)
+        && learnerRequestHoisted === null && recoveryKeyHoisted === null
+      const leakGuardMcq = mcqHoisted && mcqHoisted === gateMcqHoisted
+        ? mcqHoisted
+        : heldQuestionOnScreen ? pendingMcqHoisted : null
+      if (leakGuardMcq) {
         const { dropAnswerLeaks } = await import('@/lib/teaching/gateAssessment')
         const { getKGNode: kgNodeForLeak } = await import('@/lib/curriculum/knowledgeGraph')
-        const leak = dropAnswerLeaks(text, mcqHoisted, resolvedConceptId ? (kgNodeForLeak(resolvedConceptId)?.title ?? null) : null)
+        const leak = dropAnswerLeaks(text, leakGuardMcq, resolvedConceptId ? (kgNodeForLeak(resolvedConceptId)?.title ?? null) : null)
         if (leak.dropped.length > 0) {
           console.warn('[answer-leak] ' + JSON.stringify({
             conceptId: resolvedConceptId ?? null,
-            assetId: mcqHoisted.assetId ?? null,
+            assetId: leakGuardMcq.assetId ?? null,
+            held: leakGuardMcq !== mcqHoisted,
             dropped: leak.dropped.map((d) => d.slice(0, 120)),
           }))
           text = leak.text
@@ -10935,10 +10952,22 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // Same boundary as the synthetic recovery failure above: a wrong
               // answer about the side concept is not a failure on the paused
               // lesson, so it does not spend that session's affect budget.
+              // Owner-approved 2026-09-25: a verdict against a MODEL-INVENTED
+              // key is not evidence of a failure spiral. Measured (tension /
+              // friction run): two wrong taps on questions the model wrote
+              // itself spent the affect budget and shut every authored question
+              // out. When this turn's grade came from an unauthored key, its
+              // correctness does not reach the budget; authored grades (and the
+              // pre-existing no-question signal path) do.
+              const unauthoredGradeThisTurn = mcqGradeHoisted !== null && !gradedAgainstServerKeyHoisted
+              const signalForBudget = unauthoredGradeThisTurn && teachingSignal
+                ? { ...teachingSignal, correctness: undefined }
+                : teachingSignal
               const nextEpisode = resolvedExcursionActive
                 ? sessionEpisodeHoisted
-                : applySignalToEpisode(sessionEpisodeHoisted, teachingSignal, {
+                : applySignalToEpisode(sessionEpisodeHoisted, signalForBudget, {
                     isFirstLesson: resolvedFirstLessonActive,
+                    authoredGrade: gradedAgainstServerKeyHoisted,
                   })
               // Compare against what is STORED, not against the in-request
               // value this turn has already mutated. The old baseline
