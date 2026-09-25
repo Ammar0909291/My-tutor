@@ -208,6 +208,8 @@ This changes what counts as evidence, so it is CLAUDE.md G2 — not implemented 
 
 ## BLOCKER (2026-09-25 12:15 UTC) — new seed content is not reaching production
 
+**Update 2026-09-25 ~14:40 UTC (owner "Approved"):** the 4 Batch 17 probes (free-body diagram, normal force) were applied to production once, as guarded INSERTs in the bootstrap's own row shape, and verified ACTIVE with their choices. The bootstrap itself is still stalled for any other new seed content; phase-timing logs (`asset bootstrap timing: …`, `34b8288`) will show where the 12 s slice goes on the next cold starts.
+
 Batch 17 (4 new physics probes, `2d2cc0b`) is deployed (READY) but its rows are absent from
 `asset_identity` after three cold starts. The maths `math.de` batches committed 2026-09-24 04:07 UTC
 (`eabba05` and earlier) have **zero rows** in production after 30+ hours. Every retained cold-start log
