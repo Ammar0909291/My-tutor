@@ -82,7 +82,7 @@ reach verified mastery every time with zero critical defects (`scripts/qa/synthe
 | S8c | Run 3 on acceleration + kinematics-1d (prod `dbd3b77`) | **done**: 10/10 mastered, 0 critical, 1 major (`announced-not-asked`, see S8d); the off-track t5 verdict flag is gone. **kinematics-1d READY** (3/3 runs, all master, 0 critical). acceleration NOT ready: run 2's critical waits on the OWNER DECISION below |
 | S8d | "can you quiz me?" at t1 -> "Sure! Here's a quick check on acceleration:" + figure pointer, no question. `ANNOUNCES_A_CHECK` rejects a colon ending, and the trailing-colon rule missed it because `ensureVisualAcknowledged` (route ~L9954) appends the figure pointer before the delivery contract (~L12389). Fix: noun-form colon announcements ("here's a/your/another/the next … check/quiz/question/test:") are dropped too; still only when the text asks nothing | **pushed** (full suite 725/14,944, tsc and build clean) |
 | S9 | Next pair: `phys.mech.force,phys.mech.newtons-first-law`, 3 runs (then newtons-second/third-law, …). Launch-set status: READY = displacement, velocity, kinematics-1d; blocked = acceleration (owner decision) | run 1 (prod `b382d17`): **10/10 mastered, 0 critical, 0 major**, 1 minor. Run 2: **10/10 mastered, 0 critical**, 1 major (`announced-not-asked`: Gemini wrote "Let's check how this applies to a brand-new scenario with the 3D Newton's Forces simulation on your screen." — the `ANNOUNCES_A_CHECK` tail is capped at 80 chars; this one is ~85), 3 minor. **Every turn of run 2 was served by Gemini** — see STOP below Run 3 (07:15-07:48 UTC, Gemini-served, `RUNNER_ALLOWED_PROVIDERS=groq,gemini,memory` by owner "Go"/"keep studying"): **10/10, 0 critical, 0 major, 0 minor → force + newtons-first-law READY** |
-| S10 | Next physics pair: `phys.mech.newtons-second-law,phys.mech.newtons-third-law` (after 00:00 UTC; egress) | pending |
+| S10 | Newton's second + third law (owner: "Keep working using Gemini. Use vercel too") | run 1 (08:18-09:00 UTC, prod `9945db4`, Gemini): **10/10 mastered, 0 critical, 0 major**, 1 minor (`ungradeable-question`, strong N2L t5). Runs 2-3 after 00:00 UTC. `[gate-contract]` now logs the model text a withheld question cut (`2604147`) to diagnose the scenario/question mismatch |
 
 If S4's run file is lost (the session ended), **skip the before-baseline**. S2's smoke run already
 shows the defect; go straight to S5.
@@ -158,6 +158,7 @@ It counts rows returned (cumulative since project creation, never reset).
 | F6 | 2026-09-25 04:00:48 | 10,610,301 | 189,587,947 | force + newtons-first-law run 1: +65,094 rows / 116 turns, about 20 MB. **Today: about 113 MB; one more run allowed** |
 | F7 | 2026-09-25 04:28:39 | 10,636,738 | 189,639,897 | force + newtons-first-law run 2: +51,950 rows / 112 turns, about 16 MB. **Today: about 129 MB. Runs paused (Groq spend limit)** |
 | F8 | 2026-09-25 07:48:45 | 10,666,449 | 189,742,780 | force + N1L run 3: +100,372 rows since 07:14, about 30 MB. **Today ≈ 159 MB — stop until 00:00 UTC** |
+| F9 | 2026-09-25 09:00:06 | 10,696,336 | 189,866,432 | N2L + N3L run 1: +123,652 rows since F8, about 37 MB. **Today ≈ 196 MB (over the 150 guideline, owner-approved) — no more runs until 00:00 UTC** |
 
 ## Rules that bind this work
 
