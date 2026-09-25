@@ -138,6 +138,19 @@ export const CAMPAIGN_FIXED_CONCEPTS = [
   'bio.bioinfo.genome-sequencing-technologies',
   'bio.bioinfo.multiomics-statistical-genomics',
   'bio.biotech.agricultural-forensic-biotechnology',
+  // Batch 9 — bio.biotech (2), bio.dev (3), bio.div (6)
+  'bio.biotech.bioprocess-engineering',
+  'bio.biotech.gene-therapy-detail',
+  'bio.dev.aging-senescence-biology',
+  'bio.dev.organogenesis',
+  'bio.dev.regeneration-biology',
+  'bio.div.animal-body-plans-symmetry',
+  'bio.div.arthropod-diversity',
+  'bio.div.chordate-vertebrate-diversity',
+  'bio.div.echinoderm-deuterostome-diversity',
+  'bio.div.fish-amphibian-diversity',
+  'bio.div.invertebrate-diversity-major-phyla',
+  'bio.div.mammalian-diversity',
 ] as const
 
 describe.each(CAMPAIGN_FIXED_CONCEPTS)('%s now resolves to a faithful Tier 0 scene', (conceptId) => {
