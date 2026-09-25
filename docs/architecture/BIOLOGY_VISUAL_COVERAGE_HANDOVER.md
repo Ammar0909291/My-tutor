@@ -77,66 +77,63 @@ all 161 static-audit-flagged concepts.
    which concepts were fixed and why each was classified the way it was, any defect found and
    fixed along the way.
 
-### Two stale-count landmines already hit once each — check both on every batch
+### One stale-count landmine, now fully resolved — a pattern to watch for in other files
 
-- `dnaReplicationVisual.test.ts`'s `'the other molecular-biology DNA concepts resolve exactly as
-  before (no figure)'` test hardcodes a list of concepts still expected to have NO figure. If a
-  batch fixes one of `bio.mol.nucleic-acid-structure` / `bio.mol.transcription` /
-  `bio.mol.dna-damage-repair` / `bio.mol.chromatin-structure-genome-organization` (the original 4),
-  narrow this test's list and add a comment naming which batch fixed it. As of batch 10, only
-  `bio.mol.chromatin-structure-genome-organization` remains in that list — it is also still in
-  this campaign's own remaining-42 list below, so whichever batch reaches it must update BOTH
-  files in the same commit.
+- `dnaReplicationVisual.test.ts`'s DNA-concepts regression test originally hardcoded a list of 4
+  concepts expected to have NO figure (`bio.mol.nucleic-acid-structure`, `bio.mol.transcription`,
+  `bio.mol.dna-damage-repair`, `bio.mol.chromatin-structure-genome-organization`). Batches 2, 7,
+  and 11 fixed all four; the test was rewritten each time to narrow its list, and as of batch 11 it
+  now asserts the LAST one is fixed too (`graphical: true`) rather than iterating an empty "still
+  broken" array. If any OTHER test file in the repo hardcodes a similar "this concept has no
+  figure" list for a Biology concept this campaign later fixes, apply the same pattern: narrow or
+  flip the assertion in the SAME commit, with a comment naming which batch did it.
 - `visualGeneratorSplits.test.ts` and `bioVisualGapFix.test.ts` both use
   `.length).toBeGreaterThanOrEqual(N)` rather than an exact count specifically so this campaign's
   growth doesn't require touching them — leave them as `>=` checks, don't "fix" them back to exact
   counts.
 
-## Current status (2026-09-25, after batch 10)
+## Current status (2026-09-25, after batch 11)
 
-**119 of 161 statically-flagged concepts fixed and verified** (`tsc` 0 errors, 443/443 targeted
-tests passing, 15,356 passing / 9 skipped in the full suite, 0 duplicate seed identities). 10
-batches committed and pushed to `main` individually so far.
+**131 of 161 statically-flagged concepts fixed and verified** (`tsc` 0 errors, 479/479 targeted
+tests passing, 15,392 passing / 9 skipped in the full suite, 0 duplicate seed identities). 11
+batches committed so far; batch 11 pushed (batch 10's push is confirmed landed on `main` as
+`b681332d`; batch 11 push is the very next action after this update).
 
-Batch 10 (12 concepts: `bio.div.reptile-bird-diversity` — HUB, flight's three functional demands;
-`bio.evo.coevolution-species-interactions` — COMPARISON, reciprocal coevolution vs parallel
-adaptation to a shared environment; `bio.evo.convergent-evolution-homoplasy` — COMPARISON,
-convergent vs parallel evolution as the two sources of homoplasy; `bio.evo.macroevolution-
-extinction` — COMPARISON, phyletic gradualism vs punctuated equilibrium; `bio.evo.phylogeography-
-biogeography` — COMPARISON, vicariance vs dispersal; `bio.found.scientific-method-in-biology` —
-PATHWAY, observation → controlled experiment → statistical evaluation → replication/peer review;
-`bio.found.unifying-themes-in-biology` — HUB, the four recurring themes; `bio.gen.conservation-
-genetics` — HUB, the three reasons effective population size (Ne) is smaller than census size (N);
-`bio.gen.genetic-testing-counseling` — COMPARISON, carrier screening vs prenatal diagnostic
-testing; `bio.gen.quantitative-genetics-heritability` — COMPARISON, broad-sense (H²) vs
-narrow-sense (h²) heritability; `bio.immuno.cancer-immunology-immunotherapy` — COMPARISON,
-checkpoint inhibitors vs CAR-T cell therapy as mechanistically distinct approaches;
-`bio.immuno.cytokines-immune-signaling` — HUB, interleukins/interferons/TNF as three distinct
-cytokine classes) validated clean: `tsc --noEmit` 0 errors, 443/443 targeted tests passing,
-15,356/15,365 full-suite tests passing (9 pre-existing skips, unrelated to this campaign), dry-run
-seed script reported 0 duplicate identities. **Not yet committed as of this file's creation —
-commit/merge/push for batch 10 is the very next action.**
+Batch 10 (12 concepts — see git log commit `53722909`/`b681332d` for the full list: reptile/bird
+diversity, coevolution, convergent evolution, macroevolution/extinction, phylogeography,
+scientific method, unifying themes, conservation genetics, genetic testing/counselling,
+quantitative genetics/heritability, cancer immunotherapy, cytokine signalling) validated clean and
+pushed.
 
-### Remaining frontier — 42 concept IDs not yet fixed
+Batch 11 (12 concepts: `bio.immuno.t-cell-development-tolerance` — PATHWAY, positive selection →
+negative selection → peripheral tolerance backup; `bio.micro.antimicrobial-resistance` — HUB,
+three resistance mechanisms (efflux pumps, enzymatic inactivation, target-site modification);
+`bio.micro.archaea-extremophiles` — HUB, the four extremophile categories matched to their
+specific stressor; `bio.micro.human-microbiome-detail` — HUB, the three distinct
+microbiome-host interaction mechanisms; `bio.micro.microbial-metabolism-diversity` — HUB, the
+three metabolic strategies behind extremophile survival; `bio.mol.alternative-splicing-rna-
+diversity` — HUB, the four splicing mechanisms that create protein diversity from one gene;
+`bio.mol.chromatin-structure-genome-organization` — PATHWAY, nucleosome → higher-order folding →
+TADs (this was also one of `dnaReplicationVisual.test.ts`'s originally-tracked "still broken"
+concepts — that test was updated in the same commit to assert the fix instead, closing out that
+file's entire original 4-concept list); `bio.mol.metabolic-regulation-integration` — COMPARISON,
+insulin (fed state) vs glucagon (fasted state) reciprocal control; `bio.mol.protein-quality-
+control-autophagy` — HUB, the four distinct protein-degradation routes; `bio.neuro.audition-
+vestibular-system` — PATHWAY, outer ear → middle ear → inner ear/cochlea sound transmission;
+`bio.neuro.autonomic-stress-physiology` — PATHWAY, the HPA axis's hypothalamus → pituitary →
+adrenal cortisol cascade; `bio.neuro.brain-regional-organization` — STRUCTURE, the cerebral
+cortex's four lobes) validated clean: `tsc --noEmit` 0 errors, 479/479 targeted tests passing,
+15,392/15,401 full-suite tests passing (9 pre-existing skips, unrelated to this campaign), dry-run
+seed script 0 duplicate identities (10,462 items).
 
-One of these (`bio.plant.plant-respiration`) is a **confirmed non-defect**, deliberately excluded
-from `CAMPAIGN_FIXED_CONCEPTS` because it already serves a real Tier 3 figure — do not "fix" it,
-just don't count it against progress. The other 41 are genuinely unclassified/unauthored:
+### Remaining frontier — 30 concept IDs not yet fixed
+
+One further concept (`bio.plant.plant-respiration`) is a **confirmed non-defect**, deliberately
+excluded from `CAMPAIGN_FIXED_CONCEPTS` because it already serves a real Tier 3 figure — do not
+"fix" it, just don't count it against progress. The other 29 are genuinely unclassified/unauthored:
 
 ```
 bio.plant.plant-respiration            (confirmed already working — do NOT author, leave as-is)
-bio.immuno.t-cell-development-tolerance
-bio.micro.antimicrobial-resistance
-bio.micro.archaea-extremophiles
-bio.micro.human-microbiome-detail
-bio.micro.microbial-metabolism-diversity
-bio.mol.alternative-splicing-rna-diversity
-bio.mol.chromatin-structure-genome-organization   (also update dnaReplicationVisual.test.ts when fixed)
-bio.mol.metabolic-regulation-integration
-bio.mol.protein-quality-control-autophagy
-bio.neuro.audition-vestibular-system
-bio.neuro.autonomic-stress-physiology
-bio.neuro.brain-regional-organization
 bio.neuro.cognitive-neuroscience-consciousness
 bio.neuro.learning-memory-neurobiology
 bio.neuro.neural-circuits-computation
