@@ -93,3 +93,22 @@ production. Interpreter files unchanged.
 - Residuals (not changed): the unresolved-topic path now holds these follow-ups as a topic
   excursion on the LESSON'S OWN concept (previously a foreign concept excursion); "the/this term"
   still resolves cross-subject; "for example, …" inside an answer still reads as an example request.
+
+## Rerun on the FIXED tutor (2026-09-25, production b143b3b0 = misread fixes + EGRESS-4)
+Same runner, scenarios, wording, provider pin (groq) and 6×2 design; interpreter unchanged.
+- First ask fully satisfied: A 10/12 (baseline 8/12), B 12/12 (baseline 12/12).
+- Follow-ups F/P/X: A 18/4/2 (baseline 19/4/1), B 22/0/2 (baseline 23/0/1).
+- Deterministic fixes confirmed live: Topos T2 formal Sh(X) in A (no everyday analogy); no
+  `math.alg.term` / `math.fnal` target or figure; every typed follow-up with an MCQ pending
+  `chosen: null`; every graded event was an option tap.
+- Residual B advantage, 4 turns: Dark Matter T2 modified-gravity half (A 0/2, B 2/2, same as
+  baseline) and Vaska T3 explicit confirmation of the correction (A implicit 2/2, B explicit 2/2).
+  Content errors on follow-ups: A 2, B 0.
+- NEW failure exposed in BOTH arms: Topos T3 (an imperative follow-up, no '?') is pre-empted by
+  the authored-probe gate ("One to try, on Topos.", llmCallCount 0). Before the fix, the diagram
+  misread made it a LEARNER_REQUEST, which suppressed the probe. Root cause: arbitration's
+  LEARNER_QUESTION rung reads only `detectLearnerQuestion` ('?' + WH-word). The interpreter
+  cannot help because the model is never called.
+- Interpreter: 24/24 follow-ups admitted, 36/36 others not_actionable, p50 588 ms, 0 errors.
+  Turn p50 A 13.27 s, B 13.55 s. Visual turns equal 12/12, phases equal 11/12 (the one
+  difference follows a legitimately graded option tap). No verified mastery; isolation 72/72 + 60/60.
