@@ -38,6 +38,8 @@ Open (not fixed, needs the model's raw text which only the Vercel logs hold): th
 real learners depend on. The runner has no provider budget of its own — adding one (e.g. a
 `RUNNER_MAX_TOKENS` estimate and a pre-run provider health check) is a sensible next step.
 
+## Egress budget (owner, 2026-09-25 12:30 UTC): "Go with physics. It's okay until egress 1gb" — synthetic runs may continue until the day's egress reaches ~1 GB (was ~150 MB/day). Keep measuring every run.
+
 ## Subject order (owner, 2026-09-25) — binding
 
 **Physics first, then chemistry, then English. Do NOT study biology or mathematics.** Finish the
