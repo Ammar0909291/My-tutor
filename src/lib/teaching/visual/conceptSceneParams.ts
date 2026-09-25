@@ -1198,6 +1198,565 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
       { label: 'Adaptive immunity', description: 'slow (days to weeks), specific to ONE pathogen', items: ['B cells: antibodies', 'T cells: coordinate response, destroy infected cells', 'Immunological memory'] },
     ],
   }),
+
+  // Batch 4 (bio.plant, 3 concepts; bio.repro, 5 concepts; bio.dev, 3
+  // concepts; bio.micro, 1 concept):
+  'bio.plant.plant-water-relations': () => buildCellPathwayScene({
+    conceptId: 'bio.plant.plant-water-relations',
+    title: 'The Cohesion-Tension Mechanism',
+    teachingGoal: 'Water is not pumped up the plant — no pump exists anywhere. Removing the leaves stops water movement almost immediately, because the pulling force is lost.',
+    stages: [
+      { name: 'Transpiration', description: 'water evaporates from leaf stomata, creating tension — a pulling force — at the top of the xylem' },
+      { name: 'Cohesion and adhesion', description: 'water molecules stick to each other (cohesion) and to the xylem walls (adhesion), moving as one unbroken column' },
+      { name: 'Water enters the roots', description: 'osmosis pulls water from the soil (higher water potential) into root hair cells (lower water potential)' },
+    ],
+  }),
+
+  'bio.plant.mineral-nutrition': () => buildCellComparisonScene({
+    conceptId: 'bio.plant.mineral-nutrition',
+    title: 'Macronutrients vs. Micronutrients',
+    teachingGoal: 'Plants do not "feed from soil" for bulk mass — that comes from CO2 and water. Soil minerals are essential in small quantities for specific molecules.',
+    groups: [
+      { label: 'Macronutrients', description: 'needed in large amounts', items: ['Nitrogen: amino acids, proteins, chlorophyll', 'Phosphorus: nucleic acids, ATP', 'Potassium: enzyme activation, guard cells', 'Magnesium: the central atom in chlorophyll'] },
+      { label: 'Micronutrients', description: 'needed only in trace amounts', items: ['Iron (enzyme cofactor)', 'Manganese, zinc, copper, boron, molybdenum'] },
+    ],
+  }),
+
+  'bio.plant.plant-growth-hormones': () => buildCellComparisonScene({
+    conceptId: 'bio.plant.plant-growth-hormones',
+    title: 'The Five Plant Hormones',
+    teachingGoal: '"Auxins always promote growth" is false — the same concentration that promotes shoot elongation INHIBITS root elongation.',
+    groups: [
+      { label: 'Auxins (IAA)', description: 'cell elongation in shoot tips; redistributes with light and gravity', items: ['Phototropism: migrates to the shaded side'] },
+      { label: 'Gibberellins', description: 'stem elongation, seed germination, breaking dormancy', items: [] },
+      { label: 'Cytokinins', description: 'cell division; delays leaf senescence', items: [] },
+      { label: 'Abscisic acid', description: 'the "stress hormone" — stomatal closure, dormancy', items: [] },
+      { label: 'Ethylene', description: 'a GAS, not a liquid signal — fruit ripening, abscission', items: [] },
+    ],
+  }),
+
+  'bio.repro.asexual-reproduction': () => buildCellComparisonScene({
+    conceptId: 'bio.repro.asexual-reproduction',
+    title: 'Six Methods of Asexual Reproduction',
+    teachingGoal: '"Clones" sharing identical nuclear DNA are not identical in every respect — epigenetics, mitochondrial DNA, and environment can still differ (Dolly the sheep).',
+    groups: [
+      { label: 'Binary fission', description: 'one parent cell divides into two equal daughter cells', items: ['Bacteria'] },
+      { label: 'Budding', description: 'a new individual forms as a physical outgrowth, then detaches', items: ['Yeast, Hydra'] },
+      { label: 'Fragmentation', description: 'a broken-off piece regenerates into a complete new individual', items: ['Starfish, flatworms'] },
+      { label: 'Sporulation', description: 'spores germinate into new individuals', items: ['Fungi, ferns'] },
+      { label: 'Vegetative propagation', description: 'new plants grow from non-reproductive structures', items: ['Potato tubers, strawberry stolons'] },
+      { label: 'Parthenogenesis', description: 'an unfertilised egg develops directly into an adult', items: ['Some insects and reptiles'] },
+    ],
+  }),
+
+  'bio.repro.sexual-reproduction-plants': () => buildCellPathwayScene({
+    conceptId: 'bio.repro.sexual-reproduction-plants',
+    title: 'Double Fertilisation: Two Fusions, Two Products',
+    teachingGoal: 'This is genuinely a DOUBLE event producing two distinct products from two separate fusions — not one fertilisation event with one outcome.',
+    stages: [
+      { name: 'Pollen tube delivers two sperm nuclei', description: 'after pollination, the pollen tube grows down the style to reach the ovule' },
+    ],
+    branchEnd: [
+      { name: 'Sperm 1 + egg cell', description: 'forms the diploid zygote' },
+      { name: 'Sperm 2 + polar nuclei', description: 'forms the TRIPLOID endosperm, the seed’s food store' },
+    ],
+  }),
+
+  'bio.repro.human-reproductive-system': () => buildCellPathwayScene({
+    conceptId: 'bio.repro.human-reproductive-system',
+    title: 'The Menstrual Cycle',
+    teachingGoal: 'Ovulation timing tracks the LH surge, not a fixed "day 14" — fertilisation occurs in the Fallopian tube, not the uterus.',
+    cyclic: true,
+    stages: [
+      { name: 'Follicular phase', description: 'FSH stimulates follicle maturation; oestrogen rises' },
+      { name: 'LH surge and ovulation', description: 'rising oestrogen triggers the LH surge, causing the mature follicle to rupture and release the egg' },
+      { name: 'Luteal phase', description: 'the ruptured follicle becomes the corpus luteum, secreting progesterone to maintain the uterine lining' },
+      { name: 'Menstruation', description: 'if fertilisation does not occur, the corpus luteum degenerates, progesterone drops, and the lining sheds' },
+    ],
+  }),
+
+  'bio.repro.fertilisation-development': () => buildCellPathwayScene({
+    conceptId: 'bio.repro.fertilisation-development',
+    title: 'Early Embryonic Development',
+    teachingGoal: 'Maternal and fetal blood do NOT mix in a healthy pregnancy — the placenta is a selectively permeable barrier, not an open connection.',
+    stages: [
+      { name: 'Fertilisation', description: 'capacitation, acrosome reaction, and cortical reaction (preventing polyspermy) in the Fallopian tube' },
+      { name: 'Cleavage', description: 'the zygote divides by mitosis without growing, forming a morula then a blastocyst' },
+      { name: 'Implantation', description: 'the blastocyst embeds in the uterine wall, around day 6–10' },
+      { name: 'Gastrulation', description: 'the three germ layers form: ectoderm, mesoderm, endoderm' },
+      { name: 'Neurulation', description: 'the neural plate folds into the neural tube' },
+      { name: 'Organogenesis', description: 'major organs form by roughly week 8, marking the transition to fetus' },
+    ],
+  }),
+
+  'bio.repro.reproductive-health': () => buildCellComparisonScene({
+    conceptId: 'bio.repro.reproductive-health',
+    title: 'Contraceptive Methods by Mechanism',
+    teachingGoal: 'Condoms provide the ONLY STI protection among contraceptive methods — every other method prevents pregnancy only.',
+    groups: [
+      { label: 'Barrier', description: 'physically prevents sperm from reaching the egg', items: ['Condoms, diaphragm — the only STI protection'] },
+      { label: 'Hormonal', description: 'prevents ovulation (primary mechanism), alters cervical mucus', items: ['The pill, patch, injection, implant'] },
+      { label: 'IUD', description: 'copper (toxic to sperm) or hormonal', items: [] },
+      { label: 'Emergency contraception', description: 'high-dose progesterone to DELAY ovulation', items: ['Not an abortifacient — does not end an existing pregnancy'] },
+    ],
+  }),
+
+  'bio.dev.gametogenesis-fertilisation-dev': () => buildCellComparisonScene({
+    conceptId: 'bio.dev.gametogenesis-fertilisation-dev',
+    title: 'Spermatogenesis vs. Oogenesis: The 4-vs-1 Asymmetry',
+    teachingGoal: 'An "unfertilised egg" has NOT completed meiosis — it is a secondary oocyte arrested at metaphase II; fertilisation triggers meiosis II to finish.',
+    groups: [
+      { label: 'Spermatogenesis', description: 'runs continually; equal cytokinesis', items: ['4 functional sperm per primary spermatocyte'] },
+      { label: 'Oogenesis', description: 'begins before birth; UNEQUAL cytokinesis concentrates cytoplasm into one cell', items: ['1 functional egg + 2–3 polar bodies per primary oocyte'] },
+    ],
+  }),
+
+  'bio.dev.morphogenesis-differentiation': () => buildCellPathwayScene({
+    conceptId: 'bio.dev.morphogenesis-differentiation',
+    title: 'From Morphogen Gradient to Sculpted Tissue',
+    teachingGoal: 'Differentiation is NOT gene loss — all somatic cells carry identical genomes; cloning experiments proved this. It is a matter of gene EXPRESSION, not presence.',
+    stages: [
+      { name: 'Morphogen gradient', description: 'a signal (e.g. Sonic Hedgehog) diffuses outward; concentration tells each cell where it sits' },
+      { name: 'Determination', description: 'transcription factors lock in cell identity by silencing alternative gene programs' },
+      { name: 'Physical sculpting', description: 'cell shape changes, differential adhesion, and apoptosis (e.g. interdigital cell death forms fingers)' },
+    ],
+  }),
+
+  'bio.dev.stem-cells-regeneration': () => buildCellComparisonScene({
+    conceptId: 'bio.dev.stem-cells-regeneration',
+    title: 'Stem Cell Potency: A Narrowing Hierarchy',
+    teachingGoal: 'Potency — the BREADTH of differentiation — is not uniform across all "stem cells."',
+    groups: [
+      { label: 'Totipotent', description: 'the early zygote — can form any tissue AND extra-embryonic tissue (placenta)', items: [] },
+      { label: 'Pluripotent', description: 'embryonic stem cells — all three germ layers, but NOT extra-embryonic tissue', items: [] },
+      { label: 'Multipotent', description: 'adult stem cells — only a defined, related subset of cell types', items: ['Haematopoietic stem cells → all blood cell lineages only'] },
+    ],
+  }),
+
+  'bio.micro.microbial-diversity': () => buildCellComparisonScene({
+    conceptId: 'bio.micro.microbial-diversity',
+    title: 'Five Categories of Microorganism',
+    teachingGoal: 'Fewer than a thousand of the many millions of microbial species cause human disease — the vast majority are harmless or beneficial.',
+    groups: [
+      { label: 'Bacteria', description: 'prokaryotes, the most abundant and diverse group', items: [] },
+      { label: 'Archaea', description: 'prokaryotes, deeply divergent from bacteria; often extremophiles', items: [] },
+      { label: 'Fungi', description: 'eukaryotes, including moulds and yeasts', items: [] },
+      { label: 'Protozoa', description: 'unicellular eukaryotes', items: ['Amoeba, Paramecium, Plasmodium'] },
+      { label: 'Algae', description: 'photosynthetic eukaryotes', items: ['Chlorella'] },
+    ],
+  }),
+
+  // Batch 5 (bio.micro, 3 concepts; bio.immuno, 3 concepts; bio.biotech, 4
+  // concepts; bio.bioinfo, 2 concepts):
+  'bio.micro.microbial-growth-culture': () => buildCellPathwayScene({
+    conceptId: 'bio.micro.microbial-growth-culture',
+    title: 'The Four-Phase Bacterial Growth Curve',
+    teachingGoal: 'Stationary phase does not mean bacteria stopped reproducing — division continues, exactly balanced by an equal rate of death.',
+    stages: [
+      { name: 'Lag phase', description: 'bacteria adjust biochemically to the new medium — no net population growth yet' },
+      { name: 'Exponential (log) phase', description: 'bacteria divide at maximum rate via binary fission — numbers increase geometrically' },
+      { name: 'Stationary phase', description: 'nutrients deplete and waste accumulates; the population plateaus because cell death equals cell division' },
+      { name: 'Death (decline) phase', description: 'deaths exceed divisions as resources are exhausted' },
+    ],
+  }),
+
+  'bio.micro.microbes-in-human-welfare': () => buildCellHubScene({
+    conceptId: 'bio.micro.microbes-in-human-welfare',
+    hubLabel: 'Beneficial Microbes',
+    title: 'Microbes in Human Welfare',
+    teachingGoal: '"Microbes = germs = bad" is deeply wrong — fewer than a thousand of many thousands of known microbial species cause human disease.',
+    spokes: [
+      { name: 'Food production', description: 'Lactobacillus (yogurt, cheese); Saccharomyces yeast (bread, wine, beer)' },
+      { name: 'Industrial biotechnology', description: 'antibiotics (Penicillium), vitamins, enzymes, biofuels' },
+      { name: 'Agriculture', description: 'Rhizobium fixes atmospheric nitrogen in legume root nodules' },
+      { name: 'Bioremediation', description: 'Pseudomonas breaks down oil-spill hydrocarbons' },
+      { name: 'Medicine', description: 'engineered E. coli produces human insulin' },
+    ],
+  }),
+
+  'bio.micro.pathogenic-microbes': () => buildCellComparisonScene({
+    conceptId: 'bio.micro.pathogenic-microbes',
+    title: 'Pathogen Categories Require Different Treatments',
+    teachingGoal: 'Antibiotics work by targeting bacterial cell walls and 70S ribosomes — features viruses (and human cells) simply do not have.',
+    groups: [
+      { label: 'Bacteria', description: 'prokaryotes — treatable with antibiotics', items: ['TB, cholera, pneumonia'] },
+      { label: 'Viruses', description: 'not cells — antibiotics have nothing to target', items: ['Influenza, HIV, measles — need antivirals/vaccines'] },
+      { label: 'Fungi', description: 'eukaryotes — harder to target selectively (share machinery with human cells)', items: ["Athlete's foot, candidiasis"] },
+      { label: 'Protists', description: 'eukaryotic pathogens', items: ['Malaria (Plasmodium), sleeping sickness (Trypanosoma)'] },
+      { label: 'Prions', description: 'misfolded proteins, no nucleic acid — essentially untreatable', items: ['CJD, BSE'] },
+    ],
+  }),
+
+  'bio.immuno.innate-adaptive-immunity': () => buildCellComparisonScene({
+    conceptId: 'bio.immuno.innate-adaptive-immunity',
+    title: 'Innate and Adaptive Immunity Cooperate, Not Hand Off',
+    teachingGoal: 'Dendritic cells are the specific bridge: they perform innate-style phagocytosis, then present antigens to T cells, activating the adaptive response.',
+    groups: [
+      { label: 'Innate immunity', description: 'fast (minutes–hours), non-specific', items: ['PRRs bind PAMPs — absent from human cells', 'Phagocytes, NK cells, inflammation'] },
+      { label: 'Adaptive immunity', description: 'slow (days–weeks), highly specific, retains memory', items: ['B cells → antibodies', 'T helper (CD4⁺), cytotoxic (CD8⁺), regulatory T cells', 'MHC displays peptides for T cell recognition'] },
+    ],
+  }),
+
+  'bio.immuno.antibody-structure-function': () => buildCellComparisonScene({
+    conceptId: 'bio.immuno.antibody-structure-function',
+    title: 'The Five Antibody Classes',
+    teachingGoal: 'Antibodies do not directly kill pathogens — they neutralise, opsonise, activate complement, or agglutinate; other mechanisms do the killing.',
+    groups: [
+      { label: 'IgM', description: 'the first responder, assembled as a pentamer', items: [] },
+      { label: 'IgG', description: 'the most abundant class — the ONLY class that crosses the placenta', items: [] },
+      { label: 'IgA', description: 'found in mucosal secretions and breast milk', items: [] },
+      { label: 'IgE', description: 'parasite defense and allergic responses', items: [] },
+      { label: 'IgD', description: 'functions as a B cell receptor', items: [] },
+    ],
+  }),
+
+  'bio.immuno.vaccination-immunisation': () => buildCellComparisonScene({
+    conceptId: 'bio.immuno.vaccination-immunisation',
+    title: 'Five Vaccine Types',
+    teachingGoal: 'mRNA vaccines cannot alter DNA: the mRNA is degraded within days, never enters the nucleus, and human cells lack reverse transcriptase.',
+    groups: [
+      { label: 'Live-attenuated', description: 'a weakened but living pathogen — strong immunity, unsafe for immunocompromised patients', items: ['MMR, chickenpox'] },
+      { label: 'Inactivated', description: 'a killed pathogen — safer, weaker response, needs boosters', items: ['Flu shot, polio IPV'] },
+      { label: 'Subunit/protein', description: 'just one antigen protein, not the whole pathogen', items: ['Hepatitis B'] },
+      { label: 'Toxoid', description: 'an inactivated bacterial toxin', items: ['Tetanus, diphtheria'] },
+      { label: 'mRNA', description: 'instructs cells to manufacture the antigen themselves', items: ['COVID-19 (Pfizer/Moderna)'] },
+    ],
+  }),
+
+  'bio.biotech.biotech-principles': () => buildCellHubScene({
+    conceptId: 'bio.biotech.biotech-principles',
+    hubLabel: 'Why Biotechnology Works',
+    title: 'Three Principles Behind Modern Biotechnology',
+    teachingGoal: 'The universal genetic code guarantees a human gene inserted into a bacterium is correctly translated — no species-specific re-coding needed.',
+    spokes: [
+      { name: 'Every cell contains the same genetic code', description: 'any cell can express any gene given the right regulatory signals' },
+      { name: 'The genetic code is universal', description: 'the same codons specify the same amino acids across all known life' },
+      { name: 'Microorganisms as living factories', description: 'bacteria and yeast grow rapidly and cheaply, and can overproduce a desired protein' },
+    ],
+  }),
+
+  'bio.biotech.biotech-process-applications': () => buildCellComparisonScene({
+    conceptId: 'bio.biotech.biotech-process-applications',
+    title: 'Biotechnology Applications',
+    teachingGoal: 'Cutting (restriction enzymes) and joining (DNA ligase) are two distinct, sequential steps performed by two different enzymes.',
+    groups: [
+      { label: 'Fermentation', description: 'microorganisms as living factories for therapeutic products', items: ['Recombinant human insulin (1982), erythropoietin, vaccines'] },
+      { label: 'Transgenic crops', description: 'the same recombinant-DNA toolkit applied to plants', items: ['Bt toxin genes for pest resistance'] },
+      { label: 'Gene therapy', description: 'delivers corrective DNA via viral vectors or lipid nanoparticles', items: ['Some viral vectors integrate into the genome; mRNA vaccines do not'] },
+      { label: 'PCR', description: 'exponentially amplifies even tiny DNA samples', items: ['Diagnostics, forensics, pathogen detection'] },
+    ],
+  }),
+
+  'bio.biotech.genomics-proteomics': () => buildCellComparisonScene({
+    conceptId: 'bio.biotech.genomics-proteomics',
+    title: 'Genomics vs. Proteomics: Why the Proteome Is Bigger Than the Genome',
+    teachingGoal: 'Sequencing a genome is a starting point for investigation, not an endpoint of understanding.',
+    groups: [
+      { label: 'Genomics', description: 'large-scale study of the genome sequence', items: ['≈ 20,000 human protein-coding genes', 'RNA-seq measures gene expression'] },
+      { label: 'Proteomics', description: 'large-scale study of the resulting proteins', items: ['Several hundred thousand distinct protein variants', 'Alternative splicing + post-translational modification explain the gap'] },
+    ],
+  }),
+
+  'bio.biotech.crispr-genome-editing': () => buildCellComparisonScene({
+    conceptId: 'bio.biotech.crispr-genome-editing',
+    title: 'CRISPR Repair Pathways: NHEJ vs. HDR',
+    teachingGoal: 'NHEJ is the DEFAULT pathway — standard Cas9 editing without a donor template reliably produces a knockout, not a precise correction.',
+    groups: [
+      { label: 'NHEJ', description: 'non-homologous end joining — fast, error-prone, the default when no donor template is supplied', items: ['Produces a knockout (loss of function)'] },
+      { label: 'HDR', description: 'homology-directed repair — uses a donor template for a precise edit', items: ['Produces a knock-in', 'Only during S/G2 phase; less efficient than NHEJ'] },
+    ],
+  }),
+
+  'bio.bioinfo.bioinformatics-intro': () => buildCellHubScene({
+    conceptId: 'bio.bioinfo.bioinformatics-intro',
+    hubLabel: 'Bioinformatics',
+    title: 'Four Core Analytical Tasks in Bioinformatics',
+    teachingGoal: 'A BLAST E-value is a probability that a match arose by chance — it is NOT percent sequence identity.',
+    spokes: [
+      { name: 'Sequence alignment', description: 'finding similarity to infer homology, function, or evolutionary distance' },
+      { name: 'Annotation', description: 'assigning biological meaning to genomic features' },
+      { name: 'Variant calling', description: 'identifying SNPs, indels, and copy-number variants against a reference genome' },
+      { name: 'Structural prediction', description: 'now transformed by AlphaFold2’s deep-learning approach' },
+    ],
+  }),
+
+  'bio.bioinfo.sequence-alignment': () => buildCellComparisonScene({
+    conceptId: 'bio.bioinfo.sequence-alignment',
+    title: 'Global vs. Local Sequence Alignment',
+    teachingGoal: 'A gap in an alignment is a HYPOTHESISED evolutionary insertion/deletion — not missing data or low sequencing quality.',
+    groups: [
+      { label: 'Global alignment', description: 'Needleman-Wunsch — aligns the FULL length of both sequences end to end', items: [] },
+      { label: 'Local alignment', description: 'Smith-Waterman — finds the best-matching sub-region only', items: ['BLAST/DIAMOND heuristically approximate this at scale'] },
+    ],
+  }),
+
+  // Batch 6 (bio.bioinfo, 2 concepts; bio.sys, 4 concepts; bio.div, 6
+  // concepts):
+  'bio.bioinfo.phylogenetics-computational': () => buildCellPathwayScene({
+    conceptId: 'bio.bioinfo.phylogenetics-computational',
+    title: 'The Phylogenetics Workflow',
+    teachingGoal: 'Every tip of a fully resolved tree has been evolving for EXACTLY the same time since the root — no tip is "more primitive" than another.',
+    stages: [
+      { name: 'Align sequences', description: 'the starting multiple sequence alignment' },
+      { name: 'Choose an evolutionary model', description: 'e.g. GTR for DNA — model selection picks the SIMPLEST model that fits' },
+      { name: 'Infer a tree', description: 'distance-based, parsimony, maximum likelihood, or Bayesian methods' },
+      { name: 'Assess confidence', description: 'bootstrap values (ML) or posterior probabilities (Bayesian)' },
+    ],
+  }),
+
+  'bio.bioinfo.structural-bioinformatics': () => buildCellComparisonScene({
+    conceptId: 'bio.bioinfo.structural-bioinformatics',
+    title: 'What AlphaFold2 Predicts — and What It Doesn’t',
+    teachingGoal: '"The protein-structure problem is solved" is incorrect — AlphaFold2 predicts one static conformation, not the full functional picture.',
+    groups: [
+      { label: 'What it predicts well', description: 'the single lowest-energy conformation of an isolated protein', items: ['Near-experimental accuracy for many protein families'] },
+      { label: 'What it does NOT capture', description: 'reliably', items: ['Conformational ensembles (multiple functional states)', 'Ligand-bound states (induced fit)', 'Intrinsically disordered regions', 'Protein complexes (fully)'] },
+    ],
+  }),
+
+  'bio.sys.systems-biology-intro': () => buildCellHubScene({
+    conceptId: 'bio.sys.systems-biology-intro',
+    hubLabel: 'Emergent Network Behaviour',
+    title: 'Four Key Concepts in Systems Biology',
+    teachingGoal: 'A phenomenon like the circadian clock is not located "in" any single gene — it exists in the feedback TOPOLOGY among interacting genes.',
+    spokes: [
+      { name: 'Feedback loops', description: 'negative feedback dampens perturbations; positive feedback amplifies them' },
+      { name: 'Modularity', description: 'networks organise into sub-networks that can be rewired somewhat independently' },
+      { name: 'Robustness vs. fragility', description: 'robust to many perturbations, but fragile at specific hub points ("bow-tie" topology)' },
+      { name: 'Emergence', description: 'system-level behaviour that cannot be predicted from any single component alone' },
+    ],
+  }),
+
+  'bio.sys.gene-regulatory-networks': () => buildCellComparisonScene({
+    conceptId: 'bio.sys.gene-regulatory-networks',
+    title: 'Three Recurring Network Motifs',
+    teachingGoal: 'A GRN is NOT a static wiring diagram — the same topology can produce different output depending on initial conditions and reaction rates.',
+    groups: [
+      { label: 'Feedforward loop', description: 'filters out transient signals, preventing brief noise from triggering a response', items: [] },
+      { label: 'Autoregulation', description: 'a transcription factor activates or represses its OWN gene, tuning response speed', items: [] },
+      { label: 'Bistable toggle switch', description: 'two transcription factors mutually repress each other', items: ['Underlies binary cell-fate decisions'] },
+    ],
+  }),
+
+  'bio.sys.metabolic-network-modelling': () => buildCellComparisonScene({
+    conceptId: 'bio.sys.metabolic-network-modelling',
+    title: 'Flux Balance Analysis vs. Kinetic Models',
+    teachingGoal: 'FBA is NOT a dynamic simulation — it finds a steady-state flux distribution; it does not track concentrations changing over time.',
+    groups: [
+      { label: 'Flux Balance Analysis (FBA)', description: 'linear programming; needs only stoichiometry, no enzyme kinetics', items: ['Predicts gene essentiality', 'Does NOT model dynamics, thermodynamics, or saturation'] },
+      { label: 'Kinetic models', description: 'ordinary differential equations with mechanistic rate laws', items: ['Used when temporal dynamics and saturation matter'] },
+    ],
+  }),
+
+  'bio.sys.synthetic-biology': () => buildCellPathwayScene({
+    conceptId: 'bio.sys.synthetic-biology',
+    title: 'Synthetic Biology: Three Levels of Design',
+    teachingGoal: '"Life created from scratch" conflates genome SYNTHESIS (transplanted into an existing cell) with generating a living cell from non-living chemistry — the latter has never been achieved.',
+    stages: [
+      { name: 'Parts', description: 'standardised BioBrick promoters, ribosome-binding sites, coding sequences, terminators' },
+      { name: 'Devices', description: 'genetic circuits — toggle switches, oscillators, logic gates — implementing computational functions' },
+      { name: 'Systems', description: 'engineered metabolic pathways (artemisinin), biosensors, cell-based therapies' },
+    ],
+  }),
+
+  'bio.div.three-domain-system': () => buildCellComparisonScene({
+    conceptId: 'bio.div.three-domain-system',
+    title: "Woese's Three Domains",
+    teachingGoal: 'Archaea are actually MORE closely related to Eukarya than to Bacteria, despite sharing the same basic prokaryotic cell structure as Bacteria.',
+    groups: [
+      { label: 'Bacteria', description: 'prokaryotic; deeply divergent from Archaea despite shared cell structure', items: [] },
+      { label: 'Archaea', description: 'prokaryotic in structure, but molecularly closer to Eukarya', items: ['Similar RNA polymerases, histone-like proteins'] },
+      { label: 'Eukarya', description: 'has a nucleus and membrane-bound organelles', items: [] },
+    ],
+  }),
+
+  'bio.div.endosymbiotic-theory': () => buildCellComparisonScene({
+    conceptId: 'bio.div.endosymbiotic-theory',
+    title: 'Endosymbiotic Theory: Two Independent Origins',
+    teachingGoal: 'Mitochondrial DNA is molecularly most similar to alpha-proteobacterial DNA, not to the eukaryotic nuclear genome — direct evidence of its bacterial origin.',
+    groups: [
+      { label: 'Mitochondria', description: 'descended from an alpha-proteobacterium', items: ['Circular DNA, 70S ribosomes, binary fission, double membrane'] },
+      { label: 'Chloroplasts', description: 'descended from a cyanobacterium — ancestrally photosynthetic', items: ['Circular DNA, 70S ribosomes, binary fission, double membrane'] },
+    ],
+  }),
+
+  'bio.div.protist-diversity': () => buildCellHubScene({
+    conceptId: 'bio.div.protist-diversity',
+    hubLabel: 'Protista (a catch-all, not a natural group)',
+    title: 'Protist Diversity: Polyphyletic by Definition',
+    teachingGoal: '"Protists are simple, primitive organisms" is false — "primitive" means ANCESTRAL, not simple, and protists are not ancestral to anything in particular.',
+    spokes: [
+      { name: 'Amoebae', description: 'heterotrophic, amoeboid movement' },
+      { name: 'Algae', description: 'photosynthetic' },
+      { name: 'Diatoms', description: 'photosynthetic, silica cell walls' },
+      { name: 'Foraminifera', description: 'shelled, mostly marine' },
+      { name: 'Plasmodium', description: 'the malaria parasite — a complex, multi-host life cycle' },
+    ],
+  }),
+
+  'bio.div.fungal-biology': () => buildCellComparisonScene({
+    conceptId: 'bio.div.fungal-biology',
+    title: 'Three Ecological Roles of Fungi',
+    teachingGoal: 'Fungi are the sister group to ANIMALS (Opisthokonta), not plants — despite their plant-like stationary growth habit.',
+    groups: [
+      { label: 'Decomposers', description: 'break down dead organic matter, recycling nutrients', items: [] },
+      { label: 'Pathogens', description: 'cause disease in plants, animals, or other fungi', items: [] },
+      { label: 'Mycorrhizal partners', description: 'symbiotic associations with plant roots, extending root surface area', items: [] },
+    ],
+  }),
+
+  'bio.div.plant-diversity-alternation-of-generations': () => buildCellPathwayScene({
+    conceptId: 'bio.div.plant-diversity-alternation-of-generations',
+    title: 'The Trend Toward Sporophyte Dominance',
+    teachingGoal: 'Reducing the gametophyte to a microscopic, protected structure removes the need for a water film for sperm to swim — freeing seed plants to colonise dry land.',
+    stages: [
+      { name: 'Mosses', description: 'the gametophyte is dominant (the visible green plant); the sporophyte is a small, dependent stalk' },
+      { name: 'Ferns', description: 'dominance reverses — the large fern IS the sporophyte; the gametophyte is a tiny, independent prothallus' },
+      { name: 'Seed plants', description: 'the gametophyte is microscopic and entirely dependent on the sporophyte (pollen grain, embryo sac)' },
+    ],
+  }),
+
+  'bio.div.cladistics-phylogenetic-thinking': () => buildCellComparisonScene({
+    conceptId: 'bio.div.cladistics-phylogenetic-thinking',
+    title: 'Monophyletic, Paraphyletic, and Polyphyletic Groups',
+    teachingGoal: 'Dolphins are more closely related to hippos than to fish — a fish-like body shape evolved convergently and does not reflect close common ancestry.',
+    groups: [
+      { label: 'Monophyletic (a true clade)', description: 'a common ancestor together with ALL of its descendants', items: [] },
+      { label: 'Paraphyletic', description: 'a common ancestor plus only SOME of its descendants', items: [] },
+      { label: 'Polyphyletic', description: 'unrelated lineages grouped by superficial similarity, no exclusive common ancestor', items: [] },
+    ],
+  }),
+
+  // Batch 7 (bio.micro, 2 concepts; bio.mol, 5 concepts; bio.gen, 1 concept;
+  // bio.evo, 2 concepts; bio.immuno, 1 concept; bio.behav, 1 concept):
+  'bio.micro.viral-replication': () => buildCellComparisonScene({
+    conceptId: 'bio.micro.viral-replication',
+    title: 'Lytic vs. Lysogenic Cycle',
+    teachingGoal: 'Viruses do not reproduce — they replicate by commandeering the host’s ribosomes, energy, and raw materials. Outside a host, a virus is genuinely inert.',
+    groups: [
+      { label: 'Lytic cycle', description: 'attach → inject → hijack host machinery → assemble → lyse the cell', items: ['Releases hundreds of progeny virions'] },
+      { label: 'Lysogenic cycle', description: 'the genome integrates as a prophage, replicating silently with the host', items: ['Bacteriophage λ — excises and turns lytic under cellular stress'] },
+    ],
+  }),
+
+  'bio.micro.horizontal-gene-transfer': () => buildCellComparisonScene({
+    conceptId: 'bio.micro.horizontal-gene-transfer',
+    title: 'Three Mechanisms of Horizontal Gene Transfer',
+    teachingGoal: 'Resistance mutations pre-exist at low frequency BEFORE antibiotic exposure — the antibiotic selects for them, it does not cause them.',
+    groups: [
+      { label: 'Transformation', description: 'a bacterium takes up naked DNA directly from its environment', items: [] },
+      { label: 'Transduction', description: 'DNA is carried between bacteria by a bacteriophage', items: [] },
+      { label: 'Conjugation', description: 'direct cell-to-cell transfer via a pilus', items: [] },
+    ],
+  }),
+
+  'bio.mol.epigenetics': () => buildCellHubScene({
+    conceptId: 'bio.mol.epigenetics',
+    hubLabel: 'Cell-Type-Specific Gene Expression',
+    title: 'Three Epigenetic Mechanisms',
+    teachingGoal: 'Transgenerational epigenetic inheritance is real but limited in mammals — most marks are erased during gametogenesis and embryogenesis.',
+    spokes: [
+      { name: 'DNA methylation', description: 'a methyl group on cytosine at CpG sites generally silences nearby genes' },
+      { name: 'Histone modification', description: 'acetylation loosens chromatin and activates genes; methylation condenses and silences' },
+      { name: 'Non-coding RNA regulation', description: 'ncRNAs contribute an additional regulatory layer' },
+    ],
+  }),
+
+  'bio.mol.noncoding-rna': () => buildCellComparisonScene({
+    conceptId: 'bio.mol.noncoding-rna',
+    title: 'Five Classes of Non-Coding RNA',
+    teachingGoal: '"Junk DNA" is a wrong, outdated label — ENCODE found over 80% of the human genome shows measurable biochemical activity.',
+    groups: [
+      { label: 'rRNA', description: 'forms ribosome structure and provides its catalytic activity', items: [] },
+      { label: 'tRNA', description: 'the amino acid adaptor molecule used in translation', items: [] },
+      { label: 'miRNA', description: 'binds mRNA, triggering degradation or translational repression', items: ['Each regulates hundreds of genes'] },
+      { label: 'siRNA', description: 'mechanistically similar to miRNA, typically exogenous (RNAi)', items: [] },
+      { label: 'lncRNA', description: 'diverse functions, including whole-chromosome regulation', items: ['Xist silences an entire X chromosome'] },
+    ],
+  }),
+
+  'bio.mol.signal-transduction-pathways': () => buildCellPathwayScene({
+    conceptId: 'bio.mol.signal-transduction-pathways',
+    title: 'Signal Transduction: Reception to Response',
+    teachingGoal: 'A single receptor-binding event can activate THOUSANDS of downstream molecules — the effect compounds at each step of the relay.',
+    stages: [
+      { name: 'Reception', description: 'the signal molecule (hormone, growth factor, neurotransmitter) binds a receptor' },
+      { name: 'Transduction', description: 'relay molecules amplify and route the message onward (e.g. cAMP → PKA, or Ras → MAP kinase)' },
+      { name: 'Response', description: 'a change in gene expression, enzyme activation, or cytoskeletal rearrangement' },
+    ],
+  }),
+
+  'bio.mol.dna-damage-repair': () => buildCellComparisonScene({
+    conceptId: 'bio.mol.dna-damage-repair',
+    title: 'Matching DNA Damage Type to Repair Pathway',
+    teachingGoal: 'The largest source of mutations is spontaneous chemistry (deamination, depurination, replication errors), not radiation or toxic chemicals.',
+    groups: [
+      { label: 'Base excision repair (BER)', description: 'fixes small base modifications', items: [] },
+      { label: 'Nucleotide excision repair (NER)', description: 'removes bulky lesions such as UV thymine dimers', items: [] },
+      { label: 'Mismatch repair (MMR)', description: 'corrects replication errors', items: ['MLH1/MSH2 mutations → Lynch syndrome'] },
+      { label: 'HR and NHEJ', description: 'repair double-strand breaks — the most severe damage type', items: ['BRCA1/2 mutations disable HR → breast/ovarian cancer risk'] },
+    ],
+  }),
+
+  'bio.mol.bioenergetics': () => buildCellComparisonScene({
+    conceptId: 'bio.mol.bioenergetics',
+    title: 'Reaction Coupling: Exergonic Drives Endergonic',
+    teachingGoal: 'Living systems are OPEN systems — building ordered structures locally does not violate the second law, since total entropy (cell + surroundings) still increases.',
+    groups: [
+      { label: 'Exergonic reaction', description: 'ΔG < 0 — energy-releasing, spontaneous', items: ['ATP hydrolysis: ΔG ≈ −30.5 kJ/mol'] },
+      { label: 'Endergonic reaction', description: 'ΔG > 0 — energy-requiring, non-spontaneous alone', items: ['Coupled to an exergonic reaction to proceed'] },
+    ],
+  }),
+
+  'bio.gen.transposable-elements': () => buildCellComparisonScene({
+    conceptId: 'bio.gen.transposable-elements',
+    title: 'Class I vs. Class II Transposable Elements',
+    teachingGoal: 'Most TEs are NOT actively transposing — they are silenced by DNA methylation and piRNA pathways, since unchecked transposition causes chromosome instability.',
+    groups: [
+      { label: 'Class I (retrotransposons)', description: 'copy-and-paste via an RNA intermediate', items: ['INCREASES copy number — original stays in place'] },
+      { label: 'Class II (DNA transposons)', description: 'cut-and-paste — the transposase excises and reinserts', items: ['Relocates — does NOT reliably increase copy number'] },
+    ],
+  }),
+
+  'bio.evo.molecular-evolution': () => buildCellComparisonScene({
+    conceptId: 'bio.evo.molecular-evolution',
+    title: 'Purifying Selection vs. Neutral Evolution',
+    teachingGoal: '"Evolution is always driven by natural selection" is wrong at the molecular level — most sequence changes are neutral, fixed by genetic drift.',
+    groups: [
+      { label: 'Strongly conserved sequences', description: 'under purifying (negative) selection — any change is deleterious and eliminated', items: ['Histone H4: nearly identical from yeast to humans'] },
+      { label: 'Highly variable regions', description: 'evolve neutrally — changes carry little fitness consequence', items: ['Fixed by genetic drift, not selection'] },
+    ],
+  }),
+
+  'bio.evo.evo-devo': () => buildCellComparisonScene({
+    conceptId: 'bio.evo.evo-devo',
+    title: 'What Drives Morphological Evolution?',
+    teachingGoal: 'Mouse Pax6 expressed in a fly produces a FLY eye, not a mouse eye — the conserved signal is received by the fly’s own downstream genes.',
+    groups: [
+      { label: 'Regulatory region changes', description: 'controlling WHERE and WHEN a conserved gene is expressed', items: ['The actual driver of most major morphological change', 'Limb loss in snakes, eye reduction in cave fish'] },
+      { label: 'Protein-coding sequence changes', description: 'changes to the gene itself', items: ['NOT the typical explanation for major morphological change'] },
+    ],
+  }),
+
+  'bio.immuno.mhc-antigen-presentation': () => buildCellComparisonScene({
+    conceptId: 'bio.immuno.mhc-antigen-presentation',
+    title: 'MHC Class I vs. Class II',
+    teachingGoal: 'Transplant rejection happens because T cells perceive the donor’s MHC as foreign (MHC restriction) — not because of a generic "overreaction."',
+    groups: [
+      { label: 'MHC class I', description: 'on ALL nucleated cells; presents INSIDE-the-cell peptides', items: ['Detected by cytotoxic T cells (CD8⁺)', 'Leads to destruction of the infected cell'] },
+      { label: 'MHC class II', description: 'only on professional antigen-presenting cells; presents EXTRACELLULAR antigens', items: ['Detected by helper T cells (CD4⁺)', 'Coordinates the broader adaptive response'] },
+    ],
+  }),
+
+  'bio.behav.animal-cognition': () => buildCellComparisonScene({
+    conceptId: 'bio.behav.animal-cognition',
+    title: "Morgan's Canon: Prefer the Simpler Explanation",
+    teachingGoal: 'A simpler explanation must be actively ruled out before concluding a more complex cognitive process (like theory of mind) is genuinely operating.',
+    groups: [
+      { label: 'Simpler explanation', description: 'learned behavioural rules, associative learning, instinct', items: ['Preferred by Morgan’s Canon when it suffices'] },
+      { label: 'Complex explanation', description: 'understanding, theory of mind, flexible problem-solving', items: ['Only concluded when simpler mechanisms cannot account for the behaviour'] },
+    ],
+  }),
 }
 
 const DANIELL_CELL: ElectrochemicalCellParams = {
