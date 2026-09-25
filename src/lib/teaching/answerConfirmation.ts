@@ -175,15 +175,64 @@ export function statesCorrect(text: string): boolean {
   const statements = flatten(text)
     .split(/(?<=[.!?])\s+|\n+/)
     .filter((sentence) => sentence.trim().length > 0 && !sentence.trim().endsWith('?'))
+    // A denial is never a confirmation: "not quite right" contains "quite
+    // right", which CONFIRMS_CORRECT matches (see DENIES_CORRECT below).
+    .filter((sentence) => !DENIES_CORRECT.test(sentence))
     .join(' ')
   return CONFIRMS_CORRECT.test(statements)
 }
 
+/**
+ * An explicit verdict that the learner's answer was WRONG.
+ *
+ * MEASURED (synthetic-student run, phys.mech.tension, 2026-09-25, production
+ * `[mcq-grade] correct: true` + `[c5] confirmed: true`): the learner tapped the
+ * authored key "49 N — it must balance the lamp's weight" and the whole reply
+ * was "That's not quite right—if the lamp is accelerating, the tension need not
+ * equal its weight…". The enforcer added nothing because "not quite right"
+ * contains "quite right". The learner was told a right answer was wrong.
+ *
+ * Narrower than wrongAnswerCorrection's STATES_INCORRECT on purpose: that list
+ * also carries "the answer is" / "correct answer", which appear in genuine
+ * praise ("Correct — the answer is 49 N") and must never be stripped here.
+ */
+export const DENIES_CORRECT = new RegExp([
+  '\\bnot quite\\b', '\\bnot (?:right|correct)\\b', "\\bisn'?t (?:right|correct)\\b",
+  '\\bincorrect\\b', "\\bthat'?s wrong\\b", '\\bnot exactly\\b', '\\bclose,? but\\b',
+  '\\b(?:good|nice) try\\b',
+].join('|'), 'i')
+
+/**
+ * Drop an opening sentence that DENIES a server-graded-correct answer. Scoped
+ * to the first sentence for the same reason as stripLeadingFalseConfirmation:
+ * a later "not exactly" can be ordinary teaching prose.
+ */
+export function stripLeadingFalseDenial(text: string): string {
+  if (typeof text !== 'string') return text
+  const trimmed = text.trim()
+  if (!trimmed) return text
+  const [first, ...rest] = trimmed.split(/(?<=[.!?])\s+/)
+  if (!first || !DENIES_CORRECT.test(flatten(first))) return text
+  return rest.join(' ').trim()
+}
+
 export function confirmCorrectAnswer(input: ConfirmationInput): ConfirmationResult {
-  const { text, correct } = input
+  const { correct } = input
+  let { text } = input
   if (correct !== true) return { text, added: false }
   if (typeof text !== 'string' || text.trim().length === 0) return { text, added: false }
-  if (statesCorrect(text)) return { text, added: false }
+  // The grade is the authority: a reply that opens by calling a correct answer
+  // wrong loses that sentence before the confirmation is added.
+  const undenied = stripLeadingFalseDenial(text)
+  const denied = undenied !== text
+  text = undenied
+  if (!denied && statesCorrect(text)) return { text, added: false }
+  if (text.trim().length === 0) {
+    const n0 = input.priorConfirmations
+    const i0 = Number.isFinite(n0) && (n0 as number) >= 0 ? Math.floor(n0 as number) % PHRASINGS.length : 0
+    return { text: PHRASINGS[i0], added: true }
+  }
+  if (statesCorrect(text)) return { text, added: true }
 
   const n = input.priorConfirmations
   const index = Number.isFinite(n) && (n as number) >= 0 ? Math.floor(n as number) % PHRASINGS.length : 0

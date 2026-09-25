@@ -272,3 +272,39 @@ describe('the I1 disambiguation guard applies the strip before prepending its le
     expect(prependAt).toBeGreaterThan(stripAt)
   })
 })
+
+describe('a denial is never a confirmation (synthetic run, phys.mech.tension, 2026-09-25)', () => {
+  // Production: [mcq-grade] correct: true, [c5] confirmed: true — the whole
+  // reply to the authored key "49 N — it must balance the lamp's weight" was:
+  const PROD = "That's not quite right—if the lamp is accelerating, the tension need not equal its weight, so 49 N would only be correct for a stationary or constant‑velocity situation."
+
+  it('"not quite right" does not state correctness', () => {
+    expect(statesCorrect(PROD)).toBe(false)
+    expect(statesCorrect("That isn't correct.")).toBe(false)
+  })
+
+  it('a graded-correct answer loses the false denial and is confirmed', () => {
+    const r = confirmCorrectAnswer({ text: PROD, correct: true, priorConfirmations: 0 })
+    expect(r.added).toBe(true)
+    expect(r.text).toBe("That's right.")
+    expect(r.text).not.toMatch(/not quite/i)
+  })
+
+  it('keeps the teaching that follows a stripped denial', () => {
+    const r = confirmCorrectAnswer({
+      text: 'Not quite. The rope pulls up with 49 N, balancing the 5 kg weight.',
+      correct: true, priorConfirmations: 1,
+    })
+    expect(r.text).toBe('Correct — well done. The rope pulls up with 49 N, balancing the 5 kg weight.')
+  })
+
+  it('leaves a genuine confirmation that later says "not exactly" untouched', () => {
+    const text = "That's right — 49 N. It is not exactly the same when the lift accelerates, though."
+    expect(confirmCorrectAnswer({ text, correct: true }).text).toBe(text)
+  })
+
+  it('never touches a WRONG answer\'s denial', () => {
+    expect(confirmCorrectAnswer({ text: PROD, correct: false }).text).toBe(PROD)
+    expect(confirmCorrectAnswer({ text: PROD, correct: null }).text).toBe(PROD)
+  })
+})

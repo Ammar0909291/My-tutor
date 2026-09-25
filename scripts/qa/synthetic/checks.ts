@@ -68,7 +68,7 @@ const firstSentence = (s: string) => (s.trim().split(/(?<=[.!?])\s+|\n/)[0] ?? '
 const verifiedTotal = (m: ReplyMastery | null) => (m?.verifiedCheckCorrect ?? 0) + (m?.verifiedPracticeCorrect ?? 0)
 
 const PRAISE_RE = /^\W*(?:that'?s (?:right|correct|it)\b|correct\b|exactly\b|yes\b|well done|great (?:job|work)|nice (?:work|job)|spot on|perfect\b|good job)/i
-const CORRECTION_RE = /^\W*(?:not quite|that'?s not (?:right|correct)|incorrect\b|no[,.!]\s|close,? but|unfortunately)/i
+const CORRECTION_RE = /^\W*(?:not quite|that'?s not (?:quite |exactly )?(?:right|correct)|(?:that|this) isn'?t (?:quite )?(?:right|correct)|incorrect\b|no[,.!]\s|close,? but|unfortunately)/i
 const FIGURE_CLAIM_RE = /\b(?:in|on|from) the (?:diagram|figure|picture|animation|simulation|graph)\b|\b(?:diagram|figure|picture|animation|simulation) (?:above|below|shows|on (?:your|the) screen)\b/i
 const TEXT_DEFECTS: Array<[string, RegExp, Severity]> = [
   ['content-free-hold', /^Let's stay with this idea for a moment\.?$/m, 'major'],

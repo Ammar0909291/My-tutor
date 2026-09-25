@@ -89,6 +89,10 @@ describe('defect checks, on production text', () => {
     const t = turn(2, reply({ text: "Correct — well done. I see you identified 'N₂' as the limiting reactant." }), answer('N₂ — there\'s less of it', false))
     expect(checkTurn(t, [turn(1, reply())]).map((f) => f.code)).toContain('false-praise')
   })
+  it('false correction: "That\'s not quite right…" after the authored key (tension, 2026-09-25)', () => {
+    const t = turn(12, reply({ text: "That's not quite right—if the lamp is accelerating, the tension need not equal its weight." }), answer("49 N — it must balance the lamp's weight", true))
+    expect(checkTurn(t, [turn(11, reply())]).map((f) => f.code)).toContain('false-correction')
+  })
   it('false correction after a right answer', () => {
     const t = turn(2, reply({ text: 'Not quite — let us look again.' }), answer('Displacement', true))
     expect(checkTurn(t, [turn(1, reply())]).map((f) => f.code)).toContain('false-correction')
