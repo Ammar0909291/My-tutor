@@ -28,6 +28,8 @@ Status checks (owner loop "keep updating handover file"): 2026-09-25 ~04:35 UTC 
 - **Vercel log queries now fail with `ExceedsBillingLimitError`** (runtime-logs API). Log-based diagnosis (TURN_EVENT, `[c5]`, `[dont-know-ceiling]`) is unavailable until that limit resets or the owner raises it. Do not retry in a loop.
 - **The runner's `figure` field is per-turn only.** Replaying all 1,317 recorded replies through `stripPhantomVisualClaims` flags 57 sentences on `figure:false` turns, but most say "diagram … on your screen" — which the OLD pattern already matched — and still reached the learner, so production had a graphical decision on those turns (a figure sent on an earlier turn, still visible). So `figure:false` ≠ nothing on screen, and the `phantom-figure` check (which requires no figure earlier in the lesson) remains the right checker rule. The new simulation/animation nouns only act when the server itself decided no visual this turn — the same rule the old nouns always followed. Whether the N1L t5 turn was graphical could not be confirmed (logs blocked).
 
+2026-09-25 07:14 UTC — owner said "Go"; readiness run 3 (force + newtons-first-law) started under the new provider guard and **stopped itself after 3 turns** (2 consecutive Gemini turns): **Groq is still blocked.** Cost: 3 turns, 1 disposable account (deleted, re-login blocked). Egress rows 189,642,408 before. Future runs are safe to attempt: the guard ends them within 2 turns while Groq is down.
+
 **Do not start another run until the owner has (1) decided on the Groq spend alert/billing and
 (2) set a token budget for synthetic runs.** Further runs would now spend the Gemini quota that
 real learners depend on. The runner has no provider budget of its own — adding one (e.g. a
