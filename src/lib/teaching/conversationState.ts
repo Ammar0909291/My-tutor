@@ -2094,7 +2094,9 @@ export function classifyAcknowledgementContext(
 ): AcknowledgementContext {
   if (recoveryFired) return 'recovery'
   if (navigationRequest) return 'navigation'
-  if (state.consecutiveFailures >= 2) return 'confusion'
+  // A right answer is never met with "this is genuinely tricky": earlier
+  // misses do not outrank the answer in front of us (synthetic run 2026-09-25).
+  if (state.consecutiveFailures >= 2 && signalCorrect !== true) return 'confusion'
   if (signalCorrect === false) return 'correction'
   if (signalCorrect === true) {
     if (state.learnerConfidence === 'low') return 'confidence_building'
