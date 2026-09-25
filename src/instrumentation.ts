@@ -1198,15 +1198,21 @@ async function bootstrapAssets() {
       // probes were absent.
       try {
         const expectedSlugList = [...expectedSlugs]
-        const ownership = seedOwnershipWhere() as Record<string, unknown>
+        // PRESENCE IS THE UNIQUE INDEX'S SCOPE, not the ownership filter. A
+        // row under one of OUR slugs blocks our insert whatever its tags (the
+        // index is `WHERE "authorId" = 'EDUCATIONAL_BRAIN_SEED'`), so it is
+        // present. Counting only owned-subject rows left the 992 biology
+        // rows written by SQL on 2026-09-22 permanently "missing" — see
+        // SLUG-INDEX PRESENCE below for what that did.
+        const presence = { authorId: SEED_AUTHOR_ID }
         const [storedCount, hollowCount] = await withRetry(() =>
           prisma.$transaction([
             prisma.assetIdentity.count({
-              where: { ...ownership, canonicalSlug: { in: expectedSlugList } } as never,
+              where: { ...presence, canonicalSlug: { in: expectedSlugList } } as never,
             }),
             prisma.assetIdentity.count({
               where: {
-                ...ownership,
+                ...presence,
                 canonicalSlug: { in: expectedSlugList },
                 probeAsset: { is: null },
                 explanationAsset: { is: null },
@@ -1418,6 +1424,48 @@ async function bootstrapAssets() {
       // satisfy the guard, and the two extra aggregate queries this replaced
       // are gone — the prefetch already holds the answer.
       const EXPECTED_IDENTITIES = identityCheck.distinctIdentities
+
+      // ── SLUG-INDEX PRESENCE (2026-09-25) ──────────────────────────────────
+      //
+      // MEASURED IN PRODUCTION: every cold start logged
+      //   5629/10409 seed identities present — seeding missing assets...
+      //   slice: created=0 repaired=0 skipped=1742 failed=0 spent=150/150
+      // for days. The prefetch above reads only rows tagged with a
+      // BOOTSTRAP_SEED_SUBJECTS subject, but this corpus also carries biology
+      // (and computer_science), and the 992 biology rows applied by SQL on
+      // 2026-09-22 carry the `biology` tag. The planner therefore saw the
+      // first 150 biology explanations as missing, planned them, and every
+      // insert was skipped by the seed-slug unique index — the SAME 150 on
+      // every cold start, so nothing behind them (mathematics, new physics
+      // probes) was ever reached.
+      //
+      // The fix asks the one question the index answers: which of the slugs
+      // still unseen above already exist under the seed author? Bounded by
+      // this corpus's own unseen slugs, and only on the path that is already
+      // paying for the prefetch. These rows join `existing` (so they are
+      // skipped or repaired, never re-inserted) and the live-sibling set; they
+      // are deliberately NOT added to the abandoned-slug guard or status
+      // convergence, which stay scoped to the subjects this hook owns.
+      const unseenSlugs = [...expectedSlugs].filter((slug) => !existing.has(slug))
+      if (unseenSlugs.length > 0) {
+        for (const row of await withRetry(() => prisma.assetIdentity.findMany({
+          where: { authorId: SEED_AUTHOR_ID, canonicalSlug: { in: unseenSlugs } } as never,
+          select: {
+            assetId: true,
+            canonicalSlug: true,
+            status: true,
+            probeAsset: { select: { assetId: true } },
+            explanationAsset: { select: { assetId: true } },
+          },
+        }))) {
+          existing.set(row.canonicalSlug, {
+            assetId: row.assetId,
+            hasContent: row.probeAsset !== null || row.explanationAsset !== null,
+          })
+          if (!SEED_REVIVABLE_STATUSES.includes(row.status)) liveSeedSlugs.add(row.canonicalSlug)
+        }
+      }
+
       let storedIdentities = 0
       let hollowIdentities = 0
       for (const slug of expectedSlugs) {
