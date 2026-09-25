@@ -214,6 +214,8 @@ validating identities). The deadline was measured against 1.37 MB of seed source
 (10,409 items). If the fixed cost now exceeds 12 s, no cold start ever reaches a write, and every new
 seed item — any subject — stays unseeded.
 
+Measured 2026-09-25 (local, no DB): loading + validating the full seed corpus (`seed-knowledge-assets.ts --draft --dry-run`) takes ≈ 7.8 s over a 0.8 s tsx baseline. Production adds Prisma connect + a cross-region DB and cold-start CPU, so the fixed cost plausibly consumes most or all of the 12 s slice before the first write — consistent with the zero-rows evidence, not yet proof.
+
 Also found: `phys.mech.normal-force:misconception_probe:en:high` is DEPRECATED in production, so normal
 force had only FOUR active gradeable probes (not five) — why it ran out first.
 
