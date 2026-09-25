@@ -38,6 +38,8 @@ Open (not fixed, needs the model's raw text which only the Vercel logs hold): th
 real learners depend on. The runner has no provider budget of its own — adding one (e.g. a
 `RUNNER_MAX_TOKENS` estimate and a pre-run provider health check) is a sensible next step.
 
+## Egress budget (owner, 2026-09-25 12:30 UTC): "Go with physics. It's okay until egress 1gb" — synthetic runs may continue until the day's egress reaches ~1 GB (was ~150 MB/day). Keep measuring every run.
+
 ## Subject order (owner, 2026-09-25) — binding
 
 **Physics first, then chemistry, then English. Do NOT study biology or mathematics.** Finish the
@@ -82,7 +84,9 @@ reach verified mastery every time with zero critical defects (`scripts/qa/synthe
 | S8c | Run 3 on acceleration + kinematics-1d (prod `dbd3b77`) | **done**: 10/10 mastered, 0 critical, 1 major (`announced-not-asked`, see S8d); the off-track t5 verdict flag is gone. **kinematics-1d READY** (3/3 runs, all master, 0 critical). acceleration NOT ready: run 2's critical waits on the OWNER DECISION below |
 | S8d | "can you quiz me?" at t1 -> "Sure! Here's a quick check on acceleration:" + figure pointer, no question. `ANNOUNCES_A_CHECK` rejects a colon ending, and the trailing-colon rule missed it because `ensureVisualAcknowledged` (route ~L9954) appends the figure pointer before the delivery contract (~L12389). Fix: noun-form colon announcements ("here's a/your/another/the next … check/quiz/question/test:") are dropped too; still only when the text asks nothing | **pushed** (full suite 725/14,944, tsc and build clean) |
 | S9 | Next pair: `phys.mech.force,phys.mech.newtons-first-law`, 3 runs (then newtons-second/third-law, …). Launch-set status: READY = displacement, velocity, kinematics-1d; blocked = acceleration (owner decision) | run 1 (prod `b382d17`): **10/10 mastered, 0 critical, 0 major**, 1 minor. Run 2: **10/10 mastered, 0 critical**, 1 major (`announced-not-asked`: Gemini wrote "Let's check how this applies to a brand-new scenario with the 3D Newton's Forces simulation on your screen." — the `ANNOUNCES_A_CHECK` tail is capped at 80 chars; this one is ~85), 3 minor. **Every turn of run 2 was served by Gemini** — see STOP below Run 3 (07:15-07:48 UTC, Gemini-served, `RUNNER_ALLOWED_PROVIDERS=groq,gemini,memory` by owner "Go"/"keep studying"): **10/10, 0 critical, 0 major, 0 minor → force + newtons-first-law READY** |
-| S10 | Next physics pair: `phys.mech.newtons-second-law,phys.mech.newtons-third-law` (after 00:00 UTC; egress) | pending |
+| S10 | Newton's second + third law (owner: "Keep working using Gemini. Use vercel too") | run 1 (08:18-09:00 UTC, prod `9945db4`, Gemini): **10/10 mastered, 0 critical, 0 major**, 1 minor (`ungradeable-question`, strong N2L t5). Runs 2-3 after 00:00 UTC. `[gate-contract]` now logs the model text a withheld question cut (`2604147`) to diagnose the scenario/question mismatch Run 2 (09:49-10:17 UTC, prod `2604147`): **10/10, 0 critical, 0 major**, 2 minor — both checker false positives ("ready?", "have I got that right?"); the checker now uses the production `askedAnswerableQuestion`. The new `[gate-contract]` text logging found a real defect: a rhetorical "how does a rocket accelerate…? It carries its own…" made the stray-question withhold cut a teaching paragraph from 693 chars to 37 — fixed `e9903f0` Run 3 (10:25-10:58 UTC, prod `1a51db9`): **10/10, 0 critical → Newton's 2nd + 3rd law READY**; 2 majors, both fixed the same hour: (a) Gemini wrote `<!--MCq=… correct="A"-->` and it leaked with the answer key — residual sweep now takes mixed-case tag names (`1e9fc47`); (b) "…Imagine you are standing on a skateboard and you throw a heavy medicine ball forward. [question withheld]" left a bare set-up — a scenario opener that ends a paragraph after its question is removed now goes with it |
+| S11 | Free-body diagram + normal force, run 1 (prod `f343273`) | **5/10 mastered**, 1 critical, 18 major. Three causes (production TURN_EVENT/arbitration logs): (1) `authored-pool-exhausted` — careless/confused normal-force stuck at verified 2/1: five gradeable probes do not survive one wrong answer → **Batch 17** in `physicsDepthSeedAssets.ts` adds 2 gradeable probes to each concept (only free ladder slots; 0 duplicate identities across 10,409 items; physics contract 261/261); (2) **CLOSING trap** — beginner ×2: two consecutive graded wrongs spend the affect budget, the episode goes CLOSING, every question is blocked (`blockedBy: arbitrationAllowsProbe, notClosingTurn`), a later right answer does not reopen it (by design, pinned by `affectBudgetSpiral.test.ts §H1`) — **OWNER DECISION** below; (3) concept budget closed confused/free-body at t12 right after a wrong answer ("Let's pause … Worth another look later") | Batch 17 deployed but **NOT seeded** — see BLOCKER |
+| S12 | Tension + friction run 1 (prod `2d2cc0b`, Gemini) | **6/10 mastered**. Same two causes: pool exhaustion (careless/tension stuck at verified 2/1) and the CLOSING trap (beginner/tension; strong/friction; offtrack/tension). New: the strong student's two "wrong" answers were guesses at **model-invented** MCQs (no authored key — "heavy crate … μ = 0.40, N = 150 N", "normal force for a 10 kg box on a 30° incline"), graded against the model's own key, and they alone spent the affect budget → CLOSING. `applySignalToEpisode` reads `teachingSignal`, so an unauthored-key grade counts as a real failure — added to the CLOSING-trap decision. Checker: `unfair-close` no longer fires when the lesson had unkeyed guesses. Production pool audit (active gradeable HIGH probes): **every** launch topic has only 4-5 (acceleration, impulse, inclined-plane, kinematics-1d, N2L, N3L, normal-force, tension at 4) — pool exhaustion is corpus-wide and needs content + the seeding BLOCKER fixed |
 
 If S4's run file is lost (the session ended), **skip the before-baseline**. S2's smoke run already
 shows the defect; go straight to S5.
@@ -158,6 +162,11 @@ It counts rows returned (cumulative since project creation, never reset).
 | F6 | 2026-09-25 04:00:48 | 10,610,301 | 189,587,947 | force + newtons-first-law run 1: +65,094 rows / 116 turns, about 20 MB. **Today: about 113 MB; one more run allowed** |
 | F7 | 2026-09-25 04:28:39 | 10,636,738 | 189,639,897 | force + newtons-first-law run 2: +51,950 rows / 112 turns, about 16 MB. **Today: about 129 MB. Runs paused (Groq spend limit)** |
 | F8 | 2026-09-25 07:48:45 | 10,666,449 | 189,742,780 | force + N1L run 3: +100,372 rows since 07:14, about 30 MB. **Today ≈ 159 MB — stop until 00:00 UTC** |
+| F9 | 2026-09-25 09:00:06 | 10,696,336 | 189,866,432 | N2L + N3L run 1: +123,652 rows since F8, about 37 MB. **Today ≈ 196 MB (over the 150 guideline, owner-approved) — no more runs until 00:00 UTC** |
+| F10 | 2026-09-25 10:17:08 | 10,724,437 | 189,943,031 | N2L + N3L run 2: +76,241 rows since 09:48, about 23 MB. **Today ≈ 219 MB (owner: keep going)** |
+| F11 | 2026-09-25 10:58:43 | 10,753,162 | 190,006,866 | N2L + N3L run 3: +63,835 rows, about 19 MB. **Today ≈ 238 MB** |
+| F12 | 2026-09-25 11:58:54 | 10,787,678 | 190,106,470 | free-body + normal-force run 1: +99,604 rows, about 30 MB. **Today ≈ 268 MB — runs paused until 00:00 UTC (free-tier rule)** |
+| F13 | 2026-09-25 13:12:04 | 10,820,965 | 190,283,563 | tension + friction run 1 (+ bootstrap cold starts): +177,093 rows, about 53 MB. **Today ≈ 321 MB** (owner cap 1 GB) |
 
 ## Rules that bind this work
 
@@ -176,7 +185,9 @@ It counts rows returned (cumulative since project creation, never reset).
 - **No AI key in the container.** Students are rule-based, and the model-based factual marker is
   not built. It needs a key added to the environment secrets by the owner.
 
-## OWNER DECISION NEEDED (2026-09-25) — the held question's answer in the teaching
+## DECIDED (owner "Approved", 2026-09-25) — held-question answer leak: option A implemented (`[answer-leak]` guard also covers an authored held question, except help/recovery turns)
+
+### Original write-up
 
 The leak guard hides the answer only on the turn the server attaches a question. While the question
 stays on screen unanswered, the tutor's reply can state the answer (S8b: "acceleration — how velocity
@@ -194,6 +205,60 @@ Options:
   readiness while this path occurs).
 
 This changes what counts as evidence, so it is CLAUDE.md G2 — not implemented without approval.
+
+## BLOCKER (2026-09-25 12:15 UTC) — new seed content is not reaching production
+
+**Update 2026-09-25 ~14:40 UTC (owner "Approved"):** the 4 Batch 17 probes (free-body diagram, normal force) were applied to production once, as guarded INSERTs in the bootstrap's own row shape, and verified ACTIVE with their choices. The bootstrap itself is still stalled for any other new seed content; phase-timing logs (`asset bootstrap timing: …`, `34b8288`) will show where the 12 s slice goes on the next cold starts.
+
+Batch 17 (4 new physics probes, `2d2cc0b`) is deployed (READY) but its rows are absent from
+`asset_identity` after three cold starts. The maths `math.de` batches committed 2026-09-24 04:07 UTC
+(`eabba05` and earlier) have **zero rows** in production after 30+ hours. Every retained cold-start log
+reads `asset bootstrap: 12000ms boot deadline reached — continuing in the background; the next cold
+start resumes`.
+
+Likely cause (from `src/instrumentation.ts`'s own comments): the bootstrap gets a bounded 12 s slice per
+cold start, most of it fixed cost BEFORE the first write (Prisma connect, evaluating the seed source,
+validating identities). The deadline was measured against 1.37 MB of seed source; it is now **11.9 MB**
+(10,409 items). If the fixed cost now exceeds 12 s, no cold start ever reaches a write, and every new
+seed item — any subject — stays unseeded.
+
+Measured 2026-09-25 (local, no DB): loading + validating the full seed corpus (`seed-knowledge-assets.ts --draft --dry-run`) takes ≈ 7.8 s over a 0.8 s tsx baseline. Production adds Prisma connect + a cross-region DB and cold-start CPU, so the fixed cost plausibly consumes most or all of the 12 s slice before the first write — consistent with the zero-rows evidence, not yet proof.
+
+Also found: `phys.mech.normal-force:misconception_probe:en:high` is DEPRECATED in production, so normal
+force had only FOUR active gradeable probes (not five) — why it ran out first.
+
+Options (owner — production state / egress-sensitive code, not changed unilaterally):
+- **A:** raise `ASSET_BOOTSTRAP_DEADLINE_MS` (Vercel env) enough for one cold start to finish, then lower
+  it again. Costs one slow cold start.
+- **B:** make the bootstrap scope its fixed cost (load only subjects whose expected-slug count differs)
+  — code change in `instrumentation.ts`; read `docs/history/egress-incidents.md` first.
+- **C:** owner-authorized SQL insert of the missing rows generated from the seed files (the biology
+  2026-09-22 precedent).
+
+Until this is fixed, content additions (including Batch 17) do not help learners, and the
+free-body/normal-force re-runs would measure the old pool.
+
+## DECIDED (owner "Approved", 2026-09-25) — the CLOSING trap: option A implemented (`sessionLifecycle.closedBy`, spiral closes reopen on an authored right answer, explicit closes stay final, unauthored grades do not spend the budget)
+
+### Original write-up
+
+After two consecutive graded wrong answers the session episode goes CLOSING ("affect budget spent",
+`sessionLifecycle.applySignalToEpisode`). CLOSING blocks every question (turnArbitration CLOSE +
+`closingTurnWithholdsQuestion`) and has no exit by design. Measured (synthetic run, free-body diagram
+and normal force, beginner): the learner then answered correctly and asked "can you test me with a
+question?" three times; each got re-teaching or "have I got that right?", and the lesson ended without
+mastery. The lesson itself never closes, so the learner is stranded rather than wound down.
+Options:
+- **A (recommended):** a GRADED-CORRECT answer while CLOSING, followed by an explicit practice request,
+  reopens the episode to CORE (the spiral is over; the learner asked). Explicit "I'm done" closes stay
+  absolute (`forceClosing` is untouched).
+- **B:** CLOSING actually closes: deliver the close + "come back later" and end the lesson, instead of
+  continuing to teach with questions blocked.
+- **C:** keep as is.
+
+Related (2026-09-25, tension/friction run): a wrong tap on a MODEL-INVENTED question (no authored key) also spends the affect budget, because `applySignalToEpisode` reads `teachingSignal`. Option A should also say: only authored-key grades spend the budget.
+
+This changes when the tutor stops assessing, so it is CLAUDE.md G2 — not implemented without approval.
 
 ## DONE — owner-approved 2026-09-24 ("Approved, implement the TRANSFER fix")
 

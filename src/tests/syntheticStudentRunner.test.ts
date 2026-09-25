@@ -268,3 +268,20 @@ describe('provider guard (2026-09-25: Groq spend limit, two runs served entirely
     expect(card.topics[0].personas.beginner.mastered).toBe(1)
   })
 })
+
+describe('ungradeable-question uses the production detector (2026-09-25)', () => {
+  it('a readiness or confirmation check at CHECK is not flagged; a real question still is', () => {
+    const at = (text: string) => checkTurn(turn(5, reply({ text, mastery: { phase: 'CHECK' } })), [turn(4, reply())]).map((f) => f.code)
+    expect(at('Before we call this lesson finished, let\'s do 2 practice questions together — ready?')).not.toContain('ungradeable-question')
+    expect(at('So the net force sets the acceleration — have I got that right?')).not.toContain('ungradeable-question')
+    expect(at('A 2 kg cart feels a net force of 10 N. What is its acceleration?')).toContain('ungradeable-question')
+  })
+})
+
+describe('unfair-close ignores lessons with unkeyed guesses (2026-09-25)', () => {
+  it('a guess at a model-invented question may have been graded wrong, so no unfair-close', () => {
+    const h = [turn(3, reply(), answer('a', true)), turn(4, reply(), { kind: 'answer', message: '40 N', typed: false, intent: 'unkeyed', intendedCorrect: null, question: 'q' } as never)]
+    const t = turn(12, reply({ text: "Let's pause Friction Forces here for now. Worth another look later: Friction Forces.", lessonComplete: { complete: true }, mastery: { phase: 'GUIDE', verified: false } }))
+    expect(checkTurn(t, h).map((f) => f.code)).not.toContain('unfair-close')
+  })
+})

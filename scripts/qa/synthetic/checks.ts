@@ -15,6 +15,7 @@
  */
 import { dropAnswerLeaks } from '../../../src/lib/teaching/gateAssessment'
 import { claimsCompletionInProse } from '../../../src/lib/teaching/stanceEnforcement'
+import { askedAnswerableQuestion } from '../../../src/lib/teaching/answerableTurn'
 import type { LearnerAct } from './personas'
 
 export type Severity = 'critical' | 'major' | 'minor'
@@ -134,7 +135,10 @@ export function checkTurn(cur: TurnRecord, history: readonly TurnRecord[], opts:
     const answeredRight = history.some((t) => t.act.kind === 'answer' && normText(t.act.question) === key && t.act.intendedCorrect === true)
     if (earlier.length >= 2 || (earlier.length >= 1 && answeredRight)) f('repeated-question', 'major', q.question)
   }
-  if (!q && cur.reply.mastery?.phase && GATE_PHASES.has(cur.reply.mastery.phase) && /\?\s*$/.test(text.trim())) {
+  // The production detector, not "ends in ?": "…let's do 2 practice questions
+  // together — ready?" and "…have I got that right?" ask nothing gradeable
+  // (readiness run 2026-09-25, Newton's 2nd/3rd law).
+  if (!q && cur.reply.mastery?.phase && GATE_PHASES.has(cur.reply.mastery.phase) && /\?\s*$/.test(text.trim()) && askedAnswerableQuestion(text)) {
     f('ungradeable-question', 'minor', `question asked in prose at ${cur.reply.mastery.phase}: ${text.trim().slice(-120)}`)
   }
 
@@ -154,7 +158,10 @@ export function checkTurn(cur: TurnRecord, history: readonly TurnRecord[], opts:
   // wrong is a verdict the evidence does not support.
   if (cur.reply.lessonComplete?.complete && !verified) {
     const answers = [...history, cur].flatMap((t) => (t.act.kind === 'answer' ? [t.act] : []))
-    if (answers.some((a) => a.intendedCorrect === true) && !answers.some((a) => a.intendedCorrect === false)) {
+    // An unkeyed answer (the student guessed at a question the model wrote
+    // itself) may have been graded wrong by the model's own key, so "none
+    // wrong" cannot be claimed (tension/friction run, 2026-09-25).
+    if (answers.some((a) => a.intendedCorrect === true) && !answers.some((a) => a.intendedCorrect === false || a.intendedCorrect === null)) {
       f('unfair-close', 'critical', `closed unmastered after ${answers.length} answer(s), none wrong: ${firstSentence(text)}`)
     }
   }

@@ -187,6 +187,15 @@ async function bootstrapAssets() {
     const { prisma, withRetry } = await import('./lib/db/prisma')
 
     {
+      // PHASE TIMING (owner-approved 2026-09-25, observability only — no query,
+      // no write). New seed rows stopped reaching production (rows committed
+      // 30+ h earlier absent; every retained cold-start log is the 12 s deadline
+      // line, and the "N/M seed identities present" line never appears — so the
+      // slice runs out BEFORE the first query). These marks say which fixed cost
+      // ate it.
+      const bootT0 = Date.now()
+      const bootMark = (phase: string) =>
+        console.log(`[instrumentation] asset bootstrap timing: ${phase} at ${Date.now() - bootT0}ms`)
       // Load seed arrays first so we know the expected total before querying.
       const { SEED_EXPLANATIONS, SEED_PROBES, SEED_LANGUAGE, SEED_AUTHOR_ID, seedCanonicalSlug,
         buildProbeSlugResolver, abandonedLegacyProbeSlugs, SEED_REVIVABLE_STATUSES,
@@ -963,6 +972,7 @@ async function bootstrapAssets() {
       // ADR 14 §13 (Item 6): ladder rungs get a difficulty segment; singleton
       // slots keep the identity they already have. One resolver drives BOTH
       // the pre-flight check and the write loop so they cannot disagree.
+      bootMark('seed modules loaded')
       const probeSlug = buildProbeSlugResolver(ALL_PROBES)
 
       // The exact set of canonical identities THIS corpus declares. The
@@ -1013,6 +1023,7 @@ async function bootstrapAssets() {
           source: p.source,
         })),
       ])
+      bootMark('identities validated')
       if (!identityCheck.ok) {
         console.error(
           formatSeedIdentityReport(identityCheck, {

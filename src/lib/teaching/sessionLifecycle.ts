@@ -36,6 +36,12 @@ export interface SessionEpisode {
   retroWinOwed: boolean
   /** OPENING exit bookkeeping: an answered signal during OPENING moves to CORE */
   openingSatisfied: boolean
+  /** WHY the episode is CLOSING (owner-approved 2026-09-25). 'spiral' = the
+   *  affect budget was spent by graded failures; 'explicit' = the learner asked
+   *  to stop (`forceClosing`). Only a spiral close may reopen — see
+   *  `applySignalToEpisode`. Absent on episodes written before this field:
+   *  those are treated as final, exactly as before. */
+  closedBy?: 'spiral' | 'explicit'
 }
 
 /** decision-engine/07 §8 rule 1: ~30 minutes, deliberately generous —
@@ -151,9 +157,26 @@ export function clearEpisodeForLessonOpen(): Record<string, unknown> {
 export function applySignalToEpisode(
   ep: SessionEpisode,
   signal: { correctness?: boolean; confusion?: boolean } | null,
-  opts: { isFirstLesson: boolean },
+  opts: { isFirstLesson: boolean; authoredGrade?: boolean },
 ): SessionEpisode {
   if (!signal || signal.correctness === undefined) return ep
+  // ── A SPIRAL CLOSE REOPENS ON AN AUTHORED RIGHT ANSWER (owner-approved
+  // 2026-09-25) ──────────────────────────────────────────────────────────────
+  //
+  // MEASURED (synthetic students, production — free-body diagram, normal force,
+  // tension, friction): two graded misses closed the episode; the learner then
+  // answered an AUTHORED question correctly and asked "can you test me with a
+  // question?" three or four times. Every request was refused (CLOSE denies
+  // AUTHORED_PROBE) and the lesson ended unmastered. The spiral this phase
+  // exists to stop was already over.
+  //
+  // So a CLOSING episode the SPIRAL produced returns to CORE on a correct answer
+  // graded against an authored key (`opts.authoredGrade`). An explicit close
+  // (`forceClosing`, closedBy 'explicit') never reopens, and neither does an
+  // episode written before `closedBy` existed.
+  if (ep.phase === 'CLOSING' && ep.closedBy === 'spiral' && signal.correctness === true && opts.authoredGrade === true) {
+    return { ...ep, phase: 'CORE', visibleFailures: 0, closedBy: undefined }
+  }
   // ── PHASE E: THE AFFECT BUDGET MEASURES A SPIRAL, NOT A LIFETIME ─────────
   //
   // This read `ep.visibleFailures + (correctness === false ? 1 : 0)`, so the
@@ -248,10 +271,12 @@ export function applySignalToEpisode(
     phase = 'CORE'
     if (signal.correctness === true) retroWinOwed = false // the win landed
   }
+  let closedBy = ep.closedBy
   if (failures >= budget && phase !== 'CLOSING') {
     phase = 'CLOSING'
+    closedBy = 'spiral'
   }
-  return { ...ep, phase, visibleFailures: failures, openingSatisfied, retroWinOwed }
+  return { ...ep, phase, visibleFailures: failures, openingSatisfied, retroWinOwed, ...(closedBy ? { closedBy } : {}) }
 }
 
 /**
@@ -485,8 +510,8 @@ export function episodeNeedsPersist(input: {
 /** Force the episode into CLOSING this turn — idempotent, never downgrades
  * an already-CLOSING episode, never re-opens/rewinds visibleFailures. */
 export function forceClosing(ep: SessionEpisode): SessionEpisode {
-  if (ep.phase === 'CLOSING') return ep
-  return { ...ep, phase: 'CLOSING' }
+  if (ep.phase === 'CLOSING') return ep.closedBy === 'spiral' ? { ...ep, closedBy: 'explicit' } : ep
+  return { ...ep, phase: 'CLOSING', closedBy: 'explicit' }
 }
 
 /**

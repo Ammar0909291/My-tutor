@@ -177,9 +177,14 @@ describe('B — sentences that state the answer are removed (production text)', 
     expect(dropAnswerLeaks(t, mcq, 'Displacement and Distance')).toEqual({ text: t, dropped: [] })
     expect(dropAnswerLeaks(t, mcq, 'Stoichiometry').dropped.length).toBeGreaterThan(0)
   })
-  it('route: applied only to the server question attached this turn, logged as [answer-leak]', () => {
-    expect(route).toMatch(/if \(mcqHoisted && mcqHoisted === gateMcqHoisted\) \{\s*const \{ dropAnswerLeaks \}/)
-    expect(route).toMatch(/dropAnswerLeaks\(text, mcqHoisted, resolvedConceptId \? \(kgNodeForLeak\(resolvedConceptId\)\?\.title \?\? null\) : null\)/)
+  // Widened 2026-09-25 (owner-approved, option A): the server question attached
+  // this turn OR an authored question still held on screen — never on a help or
+  // recovery turn (acceleration synthetic run: "…how velocity changes…" above a
+  // held "rate of change of which quantity?").
+  it('route: the attached server question, or an authored held one outside help turns, logged as [answer-leak]', () => {
+    expect(route).toMatch(/const leakGuardMcq = mcqHoisted && mcqHoisted === gateMcqHoisted\s*\?\s*mcqHoisted\s*:\s*heldQuestionOnScreen \? pendingMcqHoisted : null/)
+    expect(route).toMatch(/heldKeyIsAuthored\(pendingMcqHoisted\)\s*&& learnerRequestHoisted === null && recoveryKeyHoisted === null/)
+    expect(route).toMatch(/dropAnswerLeaks\(text, leakGuardMcq, resolvedConceptId \? \(kgNodeForLeak\(resolvedConceptId\)\?\.title \?\? null\) : null\)/)
     expect(route).toContain("console.warn('[answer-leak] '")
   })
 })
