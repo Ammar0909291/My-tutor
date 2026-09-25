@@ -7970,7 +7970,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // Placed after the other repairs so it decorates the text that actually
       // ships, and before the verifier so the verifier sees the final reply.
       try {
-        const { confirmCorrectAnswer, CONFIRMS_CORRECT } = await import('@/lib/teaching/answerConfirmation')
+        const { confirmCorrectAnswer, statesCorrect } = await import('@/lib/teaching/answerConfirmation')
         const confirmed = confirmCorrectAnswer({
           text: cleanText,
           correct: correctForConfirmation,
@@ -7999,7 +7999,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         if (correctForConfirmation === true) {
           console.log('[c5] ' + JSON.stringify({
             event: 'servedGradedCorrect',
-            confirmed: confirmed.added || CONFIRMS_CORRECT.test(confirmed.text),
+            confirmed: confirmed.added || statesCorrect(confirmed.text),
           }))
         }
       } catch { /* non-fatal — the teaching is still better than no answer */ }

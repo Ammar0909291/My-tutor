@@ -35,7 +35,8 @@ reach verified mastery every time with zero critical defects (`scripts/qa/synthe
 | S6f | Checker: an offered check, or "Quick check:" followed by the model's own question, is not `announced-not-asked` (both after-run 2 majors were checker false positives) | **pushed** `1b576c2` |
 | S7 | Readiness runs 2 and 3 on displacement + velocity (production `dd31beb`) | **done — both topics READY**: run 2 10/10 mastered, 0 critical, 0 major; run 3 10/10, 0 critical, 1 major (`content-free-reply`, see below). With after-run 3 (run 1) that is 3 consecutive runs, all 5 students mastering both topics, 0 critical. (After-run 3's run file was lost to a container restart, so the scorecard CLI can only combine runs 2 and 3; runs 1 is recorded from its log.) |
 | S7a | Run 3's content-free reply: confused student, "I still don't get it" (2nd don't-know) -> only "I hear you—it's completely okay to feel stuck. Let's take a tiny step together." Production log: model wrote 377 chars, `[dont-know-ceiling] question-withheld run:2` cut the rest. Could not reproduce (the model's raw text is not logged; a reconstructed teaching+question paragraph is already kept by `trimTrailingQuestions`). **No speculative fix**: the ceiling log now records `before`/`beforeChars`/`afterChars` (model text only), so the next occurrence is diagnosable. Likely cause: the known cost in `trimTrailingQuestions` (a single teaching sentence before its question is dropped) | **pushed** (logging only) |
-| S8 | Widen: next launch topics two at a time (`RUNNER_TOPICS=phys.mech.acceleration,phys.mech.kinematics-1d`, then force + newtons-first-law, …), 3 runs each, within ~150 MB/day | **in progress** (2026-09-25) |
+| S8 | Widen: next launch topics two at a time (`RUNNER_TOPICS=phys.mech.acceleration,phys.mech.kinematics-1d`, then force + newtons-first-law, …), 3 runs each, within ~150 MB/day | **in progress**. acceleration + kinematics-1d run 1 (prod `651276f`): 10/10 mastered, 0 critical, 0 major, 2 minor |
+| S8a | The recurring minor `ungradeable-question` (off-track t5, every topic) is a real defect: a server-graded-CORRECT answer got "…3 m/s², right? Is that correct?" and no verdict, because `CONFIRMS_CORRECT` matched "correct" inside the question (`[c5] confirmed:true`). Fix: `statesCorrect()` tests only statements; regex unchanged (scorer parity) | **pushed** (full suite 725/14,941, tsc and build clean); next: runs 2-3 on acceleration + kinematics-1d |
 
 If S4's run file is lost (the session ended), **skip the before-baseline**. S2's smoke run already
 shows the defect; go straight to S5.
@@ -105,6 +106,7 @@ It counts rows returned (cumulative since project creation, never reset).
 | F0 | 2026-09-25 00:16:47 | 10,442,945 | 189,213,160 | new UTC day; +778 rows overnight |
 | F1 | 2026-09-25 00:46:38 | 10,470,441 | 189,305,444 | readiness run 2: +92,284 rows / 116 turns, about 28 MB |
 | F2 | 2026-09-25 01:29:00 | 10,497,795 | 189,341,815 | readiness run 3: +36,371 rows / 116 turns, about 11 MB. **Today: about 39 MB** |
+| F3 | 2026-09-25 01:59:44 | 10,526,228 | 189,430,620 | acceleration + kinematics-1d run 1: +88,805 rows / 116 turns, about 27 MB. **Today: about 66 MB** |
 
 ## Rules that bind this work
 
