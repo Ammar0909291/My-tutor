@@ -167,6 +167,7 @@ It counts rows returned (cumulative since project creation, never reset).
 | F11 | 2026-09-25 10:58:43 | 10,753,162 | 190,006,866 | N2L + N3L run 3: +63,835 rows, about 19 MB. **Today ≈ 238 MB** |
 | F12 | 2026-09-25 11:58:54 | 10,787,678 | 190,106,470 | free-body + normal-force run 1: +99,604 rows, about 30 MB. **Today ≈ 268 MB — runs paused until 00:00 UTC (free-tier rule)** |
 | F13 | 2026-09-25 13:12:04 | 10,820,965 | 190,283,563 | tension + friction run 1 (+ bootstrap cold starts): +177,093 rows, about 53 MB. **Today ≈ 321 MB** (owner cap 1 GB) |
+| F14 | 2026-09-25 14:38:36 | 10,822,099 | 190,285,788 | start of free-body + normal-force run 2 (+2,225 idle since F13). **Today ≈ 322 MB** |
 
 ## Rules that bind this work
 
@@ -207,6 +208,8 @@ Options:
 This changes what counts as evidence, so it is CLAUDE.md G2 — not implemented without approval.
 
 ## BLOCKER (2026-09-25 12:15 UTC) — new seed content is not reaching production
+
+**Update 2026-09-25 ~14:35 UTC (Batch 18, `192a6da`):** 16 more probes (2 each for acceleration, kinematics-1d, N2L, N3L, tension, friction, inclined-plane, impulse — free ladder slots only; 0 duplicate identities across 10,425 items) were applied to production the same way and verified: 16/16 ACTIVE, each with its probe row, ≥3 choices, 0 slug collisions beforehand. Those eight topics now serve 8–9 ACTIVE gradeable HIGH probes each (was 4–5). The hollow HIGH identities still present on those concepts are all DEPRECATED abandoned slugs (60 mcq, 60 short_answer, 8 misconception_probe across phys.mech) and are never served.
 
 **Update 2026-09-25 ~14:40 UTC (owner "Approved"):** the 4 Batch 17 probes (free-body diagram, normal force) were applied to production once, as guarded INSERTs in the bootstrap's own row shape, and verified ACTIVE with their choices. The bootstrap itself is still stalled for any other new seed content; phase-timing logs (`asset bootstrap timing: …`, `34b8288`) will show where the 12 s slice goes on the next cold starts.
 
