@@ -3901,16 +3901,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                   pendingQuestion: pendingMcqHoisted?.question ?? null,
                   latestMessage: learnerAuthoredMessage,
                 },
-                async (sys, user, timeoutMs) => {
-                  // Never spend the primary generation's time: keep 30s of the
-                  // route's own budget in reserve, or do not call at all.
-                  const budgetMs = Math.min(timeoutMs, deadline.remainingMs() - 30_000)
-                  if (budgetMs <= 0) throw new Error('intent-experiment: no route budget')
-                  return (await routeAI(
-                    [{ role: 'user', content: user }], sys, country, 600, teachingLang,
-                    { userId, purpose: 'intent-experiment' }, groqModelOverride, budgetMs, forceProvider,
-                  )).text
-                },
+                (await import('@/lib/teaching/learnerIntentProviderCall')).makeIntentCaller({
+                  country, lang: teachingLang, userId, groqModelOverride, forceProvider,
+                  remainingMs: () => deadline.remainingMs(),
+                }),
               )
               const owner = (turnArbitrationHoisted ?? arbitrationUnavailable()).owner
               if (intentExperimentResultHoisted.intent && intentMod.intentAdmittedUnder(turnArbitrationHoisted ? owner : null)) {
@@ -12693,11 +12687,6 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
 
       return NextResponse.json({
         success: true, text: cleanText, provider,
-        // EXPERIMENT diagnostic — present ONLY on Architecture B requests
-        // (cert-gated account + header); absent for every ordinary learner.
-        intentExperiment: intentExperimentEnabled
-          ? { result: intentExperimentResultHoisted, injected: intentAdvisoryHoisted !== null }
-          : undefined,
         // PROVENANCE SOURCE OF TRUTH. `provider` names the serving branch
         // and has been measured lying: four LESSON_COMPLETE turns carried
         // 'memory' while an LLM had re-rendered them. The client must badge
@@ -12707,6 +12696,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // `provider` above is unchanged and remains the stable field
         // (memory/groq/yandex/fallback); these describe HOW/WHY, never a
         // new provider value.
+        // EXPERIMENT diagnostic — present ONLY on Architecture B requests
+        // (cert-gated account + header); absent for every ordinary learner.
+        intentExperiment: intentExperimentEnabled
+          ? { result: intentExperimentResultHoisted, injected: intentAdvisoryHoisted !== null }
+          : undefined,
         memoryServingMode, memoryConfidence, memoryAssetId, memoryConceptId,
         memoryExactGradeMatch, memoryFallbackUsed,
         memoryFallbackReason: memoryFallbackReasonCode,

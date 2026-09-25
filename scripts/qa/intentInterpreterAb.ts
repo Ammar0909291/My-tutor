@@ -113,7 +113,7 @@ interface Payload {
   [k: string]: unknown
 }
 
-interface Arm { scenario: string; arm: 'A' | 'B'; rep: number; account: QaAccount }
+interface Arm { scenario: string; arm: 'A' | 'B'; rep: number; account: QaAccount; extra?: boolean }
 
 async function api(cookie: string, method: 'GET' | 'POST', path: string, body?: unknown, headers?: Record<string, string>): Promise<Payload> {
   const r = await fetch(`${BASE}${path}`, {
@@ -127,23 +127,29 @@ async function api(cookie: string, method: 'GET' | 'POST', path: string, body?: 
 }
 
 async function create(outDir: string, reps: number) {
+  // One account per arm per rep, reused across the six scenarios (six
+  // DIFFERENT concepts, so no scenario inherits another's topic progress;
+  // any cross-concept profile effect is symmetric between A and B).
+  // `/api/auth/register` allows 5 per 15 min per IP, so this resumes from
+  // accounts.json rather than starting over.
   mkdirSync(outDir, { recursive: true })
-  const arms: Arm[] = []
-  for (const s of SCENARIOS) {
-    for (let rep = 1; rep <= reps; rep++) {
-      for (const arm of ['A', 'B'] as const) {
-        const account = await createQaAccount(`intentab-${s.id}-${arm}${rep}`.toLowerCase())
-        await api(account.cookie, 'POST', '/api/onboarding', {
-          userType: 'GENERAL_LEARNER', subjectSlugs: ['mathematics', 'physics', 'chemistry'],
-          currentLevel: 'advanced', selfDescription: 'University student revising advanced topics in depth.',
-          voiceChoice: 'default', teachingLanguage: 'en',
-        })
-        arms.push({ scenario: s.id, arm, rep, account })
-        console.log(`created ${account.email}`)
-      }
+  const file = join(outDir, 'accounts.json')
+  let arms: Arm[] = []
+  try { arms = JSON.parse(readFileSync(file, 'utf8')) as Arm[] } catch { /* fresh */ }
+  for (let rep = 1; rep <= reps; rep++) {
+    for (const arm of ['A', 'B'] as const) {
+      if (arms.some((a) => a.arm === arm && a.rep === rep)) continue
+      const account = await createQaAccount(`intentab-${arm}${rep}`.toLowerCase())
+      await api(account.cookie, 'POST', '/api/onboarding', {
+        userType: 'GENERAL_LEARNER', subjectSlugs: ['mathematics', 'physics', 'chemistry'],
+        currentLevel: 'advanced', selfDescription: 'University student revising advanced topics in depth.',
+        voiceChoice: 'default', teachingLanguage: 'en',
+      })
+      arms.push({ scenario: '*', arm, rep, account })
+      writeFileSync(file, JSON.stringify(arms, null, 2))
+      console.log(`created ${account.email}`)
     }
   }
-  writeFileSync(join(outDir, 'accounts.json'), JSON.stringify(arms, null, 2))
 }
 
 function trigramJaccard(a: string, b: string): number {
@@ -220,25 +226,29 @@ async function runArm(a: Arm) {
   }
 }
 
-async function run(outDir: string) {
-  const arms = JSON.parse(readFileSync(join(outDir, 'accounts.json'), 'utf8')) as Arm[]
-  const results: unknown[] = []
+async function run(outDir: string, only?: string) {
+  const arms = (JSON.parse(readFileSync(join(outDir, 'accounts.json'), 'utf8')) as Arm[]).filter((a) => !a.extra)
+  const resFile = join(outDir, 'results.json')
+  let results: Record<string, unknown>[] = []
+  try { results = JSON.parse(readFileSync(resFile, 'utf8')) } catch { /* fresh */ }
+  const reps = [...new Set(arms.map((a) => a.rep))].sort()
   // A and B of the same scenario+rep run CONCURRENTLY, so both arms meet the
   // same provider conditions; pairs run one after another.
-  const pairs = new Map<string, Arm[]>()
-  for (const a of arms) {
-    const k = `${a.scenario}#${a.rep}`
-    pairs.set(k, [...(pairs.get(k) ?? []), a])
-  }
-  for (const [k, pair] of pairs) {
-    console.log(`=== ${k} ===`)
-    const out = await Promise.all(pair.map((a) => runArm(a).catch((e) => ({ scenario: a.scenario, arm: a.arm, rep: a.rep, fatal: String(e) }))))
-    for (const r of out) {
-      results.push(r)
-      const x = r as Record<string, unknown>
-      console.log(`  ${x.arm}: answered=${JSON.stringify(x.answered)} repeatSim=${x.repeatSim} lat=${JSON.stringify(x.latencyMs)} ${x.fatal ?? ''}`)
+  for (const s of SCENARIOS) {
+    if (only && s.id !== only) continue
+    for (const rep of reps) {
+      if (results.some((r) => r.scenario === s.id && r.rep === rep && !r.fatal)) continue
+      results = results.filter((r) => !(r.scenario === s.id && r.rep === rep))
+      console.log(`=== ${s.id} #${rep} ===`)
+      const pair = arms.filter((a) => a.rep === rep).map((a) => ({ ...a, scenario: s.id }))
+      const out = await Promise.all(pair.map((a) => runArm(a).catch((e) => ({ scenario: a.scenario, arm: a.arm, rep: a.rep, fatal: String(e) }))))
+      for (const r of out) {
+        const x = r as Record<string, unknown>
+        results.push(x)
+        console.log(`  ${x.arm}: answered=${JSON.stringify(x.answered)} repeatSim=${x.repeatSim} lat=${JSON.stringify(x.latencyMs)} ${x.fatal ?? ''}`)
+      }
+      writeFileSync(resFile, JSON.stringify(results, null, 2))
     }
-    writeFileSync(join(outDir, 'results.json'), JSON.stringify(results, null, 2))
   }
 }
 
@@ -255,7 +265,7 @@ async function cleanup(outDir: string) {
   }
 }
 
-const [, , cmd, outDir, reps] = process.argv
+const [, , cmd, outDir, reps] = process.argv // `run <outDir> [scenarioId]`
 if (!cmd || !outDir) throw new Error('usage: create|run|cleanup <outDir> [reps]')
-;(cmd === 'create' ? create(outDir, Number(reps ?? 2)) : cmd === 'run' ? run(outDir) : cleanup(outDir))
+;(cmd === 'create' ? create(outDir, Number(reps ?? 2)) : cmd === 'run' ? run(outDir, reps) : cleanup(outDir))
   .catch((e) => { console.error('FATAL', e); process.exit(1) })
