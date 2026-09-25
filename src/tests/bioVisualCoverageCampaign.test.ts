@@ -72,6 +72,32 @@ export const CAMPAIGN_FIXED_CONCEPTS = [
   'bio.physio.endocrine-system',
   'bio.physio.musculoskeletal-system',
   'bio.physio.immune-system-intro',
+  // Batch 4 — bio.plant (3), bio.repro (5), bio.dev (3), bio.micro (1)
+  'bio.plant.plant-water-relations',
+  'bio.plant.mineral-nutrition',
+  'bio.plant.plant-growth-hormones',
+  'bio.repro.asexual-reproduction',
+  'bio.repro.sexual-reproduction-plants',
+  'bio.repro.human-reproductive-system',
+  'bio.repro.fertilisation-development',
+  'bio.repro.reproductive-health',
+  'bio.dev.gametogenesis-fertilisation-dev',
+  'bio.dev.morphogenesis-differentiation',
+  'bio.dev.stem-cells-regeneration',
+  'bio.micro.microbial-diversity',
+  // Batch 5 — bio.micro (3), bio.immuno (3), bio.biotech (4), bio.bioinfo (2)
+  'bio.micro.microbial-growth-culture',
+  'bio.micro.microbes-in-human-welfare',
+  'bio.micro.pathogenic-microbes',
+  'bio.immuno.innate-adaptive-immunity',
+  'bio.immuno.antibody-structure-function',
+  'bio.immuno.vaccination-immunisation',
+  'bio.biotech.biotech-principles',
+  'bio.biotech.biotech-process-applications',
+  'bio.biotech.genomics-proteomics',
+  'bio.biotech.crispr-genome-editing',
+  'bio.bioinfo.bioinformatics-intro',
+  'bio.bioinfo.sequence-alignment',
 ] as const
 
 describe.each(CAMPAIGN_FIXED_CONCEPTS)('%s now resolves to a faithful Tier 0 scene', (conceptId) => {
