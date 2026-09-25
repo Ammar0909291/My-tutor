@@ -142,11 +142,12 @@ describe('bio.immuno.immune-disorders: three failure modes, not four', () => {
 })
 
 describe('non-regression: everything this fix must not touch', () => {
-  it('CONCEPT_SCENE_OVERRIDES grew by exactly these two, on top of the concurrent DNA-replication fix', () => {
+  it('CONCEPT_SCENE_OVERRIDES still contains these two, plus everything the wider campaign has since added', () => {
     // A concurrent session independently fixed bio.mol.dna-replication
-    // (56 -> 57) while this fix was in progress (57 -> 59) — see
-    // visualGeneratorSplits.test.ts's own merged history for both.
-    expect(CONCEPT_SCENE_OVERRIDES).toHaveLength(59)
+    // (56 -> 57) while this fix was in progress (57 -> 59), and the wider
+    // bioVisualCoverageCampaign.test.ts has grown the count well past 59
+    // since — that file owns the authoritative running total.
+    expect(CONCEPT_SCENE_OVERRIDES.length).toBeGreaterThanOrEqual(59)
     expect(CONCEPT_SCENE_OVERRIDES).toContain(PHOTOSYNTHESIS)
     expect(CONCEPT_SCENE_OVERRIDES).toContain(IMMUNE_DISORDERS)
   })
