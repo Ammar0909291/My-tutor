@@ -357,6 +357,20 @@ function matchPrecedesItsRequest(message: string, matchedText: string): boolean 
  */
 const INSTANCE_DETERMINERS: ReadonlySet<string> = new Set([
   'every', 'each', 'all', 'any', 'which', 'what', 'whichever', 'whatever',
+  // E4b (2026-09-26): demonstratives point at something already present —
+  // "why is THIS term negative" is about the sum on screen, not algebra.
+  'this', 'that', 'these', 'those',
+])
+/**
+ * E4b · "THE <noun> IS …" — the definite article counts ONLY when the noun is
+ * the subject of a following predicate ("show why the term is negative").
+ * The rejected definite-article rule blocked "teach me the derivative"; that
+ * phrase has no predicate after the noun, so it is untouched, and so is the
+ * definitional "what the derivative is" (predicate with nothing after it).
+ */
+const SUBJECT_PREDICATES: ReadonlySet<string> = new Set([
+  'is', 'are', 'was', 'were', 'has', 'have', 'does', 'do', 'did', 'can', 'will', 'would',
+  'should', 'must', 'becomes', 'become', 'goes', 'go', 'comes', 'come', 'gets', 'get',
 ])
 /** "what entropy IS" / "what entropy MEANS" — a definition request, not an instance. */
 const DEFINITION_COPULA: ReadonlySet<string> = new Set(['is', 'are', 'mean', 'means', 'was', 'were'])
@@ -382,8 +396,13 @@ export function isOffDomainInstanceReference(
     if (words[i] !== noun) continue
     occurrences++
     const before = words[i - 1]
-    if (!before || !INSTANCE_DETERMINERS.has(before)) return false
     const next = words[i + 1]
+    if (before === 'the') {
+      // subject of a predicate that continues ("the term is negative") -> instance
+      if (next && SUBJECT_PREDICATES.has(next) && words[i + 2]) continue
+      return false
+    }
+    if (!before || !INSTANCE_DETERMINERS.has(before)) return false
     if ((before === 'what' || before === 'which') && next && DEFINITION_COPULA.has(next)) {
       const after = words[i + 2]
       if (!after || !INVERTED_SUBJECT.has(after)) return false   // "what entropy is" -> a topic
