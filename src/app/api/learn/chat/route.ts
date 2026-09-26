@@ -3957,6 +3957,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               return cls.kind === 'capability_missing' ? cls.blockingCapabilities : null
             })(),
             learnerAskedQuestion: detectLearnerQuestion(message),
+            // A.4b (2026-09-26): a follow-up on the lesson's own, already-taught
+            // idea — never on an excursion (a new topic keeps the sequencing
+            // law) and never an explicit example/diagram/re-explain request.
+            followUpOnTaughtIdea: (detectLearnerQuestion(message) || (await import('@/lib/teaching/mcq')).readsAsRequestToTutor(message))
+              && !excursionActiveHoisted
+              && conversationStateHoisted.taughtThisSession === true
+              && learnerRequestHoisted === null
+              && !(await import('@/lib/teaching/conversationState')).asksForEverydayFraming(message),
             conceptPreviouslyMastered: conceptPreviouslyMasteredHoisted,
             phaseJustAdvanced: (conversationStateHoisted.turnsInCurrentPhase ?? 0) === 0
               && conversationStateHoisted.phase !== 'OBSERVE',
