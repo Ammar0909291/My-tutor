@@ -222,3 +222,15 @@ emitted no SIGNAL tag on the request turn; 0 PROBE_OUTCOME rows) — offline-val
   the existing stray-question-beside-MCQ withhold removed it, leaving the handoff line "Let me
   check your thinking with this." plus the probe. No deterministic step replaced an answer — the
   model did not write one.
+- **Relieved turn answered with a clarifying question (FIXED, 2026-09-26).** When relief fires
+  and the model's reply is ONLY a question (`replyIsOnlyAQuestion`: the withhold's own
+  `cutBackToTeaching` + `salvageNonQuestionSentences` leave nothing), the relieved probe steps
+  aside for that turn (`mcqHoisted = null`, `[gate-assessment] relieved-probe-yielded-to-
+  clarification`) and the withhold leaves the clarification on screen (its existing
+  `learnerAskedDirectQuestion` branch, now also set by the yield so a no-'?' request qualifies).
+  The probe is not spent (the ledger records only grades/releases) and the starvation counter keeps
+  climbing, so relief fires on the next question-owned turn. An answer with a stray question
+  still carries the probe. Pure confirm-tails ("have I got that right?") are not answerable
+  questions to either reading, so they were never stripped and are not affected. Tests:
+  `relievedProbeAnswersLearnerFirst.test.ts` (clarification with '?', without '?', stray-question
+  control, helper table); both halves mutation-checked.

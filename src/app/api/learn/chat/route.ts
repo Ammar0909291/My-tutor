@@ -2148,6 +2148,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     // before this turn's own verdict folds.
     let priorProbeStarvedTurnsHoisted = 0
     let probeStarvationRelievedHoisted = false
+    // Set when a relieved probe stepped aside for a clarifying question.
+    let relievedProbeYieldedHoisted = false
     let arbitrationWasSoleBlockerHoisted = false
     let turnProgressHoisted: {
       outcome: import('@/lib/teaching/turnProgress').TurnOutcome
@@ -6370,6 +6372,25 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // Separate override, same shape and same reason as the CLOSING one just
       // below. See inventedProbeGuard.ts.
       if (modelProbeWithheld) mcqHoisted = null
+      // A RELIEVED PROBE YIELDS TO A CLARIFYING QUESTION (2026-09-26, live QA).
+      // Relief rides on a question-owned turn; when the model answered with
+      // ONLY a clarifying question, the ungraded-question withhold deleted it
+      // and the learner saw "Let me check your thinking with this." + the
+      // quiz. The probe steps aside for this turn instead: never shown, so
+      // never spent, and the starvation counter keeps its value, so relief
+      // fires again next turn. See replyIsOnlyAQuestion.
+      if (probeStarvationRelievedHoisted && mcqHoisted !== null && mcqHoisted === gateMcqHoisted) {
+        const { replyIsOnlyAQuestion } = await import('@/lib/teaching/gateAssessment')
+        if (replyIsOnlyAQuestion(mcqParse.cleanText)) {
+          mcqHoisted = null
+          relievedProbeYieldedHoisted = true
+          console.log('[gate-assessment] ' + JSON.stringify({
+            event: 'relieved-probe-yielded-to-clarification',
+            conceptId: resolvedConceptId ?? null,
+            assetId: gateMcqHoisted?.assetId ?? null,
+          }))
+        }
+      }
       // R82 — withhold an OBSERVE askViolation, mirroring the override above.
       //
       // `decideModelProbe` (inventedProbeGuard.ts) already ran and, at
@@ -9259,7 +9280,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // `learnerAskedDirectQuestion`'s doc comment in gateAssessment.ts.
               // Same detector the route already uses a few hundred lines up to
               // drop a stray self-reported correctness claim.
-              learnerAskedDirectQuestion: detectLearnerQuestionForWithhold(message),
+              // + a relieved probe that yielded to the model's clarifying
+              // question: that clarification is what the learner gets.
+              learnerAskedDirectQuestion: detectLearnerQuestionForWithhold(message) || relievedProbeYieldedHoisted,
               // Real-student session (2026-09): a bare "yes"/"ok"/"got it"
               // met with the same content-free placeholder — see
               // `learnerAcknowledged`'s doc comment in gateAssessment.ts.

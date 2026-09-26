@@ -756,6 +756,28 @@ export function cutBackToTeaching(text: string): string {
 }
 
 /**
+ * IS THE REPLY NOTHING BUT A QUESTION? (2026-09-26, live QA)
+ *
+ * The withhold's own "nothing survived either salvage pass" condition, asked
+ * one step earlier: `cutBackToTeaching` and `salvageNonQuestionSentences` both
+ * return '' — the whole reply was a question and its introduction. Used by the
+ * route so a probe-starvation-relief probe steps aside for one turn when the
+ * model answered a learner's question with a clarifying question, instead of
+ * the withhold deleting that clarification and leaving only a hand-off line
+ * in front of the quiz. Hidden tags are ignored.
+ */
+export function replyIsOnlyAQuestion(text: string): boolean {
+  try {
+    const t = (typeof text === 'string' ? text : '').replace(/<!--[\s\S]*?-->/g, ' ').trim()
+    if (t.length === 0) return false
+    if (!(askedAnswerableQuestion(t) || containsOptionList(t))) return false
+    return cutBackToTeaching(t).length === 0 && salvageNonQuestionSentences(t).length === 0
+  } catch {
+    return false
+  }
+}
+
+/**
  * SENTENCE-LEVEL SALVAGE: keep the statements when the question shares a
  * paragraph with real teaching.
  *
