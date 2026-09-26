@@ -112,3 +112,23 @@ Same runner, scenarios, wording, provider pin (groq) and 6×2 design; interprete
 - Interpreter: 24/24 follow-ups admitted, 36/36 others not_actionable, p50 588 ms, 0 errors.
   Turn p50 A 13.27 s, B 13.55 s. Visual turns equal 12/12, phases equal 11/12 (the one
   difference follows a legitimately graded option tap). No verified mastery; isolation 72/72 + 60/60.
+
+## Rerun #3 — after the quiz-gate rung fix (2026-09-26, production bf726589)
+Rung fix: LEARNER_QUESTION's claim also reads `readsAsRequestToTutor`, so an imperative follow-up
+is answered before the authored-probe gate (`requestBeforeProbeGate.test.ts`, mutation-checked).
+Same 6×2 A/B, same runner, wording and provider pin; interpreter unchanged.
+- Follow-ups fully addressed: A 24/24, B 24/24 (strict substance check: 0 misses in either arm).
+  First ask: A 12/12, B 12/12. Topos T3 now answered by the model in all 4 runs (Ω + topos
+  axioms; no gate line).
+- The previous B-only advantages did not reproduce: Dark Matter modified-gravity half A 2/2, B 2/2;
+  Vaska explicit acknowledgement A 1/2, B 1/2.
+- Factual errors on follow-ups: A 1 (Pericyclic r1 T2: rule inverted, thermal hexatriene called
+  conrotatory), B 0.
+- Interpreter: 25 ok / 35 not_actionable, including ONE false positive (an option tap classified as
+  CORRECTION 0.86 and injected; grading unaffected — the tap was graded deterministically).
+  p50 471 ms. Turn p50 A 12.99 s, B 14.08 s (+1.1 s); p90 A 17.1 s, B 19.8 s.
+- Authority: every graded event was an option tap; typed follow-ups with an MCQ pending were
+  `chosen: null`; no mastery, no completion. One A PROBE_OUTCOME fail (perturbation) with no MCQ
+  shown — pre-existing model-SIGNAL path, origin not verified (truncated log window).
+- Conclusion: with the deterministic fixes, the interpreter adds no measurable follow-up benefit on
+  this benchmark, while costing about 1 s per turn at the median and one misclassification.
