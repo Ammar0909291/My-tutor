@@ -193,3 +193,15 @@ emitted no SIGNAL tag on the request turn; 0 PROBE_OUTCOME rows) — offline-val
   mirror class `attributionGuard.ts` documents as having no deterministic lever; left unchanged.
 - Observed, out of scope: "show why that happens step by step" opens an unresolved-topic
   excursion titled "why that happens step by step" (turn harness).
+- **Live QA after the fix (production 7dd33cda, one disposable account, deleted, re-login blocked):**
+  A "show why the term is negative" and B "Give me the second-order energy correction…" both ran
+  on relieved turns (`probeStarvationRelieved: true`, `probeStarvedTurnsBefore: 2`) and were
+  answered by the model (`RESPONSE provider=groq`) with the authored probe attached beneath.
+  C "why is that term zero?" (quiz pending, owner TEACH) again drew "So you're wondering whether
+  … vanishes — have I got that right?"; the premise was false (the prior reply showed the terms
+  are negative), so it reads as a clarification; unchanged. D opened the unresolved-topic detour;
+  E → `real_life_example`; F → owner TEACH, no request, treated as an answer.
+  DB: one unverified model-SIGNAL PROBE_OUTCOME pass (case F, a genuine typed answer,
+  `serverGraded: false`, verified counters 0) and one MISCONCEPTION_DETECTED whose text is the
+  learner's question (case C; correctness was dropped, the misconception phrase is not — the
+  guard drops only correctness by design). The latter is a remaining, unfixed observation.
