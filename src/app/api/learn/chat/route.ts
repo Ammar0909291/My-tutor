@@ -2767,10 +2767,23 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               ?? getKGNode(priorExcursionState.targetConceptId ?? '')?.title
               ?? '')
             : ''
+          // WHAT WAS ACTUALLY TAUGHT includes the tutor's own last two replies
+          // (2026-09-26). The KG description alone is one sentence, so a
+          // follow-up about what the tutor had JUST explained ("why every term
+          // is negative when n is the ground state", "the expected number of
+          // isolated vertices") read as an unknown topic and opened a detour
+          // that paused the lesson. Already-loaded rows; no new query. A topic
+          // the tutor never mentioned still opens a detour exactly as before.
+          const recentTutorText = learnSession.messages
+            .filter((m) => m.role === MessageRole.ASSISTANT)
+            .slice(0, 2)
+            .map((m) => m.content.replace(/<!--[\s\S]*?-->/g, ' ').slice(0, 4000))
+            .join(' ')
           const taughtText = [
             lessonNode?.title ?? '',
             lessonNode?.description ?? '',
             activeTopic,
+            recentTutorText,
           ].join(' ')
           return namedTopicUnknownTo(learnerAuthoredMessage, taughtText)?.title ?? null
         })()
@@ -6687,7 +6700,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           teachingSignal
           && teachingSignal.correctness !== undefined
           && mcqGradeHoisted === null
-          && detectLearnerQuestion(message)
+          // + an explicit request to the tutor / claim challenge (2026-09-26):
+          // "Give me the second-order energy correction…" (no '?') let the
+          // model's SIGNAL become a PROBE_OUTCOME row in the intent A/B rerun.
+          && (detectLearnerQuestion(message) || (await import('@/lib/teaching/mcq')).readsAsRequestToTutor(message))
         ) {
           console.log('[learner-asked-question]', { learnerMessage: message.slice(0, 40) })
           teachingSignal = { ...teachingSignal, correctness: undefined }

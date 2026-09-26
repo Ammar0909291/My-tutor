@@ -822,8 +822,25 @@ export function detectLearnerRequest(message: string): LearnerRequest | null {
   if (EXPLAIN_DIFF_RE.test(text)) return 'explain_differently'
   // A bare mention, below confusion — see mentionsAVisualMedium.
   if (mentionsAVisualMedium(text)) return 'diagram'
-  if (EXAMPLE_RE.test(text)) return 'real_life_example'
+  if (EXAMPLE_RE.test(withoutExampleDiscourseMarker(text))) return 'real_life_example'
   return null
+}
+
+/**
+ * "FOR EXAMPLE, …" INSIDE AN ANSWER IS NOT A REQUEST FOR ONE (2026-09-26).
+ *
+ * `EXAMPLE_RE` fires on the bare word, so a learner ANSWERING with an
+ * illustration — "for example, when I push a box it moves" — was read as
+ * asking for a real-life example: the LEARNER_REQUEST rung took the turn,
+ * suppressed the authored probe and replaced the move with an example
+ * directive. The discourse marker ("for example" / "for instance" / "e.g.")
+ * is removed before the test, UNLESS it ends the message ("like what, for
+ * example?"), where it is the ask itself. Any other mention of "example"
+ * still counts exactly as before.
+ */
+function withoutExampleDiscourseMarker(text: string): string {
+  return text
+    .replace(/\b(?:for\s+(?:example|instance)|e\.g\.)(?!\s*[?.!…]*\s*$)/gi, ' ')
 }
 
 /**
