@@ -146,3 +146,24 @@ E4 resolver, CONCRETE_EXAMPLE form, "show me how/why" ≠ diagram, typed non-ans
 visual disambiguation context, request-to-tutor priority over the probe gate, EGRESS-4.
 The generic turn-harness support for request headers / `modelOverrideAllowed` is kept (test-only).
 The A/B experiment is CLOSED.
+
+## Post-closure — remaining known issues (2026-09-26, deterministic only)
+Owner: "fix the remaining known issues". No interpreter code reintroduced.
+- **#1 unresolved-topic detour on follow-ups** (`route.ts`): `namedTopicUnknownTo`'s taught text now
+  also includes the tutor's last two replies (SIGNAL/HTML comments stripped, 4 000 chars each), so a
+  follow-up that reuses words the tutor just taught no longer opens a detour; an unmentioned topic
+  still does.
+- **#2 "the/this term" cross-subject** (`requestedConcept.ts`, E4b): demonstratives
+  this/that/these/those join E4's determiners; "the" counts only when followed by a subject
+  predicate (is/are/has/does/can/…) AND further words. Sweep vs e6600ce3, 50,160 lookups: 0 of
+  32,604 must-not-change phrasings changed ("teach me the W", "what the W is", "explain the W
+  please", …); 2,413 target phrasings changed, all to null.
+- **#3 "for example, …" inside an answer** (`masteryGate.ts`): `withoutExampleDiscourseMarker`
+  strips "for example / for instance / e.g." before `EXAMPLE_RE` unless the marker ends the message
+  ("for example?", "like what, for example?" still requests).
+- **#5 model SIGNAL on a request turn** (`route.ts`): the learner-question guard at the signal seam
+  also admits `readsAsRequestToTutor`, so a request/claim-challenge with no '?' drops the model's
+  correctness (never fabricates); a typed answer keeps its signal.
+- **#4 model factual slips: NOT fixed.** Needs a content verifier (the Deterministic Physics
+  Verifier primitive), explicitly deferred in CLAUDE.md.
+- Tests: `remainingMisreadFixes.test.ts` (15; route-level fixes mutation-checked).
