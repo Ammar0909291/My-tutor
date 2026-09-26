@@ -2303,6 +2303,148 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
       { name: 'Occipital lobe', description: 'visual processing' },
     ],
   }),
+
+  // Batch 12 (bio.neuro, 9 concepts; bio.physio, 3 concepts):
+  'bio.neuro.cognitive-neuroscience-consciousness': () => buildCellHubScene({
+    conceptId: 'bio.neuro.cognitive-neuroscience-consciousness',
+    hubLabel: 'Cognitive neuroscience of consciousness: three distinct lines of evidence',
+    title: 'Attention, Neural Correlates, and Split-Brain Evidence',
+    teachingGoal: 'Identifying a neural CORRELATE of a conscious experience is not the same as EXPLAINING why that brain activity produces subjective experience at all.',
+    spokes: [
+      { name: 'Top-down control', description: 'higher-order goals actively bias earlier sensory/motor processing, unlike passive bottom-up, stimulus-driven processing' },
+      { name: 'Neural correlates of consciousness', description: 'identifying brain activity that co-occurs with an experience is a correlation, not an explanation of how it arises' },
+      { name: 'Split-brain evidence', description: 'severing the corpus callosum can behaviourally dissociate one unified experience into two independent processing streams' },
+    ],
+  }),
+
+  'bio.neuro.learning-memory-neurobiology': () => buildCellComparisonScene({
+    conceptId: 'bio.neuro.learning-memory-neurobiology',
+    title: 'Declarative vs Procedural Memory: Separate Neural Systems',
+    teachingGoal: 'Patients with hippocampal damage can show severely impaired declarative memory formation while still learning new motor skills — direct evidence these are separate systems, not one common memory centre.',
+    groups: [
+      { label: 'Declarative memory', description: 'facts and events, consciously recalled', items: ['Formation depends on the hippocampus', 'Can consolidate elsewhere in cortex over time', 'Impaired by hippocampal damage'] },
+      { label: 'Procedural memory', description: 'skills and habits', items: ['Depends on basal ganglia and cerebellum', 'Does not require the hippocampus', 'Preserved even with hippocampal damage'] },
+    ],
+  }),
+
+  'bio.neuro.neural-circuits-computation': () => buildCellHubScene({
+    conceptId: 'bio.neuro.neural-circuits-computation',
+    hubLabel: 'Four recurring circuit motifs, each a distinct computation',
+    title: 'Neural Circuit Motifs: Inhibition, Coding, and Rhythm',
+    teachingGoal: 'Inhibition is not merely a "brake" — it is an active, shaping computational element, whether sharpening timing (feedforward) or sharpening contrast (lateral).',
+    spokes: [
+      { name: 'Feedforward inhibition', description: 'excitation reaches the target directly and via a delayed inhibitory relay, sharpening response timing' },
+      { name: 'Lateral inhibition', description: 'an active neuron inhibits its neighbours via interneurons, sharpening contrast at edges' },
+      { name: 'Rate vs temporal coding', description: 'information is carried either in overall firing rate or in the precise timing/pattern of spikes' },
+      { name: 'Central pattern generators', description: 'rhythmic output emerges from the circuit\'s own connectivity, without rhythmic input timing' },
+    ],
+  }),
+
+  'bio.neuro.neurodegenerative-disease': () => buildCellComparisonScene({
+    conceptId: 'bio.neuro.neurodegenerative-disease',
+    title: "Alzheimer's Two Hallmarks: Different Proteins, Different Locations",
+    teachingGoal: 'These are genuinely different proteins aggregating in different cellular compartments, not two names for the same underlying structure.',
+    groups: [
+      { label: 'Amyloid-beta plaques', description: 'extracellular deposits, outside neurons', items: ['Formed from misfolded, aggregated amyloid-beta fragments', 'Accumulate in the spaces between neurons'] },
+      { label: 'Tau neurofibrillary tangles', description: 'intracellular structures, inside neurons', items: ['Formed from misfolded, hyperphosphorylated tau protein', 'Disrupt the neuron\'s internal microtubule transport'] },
+    ],
+  }),
+
+  'bio.neuro.neurodevelopment': () => buildCellPathwayScene({
+    conceptId: 'bio.neuro.neurodevelopment',
+    title: 'Neural Development: An Ordered Sequence',
+    teachingGoal: 'Synaptic pruning is a selective, activity-dependent refinement — frequently-used synapses are strengthened and retained, weakly-used ones are eliminated — not a random or indiscriminate reduction.',
+    stages: [
+      { name: 'Neurulation', description: 'the neural plate folds and closes into the neural tube, which becomes the entire CNS' },
+      { name: 'Neuronal migration', description: 'new neurons travel along radial glia "guide rails" to their final position' },
+      { name: 'Synaptogenesis', description: 'synaptic connections form on a massive scale, far more than will be retained' },
+      { name: 'Activity-dependent pruning', description: 'frequently-used synapses are strengthened and retained; weakly-used ones are selectively eliminated' },
+    ],
+  }),
+
+  'bio.neuro.neurotransmitter-systems': () => buildCellComparisonScene({
+    conceptId: 'bio.neuro.neurotransmitter-systems',
+    title: 'Ionotropic vs Metabotropic Receptors',
+    teachingGoal: "Whether a neurotransmitter's effect is excitatory or inhibitory is determined by the RECEPTOR it binds, not by a fixed property of the molecule itself.",
+    groups: [
+      { label: 'Ionotropic receptors', description: 'ligand-gated ion channels', items: ['Binding directly opens the channel', 'Fast, millisecond-scale postsynaptic response'] },
+      { label: 'Metabotropic receptors', description: 'not ion channels themselves', items: ['Binding activates a G-protein and second-messenger cascade', 'Slower, but can produce more prolonged, widespread effects'] },
+    ],
+  }),
+
+  'bio.neuro.sensory-transduction': () => buildCellHubScene({
+    conceptId: 'bio.neuro.sensory-transduction',
+    hubLabel: 'Four receptor categories, one shared transduction logic',
+    title: 'Four Sensory Receptor Categories',
+    teachingGoal: 'Despite transducing very different physical stimulus types, all four categories convert their stimulus into the same general form: a graded receptor potential.',
+    spokes: [
+      { name: 'Photoreceptors', description: 'respond to light — e.g. rod and cone cells in the retina' },
+      { name: 'Mechanoreceptors', description: 'respond to physical deformation — pressure, stretch, vibration' },
+      { name: 'Chemoreceptors', description: 'respond to specific chemical molecules — taste and smell' },
+      { name: 'Thermoreceptors', description: 'respond to temperature change' },
+    ],
+  }),
+
+  'bio.neuro.sleep-circadian-biology': () => buildCellPathwayScene({
+    conceptId: 'bio.neuro.sleep-circadian-biology',
+    title: 'The Molecular Clock: A Self-Sustaining Negative-Feedback Loop',
+    teachingGoal: "The pathway's own protein products eventually suppress their own gene's further activation — as PER/CRY levels decline, the inhibition lifts and a new cycle begins.",
+    cyclic: true,
+    stages: [
+      { name: 'CLOCK/BMAL1 activation', description: 'the CLOCK and BMAL1 proteins combine and activate transcription of the PER and CRY genes' },
+      { name: 'PER/CRY accumulation', description: 'the resulting PER and CRY proteins build up as they are translated' },
+      { name: 'Negative feedback inhibition', description: 'once sufficiently abundant, PER/CRY inhibit CLOCK/BMAL1\'s own transcriptional activity' },
+      { name: 'Protein decline', description: 'PER/CRY degrade, lifting the inhibition and allowing a new cycle of transcription to begin' },
+    ],
+  }),
+
+  'bio.neuro.vision-visual-system': () => buildCellPathwayScene({
+    conceptId: 'bio.neuro.vision-visual-system',
+    title: 'The Visual Pathway: From Light to Conscious Perception',
+    teachingGoal: 'The eye is fundamentally a signal-capturing and initial-processing organ — the actual "seeing" is a brain function occurring at the end of this multi-stage pathway, not at the retina itself.',
+    stages: [
+      { name: 'Cornea and lens', description: 'focus incoming light onto the retina' },
+      { name: 'Retina (rods and cones)', description: 'photoreceptors detect the light via the phototransduction cascade' },
+      { name: 'Bipolar and ganglion cells', description: 'process and relay the signal; ganglion cell axons form the optic nerve' },
+      { name: 'Visual cortex', description: 'the brain finally processes the signal into conscious visual experience' },
+    ],
+  }),
+
+  'bio.physio.blood-physiology-hemostasis': () => buildCellPathwayScene({
+    conceptId: 'bio.physio.blood-physiology-hemostasis',
+    title: 'Haemostasis: Three Progressively More Durable Responses',
+    teachingGoal: 'The coagulation cascade reinforces the platelet plug rather than replacing it — haemostasis is a sequence of increasingly durable responses, not one simultaneous event.',
+    stages: [
+      { name: 'Vascular spasm', description: 'the injured vessel\'s smooth muscle constricts immediately — fastest, but only temporary' },
+      { name: 'Platelet plug formation', description: 'platelets adhere to exposed collagen and aggregate into a temporary plug' },
+      { name: 'Coagulation cascade', description: 'clotting factors convert fibrinogen into fibrin, forming a durable mesh that reinforces the plug' },
+    ],
+  }),
+
+  'bio.physio.comparative-animal-physiology': () => buildCellHubScene({
+    conceptId: 'bio.physio.comparative-animal-physiology',
+    hubLabel: 'Four strategies, one shared surface-area-to-volume problem',
+    title: 'Four Gas-Exchange Strategies, One Shared Constraint',
+    teachingGoal: 'Despite very different specific structures, all four strategies solve the identical surface-area-to-volume constraint through the same general principle.',
+    spokes: [
+      { name: 'Gills', description: 'highly-branched, thin-walled structures that increase surface area exposed to water' },
+      { name: 'Tracheal systems', description: 'branching tubes that deliver air directly to tissues, used by insects' },
+      { name: 'Book lungs', description: 'internal, stacked, leaf-like structures, used by some arachnids' },
+      { name: 'Alveolar lungs', description: 'millions of tiny, thin-walled alveoli, used by most terrestrial vertebrates' },
+    ],
+  }),
+
+  'bio.physio.endocrine-disorders-feedback': () => buildCellPathwayScene({
+    conceptId: 'bio.physio.endocrine-disorders-feedback',
+    title: 'Oxytocin in Childbirth: A Positive-Feedback Exception',
+    teachingGoal: 'This is not a malfunctioning negative-feedback system — it is a different, positive-feedback architecture deliberately suited to a process that benefits from escalation toward a specific endpoint.',
+    cyclic: true,
+    stages: [
+      { name: 'Cervix stretch', description: 'the baby\'s head presses against and stretches the cervix' },
+      { name: 'Oxytocin release', description: 'the stretch triggers release of oxytocin' },
+      { name: 'Intensified contractions', description: 'oxytocin strengthens uterine contractions, pushing the baby further against the cervix' },
+    ],
+  }),
 }
 
 const DANIELL_CELL: ElectrochemicalCellParams = {

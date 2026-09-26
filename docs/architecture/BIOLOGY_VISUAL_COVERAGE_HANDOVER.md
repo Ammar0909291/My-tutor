@@ -92,12 +92,39 @@ all 161 static-audit-flagged concepts.
   growth doesn't require touching them — leave them as `>=` checks, don't "fix" them back to exact
   counts.
 
-## Current status (2026-09-25, after batch 11)
+## Current status (2026-09-26, after batch 12)
 
-**131 of 161 statically-flagged concepts fixed and verified** (`tsc` 0 errors, 479/479 targeted
-tests passing, 15,392 passing / 9 skipped in the full suite, 0 duplicate seed identities). 11
-batches committed so far; batch 11 pushed (batch 10's push is confirmed landed on `main` as
-`b681332d`; batch 11 push is the very next action after this update).
+**143 of 161 statically-flagged concepts fixed and verified** (`tsc` 0 errors, 515/515 targeted
+tests passing, 15,517 passing / 9 skipped in the full suite, 0 duplicate seed identities —
+10,602 items). 12 batches committed so far; batch 11 confirmed landed on `main` as `6b5c580b`;
+batch 12 push is the very next action after this update.
+
+Batch 12 (12 concepts: `bio.neuro.cognitive-neuroscience-consciousness` — HUB, three distinct
+lines of evidence (top-down vs bottom-up control, neural correlates of consciousness, split-brain
+hemispheric dissociation); `bio.neuro.learning-memory-neurobiology` — COMPARISON, declarative
+(hippocampus-dependent) vs procedural (basal-ganglia/cerebellum-dependent) memory systems;
+`bio.neuro.neural-circuits-computation` — HUB, four circuit motifs (feedforward inhibition,
+lateral inhibition, rate vs temporal coding, central pattern generators);
+`bio.neuro.neurodegenerative-disease` — COMPARISON, amyloid-beta plaques (extracellular) vs tau
+tangles (intracellular) — the EB entry explicitly warns these must not be conflated;
+`bio.neuro.neurodevelopment` — PATHWAY, neurulation → neuronal migration → synaptogenesis →
+activity-dependent pruning; `bio.neuro.neurotransmitter-systems` — COMPARISON, ionotropic
+(fast, direct channel) vs metabotropic (slow, second-messenger) receptors;
+`bio.neuro.sensory-transduction` — HUB, four receptor categories (photo/mechano/chemo/thermo)
+sharing one transduction logic; `bio.neuro.sleep-circadian-biology` — PATHWAY, cyclic: true, the
+molecular clock's negative-feedback loop (CLOCK/BMAL1 → PER/CRY accumulation → inhibition →
+decline → repeat); `bio.neuro.vision-visual-system` — PATHWAY, cornea/lens → retina →
+bipolar/ganglion cells → visual cortex; `bio.physio.blood-physiology-hemostasis` — PATHWAY,
+vascular spasm → platelet plug → coagulation cascade, the EB entry's own explicit three-stage
+sequence; `bio.physio.comparative-animal-physiology` — HUB, four gas-exchange strategies (gills,
+tracheal systems, book lungs, alveolar lungs) all solving the same surface-area-to-volume
+constraint; `bio.physio.endocrine-disorders-feedback` — PATHWAY, cyclic: true, oxytocin's
+positive-feedback loop during childbirth (cervix stretch → oxytocin release → intensified
+contractions → more stretch), the EB entry's explicit exception to negative feedback) validated
+clean: `tsc --noEmit` 0 errors, 515/515 targeted tests passing (up from 479), 15,517/15,526 full
+suite passing (9 pre-existing skips), dry-run seed script "Identity check passed: 10602 items,
+10602 distinct identities, 0 duplicates". No stale-count landmine found for any of these 12
+concept IDs elsewhere in the test suite (grepped before starting).
 
 Batch 10 (12 concepts — see git log commit `53722909`/`b681332d` for the full list: reptile/bird
 diversity, coevolution, convergent evolution, macroevolution/extinction, phylogeography,
@@ -126,26 +153,14 @@ cortex's four lobes) validated clean: `tsc --noEmit` 0 errors, 479/479 targeted 
 15,392/15,401 full-suite tests passing (9 pre-existing skips, unrelated to this campaign), dry-run
 seed script 0 duplicate identities (10,462 items).
 
-### Remaining frontier — 30 concept IDs not yet fixed
+### Remaining frontier — 18 concept IDs not yet fixed
 
 One further concept (`bio.plant.plant-respiration`) is a **confirmed non-defect**, deliberately
 excluded from `CAMPAIGN_FIXED_CONCEPTS` because it already serves a real Tier 3 figure — do not
-"fix" it, just don't count it against progress. The other 29 are genuinely unclassified/unauthored:
+"fix" it, just don't count it against progress. The other 17 are genuinely unclassified/unauthored:
 
 ```
 bio.plant.plant-respiration            (confirmed already working — do NOT author, leave as-is)
-bio.neuro.cognitive-neuroscience-consciousness
-bio.neuro.learning-memory-neurobiology
-bio.neuro.neural-circuits-computation
-bio.neuro.neurodegenerative-disease
-bio.neuro.neurodevelopment
-bio.neuro.neurotransmitter-systems
-bio.neuro.sensory-transduction
-bio.neuro.sleep-circadian-biology
-bio.neuro.vision-visual-system
-bio.physio.blood-physiology-hemostasis
-bio.physio.comparative-animal-physiology
-bio.physio.endocrine-disorders-feedback
 bio.physio.exercise-physiology
 bio.physio.homeostasis-thermoregulation
 bio.physio.integumentary-system

@@ -178,6 +178,19 @@ export const CAMPAIGN_FIXED_CONCEPTS = [
   'bio.neuro.audition-vestibular-system',
   'bio.neuro.autonomic-stress-physiology',
   'bio.neuro.brain-regional-organization',
+  // Batch 12 — bio.neuro (9), bio.physio (3)
+  'bio.neuro.cognitive-neuroscience-consciousness',
+  'bio.neuro.learning-memory-neurobiology',
+  'bio.neuro.neural-circuits-computation',
+  'bio.neuro.neurodegenerative-disease',
+  'bio.neuro.neurodevelopment',
+  'bio.neuro.neurotransmitter-systems',
+  'bio.neuro.sensory-transduction',
+  'bio.neuro.sleep-circadian-biology',
+  'bio.neuro.vision-visual-system',
+  'bio.physio.blood-physiology-hemostasis',
+  'bio.physio.comparative-animal-physiology',
+  'bio.physio.endocrine-disorders-feedback',
 ] as const
 
 describe.each(CAMPAIGN_FIXED_CONCEPTS)('%s now resolves to a faithful Tier 0 scene', (conceptId) => {
