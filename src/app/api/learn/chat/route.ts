@@ -6695,15 +6695,21 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // answered (tapped an option -> a server grade resolved) is untouched;
           // that authoritative grade sets correctness a few lines below.
           //
-          // Only `correctness` is dropped. `confusion`/`confidence` are the
+          // Only `correctness` (and `phrase`, below) is dropped. `confusion`/`confidence` are the
           // model's read of the learner's BEHAVIOUR, not a claim about an
           // answer, so they survive and the clarification still routes to
           // teaching (never fabricated: this records no correctness, never a
           // wrong answer). With correctness gone the fold takes its non-answer
           // path — no plain counter, no verified counter, no mastery credit —
           // so a question cannot become gradeable evidence.
+          //
+          // + the misconception `phrase` (2026-09-26, live QA): the SIGNAL
+          // contract says a question carries no tag at all (signals.ts), yet
+          // "why is that term zero?" became a MISCONCEPTION_DETECTED row whose
+          // text was the question itself. Dropped with correctness, and also
+          // when the model sent a phrase without correctness.
           teachingSignal
-          && teachingSignal.correctness !== undefined
+          && (teachingSignal.correctness !== undefined || teachingSignal.phrase !== undefined)
           && mcqGradeHoisted === null
           // + an explicit request to the tutor / claim challenge (2026-09-26):
           // "Give me the second-order energy correction…" (no '?') let the
@@ -6711,7 +6717,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           && (detectLearnerQuestion(message) || (await import('@/lib/teaching/mcq')).readsAsRequestToTutor(message))
         ) {
           console.log('[learner-asked-question]', { learnerMessage: message.slice(0, 40) })
-          teachingSignal = { ...teachingSignal, correctness: undefined }
+          teachingSignal = { ...teachingSignal, correctness: undefined, phrase: undefined }
         }
       }
 
