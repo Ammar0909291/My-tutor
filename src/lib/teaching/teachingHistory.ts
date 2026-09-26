@@ -64,6 +64,24 @@ export interface TeachingHistory {
    * looked correct to every layer involved.
    */
   explanationsServed: string[]
+  /**
+   * Fingerprints of AUTHORED questions the learner answered WRONG and that may
+   * still be asked ONE more time — only once every unasked authored question
+   * for the concept is spent (`findBestProbe`'s `allowMissedStem`).
+   *
+   * Measured on a real account (chem.found.stoichiometry, 2026-09-24): one
+   * wrong answer at PRACTICE dropped the learner to CHECK, the remaining pool
+   * was spent there, and at PRACTICE 2/0 no gradeable question was left —
+   * mastery became unreachable after a single mistake. Re-asking a spent
+   * question was rejected earlier because it would let one question be
+   * answered three times and called mastery; that cannot happen here, because
+   * only a question answered WRONG qualifies and it moves to `mcqReasked` the
+   * moment it is asked again, so every authored question yields at most one
+   * correct answer. Owner-approved (G2) 2026-09-24.
+   */
+  mcqMissed: string[]
+  /** Fingerprints already given their one re-ask. Never re-asked again. */
+  mcqReasked: string[]
 }
 
 export type ConfidenceReading = 'high' | 'medium' | 'low'
@@ -88,6 +106,8 @@ export function initialTeachingHistory(conceptId: string | null): TeachingHistor
     mcqAsked: [],
     misconceptionStatus: {},
     explanationsServed: [],
+    mcqMissed: [],
+    mcqReasked: [],
   }
 }
 
@@ -225,6 +245,36 @@ export function recordMcqAsked(h: TeachingHistory, question: string): TeachingHi
   const fp = memoryFingerprint(question)
   if (!fp || h.mcqAsked.includes(fp)) return h
   return { ...h, mcqAsked: [...h.mcqAsked, fp] }
+}
+
+/** May this question be asked again? True only for a missed authored
+ *  question that has not had its one re-ask. See `mcqMissed`. */
+export function isMissedAndReaskable(h: TeachingHistory, question: string): boolean {
+  const fp = memoryFingerprint(question)
+  return fp.length > 0 && h.mcqMissed.includes(fp) && !h.mcqReasked.includes(fp)
+}
+
+/**
+ * Record how a spent question ended. Called beside `recordMcqAsked` at the one
+ * place a question is spent (graded, or released unanswered).
+ *
+ *   a question that was a RE-ASK (still in `mcqMissed`) -> moved to
+ *     `mcqReasked`, whatever the outcome: it has had its second chance
+ *   otherwise, graded WRONG -> added to `mcqMissed` (eligible for one re-ask)
+ *   anything else -> unchanged
+ *
+ * NOT idempotent (a re-ask moves on), and it need not be: it runs once per
+ * turn, in the primary fold OR in the snapshot rederiver, which replaces that
+ * fold on a write conflict — never both.
+ */
+export function recordMcqOutcome(h: TeachingHistory, question: string, gradedCorrect: boolean | null): TeachingHistory {
+  const fp = memoryFingerprint(question)
+  if (!fp || h.mcqReasked.includes(fp)) return h
+  if (h.mcqMissed.includes(fp)) {
+    return { ...h, mcqMissed: h.mcqMissed.filter((x) => x !== fp), mcqReasked: [...h.mcqReasked, fp] }
+  }
+  if (gradedCorrect === false) return { ...h, mcqMissed: [...h.mcqMissed, fp] }
+  return h
 }
 
 /** Append a confidence reading to the trail and update the current value. */

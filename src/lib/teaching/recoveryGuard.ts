@@ -412,10 +412,27 @@ const TEST_ME_RE =
 /** A bare "next" / "keep going" style nudge, with no content of its own. */
 const BARE_NEXT_RE = /^(?:ok(?:ay)?[\s,.]*)?(?:next|another|more|again|continue|carry\s+on|go\s+on|keep\s+going)\s*(?:please|one|question)?[\s.!?]*$/i
 
+/**
+ * A request after a short lead-in is still a request. Synthetic-student smoke
+ * run, 2026-09-24 (phys.mech.displacement, production): a learner who had
+ * answered three questions right sent "can we move faster? give me a question"
+ * six times. Anchored at the start, none of the patterns above matched, so the
+ * repeat read as 'frustrated', recovery refused every question, and the ladder
+ * walked CHECK -> GUIDE -> DEMONSTRATE until the lesson closed "for another
+ * look later". The same held for "got it. test me please" and "cool. ok test
+ * me". Each clause after the first is tested on its own; the length cap and
+ * the patterns themselves are unchanged.
+ */
+const CLAUSE_SPLIT_RE = /(?<=[.?!;:])\s+|,\s+/
+/** A clause must name what is asked for — "one of them is heavier" is an answer, not a request. */
+const REQUEST_WORD_RE = /\b(?:questions?|problems?|exercises?|examples?|next|another|more|test|quiz|check)\b/i
+
 function isNextItemRequest(text: string): boolean {
   const t = text.trim()
   if (t.length > MILD_MAX_LENGTH) return false
-  return NEXT_ITEM_REQUEST_RE.test(t) || BARE_NEXT_RE.test(t) || TEST_ME_RE.test(t)
+  const asks = (s: string) => NEXT_ITEM_REQUEST_RE.test(s) || BARE_NEXT_RE.test(s) || TEST_ME_RE.test(s)
+  if (asks(t)) return true
+  return t.split(CLAUSE_SPLIT_RE).slice(1).some((clause) => REQUEST_WORD_RE.test(clause) && asks(clause.trim()))
 }
 
 function isRepeatedAnswer(message: string, priorUserMessage: string | null | undefined): boolean {

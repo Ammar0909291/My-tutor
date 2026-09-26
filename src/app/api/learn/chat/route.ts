@@ -2799,6 +2799,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // equality. `pendingMcqHoisted` is the CURRENT question only — it comes
           // from readPendingQuestion, which returns null on a lesson mismatch.
           offeredMcqOptions: pendingMcqHoisted?.options,
+          // The lesson question on screen, and whether this message was graded
+          // against it. An excursion records the question at opening; answering
+          // exactly that question closes it as 'closed-answered-lesson' and the
+          // turn counts for the lesson (see ExcursionState.heldQuestion).
+          pendingQuestion: pendingMcqHoisted?.question ?? null,
+          answeredPendingQuestion: mcqGradeHoisted !== null,
           // Phase 2: the turn read itself two contradictory ways. Hold the
           // teaching context rather than let either reading change it. This is
           // the ONE place ambiguity is given authority — everything else on
@@ -3026,6 +3032,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // whatever §4.4 misses, this still misses too. Widening that
             // detector is explicitly out of scope this batch (design doc
             // §8 row 6, "fixed separately").
+            const { readsAsRequestToTutor } = await import('@/lib/teaching/mcq')
             const { readLearnerMove } = await import('@/lib/teaching/learnerMove')
             learnerMoveStageAHoisted = learnerMoveStageAHoisted ?? readLearnerMove(turnIntent, {
               isBareAcknowledgement: isBareAckHoisted,
@@ -3055,7 +3062,21 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 learnerMoveStageAHoisted.has('HELP_REQUEST') || learnerMoveStageAHoisted.ambiguous,
               closing: sessionEpisodeHoisted.phase === 'CLOSING',
               completionReady: lessonCompletedHoisted,
-              genuineQuestionActive: detectLearnerQuestion(turnIntent.message) && pendingMcqHoisted === null,
+              // A REQUEST TO BE ASKED IS NOT A QUESTION TO ANSWER FIRST.
+              // Synthetic-student after-run, 2026-09-24 (production 1f438cd,
+              // phys.mech.displacement): "can we move faster? give me a
+              // question" at CHECK and "can you check me with a question?" at
+              // GUIDE carry a '?', so LEARNER_QUESTION owned the turn and
+              // denied AUTHORED_PROBE ([arbitration] owner LEARNER_QUESTION,
+              // [gate-eligibility] blockedBy arbitrationAllowsProbe) while the
+              // same turn read PRACTICE_REQUEST. The learner asked for exactly
+              // what the rung refused; answering "first" meant never.
+              // + an explicit request to the tutor (2026-09-25, topos A/B: an
+              // imperative follow-up was pre-empted by the probe gate). Same
+              // reading the grader uses; see requestBeforeProbeGate.test.ts.
+              genuineQuestionActive: (detectLearnerQuestion(turnIntent.message) || readsAsRequestToTutor(turnIntent.message))
+                && pendingMcqHoisted === null
+                && !turnIntent.wantsPractice,
             })
             const arb = turnArbitrationHoisted
             console.log('[arbitration]', {
@@ -3838,6 +3859,17 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // One detection, two consumers: the turn directive below and the
           // conversation-state fold after the LLM call.
           lowSignalAckHoisted = isLowSignalAcknowledgement(message)
+          // THIS turn's server grade, when it was against an authored key, is
+          // what the acknowledgement must answer — not the previous turn's
+          // SIGNAL. Synthetic run 2026-09-25 (phys.mech.force, beginner): a
+          // right answer after two misses was told "This is genuinely tricky —
+          // let me try a completely different angle". A model-invented key is
+          // left out, as everywhere else that states a verdict.
+          const { probeKeyIsAuthored: ackKeyIsAuthored } = await import('@/lib/teaching/mcq')
+          const ackThisTurnCorrect: boolean | null =
+            mcqGradeHoisted && typeof mcqGradeHoisted.correct === 'boolean' && ackKeyIsAuthored(pendingMcqHoisted)
+              ? mcqGradeHoisted.correct
+              : null
           systemPrompt += buildTurnDirective({
             state: conversationStateHoisted,
             nextMove,
@@ -3918,7 +3950,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 ? (snapshot.lastSignal as { correctness?: boolean }).correctness ?? null
                 : null
               return classifyAcknowledgementContext(
-                conversationStateHoisted, prevSig, recoveryKeyHoisted !== null, navigationRequestHoisted,
+                conversationStateHoisted, ackThisTurnCorrect ?? prevSig, recoveryKeyHoisted !== null, navigationRequestHoisted,
               )
             })(),
           })
@@ -3942,9 +3974,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 visualDecisionHoisted?.graphical ?? false,
               )
             } else {
+              // The FORM of an example request (everyday vs a concrete instance
+              // in the subject's own terms) — prompt text only; the request
+              // kind every authority reads is unchanged. See requestedExampleForm.
+              const { requestedExampleForm } = await import('@/lib/teaching/masteryGate')
               systemPrompt += buildLearnerRequestBlock(
                 learnerRequestHoisted, availableVisualHoisted, remediationTier, hasEstablishedExample,
                 undefined, undefined, visualDecisionHoisted?.graphical ?? false,
+                requestedExampleForm(learnerAuthoredMessage),
               )
             }
           }
@@ -4806,11 +4843,21 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // refuses a second early spend at DEMONSTRATE — the same guarantee
         // that already protects DEMONSTRATE alone, extended by reusing the
         // identical arithmetic rather than a second threshold.
+        // TRANSFER below the verified bar (owner-approved, 2026-09-24): the
+        // ladder can reach TRANSFER on plain credit with verified evidence
+        // short of the bar, and TRANSFER is not a mastery-gate phase, so no
+        // authored question was ever attached there again and the lesson could
+        // never certify. Until the bar is met, TRANSFER keeps assessing with
+        // authored questions; a server-graded right answer then tops up the
+        // lowest unmet verified counter (conversationState's TRANSFER case).
+        const { transferBelowVerifiedBar } = await import('@/lib/teaching/conversationState')
+        const transferNeedsVerifiedCredit = transferBelowVerifiedBar(conversationStateHoisted)
         const phaseAllowsProbe =
           isMasteryGatePhase(phaseBeforeTurn) ||
           (phaseBeforeTurn === 'GUIDE' && evidenceMoveHoisted === 'ask') ||
           (phaseBeforeTurn === 'DEMONSTRATE') ||
-          (phaseBeforeTurn === 'OBSERVE' && evidenceMoveHoisted === 'ask')
+          (phaseBeforeTurn === 'OBSERVE' && evidenceMoveHoisted === 'ask') ||
+          transferNeedsVerifiedCredit
         phaseAllowsProbeHoisted = phaseAllowsProbe
         // R82: the mirror image of the OBSERVE disjunct just above. R81
         // measured 79/238 concepts failing certification because OBSERVE's
@@ -4922,7 +4969,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // caller this comment already protects is unaffected.
           probeAttachablePhase:
             isProbeAttachablePhase(phaseBeforeTurn) || phaseBeforeTurn === 'DEMONSTRATE' ||
-            (phaseBeforeTurn === 'OBSERVE' && evidenceMoveHoisted === 'ask'),
+            (phaseBeforeTurn === 'OBSERVE' && evidenceMoveHoisted === 'ask') ||
+            transferNeedsVerifiedCredit,
           hasMemoryState: memoryState !== null,
           noUnansweredProbeOnScreen: !unansweredProbeOnScreen,
           notFirstLesson: !firstLessonActiveHoisted,
@@ -4957,7 +5005,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         {
           const { gateRefusedOnPolicy } = await import('@/lib/teaching/inventedProbeGuard')
           gateDeclinedByPolicyHoisted = gateRefusedOnPolicy(gateTerms)
-          probeWouldCountThisPhaseHoisted = isProbeAttachablePhase(phaseBeforeTurn)
+          probeWouldCountThisPhaseHoisted = isProbeAttachablePhase(phaseBeforeTurn) || transferNeedsVerifiedCredit
         }
         console.log('[gate-eligibility] ' + JSON.stringify({
           phase: phaseBeforeTurn,
@@ -4977,7 +5025,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         }))
         if (gateEligible && memoryState) {
           const { findBestProbe } = await import('@/lib/teaching/assets')
-          const { hasAskedMcq, recordMcqAsked: recordMcqAskedForGate } =
+          const { hasAskedMcq, recordMcqAsked: recordMcqAskedForGate, isMissedAndReaskable, memoryFingerprint } =
             await import('@/lib/teaching/teachingHistory')
           const { stripAuthoringLabel } = await import('@/lib/teaching/gateProbeContract')
           const history = teachingHistoryHoisted
@@ -5050,6 +5098,20 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // accepts non-MCQ probes and renders them as prose follow-ups.
             requireMcq: true,
             onAllCandidatesSpent: () => { authoredPoolExhaustedHoisted = true },
+            // Owner-approved (G2, 2026-09-24): once every unasked question is
+            // spent, a question the learner got WRONG may be asked once more.
+            // Read from the ledger as it stood BEFORE this turn, so a question
+            // missed on this very turn is never asked straight back. Below
+            // GUIDE the surplus rule already refuses a pool this small.
+            // The question graded THIS turn is never the one re-asked.
+            allowMissedStem: history && phaseBeforeTurn !== 'OBSERVE' && phaseBeforeTurn !== 'DEMONSTRATE'
+              ? (stem) => {
+                const q = stripAuthoringLabel(stem)
+                const gradedNow = mcqGradeHoisted && pendingMcqHoisted?.question
+                  ? memoryFingerprint(pendingMcqHoisted.question) === memoryFingerprint(q) : false
+                return !gradedNow && isMissedAndReaskable(history, q)
+              }
+              : undefined,
           })
           // THE SURPLUS RULE. Spending a probe below the mastery gates is only
           // safe while three remain afterwards, because mastery needs three
@@ -5075,6 +5137,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             }))
           }
           const converted = probe && !belowGuideBlocked ? probeToMcq(probe) : null
+          // A re-ask arrives from the selector with its options already rotated.
+          if (converted && probe?.reask) {
+            console.log('[gate-assessment] ' + JSON.stringify({ event: 'missed-probe-reasked', phase: phaseBeforeTurn, assetId: probe.assetId }))
+          }
           if (converted) {
             gateMcqHoisted = converted
             // The block still goes in: if the deterministic renderer refuses
@@ -6376,6 +6442,40 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       const attemptVectorParse = parseAttemptVectorTag(text)
       if (attemptCaptureOn) attemptVectorHoisted = attemptVectorParse.vector
       text = attemptVectorParse.cleanText
+      // The reply must not answer the graded question it is about to ask
+      // (owner-approved, G2, 2026-09-24). Only for the server's own question
+      // attached THIS turn. Emptying the text is safe: the guard just below
+      // treats a question on screen as content, never as an outage.
+      // HELD QUESTION TOO (owner-approved 2026-09-25, option A). Measured
+      // (synthetic run, phys.mech.acceleration): the authored question
+      // "Acceleration is defined as the rate of change of which quantity?"
+      // stayed on screen unanswered; the learner asked "will this be on the
+      // exam?" and the reply said "…acceleration — how velocity changes with
+      // time…". A question still on screen is being asked just as much as one
+      // attached this turn. Help and recovery turns are exempt: when the
+      // learner asks to be taught, the teaching stays even if it names the
+      // answer.
+      const { probeKeyIsAuthored: heldKeyIsAuthored } = await import('@/lib/teaching/mcq')
+      const heldQuestionOnScreen = !mcqHoisted && mcqGradeHoisted === null && pendingMcqHoisted !== null
+        && heldKeyIsAuthored(pendingMcqHoisted)
+        && learnerRequestHoisted === null && recoveryKeyHoisted === null
+      const leakGuardMcq = mcqHoisted && mcqHoisted === gateMcqHoisted
+        ? mcqHoisted
+        : heldQuestionOnScreen ? pendingMcqHoisted : null
+      if (leakGuardMcq) {
+        const { dropAnswerLeaks } = await import('@/lib/teaching/gateAssessment')
+        const { getKGNode: kgNodeForLeak } = await import('@/lib/curriculum/knowledgeGraph')
+        const leak = dropAnswerLeaks(text, leakGuardMcq, resolvedConceptId ? (kgNodeForLeak(resolvedConceptId)?.title ?? null) : null)
+        if (leak.dropped.length > 0) {
+          console.warn('[answer-leak] ' + JSON.stringify({
+            conceptId: resolvedConceptId ?? null,
+            assetId: leakGuardMcq.assetId ?? null,
+            held: leakGuardMcq !== mcqHoisted,
+            dropped: leak.dropped.map((d) => d.slice(0, 120)),
+          }))
+          text = leak.text
+        }
+      }
 
       // C-A — THE SINGLE DEFINITION OF "usable assistant response", and the
       // only degraded-response path. It sits HERE, after both tag strips,
@@ -7451,6 +7551,19 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // counters still drive the ladder. Measured on the 2026-08-17 turn:
       // `correctAtCheck 1` with `verifiedCorrectAtCheck 0`. Detection without
       // suppression does not hold the gate, which is why this exists.
+      // A REQUEST IS NOT AN ANSWER. Synthetic-student after-run 2, 2026-09-24
+      // (production TURN_EVENT, phys.mech.velocity): on "ok, next question
+      // please" the model's own SIGNAL said correct, nothing suppressed it
+      // (`gradeSource: none`, `signalSuppressedReason: null`), and the plain
+      // practice counter carried the lesson PRACTICE -> TRANSFER below the
+      // verified bar, where it could never certify. The MCQ grader already
+      // refuses to grade a practice request (`&& !turnIntent.wantsPractice`);
+      // the self-report path now agrees.
+      if (teachingSignal && teachingSignal.correctness !== undefined && turnIntent.wantsPractice && !mcqGradeHoisted) {
+        signalSuppressedReasonHoisted = 'practice-request-not-an-answer'
+        console.log('[practice-request-not-an-answer]', { claimed: teachingSignal.correctness, learnerMessage: message.slice(0, 40) })
+        teachingSignal = { ...teachingSignal, correctness: undefined }
+      }
       if (teachingSignal && teachingSignal.correctness !== undefined) {
         try {
           const { shouldSuppressSignalCorrectness } = await import('@/lib/teaching/answerableTurn')
@@ -7895,7 +8008,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // Placed after the other repairs so it decorates the text that actually
       // ships, and before the verifier so the verifier sees the final reply.
       try {
-        const { confirmCorrectAnswer, CONFIRMS_CORRECT } = await import('@/lib/teaching/answerConfirmation')
+        const { confirmCorrectAnswer, statesCorrect } = await import('@/lib/teaching/answerConfirmation')
         const confirmed = confirmCorrectAnswer({
           text: cleanText,
           correct: correctForConfirmation,
@@ -7924,7 +8037,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         if (correctForConfirmation === true) {
           console.log('[c5] ' + JSON.stringify({
             event: 'servedGradedCorrect',
-            confirmed: confirmed.added || CONFIRMS_CORRECT.test(confirmed.text),
+            confirmed: confirmed.added || statesCorrect(confirmed.text),
           }))
         }
       } catch { /* non-fatal — the teaching is still better than no answer */ }
@@ -7991,8 +8104,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           pendingMcq: pendingMcqHoisted,
         })
         if (ceiling.withheld) {
+          // `before`/`after` let a cut that leaves only a lead-in ("I hear you…
+          // let's take a tiny step together.", synthetic readiness run 3,
+          // 2026-09-25) be diagnosed from the log. Model text only, never the
+          // learner's; `[verifier-log]` already logs model drafts the same way.
           console.log('[dont-know-ceiling] ' + JSON.stringify({
             reason: ceiling.reason, run: resolvedConsecutiveDontKnows,
+            beforeChars: cleanText.length, afterChars: ceiling.text.length,
+            before: cleanText.slice(0, 600),
           }))
         }
         cleanText = ceiling.text
@@ -9144,6 +9263,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 // below the asset contract, not that the runtime is misbehaving.
                 charsBefore: cleanText.length,
                 charsAfter: ungraded.text.length,
+                // The model text that was cut, so a kept setup sentence whose
+                // question was withheld ("Imagine two people pushing a box … 10 N
+                // and 15 N." above an unrelated authored question — synthetic
+                // run 2026-09-25) can be diagnosed. Model text only, never the
+                // learner's; `[verifier-log]` already logs drafts the same way.
+                before: cleanText.slice(0, 600),
               }))
               cleanText = ungraded.text
             }
@@ -10137,6 +10262,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               ` — prose replaced (reason=${contract.reason}, chars ${cleanText.length}->${contract.text.length})`,
             )
             cleanText = contract.text
+            // A reply replaced wholesale still owes the learner the verdict on
+            // the answer just graded. Synthetic-student smoke run, 2026-09-24:
+            // a right answer came back as the bare "Here is your next
+            // question." because the replacement dropped the confirmation
+            // added earlier in the turn. Both helpers no-op when the text
+            // already carries the verdict.
+            if (correctForConfirmation !== null) {
+              const { confirmCorrectAnswer: reconfirm } = await import('@/lib/teaching/answerConfirmation')
+              const { stateCorrectionForWrongAnswer: recorrect } = await import('@/lib/teaching/wrongAnswerCorrection')
+              cleanText = reconfirm({ text: cleanText, correct: correctForConfirmation, priorConfirmations: resolvedPriorConfirmations }).text
+              cleanText = recorrect({ text: cleanText, correct: correctForConfirmation, probe: pendingMcqHoisted }).text
+            }
           }
         } catch (err) {
           // A repair must never break a turn.
@@ -10825,10 +10962,22 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // Same boundary as the synthetic recovery failure above: a wrong
               // answer about the side concept is not a failure on the paused
               // lesson, so it does not spend that session's affect budget.
+              // Owner-approved 2026-09-25: a verdict against a MODEL-INVENTED
+              // key is not evidence of a failure spiral. Measured (tension /
+              // friction run): two wrong taps on questions the model wrote
+              // itself spent the affect budget and shut every authored question
+              // out. When this turn's grade came from an unauthored key, its
+              // correctness does not reach the budget; authored grades (and the
+              // pre-existing no-question signal path) do.
+              const unauthoredGradeThisTurn = mcqGradeHoisted !== null && !gradedAgainstServerKeyHoisted
+              const signalForBudget = unauthoredGradeThisTurn && teachingSignal
+                ? { ...teachingSignal, correctness: undefined }
+                : teachingSignal
               const nextEpisode = resolvedExcursionActive
                 ? sessionEpisodeHoisted
-                : applySignalToEpisode(sessionEpisodeHoisted, teachingSignal, {
+                : applySignalToEpisode(sessionEpisodeHoisted, signalForBudget, {
                     isFirstLesson: resolvedFirstLessonActive,
+                    authoredGrade: gradedAgainstServerKeyHoisted,
                   })
               // Compare against what is STORED, not against the in-request
               // value this turn has already mutated. The old baseline
@@ -11494,7 +11643,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // which assessment question was asked (so an identical MCQ is
             // never repeated) and the confidence reading (so the adaptation
             // engine has a trend, not just a current value).
-            const { recordMcqAsked, recordConfidence, recordExplanationServed } = await import('@/lib/teaching/teachingHistory')
+            const { recordMcqAsked, recordMcqOutcome, recordConfidence, recordExplanationServed } = await import('@/lib/teaching/teachingHistory')
             let memoryHistory = updatedHistory
             // A PROBE IS SPENT WHEN IT IS ANSWERED, NOT WHEN IT IS SHOWN.
             //
@@ -11542,8 +11691,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             const questionToSpend = (pendingMcqHoisted?.question && mcqGradeHoisted)
               ? pendingMcqHoisted.question
               : releasedProbeQuestionHoisted
+            // Same moment, same question: how it ended. A wrong answer makes an
+            // authored question eligible for ONE re-ask once the pool is spent;
+            // a re-ask, however it ends, is never asked again. A release (no
+            // grade) changes nothing unless it was the re-ask.
+            const spentQuestionGrade = questionToSpend && questionToSpend === pendingMcqHoisted?.question && mcqGradeHoisted
+              ? mcqGradeHoisted.correct : null
             if (questionToSpend) {
               memoryHistory = recordMcqAsked(memoryHistory, questionToSpend)
+              memoryHistory = recordMcqOutcome(memoryHistory, questionToSpend, spentQuestionGrade)
             }
             // The write half of the already-read guard above. Recorded only
             // when the asset was actually SERVED to the learner this turn —
@@ -11635,6 +11791,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               if (rederiveServedExplanation) rederived = recordExplanationServed(rederived, rederiveServedExplanation)
               if (rederiveServedCard) rederived = recordExplanationServed(rederived, rederiveServedCard)
               if (rederiveAskedMcq) rederived = recordMcqAsked(rederived, rederiveAskedMcq)
+              if (questionToSpend) rederived = recordMcqOutcome(rederived, questionToSpend, spentQuestionGrade)
               if (rederiveConfReading) rederived = recordConfidence(rederived, rederiveConfReading)
               return { teachingHistory: rederived }
             })

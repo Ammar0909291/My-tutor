@@ -23,6 +23,7 @@
  */
 
 import { createHash } from 'node:crypto'
+import { isClaimChallenge } from './claimChallengeGuard'
 
 export interface TutorMCQ {
   question: string
@@ -966,6 +967,57 @@ const looksLikeAQuestion = (s: string): boolean =>
   /\?\s*$/.test(s.trim()) || /^\s*(why|how|what|when|where|which|who|is|are|does|do|can|could|should)\b/i.test(s)
 
 /**
+ * A REQUEST TO THE TUTOR, OR A CHALLENGE TO WHAT IT SAID, IS NOT AN ANSWER.
+ *
+ * ── THE DEFECT (learner-intent A/B experiment, 2026-09-25, production) ─────
+ * With a MODEL-invented MCQ pending, two typed follow-ups were graded as
+ * choices and written as PROBE_OUTCOME evidence:
+ *
+ *   phys.qm.perturbation-theory, options [Positive, Negative, Zero, Cannot
+ *   determine], learner: "Please write out E_n^(2) explicitly and show why
+ *   every term is negative when n is the ground state."
+ *     -> [mcq-grade] chosen: 1, correct: TRUE   (a PASS, strength 1.0, on a
+ *        request for an explanation — rule 4a read the word "negative")
+ *   math.cat.topos, weather-app gluing MCQ, learner: "I mean specifically
+ *   sheaves on a topological space X — show me how Sh(X) is a topos …"
+ *     -> [mcq-grade] chosen: 3, correct: false
+ *
+ * Both were correctly withheld from mastery ("unauthored-key-not-certifying"),
+ * but the evidence rows were written. `looksLikeAQuestion` is the existing
+ * guard for this exact shape ("names an option while answering nothing"), and
+ * it only knew the interrogative form: an IMPERATIVE request ("please write
+ * out…", "show me how…") has no '?' and no leading WH-word.
+ *
+ * ── THE RULE ───────────────────────────────────────────────────────────────
+ * The same precondition, one more shape: an explicit request frame addressed
+ * to the tutor, or a claim challenge (`isClaimChallenge`, the existing
+ * detector — no second vocabulary). Returns null = "not gradeable here",
+ * never "wrong". It sits exactly where the question guard sits, AFTER the
+ * verbatim-tap (rule 0) and labelled-letter rules, so a tapped option — the
+ * only thing the UI sends on a tap — is graded exactly as before.
+ */
+const REQUEST_TO_TUTOR_RE = new RegExp([
+  // An imperative OPENING, after optional discourse lead-ins and politeness:
+  // "please write out…", "ok explain…", "now show me…", "give me…".
+  String.raw`^\s*(?:(?:ok(?:ay)?|so|and|but|now|wait|hmm+|um+|sir|ma'?am|then|also|no|yes|right)[\s,.;:!\-]+)*(?:please\s+|pls\s+|plz\s+|kindly\s+)?(?:explain|show|tell|give|write|derive|prove|walk|go\s+(?:through|over)|elaborate|describe|clarify|expand|demonstrate|define|compare|repeat|teach)\b`,
+  // A polite request frame anywhere ("can you" alone is already a question
+  // opener; "would/will you" are not).
+  String.raw`\b(?:can|could|would|will)\s+you\s+(?:please\s+)?(?:explain|show|tell|give|write|derive|prove|walk|go\s+(?:through|over)|elaborate|describe|clarify|expand|demonstrate|define|compare|repeat|teach)\b`,
+  // "show me how/why…", "explain why…", "tell me how…", "walk me through…"
+  String.raw`\bshow\s+(?:me|us)\s+(?:how|why|what|that|whether|the)\b`,
+  String.raw`\b(?:explain|tell\s+(?:me|us))\s+(?:how|why|what)\b`,
+  String.raw`\bwalk\s+(?:me|us)\s+through\b`,
+  // "I (still) want you to…", "I'd like to see the derivation…"
+  String.raw`\bi\s+(?:still\s+)?(?:want|need|would\s+like|'d\s+like)\s+(?:you\s+to|to\s+see|the\s+(?:derivation|proof|explanation|example|steps))\b`,
+].join('|'), 'i')
+
+export function readsAsRequestToTutor(message: string): boolean {
+  const text = typeof message === 'string' ? message : ''
+  if (!text.trim()) return false
+  return REQUEST_TO_TUTOR_RE.test(text) || isClaimChallenge(text)
+}
+
+/**
  * Resolve a learner's free-text reply to one of the offered options.
  *
  * Returns `null` whenever the answer is ambiguous or unrecognisable — including
@@ -1241,6 +1293,7 @@ function resolveMcqChoiceFolded(message: string, mcq: TutorMCQ): number | null {
   }
   if (namedStandalone.size > 1) return null
   if (looksLikeAQuestion(message)) return null
+  if (readsAsRequestToTutor(message)) return null
 
   // 1. A bare letter, alone or as "option b" / "b)" — normalisation has already
   //    removed the bracket. Standalone-token matching alone is NOT enough, and
@@ -1597,6 +1650,10 @@ export function engagesPendingOptions(message: string, mcq: TutorMCQ | null): bo
   if (!mcq || !Array.isArray(mcq.options) || mcq.options.length === 0) return false
   const raw = typeof message === 'string' ? message : ''
   if (!raw.trim()) return false
+  // Same non-answer shape `resolveMcqChoice` refuses to grade: a request to
+  // the tutor or a claim challenge does not reach for an option, so the
+  // "tap the choice you mean" lead-in must not fire on it either.
+  if (readsAsRequestToTutor(raw)) return false
   const limit = Math.min(mcq.options.length, OPTION_KEYS.length)
 
   // (a) An option letter as a standalone token. Same shape rule 0a reads, and

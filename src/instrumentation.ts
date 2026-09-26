@@ -162,6 +162,56 @@ export function servedByLiveLadderSibling(
   return false
 }
 
+/**
+ * EGRESS-4 · THE FULL PREFETCH READS WHAT ITS GUARDS NEED, NOT THE WHOLE TABLE.
+ *
+ * ── WHY (2026-09-25) ────────────────────────────────────────────────────────
+ * With seed-asset campaigns landing many batches a day, the corpus is rarely
+ * fully converged, so the cheap completeness probe (EGRESS-1's two COUNTs)
+ * falls through to the full prefetch on most cold starts. That prefetch read
+ * EVERY seed-owned row (+ two relation reads), unbounded, so its cost grew with
+ * every historical row any writer had ever seeded — the same "scales with the
+ * table, not the corpus" shape this file's egress notes forbid.
+ *
+ * ── WHY THE OBVIOUS BOUND IS WRONG ─────────────────────────────────────────
+ * Bounding to the corpus's `expectedSlugs` alone was proposed and REJECTED: the
+ * prefetch also feeds `liveSeedSlugs`, which P-10-FOLLOW-UP-D
+ * (`servedByLiveLadderSibling`) reads for the manual seeder's 5-segment ladder
+ * rows — slugs this corpus does NOT produce. Dropping them disarms that guard
+ * and re-creates the 45 duplicate ACTIVE mathematics identities
+ * (bootstrapLadderSiblingGuard.test.ts, test I). And the P-10 abandoned-slug
+ * guard reads rows under slugs the corpus no longer produces at all.
+ *
+ * ── THE RULE ───────────────────────────────────────────────────────────────
+ * Read exactly the union of what the three consumers look up:
+ *   • `existing`       — this corpus's own slugs (expectedSlugs);
+ *   • liveAbandoned    — the corpus's abandoned legacy slugs;
+ *   • liveSeedSlugs    — `${base}:${difficulty}` for every SINGLETON slot (the
+ *                        only candidates `servedByLiveLadderSibling` can ever
+ *                        return true for: it bails unless candidate === base).
+ * Rows outside that union were never read by anything.
+ *
+ * Postgres caps a statement at 65,535 bind parameters. Above
+ * PREFETCH_SLUG_BUDGET this returns null and the caller keeps the unbounded
+ * read — never a new failure mode, at worst today's cost.
+ */
+export const PREFETCH_SLUG_BUDGET = 30_000
+
+export function bootstrapPrefetchSlugs(
+  expectedSlugs: Iterable<string>,
+  abandonedSlugs: Iterable<string>,
+  singletonBaseSlugs: Iterable<string>,
+  difficulties: readonly string[],
+  budget: number = PREFETCH_SLUG_BUDGET,
+): string[] | null {
+  const out = new Set<string>(expectedSlugs)
+  for (const s of abandonedSlugs) out.add(s)
+  for (const base of singletonBaseSlugs) {
+    for (const d of difficulties) out.add(`${base}:${String(d).toLowerCase()}`)
+  }
+  return out.size > budget ? null : [...out]
+}
+
 async function bootstrapAssets() {
   try {
     // ONE POOL PER PROCESS, NOT TWO.
@@ -187,6 +237,15 @@ async function bootstrapAssets() {
     const { prisma, withRetry } = await import('./lib/db/prisma')
 
     {
+      // PHASE TIMING (owner-approved 2026-09-25, observability only — no query,
+      // no write). New seed rows stopped reaching production (rows committed
+      // 30+ h earlier absent; every retained cold-start log is the 12 s deadline
+      // line, and the "N/M seed identities present" line never appears — so the
+      // slice runs out BEFORE the first query). These marks say which fixed cost
+      // ate it.
+      const bootT0 = Date.now()
+      const bootMark = (phase: string) =>
+        console.log(`[instrumentation] asset bootstrap timing: ${phase} at ${Date.now() - bootT0}ms`)
       // Load seed arrays first so we know the expected total before querying.
       const { SEED_EXPLANATIONS, SEED_PROBES, SEED_LANGUAGE, SEED_AUTHOR_ID, seedCanonicalSlug,
         buildProbeSlugResolver, abandonedLegacyProbeSlugs, SEED_REVIVABLE_STATUSES,
@@ -965,6 +1024,7 @@ async function bootstrapAssets() {
       // ADR 14 §13 (Item 6): ladder rungs get a difficulty segment; singleton
       // slots keep the identity they already have. One resolver drives BOTH
       // the pre-flight check and the write loop so they cannot disagree.
+      bootMark('seed modules loaded')
       const probeSlug = buildProbeSlugResolver(ALL_PROBES)
 
       // The exact set of canonical identities THIS corpus declares. The
@@ -1015,6 +1075,7 @@ async function bootstrapAssets() {
           source: p.source,
         })),
       ])
+      bootMark('identities validated')
       if (!identityCheck.ok) {
         console.error(
           formatSeedIdentityReport(identityCheck, {
@@ -1189,15 +1250,21 @@ async function bootstrapAssets() {
       // probes were absent.
       try {
         const expectedSlugList = [...expectedSlugs]
-        const ownership = seedOwnershipWhere() as Record<string, unknown>
+        // PRESENCE IS THE UNIQUE INDEX'S SCOPE, not the ownership filter. A
+        // row under one of OUR slugs blocks our insert whatever its tags (the
+        // index is `WHERE "authorId" = 'EDUCATIONAL_BRAIN_SEED'`), so it is
+        // present. Counting only owned-subject rows left the 992 biology
+        // rows written by SQL on 2026-09-22 permanently "missing" — see
+        // SLUG-INDEX PRESENCE below for what that did.
+        const presence = { authorId: SEED_AUTHOR_ID }
         const [storedCount, hollowCount] = await withRetry(() =>
           prisma.$transaction([
             prisma.assetIdentity.count({
-              where: { ...ownership, canonicalSlug: { in: expectedSlugList } } as never,
+              where: { ...presence, canonicalSlug: { in: expectedSlugList } } as never,
             }),
             prisma.assetIdentity.count({
               where: {
-                ...ownership,
+                ...presence,
                 canonicalSlug: { in: expectedSlugList },
                 probeAsset: { is: null },
                 explanationAsset: { is: null },
@@ -1311,8 +1378,26 @@ async function bootstrapAssets() {
       // questions against this set, so that guard costs no query either — the
       // rows are the ones already being read on the line below.
       const liveSeedSlugs = new Set<string>()
+      // EGRESS-4 — see bootstrapPrefetchSlugs. Singleton slots are the only
+      // ones the ladder-sibling guard can fire for.
+      const prefetchSlugs = bootstrapPrefetchSlugs(
+        expectedSlugs,
+        abandonedSlugs,
+        ALL_PROBES
+          .map((p) => ({ resolved: probeSlug(p), base: seedCanonicalSlug(p.conceptId, p.probeKind, p.gradeBand) }))
+          .filter((x) => x.resolved === x.base)
+          .map((x) => x.base),
+        PROBE_DIFFICULTIES,
+      )
+      console.log(
+        prefetchSlugs
+          ? `[instrumentation] asset bootstrap: full prefetch bounded to ${prefetchSlugs.length} slugs (EGRESS-4)`
+          : `[instrumentation] asset bootstrap: prefetch slug set over budget (${PREFETCH_SLUG_BUDGET}) — unbounded read (EGRESS-4 fallback)`,
+      )
       for (const row of await withRetry(() => prisma.assetIdentity.findMany({
-        where: seedOwnershipWhere() as never,
+        where: (prefetchSlugs
+          ? { ...(seedOwnershipWhere() as Record<string, unknown>), canonicalSlug: { in: prefetchSlugs } }
+          : seedOwnershipWhere()) as never,
         select: {
           assetId: true,
           canonicalSlug: true,
@@ -1409,6 +1494,48 @@ async function bootstrapAssets() {
       // satisfy the guard, and the two extra aggregate queries this replaced
       // are gone — the prefetch already holds the answer.
       const EXPECTED_IDENTITIES = identityCheck.distinctIdentities
+
+      // ── SLUG-INDEX PRESENCE (2026-09-25) ──────────────────────────────────
+      //
+      // MEASURED IN PRODUCTION: every cold start logged
+      //   5629/10409 seed identities present — seeding missing assets...
+      //   slice: created=0 repaired=0 skipped=1742 failed=0 spent=150/150
+      // for days. The prefetch above reads only rows tagged with a
+      // BOOTSTRAP_SEED_SUBJECTS subject, but this corpus also carries biology
+      // (and computer_science), and the 992 biology rows applied by SQL on
+      // 2026-09-22 carry the `biology` tag. The planner therefore saw the
+      // first 150 biology explanations as missing, planned them, and every
+      // insert was skipped by the seed-slug unique index — the SAME 150 on
+      // every cold start, so nothing behind them (mathematics, new physics
+      // probes) was ever reached.
+      //
+      // The fix asks the one question the index answers: which of the slugs
+      // still unseen above already exist under the seed author? Bounded by
+      // this corpus's own unseen slugs, and only on the path that is already
+      // paying for the prefetch. These rows join `existing` (so they are
+      // skipped or repaired, never re-inserted) and the live-sibling set; they
+      // are deliberately NOT added to the abandoned-slug guard or status
+      // convergence, which stay scoped to the subjects this hook owns.
+      const unseenSlugs = [...expectedSlugs].filter((slug) => !existing.has(slug))
+      if (unseenSlugs.length > 0) {
+        for (const row of await withRetry(() => prisma.assetIdentity.findMany({
+          where: { authorId: SEED_AUTHOR_ID, canonicalSlug: { in: unseenSlugs } } as never,
+          select: {
+            assetId: true,
+            canonicalSlug: true,
+            status: true,
+            probeAsset: { select: { assetId: true } },
+            explanationAsset: { select: { assetId: true } },
+          },
+        }))) {
+          existing.set(row.canonicalSlug, {
+            assetId: row.assetId,
+            hasContent: row.probeAsset !== null || row.explanationAsset !== null,
+          })
+          if (!SEED_REVIVABLE_STATUSES.includes(row.status)) liveSeedSlugs.add(row.canonicalSlug)
+        }
+      }
+
       let storedIdentities = 0
       let hollowIdentities = 0
       for (const slug of expectedSlugs) {

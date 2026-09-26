@@ -42,6 +42,26 @@ export const PHASE_ORDER: TeachingPhase[] = [
 ]
 
 /**
+ * The verified bar, mirrored from masteryGate's MASTERY_CHECK_REQUIRED /
+ * MASTERY_PRACTICE_REQUIRED: masteryGate imports this module, so it cannot be
+ * imported back. A test pins the two pairs equal.
+ */
+export const VERIFIED_CHECK_BAR = 1
+export const VERIFIED_PRACTICE_BAR = 2
+
+/**
+ * At TRANSFER with verified evidence still short of the bar — the only state
+ * where TRANSFER must keep assessing with authored questions, so the lesson
+ * can still certify (owner-approved, 2026-09-24; see the TRANSFER case in
+ * advanceConversationState).
+ */
+export function transferBelowVerifiedBar(state: Pick<ConversationState, 'phase' | 'verifiedCorrectAtCheck' | 'verifiedCorrectAtPractice'> | null | undefined): boolean {
+  if (!state || state.phase !== 'TRANSFER') return false
+  return (state.verifiedCorrectAtCheck ?? 0) < VERIFIED_CHECK_BAR
+    || (state.verifiedCorrectAtPractice ?? 0) < VERIFIED_PRACTICE_BAR
+}
+
+/**
  * The ladder splits in two, and the split is the reason acknowledgements are
  * safe to act on.
  *
@@ -1183,8 +1203,30 @@ export function advanceConversationState(
         if (verified) next.verifiedCorrectAtPractice = (prev.verifiedCorrectAtPractice ?? 0) + 1
         if (next.correctAtPractice >= 2) next.phase = 'TRANSFER'
         break
-      case 'TRANSFER':
+      case 'TRANSFER': {
+        // TRANSFER BELOW THE VERIFIED BAR (owner-approved, 2026-09-24).
+        //
+        // The plain counters above deliberately advance on any accepted
+        // correct answer, so a lesson can reach TRANSFER with verified
+        // evidence short of the bar — measured on production (synthetic
+        // after-run 2, phys.mech.velocity): verified 1/1 at TRANSFER, and
+        // TRANSFER moved no counter, so verified mastery was unreachable for
+        // the rest of the lesson however well the learner answered. A
+        // SERVER-GRADED correct answer here now tops up the lowest unmet
+        // verified counter, never past the bar and never past its plain
+        // counterpart (verified <= plain is kept). Self-reported correctness
+        // still credits nothing (`verified` requires serverGraded).
+        if (verified) {
+          const vCheck = prev.verifiedCorrectAtCheck ?? 0
+          const vPractice = prev.verifiedCorrectAtPractice ?? 0
+          if (vCheck < VERIFIED_CHECK_BAR && vCheck < prev.correctAtCheck) {
+            next.verifiedCorrectAtCheck = vCheck + 1
+          } else if (vPractice < VERIFIED_PRACTICE_BAR && vPractice < prev.correctAtPractice) {
+            next.verifiedCorrectAtPractice = vPractice + 1
+          }
+        }
         break
+      }
     }
   } else if (evidence.acknowledgement) {
     // The learner acknowledged ("got it") or asked to proceed ("go",
@@ -2052,7 +2094,9 @@ export function classifyAcknowledgementContext(
 ): AcknowledgementContext {
   if (recoveryFired) return 'recovery'
   if (navigationRequest) return 'navigation'
-  if (state.consecutiveFailures >= 2) return 'confusion'
+  // A right answer is never met with "this is genuinely tricky": earlier
+  // misses do not outrank the answer in front of us (synthetic run 2026-09-25).
+  if (state.consecutiveFailures >= 2 && signalCorrect !== true) return 'confusion'
   if (signalCorrect === false) return 'correction'
   if (signalCorrect === true) {
     if (state.learnerConfidence === 'low') return 'confidence_building'

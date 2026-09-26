@@ -31,6 +31,8 @@ log.
 | `account-safety-and-english-defects.md` | The `suaibamr@gmail.com` forbidden-account restriction revocation; the English open-defect campaign (ENG-D02/D03 exclusion-list trap, D06/D07/D08/D09). |
 | `mastery-and-knowledge-exposure-fixes.md` | The claim-challenge mastery-integrity fix (a defended false claim could still certify mastery); the authored-knowledge-reaches-runtime fix (misconception-parser grammar + Core Understanding packing budget); the governing-knowledge-residue ordering fix (packer order, not budget size). |
 | `subject-onboarding-and-fix-campaign.md` | The subject-onboarding pipeline architecture audit (confirms the KG→registration→seed-corpus→bootstrap pipeline is already generically hardened for a future subject); and the full running log of the current "fix physics/english/chemistry" campaign, including the `contract-audit.ts` English-undercount bug fix and the account-saturation finding. |
+| `synthetic-students.md` | The synthetic-student runner on the physics mechanics launch set (owner decisions 2026-09-24: no boards, no real traffic yet): the tool, how to run it, and each run's findings and fixes. |
+| `learner-intent-interpreter-ab-experiment.md` | The 2026-09-25 AI learner-intent interpreter A/B experiment (three live 6×2 runs): design, results, the deterministic fixes it surfaced, cleanup. FINAL: abandoned for production, interpreter removed 2026-09-26, deterministic path retained (A 8/12 → 10/12 → 12/12 first ask). |
 
 ## Live pointers (not history — check these first for CURRENT state)
 - `/CLAUDE.md` — live rules.

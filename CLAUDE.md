@@ -163,6 +163,8 @@ npx tsc --noEmit       # pre-existing stripe/subscription errors are expected on
 - Branch for current work (canonical): `main`.
 - Do NOT create PRs unless explicitly asked. Do NOT push to other branches.
 - Do NOT redesign UI, navigation, or touch Hindi/Sanskrit subject architecture.
+- **No boards/curricula yet (owner, 2026-09-25):** there is no CBSE, ICSE or any other board mapping in the product. Work subject by subject on the canonical KGs only — never add, assume or optimise for a board/syllabus mapping unless the owner says so.
+- **AI provider (owner, 2026-09-25): Groq first, from now on.** Keep the default chain Groq -> Gemini -> OpenRouter; Gemini is fallback only. Never set `AI_PROVIDER_MODE=gemini_only`. If production logs show Groq `spend_limit_reached`, tell the owner (it is a Groq-console/`GROQ_API_KEY` fix, not a code fix).
 
 ## Repository branch policy (binding)
 - `main` is THE only active working branch. Check out `main`, commit on `main`, push to `main` —
@@ -667,6 +669,28 @@ production-ready**: the row exists and the pipeline demonstrably works and grade
 mastery was not observed to complete in this run and the photosynthesis visual gap is unresolved.
 `EDUCATIONAL_BRAIN_SUBJECTS` was NOT touched — biology remains excluded from public
 onboarding/library/enroll discovery; that rollout decision is still explicitly the owner's to make.
+
+**2026-09-25 update — rollout flipped (owner-authorized), two visual-gap defects fixed, still
+being verified.** `EDUCATIONAL_BRAIN_SUBJECTS` now includes `biology` (commit `2fbc6792`,
+2026-09-23, a prior session — the onboarding fallback list and `/api/subjects` were confirmed
+live-serving biology via direct production read on 2026-09-24). Separately, real-learner QA
+against the real deployed app (2026-09-24, disposable-account-equivalent driving of two random
+concepts per subject) found the photosynthesis visual gap noted above is NOT a one-concept fluke:
+`bio.immuno.immune-disorders` reproduced the identical symptom — `no-figure:critic-reject-cached`
+on every turn of a 10-turn session, including an explicit "do you have picture" request, never
+serving a diagram. Root cause for both: no Tier 0/1 static visual binding existed for either
+concept, so both depended entirely on Tier 3 live generation, which gets stuck re-proposing a
+fingerprint-identical candidate to the one already critic-rejected (`no-figure:retry-identical-
+figure` on the explicit-request retry — see `photosynthesisVisualServingLedger.test.ts`'s own
+2026-09-23 characterization). Fix: a deterministic Tier 0 scene for each concept (reusing the
+existing generic `buildCellPathwayScene`/`buildCellComparisonScene` generators from the Biology
+cell visual campaign — no new generator authored), grounded strictly in each concept's
+Educational Brain "Core Understanding" (not the fuller KG description — both EB entries flag the
+extra KG detail as an untaught content gap). Regression coverage: `bioVisualGapFix.test.ts` (20
+tests). Still open, NOT fixed in this pass: the 2026-09-24 QA also found one turn on
+`bio.immuno.immune-disorders` (an explicit visual request) returned a completely empty tutor
+response — root cause not established (no DB/request-ID access in that session to confirm);
+flagged for the next session to investigate with production log access.
 
 ## Full history index
 Every dated campaign, incident, and defect investigation this project has ever recorded is

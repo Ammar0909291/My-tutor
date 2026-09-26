@@ -307,6 +307,92 @@ function matchPrecedesItsRequest(message: string, matchedText: string): boolean 
 }
 
 /**
+ * E4 · A QUANTIFIED OR DETERMINED NOUN IS AN INSTANCE HERE, NOT A TOPIC ELSEWHERE.
+ *
+ * ── THE DEFECT, reproduced offline from production traces (2026-09-25) ──────
+ * Found by the learner-intent A/B experiment (docs/history/
+ * learner-intent-interpreter-ab-experiment.md), in BOTH arms:
+ *
+ *   physics lesson `phys.qm.perturbation-theory`:
+ *     "Please write out E_n^(2) explicitly and show why EVERY TERM is negative
+ *      when n is the ground state."
+ *     -> `math.alg.term` ("Term", algebra). Production `[excursion]` opened
+ *        lesson -> math.alg.term and `[visual-v2]` served
+ *        `registry:domain-default:math.alg:coordinate_plane` in the physics
+ *        lesson; the tutor then asked "which specific term?" and, a turn
+ *        later, for "the coordinates of the origin".
+ *   mathematics lesson `math.graph.random-graph`:
+ *     "…and WHAT DISTRIBUTION does it follow?"
+ *     -> `math.fnal.distributions` (generalized functions — the wrong sense
+ *        of the word); both arms then drifted into "what is a probability
+ *        distribution" for the rest of the session.
+ *
+ * ── WHY THE EXISTING FILTERS KEEP IT (traced) ──────────────────────────────
+ * `isIncidentalWord` treats a one-word title as a topic when a cue sits within
+ * CUE_WINDOW tokens before it. "SHOW why every TERM" and "WHAT distribution"
+ * both put a cue there, so both matches survive as "governed". But in neither
+ * sentence does the cue govern the noun: "every term" and "what distribution"
+ * are a quantifier and an interrogative determiner picking out INSTANCES —
+ * the terms of the sum just shown, the distribution of the count just
+ * discussed. The learner is asking about the lesson's own material, and
+ * nothing here names a concept to travel to.
+ *
+ * ── THE RULE, deliberately narrow ──────────────────────────────────────────
+ * A match is dropped only when ALL of these hold:
+ *   1. its title is ONE word (multi-word titles are specific — unchanged);
+ *   2. it lies OUTSIDE the lesson's own KG domain (`phys.qm`, `math.graph`, …),
+ *      so a word the lesson's own domain owns is never touched;
+ *   3. EVERY occurrence of the word in the message is immediately preceded by
+ *      a quantifier / interrogative determiner (INSTANCE_DETERMINERS);
+ *   4. no occurrence is the definitional frame "what X is / what X means"
+ *      ("teach me what entropy is" still names entropy).
+ * Positional, like E3: it reads where the determiner sits, not which noun it
+ * is. The earlier-rejected definite-article rule ("the") is NOT this rule —
+ * "teach me the derivative" contains no member of INSTANCE_DETERMINERS.
+ *
+ * Returning null leaves the teaching target on the lesson, the same "an honest
+ * 'I could not name it' rather than a guess" stance the rest of this module
+ * takes; an explicit request such as "teach me distributions" is untouched
+ * (no determiner) and still resolves.
+ */
+const INSTANCE_DETERMINERS: ReadonlySet<string> = new Set([
+  'every', 'each', 'all', 'any', 'which', 'what', 'whichever', 'whatever',
+])
+/** "what entropy IS" / "what entropy MEANS" — a definition request, not an instance. */
+const DEFINITION_COPULA: ReadonlySet<string> = new Set(['is', 'are', 'mean', 'means', 'was', 'were'])
+/** "which distribution IS IT" — an inverted copula asks WHICH instance, not what the noun is. */
+const INVERTED_SUBJECT: ReadonlySet<string> = new Set([
+  'it', 'this', 'that', 'these', 'those', 'they', 'there', 'he', 'she', 'we', 'you', 'i',
+])
+
+export function isOffDomainInstanceReference(
+  message: string,
+  matchedText: string,
+  matchedConceptId: string,
+  lessonConceptId: string | null,
+): boolean {
+  if (!lessonConceptId) return false
+  const matched = tokens(matchedText)
+  if (matched.length !== 1) return false
+  if (conceptDomain(matchedConceptId) === conceptDomain(lessonConceptId)) return false
+  const noun = matched[0]
+  const words = tokens(message ?? '')
+  let occurrences = 0
+  for (let i = 0; i < words.length; i++) {
+    if (words[i] !== noun) continue
+    occurrences++
+    const before = words[i - 1]
+    if (!before || !INSTANCE_DETERMINERS.has(before)) return false
+    const next = words[i + 1]
+    if ((before === 'what' || before === 'which') && next && DEFINITION_COPULA.has(next)) {
+      const after = words[i + 2]
+      if (!after || !INVERTED_SUBJECT.has(after)) return false   // "what entropy is" -> a topic
+    }
+  }
+  return occurrences > 0
+}
+
+/**
  * Topic governance for the incidental rule. Wider than TEACHING_CUE because a
  * request verb governs a topic just as a teaching verb does — "show me VECTOR
  * graph" asks for vectors. It stays separate from TEACHING_CUE so that
@@ -768,6 +854,14 @@ export function resolveRequestedConceptId(
   message: string,
   lessonConceptId: string | null,
   preferredSubject?: string | null,
+  /**
+   * The lesson the learner is actually in, when `lessonConceptId` is null ON
+   * PURPOSE — the visual resolver passes null during an unresolved-topic
+   * excursion so it never introduces a figure of the paused lesson. Read by E4
+   * ONLY, as disambiguation context; it never becomes a fallback target and
+   * no other rule reads it. Omitted -> behaviour identical to before.
+   */
+  contextConceptId?: string | null,
 ): string | null {
   try {
     const matches = resolveConceptMatches(message ?? '', conceptIndex(), preferredSubject ?? null)
@@ -788,7 +882,10 @@ export function resolveRequestedConceptId(
         // E3: named in a different clause from the request that would justify
         // moving the teaching target. The fourth member of the same family,
         // and the only one that reads position rather than vocabulary.
-        !matchPrecedesItsRequest(message ?? '', m.matchedText),
+        !matchPrecedesItsRequest(message ?? '', m.matchedText) &&
+        // E4: "every term", "what distribution" — an off-domain one-word title
+        // used as an instance of the lesson's own material, not a topic.
+        !isOffDomainInstanceReference(message ?? '', m.matchedText, m.conceptId, lessonConceptId ?? contextConceptId ?? null),
     )
     // Same-subject candidates win over an equally-confident foreign one. The
     // lesson's own id prefix is the subject signal — it needs no mapping table

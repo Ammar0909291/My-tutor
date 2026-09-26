@@ -11,7 +11,7 @@
  */
 import { readFileSync } from 'fs'
 import { describe, it, expect } from 'vitest'
-import { confirmCorrectAnswer, CONFIRMS_CORRECT, stripLeadingFalseConfirmation } from '@/lib/teaching/answerConfirmation'
+import { confirmCorrectAnswer, CONFIRMS_CORRECT, stripLeadingFalseConfirmation, statesCorrect } from '@/lib/teaching/answerConfirmation'
 
 const REAL_UNCONFIRMED = 'Here is a question to check your understanding:'
 const REAL_REMEDIATION =
@@ -192,7 +192,27 @@ describe('the route actually applies it', () => {
     expect(block).toContain("console.log('[c5] '")
     expect(block).toContain("event: 'servedGradedCorrect'")
     expect(block).toMatch(/if \(correctForConfirmation === true\)/)
-    expect(block).toContain('confirmed.added || CONFIRMS_CORRECT.test(confirmed.text)')
+    // 2026-09-25: telemetry reads `statesCorrect` (statements only) so "Is that
+    // correct?" no longer counts as a confirmation — same detector as the enforcer.
+    expect(block).toContain('confirmed.added || statesCorrect(confirmed.text)')
+  })
+})
+
+describe('a question is not a confirmation (synthetic run, 2026-09-25)', () => {
+  const PROD = 'So you calculated the train’s average acceleration as 3 metres per second squared, right? Is that correct?'
+  it('the production reply gets a verdict prepended', () => {
+    expect(statesCorrect(PROD)).toBe(false)
+    const r = confirmCorrectAnswer({ text: PROD, correct: true })
+    expect(r.added).toBe(true)
+    expect(statesCorrect(r.text)).toBe(true)
+  })
+  it('a stated confirmation is still recognised, with or without a question after it', () => {
+    expect(statesCorrect('That’s correct — 18 m/s over 6 s is 3 m/s².')).toBe(true)
+    expect(statesCorrect('Exactly. Can you try the next one?')).toBe(true)
+    expect(confirmCorrectAnswer({ text: 'Correct! Ready for another?', correct: true }).added).toBe(false)
+  })
+  it('the regex itself is unchanged (scorer parity)', () => {
+    expect(CONFIRMS_CORRECT.test('Is that correct?')).toBe(true)
   })
 })
 
@@ -250,5 +270,41 @@ describe('the I1 disambiguation guard applies the strip before prepending its le
     const prependAt = guardBlock.indexOf('MCQ_REOFFER_DISAMBIGUATION}\\n\\n')
     expect(stripAt).toBeGreaterThan(-1)
     expect(prependAt).toBeGreaterThan(stripAt)
+  })
+})
+
+describe('a denial is never a confirmation (synthetic run, phys.mech.tension, 2026-09-25)', () => {
+  // Production: [mcq-grade] correct: true, [c5] confirmed: true — the whole
+  // reply to the authored key "49 N — it must balance the lamp's weight" was:
+  const PROD = "That's not quite right—if the lamp is accelerating, the tension need not equal its weight, so 49 N would only be correct for a stationary or constant‑velocity situation."
+
+  it('"not quite right" does not state correctness', () => {
+    expect(statesCorrect(PROD)).toBe(false)
+    expect(statesCorrect("That isn't correct.")).toBe(false)
+  })
+
+  it('a graded-correct answer loses the false denial and is confirmed', () => {
+    const r = confirmCorrectAnswer({ text: PROD, correct: true, priorConfirmations: 0 })
+    expect(r.added).toBe(true)
+    expect(r.text).toBe("That's right.")
+    expect(r.text).not.toMatch(/not quite/i)
+  })
+
+  it('keeps the teaching that follows a stripped denial', () => {
+    const r = confirmCorrectAnswer({
+      text: 'Not quite. The rope pulls up with 49 N, balancing the 5 kg weight.',
+      correct: true, priorConfirmations: 1,
+    })
+    expect(r.text).toBe('Correct — well done. The rope pulls up with 49 N, balancing the 5 kg weight.')
+  })
+
+  it('leaves a genuine confirmation that later says "not exactly" untouched', () => {
+    const text = "That's right — 49 N. It is not exactly the same when the lift accelerates, though."
+    expect(confirmCorrectAnswer({ text, correct: true }).text).toBe(text)
+  })
+
+  it('never touches a WRONG answer\'s denial', () => {
+    expect(confirmCorrectAnswer({ text: PROD, correct: false }).text).toBe(PROD)
+    expect(confirmCorrectAnswer({ text: PROD, correct: null }).text).toBe(PROD)
   })
 })

@@ -316,8 +316,11 @@ describe('13 · an excursion never writes lesson state', () => {
     // `openedAsKnowledgeGap` records WHY the excursion opened so its exit can
     // differ from a learner-chosen one — lifecycle, not progress: it moves no
     // counter, gates no mastery, and is never read by the ladder.
+    // `heldQuestion` (2026-09-24) is the lesson question that was on screen
+    // when the detour opened — lifecycle again: it decides only WHEN the detour
+    // closes ('closed-answered-lesson'); it moves no counter itself.
     expect(Object.keys(t.excursion.state).sort()).toEqual(
-      ['active', 'openedAsKnowledgeGap', 'returnToConceptId', 'targetConceptId', 'targetTopicTitle', 'turns'],
+      ['active', 'heldQuestion', 'openedAsKnowledgeGap', 'returnToConceptId', 'targetConceptId', 'targetTopicTitle', 'turns'],
     )
     // The lesson identity handed in is returned untouched as the return anchor.
     expect(t.excursion.returnToConceptId).toBe(LESSON)

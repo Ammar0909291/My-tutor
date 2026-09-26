@@ -109,7 +109,9 @@ fix shipped (typed grouped numbers now graded) are in `docs/history/visualizatio
 section "Acting as a real student". **Two items need the OWNER's approval before any code** (they
 change assessment behaviour — CLAUDE.md G1/G2): (1) re-serve a MISSED authored probe once the
 pool is spent in an attempt; (2) stop the model seeing/solving the gate probe before it is asked
-(answer leak). Do not implement either without that approval.
+(answer leak). **UPDATE: the owner APPROVED both ("Approved, implement both items") and both are
+shipped** — see the next section of `docs/history/visualization-engine.md`. Next: after deploy, run
+a real-student lesson and grep the Vercel logs for `missed-probe-reasked` / `[answer-leak]`.
 
 ## LIVE LOOP STATE (updated every loop step)
 

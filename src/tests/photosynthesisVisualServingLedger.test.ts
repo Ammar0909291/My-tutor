@@ -33,6 +33,15 @@
  * These tests exercise `resolveVisualForTurn` directly with injected deps
  * (cache, critic, outcome sink) — no network, no real database, no LLM —
  * exactly like `visualEngineArchitecture.test.ts`'s own harness.
+ *
+ * UPDATE 2026-09-25: bio.plant.photosynthesis itself was given a
+ * deterministic Tier 0 scene (see bioVisualGapFix.test.ts) after live
+ * production QA (2026-09-24) found the identical symptom — no diagram ever
+ * served, even on repeated explicit requests — on a second, unrelated
+ * Biology concept (bio.immuno.immune-disorders), confirming this was not a
+ * one-concept fluke. Test 7 below was updated accordingly; the ledger-
+ * correction mechanism itself (tests 5a/5b/5c, using CALORIMETRY, which
+ * still has no Tier 0 override) is untouched and still fully covered.
  */
 import { describe, it, expect } from 'vitest'
 import { resolveVisualForTurn } from '@/lib/teaching/visual/resolveVisual'
@@ -304,14 +313,26 @@ describe('the ledger now agrees with the HTTP response on the discard paths', ()
     expect(last.cached).toBe(true)
   })
 
-  it('7. bio.plant.photosynthesis specifically reproduces the formerly-failing shape, then passes: no figure served, ledger says so too', async () => {
-    const { outcomes, sink } = fakeOutcomeSink()
+  it('7. bio.plant.photosynthesis no longer reaches this path at all — it now has its own Tier 0 scene (2026-09-25)', async () => {
+    // UPDATED 2026-09-25: this test used to reproduce the exact
+    // formerly-failing shape (a cached-reject figure discarded as
+    // 'no-figure:retry-identical-figure', mocked deps and all) FOR this
+    // specific concept, to prove the ledger-correction fix below made the
+    // audit trail agree with the empty response. bio.plant.photosynthesis
+    // has since been given a deterministic Tier 0 scene (see
+    // bioVisualGapFix.test.ts) precisely BECAUSE it kept reproducing this
+    // shape live in production — Tier 0 is checked before Tier 3, so the
+    // mocked Tier-3-only `deps` below are now provably never consulted for
+    // this concept, and a real figure is served instead. The GENERAL
+    // ledger-correction mechanism this test originally motivated is still
+    // fully covered by 5a/5b/5c above (using CALORIMETRY, which has no Tier
+    // 0 override and genuinely still reaches this path) — nothing about
+    // that mechanism regressed; only this one concept's own routing did.
+    const { sink } = fakeOutcomeSink()
     const cache = fakeCacheClient()
     const frozen = scene(PHOTOSYNTHESIS, 'photosynthesis-frozen-rejected')
     seedCachedReject(cache, PHOTOSYNTHESIS, frozen)
 
-    // Exactly the live-reproduced learner action: an explicit diagram request
-    // on a concept whose only cached candidate was already rejected.
     const d = await resolveVisualForTurn(
       { message: 'Can you show me a diagram of this?', lessonConceptId: PHOTOSYNTHESIS, subject: 'biology', learnerRequest: 'diagram' },
       {
@@ -319,21 +340,10 @@ describe('the ledger now agrees with the HTTP response on the discard paths', ()
         generate: async () => frozen, cacheClient: cache.client, outcomeSink: sink,
       },
     )
-    // The response the production incident measured: no visual at all.
-    expect(carriesFigure(d)).toBe(false)
-    expect(d.provenance).toBe('no-figure:retry-identical-figure')
-
-    // The gap the production incident measured: ledger said served:true for
-    // this exact shape. It must not any more — the LATEST row must agree
-    // with the empty response above.
-    const conceptOutcomes = outcomes.filter((o) => o.conceptId === PHOTOSYNTHESIS)
-    expect(conceptOutcomes.length).toBeGreaterThan(0)
-    const last = conceptOutcomes[conceptOutcomes.length - 1]
-    expect(last.result.ok && last.result.served).toBe(false)
-    expect(last.cached).toBe(true)
-    // And no PRIOR row for this concept was rewritten — this is a correction
-    // appended to the trail, not a rewrite of history.
-    expect(conceptOutcomes.some((o) => o.result.ok && o.result.served === true)).toBe(true)
+    // The fix: a real, concept-authored figure is served, not the mocked
+    // Tier-3 candidate above (which is never reached).
+    expect(carriesFigure(d)).toBe(true)
+    expect(d.provenance).toBe('generator:bio.plant.photosynthesis:concept-authored')
   })
 
   it('a genuinely promoted retry still replaces the stale reject and IS served', async () => {

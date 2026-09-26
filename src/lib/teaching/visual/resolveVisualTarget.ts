@@ -58,9 +58,11 @@ export function resolveVisualTarget(
   message: string,
   lessonConceptId: string | null,
   preferredSubject?: string | null,
+  /** Disambiguation context only (see resolveRequestedConceptId). Never drawn. */
+  contextConceptId?: string | null,
 ): VisualTarget | null {
   // 1. What did the learner actually name?
-  const requested = resolveRequestedConceptId(message, lessonConceptId, preferredSubject)
+  const requested = resolveRequestedConceptId(message, lessonConceptId, preferredSubject, contextConceptId)
 
   // 2. The learner's own words win whenever they named something real.
   if (requested) {

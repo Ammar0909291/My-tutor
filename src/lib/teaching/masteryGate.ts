@@ -479,7 +479,29 @@ const VISUAL_VERB_RE = /\b(draw|sketch|illustrate|visuali[sz]e)\b/i
  * corpus ("I get the picture", "picture this", "the graph of my grades") gets
  * near it.
  */
-const SHOW_ME_RE = /\b(?:show|showing)\s+(?:me|us)\b/i
+const SHOW_ME_RE =
+  /\b(?:show|showing)\s+(?:me|us)\b(?!\s+(?:how|why|that|whether|the\s+(?:derivation|proof|steps?|working|workings|calculation|maths?|algebra|reasoning|solution)|step[\s-]by[\s-]step|mathematically|algebraically|formally)\b)/i
+
+/**
+ * "SHOW ME HOW / WHY …" IS A REQUEST TO BE TAUGHT, NOT TO BE SHOWN A PICTURE.
+ *
+ * ── THE DEFECT (learner-intent A/B experiment, 2026-09-25, both arms) ──────
+ * math.cat.topos, typed: "I mean specifically sheaves on a topological space
+ * X — show me how Sh(X) is a topos and what its subobject classifier is."
+ * `SHOW_ME_RE` (then an unconditional "show me") returned 'diagram', so the
+ * LEARNER_REQUEST rung owned the turn and the diagram directive answered a
+ * request for a PROOF with "I don't have a picture for this one, so I'll
+ * explain it in words" in both arms.
+ *
+ * The negative lookahead above keeps an unqualified "show me" (shipped for
+ * months, see its own note) and removes only the complements that name an
+ * explanation or a derivation. A learner who wants a picture still gets one:
+ * a medium noun anywhere ("show me how the graph changes") is caught by
+ * MEDIUM_REQUEST_RE / `mentionsAVisualMedium`, the visual verbs by
+ * VISUAL_VERB_RE, and "show me what it looks like" by the rule below.
+ */
+const SHOW_ME_LOOKS_RE =
+  /\b(?:show|showing)\s+(?:me|us)\s+(?:what\s+(?:it|this|that|they|these|those)\s+looks?\s+like|how\s+(?:it|this|that|they|these|those)\s+looks?)\b/i
 
 /** The medium being named. Built from the shared vocabulary, plus the forms
  *  that only ever appear in requests. */
@@ -585,7 +607,8 @@ const MEDIUM_AS_VERB_RE = /\bpicture\s+(?:this|that)\b/i
  */
 export function asksForAVisual(text: string): boolean {
   if (MEDIUM_AS_VERB_RE.test(text)) return false
-  return VISUAL_VERB_RE.test(text) || SHOW_ME_RE.test(text) || MEDIUM_REQUEST_RE.test(text)
+  return VISUAL_VERB_RE.test(text) || SHOW_ME_RE.test(text) || SHOW_ME_LOOKS_RE.test(text)
+    || MEDIUM_REQUEST_RE.test(text)
 }
 
 /**
@@ -893,6 +916,14 @@ const PRACTICE_REQUEST_RE: readonly RegExp[] = [
   // not requests for a question. A learner asking for the next item puts it
   // first.
   /^\s*(one|another)\s+more\b/i,
+  // Synthetic-student baseline, 2026-09-24 (production, phys.mech.*): "ok,
+  // next question please" and "can you check me with a question?" matched
+  // none of the patterns above. Unread, "next question please" could not
+  // close an open side-question detour (closed-wants-practice), and a learner
+  // asking five times got five more "favourite physics facts". Same intent as
+  // "quiz me" / "give me a question", in the words learners use.
+  /\b(?:next|another|new)\s+question\b/i,
+  /\bcheck\s+(?:me|my\s+understanding)\b/i,
 ]
 
 /**
@@ -913,7 +944,7 @@ const PRACTICE_REQUEST_NEGATED_RE =
   // 'practice|practise' added with the first-person pattern above: without it
   // "I don't want to practice" would match that new pattern and be read as a
   // REQUEST for practice — the exact inversion this guard exists to prevent.
-  /\b(don'?t|do\s+not|stop|quit|no\s+more|rather\s+than|instead\s+of)\s+(\w+\s+){0,2}(ask|quiz|test|question|practice|practise)/i
+  /\b(don'?t|do\s+not|stop|quit|no\s+more|rather\s+than|instead\s+of)\s+(\w+\s+){0,2}(ask|quiz|test|check|question|practice|practise)/i
 
 /** Did the learner explicitly ask to be given a question to answer?
  *
@@ -951,6 +982,54 @@ export function asksForPractice(message: string): boolean {
  * asking it to reconstruct that fact from a context window that may not
  * contain it.
  */
+/**
+ * WHICH KIND OF EXAMPLE WAS ASKED FOR.
+ *
+ * ── THE DEFECT (learner-intent A/B experiment, 2026-09-25, both arms) ──────
+ * `EXAMPLE_RE` fires on the bare word "example", and every match was answered
+ * with the REAL_LIFE_EXAMPLE directive: "ONE vivid everyday scenario they
+ * have personally experienced … No definitions this turn." So
+ *   "Give me a concrete non-Set example of a topos, like sheaves on a
+ *    topological space."  (math.cat.topos)
+ * was answered in production with a weather-app analogy in BOTH A/B reps —
+ * the formal Sh(X) example arrived only after the learner asked again — and
+ * "Can you tell me about Vaska's complex as an example?" opened with a
+ * kitchen-exhaust-fan analogy.
+ *
+ * ── THE RULE ───────────────────────────────────────────────────────────────
+ * The TRIGGER is unchanged (still `EXAMPLE_RE`, still the `real_life_example`
+ * LearnerRequest, so arbitration, the example counters and the state fold see
+ * exactly what they saw before). Only the FORM of the directive now follows
+ * what was asked: an explicit real-life / real-world / everyday / daily-life
+ * / application / use-case / story / analogy request keeps the everyday
+ * directive verbatim; any other example request ("a concrete example of X",
+ * "an example of a group", "X as an example") gets an example in the
+ * subject's own terms.
+ */
+const REAL_LIFE_FORM_RE =
+  /\b(real[\s-]?life|real[\s-]?world|everyday|every[\s-]day|daily\s+life|day[\s-]to[\s-]day|application|applications|use\s+case|story|stories|analog(?:y|ies))\b/i
+
+export type ExampleForm = 'real_life' | 'concrete'
+
+export function requestedExampleForm(message: string): ExampleForm {
+  return REAL_LIFE_FORM_RE.test(message ?? '') ? 'real_life' : 'concrete'
+}
+
+function concreteExampleDirective(hasEstablishedExample: boolean): string {
+  const continuity = hasEstablishedExample
+    ? 'An example for this concept has ALREADY been given earlier this lesson (tracked server-side). If the student is now asking for a DIFFERENT, more specific or more formal example — they may name it — give exactly that one; otherwise go deeper into the one already given rather than switching to an unrelated scenario.'
+    : 'This is the first example for this concept this lesson — choose one that is genuinely representative of the concept.'
+  return (
+    '\n\nTEACHING ACTION: CONCRETE_EXAMPLE (learner-requested — overrides the turn move). ' +
+    'The student asked for a concrete example. Give ONE specific instance of the concept itself, in the ' +
+    "subject's own terms — a particular mathematical object or structure, a particular compound or reaction, " +
+    'a particular physical system with actual values — and work it through so they can see the concept ' +
+    'operating on it. If they named a specific object or structure, that IS the example: use exactly it. ' +
+    'Do NOT substitute an everyday analogy or a story for it. ' +
+    continuity
+  )
+}
+
 function realLifeExampleDirective(hasEstablishedExample: boolean): string {
   const continuity = hasEstablishedExample
     ? 'An example or analogy for this concept has ALREADY been given earlier this lesson (this is tracked server-side, not something to guess from recent messages). EXTEND that same scenario further — do not introduce a new, unrelated one. Jumping between disconnected examples (a ruler, then coffee, then a stroller) is more confusing than exploring one scenario more deeply. Only switch to a genuinely different scenario if the established one has clearly not worked.'
@@ -1038,6 +1117,12 @@ export function buildLearnerRequestBlock(
   prerequisiteId?: string | null,
   /** Visual Resolver V2: a real figure is already attached to this response. */
   visualAlreadyAttached = false,
+  /**
+   * For 'real_life_example' only: which KIND of example was asked for
+   * (`requestedExampleForm`). Omitted -> 'real_life', i.e. every existing
+   * caller keeps the everyday directive byte-for-byte.
+   */
+  exampleForm: ExampleForm = 'real_life',
 ): string {
   switch (request) {
     case 'diagram':
@@ -1052,7 +1137,9 @@ export function buildLearnerRequestBlock(
         ' No new abstract explanation this turn.'
       )
     case 'real_life_example':
-      return realLifeExampleDirective(hasEstablishedExample)
+      return exampleForm === 'concrete'
+        ? concreteExampleDirective(hasEstablishedExample)
+        : realLifeExampleDirective(hasEstablishedExample)
     case 'explain_differently': {
       if (typeof strategyIndex === 'number' && strategyIndex >= 0 && strategyIndex <= 6) {
         const builder = STRATEGY_BLOCKS[strategyIndex]

@@ -250,14 +250,18 @@ describe('the prompt block asks for a lead-in, not a question', () => {
     correctIndex: 0,
   })
 
-  it('quotes the question as context so the lead-in can be about THIS question', () => {
-    expect(block).toContain('Which of these is the SI base unit for temperature?')
+  // Changed 2026-09-24 (owner-approved, G2). The question used to be quoted
+  // "as context"; on a real account the model used it to work the exact
+  // problem first and the learner was then asked it. The model no longer sees
+  // the question — see missedProbeReaskAndAnswerLeak.test.ts.
+  it('does NOT show the model the question, so it cannot answer it first', () => {
+    expect(block).not.toContain('Which of these is the SI base unit for temperature?')
+    expect(block).not.toContain('kelvin')
   })
 
   it('forbids the model writing a competing question or its own tag', () => {
     expect(block).toMatch(/do NOT ask any other question/i)
     expect(block).toMatch(/do NOT emit an MCQ tag/i)
-    expect(block).toMatch(/do NOT restate the question/i)
   })
 
   it('never leaks the mechanism to the learner', () => {

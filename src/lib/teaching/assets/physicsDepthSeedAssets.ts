@@ -6431,6 +6431,844 @@ const UG: SeedProbe[] = [
  * contract tests all scan for a `*_PROBES` export, so splitting them would
  * only make a partial import possible.
  */
+// ═══════════════════════════════════════════════════════════════════════════
+// BATCH 17 — launch-set slack: free-body diagram + normal force @ HIGH.
+// ═══════════════════════════════════════════════════════════════════════════
+//
+// MEASURED (synthetic students, production, 2026-09-25): on these two concepts
+// the careless and confused students reached verified CHECK 1 + PRACTICE 1 and
+// then every "test me" read `authored-pool-exhausted` — five gradeable probes
+// do not survive one wrong answer plus the early spends the surplus rule
+// allows. Each concept gets two more gradeable probes, only in slots that are
+// already ladders and only at difficulties those slots do not hold yet (see
+// the identity note at the top of this file): normal-force `short_answer`
+// FOUNDATIONAL/DEVELOPING (closed-choice, like biology's third capability),
+// free-body-diagram `mcq` ADVANCED and `misconception_probe` FOUNDATIONAL.
+const LAUNCH_SLACK: SeedProbe[] = [
+  {
+    conceptId: 'phys.mech.normal-force', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: 'A 2 kg book rests on a level table. You press straight down on the book with your hand, with a force of 10 N. What normal force does the table exert on the book? (g = 9.8 m/s²)',
+    choices: [
+      { text: 'About 29.6 N — the table must balance the book\'s weight (19.6 N) AND your 10 N push', isCorrect: true },
+      { text: '19.6 N — the normal force is always equal to the weight', isCorrect: false, misconceptionId: 'phys.mech.normal-force:MC-NORMAL-EQUALS-WEIGHT' },
+      { text: '9.6 N — your push takes some of the weight off the table', isCorrect: false },
+      { text: '10 N — only your push reaches the table', isCorrect: false },
+    ],
+    correctValue: '29.6 N',
+    targetedMisconceptions: ['phys.mech.normal-force:MC-NORMAL-EQUALS-WEIGHT'],
+    source: src('phys.mech.normal-force', 'MC-NORMAL-EQUALS-WEIGHT: vertical balance N = mg + F_hand = 19.6 + 10 = 29.6 N; the normal force is whatever the surface must supply, not the weight (launch-set slack, synthetic-student pool exhaustion 2026-09-25)'),
+  },
+  {
+    conceptId: 'phys.mech.normal-force', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.DEVELOPING,
+    stem: 'A 10 kg box sits on a level floor. A rope pulls it with a tension of 40 N at 30° ABOVE the horizontal, and the box stays in contact with the floor. What is the normal force from the floor? (g = 9.8 m/s², sin 30° = 0.5)',
+    choices: [
+      { text: '78 N — the rope\'s upward part (40 × sin 30° = 20 N) carries some of the 98 N weight', isCorrect: true },
+      { text: '98 N — the normal force equals the weight', isCorrect: false, misconceptionId: 'phys.mech.normal-force:MC-NORMAL-EQUALS-WEIGHT' },
+      { text: '118 N — the rope adds 20 N to the weight', isCorrect: false },
+      { text: '58 N — the whole 40 N tension is subtracted from the weight', isCorrect: false },
+    ],
+    correctValue: '78 N',
+    targetedMisconceptions: ['phys.mech.normal-force:MC-NORMAL-EQUALS-WEIGHT'],
+    source: src('phys.mech.normal-force', 'MC-NORMAL-EQUALS-WEIGHT with an angled pull: N + T sin θ = mg gives N = 98 − 20 = 78 N; only the vertical component of the tension changes N (launch-set slack, 2026-09-25)'),
+  },
+  {
+    conceptId: 'phys.mech.free-body-diagram', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'A block is pushed UP a rough ramp at constant speed by a force parallel to the ramp. What does a correct free-body diagram of the block show?',
+    choices: [
+      { text: 'Four forces: weight, normal force, the push up the slope, and friction pointing DOWN the slope', isCorrect: true },
+      { text: 'Three forces: weight, normal force and the push — at constant speed there is no friction', isCorrect: false },
+      { text: 'Four forces, with friction pointing UP the slope because friction holds the block on the ramp', isCorrect: false },
+      { text: 'Five forces: weight, normal force, push, friction, and a "force of motion" carrying the block up the slope', isCorrect: false, misconceptionId: 'phys.mech.free-body-diagram:MC-MOTION-FORCE' },
+    ],
+    correctValue: 'weight, normal, push, friction down the slope',
+    targetedMisconceptions: ['phys.mech.free-body-diagram:MC-MOTION-FORCE'],
+    source: src('phys.mech.free-body-diagram', 'MC-MOTION-FORCE: kinetic friction opposes the block\'s motion relative to the ramp, so it points down the slope; constant speed means the forces balance, not that one is missing, and motion itself is never a force on the diagram (launch-set slack, 2026-09-25)'),
+  },
+  {
+    conceptId: 'phys.mech.free-body-diagram', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: 'A ball has left a thrower\'s hand and is still rising through the air (ignore air resistance). Which forces belong on the ball\'s free-body diagram?',
+    choices: [
+      { text: 'Only its weight, pointing down — the hand\'s push ended the moment the ball left it', isCorrect: true },
+      { text: 'Its weight pointing down, and the force of the throw pointing up and carrying the ball', isCorrect: false, misconceptionId: 'phys.mech.free-body-diagram:MC-MOTION-FORCE' },
+      { text: 'Its weight, plus an upward force stored from the throw that runs out as the ball slows', isCorrect: false, misconceptionId: 'phys.mech.free-body-diagram:MC-MOTION-FORCE' },
+    ],
+    correctValue: 'only the weight',
+    targetedMisconceptions: ['phys.mech.free-body-diagram:MC-MOTION-FORCE'],
+    source: src('phys.mech.free-body-diagram', 'MC-MOTION-FORCE: a free-body diagram shows only forces from objects touching or acting on the body now; the upward motion is the ball\'s velocity, not a force (launch-set slack, 2026-09-25)'),
+  },
+]
+
+// ═══════════════════════════════════════════════════════════════════════════
+// BATCH 18 — launch-set slack: the eight thinnest phys.mech @ HIGH topics.
+// ═══════════════════════════════════════════════════════════════════════════
+//
+// Production audit 2026-09-25: acceleration, kinematics-1d, Newton's second and
+// third laws, tension, friction, inclined-plane and impulse each had only FOUR
+// active gradeable HIGH probes, and synthetic students who made one mistake ran
+// the pool out before verified mastery. Two more each, in free ladder slots
+// only (closed-choice short_answer FOUNDATIONAL/DEVELOPING; friction mcq
+// ADVANCED + misconception_probe FOUNDATIONAL).
+const LAUNCH_SLACK_B: SeedProbe[] = [
+  {
+    conceptId: 'phys.mech.acceleration', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: "A car speeds up from 10 m/s to 25 m/s in 5 s along a straight road. What is its average acceleration?",
+    choices: [
+      { text: "3 m/s² — the velocity changes by 15 m/s over 5 s", isCorrect: true },
+      { text: "5 m/s² — the final speed divided by the time", isCorrect: false, misconceptionId: "phys.mech.acceleration:MC-ACCELERATION-IS-SPEED" },
+      { text: "7 m/s² — the two speeds added, then divided by the time", isCorrect: false },
+      { text: "15 m/s — the change in velocity", isCorrect: false },
+    ],
+    correctValue: "3 m/s²",
+    targetedMisconceptions: ["phys.mech.acceleration:MC-ACCELERATION-IS-SPEED"],
+    source: src('phys.mech.acceleration', "a = Δv/Δt = (25 − 10)/5 = 3 m/s²; dividing the final speed by the time reads acceleration as speed (launch-set slack, synthetic-student pool exhaustion 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.acceleration', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.DEVELOPING,
+    stem: "A cyclist moving at 8 m/s brakes steadily and stops in 4 s. Taking the direction of motion as positive, what is the acceleration?",
+    choices: [
+      { text: "−2 m/s² — the velocity drops by 8 m/s over 4 s", isCorrect: true },
+      { text: "+2 m/s² — acceleration is always a positive number", isCorrect: false },
+      { text: "Zero — the cyclist ends up at rest, so nothing is accelerating", isCorrect: false, misconceptionId: "phys.mech.acceleration:MC-ACCELERATION-IS-SPEED" },
+      { text: "−32 m/s² — the speed multiplied by the time", isCorrect: false },
+    ],
+    correctValue: "−2 m/s²",
+    targetedMisconceptions: ["phys.mech.acceleration:MC-ACCELERATION-IS-SPEED"],
+    source: src('phys.mech.acceleration', "a = (0 − 8)/4 = −2 m/s²; slowing down is an acceleration opposite to the motion, and ending at rest does not make it zero (launch-set slack, synthetic-student pool exhaustion 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.kinematics-1d', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: "A train starts from rest and accelerates uniformly at 0.5 m/s² for 20 s. How far does it travel in that time?",
+    choices: [
+      { text: "100 m — s = ½at² = ½ × 0.5 × 20²", isCorrect: true },
+      { text: "200 m — its final speed (10 m/s) multiplied by the time", isCorrect: false },
+      { text: "10 m — the final speed", isCorrect: false },
+      { text: "50 m", isCorrect: false },
+    ],
+    correctValue: "100 m",
+    targetedMisconceptions: [],
+    source: src('phys.mech.kinematics-1d', "s = ut + ½at² = 0 + ½ × 0.5 × 400 = 100 m; final speed × time (200 m) ignores that it started from rest (launch-set slack, synthetic-student pool exhaustion 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.kinematics-1d', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.DEVELOPING,
+    stem: "A ball is thrown straight up at 14.7 m/s. How long does it take to reach its highest point? (g = 9.8 m/s²)",
+    choices: [
+      { text: "1.5 s — it loses 9.8 m/s of upward speed every second", isCorrect: true },
+      { text: "3.0 s — the time to go up and come back down", isCorrect: false },
+      { text: "0.67 s — g divided by the launch speed", isCorrect: false },
+      { text: "14.7 s", isCorrect: false },
+    ],
+    correctValue: "1.5 s",
+    targetedMisconceptions: [],
+    source: src('phys.mech.kinematics-1d', "v = u − gt reaches 0 when t = 14.7/9.8 = 1.5 s; 3.0 s is the whole flight (launch-set slack, synthetic-student pool exhaustion 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.newtons-second-law', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: "A net force of 12 N acts on a 3 kg trolley. What is its acceleration?",
+    choices: [
+      { text: "4 m/s² — a = F/m = 12/3", isCorrect: true },
+      { text: "36 m/s² — force multiplied by mass", isCorrect: false },
+      { text: "0.25 m/s² — mass divided by force", isCorrect: false },
+      { text: "12 m/s² — the acceleration equals the force", isCorrect: false },
+    ],
+    correctValue: "4 m/s²",
+    targetedMisconceptions: [],
+    source: src('phys.mech.newtons-second-law', "a = ΣF/m = 12/3 = 4 m/s² (launch-set slack, synthetic-student pool exhaustion 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.newtons-second-law', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.DEVELOPING,
+    stem: "A 2 kg box is pushed across a floor with a 10 N horizontal force while friction on it is 4 N. What is its acceleration?",
+    choices: [
+      { text: "3 m/s² — the NET force is 10 − 4 = 6 N", isCorrect: true },
+      { text: "5 m/s² — the 10 N push divided by the mass", isCorrect: false },
+      { text: "7 m/s² — the push and friction added together", isCorrect: false },
+      { text: "2 m/s² — the friction divided by the mass", isCorrect: false },
+    ],
+    correctValue: "3 m/s²",
+    targetedMisconceptions: [],
+    source: src('phys.mech.newtons-second-law', "ΣF = 10 − 4 = 6 N, so a = 6/2 = 3 m/s²; the second law uses the NET force, not the applied one (launch-set slack, synthetic-student pool exhaustion 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.newtons-third-law', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: "You push on a wall with a force of 50 N. What force does the wall exert on you?",
+    choices: [
+      { text: "50 N, pushing back on you — the pair force is equal and opposite", isCorrect: true },
+      { text: "None — walls cannot push, they only stop things", isCorrect: false },
+      { text: "Less than 50 N, because the wall does not move", isCorrect: false },
+      { text: "More than 50 N, because the wall is heavier than you", isCorrect: false },
+    ],
+    correctValue: "50 N back on you",
+    targetedMisconceptions: [],
+    source: src('phys.mech.newtons-third-law', "every force is one half of an interaction pair: equal size, opposite direction, acting on the other object; whether the wall moves is decided by the forces ON the wall (launch-set slack, synthetic-student pool exhaustion 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.newtons-third-law', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.DEVELOPING,
+    stem: "A 60 kg skater and a 30 kg skater stand still on smooth ice and push off each other. The lighter skater moves away at 2 m/s. How does the heavier skater move?",
+    choices: [
+      { text: "1 m/s in the opposite direction — equal forces for the same time, but twice the mass", isCorrect: true },
+      { text: "2 m/s in the opposite direction — equal forces mean equal speeds", isCorrect: false },
+      { text: "4 m/s in the opposite direction", isCorrect: false },
+      { text: "The heavier skater stays still because the lighter one did the pushing", isCorrect: false },
+    ],
+    correctValue: "1 m/s opposite",
+    targetedMisconceptions: [],
+    source: src('phys.mech.newtons-third-law', "the pair forces are equal and act for the same time, so each skater gets the same impulse: 60v = 30 × 2 gives v = 1 m/s the other way (launch-set slack, synthetic-student pool exhaustion 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.tension', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: "A 5 kg lamp hangs at rest from a single vertical cord. What is the tension in the cord? (g = 9.8 m/s²)",
+    choices: [
+      { text: "49 N — it must balance the lamp’s weight", isCorrect: true },
+      { text: "5 N — the tension equals the mass", isCorrect: false },
+      { text: "0 N — nothing is moving, so there is no force", isCorrect: false },
+      { text: "98 N — twice the weight, one for each end of the cord", isCorrect: false },
+    ],
+    correctValue: "49 N",
+    targetedMisconceptions: [],
+    source: src('phys.mech.tension', "at rest the net force is zero, so T = mg = 5 × 9.8 = 49 N (launch-set slack, synthetic-student pool exhaustion 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.tension', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.DEVELOPING,
+    stem: "A rope pulls a 2 kg bucket UPWARDS with an acceleration of 1.2 m/s². What is the tension in the rope? (g = 9.8 m/s²)",
+    choices: [
+      { text: "22 N — T − mg = ma, so T = 2 × (9.8 + 1.2)", isCorrect: true },
+      { text: "19.6 N — the tension equals the weight", isCorrect: false },
+      { text: "17.2 N — the acceleration is subtracted from g", isCorrect: false },
+      { text: "2.4 N — only the mass times the acceleration", isCorrect: false },
+    ],
+    correctValue: "22 N",
+    targetedMisconceptions: [],
+    source: src('phys.mech.tension', "T − mg = ma gives T = m(g + a) = 2 × 11 = 22 N; an upward acceleration needs more than the weight (launch-set slack, synthetic-student pool exhaustion 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.friction', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: "A 10 kg box rests on a floor with μs = 0.5 and μk = 0.4. You push it horizontally with 30 N and it does not move. What is the friction force on it? (g = 9.8 m/s²)",
+    choices: [
+      { text: "30 N — static friction matches the push, up to its 49 N limit", isCorrect: true },
+      { text: "49 N — static friction is always μs × N", isCorrect: false },
+      { text: "39.2 N — kinetic friction, μk × N", isCorrect: false },
+      { text: "0 N — nothing is sliding, so there is no friction", isCorrect: false },
+    ],
+    correctValue: "30 N",
+    targetedMisconceptions: [],
+    source: src('phys.mech.friction', "static friction adjusts to whatever keeps the box still, up to μs N = 0.5 × 98 = 49 N; μs N is a maximum, not the value (launch-set slack, synthetic-student pool exhaustion 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.friction', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: "A block slides across a table. If it were sliding twice as fast (at everyday speeds), what would happen to the kinetic friction on it?",
+    choices: [
+      { text: "About the same — kinetic friction is roughly μk × N, whatever the speed", isCorrect: true },
+      { text: "It would double — faster sliding means more friction", isCorrect: false },
+      { text: "It would disappear — friction only acts on slow objects", isCorrect: false },
+    ],
+    correctValue: "about the same",
+    targetedMisconceptions: [],
+    source: src('phys.mech.friction', "the kinetic friction model f = μk N does not depend on speed at everyday speeds; speed-dependent drag is a different force (launch-set slack, synthetic-student pool exhaustion 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.inclined-plane', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: "A 4 kg block sits on a frictionless ramp inclined at 30°. What is the part of its weight that acts ALONG the slope? (g = 9.8 m/s², sin 30° = 0.5, cos 30° ≈ 0.87)",
+    choices: [
+      { text: "19.6 N — mg sin 30°", isCorrect: true },
+      { text: "39.2 N — the whole weight", isCorrect: false },
+      { text: "About 34 N — mg cos 30°, which presses into the ramp", isCorrect: false },
+      { text: "0 N — the ramp holds the block up", isCorrect: false },
+    ],
+    correctValue: "19.6 N",
+    targetedMisconceptions: [],
+    source: src('phys.mech.inclined-plane', "along the slope the weight component is mg sin θ = 4 × 9.8 × 0.5 = 19.6 N; mg cos θ is the component into the surface (launch-set slack, synthetic-student pool exhaustion 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.inclined-plane', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.DEVELOPING,
+    stem: "A block slides down a frictionless ramp inclined at 30°. What is its acceleration down the slope? (g = 9.8 m/s²)",
+    choices: [
+      { text: "4.9 m/s² — g sin 30°", isCorrect: true },
+      { text: "9.8 m/s² — everything falls at g", isCorrect: false },
+      { text: "About 8.5 m/s² — g cos 30°", isCorrect: false },
+      { text: "It depends on the block’s mass", isCorrect: false },
+    ],
+    correctValue: "4.9 m/s²",
+    targetedMisconceptions: [],
+    source: src('phys.mech.inclined-plane', "along the slope ΣF = mg sin θ, so a = g sin θ = 4.9 m/s², independent of mass (launch-set slack, synthetic-student pool exhaustion 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.impulse', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: "A 0.5 kg ball hits a wall at 4 m/s and bounces straight back at 6 m/s. What impulse does the wall give the ball?",
+    choices: [
+      { text: "5 N·s, directed away from the wall — the velocity changes by 10 m/s", isCorrect: true },
+      { text: "1 N·s — the speeds differ by only 2 m/s", isCorrect: false },
+      { text: "Zero — the ball leaves with about the same speed", isCorrect: false },
+      { text: "3 N·s — mass times the final speed", isCorrect: false },
+    ],
+    correctValue: "5 N·s away from the wall",
+    targetedMisconceptions: [],
+    source: src('phys.mech.impulse', "impulse = Δp = m(v_f − v_i) = 0.5 × (−6 − 4) = −5 N·s; reversing direction counts both speeds (launch-set slack, synthetic-student pool exhaustion 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.impulse', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.DEVELOPING,
+    stem: "A 1000 kg car moving at 20 m/s is brought to rest in 4 s. What average force stops it?",
+    choices: [
+      { text: "5000 N — the impulse (20 000 N·s) divided by the time", isCorrect: true },
+      { text: "20 000 N — the car’s momentum", isCorrect: false },
+      { text: "80 000 N — momentum multiplied by the time", isCorrect: false },
+      { text: "250 N", isCorrect: false },
+    ],
+    correctValue: "5000 N",
+    targetedMisconceptions: [],
+    source: src('phys.mech.impulse', "FΔt = Δp gives F = (1000 × 20)/4 = 5000 N; a longer stopping time would mean a smaller force (launch-set slack, synthetic-student pool exhaustion 2026-09-25)"),
+  },
+]
+
+// ═══════════════════════════════════════════════════════════════════════════
+// BATCH 19 — launch-set slack: the remaining phys.mech @ HIGH launch topics.
+// ═══════════════════════════════════════════════════════════════════════════
+//
+// After Batches 17-18 every other launch topic still had five gradeable HIGH
+// probes (four ACTIVE in production). One or two more each, in free ladder
+// slots only (closed-choice short_answer FOUNDATIONAL, and DEVELOPING where
+// that rung is also free), so one mistake no longer runs the pool out.
+const LAUNCH_SLACK_C: SeedProbe[] = [
+  {
+    conceptId: 'phys.mech.displacement', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: "A runner goes once around a 400 m circular track and finishes exactly where she started. What is her displacement for the lap?",
+    choices: [
+      { text: "0 m — she ends at the same point she started from", isCorrect: true },
+      { text: "400 m — the length of the track", isCorrect: false, misconceptionId: "phys.mech.displacement:MC-DISPLACEMENT-IS-DISTANCE" },
+      { text: "200 m — half of the lap", isCorrect: false },
+      { text: "It cannot be found without knowing her speed", isCorrect: false },
+    ],
+    correctValue: "0 m",
+    targetedMisconceptions: ["phys.mech.displacement:MC-DISPLACEMENT-IS-DISTANCE"],
+    source: src('phys.mech.displacement', "displacement is final position minus initial position; a closed lap returns to the start, so it is zero although the distance is 400 m (launch-set slack, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.displacement', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.DEVELOPING,
+    stem: "A cat walks 5 m east and then 2 m west. Taking east as positive, what is its displacement?",
+    choices: [
+      { text: "+3 m (3 m east) — 5 m east minus 2 m back", isCorrect: true },
+      { text: "7 m — the total distance walked", isCorrect: false, misconceptionId: "phys.mech.displacement:MC-DISPLACEMENT-IS-DISTANCE" },
+      { text: "−3 m — it finished by walking west", isCorrect: false },
+      { text: "+2 m — only the last part of the walk counts", isCorrect: false },
+    ],
+    correctValue: "+3 m",
+    targetedMisconceptions: ["phys.mech.displacement:MC-DISPLACEMENT-IS-DISTANCE"],
+    source: src('phys.mech.displacement', "Δx = +5 − 2 = +3 m; adding the two lengths gives the distance, 7 m (launch-set slack, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.velocity', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: "A cyclist rides 300 m due north in 60 s. What is her average velocity?",
+    choices: [
+      { text: "5 m/s north — 300 m divided by 60 s, with the direction", isCorrect: true },
+      { text: "18 000 m/s north — the distance multiplied by the time", isCorrect: false },
+      { text: "0.2 m/s north — the time divided by the distance", isCorrect: false },
+      { text: "300 m north — the displacement itself", isCorrect: false },
+    ],
+    correctValue: "5 m/s north",
+    targetedMisconceptions: [],
+    source: src('phys.mech.velocity', "v = Δx/Δt = 300/60 = 5 m/s, north; velocity carries the direction of the displacement (launch-set slack, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.velocity', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.DEVELOPING,
+    stem: "A dog runs 40 m east in 8 s, then 20 m back west in 4 s. What is its average velocity for the whole 12 s?",
+    choices: [
+      { text: "About 1.7 m/s east — 20 m net displacement over 12 s", isCorrect: true },
+      { text: "5 m/s east — the full 60 m divided by 12 s", isCorrect: false, misconceptionId: "phys.mech.velocity:MC-SPEED-IS-VELOCITY" },
+      { text: "Zero — it turned round, so it has no velocity", isCorrect: false },
+      { text: "2.5 m/s east — 20 m over the first 8 s", isCorrect: false },
+    ],
+    correctValue: "about 1.7 m/s east",
+    targetedMisconceptions: ["phys.mech.velocity:MC-SPEED-IS-VELOCITY"],
+    source: src('phys.mech.velocity', "average velocity = net displacement / time = 20/12 ≈ 1.7 m/s east; 60/12 = 5 m/s is the average speed (launch-set slack, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.force', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: "Two people push a stalled car in the same direction, one with 300 N and the other with 200 N. Friction on the car is 400 N. What is the net force on the car?",
+    choices: [
+      { text: "100 N forward — 300 + 200 − 400", isCorrect: true },
+      { text: "500 N forward — friction does not count", isCorrect: false },
+      { text: "900 N — all three forces added", isCorrect: false },
+      { text: "0 N — pushes and friction always balance", isCorrect: false },
+    ],
+    correctValue: "100 N forward",
+    targetedMisconceptions: [],
+    source: src('phys.mech.force', "forces along a line add with sign: 300 + 200 − 400 = 100 N in the pushing direction (launch-set slack, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.newtons-first-law', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: "A 1000 kg car cruises in a straight line at a steady 20 m/s. What is the net force on it?",
+    choices: [
+      { text: "0 N — constant velocity means the forces on it are balanced", isCorrect: true },
+      { text: "A net forward force — otherwise it would slow down", isCorrect: false, misconceptionId: "phys.mech.newtons-first-law:MC-3" },
+      { text: "20 000 N forward — its mass times its speed", isCorrect: false },
+      { text: "9800 N downward — its weight", isCorrect: false },
+    ],
+    correctValue: "0 N",
+    targetedMisconceptions: ["phys.mech.newtons-first-law:MC-3"],
+    source: src('phys.mech.newtons-first-law', "Newton's first law: unchanging velocity means zero net force; the engine force only balances resistance (launch-set slack, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.newtons-first-law', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.DEVELOPING,
+    stem: "A passenger is standing in a bus that is moving steadily forward. The bus brakes suddenly. Which way does the passenger lurch relative to the bus?",
+    choices: [
+      { text: "Forward — her body keeps moving at the old velocity while the bus slows", isCorrect: true },
+      { text: "Backward — the braking force pushes her back", isCorrect: false },
+      { text: "Forward — the brakes push her forward", isCorrect: false },
+      { text: "Neither — she slows down together with the bus", isCorrect: false },
+    ],
+    correctValue: "forward (inertia)",
+    targetedMisconceptions: [],
+    source: src('phys.mech.newtons-first-law', "no forward force acts on her; by inertia she keeps her velocity while the floor beneath her slows, so she moves forward relative to the bus (launch-set slack, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.kinematics-2d', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: "A ball rolls off a table at 3 m/s horizontally and takes 0.5 s to reach the floor. How far from the table's edge does it land, measured horizontally? (ignore air resistance)",
+    choices: [
+      { text: "1.5 m — the horizontal speed stays 3 m/s for the whole 0.5 s", isCorrect: true },
+      { text: "Less than 1.5 m — gravity slows the horizontal motion", isCorrect: false, misconceptionId: "phys.mech.kinematics-2d:MC-AXES-COUPLED" },
+      { text: "0 m — it falls straight down once it leaves the table", isCorrect: false },
+      { text: "6 m — the speed divided by the time", isCorrect: false },
+    ],
+    correctValue: "1.5 m",
+    targetedMisconceptions: ["phys.mech.kinematics-2d:MC-AXES-COUPLED"],
+    source: src('phys.mech.kinematics-2d', "x = vₓt = 3 × 0.5 = 1.5 m; gravity acts only vertically, so vₓ is unchanged (launch-set slack, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.projectile-motion', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: "A stone is thrown horizontally at 10 m/s from the top of a cliff 20 m high. How long does it take to reach the ground below? (g = 10 m/s², no air resistance)",
+    choices: [
+      { text: "2 s — the fall time depends only on the 20 m drop", isCorrect: true },
+      { text: "Longer than 2 s — the sideways speed holds it up", isCorrect: false, misconceptionId: "phys.mech.projectile-motion:MC-AXES-NOT-INDEPENDENT" },
+      { text: "0.5 s — 10 divided by 20", isCorrect: false },
+      { text: "4 s — 2 × 20 ÷ 10", isCorrect: false },
+    ],
+    correctValue: "2 s",
+    targetedMisconceptions: ["phys.mech.projectile-motion:MC-AXES-NOT-INDEPENDENT"],
+    source: src('phys.mech.projectile-motion', "vertical motion is independent of horizontal: h = ½gt² gives t = √(2 × 20/10) = 2 s (launch-set slack, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.projectile-motion', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.DEVELOPING,
+    stem: "A ball is kicked from level ground at 20 m/s, 30° above the horizontal. How long is it in the air before it lands on the same level? (g = 10 m/s², sin 30° = 0.5)",
+    choices: [
+      { text: "2 s — it rises for 1 s on 10 m/s of vertical speed, then falls for 1 s", isCorrect: true },
+      { text: "1 s — the time to reach the top", isCorrect: false },
+      { text: "4 s — as if all 20 m/s were vertical", isCorrect: false },
+      { text: "About 3.5 s — using the horizontal component", isCorrect: false },
+    ],
+    correctValue: "2 s",
+    targetedMisconceptions: [],
+    source: src('phys.mech.projectile-motion', "v_y = 20 sin 30° = 10 m/s; time to the top 10/10 = 1 s, and the flight is symmetric, so 2 s (launch-set slack, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.circular-motion', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: "A ball moves in a horizontal circle of radius 1 m at a steady 3 m/s. What is its acceleration?",
+    choices: [
+      { text: "9 m/s² towards the centre — v²/r", isCorrect: true },
+      { text: "Zero — its speed is not changing", isCorrect: false, misconceptionId: "phys.mech.circular-motion:MC-CONSTANT-SPEED-NO-ACCELERATION" },
+      { text: "3 m/s² — v divided by r", isCorrect: false },
+      { text: "9 m/s² outwards, away from the centre", isCorrect: false },
+    ],
+    correctValue: "9 m/s² towards the centre",
+    targetedMisconceptions: ["phys.mech.circular-motion:MC-CONSTANT-SPEED-NO-ACCELERATION"],
+    source: src('phys.mech.circular-motion', "the direction of velocity keeps changing, so a = v²/r = 3²/1 = 9 m/s², pointing to the centre (launch-set slack, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.work', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: "You push a box 3 m across a floor with a steady 50 N horizontal force. How much work does your push do on the box?",
+    choices: [
+      { text: "150 J — force × distance in the direction of the force", isCorrect: true },
+      { text: "53 J — force plus distance", isCorrect: false },
+      { text: "About 17 J — force divided by distance", isCorrect: false },
+      { text: "0 J — the box does not speed up", isCorrect: false },
+    ],
+    correctValue: "150 J",
+    targetedMisconceptions: [],
+    source: src('phys.mech.work', "W = Fd cos 0° = 50 × 3 = 150 J (launch-set slack, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.work', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.DEVELOPING,
+    stem: "You lift a 2 kg bag straight up through 1.5 m at a steady speed. How much work do you do on the bag? (g = 9.8 m/s²)",
+    choices: [
+      { text: "29.4 J — your force equals its 19.6 N weight, over 1.5 m", isCorrect: true },
+      { text: "3 J — the mass times the height", isCorrect: false },
+      { text: "0 J — its speed never changed", isCorrect: false },
+      { text: "19.6 J — just its weight", isCorrect: false },
+    ],
+    correctValue: "29.4 J",
+    targetedMisconceptions: [],
+    source: src('phys.mech.work', "at steady speed your force equals mg = 19.6 N, so W = 19.6 × 1.5 = 29.4 J (gravity does −29.4 J, so the net work is zero) (launch-set slack, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.kinetic-energy', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: "A 4 kg ball moves at 3 m/s. What is its kinetic energy?",
+    choices: [
+      { text: "18 J — ½ × 4 × 3²", isCorrect: true },
+      { text: "12 J — mass times speed", isCorrect: false, misconceptionId: "phys.mech.kinetic-energy:MC-KE-LINEAR" },
+      { text: "36 J — the ½ has been left out", isCorrect: false },
+      { text: "6 J — ½ × mass × speed", isCorrect: false, misconceptionId: "phys.mech.kinetic-energy:MC-KE-LINEAR" },
+    ],
+    correctValue: "18 J",
+    targetedMisconceptions: ["phys.mech.kinetic-energy:MC-KE-LINEAR"],
+    source: src('phys.mech.kinetic-energy', "KE = ½mv² = ½ × 4 × 9 = 18 J; kinetic energy grows with the SQUARE of speed (launch-set slack, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.potential-energy', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: "A 5 kg box is lifted onto a shelf 2 m above the floor. How much gravitational potential energy does it gain? (g = 9.8 m/s²)",
+    choices: [
+      { text: "98 J — mgh = 5 × 9.8 × 2", isCorrect: true },
+      { text: "10 J — the mass times the height", isCorrect: false },
+      { text: "49 J — half of mgh", isCorrect: false },
+      { text: "2.5 J — the mass divided by the height", isCorrect: false },
+    ],
+    correctValue: "98 J",
+    targetedMisconceptions: [],
+    source: src('phys.mech.potential-energy', "ΔGPE = mgΔh = 5 × 9.8 × 2 = 98 J (launch-set slack, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.work-energy-theorem', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: "A 2 kg trolley starts from rest, and the net force on it does 16 J of work. What speed does it reach?",
+    choices: [
+      { text: "4 m/s — ½ × 2 × v² = 16", isCorrect: true },
+      { text: "8 m/s — the work divided by the mass", isCorrect: false },
+      { text: "About 2.8 m/s — using KE = mv² without the ½", isCorrect: false },
+      { text: "16 m/s — the speed equals the work done", isCorrect: false },
+    ],
+    correctValue: "4 m/s",
+    targetedMisconceptions: [],
+    source: src('phys.mech.work-energy-theorem', "W_net = ΔKE, so ½ × 2 × v² = 16, v² = 16, v = 4 m/s (launch-set slack, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.conservation-of-energy', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: "A skateboarder starts from rest at the top of a smooth ramp 1.8 m high. Ignoring friction, how fast is she moving at the bottom? (g = 10 m/s²)",
+    choices: [
+      { text: "6 m/s — mgh = ½mv² gives v = √(2gh) = √36", isCorrect: true },
+      { text: "36 m/s — 2gh without the square root", isCorrect: false },
+      { text: "18 m/s — g times h", isCorrect: false },
+      { text: "It depends on her mass", isCorrect: false },
+    ],
+    correctValue: "6 m/s",
+    targetedMisconceptions: [],
+    source: src('phys.mech.conservation-of-energy', "energy conservation: mgh = ½mv², mass cancels, v = √(2 × 10 × 1.8) = 6 m/s (launch-set slack, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.power', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: "A student runs up a flight of stairs, gaining 1200 J of potential energy in 4 s. What average power does she develop?",
+    choices: [
+      { text: "300 W — 1200 J ÷ 4 s", isCorrect: true },
+      { text: "1200 W — power is the energy gained", isCorrect: false, misconceptionId: "phys.mech.power:MC-POWER-IS-ENERGY" },
+      { text: "4800 W — the energy multiplied by the time", isCorrect: false },
+      { text: "About 0.003 W — the time divided by the energy", isCorrect: false },
+    ],
+    correctValue: "300 W",
+    targetedMisconceptions: ["phys.mech.power:MC-POWER-IS-ENERGY"],
+    source: src('phys.mech.power', "P = E/t = 1200/4 = 300 W; power is the RATE of transferring energy, not the energy (launch-set slack, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.momentum', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: "What is the momentum of a 1500 kg car travelling east at 20 m/s?",
+    choices: [
+      { text: "30 000 kg·m/s east — mass × velocity", isCorrect: true },
+      { text: "20 m/s east — momentum is just the velocity", isCorrect: false, misconceptionId: "phys.mech.momentum:MC-MOMENTUM-IS-SPEED" },
+      { text: "300 000 J — ½mv²", isCorrect: false },
+      { text: "75 kg·m/s — mass divided by speed", isCorrect: false },
+    ],
+    correctValue: "30 000 kg·m/s east",
+    targetedMisconceptions: ["phys.mech.momentum:MC-MOMENTUM-IS-SPEED"],
+    source: src('phys.mech.momentum', "p = mv = 1500 × 20 = 30 000 kg·m/s, in the direction of the velocity; ½mv² is kinetic energy, not momentum (launch-set slack, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.momentum', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.DEVELOPING,
+    stem: "A 0.2 kg ball travelling east at 10 m/s is caught and brought to rest. Taking east as positive, what is its change in momentum?",
+    choices: [
+      { text: "−2 kg·m/s (2 kg·m/s westward) — from +2 to 0", isCorrect: true },
+      { text: "0 — it ends with no momentum, so nothing changed", isCorrect: false },
+      { text: "+2 kg·m/s — the momentum it had", isCorrect: false },
+      { text: "−10 kg·m/s — the change in velocity", isCorrect: false },
+    ],
+    correctValue: "−2 kg·m/s",
+    targetedMisconceptions: [],
+    source: src('phys.mech.momentum', "Δp = p_f − p_i = 0 − (0.2 × 10) = −2 kg·m/s (launch-set slack, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.conservation-of-momentum', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: "Two carts, 1 kg and 3 kg, rest together on a frictionless track with a compressed spring between them. When the spring is released the 3 kg cart moves right at 2 m/s. What does the 1 kg cart do?",
+    choices: [
+      { text: "Moves left at 6 m/s — total momentum stays zero", isCorrect: true },
+      { text: "Moves left at 2 m/s — equal and opposite speeds", isCorrect: false },
+      { text: "Moves right at 6 m/s", isCorrect: false },
+      { text: "Stays at rest — the spring pushed only the heavier cart", isCorrect: false },
+    ],
+    correctValue: "6 m/s left",
+    targetedMisconceptions: [],
+    source: src('phys.mech.conservation-of-momentum', "total momentum starts at 0, so 1 × v + 3 × 2 = 0 and v = −6 m/s (6 m/s left) (launch-set slack, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.collisions-elastic', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: "A 2 kg cart at 3 m/s hits a 1 kg cart at rest. Afterwards the 2 kg cart moves at 1 m/s and the 1 kg cart at 4 m/s, both in the original direction. Was the collision elastic?",
+    choices: [
+      { text: "Yes — the kinetic energy is 9 J before and 9 J after", isCorrect: true },
+      { text: "No — the 2 kg cart slowed down, so energy must have been lost", isCorrect: false, misconceptionId: "phys.mech.collisions-elastic:MC-ALL-COLLISIONS-ELASTIC" },
+      { text: "No — the momentum changed", isCorrect: false },
+      { text: "It cannot be decided without the collision time", isCorrect: false },
+    ],
+    correctValue: "yes (KE 9 J before and after)",
+    targetedMisconceptions: [],
+    source: src('phys.mech.collisions-elastic', "momentum: 6 = 2 + 4 ✓; KE: ½·2·3² = 9 J before, ½·2·1² + ½·1·4² = 1 + 8 = 9 J after, so kinetic energy is conserved: elastic (launch-set slack, 2026-09-25)"),
+  },
+]
+
+// ═══════════════════════════════════════════════════════════════════════════
+// BATCH 20 — launch-set depth: the last free ladder rungs on five topics.
+// ═══════════════════════════════════════════════════════════════════════════
+//
+// Projectile motion, work, momentum, free-body diagram and friction still had
+// free rungs in existing ladder slots. Filling them gives each 8-10 gradeable
+// HIGH probes, so repeat runs and re-teach loops draw fresh questions.
+const LAUNCH_DEPTH_E: SeedProbe[] = [
+  {
+    conceptId: 'phys.mech.projectile-motion', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: "Two balls are launched from level ground at the same speed, one at 30° and the other at 60° above the horizontal (no air resistance). Which one lands farther away?",
+    choices: [
+      { text: "They land the same distance away — 30° and 60° add to 90°, so their ranges are equal", isCorrect: true },
+      { text: "The 60° ball — a higher launch always goes farther", isCorrect: false, misconceptionId: "phys.mech.projectile-motion:MC-MAX-RANGE-90DEG" },
+      { text: "The 30° ball — a flatter launch always goes farther", isCorrect: false },
+      { text: "The 60° ball, because it stays in the air longer", isCorrect: false },
+    ],
+    correctValue: "the same distance",
+    targetedMisconceptions: ["phys.mech.projectile-motion:MC-MAX-RANGE-90DEG"],
+    source: src('phys.mech.projectile-motion', "range = v² sin 2θ / g, and sin 60° = sin 120°, so complementary angles give equal range; the 60° ball flies longer but moves forward more slowly (launch-set depth, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.projectile-motion', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: "At the very top of its flight, what is a thrown ball's acceleration? (no air resistance)",
+    choices: [
+      { text: "9.8 m/s² downward — gravity still acts at the top", isCorrect: true },
+      { text: "Zero — the ball stops for an instant at the top", isCorrect: false },
+      { text: "Zero vertically, but it is accelerating forward", isCorrect: false },
+    ],
+    correctValue: "9.8 m/s² downward",
+    targetedMisconceptions: [],
+    source: src('phys.mech.projectile-motion', "only the vertical VELOCITY is momentarily zero at the top; the acceleration is g downward throughout the flight (launch-set depth, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.projectile-motion', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: "Over level ground, one bullet is fired horizontally from a rifle while another is dropped from the same height at the same instant. Which hits the ground first? (no air resistance)",
+    choices: [
+      { text: "They land at the same time — the horizontal speed does not change the fall", isCorrect: true },
+      { text: "The dropped bullet — the fired bullet's speed keeps it up longer", isCorrect: false, misconceptionId: "phys.mech.projectile-motion:MC-AXES-NOT-INDEPENDENT" },
+      { text: "The fired bullet — it is moving much faster", isCorrect: false },
+    ],
+    correctValue: "the same time",
+    targetedMisconceptions: ["phys.mech.projectile-motion:MC-AXES-NOT-INDEPENDENT"],
+    source: src('phys.mech.projectile-motion', "vertical and horizontal motions are independent: both start with zero vertical velocity and fall the same height under g (launch-set depth, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.work', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: "A 2 kg ball is carried up a staircase that rises 3 m vertically while moving 5 m horizontally. How much work does GRAVITY do on the ball? (g = 9.8 m/s²)",
+    choices: [
+      { text: "−58.8 J — only the 3 m rise counts, and gravity opposes it", isCorrect: true },
+      { text: "+58.8 J — the ball gains height", isCorrect: false },
+      { text: "−98 J — using the 5 m horizontal distance", isCorrect: false },
+      { text: "0 J — the ball ends up moving sideways as well", isCorrect: false },
+    ],
+    correctValue: "−58.8 J",
+    targetedMisconceptions: [],
+    source: src('phys.mech.work', "gravity's work depends only on vertical displacement: W = −mgΔh = −2 × 9.8 × 3 = −58.8 J; the horizontal part is perpendicular to the weight (launch-set depth, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.work', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: "You hold a heavy bag perfectly still for two minutes. How much work, in the physics sense, do you do on the bag?",
+    choices: [
+      { text: "Zero — the bag does not move, so no work is done on it", isCorrect: true },
+      { text: "A lot — holding it makes your arms tired", isCorrect: false },
+      { text: "It depends on how heavy the bag is", isCorrect: false },
+    ],
+    correctValue: "zero",
+    targetedMisconceptions: [],
+    source: src('phys.mech.work', "W = Fd; with no displacement no work is done on the bag, although your muscles use energy internally (launch-set depth, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.work', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: "A satellite moves in a circular orbit at constant speed. How much work does gravity do on it over any part of the orbit?",
+    choices: [
+      { text: "Zero — gravity always points at right angles to the satellite's motion", isCorrect: true },
+      { text: "Positive — gravity is the force that keeps it moving", isCorrect: false },
+      { text: "Zero only over a full orbit, positive over part of one", isCorrect: false },
+    ],
+    correctValue: "zero",
+    targetedMisconceptions: [],
+    source: src('phys.mech.work', "gravity is centripetal, always perpendicular to the velocity, so it does no work and the speed stays constant (launch-set depth, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.momentum', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: "A 0.15 kg ball moving at 20 m/s is hit straight back along its path at 30 m/s. What is the size of its change in momentum?",
+    choices: [
+      { text: "7.5 kg·m/s — 0.15 × (30 + 20), because the direction reversed", isCorrect: true },
+      { text: "1.5 kg·m/s — 0.15 × (30 − 20)", isCorrect: false, misconceptionId: "phys.mech.momentum:MC-MOMENTUM-IS-SCALAR" },
+      { text: "4.5 kg·m/s — only the final momentum", isCorrect: false },
+      { text: "Zero — the speeds are almost the same", isCorrect: false },
+    ],
+    correctValue: "7.5 kg·m/s",
+    targetedMisconceptions: ["phys.mech.momentum:MC-MOMENTUM-IS-SCALAR"],
+    source: src('phys.mech.momentum', "taking the new direction as positive: Δp = 0.15 × 30 − 0.15 × (−20) = 7.5 kg·m/s; momentum is a vector, so a reversal adds the two magnitudes (launch-set depth, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.momentum', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: "A loaded truck and a bicycle travel along the same road at the same speed. Which has more momentum?",
+    choices: [
+      { text: "The truck — it has far more mass at the same speed", isCorrect: true },
+      { text: "They are equal — they have the same speed", isCorrect: false, misconceptionId: "phys.mech.momentum:MC-MOMENTUM-IS-SPEED" },
+      { text: "The bicycle — it is easier to stop", isCorrect: false },
+    ],
+    correctValue: "the truck",
+    targetedMisconceptions: ["phys.mech.momentum:MC-MOMENTUM-IS-SPEED"],
+    source: src('phys.mech.momentum', "p = mv; at equal speeds the larger mass has the larger momentum (launch-set depth, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.momentum', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: "A ball is thrown straight up and caught again at the same height, moving at the same speed. How does its momentum just before the catch compare with just after the throw?",
+    choices: [
+      { text: "Same size but opposite direction — so its momentum has changed", isCorrect: true },
+      { text: "Exactly the same — the speed is the same, so the momentum did not change", isCorrect: false, misconceptionId: "phys.mech.momentum:MC-MOMENTUM-IS-SCALAR" },
+      { text: "Zero both times — only horizontal motion has momentum", isCorrect: false },
+    ],
+    correctValue: "same size, opposite direction",
+    targetedMisconceptions: ["phys.mech.momentum:MC-MOMENTUM-IS-SCALAR"],
+    source: src('phys.mech.momentum', "momentum is a vector: the velocity reversed, so p went from +mv to −mv, a change of 2mv delivered by gravity (launch-set depth, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.free-body-diagram', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: "A box stands on the floor of a lift that is moving UPWARD at a constant speed. Which forces belong on the box's free-body diagram?",
+    choices: [
+      { text: "Its weight down and the floor's normal force up, equal in size", isCorrect: true },
+      { text: "Weight, normal force, and an upward 'force of motion' from the lift", isCorrect: false, misconceptionId: "phys.mech.free-body-diagram:MC-MOTION-FORCE" },
+      { text: "Only the normal force — the upward motion cancels the weight", isCorrect: false },
+    ],
+    correctValue: "weight and an equal normal force",
+    targetedMisconceptions: ["phys.mech.free-body-diagram:MC-MOTION-FORCE"],
+    source: src('phys.mech.free-body-diagram', "constant velocity means zero net force, so the normal force equals the weight; motion is not a force and does not appear on the diagram (launch-set depth, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.free-body-diagram', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: "A lamp hangs at rest from the ceiling by a single cord. How many forces act on the lamp, and what are they?",
+    choices: [
+      { text: "Two — its weight down and the cord's tension up", isCorrect: true },
+      { text: "One — only the tension in the cord", isCorrect: false },
+      { text: "Three — weight, tension, and the ceiling pulling on the lamp", isCorrect: false },
+      { text: "None — it is not moving", isCorrect: false },
+    ],
+    correctValue: "two: weight and tension",
+    targetedMisconceptions: [],
+    source: src('phys.mech.free-body-diagram', "only the Earth (weight) and the cord (tension) act on the lamp; the ceiling acts on the cord, not on the lamp (launch-set depth, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.free-body-diagram', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.DEVELOPING,
+    stem: "A block rests on a level floor. You pull it with a horizontal rope, but it does not move. How many forces act on the block?",
+    choices: [
+      { text: "Four — weight, normal force, the rope's pull, and static friction", isCorrect: true },
+      { text: "Three — weight, normal force and the rope; nothing is sliding, so no friction", isCorrect: false },
+      { text: "Two — weight and the normal force", isCorrect: false },
+      { text: "Five — including the block's push on the floor", isCorrect: false },
+    ],
+    correctValue: "four",
+    targetedMisconceptions: [],
+    source: src('phys.mech.free-body-diagram', "static friction balances the rope's pull (the block stays put); the block's push on the floor acts on the floor, so it is not on this diagram (launch-set depth, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.friction', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: "When you push off the ground to take a step forward, which way does the ground's friction act on your foot?",
+    choices: [
+      { text: "Forward — your foot pushes back on the ground, so friction on the foot points forward", isCorrect: true },
+      { text: "Backward — friction always opposes the direction you move", isCorrect: false },
+      { text: "There is no friction when you walk", isCorrect: false },
+    ],
+    correctValue: "forward",
+    targetedMisconceptions: [],
+    source: src('phys.mech.friction', "friction opposes the foot's tendency to slip backward, so it points forward and is the force that propels you (launch-set depth, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.friction', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
+    stem: "A 10 kg crate slides across a level floor with a coefficient of kinetic friction of 0.3. What is the friction force on it? (g = 9.8 m/s²)",
+    choices: [
+      { text: "29.4 N — μk × N = 0.3 × 98 N", isCorrect: true },
+      { text: "3 N — μ times the mass", isCorrect: false },
+      { text: "98 N — the crate's weight", isCorrect: false },
+      { text: "About 33 N — the mass divided by μ", isCorrect: false },
+    ],
+    correctValue: "29.4 N",
+    targetedMisconceptions: [],
+    source: src('phys.mech.friction', "on a level floor N = mg = 98 N, so f_k = μk N = 0.3 × 98 = 29.4 N (launch-set depth, 2026-09-25)"),
+  },
+  {
+    conceptId: 'phys.mech.friction', subjectSlug: S, probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.DEVELOPING,
+    stem: "A 4 kg box on a level floor starts to slide only when a horizontal push exceeds 20 N. What is the coefficient of static friction? (g = 10 m/s²)",
+    choices: [
+      { text: "0.5 — 20 N divided by the 40 N normal force", isCorrect: true },
+      { text: "5 — 20 N divided by 4 kg", isCorrect: false },
+      { text: "0.2 — 4 divided by 20", isCorrect: false },
+      { text: "2 — 40 divided by 20", isCorrect: false },
+    ],
+    correctValue: "0.5",
+    targetedMisconceptions: [],
+    source: src('phys.mech.friction', "the largest static friction is μs N, so μs = 20/(4 × 10) = 0.5 (launch-set depth, 2026-09-25)"),
+  },
+]
+
 export const PHYSICS_DEPTH_PROBES: SeedProbe[] = [
   ...UNITS,
   ...SCALARS_VECTORS,
@@ -6478,4 +7316,12 @@ export const PHYSICS_DEPTH_PROBES: SeedProbe[] = [
   ...TAIL,
   // Batch 16 — the seven physics UNDERGRADUATE pairs. PHYSICS COMPLETE.
   ...UG,
+  // Batch 17 — launch-set slack: free-body diagram + normal force @ HIGH.
+  ...LAUNCH_SLACK,
+  // Batch 18 — launch-set slack: the eight thinnest phys.mech @ HIGH topics.
+  ...LAUNCH_SLACK_B,
+  // Batch 19 — launch-set slack: the remaining phys.mech @ HIGH launch topics.
+  ...LAUNCH_SLACK_C,
+  // Batch 20 — launch-set depth: the last free rungs on five topics.
+  ...LAUNCH_DEPTH_E,
 ]

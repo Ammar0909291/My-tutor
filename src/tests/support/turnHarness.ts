@@ -57,6 +57,8 @@ export interface HarnessOptions {
   /** Seed conversation state (phase, counters). Merged over the initial state. */
   conversationState?: Record<string, unknown>
   currentLevel?: string
+  /** The account's `modelOverrideAllowed` DB flag (A/B gates). Default false. */
+  modelOverrideAllowed?: boolean
 }
 
 export interface ServedMcq { question: string; options: string[] }
@@ -72,6 +74,8 @@ export interface HarnessTurn {
    *  internal lesson-opening/resume instruction — never learner-typed, never
    *  persisted). Defaults to false, i.e. an ordinary learner turn. */
   ephemeral?: boolean
+  /** Extra request headers (A/B gate headers). None by default. */
+  headers?: Record<string, string>
 }
 
 export interface TurnResult {
@@ -123,6 +127,7 @@ export interface Harness {
     messages: { id: string; role: string; content: string; createdAt: Date }[]
     snapshot: Record<string, unknown>
     probes: HarnessProbe[]
+    modelOverrideAllowed: boolean
     opts: Required<Pick<HarnessOptions, 'userId' | 'sessionId' | 'subjectSlug' | 'conceptId' | 'lessonTitle' | 'currentLevel'>>
   }
 }
@@ -133,6 +138,7 @@ export function createHarness(): Harness {
     messages: [],
     snapshot: {},
     probes: [],
+    modelOverrideAllowed: false,
     opts: { ...DEFAULTS },
   }
   let seq = 0
@@ -183,7 +189,7 @@ export function createHarness(): Harness {
         grade: 10,
       }),
     },
-    user: { findUnique: () => ({ id: state.opts.userId, modelOverrideAllowed: false, email: 'harness@test.invalid' }) },
+    user: { findUnique: () => ({ id: state.opts.userId, modelOverrideAllowed: state.modelOverrideAllowed, email: 'harness@test.invalid' }) },
     studentProgress: {
       // A learner mid-course, NOT on lesson one. Without this the real
       // firstLessonGuard fires (`notFirstLesson: false`), which also nulls
@@ -286,7 +292,9 @@ export async function driveTurns(
   turns: HarnessTurn[],
   opts: HarnessOptions = {},
 ): Promise<TurnResult[]> {
-  Object.assign(h.state.opts, opts)
+  const { modelOverrideAllowed, ...laneOpts } = opts
+  Object.assign(h.state.opts, laneOpts)
+  h.state.modelOverrideAllowed = modelOverrideAllowed ?? false
   h.state.probes = opts.probes ?? []
   if (opts.conversationState) {
     h.state.snapshot = { ...h.state.snapshot, conversationState: opts.conversationState }
@@ -307,7 +315,7 @@ export async function driveTurns(
     try {
       res = await POST(new Request('http://localhost/api/learn/chat', {
         method: 'POST',
-        headers: { 'content-type': 'application/json' },
+        headers: { 'content-type': 'application/json', ...(t.headers ?? {}) },
         body: JSON.stringify({
           sessionId: h.state.opts.sessionId, message: learnerSays,
           ...(t.ephemeral ? { ephemeral: true } : {}),
