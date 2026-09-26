@@ -234,3 +234,9 @@ emitted no SIGNAL tag on the request turn; 0 PROBE_OUTCOME rows) — offline-val
   questions to either reading, so they were never stripped and are not affected. Tests:
   `relievedProbeAnswersLearnerFirst.test.ts` (clarification with '?', without '?', stray-question
   control, helper table); both halves mutation-checked.
+  Live (production 87f1f98c, one disposable account, two identical perturbation sessions, deleted,
+  re-login blocked): run 2's "show why the term is negative" was relieved (`probeStarvedTurnsBefore
+  2`) and answered in full by the model with the probe beneath (answer-first path). Run 1's same
+  turn was NOT relieved (move 'teach' → `phaseAllowsProbe: false`, by design); the model's
+  confirm-tail mirror was shown unchanged (a confirm tail is never stripped). The yield path itself
+  did not trigger live (it needs relief AND a reply the withhold would delete) — offline-validated.
