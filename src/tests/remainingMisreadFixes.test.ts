@@ -20,8 +20,15 @@ vi.mock('@/lib/rateLimit', () => ({
   rateLimitResponse: () => new Response('{}', { status: 429 }),
 }))
 vi.mock('@/lib/ai/router', async (o) => ({ ...(await o<Record<string, unknown>>()), routeAI: (...a: unknown[]) => h.routeAI(...a) }))
+// Records evidence writes (the real writer is fire-and-forget into prisma).
+const evidence = vi.hoisted(() => [] as { category: string; outcome?: string }[])
+vi.mock('@/lib/teaching/evidence/evidenceEngine', async (o) => ({
+  ...(await o<Record<string, unknown>>()),
+  appendEvidenceEvent: (i: { category: string; outcome?: string }) => { evidence.push(i) },
+}))
 const { POST } = await import('@/app/api/learn/chat/route')
-beforeEach(() => { h.state.messages = []; h.state.snapshot = {} })
+beforeEach(() => { h.state.messages = []; h.state.snapshot = {}; evidence.length = 0 })
+const misconceptionRows = () => evidence.filter((e) => e.category === 'MISCONCEPTION_DETECTED')
 
 const PHYS = { subjectSlug: 'physics', conceptId: 'phys.qm.perturbation-theory', lessonTitle: 'Time-Independent Perturbation Theory' }
 const TAUGHT = 'The second-order correction is a sum over states. For the ground state every term in the sum is negative, because each denominator is negative.'
@@ -100,3 +107,29 @@ describe('5. a model SIGNAL on a request turn is not answer evidence', () => {
     expect(t.logs.some((l) => l.startsWith('[learner-asked-question]'))).toBe(false)
   }, 60_000)
 })
+
+describe('5b. a misconception phrase on a question/request turn is not evidence (2026-09-26)', () => {
+  const tag = (attrs: string) => `\n<!--SIGNAL ${attrs}-->`
+  const setup = { learnerSays: 'ok, continue', modelReplies: 'Teaching. Quick check: what sign do you expect?' }
+
+  it.each([
+    ['question + correctness + phrase', 'why is that term zero?', 'correctness="false" confidence="high" confusion="false" phrase="why is that term zero"'],
+    ['question + phrase only', 'why is that term zero?', 'confidence="high" confusion="false" phrase="why is that term zero"'],
+    ['request (no "?") + phrase only', 'explain why the term vanishes for the ground state', 'confidence="high" confusion="false" phrase="the term vanishes"'],
+  ])('%s → phrase dropped', async (_label, msg, attrs) => {
+    const [, t] = await driveTurns(h, POST, [setup, { learnerSays: msg, modelReplies: `Here is why.${tag(attrs)}` }], PHYS)
+    expect(t.logs.some((l) => l.startsWith('[learner-asked-question]'))).toBe(true)
+    expect(readLog(t, '[ladder]')).toMatchObject({ correctness: null })
+    expect(misconceptionRows()).toHaveLength(0)
+  }, 60_000)
+
+  it('control: a typed ANSWER with a phrase keeps it', async () => {
+    const [, t] = await driveTurns(h, POST, [setup, {
+      learnerSays: 'it is positive because you just add the energies',
+      modelReplies: `Not quite.${tag('correctness="false" confidence="high" confusion="false" phrase="you just add the energies"')}`,
+    }], PHYS)
+    expect(t.logs.some((l) => l.startsWith('[learner-asked-question]'))).toBe(false)
+    expect(misconceptionRows()).toHaveLength(1)
+  }, 60_000)
+})
+

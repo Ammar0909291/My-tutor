@@ -205,3 +205,10 @@ emitted no SIGNAL tag on the request turn; 0 PROBE_OUTCOME rows) — offline-val
   `serverGraded: false`, verified counters 0) and one MISCONCEPTION_DETECTED whose text is the
   learner's question (case C; correctness was dropped, the misconception phrase is not — the
   guard drops only correctness by design). The latter is a remaining, unfixed observation.
+- **Misconception row on question turns (FIXED, 2026-09-26).** The learner-question guard at the
+  signal seam now drops the SIGNAL `phrase` together with `correctness`, and also fires when the
+  model sent a phrase without correctness. Basis: the SIGNAL contract (`signals.ts`) says a
+  question/non-answer carries no tag at all. `confusion`/`confidence` still survive; typed answers
+  keep their phrase. Consequence: such turns also stop setting `misconceptionDetectedThisLesson`.
+  Tests: `remainingMisreadFixes.test.ts` §5b (question + correctness + phrase, phrase-only,
+  request without '?', typed-answer control), both halves mutation-checked.
