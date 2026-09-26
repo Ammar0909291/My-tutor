@@ -63,7 +63,6 @@ import { compileTurnContract, certifies, mayStateVerdict, type TurnContract, typ
 import { compileTurnDelivery, assertDeliverySatisfiesContract, type TurnDelivery, type TurnDeliveryInput } from '@/lib/teaching/turnDelivery'
 import type { TeachingPhase } from '@/lib/teaching/conversationState'
 import { arbitrateTurn, arbitrationUnavailable } from '@/lib/teaching/turnArbitration'
-import { intentExperimentRequested, INTENT_EXPERIMENT_HEADER } from '@/lib/teaching/learnerIntentInterpreter'
 import {
   pickCurrentTopicSlug, selectCurrentLesson, foldProgressionMetrics,
   readProgressionMetrics, progressionTags, needsSignalRepair,
@@ -207,13 +206,7 @@ async function handleChatTurn(req: Request, deadline: RouteDeadline): Promise<Re
   let forceProvider: CertProviderOverride | undefined
   const requestedCertModel = req.headers.get('x-cert-groq-model')
   const requestedCertProvider = req.headers.get('x-cert-provider')
-  // EXPERIMENT (learnerIntentInterpreter.ts): Architecture B of the
-  // learner-intent A/B. Same contract as the two cert headers above — the
-  // header alone does nothing; it is honoured only for an account whose own
-  // DB row has `modelOverrideAllowed = true`, in the SAME single read.
-  const intentExperimentHeader = intentExperimentRequested(req.headers.get(INTENT_EXPERIMENT_HEADER))
-  let intentExperimentEnabled = false
-  if (isAllowedGroqCertModel(requestedCertModel) || isAllowedCertProvider(requestedCertProvider) || intentExperimentHeader) {
+  if (isAllowedGroqCertModel(requestedCertModel) || isAllowedCertProvider(requestedCertProvider)) {
     // Bounded like every other query on this path. A read, so it is safely
     // retryable; the budget decides whether a retry is affordable.
     const dbUser = await boundedDbCall(deadline, 'chat-cert-model-flag',
@@ -224,7 +217,6 @@ async function handleChatTurn(req: Request, deadline: RouteDeadline): Promise<Re
     if (dbUser?.modelOverrideAllowed) {
       if (isAllowedGroqCertModel(requestedCertModel)) groqModelOverride = requestedCertModel
       if (isAllowedCertProvider(requestedCertProvider)) forceProvider = requestedCertProvider
-      intentExperimentEnabled = intentExperimentHeader
     }
   }
 
@@ -2091,12 +2083,6 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
      * which grants TEACH and denies every question/probe/repair capability.
      */
     let turnArbitrationHoisted: import('@/lib/teaching/turnArbitration').TurnArbitration | null = null
-    // EXPERIMENT (learnerIntentInterpreter.ts) — null unless Architecture B is
-    // enabled for this account AND the interpreter produced an admitted
-    // reading. Read ONLY by prompt assembly and the response's diagnostic
-    // field; never by arbitration, the move decision, grading, or any state.
-    let intentExperimentResultHoisted: import('@/lib/teaching/learnerIntentInterpreter').InterpretResult | null = null
-    let intentAdvisoryHoisted: import('@/lib/teaching/learnerIntentInterpreter').LearnerIntent | null = null
     /**
      * PHASE 4 — the concept the learner reported MISSING, when the curriculum
      * could name it (knowledgeGap.ts). Null on every ordinary turn, and null
@@ -3884,50 +3870,6 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             mcqGradeHoisted && typeof mcqGradeHoisted.correct === 'boolean' && ackKeyIsAuthored(pendingMcqHoisted)
               ? mcqGradeHoisted.correct
               : null
-          // EXPERIMENT — Architecture B (learnerIntentInterpreter.ts). Runs
-          // only for an account the cert gate above admitted AND only after
-          // arbitration, the move decision and grading have all been decided
-          // without it. Its reading reaches the prompt and nothing else; any
-          // failure leaves the reading null, i.e. Architecture A exactly.
-          if (intentExperimentEnabled && learnerAuthoredMessage.trim() !== '') {
-            try {
-              const intentMod = await import('@/lib/teaching/learnerIntentInterpreter')
-              const recent = [...learnSession.messages].reverse()
-                .filter((m) => m.role === MessageRole.USER || m.role === MessageRole.ASSISTANT)
-                .map((m) => ({ role: m.role === MessageRole.USER ? 'user' as const : 'assistant' as const, content: m.content }))
-              if (recent.length > 0 && recent[recent.length - 1].role === 'user'
-                  && recent[recent.length - 1].content === learnerAuthoredMessage) recent.pop()
-              intentExperimentResultHoisted = await intentMod.interpretLearnerIntent(
-                {
-                  subject: learnSession.subject.name,
-                  lessonTitle: excursionTeachingTitleHoisted ?? lessonCtx?.lessonTitle ?? null,
-                  teachingPhase: conversationStateHoisted.phase,
-                  recentMessages: recent,
-                  pendingQuestion: pendingMcqHoisted?.question ?? null,
-                  latestMessage: learnerAuthoredMessage,
-                },
-                (await import('@/lib/teaching/learnerIntentProviderCall')).makeIntentCaller({
-                  country, lang: teachingLang, userId, groqModelOverride, forceProvider,
-                  remainingMs: () => deadline.remainingMs(),
-                }),
-              )
-              const owner = (turnArbitrationHoisted ?? arbitrationUnavailable()).owner
-              if (intentExperimentResultHoisted.intent && intentMod.intentAdmittedUnder(turnArbitrationHoisted ? owner : null)) {
-                intentAdvisoryHoisted = intentExperimentResultHoisted.intent
-              }
-              console.log('[intent-exp] ' + JSON.stringify({
-                outcome: intentExperimentResultHoisted.outcome,
-                latencyMs: intentExperimentResultHoisted.latencyMs,
-                intent: intentExperimentResultHoisted.intent,
-                arbitrationOwner: owner,
-                admitted: intentAdvisoryHoisted !== null,
-              }))
-            } catch (err) {
-              // Never breaks a turn: B degrades to A.
-              intentAdvisoryHoisted = null
-              console.warn('[intent-exp] interpreter skipped:', err)
-            }
-          }
           systemPrompt += buildTurnDirective({
             state: conversationStateHoisted,
             nextMove,
@@ -3999,10 +3941,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               const cls = capMod.classifyFailure(capabilityStateHoisted, requiredCapabilitiesHoisted)
               return cls.kind === 'capability_missing' ? cls.blockingCapabilities : null
             })(),
-            // EXPERIMENT (B only): an admitted interpreter reading also opens
-            // this directive's existing A.4 "address their question FIRST"
-            // line. Null on Architecture A, so A's value is unchanged.
-            learnerAskedQuestion: detectLearnerQuestion(message) || intentAdvisoryHoisted !== null,
+            learnerAskedQuestion: detectLearnerQuestion(message),
             conceptPreviouslyMastered: conceptPreviouslyMasteredHoisted,
             phaseJustAdvanced: (conversationStateHoisted.turnsInCurrentPhase ?? 0) === 0
               && conversationStateHoisted.phase !== 'OBSERVE',
@@ -4015,19 +3954,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               )
             })(),
           })
-          // EXPERIMENT (B only): when the regex read an example request as
-          // 'real_life_example' but the interpreter read a request for a
-          // concrete example OF A NAMED SUBJECT TARGET ("sheaves on a
-          // topological space"), the REAL_LIFE_EXAMPLE block's "ONE vivid
-          // everyday scenario … No definitions" is the opposite of the ask, so
-          // its TEXT is withheld and the LEARNER DIRECTION block carries the
-          // form. `learnerRequestHoisted` itself is untouched — arbitration,
-          // counters and the state fold see exactly what A sees.
-          const intentReplacesExampleBlock = intentAdvisoryHoisted !== null
-            && learnerRequestHoisted === 'real_life_example'
-            && intentAdvisoryHoisted.requestedAction === 'CONCRETE_EXAMPLE'
-            && intentAdvisoryHoisted.target !== null
-          if (learnerRequestHoisted && !intentReplacesExampleBlock) {
+          if (learnerRequestHoisted) {
             const hasEstablishedExample =
               conversationStateHoisted.exampleRequests > 0 || conversationStateHoisted.remediationCount > 2
             if (learnerRequestHoisted === 'explain_differently') {
@@ -4152,14 +4079,6 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             ?? null,
           lessonTitle: lessonCtx?.lessonTitle ?? null,
         })
-        // EXPERIMENT (B only) — appended after every authority's block, and
-        // only when arbitration's owner admits it (never under RECOVERY,
-        // KNOWLEDGE_GAP, CLOSE or COMPLETE). Advisory prompt text; restates
-        // the TURN DIRECTIVE's legality/length limits rather than loosening them.
-        if (intentAdvisoryHoisted) {
-          const { buildLearnerIntentBlock } = await import('@/lib/teaching/learnerIntentInterpreter')
-          systemPrompt += buildLearnerIntentBlock(intentAdvisoryHoisted)
-        }
       } catch (err) {
         console.warn('[learn/chat] wave-0 brain blocks skipped:', err)
       }
@@ -12706,11 +12625,6 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // `provider` above is unchanged and remains the stable field
         // (memory/groq/yandex/fallback); these describe HOW/WHY, never a
         // new provider value.
-        // EXPERIMENT diagnostic — present ONLY on Architecture B requests
-        // (cert-gated account + header); absent for every ordinary learner.
-        intentExperiment: intentExperimentEnabled
-          ? { result: intentExperimentResultHoisted, injected: intentAdvisoryHoisted !== null }
-          : undefined,
         memoryServingMode, memoryConfidence, memoryAssetId, memoryConceptId,
         memoryExactGradeMatch, memoryFallbackUsed,
         memoryFallbackReason: memoryFallbackReasonCode,

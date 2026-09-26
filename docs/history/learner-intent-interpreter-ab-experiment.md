@@ -132,3 +132,17 @@ Same 6×2 A/B, same runner, wording and provider pin; interpreter unchanged.
   shown — pre-existing model-SIGNAL path, origin not verified (truncated log window).
 - Conclusion: with the deterministic fixes, the interpreter adds no measurable follow-up benefit on
   this benchmark, while costing about 1 s per turn at the median and one misclassification.
+
+## FINAL STATUS (2026-09-26): ABANDONED FOR PRODUCTION / DETERMINISTIC PATH RETAINED
+Final benchmark (12 paired scenarios, one provider, fixed wording/script — not a general proof):
+A 12/12 first ask, 24/24 follow-ups; B 12/12 first ask, 24/24 follow-ups; B +1.1 s median latency;
+1 interpreter false positive; factual slips A 1 vs B 0 (too small a sample to conclude).
+Progression of the deterministic path as fixes landed: A first ask 8/12 → 10/12 → 12/12.
+Decision: deterministic path retained; interpreter not promoted, and REMOVED from the codebase
+(route wiring, `learnerIntentInterpreter.ts`, `learnerIntentProviderCall.ts`, its test file and
+`scripts/qa/intentInterpreterAb.ts`). Recoverable from git history (4766ebd..df64d7ef) if ever
+needed. The deterministic fixes the experiment surfaced are kept and independently tested:
+E4 resolver, CONCRETE_EXAMPLE form, "show me how/why" ≠ diagram, typed non-answer not graded,
+visual disambiguation context, request-to-tutor priority over the probe gate, EGRESS-4.
+The generic turn-harness support for request headers / `modelOverrideAllowed` is kept (test-only).
+The A/B experiment is CLOSED.
