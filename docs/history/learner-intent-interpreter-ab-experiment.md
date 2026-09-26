@@ -253,3 +253,17 @@ emitted no SIGNAL tag on the request turn; 0 PROBE_OUTCOME rows) — offline-val
   happens step by step" and "explain to me why this is negative" → `requestedTopic: null`,
   `unresolvedTopic: null`, excursion inactive, owner LEARNER_QUESTION; control "Can you explain
   Kubernetes pod scheduling?" → unresolved topic 'Kubernetes pod scheduling', excursion active.
+- **Everyday analogy on a direct follow-up (FIXED, 2026-09-26).** Live: "explain to me why this is
+  negative" → "Imagine you have a simple balance scale…" (earlier: "Please write out E_n^(2)…" →
+  "Imagine a simple playground swing…"). Deterministic cause: `client.ts` Principle 1, the
+  EXPLANATION SEQUENCING LAW ("teach every new idea in this exact order: concrete everyday object
+  → …"), had no scope for a follow-up on an idea already introduced, and the A.4 "STUDENT QUESTION
+  DETECTED" line did not override it. Fix (per turn, the global law untouched): new turn-directive
+  line A.4b "FOLLOW-UP ON WHAT YOU ALREADY TAUGHT" — answer with the terms/formulas already
+  introduced; no everyday-object/analogy/"imagine" opener unless asked. Emitted only when the
+  message is a question or request to the tutor, no excursion is active (a new topic keeps the
+  law), the lesson idea was taught this session, it is not an example/diagram/re-explain request,
+  and it does not itself ask for an analogy/example/picture/everyday/simpler framing
+  (`asksForEverydayFraming`). Tests: `remainingMisreadFixes.test.ts` §7 (3 present, 4 controls;
+  wiring and exclusion mutation-checked). This is prompt steering: whether the model complies is
+  checked live, not guaranteed.

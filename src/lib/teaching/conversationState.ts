@@ -2173,6 +2173,13 @@ export interface TurnDirectiveParams {
   /** A.4: true when the learner's message contains a genuine question the
    *  LLM must address before following the phase template. */
   learnerAskedQuestion?: boolean
+  /** A.4b (2026-09-26, live QA): the learner's question/request is a follow-up
+   *  about the lesson's own idea, already taught this session (no excursion,
+   *  no example/diagram/re-explain request). The EXPLANATION SEQUENCING LAW
+   *  (client.ts) is for introducing a NEW idea; without this the model
+   *  restarted it and answered "explain to me why this is negative" with
+   *  "Imagine you have a simple balance scale…". */
+  followUpOnTaughtIdea?: boolean
   /** A.7: true when this concept was previously completed/mastered by the
    *  learner — skip re-teaching from scratch, treat as review/refresh. */
   conceptPreviouslyMastered?: boolean
@@ -2220,6 +2227,16 @@ const MOVE_LINE: Record<NextMove, string> = {
  * write, whether a visual leads) — it does not add another advisory
  * opinion on top of it.
  */
+/**
+ * A.4b's exclusion: the learner asked for the very framing the sequencing law
+ * provides (an analogy, an example, a picture, everyday/real-life terms, or a
+ * simpler telling). The caller then leaves `followUpOnTaughtIdea` false.
+ */
+export function asksForEverydayFraming(message: string): boolean {
+  return /\b(?:analog\w*|examples?|metaphors?|real[- ]?(?:life|world)|everyday|pictures?|imagine|simpl\w*|plain(?:er)?\s+(?:words|english|language)|like\s+i'?m\s+(?:five|5))\b/i
+    .test(message ?? '')
+}
+
 export function buildTurnDirective(p: TurnDirectiveParams): string {
   // PHASE 3 — ARBITRATION BY ABSENCE.
   //
@@ -2372,6 +2389,11 @@ export function buildTurnDirective(p: TurnDirectiveParams): string {
   // it directly BEFORE following the phase template — intent > template.
   if (p.learnerAskedQuestion) {
     lines.push('- STUDENT QUESTION DETECTED: the student asked a genuine question. Address their specific question FIRST, directly and concisely. Then continue with the teaching phase above. Never ignore a student question to follow a template.')
+  }
+  // A.4b: a follow-up on an idea already introduced is answered at the level
+  // already reached — the sequencing law does not restart for it.
+  if (p.followUpOnTaughtIdea) {
+    lines.push('- FOLLOW-UP ON WHAT YOU ALREADY TAUGHT: answer it directly, using the terms, formulas and reasoning already introduced in this conversation. The EXPLANATION SEQUENCING LAW is for introducing a NEW idea and does not restart here: do NOT open with an everyday object, analogy or "imagine…" scene unless the student asks for one.')
   }
   // A.10: brief concept recap on phase advancement — grounds the student
   // before moving to the next teaching mode.

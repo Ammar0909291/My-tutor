@@ -167,3 +167,33 @@ describe('6. "show why that happens" is not a named topic (2026-09-26)', () => {
   }, 60_000)
 })
 
+describe('7. a follow-up on the taught idea is answered at that level, not with an everyday analogy (2026-09-26)', () => {
+  const LINE = 'FOLLOW-UP ON WHAT YOU ALREADY TAUGHT'
+  const prompted = (t: { body: unknown }) => ((t.body as { llmCallCount?: number }).llmCallCount ?? 0) > 0
+  const second = async (msg: string) => {
+    const [, t] = await driveTurns(h, POST, [
+      { learnerSays: 'ok, continue', modelReplies: TAUGHT },
+      { learnerSays: msg, modelReplies: 'Reply.' },
+    ], PHYS)
+    expect(prompted(t)).toBe(true)
+    return t.systemPrompt
+  }
+
+  it.each([
+    'explain to me why this is negative',
+    'why is that term zero?',
+    'show why that happens step by step',
+  ])('%s → directive present', async (m) => {
+    expect(await second(m)).toContain(LINE)
+  }, 60_000)
+
+  it.each([
+    ['asks for an analogy', 'can you give me an analogy?'],
+    ['asks for it simpler', 'why is it negative, in simpler words?'],
+    ['new topic (detour)', 'Can you explain Kubernetes pod scheduling?'],
+    ['a typed answer', 'it comes out negative because the denominator is negative'],
+  ])('control: %s → no directive', async (_l, m) => {
+    expect(await second(m)).not.toContain(LINE)
+  }, 60_000)
+})
+
