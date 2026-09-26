@@ -9290,7 +9290,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // drop a stray self-reported correctness claim.
               // + a relieved probe that yielded to the model's clarifying
               // question: that clarification is what the learner gets.
-              learnerAskedDirectQuestion: detectLearnerQuestionForWithhold(message) || relievedProbeYieldedHoisted,
+              // + an explicit request to the tutor (2026-09-26, live QA):
+              // "explain to me why this is negative" drew a genuine clarifying
+              // question that was replaced by the concept fallback. Same
+              // reading the arbitration rung and the grader use.
+              learnerAskedDirectQuestion: detectLearnerQuestionForWithhold(message)
+                || (await import('@/lib/teaching/mcq')).readsAsRequestToTutor(message)
+                || relievedProbeYieldedHoisted,
               // Real-student session (2026-09): a bare "yes"/"ok"/"got it"
               // met with the same content-free placeholder — see
               // `learnerAcknowledged`'s doc comment in gateAssessment.ts.

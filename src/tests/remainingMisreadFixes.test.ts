@@ -197,3 +197,22 @@ describe('7. a follow-up on the taught idea is answered at that level, not with 
   }, 60_000)
 })
 
+describe('8. a clarifying question to a request without "?" is kept (2026-09-26)', () => {
+  const CLARIFY = 'Which specific quantity or result are you referring to when you say "this is negative"?'
+  it('request → the model\'s clarification reaches the learner, not the concept fallback', async () => {
+    const [, t] = await driveTurns(h, POST, [
+      { learnerSays: 'ok, continue', modelReplies: TAUGHT },
+      { learnerSays: 'explain to me why this is negative', modelReplies: CLARIFY },
+    ], PHYS)
+    expect((t.body as { text?: string }).text).toContain('Which specific quantity')
+  }, 60_000)
+
+  it('control: the same bare question after a plain acknowledgement is still withheld', async () => {
+    const [, t] = await driveTurns(h, POST, [
+      { learnerSays: 'ok, continue', modelReplies: TAUGHT },
+      { learnerSays: 'ok', modelReplies: CLARIFY },
+    ], PHYS)
+    expect((t.body as { text?: string }).text).not.toContain('Which specific quantity')
+  }, 60_000)
+})
+

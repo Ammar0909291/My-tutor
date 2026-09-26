@@ -267,3 +267,13 @@ emitted no SIGNAL tag on the request turn; 0 PROBE_OUTCOME rows) — offline-val
   (`asksForEverydayFraming`). Tests: `remainingMisreadFixes.test.ts` §7 (3 present, 4 controls;
   wiring and exclusion mutation-checked). This is prompt steering: whether the model complies is
   checked live, not guaranteed.
+  Live (production 9a34002e — another session's merge on top of e9ef7c8d, which carries the fix;
+  one disposable account, one 4-turn session): "Please write out E_n^(2)…" opened directly with
+  the formula (was "Imagine a simple playground swing…"); "can you give me an analogy?" still got
+  one. "explain to me why this is negative" drew a genuine clarifying question ("Which specific
+  quantity … when you say 'this is negative'?"), which the no-probe withhold replaced with the
+  concept-description fallback because its `learnerAskedDirectQuestion` read only '?' questions.
+- **Clarification to a no-'?' request kept (FIXED, 2026-09-26).** The withhold's
+  `learnerAskedDirectQuestion` now also reads `readsAsRequestToTutor` (the reading arbitration and
+  the grader already use). Tests: `remainingMisreadFixes.test.ts` §8 (request keeps the
+  clarification — failed before the fix; a bare "ok" still gets it withheld).
