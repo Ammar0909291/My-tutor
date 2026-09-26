@@ -193,7 +193,9 @@ describe('the route wires the learner-question guard at the signal-finalization 
 
   it('imports detectLearnerQuestion alongside the acknowledgement predicate and gates on an unresolved grade', () => {
     expect(ROUTE).toContain('isLowSignalAcknowledgement, detectLearnerQuestion')
-    expect(ROUTE).toMatch(/mcqGradeHoisted === null\s*\n?\s*&& detectLearnerQuestion\(message\)/)
+    // 2026-09-26: the same guard also treats an explicit request to the tutor
+    // (mcq.readsAsRequestToTutor) as a non-answer; still gated on an unresolved grade.
+    expect(ROUTE).toMatch(/mcqGradeHoisted === null\s*\n(?:\s*\/\/[^\n]*\n)*\s*&& \(detectLearnerQuestion\(message\) \|\| \(await import\('@\/lib\/teaching\/mcq'\)\)\.readsAsRequestToTutor\(message\)\)/)
     // Drops ONLY correctness — never fabricates.
     expect(ROUTE).toContain("teachingSignal = { ...teachingSignal, correctness: undefined }")
     expect(ROUTE).toContain("[learner-asked-question]")
