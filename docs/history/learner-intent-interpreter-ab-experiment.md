@@ -240,3 +240,12 @@ emitted no SIGNAL tag on the request turn; 0 PROBE_OUTCOME rows) — offline-val
   turn was NOT relieved (move 'teach' → `phaseAllowsProbe: false`, by design); the model's
   confirm-tail mirror was shown unchanged (a confirm tail is never stripped). The yield path itself
   did not trigger live (it needs relief AND a reply the withhold would delete) — offline-validated.
+- **"show why that happens" detour misread (FIXED, 2026-09-26).** `extractRequestedTopic`
+  (`visual/requestedTopic.ts`) took the clause after a request verb as the topic: "show why that
+  happens step by step" → unresolved topic "why that happens step by step". New rule, mirroring
+  `QUESTION_FORM_RE`'s existing pronoun exclusion: a clause headed by why/how/whether/what/that
+  whose subject is a pronoun or demonstrative (after skipping me/us/to/please/again) names no
+  topic. Sweep vs 1b0a9489 (3,960 phrasings × both extractor modes + `namedTopicUnknownTo`):
+  target shape opening a detour 1,298 → 0; 0 non-target phrasings changed; every change went to
+  null. "explain why the sky is blue", "explain what photosynthesis is" and "Kubernetes pod
+  scheduling" still name topics. Tests: `remainingMisreadFixes.test.ts` §6 (mutation-checked).

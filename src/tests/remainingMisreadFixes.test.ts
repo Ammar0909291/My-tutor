@@ -2,6 +2,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { driveTurns, readLog } from './support/turnHarness'
 import { resolveRequestedConceptId, isOffDomainInstanceReference } from '@/lib/teaching/concept/requestedConcept'
 import { detectLearnerRequest } from '@/lib/teaching/masteryGate'
+import { namedTopicUnknownTo, extractRequestedTopic } from '@/lib/teaching/visual/requestedTopic'
 
 /**
  * The remaining known issues after the learner-intent A/B (2026-09-26):
@@ -130,6 +131,39 @@ describe('5b. a misconception phrase on a question/request turn is not evidence 
     }], PHYS)
     expect(t.logs.some((l) => l.startsWith('[learner-asked-question]'))).toBe(false)
     expect(misconceptionRows()).toHaveLength(1)
+  }, 60_000)
+})
+
+describe('6. "show why that happens" is not a named topic (2026-09-26)', () => {
+  const TAUGHT_TEXT = 'Time-Independent Perturbation Theory first order energy shift'
+  it.each([
+    'show why that happens step by step',
+    'show me how it works',
+    'explain to me why this is negative',
+    'can you explain whether that is right',
+    "explain what it's doing",
+    'show that it is negative',
+  ])('%s → no topic', (m) => {
+    expect(namedTopicUnknownTo(m, TAUGHT_TEXT)).toBeNull()
+    expect(extractRequestedTopic(m, 1, true)).toBeNull()
+  })
+
+  it.each([
+    ['explain why the sky is blue', 'why the sky is blue'],
+    ['explain what photosynthesis is', 'what photosynthesis is'],
+    ['can you explain Kubernetes pod scheduling', 'Kubernetes pod scheduling'],
+  ])('control: %s still names a topic', (m, title) => {
+    expect(namedTopicUnknownTo(m, TAUGHT_TEXT)?.title).toBe(title)
+  })
+
+  it('route: no unresolved-topic detour', async () => {
+    const [, t] = await driveTurns(h, POST, [
+      { learnerSays: 'ok, continue', modelReplies: TAUGHT },
+      { learnerSays: 'show why that happens step by step', modelReplies: 'Step 1 …' },
+    ], PHYS)
+    const e = excursion(readLog(t, '[excursion]'))
+    expect(e?.unresolvedTopic ?? null).toBeNull()
+    expect(e?.active ?? false).toBe(false)
   }, 60_000)
 })
 
