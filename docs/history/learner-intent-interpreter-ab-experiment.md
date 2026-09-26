@@ -167,3 +167,29 @@ Owner: "fix the remaining known issues". No interpreter code reintroduced.
 - **#4 model factual slips: NOT fixed.** Needs a content verifier (the Deterministic Physics
   Verifier primitive), explicitly deferred in CLAUDE.md.
 - Tests: `remainingMisreadFixes.test.ts` (15; route-level fixes mutation-checked).
+
+## Live QA of the above + final follow-up cleanup (2026-09-26)
+Live QA on production d2139f25 (one disposable account, deleted, re-login blocked): #1, #2, #3
+confirmed from `[excursion]`/`[arbitration]`/`helpRequestKind` logs; #5 not triggered (the model
+emitted no SIGNAL tag on the request turn; 0 PROBE_OUTCOME rows) — offline-validated only.
+- **Issue A — a relieved probe replaced the answer (FIXED).** "show why the term is negative"
+  (third question-owned turn): arbitration owner LEARNER_QUESTION denied AUTHORED_PROBE, then
+  probe-starvation relief (`probeStarvedTurnsBefore: 2`) re-allowed it — as designed. The answer
+  was lost at composition: `renderGateLeadIn` refused only explicit requests
+  (`learnerMadeARequest`), so it served the canned lead-in (`provider=gate`, no model call); and
+  had the model been called, `buildGateAssessmentBlock` said "LEAD-IN ONLY … do NOT work a new
+  example". Fix: on a relieved turn the lead-in renderer refuses and the block asks the model to
+  answer first, then bridge (`answerLearnerFirst`). Relief policy, probe selection, grading
+  unchanged. Tests: `relievedProbeAnswersLearnerFirst.test.ts` (both halves mutation-checked).
+  `pcd007AssessmentLifecycle`'s "answer untouched" test had passed only because its third turn was
+  an example request.
+- **Issue B — "why is that term zero?" answered as "So you're saying … have I got that right?"
+  (NOT FIXED — model prose).** Trace: owner TEACH because an authored probe was pending
+  (`genuineQuestionActive` excludes pending-MCQ turns) — but that rung only denies AUTHORED_PROBE,
+  already blocked by `noUnansweredProbeOnScreen`, so no prompt difference. The prompt carried
+  "STUDENT QUESTION DETECTED … Address their specific question FIRST" (reads
+  `detectLearnerQuestion` directly) and no restate/confirm instruction (reproduced in the turn
+  harness). `stripFabricatedAttribution` correctly did not fire ("zero" is shared). This is the
+  mirror class `attributionGuard.ts` documents as having no deterministic lever; left unchanged.
+- Observed, out of scope: "show why that happens step by step" opens an unresolved-topic
+  excursion titled "why that happens step by step" (turn harness).

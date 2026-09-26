@@ -5158,7 +5158,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             gateMcqHoisted = converted
             // The block still goes in: if the deterministic renderer refuses
             // below, the model serves this turn and needs its instruction.
-            systemPrompt += buildGateAssessmentBlock(converted)
+            // On a relieved turn (a learner question/request owns it) the
+            // model answers first; see buildGateAssessmentBlock.
+            systemPrompt += buildGateAssessmentBlock(converted, { answerLearnerFirst: probeStarvationRelievedHoisted })
             // Phase 2 — DETERMINISTIC LEAD-IN. The question, choices,
             // correctIndex and grading are already server-owned by this point;
             // the model's only remaining job is the sentence above the
@@ -5180,7 +5182,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 // read here, never set. A learner who asked for a diagram, an
                 // example, or a different explanation gets the model's turn,
                 // and the authored probe is still attached beneath it.
-                learnerMadeARequest: learnerRequestHoisted !== null,
+                learnerMadeARequest: learnerRequestHoisted !== null
+                  // A relieved probe rides on a question-owned turn: the
+                  // model answers it (2026-09-26, live QA).
+                  || probeStarvationRelievedHoisted,
               })
             } catch (err) {
               // Rendering is an optimisation; the model path is the contract.

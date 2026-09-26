@@ -192,7 +192,7 @@ export function probeToMcq(probe: ConvertibleProbe): TutorMCQ | null {
  * than a generic "here's a check" — but it is quoted as context, never as
  * something to reproduce, because the learner is already reading it.
  */
-export function buildGateAssessmentBlock(_mcq: TutorMCQ): string {
+export function buildGateAssessmentBlock(_mcq: TutorMCQ, opts: { answerLearnerFirst?: boolean } = {}): string {
   // THE QUESTION IS NOT SHOWN TO THE MODEL (owner-approved, G2, 2026-09-24).
   // It used to be quoted here "as context", and on a real account the model
   // used it to work the exact problem first — "3.0 mol H₂ × (2/2) = 3.0 mol
@@ -200,6 +200,24 @@ export function buildGateAssessmentBlock(_mcq: TutorMCQ): string {
   // "how many moles of water form from 3.0 mol of hydrogen?". A model that
   // never sees the question cannot solve it for the learner. The lead-in is
   // still about the concept just taught; `dropAnswerLeaks` backs this up.
+  //
+  // ANSWER-FIRST VARIANT (2026-09-26, live QA): probe-starvation relief lets
+  // this probe ride on a turn the learner's own question/request owns. The
+  // lead-in-only wording then told the model not to explain anything, so the
+  // learner's question went unanswered. Here the answer comes first; the
+  // question stays hidden and the leak guard still applies.
+  if (opts.answerLearnerFirst) {
+    return (
+      '\n\nASSESSMENT ALREADY SELECTED (do not write a question this turn). ' +
+      'A graded question on this concept will appear beneath your message as ' +
+      'tappable buttons, chosen by the teaching engine from reviewed course ' +
+      'material. The learner has just asked you something: ANSWER IT FIRST, ' +
+      'fully, exactly as you otherwise would. Then end with one short ' +
+      'sentence that bridges to the question beneath. Do NOT ask any other ' +
+      'question, and do NOT emit an MCQ tag of your own. Never mention that ' +
+      'the question was selected for you.'
+    )
+  }
   return (
     '\n\nASSESSMENT ALREADY SELECTED (do not write a question this turn). ' +
     'A graded question on this concept will appear beneath your message as ' +

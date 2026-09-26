@@ -84,7 +84,8 @@ describe('a request is answered, never overwritten by the gate lead-in', () => {
     expect(ROUTE).toContain('learnerMadeARequest: learnerRequestHoisted !== null')
     // And the gate still attaches its question either way — a request must not
     // disable assessment, only stop overwriting the learner.
-    expect(ROUTE).toContain('systemPrompt += buildGateAssessmentBlock(converted)')
+    // (2026-09-26: a relieved turn passes { answerLearnerFirst } — still attached.)
+    expect(ROUTE).toContain('systemPrompt += buildGateAssessmentBlock(converted')
   })
 
   it('the three visual-availability states are real, not hypothetical', () => {
