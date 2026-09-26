@@ -249,3 +249,7 @@ emitted no SIGNAL tag on the request turn; 0 PROBE_OUTCOME rows) — offline-val
   target shape opening a detour 1,298 → 0; 0 non-target phrasings changed; every change went to
   null. "explain why the sky is blue", "explain what photosynthesis is" and "Kubernetes pod
   scheduling" still name topics. Tests: `remainingMisreadFixes.test.ts` §6 (mutation-checked).
+  Live (production 9a8a103c, one disposable account, deleted, re-login blocked): "show why that
+  happens step by step" and "explain to me why this is negative" → `requestedTopic: null`,
+  `unresolvedTopic: null`, excursion inactive, owner LEARNER_QUESTION; control "Can you explain
+  Kubernetes pod scheduling?" → unresolved topic 'Kubernetes pod scheduling', excursion active.
