@@ -13,7 +13,7 @@
  */
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { driveTurns, readLog, type TurnResult } from './support/turnHarness'
-import { buildGateAssessmentBlock } from '@/lib/teaching/gateAssessment'
+import { buildGateAssessmentBlock, replyIsOnlyAQuestion } from '@/lib/teaching/gateAssessment'
 
 const h = await vi.hoisted(async () => (await import('./support/turnHarness')).createHarness())
 vi.mock('@/lib/auth', () => ({ auth: () => h.auth() }))
@@ -74,6 +74,54 @@ describe('relieved probe on plain question turns (no request frame)', () => {
   }, 90_000)
 })
 
+describe('a relieved probe yields to a clarifying question (2026-09-26, live QA)', () => {
+  const CLARIFY = "So you'd like me to demonstrate why each contribution is negative for the ground state, correct?\n\nCould you confirm that this is what you're asking?"
+
+  it('clarification-only reply → clarification shown, no quiz this turn, relief again next turn', async () => {
+    const res = await driveTurns(h, POST, [
+      { learnerSays: 'why does that happen?', modelReplies: answer(0) },
+      { learnerSays: 'what does that mean here?', modelReplies: answer(1) },
+      { learnerSays: 'why is that the case?', modelReplies: CLARIFY },
+      { learnerSays: 'what does the mechanism look like step by step?', modelReplies: answer(3) },
+    ], LANE)
+    const [, , third, fourth] = res
+    expect(gate(third)?.probeStarvationRelieved).toBe(true)
+    expect(third.logs.some((l) => l.includes('relieved-probe-yielded-to-clarification'))).toBe(true)
+    expect(text(third)).toContain('Could you confirm')
+    expect(text(third)).not.toContain('Let me check your thinking')
+    expect(mcq(third)).toBeNull()
+    // the probe was not spent, and relief fires again on the next question
+    expect(gate(fourth)?.probeStarvationRelieved).toBe(true)
+    expect(text(fourth)).toContain('Answering your question. Point 3')
+    expect(mcq(fourth)?.options.length).toBeGreaterThanOrEqual(2)
+  }, 90_000)
+
+  it('same for a request without "?" (the production shape)', async () => {
+    const res = await driveTurns(h, POST, [
+      { learnerSays: 'why does that happen?', modelReplies: answer(0) },
+      { learnerSays: 'explain the mechanism again please', modelReplies: answer(1) },
+      { learnerSays: 'show why the mechanism is spelled out that way', modelReplies: CLARIFY },
+    ], LANE)
+    const third = res[2]
+    expect(gate(third)?.probeStarvationRelieved).toBe(true)
+    expect(text(third)).toContain('Could you confirm')
+    expect(mcq(third)).toBeNull()
+  }, 90_000)
+
+  it('control: an answer with a stray question still carries the relieved probe', async () => {
+    const res = await driveTurns(h, POST, [
+      { learnerSays: 'why does that happen?', modelReplies: answer(0) },
+      { learnerSays: 'what does that mean here?', modelReplies: answer(1) },
+      { learnerSays: 'why is that the case?', modelReplies: `${answer(2)}\n\nWhich electrode loses mass over time?` },
+    ], LANE)
+    const third = res[2]
+    expect(gate(third)?.probeStarvationRelieved).toBe(true)
+    expect(third.logs.some((l) => l.includes('relieved-probe-yielded-to-clarification'))).toBe(false)
+    expect(mcq(third)).not.toBeNull()
+    expect(text(third)).toContain('Answering your question. Point 2')
+  }, 90_000)
+})
+
 describe('unchanged paths', () => {
   const tap = (mcqNow: { options: string[] } | null) => mcqNow ? (mcqNow.options.find((o) => o.startsWith('Zinc')) ?? mcqNow.options[0]) : 'ok, that makes sense'
 
@@ -107,3 +155,15 @@ describe('the ordinary gate turn keeps its lead-in-only block', () => {
     expect(first).not.toContain("'q'")
   })
 })
+
+describe('replyIsOnlyAQuestion', () => {
+  it.each([
+    ["So you'd like me to show why each term is negative, correct?\n\nCould you confirm that this is what you're asking?", true],
+    ['Which term dominates for large n?', true],
+    ['The denominator is negative for every excited state, so each term is negative. Which term dominates?', false],
+    ['Each term is negative because the denominator is negative. Does that make sense?', false],
+    ['Here is why.<!--SIGNAL correctness="false" confidence="high" confusion="false"-->', false],
+    ['', false],
+  ])('%j → %s', (t, want) => expect(replyIsOnlyAQuestion(t as string)).toBe(want))
+})
+
