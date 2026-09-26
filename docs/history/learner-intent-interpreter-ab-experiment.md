@@ -212,3 +212,13 @@ emitted no SIGNAL tag on the request turn; 0 PROBE_OUTCOME rows) — offline-val
   keep their phrase. Consequence: such turns also stop setting `misconceptionDetectedThisLesson`.
   Tests: `remainingMisreadFixes.test.ts` §5b (question + correctness + phrase, phrase-only,
   request without '?', typed-answer control), both halves mutation-checked.
+  Live (production ec976462, one disposable account, deleted, re-login blocked): 0
+  MISCONCEPTION_DETECTED and 0 PROBE_OUTCOME rows; the one question turn that carried a SIGNAL
+  ("show why the term is negative") was stripped (`[learner-asked-question]`). "why is that term
+  zero?" was answered directly this run. The typed-answer control drew no SIGNAL from the model,
+  so the keep-phrase path was verified offline only.
+  Observed (not fixed): on that relieved turn the model was called (answer-first block) but wrote
+  only a clarifying mirror ("So you'd like me to demonstrate why … correct? Could you confirm…");
+  the existing stray-question-beside-MCQ withhold removed it, leaving the handoff line "Let me
+  check your thinking with this." plus the probe. No deterministic step replaced an answer — the
+  model did not write one.
