@@ -277,3 +277,7 @@ emitted no SIGNAL tag on the request turn; 0 PROBE_OUTCOME rows) — offline-val
   `learnerAskedDirectQuestion` now also reads `readsAsRequestToTutor` (the reading arbitration and
   the grader already use). Tests: `remainingMisreadFixes.test.ts` §8 (request keeps the
   clarification — failed before the fix; a bare "ok" still gets it withheld).
+  Live (production e2e74542 — another session's commit on top of 3c14d636, which carries both
+  fixes; one disposable account, one 2-turn session, deleted, re-login blocked): "explain to me why
+  this is negative" was answered directly (H' = eEz, E⁽¹⁾ = eE⟨z⟩, parity argument) — no everyday
+  analogy, no concept fallback.
