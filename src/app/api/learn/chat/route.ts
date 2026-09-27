@@ -4070,7 +4070,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // a restatement), but ahead of everything advisory. See
         // progressionIntegrity.buildSignalRepairBlock for why this changes
         // the TURN rather than repeating the instruction that just failed.
-        if (!recoveryKeyHoisted && needsSignalRepair(
+        // Never on a turn whose message is itself a question or a request to
+        // the tutor (2026-09-27, live QA): there is no answer to restate, and
+        // the block's "restate … and ask them to confirm" produced the mirror
+        // ("So you're wondering whether … have I got that right?").
+        if (!recoveryKeyHoisted
+          && !((await import('@/lib/teaching/conversationState')).detectLearnerQuestion(message)
+            || (await import('@/lib/teaching/mcq')).readsAsRequestToTutor(message))
+          && needsSignalRepair(
           readProgressionMetrics(snapshot?.progressionMetrics),
         )) {
           const { buildSignalRepairBlock } = await import('@/lib/teaching/progressionIntegrity')

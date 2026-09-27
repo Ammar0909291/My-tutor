@@ -294,5 +294,15 @@ emitted no SIGNAL tag on the request turn; 0 PROBE_OUTCOME rows) — offline-val
   `NO_MIRROR_CLAUSE`: answer it; if genuinely ambiguous or false-premised, ask ONE specific
   clarifying question naming the options or correct the premise — never restate the question back
   for confirmation. Tests: `remainingMisreadFixes.test.ts` §9 (mutation-checked).
+- **The mirror's real cause (FIXED, deterministic).** Live after the clause shipped (21cf4615), the
+  mirror persisted ("So you'd like to see … — have I got that right?", "You're asking why … Is that
+  right?"). The question-turn prompt carried RC-D's `buildSignalRepairBlock` ("OBSERVATION REPAIR —
+  MANDATORY THIS TURN … restate what you understood their answer to mean, and ask them to confirm
+  … 'So you're saying … — have I got that right?'"). It fires after an untagged substantive turn —
+  and a question is correctly untagged per the SIGNAL contract, so question turns inherited a
+  mandatory mirror that outranked the clause. The block is now never injected when the current
+  message is a question or a request to the tutor (`detectLearnerQuestion || readsAsRequestToTutor`);
+  a typed answer after an untagged turn still gets it. Tests: `remainingMisreadFixes.test.ts` §10
+  (both injection tests failed before the fix; the control passes before and after).
 - **Factual slips: NOT started.** Needs the deferred Deterministic Physics Verifier (CLAUDE.md
   four-primitives governance + G1/G2); awaiting an explicit, scoped owner go-ahead.

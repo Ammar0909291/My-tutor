@@ -237,3 +237,33 @@ describe('9. question turns carry the no-mirror clause (2026-09-27)', () => {
   }, 60_000)
 })
 
+describe('10. a question is not a dropped observation — no restate-and-confirm repair (2026-09-27)', () => {
+  const REPAIR = 'OBSERVATION REPAIR'
+  const ANSWER = 'it is negative because the denominators are all negative'
+  const prompted = (t: { body: unknown }) => ((t.body as { llmCallCount?: number }).llmCallCount ?? 0) > 0
+  const run = async (turns: string[]) => {
+    const res = await driveTurns(h, POST, [
+      { learnerSays: 'ok, continue', modelReplies: TAUGHT },
+      ...turns.map((m) => ({ learnerSays: m, modelReplies: 'Reply without a tag.' })),
+    ], PHYS)
+    const last = res[res.length - 1]
+    expect(prompted(last)).toBe(true)
+    return last.systemPrompt
+  }
+
+  it('injection: a question turn never gets the repair block', async () => {
+    expect(await run(['why is that term zero?'])).not.toContain(REPAIR)
+  }, 60_000)
+
+  it('injection: a request without "?" never gets it either', async () => {
+    expect(await run(['explain to me why this is negative'])).not.toContain(REPAIR)
+  }, 60_000)
+
+  it('counter: a question does not arm it for the following answer', async () => {
+    expect(await run(['why does the denominator matter here?', ANSWER])).not.toContain(REPAIR)
+  }, 60_000)
+
+  it('control: a typed answer after an untagged turn still gets the repair', async () => {
+    expect(await run([ANSWER])).toContain(REPAIR)
+  }, 60_000)
+})
