@@ -125,8 +125,8 @@ describe('A — route wiring', () => {
     expect(route).toContain("event: 'missed-probe-reasked'")
   })
   it('the outcome is recorded where the question is spent, and in the rederiver', () => {
-    expect(route).toMatch(/memoryHistory = recordMcqOutcome\(memoryHistory, questionToSpend, spentQuestionGrade\)/)
-    expect(route).toMatch(/if \(questionToSpend\) rederived = recordMcqOutcome\(rederived, questionToSpend, spentQuestionGrade\)/)
+    expect(route).toMatch(/memoryHistory = recordMcqOutcome\(memoryHistory, questionToSpend, spentQuestionGrade, spentWithoutCredit\)/)
+    expect(route).toMatch(/if \(questionToSpend\) rederived = recordMcqOutcome\(rederived, questionToSpend, spentQuestionGrade, spentWithoutCredit\)/)
   })
 })
 

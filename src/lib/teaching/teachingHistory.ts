@@ -267,13 +267,26 @@ export function isMissedAndReaskable(h: TeachingHistory, question: string): bool
  * turn, in the primary fold OR in the snapshot rederiver, which replaces that
  * fold on a write conflict — never both.
  */
-export function recordMcqOutcome(h: TeachingHistory, question: string, gradedCorrect: boolean | null): TeachingHistory {
+export function recordMcqOutcome(
+  h: TeachingHistory, question: string, gradedCorrect: boolean | null,
+  /**
+   * The answer was graded in a phase that banks no mastery credit (OBSERVE,
+   * DEMONSTRATE, GUIDE). MEASURED live (Biology batch 13, 2026-09-27): a
+   * correct answer at GUIDE only advances the ladder, yet the probe was spent —
+   * with exactly three authored probes per concept, 9 of 17 lessons where every
+   * answer was correct could no longer reach verified mastery. Such a probe is
+   * treated like a missed one: eligible for ONE re-ask once the pool is dry,
+   * never more (owner decision, option (c)).
+   */
+  gradedWithoutCredit = false,
+): TeachingHistory {
   const fp = memoryFingerprint(question)
   if (!fp || h.mcqReasked.includes(fp)) return h
   if (h.mcqMissed.includes(fp)) {
     return { ...h, mcqMissed: h.mcqMissed.filter((x) => x !== fp), mcqReasked: [...h.mcqReasked, fp] }
   }
   if (gradedCorrect === false) return { ...h, mcqMissed: [...h.mcqMissed, fp] }
+  if (gradedCorrect === true && gradedWithoutCredit) return { ...h, mcqMissed: [...h.mcqMissed, fp] }
   return h
 }
 
