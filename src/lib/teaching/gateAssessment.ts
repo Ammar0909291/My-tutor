@@ -1264,8 +1264,11 @@ export function withholdClosingProseQuestion(input: {
  * carries no lettered option list of its own (a prose list is a separate case,
  * owned by proseMcqGuard).
  */
+// "your turn to pick the answer" / "pick an option" added 2026-09-27 (live,
+// bio.gen.mendelian-genetics, PRACTICE, no widget): "Your turn to pick the
+// answer!" closed a reply that offered nothing to pick from.
 const POINTS_AT_MISSING_OPTIONS =
-  /\b(which of the following|of the (?:options|choices) (?:below|above|shown)|(?:pick|choose|select|tap) (?:the )?(?:best|correct|right) (?:answer|option|choice)|which (?:option|choice|answer) you (?:choose|pick|select)|from the (?:options|choices|list) (?:below|above)|the options below)\b/i
+  /\b(which of the following|of the (?:options|choices) (?:below|above|shown)|(?:pick|choose|select|tap) (?:the |an? )?(?:(?:best|correct|right) )?(?:answer|option|choice)|which (?:option|choice|answer) you (?:choose|pick|select)|from the (?:options|choices|list) (?:below|above)|the options below)\b/i
 
 export function dropSentencesPointingAtMissingOptions(text: string): string {
   const t = typeof text === 'string' ? text : ''
@@ -1290,8 +1293,12 @@ export function dropSentencesPointingAtMissingOptions(text: string): string {
  * question mark at all and no options list — the one condition under which the
  * announcement is certainly unkept.
  */
+// Tail cap 80 -> 160 (2026-09-27, live, bio.cell.mitosis, PRACTICE, no widget):
+// "Great, let’s check how the steps of mitosis guarantee that each new cell
+// ends up with the same genetic blueprint as the original." was the whole
+// reply — a 95-character tail slipped past.
 const ANNOUNCES_A_CHECK =
-  /^(?:(?:sure|great|ok(?:ay)?|alright|got it|understood|no problem|absolutely|of course|i hear you|that(?:'|’)s great)[^.!?]{0,30}[,—–-]\s*)?(?:let(?:'|’)s|let me|here(?:'|’)s|here is)\b[^.!?]{0,80}\b(?:check|test|quiz|question)\b[^.!?:]{0,80}[.!]?$/i
+  /^(?:(?:sure|great|ok(?:ay)?|alright|got it|understood|no problem|absolutely|of course|i hear you|that(?:'|’)s great)[^.!?]{0,30}[,—–-]\s*)?(?:let(?:'|’)s|let me|here(?:'|’)s|here is)\b[^.!?]{0,80}\b(?:check|test|quiz|question)\b[^.!?:]{0,160}[.!]?$/i
 
 // The same promise ending in a COLON. MEASURED (synthetic run, 2026-09-25,
 // phys.mech.acceleration, strong student "can you quiz me?"): "Sure! Here's a
