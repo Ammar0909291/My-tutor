@@ -29,6 +29,7 @@
 // isRepeatedAnswer below). conversationState.ts does not import this module,
 // so this edge adds no cycle.
 import { isLowSignalAcknowledgement } from './conversationState'
+import { QUICK_ACTIONS } from '@/lib/learn/quickActions'
 
 export type FailureStateKey =
   | 'dont_know' | 'dont_understand' | 'confused' | 'forgot' | 'guessing'
@@ -435,6 +436,39 @@ function isNextItemRequest(text: string): boolean {
   return t.split(CLAUSE_SPLIT_RE).slice(1).some((clause) => REQUEST_WORD_RE.test(clause) && asks(clause.trim()))
 }
 
+/**
+ * A REQUEST TO BE SHOWN SOMETHING, OR TO BE CHALLENGED, IS NOT AN ANSWER.
+ *
+ * MEASURED on production (2026-09-27, Biology, the lesson screen's "Give me a
+ * diagram" quick action): the action sends the SAME text every time, so a
+ * learner who tapped it in one lesson and again as the first message of the
+ * next matched isRepeatedAnswer and was read as 'frustrated' — recovery fired
+ * (failure counted, phase stepped down) and the tutor opened with "I'm sorry
+ * you're feeling stuck". Four of eight fresh diagram requests got that reply.
+ * The same holds for "Show real-life example" and "Challenge me". This is the
+ * reasoning above applied once more: asking to SEE a diagram or an example, or
+ * to be challenged, is a willing learner's request, not a repeated answer.
+ *
+ * Deliberately narrow: the quick actions' own prompts (every teaching
+ * language) EXCEPT "Explain in simpler way" — a repeated request to be
+ * re-explained IS a signal (`isRephraseRequest`, above) — plus typed English
+ * "give/show/draw me a diagram/picture/…" and "challenge me" forms.
+ */
+const SHOW_OR_CHALLENGE_REQUEST_RE =
+  /^(?:ok(?:ay)?|right|sure|yes|yeah|alright)?[\s,.]*(?:can\s+you\s+|could\s+you\s+|please\s+|now\s+)*(?:(?:give|show|draw)\s+me\s+(?:a\s+|an\s+|another\s+|the\s+|one\s+more\s+)?(?:diagram|picture|visual|figure|image|illustration|drawing|real[\s-]?(?:life|world)\s+example)|challenge\s+me)\b[\s\S]{0,60}$/i
+
+const NON_ANSWER_QUICK_ACTION_PROMPTS: ReadonlySet<string> = new Set(
+  Object.values(QUICK_ACTIONS).flat()
+    .filter((a) => a.key !== 'simpler')
+    .map((a) => a.prompt.trim().toLowerCase()),
+)
+
+function isShowOrChallengeRequest(text: string): boolean {
+  const t = text.trim()
+  return NON_ANSWER_QUICK_ACTION_PROMPTS.has(t.toLowerCase())
+    || (t.length <= MILD_MAX_LENGTH && SHOW_OR_CHALLENGE_REQUEST_RE.test(t))
+}
+
 function isRepeatedAnswer(message: string, priorUserMessage: string | null | undefined): boolean {
   if (!priorUserMessage) return false
   const normalize = (s: string) => s.trim().toLowerCase().replace(/['’]/g, '').replace(/[.,!?…\s]+/g, ' ').trim()
@@ -442,6 +476,7 @@ function isRepeatedAnswer(message: string, priorUserMessage: string | null | und
   const b = normalize(priorUserMessage)
   if (a.length < 4 || a !== b) return false
   if (isNextItemRequest(message)) return false
+  if (isShowOrChallengeRequest(message)) return false
   return !isLowSignalAcknowledgement(message)
 }
 
