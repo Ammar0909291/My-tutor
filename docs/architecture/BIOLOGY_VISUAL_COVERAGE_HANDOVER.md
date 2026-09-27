@@ -429,3 +429,50 @@ Fix options for the owner (none implemented):
 server graded it wrong (phase regressed GUIDE → DEMONSTRATE) but the reply said "Great,
 you've spotted the hypertrophy adaptation" — `wrongAnswerCorrection.ts` deliberately stays
 silent on model-invented keys, and nothing stops the model praising a wrong answer.
+
+## FINAL VERDICT (2026-09-27): Is Biology fully production-ready? **NO.**
+
+Everything a learner SEES and the content behind it is ready. The one outcome that makes
+Biology a finished course is not: **a learner who answers every question correctly reaches
+verified mastery only when the timing is favourable — 8 of 17 batch-13 concepts in the live
+run.** That is a product defect in the mastery gate, with three fix options awaiting an owner
+decision (section "Mastery reachability, batch 13" above).
+
+**Ready (measured on production, deployment `aba1911`):**
+- Content: asset contract 199/199 authored, 199/199 at contract, 0 short, 0 never-quizzable
+  (`scripts/assets/contract-audit.ts --subject biology`); seed corpus 10,838 items, 0
+  duplicate identities (`seed-knowledge-assets.ts --draft --dry-run`).
+- Figures: `scripts/qa/biologyFinalRuntimeQa.ts` — one concept per figure family (hub,
+  5-group comparison, 6-group comparison, cyclic pathway, 12-stage pathway, structure) plus
+  the two with a defect history: 8/8 served a figure, 8/8 THEIR OWN concept's figure, 0 empty
+  replies, 0 claims of a figure that was not attached, 0 "curved" descriptions of straight
+  connectors; ~9–13 s per diagram turn. `bio.immuno.immune-disorders` (previously an empty
+  turn) and `bio.plant.photosynthesis` (previously no figure) both served correctly in two
+  separate runs. Browser-verified render: connectors, legend, panel (desktop + mobile).
+- Five-kingdom figure complete (Animalia), distinct group colours for 5–6 group figures,
+  tutor told the truth about the figure (straight lines, every stage).
+- `/learn?subject=` for an unenrolled subject prompts instead of opening another subject.
+- Tone: a repeated "Give me a diagram" no longer triggers the frustration script
+  (`aba1911`): 4/8 → 0/8 apology openings, 0 `recoveryKey:"frustrated"` in the logs.
+- Honesty: across 17 lessons the API mastery verdict and `topic_progress` agreed exactly
+  (8 COMPLETED / 9 REVISION); unmastered lessons close as "on pause — you haven't mastered it
+  yet", never as mastered.
+
+**Not ready — caveats, each named:**
+1. **BLOCKER — mastery reachability (owner decision).** Authored probe graded at GUIDE banks
+   no credit and is spent; with exactly three authored probes per Biology concept, verified
+   mastery becomes unreachable for a perfect learner in that session (9/17 live). Options:
+   (a) surplus rule at GUIDE, (b) a fourth EB-grounded probe per concept, (c) don't spend a
+   probe graded at GUIDE. Not changed: it is teaching-decision logic under the G1/G2 rule.
+2. Praise for a wrong answer on a model-invented quiz ("Great, you've spotted the
+   hypertrophy adaptation" after a wrong answer the server graded wrong).
+   `wrongAnswerCorrection.ts` deliberately stays silent on model-invented keys, and nothing
+   stops the model praising. Not changed (grading/verdict design).
+3. Six-group comparison figures are cramped at lesson width (labels crowd).
+4. Pathway "What's happening?" lines don't name their stage (`cellPathway` narrations).
+5. `topic_progress.masteryPct` reads 65 for COMPLETED and REVISION alike in these runs —
+   status is right; the percentage looks like a coarse display value (not investigated).
+6. After Add-subject there is a 5–10 s empty lesson frame before the subject introduction.
+7. Diagram turns take ~9–13 s end to end.
+8. Only batch 13 (17 concepts) was mastery-driven live; the other 182 Biology concepts
+   share the same three-probe contract and the same gate, so caveat 1 applies to them too.
