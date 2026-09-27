@@ -269,12 +269,14 @@ describe('9 · grading is byte-identical', () => {
   it('the label never reached the grader and still does not', () => {
     const mcq = probeToMcq({ stem: D1_STEM, choices: D1_CHOICES })!
     expect(mcq.question.startsWith('DIAGNOSTIC')).toBe(false)
-    expect(gradeMcqAnswer('A', mcq)).toEqual({ chosenIndex: 0, correct: true })
-    expect(gradeMcqAnswer('B', mcq)).toEqual({ chosenIndex: 1, correct: false })
+    const right = mcq.correctIndex, wrong = mcq.options.findIndex((_, i) => i !== right)
+    expect(gradeMcqAnswer('ABCD'[right], mcq)).toEqual({ chosenIndex: right, correct: true })
+    expect(gradeMcqAnswer('ABCD'[wrong], mcq)).toEqual({ chosenIndex: wrong, correct: false })
   })
 
   it('the correct index still comes from the authored key alone', () => {
-    expect(probeToMcq({ stem: D1_STEM, choices: D1_CHOICES })!.correctIndex).toBe(0)
+    const mcq = probeToMcq({ stem: D1_STEM, choices: D1_CHOICES })!
+    expect(mcq.options[mcq.correctIndex]).toBe(D1_CHOICES.find((c) => c.isCorrect)!.text.trim())
   })
 })
 

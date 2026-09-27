@@ -96,8 +96,10 @@ describe('probeToMcq reads the authored key, never the prose', () => {
       { text: 'degree Fahrenheit (°F)', isCorrect: false },
     ]))
     expect(m).not.toBeNull()
-    expect(m!.correctIndex).toBe(1)
-    expect(m!.options).toEqual(['degree Celsius (°C)', 'kelvin (K)', 'degree Fahrenheit (°F)'])
+    // Presentation order is a question-keyed permutation (probeOptionOrder.test.ts);
+    // the key moves with its choice.
+    expect(m!.options[m!.correctIndex]).toBe('kelvin (K)')
+    expect([...m!.options].sort()).toEqual(['degree Celsius (°C)', 'degree Fahrenheit (°F)', 'kelvin (K)'])
   })
 
   /**
@@ -127,8 +129,8 @@ describe('the converted MCQ is gradeable end to end', () => {
       { text: 'degree Celsius (°C)', isCorrect: false },
       { text: 'kelvin (K)', isCorrect: true },
     ]))!
-    expect(gradeMcqAnswer('kelvin (K)', m)).toEqual({ chosenIndex: 1, correct: true })
-    expect(gradeMcqAnswer('degree Celsius (°C)', m)).toEqual({ chosenIndex: 0, correct: false })
+    expect(gradeMcqAnswer('kelvin (K)', m)).toEqual({ chosenIndex: m.options.indexOf('kelvin (K)'), correct: true })
+    expect(gradeMcqAnswer('degree Celsius (°C)', m)).toEqual({ chosenIndex: m.options.indexOf('degree Celsius (°C)'), correct: false })
   })
 })
 

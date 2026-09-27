@@ -85,8 +85,8 @@ if (!mcq) {
   console.log('  conversion failed — cannot grade')
 } else {
   const cases: Array<[string, string]> = [
-    ['exact correct option', mcq.options[0]],
-    ['letter A (correct)', 'A'],
+    ['exact correct option', mcq.options[mcq.correctIndex]],
+    [`letter ${'ABCD'[mcq.correctIndex]} (correct)`, 'ABCD'[mcq.correctIndex]],
     ['weak-learner phrasing', 'i think it is it opposes the motion sir'],
     ['letter B (wrong)', 'B. but sir i not fully sure'],
     ['wrong option text', 'maybe it assists the motion'],

@@ -11794,9 +11794,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // grade) changes nothing unless it was the re-ask.
             const spentQuestionGrade = questionToSpend && questionToSpend === pendingMcqHoisted?.question && mcqGradeHoisted
               ? mcqGradeHoisted.correct : null
+            // Graded where a correct answer banks no mastery credit: keep it
+            // re-askable once (recordMcqOutcome, option (c)).
+            const spentWithoutCredit = spentQuestionGrade === true
+              && (phaseBeforeTurnHoisted === 'GUIDE' || phaseBeforeTurnHoisted === 'DEMONSTRATE' || phaseBeforeTurnHoisted === 'OBSERVE')
             if (questionToSpend) {
               memoryHistory = recordMcqAsked(memoryHistory, questionToSpend)
-              memoryHistory = recordMcqOutcome(memoryHistory, questionToSpend, spentQuestionGrade)
+              memoryHistory = recordMcqOutcome(memoryHistory, questionToSpend, spentQuestionGrade, spentWithoutCredit)
             }
             // The write half of the already-read guard above. Recorded only
             // when the asset was actually SERVED to the learner this turn —
@@ -11888,7 +11892,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               if (rederiveServedExplanation) rederived = recordExplanationServed(rederived, rederiveServedExplanation)
               if (rederiveServedCard) rederived = recordExplanationServed(rederived, rederiveServedCard)
               if (rederiveAskedMcq) rederived = recordMcqAsked(rederived, rederiveAskedMcq)
-              if (questionToSpend) rederived = recordMcqOutcome(rederived, questionToSpend, spentQuestionGrade)
+              if (questionToSpend) rederived = recordMcqOutcome(rederived, questionToSpend, spentQuestionGrade, spentWithoutCredit)
               if (rederiveConfReading) rederived = recordConfidence(rederived, rederiveConfReading)
               return { teachingHistory: rederived }
             })

@@ -183,18 +183,19 @@ describe('B — a competing question WITHOUT an option list', () => {
 describe('P0 safety contract — the probe itself is untouched', () => {
   it('selected probe P produces widget P, options and key intact', () => {
     const mcq = probeToMcq(PROBE)!
-    expect(mcq.options).toEqual([
+    expect([...mcq.options].sort()).toEqual([
       'The first is speed (scalar, no direction); the second is velocity (vector, has direction)',
       'They are the same quantity just phrased differently',
-    ])
-    expect(mcq.correctIndex).toBe(0)
+    ].sort())
+    expect(mcq.options[mcq.correctIndex]).toBe('The first is speed (scalar, no direction); the second is velocity (vector, has direction)')
   })
 
   it('grading still evaluates against P after the prose was replaced', () => {
     const mcq = probeToMcq(PROBE)!
     enforceGateProbeContract({ text: VIOLATING_PROSE, leadIn: null, canonicalQuestion: mcq.question })
-    expect(gradeMcqAnswer('A', mcq).correct).toBe(true)
-    expect(gradeMcqAnswer('B', mcq).correct).toBe(false)
+    const right = 'AB'[mcq.correctIndex], wrong = 'AB'[1 - mcq.correctIndex]
+    expect(gradeMcqAnswer(right, mcq).correct).toBe(true)
+    expect(gradeMcqAnswer(wrong, mcq).correct).toBe(false)
     expect(gradeMcqAnswer('who knows', mcq).correct).toBeNull()
   })
 

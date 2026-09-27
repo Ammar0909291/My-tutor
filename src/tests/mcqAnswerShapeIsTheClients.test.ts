@@ -79,10 +79,11 @@ describe('the client sends the option TEXT', () => {
 
 describe('the option text grades, for authored and model questions alike', () => {
   it('grades the authored probe from its own option text', () => {
+    const wrong = AUTHORED.options.findIndex((_, i) => i !== AUTHORED.correctIndex)
     expect(gradeMcqAnswer(AUTHORED.options[AUTHORED.correctIndex], AUTHORED))
-      .toEqual({ chosenIndex: 0, correct: true })
-    expect(gradeMcqAnswer(AUTHORED.options[1], AUTHORED))
-      .toEqual({ chosenIndex: 1, correct: false })
+      .toEqual({ chosenIndex: AUTHORED.correctIndex, correct: true })
+    expect(gradeMcqAnswer(AUTHORED.options[wrong], AUTHORED))
+      .toEqual({ chosenIndex: wrong, correct: false })
   })
 
   it('grades a model question from its own option text', () => {
@@ -91,7 +92,8 @@ describe('the option text grades, for authored and model questions alike', () =>
   })
 
   it('a bare letter also grades — the typed shortcut a learner may use', () => {
-    expect(gradeMcqAnswer('A', AUTHORED)).toEqual({ chosenIndex: 0, correct: true })
+    const letter = 'ABCD'[AUTHORED.correctIndex]
+    expect(gradeMcqAnswer(letter, AUTHORED)).toEqual({ chosenIndex: AUTHORED.correctIndex, correct: true })
     expect(gradeMcqAnswer('A', MODEL)).toEqual({ chosenIndex: 0, correct: true })
   })
 })
