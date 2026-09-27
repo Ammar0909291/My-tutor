@@ -191,3 +191,23 @@ export function visibleObjects(spec: SceneSpec, revealStep: number): SceneObject
 export function sceneNarration(spec: SceneSpec): string[] {
   return spec.steps.map((s) => s.narration ?? '')
 }
+
+/**
+ * The line segments a `path` / `trajectory` is drawn as: one per consecutive
+ * pair of its ordered points. A pair that does not move (a repeated point) is
+ * skipped — it has no direction, so it would be a zero-length cylinder with an
+ * undefined orientation. A closed ring repeats its first point last and so
+ * closes itself; an open arc stays open. Pure, so the renderer's geometry is
+ * unit-testable without three.js.
+ */
+export function pathSegments(points: readonly Vec3[] | undefined): [Vec3, Vec3][] {
+  const segments: [Vec3, Vec3][] = []
+  if (!points) return segments
+  for (let i = 1; i < points.length; i++) {
+    const a = points[i - 1]
+    const b = points[i]
+    if (a[0] === b[0] && a[1] === b[1] && a[2] === b[2]) continue
+    segments.push([a, b])
+  }
+  return segments
+}

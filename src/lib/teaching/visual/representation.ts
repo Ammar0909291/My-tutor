@@ -154,7 +154,7 @@ export function linkSymbols(
 ): { text: string; color?: string }[] {
   const bySymbol = new Map<string, string>()
   for (const row of legend) {
-    const symbol = row.label.trim().split(/[\s=(]/)[0]
+    const symbol = row.label.trim().split(/[\s=(,]/)[0]
     // One character or a short greek/latin token is a symbol; a word is a name.
     if (symbol && symbol.length <= 3 && !bySymbol.has(symbol)) bySymbol.set(symbol, row.color)
   }
