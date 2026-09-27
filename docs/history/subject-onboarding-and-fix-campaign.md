@@ -672,3 +672,33 @@ accepts; particle-in-box verified, others REVISION/IN_PROGRESS honestly. Defects
 Not fixed (model-written prose or documented owner policy): wrong answers to model-invented
 questions below GUIDE go uncorrected (the guard's recorded "undo" decision); correct transfer
 answers not always confirmed; mirror mis-paraphrases; recap after a budget close.
+
+## 2026-09-27 — "Always tap A" passed every authored quiz (all subjects) — fixed at probeToMcq
+
+**Finding (measured, static corpus scan).** The authored seed corpus lists the correct choice FIRST
+in 6,280 of 6,281 multiple-choice items (biology 597/597, chemistry 930/931, physics 554/554,
+mathematics 2528/2528, cs 268/268, english 81/81, authored 1319/1319). `probeToMcq`
+(`src/lib/teaching/gateAssessment.ts`) — the single conversion point from an authored probe to the
+learner-facing MCQ, used by the gate in `route.ts` and by `assembleLesson` — kept authored order,
+and `findBestProbe` only rotated choices on a re-ask. So a learner who tapped the first option
+every time was graded correct on every authored gate question in every subject.
+
+**Fix.** `probeToMcq` now presents a deterministic permutation keyed on the question text
+(`presentationOrder`: FNV-1a seed + mulberry32 Fisher–Yates). Same question → same order (reload,
+restored turn and grade agree; grading reads the stored `pendingMcq.correctIndex`). Measured on
+2,602 convertible biology+chemistry+authored probes: 4-option correct positions 76/77/63/75,
+2-option 1015/1006. A re-ask (rotated by the selector) always lands the correct answer in a
+different slot. Regression: `src/tests/probeOptionOrder.test.ts`; 6 existing tests that pinned
+authored positions now assert "the key moves with its choice" instead.
+
+**Caveat for prior QA evidence.** Several live harnesses answer unrecognised questions with
+`options[0]` as a "guess" (`biologyProductionRuntimeQa.ts`, `masteryEvidenceIdentityLive.ts`,
+`synthetic/personas.ts`, `preMergeStudentRun.ts`, …). Before this fix that guess was always right
+on authored probes, so any past "mastery reached" run that leaned on it overstates reachability.
+
+**Still open (needs an owner decision, not a code change).** The correct option is also the
+uniquely LONGEST option on 71% of biology 3–4-option items (mathematics 94%, physics 67%, cs 66%,
+chemistry 38%) — "pick the longest" beats chance by ~2–3×. Fixing it means rewriting existing
+probe text, and the cold-start bootstrap is insert-only (`createMany … skipDuplicates` in
+`src/instrumentation.ts`), so edited seed text never reaches existing production rows without a
+direct, owner-authorized DB update. Not done unilaterally.

@@ -165,6 +165,19 @@ export function probeToMcq(probe: ConvertibleProbe): TutorMCQ | null {
     .filter((i) => i >= 0)
   if (correctIndexes.length !== 1) return null
 
+  // PRESENTATION ORDER (2026-09-27). The authored corpus lists the correct
+  // choice FIRST in 6,280 of 6,281 items across every subject, and this was
+  // the order served — so "always tap the first option" passed every gate.
+  // The order is now a deterministic permutation keyed on the question text:
+  // the same question always shows the same order (a reload, a restored turn
+  // and the grade all agree), while the correct answer's position is spread
+  // across the slots. A re-ask arrives with its choices already rotated
+  // (findBestProbe), so its order still differs from the first asking.
+  // The key travels with each choice; grading reads the stored correctIndex.
+  const order = presentationOrder(question, options.length)
+  const shownOptions = order.map((i) => options[i])
+  const shownCorrect = order.indexOf(correctIndexes[0])
+
   // PHASE F: carry the authored identity forward. This is the ONLY writer of
   // TutorMCQ.assetId — a model-parsed tag has no asset and must stay anonymous.
   // Presentation, selection, the answer key and grading are all untouched;
@@ -173,10 +186,37 @@ export function probeToMcq(probe: ConvertibleProbe): TutorMCQ | null {
   // an assetId produces a byte-identical object to the previous behaviour.
   return {
     question,
-    options,
-    correctIndex: correctIndexes[0],
+    options: shownOptions,
+    correctIndex: shownCorrect,
     ...(probe.assetId ? { assetId: probe.assetId } : {}),
   }
+}
+
+/**
+ * A stable permutation of `[0, n)` derived from `key` (FNV-1a seed, then a
+ * Fisher–Yates shuffle driven by mulberry32). Pure: identical input, identical
+ * order. Exported for the regression test's distribution check.
+ */
+export function presentationOrder(key: string, n: number): number[] {
+  let h = 0x811c9dc5
+  for (let i = 0; i < key.length; i++) {
+    h ^= key.charCodeAt(i)
+    h = Math.imul(h, 0x01000193)
+  }
+  let s = h >>> 0
+  const next = () => {
+    s = (s + 0x6d2b79f5) >>> 0
+    let t = s
+    t = Math.imul(t ^ (t >>> 15), t | 1)
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61)
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296
+  }
+  const order = Array.from({ length: n }, (_, i) => i)
+  for (let i = n - 1; i > 0; i--) {
+    const j = Math.floor(next() * (i + 1))
+    ;[order[i], order[j]] = [order[j], order[i]]
+  }
+  return order
 }
 
 /**
