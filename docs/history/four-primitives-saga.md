@@ -143,4 +143,9 @@
   "DONE" labels, per this file's own standing rule that CLAUDE.md's dated entries are the raw
   history and the dashboard files should be corrected to match.
 
+## 2026-09-27 — owner decision on factual slips (not a resumption of the V2 Physics Verifier)
+Asked to "fix" factual slips, the session offered three options; the owner chose an
+**authored-claim check** (`V-CONTRADICT`, LOG-only) over the V2 six-check Physics Verifier, which
+remains deferred. Record: `docs/history/learner-intent-interpreter-ab-experiment.md`
+("Closing the open items").
 

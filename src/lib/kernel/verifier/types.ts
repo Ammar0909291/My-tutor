@@ -52,6 +52,8 @@ export const RULE_CODES = [
   // teaching/objectiveModel.ts.
   'V-OBJ',          // assessment-shaped draft targets an already-completed objective
   'V-NOPROGRESS',   // no objective advancement in NO_PROGRESS_TURN_THRESHOLD turns
+  // Authored-claim check (2026-09-27, owner-approved, LOG first). See claims.ts.
+  'V-CONTRADICT',   // a specific claim contradicts a rule the concept's authored content states
 ] as const
 
 export type RuleCode = (typeof RULE_CODES)[number]
@@ -89,6 +91,8 @@ export const SEVERITY: Record<RuleCode, Severity> = {
   // S2 — LOG only; see S1's note above (never guess a threshold to REJECT).
   'V-OBJ':          'LOG',
   'V-NOPROGRESS':   'LOG',
+  // LOG only until real-traffic precision is measured (owner decision to enforce).
+  'V-CONTRADICT':   'LOG',
 }
 
 export interface Violation {

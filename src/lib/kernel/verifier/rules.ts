@@ -11,6 +11,7 @@
  */
 import { repliesWithQuestion } from '@/lib/teaching/conversationState'
 import type { VerifierContext, Violation } from './types'
+import { vContradict } from './claims'
 import { CAPABILITY_DEMAND_PATTERNS } from '@/lib/teaching/capabilityModel'
 import { CHALLENGE_ACKNOWLEDGED_RE } from '@/lib/teaching/claimChallengeGuard'
 import {
@@ -480,6 +481,8 @@ export const RULES = [
   // rule's view of the text.
   vDupExact, vDupNear, vDupQuestion, vRecRepeat, vOscillate,
   vObj, vNoProgress,
+  // V-CONTRADICT — authored-rule contradiction, LOG severity (claims.ts).
+  vContradict,
 ] as const
 
 // ── V-AFFIRM · opens by agreeing with a definition the LEARNER proposed ──────
