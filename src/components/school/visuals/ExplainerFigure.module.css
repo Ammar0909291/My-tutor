@@ -203,6 +203,8 @@
   font-size: 13px;
   line-height: 1.55;
   color: var(--text-secondary);
+  /* A derived "What's happening?" body puts each step on its own line. */
+  white-space: pre-line;
 }
 
 .panelLines {
