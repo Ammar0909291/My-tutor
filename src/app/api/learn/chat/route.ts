@@ -5202,7 +5202,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 learnerMadeARequest: learnerRequestHoisted !== null
                   // A relieved probe rides on a question-owned turn: the
                   // model answers it (2026-09-26, live QA).
-                  || probeStarvationRelievedHoisted,
+                  || probeStarvationRelievedHoisted
+                  // I8 (2026-09-27): any message with content — a claim like
+                  // "…they must travel faster than light" got the canned
+                  // lead-in and was never addressed. See learnerEngagement.ts.
+                  || (await import('@/lib/teaching/learnerEngagement')).learnerMessageNeedsModelReply(
+                    message, { answeredPendingQuestion: mcqGradeHoisted !== null }),
               })
             } catch (err) {
               // Rendering is an optimisation; the model path is the contract.
@@ -5453,7 +5458,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       })
       const ackToQuestion = isLowSignalAcknowledgement(message)
         && (pendingMcqHoisted !== null || (!!lastAssistantText && repliesWithQuestion(lastAssistantText)))
-      let serveFromMemory = assembled !== null && !answersPendingQuestion && !readinessAtGate && !answersProse && !ackToQuestion
+      // I8 (2026-09-27): a stored explanation may not REPLACE a reply the
+      // learner's message needs ("which levels shift?" was answered with a
+      // generic paragraph). One predicate, ANDed into every decision point
+      // below exactly like the guards beside it. See learnerEngagement.ts.
+      const learnerNeedsReply = (await import('@/lib/teaching/learnerEngagement'))
+        .learnerMessageNeedsModelReply(message, { answeredPendingQuestion: mcqGradeHoisted !== null })
+      if (learnerNeedsReply && assembled !== null && memoryFallbackReason === null) {
+        memoryFallbackReason = 'Learner message needs a reply'
+      }
+      let serveFromMemory = assembled !== null && !answersPendingQuestion && !readinessAtGate && !answersProse && !ackToQuestion && !learnerNeedsReply
       let serveLessonComplete = false
       let dispatchPlanHoisted: import('@/lib/understanding/dispatcher').DispatchPlan | null = null
       try {
@@ -5466,7 +5480,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             ` mode=${brainRuntimeActive ? 'ACTIVE' : 'shadow'}`
           )
           if (brainRuntimeActive) {
-            serveFromMemory = dispatchPlanHoisted.executor === 'EXPLANATION_MEMORY' && assembled !== null && !answersPendingQuestion && !readinessAtGate && !answersProse && !ackToQuestion
+            serveFromMemory = dispatchPlanHoisted.executor === 'EXPLANATION_MEMORY' && assembled !== null && !answersPendingQuestion && !readinessAtGate && !answersProse && !ackToQuestion && !learnerNeedsReply
             // P13: the plan — not this route — decides that no provider is
             // needed. Acting on plan.executor is the SAME pattern as
             // serveFromMemory above, not a bypass of the engine.
@@ -5517,7 +5531,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         recordDispatch(dispatchPlanHoisted, brainRuntimeActive)
       } catch (err) {
         console.warn('[learn/chat] dispatcher skipped (legacy serving choice retained):', err)
-        serveFromMemory = assembled !== null && !answersPendingQuestion && !readinessAtGate && !answersProse && !ackToQuestion
+        serveFromMemory = assembled !== null && !answersPendingQuestion && !readinessAtGate && !answersProse && !ackToQuestion && !learnerNeedsReply
       }
 
       // Conversation Decision — standalone block for turns where the Brain
@@ -6051,6 +6065,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           : memoryFallbackReason === 'No asset (lookup error)' ? 'lookup_error'
           : memoryFallbackReason === 'Explanation Memory lookup error' ? 'lookup_error'
           : memoryFallbackReason === 'Brain decision' ? 'brain_decision'
+          : memoryFallbackReason === 'Learner message needs a reply' ? 'learner_needs_reply'
           : 'no_asset'
         // K6 — Degraded deterministic mode (RS P-3). When EVERY provider in
         // the failover chain has thrown, the turn is served by a K5 template
@@ -9303,7 +9318,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // reading the arbitration rung and the grader use.
               learnerAskedDirectQuestion: detectLearnerQuestionForWithhold(message)
                 || (await import('@/lib/teaching/mcq')).readsAsRequestToTutor(message)
-                || relievedProbeYieldedHoisted,
+                || relievedProbeYieldedHoisted
+                // I8 (2026-09-27): "you skipped my point: …" got the one-line
+                // concept fallback. See learnerEngagement.ts.
+                || (await import('@/lib/teaching/learnerEngagement')).learnerMessageNeedsModelReply(
+                  message, { answeredPendingQuestion: mcqGradeHoisted !== null }),
               // Real-student session (2026-09): a bare "yes"/"ok"/"got it"
               // met with the same content-free placeholder — see
               // `learnerAcknowledged`'s doc comment in gateAssessment.ts.
@@ -12017,7 +12036,17 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                     && resolvedConversationState?.taughtThisSession === true),
               learnerReplySubstantive: message.trim().length > 0
                 && !isBareAckForMetrics(message)
-                && resolvedRecoveryKey === null,
+                && resolvedRecoveryKey === null
+                // 2026-09-27 (live study): a question/request is not an answer,
+                // and a turn the model never wrote (memory / gate renderer)
+                // could not have emitted the tag. Both were counted as dropped
+                // observations, and the next turn got RC-D's mandatory
+                // "restate … and ask them to confirm" block — the mirror, once
+                // as "That's right. You're saying … aren't limited by the speed
+                // of light. Is that an accurate summary of your view?"
+                && !(await import('@/lib/teaching/conversationState')).detectLearnerQuestion(message)
+                && !(await import('@/lib/teaching/mcq')).readsAsRequestToTutor(message)
+                && provider !== 'memory' && provider !== 'gate',
               signalPresent: teachingSignal !== null && teachingSignal !== undefined,
               phaseBefore: resolvedConversationState?.phase ?? null,
               phaseAfter: stateAfterForMetrics?.phase ?? null,
