@@ -23,7 +23,9 @@ import {
   type TopicScoreHistoryRow,
   type VisualEvidenceHistoryRow,
 } from '@/lib/intelligence/improvementTracking'
-export async function GET() {
+import { withRequestMemo } from '@/lib/db/requestMemo'
+
+async function handleGET() {
   const session = await auth()
   if (!session?.user?.id) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   const userId = session.user.id
@@ -74,4 +76,9 @@ export async function GET() {
   const improvement = analyzeImprovement(profile, historyRows, visualHistoryRows, targets, retestCandidates)
 
   return NextResponse.json({ profile, targets, retestCandidates, improvement })
+}
+
+// One read per distinct query across this handler's loaders (egress, requestMemo.ts).
+export function GET(...args: Parameters<typeof handleGET>) {
+  return withRequestMemo(() => handleGET(...args))
 }

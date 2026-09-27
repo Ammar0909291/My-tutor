@@ -15,6 +15,7 @@
  * docs/VISUAL_INTELLIGENCE_AUDIT.md).
  */
 import { prisma } from '@/lib/db/prisma'
+import { memoized } from '@/lib/db/requestMemo'
 import type { VisualMasteryEngine } from './visualMastery'
 
 /** One visual evidence row's `notes` shape, as written by Sprint M's persistence adapter. */
@@ -70,12 +71,14 @@ export function buildVisualLearningProfile(rows: VisualEvidenceRow[]): VisualLea
 }
 
 /** Task 2/3 — loads a user's persisted visual evidence and builds their profile. The only Prisma call in this module; read-only, queries `EvidenceRecord` exclusively. */
-export async function getVisualLearningProfile(userId: string): Promise<VisualLearningProfile> {
-  const rows = await prisma.evidenceRecord.findMany({
-    where: { userId, type: 'VISUAL' },
-    select: { notes: true },
+export function getVisualLearningProfile(userId: string): Promise<VisualLearningProfile> {
+  return memoized(`visualLearningProfile:${userId}`, async () => {
+    const rows = await prisma.evidenceRecord.findMany({
+      where: { userId, type: 'VISUAL' },
+      select: { notes: true },
+    })
+    return buildVisualLearningProfile(rows as unknown as VisualEvidenceRow[])
   })
-  return buildVisualLearningProfile(rows as unknown as VisualEvidenceRow[])
 }
 
 /** Task 4 — one weak visual area, recommendation only. Never mutates curriculum, progress, or evidence data. */

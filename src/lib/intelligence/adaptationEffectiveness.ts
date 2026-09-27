@@ -11,6 +11,7 @@
  */
 import { prisma } from '@/lib/db/prisma'
 import { getRevisionProfile } from './revisionProfile'
+import { loadUserTopicRows } from './userTopicRows'
 import { generatePracticeTargets } from './practiceTargets'
 import { generateRetestCandidates } from './retestCandidates'
 import { analyzeImprovement, type TopicScoreHistoryRow, type VisualEvidenceHistoryRow, type ImprovementSummary } from './improvementTracking'
@@ -178,10 +179,7 @@ export async function getAdaptationEffectivenessProfile(userId: string): Promise
 
   // ── Reproduce the improvement-tracking data fetch (read-only) ──
   const profile = await getRevisionProfile(userId)
-  const attemptsRows = await prisma.topicProgress.findMany({
-    where: { userId },
-    select: { subjectSlug: true, topicSlug: true, attempts: true },
-  })
+  const attemptsRows = await loadUserTopicRows(userId)
   const targets = generatePracticeTargets(profile, attemptsRows)
   const retestCandidates = generateRetestCandidates(targets)
 
