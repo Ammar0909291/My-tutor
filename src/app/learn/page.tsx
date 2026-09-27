@@ -5,9 +5,12 @@ import { withRetry } from '@/lib/db/withRetry'
 import { withTimeout } from '@/lib/net/timeout'
 import { LessonScreen } from '@/components/learn/LessonScreen'
 import { MessageRole } from '@prisma/client'
-import { t, type TranslationKey } from '@/lib/i18n'
+import { t, type Lang, type TranslationKey } from '@/lib/i18n'
 import { getUserNavSubjects } from '@/lib/subjects/getUserNavSubjects'
 import { ConnectionRecovery } from '@/components/system/ConnectionRecovery'
+import { SubjectNotEnrolled } from '@/components/learn/SubjectNotEnrolled'
+import { resolveLearnSubject } from '@/lib/subjects/resolveLearnSubject'
+import { localizedSubjectName } from '@/lib/curriculum/subjectCatalog'
 
 // P0 (subject switching, Lesson Flow sprint item 1): auth() already forces
 // this route dynamic (any cookies()/auth() call opts a route out of static
@@ -80,11 +83,34 @@ export default async function LearnPage({ searchParams }: { searchParams?: { sub
 
   let profile = user.profile
 
-  const requestedSlug = searchParams?.subject
-  const requestedSubject = requestedSlug
-    ? profile?.subjects.find((ps) => ps.subject.slug === requestedSlug)?.subject
-    : undefined
-  let primarySubject = requestedSubject ?? profile?.subjects[0]?.subject
+  // `?subject=` for a subject the learner is not (actively) enrolled in used to
+  // fall back SILENTLY to their first subject — measured: /learn?subject=biology
+  // opened a Chemistry lesson with nothing saying why. It now says so, and
+  // offers the Library's choices; the page itself never enrolls.
+  const resolution = resolveLearnSubject(profile.subjects, searchParams?.subject)
+  if (resolution.kind === 'not-enrolled') {
+    const lang = (profile.teachingLanguage ?? 'en') as Lang
+    const T = (key: TranslationKey) => t(lang, key)
+    const name = resolution.librarySubject ? localizedSubjectName(resolution.librarySubject, lang) : null
+    const fallback = resolution.fallback?.subject
+    return (
+      <SubjectNotEnrolled
+        subjectSlug={resolution.requestedSlug}
+        canEnroll={resolution.canEnroll}
+        fallbackSlug={fallback?.slug ?? null}
+        copy={{
+          title: resolution.canEnroll && name ? T('library_not_enrolled_title').replace('{name}', name) : T('learn_subject_unavailable'),
+          body: resolution.canEnroll ? T('library_enroll_unlock') : undefined,
+          add: resolution.canEnroll && name ? `＋ ${T('library_add_subject')}: ${name}` : undefined,
+          adding: T('career_enrolling'),
+          failed: T('career_could_not_enroll'),
+          continueLabel: fallback ? `${fallback.name} — ${T('library_continue_learning')}` : undefined,
+          library: T('library_go_to_library'),
+        }}
+      />
+    )
+  }
+  let primarySubject = resolution.enrollment?.subject
 
   // Auto-heal: profile has no subject linked — ensure subject exists then link it.
   // Wrapped in try/catch: these calls have no individual timeout; a Neon cold-start
