@@ -354,7 +354,14 @@ perturbation theory on the owner's saturated account before credential use was b
    quiz answer, and once as "That's right. You're saying … aren't limited by the speed of light. Is
    that an accurate summary of your view?" (affirming a misconception). Fix: the fold only counts a
    substantive ANSWER on a model-written turn.
-Tests: `learnerEngagementI8.test.ts` (18; lead-in yield and counter each mutation-checked).
+Live re-run on 52476ce5: quiz answer → "That's right. Here is your next question." (no mirror);
+the delta-bump follow-up answered in full by the model. Still wrong: the false claim was routed to
+the model but a probe rode along with the gate's "LEAD-IN ONLY … do NOT give a new definition"
+block, so the model wrote a lead-in and the stray-question withhold left only "Let me check your
+thinking with this." Fixed: the gate block uses its answer-first variant whenever the message needs
+a reply; practice requests ("give me a practice question", `asksForPractice`) are exempt from the
+predicate, since a stock lead-in plus an authored quiz is the reply they ask for.
+Tests: `learnerEngagementI8.test.ts` (19; lead-in yield, counter and answer-first each mutation-checked).
 **Systemic issues recorded, not fixed here:** (a) OBSERVE-phase "What do you notice?" regardless of
 learner level (a self-described grad student got "drop a stone in a pond"); (b) assessment: the
 correct option is consistently the longest; mastery = 3 recognition MCQs even for research-level
