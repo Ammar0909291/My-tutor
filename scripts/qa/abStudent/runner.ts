@@ -119,15 +119,55 @@ async function whoAmI(cookie: string): Promise<string | undefined> {
   return d.user?.id
 }
 
+function accountsPath(): string { return join(OUT_DIR!, 'accounts.json') }
+
+function loadPrepared(): PreparedAccount[] {
+  if (!existsSync(accountsPath())) return []
+  return JSON.parse(readFileSync(accountsPath(), 'utf8')) as PreparedAccount[]
+}
+
+function persist(prepared: PreparedAccount[]): void {
+  writeFileSync(accountsPath(), JSON.stringify(prepared, null, 2))
+}
+
+function sleep(ms: number): Promise<void> { return new Promise((r) => setTimeout(r, ms)) }
+
+/**
+ * /api/auth/register rate-limits at 5/900s per IP (in-memory fallback, since
+ * this deployment has no Redis — src/lib/rateLimit.ts). Measured live: this
+ * limiter is leaky across serverless instances (10 registrations succeeded
+ * before the first 429 in one run), so a bounded retry-with-backoff clears
+ * it in practice without a long fixed sleep between every single call.
+ */
+async function createQaAccountWithRetry(label: string, maxAttempts = 6): Promise<Awaited<ReturnType<typeof createQaAccount>>> {
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    try {
+      return await createQaAccount(label)
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : String(e)
+      if (!/429|Too many requests/i.test(msg) || attempt === maxAttempts) throw e
+      const waitMs = 30_000 * attempt
+      console.log(`  rate-limited creating ${label} (attempt ${attempt}/${maxAttempts}) — waiting ${waitMs / 1000}s`)
+      await sleep(waitMs)
+    }
+  }
+  throw new Error('unreachable')
+}
+
 async function phasePrepare(): Promise<void> {
   const { script, sha256 } = loadScript()
   console.log(`script.json sha256: ${sha256}`)
-  const prepared: PreparedAccount[] = []
+  const prepared = loadPrepared()
+  const already = new Set(prepared.map((p) => `${p.conceptId}|${p.arm}|${p.run}`))
+  if (prepared.length) console.log(`resuming: ${prepared.length} accounts already prepared (found in ${accountsPath()})`)
+
   for (const c of script.concepts) {
     for (const run of RUNS) {
       for (const arm of ARMS) {
+        const key = `${c.conceptId}|${arm}|${run}`
+        if (already.has(key)) { console.log(`skip (already prepared): ${key}`); continue }
         const label = `ab-${c.conceptId.replace(/\./g, '-')}-${arm}-${run}`
-        const acct = await createQaAccount(label)
+        const acct = await createQaAccountWithRetry(label)
         const cookie = acct.cookie
         const userId = await whoAmI(cookie)
         await apiJson(cookie, 'POST', '/api/onboarding', {
@@ -138,16 +178,18 @@ async function phasePrepare(): Promise<void> {
           selfDescription: 'I am a student and want to understand each topic properly.',
         })
         prepared.push({ conceptId: c.conceptId, arm, run, email: acct.email, password: acct.password, userId })
+        persist(prepared)
         console.log(`prepared ${label}: ${acct.email} userId=${userId ?? 'UNKNOWN'}`)
+        await sleep(3000)
       }
     }
   }
-  writeFileSync(join(OUT_DIR!, 'accounts.json'), JSON.stringify(prepared, null, 2))
+
   const missingIds = prepared.filter((p) => !p.userId)
-  console.log(`\n${prepared.length} accounts prepared, written to ${join(OUT_DIR!, 'accounts.json')}`)
+  console.log(`\n${prepared.length} accounts prepared, written to ${accountsPath()}`)
   if (missingIds.length) console.log(`WARNING: ${missingIds.length} accounts have no resolved userId — check manually before the DB write.`)
   console.log(`\nNext: agent runs ONE batched SQL —`)
-  console.log(`  UPDATE users SET "modelOverrideAllowed" = true WHERE id IN (${prepared.map((p) => `'${p.userId}'`).join(', ')});`)
+  console.log(`  UPDATE users SET "modelOverrideAllowed" = true WHERE id IN (${prepared.map((p) => `'${p.userId}'`).join(', ')}) AND email LIKE 'qa-%@mytutor-qa.invalid' RETURNING id, email;`)
   console.log(`Then run this script's 'drive' phase.`)
 }
 
