@@ -2445,6 +2445,193 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
       { name: 'Intensified contractions', description: 'oxytocin strengthens uterine contractions, pushing the baby further against the cervix' },
     ],
   }),
+
+  // Batch 13 — FINAL BATCH — bio.physio (5), bio.plant (8), bio.repro (2), bio.sys (2):
+  'bio.physio.exercise-physiology': () => buildCellComparisonScene({
+    conceptId: 'bio.physio.exercise-physiology',
+    title: 'Aerobic vs Anaerobic Training: Different Chronic Adaptations',
+    teachingGoal: 'These are genuinely different training-specific adaptations, not simply "more" or "less" of the same generic fitness improvement.',
+    groups: [
+      { label: 'Aerobic (endurance) training', description: 'sustained, moderate-intensity activity', items: ['Increases mitochondrial density', 'Shifts fibres toward slow-twitch (oxidative)', 'Increases stroke volume and capillary density'] },
+      { label: 'Anaerobic (resistance/high-intensity) training', description: 'high-intensity, short-duration activity', items: ['Increases muscle fibre cross-sectional area (hypertrophy)', 'Enhances rapid, powerful force generation', 'Less pronounced mitochondrial-density increase'] },
+    ],
+  }),
+
+  'bio.physio.homeostasis-thermoregulation': () => buildCellComparisonScene({
+    conceptId: 'bio.physio.homeostasis-thermoregulation',
+    title: 'Thermoregulation: Heat-Loss vs Heat-Gain Responses',
+    teachingGoal: 'The response counteracts the change that triggered it — this negative-feedback logic is what keeps body temperature near its set point.',
+    groups: [
+      { label: 'Heat-loss responses (above set point)', description: 'triggered when body temperature rises', items: ['Vasodilation — blood vessels widen, radiating heat away', 'Sweating — evaporative cooling'] },
+      { label: 'Heat-gain responses (below set point)', description: 'triggered when body temperature falls', items: ['Vasoconstriction — blood vessels narrow, conserving heat', 'Shivering — muscle contraction generates heat'] },
+    ],
+  }),
+
+  'bio.physio.integumentary-system': () => buildCellPathwayScene({
+    conceptId: 'bio.physio.integumentary-system',
+    title: 'Wound Healing: Four Ordered, Overlapping Stages',
+    teachingGoal: 'These four stages are ordered and overlapping, not a single undifferentiated event — each stage sets up conditions the next stage depends on.',
+    stages: [
+      { name: 'Haemostasis', description: 'vascular spasm, platelet plug, and coagulation stop bleeding immediately' },
+      { name: 'Inflammation', description: 'neutrophils and macrophages clear debris and pathogens, producing redness, heat, and swelling' },
+      { name: 'Proliferation', description: 'fibroblasts produce new collagen, new blood vessels form, and the epidermis regenerates' },
+      { name: 'Remodelling', description: 'collagen is progressively reorganised and strengthened over weeks to months — the longest stage' },
+    ],
+  }),
+
+  'bio.physio.lymphatic-system-detail': () => buildCellComparisonScene({
+    conceptId: 'bio.physio.lymphatic-system-detail',
+    title: "The Lymphatic System's Dual Role",
+    teachingGoal: 'These are two separate functions performed by the same anatomical system — a disruption affecting one role does not necessarily disrupt the other.',
+    groups: [
+      { label: 'Fluid balance role', description: 'returns leaked interstitial fluid to the bloodstream', items: ['Prevents fluid from accumulating in tissues', 'Disruption causes lymphedema (chronic swelling)'] },
+      { label: 'Immune surveillance role', description: 'filters lymph and coordinates immune responses', items: ['Lymph nodes filter pathogens and debris', 'Provide the site for antigen presentation to T and B cells'] },
+    ],
+  }),
+
+  'bio.physio.muscle-physiology-energetics': () => buildCellPathwayScene({
+    conceptId: 'bio.physio.muscle-physiology-energetics',
+    title: 'Three ATP Sources, Each Dominant Over a Different Timescale',
+    teachingGoal: 'The three ATP sources become dominant over different specific timescales rather than all operating simultaneously and interchangeably from the very start of activity.',
+    stages: [
+      { name: 'Creatine phosphate', description: 'fastest-available ATP via direct phosphate transfer — sufficient for only the first few seconds' },
+      { name: 'Anaerobic glycolysis', description: 'dominant over the next ~30 seconds to 2 minutes; less ATP per glucose, produces lactate' },
+      { name: 'Oxidative phosphorylation', description: 'dominant for sustained activity beyond that; slower to ramp up but much higher total yield' },
+    ],
+  }),
+
+  'bio.plant.mycorrhizae-plant-symbioses': () => buildCellPathwayScene({
+    conceptId: 'bio.plant.mycorrhizae-plant-symbioses',
+    title: 'Rhizobium-Legume Nitrogen Fixation, Step by Step',
+    teachingGoal: "Leghaemoglobin's oxygen-binding role is not an incidental detail but the specific solution to nitrogenase's specific oxygen-sensitivity constraint.",
+    stages: [
+      { name: 'Root hair infection', description: 'rhizobium bacteria infect legume root hairs' },
+      { name: 'Nodule formation', description: 'specialised root structures form, housing the bacteria' },
+      { name: 'Nitrogen fixation', description: 'nitrogenase converts atmospheric N2 into biologically usable ammonia' },
+      { name: 'Oxygen protection', description: 'leghaemoglobin binds free oxygen, protecting nitrogenase from inactivation' },
+    ],
+  }),
+
+  'bio.plant.phytochrome-photoperiodic-flowering': () => buildCellPathwayScene({
+    conceptId: 'bio.plant.phytochrome-photoperiodic-flowering',
+    title: 'From Night-Length Detection to Flowering',
+    teachingGoal: 'The leaf detects the appropriate photoperiodic condition, but the shoot apex is where the actual flowering response occurs, connected by florigen as a long-distance mobile signal.',
+    stages: [
+      { name: 'Night-length detection', description: 'phytochrome\'s Pr/Pfr conversion in leaves tracks uninterrupted darkness duration' },
+      { name: 'Florigen production', description: 'once the critical night-length threshold is met, the leaves produce florigen (FT protein)' },
+      { name: 'Long-distance transport', description: 'florigen travels through the vascular tissue to the shoot apex' },
+      { name: 'Flowering response', description: 'florigen acts at the shoot apex, triggering the transition to flowering' },
+    ],
+  }),
+
+  'bio.plant.plant-biotechnology-applications': () => buildCellPathwayScene({
+    conceptId: 'bio.plant.plant-biotechnology-applications',
+    title: 'Agrobacterium-Mediated Transformation, Traced Step by Step',
+    teachingGoal: 'This method works by hijacking an already-existing natural bacterial gene-transfer mechanism, rather than requiring an entirely artificial gene-delivery system built from scratch.',
+    stages: [
+      { name: 'Natural infection', description: 'Agrobacterium naturally transfers its T-DNA into plant cell genomes, normally causing a tumour' },
+      { name: 'Gene replacement', description: 'engineers replace the tumour-inducing genes within the T-DNA with a desired gene of interest' },
+      { name: 'T-DNA delivery', description: 'the bacterium\'s own natural machinery delivers the engineered T-DNA into the plant genome' },
+    ],
+  }),
+
+  'bio.plant.plant-defense-mechanisms': () => buildCellComparisonScene({
+    conceptId: 'bio.plant.plant-defense-mechanisms',
+    title: 'Structural vs Chemical Plant Defences',
+    teachingGoal: 'One category defends through physical obstruction, the other through biochemical toxicity/deterrence — the same plant typically deploys both simultaneously.',
+    groups: [
+      { label: 'Structural defences', description: 'physical barriers or deterrents', items: ['Thorns — deter large herbivores', 'Trichomes — impede small insects', 'Thickened cuticle — resists pathogen penetration'] },
+      { label: 'Chemical defences', description: 'bioactive molecules, not physical barriers', items: ['Alkaloids — toxic, bitter-tasting compounds', 'Terpenoids — toxic or repellent compounds', 'Phenolics — astringent, digestion-impairing compounds'] },
+    ],
+  }),
+
+  'bio.plant.plant-stress-physiology': () => buildCellHubScene({
+    conceptId: 'bio.plant.plant-stress-physiology',
+    hubLabel: 'ABA: the central hormone linking multiple stress pathways',
+    title: 'Abscisic Acid: One Hub, Multiple Stress Responses',
+    teachingGoal: "ABA's role as a central hub, rather than a stress-specific signal, is precisely what allows a plant to mount a coordinated response across multiple distinct stress mechanisms.",
+    spokes: [
+      { name: 'Stomatal closure', description: 'under drought, ABA promotes closing stomata to reduce water loss' },
+      { name: 'Osmotic adjustment', description: 'helps cells continue drawing in limited water under drought or salinity stress' },
+      { name: 'Antioxidant defence', description: 'coordinates the response to reactive oxygen species generated under stress' },
+    ],
+  }),
+
+  'bio.plant.plant-tissue-systems': () => buildCellStructureScene({
+    conceptId: 'bio.plant.plant-tissue-systems',
+    subject: 'Plant Body',
+    boundaryLabel: 'Dermal tissue system (outer covering)',
+    teachingGoal: 'Classifying a given plant structure requires checking its specific functional role: protective covering, bulk filler/photosynthesis/storage, or long-distance transport.',
+    parts: [
+      { name: 'Ground tissue system', description: 'the bulk of the plant body — photosynthesis, storage, and structural support' },
+      { name: 'Vascular tissue system', description: 'long-distance transport of water, minerals, and photosynthate' },
+    ],
+  }),
+
+  'bio.plant.secondary-growth-anatomy': () => buildCellComparisonScene({
+    conceptId: 'bio.plant.secondary-growth-anatomy',
+    title: 'Wood vs Bark: Two Composite Outcomes of Secondary Growth',
+    teachingGoal: '"Bark" is not itself a single tissue type — it is a location-based term encompassing several genuinely different tissues working together.',
+    groups: [
+      { label: 'Wood', description: 'accumulated secondary xylem', items: ['Produced by the vascular cambium, toward the inside', 'Remains functional as structural tissue after it stops transporting water'] },
+      { label: 'Bark', description: 'everything outside the vascular cambium', items: ['Includes the current secondary phloem (outward-facing)', "Includes periderm — the cork cambium's product"] },
+    ],
+  }),
+
+  'bio.plant.seed-germination-dormancy': () => buildCellStructureScene({
+    conceptId: 'bio.plant.seed-germination-dormancy',
+    subject: 'Seed',
+    boundaryLabel: 'Seed coat',
+    teachingGoal: "The endosperm or cotyledons store food reserves that fuel the embryo's initial growth before the seedling can photosynthesise independently.",
+    parts: [
+      { name: 'Embryo', description: 'the developing young plant itself' },
+      { name: 'Endosperm/cotyledons', description: "food reserves fuelling the embryo's initial growth" },
+    ],
+  }),
+
+  'bio.repro.animal-reproductive-strategies': () => buildCellComparisonScene({
+    conceptId: 'bio.repro.animal-reproductive-strategies',
+    title: 'Oviparity, Viviparity, and Ovoviviparity',
+    teachingGoal: 'The classification criterion requires checking BOTH dimensions — location of development AND nutrient source — independently.',
+    groups: [
+      { label: 'Oviparity', description: 'eggs laid externally', items: ['Develops outside the mother\'s body', 'Nourished by nutrients stored within the egg (yolk)'] },
+      { label: 'Viviparity', description: 'embryos develop internally', items: ['Develops within the mother\'s body', 'Nourished directly from the mother (e.g. placenta)'] },
+      { label: 'Ovoviviparity', description: 'the intermediate case', items: ['Develops internally, like viviparity', 'Nourished by the egg\'s own reserves, like oviparity'] },
+    ],
+  }),
+
+  'bio.repro.hormonal-regulation-reproduction-detail': () => buildCellPathwayScene({
+    conceptId: 'bio.repro.hormonal-regulation-reproduction-detail',
+    title: 'The HPG Axis: A Regulatory Feedback Loop',
+    teachingGoal: 'Gonadal hormones feed back to regulate the hypothalamus and pituitary, completing the regulatory loop that governs reproductive hormone regulation.',
+    cyclic: true,
+    stages: [
+      { name: 'Hypothalamus', description: 'secretes GnRH in pulsatile bursts' },
+      { name: 'Anterior pituitary', description: 'GnRH stimulates release of luteinising hormone (LH) and follicle-stimulating hormone (FSH)' },
+      { name: 'Gonads', description: 'LH and FSH regulate gamete production and sex hormone secretion' },
+    ],
+  }),
+
+  'bio.sys.evolutionary-systems-biology': () => buildCellComparisonScene({
+    conceptId: 'bio.sys.evolutionary-systems-biology',
+    title: 'Robustness vs Evolvability: Related but Distinct',
+    teachingGoal: 'These properties are not simply opposites, nor the same thing viewed two ways — a network can, in principle, be both highly robust and evolvable.',
+    groups: [
+      { label: 'Robustness', description: 'maintains stable function despite perturbations', items: ['Buffers against most mutations, noise, and environmental changes', 'Produces the same functional output despite internal disruption'] },
+      { label: 'Evolvability', description: 'generates new, useful functional variation', items: ['Produces novel phenotypic outcomes from small genetic changes', 'Channels select perturbations into potentially useful variation'] },
+    ],
+  }),
+
+  'bio.sys.quantitative-systems-modeling': () => buildCellPathwayScene({
+    conceptId: 'bio.sys.quantitative-systems-modeling',
+    title: 'From ODE Model to Sensitivity Analysis',
+    teachingGoal: "Parameter estimation is the specific bridge connecting a model's theoretical structure to real, measured biological behaviour.",
+    stages: [
+      { name: 'ODE model construction', description: 'writes equations for each variable\'s rate of change, making qualitative network motifs precise' },
+      { name: 'Parameter estimation', description: 'determines unknown parameter values by fitting predictions to experimental time-course data' },
+      { name: 'Sensitivity analysis', description: 'systematically varies each parameter to identify which most strongly influence model behaviour' },
+    ],
+  }),
 }
 
 const DANIELL_CELL: ElectrochemicalCellParams = {
