@@ -99,8 +99,11 @@ describe('A — findBestProbe offers a missed question only when nothing unasked
   it('a re-ask comes with its options rotated: the right answer moves, the key moves with it', async () => {
     const got = await findBestProbe(STATE as never, { requireMcq: true, excludeProbeStem: () => true, allowMissedStem: (s) => s === 'Q two?' })
     const mcq = probeToMcq({ stem: got!.stem, choices: got!.choices as never, assetId: got!.assetId })
-    expect(mcq?.options).toEqual(['wrong', 'right'])
+    expect((got!.choices as Array<{ text: string }>).map((c) => c.text)).toEqual(['wrong', 'right'])
     expect(mcq?.options[mcq!.correctIndex]).toBe('right')
+    // Shown in a different order from the first asking.
+    const first = probeToMcq({ stem: got!.stem, choices: [{ text: 'right', isCorrect: true }, { text: 'wrong', isCorrect: false }] })!
+    expect(mcq!.correctIndex).not.toBe(first.correctIndex)
   })
   it('a first ask keeps the authored order', async () => {
     const got = await findBestProbe(STATE as never, { requireMcq: true, excludeProbeStem: (s) => s !== 'Q one?' })
