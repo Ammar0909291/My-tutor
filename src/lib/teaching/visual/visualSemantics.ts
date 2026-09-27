@@ -17,7 +17,7 @@
 
 import type { VisualPayload } from './types'
 import type { SceneObject, SceneSpec } from '@/lib/teaching/sceneSpec'
-import { sceneStepCount } from '@/lib/teaching/sceneSpec'
+import { sceneStepCount, type Vec3 } from '@/lib/teaching/sceneSpec'
 import type { VisualSpec } from '@/lib/visuals/visualSpec'
 import { VISUAL_META } from '@/lib/school/visuals/visualTypes'
 import { clamp } from './conceptText'
@@ -52,6 +52,8 @@ export interface VisualSemantics {
   equations: string[]
   /** Authored step narrations, in reveal order. Empty when not stepped. */
   steps: string[]
+  /** How many stages the figure really has, when `steps` had to be cut short. */
+  stepTotal?: number
 }
 
 const EMPTY: VisualSemantics = {
@@ -61,7 +63,11 @@ const EMPTY: VisualSemantics = {
 /** Labels are the teaching; every one of them earns a slot before geometry. */
 const MAX_READABLE = 14
 const MAX_GEOMETRY = 5
-const MAX_STEPS = 6
+// Twelve, not six: MEASURED on production (2026-09-27), the tutor was told
+// "built in 6 stages" for a 7-stage Biology figure and never heard its last
+// stage (Genetics) — the count was taken after the cut. Seven Biology figures
+// have 7-12 stages (the levels of organisation have 12); all now fit.
+const MAX_STEPS = 12
 
 /**
  * Human-readable noun for a scene object that carries no text of its own.
@@ -115,6 +121,26 @@ const DRAWN: ReadonlySet<SceneObject['type']> = new Set<SceneObject['type']>([
   'point', 'particle', 'node', 'vector', 'arrow', 'bond', 'label', 'path', 'trajectory',
 ])
 
+/**
+ * A path through two points, or through points that all lie on one line, is
+ * drawn as a straight line. Calling it "a plotted curve" MEASURED on
+ * production: the Biology hub's six straight spokes reached the tutor as
+ * "6 plotted curves", and it told the learner about "six curved arrows".
+ */
+function isStraightPath(points: Vec3[] | undefined): boolean {
+  if (!points || points.length <= 2) return true
+  const [a] = points
+  const b = points.find((p) => p[0] !== a[0] || p[1] !== a[1] || p[2] !== a[2])
+  if (!b) return true
+  const d = [b[0] - a[0], b[1] - a[1], b[2] - a[2]]
+  const len = Math.hypot(d[0], d[1], d[2])
+  return points.every((p) => {
+    const e = [p[0] - a[0], p[1] - a[1], p[2] - a[2]]
+    const cross = Math.hypot(d[1] * e[2] - d[2] * e[1], d[2] * e[0] - d[0] * e[2], d[0] * e[1] - d[1] * e[0])
+    return cross / len <= 1e-6 * Math.max(1, len)
+  })
+}
+
 function dedupe(values: string[]): string[] {
   const seen = new Set<string>()
   const out: string[] = []
@@ -149,7 +175,9 @@ function fromScene(spec: SceneSpec): VisualSemantics {
         texts.push(clamp(text, 60))
         if (isEquation(text)) equations.push(clamp(text, 60))
       } else {
-        shapeCounts.set(obj.type, (shapeCounts.get(obj.type) ?? 0) + 1)
+        // A straight path is described as what the learner sees: a line.
+        const kind = (obj.type === 'path' || obj.type === 'trajectory') && isStraightPath(obj.points) ? 'bond' : obj.type
+        shapeCounts.set(kind, (shapeCounts.get(kind) ?? 0) + 1)
       }
     }
   }
@@ -161,11 +189,12 @@ function fromScene(spec: SceneSpec): VisualSemantics {
     .slice(0, MAX_GEOMETRY)
     .map(([type, n]) => (n === 1 ? OBJECT_NOUN[type] : `${n} ${OBJECT_PLURAL[type] ?? OBJECT_NOUN[type]}`))
 
-  const steps = dedupe(
+  const allSteps = dedupe(
     (spec.steps ?? [])
       .map((s) => (typeof s.narration === 'string' ? s.narration.trim() : ''))
       .filter(Boolean),
-  ).slice(0, MAX_STEPS)
+  )
+  const steps = allSteps.slice(0, MAX_STEPS)
 
   const caption = spec.teachingGoal?.trim()
     ? `${clamp(spec.title, 60)} — ${clamp(spec.teachingGoal.trim(), 160)}`
@@ -183,6 +212,7 @@ function fromScene(spec: SceneSpec): VisualSemantics {
     // A one-step scene is not "stepped"; saying so would invite the model to
     // announce stages that do not exist.
     steps: sceneStepCount(spec) > 1 ? steps : [],
+    ...(sceneStepCount(spec) > 1 && allSteps.length > steps.length ? { stepTotal: allSteps.length } : {}),
   }
 }
 
@@ -319,8 +349,9 @@ export function buildSemanticsBlock(semantics: VisualSemantics): string {
   // meaning in the payload, so they are quoted, never paraphrased into claims.
   if (steps.length) {
     parts.push(
-      `It is built in ${steps.length} stages, shown complete but ` +
-      'walkable one stage at a time by the learner: ' +
+      `It is built in ${Math.max(semantics.stepTotal ?? 0, steps.length)} stages, shown complete but ` +
+      'walkable one stage at a time by the learner' +
+      ((semantics.stepTotal ?? 0) > steps.length ? ` (the first ${steps.length} are listed)` : '') + ': ' +
       steps.map((s, i) => `(${i + 1}) ${clamp(s, 220)}`).join(' ') +
       '. These stages are what the figure MEANS: teach it in that order, keep ' +
       'each stage\'s claim intact, and invite them to walk the stages if they ' +
