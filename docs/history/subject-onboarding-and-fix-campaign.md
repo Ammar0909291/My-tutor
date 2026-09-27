@@ -702,3 +702,9 @@ chemistry 38%) — "pick the longest" beats chance by ~2–3×. Fixing it means 
 probe text, and the cold-start bootstrap is insert-only (`createMany … skipDuplicates` in
 `src/instrumentation.ts`), so edited seed text never reaches existing production rows without a
 direct, owner-authorized DB update. Not done unilaterally.
+
+**Verified live (2026-09-27, production deploy `2f15d657`, disposable account, deleted after).**
+`scripts/qa/probeOptionOrderLive.ts` over the first 5 Biology lessons: 10 authored quizzes served;
+the authored-correct option sat at A in 4/10 (3 of them 2-option items that happened to land in
+authored order — chance is 1/2 there), versus 10/10 before the fix. Tapping the authored-correct
+option still graded correct (`checkCorrect: 1`, verified).
