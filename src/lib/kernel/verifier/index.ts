@@ -14,6 +14,7 @@ export {
   vDupExact, vDupNear, vDupQuestion, vRecRepeat, vOscillate,
   vObj, vNoProgress,
 } from './rules'
+export { vContradict } from './claims'
 export * from './history'
 export {
   renderFallback, chooseFallback, templateMove, type FallbackKind, type TemplateContext,

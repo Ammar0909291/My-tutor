@@ -304,5 +304,29 @@ emitted no SIGNAL tag on the request turn; 0 PROBE_OUTCOME rows) — offline-val
   message is a question or a request to the tutor (`detectLearnerQuestion || readsAsRequestToTutor`);
   a typed answer after an untagged turn still gets it. Tests: `remainingMisreadFixes.test.ts` §10
   (both injection tests failed before the fix; the control passes before and after).
-- **Factual slips: NOT started.** Needs the deferred Deterministic Physics Verifier (CLAUDE.md
-  four-primitives governance + G1/G2); awaiting an explicit, scoped owner go-ahead.
+- **Factual slips — authored-claim check BUILT, LOG-only (owner decision 2026-09-27).** Offered
+  three options (authored-claim check / full V2 six-check Physics Verifier / keep deferred), the
+  owner chose the authored-claim check. The V2 Physics Verifier stays deferred (its one built check,
+  dimensional, found 0 violations; it would not catch the only recorded slip, which is chemistry).
+  New verifier rule `V-CONTRADICT` (`src/lib/kernel/verifier/claims.ts`, LOG severity, registered in
+  `RULES`): each check encodes one rule stated in a concept's authored Educational Brain entry and
+  evaluates the tutor's specific claim against it. A text diff cannot do this — the entry states a
+  class rule ("4n+2 → disrotatory, thermal"), the tutor states an instance ("thermal 6π hexatriene
+  → conrotatory"). v1 rules, from `chem.org.pericyclic.md`: electrocyclic mode (4n / 4n+2 ×
+  thermal / photochemical) and cycloaddition allowedness ([4n+2] thermal allowed; [4n] thermal
+  forbidden, photochemically allowed). Fires only on one sentence naming exactly one electron class,
+  condition and mode/verdict; skips negation, comparisons and reported claims ("if you call…", "a
+  common mistake…"). The ψ-node-count slip has no authored rule, so no check (not invented).
+  `[claim-check]` runtime log line (verifierGate.ts; LOG codes never reached `[verifier-log]`, which
+  prints only on REJECT). Precision on known-correct content: 0 hits in 668,275 lines across 2,138
+  authored files (EB entries, seed assets, KGs) — after skipping reported-claim sentences, which
+  were the only 2 hits before. Tests: `authoredClaimContradiction.test.ts` (28; rule swap,
+  unregistering and removing the log line each fail tests). Enforcement is a separate owner decision
+  once `[claim-check]` precision on real traffic is known.
+- **Offline-only paths, live evidence (2026-09-27).** No-'?' request with a model tag: observed on
+  real traffic (`can you give me a practice question` → `[learner-asked-question]`, correctness
+  stripped). Keep misconception phrase on answers: 7 production `MISCONCEPTION_DETECTED` rows from a
+  real learner after the fix, none containing '?'. Relieved-quiz yield to a clarification: still not
+  observed (needs relief AND a question-only reply; rarer now the mirror is fixed); offline only.
+  Also observed live after the repair-block fix: "why is that term zero?" / "show me how that works
+  for it" answered directly, no mirror.
