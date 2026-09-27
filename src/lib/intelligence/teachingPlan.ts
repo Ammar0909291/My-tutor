@@ -8,7 +8,8 @@
  * produced read-only and consumed NOWHERE this sprint. Mirrors the consumer
  * architecture of `practiceTargets.ts` / `learningDifficultyProfile.ts`.
  */
-import { prisma } from '@/lib/db/prisma'
+import { memoized } from '@/lib/db/requestMemo'
+import { loadUserTopicRows } from './userTopicRows'
 import { getRevisionProfile } from './revisionProfile'
 import { generatePracticeTargets, type PracticeTargetPlan, type PracticePriority } from './practiceTargets'
 import { generateRetestCandidates, type RetestCandidatePlan } from './retestCandidates'
@@ -132,15 +133,17 @@ export async function getTeachingPlans(userId: string): Promise<{
   adaptations: TeachingAdaptationRecommendation[]
   teachingPlan: TeachingPlan[]
 }> {
+  return memoized(`teachingPlans:${userId}`, () => loadTeachingPlans(userId))
+}
+
+async function loadTeachingPlans(userId: string): Promise<{
+  difficultyProfile: LearningDifficultyProfile
+  adaptations: TeachingAdaptationRecommendation[]
+  teachingPlan: TeachingPlan[]
+}> {
   const revisionProfile = await getRevisionProfile(userId)
 
-  const topicRows = await prisma.topicProgress.findMany({
-    where: { userId },
-    select: {
-      subjectSlug: true, topicSlug: true, status: true,
-      masteryPct: true, attempts: true, revisionCount: true, lastScore: true,
-    },
-  })
+  const topicRows = await loadUserTopicRows(userId)
 
   const practiceTargets = generatePracticeTargets(
     revisionProfile,

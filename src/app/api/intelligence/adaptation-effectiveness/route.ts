@@ -10,11 +10,17 @@
 import { NextResponse } from 'next/server'
 import { auth } from '@/lib/auth'
 import { getAdaptationEffectivenessProfile } from '@/lib/intelligence/adaptationEffectiveness'
+import { withRequestMemo } from '@/lib/db/requestMemo'
 
-export async function GET() {
+async function handleGET() {
   const session = await auth()
   if (!session?.user?.id) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
   const { effectiveness, insights } = await getAdaptationEffectivenessProfile(session.user.id)
   return NextResponse.json({ effectiveness, insights })
+}
+
+// One read per distinct query across this handler's loaders (egress, requestMemo.ts).
+export function GET(...args: Parameters<typeof handleGET>) {
+  return withRequestMemo(() => handleGET(...args))
 }

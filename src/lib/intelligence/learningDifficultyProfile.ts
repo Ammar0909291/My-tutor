@@ -13,7 +13,7 @@
  * Prisma-reading wrapper. DETECTION ONLY — this layer never attempts to
  * resolve difficulty (see docs/EDUCATIONAL_INTELLIGENCE_DIFFICULTY_AUDIT.md).
  */
-import { prisma } from '@/lib/db/prisma'
+import { loadUserTopicRows } from './userTopicRows'
 import { getRevisionProfile, type RevisionProfile } from './revisionProfile'
 import { generatePracticeTargets } from './practiceTargets'
 import { generateRetestCandidates, type RetestCandidatePlan } from './retestCandidates'
@@ -205,13 +205,7 @@ export function detectLearningDifficulties(profile: LearningDifficultyProfile): 
 export async function getLearningDifficultyProfile(userId: string): Promise<LearningDifficultyProfile> {
   const revisionProfile = await getRevisionProfile(userId)
 
-  const topicRows = await prisma.topicProgress.findMany({
-    where: { userId },
-    select: {
-      subjectSlug: true, topicSlug: true, status: true,
-      masteryPct: true, attempts: true, revisionCount: true, lastScore: true,
-    },
-  })
+  const topicRows = await loadUserTopicRows(userId)
 
   // Reuse Sprints 2/3 to derive the retest flags (no recomputation of mastery).
   const practiceTargets = generatePracticeTargets(

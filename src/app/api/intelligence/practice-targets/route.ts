@@ -15,8 +15,9 @@ import { prisma } from '@/lib/db/prisma'
 import { getRevisionProfile } from '@/lib/intelligence/revisionProfile'
 import { generateRevisionRecommendations } from '@/lib/intelligence/revisionRecommendations'
 import { generatePracticeTargets } from '@/lib/intelligence/practiceTargets'
+import { withRequestMemo } from '@/lib/db/requestMemo'
 
-export async function GET() {
+async function handleGET() {
   const session = await auth()
   if (!session?.user?.id) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
@@ -35,4 +36,9 @@ export async function GET() {
   const targets = generatePracticeTargets(profile, attemptsRows)
 
   return NextResponse.json({ profile, recommendations, targets })
+}
+
+// One read per distinct query across this handler's loaders (egress, requestMemo.ts).
+export function GET(...args: Parameters<typeof handleGET>) {
+  return withRequestMemo(() => handleGET(...args))
 }

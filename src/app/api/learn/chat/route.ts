@@ -1459,7 +1459,10 @@ async function handleChatTurn(req: Request, deadline: RouteDeadline): Promise<Re
       const currentTopicSlug = pickCurrentTopicSlug(topicProgressRowsShared)
       if (currentTopicSlug) {
         const { getTutorTeachingContext, buildTutorTeachingContextBlock } = await import('@/lib/intelligence/tutorTeachingContext')
-        const teachingContext = await getTutorTeachingContext(userId, subjectCode, currentTopicSlug)
+        // One read per distinct query for the whole chain (egress, 2026-09-27:
+        // it re-read topic_progress six times per turn) — see requestMemo.ts.
+        const { withRequestMemo } = await import('@/lib/db/requestMemo')
+        const teachingContext = await withRequestMemo(() => getTutorTeachingContext(userId, subjectCode, currentTopicSlug))
         systemPrompt += buildTutorTeachingContextBlock(teachingContext)
       }
     } catch (err) {

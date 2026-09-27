@@ -12,7 +12,8 @@
  * docs/EDUCATIONAL_INTELLIGENCE_REVISION_AUDIT.md) — those remain the
  * existing, untouched time-based and mistake-severity-based engines.
  */
-import { prisma } from '@/lib/db/prisma'
+import { memoized } from '@/lib/db/requestMemo'
+import { loadUserTopicRows } from './userTopicRows'
 import {
   getVisualLearningProfile,
   detectVisualWeaknesses,
@@ -112,14 +113,13 @@ export function buildRevisionProfile(
  * module adds; read-only, queries `TopicProgress` exclusively (the
  * visual data comes from Sprint N's own, already-existing Prisma call).
  */
-export async function getRevisionProfile(userId: string): Promise<RevisionProfile> {
-  const topicRows = await prisma.topicProgress.findMany({
-    where: { userId },
-    select: { subjectSlug: true, topicSlug: true, status: true, masteryPct: true, lastScore: true },
+export function getRevisionProfile(userId: string): Promise<RevisionProfile> {
+  return memoized(`revisionProfile:${userId}`, async () => {
+    const topicRows = await loadUserTopicRows(userId)
+
+    const visualProfile = await getVisualLearningProfile(userId)
+    const visualWeaknesses = detectVisualWeaknesses(visualProfile)
+
+    return buildRevisionProfile(topicRows, visualWeaknesses)
   })
-
-  const visualProfile = await getVisualLearningProfile(userId)
-  const visualWeaknesses = detectVisualWeaknesses(visualProfile)
-
-  return buildRevisionProfile(topicRows, visualWeaknesses)
 }

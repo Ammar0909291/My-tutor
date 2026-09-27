@@ -261,3 +261,16 @@ describe('the equivalence proof is structurally guarded, not just asserted once'
     expect(Object.keys(projection.capabilities)).toEqual(['multiply'])
   })
 })
+
+describe('EGRESS-5 — the capability replay fetches only the columns the fold reads', () => {
+  it('selects seq, type, schemaVersion, payload and nothing else', async () => {
+    const seen: unknown[] = []
+    const prisma = {
+      spineEvent: {
+        findMany: async (args: { select?: Record<string, true> }) => { seen.push(args.select); return [] },
+      },
+    }
+    await replayCapabilityProjection(prisma as never, 'learner-1')
+    expect(seen).toEqual([{ seq: true, type: true, schemaVersion: true, payload: true }])
+  })
+})
