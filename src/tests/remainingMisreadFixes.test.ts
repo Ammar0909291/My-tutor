@@ -216,3 +216,24 @@ describe('8. a clarifying question to a request without "?" is kept (2026-09-26)
   }, 60_000)
 })
 
+describe('9. question turns carry the no-mirror clause (2026-09-27)', () => {
+  const prompted = (t: { body: unknown }) => ((t.body as { llmCallCount?: number }).llmCallCount ?? 0) > 0
+  const promptFor = async (msg: string) => {
+    const [, t] = await driveTurns(h, POST, [
+      { learnerSays: 'ok, continue', modelReplies: TAUGHT },
+      { learnerSays: msg, modelReplies: 'Reply.' },
+    ], PHYS)
+    expect(prompted(t)).toBe(true)
+    return t.systemPrompt
+  }
+  it.each([
+    'why is that term zero?',
+    'explain to me why this is negative',
+  ])('%s → no-mirror clause present', async (m) => {
+    expect(await promptFor(m)).toContain('Do NOT restate their question back to them for confirmation')
+  }, 60_000)
+  it('control: a typed answer carries no question clause', async () => {
+    expect(await promptFor('it comes out negative because the denominator is negative')).not.toContain('Do NOT restate their question back')
+  }, 60_000)
+})
+

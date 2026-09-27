@@ -281,3 +281,18 @@ emitted no SIGNAL tag on the request turn; 0 PROBE_OUTCOME rows) — offline-val
   fixes; one disposable account, one 2-turn session, deleted, re-login blocked): "explain to me why
   this is negative" was answered directly (H' = eEz, E⁽¹⁾ = eE⟨z⟩, parity argument) — no everyday
   analogy, no concept fallback.
+
+## Closing the open items (2026-09-27, owner: "apply the vercel.json fix and close the open issues")
+- **Vercel skipped deploys (FIXED).** GitHub commit status on the two undeployed commits
+  (e9ef7c8d, 3c14d636): Vercel "Deployment rate limited — retry in 24 hours." (Hobby plan). Every
+  push went to `main` AND a `claude/*` branch (both sessions, per the branch policy), so each push
+  cost two deployments, the preview unused. `vercel.json` now sets
+  `git.deploymentEnabled: { "claude/*": false }` (documented minimatch; unlisted branches, incl.
+  `main`, still deploy). Also: docs notes now ride in the code commit, not their own.
+- **The confirmation mirror (FIXED, prompt steering).** Both question lines of the turn directive
+  (A.4 "STUDENT QUESTION DETECTED", A.4b "FOLLOW-UP ON WHAT YOU ALREADY TAUGHT") carry
+  `NO_MIRROR_CLAUSE`: answer it; if genuinely ambiguous or false-premised, ask ONE specific
+  clarifying question naming the options or correct the premise — never restate the question back
+  for confirmation. Tests: `remainingMisreadFixes.test.ts` §9 (mutation-checked).
+- **Factual slips: NOT started.** Needs the deferred Deterministic Physics Verifier (CLAUDE.md
+  four-primitives governance + G1/G2); awaiting an explicit, scoped owner go-ahead.
