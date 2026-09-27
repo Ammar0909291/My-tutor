@@ -2228,6 +2228,18 @@ const MOVE_LINE: Record<NextMove, string> = {
  * opinion on top of it.
  */
 /**
+ * The mirror (2026-09-27, owner instruction; live QA 2026-09-26): "why is that
+ * term zero?" came back as "So you're wondering whether … vanishes — have I got
+ * that right?" and "show why the term is negative" as "So you'd like me to …
+ * correct?". Both question lines (A.4, A.4b) now say: answer it, or ask ONE
+ * specific clarifying question that names the options — never restate the
+ * question back for confirmation. Prompt steering; see attributionGuard.ts for
+ * why no output-side rewrite exists.
+ */
+export const NO_MIRROR_CLAUSE =
+  'Do NOT restate their question back to them for confirmation ("So you\'re asking…?", "So you\'re wondering whether…?", "So you\'d like me to…, correct?", "have I got that right?") — answer it. If it is genuinely ambiguous or rests on a false premise, ask ONE specific clarifying question that names the options (e.g. "Do you mean the first-order or the second-order term?"), or gently correct the premise and answer.'
+
+/**
  * A.4b's exclusion: the learner asked for the very framing the sequencing law
  * provides (an analogy, an example, a picture, everyday/real-life terms, or a
  * simpler telling). The caller then leaves `followUpOnTaughtIdea` false.
@@ -2388,12 +2400,12 @@ export function buildTurnDirective(p: TurnDirectiveParams): string {
   // A.4: when the learner asked a genuine question, the LLM must address
   // it directly BEFORE following the phase template — intent > template.
   if (p.learnerAskedQuestion) {
-    lines.push('- STUDENT QUESTION DETECTED: the student asked a genuine question. Address their specific question FIRST, directly and concisely. Then continue with the teaching phase above. Never ignore a student question to follow a template.')
+    lines.push('- STUDENT QUESTION DETECTED: the student asked a genuine question. Address their specific question FIRST, directly and concisely. Then continue with the teaching phase above. Never ignore a student question to follow a template. ' + NO_MIRROR_CLAUSE)
   }
   // A.4b: a follow-up on an idea already introduced is answered at the level
   // already reached — the sequencing law does not restart for it.
   if (p.followUpOnTaughtIdea) {
-    lines.push('- FOLLOW-UP ON WHAT YOU ALREADY TAUGHT: answer it directly, using the terms, formulas and reasoning already introduced in this conversation. The EXPLANATION SEQUENCING LAW is for introducing a NEW idea and does not restart here: do NOT open with an everyday object, analogy or "imagine…" scene unless the student asks for one.')
+    lines.push('- FOLLOW-UP ON WHAT YOU ALREADY TAUGHT: answer it directly, using the terms, formulas and reasoning already introduced in this conversation. The EXPLANATION SEQUENCING LAW is for introducing a NEW idea and does not restart here: do NOT open with an everyday object, analogy or "imagine…" scene unless the student asks for one. ' + NO_MIRROR_CLAUSE)
   }
   // A.10: brief concept recap on phase advancement — grounds the student
   // before moving to the next teaching mode.
